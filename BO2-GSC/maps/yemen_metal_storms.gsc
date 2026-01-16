@@ -109,11 +109,10 @@ metal_storms_cleanup() {
   cleanup("street_yemeni", "script_noteworthy");
   cleanup("street_drone", "script_noteworthy");
   cleanup("street_metalstorm", "script_noteworthy");
-  a_fans = getEntArray("morals_fan", "script_noteworthy");
+  a_fans = getentarray("morals_fan", "script_noteworthy");
 
-  foreach(fan in a_fans) {
-    fan delete();
-  }
+  foreach(fan in a_fans)
+  fan delete();
 }
 
 street_bridge_spawner_think() {
@@ -179,7 +178,7 @@ courtyard_fire_fake_rocket() {
   level.player rumble_loop(3, 1, "crash_heli_rumble");
   level run_scene("courtyard_balcony_deaths");
   a_scene_ai = get_ais_from_scene("courtyard_balcony_deaths");
-  a_balcony_ai = getEntArray("courtyard_floor2_guys_ai", "targetname");
+  a_balcony_ai = getentarray("courtyard_floor2_guys_ai", "targetname");
   a_scene_and_balcony_ai = arraycombine(a_scene_ai, a_balcony_ai, 1, 0);
 
   foreach(ai_guy in a_scene_and_balcony_ai) {
@@ -196,11 +195,11 @@ courtyard_explosion_fx() {
   s_explosion_point = getstruct("courtyard_building_fx", "targetname");
   s_drama_struct = getstruct("courtyard_fx_at_player", "targetname");
   exploder(410);
-  v_eye_pos = level.player getEye();
+  v_eye_pos = level.player geteye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 256;
-  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
   v_drama_fx = vectornormalize(a_trace["position"] - s_drama_struct.origin);
   v_drama_fx = vectortoangles(v_drama_fx);
   m_drama_spot = spawn_model("tag_origin", s_drama_struct.origin, v_drama_fx);
@@ -238,7 +237,7 @@ street_balcony_damage_listener() {
 
 street_balcony_take_position() {
   level waittill("balcony_runner_alerted");
-  a_balcony_runners = getEntArray("street_balcony_runner_ai", "targetname");
+  a_balcony_runners = getentarray("street_balcony_runner_ai", "targetname");
   a_balcony_nodes = array_randomize(getnodearray("street_balcony_covernode", "targetname"));
 
   for(i = 0; i < a_balcony_runners.size; i++) {
@@ -262,24 +261,21 @@ street_safety() {
   spawn_manager_kill("sm_street_bridge", 1);
   spawn_manager_kill("sm_street_back", 1);
 
-  if(isDefined(level.courtyard_asd)) {
+  if(isDefined(level.courtyard_asd))
     level.courtyard_asd dodamage(level.courtyard_asd.health, level.courtyard_asd.origin);
-  }
 
   behind_guys = get_ai_group_ai("street_bridge");
 
   foreach(guy in behind_guys) {
-    if(isDefined(guy)) {
+    if(isDefined(guy))
       guy bloody_death();
-    }
   }
 
   behind_guys = get_ai_group_ai("street_entrance");
 
   foreach(guy in behind_guys) {
-    if(isDefined(guy)) {
+    if(isDefined(guy))
       guy bloody_death();
-    }
   }
 }
 
@@ -302,17 +298,15 @@ street_end() {
   end_guys = get_ai_group_ai("street_end_alley");
 
   foreach(guy in end_guys) {
-    if(isDefined(guy)) {
+    if(isDefined(guy))
       guy.health = 10;
-    }
   }
 
-  drones = getEntArray("street_drone", "script_noteworthy");
+  drones = getentarray("street_drone", "script_noteworthy");
 
   foreach(drone in drones) {
-    if(isDefined(drone)) {
+    if(isDefined(drone))
       drone.health = 10;
-    }
   }
 
   trigger_wait("morals_at_menendez");
@@ -338,9 +332,8 @@ street_terrorist_spawnfunc() {
   while(!flag("player_engaged_street_terrorists")) {
     self waittill("damage", damage, ai_guy);
 
-    if(ai_guy == level.player) {
+    if(ai_guy == level.player)
       flag_set("player_engaged_street_terrorists");
-    }
   }
 }
 
@@ -437,7 +430,7 @@ intruder_turret_move_qrdrones() {
   flag_wait("street_player_on_balcony");
   autosave_by_name("yemen_balcony");
   queue_dialog_ally("cd3_fire_on_the_drones_0");
-  a_qrs = getEntArray("street_drone", "script_noteworthy");
+  a_qrs = getentarray("street_drone", "script_noteworthy");
   s_goal = getstruct("streets_qr_moveto", "targetname");
   s_goalfar = getstruct("streets_qr_moveto_far", "targetname");
 
@@ -450,11 +443,11 @@ intruder_turret_move_qrdrones() {
   s_spots = getstructarray("streets_qr_spawn_far", "targetname");
 
   while(extra_qrs < 8) {
-    a_qrs = getEntArray("street_drone", "script_noteworthy");
+    a_qrs = getentarray("street_drone", "script_noteworthy");
 
-    if(a_qrs.size > 3) {
+    if(a_qrs.size > 3)
       wait 1;
-    } else {
+    else {
       vh_qrotor = spawn_vehicle_from_targetname("yemen_quadrotor_spawner");
       vh_qrotor.origin = s_spots[randomint(s_spots.size)].origin;
       vh_qrotor.goalpos = s_goal.origin;
@@ -484,9 +477,8 @@ turretqrkills_death_listener(str_notify) {
     self.script_noteworthy = "street_drone";
     self waittill("death", attacker, type, weapon);
 
-    if(attacker == level.player && weapon == "auto_gun_turret_sp_minigun") {
+    if(attacker == level.player && weapon == "auto_gun_turret_sp_minigun")
       level.player notify(str_notify);
-    }
   }
 }
 
@@ -496,8 +488,7 @@ watch_asd_death() {
   queue_dialog_ally("cd2_the_drone_is_down_0");
 
   if(attacker == level.player) {
-    if(isDefined(self.emped) && self.emped == 1) {
+    if(isDefined(self.emped) && self.emped == 1)
       level notify("player_killed_asd");
-    }
   }
 }

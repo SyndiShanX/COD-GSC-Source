@@ -156,14 +156,13 @@ init_flags() {
 }
 
 init_doors() {
-  doors = getEntArray("rotating_door", "script_noteworthy");
+  doors = getentarray("rotating_door", "script_noteworthy");
 
   for(i = 0; i < doors.size; i++) {
     model = getent(doors[i].target, "targetname");
 
-    if(isDefined(model)) {
+    if(isDefined(model))
       model linkto(doors[i]);
-    }
   }
 }
 
@@ -240,9 +239,8 @@ challenge_turret_kills(str_notify) {
   while(true) {
     level waittill("player_performed_kill", str_team, str_weapon);
 
-    if(str_weapon == "cic_turret" && str_team == "axis") {
+    if(str_weapon == "cic_turret" && str_team == "axis")
       self notify(str_notify);
-    }
   }
 }
 
@@ -257,19 +255,17 @@ challenge_electrocutions(str_notify) {
   while(true) {
     level waittill("player_performed_kill", str_team, str_weapon);
 
-    if(str_weapon == "tazer_knuckles_sp" && str_team == "axis") {
+    if(str_weapon == "tazer_knuckles_sp" && str_team == "axis")
       self notify(str_notify);
-    }
   }
 }
 
 challenge_turret_oneshot(str_notify) {
-  vehicles = getEntArray("script_vehicle", "classname");
+  vehicles = getentarray("script_vehicle", "classname");
 
   foreach(veh in vehicles) {
-    if(veh.vehicletype == "turret_cic") {
+    if(veh.vehicletype == "turret_cic")
       veh thread challenge_turret_stun_think();
-    }
   }
 
   add_spawn_function_veh_by_type("turret_cic", ::challenge_turret_stun_think);
@@ -283,9 +279,8 @@ challenge_turret_oneshot(str_notify) {
 challenge_turret_stun_think() {
   self waittill("death");
 
-  if(isDefined(self.emped) && self.emped) {
+  if(isDefined(self.emped) && self.emped)
     level notify("turret_stun_kill");
-  }
 }
 
 challenge_jetpack_kills(str_notify) {
@@ -308,9 +303,8 @@ nodeath_challenge(str_notify) {
   level.player waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0) {
+  if(n_deaths == 0)
     self notify(str_notify);
-  }
 }
 
 masonroom_challenge(str_notify) {
@@ -321,11 +315,9 @@ masonroom_challenge(str_notify) {
 vtol_challenge(str_notify) {
   level waittill("start_vtol_timer");
 
-  for(n_timer = 90; n_timer > 0 && !flag("player_boarded_vtol"); n_timer--) {
+  for(n_timer = 90; n_timer > 0 && !flag("player_boarded_vtol"); n_timer--)
     wait 1;
-  }
 
-  if(flag("player_boarded_vtol") && n_timer > 0) {
+  if(flag("player_boarded_vtol") && n_timer > 0)
     self notify(str_notify);
-  }
 }

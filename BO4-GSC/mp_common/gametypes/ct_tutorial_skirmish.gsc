@@ -16,6 +16,7 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_tutorial_skirmish;
 
 init() {
@@ -25,7 +26,7 @@ init() {
   level.var_86513cd0 = &function_c11071a8;
   level.var_edd52efc = &function_edd52efc;
   level.b_movie = 0;
-  level.forcedplayerteam = # "allies";
+  level.forcedplayerteam = #"allies";
   level.var_b0fade70 = 1;
   setdvar(#"botfill", 0);
 
@@ -220,8 +221,8 @@ function_8599f7cb() {
         player function_efa762f6(#"story_outro");
       }
 
-      player function_3b91934f(specialist, # "skirmish_completed");
-      player function_a6cbcab(specialist, # "bronze");
+      player function_3b91934f(specialist, #"skirmish_completed");
+      player function_a6cbcab(specialist, #"bronze");
       player function_ea859fe2();
       player thread function_51450191();
       player thread function_78a17c00();
@@ -261,13 +262,13 @@ function_6cc515f7(str_difficulty) {
 
   if(var_d4002929) {
     if(str_difficulty == "medium") {
-      if(!player function_8750c45b(specialist, # "silver")) {
-        player function_a6cbcab(specialist, # "silver");
+      if(!player function_8750c45b(specialist, #"silver")) {
+        player function_a6cbcab(specialist, #"silver");
         player thread function_46f9c28e();
       }
     } else if(str_difficulty == "hard") {
-      if(!player function_8750c45b(specialist, # "gold")) {
-        player function_a6cbcab(specialist, # "gold");
+      if(!player function_8750c45b(specialist, #"gold")) {
+        player function_a6cbcab(specialist, #"gold");
         player thread function_ca8c7182();
       }
     }
@@ -347,25 +348,25 @@ give_killstreaks(a_str_killstreaks) {
 
             if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
               if(weapon.iscarriedkillstreak) {
-                if(!isDefined(self.pers[# "held_killstreak_ammo_count"][weapon])) {
-                  self.pers[# "held_killstreak_ammo_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_ammo_count"][weapon])) {
+                  self.pers[#"held_killstreak_ammo_count"][weapon] = 0;
                 }
 
-                if(!isDefined(self.pers[# "held_killstreak_clip_count"][weapon])) {
-                  self.pers[# "held_killstreak_clip_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_clip_count"][weapon])) {
+                  self.pers[#"held_killstreak_clip_count"][weapon] = 0;
                 }
 
-                if(self.pers[# "held_killstreak_ammo_count"][weapon] > 0) {
-                  self setweaponammoclip(weapon, self.pers[# "held_killstreak_clip_count"][weapon]);
-                  self setweaponammostock(weapon, self.pers[# "held_killstreak_ammo_count"][weapon] - self.pers[# "held_killstreak_clip_count"][weapon]);
+                if(self.pers[#"held_killstreak_ammo_count"][weapon] > 0) {
+                  self setweaponammoclip(weapon, self.pers[#"held_killstreak_clip_count"][weapon]);
+                  self setweaponammostock(weapon, self.pers[#"held_killstreak_ammo_count"][weapon] - self.pers[#"held_killstreak_clip_count"][weapon]);
                 } else {
                   self function_3ba6ee5d(weapon, 0);
                 }
               } else {
                 quantity = 0;
 
-                if(isDefined(self.pers[# "killstreak_quantity"]) && isDefined(self.pers[# "killstreak_quantity"][weapon])) {
-                  quantity = self.pers[# "killstreak_quantity"][weapon];
+                if(isDefined(self.pers[#"killstreak_quantity"]) && isDefined(self.pers[#"killstreak_quantity"][weapon])) {
+                  quantity = self.pers[#"killstreak_quantity"][weapon];
                 }
 
                 self setweaponammoclip(weapon, quantity);
@@ -425,37 +426,37 @@ function_3ba6ee5d(weapon, amount) {
 function_b958401e(n_index) {
   switch (n_index) {
     case 1:
-      a_str_killstreaks = array(#"uav", # "recon_car", # "supplydrop_marker");
+      a_str_killstreaks = array(#"uav", #"recon_car", #"supplydrop_marker");
       break;
     case 2:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "planemortar");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"planemortar");
       break;
     case 3:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "ai_tank_marker");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"ai_tank_marker");
       break;
     case 4:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "straferun");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"straferun");
       break;
     case 5:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "ultimate_turret");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"ultimate_turret");
       break;
     case 6:
-      a_str_killstreaks = array(#"uav", # "recon_car", # "supplydrop_marker");
+      a_str_killstreaks = array(#"uav", #"recon_car", #"supplydrop_marker");
       break;
     case 7:
-      a_str_killstreaks = array(#"uav", # "dart", # "supplydrop_marker");
+      a_str_killstreaks = array(#"uav", #"dart", #"supplydrop_marker");
       break;
     case 8:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "overwatch_helicopter");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"overwatch_helicopter");
       break;
     case 9:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "remote_missile");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"remote_missile");
       break;
     case 10:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "ac130");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"ac130");
       break;
     case 11:
-      a_str_killstreaks = array(#"uav", # "supplydrop_marker", # "swat_team");
+      a_str_killstreaks = array(#"uav", #"supplydrop_marker", #"swat_team");
       break;
   }
 
@@ -465,37 +466,37 @@ function_b958401e(n_index) {
 function_d8cdeb6a(n_index) {
   switch (n_index) {
     case 1:
-      a_str_weapons = array(#"ar_accurate_t8", # "quickdraw", # "fmj", # "extbarrel");
+      a_str_weapons = array(#"ar_accurate_t8", #"quickdraw", #"fmj", #"extbarrel");
       break;
     case 2:
-      a_str_weapons = array(#"ar_damage_t8", # "holo", # "damage", # "damage2", # "grip");
+      a_str_weapons = array(#"ar_damage_t8", #"holo", #"damage", #"damage2", #"grip");
       break;
     case 3:
-      a_str_weapons = array(#"ar_fastfire_t8", # "elo", # "fastreload", # "fastreload2", # "quickdraw", # "quickdraw2");
+      a_str_weapons = array(#"ar_fastfire_t8", #"elo", #"fastreload", #"fastreload2", #"quickdraw", #"quickdraw2");
       break;
     case 4:
-      a_str_weapons = array(#"ar_modular_t8", # "rf", # "steadyaim", # "mixclip");
+      a_str_weapons = array(#"ar_modular_t8", #"rf", #"steadyaim", #"mixclip");
       break;
     case 5:
-      a_str_weapons = array(#"ar_stealth_t8", # "damage", # "extbarrel", # "rf", # "uber_bayonet");
+      a_str_weapons = array(#"ar_stealth_t8", #"damage", #"extbarrel", #"rf", #"uber_bayonet");
       break;
     case 6:
-      a_str_weapons = array(#"ar_damage_t8", # "holo", # "damage", # "damage2");
+      a_str_weapons = array(#"ar_damage_t8", #"holo", #"damage", #"damage2");
       break;
     case 7:
-      a_str_weapons = array(#"ar_accurate_t8", # "reddot", # "grip", # "grip2", # "steadyaim");
+      a_str_weapons = array(#"ar_accurate_t8", #"reddot", #"grip", #"grip2", #"steadyaim");
       break;
     case 8:
-      a_str_weapons = array(#"ar_stealth_t8", # "acog", # "suppressed", # "stalker", # "stalker2");
+      a_str_weapons = array(#"ar_stealth_t8", #"acog", #"suppressed", #"stalker", #"stalker2");
       break;
     case 9:
-      a_str_weapons = array(#"ar_fastfire_t8", # "steadyaim", # "steadyaim2", # "stalker", # "uber_firingunit");
+      a_str_weapons = array(#"ar_fastfire_t8", #"steadyaim", #"steadyaim2", #"stalker", #"uber_firingunit");
       break;
     case 10:
-      a_str_weapons = array(#"ar_modular_t8", # "reflex", # "suppressed", # "stalker", # "grip", # "quickdraw");
+      a_str_weapons = array(#"ar_modular_t8", #"reflex", #"suppressed", #"stalker", #"grip", #"quickdraw");
       break;
     case 11:
-      a_str_weapons = array(#"ar_damage_t8", # "fmj", # "fmj2", # "extbarrel");
+      a_str_weapons = array(#"ar_damage_t8", #"fmj", #"fmj2", #"extbarrel");
       break;
   }
 
@@ -535,40 +536,40 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     switch (var_947d01ee) {
-      case # "weapon_knife":
-      case # "weapon_pistol":
-      case # "weapon_launcher":
-      case # "weapon_cqb":
+      case #"weapon_knife":
+      case #"weapon_pistol":
+      case #"weapon_launcher":
+      case #"weapon_cqb":
         if(attacker newvalueoptions(#"hash_512584b15284d144") < level.var_924497ca) {
           attacker function_9401373f(#"hash_512584b15284d144", 1);
         }
 
         break;
-      case # "weapon_assault":
+      case #"weapon_assault":
         if(attacker newvalueoptions(#"hash_683d7dfc8782d6b9") < level.var_b7ad6f5b) {
           attacker function_9401373f(#"hash_683d7dfc8782d6b9", 1);
         }
 
         break;
-      case # "weapon_smg":
+      case #"weapon_smg":
         if(attacker newvalueoptions(#"hash_68046b0858420412") < level.var_c30109f4) {
           attacker function_9401373f(#"hash_68046b0858420412", 1);
         }
 
         break;
-      case # "weapon_tactical":
+      case #"weapon_tactical":
         if(attacker newvalueoptions(#"hash_4d4a62396c1ec8") < level.var_26d708d7) {
           attacker function_9401373f(#"hash_4d4a62396c1ec8", 1);
         }
 
         break;
-      case # "weapon_lmg":
+      case #"weapon_lmg":
         if(attacker newvalueoptions(#"hash_3caeae083fb50ceb") < level.var_4ac5338a) {
           attacker function_9401373f(#"hash_3caeae083fb50ceb", 1);
         }
 
         break;
-      case # "weapon_sniper":
+      case #"weapon_sniper":
         if(attacker newvalueoptions("#weapon_class_kills_sniper") < level.var_92dc2d7c) {
           attacker function_9401373f(#"weapon_class_kills_sniper", 1);
         }
@@ -633,7 +634,7 @@ function_b4ebcd8a() {
   foreach(index in var_3e22bae5) {
     str_state = self function_c2c1d36b(index);
 
-    if(str_state == # "tutorial_completed" || str_state == # "skirmish_completed" || str_state == # "skirmish_started") {
+    if(str_state == #"tutorial_completed" || str_state == #"skirmish_completed" || str_state == #"skirmish_started") {
       var_10e6d37f++;
     }
   }
@@ -768,7 +769,7 @@ on_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon,
 
 function_5f516f9d(stathash, var_16538d01 = 0) {
   if(isDefined(var_16538d01) && var_16538d01) {
-    stathash = # "weapon_class_";
+    stathash = #"weapon_class_";
   }
 
   target = tablelookup(#"gamedata/tables/mp/mp_combat_training_challenges.csv", 2, stathash, 1);

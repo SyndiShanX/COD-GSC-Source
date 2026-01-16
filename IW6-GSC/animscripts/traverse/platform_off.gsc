@@ -27,9 +27,8 @@ dotraverse_custom(var_0) {
   self traversemode("noclip");
   self.traversestartz = self.origin[2];
 
-  if(!animhasnotetrack(var_3, "traverse_align")) {
+  if(!animhasnotetrack(var_3, "traverse_align"))
     animscripts\traverse\shared::handletraversealignment();
-  }
 
   var_5 = 0;
 

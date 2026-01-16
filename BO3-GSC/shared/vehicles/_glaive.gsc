@@ -23,11 +23,11 @@
 #namespace glaive;
 
 function autoexec __init__sytem__() {
-  system::register("glaive", &__init__, undefined, undefined);
+  system::register("glaive", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("glaive", &glaive_initialize);
+  vehicle::add_main_callback("glaive", & glaive_initialize);
   clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int");
 }
 
@@ -37,8 +37,8 @@ function glaive_initialize() {
   self vehicle::friendly_fire_shield();
   self setneargoalnotifydist(50);
   self sethoverparams(0, 0, 40);
-  self playLoopSound("wpn_sword2_looper");
-  if(isDefined(self.scriptbundlesettings)) {
+  self playloopsound("wpn_sword2_looper");
+  if(isdefined(self.scriptbundlesettings)) {
     self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   }
   blackboard::createblackboardforentity(self);
@@ -49,21 +49,23 @@ function glaive_initialize() {
   self.goalradius = 9999999;
   self.goalheight = 512;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = &glaive_callback_damage;
-  self.allowfriendlyfiredamageoverride = &glaive_allowfriendlyfiredamage;
+  self.overridevehicledamage = & glaive_callback_damage;
+  self.allowfriendlyfiredamageoverride = & glaive_allowfriendlyfiredamage;
   self.ignoreme = 1;
   self._glaive_settings_lifetime = self.settings.lifetime;
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   defaultrole();
 }
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
-  self vehicle_ai::add_state("slash", undefined, &state_slash_update, undefined);
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
+  self vehicle_ai::add_state("slash", undefined, & state_slash_update, undefined);
   setdvar("", 1);
   self thread glaive_target_selection();
   vehicle_ai::startinitialstate("combat");
@@ -71,30 +73,30 @@ function defaultrole() {
 }
 
 function private is_enemy_valid(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return false;
   }
   if(!isalive(target)) {
     return false;
   }
-  if(isDefined(self.intermission) && self.intermission) {
+  if(isdefined(self.intermission) && self.intermission) {
     return false;
   }
-  if(isDefined(target.ignoreme) && target.ignoreme) {
+  if(isdefined(target.ignoreme) && target.ignoreme) {
     return false;
   }
   if(target isnotarget()) {
     return false;
   }
-  if(isDefined(target._glaive_ignoreme) && target._glaive_ignoreme) {
+  if(isdefined(target._glaive_ignoreme) && target._glaive_ignoreme) {
     return false;
   }
-  if(isDefined(target.archetype) && target.archetype == "margwa") {
+  if(isdefined(target.archetype) && target.archetype == "margwa") {
     if(!target margwaserverutils::margwacandamageanyhead()) {
       return false;
     }
   }
-  if(isDefined(target.archetype) && target.archetype == "zombie" && (!(isDefined(target.completed_emerging_into_playable_area) && target.completed_emerging_into_playable_area))) {
+  if(isdefined(target.archetype) && target.archetype == "zombie" && (!(isdefined(target.completed_emerging_into_playable_area) && target.completed_emerging_into_playable_area))) {
     return false;
   }
   if(distancesquared(self.owner.origin, target.origin) > (self.settings.guardradius * self.settings.guardradius)) {
@@ -118,17 +120,17 @@ function private get_glaive_enemy() {
 
 function private glaive_target_selection() {
   self endon("death");
-  for(;;) {
-    if(!isDefined(self.owner)) {
+  for (;;) {
+    if(!isdefined(self.owner)) {
       wait(0.25);
       continue;
     }
-    if(isDefined(self.ignoreall) && self.ignoreall) {
+    if(isdefined(self.ignoreall) && self.ignoreall) {
       wait(0.25);
       continue;
     }
     if(getdvarint("", 0)) {
-      if(isDefined(self.glaiveenemy)) {
+      if(isdefined(self.glaiveenemy)) {
         line(self.origin, self.glaiveenemy.origin, (1, 0, 0), 1, 0, 5);
       }
     }
@@ -136,12 +138,12 @@ function private glaive_target_selection() {
       wait(0.25);
       continue;
     }
-    if(isDefined(self._glaive_must_return_to_owner) && self._glaive_must_return_to_owner) {
+    if(isdefined(self._glaive_must_return_to_owner) && self._glaive_must_return_to_owner) {
       wait(0.25);
       continue;
     }
     target = get_glaive_enemy();
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       self.glaiveenemy = undefined;
     } else {
       self.glaiveenemy = target;
@@ -152,7 +154,7 @@ function private glaive_target_selection() {
 
 function should_go_to_owner() {
   b_is_lifetime_over = (gettime() - self.starttime) > (self._glaive_settings_lifetime * 1000);
-  if(isDefined(b_is_lifetime_over) && b_is_lifetime_over) {
+  if(isdefined(b_is_lifetime_over) && b_is_lifetime_over) {
     return true;
   }
   if(self.owner.sword_power <= 0) {
@@ -162,10 +164,10 @@ function should_go_to_owner() {
 }
 
 function should_go_to_near_owner() {
-  if(isDefined(self.owner) && distancesquared(self.origin, self.owner.origin) > (self.settings.guardradius * self.settings.guardradius)) {
+  if(isdefined(self.owner) && distancesquared(self.origin, self.owner.origin) > (self.settings.guardradius * self.settings.guardradius)) {
     return true;
   }
-  if(isDefined(self.owner) && !self is_enemy_valid(self.glaiveenemy)) {
+  if(isdefined(self.owner) && !self is_enemy_valid(self.glaiveenemy)) {
     if(distance2dsquared(self.origin, self.owner.origin) > (160 * 160)) {
       return true;
     }
@@ -184,14 +186,14 @@ function state_combat_update(params) {
   self endon("change_state");
   self endon("death");
   pathfailcount = 0;
-  while(!isDefined(self.owner)) {
+  while (!isdefined(self.owner)) {
     wait(0.1);
-    if(!isDefined(self.owner)) {
+    if(!isdefined(self.owner)) {
       self.owner = getplayers(self.team)[0];
     }
   }
-  for(;;) {
-    if(self should_go_to_owner() || (isDefined(self._glaive_must_return_to_owner) && self._glaive_must_return_to_owner)) {
+  for (;;) {
+    if(self should_go_to_owner() || (isdefined(self._glaive_must_return_to_owner) && self._glaive_must_return_to_owner)) {
       self._glaive_must_return_to_owner = 1;
       if(!isalive(self.glaiveenemy)) {
         self go_to_owner();
@@ -199,25 +201,25 @@ function state_combat_update(params) {
     }
     if(self should_go_to_near_owner()) {
       self go_to_near_owner();
-    } else if(isDefined(self.glaiveenemy)) {
+    } else if(isdefined(self.glaiveenemy)) {
       foundpath = 0;
       targetpos = vehicle_ai::gettargetpos(self.glaiveenemy, 1);
-      if(isDefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype == "margwa") {
+      if(isdefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype == "margwa") {
         targetpos = self.glaiveenemy gettagorigin("j_chunk_head_bone");
       }
       targetpos = targetpos + (self.glaiveenemy getvelocity() * 0.4);
-      if(isDefined(targetpos)) {
+      if(isdefined(targetpos)) {
         if(distance2dsquared(self.origin, self.glaiveenemy.origin) < (80 * 80)) {
           self vehicle_ai::set_state("slash");
-        } else if(isDefined(self.owner) && self is_enemy_valid(self.glaiveenemy) && self check_glaive_playable_area_conditions()) {
+        } else if(isdefined(self.owner) && self is_enemy_valid(self.glaiveenemy) && self check_glaive_playable_area_conditions()) {
           go_back_on_navvolume();
           queryresult = positionquery_source_navigation(targetpos, 0, 64, 64, 8, self);
-          if(isDefined(self.glaiveenemy)) {
-            positionquery_filter_sight(queryresult, targetpos, self getEye() - self.origin, self, 0, self.glaiveenemy);
+          if(isdefined(self.glaiveenemy)) {
+            positionquery_filter_sight(queryresult, targetpos, self geteye() - self.origin, self, 0, self.glaiveenemy);
           }
-          if(isDefined(queryresult.centeronnav) && queryresult.centeronnav) {
+          if(isdefined(queryresult.centeronnav) && queryresult.centeronnav) {
             foreach(point in queryresult.data) {
-              if(isDefined(point.visibility) && point.visibility) {
+              if(isdefined(point.visibility) && point.visibility) {
                 self.current_pathto_pos = point.origin;
                 foundpath = self setvehgoalpos(self.current_pathto_pos, 1, 1);
                 if(foundpath) {
@@ -230,7 +232,7 @@ function state_combat_update(params) {
             }
           } else {
             foreach(point in queryresult.data) {
-              if(isDefined(point.visibility) && point.visibility) {
+              if(isdefined(point.visibility) && point.visibility) {
                 self.current_pathto_pos = point.origin;
                 foundpath = self setvehgoalpos(self.current_pathto_pos, 1, 0);
                 if(foundpath) {
@@ -248,7 +250,7 @@ function state_combat_update(params) {
         go_back_on_navvolume();
         pathfailcount++;
         if(pathfailcount > 3) {
-          if(isDefined(self.owner)) {
+          if(isdefined(self.owner)) {
             self go_to_near_owner();
           }
         }
@@ -262,10 +264,10 @@ function state_combat_update(params) {
 }
 
 function check_glaive_playable_area_conditions() {
-  if(isDefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype != "zombie") {
+  if(isdefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype != "zombie") {
     return true;
   }
-  if(isDefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype == "zombie" && (isDefined(self.glaiveenemy.completed_emerging_into_playable_area) && self.glaiveenemy.completed_emerging_into_playable_area)) {
+  if(isdefined(self.glaiveenemy.archetype) && self.glaiveenemy.archetype == "zombie" && (isdefined(self.glaiveenemy.completed_emerging_into_playable_area) && self.glaiveenemy.completed_emerging_into_playable_area)) {
     return true;
   }
   return false;
@@ -274,7 +276,7 @@ function check_glaive_playable_area_conditions() {
 function go_back_on_navvolume() {
   queryresult = positionquery_source_navigation(self.origin, 0, 100, 64, 8, self);
   multiplier = 2;
-  while(queryresult.data.size < 1) {
+  while (queryresult.data.size < 1) {
     queryresult = positionquery_source_navigation(self.origin, 0, 100 * multiplier, 64 * multiplier, 20 * multiplier, self);
     multiplier = multiplier + 2;
   }
@@ -288,7 +290,7 @@ function go_back_on_navvolume() {
         best_point = point;
       }
     }
-    if(isDefined(best_point)) {
+    if(isdefined(best_point)) {
       self setneargoalnotifydist(2);
       point = best_point;
       self.current_pathto_pos = point.origin;
@@ -306,7 +308,7 @@ function chooseswordanim(enemy) {
   self endon("death");
   sword_anim = "o_zombie_zod_sword_projectile_melee_synced_a";
   self._glaive_linktotag = "tag_origin";
-  if(isDefined(enemy.archetype)) {
+  if(isdefined(enemy.archetype)) {
     switch (enemy.archetype) {
       case "parasite": {
         sword_anim = "o_zombie_zod_sword_projectile_melee_parasite_synced_a";
@@ -335,8 +337,8 @@ function state_slash_update(params) {
   self animscripted("anim_notify", enemy gettagorigin(self._glaive_linktotag), enemy gettagangles(self._glaive_linktotag), sword_anim, "normal", undefined, undefined, 0.3, 0.3);
   self clientfield::set("glaive_blood_fx", 1);
   self waittill("anim_notify");
-  if(isalive(enemy) && isDefined(enemy.archetype) && enemy.archetype == "margwa") {
-    if(isDefined(enemy.chop_actor_cb)) {
+  if(isalive(enemy) && isdefined(enemy.archetype) && enemy.archetype == "margwa") {
+    if(isdefined(enemy.chop_actor_cb)) {
       should_reevaluate_target = 1;
       enemy._glaive_ignoreme = 1;
       enemy thread glaive_ignore_cooldown(5);
@@ -346,11 +348,11 @@ function state_slash_update(params) {
     target_enemies = getaiteamarray("axis");
     foreach(target in target_enemies) {
       if(distance2dsquared(self.origin, target.origin) < (128 * 128)) {
-        if(isDefined(target.archetype) && target.archetype == "margwa") {
+        if(isdefined(target.archetype) && target.archetype == "margwa") {
           continue;
         }
         target dodamage(target.health + 100, self.origin, self.owner, self, "none", "MOD_UNKNOWN", 0, self.weapon);
-        self playSound("wpn_sword2_imp");
+        self playsound("wpn_sword2_imp");
         if(isactor(target)) {
           target zombie_utility::gib_random_parts();
           target startragdoll();
@@ -360,7 +362,7 @@ function state_slash_update(params) {
     }
   }
   self waittill("anim_notify", notetrack);
-  while(!isDefined(notetrack) || notetrack != "end") {
+  while (!isdefined(notetrack) || notetrack != "end") {
     self waittill("anim_notify", notetrack);
   }
   self clientfield::set("glaive_blood_fx", 0);
@@ -382,17 +384,17 @@ function go_to_near_owner() {
   self thread back_to_near_owner_check();
   starttime = gettime();
   self asmrequestsubstate("forward@movement");
-  while((gettime() - starttime) < ((self._glaive_settings_lifetime * 1000) * 0.1)) {
+  while ((gettime() - starttime) < ((self._glaive_settings_lifetime * 1000) * 0.1)) {
     go_back_on_navvolume();
     ownertargetpos = vehicle_ai::gettargetpos(self.owner, 1) - vectorscale((0, 0, 1), 4);
-    ownerforwardvec = anglesToForward(self.owner.angles);
+    ownerforwardvec = anglestoforward(self.owner.angles);
     targetpos = ownertargetpos + (80 * ownerforwardvec);
     searchcenter = self getclosestpointonnavvolume(ownertargetpos);
-    if(isDefined(searchcenter)) {
+    if(isdefined(searchcenter)) {
       queryresult = positionquery_source_navigation(searchcenter, 0, 144, 32, 12, self);
       foundpath = 0;
       foreach(point in queryresult.data) {
-        if(!isDefined(point._scoredebug)) {
+        if(!isdefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = distancesquared(point.origin, targetpos) * -1;
@@ -421,7 +423,7 @@ function go_to_owner() {
   self thread back_to_owner_check();
   starttime = gettime();
   self asmrequestsubstate("forward@movement");
-  while((gettime() - starttime) < ((self._glaive_settings_lifetime * 1000) * 0.3)) {
+  while ((gettime() - starttime) < ((self._glaive_settings_lifetime * 1000) * 0.3)) {
     go_back_on_navvolume();
     targetpos = vehicle_ai::gettargetpos(self.owner, 1);
     queryresult = positionquery_source_navigation(targetpos, 0, 64, 64, 8, self);
@@ -457,7 +459,7 @@ function go_to_owner() {
     }
     wait(1);
   }
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner)) {
     self.origin = self.owner.origin + vectorscale((0, 0, 1), 40);
   }
   self notify("returned_to_owner");
@@ -466,7 +468,7 @@ function go_to_owner() {
 
 function back_to_owner_check() {
   self endon("death");
-  while(isDefined(self.owner) && ((abs(self.origin[2] - self.owner.origin[2])) > (80 * 80) || distance2dsquared(self.origin, self.owner.origin) > (80 * 80))) {
+  while (isdefined(self.owner) && ((abs(self.origin[2] - self.owner.origin[2])) > (80 * 80) || distance2dsquared(self.origin, self.owner.origin) > (80 * 80))) {
     wait(0.1);
   }
   self notify("returned_to_owner");
@@ -474,7 +476,7 @@ function back_to_owner_check() {
 
 function back_to_near_owner_check() {
   self endon("death");
-  while(isDefined(self.owner) && ((abs(self.origin[2] - self.owner.origin[2])) > (160 * 160) || distance2dsquared(self.origin, self.owner.origin) > (160 * 160) || !util::within_fov(self.owner.origin, self.owner.angles, self.origin, cos(60)))) {
+  while (isdefined(self.owner) && ((abs(self.origin[2] - self.owner.origin[2])) > (160 * 160) || distance2dsquared(self.origin, self.owner.origin) > (160 * 160) || !util::within_fov(self.owner.origin, self.owner.angles, self.origin, cos(60)))) {
     wait(0.1);
   }
   self asmrequestsubstate("idle@movement");

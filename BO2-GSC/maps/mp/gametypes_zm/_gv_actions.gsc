@@ -100,13 +100,11 @@ greaterthanequals(param1, param2) {
 }
 
 inplace(param1, param2) {
-  if(param1 == param2) {
+  if(param1 == param2)
     return true;
-  }
 
-  if(param2 == "top3" && param1 == "first") {
+  if(param2 == "top3" && param1 == "first")
     return true;
-  }
 
   return false;
 }
@@ -123,9 +121,8 @@ hitby(rule) {
   meansofdeath = rule.target["MeansOfDeath"];
   weapon = rule.target["Weapon"];
 
-  if(!isDefined(meansofdeath) || !isDefined(weapon)) {
+  if(!isDefined(meansofdeath) || !isDefined(weapon))
     return undefined;
-  }
 
   switch (weapon) {
     case "knife_ballistic_mp":
@@ -180,13 +177,12 @@ getplayersplace(player) {
 
   place++;
 
-  if(place == 1) {
+  if(place == 1)
     return "first";
-  } else if(place <= 3) {
+  else if(place <= 3)
     return "top3";
-  } else if(place == level.placement["all"].size) {
+  else if(place == level.placement["all"].size)
     return "last";
-  }
 
   return "middle";
 }
@@ -216,9 +212,8 @@ gettargetplayerseliminated(rule) {
 gettargetplayersteam(rule) {
   player = rule.target["Player"];
 
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return [];
-  }
 
   return getplayersonteam(level.players, player.pers["team"]);
 }
@@ -226,9 +221,8 @@ gettargetplayersteam(rule) {
 gettargetotherteam(rule) {
   player = rule.target["Player"];
 
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return [];
-  }
 
   return getplayersonteam(level.players, getotherteam(player.pers["team"]));
 }
@@ -253,9 +247,8 @@ getassistingplayers(rule) {
   assisters = [];
   attacker = rule.target["Attacker"];
 
-  if(!isDefined(rule.target["Assisters"]) || !isDefined(attacker)) {
+  if(!isDefined(rule.target["Assisters"]) || !isDefined(attacker))
     return assisters;
-  }
 
   for(j = 0; j < rule.target["Assisters"].size; j++) {
     player = rule.target["Assisters"][j];
@@ -285,18 +278,17 @@ executegametypeeventrule(rule) {
   thread internalexecuterule(rule);
 }
 
-internalexecuterule(rule) {}
+internalexecuterule(rule) {
+}
 
 aregametypeeventruleconditionalsmet(rule) {
-  if(!isDefined(rule.conditionals) || rule.conditionals.size == 0) {
+  if(!isDefined(rule.conditionals) || rule.conditionals.size == 0)
     return 1;
-  }
 
   combinedresult = 1;
 
-  if(rule.conditionaleval == "OR") {
+  if(rule.conditionaleval == "OR")
     combinedresult = 0;
-  }
 
   for(i = 0; i < rule.conditionals.size; i++) {
     conditionalresult = evaluategametypeeventruleconditional(rule, rule.conditionals[i]);
@@ -323,19 +315,16 @@ aregametypeeventruleconditionalsmet(rule) {
 }
 
 evaluategametypeeventruleconditional(rule, conditional) {
-  if(!isDefined(conditional.lhs) || !isDefined(conditional.operand) || !isDefined(conditional.rhs)) {
+  if(!isDefined(conditional.lhs) || !isDefined(conditional.operand) || !isDefined(conditional.rhs))
     return 0;
-  }
 
-  if(!isDefined(level.conditionallefthandside[conditional.lhs])) {
+  if(!isDefined(level.conditionallefthandside[conditional.lhs]))
     return 0;
-  }
 
   lhsvalue = [[level.conditionallefthandside[conditional.lhs]]](rule);
 
-  if(!isDefined(lhsvalue) || !isDefined(level.conditionals[conditional.operand])) {
+  if(!isDefined(lhsvalue) || !isDefined(level.conditionals[conditional.operand]))
     return 0;
-  }
 
   return [[level.conditionals[conditional.operand]]](lhsvalue, conditional.rhs);
 }
@@ -346,9 +335,8 @@ getplayersonteam(players, team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(player.pers["team"] == team) {
+    if(player.pers["team"] == team)
       playersonteam[playersonteam.size] = player;
-    }
   }
 
   return playersonteam;
@@ -357,15 +345,15 @@ getplayersonteam(players, team) {
 gettargetsforgametypeeventrule(rule) {
   targets = [];
 
-  if(!isDefined(rule.targetname)) {
+  if(!isDefined(rule.targetname))
     return targets;
-  }
 
-  if(isDefined(rule.target[rule.targetname])) {
+  if(isDefined(rule.target[rule.targetname]))
     targets[targets.size] = rule.target[rule.targetname];
-  } else if(isDefined(level.targets[rule.targetname])) {
-    targets = [[level.targets[rule.targetname]]](rule);
-  }
+  else if(isDefined(level.targets[rule.targetname]))
+    targets = [
+      [level.targets[rule.targetname]]
+    ](rule);
 
   return targets;
 }
@@ -375,9 +363,8 @@ doesrulehavevalidparam(rule) {
 }
 
 sortplayersbylivesdescending(players) {
-  if(!isDefined(players)) {
+  if(!isDefined(players))
     return undefined;
-  }
 
   swapped = 1;
 
@@ -423,10 +410,9 @@ doremoveammo(rule) {
   giveammo(targets, 0 - rule.params[0]);
 }
 
-doplaySound(rule) {
-  if(doesrulehavevalidparam(rule)) {
+doplaysound(rule) {
+  if(doesrulehavevalidparam(rule))
     playsoundonplayers(rule.params[0]);
-  }
 }
 
 doenableuav(rule) {
@@ -489,11 +475,10 @@ dosetsubheader(rule) {
 displaytextonhudelem(target, texthudelem, text, secondstodisplay, notifyname, valueparam) {
   texthudelem.alpha = 1;
 
-  if(isDefined(valueparam)) {
+  if(isDefined(valueparam))
     texthudelem settext(text, valueparam);
-  } else {
+  else
     texthudelem settext(text);
-  }
 
   if(!isDefined(secondstodisplay) || secondstodisplay <= 0) {
     target.doingnotify = 0;
@@ -518,9 +503,8 @@ fadecustomgametypehudelem(hudelem, seconds, notifyname) {
   while(hudelem.alpha > 0) {
     hudelem.alpha = hudelem.alpha - 0.05;
 
-    if(hudelem.alpha < 0) {
+    if(hudelem.alpha < 0)
       hudelem.alpha = 0;
-    }
 
     wait 0.05;
   }
@@ -534,18 +518,16 @@ dodisplaymessage(rule) {
   }
   targets = gettargetsforgametypeeventrule(rule);
 
-  for(targetindex = 0; targetindex < targets.size; targetindex++) {
+  for(targetindex = 0; targetindex < targets.size; targetindex++)
     thread announcemessage(targets[targetindex], rule.params[0], 2.0);
-  }
 }
 
 announcemessage(target, messagetext, time) {
   target endon("disconnect");
   clientannouncement(target, messagetext, int(time * 1000));
 
-  if(time == 0) {
+  if(time == 0)
     time = getdvarfloat(#"_id_E8C4FC20");
-  }
 
   target.doingnotify = 1;
   wait(time);
@@ -583,9 +565,8 @@ dosethealthregen(rule) {
 }
 
 dochangeclass(rule) {
-  if(!doesrulehavevalidparam(rule)) {
+  if(!doesrulehavevalidparam(rule))
     return;
-  }
 }
 
 dochangeteam(rule) {
@@ -616,11 +597,10 @@ dochangeteam(rule) {
     target.pers["team"] = team;
     target.team = team;
 
-    if(level.teambased) {
+    if(level.teambased)
       target.sessionteam = team;
-    } else {
+    else
       target.sessionteam = "none";
-    }
 
     target notify("joined_team");
     level notify("joined_team");
@@ -640,9 +620,8 @@ displayperk(player, imagename) {
       }
     }
 
-    if(index == -1) {
+    if(index == -1)
       return;
-    }
   }
 
   player maps\mp\gametypes_zm\_hud_util::showperk(index, imagename, 10);
@@ -666,9 +645,8 @@ setorunsetperk(players, perks, shouldset) {
     for(perkindex = 0; perkindex < perks.size - 1; perkindex++) {
       perk = perks[perkindex];
 
-      if(player hasperk(perk)) {
+      if(player hasperk(perk))
         hasperkalready = 1;
-      }
 
       if(shouldset) {
         player setperk(perk);
@@ -678,9 +656,8 @@ setorunsetperk(players, perks, shouldset) {
       player unsetperk(perk);
     }
 
-    if(shouldset && !hasperkalready && getdvarint(#"scr_showperksonspawn") == 1) {
+    if(shouldset && !hasperkalready && getdvarint(#"scr_showperksonspawn") == 1)
       displayperk(player, imagename);
-    }
   }
 }
 
@@ -698,7 +675,8 @@ doremoveperk(rule) {
   setorunsetperk(gettargetsforgametypeeventrule(rule), rule.params, 0);
 }
 
-giveorremovekillstreak(rule, shouldgive) {}
+giveorremovekillstreak(rule, shouldgive) {
+}
 
 dogivekillstreak(rule) {
   giveorremovekillstreak(rule, 1);
@@ -713,9 +691,8 @@ givelives(players, amount) {
     player = players[i];
     player.pers["lives"] = player.pers["lives"] + amount;
 
-    if(player.pers["lives"] < 0) {
+    if(player.pers["lives"] < 0)
       player.pers["lives"] = 0;
-    }
   }
 }
 
@@ -734,9 +711,8 @@ doremovelives(rule) {
 }
 
 giveorremoveinvuln(players, shouldgiveinvuln) {
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     player = players[i];
-  }
 }
 
 dogiveinvuln(rule) {
@@ -770,11 +746,10 @@ doscalemovespeed(rule) {
     target = targets[targetindex];
     target.movementspeedmodifier = movespeedscale * target getmovespeedscale();
 
-    if(target.movementspeedmodifier < 0.1) {
+    if(target.movementspeedmodifier < 0.1)
       target.movementspeedmodifier = 0.1;
-    } else if(target.movementspeedmodifier > 4.0) {
+    else if(target.movementspeedmodifier > 4.0)
       target.movementspeedmodifier = 4.0;
-    }
 
     target setmovespeedscale(target.movementspeedmodifier);
   }

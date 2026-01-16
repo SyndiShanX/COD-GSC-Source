@@ -12,15 +12,15 @@
 #namespace zm_island_fx;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_fx", &__init__, undefined, undefined);
+  system::register("zm_island_fx", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "do_fade_material", 9000, 3, "float", &do_fade_material, 0, 0);
-  clientfield::register("scriptmover", "do_fade_material_slow", 9000, 3, "float", &do_fade_material_slow, 0, 0);
-  clientfield::register("scriptmover", "do_fade_material_direct", 9000, 3, "float", &do_fade_material_direct, 0, 0);
-  clientfield::register("scriptmover", "do_emissive_material", 9000, 3, "float", &do_emissive_material, 0, 0);
-  clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float", &do_emissive_material_direct, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material", 9000, 3, "float", & do_fade_material, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material_slow", 9000, 3, "float", & do_fade_material_slow, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material_direct", 9000, 3, "float", & do_fade_material_direct, 0, 0);
+  clientfield::register("scriptmover", "do_emissive_material", 9000, 3, "float", & do_emissive_material, 0, 0);
+  clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float", & do_emissive_material_direct, 0, 0);
 }
 
 function main() {
@@ -218,7 +218,7 @@ function function_bea149a5(localclientnum, var_afc7cc94, var_b05b3457, b_on, n_a
   if(b_on) {
     var_24fbb6c6 = 0;
     i = 0;
-    while(var_24fbb6c6 <= n_alpha) {
+    while (var_24fbb6c6 <= n_alpha) {
       self transition_shader(localclientnum, var_24fbb6c6, var_afc7cc94);
       if(var_c0ce8db2) {
         var_24fbb6c6 = sqrt(i);
@@ -231,14 +231,14 @@ function function_bea149a5(localclientnum, var_afc7cc94, var_b05b3457, b_on, n_a
     self.var_bbfa5d7d = n_alpha;
     self transition_shader(localclientnum, n_alpha, var_afc7cc94);
   } else {
-    if(isDefined(self.var_bbfa5d7d)) {
+    if(isdefined(self.var_bbfa5d7d)) {
       var_bbfa5d7d = self.var_bbfa5d7d;
     } else {
       var_bbfa5d7d = 1;
     }
     var_24fbb6c6 = var_bbfa5d7d;
     i = var_bbfa5d7d;
-    while(var_24fbb6c6 >= 0) {
+    while (var_24fbb6c6 >= 0) {
       self transition_shader(localclientnum, var_24fbb6c6, var_afc7cc94);
       if(var_c0ce8db2) {
         var_24fbb6c6 = sqrt(i);

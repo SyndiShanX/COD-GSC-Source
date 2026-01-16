@@ -18,25 +18,20 @@ init_dog_control() {
 enable_dog_control(var_0) {
   var_0.animname = "dog";
 
-  if(!var_0 maps\_utility::ent_flag_exist("dog_no_teleport")) {
+  if(!var_0 maps\_utility::ent_flag_exist("dog_no_teleport"))
     var_0 maps\_utility::ent_flag_init("dog_no_teleport");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("dog_cooldown")) {
+  if(!var_0 maps\_utility::ent_flag_exist("dog_cooldown"))
     var_0 maps\_utility::ent_flag_init("dog_cooldown");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("running_dog_command")) {
+  if(!var_0 maps\_utility::ent_flag_exist("running_dog_command"))
     var_0 maps\_utility::ent_flag_init("running_dog_command");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("pause_dog_command")) {
+  if(!var_0 maps\_utility::ent_flag_exist("pause_dog_command"))
     var_0 maps\_utility::ent_flag_init("pause_dog_command");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("cancel_command_disabled")) {
+  if(!var_0 maps\_utility::ent_flag_exist("cancel_command_disabled"))
     var_0 maps\_utility::ent_flag_init("cancel_command_disabled");
-  }
 
   self.controlled_dog = var_0;
   var_0.player_controller = self;
@@ -55,9 +50,8 @@ enable_dog_control(var_0) {
   setdvar("ui_dog_grenade", 1);
   thread ui_dog_grenade_logic();
 
-  if(level.xb3) {
+  if(level.xb3)
     maps\_dog_kinect::speechcommands();
-  }
 }
 
 disable_dog_control() {
@@ -105,9 +99,8 @@ isneargrenade() {
     for(var_3 = 0; var_3 < level.players.size; var_3++) {
       var_4 = level.players[var_3];
 
-      if(distancesquared(var_2.origin, var_4.origin) < 36864) {
+      if(distancesquared(var_2.origin, var_4.origin) < 36864)
         return 1;
-      }
     }
   }
 
@@ -136,9 +129,8 @@ laser_designate_target() {
     var_5 = var_4 get_eye();
 
     if(isDefined(var_0["entity"]) && isai(var_0["entity"])) {
-      if(isalive(var_0["entity"]) && var_0["entity"].team != "allies" && var_0["entity"].type != "dog") {
+      if(isalive(var_0["entity"]) && var_0["entity"].team != "allies" && var_0["entity"].type != "dog")
         var_1 = var_0["entity"];
-      }
     }
 
     if(!isDefined(var_1)) {
@@ -155,9 +147,8 @@ laser_designate_target() {
         var_13 = anglesToForward(var_12);
         var_14 = vectordot(var_11, var_13);
 
-        if(var_14 > var_6) {
+        if(var_14 > var_6)
           var_3 = common_scripts\utility::array_add(var_3, var_8);
-        }
       }
 
       if(var_3.size > 0) {
@@ -195,9 +186,8 @@ laser_designate_target() {
 
     self notify("issue_dog_command", var_0, undefined, var_1);
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       wait 2;
-    }
   }
 }
 
@@ -228,9 +218,8 @@ get_laser_designated_trace() {
   var_4 = bulletTrace(var_0, var_3, 1, self.controlled_dog);
   var_5 = var_4["entity"];
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_4["position"] = var_5.origin;
-  }
 
   return var_4;
 }
@@ -239,27 +228,24 @@ run_dog_command(var_0, var_1, var_2) {
   self endon("death");
 
   if(var_0["fraction"] >= 0.98 && !isDefined(var_1)) {
-    if(!maps\_utility::ent_flag("running_dog_command")) {
+    if(!maps\_utility::ent_flag("running_dog_command"))
       self.player_controller thread display_no_target(&"SCRIPT_DOG_NOTARGET", 1.75);
-    }
 
     return;
   }
 
   var_3 = var_0["position"];
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_4 = var_2;
-  } else {
+  else
     var_4 = enemy_near_position(var_0["position"]);
-  }
 
   var_5 = get_flush_volume(var_3);
 
   if(!isDefined(var_2) && !isDefined(var_1) && !isDefined(var_5)) {
-    if(!maps\_utility::ent_flag("running_dog_command")) {
+    if(!maps\_utility::ent_flag("running_dog_command"))
       self.player_controller thread display_no_target(&"SCRIPT_DOG_NOTARGET", 1.75);
-    }
 
     return;
   }
@@ -270,9 +256,8 @@ run_dog_command(var_0, var_1, var_2) {
   maps\_utility::ent_flag_set("running_dog_command");
   var_6 = isDefined(self.script_forcecolor) || isDefined(self.script_old_forcecolor);
 
-  if(var_6 && isDefined(self.script_forcecolor)) {
+  if(var_6 && isDefined(self.script_forcecolor))
     self.script_old_forcecolor = self.script_forcecolor;
-  }
 
   if(isDefined(self.current_follow_path)) {
     self.old_path = self.current_follow_path;
@@ -289,9 +274,8 @@ run_dog_command(var_0, var_1, var_2) {
   self.dog_marker.origin = var_3;
   self.dog_marker.angles = vectortoangles(var_0["normal"]);
 
-  if(!isDefined(self.dc_old_moveplaybackrate)) {
+  if(!isDefined(self.dc_old_moveplaybackrate))
     self.dc_old_moveplaybackrate = self.moveplaybackrate;
-  }
 
   self.moveplaybackrate = 1;
 
@@ -300,11 +284,11 @@ run_dog_command(var_0, var_1, var_2) {
     maps\_utility::clear_run_anim();
   }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     dog_command_cancel(var_1);
-  } else if(isDefined(var_5)) {
+  else if(isDefined(var_5))
     dog_command_flush(var_5, var_0);
-  } else if(isDefined(var_4)) {
+  else if(isDefined(var_4)) {
     self.script_nostairs = 1;
     maps\_utility::set_hudoutline("friendly", 0);
     self.moveplaybackrate = 1;
@@ -313,16 +297,14 @@ run_dog_command(var_0, var_1, var_2) {
 
     if(isDefined(var_7) && var_7 == "attack") {
       if(isalive(var_4)) {
-        if(isDefined(self.in_melee) && self.in_melee) {
+        if(isDefined(self.in_melee) && self.in_melee)
           var_4 waittill("death");
-        }
       }
     } else {
       wait 0.5;
 
-      if(!isDefined(self.in_melee) || !self.in_melee) {
+      if(!isDefined(self.in_melee) || !self.in_melee)
         self clearenemy();
-      }
     }
 
     if(isDefined(self.old_ai_target)) {
@@ -353,9 +335,8 @@ run_dog_command(var_0, var_1, var_2) {
     self.script_old_forcecolor = undefined;
     self.old_path = undefined;
 
-    if(isDefined(var_8)) {
+    if(isDefined(var_8))
       self.script_color_delay_override = var_8;
-    }
   } else if(isDefined(self.old_path)) {
     thread maps\_utility::follow_path_and_animate(self.old_path);
     self.old_path = undefined;
@@ -395,9 +376,8 @@ dog_command_flush(var_0, var_1) {
 
 dog_command_cancel(var_0) {
   if(isDefined(self.favoriteenemy)) {
-    if(isDefined(self.favoriteenemy.oldignoreme)) {
+    if(isDefined(self.favoriteenemy.oldignoreme))
       self.favoriteenemy.ignoreme = self.favoriteenemy.oldignoreme;
-    }
 
     self.favoriteenemy = undefined;
   }
@@ -415,21 +395,19 @@ dog_command_attack(var_0) {
   self.dog_marker linkto(var_0, "tag_origin", (0, 0, 0), (-90, 0, -90));
   wait 0.05;
 
-  if(!isalive(var_0)) {
+  if(!isalive(var_0))
     return "bail";
-  }
 
   self.script_nostairs = 1;
 
-  if(isDefined(self.old_ai_target) && self.old_ai_target != var_0) {
+  if(isDefined(self.old_ai_target) && self.old_ai_target != var_0)
     self.old_ai_target hudoutlinedisable();
-  }
 
   var_0 thread hud_outlineenable();
 
-  if(isDefined(var_0.dog_attack_alt_func)) {
+  if(isDefined(var_0.dog_attack_alt_func))
     self[[var_0.dog_attack_alt_func]](var_0);
-  } else {
+  else {
     self.old_ai_target = var_0;
     var_0.old_ignoreme = var_0.ignoreme;
     var_0.ignoreme = 0;
@@ -437,11 +415,10 @@ dog_command_attack(var_0) {
     var_0 thread maps\_utility::set_battlechatter(0);
     self.favoriteenemy = var_0;
 
-    if(common_scripts\utility::flag_exist("_stealth_spotted") && !common_scripts\utility::flag("_stealth_spotted")) {
+    if(common_scripts\utility::flag_exist("_stealth_spotted") && !common_scripts\utility::flag("_stealth_spotted"))
       thread maps\_utility::play_sound_on_entity("anml_dog_growl");
-    } else {
+    else
       thread maps\_utility::play_sound_on_entity("anml_dog_bark_attack_start_npc");
-    }
 
     self setgoalentity(var_0, 50);
     thread temporary_disable_pain();
@@ -479,15 +456,13 @@ dog_command_attack(var_0) {
     self.player_controller.notargethudelem.alpha = 0;
     var_12 = dog_waitfor_attack_or_bail(var_0);
 
-    if(isDefined(var_12)) {
+    if(isDefined(var_12))
       self notify("stop_disable_pain");
-    }
 
     self notify("dog_attack_damage_tracking");
 
-    if(!isDefined(var_12) || var_12 == "bail") {
+    if(!isDefined(var_12) || var_12 == "bail")
       return "bail";
-    }
   }
 }
 
@@ -495,18 +470,16 @@ dog_waitfor_attack_or_bail(var_0) {
   var_0 endon("death");
 
   if(isDefined(self.in_melee) && self.in_melee) {
-    if(isDefined(self.enemy) && self.enemy == var_0) {
+    if(isDefined(self.enemy) && self.enemy == var_0)
       return "dog_attacks_ai";
-    }
 
     return "bail";
   }
 
   level waittill("dog_attacks_ai", var_1, var_2, var_3);
 
-  if(var_2 == var_0) {
+  if(var_2 == var_0)
     return "dog_attacks_ai";
-  }
 
   return "bail";
 }
@@ -518,9 +491,8 @@ temporary_disable_pain() {
   self setCanDamage(0);
   wait 2;
 
-  if(!isDefined(self.in_melee) || self.in_melee == 0) {
+  if(!isDefined(self.in_melee) || self.in_melee == 0)
     self setCanDamage(1);
-  }
 }
 
 dog_attack_damage_tracking() {
@@ -528,9 +500,8 @@ dog_attack_damage_tracking() {
   self endon("dog_attack_damage_tracking");
   common_scripts\utility::waittill_either("damage", "cancel_dog_attack");
 
-  if(!isDefined(self.in_melee) || !self.in_melee) {
+  if(!isDefined(self.in_melee) || !self.in_melee)
     thread dog_got_hit();
-  }
 }
 
 dog_got_hit() {
@@ -562,9 +533,9 @@ dog_command_goto(var_0) {
   self setgoalpos(var_1);
   common_scripts\utility::waittill_notify_or_timeout("goal", 0.2);
 
-  if(isDefined(self.pathgoalpos)) {
+  if(isDefined(self.pathgoalpos))
     self waittill("goal");
-  } else if(distance2d(self.origin, var_1) > self.goalradius) {
+  else if(distance2d(self.origin, var_1) > self.goalradius) {
     var_2 = getnodesinradius(var_1, 96, 0, 96);
     var_2 = sortbydistance(var_2, level.player get_eye());
 
@@ -584,9 +555,8 @@ enemy_near_position(var_0) {
   if(var_1.size > 0) {
     var_1 = sortbydistance(var_1, var_0);
 
-    if(distance(var_1[0].origin, var_0) < 196) {
+    if(distance(var_1[0].origin, var_0) < 196)
       return var_1[0];
-    }
   }
 
   return undefined;
@@ -647,19 +617,17 @@ chopper_air_support_activate() {
       var_10 = var_8;
       var_11 = undefined;
 
-      if(var_4[var_9].offsetdir == "vertical") {
+      if(var_4[var_9].offsetdir == "vertical")
         var_11 = anglestoup(var_6);
-      } else if(var_4[var_9].offsetdir == "horizontal") {
+      else if(var_4[var_9].offsetdir == "horizontal")
         var_11 = anglestoright(var_6);
-      }
 
       var_10 = var_10 + var_11 * var_4[var_9].offsetdist;
       var_4[var_9].trace = bulletTrace(var_10, var_10 + var_7 * var_2, 0, undefined);
       var_4[var_9].length = distancesquared(var_10, var_4[var_9].trace["position"]);
 
-      if(getdvar("village_assault_debug_marker") == "1") {
+      if(getdvar("village_assault_debug_marker") == "1")
         thread common_scripts\utility::draw_line_for_time(var_10, var_4[var_9].trace["position"], 1, 1, 1, 0.05);
-      }
     }
 
     var_12 = [];
@@ -673,9 +641,8 @@ chopper_air_support_activate() {
       var_12[var_14] = var_4[var_9].trace["position"];
       var_13[var_14] = var_4[var_9].trace["normal"];
 
-      if(getdvar("village_assault_debug_marker") == "1") {
+      if(getdvar("village_assault_debug_marker") == "1")
         thread common_scripts\utility::draw_line_for_time(level.player get_eye(), var_12[var_14], 0, 1, 0, 0.05);
-      }
     }
 
     if(var_12.size == 0) {
@@ -699,9 +666,8 @@ chopper_air_support_activate() {
       var_16 = var_13[0];
     }
 
-    if(getdvar("village_assault_debug_marker") == "1") {
+    if(getdvar("village_assault_debug_marker") == "1")
       thread common_scripts\utility::draw_line_for_time(level.player get_eye(), var_15, 1, 0, 0, 0.05);
-    }
 
     thread drawchopperattackarrow(var_15, var_16, var_5);
     var_5 = 0.2;
@@ -727,24 +693,22 @@ findaveragepointvec(var_0, var_1, var_2, var_3) {
 }
 
 findaveragepoint(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     return (var_0 + var_1 + var_2 + var_3) / 4;
-  } else if(isDefined(var_2)) {
+  else if(isDefined(var_2))
     return (var_0 + var_1 + var_2) / 3;
-  } else {
+  else
     return (var_0 + var_1) / 2;
-  }
 }
 
 drawchopperattackarrow(var_0, var_1, var_2) {
   var_0 = var_0 + var_1 * level.chopperattackarrow.offset;
   level.chopperattackarrow.origin = var_0;
 
-  if(var_2 > 0) {
+  if(var_2 > 0)
     level.chopperattackarrow rotateto(vectortoangles(var_1), 0.2);
-  } else {
+  else
     level.chopperattackarrow.angles = vectortoangles(var_1);
-  }
 }
 
 get_eye() {
@@ -806,9 +770,8 @@ hudoutline_wait_death() {
 
   var_0 = getcorpsearray();
 
-  foreach(var_2 in var_0) {
-    var_2 hudoutlinedisable();
-  }
+  foreach(var_2 in var_0)
+  var_2 hudoutlinedisable();
 }
 
 display_no_target(var_0, var_1) {

@@ -12,7 +12,7 @@ init() {
   level.teams[0] = "allies";
   level.teams[1] = "axis";
   level.recently_deceased = [];
-  for(iTeam = 0; iTeam < level.teams.size; iTeam++) {
+  for (iTeam = 0; iTeam < level.teams.size; iTeam++) {
     level.recently_deceased[level.teams[iTeam]] = spawn_array_struct();
   }
   level thread onPlayerConnect();
@@ -34,7 +34,7 @@ init() {
 }
 
 init_spawn_system() {
-  level.spawnsystem = spawnStruct();
+  level.spawnsystem = spawnstruct();
   spawnsystem = level.spawnsystem;
   level thread initialize_player_spawning_dvars();
   spawnsystem.eINFLUENCER_SHAPE_SPHERE = 0;
@@ -57,7 +57,7 @@ init_spawn_system() {
 
 onPlayerConnect() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onDisconnect();
@@ -71,7 +71,7 @@ onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
   created_influencers = false;
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     if(!created_influencers) {
       self create_player_influencers();
@@ -93,7 +93,7 @@ onDeath() {
 onTeamChange() {
   self endon("disconnect");
   level endon("game_ended");
-  while(1) {
+  while (1) {
     self waittill("joined_team");
     self player_influencers_set_team();
     wait(0.05);
@@ -103,7 +103,7 @@ onTeamChange() {
 onSquadLeaderChange() {
   self endon("disconnect");
   level endon("game_ended");
-  while(1) {
+  while (1) {
     self waittill("squadleader_changed", squad_id, is_leader);
     if(isDefined(self.spawn_influencers_created)) {
       if(is_leader) {
@@ -119,7 +119,7 @@ onSquadLeaderChange() {
 onGrenadeThrow() {
   self endon("disconnect");
   level endon("game_ended");
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", grenade, weaponName);
     grenade create_grenade_influencers(self.pers["team"], weaponName);
     wait(0.05);
@@ -132,9 +132,8 @@ onDisconnect() {
 }
 
 get_team_mask(team) {
-  if(!level.teambased || !isDefined(team)) {
+  if(!level.teambased || !isDefined(team))
     return level.spawnsystem.iSPAWN_TEAMMASK_FREE;
-  }
   switch (team) {
     case "axis":
       return level.spawnsystem.iSPAWN_TEAMMASK_AXIS;
@@ -262,21 +261,16 @@ remove_player_influencers() {
 }
 
 enable_player_influencers(enabled) {
-  if(isDefined(self.influencer_friendly_sphere)) {
+  if(isDefined(self.influencer_friendly_sphere))
     enableinfluencer(self.influencer_friendly_sphere, enabled);
-  }
-  if(isDefined(self.influencer_friendly_cylinder)) {
+  if(isDefined(self.influencer_friendly_cylinder))
     enableinfluencer(self.influencer_friendly_cylinder, enabled);
-  }
-  if(isDefined(self.influencer_enemy_sphere)) {
+  if(isDefined(self.influencer_enemy_sphere))
     enableinfluencer(self.influencer_enemy_sphere, enabled);
-  }
-  if(isDefined(self.influencer_weapon_cylinder)) {
+  if(isDefined(self.influencer_weapon_cylinder))
     enableinfluencer(self.influencer_weapon_cylinder, enabled);
-  }
-  if(isDefined(self.influencer_squad)) {
+  if(isDefined(self.influencer_squad))
     enableinfluencer(self.influencer_squad, enabled);
-  }
 }
 
 player_influencers_set_team() {
@@ -293,21 +287,16 @@ player_influencers_set_team() {
   if(level.friendlyfire != 0 && level.teamBased) {
     weapon_team_mask |= team_mask;
   }
-  if(isDefined(self.influencer_friendly_sphere)) {
+  if(isDefined(self.influencer_friendly_sphere))
     setinfluencerteammask(self.influencer_friendly_sphere, team_mask);
-  }
-  if(isDefined(self.influencer_friendly_cylinder)) {
+  if(isDefined(self.influencer_friendly_cylinder))
     setinfluencerteammask(self.influencer_friendly_cylinder, team_mask);
-  }
-  if(isDefined(self.influencer_enemy_sphere)) {
+  if(isDefined(self.influencer_enemy_sphere))
     setinfluencerteammask(self.influencer_enemy_sphere, other_team_mask);
-  }
-  if(isDefined(self.influencer_weapon_cylinder)) {
+  if(isDefined(self.influencer_weapon_cylinder))
     setinfluencerteammask(self.influencer_weapon_cylinder, weapon_team_mask);
-  }
-  if(isDefined(self.influencer_squad)) {
+  if(isDefined(self.influencer_squad))
     setinfluencerteammask(self.influencer_squad, team_mask);
-  }
 }
 
 create_squad_influencers() {
@@ -420,8 +409,8 @@ create_vehicle_influencers() {
 }
 
 create_map_placed_influencers() {
-  staticInfluencerEnts = getEntArray("mp_uspawn_influencer", "classname");
-  for(i = 0; i < staticInfluencerEnts.size; i++) {
+  staticInfluencerEnts = GetEntArray("mp_uspawn_influencer", "classname");
+  for (i = 0; i < staticInfluencerEnts.size; i++) {
     staticInfluencerEnt = staticInfluencerEnts[i];
     if(isDefined(staticInfluencerEnt.script_gameobjectname) &&
       staticInfluencerEnt.script_gameobjectname == "twar") {
@@ -465,7 +454,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
           }
           influencer_id = addcylinderinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
             influencer_entity.origin,
-            anglesToForward(influencer_entity.angles),
+            AnglesToForward(influencer_entity.angles),
             AnglesToUp(influencer_entity.angles),
             influencer_entity.radius,
             influencer_entity.height,
@@ -532,7 +521,7 @@ set_dvar_int_if_unset(
 }
 
 initialize_player_spawning_dvars() {
-  while(1) {
+  while (1) {
     get_player_spawning_dvars();
     wait(2);
   }
@@ -655,7 +644,9 @@ onSpawnPlayer_Unified() {
       maps\mp\gametypes\_callbacksetup::AbortLevel();
     }
   } else {
-    [[level.onSpawnPlayer]]();
+    [
+      [level.onSpawnPlayer]
+    ]();
   }
   self.uspawn_already_spawned = true;
   prof_end("onSpawnPlayer_Unified");
@@ -716,7 +707,7 @@ get_best_spawnpoint(point_team, influencer_team, player) {
   }
   best_spawn_no_sight = undefined;
   prof_begin("get_best_spawnpoint__");
-  for(i = 0; i < scored_spawn_points.size; i++) {
+  for (i = 0; i < scored_spawn_points.size; i++) {
     scored_spawn = scored_spawn_points[i];
     if(PositionWouldTelefrag(scored_spawn_points[i].origin)) {
       continue;
@@ -750,12 +741,12 @@ gatherSpawnEntities(player_team) {
     }
   }
   spawn_entities_s = spawn_array_struct();
-  spawn_entities_s.a = getEntArray("mp_uspawn_point", "classname");
+  spawn_entities_s.a = GetEntArray("mp_uspawn_point", "classname");
   if(!isDefined(spawn_entities_s.a)) {
     spawn_entities_s.a = [];
   }
   legacy_spawn_points = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(player_team);
-  for(legacy_spawn_index = 0; legacy_spawn_index < legacy_spawn_points.size; legacy_spawn_index++) {
+  for (legacy_spawn_index = 0; legacy_spawn_index < legacy_spawn_points.size; legacy_spawn_index++) {
     spawn_entities_s.a[spawn_entities_s.a.size] = legacy_spawn_points[legacy_spawn_index];
   }
   level.unified_spawn_points[player_team] = spawn_entities_s;
@@ -770,9 +761,8 @@ is_hardcore() {
 teams_have_enmity(
   team1,
   team2) {
-  if(!isDefined(team1) || !isDefined(team2) || (level.gameType == "dm")) {
+  if(!isDefined(team1) || !isDefined(team2) || (level.gameType == "dm"))
     return true;
-  }
   return team1 != "neutral" &&
     team2 != "neutral" &&
     team1 != team2;
@@ -800,7 +790,7 @@ remove_unused_spawn_entities() {
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn_axis_start";
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn_allies_start";
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn";
-  for(i = 0; i < spawn_entity_types.size; i++) {
+  for (i = 0; i < spawn_entity_types.size; i++) {
     if(spawn_point_class_name_being_used(spawn_entity_types[i])) {
       continue;
     }
@@ -810,7 +800,7 @@ remove_unused_spawn_entities() {
 }
 
 delete_all_spawns(spawnpoints) {
-  for(i = 0; i < spawnpoints.size; i++) {
+  for (i = 0; i < spawnpoints.size; i++) {
     spawnpoints[i] delete();
   }
 }
@@ -819,7 +809,7 @@ spawn_point_class_name_being_used(name) {
   if(!isDefined(level.spawn_point_class_names)) {
     return false;
   }
-  for(i = 0; i < level.spawn_point_class_names.size; i++) {
+  for (i = 0; i < level.spawn_point_class_names.size; i++) {
     if(level.spawn_point_class_names[i] == name) {
       return true;
     }

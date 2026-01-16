@@ -11,6 +11,7 @@
 #include scripts\core_common\globallogic\globallogic_score;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace gadget_vision_pulse;
 
 init_shared() {
@@ -70,12 +71,12 @@ gadget_vision_pulse_on_spawn() {
 }
 
 gadget_vision_pulse_ramp_hold_func() {
-  self waittilltimeout(float(level.weaponvisionpulse.var_4d88a1ff) / 1000 - 0.35, # "ramp_out_visionset");
+  self waittilltimeout(float(level.weaponvisionpulse.var_4d88a1ff) / 1000 - 0.35, #"ramp_out_visionset");
 }
 
 gadget_vision_pulse_watch_death(slot, weapon) {
   self notify(#"vision_pulse_watch_death");
-  self endon(#"vision_pulse_watch_death", # "disconnect");
+  self endon(#"vision_pulse_watch_death", #"disconnect");
   self waittill(#"death");
   self endon(#"shutdown_vision_pulse");
 
@@ -92,7 +93,7 @@ gadget_vision_pulse_watch_death(slot, weapon) {
 
 gadget_vision_pulse_watch_emp(slot, weapon) {
   self notify(#"vision_pulse_watch_emp");
-  self endon(#"vision_pulse_watch_emp", # "disconnect", # "shutdown_vision_pulse");
+  self endon(#"vision_pulse_watch_emp", #"disconnect", #"shutdown_vision_pulse");
 
   while(true) {
     if(self isempjammed()) {
@@ -112,7 +113,7 @@ gadget_vision_pulse_watch_emp(slot, weapon) {
 
 function_46f384d5() {
   self notify(#"remote_control");
-  self endon(#"remote_control", # "disconnect", # "death", # "shutdown_vision_pulse");
+  self endon(#"remote_control", #"disconnect", #"death", #"shutdown_vision_pulse");
 
   while(true) {
     if(self isremotecontrolling() || self clientfield::get_to_player("remote_missile_screenfx") != 0) {
@@ -152,7 +153,7 @@ gadget_vision_pulse_off(slot, weapon) {
 }
 
 gadget_vision_pulse_start(slot, weapon) {
-  self endon(#"disconnect", # "death", # "emp_vp_jammed", # "shutdown_vision_pulse", # "hash_7e581b90612825f4");
+  self endon(#"disconnect", #"death", #"emp_vp_jammed", #"shutdown_vision_pulse", #"hash_7e581b90612825f4");
   wait 0.1;
 
   if(isDefined(self._pulse_ent)) {
@@ -226,7 +227,7 @@ shutdown_vision_pulse(spottedenemy, immediate, weapon) {
 }
 
 function_19bef771(weapon) {
-  self endon(#"death", # "shutdown_vision_pulse", # "hash_7e581b90612825f4");
+  self endon(#"death", #"shutdown_vision_pulse", #"hash_7e581b90612825f4");
   wait float(weapon.var_4d88a1ff) / 1000;
   self disableoffhandweapons();
   self switchtooffhand(level.weaponvisionpulse);
@@ -243,7 +244,7 @@ function_19bef771(weapon) {
 }
 
 wait_until_is_done(slot, timepulse) {
-  self endon(#"hash_7e581b90612825f4", # "shutdown_vision_pulse", # "death");
+  self endon(#"hash_7e581b90612825f4", #"shutdown_vision_pulse", #"death");
   wait float(timepulse) / 1000;
   self globallogic_score::function_d3ca3608(#"hash_32591f4be1bf4f22");
 }

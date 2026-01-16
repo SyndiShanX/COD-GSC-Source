@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_aar_medals;
 
 class cct_shared_aar_medals: cluielem {

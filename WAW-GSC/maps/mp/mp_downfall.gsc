@@ -19,11 +19,11 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "german";
   game["axis_soldiertype"] = "german";
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_DOWNFALL_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_DOWNFALL_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_DOWNFALL_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_DOWNFALL_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_DOWNFALL_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_DOWNFALL_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_DOWNFALL_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_DOWNFALL_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_DOWNFALL_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_DOWNFALL_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_DOWNFALL_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_DOWNFALL_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_DOWNFALL_C";

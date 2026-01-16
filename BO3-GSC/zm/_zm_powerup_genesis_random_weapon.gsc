@@ -26,14 +26,14 @@
 #namespace zm_powerup_genesis_random_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_genesis_random_weapon", &__init__, undefined, undefined);
+  system::register("zm_powerup_genesis_random_weapon", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("scriptmover", "random_weap_fx", 15000, 1, "int");
-  zm_powerups::register_powerup("genesis_random_weapon", &function_984a38e);
+  zm_powerups::register_powerup("genesis_random_weapon", & function_984a38e);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("genesis_random_weapon", "p7_zm_power_up_max_ammo", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("genesis_random_weapon", "p7_zm_power_up_max_ammo", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("genesis_random_weapon");
     zm_powerups::powerup_set_player_specific("genesis_random_weapon", 1);
   }
@@ -107,7 +107,7 @@ function function_89d232d2() {
 function function_15732f56() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback(&function_9677023e);
+  zm_devgui::add_custom_devgui_callback( & function_9677023e);
   adddebugcommand("");
 }
 

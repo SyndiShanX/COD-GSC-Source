@@ -50,11 +50,10 @@ face_swap(localclientnum, set, newent) {
 }
 
 glow_metal(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     lerp_shader_constant(localclientnum, 0, "ScriptVector0", 1, 0.01, 1);
-  } else {
+  else
     lerp_shader_constant(localclientnum, 0, "ScriptVector0", 1, 0.01, 0);
-  }
 }
 
 float_body(localclientnum, set, newent) {
@@ -62,9 +61,9 @@ float_body(localclientnum, set, newent) {
 
   if(set) {
     e_fx = spawn(localclientnum, get_floating_body_fx_origin(), "script_model");
-    e_fx setModel("tag_origin");
+    e_fx setmodel("tag_origin");
     e_fx.angles = vectorscale((-1, 0, 0), 90.0);
-    playFXOnTag(localclientnum, level._effect["blood_cloud_water"], e_fx, "tag_origin");
+    playfxontag(localclientnum, level._effect["blood_cloud_water"], e_fx, "tag_origin");
 
     while(isDefined(self)) {
       e_fx.origin = get_floating_body_fx_origin();

@@ -4,7 +4,7 @@
 **************************************/
 
 init() {
-  level.uiparent = spawnStruct();
+  level.uiparent = spawnstruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";

@@ -28,22 +28,22 @@ function main() {
   level.teamscoreperdeath = getgametypesetting("teamScorePerDeath");
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
   level.killstreaksgivegamescore = getgametypesetting("killstreaksGiveGameScore");
-  level.onstartgametype = &onstartgametype;
-  level.onplayerkilled = &onplayerkilled;
-  level.onspawnplayer = &onspawnplayer;
+  level.onstartgametype = & onstartgametype;
+  level.onplayerkilled = & onplayerkilled;
+  level.onspawnplayer = & onspawnplayer;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startFreeForAll", "hcStartFreeForAll", "gameBoost", "gameBoost");
   globallogic::setvisiblescoreboardcolumns("pointstowin", "kills", "deaths", "kdratio", "score");
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, &"OBJECTIVES_DM");
+  util::setobjectivetext(team, & "OBJECTIVES_DM");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, &"OBJECTIVES_DM");
+    util::setobjectivescoretext(team, & "OBJECTIVES_DM");
   } else {
-    util::setobjectivescoretext(team, &"OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext(team, & "OBJECTIVES_DM_SCORE");
   }
-  util::setobjectivehinttext(team, &"OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext(team, & "OBJECTIVES_DM_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
   level.spawn_start = spawnlogic::get_spawnpoint_array("mp_dm_spawn_start");
@@ -70,16 +70,18 @@ function onstartgametype() {
 }
 
 function onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
-    [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
+  if(isdefined(winningplayer) && isplayer(winningplayer)) {
+    [
+      [level._setplayerscore]
+    ](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
   }
 }
 
 function onscoreclosemusic() {
-  while(!level.gameended) {
+  while (!level.gameended) {
     scorelimit = level.scorelimit;
     scorethreshold = scorelimit * 0.9;
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       scorecheck = [
         [level._getplayerscore]
       ](level.players[i]);
@@ -102,7 +104,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(!isplayer(attacker) || self == attacker) {
     return;
   }
-  if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
+  if(!isdefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isdefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
     attacker globallogic_score::givepointstowin(level.teamscoreperkill);
     self globallogic_score::givepointstowin(level.teamscoreperdeath * -1);
     if(smeansofdeath == "MOD_HEAD_SHOT") {

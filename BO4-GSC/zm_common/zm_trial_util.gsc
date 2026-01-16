@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_util;
 
 autoexec __init__system__() {
@@ -63,7 +64,7 @@ function_73ff0096() {
 function_2ee2d021() {
   if(!level flag::get(#"trial_failed") && clientfield::get_world_uimodel("ZMHudGlobal.trials.gameState") != 2) {
     clientfield::set_world_uimodel("ZMHudGlobal.trials.failurePlayer", 0);
-    clientfield::set_world_uimodel("ZMHudGlobal.trials.failureReason", # "mp/host_ended_game");
+    clientfield::set_world_uimodel("ZMHudGlobal.trials.failureReason", #"mp/host_ended_game");
     set_game_state(3);
   }
 }
@@ -75,7 +76,7 @@ function_f79b96ac() {
 
 private finalize_clientfields() {
   clientfield::register("world", "ZMHudGlobal.trials.trialIndex", 1, getminbitcountfornum(15), "int");
-  clientfield::register("toplayer", "" + # "hash_6536ca4fb2858a9f", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_6536ca4fb2858a9f", 16000, 1, "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundNumber", 1, getminbitcountfornum(30), "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundSuccess", 1, getminbitcountfornum(1), "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.strikes", 1, getminbitcountfornum(3), "int");
@@ -145,7 +146,7 @@ stop_timer() {
   self clientfield::set_to_player("zm_trials_timer", 0);
 }
 
-function_128378c9(n_timer, var_97fd1b64 = 1, var_779bd906 = # "") {
+function_128378c9(n_timer, var_97fd1b64 = 1, var_779bd906 = #"") {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, var_97fd1b64);
@@ -272,7 +273,7 @@ function_3f8a4145(var_26f4f16d) {
       }
 
       self notify(vapor + "_stop", {
-        #var_613b7621: !var_d84249cb,
+        #var_613b7621: !var_d84249cb, 
         #var_fe7072f6: 1
       });
       assert(isDefined(level.var_5355c665));
@@ -284,7 +285,7 @@ function_3f8a4145(var_26f4f16d) {
         });
       }
 
-      if(vapor == # "specialty_additionalprimaryweapon") {
+      if(vapor == #"specialty_additionalprimaryweapon") {
         var_806e2de0.additional_primary_weapon = self.var_2a62e678;
       }
 
@@ -303,7 +304,7 @@ function_3f8a4145(var_26f4f16d) {
 
     foreach(var_6cbabb29 in self.var_67ba1237) {
       self notify(var_6cbabb29 + "_stop", {
-        #var_613b7621: 1,
+        #var_613b7621: 1, 
         #var_fe7072f6: 1
       });
     }
@@ -356,10 +357,10 @@ function_d37a769(var_806e2de0) {
 
 function_7f999aa0(var_806e2de0) {
   slot = self zm_perks::function_c1efcc57(#"specialty_additionalprimaryweapon");
-  var_4493e3e1 = isarray(var_806e2de0.var_724d826b) && isinarray(var_806e2de0.var_724d826b, # "specialty_additionalprimaryweapon");
+  var_4493e3e1 = isarray(var_806e2de0.var_724d826b) && isinarray(var_806e2de0.var_724d826b, #"specialty_additionalprimaryweapon");
 
   if((var_4493e3e1 || slot != -1) && (var_4493e3e1 || var_806e2de0.var_149ec45c[slot] || zm_perks::function_e56d8ef4(#"specialty_additionalprimaryweapon")) && isDefined(var_806e2de0.additional_primary_weapon)) {
-    if(var_4493e3e1 || isinarray(self.var_466b927f, # "specialty_additionalprimaryweapon")) {
+    if(var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) {
       if(self hasweapon(var_806e2de0.additional_primary_weapon)) {
         self notify(#"hash_29c66728ccd27f03", {
           #weapon: var_806e2de0.additional_primary_weapon
@@ -677,3 +678,4 @@ function_9c1092f6() {
 
   setgametypesetting(#"zmshowtimer", 1);
 }
+

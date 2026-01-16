@@ -56,7 +56,7 @@ play_easter_egg_audio(alias, sound_ent, text) {
   if(alias == undefined) {
     return;
   }
-  sound_ent playSound(alias, "sounddone");
+  sound_ent PlaySound(alias, "sounddone");
   sound_ent waittill("sounddone");
 }
 
@@ -66,7 +66,7 @@ activate_casimir_light(num) {
     light = spawn("script_model", spot.origin);
     light setModel("tag_origin");
     light.angles = spot.angles;
-    fx = playFXOnTag(level._effect["fx_zmb_light_floodlight_bright"], light, "tag_origin");
+    fx = PlayFXOnTag(level._effect["fx_zmb_light_floodlight_bright"], light, "tag_origin");
     level.casimir_lights[level.casimir_lights.size] = light;
   }
 }
@@ -80,7 +80,7 @@ teleport_target_event() {
   level.teleport_target playLoopSound("zmb_egg_notifier", 1);
   teleport_target_spark = spawn("script_model", teleport_target_spark.origin);
   teleport_target_spark setModel("tag_origin");
-  playFXOnTag(level._effect["switch_sparks"], teleport_target_spark, "tag_origin");
+  PlayFXOnTag(level._effect["switch_sparks"], teleport_target_spark, "tag_origin");
   level.teleport_target_trigger = spawn("trigger_radius", teleport_target_start.origin + (0, 0, -70), 0, 125, 100);
   level.black_hole_bomb_loc_check_func = ::bhb_teleport_loc_check;
   flag_wait("target_teleported");
@@ -115,8 +115,8 @@ teleport_target(grenade, model) {
   level.teleport_target stopLoopSound(1);
   wait(0.5);
   level.teleport_target Show();
-  playFXOnTag(level._effect["black_hole_bomb_event_horizon"], level.teleport_target, "tag_origin");
-  level.teleport_target playSound("zmb_gersh_teleporter_go");
+  PlayFXOnTag(level._effect["black_hole_bomb_event_horizon"], level.teleport_target, "tag_origin");
+  level.teleport_target PlaySound("zmb_gersh_teleporter_go");
   wait(2.0);
   model Delete();
   flag_set("target_teleported");
@@ -143,7 +143,7 @@ wait_for_use(monitor) {
     while(IsPlayer(who) && who IsTouching(self)) {
       if(who UseButtonPressed()) {
         flag_set("rerouted_power");
-        monitor playSound("zmb_comp_activate");
+        monitor PlaySound("zmb_comp_activate");
         return;
       }
       wait(.05);
@@ -169,7 +169,7 @@ reveal_switch() {
   button setModel("p_rus_electric_switch_stop");
   button.angles = self.angles + (0, 90, 0);
   button playLoopSound("zmb_egg_notifier", 1);
-  offset = anglesToForward(self.angles) * 8;
+  offset = AnglesToForward(self.angles) * 8;
   time = 1;
   button moveTo(button.origin + offset, 1);
   wait(1);
@@ -273,7 +273,7 @@ area_timer(time) {
     if(stop_timer) {
       continue;
     }
-    self playSound("zmb_pressure_plate_trigger");
+    self PlaySound("zmb_pressure_plate_trigger");
     time_remaining = time;
     timer_hand rotatePitch(360, time);
     while(time_remaining) {
@@ -284,7 +284,7 @@ area_timer(time) {
           time_remaining = time;
           stop_timer = true;
           timer_hand RotateTo(timer_hand_angles_init, 0.5);
-          timer_hand playSound("zmb_deny");
+          timer_hand PlaySound("zmb_deny");
           wait(0.5);
           break;
         }
@@ -294,7 +294,7 @@ area_timer(time) {
       }
       wait(step);
       time_remaining -= step;
-      timer_hand playSound("zmb_egg_timer_oneshot");
+      timer_hand PlaySound("zmb_egg_timer_oneshot");
     }
     if(time_remaining <= 0) {
       flag_set("pressure_sustained");
@@ -303,7 +303,7 @@ area_timer(time) {
       if(isDefined(players[0].fx)) {
         temp_fx = players[0].fx;
       }
-      timer_hand playSound("zmb_perks_packa_ready");
+      timer_hand playsound("zmb_perks_packa_ready");
       players[0].fx = level.zombie_powerups["nuke"].fx;
       level thread maps\_zombiemode_powerups::nuke_powerup(players[0]);
       clock stopLoopSound(1);
@@ -363,7 +363,7 @@ lander_monitor() {
       letter = level.lander_key[start][dest];
       model = level.lander_letters[letter];
       model Show();
-      model playSound("zmb_spawn_powerup");
+      model PlaySound("zmb_spawn_powerup");
       model thread spin_letter();
       model playLoopSound("zmb_spawn_powerup_loop", .5);
       trig = spawn("trigger_radius", model.origin, 0, 200, 150);
@@ -430,7 +430,7 @@ weapon_combo_event() {
   focal_point = spawn("script_model", weapon_combo_spot.origin);
   focal_point setModel("tag_origin");
   focal_point playLoopSound("zmb_egg_notifier", 1);
-  fx = playFXOnTag(level._effect["gersh_spark"], focal_point, "tag_origin");
+  fx = PlayFXOnTag(level._effect["gersh_spark"], focal_point, "tag_origin");
   level.black_hold_bomb_target_trig = spawn("trigger_radius", weapon_combo_spot.origin, 0, 50, 72);
   level.black_hole_bomb_loc_check_func = ::bhb_combo_loc_check;
   flag_wait("weapons_combined");
@@ -514,7 +514,7 @@ soul_release(model, origin) {
   soul = spawn("script_model", origin);
   soul setModel("tag_origin");
   soul playLoopSound("zmb_egg_soul");
-  fx = playFXOnTag(level._effect["gersh_spark"], soul, "tag_origin");
+  fx = PlayFXOnTag(level._effect["gersh_spark"], soul, "tag_origin");
   time = 20;
   model waittill("death");
   level thread play_egg_vox("vox_ann_egg6_success", "vox_gersh_egg6_success", 9);

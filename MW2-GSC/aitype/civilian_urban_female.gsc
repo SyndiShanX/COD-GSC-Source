@@ -49,4 +49,5 @@ spawner() {
 precache() {
   character\character_civilian_urban_female_a::precache();
   character\character_civilian_urban_female_b::precache();
+
 }

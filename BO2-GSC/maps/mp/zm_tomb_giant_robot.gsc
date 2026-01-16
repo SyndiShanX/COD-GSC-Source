@@ -44,9 +44,8 @@ init_giant_robot_glows() {
   level.gr_foot_hatch_closed[2] = 1;
   a_gr_head_triggers = getstructarray("giant_robot_head_exit_trigger", "script_noteworthy");
 
-  foreach(struct in a_gr_head_triggers) {
-    gr_head_exit_trigger_start(struct);
-  }
+  foreach(struct in a_gr_head_triggers)
+  gr_head_exit_trigger_start(struct);
 
   level thread handle_wind_tunnel_bunker_collision();
   level thread handle_tank_bunker_collision();
@@ -97,9 +96,8 @@ make_safe_spot_trigger_box_at_point(v_origin, v_angles, n_length, n_width, n_hei
 }
 
 tomb_can_revive_override(player_down) {
-  if(isDefined(player_down.is_stomped) && player_down.is_stomped) {
+  if(isDefined(player_down.is_stomped) && player_down.is_stomped)
     return false;
-  }
 
   return true;
 }
@@ -152,7 +150,7 @@ giant_robot_initial_spawns() {
     ai.audio_type = "giant_robot";
     ai.ignoreall = 1;
     ai.ignoreme = 1;
-    ai setCanDamage(0);
+    ai setcandamage(0);
     ai magic_bullet_shield();
     ai setplayercollision(1);
     ai setforcenocull();
@@ -178,43 +176,37 @@ robot_cycling() {
   level waittill("giant_robot_intro_complete");
 
   while(true) {
-    if(!(level.round_number % 4) && three_robot_round != level.round_number) {
+    if(!(level.round_number % 4) && three_robot_round != level.round_number)
       flag_set("three_robot_round");
-    }
 
-    if(flag("ee_all_staffs_placed") && !flag("ee_mech_zombie_hole_opened")) {
+    if(flag("ee_all_staffs_placed") && !flag("ee_mech_zombie_hole_opened"))
       flag_set("three_robot_round");
-    }
 
-    if(isDefined(level.devgui_force_three_robot_round) && level.devgui_force_three_robot_round) {
+    if(isDefined(level.devgui_force_three_robot_round) && level.devgui_force_three_robot_round)
       flag_set("three_robot_round");
-    }
 
     if(flag("three_robot_round")) {
       level.zombie_ai_limit = 22;
       random_number = randomint(3);
 
-      if(random_number == 2) {
+      if(random_number == 2)
         level thread giant_robot_start_walk(2);
-      } else {
+      else
         level thread giant_robot_start_walk(2, 0);
-      }
 
       wait 5;
 
-      if(random_number == 0) {
+      if(random_number == 0)
         level thread giant_robot_start_walk(0);
-      } else {
+      else
         level thread giant_robot_start_walk(0, 0);
-      }
 
       wait 5;
 
-      if(random_number == 1) {
+      if(random_number == 1)
         level thread giant_robot_start_walk(1);
-      } else {
+      else
         level thread giant_robot_start_walk(1, 0);
-      }
 
       level waittill("giant_robot_walk_cycle_complete");
       level waittill("giant_robot_walk_cycle_complete");
@@ -225,17 +217,16 @@ robot_cycling() {
       last_robot = -1;
       flag_clear("three_robot_round");
     } else {
-      if(!flag("activate_zone_nml")) {
+      if(!flag("activate_zone_nml"))
         random_number = randomint(2);
-      } else {
+      else {
         do
           random_number = randomint(3);
         while(random_number == last_robot);
       }
 
-      if(isDefined(level.devgui_force_giant_robot)) {
+      if(isDefined(level.devgui_force_giant_robot))
         random_number = level.devgui_force_giant_robot;
-      }
 
       last_robot = random_number;
       level thread giant_robot_start_walk(random_number);
@@ -272,9 +263,8 @@ giant_robot_intro_exploder() {
 }
 
 giant_robot_start_walk(n_robot_id, b_has_hatch) {
-  if(!isDefined(b_has_hatch)) {
+  if(!isDefined(b_has_hatch))
     b_has_hatch = 1;
-  }
 
   ai = getent("giant_robot_walker_" + n_robot_id, "targetname");
   level.gr_foot_hatch_closed[n_robot_id] = 1;
@@ -282,12 +272,11 @@ giant_robot_start_walk(n_robot_id, b_has_hatch) {
   ai ent_flag_clear("kill_trigger_active");
   ai ent_flag_clear("robot_head_entered");
 
-  if(isDefined(ai.b_has_hatch) && ai.b_has_hatch) {
+  if(isDefined(ai.b_has_hatch) && ai.b_has_hatch)
     m_sole = getent("target_sole_" + n_robot_id, "targetname");
-  }
 
   if(isDefined(m_sole) && (isDefined(ai.b_has_hatch) && ai.b_has_hatch)) {
-    m_sole setCanDamage(1);
+    m_sole setcandamage(1);
     m_sole.health = 99999;
     m_sole useanimtree(#animtree);
     m_sole unlink();
@@ -296,15 +285,13 @@ giant_robot_start_walk(n_robot_id, b_has_hatch) {
   wait 10;
 
   if(isDefined(m_sole)) {
-    if(cointoss()) {
+    if(cointoss())
       ai.hatch_foot = "left";
-    } else {
+    else
       ai.hatch_foot = "right";
-    }
 
-    if(isDefined(level.devgui_force_giant_robot_foot) && (isDefined(ai.b_has_hatch) && ai.b_has_hatch)) {
+    if(isDefined(level.devgui_force_giant_robot_foot) && (isDefined(ai.b_has_hatch) && ai.b_has_hatch))
       ai.hatch_foot = level.devgui_force_giant_robot_foot;
-    }
 
     if(ai.hatch_foot == "left") {
       n_sole_origin = ai gettagorigin("TAG_ATTACH_HATCH_LE");
@@ -341,9 +328,8 @@ giant_robot_think(trig_stomp_kill_right, trig_stomp_kill_left, clip_foot_right, 
   self thread robot_walk_animation(n_robot_id);
   self show();
 
-  if(isDefined(m_sole)) {
+  if(isDefined(m_sole))
     self thread sole_cleanup(m_sole);
-  }
 
   self.is_walking = 1;
   self thread monitor_footsteps(trig_stomp_kill_right, "right");
@@ -355,26 +341,22 @@ giant_robot_think(trig_stomp_kill_right, trig_stomp_kill_left, clip_foot_right, 
   self thread sndgrthreads("left");
   self thread sndgrthreads("right");
 
-  if(isDefined(m_sole) && level.gr_foot_hatch_closed[n_robot_id] && (isDefined(self.b_has_hatch) && self.b_has_hatch)) {
+  if(isDefined(m_sole) && level.gr_foot_hatch_closed[n_robot_id] && (isDefined(self.b_has_hatch) && self.b_has_hatch))
     self thread giant_robot_foot_waittill_sole_shot(m_sole);
-  }
 
   a_players = getplayers();
 
   if(n_robot_id != 3 && !(isDefined(level.giant_robot_discovered) && level.giant_robot_discovered)) {
-    foreach(player in a_players) {
-      player thread giant_robot_discovered_vo(self);
-    }
+    foreach(player in a_players)
+    player thread giant_robot_discovered_vo(self);
   } else if(flag("three_robot_round") && !(isDefined(level.three_robot_round_vo) && level.three_robot_round_vo)) {
-    foreach(player in a_players) {
-      player thread three_robot_round_vo(self);
-    }
+    foreach(player in a_players)
+    player thread three_robot_round_vo(self);
   }
 
   if(n_robot_id != 3 && !(isDefined(level.shoot_robot_vo) && level.shoot_robot_vo)) {
-    foreach(player in a_players) {
-      player thread shoot_at_giant_robot_vo(self);
-    }
+    foreach(player in a_players)
+    player thread shoot_at_giant_robot_vo(self);
   }
 
   self waittill("giant_robot_stop");
@@ -436,11 +418,10 @@ giant_robot_close_head_entrance(foot_side) {
   }
 
   if(isDefined(foot_side)) {
-    if(foot_side == "right") {
+    if(foot_side == "right")
       str_tag = "TAG_ATTACH_HATCH_RI";
-    } else if(foot_side == "left") {
+    else if(foot_side == "left")
       str_tag = "TAG_ATTACH_HATCH_LE";
-    }
 
     self detach("veh_t6_dlc_zm_robot_foot_hatch_lights", str_tag);
   }
@@ -514,9 +495,8 @@ robot_walk_animation(n_robot_id) {
     self notify("giant_robot_stop");
   }
 
-  if(n_robot_id != 3) {
+  if(n_robot_id != 3)
     level setclientfield("start_anim_robot_" + n_robot_id, 0);
-  }
 }
 
 sndgrthreads(side) {
@@ -529,11 +509,10 @@ sndgrthreads(side) {
 sndrobot(notetrack, alias, side) {
   self endon("giant_robot_stop");
 
-  if(side == "right") {
+  if(side == "right")
     str_tag = "TAG_ATTACH_HATCH_RI";
-  } else if(side == "left") {
+  else if(side == "left")
     str_tag = "TAG_ATTACH_HATCH_LE";
-  }
 
   while(true) {
     self waittillmatch("scripted_walk", notetrack);
@@ -553,11 +532,10 @@ monitor_footsteps(trig_stomp_kill, foot_side) {
     self thread toggle_kill_trigger_flag(trig_stomp_kill, 1, foot_side);
     self waittillmatch("scripted_walk", str_end_stomp);
 
-    if(self.giant_robot_id == 0 && foot_side == "left") {
+    if(self.giant_robot_id == 0 && foot_side == "left")
       self thread toggle_wind_bunker_collision();
-    } else if(self.giant_robot_id == 1 && foot_side == "left") {
+    else if(self.giant_robot_id == 1 && foot_side == "left")
       self thread toggle_tank_bunker_collision();
-    }
 
     wait 0.5;
     self thread toggle_kill_trigger_flag(trig_stomp_kill, 0, foot_side);
@@ -573,19 +551,17 @@ monitor_footsteps_fx(trig_stomp_kill, foot_side) {
     level setclientfield("play_foot_stomp_fx_robot_" + self.giant_robot_id, 0);
     self waittillmatch("scripted_walk", str_end_stomp);
 
-    if(foot_side == "right") {
+    if(foot_side == "right")
       level setclientfield("play_foot_stomp_fx_robot_" + self.giant_robot_id, 1);
-    } else {
+    else
       level setclientfield("play_foot_stomp_fx_robot_" + self.giant_robot_id, 2);
-    }
 
     trig_stomp_kill thread rumble_and_shake(self);
 
-    if(self.giant_robot_id == 2) {
+    if(self.giant_robot_id == 2)
       self thread church_ceiling_fxanim(foot_side);
-    } else if(self.giant_robot_id == 0) {
+    else if(self.giant_robot_id == 0)
       self thread play_pap_shake_fxanim(foot_side);
-    }
 
     wait_network_frame();
   }
@@ -611,11 +587,10 @@ rumble_and_shake(robot) {
         if(isDefined(player.giant_robot_transition) && player.giant_robot_transition) {
           continue;
         }
-        if(player.in_giant_robot_head == robot.giant_robot_id) {
+        if(player.in_giant_robot_head == robot.giant_robot_id)
           player setclientfieldtoplayer("giant_robot_rumble_and_shake", 2);
-        } else {
+        else
           continue;
-        }
       } else {
         dist = distance(player.origin, self.origin);
 
@@ -624,11 +599,10 @@ rumble_and_shake(robot) {
           level notify("sam_clue_giant", player);
         } else if(dist < 3000)
           player setclientfieldtoplayer("giant_robot_rumble_and_shake", 2);
-        else if(dist < 6000) {
+        else if(dist < 6000)
           player setclientfieldtoplayer("giant_robot_rumble_and_shake", 1);
-        } else {
+        else
           continue;
-        }
       }
 
       player thread turn_clientside_rumble_off();
@@ -637,9 +611,8 @@ rumble_and_shake(robot) {
 }
 
 toggle_kill_trigger_flag(trig_stomp, b_flag, foot_side) {
-  if(!isDefined(foot_side)) {
+  if(!isDefined(foot_side))
     foot_side = undefined;
-  }
 
   if(b_flag) {
     self ent_flag_set("kill_trigger_active");
@@ -659,11 +632,10 @@ toggle_kill_trigger_flag(trig_stomp, b_flag, foot_side) {
 activate_kill_trigger(robot, foot_side) {
   level endon("stop_kill_trig_think");
 
-  if(foot_side == "left") {
+  if(foot_side == "left")
     str_foot_tag = "TAG_ATTACH_HATCH_LE";
-  } else if(foot_side == "right") {
+  else if(foot_side == "right")
     str_foot_tag = "TAG_ATTACH_HATCH_RI";
-  }
 
   while(robot ent_flag("kill_trigger_active")) {
     a_zombies = getaispeciesarray(level.zombie_team, "all");
@@ -712,17 +684,15 @@ activate_kill_trigger(robot, foot_side) {
     }
 
     if(isDefined(level.maxis_quadrotor)) {
-      if(level.maxis_quadrotor istouching(self)) {
+      if(level.maxis_quadrotor istouching(self))
         level.maxis_quadrotor thread quadrotor_stomp_death();
-      }
     }
 
-    a_boxes = getEntArray("foot_box", "script_noteworthy");
+    a_boxes = getentarray("foot_box", "script_noteworthy");
 
     foreach(m_box in a_boxes) {
-      if(m_box istouching(self)) {
+      if(m_box istouching(self))
         m_box notify("robot_foot_stomp");
-      }
     }
 
     players = get_players();
@@ -752,9 +722,8 @@ activate_kill_trigger(robot, foot_side) {
             level thread maps\mp\zm_tomb_teleporter::stargate_teleport_player("head_1_teleport_player", players[i], 4.0, 0);
             players[i].in_giant_robot_head = 1;
 
-            if(players[i] maps\mp\zombies\_zm_zonemgr::player_in_zone("zone_bunker_4d") || players[i] maps\mp\zombies\_zm_zonemgr::player_in_zone("zone_bunker_4c")) {
+            if(players[i] maps\mp\zombies\_zm_zonemgr::player_in_zone("zone_bunker_4d") || players[i] maps\mp\zombies\_zm_zonemgr::player_in_zone("zone_bunker_4c"))
               players[i].entered_foot_from_tank_bunker = 1;
-            }
           } else {
             level thread maps\mp\zm_tomb_teleporter::stargate_teleport_player("head_2_teleport_player", players[i], 4.0, 0);
             players[i].in_giant_robot_head = 2;
@@ -776,11 +745,10 @@ activate_kill_trigger(robot, foot_side) {
           players[i] thread player_death_watch_on_giant_robot();
           continue;
         } else {
-          if(isDefined(players[i].dig_vars["has_helmet"]) && players[i].dig_vars["has_helmet"]) {
+          if(isDefined(players[i].dig_vars["has_helmet"]) && players[i].dig_vars["has_helmet"])
             players[i] thread player_stomp_fake_death(robot);
-          } else {
+          else
             players[i] thread player_stomp_death(robot);
-          }
 
           start_wait = 0.0;
           black_screen_wait = 5.0;
@@ -814,23 +782,21 @@ player_stomp_death(robot) {
   self endon("death");
   self endon("disconnect");
   self.is_stomped = 1;
-  self playSound("zmb_zombie_arc");
+  self playsound("zmb_zombie_arc");
   self freezecontrols(1);
 
-  if(self player_is_in_laststand()) {
+  if(self player_is_in_laststand())
     self shellshock("explosion", 7);
-  } else {
+  else
     self dodamage(self.health, self.origin, robot);
-  }
 
   self maps\mp\zombies\_zm_stats::increment_client_stat("tomb_giant_robot_stomped", 0);
   self maps\mp\zombies\_zm_stats::increment_player_stat("tomb_giant_robot_stomped");
   wait 5.0;
   self.is_stomped = 0;
 
-  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen))
     self freezecontrols(0);
-  }
 
   self thread play_robot_crush_player_vo();
 }
@@ -839,16 +805,15 @@ player_stomp_fake_death(robot) {
   self endon("death");
   self endon("disconnect");
   self.is_stomped = 1;
-  self playSound("zmb_zombie_arc");
+  self playsound("zmb_zombie_arc");
   self freezecontrols(1);
   self setstance("prone");
   self shellshock("explosion", 7);
   wait 5.0;
   self.is_stomped = 0;
 
-  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen))
     self freezecontrols(0);
-  }
 
   if(!(isDefined(self.ee_stepped_on) && self.ee_stepped_on)) {
     self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "robot_crush_golden");
@@ -935,11 +900,10 @@ handle_tank_bunker_collision() {
 }
 
 church_ceiling_fxanim(foot_side) {
-  if(foot_side == "left") {
+  if(foot_side == "left")
     tag_foot = self gettagorigin("TAG_ATTACH_HATCH_LE");
-  } else {
+  else
     tag_foot = self gettagorigin("TAG_ATTACH_HATCH_RI");
-  }
 
   s_church = getstruct("giant_robot_church_marker", "targetname");
   n_distance = distance2dsquared(tag_foot, s_church.origin);
@@ -952,11 +916,10 @@ church_ceiling_fxanim(foot_side) {
 }
 
 play_pap_shake_fxanim(foot_side) {
-  if(foot_side == "left") {
+  if(foot_side == "left")
     tag_foot = self gettagorigin("TAG_ATTACH_HATCH_LE");
-  } else {
+  else
     tag_foot = self gettagorigin("TAG_ATTACH_HATCH_RI");
-  }
 
   s_pap = getstruct("giant_robot_pap_marker", "targetname");
   wait 0.2;
@@ -1001,12 +964,12 @@ player_transition_into_robot_head_finish(n_transition_time) {
 }
 
 gr_head_exit_trigger_start(s_origin) {
-  s_origin.unitrigger_stub = spawnStruct();
+  s_origin.unitrigger_stub = spawnstruct();
   s_origin.unitrigger_stub.origin = s_origin.origin;
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_EHT";
+  s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_EHT";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.target = s_origin.target;
@@ -1047,9 +1010,8 @@ player_exits_giant_robot_head_trigger_think() {
 }
 
 init_player_eject_logic(s_unitrigger, player, b_timeout) {
-  if(!isDefined(b_timeout)) {
+  if(!isDefined(b_timeout))
     b_timeout = 0;
-  }
 
   s_unitrigger.is_available = 0;
   s_origin = getstruct(s_unitrigger.target, "targetname");
@@ -1057,11 +1019,10 @@ init_player_eject_logic(s_unitrigger, player, b_timeout) {
   v_angles = s_origin.angles;
   m_linkpoint = spawn_model("tag_origin", v_origin, v_angles);
 
-  if(isDefined(level.giant_robot_head_player_eject_thread_custom_func)) {
+  if(isDefined(level.giant_robot_head_player_eject_thread_custom_func))
     player thread[[level.giant_robot_head_player_eject_thread_custom_func]](m_linkpoint, s_origin.script_noteworthy, b_timeout);
-  } else {
+  else
     player thread giant_robot_head_player_eject_thread(m_linkpoint, s_origin.script_noteworthy, b_timeout);
-  }
 
   tube_clone = player maps\mp\zombies\_zm_clone::spawn_player_clone(player, player.origin, undefined);
   player thread giant_robot_eject_disconnect_watcher(m_linkpoint, tube_clone);
@@ -1079,9 +1040,8 @@ init_player_eject_logic(s_unitrigger, player, b_timeout) {
 }
 
 giant_robot_head_player_eject_thread(m_linkpoint, str_tube, b_timeout) {
-  if(!isDefined(b_timeout)) {
+  if(!isDefined(b_timeout))
     b_timeout = 0;
-  }
 
   self endon("death_or_disconnect");
   self maps\mp\zm_tomb_giant_robot_ffotd::giant_robot_head_player_eject_start();
@@ -1135,9 +1095,8 @@ giant_robot_head_player_eject_thread(m_linkpoint, str_tube, b_timeout) {
   self waittill("gr_eject_fall_complete");
   self takeweapon("falling_hands_tomb_zm");
 
-  if(isDefined(str_current_weapon) && str_current_weapon != "none") {
+  if(isDefined(str_current_weapon) && str_current_weapon != "none")
     self switchtoweaponimmediate(str_current_weapon);
-  }
 
   self enableoffhandweapons();
   self unlink();
@@ -1163,15 +1122,13 @@ giant_robot_head_player_eject_thread(m_linkpoint, str_tube, b_timeout) {
   self.giant_robot_transition = 0;
   self notify("gr_eject_sequence_complete");
 
-  if(!flag("story_vo_playing")) {
+  if(!flag("story_vo_playing"))
     self delay_thread(3.0, maps\mp\zombies\_zm_audio::create_and_play_dialog, "general", "air_chute_landing");
-  }
 
   debug_level = getdvarint(#"_id_FA81816F");
 
-  if(isDefined(debug_level) && debug_level) {
+  if(isDefined(debug_level) && debug_level)
     self enableinvulnerability();
-  }
 
   wait(n_post_eject_time);
   self.ignoreme = 0;
@@ -1244,9 +1201,8 @@ gr_eject_landing_rumble_on_position() {
     if(isDefined(player.giant_robot_transition) && player.giant_robot_transition) {
       continue;
     }
-    if(distance2dsquared(player.origin, self.origin) < 250000) {
+    if(distance2dsquared(player.origin, self.origin) < 250000)
       player thread gr_eject_landing_rumble();
-    }
   }
 }
 
@@ -1301,9 +1257,8 @@ giant_robot_head_teleport_timeout(n_robot_id) {
   if(n_players_in_robot == 0) {
     return;
   }
-  while(flag("maxis_audiolog_gr" + n_robot_id + "_playing")) {
+  while(flag("maxis_audiolog_gr" + n_robot_id + "_playing"))
     wait 0.1;
-  }
 
   n_players_in_robot = count_players_in_gr_head(n_robot_id);
 
@@ -1364,16 +1319,14 @@ giant_robot_head_teleport_timeout(n_robot_id) {
   a_players[0] setclientfield("all_tubes_play_eject_steam_fx", 0);
 
   foreach(trigger in a_shutdown_triggers) {
-    if(trigger.script_int == n_robot_id) {
+    if(trigger.script_int == n_robot_id)
       trigger thread reset_gr_head_unitriggers();
-    }
   }
 
   if(a_m_linkspots.size > 0) {
     for(i = 0; i < a_m_linkspots.size; i++) {
-      if(isDefined(a_m_linkspots[i])) {
+      if(isDefined(a_m_linkspots[i]))
         a_m_linkspots[i] delete();
-      }
     }
   }
 }
@@ -1445,13 +1398,11 @@ giant_robot_eject_disconnect_watcher(m_linkpoint, tube_clone) {
   self endon("gr_eject_sequence_complete");
   self waittill("disconnect");
 
-  if(isDefined(m_linkpoint)) {
+  if(isDefined(m_linkpoint))
     m_linkpoint delete();
-  }
 
-  if(isDefined(tube_clone)) {
+  if(isDefined(tube_clone))
     tube_clone delete();
-  }
 }
 
 turn_clientside_rumble_off() {
@@ -1462,20 +1413,17 @@ turn_clientside_rumble_off() {
 }
 
 spawn_model(model_name, origin, angles, n_spawnflags) {
-  if(!isDefined(n_spawnflags)) {
+  if(!isDefined(n_spawnflags))
     n_spawnflags = 0;
-  }
 
-  if(!isDefined(origin)) {
+  if(!isDefined(origin))
     origin = (0, 0, 0);
-  }
 
   model = spawn("script_model", origin, n_spawnflags);
-  model setModel(model_name);
+  model setmodel(model_name);
 
-  if(isDefined(angles)) {
+  if(isDefined(angles))
     model.angles = angles;
-  }
 
   return model;
 }
@@ -1485,9 +1433,8 @@ count_players_in_gr_head(n_robot_id) {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(isDefined(player.in_giant_robot_head) && player.in_giant_robot_head == n_robot_id) {
+    if(isDefined(player.in_giant_robot_head) && player.in_giant_robot_head == n_robot_id)
       n_players_in_robot++;
-    }
   }
 
   return n_players_in_robot;
@@ -1511,7 +1458,7 @@ tomb_standard_intermission() {
   points = getstructarray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+    points = getentarray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -1533,14 +1480,13 @@ tomb_standard_intermission() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
 
-      if(!isDefined(org)) {
+      if(!isDefined(org))
         self spawn(point.origin, point.angles);
-      }
 
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setModel("tag_origin");
+          org setmodel("tag_origin");
         }
 
         org.origin = points[i].origin;
@@ -1555,18 +1501,16 @@ tomb_standard_intermission() {
 
         speed = 20;
 
-        if(isDefined(points[i].speed)) {
+        if(isDefined(points[i].speed))
           speed = points[i].speed;
-        }
 
         target_point = getstruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
 
-        if(q_time > 1) {
+        if(q_time > 1)
           q_time = 1;
-        }
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
@@ -1677,25 +1621,23 @@ shoot_at_giant_robot_vo(ai_giant_robot) {
 }
 
 start_robot_stomp_warning_vo(foot_side) {
-  if(foot_side == "right") {
+  if(foot_side == "right")
     str_tag = "TAG_ATTACH_HATCH_RI";
-  } else if(foot_side == "left") {
+  else if(foot_side == "left")
     str_tag = "TAG_ATTACH_HATCH_LE";
-  }
 
   v_origin = self gettagorigin(str_tag);
   a_s_footprint_all = getstructarray("giant_robot_footprint_center", "targetname");
   a_s_footprint = [];
 
   foreach(footprint in a_s_footprint_all) {
-    if(footprint.script_int == self.giant_robot_id) {
+    if(footprint.script_int == self.giant_robot_id)
       a_s_footprint[a_s_footprint.size] = footprint;
-    }
   }
 
-  if(a_s_footprint.size == 0) {
+  if(a_s_footprint.size == 0)
     return;
-  } else {
+  else {
     a_s_footprint = get_array_of_closest(v_origin, a_s_footprint);
     s_footprint = a_s_footprint[0];
   }
@@ -1703,9 +1645,8 @@ start_robot_stomp_warning_vo(foot_side) {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(distance2dsquared(player.origin, s_footprint.origin) < 160000) {
+    if(distance2dsquared(player.origin, s_footprint.origin) < 160000)
       player thread play_robot_stomp_warning_vo();
-    }
   }
 }
 
@@ -1730,11 +1671,10 @@ play_robot_stomp_warning_vo() {
 zombie_stomped_by_gr_vo(foot_side) {
   self endon("giant_robot_stop");
 
-  if(foot_side == "right") {
+  if(foot_side == "right")
     str_tag = "TAG_ATTACH_HATCH_RI";
-  } else if(foot_side == "left") {
+  else if(foot_side == "left")
     str_tag = "TAG_ATTACH_HATCH_LE";
-  }
 
   v_origin = self gettagorigin(str_tag);
   a_players = getplayers();
@@ -1755,11 +1695,10 @@ play_robot_crush_player_vo() {
   self endon("disconnect");
 
   if(self player_is_in_laststand()) {
-    if(cointoss()) {
+    if(cointoss())
       n_alt = 1;
-    } else {
+    else
       n_alt = 0;
-    }
 
     self playsoundwithnotify("vox_plr_" + self.characterindex + "_robot_crush_player_" + n_alt, "sound_done" + "vox_plr_" + self.characterindex + "_robot_crush_player_" + n_alt);
   }
@@ -1784,9 +1723,8 @@ play_timeout_warning_vo(n_robot_id) {
     }
   }
 
-  while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking)) {
+  while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking))
     wait 0.1;
-  }
 
   wait 1.0;
   e_vo_origin playsoundwithnotify("vox_maxi_purge_countdown_0", "vox_maxi_purge_countdown_0_done");
@@ -1804,9 +1742,8 @@ start_footprint_warning_vo(n_robot_id) {
   a_structs = getstructarray("giant_robot_footprint_center", "targetname");
 
   foreach(struct in a_structs) {
-    if(struct.script_int == n_robot_id) {
+    if(struct.script_int == n_robot_id)
       struct thread footprint_check_for_nearby_players(self);
-    }
   }
 }
 

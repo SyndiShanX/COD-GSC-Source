@@ -52,17 +52,17 @@ main() {
   fix_c4_barrels();
 
   maps\_compass::setupMiniMap("compass_map_oilrig_lvl_1");
-  array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
-  array_thread(getEntArray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
-  array_call(getEntArray("hide", "script_noteworthy"), ::hide);
+  array_thread(getentarray("compassTriggers", "targetname"), ::compass_triggers_think);
+  array_thread(getentarray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
+  array_call(getentarray("hide", "script_noteworthy"), ::hide);
 
   music_loop("so_takeover_oilrig_music", 136);
-  DDS = getEntArray("sub_dds_01", "targetname");
-  DoorDDS = getEntArray("dds_door_01", "targetname");
+  DDS = getentarray("sub_dds_01", "targetname");
+  DoorDDS = getentarray("dds_door_01", "targetname");
   array_thread(DDS, ::hide_entity);
   array_thread(DoorDDS, ::hide_entity);
-  DDS = getEntArray("sub_dds_02", "targetname");
-  DoorDDS = getEntArray("dds_door_02", "targetname");
+  DDS = getentarray("sub_dds_02", "targetname");
+  DoorDDS = getentarray("dds_door_02", "targetname");
   array_thread(DDS, ::hide_entity);
   array_thread(DoorDDS, ::hide_entity);
 
@@ -70,31 +70,30 @@ main() {
 }
 
 fix_c4_barrels() {
-  array_call(getEntArray("c4barrelPacks", "script_noteworthy"), ::delete);
+  array_call(getentarray("c4barrelPacks", "script_noteworthy"), ::delete);
 
-  barrels = getEntArray("c4_barrel", "script_noteworthy");
+  barrels = getentarray("c4_barrel", "script_noteworthy");
   foreach(barrel in barrels) {
-    if(cointoss()) {
+    if(cointoss())
       barrel setModel("com_barrel_white_rust");
-    } else {
+    else
       barrel setModel("com_barrel_blue_rust");
-    }
   }
 }
 
 save_triggers() {
-  array_thread(getEntArray("compassTriggers", "targetname"), ::make_special_op_ent);
+  array_thread(getentarray("compassTriggers", "targetname"), ::make_special_op_ent);
   getent("killtrigger_ocean", "targetname") make_special_op_ent();
 }
 
 make_special_op_ent() {
-  assert(isDefined(self));
+  assert(isdefined(self));
   self.script_specialops = 1;
 }
 
 compass_triggers_think() {
-  assertex(isDefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
-  while(true) {
+  assertex(isdefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
+  while (true) {
     wait(1);
     self waittill("trigger");
     setsaveddvar("ui_hidemap", 0);
@@ -103,15 +102,14 @@ compass_triggers_think() {
 }
 
 scale_juggernaut_enemies() {
-  for(;;) {
+  for (;;) {
     level waittill("update_enemies_remaining_count");
 
-    if(level.pmc.enemies_remaining >= 12) {
+    if(level.pmc.enemies_remaining >= 12)
       level.pmc.max_ai_alive = 1;
-    } else if(level.pmc.enemies_remaining >= 8) {
+    else if(level.pmc.enemies_remaining >= 8)
       level.pmc.max_ai_alive = 2;
-    } else {
+    else
       level.pmc.max_ai_alive = 3;
-    }
   }
 }

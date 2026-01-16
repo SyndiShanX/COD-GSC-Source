@@ -14,6 +14,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\acid_bomb;
 #include scripts\zm\weapons\zm_weap_sticky_grenade;
+
 #namespace callback;
 
 autoexec __init__system__() {
@@ -94,10 +95,10 @@ entityspawned(localclientnum) {
     }
 
     switch (self.weapon.name) {
-      case # "eq_acid_bomb":
+      case #"eq_acid_bomb":
         self thread acid_bomb::spawned(localclientnum);
         break;
-      case # "sticky_grenade":
+      case #"sticky_grenade":
         self thread sticky_grenade::spawned(localclientnum);
         break;
     }
@@ -119,7 +120,7 @@ entityspawned(localclientnum) {
 
     if(self.type == "helicopter") {}
 
-    if(self.archetype === # "bat") {
+    if(self.archetype === #"bat") {
       if(isDefined(level._customactorcbfunc)) {
         self thread[[level._customactorcbfunc]](localclientnum);
       }

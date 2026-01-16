@@ -19,22 +19,22 @@ spawned(localClientNum, play_sound) {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_semtex_alert", 0.3, level._effect["grenade_enemy_light"]);
     } else {
-      playFXOnTag(localClientNum, level._effect["grenade_enemy_light"], self, "tag_fx");
+      PlayFXOnTag(localClientNum, level._effect["grenade_enemy_light"], self, "tag_fx");
     }
   } else {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_semtex_alert", 0.3, level._effect["grenade_friendly_light"]);
     } else {
-      playFXOnTag(localClientNum, level._effect["grenade_friendly_light"], self, "tag_fx");
+      PlayFXOnTag(localClientNum, level._effect["grenade_friendly_light"], self, "tag_fx");
     }
   }
 }
 loop_local_sound(localClientNum, alias, interval, fx) {
   self endon("entityshutdown");
-  while(1) {
+  while (1) {
     self waittill_dobj(localClientNum);
-    self playSound(localClientNum, alias);
-    playFXOnTag(localClientNum, fx, self, "tag_fx");
+    self PlaySound(localClientNum, alias);
+    PlayFXOnTag(localClientNum, fx, self, "tag_fx");
     owner = self GetOwner(localClientNum);
     self.stuckToPlayer = self GetParentEntity();
     localPlayer = GetLocalPlayer(localClientNum);
@@ -43,14 +43,12 @@ loop_local_sound(localClientNum, alias, interval, fx) {
         if(self.stuckToPlayer.team == "free" || self.stuckToPlayer.team != owner.team) {
           self.stuckToPlayer PlayRumbleOnEntity(localClientNum, "buzz_high");
           if((localPlayer == self.stuckToPlayer) && !(localPlayer IsDriving(localClientNum))) {
-            if(IsSplitscreen()) {
+            if(IsSplitscreen())
               AnimateUI(localClientNum, "sticky_grenade_overlay" + localClientNum, "overlay", "pulse", 0);
-            } else {
+            else
               AnimateUI(localClientNum, "sticky_grenade_overlay", "overlay", "pulse", 0);
-            }
-            if(!IsSplitscreen() && GetDvarInt(#"ui_hud_hardcore") == 0) {
+            if(!IsSplitscreen() && GetDvarInt(#"ui_hud_hardcore") == 0)
               AnimateUI(localClientNum, "stuck", "sticky_grenade", "pulse", 0);
-            }
           }
         }
       }

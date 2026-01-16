@@ -8,6 +8,7 @@
 #include scripts\core_common\fx_shared;
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
+
 #namespace gadget_radiation_field;
 
 init_shared() {
@@ -98,7 +99,7 @@ function_1a7aaaa8(localclientnum, text) {
 }
 
 function_e9e14905(localclientnum, sound, islocal) {
-  self waittill(#"death", # "stop_sounds");
+  self waittill(#"death", #"stop_sounds");
 
   if(isDefined(islocal) && islocal) {
     function_d48752e(localclientnum, sound);
@@ -152,8 +153,8 @@ function_671d7ad5(localclientnum, attacker_entnum) {
   self endon(#"death");
   var_4c6480bf = level.var_2e0bd467.var_641f6852 * level.var_2e0bd467.var_641f6852;
   var_572ced0c = level.var_2e0bd467.var_cbe3d2b8 * level.var_2e0bd467.var_cbe3d2b8;
-  var_8acd204b = # "hash_1a49fb45be903460";
-  var_daa90ad6 = # "hash_1cc8ef91832fa038";
+  var_8acd204b = #"hash_1a49fb45be903460";
+  var_daa90ad6 = #"hash_1cc8ef91832fa038";
 
   while(true) {
     player = function_5c10bd79(localclientnum);
@@ -233,7 +234,7 @@ function_be4b3e9a(localclientnum) {
 
 function_790443a8(localclientnum) {
   self postfx::playpostfxbundle("pstfx_radiation_dot");
-  self.var_98491eb6 = util::playFXOnTag(localclientnum, # "hash_66860bac9e69a693", self, "j_spinelower");
+  self.var_98491eb6 = util::playFXOnTag(localclientnum, #"hash_66860bac9e69a693", self, "j_spinelower");
   self thread function_ed4a5949();
 }
 
@@ -337,7 +338,7 @@ function_a225797d(localclientnum, var_7e4d34a7, phase2) {
 }
 
 cleanup_fx(localclientnum, fx) {
-  self waittill(#"delete", # "death");
+  self waittill(#"delete", #"death");
 
   if(isDefined(fx)) {
     stopfx(localclientnum, fx);
@@ -444,7 +445,7 @@ function_3caac9e(localclientnum) {
 }
 
 function_95252d1f(localclientnum, var_7e4d34a7, script_mover) {
-  event = # "hash_5eb05b2054c53425" + var_7e4d34a7;
+  event = #"hash_5eb05b2054c53425" + var_7e4d34a7;
 
   function_1a7aaaa8(localclientnum, "<dev string:x20f>" + script_mover getentitynumber());
 

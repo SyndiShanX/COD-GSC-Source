@@ -36,9 +36,10 @@ tryUseHeliSniper(lifeId, streakName) {
     return false;
   }
 
-  if(isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom == true) {
+  if(isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom == true)
     return false;
-  } else if(!isDefined(level.air_node_mesh) ||
+
+  else if(!isDefined(level.air_node_mesh) ||
     !isDefined(closestStart) ||
     !isDefined(closestNode)) {
     self iPrintLnBold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
@@ -57,25 +58,21 @@ tryUseHeliSniper(lifeId, streakName) {
     return false;
   }
 
-  if(isDefined(self.isCapturingCrate) && self.isCapturingCrate) {
+  if(isDefined(self.isCapturingCrate) && self.isCapturingCrate)
     return false;
-  }
 
-  if(isDefined(self.isReviving) && self.isReviving) {
+  if(isDefined(self.isReviving) && self.isReviving)
     return false;
-  }
 
   chopper = createHeli(self, closestStart, closestNode, startAng, streakName, lifeId);
 
-  if(!isDefined(chopper)) {
+  if(!isDefined(chopper))
     return false;
-  }
 
   usedStreak = self heliPickup(chopper, streakName);
 
-  if(isDefined(usedStreak) && usedStreak == "fail") {
+  if(isDefined(usedStreak) && usedStreak == "fail")
     return false;
-  }
 
   return true;
 }
@@ -138,9 +135,8 @@ createHeli(owner, startNode, closestNode, startAng, streakName, lifeId) {
 
   chopper.forwardYaw = forward[1];
   chopper.backwardYaw = forward[1] + 180;
-  if(chopper.backwardYaw > 360) {
+  if(chopper.backwardYaw > 360)
     chopper.backwardYaw -= 360;
-  }
 
   chopper.heliType = "littlebird";
   chopper.heli_type = "littlebird";
@@ -187,13 +183,12 @@ getBestHeight(centerPoint) {
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(isDefined(heightEnt)) {
+  if(isDefined(heightEnt))
     trueHeight = heightEnt.origin[2];
-  } else if(isDefined(level.airstrikeHeightScale)) {
+  else if(isDefined(level.airstrikeHeightScale))
     trueHeight = 850 * level.airstrikeHeightScale;
-  } else {
+  else
     trueHeight = 850;
-  }
 
   bestHeightPoint = bulletTrace(centerPoint, centerPoint - (0, 0, 10000), false, self, false, false, false, false);
   bestHeight = bestHeightPoint["position"][2];
@@ -269,21 +264,19 @@ heliPickup(chopper, streakName) {
   closestStartNode = getClosestStartNode(self.origin);
   level thread teamPlayerCardSplash("used_heli_sniper", self, self.team);
 
-  if(isDefined(closestStartNode.angles)) {
+  if(isDefined(closestStartNode.angles))
     startAng = closestStartNode.angles;
-  } else {
+  else
     startAng = (0, 0, 0);
-  }
 
   self _disableUsability();
 
   flyHeight = chopper.flyHeight;
 
-  if(isDefined(closestStartNode.neighbors[0])) {
+  if(isDefined(closestStartNode.neighbors[0]))
     closestNode = closestStartNode.neighbors[0];
-  } else {
+  else
     closestNode = getClosestNode(self.origin);
-  }
 
   forward = anglesToForward(self.angles);
 
@@ -309,9 +302,8 @@ onHeli(chopper) {
   chopper endon("owner_disconnected");
   chopper endon("killstreakExit");
 
-  if(isDefined(self.imsList)) {
+  if(isDefined(self.imsList))
     self destroyCarriedIms();
-  }
 
   chopper thread giveCoolAssGun();
 
@@ -372,9 +364,8 @@ doDropff(chopper) {
 
   lastWeapon = self getLastWeapon();
 
-  if(!self HasWeapon(lastWeapon)) {
+  if(!self HasWeapon(lastWeapon))
     lastWeapon = self maps\mp\killstreaks\_killstreaks::getFirstPrimaryWeapon();
-  }
 
   self switch_to_last_weapon(lastWeapon);
 
@@ -414,16 +405,14 @@ movePlayerToChopper(chopper) {
   if(blackOutWait != "disconnect") {
     self thread maps\mp\killstreaks\_killstreaks::clearRideIntro(1.0, .75);
 
-    if(self.team == "spectator") {
+    if(self.team == "spectator")
       return "fail";
-    }
   }
 
   chopper attachPlayerToChopper();
 
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     return "fail";
-  }
 
   level.heliSniperEyesOn = chopper;
   level notify("update_uplink");
@@ -436,9 +425,8 @@ destroyCarriedIms() {
       self.isCarrying = undefined;
       self.carriedItem = undefined;
 
-      if(isDefined(ims.bombSquadModel)) {
+      if(isDefined(ims.bombSquadModel))
         ims.bombSquadModel delete();
-      }
 
       ims delete();
       self enableWeapons();
@@ -506,18 +494,16 @@ heliReturnToDropsite() {
       closestNode = loc;
       closestDistance = nodeDistance;
 
-      if(loc.script_parameters == "pickupNodehigh") {
+      if(loc.script_parameters == "pickupNodehigh")
         closestNodeIsHigh = true;
-      } else {
+      else
         closestNodeIsHigh = false;
-      }
     }
   }
 
   if(getMapName() == "mp_chasm") {
-    if(closestNode.origin == (-224, -1056, 2376)) {
+    if(closestNode.origin == (-224, -1056, 2376))
       closestNode.origin = (-304, -896, 2376);
-    }
   }
 
   if(closestNodeIsHigh && !BulletTracePassed(self.origin, closestNode.origin, false, self)) {
@@ -575,9 +561,8 @@ heliMovementControl() {
   for(;;) {
     movementDirection = self.owner GetNormalizedMovement();
 
-    if(movementDirection[0] >= 0.15 || movementDirection[1] >= 0.15 || movementDirection[0] <= -0.15 || movementDirection[1] <= -0.15) {
+    if(movementDirection[0] >= 0.15 || movementDirection[1] >= 0.15 || movementDirection[0] <= -0.15 || movementDirection[1] <= -0.15)
       self thread manualMove(movementDirection);
-    }
 
     wait 0.05;
   }
@@ -591,9 +576,8 @@ heliFreeMovementControl() {
   for(;;) {
     movementDirection = self.owner GetNormalizedMovement();
 
-    if(movementDirection[0] >= 0.15 || movementDirection[1] >= 0.15 || movementDirection[0] <= -0.15 || movementDirection[1] <= -0.15) {
+    if(movementDirection[0] >= 0.15 || movementDirection[1] >= 0.15 || movementDirection[0] <= -0.15 || movementDirection[1] <= -0.15)
       self thread manualMoveFree(movementDirection);
-    }
 
     wait 0.05;
   }
@@ -671,24 +655,18 @@ heliLeave() {
   self notify("end_death_check");
   self notify("leaving");
 
-  if(isDefined(self.ladder)) {
+  if(isDefined(self.ladder))
     self.ladder delete();
-  }
-  if(isDefined(self.trigger)) {
+  if(isDefined(self.trigger))
     self.trigger delete();
-  }
-  if(isDefined(self.turret)) {
+  if(isDefined(self.turret))
     self.turret delete();
-  }
-  if(isDefined(self.msg)) {
+  if(isDefined(self.msg))
     self.msg destroyElem();
-  }
-  if(isDefined(self.switchMsg)) {
+  if(isDefined(self.switchMsg))
     self.switchMsg destroyElem();
-  }
-  if(isDefined(self.moveMsg)) {
+  if(isDefined(self.moveMsg))
     self.moveMsg destroyElem();
-  }
 
   self ClearLookAtEnt();
 
@@ -726,24 +704,18 @@ heliDeathCleanup(streakName) {
 
   self thread maps\mp\killstreaks\_helicopter::lbOnKilled();
 
-  if(isDefined(self.ladder)) {
+  if(isDefined(self.ladder))
     self.ladder delete();
-  }
-  if(isDefined(self.trigger)) {
+  if(isDefined(self.trigger))
     self.trigger delete();
-  }
-  if(isDefined(self.turret)) {
+  if(isDefined(self.turret))
     self.turret delete();
-  }
-  if(isDefined(self.msg)) {
+  if(isDefined(self.msg))
     self.msg destroyElem();
-  }
-  if(isDefined(self.switchMsg)) {
+  if(isDefined(self.switchMsg))
     self.switchMsg destroyElem();
-  }
-  if(isDefined(self.moveMsg)) {
+  if(isDefined(self.moveMsg))
     self.moveMsg destroyElem();
-  }
 
   if(isDefined(self.owner) && IsAlive(self.owner) && self.ownerBoarded == true) {
     self.owner StopRidingVehicle();
@@ -763,9 +735,8 @@ heliDeathCleanup(streakName) {
 
     if(isDefined(bestAttacker)) {
       foreach(player in level.participants) {
-        if(player getUniqueId() == bestAttacker) {
+        if(player getUniqueId() == bestAttacker)
           bestAttackerObj = player;
-        }
       }
     }
 
@@ -845,9 +816,8 @@ giveCoolAssGun() {
   self.owner endon("disconnect");
 
   for(;;) {
-    if(!isAlive(self.owner)) {
+    if(!isAlive(self.owner))
       return "fail";
-    }
 
     if(self.owner GetCurrentPrimaryWeapon() != "iw6_gm6helisnipe_mp_gm6scope") {
       self.owner GiveWeapon("iw6_gm6helisnipe_mp_gm6scope");
@@ -889,9 +859,8 @@ pushCorpseOnOwnerDeath() {
   self.owner.heliSniper = undefined;
   self.ownerBoarded = false;
 
-  if(isDefined(self.origin)) {
+  if(isDefined(self.origin))
     PhysicsExplosionSphere(self.origin, 200, 200, 1);
-  }
 }
 
 leaveOnOwnerDisconnect() {

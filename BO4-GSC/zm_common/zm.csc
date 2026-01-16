@@ -46,6 +46,7 @@
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zdraw;
+
 #namespace zm;
 
 autoexec ignore_systems() {
@@ -225,12 +226,12 @@ init_blocker_fx() {}
 init_riser_fx() {
   if(isDefined(level.var_7f632569) && level.var_7f632569) {}
 
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
 
   if(isDefined(level.riser_type) && level.riser_type == "snow") {
-    level._effect[# "rise_billow_snow"] = # "hash_793798659a4b9560";
+    level._effect[#"rise_billow_snow"] = #"hash_793798659a4b9560";
   }
 }
 
@@ -385,7 +386,7 @@ createzombieeyesinternal(localclientnum) {
 
   if(!isDefined(self._eyearray[localclientnum])) {
     linktag = "j_eyeball_le";
-    effect = level._effect[# "eye_glow"];
+    effect = level._effect[#"eye_glow"];
 
     if(isDefined(level._override_eye_fx)) {
       effect = level._override_eye_fx;
@@ -471,18 +472,18 @@ zombie_ragdoll_explode_cb(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(isDefined(level._effect[# "zombie_guts_explosion"])) {
+    if(isDefined(level._effect[#"zombie_guts_explosion"])) {
       org = self gettagorigin("J_SpineLower");
 
       if(isDefined(org)) {
-        playFX(localclientnum, level._effect[# "zombie_guts_explosion"], org);
+        playFX(localclientnum, level._effect[#"zombie_guts_explosion"], org);
       }
     }
   }
 }
 
 init_zombie_explode_fx() {
-  level._effect[# "zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
 }
 
 zombie_wait_explode(localclientnum) {
@@ -506,8 +507,8 @@ zombie_wait_explode(localclientnum) {
     waitframe(1);
   }
 
-  if(isDefined(level._effect[# "zombie_guts_explosion"]) && util::is_mature()) {
-    playFX(localclientnum, level._effect[# "zombie_guts_explosion"], where);
+  if(isDefined(level._effect[#"zombie_guts_explosion"]) && util::is_mature()) {
+    playFX(localclientnum, level._effect[#"zombie_guts_explosion"], where);
   }
 }
 
@@ -541,18 +542,18 @@ do_headshot_gib_fx() {
   players = level.localplayers;
 
   for(i = 0; i < players.size; i++) {
-    playFX(i, level._effect[# "headshot"], fxorigin, forwardvec, upvec);
-    playFX(i, level._effect[# "headshot_nochunks"], fxorigin, forwardvec, upvec);
+    playFX(i, level._effect[#"headshot"], fxorigin, forwardvec, upvec);
+    playFX(i, level._effect[#"headshot_nochunks"], fxorigin, forwardvec, upvec);
   }
 
-  playSound(0, # "zmb_zombie_head_gib", fxorigin);
+  playSound(0, #"zmb_zombie_head_gib", fxorigin);
   wait 0.3;
 
   if(isDefined(self)) {
     players = level.localplayers;
 
     for(i = 0; i < players.size; i++) {
-      util::playFXOnTag(i, level._effect[# "bloodspurt"], self, fxtag);
+      util::playFXOnTag(i, level._effect[#"bloodspurt"], self, fxtag);
     }
   }
 }
@@ -561,10 +562,10 @@ do_gib_fx(tag) {
   players = level.localplayers;
 
   for(i = 0; i < players.size; i++) {
-    util::playFXOnTag(i, level._effect[# "animscript_gib_fx"], self, tag);
+    util::playFXOnTag(i, level._effect[#"animscript_gib_fx"], self, tag);
   }
 
-  playSound(0, # "zmb_death_gibs", self gettagorigin(tag));
+  playSound(0, #"zmb_death_gibs", self gettagorigin(tag));
 }
 
 do_gib(model, tag) {
@@ -591,14 +592,14 @@ do_gib(model, tag) {
     forward += (0, 0, randomfloatrange(0.4, 0.7));
   }
 
-  createdynentandlaunch(0, model, end_pos, angles, start_pos, forward, level._effect[# "animscript_gibtrail_fx"], 1);
+  createdynentandlaunch(0, model, end_pos, angles, start_pos, forward, level._effect[#"animscript_gibtrail_fx"], 1);
 
   if(isDefined(self)) {
     self do_gib_fx(tag);
     return;
   }
 
-  playSound(0, # "zmb_death_gibs", end_pos);
+  playSound(0, #"zmb_death_gibs", end_pos);
 }
 
 do_hat_gib(model, tag) {
@@ -875,9 +876,9 @@ handle_zombie_risers_foliage(localclientnum, oldval, newval, bnewent, binitialsn
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn", self.origin);
-    burst_fx = level._effect[# "rise_burst_foliage"];
-    billow_fx = level._effect[# "rise_billow_foliage"];
+    playSound(0, #"zmb_zombie_spawn", self.origin);
+    burst_fx = level._effect[#"rise_burst_foliage"];
+    billow_fx = level._effect[#"rise_billow_foliage"];
     type = "foliage";
 
     for(i = 0; i < localplayers.size; i++) {
@@ -892,9 +893,9 @@ handle_zombie_risers_water(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn_water", self.origin);
-    burst_fx = level._effect[# "rise_burst_water"];
-    billow_fx = level._effect[# "rise_billow_water"];
+    playSound(0, #"zmb_zombie_spawn_water", self.origin);
+    burst_fx = level._effect[#"rise_burst_water"];
+    billow_fx = level._effect[#"rise_billow_water"];
     type = "water";
 
     for(i = 0; i < localplayers.size; i++) {
@@ -910,14 +911,14 @@ handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   if(!oldval && newval) {
     localplayers = level.localplayers;
     sound = "zmb_zombie_spawn";
-    burst_fx = level._effect[# "rise_burst"];
-    billow_fx = level._effect[# "rise_billow"];
+    burst_fx = level._effect[#"rise_burst"];
+    billow_fx = level._effect[#"rise_billow"];
     type = "dirt";
 
     if(isDefined(level.riser_type) && level.riser_type == "snow") {
       sound = "zmb_zombie_spawn_snow";
-      burst_fx = level._effect[# "rise_burst_snow"];
-      billow_fx = level._effect[# "rise_billow_snow"];
+      burst_fx = level._effect[#"rise_burst_snow"];
+      billow_fx = level._effect[#"rise_billow_snow"];
       type = "snow";
     }
 
@@ -936,14 +937,14 @@ handle_zombie_risers_lowg(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(!oldval && newval) {
     localplayers = level.localplayers;
     sound = "zmb_zombie_spawn";
-    burst_fx = level._effect[# "rise_burst_lg"];
-    billow_fx = level._effect[# "rise_billow_lg"];
+    burst_fx = level._effect[#"rise_burst_lg"];
+    billow_fx = level._effect[#"rise_billow_lg"];
     type = "dirt";
 
     if(isDefined(level.riser_type) && level.riser_type == "snow") {
       sound = "zmb_zombie_spawn_snow";
-      burst_fx = level._effect[# "rise_burst_snow"];
-      billow_fx = level._effect[# "rise_billow_snow"];
+      burst_fx = level._effect[#"rise_burst_snow"];
+      billow_fx = level._effect[#"rise_billow_snow"];
       type = "snow";
     }
 
@@ -992,14 +993,14 @@ rise_dust_fx(clientnum, type, billow_fx, burst_fx) {
   dust_time = 5.5;
   dust_interval = 0.3;
   player = level.localplayers[clientnum];
-  effect = level._effect[# "rise_dust"];
+  effect = level._effect[#"rise_dust"];
 
   if(type == "water") {
-    effect = level._effect[# "rise_dust_water"];
+    effect = level._effect[#"rise_dust_water"];
   } else if(type == "snow") {
-    effect = level._effect[# "rise_dust_snow"];
+    effect = level._effect[#"rise_dust_snow"];
   } else if(type == "foliage") {
-    effect = level._effect[# "rise_dust_foliage"];
+    effect = level._effect[#"rise_dust_foliage"];
   } else if(type == "none") {
     return;
   }
@@ -1026,7 +1027,7 @@ end_last_stand(clientnum) {
   println("<dev string:xe1>" + clientnum);
   wait 0.7;
   println("<dev string:x101>");
-  playSound(clientnum, # "revive_gasp");
+  playSound(clientnum, #"revive_gasp");
 }
 
 last_stand_thread(clientnum) {
@@ -1036,7 +1037,7 @@ last_stand_thread(clientnum) {
   pause = 0.5;
 
   for(vol = 0.5; true; vol = 1) {
-    id = playSound(clientnum, # "chr_heart_beat");
+    id = playSound(clientnum, #"chr_heart_beat");
     setsoundvolume(id, vol);
     wait pause;
 
@@ -1085,7 +1086,7 @@ last_stand_monitor(clientnum, state, oldstate) {
   if(level._laststand[clientnum]) {
     if(isDefined(level.lslooper)) {
       level.lslooper stopallloopsounds(0.7);
-      playSound(0, # "evt_laststand_in", (0, 0, 0));
+      playSound(0, #"evt_laststand_in", (0, 0, 0));
     }
 
     player notify(#"laststandend");
@@ -1098,8 +1099,8 @@ function_bbea98ae(localclientnum, b_igc_active) {
 }
 
 function_92f0c63(localclientnum) {
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly", # "hash_60913f86a5a5a3f1");
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly_ls", # "hash_60913f86a5a5a3f1");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly", #"hash_60913f86a5a5a3f1");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly_ls", #"hash_60913f86a5a5a3f1");
 }
 
 laststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -1167,7 +1168,7 @@ update_aat_hud(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   icon = aat::get_icon(newval);
 
   if(str_localized == "none") {
-    str_localized = # "";
+    str_localized = #"";
   }
 
   controllermodel = getuimodelforcontroller(localclientnum);

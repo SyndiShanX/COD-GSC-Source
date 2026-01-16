@@ -28,15 +28,14 @@
 #include animscripts\balcony;
 
 initweapon(weapon) {
-  self.weaponinfo[weapon] = spawnStruct();
+  self.weaponinfo[weapon] = spawnstruct();
   self.weaponinfo[weapon].position = "none";
   self.weaponinfo[weapon].hasclip = 1;
 
-  if(getweaponclipmodel(weapon) != "") {
+  if(getweaponclipmodel(weapon) != "")
     self.weaponinfo[weapon].useclip = 1;
-  } else {
+  else
     self.weaponinfo[weapon].useclip = 0;
-  }
 }
 
 isweaponinitialized(weapon) {
@@ -46,18 +45,16 @@ isweaponinitialized(weapon) {
 #using_animtree("generic_human");
 
 main() {
-  self.a = spawnStruct();
+  self.a = spawnstruct();
   self.a.laseron = 0;
 
-  if(self.weapon == "") {
+  if(self.weapon == "")
     self setcurrentweapon("none");
-  }
 
   self setprimaryweapon(self.weapon);
 
-  if(self.secondaryweapon == "") {
+  if(self.secondaryweapon == "")
     self setsecondaryweapon("none");
-  }
 
   self setprimaryweapon(animscripts\assign_weapon::assign_random_weapon());
   self thread animscripts\assign_weapon::set_random_camo_drop();
@@ -75,9 +72,8 @@ main() {
   self.weapon_positions[self.weapon_positions.size] = "chest";
   self.weapon_positions[self.weapon_positions.size] = "back";
 
-  for(i = 0; i < self.weapon_positions.size; i++) {
+  for(i = 0; i < self.weapon_positions.size; i++)
     self.a.weaponpos[self.weapon_positions[i]] = "none";
-  }
 
   self.lastweapon = self.weapon;
   self.root_anim = % root;
@@ -89,9 +85,8 @@ main() {
   self.lastanimtype = self.animtype;
   self animscripts\anims::clearanimcache();
 
-  if(isDefined(level.setup_anim_array_callback)) {
+  if(isDefined(level.setup_anim_array_callback))
     [[level.setup_anim_array_callback]](self.animtype);
-  }
 
   self.heat = 0;
   self.issniper = issniperrifle(self.primaryweapon);
@@ -115,9 +110,8 @@ main() {
   self.a.gunhand = "none";
   animscripts\shared::placeweaponon(self.primaryweapon, "right");
 
-  if(isDefined(self.secondaryweaponclass) && self.secondaryweaponclass != "none" && self.secondaryweaponclass != "pistol") {
+  if(isDefined(self.secondaryweaponclass) && self.secondaryweaponclass != "none" && self.secondaryweaponclass != "pistol")
     animscripts\shared::placeweaponon(self.secondaryweapon, "back");
-  }
 
   self.a.combatendtime = gettime();
   self.a.script = "init";
@@ -157,15 +151,13 @@ main() {
   self thread deathnotify();
   self.baseaccuracy = self.accuracy;
 
-  if(!isDefined(self.script_accuracy)) {
+  if(!isDefined(self.script_accuracy))
     self.script_accuracy = 1;
-  }
 
-  if(self.team == "axis" || self.team == "team3") {
+  if(self.team == "axis" || self.team == "team3")
     self thread maps\_gameskill::axisaccuracycontrol();
-  } else if(self.team == "allies") {
+  else if(self.team == "allies")
     self thread maps\_gameskill::alliesaccuracycontrol();
-  }
 
   self.a.misstime = 0;
   self.a.yawtransition = "none";
@@ -185,9 +177,8 @@ main() {
   self.a.crouchpain = 0;
   self.a.nextstandinghitdying = 0;
 
-  if(!isDefined(self.script_forcegrenade)) {
+  if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
-  }
 
   self.a.stopcowering = ::donothing;
   setupuniqueanims();
@@ -200,17 +191,15 @@ main() {
   self.suppressed = 0;
   self.suppressedtime = 0;
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.suppressionthreshold = 0.75;
-  } else {
+  else
     self.suppressionthreshold = 0.5;
-  }
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.randomgrenaderange = 0;
-  } else {
+  else
     self.randomgrenaderange = 128;
-  }
 
   self.exception = [];
   self.exception["corner"] = 1;
@@ -223,11 +212,10 @@ main() {
   self.exception["cover_stand"] = 1;
   keys = getarraykeys(self.exception);
 
-  for(i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++)
     clear_exception(keys[i]);
-  }
 
-  self.old = spawnStruct();
+  self.old = spawnstruct();
   self.reacquire_state = 0;
   self thread setnameandrank();
   self.shouldconserveammotime = 0;
@@ -245,8 +233,8 @@ printeyeoffsetfromnode() {
   while(true) {
     if(getdvarint(#"_id_EF4ABB36") == self getentnum()) {
       if(isDefined(self.covernode)) {
-        offset = self getEye() - self.covernode.origin;
-        forward = anglesToForward(self.covernode.angles);
+        offset = self geteye() - self.covernode.origin;
+        forward = anglestoforward(self.covernode.angles);
         right = anglestoright(self.covernode.angles);
         trueoffset = (vectordot(right, offset), vectordot(forward, offset), offset[2]);
         println(trueoffset);
@@ -262,27 +250,24 @@ printeyeoffsetfromnode() {
 showlikelyenemypathdir() {
   self endon("death");
 
-  if(getdvar(#"_id_6CB7B561") == "") {
+  if(getdvar(#"_id_6CB7B561") == "")
     setdvar("scr_showlikelyenemypathdir", "-1");
-  }
 
   while(true) {
     if(getdvarint(#"_id_6CB7B561") == self getentnum()) {
       yaw = self.angles[1];
       dir = self getanglestolikelyenemypath();
 
-      if(isDefined(dir)) {
+      if(isDefined(dir))
         yaw = dir[1];
-      }
 
-      printpos = self.origin + vectorscale((0, 0, 1), 60.0) + anglesToForward((0, yaw, 0)) * 100;
+      printpos = self.origin + vectorscale((0, 0, 1), 60.0) + anglestoforward((0, yaw, 0)) * 100;
       line(self.origin + vectorscale((0, 0, 1), 60.0), printpos);
 
-      if(isDefined(dir)) {
+      if(isDefined(dir))
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
-      } else {
+      else
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
-      }
 
       wait 0.05;
     } else
@@ -294,9 +279,8 @@ showlikelyenemypathdir() {
 setnameandrank() {
   self endon("death");
 
-  if(!isDefined(level.loadoutcomplete)) {
+  if(!isDefined(level.loadoutcomplete))
     level waittill("loadout complete");
-  }
 
   self maps\_names::get_name();
 }
@@ -317,12 +301,12 @@ setweapondist() {
   }
 }
 
-donothing() {}
+donothing() {
+}
 
 setupuniqueanims() {
-  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate)) {
+  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate))
     set_anim_playback_rate();
-  }
 }
 
 set_anim_playback_rate() {
@@ -401,15 +385,13 @@ previewaccuracy() {
   if(getdebugdvar("debug_accuracypreview") != "on") {
     return;
   }
-  if(!isDefined(level.offsetnum)) {
+  if(!isDefined(level.offsetnum))
     level.offsetnum = 0;
-  }
 
   level.offsetnum++;
 
-  if(level.offsetnum > 5) {
+  if(level.offsetnum > 5)
     level.offsetnum = 1;
-  }
 
   self endon("death");
 
@@ -519,19 +501,17 @@ checkapproachangles(transtypes) {
       trans = transtypes[j];
       idealadd = 0;
 
-      if(trans == "left" || trans == "left_crouch") {
+      if(trans == "left" || trans == "left_crouch")
         idealadd = 90;
-      } else if(trans == "right" || trans == "right_crouch") {
+      else if(trans == "right" || trans == "right_crouch")
         idealadd = -90;
-      }
 
       if(isDefined(anim.covertransangles[trans][i])) {
         correctangle = angleclamp180(idealtransangles[i] + idealadd);
         actualangle = angleclamp180(anim.covertransangles[trans][i]);
 
-        if(absangleclamp180(actualangle - correctangle) > 7) {
+        if(absangleclamp180(actualangle - correctangle) > 7)
           println("^1Cover approach animation has bad yaw delta: anim.coverTrans[\"" + trans + "\"][" + i + "]; is ^2" + actualangle + "^1, should be closer to ^2" + correctangle + "^1.");
-        }
       }
     }
   }
@@ -541,19 +521,17 @@ checkapproachangles(transtypes) {
       trans = transtypes[j];
       idealadd = 0;
 
-      if(trans == "left" || trans == "left_crouch") {
+      if(trans == "left" || trans == "left_crouch")
         idealadd = 90;
-      } else if(trans == "right" || trans == "right_crouch") {
+      else if(trans == "right" || trans == "right_crouch")
         idealadd = -90;
-      }
 
       if(isDefined(anim.coverexitangles[trans][i])) {
         correctangle = angleclamp180(-1 * (idealtransangles[i] + idealadd + 180));
         actualangle = angleclamp180(anim.coverexitangles[trans][i]);
 
-        if(absangleclamp180(actualangle - correctangle) > 7) {
+        if(absangleclamp180(actualangle - correctangle) > 7)
           println("^1Cover exit animation has bad yaw delta: anim.coverTrans[\"" + trans + "\"][" + i + "]; is ^2" + actualangle + "^1, should be closer to ^2" + correctangle + "^1.");
-        }
       }
     }
   }
@@ -575,58 +553,47 @@ firstinit() {
   anim.notfirsttime = 1;
   anim.usefacialanims = 0;
 
-  if(!isDefined(anim.dog_health)) {
+  if(!isDefined(anim.dog_health))
     anim.dog_health = 1;
-  }
 
-  if(!isDefined(anim.dog_presstime)) {
+  if(!isDefined(anim.dog_presstime))
     anim.dog_presstime = 1000;
-  }
 
   anim.dog_presstime = 1000;
 
   println("anim.dog_presstime = " + anim.dog_presstime);
 
-  if(!isDefined(anim.dog_hits_before_kill)) {
+  if(!isDefined(anim.dog_hits_before_kill))
     anim.dog_hits_before_kill = 1;
-  }
 
-  if(getdvar(#"_id_273C0FA3") == "on") {
+  if(getdvar(#"_id_273C0FA3") == "on")
     precacheitem("winchester1200");
-  }
 
   level.nextgrenadedrop = randomint(3);
   anim.defaultexception = ::empty;
 
-  if(getdebugdvar("debug_noanimscripts") == "") {
+  if(getdebugdvar("debug_noanimscripts") == "")
     setdvar("debug_noanimscripts", "off");
-  } else if(getdebugdvar("debug_noanimscripts") == "on") {
+  else if(getdebugdvar("debug_noanimscripts") == "on")
     anim.defaultexception = animscripts\init::infiniteloop;
-  }
 
-  if(getdebugdvar("debug_grenadehand") == "") {
+  if(getdebugdvar("debug_grenadehand") == "")
     setdvar("debug_grenadehand", "off");
-  }
 
-  if(getdebugdvar("anim_dotshow") == "") {
+  if(getdebugdvar("anim_dotshow") == "")
     setdvar("anim_dotshow", "-1");
-  }
 
-  if(getdebugdvar("anim_debug") == "") {
+  if(getdebugdvar("anim_debug") == "")
     setdvar("anim_debug", "");
-  }
 
-  if(getdebugdvar("debug_misstime") == "") {
+  if(getdebugdvar("debug_misstime") == "")
     setdvar("debug_misstime", "");
-  }
 
-  if(getdvar(#"_id_0E3283EA") == "") {
+  if(getdvar(#"_id_0E3283EA") == "")
     setdvar("modern", "on");
-  }
 
-  if(getdvar(#"_id_DA8BDE9E") == "") {
+  if(getdvar(#"_id_DA8BDE9E") == "")
     setdvar("scr_ai_auto_fire_rate", "1.0");
-  }
 
   setdvar("scr_expDeathMayMoveCheck", "on");
   maps\_names::setup_names();
@@ -640,9 +607,8 @@ firstinit() {
   anim.aivsaimeleerangesq = 160000;
   anim.animflagnameindex = 0;
 
-  if(isDefined(level.setup_anims_callback)) {
+  if(isDefined(level.setup_anims_callback))
     [[level.setup_anims_callback]]();
-  }
 
   initmovestartstoptransitions();
   anim.lastupwardsdeathtime = 0;
@@ -683,9 +649,8 @@ firstinit() {
   anim.notetracks = [];
   animscripts\shared::registernotetracks();
 
-  if(!isDefined(level.flag)) {
+  if(!isDefined(level.flag))
     level.flag = [];
-  }
 
   level.painai = undefined;
   animscripts\setposemovement::initposemovementfunctions();
@@ -752,9 +717,8 @@ setnextplayergrenadetime() {
   if(isDefined(anim.playergrenaderangetime)) {
     maxtime = int(anim.playergrenaderangetime * 0.7);
 
-    if(maxtime < 1) {
+    if(maxtime < 1)
       maxtime = 1;
-    }
 
     anim.grenadetimers["player_frag_grenade_sp"] = randomintrange(0, maxtime);
     anim.grenadetimers["player_flash_grenade_sp"] = randomintrange(0, maxtime);
@@ -764,9 +728,8 @@ setnextplayergrenadetime() {
     maxtime = int(anim.playerdoublegrenadetime);
     mintime = int(maxtime / 2);
 
-    if(maxtime <= mintime) {
+    if(maxtime <= mintime)
       maxtime = mintime + 1;
-    }
 
     anim.grenadetimers["player_double_grenade"] = randomintrange(mintime, maxtime);
   }
@@ -799,9 +762,8 @@ ondeath() {
   self waittill("death");
 
   if(!isDefined(self)) {
-    if(isDefined(self.a.usingturret)) {
+    if(isDefined(self.a.usingturret))
       self.a.usingturret delete();
-    }
   }
 }
 

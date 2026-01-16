@@ -160,7 +160,7 @@ dog_handler_anim() {
 dog_victim_think() {
   wait(2);
   spawner = getent("dog_victim", "targetname");
-  victim = spawner stalingradspawn(true);
+  victim = spawner stalingradSpawn(true);
   spawn_failed(victim);
   victim setthreatbiasgroup("victim");
   victim.pacifist = 1;
@@ -205,7 +205,7 @@ dog_anim() {
 outro_fade_out(anything) {
   level.nextmission_cleanup = ::clean_up_fadeout_hud;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread hud_fade_to_black(1.5);
   }
   wait(6);
@@ -223,8 +223,8 @@ pacing_throw_smoke(guy) {
   wait(2.25);
   target_pos = guy GetTagOrigin("tag_weapon_left");
   count = 0;
-  while(1) {
-    playFX(level._effect["target_smoke"], target_pos);
+  while (1) {
+    playfx(level._effect["target_smoke"], target_pos);
     wait(0.05);
     count++;
     if(count > 30) {
@@ -232,8 +232,8 @@ pacing_throw_smoke(guy) {
     }
   }
   count = 0;
-  while(1) {
-    playFX(level._effect["target_smoke"], target_pos);
+  while (1) {
+    playfx(level._effect["target_smoke"], target_pos);
     count++;
     if(count < 500) {
       wait(0.05);
@@ -242,17 +242,17 @@ pacing_throw_smoke(guy) {
     } else if(count < 630) {
       wait(0.2);
     } else {
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       wait(0.25);
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       wait(0.4);
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       wait(0.15);
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       wait(0.7);
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       wait(0.4);
-      playFX(level._effect["target_smoke"], target_pos);
+      playfx(level._effect["target_smoke"], target_pos);
       break;
     }
   }
@@ -281,7 +281,7 @@ hud_fade_to_black(time) {
 
 clean_up_fadeout_hud() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(players[i].warpblack)) {
       players[i].warpblack Destroy();
     }

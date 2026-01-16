@@ -18,9 +18,9 @@ init() {
   config.modelPlacement = "placeable_barrier_obj";
   config.modelPlacementFailed = "placeable_barrier_obj_red";
 
-  config.hintString = &"KILLSTREAKS_HINTS_PLACEABLE_COVER_PICKUP";
-  config.placeString = &"KILLSTREAKS_HINTS_PLACEABLE_COVER_PLACE";
-  config.cannotPlaceString = &"KILLSTREAKS_HINTS_PLACEABLE_COVER_CANNOT_PLACE";
+  config.hintString = & "KILLSTREAKS_HINTS_PLACEABLE_COVER_PICKUP";
+  config.placeString = & "KILLSTREAKS_HINTS_PLACEABLE_COVER_PLACE";
+  config.cannotPlaceString = & "KILLSTREAKS_HINTS_PLACEABLE_COVER_CANNOT_PLACE";
   config.headIconHeight = 75;
   config.splashName = "used_placeable_barrier";
   config.lifeSpan = 60.0;

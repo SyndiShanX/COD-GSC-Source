@@ -20,14 +20,14 @@ main() {
 }
 
 teleporter_fx_setup(clientNum) {
-  teleporters = getEntArray(clientNum, "pentagon_teleport_fx", "targetname");
+  teleporters = GetEntArray(clientNum, "pentagon_teleport_fx", "targetname");
   level.fxents[ClientNum] = [];
   level.packtime[ClientNum] = true;
   teleporter_pack = getEnt(clientNum, "pentagon_teleport_fx_pack", "targetname");
   teleporter_pack.fx_ent = spawn(clientNum, teleporter_pack.origin, "script_model");
   teleporter_pack.fx_ent setModel("tag_origin");
   teleporter_pack.fx_ent.angles = teleporter_pack.angles;
-  teleporter_pack.portalfx = playFXOnTag(clientNum, level.portal_effect, teleporter_pack.fx_ent, "tag_origin");
+  teleporter_pack.portalfx = PlayFXOnTag(clientNum, level.portal_effect, teleporter_pack.fx_ent, "tag_origin");
   teleporter_pack playLoopSound("evt_teleporter_loop", 1.75);
   for(i = 0; i < teleporters.size; i++) {
     fx_ent = spawn(clientNum, teleporters[i].origin, "script_model");
@@ -47,8 +47,8 @@ teleporter_fx_init(clientNum, set, newEnt) {
         deletefx(clientNum, fx_array[i].portalfx);
       }
       wait(0.01);
-      fx_array[i].portalfx = playFXOnTag(clientNum, level.portal_effect, fx_array[i], "tag_origin");
-      playSound(clientNum, "evt_teleporter_start", fx_array[i].origin);
+      fx_array[i].portalfx = PlayFXOnTag(clientNum, level.portal_effect, fx_array[i], "tag_origin");
+      PlaySound(clientNum, "evt_teleporter_start", fx_array[i].origin);
       fx_array[i] playLoopSound("evt_teleporter_loop", 1.75);
     }
   } else if(!set && level.packtime[ClientNum] == false) {
@@ -60,7 +60,7 @@ teleporter_fx_init(clientNum, set, newEnt) {
         deletefx(clientNum, fx_array[i].portalfx);
       }
       wait(0.01);
-      fx_array[i].portalfx = playFXOnTag(clientNum, level.pack_effect, fx_array[i], "tag_origin");
+      fx_array[i].portalfx = PlayFXOnTag(clientNum, level.pack_effect, fx_array[i], "tag_origin");
       fx_array[i] thread play_packa_special_looper(clientNum);
     }
   }
@@ -83,7 +83,7 @@ teleporter_fx_cool_down(clientNum) {
       }
       if(isDefined(fx_pos) && isDefined(fx_pos.portalfx)) {
         deletefx(clientNum, fx_pos.portalfx);
-        fx_pos.portalfx = playFXOnTag(clientNum, level._effect["zombie_pent_portal_cool"], fx_pos, "tag_origin");
+        fx_pos.portalfx = PlayFXOnTag(clientNum, level._effect["zombie_pent_portal_cool"], fx_pos, "tag_origin");
         self thread turn_off_cool_down_fx(fx_pos, ClientNum);
       }
     }
@@ -97,9 +97,9 @@ turn_off_cool_down_fx(fx_pos, ClientNum) {
   if(isDefined(fx_pos) && isDefined(fx_pos.portalfx)) {
     deletefx(clientNum, fx_pos.portalfx);
     if(level.packtime[ClientNum] == false) {
-      fx_pos.portalfx = playFXOnTag(clientNum, level.portal_effect, fx_pos, "tag_origin");
+      fx_pos.portalfx = PlayFXOnTag(clientNum, level.portal_effect, fx_pos, "tag_origin");
     } else {
-      fx_pos.portalfx = playFXOnTag(clientNum, level.pack_effect, fx_pos, "tag_origin");
+      fx_pos.portalfx = PlayFXOnTag(clientNum, level.pack_effect, fx_pos, "tag_origin");
     }
   }
 }

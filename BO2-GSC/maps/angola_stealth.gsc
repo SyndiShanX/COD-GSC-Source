@@ -23,11 +23,10 @@ player_start_stealth_battle() {
   level.stealth_spotted_time_scale = 1.0;
 
   while(true) {
-    if(isDefined(level.player.climbing_tree)) {
+    if(isDefined(level.player.climbing_tree))
       level.player.stealth_visible_distance = 60;
-    } else {
+    else
       level.player.stealth_visible_distance = level.player.ground_visible_distance;
-    }
 
     wait 0.01;
   }
@@ -45,9 +44,8 @@ monitor_player_stealth_state() {
 }
 
 is_player_in_stealth_mode() {
-  if(isDefined(level.player.stealth_cover_broken) && level.player.stealth_cover_broken == 0) {
+  if(isDefined(level.player.stealth_cover_broken) && level.player.stealth_cover_broken == 0)
     return true;
-  }
 
   return false;
 }
@@ -67,11 +65,10 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
   self thread ai_patrol_return_to_combat();
   self.animname = "misc_patrol";
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "walk") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "walk")
     self change_movemode("cqb_walk");
-  } else {
+  else
     self set_run_anim("walk");
-  }
 
   nd_node = getnode(self.script_string, "targetname");
   self.goalradius = 48;
@@ -80,11 +77,10 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
   self.disable_node_arrivals = 0;
   change_route_frac = 40;
 
-  if(isDefined(self.script_int)) {
+  if(isDefined(self.script_int))
     change_arrivals_anim_frac = self.script_int;
-  } else {
+  else
     change_arrivals_anim_frac = 60;
-  }
 
   min_node_wait_time = 1.0;
   max_node_wait_time = 3.5;
@@ -93,9 +89,8 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
     str_next_node_name = nd_node.target;
 
     if(isDefined(nd_node.script_noteworthy)) {
-      if(randomfloatrange(0, 100) <= change_route_frac) {
+      if(randomfloatrange(0, 100) <= change_route_frac)
         str_next_node_name = nd_node.script_noteworthy;
-      }
     }
 
     nd_node = getnode(str_next_node_name, "targetname");
@@ -104,9 +99,8 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
     self update_node_arrivals(change_arrivals_anim_frac);
     self waittill("goal");
 
-    if(isDefined(nd_node.script_string) && nd_node.script_string == "break_patrol") {
+    if(isDefined(nd_node.script_string) && nd_node.script_string == "break_patrol")
       level notify("player_position_located");
-    }
 
     if(self.disable_node_arrivals == 0) {
       delay = randomfloatrange(min_node_wait_time, max_node_wait_time);
@@ -124,14 +118,13 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
 }
 
 update_node_arrivals(disable_frac) {
-  if(self.disable_node_arrivals == 0) {
+  if(self.disable_node_arrivals == 0)
     self.disable_node_arrivals = 1;
-  } else {
+  else {
     frac = randomfloatrange(0, 100);
 
-    if(frac <= disable_frac) {
+    if(frac <= disable_frac)
       self.disable_node_arrivals = 0;
-    }
   }
 
   self ai_set_node_approach_anims(self.disable_node_arrivals);
@@ -157,15 +150,15 @@ patrol_search_for_player() {
 
     if(dist_to_player < level.player.stealth_visible_distance) {
       str_message = "Player Behind Me: " + dist_to_player;
-      v_ai_forward = anglesToForward(self.angles);
+      v_ai_forward = anglestoforward(self.angles);
       v_dir_to_player = vectornormalize(level.player.origin - self.origin);
       dot = vectordot(v_ai_forward, v_dir_to_player);
 
       if(dot > level.player.stealth_visible_dot) {
         up = anglestoup(vectorscale((0, 1, 0), 90.0));
         v_start = self.origin + up * 60;
-        v_end = level.player getEye();
-        trace = bulletTrace(v_start, v_end, 0, self);
+        v_end = level.player geteye();
+        trace = bullettrace(v_start, v_end, 0, self);
 
         if(trace["fraction"] == 1) {
           str_message = "Looking at Player: " + dist_to_player;
@@ -184,19 +177,19 @@ patrol_search_for_player() {
       self.can_see_player_start_time = undefined;
     }
 
-    if(isDefined(str_message)) {}
+    if(isDefined(str_message)) {
+    }
 
     if(isDefined(self.can_see_player_start_time)) {
       time = gettime();
       alerted_time = (time - self.can_see_player_start_time) / 1000;
 
-      if(level.player.stealth_num_times_player_seen == 1) {
+      if(level.player.stealth_num_times_player_seen == 1)
         can_see_player_time = 2.0;
-      } else if(level.player.stealth_num_times_player_seen == 2) {
+      else if(level.player.stealth_num_times_player_seen == 2)
         can_see_player_time = 1.5;
-      } else {
+      else
         can_see_player_time = 1.25;
-      }
 
       can_see_player_time = can_see_player_time * level.stealth_spotted_time_scale;
 
@@ -283,9 +276,8 @@ player_climbs_tree_confuses_ai() {
   if(!is_player_in_stealth_mode()) {
     a_enemies = getaiarray("axis");
 
-    for(i = 0; i < a_enemies.size; i++) {
+    for(i = 0; i < a_enemies.size; i++)
       a_enemies[i] thread temp_confuse_ai_by_tree_climb(randomfloatrange(8.0, 9.0));
-    }
   }
 }
 
@@ -304,21 +296,18 @@ setup_stealth_event(str_save_name, str_patrol_spawner_targetname, str_category, 
   level notify("reset_patrol");
   level thread player_start_stealth_event(str_save_name);
   wait 0.01;
-  a_spawners = getEntArray(str_patrol_spawner_targetname, "targetname");
+  a_spawners = getentarray(str_patrol_spawner_targetname, "targetname");
 
-  if(isDefined(a_spawners)) {
+  if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, maps\angola_stealth::spawn_fn_ai_jungle_patrol, 0, str_category, 0, 1, kill_guy_if_path_ends);
-  }
 
-  if(isDefined(fail_mission_if_stealth_broken) && fail_mission_if_stealth_broken == 1) {
+  if(isDefined(fail_mission_if_stealth_broken) && fail_mission_if_stealth_broken == 1)
     player_fails_mission_if_stealth_broken(1);
-  }
 }
 
 player_start_stealth_event(str_stealth_name) {
-  if(isDefined(str_stealth_name)) {
+  if(isDefined(str_stealth_name))
     autosave_by_name(str_stealth_name);
-  }
 
   maps\angola_stealth::player_start_stealth_battle();
 }
@@ -326,9 +315,8 @@ player_start_stealth_event(str_stealth_name) {
 player_stealth_override_spotted_params(time_scale, vis_dot) {
   level.stealth_spotted_time_scale = time_scale;
 
-  if(isDefined(vis_dot)) {
+  if(isDefined(vis_dot))
     level.player.stealth_visible_dot = vis_dot;
-  }
 }
 
 player_fails_mission_if_stealth_broken(delay) {

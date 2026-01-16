@@ -45,9 +45,8 @@ slowgun_dial_sounds(localclientnum) {
     heat = isweaponoverheating(localclientnum, 1);
     digit1 = int(heat) % 10;
 
-    if(self.slowgun_digit1 != digit1) {
-      self playSound(localclientnum, "wpn_paralyzer_counter_tick");
-    }
+    if(self.slowgun_digit1 != digit1)
+      self playsound(localclientnum, "wpn_paralyzer_counter_tick");
 
     self.slowgun_digit1 = digit1;
     wait 0.05;
@@ -56,11 +55,10 @@ slowgun_dial_sounds(localclientnum) {
 
 sndparalyzerloop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    if(!isDefined(self.sndparalyzerloopent)) {
+    if(!isDefined(self.sndparalyzerloopent))
       self.sndparalyzerloopent = spawn(0, self.origin, "script_origin");
-    }
 
-    self.sndparalyzerloopent playLoopSound("fly_paralyzer_loop", 1);
+    self.sndparalyzerloopent playloopsound("fly_paralyzer_loop", 1);
     self thread slowgun_dial_sounds(localclientnum);
   } else {
     if(isDefined(self.sndparalyzerloopent)) {
@@ -73,11 +71,10 @@ sndparalyzerloop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 slowgun_player_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
+  if(newval)
     self thread play_sizzle_player(localclientnum);
-  } else {
+  else
     self notify("end_sizzle");
-  }
 }
 
 play_sizzle_player(localclientnum, upgraded) {
@@ -88,9 +85,8 @@ play_sizzle_player(localclientnum, upgraded) {
   while(isDefined(self) && followed == playerbeingspectated(localclientnum)) {
     sizzle = "player_slowgun_sizzle_1st";
 
-    if(isDefined(level._effect[sizzle])) {
+    if(isDefined(level._effect[sizzle]))
       playviewmodelfx(localclientnum, level._effect[sizzle], "tag_camera");
-    }
 
     wait 0.1;
   }
@@ -113,42 +109,39 @@ slowgun_actor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       tag4 = "tag_origin";
     }
 
-    self playSound(localclientnum, "wpn_paralyzer_dsintegrate");
+    self playsound(localclientnum, "wpn_paralyzer_dsintegrate");
     effect = "zombie_slowgun_explosion";
 
-    if(upgraded) {
+    if(upgraded)
       effect = "zombie_slowgun_explosion_ug";
-    }
 
     if(isDefined(level._effect[effect])) {
       angles = self.angles;
-      forward = anglesToForward(angles);
-      right = anglesToForward(angles);
+      forward = anglestoforward(angles);
+      right = anglestoforward(angles);
       which = randomint(3);
-      playFX(localclientnum, level._effect[effect], self gettagorigin(tag2), -1 * forward);
+      playfx(localclientnum, level._effect[effect], self gettagorigin(tag2), -1 * forward);
 
       switch (which) {
         case 0:
-          playFX(localclientnum, level._effect[effect], self gettagorigin(tag1), forward);
+          playfx(localclientnum, level._effect[effect], self gettagorigin(tag1), forward);
           break;
         case 1:
           back_and_to_the_left = -0.5 * (forward + right);
-          playFX(localclientnum, level._effect[effect], self gettagorigin(tag3), back_and_to_the_left);
+          playfx(localclientnum, level._effect[effect], self gettagorigin(tag3), back_and_to_the_left);
           break;
         default:
-          playFX(localclientnum, level._effect[effect], self gettagorigin(tag4), right);
+          playfx(localclientnum, level._effect[effect], self gettagorigin(tag4), right);
           break;
       }
     }
 
-    if(!is_true(self.isdog)) {
+    if(!is_true(self.isdog))
       wait 0.1;
-    }
   } else if(newval & 1)
     self thread play_sizzle(localclientnum, upgraded);
-  else {
+  else
     self notify("end_sizzle");
-  }
 }
 
 pick_slowgun_sizzle_bone() {
@@ -177,17 +170,14 @@ play_sizzle(localclientnum, upgraded) {
   while(isDefined(self)) {
     sizzle = "zombie_slowgun_sizzle";
 
-    if(upgraded) {
+    if(upgraded)
       sizzle = "zombie_slowgun_sizzle_ug";
-    }
 
-    if(!isDefined(self.slowgun_sizzle_bone) || randomint(4) == 0) {
+    if(!isDefined(self.slowgun_sizzle_bone) || randomint(4) == 0)
       self pick_slowgun_sizzle_bone();
-    }
 
-    if(isDefined(level._effect[sizzle])) {
-      playFXOnTag(localclientnum, level._effect[sizzle], self, self.slowgun_sizzle_bone);
-    }
+    if(isDefined(level._effect[sizzle]))
+      playfxontag(localclientnum, level._effect[sizzle], self, self.slowgun_sizzle_bone);
 
     wait 0.1;
   }
@@ -207,12 +197,11 @@ show_anim_rates() {
   while(true) {
     if(getdvarint(#"_id_61A711C2") == 3) {
       lp = getlocalplayers()[0];
-      ents = getEntArray(0);
+      ents = getentarray(0);
 
       foreach(ent in ents) {
-        if(isDefined(ent) && (ent isplayer() || isDefined(ent._eyearray) && isDefined(ent._eyearray[0])) && ent isalive()) {
+        if(isDefined(ent) && (ent isplayer() || isDefined(ent._eyearray) && isDefined(ent._eyearray[0])) && ent isalive())
           ent show_anim_rate(lp.origin, 360000);
-        }
       }
     }
 

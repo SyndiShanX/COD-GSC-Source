@@ -20,7 +20,7 @@
 #namespace zm_weap_staff_water;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_water", &__init__, undefined, undefined);
+  system::register("zm_weap_staff_water", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,12 +31,12 @@ function __init__() {
   clientfield::register("actor", "anim_rate", 21000, 2, "float");
   clientfield::register("actor", "attach_bullet_model", 21000, 1, "int");
   clientfield::register("actor", "staff_shatter_fx", 21000, 1, "int");
-  callback::on_spawned(&onplayerspawned);
+  callback::on_spawned( & onplayerspawned);
   level flag::init("blizzard_active");
   init_tag_array();
   level thread water_dart_cleanup();
-  zm_spawner::register_zombie_death_event_callback(&staff_water_death_event);
-  zm_spawner::add_custom_zombie_spawn_logic(&staff_water_on_zombie_spawned);
+  zm_spawner::register_zombie_death_event_callback( & staff_water_death_event);
+  zm_spawner::add_custom_zombie_spawn_logic( & staff_water_on_zombie_spawned);
 }
 
 function init_tag_array() {
@@ -51,10 +51,10 @@ function init_tag_array() {
 }
 
 function water_dart_cleanup() {
-  while(true) {
-    a_grenades = getEntArray("grenade", "classname");
+  while (true) {
+    a_grenades = getentarray("grenade", "classname");
     foreach(e_grenade in a_grenades) {
-      if(isDefined(e_grenade.model) && e_grenade.model == "p6_zm_tm_staff_projectile_ice") {
+      if(isdefined(e_grenade.model) && e_grenade.model == "p6_zm_tm_staff_projectile_ice") {
         time = gettime();
         if((time - e_grenade.birthtime) >= 1000) {
           e_grenade delete();
@@ -74,7 +74,7 @@ function onplayerspawned() {
 
 function watch_staff_water_fired() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("missile_fire", e_projectile, str_weapon);
     if(str_weapon.name == "staff_water" || str_weapon.name == "staff_water_upgraded") {
       util::wait_network_frame();
@@ -89,7 +89,7 @@ function watch_staff_water_fired() {
 
 function watch_staff_water_impact() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("projectile_impact", str_weapon, v_explode_point, n_radius, str_name, n_impact);
     if(str_weapon.name == "staff_water_upgraded2" || str_weapon.name == "staff_water_upgraded3") {
       n_lifetime = 6;
@@ -104,36 +104,36 @@ function watch_staff_water_impact() {
 function staff_water_kill_zombie(player, str_weapon) {
   self freeze_zombie();
   self zm_tomb_utility::do_damage_network_safe(player, self.health, str_weapon, "MOD_RIFLE_BULLET");
-  if(isDefined(self.deathanim)) {
+  if(isdefined(self.deathanim)) {
     self waittillmatch("death_anim");
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self thread frozen_zombie_shatter();
   }
   player zm_score::player_add_points("death", "", "");
 }
 
 function freeze_zombie() {
-  if(isDefined(self.is_mechz) && self.is_mechz) {
+  if(isdefined(self.is_mechz) && self.is_mechz) {
     return;
   }
   self.var_93022f09 = 1;
 }
 
 function _network_safe_play_fx(fx, v_origin) {
-  playFX(fx, v_origin, (0, 0, 1), (1, 0, 0));
+  playfx(fx, v_origin, (0, 0, 1), (1, 0, 0));
 }
 
 function network_safe_play_fx(id, max, fx, v_origin) {
   zm_net::network_safe_init(id, max);
-  zm_net::network_choke_action(id, &_network_safe_play_fx, fx, v_origin);
+  zm_net::network_choke_action(id, & _network_safe_play_fx, fx, v_origin);
 }
 
 function frozen_zombie_shatter() {
-  if(isDefined(self.is_mechz) && self.is_mechz) {
+  if(isdefined(self.is_mechz) && self.is_mechz) {
     return;
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     if(1) {
       v_fx = self gettagorigin("J_SpineLower");
       level thread network_safe_play_fx("frozen_shatter", 2, level._effect["staff_water_shatter"], v_fx);
@@ -150,17 +150,17 @@ function frozen_zombie_gib(gib_type) {
   self gib(gib_type, gibarray);
   self ghost();
   wait(0.4);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
 
 function staff_water_position_source(v_detonate, n_lifetime_sec, str_weapon) {
   self endon("disconnect");
-  if(isDefined(v_detonate)) {
+  if(isdefined(v_detonate)) {
     level notify("blizzard_shot");
     e_fx = spawn("script_model", v_detonate + vectorscale((0, 0, 1), 33));
-    e_fx setModel("tag_origin");
+    e_fx setmodel("tag_origin");
     e_fx clientfield::set("staff_blizzard_fx", 1);
     e_fx thread zm_tomb_utility::puzzle_debug_position("X", (0, 64, 255));
     wait(1);
@@ -182,12 +182,12 @@ function staff_water_position_source(v_detonate, n_lifetime_sec, str_weapon) {
 function ice_staff_blizzard_do_kills(player, str_weapon) {
   player endon("disconnect");
   self endon("blizzard_off");
-  while(true) {
+  while (true) {
     a_zombies = getaiarray();
     foreach(zombie in a_zombies) {
-      if(!(isDefined(zombie.is_on_ice) && zombie.is_on_ice)) {
+      if(!(isdefined(zombie.is_on_ice) && zombie.is_on_ice)) {
         if(distancesquared(self.origin, zombie.origin) <= 30625) {
-          if(isDefined(zombie.is_mechz) && zombie.is_mechz) {
+          if(isdefined(zombie.is_mechz) && zombie.is_mechz) {
             zombie thread ice_affect_mechz(player, 1);
             continue;
           }
@@ -238,9 +238,9 @@ function staff_water_zombie_range(v_source, n_range) {
   a_enemies = [];
   a_zombies = getaiarray();
   a_zombies = util::get_array_of_closest(v_source, a_zombies);
-  if(isDefined(a_zombies)) {
-    for(i = 0; i < a_zombies.size; i++) {
-      if(!isDefined(a_zombies[i])) {
+  if(isdefined(a_zombies)) {
+    for (i = 0; i < a_zombies.size; i++) {
+      if(!isdefined(a_zombies[i])) {
         continue;
       }
       v_zombie_pos = a_zombies[i] gettagorigin("j_head");
@@ -250,7 +250,7 @@ function staff_water_zombie_range(v_source, n_range) {
       if(!zm_tomb_utility::bullet_trace_throttled(v_source, v_zombie_pos, undefined)) {
         continue;
       }
-      if(isDefined(a_zombies[i]) && isalive(a_zombies[i])) {
+      if(isdefined(a_zombies[i]) && isalive(a_zombies[i])) {
         a_enemies[a_enemies.size] = a_zombies[i];
       }
     }
@@ -259,11 +259,11 @@ function staff_water_zombie_range(v_source, n_range) {
 }
 
 function is_staff_water_damage(weapon) {
-  return isDefined(weapon) && (weapon.name == "staff_water" || weapon.name == "staff_water_upgraded" || weapon.name == "staff_water_fake_dart_zm") && (!(isDefined(self.set_beacon_damage) && self.set_beacon_damage));
+  return isdefined(weapon) && (weapon.name == "staff_water" || weapon.name == "staff_water_upgraded" || weapon.name == "staff_water_fake_dart_zm") && (!(isdefined(self.set_beacon_damage) && self.set_beacon_damage));
 }
 
 function ice_affect_mechz(e_player, is_upgraded) {
-  if(isDefined(self.is_on_ice) && self.is_on_ice) {
+  if(isdefined(self.is_on_ice) && self.is_on_ice) {
     return;
   }
   self.is_on_ice = 1;
@@ -288,7 +288,7 @@ function ice_affect_zombie(str_weapon = "staff_water", e_player, always_kill = 0
       n_damage = 11275;
     }
   }
-  if(isDefined(self.is_on_ice) && self.is_on_ice) {
+  if(isdefined(self.is_on_ice) && self.is_on_ice) {
     return;
   }
   self.is_on_ice = 1;
@@ -326,7 +326,7 @@ function set_anim_rate(n_speed) {
     self.preserve_asd_substates = 1;
   }
   util::wait_network_frame();
-  if(!(isDefined(self.is_traversing) && self.is_traversing)) {
+  if(!(isdefined(self.is_traversing) && self.is_traversing)) {
     self.needs_run_update = 1;
     self notify("needs_run_update");
   }
@@ -347,7 +347,7 @@ function staff_water_death_event(attacker) {
     self.no_gib = 1;
     self.nodeathragdoll = 1;
     self freeze_zombie();
-    if(isDefined(self.deathanim)) {
+    if(isdefined(self.deathanim)) {
       self waittillmatch("death_anim");
     }
     self thread frozen_zombie_shatter();
@@ -361,7 +361,7 @@ function _icicle_locate_target(str_weapon) {
   a_targets = getaiarray();
   a_targets = util::get_array_of_closest(self.origin, a_targets, undefined, undefined, 600);
   foreach(target in a_targets) {
-    if(isDefined(target.is_on_ice) && target.is_on_ice) {
+    if(isdefined(target.is_on_ice) && target.is_on_ice) {
       continue;
     }
     if(util::within_fov(fire_origin, fire_angles, target gettagorigin("j_spine4"), cos(25))) {
@@ -376,8 +376,8 @@ function _icicle_locate_target(str_weapon) {
         a_tags[6] = "j_clavicle_ri";
         str_tag = a_tags[randomint(a_tags.size)];
         b_trace_pass = zm_tomb_utility::bullet_trace_throttled(fire_origin, target gettagorigin(str_tag), target);
-        if(b_trace_pass && isDefined(target) && isalive(target)) {
-          if(isDefined(target.is_mechz) && target.is_mechz) {
+        if(b_trace_pass && isdefined(target) && isalive(target)) {
+          if(isdefined(target.is_mechz) && target.is_mechz) {
             target thread ice_affect_mechz(self, is_upgraded);
           } else {
             target thread ice_affect_zombie(str_weapon, self);
@@ -402,32 +402,32 @@ function function_de3654ba(is_frozen) {
   }
   if(is_frozen && !issubstr(self.model, "_ice")) {
     self.no_gib = 1;
-    if(!isDefined(self.old_model)) {
+    if(!isdefined(self.old_model)) {
       self.old_model = self.model;
       self.var_f08c601 = self.head;
       self.var_7cff9f25 = self.hatmodel;
     }
-    self setModel(self.old_model + "_ice");
-    if(isDefined(self.var_f08c601) && (!(isDefined(self.head_gibbed) && self.head_gibbed))) {
+    self setmodel(self.old_model + "_ice");
+    if(isdefined(self.var_f08c601) && (!(isdefined(self.head_gibbed) && self.head_gibbed))) {
       self detach(self.head);
       self attach(self.var_f08c601 + "_ice");
       self.head = self.var_f08c601 + "_ice";
     }
-    if(isDefined(self.var_7cff9f25) && (!(isDefined(self.hat_gibbed) && self.hat_gibbed))) {
+    if(isdefined(self.var_7cff9f25) && (!(isdefined(self.hat_gibbed) && self.hat_gibbed))) {
       self detach(self.hatmodel);
       self attach(self.var_7cff9f25 + "_ice");
       self.hatmodel = self.var_7cff9f25 + "_ice";
     }
-  } else if(!is_frozen && isDefined(self.old_model)) {
+  } else if(!is_frozen && isdefined(self.old_model)) {
     self.no_gib = undefined;
-    self setModel(self.old_model);
+    self setmodel(self.old_model);
     self.old_model = undefined;
-    if(isDefined(self.var_f08c601) && (!(isDefined(self.head_gibbed) && self.head_gibbed))) {
+    if(isdefined(self.var_f08c601) && (!(isdefined(self.head_gibbed) && self.head_gibbed))) {
       self detach(self.head);
       self attach(self.var_f08c601);
       self.var_f08c601 = undefined;
     }
-    if(isDefined(self.var_7cff9f25) && (!(isDefined(self.hat_gibbed) && self.hat_gibbed))) {
+    if(isdefined(self.var_7cff9f25) && (!(isdefined(self.hat_gibbed) && self.hat_gibbed))) {
       self detach(self.hatmodel);
       self attach(self.var_7cff9f25);
       self.var_7cff9f25 = undefined;

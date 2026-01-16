@@ -4,7 +4,7 @@
 *****************************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("launcher_qte", &"FLOOD_LAUNCHER_MELEE", ::mlrs_stop_qte_hint);
+  maps\_utility::add_hint_string("launcher_qte", & "FLOOD_LAUNCHER_MELEE", ::mlrs_stop_qte_hint);
 }
 
 section_precache() {
@@ -32,9 +32,8 @@ section_flag_inits() {
   common_scripts\utility::flag_init("level_faded_to_black");
   common_scripts\utility::flag_init("end_of_dam");
 
-  if(!common_scripts\utility::flag_exist("player_on_ladder")) {
+  if(!common_scripts\utility::flag_exist("player_on_ladder"))
     common_scripts\utility::flag_init("player_on_ladder");
-  }
 
   common_scripts\utility::flag_init("streets_to_dam_enemies_dead");
   common_scripts\utility::flag_init("streets_to_dam_enemies_ALMOST_dead");
@@ -69,9 +68,8 @@ section_flag_inits() {
   common_scripts\utility::flag_init("player_looking_away");
   common_scripts\utility::flag_init("launcher_objective_given");
 
-  if(!common_scripts\utility::flag_exist("launcher_2_objective_given")) {
+  if(!common_scripts\utility::flag_exist("launcher_2_objective_given"))
     common_scripts\utility::flag_init("launcher_2_objective_given");
-  }
 }
 
 test_tracer_fire(var_0, var_1, var_2) {
@@ -139,9 +137,8 @@ draw_turret_target_line() {
   for(;;) {
     var_0 = self getturrettarget(0);
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       thread common_scripts\utility::draw_line_for_time(self.origin, var_0.origin, 1, 0, 0, 0.1);
-    }
 
     wait 0.1;
   }
@@ -165,18 +162,16 @@ destroy_planter(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.targetname) && var_3.targetname == "planter_trigger") {
+    if(isDefined(var_3.targetname) && var_3.targetname == "planter_trigger")
       var_3 notify("trigger");
-    }
   }
 }
 
 destroy_corner() {
   var_0 = getEntArray("corner_exploder_trigger", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 notify("trigger");
-  }
+  foreach(var_2 in var_0)
+  var_2 notify("trigger");
 }
 
 kill_ally_in_volume(var_0) {
@@ -185,9 +180,8 @@ kill_ally_in_volume(var_0) {
   foreach(var_3 in var_1) {
     if(var_3 istouching(var_0)) {
       if(!maps\_utility::is_in_array(level.allies, var_3)) {
-        if(isDefined(var_3.magic_bullet_shield) && var_3.magic_bullet_shield) {
+        if(isDefined(var_3.magic_bullet_shield) && var_3.magic_bullet_shield)
           var_3 maps\_utility::stop_magic_bullet_shield();
-        }
 
         var_3 kill();
       }
@@ -215,13 +209,11 @@ converge_on_target(var_0, var_1, var_2) {
   for(;;) {
     var_3 = distance2d(var_1.origin, var_0.origin);
 
-    if(var_3 < 0) {
+    if(var_3 < 0)
       var_3 = abs(var_3);
-    }
 
-    if(var_3 == 0) {
+    if(var_3 == 0)
       var_3 = 1;
-    }
 
     var_4 = var_3 / var_2;
     var_0 moveto(var_1.origin + (0, 0, 16), var_4);
@@ -312,36 +304,32 @@ fire_at_target(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_22 = (var_19, var_20, var_21);
 
     if(isDefined(var_3)) {
-      if(!isarray(var_3)) {
+      if(!isarray(var_3))
         var_3 = maps\_utility::make_array(var_3);
-      }
 
       var_23 = bulletTrace(var_16, var_22, 1);
       var_24 = var_23["entity"];
 
       if(isDefined(var_24)) {
         for(var_15 = 0; var_15 < var_3.size; var_15++) {
-          if(var_24 == var_3[var_15]) {
+          if(var_24 == var_3[var_15])
             var_18 = 1;
-          }
         }
 
-        if(var_18) {
+        if(var_18)
           continue;
-        }
       }
     }
 
     if(var_18) {}
 
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       magicbullet(var_4, var_16, var_22);
-    } else {
+    else {
       var_25 = level.player getcurrentweapon();
 
-      if(isDefined(var_25) && var_25 != "none") {
+      if(isDefined(var_25) && var_25 != "none")
         magicbullet(var_25, var_16, var_22);
-      }
     }
 
     wait(randomfloatrange(var_8, var_9));
@@ -380,36 +368,32 @@ turret_fire_at_target(var_0, var_1, var_2, var_3, var_4) {
     var_21 = (var_18, var_19, var_20);
 
     if(isDefined(var_3)) {
-      if(!isarray(var_3)) {
+      if(!isarray(var_3))
         var_3 = maps\_utility::make_array(var_3);
-      }
 
       var_22 = bulletTrace(var_15, var_21, 1);
       var_23 = var_22["entity"];
 
       if(isDefined(var_23)) {
         for(var_14 = 0; var_14 < var_3.size; var_14++) {
-          if(var_23 == var_3[var_14]) {
+          if(var_23 == var_3[var_14])
             var_17 = 1;
-          }
         }
 
-        if(var_17) {
+        if(var_17)
           continue;
-        }
       }
     }
 
     if(var_17) {}
 
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       magicbullet(var_4, var_15, var_21);
-    } else {
+    else {
       var_24 = level.player getcurrentweapon();
 
-      if(isDefined(var_24) && var_24 != "none") {
+      if(isDefined(var_24) && var_24 != "none")
         magicbullet(var_24, var_15, var_21);
-      }
     }
 
     wait(randomfloatrange(var_7, var_8));
@@ -476,9 +460,8 @@ enter_garage() {
   level endon("firing_garage_shot");
   var_0 = getent("into_parking_garage", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 waittill("trigger");
-  }
 
   if(isDefined(level.enemy_tank_3)) {
     level.enemy_tank_3 notify("stop_firing");
@@ -488,9 +471,8 @@ enter_garage() {
     level.enemy_tank_3 setturrettargetvec(var_1.origin);
     var_0 = getent("parking_garage_doorway", "targetname");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_0 waittill("trigger");
-    }
 
     wait 0.5;
     level thread turret_too_slow_failsafe();
@@ -513,9 +495,8 @@ turret_too_slow_failsafe() {
   level endon("firing_garage_shot");
   var_0 = getent("player_far_enough_in_garage", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 waittill("trigger");
-  }
 
   level.enemy_tank_3 fireweapon();
   level.enemy_tank_3 notify("stop_firing");
@@ -525,9 +506,8 @@ turret_too_slow_failsafe() {
 garage_opening_collapse() {
   level waittill("firing_garage_shot");
 
-  if(isDefined(level.enemy_tank_3)) {
+  if(isDefined(level.enemy_tank_3))
     level.enemy_tank_3 playSound("flood_t90_sweetener");
-  }
 
   wait 0.5;
   thread teleport_allies_on_flag();
@@ -639,9 +619,9 @@ find_teleport_spot_for_ally(var_0, var_1) {
 
     if(isDefined(var_2)) {
       if(distance2d(level.player.origin, var_2.origin) > 32) {
-        if(!maps\_utility::player_looking_at(var_2.origin + (0, 0, 16), 0.5, 1)) {
+        if(!maps\_utility::player_looking_at(var_2.origin + (0, 0, 16), 0.5, 1))
           return var_1;
-        } else {}
+        else {}
       } else {}
     } else {}
 
@@ -663,9 +643,8 @@ make_player_look_away(var_0, var_1, var_2, var_3) {
   var_5 = 0;
 
   foreach(var_7 in var_4) {
-    if(maps\_utility::player_looking_at(var_7.origin)) {
+    if(maps\_utility::player_looking_at(var_7.origin))
       var_5 = 1;
-    }
   }
 
   if(var_3 || var_5) {
@@ -699,9 +678,8 @@ hide_garage_debris() {
   wait 1.0;
   var_2 = getnodearray("garage_opening_path_node", "targetname");
 
-  for(var_1 = 0; var_1 < var_2.size; var_1++) {
+  for(var_1 = 0; var_1 < var_2.size; var_1++)
     var_2[var_1] connectnode();
-  }
 }
 
 show_garage_debris() {
@@ -710,9 +688,8 @@ show_garage_debris() {
   var_1 = getEntArray("garage_debris_origin", "targetname");
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(level.player istouching(var_0[var_2])) {
+    if(level.player istouching(var_0[var_2]))
       var_0[var_2] maps\flood_anim::push_player_out_of_brush((0, 40, 0));
-    }
 
     var_0[var_2] show();
     var_0[var_2] solid();
@@ -723,9 +700,8 @@ adjust_ally_movement() {
   level.allies[1] maps\_utility::set_force_color("p");
   level.allies[2] maps\_utility::set_force_color("r");
 
-  foreach(var_1 in level.allies) {
-    var_1 ignore_everything(0.0);
-  }
+  foreach(var_1 in level.allies)
+  var_1 ignore_everything(0.0);
 
   common_scripts\utility::flag_wait("everyone_in_garage");
   level thread set_flag_when_player_ready_to_progress("player_ready_to_progress");
@@ -737,9 +713,8 @@ adjust_ally_movement() {
   for(var_5 = 2; var_5 > 0; var_5--) {
     if(level.allies[var_5] istouching(var_4)) {
       if(isDefined(var_3)) {
-        if(level.allies[var_5].origin[0] < var_3.origin[0]) {
+        if(level.allies[var_5].origin[0] < var_3.origin[0])
           var_3 = level.allies[var_5];
-        }
 
         continue;
       }
@@ -779,15 +754,13 @@ adjust_ally_movement() {
   level thread turn_off_cqb_if_player_too_far_forward();
   wait 5;
 
-  for(var_5 = 0; var_5 < level.allies.size; var_5++) {
+  for(var_5 = 0; var_5 < level.allies.size; var_5++)
     level.allies[var_5] pushplayer(0);
-  }
 
   var_10 = getent("baker_hold_up", "targetname");
 
-  if(isDefined(var_10)) {
+  if(isDefined(var_10))
     var_10 waittill("trigger");
-  }
 
   level notify("stop_distance_check");
 
@@ -804,9 +777,8 @@ adjust_ally_movement() {
 send_ally_to_garage_node(var_0, var_1) {
   var_2 = getnode(var_0, "targetname");
 
-  if(self.origin[0] < var_2.origin[0]) {
+  if(self.origin[0] < var_2.origin[0])
     var_2 = getnode(var_1, "targetname");
-  }
 
   thread maps\_utility::follow_path(var_2, 650);
 }
@@ -814,9 +786,8 @@ send_ally_to_garage_node(var_0, var_1) {
 set_flag_when_player_ready_to_progress(var_0) {
   var_1 = getent("player_far_enough_in_garage", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 waittill("trigger");
-  }
 
   common_scripts\utility::flag_set(var_0);
 }
@@ -851,9 +822,8 @@ turn_off_cqb_if_player_too_far_forward(var_0) {
   level endon("stop_distance_check");
   var_1 = getent("streets_to_dam_autosave", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 waittill("trigger");
-  }
 
   var_2 = getent("garage_hallway_position_check", "targetname");
   var_3 = 1;
@@ -866,17 +836,15 @@ turn_off_cqb_if_player_too_far_forward(var_0) {
     foreach(var_6 in level.allies) {
       var_7 = distance2d(var_6.origin, var_2.origin);
 
-      if(var_7 < var_4) {
+      if(var_7 < var_4)
         var_3 = 1;
-      }
     }
 
     wait 0.1;
   }
 
-  foreach(var_6 in level.allies) {
-    var_6 maps\_utility::disable_cqbwalk();
-  }
+  foreach(var_6 in level.allies)
+  var_6 maps\_utility::disable_cqbwalk();
 }
 
 play_baker_anim(var_0) {
@@ -900,9 +868,8 @@ setup_allies_streets_to_dam() {
   wait 0.5;
   var_0 = level.allies;
 
-  foreach(var_2 in var_0) {
-    var_2 ally_think_streets_to_dam();
-  }
+  foreach(var_2 in var_0)
+  var_2 ally_think_streets_to_dam();
 }
 
 ally_think_streets_to_dam() {
@@ -930,9 +897,8 @@ convoy_think() {
 convoy_spawn_logic() {
   var_0 = getEntArray("enemy_convoy_vehicles", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 maps\_utility::add_spawn_function(::convoy_spawn_func);
-  }
+  foreach(var_2 in var_0)
+  var_2 maps\_utility::add_spawn_function(::convoy_spawn_func);
 
   var_4 = [1, 2, 0, 1, 2, 1, 0];
   var_5 = 0;
@@ -944,9 +910,8 @@ convoy_spawn_logic() {
     var_7 vehicle_turnengineoff();
     var_5++;
 
-    if(var_5 >= var_4.size) {
+    if(var_5 >= var_4.size)
       var_5 = 0;
-    }
 
     var_8 = getvehiclenode("convoy_next_node_1", "targetname");
     var_9 = getvehiclenode("convoy_next_node_2", "targetname");
@@ -983,9 +948,8 @@ convoy_spawn_func() {
   self vehicle_setspeed(25, 25, 25);
 
   if(self.vehicletype != "iveco_lynx") {
-    while(!self.riders.size) {
+    while(!self.riders.size)
       wait 0.1;
-    }
 
     var_1 = self.riders.size;
     wait 0.2;
@@ -1028,9 +992,8 @@ launcher_spawn_func() {
   wait 2.0;
   self vehicle_setspeed(25, 2, 2);
 
-  while(level.first_launcher.origin[1] < -10000) {
+  while(level.first_launcher.origin[1] < -10000)
     common_scripts\utility::waitframe();
-  }
 
   level.first_launcher thread maps\_vehicle::vehicle_stop_named("m880_crashed", 25, 25);
   level.launcher_lynx thread m880_crash_kill_player_in_lynx_volume();
@@ -1061,14 +1024,13 @@ m880_crash_kill_in_volume() {
   if(level.player istouching(var_1)) {
     level.player kill();
     wait 0.1;
-    setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+    setdvar("ui_deadquote", & "FLOOD_FAIL_VEHICLE_CRUSH");
     level thread maps\_utility::missionfailedwrapper();
   }
 
   foreach(var_3 in var_0) {
-    if(var_3 istouching(var_1)) {
+    if(var_3 istouching(var_1))
       var_3 kill();
-    }
   }
 }
 
@@ -1097,7 +1059,7 @@ wait_then_check_if_player_touching_kill(var_0, var_1) {
     if(level.player istouching(self)) {
       level.player kill();
       wait 0.1;
-      setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+      setdvar("ui_deadquote", & "FLOOD_FAIL_VEHICLE_CRUSH");
       level thread maps\_utility::missionfailedwrapper();
     }
 
@@ -1108,15 +1070,13 @@ wait_then_check_if_player_touching_kill(var_0, var_1) {
 connect_nodes_after_crash() {
   var_0 = getnodearray("connect_after_crash", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 connectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 connectnode();
 
   var_0 = getnodearray("disconnect_after_crash", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 disconnectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 disconnectnode();
 }
 
 launcher_lynx_spawn_func() {
@@ -1134,7 +1094,7 @@ convoy_kill_player() {
   var_0 waittill("trigger");
   level.player kill();
   wait 0.1;
-  setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+  setdvar("ui_deadquote", & "FLOOD_FAIL_VEHICLE_CRUSH");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -1189,9 +1149,8 @@ convoy_riders_react_func(var_0) {
 check_if_player_close_to_checkpoint() {
   var_0 = getent("close_to_checkpoint", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 waittill("trigger");
-  }
 
   common_scripts\utility::flag_set("close_to_checkpoint");
 }
@@ -1206,9 +1165,8 @@ convoy_spacing_func(var_0, var_1, var_2) {
       var_6 = randomintrange(1, 3);
       var_7 = var_5 + var_6;
 
-      if(var_7 > var_4) {
+      if(var_7 > var_4)
         var_7 = var_4;
-      }
 
       level.convoy[var_0] vehicle_setspeed(var_7, 10, 10);
     }
@@ -1218,9 +1176,8 @@ convoy_spacing_func(var_0, var_1, var_2) {
       var_6 = randomintrange(1, 3);
       var_7 = var_5 - var_6;
 
-      if(var_7 < var_3) {
+      if(var_7 < var_3)
         var_7 = var_3;
-      }
 
       level.convoy[var_0] vehicle_setspeed(var_7, 10, 10);
     }
@@ -1231,13 +1188,11 @@ rotate_checkpoint_gate_when_near_m880(var_0) {
   var_1 = getent("checkpoint_gate", "targetname");
   var_2 = (0, 0, -15);
 
-  while(!isDefined(level.first_launcher)) {
+  while(!isDefined(level.first_launcher))
     wait 0.1;
-  }
 
-  while(distance2d(level.first_launcher.origin, var_1.origin) > var_0) {
+  while(distance2d(level.first_launcher.origin, var_1.origin) > var_0)
     wait 0.1;
-  }
 
   var_1 rotateto(var_2, 0.25);
 }
@@ -1250,21 +1205,18 @@ rotate_checkpoint_concrete_barrier_when_near_m880(var_0) {
   var_3 = var_2.angles;
   var_4 = var_2.origin;
 
-  while(!isDefined(level.first_launcher)) {
+  while(!isDefined(level.first_launcher))
     wait 0.1;
-  }
 
-  while(distance2d(level.first_launcher.origin, var_1.origin) > var_0) {
+  while(distance2d(level.first_launcher.origin, var_1.origin) > var_0)
     wait 0.1;
-  }
 
   var_1 rotateto(var_3, 0.15);
   var_1 moveto(var_4, 0.15);
   var_5 = getEntArray("checkpoint_concrete_barrier_1_clip", "targetname");
 
-  foreach(var_7 in var_5) {
-    var_7 delete();
-  }
+  foreach(var_7 in var_5)
+  var_7 delete();
 
   level waittill("player_failed_stab");
   var_1 hide();
@@ -1303,9 +1255,8 @@ streets_to_dam_wave_1_init() {
 
   var_3 = getent("spawn_scaffold_guys_trigger", "targetname");
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 notify("trigger");
-  }
 
   level thread start_combat_after_seeing_launcher();
   level thread enemy_checkpoint_dialogue();
@@ -1326,9 +1277,8 @@ streets_to_dam_wave_1_init() {
     level.player.ignoreme = 1;
     var_1 = getaiarray("axis");
 
-    foreach(var_5 in var_1) {
-      var_5 maps\_utility::delaythread(randomfloatrange(0.1, 1.0), ::clear_ignore_everything);
-    }
+    foreach(var_5 in var_1)
+    var_5 maps\_utility::delaythread(randomfloatrange(0.1, 1.0), ::clear_ignore_everything);
 
     level thread checkpoint_enemies_run_for_cover();
     wait 3.0;
@@ -1340,9 +1290,8 @@ streets_to_dam_wave_1_init() {
   var_2 = getaiarray("allies");
   common_scripts\utility::array_thread(var_2, ::clear_ignore_everything);
 
-  foreach(var_5 in var_2) {
-    var_5.ignoreme = 0;
-  }
+  foreach(var_5 in var_2)
+  var_5.ignoreme = 0;
 
   level.player.ignoreme = 0;
   var_9 = maps\_utility::get_ai_group_ai("rpg_guys");
@@ -1359,21 +1308,18 @@ streets_to_dam_wave_1_init() {
 
   wait 0.5;
 
-  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 4) {
+  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 4)
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("streets_to_dam_enemies_ALMOST_dead");
   wait 2;
   var_14 = getent("streets_to_dam_garage_exit", "targetname");
 
-  if(isDefined(var_14)) {
+  if(isDefined(var_14))
     var_14 notify("trigger");
-  }
 
-  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 1) {
+  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 1)
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("streets_to_dam_enemies_last_guy");
   maps\_utility::waittill_aigroupcleared("streets_to_dam_wave_1");
@@ -1418,18 +1364,16 @@ checkpoint_enemies_run_for_cover() {
 }
 
 checkpoint_rpg_enemies_fire_at_heli() {
-  for(var_0 = maps\_utility::get_ai_group_ai("rpg_guys"); var_0.size < 2; var_0 = maps\_utility::get_ai_group_ai("rpg_guys")) {
+  for(var_0 = maps\_utility::get_ai_group_ai("rpg_guys"); var_0.size < 2; var_0 = maps\_utility::get_ai_group_ai("rpg_guys"))
     wait 0.1;
-  }
 
   var_1 = getent("streets_to_dam_rpg_target_1", "targetname");
   var_0 = common_scripts\utility::get_array_of_closest(var_1.origin, var_0);
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(isDefined(var_0[var_2])) {
-      if(var_2 != 0) {
+      if(var_2 != 0)
         var_1 = getent("streets_to_dam_rpg_target_2", "targetname");
-      }
 
       var_0[var_2] thread rpg_guy_wait_and_fire_at_target(var_1);
     }
@@ -1444,9 +1388,8 @@ rpg_guy_wait_and_fire_at_target(var_0) {
     self setentitytarget(var_0);
     thread ignore_everything();
 
-    while(level.heli_turret.origin[1] < var_0.origin[1]) {
+    while(level.heli_turret.origin[1] < var_0.origin[1])
       wait 0.1;
-    }
 
     self.dontevershoot = undefined;
     wait 2.0;
@@ -1479,9 +1422,8 @@ set_up_vignette_enemies() {
   wait 1.0;
   common_scripts\utility::flag_wait("vignette_convoy_checkpoint_flag");
 
-  if(!common_scripts\utility::flag("enemy_alerted")) {
+  if(!common_scripts\utility::flag("enemy_alerted"))
     maps\flood_anim::convoy_checkpoint(var_2[0], var_2[1], var_2[2], var_2[3]);
-  }
 }
 
 delete_on_flag(var_0) {
@@ -1494,17 +1436,14 @@ streets_to_dam_wave_1_vignette_spawn_func() {
   self endon("death");
 
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "enemy_13") {
+    if(self.script_noteworthy == "enemy_13")
       level.enemy_13 = self;
-    }
 
-    if(self.script_noteworthy == "enemy_14") {
+    if(self.script_noteworthy == "enemy_14")
       level.enemy_14 = self;
-    }
 
-    if(self.script_noteworthy == "enemy_15") {
+    if(self.script_noteworthy == "enemy_15")
       level.enemy_15 = self;
-    }
   }
 
   thread set_flag_if_damaged();
@@ -1555,23 +1494,19 @@ allies_convoy_dialogue() {
 }
 
 enemy_checkpoint_dialogue() {
-  while(!isDefined(level.enemy_13)) {
+  while(!isDefined(level.enemy_13))
     wait 0.1;
-  }
 
-  while(!isDefined(level.enemy_14)) {
+  while(!isDefined(level.enemy_14))
     wait 0.1;
-  }
 
-  while(!isDefined(level.enemy_15)) {
+  while(!isDefined(level.enemy_15))
     wait 0.1;
-  }
 }
 
 enemy_dialogue(var_0) {
-  if(!common_scripts\utility::flag("enemy_alerted")) {
+  if(!common_scripts\utility::flag("enemy_alerted"))
     maps\_utility::smart_dialogue(var_0);
-  }
 }
 
 heli_strafing_run() {
@@ -1658,9 +1593,8 @@ add_turret_to_heli(var_0) {
   var_5 setturretteam("allies");
   var_5 hide();
 
-  while(isDefined(self)) {
+  while(isDefined(self))
     wait 1.0;
-  }
 
   var_5 delete();
 }
@@ -1733,9 +1667,8 @@ watch_player_for_trigger() {
 watch_enemy_for_damage() {
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0) {
-    var_2 thread set_flag_if_damaged();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread set_flag_if_damaged();
 }
 
 set_flag_if_damaged() {
@@ -1754,17 +1687,15 @@ waitill_damage_or_death() {
   self endon("damage");
   self endon("death");
 
-  for(;;) {
+  for(;;)
     wait 0.1;
-  }
 }
 
 swap_nodes_init() {
   var_0 = getEntArray("swap_node_trigger", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread swap_nodes();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread swap_nodes();
 }
 
 swap_nodes() {
@@ -1795,38 +1726,33 @@ trigger_named_and_turn_off_prior(var_0, var_1) {
       if(var_0[var_3] == var_1) {
         var_4 = getent(var_0[var_3], "targetname");
 
-        if(isDefined(var_4)) {
+        if(isDefined(var_4))
           var_4 notify("trigger");
-        }
 
         var_2 = 0;
       }
 
       var_4 = getent(var_0[var_3], "targetname");
 
-      if(isDefined(var_4)) {
+      if(isDefined(var_4))
         var_4 common_scripts\utility::trigger_off();
-      }
     }
   }
 }
 
 set_flag_when_launcher_in_right_spot() {
-  while(!isDefined(level.first_launcher)) {
+  while(!isDefined(level.first_launcher))
     wait 0.1;
-  }
 
-  while(level.first_launcher.origin[1] < -10500) {
+  while(level.first_launcher.origin[1] < -10500)
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("start_heli_attack");
 }
 
 convoy_check() {
-  while(!isDefined(level.first_launcher)) {
+  while(!isDefined(level.first_launcher))
     wait 0.1;
-  }
 
   var_0 = level.first_launcher;
   var_1 = -8200;
@@ -1842,16 +1768,15 @@ convoy_check() {
         var_0 = var_3;
     }
 
-    if(var_0.origin[1] > var_1) {
+    if(var_0.origin[1] > var_1)
       var_2 = 0;
-    }
 
     if(level.player.origin[1] > var_0.origin[1] - 190) {
       if(level.player.origin[0] > var_0.origin[0] - 100 && level.player.origin[0] < var_0.origin[0] + 100) {
         wait 0.2;
         level.player kill();
         wait 0.1;
-        setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+        setdvar("ui_deadquote", & "FLOOD_FAIL_VEHICLE_CRUSH");
         level thread maps\_utility::missionfailedwrapper();
       }
     }
@@ -1865,31 +1790,27 @@ convoy_check() {
 disable_combat_nodes() {
   var_0 = getnodearray("nodes_to_disconnect", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 disconnectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 disconnectnode();
 
   common_scripts\utility::flag_wait("enemy_alerted");
   var_0 = getnodearray("nodes_to_disconnect", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 connectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 connectnode();
 }
 
 disable_ally_nag_nodes() {
   var_0 = getnodearray("nodes_to_disconnect_ally", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 disconnectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 disconnectnode();
 
   common_scripts\utility::flag_wait_either("player_on_ladder", "streets_to_dam_enemies_dead");
   var_0 = getnodearray("nodes_to_disconnect_ally", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 connectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 connectnode();
 }
 
 spawn_rpg_guys() {
@@ -1918,11 +1839,10 @@ streets_to_dam_wave_1_rpg_spawn_func() {
   clear_ignore_everything();
   self.ignoresuppression = 1;
 
-  if(self.script_noteworthy == "rpg_guy_1") {
+  if(self.script_noteworthy == "rpg_guy_1")
     var_0 = getnode("rpg_node_1", "targetname");
-  } else {
+  else
     var_0 = getnode("rpg_node_2", "targetname");
-  }
 
   var_1 = self.goalradius;
   self.goalradius = var_0.radius;
@@ -1936,9 +1856,8 @@ streets_to_dam_wave_1_rpg_spawn_func() {
 remove_rpgs_on_death() {
   self waittill("death");
 
-  if(isDefined(self.weapon)) {
+  if(isDefined(self.weapon))
     maps\_utility::gun_remove();
-  }
 }
 
 streets_to_dam_wave_1_street_patrol_spawn_func() {
@@ -1947,18 +1866,16 @@ streets_to_dam_wave_1_street_patrol_spawn_func() {
   common_scripts\utility::flag_wait("enemy_alerted");
   self notify("stop_going_to_node");
 
-  if(common_scripts\utility::flag("convoy_gone")) {
+  if(common_scripts\utility::flag("convoy_gone"))
     var_0 = getent("enemies_left_goal_volume", "targetname");
-  } else {
+  else
     var_0 = getent("enemies_convoy_goal_volume", "targetname");
-  }
 
   self setgoalvolumeauto(var_0);
   self.grenadeammo = randomint(1);
 
-  while(!common_scripts\utility::flag("convoy_gone")) {
+  while(!common_scripts\utility::flag("convoy_gone"))
     wait 0.1;
-  }
 
   var_0 = getent("enemies_left_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
@@ -1983,9 +1900,8 @@ spawn_scaffold_guys() {
 scaffold_test_2() {
   wait 0.5;
 
-  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 1) {
+  while(maps\_utility::get_ai_group_sentient_count("streets_to_dam_wave_1") + maps\_utility::get_ai_group_sentient_count("rpg_guys") > 1)
     wait 0.1;
-  }
 
   level notify("spawn_scaffold_guys");
 }
@@ -2004,18 +1920,16 @@ streets_to_dam_wave_1_spawn_func() {
   self setgoalvolumeauto(var_0);
   wait 2.0;
 
-  if(common_scripts\utility::flag("convoy_gone")) {
+  if(common_scripts\utility::flag("convoy_gone"))
     var_0 = getent("enemies_left_goal_volume", "targetname");
-  } else {
+  else
     var_0 = getent("enemies_convoy_goal_volume", "targetname");
-  }
 
   self setgoalvolumeauto(var_0);
   self.grenadeammo = randomint(1);
 
-  while(!common_scripts\utility::flag("convoy_gone")) {
+  while(!common_scripts\utility::flag("convoy_gone"))
     wait 0.1;
-  }
 
   var_0 = getent("enemies_left_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
@@ -2037,37 +1951,32 @@ streets_to_dam_drive_missile_launcher() {
   level.first_launcher stopanimscripted();
   missile_launcher_destruction_vignette();
 
-  if(level.stabbed) {
+  if(level.stabbed)
     wait 1.0;
-  }
 }
 
 m880_open_path_init() {
   var_0 = getEntArray("m880_show_to_open_path", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 }
 
 m880_open_path() {
   var_0 = getEntArray("m880_delete_to_open_path", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
   var_0 = getEntArray("m880_collision_brush", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
   var_0 = getEntArray("m880_show_to_open_path", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 show();
-  }
+  foreach(var_2 in var_0)
+  var_2 show();
 }
 
 m880_connect_path_nodes(var_0) {
@@ -2090,9 +1999,8 @@ missile_launcher_vo() {
     wait 3.0;
   }
 
-  if(!common_scripts\utility::flag("player_on_ladder")) {
+  if(!common_scripts\utility::flag("player_on_ladder"))
     level.allies[0] maps\_utility::smart_dialogue("flood_bkr_getinposition");
-  }
 }
 
 missile_launcher_destruction_vignette() {
@@ -2126,9 +2034,8 @@ missile_launcher_destruction_vignette_allies() {
   wait 0.5;
   var_1 = getent("streets_to_dam_wave_2_start", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 notify("trigger");
-  }
 }
 
 mlrs_kill1_spawn() {
@@ -2156,17 +2063,15 @@ mlrs_kill1_start(var_0, var_1) {
   if(level.player getstance() == "prone") {
     level.player setstance("crouch");
 
-    while(level.player getstance() != "crouch") {
+    while(level.player getstance() != "crouch")
       common_scripts\utility::waitframe();
-    }
   }
 
   if(level.player getstance() == "crouch") {
     level.player setstance("stand");
 
-    while(level.player getstance() != "stand") {
+    while(level.player getstance() != "stand")
       common_scripts\utility::waitframe();
-    }
   }
 
   level.player allowprone(0);
@@ -2216,7 +2121,7 @@ mlrs_kill1_start(var_0, var_1) {
     level.convoy_tall_barricade_02 hide();
     setslowmotion(0.25, 1.0, 0.25);
     wait 1.0;
-    setdvar("ui_deadquote", &"FLOOD_LAUNCHER_QTE_FAIL");
+    setdvar("ui_deadquote", & "FLOOD_LAUNCHER_QTE_FAIL");
     level thread maps\_utility::missionfailedwrapper();
   } else {
     mlrs_kill1_end_spawn(var_2, var_6, var_0, var_1, var_3, var_4, level.m880_radiation_gate);
@@ -2331,13 +2236,11 @@ mlrs_kill1_end(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   thread play_mlrs_m880_end(var_0, var_2);
   var_0 maps\_anim::anim_single(var_9, "mlrs_kill1_end");
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_4 delete();
-  }
 
-  if(isDefined(var_8)) {
+  if(isDefined(var_8))
     var_8 delete();
-  }
 }
 
 play_mlrs_m880_end(var_0, var_1) {
@@ -2382,17 +2285,15 @@ mlrs_start_qte(var_0) {
 }
 
 mlrs_stop_qte_hint() {
-  if(common_scripts\utility::flag("qte_window_closed")) {
+  if(common_scripts\utility::flag("qte_window_closed"))
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 ladder_spot_glow() {
-  while(!isDefined(level.first_launcher)) {
+  while(!isDefined(level.first_launcher))
     wait 0.1;
-  }
 
   common_scripts\utility::flag_wait("missile_launcher_in_place");
   var_0 = "vehicle_m880_launcher_obj";
@@ -2411,9 +2312,8 @@ wait_for_player_to_use_ladder() {
   common_scripts\utility::flag_wait("missile_launcher_in_place");
   var_0 = getent("streets_to_dam_garage_exit", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 common_scripts\utility::trigger_off();
-  }
 
   level thread end_of_combat_autosave();
   var_0 = getent("player_climb_ladder_trigger_no_use", "targetname");
@@ -2444,9 +2344,8 @@ block_garage_exit() {
   var_1 = getent("streets_to_dam_end_combat_autosave", "targetname");
   var_1 waittill("trigger");
 
-  while(level.player istouching(var_0)) {
+  while(level.player istouching(var_0))
     wait 0.1;
-  }
 
   var_0 show();
   var_0 solid();
@@ -2489,17 +2388,15 @@ make_allies_shoot_at_targets() {
     level.allies[0] setgoalnode(var_1);
     var_0 = getent("streets_to_dam_garage_exit", "targetname");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       wait 2.0;
-    }
 
     var_1 = getnode("streets_to_dam_ally_1_node", "targetname");
     level.allies[1] thread play_ally_launcher_vignette_wrapper("launcher_callout_ally02", var_1, maps\flood_anim::launcher_callout_ally02, "player_on_ladder", (0, 0, 0));
     var_0 = getent("streets_to_dam_garage_exit", "targetname");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       wait 2.0;
-    }
 
     var_1 = getnode("streets_to_dam_ally_2_node", "targetname");
     level.allies[2] thread play_ally_launcher_vignette_wrapper("launcher_callout_ally03", var_1, maps\flood_anim::launcher_callout_ally03, "player_on_ladder", (0, 225, 0));
@@ -2519,9 +2416,8 @@ play_ally_launcher_vignette_wrapper(var_0, var_1, var_2, var_3, var_4) {
   play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4);
   self stopanimscripted();
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     self.animname = var_5;
-  }
 
   self.goalradius = var_6;
 }
@@ -2539,7 +2435,9 @@ play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4) {
       wait(randomfloatrange(0.2, 1.0));
 
       if(isDefined(var_4)) {
-        [[var_2]](self, var_1.origin, var_4);
+        [
+          [var_2]
+        ](self, var_1.origin, var_4);
         continue;
       }
 
@@ -2554,21 +2452,18 @@ hide_unhide_crashed_convoy(var_0) {
   if(var_0) {
     var_1 = getent("crashed_truck", "targetname");
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 hide();
-    }
 
     var_1 = getent("crashed_tank", "targetname");
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 delete();
-    }
 
     var_1 = getent("crashed_m880", "targetname");
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 delete();
-    }
 
     common_scripts\utility::flag_wait("player_on_ladder");
   }
@@ -2597,9 +2492,8 @@ dialogue_streets_to_dam() {
   common_scripts\utility::flag_set("spawn_m880");
   common_scripts\utility::flag_wait("m880_has_spawned");
 
-  if(common_scripts\utility::flag("enemy_alerted")) {
+  if(common_scripts\utility::flag("enemy_alerted"))
     maps\_utility::battlechatter_on("allies");
-  }
 
   wait 6;
   maps\_utility::smart_radio_dialogue("flood_hlx_goinghot");
@@ -2675,17 +2569,15 @@ nag_player_in_garage() {
 streets_nag_end_on_notify(var_0, var_1, var_2) {
   wait 3.0;
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     level.allies[0] thread maps\flood_util::play_nag(var_0, var_1, 8, 30, 1, 1.5, "flag_set");
-  }
 }
 
 init_turn_off_lean_volumes() {
   var_0 = getEntArray("turn_off_lean", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 turn_off_lean();
-  }
+  foreach(var_2 in var_0)
+  var_2 turn_off_lean();
 }
 
 turn_off_lean() {
@@ -2752,16 +2644,14 @@ make_enemies_miss_player_at_first() {
   level.player maps\_utility::set_player_attacker_accuracy(0.0);
   var_1 = getent("streets_to_dam_first_retreat", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 common_scripts\utility::waittill_notify_or_timeout("trigger", 4.0);
-  }
 
   level.player maps\_utility::set_player_attacker_accuracy(0.1);
   var_1 = getent("streets_to_dam_wave_2_first_advance", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 common_scripts\utility::waittill_notify_or_timeout("trigger", 6.0);
-  }
 
   level.player maps\_utility::set_player_attacker_accuracy(var_0);
 }
@@ -2779,9 +2669,8 @@ streets_to_dam_wave_2_sequence() {
   level thread adjust_suppression_on_enemies();
   var_1 = getent("crashed_tank", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 hide();
-  }
 
   var_2 = getent("streets_to_dam_wave_2_start", "targetname");
   var_2 notify("trigger");
@@ -2789,9 +2678,8 @@ streets_to_dam_wave_2_sequence() {
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, ::streets_to_dam_wave_2_first_spawn_func);
   common_scripts\utility::array_thread(var_3, maps\_utility::spawn_ai);
 
-  foreach(var_5 in level.side_guys) {
-    var_5 notify("stop_ignoring_player");
-  }
+  foreach(var_5 in level.side_guys)
+  var_5 notify("stop_ignoring_player");
 
   common_scripts\utility::flag_wait("missile_launcher_destruction_done");
   var_3 = getEntArray("streets_to_dam_wave_2", "targetname");
@@ -2830,9 +2718,8 @@ streets_to_dam_wave_2_sequence() {
   var_3 = maps\_utility::get_ai_group_ai("streets_to_dam_wave_2");
 
   if(var_3.size > 4) {
-    foreach(var_5 in var_3) {
-      var_5.favoriteenemy = level.player;
-    }
+    foreach(var_5 in var_3)
+    var_5.favoriteenemy = level.player;
   } else {
     foreach(var_5 in var_3) {
       if(isDefined(var_5) && isalive(var_5)) {
@@ -2851,9 +2738,8 @@ throw_grenade_if_player_behind_tank() {
   if(level.player istouching(var_0)) {
     var_1 = getaiarray("axis");
 
-    foreach(var_3 in var_1) {
-      var_3 thread maps\_utility::throwgrenadeatplayerasap();
-    }
+    foreach(var_3 in var_1)
+    var_3 thread maps\_utility::throwgrenadeatplayerasap();
   }
 }
 
@@ -2890,9 +2776,8 @@ streets_to_dam_2_staggered_retreat() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(var_1 < 3 || var_0.size > 5) {
-      if(var_0.size > 5) {
+      if(var_0.size > 5)
         var_0[var_1].favoriteenemy = level.player;
-      }
 
       var_2 = getent("streets_to_dam_goal_volume_3_5", "targetname");
     } else {
@@ -2944,9 +2829,9 @@ streets_to_dam_wave_2_first_spawn_func() {
   var_0 = getent("streets_to_dam_goal_volume_2_first", "targetname");
   self setgoalvolumeauto(var_0);
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "exposed_guy") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "exposed_guy")
     thread exposed_guy_think();
-  } else {
+  else {
     self.favoriteenemy = level.player;
     common_scripts\utility::flag_wait("missile_launcher_destruction_done");
     self.favoriteenemy = level.player;
@@ -2961,9 +2846,8 @@ streets_to_dam_wave_2_first_spawn_func() {
 
   var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 waittill("trigger");
-  }
 
   var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
@@ -2993,9 +2877,8 @@ streets_to_dam_wave_2_side_spawn_func() {
 
   var_1 = getent("streets_to_dam_wave_2_2_trigger", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 waittill("trigger");
-  }
 
   var_0 = getent("streets_to_dam_goal_volume_3", "targetname");
   self setgoalvolumeauto(var_0);
@@ -3054,9 +2937,8 @@ exposed_guy_think() {
   self.goalradius = var_1;
   var_2 = getent("streets_to_dam_wave_2_1_trigger", "targetname");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 common_scripts\utility::waittill_notify_or_timeout("trigger", 20.0);
-  }
 
   var_3 = getent("exposed_node_first", "targetname");
   self setgoalvolumeauto(var_3);
@@ -3069,9 +2951,8 @@ exposed_guy_think() {
   self.goalradius = var_1;
   var_2 = getent("streets_to_dam_wave_2_5_spawn", "targetname");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 waittill("trigger");
-  }
 
   var_4 = getent("streets_to_dam_goal_volume_2_5", "targetname");
   self setgoalvolumeauto(var_4);
@@ -3098,16 +2979,14 @@ kill_deathflag_in_area(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
   foreach(var_4 in level.deathflags[var_0]) {
     foreach(var_6 in var_4) {
       if(isalive(var_6)) {
-        if(var_6 istouching(var_1)) {
+        if(var_6 istouching(var_1))
           var_6 thread maps\_utility_code::kill_deathflag_proc(var_2);
-        }
 
         continue;
       }
@@ -3118,9 +2997,8 @@ kill_deathflag_in_area(var_0, var_1, var_2) {
 }
 
 delete_corpse_in_volume(var_0) {
-  if(self istouching(var_0)) {
+  if(self istouching(var_0))
     self delete();
-  }
 }
 
 fake_mantle_text() {
@@ -3180,9 +3058,8 @@ dialogue_streets_to_dam_2() {
     wait 1.0;
   }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level.allies[0] maps\_utility::smart_dialogue("flood_pri_wecantletthat");
-  }
 
   if(isDefined(var_1) && !common_scripts\utility::flag("played_radio_part_1")) {
     common_scripts\utility::flag_set("played_radio_part_1");
@@ -3196,9 +3073,8 @@ dialogue_streets_to_dam_2() {
 
   maps\_utility::battlechatter_on("allies");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 waittill("trigger");
-  }
 
   maps\_utility::battlechatter_off("allies");
   level.allies[0] thread maps\_utility::smart_dialogue("flood_bkr_getaway");
@@ -3255,9 +3131,8 @@ streets_to_dam_heli_far_flyby() {
   var_2 vehicle_turnengineoff();
   var_3 = common_scripts\utility::getstruct("streets_dam_far_flyby_1", "targetname");
 
-  while(distancesquared(var_3.origin, var_1.origin) > 100) {
+  while(distancesquared(var_3.origin, var_1.origin) > 100)
     wait 0.05;
-  }
 
   var_1 delete();
   var_2 delete();
@@ -3306,9 +3181,8 @@ remove_streets_to_dam_ents() {
   thread maps\flood_anim::m880_cleanup();
   var_0 = getweaponarray();
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
   delete_ent_by_targetname("enemy_convoy_vehicles_launcher");
   delete_ent_by_targetname("enemy_convoy_vehicles_tank");
@@ -3346,14 +3220,12 @@ delete_ent_by_targetname(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   if(isDefined(var_1)) {
-    if(!isarray(var_1)) {
+    if(!isarray(var_1))
       var_1 = maps\_utility::make_array(var_1);
-    }
 
     foreach(var_3 in var_1) {
-      if(isDefined(var_3)) {
+      if(isDefined(var_3))
         var_3 delete();
-      }
     }
   }
 }
@@ -3362,14 +3234,12 @@ delete_ent_by_script_noteworthy(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
   if(isDefined(var_1)) {
-    if(!isarray(var_1)) {
+    if(!isarray(var_1))
       var_1 = maps\_utility::make_array(var_1);
-    }
 
     foreach(var_3 in var_1) {
-      if(isDefined(var_3)) {
+      if(isDefined(var_3))
         var_3 delete();
-      }
     }
   }
 }
@@ -3397,11 +3267,10 @@ flood_shake_tree() {
 flood_shake_tree_internal() {
   level waittill(self.script_noteworthy);
 
-  if(randomfloat(1.0) < 0.3333) {
+  if(randomfloat(1.0) < 0.3333)
     playFXOnTag(level._effect["birds_flood_street_birds_01"], self, "J_Tip2_Tall2");
-  } else if(self.script_noteworthy == "flood_shake_tree_right_4" || self.script_noteworthy == "flood_shake_tree_left_4" || self.script_noteworthy == "flood_shake_tree_right_5" || self.script_noteworthy == "flood_shake_tree_right_6") {
+  else if(self.script_noteworthy == "flood_shake_tree_right_4" || self.script_noteworthy == "flood_shake_tree_left_4" || self.script_noteworthy == "flood_shake_tree_right_5" || self.script_noteworthy == "flood_shake_tree_right_6")
     playFXOnTag(level._effect["birds_flood_street_birds_01"], self, "J_Tip2_Tall2");
-  }
 
   var_0 = 1;
   var_1 = 1 + randomfloat(0.4);
@@ -3488,9 +3357,8 @@ aim_missiles_2() {
 spawn_ml_drivers() {
   var_0 = getEntArray("dam_missile_drivers", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 maps\_utility::add_spawn_function(::ml_driver_spawn_func);
-  }
+  foreach(var_2 in var_0)
+  var_2 maps\_utility::add_spawn_function(::ml_driver_spawn_func);
 
   maps\_utility::array_spawn(var_0);
 }
@@ -3557,9 +3425,8 @@ c4_spot_glow() {
 manage_mantles() {
   var_0 = getEntArray("mantle_trigger", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread show_hide_mantle();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread show_hide_mantle();
 }
 
 show_hide_mantle() {
@@ -3617,9 +3484,8 @@ temp_missile_impacts() {
   var_0 = getEntArray("missile_impact_origin", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1])) {
+    if(isDefined(var_0[var_1]))
       playFX(level._effect["temp_missile_impact"], var_0[var_1].origin);
-    }
 
     var_2 = randomfloatrange(0.25, 1.0);
     wait(var_2);
@@ -3668,52 +3534,43 @@ clear_ignore_everything() {
   self.dontavoidplayer = 0;
   self.script_dontpeek = 0;
 
-  if(isDefined(self.og_newenemyreactiondistsq)) {
+  if(isDefined(self.og_newenemyreactiondistsq))
     self.newenemyreactiondistsq = self.og_newenemyreactiondistsq;
-  }
 }
 
 dialogue_dam() {
   var_0 = getent("aim_missiles_2", "targetname");
   var_0 waittill("trigger");
 
-  if(isDefined(level.e3_demo)) {
+  if(isDefined(level.e3_demo))
     wait 3.0;
-  }
 
   maps\_utility::battlechatter_off("allies");
 
-  if(!common_scripts\utility::flag("looked_at_missiles_failsafe")) {
+  if(!common_scripts\utility::flag("looked_at_missiles_failsafe"))
     level.allies[0] maps\_utility::smart_dialogue("flood_pri_takethatlauncherout");
-  }
 
-  if(level.start_point == "dam") {
+  if(level.start_point == "dam")
     wait 3.0;
-  }
 
   wait 1.0;
 
-  if(!common_scripts\utility::flag("looked_at_missiles_failsafe")) {
+  if(!common_scripts\utility::flag("looked_at_missiles_failsafe"))
     level.allies[1] maps\_utility::smart_dialogue("flood_diz_samsgonnafire");
-  }
 
-  if(isDefined(level.e3_demo)) {
+  if(isDefined(level.e3_demo))
     wait 0.5;
-  }
 
-  if(!common_scripts\utility::flag("looked_at_missiles_failsafe")) {
+  if(!common_scripts\utility::flag("looked_at_missiles_failsafe"))
     level.allies[2] maps\_utility::smart_dialogue("flood_mrk_whatthehellis");
-  }
 
   wait 0.5;
 
-  if(!common_scripts\utility::flag("looked_at_missiles_failsafe")) {
+  if(!common_scripts\utility::flag("looked_at_missiles_failsafe"))
     level.allies[0] maps\_utility::smart_dialogue("flood_bkr_gotyoucovered");
-  }
 
-  if(!common_scripts\utility::flag("looked_at_missiles_failsafe")) {
+  if(!common_scripts\utility::flag("looked_at_missiles_failsafe"))
     level.allies[0] thread streets_nag_end_on_notify(maps\_utility::make_array("flood_pri_takethatlauncherout", "flood_bkr_gotyoucovered", "flood_bkr_stopsequence"), "looked_at_missiles_failsafe", "flag_set");
-  }
 
   common_scripts\utility::flag_wait("looked_at_missiles_failsafe");
   level.allies[0] stopsounds();
@@ -3726,9 +3583,8 @@ remove_allies() {
   var_0 = maps\_utility::get_ai_group_ai("street_start_allies");
 
   if(var_0.size > 0) {
-    foreach(var_2 in var_0) {
-      var_2 delete();
-    }
+    foreach(var_2 in var_0)
+    var_2 delete();
   }
 }
 
@@ -3736,9 +3592,8 @@ remove_live_grenades() {
   var_0 = getEntArray("grenade", "classname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1])) {
+    if(isDefined(var_0[var_1]))
       var_0[var_1] delete();
-    }
   }
 }
 
@@ -3751,9 +3606,8 @@ remove_stuff_for_animation() {
   var_0 = getEntArray("dam_break_delete", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1])) {
+    if(isDefined(var_0[var_1]))
       var_0[var_1] delete();
-    }
   }
 }
 
@@ -3809,7 +3663,6 @@ dam_waterfall_hide() {
   wait 8.3;
   var_0 = getEntArray("dam_waterfall_to_hide", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 }

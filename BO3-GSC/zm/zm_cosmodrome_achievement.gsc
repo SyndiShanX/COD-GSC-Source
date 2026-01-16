@@ -11,7 +11,7 @@
 function init() {
   level thread achievement_the_eagle_has_landers();
   level thread achievement_chimp_on_the_barbie();
-  level thread callback::on_connect(&onplayerconnect);
+  level thread callback::on_connect( & onplayerconnect);
 }
 
 function onplayerconnect() {
@@ -27,7 +27,7 @@ function achievement_the_eagle_has_landers() {
 
 function achievement_chimp_on_the_barbie() {
   level endon("end_game");
-  for(;;) {
+  for (;;) {
     level waittill("trap_kill", zombie, trap);
     if(!isplayer(zombie) && "monkey_zombie" == zombie.animname && "fire" == trap._trap_type) {
       zm_utility::giveachievement_wrapper("DLC2_ZOM_FIREMONKEY", 1);

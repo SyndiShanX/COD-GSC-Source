@@ -14,9 +14,8 @@ initAnimTree(animscript) {
   }
   self clearAnim( % body, 0.3);
   self setAnim( % body, 1, 0);
-  if(animscript != "pain" && animscript != "death") {
+  if(animscript != "pain" && animscript != "death")
     self.a.special = "none";
-  }
   self.missedSightChecks = 0;
   self.a.aimweight = 1.0;
   self.a.aimweight_start = 1.0;
@@ -33,9 +32,8 @@ initAnimTree(animscript) {
 UpdateAnimPose() {
   assertEX(self.a.movement == "stop" || self.a.movement == "walk" || self.a.movement == "run", "UpdateAnimPose " + self.a.pose + " " + self.a.movement);
   if(isDefined(self.desired_anim_pose) && self.desired_anim_pose != self.a.pose) {
-    if(self.a.pose == "prone") {
+    if(self.a.pose == "prone")
       self ExitProneWrapper(0.5);
-    }
     if(self.desired_anim_pose == "prone") {
       self SetProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
       self EnterProneWrapper(0.5);
@@ -61,17 +59,17 @@ initialize(animscript) {
   if(isDefined(self.a.postScriptFunc)) {
     scriptFunc = self.a.postScriptFunc;
     self.a.postScriptFunc = undefined;
-    [[scriptFunc]](animscript);
+    [
+      [scriptFunc]
+    ](animscript);
   }
   if(animscript != "combat" && animscript != "pain" && animscript != "death" && usingSidearm()) {
     self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
   }
-  if(animscript != "combat" && animscript != "move" && animscript != "pain") {
+  if(animscript != "combat" && animscript != "move" && animscript != "pain")
     self.a.magicReloadWhenReachEnemy = false;
-  }
-  if(animscript != "death") {
+  if(animscript != "death")
     self.a.nodeath = false;
-  }
   if(isDefined(self.isHoldingGrenade) && (animscript == "pain" || animscript == "death" || animscript == "flashed")) {
     self dropGrenade();
   }
@@ -83,9 +81,8 @@ initialize(animscript) {
   self.changingCoverPos = false;
   self.a.scriptStartTime = gettime();
   self.a.atConcealmentNode = false;
-  if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
+  if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand"))
     self.a.atConcealmentNode = true;
-  }
   initAnimTree(animscript);
   UpdateAnimPose();
 }
@@ -97,7 +94,7 @@ checkGrenadeInHand(animscript) {
     waittillframeend;
   }
   attachSize = self getattachsize();
-  for(i = 0; i < attachSize; i++) {
+  for (i = 0; i < attachSize; i++) {
     model = toLower(self getAttachModelName(i));
     assertex(model != "weapon_m67_grenade", "AI has a grenade in hand after animscript finished. Please call over an animscripter! " + self.origin);
     assertex(model != "weapon_m84_flashbang_grenade", "AI has a grenade in hand after animscript finished. Please call over an animscripter! " + self.origin);
@@ -107,28 +104,26 @@ checkGrenadeInHand(animscript) {
 
 getPreferredWeapon() {
   if(isDefined(self.wantshotgun) && self.wantshotgun) {
-    if(weaponclass(self.primaryweapon) == "spread") {
+    if(weaponclass(self.primaryweapon) == "spread")
       return self.primaryweapon;
-    } else if(weaponclass(self.secondaryweapon) == "spread") {
+    else if(weaponclass(self.secondaryweapon) == "spread")
       return self.secondaryweapon;
-    }
   }
   return self.primaryweapon;
 }
 should_find_a_new_node() {
   self.a.next_move_to_new_cover--;
-  if(self.a.next_move_to_new_cover > 0) {
+  if(self.a.next_move_to_new_cover > 0)
     return false;
-  }
   anim_set_next_move_to_new_cover();
   return true;
 }
 
 badplacer(time, org, radius) {
-  for(i = 0; i < time * 20; i++) {
-    for(p = 0; p < 10; p++) {
+  for (i = 0; i < time * 20; i++) {
+    for (p = 0; p < 10; p++) {
       angles = (0, randomint(360), 0);
-      forward = anglesToForward(angles);
+      forward = anglestoforward(angles);
       scale = vectorScale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
     }
@@ -140,7 +135,7 @@ printDisplaceInfo() {
   self endon("death");
   self notify("displaceprint");
   self endon("displaceprint");
-  for(;;) {
+  for (;;) {
     print3d(self.origin + (0, 0, 60), "displacer", (0, 0.4, 0.7), 0.85, 0.5);
     wait(0.05);
   }
@@ -155,21 +150,17 @@ getOldRadius() {
 }
 
 sightCheckNodeProc(invalidateNode, viewOffset) {
-  if(!isDefined(self.missedSightChecks)) {
+  if(!isDefined(self.missedSightChecks))
     self.missedSightChecks = 0;
-  }
-  if(!isDefined(invalidateNode)) {
+  if(!isDefined(invalidateNode))
     invalidateNode = 1;
-  }
-  if(isDefined(viewOffset)) {
+  if(isDefined(viewOffset))
     canShootAt = canShootEnemyFrom(viewOffset);
-  } else {
+  else
     canShootAt = self canShootEnemy();
-  }
   if(!canShootAt) {
-    if(invalidateNode) {
+    if(invalidateNode)
       self.missedSightChecks++;
-    }
   } else
     self.missedSightChecks = 0;
   if(self.missedSightChecks > 4) {
@@ -200,51 +191,48 @@ DebugIsInCombat() {
 }
 
 holdingWeapon() {
-  if(self.a.weaponPos["right"] == "none") {
+  if(self.a.weaponPos["right"] == "none")
     return (false);
-  }
-  if(!isDefined(self.holdingWeapon)) {
+  if(!isDefined(self.holdingWeapon))
     return (true);
-  }
   return (self.holdingWeapon);
 }
 canShootEnemyFromPose(pose, offset, useSightCheck) {
-  if(self.weapon == "mg42") {
+  if(self.weapon == "mg42")
     return false;
-  }
   switch (pose) {
     case "stand":
-      if(self.a.pose == "stand") {
+      if(self.a.pose == "stand")
         poseOffset = (0, 0, 0);
-      } else if(self.a.pose == "crouch") {
+      else if(self.a.pose == "crouch")
         poseOffset = (0, 0, 20);
-      } else if(self.a.pose == "prone") {
+      else if(self.a.pose == "prone")
         poseOffset = (0, 0, 55);
-      } else {
+      else {
         assertEX(0, "init::canShootEnemyFromPose " + self.a.pose);
         poseOffset = (0, 0, 0);
       }
       break;
     case "crouch":
-      if(self.a.pose == "stand") {
+      if(self.a.pose == "stand")
         poseOffset = (0, 0, -20);
-      } else if(self.a.pose == "crouch") {
+      else if(self.a.pose == "crouch")
         poseOffset = (0, 0, 0);
-      } else if(self.a.pose == "prone") {
+      else if(self.a.pose == "prone")
         poseOffset = (0, 0, 35);
-      } else {
+      else {
         assertEX(0, "init::canShootEnemyFromPose " + self.a.pose);
         poseOffset = (0, 0, 0);
       }
       break;
     case "prone":
-      if(self.a.pose == "stand") {
+      if(self.a.pose == "stand")
         poseOffset = (0, 0, -55);
-      } else if(self.a.pose == "crouch") {
+      else if(self.a.pose == "crouch")
         poseOffset = (0, 0, -35);
-      } else if(self.a.pose == "prone") {
+      else if(self.a.pose == "prone")
         poseOffset = (0, 0, 0);
-      } else {
+      else {
         assertEX(0, "init::canShootEnemyFromPose " + self.a.pose);
         poseOffset = (0, 0, 0);
       }
@@ -269,15 +257,13 @@ canShootEnemyPos(posOverrideOrigin) {
 }
 
 canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
-  if(!isValidEnemy(self.enemy) && !isValidEnemy(posOverrideEntity)) {
+  if(!isValidEnemy(self.enemy) && !isValidEnemy(posOverrideEntity))
     return false;
-  }
-  if(!holdingWeapon()) {
+  if(!holdingWeapon())
     return false;
-  }
   if(isDefined(posOverrideEntity)) {
     if(isSentient(posOverrideEntity)) {
-      eye = posOverrideEntity getEye();
+      eye = posOverrideEntity GetEye();
       chest = eye + (0, 0, -20);
     } else {
       eye = posOverrideEntity.origin;
@@ -292,39 +278,33 @@ canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
     chest = eye + (0, 0, -20);
   }
   myGunPos = self GetTagOrigin("tag_flash");
-  if(!isDefined(useSightCheck)) {
+  if(!isDefined(useSightCheck))
     useSightCheck = true;
-  }
   if(useSightCheck) {
     myEyeOffset = (self getShootAtPos() - myGunPos);
     canSee = self canshoot(eye, myEyeOffset + offset);
     if(canSee) {
-      if(getdebugdvarint("anim_dotshow") == self getentnum()) {
+      if(getdebugdvarint("anim_dotshow") == self getentnum())
         if(getdebugdvar("anim_debug") == "3")
-      }
-      thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (.5, 1, .5), 5);
+          thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (.5, 1, .5), 5);
     } else {
-      if(getdebugdvarint("anim_dotshow") == self getentnum()) {
+      if(getdebugdvarint("anim_dotshow") == self getentnum())
         if(getdebugdvar("anim_debug") == "3")
-      }
-      thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (1, .5, .5), 5);
+          thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (1, .5, .5), 5);
     }
   } else
     canSee = true;
-  if(!canSee) {
+  if(!canSee)
     return false;
-  }
   canShoot = self canshoot(eye, offset) || self canshoot(chest, offset);
   if(canShoot) {
-    if(getdebugdvarint("anim_dotshow") == self getentnum()) {
+    if(getdebugdvarint("anim_dotshow") == self getentnum())
       if(getdebugdvar("anim_debug") == "3")
-    }
-    thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (.5, 1, .5), 5);
+        thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (.5, 1, .5), 5);
   } else {
-    if(getdebugdvarint("anim_dotshow") == self getentnum()) {
+    if(getdebugdvarint("anim_dotshow") == self getentnum())
       if(getdebugdvar("anim_debug") == "3")
-    }
-    thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (1, .5, .5), 5);
+        thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (1, .5, .5), 5);
   }
   return (canShoot);
 }
@@ -348,11 +328,10 @@ GetEnemyEyePos() {
 }
 
 GetNodeYawToOrigin(pos) {
-  if(isDefined(self.node)) {
+  if(isDefined(self.node))
     yaw = self.node.angles[1] - GetYaw(pos);
-  } else {
+  else
     yaw = self.angles[1] - GetYaw(pos);
-  }
   yaw = AngleClamp180(yaw);
   return yaw;
 }
@@ -362,19 +341,17 @@ GetNodeYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    if(isDefined(self.node)) {
-      forward = anglesToForward(self.node.angles);
-    } else {
-      forward = anglesToForward(self.angles);
-    }
+    if(isDefined(self.node))
+      forward = anglestoforward(self.node.angles);
+    else
+      forward = anglestoforward(self.angles);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
-  if(isDefined(self.node)) {
+  if(isDefined(self.node))
     yaw = self.node.angles[1] - GetYaw(pos);
-  } else {
+  else
     yaw = self.angles[1] - GetYaw(pos);
-  }
   yaw = AngleClamp180(yaw);
   return yaw;
 }
@@ -384,7 +361,7 @@ GetCoverNodeYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
+    forward = anglestoforward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
@@ -405,7 +382,7 @@ GetYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.angles);
+    forward = anglestoforward(self.angles);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
@@ -428,9 +405,8 @@ AbsYawToEnemy() {
   assert(isValidEnemy(self.enemy));
   yaw = self.angles[1] - GetYaw(self.enemy.origin);
   yaw = AngleClamp180(yaw);
-  if(yaw < 0) {
+  if(yaw < 0)
     yaw = -1 * yaw;
-  }
   return yaw;
 }
 
@@ -438,27 +414,24 @@ AbsYawToEnemy2d() {
   assert(isValidEnemy(self.enemy));
   yaw = self.angles[1] - GetYaw2d(self.enemy.origin);
   yaw = AngleClamp180(yaw);
-  if(yaw < 0) {
+  if(yaw < 0)
     yaw = -1 * yaw;
-  }
   return yaw;
 }
 
 AbsYawToOrigin(org) {
   yaw = self.angles[1] - GetYaw(org);
   yaw = AngleClamp180(yaw);
-  if(yaw < 0) {
+  if(yaw < 0)
     yaw = -1 * yaw;
-  }
   return yaw;
 }
 
 AbsYawToAngles(angles) {
   yaw = self.angles[1] - angles;
   yaw = AngleClamp180(yaw);
-  if(yaw < 0) {
+  if(yaw < 0)
     yaw = -1 * yaw;
-  }
   return yaw;
 }
 
@@ -492,9 +465,8 @@ GetCoverNodeYawToOrigin(org) {
 }
 
 isStanceAllowedWrapper(stance) {
-  if(isDefined(self.coverNode)) {
+  if(isDefined(self.coverNode))
     return self.coverNode doesNodeAllowStance(stance);
-  }
   return self isStanceAllowed(stance);
 }
 
@@ -598,9 +570,8 @@ ImNotMeleeing(person) {
 
 WeaponAnims() {
   weaponModel = getWeaponModel(self.weapon);
-  if((isDefined(self.holdingWeapon) && !self.holdingWeapon) || weaponModel == "") {
+  if((isDefined(self.holdingWeapon) && !self.holdingWeapon) || weaponModel == "")
     return "none";
-  }
   class = weaponClass(self.weapon);
   switch (class) {
     case "smg":
@@ -619,17 +590,15 @@ WeaponAnims() {
 
 GetClaimedNode() {
   myNode = self.node;
-  if(isDefined(myNode) && (self nearNode(myNode) || (isDefined(self.coverNode) && myNode == self.coverNode))) {
+  if(isDefined(myNode) && (self nearNode(myNode) || (isDefined(self.coverNode) && myNode == self.coverNode)))
     return myNode;
-  }
   return undefined;
 }
 
 GetNodeType() {
   myNode = GetClaimedNode();
-  if(isDefined(myNode)) {
+  if(isDefined(myNode))
     return myNode.type;
-  }
   return "none";
 }
 
@@ -643,17 +612,15 @@ GetNodeDirection() {
 
 GetNodeForward() {
   myNode = GetClaimedNode();
-  if(isDefined(myNode)) {
-    return anglesToForward(myNode.angles);
-  }
-  return anglesToForward(self.angles);
+  if(isDefined(myNode))
+    return AnglesToForward(myNode.angles);
+  return AnglesToForward(self.angles);
 }
 
 GetNodeOrigin() {
   myNode = GetClaimedNode();
-  if(isDefined(myNode)) {
+  if(isDefined(myNode))
     return myNode.origin;
-  }
   return self.origin;
 }
 
@@ -662,20 +629,19 @@ isDebugOn() {
 }
 
 drawDebugLineInternal(fromPoint, toPoint, color, durationFrames) {
-  for(i = 0; i < durationFrames; i++) {
+  for (i = 0; i < durationFrames; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
 }
 
 drawDebugLine(fromPoint, toPoint, color, durationFrames) {
-  if(isDebugOn()) {
+  if(isDebugOn())
     thread drawDebugLineInternal(fromPoint, toPoint, color, durationFrames);
-  }
 }
 
 debugLine(fromPoint, toPoint, color, durationFrames) {
-  for(i = 0; i < durationFrames * 20; i++) {
+  for (i = 0; i < durationFrames * 20; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
@@ -708,11 +674,10 @@ drawDebugCrossOld(atPoint, radius, color, durationFrames) {
 }
 
 UpdateDebugInfoInternal() {
-  if(isDefined(anim.debugEnt) && (anim.debugEnt == self)) {
+  if(isDefined(anim.debugEnt) && (anim.debugEnt == self))
     doInfo = true;
-  } else {
+  else
     doInfo = getdebugdvarInt("animscriptinfo");
-  }
   if(doInfo) {
     thread drawDebugInfoThread();
   } else {
@@ -722,7 +687,7 @@ UpdateDebugInfoInternal() {
 
 UpdateDebugInfo() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     thread UpdateDebugInfoInternal();
     wait 1;
   }
@@ -731,7 +696,7 @@ UpdateDebugInfo() {
 drawDebugInfoThread() {
   self endon("EndDebugInfo");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self thread drawDebugInfo();
     wait 0.05;
   }
@@ -741,15 +706,14 @@ drawDebugInfo() {
   line[0] = self getEntityNumber() + " " + self.a.script;
   line[1] = self.a.pose + " " + self.a.movement;
   line[2] = self.a.alertness + " " + self.a.special;
-  if(self thread DebugIsInCombat()) {
+  if(self thread DebugIsInCombat())
     line[3] = "in combat for " + (self.a.combatEndTime - gettime()) + " ms.";
-  } else {
+  else
     line[3] = "not in combat";
-  }
   line[4] = self.a.lastDebugPrint1;
   belowFeet = self.origin + (0, 0, -8);
   offset = (0, 0, -10);
-  for(i = 0; i < line.size; i++) {
+  for (i = 0; i < line.size; i++) {
     if(isDefined(line[i])) {
       textPos = (belowFeet[0] + (offset[0] * i), belowFeet[1] + (offset[1] * i), belowFeet[2] + (offset[2] * i));
       print3d(textPos, line[i], (.2, .2, 1), 1, 0.75);
@@ -782,20 +746,18 @@ QuadrantAnimWeights(yaw) {
   }
   if(forwardWeight > 0) {
     result["front"] = forwardWeight;
-    if(leftWeight > 0) {
+    if(leftWeight > 0)
       result["left"] = leftWeight;
-    } else {
+    else
       result["right"] = -1 * leftWeight;
-    }
   } else {
     backWeight = -1 * forwardWeight;
-    if(leftWeight > backWeight) {
+    if(leftWeight > backWeight)
       result["left"] = 1;
-    } else if(leftWeight < forwardWeight) {
+    else if(leftWeight < forwardWeight)
       result["right"] = 1;
-    } else {
+    else
       result["back"] = 1;
-    }
   }
   return result;
 }
@@ -815,10 +777,9 @@ getQuadrant(angle) {
 }
 
 IsInSet(input, set) {
-  for(i = set.size - 1; i >= 0; i--) {
-    if(input == set[i]) {
+  for (i = set.size - 1; i >= 0; i--) {
+    if(input == set[i])
       return true;
-    }
   }
   return false;
 }
@@ -845,7 +806,7 @@ NotifyAfterTime(notifyString, killmestring, time) {
 drawString(stringtodraw) {
   self endon("killanimscript");
   self endon("enddrawstring");
-  for(;;) {
+  for (;;) {
     wait .05;
     print3d((self GetDebugEye()) + (0, 0, 8), stringtodraw, (1, 1, 1), 1, 0.2);
   }
@@ -853,7 +814,7 @@ drawString(stringtodraw) {
 
 drawStringTime(msg, org, color, timer) {
   maxtime = timer * 20;
-  for(i = 0; i < maxtime; i++) {
+  for (i = 0; i < maxtime; i++) {
     print3d(org, msg, color, 1, 1);
     wait .05;
   }
@@ -866,12 +827,11 @@ showLastEnemySightPos(string) {
   if(!isValidEnemy(self.enemy)) {
     return;
   }
-  if(self.enemy.team == "allies") {
+  if(self.enemy.team == "allies")
     color = (0.4, 0.7, 1);
-  } else {
+  else
     color = (1, 0.7, 0.4);
-  }
-  while(1) {
+  while (1) {
     wait(0.05);
     if(!isDefined(self.lastEnemySightPos)) {
       continue;
@@ -883,20 +843,18 @@ showLastEnemySightPos(string) {
 printDebugTextProc(string, org, printTime, color) {
   level notify("stop debug print " + org);
   level endon("stop debug print " + org);
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (0.3, 0.9, 0.6);
-  }
   timer = printTime * 20;
-  for(i = 0; i < timer; i += 1) {
+  for (i = 0; i < timer; i += 1) {
     wait(0.05);
     print3d(org, string, color, 1, 1);
   }
 }
 
 printDebugText(string, org, printTime, color) {
-  if(getdebugdvar("anim_debug") != "") {
+  if(getdebugdvar("anim_debug") != "")
     level thread printDebugTextProc(string, org, printTime, color);
-  }
 }
 
 debug_anim_print(text) {
@@ -923,25 +881,22 @@ debug_turn_print(text, line) {
 
 set_orient_mode(mode, val1) {
   if(GetDvarInt("anim_debug_dogs") == 1 || GetDvarInt("anim_debug_dogs") == self GetEntNum()) {
-    if(isDefined(val1)) {
+    if(isDefined(val1))
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + getTime());
-    } else {
+    else
       println("DOG:Setting orient mode: " + mode + " " + getTime());
-    }
   }
-  if(isDefined(val1)) {
+  if(isDefined(val1))
     self OrientMode(mode, val1);
-  } else {
+  else
     self OrientMode(mode);
-  }
 }
 
 hasEnemySightPos() {
-  if(isDefined(self.node)) {
+  if(isDefined(self.node))
     return (canSeeEnemyFromExposed() || canSuppressEnemyFromExposed());
-  } else {
+  else
     return (canSeeEnemy() || canSuppressEnemy());
-  }
 }
 
 getEnemySightPos() {
@@ -951,15 +906,12 @@ getEnemySightPos() {
 
 tryTurret(targetname) {
   turret = getent(targetname, "targetname");
-  if(!isDefined(turret)) {
+  if(!isDefined(turret))
     return false;
-  }
-  if((turret.classname != "misc_mg42") && (turret.classname != "misc_turret")) {
+  if((turret.classname != "misc_mg42") && (turret.classname != "misc_turret"))
     return false;
-  }
-  if(!self isingoal(self.covernode.origin)) {
+  if(!self isingoal(self.covernode.origin))
     return false;
-  }
   canuse = self useturret(turret);
   if(canuse) {
     turret setmode("auto_ai");
@@ -986,15 +938,13 @@ canShootPos(pos) {
 }
 
 util_evaluateKnownEnemyLocation() {
-  if(!hasEnemySightPos()) {
+  if(!hasEnemySightPos())
     return false;
-  }
   myGunPos = self GetTagOrigin("tag_flash");
   myEyeOffset = (self getShootAtPos() - myGunPos);
   if((isDefined(self.ignoreSightPos)) && (isDefined(self.ignoreOrigin))) {
-    if(distance(self.origin, self.ignoreOrigin) < 25) {
+    if(distance(self.origin, self.ignoreOrigin) < 25)
       return false;
-    }
   }
   self.ignoreSightPos = undefined;
   canSee = self canshoot(getEnemySightPos(), myEyeOffset);
@@ -1014,15 +964,14 @@ debugPosInternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread debugTimeout();
   ent endon("timeout");
-  if(self.enemy.team == "allies") {
+  if(self.enemy.team == "allies")
     color = (0.4, 0.7, 1);
-  } else {
+  else
     color = (1, 0.7, 0.4);
-  }
-  while(1) {
+  while (1) {
     wait(0.05);
     print3d(org, string, color, 1, size);
   }
@@ -1039,19 +988,16 @@ debugPosSize(org, string, size) {
 debugBurstPrint(numShots, maxShots) {
   burstSize = numShots / maxShots;
   burstSizeStr = undefined;
-  if(numShots == self.bulletsInClip) {
+  if(numShots == self.bulletsInClip)
     burstSizeStr = "all rounds";
-  } else {
-    if(burstSize < 0.25)
-  }
-  burstSizeStr = "small burst";
-  else {
-    if(burstSize < 0.5)
-  }
-  burstSizeStr = "med burst";
-  else {
+  else
+  if(burstSize < 0.25)
+    burstSizeStr = "small burst";
+  else
+  if(burstSize < 0.5)
+    burstSizeStr = "med burst";
+  else
     burstSizeStr = "long burst";
-  }
   thread animscripts\utility::debugPosSize(self.origin + (0, 0, 42), burstSizeStr, 1.5);
   thread animscripts\utility::debugPos(self.origin + (0, 0, 60), "Suppressing");
 }
@@ -1062,22 +1008,21 @@ printShootProc() {
   self endon("stop shoot " + self.export);
   printTime = 0.25;
   timer = printTime * 20;
-  for(i = 0; i < timer; i += 1) {
+  for (i = 0; i < timer; i += 1) {
     wait(0.05);
     print3d(self.origin + (0, 0, 70), "Shoot", (1, 0, 0), 1, 1);
   }
 }
 
 printShoot() {
-  if(getdebugdvar("anim_debug") == "3") {
+  if(getdebugdvar("anim_debug") == "3")
     self thread printShootProc();
-  }
 }
 
 showDebugProc(fromPoint, toPoint, color, printTime) {
   self endon("death");
   timer = printTime * 20;
-  for(i = 0; i < timer; i += 1) {
+  for (i = 0; i < timer; i += 1) {
     wait(0.05);
     line(fromPoint, toPoint, color);
   }
@@ -1089,9 +1034,13 @@ showDebugLine(fromPoint, toPoint, color, printTime) {
 
 shootEnemyWrapper() {
   if(self usingGasWeapon()) {
-    [[anim.shootFlameThrowerWrapper_func]]();
+    [
+      [anim.shootFlameThrowerWrapper_func]
+    ]();
   } else {
-    [[anim.shootEnemyWrapper_func]]();
+    [
+      [anim.shootEnemyWrapper_func]
+    ]();
   }
 }
 
@@ -1139,12 +1088,12 @@ shootPosWrapper(shootPos) {
 
 throwGun() {
   org = spawn("script_model", (0, 0, 0));
-  org setModel("temp");
+  org setmodel("temp");
   org.origin = self getTagOrigin("tag_weapon_right") + (50, 50, 0);
   org.angles = self getTagAngles("tag_weapon_right");
   right = anglestoright(org.angles);
   right = vectorScale(right, 15);
-  forward = anglesToForward(org.angles);
+  forward = anglestoforward(org.angles);
   forward = vectorScale(forward, 15);
   org moveGravity((0, 50, 150), 100);
   weaponClass = "weapon_" + self.weapon;
@@ -1152,11 +1101,11 @@ throwGun() {
   weapon.angles = self getTagAngles("tag_weapon_right");
   weapon linkto(org);
   lastOrigin = org.origin;
-  while((isDefined(weapon)) && (isDefined(weapon.origin))) {
+  while ((isDefined(weapon)) && (isDefined(weapon.origin))) {
     start = lastOrigin;
     end = org.origin;
     angles = vectortoangles(end - start);
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     forward = vectorScale(forward, 4);
     trace = bulletTrace(end, end + forward, true, weapon);
     if(isalive(trace["entity"]) && trace["entity"] == self) {
@@ -1169,9 +1118,8 @@ throwGun() {
     lastOrigin = org.origin;
     wait(0.05);
   }
-  if((isDefined(weapon)) && (isDefined(weapon.origin))) {
+  if((isDefined(weapon)) && (isDefined(weapon.origin)))
     weapon unlink();
-  }
   org delete();
 }
 
@@ -1237,9 +1185,9 @@ PersonalColdBreath() {
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
-  for(;;) {
+  for (;;) {
     if(self.a.movement != "run") {
-      playFXOnTag(level._effect["cold_breath"], self, tag);
+      playfxOnTag(level._effect["cold_breath"], self, tag);
       wait(2.5 + randomfloat(3));
     } else
       wait(0.5);
@@ -1250,42 +1198,35 @@ PersonalColdBreathSpawner() {
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned", spawn);
-    if(maps\_utility::spawn_failed(spawn)) {
+    if(maps\_utility::spawn_failed(spawn))
       continue;
-    }
     spawn thread PersonalColdBreath();
   }
 }
 
 isSuppressedWrapper() {
-  if(forcedCover("show")) {
+  if(forcedCover("show"))
     return false;
-  }
-  if(forcedCover("hide")) {
+  if(forcedCover("hide"))
     return true;
-  }
-  if(self.suppressionMeter <= self.suppressionThreshold) {
+  if(self.suppressionMeter <= self.suppressionThreshold)
     return false;
-  }
   return self issuppressed();
 }
 
 isPartiallySuppressedWrapper() {
-  if(forcedCover("show")) {
+  if(forcedCover("show"))
     return false;
-  }
-  if(self.suppressionMeter <= self.suppressionThreshold * 0.25) {
+  if(self.suppressionMeter <= self.suppressionThreshold * 0.25)
     return false;
-  }
   return (self issuppressed());
 }
 
 getNodeOffset(node) {
-  if(isDefined(node.offset)) {
+  if(isDefined(node.offset))
     return node.offset;
-  }
   cover_left_crouch_offset = (-26, .4, 36);
   cover_left_stand_offset = (-32, 7, 63);
   cover_right_crouch_offset = (43.5, 11, 36);
@@ -1295,23 +1236,21 @@ getNodeOffset(node) {
   cornernode = false;
   nodeOffset = (0, 0, 0);
   right = anglestoright(node.angles);
-  forward = anglesToForward(node.angles);
+  forward = anglestoforward(node.angles);
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide":
-      if(node isNodeDontStand() && !node isNodeDontCrouch()) {
+      if(node isNodeDontStand() && !node isNodeDontCrouch())
         nodeOffset = calculateNodeOffset(right, forward, cover_left_crouch_offset);
-      } else {
+      else
         nodeOffset = calculateNodeOffset(right, forward, cover_left_stand_offset);
-      }
       break;
     case "Cover Right":
     case "Cover Right Wide":
-      if(node isNodeDontStand() && !node isNodeDontCrouch()) {
+      if(node isNodeDontStand() && !node isNodeDontCrouch())
         nodeOffset = calculateNodeOffset(right, forward, cover_right_crouch_offset);
-      } else {
+      else
         nodeOffset = calculateNodeOffset(right, forward, cover_right_stand_offset);
-      }
       break;
     case "Cover Stand":
     case "Conceal Stand":
@@ -1333,13 +1272,11 @@ calculateNodeOffset(right, forward, baseoffset) {
 }
 
 canSeeEnemy() {
-  if(!isValidEnemy(self.enemy)) {
+  if(!isValidEnemy(self.enemy))
     return false;
-  }
   if(self canSee(self.enemy) || (isDefined(self.cansee_override) && self.cansee_override)) {
-    if(!checkPitchVisibility(self getEye(), self.enemy getshootatpos())) {
+    if(!checkPitchVisibility(self geteye(), self.enemy getshootatpos()))
       return false;
-    }
     self.goodShootPosValid = true;
     self.goodShootPos = GetEnemyEyePos();
     dontGiveUpOnSuppressionYet();
@@ -1364,24 +1301,21 @@ canSeeEnemyFromExposed() {
     self.goodShootPos = enemyEye;
     dontGiveUpOnSuppressionYet();
   } else {
-    if(self getentnum() == getdebugdvarint("anim_dotshow")) {
+    if(self getentnum() == getdebugdvarint("anim_dotshow"))
       thread persistentDebugLine(self.node.origin + getNodeOffset(self.node), enemyEye);
-    }
   }
   return result;
 }
 
 canSeePointFromExposedAtNode(point, node) {
   if(node.type == "Cover Left" || node.type == "Cover Right" || node.type == "Cover Left Wide" || node.type == "Cover Right Wide") {
-    if(!self animscripts\corner::canSeePointFromExposedAtCorner(point, node)) {
+    if(!self animscripts\corner::canSeePointFromExposedAtCorner(point, node))
       return false;
-    }
   }
   nodeOffset = getNodeOffset(node);
   lookFromPoint = node.origin + nodeOffset;
-  if(!checkPitchVisibility(lookFromPoint, point, node)) {
+  if(!checkPitchVisibility(lookFromPoint, point, node))
     return false;
-  }
   if(!sightTracePassed(lookFromPoint, point, false, undefined)) {
     if(node.type == "Cover Crouch" || node.type == "Conceal Crouch") {
       lookFromPoint = (0, 0, 64) + node.origin;
@@ -1395,12 +1329,10 @@ canSeePointFromExposedAtNode(point, node) {
 checkPitchVisibility(fromPoint, toPoint, atNode) {
   pitch = AngleClamp180(vectorToAngles(toPoint - fromPoint)[0]);
   if(abs(pitch) > 45) {
-    if(isDefined(atNode) && atNode.type != "Cover Crouch" && atNode.type != "Conceal Crouch") {
+    if(isDefined(atNode) && atNode.type != "Cover Crouch" && atNode.type != "Conceal Crouch")
       return false;
-    }
-    if(pitch > 45 || pitch < anim.coverCrouchLeanPitch - 45) {
+    if(pitch > 45 || pitch < anim.coverCrouchLeanPitch - 45)
       return false;
-    }
   }
   return true;
 }
@@ -1410,9 +1342,8 @@ dontGiveUpOnSuppressionYet() {
 }
 
 updateGiveUpOnSuppressionTimer() {
-  if(!isDefined(self.a.shouldResetGiveUpOnSuppressionTimer)) {
+  if(!isDefined(self.a.shouldResetGiveUpOnSuppressionTimer))
     self.a.shouldResetGiveUpOnSuppressionTimer = true;
-  }
   if(self.a.shouldResetGiveUpOnSuppressionTimer) {
     self.a.giveUpOnSuppressionTime = gettime() + randomintrange(15000, 30000);
     self.a.shouldResetGiveUpOnSuppressionTimer = false;
@@ -1420,7 +1351,7 @@ updateGiveUpOnSuppressionTimer() {
 }
 
 showLines(start, end, end2) {
-  for(;;) {
+  for (;;) {
     line(start, end, (1, 0, 0), 1);
     wait(0.05);
     line(start, end2, (0, 0, 1), 1);
@@ -1429,22 +1360,19 @@ showLines(start, end, end2) {
 }
 
 aiSuppressAI() {
-  if(!self canAttackEnemyNode()) {
+  if(!self canAttackEnemyNode())
     return false;
-  }
   shootPos = undefined;
   if(isDefined(self.enemy.node)) {
     nodeOffset = getNodeOffset(self.enemy.node);
     shootPos = self.enemy.node.origin + nodeOffset;
   } else
     shootPos = self.enemy getShootAtPos();
-  if(!self canShoot(shootPos)) {
+  if(!self canShoot(shootPos))
     return false;
-  }
   if(self.a.script == "combat") {
-    if(!sighttracepassed(self getEye(), self gettagorigin("tag_flash"), false, undefined)) {
+    if(!sighttracepassed(self geteye(), self gettagorigin("tag_flash"), false, undefined))
       return false;
-    }
   }
   self.goodShootPosValid = true;
   self.goodShootPos = shootPos;
@@ -1456,22 +1384,19 @@ canSuppressEnemyFromExposed() {
     self.goodShootPosValid = false;
     return false;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isplayer(self.enemy))
     return aiSuppressAI();
-  }
   if(isDefined(self.node)) {
     if(self.node.type == "Cover Left" || self.node.type == "Cover Right" || self.node.type == "Cover Left Wide" || self.node.type == "Cover Right Wide") {
-      if(!self animscripts\corner::canSeePointFromExposedAtCorner(self GetEnemyEyePos(), self.node)) {
+      if(!self animscripts\corner::canSeePointFromExposedAtCorner(self GetEnemyEyePos(), self.node))
         return false;
-      }
     }
     nodeOffset = getNodeOffset(self.node);
     startOffset = self.node.origin + nodeOffset;
   } else
     startOffset = self GetTagOrigin("tag_flash");
-  if(!checkPitchVisibility(startOffset, self.lastEnemySightPos)) {
+  if(!checkPitchVisibility(startOffset, self.lastEnemySightPos))
     return false;
-  }
   return findGoodSuppressSpot(startOffset);
 }
 
@@ -1480,48 +1405,39 @@ canSuppressEnemy() {
     self.goodShootPosValid = false;
     return false;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isplayer(self.enemy))
     return aiSuppressAI();
-  }
   startOffset = self GetTagOrigin("tag_flash");
-  if(!checkPitchVisibility(startOffset, self.lastEnemySightPos)) {
+  if(!checkPitchVisibility(startOffset, self.lastEnemySightPos))
     return false;
-  }
   return findGoodSuppressSpot(startOffset);
 }
 
 hasSuppressableEnemy() {
-  if(!isValidEnemy(self.enemy)) {
+  if(!isValidEnemy(self.enemy))
     return false;
-  }
-  if(!isDefined(self.lastEnemySightPos)) {
+  if(!isDefined(self.lastEnemySightPos))
     return false;
-  }
   updateGiveUpOnSuppressionTimer();
-  if(gettime() > self.a.giveUpOnSuppressionTime) {
+  if(gettime() > self.a.giveUpOnSuppressionTime)
     return false;
-  }
-  if(!needRecalculateSuppressSpot()) {
+  if(!needRecalculateSuppressSpot())
     return self.goodShootPosValid;
-  }
   return true;
 }
 
 canSeeAndShootPoint(point) {
-  if(!sightTracePassed(self getShootAtPos(), point, false, undefined)) {
+  if(!sightTracePassed(self getShootAtPos(), point, false, undefined))
     return false;
-  }
-  if(self.a.weaponPos["right"] == "none") {
+  if(self.a.weaponPos["right"] == "none")
     return false;
-  }
   gunpoint = self GetTagOrigin("tag_flash");
   return sightTracePassed(gunpoint, point, false, undefined);
 }
 
 needRecalculateSuppressSpot() {
-  if(self.goodShootPosValid && !self canSeeAndShootPoint(self.goodShootPos)) {
+  if(self.goodShootPosValid && !self canSeeAndShootPoint(self.goodShootPos))
     return true;
-  }
   return (
     !isDefined(self.lastEnemySightPosOld) ||
     self.lastEnemySightPosOld != self.lastEnemySightPos ||
@@ -1530,9 +1446,8 @@ needRecalculateSuppressSpot() {
 }
 
 findGoodSuppressSpot(startOffset) {
-  if(!needRecalculateSuppressSpot()) {
+  if(!needRecalculateSuppressSpot())
     return self.goodShootPosValid;
-  }
   if(!sightTracePassed(self getShootAtPos(), startOffset, false, undefined)) {
     self.goodShootPosValid = false;
     return false;
@@ -1540,19 +1455,17 @@ findGoodSuppressSpot(startOffset) {
   self.lastEnemySightPosSelfOrigin = self.origin;
   self.lastEnemySightPosOld = self.lastEnemySightPos;
   currentEnemyPos = GetEnemyEyePos();
-  trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
+  trace = bullettrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
   startTracesAt = trace["position"];
   percievedMovementVector = self.lastEnemySightPos - startTracesAt;
   lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
   percievedMovementVector = percievedMovementVector - vectorScale(lookVector, vectorDot(percievedMovementVector, lookVector));
   idealTraceInterval = 20.0;
   numTraces = int(length(percievedMovementVector) / idealTraceInterval + 0.5);
-  if(numTraces < 1) {
+  if(numTraces < 1)
     numTraces = 1;
-  }
-  if(numTraces > 20) {
+  if(numTraces > 20)
     numTraces = 20;
-  }
   vectorDif = self.lastEnemySightPos - startTracesAt;
   vectorDif = (vectorDif[0] / numTraces, vectorDif[1] / numTraces, vectorDif[2] / numTraces);
   numTraces++;
@@ -1564,15 +1477,14 @@ findGoodSuppressSpot(startOffset) {
   self.goodShootPosValid = false;
   goodTraces = 0;
   neededGoodTraces = 2;
-  for(i = 0; i < numTraces + neededGoodTraces; i++) {
+  for (i = 0; i < numTraces + neededGoodTraces; i++) {
     tracePassed = sightTracePassed(startOffset, traceTo, false, undefined);
     thisTraceTo = traceTo;
     if(getdebugdvarint("debug_dotshow") == self getentnum()) {
-      if(tracePassed) {
+      if(tracePassed)
         color = (.2, .2, 1);
-      } else {
+      else
         color = (.2, .2, .2);
-      }
       thread print3dtime(15, traceTo, ".", color, 1, 0.75);
     }
     if(i == numTraces - 1) {
@@ -1599,17 +1511,15 @@ anim_array(animArray, animWeights) {
   idleanim = randomint(total_anims);
   assert(total_anims);
   assert(animArray.size == animWeights.size);
-  if(total_anims == 1) {
+  if(total_anims == 1)
     return animArray[0];
-  }
   weights = 0;
   total_weight = 0;
-  for(i = 0; i < total_anims; i++) {
+  for (i = 0; i < total_anims; i++)
     total_weight += animWeights[i];
-  }
   anim_play = randomfloat(total_weight);
   current_weight = 0;
-  for(i = 0; i < total_anims; i++) {
+  for (i = 0; i < total_anims; i++) {
     current_weight += animWeights[i];
     if(anim_play >= current_weight) {
       continue;
@@ -1630,7 +1540,7 @@ forcedCover(msg) {
 
 print3dtime(timer, org, msg, color, alpha, scale) {
   newtime = timer / 0.05;
-  for(i = 0; i < newtime; i++) {
+  for (i = 0; i < newtime; i++) {
     print3d(org, msg, color, alpha, scale);
     wait(0.05);
   }
@@ -1640,7 +1550,7 @@ print3drise(org, msg, color, alpha, scale) {
   newtime = 5 / 0.05;
   up = 0;
   org = org + randomvector(30);
-  for(i = 0; i < newtime; i++) {
+  for (i = 0; i < newtime; i++) {
     up += 0.5;
     print3d(org + (0, 0, up), msg, color, alpha, scale);
     wait(0.05);
@@ -1679,19 +1589,16 @@ getGrenadeModel() {
 }
 
 sawEnemyMove(timer) {
-  if(!isDefined(timer)) {
+  if(!isDefined(timer))
     timer = 500;
-  }
   return (gettime() - self.personalSightTime < timer);
 }
 
 canThrowGrenade() {
-  if(!self.grenadeAmmo) {
+  if(!self.grenadeAmmo)
     return false;
-  }
-  if(self.script_forceGrenade) {
+  if(self.script_forceGrenade)
     return true;
-  }
   return (isplayer(self.enemy));
 }
 
@@ -1717,12 +1624,11 @@ random_weight(array) {
   idleanim = randomint(array.size);
   if(array.size > 1) {
     anim_weight = 0;
-    for(i = 0; i < array.size; i++) {
+    for (i = 0; i < array.size; i++)
       anim_weight += array[i];
-    }
     anim_play = randomfloat(anim_weight);
     anim_weight = 0;
-    for(i = 0; i < array.size; i++) {
+    for (i = 0; i < array.size; i++) {
       anim_weight += array[i];
       if(anim_play < anim_weight) {
         idleanim = i;
@@ -1734,19 +1640,16 @@ random_weight(array) {
 }
 
 removeableHat() {
-  if(!isDefined(self.hatmodel)) {
+  if(!isDefined(self.hatmodel))
     return false;
-  }
-  if(isDefined(anim.noHatClassname[self.classname])) {
+  if(isDefined(anim.noHatClassname[self.classname]))
     return false;
-  }
   return (!isDefined(anim.noHat[self.model]));
 }
 
 metalHat() {
-  if(!isDefined(self.hatmodel)) {
+  if(!isDefined(self.hatmodel))
     return false;
-  }
   return (isDefined(anim.metalHat[self.model]));
 }
 
@@ -1757,9 +1660,8 @@ fatGuy() {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffects)) {
+  if(!isDefined(anim.optionalStepEffects))
     anim.optionalStepEffects = [];
-  }
   anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
   anim.optionalStepEffectFunction = animscripts\shared::playFootStepEffect;
@@ -1769,7 +1671,7 @@ persistentDebugLine(start, end) {
   self endon("death");
   level notify("newdebugline");
   level endon("newdebugline");
-  for(;;) {
+  for (;;) {
     line(start, end, (0.3, 1, 0), 1);
     wait(0.05);
   }
@@ -1785,9 +1687,8 @@ enterProneWrapperProc(timer) {
   self endon("anim_prone_change");
   self EnterProne(timer);
   self waittill("killanimscript");
-  if(self.a.pose != "prone") {
+  if(self.a.pose != "prone")
     self.a.pose = "prone";
-  }
 }
 
 ExitProneWrapper(timer) {
@@ -1800,31 +1701,25 @@ ExitProneWrapperProc(timer) {
   self endon("anim_prone_change");
   self ExitProne(timer);
   self waittill("killanimscript");
-  if(self.a.pose == "prone") {
+  if(self.a.pose == "prone")
     self.a.pose = "crouch";
-  }
 }
 
 canBlindfire() {
-  if(self.a.atConcealmentNode) {
+  if(self.a.atConcealmentNode)
     return false;
-  }
-  if(!animscripts\weaponList::usingAutomaticWeapon()) {
+  if(!animscripts\weaponList::usingAutomaticWeapon())
     return false;
-  }
-  if(weaponClass(self.weapon) == "mg") {
+  if(weaponClass(self.weapon) == "mg")
     return false;
-  }
-  if(isDefined(self.disable_blindfire) && self.disable_blindfire == true) {
+  if(isDefined(self.disable_blindfire) && self.disable_blindfire == true)
     return false;
-  }
   return true;
 }
 
 canHitSuppressSpot() {
-  if(!hasEnemySightPos()) {
+  if(!hasEnemySightPos())
     return false;
-  }
   myGunPos = self GetTagOrigin("tag_flash");
   return (sightTracePassed(myGunPos, getEnemySightPos(), false, undefined));
 }
@@ -1877,23 +1772,21 @@ animArrayPickRandom(animname) {
     assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
   }
   assert(self.a.array[animname].size > 0);
-  if(self.a.array[animname].size > 1) {
+  if(self.a.array[animname].size > 1)
     index = randomint(self.a.array[animname].size);
-  } else {
+  else
     index = 0;
-  }
   return self.a.array[animname][index];
 }
 
 dumpAnimArray() {
   println("self.a.array:");
   keys = getArrayKeys(self.a.array);
-  for(i = 0; i < keys.size; i++) {
-    if(isarray(self.a.array[keys[i]])) {
+  for (i = 0; i < keys.size; i++) {
+    if(isarray(self.a.array[keys[i]]))
       println(" array[ \"" + keys[i] + "\" ] = {array of size " + self.a.array[keys[i]].size + "}");
-    } else {
+    else
       println(" array[ \"" + keys[i] + "\" ] = ", self.a.array[keys[i]]);
-    }
   }
 }
 
@@ -1945,15 +1838,14 @@ getAICurrentWeapon() {
 }
 
 setAICurrentWeapon(weapon) {
-  if(weapon == self.primaryweapon) {
+  if(weapon == self.primaryweapon)
     self.weapon = weapon;
-  } else if(weapon == self.secondaryweapon) {
+  else if(weapon == self.secondaryweapon)
     self.weapon = weapon;
-  } else if(weapon == self.sidearm) {
+  else if(weapon == self.sidearm)
     self.weapon = weapon;
-  } else {
+  else
     assertMsg("weapon '" + weapon + "' does not match any known slot");
-  }
 }
 
 usingPrimary() {
@@ -1969,49 +1861,39 @@ usingSidearm() {
 }
 
 usingSMG() {
-  if(self.primaryweapon == "ppsh") {
+  if(self.primaryweapon == "ppsh")
     return true;
-  }
-  if(self.primaryweapon == "thompson") {
+  if(self.primaryweapon == "thompson")
     return true;
-  }
-  if(self.primaryweapon == "mp40") {
+  if(self.primaryweapon == "mp40")
     return true;
-  }
-  if(self.primaryweapon == "type99_lmg") {
+  if(self.primaryweapon == "type99_lmg")
     return true;
-  }
-  if(self.primaryweapon == "type100_smg") {
+  if(self.primaryweapon == "type100_smg")
     return true;
-  }
-  if(self.primaryweapon == "stg44") {
+  if(self.primaryweapon == "stg44")
     return true;
-  }
-  if(self.primaryweapon == "bar") {
+  if(self.primaryweapon == "bar")
     return true;
-  }
-  if(self.primaryweapon == "dp28") {
+  if(self.primaryweapon == "dp28")
     return true;
-  }
   return false;
 }
 
 getAICurrentWeaponSlot() {
-  if(self.weapon == self.primaryweapon) {
+  if(self.weapon == self.primaryweapon)
     return "primary";
-  } else if(self.weapon == self.secondaryweapon) {
+  else if(self.weapon == self.secondaryweapon)
     return "secondary";
-  } else if(self.weapon == self.sidearm) {
+  else if(self.weapon == self.sidearm)
     return "sidearm";
-  } else {
+  else
     assertMsg("self.weapon does not match any known slot");
-  }
 }
 
 AIHasWeapon(weapon) {
-  if(isDefined(self.weaponInfo[weapon])) {
+  if(isDefined(self.weaponInfo[weapon]))
     return true;
-  }
   return false;
 }
 
@@ -2021,9 +1903,8 @@ getAnimEndPos(theanim) {
 }
 
 isValidEnemy(enemy) {
-  if(!isDefined(enemy)) {
+  if(!isDefined(enemy))
     return false;
-  }
   return true;
 }
 
@@ -2074,7 +1955,7 @@ ragdollDeath(moveAnim) {
   self endon("killanimscript");
   lastOrg = self.origin;
   moveVec = (0, 0, 0);
-  for(;;) {
+  for (;;) {
     wait(0.05);
     force = distance(self.origin, lastOrg);
     lastOrg = self.origin;

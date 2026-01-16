@@ -43,9 +43,8 @@ drop_structs() {
   var_0 = common_scripts\utility::array_combine(common_scripts\utility::getstructarray("ending2_start_spot", "targetname"), var_0);
   var_0 = common_scripts\utility::array_combine(common_scripts\utility::getstructarray("ending3_start_spot", "targetname"), var_0);
 
-  foreach(var_2 in var_0) {
-    var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -100);
-  }
+  foreach(var_2 in var_0)
+  var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -100);
 }
 
 ending_init() {
@@ -209,9 +208,8 @@ hesh_dream() {
 save() {
   ending_init();
 
-  if(level.start_point == "save") {
+  if(level.start_point == "save")
     setslowmotion(1, 0.5, 0.05);
-  }
 
   level.player freezecontrols(1);
   level.player enableslowaim(0.1, 0.1);
@@ -263,9 +261,8 @@ set_anim_time(var_0, var_1) {
 teleport_friends(var_0) {
   maps\las_vegas_code::set_start_locations(var_0);
 
-  foreach(var_2 in level.heroes) {
-    var_2 setgoalpos(var_2.origin);
-  }
+  foreach(var_2 in level.heroes)
+  var_2 setgoalpos(var_2.origin);
 }
 
 remove_hero_guns() {

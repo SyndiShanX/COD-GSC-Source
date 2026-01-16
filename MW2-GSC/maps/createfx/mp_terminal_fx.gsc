@@ -617,4 +617,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "light_shaft_motes_airport";
   ent.v["delay"] = -15;
+
 }

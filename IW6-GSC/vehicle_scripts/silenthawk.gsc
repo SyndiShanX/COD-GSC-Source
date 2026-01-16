@@ -12,11 +12,10 @@ main(var_0, var_1, var_2) {
   var_3 = var_2 == "script_vehicle_silenthawk_flood_player" || var_2 == "script_vehicle_silenthawk_player_turret_left" || var_2 == "script_vehicle_silenthawk_open" || var_2 == "script_vehicle_silenthawk_oilrocks" || var_2 == "script_vehicle_silenthawk_open_lite";
   var_4 = var_2 == "script_vehicle_silenthawk_open_lite";
 
-  if(var_3) {
+  if(var_3)
     maps\_vehicle::build_drive( % silenthawk_doors_open, undefined, 0);
-  } else {
+  else
     maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
-  }
 
   if(!var_4) {
     maps\_vehicle::build_deathfx("vfx/gameplay/explosions/vfx_exp_silenthawk_end", undefined, "blackhawk_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");
@@ -38,9 +37,8 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "white_blink", "tag_light_belly", "fx/misc/aircraft_light_white_blink", "running", 0.1);
   maps\_vehicle::build_light(var_2, "white_blink_tail", "tag_light_tail", "fx/misc/aircraft_light_white_blink", "running", 0.1);
 
-  if(issubstr(var_2, "turret_left")) {
+  if(issubstr(var_2, "turret_left"))
     maps\_vehicle::build_turret("nym_blackhawk_minigun_close_stand", "tag_player1", "weapon_blackhawk_minigun", undefined, undefined, 0.2, 20, -14, (25, 0, 6));
-  }
 
   if(var_2 == "script_vehicle_silenthawk_oilrocks") {
     maps\_vehicle::build_turret("nym_blackhawk_minigun_close", "tag_turret_npc", "weapon_blackhawk_minigun", undefined, "auto_nonai", 0.2, 20, -14, (0, 12, -4));
@@ -57,9 +55,8 @@ init_local() {
   maps\_vehicle::vehicle_lights_on("exhaust");
   thread vehicle_scripts\silenthawk_landing::silenthawk_landing();
 
-  if(self.classname != "script_vehicle_silenthawk_open_lite") {
+  if(self.classname != "script_vehicle_silenthawk_open_lite")
     thread vehicle_scripts\silenthawk_landing::listen_for_landing_gear_messages();
-  }
 }
 
 set_vehicle_anims(var_0) {
@@ -73,9 +70,8 @@ setanims() {
   level.scr_anim["generic"]["stage_littlebird_left"] = % little_bird_premount_guy3;
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 8; var_1++) {
+  for(var_1 = 0; var_1 < 8; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_pilot1";
   var_0[1].sittag = "tag_pilot2";

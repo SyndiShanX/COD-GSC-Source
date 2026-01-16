@@ -115,9 +115,8 @@ setup_spetsnaz_anim_array(animtype, array) {
   for(i = 0; i < arrivalkeys.size; i++) {
     arrivaltype = arrivalkeys[i];
 
-    if(isarray(array[animtype]["move"]["stand"]["rifle"][arrivaltype])) {
+    if(isarray(array[animtype]["move"]["stand"]["rifle"][arrivaltype]))
       array[animtype]["move"]["crouch"]["rifle"][arrivaltype] = array[animtype]["move"]["stand"]["rifle"][arrivaltype];
-    }
   }
 
   array[animtype]["combat"]["stand"]["rifle"]["melee_0"] = % ai_spets_melee;
@@ -127,9 +126,8 @@ setup_spetsnaz_anim_array(animtype, array) {
 }
 
 setup_spetsnaz_rusher_anim_array() {
-  if(!isDefined(self.anim_array)) {
+  if(!isDefined(self.anim_array))
     self.anim_array = [];
-  }
 
   assert(isDefined(self.rushertype), "Call this function after setting the rusherType on the AI");
 

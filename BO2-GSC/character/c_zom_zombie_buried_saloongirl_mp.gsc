@@ -4,7 +4,7 @@
 *****************************************************************/
 
 main() {
-  self setModel("c_zom_zombie_buried_sgirl_player_fb");
+  self setmodel("c_zom_zombie_buried_sgirl_player_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

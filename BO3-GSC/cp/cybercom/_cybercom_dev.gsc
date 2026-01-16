@@ -21,7 +21,7 @@ function function_a0e51d80(point, timesec, size, color) {
   var_842de44a = point + (0, halfwidth, 0);
   h1 = point + (0, 0, halfwidth * -1);
   h2 = point + (0, 0, halfwidth);
-  while(end > gettime()) {
+  while (end > gettime()) {
     line(l1, l2, color, 1, 0, 1);
     line(var_5e2b69e1, var_842de44a, color, 1, 0, 1);
     line(h1, h2, color, 1, 0, 1);
@@ -39,12 +39,12 @@ function constantjuice() {
   self endon("constantjuice");
   self endon("disconnect");
   self endon("spawned");
-  while(true) {
+  while (true) {
     wait(1);
-    if(isDefined(self.cybercom.var_ebeecfd5) && self.cybercom.var_ebeecfd5) {
+    if(isdefined(self.cybercom.var_ebeecfd5) && self.cybercom.var_ebeecfd5) {
       continue;
     }
-    if(isDefined(self.cybercom.activecybercomweapon)) {
+    if(isdefined(self.cybercom.activecybercomweapon)) {
       slot = self gadgetgetslot(self.cybercom.activecybercomweapon);
       var_d921672c = self gadgetcharging(slot);
       if(var_d921672c) {
@@ -57,7 +57,7 @@ function constantjuice() {
 function cybercom_devguithink() {
   setdvar("devgui_cybercore", "");
   setdvar("devgui_cybercore_upgrade", "");
-  while(true) {
+  while (true) {
     cmd = getdvarstring("devgui_cybercore");
     if(cmd == "") {
       wait(0.5);
@@ -126,7 +126,7 @@ function cybercom_devguithink() {
         }
       }
     }
-    if(isDefined(level._cybercom_rig_ability[cmd])) {
+    if(isdefined(level._cybercom_rig_ability[cmd])) {
       player cybercom_tacrig::giverigability(cmd, upgrade);
     } else {
       player cybercom_gadget::giveability(cmd, upgrade);

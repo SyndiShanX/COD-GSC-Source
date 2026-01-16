@@ -227,7 +227,7 @@ place_track_cp() {
   if(!isDefined(level.create_num)) {
     level.create_num = level.cam_tracks.size;
   }
-  cp = create_cp(level.player getEye());
+  cp = create_cp(level.player GetEye());
   add_cp_to_track(level.create_num, level.shottype, cp);
   draw_track(level.create_num);
 }
@@ -242,7 +242,7 @@ place_target_cp() {
   if(!isDefined(level.create_num)) {
     level.create_num = level.cam_targets.size;
   }
-  cp = create_cp(level.player getEye());
+  cp = create_cp(level.player GetEye());
   add_cp_to_target(level.create_num, level.shottype, cp);
   draw_target(level.create_num);
 }
@@ -257,7 +257,7 @@ select_track() {
   arrow_hud = set_hudelem("-------->", 125, y, 1.3);
   value = undefined;
   strings = [];
-  for(i = 0; i < level.cam_tracks.size; i++) {
+  for (i = 0; i < level.cam_tracks.size; i++) {
     strings[strings.size] = "" + i;
   }
   value = list_menu(strings, 180, y, 1.3, ::select_track_highlight);
@@ -278,7 +278,7 @@ select_track_highlight(num) {
 
 create_shot(shot_name, track_name, target_name) {
   if(!isDefined(level.cam_shots[shot_name])) {
-    level.cam_shots[shot_name] = spawnStruct();
+    level.cam_shots[shot_name] = SpawnStruct();
   }
   if(isDefined(track_name)) {
     level.cam_shots[shot_name].cam_track = level.cam_tracks[track_name];
@@ -296,7 +296,7 @@ select_target() {
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
   value = undefined;
   strings = [];
-  for(i = 0; i < level.cam_targets.size; i++) {
+  for (i = 0; i < level.cam_targets.size; i++) {
     strings[strings.size] = "" + i;
   }
   value = list_menu(strings, 180, y, 1.3, ::select_target_highlight);
@@ -375,7 +375,7 @@ edit_track_select_track() {
   arrow_hud = set_hudelem("-------->", 125, y, 1.3);
   value = undefined;
   strings = [];
-  for(i = 0; i < level.cam_tracks.size; i++) {
+  for (i = 0; i < level.cam_tracks.size; i++) {
     strings[strings.size] = "" + i;
   }
   value = list_menu(strings, 180, y, 1.3);
@@ -500,7 +500,7 @@ edit_track_cp_update_info(edit_target) {
   }
   x = level.hud_array["edit_shot_track_cp_info"][1].x;
   y = level.hud_array["edit_shot_track_cp_info"][1].y + 10;
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     y += 15;
     new_hud("edit_shot_track_cp_info2", keys[i] + ":", x, y, 1);
     x += 30;
@@ -531,7 +531,7 @@ edit_update_cpoint_origin(edit_target) {
   } else {
     level thread edit_help("Press 'M' to set Origin (END to Cancel)");
   }
-  while(1) {
+  while (1) {
     level waittill("edit_shot_track_button_pressed", key);
     if(key == "m") {
       break;
@@ -547,7 +547,7 @@ edit_update_cpoint_origin(edit_target) {
     cpoint = level.cam_shots[level.shot_selected].cam_track.cpoints[level.edit_current_cp];
   }
   level.edit_help = false;
-  cpoint.origin = level.player getEye();
+  cpoint.origin = level.player GetEye();
   draw_shot(level.shot_selected);
 }
 
@@ -561,7 +561,7 @@ edit_add_cpoint(edit_target) {
   } else {
     level thread edit_help("Press 'ENTER' to Add CP (END to Cancel)");
   }
-  while(1) {
+  while (1) {
     level waittill("edit_shot_track_button_pressed", key);
     if(key == "button_a" || key == "enter") {
       break;
@@ -577,7 +577,7 @@ edit_add_cpoint(edit_target) {
   } else {
     cpoints = level.cam_shots[level.shot_selected].cam_track.cpoints;
   }
-  new_cpoint = create_cp(level.player getEye());
+  new_cpoint = create_cp(level.player GetEye());
   cpoints = array_insert(cpoints, new_cpoint, level.edit_current_cp + 1);
   if(isDefined(edit_target) && edit_target) {
     level.cam_shots[level.shot_selected].cam_target.cpoints = cpoints;
@@ -598,7 +598,7 @@ edit_delete_cpoint(edit_target) {
   } else {
     level thread edit_help("Press 'ENTER' to Delete CP (END to Cancel)");
   }
-  while(1) {
+  while (1) {
     level waittill("edit_shot_track_button_pressed", key);
     if(key == "button_a" || key == "enter") {
       break;
@@ -627,12 +627,12 @@ edit_delete_cpoint(edit_target) {
 edit_sync_time_to_target() {
   target_cpoints = level.cam_shots[level.shot_selected].cam_target.cpoints;
   time = 0;
-  for(i = 1; i < target_cpoints.size; i++) {
+  for (i = 1; i < target_cpoints.size; i++) {
     time += target_cpoints[i].attrib["time"];
   }
   cpoints = level.cam_shots[level.shot_selected].cam_track.cpoints;
   div_time = time / (cpoints.size - 1);
-  for(i = 1; i < cpoints.size; i++) {
+  for (i = 1; i < cpoints.size; i++) {
     cpoints[i].attrib["time"] = div_time;
   }
   edit_track_cp_update_info(false);
@@ -642,12 +642,12 @@ edit_sync_time_to_target() {
 edit_sync_time_to_track() {
   track_cpoints = level.cam_shots[level.shot_selected].cam_track.cpoints;
   time = 0;
-  for(i = 1; i < track_cpoints.size; i++) {
+  for (i = 1; i < track_cpoints.size; i++) {
     time += track_cpoints[i].attrib["time"];
   }
   cpoints = level.cam_shots[level.shot_selected].cam_target.cpoints;
   div_time = time / (cpoints.size - 1);
-  for(i = 1; i < cpoints.size; i++) {
+  for (i = 1; i < cpoints.size; i++) {
     cpoints[i].attrib["time"] = div_time;
   }
   edit_track_cp_update_info(true);
@@ -682,7 +682,7 @@ edit_shot_track_buttons() {
 edit_shot_track_input(edit_target) {
   level endon("disable edit_shot_track");
   level endon("disable edit_shot_target");
-  while(1) {
+  while (1) {
     if(isDefined(edit_target) && edit_target) {
       cpoints = level.cam_shots[level.shot_selected].cam_target.cpoints;
     } else {
@@ -758,40 +758,40 @@ edit_cp_highlight(pos, edit_target) {
   segments = 16;
   add_angles = 360 / segments;
   angles = (0, 0, 0);
-  for(i = 0; i < segments; i++) {
+  for (i = 0; i < segments; i++) {
     angles = angles + (add_angles, 0, 0);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     points_a[i] = pos + VectorScale(forward, radius);
   }
   angles = (0, 90, 0);
-  for(i = 0; i < segments; i++) {
+  for (i = 0; i < segments; i++) {
     angles = angles + (add_angles, 0, 0);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     points_b[i] = pos + VectorScale(forward, radius);
   }
   angles = (0, 0, 0);
-  for(i = 0; i < segments; i++) {
+  for (i = 0; i < segments; i++) {
     angles = angles + (0, add_angles, 0);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     points_c[i] = pos + VectorScale(forward, radius);
   }
   color_count = 0;
-  while(1) {
-    for(i = 0; i < points_a.size; i++) {
+  while (1) {
+    for (i = 0; i < points_a.size; i++) {
       if(i == (points_a.size - 1)) {
         Line(points_a[i], points_a[0], color, 1);
       } else {
         Line(points_a[i], points_a[i + 1], color, 1);
       }
     }
-    for(i = 0; i < points_b.size; i++) {
+    for (i = 0; i < points_b.size; i++) {
       if(i == (points_b.size - 1)) {
         Line(points_b[i], points_b[0], color, 1);
       } else {
         Line(points_b[i], points_b[i + 1], color, 1);
       }
     }
-    for(i = 0; i < points_c.size; i++) {
+    for (i = 0; i < points_c.size; i++) {
       if(i == (points_c.size - 1)) {
         Line(points_c[i], points_c[0], color, 1);
       } else {
@@ -827,7 +827,7 @@ edit_shot_change_track() {
   arrow_hud = set_hudelem("-------->", 125, y, 1.3);
   value = undefined;
   strings = [];
-  for(i = 0; i < level.cam_tracks.size; i++) {
+  for (i = 0; i < level.cam_tracks.size; i++) {
     strings[strings.size] = "" + i;
   }
   value = list_menu(strings, 180, y, 1.3, ::select_track_highlight);
@@ -849,7 +849,7 @@ edit_shot_change_target() {
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
   value = undefined;
   strings = [];
-  for(i = 0; i < level.cam_targets.size; i++) {
+  for (i = 0; i < level.cam_targets.size; i++) {
     strings[strings.size] = "" + i;
   }
   value = list_menu(strings, 180, y, 1.3, ::select_target_highlight);
@@ -872,7 +872,7 @@ compose_scene() {
   values = scene_editor_menu(strings, maps\_camsys::create_scene_add_shot);
   if(isDefined(values)) {
     remove_scene("new");
-    for(i = 0; i < values.size; i++) {
+    for (i = 0; i < values.size; i++) {
       if(isDefined(values[i])) {
         create_scene_add_shot("new", values[i]);
       }
@@ -888,11 +888,11 @@ scene_editor_menu(strings, func) {
   current_x_pos = 0;
   blue_background = draw_fancy_hudline("horizontal", 0, 410, 640, 0.2, (0.0, 0.0, 0.5), 0.7, 60);
   huds = [];
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     huds[i] = scene_editor_add_huds(x + (i * space_between), y, scale, i);
   }
   set_huds_alphas(huds, current_x_pos, 5, 0);
-  while(true) {
+  while (true) {
     level waittill("menu_button_pressed", key);
     if(key == "leftarrow" || key == "dpad_left") {
       if(current_x_pos == 0) {
@@ -925,7 +925,7 @@ scene_editor_menu(strings, func) {
     } else if(key == "ins" || key == "button_lshldr") {
       temp = scene_editor_add_huds(x, y, scale, current_x_pos);
       huds = array_insert(huds, temp, current_x_pos);
-      for(i = current_x_pos + 1; i < huds.size; i++) {
+      for (i = current_x_pos + 1; i < huds.size; i++) {
         huds[i].hud.x = huds[i].hud.x + space_between;
         huds[i].title SetText("#" + (i + 1));
         huds[i].title.x = huds[i].title.x + space_between;
@@ -935,7 +935,7 @@ scene_editor_menu(strings, func) {
       huds[current_x_pos].hud Destroy();
       huds[current_x_pos].title Destroy();
       huds = array_remove_index(huds, current_x_pos);
-      for(i = current_x_pos; i < huds.size; i++) {
+      for (i = current_x_pos; i < huds.size; i++) {
         huds[i].hud.x = huds[i].hud.x - space_between;
         huds[i].title SetText("#" + (i + 1));
         huds[i].title.x = huds[i].title.x - space_between;
@@ -946,13 +946,15 @@ scene_editor_menu(strings, func) {
     } else if(key == "p" || key == "button_x") {
       remove_scene("new");
       skip = 0;
-      for(i = 0; i < huds.size - 1; i++) {
+      for (i = 0; i < huds.size - 1; i++) {
         if(huds[i].value == "---") {
           println("^3Shot # " + (i + 1) + " is not set properly, Skipping!");
           skip++;
           continue;
         }
-        [[func]]("new", huds[i - skip].value, i - skip);
+        [
+          [func]
+        ]("new", huds[i - skip].value, i - skip);
       }
       play_scene("new");
       wait(0.2);
@@ -963,14 +965,14 @@ scene_editor_menu(strings, func) {
       stop_drawing_all();
     }
   }
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     if(isDefined(huds[i])) {
       huds[i].hud Destroy();
     }
   }
   blue_background Destroy();
   values = [];
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     if(huds[i].value == "---") {
       values[i] = undefined;
     } else {
@@ -981,7 +983,7 @@ scene_editor_menu(strings, func) {
 }
 
 scene_editor_add_huds(x, y, scale, num) {
-  huds = spawnStruct();
+  huds = SpawnStruct();
   huds.value = "---";
   huds.hud = set_hudelem(huds.value, x, y, scale, 1);
   huds.hud.alignX = "center";
@@ -1050,7 +1052,7 @@ move_huds(huds, x_shift, y_shift, current_pos, max_num_fading, min_alpha) {
     min_alpha = 0.1;
   }
   time = 0.1;
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     huds[i].hud MoveOverTime(time);
     huds[i].title MoveOverTime(time);
     huds[i].hud.x += x_shift;
@@ -1071,7 +1073,7 @@ set_huds_alphas(huds, current_pos, max_num_fading, min_alpha) {
   if(!isDefined(max_num_fading)) {
     max_num_fading = 3;
   }
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     temp = i - current_pos;
     if(temp < 0) {
       temp = temp * -1;
@@ -1098,7 +1100,7 @@ name_scene() {
 
 copy_scene(name, copy_name) {
   size = level.cam_scenes[name].shots.size;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     create_scene_add_shot(copy_name, level.cam_scenes[name].shots[i]);
   }
 }
@@ -1132,28 +1134,28 @@ save_all() {
           fprintln(file, "shots()");
           fprintln(file, "{");
           shot_names = GetArrayKeys(level.cam_shots);
-          for(i = 0; i < shot_names.size; i++) {
+          for (i = 0; i < shot_names.size; i++) {
             track = level.cam_shots[shot_names[i]].cam_track;
             fprintln(file, tab + "
                 fprintln(file, tab + "
                   fprintln(file, tab + "
                     fprintln(file, tab + "track_array = [];");
-                    for(j = 0; j < track.cpoints.size; j++) {
+                    for (j = 0; j < track.cpoints.size; j++) {
                       fprintln(file, tab + "num = track_array.size;");
                       fprintln(file, tab + "track_array[num] = " + cp_string + track.cpoints[j].origin + " );");
                       keys = GetArrayKeys(track.cpoints[j].attrib);
-                      for(q = 0; q < keys.size; q++) {
+                      for (q = 0; q < keys.size; q++) {
                         fprintln(file, tab + "track_array[num].attrib[\"" + keys[q] + "\"] = " + track.cpoints[j].attrib[keys[q]] + ";");
                       }
                       fprintln(file, "");
                     }
                     fprintln(file, ""); target = level.cam_shots[shot_names[i]].cam_target; fprintln(file, tab + "
                       fprintln(file, tab + "target_array = [];");
-                      for(j = 0; j < target.cpoints.size; j++) {
+                      for (j = 0; j < target.cpoints.size; j++) {
                         fprintln(file, tab + "num = target_array.size;");
                         fprintln(file, tab + "target_array[num] = " + cp_string + target.cpoints[j].origin + " );");
                         keys = GetArrayKeys(target.cpoints[j].attrib);
-                        for(q = 0; q < keys.size; q++) {
+                        for (q = 0; q < keys.size; q++) {
                           fprintln(file, tab + "target_array[num].attrib[\"" + keys[q] + "\"] = " + target.cpoints[j].attrib[keys[q]] + ";");
                         }
                         fprintln(file, "");
@@ -1169,11 +1171,11 @@ save_all() {
                     fprintln(file, "scenes()");
                     fprintln(file, "{");
                     scene_names = GetArrayKeys(level.cam_scenes);
-                    for(i = 0; i < scene_names.size; i++) {
+                    for (i = 0; i < scene_names.size; i++) {
                       fprintln(file, tab + "
                         fprintln(file, tab + "
                           fprintln(file, tab + "shots = [];"); shots = level.cam_scenes[scene_names[i]].shots;
-                          for(j = 0; j < shots.size; j++) {
+                          for (j = 0; j < shots.size; j++) {
                             fprintln(file, tab + "shots[" + j + "] = " + "\"" + shots[j] + "\";");
                           }
                           fprintln(file, ""); fprintln(file, tab + create_scene + "\"" + scene_names[i] + "\"" + ", shots );"); fprintln(file, "");
@@ -1208,7 +1210,7 @@ save_all() {
                           level.cam_tracks = [];
                         }
                         if(!isDefined(level.cam_tracks[num])) {
-                          shot = spawnStruct();
+                          shot = SpawnStruct();
                           shot.type = type;
                           shot.cpoints = [];
                           level.cam_tracks[num] = shot;
@@ -1224,7 +1226,7 @@ save_all() {
                           level.cam_targets = [];
                         }
                         if(!isDefined(level.cam_targets[num])) {
-                          shot = spawnStruct();
+                          shot = SpawnStruct();
                           shot.type = type;
                           shot.cpoints = [];
                           level.cam_targets[num] = shot;
@@ -1236,7 +1238,7 @@ save_all() {
                         level.cam_targets[num].cpoints[size] = cp;
                       }
                       copy_shot(name, copy_name) {
-                        level.cam_shots[copy_name] = spawnStruct();
+                        level.cam_shots[copy_name] = SpawnStruct();
                         level.cam_shots[copy_name].cam_track = level.cam_shots[name].cam_track;
                         level.cam_shots[copy_name].cam_target = level.cam_shots[name].cam_target;
                       }
@@ -1248,7 +1250,7 @@ save_all() {
                           return;
                         }
                         keys = level.cam_shots;
-                        for(i = 0; i < keys.size; i++) {
+                        for (i = 0; i < keys.size; i++) {
                           draw_shot_track(level.cam_shots[keys[i]]);
                           draw_shot_target(level.cam_shots[keys[i]]);
                         }
@@ -1258,7 +1260,7 @@ save_all() {
                         draw_all_targets();
                       }
                       draw_all_tracks() {
-                        for(i = 0; i < level.cam_track.size; i++) {
+                        for (i = 0; i < level.cam_track.size; i++) {
                           draw_track(i);
                         }
                       }
@@ -1301,7 +1303,7 @@ save_all() {
                       draw_point_thread(origin, num, color) {
                         level endon("stop_drawing_" + num);
                         points = get_square_points(origin, 5);
-                        while(1) {
+                        while (1) {
                           line(points[0], points[1], color);
                           line(points[1], points[2], color);
                           line(points[2], points[3], color);
@@ -1331,7 +1333,7 @@ save_all() {
                         return points;
                       }
                       draw_all_targets() {
-                        for(i = 0; i < level.cam_targets.size; i++) {
+                        for (i = 0; i < level.cam_targets.size; i++) {
                           draw_target(i);
                         }
                       }
@@ -1372,7 +1374,7 @@ save_all() {
                         hud.alignX = "center";
                         hud.color = (1, 1, 0);
                         level.edit_help = true;
-                        while(level.edit_help) {
+                        while (level.edit_help) {
                           wait(0.05);
                         }
                         hud Destroy();
@@ -1383,18 +1385,18 @@ save_all() {
                         }
                       }
                       spawn_cam_model(scene_name, pos, angles) {
-                        model = spawn("script_model", pos);
+                        model = Spawn("script_model", pos);
                         model.angles = angles;
-                        model setModel("temp_camera");
+                        model SetModel("temp_camera");
                         return model;
                       }
                       draw_scene_lines(scene_name) {
                         level notify("stop_all_lines");
                         level endon("stop_" + scene_name + "_lines");
                         level endon("stop_all_lines");
-                        while(1) {
+                        while (1) {
                           if(isDefined(level.cam_scenes[scene_name]) && level.cam_scenes[scene_name].size > 1) {
-                            for(i = 1; i < level.cam_scenes[scene_name].size; i++) {
+                            for (i = 1; i < level.cam_scenes[scene_name].size; i++) {
                               line(level.cam_scenes[scene_name][i]["pos"], level.cam_scenes[scene_name][i - 1]["pos"], (1, 1, 1));
                             }
                           }
@@ -1414,11 +1416,11 @@ save_all() {
                         alpha = 0.5;
                         max_dist = 500 * 500;
                         dot = 0.95;
-                        while(1) {
+                        while (1) {
                           if(!isDefined(level.cam_scenes[scene_name])) {
                             return;
                           }
-                          for(i = 0; i < level.cam_scenes[scene_name].size; i++) {
+                          for (i = 0; i < level.cam_scenes[scene_name].size; i++) {
                             if(i == 0) {
                               time_array[i] = 0;
                               time2_array[i] = 0;
@@ -1427,8 +1429,8 @@ save_all() {
                               time2_array[i] = level.cam_scenes[scene_name][i]["time"];
                             }
                           }
-                          forward = anglesToForward(players[0] GetPlayerAngles());
-                          for(i = 0; i < level.cam_scenes[scene_name].size; i++) {
+                          forward = AnglesToForward(players[0] GetPlayerAngles());
+                          for (i = 0; i < level.cam_scenes[scene_name].size; i++) {
                             pos = level.cam_scenes[scene_name][i]["pos"];
                             time = time_array[i] * 0.001;
                             time2 = time2_array[i] * 0.001;
@@ -1439,7 +1441,7 @@ save_all() {
                             if(alpha < 0.3) {
                               alpha = 0.3;
                             }
-                            difference = VectorNormalize(pos - players[0] getEye());
+                            difference = VectorNormalize(pos - players[0] GetEye());
                             newdot = VectorDot(forward, difference);
                             if(newdot < dot) {
                               scale = 0.25;

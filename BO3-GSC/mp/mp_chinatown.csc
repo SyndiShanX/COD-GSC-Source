@@ -16,15 +16,15 @@ function main() {
   mp_chinatown_sound::main();
   level.disablefxaniminsplitscreencount = 3;
   load::main();
-  level.domflagbasefxoverride = &dom_flag_base_fx_override;
-  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = & dom_flag_base_fx_override;
+  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_chinatown";
-  level.var_283122e6 = &function_ea38265c;
+  level.var_283122e6 = & function_ea38265c;
 }
 
 function function_ea38265c(scriptbundlename) {
-  if(isDefined(level.localplayers) && level.localplayers.size < 2) {
+  if(isdefined(level.localplayers) && level.localplayers.size < 2) {
     return false;
   }
   if(issubstr(scriptbundlename, "p7_fxanim_gp_shutter")) {

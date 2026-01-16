@@ -5,9 +5,8 @@
 ****************************************************/
 
 beautiful_corner() {
-  if(!common_scripts\_ca_beautiful_corner::initialize()) {
+  if(!common_scripts\_ca_beautiful_corner::initialize())
     return 0;
-  }
 
   common_scripts\utility::flag_init("lighting_player_interior");
   common_scripts\utility::flag_init("player_made_it");
@@ -68,9 +67,8 @@ open_all_doors() {
 }
 
 remove_barbed_wire_walls(var_0) {
-  var_1 = getEntArray(var_0, "targetname");
+  var_1 = getentarray(var_0, "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 delete();
-  }
+  foreach(var_3 in var_1)
+  var_3 delete();
 }

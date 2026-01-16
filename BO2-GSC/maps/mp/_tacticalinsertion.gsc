@@ -24,39 +24,34 @@ init() {
 }
 
 istacspawntouchingcrates(origin, angles) {
-  crate_ents = getEntArray("care_package", "script_noteworthy");
+  crate_ents = getentarray("care_package", "script_noteworthy");
   mins = (-17, -17, -40);
   maxs = (17, 17, 40);
 
   for(i = 0; i < crate_ents.size; i++) {
-    if(crate_ents[i] istouchingvolume(origin + vectorscale((0, 0, 1), 40.0), mins, maxs)) {
+    if(crate_ents[i] istouchingvolume(origin + vectorscale((0, 0, 1), 40.0), mins, maxs))
       return true;
-    }
   }
 
   return false;
 }
 
 overridespawn(ispredictedspawn) {
-  if(!isDefined(self.tacticalinsertion)) {
+  if(!isDefined(self.tacticalinsertion))
     return false;
-  }
 
   origin = self.tacticalinsertion.origin;
   angles = self.tacticalinsertion.angles;
   team = self.tacticalinsertion.team;
 
-  if(!ispredictedspawn) {
+  if(!ispredictedspawn)
     self.tacticalinsertion destroy_tactical_insertion();
-  }
 
-  if(team != self.team) {
+  if(team != self.team)
     return false;
-  }
 
-  if(istacspawntouchingcrates(origin)) {
+  if(istacspawntouchingcrates(origin))
     return false;
-  }
 
   if(!ispredictedspawn) {
     self.tacticalinsertiontime = gettime();
@@ -75,9 +70,8 @@ waitanddelete(time) {
 }
 
 watch(player) {
-  if(isDefined(player.tacticalinsertion)) {
+  if(isDefined(player.tacticalinsertion))
     player.tacticalinsertion destroy_tactical_insertion();
-  }
 
   player thread spawntacticalinsertion();
   self waitanddelete(0.05);
@@ -105,13 +99,11 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
       continue;
     }
     if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed()) {
-      if(isDefined(playersoundonuse)) {
+      if(isDefined(playersoundonuse))
         player playlocalsound(playersoundonuse);
-      }
 
-      if(isDefined(npcsoundonuse)) {
-        player playSound(npcsoundonuse);
-      }
+      if(isDefined(npcsoundonuse))
+        player playsound(npcsoundonuse);
 
       self thread[[callback]](player);
     }
@@ -155,12 +147,11 @@ fizzle(attacker) {
     return;
   }
   self.fizzle = 1;
-  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playSound("dst_tac_insert_break");
+  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playsound("dst_tac_insert_break");
 
-  if(isDefined(attacker) && attacker != self.owner) {
+  if(isDefined(attacker) && attacker != self.owner)
     self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("tact_destroyed", "item_destroyed");
-  }
 
   self destroy_tactical_insertion(attacker);
 }
@@ -175,7 +166,7 @@ pickup(attacker) {
 spawntacticalinsertion() {
   self endon("disconnect");
   self.tacticalinsertion = spawn("script_model", self.origin + (0, 0, 1));
-  self.tacticalinsertion setModel("t6_wpn_tac_insert_world");
+  self.tacticalinsertion setmodel("t6_wpn_tac_insert_world");
   self.tacticalinsertion.origin = self.origin + (0, 0, 1);
   self.tacticalinsertion.angles = self.angles;
   self.tacticalinsertion.team = self.team;
@@ -215,13 +206,12 @@ spawntacticalinsertion() {
   self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.friendlytrigger, ::pickup, watcher.pickupsoundplayer, watcher.pickupsound);
   self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.enemytrigger, ::fizzle);
 
-  if(isDefined(self.tacticalinsertioncount)) {
+  if(isDefined(self.tacticalinsertioncount))
     self.tacticalinsertioncount++;
-  } else {
+  else
     self.tacticalinsertioncount = 1;
-  }
 
-  self.tacticalinsertion setCanDamage(1);
+  self.tacticalinsertion setcandamage(1);
   self.tacticalinsertion.health = 1;
 
   while(true) {
@@ -241,28 +231,24 @@ spawntacticalinsertion() {
         case "concussion_grenade_mp":
         case "flash_grenade_mp":
           if(level.teambased && self.tacticalinsertion.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           } else if(!level.teambased && self.tacticalinsertion.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           }
 
           break;
         default:
-          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
             attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-          }
 
           break;
       }
     }
 
-    if(isDefined(attacker) && attacker != self) {
+    if(isDefined(attacker) && attacker != self)
       self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("tact_destroyed", "item_destroyed");
-    }
 
     self.tacticalinsertion thread fizzle();
   }
@@ -276,21 +262,18 @@ cancel_button_think() {
   self thread cancel_button_press();
   event = self waittill_any_return("tactical_insertion_destroyed", "disconnect", "end_killcam", "abort_killcam", "tactical_insertion_canceled", "spawned");
 
-  if(event == "tactical_insertion_canceled") {
+  if(event == "tactical_insertion_canceled")
     self.tacticalinsertion destroy_tactical_insertion();
-  }
 
-  if(isDefined(text)) {
+  if(isDefined(text))
     text destroy();
-  }
 }
 
 canceltackinsertionbutton() {
-  if(level.console) {
+  if(level.console)
     return self changeseatbuttonpressed();
-  } else {
+  else
     return self jumpbuttonpressed();
-  }
 }
 
 cancel_button_press() {
@@ -337,9 +320,8 @@ gettacticalinsertions() {
   tac_inserts = [];
 
   foreach(player in level.players) {
-    if(isDefined(player.tacticalinsertion)) {
+    if(isDefined(player.tacticalinsertion))
       tac_inserts[tac_inserts.size] = player.tacticalinsertion;
-    }
   }
 
   return tac_inserts;

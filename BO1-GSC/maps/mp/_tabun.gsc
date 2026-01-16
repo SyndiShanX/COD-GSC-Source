@@ -40,7 +40,7 @@ init() {
   level.sound_shock_tabun_stop = "";
 }
 checkDvarUpdates() {
-  while(true) {
+  while (true) {
     level.tabunGasPoisonRadius = weapons_get_dvar_int("scr_tabun_effect_radius", level.tabunGasPoisonRadius);
     level.tabunGasPoisonHeight = weapons_get_dvar_int("scr_tabun_shock_height", level.tabunGasPoisonHeight);
     level.tabunGasShockRadius = weapons_get_dvar_int("scr_tabun_shock_radius", level.tabunGasShockRadius);
@@ -65,11 +65,10 @@ watchTabunGrenadeDetonation(owner) {
       return;
     }
   }
-  if(weapons_get_dvar_int("scr_enable_new_tabun", 1)) {
+  if(weapons_get_dvar_int("scr_enable_new_tabun", 1))
     generateLocations(position, owner);
-  } else {
+  else
     singleLocation(position, owner);
-  }
 }
 damageEffectArea(owner, position, radius, height, killCamEnt) {
   shockEffectArea = spawn("trigger_radius", position, 0, radius, height);
@@ -78,23 +77,21 @@ damageEffectArea(owner, position, radius, height, killCamEnt) {
   owner thread maps\mp\_dogs::flash_dogs(gasEffectArea);
   loopWaitTime = 0.5;
   durationOfTabun = level.tabunGasDuration;
-  while(durationOfTabun > 0) {
+  while (durationOfTabun > 0) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(level.friendlyfire == 0) {
         if(players[i] != owner) {
-          if(!isDefined(owner) || !isDefined(owner.team)) {
+          if(!isDefined(owner) || !isDefined(owner.team))
             continue;
-          }
-          if(level.teambased && players[i].team == owner.team) {
+          if(level.teambased && players[i].team == owner.team)
             continue;
-          }
         }
       }
       if((!isDefined(players[i].inPoisonArea)) || (players[i].inPoisonArea == false)) {
         if(players[i] istouching(gasEffectArea) && players[i].sessionstate == "playing") {
           if(!(players[i] hasPerk("specialty_gas_mask"))) {
-            trace = bulletTrace(position, players[i].origin + (0, 0, 12), false, players[i]);
+            trace = bullettrace(position, players[i].origin + (0, 0, 12), false, players[i]);
             if(trace["fraction"] == 1) {
               players[i].lastPoisonedBy = owner;
               players[i] thread damageInPoisonArea(shockEffectArea, killcament, trace, position);
@@ -107,9 +104,8 @@ damageEffectArea(owner, position, radius, height, killCamEnt) {
     wait(loopWaitTime);
     durationOfTabun -= loopWaitTime;
   }
-  if(level.tabunGasDuration < level.poisonDuration) {
+  if(level.tabunGasDuration < level.poisonDuration)
     wait(level.poisonDuration - level.tabunGasDuration);
-  }
   shockEffectArea delete();
   gasEffectArea delete();
 }
@@ -122,10 +118,10 @@ damageInPoisonArea(gasEffectArea, killcament, trace, position) {
   tabunShockSound = spawn("script_origin", (0, 0, 1));
   tabunShockSound thread deleteEntOnOwnerDeath(self);
   tabunShockSound.origin = position;
-  tabunShockSound playSound(level.sound_shock_tabun_start);
+  tabunShockSound playsound(level.sound_shock_tabun_start);
   tabunShockSound playLoopSound(level.sound_shock_tabun_loop);
   timer = 0;
-  while((trace["fraction"] == 1) && (isDefined(gasEffectArea)) && self istouching(gasEffectArea) && self.sessionstate == "playing" && isDefined(self.lastPoisonedBy)) {
+  while ((trace["fraction"] == 1) && (isDefined(gasEffectArea)) && self istouching(gasEffectArea) && self.sessionstate == "playing" && isDefined(self.lastPoisonedBy)) {
     damage = level.poisonDamage;
     if(level.hardcoreMode) {
       damage = level.poisonDamageHardcore;
@@ -152,7 +148,7 @@ damageInPoisonArea(gasEffectArea, killcament, trace, position) {
       self SetClientDvar("r_poisonFX_blurMin", "1.5");
     }
     wait(1.0);
-    trace = bulletTrace(position, self.origin + (0, 0, 12), false, self);
+    trace = bullettrace(position, self.origin + (0, 0, 12), false, self);
   }
   tabunShockSound StopLoopSound(0.5);
   wait(0.5);
@@ -206,7 +202,7 @@ singleLocation(position, owner) {
   damageEffectArea(owner, position, level.tabunGasPoisonRadius, level.tabunGasPoisonHeight, killcament);
 }
 hitPos(start, end, color) {
-  trace = bulletTrace(start, end, false, undefined);
+  trace = bullettrace(start, end, false, undefined);
   return trace["position"];
 }
 spawnAllLocs(owner, startPos) {
@@ -248,7 +244,7 @@ spawnAllLocs(owner, startPos) {
   locations["point"][5] = sw;
   locations["point"][6] = west;
   locations["point"][7] = nw;
-  for(count = 0; count < 8; count++) {
+  for (count = 0; count < 8; count++) {
     trace = hitPos(startPos, locations["point"][count], locations["color"][count]);
     locations["tracePos"][count] = trace;
     locations["loc"][count] = startPos / 2 + trace / 2;
@@ -260,7 +256,7 @@ spawnAllLocs(owner, startPos) {
   killCamEnt thread deleteAfterTime(15.0);
   killCamEnt.startTime = gettime();
   center = getcenter(locations);
-  for(i = 0; i < 8; i++) {
+  for (i = 0; i < 8; i++) {
     fxToPlay = setUpTabunFx(owner, locations, i);
     switch (fxToPlay) {
       case 0: {
@@ -291,7 +287,7 @@ spawnAllLocs(owner, startPos) {
   }
   singleEffect = true;
   freepassUsed = false;
-  for(i = 0; i < 8; i++) {
+  for (i = 0; i < 8; i++) {
     if(locations["radius"][i] != level.fx_tabun_radius0) {
       if(freePassUsed == false && locations["radius"][i] == level.fx_tabun_radius1) {
         freePassUsed = true;
@@ -307,7 +303,7 @@ spawnAllLocs(owner, startPos) {
     singleLocation(startPos, owner);
   } else {
     SpawnTimedFX(level.fx_tabun_3, startPos);
-    for(count = 0; count < 8; count++) {
+    for (count = 0; count < 8; count++) {
       if(isDefined(locations["fxtoplay"][count])) {
         SpawnTimedFX(locations["fxtoplay"][count], locations["loc"][count]);
         thread damageEffectArea(owner, locations["loc"][count], locations["radius"][count], locations["radius"][count], killCamEnt);
@@ -318,7 +314,7 @@ spawnAllLocs(owner, startPos) {
 playTabunSound(position) {
   tabunSound = spawn("script_origin", (0, 0, 1));
   tabunSound.origin = position;
-  tabunSound playSound(level.sound_tabun_start);
+  tabunSound playsound(level.sound_tabun_start);
   tabunSound playLoopSound(level.sound_tabun_loop);
   wait(level.tabunGasDuration);
   thread playSoundinSpace(level.sound_tabun_stop, position);
@@ -329,13 +325,11 @@ playTabunSound(position) {
 setUpTabunFx(owner, locations, count) {
   fxToPlay = undefined;
   previous = count - 1;
-  if(previous < 0) {
+  if(previous < 0)
     previous = previous + locations["loc"].size;
-  }
   next = count + 1;
-  if(next >= locations["loc"].size) {
+  if(next >= locations["loc"].size)
     next = next - locations["loc"].size;
-  }
   effect0Dist = level.fx_tabun_radius0 * level.fx_tabun_radius0;
   effect1Dist = level.fx_tabun_radius1 * level.fx_tabun_radius1;
   effect2Dist = level.fx_tabun_radius2 * level.fx_tabun_radius2;
@@ -355,7 +349,7 @@ setUpTabunFx(owner, locations, count) {
 }
 getCentroid(locations) {
   centroid = (0, 0, 0);
-  for(i = 0; i < locations["loc"].size; i++) {
+  for (i = 0; i < locations["loc"].size; i++) {
     centroid = centroid + (locations["loc"][i] / locations["loc"].size);
   }
   return centroid;
@@ -368,22 +362,21 @@ getcenter(locations) {
   maxX = curX;
   minY = curY;
   maxY = curY;
-  for(i = 1; i < locations["tracePos"].size; i++) {
+  for (i = 1; i < locations["tracePos"].size; i++) {
     curX = locations["tracePos"][i][0];
     curY = locations["tracePos"][i][1];
-    if(curX > maxX) {
+    if(curX > maxX)
       maxX = curX;
-    } else if(curX < minX) {
+    else if(curX < minX)
       minX = curX;
-    }
-    if(curY > maxY) {
+    if(curY > maxY)
       maxY = curY;
-    } else if(curY < minY) {
+    else if(curY < minY)
       minY = curY;
-    }
   }
   avgX = (maxX + minX) / 2;
   avgY = (maxY + minY) / 2;
   center = (avgX, avgY, locations["tracePos"][0][2]);
   return center;
 }
+

@@ -16,25 +16,20 @@ precache_gib_fx() {
 }
 
 do_gib(iDamage, sMeansOfDeath, weapon) {
-  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon)) {
+  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon))
     return true;
-  }
   return false;
 }
 
 do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
-  if(weapon == "m8_white_smoke_mp") {
+  if(weapon == "m8_white_smoke_mp")
     return false;
-  }
-  if(weapon == "tabun_gas_mp") {
+  if(weapon == "tabun_gas_mp")
     return false;
-  }
-  if(weapon == "signal_flare_mp") {
+  if(weapon == "signal_flare_mp")
     return false;
-  }
-  if(weapon == "molotov_mp") {
+  if(weapon == "molotov_mp")
     return false;
-  }
   if(sMeansOfDeath == "MOD_EXPLOSIVE" ||
     sMeansOfDeath == "MOD_GRENADE" ||
     sMeansOfDeath == "MOD_GRENADE_SPLASH" ||
@@ -49,22 +44,18 @@ do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
 }
 
 is_weapon_shotgun(sWeapon) {
-  if(WeaponClass(sWeapon) == "spread") {
+  if(WeaponClass(sWeapon) == "spread")
     return true;
-  }
   return false;
 }
 
 do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
-  if(!isDefined(vAttackerOrigin)) {
+  if(!isDefined(vAttackerOrigin))
     return false;
-  }
-  if(!isDefined(sHitLoc)) {
+  if(!isDefined(sHitLoc))
     return false;
-  }
-  if(sMeansOfDeath == "MOD_MELEE") {
+  if(sMeansOfDeath == "MOD_MELEE")
     return false;
-  }
   shotty_gib = is_weapon_shotgun(sWeapon);
   if(iDamage < 35 && !shotty_gib) {
     return false;
@@ -229,16 +220,15 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      playFXOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      PlayFxOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
-  self playSound("chr_death_gibs");
+  self PlaySound("chr_death_gibs");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
   self setModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
-  if(gib_ref == "no_legs") {
+  if(gib_ref == "no_legs")
     return true;
-  }
   return false;
 }
 

@@ -68,11 +68,10 @@ tryUseLBSupport(lifeId, streakName) {
 
 createLBGuard(heliGuardType) {
   closestStartNode = lbSupport_getClosestStartNode(self.origin);
-  if(isDefined(closestStartNode.angles)) {
+  if(isDefined(closestStartNode.angles))
     startAng = closestStartNode.angles;
-  } else {
+  else
     startAng = (0, 0, 0);
-  }
 
   flyHeight = self maps\mp\killstreaks\_airdrop::getFlyHeightOffset(self.origin);
 
@@ -310,12 +309,10 @@ lbSupport_watchOwnerDamage() {
         !attacker _hasPerk("specialty_blindeye") &&
         !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
         self SetLookAtEnt(attacker);
-        if(isDefined(self.mgTurretLeft)) {
+        if(isDefined(self.mgTurretLeft))
           self.mgTurretLeft SetTargetEntity(attacker);
-        }
-        if(isDefined(self.mgTurretRight)) {
+        if(isDefined(self.mgTurretRight))
           self.mgTurretRight SetTargetEntity(attacker);
-        }
       }
     }
   }
@@ -382,9 +379,8 @@ lbSupport_handleDamage() {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
-    }
 
     self.wasDamaged = true;
 
@@ -396,20 +392,17 @@ lbSupport_handleDamage() {
         !attacker _hasPerk("specialty_blindeye") &&
         !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
         self SetLookAtEnt(attacker);
-        if(isDefined(self.mgTurretLeft)) {
+        if(isDefined(self.mgTurretLeft))
           self.mgTurretLeft SetTargetEntity(attacker);
-        }
-        if(isDefined(self.mgTurretRight)) {
+        if(isDefined(self.mgTurretRight))
           self.mgTurretRight SetTargetEntity(attacker);
-        }
       }
 
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("helicopter");
 
       if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
-        if(attacker _hasPerk("specialty_armorpiercing")) {
+        if(attacker _hasPerk("specialty_armorpiercing"))
           modifiedDamage += damage * level.armorPiercingMod;
-        }
       }
     }
 
@@ -461,9 +454,8 @@ lbSupport_handleDamage() {
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath, weapon);
       }
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self.owner thread leaderDialogOnPlayer("lbguard_destroyed");
-      }
 
       self notify("death");
       return;
@@ -480,31 +472,25 @@ lbSupport_EMPGrenaded() {
   level endon("game_ended");
 
   self.empGrenaded = true;
-  if(isDefined(self.mgTurretRight)) {
+  if(isDefined(self.mgTurretRight))
     self.mgTurretRight notify("stop_shooting");
-  }
-  if(isDefined(self.mgTurretLeft)) {
+  if(isDefined(self.mgTurretLeft))
     self.mgTurretLeft notify("stop_shooting");
-  }
 
   if(isDefined(level._effect["ims_sensor_explode"])) {
-    if(isDefined(self.mgTurretRight)) {
+    if(isDefined(self.mgTurretRight))
       playFXOnTag(getfx("ims_sensor_explode"), self.mgTurretRight, "tag_aim");
-    }
-    if(isDefined(self.mgTurretLeft)) {
+    if(isDefined(self.mgTurretLeft))
       playFXOnTag(getfx("ims_sensor_explode"), self.mgTurretLeft, "tag_aim");
-    }
   }
 
   wait(EMP_GRENADE_TIME);
 
   self.empGrenaded = false;
-  if(isDefined(self.mgTurretRight)) {
+  if(isDefined(self.mgTurretRight))
     self.mgTurretRight notify("turretstatechange");
-  }
-  if(isDefined(self.mgTurretLeft)) {
+  if(isDefined(self.mgTurretLeft))
     self.mgTurretLeft notify("turretstatechange");
-  }
 }
 
 lbSupport_watchSAMProximity(player, missileTeam, missileTarget, missileGroup) {
@@ -607,14 +593,12 @@ lbSupport_getClosestLinkedNode(pos) {
 }
 
 lbSupport_arrayContains(array, compare) {
-  if(array.size <= 0) {
+  if(array.size <= 0)
     return false;
-  }
 
   foreach(member in array) {
-    if(member == compare) {
+    if(member == compare)
       return true;
-    }
   }
 
   return false;
@@ -654,9 +638,8 @@ lbSupport_setAirNodeMesh() {
       if(loc == other_loc) {
         continue;
       }
-      if(!lbSupport_arrayContains(loc.neighbors, other_loc) && lbSupport_arrayContains(other_loc lbSupport_getLinkedStructs(), loc)) {
+      if(!lbSupport_arrayContains(loc.neighbors, other_loc) && lbSupport_arrayContains(other_loc lbSupport_getLinkedStructs(), loc))
         loc.neighbors[loc.neighbors.size] = other_loc;
-      }
     }
   }
 }
@@ -668,11 +651,10 @@ lbSupport_attackTargets() {
   for(;;) {
     self waittill("turretstatechange");
 
-    if(self IsFiringTurret() && !self.vehicle.empGrenaded) {
+    if(self IsFiringTurret() && !self.vehicle.empGrenaded)
       self thread lbSupport_burstFireStart();
-    } else {
+    else
       self thread lbSupport_burstFireStop();
-    }
   }
 }
 
@@ -710,7 +692,6 @@ lbSupport_burstFireStart() {
 
 lbSupport_burstFireStop() {
   self notify("stop_shooting");
-  if(isDefined(self.vehicle.owner)) {
+  if(isDefined(self.vehicle.owner))
     self.vehicle SetLookAtEnt(self.vehicle.owner);
-  }
 }

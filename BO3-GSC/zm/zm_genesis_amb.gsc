@@ -23,7 +23,7 @@ function function_25b0085d() {
     return;
   }
   level flag::set("ambient_solar_flares_on");
-  while(true) {
+  while (true) {
     wait(randomfloatrange(40, 60));
     var_9a813858 = 0;
     if(!level flag::get("ambient_solar_flares_on")) {
@@ -32,7 +32,7 @@ function function_25b0085d() {
     do {
       var_34b4e10b = undefined;
       var_717fac8 = array::random(level.activeplayers);
-      if(!isDefined(var_717fac8.var_a3d40b8)) {
+      if(!isdefined(var_717fac8.var_a3d40b8)) {
         wait(0.5);
       } else {
         str_zone = var_717fac8.var_a3d40b8;
@@ -46,7 +46,7 @@ function function_25b0085d() {
         }
       }
     }
-    while(!isDefined(var_34b4e10b));
+    while (!isdefined(var_34b4e10b));
     if(var_34b4e10b == "start") {
       var_34b4e10b = "sheffield";
     }

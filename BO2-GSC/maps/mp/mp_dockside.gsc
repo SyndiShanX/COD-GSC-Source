@@ -22,11 +22,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_dockside");
   level.overrideplayerdeathwatchtimer = ::leveloverridetime;
   level.useintermissionpointsonwavespawn = ::useintermissionpointsonwavespawn;
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -38,14 +38,13 @@ main() {
   setdvar("sm_sunsamplesizenear", 0.39);
   setdvar("sm_sunshadowsmall", 1);
 
-  if(getgametypesetting("allowMapScripting")) {
+  if(getgametypesetting("allowMapScripting"))
     level maps\mp\mp_dockside_crane::init();
-  } else {
-    crate_triggers = getEntArray("crate_kill_trigger", "targetname");
+  else {
+    crate_triggers = getentarray("crate_kill_trigger", "targetname");
 
-    for(i = 0; i < crate_triggers.size; i++) {
+    for(i = 0; i < crate_triggers.size; i++)
       crate_triggers[i] delete();
-    }
   }
 
   setheliheightpatchenabled("war_mode_heli_height_lock", 0);
@@ -63,7 +62,7 @@ levelspawndvars(reset_dvars) {
 
 water_trigger_init() {
   wait 3;
-  triggers = getEntArray("trigger_hurt", "classname");
+  triggers = getentarray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -78,16 +77,15 @@ water_trigger_think() {
     self waittill("trigger", entity);
 
     if(isplayer(entity)) {
-      entity playSound("mpl_splash_death");
-      playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
+      entity playsound("mpl_splash_death");
+      playfx(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }
   }
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater()) {
+  if(self isinwater())
     return 0.4;
-  }
 
   return defaulttime;
 }
@@ -97,27 +95,25 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getEntArray("trigger_hurt", "classname");
+  triggers = getentarray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger)) {
+    if(self istouching(trigger))
       return true;
-    }
   }
 
   return false;
 }
 
 rts_remove() {
-  removes = getEntArray("rts_only", "targetname");
+  removes = getentarray("rts_only", "targetname");
 
   foreach(remove in removes) {
-    if(isDefined(remove)) {
+    if(isDefined(remove))
       remove delete();
-    }
   }
 }
 
@@ -138,9 +134,8 @@ devgui_dockside() {
         break;
     }
 
-    if(getdvar(#"devgui_notify") != "") {
+    if(getdvar(#"devgui_notify") != "")
       setdvar("devgui_notify", "");
-    }
   }
 
 }

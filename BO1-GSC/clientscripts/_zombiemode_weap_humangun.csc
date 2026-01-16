@@ -107,7 +107,7 @@ humangun_notetrack_think() {
 
 humangun_create_hit_response_fx(localClientNum, tag, effect) {
   if(!isDefined(self._humangun_hit_response_fx[localClientNum][tag])) {
-    self._humangun_hit_response_fx[localClientNum][tag] = playFXOnTag(localClientNum, effect, self, tag);
+    self._humangun_hit_response_fx[localClientNum][tag] = PlayFxOnTag(localClientNum, effect, self, tag);
   }
 }
 
@@ -179,8 +179,8 @@ humangun_zombie_hit_response(localClientNum, set, newEnt) {
       tag_pos = self gettagorigin("J_SpineLower");
       players = getLocalPlayers();
       for(i = 0; i < players.size; i++) {
-        playFX(i, level._effect["humangun_explosion"], tag_pos);
-        playFX(i, level._effect["humangun_explosion_death_mist"], tag_pos);
+        playfx(i, level._effect["humangun_explosion"], tag_pos);
+        playfx(i, level._effect["humangun_explosion_death_mist"], tag_pos);
       }
     }
   } else {
@@ -229,13 +229,13 @@ humangun_player_visionset(int_local_client, set, ent_new, bool_upgraded) {
 activate_humangun_loop() {
   level endon("audio_deact_hg_loop");
   level notify("audio_act_hg_loop");
-  playSound(0, "wpn_humangun_loop_start", (0, 0, 0));
+  PlaySound(0, "wpn_humangun_loop_start", (0, 0, 0));
   level.humangun_sound_ent playLoopSound("wpn_humangun_loop", 1);
 }
 
 deactivate_humangun_loop() {
   level endon("audio_act_hg_loop");
   level notify("audio_deact_hg_loop");
-  playSound(0, "wpn_humangun_loop_end", (0, 0, 0));
+  PlaySound(0, "wpn_humangun_loop_end", (0, 0, 0));
   level.humangun_sound_ent stopLoopSound(.5);
 }

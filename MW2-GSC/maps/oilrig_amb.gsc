@@ -26,4 +26,5 @@ main() {
   ambientEvent("ambient_oilrig_int1", "elm_metal_stress", 1.0);
 
   thread maps\_utility::set_ambient("amb_underwater_test1v1");
+
 }

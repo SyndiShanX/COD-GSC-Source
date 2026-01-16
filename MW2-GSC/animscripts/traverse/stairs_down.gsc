@@ -17,7 +17,7 @@ main() {
   self traverseMode("nogravity");
 
   endnode = self getnegotiationendnode()
-  assert(isDefined(endnode));
+  assert(isdefined(endnode));
   endPos = endnode.origin
 
   horizontalDelta = (endPos[0] - self.origin[0], endPos[1] - self.origin[1], 0);
@@ -31,7 +31,7 @@ main() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startNode));
+  assert(isdefined(startNode));
   self OrientMode("face angle", node.angles[1]);
 
   self setFlaggedAnimKnoball("climbanim", climbAnim, % body, 1, .3, 1);
@@ -42,11 +42,11 @@ main() {
   cycleTime = getanimlength(climbAnim);
   climbingTime = (horizontalDistance / cycleHorDist) * cycleTime;
 
-  //("stairs_down: about to start climbing.Horizontal dist: " +horizontalDistance+ ", dist/cycle: "+cycleHorDist+", time/cycle: "+cycleTime+", time to play: "+climbingTime);
+  //("stairs_down: about to start climbing.Horizontal dist: " +horizontalDistance+ ", dist/cycle: "+cycleHorDist+", time/cycle: "+cycleTime+", time to play: "+climbingTime);#/
   self animscripts\shared::DoNoteTracksForTime(climbingTime, "climbanim");
 
   //	self traverseMode("gravity");
   self.a.movement = "walk";
   self.a.pose = "stand";
-  //("stairs_down: all done");
+  //("stairs_down: all done");#/
 }

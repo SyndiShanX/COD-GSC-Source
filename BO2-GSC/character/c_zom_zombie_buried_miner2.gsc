@@ -7,7 +7,7 @@
 #include xmodelalias\c_zom_zombie_buried_male_heads_als;
 
 main() {
-  self setModel("c_zom_zombie_buried_miner_body2");
+  self setmodel("c_zom_zombie_buried_miner_body2");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_zom_zombie_buried_male_heads_als::main());
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_zom_zombie_buried_miner_hats1";

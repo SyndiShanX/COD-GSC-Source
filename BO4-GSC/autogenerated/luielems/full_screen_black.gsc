@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace full_screen_black;
 
 class cfull_screen_black: cluielem {

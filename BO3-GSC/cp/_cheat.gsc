@@ -8,7 +8,7 @@
 #namespace cheat;
 
 function autoexec __init__sytem__() {
-  system::register("cheat", &__init__, undefined, undefined);
+  system::register("cheat", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -28,7 +28,7 @@ function death_monitor() {
 }
 
 function setdvars_based_on_varibles() {
-  for(index = 0; index < level.cheatdvars.size; index++) {
+  for (index = 0; index < level.cheatdvars.size; index++) {
     setdvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
   }
 }
@@ -38,7 +38,9 @@ function addcheat(toggledvar, cheatfunc) {
   level.cheatstates[toggledvar] = getdvarint(toggledvar);
   level.cheatfuncs[toggledvar] = cheatfunc;
   if(level.cheatstates[toggledvar]) {
-    [[cheatfunc]](level.cheatstates[toggledvar]);
+    [
+      [cheatfunc]
+    ](level.cheatstates[toggledvar]);
   }
 }
 
@@ -56,10 +58,10 @@ function checkcheatchanged(toggledvar) {
 
 function specialfeaturesmenu() {
   level endon("unloaded");
-  addcheat("sf_use_ignoreammo", &ignore_ammomode);
+  addcheat("sf_use_ignoreammo", & ignore_ammomode);
   level.cheatdvars = getarraykeys(level.cheatstates);
-  for(;;) {
-    for(index = 0; index < level.cheatdvars.size; index++) {
+  for (;;) {
+    for (index = 0; index < level.cheatdvars.size; index++) {
       checkcheatchanged(level.cheatdvars[index]);
     }
     wait(0.5);

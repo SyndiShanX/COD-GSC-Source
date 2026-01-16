@@ -11,26 +11,26 @@
 #namespace fx;
 
 function autoexec __init__sytem__() {
-  system::register("fx", &__init__, undefined, undefined);
+  system::register("fx", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect(&player_init);
+  callback::on_localclient_connect( & player_init);
 }
 
 function player_init(clientnum) {
-  if(!isDefined(level.createfxent)) {
+  if(!isdefined(level.createfxent)) {
     return;
   }
   creatingexploderarray = 0;
-  if(!isDefined(level.createfxexploders)) {
+  if(!isdefined(level.createfxexploders)) {
     creatingexploderarray = 1;
     level.createfxexploders = [];
   }
-  for(i = 0; i < level.createfxent.size; i++) {
+  for (i = 0; i < level.createfxent.size; i++) {
     ent = level.createfxent[i];
-    if(!isDefined(level._createfxforwardandupset)) {
-      if(!isDefined(level._createfxforwardandupset)) {
+    if(!isdefined(level._createfxforwardandupset)) {
+      if(!isdefined(level._createfxforwardandupset)) {
         ent set_forward_and_up_vectors();
       }
     }
@@ -44,7 +44,7 @@ function player_init(clientnum) {
       ent thread loop_sound(clientnum);
     }
     if(creatingexploderarray && ent.v["type"] == "exploder") {
-      if(!isDefined(level.createfxexploders[ent.v["exploder"]])) {
+      if(!isdefined(level.createfxexploders[ent.v["exploder"]])) {
         level.createfxexploders[ent.v["exploder"]] = [];
       }
       ent.v["exploder_id"] = exploder::getexploderid(ent);
@@ -55,14 +55,14 @@ function player_init(clientnum) {
 }
 
 function validate(fxid, origin) {
-  if(!isDefined(level._effect[fxid])) {
+  if(!isdefined(level._effect[fxid])) {
     assertmsg((("" + fxid) + "") + origin);
   }
 }
 
 function create_loop_sound() {
-  ent = spawnStruct();
-  if(!isDefined(level.createfxent)) {
+  ent = spawnstruct();
+  if(!isdefined(level.createfxent)) {
     level.createfxent = [];
   }
   level.createfxent[level.createfxent.size] = ent;
@@ -77,8 +77,8 @@ function create_loop_sound() {
 }
 
 function create_effect(type, fxid) {
-  ent = spawnStruct();
-  if(!isDefined(level.createfxent)) {
+  ent = spawnstruct();
+  if(!isdefined(level.createfxent)) {
     level.createfxent = [];
   }
   level.createfxent[level.createfxent.size] = ent;
@@ -105,7 +105,7 @@ function create_loop_effect(fxid) {
 
 function set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglesToForward(self.v["angles"]);
+  self.v["forward"] = anglestoforward(self.v["angles"]);
 }
 
 function oneshot_thread(clientnum) {
@@ -122,8 +122,8 @@ function loop_sound(clientnum) {
     return;
   }
   self notify("stop_loop");
-  if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
-    if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
+  if(isdefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
+    if(isdefined(self.v["stopable"]) && self.v["stopable"]) {
       thread sound::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"], "stop_loop");
     } else {
       thread sound::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"]);
@@ -138,23 +138,23 @@ function lightning(normalfunc, flashfunc) {
 }
 
 function loop_thread(clientnum) {
-  if(isDefined(self.fxstart)) {
+  if(isdefined(self.fxstart)) {
     level waittill("start fx" + self.fxstart);
   }
-  while(true) {
+  while (true) {
     create_looper(clientnum);
-    if(isDefined(self.timeout)) {
+    if(isdefined(self.timeout)) {
       thread loop_stop(clientnum, self.timeout);
     }
-    if(isDefined(self.fxstop)) {
+    if(isdefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
     } else {
       return;
     }
-    if(isDefined(self.looperfx)) {
+    if(isdefined(self.looperfx)) {
       deletefx(clientnum, self.looperfx);
     }
-    if(isDefined(self.fxstart)) {
+    if(isdefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
     } else {
       return;
@@ -165,7 +165,7 @@ function loop_thread(clientnum) {
 function loop_stop(clientnum, timeout) {
   self endon("death");
   wait(timeout);
-  if(isDefined(self.looper)) {
+  if(isdefined(self.looper)) {
     deletefx(clientnum, self.looper);
   }
 }
@@ -177,15 +177,15 @@ function create_looper(clientnum) {
 
 function loop(clientnum) {
   validate(self.v["fxid"], self.v["origin"]);
-  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
-  while(true) {
-    if(isDefined(self.v["delay"])) {
+  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  while (true) {
+    if(isdefined(self.v["delay"])) {
       waitrealtime(self.v["delay"]);
     }
-    while(isfxplaying(clientnum, self.looperfx)) {
+    while (isfxplaying(clientnum, self.looperfx)) {
       wait(0.25);
     }
-    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
+    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
   }
 }
 
@@ -194,7 +194,7 @@ function create_trigger(clientnum) {
   if(getdvarint("") > 0) {
     println("" + self.v[""]);
   }
-  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
   loop_sound(clientnum);
 }
 
@@ -204,16 +204,16 @@ function blinky_light(localclientnum, tagname, friendlyfx, enemyfx) {
   self.lighttagname = tagname;
   self util::waittill_dobj(localclientnum);
   self thread blinky_emp_wait(localclientnum);
-  while(true) {
-    if(isDefined(self.stunned) && self.stunned) {
+  while (true) {
+    if(isdefined(self.stunned) && self.stunned) {
       wait(0.1);
       continue;
     }
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       if(util::friend_not_foe(localclientnum)) {
-        self.blinkylightfx = playFXOnTag(localclientnum, friendlyfx, self, self.lighttagname);
+        self.blinkylightfx = playfxontag(localclientnum, friendlyfx, self, self.lighttagname);
       } else {
-        self.blinkylightfx = playFXOnTag(localclientnum, enemyfx, self, self.lighttagname);
+        self.blinkylightfx = playfxontag(localclientnum, enemyfx, self, self.lighttagname);
       }
     }
     util::server_wait(localclientnum, 0.5, 0.016);
@@ -222,7 +222,7 @@ function blinky_light(localclientnum, tagname, friendlyfx, enemyfx) {
 
 function stop_blinky_light(localclientnum) {
   self notify("stop_blinky_light");
-  if(!isDefined(self.blinkylightfx)) {
+  if(!isdefined(self.blinkylightfx)) {
     return;
   }
   stopfx(localclientnum, self.blinkylightfx);

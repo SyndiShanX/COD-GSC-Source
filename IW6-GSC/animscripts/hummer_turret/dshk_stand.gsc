@@ -37,9 +37,8 @@ get_death_anim() {
   var_0 = % gaz_turret_death;
 
   if(isDefined(self.ridingvehicle)) {
-    if(isDefined(level.dshk_death_anim)) {
+    if(isDefined(level.dshk_death_anim))
       var_0 = self[[level.dshk_death_anim]]();
-    }
   }
 
   return var_0;

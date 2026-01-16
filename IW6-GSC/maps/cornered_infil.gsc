@@ -109,12 +109,12 @@ cornered_infil_pre_load() {
   precachestring(&"CORNERED_RAPPEL_HINT_GAMEPAD_L");
   precachestring(&"CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH");
   precachestring(&"CORNERED_RAPPEL_JUMP");
-  maps\_utility::add_hint_string("rappel_movement_pc", &"CORNERED_RAPPEL_HINT_PC", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad", &"CORNERED_RAPPEL_HINT_GAMEPAD", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_no_glyph", &"CORNERED_RAPPEL_HINT_GAMEPAD_NO_GLYPH", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_l", &"CORNERED_RAPPEL_HINT_GAMEPAD_L", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_l_no_glyph", &"CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("jump", &"CORNERED_RAPPEL_JUMP");
+  maps\_utility::add_hint_string("rappel_movement_pc", & "CORNERED_RAPPEL_HINT_PC", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad", & "CORNERED_RAPPEL_HINT_GAMEPAD", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_no_glyph", & "CORNERED_RAPPEL_HINT_GAMEPAD_NO_GLYPH", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_l", & "CORNERED_RAPPEL_HINT_GAMEPAD_L", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_l_no_glyph", & "CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("jump", & "CORNERED_RAPPEL_JUMP");
   var_0 = getent("player_rappel_rope_stealth", "targetname");
   var_0 hide();
   level.first_floor_shift_right_trigger = getent("first_floor_shift_right_trigger", "targetname");
@@ -164,11 +164,10 @@ begin_rappel_stealth() {
   thread maps\cornered_lighting::fireworks_stealth_rappel();
   common_scripts\utility::flag_wait("rappel_stealth_finished");
 
-  if(maps\cornered_code::is_e3()) {
+  if(maps\cornered_code::is_e3())
     thread maps\_utility::autosave_by_name_silent("rappel_stealth");
-  } else {
+  else
     thread maps\_utility::autosave_tactical();
-  }
 }
 
 rappel_stealth() {
@@ -183,9 +182,8 @@ rappel_stealth() {
 }
 
 handle_rappel_stealth() {
-  if(!isDefined(level.zipline_anim_struct)) {
+  if(!isDefined(level.zipline_anim_struct))
     level.zipline_anim_struct = common_scripts\utility::getstruct("zipline_anim_struct", "targetname");
-  }
 
   level.player thread maps\cornered_code::unlimited_ammo();
   var_0 = spawnStruct();
@@ -236,9 +234,8 @@ handle_rappel_stealth() {
   maps\cornered_code_rappel::rappel_limit_vertical_move(-85, var_1);
   var_2 = getEntArray("stop_at_third_combat_floor_trigger", "targetname");
 
-  foreach(var_4 in var_2) {
-    var_4 delete();
-  }
+  foreach(var_4 in var_2)
+  var_4 delete();
 
   common_scripts\utility::flag_wait("allies_reached_target_floor");
   common_scripts\utility::flag_set("rappel_stealth_finished");
@@ -255,9 +252,8 @@ watch_vertical_limit(var_0, var_1, var_2) {
   maps\cornered_code_rappel::rappel_limit_vertical_move(-125, var_3);
   var_4 = getEntArray(var_2, "targetname");
 
-  foreach(var_6 in var_4) {
-    var_6 delete();
-  }
+  foreach(var_6 in var_4)
+  var_6 delete();
 }
 
 rappel_stealth_combat() {
@@ -381,9 +377,8 @@ watch_for_damage() {
 first_floor_sitting_laptop_guy_react_laptop(var_0) {
   wait 2.25;
 
-  if(isalive(self)) {
+  if(isalive(self))
     self.struct maps\_anim::anim_single_solo(var_0, "laptop_sit_react_laptop");
-  }
 }
 
 first_floor_patroller_1_setup() {
@@ -406,9 +401,8 @@ first_floor_patroller_1_setup() {
     thread maps\_anim::anim_single_solo(self, "so_hijack_texting_reaction");
     wait 0.5;
 
-    if(isDefined(level.enemy_patrol_phone)) {
+    if(isDefined(level.enemy_patrol_phone))
       level.enemy_patrol_phone delete();
-    }
 
     self waittillmatch("single anim", "end");
   } else
@@ -416,9 +410,8 @@ first_floor_patroller_1_setup() {
 
   self.ignoreall = 0;
 
-  if(!common_scripts\utility::flag("enemies_aware")) {
+  if(!common_scripts\utility::flag("enemies_aware"))
     common_scripts\utility::flag_set("enemies_aware");
-  }
 }
 
 first_floor_patroller_2_setup() {
@@ -435,20 +428,18 @@ first_floor_patroller_2_setup() {
   thread two_guys_talking_patrol();
   self waittill("enemy_aware");
 
-  if(isDefined(self.struct)) {
+  if(isDefined(self.struct))
     self.struct notify("stop_loop");
-  } else {
+  else
     self notify("stop_loop");
-  }
 
   waittillframeend;
   maps\_utility::anim_stopanimscripted();
   maps\_anim::anim_single_solo(self, "exposed_idle_reactA");
   self.ignoreall = 0;
 
-  if(!common_scripts\utility::flag("enemies_aware")) {
+  if(!common_scripts\utility::flag("enemies_aware"))
     common_scripts\utility::flag_set("enemies_aware");
-  }
 }
 
 watch_patrollers(var_0) {
@@ -630,9 +621,8 @@ second_floor_poker_table_guys_setup() {
   self.noragdoll = 0;
   maps\_utility::clear_deathanim();
 
-  if(!common_scripts\utility::flag("poker_table_alerted")) {
+  if(!common_scripts\utility::flag("poker_table_alerted"))
     common_scripts\utility::flag_set("poker_table_alerted");
-  }
 }
 
 enemy_poker_cards() {
@@ -650,9 +640,8 @@ enemy_poker_cards() {
     var_2 linkto(self, "j_index_ri_3", (1, 2, 0), (90, 270, 5));
   }
 
-  if(self.script_noteworthy == "enemy_1") {
+  if(self.script_noteworthy == "enemy_1")
     thread enemy1_spooked_drop_poker_cards(var_1, var_2);
-  }
 
   thread enemy_drop_poker_cards(var_1, var_2);
 }
@@ -669,13 +658,11 @@ enemy1_spooked_drop_poker_cards(var_0, var_1) {
 enemy_drop_poker_cards(var_0, var_1) {
   common_scripts\utility::waittill_any("enemy_aware", "damage", "death");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 delete();
-  }
 
   playFXOnTag(level._effect["vfx_playing_cards_burst"], self, "j_index_ri_3");
 }
@@ -689,9 +676,8 @@ poker_table_spooked() {
   maps\_utility::delaythread(1, common_scripts\utility::flag_set, "poker_table_spooked");
   var_0 = getent("second_floor_left_volume_player", "targetname");
 
-  while(level.player istouching(var_0)) {
+  while(level.player istouching(var_0))
     common_scripts\utility::waitframe();
-  }
 
   var_1 = common_scripts\utility::getstruct("enemy_2", "targetname");
   maps\cornered_code::waittill_player_looking_at_ent(var_1, 10);
@@ -755,9 +741,8 @@ second_floor_fridge_guy_setup() {
   self waittill("enemy_aware");
 
   if(common_scripts\utility::flag("second_floor_kitchenette_guy_in_kitchen")) {
-    if(!common_scripts\utility::flag("kitchen_alerted")) {
+    if(!common_scripts\utility::flag("kitchen_alerted"))
       common_scripts\utility::flag_set("kitchen_alerted");
-    }
   }
 }
 
@@ -795,14 +780,13 @@ second_floor_fridge_guy_path() {
   self.patrol_no_stop_transition = undefined;
   common_scripts\utility::flag_wait("second_floor_fridge_guy_leaving_kitchen");
 
-  if(common_scripts\utility::flag("second_floor_poker_guys_dead")) {
+  if(common_scripts\utility::flag("second_floor_poker_guys_dead"))
     common_scripts\utility::flag_set("second_floor_fridge_guy_will_be_alerted");
-  } else {
+  else {
     var_0 = getent(self.volume.targetname + "_player", "targetname");
 
-    if(level.player istouching(var_0)) {
+    if(level.player istouching(var_0))
       common_scripts\utility::flag_set("take_the_shot_vo");
-    }
   }
 
   common_scripts\utility::flag_wait("second_floor_fridge_guy_in_middle_volume");
@@ -820,9 +804,8 @@ second_floor_fridge_guy_path() {
 fridge_light_off(var_0) {
   var_1 = getEntArray("rappel_stealth_fridge_light", "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 setlightintensity(0.1);
-  }
+  foreach(var_3 in var_1)
+  var_3 setlightintensity(0.1);
 }
 
 second_floor_fridge_guy_spooked() {
@@ -890,9 +873,8 @@ handle_beer_bottles() {
 
   if(common_scripts\utility::flag("second_floor_fridge_guy_end_patrol")) {
     foreach(var_2 in var_0) {
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         var_2 delete();
-      }
     }
   } else {
     foreach(var_2 in var_0) {
@@ -905,9 +887,8 @@ handle_beer_bottles() {
     common_scripts\utility::flag_wait("stop_for_third_floor_combat");
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         var_2 delete();
-      }
     }
   }
 }
@@ -949,15 +930,13 @@ second_floor_kitchenette_guy_setup() {
   self waittill("enemy_aware");
 
   if(common_scripts\utility::flag("second_floor_kitchenette_guy_in_kitchen")) {
-    if(!common_scripts\utility::flag("kitchen_alerted")) {
+    if(!common_scripts\utility::flag("kitchen_alerted"))
       common_scripts\utility::flag_set("kitchen_alerted");
-    }
   }
 
   if(common_scripts\utility::flag("second_floor_kitchenette_guy_at_stir_node")) {
-    if(isDefined(level.enemy_patrol_phone)) {
+    if(isDefined(level.enemy_patrol_phone))
       level.enemy_patrol_phone delete();
-    }
   }
 }
 
@@ -966,23 +945,20 @@ second_floor_kitchenette_guy() {
   self endon("enemy_aware");
   common_scripts\utility::flag_wait("second_floor_kitchenette_guy_heading_to_kitchen");
 
-  if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
+  if(common_scripts\utility::flag("second_floor_fridge_guy_dead"))
     common_scripts\utility::flag_set("second_floor_kitchenette_guy_will_be_alerted");
-  }
 
   common_scripts\utility::flag_wait("second_floor_kitchenette_guy_in_kitchen");
 
-  if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
+  if(common_scripts\utility::flag("second_floor_fridge_guy_dead"))
     common_scripts\utility::flag_set("second_floor_kitchenette_guy_will_be_alerted_2");
-  }
 
   common_scripts\utility::flag_wait("second_floor_kitchenette_guy_alert_node");
 
-  if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
+  if(common_scripts\utility::flag("second_floor_fridge_guy_dead"))
     thread kitchenette_guy_spooked();
-  } else {
+  else
     thread kitchenette_guy_continue();
-  }
 }
 
 kitchenette_guy_spooked() {
@@ -1016,11 +992,10 @@ second_floor_elevator_guy_setup() {
   thread maps\cornered_code::alert_all("second_floor_stealth_broken");
   thread elevator_guys_react();
 
-  if(self.script_noteworthy == "second_floor_elevator_guy_1") {
+  if(self.script_noteworthy == "second_floor_elevator_guy_1")
     thread elevator_anims("cornered_stealth_elevator_enemy1");
-  } else {
+  else
     thread elevator_anims("cornered_stealth_elevator_enemy2");
-  }
 }
 
 elevator_anims(var_0) {
@@ -1122,13 +1097,11 @@ watch_while_in_volume_and_set_flag_when_out(var_0, var_1) {
   var_2 = undefined;
 
   for(;;) {
-    if(self istouching(var_0) && !isDefined(var_2)) {
+    if(self istouching(var_0) && !isDefined(var_2))
       var_2 = 1;
-    }
 
-    if(!self istouching(var_0) && isDefined(var_2) && var_2 == 1) {
+    if(!self istouching(var_0) && isDefined(var_2) && var_2 == 1)
       var_2 = 0;
-    }
 
     if(isDefined(var_2) && var_2 == 0) {
       common_scripts\utility::flag_set(var_1);
@@ -1144,9 +1117,8 @@ handle_alerted(var_0) {
   self waittill("enemy_aware");
 
   if(isDefined(var_0)) {
-    if(!common_scripts\utility::flag(var_0)) {
+    if(!common_scripts\utility::flag(var_0))
       common_scripts\utility::flag_set(var_0);
-    }
   }
 
   if(isDefined(self.struct)) {
@@ -1161,13 +1133,11 @@ handle_alerted(var_0) {
     self.favoriteenemy = level.player;
   }
 
-  if(isDefined(self.reactanim)) {
+  if(isDefined(self.reactanim))
     maps\_anim::anim_single_solo(self, self.reactanim);
-  }
 
-  if(isDefined(self.weapon_removed)) {
+  if(isDefined(self.weapon_removed))
     maps\_utility::gun_recall();
-  }
 
   self.ignoreall = 0;
 }
@@ -1185,9 +1155,8 @@ allies_rappel_stealth_vo() {
 
   level.allies[level.const_rorke] thread maps\_utility::smart_radio_dialogue("cornered_mrk_linessecureletsmove");
 
-  if(!isDefined(level.rappel_stealth_checkpoint)) {
+  if(!isDefined(level.rappel_stealth_checkpoint))
     common_scripts\utility::flag_wait("rappel_down_ready");
-  }
 
   var_0 = maps\_utility::make_array("cornered_hsh_letsheaddownbro", "cornered_mrk_comeondropdown");
   thread maps\cornered_code::nag_until_flag(var_0, "approaching_first_combat_floor", 10, 15, 5);
@@ -1214,11 +1183,10 @@ allies_rappel_stealth_vo() {
     level.allies[level.const_rorke] thread maps\_utility::smart_radio_dialogue("cornered_mrk_movetothenext");
     common_scripts\utility::flag_set("rappel_down_ready");
 
-    if(maps\cornered_code::is_e3()) {
+    if(maps\cornered_code::is_e3())
       thread maps\_utility::autosave_now_silent();
-    } else {
+    else
       thread maps\_utility::autosave_now();
-    }
 
     wait 0.5;
     common_scripts\utility::flag_wait("approaching_second_floor_combat");
@@ -1296,9 +1264,8 @@ rappel_stealth_first_floor_combat_stealth_broken_vo() {
   level endon("first_floor_enemies_dead");
   common_scripts\utility::flag_wait("enemies_aware");
 
-  if(!common_scripts\utility::flag("first_floor_combat_weapons_free")) {
+  if(!common_scripts\utility::flag("first_floor_combat_weapons_free"))
     level.allies[level.const_rorke] maps\_utility::smart_radio_dialogue("cornered_mrk_shitwhatareyou");
-  }
 }
 
 first_floor_enemies_shot_out_of_order() {
@@ -1377,16 +1344,14 @@ second_floor_stealth_broken_middle_vo() {
     wait 5;
     level.second_floor_middle_enemies = maps\_utility::array_removedead(level.second_floor_middle_enemies);
 
-    if(level.second_floor_middle_enemies.size > 0) {
+    if(level.second_floor_middle_enemies.size > 0)
       common_scripts\utility::flag_set("second_floor_stealth_broken");
-    }
   } else {
     wait 5;
     level.second_floor_middle_enemies = maps\_utility::array_removedead(level.second_floor_middle_enemies);
 
-    if(level.second_floor_middle_enemies.size > 0) {
+    if(level.second_floor_middle_enemies.size > 0)
       common_scripts\utility::flag_set("second_floor_stealth_broken");
-    }
   }
 }
 
@@ -1404,16 +1369,14 @@ second_floor_stealth_broken_left_vo() {
     wait 5;
     level.second_floor_left_enemies = maps\_utility::array_removedead(level.second_floor_left_enemies);
 
-    if(level.second_floor_left_enemies.size > 0) {
+    if(level.second_floor_left_enemies.size > 0)
       common_scripts\utility::flag_set("second_floor_stealth_broken");
-    }
   } else {
     wait 5;
     level.second_floor_left_enemies = maps\_utility::array_removedead(level.second_floor_left_enemies);
 
-    if(level.second_floor_left_enemies.size > 0) {
+    if(level.second_floor_left_enemies.size > 0)
       common_scripts\utility::flag_set("second_floor_stealth_broken");
-    }
   }
 }
 
@@ -1428,9 +1391,8 @@ second_floor_combat_intro_vo() {
   common_scripts\utility::flag_wait("second_floor_combat_vo");
   var_0 = getEntArray("second_floor_combat_vo_trigger", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
   common_scripts\utility::flag_set("start_elevator_anims");
   wait 0.5;
@@ -1456,11 +1418,10 @@ second_floor_combat_left_enemies_down() {
   common_scripts\utility::flag_wait_either("second_floor_fridge_guy_dead", "second_floor_kitchenette_guy_dead");
 
   if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
-    if(common_scripts\utility::flag("second_floor_fridge_guy_killed_too_soon")) {
+    if(common_scripts\utility::flag("second_floor_fridge_guy_killed_too_soon"))
       common_scripts\utility::flag_wait("second_floor_kitchenette_guy_dead");
-    } else {
+    else
       common_scripts\utility::flag_wait("second_floor_kitchenette_guy_dead");
-    }
   } else if(common_scripts\utility::flag("second_floor_kitchenette_guy_dead"))
     common_scripts\utility::flag_wait("second_floor_fridge_guy_dead");
 
@@ -1490,9 +1451,8 @@ watch_for_death_to_notify_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
   common_scripts\utility::flag_wait(var_1);
 
   if(!common_scripts\utility::flag(var_2)) {
-    if(isDefined(var_5)) {
+    if(isDefined(var_5))
       common_scripts\utility::flag_set(var_5);
-    }
 
     wait 0.5;
     var_3 maps\_utility::smart_radio_dialogue(var_4);
@@ -1506,9 +1466,8 @@ notify_patrol_movement_vo(var_0, var_1, var_2, var_3, var_4) {
   wait 0.5;
   var_1 maps\_utility::smart_radio_dialogue(var_2);
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     common_scripts\utility::flag_set(var_4);
-  }
 }
 
 allies_rappel_stealth_anims() {
@@ -1534,9 +1493,8 @@ allies_rappel_stealth_anims() {
 
   level.ally_zipline_count++;
 
-  if(level.ally_zipline_count == 2) {
+  if(level.ally_zipline_count == 2)
     common_scripts\utility::flag_set("rappel_down_ready");
-  }
 
   self.stealth_broken_flag = self.animname + "_stealth_broken";
   maps\cornered_code_rappel_allies::ally_rappel_start_movement_horizontal("stealth", "first", "player_moving_down");
@@ -1564,13 +1522,11 @@ allies_rappel_stealth_anims() {
     } else
       level notify("floor_complete_end_stealth_threads");
 
-    if(!common_scripts\utility::flag("rappel_down_ready")) {
+    if(!common_scripts\utility::flag("rappel_down_ready"))
       common_scripts\utility::flag_wait("rappel_down_ready");
-    }
 
-    if(!common_scripts\utility::flag("player_moving_down")) {
+    if(!common_scripts\utility::flag("player_moving_down"))
       common_scripts\utility::flag_wait("player_moving_down");
-    }
 
     allies_move_down_to_second_floor_combat();
     common_scripts\utility::flag_wait("second_floor_enemies_dead");
@@ -1598,9 +1554,8 @@ allies_rappel_stealth_anims() {
   allies_move_down_to_third_floor_combat();
   level.reached_target_floor_count++;
 
-  if(level.reached_target_floor_count == 2) {
+  if(level.reached_target_floor_count == 2)
     common_scripts\utility::flag_set("allies_reached_target_floor");
-  }
 }
 
 allies_move_down_to_first_floor_combat() {
@@ -1666,9 +1621,8 @@ allies_move_down_to_third_floor_combat() {
 handle_allies_if_stealth_broken(var_0, var_1, var_2) {
   level endon("floor_complete_end_stealth_threads");
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     common_scripts\utility::flag_wait(var_1);
-  }
 
   wait 1;
   common_scripts\utility::waitframe();
@@ -1690,13 +1644,11 @@ handle_allies_if_stealth_broken(var_0, var_1, var_2) {
 
   maps\cornered_code_rappel_allies::ally_rappel_start_movement_horizontal("stealth", "first", var_0);
 
-  if(maps\cornered_code_rappel_allies::ally_is_aiming()) {
+  if(maps\cornered_code_rappel_allies::ally_is_aiming())
     maps\cornered_code_rappel_allies::ally_rappel_stop_aiming();
-  }
 
-  if(!maps\cornered_code_rappel_allies::ally_is_calm_idling()) {
+  if(!maps\cornered_code_rappel_allies::ally_is_calm_idling())
     maps\cornered_code_rappel_allies::ally_start_calm_idle("stealth");
-  }
 
   self.stealth_behavior_over = 1;
   level.allies_stealth_behavior_end_count++;
@@ -1727,11 +1679,10 @@ ally_rappel_moving_change_direction(var_0) {
   var_1 = "move_" + var_0 + "_start";
   var_2 = "move_" + var_0;
 
-  if(maps\cornered_code_rappel_allies::ally_is_aiming()) {
+  if(maps\cornered_code_rappel_allies::ally_is_aiming())
     maps\cornered_code_rappel_allies::ally_rappel_stop_aiming();
-  } else if(maps\cornered_code_rappel_allies::ally_is_calm_idling()) {
+  else if(maps\cornered_code_rappel_allies::ally_is_calm_idling())
     maps\cornered_code_rappel_allies::ally_stop_calm_idle();
-  }
 
   self.rappel_move_direction = var_0;
   self notify("stop_loop");
@@ -1767,9 +1718,8 @@ rorke_move_to_glass_position() {
   if(var_0 < var_1) {
     var_12 = var_3 + var_4;
 
-    if(var_2 < var_12) {
+    if(var_2 < var_12)
       var_10 = var_1 + var_5 + var_6;
-    }
 
     var_10 = var_10 - var_4;
     var_11 = 1;
@@ -1808,23 +1758,19 @@ rorke_move_to_glass_position() {
 }
 
 ally_rappel_stealth_movement_vertical(var_0, var_1, var_2) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     level endon(var_0);
-  }
 
   var_3 = self.animname + "_reached_combat_floor";
 
-  if(common_scripts\utility::flag(var_3)) {
+  if(common_scripts\utility::flag(var_3))
     common_scripts\utility::flag_clear(var_3);
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
   self.rappel_move_direction = "";
   var_4 = 10000;
@@ -1857,32 +1803,28 @@ ally_rappel_stealth_movement_vertical(var_0, var_1, var_2) {
 
       ally_rappel_moving_stop_idle();
 
-      if(var_16) {
+      if(var_16)
         common_scripts\utility::flag_set(var_3);
-      }
     } else if(self.doing_start_anim) {
       common_scripts\utility::waitframe();
       continue;
     } else if(var_1)
       thread ally_rappel_moving_change_direction("down");
     else if(var_11 < var_4) {
-      if(!var_14) {
+      if(!var_14)
         thread ally_rappel_moving_change_direction("away");
-      } else if(var_12) {
+      else if(var_12)
         thread ally_rappel_moving_change_direction("down");
-      }
     } else if(var_11 < var_5) {
       if(!var_14) {
-        if(var_12) {
+        if(var_12)
           thread ally_rappel_moving_change_direction("down_away");
-        }
       } else if(var_12)
         thread ally_rappel_moving_change_direction("down");
     } else if(var_11 >= var_6) {
       if(!var_15) {
-        if(var_12) {
+        if(var_12)
           thread ally_rappel_moving_change_direction("down_back");
-        }
       } else if(var_12)
         thread ally_rappel_moving_change_direction("down");
     } else if(var_12)
@@ -1903,9 +1845,8 @@ find_closest_struct_below_player() {
     }
   }
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = level.last_goal_struct;
-  }
 
   return var_0;
 }

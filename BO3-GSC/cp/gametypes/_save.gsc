@@ -19,21 +19,21 @@
 #namespace savegame;
 
 function autoexec __init__sytem__() {
-  system::register("save", &__init__, undefined, undefined);
+  system::register("save", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!isDefined(world.loadout)) {
+  if(!isdefined(world.loadout)) {
     world.loadout = [];
   }
-  if(!isDefined(world.mapdata)) {
+  if(!isdefined(world.mapdata)) {
     world.mapdata = [];
   }
-  if(!isDefined(world.playerdata)) {
+  if(!isdefined(world.playerdata)) {
     world.playerdata = [];
   }
   foreach(trig in trigger::get_all()) {
-    if(isDefined(trig.var_d981bb2d) && trig.var_d981bb2d) {
+    if(isdefined(trig.var_d981bb2d) && trig.var_d981bb2d) {
       trig thread checkpoint_trigger();
     }
   }
@@ -41,7 +41,7 @@ function __init__() {
 }
 
 function save() {
-  if(!isDefined(world.loadout)) {
+  if(!isdefined(world.loadout)) {
     world.loadout = [];
   }
 }
@@ -49,14 +49,14 @@ function save() {
 function load() {}
 
 function set_mission_name(name) {
-  if(isDefined(level.savename) && level.savename != name) {
+  if(isdefined(level.savename) && level.savename != name) {
     errormsg(((("" + level.savename) + "") + name) + "");
   }
   level.savename = name;
 }
 
 function get_mission_name() {
-  if(!isDefined(level.savename)) {
+  if(!isdefined(level.savename)) {
     set_mission_name(level.script);
   }
   return level.savename;
@@ -64,10 +64,10 @@ function get_mission_name() {
 
 function set_mission_data(name, value) {
   id = get_mission_name();
-  if(!isDefined(world.mapdata)) {
+  if(!isdefined(world.mapdata)) {
     world.mapdata = [];
   }
-  if(!isDefined(world.mapdata[id])) {
+  if(!isdefined(world.mapdata[id])) {
     world.mapdata[id] = [];
   }
   world.mapdata[id][name] = value;
@@ -75,7 +75,7 @@ function set_mission_data(name, value) {
 
 function get_mission_data(name, defval) {
   id = get_mission_name();
-  if(isDefined(world.mapdata) && isDefined(world.mapdata[id]) && isDefined(world.mapdata[id][name])) {
+  if(isdefined(world.mapdata) && isdefined(world.mapdata[id]) && isdefined(world.mapdata[id][name])) {
     return world.mapdata[id][name];
   }
   return defval;
@@ -83,7 +83,7 @@ function get_mission_data(name, defval) {
 
 function clear_mission_data() {
   id = get_mission_name();
-  if(isDefined(world.mapdata) && isDefined(world.mapdata[id])) {
+  if(isdefined(world.mapdata) && isdefined(world.mapdata[id])) {
     world.mapdata[id] = [];
   }
 }
@@ -103,13 +103,13 @@ function set_player_data(name, value) {
     var_c98fc56a = "CP";
   }
   id = self get_player_unique_id();
-  if(!isDefined(world.playerdata)) {
+  if(!isdefined(world.playerdata)) {
     world.playerdata = [];
   }
-  if(!isDefined(world.playerdata[var_c98fc56a])) {
+  if(!isdefined(world.playerdata[var_c98fc56a])) {
     world.playerdata[var_c98fc56a] = [];
   }
-  if(!isDefined(world.playerdata[var_c98fc56a][id])) {
+  if(!isdefined(world.playerdata[var_c98fc56a][id])) {
     world.playerdata[var_c98fc56a][id] = [];
   }
   world.playerdata[var_c98fc56a][id][name] = value;
@@ -126,7 +126,7 @@ function get_player_data(name, defval) {
     var_c98fc56a = "CP";
   }
   id = self get_player_unique_id();
-  if(isDefined(world.playerdata) && isDefined(world.playerdata[var_c98fc56a]) && isDefined(world.playerdata[var_c98fc56a][id]) && isDefined(world.playerdata[var_c98fc56a][id][name])) {
+  if(isdefined(world.playerdata) && isdefined(world.playerdata[var_c98fc56a]) && isdefined(world.playerdata[var_c98fc56a][id]) && isdefined(world.playerdata[var_c98fc56a][id][name])) {
     return world.playerdata[var_c98fc56a][id][name];
   }
   return defval;
@@ -143,7 +143,7 @@ function clear_player_data() {
     var_c98fc56a = "CP";
   }
   id = self get_player_unique_id();
-  if(isDefined(world.playerdata) && isDefined(world.playerdata[var_c98fc56a])) {
+  if(isdefined(world.playerdata) && isdefined(world.playerdata[var_c98fc56a])) {
     world.playerdata[var_c98fc56a] = [];
   }
 }
@@ -158,14 +158,14 @@ function function_37ae30c6() {
   } else {
     var_c98fc56a = "CP";
   }
-  if(!isDefined(world.playerdata)) {
+  if(!isdefined(world.playerdata)) {
     world.playerdata = [];
   }
-  if(!isDefined(world.playerdata[var_c98fc56a])) {
+  if(!isdefined(world.playerdata[var_c98fc56a])) {
     world.playerdata[var_c98fc56a] = [];
   }
   keys = getarraykeys(world.playerdata[var_c98fc56a]);
-  if(isDefined(keys)) {
+  if(isdefined(keys)) {
     foreach(key in keys) {
       key_found = 0;
       foreach(player in level.players) {
@@ -186,7 +186,7 @@ function function_f6ab8f28() {
 }
 
 function function_fb150717() {
-  if(isDefined(level.var_cc93e6eb) && level.var_cc93e6eb || getdvarint("scr_no_checkpoints", 0)) {
+  if(isdefined(level.var_cc93e6eb) && level.var_cc93e6eb || getdvarint("scr_no_checkpoints", 0)) {
     return;
   }
   level thread function_74fcb9ca();
@@ -228,7 +228,7 @@ function function_152fdd8c(delay) {
       player._generated_weapons = undefined;
     }
     player = util::gethostplayer();
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       player set_player_data("savegame_score", player.pers["score"]);
       player set_player_data("savegame_kills", player.pers["kills"]);
       player set_player_data("savegame_assists", player.pers["assists"]);
@@ -237,14 +237,14 @@ function function_152fdd8c(delay) {
     }
     savegame_create();
     wait(delay);
-    if(isDefined(player)) {
-      util::show_event_message(player, &"COOP_REACHED_SKIPTO");
+    if(isdefined(player)) {
+      util::show_event_message(player, & "COOP_REACHED_SKIPTO");
     }
   }
 }
 
 function function_319d38eb() {
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isdefined(level.missionfailed) && level.missionfailed) {
     return false;
   }
   foreach(player in level.players) {
@@ -258,7 +258,7 @@ function function_319d38eb() {
       return false;
     }
     if(player.sessionstate == "spectator") {
-      if(isDefined(self.firstspawn)) {
+      if(isdefined(self.firstspawn)) {
         return false;
       }
       return true;
@@ -266,7 +266,7 @@ function function_319d38eb() {
     if(player oob::isoutofbounds()) {
       return false;
     }
-    if(isDefined(player.burning) && player.burning) {
+    if(isdefined(player.burning) && player.burning) {
       return false;
     }
   }
@@ -279,12 +279,12 @@ function private function_1add9d4a(var_c36855a9) {
   level endon("kill_save");
   level endon("save_restore");
   wait(0.1);
-  while(true) {
+  while (true) {
     if(function_147f4ca3()) {
       wait(0.1);
       checkpointcreate();
       wait(6);
-      for(var_e2502f23 = 0; var_e2502f23 < 5; var_e2502f23++) {
+      for (var_e2502f23 = 0; var_e2502f23 < 5; var_e2502f23++) {
         if(function_319d38eb()) {
           break;
         }
@@ -305,13 +305,13 @@ function private function_1add9d4a(var_c36855a9) {
 }
 
 function function_147f4ca3() {
-  if(isDefined(level.var_cc93e6eb) && level.var_cc93e6eb) {
+  if(isdefined(level.var_cc93e6eb) && level.var_cc93e6eb) {
     return false;
   }
   if(getdvarint("scr_no_checkpoints", 0)) {
     return false;
   }
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isdefined(level.missionfailed) && level.missionfailed) {
     return false;
   }
   var_3d59bfa3 = 0;
@@ -330,7 +330,7 @@ function function_147f4ca3() {
   if(!function_a3a9b003()) {
     return false;
   }
-  if(isDefined(level.var_67e1f60e)) {
+  if(isdefined(level.var_67e1f60e)) {
     foreach(func in level.var_67e1f60e) {
       if(!level[[func]]()) {
         return false;
@@ -342,13 +342,13 @@ function function_147f4ca3() {
 
 function private function_2c89c30c() {
   healthfraction = 1;
-  if(isDefined(self.health) && isDefined(self.maxhealth) && self.maxhealth > 0) {
+  if(isdefined(self.health) && isdefined(self.maxhealth) && self.maxhealth > 0) {
     healthfraction = self.health / self.maxhealth;
   }
   if(healthfraction < 0.7) {
     return false;
   }
-  if(isDefined(self.lastdamagetime) && self.lastdamagetime > (gettime() - 1500)) {
+  if(isdefined(self.lastdamagetime) && self.lastdamagetime > (gettime() - 1500)) {
     return false;
   }
   if(self clientfield::get("burn")) {
@@ -370,7 +370,7 @@ function private function_2c89c30c() {
     return false;
   }
   if(self.sessionstate == "spectator") {
-    if(isDefined(self.firstspawn)) {
+    if(isdefined(self.firstspawn)) {
       return false;
     }
     return true;
@@ -378,7 +378,7 @@ function private function_2c89c30c() {
   if(self oob::isoutofbounds()) {
     return false;
   }
-  if(isDefined(self.burning) && self.burning) {
+  if(isdefined(self.burning) && self.burning) {
     return false;
   }
   if(self flagsys::get("mobile_armory_in_use")) {
@@ -399,7 +399,7 @@ function private function_a3a9b003() {
   }
   ais = getaiteamarray("axis");
   foreach(ai in ais) {
-    if(!isDefined(ai)) {
+    if(!isdefined(ai)) {
       continue;
     }
     if(!isalive(ai)) {
@@ -408,7 +408,7 @@ function private function_a3a9b003() {
     if(isactor(ai) && ai isinscriptedstate()) {
       continue;
     }
-    if(isDefined(ai.ignoreall) && ai.ignoreall) {
+    if(isdefined(ai.ignoreall) && ai.ignoreall) {
       continue;
     }
     playerproximity = ai function_2808d83d();
@@ -420,13 +420,13 @@ function private function_a3a9b003() {
 }
 
 function private function_f70dd749() {
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return true;
   }
   if(!isplayer(self.enemy)) {
     return true;
   }
-  if(isDefined(self.melee) && isDefined(self.melee.target) && isplayer(self.melee.target)) {
+  if(isdefined(self.melee) && isdefined(self.melee.target) && isplayer(self.melee.target)) {
     return false;
   }
   playerproximity = self function_2808d83d();
@@ -455,7 +455,7 @@ function function_2808d83d() {
 
 function private function_8dc86b60() {
   var_db6b9d9f = 0;
-  foreach(grenade in getEntArray("grenade", "classname")) {
+  foreach(grenade in getentarray("grenade", "classname")) {
     foreach(player in level.activeplayers) {
       distsq = distancesquared(grenade.origin, player.origin);
       if(distsq < 90000) {

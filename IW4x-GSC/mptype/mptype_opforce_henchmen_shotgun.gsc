@@ -3,6 +3,9 @@
  * Script: mptype\mptype_opforce_henchmen_shotgun.gsc
 ******************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   switch (codescripts\character::get_random_character(2)) {
     case 0:

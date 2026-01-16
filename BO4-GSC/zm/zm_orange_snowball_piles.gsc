@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_orange_snowball_piles;
 
 init() {
@@ -178,7 +179,7 @@ function_75a76099() {
 
 function_e1b7c710() {
   self endon(#"death");
-  level flag::wait_till_any(array("round_reset", # "trial_failed"));
+  level flag::wait_till_any(array("round_reset", #"trial_failed"));
 
   if(isDefined(self.var_3b55baa1) && isDefined(self.var_e01bb56) && self function_75a76099()) {
     self zm_loadout::set_player_lethal_grenade(self.var_3b55baa1);

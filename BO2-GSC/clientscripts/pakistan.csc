@@ -52,21 +52,18 @@ dynent_control() {
 }
 
 waitill_notify_and_toggle_dynents(str_notify, str_dynent_name, b_active) {
-  if(!isDefined(b_active)) {
+  if(!isDefined(b_active))
     b_active = 0;
-  }
 
   level waittill(str_notify);
   a_e_dynents = getdynentarray(str_dynent_name);
 
   if(b_active == 0) {
-    foreach(e_dynent in a_e_dynents) {
-      setdynentenabled(e_dynent, 0);
-    }
+    foreach(e_dynent in a_e_dynents)
+    setdynentenabled(e_dynent, 0);
   } else {
-    foreach(e_dynent in a_e_dynents) {
-      launchdynent(e_dynent, (0, 0, -1));
-    }
+    foreach(e_dynent in a_e_dynents)
+    launchdynent(e_dynent, (0, 0, -1));
   }
 }
 
@@ -129,9 +126,8 @@ toggle_flame_char_actor(localclientnum, set, newent) {
 }
 
 toggle_water_fx_actor(localclientnum, set, newent) {
-  if(set) {
-    self.fx_handle = playFXOnTag(localclientnum, level._effect["water_loop"], self, "tag_origin");
-  } else {
+  if(set)
+    self.fx_handle = playfxontag(localclientnum, level._effect["water_loop"], self, "tag_origin");
+  else
     deletefx(localclientnum, self.fx_handle);
-  }
 }

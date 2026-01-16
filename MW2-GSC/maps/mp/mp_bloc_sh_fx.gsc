@@ -11,7 +11,8 @@ main() {
   //level._effect[ "drips_player_hand" ]	= loadfx( "water/drips_player_hand_sh" );
   level._effect["water_spill_fall"] = loadfx("maps/mp_maps/fx_mp_water_spill");
 
-  if(getdvar("clientSideEffects") != "1") {
+  /#
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_bloc_sh_fx::main();
-  }
+  # /
 }

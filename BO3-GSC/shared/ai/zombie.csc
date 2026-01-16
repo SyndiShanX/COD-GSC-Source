@@ -12,39 +12,39 @@ function autoexec precache() {}
 
 function autoexec main() {
   level._effect["zombie_special_day_effect"] = "zombie/fx_val_chest_burst";
-  ai::add_archetype_spawn_function("zombie", &zombieclientutils::zombie_override_burn_fx);
-  clientfield::register("actor", "zombie", 1, 1, "int", &zombieclientutils::zombiehandler, 0, 0);
-  clientfield::register("actor", "zombie_special_day", 6001, 1, "counter", &zombieclientutils::zombiespecialdayeffectshandler, 0, 0);
+  ai::add_archetype_spawn_function("zombie", & zombieclientutils::zombie_override_burn_fx);
+  clientfield::register("actor", "zombie", 1, 1, "int", & zombieclientutils::zombiehandler, 0, 0);
+  clientfield::register("actor", "zombie_special_day", 6001, 1, "counter", & zombieclientutils::zombiespecialdayeffectshandler, 0, 0);
 }
 
 #namespace zombieclientutils;
 
 function zombiehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(isDefined(entity.archetype) && entity.archetype != "zombie") {
+  if(isdefined(entity.archetype) && entity.archetype != "zombie") {
     return;
   }
-  if(!isDefined(entity.initializedgibcallbacks) || !entity.initializedgibcallbacks) {
+  if(!isdefined(entity.initializedgibcallbacks) || !entity.initializedgibcallbacks) {
     entity.initializedgibcallbacks = 1;
-    gibclientutils::addgibcallback(localclientnum, entity, 8, &_gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 16, &_gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 32, &_gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 128, &_gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 256, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 8, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 16, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 32, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 128, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 256, & _gibcallback);
   }
 }
 
 function private _gibcallback(localclientnum, entity, gibflag) {
   switch (gibflag) {
     case 8: {
-      playSound(0, "zmb_zombie_head_gib", self.origin + vectorscale((0, 0, 1), 60));
+      playsound(0, "zmb_zombie_head_gib", self.origin + vectorscale((0, 0, 1), 60));
       break;
     }
     case 16:
     case 32:
     case 128:
     case 256: {
-      playSound(0, "zmb_death_gibs", self.origin + vectorscale((0, 0, 1), 30));
+      playsound(0, "zmb_death_gibs", self.origin + vectorscale((0, 0, 1), 30));
       break;
     }
   }
@@ -52,17 +52,17 @@ function private _gibcallback(localclientnum, entity, gibflag) {
 
 function zombiespecialdayeffectshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(isDefined(entity.archetype) && entity.archetype != "zombie") {
+  if(isdefined(entity.archetype) && entity.archetype != "zombie") {
     return;
   }
   origin = entity gettagorigin("j_spine4");
-  fx = playFX(localclientnum, level._effect["zombie_special_day_effect"], origin);
+  fx = playfx(localclientnum, level._effect["zombie_special_day_effect"], origin);
   setfxignorepause(localclientnum, fx, 1);
 }
 
 function zombie_override_burn_fx(localclientnum) {
   if(sessionmodeiszombiesgame()) {
-    if(!isDefined(self._effect)) {
+    if(!isdefined(self._effect)) {
       self._effect = [];
     }
     level._effect["fire_zombie_j_elbow_le_loop"] = "fire/fx_fire_ai_human_arm_left_loop_optim";

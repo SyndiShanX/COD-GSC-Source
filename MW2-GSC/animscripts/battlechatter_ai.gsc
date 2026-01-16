@@ -4,7 +4,7 @@
 ********************************************************/
 
 /****************************************************************************
-
+ 
  battleChatter_ai.gsc
 		
 *****************************************************************************/
@@ -23,20 +23,17 @@ addToSystem(squadName) {
 
   //prof_begin("addToSystem");
 
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
-  if(self.chatInitialized) {
+  if(self.chatInitialized)
     return;
-  }
 
-  assert(isDefined(self.squad));
+  assert(isdefined(self.squad));
 
   // initialize battlechatter data for this AI's squad if it hasn't been already
-  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized) {
+  if(!isdefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
     self.squad init_squadBattleChatter();
-  }
 
   self.enemyClass = "infantry";
   self.calledOut = [];
@@ -64,11 +61,10 @@ addToSystem(squadName) {
   }
 
   if(forceEnglish()) {
-    if(self.team == "allies") {
+    if(self.team == "allies")
       self.script_battlechatter = false;
-    } else {
+    else
       self.voice = "american";
-    }
   }
 
   // SRS 1/31/09: turning off multilingual voices to avoid a bunch of errors that don't really
@@ -84,7 +80,7 @@ addToSystem(squadName) {
     self.countryID = anim.countryIDs[self.voice];
   }
 
-  if(isDefined(self.script_friendname)) {
+  if(isdefined(self.script_friendname)) {
     friendname = ToLower(self.script_friendname);
 
     if(IsSubStr(friendname, "price")) {
@@ -130,24 +126,20 @@ get_random_nationality()
 	//determine what language the multilingual PMC will speak
 	sMultiLang = "";
 	iRand = RandomIntrange( 1, 4 );
-	if( iRand == 1 ) {
+	if( iRand == 1 )
 		sMultiLang = "german";
-	}
-	else if( iRand == 2 ) {
+	else if( iRand == 2 )
 		sMultiLang = "italian";
-	}
-	else {
+	else
 		sMultiLang = "spanish";
-	}
 
 	return sMultiLang;
 }
 */
 
 forceEnglish() {
-  if(!getDvarInt("bcs_forceEnglish", 0)) {
+  if(!getDvarInt("bcs_forceEnglish", 0))
     return false;
-  }
 
   switch (level.script) {
     case "airlift":
@@ -217,10 +209,9 @@ setNPCID() {
   startIndex = randomIntRange(0, numIDs);
 
   lowestID = startIndex;
-  for(index = 0; index <= numIDs; index++) {
-    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count) {
+  for (index = 0; index <= numIDs; index++) {
+    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
       lowestID = (startIndex + index) % numIDs;
-    }
   }
 
   self thread npcIDTracker(lowestID);
@@ -233,9 +224,8 @@ npcIDTracker(lowestID) {
 
   anim.usedIDs[self.voice][lowestID].count++;
   self waittill("death");
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
   anim.usedIDs[self.voice][lowestID].count--;
 }
@@ -244,10 +234,10 @@ aiHostileBurstLoop() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(1) {
+  while (1) {
     if(Distance(self.origin, level.player.origin) < 1024) {
       // don't burst unless there's at least one other guy to hear you
-      if(isDefined(self.squad.memberCount) && self.squad.memberCount > 1) {
+      if(IsDefined(self.squad.memberCount) && self.squad.memberCount > 1) {
         self addReactionEvent("taunt", "hostileburst");
       }
     }
@@ -260,7 +250,7 @@ aiBattleChatterLoop() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(true) {
+  while (true) {
     //prof_begin( "aiBattleChatterLoop" );
     self playBattleChatter();
     //prof_end( "aiBattleChatterLoop" );
@@ -273,7 +263,7 @@ aiNameAndRankWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(1) {
+  while (1) {
     self.bcName = self animscripts\battlechatter::getName();
     self.bcRank = self animscripts\battlechatter::getRank();
     self waittill("set name and rank");
@@ -287,14 +277,14 @@ removeFromSystem(squadName) {
     self aiDeathEnemy();
   }
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self.battleChatter = false;
     self.chatInitialized = false;
   }
 
   self notify("removed from battleChatter");
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self.chatQueue = undefined;
     self.nextSayTime = undefined;
     self.nextSayTimes = undefined;
@@ -309,22 +299,22 @@ removeFromSystem(squadName) {
 init_aiBattleChatter() {
   //prof_begin("init_aiBattleChatter");
   self.chatQueue = [];
-  self.chatQueue["threat"] = spawnStruct();
+  self.chatQueue["threat"] = spawnstruct();
   self.chatQueue["threat"].expireTime = 0;
   self.chatQueue["threat"].priority = 0.0;
-  self.chatQueue["response"] = spawnStruct();
+  self.chatQueue["response"] = spawnstruct();
   self.chatQueue["response"].expireTime = 0;
   self.chatQueue["response"].priority = 0.0;
-  self.chatQueue["reaction"] = spawnStruct();
+  self.chatQueue["reaction"] = spawnstruct();
   self.chatQueue["reaction"].expireTime = 0;
   self.chatQueue["reaction"].priority = 0.0;
-  self.chatQueue["inform"] = spawnStruct();
+  self.chatQueue["inform"] = spawnstruct();
   self.chatQueue["inform"].expireTime = 0;
   self.chatQueue["inform"].priority = 0.0;
-  self.chatQueue["order"] = spawnStruct();
+  self.chatQueue["order"] = spawnstruct();
   self.chatQueue["order"].expireTime = 0;
   self.chatQueue["order"].priority = 0.0;
-  self.chatQueue["custom"] = spawnStruct();
+  self.chatQueue["custom"] = spawnstruct();
   self.chatQueue["custom"].expireTime = 0;
   self.chatQueue["custom"].priority = 0.0;
 
@@ -372,7 +362,7 @@ init_aiBattleChatter() {
     self addAllowedThreatCallout("ai_location");
   }
 
-  if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
+  if(IsDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battleChatter = false;
   } else {
     self.battleChatter = level.battlechatter[self.team];
@@ -405,7 +395,7 @@ addThreatEvent(eventType, threat, priority) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  ASSERTEX(isDefined(eventType), "addThreatEvent called with undefined eventType");
+  ASSERTEX(IsDefined(eventType), "addThreatEvent called with undefined eventType");
 
   if(!self canSay("threat", eventType, priority)) {
     return;
@@ -432,7 +422,7 @@ addThreatEvent(eventType, threat, priority) {
       */
   }
 
-  if(isDefined(threat.squad)) {
+  if(IsDefined(threat.squad)) {
     self.squad updateContact(threat.squad.squadName, self);
   }
 
@@ -481,11 +471,11 @@ addResponseEvent_internal(eventType, modifier, respondTo, priority, reportAlias,
 
   chatEvent = self createChatEvent("response", eventType, priority);
 
-  if(isDefined(reportAlias)) {
+  if(IsDefined(reportAlias)) {
     chatEvent.reportAlias = reportAlias;
   }
 
-  if(isDefined(location)) {
+  if(IsDefined(location)) {
     chatEvent.location = location;
   }
 
@@ -542,9 +532,8 @@ addReactionEvent(eventType, modifier, reactTo, priority) {
   	return;
   }
   */
-  if(!isDefined(self.chatQueue)) {
+  if(!isdefined(self.chatQueue))
     return;
-  }
 
   chatEvent = self createChatEvent("reaction", eventType, priority);
 
@@ -564,7 +553,7 @@ addOrderEvent(eventType, modifier, orderTo, priority) {
     return;
   }
 
-  if(isDefined(orderTo) && orderTo.type == "dog") {
+  if(IsDefined(orderTo) && orderTo.type == "dog") {
     return;
   }
 
@@ -585,20 +574,18 @@ squadOfficerWaiter() {
   anim endon("battlechatter disabled");
   anim endon("squad deleted " + self.squadName);
 
-  while(1) {
+  while (1) {
     officer = undefined;
 
-    if(self.officers.size) {
+    if(self.officers.size)
       members = self.officers;
-    } else {
+    else
       members = self.members;
-    }
 
     officers = [];
-    for(index = 0; index < members.size; index++) {
-      if(isalive(members[index])) {
+    for (index = 0; index < members.size; index++) {
+      if(isalive(members[index]))
         officers[officers.size] = members[index];
-      }
     }
 
     if(officers.size) {
@@ -614,8 +601,8 @@ squadOfficerWaiter() {
 getThreats(potentialThreats) {
   threats = [];
 
-  for(i = 0; i < potentialThreats.size; i++) {
-    if(!isDefined(potentialThreats[i].enemyClass)) {
+  for (i = 0; i < potentialThreats.size; i++) {
+    if(!IsDefined(potentialThreats[i].enemyClass)) {
       continue;
     }
 
@@ -635,7 +622,7 @@ getThreats(potentialThreats) {
   noLocs = [];
   foreach(threat in threats) {
     location = threat GetLocation();
-    if(isDefined(location) && !location_called_out_recently(location)) {
+    if(IsDefined(location) && !location_called_out_recently(location)) {
       haveLocs[haveLocs.size] = threat;
     } else {
       noLocs[noLocs.size] = threat;
@@ -666,7 +653,7 @@ squadThreatWaiter() {
   anim endon("battlechatter disabled");
   anim endon("squad deleted " + self.squadName);
 
-  while(1) {
+  while (1) {
     wait(RandomFloatRange(0.25, 0.75));
 
     //prof_begin("squadThreatWaiter");
@@ -696,7 +683,7 @@ squadThreatWaiter() {
       }
 
       foreach(j, enemy in validEnemies) {
-        if(!isDefined(enemy)) {
+        if(!IsDefined(enemy)) {
           if(j == 0) {
             validEnemies = [];
           }
@@ -744,14 +731,14 @@ aiDeathFriendly() {
   array_thread(self.squad.members, ::aiDeathEventThread);
 
   // if the guy who killed him is a regular AI, call him out if we can
-  if(IsAlive(attacker) && IsSentient(attacker) && isDefined(attacker.squad) && attacker.battleChatter) {
+  if(IsAlive(attacker) && IsSentient(attacker) && IsDefined(attacker.squad) && attacker.battleChatter) {
     // reset this guy's calledOut status since he's dangerous again
-    if(isDefined(attacker.calledOut[attacker.squad.squadName])) {
+    if(IsDefined(attacker.calledOut[attacker.squad.squadName])) {
       attacker.calledOut[attacker.squad.squadName] = undefined;
     }
 
     // only infantry do this
-    if(!isDefined(attacker.enemyClass)) {
+    if(!IsDefined(attacker.enemyClass)) {
       return;
     }
 
@@ -787,12 +774,12 @@ aiDeathEventThread() {
 aiDeathEnemy() {
   attacker = self.attacker;
 
-  if(!IsAlive(attacker) || !IsSentient(attacker) || !isDefined(attacker.squad)) {
+  if(!IsAlive(attacker) || !IsSentient(attacker) || !IsDefined(attacker.squad)) {
     return;
   }
 
   // only SEALs get to do killfirms
-  if(!isDefined(attacker.countryID) || attacker.countryID != "NS") {
+  if(!IsDefined(attacker.countryID) || attacker.countryID != "NS") {
     return;
   }
 
@@ -814,11 +801,10 @@ aiOfficerOrders() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!isDefined(self.squad.chatInitialized)) {
+  if(!isdefined(self.squad.chatInitialized))
     self.squad waittill("squad chat initialized");
-  }
 
-  while(1) {
+  while (1) {
     if(getdvar("bcs_enable", "on") == "off") {
       wait(1.0);
       continue;
@@ -834,16 +820,14 @@ aiGrenadeDangerWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(1) {
+  while (1) {
     self waittill("grenade danger", grenade);
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getdvar("bcs_enable", "on") == "off")
       continue;
-    }
 
-    if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
+    if(!isdefined(grenade) || grenade.model != "projectile_m67fraggrenade")
       continue;
-    }
 
     if(distance(grenade.origin, level.player.origin) < 512) // grenade radius is 220
       self addInformEvent("incoming", "grenade");
@@ -854,12 +838,11 @@ aiDisplaceWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(true) {
+  while (true) {
     self waittill("trigger");
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getdvar("bcs_enable", "on") == "off")
       continue;
-    }
 
     // no acknowledgement if you just took pain, looks dumb
     if(GetTime() < self.a.painTime + 4000) {
@@ -878,7 +861,7 @@ evaluateMoveEvent(wasInCover) {
     return;
   }
 
-  if(!isDefined(self.node)) {
+  if(!IsDefined(self.node)) {
     return;
   }
 
@@ -901,7 +884,7 @@ evaluateMoveEvent(wasInCover) {
   responder = self getResponder(24, 1024, "response");
 
   if(self.team != "axis" && self.team != "team3") {
-    if(!isDefined(responder)) {
+    if(!IsDefined(responder)) {
       responder = level.player;
     }
     // if we do have a responder, sometimes we want to pick the player anyway, for variety
@@ -950,16 +933,14 @@ aiFollowOrderWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(true) {
+  while (true) {
     level waittill("follow order", speaker);
 
-    if(!bcsEnabled()) {
+    if(!bcsEnabled())
       return;
-    }
 
-    if(speaker.team != self.team) {
+    if(speaker.team != self.team)
       continue;
-    }
 
     if(distance(self.origin, speaker.origin) < 600) {
       self addResponseEvent("ack", "yes", speaker, 0.9);
@@ -974,7 +955,7 @@ player_friendlyfire_waiter() {
 
   self thread player_friendlyfire_waiter_damage();
 
-  while(1) {
+  while (1) {
     self waittill("bulletwhizby", shooter, whizByDist);
 
     if(!bcsEnabled()) {
@@ -1001,10 +982,10 @@ player_friendlyfire_waiter_damage() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
 
-    if(isDefined(attacker) && IsPlayer(attacker)) {
+    if(IsDefined(attacker) && IsPlayer(attacker)) {
       if(damage_is_valid_for_friendlyfire_warning(type)) {
         self player_friendlyfire_addReactionEvent();
       }
@@ -1013,7 +994,7 @@ player_friendlyfire_waiter_damage() {
 }
 
 damage_is_valid_for_friendlyfire_warning(type) {
-  if(!isDefined(type)) {
+  if(!IsDefined(type)) {
     return false;
   }
 
@@ -1060,13 +1041,11 @@ evaluateMeleeEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return (false);
-  }
 
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy))
     return (false);
-  }
 
   //	self addReactionEvent("taunt", "generic", self.enemy);
 
@@ -1078,13 +1057,11 @@ evaluateFiringEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy))
     return;
-  }
 
   //	if(distance(self.origin, self.enemy.origin) > 384)
   //		self addReactionEvent("taunt", "generic", self.enemy, 0.4);
@@ -1094,13 +1071,11 @@ evaluateSuppressionEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
-  if(!self.suppressed) {
+  if(!self.suppressed)
     return;
-  }
 
   self addInformEvent("suppressed", "generic");
 }
@@ -1113,7 +1088,7 @@ evaluateAttackEvent(type) {
     return;
   }
 
-  ASSERTEX(isDefined(type), "Grenade type [self.grenadeWeapon] thrown is undefined!");
+  ASSERTEX(IsDefined(type), "Grenade type [self.grenadeWeapon] thrown is undefined!");
 
   // just do frag callouts for all kinds of grenades
   self addInformEvent("attack", "grenade");
@@ -1193,7 +1168,7 @@ custom_battlechatter_validate_phrase(string) {
 }
 
 custom_battlechatter_internal(string) {
-  if(!isDefined(level.customBcs_validPhrases)) {
+  if(!IsDefined(level.customBcs_validPhrases)) {
     custom_battlechatter_init_valid_phrases();
   }
 
@@ -1214,9 +1189,10 @@ custom_battlechatter_internal(string) {
   switch (string) {
     case "order_move_combat":
       if(!self nationalityOkForMoveOrder()) {
+        /#
         println(badCountryIdStr);
-
-        return false;
+        # /
+          return false;
       }
 
       self tryOrderTo(self.customChatPhrase, responder);
@@ -1225,9 +1201,10 @@ custom_battlechatter_internal(string) {
 
     case "order_move_noncombat":
       if(!self nationalityOkForMoveOrderNoncombat()) {
+        /#
         println(badCountryIdStr);
-
-        return false;
+        # /
+          return false;
       }
 
       self addMoveNoncombatAliasEx();
@@ -1254,9 +1231,8 @@ custom_battlechatter_internal(string) {
 }
 
 beginCustomEvent() {
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
   self.customChatPhrase = createChatPhrase();
 }
@@ -1278,28 +1254,24 @@ addInformReloadingAliasEx() {
 }
 
 addNameAliasEx(name) {
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
   self.customChatPhrase addNameAlias(name);
 }
 
 endCustomEvent(eventDuration, typeOverride) {
-  if(!bcsEnabled()) {
+  if(!bcsEnabled())
     return;
-  }
 
   chatEvent = self createChatEvent("custom", "generic", 1.0);
-  if(isDefined(eventDuration)) {
+  if(isdefined(eventDuration))
     chatEvent.expireTime = gettime() + eventDuration;
-  }
 
-  if(isDefined(typeOverride)) {
+  if(isDefined(typeOverride))
     chatEvent.type = typeOverride;
-  } else {
+  else
     chatEvent.type = "custom";
-  }
 
   self.chatQueue["custom"] = undefined;
   self.chatQueue["custom"] = chatEvent;

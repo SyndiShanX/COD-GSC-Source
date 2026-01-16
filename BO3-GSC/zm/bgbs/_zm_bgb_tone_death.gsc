@@ -16,15 +16,15 @@
 #namespace zm_bgb_tone_death;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_tone_death", &__init__, undefined, "bgb");
+  system::register("zm_bgb_tone_death", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_tone_death", "event", &event, undefined, undefined, undefined);
-  bgb::register_actor_death_override("zm_bgb_tone_death", &actor_death_override);
+  bgb::register("zm_bgb_tone_death", "event", & event, undefined, undefined, undefined);
+  bgb::register_actor_death_override("zm_bgb_tone_death", & actor_death_override);
 }
 
 function event() {
@@ -44,7 +44,7 @@ function actor_death_override(e_attacker) {
   }
   if(e_attacker bgb::is_enabled("zm_bgb_tone_death")) {
     self.bgb_tone_death = 1;
-    if(!isDefined(e_attacker.n_bgb_tone_death_count)) {
+    if(!isdefined(e_attacker.n_bgb_tone_death_count)) {
       e_attacker.n_bgb_tone_death_count = 25;
     }
     e_attacker.n_bgb_tone_death_count--;

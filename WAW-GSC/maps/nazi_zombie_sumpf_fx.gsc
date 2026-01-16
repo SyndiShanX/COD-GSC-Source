@@ -117,24 +117,24 @@ electric_light() {
   lght setlightintensity(2.5);
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
-  mdl setModel("tag_origin");
+  mdl setmodel("tag_origin");
   mdl linkto(lantern);
-  playFXOnTag(level._effect["hanging_light_fx"], mdl, "tag_origin");
-  while(1) {
+  playfxontag(level._effect["hanging_light_fx"], mdl, "tag_origin");
+  while (1) {
     wait(randomfloatrange(10, 15));
     lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
   }
 }
 
 post_lights() {
-  lanterns = getEntArray("post_lamp", "targetname");
+  lanterns = getentarray("post_lamp", "targetname");
   array_thread(lanterns, ::swing_lanterns);
 }
 
 swing_lanterns() {
   org_angles = self.angles;
   org_pos = self.origin;
-  while(1) {
+  while (1) {
     self rotateto(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
     self waittill("rotatedone");
     self rotateto(org_angles, randomfloatrange(.5, 1));
@@ -144,11 +144,10 @@ swing_lanterns() {
 
 hanging_dead_guy() {
   dead_guy = getent("hanging_dead_guy", "targetname");
-  if(!isDefined(dead_guy)) {
+  if(!isDefined(dead_guy))
     return;
-  }
   dead_guy physicslaunch(dead_guy.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
-  while(1) {
+  while (1) {
     wait(randomint(8, 13));
     dead_guy physicslaunch(dead_guy.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
   }

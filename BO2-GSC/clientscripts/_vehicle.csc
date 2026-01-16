@@ -17,9 +17,8 @@ vehicle_rumble(localclientnum) {
   if(!isDefined(self.rumbletype) || self.rumbleradius == 0) {
     return;
   }
-  if(!isDefined(self.rumbleon)) {
+  if(!isDefined(self.rumbleon))
     self.rumbleon = 1;
-  }
 
   height = self.rumbleradius * 2;
   zoffset = -1 * self.rumbleradius;
@@ -85,13 +84,12 @@ vehicle_kill_treads_forever() {
 
 get_throttle_effect(throttle) {
   if(isDefined(self.throttlefx)) {
-    if(throttle < 0.3) {
+    if(throttle < 0.3)
       return self.throttlefx[0];
-    } else if(throttle < 0.7) {
+    else if(throttle < 0.7)
       return self.throttlefx[1];
-    } else {
+    else
       return self.throttlefx[2];
-    }
   }
 
   return undefined;
@@ -119,9 +117,8 @@ wake(localclientnum, tagname) {
   offset = vectorscale((0, 0, -1), 10.0);
   self thread wake_mon(localclientnum);
 
-  if(isDefined(self.wake_fxhandle)) {
+  if(isDefined(self.wake_fxhandle))
     deletefx(localclientnum, self.wake_fxhandle, 0);
-  }
 
   self.wake_fxhandle = undefined;
   wakestate = -1;
@@ -136,21 +133,20 @@ wake(localclientnum, tagname) {
           self.wake_fxhandle = undefined;
         }
       } else if(!isDefined(self.wake_fxhandle))
-        self.wake_fxhandle = playFXOnTag(localclientnum, treadfx, self, tagname);
+        self.wake_fxhandle = playfxontag(localclientnum, treadfx, self, tagname);
     } else if(self isvehicleinwater()) {
       newstate = 0;
 
-      if(speed > 150 && self getthrottle() < 0) {
+      if(speed > 150 && self getthrottle() < 0)
         newstate = 0;
-      } else if(speed < 70) {
+      else if(speed < 70)
         newstate = 1;
-      } else if(speed < 300) {
+      else if(speed < 300)
         newstate = 2;
-      } else if(speed < 600) {
+      else if(speed < 600)
         newstate = 3;
-      } else {
+      else
         newstate = 4;
-      }
 
       if(wakestate != newstate) {
         if(isDefined(self.wake_fxhandle)) {
@@ -160,7 +156,7 @@ wake(localclientnum, tagname) {
 
         wakestate = newstate;
         fx = self.wakefx[wakestate];
-        self.wake_fxhandle = playFXOnTag(localclientnum, fx, self, tagname);
+        self.wake_fxhandle = playfxontag(localclientnum, fx, self, tagname);
       }
 
       throttle = self getthrottle();
@@ -171,7 +167,7 @@ wake(localclientnum, tagname) {
         if(isDefined(throttleeffect)) {
           effectorigin = self gettagorigin(tagname);
           fwd = self gettagforwardvector(tagname);
-          playFX(localclientnum, throttleeffect, effectorigin, fwd);
+          playfx(localclientnum, throttleeffect, effectorigin, fwd);
         }
       }
     } else {
@@ -197,11 +193,11 @@ splash(localclientnum) {
   }
   wasinwater = 1;
   offset = vectorscale((0, 0, -1), 10.0);
-  last_water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
+  last_water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
 
   for(;;) {
     wait 0.5;
-    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - last_water_check_pos[2];
@@ -213,8 +209,8 @@ splash(localclientnum) {
         splashorigin = self gettagorigin("snd_bow_center");
         effectorigin = self gettagorigin("tag_wake");
         fwd = self gettagforwardvector("tag_wake");
-        playFX(localclientnum, self.splashfx, effectorigin, fwd);
-        id = playSound(0, "veh_boat_splash", splashorigin);
+        playfx(localclientnum, self.splashfx, effectorigin, fwd);
+        id = playsound(0, "veh_boat_splash", splashorigin);
       }
     }
 
@@ -231,9 +227,9 @@ splash_small() {
   wait(randomfloat(0.5));
 
   for(;;) {
-    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
     wait 0.5;
-    water_check_pos_2 = self.origin + anglesToForward(self.angles) * 100 + offset;
+    water_check_pos_2 = self.origin + anglestoforward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - water_check_pos_2[2];
@@ -244,11 +240,10 @@ splash_small() {
       if(self getspeed() > 100 && vertical_speed < -0.6) {
         splashorigin = self gettagorigin("snd_bow_center");
 
-        if(!isDefined(splashorigin)) {
+        if(!isDefined(splashorigin))
           splashorigin = self gettagorigin("tag_origin");
-        }
 
-        id = playSound(0, "veh_boat_splash_small", splashorigin);
+        id = playsound(0, "veh_boat_splash_small", splashorigin);
         wait 1.6;
       }
     }
@@ -274,13 +269,12 @@ tread(localclientnum, tagname, side) {
       continue;
     }
 
-    if(speed > 350) {
+    if(speed > 350)
       waittime = 0.1;
-    } else if(speed < 166) {
+    else if(speed < 166)
       waittime = 0.3;
-    } else {
+    else
       waittime = 35 / speed;
-    }
 
     wait(waittime);
     treadfx = treadget(self, side);
@@ -293,7 +287,7 @@ tread(localclientnum, tagname, side) {
       }
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -345,13 +339,12 @@ boat_tread(localclientnum, tagname, side) {
       continue;
     }
 
-    if(speed > 350) {
+    if(speed > 350)
       waittime = 0.1;
-    } else if(speed < 166) {
+    else if(speed < 166)
       waittime = 0.3;
-    } else {
+    else
       waittime = 35 / speed;
-    }
 
     wait(waittime);
     treadfx = treadgetboat(self, side);
@@ -364,7 +357,7 @@ boat_tread(localclientnum, tagname, side) {
       }
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -372,9 +365,8 @@ boat_tread(localclientnum, tagname, side) {
 treadgetboat(vehicle, side) {
   surface = self getwheelsurface(side);
 
-  if(!isDefined(vehicle.vehicletype) || surface == "water") {
+  if(!isDefined(vehicle.vehicletype) || surface == "water")
     return -1;
-  }
 
   if(!isDefined(vehicle.treadfx[surface])) {
     wait 10;
@@ -385,32 +377,28 @@ treadgetboat(vehicle, side) {
 }
 
 play_exhaust(localclientnum, tag_left, tag_right) {
-  if(!isDefined(tag_left)) {
+  if(!isDefined(tag_left))
     tag_left = "tag_engine_left";
-  }
 
-  if(!isDefined(tag_right)) {
+  if(!isDefined(tag_right))
     tag_right = "tag_engine_right";
-  }
 
   if(isDefined(self.csf_no_exhaust) && self.csf_no_exhaust) {
     return;
   }
   if(!isDefined(self.exhaust_fx) && isDefined(self.exhaustfxname) && self.exhaustfxname != "") {
-    if(!isDefined(level._effect[self.exhaustfxname])) {
+    if(!isDefined(level._effect[self.exhaustfxname]))
       level._effect[self.exhaustfxname] = loadfx(self.exhaustfxname);
-    }
 
     self.exhaust_fx = level._effect[self.exhaustfxname];
   }
 
   if(isDefined(self.exhaust_fx) && isDefined(self.exhaustfxname) && self.exhaustfxname != "") {
     if(isDefined(self) && self isalive() && isDefined(self.exhaust_fx)) {
-      self.exhaust_id_left = playFXOnTag(localclientnum, self.exhaust_fx, self, tag_left);
+      self.exhaust_id_left = playfxontag(localclientnum, self.exhaust_fx, self, tag_left);
 
-      if(!isDefined(self.exhaust_id_right) && !self.oneexhaust) {
-        self.exhaust_id_right = playFXOnTag(localclientnum, self.exhaust_fx, self, tag_right);
-      }
+      if(!isDefined(self.exhaust_id_right) && !self.oneexhaust)
+        self.exhaust_id_right = playfxontag(localclientnum, self.exhaust_fx, self, tag_right);
 
       self thread kill_exhaust_watcher(localclientnum);
     }
@@ -439,9 +427,8 @@ build_gear(vehicletype, model, tag) {
   index = 0;
 
   if(isDefined(level.vehiclegearmodels)) {
-    if(isDefined(level.vehiclegearmodels[vehicletype])) {
+    if(isDefined(level.vehiclegearmodels[vehicletype]))
       index = level.vehiclegearmodels[vehicletype].size;
-    }
   }
 
   level.vehiclegearmodels[vehicletype][index] = model;
@@ -454,9 +441,8 @@ vehicle_variants(localclientnum) {
       numgear = level.vehiclegearmodels[self.vehicletype].size;
       maxgear = 2;
 
-      if(numgear < maxgear) {
+      if(numgear < maxgear)
         maxgear = numgear;
-      }
 
       randomconstantnumber = self getentitynumber();
 
@@ -491,11 +477,10 @@ aircraft_dustkick() {
   if(isDefined(self.csf_no_tread) && self.csf_no_tread) {
     return;
   }
-  if(self is_mig()) {
+  if(self is_mig())
     numframespertrace = 1;
-  } else {
+  else
     numframespertrace = 3;
-  }
 
   dotracethisframe = numframespertrace;
   repeatrate = 1.0;
@@ -504,13 +489,11 @@ aircraft_dustkick() {
   trace_ent = self;
 
   while(isDefined(self)) {
-    if(repeatrate <= 0) {
+    if(repeatrate <= 0)
       repeatrate = 1.0;
-    }
 
-    if(self is_mig()) {
+    if(self is_mig())
       repeatrate = 0.02;
-    }
 
     waitrealtime(repeatrate);
 
@@ -524,11 +507,10 @@ aircraft_dustkick() {
       trace = tracepoint(trace_ent.origin, trace_ent.origin - vectorscale((0, 0, 1), 100000.0));
       d = distance(trace_ent.origin, trace["position"]);
 
-      if(d > 350) {
+      if(d > 350)
         repeatrate = (d - 350) / (1200 - 350) * (0.2 - 0.1) + 0.1;
-      } else {
+      else
         repeatrate = 0.1;
-      }
     }
 
     if(isDefined(trace)) {
@@ -537,13 +519,12 @@ aircraft_dustkick() {
         continue;
       }
 
-      if(!isDefined(trace["surfacetype"])) {
+      if(!isDefined(trace["surfacetype"]))
         trace["surfacetype"] = "dirt";
-      }
 
-      if(isDefined(self.treadfx[trace["surfacetype"]])) {
-        playFX(0, self.treadfx[trace["surfacetype"]], trace["position"]);
-      } else {
+      if(isDefined(self.treadfx[trace["surfacetype"]]))
+        playfx(0, self.treadfx[trace["surfacetype"]], trace["position"]);
+      else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
 
         return;
@@ -563,9 +544,8 @@ vehicle_weapon_fired() {
       player_distance = distancesquared(self.origin, players[i].origin);
 
       if(player_distance < 250000) {
-        if(isDefined(self.shootrumble) && self.shootrumble != "") {
+        if(isDefined(self.shootrumble) && self.shootrumble != "")
           playrumbleonposition(i, self.shootrumble, self.origin + vectorscale((0, 0, 1), 32.0));
-        }
       }
 
       if(player_distance < 160000) {
@@ -573,9 +553,8 @@ vehicle_weapon_fired() {
         time = 4 - 3 * fraction;
 
         if(isDefined(players[i])) {
-          if(isDefined(self.shootshock) && self.shootshock != "") {
+          if(isDefined(self.shootshock) && self.shootshock != "")
             players[i] shellshock(i, self.shootshock, time);
-          }
         }
       }
     }
@@ -585,33 +564,28 @@ vehicle_weapon_fired() {
 lights_on(localclientnum) {
   lights_off(localclientnum);
 
-  if(self.vehicletype == "spiderbot_large" || self.vehicletype == "drone_firescout_axis") {
+  if(self.vehicletype == "spiderbot_large" || self.vehicletype == "drone_firescout_axis")
     wait 0.1;
-  }
 
   if(isDefined(self.light_fx)) {
-    if(!isDefined(self.light_fx_handles)) {
+    if(!isDefined(self.light_fx_handles))
       self.light_fx_handles = [];
-    }
 
-    for(i = 0; i < self.light_fx.size; i++) {
-      self.light_fx_handles[i] = playFXOnTag(localclientnum, self.light_fx[i], self, self.lightfxtagarray[i]);
-    }
+    for(i = 0; i < self.light_fx.size; i++)
+      self.light_fx_handles[i] = playfxontag(localclientnum, self.light_fx[i], self, self.lightfxtagarray[i]);
   }
 
   if(isDefined(self.team) && self.team == "allies") {
-    if(isDefined(self.friendly_light_fx)) {
-      self.team_light_fx_handle = playFXOnTag(localclientnum, self.friendly_light_fx, self, self.enemylightfxtag);
-    }
+    if(isDefined(self.friendly_light_fx))
+      self.team_light_fx_handle = playfxontag(localclientnum, self.friendly_light_fx, self, self.enemylightfxtag);
   } else if(isDefined(self.enemy_light_fx))
-    self.team_light_fx_handle = playFXOnTag(localclientnum, self.enemy_light_fx, self, self.friendlylightfxtag);
+    self.team_light_fx_handle = playfxontag(localclientnum, self.enemy_light_fx, self, self.friendlylightfxtag);
 }
 
 lights_off(localclientnum) {
   if(isDefined(self.light_fx_handles)) {
-    for(i = 0; i < self.light_fx_handles.size; i++) {
+    for(i = 0; i < self.light_fx_handles.size; i++)
       deletefx(localclientnum, self.light_fx_handles[i]);
-    }
   }
 
   self.light_fx_handles = undefined;
@@ -631,7 +605,8 @@ vehicle_flag_toggle_sounds(localclientnum, set, newent) {
       self notify("play_heli_sounds");
       self.should_not_play_sounds = 0;
     }
-  } else {}
+  } else {
+  }
 }
 
 vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
@@ -639,15 +614,13 @@ vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
     println("****CLIENT:: Vehicle Flag Plane");
 
     if(set) {
-      if(isDefined(newent) && newent) {
+      if(isDefined(newent) && newent)
         self.csf_no_tread = 1;
-      } else {
+      else
         self vehicle_kill_treads_forever();
-      }
     } else {
-      if(isDefined(self.csf_no_tread)) {
+      if(isDefined(self.csf_no_tread))
         self.csf_no_tread = 0;
-      }
 
       self vehicle_kill_treads_forever();
       self thread aircraft_dustkick();
@@ -667,9 +640,8 @@ vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
   } else {
     println("****CLIENT:: Vehicle Flag Tread FX Clear");
 
-    if(isDefined(self.csf_no_tread)) {
+    if(isDefined(self.csf_no_tread))
       self.csf_no_tread = 0;
-    }
 
     self vehicle_kill_treads_forever();
     self thread vehicle_treads(localclientnum);
@@ -687,9 +659,10 @@ vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent) {
 }
 
 vehicle_flag_3_handler(localclientnum, set, newent) {
-  if(self is_helicopter()) {
+  if(self is_helicopter())
     vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent);
-  } else {}
+  else {
+  }
 }
 
 vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
@@ -703,22 +676,21 @@ vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
 }
 
 vehicle_flag_4_handler(localclientnum, set, newent) {
-  if(self is_helicopter()) {
+  if(self is_helicopter())
     vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent);
-  } else {}
+  else {
+  }
 }
 
 vehicle_flag_toggle_exhaustfx_handler(localclientnum, set, newent) {
   if(set) {
-    if(isDefined(newent) && newent) {
+    if(isDefined(newent) && newent)
       self.csf_no_exhaust = 1;
-    } else {
+    else
       self stop_exhaust(localclientnum);
-    }
   } else {
-    if(isDefined(self.csf_no_exhaust)) {
+    if(isDefined(self.csf_no_exhaust))
       self.csf_no_exhaust = 0;
-    }
 
     self stop_exhaust(localclientnum);
     exhaust_tag_left = issubstr(self.vehicletype, "heli_v78") || issubstr(self.vehicletype, "osprey") ? "tag_fx_engine_left1" : "tag_engine_left";
@@ -728,25 +700,22 @@ vehicle_flag_toggle_exhaustfx_handler(localclientnum, set, newent) {
 }
 
 vehicle_flag_toggle_lights_handler(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     self lights_off(localclientnum);
-  } else {
+  else
     self lights_on(localclientnum);
-  }
 }
 
 vehicle_flag_toggle_lockon_handler(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     self setvehiclelockedon(1);
-  } else {
+  else
     self setvehiclelockedon(0);
-  }
 }
 
 autoexec build_damage_filter_list() {
-  if(!isDefined(level.vehicle_damage_filters)) {
+  if(!isDefined(level.vehicle_damage_filters))
     level.vehicle_damage_filters = [];
-  }
 
   level.vehicle_damage_filters[0] = "generic_filter_vehicle_damage";
   level.vehicle_damage_filters[1] = "generic_filter_sam_damage";
@@ -788,9 +757,8 @@ damage_filter_off(localclientnum) {
   while(level.localplayers[0].damage_filter_intensity > 0) {
     level.localplayers[0].damage_filter_intensity = level.localplayers[0].damage_filter_intensity - 0.0505061;
 
-    if(level.localplayers[0].damage_filter_intensity < 0) {
+    if(level.localplayers[0].damage_filter_intensity < 0)
       level.localplayers[0].damage_filter_intensity = 0;
-    }
 
     set_filter_vehicle_damage_amount(level.localplayers[0], 3, level.localplayers[0].damage_filter_intensity);
     wait 0.016667;
@@ -805,9 +773,8 @@ damage_filter_light(localclientnum) {
   while(level.localplayers[0].damage_filter_intensity < 0.5) {
     level.localplayers[0].damage_filter_intensity = level.localplayers[0].damage_filter_intensity + 0.083335;
 
-    if(level.localplayers[0].damage_filter_intensity > 0.5) {
+    if(level.localplayers[0].damage_filter_intensity > 0.5)
       level.localplayers[0].damage_filter_intensity = 0.5;
-    }
 
     set_filter_vehicle_damage_amount(level.localplayers[0], 3, level.localplayers[0].damage_filter_intensity);
     wait 0.016667;
@@ -821,9 +788,8 @@ damage_filter_heavy(localclientnum) {
   while(level.localplayers[0].damage_filter_intensity < 1) {
     level.localplayers[0].damage_filter_intensity = level.localplayers[0].damage_filter_intensity + 0.083335;
 
-    if(level.localplayers[0].damage_filter_intensity > 1) {
+    if(level.localplayers[0].damage_filter_intensity > 1)
       level.localplayers[0].damage_filter_intensity = 1;
-    }
 
     set_filter_vehicle_damage_amount(level.localplayers[0], 3, level.localplayers[0].damage_filter_intensity);
     wait 0.016667;

@@ -165,7 +165,9 @@ add_override_name_func(nationality, func) {
 get_name_for_nationality(nationality) {
   assertex(isDefined(level.nameIndex[nationality]), nationality);
   if(isDefined(level._override_name_funcs) && isDefined(level._override_name_funcs[nationality])) {
-    self.name = [[level._override_name_funcs[nationality]]]();
+    self.name = [
+      [level._override_name_funcs[nationality]]
+    ]();
     self.airank = "";
     return;
   }

@@ -50,14 +50,17 @@ main(model, type) {
   build_light(model, "brakelight_troops_left", "tag_taillight_left", "misc/car_taillight_bm21", "brakelights");
 
   build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+
 }
 
 init_local() {
   // 	maps\_vehicle::lights_on( "headlights" );
   // 	maps\_vehicle::lights_on( "brakelights" );
+
 }
 
 set_vehicle_anims(positions) {
+
   positions[0].vehicle_getoutanim = % bm21_driver_climbout_door;
   positions[1].vehicle_getoutanim = % bm21_passenger_climbout_door;
   positions[2].vehicle_getoutanim = % bm21_guy_climbout_truckdoor;
@@ -106,9 +109,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 10; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 10; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -160,6 +162,7 @@ setanims() {
   positions[9].explosion_death = % death_explosion_up10;
 
   return positions;
+
 }
 
 unload_groups() {

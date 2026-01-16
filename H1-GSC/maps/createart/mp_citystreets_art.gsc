@@ -7,11 +7,10 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr()) {
+  if(isusinghdr())
     maps\createart\mp_citystreets_fog_hdr::setupfog();
-  } else {
+  else
     maps\createart\mp_citystreets_fog::setupfog();
-  }
 
   visionsetnaked("mp_citystreets", 0);
 }

@@ -53,11 +53,11 @@ function air_traffic_controller_main() {
   wait(1.5);
   level clientfield::set("sndIGCsnapshot", 2);
   level thread namespace_21b2c1f2::play_intro_igc();
-  if(isDefined(level.bzm_prologuedialogue1callback)) {
+  if(isdefined(level.bzm_prologuedialogue1callback)) {
     level thread[[level.bzm_prologuedialogue1callback]]();
   }
   videostart("cp_prologue_env_controltower");
-  util::delay(6.5, undefined, &exploder::stop_exploder, "fx_exploder_high_res_fire");
+  util::delay(6.5, undefined, & exploder::stop_exploder, "fx_exploder_high_res_fire");
   level thread scene::play("cin_pro_01_02_airtraffic_1st_hack_ai");
   level scene::play("cin_pro_01_02_airtraffic_1st_hack");
   videostop("cp_prologue_env_controltower");

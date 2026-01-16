@@ -72,7 +72,7 @@ set_swimming_depth_of_field(toggle, set_values, near_start, near_end, far_start,
 }
 
 settings() {
-  level._swimming = spawnStruct();
+  level._swimming = spawnstruct();
   level._swimming.swim_times[0] = 0;
   level._swimming.swim_times[1] = 15;
   level._swimming.swim_times[2] = 25;
@@ -173,7 +173,7 @@ fx() {
 }
 
 init_player() {
-  self._swimming = spawnStruct();
+  self._swimming = spawnstruct();
   self._swimming.is_swimming = 0;
   self._swimming.is_underwater = 0;
   self._swimming.is_swimming_enabled = 1;
@@ -254,9 +254,8 @@ swimmingdrown() {
 
       println("^4_swimming - server: phase " + phase);
 
-      if(phase == level._swimming.num_phases) {
+      if(phase == level._swimming.num_phases)
         wait 2;
-      }
     }
   }
 
@@ -266,25 +265,21 @@ swimmingdrown() {
 advance_drowning_phase(phase) {
   t_delta = swimming_get_time();
 
-  if(isgodmode(self)) {
+  if(isgodmode(self))
     return 0;
-  }
 
-  if(getdvarint(#"_id_79A1DCC2") == 1) {
+  if(getdvarint(#"_id_79A1DCC2") == 1)
     return 0;
-  }
 
-  if(isDefined(level.disable_drowning) && level.disable_drowning) {
+  if(isDefined(level.disable_drowning) && level.disable_drowning)
     return 0;
-  }
 
   if(self._swimming.is_underwater) {
     self._swimming.swim_time = self._swimming.swim_time + t_delta;
 
     for(phase = level._swimming.num_phases; phase >= 0; phase--) {
-      if(self._swimming.swim_time >= get_phase_time(phase)) {
+      if(self._swimming.swim_time >= get_phase_time(phase))
         return phase;
-      }
     }
   } else {
     self._swimming.reset_time = self._swimming.reset_time + t_delta;
@@ -302,9 +297,8 @@ swimming_get_time() {
   t_now = gettime();
   t_delta = 0;
 
-  if(isDefined(self._swimming.last_get_time)) {
+  if(isDefined(self._swimming.last_get_time))
     t_delta = t_now - self._swimming.last_get_time;
-  }
 
   self._swimming.last_get_time = t_now;
   return t_delta;

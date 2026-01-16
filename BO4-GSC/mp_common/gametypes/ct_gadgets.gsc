@@ -8,6 +8,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\ct_bots;
 #include scripts\mp_common\gametypes\ct_utils;
+
 #namespace ct_gadgets;
 
 function_f2f3407(gadget_name) {
@@ -92,7 +93,7 @@ function_ac7d2bdd(n_time = 0.5) {
 
 function_4d6c7d92(var_e8ee1cd1, n_time = 0) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_649b67d, # "death");
+  self endoncallback(&function_649b67d, #"death");
 
   if(!isDefined(self.var_5c519f98)) {
     self.var_5c519f98 = [];
@@ -291,7 +292,7 @@ function_952b1db2() {
 }
 
 function_1be7e4f(str_weapon) {
-  self endon(#"death", # "hash_46d18c1394319d75");
+  self endon(#"death", #"hash_46d18c1394319d75");
   weapon = getweapon(str_weapon);
   var_333fa936 = self getweaponammoclipsize(weapon);
 

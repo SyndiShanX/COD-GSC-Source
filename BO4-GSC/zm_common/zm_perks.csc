@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_perks;
 
 init() {
@@ -19,19 +20,19 @@ init() {
   }
 
   callback::on_start_gametype(&init_perk_machines_fx);
-  level._effect[# "hash_57c8c9eff08ddf44"] = # "hash_56161fdf383c5fdc";
-  level._effect[# "hash_7c3a9f5103c06ff6"] = # "hash_420040b9ccd8bd85";
+  level._effect[#"hash_57c8c9eff08ddf44"] = #"hash_56161fdf383c5fdc";
+  level._effect[#"hash_7c3a9f5103c06ff6"] = #"hash_420040b9ccd8bd85";
 
   if(level.var_c3e5c4cd == 2) {
-    level._effect[# "hash_223e3f9bde46f5b4"] = # "hash_1678d9a47030413d";
-    level._effect[# "hash_10e42380c1009ee9"] = # "hash_6ecd7d04b43d3fde";
-    level._effect[# "hash_110d9fbfd034c819"] = # "hash_3060d78224e9c44e";
-    level._effect[# "hash_6e4e902b59a22662"] = # "hash_3bb50572a528b187";
-    level._effect[# "hash_26247c4bfd6fed73"] = # "hash_57eb5602b41fa4db";
-    level._effect[# "hash_46334db9e3c76275"] = # "hash_3a24f6e29267c4d7";
+    level._effect[#"hash_223e3f9bde46f5b4"] = #"hash_1678d9a47030413d";
+    level._effect[#"hash_10e42380c1009ee9"] = #"hash_6ecd7d04b43d3fde";
+    level._effect[#"hash_110d9fbfd034c819"] = #"hash_3060d78224e9c44e";
+    level._effect[#"hash_6e4e902b59a22662"] = #"hash_3bb50572a528b187";
+    level._effect[#"hash_26247c4bfd6fed73"] = #"hash_57eb5602b41fa4db";
+    level._effect[#"hash_46334db9e3c76275"] = #"hash_3a24f6e29267c4d7";
   }
 
-  level._effect[# "altar_icon_ambient_fx"] = # "hash_2c9a36103f6cc1e9";
+  level._effect[#"altar_icon_ambient_fx"] = #"hash_2c9a36103f6cc1e9";
   init_custom_perks();
   perks_register_clientfield();
   init_perk_custom_threads();
@@ -92,17 +93,17 @@ perks_register_clientfield() {
     clientfield::register("clientuimodel", "hudItems.extraPerkVapor." + i + ".specialEffectActive", n_version, 1, "int", undefined, 0, 0);
   }
 
-  clientfield::register("scriptmover", "" + # "hash_cf74c35ecc5a49", 1, 1, "int", &function_bb184fed, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_35fe26fc5cb223b3", 1, 3, "int", &_train_sd_bombexplode, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_6fb426c48a4877e0", 1, 3, "int", &function_d5f2f6ac, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_345845080e40675d", 1, 3, "int", &function_136826b0, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_1da6660f0414562", 1, 3, "int", &function_a4c33786, 0, 1);
+  clientfield::register("scriptmover", "" + #"hash_cf74c35ecc5a49", 1, 1, "int", &function_bb184fed, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_35fe26fc5cb223b3", 1, 3, "int", &_train_sd_bombexplode, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_6fb426c48a4877e0", 1, 3, "int", &function_d5f2f6ac, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_345845080e40675d", 1, 3, "int", &function_136826b0, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_1da6660f0414562", 1, 3, "int", &function_a4c33786, 0, 1);
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + # "hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
-    clientfield::register("scriptmover", "" + # "hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
-    clientfield::register("allplayers", "" + # "hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
-    clientfield::register("toplayer", "" + # "hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
+    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
+    clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
+    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
   }
 
   level thread perk_init_code_callbacks();
@@ -178,7 +179,7 @@ _register_undefined_perk(str_perk) {
 
 perk_meteor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.meteor_fx = util::playFXOnTag(localclientnum, level._effect[# "perk_meteor"], self, "tag_origin");
+    self.meteor_fx = util::playFXOnTag(localclientnum, level._effect[#"perk_meteor"], self, "tag_origin");
     return;
   }
 
@@ -252,28 +253,28 @@ function_ccbdf992(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_bb184fed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     switch (self.model) {
-      case # "p8_fxanim_zm_vapor_altar_danu_mod":
-      case # "p8_fxanim_zm_perk_vending_brew_mod":
+      case #"p8_fxanim_zm_vapor_altar_danu_mod":
+      case #"p8_fxanim_zm_perk_vending_brew_mod":
         n_slot = 0;
-        var_fe826f11 = level._effect[# "hash_223e3f9bde46f5b4"];
+        var_fe826f11 = level._effect[#"hash_223e3f9bde46f5b4"];
         var_7ad76c54 = 3;
         break;
-      case # "p8_fxanim_zm_red_vapor_altar_ra_mod":
-      case # "p8_fxanim_zm_vapor_altar_ra_mod":
-      case # "p8_fxanim_zm_perk_vending_cola_mod":
+      case #"p8_fxanim_zm_red_vapor_altar_ra_mod":
+      case #"p8_fxanim_zm_vapor_altar_ra_mod":
+      case #"p8_fxanim_zm_perk_vending_cola_mod":
         n_slot = 1;
-        var_fe826f11 = level._effect[# "hash_10e42380c1009ee9"];
+        var_fe826f11 = level._effect[#"hash_10e42380c1009ee9"];
         var_7ad76c54 = 5;
         break;
-      case # "p8_fxanim_zm_vapor_altar_zeus_mod":
-      case # "p8_fxanim_zm_perk_vending_soda_mod":
+      case #"p8_fxanim_zm_vapor_altar_zeus_mod":
+      case #"p8_fxanim_zm_perk_vending_soda_mod":
         n_slot = 2;
-        var_fe826f11 = level._effect[# "hash_110d9fbfd034c819"];
+        var_fe826f11 = level._effect[#"hash_110d9fbfd034c819"];
         break;
-      case # "p8_fxanim_zm_perk_vending_tonic_mod":
-      case # "p8_fxanim_zm_vapor_altar_odin_mod":
+      case #"p8_fxanim_zm_perk_vending_tonic_mod":
+      case #"p8_fxanim_zm_vapor_altar_odin_mod":
         n_slot = 3;
-        var_fe826f11 = level._effect[# "hash_6e4e902b59a22662"];
+        var_fe826f11 = level._effect[#"hash_6e4e902b59a22662"];
         var_7ad76c54 = 2;
         break;
       default:
@@ -297,11 +298,11 @@ function_bb184fed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       if(level.var_c3e5c4cd == 2) {
         var_fe0b737a = level._custom_perks[var_16c042b8].var_347c72d2;
       } else {
-        var_fe0b737a = level._effect[# "altar_icon_ambient_fx"];
+        var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
       }
     } else {
-      var_c1cbeea5 = # "tag_origin";
-      var_fe0b737a = level._effect[# "altar_icon_ambient_fx"];
+      var_c1cbeea5 = #"tag_origin";
+      var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
     }
 
     assert(isDefined(var_c1cbeea5), "<dev string:x38>");
@@ -343,9 +344,9 @@ function_35ba0b0e(localclientnum, n_slot) {
     assert(isDefined(var_3e311473), "<dev string:x79>");
   }
 
-  if(!isDefined(var_3e311473)) {
-    return;
-  }
+    if(!isDefined(var_3e311473)) {
+      return;
+    }
 
   s_perk = getunlockableiteminfofromindex(var_3e311473, 3);
 
@@ -404,11 +405,11 @@ function_30bf6142(localclientnum, newval, oldval, n_slot) {
       if(level.var_c3e5c4cd == 2) {
         var_fe0b737a = level._custom_perks[var_16c042b8].var_347c72d2;
       } else {
-        var_fe0b737a = level._effect[# "altar_icon_ambient_fx"];
+        var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
       }
     } else {
-      var_c1cbeea5 = # "tag_origin";
-      var_fe0b737a = level._effect[# "altar_icon_ambient_fx"];
+      var_c1cbeea5 = #"tag_origin";
+      var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
     }
 
     mdl_icon setModel(var_c1cbeea5);
@@ -445,7 +446,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
 
     v_forward = anglesToForward(self.angles) * 5;
     v_fx_origin = self.origin + (v_forward[0], v_forward[1], 3);
-    playFX(localclientnum, level._effect[# "hash_7c3a9f5103c06ff6"], v_fx_origin);
+    playFX(localclientnum, level._effect[#"hash_7c3a9f5103c06ff6"], v_fx_origin);
 
     while(isDefined(self)) {
       n_time = gettime();
@@ -470,7 +471,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
     if(newval == 7) {
       self.mdl_altar function_5b123b68(localclientnum, 0);
     } else {
-      self.mdl_altar.var_be82764e = level._effect[# "hash_26247c4bfd6fed73"];
+      self.mdl_altar.var_be82764e = level._effect[#"hash_26247c4bfd6fed73"];
       self.mdl_altar function_5b123b68(localclientnum, 1, 1);
     }
   }
@@ -491,7 +492,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
   self unlink();
   v_forward = anglesToForward(self.angles) * 5;
   v_fx_origin = self.origin + (v_forward[0], v_forward[1], 3);
-  playFX(localclientnum, level._effect[# "hash_57c8c9eff08ddf44"], v_fx_origin);
+  playFX(localclientnum, level._effect[#"hash_57c8c9eff08ddf44"], v_fx_origin);
   self moveto(self.origin - anglesToForward(self.angles) * 2, 0.5);
 
   while(isDefined(self)) {
@@ -554,7 +555,7 @@ function_9b4bc8e7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       level.var_aaf8da70 = getent(localclientnum, "zeus_bird_head", "targetname");
     }
 
-    util::playFXOnTag(localclientnum, level._effect[# "hash_46334db9e3c76275"], level.var_aaf8da70, "bird_follow_jnt");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_46334db9e3c76275"], level.var_aaf8da70, "bird_follow_jnt");
     level.var_aaf8da70 thread function_6a0a572d(localclientnum);
   }
 }
@@ -565,7 +566,7 @@ function_6a0a572d(localclientnum) {
 
   while(true) {
     wait randomintrange(5, 20);
-    self playSound(localclientnum, # "hash_62f87027921fa5b4");
+    self playSound(localclientnum, #"hash_62f87027921fa5b4");
   }
 }
 
@@ -622,7 +623,7 @@ function_1625e105(e_player) {
     return;
   }
 
-  level endon(#"demo_jump", # "hash_4d8d403fdb281b69");
+  level endon(#"demo_jump", #"hash_4d8d403fdb281b69");
   e_player endon(#"death");
   self endon(#"death");
   wait 1;

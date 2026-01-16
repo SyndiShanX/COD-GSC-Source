@@ -18,10 +18,11 @@
 // ---------------------------------------------------------------------------------
 
 main() {
+
   level.so_compass_zoom = "close";
 
   //	breakpoint;
-  gulag_destructible_volumes = getEntArray("gulag_destructible_volume", "targetname");
+  gulag_destructible_volumes = GetEntArray("gulag_destructible_volume", "targetname");
   mask_destructibles_in_volumes(gulag_destructible_volumes);
   mask_interactives_in_volumes(gulag_destructible_volumes);
 
@@ -33,25 +34,25 @@ main() {
   //VisionSetNight( "gulag_nvg", 1.5 );
 
   // The Gulag
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_1" );
+  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_1" );
   // Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_2" );
+  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_2" );
   // P03 'Roach' Silvers
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_3" );
+  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_3" );
   // SEAL Team Six, U.S.N.
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_4" );
+  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_4" );
 
   //	level.start_point = "unload";
   set_default_start("so_showers");
   add_start("so_showers", ::start_so_showers_timed, "Special Op: Showers");
 
-  falling_rib_chunks = getEntArray("falling_rib_chunk", "targetname");
+  falling_rib_chunks = GetEntArray("falling_rib_chunk", "targetname");
   array_thread(falling_rib_chunks, ::self_delete);
-  top_hall_exploders = getEntArray("top_hall_exploder", "targetname");
+  top_hall_exploders = GetEntArray("top_hall_exploder", "targetname");
   array_thread(top_hall_exploders, ::self_delete);
-  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
+  top_hall_chunks = GetEntArray("top_hall_chunk", "targetname");
   array_thread(top_hall_chunks, ::self_delete);
-  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
+  top_hall_chunks = GetEntArray("top_hall_chunk", "targetname");
   array_thread(top_hall_chunks, ::self_delete);
 
   level.disable_interactive_tv_use_triggers = true;
@@ -60,7 +61,7 @@ main() {
   start = create_start( "intro" );
   start.main = ::gulag_flyin;
   start.text = "Intro";
-  	
+	
   start = create_start( "approach" );
   start.main = ::gulag_approach;
   start.text = "Approach";
@@ -217,10 +218,10 @@ main() {
   array_spawn_function_noteworthy("riot_escort_spawner", ::riot_escort_spawner);
   array_spawn_function_noteworthy("catwalk_spawner", ::catwalk_spawner);
 
-  challenge_onlys = getEntArray("challenge_only", "targetname");
+  challenge_onlys = GetEntArray("challenge_only", "targetname");
   array_thread(challenge_onlys, ::challenge_only_think);
 
-  damage_targ_triggers = getEntArray("damage_targ_trigger", "targetname");
+  damage_targ_triggers = GetEntArray("damage_targ_trigger", "targetname");
   array_thread(damage_targ_triggers, ::damage_targ_trigger_think);
 
   add_wait(::flag_wait, "player_moves_into_gulag");
@@ -241,13 +242,13 @@ main() {
 
 fill_weapon_pickups() {
   // Fill up all of the weapons in the level
-  weapons = getEntArray("so_weapons", "targetname");
+  weapons = GetEntArray("so_weapons", "targetname");
 
   foreach(weapon in weapons) {
     weapon_names = strtok(weapon.classname, "_");
 
     weapon_name = weapon_names[1];
-    for(i = 2; i < weapon_names.size; i++) {
+    for (i = 2; i < weapon_names.size; i++) {
       weapon_name = weapon_name + "_" + weapon_names[i];
     }
 
@@ -264,7 +265,7 @@ fill_weapon_pickups() {
 // ---------------------------------------------------------------------------------
 
 start_so_showers_timed() {
-  //	if( !isDefined( anim.bcs_locations ) )
+  //	if( !isdefined( anim.bcs_locations ) )
   //		anim.bcs_locations = [];
 
   fill_weapon_pickups();
@@ -344,16 +345,15 @@ so_showers_update_objective() {
 
 // This does not appear to be call from anywhere
 so_showers_timed_setup_get_spawners(randomize) {
-  if(!isDefined(randomize)) {
+  if(!isdefined(randomize))
     randomize = true;
-  }
 
   // Access all the enemy spawners used in the bathroom
-  level.bathroom_initial = getEntArray("bathroom_initial_spawner", "script_noteworthy");
-  level.bathroom_balcony = getEntArray("bathroom_balcony_spawner", "script_noteworthy");
-  level.bathroom_reinforcements = getEntArray("bathroom_reinforcements_spawner", "script_noteworthy");
-  level.riot_shield = getEntArray("riot_shield_spawner", "script_noteworthy");
-  level.riot_escort = getEntArray("riot_escort_spawner", "script_noteworthy");
+  level.bathroom_initial = getentarray("bathroom_initial_spawner", "script_noteworthy");
+  level.bathroom_balcony = getentarray("bathroom_balcony_spawner", "script_noteworthy");
+  level.bathroom_reinforcements = getentarray("bathroom_reinforcements_spawner", "script_noteworthy");
+  level.riot_shield = getentarray("riot_shield_spawner", "script_noteworthy");
+  level.riot_escort = getentarray("riot_escort_spawner", "script_noteworthy");
 
   if(randomize) {
     array_randomize(level.bathroom_initial);
@@ -364,25 +364,24 @@ so_showers_timed_setup_get_spawners(randomize) {
   }
 
   // Purge the riot_shield guys not actually used in the bathroom.
-  for(i = 0; i < level.riot_shield.size; i++) {
-    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG") {
+  for (i = 0; i < level.riot_shield.size; i++) {
+    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG")
       level.riot_shield[i] = undefined;
-    }
   }
   array_removeUndefined(level.riot_shield);
 }
 
 so_showers_timed_setup_regular() {
-  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_REGULAR";
+  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_REGULAR";
 }
 
 so_showers_timed_setup_hardened() {
-  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_HARDENED";
+  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_HARDENED";
 }
 
 so_showers_timed_setup_veteran() {
   level.challenge_time_limit = 180;
-  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_VETERAN";
+  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_VETERAN";
 }
 
 gulag_shower_challenge_music() {
@@ -394,14 +393,13 @@ gulag_shower_challenge_music() {
 challenge_only_think() {
   if(level.start_point == "so_showers") {
     if(self.classname == "script_model") {
-      self setCanDamage(true);
+      self setcandamage(true);
     }
     return;
   }
 
-  if(self.classname == "script_brushmodel") {
+  if(self.classname == "script_brushmodel")
     self connectpaths();
-  }
 
   self delete();
 }
@@ -432,7 +430,7 @@ enable_bathroom_complete_trigger() {
 so_handle_exterior_fx() {
   volume = getent("gulag_exterior_fx_vol", "targetname");
 
-  dummy = spawn("script_origin", (0, 0, 0));
+  dummy = Spawn("script_origin", (0, 0, 0));
 
   fx_array = [];
   foreach(entFx in level.createfxent) {

@@ -24,7 +24,9 @@ main() {
     self playThundergunPainAnim();
     return;
   }
-  if([[anim.pain_test]]()) {
+  if([
+      [anim.pain_test]
+    ]()) {
     return;
   }
   if(self.a.disablePain) {
@@ -108,7 +110,7 @@ get_flamethrower_pain() {
   }
   anim_num = randomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
-    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
+    PlayFxOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {}
   pain_anim = painArray[anim_num];
   time = GetAnimLength(pain_anim);
@@ -126,7 +128,7 @@ get_flamethrower_crouch_pain() {
   }
   anim_num = randomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
-    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
+    PlayFxOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {}
   pain_anim = painArray[anim_num];
   time = GetAnimLength(pain_anim);

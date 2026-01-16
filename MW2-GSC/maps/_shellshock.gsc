@@ -8,26 +8,26 @@ main(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed, customS
 }
 
 internalMain(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed, customShellShock) {
-  if(!isDefined(duration)) {
+  if(!isdefined(duration)) {
     duration = 12;
   } else
   if(duration < 7) {
     duration = 7;
   }
 
-  if(!isDefined(nMaxDamageBase)) {
+  if(!isdefined(nMaxDamageBase)) {
     nMaxDamageBase = 150;
   }
 
-  if(!isDefined(nRanDamageBase)) {
+  if(!isdefined(nRanDamageBase)) {
     nRanDamageBase = 100;
   }
 
-  if(!isDefined(nMinDamageBase)) {
+  if(!isdefined(nMinDamageBase)) {
     nMinDamageBase = 100;
   }
 
-  if(!isDefined(customShellShock)) {
+  if(!isdefined(customShellShock)) {
     strShocktype = "default";
   } else {
     strShocktype = customShellShock;
@@ -38,7 +38,7 @@ internalMain(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed,
   maxdamage = nMaxDamageBase + randomint(nRanDamageBase);
   mindamage = nMinDamageBase;
 
-  level.player playSound("weapons_rocket_explosion");
+  level.player playsound("weapons_rocket_explosion");
   wait 0.25;
 
   radiusDamage(origin, range, maxdamage, mindamage);
@@ -53,7 +53,7 @@ internalMain(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed,
     level.player viewkick(127, level.player.origin); // Amount should be in the range 0 - 127, and is normalized "damage".No damage is done.
     level.player shellshock(strShocktype, duration);
 
-    if(!isDefined(nExposed)) {
+    if(!isdefined(nExposed)) {
       level.player thread playerHitable(duration);
     }
 

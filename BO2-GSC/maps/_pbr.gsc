@@ -62,7 +62,7 @@ set_patrol_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  positions[0] = spawnStruct();
+  positions[0] = spawnstruct();
   positions[0].sittag = "tag_gunner1";
   positions[0].vehiclegunner = 1;
   positions[0].idle = % ai_crew_gunboat_front_gunner_aim;
@@ -73,7 +73,7 @@ setanims() {
   positions[0].firedown = % ai_crew_gunboat_front_gunner_fire_down;
   positions[0].death = % ai_crew_gunboat_front_gunner_death_front;
   positions[0].explosion_death = % ai_crew_gunboat_front_gunner_death_front;
-  positions[1] = spawnStruct();
+  positions[1] = spawnstruct();
   positions[1].sittag = "tag_gunner2";
   positions[1].vehiclegunner = 2;
   positions[1].idle = % ai_crew_gunboat_rear_gunner_aim;
@@ -89,7 +89,7 @@ setanims() {
 
 patrol_setanim() {
   positions = [];
-  positions[0] = spawnStruct();
+  positions[0] = spawnstruct();
   positions[0].sittag = "tag_gunner1";
   positions[0].vehiclegunner = 1;
   positions[0].idle = % ai_crew_gunboatsm_front_gunner_aim;
@@ -105,7 +105,7 @@ patrol_setanim() {
 
 update_damage_states() {
   self endon("death");
-  self setModel("veh_t6_sea_gunboat_medium_damaged");
+  self setmodel("veh_t6_sea_gunboat_medium_damaged");
   self.front_piece_damage_level = 0;
   self attach("veh_t6_sea_gunboat_medium_wheelhouse_dmg" + self.front_piece_damage_level, "tag_wheel_house");
   self.rear_piece_damage_level = 0;
@@ -119,7 +119,7 @@ update_damage_states() {
     }
     if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE" || mod == "MOD_IMPACT") {
       delta = point - self.origin;
-      fwd = anglesToForward(self.angles);
+      fwd = anglestoforward(self.angles);
       dot = vectordot(delta, fwd);
 
       if(dot > 0) {
@@ -165,13 +165,12 @@ update_wake_fx(str_size) {
     angles = (0, angles[1], angles[2]);
     angles = (angles[0], angles[1], 0);
 
-    if(speed_pct > 0.0 && speed_pct <= level.boat_wake_speed[0]) {
-      playFX(level._effect["pbr_wake_" + str_size + "_churn_1"], origin, anglesToForward(angles) * -1);
-    } else if(level.boat_wake_speed[0] > 0.0 && speed_pct <= level.boat_wake_speed[1]) {
-      playFX(level._effect["pbr_wake_" + str_size + "_churn_2"], origin, anglesToForward(angles) * -1);
-    } else if(level.boat_wake_speed[1] > 0.0 && speed_pct <= level.boat_wake_speed[2]) {
-      playFX(level._effect["pbr_wake_" + str_size + "_churn_3"], origin, anglesToForward(angles) * -1);
-    }
+    if(speed_pct > 0.0 && speed_pct <= level.boat_wake_speed[0])
+      playfx(level._effect["pbr_wake_" + str_size + "_churn_1"], origin, anglestoforward(angles) * -1);
+    else if(level.boat_wake_speed[0] > 0.0 && speed_pct <= level.boat_wake_speed[1])
+      playfx(level._effect["pbr_wake_" + str_size + "_churn_2"], origin, anglestoforward(angles) * -1);
+    else if(level.boat_wake_speed[1] > 0.0 && speed_pct <= level.boat_wake_speed[2])
+      playfx(level._effect["pbr_wake_" + str_size + "_churn_3"], origin, anglestoforward(angles) * -1);
 
     wait 0.1;
   }

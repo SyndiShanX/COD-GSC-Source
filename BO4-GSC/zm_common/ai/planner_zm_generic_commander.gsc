@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\ai\planner_zm_commander_utility;
 #include scripts\zm_common\ai\planner_zm_generic_squad;
+
 #namespace namespace_42cba673;
 
 autoexec __init__system__() {
@@ -26,19 +27,19 @@ createcommanderplanner(team) {
 }
 
 createcommander() {
-  team = # "allies";
+  team = #"allies";
   commander = plannercommanderutility::createcommander(team, createcommanderplanner(team), createsquadplanner(team));
   plannergenericcommander::commanderdaemons(commander);
-  plannercommanderutility::adddaemon(commander, # "daemonzmaltars");
-  plannercommanderutility::adddaemon(commander, # "daemonzmblockers");
-  plannercommanderutility::adddaemon(commander, # "daemonzmchests");
-  plannercommanderutility::adddaemon(commander, # "daemonzmpowerups");
-  plannercommanderutility::adddaemon(commander, # "daemonzmswitches");
-  plannercommanderutility::adddaemon(commander, # "daemonzmwallbuys");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscorebotpresence");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscoreescortpathing");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscoreforcegoal");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscoreteam");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscoreviableescort");
-  plannercommanderutility::addsquadevaluator(commander, # "commanderscoreage", [# "maxage": 6000]);
+  plannercommanderutility::adddaemon(commander, #"daemonzmaltars");
+  plannercommanderutility::adddaemon(commander, #"daemonzmblockers");
+  plannercommanderutility::adddaemon(commander, #"daemonzmchests");
+  plannercommanderutility::adddaemon(commander, #"daemonzmpowerups");
+  plannercommanderutility::adddaemon(commander, #"daemonzmswitches");
+  plannercommanderutility::adddaemon(commander, #"daemonzmwallbuys");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscorebotpresence");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreescortpathing");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreforcegoal");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreteam");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreviableescort");
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreage", [#"maxage": 6000]);
 }

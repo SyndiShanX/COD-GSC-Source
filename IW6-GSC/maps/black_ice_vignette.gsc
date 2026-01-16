@@ -4,9 +4,8 @@
 ***************************************/
 
 vignette_setup(var_0, var_1) {
-  if(!isDefined(self.v)) {
+  if(!isDefined(self.v))
     self.v = spawnStruct();
-  }
 
   self.v.active = 0;
   self.v.instant_death = vignette_isDefined(self.v.instant_death, 1);
@@ -23,13 +22,11 @@ vignette_setup(var_0, var_1) {
   self.v.interrupt_dist = vignette_isDefined(self.v.interrupt_dist, 128);
   self.v.prop_launch = vignette_isDefined(self.v.prop_launch, 0);
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self.animname = var_0;
-  }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     self.v.prop = var_1;
-  }
 
   self.v.current_state = "none";
   self.v.current_anim = undefined;
@@ -37,33 +34,28 @@ vignette_setup(var_0, var_1) {
 }
 
 vignette_isDefined(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     return var_0;
-  } else {
+  else
     return var_1;
-  }
 }
 
 vignette_single(var_0, var_1, var_2, var_3, var_4) {
-  foreach(var_6 in var_0) {
-    thread vignette_single_solo(var_6, var_1, var_2, var_3, var_4);
-  }
+  foreach(var_6 in var_0)
+  thread vignette_single_solo(var_6, var_1, var_2, var_3, var_4);
 
-  while(self._vignette_active > 0) {
+  while(self._vignette_active > 0)
     wait 0.05;
-  }
 }
 
 vignette_single_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_0.v) || !isDefined(var_0.v.active)) {
+  if(!isDefined(var_0.v) || !isDefined(var_0.v.active))
     var_0 vignette_setup();
-  }
 
-  if(!isDefined(self._vignette_active)) {
+  if(!isDefined(self._vignette_active))
     self._vignette_active = 1;
-  } else {
+  else
     self._vignette_active++;
-  }
 
   var_0 endon("death");
   var_0 endon("msg_vignette_interrupt");
@@ -72,39 +64,33 @@ vignette_single_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isai(var_0)) {
     var_0 vignette_ignore_everything();
 
-    if(!isDefined(var_0.magic_bullet_shield) || !var_0.magic_bullet_shield) {
+    if(!isDefined(var_0.magic_bullet_shield) || !var_0.magic_bullet_shield)
       var_0 thread maps\_utility::magic_bullet_shield();
-    }
   }
 
   var_0.v.anim_node = self;
 
-  if(isDefined(var_0.v.prop)) {
+  if(isDefined(var_0.v.prop))
     var_6 = [var_0, var_0.v.prop];
-  } else {
+  else
     var_6 = [var_0];
-  }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_0.v.start_anim = var_1;
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_0.v.idle_anim = var_2;
-  }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_0.v.idle_break_anim = var_3;
-  }
 
   if(isDefined(var_4)) {
     var_0.v.death_anim = var_4;
     var_0.a.nodeath = 1;
   }
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_0.v.start_end_time = var_5;
-  }
 
   var_0 thread vignette_interrupt_watcher(var_6);
   var_0.v.active = 1;
@@ -125,17 +111,15 @@ vignette_single_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
 vignette_interrupt(var_0, var_1) {
   thread vignette_interrupt_solo(var_0, var_1);
 
-  if(self.v.interrupt_level) {
+  if(self.v.interrupt_level)
     level notify("msg_vignette_interrupt");
-  }
 }
 
 vignette_stop_interrupt_scripts(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = ["damage", "player_close", "other"];
-  } else if(isstring(var_0)) {
+  else if(isstring(var_0))
     var_0 = [var_0];
-  }
 
   self.v.current_interrupt_status = "";
 
@@ -156,18 +140,16 @@ vignette_stop_interrupt_scripts(var_0) {
 
     self.v.current_interrupt_status = self.v.current_interrupt_status + var_0[var_1];
 
-    if(var_1 + 1 < var_0.size) {
+    if(var_1 + 1 < var_0.size)
       self.v.current_interrupt_status = self.v.current_interrupt_status + " ";
-    }
   }
 }
 
 vignette_kill(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     thread vignette_end("kill: " + var_0, 1, var_1);
-  } else {
+  else
     thread vignette_end("kill", 1, var_1);
-  }
 }
 
 vignette_interrupt_solo(var_0, var_1) {
@@ -177,11 +159,10 @@ vignette_interrupt_solo(var_0, var_1) {
     self.v.anim_node notify("stop_loop");
 
     if(isDefined(self.v.idle_break_anim)) {
-      if(isDefined(self.v.prop)) {
+      if(isDefined(self.v.prop))
         var_3 = [self, self.v.prop];
-      } else {
+      else
         var_3 = [self];
-      }
 
       vignette_state("idle_break", self.v.idle_break_anim);
       self.v.idle_break_anim_active = 1;
@@ -192,47 +173,42 @@ vignette_interrupt_solo(var_0, var_1) {
 
     var_2 = "interrupt";
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_2 = var_0;
-    }
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       vignette_kill(var_2, var_1);
-    } else {
+    else
       thread vignette_end(var_2);
-    }
   }
 }
 
 vignette_end(var_0, var_1, var_2) {
   self notify("msg_stop_vignette_scripts");
 
-  if(self.v.interrupt_level) {
+  if(self.v.interrupt_level)
     level notify("msg_vignette_interrupt");
-  }
 
   if(self.v.active) {
     self.v.anim_node notify("stop_loop");
 
-    if(self.v.silent_script_death) {
+    if(self.v.silent_script_death)
       self.a.nodeath = 1;
-    } else {
+    else {
       if((isDefined(var_1) && var_1 || self.v.death_on_end) && isDefined(self.v.death_anim)) {
         if(self.v.current_state == "idle" || self.v.death_anim_anytime) {
           self notify("msg_vignette_death_anim_start");
           vignette_state("death_anim", self.v.death_anim);
 
-          if(isDefined(self.v.prop)) {
+          if(isDefined(self.v.prop))
             var_3 = [self, self.v.prop];
-          } else {
+          else
             var_3 = [self];
-          }
 
-          if(self.v.death_on_self) {
+          if(self.v.death_on_self)
             maps\_anim::anim_single(var_3, self.v.death_anim);
-          } else {
+          else
             self.v.anim_node maps\_anim::anim_single(var_3, self.v.death_anim);
-          }
 
           self.v.death_anim_played = 1;
           self.a.nodeath = 1;
@@ -259,32 +235,27 @@ vignette_end(var_0, var_1, var_2) {
       }
     }
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       vignette_state(var_0);
-    } else {
+    else
       vignette_state("none");
-    }
 
-    if(!isDefined(var_1) && !self.v.death_on_end && !self.v.delete_on_end && isDefined(self.v.nogun) && self.v.nogun) {
+    if(!isDefined(var_1) && !self.v.death_on_end && !self.v.delete_on_end && isDefined(self.v.nogun) && self.v.nogun)
       maps\_utility::gun_recall();
-    }
 
-    if(!isDefined(var_1) && isai(self) && !self.v.ignoreall_on_end) {
+    if(!isDefined(var_1) && isai(self) && !self.v.ignoreall_on_end)
       vignette_unignore_everything();
-    }
 
     self.v.active = 0;
   }
 
-  if(!isDefined(self.hero) && isDefined(self.magic_bullet_shield)) {
+  if(!isDefined(self.hero) && isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self notify("msg_vignette_end", var_2);
 
-  if(isDefined(self.v.anim_node)) {
+  if(isDefined(self.v.anim_node))
     self.v.anim_node._vignette_active--;
-  }
 
   if(isDefined(var_1) && var_1 || self.v.death_on_end) {
     vignette_state("kill");
@@ -292,9 +263,8 @@ vignette_end(var_0, var_1, var_2) {
     self kill();
   }
 
-  if(self.v.delete_on_end) {
+  if(self.v.delete_on_end)
     self delete();
-  }
 }
 
 vignette_interrupt_watcher(var_0) {
@@ -336,9 +306,8 @@ vignette_interrupt_watcher_damage() {
     if(self.v.instant_death) {
       continue;
     }
-    if(!isDefined(self.hero) && isDefined(self.magic_bullet_shield)) {
+    if(!isDefined(self.hero) && isDefined(self.magic_bullet_shield))
       maps\_utility::stop_magic_bullet_shield();
-    }
 
     self dodamage(var_0, var_2, var_1);
     vignette_interrupt("damage");
@@ -384,35 +353,31 @@ vignette_interrupt_watcher_player_close() {
 }
 
 vignette_state(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self.v.current_state = var_0;
-  } else {
+  else
     self.v.current_state = "none";
-  }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     self.v.current_anim = var_1;
-  } else {
+  else
     self.v.current_anim = "none";
-  }
 
   self notify("msg_vignette_state_" + var_0);
 
   if(0) {
     var_2 = "";
 
-    if(isDefined(self.animname)) {
+    if(isDefined(self.animname))
       var_2 = " (" + self.animname + ")";
-    }
 
     iprintln("VIGNETTE" + var_2 + ": " + var_0);
   }
 }
 
 vignette_ignore_everything() {
-  if(isDefined(self._ignore_settings_old)) {
+  if(isDefined(self._ignore_settings_old))
     vignette_unignore_everything();
-  }
 
   self._ignore_settings_old = [];
   self.disableplayeradsloscheck = vignette_set_ignore_setting(self.disableplayeradsloscheck, "disableplayeradsloscheck", 1);
@@ -436,20 +401,18 @@ vignette_ignore_everything() {
 }
 
 vignette_set_ignore_setting(var_0, var_1, var_2) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self._ignore_settings_old[var_1] = var_0;
-  } else {
+  else
     self._ignore_settings_old[var_1] = "none";
-  }
 
   return var_2;
 }
 
 vignette_unignore_everything(var_0) {
   if(isDefined(var_0) && var_0) {
-    if(isDefined(self._ignore_settings_old)) {
+    if(isDefined(self._ignore_settings_old))
       self._ignore_settings_old = undefined;
-    }
   }
 
   self.disableplayeradsloscheck = vignette_restore_ignore_setting("disableplayeradsloscheck", 0);
@@ -474,11 +437,10 @@ vignette_unignore_everything(var_0) {
 
 vignette_restore_ignore_setting(var_0, var_1) {
   if(isDefined(self._ignore_settings_old)) {
-    if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none") {
+    if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none")
       return var_1;
-    } else {
+    else
       return self._ignore_settings_old[var_0];
-    }
   }
 
   return var_1;

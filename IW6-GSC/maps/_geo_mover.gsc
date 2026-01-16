@@ -37,16 +37,14 @@ moveto_volume_think(var_0) {
   }
 
   foreach(var_4 in var_1) {
-    if(var_6 != var_4) {
+    if(var_6 != var_4)
       var_4 linkto(var_6);
-    }
   }
 
   var_11 = common_scripts\utility::get_target_ent();
 
-  if(!isDefined(var_11.angles)) {
+  if(!isDefined(var_11.angles))
     var_11.angles = (0, 0, 0);
-  }
 
   var_0.mover = var_6;
   var_6.origin = var_11.origin;
@@ -56,41 +54,34 @@ moveto_volume_think(var_0) {
   var_14 = 0;
   var_15 = 0;
 
-  if(isDefined(var_11.script_duration)) {
+  if(isDefined(var_11.script_duration))
     var_13 = var_11.script_duration;
-  }
 
-  if(isDefined(var_11.script_accel)) {
+  if(isDefined(var_11.script_accel))
     var_14 = var_11.script_accel;
-  }
 
-  if(isDefined(var_11.script_decel)) {
+  if(isDefined(var_11.script_decel))
     var_15 = var_11.script_decel;
-  }
 
-  if(isDefined(var_11.script_earthquake)) {
+  if(isDefined(var_11.script_earthquake))
     var_12 = var_11.script_earthquake;
-  }
 
   var_0 waittill("trigger");
   var_11 maps\_utility::script_delay();
 
-  if(isDefined(var_11.target)) {
+  if(isDefined(var_11.target))
     var_11 = var_11 common_scripts\utility::get_target_ent();
-  } else {
+  else
     var_11 = undefined;
-  }
 
   while(isDefined(var_11)) {
     if(isDefined(var_12)) {
-      if(issubstr(var_12, "constant")) {
+      if(issubstr(var_12, "constant"))
         var_6 thread constant_quake(var_12);
-      }
     }
 
-    if(!isDefined(var_11.angles)) {
+    if(!isDefined(var_11.angles))
       var_11.angles = (0, 0, 0);
-    }
 
     var_6 moveto_rotateto(var_11, var_13, var_14, var_15);
     var_6 notify("stop_constant_quake");
@@ -100,28 +91,23 @@ moveto_volume_think(var_0) {
     var_12 = undefined;
     var_11 maps\_utility::script_delay();
 
-    if(isDefined(var_11.script_duration)) {
+    if(isDefined(var_11.script_duration))
       var_13 = var_11.script_duration;
-    }
 
-    if(isDefined(var_11.script_accel)) {
+    if(isDefined(var_11.script_accel))
       var_14 = var_11.script_accel;
-    }
 
-    if(isDefined(var_11.script_decel)) {
+    if(isDefined(var_11.script_decel))
       var_15 = var_11.script_decel;
-    }
 
-    if(isDefined(var_11.script_earthquake)) {
+    if(isDefined(var_11.script_earthquake))
       var_12 = var_11.script_earthquake;
-    }
 
     var_16 = var_11 common_scripts\utility::get_linked_ents();
 
     if(var_16.size > 0) {
-      if(issubstr(var_16[0].classname, "trigger")) {
+      if(issubstr(var_16[0].classname, "trigger"))
         var_16[0] waittill("trigger");
-      }
     }
 
     if(isDefined(var_11.target)) {
@@ -150,13 +136,11 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
   var_6 = distance(var_5, var_4);
   var_7 = var_6 / var_1;
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
   self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);

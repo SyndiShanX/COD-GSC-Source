@@ -70,9 +70,8 @@ kill_buckets(localclientnum, set, newent) {
   level waittill("unlink_box");
 
   if(isstereoon()) {
-    foreach(dyn_ent in dyn_ents) {
-      setdynentenabled(dyn_ent, 0);
-    }
+    foreach(dyn_ent in dyn_ents)
+    setdynentenabled(dyn_ent, 0);
   }
 }
 
@@ -83,9 +82,8 @@ link_cardboard_box_to_barge(localclientnum, set, newent) {
   foreach(dyn_ent in dyn_ents) {
     x = randomintrange(250, 500);
 
-    if(randomint(2)) {
+    if(randomint(2))
       x = x * -1;
-    }
 
     offset = (x, randomintrange(-200, 200), 0);
     dyn_ent.origin = self.origin + offset;
@@ -93,19 +91,17 @@ link_cardboard_box_to_barge(localclientnum, set, newent) {
 }
 
 play_tow_futz(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     enable_filter_custom_tow(level.localplayers[0]);
-  } else {
+  else
     disable_filter_custom_tow(level.localplayers[0]);
-  }
 }
 
 play_tow_highlight(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     towlockedon = 1;
-  } else {
+  else
     towlockedon = 0;
-  }
 
   set_filter_custom_tow_mode(level.localplayers[0], towlockedon);
 }

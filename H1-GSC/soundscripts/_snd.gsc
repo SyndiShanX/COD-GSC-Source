@@ -5,8 +5,8 @@
 ********************************/
 
 snd_init() {
-  if(!isDefined(level._snd)) {
-    level._snd = spawnStruct();
+  if(!isdefined(level._snd)) {
+    level._snd = spawnstruct();
     level._snd.guid = 0;
     level._snd.default_vid_log_vol = 1.0;
     thread snd_init_done();
@@ -44,26 +44,24 @@ snd_music_message(var_0, var_1, var_2) {
   level notify("stop_other_music");
   level endon("stop_other_music");
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     childthread snd_message("snd_music_handler", var_0, var_1, var_2);
-  } else if(isDefined(var_1)) {
+  else if(isdefined(var_1))
     childthread snd_message("snd_music_handler", var_0, var_1);
-  } else {
+  else
     childthread snd_message("snd_music_handler", var_0);
-  }
 }
 
 snd_message(var_0, var_1, var_2, var_3) {
-  if(isDefined(level._snd.messages[var_0])) {
-    if(isDefined(var_3)) {
+  if(isdefined(level._snd.messages[var_0])) {
+    if(isdefined(var_3))
       thread[[level._snd.messages[var_0]]](var_1, var_2, var_3);
-    } else if(isDefined(var_2)) {
+    else if(isdefined(var_2))
       thread[[level._snd.messages[var_0]]](var_1, var_2);
-    } else if(isDefined(var_1)) {
+    else if(isdefined(var_1))
       thread[[level._snd.messages[var_0]]](var_1);
-    } else {
+    else
       thread[[level._snd.messages[var_0]]]();
-    }
   }
 }
 
@@ -74,9 +72,8 @@ snd_printlnbold(var_0) {}
 snd_get_tagarg(var_0, var_1) {
   var_2 = undefined;
 
-  if(isarray(var_1)) {
+  if(isarray(var_1))
     var_2 = var_1[var_0];
-  }
 
   return var_2;
 }
@@ -113,15 +110,13 @@ snd_flash_white() {
 snd_slate(var_0) {}
 
 snd_throttle_wait() {
-  if(self.count >= self.max_calls_per_frame) {
+  if(self.count >= self.max_calls_per_frame)
     wait 0.05;
-  } else {
+  else
     self.count++;
-  }
 
-  if(!self.reset_thread_sent) {
+  if(!self.reset_thread_sent)
     thread snd_throttler_reset();
-  }
 }
 
 snd_throttler_reset() {
@@ -132,15 +127,14 @@ snd_throttler_reset() {
 }
 
 snd_get_throttler(var_0) {
-  var_1 = spawnStruct();
+  var_1 = spawnstruct();
   var_1.name = "throttle_waiter";
   var_1.count = 0;
   var_1.reset_thread_sent = 0;
   var_2 = 10;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_2 = max(var_0, 1);
-  }
 
   var_1.max_calls_per_frame = var_2;
   return var_1;
@@ -157,7 +151,7 @@ snd_get_soundtable_name() {
 snd_parse_preset_header(var_0, var_1, var_2) {
   var_3 = [];
 
-  for(var_4 = 0; var_4 < var_2; var_4++) {
+  for (var_4 = 0; var_4 < var_2; var_4++) {
     var_5 = tablelookupbyrow(var_0, var_1, var_4);
     var_3[var_5] = var_4;
   }
@@ -168,7 +162,7 @@ snd_parse_preset_header(var_0, var_1, var_2) {
 snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
 
-  for(var_6 = 0; var_6 < var_1.size; var_6++) {
+  for (var_6 = 0; var_6 < var_1.size; var_6++) {
     var_7 = var_1[var_6];
     var_8 = 0;
     var_9 = undefined;
@@ -178,28 +172,28 @@ snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
     var_13 = "";
     var_14 = packedtablesectionlookup(var_7, var_3, var_4);
 
-    if(isDefined(var_14)) {
-      while(var_10 < 10 && var_8 + var_14[0] < var_14[1]) {
+    if(isdefined(var_14)) {
+      while (var_10 < 10 && var_8 + var_14[0] < var_14[1]) {
         var_15 = tablelookupbyrow(var_7, var_8 + var_14[0], var_11);
 
         if(var_15 != "") {
           var_10 = 0;
 
-          if(!isDefined(var_9)) {
+          if(!isdefined(var_9)) {
             var_9 = snd_parse_preset_header(var_7, var_8 + var_14[0], var_2);
             var_11 = var_9[var_3];
           } else {
             var_16 = 0;
 
-            if(!isDefined(var_12)) {
+            if(!isdefined(var_12))
               var_16 = 1;
-            } else if(var_15 != var_13) {
+            else if(var_15 != var_13) {
               var_5[var_13] = var_12;
               var_16 = 1;
             }
 
             if(var_16) {
-              var_12 = spawnStruct();
+              var_12 = spawnstruct();
               var_12.name = var_15;
               var_12.settings = [];
               var_13 = var_15;
@@ -227,7 +221,7 @@ snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
             var_12.settings[var_12.settings.size] = var_17;
           }
         } else {
-          if(isDefined(var_12)) {
+          if(isdefined(var_12)) {
             var_5[var_13] = var_12;
             var_12 = undefined;
           }
@@ -238,7 +232,7 @@ snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
         var_8++;
       }
 
-      if(isDefined(var_12)) {
+      if(isdefined(var_12)) {
         var_5[var_13] = var_12;
         var_12 = undefined;
       }

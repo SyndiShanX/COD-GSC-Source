@@ -71,19 +71,16 @@ doface_generichuman(localclientnum) {
   if(self.species != "human") {
     return;
   }
-  if(!isDefined(self.face_disable)) {
+  if(!isDefined(self.face_disable))
     self.face_disable = 0;
-  }
 
-  if(!isDefined(self.face_death)) {
+  if(!isDefined(self.face_death))
     self.face_death = 0;
-  }
 
   self.face_anim_tree = "generic_human";
 
-  if(!isDefined(level.facestates)) {
+  if(!isDefined(level.facestates))
     level.facestates = [];
-  }
 
   if(!isDefined(level.facestates[self.face_anim_tree])) {
     self setfaceroot( % faces);

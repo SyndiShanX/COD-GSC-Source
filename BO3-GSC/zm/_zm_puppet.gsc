@@ -10,26 +10,26 @@
 function wait_for_puppet_pickup() {
   self endon("death");
   self.iscurrentlypuppet = 0;
-  while(true) {
-    if(isDefined(self.ispuppet) && self.ispuppet && !self.iscurrentlypuppet) {
+  while (true) {
+    if(isdefined(self.ispuppet) && self.ispuppet && !self.iscurrentlypuppet) {
       self notify("stop_zombie_goto_entrance");
       self.iscurrentlypuppet = 1;
     }
-    if(!(isDefined(self.ispuppet) && self.ispuppet) && self.iscurrentlypuppet) {
+    if(!(isdefined(self.ispuppet) && self.ispuppet) && self.iscurrentlypuppet) {
       self.iscurrentlypuppet = 0;
     }
-    if(isDefined(self.ispuppet) && self.ispuppet && zm_utility::check_point_in_playable_area(self.origin) && !isDefined(self.completed_emerging_into_playable_area)) {
+    if(isdefined(self.ispuppet) && self.ispuppet && zm_utility::check_point_in_playable_area(self.origin) && !isdefined(self.completed_emerging_into_playable_area)) {
       self zm_spawner::zombie_complete_emerging_into_playable_area();
       self.barricade_enter = 0;
     }
     player = getplayers()[0];
-    if(isDefined(player) && player buttonpressed("")) {
+    if(isdefined(player) && player buttonpressed("")) {
       if(self.iscurrentlypuppet) {
         if(zm_utility::check_point_in_playable_area(self.goalpos) && !zm_utility::check_point_in_playable_area(self.origin)) {
           self.backedupgoal = self.goalpos;
           self thread zm_spawner::zombie_goto_entrance(self.backupnode, 0);
         }
-        if(!zm_utility::check_point_in_playable_area(self.goalpos) && isDefined(self.backupnode) && self.goalpos != self.backupnode.origin) {
+        if(!zm_utility::check_point_in_playable_area(self.goalpos) && isdefined(self.backupnode) && self.goalpos != self.backupnode.origin) {
           self notify("stop_zombie_goto_entrance");
         }
       }

@@ -16,7 +16,7 @@ main(model, type) {
 
   /*	
   // twas too powerful for humans to wield
-  	
+	
   if( level.script == "roadkill" )
   {
   	// roadkill turrets do the mega damages
@@ -67,21 +67,18 @@ set_vehicle_anims(positions) {
 init_local() {
   //	maps\_vehicle::lights_on( "headlights" );
   //	maps\_vehicle::lights_on( "brakelights" );
-  if(!isDefined(self.script_allow_rider_deaths)) {
+  if(!isdefined(self.script_allow_rider_deaths))
     self.script_allow_rider_deaths = true;
-  }
-  if(!isDefined(self.script_allow_driver_death)) {
+  if(!isdefined(self.script_allow_driver_death))
     self.script_allow_driver_death = true;
-  }
 }
 
 #using_animtree("generic_human");
 
 setanims() {
   positions = [];
-  for(i = 0; i < 3; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 3; i++)
+    positions[i] = SpawnStruct();
   /*
   rough pass
 
@@ -178,6 +175,7 @@ unload_groups() {
   unload_groups["default"] = unload_groups["all"];
 
   return unload_groups;
+
 }
 
 /*QUAKED script_vehicle_pickup_technical (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER

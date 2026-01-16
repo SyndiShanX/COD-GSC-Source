@@ -16,9 +16,8 @@ main() {
   if(issubstr(self.vehicletype, "wturret")) {
     build_aianims(::set_50cal_gunner_anims, ::set_vehicle_anims);
 
-    if(isassetloaded("xmodel", self.model)) {
+    if(isassetloaded("xmodel", self.model))
       self hidepart("tag_hide_turret");
-    }
   } else
     build_aianims(::setanims, ::set_vehicle_anims);
 
@@ -50,9 +49,8 @@ set_vehicle_anims(positions) {
 set_50cal_gunner_anims() {
   positions = [];
 
-  for(i = 0; i < 5; i++) {
-    positions[i] = spawnStruct();
-  }
+  for(i = 0; i < 5; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -90,9 +88,8 @@ set_50cal_gunner_anims() {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for(i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

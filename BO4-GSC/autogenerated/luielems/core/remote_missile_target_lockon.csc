@@ -4,9 +4,11 @@
 ************************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace remote_missile_target_lockon;
 
 class cremote_missile_target_lockon: cluielem {
+
   function set_killed(localclientnum, value) {
     set_data(localclientnum, "killed", value);
   }
@@ -24,7 +26,7 @@ class cremote_missile_target_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "remote_missile_target_lockon");
+    cluielem::open(localclientnum, #"remote_missile_target_lockon");
   }
 
   function function_fa582112(localclientnum) {

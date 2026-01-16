@@ -112,9 +112,8 @@ update_bot_maxsightdistsqrd() {
   fog_maxSightDist = 700;
   fog_maxSightDistSqrd = fog_maxSightDist * fog_maxSightDist;
 
-  while(!isDefined(level.participants)) {
+  while(!isDefined(level.participants))
     waitframe();
-  }
 
   while(true) {
     foreach(participant in level.participants) {
@@ -122,9 +121,8 @@ update_bot_maxsightdistsqrd() {
         continue;
       }
       if(IsBot(participant)) {
-        if(!isDefined(participant.default_maxsightdistsqrd)) {
+        if(!isDefined(participant.default_maxsightdistsqrd))
           participant.default_maxsightdistsqrd = participant.maxsightdistsqrd;
-        }
 
         if(level.zerosub_fog_on) {
           participant.maxsightdistsqrd = fog_maxSightDistSqrd;
@@ -180,17 +178,14 @@ playEnvironmentAnims() {
   treeObj05 = getEntArray("zerosub_tree_05", "targetname");
   treeObj06 = getEntArray("zerosub_tree_06", "targetname");
 
-  if(isDefined(fanObj01)) {
+  if(isDefined(fanObj01))
     fanObj01 ScriptModelPlayAnim("mp_zerosub_fan_spin_1");
-  }
 
-  if(isDefined(fanObj02)) {
+  if(isDefined(fanObj02))
     fanObj02 ScriptModelPlayAnim("mp_zerosub_fan_spin_2");
-  }
 
-  if(isDefined(radarObj)) {
+  if(isDefined(radarObj))
     radarObj ScriptModelPlayAnim("mp_zerosub_radar_spin");
-  }
 
   if(isDefined(bushObj01)) {
     foreach(bush in bushObj01) {
@@ -320,14 +315,13 @@ debugDvarWatcher(DVAR) {
 }
 
 zeroSubCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "zerosub_level_killstreak", CONST_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_ZEROSUB_LEVEL_KILLSTREAK_ACTIVATE");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "zerosub_level_killstreak", CONST_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_ZEROSUB_LEVEL_KILLSTREAK_ACTIVATE");
   level thread zerosub_killstreak_watch_for_crate();
 }
 
@@ -357,9 +351,8 @@ tryUseZeroSubKillstreak(lifeId, streakName) {
   foreach(player in level.players) {
     player PlayLocalSound("mp_zero_monster_spawn");
 
-    if(player.team != level.zerosub_killstreak_user.team) {
+    if(player.team != level.zerosub_killstreak_user.team)
       player thread watchRagDoll();
-    }
   }
 
   level thread watchKillstreakEnd();
@@ -417,9 +410,8 @@ watchRagDoll() {
 
     waitframe();
 
-    if(isBeastMan(eInflictor)) {
+    if(isBeastMan(eInflictor))
       PhysicsExplosionSphere(eInflictor.origin + (0, 0, 50), 100, 90, 5.0);
-    }
   }
 }
 
@@ -435,23 +427,19 @@ watchKillstreakEnd() {
 
   foreach(player in level.players) {
     if(isDefined(player)) {
-      if(isDefined(player.killedByYeti)) {
+      if(isDefined(player.killedByYeti))
         player.killedByYeti = undefined;
-      }
 
-      if(isDefined(player.isBeingHunted)) {
+      if(isDefined(player.isBeingHunted))
         player.isBeingHunted = undefined;
-      }
 
-      if(isDefined(player.beastKillCam)) {
+      if(isDefined(player.beastKillCam))
         player.beastKillCam = undefined;
-      }
     }
   }
 
-  if(!isDefined(level.nukeVisionInProgress) || !level.nukeVisionInProgress) {
+  if(!isDefined(level.nukeVisionInProgress) || !level.nukeVisionInProgress)
     stopFrostFog();
-  }
 
   level notify("frost_clear");
 }
@@ -466,9 +454,8 @@ killRandomTargets() {
     killTarget = getKillTarget();
     killInterval = RandomIntRange(2, 4);
 
-    if(isDefined(killTarget)) {
+    if(isDefined(killTarget))
       killTarget thread delayKill(CONST_KILLSTREAK_KILL_TIME);
-    }
 
     wait(killInterval);
   }
@@ -514,9 +501,8 @@ delayKill(delayTime) {
 
   randomIndex = RandomInt(randomOffset.size);
 
-  if(!self isUsingRemote()) {
+  if(!self isUsingRemote())
     self PlayLocalSound("mp_zerosub_monster_approach");
-  }
 
   self thread playBeastFX();
 
@@ -543,9 +529,8 @@ delayKill(delayTime) {
 
   if(isDefined(self) && isReallyAlive(self)) {
     if(self isOutside() && !self maps\mp\killstreaks\_killstreaks::isUsingHeliSniper()) {
-      if(!self isUsingRemote()) {
+      if(!self isUsingRemote())
         self PlayLocalSound("mp_zero_plr_monster_attack");
-      }
 
       self playSound("mp_zero_npc_monster_attack");
 
@@ -643,9 +628,8 @@ startKillstreakWatchers() {
 
   self waittill("spawned_player");
 
-  if(self.team != level.zerosub_killstreak_user.team) {
+  if(self.team != level.zerosub_killstreak_user.team)
     self thread watchRagDoll();
-  }
 }
 
 playDoorWindowSnowCoverFX(playImmediate) {
@@ -658,9 +642,8 @@ playDoorWindowSnowCoverFX(playImmediate) {
   }
 
   while(true) {
-    if(!self isOutside()) {
+    if(!self isOutside())
       exploder(EXPLODER_SNOW_DOORS_WINDOWS_ID, self);
-    }
 
     wait(0.5);
   }
@@ -714,14 +697,12 @@ delayPlayLoopScreenFX(effectType, intervalTime, delayTime) {
 isOutside() {
   outside = true;
 
-  if(!isDefined(level.zerosub_inside_trigger)) {
+  if(!isDefined(level.zerosub_inside_trigger))
     level.zerosub_inside_trigger = GetEnt("mp_zerosub_indoor_triggers", "targetname");
-  }
 
   if(isDefined(level.zerosub_inside_trigger)) {
-    if(self IsTouching(level.zerosub_inside_trigger)) {
+    if(self IsTouching(level.zerosub_inside_trigger))
       outside = false;
-    }
   }
 
   return outside;
@@ -730,9 +711,8 @@ isOutside() {
 isBeingHunted() {
   beingHunted = false;
 
-  if(isDefined(self.isBeingHunted) && self.isBeingHunted) {
+  if(isDefined(self.isBeingHunted) && self.isBeingHunted)
     beingHunted = true;
-  }
 
   return beingHunted;
 }
@@ -776,9 +756,8 @@ watchPlayerspawn() {
   while(true) {
     level waittill("player_spawned", player);
 
-    if(isDefined(player.customDeath)) {
+    if(isDefined(player.customDeath))
       player.customDeath = undefined;
-    }
 
     if(isDefined(player.beastKillCam)) {
       player.beastKillCam.origin = player.origin + (100, 100, 100);
@@ -826,9 +805,8 @@ playCustomDeathSound(victim, sMeansOfDeath, eInflictor) {
   if(sMeansOfDeath == "MOD_MELEE") {
     if(isBeastMan(eInflictor)) {
       type = "male";
-      if(victim hasFemaleCustomizationModel()) {
+      if(victim hasFemaleCustomizationModel())
         type = "female";
-      }
 
       victim playSound("knife_death_" + type);
     }
@@ -840,9 +818,8 @@ isBeastMan(eInflictor) {
   beastMan = false;
 
   if(isDefined(eInflictor) && IsAgent(eInflictor)) {
-    if(eInflictor.agent_type == "beastmen") {
+    if(eInflictor.agent_type == "beastmen")
       beastMan = true;
-    }
   }
 
   return beastMan;
@@ -896,9 +873,8 @@ tvs_set(targetname) {
   while(true) {
     prev_fx = level.tv_fx_num;
     level.tv_fx_num = RandomIntRange(1, num_tv_fx);
-    if(level.tv_fx_num >= prev_fx) {
+    if(level.tv_fx_num >= prev_fx)
       level.tv_fx_num += 1;
-    }
     fx = level._effect[targetname][level.tv_fx_num];
     foreach(tv in tvs) {
       if(tv.isHealthy) {

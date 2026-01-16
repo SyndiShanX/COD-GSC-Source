@@ -51,7 +51,7 @@ main() {
     self animscripts\shared::DoNoteTracks("deathanim");
     if(isDefined(self.deathanimloop)) {
       self SetFlaggedAnimKnobAll("deathanim", self.deathanimloop, % root, 1, .05, 1);
-      for(;;) {
+      for (;;) {
         self animscripts\shared::DoNoteTracks("deathanim");
       }
     }
@@ -76,15 +76,15 @@ main() {
     if(self.damageLocation == "helmet" && isDefined(self.hatModel) &&
       ModelHasPhysPreset(self.hatModel) &&
       issubstr(self.hatmodel, "helm")) {
-      self playSound("bullet_impact_headshot_helmet");
+      self PlaySound("bullet_impact_headshot_helmet");
     } else {
-      self playSound("bullet_impact_headshot");
+      self PlaySound("bullet_impact_headshot");
     }
   }
   if(maps\_collectibles::has_collectible("collectible_thunder")) {
     if(damageLocationIsAny("head", "helmet")) {
       if(!isDefined(self.attacker) || !IsPlayer(self.attacker)) {} else if(!isDefined(self.team) || self.team != "axis") {} else if(self.damagemod == "MOD_PISTOL_BULLET" || self.damagemod == "MOD_RIFLE_BULLET" || self.damagemod == "MOD_IMPACT") {
-        playFXOnTag(level._effect["thunder"], self, "j_head");
+        playfxontag(level._effect["thunder"], self, "j_head");
         self startragdoll();
         self launchragdoll((0, 0, 100));
         self.thunder_death = true;
@@ -168,7 +168,7 @@ play_death_anim(deathAnim) {
     self animscripts\shared::DropAllAIWeapons();
   }
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt") && is_mature()) {
-    playFXOnTag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
+    PlayFXOnTag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
   }
   if(isDefined(self.skipDeathAnim) && self.skipDeathAnim) {
     self thread do_gib();
@@ -306,7 +306,7 @@ PlayDeathSound() {
 
 print3dfortime(place, text, time) {
   numframes = time * 20;
-  for(i = 0; i < numframes; i++) {
+  for (i = 0; i < numframes; i++) {
     print3d(place, text);
     wait .05;
   }
@@ -344,7 +344,7 @@ helmetLaunch(model, origin, angles, damageDir) {
 }
 
 removeSelfFrom_SquadLastSeenEnemyPos(org) {
-  for(i = 0; i < anim.squadIndex.size; i++) {
+  for (i = 0; i < anim.squadIndex.size; i++) {
     anim.squadIndex[i] clearSightPosNear(org);
   }
 }
@@ -412,7 +412,7 @@ getRunningForwardDeathAnim() {
 
 tempClean(array) {
   newArray = [];
-  for(index = 0; index < array.size; index++) {
+  for (index = 0; index < array.size; index++) {
     if(!isDefined(array[index])) {
       continue;
     }
@@ -649,12 +649,10 @@ play_explosion_death() {
 }
 
 play_flame_death_anim() {
-  if(self.damagemod == "MOD_MELEE") {
+  if(self.damagemod == "MOD_MELEE")
     return false;
-  }
-  if(is_german_build()) {
+  if(is_german_build())
     return false;
-  }
   if(self.team == "axis") {
     level.bcOnFireTime = gettime();
     level.bcOnFireOrg = self.origin;
@@ -740,7 +738,7 @@ flame_death_fx() {
   }
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     if(self.classname != "actor_zombie_dog") {
-      playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+      PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
     }
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"");
@@ -753,7 +751,7 @@ flame_death_fx() {
     tagArray[2] = "J_Knee_RI";
     tagArray[3] = "J_Knee_LE";
     tagArray = randomize_array(tagArray);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
     wait 1;
     tagArray[0] = "J_Wrist_RI";
     tagArray[1] = "J_Wrist_LE";
@@ -762,8 +760,8 @@ flame_death_fx() {
       tagArray[3] = "J_Ankle_LE";
     }
     tagArray = randomize_array(tagArray);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[1]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[1]);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
   }
@@ -946,7 +944,7 @@ extended_death_loop(deathSeq, numLoops) {
   self endon("damage");
   assert(isDefined(deathSeq[1]));
   animLength = GetAnimLength(deathSeq[1]);
-  for(i = 0; i < numLoops; i++) {
+  for (i = 0; i < numLoops; i++) {
     self setFlaggedAnimKnobAllRestart("deathloopanim", deathSeq[1], % body, 1, .1);
     self animscripts\shared::DoNoteTracks("deathloopanim");
   }
@@ -1027,7 +1025,7 @@ get_gib_extended_death_anims() {
 }
 
 randomize_array(array) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     j = RandomInt(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -1095,7 +1093,7 @@ get_tag_for_damage_location() {
 bayonet_death_fx(side) {
   tag = self get_tag_for_damage_location();
   if(isDefined(level._effect) && isDefined(level._effect["character_bayonet_blood_in"])) {
-    playFXOnTag(level._effect["character_bayonet_blood_in"], self, tag);
+    PlayFxOnTag(level._effect["character_bayonet_blood_in"], self, tag);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_bayonet_blood_in\"], please set it in your levelname_fx.gsc. Use \"impacts/fx_flesh_bayonet_impact\"");
   }
@@ -1112,13 +1110,13 @@ bayonet_death_fx(side) {
       println("^3\"impacts/fx_flesh_bayonet_fatal_lf\".");
     } else {
       if(side == "front") {
-        playFXOnTag(level._effect["character_bayonet_blood_front"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_front"], self, "j_spine4");
       } else if(side == "back") {
-        playFXOnTag(level._effect["character_bayonet_blood_back"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_back"], self, "j_spine4");
       } else if(side == "right") {
-        playFXOnTag(level._effect["character_bayonet_blood_right"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_right"], self, "j_spine4");
       } else if(side == "left") {
-        playFXOnTag(level._effect["character_bayonet_blood_left"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_left"], self, "j_spine4");
       }
     }
   } else {
@@ -1244,18 +1242,18 @@ do_gib() {
   }
   if(limb_data["spawn_tags"][0] != "") {
     if(isDefined(self.gib_vel)) {
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         velocities[i] = self.gib_vel;
       }
     } else {
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos1[pos1.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
       wait(0.05);
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos2[pos2.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
-      for(i = 0; i < pos1.size; i++) {
+      for (i = 0; i < pos1.size; i++) {
         forward = VectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
@@ -1263,16 +1261,16 @@ do_gib() {
     }
   }
   if(isDefined(limb_data["fx"])) {
-    for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+    for (i = 0; i < limb_data["spawn_tags"].size; i++) {
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      playFXOnTag(anim._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      PlayFxOnTag(anim._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
   PlaySoundAtPosition("death_gibs", self.origin);
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
-  self setModel(limb_data["body_model"]);
+  self SetModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
 }
 
@@ -1370,7 +1368,7 @@ throw_gib(spawn_models, spawn_tags, velocities) {
   if(velocities.size < 1) {
     return;
   }
-  for(i = 0; i < spawn_models.size; i++) {
+  for (i = 0; i < spawn_models.size; i++) {
     origin = self GetTagOrigin(spawn_tags[i]);
     angles = self GetTagAngles(spawn_tags[i]);
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], anim._effect["animscript_gibtrail_fx"], 1);
@@ -1379,7 +1377,7 @@ throw_gib(spawn_models, spawn_tags, velocities) {
 
 gib_delete() {
   wait(10 + RandomFloat(5));
-  for(i = 0; i < 100; i++) {
+  for (i = 0; i < 100; i++) {
     if(!self IsBeingWatched()) {
       break;
     }
@@ -1392,7 +1390,7 @@ death_anim_short_circuit() {
   self endon("stop_death_anim_short_circuit");
   wait 0.3;
   totalDamageTaken = 0;
-  while(1) {
+  while (1) {
     self waittill("damage", damagetaken, attacker, dir, point, mod);
     waittillframeend;
     if(isDefined(self.damageMod) && self.damageMod != "MOD_BURNED") {
@@ -1432,7 +1430,7 @@ launch_ragdoll_based_on_damage_type(bullet_scale) {
 }
 
 draw_line(pos1, pos2) {
-  while(1) {
+  while (1) {
     line(pos1, pos2);
     wait(0.05);
   }

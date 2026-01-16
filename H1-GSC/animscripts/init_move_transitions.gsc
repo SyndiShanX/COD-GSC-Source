@@ -5,41 +5,35 @@
 *************************************************/
 
 init_move_transition_arrays() {
-  if(isDefined(anim.move_transition_arrays)) {
+  if(isdefined(anim.move_transition_arrays)) {
     return;
   }
   anim.move_transition_arrays = 1;
 
-  if(!isDefined(anim.covertrans)) {
+  if(!isdefined(anim.covertrans))
     anim.covertrans = [];
-  }
 
-  if(!isDefined(anim.coverexit)) {
+  if(!isdefined(anim.coverexit))
     anim.coverexit = [];
-  }
 
   anim.maxdirections = [];
   anim.excludedir = [];
   anim.traverseinfo = [];
 
-  if(!isDefined(anim.covertransdist)) {
+  if(!isdefined(anim.covertransdist))
     anim.covertransdist = [];
-  }
 
-  if(!isDefined(anim.coverexitdist)) {
+  if(!isdefined(anim.coverexitdist))
     anim.coverexitdist = [];
-  }
 
   anim.coverexitpostdist = [];
   anim.covertranspredist = [];
 
-  if(!isDefined(anim.covertransangles)) {
+  if(!isdefined(anim.covertransangles))
     anim.covertransangles = [];
-  }
 
-  if(!isDefined(anim.coverexitangles)) {
+  if(!isdefined(anim.coverexitangles))
     anim.coverexitangles = [];
-  }
 
   anim.arrivalendstance = [];
 }
@@ -453,7 +447,7 @@ getmoveend(var_0) {
   var_3 = 1;
   var_4 = 0.05;
 
-  for(var_5 = getanimlength(var_0);
+  for (var_5 = getanimlength(var_0);
     (var_3 - var_2) * var_5 > var_4; var_1 = (var_3 - var_2) / 2 + var_2) {
     var_6 = getmovedelta(var_0, var_1, 1);
 
@@ -469,7 +463,7 @@ getmoveend(var_0) {
 }
 
 inittransdistandanglesforarchetype(var_0) {
-  if(!isDefined(anim.archetypes[var_0])) {
+  if(!isdefined(anim.archetypes[var_0])) {
     return;
   }
   var_1 = [];
@@ -504,28 +498,27 @@ inittransdistandanglesforarchetype(var_0) {
   var_1[28] = "exposed_crouch_crouchwalk";
   var_1[29] = "prone";
 
-  if(!isDefined(anim.archetypes[var_0]["cover_trans"])) {
+  if(!isdefined(anim.archetypes[var_0]["cover_trans"])) {
     return;
   }
-  for(var_2 = 1; var_2 <= 6; var_2++) {
+  for (var_2 = 1; var_2 <= 6; var_2++) {
     if(var_2 == 5) {
       continue;
     }
-    for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    for (var_3 = 0; var_3 < var_1.size; var_3++) {
       var_4 = var_1[var_3];
 
-      if(isDefined(anim.archetypes[var_0]["cover_trans"][var_4]) && isDefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
+      if(isdefined(anim.archetypes[var_0]["cover_trans"][var_4]) && isdefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
         anim.archetypes[var_0]["cover_trans_dist"][var_4][var_2] = getmovedelta(anim.archetypes[var_0]["cover_trans"][var_4][var_2], 0, 1);
         anim.archetypes[var_0]["cover_trans_angles"][var_4][var_2] = getangledelta(anim.archetypes[var_0]["cover_trans"][var_4][var_2], 0, 1);
         anim.archetypes[var_0]["cover_trans_move_end"][var_4][var_2] = getmoveend(anim.archetypes[var_0]["cover_trans"][var_4][var_2]);
       }
 
-      if(isDefined(anim.archetypes[var_0]["cover_exit"][var_4]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_4][var_2])) {
-        if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move")) {
+      if(isdefined(anim.archetypes[var_0]["cover_exit"][var_4]) && isdefined(anim.archetypes[var_0]["cover_exit"][var_4][var_2])) {
+        if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move"))
           var_5 = getnotetracktimes(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move")[0];
-        } else {
+        else
           var_5 = 1;
-        }
 
         anim.archetypes[var_0]["cover_exit_dist"][var_4][var_2] = getmovedelta(anim.archetypes[var_0]["cover_exit"][var_4][var_2], 0, var_5);
         anim.archetypes[var_0]["cover_exit_angles"][var_4][var_2] = getangledelta(anim.archetypes[var_0]["cover_exit"][var_4][var_2], 0, 1);
@@ -533,23 +526,21 @@ inittransdistandanglesforarchetype(var_0) {
     }
   }
 
-  if(!isDefined(anim.archetypes[var_0]["CoverTransLongestDist"])) {
+  if(!isdefined(anim.archetypes[var_0]["CoverTransLongestDist"]))
     anim.archetypes[var_0]["CoverTransLongestDist"] = [];
-  }
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+  for (var_3 = 0; var_3 < var_1.size; var_3++) {
     var_4 = var_1[var_3];
     anim.archetypes[var_0]["CoverTransLongestDist"][var_4] = 0;
 
-    for(var_2 = 1; var_2 <= 6; var_2++) {
-      if(var_2 == 5 || !isDefined(anim.archetypes[var_0]["cover_trans"][var_4]) || !isDefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
+    for (var_2 = 1; var_2 <= 6; var_2++) {
+      if(var_2 == 5 || !isdefined(anim.archetypes[var_0]["cover_trans"][var_4]) || !isdefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
         continue;
       }
       var_6 = lengthsquared(anim.archetypes[var_0]["cover_trans_dist"][var_4][var_2]);
 
-      if(anim.archetypes[var_0]["CoverTransLongestDist"][var_4] < var_6) {
+      if(anim.archetypes[var_0]["CoverTransLongestDist"][var_4] < var_6)
         anim.archetypes[var_0]["CoverTransLongestDist"][var_4] = var_6;
-      }
     }
 
     anim.archetypes[var_0]["CoverTransLongestDist"][var_4] = sqrt(anim.archetypes[var_0]["CoverTransLongestDist"][var_4]);
@@ -567,19 +558,18 @@ inittransdistandanglesforarchetype(var_0) {
   anim.exposedtransition["exposed_smg"] = 1;
   anim.exposedtransition["heat"] = 1;
 
-  if(!isDefined(anim.archetypes[var_0]["longestExposedApproachDist"])) {
+  if(!isdefined(anim.archetypes[var_0]["longestExposedApproachDist"]))
     anim.archetypes[var_0]["longestExposedApproachDist"] = 0;
-  }
 
   foreach(var_4, var_8 in anim.exposedtransition) {
-    for(var_2 = 7; var_2 <= 9; var_2++) {
-      if(isDefined(anim.archetypes[var_0]["cover_trans"][var_4]) && isDefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
+    for (var_2 = 7; var_2 <= 9; var_2++) {
+      if(isdefined(anim.archetypes[var_0]["cover_trans"][var_4]) && isdefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
         anim.archetypes[var_0]["cover_trans_dist"][var_4][var_2] = getmovedelta(anim.archetypes[var_0]["cover_trans"][var_4][var_2], 0, 1);
         anim.archetypes[var_0]["cover_trans_angles"][var_4][var_2] = getangledelta(anim.archetypes[var_0]["cover_trans"][var_4][var_2], 0, 1);
         anim.archetypes[var_0]["cover_trans_move_end"][var_4][var_2] = getmoveend(anim.archetypes[var_0]["cover_trans"][var_4][var_2]);
       }
 
-      if(isDefined(anim.archetypes[var_0]["cover_exit"][var_4]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_4][var_2])) {
+      if(isdefined(anim.archetypes[var_0]["cover_exit"][var_4]) && isdefined(anim.archetypes[var_0]["cover_exit"][var_4][var_2])) {
         var_9 = animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move");
         var_5 = getnotetracktimes(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move")[0];
         anim.archetypes[var_0]["cover_exit_dist"][var_4][var_2] = getmovedelta(anim.archetypes[var_0]["cover_exit"][var_4][var_2], 0, var_5);
@@ -587,15 +577,14 @@ inittransdistandanglesforarchetype(var_0) {
       }
     }
 
-    for(var_2 = 1; var_2 <= 9; var_2++) {
-      if(!isDefined(anim.archetypes[var_0]["cover_trans"][var_4]) || !isDefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
+    for (var_2 = 1; var_2 <= 9; var_2++) {
+      if(!isdefined(anim.archetypes[var_0]["cover_trans"][var_4]) || !isdefined(anim.archetypes[var_0]["cover_trans"][var_4][var_2])) {
         continue;
       }
       var_10 = length(anim.archetypes[var_0]["cover_trans_dist"][var_4][var_2]);
 
-      if(var_10 > anim.archetypes[var_0]["longestExposedApproachDist"]) {
+      if(var_10 > anim.archetypes[var_0]["longestExposedApproachDist"])
         anim.archetypes[var_0]["longestExposedApproachDist"] = var_10;
-      }
     }
   }
 }
@@ -660,9 +649,8 @@ initmovestartstoptransitions() {
 
   inittransdistandanglesforarchetype("soldier");
 
-  if(maps\_utility::s1_motionset_avaliable()) {
+  if(maps\_utility::s1_motionset_avaliable())
     inittransdistandanglesforarchetype("s1_soldier");
-  }
 
   anim.splitarrivalsleft = [];
   anim.splitarrivalsleft["left"] = 1;
@@ -688,9 +676,8 @@ initmovestartstoptransitions() {
   anim.splitexitsright["heat_right"] = 1;
   getsplittimes("soldier");
 
-  if(maps\_utility::s1_motionset_avaliable()) {
+  if(maps\_utility::s1_motionset_avaliable())
     getsplittimes("s1_soldier");
-  }
 
   anim.arrivalendstance["left"] = "stand";
   anim.arrivalendstance["left_cqb"] = "stand";
@@ -731,11 +718,10 @@ getsplittimes(var_0) {
 getsplitdeltas(var_0, var_1) {
   var_2 = 1;
 
-  if(animhasnotetrack(var_0, "code_move")) {
+  if(animhasnotetrack(var_0, "code_move"))
     var_2 = getnotetracktimes(var_0, "code_move")[0];
-  }
 
-  var_3 = spawnStruct();
+  var_3 = spawnstruct();
   var_3.predist = getmovedelta(var_0, 0, var_1);
   var_3.postdist = getmovedelta(var_0, 0, var_2) - var_3.predist;
   var_3.angledelta = getangledelta(var_0, 0, 1);
@@ -743,13 +729,13 @@ getsplitdeltas(var_0, var_1) {
 }
 
 getsplittimesside(var_0, var_1, var_2, var_3, var_4, var_5) {
-  for(var_6 = var_1; var_6 <= var_2; var_6++) {
-    if(isDefined(anim.archetypes[var_0]["cover_trans"])) {
+  for (var_6 = var_1; var_6 <= var_2; var_6++) {
+    if(isdefined(anim.archetypes[var_0]["cover_trans"])) {
       foreach(var_11, var_8 in var_4) {
         if(issubstr(var_11, "heat")) {
           continue;
         }
-        if(isDefined(anim.archetypes[var_0]["cover_trans"][var_11]) && isDefined(anim.archetypes[var_0]["cover_trans"][var_11][var_6])) {
+        if(isdefined(anim.archetypes[var_0]["cover_trans"][var_11]) && isdefined(anim.archetypes[var_0]["cover_trans"][var_11][var_6])) {
           var_9 = findbestsplittime(anim.archetypes[var_0]["cover_trans"][var_11][var_6], 1, var_3);
           var_10 = getsplitdeltas(anim.archetypes[var_0]["cover_trans"][var_11][var_6], var_9);
           anim.archetypes[var_0]["cover_trans_predist"][var_11][var_6] = var_10.predist;
@@ -760,12 +746,12 @@ getsplittimesside(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    if(isDefined(anim.archetypes[var_0]["cover_exit"])) {
+    if(isdefined(anim.archetypes[var_0]["cover_exit"])) {
       foreach(var_11, var_8 in var_5) {
         if(issubstr(var_11, "heat")) {
           continue;
         }
-        if(isDefined(anim.archetypes[var_0]["cover_exit"][var_11]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_11][var_6])) {
+        if(isdefined(anim.archetypes[var_0]["cover_exit"][var_11]) && isdefined(anim.archetypes[var_0]["cover_exit"][var_11][var_6])) {
           var_9 = findbestsplittime(anim.archetypes[var_0]["cover_exit"][var_11][var_6], 0, var_3);
           var_10 = getsplitdeltas(anim.archetypes[var_0]["cover_exit"][var_11][var_6], var_9);
           anim.archetypes[var_0]["cover_exit_dist"][var_11][var_6] = var_10.predist;
@@ -785,17 +771,15 @@ findbestsplittime(var_0, var_1, var_2) {
   var_7 = -100000000;
   var_8 = (0, 0, 0);
 
-  for(var_9 = 0; var_9 < var_5; var_9++) {
+  for (var_9 = 0; var_9 < var_5; var_9++) {
     var_10 = 1.0 * var_9 / (var_5 - 1);
     var_11 = getmovedelta(var_0, 0, var_10);
 
-    if(var_1) {
+    if(var_1)
       var_11 = deltarotate(var_4 - var_11, 180 - var_3);
-    }
 
-    if(var_2) {
+    if(var_2)
       var_11 = (var_11[0], 0 - var_11[1], var_11[2]);
-    }
 
     var_12 = min(var_11[0] - 32, var_11[1]);
 

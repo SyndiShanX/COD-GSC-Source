@@ -18,13 +18,13 @@
 #namespace zombiedogbehavior;
 
 function autoexec registerbehaviorscriptfunctions() {
-  spawner::add_archetype_spawn_function("zombie_dog", &archetypezombiedogblackboardinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogTargetService", &zombiedogtargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldMelee", &zombiedogshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldWalk", &zombiedogshouldwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldRun", &zombiedogshouldrun);
-  behaviortreenetworkutility::registerbehaviortreeaction("zombieDogMeleeAction", &zombiedogmeleeaction, undefined, &zombiedogmeleeactionterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("dog_melee", &zombiebehavior::zombienotetrackmeleefire);
+  spawner::add_archetype_spawn_function("zombie_dog", & archetypezombiedogblackboardinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogTargetService", & zombiedogtargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldMelee", & zombiedogshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldWalk", & zombiedogshouldwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldRun", & zombiedogshouldrun);
+  behaviortreenetworkutility::registerbehaviortreeaction("zombieDogMeleeAction", & zombiedogmeleeaction, undefined, & zombiedogmeleeactionterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("dog_melee", & zombiebehavior::zombienotetrackmeleefire);
   zombiedoginterface::registerzombiedoginterfaceattributes();
 }
 
@@ -36,15 +36,15 @@ function archetypezombiedogblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_should_run", "walk", &bb_getshouldrunstatus);
+  blackboard::registerblackboardattribute(self, "_should_run", "walk", & bb_getshouldrunstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_should_howl", "dont_howl", &bb_getshouldhowlstatus);
+  blackboard::registerblackboardattribute(self, "_should_howl", "dont_howl", & bb_getshouldhowlstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = &archetypezombiedogonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = & archetypezombiedogonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
   self.kill_on_wine_coccon = 1;
 }
@@ -55,18 +55,18 @@ function private archetypezombiedogonanimscriptedcallback(entity) {
 }
 
 function bb_getshouldrunstatus() {
-  if(isDefined(self.ispuppet) && self.ispuppet) {
+  if(isdefined(self.ispuppet) && self.ispuppet) {
     return "";
   }
-  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || (ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint"))) {
+  if(isdefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || (ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint"))) {
     return "run";
   }
   return "walk";
 }
 
 function bb_getshouldhowlstatus() {
-  if(self ai::has_behavior_attribute("howl_chance") && (isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy)) {
-    if(!isDefined(self.shouldhowl)) {
+  if(self ai::has_behavior_attribute("howl_chance") && (isdefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy)) {
+    if(!isdefined(self.shouldhowl)) {
       chance = self ai::get_behavior_attribute("howl_chance");
       self.shouldhowl = randomfloat(1) <= chance;
     }
@@ -84,7 +84,7 @@ function getyaw(org) {
 }
 
 function absyawtoenemy() {
-  assert(isDefined(self.enemy));
+  assert(isdefined(self.enemy));
   yaw = self.angles[1] - getyaw(self.enemy.origin);
   yaw = angleclamp180(yaw);
   if(yaw < 0) {
@@ -101,7 +101,7 @@ function need_to_run() {
   if(self.health < self.maxhealth) {
     return true;
   }
-  if(!isDefined(self.enemy) || !isalive(self.enemy)) {
+  if(!isdefined(self.enemy) || !isalive(self.enemy)) {
     return false;
   }
   if(!self cansee(self.enemy)) {
@@ -127,7 +127,7 @@ function need_to_run() {
 }
 
 function private is_target_valid(dog, target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return 0;
   }
   if(!isalive(target)) {
@@ -137,7 +137,7 @@ function private is_target_valid(dog, target) {
     if(!isplayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
-    if(isDefined(target.is_zombie) && target.is_zombie == 1) {
+    if(isdefined(target.is_zombie) && target.is_zombie == 1) {
       return 0;
     }
   }
@@ -147,10 +147,10 @@ function private is_target_valid(dog, target) {
   if(isplayer(target) && target.sessionstate == "intermission") {
     return 0;
   }
-  if(isDefined(self.intermission) && self.intermission) {
+  if(isdefined(self.intermission) && self.intermission) {
     return 0;
   }
-  if(isDefined(target.ignoreme) && target.ignoreme) {
+  if(isdefined(target.ignoreme) && target.ignoreme) {
     return 0;
   }
   if(target isnotarget()) {
@@ -159,8 +159,10 @@ function private is_target_valid(dog, target) {
   if(dog.team == target.team) {
     return 0;
   }
-  if(isplayer(target) && isDefined(level.is_player_valid_override)) {
-    return [[level.is_player_valid_override]](target);
+  if(isplayer(target) && isdefined(level.is_player_valid_override)) {
+    return [
+      [level.is_player_valid_override]
+    ](target);
   }
   return 1;
 }
@@ -178,8 +180,8 @@ function private get_favorite_enemy(dog) {
   }
   least_hunted = dog_targets[0];
   closest_target_dist_squared = undefined;
-  for(i = 0; i < dog_targets.size; i++) {
-    if(!isDefined(dog_targets[i].hunted_by)) {
+  for (i = 0; i < dog_targets.size; i++) {
+    if(!isdefined(dog_targets[i].hunted_by)) {
       dog_targets[i].hunted_by = 0;
     }
     if(!is_target_valid(dog, dog_targets[i])) {
@@ -189,7 +191,7 @@ function private get_favorite_enemy(dog) {
       least_hunted = dog_targets[i];
     }
     dist_squared = distancesquared(dog.origin, dog_targets[i].origin);
-    if(dog_targets[i].hunted_by <= least_hunted.hunted_by && (!isDefined(closest_target_dist_squared) || dist_squared < closest_target_dist_squared)) {
+    if(dog_targets[i].hunted_by <= least_hunted.hunted_by && (!isdefined(closest_target_dist_squared) || dist_squared < closest_target_dist_squared)) {
       least_hunted = dog_targets[i];
       closest_target_dist_squared = dist_squared;
     }
@@ -210,7 +212,7 @@ function get_last_valid_position() {
 
 function get_locomotion_target(behaviortreeentity) {
   last_valid_position = behaviortreeentity.favoriteenemy get_last_valid_position();
-  if(!isDefined(last_valid_position)) {
+  if(!isdefined(last_valid_position)) {
     return undefined;
   }
   locomotion_target = last_valid_position;
@@ -226,7 +228,7 @@ function get_locomotion_target(behaviortreeentity) {
     lerp_amount = math::clamp((spacing_dist - spacing_near_dist) / (spacing_far_dist - spacing_near_dist), 0, 1);
     desired_point = last_valid_position + (offset * lerp_amount);
     desired_point = getclosestpointonnavmesh(desired_point, spacing_horz_dist * 1.2, 16);
-    if(isDefined(desired_point)) {
+    if(isdefined(desired_point)) {
       locomotion_target = desired_point;
     }
   }
@@ -234,15 +236,15 @@ function get_locomotion_target(behaviortreeentity) {
 }
 
 function zombiedogtargetservice(behaviortreeentity) {
-  if(isDefined(level.intermission) && level.intermission) {
+  if(isdefined(level.intermission) && level.intermission) {
     behaviortreeentity clearpath();
     return;
   }
-  if(isDefined(behaviortreeentity.ispuppet) && behaviortreeentity.ispuppet) {
+  if(isdefined(behaviortreeentity.ispuppet) && behaviortreeentity.ispuppet) {
     return;
   }
-  if(behaviortreeentity.ignoreall || behaviortreeentity.pacifist || (isDefined(behaviortreeentity.favoriteenemy) && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy))) {
-    if(isDefined(behaviortreeentity.favoriteenemy) && isDefined(behaviortreeentity.favoriteenemy.hunted_by) && behaviortreeentity.favoriteenemy.hunted_by > 0) {
+  if(behaviortreeentity.ignoreall || behaviortreeentity.pacifist || (isdefined(behaviortreeentity.favoriteenemy) && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy))) {
+    if(isdefined(behaviortreeentity.favoriteenemy) && isdefined(behaviortreeentity.favoriteenemy.hunted_by) && behaviortreeentity.favoriteenemy.hunted_by > 0) {
       behaviortreeentity.favoriteenemy.hunted_by--;
     }
     behaviortreeentity.favoriteenemy = undefined;
@@ -252,31 +254,31 @@ function zombiedogtargetservice(behaviortreeentity) {
     }
     return;
   }
-  if(isDefined(behaviortreeentity.ignoreme) && behaviortreeentity.ignoreme) {
+  if(isdefined(behaviortreeentity.ignoreme) && behaviortreeentity.ignoreme) {
     return;
   }
   if(!sessionmodeiszombiesgame() || behaviortreeentity.team == "allies" && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     behaviortreeentity.favoriteenemy = get_favorite_enemy(behaviortreeentity);
   }
-  if(!(isDefined(behaviortreeentity.hasseenfavoriteenemy) && behaviortreeentity.hasseenfavoriteenemy)) {
-    if(isDefined(behaviortreeentity.favoriteenemy) && behaviortreeentity need_to_run()) {
+  if(!(isdefined(behaviortreeentity.hasseenfavoriteenemy) && behaviortreeentity.hasseenfavoriteenemy)) {
+    if(isdefined(behaviortreeentity.favoriteenemy) && behaviortreeentity need_to_run()) {
       behaviortreeentity.hasseenfavoriteenemy = 1;
     }
   }
-  if(isDefined(behaviortreeentity.favoriteenemy)) {
-    if(isDefined(level.enemy_location_override_func)) {
+  if(isdefined(behaviortreeentity.favoriteenemy)) {
+    if(isdefined(level.enemy_location_override_func)) {
       goalpos = [
         [level.enemy_location_override_func]
       ](behaviortreeentity, behaviortreeentity.favoriteenemy);
-      if(isDefined(goalpos)) {
+      if(isdefined(goalpos)) {
         behaviortreeentity setgoal(goalpos);
         return;
       }
     }
     locomotion_target = get_locomotion_target(behaviortreeentity);
-    if(isDefined(locomotion_target)) {
+    if(isdefined(locomotion_target)) {
       repathdist = 16;
-      if(!isDefined(behaviortreeentity.lasttargetposition) || distancesquared(behaviortreeentity.lasttargetposition, locomotion_target) > (repathdist * repathdist) || !behaviortreeentity haspath()) {
+      if(!isdefined(behaviortreeentity.lasttargetposition) || distancesquared(behaviortreeentity.lasttargetposition, locomotion_target) > (repathdist * repathdist) || !behaviortreeentity haspath()) {
         behaviortreeentity useposition(locomotion_target);
         behaviortreeentity.lasttargetposition = locomotion_target;
       }
@@ -288,15 +290,15 @@ function zombiedogshouldmelee(behaviortreeentity) {
   if(behaviortreeentity.ignoreall || !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     return false;
   }
-  if(!(isDefined(level.intermission) && level.intermission)) {
+  if(!(isdefined(level.intermission) && level.intermission)) {
     meleedist = 72;
     if(distancesquared(behaviortreeentity.origin, behaviortreeentity.favoriteenemy.origin) < (meleedist * meleedist) && behaviortreeentity cansee(behaviortreeentity.favoriteenemy)) {
       dog_eye = behaviortreeentity.origin + vectorscale((0, 0, 1), 40);
-      enemy_eye = behaviortreeentity.favoriteenemy getEye();
+      enemy_eye = behaviortreeentity.favoriteenemy geteye();
       clip_mask = 1 | 8;
       trace = physicstrace(dog_eye, enemy_eye, (0, 0, 0), (0, 0, 0), self, clip_mask);
-      can_melee = trace["fraction"] == 1 || (isDefined(trace["entity"]) && trace["entity"] == behaviortreeentity.favoriteenemy);
-      if(isDefined(can_melee) && can_melee) {
+      can_melee = trace["fraction"] == 1 || (isdefined(trace["entity"]) && trace["entity"] == behaviortreeentity.favoriteenemy);
+      if(isdefined(can_melee) && can_melee) {
         return true;
       }
     }
@@ -313,7 +315,7 @@ function zombiedogshouldrun(behaviortreeentity) {
 }
 
 function use_low_attack() {
-  if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+  if(!isdefined(self.enemy) || !isplayer(self.enemy)) {
     return false;
   }
   height_diff = self.enemy.origin[2] - self.origin[2];

@@ -12,11 +12,11 @@
 #namespace player;
 
 function autoexec __init__sytem__() {
-  system::register("player", &__init__, undefined, undefined);
+  system::register("player", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   clientfield::register("world", "gameplay_started", 4000, 1, "int");
 }
 
@@ -32,7 +32,7 @@ function on_player_spawned() {
     }
   }
   ismultiplayer = !sessionmodeiszombiesgame() && !sessionmodeiscampaigngame();
-  if(!ismultiplayer || (isDefined(level._enablelastvalidposition) && level._enablelastvalidposition)) {
+  if(!ismultiplayer || (isdefined(level._enablelastvalidposition) && level._enablelastvalidposition)) {
     self thread last_valid_position();
   }
 }
@@ -41,16 +41,16 @@ function last_valid_position() {
   self endon("disconnect");
   self notify("stop_last_valid_position");
   self endon("stop_last_valid_position");
-  while(!isDefined(self.last_valid_position)) {
+  while (!isdefined(self.last_valid_position)) {
     self.last_valid_position = getclosestpointonnavmesh(self.origin, 2048, 0);
     wait(0.1);
   }
-  while(true) {
+  while (true) {
     if(distance2dsquared(self.origin, self.last_valid_position) < (15 * 15) && (self.origin[2] - self.last_valid_position[2]) * (self.origin[2] - self.last_valid_position[2]) < (16 * 16)) {
       wait(0.1);
       continue;
     }
-    if(isDefined(level.last_valid_position_override) && self[[level.last_valid_position_override]]()) {
+    if(isdefined(level.last_valid_position_override) && self[[level.last_valid_position_override]]()) {
       wait(0.1);
       continue;
     } else {
@@ -62,7 +62,7 @@ function last_valid_position() {
           continue;
         } else {
           position = getclosestpointonnavmesh(self.origin, 100, 15);
-          if(isDefined(position)) {
+          if(isdefined(position)) {
             self.last_valid_position = position;
           }
         }
@@ -73,10 +73,10 @@ function last_valid_position() {
 }
 
 function take_weapons() {
-  if(!(isDefined(self.gun_removed) && self.gun_removed)) {
+  if(!(isdefined(self.gun_removed) && self.gun_removed)) {
     self.gun_removed = 1;
     self._weapons = [];
-    if(!isDefined(self._current_weapon)) {
+    if(!isdefined(self._current_weapon)) {
       self._current_weapon = level.weaponnone;
     }
     w_current = self getcurrentweapon();
@@ -85,15 +85,15 @@ function take_weapons() {
     }
     a_weapon_list = self getweaponslist();
     if(self._current_weapon == level.weaponnone) {
-      if(isDefined(a_weapon_list[0])) {
+      if(isdefined(a_weapon_list[0])) {
         self._current_weapon = a_weapon_list[0];
       }
     }
     foreach(weapon in a_weapon_list) {
-      if(isDefined(weapon.dniweapon) && weapon.dniweapon) {
+      if(isdefined(weapon.dniweapon) && weapon.dniweapon) {
         continue;
       }
-      if(!isDefined(self._weapons)) {
+      if(!isdefined(self._weapons)) {
         self._weapons = [];
       } else if(!isarray(self._weapons)) {
         self._weapons = array(self._weapons);
@@ -106,10 +106,10 @@ function take_weapons() {
 
 function generate_weapon_data() {
   self._generated_weapons = [];
-  if(!isDefined(self._generated_current_weapon)) {
+  if(!isdefined(self._generated_current_weapon)) {
     self._generated_current_weapon = level.weaponnone;
   }
-  if(isDefined(self.gun_removed) && self.gun_removed && isDefined(self._weapons)) {
+  if(isdefined(self.gun_removed) && self.gun_removed && isdefined(self._weapons)) {
     self._generated_weapons = arraycopy(self._weapons);
     self._generated_current_weapon = self._current_weapon;
   } else {
@@ -119,15 +119,15 @@ function generate_weapon_data() {
     }
     a_weapon_list = self getweaponslist();
     if(self._generated_current_weapon == level.weaponnone) {
-      if(isDefined(a_weapon_list[0])) {
+      if(isdefined(a_weapon_list[0])) {
         self._generated_current_weapon = a_weapon_list[0];
       }
     }
     foreach(weapon in a_weapon_list) {
-      if(isDefined(weapon.dniweapon) && weapon.dniweapon) {
+      if(isdefined(weapon.dniweapon) && weapon.dniweapon) {
         continue;
       }
-      if(!isDefined(self._generated_weapons)) {
+      if(!isdefined(self._generated_weapons)) {
         self._generated_weapons = [];
       } else if(!isarray(self._generated_weapons)) {
         self._generated_weapons = array(self._generated_weapons);
@@ -138,17 +138,17 @@ function generate_weapon_data() {
 }
 
 function give_back_weapons(b_immediate = 0) {
-  if(isDefined(self._weapons)) {
+  if(isdefined(self._weapons)) {
     foreach(weapondata in self._weapons) {
       weapondata_give(weapondata);
     }
-    if(isDefined(self._current_weapon) && self._current_weapon != level.weaponnone) {
+    if(isdefined(self._current_weapon) && self._current_weapon != level.weaponnone) {
       if(b_immediate) {
         self switchtoweaponimmediate(self._current_weapon);
       } else {
         self switchtoweapon(self._current_weapon);
       }
-    } else if(isDefined(self.primaryloadoutweapon) && self hasweapon(self.primaryloadoutweapon)) {
+    } else if(isdefined(self.primaryloadoutweapon) && self hasweapon(self.primaryloadoutweapon)) {
       switch_to_primary_weapon(b_immediate);
     }
   }
@@ -158,7 +158,7 @@ function give_back_weapons(b_immediate = 0) {
 
 function get_weapondata(weapon) {
   weapondata = [];
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     weapon = self getcurrentweapon();
   }
   weapondata["weapon"] = weapon.name;
@@ -201,13 +201,13 @@ function weapondata_give(weapondata) {
   if(weapon != level.weaponnone) {
     self setweaponammoclip(weapon, weapondata["clip"]);
     self setweaponammostock(weapon, weapondata["stock"]);
-    if(isDefined(weapondata["fuel"])) {
+    if(isdefined(weapondata["fuel"])) {
       self setweaponammofuel(weapon, weapondata["fuel"]);
     }
-    if(isDefined(weapondata["heat"]) && isDefined(weapondata["overheat"])) {
+    if(isdefined(weapondata["heat"]) && isdefined(weapondata["overheat"])) {
       self setweaponoverheating(weapondata["overheat"], weapondata["heat"], weapon);
     }
-    if(weapon.isriotshield && isDefined(weapondata["health"])) {
+    if(weapon.isriotshield && isdefined(weapondata["health"])) {
       self.weaponhealth = weapondata["health"];
     }
   }
@@ -235,17 +235,17 @@ function fill_current_clip() {
   if(w_current.isheroweapon) {
     w_current = self.primaryloadoutweapon;
   }
-  if(isDefined(w_current) && self hasweapon(w_current)) {
+  if(isdefined(w_current) && self hasweapon(w_current)) {
     self setweaponammoclip(w_current, w_current.clipsize);
   }
 }
 
 function is_valid_weapon(weaponobject) {
-  return isDefined(weaponobject) && weaponobject != level.weaponnone;
+  return isdefined(weaponobject) && weaponobject != level.weaponnone;
 }
 
 function is_spawn_protected() {
-  return (gettime() - (isDefined(self.spawntime) ? self.spawntime : 0)) <= level.spawnprotectiontimems;
+  return (gettime() - (isdefined(self.spawntime) ? self.spawntime : 0)) <= level.spawnprotectiontimems;
 }
 
 function simple_respawn() {

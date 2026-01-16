@@ -25,12 +25,13 @@ NO_ABILITIES_DURATION = 90;
 init_challenge_type() {
   level.challenge_data = [];
 
-  if(!isDefined(level.challenge_scalar_func)) {
+  if(!isDefined(level.challenge_scalar_func))
     level.challenge_scalar_func = ::default_challenge_scalar_func;
-  }
 
   if(isDefined(level.challenge_registration_func)) {
-    [[level.challenge_registration_func]]();
+    [
+      [level.challenge_registration_func]
+    ]();
   }
 
   if(is_true(level.include_default_challenges)) {
@@ -96,34 +97,29 @@ register_challenge(ref, goal, default_success, successFunc, canActivateFunc, act
   challenge_struct.default_success = default_success;
 
   challenge_struct.isSuccessFunc = ::default_isSuccessFunc;
-  if(isDefined(successFunc)) {
+  if(isDefined(successFunc))
     challenge_struct.isSuccessFunc = successFunc;
-  }
 
   challenge_struct.canActivateFunc = ::default_canActivateFunc;
-  if(isDefined(canActivateFunc)) {
+  if(isDefined(canActivateFunc))
     challenge_struct.canActivateFunc = canActivateFunc;
-  }
 
   challenge_struct.activateFunc = activateFunc;
   challenge_struct.deactivateFunc = deactivateFunc;
 
   challenge_struct.failActivateFunc = ::default_failActivateFunc;
-  if(isDefined(failActivateFunc)) {
+  if(isDefined(failActivateFunc))
     challenge_struct.failActivateFunc = failActivateFunc;
-  }
 
   challenge_struct.updateFunc = updateFunc;
 
   challenge_struct.rewardFunc = ::default_rewardFunc;
-  if(isDefined(rewardFunc)) {
+  if(isDefined(rewardFunc))
     challenge_struct.rewardFunc = rewardFunc;
-  }
 
   challenge_struct.failFunc = ::default_failFunc;
-  if(isDefined(failFunc)) {
+  if(isDefined(failFunc))
     challenge_struct.failFunc = failFunc;
-  }
 
   level.challenge_data[ref] = challenge_struct;
 }
@@ -171,9 +167,8 @@ default_resetSuccess() {
 default_rewardFunc() {
   CHALLENGE_COMPLETE_SKILL_POINT = 1;
 
-  foreach(player in level.players) {
-    player maps\mp\alien\_persistence::give_player_points(CHALLENGE_COMPLETE_SKILL_POINT);
-  }
+  foreach(player in level.players)
+  player maps\mp\alien\_persistence::give_player_points(CHALLENGE_COMPLETE_SKILL_POINT);
 }
 
 activate_spend_currency() {
@@ -198,15 +193,13 @@ activate_spend_money_progress() {
 update_spend_currency(currency_spent, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += currency_spent;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_kill_leper() {
@@ -359,9 +352,8 @@ update_take_no_damage(unused_1, unused_2, unused_3, unused_4, unused_5, unused_6
 
 nodamage_rewardFunc() {
   NODAMAGE_REWARD_POINT = 250;
-  foreach(player in level.players) {
-    player thread maps\mp\alien\_persistence::give_player_currency(NODAMAGE_REWARD_POINT);
-  }
+  foreach(player in level.players)
+  player thread maps\mp\alien\_persistence::give_player_currency(NODAMAGE_REWARD_POINT);
 }
 
 activate_melee_goons() {
@@ -380,16 +372,14 @@ reset_melee_goons_progress() {
 update_melee_goons(goons_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += goons_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_melee_spitter() {
@@ -407,13 +397,11 @@ reset_melee_spitter_progress() {
 update_melee_spitter(spitter_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += spitter_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 update_no_stuck_drill(unused_1, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
@@ -448,16 +436,14 @@ reset_kill_10_with_propane_progress() {
 update_kill_10_with_propane(aliens_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += aliens_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_kill_10_with_traps() {
@@ -477,16 +463,14 @@ reset_kill_10_with_traps_progress() {
 update_kill_10_with_traps(aliens_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += aliens_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_stay_prone() {
@@ -507,17 +491,15 @@ reset_stay_prone_progress() {
 update_stay_prone(aliens_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += aliens_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
 
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_protect_a_player() {
@@ -525,9 +507,8 @@ activate_protect_a_player() {
 
   alive_players = [];
   foreach(player in level.players) {
-    if(isAlive(player) && !player is_in_laststand()) {
+    if(isAlive(player) && !player is_in_laststand())
       alive_players[alive_players.size] = player;
-    }
   }
 
   targetPlayer = random(alive_players);
@@ -642,9 +623,8 @@ activate_use_weapon_challenge() {
 }
 
 update_pistols_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_pistol" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_pistol" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -656,9 +636,8 @@ update_pistols_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused
 }
 
 update_shotguns_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_shotgun" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_shotgun" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -669,9 +648,8 @@ update_shotguns_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unuse
 }
 
 update_snipers_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_sniper" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_sniper" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -682,9 +660,8 @@ update_snipers_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused
 }
 
 update_lmgs_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_lmg" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_lmg" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -695,9 +672,8 @@ update_lmgs_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6,
 }
 
 update_ar_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_assault" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_assault" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -708,9 +684,8 @@ update_ar_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, u
 }
 
 update_smgs_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
-  if(getweaponclass(weapon) == "weapon_smg" || is_true(arc_death)) {
+  if(getweaponclass(weapon) == "weapon_smg" || is_true(arc_death))
     self.current_progress++;
-  }
 
   update_challenge_progress(self.current_progress, self.goal);
 
@@ -737,16 +712,14 @@ reset_kill_10_with_turrets_progress() {
 update_kill_10_with_turrets(aliens_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += aliens_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_kill_airborne_aliens() {
@@ -766,16 +739,14 @@ reset_kill_airborne_aliens_progress() {
 update_kill_airborne_aliens(aliens_killed, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
   self.current_progress += aliens_killed;
 
-  if(self.current_progress >= self.goal) {
+  if(self.current_progress >= self.goal)
     self.success = true;
-  }
 
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 activate_melee_only() {
@@ -830,18 +801,16 @@ update_stay_within_area(alien_pos, player_pos, unused_3, unused_4, unused_5, unu
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 deactivate_stay_within_area() {
   level notify("ring_challenge_ended");
   self.current_progress = 0;
   self.ring_ent delete();
   self.ring_fx = undefined;
-  if(isDefined(level.ring_waypoint_icon)) {
+  if(isDefined(level.ring_waypoint_icon))
     level.ring_waypoint_icon destroy();
-  }
   default_resetSuccess();
 }
 
@@ -878,9 +847,8 @@ update_kill_10_in_30(num_killed, unused_2, unused_3, unused_4, unused_5, unused_
   remaining = (self.goal - self.current_progress);
   update_challenge_progress(self.current_progress, self.goal);
 
-  if(self.success) {
+  if(self.success)
     maps\mp\alien\_challenge::deactivate_current_challenge();
-  }
 }
 
 update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration) {
@@ -892,9 +860,8 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
   if(isDefined(level.custom_death_challenge_func)) {
     continue_processing_challenges = self[[level.custom_death_challenge_func]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
 
-    if(!is_true(continue_processing_challenges)) {
+    if(!is_true(continue_processing_challenges))
       return;
-    }
   }
 
   attacker_is_player = isDefined(eAttacker) && isPlayer(eAttacker);
@@ -910,9 +877,8 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
   }
 
   is_trap_kill = false;
-  if(inflictor_defined) {
+  if(inflictor_defined)
     is_trap_kill = is_trap(eInflictor);
-  }
 
   switch (current_challenge) {
     case "pistols_only":
@@ -924,81 +890,70 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
       if(weapon_defined && sMeansOfDeath != "MOD_MELEE") {
         isArcDeath = is_arc_death(eInflictor, eAttacker, attacker_defined, attacker_is_player, inflictor_defined, inflictor_is_player);
         if(!inflictor_defined || inflictor_is_player || isArcDeath) {
-          if(isArcDeath) {
+          if(isArcDeath)
             maps\mp\alien\_challenge::update_challenge(current_challenge, sWeapon, sMeansofDeath, isArcDeath);
-          } else {
+          else
             maps\mp\alien\_challenge::update_challenge(current_challenge, sWeapon, sMeansofDeath);
-          }
         }
       }
       break;
 
     case "melee_5_goons":
-      if(alien_type == "goon" && attacker_is_player && sMeansOfDeath == "MOD_MELEE") {
+      if(alien_type == "goon" && attacker_is_player && sMeansOfDeath == "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_5_goons", 1);
-      }
       break;
 
     case "melee_spitter":
-      if(alien_type == "spitter" && attacker_is_player && sMeansOfDeath == "MOD_MELEE") {
+      if(alien_type == "spitter" && attacker_is_player && sMeansOfDeath == "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_spitter", 1);
-      }
       break;
 
     case "melee_only":
-      if(attacker_is_player && sMeansOfDeath != "MOD_MELEE") {
+      if(attacker_is_player && sMeansOfDeath != "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_only");
-      }
       break;
 
     case "kill_airborne_aliens":
-      if(attacker_is_player && isDefined(self.trajectoryActive) && self.trajectoryActive) {
+      if(attacker_is_player && isDefined(self.trajectoryActive) && self.trajectoryActive)
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
-      } else if(attacker_is_player && (is_true(self.in_air) || alien_type == "bomber") && sMeansOfDeath != "MOD_SUICIDE") {
+      else if(attacker_is_player && (is_true(self.in_air) || alien_type == "bomber") && sMeansOfDeath != "MOD_SUICIDE")
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
-      } else if(attacker_is_player && alien_type == "ancestor") {
+      else if(attacker_is_player && alien_type == "ancestor")
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
-      }
       break;
 
     case "stay_prone":
-      if((attacker_is_player || inflictor_is_player) && eAttacker GetStance() == "prone") {
+      if((attacker_is_player || inflictor_is_player) && eAttacker GetStance() == "prone")
         maps\mp\alien\_challenge::update_challenge("stay_prone", 1);
-      }
       break;
 
     case "kill_10_with_turrets":
-      if(attacker_is_player && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon)) {
+      if(attacker_is_player && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon))
         maps\mp\alien\_challenge::update_challenge("kill_10_with_turrets", 1);
-      } else if(attacker_defined && isDefined(eAttacker.classname) && eAttacker.classname == "misc_turret" && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon)) {
+      else if(attacker_defined && isDefined(eAttacker.classname) && eAttacker.classname == "misc_turret" && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon))
         maps\mp\alien\_challenge::update_challenge("kill_10_with_turrets", 1);
-      }
       break;
 
     case "stay_within_area":
-      if(attacker_is_player) {
+      if(attacker_is_player)
         maps\mp\alien\_challenge::update_challenge("stay_within_area", self.origin, eAttacker.origin);
-      }
       break;
 
     case "kill_10_in_30":
-      if(attacker_is_player) {
+      if(attacker_is_player)
         maps\mp\alien\_challenge::update_challenge("kill_10_in_30", 1);
-      }
       break;
 
     case "kill_10_with_propane":
-      if(weapon_defined && sWeapon == "alienpropanetank_mp") {
+      if(weapon_defined && sWeapon == "alienpropanetank_mp")
         maps\mp\alien\_challenge::update_challenge("kill_10_with_propane", 1);
-      } else if(inflictor_defined && isDefined(eInflictor.classname) && eInflictor.classname == "trigger_radius") {
+      else if(inflictor_defined && isDefined(eInflictor.classname) && eInflictor.classname == "trigger_radius")
         maps\mp\alien\_challenge::update_challenge("kill_10_with_propane", 1);
-      }
       break;
 
     case "kill_10_with_traps":
-      if(is_trap_kill) {
+      if(is_trap_kill)
         maps\mp\alien\_challenge::update_challenge("kill_10_with_traps", 1);
-      }
       break;
   }
 }
@@ -1024,9 +979,8 @@ update_alien_damage_challenge(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfD
   if(isDefined(eAttacker) && isPlayer(eAttacker)) {
     if(isDefined(level.custom_damage_challenge_func)) {
       continue_processing_challenges = self[[level.custom_damage_challenge_func]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, alien);
-      if(!is_true(continue_processing_challenges)) {
+      if(!is_true(continue_processing_challenges))
         return;
-      }
     }
 
     eAttacker endon("disconnect");
@@ -1064,11 +1018,10 @@ update_alien_damage_challenge(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfD
       }
 
       if(isDefined(level.current_challenge)) {
-        if(level.current_challenge == "75_percent_accuracy") {
+        if(level.current_challenge == "75_percent_accuracy")
           maps\mp\alien\_challenge::update_challenge("75_percent_accuracy", 1);
-        } else if(level.current_challenge == "50_percent_accuracy") {
+        else if(level.current_challenge == "50_percent_accuracy")
           maps\mp\alien\_challenge::update_challenge("50_percent_accuracy", 1);
-        }
       }
 
       eAttacker.fired_weapon = undefined;
@@ -1146,9 +1099,8 @@ update_percent_accuracy(challenge) {
     }
     accuracy = int((challenge.total_shots_hit / challenge.total_shots_fired) * 10000);
 
-    if(accuracy > 10000) {
+    if(accuracy > 10000)
       accuracy = 10000;
-    }
 
     trimmed_accuracy = accuracy / 100;
     challenge.current_accuracy = trimmed_accuracy;
@@ -1173,9 +1125,8 @@ fail_challenge(challenge) {
 
 track_percent_accuracy_shots_fired(challenge) {
   foreach(player in level.players) {
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       continue;
-    }
     player thread track_percent_accuracy_shots_fired_internal(challenge);
   }
 }
@@ -1368,9 +1319,10 @@ hide_barrier_hive_intel() {
 }
 
 get_challenge_ring_location(hive_name) {
-  if(isDefined(level.challenge_ring_location_func)) {
-    return [[level.challenge_ring_location_func]](hive_name);
-  }
+  if(isDefined(level.challenge_ring_location_func))
+    return [
+      [level.challenge_ring_location_func]
+    ](hive_name);
 
   return undefined;
 }
@@ -1382,9 +1334,8 @@ create_challenge_waypoints(item) {
   wayPoint_ALPHA = 0.75;
   wayPoint_POS = item.origin;
 
-  if(level.script == "mp_alien_armory") {
+  if(level.script == "mp_alien_armory")
     wayPoint_ALPHA = 0;
-  }
 
   waypoint_icon = maps\mp\alien\_hud::make_wayPoint(wayPoint_SHADER, wayPoint_WIDTH, wayPoint_HEIGHT, wayPoint_ALPHA, wayPoint_POS);
 
@@ -1443,9 +1394,8 @@ get_challenge_weapons(current_area, current_challenge) {
           waypoints[waypoints.size] = waypoint;
         }
       } else {
-        if(challenge_weapon_class != WeaponClass) {
+        if(challenge_weapon_class != WeaponClass)
           continue;
-        }
         possible_weapons[possible_weapons.size] = base_weapon;
 
         waypoint = create_challenge_waypoints(item);

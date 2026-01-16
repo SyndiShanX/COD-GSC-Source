@@ -24,34 +24,34 @@
 function autoexec init() {
   initzmislandbehaviorsandasm();
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = &island_closest_player;
+  level.closest_player_override = & island_closest_player;
   level thread update_closest_player();
   level.pathdist_type = 2;
-  zm_utility::register_custom_spawner_entry("quick_riser_location", &function_50565360);
-  spawner::add_archetype_spawn_function("zombie", &function_1d7e9058);
+  zm_utility::register_custom_spawner_entry("quick_riser_location", & function_50565360);
+  spawner::add_archetype_spawn_function("zombie", & function_1d7e9058);
 }
 
 function private initzmislandbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmIslandAttackableObjectService", &zmislandattackableobjectservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmIslandAttackableObjectService", & zmislandattackableobjectservice);
 }
 
 function private function_1d7e9058() {
   self ai::set_behavior_attribute("use_attackable", 1);
-  self.cant_move_cb = &island_cant_move_cb;
+  self.cant_move_cb = & island_cant_move_cb;
 }
 
 function private island_cant_move_cb() {
-  if(isDefined(self.attackable)) {
-    if(isDefined(self.attackable.is_active) && self.attackable.is_active) {
+  if(isdefined(self.attackable)) {
+    if(isdefined(self.attackable.is_active) && self.attackable.is_active) {
       self pushactors(0);
       self.enablepushtime = gettime() + 1000;
       return;
     }
   }
   a_ai = getaiteamarray(level.zombie_team);
-  var_125a7575 = self array::filter(a_ai, 0, &function_b3de8aa4, 32);
+  var_125a7575 = self array::filter(a_ai, 0, & function_b3de8aa4, 32);
   foreach(ai in var_125a7575) {
-    if(isDefined(ai.attackable) && (isDefined(ai.attackable.is_active) && ai.attackable.is_active) && (isDefined(ai.is_at_attackable) && ai.is_at_attackable)) {
+    if(isdefined(ai.attackable) && (isdefined(ai.attackable.is_active) && ai.attackable.is_active) && (isdefined(ai.is_at_attackable) && ai.is_at_attackable)) {
       self pushactors(0);
       self.enablepushtime = gettime() + 1000;
       return;
@@ -65,7 +65,7 @@ function private function_b3de8aa4(ent, radius) {
 }
 
 function private zmislandattackableobjectservice(entity) {
-  if(isDefined(entity.var_7d79a6) && entity.var_7d79a6) {
+  if(isdefined(entity.var_7d79a6) && entity.var_7d79a6) {
     entity.attackable = undefined;
     return false;
   }
@@ -82,13 +82,13 @@ function function_2d4f3007(player) {
   var_8ea2cdb6 = "zone_bunker_interior_elevator";
   str_player_zone = "";
   var_334f2464 = "";
-  if(isDefined(player.var_90f735f8) && player.var_90f735f8) {
+  if(isdefined(player.var_90f735f8) && player.var_90f735f8) {
     return false;
   }
-  if(isDefined(self.var_6eb9188d) && self.var_6eb9188d) {
+  if(isdefined(self.var_6eb9188d) && self.var_6eb9188d) {
     return true;
   }
-  if(isDefined(self.zone_name)) {
+  if(isdefined(self.zone_name)) {
     switch (self.zone_name) {
       case "zone_spider_boss": {
         if(!level flag::get("spider_queen_dead")) {
@@ -118,14 +118,14 @@ function function_2d4f3007(player) {
         break;
       }
       case "zone_ruins_underground": {
-        if(isDefined(level.var_a5db31a9) && level.var_a5db31a9 || (isDefined(self.var_2f846873) && self.var_2f846873)) {
+        if(isdefined(level.var_a5db31a9) && level.var_a5db31a9 || (isdefined(self.var_2f846873) && self.var_2f846873)) {
           var_334f2464 = var_1ac852d;
         }
         break;
       }
     }
   }
-  if(isDefined(player.zone_name)) {
+  if(isdefined(player.zone_name)) {
     switch (player.zone_name) {
       case "zone_spider_boss": {
         if(!level flag::get("spider_queen_dead")) {
@@ -162,7 +162,7 @@ function function_2d4f3007(player) {
         break;
       }
       case "zone_ruins_underground": {
-        if(isDefined(level.var_a5db31a9) && level.var_a5db31a9) {
+        if(isdefined(level.var_a5db31a9) && level.var_a5db31a9) {
           str_player_zone = var_1ac852d;
         }
         break;
@@ -176,7 +176,7 @@ function function_2d4f3007(player) {
 }
 
 function private function_f8e95ea2(players) {
-  if(isDefined(self.last_closest_player) && (isDefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
+  if(isdefined(self.last_closest_player) && (isdefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
     return;
   }
   self.need_closest_player = 1;
@@ -196,7 +196,7 @@ function private island_closest_player(origin, players) {
   if(players.size == 0) {
     return undefined;
   }
-  if(isDefined(self.zombie_poi)) {
+  if(isdefined(self.zombie_poi)) {
     return undefined;
   }
   if(players.size == 1) {
@@ -206,20 +206,20 @@ function private island_closest_player(origin, players) {
     }
     return undefined;
   }
-  if(!isDefined(self.last_closest_player)) {
+  if(!isdefined(self.last_closest_player)) {
     self.last_closest_player = players[0];
   }
-  if(isDefined(self.v_zombie_custom_goal_pos) || isDefined(self.attackable_slot)) {
+  if(isdefined(self.v_zombie_custom_goal_pos) || isdefined(self.attackable_slot)) {
     return self.last_closest_player;
   }
-  if(!isDefined(self.need_closest_player)) {
+  if(!isdefined(self.need_closest_player)) {
     self.need_closest_player = 1;
   }
-  if(isDefined(level.last_closest_time) && level.last_closest_time >= level.time) {
+  if(isdefined(level.last_closest_time) && level.last_closest_time >= level.time) {
     self function_f8e95ea2(players);
     return self.last_closest_player;
   }
-  if(isDefined(self.need_closest_player) && self.need_closest_player) {
+  if(isdefined(self.need_closest_player) && self.need_closest_player) {
     level.last_closest_time = level.time;
     self.need_closest_player = 0;
     closest = players[0];
@@ -227,16 +227,16 @@ function private island_closest_player(origin, players) {
     if(self function_2d4f3007(players[0])) {
       closest_dist = self zm_utility::approximate_path_dist(closest);
     }
-    if(!isDefined(closest_dist)) {
+    if(!isdefined(closest_dist)) {
       closest = undefined;
     }
-    for(index = 1; index < players.size; index++) {
+    for (index = 1; index < players.size; index++) {
       dist = undefined;
       if(self function_2d4f3007(players[index])) {
         dist = self zm_utility::approximate_path_dist(players[index]);
       }
-      if(isDefined(dist)) {
-        if(isDefined(closest_dist)) {
+      if(isdefined(dist)) {
+        if(isdefined(closest_dist)) {
           if(dist < closest_dist) {
             closest = players[index];
             closest_dist = dist;
@@ -249,7 +249,7 @@ function private island_closest_player(origin, players) {
     }
     self.last_closest_player = closest;
   }
-  if(players.size > 1 && isDefined(closest)) {
+  if(players.size > 1 && isdefined(closest)) {
     self zm_utility::approximate_path_dist(closest);
   }
   self function_f8e95ea2(players);
@@ -258,18 +258,18 @@ function private island_closest_player(origin, players) {
 
 function private update_closest_player() {
   level waittill("start_of_round");
-  while(true) {
+  while (true) {
     reset_closest_player = 1;
     zombies = zombie_utility::get_round_enemy_array();
     foreach(zombie in zombies) {
-      if(isDefined(zombie.need_closest_player) && zombie.need_closest_player) {
+      if(isdefined(zombie.need_closest_player) && zombie.need_closest_player) {
         reset_closest_player = 0;
         break;
       }
     }
     if(reset_closest_player) {
       foreach(zombie in zombies) {
-        if(isDefined(zombie.need_closest_player)) {
+        if(isdefined(zombie.need_closest_player)) {
           zombie.need_closest_player = 1;
         }
       }
@@ -287,7 +287,7 @@ function function_50565360(s_spot) {
   mdl_anchor moveto(s_spot.origin, 0.05);
   mdl_anchor waittill("movedone");
   var_ac82e424 = zombie_utility::get_desired_origin();
-  if(isDefined(var_ac82e424)) {
+  if(isdefined(var_ac82e424)) {
     var_585cefca = vectortoangles(var_ac82e424 - self.origin);
     mdl_anchor rotateto((0, var_585cefca[1], 0), 0.05);
     mdl_anchor waittill("rotatedone");
@@ -297,7 +297,7 @@ function function_50565360(s_spot) {
   self notify("risen", s_spot.script_string);
   self.in_the_ground = 0;
   mdl_anchor waittill("scene_done");
-  if(isDefined(mdl_anchor)) {
+  if(isdefined(mdl_anchor)) {
     mdl_anchor delete();
   }
 }
@@ -306,10 +306,10 @@ function function_cd5d6101() {
   self endon("death");
   self ghost();
   wait(0.4);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self show();
     util::wait_network_frame();
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       self.create_eyes = 1;
     }
   }

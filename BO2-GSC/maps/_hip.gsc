@@ -47,9 +47,8 @@ init_dropoffset() {
 setanims() {
   positions = [];
 
-  for(i = 0; i <= 5; i++) {
-    positions[i] = spawnStruct();
-  }
+  for(i = 0; i <= 5; i++)
+    positions[i] = spawnstruct();
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;
@@ -111,7 +110,7 @@ unload_groups() {
 
 set_attached_models() {
   array = [];
-  array["rope_test_ri"] = spawnStruct();
+  array["rope_test_ri"] = spawnstruct();
   array["rope_test_ri"].model = "rope_test_ri";
   array["rope_test_ri"].tag = "TAG_FastRope_RI";
   array["rope_test_ri"].idleanim = % o_mi8_hip_rope_idle_ri;
@@ -127,9 +126,8 @@ setanims_land() {
   positions = [];
   positions = [];
 
-  for(i = 0; i <= 5; i++) {
-    positions[i] = spawnStruct();
-  }
+  for(i = 0; i <= 5; i++)
+    positions[i] = spawnstruct();
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;

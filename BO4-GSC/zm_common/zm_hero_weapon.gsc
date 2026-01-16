@@ -26,10 +26,11 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_hero_weapon;
 
 autoexec __init__system__() {
-  system::register(#"zm_hero_weapons", &__init__, undefined, # "gadget_hero_weapon");
+  system::register(#"zm_hero_weapons", &__init__, undefined, #"gadget_hero_weapon");
 }
 
 __init__() {
@@ -60,7 +61,7 @@ __init__() {
   level thread function_281b4073();
   level.var_124446e = &function_124446e;
 
-  level.var_ff96c5e4 = 0;
+    level.var_ff96c5e4 = 0;
   zm_armor::register(#"hero_weapon_armor", 0);
 }
 
@@ -102,14 +103,14 @@ function_124446e(weapon_name) {
   }
 }
 
-function function_76505465(slot, enabled) {
-  if(isDefined(level.var_697a556f) && level.var_697a556f) {
-    self function_19ed70ca(slot, 1);
-    return;
-  }
+  function function_76505465(slot, enabled) {
+    if(isDefined(level.var_697a556f) && level.var_697a556f) {
+      self function_19ed70ca(slot, 1);
+      return;
+    }
 
-  self function_19ed70ca(slot, enabled);
-}
+    self function_19ed70ca(slot, enabled);
+  }
 
 function_416eaaa2(var_deaf10fb, var_ef230d21) {
   if(self gadgetisactive(level.var_a53a05b5)) {
@@ -347,12 +348,12 @@ function_23978edd() {
   }
 
   if(zm_utility::get_story() == 1) {
-    self.var_fd05e363 = level.hero_weapon[# "gravityspikes"][self.var_72d6f15d];
+    self.var_fd05e363 = level.hero_weapon[#"gravityspikes"][self.var_72d6f15d];
     self.var_b708af7b = "gravityspikes";
     return;
   }
 
-  self.var_fd05e363 = level.hero_weapon[# "chakram"][self.var_72d6f15d];
+  self.var_fd05e363 = level.hero_weapon[#"chakram"][self.var_72d6f15d];
   self.var_b708af7b = "chakram";
 }
 
@@ -407,7 +408,7 @@ hero_give_weapon(weapon, enabled, var_b94ec3d9 = 0) {
 }
 
 function_1297aefe(weapon) {
-  var_328c1d6e = array(#"hero_chakram_lv3", # "hero_hammer_lv3", # "hero_scepter_lv3", # "hero_sword_pistol_lv3", # "hero_flamethrower_t8_lv3", # "hero_gravityspikes_t8_lv3", # "hero_katana_t8_lv3", # "hero_minigun_t8_lv3");
+  var_328c1d6e = array(#"hero_chakram_lv3", #"hero_hammer_lv3", #"hero_scepter_lv3", #"hero_sword_pistol_lv3", #"hero_flamethrower_t8_lv3", #"hero_gravityspikes_t8_lv3", #"hero_katana_t8_lv3", #"hero_minigun_t8_lv3");
   i = 0;
   var_8e233987 = [];
 
@@ -455,11 +456,11 @@ function_1297aefe(weapon) {
 
 hero_weapon_on(n_slot, w_hero) {
   self notify(#"hero_weapon_power_on");
-  self addweaponstat(w_hero, # "used", 1);
+  self addweaponstat(w_hero, #"used", 1);
   level.var_ff96c5e4 = 1;
   self.var_479965f7 = 1;
   level notify(#"hero_weapon_activated", {
-    #e_player: self,
+    #e_player: self, 
     #weapon: w_hero
   });
   self notify(#"hero_weapon_activated");
@@ -471,7 +472,7 @@ hero_weapon_on(n_slot, w_hero) {
 }
 
 hero_weapon_off(n_slot, w_hero) {
-  self endon(#"death", # "hero_weapon_power_on");
+  self endon(#"death", #"hero_weapon_power_on");
   self.var_479965f7 = undefined;
   wait 2;
   self notify(#"hero_weapon_power_off");
@@ -493,7 +494,7 @@ hero_weapon_ready(n_slot, w_hero) {
 
 function_9a100883(weapon_level, enabled) {
   self notify(#"hash_6b01968912321cc5");
-  self endon(#"hash_6b01968912321cc5", # "disconnect");
+  self endon(#"hash_6b01968912321cc5", #"disconnect");
   self.var_39b77a76 = 1;
   self.var_c9279111 = 0;
   self.var_821c9bf3 = 0;
@@ -503,7 +504,7 @@ function_9a100883(weapon_level, enabled) {
     wait 1;
   }
 
-  self waittilltimeout(2, # "weapon_change_complete");
+  self waittilltimeout(2, #"weapon_change_complete");
   self playSound("zmb_weapon_upgrade_to_lvl_" + weapon_level + 1);
   self function_45b7d6c1(weapon_level);
   self hero_give_weapon(level.hero_weapon[self.var_b708af7b][weapon_level], enabled, 1);
@@ -511,20 +512,21 @@ function_9a100883(weapon_level, enabled) {
 
   self zm_challenges::debug_print("<dev string:xfe>");
 
-  self zm_stats::increment_challenge_stat(#"special_weapon_levels");
+    self zm_stats::increment_challenge_stat(#"special_weapon_levels");
   self.var_39b77a76 = undefined;
 }
 
 function_6bba3829(e_player, ai_enemy) {
+
   var_ea65bd9c = getdvarstring(#"hash_16e05c0b86ebb83d", "<dev string:x12e>");
 
   if(var_ea65bd9c == "<dev string:x138>") {
     return;
   }
 
-  if(isDefined(e_player.var_80612bea) && e_player.var_80612bea) {
-    return;
-  }
+    if(isDefined(e_player.var_80612bea) && e_player.var_80612bea) {
+      return;
+    }
 
   if(isDefined(ai_enemy) && isDefined(ai_enemy.var_ab8f2b90)) {
     var_ef230d21 = ai_enemy.var_ab8f2b90;
@@ -584,15 +586,16 @@ function_6bba3829(e_player, ai_enemy) {
 }
 
 function_3fe4a02e(e_player, n_points, str_event) {
+
   var_ea65bd9c = getdvarstring(#"hash_16e05c0b86ebb83d", "<dev string:x12e>");
 
   if(var_ea65bd9c == "<dev string:x138>") {
     return;
   }
 
-  if(!isDefined(e_player)) {
-    return;
-  }
+    if(!isDefined(e_player)) {
+      return;
+    }
 
   if(isDefined(e_player.var_80612bea) && e_player.var_80612bea || isentity(n_points)) {
     return;
@@ -600,10 +603,10 @@ function_3fe4a02e(e_player, n_points, str_event) {
 
   if(isDefined(str_event) && !(isDefined(level.var_f03084a6) && level.var_f03084a6)) {
     switch (str_event) {
-      case # "carpenter_powerup":
-      case # "nuke_powerup":
-      case # "bonus_points_powerup_shared":
-      case # "bonus_points_powerup":
+      case #"carpenter_powerup":
+      case #"nuke_powerup":
+      case #"bonus_points_powerup_shared":
+      case #"bonus_points_powerup":
         return;
     }
   }
@@ -716,7 +719,7 @@ function_5ccf482(str_name, var_a986aaed, var_f2bbbd56, var_503e1e6) {
 
 function_60878f7f(w_weapon) {
   self notify(#"hash_5ef1cf6d910b343b");
-  self endon(#"hash_5ef1cf6d910b343b", # "hero_weapon_take", # "disconnect", # "weapon_change");
+  self endon(#"hash_5ef1cf6d910b343b", #"hero_weapon_take", #"disconnect", #"weapon_change");
   var_a01a1f92 = w_weapon.var_e4109b63;
   var_bcf2cdde = w_weapon.var_fb22040b;
 
@@ -738,7 +741,7 @@ function_60878f7f(w_weapon) {
 }
 
 function_ac9f4b22() {
-  self endon(#"hero_weapon_take", # "disconnect");
+  self endon(#"hero_weapon_take", #"disconnect");
 
   while(true) {
     s_notify = self waittill(#"weapon_change");
@@ -786,7 +789,7 @@ function_ac9f4b22() {
     }
 
     self notify(#"hero_weapon_change", {
-      #weapon: w_current,
+      #weapon: w_current, 
       #last_weapon: w_previous
     });
   }
@@ -796,7 +799,7 @@ private function_a1004d47() {
   self endon(#"death");
   self.var_1f23fe79 = 1;
   self function_29e4516d();
-  self waittilltimeout(2, # "weapon_change_complete");
+  self waittilltimeout(2, #"weapon_change_complete");
   self notify(#"hash_3eaa776332738598");
   self.var_1f23fe79 = undefined;
 }
@@ -837,7 +840,7 @@ function_c2dea172(player, w_hero) {
     return;
   }
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     self zm_cleanup::function_23621259();
     self.var_2f68be48 = 1;
     self dodamage(self.health + 100, player.origin, player, player, "torso_lower", "MOD_IMPACT", 0, w_hero);
@@ -861,14 +864,16 @@ show_hint(w_hero, str_hint, var_bdc24d5f = 0) {
   }
 
   if(!(isDefined(self.var_2a2832c6[w_hero.name]) && self.var_2a2832c6[w_hero.name])) {
+
     if(isDefined(self.hintelem)) {
       self.hintelem settext("<dev string:x143>");
       self.hintelem destroy();
     }
 
-    if(var_bdc24d5f) {
-      n_hint_time = 5;
-    } else {
+      if(var_bdc24d5f) {
+        n_hint_time = 5;
+      }
+    else {
       n_hint_time = 3;
     }
 

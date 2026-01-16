@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_give_reward;
 
 autoexec __init__system__() {
@@ -21,7 +22,7 @@ __init__() {
     return;
   }
 
-  level.var_5335b66f = associativearray(#"zm_zodt8_default", 1, # "zm_towers_default", 2, # "zm_office_default", 3, # "zm_escape_default", 4, # "zm_mansion_default", 5, # "zm_red_default", 6, # "zm_zodt8_variant_1", 7, # "zm_white_default", 8, # "zm_orange_default", 9);
+  level.var_5335b66f = associativearray(#"zm_zodt8_default", 1, #"zm_towers_default", 2, #"zm_office_default", 3, #"zm_escape_default", 4, #"zm_mansion_default", 5, #"zm_red_default", 6, #"zm_zodt8_variant_1", 7, #"zm_white_default", 8, #"zm_orange_default", 9);
   zm_trial::register_challenge(#"give_reward", &on_begin, &on_end);
   level.var_ee7ca64 = [];
 }
@@ -30,7 +31,7 @@ private on_begin(var_c2964c77, description, image, challenge_stat, var_191009a6,
   self.var_c2964c77 = var_c2964c77;
   self.challenge_stat = challenge_stat;
   self.var_191009a6 = var_191009a6;
-  self.trial_completed = trial_completed === # "1";
+  self.trial_completed = trial_completed === #"1";
 }
 
 private on_end(round_reset) {

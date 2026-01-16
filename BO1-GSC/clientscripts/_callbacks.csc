@@ -13,11 +13,13 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnStruct();
+    level._systemStates[system] = spawnstruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [[level._systemStates[system].callback]](clientNum, newState);
+    [
+      [level._systemStates[system].callback]
+    ](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
@@ -84,12 +86,10 @@ localclientdisconnect(clientNum) {
 playerspawned(localClientNum) {
   self endon("entityshutdown");
   self thread clientscripts\_flamethrower_plight::play_pilot_light_fx(localClientNum);
-  if(isDefined(level._faceAnimCBFunc)) {
+  if(isDefined(level._faceAnimCBFunc))
     self thread[[level._faceAnimCBFunc]](localClientNum);
-  }
-  if(isDefined(level._playerCBFunc)) {
+  if(isDefined(level._playerCBFunc))
     self thread[[level._playerCBFunc]](localClientNum);
-  }
   level thread localclientspawned_callback(localClientNum);
 }
 
@@ -198,9 +198,8 @@ entityspawned(localClientNum) {
     }
   }
   if(self.type == "actor") {
-    if(isDefined(level._faceAnimCBFunc)) {
+    if(isDefined(level._faceAnimCBFunc))
       self thread[[level._faceAnimCBFunc]](localClientNum);
-    }
     if(localClientNum == 0) {
       self._gib_def = get_gib_def();
       if(self._gib_def == -1) {
@@ -214,7 +213,9 @@ entityspawned(localClientNum) {
 
 entityshutdown_callback(localClientNum, entity) {
   if(isDefined(level._entityShutDownCBFunc)) {
-    [[level._entityShutDownCBFunc]](localClientNum, entity);
+    [
+      [level._entityShutDownCBFunc]
+    ](localClientNum, entity);
   }
 }
 
@@ -291,21 +292,17 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
 }
 
 scriptmodelspawned(local_client_num, ent, destructable_index) {
-  if(destructable_index == 0) {
+  if(destructable_index == 0)
     return;
-  }
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     return;
-  }
   fixed = false;
   for(i = 0; i < level.createFXent.size; i++) {
-    if(level.createFXent[i].v["type"] != "exploder") {
+    if(level.createFXent[i].v["type"] != "exploder")
       continue;
-    }
     exploder = level.createFXent[i];
-    if(!isDefined(exploder.needs_fixup)) {
+    if(!isDefined(exploder.needs_fixup))
       continue;
-    }
     if(exploder.needs_fixup == destructable_index) {
       exploder.v["angles"] = VectorToAngles(ent.origin - exploder.v["origin"]);
       exploder clientscripts\_fx::set_forward_and_up_vectors();
@@ -316,9 +313,8 @@ scriptmodelspawned(local_client_num, ent, destructable_index) {
 }
 
 callback_activate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids)) {
+  if(!isDefined(level._exploder_ids))
     return;
-  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -336,9 +332,8 @@ callback_activate_exploder(exploder_id) {
 }
 
 callback_deactivate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids)) {
+  if(!isDefined(level._exploder_ids))
     return;
-  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -361,13 +356,12 @@ level_notify(notify_name, param1, param2) {
 
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playSound(client_num, "fly_dog_step_run_default");
+    entity playsound(client_num, "fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound") {
+  if(prefix != "sound")
     return false;
-  }
   alias = "aml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
 }
@@ -376,9 +370,9 @@ dog_sound_print(message) {}
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
   if(isDefined(position)) {
-    return self playSound(localClientNum, sound, position);
+    return self playsound(localClientNum, sound, position);
   }
-  return self playSound(localClientNum, sound);
+  return self playsound(localClientNum, sound);
 }
 
 client_flag_callback(localClientNum, flag, set, newEnt) {

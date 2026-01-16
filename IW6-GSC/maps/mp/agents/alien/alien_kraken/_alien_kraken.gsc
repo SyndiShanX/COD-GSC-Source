@@ -6,27 +6,24 @@
 precacheanims() {}
 
 getdefinitionvalue(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 2;
-  }
 
   var_2 = tablelookup("mp/alien/alien_kraken_definition.csv", 0, var_0, var_1);
 
   if(!isstring(var_0)) {
-    if(!issubstr(var_2, ".")) {
+    if(!issubstr(var_2, "."))
       var_2 = int(var_2);
-    } else {
+    else
       var_2 = float(var_2);
-    }
   }
 
   return var_2;
 }
 
 getarraydefinitionvalue(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 2;
-  }
 
   var_2 = strtok(tablelookup("mp/alien/alien_kraken_definition.csv", 0, var_0, var_1), " ,");
 
@@ -77,11 +74,10 @@ loadkrakenattributes() {
   level.alien_types[var_0] = spawnStruct();
   level.alien_types[var_0].attributes = [];
 
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.kraken_attribute_table = "mp/alien/alien_kraken_definition_solo.csv";
-  } else {
+  else
     level.kraken_attribute_table = "mp/alien/alien_kraken_definition.csv";
-  }
 
   level.alien_types[var_0].attributes["emissive"] = getdefinitionvalue(21.0);
   level.alien_types[var_0].attributes["max_emissive"] = getdefinitionvalue(22.0);
@@ -182,13 +178,11 @@ loadkrakenvariablenumberofstringentries(var_0) {
 
     var_6 = getent(var_5, "targetname");
 
-    if(!isDefined(var_6)) {
+    if(!isDefined(var_6))
       var_6 = common_scripts\utility::getstruct(var_5, "targetname");
-    }
 
-    if(isDefined(var_6)) {
+    if(isDefined(var_6))
       var_1[var_1.size] = var_6;
-    }
 
     var_2++;
   }
@@ -348,11 +342,10 @@ thin_alien_herd() {
   foreach(var_3 in var_0) {
     if(isDefined(var_3) && var_3 != level.kraken) {
       if(isalive(var_3) || var_3.model == "alien_spore") {
-        if(var_3.team == "axis" && isDefined(var_3.alien_type) && var_3.model != "alien_spore") {
+        if(var_3.team == "axis" && isDefined(var_3.alien_type) && var_3.model != "alien_spore")
           var_3 thread waittil_goal_and_suicide(var_1[randomint(var_1.size)]);
-        } else if(var_3.model == "alien_spore") {
+        else if(var_3.model == "alien_spore")
           var_3 notify("death");
-        }
       }
     }
 
@@ -375,9 +368,8 @@ runphases() {
     var_0 = self.phases[self.current_phase];
     self.current_phase++;
 
-    if(var_0["in_final_stage"] || self.current_stage_num != 4) {
+    if(var_0["in_final_stage"] || self.current_stage_num != 4)
       runphase(var_0["name"], var_0["func"], var_0["melee_allowed"], var_0["run_cycle"], var_0["min_health_percentage"]);
-    }
   }
 }
 
@@ -424,9 +416,8 @@ posturemonitor() {
       self.melee_type = "posture";
       performmeleeattack(self.enemy);
 
-      while(self.posturing) {
+      while(self.posturing)
         wait 0.05;
-      }
 
       var_0 = gettime() + randomfloatrange(level.alien_types["kraken"].attributes["posture_min_interval"], level.alien_types["kraken"].attributes["posture_max_interval"]) * 1000.0;
     }
@@ -444,9 +435,8 @@ masssmashattacktimer() {
     var_2 = gettime() * 0.001;
     var_3 = level.alien_types[self.alien_type].attributes[self.stage]["mass_smash_times"][var_1] + var_0 - var_2;
 
-    if(var_3 > 0) {
+    if(var_3 > 0)
       wait(var_3);
-    }
 
     masssmashattack();
   }
@@ -485,29 +475,25 @@ runphase(var_0, var_1, var_2, var_3, var_4) {
   self.smash_allowed = var_2;
   self.min_health_percentage = level.alien_types[self.alien_type].attributes[self.stage][var_4];
 
-  if(var_3) {
+  if(var_3)
     start_cycle();
-  }
 
   [[var_1]]();
 
-  if(var_3) {
+  if(var_3)
     maps\mp\alien\_spawn_director::end_cycle();
-  }
 }
 
 runemergephase() {
-  if(self.stage == "stage_1") {
+  if(self.stage == "stage_1")
     thread run_intro_emissive();
-  } else {
+  else
     maps\mp\alien\_utility::set_alien_emissive_default(2.0);
-  }
 
-  if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
+  if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port")
     common_scripts\utility::exploder(102);
-  } else {
+  else
     common_scripts\utility::exploder(106);
-  }
 
   self.melee_type = "emerge";
   performmeleeattack(self.enemy);
@@ -529,9 +515,8 @@ runspawnphase() {
   maps\mp\alien\_utility::set_alien_emissive_default(2.0);
   thread posturemonitor();
 
-  if(level.alien_types[self.alien_type].attributes[self.stage]["mass_smash_times"].size > 0) {
+  if(level.alien_types[self.alien_type].attributes[self.stage]["mass_smash_times"].size > 0)
     thread masssmashattacktimer();
-  }
 
   thread smashattackmonitor();
   thread timedsmashattackmonitor();
@@ -557,9 +542,8 @@ runspawnmonitor() {
     var_3 = strtok(level.alien_types[self.alien_type].attributes[self.stage]["spawn_times"][var_1], "-");
     var_4 = int(var_3[0]) + var_0 - var_2;
 
-    if(var_4 > 0) {
+    if(var_4 > 0)
       wait(var_4);
-    }
 
     for(;;) {
       var_5 = findavailabletentacle();
@@ -593,9 +577,8 @@ waitforidletentacles() {
 }
 
 waitforposturetofinish() {
-  while(self.posturing) {
+  while(self.posturing)
     wait 0.05;
-  }
 }
 
 waitforextendedtentacles() {
@@ -622,23 +605,20 @@ waitforextendedtentacles() {
 findavailabletentacle() {
   var_0 = randomint(self.tentacles.size);
 
-  while(self.masssmashattackavailable) {
+  while(self.masssmashattackavailable)
     wait 0.05;
-  }
 
   for(var_1 = 0; var_1 < self.tentacles.size; var_1++) {
     var_2 = level.alien_types["kraken"].attributes["tentacle_names"][var_0];
     var_3 = istentaclespawning(var_2);
 
-    if(!istentaclespawning(var_2) && !istentaclesmashing(var_2)) {
+    if(!istentaclespawning(var_2) && !istentaclesmashing(var_2))
       return self.tentacles[var_2];
-    }
 
     var_0++;
 
-    if(var_0 >= self.tentacles.size) {
+    if(var_0 >= self.tentacles.size)
       var_0 = 0;
-    }
   }
 
   return undefined;
@@ -674,11 +654,10 @@ setupheatedsmashvolume() {
 runsubmergephase() {
   maps\mp\alien\_utility::set_alien_emissive_default(2.0);
 
-  if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
+  if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port")
     common_scripts\utility::exploder(103);
-  } else {
+  else
     common_scripts\utility::exploder(107);
-  }
 
   self.melee_type = "submerge";
   performmeleeattack(self.enemy);
@@ -688,9 +667,8 @@ runsubmergephase() {
 
 do_kraken_tilt() {
   foreach(var_1 in level.players) {
-    if(isalive(var_1)) {
+    if(isalive(var_1))
       earthquake(0.75, 3, var_1.origin, 100);
-    }
   }
 
   wait 3;
@@ -706,9 +684,8 @@ attemptsmashattack(var_0, var_1) {
   self.smash_tentacle_name = undefined;
   self.smash_trigger = undefined;
 
-  if(self.phase == "heat") {
+  if(self.phase == "heat")
     self.tentacles[var_1] thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::heat();
-  }
 }
 
 timedsmashattackmonitor() {
@@ -718,9 +695,8 @@ timedsmashattackmonitor() {
 
   for(;;) {
     if(canperformmelee() && gettime() - var_0 > self.last_smash_attack_time) {
-      if(attemptrandomsmashattack()) {
+      if(attemptrandomsmashattack())
         var_0 = randomfloatrange(level.alien_types["kraken"].attributes[self.stage]["random_smash_min_interval"], level.alien_types["kraken"].attributes[self.stage]["random_smash_max_interval"]) * 1000.0;
-      }
     }
 
     wait 0.05;
@@ -730,9 +706,8 @@ timedsmashattackmonitor() {
 attemptrandomsmashattack() {
   var_0 = findavailabletentacle();
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
   attemptsmashattack(self.current_smash_triggers[var_0.tentacle_name], var_0.tentacle_name);
   return 1;
@@ -818,11 +793,10 @@ monitortargetintrigger(var_0, var_1) {
 
     var_8 = var_0 getistouchingentities(level.players);
 
-    if(var_8.size != 0) {
+    if(var_8.size != 0)
       var_4 = var_7;
-    } else {
+    else
       var_9 = 1;
-    }
 
     if(var_4 + var_3 < var_7) {
       break;
@@ -833,9 +807,8 @@ monitortargetintrigger(var_0, var_1) {
 
   var_0.has_occupant = undefined;
 
-  if(var_6) {
+  if(var_6)
     self notify("smash_trigger_hit", var_0, var_1);
-  }
 }
 
 canperformmelee() {
@@ -846,9 +819,8 @@ performmeleeattack(var_0) {
   if(!isDefined(var_0)) {
     var_0 = findanenemy();
 
-    if(!isDefined(var_0)) {
+    if(!isDefined(var_0))
       return;
-    }
   }
 
   self scragentsetgoalpos(self.origin);
@@ -858,14 +830,12 @@ performmeleeattack(var_0) {
 }
 
 findanenemy() {
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return self.enemy;
-  }
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       return var_1;
-    }
   }
 
   return undefined;
@@ -874,39 +844,33 @@ findanenemy() {
 alienkrakenkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 
 alienkrakenprocesshitloc(var_0, var_1) {
-  if(var_1 != "soft") {
+  if(var_1 != "soft")
     return "armor";
-  }
 
   return var_1;
 }
 
 bullethitarmor(var_0, var_1, var_2) {
-  if(isplayer(var_2)) {
+  if(isplayer(var_2))
     var_2 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitalienarmor");
-  }
 }
 
 alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!maps\mp\alien\_damage::is_alien_agent_damage_allowed(var_0, var_1, var_5, var_4)) {
+  if(!maps\mp\alien\_damage::is_alien_agent_damage_allowed(var_0, var_1, var_5, var_4))
     return 0;
-  }
 
-  if(var_4 == "MOD_TRIGGER_HURT") {
+  if(var_4 == "MOD_TRIGGER_HURT")
     return 0;
-  }
 
-  if(gethealthratio() < self.min_health_percentage) {
+  if(gethealthratio() < self.min_health_percentage)
     var_2 = 0;
-  }
 
   var_8 = alienkrakenprocesshitloc(var_6, var_8);
   var_10 = "hitalienarmor";
   var_11 = 1.0;
 
-  if(isDefined(self.damage_multiplier)) {
+  if(isDefined(self.damage_multiplier))
     var_11 = self.damage_multiplier;
-  }
 
   if(isDefined(self.kraken_heated) && self.kraken_heated) {
     if(maps\mp\alien\_utility::is_true(level.zap_multiplier_active)) {
@@ -929,31 +893,28 @@ alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   var_12 = var_5 == "iw6_alienminigun_mp" || var_5 == "iw6_alienminigun1_mp" || var_5 == "iw6_alienminigun2_mp" || var_5 == "iw6_alienminigun3_mp";
   var_13 = var_5 == "iw6_alienminigun4_mp";
 
-  if(var_12 || var_13) {
+  if(var_12 || var_13)
     var_2 = var_2 * 0.45;
-  }
 
   var_14 = var_5 == "iw6_alienmk32_mp" || var_5 == "iw6_alienmk321_mp" || var_5 == "iw6_alienmk322_mp" || var_5 == "iw6_alienmk323_mp" || var_5 == "iw6_alienmk324_mp";
 
-  if(var_14) {
+  if(var_14)
     var_2 = var_2 * 0.5;
-  }
 
   var_15 = var_5 == "alien_manned_minigun_turret_mp" || var_5 == "alien_manned_minigun_turret1_mp" || var_5 == "alien_manned_minigun_turret2_mp" || var_5 == "alien_manned_minigun_turret3_mp" || var_5 == "alien_manned_minigun_turret4_mp";
 
-  if(var_15) {
+  if(var_15)
     var_2 = var_2 * 0.5;
-  }
 
   var_16 = var_5 == "alien_manned_gl_turret_mp" || var_5 == "alien_manned_gl_turret1_mp" || var_5 == "alien_manned_gl_turret2_mp" || var_5 == "alien_manned_gl_turret3_mp" || var_5 == "alien_manned_gl_turret4_mp";
 
-  if(var_16) {
+  if(var_16)
     var_2 = var_2 * 0.5;
-  }
 
-  if(isDefined(level.custom_scale_alien_damage_func)) {
-    var_2 = [[level.custom_scale_alien_damage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
+  if(isDefined(level.custom_scale_alien_damage_func))
+    var_2 = [
+      [level.custom_scale_alien_damage_func]
+    ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
   if(var_5 == "alienthrowingknife_mp") {
     var_2 = 0;
@@ -970,16 +931,14 @@ alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   var_2 = int(var_2);
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isplayer(var_1.owner))
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    } else {
+    else
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    }
   }
 
-  if(var_2 <= 0) {
+  if(var_2 <= 0)
     return 0;
-  }
 
   return self[[maps\mp\agents\_agent_utility::agentfunc("on_damaged_finished")]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }

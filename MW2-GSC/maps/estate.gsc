@@ -8,7 +8,7 @@
 Level:Loose Ends (estate.bsp)
 Location: Georgian-Russian Border (45 miles into Russian territory)
 Campaign: Task Force 141
-Objectives:
+Objectives: 
 1. Locate and neutralize Vladimir Makarov.
 2. Recover the hard drive from Makarov's computer.
 3. Hold out until the extraction force arrives.
@@ -246,7 +246,7 @@ startAmbush() {
   node = getnode("ghost_ambush_start", "targetname");
   level.ghost forceTeleport(node.origin, node.angles);
 
-  redshirts = getEntArray("starterguy", "script_noteworthy");
+  redshirts = getentarray("starterguy", "script_noteworthy");
   nodes = getnodearray("friendly_ambush_start", "targetname");
 
   friendly_starts_avail = redshirts.size <= nodes.size;
@@ -284,7 +284,7 @@ startForestFight() {
   node = getnode("ghost_ambush_start", "targetname");
   level.ghost forceTeleport(node.origin, node.angles);
 
-  redshirts = getEntArray("starterguy", "script_noteworthy");
+  redshirts = getentarray("starterguy", "script_noteworthy");
   nodes = getnodearray("friendly_forestfight_start", "targetname");
   deathNodes = getnodearray("forestfight_friendlykill", "script_noteworthy");
 
@@ -629,14 +629,14 @@ startHeliTweak2() {
   /*
   heliName = "md500_rush_2";
   thread heli_tweak( heliName );
-  	
+	
   wait 4;
-  	
+	
   heliName = "md500_rush_1";
   thread heli_tweak( heliName );
-  	
+	
   wait 2;
-  	
+	
   heliName = "md500_rush_3";
   thread heli_tweak( heliName );
   */
@@ -669,14 +669,13 @@ startHeliTweakShadowBirdsEnd() {
 }
 
 startFakeRPGTweak() {
+
   wait 5;
 
   ambush_fake_rpg_barrage();
 }
 
-//*************** MISSION BEGINS*******************/
-
-/
+//*************** MISSION BEGINS*******************//
 
 intro() {
   wait 2;
@@ -719,15 +718,15 @@ objectives() {
   flag_wait("print_first_objective");
 
   objective_location_makarov = getent("objective_location_makarov", "targetname");
-  objective_add(1, "current", &"ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
+  objective_add(1, "current", & "ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
 
   //flag_wait( "futilejeeps_destroyed" );
   flag_wait("deploy_house_defense_jeeps");
 
-  objective_add(2, "current", &"ESTATE_OBJ_BREACH");
+  objective_add(2, "current", & "ESTATE_OBJ_BREACH");
   objective_current(2);
 
-  exteriorBreaches = getEntArray("breach_objective_exterior", "targetname");
+  exteriorBreaches = getentarray("breach_objective_exterior", "targetname");
   // grab the script_slow_breach index off the nearest breach and put it on the entity
   assign_script_breachgroup_to_ents(exteriorBreaches);
 
@@ -747,7 +746,7 @@ objectives() {
   objective_clearAdditionalPositions(2);
   wait(1);
 
-  interiorBreaches = getEntArray("breach_objective_interior", "targetname");
+  interiorBreaches = getentarray("breach_objective_interior", "targetname");
   assign_script_breachgroup_to_ents(interiorBreaches);
 
   level.interiorBreachesCompleted = 0;
@@ -782,7 +781,7 @@ objectives() {
   objective_delete(1);
 
   node = getstruct("ghost_talknode", "targetname");
-  objective_add(1, "current", &"ESTATE_OBJ_REGROUP", node.origin);
+  objective_add(1, "current", & "ESTATE_OBJ_REGROUP", node.origin);
 
   //flag_wait( "dsm_ready_to_use" );
   flag_wait("house_briefing_is_over");
@@ -790,15 +789,15 @@ objectives() {
   objective_state(1, "done");
 
   dsm_real = getent("dsm", "targetname");
-  objective_add(3, "current", &"ESTATE_OBJ_INTEL", dsm_real.origin);
+  objective_add(3, "current", & "ESTATE_OBJ_INTEL", dsm_real.origin);
 
   flag_wait("download_started");
 
   objective_state(3, "done");
 
-  objective_add(4, "current", &"ESTATE_OBJ_DOWNLOAD", dsm_real.origin);
+  objective_add(4, "current", & "ESTATE_OBJ_DOWNLOAD", dsm_real.origin);
 
-  Objective_SetPointerTextOverride(4, &"ESTATE_OBJ_POINTER_PROTECT");
+  Objective_SetPointerTextOverride(4, & "ESTATE_OBJ_POINTER_PROTECT");
 
   //iprintlnbold( "End of Currently Scripted Level" );
 
@@ -806,9 +805,9 @@ objectives() {
 
   objective_state(4, "done");
 
-  objective_add(5, "current", &"ESTATE_OBJ_RETRIEVE", dsm_real.origin);
+  objective_add(5, "current", & "ESTATE_OBJ_RETRIEVE", dsm_real.origin);
 
-  Objective_SetPointerTextOverride(5, &"ESTATE_OBJ_POINTER_RETRIEVE");
+  Objective_SetPointerTextOverride(5, & "ESTATE_OBJ_POINTER_RETRIEVE");
 
   flag_wait("dsm_recovered");
 
@@ -816,7 +815,7 @@ objectives() {
 
   objective_state(5, "done");
 
-  objective_add(6, "current", &"ESTATE_OBJ_LZ", marker.origin);
+  objective_add(6, "current", & "ESTATE_OBJ_LZ", marker.origin);
 
   flag_wait("made_it_to_lz");
 
@@ -854,7 +853,7 @@ objective_interior_breach_update(breachnum) {
   self delete();
 
   // now get all the existing breaches and recreate them
-  interiorBreaches = getEntArray("breach_objective_interior", "targetname");
+  interiorBreaches = getentarray("breach_objective_interior", "targetname");
   assign_script_breachgroup_to_ents(interiorBreaches);
 
   // clear the old positions
@@ -956,7 +955,7 @@ forest_mortar_playerkill() {
 
   //Check if autosave happened recently
 
-  if(isDefined(level.curAutoSave) && level.curAutoSave >= 3) {
+  if(isdefined(level.curAutoSave) && level.curAutoSave >= 3) {
     //give enough time to get back to safety if autosave happened and player ran back into danger zone
 
     wait 5;
@@ -1021,11 +1020,11 @@ first_smoke_screen() {
 
   flag_wait("smoke_screen_activated");
 
-  smoke_pots = getEntArray("smokepot1", "targetname");
+  smoke_pots = getentarray("smokepot1", "targetname");
 
   smoke_pots = array_randomize(smoke_pots);
 
-  while(1) {
+  while (1) {
     foreach(smoke_pot in smoke_pots) {
       wait 5;
       smoke_pot thread smokepot();
@@ -1131,8 +1130,8 @@ house_approach_dialogue() {
   /*
   level.scarecrow disable_ai_color();
   node1 = getnode( "scarecrow_breachhouse_start", "targetname" );
-  level.scarecrow setgoalnode( node1 );
-  	
+  level.scarecrow setgoalnode( node1 ); 
+	
   level.ozone disable_ai_color();
   node2 = getnode( "ozone_breachhouse_start", "targetname" );
   level.ozone setgoalnode( node2 );
@@ -1355,15 +1354,15 @@ house_briefing_scarecrow() {
     level.scarecrow waittillmatch("single anim", "camera");
 
     camera = spawn("script_model", (0, 0, 0));
-    camera setModel("electronics_camera_pointandshoot_animated");
+    camera setmodel("electronics_camera_pointandshoot_animated");
     camera linkto(level.scarecrow, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
     delaythread(10, ::flag_set, "photographs_done");
 
     /*
-    		
+		
     photosnap_notetracks = 15;
-    		
+		
     while( photosnap_notetracks > 0 )
     {
     	level.scarecrow waittillmatch( "single anim", "ps_scn_estate_photo_snap" );
@@ -1603,7 +1602,7 @@ defense_intro() {
     //Makarov's men are going to do whatever it takes to keep us from leaving with this intel. We need to protect the DSM until the transfer's done.
     radio_dialogue("est_gst_withintel");
 
-    //We got 60 seconds tops, over.
+    //We got 60 seconds tops, over. 
     //radio_dialogue( "est_snp1_60seconds" );
 
     //Use the weapons caches and set up your claymores if you've got any left. Defensive positions, let's go!
@@ -1640,7 +1639,7 @@ defense_intro() {
 defense_download_nag() {
   level endon("download_started");
 
-  while(!flag("download_started")) {
+  while (!flag("download_started")) {
     wait 10;
 
     //Roach - connect the DSM to Makarov's computer.
@@ -1658,7 +1657,7 @@ defense_download_nag() {
 ending_blur_cycler() {
   level endon("stop_blur_cycler");
 
-  while(1) {
+  while (1) {
     level.player endingBlurView(3.6, 2);
     level.player endingBlurView(1, 0.8);
     level.player endingBlurView(2, 1);
@@ -1714,7 +1713,7 @@ ending_eq_reset() {
 }
 
 ending_attackers() {
-  ending_attackers = getEntArray("ending_attacker", "targetname");
+  ending_attackers = getentarray("ending_attacker", "targetname");
   array_thread(ending_attackers, ::ending_attackers_spawn);
 
   //make sure all bad guys have the same settings when the player is locked into the ending sequence
@@ -1767,8 +1766,8 @@ ending_attackers_deathmonitor(damage, attacker, direction_vec, point, type, mode
 }
 
 ending_attackers_spawn() {
-  guy = self stalingradspawn();
-  if(isDefined(guy)) {
+  guy = self stalingradSpawn();
+  if(isdefined(guy)) {
     guy endon("death");
     //guy enable_cqbwalk();
     wait 1;
@@ -1778,13 +1777,13 @@ ending_attackers_spawn() {
 
   /*
   dist = length( guy.origin - level.player.origin );
-  	
+	
   while( dist > 700 )
   {
   	dist = length( guy.origin - level.player.origin );
   	wait 0.1;
   }
-  	
+	
   if( isalive( level.player ) )
   {
   	guy.baseAccuracy = 1000000;
@@ -1811,9 +1810,9 @@ ending_drag_damagecheck() {
   {
   	level.player waittill ( "damage" );
   }
-  	
+	
   level notify ( "ending_normal_death" );
-  	
+	
   thread ending_drag_failure();
   */
 }
@@ -1863,14 +1862,14 @@ ending_drag_failure() {
   level.player.ignoreme = true;
   level.player shellshock("estate_bouncingbetty", 9);
 
-  setdvar("ui_deadquote", &"ESTATE_FAKE_DEATH_QUOTE");
+  setdvar("ui_deadquote", & "ESTATE_FAKE_DEATH_QUOTE");
   missionfailedwrapper();
 }
 
 ending_player_breathing() {
   level endon("stop_player_breathing");
 
-  while(1) {
+  while (1) {
     level.player play_sound_on_entity("breathing_hurt");
     wait(0.1 + RandomFloat(0.8));
   }
@@ -1947,9 +1946,8 @@ ending_moments() {
 
     level.player takeallweapons();
 
-    if(!flag("test_ending_body_toss")) {
+    if(!flag("test_ending_body_toss"))
       level.ghost.attackeraccuracy = 0;
-    }
 
     level.player.attackeraccuracy = 0;
     level.player.ignorerandombulletdamage = 1;
@@ -1998,18 +1996,16 @@ ending_moments() {
 
     level.player thread ending_drag_damagecheck();
 
-    if(!flag("test_ending_body_toss") && !flag("test_ending")) {
+    if(!flag("test_ending_body_toss") && !flag("test_ending"))
       level.ghost stop_magic_bullet_shield();
-    }
 
-    if(!flag("test_ending_body_toss")) {
+    if(!flag("test_ending_body_toss"))
       level.ghost delete();
-    }
 
     /*
     switch( level.gameskill )
     {
-    	case 0:
+    	case 0: 
     		level.player.attackeraccuracy = 1;		
     		break;
     	case 1:
@@ -2074,7 +2070,7 @@ ending_moments() {
     wait 1;
   }
 
-  array_thread(getEntArray("ending_actors", "targetname"), ::add_spawn_function, ::ending_actors_think);
+  array_thread(getentarray("ending_actors", "targetname"), ::add_spawn_function, ::ending_actors_think);
   activate_trigger("ending_actors", "target");
   wait 0.1;
 
@@ -2198,7 +2194,7 @@ ending_moments() {
 
     shepherd waittill_notetrack_or_damage("pistol_pullout");
     pistol = spawn("script_model", (0, 0, 0));
-    pistol setModel("weapon_colt_anaconda");
+    pistol setmodel("weapon_colt_anaconda");
     pistol linkto(shepherd, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
 
     level.player LerpViewAngleClamp(1, 1, 1, 20, 20, 10, 2);
@@ -2207,8 +2203,8 @@ ending_moments() {
     level.ending_actors["guy2_ending"] show();
 
     shepherd waittill_notetrack_or_damage("shepherd_fire2");
-    pistol playSound("weap_deserteagle_fire_plr");
-    playFXOnTag(getfx("anaconda_muzzle_flash"), pistol, "tag_flash");
+    pistol playsound("weap_deserteagle_fire_plr");
+    playfxOnTag(getfx("anaconda_muzzle_flash"), pistol, "tag_flash");
 
     level.player PlayRumbleOnEntity("shepherd_pistol");
 
@@ -2218,7 +2214,7 @@ ending_moments() {
     level.player delaycall(1.3, ::PlayRumbleOnEntity, "shot_collapse");
 
     level.player SetNormalHealth(1);
-    gunpos = shepherd getEye();
+    gunpos = shepherd geteye();
     level.player DoDamage(99 / level.player.damagemultiplier, gunpos);
 
     level.player delayThread(0.3, ::ending_player_fullhealth);
@@ -2235,8 +2231,8 @@ ending_moments() {
     }
 
     shepherd waittill_notetrack_or_damage("shepherd_fire1");
-    pistol playSound("weap_cheytac_fire_plr");
-    playFXOnTag(getfx("anaconda_muzzle_flash"), pistol, "tag_flash");
+    pistol playsound("weap_cheytac_fire_plr");
+    playfxOnTag(getfx("anaconda_muzzle_flash"), pistol, "tag_flash");
 
     shepherd waittill_notetrack_or_damage("pistol_putaway");
     pistol delete();
@@ -2247,7 +2243,7 @@ ending_moments() {
 
     shepherd waittill_notetrack_or_damage("dsm_pullout");
     dsm = spawn("script_model", (0, 0, 0));
-    dsm setModel("mil_wireless_dsm_small");
+    dsm setmodel("mil_wireless_dsm_small");
     dsm linkto(shepherd, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
     shepherd waittill_notetrack_or_damage("dsm_putaway");
@@ -2298,7 +2294,7 @@ ending_moments() {
 
   wait 1.8;
 
-  //level.player thread play_sound_on_entity( "scn_estate_player_bodyfall" );
+  //level.player thread play_sound_on_entity( "scn_estate_player_bodyfall" ); 
   level.player PlayRumbleOnEntity("bodytoss_impact");
 
   wait 1.3;
@@ -2445,31 +2441,27 @@ ending_shadow_fader() {
 
   level.shadowfader = spawn("script_origin", (0.25, 0, 0));
 
-  while(1) {
+  while (1) {
     SetSavedDvar("sm_sunSampleSizeNear", level.shadowfader.origin[0]);
     wait 0.05;
   }
 }
 
 ending_shadow_fader_mover(setting, fadeTime, accelTime, decelTime) {
-  if(!isDefined(setting)) {
+  if(!isdefined(setting))
     setting = 0.25;
-  }
 
   assertEX(setting <= 0.25, "Specified value for sm_sunSampleSizeNear is out of range.");
   assertEX(setting >= 0.015625, "Specified value for sm_sunSampleSizeNear is out of range.");
 
-  if(!isDefined(fadeTime)) {
+  if(!isdefined(fadeTime))
     fadeTime = 1;
-  }
 
-  if(!isDefined(accelTime)) {
+  if(!isdefined(accelTime))
     accelTime = 1;
-  }
 
-  if(!isDefined(decelTime)) {
+  if(!isdefined(decelTime))
     decelTime = 1;
-  }
 
   level.shadowfader MoveTo((setting, 0, 0), fadeTime, accelTime, decelTime);
 }
@@ -2533,13 +2525,12 @@ ending_shadowops_heli_sequence() {
   trig = getent("ending_shouter_trig", "targetname");
   trig waittill("trigger");
 
-  speakers = getEntArray("ending_shouter", "targetname");
+  speakers = getentarray("ending_shouter", "targetname");
   array_randomize(speakers);
 
   foreach(index, ent in speakers) {
-    if(index > 2) {
+    if(index > 2)
       break;
-    }
 
     if(index == 0) {
       //Cover them! Move, move!
@@ -2686,7 +2677,7 @@ ending_mortarhit(mortarname) {
   earthquake(0.5, 1.4, level.player.origin, 2000);
   playRumbleOnPosition("artillery_rumble", hit.origin);
   hit thread play_sound_in_space(level.scr_sound["mortar"]["dirt"]);
-  playFX(level._effect["mortar"]["dirt"], hit.origin);
+  playfx(level._effect["mortar"]["dirt"], hit.origin);
 }
 
 temp_music_ending_delay() {
@@ -2794,7 +2785,7 @@ ending_gasoline_price_radio() {
   /*
   //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
   radio_dialogue( "est_pri_comein" );
-  	
+	
   //(off mike) Soap, hold the left flank! 	
   radio_dialogue( "est_pri_holdleftflank" );
 
@@ -2809,39 +2800,39 @@ ending_gasoline_price_radio() {
 ending_smoking_fx() {
   self waittill_notetrack_or_damage("cigar_box_pullout");
   cigarBox = spawn("script_model", (0, 0, 0));
-  cigarBox setModel("prop_cigarette_pack");
+  cigarBox setmodel("prop_cigarette_pack");
   cigarBox linkto(self, "j_thumb_le_3", (0, 0, 0), (0, 0, 0));
 
   wait 0.25;
 
   cigar = spawn("script_model", (0, 0, 0));
-  cigar setModel("prop_price_cigar");
+  cigar setmodel("prop_price_cigar");
   cigar linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
   self waittill_notetrack_or_damage("lighter_pullout");
   cigarBox delete();
 
   self waittill_notetrack_or_damage("lighter_on");
-  playFXOnTag(getfx("cigar_glow_puff"), cigar, "tag_cigarglow");
+  playfxOnTag(getfx("cigar_glow_puff"), cigar, "tag_cigarglow");
   wait 1;
-  playFXOnTag(getfx("cigar_smoke_puff"), self, "tag_eye");
+  playfxOnTag(getfx("cigar_smoke_puff"), self, "tag_eye");
 
   self waittill_notetrack_or_damage("shepherd_exhale");
-  playFXOnTag(getfx("cigar_exhale_estate"), self, "tag_eye");
+  playfxOnTag(getfx("cigar_exhale_estate"), self, "tag_eye");
 
   self waittill_notetrack_or_damage("shepherd_exhale");
-  playFXOnTag(getfx("cigar_glow_puff"), cigar, "tag_cigarglow");
+  playfxOnTag(getfx("cigar_glow_puff"), cigar, "tag_cigarglow");
   wait 1;
-  playFXOnTag(getfx("cigar_smoke_puff"), self, "tag_eye");
+  playfxOnTag(getfx("cigar_smoke_puff"), self, "tag_eye");
 
   self waittill_notetrack_or_damage("shepherd_exhale");
-  playFXOnTag(getfx("cigar_exhale_estate"), self, "tag_eye");
+  playfxOnTag(getfx("cigar_exhale_estate"), self, "tag_eye");
 
   self waittill_notetrack_or_damage("shepher_flick");
   flag_set("cigar_flicked");
 
   flag_wait("cigar_flareup");
-  playFXOnTag(getfx("cigar_glow"), cigar, "tag_cigarglow");
+  playfxOnTag(getfx("cigar_glow"), cigar, "tag_cigarglow");
 }
 
 ending_slowmo(duration, speed) {
@@ -2850,7 +2841,7 @@ ending_slowmo(duration, speed) {
   slomobreachplayerspeed = 0.1; //0.1
   slomoSpeed = 0.31; //0.25
 
-  if(isDefined(speed)) {
+  if(isdefined(speed)) {
     slowmoSpeed = speed;
   }
 
@@ -2874,9 +2865,8 @@ ending_slowmo(duration, speed) {
 }
 
 ending_actors_think() {
-  if(!isDefined(level.ending_actors)) {
+  if(!isdefined(level.ending_actors))
     level.ending_actors = [];
-  }
 
   self.animname = self.script_noteworthy;
   self.team = "allies";

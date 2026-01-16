@@ -13,16 +13,16 @@
 #namespace zm_genesis_skull_turret;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_skull_turret", &__init__, &__main__, undefined);
+  system::register("zm_genesis_skull_turret", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "skull_turret", 15000, 2, "int", &function_aeaa2ee6, 0, 0);
-  clientfield::register("vehicle", "skull_turret_beam_fire", 15000, 1, "int", &skull_turret_beam_fire, 0, 0);
-  clientfield::register("vehicle", "turret_beam_fire_crystal", 15000, 1, "int", &function_a70748cf, 0, 0);
-  clientfield::register("actor", "skull_turret_shock_fx", 15000, 1, "int", &skull_turret_shock_fx, 0, 0);
-  clientfield::register("actor", "skull_turret_shock_eye_fx", 15000, 1, "int", &skull_turret_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "skull_turret_explode_fx", 15000, 1, "counter", &skull_turret_explode_fx, 0, 0);
+  clientfield::register("vehicle", "skull_turret", 15000, 2, "int", & function_aeaa2ee6, 0, 0);
+  clientfield::register("vehicle", "skull_turret_beam_fire", 15000, 1, "int", & skull_turret_beam_fire, 0, 0);
+  clientfield::register("vehicle", "turret_beam_fire_crystal", 15000, 1, "int", & function_a70748cf, 0, 0);
+  clientfield::register("actor", "skull_turret_shock_fx", 15000, 1, "int", & skull_turret_shock_fx, 0, 0);
+  clientfield::register("actor", "skull_turret_shock_eye_fx", 15000, 1, "int", & skull_turret_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "skull_turret_explode_fx", 15000, 1, "counter", & skull_turret_explode_fx, 0, 0);
   level._effect["turret_zombie_shock"] = "dlc4/genesis/fx_tesla_trap_body_shock_red";
   level._effect["turret_zombie_explode"] = "dlc4/genesis/fx_tesla_trap_body_exp_red";
   level._effect["skull_turret_shock_eyes"] = "dlc4/genesis/fx_tesla_shock_eyes_zmb_red";
@@ -47,10 +47,10 @@ function function_aeaa2ee6(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6e443da4(localclientnum, var_fcb37269, tint) {
   self notify("hash_6e443da4");
   self endon("hash_6e443da4");
-  if(!isDefined(self.var_392865b9)) {
+  if(!isdefined(self.var_392865b9)) {
     self.var_392865b9 = 0;
   }
-  while(self.var_392865b9 != var_fcb37269) {
+  while (self.var_392865b9 != var_fcb37269) {
     if(self.var_392865b9 < var_fcb37269) {
       self.var_392865b9 = self.var_392865b9 + 0.033;
       if(self.var_392865b9 > var_fcb37269) {
@@ -78,7 +78,7 @@ function skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitia
 
 function function_1046b72f(localclientnum) {
   self notify("hash_f8e6601f");
-  if(isDefined(self.var_f929ecf4)) {
+  if(isdefined(self.var_f929ecf4)) {
     function_6c8292ba(localclientnum);
     level beam::kill(self, "tag_flash", self.var_f929ecf4, "tag_origin", "dlc4_skull_turret_beam");
     self.var_f929ecf4 delete();
@@ -87,7 +87,7 @@ function function_1046b72f(localclientnum) {
 }
 
 function function_6c8292ba(localclientnum) {
-  if(isDefined(self.var_805863e3)) {
+  if(isdefined(self.var_805863e3)) {
     level beam::kill(self.var_f929ecf4, "tag_origin", self.var_805863e3, "tag_origin", self.var_4a0d7655);
     self.var_805863e3 delete();
     self.var_805863e3 = undefined;
@@ -96,7 +96,7 @@ function function_6c8292ba(localclientnum) {
 }
 
 function function_1b1753c0(localclientnum, origin, var_263c10ef) {
-  if(!isDefined(self.var_805863e3)) {
+  if(!isdefined(self.var_805863e3)) {
     self.var_805863e3 = util::spawn_model(localclientnum, "tag_origin", origin);
     level beam::launch(self.var_f929ecf4, "tag_origin", self.var_805863e3, "tag_origin", var_263c10ef);
     self.var_4a0d7655 = var_263c10ef;
@@ -117,7 +117,7 @@ function function_463d46bd(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon("hash_f8e6601f");
   self.var_f929ecf4 = util::spawn_model(localclientnum, "tag_origin", self.origin);
   level beam::launch(self, "tag_flash", self.var_f929ecf4, "tag_origin", "dlc4_skull_turret_beam");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     function_b578a840(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
     wait(0.016);
   }
@@ -125,7 +125,7 @@ function function_463d46bd(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_b578a840(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   v_position = self gettagorigin("tag_aim");
-  v_forward = anglesToForward(self gettagangles("tag_aim"));
+  v_forward = anglestoforward(self gettagangles("tag_aim"));
   a_trace = beamtrace(v_position, v_position + (v_forward * 20000), 1, self);
   self.var_f929ecf4.origin = a_trace["position"];
   self.var_f929ecf4.angles = vectortoangles(v_forward);
@@ -133,7 +133,7 @@ function function_b578a840(localclientnum, oldval, newval, bnewent, binitialsnap
   render_debug_sphere(v_position, (1, 1, 0));
   render_debug_sphere(self.var_f929ecf4.origin, (1, 0, 0));
   var_c18b4417 = 0;
-  if(isDefined(a_trace["entity"])) {
+  if(isdefined(a_trace["entity"])) {
     e_last_target = a_trace["entity"];
     var_c18b4417 = 1;
     if(e_last_target.model === "p7_zm_ctl_crystal") {
@@ -144,14 +144,14 @@ function function_b578a840(localclientnum, oldval, newval, bnewent, binitialsnap
     var_c18b4417 = 1;
   }
   if(var_c18b4417) {
-    if(!isDefined(e_last_target) || (e_last_target.archetype !== "zombie" && e_last_target.archetype !== "parasite")) {
+    if(!isdefined(e_last_target) || (e_last_target.archetype !== "zombie" && e_last_target.archetype !== "parasite")) {
       v_forward = function_f8f61ccb(v_forward, a_trace["normal"]);
     }
     self.var_f929ecf4.angles = vectortoangles(v_forward);
     v_position = self.var_f929ecf4.origin;
     a_trace = beamtrace(v_position, v_position + (v_forward * 20000), 1, self);
     var_263c10ef = "dlc4_skull_turret_beam_reflect";
-    if(isDefined(e_last_target) && (e_last_target.archetype === "zombie" || e_last_target.archetype === "parasite")) {
+    if(isdefined(e_last_target) && (e_last_target.archetype === "zombie" || e_last_target.archetype === "parasite")) {
       var_263c10ef = "dlc4_skull_turret_beam";
     }
     function_1b1753c0(localclientnum, a_trace["position"], var_263c10ef);
@@ -199,7 +199,7 @@ function function_9f90a4b0(localclientnum) {
   audio::playloopat("wpn_skull_turret_loop", self.origin);
   level waittill("hash_bd0e918");
   audio::stoploopat("wpn_skull_turret_loop", self.origin);
-  playSound(0, "wpn_skull_turret_stop", self.origin);
+  playsound(0, "wpn_skull_turret_stop", self.origin);
   level beam::kill(self, "tag_flash", var_f929ecf4, "tag_origin", "dlc4_skull_turret_beam");
   level beam::kill(var_f929ecf4, "tag_origin", var_b4e42dd3, "tag_origin", "dlc4_skull_turret_beam_reflect");
   var_f929ecf4 delete();
@@ -208,14 +208,14 @@ function function_9f90a4b0(localclientnum) {
 
 function skull_turret_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!isDefined(self.var_2fdeee05)) {
+    if(!isdefined(self.var_2fdeee05)) {
       str_tag = "J_SpineUpper";
       if(!self isai()) {
         str_tag = "tag_origin";
       }
-      self.var_2fdeee05 = playFXOnTag(localclientnum, level._effect["turret_zombie_shock"], self, str_tag);
+      self.var_2fdeee05 = playfxontag(localclientnum, level._effect["turret_zombie_shock"], self, str_tag);
     }
-  } else if(isDefined(self.var_2fdeee05)) {
+  } else if(isdefined(self.var_2fdeee05)) {
     deletefx(localclientnum, self.var_2fdeee05, 1);
     self.var_2fdeee05 = undefined;
   }
@@ -223,10 +223,10 @@ function skull_turret_shock_fx(localclientnum, oldval, newval, bnewent, binitial
 
 function skull_turret_shock_eye_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(!isDefined(self.var_9724eab9)) {
-      self.var_9724eab9 = playFXOnTag(localclientnum, level._effect["skull_turret_shock_eyes"], self, "J_Eyeball_LE");
+    if(!isdefined(self.var_9724eab9)) {
+      self.var_9724eab9 = playfxontag(localclientnum, level._effect["skull_turret_shock_eyes"], self, "J_Eyeball_LE");
       sndorigin = self gettagorigin("J_Eyeball_LE");
-      playSound(0, "zmb_vocals_zombie_skull_scream", sndorigin);
+      playsound(0, "zmb_vocals_zombie_skull_scream", sndorigin);
     }
   } else {
     deletefx(localclientnum, self.var_9724eab9, 1);
@@ -235,26 +235,26 @@ function skull_turret_shock_eye_fx(localclientnum, oldval, newval, bnewent, bini
 }
 
 function skull_turret_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFXOnTag(localclientnum, level._effect["turret_zombie_explode"], self, "j_spine4");
-  playSound(0, "zmb_zombie_skull_explode", self.origin);
+  playfxontag(localclientnum, level._effect["turret_zombie_explode"], self, "j_spine4");
+  playsound(0, "zmb_zombie_skull_explode", self.origin);
 }
 
 function function_6818044b(localclientnum, var_365c612) {
-  if(isDefined(self.var_341294b1)) {
+  if(isdefined(self.var_341294b1)) {
     deletefx(localclientnum, self.var_341294b1);
     self.var_341294b1 = undefined;
   }
   if(var_365c612) {
-    self.var_341294b1 = playFXOnTag(localclientnum, "dlc4/genesis/fx_skullturret_active", self, "tag_turret");
+    self.var_341294b1 = playfxontag(localclientnum, "dlc4/genesis/fx_skullturret_active", self, "tag_turret");
   }
 }
 
 function function_46870125(localclientnum, var_365c612) {
-  if(isDefined(self.var_dada95a7)) {
+  if(isdefined(self.var_dada95a7)) {
     deletefx(localclientnum, self.var_dada95a7);
     self.var_dada95a7 = undefined;
   }
   if(var_365c612) {
-    self.var_dada95a7 = playFXOnTag(localclientnum, "dlc4/genesis/fx_skullturret_eyes", self, "tag_fx");
+    self.var_dada95a7 = playfxontag(localclientnum, "dlc4/genesis/fx_skullturret_eyes", self, "tag_fx");
   }
 }

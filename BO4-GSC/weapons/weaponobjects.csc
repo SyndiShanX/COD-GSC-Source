@@ -10,6 +10,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\util_shared;
+
 #namespace weaponobjects;
 
 init_shared(friendly_rob, var_4885f19e) {
@@ -23,14 +24,14 @@ init_shared(friendly_rob, var_4885f19e) {
   clientfield::register("clientuimodel", "hudItems.proximityAlarm", 1, 3, "int", undefined, 0, 0);
   clientfield::register("missile", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 1);
   clientfield::register("scriptmover", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 0);
-  level._effect[# "powerlight"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"powerlight"] = #"weapon/fx8_equip_light_os";
 
   if(getgametypesetting(#"hash_48670d9509071424")) {
     level.var_58253868 = friendly_rob;
   }
 
   level.var_420d7d7e = var_4885f19e;
-  level.var_4de4699b = # "rob_sonar_set_enemy";
+  level.var_4de4699b = #"rob_sonar_set_enemy";
 
   if(!isDefined(level.retrievable)) {
     level.retrievable = [];
@@ -107,11 +108,11 @@ updateretrievable(local_client_num, newval) {
 }
 
 function_f89c4b81() {
-  if(isDefined(self.weapon) && self.weapon.statname == # "ac130") {
+  if(isDefined(self.weapon) && self.weapon.statname == #"ac130") {
     return false;
   }
 
-  if(isDefined(self.weapon) && self.weapon.statname == # "tr_flechette_t8") {
+  if(isDefined(self.weapon) && self.weapon.statname == #"tr_flechette_t8") {
     return false;
   }
 
@@ -128,7 +129,7 @@ enemyequip_changed(local_client_num, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 function_6a5648dc(local_client_num, bundle) {
-  if(!self function_4e0ca360() || self.team === # "free") {
+  if(!self function_4e0ca360() || self.team === #"free") {
     return false;
   }
 
@@ -150,7 +151,7 @@ function_6a5648dc(local_client_num, bundle) {
 }
 
 function_232f3acf(local_client_num, bundle) {
-  if(self function_4e0ca360() && self.team !== # "free") {
+  if(self function_4e0ca360() && self.team !== #"free") {
     return false;
   }
 
@@ -165,11 +166,11 @@ function_232f3acf(local_client_num, bundle) {
   }
 
   if(sessionmodeiswarzonegame()) {
-    if(function_5778f82(local_client_num, # "specialty_showenemyequipment") && isDefined(self.var_f19b4afd) && self.var_f19b4afd) {
+    if(function_5778f82(local_client_num, #"specialty_showenemyequipment") && isDefined(self.var_f19b4afd) && self.var_f19b4afd) {
       return true;
     }
   } else {
-    if(function_5778f82(local_client_num, # "specialty_showenemyequipment")) {
+    if(function_5778f82(local_client_num, #"specialty_showenemyequipment")) {
       return true;
     }
 
@@ -181,11 +182,11 @@ function_232f3acf(local_client_num, bundle) {
 
 updateenemyequipment(local_client_num, newval) {
   if(isDefined(level.var_58253868)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_66ac79c57723c169");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_66ac79c57723c169");
   }
 
   if(isDefined(level.var_420d7d7e)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, # "enemy", # "hash_691f7dc47ae8aa08");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, #"enemy", #"hash_691f7dc47ae8aa08");
   }
 }
 
@@ -256,11 +257,11 @@ playflarefx(localclientnum) {
   }
 
   if(!isDefined(self.equipmentfriendfx)) {
-    self.equipmenttagfx = level._effect[# "powerlightgreen"];
+    self.equipmenttagfx = level._effect[#"powerlightgreen"];
   }
 
   if(!isDefined(self.equipmentenemyfx)) {
-    self.equipmenttagfx = level._effect[# "powerlight"];
+    self.equipmenttagfx = level._effect[#"powerlight"];
   }
 
   if(self function_83973173()) {
@@ -273,7 +274,7 @@ playflarefx(localclientnum) {
 }
 
 equipmentwatchteamfx(localclientnum, fxhandle) {
-  msg = self waittill(#"death", # "team_changed", # "player_switch");
+  msg = self waittill(#"death", #"team_changed", #"player_switch");
 
   if(isDefined(fxhandle)) {
     stopfx(localclientnum, fxhandle);
@@ -303,7 +304,7 @@ equipmentwatchplayerteamchanged(localclientnum, fxhandle) {
 }
 
 sndproxalert_entcleanup(localclientnum, ent) {
-  level waittill(#"snddede", # "demo_jump", # "player_switch", # "killcam_begin", # "killcam_end");
+  level waittill(#"snddede", #"demo_jump", #"player_switch", #"killcam_begin", #"killcam_end");
 
   if(isDefined(ent)) {
     ent stopallloopsounds(0.5);

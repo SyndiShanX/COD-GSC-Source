@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_bandolier;
 
 autoexec __init__system__() {
@@ -21,7 +22,7 @@ function_27473e44() {
   zm_perks::register_perk_clientfields(#"specialty_extraammo", &function_12161a30, &function_b10a7225);
   zm_perks::register_perk_effects(#"specialty_extraammo", "sleight_light");
   zm_perks::register_perk_init_thread(#"specialty_extraammo", &init_perk);
-  zm_perks::function_b60f4a9f(#"specialty_extraammo", # "p8_zm_vapor_altar_icon_01_bandolierbandit", "zombie/fx8_perk_altar_symbol_ambient_bandolier", # "zmperksbandolier");
+  zm_perks::function_b60f4a9f(#"specialty_extraammo", #"p8_zm_vapor_altar_icon_01_bandolierbandit", "zombie/fx8_perk_altar_symbol_ambient_bandolier", #"zmperksbandolier");
 }
 
 init_perk() {

@@ -13,16 +13,16 @@
 #namespace perks;
 
 function autoexec __init__sytem__() {
-  system::register("perks", &__init__, undefined, undefined);
+  system::register("perks", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "flying", 1, 1, "int", &flying_callback, 0, 1);
-  callback::on_localclient_connect(&on_local_client_connect);
-  callback::on_localplayer_spawned(&on_localplayer_spawned);
-  callback::on_spawned(&on_player_spawned);
+  clientfield::register("allplayers", "flying", 1, 1, "int", & flying_callback, 0, 1);
+  callback::on_localclient_connect( & on_local_client_connect);
+  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  callback::on_spawned( & on_player_spawned);
   level.killtrackerfxenable = 1;
-  level._monitor_tracker = &monitor_tracker_perk;
+  level._monitor_tracker = & monitor_tracker_perk;
   level.sitrepscan1_enable = getdvarint("scr_sitrepscan1_enable", 2);
   level.sitrepscan1_setoutline = getdvarint("scr_sitrepscan1_setoutline", 1);
   level.sitrepscan1_setsolid = getdvarint("scr_sitrepscan1_setsolid", 1);
@@ -42,7 +42,7 @@ function __init__() {
 
 function updatesitrepscan() {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self oed_sitrepscan_enable(level.sitrepscan1_enable);
     self oed_sitrepscan_setoutline(level.sitrepscan1_setoutline);
     self oed_sitrepscan_setsolid(level.sitrepscan1_setsolid);
@@ -62,7 +62,7 @@ function updatesitrepscan() {
 }
 
 function updatedvars() {
-  while(true) {
+  while (true) {
     level.sitrepscan1_enable = getdvarint("", level.sitrepscan1_enable);
     level.sitrepscan1_setoutline = getdvarint("", level.sitrepscan1_setoutline);
     level.sitrepscan1_setsolid = getdvarint("", level.sitrepscan1_setsolid);
@@ -115,9 +115,9 @@ function on_player_spawned(local_client_num) {
   self thread monitor_tracker_perk(local_client_num);
 }
 
-function array_equal(&a, &b) {
-  if(isDefined(a) && isDefined(b) && isarray(a) && isarray(b) && a.size == b.size) {
-    for(i = 0; i < a.size; i++) {
+function array_equal( & a, & b) {
+  if(isdefined(a) && isdefined(b) && isarray(a) && isarray(b) && a.size == b.size) {
+    for (i = 0; i < a.size; i++) {
       if(!a[i] === b[i]) {
         return false;
       }
@@ -134,7 +134,7 @@ function watch_perks_change(local_client_num) {
   self endon("death");
   self endon("disconnect");
   self.last_perks = self getperks(local_client_num);
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     perks = self getperks(local_client_num);
     if(!array_equal(perks, self.last_perks)) {
       self.last_perks = perks;
@@ -146,8 +146,8 @@ function watch_perks_change(local_client_num) {
 
 function get_players(local_client_num) {
   players = [];
-  entities = getEntArray(local_client_num);
-  if(isDefined(entities)) {
+  entities = getentarray(local_client_num);
+  if(isdefined(entities)) {
     foreach(ent in entities) {
       if(ent isplayer()) {
         players[players.size] = ent;
@@ -163,7 +163,7 @@ function monitor_tracker_existing_players(local_client_num) {
   self notify("monitor_tracker_existing_players");
   players = getplayers(local_client_num);
   foreach(player in players) {
-    if(isDefined(player) && player != self) {
+    if(isdefined(player) && player != self) {
       player thread monitor_tracker_perk(local_client_num);
     }
     wait(0.016);
@@ -175,29 +175,29 @@ function monitor_tracker_perk_killcam(local_client_num) {
   self endon("monitor_tracker_perk_killcam" + local_client_num);
   self endon("entityshutdown");
   predictedlocalplayer = getlocalplayer(local_client_num);
-  if(!isDefined(level.trackerspecialtyself)) {
+  if(!isdefined(level.trackerspecialtyself)) {
     level.trackerspecialtyself = [];
     level.trackerspecialtycounter = 0;
   }
-  if(!isDefined(level.trackerspecialtyself[local_client_num])) {
+  if(!isdefined(level.trackerspecialtyself[local_client_num])) {
     level.trackerspecialtyself[local_client_num] = [];
   }
   if(predictedlocalplayer getinkillcam(local_client_num)) {
     nonpredictedlocalplayer = getnonpredictedlocalplayer(local_client_num);
     if(predictedlocalplayer hasperk(local_client_num, "specialty_tracker")) {
       servertime = getservertime(local_client_num);
-      for(count = 0; count < level.trackerspecialtyself[local_client_num].size; count++) {
+      for (count = 0; count < level.trackerspecialtyself[local_client_num].size; count++) {
         if(level.trackerspecialtyself[local_client_num][count].time < servertime && level.trackerspecialtyself[local_client_num][count].time > (servertime - 5000)) {
           positionandrotationstruct = level.trackerspecialtyself[local_client_num][count];
-          tracker_playFX(local_client_num, positionandrotationstruct);
+          tracker_playfx(local_client_num, positionandrotationstruct);
         }
       }
     }
   } else {
-    for(;;) {
+    for (;;) {
       wait(0.05);
       positionandrotationstruct = self gettrackerfxposition(local_client_num);
-      if(isDefined(positionandrotationstruct)) {
+      if(isdefined(positionandrotationstruct)) {
         positionandrotationstruct.time = getservertime(local_client_num);
         level.trackerspecialtyself[local_client_num][level.trackerspecialtycounter] = positionandrotationstruct;
         level.trackerspecialtycounter++;
@@ -220,16 +220,16 @@ function monitor_tracker_perk(local_client_num) {
   self.tracker_last_pos = self.origin;
   offset = (0, 0, getdvarfloat("perk_tracker_fx_foot_height", 0));
   dist2 = 1024;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     wait(0.05);
     watcher = getlocalplayer(local_client_num);
-    if(!isDefined(watcher) || self == watcher) {
+    if(!isdefined(watcher) || self == watcher) {
       return;
     }
-    if(isDefined(watcher) && watcher hasperk(local_client_num, "specialty_tracker")) {
+    if(isdefined(watcher) && watcher hasperk(local_client_num, "specialty_tracker")) {
       friend = self isfriendly(local_client_num, 1);
       camooff = 1;
-      if(!isDefined(self._isclone) || !self._isclone) {
+      if(!isdefined(self._isclone) || !self._isclone) {
         camo_val = self clientfield::get("camo_shader");
         if(camo_val != 0) {
           camooff = 0;
@@ -237,8 +237,8 @@ function monitor_tracker_perk(local_client_num) {
       }
       if(!friend && isalive(self) && camooff) {
         positionandrotationstruct = self gettrackerfxposition(local_client_num);
-        if(isDefined(positionandrotationstruct)) {
-          self tracker_playFX(local_client_num, positionandrotationstruct);
+        if(isdefined(positionandrotationstruct)) {
+          self tracker_playfx(local_client_num, positionandrotationstruct);
         }
       } else {
         self.tracker_flying = 0;
@@ -247,15 +247,15 @@ function monitor_tracker_perk(local_client_num) {
   }
 }
 
-function tracker_playFX(local_client_num, positionandrotationstruct) {
-  handle = playFX(local_client_num, positionandrotationstruct.fx, positionandrotationstruct.pos, positionandrotationstruct.fwd, positionandrotationstruct.up);
+function tracker_playfx(local_client_num, positionandrotationstruct) {
+  handle = playfx(local_client_num, positionandrotationstruct.fx, positionandrotationstruct.pos, positionandrotationstruct.fwd, positionandrotationstruct.up);
   self killtrackerfx_track(local_client_num, handle);
 }
 
 function killtrackerfx_track(local_client_num, handle) {
-  if(handle && isDefined(self.killtrackerfx)) {
+  if(handle && isdefined(self.killtrackerfx)) {
     servertime = getservertime(local_client_num);
-    killfxstruct = spawnStruct();
+    killfxstruct = spawnstruct();
     killfxstruct.time = servertime;
     killfxstruct.handle = handle;
     index = self.killtrackerfx.index;
@@ -269,26 +269,26 @@ function killtrackerfx_track(local_client_num, handle) {
 
 function killtrackerfx_on_death(local_client_num) {
   self endon("disconnect");
-  if(!(isDefined(level.killtrackerfxenable) && level.killtrackerfxenable)) {
+  if(!(isdefined(level.killtrackerfxenable) && level.killtrackerfxenable)) {
     return;
   }
   predictedlocalplayer = getlocalplayer(local_client_num);
   if(predictedlocalplayer == self) {
     return;
   }
-  if(isDefined(self.killtrackerfx)) {
+  if(isdefined(self.killtrackerfx)) {
     self.killtrackerfx.array = [];
     self.killtrackerfx.index = 0;
     self.killtrackerfx = undefined;
   }
-  killtrackerfx = spawnStruct();
+  killtrackerfx = spawnstruct();
   killtrackerfx.array = [];
   killtrackerfx.index = 0;
   self.killtrackerfx = killtrackerfx;
   self waittill("entityshutdown");
   servertime = getservertime(local_client_num);
   foreach(killfxstruct in killtrackerfx.array) {
-    if(isDefined(killfxstruct) && (killfxstruct.time + 5000) > servertime) {
+    if(isdefined(killfxstruct) && (killfxstruct.time + 5000) > servertime) {
       killfx(local_client_num, killfxstruct.handle);
     }
   }
@@ -300,14 +300,14 @@ function killtrackerfx_on_death(local_client_num) {
 function gettrackerfxposition(local_client_num) {
   positionandrotation = undefined;
   player = self;
-  if(isDefined(self._isclone) && self._isclone) {
+  if(isdefined(self._isclone) && self._isclone) {
     player = self.owner;
   }
   playfastfx = player hasperk(local_client_num, "specialty_trackerjammer");
-  if(isDefined(self.flying) && self.flying) {
+  if(isdefined(self.flying) && self.flying) {
     offset = (0, 0, getdvarfloat("perk_tracker_fx_fly_height", 0));
     dist2 = 1024;
-    if(isDefined(self.trailrightfoot) && self.trailrightfoot) {
+    if(isdefined(self.trailrightfoot) && self.trailrightfoot) {
       if(playfastfx) {
         fx = "player/fx_plyr_flying_tracker_rf";
       } else {
@@ -323,7 +323,7 @@ function gettrackerfxposition(local_client_num) {
   } else {
     offset = (0, 0, getdvarfloat("perk_tracker_fx_foot_height", 0));
     dist2 = 1024;
-    if(isDefined(self.trailrightfoot) && self.trailrightfoot) {
+    if(isdefined(self.trailrightfoot) && self.trailrightfoot) {
       if(playfastfx) {
         fx = "player/fx_plyr_footstep_tracker_rf";
       } else {
@@ -338,7 +338,7 @@ function gettrackerfxposition(local_client_num) {
     }
   }
   pos = self.origin + offset;
-  fwd = anglesToForward(self.angles);
+  fwd = anglestoforward(self.angles);
   right = anglestoright(self.angles);
   up = anglestoup(self.angles);
   vel = self getvelocity();
@@ -360,13 +360,13 @@ function gettrackerfxposition(local_client_num) {
     self.tracker_flying = 1;
     self.tracker_last_pos = self.origin;
   } else if(distancesquared(self.tracker_last_pos, pos) > dist2) {
-    positionandrotation = spawnStruct();
+    positionandrotation = spawnstruct();
     positionandrotation.fx = fx;
     positionandrotation.pos = pos;
     positionandrotation.fwd = fwd;
     positionandrotation.up = up;
     self.tracker_last_pos = self.origin;
-    if(isDefined(self.trailrightfoot) && self.trailrightfoot) {
+    if(isdefined(self.trailrightfoot) && self.trailrightfoot) {
       self.trailrightfoot = 0;
     } else {
       self.trailrightfoot = 1;
@@ -383,7 +383,7 @@ function monitor_detectnearbyenemies(local_client_num) {
   enemylosttime = 0;
   previousenemydetectedbitfield = 0;
   setuimodelvalue(sixthsensemodel, 0);
-  while(true) {
+  while (true) {
     localplayer = getlocalplayer(local_client_num);
     if(!localplayer isplayer() || localplayer hasperk(local_client_num, "specialty_detectnearbyenemies") == 0 || (localplayer getinkillcam(local_client_num) == 1 || isalive(localplayer) == 0)) {
       setuimodelvalue(sixthsensemodel, 0);
@@ -400,7 +400,7 @@ function monitor_detectnearbyenemies(local_client_num) {
     innerdetect = getdvarint("specialty_detectnearbyenemies_inner", 1);
     outerdetect = getdvarint("specialty_detectnearbyenemies_outer", 1);
     zdetect = getdvarint("specialty_detectnearbyenemies_zthreshold", 1);
-    localplayeranglestoforward = anglesToForward(localplayer.angles);
+    localplayeranglestoforward = anglestoforward(localplayer.angles);
     players = getplayers(local_client_num);
     clones = getclones(local_client_num);
     sixthsenseents = arraycombine(players, clones, 0, 0);
@@ -414,7 +414,7 @@ function monitor_detectnearbyenemies(local_client_num) {
       distancescalarsq = 1;
       zscalarsq = 1;
       player = sixthsenseent;
-      if(isDefined(sixthsenseent._isclone) && sixthsenseent._isclone) {
+      if(isdefined(sixthsenseent._isclone) && sixthsenseent._isclone) {
         player = sixthsenseent.owner;
       }
       if(player isplayer() && player hasperk(local_client_num, "specialty_sixthsensejammer")) {
@@ -466,8 +466,8 @@ function monitor_detectnearbyenemies(local_client_num) {
         setuimodelvalue(sixthsensemodel, enemydetectedbitfield);
         enemynearbytime = 0;
         diff = enemydetectedbitfield ^ previousenemydetectedbitfield;
-        if(diff &enemydetectedbitfield) {
-          self playSound(0, "uin_sixth_sense_ping_on");
+        if(diff & enemydetectedbitfield) {
+          self playsound(0, "uin_sixth_sense_ping_on");
         }
         previousenemydetectedbitfield = enemydetectedbitfield;
       }

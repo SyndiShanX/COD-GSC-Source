@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
+
 #namespace wz_cash_safe;
 
 autoexec __init__system__() {
@@ -34,7 +35,7 @@ private on_localclient_connect(localclientnum) {
     for(i = 0; i < 1; i++) {
       objid = util::getnextobjid(localclientnum);
       level.var_f042433[localclientnum][i] = objid;
-      objective_add(localclientnum, objid, "invisible", # "wz_cash_safe");
+      objective_add(localclientnum, objid, "invisible", #"wz_cash_safe");
     }
 
     level.var_7cce82bd[localclientnum] = [];
@@ -42,7 +43,7 @@ private on_localclient_connect(localclientnum) {
     for(i = 0; i < 12; i++) {
       objid = util::getnextobjid(localclientnum);
       level.var_7cce82bd[localclientnum][i] = objid;
-      objective_add(localclientnum, objid, "invisible", # "wz_cash_held");
+      objective_add(localclientnum, objid, "invisible", #"wz_cash_held");
     }
 
     level thread function_93b89303(localclientnum);
@@ -82,7 +83,7 @@ private function_93b89303(localclientnum) {
         if(item.id != 32767) {
           point = function_b1702735(item.id);
 
-          if(isDefined(point) && isDefined(point.itementry) && point.itementry.itemtype == # "cash") {
+          if(isDefined(point) && isDefined(point.itementry) && point.itementry.itemtype == #"cash") {
             carryingcash = 1;
             break;
           }

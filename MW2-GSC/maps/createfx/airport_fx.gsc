@@ -974,4 +974,5 @@ main() {
   ent.v["exploder"] = "anc_gate";
   ent.v["soundalias"] = "airport_anc_security";
   ent.v["loopsound"] = "nil";
+
 }

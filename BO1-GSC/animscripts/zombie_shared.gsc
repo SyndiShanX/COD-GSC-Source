@@ -44,7 +44,7 @@ LookAtAnimations(leftanim, rightanim) {
 
 HandleDogSoundNoteTracks(note) {
   if(note == "sound_dogstep_run_default") {
-    self playSound("fly_dog_step_run_default");
+    self PlaySound("fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -160,9 +160,9 @@ noteTrackBodyFall(note, flagName) {
     groundType = "dirt";
   }
   if(isSubStr(note, "large")) {
-    self playSound("fly_bodyfall_large_" + groundType);
+    self PlaySound("fly_bodyfall_large_" + groundType);
   } else if(isSubStr(note, "small")) {
-    self playSound("fly_bodyfall_small_" + groundType);
+    self PlaySound("fly_bodyfall_small_" + groundType);
   }
 }
 
@@ -173,7 +173,7 @@ noteTrackFootStep(note, flagName) {
     playFootStep("J_BALL_RI");
   }
   if(!level.clientScripts) {
-    self playSound("fly_gear_run");
+    self PlaySound("fly_gear_run");
   }
 }
 
@@ -183,7 +183,7 @@ noteTrackFootScrape(note, flagName) {
   } else {
     groundType = "dirt";
   }
-  self playSound("fly_step_scrape_" + groundType);
+  self PlaySound("fly_step_scrape_" + groundType);
 }
 
 noteTrackLand(note, flagName) {
@@ -192,7 +192,7 @@ noteTrackLand(note, flagName) {
   } else {
     groundType = "dirt";
   }
-  self playSound("fly_land_npc_" + groundType);
+  self PlaySound("fly_land_npc_" + groundType);
 }
 
 HandleNoteTrack(note, flagName, customFunction, var1) {
@@ -203,7 +203,9 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
   }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
-    return [[notetrackFunc]](note, flagName);
+    return [
+      [notetrackFunc]
+    ](note, flagName);
   }
   switch (note) {
     case "end":
@@ -284,7 +286,9 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
     if(!isDefined(note)) {
       note = "undefined";
     }
-    intercepted = [[interceptFunction]](note);
+    intercepted = [
+      [interceptFunction]
+    ](note);
     if(isDefined(intercepted) && intercepted) {
       continue;
     }
@@ -303,7 +307,9 @@ DoNoteTracksPostCallback(flagName, postFunction) {
       note = "undefined";
     }
     val = self HandleNoteTrack(note, flagName);
-    [[postFunction]](note);
+    [
+      [postFunction]
+    ](note);
     if(isDefined(val)) {
       return val;
     }
@@ -328,7 +334,9 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
   }
   for(;;) {
     time = GetTime();
-    returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
+    returnedNote = [
+      [notetracksFunc]
+    ](flagName, customFunction, debugIdentifier);
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
@@ -345,13 +353,13 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
 }
 
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, debugIdentifier, ent);
 }
 
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, time, flagName, interceptFunction, debugIdentifier, ent);
 }
@@ -369,7 +377,7 @@ doNoteTracksForTimeEndNotify(time) {
 playFootStep(foot) {
   if(!level.clientScripts) {
     if(!isAI(self)) {
-      self playSound("fly_step_run_dirt");
+      self PlaySound("fly_step_run_dirt");
       return;
     }
   }
@@ -377,7 +385,7 @@ playFootStep(foot) {
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastGroundtype)) {
       if(!level.clientScripts) {
-        self playSound("fly_step_run_dirt");
+        self PlaySound("fly_step_run_dirt");
       }
       return;
     }
@@ -387,7 +395,7 @@ playFootStep(foot) {
     self.lastGroundtype = self.groundType;
   }
   if(!level.clientScripts) {
-    self playSound("fly_step_run_" + groundType);
+    self PlaySound("fly_step_run_" + groundType);
   }
   [[anim.optionalStepEffectFunction]](foot, groundType);
 }
@@ -404,7 +412,7 @@ playFootStepEffect(foot, groundType) {
       continue;
     }
     org = self gettagorigin(foot);
-    playFX(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
+    playfx(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
     return;
   }
 }

@@ -8,15 +8,13 @@ move_player_to_start_point(var_0) {
   self setorigin(var_1.origin);
   var_2 = undefined;
 
-  if(isDefined(var_1.target)) {
+  if(isDefined(var_1.target))
     var_2 = getent(var_1.target, "targetname");
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     self setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  } else {
+  else
     self setplayerangles(var_1.angles);
-  }
 }
 
 actor_teleport(var_0, var_1) {
@@ -30,9 +28,8 @@ actor_teleport(var_0, var_1) {
 }
 
 squad_add_ally(var_0, var_1, var_2) {
-  if(!isDefined(level.squad)) {
+  if(!isDefined(level.squad))
     level.squad = [];
-  }
 
   var_3 = getent(var_1, "targetname");
   var_4 = var_3 maps\_utility::spawn_ai();
@@ -71,15 +68,13 @@ safe_trigger_by_noteworthy(var_0) {
 break_glass(var_0, var_1) {
   var_2 = getglassarray(var_0);
 
-  foreach(var_4 in var_2) {
-    destroyglass(var_4, var_1);
-  }
+  foreach(var_4 in var_2)
+  destroyglass(var_4, var_1);
 }
 
 disable_awareness() {
-  if(!isDefined(self.awareness)) {
+  if(!isDefined(self.awareness))
     self.awareness = 0;
-  }
 
   self.awareness = 0;
   self.ignoreall = 1;
@@ -97,9 +92,8 @@ has_awareness() {
 }
 
 enable_awareness() {
-  if(!isDefined(self.awareness)) {
+  if(!isDefined(self.awareness))
     self.awareness = 1;
-  }
 
   self.awareness = 1;
   self.ignoreall = 0;
@@ -117,9 +111,8 @@ check_trigger_flagset(var_0) {
   var_1 = getent(var_0, "targetname");
   var_1 waittill("trigger");
 
-  if(isDefined(var_1.script_flag_set)) {
+  if(isDefined(var_1.script_flag_set))
     common_scripts\utility::flag_set(var_1.script_flag_set);
-  }
 }
 
 playerseek() {
@@ -129,9 +122,8 @@ playerseek() {
 }
 
 factory_set_ignoreme(var_0) {
-  if(isDefined(self) && isalive(self) && issentient(self)) {
+  if(isDefined(self) && isalive(self) && issentient(self))
     self.ignoreme = var_0;
-  }
 }
 
 safe_set_goal_volume(var_0, var_1) {
@@ -140,14 +132,12 @@ safe_set_goal_volume(var_0, var_1) {
   if(!isDefined(var_2)) {
     return;
   }
-  if(!isarray(var_0)) {
+  if(!isarray(var_0))
     var_0 = [var_0];
-  }
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4) && isalive(var_4)) {
+    if(isDefined(var_4) && isalive(var_4))
       var_4 thread safe_set_goal_volume_single(var_2);
-    }
   }
 }
 
@@ -170,21 +160,19 @@ safe_delete_linkname(var_0) {
 }
 
 safe_delete(var_0) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  } else {}
+  else {}
 }
 
 safe_delete_array(var_0) {
-  foreach(var_2 in var_0) {
-    safe_delete(var_2);
-  }
+  foreach(var_2 in var_0)
+  safe_delete(var_2);
 }
 
 notify_targetname_on_goal(var_0) {
-  if(isDefined(var_0) && isDefined(var_0.targetname)) {
+  if(isDefined(var_0) && isDefined(var_0.targetname))
     self notify(var_0.targetname);
-  }
 }
 
 thermal_vision() {
@@ -210,11 +198,10 @@ toggle_thermal_vision() {
   if(self.active_anim || common_scripts\utility::flag("player_using_camera") || self isthrowinggrenade() || self ismeleeing()) {
     return;
   }
-  if(self.thermal == 0) {
+  if(self.thermal == 0)
     turn_on_thermal_vision();
-  } else {
+  else
     turn_off_thermal_vision();
-  }
 }
 
 turn_on_thermal_vision() {
@@ -296,33 +283,29 @@ nag_line_generator(var_0, var_1, var_2, var_3) {
   level endon("stop_nag");
   level endon(var_1);
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     wait(var_3);
-  }
 
   var_4 = 8;
   var_5 = 20;
   var_6 = 0.5;
   var_7 = 1.5;
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = randomizer_create(["factory_bkr_whatreyoudoing", "factory_bkr_letsgo", "factory_bkr_letsgo2"]);
-  } else {
+  else
     var_0 = randomizer_create(var_0);
-  }
 
   for(;;) {
     var_8 = var_0 randomizer_get_no_repeat();
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       maps\_utility::smart_radio_dialogue(var_8);
-    } else {
+    else
       thread maps\_utility::smart_dialogue(var_8);
-    }
 
-    if(var_4 < var_5) {
+    if(var_4 < var_5)
       var_4 = var_4 + randomfloatrange(var_6, var_7);
-    }
 
     wait(var_4 + randomfloatrange(-2.0, 2.0));
   }
@@ -340,9 +323,8 @@ randomizer_get_no_repeat() {
   if(self.array.size > 1 && isDefined(self.last_index)) {
     var_0 = randomint(self.array.size - 1);
 
-    if(var_0 >= self.last_index) {
+    if(var_0 >= self.last_index)
       var_0++;
-    }
   } else
     var_0 = randomint(self.array.size);
 
@@ -364,20 +346,17 @@ nag_line_generator_text(var_0, var_1, var_2, var_3) {
     var_8 = var_0 randomizer_get_no_repeat();
     thread add_debug_dialogue(var_2, var_8, var_3);
 
-    if(var_4 < var_5) {
+    if(var_4 < var_5)
       var_4 = var_4 + randomfloatrange(var_6, var_7);
-    }
   }
 }
 
 create_door(var_0, var_1) {
-  if(!isDefined(level.doors)) {
+  if(!isDefined(level.doors))
     level.doors = [];
-  }
 
-  if(isDefined(level.doors[var_0])) {
+  if(isDefined(level.doors[var_0]))
     return level.doors[var_0];
-  }
 
   var_2 = getent(var_0, "targetname");
   level.doors[var_0] = var_2;
@@ -387,9 +366,8 @@ create_door(var_0, var_1) {
   foreach(var_5 in var_3) {
     var_5 linkto(var_2);
 
-    if(isDefined(var_5.script_parameters) && var_5.script_parameters == "path_connector") {
+    if(isDefined(var_5.script_parameters) && var_5.script_parameters == "path_connector")
       level.doors[var_0].path_connectors[level.doors[var_0].path_connectors.size] = var_5;
-    }
   }
 
   return var_2;
@@ -402,9 +380,8 @@ open_door(var_0, var_1, var_2, var_3) {
     return;
   }
   if(isDefined(var_3) && var_3 == 1) {
-    foreach(var_6 in var_4.path_connectors) {
-      var_6 connectpaths();
-    }
+    foreach(var_6 in var_4.path_connectors)
+    var_6 connectpaths();
   }
 
   wait 0.01;
@@ -413,18 +390,17 @@ open_door(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3) && var_3 == 1) {
     var_4 waittill("rotatedone");
 
-    foreach(var_6 in var_4.path_connectors) {
-      var_6 disconnectpaths();
-    }
+    foreach(var_6 in var_4.path_connectors)
+    var_6 disconnectpaths();
   }
 }
 
 create_automatic_sliding_door(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "script_noteworthy");
 
-  if(!isDefined(var_5) || var_5.size == 0) {
+  if(!isDefined(var_5) || var_5.size == 0)
     iprintln("create_automatic_sliding_door failed. No parts");
-  } else {
+  else {
     var_6 = undefined;
     var_7 = undefined;
     var_8 = undefined;
@@ -454,9 +430,8 @@ create_automatic_sliding_door(var_0, var_1, var_2, var_3, var_4) {
             continue;
           }
 
-          if(var_12.targetname == "left_open_node") {
+          if(var_12.targetname == "left_open_node")
             var_8 = var_12;
-          }
         }
       }
     }
@@ -511,30 +486,26 @@ automatic_sliding_door_logic() {
         self.left moveto(self.left_open.origin, self.time, self.accel);
         self.right moveto(self.right_open.origin, self.time, self.accel);
 
-        if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
+        if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01")
           thread maps\factory_audio::sfx_metal_door_open(self);
-        } else {
+        else
           thread maps\factory_audio::sfx_glass_door_open(self);
-        }
 
-        if(self.door_name == "sliding_door_sat_enter_02") {
+        if(self.door_name == "sliding_door_sat_enter_02")
           thread maps\factory_audio::sfx_sat_door_mix_open();
-        }
       }
     } else if(self.state == "opening" || self.state == "open") {
       self.state = "closed";
       self.left moveto(self.origin, self.time, self.accel);
       self.right moveto(self.origin, self.time, self.accel);
 
-      if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
+      if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01")
         thread maps\factory_audio::sfx_metal_door_close(self);
-      } else {
+      else
         thread maps\factory_audio::sfx_glass_door_close(self);
-      }
 
-      if(self.door_name == "sliding_door_sat_enter_02") {
+      if(self.door_name == "sliding_door_sat_enter_02")
         thread maps\factory_audio::sfx_sat_door_mix_close();
-      }
     }
 
     wait 0.1;
@@ -586,9 +557,8 @@ forklift_run_over_monitor(var_0) {
       if(isDefined(var_0)) {
         var_11 = maps\_utility::get_vehicle(var_0, "targetname");
 
-        if(isDefined(var_11) && var_11 == var_10) {
+        if(isDefined(var_11) && var_11 == var_10)
           continue;
-        }
       }
 
       var_7 = distance(var_10.origin, self.origin);
@@ -652,9 +622,8 @@ quick_kill(var_0, var_1, var_2, var_3) {
   }
   common_scripts\utility::array_thread(var_0, maps\_utility::cqb_aim, var_1);
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     [[var_3]](var_0, var_1);
-  }
 
   if(!isDefined(var_1) || !isalive(var_1)) {
     common_scripts\utility::array_thread(var_0, maps\_utility::cqb_aim, undefined);
@@ -663,18 +632,16 @@ quick_kill(var_0, var_1, var_2, var_3) {
 
   var_1.dontattackme = undefined;
 
-  if(var_2 == 1) {
+  if(var_2 == 1)
     var_1.health = 1;
-  }
 
   var_4 = var_0[0] gettagorigin("tag_flash");
   var_5 = var_1 gettagorigin("j_head");
   var_6 = bulletTrace(var_4, var_5, 1);
 
   if(var_0.size > 1) {
-    if(isDefined(var_6["entity"]) && var_6["entity"] == level.player) {
+    if(isDefined(var_6["entity"]) && var_6["entity"] == level.player)
       var_0 = common_scripts\utility::array_reverse(var_0);
-    }
   }
 
   var_7 = randomint(var_0[0].a.array["single"].size);
@@ -690,31 +657,27 @@ quick_kill(var_0, var_1, var_2, var_3) {
     if(isalive(var_1)) {
       var_5 = var_1 gettagorigin("j_head");
 
-      if(var_2 - var_10 == 1) {
+      if(var_2 - var_10 == 1)
         var_1.health = 1;
-      }
     }
 
     var_11 = (0, 0, 0);
 
-    if(var_2 - var_10 > 1) {
+    if(var_2 - var_10 > 1)
       var_11 = (0, 0, randomfloatrange(5, 15) * -1);
-    }
 
     var_0[0] setflaggedanimknobrestart("fire_notify", var_8, 1, 0.2, var_9);
     var_0[0] waittillmatch_or_timeout("fire_notify", "fire", 0.2);
     var_4 = var_0[0] gettagorigin("tag_flash");
     var_0[0] maps\factory_intro::safe_magic_bullet(var_4, var_5 + var_11);
 
-    if(var_2 - var_10 > 1) {
+    if(var_2 - var_10 > 1)
       wait(0.15 + randomfloat(0.1));
-    }
   }
 
   if(isalive(var_1)) {
-    if(isDefined(var_1.magic_bullet_shield)) {
+    if(isDefined(var_1.magic_bullet_shield))
       var_1 maps\_utility::stop_magic_bullet_shield();
-    }
 
     var_1 kill();
   }
@@ -807,9 +770,8 @@ add_debug_dialogue(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level.debug_dialogue_huds)) {
+  if(!isDefined(level.debug_dialogue_huds))
     level.debug_dialogue_huds = [];
-  }
 
   var_3 = "^3";
 
@@ -869,9 +831,8 @@ add_debug_dialogue(var_0, var_1, var_2) {
     if(var_7 == 0) {
       continue;
     }
-    if(isDefined(var_6)) {
+    if(isDefined(var_6))
       var_6.y = 325 - var_7 * 18;
-    }
   }
 
   wait 2;
@@ -895,34 +856,30 @@ load_transient(var_0) {
 }
 
 sync_transients() {
-  while(!synctransients()) {
+  while(!synctransients())
     wait 0.05;
-  }
 }
 
 god_rays_from_world_location(var_0, var_1, var_2, var_3, var_4) {
   if(maps\_utility::is_gen4()) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       common_scripts\utility::flag_wait(var_1);
-    }
 
     var_5 = 0;
     var_6 = 0;
 
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       maps\_utility::vision_set_fog_changes(var_3, 5);
-    }
 
     var_7 = maps\_utility::create_sunflare_setting("default");
 
     for(;;) {
       var_5 = atan((level.player.origin[2] - var_0[2]) / sqrt(squared(level.player.origin[0] - var_0[0]) + squared(level.player.origin[1] - var_0[1])));
 
-      if(level.player.origin[0] < var_0[0]) {
+      if(level.player.origin[0] < var_0[0])
         var_6 = atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
-      } else {
+      else
         var_6 = 180 + atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
-      }
 
       var_7.position = (var_5, var_6, 0);
       maps\_art::sunflare_changes("default", 0);
@@ -945,33 +902,29 @@ god_rays_from_world_location(var_0, var_1, var_2, var_3, var_4) {
 
 god_rays_from_moving_source(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(maps\_utility::is_gen4()) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       common_scripts\utility::flag_wait(var_2);
-    }
 
     var_6 = 0;
     var_7 = 0;
 
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       maps\_utility::vision_set_fog_changes(var_4, 1);
-    }
 
     var_8 = maps\_utility::create_sunflare_setting("default");
 
     for(;;) {
-      if(isDefined(var_1)) {
+      if(isDefined(var_1))
         var_9 = var_0 gettagorigin("tag_flash");
-      } else {
+      else
         var_9 = var_0.origin;
-      }
 
       var_6 = atan((level.player.origin[2] - var_9[2]) / sqrt(squared(level.player.origin[0] - var_9[0]) + squared(level.player.origin[1] - var_9[1])));
 
-      if(level.player.origin[0] < var_9[0]) {
+      if(level.player.origin[0] < var_9[0])
         var_7 = atan((level.player.origin[1] - var_9[1]) / (level.player.origin[0] - var_9[0]));
-      } else {
+      else
         var_7 = 180 + atan((level.player.origin[1] - var_9[1]) / (level.player.origin[0] - var_9[0]));
-      }
 
       var_8.position = (var_6, var_7, 0);
       maps\_art::sunflare_changes("default", 0);
@@ -1009,15 +962,13 @@ god_rays_intro() {
 }
 
 god_rays_trainyard() {
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     god_rays_from_world_location((4078, 3541, 1321), undefined, "factory_exterior_reveal", "factory_godray", "factory_ingress");
-  }
 }
 
 god_rays_factory_awning() {
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     god_rays_from_world_location((4208, 4299, 263), "factory_exterior_reveal_between_trains", "player_entered_awning", undefined, undefined);
-  }
 }
 
 god_rays_factory_open() {

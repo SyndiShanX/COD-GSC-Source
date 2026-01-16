@@ -37,67 +37,47 @@ main() {
   level.getTimeLimitDvarValue = ::getTimeLimitDvarValue;
   level.endGameOnScoreLimit = false;
   level.flagSetupComplete = false;
-  if(getdvar("twar_captureTime") == "") {
+  if(getdvar("twar_captureTime") == "")
     setdvar("twar_captureTime", "40");
-  }
   level.captureTime = getdvarint("twar_captureTime");
-  if(getdvar("twar_spawnPointFacingAngle") == "") {
+  if(getdvar("twar_spawnPointFacingAngle") == "")
     setdvar("twar_spawnPointFacingAngle", "60");
-  }
-  if(getdvar("twar_captureAccelBonus") == "") {
+  if(getdvar("twar_captureAccelBonus") == "")
     setdvar("twar_captureAccelBonus", "25");
-  }
-  if(getdvar("twar_captureAccelBonus") == "") {
+  if(getdvar("twar_captureAccelBonus") == "")
     setdvar("twar_captureAccelBonus", "25");
-  }
-  if(getdvar("twar_secondaryInfluencerBonus") == "") {
+  if(getdvar("twar_secondaryInfluencerBonus") == "")
     setdvar("twar_secondaryInfluencerBonus", "0.5");
-  }
-  if(getdvar("twar_neutralFlagLockTime") == "") {
+  if(getdvar("twar_neutralFlagLockTime") == "")
     setdvar("twar_neutralFlagLockTime", "10");
-  }
-  if(getdvar("twar_finalFightTimeLimit") == "") {
+  if(getdvar("twar_finalFightTimeLimit") == "")
     setdvar("twar_finalFightTimeLimit", "5");
-  }
-  if(getdvar("twar_finalFightFlagRespawnPenalty") == "") {
+  if(getdvar("twar_finalFightFlagRespawnPenalty") == "")
     setdvar("twar_finalFightFlagRespawnPenalty", "3");
-  }
-  if(getdvar("twar_momentumEnabled") == "") {
+  if(getdvar("twar_momentumEnabled") == "")
     setdvar("twar_momentumEnabled", "0");
-  }
-  if(getdvar("twar_momentumMax") == "") {
+  if(getdvar("twar_momentumMax") == "")
     setdvar("twar_momentumMax", "70");
-  }
-  if(getdvar("twar_momentumMaxMultiplier") == "") {
+  if(getdvar("twar_momentumMaxMultiplier") == "")
     setdvar("twar_momentumMaxMultiplier", "3");
-  }
-  if(getdvar("twar_momentumMultiplierBonus") == "") {
+  if(getdvar("twar_momentumMultiplierBonus") == "")
     setdvar("twar_momentumMultiplierBonus", "25");
-  }
-  if(getdvar("twar_momentumMultiplierBonusLimit") == "") {
+  if(getdvar("twar_momentumMultiplierBonusLimit") == "")
     setdvar("twar_momentumMultiplierBonusLimit", "75");
-  }
-  if(getdvar("twar_momentumBlitzkriegTime") == "") {
+  if(getdvar("twar_momentumBlitzkriegTime") == "")
     setdvar("twar_momentumBlitzkriegTime", "30");
-  }
-  if(getdvar("twar_momentumFlagCap") == "") {
+  if(getdvar("twar_momentumFlagCap") == "")
     setdvar("twar_momentumFlagCap", "25");
-  }
-  if(getdvar("twar_momentumKillPlayer") == "") {
+  if(getdvar("twar_momentumKillPlayer") == "")
     setdvar("twar_momentumKillPlayer", "5");
-  }
-  if(getdvar("twar_momentumRadar") == "") {
+  if(getdvar("twar_momentumRadar") == "")
     setdvar("twar_momentumRadar", "10");
-  }
-  if(getdvar("twar_momentumArtillery") == "") {
+  if(getdvar("twar_momentumArtillery") == "")
     setdvar("twar_momentumArtillery", "10");
-  }
-  if(getdvar("twar_momentumDogs") == "") {
+  if(getdvar("twar_momentumDogs") == "")
     setdvar("twar_momentumDogs", "10");
-  }
-  if(getdvar("twar_showEnemyCount") == "") {
+  if(getdvar("twar_showEnemyCount") == "")
     setdvar("twar_showEnemyCount", "1");
-  }
   setDvar("war_sb", "");
   level.objectiveFX = "waypoint_objpoint";
   level.objectiveCompassFX = "objective";
@@ -131,16 +111,14 @@ onPrecacheGameType() {
   precacheShader(level.objectiveCompassFX);
   game["flagmodels"] = [];
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
-  if(game["allies"] == "marines") {
+  if(game["allies"] == "marines")
     game["flagmodels"]["allies"] = "prop_flag_american";
-  } else {
+  else
     game["flagmodels"]["allies"] = "prop_flag_russian";
-  }
-  if(game["axis"] == "german") {
+  if(game["axis"] == "german")
     game["flagmodels"]["axis"] = "prop_flag_german";
-  } else {
+  else
     game["flagmodels"]["axis"] = "prop_flag_japanese";
-  }
   precacheModel(game["flagmodels"]["neutral"]);
   precacheModel(game["flagmodels"]["allies"]);
   precacheModel(game["flagmodels"]["axis"]);
@@ -179,31 +157,30 @@ onPrecacheGameType() {
   precacheString(&"MP_WAR_TEAMS_WERE_EVEN");
   precacheString(&"MP_WAR_TEAM_WAS_LEADING");
   precacheString(&"MP_WAR_OTHERTEAM_WAS_LEADING");
-  if(!isDefined(game["strings_menu"])) {
+  if(!isDefined(game["strings_menu"]))
     game["strings_menu"] = [];
-  }
   if(!isDefined(game["strings"]["war_callsign_a"]) || !isDefined(game["strings_menu"]["war_callsign_a"])) {
-    game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_A";
+    game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_A";
     game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_A";
   }
   precacheString(game["strings"]["war_callsign_a"]);
   if(!isDefined(game["strings"]["war_callsign_b"]) || !isDefined(game["strings_menu"]["war_callsign_b"])) {
-    game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_B";
+    game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_B";
     game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_B";
   }
   precacheString(game["strings"]["war_callsign_b"]);
   if(!isDefined(game["strings"]["war_callsign_c"]) || !isDefined(game["strings_menu"]["war_callsign_c"])) {
-    game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_C";
+    game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_C";
     game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_C";
   }
   precacheString(game["strings"]["war_callsign_c"]);
   if(!isDefined(game["strings"]["war_callsign_d"]) || !isDefined(game["strings_menu"]["war_callsign_d"])) {
-    game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_D";
+    game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_D";
     game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_D";
   }
   precacheString(game["strings"]["war_callsign_d"]);
   if(!isDefined(game["strings"]["war_callsign_e"]) || !isDefined(game["strings_menu"]["war_callsign_e"])) {
-    game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_E";
+    game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_E";
     game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_E";
   }
   precacheString(game["strings"]["war_callsign_e"]);
@@ -222,7 +199,7 @@ onPrecacheGameType() {
 
 onRoundSwitch() {
   level.halftimeType = "finalfight";
-  level.halftimeSubCaption = &"MP_ONEFLAGWINS";
+  level.halftimeSubCaption = & "MP_ONEFLAGWINS";
 }
 
 getTimeLimitDvarValue() {
@@ -240,7 +217,7 @@ onOvertime() {
     setGameEndTime(0);
   } else {
     waitTime = 0;
-    while(waitTime < timeLimit) {
+    while (waitTime < timeLimit) {
       waitTime += 1;
       setGameEndTime(getTime() + ((timeLimit - waitTime) * 1000));
       wait(1.0);
@@ -256,36 +233,36 @@ onStartGameType() {
   } else {
     level.inFinalFight = true;
   }
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_TWAR");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_TWAR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_TWAR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_TWAR");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TWAR");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TWAR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TWAR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TWAR");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TWAR_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TWAR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TWAR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TWAR_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_TWAR_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_TWAR_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_TWAR_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_TWAR_HINT");
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   spawn_axis_start_classname = "mp_twar_spawn_axis_start";
   spawn_allies_start_classname = "mp_twar_spawn_allies_start";
-  level.spawn_axis_start = getEntArray(spawn_axis_start_classname, "classname");
-  level.spawn_allies_start = getEntArray(spawn_allies_start_classname, "classname");
+  level.spawn_axis_start = GetEntArray(spawn_axis_start_classname, "classname");
+  level.spawn_allies_start = GetEntArray(spawn_allies_start_classname, "classname");
   if(level.spawn_axis_start.size == 0 || level.spawn_allies_start.size == 0) {
     spawn_axis_start_classname = "mp_dom_spawn_axis_start";
     spawn_allies_start_classname = "mp_dom_spawn_allies_start";
-    level.spawn_axis_start = getEntArray(spawn_axis_start_classname, "classname");
-    level.spawn_allies_start = getEntArray(spawn_allies_start_classname, "classname");
+    level.spawn_axis_start = GetEntArray(spawn_axis_start_classname, "classname");
+    level.spawn_allies_start = GetEntArray(spawn_allies_start_classname, "classname");
     allow_dom_object_placement = true;
   }
   spawn_all_classname = "mp_twar_spawn";
-  level.spawn_all = getEntArray(spawn_all_classname, "classname");
+  level.spawn_all = GetEntArray(spawn_all_classname, "classname");
   if(level.spawn_all.size == 0) {
     spawn_all_classname = "mp_dom_spawn";
-    level.spawn_all = getEntArray(spawn_all_classname, "classname");
+    level.spawn_all = GetEntArray(spawn_all_classname, "classname");
     allow_dom_object_placement = true;
   }
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints(spawn_allies_start_classname);
@@ -334,14 +311,13 @@ onStartGameType() {
 }
 
 onTimeLimit() {
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(isDefined(player)) {
+    if(isDefined(player))
       player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(undefined, undefined);
-    }
   }
   if(!level.inFinalFight && 0 <= getDvarInt("twar_finalFightTimeLimit")) {
-    thread maps\mp\gametypes\_globallogic::endGame("endregulation", &"MP_END_OF_REGULATION");
+    thread maps\mp\gametypes\_globallogic::endGame("endregulation", & "MP_END_OF_REGULATION");
     alliesFlagCount = getTeamFlagCount("allies");
     switch (alliesFlagCount) {
       case 0:
@@ -383,12 +359,10 @@ onTeamOutcomeNotify(winner, isRound, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
   team = self.pers["team"];
-  if(!isDefined(team) || (team != "allies" && team != "axis")) {
+  if(!isDefined(team) || (team != "allies" && team != "axis"))
     team = "allies";
-  }
-  while(self.doingNotify) {
+  while (self.doingNotify)
     wait 0.05;
-  }
   self endon("reset_outcome");
   if(level.splitscreen) {
     titleSize = 2.0;
@@ -419,25 +393,22 @@ onTeamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle setText(&"MP_FINALFIGHT");
     outcomeTitle.color = (1, 1, 1);
   } else if(winner == "tie") {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_draw"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["draw"]);
-    }
     outcomeTitle.color = (1, 1, 1);
   } else if(isDefined(self.pers["team"]) && winner == team) {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_win"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["victory"]);
-    }
     outcomeTitle.color = (0.6, 0.9, 0.6);
   } else {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_loss"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["defeat"]);
-    }
     outcomeTitle.color = (0.7, 0.3, 0.2);
   }
   outcomeText setText(endReasonText);
@@ -505,8 +476,8 @@ getRespawnDelay() {
 
 twar_sendDvarToAllPlayers(dvar, value, inc_count, time_inc) {
   current_time_value = 0;
-  for(i = 0; i < level.players.size; i++) {
-    for(players_this_inc = 0; players_this_inc < inc_count; players_this_inc++) {
+  for (i = 0; i < level.players.size; i++) {
+    for (players_this_inc = 0; players_this_inc < inc_count; players_this_inc++) {
       level.players[i] thread twar_setClientDvar(dvar, value, current_time_value);
     }
     current_time_value += time_inc;
@@ -543,7 +514,7 @@ sendFlagCallsignDvars() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     if(isDefined(player)) {
       player.hidingHudForNotify = false;
@@ -562,7 +533,7 @@ onPlayerConnect() {
 onTeamChange() {
   self endon("disconnect");
   level endon("game_ended");
-  while(1) {
+  while (1) {
     self waittill("joined_team");
     updateHudIcons(false);
     contestedFlag = locate_contested_twar_flag();
@@ -574,14 +545,14 @@ onTeamChange() {
 }
 
 clearPlayersTouchingFlag() {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i].touchingContestedFlag = false;
   }
 }
 
 hideHudOnNotify() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("notifyMessageBegin", notifyDuration);
     self hud_hideHudForPlayer();
     self.hidingHudForNotify = true;
@@ -610,7 +581,7 @@ hardpointMomentum() {
   radarMomentum = getDvarInt("twar_momentumRadar");
   artilleryMomentum = getDvarInt("twar_momentumArtillery");
   dogsMomentum = getDvarInt("twar_momentumDogs");
-  for(;;) {
+  for (;;) {
     self waittill("hardpoint_used", hardpointType);
     amount = 1;
     switch (hardpointType) {
@@ -637,7 +608,7 @@ updateAllPlayersHudIcons(contested_flag) {
   if(isDefined(contested_flag)) {
     parent_elem_index = level.flagOrder[contested_flag.label];
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player)) {
       player thread threadedUpdateHudIcons(false, parent_elem_index, i * 0.05);
@@ -646,7 +617,7 @@ updateAllPlayersHudIcons(contested_flag) {
 }
 
 hideAllPlayersHudIcons() {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player)) {
       player hud_hideHudForPlayer();
@@ -675,7 +646,7 @@ fadeInIconElemAndChildren() {
   self.alpha = 0;
   self fadeOverTime(0.5);
   self.alpha = 0.75;
-  for(i = 0; i < self.children.size; i++) {
+  for (i = 0; i < self.children.size; i++) {
     self.children[i] fadeInIconChild();
   }
 }
@@ -689,7 +660,7 @@ fadeInIconElem() {
 
 fadeOutIconElemAndChildren() {
   self hideElem();
-  for(i = 0; i < self.children.size; i++) {
+  for (i = 0; i < self.children.size; i++) {
     self.children[i] hideElem();
   }
 }
@@ -712,7 +683,7 @@ updateHudIcons(hide) {
     team = "allies";
   }
   y = level.hudImageSize + level.hudImageSpacing;
-  for(j = 0; j < numColumns; j++) {
+  for (j = 0; j < numColumns; j++) {
     flag = level.flags[j];
     useObj = flag.useObj;
     size = level.hudImageSize;
@@ -765,7 +736,7 @@ updateAllPlayersHudPlayerProgressBars(flag) {
   if(level.hardcoreMode) {
     return;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player)) {
       player updateHudProgressBar(flag);
@@ -787,7 +758,7 @@ updateAllPlayersHudPlayerCounts(flag) {
     numAllies = 0;
     numAxis = 0;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player)) {
       player updateHudPlayerCounts(flag, numAllies, numAxis);
@@ -840,7 +811,7 @@ updateHudMomentumForTeam(team) {
   if(getDvarInt("twar_momentumEnabled") == 0) {
     return;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player) && player.pers["team"] == team) {
       player updateHudMomentum();
@@ -885,9 +856,8 @@ updateHudMomentum() {
 }
 
 updateMomentum(team, amount) {
-  if(getDvarInt("twar_momentumEnabled") == 0) {
+  if(getDvarInt("twar_momentumEnabled") == 0)
     return;
-  }
   prof_begin("TWAR: updateMomentum");
   momentumMax = getDvarInt("twar_momentumMax");
   momentumMaxMultiplier = getDvarInt("twar_momentumMaxMultiplier");
@@ -902,19 +872,17 @@ updateMomentum(team, amount) {
     game["war_momentum"][team] += amount;
   }
   if(game["war_momentum"][team + "_multiplier"] < momentumMaxMultiplier) {
-    while((momentumMax <= game["war_momentum"][team]) && (game["war_momentum"][team + "_multiplier"] < momentumMaxMultiplier)) {
+    while ((momentumMax <= game["war_momentum"][team]) && (game["war_momentum"][team + "_multiplier"] < momentumMaxMultiplier)) {
       game["war_momentum"][team + "_multiplier"]++;
       game["war_momentum"][team] = game["war_momentum"][team] - momentumMax;
     }
-    if(momentumMax < game["war_momentum"][team]) {
+    if(momentumMax < game["war_momentum"][team])
       game["war_momentum"][team] = momentumMax;
-    }
     if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
-      if(team == "allies") {
+      if(team == "allies")
         level thread alliesBlitzkriegCountdown();
-      } else {
+      else
         level thread axisBlitzkriegCountdown();
-      }
     }
     if(!level.gameEnded &&
       previousMultiplier != game["war_momentum"][team + "_multiplier"]) {
@@ -922,25 +890,25 @@ updateMomentum(team, amount) {
       if(previousMultiplier < game["war_momentum"][team + "_multiplier"]) {
         enemyTeam = getOtherTeam(team);
         if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
-          notifyData.titleText = &"MP_BLITZKRIEG";
-          notifyData.notifyText = &"MP_BLITZKRIEG_DESC";
+          notifyData.titleText = & "MP_BLITZKRIEG";
+          notifyData.notifyText = & "MP_BLITZKRIEG_DESC";
           notifyData.iconName = "hud_momentum_notification_blitzkrieg";
           notifyData.iconWidth = 40;
           notifyData.iconHeight = 40;
           maps\mp\gametypes\_globallogic::leaderDialog("blitz_friendly", team);
         } else {
-          notifyData.titleText = &"MP_MOMENTUM";
-          notifyData.notifyText = &"MP_MOMENTUM_DESC";
+          notifyData.titleText = & "MP_MOMENTUM";
+          notifyData.notifyText = & "MP_MOMENTUM_DESC";
           notifyData.iconName = "hud_momentum_notification_bonus";
           notifyData.iconWidth = 32;
           notifyData.iconHeight = 32;
           maps\mp\gametypes\_globallogic::leaderDialog("momentum_friendly", team);
         }
       } else if(game["war_momentum"][team + "_multiplier"] == 1) {
-        notifyData.titleText = &"MP_MOMENTUM_LOST";
-        notifyData.notifyText = &"MP_MOMENTUM_LOST_DESC";
+        notifyData.titleText = & "MP_MOMENTUM_LOST";
+        notifyData.notifyText = & "MP_MOMENTUM_LOST_DESC";
       }
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         if(isDefined(player) && player.pers["team"] == team) {
           player maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -960,7 +928,7 @@ alliesBlitzkriegCountdown() {
   momentumMax = getDvarInt("twar_momentumMax");
   blitzkriegTime = getDvarInt("twar_momentumBlitzkriegTime");
   waitTime = 0.1;
-  while(waitTime < blitzkriegTime) {
+  while (waitTime < blitzkriegTime) {
     game["war_momentum"]["allies"] = int(momentumMax - (momentumMax / blitzkriegTime) * waitTime);
     game["war_momentum"]["allies_blitzkriegTime"] = int(blitzkriegTime - waitTime);
     updateHudMomentumForTeam("allies");
@@ -978,7 +946,7 @@ axisBlitzkriegCountdown() {
   momentumMax = getDvarInt("twar_momentumMax");
   blitzkriegTime = getDvarInt("twar_momentumBlitzkriegTime");
   waitTime = 0.1;
-  while(waitTime < blitzkriegTime) {
+  while (waitTime < blitzkriegTime) {
     game["war_momentum"]["axis"] = int(momentumMax - (momentumMax / blitzkriegTime) * waitTime);
     game["war_momentum"]["axis_blitzkriegTime"] = int(blitzkriegTime - waitTime);
     updateHudMomentumForTeam("axis");
@@ -993,9 +961,8 @@ axisBlitzkriegCountdown() {
 updateFlagStatusHudDvars(flag) {
   prof_begin("TWAR: updateFlagStatusHudDvars");
   otherTeam = "axis";
-  if(isDefined(flag) && flag.claimTeam == "axis") {
+  if(isDefined(flag) && flag.claimTeam == "axis")
     otherTeam = "allies";
-  }
   if(!isDefined(flag) || flag.claimTeam == "none" || (flag.numTouching[flag.claimTeam] == 0 && flag.numTouching[otherTeam] == 0)) {
     if(getDvar("war_sb") != "") {
       setDvar("war_sb", "");
@@ -1038,13 +1005,12 @@ onSpawnPlayer() {
     enemyFlagsOwned = 0;
     myTeam = self.pers["team"];
     enemyTeam = getOtherTeam(myTeam);
-    for(i = 0; i < level.flags.size; i++) {
+    for (i = 0; i < level.flags.size; i++) {
       team = level.flags[i] getFlagTeam();
-      if(team == myTeam) {
+      if(team == myTeam)
         flagsOwned++;
-      } else if(team == enemyTeam) {
+      else if(team == enemyTeam)
         enemyFlagsOwned++;
-      }
     }
     if(flagsOwned == level.flags.size) {
       enemyBestSpawnFlag = level.bestSpawnFlag[getOtherTeam(self.pers["team"])];
@@ -1064,11 +1030,10 @@ onSpawnPlayer() {
     }
   }
   if(!isDefined(spawnpoint)) {
-    if(self.pers["team"] == "axis") {
+    if(self.pers["team"] == "axis")
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    } else {
+    else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
-    }
   }
   assert(isDefined(spawnpoint));
   self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -1103,14 +1068,14 @@ twarFlags() {
   level.lastStatus["axis"] = 0;
   refWrapper = spawn_array_struct();
   refWrapper.primaryFlags = getEntArray("flag_primary_linked", "targetname");
-  refWrapper.descriptors = getEntArray("twar_flag_descriptor", "targetname");
+  refWrapper.descriptors = getentarray("twar_flag_descriptor", "targetname");
   refWrapper.maperrors = [];
   refWrapper.descriptorsByLinkname = [];
   level.flags = [];
-  for(index = 0; index < refWrapper.primaryFlags.size; index++) {
+  for (index = 0; index < refWrapper.primaryFlags.size; index++) {
     closestdist = undefined;
     closestdesc = undefined;
-    for(i = 0; i < refWrapper.descriptors.size; i++) {
+    for (i = 0; i < refWrapper.descriptors.size; i++) {
       dist = distance(refWrapper.primaryFlags[index].origin, refWrapper.descriptors[i].origin);
       if(!isDefined(closestdist) || dist < closestdist) {
         closestdist = dist;
@@ -1143,7 +1108,7 @@ twarFlags() {
   level.flagOrder["_e"] = 4;
   sortFlags();
   level.twarFlags = [];
-  for(index = 0; index < level.flags.size; index++) {
+  for (index = 0; index < level.flags.size; index++) {
     trigger = level.flags[index];
     if(isDefined(trigger.target)) {
       visuals[0] = getEnt(trigger.target, "targetname");
@@ -1224,8 +1189,8 @@ twarFlags() {
 }
 
 sortFlags() {
-  for(i = 1; i < level.flags.size; i++) {
-    for(j = 0; j < level.flags.size - i; j++) {
+  for (i = 1; i < level.flags.size; i++) {
+    for (j = 0; j < level.flags.size - i; j++) {
       if(level.flagOrder[level.flags[j].script_label] > level.flagOrder[level.flags[j + 1].script_label]) {
         temp = level.flags[j];
         level.flags[j] = level.flags[j + 1];
@@ -1238,7 +1203,7 @@ sortFlags() {
 getUnownedFlagNearestStart(team, excludeFlag) {
   best = undefined;
   bestdistsq = undefined;
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
     if(flag getFlagTeam() != "neutral") {
       continue;
@@ -1253,28 +1218,26 @@ getUnownedFlagNearestStart(team, excludeFlag) {
 }
 
 domDebug() {
-  while(1) {
+  while (1) {
     if(getdvar("scr_domdebug") != "1") {
       wait 2;
       continue;
     }
-    while(1) {
+    while (1) {
       if(getdvar("scr_domdebug") != "1") {
         break;
       }
-      for(i = 0; i < level.flags.size; i++) {
-        for(j = 0; j < level.flags[i].adjflags.size; j++) {
+      for (i = 0; i < level.flags.size; i++) {
+        for (j = 0; j < level.flags[i].adjflags.size; j++) {
           line(level.flags[i].origin, level.flags[i].adjflags[j].origin, (1, 1, 1));
         }
-        for(j = 0; j < level.flags[i].nearbyspawns.size; j++) {
+        for (j = 0; j < level.flags[i].nearbyspawns.size; j++) {
           line(level.flags[i].origin, level.flags[i].nearbyspawns[j].origin, (.2, .2, .6));
         }
-        if(level.flags[i] == level.bestSpawnFlag["allies"]) {
+        if(level.flags[i] == level.bestSpawnFlag["allies"])
           print3d(level.flags[i].origin, "allies best spawn flag");
-        }
-        if(level.flags[i] == level.bestSpawnFlag["axis"]) {
+        if(level.flags[i] == level.bestSpawnFlag["axis"])
           print3d(level.flags[i].origin, "axis best spawn flag");
-        }
       }
       wait .05;
     }
@@ -1371,9 +1334,8 @@ onUseUpdate(team, progress, change) {
       self.didStatusNotify = true;
     }
   }
-  if(progress < 0.05 && level.lastProgress > progress && level.isLastFlag) {
+  if(progress < 0.05 && level.lastProgress > progress && level.isLastFlag)
     setmusicstate("UNDERSCORE");
-  }
   level.lastProgress = progress;
   updateAllPlayersHudPlayerProgressBars(self);
   if(progress == 0) {
@@ -1405,9 +1367,8 @@ resetFlagBaseEffect(delay_time) {
   if(isDefined(delay_time)) {
     wait(delay_time);
   }
-  if(isDefined(self.baseeffect)) {
+  if(isDefined(self.baseeffect))
     self.baseeffect delete();
-  }
   team = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
   if(team != "neutral") {
     return;
@@ -1437,7 +1398,7 @@ flagNeutralTimer() {
   level endon("game_ended");
   time = getDvarFloat("twar_neutralFlagLockTime");
   if(time && level.flagSetupComplete) {
-    for(index = 0; index < level.players.size; index++) {
+    for (index = 0; index < level.players.size; index++) {
       player = level.players[index];
       if(isDefined(player)) {
         player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(time, "@MENU_WAR_STATUS_NEUTRAL_COOK");
@@ -1470,7 +1431,7 @@ onUse(player) {
   nextFlag = undefined;
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
+    thread printAndSoundOnEveryone(team, otherTeam, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
     if(!level.inFinalFight) {
       if(!checkIfLastFlagCaptured(otherTeam)) {
         thread playSoundOnPlayers("mx_WAR_captured" + "_" + level.teamPrefix[team]);
@@ -1484,18 +1445,16 @@ onUse(player) {
       }
     }
   } else {
-    thread printAndSoundOnEveryone(team, oldTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
+    thread printAndSoundOnEveryone(team, oldTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
     if(!level.inFinalFight) {
       thread playSoundOnPlayers("mx_WAR_captured" + "_" + level.teamPrefix[team]);
       if(team != "neutral") {
-        if(!checkIfLastFlagCaptured(oldTeam)) {
+        if(!checkIfLastFlagCaptured(oldTeam))
           statusDialog("secure_flag", team);
-        }
       }
       if(oldTeam != "neutral") {
-        if(!checkIfLastFlagCaptured(oldTeam)) {
+        if(!checkIfLastFlagCaptured(oldTeam))
           statusDialog("lost_flag", oldTeam);
-        }
         level.bestSpawnFlag[oldTeam] = self.levelFlag;
       }
       otherTeam = getOtherTeam(team);
@@ -1518,11 +1477,10 @@ onUse(player) {
     if(!isLastFlag) {
       updateMomentum(getOtherTeam(team), 0);
       updateMomentum(team, getDvarInt("twar_momentumFlagCap"));
-      if(team == "allies") {
+      if(team == "allies")
         nextFlag = level.twarFlags[level.flagOrder[self.label] + 1];
-      } else {
+      else
         nextFlag = level.twarFlags[level.flagOrder[self.label] - 1];
-      }
       nextFlag setFlagOwner("neutral");
       flagChanging = true;
     }
@@ -1553,19 +1511,17 @@ onUse(player) {
 }
 
 checkIfLastFlag(team) {
-  if(getTeamFlagCount(team) == 1) {
+  if(getTeamFlagCount(team) == 1)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 checkIfLastFlagCaptured(team) {
-  if(getTeamFlagCount(team) == 0) {
+  if(getTeamFlagCount(team) == 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 getUseRate(accelPercent) {
@@ -1584,9 +1540,8 @@ onUpdateUseRate() {
     otherTeam = getOtherTeam(self.claimTeam);
     claimTeamMomentumMultiplier = game["war_momentum"][self.claimTeam + "_multiplier"];
     otherTeamMomentumMultiplier = 0;
-    if(otherTeam == "axis" || otherTeam == "allies") {
+    if(otherTeam == "axis" || otherTeam == "allies")
       otherTeamMomentumMultiplier = game["war_momentum"][otherTeam + "_multiplier"];
-    }
     momentumMaxMultiplier = 0;
     momentumMultiplierBonus = 0;
     momentumMultiplierBonusLimit = 0;
@@ -1600,32 +1555,27 @@ onUpdateUseRate() {
     if(self.decayProgress) {
       numClaimants = self.numTouching[self.claimTeam];
       numOther = 0;
-      if(otherTeam == "axis" || otherTeam == "allies") {
+      if(otherTeam == "axis" || otherTeam == "allies")
         numOther += self.numTouching[otherTeam];
-      }
       accelPercent = 0;
       momentumPercent = 0;
       if(numClaimants && !numOther) {
         accelPercent = (numClaimants - 1) * captureAccelBonus;
-        if(captureAccelLimit < accelPercent) {
+        if(captureAccelLimit < accelPercent)
           accelPercent = captureAccelLimit;
-        }
         if(1 < claimTeamMomentumMultiplier) {
           momentumPercent = claimTeamMomentumMultiplier * momentumMultiplierBonus;
-          if(momentumMultiplierBonusLimit < momentumPercent) {
+          if(momentumMultiplierBonusLimit < momentumPercent)
             momentumPercent = momentumMultiplierBonusLimit;
-          }
         }
       } else if(!numClaimants && numOther) {
         accelPercent = numOther * captureAccelBonus;
-        if(captureAccelLimit < accelPercent) {
+        if(captureAccelLimit < accelPercent)
           accelPercent = captureAccelLimit;
-        }
         if(1 < otherTeamMomentumMultiplier) {
           momentumPercent = otherTeamMomentumMultiplier * momentumMultiplierBonus;
-          if(momentumMultiplierBonusLimit < momentumPercent) {
+          if(momentumMultiplierBonusLimit < momentumPercent)
             momentumPercent = momentumMultiplierBonusLimit;
-          }
         }
       }
       self.useRate = getUseRate(accelPercent * 0.01) * getUseRate(momentumPercent * 0.01);
@@ -1633,14 +1583,12 @@ onUpdateUseRate() {
       numClaimants = self.numTouching[self.claimTeam];
       accelPercent = (numClaimants - 1) * captureAccelBonus;
       momentumPercent = 0;
-      if(captureAccelLimit < accelPercent) {
+      if(captureAccelLimit < accelPercent)
         accelPercent = captureAccelLimit;
-      }
       if(1 < claimTeamMomentumMultiplier) {
         momentumPercent = claimTeamMomentumMultiplier * momentumMultiplierBonus;
-        if(momentumMultiplierBonusLimit < momentumPercent) {
+        if(momentumMultiplierBonusLimit < momentumPercent)
           momentumPercent = momentumMultiplierBonusLimit;
-        }
       }
       self.useRate = getUseRate(accelPercent * 0.01) * getUseRate(momentumPercent * 0.01);
     }
@@ -1652,7 +1600,7 @@ giveFlagCaptureXP(touchList, isLastFlag) {
   wait .05;
   maps\mp\gametypes\_globallogic::WaitTillSlowProcessAllowed();
   players = getArrayKeys(touchList);
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = touchList[players[index]].player;
     if(player.lastcapkiller) {
       player maps\mp\gametypes\_missions::doMissionCallback("warHero", player);
@@ -1700,10 +1648,9 @@ updateTwarScores() {
 
 getTeamFlagCount(team) {
   score = 0;
-  for(i = 0; i < level.flags.size; i++) {
-    if(level.twarFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team) {
+  for (i = 0; i < level.flags.size; i++) {
+    if(level.twarFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team)
       score++;
-    }
   }
   return score;
 }
@@ -1714,8 +1661,8 @@ getFlagTeam() {
 
 getBoundaryFlags() {
   bflags = [];
-  for(i = 0; i < level.flags.size; i++) {
-    for(j = 0; j < level.flags[i].adjflags.size; j++) {
+  for (i = 0; i < level.flags.size; i++) {
+    for (j = 0; j < level.flags[i].adjflags.size; j++) {
       if(level.flags[i].useObj maps\mp\gametypes\_gameobjects::getOwnerTeam() != level.flags[i].adjflags[j].useObj maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
         bflags[bflags.size] = level.flags[i];
         break;
@@ -1728,26 +1675,25 @@ getBoundaryFlags() {
 getBoundaryFlagSpawns(team) {
   spawns = [];
   bflags = getBoundaryFlags();
-  for(i = 0; i < bflags.size; i++) {
+  for (i = 0; i < bflags.size; i++) {
     if(isDefined(team) && bflags[i] getFlagTeam() != team) {
       continue;
     }
-    for(j = 0; j < bflags[i].nearbyspawns.size; j++) {
+    for (j = 0; j < bflags[i].nearbyspawns.size; j++)
       spawns[spawns.size] = bflags[i].nearbyspawns[j];
-    }
   }
   return spawns;
 }
 
 getSpawnsBoundingFlag(avoidflag) {
   spawns = [];
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
     if(flag == avoidflag) {
       continue;
     }
     isbounding = false;
-    for(j = 0; j < flag.adjflags.size; j++) {
+    for (j = 0; j < flag.adjflags.size; j++) {
       if(flag.adjflags[j] == avoidflag) {
         isbounding = true;
         break;
@@ -1756,26 +1702,23 @@ getSpawnsBoundingFlag(avoidflag) {
     if(!isbounding) {
       continue;
     }
-    for(j = 0; j < flag.nearbyspawns.size; j++) {
+    for (j = 0; j < flag.nearbyspawns.size; j++)
       spawns[spawns.size] = flag.nearbyspawns[j];
-    }
   }
   return spawns;
 }
 
 getOwnedAndBoundingFlagSpawns(team) {
   spawns = [];
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
+      for (s = 0; s < level.flags[i].nearbyspawns.size; s++)
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
-      }
     } else {
-      for(j = 0; j < level.flags[i].adjflags.size; j++) {
+      for (j = 0; j < level.flags[i].adjflags.size; j++) {
         if(level.flags[i].adjflags[j] getFlagTeam() == team) {
-          for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
+          for (s = 0; s < level.flags[i].nearbyspawns.size; s++)
             spawns[spawns.size] = level.flags[i].nearbyspawns[s];
-          }
           break;
         }
       }
@@ -1786,11 +1729,10 @@ getOwnedAndBoundingFlagSpawns(team) {
 
 getOwnedFlagSpawns(team) {
   spawns = [];
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
+      for (s = 0; s < level.flags[i].nearbyspawns.size; s++)
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
-      }
     }
   }
   return spawns;
@@ -1798,13 +1740,13 @@ getOwnedFlagSpawns(team) {
 
 flagSetup(refWrapper) {
   if(refWrapper.maperrors.size == 0) {
-    for(i = 0; i < level.flags.size; i++) {
+    for (i = 0; i < level.flags.size; i++) {
       if(isDefined(level.flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(level.flags[i].descriptor.script_linkto, " ");
       } else {
         adjdescs = [];
       }
-      for(j = 0; j < adjdescs.size; j++) {
+      for (j = 0; j < adjdescs.size; j++) {
         otherdesc = refWrapper.descriptorsByLinkname[adjdescs[j]];
         if(!isDefined(otherdesc) || otherdesc.targetname != "twar_flag_descriptor") {
           refWrapper.maperrors[refWrapper.maperrors.size] = "twar_flag_descriptor with script_linkname \"" + level.flags[i].descriptor.script_linkname + "\" linked to \"" + adjdescs[j] + "\" which does not exist as a script_linkname of any other entity with a targetname of twar_flag_descriptor (or, if it does, that twar_flag_descriptor has not been assigned to a flag)";
@@ -1819,8 +1761,8 @@ flagSetup(refWrapper) {
       }
     }
   }
-  spawnpoints = getEntArray("mp_dom_spawn", "classname");
-  for(i = 0; i < spawnpoints.size; i++) {
+  spawnpoints = getentarray("mp_dom_spawn", "classname");
+  for (i = 0; i < spawnpoints.size; i++) {
     if(isDefined(spawnpoints[i].script_linkto)) {
       desc = refWrapper.descriptorsByLinkname[spawnpoints[i].script_linkto];
       if(!isDefined(desc) || desc.targetname != "twar_flag_descriptor") {
@@ -1831,7 +1773,7 @@ flagSetup(refWrapper) {
     } else {
       nearestflag = undefined;
       nearestdist = undefined;
-      for(j = 0; j < level.flags.size; j++) {
+      for (j = 0; j < level.flags.size; j++) {
         dist = distancesquared(level.flags[j].origin, spawnpoints[i].origin);
         if(!isDefined(nearestflag) || dist < nearestdist) {
           nearestflag = level.flags[j];
@@ -1846,15 +1788,14 @@ flagSetup(refWrapper) {
 
 onEndGame(winningTeam) {
   if(isDefined(level.twarFlags)) {
-    for(i = 0; i < level.twarFlags.size; i++) {
+    for (i = 0; i < level.twarFlags.size; i++) {
       level.twarFlags[i] maps\mp\gametypes\_gameobjects::allowUse("none");
     }
   }
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(isDefined(player)) {
+    if(isDefined(player))
       player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(undefined, undefined);
-    }
   }
   hideAllPlayersHudIcons();
 }
@@ -1862,7 +1803,7 @@ onEndGame(winningTeam) {
 printMapErrors(refWrapper) {
   if(refWrapper.mapErrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for(i = 0; i < refWrapper.mapErrors.size; i++) {
+    for (i = 0; i < refWrapper.mapErrors.size; i++) {
       println(refWrapper.mapErrors[i]);
     }
     println("^1------------------------------------");
@@ -1900,7 +1841,7 @@ twar_flag_index_to_script_flag(
 twar_generate_non_enemy_flag_indices(
   player_team) {
   flag_indices = [];
-  for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
+  for (flag_index = 0; flag_index < level.flags.size; flag_index++) {
     if(!maps\mp\gametypes\_spawning::teams_have_enmity(player_team, (level.flags[flag_index] GetFlagTeam()))) {
       flag_indices[flag_indices.size] = flag_index;
     }
@@ -1909,15 +1850,12 @@ twar_generate_non_enemy_flag_indices(
 }
 
 twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag) {
-  if(!isDefined(influencer_entity.script_gameobjectname) || influencer_entity.script_gameobjectname != "twar") {
+  if(!isDefined(influencer_entity.script_gameobjectname) || influencer_entity.script_gameobjectname != "twar")
     return false;
-  }
-  if(!isDefined(influencer_entity.script_team) || influencer_entity.script_team != flag_team) {
+  if(!isDefined(influencer_entity.script_team) || influencer_entity.script_team != flag_team)
     return false;
-  }
-  if(!isDefined(influencer_entity.script_twar_flag) || influencer_entity.script_twar_flag != script_flag) {
+  if(!isDefined(influencer_entity.script_twar_flag) || influencer_entity.script_twar_flag != script_flag)
     return false;
-  }
   return true;
 }
 
@@ -1935,7 +1873,7 @@ twar_create_designer_placed_spawn_influencers_for_flag(
     flag_origin = contested_flag GetOrigin();
     closest_distance_squared = 1000000000000.0;
     second_closest_distance_squared = 1000000000000.0;
-    for(influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
+    for (influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
       influencer_entity = placed_influencers[influencer_index];
       if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag)) {
         continue;
@@ -1956,7 +1894,7 @@ twar_create_designer_placed_spawn_influencers_for_flag(
     }
   }
   secondary_influencer_bonus_percent = getdvarfloat("twar_secondaryInfluencerBonus");
-  for(influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
+  for (influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
     influencer_entity = placed_influencers[influencer_index];
     if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag)) {
       continue;
@@ -1984,7 +1922,7 @@ twar_create_spawn_influencers() {
   if(!isDefined(level.twar_influencers)) {
     level.twar_influencers = [];
   }
-  placed_influencers = getEntArray("mp_uspawn_influencer", "classname");
+  placed_influencers = GetEntArray("mp_uspawn_influencer", "classname");
   if(placed_influencers.size == 0) {
     return;
   }
@@ -2004,7 +1942,7 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
   team_flag_indices = twar_generate_non_enemy_flag_indices(team);
   if(team_flag_indices.size > 0) {
     if((level.flags[0] GetFlagTeam()) == team) {
-      for(flag_index = team_flag_indices.size - 1; flag_index >= 0; flag_index--) {
+      for (flag_index = team_flag_indices.size - 1; flag_index >= 0; flag_index--) {
         twar_create_designer_placed_spawn_influencers_for_flag(
           placed_influencers,
           team_flag_indices[flag_index],
@@ -2013,7 +1951,7 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
         linked_influencer_score -= (score_falloff_percentage * linked_influencer_score);
       }
     } else {
-      for(flag_index = 0; flag_index < team_flag_indices.size; flag_index++) {
+      for (flag_index = 0; flag_index < team_flag_indices.size; flag_index++) {
         twar_create_designer_placed_spawn_influencers_for_flag(
           placed_influencers,
           team_flag_indices[flag_index],
@@ -2053,7 +1991,7 @@ twar_remove_spawn_influencers() {
   if(!isDefined(level.twar_influencers)) {
     return;
   }
-  for(i = 0; i < level.twar_influencers.size; i++) {
+  for (i = 0; i < level.twar_influencers.size; i++) {
     removeinfluencer(level.twar_influencers[i]);
   }
   level.twar_influencers = [];
@@ -2061,7 +1999,7 @@ twar_remove_spawn_influencers() {
 
 locate_contested_twar_flag() {
   flag_entity = undefined;
-  for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
+  for (flag_index = 0; flag_index < level.flags.size; flag_index++) {
     flag_team = level.flags[flag_index] GetFlagTeam();
     if(flag_team == "neutral") {
       flag_entity = level.flags[flag_index];
@@ -2072,7 +2010,7 @@ locate_contested_twar_flag() {
 }
 
 locate_contested_twar_flag_index() {
-  for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
+  for (flag_index = 0; flag_index < level.flags.size; flag_index++) {
     flag_team = level.flags[flag_index] GetFlagTeam();
     if(flag_team == "neutral") {
       return flag_index;
@@ -2082,17 +2020,16 @@ locate_contested_twar_flag_index() {
 }
 
 hud_beginUseHudFlagProgressBarsForPlayers(captureTeam) {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i] hud_beginUseHudFlagProgressBars(captureTeam);
   }
 }
 
 hud_beginUseHudFlagProgressBars(captureTeam) {
-  if(self.pers["team"] == captureTeam) {
+  if(self.pers["team"] == captureTeam)
     self.waypointProgress.bar.color = (1, 1, 1);
-  } else {
+  else
     self.waypointProgress.bar.color = (1, 0, 0);
-  }
 }
 
 hud_createPlayerFlagElems() {
@@ -2118,7 +2055,7 @@ hud_createPlayerFlagElems() {
 }
 
 hud_createPlayersFlagElems() {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i] hud_createPlayerFlagElems();
   }
   flag = locate_contested_twar_flag();
@@ -2150,7 +2087,7 @@ hud_createPlayerFlagIcons() {
       team = "allies";
     }
     columnOffset = level.warHudColumnOffset;
-    for(column = 0; column < numColumns; column++) {
+    for (column = 0; column < numColumns; column++) {
       size = level.hudImageSize;
       x = columnOffset;
       teamShader = hud_getDefaultOwnerTeam(column);
@@ -2190,7 +2127,7 @@ hud_updateHudParentingForAllPlayers() {
     return;
   }
   parent_elem_index = level.flagOrder[flag.useObj.label];
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i] hud_updateHudParentingForPlayer(parent_elem_index);
   }
 }
@@ -2201,25 +2138,22 @@ hud_updateHudParentingForPlayer(parent_elem_index) {
   }
   parentElem = self.warHudElems[parent_elem_index];
   if(self.waypointAlliesTouching.parent != parentElem) {
-    if(isDefined(self.waypointAlliesTouching.parent)) {
+    if(isDefined(self.waypointAlliesTouching.parent))
       self.waypointAlliesTouching.parent removeChild(self.waypointAlliesTouching);
-    }
     parentElem addChild(self.waypointAlliesTouching);
     self.waypointAlliesTouching setParent(parentElem);
     self.waypointAlliesTouching setPoint("CENTER", "BOTTOM", (int(level.hudImageSize / 2) + int(level.hudImageSpacing / 2)) * -1, int(level.hudImageSpacing / 2) * -1);
   }
   if(self.waypointAxisTouching.parent != parentElem) {
-    if(isDefined(self.waypointAxisTouching.parent)) {
+    if(isDefined(self.waypointAxisTouching.parent))
       self.waypointAxisTouching.parent removeChild(self.waypointAxisTouching);
-    }
     parentElem addChild(self.waypointAxisTouching);
     self.waypointAxisTouching setParent(parentElem);
     self.waypointAxisTouching setPoint("CENTER", "BOTTOM", (int(level.hudImageSize / 2) + int(level.hudImageSpacing / 2)), int(level.hudImageSpacing / 2) * -1);
   }
   if(self.waypointProgress.parent != parentElem) {
-    if(isDefined(self.waypointProgress.parent)) {
+    if(isDefined(self.waypointProgress.parent))
       self.waypointProgress.parent removeChild(self.waypointProgress);
-    }
     parentElem addChild(self.waypointProgress);
     self.waypointProgress setParent(parentElem);
     self.waypointProgress setPoint("CENTER", "BOTTOM", 0, level.hudImageSpacing);
@@ -2231,7 +2165,7 @@ hud_hideHudForPlayer() {
   self.waypointAlliesTouching hideElem();
   self.waypointAxisTouching hideElem();
   numColumns = level.flags.size;
-  for(column = 0; column < numColumns; column++) {
+  for (column = 0; column < numColumns; column++) {
     self.warHudElems[column] fadeOutIconElemAndChildren();
   }
 }
@@ -2249,7 +2183,7 @@ hud_showHudForPlayer(contested_flag) {
     hud_showPlayerCountForPlayer(contested_flag, true);
   }
   numColumns = level.flags.size;
-  for(column = 0; column < numColumns; column++) {
+  for (column = 0; column < numColumns; column++) {
     if(!level.inFinalFight || (column == int(numColumns / 2))) {
       self.warHudElems[column] fadeInIconElem();
     }
@@ -2267,7 +2201,7 @@ hud_showProgressBarsForAllPlayers(enabled, exclude) {
   if(level.hardcoreMode) {
     return;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     if(!isDefined(level.players[i])) {
       continue;
     }
@@ -2279,7 +2213,7 @@ hud_showProgressBarsForAllPlayers(enabled, exclude) {
 }
 
 hud_hideProgressAndCountsForAllPlayers() {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     if(!isDefined(level.players[i])) {
       continue;
     }
@@ -2314,7 +2248,7 @@ hud_showPlayerCountForPlayer(contested_flag, enabled) {
 }
 
 hud_showPlayerCountForAllPlayers(contested_flag, enabled) {
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i] hud_showPlayerCountForPlayer(contested_flag, enabled);
   }
 }

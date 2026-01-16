@@ -7,10 +7,11 @@
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_battery;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_battery", &__init__, undefined, # "character_unlock_battery_fixup");
+  system::register(#"character_unlock_battery", &__init__, undefined, #"character_unlock_battery_fixup");
 }
 
 __init__() {

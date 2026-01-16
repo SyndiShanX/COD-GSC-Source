@@ -132,7 +132,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     script_gen_dump_addline("maps\\createfx\\" + level.script + "_fx::main(); ", level.script + "_fx");
   }
   if(isDefined(level.script_gen_dump_preload)) {
-    for(i = 0; i < level.script_gen_dump_preload.size; i++) {
+    for (i = 0; i < level.script_gen_dump_preload.size; i++) {
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
     }
   }
@@ -182,7 +182,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   PreCacheShellShock("explosion");
   PreCacheShellShock("tank_mantle");
   if(isDefined(level._gamemode_precache)) {
-    [[level._gamemode_precache]]();
+    [
+      [level._gamemode_precache]
+    ]();
   }
   WaterSimEnable(false);
   level.createFX_enabled = (GetDvar(#"createfx") != "");
@@ -213,16 +215,17 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   maps\_callbackglobal::init();
   maps\_callbacksetup::SetupCallbacks();
   if(isDefined(level._gamemode_initcallbacks)) {
-    [[level._gamemode_initcallbacks]]();
+    [
+      [level._gamemode_initcallbacks]
+    ]();
   }
   maps\_autosave::main();
   maps\_anim::init();
   maps\_busing::businit();
   maps\_music::music_init();
   maps\_dds::dds_init();
-  if(!isDefined(level.reviveFeature)) {
+  if(!isDefined(level.reviveFeature))
     level.reviveFeature = true;
-  }
   anim.useFacialAnims = false;
   if(!isDefined(level.missionfailed)) {
     level.missionfailed = false;
@@ -262,10 +265,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   thread maps\_minefields::main();
   thread maps\_endmission::main();
   maps\_friendlyfire::main();
-  array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
-  array_delete(getEntArray("delete_on_load", "targetname"));
+  array_levelthread(GetEntArray("badplace", "targetname"), ::badplace_think);
+  array_delete(GetEntArray("delete_on_load", "targetname"));
   setup_traversals();
-  array_thread(getEntArray("water", "targetname"), ::waterThink);
+  array_thread(GetEntArray("water", "targetname"), ::waterThink);
   thread maps\_audio::main();
   thread massNodeInitFunctions();
   flag_init("spawning_friendlies");
@@ -311,12 +314,12 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   trigger_funcs["trigger_fog"] = ::trigger_fog;
   trigger_funcs["no_crouch_or_prone"] = ::no_crouch_or_prone_think;
   trigger_funcs["no_prone"] = ::no_prone_think;
-  trigger_multiple = getEntArray("trigger_multiple", "classname");
-  trigger_radius = getEntArray("trigger_radius", "classname");
-  trigger_once = getEntArray("trigger_once", "classname");
+  trigger_multiple = GetEntArray("trigger_multiple", "classname");
+  trigger_radius = GetEntArray("trigger_radius", "classname");
+  trigger_once = GetEntArray("trigger_once", "classname");
   triggers = array_merge(trigger_multiple, trigger_radius);
   triggers = array_merge(triggers, trigger_once);
-  for(i = 0; i < triggers.size; i++) {
+  for (i = 0; i < triggers.size; i++) {
     if(triggers[i] has_spawnflag(level.SPAWNFLAG_TRIGGER_SPAWN)) {
       thread maps\_spawner::trigger_spawner(triggers[i]);
     }
@@ -330,10 +333,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     "trigger_lookat",
     "trigger_damage"
   );
-  for(p = 0; p < trigger_types.size; p++) {
+  for (p = 0; p < trigger_types.size; p++) {
     triggertype = trigger_types[p];
-    triggers = getEntArray(triggertype, "classname");
-    for(i = 0; i < triggers.size; i++) {
+    triggers = GetEntArray(triggertype, "classname");
+    for (i = 0; i < triggers.size; i++) {
       if((triggertype != "trigger_once") && triggers[i] has_spawnflag(level.SPAWNFLAG_TRIGGER_TRIGGER_ONCE)) {
         level thread trigger_once(triggers[i]);
       }
@@ -388,7 +391,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     }
   }
   update_script_forcespawn_based_on_flags();
-  trigs = getEntArray("explodable_volume", "targetname");
+  trigs = GetEntArray("explodable_volume", "targetname");
   array_thread(trigs, ::explodable_volume);
   level.ai_number = 0;
   level.shared_portable_turrets = [];
@@ -411,10 +414,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   println("_LOAD END TIME = " + GetTime());
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     if(!isDefined(player.a)) {
-      player.a = spawnStruct();
+      player.a = SpawnStruct();
     }
     player thread animscripts\zombie_init::onPlayerConnect();
     player thread onPlayerSpawned();
@@ -432,7 +435,7 @@ onPlayerDisconnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self GiveWeapon("m1911_zm");
     self SetSpawnWeapon("m1911_zm");
     self waittill("spawned_player");

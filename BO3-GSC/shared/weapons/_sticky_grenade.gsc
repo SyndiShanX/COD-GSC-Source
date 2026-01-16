@@ -8,7 +8,7 @@
 #namespace sticky_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("sticky_grenade", &__init__, undefined, undefined);
+  system::register("sticky_grenade", & __init__, undefined, undefined);
 }
 
 function __init__() {}

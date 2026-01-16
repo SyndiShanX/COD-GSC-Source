@@ -5,7 +5,7 @@
 ****************************************/
 
 init() {
-  if(isDefined(level.initedentityheadicons)) {
+  if(isdefined(level.initedentityheadicons)) {
     return;
   }
   level.initedentityheadicons = 1;
@@ -28,49 +28,40 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
   if(maps\mp\_utility::isgameparticipant(var_0) && !isplayer(var_0)) {
     return;
   }
-  if(!isDefined(self.entityheadicons)) {
+  if(!isdefined(self.entityheadicons))
     self.entityheadicons = [];
-  }
 
-  if(!isDefined(var_5)) {
+  if(!isdefined(var_5))
     var_5 = 1;
-  }
 
-  if(!isDefined(var_6)) {
+  if(!isdefined(var_6))
     var_6 = 0.05;
-  }
 
-  if(!isDefined(var_7)) {
+  if(!isdefined(var_7))
     var_7 = 1;
-  }
 
-  if(!isDefined(var_8)) {
+  if(!isdefined(var_8))
     var_8 = 1;
-  }
 
-  if(!isDefined(var_9)) {
+  if(!isdefined(var_9))
     var_9 = 0;
-  }
 
-  if(!isDefined(var_10)) {
+  if(!isdefined(var_10))
     var_10 = 1;
-  }
 
-  if(!isDefined(var_11)) {
+  if(!isdefined(var_11))
     var_11 = "";
-  }
 
   if(!isplayer(var_0) && var_0 == "none") {
     foreach(var_14, var_13 in self.entityheadicons) {
-      if(isDefined(var_13)) {
+      if(isdefined(var_13))
         var_13 destroy();
-      }
 
       self.entityheadicons[var_14] = undefined;
     }
   } else {
     if(isplayer(var_0)) {
-      if(isDefined(self.entityheadicons[var_0.guid])) {
+      if(isdefined(self.entityheadicons[var_0.guid])) {
         self.entityheadicons[var_0.guid] destroy();
         self.entityheadicons[var_0.guid] = undefined;
       }
@@ -78,7 +69,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       if(var_1 == "") {
         return;
       }
-      if(isDefined(self.entityheadicons[var_0.team])) {
+      if(isdefined(self.entityheadicons[var_0.team])) {
         self.entityheadicons[var_0.team] destroy();
         self.entityheadicons[var_0.team] = undefined;
       }
@@ -86,7 +77,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       var_13 = newclienthudelem(var_0);
       self.entityheadicons[var_0.guid] = var_13;
     } else {
-      if(isDefined(self.entityheadicons[var_0])) {
+      if(isdefined(self.entityheadicons[var_0])) {
         self.entityheadicons[var_0] destroy();
         self.entityheadicons[var_0] = undefined;
       }
@@ -110,7 +101,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       self.entityheadicons[var_0] = var_13;
     }
 
-    if(!isDefined(var_3) || !isDefined(var_4)) {
+    if(!isdefined(var_3) || !isdefined(var_4)) {
       var_3 = 10;
       var_4 = 10;
     }
@@ -134,13 +125,11 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
 
     thread destroyiconsondeath();
 
-    if(isplayer(var_0)) {
+    if(isplayer(var_0))
       var_13 thread destroyonownerdisconnect(var_0);
-    }
 
-    if(isplayer(self)) {
+    if(isplayer(self))
       var_13 thread destroyonownerdisconnect(self);
-    }
   }
 }
 
@@ -156,7 +145,7 @@ destroyiconsondeath() {
   self waittill("death");
 
   foreach(var_2, var_1 in self.entityheadicons) {
-    if(!isDefined(var_1)) {
+    if(!isdefined(var_1)) {
       continue;
     }
     var_1 destroy();
@@ -169,8 +158,8 @@ keeppositioned(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_3 = var_0.origin;
 
-  for(;;) {
-    if(!isDefined(var_0)) {
+  for (;;) {
+    if(!isdefined(var_0)) {
       return;
     }
     if(var_3 != var_0.origin) {
@@ -194,34 +183,30 @@ setteamheadicon(var_0, var_1, var_2, var_3) {
   if(!level.teambased) {
     return;
   }
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = "";
-  }
 
-  if(!isDefined(self.entityheadiconteam)) {
+  if(!isdefined(self.entityheadiconteam)) {
     self.entityheadiconteam = "none";
     self.entityheadicon = undefined;
   }
 
-  if(isDefined(var_3) && var_3 == 0) {
+  if(isdefined(var_3) && var_3 == 0)
     var_4 = undefined;
-  }
 
   var_5 = game["entity_headicon_" + var_0];
   self.entityheadiconteam = var_0;
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     self.entityheadiconoffset = var_1;
-  } else {
+  else
     self.entityheadiconoffset = (0, 0, 0);
-  }
 
   self notify("kill_entity_headicon_thread");
 
   if(var_0 == "none") {
-    if(isDefined(self.entityheadicon)) {
+    if(isdefined(self.entityheadicon))
       self.entityheadicon destroy();
-    }
 
     return;
   }
@@ -233,7 +218,7 @@ setteamheadicon(var_0, var_1, var_2, var_3) {
   var_6 setwaypoint(0, 0, 0, 1);
   self.entityheadicon = var_6;
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3)) {
     if(var_2 == "") {
       var_6.x = self.origin[0] + self.entityheadiconoffset[0];
       var_6.y = self.origin[1] + self.entityheadiconoffset[1];
@@ -269,21 +254,19 @@ setplayerheadicon(var_0, var_1, var_2) {
   if(level.teambased) {
     return;
   }
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = "";
-  }
 
-  if(!isDefined(self.entityheadiconteam)) {
+  if(!isdefined(self.entityheadiconteam)) {
     self.entityheadiconteam = "none";
     self.entityheadicon = undefined;
   }
 
   self notify("kill_entity_headicon_thread");
 
-  if(!isDefined(var_0)) {
-    if(isDefined(self.entityheadicon)) {
+  if(!isdefined(var_0)) {
+    if(isdefined(self.entityheadicon))
       self.entityheadicon destroy();
-    }
 
     return;
   }
@@ -291,11 +274,10 @@ setplayerheadicon(var_0, var_1, var_2) {
   var_3 = var_0.team;
   self.entityheadiconteam = var_3;
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     self.entityheadiconoffset = var_1;
-  } else {
+  else
     self.entityheadiconoffset = (0, 0, 0);
-  }
 
   var_4 = game["entity_headicon_" + var_3];
   var_5 = newclienthudelem(var_0);
@@ -325,7 +307,7 @@ keepiconpositioned(var_0) {
   self endon("death");
   var_1 = self.origin;
 
-  for(;;) {
+  for (;;) {
     if(var_1 != self.origin) {
       updateheadiconorigin(var_0);
       var_1 = self.origin;
@@ -339,14 +321,14 @@ destroyheadiconsondeath() {
   self endon("kill_entity_headicon_thread");
   self waittill("death");
 
-  if(!isDefined(self.entityheadicon)) {
+  if(!isdefined(self.entityheadicon)) {
     return;
   }
   self.entityheadicon destroy();
 }
 
 updateheadiconorigin(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     self.entityheadicon.x = self.origin[0] + self.entityheadiconoffset[0];
     self.entityheadicon.y = self.origin[1] + self.entityheadiconoffset[1];
     self.entityheadicon.z = self.origin[2] + self.entityheadiconoffset[2];

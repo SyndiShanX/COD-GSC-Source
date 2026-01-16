@@ -17,9 +17,8 @@ main() {
 }
 
 process_intro_notetracks() {
-  while(!isDefined(level.flag)) {
+  while(!isDefined(level.flag))
     wait 0.25;
-  }
 
   common_scripts\utility::flag_wait("deer_hunt_intro_tr_loaded");
   maps\_anim::addnotetrack_sound("generic", "start", "curtain_cut_in", "scn_deer_cut_screen");

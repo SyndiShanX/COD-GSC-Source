@@ -13,7 +13,7 @@
 #namespace heatseekingmissile;
 
 function autoexec __init__sytem__() {
-  system::register("heatseekingmissile", &__init__, undefined, undefined);
+  system::register("heatseekingmissile", & __init__, undefined, undefined);
 }
 
 function __init__() {

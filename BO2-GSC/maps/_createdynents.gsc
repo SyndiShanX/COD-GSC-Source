@@ -12,18 +12,16 @@ init_once() {
   dyn_models = [];
 
   for(i = 0; i < dyn_models.size; i++) {
-    if(isDefined(dyn_models[i])) {
+    if(isDefined(dyn_models[i]))
       precachemodel(dyn_models[i]);
-    }
   }
 
   misc_models = getmiscmodels();
   misc_models = [];
 
   for(i = 0; i < misc_models.size; i++) {
-    if(isDefined(misc_models[i])) {
+    if(isDefined(misc_models[i]))
       precachemodel(misc_models[i]);
-    }
   }
 
   level.model_names["dynent"] = [];
@@ -48,25 +46,21 @@ init_once() {
   misc_models = getmiscmodels();
   misc_models = [];
 
-  for(i = 0; i < misc_models.size; i++) {
+  for(i = 0; i < misc_models.size; i++)
     add_name(misc_models[i], "miscmodel");
-  }
 
   destructible_defs = getdestructibledefs();
 
-  for(i = 0; i < destructible_defs.size; i++) {
+  for(i = 0; i < destructible_defs.size; i++)
     add_name(destructible_defs[i], "destructible");
-  }
 }
 
 main() {
-  while(getdvar(#"_id_C33E3082") != "1") {
+  while(getdvar(#"_id_C33E3082") != "1")
     wait 1;
-  }
 
-  if(!isDefined(level.script)) {
+  if(!isDefined(level.script))
     level.script = tolower(getdvar(#"mapname"));
-  }
 
   waittillframeend;
   wait 1;
@@ -108,9 +102,8 @@ setup_groups() {
 
 add_to_group(group, model) {
   if(isDefined(level.groups[group])) {
-    if(check_for_dupes(level.groups[group], model)) {
+    if(check_for_dupes(level.groups[group], model))
       level.groups[group][level.groups[group].size] = model;
-    }
   } else {
     level.dynent_groups[level.dynent_groups.size] = group;
     level.groups[group][0] = model;
@@ -119,11 +112,10 @@ add_to_group(group, model) {
 }
 
 add_model_to_group(model) {
-  if(isDefined(level.model_group_map[model])) {
+  if(isDefined(level.model_group_map[model]))
     add_to_group(level.model_group_map[model], model);
-  } else {
+  else
     add_to_group("miscmodel", model);
-  }
 }
 
 init() {
@@ -132,40 +124,34 @@ init() {
 }
 
 add_to_dynent_group(dynent_name) {
-  if(check_for_dupes(level.dynent_groups, dynent_name)) {
+  if(check_for_dupes(level.dynent_groups, dynent_name))
     level.dynent_groups[level.dynent_groups.size] = dynent_name;
-  }
 }
 
 add_to_all_objects() {
-  if(check_for_dupes(level.all_objects, self)) {
+  if(check_for_dupes(level.all_objects, self))
     level.all_objects[level.all_objects.size] = self;
-  }
 }
 
 remove_from_all_objects() {
-  if(level.all_objects.size > 0) {
+  if(level.all_objects.size > 0)
     arrayremovevalue(level.all_objects, self);
-  }
 }
 
 add_name(name, type) {
-  if(check_for_dupes(level.model_names[type], name)) {
+  if(check_for_dupes(level.model_names[type], name))
     level.model_names[type][level.model_names[type].size] = name;
-  }
 }
 
 add_model(type) {
-  if(check_for_dupes(level.models[type], self)) {
+  if(check_for_dupes(level.models[type], self))
     level.models[type][level.models[type].size] = self;
-  }
 }
 
 check_for_dupes(array, single) {
   for(i = 0; i < array.size; i++) {
-    if(array[i] == single) {
+    if(array[i] == single)
       return false;
-    }
   }
 
   return true;
@@ -173,7 +159,7 @@ check_for_dupes(array, single) {
 
 setup_menus() {
   level.menu_sys = [];
-  level.menu_sys["current_menu"] = spawnStruct();
+  level.menu_sys["current_menu"] = spawnstruct();
   add_menu("choose_mode", "Choose Mode:");
   add_menuoptions("choose_mode", "Dyn Ents Mode");
   add_menuoptions("choose_mode", "Destructibles Mode");
@@ -265,15 +251,14 @@ add_menu(menu_name, title) {
     return;
   }
 
-  level.menu_sys[menu_name] = spawnStruct();
+  level.menu_sys[menu_name] = spawnstruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
 
 add_menuoptions(menu_name, option_text, func) {
-  if(!isDefined(level.menu_sys[menu_name].options)) {
+  if(!isDefined(level.menu_sys[menu_name].options))
     level.menu_sys[menu_name].options = [];
-  }
 
   num = level.menu_sys[menu_name].options.size;
   level.menu_sys[menu_name].options[num] = option_text;
@@ -281,28 +266,24 @@ add_menuoptions(menu_name, option_text, func) {
 }
 
 add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
-  if(!isDefined(level.menu_sys[child_menu])) {
+  if(!isDefined(level.menu_sys[child_menu]))
     add_menu(child_menu, child_title);
-  }
 
   level.menu_sys[child_menu].parent_menu = parent_menu;
 
-  if(!isDefined(level.menu_sys[parent_menu].children_menu)) {
+  if(!isDefined(level.menu_sys[parent_menu].children_menu))
     level.menu_sys[parent_menu].children_menu = [];
-  }
 
-  if(!isDefined(child_number_override)) {
+  if(!isDefined(child_number_override))
     size = level.menu_sys[parent_menu].children_menu.size;
-  } else {
+  else
     size = child_number_override;
-  }
 
   level.menu_sys[parent_menu].children_menu[size] = child_menu;
 
   if(isDefined(func)) {
-    if(!isDefined(level.menu_sys[parent_menu].children_func)) {
+    if(!isDefined(level.menu_sys[parent_menu].children_func))
       level.menu_sys[parent_menu].children_func = [];
-    }
 
     level.menu_sys[parent_menu].children_func[size] = func;
   }
@@ -345,16 +326,14 @@ enable_menu(menu_name) {
 
 disable_menu(menu_name) {
   if(isDefined(level.menu_sys[menu_name])) {
-    if(isDefined(level.menu_sys[menu_name].title)) {
+    if(isDefined(level.menu_sys[menu_name].title))
       level.menu_sys[menu_name].title destroy();
-    }
 
     if(isDefined(level.menu_sys[menu_name].options)) {
       options = level.menu_sys[menu_name].options;
 
-      for(i = 0; i < options.size; i++) {
+      for(i = 0; i < options.size; i++)
         options[i] destroy();
-      }
     }
   }
 
@@ -365,29 +344,26 @@ disable_menu(menu_name) {
 set_menu_hudelem(text, type, y_offset) {
   y = 100;
 
-  if(isDefined(type) && type == "title") {
+  if(isDefined(type) && type == "title")
     scale = 2;
-  } else {
+  else {
     scale = 1.3;
     y = y + 30;
   }
 
-  if(!isDefined(y_offset)) {
+  if(!isDefined(y_offset))
     y_offset = 0;
-  }
 
   y = y + y_offset;
   return set_hudelem(text, 10, y, scale);
 }
 
 set_hudelem(text, x, y, scale, alpha) {
-  if(!isDefined(alpha)) {
+  if(!isDefined(alpha))
     alpha = 1;
-  }
 
-  if(!isDefined(scale)) {
+  if(!isDefined(scale))
     scale = 1;
-  }
 
   hud = newdebughudelem();
   hud.location = 0;
@@ -401,9 +377,8 @@ set_hudelem(text, x, y, scale, alpha) {
   hud.y = y;
   hud.og_scale = scale;
 
-  if(isDefined(text)) {
+  if(isDefined(text))
     hud settext(text);
-  }
 
   return hud;
 }
@@ -437,36 +412,33 @@ menu_input() {
       continue;
     } else if(keystring == "button_a" || keystring == "enter")
       key = level.menu_cursor.current_pos;
-    else {
+    else
       key = int(keystring) - 1;
-    }
 
-    if(key > level.menu_sys[menu_name].options.size) {
+    if(key > level.menu_sys[menu_name].options.size)
       continue;
-    } else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
+    else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
       level notify("disable " + menu_name);
       level enable_menu(level.menu_sys[menu_name].parent_menu);
     } else if(isDefined(level.menu_sys[menu_name].function) && isDefined(level.menu_sys[menu_name].function[key])) {
       level.menu_sys["current_menu"].options[key] thread hud_selector(level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
 
-      if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
+      if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring)
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
-      } else {
+      else
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
-      }
 
       level thread hud_selector_fade_out();
 
-      if(isDefined(error_msg)) {
+      if(isDefined(error_msg))
         level thread selection_error(error_msg, level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
-      }
     }
 
-    if(!isDefined(level.menu_sys[menu_name].children_menu)) {
+    if(!isDefined(level.menu_sys[menu_name].children_menu))
       continue;
-    } else if(!isDefined(level.menu_sys[menu_name].children_menu[key])) {
+    else if(!isDefined(level.menu_sys[menu_name].children_menu[key]))
       continue;
-    } else if(!isDefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
+    else if(!isDefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
       continue;
     }
     if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
@@ -502,9 +474,8 @@ force_menu_back() {
   keys[8] = "8";
   keys[9] = "9";
 
-  if(key > 0 && key < 10) {
+  if(key > 0 && key < 10)
     key = keys[key];
-  }
 
   level notify("menu_button_pressed", key);
 }
@@ -515,9 +486,8 @@ list_menu(list, x, y, scale, func) {
   for(i = 0; i < list.size; i++) {
     alpha = 1 / (i + 1);
 
-    if(alpha < 0.2) {
+    if(alpha < 0.2)
       alpha = 0.1;
-    }
 
     hud = set_hudelem(list[i], x, y + i * 15, scale, alpha);
     hud_array[hud_array.size] = hud;
@@ -560,36 +530,31 @@ list_menu(list, x, y, scale, func) {
     }
   }
 
-  for(i = 0; i < hud_array.size; i++) {
+  for(i = 0; i < hud_array.size; i++)
     hud_array[i] destroy();
-  }
 
-  if(selected) {
+  if(selected)
     return current_num;
-  }
 }
 
 move_list_menu(hud_array, dir, space, num) {
-  if(dir == "up") {
+  if(dir == "up")
     movement = space;
-  } else {
+  else
     movement = space * -1;
-  }
 
   for(i = 0; i < hud_array.size; i++) {
     hud_array[i] moveovertime(0.1);
     hud_array[i].y = hud_array[i].y + movement;
     temp = i - num;
 
-    if(temp < 0) {
+    if(temp < 0)
       temp = temp * -1;
-    }
 
     alpha = 1 / (temp + 1);
 
-    if(alpha < 0.2) {
+    if(alpha < 0.2)
       alpha = 0.1;
-    }
 
     hud_array[i] fadeovertime(0.1);
     hud_array[i].alpha = alpha;
@@ -600,9 +565,8 @@ move_list_menu(hud_array, dir, space, num) {
 hud_selector(x, y) {
   level endon("stop_createdynents");
 
-  if(isDefined(level.hud_selector)) {
+  if(isDefined(level.hud_selector))
     level thread hud_selector_fade_out();
-  }
 
   level.menu_cursor.alpha = 0;
   level.hud_selector = set_hudelem(undefined, x - 10, y, 1);
@@ -615,9 +579,8 @@ hud_selector(x, y) {
 hud_selector_fade_out(time) {
   level endon("stop_createdynents");
 
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 0.25;
-  }
 
   level.menu_cursor.alpha = 0.5;
   hud = level.hud_selector;
@@ -652,9 +615,8 @@ hud_font_scaler(mult) {
   self endon("stop_fontscaler");
   og_scale = self.og_scale;
 
-  if(!isDefined(mult)) {
+  if(!isDefined(mult))
     mult = 1.5;
-  }
 
   self.fontscale = og_scale * mult;
   dif = og_scale - self.fontscale;
@@ -671,9 +633,9 @@ update_selected_object_position() {
   object = level.selected_object;
 
   if(isDefined(object)) {
-    forward = anglesToForward(level.debug_player getplayerangles());
-    vector = level.debug_player getEye() + vectorscale(forward, 5000);
-    trace = bulletTrace(level.debug_player getEye(), vector, 0, self);
+    forward = anglestoforward(level.debug_player getplayerangles());
+    vector = level.debug_player geteye() + vectorscale(forward, 5000);
+    trace = bullettrace(level.debug_player geteye(), vector, 0, self);
 
     if(trace["fraction"] != 1) {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
@@ -696,16 +658,15 @@ move_selected_object(with_trace) {
   self endon("unlink_selected_object");
   self endon("death");
 
-  if(!isDefined(with_trace)) {
+  if(!isDefined(with_trace))
     with_trace = 0;
-  }
 
   while(true) {
-    forward = anglesToForward(level.debug_player getplayerangles());
+    forward = anglestoforward(level.debug_player getplayerangles());
 
     if(with_trace) {
-      vector = level.debug_player getEye() + vectorscale(forward, 5000);
-      trace = bulletTrace(level.debug_player getEye(), vector, 0, self);
+      vector = level.debug_player geteye() + vectorscale(forward, 5000);
+      trace = bullettrace(level.debug_player geteye(), vector, 0, self);
 
       if(trace["fraction"] == 1) {
         wait 0.1;
@@ -715,7 +676,7 @@ move_selected_object(with_trace) {
 
       vector = vector + (0, 0, level.selected_object_z_offset);
     } else
-      vector = level.debug_player getEye() + vectorscale(forward, level.selected_object_dist);
+      vector = level.debug_player geteye() + vectorscale(forward, level.selected_object_dist);
 
     if(vector != self.origin) {
       self moveto(vector, 0.1);
@@ -771,9 +732,8 @@ spray_model() {
     } else if(key == "uparrow" || key == "dpad_up") {
       level.spray["power"] = level.spray["power"] + 50;
 
-      if(level.spray["power"] > 5000) {
+      if(level.spray["power"] > 5000)
         level.spray["power"] = 5000;
-      }
 
       level.spray_hud["power"] settext(level.spray["power"]);
       level.spray_hud["power"] thread hud_font_scaler();
@@ -781,9 +741,8 @@ spray_model() {
     } else if(key == "downarrow" || key == "dpad_down") {
       level.spray["power"] = level.spray["power"] - 50;
 
-      if(level.spray["power"] < 50) {
+      if(level.spray["power"] < 50)
         level.spray["power"] = 50;
-      }
 
       level.spray_hud["power"] settext(level.spray["power"]);
       level.spray_hud["power"] thread hud_font_scaler();
@@ -791,9 +750,8 @@ spray_model() {
     } else if(key == "leftarrow" || key == "dpad_left") {
       level.spray["rate"] = level.spray["rate"] - 0.05;
 
-      if(level.spray["rate"] < 0.25) {
+      if(level.spray["rate"] < 0.25)
         level.spray["rate"] = 0.25;
-      }
 
       level.spray_hud["rate"] settext(level.spray["rate"]);
       level.spray_hud["rate"] thread hud_font_scaler();
@@ -801,9 +759,8 @@ spray_model() {
     } else if(key == "rightarrow" || key == "dpad_right") {
       level.spray["rate"] = level.spray["rate"] + 0.05;
 
-      if(level.spray["rate"] > 1) {
+      if(level.spray["rate"] > 1)
         level.spray["rate"] = 1;
-      }
 
       level.spray_hud["rate"] settext(level.spray["rate"]);
       level.spray_hud["rate"] thread hud_font_scaler();
@@ -825,10 +782,10 @@ spray_model() {
 }
 
 do_spray_model() {
-  forward = anglesToForward(level.debug_player getplayerangles());
-  vector = level.debug_player getEye() + vectorscale(forward, 48);
+  forward = anglestoforward(level.debug_player getplayerangles());
+  vector = level.debug_player geteye() + vectorscale(forward, 48);
   object = spawn("script_model", vector);
-  object setModel(level.spray["model"]);
+  object setmodel(level.spray["model"]);
   velocity = vectorscale(forward, level.spray["power"]);
   object physicslaunch(object.origin, velocity);
   object store_model("dynent");
@@ -842,10 +799,10 @@ spray_trajectory() {
 
   while(true) {
     time_inc = og_time_inc;
-    forward = anglesToForward(level.debug_player getplayerangles());
+    forward = anglestoforward(level.debug_player getplayerangles());
     velocity = vectorscale(forward, level.spray["power"]);
     sub_vel = vectorscale(velocity, time_inc);
-    start_pos = level.debug_player getEye() + vectorscale(forward, 48);
+    start_pos = level.debug_player geteye() + vectorscale(forward, 48);
     gravity = getdvarint(#"bg_gravity");
 
     for(i = 1; i < 10 + 1; i++) {
@@ -915,13 +872,11 @@ spray_buttons() {
 }
 
 add_universal_button(button_group, name) {
-  if(!isDefined(level.u_buttons[button_group])) {
+  if(!isDefined(level.u_buttons[button_group]))
     level.u_buttons[button_group] = [];
-  }
 
-  if(check_for_dupes(level.u_buttons[button_group], name)) {
+  if(check_for_dupes(level.u_buttons[button_group], name))
     level.u_buttons[button_group][level.u_buttons[button_group].size] = name;
-  }
 }
 
 clear_universal_buttons(button_group) {
@@ -932,9 +887,8 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
   level endon("stop_createdynents");
   level endon(end_on);
 
-  if(!isDefined(use_attackbutton)) {
+  if(!isDefined(use_attackbutton))
     use_attackbutton = 0;
-  }
 
   notify_name = button_group + "_button_pressed";
   buttons = level.u_buttons[button_group];
@@ -992,11 +946,10 @@ select_dynent_group() {
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
   selected = list_menu(level.dynent_groups, 180, y, 1.3, ::group_selected);
 
-  if(!isDefined(selected)) {
+  if(!isDefined(selected))
     level notify("stop_select_group");
-  } else {
+  else
     level.dyn_ent_selected_group = level.dynent_groups[selected];
-  }
 
   arrow_hud destroy();
 }
@@ -1011,21 +964,18 @@ remove_hud(hud_name) {
   }
   huds = level.hud_array[hud_name];
 
-  for(i = 0; i < huds.size; i++) {
+  for(i = 0; i < huds.size; i++)
     destroy_hud(huds[i]);
-  }
 
   level.hud_array[hud_name] = undefined;
 }
 
 new_hud(hud_name, msg, x, y, scale) {
-  if(!isDefined(level.hud_array)) {
+  if(!isDefined(level.hud_array))
     level.hud_array = [];
-  }
 
-  if(!isDefined(level.hud_array[hud_name])) {
+  if(!isDefined(level.hud_array[hud_name]))
     level.hud_array[hud_name] = [];
-  }
 
   hud = set_hudelem(msg, x, y, scale);
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
@@ -1037,12 +987,11 @@ object_highlight(objects) {
   level endon("stop_select_model");
   dot = 0.85;
   highlighted_object = undefined;
-  forward = anglesToForward(level.debug_player getplayerangles());
+  forward = anglestoforward(level.debug_player getplayerangles());
 
   for(i = 0; i < objects.size; i++) {
-    if(!isDefined(objects[i].select_scale)) {
+    if(!isDefined(objects[i].select_scale))
       objects[i] select_icon_think();
-    }
 
     ent = objects[i];
     difference = vectornormalize(ent.origin - (level.debug_player.origin + vectorscale((0, 0, 1), 55.0)));
@@ -1083,9 +1032,8 @@ selected_delete(no_force_back) {
     level.selected_object delete();
     level.selected_object = undefined;
 
-    if(!isDefined(no_force_back) || !no_force_back) {
+    if(!isDefined(no_force_back) || !no_force_back)
       level thread force_menu_back();
-    }
   }
 
 }
@@ -1145,9 +1093,8 @@ selected_models_save_thread(type) {
   level endon("stop_createdynents");
   level waittill("disable selected_" + type + "_save_menu");
 
-  for(i = 0; i < level.models[type].size; i++) {
+  for(i = 0; i < level.models[type].size; i++)
     level.models[type][i] remove_save_stat();
-  }
 }
 
 selected_dynent_save() {
@@ -1171,21 +1118,18 @@ remove_save_stat() {
 }
 
 save_dynent_highlighted() {
-  if(level.highlighted.size > 0) {
+  if(level.highlighted.size > 0)
     return save_master("Save Selected DynEnts?", "dynents_selected", level.highlighted, "dynent");
-  }
 }
 
 save_destructible_highlighted() {
-  if(level.highlighted.size > 0) {
+  if(level.highlighted.size > 0)
     return save_master("Save Selected Destructibles?", "detructibles_selected", level.highlighted, "destructible");
-  }
 }
 
 save_miscmodel_highlighted() {
-  if(level.highlighted.size > 0) {
+  if(level.highlighted.size > 0)
     return save_master("Save Selected Misc_Models?", "miscmodels_selected", level.highlighted, "miscmodel");
-  }
 }
 
 setup_menu_buttons() {
@@ -1244,9 +1188,8 @@ any_button_hit(button_hit, type) {
     buttons = level.buttons;
 
   for(i = 0; i < buttons.size; i++) {
-    if(button_hit == buttons[i]) {
+    if(button_hit == buttons[i])
       return true;
-    }
   }
 
   return false;
@@ -1310,9 +1253,8 @@ xform_input_handler() {
     level waittill("xform_button_pressed", key);
     object = level.selected_object;
 
-    if(!isDefined(object)) {
+    if(!isDefined(object))
       object = level.highlighted_object;
-    }
 
     if(!level.debug_player buttonpressed("button_ltrig")) {
       if(key == "button_rshldr") {
@@ -1323,21 +1265,20 @@ xform_input_handler() {
         update_selected_object_position();
       }
     } else if(isDefined(object)) {
-      if(key == "button_b") {
+      if(key == "button_b")
         object devaddyaw(2);
-      } else if(key == "button_x") {
+      else if(key == "button_x")
         object devaddyaw(2 * -1);
-      } else if(key == "button_y") {
+      else if(key == "button_y")
         object devaddpitch(2 * -1);
-      } else if(key == "button_a") {
+      else if(key == "button_a")
         object devaddpitch(2);
-      } else if(key == "button_lshldr") {
+      else if(key == "button_lshldr")
         object devaddroll(2 * -1);
-      } else if(key == "button_rshldr") {
+      else if(key == "button_rshldr")
         object devaddroll(2);
-      } else if(key == "button_lstick") {
+      else if(key == "button_lstick")
         object.angles = (0, 0, 0);
-      }
     }
 
     wait 0.1;
@@ -1359,11 +1300,10 @@ place_copy(type) {
   if(isDefined(level.selected_object)) {
     level.selected_object notify("unlink_selected_object");
 
-    if(type == "destructible") {
+    if(type == "destructible")
       model_name = level.selected_object getdestructiblename();
-    } else {
+    else
       model_name = level.selected_object.model;
-    }
 
     level.selected_object add_model(type);
     angles = level.selected_object.angles;
@@ -1422,18 +1362,17 @@ select_miscmodel_from_list() {
 }
 
 spawn_selected_object(model_name, with_trace, type) {
-  if(isDefined(level.selected_object)) {
+  if(isDefined(level.selected_object))
     level.selected_object delete();
-  }
 
-  forward = anglesToForward(level.debug_player getplayerangles());
-  vector = level.debug_player getEye() + vectorscale(forward, level.selected_object_dist);
+  forward = anglestoforward(level.debug_player getplayerangles());
+  vector = level.debug_player geteye() + vectorscale(forward, level.selected_object_dist);
 
-  if(isDefined(type) && type == "destructible") {
+  if(isDefined(type) && type == "destructible")
     level.selected_object = codespawn("script_model", vector, 0, 0, 0, model_name);
-  } else {
+  else {
     level.selected_object = spawn("script_model", vector);
-    level.selected_object setModel(model_name);
+    level.selected_object setmodel(model_name);
   }
 
   level.select_group = undefined;
@@ -1478,7 +1417,7 @@ copy_model(type) {
     } else {
       model_name = level.highlighted_object.model;
       level.selected_object = spawn("script_model", model_origin);
-      level.selected_object setModel(model_name);
+      level.selected_object setmodel(model_name);
     }
 
     level.selected_object.old_origin = level.selected_object.origin;
@@ -1519,15 +1458,13 @@ select_miscmodels() {
 }
 
 select(type) {
-  if(level.models[type].size > 0) {
+  if(level.models[type].size > 0)
     level thread select_model_thread(type);
-  }
 }
 
 draw_selectables(objects) {
-  for(i = 0; i < objects.size; i++) {
+  for(i = 0; i < objects.size; i++)
     objects[i] thread select_icon_think();
-  }
 }
 
 select_icon_think() {
@@ -1537,9 +1474,8 @@ select_icon_think() {
   self endon("only_one_icon_think_thread");
   level endon("stop_select_model");
 
-  if(!isDefined(self.select_scale)) {
+  if(!isDefined(self.select_scale))
     self.select_scale = 1;
-  }
 
   self.select_color = level.unselected_color;
 
@@ -1580,9 +1516,8 @@ select_main_thread(type) {
   level.selected_object = undefined;
 
   while(true) {
-    if(!isDefined(level.selected_object)) {
+    if(!isDefined(level.selected_object))
       level thread object_highlight(level.models[type]);
-    }
 
     wait 0.05;
   }
@@ -1590,9 +1525,8 @@ select_main_thread(type) {
 }
 
 set_default_path() {
-  if(!isDefined(level.path)) {
+  if(!isDefined(level.path))
     level.path = "prop_man/" + level.script + "/";
-  }
 }
 
 store_model(type) {
@@ -1605,23 +1539,20 @@ remove_model(type) {
 }
 
 save_dynents() {
-  if(level.models["dynent"].size > 0) {
+  if(level.models["dynent"].size > 0)
     return save_master("Save All DynEnts?", "dynents_all", level.models["dynent"], "dynent");
-  }
 }
 
 save_destructibles() {
-  if(level.models["destructible"].size > 0) {
+  if(level.models["destructible"].size > 0)
     return save_master("Save All Destructibles?", "destructibles_all", level.models["destructible"], "destructible");
-  }
 }
 
 save_miscmodels() {
   selected_delete(1);
 
-  if(level.models["miscmodel"].size > 0) {
+  if(level.models["miscmodel"].size > 0)
     return save_master("Save All misc models?", "miscmodels_all", level.models["miscmodel"], "miscmodel");
-  }
 }
 
 save_master(save_msg, filename, save_array, type) {
@@ -1642,11 +1573,10 @@ save_master(save_msg, filename, save_array, type) {
       level thread save_selector(level.save_yes_hud.x, level.save_yes_hud.y, 40);
       check = save(save_array, filename, type);
 
-      if(isDefined(check) && check != "failed") {
+      if(isDefined(check) && check != "failed")
         level thread save_complete(check);
-      } else {
+      else
         level thread save_failed();
-      }
 
       break;
     } else if(key == no_key) {
@@ -1664,13 +1594,11 @@ save_master(save_msg, filename, save_array, type) {
 }
 
 save_dialog(msg, filename) {
-  if(!isDefined(level.save_hud_x)) {
+  if(!isDefined(level.save_hud_x))
     level.save_hud_x = 0;
-  }
 
-  if(!isDefined(level.save_hud_y)) {
+  if(!isDefined(level.save_hud_y))
     level.save_hud_y = 300;
-  }
 
   x = level.save_hud_x;
   y = level.save_hud_y;
@@ -1697,9 +1625,8 @@ save_dialog(msg, filename) {
 }
 
 destroy_hud(hud) {
-  if(isDefined(hud)) {
+  if(isDefined(hud))
     hud destroy();
-  }
 }
 
 save_complete(msg) {
@@ -1746,15 +1673,13 @@ save_selector(x, y, width) {
 save(model_array, filename, type) {
   level.fullpath_file = level.path + filename;
 
-  if(!isDefined(type)) {
+  if(!isDefined(type))
     type = "dynent";
-  }
 
   spawnflags = 0;
 
-  if(type == "dynent") {
+  if(type == "dynent")
     spawnflags = 1;
-  }
 
   file = openfile(level.fullpath_file, "write");
   assert(file != -1, "File not writeable (maybe you should check it out): " + level.fullpath_file);
@@ -1763,11 +1688,10 @@ save(model_array, filename, type) {
   fprintln(file, "\"classname\" \"worldspawn\"");
   fprintln(file, "}");
 
-  if(type == "dynent") {
+  if(type == "dynent")
     classname = "dyn_model";
-  } else {
+  else
     classname = "misc_model";
-  }
 
   for(i = 0; i < model_array.size; i++) {
     fprintln(file, "{");
@@ -1782,9 +1706,8 @@ save(model_array, filename, type) {
     } else {
       fprintln(file, "\"model\" \"" + model_array[i].model + "\"");
 
-      if(spawnflags == 1) {
+      if(spawnflags == 1)
         fprintln(file, "\"spawnflags\" \"2\"");
-      }
 
       fprintln(file, "\"classname\" \"" + classname + "\"");
     }
@@ -1796,11 +1719,10 @@ save(model_array, filename, type) {
   saved = closefile(file);
   assert(saved == 1, "File not saved (see above message?): " + level.fullpath_file);
 
-  if(saved) {
+  if(saved)
     return level.fullpath_file;
-  } else {
+  else
     return "failed";
-  }
 }
 
 save_buttons() {
@@ -1811,9 +1733,8 @@ save_buttons() {
 }
 
 quit() {
-  if(level.xform_hud_active) {
+  if(level.xform_hud_active)
     toggle_xform_hud();
-  }
 
   level.hud_selector destroy();
   disable_menu("current_menu");

@@ -58,11 +58,10 @@ handle_ambush_tower_blackout_lighting() {
   common_scripts\utility::flag_wait("player_tower_hits_ground");
   var_0 = create_overlay_element("black", 1);
 
-  if(getdvarint("use_old_tower_fall_cinematic_fx") == 1) {
+  if(getdvarint("use_old_tower_fall_cinematic_fx") == 1)
     thread handle_tower_fall_cinematic_fx_preh1();
-  } else {
+  else
     thread handle_tower_fall_cinematic_fx();
-  }
 
   common_scripts\utility::flag_wait("ambush_tower_blackout_come_to");
   var_0 fadeovertime(3);
@@ -134,15 +133,13 @@ setup_daytime_lights() {
   var_1 = getent("day_skydome", "targetname");
   var_0 delete();
   var_1 show();
-  var_2 = getEntArray("bright_fixtures", "targetname");
+  var_2 = getentarray("bright_fixtures", "targetname");
 
-  foreach(var_4 in var_2) {
-    var_4 delete();
-  }
+  foreach(var_4 in var_2)
+  var_4 delete();
 
-  var_6 = getEntArray("bright_lights", "targetname");
+  var_6 = getentarray("bright_lights", "targetname");
 
-  foreach(var_8 in var_6) {
-    var_8 setlightintensity(1);
-  }
+  foreach(var_8 in var_6)
+  var_8 setlightintensity(1);
 }

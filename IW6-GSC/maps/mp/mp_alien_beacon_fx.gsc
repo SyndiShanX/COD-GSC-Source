@@ -133,9 +133,8 @@ fx_raindrops_intro() {
 fx_raindrops_intro_delete() {
   wait 26;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 fx_tenticle_enter_water_fx() {
@@ -196,9 +195,8 @@ fx_intro_lightning() {
   wait 17;
   common_scripts\utility::exploder(11);
 
-  foreach(var_1 in level.players) {
-    var_1 playSound("scn_beacon_intro_lightning");
-  }
+  foreach(var_1 in level.players)
+  var_1 playSound("scn_beacon_intro_lightning");
 }
 
 fx_boatride_splashes() {
@@ -235,9 +233,8 @@ ship_camera_tilting() {
   var_1 = 0;
   level thread ship_camera_tilting_watcher();
 
-  foreach(var_3 in level.players) {
-    var_3 playersetgroundreferenceent(var_0);
-  }
+  foreach(var_3 in level.players)
+  var_3 playersetgroundreferenceent(var_0);
 
   for(;;) {
     var_5 = randomfloatrange(-1.5, 1.5);
@@ -263,11 +260,10 @@ ship_camera_tilting_watcher() {
   for(;;) {
     var_0 = level common_scripts\utility::waittill_any_return("drill_planted", "drill_detonated");
 
-    if(var_0 == "drill_planted") {
+    if(var_0 == "drill_planted")
       level.pause_tilting = 1;
-    } else {
+    else
       level.pause_tilting = 0;
-    }
 
     wait 0.2;
   }
@@ -286,9 +282,8 @@ beacon_door_drilling_fx() {
     wait 2;
     var_1 = 0;
 
-    if(level.encounter_name == "cargo_area_main") {
+    if(level.encounter_name == "cargo_area_main")
       var_1 = 1;
-    }
 
     playFXOnTag(level._effect["vfx_alien_drill_door"], level.drill, "tag_laser_end");
 
@@ -300,18 +295,16 @@ beacon_door_drilling_fx() {
       wait 25;
     }
 
-    if(var_1) {
+    if(var_1)
       thread sfx_drill_off_cargo_blocker();
-    } else {
+    else
       thread maps\mp\alien\_drill::sfx_drill_off(1);
-    }
 
     stopFXOnTag(level._effect["vfx_alien_drill_door_laser"], level.drill, "tag_laser");
     stopFXOnTag(level._effect["vfx_alien_drill_door"], level.drill, "tag_laser_end");
 
-    if(!isDefined(level.drill)) {
+    if(!isDefined(level.drill))
       return;
-    }
   }
 }
 
@@ -324,9 +317,8 @@ beacon_door_drilling_stop_fx() {
     }
     stopFXOnTag(level._effect["vfx_alien_drill_door"], level.drill, "tag_laser_end");
 
-    if(isDefined(var_0) && var_0 == "drill_destroyed") {
+    if(isDefined(var_0) && var_0 == "drill_destroyed")
       stopFXOnTag(level._effect["vfx_alien_drill_door_laser"], level.drill, "tag_laser");
-    }
 
     wait 0.5;
   }
@@ -338,17 +330,14 @@ sfx_drill_off_cargo_blocker() {
   var_2 = (-515, 846, 332);
   playsoundatpos(var_0, "alien_laser_drill_stop");
 
-  if(isDefined(level.drill_sfx_lp)) {
+  if(isDefined(level.drill_sfx_lp))
     level.drill_sfx_lp delete();
-  }
 
-  if(isDefined(level.drill_sfx_dist_lp)) {
+  if(isDefined(level.drill_sfx_dist_lp))
     level.drill_sfx_dist_lp delete();
-  }
 
-  if(isDefined(level.drill_overheat_lp_02)) {
+  if(isDefined(level.drill_overheat_lp_02))
     level.drill_overheat_lp_02 delete();
-  }
 
   wait 0.1;
   playsoundatpos(var_1, "alien_laser_drill_door_open_quake");

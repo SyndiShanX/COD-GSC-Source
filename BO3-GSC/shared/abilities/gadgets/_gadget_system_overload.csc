@@ -15,7 +15,7 @@
 #namespace _gadget_system_overload;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_system_overload", &__init__, undefined, undefined);
+  system::register("gadget_system_overload", & __init__, undefined, undefined);
 }
 
 function __init__() {}

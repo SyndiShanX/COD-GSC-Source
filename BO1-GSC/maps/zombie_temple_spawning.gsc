@@ -139,7 +139,9 @@ temple_round_spawning() {
     level.max_zombie_func = ::default_max_zombie_func;
   }
   if(!(isDefined(level.kill_counter_hud) && level.zombie_total > 0)) {
-    level.zombie_total = [[level.max_zombie_func]](max);
+    level.zombie_total = [
+      [level.max_zombie_func]
+    ](max);
   }
   if(level.round_number < 10) {
     level thread zombie_speed_up_temple();
@@ -504,7 +506,7 @@ delete_zombie_noone_looking(how_close) {
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = anglesToForward(playerAngles);
+  playerForwardVec = AnglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();

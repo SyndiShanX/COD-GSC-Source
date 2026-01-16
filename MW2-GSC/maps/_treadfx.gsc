@@ -7,9 +7,8 @@
 
 main(vehicletype) {
   //this sets default tread and tire fx for vehicles - they can be overwritten in level scripts
-  if(!isDefined(vehicletype)) {
+  if(!isdefined(vehicletype))
     return;
-  }
   level.vehicle_treads[vehicletype] = true;
   switch (vehicletype) {
     case "apache":
@@ -55,14 +54,12 @@ main(vehicletype) {
 }
 
 setvehiclefx(vehicletype, material, fx) {
-  if(!isDefined(level._vehicle_effect)) {
+  if(!isdefined(level._vehicle_effect))
     level._vehicle_effect = [];
-  }
-  if(!isDefined(fx)) {
+  if(!isdefined(fx))
     level._vehicle_effect[vehicletype][material] = -1;
-  } else {
+  else
     level._vehicle_effect[vehicletype][material] = loadfx(fx);
-  }
 }
 
 setallvehiclefx(vehicletype, fx) {

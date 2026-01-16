@@ -7,9 +7,8 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(GetDvar(#"mapname") == "mp_background") {
+  if(GetDvar(#"mapname") == "mp_background")
     return;
-  }
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -28,9 +27,8 @@ main() {
     level.scorelimitMin = 1;
     level.scorelimitMax = 1;
   }
-  if(GetDvar(#"scr_ctf_spawnPointFacingAngle") == "") {
+  if(GetDvar(#"scr_ctf_spawnPointFacingAngle") == "")
     setdvar("scr_ctf_spawnPointFacingAngle", "60");
-  }
   level.teamBased = true;
   level.overrideTeamScore = true;
   level.onStartGameType = ::onStartGameType;
@@ -163,25 +161,24 @@ onPrecacheGameType() {
   precacheString(&"MP_CAP_LIMIT_REACHED");
   precacheString(&"MP_CTF_CANT_CAPTURE_FLAG");
   precacheString(&"MP_CTF_OVERTIME_WIN");
-  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
 }
 onStartGameType() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
   setClientNameMode("auto_change");
   maps\mp\gametypes\_globallogic_score::resetTeamScores();
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_CTF");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_CTF");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_CTF");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_CTF");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_CTF");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_CTF");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_CTF");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_CTF");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_CTF_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_CTF_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_CTF_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_CTF_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_CTF_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_CTF_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_CTF_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_CTF_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints("mp_ctf_spawn_allies_start");
@@ -208,9 +205,8 @@ onStartGameType() {
   thread ctf();
 }
 onRoundSwitch() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
   [[level._setTeamScore]]("allies", game["roundswon"]["allies"]);
   [[level._setTeamScore]]("axis", game["roundswon"]["axis"]);
   if(islastround()) {
@@ -230,13 +226,12 @@ onRoundSwitch() {
 onRoundEndGame(winningTeam) {
   [[level._setTeamScore]]("allies", game["roundswon"]["allies"]);
   [[level._setTeamScore]]("axis", game["roundswon"]["axis"]);
-  if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
+  if(game["roundswon"]["allies"] == game["roundswon"]["axis"])
     winner = "tie";
-  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"])
     winner = "axis";
-  } else {
+  else
     winner = "allies";
-  }
   return winner;
 }
 onSpawnPlayerUnified() {
@@ -248,21 +243,18 @@ onSpawnPlayer() {
   self.isFlagCarrier = false;
   self ClearClientFlag(level.const_flag_ctfcarrier);
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
   if(level.useStartSpawns) {
-    if(spawnteam == "axis") {
+    if(spawnteam == "axis")
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    } else {
+    else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
-    }
   } else {
-    if(spawnteam == "axis") {
+    if(spawnteam == "axis")
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-    } else {
+    else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
-    }
   }
   assert(isDefined(spawnpoint));
   self spawn(spawnPoint.origin, spawnPoint.angles, "ctf");
@@ -286,9 +278,8 @@ createFlag(trigger) {
     visuals[0].angles = trigger.angles;
   }
   entityTeam = trigger.script_team;
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     entityTeam = getOtherTeam(entityTeam);
-  }
   visuals[0] setModel(game["flagmodels"][entityTeam]);
   visuals[0] SetTeam(entityTeam);
   flag = maps\mp\gametypes\_gameobjects::createCarryObject(entityTeam, trigger, visuals, (0, 0, 100));
@@ -318,9 +309,8 @@ createFlag(trigger) {
 createFlagZone(trigger) {
   visuals = [];
   entityTeam = trigger.script_team;
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     entityTeam = getOtherTeam(entityTeam);
-  }
   flagZone = maps\mp\gametypes\_gameobjects::createUseObject(entityTeam, trigger, visuals, (0, 0, 100));
   flagZone maps\mp\gametypes\_gameobjects::allowUse("friendly");
   flagZone maps\mp\gametypes\_gameobjects::setUseTime(0);
@@ -394,7 +384,7 @@ ctf() {
     maps\mp\_utility::error("Not enough ctf_flag_pickup_trig triggers found in map.Need two.");
     return;
   }
-  for(index = 0; index < flag_triggers.size; index++) {
+  for (index = 0; index < flag_triggers.size; index++) {
     trigger = flag_triggers[index];
     flag = createFlag(trigger);
     team = flag maps\mp\gametypes\_gameobjects::getOwnerTeam();
@@ -406,7 +396,7 @@ ctf() {
     maps\mp\_utility::error("Not enough ctf_flag_zone_trig triggers found in map.Need two.");
     return;
   }
-  for(index = 0; index < flag_zones.size; index++) {
+  for (index = 0; index < flag_zones.size; index++) {
     trigger = flag_zones[index];
     flagZone = createFlagZone(trigger);
     team = flagZone maps\mp\gametypes\_gameobjects::getOwnerTeam();
@@ -454,22 +444,21 @@ onDrop(player) {
     level.flagHints[otherTeam] turn_off();
   }
   if(isDefined(player)) {
-    printAndSoundOnEveryone(team, "none", &"", &"", "mp_war_objective_lost", "", "");
+    printAndSoundOnEveryone(team, "none", & "", & "", "mp_war_objective_lost", "", "");
     level thread maps\mp\_popups::DisplayTeamMessageToTeam(&"MP_FRIENDLY_FLAG_DROPPED", player, team);
     level thread maps\mp\_popups::DisplayTeamMessageToTeam(&"MP_ENEMY_FLAG_DROPPED", player, otherTeam);
   } else {
-    printAndSoundOnEveryone(team, "none", &"", &"", "mp_war_objective_lost", "", "");
+    printAndSoundOnEveryone(team, "none", & "", & "", "mp_war_objective_lost", "", "");
   }
   if(getTime() - level.lastDialogTime > 1500) {
     maps\mp\gametypes\_globallogic_audio::leaderDialog("wedrop_flag", otherTeam);
     maps\mp\gametypes\_globallogic_audio::leaderDialog("theydrop_flag", team);
     level.lastDialogTime = getTime();
   }
-  if(isDefined(player)) {
+  if(isDefined(player))
     player logString(team + " flag dropped");
-  } else {
+  else
     logString(team + " flag dropped");
-  }
   if(isDefined(player)) {
     player playLocalSound("mpl_flag_drop_plr");
     player thread maps\mp\gametypes\_globallogic_audio::return_music_state_player();
@@ -497,11 +486,10 @@ onDrop(player) {
   ss = level.spawnsystem;
   player_team_mask = maps\mp\gametypes\_spawning::get_team_mask(otherTeam);
   enemy_team_mask = maps\mp\gametypes\_spawning::get_team_mask(team);
-  if(isDefined(player)) {
+  if(isDefined(player))
     flag_origin = player.origin;
-  } else {
+  else
     flag_origin = self.curorigin;
-  }
   self.spawn_influencer_dropped = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
     flag_origin,
     ss.ctf_dropped_influencer_radius,
@@ -528,7 +516,7 @@ onPickup(player) {
   self clearReturnFlagHudElems();
   if(isDefined(player) && player.pers["team"] == team) {
     self notify("picked_up");
-    printAndSoundOnEveryone(team, "none", &"", &"", "mp_obj_returned", "", "");
+    printAndSoundOnEveryone(team, "none", & "", & "", "mp_obj_returned", "", "");
     if(isDefined(player.pers["returns"])) {
       player.pers["returns"]++;
       player.returns = player.pers["returns"];
@@ -540,14 +528,13 @@ onPickup(player) {
     self.visuals[0] ClearClientFlag(level.const_flag_flag_away);
     self returnFlag();
     self maps\mp\gametypes\_gameobjects::returnHome();
-    if(isDefined(player)) {
+    if(isDefined(player))
       player logString(team + " flag returned");
-    } else {
+    else
       logString(team + " flag returned");
-    }
     if(!level.teamFlags["allies"] isHome() && !level.teamFlags["axis"] isHome()) {
       players = Get_Players();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i].ctfBaseIcon setShader(level.iconWaitForFlag3D, level.objPointSize, level.objPointSize);
         players[i].ctfBaseIcon setWaypoint(true, level.iconWaitForFlag3D);
       }
@@ -556,7 +543,7 @@ onPickup(player) {
     return;
   } else {
     player maps\mp\_medals::flagRunner();
-    printAndSoundOnEveryone(otherteam, team, &"", &"", "mp_obj_taken", "mp_enemy_obj_taken", "");
+    printAndSoundOnEveryone(otherteam, team, & "", & "", "mp_obj_taken", "mp_enemy_obj_taken", "");
     level thread maps\mp\_popups::DisplayTeamMessageToTeam(&"MP_FRIENDLY_FLAG_TAKEN", player, team);
     level thread maps\mp\_popups::DisplayTeamMessageToTeam(&"MP_ENEMY_FLAG_TAKEN", player, otherTeam);
     if(getTime() - level.lastDialogTime > 1500) {
@@ -619,12 +606,10 @@ OnPickupMusicState(player) {
   }
 }
 isHome() {
-  if(isDefined(self.carrier)) {
+  if(isDefined(self.carrier))
     return false;
-  }
-  if(self.curOrigin != self.trigger.baseOrigin) {
+  if(self.curOrigin != self.trigger.baseOrigin)
     return false;
-  }
   return true;
 }
 returnFlag() {
@@ -657,7 +642,7 @@ onCapture(player) {
   if(playerTeamsFlag maps\mp\gametypes\_gameobjects::isObjectAwayFromHome()) {
     return;
   }
-  printAndSoundOnEveryone(team, enemyTeam, &"", &"", "mp_obj_captured", "mp_enemy_obj_captured", "");
+  printAndSoundOnEveryone(team, enemyTeam, & "", & "", "mp_obj_captured", "mp_enemy_obj_captured", "");
   game["challenge"][team]["capturedFlag"] = true;
   if(isDefined(player.pers["captures"])) {
     player.pers["captures"]++;
@@ -692,7 +677,7 @@ onCapture(player) {
   [[level._setTeamScore]](team, [[level._getTeamScore]](team) + 1);
   flag removeInfluencers();
   if(waslastround()) {
-    ctf_endGame(team, &"MP_CTF_OVERTIME_WIN");
+    ctf_endGame(team, & "MP_CTF_OVERTIME_WIN");
   }
 }
 ctf_endGame(winningTeam, endReasonText) {
@@ -723,9 +708,8 @@ onReset() {
   base_3d_icon_update();
 }
 getOtherFlag(flag) {
-  if(flag == level.flags[0]) {
+  if(flag == level.flags[0])
     return level.flags[1];
-  }
   return level.flags[0];
 }
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
@@ -734,29 +718,26 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   offendedFlag = false;
   flagTeam = "invalidTeam";
   if(isDefined(attacker) && isplayer(attacker) && (!isDefined(sWeapon) || !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(sWeapon))) {
-    for(index = 0; index < level.flags.size; index++) {
-      if(isDefined(level.flags[index].carrier)) {
+    for (index = 0; index < level.flags.size; index++) {
+      if(isDefined(level.flags[index].carrier))
         flagOrigin = level.flags[index].carrier.origin;
-      } else {
+      else
         flagOrigin = level.flags[index].curorigin;
-      }
       dist = Distance2d(self.origin, flagOrigin);
       if(dist < level.defaultOffenseRadius) {
         inFlagZone = true;
-        if(level.flags[index].ownerteam == attacker.pers["team"]) {
+        if(level.flags[index].ownerteam == attacker.pers["team"])
           defendedFlag = true;
-        } else {
+        else
           offendedFlag = true;
-        }
       }
       dist = Distance2d(attacker.origin, flagOrigin);
       if(dist < level.defaultOffenseRadius) {
         inFlagZone = true;
-        if(level.flags[index].ownerteam == attacker.pers["team"]) {
+        if(level.flags[index].ownerteam == attacker.pers["team"])
           defendedFlag = true;
-        } else {
+        else
           offendedFlag = true;
-        }
       }
     }
     if(inFlagZone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
@@ -770,9 +751,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       }
     }
   }
-  if(!isDefined(self.isFlagCarrier) || !self.isFlagCarrier) {
+  if(!isDefined(self.isFlagCarrier) || !self.isFlagCarrier)
     return;
-  }
   if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     attacker thread[[level.onXPEvent]]("kill_carrier");
     maps\mp\gametypes\_globallogic_score::givePlayerScore("kill_carrier", attacker);
@@ -783,37 +763,35 @@ createReturnMessageElems() {
   level.ReturnMessageElems = [];
   level.ReturnMessageElems["allies"]["axis"] = createServerTimer("objective", 1.4, "allies");
   level.ReturnMessageElems["allies"]["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.ReturnMessageElems["allies"]["axis"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["allies"]["axis"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
   level.ReturnMessageElems["allies"]["axis"].alpha = 0;
   level.ReturnMessageElems["allies"]["axis"].archived = false;
   level.ReturnMessageElems["allies"]["allies"] = createServerTimer("objective", 1.4, "allies");
   level.ReturnMessageElems["allies"]["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.ReturnMessageElems["allies"]["allies"].label = &"MP_YOUR_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["allies"]["allies"].label = & "MP_YOUR_FLAG_RETURNING_IN";
   level.ReturnMessageElems["allies"]["allies"].alpha = 0;
   level.ReturnMessageElems["allies"]["allies"].archived = false;
   level.ReturnMessageElems["axis"]["allies"] = createServerTimer("objective", 1.4, "axis");
   level.ReturnMessageElems["axis"]["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.ReturnMessageElems["axis"]["allies"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["axis"]["allies"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
   level.ReturnMessageElems["axis"]["allies"].alpha = 0;
   level.ReturnMessageElems["axis"]["allies"].archived = false;
   level.ReturnMessageElems["axis"]["axis"] = createServerTimer("objective", 1.4, "axis");
   level.ReturnMessageElems["axis"]["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.ReturnMessageElems["axis"]["axis"].label = &"MP_YOUR_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["axis"]["axis"].label = & "MP_YOUR_FLAG_RETURNING_IN";
   level.ReturnMessageElems["axis"]["axis"].alpha = 0;
   level.ReturnMessageElems["axis"]["axis"].archived = false;
 }
 returnFlagAfterTimeMsg(time) {
-  if(level.touchReturn) {
+  if(level.touchReturn)
     return;
-  }
   self notify("returnFlagAfterTimeMsg");
   self endon("returnFlagAfterTimeMsg");
   result = returnFlagHudElems(time);
   self removeInfluencers();
   self clearReturnFlagHudElems();
-  if(!isDefined(result)) {
+  if(!isDefined(result))
     return;
-  }
 }
 returnFlagHudElems(time) {
   self endon("picked_up");
@@ -825,11 +803,10 @@ returnFlagHudElems(time) {
   assert(!level.ReturnMessageElems["allies"][ownerteam].alpha);
   level.ReturnMessageElems["allies"][ownerteam].alpha = 1;
   level.ReturnMessageElems["allies"][ownerteam] setTimer(time);
-  if(time <= 0) {
+  if(time <= 0)
     return false;
-  } else {
+  else
     wait time;
-  }
   return true;
 }
 clearReturnFlagHudElems() {
@@ -839,21 +816,18 @@ clearReturnFlagHudElems() {
 }
 resetFlagBaseEffect() {
   wait(0.1);
-  if(isDefined(self.baseeffect)) {
+  if(isDefined(self.baseeffect))
     self.baseeffect delete();
-  }
   team = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
-  if(team != "axis" && team != "allies") {
+  if(team != "axis" && team != "allies")
     return;
-  }
   fxid = level.flagBaseFXid[team];
   self.baseeffect = spawnFx(fxid, self.baseeffectpos, self.baseeffectforward, self.baseeffectright);
   triggerFx(self.baseeffect);
 }
 turn_on() {
-  if(level.hardcoreMode) {
+  if(level.hardcoreMode)
     return;
-  }
   self.origin = self.original_origin;
 }
 turn_off() {
@@ -862,15 +836,12 @@ turn_off() {
 update_hints() {
   allied_flag = level.teamFlags["allies"];
   axis_flag = level.teamFlags["axis"];
-  if(isDefined(allied_flag.carrier)) {
+  if(isDefined(allied_flag.carrier))
     allied_flag.carrier updateBaseIcon();
-  }
-  if(isDefined(axis_flag.carrier)) {
+  if(isDefined(axis_flag.carrier))
     axis_flag.carrier updateBaseIcon();
-  }
-  if(!level.touchReturn) {
+  if(!level.touchReturn)
     return;
-  }
   if(isDefined(allied_flag.carrier) && axis_flag maps\mp\gametypes\_gameobjects::isObjectAwayFromHome()) {
     level.flagHints["axis"] turn_on();
   } else {
@@ -902,11 +873,10 @@ setupBaseIcon() {
   self.ctfBaseIcon.sort = 1;
 }
 base_3d_icon_update() {
-  if(!level.touchReturn) {
+  if(!level.touchReturn)
     return;
-  }
   players = Get_Players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(players[i].ctfBaseIcon) && !level.teamFlags["allies"] isHome() && !level.teamFlags["axis"] isHome()) {
       players[i].ctfBaseIcon setShader(level.iconWaitForFlag3D, level.objPointSize, level.objPointSize);
       players[i].ctfBaseIcon setWaypoint(true, level.iconWaitForFlag3D);
@@ -931,9 +901,8 @@ updateBaseIcon() {
   updateBaseIconVisibility(visible);
 }
 updateBaseIconVisibility(visible) {
-  if(!isDefined(self.ctfBaseIcon)) {
+  if(!isDefined(self.ctfBaseIcon))
     return;
-  }
   if(visible) {
     self.ctfBaseIcon.alpha = self.ctfBaseIcon.awayAlpha;
     self.ctfBaseIcon.isShown = true;
@@ -999,3 +968,4 @@ ctf_getTeamKillScore(eInflictor, attacker, sMeansOfDeath, sWeapon) {
   }
   return int(teamkill_score);
 }
+

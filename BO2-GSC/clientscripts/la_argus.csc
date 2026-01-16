@@ -7,9 +7,8 @@
 #include clientscripts\_argus;
 
 register_argus_zone(str_zone, func_handler) {
-  if(!isDefined(level.argus_zones)) {
+  if(!isDefined(level.argus_zones))
     level.argus_zones = [];
-  }
 
   level.argus_zones["argus_zone:" + str_zone] = func_handler;
 }
@@ -63,9 +62,8 @@ on_argus_notify_default(n_client, n_argus_id, str_user_tag, str_message) {
         case "hillary":
         case "jones":
         case "sam":
-          if(!within_fov(level.localplayers[n_client] getEye(), level.localplayers[n_client] getplayerangles(), argusgetorigin(n_argus_id), 0.99)) {
+          if(!within_fov(level.localplayers[n_client] geteye(), level.localplayers[n_client] getplayerangles(), argusgetorigin(n_argus_id), 0.99))
             return 0;
-          }
       }
 
       break;
@@ -74,9 +72,8 @@ on_argus_notify_default(n_client, n_argus_id, str_user_tag, str_message) {
     case "hillary":
     case "jones":
     case "sam":
-      if(!within_fov(level.localplayers[n_client] getEye(), level.localplayers[n_client] getplayerangles(), argusgetorigin(n_argus_id), 0.99)) {
+      if(!within_fov(level.localplayers[n_client] geteye(), level.localplayers[n_client] getplayerangles(), argusgetorigin(n_argus_id), 0.99))
         return 0;
-      }
 
       break;
     case "out":
@@ -89,12 +86,12 @@ on_argus_notify_default(n_client, n_argus_id, str_user_tag, str_message) {
 argus_build_ui(n_client, str_user_tag) {
   switch (str_user_tag) {
     case "harper":
-      return argusimageandtext2ui(n_client, "white", &"LA_SHARED_ARGUS_HARPER", &"LA_SHARED_ARGUS_HARPER_INFO");
+      return argusimageandtext2ui(n_client, "white", & "LA_SHARED_ARGUS_HARPER", & "LA_SHARED_ARGUS_HARPER_INFO");
     case "sam":
-      return argusimageandtext2ui(n_client, "white", &"LA_SHARED_ARGUS_SAM", &"LA_SHARED_ARGUS_SAM_INFO");
+      return argusimageandtext2ui(n_client, "white", & "LA_SHARED_ARGUS_SAM", & "LA_SHARED_ARGUS_SAM_INFO");
     case "hillary":
-      return argusimageandtext2ui(n_client, "white", &"LA_SHARED_ARGUS_POTUS", &"LA_SHARED_ARGUS_POTUS_INFO");
+      return argusimageandtext2ui(n_client, "white", & "LA_SHARED_ARGUS_POTUS", & "LA_SHARED_ARGUS_POTUS_INFO");
     case "jones":
-      return argusimageandtext2ui(n_client, "white", &"LA_SHARED_ARGUS_JONES", &"LA_SHARED_ARGUS_JONES_INFO");
+      return argusimageandtext2ui(n_client, "white", & "LA_SHARED_ARGUS_JONES", & "LA_SHARED_ARGUS_JONES_INFO");
   }
 }

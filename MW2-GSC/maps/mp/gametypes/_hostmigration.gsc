@@ -60,7 +60,7 @@ hostMigrationTimerThink_Internal() {
 
   self.hostMigrationControlsFrozen = false;
 
-  while(!isReallyAlive(self)) {
+  while (!isReallyAlive(self)) {
     self waittill("spawned");
   }
 
@@ -77,17 +77,15 @@ hostMigrationTimerThink() {
 
   hostMigrationTimerThink_Internal();
 
-  if(self.hostMigrationControlsFrozen) {
+  if(self.hostMigrationControlsFrozen)
     self freezeControlsWrapper(false);
-  }
 
   self setClientDvar("cg_scoreboardPingGraph", "1");
 }
 
 waitTillHostMigrationDone() {
-  if(!isDefined(level.hostMigrationTimer)) {
+  if(!isDefined(level.hostMigrationTimer))
     return 0;
-  }
 
   starttime = gettime();
   level waittill("host_migration_end");
@@ -95,25 +93,23 @@ waitTillHostMigrationDone() {
 }
 
 waitTillHostMigrationStarts(duration) {
-  if(isDefined(level.hostMigrationTimer)) {
+  if(isDefined(level.hostMigrationTimer))
     return;
-  }
 
   level endon("host_migration_begin");
   wait duration;
 }
 
 waitLongDurationWithHostMigrationPause(duration) {
-  if(duration == 0) {
+  if(duration == 0)
     return;
-  }
   assert(duration > 0);
 
   starttime = gettime();
 
   endtime = gettime() + duration * 1000;
 
-  while(gettime() < endtime) {
+  while (gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
 
     if(isDefined(level.hostMigrationTimer)) {
@@ -129,19 +125,18 @@ waitLongDurationWithHostMigrationPause(duration) {
 }
 
 waitLongDurationWithGameEndTimeUpdate(duration) {
-  if(duration == 0) {
+  if(duration == 0)
     return;
-  }
   assert(duration > 0);
 
   starttime = gettime();
 
   endtime = gettime() + duration * 1000;
 
-  while(gettime() < endtime) {
+  while (gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
 
-    while(isDefined(level.hostMigrationTimer)) {
+    while (isDefined(level.hostMigrationTimer)) {
       endTime += 1000;
       setGameEndTime(int(endTime));
       wait 1;
@@ -149,7 +144,7 @@ waitLongDurationWithGameEndTimeUpdate(duration) {
   }
 
   assert(gettime() == endtime);
-  while(isDefined(level.hostMigrationTimer)) {
+  while (isDefined(level.hostMigrationTimer)) {
     endTime += 1000;
     setGameEndTime(int(endTime));
     wait 1;

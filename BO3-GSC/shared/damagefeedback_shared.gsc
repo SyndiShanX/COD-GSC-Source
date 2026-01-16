@@ -13,12 +13,12 @@
 #namespace damagefeedback;
 
 function autoexec __init__sytem__() {
-  system::register("damagefeedback", &__init__, undefined, undefined);
+  system::register("damagefeedback", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_player_connect);
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_player_connect);
 }
 
 function init() {}
@@ -45,7 +45,7 @@ function on_player_connect() {
 }
 
 function should_play_sound(mod) {
-  if(!isDefined(mod)) {
+  if(!isdefined(mod)) {
     return false;
   }
   switch (mod) {
@@ -65,20 +65,20 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
   if(!isplayer(self)) {
     return;
   }
-  if(isDefined(self.nohitmarkers) && self.nohitmarkers) {
+  if(isdefined(self.nohitmarkers) && self.nohitmarkers) {
     return false;
   }
-  if(isDefined(weapon) && (isDefined(weapon.nohitmarker) && weapon.nohitmarker)) {
+  if(isdefined(weapon) && (isdefined(weapon.nohitmarker) && weapon.nohitmarker)) {
     return;
   }
-  if(!isDefined(self.lasthitmarkertime)) {
+  if(!isdefined(self.lasthitmarkertime)) {
     self.lasthitmarkertimes = [];
     self.lasthitmarkertime = 0;
     self.lasthitmarkeroffsettime = 0;
   }
-  if(isDefined(psoffsettime)) {
+  if(isdefined(psoffsettime)) {
     victim_id = victim getentitynumber();
-    if(!isDefined(self.lasthitmarkertimes[victim_id])) {
+    if(!isdefined(self.lasthitmarkertimes[victim_id])) {
       self.lasthitmarkertimes[victim_id] = 0;
     }
     if(self.lasthitmarkertime == gettime()) {
@@ -94,7 +94,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
   self.lasthitmarkertime = gettime();
   hitalias = undefined;
   if(should_play_sound(mod)) {
-    if(isDefined(victim) && isDefined(victim.victimsoundmod)) {
+    if(isdefined(victim) && isdefined(victim.victimsoundmod)) {
       switch (victim.victimsoundmod) {
         case "safeguard_robot": {
           hitalias = "mpl_hit_alert_escort";
@@ -106,16 +106,16 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
         }
       }
     } else {
-      if(isDefined(inflictor) && isDefined(inflictor.soundmod)) {
+      if(isdefined(inflictor) && isdefined(inflictor.soundmod)) {
         switch (inflictor.soundmod) {
           case "player": {
-            if(isDefined(victim) && (isDefined(victim.isaiclone) && victim.isaiclone)) {
+            if(isdefined(victim) && (isdefined(victim.isaiclone) && victim.isaiclone)) {
               hitalias = "mpl_hit_alert_clone";
             } else {
-              if(isDefined(victim) && isplayer(victim) && victim flagsys::get("gadget_armor_on") && armor::armor_should_take_damage(inflictor, weapon, mod, shitloc)) {
+              if(isdefined(victim) && isplayer(victim) && victim flagsys::get("gadget_armor_on") && armor::armor_should_take_damage(inflictor, weapon, mod, shitloc)) {
                 hitalias = "mpl_hit_alert_armor";
               } else {
-                if(isDefined(victim) && isplayer(victim) && isDefined(victim.carryobject) && isDefined(victim.carryobject.hitsound) && isDefined(perkfeedback) && perkfeedback == "armor") {
+                if(isdefined(victim) && isplayer(victim) && isdefined(victim.carryobject) && isdefined(victim.carryobject.hitsound) && isdefined(perkfeedback) && perkfeedback == "armor") {
                   hitalias = victim.carryobject.hitsound;
                 } else {
                   if(mod == "MOD_BURNED") {
@@ -178,17 +178,17 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
       }
     }
   }
-  if(isDefined(victim) && (isDefined(victim.isaiclone) && victim.isaiclone)) {
+  if(isdefined(victim) && (isdefined(victim.isaiclone) && victim.isaiclone)) {
     self playhitmarker(hitalias);
     return;
   }
   damagestage = 1;
-  if(isDefined(level.growing_hitmarker) && isDefined(victim) && isplayer(victim)) {
+  if(isdefined(level.growing_hitmarker) && isdefined(victim) && isplayer(victim)) {
     damagestage = damage_feedback_get_stage(victim);
   }
   self playhitmarker(hitalias, damagestage, perkfeedback, damage_feedback_get_dead(victim, mod, weapon, damagestage));
-  if(isDefined(perkfeedback)) {
-    if(isDefined(self.hud_damagefeedback_additional)) {
+  if(isdefined(perkfeedback)) {
+    if(isdefined(self.hud_damagefeedback_additional)) {
       switch (perkfeedback) {
         case "flakjacket": {
           self.hud_damagefeedback_additional setshader("damage_feedback_flak", 24, 48);
@@ -207,12 +207,12 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
       self.hud_damagefeedback_additional fadeovertime(1);
       self.hud_damagefeedback_additional.alpha = 0;
     }
-  } else if(isDefined(self.hud_damagefeedback)) {
+  } else if(isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
   }
-  if(isDefined(self.hud_damagefeedback) && isDefined(level.growing_hitmarker) && isDefined(victim) && isplayer(victim)) {
+  if(isdefined(self.hud_damagefeedback) && isdefined(level.growing_hitmarker) && isdefined(victim) && isplayer(victim)) {
     self thread damage_feedback_growth(victim, mod, weapon);
-  } else if(isDefined(self.hud_damagefeedback)) {
+  } else if(isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback.x = -12;
     self.hud_damagefeedback.y = -12;
     self.hud_damagefeedback.alpha = 1;
@@ -222,7 +222,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
 }
 
 function damage_feedback_get_stage(victim) {
-  if(isDefined(victim.laststand) && victim.laststand) {
+  if(isdefined(victim.laststand) && victim.laststand) {
     return 5;
   }
   if((victim.health / victim.maxhealth) > 0.74) {
@@ -241,11 +241,11 @@ function damage_feedback_get_stage(victim) {
 }
 
 function damage_feedback_get_dead(victim, mod, weapon, stage) {
-  return stage == 5 && (mod == "MOD_BULLET" || mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || mod == "MOD_HEAD_SHOT") && (isDefined(weapon.isheroweapon) && !weapon.isheroweapon) && !killstreaks::is_killstreak_weapon(weapon) && !weapon.name === "siegebot_gun_turret" && !weapon.name === "siegebot_launcher_turret";
+  return stage == 5 && (mod == "MOD_BULLET" || mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || mod == "MOD_HEAD_SHOT") && (isdefined(weapon.isheroweapon) && !weapon.isheroweapon) && !killstreaks::is_killstreak_weapon(weapon) && !weapon.name === "siegebot_gun_turret" && !weapon.name === "siegebot_launcher_turret";
 }
 
 function damage_feedback_growth(victim, mod, weapon) {
-  if(isDefined(self.hud_damagefeedback)) {
+  if(isdefined(self.hud_damagefeedback)) {
     stage = damage_feedback_get_stage(victim);
     self.hud_damagefeedback.x = -11 + -1 * stage;
     self.hud_damagefeedback.y = -11 + -1 * stage;
@@ -279,14 +279,14 @@ function update_override(icon, sound, additional_icon) {
     return;
   }
   self playlocalsound(sound);
-  if(isDefined(self.hud_damagefeedback)) {
+  if(isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader(icon, 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);
     self.hud_damagefeedback.alpha = 0;
   }
-  if(isDefined(self.hud_damagefeedback_additional)) {
-    if(!isDefined(additional_icon)) {
+  if(isdefined(self.hud_damagefeedback_additional)) {
+    if(!isdefined(additional_icon)) {
       self.hud_damagefeedback_additional.alpha = 0;
     } else {
       self.hud_damagefeedback_additional setshader(additional_icon, 24, 48);
@@ -301,14 +301,14 @@ function update_special(hitent) {
   if(!isplayer(self)) {
     return;
   }
-  if(!isDefined(hitent)) {
+  if(!isdefined(hitent)) {
     return;
   }
   if(!isplayer(hitent)) {
     return;
   }
   wait(0.05);
-  if(!isDefined(self.directionalhitarray)) {
+  if(!isdefined(self.directionalhitarray)) {
     self.directionalhitarray = [];
     hitentnum = hitent getentitynumber();
     self.directionalhitarray[hitentnum] = 1;
@@ -325,16 +325,16 @@ function send_hit_special_event_at_frame_end(hitent) {
   enemyshit = 0;
   value = 1;
   entbitarray0 = 0;
-  for(i = 0; i < 32; i++) {
-    if(isDefined(self.directionalhitarray[i]) && self.directionalhitarray[i] != 0) {
+  for (i = 0; i < 32; i++) {
+    if(isdefined(self.directionalhitarray[i]) && self.directionalhitarray[i] != 0) {
       entbitarray0 = entbitarray0 + value;
       enemyshit++;
     }
     value = value * 2;
   }
   entbitarray1 = 0;
-  for(i = 33; i < 64; i++) {
-    if(isDefined(self.directionalhitarray[i]) && self.directionalhitarray[i] != 0) {
+  for (i = 33; i < 64; i++) {
+    if(isdefined(self.directionalhitarray[i]) && self.directionalhitarray[i] != 0) {
       entbitarray1 = entbitarray1 + value;
       enemyshit++;
     }
@@ -349,17 +349,17 @@ function send_hit_special_event_at_frame_end(hitent) {
 }
 
 function dodamagefeedback(weapon, einflictor, idamage, smeansofdeath) {
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     return false;
   }
-  if(isDefined(weapon.nohitmarker) && weapon.nohitmarker) {
+  if(isdefined(weapon.nohitmarker) && weapon.nohitmarker) {
     return false;
   }
   if(level.allowhitmarkers == 0) {
     return false;
   }
   if(level.allowhitmarkers == 1) {
-    if(isDefined(smeansofdeath) && isDefined(idamage)) {
+    if(isdefined(smeansofdeath) && isdefined(idamage)) {
       if(istacticalhitmarker(weapon, smeansofdeath, idamage)) {
         return false;
       }

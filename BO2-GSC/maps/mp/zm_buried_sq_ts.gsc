@@ -14,10 +14,10 @@ init() {
 }
 
 init_stage() {
-  a_signs = getEntArray("sq_tunnel_sign", "targetname");
+  a_signs = getentarray("sq_tunnel_sign", "targetname");
 
   foreach(m_sign in a_signs) {
-    m_sign setCanDamage(1);
+    m_sign setcandamage(1);
     m_sign thread ts_sign_damage_watch();
   }
 
@@ -33,7 +33,8 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {}
+exit_stage(success) {
+}
 
 ts_sign_damage_watch() {
   level endon("sq_sign_damaged");
@@ -49,11 +50,10 @@ ts_sign_damage_watch() {
     }
 
     if(ts_is_bowie_knife(str_weapon) || ts_is_galvaknuckles(str_weapon)) {
-      if(self.ts_sign_activated) {
+      if(self.ts_sign_activated)
         self thread ts_sign_deactivate();
-      } else {
+      else
         self thread ts_sign_activate();
-      }
 
       ts_sign_check_all_activated(e_attacker, self);
     }
@@ -64,16 +64,16 @@ ts_sign_activate() {
   self.ts_sign_activated = 1;
 
   if(!isDefined(self.fx_ent)) {
-    v_forward = anglesToForward(self.angles);
+    v_forward = anglestoforward(self.angles);
     v_offset = vectornormalize(v_forward) * 2;
     self.fx_ent = spawn("script_model", self.origin - vectorscale((0, 0, 1), 20.0) + v_offset);
-    self.fx_ent.angles = anglesToForward(self.angles);
-    self.fx_ent setModel("tag_origin");
-    self.fx_ent playSound("zmb_sq_wisp_spawn");
-    self.fx_ent playLoopSound("zmb_sq_wisp_wall_loop");
+    self.fx_ent.angles = anglestoforward(self.angles);
+    self.fx_ent setmodel("tag_origin");
+    self.fx_ent playsound("zmb_sq_wisp_spawn");
+    self.fx_ent playloopsound("zmb_sq_wisp_wall_loop");
 
     while(isDefined(self.fx_ent)) {
-      playFXOnTag(level._effect["sq_ether_amp_trail"], self.fx_ent, "tag_origin");
+      playfxontag(level._effect["sq_ether_amp_trail"], self.fx_ent, "tag_origin");
       wait 0.3;
     }
   }
@@ -89,7 +89,7 @@ ts_sign_deactivate() {
 }
 
 ts_sign_check_all_activated(e_attacker, m_last_touched) {
-  a_signs = getEntArray("sq_tunnel_sign", "targetname");
+  a_signs = getentarray("sq_tunnel_sign", "targetname");
   a_signs_active = [];
   is_max_complete = 1;
   is_ric_complete = 1;
@@ -98,13 +98,11 @@ ts_sign_check_all_activated(e_attacker, m_last_touched) {
     if(m_sign.ts_sign_activated) {
       a_signs_active[a_signs_active.size] = m_sign;
 
-      if(!is_true(m_sign.is_max_sign)) {
+      if(!is_true(m_sign.is_max_sign))
         is_max_complete = 0;
-      }
 
-      if(!is_true(m_sign.is_ric_sign)) {
+      if(!is_true(m_sign.is_ric_sign))
         is_ric_complete = 0;
-      }
     }
   }
 
@@ -118,17 +116,15 @@ ts_sign_check_all_activated(e_attacker, m_last_touched) {
 }
 
 ts_is_bowie_knife(str_weapon) {
-  if(str_weapon == "knife_ballistic_bowie_zm" || str_weapon == "knife_ballistic_bowie_upgraded_zm" || str_weapon == "bowie_knife_zm") {
+  if(str_weapon == "knife_ballistic_bowie_zm" || str_weapon == "knife_ballistic_bowie_upgraded_zm" || str_weapon == "bowie_knife_zm")
     return true;
-  }
 
   return false;
 }
 
 ts_is_galvaknuckles(str_weapon) {
-  if(str_weapon == "tazer_knuckles_zm") {
+  if(str_weapon == "tazer_knuckles_zm")
     return true;
-  }
 
   return false;
 }

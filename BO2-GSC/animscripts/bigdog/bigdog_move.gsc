@@ -52,9 +52,8 @@ movemainloop() {
 
     looptime = self getanimtime( % walk_loops);
 
-    if(looptime < prevlooptime) {
+    if(looptime < prevlooptime)
       self.a.runloopcount++;
-    }
 
     prevlooptime = looptime;
     animname = "walk";
@@ -82,9 +81,8 @@ movemainloop() {
 }
 
 bigdoghandledisconnectpathswhilemoving() {
-  if(gettime() > self.a.disconnectpathstime) {
+  if(gettime() > self.a.disconnectpathstime)
     self.a.disconnectpathstime = gettime() + 2000;
-  }
 }
 
 shouldtacticalwalk() {
@@ -92,9 +90,8 @@ shouldtacticalwalk() {
 }
 
 shouldfacemotionwhilerunning() {
-  if(self shouldfacemotion()) {
+  if(self shouldfacemotion())
     return true;
-  }
 
   return false;
 }
@@ -102,9 +99,8 @@ shouldfacemotionwhilerunning() {
 shouldwalkbackwards() {
   anglediff = self animscripts\run::getlookaheadangle();
 
-  if(abs(anglediff) > 135) {
+  if(abs(anglediff) > 135)
     return true;
-  }
 
   return false;
 }
@@ -114,9 +110,8 @@ getmoveanimname() {
 }
 
 tryturning() {
-  if(!self.canmove) {
+  if(!self.canmove)
     return 0;
-  }
 
   anglediff = self animscripts\run::getlookaheadangle();
 

@@ -75,7 +75,7 @@ uaz_control() {
   flag_wait("uaz_park");
   wait 0.25;
 
-  self playSound("scn_bone_uaz_hits_ramp");
+  self playsound("scn_bone_uaz_hits_ramp");
   Earthquake(.5, 2, level.player.origin, 1024);
 
   self thread park_uaz();
@@ -101,7 +101,7 @@ player_rig_adjust_height() {
 
   stand = false;
 
-  while(true) {
+  while (true) {
     player_angle = level.player.angles[1];
     uaz_angle = self.angles[1];
     dif_angle = abs(int(uaz_angle - player_angle) % 360);
@@ -170,20 +170,21 @@ uaz_steer() {
   full_accel *= 4;
   accel = slow_accel;
 
-  while(true) {
+  while (true) {
     // -1 to 1 for left/right
     input = level.player GetNormalizedMovement()[1];
     input *= -1; // swap it for the direction we're going in
     goal_offset += input * input_multiplier;
     goal_offset = clamp(goal_offset, goal_offset_range * -1, goal_offset_range);
 
+
     // ============================================================================================	
     // This section overrides the player's steering if he steers too hard left or right
     // ============================================================================================	
     angles_runway = vectortoangles((0, 100, 0));
-    forward_runway = anglesToForward(angles_runway);
+    forward_runway = anglestoforward(angles_runway);
 
-    my_forward = anglesToForward(self.angles);
+    my_forward = anglestoforward(self.angles);
     dot = vectordot(my_forward, forward_runway);
 
     my_right = anglestoright(self.angles);
@@ -202,10 +203,11 @@ uaz_steer() {
     }
     // ============================================================================================	
 
+
     // use a reference ent so we can easily add angles to it
     angles_ent.angles = (0, self.angles[1], 0);
     angles_ent addyaw(goal_offset);
-    forward = anglesToForward(angles_ent.angles);
+    forward = anglestoforward(angles_ent.angles);
     goal = self.origin + forward * lookahead;
 
     if(self.origin[0] < level.c130.origin[0] - 360) {
@@ -217,7 +219,7 @@ uaz_steer() {
     // ============================================================================================	
 
     // find the spot the uaz should drive to if it were driving straight towards
-    // the c130.
+    // the c130. 
     if(flag("player_loses_control_of_uaz")) {
       // once the player loses control, blend out control of the uaz
       difference = gettime() - level.control_loss_time;
@@ -230,7 +232,7 @@ uaz_steer() {
       goal = level.c130.ramp_trigger.origin * difference + goal * (1 - difference);
     } else {
       angles_to_c130 = vectortoangles((level.c130.origin + (off_road_offset, 0, 0)) - self.origin);
-      forward_to_c130 = anglesToForward(angles_to_c130);
+      forward_to_c130 = anglestoforward(angles_to_c130);
       straight_to_c130_goal = self.origin + forward_to_c130 * lookahead;
 
       // blend in control over time, so we dont oversteer early on,
@@ -246,9 +248,8 @@ uaz_steer() {
 
     //		Line( goal, level.c130.ramp_trigger.origin, (1,0,0) );
 
-    if(speed >= 60) {
+    if(speed >= 60)
       accel = full_accel;
-    }
     // calculate the speed
     speed += accel;
     speed = clamp(speed, 0, goal_speed);
@@ -269,7 +270,7 @@ modulate_uaz_crashability() {
   wait(2);
   self VehPhys_DisableCrashing();
 
-  for(;;) {
+  for (;;) {
     // after 2 seconds, you can only only crash if you're off the road
     // this is cause if you get side swiped you crash in a really
     // weird way that is hard to comprehend
@@ -288,15 +289,14 @@ uaz_steer_viewmodel() {
 
   steering = 0;
 
-  while(true) {
+  while (true) {
     input = level.player GetNormalizedMovement()[1] * -1;
     input += (self Vehicle_GetSteering() * 0.25);
     input = clamp(input, -1, 1);
 
     steering += input * 0.1; // ( 1.1 - abs( input ) );
-    if(abs(steering) > abs(input)) {
+    if(abs(steering) > abs(input))
       steering = input;
-    }
 
     fraction = abs(steering);
 
@@ -324,20 +324,18 @@ uaz_steer_viewmodel() {
 
 ride_uaz_fake_price_fire() {
   self endon("death");
-  while(true) {
+  while (true) {
     axis = getaiarray("axis");
-    if(axis.size == 0) {
+    if(axis.size == 0)
       break;
-    }
 
     axis = array_randomize(axis);
     burst = randomintrange(5, 15);
-    target_origin = axis[0] getEye();
-    for(i = 0; i < burst; i++) {
-      if(isalive(axis[0])) {
-        target_origin = axis[0] getEye();
-      }
-      MagicBullet(self.weapon, level.price getEye() + (0, 0, 16), target_origin);
+    target_origin = axis[0] geteye();
+    for (i = 0; i < burst; i++) {
+      if(isalive(axis[0]))
+        target_origin = axis[0] geteye();
+      MagicBullet(self.weapon, level.price geteye() + (0, 0, 16), target_origin);
       wait 0.1;
     }
     wait RandomFloatRange(1.5, 3);
@@ -365,12 +363,12 @@ ride_uaz_door() {
 
 park_uaz() {
   park_goal = getent("uaz_park", "script_noteworthy"); // use uaz_park for the final animation
-  park_goal setModel("tag_origin");
+  park_goal setmodel("tag_origin");
 
   tag_origin = park_goal spawn_tag_origin();
   tag_origin linkto(park_goal, "tag_origin", (0, 0, 0), (0, 0, 0));
 
-  forward = anglesToForward(park_goal.angles);
+  forward = anglestoforward(park_goal.angles);
   goal = self.origin + forward * 500;
   self vehicleDriveTo(goal, 60);
 
@@ -419,7 +417,7 @@ ride_bump() {
   offset[0] = (23, 33, 64);
   offset[1] = (-23, -33, 64);
 
-  while(true) {
+  while (true) {
     speed = min(self.veh_speed, max_speed);
     jolt_scale = self.max_jolt / max_speed;
     if(speed > 0 && self.max_jolt > 0) {
@@ -438,7 +436,7 @@ ride_bump_node() {
 }
 
 ride_rumble_setup() {
-  array = getEntArray("rumble_trigger", "targetname");
+  array = getentarray("rumble_trigger", "targetname");
   array_thread(array, ::ride_rumble);
 }
 
@@ -446,9 +444,8 @@ ride_rumble() {
   self waittill("trigger");
 
   rumble = "grenade_rumble";
-  if(isDefined(self.script_rumble)) {
+  if(isdefined(self.script_rumble))
     rumble = self.script_rumble;
-  }
 
   level.player PlayRumbleOnEntity(rumble);
 }
@@ -465,9 +462,8 @@ vehicle_dialogue_node() {
   self waittill("trigger");
 
   // don't player this one line if the flag is set. Yes it's ugly, but so be it.
-  if(flag("ride_minigun_gunner_dead") && self.script_soundalias == "byard_pri_thedrivers") {
+  if(flag("ride_minigun_gunner_dead") && self.script_soundalias == "byard_pri_thedrivers")
     return;
-  }
 
   level.price dialogue_queue(self.script_soundalias);
 }
@@ -475,17 +471,17 @@ vehicle_dialogue_node() {
 vehicle_event_node() {
   // doing the handling of vehicle nodes here since the global script isn't working right now.
   // besides it lets me do more stuff to.
-  while(true) {
+  while (true) {
     self waittill("trigger", vehicle);
-    assert(isDefined(vehicle));
+    assert(isdefined(vehicle));
 
     vehicle notify("event", self.script_parameters);
 
-    if(isDefined(self.script_vehicleaianim)) {
+    if(isdefined(self.script_vehicleaianim)) {
       vehicle Maps\_vehicle::vehicle_ai_event(self.script_vehicleaianim);
-
+      /#
       println(self.script_vehicleaianim);
-
+      # /
     }
   }
 }
@@ -494,12 +490,11 @@ vehicle_event_handler() {
   self endon("death");
   vehicle = self;
 
-  while(true) {
+  while (true) {
     self waittill("event", event);
 
-    if(!isDefined(event)) {
+    if(!isdefined(event))
       continue;
-    }
 
     switch (event) {
       case "enable_crashing":
@@ -551,9 +546,8 @@ vehicle_event_handler() {
 }
 
 vehicle_crash_guy(vehicle) {
-  if(self.vehicle_position == 0) {
+  if(self.vehicle_position == 0)
     return;
-  }
 
   self.deathanim = undefined;
   self.noragdoll = undefined;
@@ -570,9 +564,8 @@ vehicle_crash_launch_guys() {
 }
 
 vehicle_frontal_guy(vehicle) {
-  if(self.vehicle_position == 0) {
+  if(self.vehicle_position == 0)
     return;
-  }
 
   self.deathanim = undefined;
   self.noragdoll = undefined;
@@ -581,9 +574,8 @@ vehicle_frontal_guy(vehicle) {
 
   wait 0.05;
   self unlink();
-  if(isalive(self)) {
+  if(isalive(self))
     self kill(level.player.origin, level.player);
-  }
 }
 
 vehicle_player_induced_death() {
@@ -603,11 +595,10 @@ vehicle_player_induced_death() {
   damage_limit = damage_limit_arr[difficulty];
   total_damage = 0;
 
-  while(total_damage < damage_limit) {
+  while (total_damage < damage_limit) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
-    if(attacker != level.player) {
+    if(attacker != level.player)
       continue;
-    }
     if(type == "MOD_PROJECTILE") // always crash from direct hit rpgs.
       break;
     total_damage += damage;
@@ -621,12 +612,11 @@ vehicle_track_frontal() {
   self endon("dying");
 
   crash_limit = 5000;
-  while(true) {
+  while (true) {
     self waittill("veh_jolt", vector);
     force = abs(vector[0]) + abs(vector[1]) + abs(vector[2]);
-    if(force > crash_limit) {
+    if(force > crash_limit)
       self notify("event", "frontal");
-    }
   }
 }
 
@@ -635,7 +625,7 @@ vehicle_crash_turn(left_turn, wait_time) {
   offset = (64, -256, 16);
   vector = (64, 256, 0);
 
-  if(isDefined(left_turn)) {
+  if(isdefined(left_turn)) {
     // left turn default
     offset = (64, 256, 16);
     vector = (64, -256, 0);
@@ -658,16 +648,14 @@ vehicle_crash_turn(left_turn, wait_time) {
   self VehPhys_EnableCrashing();
   self vehicleDriveTo(goal_origin, self.veh_speed);
 
-  while(abs(self Vehicle_GetSteering()) < 1) {
+  while (abs(self Vehicle_GetSteering()) < 1)
     wait 0.05;
-  }
 
   vector = rotate_vector(vector, self.angles);
   self VehPhys_launch(vector, false);
 
-  if(!isDefined(wait_time)) {
+  if(!isdefined(wait_time))
     wait_time = 4;
-  }
 
   self waittill_still(wait_time, 200);
   self maps\_vehicle::godoff();
@@ -677,14 +665,13 @@ vehicle_crash_turn(left_turn, wait_time) {
 waittill_still(timeout, still_point) {
   mytimeOutEnt(timeout) endon("timeout");
 
-  if(!isDefined(still_point)) {
+  if(!isdefined(still_point))
     still_point = 50;
-  }
 
   velocity = self Vehicle_GetVelocity();
   velocity = abs(velocity[0]) + abs(velocity[1]) + abs(velocity[2]);
 
-  while(velocity > still_point) {
+  while (velocity > still_point) {
     velocity = self Vehicle_GetVelocity();
     velocity = abs(velocity[0]) + abs(velocity[1]) + abs(velocity[2]);
     wait 0.05;
@@ -692,11 +679,11 @@ waittill_still(timeout, still_point) {
 }
 
 launch_object_setup() {
-  array_thread(getEntArray("launch_object", "targetname"), ::launch_object);
+  array_thread(getentarray("launch_object", "targetname"), ::launch_object);
 }
 
 launch_object() {
-  obj_array = getEntArray(self.target, "targetname");
+  obj_array = getentarray(self.target, "targetname");
   self waittill("trigger", vehicle);
 
   force_multiplier_arr = [];
@@ -708,9 +695,8 @@ launch_object() {
 
   foreach(obj in obj_array) {
     // playes a light rumble for each impact.
-    if(vehicle == level.uaz) {
+    if(vehicle == level.uaz)
       level.player PlayRumbleOnEntity("damage_light");
-    }
 
     velocity = vehicle vehicle_getvelocity();
     angles1 = vectortoangles((obj.origin + (0, 0, 6)) - vehicle.origin);
@@ -726,19 +712,16 @@ launch_object() {
     velocity = rotate_vector(velocity, rotation);
 
     force_multiplier = 2;
-    if(isDefined(force_multiplier_arr[obj.model])) {
+    if(isdefined(force_multiplier_arr[obj.model]))
       force_multiplier = force_multiplier_arr[obj.model];
-    }
 
     // lets me overide if needed.
-    if(isDefined(obj.script_accel)) {
+    if(isdefined(obj.script_accel))
       force_multiplier = force_multiplier * obj.script_accel;
-    }
 
     //play sound from hit
-    if(isDefined(obj.script_soundalias)) {
+    if(isdefined(obj.script_soundalias))
       level thread play_sound_in_space(obj.script_soundalias, obj.origin);
-    }
 
     velocity *= force_multiplier;
 
@@ -752,7 +735,7 @@ launch_object() {
 }
 
 mytimeOutEnt(timeOut) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent delaythread(timeOut, ::send_notify, "timeout");
   return ent;
 }
@@ -816,19 +799,19 @@ assemble_c130() {
   c130 = getent("c130_flight", "targetname");
   lower_hatch = getent("lower_hatch", "targetname");
   upper_hatch = getent("upper_hatch", "targetname");
-  hinge_arr = getEntArray("hinge", "targetname");
+  hinge_arr = getentarray("hinge", "targetname");
 
   lower_hatch_origin = getent("lower_hatch_origin", "targetname");
   upper_hatch_origin = getent("upper_hatch_origin", "targetname");
-  hinge_origin_arr = getEntArray("hinge_origin", "targetname");
+  hinge_origin_arr = getentarray("hinge_origin", "targetname");
 
-  array_call(getEntArray(c130.target, "targetname"), ::linkto, c130);
-  array_call(getEntArray(lower_hatch.target, "targetname"), ::linkto, lower_hatch);
-  array_call(getEntArray(upper_hatch.target, "targetname"), ::linkto, upper_hatch);
-  array_call(getEntArray(hinge_arr[0].target, "targetname"), ::linkto, hinge_arr[0]);
-  array_call(getEntArray(hinge_arr[1].target, "targetname"), ::linkto, hinge_arr[1]);
+  array_call(getentarray(c130.target, "targetname"), ::linkto, c130);
+  array_call(getentarray(lower_hatch.target, "targetname"), ::linkto, lower_hatch);
+  array_call(getentarray(upper_hatch.target, "targetname"), ::linkto, upper_hatch);
+  array_call(getentarray(hinge_arr[0].target, "targetname"), ::linkto, hinge_arr[0]);
+  array_call(getentarray(hinge_arr[1].target, "targetname"), ::linkto, hinge_arr[1]);
 
-  array_thread(getEntArray("c130_spark_origin", "script_noteworthy"), ::c130_sparks);
+  array_thread(getentarray("c130_spark_origin", "script_noteworthy"), ::c130_sparks);
 
   hinge_arr[0].angles = (175, 90, 0);
   hinge_arr[1].angles = (170, 90, 0);
@@ -846,34 +829,33 @@ assemble_c130() {
   c130.ramp_trigger enablelinkto();
   c130.ramp_trigger LinkTo(c130);
 
-  array_thread(getEntArray("ramp_death_trigger", "targetname"), ::ramp_death_trigger, c130);
+  array_thread(getentarray("ramp_death_trigger", "targetname"), ::ramp_death_trigger, c130);
 
-  array_thread(getEntArray("c130_propeller", "script_noteworthy"), ::c130_propeller);
+  array_thread(getentarray("c130_propeller", "script_noteworthy"), ::c130_propeller);
 
   return c130;
 }
 
 extra_row_of_sparks_from_ramp(my_hatch) {
-  for(;;) {
+  for (;;) {
     level waittill("hinge_stopped", hatch);
-    if(hatch == my_hatch) {
+    if(hatch == my_hatch)
       break;
-    }
   }
 
-  hinges = getEntArray("hinge", "targetname");
+  hinges = getentarray("hinge", "targetname");
 
-  hinges[0] playLoopSound("veh_c130_ramp_scrape_loop");
+  hinges[0] PlayLoopSound("veh_c130_ramp_scrape_loop");
 
   start_origin = level.c130.origin[2];
-  for(;;) {
+  for (;;) {
     // stop if c130 takes off
     if(level.c130.origin[2] > start_origin + 50) {
       hinges[0] StopLoopSound();
       return;
     }
     sparks = randomintrange(0, 2);
-    for(i = 0; i < sparks; i++) {
+    for (i = 0; i < sparks; i++) {
       thread spawn_spark_between_hinges(hinges);
     }
     wait(0.05);
@@ -889,10 +871,10 @@ spawn_spark_between_hinges(hinges) {
   ent linkto(hinges[0]);
 
   spark_fx = getfx("scrape_sparks");
-  playFXOnTag(spark_fx, ent, "tag_origin");
+  PlayFXOnTag(spark_fx, ent, "tag_origin");
   delay = 4;
   delay *= 20;
-  for(i = 0; i < delay; i++) {
+  for (i = 0; i < delay; i++) {
     //		Print3d( ent.origin, "x", (1,0,0), 1, 1 );
     wait(0.05);
   }
@@ -908,11 +890,10 @@ ramp_death_trigger(c130) {
 
   flag_wait("uaz_player_in_control");
 
-  while(true) {
+  while (true) {
     self waittill("trigger", vehicle);
-    if(vehicle == level.uaz) {
+    if(vehicle == level.uaz)
       break;
-    }
   }
 
   level notify("uaz_park_crash");
@@ -937,7 +918,7 @@ c130_rotate_hatch(hatch, hinge_origin, rate, stop_time, delay) {
   wait_time = 5;
   hinge = spawn("script_model", hinge_origin);
   hinge.angles = (0, 0, 0);
-  hinge setModel("tag_origin");
+  hinge setmodel("tag_origin");
   hinge linkto(self);
   hatch.origin = hinge_origin;
   hatch linkto(hinge);
@@ -945,9 +926,8 @@ c130_rotate_hatch(hatch, hinge_origin, rate, stop_time, delay) {
   flag_wait("c130_hatch_open");
   wait(wait_time);
 
-  if(isDefined(delay)) {
+  if(isdefined(delay))
     wait delay;
-  }
 
   hinge.animname = "c130_propeller";
   hinge assign_animtree();
@@ -984,8 +964,8 @@ c130_sparks() {
   wait(0.65);
 
   spark_fx = getfx("scrape_sparks");
-  while(true) {
-    playFXOnTag(spark_fx, ent, "tag_origin");
+  while (true) {
+    PlayFXOnTag(spark_fx, ent, "tag_origin");
     wait randomfloatrange(0.1, 0.3);
   }
 }
@@ -1000,7 +980,7 @@ flyby_rumble() {
 
   loops = int(0.75 * 20);
   up_target_angle = -8;
-  for(i = 0; i < loops; i++) {
+  for (i = 0; i < loops; i++) {
     player_angles = level.player getplayerangles();
     up_angle = player_angles[0];
 
@@ -1016,41 +996,35 @@ flyby_rumble() {
 
 RUMBLE_FRAMES_PER_SEC = 10;
 screenshake(scale, duration, fade_in, fade_out) {
-  if(!isDefined(fade_in)) {
+  if(!isdefined(fade_in))
     fade_in = 0;
-  }
-  if(!isDefined(fade_out)) {
+  if(!isdefined(fade_out))
     fade_out = 0;
-  }
 
   assert((fade_in + fade_out) <= duration);
 
   frame_count = duration * RUMBLE_FRAMES_PER_SEC;
   fade_in_frame_count = fade_in * RUMBLE_FRAMES_PER_SEC;
-  if(fade_in_frame_count > 0) {
+  if(fade_in_frame_count > 0)
     fade_in_scale_step = scale / fade_in_frame_count;
-  } else {
+  else
     fade_in_scale_step = scale;
-  }
 
   fade_out_frame_count = fade_out * RUMBLE_FRAMES_PER_SEC;
   fade_out_start_frame = frame_count - fade_out_frame_count;
-  if(fade_out_frame_count > 0) {
+  if(fade_out_frame_count > 0)
     fade_out_scale_step = scale / fade_out_frame_count;
-  } else {
+  else
     fade_out_scale_step = scale;
-  }
 
   delay = 1 / RUMBLE_FRAMES_PER_SEC;
   scale = 0;
-  for(i = 0; i < frame_count; i++) {
-    if(i <= fade_in_frame_count) {
+  for (i = 0; i < frame_count; i++) {
+    if(i <= fade_in_frame_count)
       scale += fade_in_scale_step;
-    }
 
-    if(i > fade_out_start_frame) {
+    if(i > fade_out_start_frame)
       scale -= fade_out_scale_step;
-    }
 
     earthquake(scale, delay, level.player.origin, 500);
     wait delay;
@@ -1059,21 +1033,20 @@ screenshake(scale, duration, fade_in, fade_out) {
 
 angel_flare_burst(flare_count) {
   // Angel Flare Swirl
-  playFXOnTag(getfx("angel_flare_swirl"), self, "tag_flash_flares");
+  PlayFXOnTag(getfx("angel_flare_swirl"), self, "tag_flash_flares");
 
-  self playSound("ac130_flare_burst");
+  self PlaySound("ac130_flare_burst");
 
   // Angel Flare Trails
-  for(i = 0; i < flare_count; i++) {
+  for (i = 0; i < flare_count; i++) {
     self thread angel_flare();
     wait randomfloatrange(0.1, 0.25);
   }
 }
 
 angel_flare() {
-  if(!isDefined(level.anim_index)) {
+  if(!isdefined(level.anim_index))
     level.anim_index = 0;
-  }
 
   rig = spawn_anim_model("angel_flare_rig");
 
@@ -1091,18 +1064,18 @@ angel_flare() {
   rig SetFlaggedAnim("flare_anim", animation, 1, 0, 1);
 
   wait 0.1;
-  playFXOnTag(fx_id, rig, "flare_left_top");
-  playFXOnTag(fx_id, rig, "flare_right_top");
+  PlayFXOnTag(fx_id, rig, "flare_left_top");
+  PlayFXOnTag(fx_id, rig, "flare_right_top");
   wait 0.05;
-  playFXOnTag(fx_id, rig, "flare_left_bot");
-  playFXOnTag(fx_id, rig, "flare_right_bot");
+  PlayFXOnTag(fx_id, rig, "flare_left_bot");
+  PlayFXOnTag(fx_id, rig, "flare_right_bot");
 
   rig waittillmatch("flare_anim", "end");
 
-  stopFXOnTag(fx_id, rig, "flare_left_top");
-  stopFXOnTag(fx_id, rig, "flare_right_top");
-  stopFXOnTag(fx_id, rig, "flare_left_bot");
-  stopFXOnTag(fx_id, rig, "flare_right_bot");
+  StopFXOnTag(fx_id, rig, "flare_left_top");
+  StopFXOnTag(fx_id, rig, "flare_right_top");
+  StopFXOnTag(fx_id, rig, "flare_left_bot");
+  StopFXOnTag(fx_id, rig, "flare_right_bot");
 }
 
 /***** THREE WAY FIGHTING STUFF*****/
@@ -1122,19 +1095,16 @@ threewayfight_setup() {
 
 threewayfight_threads() {
   // don't do this on vehicles or other non sentient ents
-  if(!issentient(self)) {
+  if(!issentient(self))
     return;
-  }
 
   state = "default";
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy))
     state = self.script_noteworthy;
-  }
 
   difficulty = level.gameskill;
-  if(difficulty == 0) {
+  if(difficulty == 0)
     difficulty = 1;
-  }
 
   //	might work to work around the self.ridingvehicle issue.
   waittillframeend;
@@ -1163,10 +1133,11 @@ threewayfight_threads() {
     default:
       // delete generic guys that would push the count above the limit
       // there is probably a better way to do this.
-      if(level.ai_cap[self.team] < level.ai_cap[self.team + "_alive"] && !isDefined(self.ridingvehicle)) {
+      if(level.ai_cap[self.team] < level.ai_cap[self.team + "_alive"] && !isdefined(self.ridingvehicle)) {
+        /#
         println("^2didn't spawn " + self.team + " guy because of ai_cap.");
-
-        self waittill("finished spawning");
+        # /
+          self waittill("finished spawning");
         self delete();
       } else {
         self thread ai_cap_count();
@@ -1181,9 +1152,8 @@ threewayfight_threads_defaults() {
   self thread player_enemy();
   self thread delay_awareness();
 
-  if(self.team == "team3" && randomint(4) == 0) {
+  if(self.team == "team3" && randomint(4) == 0)
     self enable_heat_behavior(true);
-  }
 }
 
 ai_cap_count() {
@@ -1203,8 +1173,8 @@ delay_awareness() {
   self endon("death");
   self endon("tobedeleted");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delay_awareness") {
-    if(isDefined(self.ridingvehicle)) {
+  if(isdefined(self.script_noteworthy) && self.script_noteworthy == "delay_awareness") {
+    if(isdefined(self.ridingvehicle)) {
       self setthreatbiasgroup("ignore_player");
       self waittill("jumpedout");
       wait 2;
@@ -1224,7 +1194,7 @@ react_to_player() {
   self endon("death");
   self endon("tobedeleted");
 
-  while(true) {
+  while (true) {
     self waittill_stack_add("bulletwhizby");
     self waittill_stack_add("damage");
 
@@ -1233,9 +1203,8 @@ react_to_player() {
     if(
       (msg == "bulletwhizby" && self.waittill_stack.a == level.player) ||
       (msg == "damage" && self.waittill_stack.b == level.player)
-    ) {
+    )
       break;
-    }
   }
 
   self waittill_stack_clear(); // removes variables used by waittill_stack.
@@ -1254,7 +1223,7 @@ player_enemy() {
   self endon("death");
   self endon("tobedeleted");
 
-  while(true) {
+  while (true) {
     self waittill("enemy");
 
     if(Isplayer(self.enemy)) {
@@ -1292,12 +1261,12 @@ turret_track_target(turret, heli) {
   heli thread fake_target();
 
   mg_guy = turret getturretowner();
-  assert(isDefined(mg_guy));
+  assert(isdefined(mg_guy));
   mg_guy endon("death");
   heli endon("death");
   self endon("death");
 
-  while(true) {
+  while (true) {
     etarget = random(heli.fake_target);
     turret animscripts\hummer_turret\common::set_manual_target(etarget, 3, 5);
     mg_guy.ignoreall = true;
@@ -1327,12 +1296,12 @@ littlebird_reaction(path_name) {
   self endon("death");
   self endon("reaction_end");
 
-  paths = getEntArray(path_name, "script_noteworthy");
+  paths = getentarray(path_name, "script_noteworthy");
   total_damage = 0;
 
   index = 0;
 
-  while(true) {
+  while (true) {
     flag_wait("littlebird_react");
 
     self waittill_stack_add("damage");
@@ -1349,9 +1318,8 @@ littlebird_reaction(path_name) {
         continue;
 
       total_damage += amount;
-      if(total_damage < 400) {
+      if(total_damage < 400)
         continue;
-      }
     }
 
     total_damage = 0;
@@ -1363,10 +1331,12 @@ littlebird_reaction(path_name) {
       index = 0;
     }
 
+    /#
     // debug shit
     level thread mark_heli_path(current_path);
+    # /
 
-    self SetMaxPitchRoll(25, 25);
+      self SetMaxPitchRoll(25, 25);
     self maps\_vehicle::set_heli_move("fast");
     self Vehicle_SetSpeed(65, 25, 25);
 
@@ -1390,17 +1360,16 @@ littlebird_notarget_timeout() {
   timeout = 5000;
   start_time = gettime();
 
-  while(true)
+  while (true)
 
   {
     wait 0.05;
-    if(isDefined(self.mgturret[0] getturrettarget(0)) || isDefined(self.mgturret[1] getturrettarget(0))) {
+    if(isdefined(self.mgturret[0] getturrettarget(0)) || isdefined(self.mgturret[1] getturrettarget(0))) {
       start_time = gettime();
       continue;
     }
-    if(start_time + timeout < gettime()) {
+    if(start_time + timeout < gettime())
       break;
-    }
   }
 
   self notify("react");
@@ -1428,32 +1397,30 @@ rpg_guy() {
   self.rpg_guy = true;
 
   goal = getnode(self.target, "targetname");
-  if(isDefined(goal)) {
+  if(isdefined(goal)) {
     self setgoalnode(goal);
   } else {
     goal = getent(self.target, "targetname");
     self setgoalpos(goal.origin);
   }
 
-  if(isDefined(goal.radius)) {
+  if(isdefined(goal.radius))
     self.goalradius = goal.radius;
-  } else {
+  else
     self.goalradius = 32;
-  }
 
   timeout = 10;
 
-  if(!isDefined(goal.script_shotcount) || goal.script_shotcount == 0) {
+  if(!isdefined(goal.script_shotcount) || goal.script_shotcount == 0)
     goal.script_shotcount = 1;
-  }
 
   self.a.rockets = goal.script_shotcount;
 
-  for(i = 0; i < goal.script_shotcount; i++) {
-    if(isDefined(goal.target)) {
-      target_arr = getEntArray(goal.target, "targetname");
+  for (i = 0; i < goal.script_shotcount; i++) {
+    if(isdefined(goal.target)) {
+      target_arr = getentarray(goal.target, "targetname");
       etarget = random(target_arr);
-    } else if(isDefined(self.rocket_target)) {
+    } else if(isdefined(self.rocket_target)) {
       etarget = self.rocket_target;
       timeout = 30;
     } else {
@@ -1461,9 +1428,8 @@ rpg_guy() {
       return;
     }
 
-    if(isDefined(etarget.script_parameters) && etarget.script_parameters == "straight") {
+    if(isdefined(etarget.script_parameters) && etarget.script_parameters == "straight")
       self SetStableMissile(true);
-    }
 
     if(issentient(etarget)) {
       ent = spawn("script_origin", etarget.origin);
@@ -1499,11 +1465,10 @@ spray_guy() {
   self.spray_guy = true;
 
   node = getnode(self.target, "targetname");
-  if(isDefined(node.radius)) {
+  if(isdefined(node.radius))
     self.goalradius = node.radius;
-  } else {
+  else
     self.goalradius = 32;
-  }
   self setgoalnode(node);
 
   self.no_pistol_switch = true;
@@ -1515,16 +1480,15 @@ spray_guy() {
   self.combatmode = "no_cover";
   self SetThreatBiasGroup("lowthreat");
 
-  target_arr = getEntArray(node.target, "targetname");
-  assert(isDefined(target_arr) && target_arr.size > 1);
+  target_arr = getentarray(node.target, "targetname");
+  assert(isdefined(target_arr) && target_arr.size > 1);
   target_arr = array_randomize(target_arr);
 
   self SetEntityTarget(target_arr[0], 1);
-  if(isDefined(self.script_wait)) {
+  if(isdefined(self.script_wait))
     move_time = self.script_wait;
-  } else {
+  else
     move_time = randomfloatrange(1, 2.5);
-  }
 
   self waittill_notify_or_timeout("goal", 5);
 
@@ -1548,7 +1512,7 @@ spray_guy() {
 }
 
 smoke() {
-  target_arr = getEntArray(self.target, "targetname");
+  target_arr = getentarray(self.target, "targetname");
   target_ent = random(target_arr);
 
   vec = target_ent.origin - self.origin + (0, 0, 200);
@@ -1556,7 +1520,7 @@ smoke() {
 }
 
 delete_excess_setup() {
-  array_thread(getEntArray("delete_excess", "targetname"), ::delete_excess_trigger);
+  array_thread(getentarray("delete_excess", "targetname"), ::delete_excess_trigger);
   level thread delete_excess();
 }
 
@@ -1564,9 +1528,8 @@ delete_excess_trigger() {
   self waittill("trigger");
   level.delete_excess_safe_volume = undefined;
 
-  if(isDefined(self.target)) {
+  if(isdefined(self.target))
     level.delete_excess_safe_volume = getent(self.target, "targetname");
-  }
 
   flag_set("delete_excess");
   waittillframeend; // lets everyone that waits for the flag continue their thread.
@@ -1574,22 +1537,19 @@ delete_excess_trigger() {
 }
 
 delete_excess_exeption(guy) {
-  if(isDefined(guy.ridingvehicle)) {
+  if(isdefined(guy.ridingvehicle))
     return true;
-  }
-  if(isDefined(guy.spray_guy)) {
+  if(isdefined(guy.spray_guy))
     return true;
-  }
-  if(isDefined(guy.rpg_guy)) {
+  if(isdefined(guy.rpg_guy))
     return true;
-  }
 
   return false;
 }
 
 delete_excess() {
   // Delete enemies that are far away because new ones will be spawned in.
-  while(true) {
+  while (true) {
     flag_wait("delete_excess");
 
     safe_volume = level.delete_excess_safe_volume;
@@ -1597,14 +1557,12 @@ delete_excess() {
     dist = 1600 * 1600;
 
     foreach(guy in ai_arr) {
-      if(delete_excess_exeption(guy)) {
+      if(delete_excess_exeption(guy))
         continue;
-      }
-      if(isDefined(safe_volume) && guy istouching(safe_volume)) {
+      if(isdefined(safe_volume) && guy istouching(safe_volume))
         continue;
-      } else if(!isDefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist) {
+      else if(!isdefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist)
         continue;
-      }
 
       guy thread move_and_delete(true);
     }
@@ -1620,10 +1578,10 @@ higround_littlebird_hunt_btr80(node_name) {
 
   self SetLookAtEnt(level.btr80);
 
-  goal_arr = getEntArray(node_name, "targetname");
+  goal_arr = getentarray(node_name, "targetname");
   old_goal = undefined;
 
-  while(true) {
+  while (true) {
     btr80_vect = VectorNormalize(level.btr80.origin - level.player.origin);
     goal = undefined;
     hi_dot = -1;
@@ -1637,9 +1595,9 @@ higround_littlebird_hunt_btr80(node_name) {
       }
     }
 
-    assert(isDefined(goal));
+    assert(isdefined(goal));
 
-    if(!isDefined(old_goal) || goal != old_goal) {
+    if(!isdefined(old_goal) || goal != old_goal) {
       self Vehicle_SetSpeed(50, 20, 20);
       //			self maps\_vehicle::set_heli_move( "faster" );
       self SetMaxPitchRoll(25, 25);
@@ -1658,7 +1616,7 @@ higround_littlebird_hunt_btr80(node_name) {
 littlebird_at_goal() {
   level endon("littlebird_at_goal");
 
-  while(self.veh_speed > 15) {
+  while (self.veh_speed > 15) {
     self waittill_either("goal", "near_goal");
   }
 
@@ -1668,23 +1626,20 @@ littlebird_at_goal() {
 higround_littlebird_aligned(end_msg) {
   self endon("death");
 
-  if(isDefined(end_msg)) {
+  if(isdefined(end_msg))
     level endon(end_msg);
-  }
 
-  while(true) {
+  while (true) {
     flag_wait("littlebird_at_goal");
     btr80_origin = level.btr80.origin + (0, 0, 128);
     heli_origin = self.origin + (0, 0, -56);
     // only fov check
-    if(player_looking_at(heli_origin, 0.85, true, self) && player_looking_at(btr80_origin, 0.70, true, level.btr80)) {
+    if(player_looking_at(heli_origin, 0.85, true, self) && player_looking_at(btr80_origin, 0.70, true, level.btr80))
       break;
-    }
     wait .5;
 
-    if(flag("no_align")) {
+    if(flag("no_align"))
       break;
-    }
   }
 }
 
@@ -1692,11 +1647,11 @@ higround_littlebird_failed_attack() {
   self endon("death");
 
   center_ent = getent("btr80_miss_target", "targetname");
-  temp_miss_target_arr = getEntArray(center_ent.target, "targetname");
+  temp_miss_target_arr = getentarray(center_ent.target, "targetname");
   temp_miss_target_arr = array_index_by_script_index(temp_miss_target_arr);
 
   miss_target_arr = [];
-  for(i = 0; i < temp_miss_target_arr.size; i++) {
+  for (i = 0; i < temp_miss_target_arr.size; i++) {
     ent = spawn("script_origin", temp_miss_target_arr[i].origin);
     miss_target_arr[i] = ent;
   }
@@ -1715,12 +1670,9 @@ higround_littlebird_failed_attack() {
 }
 
 /*******************************/
-
 /*******************************/
-
 /*** Vehicle ai anim threads ***/
 /*******************************/
-
 /*******************************/
 
 uaz_unload_groups() {
@@ -1779,6 +1731,7 @@ vehicle_aianimthread_setup() {
   // suburban
   level.vehicle_aianimthread["hide_attack_right"] = ::guy_hide_attack_right;
   level.vehicle_aianimcheck["hide_attack_right"] = ::guy_hide_attack_right_check;
+
 }
 
 guy_free_attack(guy, pos) {
@@ -1799,19 +1752,19 @@ guy_free_attack(guy, pos) {
   old_stance = "";
 
   fov = level.cosine["20"]; // only do standing when player is clearly infront of the pickup.
-  while(true) {
-    if(within_fov(self.origin, self.angles, level.player.origin, fov)) {
+  while (true) {
+    if(within_fov(self.origin, self.angles, level.player.origin, fov))
       stance = "stand";
-    } else {
+    else
       stance = "crouch";
-    }
 
     if(stance != old_stance) {
       old_stance = stance;
       guy allowedstances(stance);
 
+      /#
       guy thread debug_stance(stance);
-
+      # /
     }
 
     wait 1;
@@ -1837,7 +1790,7 @@ guy_free_attack_check(guy, pos) {
 }
 
 guy_hidetoback_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).hidetoback);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).hidetoback);
 }
 
 guy_hidetoback_startingback(guy, pos) {
@@ -1847,7 +1800,7 @@ guy_hidetoback_startingback(guy, pos) {
   self endon("death");
   guy endon("death");
 
-  assert(isDefined(animpos.hidetoback));
+  assert(isdefined(animpos.hidetoback));
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hidetoback);
   thread guy_back_attack(guy, pos);
 }
@@ -1857,14 +1810,13 @@ guy_back_attack(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  assert(isDefined(animpos.back_attack));
-  while(1) {
+  assert(isdefined(animpos.back_attack));
+  while (1)
     maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.back_attack);
-  }
 }
 
 guy_backtohide_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).backtohide);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).backtohide);
 }
 
 guy_hide_starting_back(guy, pos) {
@@ -1874,7 +1826,7 @@ guy_hide_starting_back(guy, pos) {
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
 
-  assert(isDefined(animpos.backtohide));
+  assert(isdefined(animpos.backtohide));
 
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.backtohide);
   thread guy_hide_attack_back(guy, pos);
@@ -1886,12 +1838,12 @@ guy_hide_startingleft(guy, pos) {
   guy endon("death");
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  if(!isDefined(animpos.backtohide)) {
+  if(!isdefined(animpos.backtohide))
     return maps\_vehicle_aianim::guy_idle(guy, pos);
-  }
 
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.backtohide);
   thread guy_hide_attack_left(guy, pos);
+
 }
 
 guy_backtohide(guy, pos) {
@@ -1900,7 +1852,7 @@ guy_backtohide(guy, pos) {
   guy endon("death");
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  assert(isDefined(animpos.backtohide));
+  assert(isdefined(animpos.backtohide));
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.backtohide);
   thread maps\_vehicle_aianim::guy_idle(guy, pos);
 }
@@ -1911,17 +1863,17 @@ guy_react(guy, pos) {
   guy endon("death");
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  assert(isDefined(animpos.react));
+  assert(isdefined(animpos.react));
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.react);
   thread maps\_vehicle_aianim::guy_idle(guy, pos);
 }
 
 guy_react_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).react);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).react);
 }
 
 guy_hide_attack_back_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_back);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_back);
 }
 
 guy_hide_attack_back(guy, pos) {
@@ -1930,10 +1882,10 @@ guy_hide_attack_back(guy, pos) {
   guy endon("death");
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  assert(isDefined(animpos.hide_attack_back));
+  assert(isdefined(animpos.hide_attack_back));
 
-  while(1) {
-    if(isDefined(animpos.hide_attack_back_occurrence)) {
+  while (1) {
+    if(isdefined(animpos.hide_attack_back_occurrence)) {
       theanim = maps\_vehicle_aianim::randomoccurrance(guy, animpos.hide_attack_back_occurrence);
       maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_back[theanim]);
     } else
@@ -1942,7 +1894,7 @@ guy_hide_attack_back(guy, pos) {
 }
 
 guy_hide_attack_forward_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_forward);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_forward);
 }
 
 guy_hide_attack_forward(guy, pos) {
@@ -1951,15 +1903,14 @@ guy_hide_attack_forward(guy, pos) {
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
 
-  assert(isDefined(animpos.hide_attack_forward));
+  assert(isdefined(animpos.hide_attack_forward));
 
-  while(1) {
+  while (1)
     maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_forward);
-  }
 }
 
 guy_hide_attack_left_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_left);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_left);
 }
 
 guy_hide_attack_left(guy, pos) {
@@ -1968,10 +1919,10 @@ guy_hide_attack_left(guy, pos) {
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
 
-  assert(isDefined(animpos.hide_attack_left));
+  assert(isdefined(animpos.hide_attack_left));
 
-  while(1) {
-    if(isDefined(animpos.hide_attack_left_occurrence)) {
+  while (1) {
+    if(isdefined(animpos.hide_attack_left_occurrence)) {
       theanim = maps\_vehicle_aianim::randomoccurrance(guy, animpos.hide_attack_left_occurrence);
       maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_left[theanim]);
     } else
@@ -1985,9 +1936,9 @@ guy_hide_attack_left_standing(guy, pos) {
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
 
-  assert(isDefined(animpos.hide_attack_left_standing));
-  while(1) {
-    if(isDefined(animpos.hide_attack_left_standing_occurrence)) {
+  assert(isdefined(animpos.hide_attack_left_standing));
+  while (1) {
+    if(isdefined(animpos.hide_attack_left_standing_occurrence)) {
       theanim = maps\_vehicle_aianim::randomoccurrance(guy, animpos.hide_attack_left_standing_occurrence);
       maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_left_standing[theanim]);
     } else
@@ -1996,7 +1947,7 @@ guy_hide_attack_left_standing(guy, pos) {
 }
 
 guy_hide_attack_right_check(guy, pos) {
-  return isDefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_left);
+  return isdefined(maps\_vehicle_aianim::anim_pos(self, pos).hide_attack_left);
 }
 
 guy_hide_attack_right(guy, pos) {
@@ -2005,28 +1956,27 @@ guy_hide_attack_right(guy, pos) {
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
 
-  assert(isDefined(animpos.hide_attack_right));
+  assert(isdefined(animpos.hide_attack_right));
 
-  while(1) {
+  while (1) {
     maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_left);
   }
 }
 
 killer_bird_setup() {
-  array_thread(getEntArray("player_stray_trigger", "targetname"), ::killer_bird);
+  array_thread(getentarray("player_stray_trigger", "targetname"), ::killer_bird);
 }
 
 killer_bird() {
   level.player endon("death");
 
-  ent_arr = getEntArray(self.target, "targetname");
+  ent_arr = getentarray(self.target, "targetname");
 
   timer = 0;
-  while(true) {
+  while (true) {
     self waittill("trigger");
-    if(timer > 8) {
+    if(timer > 8)
       break;
-    }
     timer++;
     wait 1;
   }
@@ -2059,9 +2009,8 @@ killer_bird() {
   killer_bird waittill("goal");
 
   fov = level.cosine["20"];
-  while(!within_fov(killer_bird.origin, killer_bird.angles, level.player.origin, fov)) {
+  while (!within_fov(killer_bird.origin, killer_bird.angles, level.player.origin, fov))
     wait 0.05;
-  }
 
   killer_bird notify("killing_player");
 
@@ -2079,14 +2028,13 @@ killer_bird_goal(goal_origin) {
   dist = distance2d(level.player.origin, goal_origin);
   height = goal_origin[2];
 
-  while(true) {
-    vector = anglesToForward(level.player.angles);
+  while (true) {
+    vector = AnglesToForward(level.player.angles);
     new_origin = level.player.origin + (dist * vector) + (0, 0, height);
     vector = VectorNormalize(new_origin - level.player.origin);
 
-    if(SightTracePassed(level.player getEye(), new_origin, false, self)) {
+    if(SightTracePassed(level.player geteye(), new_origin, false, self))
       self SetVehGoalPos(new_origin, true);
-    }
 
     wait 2;
   }
@@ -2110,7 +2058,7 @@ ramp_sunsample_over_time(samplesize, time) {
   range = current_samplesize - samplesize; // min sample size is 0.25
 
   frames = time * 20;
-  for(i = 0; i <= frames; i++) {
+  for (i = 0; i <= frames; i++) {
     dif = i / frames;
     dif = 1 - dif;
     current_range = dif * range;
@@ -2124,15 +2072,13 @@ makesentient(team) {
   self MakeEntitySentient(team);
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isdefined(self))
     self FreeEntitySentient();
-  }
 }
 
 waittill_damage(damage_types, attacker_ent, endon_death, timeout) {
-  if(isDefined(timeout)) {
+  if(isdefined(timeout))
     mytimeOutEnt(timeout) endon("timeout");
-  }
 
   if(isstring(damage_types)) {
     tmp = [];
@@ -2140,20 +2086,17 @@ waittill_damage(damage_types, attacker_ent, endon_death, timeout) {
     damage_types = tmp;
   }
 
-  if(isDefined(endon_death) && endon_death) {
+  if(isdefined(endon_death) && endon_death)
     self endon("death");
-  }
 
   state = false;
-  while(!state) {
+  while (!state) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
 
-    if(isDefined(damage_types)) {
-      state = isDefined(damage_types[tolower(type)]);
-    }
-    if(state && isDefined(attacker_ent)) {
+    if(isdefined(damage_types))
+      state = isdefined(damage_types[tolower(type)]);
+    if(state && isdefined(attacker_ent))
       state = (attacker_ent == attacker);
-    }
   }
 }
 
@@ -2182,7 +2125,7 @@ fade_out_level(fadeOutTime) {
 
 sp_objective_onentity(id, entity) {
   level endon("release_objective");
-  while(true) {
+  while (true) {
     objective_position(id, entity.origin);
     wait 0.05;
   }
@@ -2198,7 +2141,7 @@ rotate_with_offset(rotation, center_origin, goal_offset) {
 
   offset = self.origin - center_origin;
   right = anglestoright(rotation) * -1;
-  forward = anglesToForward(rotation);
+  forward = anglestoforward(rotation);
   up = anglestoup(rotation);
   new_offset = forward * offset[0] + right * offset[1] + up * offset[2];
   self.origin = center_origin + new_offset + goal_offset;
@@ -2206,7 +2149,7 @@ rotate_with_offset(rotation, center_origin, goal_offset) {
 
 rotate_vector(vector, rotation) {
   right = anglestoright(rotation) * -1;
-  forward = anglesToForward(rotation);
+  forward = anglestoforward(rotation);
   up = anglestoup(rotation);
   new_vector = forward * vector[0] + right * vector[1] + up * vector[2];
   return new_vector;
@@ -2232,19 +2175,17 @@ main_turret_think(target_ai) {
 
   old_target_ent = undefined;
 
-  while(true) {
+  while (true) {
     enemies = self.main_turret_enemies;
     enemies = array_combine(enemies, self get_ai_enemies());
 
     target_ent = undefined;
     foreach(ent in enemies) {
-      if(issentient(ent) && !isalive(ent)) {
+      if(issentient(ent) && !isalive(ent))
         continue;
-      }
 
-      if(isDefined(ent.ridingvehicle)) {
+      if(isdefined(ent.ridingvehicle))
         continue;
-      }
       if(self Vehicle_CanTurretTargetPoint(ent.origin + (0, 0, 20), 1, ent)) {
         if(isplayer(ent) || (IsAI(ent) && !self.fire_on_ai)) {
           ent_flag_set("hold_fire");
@@ -2258,7 +2199,7 @@ main_turret_think(target_ai) {
       }
     }
 
-    if(!isDefined(target_ent)) // never mind the old target stuff ->> || ( isDefined( old_target_ent ) && target_ent == old_target_ent ) )
+    if(!isdefined(target_ent)) // never mind the old target stuff ->> || ( isdefined( old_target_ent ) && target_ent == old_target_ent ) )
     {
       wait 0.5;
       continue;
@@ -2266,9 +2207,11 @@ main_turret_think(target_ai) {
 
     old_target_ent = target_ent;
 
+    /#
     println("btr80 aquired a new target");
+    # /
 
-    self ent_flag_set("have_target");
+      self ent_flag_set("have_target");
     self main_turret_attack(target_ent, (0, 0, 20), false, 5);
     self ent_flag_clear("have_target");
   }
@@ -2280,28 +2223,24 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
   self notify("clear_turret_target");
   self endon("clear_turret_target");
 
-  if(isalive(target_ent)) {
+  if(isalive(target_ent))
     self thread main_turret_attack_target_death(target_ent);
-  }
 
-  if(!isDefined(target_ent.fake_target)) {
+  if(!isdefined(target_ent.fake_target))
     self SetTurretTargetEnt(target_ent, offset);
-  } else {
+  else
     self SetTurretTargetEnt(target_ent.fake_target, offset);
-  }
 
   self waittill("turret_on_target");
 
-  if(isDefined(timeout)) {
+  if(isdefined(timeout))
     mytimeOutEnt(timeout) endon("timeout");
-  }
 
-  if(!isDefined(no_vis)) {
+  if(!isdefined(no_vis))
     self thread main_turret_target_lost(target_ent, offset);
-  }
 
   starttime = gettime();
-  while(true) {
+  while (true) {
     self ent_flag_waitopen("hold_fire"); // lets me pause firing while still aiming at the target.
     self FireWeapon();
     wait 0.2;
@@ -2311,19 +2250,18 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
 main_turret_attack_target_death(target_ent) {
   self endon("clear_turret_target");
 
-  if(isDefined(target_ent.fake_target)) {
+  if(isdefined(target_ent.fake_target))
     target_ent.fake_target add_wait(::waittill_msg, "death");
-  }
   target_ent add_wait(::waittill_either, "death", "pain_death");
   do_wait_any();
 
   wait randomfloat(1);
 
   // remove the target if it's in the special enemy list unless it's alive.
-  if(is_in_array(self.main_turret_enemies, target_ent) && !isalive(target_ent)) {
+  if(is_in_array(self.main_turret_enemies, target_ent) && !isalive(target_ent))
     self.main_turret_enemies = array_remove(self.main_turret_enemies, target_ent);
-  }
   self notify("clear_turret_target");
+
 }
 
 main_turret_target_lost(target_ent, offset) {
@@ -2333,18 +2271,15 @@ main_turret_target_lost(target_ent, offset) {
   timelimit = randomfloatrange(1000, 2000);
   start_time = undefined;
 
-  while(true) {
+  while (true) {
     msg = self waittill_any_return("turret_no_vis", "turret_on_vistarget");
     if(msg == "turret_no_vis") {
-      if(self Vehicle_CanTurretTargetPoint(target_ent.origin + offset, 1, target_ent)) {
+      if(self Vehicle_CanTurretTargetPoint(target_ent.origin + offset, 1, target_ent))
         continue;
-      }
-      if(!isDefined(start_time)) {
+      if(!isdefined(start_time))
         start_time = gettime();
-      }
-      if(start_time + timelimit < gettime()) {
+      if(start_time + timelimit < gettime())
         break;
-      }
     } else
       start_time = undefined;
   }
@@ -2362,9 +2297,8 @@ main_turret_aim_straight() {
   self setTurretTargetEnt(ent);
 
   self waittill_either("turret_on_target", "death");
-  if(isalive(self)) {
+  if(isalive(self))
     self ClearTurretTarget();
-  }
   ent delete();
   self ent_flag_clear("hold_fire");
 }
@@ -2372,7 +2306,7 @@ main_turret_aim_straight() {
 slowdown_on_target(speedmin, speedmax) {
   self endon("death");
 
-  while(true) {
+  while (true) {
     self ent_flag_wait("have_target");
     self ent_flag_wait("allow_stop");
 
@@ -2388,13 +2322,12 @@ slowdown_on_target(speedmin, speedmax) {
 get_ai_enemies() {
   enemies = [];
   team = "";
-  if(isDefined(self.team)) {
+  if(isdefined(self.team))
     team = self.team;
-  } else if(isDefined(self.script_team)) {
+  else if(isdefined(self.script_team))
     team = self.script_team;
-  } else {
+  else
     assertmsg("get_ai_enemies used on entity with no team");
-  }
 
   switch (team) {
     case "axis":
@@ -2408,11 +2341,10 @@ get_ai_enemies() {
   }
 
   if(team != "allies") {
-    if(enemies.size > 0) {
+    if(enemies.size > 0)
       enemies = array_insert(enemies, level.player, 0);
-    } else {
+    else
       enemies[0] = level.player;
-    }
   }
 
   return enemies;
@@ -2425,7 +2357,7 @@ vehicle_set_health(health) {
 
 flyby_magic_rocket(delete_time) {
   flag_wait("flyby_rockets");
-  while(!flag("flyby_c130")) {
+  while (!flag("flyby_c130")) {
     wait 2;
     self magic_rocket(delete_time);
     wait randomfloatrange(3, 4);
@@ -2437,11 +2369,10 @@ magic_rocket(delete_time) {
   target = getent(self.target, "targetname");
   rocket = MagicBullet("rpg_distant", self.origin, target.origin);
 
-  if(isDefined(delete_time)) {
+  if(isdefined(delete_time)) {
     wait delete_time;
-    if(isDefined(rocket)) {
+    if(isdefined(rocket))
       rocket delete();
-    }
   }
 }
 
@@ -2449,12 +2380,11 @@ set_flag_on_player_damage(flag_str) {
   level endon(flag_str);
   self endon("death");
 
-  while(true) {
+  while (true) {
     self waittill("damage", amount, damager);
-    assert(isDefined(damager));
-    if(isplayer(damager)) {
+    assert(isdefined(damager));
+    if(isplayer(damager))
       break;
-    }
   }
 
   flag_set(flag_str);
@@ -2472,11 +2402,10 @@ random_delayed_kill(min_delay, max_delay) {
   enemies = SortByDistance(enemies, self.origin);
   guy = enemies[0];
 
-  if(isDefined(guy)) {
-    self Kill(guy getEye(), guy);
-  } else {
-    self Kill(self getEye());
-  }
+  if(isdefined(guy))
+    self Kill(guy geteye(), guy);
+  else
+    self Kill(self geteye());
 }
 
 move_and_delete(add_delay) {
@@ -2490,14 +2419,14 @@ move_and_delete(add_delay) {
 }
 
 origin_is_behind(node_origin) {
-  forward = anglesToForward((0, 0, 0)); // we are heading north in this level.
+  forward = anglestoforward((0, 0, 0)); // we are heading north in this level.
   vector = VectorNormalize(node_origin - self.origin);
   dot = VectorDot(forward, vector);
   return (dot < -0.2);
 }
 
 switch_colors() {
-  while(true) {
+  while (true) {
     flag_wait("switch_color");
 
     guys = getaiarray("axis", "team3");
@@ -2505,16 +2434,15 @@ switch_colors() {
       color = guy.script_forcecolor;
       colorCodes = strtok(level.base_colors[guy.team], " ");
 
-      if(isDefined(color)) {
+      if(isdefined(color)) {
         // if not a base color switch to one that is.
-        if(isDefined(color) && !is_in_array(colorCodes, color) || isDefined(guy.old_forcecolor)) {
+        if(isdefined(color) && !is_in_array(colorCodes, color) || isdefined(guy.old_forcecolor)) {
           guy set_force_color(colorCodes[0]);
         }
       } else {
         // if guy used to be a color turn old color to the base color
-        if(isDefined(guy.old_forcecolor)) {
+        if(isdefined(guy.old_forcecolor))
           guy.old_forcecolor = colorCodes[0];
-        }
       }
     }
     flag_clear("switch_color");
@@ -2535,9 +2463,8 @@ waittill_stack_add(msg, ent) {
   	level waittill_stack_clear(); // cleans up any variables.
   */
 
-  if(!isDefined(self.waittill_stack)) {
-    self.waittill_stack = spawnStruct();
-  }
+  if(!isdefined(self.waittill_stack))
+    self.waittill_stack = spawnstruct();
 
   self thread waittill_stack_thread(msg, ent);
 }
@@ -2551,30 +2478,23 @@ waittill_stack_thread(msg, ent) {
   self endon("waittill_stack");
   self endon("death");
 
-  if(!isDefined(ent)) {
+  if(!isdefined(ent))
     ent = self;
-  }
 
   ent waittill(msg, a, b, c, d, e, f);
 
-  if(isDefined(a)) {
+  if(isdefined(a))
     self.waittill_stack.a = a;
-  }
-  if(isDefined(b)) {
+  if(isdefined(b))
     self.waittill_stack.b = b;
-  }
-  if(isDefined(c)) {
+  if(isdefined(c))
     self.waittill_stack.c = c;
-  }
-  if(isDefined(d)) {
+  if(isdefined(d))
     self.waittill_stack.d = d;
-  }
-  if(isDefined(e)) {
+  if(isdefined(e))
     self.waittill_stack.e = e;
-  }
-  if(isDefined(f)) {
+  if(isdefined(f))
     self.waittill_stack.f = f;
-  }
 
   self notify("waittill_stack", msg, ent);
 }
@@ -2590,66 +2510,62 @@ fire_missile(target_arr, number) {
 
   self SetVehWeapon("littlebird_FFAR");
 
-  for(i = 0; i < number; i++) {
-    assertex(isDefined(target_arr[i % target_arr.size]), "fire_missile requires indexes to start at 0 and not have any gaps.");
+  for (i = 0; i < number; i++) {
+    assertex(isdefined(target_arr[i % target_arr.size]), "fire_missile requires indexes to start at 0 and not have any gaps.");
 
     target_ent = target_arr[i % target_arr.size];
     self SetTurretTargetEnt(target_ent);
     missile = self FireWeapon(tags[i % tags.size], target_ent);
     missile delaycall(1, ::Missile_ClearTarget);
 
-    if(isDefined(target_ent.script_delay)) {
+    if(isdefined(target_ent.script_delay))
       wait target_ent.script_delay;
-    } else {
+    else
       wait randomfloatrange(0.2, 0.3);
-    }
   }
 }
 
 move_spawn_and_go(path_ent) {
   self.origin = path_ent.origin;
-  if(isDefined(path_ent.angles)) {
+  if(isdefined(path_ent.angles))
     self.angles = path_ent.angles;
-  }
 
   // changes targetname of ai so that they to can spawn
-  other_ents = getEntArray(self.target, "targetname");
+  other_ents = getentarray(self.target, "targetname");
   foreach(ent in other_ents) {
-    if(isspawner(ent)) {
+    if(isspawner(ent))
       ent.targetname = path_ent.targetname;
-    }
   }
 
   self.target = path_ent.targetname;
 
   vehicle = self thread maps\_vehicle::spawn_vehicle_and_gopath();
 
+  /#
   // debug shit
-  if(vehicle maps\_vehicle::ishelicopter()) {
+  if(vehicle maps\_vehicle::ishelicopter())
     level thread mark_heli_path(path_ent);
-  }
+  # /
 
-  return vehicle;
+    return vehicle;
 }
 
 new_vehicle_path(path_start) {
-  if(!self maps\_vehicle::ishelicopter()) {
+  if(!self maps\_vehicle::ishelicopter())
     self StartPath(path_start);
-  }
   self thread maps\_vehicle::vehicle_paths(path_start);
 }
 
 turret_fire_control(mg_guy) {
   mg_guy endon("death");
 
-  while(true) {
+  while (true) {
     mg_guy.ignoreall = !flag("minigun_fire");
 
-    if(flag("minigun_fire")) {
+    if(flag("minigun_fire"))
       flag_waitopen("minigun_fire");
-    } else {
+    else
       flag_wait("minigun_fire");
-    }
   }
 }
 
@@ -2664,14 +2580,13 @@ start_at(start_point) {
 }
 
 delete_not_touching_setup() {
-  array_thread(getEntArray("delete_not_touching", "targetname"), ::delete_not_touching);
+  array_thread(getentarray("delete_not_touching", "targetname"), ::delete_not_touching);
 }
 
 delete_not_touching() {
   self waittill("trigger");
-  while(level.player istouching(self)) {
+  while (level.player istouching(self))
     wait 0.5;
-  }
   self trigger_off();
 }
 
@@ -2680,46 +2595,47 @@ delete_not_touching() {
 drawpath() {
   self endon("death");
 
-  if(getdvar("debug_heli") == "") {
+  /#
+  if(getdvar("debug_heli") == "")
     return;
-  }
+  # /
 
-  while(true) {
-    if(self Vehicle_GetSpeed() < 5) {
+    while (true) {
+      if(self Vehicle_GetSpeed() < 5) {
+        wait 0.1;
+        continue;
+      }
+      old_origin = self.origin;
       wait 0.1;
-      continue;
+
+      Line(old_origin, self.origin, (1, 1, 1), 1, false, 500);
+
+      vector = AnglesToForward(self.angles);
+      origin1 = self.origin + (vector * 100);
+      vector = AnglesToRight(self.angles);
+      origin2 = self.origin - (vector * 30);
+      origin3 = self.origin + (vector * 30);
+
+      draw_tri(origin1, origin2, origin3);
     }
-    old_origin = self.origin;
-    wait 0.1;
-
-    Line(old_origin, self.origin, (1, 1, 1), 1, false, 500);
-
-    vector = anglesToForward(self.angles);
-    origin1 = self.origin + (vector * 100);
-    vector = AnglesToRight(self.angles);
-    origin2 = self.origin - (vector * 30);
-    origin3 = self.origin + (vector * 30);
-
-    draw_tri(origin1, origin2, origin3);
-  }
 }
 
+
 mark_heli_path(ent) {
-  if(getdvar("debug_heli") == "") {
+  /#
+  if(getdvar("debug_heli") == "")
     return;
-  }
 
   old_ent = ent;
-  while(true) {
+  while (true) {
     draw_cross(ent.origin);
-    if(!isDefined(ent.target)) {
+    if(!isdefined(ent.target))
       break;
-    }
     ent = getent(ent.target, "targetname");
     Line(ent.origin, old_ent.origin, (0.7, 0, 0), 1, false, 500);
     old_ent = ent;
   }
-
+  # /
 }
 
 draw_tri(origin1, origin2, origin3) {
@@ -2729,7 +2645,7 @@ draw_tri(origin1, origin2, origin3) {
 }
 
 draw_cross(origin, col) {
-  if(!isDefined(col)) {
+  if(!isdefined(col)) {
     Line(origin + (10, 0, 0), origin + (-10, 0, 0), (.5, .5, .5), 1, false, 500);
     Line(origin + (0, 10, 10), origin + (0, -10, 0), (.5, .5, .5), 1, false, 500);
     Line(origin, origin + (0, 0, 100), (1, 1, 1), 1, false, 50);
@@ -2741,8 +2657,8 @@ draw_cross(origin, col) {
 }
 
 cc(text) {
-  if(!isDefined(level.cc)) {
-    level.cc = spawnStruct();
+  if(!isdefined(level.cc)) {
+    level.cc = spawnstruct();
     level.cc.line = 0;
   }
 
@@ -2773,15 +2689,15 @@ cc(text) {
   level.cc notify("move", my_line);
   subtitle notify("destoyed");
   subtitle destroy();
+
 }
 
 cc_move(my_line) {
   self endon("destoyed");
-  while(true) {
+  while (true) {
     level.cc waittill("move", line);
-    if(line > my_line || my_line == 0) {
+    if(line > my_line || my_line == 0)
       continue;
-    }
     self MoveOverTime(.5);
     self.y = self.y - 14;
     my_line--;
@@ -2792,9 +2708,8 @@ draw_vehicle_paths() {
   vnode_arr = GetAllVehicleNodes();
   start_vnodes = [];
   foreach(vnode in vnode_arr) {
-    if(isDefined(vnode.spawnflags) && vnode.spawnflags & 1) {
+    if(isdefined(vnode.spawnflags) && vnode.spawnflags & 1)
       start_vnodes[start_vnodes.size] = vnode;
-    }
   }
 
   foreach(vnode in start_vnodes) {
@@ -2805,7 +2720,7 @@ draw_vehicle_paths() {
 draw_vehicle_paths_traverse(vnode) {
   random_color = (randomfloatrange(0, 1), randomfloatrange(0, 1), randomfloatrange(0, 1));
 
-  while(isDefined(vnode.target)) {
+  while (isdefined(vnode.target)) {
     start = vnode.origin;
     vnode = getvehiclenode(vnode.target, "targetname");
     end = vnode.origin;
@@ -2818,19 +2733,19 @@ debug_stance(stance) {
   self endon("new_debug");
   self endon("death");
 
-  while(1) {
+  while (1) {
     wait 0.05;
     if(getdvarint("debug_stance", 0)) {
-      if(stance == "stand") {
+      if(stance == "stand")
         Print3d(self.origin + (0, 0, 80), "S");
-      } else {
+      else
         Print3d(self.origin + (0, 0, 80), "C");
-      }
     }
   }
 }
 
 boneyard_gameskill_ride_settings() {
+
   // RIGHT NOW ONLY .25 AND .75 ARE USED for easy and normal
 
   level.difficultySettings["threatbias"]["easy"] = 0;
@@ -2899,6 +2814,7 @@ boneyard_gameskill_ride_settings() {
   level.difficultySettings["health_regenRate"]["normal"] = 0.008;
   level.difficultySettings["health_regenRate"]["hardened"] = 0.008;
   level.difficultySettings["health_regenRate"]["veteran"] = 0.008;
+
 
   // level.playerDifficultyHealth
   // the amount of health you have in this difficulty

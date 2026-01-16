@@ -9,7 +9,7 @@
 #namespace zm_powerup_insta_kill;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_insta_kill", &__init__, undefined, undefined);
+  system::register("zm_powerup_insta_kill", & __init__, undefined, undefined);
 }
 
 function __init__() {

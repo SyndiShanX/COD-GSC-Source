@@ -53,15 +53,13 @@ getfootorigin(note) {
   boneorigin = (0, 0, 0);
   bonename = level.horsefootstepbones[note];
 
-  if(isDefined(bonename)) {
+  if(isDefined(bonename))
     boneorigin = self gettagorigin(bonename);
-  }
 
-  if(!isDefined(boneorigin)) {
+  if(!isDefined(boneorigin))
     boneorigin = self.origin;
-  } else {
+  else
     boneorigin = boneorigin - vectorscale((0, 0, 1), 2.0);
-  }
 
   return boneorigin;
 }
@@ -74,19 +72,17 @@ horse_feet(localclientnum, note, ground_type) {
   origin = getfootorigin(note);
   sound_alias = "fly_" + note;
 
-  if(self islocalclientdriver(localclientnum)) {
+  if(self islocalclientdriver(localclientnum))
     sound_alias = sound_alias + "_plr";
-  } else {
+  else
     sound_alias = sound_alias + "_npc";
-  }
 
   sound_alias = sound_alias + "_" + ground_type;
-  playSound(localclientnum, sound_alias, origin);
+  playsound(localclientnum, sound_alias, origin);
   effect = getfooteffect(ground_type);
 
-  if(isDefined(effect)) {
-    playFX(localclientnum, effect, origin, (0, 0, 1));
-  }
+  if(isDefined(effect))
+    playfx(localclientnum, effect, origin, (0, 0, 1));
 
   if(self islocalclientdriver(localclientnum)) {
     if(note == "step_front_left_walk" || note == "step_rear_left_walk" || note == "step_front_left_trot" || note == "step_rear_left_trot" || note == "step_front_left_run" || note == "step_rear_left_run" || note == "step_front_left_canter" || note == "step_rear_left_canter" || note == "step_front_left_sprint" || note == "step_rear_left_sprint") {

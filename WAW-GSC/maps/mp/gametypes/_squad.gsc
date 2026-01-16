@@ -15,7 +15,7 @@ init() {
 
 onPlayerConnect() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onDisconnect();
@@ -41,7 +41,7 @@ doSquadInitialNotification() {
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill_any("spawned_player", "give_map");
     self setSquadFeatures();
   }
@@ -56,18 +56,16 @@ squadCommandWaiter() {
   self endon("death_or_disconnect");
   self thread destroyOnDeath();
   self.lastWeapon = self getCurrentWeapon();
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change");
     self.squadId = getplayersquad(self);
     currentWeapon = self getCurrentWeapon();
-    if(currentWeapon != "squadcommand_mp" && currentWeapon != "none" && currentWeapon != "artillery_mp" && currentWeapon != "dogs_mp") {
+    if(currentWeapon != "squadcommand_mp" && currentWeapon != "none" && currentWeapon != "artillery_mp" && currentWeapon != "dogs_mp")
       self.lastWeapon = currentWeapon;
-    }
     if(currentWeapon == "squadcommand_mp") {
       self ShowSquadLocationSelectionMap();
-      if(self.lastWeapon != "none") {
+      if(self.lastWeapon != "none")
         self switchToWeapon(self.lastWeapon);
-      }
     }
   }
 }
@@ -81,9 +79,8 @@ giveSquadFeatures() {
 takeSquadFeatures() {
   self.squadCommandInProgress = undefined;
   self SetActionSlot(1, "");
-  if(self hasWeapon("squadcommand_mp")) {
+  if(self hasWeapon("squadcommand_mp"))
     self takeWeapon("squadcommand_mp");
-  }
 }
 
 ShowSquadLocationSelectionMap() {
@@ -107,17 +104,15 @@ ShowSquadLocationSelectionMap() {
 selectConfirmcommand(currentWeapon) {
   self endon("used");
   self waittill("confirm_location", location);
-  if(currentWeapon == "squadcommand_mp") {
+  if(currentWeapon == "squadcommand_mp")
     self finishSquadCommandUsage(location, "confirm_location", ::useSquadCommand);
-  }
 }
 
 selectClearcommand(currentWeapon) {
   self endon("used");
   self waittill("clear_squadcommand", location);
-  if(currentWeapon == "squadcommand_mp") {
+  if(currentWeapon == "squadcommand_mp")
     self finishSquadCommandUsage(location, "clear_squadcommand", ::useSquadCommand);
-  }
 }
 
 finishSquadCommandUsage(location, command, usedCallback) {
@@ -172,7 +167,7 @@ playVOForSquadCommand() {
   playerSquadID = getplayersquadid(self);
   if(isDefined(playerSquadID)) {
     team = self.pers["team"];
-    for(i = 0; i < level.squads[team][playerSquadID].size; i++) {
+    for (i = 0; i < level.squads[team][playerSquadID].size; i++) {
       level.squads[team][playerSquadID][i] maps\mp\gametypes\_globallogic::leaderDialogOnPlayer("squad_move");
     }
   }

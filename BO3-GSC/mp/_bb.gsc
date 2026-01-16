@@ -10,7 +10,7 @@
 #namespace bb;
 
 function autoexec __init__sytem__() {
-  system::register("bb", &__init__, undefined, undefined);
+  system::register("bb", & __init__, undefined, undefined);
 }
 
 function __init__() {

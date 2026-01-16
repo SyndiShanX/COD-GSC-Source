@@ -21,32 +21,30 @@ sndmusicegg() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++) {
+  for(i = 0; i < origins.size; i++)
     level thread sndmusicegg_wait(origins[i]);
-  }
 }
 
 sndmusicegg_wait(bear_origin) {
   temp_ent = spawn("script_origin", bear_origin);
-  temp_ent playLoopSound("zmb_meteor_loop");
+  temp_ent playloopsound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playSound("zmb_meteor_activate");
+  player playsound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
-  if(level.meteor_counter == 3) {
+  if(level.meteor_counter == 3)
     level thread sndmuseggplay(temp_ent, "mus_zmb_secret_song", 190);
-  } else {
+  else {
     wait 1.5;
     temp_ent delete();
   }
 }
 
 sndmusicegg_override() {
-  if(is_true(level.music_override)) {
+  if(is_true(level.music_override))
     return false;
-  }
 
   return true;
 }
@@ -54,7 +52,7 @@ sndmusicegg_override() {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playSound(alias);
+  ent playsound(alias);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
   ent stopsounds();

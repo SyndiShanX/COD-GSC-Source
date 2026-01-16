@@ -25,7 +25,7 @@ set_level_lighting_values() {
 }
 
 apply_lighting_pass_airlift(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -109,22 +109,21 @@ play_flickering_light() {
 }
 
 shadow_triggers_setup() {
-  var_0 = getEntArray("turn_off_shadows", "targetname");
-  var_1 = getEntArray("shadow_trigger", "targetname");
+  var_0 = getentarray("turn_off_shadows", "targetname");
+  var_1 = getentarray("shadow_trigger", "targetname");
   level.current_shadow = "on";
   common_scripts\utility::array_thread(var_1, ::shadow_trigger_think, var_0);
 }
 
 shadow_trigger_think(var_0) {
-  for(;;) {
+  for (;;) {
     self waittill("trigger");
 
     if(self.script_noteworthy != level.current_shadow) {
       var_1 = common_scripts\utility::ter_op(self.script_noteworthy == "on", "normal", "force_off");
 
-      foreach(var_3 in var_0) {
-        var_3 setlightshadowstate(var_1);
-      }
+      foreach(var_3 in var_0)
+      var_3 setlightshadowstate(var_1);
 
       level.current_shadow = var_1;
     }

@@ -10,6 +10,7 @@
 #include scripts\core_common\vehicle_death_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace flak_drone;
 
 init_shared() {
@@ -47,7 +48,7 @@ initflakdrone() {
 state_off_enter(params) {}
 
 state_off_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   while(!isDefined(self.parent)) {
     wait 0.1;
@@ -82,14 +83,14 @@ state_off_update(params) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-          point._scoredebug[# "disttoorigin"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+          point._scoredebug[#"disttoorigin"] = spawnStruct();
         }
 
-        point._scoredebug[# "disttoorigin"].score = disttooriginscore;
-        point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+        point._scoredebug[#"disttoorigin"].score = disttooriginscore;
+        point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
-        point.score += disttooriginscore;
+          point.score += disttooriginscore;
 
         if(point.score > best_score) {
           best_score = point.score;
@@ -150,7 +151,7 @@ state_combat_enter(params) {}
 
 state_combat_update(params) {
   drone = self;
-  drone endon(#"change_state", # "death");
+  drone endon(#"change_state", #"death");
   drone thread spawnflakrocket(drone.incoming_missile, drone.origin, drone.parent);
   drone ghost();
 }
@@ -171,52 +172,53 @@ spawnflakrocket(missile, spawnpos, parent) {
   debug_draw = getdvarint(#"scr_flak_drone_debug_trails", 0);
   debug_duration = getdvarint(#"scr_flak_drone_debug_trails_duration", 400);
 
-  while(true) {
-    waitframe(1);
-    prevdist = curdist;
-
-    if(isDefined(rocket)) {
-      curdist = distance(missile.origin, rocket.origin);
-      distdelta = prevdist - curdist;
-      predicteddist = curdist - distdelta;
-    }
-
-    if(debug_draw && isDefined(missile)) {
-      util::debug_sphere(missile.origin, 6, (0.9, 0, 0), 0.9, debug_duration);
-    }
-
-    if(debug_draw && isDefined(rocket)) {
-      util::debug_sphere(rocket.origin, 6, (0, 0, 0.9), 0.9, debug_duration);
-    }
-
-    if(isDefined(parent)) {
-      parentvelocity = parent getvelocity();
-      parentpredictedlocation = parent.origin + parentvelocity * 0.05;
-      missilevelocity = missile getvelocity();
-      missilepredictedlocation = missile.origin + missilevelocity * 0.05;
-
-      if(distancesquared(parentpredictedlocation, missilepredictedlocation) < 1000 * 1000 || distancesquared(parent.origin, missilepredictedlocation) < 1000 * 1000) {
-        tooclosetopredictedparent = 1;
-      }
-    }
-
-    if(predicteddist < 0 || curdist > prevdist || tooclosetopredictedparent || !isDefined(rocket)) {
-      if(debug_draw && isDefined(parent)) {
-        if(tooclosetopredictedparent && !(predicteddist < 0 || curdist > prevdist)) {
-          util::debug_sphere(parent.origin, 18, (0.9, 0, 0.9), 0.9, debug_duration);
-        } else {
-          util::debug_sphere(parent.origin, 18, (0, 0.9, 0), 0.9, debug_duration);
-        }
-      }
+    while(true) {
+      waitframe(1);
+      prevdist = curdist;
 
       if(isDefined(rocket)) {
-        rocket detonate();
+        curdist = distance(missile.origin, rocket.origin);
+        distdelta = prevdist - curdist;
+        predicteddist = curdist - distdelta;
       }
 
-      missile thread heatseekingmissile::_missiledetonate(missile.target_attacker, missile.target_weapon, missile.target_weapon.explosionradius, 10, 20);
-      return;
+      if(debug_draw && isDefined(missile)) {
+        util::debug_sphere(missile.origin, 6, (0.9, 0, 0), 0.9, debug_duration);
+      }
+
+      if(debug_draw && isDefined(rocket)) {
+        util::debug_sphere(rocket.origin, 6, (0, 0, 0.9), 0.9, debug_duration);
+      }
+
+        if(isDefined(parent)) {
+          parentvelocity = parent getvelocity();
+          parentpredictedlocation = parent.origin + parentvelocity * 0.05;
+          missilevelocity = missile getvelocity();
+          missilepredictedlocation = missile.origin + missilevelocity * 0.05;
+
+          if(distancesquared(parentpredictedlocation, missilepredictedlocation) < 1000 * 1000 || distancesquared(parent.origin, missilepredictedlocation) < 1000 * 1000) {
+            tooclosetopredictedparent = 1;
+          }
+        }
+
+      if(predicteddist < 0 || curdist > prevdist || tooclosetopredictedparent || !isDefined(rocket)) {
+
+        if(debug_draw && isDefined(parent)) {
+          if(tooclosetopredictedparent && !(predicteddist < 0 || curdist > prevdist)) {
+            util::debug_sphere(parent.origin, 18, (0.9, 0, 0.9), 0.9, debug_duration);
+          } else {
+            util::debug_sphere(parent.origin, 18, (0, 0.9, 0), 0.9, debug_duration);
+          }
+        }
+
+          if(isDefined(rocket)) {
+            rocket detonate();
+          }
+
+        missile thread heatseekingmissile::_missiledetonate(missile.target_attacker, missile.target_weapon, missile.target_weapon.explosionradius, 10, 20);
+        return;
+      }
     }
-  }
 }
 
 cleanupaftermissiledeath(rocket, flak_drone) {
@@ -323,9 +325,10 @@ flakdronedamageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, 
 
 spawn(parent, ondeathcallback) {
   if(!isnavvolumeloaded()) {
+
     iprintlnbold("<dev string:x47>");
 
-    return undefined;
+      return undefined;
   }
 
   spawnpoint = parent.origin + (0, 0, -50);
@@ -356,7 +359,7 @@ configureteam(parent, ishacked) {
 watchgameevents() {
   drone = self;
   drone endon(#"death");
-  drone.parent.owner waittill(#"game_ended", # "emp_jammed", # "disconnect", # "joined_team");
+  drone.parent.owner waittill(#"game_ended", #"emp_jammed", #"disconnect", #"joined_team");
   drone shutdown(1);
 }
 

@@ -17,28 +17,26 @@ play_meteor_loop() {
 }
 
 add_song(song) {
-  if(!isDefined(level.radio_songs)) {
+  if(!isDefined(level.radio_songs))
     level.radio_songs = [];
-  }
   level.radio_songs[level.radio_songs.size] = song;
 }
 
 fade(id, time) {
   rate = 0;
-  if(time != 0) {
+  if(time != 0)
     rate = 1.0 / time;
-  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
-  while(SoundPlaying(id) && getSoundVolume(id) > .0001) {
+  while (SoundPlaying(id) && getSoundVolume(id) > .0001) {
     wait(.1);
   }
   stopSound(id);
 }
 
 radio_advance() {
-  for(;;) {
-    while(SoundPlaying(level.radio_id) || level.radio_index == 0) {
+  for (;;) {
+    while (SoundPlaying(level.radio_id) || level.radio_index == 0) {
       wait(1);
     }
     level notify("kzmb_next_song");
@@ -52,16 +50,16 @@ radio_thread() {
   assert(isDefined(level.radio_index));
   assert(level.radio_songs.size > 0);
   println("Starting radio at " + self.origin);
-  for(;;) {
+  for (;;) {
     level waittill("kzmb_next_song");
     println("client changing songs");
-    playSound(0, "static", self.origin);
+    playsound(0, "static", self.origin);
     if(SoundPlaying(level.radio_id)) {
       fade(level.radio_id, 1);
     } else {
       wait(.5);
     }
-    level.radio_id = playSound(0, level.radio_songs[level.radio_index], self.origin);
+    level.radio_id = playsound(0, level.radio_songs[level.radio_index], self.origin);
     level.radio_index += 1;
     if(level.radio_index >= level.radio_songs.size) {
       level.radio_index = 0;
@@ -86,10 +84,10 @@ radio_init() {
   add_song("pby_old");
   add_song("wild_card");
   add_song("");
-  radios = getEntArray(0, "kzmb", "targetname");
-  while(!isDefined(radios) || !radios.size) {
+  radios = getentarray(0, "kzmb", "targetname");
+  while (!isDefined(radios) || !radios.size) {
     wait(5);
-    radios = getEntArray(0, "kzmb", "targetname");
+    radios = getentarray(0, "kzmb", "targetname");
   }
   println("client found " + radios.size + " radios");
 }
@@ -98,7 +96,7 @@ start_lights() {
   level waittill("start_lights");
   wait(2.0);
   array_thread(getstructarray("electrical_circuit", "targetname"), ::circuit_sound);
-  playSound(0, "turn_on", (0, 0, 0));
+  playsound(0, "turn_on", (0, 0, 0));
   wait(3.0);
   array_thread(getstructarray("electrical_surge", "targetname"), ::light_sound);
   array_thread(getstructarray("low_buzz", "targetname"), ::buzz_sound);
@@ -108,19 +106,19 @@ start_lights() {
 
 light_sound() {
   wait(randomfloatrange(1, 4));
-  playSound(0, "electrical_surge", self.origin);
-  playFX(0, level._effect["electric_short_oneshot"], self.origin);
+  playsound(0, "electrical_surge", self.origin);
+  playfx(0, level._effect["electric_short_oneshot"], self.origin);
   wait(randomfloatrange(1, 2));
   e1 = clientscripts\_audio::playloopat(0, "light", self.origin);
   self run_sparks_loop();
 }
 
 run_sparks_loop() {
-  while(1) {
+  while (1) {
     wait(randomfloatrange(4, 15));
     if(randomfloatrange(0, 1) < 0.5) {
-      playFX(0, level._effect["electric_short_oneshot"], self.origin);
-      playSound(0, "electrical_surge", self.origin);
+      playfx(0, level._effect["electric_short_oneshot"], self.origin);
+      playsound(0, "electrical_surge", self.origin);
     }
     wait(randomintrange(1, 4));
   }
@@ -128,7 +126,7 @@ run_sparks_loop() {
 
 circuit_sound() {
   wait(1);
-  playSound(0, "circuit", self.origin);
+  playsound(0, "circuit", self.origin);
 }
 
 buzz_sound() {
@@ -139,7 +137,7 @@ start_jugganog_sounds() {
   level waittill("jugg_on");
   iprintlnbold("Machine_ON!!!");
   machine = getstructarray("perksacola", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  for (i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_jugger_jingle") {
       machine[i] thread perks_a_cola_jingle();
       iprintlnbold("Jugga_Run_Jingle");
@@ -151,7 +149,7 @@ start_speed_sounds() {
   level waittill("fast_reload_on");
   iprintlnbold("Machine_ON!!!");
   machine = getstructarray("perksacola", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  for (i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_speed_jingle") {
       machine[i] thread perks_a_cola_jingle();
       iprintlnbold("Speed_Run_Jingle");
@@ -163,7 +161,7 @@ start_revive_sounds() {
   level waittill("revive_on");
   iprintlnbold("Machine_ON!!!");
   machine = getstructarray("perksacola", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  for (i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_revive_jingle") {
       machine[i] thread perks_a_cola_jingle();
       iprintlnbold("Revive_Run_Jingle");
@@ -175,7 +173,7 @@ start_doubletap_sounds() {
   level waittill("doubletap_on");
   iprintlnbold("Machine_ON!!!");
   machine = getstructarray("perksacola", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  for (i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_doubletap_jingle") {
       machine[i] thread perks_a_cola_jingle();
       iprintlnbold("DT_Run_Jingle");
@@ -187,12 +185,12 @@ perks_a_cola_jingle() {
   lowhum = clientscripts\_audio::playloopat(0, "perks_machine_loop", self.origin);
   iprintlnbold("Low_HUM_IS_ON!");
   self thread play_random_broken_sounds();
-  while(1) {
+  while (1) {
     wait(randomfloatrange(10, 20));
     level notify("jingle_playing");
-    playSound(0, self.script_sound, self.origin);
-    playFX(0, level._effect["electric_short_oneshot"], self.origin);
-    playSound(0, "electrical_surge", self.origin);
+    playsound(0, self.script_sound, self.origin);
+    playfx(0, level._effect["electric_short_oneshot"], self.origin);
+    playsound(0, "electrical_surge", self.origin);
     wait(30);
     self thread play_random_broken_sounds();
   }
@@ -204,15 +202,15 @@ play_random_broken_sounds() {
     self.script_sound = "null";
   }
   if(self.script_sound == "mx_revive_jingle") {
-    while(1) {
+    while (1) {
       wait(randomfloatrange(7, 18));
-      playSound(0, "broken_random_jingle", self.origin);
-      playSound(0, "electrical_surge", self.origin);
+      playsound(0, "broken_random_jingle", self.origin);
+      playsound(0, "electrical_surge", self.origin);
     }
   } else {
-    while(1) {
+    while (1) {
       wait(randomfloatrange(7, 18));
-      playSound(0, "electrical_surge", self.origin);
+      playsound(0, "electrical_surge", self.origin);
     }
   }
 }

@@ -28,7 +28,7 @@
 #namespace callback;
 
 function autoexec __init__sytem__() {
-  system::register("callback", &__init__, undefined, undefined);
+  system::register("callback", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -36,21 +36,23 @@ function __init__() {
 }
 
 function set_default_callbacks() {
-  level.callbackplayerspawned = &playerspawned;
-  level.callbacklocalclientconnect = &localclientconnect;
-  level.callbackcreatingcorpse = &creating_corpse;
-  level.callbackentityspawned = &entityspawned;
-  level.callbackairsupport = &airsupport;
-  level.callbackplayaifootstep = &footsteps::playaifootstep;
-  level.callbackplaylightloopexploder = &exploder::playlightloopexploder;
-  level._custom_weapon_cb_func = &spawned_weapon_type;
-  level.gadgetvisionpulse_reveal_func = &gadget_vision_pulse::gadget_visionpulse_reveal;
+  level.callbackplayerspawned = & playerspawned;
+  level.callbacklocalclientconnect = & localclientconnect;
+  level.callbackcreatingcorpse = & creating_corpse;
+  level.callbackentityspawned = & entityspawned;
+  level.callbackairsupport = & airsupport;
+  level.callbackplayaifootstep = & footsteps::playaifootstep;
+  level.callbackplaylightloopexploder = & exploder::playlightloopexploder;
+  level._custom_weapon_cb_func = & spawned_weapon_type;
+  level.gadgetvisionpulse_reveal_func = & gadget_vision_pulse::gadget_visionpulse_reveal;
 }
 
 function localclientconnect(localclientnum) {
   println("" + localclientnum);
-  if(isDefined(level.charactercustomizationsetup)) {
-    [[level.charactercustomizationsetup]](localclientnum);
+  if(isdefined(level.charactercustomizationsetup)) {
+    [
+      [level.charactercustomizationsetup]
+    ](localclientnum);
   }
   callback("hash_da8d7d74", localclientnum);
 }
@@ -60,10 +62,10 @@ function playerspawned(localclientnum) {
   self notify("playerspawned_callback");
   self endon("playerspawned_callback");
   player = getlocalplayer(localclientnum);
-  if(isDefined(level.infraredvisionset)) {
+  if(isdefined(level.infraredvisionset)) {
     player setinfraredvisionset(level.infraredvisionset);
   }
-  if(isDefined(level._playerspawned_override)) {
+  if(isdefined(level._playerspawned_override)) {
     self thread[[level._playerspawned_override]](localclientnum);
     return;
   }
@@ -77,24 +79,24 @@ function playerspawned(localclientnum) {
 function entityspawned(localclientnum) {
   self endon("entityshutdown");
   if(self isplayer()) {
-    if(isDefined(level._clientfaceanimonplayerspawned)) {
+    if(isdefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }
   }
-  if(isDefined(level._entityspawned_override)) {
+  if(isdefined(level._entityspawned_override)) {
     self thread[[level._entityspawned_override]](localclientnum);
     return;
   }
-  if(!isDefined(self.type)) {
+  if(!isdefined(self.type)) {
     println("");
     return;
   }
   if(self.type == "missile") {
-    if(isDefined(level._custom_weapon_cb_func)) {
+    if(isdefined(level._custom_weapon_cb_func)) {
       self thread[[level._custom_weapon_cb_func]](localclientnum);
     }
   } else if(self.type == "vehicle" || self.type == "helicopter" || self.type == "plane") {
-    if(isDefined(level._customvehiclecbfunc)) {
+    if(isdefined(level._customvehiclecbfunc)) {
       self thread[[level._customvehiclecbfunc]](localclientnum);
     }
     self thread vehicle::field_toggle_exhaustfx_handler(localclientnum, undefined, 0, 1);
@@ -110,7 +112,7 @@ function entityspawned(localclientnum) {
     }
   }
   if(self.type == "actor") {
-    if(isDefined(level._customactorcbfunc)) {
+    if(isdefined(level._customactorcbfunc)) {
       self thread[[level._customactorcbfunc]](localclientnum);
     }
   }
@@ -170,7 +172,7 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
       break;
     }
   }
-  data = spawnStruct();
+  data = spawnstruct();
   data.team = team;
   data.owner = owner;
   data.bombsite = pos;
@@ -181,8 +183,8 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
   if(type == "a") {
     planehalfdistance = 12000;
     data.planehalfdistance = planehalfdistance;
-    data.startpoint = pos + (vectorscale(anglesToForward(direction), -1 * planehalfdistance));
-    data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
+    data.startpoint = pos + (vectorscale(anglestoforward(direction), -1 * planehalfdistance));
+    data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
     data.planemodel = "t5_veh_air_b52";
     data.flybysound = "null";
     data.washsound = "veh_b52_flyby_wash";
@@ -195,8 +197,8 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
     if(type == "n") {
       planehalfdistance = 24000;
       data.planehalfdistance = planehalfdistance;
-      data.startpoint = pos + (vectorscale(anglesToForward(direction), -1 * planehalfdistance));
-      data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
+      data.startpoint = pos + (vectorscale(anglestoforward(direction), -1 * planehalfdistance));
+      data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
       data.planemodel = airsupport::getplanemodel(teamfaction);
       data.flybysound = "null";
       data.washsound = "evt_us_napalm_wash";

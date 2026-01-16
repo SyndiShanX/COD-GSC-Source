@@ -21,7 +21,7 @@ init() {
   level thread uploadGlobalStatCounters();
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player setClientDvar("ui_xpText", "1");
     player.enableText = true;
@@ -68,14 +68,12 @@ uploadGlobalStatCounters() {
   level waittill("game_ended");
   if(1 == GetDvarInt(#"xblive_basictraining")) {
     incrementCounter("global_combattraining_botskilled", level.globalLarrysKilled);
-    if(wasLastRound()) {
+    if(wasLastRound())
       incrementCounter("global_combattraining_gamesplayed", 1);
-    }
     return;
   }
-  if(!level.rankedMatch && !level.wagerMatch) {
+  if(!level.rankedMatch && !level.wagerMatch)
     return;
-  }
   totalKills = 0;
   totalDeaths = 0;
   totalAssists = 0;
@@ -94,12 +92,11 @@ uploadGlobalStatCounters() {
   switch (level.gameType) {
     case "dem": {
       bombZonesLeft = 0;
-      for(index = 0; index < level.bombZones.size; index++) {
-        if(!isDefined(level.bombZones[index].bombExploded) || !level.bombZones[index].bombExploded) {
+      for (index = 0; index < level.bombZones.size; index++) {
+        if(!isDefined(level.bombZones[index].bombExploded) || !level.bombZones[index].bombExploded)
           level.globalDemBombsProtected++;
-        } else {
+        else
           level.globalDemBombsDestroyed++;
-        }
       }
     }
     break;
@@ -110,7 +107,7 @@ uploadGlobalStatCounters() {
     break;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     totalTimePlayed += min(player.timePlayed["total"], level.timeplayedcap);
   }
@@ -142,12 +139,11 @@ uploadGlobalStatCounters() {
   incrementCounter("global_distancesprinted100inches", int(level.globalDistanceSprinted));
   incrementCounter("global_distancefeetfallen", int(level.globalFeetFallen));
   incrementCounter("global_minutes", int(totalTimePlayed / 60));
-  if(!wasLastRound()) {
+  if(!wasLastRound())
     return;
-  }
   wait(0.05);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     totalKills += player.kills;
     totalDeaths += player.deaths;
@@ -202,18 +198,15 @@ uploadGlobalStatCounters() {
   }
 }
 statGet(dataName) {
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return 0;
-  }
   return (self getdstat("PlayerStatsList", dataName));
 }
 statGetWithGameType(dataName) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return 0;
-  }
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return 0;
-  }
   return (self getdstat("PlayerStatsByGameMode", getGameTypeName(), dataName));
 }
 getGameTypeName() {
@@ -286,7 +279,7 @@ checkWeaponChallengeComplete(itemIndex, statName, incValue, statValueName, chall
   if(!(self isMilestoneValid(statName, currentMilestone, statType))) {
     return;
   }
-  while(statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
+  while (statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
     index = level.statsMilestoneInfo[statType][statName][currentMilestone]["index"];
     self thread maps\mp\gametypes\_missions::milestoneNotify(index, itemIndex, "global", currentMilestone);
     self maps\mp\gametypes\_rank::giveRankXP("challenge", level.statsMilestoneInfo[statType][statName][currentMilestone]["xpreward"]);
@@ -310,7 +303,7 @@ checkGroupChallengeComplete(baseName, itemGroup, statName, incValue, statValueNa
   if(!(self isMilestoneValid(statName, currentMilestone, statType, itemGroup))) {
     return;
   }
-  while(statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
+  while (statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
     index = level.statsMilestoneInfo[statType][statName][currentMilestone]["index"];
     if(statType == "attachment") {
       attachmentIndex = GetAttachmentIndex(itemgroup);
@@ -373,7 +366,7 @@ checkMilestoneComplete(statName, statValue, statType, challengeName, lifeTime) {
   if(!(self isMilestoneValid(statName, currentMilestone, statType))) {
     return false;
   }
-  while(statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
+  while (statValue >= level.statsMilestoneInfo[statType][statName][currentMilestone]["maxval"]) {
     index = level.statsMilestoneInfo[statType][statName][currentMilestone]["index"];
     self thread maps\mp\gametypes\_missions::milestoneNotify(index, 0, milestoneType, currentMilestone);
     self maps\mp\gametypes\_rank::giveRankXP("challenge", level.statsMilestoneInfo[statType][statName][currentMilestone]["xpreward"]);
@@ -403,28 +396,23 @@ setPlayerStat(baseName, dataName, value) {
   }
 }
 statSetInternal(baseName, dataName, value, weapon) {
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
-  if(!isStatModifiable(dataName)) {
+  if(!isStatModifiable(dataName))
     return;
-  }
   contractsToProcess = self getContractsToProcess("player", toLower(dataName));
-  if(contractsToProcess.size) {
+  if(contractsToProcess.size)
     self processContracts(contractsToProcess, "player", dataName, value - self getdstat("PlayerStatsList", dataName), weapon);
-  }
   self setPlayerStat(baseName, dataName, value);
 }
 isStatModifiable(dataName) {
   return level.rankedMatch || level.wagerMatch;
 }
 statSetWithGameType(dataName, value, incValue) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return 0;
-  }
-  if(!isStatModifiable(dataName)) {
+  if(!isStatModifiable(dataName))
     return;
-  }
   contractsToProcess = self getContractsToProcess("gametype", toLower(dataName));
   if(contractsToProcess.size) {
     if(!isDefined(incValue)) {
@@ -445,20 +433,17 @@ statSetWithGameType(dataName, value, incValue) {
   }
 }
 statAddWithGameType(dataName, value) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return 0;
-  }
-  if(!isStatModifiable(dataName)) {
+  if(!isStatModifiable(dataName))
     return;
-  }
   currValue = statGetWithGameType(dataName);
   currValue += value;
   self statSetWithGameType(dataName, currValue, value);
 }
 statSet(dataName, value, includeGameType) {
-  if(!isStatModifiable(dataName)) {
+  if(!isStatModifiable(dataName))
     return;
-  }
   self statSetInternal("PlayerStatsList", dataName, value);
   if(!isDefined(includeGameType) || includeGameType) {
     self statSetWithGameType(dataName, value);
@@ -471,9 +456,8 @@ statAddInternal(dataName, incValue, weapon) {
   statSetInternal("ChallengeValue", dataName, curValue + incValue, weapon);
 }
 statAdd(dataName, value, includeGameType, weapon) {
-  if(!isStatModifiable(dataName)) {
+  if(!isStatModifiable(dataName))
     return;
-  }
   statAddInternal(dataName, value, weapon);
   if(isDefined(includeGameType) && includeGameType) {
     curValue = self statGetWithGameType(dataName);
@@ -498,18 +482,14 @@ getRecentStat(isGlobal, index, statName) {
   }
 }
 setRecentStat(isGlobal, index, statName, value) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return;
-  }
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return;
-  }
-  if(!isStatModifiable(statName)) {
+  if(!isStatModifiable(statName))
     return;
-  }
-  if(index < 0 || index > 9) {
+  if(index < 0 || index > 9)
     return;
-  }
   if(isGlobal && !level.wagerMatch) {
     self setdstat("RecentScores", index, statName, value);
     return;
@@ -522,39 +502,32 @@ setRecentStat(isGlobal, index, statName, value) {
   }
 }
 addRecentStat(isGlobal, index, statName, value) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return;
-  }
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return;
-  }
-  if(!isStatModifiable(statName)) {
+  if(!isStatModifiable(statName))
     return;
-  }
   currStat = getRecentStat(isGlobal, index, statName);
   setRecentStat(isGlobal, index, statName, currStat + value);
 }
 adjustRecentHitLocStats() {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return;
-  }
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return;
-  }
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
-  if(!level.rankedMatch) {
+  if(!level.rankedMatch)
     return;
-  }
-  for(i = 0; i < level.maxRecentStats - 1; i++) {
+  for (i = 0; i < level.maxRecentStats - 1; i++) {
     isValid = self getdstat("RecentHitLocCounts", i, "valid");
     if(!isValid) {
       break;
     }
   }
-  for(j = i - 1; j >= 0; j--) {
-    for(k = 0; k < level.maxHitLocations; k++) {
+  for (j = i - 1; j >= 0; j--) {
+    for (k = 0; k < level.maxHitLocations; k++) {
       currHitLocCount = self getdstat("RecentHitLocCounts", j, "hitLocations", k);
       self setdstat("RecentHitLocCounts", j + 1, "hitLocations", k, currHitLocCount);
       currHitLocCount = self getdstat("RecentHitLocCounts", j, "criticalHitLocations", k);
@@ -565,29 +538,25 @@ adjustRecentHitLocStats() {
   self setdstat("RecentHitLocCounts", 0, "valid", 1);
 }
 adjustRecentScores(isGlobal) {
-  if(isDefined(level.noPersistence) && level.noPersistence) {
+  if(isDefined(level.noPersistence) && level.noPersistence)
     return;
-  }
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return;
-  }
-  if(!(level.rankedMatch || level.wagerMatch)) {
+  if(!(level.rankedMatch || level.wagerMatch))
     return;
-  }
-  if(isGlobal && level.wagerMatch) {
+  if(isGlobal && level.wagerMatch)
     return;
-  }
   kills = 0;
   deaths = 0;
   gameType = 0;
   currScore = 0;
-  for(i = 0; i < level.maxRecentStats - 1; i++) {
+  for (i = 0; i < level.maxRecentStats - 1; i++) {
     isValid = self getRecentStat(isGlobal, i, "valid");
     if(!isValid) {
       break;
     }
   }
-  for(j = i - 1; j >= 0; j--) {
+  for (j = i - 1; j >= 0; j--) {
     currScore = self getRecentStat(isGlobal, j, "score");
     if(isGlobal && !level.wagerMatch) {
       kills = self getRecentStat(isGlobal, j, "kills");
@@ -613,32 +582,27 @@ adjustRecentScores(isGlobal) {
   self.pers["lastHighestScore"] = self getDStat("HighestStats", "highest_score");
 }
 setAfterActionReportStat(statName, value, index) {
-  if(self is_bot() || self isdemoclient()) {
+  if(self is_bot() || self isdemoclient())
     return;
-  }
   if(level.rankedMatch || level.wagerMatch) {
-    if(isDefined(index)) {
+    if(isDefined(index))
       self setdstat("AfterActionReportStats", statName, index, value);
-    } else {
+    else
       self setdstat("AfterActionReportStats", statName, value);
-    }
   }
 }
 getContractsToProcess(statType, statName) {
   activeContractIndices = [];
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return activeContractIndices;
-  }
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return activeContractIndices;
-  }
-  if(self is_bot() || self isdemoclient()) {
+  if(self is_bot() || self isdemoclient())
     return activeContractIndices;
-  }
   if(isDefined(self.contractStatTypes) && isDefined(self.contractStats)) {
     assert(self.contractStatTypes.size == self.contractStats.size);
     numContracts = self.contractStatTypes.size;
-    for(i = 0; i < numContracts; i++) {
+    for (i = 0; i < numContracts; i++) {
       if(self.contractStatTypes[i] == statType && self.contractStats[i] == statName) {
         activeContractIndices[activeContractIndices.size] = i;
       }
@@ -647,20 +611,16 @@ getContractsToProcess(statType, statName) {
   return activeContractIndices;
 }
 processContracts(activeContractIndices, statType, statName, incValue, weapon) {
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return;
-  }
-  if(incValue <= 0) {
+  if(incValue <= 0)
     return;
-  }
-  if(self is_bot() || self isdemoclient()) {
+  if(self is_bot() || self isdemoclient())
     return;
-  }
   numActiveContracts = activeContractIndices.size;
-  for(i = 0; i < numActiveContracts; i++) {
+  for (i = 0; i < numActiveContracts; i++) {
     activeContractIndex = activeContractIndices[i];
     contractIndex = self GetIndexForActiveContract(activeContractIndex);
     if(toLower(GetContractStatType(contractIndex)) == toLower(statType) && toLower(GetContractStatName(contractIndex)) == toLower(statName)) {
@@ -676,9 +636,8 @@ processContracts(activeContractIndices, statType, statName, incValue, weapon) {
   }
 }
 giveContractRewards(contractIndex) {
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return;
-  }
   addContractToQueue(contractIndex, true);
   rewardXP = GetContractRewardXP(contractIndex);
   if(rewardXP > 0) {
@@ -699,36 +658,31 @@ giveContractRewards(contractIndex) {
 watchContractResets() {
   self endon("disconnect");
   level endon("game_ended");
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return;
-  }
   maxActiveContracts = GetMaxActiveContracts();
-  for(i = 0; i < maxActiveContracts; i++) {
+  for (i = 0; i < maxActiveContracts; i++) {
     contractIndex = self GetIndexForActiveContract(i);
-    if(contractIndex < 0) {
+    if(contractIndex < 0)
       continue;
-    }
     resetConditions = GetContractResetConditions(contractIndex);
-    if(resetConditions == "") {
+    if(resetConditions == "")
       continue;
-    }
     resetConditions = strtok(resetConditions, ",");
-    if(!isDefined(resetConditions) || !isDefined(resetConditions.size) || !resetConditions.size) {
+    if(!isDefined(resetConditions) || !isDefined(resetConditions.size) || !resetConditions.size)
       continue;
-    }
-    for(j = 0; j < resetConditions.size; j++) {
+    for (j = 0; j < resetConditions.size; j++) {
       self thread watchContractReset(i, resetConditions[j]);
     }
   }
-  if(isOneRound() || isFirstRound()) {
+  if(isOneRound() || isFirstRound())
     self notify("new_match");
-  }
   self notify("new_round");
 }
 watchContractReset(activeContractIndex, resetCondition) {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill(resetCondition);
     self ResetActiveContractProgress(activeContractIndex);
   }
@@ -737,7 +691,7 @@ hashContractStats() {
   self.contractStats = [];
   self.contractStatTypes = [];
   maxActiveContracts = GetMaxActiveContracts();
-  for(i = 0; i < maxActiveContracts; i++) {
+  for (i = 0; i < maxActiveContracts; i++) {
     contractIndex = self GetIndexForActiveContract(i);
     statType = toLower(GetContractStatType(contractIndex));
     self.contractStatTypes[i] = statType;
@@ -747,23 +701,19 @@ hashContractStats() {
 checkContractExpirations() {
   self endon("disconnect");
   level endon("game_ended");
-  if(!isDefined(self.contractExpirations)) {
+  if(!isDefined(self.contractExpirations))
     self.contractExpirations = [];
-  }
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return;
-  }
-  if(self is_bot() || self isdemoclient()) {
+  if(self is_bot() || self isdemoclient())
     return;
-  }
   maxActiveContracts = GetMaxActiveContracts();
-  for(i = 0; i < maxActiveContracts; i++) {
+  for (i = 0; i < maxActiveContracts; i++) {
     contractExpired = self HasActiveContractExpired(i);
     if(contractExpired && isDefined(self.contractExpirations[i]) && !self.contractExpirations[i]) {
       contractIndex = self GetIndexForActiveContract(i);
-      if(contractIndex < 0) {
+      if(contractIndex < 0)
         return;
-      }
       level.globalContractsFailed += 1;
       addContractToQueue(contractIndex, false);
       bbPrint("contract_expired: xuid %s name %s contractid %d contractname %s timepassed %d progress %d requiredcount %d", self GetXUID(), self.name, contractIndex, GetContractName(contractIndex), self GetActiveContractTimePassed(i), self GetActiveContractProgress(i), GetContractRequiredCount(contractIndex));
@@ -772,22 +722,19 @@ checkContractExpirations() {
   }
 }
 incrementContractTimes(timeInc) {
-  if(!level.rankedMatch || level.wagerMatch) {
+  if(!level.rankedMatch || level.wagerMatch)
     return;
-  }
-  if(!level.contractsEnabled) {
+  if(!level.contractsEnabled)
     return;
-  }
   maxActiveContracts = GetMaxActiveContracts();
-  for(i = 0; i < maxActiveContracts; i++) {
+  for (i = 0; i < maxActiveContracts; i++) {
     contractIndex = self GetIndexForActiveContract(i);
-    if(contractIndex < 0) {
+    if(contractIndex < 0)
       continue;
-    }
     requirements = GetContractRequirements(contractIndex);
     numRequirements = requirements.size;
     incContractTime = true;
-    for(j = 0; j < numRequirements; j += 2) {
+    for (j = 0; j < numRequirements; j += 2) {
       if(requirements[j] == "map" && !self contractRequirementMet(requirements[j], requirements[j + 1])) {
         incContractTime = false;
         break;
@@ -803,10 +750,9 @@ incrementContractTimes(timeInc) {
 }
 contractRequirementsMet(contractIndex, weapon) {
   requirements = GetContractRequirements(contractIndex);
-  for(i = 0; i < requirements.size; i += 2) {
-    if(!self contractRequirementMet(requirements[i], requirements[i + 1], weapon)) {
+  for (i = 0; i < requirements.size; i += 2) {
+    if(!self contractRequirementMet(requirements[i], requirements[i + 1], weapon))
       return false;
-    }
   }
   return true;
 }
@@ -831,14 +777,12 @@ contractRequirementMet(reqType, reqData, weapon) {
   } else if(reqType == "ads") {
     return self checkGenericContractRequirementFloat(self PlayerADS(), reqData);
   } else if(reqType == "inventorytype") {
-    if(!isDefined(weapon)) {
+    if(!isDefined(weapon))
       return false;
-    }
     return self checkGenericContractRequirement(toLower(WeaponInventoryType(weapon)), reqData);
   } else if(reqType == "nonkillstreak") {
-    if(!isDefined(weapon)) {
+    if(!isDefined(weapon))
       return false;
-    }
     return !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(weapon);
   } else {
     println("ERROR: Invalid contract requirement type!");
@@ -846,24 +790,20 @@ contractRequirementMet(reqType, reqData, weapon) {
   return false;
 }
 checkGenericContractRequirement(playerValue, validValues) {
-  if(!isDefined(validValues) || !isDefined(validValues.size) || !validValues.size) {
+  if(!isDefined(validValues) || !isDefined(validValues.size) || !validValues.size)
     return false;
-  }
-  for(i = 0; i < validValues.size; i++) {
-    if(playerValue == validValues[i]) {
+  for (i = 0; i < validValues.size; i++) {
+    if(playerValue == validValues[i])
       return true;
-    }
   }
   return false;
 }
 checkGenericContractRequirementFloat(playerValue, validValues) {
-  if(!isDefined(validValues) || !isDefined(validValues.size) || !validValues.size) {
+  if(!isDefined(validValues) || !isDefined(validValues.size) || !validValues.size)
     return false;
-  }
-  for(i = 0; i < validValues.size; i++) {
-    if(playerValue == float(validValues[i])) {
+  for (i = 0; i < validValues.size; i++) {
+    if(playerValue == float(validValues[i]))
       return true;
-    }
   }
   return false;
 }
@@ -882,36 +822,30 @@ checkKDRatioRequirement(reqRatios) {
   return false;
 }
 checkBaseWeaponContractRequirement(validWeapons, weapon) {
-  if(!isDefined(validWeapons) || !isDefined(validWeapons.size) || !validWeapons.size || !isDefined(weapon)) {
+  if(!isDefined(validWeapons) || !isDefined(validWeapons.size) || !validWeapons.size || !isDefined(weapon))
     return false;
-  }
   baseWeaponName = GetRefFromItemIndex(GetBaseWeaponItemIndex(weapon));
-  for(i = 0; i < validWeapons.size; i++) {
-    if(toLower(baseWeaponName) == toLower(validWeapons[i])) {
+  for (i = 0; i < validWeapons.size; i++) {
+    if(toLower(baseWeaponName) == toLower(validWeapons[i]))
       return true;
-    }
   }
   return false;
 }
 checkWeaponSubstringContractRequirement(validSubstrings, weapon) {
-  if(!isDefined(validSubstrings) || !isDefined(validSubstrings.size) || !validSubstrings.size || !isDefined(weapon)) {
+  if(!isDefined(validSubstrings) || !isDefined(validSubstrings.size) || !validSubstrings.size || !isDefined(weapon))
     return false;
-  }
-  for(i = 0; i < validSubstrings.size; i++) {
-    if(IsSubStr(toLower(weapon), toLower(validSubstrings[i]))) {
+  for (i = 0; i < validSubstrings.size; i++) {
+    if(IsSubStr(toLower(weapon), toLower(validSubstrings[i])))
       return true;
-    }
   }
   return false;
 }
 checkPerkContractRequirement(validPerks) {
-  if(!isDefined(validPerks) || !isDefined(validPerks.size) || !validPerks.size) {
+  if(!isDefined(validPerks) || !isDefined(validPerks.size) || !validPerks.size)
     return false;
-  }
-  for(i = 0; i < validPerks.size; i++) {
-    if(self HasPerk(validPerks[i])) {
+  for (i = 0; i < validPerks.size; i++) {
+    if(self HasPerk(validPerks[i]))
       return true;
-    }
   }
   return false;
 }

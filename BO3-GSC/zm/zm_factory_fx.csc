@@ -15,7 +15,7 @@ function main() {
   precache_util_fx();
   precache_createfx_fx();
   disablefx = getdvarint("disable_fx");
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isdefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
   level.teleport_pad_names = [];
@@ -69,7 +69,7 @@ function precache_createfx_fx() {
 function perk_wire_fx(notify_wait, init_targetname, done_notify) {
   level waittill(notify_wait);
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread perk_wire_fx_client(i, init_targetname, done_notify);
   }
 }
@@ -77,16 +77,16 @@ function perk_wire_fx(notify_wait, init_targetname, done_notify) {
 function perk_wire_fx_client(clientnum, init_targetname, done_notify) {
   println("" + clientnum);
   targ = struct::get(init_targetname, "targetname");
-  if(!isDefined(targ)) {
+  if(!isdefined(targ)) {
     return;
   }
   mover = spawn(clientnum, targ.origin, "script_model");
-  mover setModel("tag_origin");
-  fx = playFXOnTag(clientnum, level._effect["wire_spark"], mover, "tag_origin");
-  playSound(0, "tele_spark_hit", mover.origin);
-  mover playLoopSound("tele_spark_loop");
-  while(isDefined(targ)) {
-    if(isDefined(targ.target)) {
+  mover setmodel("tag_origin");
+  fx = playfxontag(clientnum, level._effect["wire_spark"], mover, "tag_origin");
+  playsound(0, "tele_spark_hit", mover.origin);
+  mover playloopsound("tele_spark_loop");
+  while (isdefined(targ)) {
+    if(isdefined(targ.target)) {
       println((("" + clientnum) + "") + targ.target);
       target = struct::get(targ.target, "targetname");
       mover moveto(target.origin, 0.1);
@@ -102,19 +102,19 @@ function perk_wire_fx_client(clientnum, init_targetname, done_notify) {
 }
 
 function ramp_fog_in_out() {
-  for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+  for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
     setlitfogbank(localclientnum, -1, 1, -1);
     setworldfogactivebank(localclientnum, 2);
   }
   wait(2.5);
-  for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+  for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
     setlitfogbank(localclientnum, -1, 0, -1);
     setworldfogactivebank(localclientnum, 1);
   }
 }
 
 function dog_start_monitor() {
-  while(true) {
+  while (true) {
     level waittill("dog_start");
     level thread ramp_fog_in_out();
     start_dist = 229;
@@ -139,7 +139,7 @@ function dog_start_monitor() {
 }
 
 function dog_stop_monitor() {
-  while(true) {
+  while (true) {
     level waittill("dog_stop");
     level thread ramp_fog_in_out();
     start_dist = 440;
@@ -187,10 +187,10 @@ function level_fog_init() {
 function light_model_swap(name, model) {
   level waittill("pl1");
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, name, "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel(model);
+  for (p = 0; p < players.size; p++) {
+    lamps = getentarray(p, name, "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] setmodel(model);
     }
   }
 }
@@ -200,7 +200,7 @@ function get_guide_struct_angles(ent) {
   if(guide_structs.size > 0) {
     guide = guide_structs[0];
     dist = distancesquared(ent.origin, guide.origin);
-    for(i = 1; i < guide_structs.size; i++) {
+    for (i = 1; i < guide_structs.size; i++) {
       new_dist = distancesquared(ent.origin, guide_structs[i].origin);
       if(new_dist < dist) {
         guide = guide_structs[i];

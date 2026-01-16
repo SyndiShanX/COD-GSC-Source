@@ -16,17 +16,17 @@ init() {
   }
   registerMedalCallback("playerKilled", maps\mp\_medals::medal_kills);
   level.numKills = 0;
-  level.medalSettings = spawnStruct();
+  level.medalSettings = spawnstruct();
   level.medalSettings.teamColumn = 4;
   level.medalSettings.playerColumn = 5;
   level.medalSettings.hardcoreMedalPopup = 6;
   baseRef = "";
-  for(idx = 1; isDefined(tableLookup(tableName, 0, idx, 0)) && tableLookup(tableName, 0, idx, 0) != ""; idx++) {
+  for (idx = 1; isDefined(tableLookup(tableName, 0, idx, 0)) && tableLookup(tableName, 0, idx, 0) != ""; idx++) {
     refString = tableLookup(tableName, 0, idx, 1);
     assert(refString != "MEDALS");
     level.medalInfo[refString] = [];
     level.medalInfo[refString]["index"] = idx;
-    level.medalInfo[refString]["xp"] = spawnStruct();
+    level.medalInfo[refString]["xp"] = spawnstruct();
     level.medalInfo[refString]["xp"].team = int(tableLookup(tableName, 0, idx, level.medalSettings.teamColumn));
     level.medalInfo[refString]["xp"].player = int(tableLookup(tableName, 0, idx, level.medalSettings.playerColumn));
     level.medalInfo[refString]["hardcore"] = int(tableLookup(tableName, 0, idx, level.medalSettings.hardcoreMedalPopup));
@@ -39,33 +39,27 @@ init() {
   level thread onPlayerConnect();
 }
 registerMedalCallback(callback, func) {
-  if(!isDefined(level.medalCallbacks[callback])) {
+  if(!isDefined(level.medalCallbacks[callback]))
     level.medalCallbacks[callback] = [];
-  }
   level.medalCallbacks[callback][level.medalCallbacks[callback].size] = func;
 }
 doMedalCallback(callback, data) {
-  if(getDvarInt(#"disable_medals") > 0) {
+  if(getDvarInt(#"disable_medals") > 0)
     return;
-  }
-  if(!isDefined(level.medalCallbacks)) {
+  if(!isDefined(level.medalCallbacks))
     return;
-  }
-  if(!isDefined(level.medalCallbacks[callback])) {
+  if(!isDefined(level.medalCallbacks[callback]))
     return;
-  }
   if(isDefined(data)) {
-    for(i = 0; i < level.medalCallbacks[callback].size; i++) {
+    for (i = 0; i < level.medalCallbacks[callback].size; i++)
       thread[[level.medalCallbacks[callback][i]]](data);
-    }
   } else {
-    for(i = 0; i < level.medalCallbacks[callback].size; i++) {
+    for (i = 0; i < level.medalCallbacks[callback].size; i++)
       thread[[level.medalCallbacks[callback][i]]]();
-    }
   }
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player.lastKilledBy = undefined;
     player thread hijackCrate();
@@ -80,27 +74,25 @@ addMedalToQueue(index) {
 }
 giveMedal(medalName, weapon) {
   self endon("disconnect");
-  if(!level.medalsEnabled) {
+  if(!level.medalsEnabled)
     return;
-  }
-  if(level.wagerMatch && getDvar(#"g_gametype") != "cp") {
+  if(level.wagerMatch && getDvar(#"g_gametype") != "cp")
     return;
-  }
-  if(self is_bot()) {
+  if(self is_bot())
     return;
-  }
   waittillframeend;
   if(isDefined(level.medalInfo[medalName])) {
-    if(level.teambased) {
+    if(level.teambased)
       xp = level.medalInfo[medalName]["xp"].team;
-    } else {
+    else
       xp = level.medalInfo[medalName]["xp"].player;
-    }
     if(!level.wagerMatch && level.onlineGame && (!GetDvarInt(#"xblive_privatematch") || GetDvarInt(#"xblive_basictraining"))) {
       self thread maps\mp\gametypes\_rank::giveRankXP("medal", xp);
       self maps\mp\gametypes\_persistence::statAdd("MEDALS", 1, false);
     }
-    [[level.onMedalAwarded]](self, medalName, xp);
+    [
+      [level.onMedalAwarded]
+    ](self, medalName, xp);
     self thread maps\mp\_properks::medalEarned(medalName, weapon);
     if(level.hardcoreMode == false || level.medalInfo[medalName]["hardcore"] == 1) {
       addMedalToQueue(level.medalInfo[medalName]["index"]);
@@ -108,9 +100,8 @@ giveMedal(medalName, weapon) {
   } else {}
 }
 isMedal(medalName) {
-  if(isDefined(level.medalInfo[medalName])) {
+  if(isDefined(level.medalInfo[medalName]))
     return true;
-  }
   return false;
 }
 multiKill(killCount, weapon) {
@@ -133,13 +124,11 @@ medal_kills(data, time) {
   attacker.lastKilledPlayer = victim;
   wasDefusing = data.wasDefusing;
   victim.anglesOnDeath = victim getPlayerAngles();
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     attacker.anglesOnKill = attacker getPlayerAngles();
-  }
   if(isSubStr(data.sMeansOfDeath, "MOD_GRENADE") || isSubStr(data.sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(data.sMeansOfDeath, "MOD_PROJECTILE")) {
-    if(data.sWeapon == "none" && isDefined(data.victim.explosiveInfo["weapon"])) {
+    if(data.sWeapon == "none" && isDefined(data.victim.explosiveInfo["weapon"]))
       data.sWeapon = data.victim.explosiveInfo["weapon"];
-    }
     if(data.sWeapon == "explosive_bolt_mp" || data.sWeapon == "sticky_grenade_mp") {
       if(isDefined(data.victim.explosiveInfo["stuckToPlayer"]) && data.victim.explosiveInfo["stuckToPlayer"] == victim) {
         attacker processMedal("MEDAL_STUCK_TO_PLAYER", data.sWeapon);
@@ -156,11 +145,10 @@ medal_kills(data, time) {
   }
   if(isDefined(victim.damagedPlayers)) {
     keys = getarraykeys(victim.damagedPlayers);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       key = keys[i];
-      if(key == attacker.clientid) {
+      if(key == attacker.clientid)
         continue;
-      }
       if(level.teamBased && time - victim.damagedPlayers[key] < 1000) {
         attacker processMedal("MEDAL_RESCUER", data.sWeapon);
       }
@@ -180,9 +168,8 @@ medal_kills(data, time) {
     if(level.numKills == 1) {
       attacker processMedal("MEDAL_FIRST_BLOOD", data.sWeapon);
       if(isDefined(data.sWeapon)) {
-        if(!maps\mp\gametypes\_hardpoints::isKillstreakWeapon(data.sWeapon)) {
+        if(!maps\mp\gametypes\_hardpoints::isKillstreakWeapon(data.sWeapon))
           level thread maps\mp\_popups::DisplayTeamMessageToAll(&"MEDAL_FIRST_BLOOD", attacker);
-        }
       }
     }
     if(!level.teambased || victim.team != attacker.team) {
@@ -191,11 +178,10 @@ medal_kills(data, time) {
         attacker processMedal("MEDAL_BUZZ_KILL", data.sWeapon);
       }
       if(is_weapon_valid(data.sMeansOfDeath, data.sWeapon)) {
-        if(isDefined(victim.vAttackerOrigin)) {
+        if(isDefined(victim.vAttackerOrigin))
           attackerOrigin = victim.vAttackerOrigin;
-        } else {
+        else
           attackerOrigin = attacker.origin;
-        }
         distToVictim = distanceSquared(victim.origin, attackerOrigin);
         weap_min_dmg_range = get_distance_for_weapon(data.sWeapon);
         if(weap_min_dmg_range > 0 && distToVictim > weap_min_dmg_range * weap_min_dmg_range) {
@@ -260,15 +246,14 @@ setLastKilledBy(attacker) {
 }
 is_weapon_valid(meansOfDeath, weapon) {
   valid_weapon = false;
-  if(weapon == "minigun_mp") {
+  if(weapon == "minigun_mp")
     valid_weapon = false;
-  } else if(meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_RIFLE_BULLET") {
+  else if(meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_RIFLE_BULLET")
     valid_weapon = true;
-  } else if(meansOfDeath == "MOD_HEAD_SHOT") {
+  else if(meansOfDeath == "MOD_HEAD_SHOT")
     valid_weapon = true;
-  } else if(get_distance_for_weapon(weapon)) {
+  else if(get_distance_for_weapon(weapon))
     valid_weapon = true;
-  }
   return valid_weapon;
 }
 updatemultikills(weapon) {
@@ -276,32 +261,27 @@ updatemultikills(weapon) {
   level endon("game_ended");
   self notify("updateRecentKills");
   self endon("updateRecentKills");
-  if(!isDefined(self.recentKillCount)) {
+  if(!isDefined(self.recentKillCount))
     self.recentKillCount = 0;
-  }
   self.recentKillCount++;
-  if(!isDefined(self.recentGrenadeKillCount)) {
+  if(!isDefined(self.recentGrenadeKillCount))
     self.recentGrenadeKillCount = 0;
-  }
   if(isDefined(weapon)) {
-    if(weapon == "frag_grenade_mp" || weapon == "sticky_grenade_mp") {
+    if(weapon == "frag_grenade_mp" || weapon == "sticky_grenade_mp")
       self.recentGrenadeKillCount++;
-    }
   }
   wait(1.0);
-  if(self.recentGrenadeKillCount > 1) {
+  if(self.recentGrenadeKillCount > 1)
     self maps\mp\_properks::multiGrenadeKill();
-  }
-  if(self.recentKillCount > 1) {
+  if(self.recentKillCount > 1)
     self multiKill(self.recentKillCount, weapon);
-  }
   self.recentKillCount = 0;
   self.recentGrenadeKillCount = 0;
 }
 hijackCrate() {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill("hijacked crate");
     self processMedal("MEDAL_HIJACKER");
   }
@@ -309,7 +289,7 @@ hijackCrate() {
 hijackTeamCrate() {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill("team crate hijacked", crateType);
     level.globalSharePackages++;
     if(isDefined(crateType.shareStat)) {
@@ -374,14 +354,12 @@ get_distance_for_weapon(weapon) {
       distance = 650;
       break;
     case "knife":
-      if(weap_tokens[1] == "ballistic") {
+      if(weap_tokens[1] == "ballistic")
         distance = 500;
-      }
       break;
     case "crossbow":
-      if(weap_tokens[1] == "explosive") {
+      if(weap_tokens[1] == "explosive")
         distance = 1500;
-      }
       break;
     case "hatchet":
       distance = 500;
@@ -477,9 +455,8 @@ assistAircraftTakedown(weapon) {
 }
 processMedal(medalName, weapon, allowKillstreakWeapon) {
   if((isDefined(weapon)) && (!isDefined(allowKillstreakWeapon) || allowKillstreakWeapon == false)) {
-    if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(weapon)) {
+    if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(weapon))
       return;
-    }
   }
   self thread giveMedal(medalName, weapon);
   if(maps\mp\_challenges::canProcessChallenges()) {

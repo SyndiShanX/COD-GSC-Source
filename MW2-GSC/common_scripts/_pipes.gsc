@@ -17,11 +17,10 @@ level_pipe_fx_chance = 33;
 //////////////////////////////////////////////////////////////////////////////
 main() {
   level._pipe_fx_time = 25;
-  pipes = getEntArray("pipe_shootable", "targetname");
-  if(!pipes.size) {
+  pipes = GetEntArray("pipe_shootable", "targetname");
+  if(!pipes.size)
     return;
-  }
-  level._pipes = spawnStruct();
+  level._pipes = SpawnStruct();
   level._pipes.num_pipe_fx = 0;
 
   pipes thread precacheFX();
@@ -32,20 +31,20 @@ main() {
 }
 
 pipesetup() {
-  self setCanDamage(true);
-  self setCanRadiusDamage(false); // optimization
+  self SetCanDamage(true);
+  self SetCanRadiusDamage(false); // optimization
   self.pipe_fx_array = [];
 
   node = undefined;
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     node = getstruct(self.target, "targetname");
     self.A = node.origin;
-    vec = anglesToForward(node.angles);
+    vec = AnglesToForward(node.angles);
     vec = vector_multiply(vec, 128);
     self.B = self.A + vec;
   } else {
-    vec = anglesToForward(self.angles);
+    vec = AnglesToForward(self.angles);
     vec1 = vector_multiply(vec, 64);
     self.A = self.origin + vec1;
     vec1 = vector_multiply(vec, -64);
@@ -61,53 +60,45 @@ pipe_wait_loop() {
   hasTakenDamage = false;
   remaining = max_fires_from_entity;
 
-  while(1) {
+  while (1) {
     self waittill("damage", damage, other, direction_vec, P, type);
 
     // random so we don't get so many fx, but the very first time is guarenteed
     if(hasTakenDamage) {
-      if(randomint(100) <= level_pipe_fx_chance) {
+      if(randomint(100) <= level_pipe_fx_chance)
         continue;
-      }
     }
     hasTakenDamage = true;
 
     result = self pipe_logic(direction_vec, P, type, other);
-    if(result) {
+    if(result)
       remaining--;
-    }
 
-    if(remaining <= 0) {
+    if(remaining <= 0)
       break;
-    }
   }
 
-  self setCanDamage(false);
+  self SetCanDamage(false);
 }
 
 pipe_logic(direction_vec, P, type, damageOwner) {
-  if(level._pipes.num_pipe_fx > level_limit_pipe_fx) {
+  if(level._pipes.num_pipe_fx > level_limit_pipe_fx)
     return false;
-  }
 
-  if(!isDefined(level._pipes._pipe_methods[type])) {
+  if(!isDefined(level._pipes._pipe_methods[type]))
     P = self pipe_calc_nofx(P, type);
-  } else {
+  else
     P = self[[level._pipes._pipe_methods[type]]](P, type);
-  }
 
-  if(!isDefined(P)) {
+  if(!isdefined(P))
     return false;
-  }
 
-  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn") {
+  if(IsDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
     return false;
-  }
 
   foreach(value in self.pipe_fx_array) {
-    if(DistanceSquared(P, value.origin) < 25) {
+    if(DistanceSquared(P, value.origin) < 25)
       return false;
-    }
   }
 
   //calculate the vector derived from the center line of our pipe and the point of damage
@@ -123,30 +114,29 @@ pipefx(P, vec, damageOwner) {
   loopsnd = level._pipes._sound[self.script_noteworthy + "_loop"];
   endsnd = level._pipes._sound[self.script_noteworthy + "_end"];
 
-  snd = spawn("script_origin", P);
+  snd = Spawn("script_origin", P);
   snd Hide();
-  snd playSound(hitsnd);
-  snd playLoopSound(loopsnd);
+  snd PlaySound(hitsnd);
+  snd PlayLoopSound(loopsnd);
   self.pipe_fx_array[self.pipe_fx_array.size] = snd;
 
   level._pipes.num_pipe_fx++;
 
-  if(isSP() || self.script_noteworthy != "steam") {
+  if(isSP() || self.script_noteworthy != "steam")
     self thread pipe_damage(P, vec, damageOwner, snd);
-  }
 
   //do it once without checking for newer fx being played ( we're the newest )
-  playFX(level._pipes._effect[self.script_noteworthy], P, vec);
+  PlayFX(level._pipes._effect[self.script_noteworthy], P, vec);
   wait time;
   intervals--;
 
   //now check	for other fx and rest of intervals
-  while(level._pipes.num_pipe_fx <= level_limit_pipe_fx && intervals > 0) {
-    playFX(level._pipes._effect[self.script_noteworthy], P, vec);
+  while (level._pipes.num_pipe_fx <= level_limit_pipe_fx && intervals > 0) {
+    PlayFX(level._pipes._effect[self.script_noteworthy], P, vec);
     wait time;
     intervals--;
   }
-  snd playSound(endsnd);
+  snd PlaySound(endsnd);
   wait(.5);
   snd StopLoopSound(loopsnd);
   snd Delete();
@@ -156,18 +146,17 @@ pipefx(P, vec, damageOwner) {
 }
 
 pipe_damage(P, vec, damageOwner, fx) {
-  if(!allow_pipe_damage()) {
+  if(!allow_pipe_damage())
     return;
-  }
 
   fx endon("death");
 
   origin = fx.origin + vector_multiply(VectorNormalize(vec), 40);
   dmg = level._pipes._dmg[self.script_noteworthy];
 
-  while(1) {
+  while (1) {
     // do not pass damage owner if they have disconnected before the barrels explode.. the barrels?
-    if(!isDefined(self.damageOwner)) {
+    if(!isdefined(self.damageOwner)) {
       // MOD_TRIGGER_HURT so they dont do dirt on the player's screen
       self RadiusDamage(origin, 36, dmg, dmg * 0.75, undefined, "MOD_TRIGGER_HURT");
     } else {
@@ -180,13 +169,11 @@ pipe_damage(P, vec, damageOwner, fx) {
 }
 
 allow_pipe_damage() {
-  if(!isSP()) {
+  if(!isSP())
     return false;
-  }
 
-  if(!isDefined(level.pipesDamage)) {
+  if(!isDefined(level.pipesDamage))
     return true;
-  }
 
   return (level.pipesDamage);
 }
@@ -227,9 +214,8 @@ precacheFX() {
   steam = false;
   fire = false;
   foreach(value in self) {
-    if(value.script_noteworthy == "water") {
+    if(value.script_noteworthy == "water")
       value.script_noteworthy = "steam";
-    }
 
     if(value.script_noteworthy == "steam") {
       value willNeverChange();

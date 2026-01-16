@@ -60,9 +60,8 @@ checklocation() {
 playanimation(var_0, var_1, var_2, var_3) {
   self.startanimtime = gettime();
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = "end";
-  }
 
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);

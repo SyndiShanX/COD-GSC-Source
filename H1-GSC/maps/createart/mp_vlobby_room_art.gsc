@@ -7,11 +7,10 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr()) {
+  if(isusinghdr())
     maps\createart\mp_vlobby_room_fog_hdr::main();
-  } else {
+  else
     maps\createart\mp_vlobby_room_fog::main();
-  }
 
   visionsetnaked("mp_vlobby_room", 0);
 }

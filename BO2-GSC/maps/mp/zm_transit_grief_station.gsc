@@ -28,14 +28,13 @@ main() {
   station_treasure_chest_init();
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (-6896, 4744, 0), 1);
-  collision setModel("zm_collision_transit_busdepot_survival");
+  collision setmodel("zm_collision_transit_busdepot_survival");
   collision disconnectpaths();
   flag_wait("initial_blackscreen_passed");
   nodes = getnodearray("classic_only_traversal", "targetname");
 
-  foreach(node in nodes) {
-    unlink_nodes(node, getnode(node.target, "targetname"));
-  }
+  foreach(node in nodes)
+  unlink_nodes(node, getnode(node.target, "targetname"));
 
   level thread maps\mp\zombies\_zm_perks::perk_machine_removal("specialty_quickrevive", "p_glo_tools_chest_tall");
   maps\mp\zombies\_zm_game_module::turn_power_on_and_open_doors();
@@ -47,9 +46,8 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin)) {
+    if(isDefined(self.reroute_origin))
       location = self.reroute_origin;
-    }
   }
 
   return location;

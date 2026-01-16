@@ -308,7 +308,7 @@ spawn_vo() {
 
 spawn_vo_player(index, num) {
   sound = "plr_" + index + "_vox_" + num + "play";
-  self playSound(sound, "sound_done");
+  self playsound(sound, "sound_done");
   self waittill("sound_done");
 }
 
@@ -371,49 +371,49 @@ init_strings() {
   PrecacheString(&"ZOMBIE_SURVIVED_ROUNDS");
   PrecacheString(&"ZOMBIE_SURVIVED_NOMANS");
   PrecacheString(&"ZOMBIE_EXTRA_LIFE");
-  add_zombie_hint("undefined", &"ZOMBIE_UNDEFINED");
-  add_zombie_hint("default_treasure_chest_950", &"ZOMBIE_RANDOM_WEAPON_950");
-  add_zombie_hint("default_buy_barrier_piece_10", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
-  add_zombie_hint("default_buy_barrier_piece_20", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
-  add_zombie_hint("default_buy_barrier_piece_50", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
-  add_zombie_hint("default_buy_barrier_piece_100", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
-  add_zombie_hint("default_reward_barrier_piece", &"ZOMBIE_BUTTON_REWARD_BARRIER");
-  add_zombie_hint("default_reward_barrier_piece_10", &"ZOMBIE_BUTTON_REWARD_BARRIER_10");
-  add_zombie_hint("default_reward_barrier_piece_20", &"ZOMBIE_BUTTON_REWARD_BARRIER_20");
-  add_zombie_hint("default_reward_barrier_piece_30", &"ZOMBIE_BUTTON_REWARD_BARRIER_30");
-  add_zombie_hint("default_reward_barrier_piece_40", &"ZOMBIE_BUTTON_REWARD_BARRIER_40");
-  add_zombie_hint("default_reward_barrier_piece_50", &"ZOMBIE_BUTTON_REWARD_BARRIER_50");
-  add_zombie_hint("default_buy_debris_100", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_100");
-  add_zombie_hint("default_buy_debris_200", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_200");
-  add_zombie_hint("default_buy_debris_250", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_250");
-  add_zombie_hint("default_buy_debris_500", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_500");
-  add_zombie_hint("default_buy_debris_750", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_750");
-  add_zombie_hint("default_buy_debris_1000", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1000");
-  add_zombie_hint("default_buy_debris_1250", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1250");
-  add_zombie_hint("default_buy_debris_1500", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1500");
-  add_zombie_hint("default_buy_debris_1750", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1750");
-  add_zombie_hint("default_buy_debris_2000", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_2000");
-  add_zombie_hint("default_buy_door_100", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_100");
-  add_zombie_hint("default_buy_door_200", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_200");
-  add_zombie_hint("default_buy_door_250", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_250");
-  add_zombie_hint("default_buy_door_500", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_500");
-  add_zombie_hint("default_buy_door_750", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_750");
-  add_zombie_hint("default_buy_door_1000", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1000");
-  add_zombie_hint("default_buy_door_1250", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1250");
-  add_zombie_hint("default_buy_door_1500", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1500");
-  add_zombie_hint("default_buy_door_1750", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1750");
-  add_zombie_hint("default_buy_door_2000", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_2000");
-  add_zombie_hint("default_buy_area_100", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_100");
-  add_zombie_hint("default_buy_area_200", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_200");
-  add_zombie_hint("default_buy_area_250", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_250");
-  add_zombie_hint("default_buy_area_500", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_500");
-  add_zombie_hint("default_buy_area_750", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_750");
-  add_zombie_hint("default_buy_area_1000", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1000");
-  add_zombie_hint("default_buy_area_1250", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1250");
-  add_zombie_hint("default_buy_area_1500", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1500");
-  add_zombie_hint("default_buy_area_1750", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1750");
-  add_zombie_hint("default_buy_area_2000", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_2000");
-  add_zombie_hint("powerup_fire_sale_cost", &"ZOMBIE_FIRE_SALE_COST");
+  add_zombie_hint("undefined", & "ZOMBIE_UNDEFINED");
+  add_zombie_hint("default_treasure_chest_950", & "ZOMBIE_RANDOM_WEAPON_950");
+  add_zombie_hint("default_buy_barrier_piece_10", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
+  add_zombie_hint("default_buy_barrier_piece_20", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
+  add_zombie_hint("default_buy_barrier_piece_50", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
+  add_zombie_hint("default_buy_barrier_piece_100", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
+  add_zombie_hint("default_reward_barrier_piece", & "ZOMBIE_BUTTON_REWARD_BARRIER");
+  add_zombie_hint("default_reward_barrier_piece_10", & "ZOMBIE_BUTTON_REWARD_BARRIER_10");
+  add_zombie_hint("default_reward_barrier_piece_20", & "ZOMBIE_BUTTON_REWARD_BARRIER_20");
+  add_zombie_hint("default_reward_barrier_piece_30", & "ZOMBIE_BUTTON_REWARD_BARRIER_30");
+  add_zombie_hint("default_reward_barrier_piece_40", & "ZOMBIE_BUTTON_REWARD_BARRIER_40");
+  add_zombie_hint("default_reward_barrier_piece_50", & "ZOMBIE_BUTTON_REWARD_BARRIER_50");
+  add_zombie_hint("default_buy_debris_100", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_100");
+  add_zombie_hint("default_buy_debris_200", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_200");
+  add_zombie_hint("default_buy_debris_250", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_250");
+  add_zombie_hint("default_buy_debris_500", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_500");
+  add_zombie_hint("default_buy_debris_750", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_750");
+  add_zombie_hint("default_buy_debris_1000", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1000");
+  add_zombie_hint("default_buy_debris_1250", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1250");
+  add_zombie_hint("default_buy_debris_1500", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1500");
+  add_zombie_hint("default_buy_debris_1750", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1750");
+  add_zombie_hint("default_buy_debris_2000", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_2000");
+  add_zombie_hint("default_buy_door_100", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_100");
+  add_zombie_hint("default_buy_door_200", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_200");
+  add_zombie_hint("default_buy_door_250", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_250");
+  add_zombie_hint("default_buy_door_500", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_500");
+  add_zombie_hint("default_buy_door_750", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_750");
+  add_zombie_hint("default_buy_door_1000", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1000");
+  add_zombie_hint("default_buy_door_1250", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1250");
+  add_zombie_hint("default_buy_door_1500", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1500");
+  add_zombie_hint("default_buy_door_1750", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1750");
+  add_zombie_hint("default_buy_door_2000", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_2000");
+  add_zombie_hint("default_buy_area_100", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_100");
+  add_zombie_hint("default_buy_area_200", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_200");
+  add_zombie_hint("default_buy_area_250", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_250");
+  add_zombie_hint("default_buy_area_500", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_500");
+  add_zombie_hint("default_buy_area_750", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_750");
+  add_zombie_hint("default_buy_area_1000", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1000");
+  add_zombie_hint("default_buy_area_1250", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1250");
+  add_zombie_hint("default_buy_area_1500", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1500");
+  add_zombie_hint("default_buy_area_1750", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1750");
+  add_zombie_hint("default_buy_area_2000", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_2000");
+  add_zombie_hint("powerup_fire_sale_cost", & "ZOMBIE_FIRE_SALE_COST");
 }
 
 init_sounds() {
@@ -760,7 +760,9 @@ init_standard_zombie_anims() {
   level._zombie_run_melee["zombie"][1] = % ai_zombie_run_attack_v2;
   level._zombie_run_melee["zombie"][2] = % ai_zombie_run_attack_v3;
   if(isDefined(level.zombie_anim_override)) {
-    [[level.zombie_anim_override]]();
+    [
+      [level.zombie_anim_override]
+    ]();
   }
   level._zombie_walk_melee["zombie"][0] = % ai_zombie_walk_attack_v1;
   level._zombie_walk_melee["zombie"][1] = % ai_zombie_walk_attack_v2;
@@ -1106,7 +1108,7 @@ spawn_life_brush(origin, radius, height) {
 }
 
 in_life_brush() {
-  life_brushes = getEntArray("life_brush", "script_noteworthy");
+  life_brushes = getentarray("life_brush", "script_noteworthy");
   if(!isDefined(life_brushes)) {
     return false;
   }
@@ -1125,7 +1127,7 @@ spawn_kill_brush(origin, radius, height) {
 }
 
 in_kill_brush() {
-  kill_brushes = getEntArray("kill_brush", "script_noteworthy");
+  kill_brushes = getentarray("kill_brush", "script_noteworthy");
   if(!isDefined(kill_brushes)) {
     return false;
   }
@@ -1138,7 +1140,7 @@ in_kill_brush() {
 }
 
 in_enabled_playable_area() {
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   if(!isDefined(playable_area)) {
     return false;
   }
@@ -1592,7 +1594,7 @@ last_stand_best_pistol() {
         }
       }
       pistol_array_index = pistol_array.size;
-      pistol_array[pistol_array_index] = spawnStruct();
+      pistol_array[pistol_array_index] = SpawnStruct();
       pistol_array[pistol_array_index].gun = current_weapons[i];
       pistol_array[pistol_array_index].value = 0;
       for(j = 0; j < level.pistol_values.size; j++) {
@@ -1645,7 +1647,7 @@ last_stand_save_pistol_ammo() {
   for(i = 0; i < weapon_inventory.size; i++) {
     weapon = weapon_inventory[i];
     if(WeaponClass(weapon) == "pistol") {
-      self.stored_weapon_info[weapon] = spawnStruct();
+      self.stored_weapon_info[weapon] = SpawnStruct();
       self.stored_weapon_info[weapon].clip_amt = self GetWeaponAmmoClip(weapon);
       self.stored_weapon_info[weapon].left_clip_amt = 0;
       dual_wield_name = WeaponDualWieldWeaponName(weapon);
@@ -1757,7 +1759,9 @@ spectators_respawn() {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "spectator") {
-        players[i][[level.spawnPlayer]]();
+        players[i][
+          [level.spawnPlayer]
+        ]();
         if(isDefined(level.script) && level.round_number > 6 && players[i].score < 1500) {
           players[i].old_score = players[i].score;
           players[i].score = 1500;
@@ -1777,7 +1781,9 @@ spectator_respawn() {
   self setSpectatePermissions(false);
   new_origin = undefined;
   if(isDefined(level.check_valid_spawn_override)) {
-    new_origin = [[level.check_valid_spawn_override]](self);
+    new_origin = [
+      [level.check_valid_spawn_override]
+    ](self);
   }
   if(!isDefined(new_origin)) {
     new_origin = check_for_valid_spawn_near_team(self);
@@ -1825,7 +1831,7 @@ spectator_respawn() {
       }
     }
   }
-  claymore_triggers = getEntArray("claymore_purchase", "targetname");
+  claymore_triggers = getentarray("claymore_purchase", "targetname");
   for(i = 0; i < claymore_triggers.size; i++) {
     claymore_triggers[i] SetVisibleToPlayer(self);
     claymore_triggers[i].claymores_triggered = false;
@@ -1841,17 +1847,15 @@ check_for_valid_spawn_near_team(revivee) {
   closest_distance = 100000000;
   backup_group = undefined;
   backup_distance = 100000000;
-  if(spawn_points.size == 0) {
+  if(spawn_points.size == 0)
     return undefined;
-  }
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
       for(j = 0; j < spawn_points.size; j++) {
-        if(isDefined(spawn_points[i].script_int)) {
+        if(isDefined(spawn_points[i].script_int))
           ideal_distance = spawn_points[i].script_int;
-        } else {
+        else
           ideal_distance = 1000;
-        }
         if(spawn_points[j].locked == false) {
           distance = distanceSquared(players[i].origin, spawn_points[j].origin);
           if(distance < (ideal_distance * ideal_distance)) {
@@ -1971,7 +1975,9 @@ round_spawning() {
     level.max_zombie_func = ::default_max_zombie_func;
   }
   if(!(isDefined(level.kill_counter_hud) && level.zombie_total > 0)) {
-    level.zombie_total = [[level.max_zombie_func]](max);
+    level.zombie_total = [
+      [level.max_zombie_func]
+    ](max);
   }
   if(isDefined(level.zombie_total_set_func)) {
     level thread[[level.zombie_total_set_func]]();
@@ -2118,7 +2124,9 @@ round_pause(delay) {
 
 round_start() {
   if(isDefined(level.round_prestart_func)) {
-    [[level.round_prestart_func]]();
+    [
+      [level.round_prestart_func]
+    ]();
   } else {
     wait(2);
   }
@@ -2206,7 +2214,7 @@ play_door_dialog() {
         timer++;
       }
       if(dist > 70 * 70 && timer >= 3) {
-        self playSound("door_deny");
+        self playsound("door_deny");
         players[i] maps\_zombiemode_audio::create_and_play_dialog("general", "door_deny");
         wait(3);
         self notify("warning_dialog");
@@ -2384,9 +2392,8 @@ chalk_round_over() {
 round_think() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500) {
+    if(maxreward > 500)
       maxreward = 500;
-    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.pro_tips_start_time = GetTime();
     level.zombie_last_run_time = GetTime();
@@ -2400,7 +2407,9 @@ round_think() {
     level.round_start_time = GetTime();
     level thread[[level.round_spawn_func]]();
     level notify("start_of_round");
-    [[level.round_wait_func]]();
+    [
+      [level.round_wait_func]
+    ]();
     level.first_round = false;
     level notify("end_of_round");
     level thread maps\_zombiemode_audio::change_zombie_music("round_end");
@@ -2464,9 +2473,8 @@ round_spawn_failsafe() {
     }
     wait(30);
     if(isDefined(self.lastchunk_destroy_time)) {
-      if((GetTime() - self.lastchunk_destroy_time) < 8000) {
+      if((GetTime() - self.lastchunk_destroy_time) < 8000)
         continue;
-      }
     }
     if(self.origin[2] < level.zombie_vars["below_world_check"]) {
       if(is_true(level.put_timed_out_zombies_back_in_queue) && !flag("dog_round")) {
@@ -2796,14 +2804,14 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     }
     eAttacker notify("hit_player");
     if(is_true(eattacker.is_zombie) && eattacker.animname == "director_zombie") {
-      self playSound("zmb_director_light_hit");
+      self PlaySound("zmb_director_light_hit");
       if(RandomIntRange(0, 1) == 0) {
         self thread maps\_zombiemode_audio::create_and_play_dialog("general", "hitmed");
       } else {
         self thread maps\_zombiemode_audio::create_and_play_dialog("general", "hitlrg");
       }
     } else if(sMeansOfDeath != "MOD_FALLING") {
-      self playSound("evt_player_swiped");
+      self PlaySound("evt_player_swiped");
       if(RandomIntRange(0, 1) == 0) {
         self thread maps\_zombiemode_audio::create_and_play_dialog("general", "hitmed");
       } else {
@@ -2821,7 +2829,9 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   if(sMeansOfDeath == "MOD_FALLING") {
     if(self HasPerk("specialty_flakjacket") && isDefined(self.divetoprone) && self.divetoprone == 1) {
       if(isDefined(level.zombiemode_divetonuke_perk_func)) {
-        [[level.zombiemode_divetonuke_perk_func]](self, self.origin);
+        [
+          [level.zombiemode_divetonuke_perk_func]
+        ](self, self.origin);
       }
       return 0;
     }
@@ -2949,35 +2959,33 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
       return 0;
     }
   }
-  if(!isDefined(self) || !isDefined(attacker)) {
+  if(!isDefined(self) || !isDefined(attacker))
     return damage;
-  }
   if(!isplayer(attacker) && isDefined(self.non_attacker_func)) {
     override_damage = self[[self.non_attacker_func]](damage, weapon);
-    if(override_damage) {
+    if(override_damage)
       return override_damage;
-    }
   }
-  if(!isplayer(attacker) && !isplayer(self)) {
+  if(!isplayer(attacker) && !isplayer(self))
     return damage;
-  }
-  if(!isDefined(damage) || !isDefined(meansofdeath)) {
+  if(!isDefined(damage) || !isDefined(meansofdeath))
     return damage;
-  }
-  if(meansofdeath == "") {
+  if(meansofdeath == "")
     return damage;
-  }
   old_damage = damage;
   final_damage = damage;
   if(isDefined(self.actor_damage_func)) {
-    final_damage = [[self.actor_damage_func]](weapon, old_damage, attacker);
+    final_damage = [
+      [self.actor_damage_func]
+    ](weapon, old_damage, attacker);
   }
   if(isDefined(self.actor_full_damage_func)) {
-    final_damage = [[self.actor_full_damage_func]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime);
+    final_damage = [
+      [self.actor_full_damage_func]
+    ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime);
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
     attacker = attacker.owner;
-  }
   if(!isDefined(self.damage_assists)) {
     self.damage_assists = [];
   }
@@ -3003,17 +3011,14 @@ is_headshot(sWeapon, sHitLoc, sMeansOfDeath) {
 }
 
 actor_killed_override(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime) {
-  if(game["state"] == "postgame") {
+  if(game["state"] == "postgame")
     return;
-  }
   if(isai(attacker) && isDefined(attacker.script_owner)) {
-    if(attacker.script_owner.team != self.aiteam) {
+    if(attacker.script_owner.team != self.aiteam)
       attacker = attacker.script_owner;
-    }
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
     attacker = attacker.owner;
-  }
   if(IsPlayer(level.monkey_bolt_holder) && sMeansOfDeath == "MOD_GRENADE_SPLASH" &&
     (sWeapon == "crossbow_explosive_upgraded_zm" || sWeapon == "explosive_bolt_upgraded_zm")) {
     level._bolt_on_back = level._bolt_on_back + 1;
@@ -3053,12 +3058,10 @@ process_assist(type, attacker) {
   if(isDefined(self.damage_assists)) {
     for(j = 0; j < self.damage_assists.size; j++) {
       player = self.damage_assists[j];
-      if(!isDefined(player)) {
+      if(!isDefined(player))
         continue;
-      }
-      if(player == attacker) {
+      if(player == attacker)
         continue;
-      }
     }
     self.damage_assists = undefined;
   }
@@ -3289,7 +3292,7 @@ adjust_angles_to_player(stumble_angles) {
   pa = stumble_angles[0];
   ra = stumble_angles[2];
   rv = AnglesToRight(self.angles);
-  fv = anglesToForward(self.angles);
+  fv = AnglesToForward(self.angles);
   rva = (rv[0], 0, rv[1] * -1);
   fva = (fv[0], 0, fv[1] * -1);
   angles = vector_scale(rva, pa);
@@ -3332,7 +3335,7 @@ player_zombie_breadcrumb() {
     airborne = false;
     crumb = self.origin;
     if(!self IsOnGround() && self isinvehicle()) {
-      trace = bulletTrace(self.origin + (0, 0, 10), self.origin, false, undefined);
+      trace = bullettrace(self.origin + (0, 0, 10), self.origin, false, undefined);
       crumb = trace["position"];
     }
     if(!airborne && distanceSquared(crumb, last_crumb) < self.zombie_breadcrumb_distance) {
@@ -3410,9 +3413,8 @@ to_mins(seconds) {
 
 nazizombies_upload_solo_highscore() {
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "kills")) {
+  if(!isZombieLeaderboardAvailable(map_name, "kills"))
     return;
-  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(map_name == "zombie_moon") {
@@ -3450,39 +3452,34 @@ nazizombies_upload_solo_highscore() {
 
 makeNMLRankNumberSolo(total_kills, total_score) {
   maximum_survival_time = 108000;
-  if(total_kills > 2000) {
+  if(total_kills > 2000)
     total_kills = 2000;
-  }
-  if(total_score > 99999) {
+  if(total_score > 99999)
     total_score = 99999;
-  }
   score_padding = "";
-  if(total_score < 10) {
+  if(total_score < 10)
     score_padding += "0000";
-  } else if(total_score < 100) {
+  else if(total_score < 100)
     score_padding += "000";
-  } else if(total_score < 1000) {
+  else if(total_score < 1000)
     score_padding += "00";
-  } else if(total_score < 10000) {
+  else if(total_score < 10000)
     score_padding += "0";
-  }
   rankNumber = total_kills + score_padding + total_score;
   return rankNumber;
 }
 
 nazizombies_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1) {
+  if(level.players_playing == 1)
     playersRank = 4;
-  } else if(level.players_playing == 2) {
+  else if(level.players_playing == 2)
     playersRank = 3;
-  } else if(level.players_playing == 3) {
+  else if(level.players_playing == 3)
     playersRank = 2;
-  }
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
+  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points"))
     return;
-  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
@@ -3513,26 +3510,22 @@ nazizombies_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map]))
     return 0;
-  }
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     return 0;
-  }
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
-  }
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
     assertMsg("Unknown stat variable " + variable + " for map " + map);
-  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
 
@@ -3570,19 +3563,17 @@ nazizombies_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400) {
+  if(time > 86400)
     time = 86400;
-  }
   padding = "";
-  if(10 > time) {
+  if(10 > time)
     padding += "0000";
-  } else if(100 > time) {
+  else if(100 > time)
     padding += "000";
-  } else if(1000 > time) {
+  else if(1000 > time)
     padding += "00";
-  } else if(10000 > time) {
+  else if(10000 > time)
     padding += "0";
-  }
   rank = wave + "" + players + padding + time;
   return rank;
 }
@@ -3667,7 +3658,7 @@ player_intermission() {
   self.friendlydamage = undefined;
   points = getstructarray("intermission", "targetname");
   if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+    points = getentarray("info_intermission", "classname");
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
       return;

@@ -6,20 +6,18 @@
 #include common_scripts\utility;
 
 main() {
-  treebursts = getEntArray("treeburst", "script_noteworthy");
-  for(i = 0; i < treebursts.size; i++) {
+  treebursts = getentarray("treeburst", "script_noteworthy");
+  for (i = 0; i < treebursts.size; i++)
     treebursts[i] thread treeburst();
-  }
 }
 
 treeburst() {
   self waittill("treeburst");
 
-  if(isDefined(self.script_falldirection)) {
+  if(isdefined(self.script_falldirection))
     yaw = self.script_falldirection;
-  } else {
+  else
     yaw = randomint(360);
-  }
 
   break_angles = (self.angles[0], yaw, self.angles[2]);
   break_vector = anglesToForward(break_angles);
@@ -45,7 +43,7 @@ treeburst() {
   count = 0;
   lastcount = count;
 
-  while(travelled < dist) {
+  while (travelled < dist) {
     //velocity = velocity + 385.8267717;
     velocity = velocity + 340;
 
@@ -57,9 +55,8 @@ treeburst() {
   }
 
   remainder = lasttravelled - dist;
-  if(remainder < 0) {
+  if(remainder < 0)
     remainder = remainder * -1;
-  }
 
   time = lastcount + (remainder / velocity);
 
@@ -110,19 +107,18 @@ treeburst() {
 }
 
 drawline(start, end, color, alpha) {
-  while(1) {
+  while (1) {
     line(start, end, color, alpha);
     wait .05;
   }
 }
 
 draworigin(origin, color, alpha) {
-  if(!isDefined(alpha)) {
+  if(!isdefined(alpha))
     alpha = 1;
-  }
 
-  if(isDefined(color)) {
-    while(1) {
+  if(isdefined(color)) {
+    while (1) {
       line(origin + (16, 0, 0), origin + (-16, 0, 0), color, alpha);
       line(origin + (0, 16, 0), origin + (0, -16, 0), color, alpha);
       line(origin + (0, 0, 16), origin + (0, 0, -16), color, alpha);
@@ -130,7 +126,7 @@ draworigin(origin, color, alpha) {
       wait .05;
     }
   } else {
-    while(1) {
+    while (1) {
       red = (1, 0, 0);
       green = (0, 1, 0);
       blue = (0, 0, 1);

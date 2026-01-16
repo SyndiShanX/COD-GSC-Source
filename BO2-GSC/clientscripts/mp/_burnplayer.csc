@@ -5,14 +5,14 @@
 
 #include clientscripts\mp\_utility;
 
-initflamefx() {}
+initflamefx() {
+}
 
 corpseflamefx(localclientnum) {
   self waittill_dobj(localclientnum);
 
-  if(!isDefined(level._effect["character_fire_death_torso"])) {
+  if(!isDefined(level._effect["character_fire_death_torso"]))
     initflamefx();
-  }
 
   tagarray = [];
   tagarray[tagarray.size] = "J_Wrist_RI";
@@ -25,10 +25,9 @@ corpseflamefx(localclientnum) {
   tagarray[tagarray.size] = "J_Ankle_LE";
 
   if(isDefined(level._effect["character_fire_death_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
   }
 
-  playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  playfxontag(localclientnum, level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }

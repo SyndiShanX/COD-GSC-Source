@@ -79,34 +79,31 @@ start_player_apache_engine_audio() {
 adjust_overall_apache_pitches() {
   self.overall_pitch_roll_modifier = 1.0 - abs(self.audio_speed) / 115.0 * (abs(self.audio_roll) / 35.0) * self.overall_pitch_roll_modifier_max;
 
-  if(abs(self.audio_speed) < self.highspeed_end_crossfade) {
+  if(abs(self.audio_speed) < self.highspeed_end_crossfade)
     self.overall_pitch = self.overall_pitch_roll_modifier * (abs(self.audio_speed) / self.highspeed_end_crossfade * (self.overall_pitch_max - self.overall_pitch_min) + self.overall_pitch_min);
-  } else {
+  else
     self.overall_pitch = self.overall_pitch_max * self.overall_pitch_roll_modifier;
-  }
 }
 
 adjust_helo_sound_low() {
-  if(abs(self.audio_speed) <= self.lowspeed_start_crossfade) {
+  if(abs(self.audio_speed) <= self.lowspeed_start_crossfade)
     self.low_speed_mult = self.roll_other_mult * 1.0;
-  } else if(abs(self.audio_speed) < self.lowspeed_end_crossfade) {
+  else if(abs(self.audio_speed) < self.lowspeed_end_crossfade)
     self.low_speed_mult = self.roll_other_mult * (1.0 - (abs(self.audio_speed) - self.lowspeed_start_crossfade) / (self.lowspeed_end_crossfade - self.lowspeed_start_crossfade));
-  } else {
+  else
     self.low_speed_mult = 0.005;
-  }
 
   self.audio_entities["low_front"] scalepitch(self.overall_pitch, 0.1);
   self.audio_entities["low_front"] scalevolume(self.low_speed_mult, 0.1);
 }
 
 adjust_helo_sound_high() {
-  if(abs(self.audio_speed) >= self.highspeed_end_crossfade) {
+  if(abs(self.audio_speed) >= self.highspeed_end_crossfade)
     self.high_speed_mult = self.roll_other_mult * 1.0;
-  } else if(abs(self.audio_speed) > self.highspeed_start_crossfade) {
+  else if(abs(self.audio_speed) > self.highspeed_start_crossfade)
     self.high_speed_mult = self.roll_other_mult * (1.0 - (self.highspeed_end_crossfade - abs(self.audio_speed)) / (self.highspeed_end_crossfade - self.highspeed_start_crossfade));
-  } else {
+  else
     self.high_speed_mult = 0.005;
-  }
 
   self.audio_entities["high_front"] scalepitch(self.overall_pitch, 0.1);
   self.audio_entities["high_front"] scalevolume(self.high_speed_mult, 0.1);

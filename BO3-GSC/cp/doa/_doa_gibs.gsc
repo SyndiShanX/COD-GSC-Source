@@ -33,19 +33,19 @@ function init() {
 }
 
 function function_ddf685e8(launchvector, attacker) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(!isactor(self)) {
     return;
   }
-  if(isDefined(self.boss) && self.boss) {
+  if(isdefined(self.boss) && self.boss) {
     return;
   }
   gibserverutils::giblegs(self);
   self.becomecrawler = 1;
   self clientfield::set("zombie_saw_explosion", 1);
-  assert(!(isDefined(self.boss) && self.boss));
+  assert(!(isdefined(self.boss) && self.boss));
   self thread doa_utility::function_e3c30240(launchvector, undefined, undefined, attacker);
 }
 
@@ -54,16 +54,16 @@ function function_7b3e39cb() {
 }
 
 function function_45dffa6b(launchvector) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(!isactor(self)) {
     return;
   }
-  assert(!(isDefined(self.boss) && self.boss));
+  assert(!(isdefined(self.boss) && self.boss));
   self clientfield::set("zombie_gut_explosion", 1);
   self thread doa_utility::function_e3c30240(launchvector);
-  if(isDefined(launchvector)) {
+  if(isdefined(launchvector)) {
     self thread namespace_1a381543::function_90118d8c("zmb_ragdoll_launched");
   }
 }
@@ -133,7 +133,7 @@ function trygibbinglegs(entity, damage, hitloc = level.doa.hitlocs[randomint(lev
     if(!gibserverutils::isgibbed(entity, 384)) {
       gibserverutils::giblegs(entity);
     }
-    assert(!(isDefined(entity.boss) && entity.boss));
+    assert(!(isdefined(entity.boss) && entity.boss));
     entity thread doa_utility::function_e3c30240();
   } else {
     if(cangiblegs && isinarray(array("left_leg_upper", "left_leg_lower", "left_foot"), hitloc) && randomfloatrange(0, 1) <= 1) {

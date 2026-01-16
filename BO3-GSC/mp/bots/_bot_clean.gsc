@@ -19,19 +19,19 @@
 #namespace bot_clean;
 
 function init() {
-  level.botpostcombat = &bot_post_combat;
-  level.botidle = &bot_idle;
-  level.botupdatethreatgoal = &update_threat_goal;
+  level.botpostcombat = & bot_post_combat;
+  level.botidle = & bot_idle;
+  level.botupdatethreatgoal = & update_threat_goal;
 }
 
 function bot_post_combat() {
-  if(isDefined(self.targethub)) {
+  if(isdefined(self.targethub)) {
     if(self.carriedtacos == 0 || self.targethub.interactteam == "none") {
       self.targethub = undefined;
       self botsetgoal(self.origin);
     }
   }
-  if(isDefined(self.targettaco)) {
+  if(isdefined(self.targettaco)) {
     if(self.targettaco.interactteam == "none" || self.targettaco.droptime != self.targettacodroptime) {
       self.targettaco = undefined;
       self botsetgoal(self.origin);
@@ -44,7 +44,7 @@ function bot_post_combat() {
 }
 
 function bot_idle() {
-  if(isDefined(self.targethub)) {
+  if(isdefined(self.targethub)) {
     self bot::path_to_point_in_trigger(self.targethub.trigger);
     self bot::sprint_to_goal();
     return;
@@ -68,7 +68,7 @@ function bot_idle() {
 
 function look_for_taco(radius) {
   besttaco = get_best_taco(radius);
-  if(!isDefined(besttaco)) {
+  if(!isdefined(besttaco)) {
     return false;
   }
   self.targettaco = besttaco;
@@ -90,7 +90,7 @@ function get_best_taco(radius) {
     if(taco.attacker != self && tacodistsq > radiussq) {
       continue;
     }
-    if(!isDefined(besttaco) || tacodistsq < besttacodistsq) {
+    if(!isdefined(besttaco) || tacodistsq < besttacodistsq) {
       besttaco = taco;
       besttacodistsq = tacodistsq;
     }
@@ -99,7 +99,7 @@ function get_best_taco(radius) {
 }
 
 function update_threat_goal() {
-  if(isDefined(self.targethub)) {
+  if(isdefined(self.targethub)) {
     if(!self botgoalset()) {
       self bot::path_to_point_in_trigger(self.targethub.trigger);
       self bot::sprint_to_goal();
@@ -107,13 +107,13 @@ function update_threat_goal() {
     return;
   }
   radiussq = 65536;
-  if(isDefined(self.targettaco)) {
+  if(isdefined(self.targettaco)) {
     tacodistsq = distance2dsquared(self.origin, self.targettaco.origin);
     if(tacodistsq > radiussq) {
       self.targettaco = undefined;
     }
   }
-  if(isDefined(self.targettaco) || self look_for_taco(1024)) {
+  if(isdefined(self.targettaco) || self look_for_taco(1024)) {
     return;
   }
   self bot_combat::update_threat_goal();

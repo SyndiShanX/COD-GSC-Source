@@ -114,9 +114,8 @@ sendAgentWeaponNotify(weaponName) {
 
   self waittill("giveLoadout");
 
-  if(!isDefined(weaponName)) {
+  if(!isDefined(weaponName))
     weaponName = "iw6_riotshield_mp";
-  }
 
   self notify("weapon_change", weaponName);
 }
@@ -133,9 +132,8 @@ squadmate_agent_think() {
 
     handled_by_gametype = self[[self agentFunc("gametype_update")]]();
     if(!handled_by_gametype) {
-      if(!self bot_is_guarding_player(self.owner)) {
+      if(!self bot_is_guarding_player(self.owner))
         self bot_guard_player(self.owner, 350);
-      }
     }
 
     wait(0.05);

@@ -27,4 +27,5 @@ player_anims() {
   level.viewarms_steer_boost = % int_boat_boost_press;
 }
 
-fx() {}
+fx() {
+}

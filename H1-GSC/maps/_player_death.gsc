@@ -14,15 +14,14 @@ death_behavior() {
   level.player waittill("death", var_0, var_1, var_2, var_3);
   soundscripts\_snd::snd_message("player_death");
 
-  if(isDefined(var_3)) {
-    var_4 = level.player.origin - level.player getEye() + (0, 0, 35);
+  if(isdefined(var_3)) {
+    var_4 = level.player.origin - level.player geteye() + (0, 0, 35);
     var_5 = spawn("script_model", level.player.origin + (0, 0, var_4[2]));
     var_5.angles = (-10, level.player.angles[2], 30);
     var_5 linkto(var_3);
 
-    if(var_1 != "MOD_CRUSH") {
+    if(var_1 != "MOD_CRUSH")
       level.player playerlinkto(var_5);
-    }
   }
 
   level.player allowprone(1);
@@ -33,16 +32,14 @@ player_throwgrenade_timer() {
   self endon("death");
   self.lastgrenadetime = 0;
 
-  for(;;) {
-    while(!self isthrowinggrenade()) {
+  for (;;) {
+    while (!self isthrowinggrenade())
       wait 0.05;
-    }
 
     self.lastgrenadetime = gettime();
 
-    while(self isthrowinggrenade()) {
+    while (self isthrowinggrenade())
       wait 0.05;
-    }
   }
 }
 
@@ -68,9 +65,8 @@ special_death_hint(var_0, var_1, var_2) {
     return;
   }
   if(level.gameskill >= 2) {
-    if(!maps\_load::map_is_early_in_the_game()) {
+    if(!maps\_load::map_is_early_in_the_game())
       return;
-    }
   }
 
   switch (var_1) {
@@ -78,7 +74,7 @@ special_death_hint(var_0, var_1, var_2) {
       if(level.player.lastgrenadetime - gettime() > 3500.0) {
         return;
       }
-      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
+      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
       break;
     case "MOD_EXPLOSIVE":
       if(level.player destructible_death(var_0)) {
@@ -93,7 +89,7 @@ special_death_hint(var_0, var_1, var_2) {
       break;
     case "MOD_GRENADE_SPLASH":
     case "MOD_GRENADE":
-      if(isDefined(var_2) && !issubstr(var_2, "grenade")) {
+      if(isdefined(var_2) && !issubstr(var_2, "grenade")) {
         return;
       }
       set_deadquote("@SCRIPT_GRENADE_DEATH");
@@ -105,13 +101,11 @@ special_death_hint(var_0, var_1, var_2) {
 }
 
 vehicle_death(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return 0;
-  }
 
-  if(var_0.code_classname != "script_vehicle") {
+  if(var_0.code_classname != "script_vehicle")
     return 0;
-  }
 
   set_deadquote("@SCRIPT_EXPLODING_VEHICLE_DEATH");
   thread set_death_icon("hud_burningcaricon", 50, 50);
@@ -119,13 +113,11 @@ vehicle_death(var_0) {
 }
 
 destructible_death(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return 0;
-  }
 
-  if(!isDefined(var_0.destructible_type)) {
+  if(!isdefined(var_0.destructible_type))
     return 0;
-  }
 
   if(issubstr(var_0.destructible_type, "vehicle")) {
     set_deadquote("@SCRIPT_EXPLODING_VEHICLE_DEATH");
@@ -139,16 +131,14 @@ destructible_death(var_0) {
 }
 
 exploding_barrel_death(var_0) {
-  if(isDefined(level.lastexplodingbarrel)) {
-    if(gettime() != level.lastexplodingbarrel["time"]) {
+  if(isdefined(level.lastexplodingbarrel)) {
+    if(gettime() != level.lastexplodingbarrel["time"])
       return 0;
-    }
 
     var_1 = distance(self.origin, level.lastexplodingbarrel["origin"]);
 
-    if(var_1 > level.lastexplodingbarrel["radius"]) {
+    if(var_1 > level.lastexplodingbarrel["radius"])
       return 0;
-    }
 
     set_deadquote("@SCRIPT_EXPLODING_BARREL_DEATH");
     thread set_death_icon("hud_burningbarrelicon", 50, 50);
@@ -171,17 +161,15 @@ setdeadquote() {
     var_1 = randomint(var_0);
 
     if(getdvar("cycle_deathquotes") != "") {
-      if(getdvar("ui_deadquote_index") == "") {
+      if(getdvar("ui_deadquote_index") == "")
         setdvar("ui_deadquote_index", "0");
-      }
 
       var_1 = getdvarint("ui_deadquote_index");
       setdvar("ui_deadquote", lookupdeathquote(var_1));
       var_1++;
 
-      if(var_1 > var_0 - 1) {
+      if(var_1 > var_0 - 1)
         var_1 = 0;
-      }
 
       setdvar("ui_deadquote_index", var_1);
     } else
@@ -190,17 +178,14 @@ setdeadquote() {
 }
 
 deadquote_recently_used(var_0) {
-  if(var_0 == getdvar("ui_deadquote_v1")) {
+  if(var_0 == getdvar("ui_deadquote_v1"))
     return 1;
-  }
 
-  if(var_0 == getdvar("ui_deadquote_v2")) {
+  if(var_0 == getdvar("ui_deadquote_v2"))
     return 1;
-  }
 
-  if(var_0 == getdvar("ui_deadquote_v3")) {
+  if(var_0 == getdvar("ui_deadquote_v3"))
     return 1;
-  }
 
   return 0;
 }
@@ -208,9 +193,8 @@ deadquote_recently_used(var_0) {
 lookupdeathquote(var_0) {
   var_1 = tablelookup("sp\deathQuoteTable.csv", 0, var_0, 1);
 
-  if(tolower(var_1[0]) != tolower("@")) {
+  if(tolower(var_1[0]) != tolower("@"))
     var_1 = "@" + var_1;
-  }
 
   return var_1;
 }
@@ -240,7 +224,7 @@ grenade_death_hint(var_0, var_1) {
   var_2.alpha = 1;
   var_2.hidewheninmenu = 1;
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1)) {
     var_2 = newhudelem();
     var_2.elemtype = "font";
     var_2.font = "default";
@@ -294,9 +278,8 @@ grenade_death_indicator_hud() {
 }
 
 set_death_icon(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = 2.5;
-  }
 
   wait(var_3);
   var_4 = newhudelem();

@@ -44,47 +44,47 @@ function main() {
   level.teamscoreperkill = getgametypesetting("teamScorePerKill");
   level.teamscoreperdeath = getgametypesetting("teamScorePerDeath");
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
-  level.onstartgametype = &onstartgametype;
-  level.onspawnplayer = &onspawnplayer;
-  level.givecustomloadout = &givecustomloadout;
+  level.onstartgametype = & onstartgametype;
+  level.onspawnplayer = & onspawnplayer;
+  level.givecustomloadout = & givecustomloadout;
   level.postroundtime = 0.5;
   level.doendgamescoreboard = 0;
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
   gameobjects::register_allowed_gameobject("dm");
   gameobjects::register_allowed_gameobject(level.gametype);
-  if(!isDefined(level.fr_target_impact_fx)) {
+  if(!isdefined(level.fr_target_impact_fx)) {
     level.fr_target_impact_fx = "ui/fx_fr_target_impact";
   }
-  if(!isDefined(level.fr_target_disable_fx)) {
+  if(!isdefined(level.fr_target_disable_fx)) {
     level.fr_target_disable_fx = "ui/fx_fr_target_demat";
   }
-  if(!isDefined(level.fr_target_disable_sound)) {
+  if(!isdefined(level.fr_target_disable_sound)) {
     level.fr_target_disable_sound = "wpn_grenade_explode_default";
   }
-  level.frgame = spawnStruct();
+  level.frgame = spawnstruct();
   level.frgame.activetrackindex = 0;
   level.frgame.tracks = [];
-  for(i = 0; i < 1; i++) {
-    level.frgame.tracks[i] = spawnStruct();
+  for (i = 0; i < 1; i++) {
+    level.frgame.tracks[i] = spawnstruct();
     level.frgame.tracks[i].starttrigger = getent("fr_start_0" + i, "targetname");
-    assert(isDefined(level.frgame.tracks[i].starttrigger));
+    assert(isdefined(level.frgame.tracks[i].starttrigger));
     level.frgame.tracks[i].goaltrigger = getent("fr_end_0" + i, "targetname");
-    assert(isDefined(level.frgame.tracks[i].goaltrigger));
+    assert(isdefined(level.frgame.tracks[i].goaltrigger));
     level.frgame.tracks[i].highscores = [];
   }
-  level.frgame.checkpointtriggers = getEntArray("fr_checkpoint", "targetname");
+  level.frgame.checkpointtriggers = getentarray("fr_checkpoint", "targetname");
   assert(level.frgame.checkpointtriggers.size);
   globallogic::setvisiblescoreboardcolumns("pointstowin", "kills", "deaths", "headshots", "score");
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, &"OBJECTIVES_FR");
+  util::setobjectivetext(team, & "OBJECTIVES_FR");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, &"OBJECTIVES_FR");
+    util::setobjectivescoretext(team, & "OBJECTIVES_FR");
   } else {
-    util::setobjectivescoretext(team, &"OBJECTIVES_FR_SCORE");
+    util::setobjectivescoretext(team, & "OBJECTIVES_FR_SCORE");
   }
-  util::setobjectivehinttext(team, &"OBJECTIVES_FR_SCORE");
+  util::setobjectivehinttext(team, & "OBJECTIVES_FR_SCORE");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
 }
 
@@ -114,7 +114,7 @@ function onstartgametype() {
         trigger.spawnpoint = spawn;
       }
     }
-    assert(isDefined(trigger.spawnpoint));
+    assert(isdefined(trigger.spawnpoint));
   }
   player_starts = spawnlogic::_get_spawnpoint_array("info_player_start");
   assert(player_starts.size);
@@ -127,15 +127,15 @@ function onstartgametype() {
         track.playerstart = start;
       }
     }
-    assert(isDefined(track.playerstart));
+    assert(isdefined(track.playerstart));
   }
-  level.frgame.deathtriggers = getEntArray("fr_die", "targetname");
+  level.frgame.deathtriggers = getentarray("fr_die", "targetname");
   assert(level.frgame.deathtriggers.size);
   foreach(trigger in level.frgame.deathtriggers) {
     trigger thread watchdeathtrigger();
   }
   setup_tutorial();
-  if(!isDefined(level.freerun)) {
+  if(!isdefined(level.freerun)) {
     level.freerun = 1;
   }
   level.mapcenter = math::find_box_center(level.spawnmins, level.spawnmaxs);
@@ -156,7 +156,7 @@ function onstartgametype() {
         item.checkpoint = trigger;
       }
     }
-    assert(isDefined(item.checkpoint));
+    assert(isdefined(item.checkpoint));
     item.checkpoint.weapon = item.visuals[0].items[0].weapon;
     item.checkpoint.weaponobject = item;
     item.checkpoint setup_weapon_targets();
@@ -182,7 +182,7 @@ function on_player_connect() {
 
 function on_menu_response() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("menuresponse", menu, response);
     if(response == "fr_restart") {
       self playsoundtoplayer("uin_freerun_reset", self);
@@ -197,7 +197,7 @@ function onspawnplayer(predictedspawn) {
   if(predictedspawn) {
     return;
   }
-  if(isDefined(self.frinited)) {
+  if(isdefined(self.frinited)) {
     self.body hide();
     faultdeath();
     return;
@@ -224,7 +224,7 @@ function on_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath
 
 function trackplayerorigin() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self.prev_origin = self.origin;
     self.prev_time = gettime();
     wait(0.05);
@@ -247,7 +247,7 @@ function activatetrack(trackindex) {
   if(level.frgame.tracks.size > 1) {
     iprintln("" + trackindex);
   }
-  if(!isDefined(level.frgame.tutorials) || !level.frgame.tutorials) {
+  if(!isdefined(level.frgame.tutorials) || !level.frgame.tutorials) {
     self playlocalsound("vox_tuto_tutorial_sequence_27");
   }
   level.frgame.lastplayedfaultvocheckpoint = -1;
@@ -306,7 +306,7 @@ function oncheckpointtrigger(player, endonstring) {
   if(level.frgame.activespawnpoint != self) {
     level.frgame.activespawnpoint = self;
     player take_all_player_weapons(0, 0);
-    if(isDefined(self.weaponobject)) {
+    if(isdefined(self.weaponobject)) {
       self.weaponobject reset_targets();
       self.weaponobject pickup_items::respawn_pickup();
     }
@@ -332,13 +332,13 @@ function watchcheckpointtrigger() {
       checkpoint_index = self.checkpointindex;
       current_time = get_current_track_time(player);
       first_time = 0;
-      if(!isDefined(level.frgame.checkpointtimes[checkpoint_index]) || level.frgame.checkpointtimes[checkpoint_index] == 0) {
+      if(!isdefined(level.frgame.checkpointtimes[checkpoint_index]) || level.frgame.checkpointtimes[checkpoint_index] == 0) {
         level.frgame.checkpointtimes[checkpoint_index] = current_time;
         first_time = 1;
       }
       if(first_time) {
-        if(isDefined(level.frgame.activetrack.fastestruncheckpointtimes)) {
-          if(isDefined(level.frgame.activetrack.fastestruncheckpointtimes[checkpoint_index]) && level.frgame.activetrack.fastestruncheckpointtimes[checkpoint_index]) {
+        if(isdefined(level.frgame.activetrack.fastestruncheckpointtimes)) {
+          if(isdefined(level.frgame.activetrack.fastestruncheckpointtimes[checkpoint_index]) && level.frgame.activetrack.fastestruncheckpointtimes[checkpoint_index]) {
             delta_time = current_time - level.frgame.activetrack.fastestruncheckpointtimes[checkpoint_index];
             if(delta_time < 0) {
               delta_time = delta_time * -1;
@@ -354,12 +354,12 @@ function watchcheckpointtrigger() {
         player playsoundtoplayer("uin_freerun_checkpoint", player);
       }
     }
-    self thread util::trigger_thread(player, &oncheckpointtrigger, &leavecheckpointtrigger);
+    self thread util::trigger_thread(player, & oncheckpointtrigger, & leavecheckpointtrigger);
   }
 }
 
 function watchdeathtrigger() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(isplayer(player)) {
       player faultdeath();
@@ -373,7 +373,7 @@ function add_current_run_to_high_scores(player) {
   push_score = 1;
   new_record = 0;
   if(active_track.highscores.size > 0) {
-    for(i = 0; i < active_track.highscores.size; i++) {
+    for (i = 0; i < active_track.highscores.size; i++) {
       if(run_data.time < active_track.highscores[i].time || active_track.highscores[i].time == 0) {
         push_score = 0;
         arrayinsert(active_track.highscores, run_data, i);
@@ -447,13 +447,13 @@ function unfreeze() {
 
 function setup_weapon_targets() {
   target_name = self.weaponobject.visuals[0].target;
-  if(!isDefined(target_name)) {
+  if(!isdefined(target_name)) {
     return;
   }
   self.weaponobject.targetshottime = 0;
   self.weaponobject.targets = [];
   self.weaponobject.target_visuals = [];
-  targets = getEntArray(target_name, "targetname");
+  targets = getentarray(target_name, "targetname");
   foreach(target in targets) {
     if(target.script_noteworthy == "fr_target") {
       self.weaponobject.targets[self.weaponobject.targets.size] = target;
@@ -471,8 +471,8 @@ function setup_weapon_targets() {
   }
   foreach(target in self.weaponobject.targets) {
     target.blocker = getent(target.target, "targetname");
-    if(isDefined(target.blocker)) {
-      if(!isDefined(target.blocker.targetcount)) {
+    if(isdefined(target.blocker)) {
+      if(!isdefined(target.blocker.targetcount)) {
         target.blocker.targetcount = 0;
         target.blocker.activetargetcount = 0;
       }
@@ -487,7 +487,7 @@ function setup_weapon_targets() {
 
 function watch_target_trigger_thread(weaponobject) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     if(level.frgame.activespawnpoint != self.checkpoint) {
       continue;
@@ -499,7 +499,7 @@ function watch_target_trigger_thread(weaponobject) {
       continue;
     }
     self turn_off_target(weapon);
-    playFX(level.fr_target_impact_fx, point, direction_vec);
+    playfx(level.fr_target_impact_fx, point, direction_vec);
     weaponobject.targetshottime = gettime();
   }
 }
@@ -509,7 +509,7 @@ function turn_off_target(weapon) {
   self.visual ghost();
   self.visual notsolid();
   self.blocker blocker_disable();
-  playFX(level.fr_target_disable_fx, self.origin);
+  playfx(level.fr_target_disable_fx, self.origin);
   playsoundatposition(level.fr_target_disable_sound, self.origin);
 }
 
@@ -540,17 +540,17 @@ function reset_targets() {
 
 function reset_all_targets() {
   foreach(trigger in level.frgame.checkpointtriggers) {
-    if(isDefined(trigger.weaponobject)) {
+    if(isdefined(trigger.weaponobject)) {
       trigger.weaponobject reset_targets();
     }
   }
 }
 
 function dumphighscores() {
-  for(i = 0; i < level.frgame.activetrack.highscores.size; i++) {
+  for (i = 0; i < level.frgame.activetrack.highscores.size; i++) {
     println(((i + 1) + "") + level.frgame.activetrack.highscores[i].time);
     if(i == 0) {
-      for(j = 0; j < level.frgame.activetrack.fastestruncheckpointtimes.size; j++) {
+      for (j = 0; j < level.frgame.activetrack.fastestruncheckpointtimes.size; j++) {
         println((("" + j) + "") + level.frgame.activetrack.fastestruncheckpointtimes[j]);
       }
     }
@@ -563,7 +563,7 @@ function play_fault_vo() {
   if((current_time - level.frgame.lastplayedfaultvotime) < fault_vo_interval) {
     return;
   }
-  if(isDefined(self.lasttutorialvoplayed)) {
+  if(isdefined(self.lasttutorialvoplayed)) {
     return;
   }
   if(level.frgame.lastplayedfaultvocheckpoint == level.frgame.activespawnpoint.checkpointindex) {
@@ -609,7 +609,7 @@ function end_game_state() {
 
 function watchtrackswitch() {
   track_count = level.frgame.tracks.size;
-  while(true) {
+  while (true) {
     wait(0.05);
     switch_track = 0;
     if(end_game_state()) {
@@ -637,7 +637,7 @@ function watchtrackswitch() {
       }
       self playsoundtoplayer("uin_freerun_reset", self);
       activatetrack(curr_track_index);
-      while(true) {
+      while (true) {
         wait(0.05);
         if(!(self dpad_right_pressed() || self dpad_left_pressed() || self dpad_up_pressed())) {
           break;
@@ -651,7 +651,7 @@ function watchuserrespawn() {
   level endon("activate_track");
   level endon("finished_track");
   wasinnoclip = 0;
-  while(true) {
+  while (true) {
     wait(0.05);
     if(end_game_state()) {
       continue;
@@ -670,7 +670,7 @@ function watchuserrespawn() {
       level clientfield::set("freerun_retries", level.frgame.userspawns);
       self playsoundtoplayer("uin_freerun_reset", self);
       self respawnatactivecheckpoint();
-      while(true) {
+      while (true) {
         wait(0.05);
         if(!self dpad_down_pressed()) {
           break;
@@ -681,10 +681,10 @@ function watchuserrespawn() {
 }
 
 function ignorebulletsfired(weapon) {
-  if(!isDefined(level.frgame.activespawnpoint)) {
+  if(!isdefined(level.frgame.activespawnpoint)) {
     return false;
   }
-  if(!isDefined(level.frgame.activespawnpoint.weaponobject)) {
+  if(!isdefined(level.frgame.activespawnpoint.weaponobject)) {
     return false;
   }
   grace_period = (weapon.firetime * 4) * 1000;
@@ -701,7 +701,7 @@ function ignorebulletsfired(weapon) {
 
 function watchweaponfire() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("weapon_fired", weapon);
     if(weapon == level.weaponbasemeleeheld) {
       continue;
@@ -715,7 +715,7 @@ function watchweaponfire() {
 }
 
 function getgroundpointfororigin(position) {
-  trace = bulletTrace(position + vectorscale((0, 0, 1), 10), position - vectorscale((0, 0, 1), 1000), 0, undefined);
+  trace = bullettrace(position + vectorscale((0, 0, 1), 10), position - vectorscale((0, 0, 1), 1000), 0, undefined);
   return trace["position"];
 }
 
@@ -733,11 +733,11 @@ function respawnatactivecheckpoint() {
   pickup_items::respawn_all_pickups();
   take_players_out_of_tutorial_mode();
   self playsoundtoplayer("evt_freerun_respawn", self);
-  if(isDefined(self.respawn_position)) {
+  if(isdefined(self.respawn_position)) {
     self setorigin(self.respawn_position);
     self setvelocity((0, 0, 0));
   } else {
-    if(isDefined(level.frgame.activespawnpoint.spawnpoint)) {
+    if(isdefined(level.frgame.activespawnpoint.spawnpoint)) {
       self setorigin(level.frgame.activespawnpoint.spawnpoint.origin);
       self setplayerangles(level.frgame.activespawnpoint.spawnpoint.angles);
       self setvelocity((0, 0, 0));
@@ -770,7 +770,7 @@ function write_high_scores_stats(start_index) {
   active_track = level.frgame.activetrack;
   self setdstat("freerunTrackTimes", "track", level.frgame.trackindex, "mapUniqueId", level.frgame.mapuniqueid);
   self setdstat("freerunTrackTimes", "track", level.frgame.trackindex, "mapVersion", level.frgame.mapversion);
-  for(slot = start_index; slot < 3; slot++) {
+  for (slot = start_index; slot < 3; slot++) {
     set_high_score_stat(level.frgame.trackindex, slot, "time", active_track.highscores[slot].time);
     set_high_score_stat(level.frgame.trackindex, slot, "faults", active_track.highscores[slot].faults);
     set_high_score_stat(level.frgame.trackindex, slot, "retries", active_track.highscores[slot].retries);
@@ -780,7 +780,7 @@ function write_high_scores_stats(start_index) {
 
 function write_checkpoint_times() {
   level.frgame.activetrack.fastestruncheckpointtimes = level.frgame.checkpointtimes;
-  for(i = 0; i < level.frgame.checkpointtriggers.size; i++) {
+  for (i = 0; i < level.frgame.checkpointtriggers.size; i++) {
     self setdstat("freerunTrackTimes", "track", level.frgame.trackindex, "checkPointTimes", "time", i, level.frgame.checkpointtimes[i]);
   }
 }
@@ -790,7 +790,7 @@ function get_high_score_stat(trackindex, slot, stat) {
 }
 
 function create_high_score_struct(time, faults, retries, bulletpenalty) {
-  score_set = spawnStruct();
+  score_set = spawnstruct();
   score_set.time = time;
   score_set.faults = faults;
   score_set.retries = retries;
@@ -807,26 +807,26 @@ function get_stats_for_track(trackindex, slot) {
 }
 
 function get_checkpoint_times_for_track(trackindex) {
-  for(i = 0; i < level.frgame.checkpointtriggers.size; i++) {
+  for (i = 0; i < level.frgame.checkpointtriggers.size; i++) {
     level.frgame.activetrack.fastestruncheckpointtimes[i] = self getdstat("freerunTrackTimes", "track", trackindex, "checkPointTimes", "time", i);
   }
 }
 
 function get_top_scores_stats() {
-  if(isDefined(level.frgame.activetrack.statsread)) {
+  if(isdefined(level.frgame.activetrack.statsread)) {
     return;
   }
   mapid = self getdstat("freerunTrackTimes", "track", level.frgame.trackindex, "mapUniqueId");
   mapversion = self getdstat("freerunTrackTimes", "track", level.frgame.trackindex, "mapVersion");
   if(level.frgame.mapuniqueid != mapid || level.frgame.mapversion != mapversion) {
-    for(i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
       level.frgame.activetrack.highscores[i] = create_high_score_struct(0, 0, 0, 0);
     }
-    for(i = 0; i < level.frgame.checkpointtriggers.size; i++) {
+    for (i = 0; i < level.frgame.checkpointtriggers.size; i++) {
       level.frgame.activetrack.fastestruncheckpointtimes[i] = 0;
     }
   } else {
-    for(i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
       level.frgame.activetrack.highscores[i] = get_stats_for_track(level.frgame.trackindex, i);
     }
     get_checkpoint_times_for_track(level.frgame.trackindex);
@@ -838,19 +838,19 @@ function take_all_player_weapons(only_default, immediate) {
   self endon("disconnect");
   self endon("death");
   keep_weapon = level.weaponnone;
-  if(isDefined(level.frgame.activespawnpoint.weapon) && !only_default) {
+  if(isdefined(level.frgame.activespawnpoint.weapon) && !only_default) {
     keep_weapon = level.frgame.activespawnpoint.weapon;
   }
   if(immediate) {
     self switchtoweaponimmediate(level.weaponbasemeleeheld);
   } else {
-    while(self isswitchingweapons()) {
+    while (self isswitchingweapons()) {
       wait(0.05);
     }
     current_weapon = self getcurrentweapon();
     if(current_weapon != level.weaponbasemeleeheld && keep_weapon != current_weapon) {
       self switchtoweapon(level.weaponbasemeleeheld);
-      while(self getcurrentweapon() != level.weaponbasemeleeheld) {
+      while (self getcurrentweapon() != level.weaponbasemeleeheld) {
         wait(0.05);
       }
     }
@@ -865,7 +865,7 @@ function take_all_player_weapons(only_default, immediate) {
 
 function freerunmusic(start = 1) {
   player = self;
-  if(start && (!(isDefined(player.musicstart) && player.musicstart))) {
+  if(start && (!(isdefined(player.musicstart) && player.musicstart))) {
     mapname = getdvarstring("mapname");
     player globallogic_audio::set_music_on_player(mapname);
     player.musicstart = 1;
@@ -914,14 +914,14 @@ function activate_tutorial_mode() {
 
 function setup_tutorial() {
   level.frgame.tutorials = 0;
-  level.frgame.tutorialtriggers = getEntArray("fr_tutorial", "targetname");
+  level.frgame.tutorialtriggers = getentarray("fr_tutorial", "targetname");
   level.frgame.tutorialfunctions = [];
   register_tutorials();
 }
 
 function watchtutorialtrigger() {
   level endon("stop_tutorials");
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(isplayer(player)) {
       player thread start_tutorial(self.script_noteworthy);
@@ -945,7 +945,7 @@ function start_tutorial(tutorial) {
   self endon("disconnect");
   level endon("game_ended");
   level endon("activate_track");
-  if(!isDefined(level.frgame.tutorialfunctions[tutorial])) {
+  if(!isdefined(level.frgame.tutorialfunctions[tutorial])) {
     return;
   }
   level notify("playing_tutorial");
@@ -958,7 +958,7 @@ function start_tutorial(tutorial) {
 }
 
 function stop_tutorial_vo() {
-  if(isDefined(self.lasttutorialvoplayed)) {
+  if(isdefined(self.lasttutorialvoplayed)) {
     self stopsound(self.lasttutorialvoplayed);
     self.lasttutorialvoplayed = undefined;
   }
@@ -987,10 +987,10 @@ function _show_tutorial_hint_with_vo(text, time, unlock_player) {
 }
 
 function show_tutorial_hint(text, time, unlock_player) {
-  if(isDefined(unlock_player)) {
+  if(isdefined(unlock_player)) {
     take_players_out_of_tutorial_mode();
   }
-  if(!isDefined(time)) {
+  if(!isdefined(time)) {
     time = 4;
   }
   self util::show_hint_text(text, 0, "activate_track", 4);
@@ -1002,25 +1002,25 @@ function show_tutorial_hint_with_full_movement(text, time) {
 }
 
 function register_tutorials() {
-  level.frgame.tutorialfunctions["tutorial_01"] = &tutorial_01;
-  level.frgame.tutorialfunctions["tutorial_02"] = &tutorial_02;
-  level.frgame.tutorialfunctions["tutorial_03"] = &tutorial_03;
-  level.frgame.tutorialfunctions["tutorial_06"] = &tutorial_06;
-  level.frgame.tutorialfunctions["tutorial_08"] = &tutorial_08;
-  level.frgame.tutorialfunctions["tutorial_09"] = &tutorial_09;
-  level.frgame.tutorialfunctions["tutorial_10"] = &tutorial_10;
-  level.frgame.tutorialfunctions["tutorial_10a"] = &tutorial_10a;
-  level.frgame.tutorialfunctions["tutorial_12"] = &tutorial_12;
-  level.frgame.tutorialfunctions["tutorial_12a"] = &tutorial_12a;
-  level.frgame.tutorialfunctions["tutorial_13"] = &tutorial_13;
-  level.frgame.tutorialfunctions["tutorial_14"] = &tutorial_14;
-  level.frgame.tutorialfunctions["tutorial_15"] = &tutorial_15;
-  level.frgame.tutorialfunctions["tutorial_16"] = &tutorial_16;
-  level.frgame.tutorialfunctions["tutorial_17"] = &tutorial_17;
-  level.frgame.tutorialfunctions["tutorial_17a"] = &tutorial_17a;
-  level.frgame.tutorialfunctions["tutorial_18"] = &tutorial_18;
-  level.frgame.tutorialfunctions["tutorial_19"] = &tutorial_19;
-  level.frgame.tutorialfunctions["tutorial_20"] = &tutorial_20;
+  level.frgame.tutorialfunctions["tutorial_01"] = & tutorial_01;
+  level.frgame.tutorialfunctions["tutorial_02"] = & tutorial_02;
+  level.frgame.tutorialfunctions["tutorial_03"] = & tutorial_03;
+  level.frgame.tutorialfunctions["tutorial_06"] = & tutorial_06;
+  level.frgame.tutorialfunctions["tutorial_08"] = & tutorial_08;
+  level.frgame.tutorialfunctions["tutorial_09"] = & tutorial_09;
+  level.frgame.tutorialfunctions["tutorial_10"] = & tutorial_10;
+  level.frgame.tutorialfunctions["tutorial_10a"] = & tutorial_10a;
+  level.frgame.tutorialfunctions["tutorial_12"] = & tutorial_12;
+  level.frgame.tutorialfunctions["tutorial_12a"] = & tutorial_12a;
+  level.frgame.tutorialfunctions["tutorial_13"] = & tutorial_13;
+  level.frgame.tutorialfunctions["tutorial_14"] = & tutorial_14;
+  level.frgame.tutorialfunctions["tutorial_15"] = & tutorial_15;
+  level.frgame.tutorialfunctions["tutorial_16"] = & tutorial_16;
+  level.frgame.tutorialfunctions["tutorial_17"] = & tutorial_17;
+  level.frgame.tutorialfunctions["tutorial_17a"] = & tutorial_17a;
+  level.frgame.tutorialfunctions["tutorial_18"] = & tutorial_18;
+  level.frgame.tutorialfunctions["tutorial_19"] = & tutorial_19;
+  level.frgame.tutorialfunctions["tutorial_20"] = & tutorial_20;
 }
 
 function tutorial_01() {
@@ -1047,7 +1047,7 @@ function tutorial_08() {
 }
 
 function tutorial_09() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_28", &"FREERUN_TUTORIAL_12");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_28", & "FREERUN_TUTORIAL_12");
 }
 
 function tutorial_10() {
@@ -1067,7 +1067,7 @@ function tutorial_12a() {
 }
 
 function tutorial_13() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_17", &"FREERUN_TUTORIAL_14a");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_17", & "FREERUN_TUTORIAL_14a");
   self play_tutorial_vo("vox_tuto_tutorial_sequence_18");
   self show_tutorial_hint_with_full_movement(&"FREERUN_TUTORIAL_16");
 }
@@ -1094,7 +1094,7 @@ function tutorial_17a() {
 }
 
 function tutorial_18() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_23", &"FREERUN_TUTORIAL_23");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_23", & "FREERUN_TUTORIAL_23");
   self show_tutorial_hint_with_full_movement(&"FREERUN_TUTORIAL_22a");
 }
 

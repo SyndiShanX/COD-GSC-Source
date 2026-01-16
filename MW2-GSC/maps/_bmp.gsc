@@ -35,11 +35,10 @@ main(model, type) {
   build_deathfx(bmp_death_fx[model], undefined, "exp_armor_vehicle", undefined, undefined, undefined, 0);
   build_drive( % bmp_movement, % bmp_movement_backwards, 10);
 
-  if(issubstr(model, "_low")) {
+  if(issubstr(model, "_low"))
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
-  } else {
+  else
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun");
-  }
 
   build_radiusdamage((0, 0, 53), 512, 300, 20, false);
 
@@ -65,6 +64,7 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
+
   // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
   // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
 
@@ -77,9 +77,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";

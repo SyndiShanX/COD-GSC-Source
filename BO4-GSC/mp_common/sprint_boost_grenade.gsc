@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace sprint_boost_grenade;
 
 autoexec __init__system__() {
@@ -15,8 +16,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "satchel_charge_enemy_light"] = # "weapon/fx_c4_light_orng";
-  level._effect[# "satchel_charge_friendly_light"] = # "weapon/fx_c4_light_blue";
+  level._effect[#"satchel_charge_enemy_light"] = #"weapon/fx_c4_light_orng";
+  level._effect[#"satchel_charge_friendly_light"] = #"weapon/fx_c4_light_blue";
   weaponobjects::function_e6400478(#"sprint_boost_grenade", &create_grenade_watcher, 1);
 }
 
@@ -37,7 +38,7 @@ grenade_spawn(watcher, owner) {
 
   if(!(isDefined(self.previouslyhacked) && self.previouslyhacked)) {
     if(isDefined(owner)) {
-      owner stats::function_e24eec31(self.weapon, # "used", 1);
+      owner stats::function_e24eec31(self.weapon, #"used", 1);
       origin = owner.origin;
     }
 
@@ -98,7 +99,7 @@ apply_sprint_boost_to_players(owner, origin, radius, duration) {
 
 apply_sprint_boost(duration) {
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   player notify(#"apply_sprint_boost_singleton");
   player endon(#"apply_sprint_boost_singleton");
   player setsprintboost(1);

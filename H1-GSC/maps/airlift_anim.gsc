@@ -268,13 +268,13 @@ seaknight_turret_anim_intro() {
 
 seaknight_open_doors() {
   self useanimtree(#animtree);
-  self playSound("seaknight_door_open");
+  self playsound("seaknight_door_open");
   self setanimknobrestart( % ch46_doors_open, 1, 0, 1);
 }
 
 seaknight_close_doors() {
   self useanimtree(#animtree);
-  self playSound("seaknight_door_close");
+  self playsound("seaknight_door_close");
   self setanimknobrestart( % ch46_doors_close, 1, 0, 1);
 }
 

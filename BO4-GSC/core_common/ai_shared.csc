@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace ai_shared;
 
 autoexec main() {
@@ -20,7 +21,7 @@ add_ai_spawn_function(func_spawn, ...) {
   }
 
   var_e45a16f3 = {
-    #func: func_spawn,
+    #func: func_spawn, 
     #params: vararg
   };
 
@@ -60,7 +61,7 @@ add_archetype_spawn_function(str_archetype, func_spawn, ...) {
   }
 
   var_6d69c0bf = {
-    #func: func_spawn,
+    #func: func_spawn, 
     #params: vararg
   };
 

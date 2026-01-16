@@ -19,12 +19,12 @@
 #namespace zm_zod_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_traps", &__init__, undefined, undefined);
+  system::register("zm_zod_traps", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "trap_chain_state", 1, 2, "int", &update_chain_anims, 0, 0);
-  clientfield::register("scriptmover", "trap_chain_location", 1, 2, "int", &location_func, 0, 0);
+  clientfield::register("scriptmover", "trap_chain_state", 1, 2, "int", & update_chain_anims, 0, 0);
+  clientfield::register("scriptmover", "trap_chain_location", 1, 2, "int", & location_func, 0, 0);
 }
 
 function update_chain_anims(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -35,10 +35,10 @@ function update_chain_anims(localclientnum, oldval, newval, bnewent, binitialsna
   a_str_areaname[3] = "pap";
   int_location = self clientfield::get("trap_chain_location");
   str_areaname = a_str_areaname[int_location];
-  a_mdl_chain_active = getEntArray(localclientnum, "fxanim_chain_trap", "targetname");
-  a_mdl_chain_active = array::filter(a_mdl_chain_active, 0, &filter_areaname, str_areaname);
+  a_mdl_chain_active = getentarray(localclientnum, "fxanim_chain_trap", "targetname");
+  a_mdl_chain_active = array::filter(a_mdl_chain_active, 0, & filter_areaname, str_areaname);
   if(a_mdl_chain_active.size > 0) {
-    array::thread_all(a_mdl_chain_active, &update_active_chain_anims, localclientnum, oldval, newval, bnewent, binitialsnap, fieldname);
+    array::thread_all(a_mdl_chain_active, & update_active_chain_anims, localclientnum, oldval, newval, bnewent, binitialsnap, fieldname);
   }
 }
 
@@ -73,7 +73,7 @@ function update_active_chain_anims(localclientnum, oldval, newval, bnewent, bini
       break;
     }
     case 3: {
-      while(isDefined(self.trap_active)) {
+      while (isdefined(self.trap_active)) {
         wait(0.01);
       }
       self thread scene_play("p7_fxanim_zm_zod_chain_trap_symbol_off_bundle", self);
@@ -98,8 +98,8 @@ function function_6221b6b9(scene, var_165d49f6) {
 function function_a89bd6f9() {
   self.trap_active = 1;
   self stopallloopsounds();
-  self playSound(0, "evt_chaintrap_start");
-  self playLoopSound("evt_chaintrap_loop", 0.5);
+  self playsound(0, "evt_chaintrap_start");
+  self playloopsound("evt_chaintrap_loop", 0.5);
   scene::stop("p7_fxanim_zm_zod_chain_trap_symbol_on_bundle");
   function_3f7430db();
   scene::play(self.var_b33065b0, self);
@@ -112,7 +112,7 @@ function function_a89bd6f9() {
   scene::play(self.var_aec39a66, self);
   self thread scene::play("p7_fxanim_zm_zod_chain_trap_symbol_off_bundle", self);
   self stopallloopsounds(0.5);
-  self playLoopSound("evt_chaintrap_idle");
+  self playloopsound("evt_chaintrap_idle");
   self.trap_active = undefined;
 }
 

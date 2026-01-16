@@ -20,15 +20,13 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_shoot_shock("tankblast");
   maps\_vehicle::build_drive( % t90ms_driving_idle_forward, % t90ms_driving_idle_forward, 10);
 
-  if(!issubstr(var_2, "sand")) {
+  if(!issubstr(var_2, "sand"))
     maps\_vehicle::build_turret("t90_turret2", "tag_turret2", "vehicle_t90_PKT_Coaxial_MG");
-  }
 
-  if(issubstr(var_2, "_turret_flood")) {
+  if(issubstr(var_2, "_turret_flood"))
     maps\_vehicle::build_turret("dshk_gaz_flood", "TAG_MACHINE_GUN", "vehicle_t90ms_tank_iw6_remote_gun", 1028, "auto_ai", 0.2, 20, -14);
-  } else if(issubstr(var_2, "_turret")) {
+  else if(issubstr(var_2, "_turret"))
     maps\_vehicle::build_turret("dshk_gaz", "TAG_MACHINE_GUN", "vehicle_t90ms_tank_iw6_remote_gun", 1028, "auto_ai", 0.2, 20, -14);
-  }
 
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);

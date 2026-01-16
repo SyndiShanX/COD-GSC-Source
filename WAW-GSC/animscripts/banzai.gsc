@@ -63,15 +63,12 @@ init() {
   self.badplaceawareness = 0;
   self.chatInitialized = false;
   self thread banzai_ignoreme_monitor(10);
-  if(GetDvar("banzai_yell_distance") == "") {
+  if(GetDvar("banzai_yell_distance") == "")
     SetDvar("banzai_yell_distance", 360);
-  }
-  if(GetDvar("banzai_yell_min_pause") == "") {
+  if(GetDvar("banzai_yell_min_pause") == "")
     SetDvar("banzai_yell_min_pause", 0.3);
-  }
-  if(GetDvar("banzai_yell_max_pause") == "") {
+  if(GetDvar("banzai_yell_max_pause") == "")
     SetDvar("banzai_yell_max_pause", 0.5);
-  }
 }
 
 banzai_easy() {
@@ -97,21 +94,18 @@ ent_id() {
 
 power(base, exp) {
   assert(exp >= 0);
-  if(exp == 0) {
+  if(exp == 0)
     return 1;
-  }
   return base * power(base, exp - 1);
 }
 
 padded_int(num, numDigits) {
   assert(numDigits > 0);
-  if(numDigits == 1) {
+  if(numDigits == 1)
     return num;
-  }
   limit = power(10, numDigits - 1);
-  if(num < limit) {
+  if(num < limit)
     return "0" + padded_int(num, numDigits - 1);
-  }
   return padded_int(num, numDigits - 1);
 }
 
@@ -149,7 +143,7 @@ set_banzai_melee_distance(distance) {
 
 melee_attack_dist_thread() {
   self endon("death");
-  while(1) {
+  while (1) {
     set_banzai_melee_distance(64);
     self waittill("enemy");
   }
@@ -167,9 +161,8 @@ move_banzai() {
   }
   enemy = self.enemy;
   distSqToEnemy = 16000000;
-  if(isDefined(enemy)) {
+  if(isDefined(enemy))
     distSqToEnemy = DistanceSquared(self.origin, enemy.origin);
-  }
   start_banzai_yell();
   move_anim = undefined;
   if(isDefined(enemy) && distSqToEnemy < 4096) {
@@ -259,7 +252,7 @@ banzai_attack() {
 report_damage() {
   self notify("end_report_damage");
   self endon("end_report_damage");
-  while(1) {
+  while (1) {
     self waittill("damage", amount, inflictor, direction, point, type, modelName, tagName);
     banzai_print(undefined, undefined, "Damage: sufferer=" + self GetEntityNumber() + " amount=" + amount + " type=" + type);
   }
@@ -274,39 +267,32 @@ doSuicideGrenade(attacker, victim) {
 
 calculate_link_time(animName) {
   animLength = GetAnimLength(animName);
-  if(animLength > 0.3) {
+  if(animLength > 0.3)
     return 0.3;
-  }
   return 0;
 }
 
 calculate_unlink_time(animName) {
   animLength = GetAnimLength(animName);
   times = getNotetrackTimes(animName, "start_ragdoll");
-  if(times.size > 0) {
+  if(times.size > 0)
     return times[0] * animLength;
-  }
-  if(animLength > 0.1) {
+  if(animLength > 0.1)
     return animLength - 0.1;
-  }
   return animLength;
 }
 
 banzai_melee_ai_seq(attacker, defender) {
   if(attacker in_banzai_attack() || defender in_banzai_attack() || attacker in_banzai_melee() || defender in_banzai_melee()) {
     assert(isDefined(attacker) && IsAlive(attacker) && attacker.health > 0);
-    if(attacker in_banzai_attack()) {
+    if(attacker in_banzai_attack())
       banzai_print(attacker, defender, "Attack aborted at last minute. Reason: attacker in banzai attack.");
-    }
-    if(defender in_banzai_attack()) {
+    if(defender in_banzai_attack())
       banzai_print(attacker, defender, "Attack aborted at last minute. Reason: defender in banzai attack.");
-    }
-    if(attacker in_banzai_melee()) {
+    if(attacker in_banzai_melee())
       banzai_print(attacker, defender, "Attack aborted at last minute. Reason: attacker in banzai melee.");
-    }
-    if(defender in_banzai_melee()) {
+    if(defender in_banzai_melee())
       banzai_print(attacker, defender, "Attack aborted at last minute. Reason: defender in banzai melee.");
-    }
     if(!attacker in_banzai_attack() && !attacker in_banzai_melee()) {
       attacker thread continue_exposed_combat();
     }
@@ -322,9 +308,9 @@ banzai_melee_ai_seq(attacker, defender) {
   defender.inBanzaiMelee = true;
   attacker.disableArrivals = true;
   defender.disableArrivals = true;
-  attackerForward = VectorNormalize(anglesToForward(attacker.angles));
+  attackerForward = VectorNormalize(AnglesToForward(attacker.angles));
   attackerRight = VectorNormalize(AnglesToRight(attacker.angles));
-  defenderForward = VectorNormalize(anglesToForward(defender.angles));
+  defenderForward = VectorNormalize(AnglesToForward(defender.angles));
   defenderRight = VectorNormalize(AnglesToRight(attacker.angles));
   attackerToDefender = VectorNormalize(defender.origin - attacker.origin);
   defenderToAttacker = VectorNormalize(attacker.origin - defender.origin);
@@ -467,12 +453,10 @@ notify_if_interrupted(interruptee, enemy) {
 }
 
 banzai_melee_interrupted(attacker, defender) {
-  if(isDefined(attacker.banzai_melee_interrupted) && attacker.banzai_melee_interrupted) {
+  if(isDefined(attacker.banzai_melee_interrupted) && attacker.banzai_melee_interrupted)
     return true;
-  }
-  if(isDefined(defender.banzai_melee_interrupted) && defender.banzai_melee_interrupted) {
+  if(isDefined(defender.banzai_melee_interrupted) && defender.banzai_melee_interrupted)
     return true;
-  }
   return false;
 }
 
@@ -484,7 +468,7 @@ notify_when_melee_over(meleeLength) {
 
 debug_banzai_link(enemy) {
   elapsed = 0;
-  while(elapsed <= level.banzai_unlink_time + 0.25) {
+  while (elapsed <= level.banzai_unlink_time + 0.25) {
     print_entities(self, enemy, elapsed);
     elapsed += 0.05;
     wait 0.05;
@@ -500,12 +484,10 @@ debug_banzai_link(enemy) {
 }
 
 print_entities(defender, attacker, index) {
-  if(isDefined(attacker) && IsAlive(attacker)) {
+  if(isDefined(attacker) && IsAlive(attacker))
     attacker print_position("attacker", index);
-  }
-  if(isDefined(defender) && IsAlive(defender)) {
+  if(isDefined(defender) && IsAlive(defender))
     defender print_position("defender", index);
-  }
   banzai_print(attacker, defender, "");
 }
 
@@ -520,7 +502,7 @@ print_position(label, index) {
 
 print_script_origin(scriptOrigin, label, duration) {
   elapsed = 0;
-  while(elapsed <= duration) {
+  while (elapsed <= duration) {
     pos = scriptOrigin.origin;
     rot = scriptOrigin.angles;
     banzai_print(undefined, undefined, "Banzai " + label + " script origin " + elapsed + ": " + pos + "/" + rot);
@@ -534,9 +516,8 @@ banzai_ai_defender_link(attacker, blendTime) {
   lerpTarget = spawn("script_origin", self.origin);
   self linkto(lerpTarget);
   wait(level.banzai_link_time);
-  if(isDefined(self) && IsAlive(self)) {
+  if(isDefined(self) && IsAlive(self))
     self unlink();
-  }
   lerpTarget delete();
   if(!isDefined(self) || !IsAlive(self) || !isDefined(attacker) || !IsAlive(attacker)) {
     return;
@@ -657,12 +638,10 @@ banzai_attack_player(attacker, player) {
     return;
   }
   if(!IsAlive(player) || !player can_player_banzai_melee() || (player in_banzai_attack() && player banzai_attacked_by(attacker))) {
-    if(!player can_player_banzai_melee()) {
+    if(!player can_player_banzai_melee())
       banzai_print(attacker, player, "Aborting banzai attack against player who cannot banzai melee.");
-    }
-    if(player in_banzai_attack()) {
+    if(player in_banzai_attack())
       banzai_print(attacker, player, "Aborting banzai attack against player who is already under attack.");
-    }
     return;
   }
   start_banzai_attack(attacker, player);
@@ -720,12 +699,10 @@ record_killanimscript(timeToRecord) {
 }
 
 may_knockdown(attacker, player) {
-  if(IsGodMode(player)) {
+  if(IsGodMode(player))
     return false;
-  }
-  if(get_players().size > 1) {
+  if(get_players().size > 1)
     return false;
-  }
   if(!attacker can_attacker_banzai_melee()) {
     banzai_print(attacker, player, "Aborting knockdown because attacker cannot banzai melee.");
     return false;
@@ -734,12 +711,10 @@ may_knockdown(attacker, player) {
     banzai_print(attacker, player, "Aborting knockdown because player cannot banzai melee.");
     return false;
   }
-  if(isDefined(player.usingturret) && player.usingturret) {
+  if(isDefined(player.usingturret) && player.usingturret)
     return false;
-  }
-  if(isDefined(player.usingvehicle) && player.usingvehicle) {
+  if(isDefined(player.usingvehicle) && player.usingvehicle)
     return false;
-  }
   if(debug_banzai()) {
     if(attacker.banzaiInterruptedByPain) {
       banzai_print(attacker, player, "Aborting knockdown because attacker was interrupted by pain while waiting between attacks.");
@@ -767,48 +742,38 @@ in_banzai_melee() {
 }
 
 can_player_banzai_melee() {
-  if(!IsAlive(self)) {
+  if(!IsAlive(self))
     return false;
-  }
-  if(self.health <= 0) {
+  if(self.health <= 0)
     return false;
-  }
-  if(self in_banzai_melee()) {
+  if(self in_banzai_melee())
     return false;
-  }
-  if(maps\_collectibles::has_collectible("collectible_berserker")) {
+  if(maps\_collectibles::has_collectible("collectible_berserker"))
     if(IsPlayer(self) && self.collectibles_berserker_mode_on)
-  }
-  return false;
+      return false;
   return true;
 }
 
 can_attacker_banzai_melee() {
-  if(!can_player_banzai_melee()) {
+  if(!can_player_banzai_melee())
     return false;
-  }
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
   enemyPoint = self.enemy GetOrigin();
   vecToEnemy = enemyPoint - self.origin;
   self.enemyDistanceSq = lengthSquared(vecToEnemy);
-  if(self.enemyDistanceSq > anim.meleeRangeSq) {
+  if(self.enemyDistanceSq > anim.meleeRangeSq)
     return false;
-  }
-  if(!animscripts\melee::isMeleePathClear(vecToEnemy, enemyPoint)) {
+  if(!animscripts\melee::isMeleePathClear(vecToEnemy, enemyPoint))
     return false;
-  }
   return true;
 }
 
 in_banzai_attack() {
-  if(isDefined(self.amBanzaiAttacking) && self.amBanzaiAttacking) {
+  if(isDefined(self.amBanzaiAttacking) && self.amBanzaiAttacking)
     return true;
-  }
-  if(self has_banzai_attacker()) {
+  if(self has_banzai_attacker())
     return true;
-  }
   return false;
 }
 
@@ -821,7 +786,7 @@ has_banzai_attacker() {
 }
 
 banzai_attacked_by(attacker) {
-  for(i = 0; i < self.banzaiAttackers.size; i++) {
+  for (i = 0; i < self.banzaiAttackers.size; i++) {
     if(self.banzaiAttackers[i] == attacker) {
       return true;
     }
@@ -830,9 +795,8 @@ banzai_attacked_by(attacker) {
 }
 
 add_banzai_attacker(attacker) {
-  if(!isDefined(self.banzaiAttackers)) {
+  if(!isDefined(self.banzaiAttackers))
     self.banzaiAttackers = [];
-  }
   if(isDefined(level.banzai_debug)) {
     if(self banzai_attacked_by(attacker)) {
       banzai_print(attacker, self, "WARNING: Attacker trying to attack someone he is already attacking.");
@@ -1020,9 +984,8 @@ handleBanzaiFailedNoteTracks(note) {
   banzai_print(self, player, "Handling banzai failed note: " + note);
   switch (note) {
     case "stab_wound": {
-      if(is_mature()) {
-        playFXOnTag(level._effects["stab_wound"], self, "j_neck");
-      }
+      if(is_mature())
+        playfxontag(level._effects["stab_wound"], self, "j_neck");
     }
     break;
   }
@@ -1047,11 +1010,11 @@ banzai_last_stand(attacker, player) {
       return;
     }
   }
-  while(player_attacking(player)) {
+  while (player_attacking(player)) {
     wait(0.05);
   }
   player.attackedBanzai = false;
-  while(IsAlive(attacker) && isDefined(attacker.inBanzaiMelee) && attacker.inBanzaiMelee) {
+  while (IsAlive(attacker) && isDefined(attacker.inBanzaiMelee) && attacker.inBanzaiMelee) {
     if(player_attacking(player)) {
       level thread hideBanzaiHint(player);
       player notify("timescale_off");
@@ -1077,13 +1040,13 @@ last_stand_attacker_failed(attacker, player) {
 }
 
 kill_attacker(attacker, player) {
-  attacker setCanDamage(true);
+  attacker setcandamage(true);
   attacker.a.nodeath = true;
   attacker DropAllAIWeapons();
   dif = player.origin - attacker.origin;
   dif = (dif[0], dif[1], 0);
   arcademode_assignpoints("arcademode_score_banzai", player);
-  attacker do_kill_damage(attacker getEye() - dif, player);
+  attacker do_kill_damage(attacker geteye() - dif, player);
   player giveAchievement("ANY_ACHIEVEMENT_BANZAI");
 }
 
@@ -1112,8 +1075,8 @@ last_stand_player_failed(attacker, player) {
 }
 
 play_thrust_sound() {
-  self playSound("generic_thrust_japanese");
-  self playSound("melee_swing");
+  self PlaySound("generic_thrust_japanese");
+  self PlaySound("melee_swing");
 }
 
 play_banzai_rumble() {
@@ -1122,7 +1085,7 @@ play_banzai_rumble() {
 
 record_early_attacks(attacker, player) {
   attacker endon("startBanzaiLastStand");
-  while(1) {
+  while (1) {
     if(player_attacking(player)) {
       player.banzaiAttackedTooEarly = true;
       break;
@@ -1133,7 +1096,7 @@ record_early_attacks(attacker, player) {
 
 record_late_attacks(attacker, player) {
   attacker endon("killanimscript");
-  while(1) {
+  while (1) {
     if(player_attacking(player)) {
       player.banzaiAttackedTooLate = true;
       break;
@@ -1159,7 +1122,7 @@ do_start_synchronized_melee(attacker, player) {
     return false;
   }
   attacker OrientMode("face enemy");
-  attacker setCanDamage(false);
+  attacker setcandamage(false);
   if(!allow_mashing()) {
     player.banzaiAttackedTooEarly = false;
     player.banzaiAttackedTooLate = false;
@@ -1170,7 +1133,7 @@ do_start_synchronized_melee(attacker, player) {
   attacker.syncedMeleeTarget = player;
   if(!isDefined(player.player_view)) {
     banzai_print(attacker, player, "Spawning banzai player view.");
-    player.player_view = PlayerView_spawn(player);
+    player.player_view = PlayerView_Spawn(player);
   }
   player notify("banzai_attacks_player");
   player.player_view.inSeq = true;
@@ -1267,9 +1230,8 @@ do_end_synchronized_melee(attacker, player) {
 end_synchronized_melee(attacker, player) {
   banzai_print(attacker, player, "Trying to end banzai vs. player synchronized melee.");
   if(!isDefined(player) || !isDefined(player.inBanzaiMelee) || !player.inBanzaiMelee) {
-    if(!isDefined(player)) {
+    if(!isDefined(player))
       banzai_print(attacker, player, "WARNING: Player removed before end_synchronized_melee could execute.");
-    }
     return;
   }
   banzai_print(attacker, player, "Ending banzai vs. player synchronized melee.");
@@ -1342,11 +1304,11 @@ kill_player(player, delay) {
   waittillframeend;
   setDvar("ui_deadquote", "");
   wait(1.6);
-  level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
+  level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
   if(isDefined(player.banzaiAttackedTooEarly) && player.banzaiAttackedTooEarly) {
-    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
+    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
   } else if(isDefined(player.banzaiAttackedTooLate) && player.banzaiAttackedTooLate) {
-    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
+    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
   }
   thread banzai_deathquote(player);
 }
@@ -1382,16 +1344,14 @@ showBanzaiHint(player) {
     level.banzaiHintElem = [];
   }
   num = player GetEntityNumber();
-  if(isDefined(level.banzaiHintElem[num])) {
+  if(isDefined(level.banzaiHintElem[num]))
     level.banzaiHintElem[num] maps\_hud_util::destroyElem();
-  }
   level.banzaiHintElem[num] = maps\_hud_util::createFontString("default", 2, player);
   level.banzaiHintElem[num].color = (1, 1, 1);
-  if(player.firstTime) {
+  if(player.firstTime)
     level.banzaiHintElem[num] setText(&"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE");
-  } else {
+  else
     level.banzaiHintElem[num] setText(&"SCRIPT_PLATFORM_BANZAI_HINT");
-  }
   level.banzaiHintElem[num].x = 0;
   level.banzaiHintElem[num].y = 20;
   level.banzaiHintElem[num].alignX = "center";
@@ -1425,13 +1385,13 @@ banzai_init_player_anims() {
   anim.banzai_meleeseq_player[anim.banzai_meleeseq_player.size] = % int_bonzai_attack_player_success;
 }
 
-PlayerView_spawn(player) {
+PlayerView_Spawn(player) {
   playerView = spawn("script_model", player.origin);
   playerView.angles = player.angles;
   playerView setModel(level.player_interactive_hands);
   playerView useAnimTree(#animtree);
   weapon = spawn("script_model", playerView gettagorigin("tag_weapon"));
-  weapon setModel("weapon_usa_kbar_knife");
+  weapon setmodel("weapon_usa_kbar_knife");
   weapon linkto(playerView, "tag_weapon", (0, 0, 0), (0, 0, 0));
   player.banzaiDefenseWeapon = weapon;
   playerView hide();

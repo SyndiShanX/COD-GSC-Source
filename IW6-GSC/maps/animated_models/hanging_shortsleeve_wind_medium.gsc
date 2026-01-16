@@ -6,14 +6,12 @@
 #include common_scripts\utility;
 #using_animtree("animated_props");
 main() {
-  if(!isDefined(level.anim_prop_models)) {
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
-  }
 
   model = "clothes_line_tshirt_iw6";
-  if(isSP()) {
+  if(isSP())
     level.anim_prop_models[model]["wind_medium"] = % hanging_clothes_short_sleeve_wind_medium;
-  } else {
+  else
     level.anim_prop_models[model]["wind_medium"] = "hanging_clothes_short_sleeve_wind_medium";
-  }
 }

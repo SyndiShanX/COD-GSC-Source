@@ -13,8 +13,8 @@ init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "deployable_vest_marker_mp";
   boxConfig.modelBase = "mil_ammo_case_1_open";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   boxConfig.event = "deployable_ammo_taken";
   boxConfig.streakName = BOX_TYPE;
   boxConfig.splashName = "used_deployable_ammo";
@@ -141,9 +141,8 @@ canUseDeployable(boxEnt) {
   if(is_aliens() && isDefined(boxEnt) && boxEnt.owner == self && !isDefined(boxEnt.air_dropped)) {
     return false;
   }
-  if(!is_aliens()) {
+  if(!is_aliens())
     return (!self isJuggernaut());
-  } else {
+  else
     return true;
-  }
 }

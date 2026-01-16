@@ -23,7 +23,8 @@ init_flags() {
   flag_init("crc_breach_guards_spawned");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_crc() {
   iprintln("crc");
@@ -64,17 +65,15 @@ crc_flashbang_add_script_noteworthy(ent) {
 }
 
 init_door_clip() {
-  foreach(door in getEntArray("script_doors", "script_noteworthy")) {
-    getent(door.target, "targetname") linkto(door);
-  }
+  foreach(door in getentarray("script_doors", "script_noteworthy"))
+  getent(door.target, "targetname") linkto(door);
 }
 
 init_crc_glass_monster_clip() {
-  a_clip_brushes = getEntArray("crc_glass_clip", "targetname");
+  a_clip_brushes = getentarray("crc_glass_clip", "targetname");
 
-  foreach(e_brush in a_clip_brushes) {
-    e_brush thread crc_glass_monster_clip_think();
-  }
+  foreach(e_brush in a_clip_brushes)
+  e_brush thread crc_glass_monster_clip_think();
 }
 
 init_tarp_clip() {
@@ -87,9 +86,8 @@ init_tarp_clip() {
       e_clip = getent("tarp_collision_" + i, "targetname");
     }
 
-    if(isDefined(m_tarp) && isDefined(e_clip)) {
+    if(isDefined(m_tarp) && isDefined(e_clip))
       m_tarp thread tarp_clip_think(e_clip);
-    }
   }
 }
 
@@ -110,21 +108,20 @@ init_use_trigger_hints() {
 crc_glass_monster_clip_think() {
   level endon("offices_cleared");
   s_start_point = getstruct(self.target, "targetname");
-  v_endpoint = s_start_point.origin + anglesToForward(s_start_point.angles) * 18;
+  v_endpoint = s_start_point.origin + anglestoforward(s_start_point.angles) * 18;
 
   while(isDefined(self)) {
     level waittill("glass_smash");
     wait 0.05;
 
-    if(bulletTrace(s_start_point.origin, v_endpoint, 0, level.player, 1, 0, level.ai_salazar)["position"] == v_endpoint) {
+    if(bullettrace(s_start_point.origin, v_endpoint, 0, level.player, 1, 0, level.ai_salazar)["position"] == v_endpoint) {
       self notsolid();
       self connectpaths();
       self delete();
 
       if(isDefined(s_start_point.target)) {
-        foreach(ent in getEntArray(s_start_point.target, "targetname")) {
-          ent delete();
-        }
+        foreach(ent in getentarray(s_start_point.target, "targetname"))
+        ent delete();
       }
     }
   }
@@ -151,7 +148,7 @@ spiderbot_transition() {
   level.player freezecontrols(0);
   screen_fade_in(0, "compass_static");
   level thread run_scene_and_delete("it_mgr_body");
-  level.player playSound("evt_spiderbot_outro");
+  level.player playsound("evt_spiderbot_outro");
   level.player thread queue_dialog("pa_access_granted_0", 4, "scene_p_eye_scan_started");
 }
 
@@ -177,7 +174,7 @@ crc_breach_event() {
   scene_wait("scene_p_eye_scan_breach");
   level.ai_salazar force_goal(getnode("crc_breach_salazar_start_pos", "targetname"), 16);
 
-  foreach(ai_enemy in getEntArray("crc_breach_guards_ai", "targetname")) {
+  foreach(ai_enemy in getentarray("crc_breach_guards_ai", "targetname")) {
     if(isalive(ai_enemy)) {
       ai_enemy set_goalradius(128);
       ai_enemy thread crc_breach_rush();
@@ -208,9 +205,8 @@ close_crc_door() {
 }
 
 crc_salazar_terminal_idle() {
-  foreach(e_trigger in getEntArray("crc_entrance_color_trigger", "targetname")) {
-    e_trigger delete();
-  }
+  foreach(e_trigger in getentarray("crc_entrance_color_trigger", "targetname"))
+  e_trigger delete();
 
   level.ai_salazar say_dialog("sala_clear_0", 1.0);
   setmusicstate("KARMA_1_CRC");
@@ -229,9 +225,8 @@ crc_breach_enemy_fire() {
   level.player enableinvulnerability();
 
   foreach(ai_shooter in a_shooters) {
-    if(isDefined(ai_shooter.script_string) && ai_shooter.script_string == "crc_breach_shooters") {
+    if(isDefined(ai_shooter.script_string) && ai_shooter.script_string == "crc_breach_shooters")
       ai_shooter thread shoot_at_target(e_shoot_target, undefined, 0.0, 10.0);
-    }
   }
 
   wait 14.0;
@@ -257,14 +252,14 @@ breach_vo() {
 }
 
 crc_eye_scan() {
-  luinotifyevent(&"hud_update_vehicle_custom", 3, 1, &"retina_scanner", 3250);
+  luinotifyevent(&"hud_update_vehicle_custom", 3, 1, & "retina_scanner", 3250);
   level thread run_scene_and_delete("scene_p_eye_scan");
-  level.player playSound("evt_eye_scan_boot_up");
+  level.player playsound("evt_eye_scan_boot_up");
   add_visor_text("KARMA_ACCESSING_SOURCE_DATA", 2, "orange");
   wait 2.0;
   add_visor_text("KARMA_MATCH_COMPLETE", 2, "orange");
   exploder(480);
-  level.player playSound("evt_eye_scanner");
+  level.player playsound("evt_eye_scanner");
   luinotifyevent(&"begin_retina_scan", 1, 1000);
   wait 3.0;
   luinotifyevent(&"hud_update_vehicle_custom", 1, 0);
@@ -274,7 +269,7 @@ crc_eye_scan() {
 
 crc_terminal_event() {
   trigger_wait("t_minority_report");
-  level.player playSound("evt_ui_wall");
+  level.player playsound("evt_ui_wall");
   crc_interact();
   flag_set("crc_karma_identified");
 }
@@ -338,34 +333,34 @@ crc_interact() {
 wait_for_input(str_input) {
   switch (str_input) {
     case "attack":
-      str_msg = &"KARMA_HINT_ATTACK";
+      str_msg = & "KARMA_HINT_ATTACK";
       break;
     case "melee":
-      str_msg = &"KARMA_HINT_MELEE";
+      str_msg = & "KARMA_HINT_MELEE";
       break;
     case "down":
-      str_msg = &"KARMA_HINT_MOVE_DOWN";
+      str_msg = & "KARMA_HINT_MOVE_DOWN";
       break;
     case "left":
-      str_msg = &"KARMA_HINT_MOVE_LEFT";
+      str_msg = & "KARMA_HINT_MOVE_LEFT";
       break;
     case "right":
-      str_msg = &"KARMA_HINT_MOVE_RIGHT";
+      str_msg = & "KARMA_HINT_MOVE_RIGHT";
       break;
     case "up":
-      str_msg = &"KARMA_HINT_MOVE_UP";
+      str_msg = & "KARMA_HINT_MOVE_UP";
       break;
     case "sprint":
-      str_msg = &"KARMA_HINT_SPRINT";
+      str_msg = & "KARMA_HINT_SPRINT";
       break;
     case "use":
-      str_msg = &"KARMA_HINT_USE";
+      str_msg = & "KARMA_HINT_USE";
       break;
     case "zoom":
-      str_msg = &"KARMA_HINT_ZOOM";
+      str_msg = & "KARMA_HINT_ZOOM";
       break;
     case "unzoom":
-      str_msg = &"KARMA_HINT_UNZOOM";
+      str_msg = & "KARMA_HINT_UNZOOM";
       break;
   }
 
@@ -398,70 +393,59 @@ wait_for_input(str_input) {
     if(level.wiiu) {
       controllertype = level.player getcontrollertype();
 
-      if(controllertype == "remote") {
+      if(controllertype == "remote")
         v_rstick = level.player get_normalized_dpad_movement();
-      }
     }
 
     switch (str_input) {
       case "attack":
-        if(level.player attackbuttonpressed()) {
+        if(level.player attackbuttonpressed())
           b_got_input = 1;
-        }
 
         break;
       case "melee":
-        if(level.player meleebuttonpressed()) {
+        if(level.player meleebuttonpressed())
           b_got_input = 1;
-        }
 
         break;
       case "down":
-        if(v_lstick[0] < -0.8 && v_rstick[0] < -0.8) {
+        if(v_lstick[0] < -0.8 && v_rstick[0] < -0.8)
           b_got_input = 1;
-        }
 
         break;
       case "left":
-        if(v_lstick[1] < -0.8 && v_rstick[1] < -0.8) {
+        if(v_lstick[1] < -0.8 && v_rstick[1] < -0.8)
           b_got_input = 1;
-        }
 
         break;
       case "right":
-        if(v_lstick[1] > 0.8 && v_rstick[1] > 0.8) {
+        if(v_lstick[1] > 0.8 && v_rstick[1] > 0.8)
           b_got_input = 1;
-        }
 
         break;
       case "up":
-        if(v_lstick[0] > 0.8 && v_rstick[0] > 0.8) {
+        if(v_lstick[0] > 0.8 && v_rstick[0] > 0.8)
           b_got_input = 1;
-        }
 
         break;
       case "sprint":
-        if(level.player sprintbuttonpressed()) {
+        if(level.player sprintbuttonpressed())
           b_got_input = 1;
-        }
 
         break;
       case "use":
-        if(level.player usebuttonpressed()) {
+        if(level.player usebuttonpressed())
           b_got_input = 1;
-        }
 
         break;
       case "zoom":
-        if(v_lstick[1] < -0.6 && v_rstick[1] > 0.6) {
+        if(v_lstick[1] < -0.6 && v_rstick[1] > 0.6)
           b_got_input = 1;
-        }
 
         break;
       case "unzoom":
-        if(v_lstick[1] > 0.6 && v_rstick[1] < -0.6) {
+        if(v_lstick[1] > 0.6 && v_rstick[1] < -0.6)
           b_got_input = 1;
-        }
 
         break;
     }
@@ -491,8 +475,7 @@ trespasser_perk() {
   level.player set_temp_stat(1, 1);
 
   foreach(ai_guy in getaiarray("axis")) {
-    if(isalive(ai_guy)) {
+    if(isalive(ai_guy))
       ai_guy thread maps\karma_util::turn_on_enemy_highlight();
-    }
   }
 }

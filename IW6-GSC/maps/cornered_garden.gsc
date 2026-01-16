@@ -81,9 +81,8 @@ fireworks_garden() {
 garden_transient_sync() {
   common_scripts\utility::flag_wait("garden_transient_sync");
 
-  while(!synctransients()) {
+  while(!synctransients())
     wait 0.01;
-  }
 }
 
 garden_entity_cleanup() {
@@ -132,18 +131,16 @@ garden_entity_cleanup() {
 get_verify_and_delete_ent(var_0, var_1) {
   var_2 = getent(var_0, var_1);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 delete();
-  }
 }
 
 get_verify_and_delete_ent_array(var_0, var_1) {
   var_2 = getEntArray(var_0, var_1);
 
   if(isDefined(var_2)) {
-    foreach(var_4 in var_2) {
-      var_4 delete();
-    }
+    foreach(var_4 in var_2)
+    var_4 delete();
   }
 }
 
@@ -151,9 +148,8 @@ check_trigger_flagset(var_0) {
   var_1 = getent(var_0, "targetname");
   var_1 waittill("trigger");
 
-  if(isDefined(var_1.script_flag_set)) {
+  if(isDefined(var_1.script_flag_set))
     common_scripts\utility::flag_set(var_1.script_flag_set);
-  }
 }
 
 handle_garden() {
@@ -174,9 +170,8 @@ garden_gameplay() {
   common_scripts\utility::flag_wait("garden_player_in_garden");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.entry)) {
+    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.entry))
       var_2 delete();
-    }
   }
 
   level thread garden_vo();
@@ -327,14 +322,12 @@ garden_enemies_delete() {
   var_0 = getEntArray("garden_enemies", "script_noteworthy");
   var_1 = [];
 
-  if(isDefined(var_0) && var_0.size > 0) {
+  if(isDefined(var_0) && var_0.size > 0)
     var_1 = maps\_utility::array_removedead_or_dying(var_0);
-  }
 
   if(var_1.size > 0) {
-    foreach(var_3 in var_1) {
-      var_3 kill();
-    }
+    foreach(var_3 in var_1)
+    var_3 kill();
   }
 }
 

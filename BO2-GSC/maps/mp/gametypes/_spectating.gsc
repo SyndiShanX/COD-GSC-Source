@@ -4,9 +4,8 @@
 *********************************************/
 
 init() {
-  foreach(team in level.teams) {
-    level.spectateoverride[team] = spawnStruct();
-  }
+  foreach(team in level.teams)
+  level.spectateoverride[team] = spawnstruct();
 
   level thread onplayerconnect();
 }
@@ -50,9 +49,8 @@ onjoinedspectators() {
 updatespectatesettings() {
   level endon("game_ended");
 
-  for(index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++)
     level.players[index] setspectatepermissions();
-  }
 }
 
 getsplitscreenteam() {
@@ -68,9 +66,8 @@ getsplitscreenteam() {
     }
     team = level.players[index].sessionteam;
 
-    if(team != "spectator") {
+    if(team != "spectator")
       return team;
-    }
   }
 
   return self.sessionteam;
@@ -87,18 +84,16 @@ otherlocalplayerstillalive() {
     if(!self isplayeronsamemachine(level.players[index])) {
       continue;
     }
-    if(isalive(level.players[index])) {
+    if(isalive(level.players[index]))
       return true;
-    }
   }
 
   return false;
 }
 
 allowspectateallteams(allow) {
-  foreach(team in level.teams) {
-    self allowspectateteam(team, allow);
-  }
+  foreach(team in level.teams)
+  self allowspectateteam(team, allow);
 }
 
 allowspectateallteamsexceptteam(skip_team, allow) {
@@ -114,9 +109,8 @@ setspectatepermissions() {
   team = self.sessionteam;
 
   if(team == "spectator") {
-    if(self issplitscreen() && !level.splitscreen) {
+    if(self issplitscreen() && !level.splitscreen)
       team = getsplitscreenteam();
-    }
 
     if(team == "spectator") {
       self allowspectateallteams(1);
@@ -173,13 +167,11 @@ setspectatepermissions() {
   }
 
   if(isDefined(team) && isDefined(level.teams[team])) {
-    if(isDefined(level.spectateoverride[team].allowfreespectate)) {
+    if(isDefined(level.spectateoverride[team].allowfreespectate))
       self allowspectateteam("freelook", 1);
-    }
 
-    if(isDefined(level.spectateoverride[team].allowenemyspectate)) {
+    if(isDefined(level.spectateoverride[team].allowenemyspectate))
       self allowspectateallteamsexceptteam(team, 1);
-    }
   }
 }
 

@@ -30,7 +30,7 @@ main() {
   maps\_drone_ai::init();
   common_scripts\_pipes::main();
   level.pipesdamage = 0;
-  maps\_utility::intro_screen_create(&"FACTORY_INTROSCREEN_LINE_1", &"FACTORY_INTROSCREEN_LINE_2", &"FACTORY_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"FACTORY_INTROSCREEN_LINE_1", & "FACTORY_INTROSCREEN_LINE_2", & "FACTORY_INTROSCREEN_LINE_5");
   maps\_utility::transient_init("factory_intro_tr");
   maps\_utility::transient_init("factory_mid_tr");
   maps\_utility::transient_init("factory_outro_tr");
@@ -65,9 +65,8 @@ main() {
   setdvar("music_enable", 1);
   setsaveddvar("r_reactiveMotionPlayerRadius", 5.0);
 
-  if(level.ps3 == 1) {
+  if(level.ps3 == 1)
     setsaveddvar("sm_sunSampleSizeNear", 0.1);
-  }
 
   maps\_nightvision::main(level.players, 1);
   level.player setactionslot(1, "");
@@ -129,9 +128,8 @@ motion_blur_during_melee() {
 }
 
 factory_glare() {
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     precacheshader("lens_grime_messy");
-  }
 }
 
 intro_start() {
@@ -271,35 +269,29 @@ fly_around_start() {
 
 fly_around() {
   for(;;) {
-    while(!level.player buttonpressed("BUTTON_X")) {
+    while(!level.player buttonpressed("BUTTON_X"))
       wait 0.05;
-    }
 
     maps\factory_util::load_transient("factory_intro_tr");
 
-    while(!istransientloaded("factory_intro_tr")) {
+    while(!istransientloaded("factory_intro_tr"))
       wait 0.05;
-    }
 
-    while(!level.player buttonpressed("BUTTON_X")) {
+    while(!level.player buttonpressed("BUTTON_X"))
       wait 0.05;
-    }
 
     maps\factory_util::load_transient("factory_mid_tr");
 
-    while(!istransientloaded("factory_mid_tr")) {
+    while(!istransientloaded("factory_mid_tr"))
       wait 0.05;
-    }
 
-    while(!level.player buttonpressed("BUTTON_X")) {
+    while(!level.player buttonpressed("BUTTON_X"))
       wait 0.05;
-    }
 
     maps\factory_util::load_transient("factory_outro_tr");
 
-    while(!istransientloaded("factory_outro_tr")) {
+    while(!istransientloaded("factory_outro_tr"))
       wait 0.05;
-    }
   }
 }
 
@@ -312,9 +304,8 @@ mission_objective_logic() {
   waittillframeend;
   var_0 = 0;
 
-  if(level.start_point != "default") {
+  if(level.start_point != "default")
     var_0 = 1;
-  }
 
   switch (level.start_point) {
     case "default":
@@ -323,7 +314,7 @@ mission_objective_logic() {
       var_0 = 0;
     case "factory_ingress":
     case "intro_train":
-      objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "active", &"FACTORY_OBJ_ENTER_FACTORY");
+      objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "active", & "FACTORY_OBJ_ENTER_FACTORY");
       objective_state(maps\_utility::obj("OBJ_INFILTRATE"), "current");
       common_scripts\utility::flag_wait("entered_factory_1");
       objective_state(maps\_utility::obj("OBJ_INFILTRATE"), "done");
@@ -332,27 +323,27 @@ mission_objective_logic() {
     case "presat_room":
     case "powerstealth":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", &"FACTORY_OBJ_ENTER_FACTORY");
+        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", & "FACTORY_OBJ_ENTER_FACTORY");
         var_0 = 0;
       }
 
-      objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "active", &"FACTORY_OBJ_FIND_EVIDENCE");
+      objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "active", & "FACTORY_OBJ_FIND_EVIDENCE");
       objective_state(maps\_utility::obj("OBJ_FIND_PROOF"), "current");
       common_scripts\utility::flag_wait("start_camera_moment");
       objective_state(maps\_utility::obj("OBJ_FIND_PROOF"), "done");
       wait 0.25;
-      objective_add(maps\_utility::obj("OBJ_SCAN_2"), "active", &"FACTORY_OBJ_SCAN_2");
+      objective_add(maps\_utility::obj("OBJ_SCAN_2"), "active", & "FACTORY_OBJ_SCAN_2");
       objective_state(maps\_utility::obj("OBJ_SCAN_2"), "current");
       common_scripts\utility::flag_wait("cam_B_confirmed");
       objective_state(maps\_utility::obj("OBJ_SCAN_2"), "done");
       common_scripts\utility::flag_wait("sat_room_continue");
     case "ambush":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", &"FACTORY_OBJ_ENTER_FACTORY");
-        objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "done", &"FACTORY_OBJ_FIND_EVIDENCE");
+        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", & "FACTORY_OBJ_ENTER_FACTORY");
+        objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "done", & "FACTORY_OBJ_FIND_EVIDENCE");
       }
 
-      objective_add(maps\_utility::obj("OBJ_INVESTIGATE"), "active", &"FACTORY_OBJ_INVESTIGATE_RECORDS");
+      objective_add(maps\_utility::obj("OBJ_INVESTIGATE"), "active", & "FACTORY_OBJ_INVESTIGATE_RECORDS");
       objective_state(maps\_utility::obj("OBJ_INVESTIGATE"), "current");
       level waittill("show_ambush_use_hint");
       var_1 = getent("ambush_console_node", "targetname");
@@ -367,13 +358,13 @@ mission_objective_logic() {
     case "rooftop":
     case "ambush_escape":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", &"FACTORY_OBJ_ENTER_FACTORY");
-        objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "done", &"FACTORY_OBJ_FIND_EVIDENCE");
-        objective_add(maps\_utility::obj("OBJ_INVESTIGATE"), "done", &"FACTORY_OBJ_INVESTIGATE_RECORDS");
+        objective_add(maps\_utility::obj("OBJ_INFILTRATE"), "done", & "FACTORY_OBJ_ENTER_FACTORY");
+        objective_add(maps\_utility::obj("OBJ_FIND_PROOF"), "done", & "FACTORY_OBJ_FIND_EVIDENCE");
+        objective_add(maps\_utility::obj("OBJ_INVESTIGATE"), "done", & "FACTORY_OBJ_INVESTIGATE_RECORDS");
         var_0 = 0;
       }
 
-      objective_add(maps\_utility::obj("OBJ_ESCAPE"), "active", &"FACTORY_OBJ_ESCAPE_FACTORY");
+      objective_add(maps\_utility::obj("OBJ_ESCAPE"), "active", & "FACTORY_OBJ_ESCAPE_FACTORY");
       objective_state(maps\_utility::obj("OBJ_ESCAPE"), "current");
       common_scripts\utility::flag_wait("car_chase_complete");
       objective_state(maps\_utility::obj("OBJ_ESCAPE"), "done");

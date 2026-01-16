@@ -83,9 +83,9 @@ aud_check(var_0) {
     if(var_0 == "clubhouse") {
       return;
     }
-    if(var_0 == "hvt") {
+    if(var_0 == "hvt")
       maps\_utility::music_play("mus_hq_found_ajax");
-    } else {
+    else {
       if(var_0 == "finale") {
         return;
       }
@@ -108,16 +108,16 @@ aud_music(var_0) {
     if(var_0 == "atriumcombat") {
       return;
     }
-    if(var_0 == "lookfordoor") {
+    if(var_0 == "lookfordoor")
       maps\_utility::music_play("mus_hq_breach_search");
-    } else if(var_0 == "foundajax") {
+    else if(var_0 == "foundajax") {
       wait 2;
       maps\_utility::music_play("mus_hq_found_ajax");
     } else if(var_0 == "combatprep")
       maps\_utility::music_crossfade("mus_hq_combat_prep", 1.0);
-    else if(var_0 == "finalbattle") {
+    else if(var_0 == "finalbattle")
       maps\_utility::music_crossfade("mus_hq_final_battle", 1.0);
-    } else {
+    else {
       if(var_0 == "exfil") {
         return;
       }
@@ -156,9 +156,8 @@ aud_fx_planes() {
   }
   wait 1.7;
 
-  if(self.model == "ehq_bomber_y_8" && level.aud_play_jet_flyby) {
+  if(self.model == "ehq_bomber_y_8" && level.aud_play_jet_flyby)
     thread common_scripts\utility::play_sound_in_space("enhq_jet_flyby_1", (1133, -8854, 5440));
-  }
 
   level.aud_play_jet_flyby = !level.aud_play_jet_flyby;
 }
@@ -201,26 +200,22 @@ aud_start_sniper(var_0) {
     var_1 = getaiarray("axis");
     var_2 = getaiarray("allies");
 
-    foreach(var_4 in var_2) {
-      var_4 thread aud_handle_allies_remote_sniper(level.aud_vip_ally_locs);
-    }
+    foreach(var_4 in var_2)
+    var_4 thread aud_handle_allies_remote_sniper(level.aud_vip_ally_locs);
 
-    foreach(var_7 in var_1) {
-      var_7 thread aud_handle_remote_sniper_ai(level.aud_vip_combat);
-    }
+    foreach(var_7 in var_1)
+    var_7 thread aud_handle_remote_sniper_ai(level.aud_vip_combat);
   } else if(var_0 == "enhq_stadium_large_room") {
     wait 2;
     level.aud_finale_sniper notify("start_sniping");
     var_1 = getaiarray("axis");
     var_2 = getaiarray("allies");
 
-    foreach(var_4 in var_2) {
-      var_4 thread aud_handle_allies_remote_sniper(level.aud_finale_ally_locs);
-    }
+    foreach(var_4 in var_2)
+    var_4 thread aud_handle_allies_remote_sniper(level.aud_finale_ally_locs);
 
-    foreach(var_7 in var_1) {
-      var_7 thread aud_handle_remote_sniper_ai(level.aud_finale_sniper);
-    }
+    foreach(var_7 in var_1)
+    var_7 thread aud_handle_remote_sniper_ai(level.aud_finale_sniper);
 
     level.aud_finale_sniper linkto(level.player);
     level.aud_finale_sniper2 linkto(level.player);
@@ -231,9 +226,8 @@ aud_start_sniper(var_0) {
     thread aud_rpg_listener();
     var_2 = getaiarray("allies");
 
-    foreach(var_4 in var_2) {
-      var_4 thread aud_handle_allies_remote_sniper(level.aud_traverse_ally_locs);
-    }
+    foreach(var_4 in var_2)
+    var_4 thread aud_handle_allies_remote_sniper(level.aud_traverse_ally_locs);
   }
 
   wait 1.7;
@@ -341,16 +335,16 @@ aud_convoy_start(var_0) {
       var_0 playSound("enhq_convoy_intro_half_3");
     }
   } else if(level.aud_intro_convoy_counter == 6 || level.aud_intro_convoy_counter == 7) {
-    if(var_0.vehicletype == "iveco_lynx") {
+    if(var_0.vehicletype == "iveco_lynx")
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    } else {
+    else {
       wait 0.6;
       var_0 playSound("enhq_convoy_intro_half_4");
     }
   } else if(level.aud_intro_convoy_counter == 8 || level.aud_intro_convoy_counter == 9) {
-    if(var_0.target == "pf251_auto120") {
+    if(var_0.target == "pf251_auto120")
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    } else {
+    else {
       wait 4;
       var_0 playSound("enhq_convoy_intro_jeep_2");
     }
@@ -363,16 +357,16 @@ aud_convoy_start(var_0) {
       var_0 playSound("enhq_convoy_intro_half_1");
     }
   } else if(level.aud_intro_convoy_counter == 12 || level.aud_intro_convoy_counter == 13) {
-    if(var_0.vehicletype == "iveco_lynx") {
+    if(var_0.vehicletype == "iveco_lynx")
       var_0 playSound("enhq_convoy_intro_jeep_4");
-    } else {
+    else {
       wait 2.05;
       var_0 playSound("enhq_convoy_intro_half_2");
     }
   } else if(level.aud_intro_convoy_counter == 14 || level.aud_intro_convoy_counter == 15) {
-    if(var_0.unique_id == "ai41") {
+    if(var_0.unique_id == "ai41")
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    } else {
+    else {
       wait 2.45;
       var_0 playSound("enhq_convoy_intro_jeep_3");
     }
@@ -420,9 +414,9 @@ aud_listen_mk32_reload() {
   thread aud_listen_sprint_or_switch();
 
   for(;;) {
-    if(level.player isreloading()) {
+    if(level.player isreloading())
       level.aud_player_reloading = 1;
-    } else {
+    else {
       wait 0.1;
       level.aud_player_reloading = 0;
     }
@@ -438,9 +432,8 @@ aud_listen_sprint_or_switch() {
 
   for(;;) {
     if(level.aud_player_reloading) {
-      if(level.player issprinting() || level.player isswitchingweapon()) {
+      if(level.player issprinting() || level.player isswitchingweapon())
         level.player stopsoundchannel("effects2d2");
-      }
     }
 
     common_scripts\utility::waitframe();
@@ -455,11 +448,10 @@ aud_mk32_dud_beep(var_0) {
 aud_mk32_dud_beep_hit(var_0, var_1, var_2) {
   var_0 stoploopsound();
 
-  if(var_1) {
+  if(var_1)
     var_0 thread maps\_utility::play_sound_on_entity("enhq_mk203_impact");
-  } else {
+  else
     var_0 thread maps\_utility::play_sound_on_entity("enhq_mk203_impact_stone");
-  }
 }
 
 aud_doppler_grenade() {
@@ -584,9 +576,8 @@ aud_vehicle_jolt() {
     wait 1;
   } else if(level.aud_vehicle_jolt_count == 2)
     level.player thread maps\_utility::play_sound_on_entity("enhq_enemy_car_bash_02");
-  else if(level.aud_vehicle_jolt_count == 3) {
+  else if(level.aud_vehicle_jolt_count == 3)
     level.player thread maps\_utility::play_sound_on_entity("enhq_enemy_car_bash_04");
-  }
 
   level.aud_vehicle_jolt_count++;
 }
@@ -612,9 +603,8 @@ aud_distant_alarm() {
 aud_mute_field_guys() {
   var_0 = maps\_utility::get_ai_group_ai("field_chaos_guys");
 
-  foreach(var_2 in var_0) {
-    var_2 thread aud_limit_weaps();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread aud_limit_weaps();
 }
 
 aud_limit_weaps() {
@@ -624,11 +614,10 @@ aud_limit_weaps() {
     self waittill("shooting");
     level.aud_bullet_count = level.aud_bullet_count + 1;
 
-    if(level.aud_bullet_count > level.aud_max_bullets) {
+    if(level.aud_bullet_count > level.aud_max_bullets)
       self stopsounds();
-    } else {
+    else
       wait 1.5;
-    }
 
     level.aud_bullet_count = level.aud_bullet_count - 1;
   }
@@ -750,9 +739,8 @@ aud_enemy_muffled_vo(var_0, var_1, var_2) {
     level.aud_convo waittill("done");
     var_4++;
 
-    if(var_4 >= var_3.size) {
+    if(var_4 >= var_3.size)
       var_4 = 0;
-    }
   }
 
   wait 2;
@@ -833,9 +821,8 @@ aud_player_slide() {
 }
 
 aud_pre_sniper_rpg_listener() {
-  foreach(var_1 in level.rpg_ambush_guys) {
-    var_1 thread aud_pre_sniper_rpg_gunner_listener();
-  }
+  foreach(var_1 in level.rpg_ambush_guys)
+  var_1 thread aud_pre_sniper_rpg_gunner_listener();
 }
 
 aud_pre_sniper_rpg_gunner_listener() {
@@ -883,9 +870,8 @@ aud_rpg_listener() {
   var_1 = getaiarray("axis");
   var_2 = [(4420, 2983, 138), (3671, 2848, 138), (3123, 1711, 138), (3798, 1238, 138)];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++)
     var_1[var_3] thread aud_rpg_gunner_listener(var_2[var_3]);
-  }
 }
 
 aud_rpg_gunner_listener(var_0) {
@@ -1089,11 +1075,10 @@ aud_radio_chatter() {
   var_0 = 0;
 
   for(;;) {
-    if(var_0) {
+    if(var_0)
       thread common_scripts\utility::play_sound_in_space("enhq_radio_static_1", (4935, -4502, -921));
-    } else {
+    else
       thread common_scripts\utility::play_sound_in_space("enhq_radio_static_2", (4935, -4502, -921));
-    }
 
     var_0 = !var_0;
     wait(randomintrange(8, 14));
@@ -1133,15 +1118,14 @@ aud_handle_remote_sniper_ai(var_0) {
       if(randomint(10) < 8) {
         var_1 = randomint(4);
 
-        if(var_1 == 0) {
+        if(var_1 == 0)
           level.aud_finale_chopper1 playSound("weap_sc2010_fire_npc");
-        } else if(var_1 == 1) {
+        else if(var_1 == 1)
           level.aud_finale_chopper2 playSound("weap_m27_fire_npc");
-        } else if(var_1 == 2) {
+        else if(var_1 == 2)
           level.aud_finale_chopper3 playSound("weap_m27_fire_npc");
-        } else if(var_1 == 3) {
+        else if(var_1 == 3)
           level.aud_finale_chopper4 playSound("weap_m27_fire_npc");
-        }
 
         thread aud_play_whizby();
       }
@@ -1150,11 +1134,10 @@ aud_handle_remote_sniper_ai(var_0) {
     }
 
     if(randomint(10) < 9) {
-      if(randomint(2) == 0) {
+      if(randomint(2) == 0)
         level.aud_finale_sniper playSound("weap_sc2010_fire_npc");
-      } else {
+      else
         level.aud_finale_sniper2 playSound("weap_m27_fire_npc");
-      }
 
       thread aud_play_whizby();
     }
@@ -1165,9 +1148,8 @@ aud_play_whizby() {
   wait(randomfloatrange(0.25, 0.5));
   var_0 = "L";
 
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     var_0 = "R";
-  }
 
   var_1 = "whizby_near_0" + randomint(8) + "_" + var_0;
   level.player playSound(var_1);
@@ -1217,9 +1199,8 @@ aud_chopper_second(var_0) {
   level.aud_finale_chopper3 linkto(level.player);
   level.aud_finale_chopper4 linkto(level.player);
 
-  foreach(var_6 in var_4) {
-    var_6 thread aud_handle_remote_sniper_ai(level.aud_finale_chopper1);
-  }
+  foreach(var_6 in var_4)
+  var_6 thread aud_handle_remote_sniper_ai(level.aud_finale_chopper1);
 
   thread aud_chopper_down(var_0, var_1, var_2, var_3);
   thread aud_pings();
@@ -1246,9 +1227,8 @@ aud_lynx_turrets(var_0) {
       var_6 = var_4[randomintrange(0, level.aud_lynx_guys)];
       var_6 playSound("gaz_turret_temp_shoot");
 
-      if(randomint(8) == 0) {
+      if(randomint(8) == 0)
         wait 0.2;
-      }
 
       wait 0.1;
       continue;
@@ -1266,9 +1246,8 @@ aud_move_turret_ents(var_0) {
 aud_lynx_death_listener() {
   self waittill("death");
 
-  if(self.riders.size == 2) {
+  if(self.riders.size == 2)
     level.aud_lynx_guys--;
-  }
 }
 
 aud_lynx_rider_death_listener() {

@@ -3,12 +3,15 @@
  * Script: maps\createfx\co_hunted_fx.gsc
 ******************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
 main() {
+  // CreateFX entities placed: 521
+
   ent = createExploder("bird_pm");
   ent.v["origin"] = (2949.88, -5893.61, 87.4039);
   ent.v["angles"] = (5.70663, 18.4085, -85.9897);

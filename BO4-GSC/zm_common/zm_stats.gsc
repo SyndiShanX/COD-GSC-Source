@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_stats;
 
 autoexec __init__system__() {
@@ -236,11 +237,11 @@ player_stats_init() {
   self globallogic_score::initpersstat(#"rounds", 0);
 
   if(level.resetplayerscoreeveryround) {
-    self.pers[# "score"] = 0;
+    self.pers[#"score"] = 0;
   }
 
-  self.pers[# "score"] = level.player_starting_points;
-  self.score = self.pers[# "score"];
+  self.pers[#"score"] = level.player_starting_points;
+  self.score = self.pers[#"score"];
   self incrementplayerstat("score", self.score);
   self add_map_stat("score", self.score);
   self globallogic_score::initpersstat(#"zteam", 0);
@@ -263,17 +264,17 @@ player_stats_init() {
   }
 
   if(getdvarint(#"hash_27ff853067d7c38c", 0)) {
-    var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b");
+    var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b");
     var_8962d9b1 = isDefined(level.var_d479261a) ? level.var_d479261a : 0;
-    self stats::set_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b", var_8962d9b1);
-    previousutc = self stats::get_stat(#"hash_18e3320ccf4091e5", # "calling_timestamp");
+    self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b", var_8962d9b1);
+    previousutc = self stats::get_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp");
     currentutc = getutc();
     var_222b02a1 = currentutc - previousutc;
     var_ee21b34b = 86400;
 
     if(var_87b499fb !== var_8962d9b1 || previousutc == 0 || var_222b02a1 > var_ee21b34b) {
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", 0);
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "calling_timestamp", currentutc);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", 0);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp", currentutc);
     }
   }
 
@@ -319,8 +320,8 @@ update_players_stats_at_match_end(players) {
 
     distance = player get_stat_distance_traveled();
     player stats::function_dad108fa(#"distance_traveled", distance);
-    player incrementplayerstat("time_played_total", player.pers[# "time_played_total"]);
-    player add_map_stat("time_played_total", player.pers[# "time_played_total"]);
+    player incrementplayerstat("time_played_total", player.pers[#"time_played_total"]);
+    player add_map_stat("time_played_total", player.pers[#"time_played_total"]);
     recordplayermatchend(player);
     recordplayerstats(player, "present_at_end", 1);
     player zm_weapons::updateweapontimingszm(newtime);
@@ -393,25 +394,25 @@ update_players_stats_at_match_end(players) {
     if(gamemodeismode(0)) {
       player gamehistoryfinishmatch(4, 0, 0, 0, 0, 0);
 
-      if(isDefined(player.pers[# "matchesplayedstatstracked"])) {
+      if(isDefined(player.pers[#"matchesplayedstatstracked"])) {
         gamemode = util::getcurrentgamemode();
         player globallogic::incrementmatchcompletionstat(gamemode, "played", "completed");
 
-        if(isDefined(player.pers[# "matcheshostedstatstracked"])) {
+        if(isDefined(player.pers[#"matcheshostedstatstracked"])) {
           player globallogic::incrementmatchcompletionstat(gamemode, "hosted", "completed");
-          player.pers[# "matcheshostedstatstracked"] = undefined;
+          player.pers[#"matcheshostedstatstracked"] = undefined;
         }
 
-        player.pers[# "matchesplayedstatstracked"] = undefined;
+        player.pers[#"matchesplayedstatstracked"] = undefined;
       }
     }
 
-    if(!isDefined(player.pers[# "previous_distance_traveled"])) {
-      player.pers[# "previous_distance_traveled"] = 0;
+    if(!isDefined(player.pers[#"previous_distance_traveled"])) {
+      player.pers[#"previous_distance_traveled"] = 0;
     }
 
-    distancethisround = int(player.pers[# "distance_traveled"] - player.pers[# "previous_distance_traveled"]);
-    player.pers[# "previous_distance_traveled"] = player.pers[# "distance_traveled"];
+    distancethisround = int(player.pers[#"distance_traveled"] - player.pers[#"previous_distance_traveled"]);
+    player.pers[#"previous_distance_traveled"] = player.pers[#"distance_traveled"];
     player incrementplayerstat("distance_traveled", distancethisround);
   }
 }
@@ -466,7 +467,7 @@ survival_classic_custom_stat_update() {}
 grief_custom_stat_update() {}
 
 get_global_stat(stat_name) {
-  return self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
 }
 
 set_global_stat(stat_name, value) {
@@ -474,10 +475,11 @@ set_global_stat(stat_name, value) {
     return;
   }
 
-  self stats::set_stat(#"playerstatslist", stat_name, # "statvalue", value);
+  self stats::set_stat(#"playerstatslist", stat_name, #"statvalue", value);
 
-  var_ba1fb8c1 = self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  var_ba1fb8c1 = self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
   println("<dev string:x38>" + self.entity_num + "<dev string:x42>" + stat_name + "<dev string:x46>" + var_ba1fb8c1);
+
 }
 
 add_global_stat(stat_name, value) {
@@ -485,7 +487,7 @@ add_global_stat(stat_name, value) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatslist", stat_name, # "statvalue", value);
+  self stats::inc_stat(#"playerstatslist", stat_name, #"statvalue", value);
 }
 
 increment_global_stat(stat_name) {
@@ -493,7 +495,7 @@ increment_global_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatslist", stat_name, # "statvalue", 1);
+  self stats::inc_stat(#"playerstatslist", stat_name, #"statvalue", 1);
 }
 
 highwater_global_stat(stat_name, value) {
@@ -503,7 +505,7 @@ highwater_global_stat(stat_name, value) {
 }
 
 get_client_stat(stat_name) {
-  return self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
 }
 
 add_client_stat(stat_name, stat_value, include_gametype) {
@@ -564,7 +566,7 @@ zero_client_stat(stat_name, include_gametype) {
 }
 
 get_map_stat(stat_name) {
-  return self stats::get_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue");
 }
 
 set_map_stat(stat_name, value) {
@@ -572,7 +574,7 @@ set_map_stat(stat_name, value) {
     return;
   }
 
-  self stats::set_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", value);
+  self stats::set_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", value);
 }
 
 add_map_stat(stat_name, value) {
@@ -580,7 +582,7 @@ add_map_stat(stat_name, value) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", value);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", value);
 }
 
 increment_map_stat(stat_name) {
@@ -588,7 +590,7 @@ increment_map_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", 1);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", 1);
 }
 
 highwater_map_stat(stat_name, value) {
@@ -602,7 +604,7 @@ increment_map_cheat_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "cheats", stat_name, 1);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"cheats", stat_name, 1);
 }
 
 function_56ec2437(stat_name) {
@@ -610,7 +612,7 @@ function_56ec2437(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue");
 }
 
 function_4d4e2a78(stat_name, value) {
@@ -618,7 +620,7 @@ function_4d4e2a78(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", value);
 }
 
 function_ab006044(stat_name, value) {
@@ -626,7 +628,7 @@ function_ab006044(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", value);
 }
 
 function_7bc347f6(stat_name) {
@@ -634,7 +636,7 @@ function_7bc347f6(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", 1);
 }
 
 function_d4e0d242(stat_name, value) {
@@ -648,7 +650,7 @@ function_b1520544(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue");
 }
 
 function_49469f35(stat_name, value) {
@@ -656,7 +658,7 @@ function_49469f35(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", value);
 }
 
 function_a6efb963(stat_name, value) {
@@ -664,7 +666,7 @@ function_a6efb963(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", value);
 }
 
 function_f1a1191d(stat_name) {
@@ -672,7 +674,7 @@ function_f1a1191d(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", 1);
 }
 
 function_1b763e4(stat_name, value) {
@@ -700,7 +702,7 @@ function_523fee8d(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue");
 }
 
 function_7866854a(stat_name, value) {
@@ -708,7 +710,7 @@ function_7866854a(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", value);
 }
 
 function_9288c79b(stat_name, value) {
@@ -716,7 +718,7 @@ function_9288c79b(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", value);
 }
 
 function_2726a7c2(stat_name) {
@@ -724,7 +726,7 @@ function_2726a7c2(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", 1);
 }
 
 function_e8bfebb(stat_name, value) {
@@ -803,6 +805,7 @@ increment_challenge_stat(stat_name, amount = 1, var_b68b08b1 = 0) {
   }
 
   println("<dev string:x38>" + function_9e72a96(stat_name) + "<dev string:x46>" + var_ba1fb8c1);
+
 }
 
 get_match_stat(stat_name) {
@@ -914,53 +917,53 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
 
   if(isplayer(entity) && isDefined(eattacker.archetype)) {
     switch (eattacker.archetype) {
-      case # "blight_father":
+      case #"blight_father":
         entity increment_client_stat("killed_by_blightfather");
         entity increment_player_stat("killed_by_blightfather");
         entity forced_attachment("boas_killed_by_blightfather");
         break;
-      case # "brutus":
+      case #"brutus":
         entity increment_client_stat("killed_by_brutus");
         entity increment_player_stat("killed_by_brutus");
         entity forced_attachment("boas_killed_by_brutus");
         break;
-      case # "gladiator":
+      case #"gladiator":
         entity increment_client_stat("killed_by_gladiator");
         entity increment_player_stat("killed_by_gladiator");
         entity forced_attachment("boas_killed_by_gladiator");
         break;
-      case # "stoker":
+      case #"stoker":
         entity increment_client_stat("killed_by_stoker");
         entity increment_player_stat("killed_by_stoker");
         entity forced_attachment("boas_killed_by_stoker");
         break;
-      case # "tiger":
+      case #"tiger":
         entity increment_client_stat("killed_by_tiger");
         entity increment_player_stat("killed_by_tiger");
         entity forced_attachment("boas_killed_by_tiger");
         break;
-      case # "catalyst":
+      case #"catalyst":
         entity increment_client_stat("killed_by_catalyst");
         entity increment_player_stat("killed_by_catalyst");
         entity forced_attachment("boas_killed_by_catalyst");
 
         switch (eattacker.subarchetype) {
-          case # "catalyst_electric":
+          case #"catalyst_electric":
             entity increment_client_stat("killed_by_catalyst_electric");
             entity increment_player_stat("killed_by_catalyst_electric");
             entity forced_attachment("boas_killed_by_catalyst_electric");
             break;
-          case # "catalyst_water":
+          case #"catalyst_water":
             entity increment_client_stat("killed_by_catalyst_water");
             entity increment_player_stat("killed_by_catalyst_water");
             entity forced_attachment("boas_killed_by_catalyst_water");
             break;
-          case # "catalyst_plasma":
+          case #"catalyst_plasma":
             entity increment_client_stat("killed_by_catalyst_plasma");
             entity increment_player_stat("killed_by_catalyst_plasma");
             entity forced_attachment("boas_killed_by_catalyst_plasma");
             break;
-          case # "catalyst_corrosive":
+          case #"catalyst_corrosive":
             entity increment_client_stat("killed_by_catalyst_corrosive");
             entity increment_player_stat("killed_by_catalyst_corrosive");
             entity forced_attachment("boas_killed_by_catalyst_corrosive");
@@ -968,18 +971,18 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "nova_crawler":
+      case #"nova_crawler":
         entity increment_client_stat("killed_by_nova_crawler");
         entity increment_player_stat("killed_by_nova_crawler");
         entity forced_attachment("boas_killed_by_nova_crawler");
         break;
-      case # "zombie_dog":
+      case #"zombie_dog":
         entity increment_client_stat("killed_by_zdog");
         entity increment_player_stat("killed_by_zdog");
         entity forced_attachment("boas_killed_by_zdog");
         break;
-      case # "nosferatu":
-        if(eattacker.subarchetype === # "crimson_nosferatu") {
+      case #"nosferatu":
+        if(eattacker.subarchetype === #"crimson_nosferatu") {
           entity increment_client_stat("killed_by_crimson_nosferatu");
           entity increment_player_stat("killed_by_crimson_nosferatu");
           entity forced_attachment("boas_killed_by_crimson_nosferatu");
@@ -990,7 +993,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "werewolf":
+      case #"werewolf":
         entity increment_client_stat("killed_by_werewolf");
         entity increment_player_stat("killed_by_werewolf");
         entity forced_attachment("boas_killed_by_werewolf");
@@ -1003,53 +1006,53 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
   if(isplayer(eattacker)) {
     if(isDefined(entity.archetype)) {
       switch (entity.archetype) {
-        case # "blight_father":
+        case #"blight_father":
           eattacker increment_client_stat("blightfathers_killed");
           eattacker increment_player_stat("blightfathers_killed");
           eattacker forced_attachment("boas_blightfathers_killed");
           break;
-        case # "brutus":
+        case #"brutus":
           eattacker increment_client_stat("brutuses_killed");
           eattacker increment_player_stat("brutuses_killed");
           eattacker forced_attachment("boas_brutuses_killed");
           break;
-        case # "gladiator":
+        case #"gladiator":
           eattacker increment_client_stat("gladiators_killed");
           eattacker increment_player_stat("gladiators_killed");
           eattacker forced_attachment("boas_gladiators_killed");
           break;
-        case # "stoker":
+        case #"stoker":
           eattacker increment_client_stat("stokers_killed");
           eattacker increment_player_stat("stokers_killed");
           eattacker forced_attachment("boas_stokers_killed");
           break;
-        case # "tiger":
+        case #"tiger":
           eattacker increment_client_stat("tigers_killed");
           eattacker increment_player_stat("tigers_killed");
           eattacker forced_attachment("boas_tigers_killed");
           break;
-        case # "catalyst":
+        case #"catalyst":
           eattacker increment_client_stat("catalysts_killed");
           eattacker increment_player_stat("catalysts_killed");
           eattacker forced_attachment("boas_catalysts_killed");
 
           switch (entity.subarchetype) {
-            case # "catalyst_electric":
+            case #"catalyst_electric":
               eattacker increment_client_stat("catalyst_electrics_killed");
               eattacker increment_player_stat("catalyst_electrics_killed");
               eattacker forced_attachment("boas_catalyst_electrics_killed");
               break;
-            case # "catalyst_water":
+            case #"catalyst_water":
               eattacker increment_client_stat("catalyst_waters_killed");
               eattacker increment_player_stat("catalyst_waters_killed");
               eattacker forced_attachment("boas_catalyst_waters_killed");
               break;
-            case # "catalyst_plasma":
+            case #"catalyst_plasma":
               eattacker increment_client_stat("catalyst_plasmas_killed");
               eattacker increment_player_stat("catalyst_plasmas_killed");
               eattacker forced_attachment("boas_catalyst_plasmas_killed");
               break;
-            case # "catalyst_corrosive":
+            case #"catalyst_corrosive":
               eattacker increment_client_stat("catalyst_corrosives_killed");
               eattacker increment_player_stat("catalyst_corrosives_killed");
               eattacker forced_attachment("boas_catalyst_corrosives_killed");
@@ -1057,18 +1060,18 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "nova_crawler":
+        case #"nova_crawler":
           eattacker increment_client_stat("nova_crawlers_killed");
           eattacker increment_player_stat("nova_crawlers_killed");
           eattacker forced_attachment("boas_nova_crawlers_killed");
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           eattacker increment_client_stat("zdogs_killed");
           eattacker increment_player_stat("zdogs_killed");
           eattacker forced_attachment("boas_zdogs_killed");
           break;
-        case # "nosferatu":
-          if(entity.subarchetype === # "crimson_nosferatu") {
+        case #"nosferatu":
+          if(entity.subarchetype === #"crimson_nosferatu") {
             eattacker increment_client_stat("crimson_nosferatus_killed");
             eattacker increment_player_stat("crimson_nosferatus_killed");
             eattacker forced_attachment("boas_crimson_nosferatus_killed");
@@ -1079,12 +1082,12 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "werewolf":
+        case #"werewolf":
           eattacker increment_client_stat("werewolves_killed");
           eattacker increment_player_stat("werewolves_killed");
           eattacker forced_attachment("boas_werewolves_killed");
           break;
-        case # "bat":
+        case #"bat":
           eattacker increment_client_stat("bats_killed");
           eattacker increment_player_stat("bats_killed");
           eattacker forced_attachment("boas_bats_killed");
@@ -1099,7 +1102,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
     }
 
     if(isDefined(einflictor) && isDefined(einflictor.turret) && isDefined(einflictor.turret.item)) {
-      eattacker stats::function_e24eec31(einflictor.turret.item, # "kills", 1);
+      eattacker stats::function_e24eec31(einflictor.turret.item, #"kills", 1);
     }
   }
 }
@@ -1115,8 +1118,8 @@ track_craftables_pickedup(craftable) {
 }
 
 get_stat_distance_traveled() {
-  miles = int(self.pers[# "distance_traveled"] / 63360);
-  remainder = self.pers[# "distance_traveled"] / 63360 - miles;
+  miles = int(self.pers[#"distance_traveled"] / 63360);
+  remainder = self.pers[#"distance_traveled"] / 63360 - miles;
 
   if(miles < 1 && remainder < 0.5) {
     miles = 1;
@@ -1133,7 +1136,7 @@ get_stat_round_number() {
 
 get_stat_combined_rank_value_survival_classic() {
   rounds = get_stat_round_number();
-  kills = self.pers[# "kills"];
+  kills = self.pers[#"kills"];
 
   if(rounds > 99) {
     rounds = 99;
@@ -1272,138 +1275,138 @@ update_global_counters_on_match_end() {
   players = getplayers();
 
   foreach(player in players) {
-    deaths += player.pers[# "deaths"];
-    kills += player.pers[# "kills"];
-    wonder_weapon_kills += player.pers[# "wonder_weapon_kills"];
-    headshots += player.pers[# "headshots"];
-    suicides += player.pers[# "suicides"];
-    melee_kills += player.pers[# "melee_kills"];
-    downs += player.pers[# "downs"];
-    revives += player.pers[# "revives"];
-    perks_drank += player.pers[# "perks_drank"];
-    specialty_armorvest_drank += player.pers[# "specialty_armorvest_drank"];
-    specialty_quickrevive_drank += player.pers[# "specialty_quickrevive_drank"];
-    specialty_fastreload_drank += player.pers[# "specialty_fastreload_drank"];
-    specialty_additionalprimaryweapon_drank += player.pers[# "specialty_additionalprimaryweapon_drank"];
-    specialty_staminup_drank += player.pers[# "specialty_staminup_drank"];
-    specialty_doubletap2_drank += player.pers[# "specialty_doubletap2_drank"];
-    specialty_widowswine_drank += player.pers[# "specialty_widowswine_drank"];
-    specialty_deadshot_drank += player.pers[# "specialty_deadshot_drank"];
-    specialty_awareness_drank += player.pers[# "specialty_awareness_drank"];
-    specialty_berserker_drank += player.pers[# "specialty_berserker_drank"];
-    specialty_camper_drank += player.pers[# "specialty_camper_drank"];
-    specialty_cooldown_drank += player.pers[# "specialty_cooldown_drank"];
-    specialty_extraammo_drank += player.pers[# "specialty_extraammo_drank"];
-    specialty_mystery_drank += player.pers[# "specialty_mystery_drank"];
-    specialty_phdflopper_drank += player.pers[# "specialty_phdflopper_drank"];
-    specialty_shield_drank += player.pers[# "specialty_shield_drank"];
-    specialty_etherealrazor_drank += player.pers[# "specialty_etherealrazor_drank"];
-    specialty_mod_armorvest_drank += player.pers[# "specialty_mod_armorvest_drank"];
-    specialty_mod_quickrevive_drank += player.pers[# "specialty_mod_quickrevive_drank"];
-    specialty_mod_fastreload_drank += player.pers[# "specialty_mod_fastreload_drank"];
-    specialty_mod_doubletap2_drank += player.pers[# "specialty_mod_doubletap2_drank"];
-    specialty_mod_staminup_drank += player.pers[# "specialty_mod_staminup_drank"];
-    specialty_mod_deadshot_drank += player.pers[# "specialty_mod_deadshot_drank"];
-    specialty_mod_additionalprimaryweapon_drank += player.pers[# "specialty_mod_additionalprimaryweapon_drank"];
-    specialty_mod_electriccherry_drank += player.pers[# "specialty_mod_electriccherry_drank"];
-    specialty_mod_widowswine_drank += player.pers[# "specialty_mod_widowswine_drank"];
-    specialty_mod_cooldown_drank += player.pers[# "specialty_mod_cooldown_drank"];
-    specialty_mod_phdflopper_drank += player.pers[# "specialty_mod_phdflopper_drank"];
-    specialty_mod_camper_drank += player.pers[# "specialty_mod_camper_drank"];
-    specialty_mod_extraammo_drank += player.pers[# "specialty_mod_extraammo_drank"];
-    specialty_mod_awareness_drank += player.pers[# "specialty_mod_awareness_drank"];
-    specialty_mod_berserker_drank += player.pers[# "specialty_mod_berserker_drank"];
-    specialty_mod_shield_drank += player.pers[# "specialty_mod_shield_drank"];
-    doors_purchased += player.pers[# "doors_purchased"];
+    deaths += player.pers[#"deaths"];
+    kills += player.pers[#"kills"];
+    wonder_weapon_kills += player.pers[#"wonder_weapon_kills"];
+    headshots += player.pers[#"headshots"];
+    suicides += player.pers[#"suicides"];
+    melee_kills += player.pers[#"melee_kills"];
+    downs += player.pers[#"downs"];
+    revives += player.pers[#"revives"];
+    perks_drank += player.pers[#"perks_drank"];
+    specialty_armorvest_drank += player.pers[#"specialty_armorvest_drank"];
+    specialty_quickrevive_drank += player.pers[#"specialty_quickrevive_drank"];
+    specialty_fastreload_drank += player.pers[#"specialty_fastreload_drank"];
+    specialty_additionalprimaryweapon_drank += player.pers[#"specialty_additionalprimaryweapon_drank"];
+    specialty_staminup_drank += player.pers[#"specialty_staminup_drank"];
+    specialty_doubletap2_drank += player.pers[#"specialty_doubletap2_drank"];
+    specialty_widowswine_drank += player.pers[#"specialty_widowswine_drank"];
+    specialty_deadshot_drank += player.pers[#"specialty_deadshot_drank"];
+    specialty_awareness_drank += player.pers[#"specialty_awareness_drank"];
+    specialty_berserker_drank += player.pers[#"specialty_berserker_drank"];
+    specialty_camper_drank += player.pers[#"specialty_camper_drank"];
+    specialty_cooldown_drank += player.pers[#"specialty_cooldown_drank"];
+    specialty_extraammo_drank += player.pers[#"specialty_extraammo_drank"];
+    specialty_mystery_drank += player.pers[#"specialty_mystery_drank"];
+    specialty_phdflopper_drank += player.pers[#"specialty_phdflopper_drank"];
+    specialty_shield_drank += player.pers[#"specialty_shield_drank"];
+    specialty_etherealrazor_drank += player.pers[#"specialty_etherealrazor_drank"];
+    specialty_mod_armorvest_drank += player.pers[#"specialty_mod_armorvest_drank"];
+    specialty_mod_quickrevive_drank += player.pers[#"specialty_mod_quickrevive_drank"];
+    specialty_mod_fastreload_drank += player.pers[#"specialty_mod_fastreload_drank"];
+    specialty_mod_doubletap2_drank += player.pers[#"specialty_mod_doubletap2_drank"];
+    specialty_mod_staminup_drank += player.pers[#"specialty_mod_staminup_drank"];
+    specialty_mod_deadshot_drank += player.pers[#"specialty_mod_deadshot_drank"];
+    specialty_mod_additionalprimaryweapon_drank += player.pers[#"specialty_mod_additionalprimaryweapon_drank"];
+    specialty_mod_electriccherry_drank += player.pers[#"specialty_mod_electriccherry_drank"];
+    specialty_mod_widowswine_drank += player.pers[#"specialty_mod_widowswine_drank"];
+    specialty_mod_cooldown_drank += player.pers[#"specialty_mod_cooldown_drank"];
+    specialty_mod_phdflopper_drank += player.pers[#"specialty_mod_phdflopper_drank"];
+    specialty_mod_camper_drank += player.pers[#"specialty_mod_camper_drank"];
+    specialty_mod_extraammo_drank += player.pers[#"specialty_mod_extraammo_drank"];
+    specialty_mod_awareness_drank += player.pers[#"specialty_mod_awareness_drank"];
+    specialty_mod_berserker_drank += player.pers[#"specialty_mod_berserker_drank"];
+    specialty_mod_shield_drank += player.pers[#"specialty_mod_shield_drank"];
+    doors_purchased += player.pers[#"doors_purchased"];
     distance_traveled += player get_stat_distance_traveled();
-    boards += player.pers[# "boards"];
-    sacrifices += player.pers[# "sacrifices"];
-    drops += player.pers[# "drops"];
-    nuke_pickedup += player.pers[# "nuke_pickedup"];
-    insta_kill_pickedup += player.pers[# "insta_kill_pickedup"];
-    full_ammo_pickedup += player.pers[# "full_ammo_pickedup"];
-    double_points_pickedup += player.pers[# "double_points_pickedup"];
-    meat_stink_pickedup += player.pers[# "meat_stink_pickedup"];
-    carpenter_pickedup += player.pers[# "carpenter_pickedup"];
-    fire_sale_pickedup += player.pers[# "fire_sale_pickedup"];
-    var_d61f06ce += player.pers[# "hash_27399de28b76c5c6"];
-    minigun_pickedup += player.pers[# "minigun_pickedup"];
-    island_seed_pickedup += player.pers[# "island_seed_pickedup"];
-    hero_weapon_power_pickedup += player.pers[# "hero_weapon_power_pickedup"];
-    pack_a_punch_pickedup += player.pers[# "pack_a_punch_pickedup"];
-    extra_lives_pickedup += player.pers[# "extra_lives_pickedup"];
-    zmarcade_key_pickedup += player.pers[# "zmarcade_key_pickedup"];
-    shield_charge_pickedup += player.pers[# "shield_charge_pickedup"];
-    dung_pickedup += player.pers[# "dung_pickedup"];
-    var_614312ad += player.pers[# "hash_1b192689f4c8c402"];
-    var_be43e4a5 += player.pers[# "hash_65472fa120ebce1c"];
-    bonus_points_team_pickedup += player.pers[# "bonus_points_team_pickedup"];
-    ww_grenade_pickedup += player.pers[# "ww_grenade_pickedup"];
-    use_magicbox += player.pers[# "use_magicbox"];
-    grabbed_from_magicbox += player.pers[# "grabbed_from_magicbox"];
-    use_perk_random += player.pers[# "use_perk_random"];
-    grabbed_from_perk_random += player.pers[# "grabbed_from_perk_random"];
-    use_pap += player.pers[# "use_pap"];
-    pap_weapon_grabbed += player.pers[# "pap_weapon_grabbed"];
-    claymores_planted += player.pers[# "claymores_planted"];
-    claymores_pickedup += player.pers[# "claymores_pickedup"];
-    bouncingbetty_planted += player.pers[# "bouncingbetty_planted"];
-    ballistic_knives_pickedup += player.pers[# "ballistic_knives_pickedup"];
-    wallbuy_weapons_purchased += player.pers[# "wallbuy_weapons_purchased"];
-    power_turnedon += player.pers[# "power_turnedon"];
-    power_turnedoff += player.pers[# "power_turnedoff"];
-    planted_buildables_pickedup += player.pers[# "planted_buildables_pickedup"];
-    buildables_built += player.pers[# "buildables_built"];
-    ammo_purchased += player.pers[# "ammo_purchased"];
-    upgraded_ammo_purchased += player.pers[# "upgraded_ammo_purchased"];
-    shields_purchased += player.pers[# "shields_purchased"];
+    boards += player.pers[#"boards"];
+    sacrifices += player.pers[#"sacrifices"];
+    drops += player.pers[#"drops"];
+    nuke_pickedup += player.pers[#"nuke_pickedup"];
+    insta_kill_pickedup += player.pers[#"insta_kill_pickedup"];
+    full_ammo_pickedup += player.pers[#"full_ammo_pickedup"];
+    double_points_pickedup += player.pers[#"double_points_pickedup"];
+    meat_stink_pickedup += player.pers[#"meat_stink_pickedup"];
+    carpenter_pickedup += player.pers[#"carpenter_pickedup"];
+    fire_sale_pickedup += player.pers[#"fire_sale_pickedup"];
+    var_d61f06ce += player.pers[#"hash_27399de28b76c5c6"];
+    minigun_pickedup += player.pers[#"minigun_pickedup"];
+    island_seed_pickedup += player.pers[#"island_seed_pickedup"];
+    hero_weapon_power_pickedup += player.pers[#"hero_weapon_power_pickedup"];
+    pack_a_punch_pickedup += player.pers[#"pack_a_punch_pickedup"];
+    extra_lives_pickedup += player.pers[#"extra_lives_pickedup"];
+    zmarcade_key_pickedup += player.pers[#"zmarcade_key_pickedup"];
+    shield_charge_pickedup += player.pers[#"shield_charge_pickedup"];
+    dung_pickedup += player.pers[#"dung_pickedup"];
+    var_614312ad += player.pers[#"hash_1b192689f4c8c402"];
+    var_be43e4a5 += player.pers[#"hash_65472fa120ebce1c"];
+    bonus_points_team_pickedup += player.pers[#"bonus_points_team_pickedup"];
+    ww_grenade_pickedup += player.pers[#"ww_grenade_pickedup"];
+    use_magicbox += player.pers[#"use_magicbox"];
+    grabbed_from_magicbox += player.pers[#"grabbed_from_magicbox"];
+    use_perk_random += player.pers[#"use_perk_random"];
+    grabbed_from_perk_random += player.pers[#"grabbed_from_perk_random"];
+    use_pap += player.pers[#"use_pap"];
+    pap_weapon_grabbed += player.pers[#"pap_weapon_grabbed"];
+    claymores_planted += player.pers[#"claymores_planted"];
+    claymores_pickedup += player.pers[#"claymores_pickedup"];
+    bouncingbetty_planted += player.pers[#"bouncingbetty_planted"];
+    ballistic_knives_pickedup += player.pers[#"ballistic_knives_pickedup"];
+    wallbuy_weapons_purchased += player.pers[#"wallbuy_weapons_purchased"];
+    power_turnedon += player.pers[#"power_turnedon"];
+    power_turnedoff += player.pers[#"power_turnedoff"];
+    planted_buildables_pickedup += player.pers[#"planted_buildables_pickedup"];
+    buildables_built += player.pers[#"buildables_built"];
+    ammo_purchased += player.pers[#"ammo_purchased"];
+    upgraded_ammo_purchased += player.pers[#"upgraded_ammo_purchased"];
+    shields_purchased += player.pers[#"shields_purchased"];
 
     if(!isDefined(player.total_shots)) {
       player.total_shots = 0;
     }
 
     total_shots += player.total_shots;
-    time_played += player.pers[# "time_played_total"];
-    cheat_too_many_weapons += player.pers[# "cheat_too_many_weapons"];
-    cheat_out_of_playable_area += player.pers[# "cheat_out_of_playable"];
-    cheat_too_friendly += player.pers[# "cheat_too_friendly"];
-    cheat_total += player.pers[# "cheat_total"];
-    blightfathers_killed += player.pers[# "blightfathers_killed"];
-    killed_by_blightfather += player.pers[# "killed_by_blightfather"];
-    brutuses_killed += player.pers[# "brutuses_killed"];
-    killed_by_brutus += player.pers[# "killed_by_brutus"];
-    gladiators_killed += player.pers[# "gladiators_killed"];
-    killed_by_gladiator += player.pers[# "killed_by_gladiator"];
-    stokers_killed += player.pers[# "stokers_killed"];
-    killed_by_stoker += player.pers[# "killed_by_stoker"];
-    tigers_killed += player.pers[# "tigers_killed"];
-    killed_by_tiger += player.pers[# "killed_by_tiger"];
-    catalysts_killed += player.pers[# "catalysts_killed"];
-    killed_by_catalyst += player.pers[# "killed_by_catalyst"];
-    catalyst_electrics_killed += player.pers[# "catalyst_electrics_killed"];
-    killed_by_catalyst_electric += player.pers[# "killed_by_catalyst_electric"];
-    catalyst_waters_killed += player.pers[# "catalyst_waters_killed"];
-    killed_by_catalyst_water += player.pers[# "killed_by_catalyst_water"];
-    catalyst_plasmas_killed += player.pers[# "catalyst_plasmas_killed"];
-    killed_by_catalyst_plasma += player.pers[# "killed_by_catalyst_plasma"];
-    catalyst_corrosives_killed += player.pers[# "catalyst_corrosives_killed"];
-    killed_by_catalyst_corrosive += player.pers[# "killed_by_catalyst_corrosive"];
-    nova_crawlers_killed += player.pers[# "nova_crawlers_killed"];
-    killed_by_nova_crawler += player.pers[# "killed_by_nova_crawler"];
-    werewolves_killed += player.pers[# "werewolves_killed"];
-    killed_by_werewolf += player.pers[# "killed_by_werewolf"];
-    nosferatus_killed += player.pers[# "nosferatus_killed"];
-    killed_by_nosferatu += player.pers[# "killed_by_nosferatu"];
-    crimson_nosferatus_killed += player.pers[# "crimson_nosferatus_killed"];
-    killed_by_crimson_nosferatu += player.pers[# "killed_by_crimson_nosferatu"];
-    bats_killed += player.pers[# "bats_killed"];
+    time_played += player.pers[#"time_played_total"];
+    cheat_too_many_weapons += player.pers[#"cheat_too_many_weapons"];
+    cheat_out_of_playable_area += player.pers[#"cheat_out_of_playable"];
+    cheat_too_friendly += player.pers[#"cheat_too_friendly"];
+    cheat_total += player.pers[#"cheat_total"];
+    blightfathers_killed += player.pers[#"blightfathers_killed"];
+    killed_by_blightfather += player.pers[#"killed_by_blightfather"];
+    brutuses_killed += player.pers[#"brutuses_killed"];
+    killed_by_brutus += player.pers[#"killed_by_brutus"];
+    gladiators_killed += player.pers[#"gladiators_killed"];
+    killed_by_gladiator += player.pers[#"killed_by_gladiator"];
+    stokers_killed += player.pers[#"stokers_killed"];
+    killed_by_stoker += player.pers[#"killed_by_stoker"];
+    tigers_killed += player.pers[#"tigers_killed"];
+    killed_by_tiger += player.pers[#"killed_by_tiger"];
+    catalysts_killed += player.pers[#"catalysts_killed"];
+    killed_by_catalyst += player.pers[#"killed_by_catalyst"];
+    catalyst_electrics_killed += player.pers[#"catalyst_electrics_killed"];
+    killed_by_catalyst_electric += player.pers[#"killed_by_catalyst_electric"];
+    catalyst_waters_killed += player.pers[#"catalyst_waters_killed"];
+    killed_by_catalyst_water += player.pers[#"killed_by_catalyst_water"];
+    catalyst_plasmas_killed += player.pers[#"catalyst_plasmas_killed"];
+    killed_by_catalyst_plasma += player.pers[#"killed_by_catalyst_plasma"];
+    catalyst_corrosives_killed += player.pers[#"catalyst_corrosives_killed"];
+    killed_by_catalyst_corrosive += player.pers[#"killed_by_catalyst_corrosive"];
+    nova_crawlers_killed += player.pers[#"nova_crawlers_killed"];
+    killed_by_nova_crawler += player.pers[#"killed_by_nova_crawler"];
+    werewolves_killed += player.pers[#"werewolves_killed"];
+    killed_by_werewolf += player.pers[#"killed_by_werewolf"];
+    nosferatus_killed += player.pers[#"nosferatus_killed"];
+    killed_by_nosferatu += player.pers[#"killed_by_nosferatu"];
+    crimson_nosferatus_killed += player.pers[#"crimson_nosferatus_killed"];
+    killed_by_crimson_nosferatu += player.pers[#"killed_by_crimson_nosferatu"];
+    bats_killed += player.pers[#"bats_killed"];
   }
 
   game_mode = util::get_game_type();
 }
 
 get_specific_stat(stat_category, stat_name) {
-  return self stats::get_stat(stat_category, stat_name, # "statvalue");
+  return self stats::get_stat(stat_category, stat_name, #"statvalue");
 }
 
 initializematchstats() {
@@ -1411,17 +1414,18 @@ initializematchstats() {
     return;
   }
 
-  self.pers[# "lasthighestscore"] = self stats::get_stat(#"higheststats", # "highest_score");
+  self.pers[#"lasthighestscore"] = self stats::get_stat(#"higheststats", #"highest_score");
   currgametype = level.gametype;
   self gamehistorystartmatch(getgametypeenumfromname(currgametype, 0));
 }
 
 adjustrecentstats() {
+
   if(getdvarint(#"scr_writeconfigstrings", 0) == 1 || getdvarint(#"scr_hostmigrationtest", 0) == 1) {
     return;
   }
 
-  initializematchstats();
+    initializematchstats();
 }
 
 uploadstatssoon() {
@@ -1455,11 +1459,11 @@ function_b14863c1() {
 
 function_cb8a5c29() {
   while(true) {
-    s_result = level waittilltimeout(60, # "hash_3fdaafe712252cf5", # "trap_kill");
+    s_result = level waittilltimeout(60, #"hash_3fdaafe712252cf5", #"trap_kill");
 
     if(s_result._notify == "timeout") {
       level.var_b8cbd9e6 = 1;
-      level waittill(#"hash_3fdaafe712252cf5", # "trap_kill");
+      level waittill(#"hash_3fdaafe712252cf5", #"trap_kill");
       level.var_b8cbd9e6 = undefined;
     }
   }
@@ -1467,7 +1471,7 @@ function_cb8a5c29() {
 
 function_c5f9ea85() {
   level notify(#"hash_e3b3a7b31bbf19e");
-  level endon(#"hash_e3b3a7b31bbf19e", # "end_game");
+  level endon(#"hash_e3b3a7b31bbf19e", #"end_game");
 
   foreach(player in level.players) {
     player.var_78c18942 = 0;
@@ -1559,12 +1563,12 @@ function_94335f4a(var_1aa5a6d6) {
         var_e226ec4f = var_6530064b;
       }
 
-      level.var_ad5d54b[n_tier] = {
-        #var_e226ec4f: var_e226ec4f,
-        #var_ad971622: var_ad971622,
-        #n_xp: n_xp,
-        #var_1f2bdb95: var_1f2bdb95
-      };
+        level.var_ad5d54b[n_tier] = {
+          #var_e226ec4f: var_e226ec4f, 
+          #var_ad971622: var_ad971622, 
+          #n_xp: n_xp, 
+          #var_1f2bdb95: var_1f2bdb95
+        };
     }
   }
 }
@@ -1578,15 +1582,16 @@ function_c0c6ab19(var_ad971622, n_value = 1, var_b68b08b1 = 0) {
 
   n_value *= getdvarint(#"hash_56e2a9e5690e0373", 1);
 
-  if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_event_calling", 0) && isDefined(level.var_ad5d54b)) {
-    s_event_calling_task = level.var_ad5d54b[self function_3e561f63()];
+    if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_event_calling", 0) && isDefined(level.var_ad5d54b)) {
+      s_event_calling_task = level.var_ad5d54b[self function_3e561f63()];
 
-    if(isDefined(s_event_calling_task) && s_event_calling_task.var_ad971622 == var_ad971622) {
-      self function_7f377150(s_event_calling_task, n_value);
+      if(isDefined(s_event_calling_task) && s_event_calling_task.var_ad971622 == var_ad971622) {
+        self function_7f377150(s_event_calling_task, n_value);
+      }
     }
-  }
 
   if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_daily_calling", 0)) {
+
     if(getdvar(#"hash_acdd08b365cb62f", 0)) {
       var_a4aebab9 = getdvarint(#"zm_active_daily_calling", 0);
 
@@ -1594,18 +1599,18 @@ function_c0c6ab19(var_ad971622, n_value = 1, var_b68b08b1 = 0) {
         function_e8c496dd(var_a4aebab9);
       }
 
-      var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b");
+      var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b");
       var_8962d9b1 = isDefined(level.var_d479261a) ? level.var_d479261a : 0;
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b", var_8962d9b1);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b", var_8962d9b1);
 
       if(var_87b499fb !== var_8962d9b1) {
-        self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", 0);
+        self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", 0);
       }
     }
 
-    if(isDefined(level.s_daily_calling_task) && level.s_daily_calling_task.var_ad971622 == var_ad971622) {
-      self function_55109709(level.s_daily_calling_task, n_value);
-    }
+      if(isDefined(level.s_daily_calling_task) && level.s_daily_calling_task.var_ad971622 == var_ad971622) {
+        self function_55109709(level.s_daily_calling_task, n_value);
+      }
   }
 
   if(getdvarint(#"hash_11da02ca40639de5", 0)) {
@@ -1624,13 +1629,13 @@ function_3e561f63() {
 }
 
 function_7f377150(s_event_calling_task, n_value = 1) {
-  var_e4edaaf0 = self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress");
+  var_e4edaaf0 = self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress");
 
   if(var_e4edaaf0 < s_event_calling_task.var_e226ec4f) {
     if(var_e4edaaf0 + n_value >= s_event_calling_task.var_e226ec4f) {
       self luinotifyevent(#"zombie_callings_notification", 4, 0, level.var_1aa5a6d6, self function_3e561f63(), self getentitynumber());
-      self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress", 0);
-      self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "tiercompleted", 1);
+      self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", 0);
+      self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"tiercompleted", 1);
       self addrankxpvalue("event_calling_task", s_event_calling_task.n_xp);
       self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, s_event_calling_task.var_1f2bdb95, 1);
       uploadstats(self);
@@ -1642,7 +1647,7 @@ function_7f377150(s_event_calling_task, n_value = 1) {
     target = s_event_calling_task.var_e226ec4f;
     iprintln(self.name + "<dev string:x1a7>" + function_9e72a96(s_event_calling_task.var_ad971622) + "<dev string:x1c0>" + progress + "<dev string:x1d2>" + target);
 
-    self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress", n_value);
+      self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", n_value);
   }
 }
 
@@ -1666,9 +1671,9 @@ function_e8c496dd(var_d479261a) {
 
       if(isDefined(var_341c004b)) {
         level.s_daily_calling_task = {
-          #var_e226ec4f: taskinfo.dailytarget,
-          #var_ad971622: taskinfo.callingtask,
-          #n_xp: task.xp,
+          #var_e226ec4f: taskinfo.dailytarget, 
+          #var_ad971622: taskinfo.callingtask, 
+          #n_xp: task.xp, 
           #var_de86e878: var_341c004b
         };
       }
@@ -1677,11 +1682,11 @@ function_e8c496dd(var_d479261a) {
 }
 
 function_55109709(s_daily_calling_task, n_value = 1) {
-  var_e4edaaf0 = self stats::get_stat(#"hash_18e3320ccf4091e5", # "progress");
+  var_e4edaaf0 = self stats::get_stat(#"hash_18e3320ccf4091e5", #"progress");
 
   if(isDefined(var_e4edaaf0) && isDefined(s_daily_calling_task) && isDefined(s_daily_calling_task.var_e226ec4f) && var_e4edaaf0 < s_daily_calling_task.var_e226ec4f) {
     if(var_e4edaaf0 + n_value >= s_daily_calling_task.var_e226ec4f) {
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", s_daily_calling_task.var_e226ec4f);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", s_daily_calling_task.var_e226ec4f);
       self luinotifyevent(#"zombie_callings_notification", 3, 1, s_daily_calling_task.var_de86e878, self getentitynumber());
       self addrankxpvalue("daily_calling_task", s_daily_calling_task.n_xp);
       var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 2);
@@ -1692,13 +1697,13 @@ function_55109709(s_daily_calling_task, n_value = 1) {
 
       iprintln(self.name + "<dev string:x1f2>" + function_9e72a96(s_daily_calling_task.var_ad971622) + "<dev string:x203>" + s_daily_calling_task.n_xp + "<dev string:x21b>");
 
-      return;
+        return;
     }
 
     progress = var_e4edaaf0 + n_value;
     target = s_daily_calling_task.var_e226ec4f;
     iprintln(self.name + "<dev string:x1f2>" + function_9e72a96(s_daily_calling_task.var_ad971622) + "<dev string:x1c0>" + progress + "<dev string:x1d2>" + target);
 
-    self stats::inc_stat(#"hash_18e3320ccf4091e5", # "progress", n_value);
+      self stats::inc_stat(#"hash_18e3320ccf4091e5", #"progress", n_value);
   }
 }

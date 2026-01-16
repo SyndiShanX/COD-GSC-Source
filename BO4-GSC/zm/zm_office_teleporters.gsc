@@ -23,6 +23,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_office_teleporters;
 
 autoexec __init__system__() {
@@ -218,7 +219,7 @@ teleport_player(user) {
     return;
   }
 
-  user endoncallback(&function_96e88318, # "death");
+  user endoncallback(&function_96e88318, #"death");
   destination = undefined;
 
   if(isDefined(user.teleporting) && user.teleporting) {
@@ -234,7 +235,7 @@ teleport_player(user) {
   user notify(#"teleporting");
   self notify(#"portal_used");
   level notify(#"portal_used", {
-    #s_portal: self,
+    #s_portal: self, 
     #player: user
   });
   user.teleporting = 1;
@@ -245,14 +246,14 @@ teleport_player(user) {
       var_298e4578 = self find_portal_destination();
       break;
     case 1:
-      var_298e4578 = level.a_s_portals[# "portal_panic_room"];
+      var_298e4578 = level.a_s_portals[#"portal_panic_room"];
       break;
     case 2:
       var_298e4578 = level.var_3f3c65c7;
       level notify(#"hash_15a9f7117b9637b");
       break;
     case 3:
-      var_298e4578 = level.a_s_portals[# "portal_war_room_map"];
+      var_298e4578 = level.a_s_portals[#"portal_war_room_map"];
       break;
     case 4:
       var_298e4578 = self find_portal_destination(1);
@@ -266,8 +267,8 @@ teleport_player(user) {
   }
 
   destination = var_298e4578.var_52a6f692;
-  playFX(level._effect[# "teleport_depart"], user.origin);
-  playFX(level._effect[# "portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_depart"], user.origin);
+  playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   user.var_298e4578 = var_298e4578;
@@ -281,8 +282,8 @@ teleport_player(user) {
   user clientfield::increment_to_player("teleporter_transition", 1);
   var_298e4578 thread cooldown_portal_timer(user);
   user thread function_c234a5ce();
-  playFX(level._effect[# "teleport_arrive"], user.origin);
-  playFX(level._effect[# "portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_arrive"], user.origin);
+  playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"hash_39876bf613387fef", user);
   wait 0.5;
@@ -306,7 +307,7 @@ function_96e88318(str_notify) {
 }
 
 function_c234a5ce() {
-  self endoncallback(&function_4f5d4783, # "death");
+  self endoncallback(&function_4f5d4783, #"death");
   self val::set(#"teleport_exit", "ignoreme", 1);
   wait 1;
   self function_4f5d4783();
@@ -321,7 +322,7 @@ cooldown_portal_timer(e_user) {
     return;
   }
 
-  self endon(#"death", # "hash_3c91bf90cecbe758");
+  self endon(#"death", #"hash_3c91bf90cecbe758");
 
   if(!isDefined(self.a_e_users)) {
     self.a_e_users = [];
@@ -561,7 +562,7 @@ function_e9848fa7() {
 }
 
 function_9d689cc4(portal, portal_exit) {
-  self endoncallback(&function_2ef25d40, # "damage", # "death", # "cancel_teleport");
+  self endoncallback(&function_2ef25d40, #"damage", #"death", #"cancel_teleport");
 
   if(!isDefined(portal)) {
     portal = self function_e9848fa7();
@@ -615,8 +616,8 @@ function_2ef25d40(str_notify) {
 function_71be28e1(zombie, start_portal, end_portal) {
   zombie endon(#"death");
   zombie disableaimassist();
-  playFX(level._effect[# "teleport_depart"], zombie.origin);
-  playFX(level._effect[# "portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_depart"], zombie.origin);
+  playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
@@ -627,15 +628,15 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie setentitypaused(0);
   zombie forceteleport(end_portal.origin + anglesToForward(end_portal.angles) * randomfloatrange(0, 32), end_target.angles);
   zombie function_1f034d46();
-  playFX(level._effect[# "teleport_arrive"], zombie.origin);
-  playFX(level._effect[# "portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_arrive"], zombie.origin);
+  playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", zombie.origin);
   zombie.b_ignore_cleanup = zombie.var_693b80bb;
   zombie enableaimassist();
 }
 
 function_554c780b() {
-  self endon(#"death", # "reached_portal");
+  self endon(#"death", #"reached_portal");
   wait 2;
   self.b_ignore_cleanup = self.var_693b80bb;
 }
@@ -652,8 +653,8 @@ function_1f034d46(destination) {
 }
 
 function_bb3f9afd() {
-  s_portal = level.a_s_portals[# "portal_war_room"];
-  playFX(level._effect[# "portal_despawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
+  s_portal = level.a_s_portals[#"portal_war_room"];
+  playFX(level._effect[#"portal_despawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
   s_portal.var_a1cf77d2 clientfield::set("portal_dest_fx", 0);
   level clientfield::increment("delete_war_room_portal_fx", 1);
   zm_unitrigger::unregister_unitrigger(s_portal.s_unitrigger);
@@ -662,15 +663,15 @@ function_bb3f9afd() {
   s_portal notify(#"hash_3c91bf90cecbe758");
   s_portal = level.var_905aea40;
 
-  if(util::get_game_type() == # "zstandard") {
+  if(util::get_game_type() == #"zstandard") {
     s_portal.n_floor = -1;
   }
 
   level.a_s_portals[s_portal.script_noteworthy] = s_portal;
   s_portal zm_unitrigger::create("", 32, &portal_think, 0, 0);
-  playFX(level._effect[# "portal_spawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_spawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
 
-  if(level flag::get("defcon_active") || util::get_game_type() == # "zstandard") {
+  if(level flag::get("defcon_active") || util::get_game_type() == #"zstandard") {
     s_portal function_79e8b4c6(2);
   } else {
     s_portal function_98cd139();
@@ -722,21 +723,21 @@ portal_init() {
   self thread function_45a968e4();
 
   switch (self.script_noteworthy) {
-    case # "portal_conference_level1":
-    case # "portal_offices_level1":
+    case #"portal_conference_level1":
+    case #"portal_offices_level1":
       self.n_floor = 1;
       break;
-    case # "portal_war_room_server_room":
-    case # "portal_panic_room":
-    case # "portal_war_room":
-    case # "portal_war_room_map":
+    case #"portal_war_room_server_room":
+    case #"portal_panic_room":
+    case #"portal_war_room":
+    case #"portal_war_room_map":
       self.n_floor = 2;
       break;
-    case # "portal_labs_power_room":
-    case # "portal_labs_hall2_west":
-    case # "portal_labs_hall1_east":
-    case # "portal_labs_hall2_east":
-    case # "portal_labs_hall1_west":
+    case #"portal_labs_power_room":
+    case #"portal_labs_hall2_west":
+    case #"portal_labs_hall1_east":
+    case #"portal_labs_hall2_east":
+    case #"portal_labs_hall1_west":
       self.n_floor = 3;
       break;
   }
@@ -865,7 +866,7 @@ function_63283830() {
 }
 
 function_45a968e4() {
-  self endon(#"death", # "hash_6db43858f08123dd");
+  self endon(#"death", #"hash_6db43858f08123dd");
 
   if(zm_utility::is_standard()) {
     n_cycle_time = 3;
@@ -949,7 +950,7 @@ function_1bf7bc9e() {
 
 function_a6bb56f6() {
   foreach(s_portal in level.a_s_portals) {
-    if(s_portal.script_noteworthy != "portal_war_room_map" || util::get_game_type() != # "zstandard") {
+    if(s_portal.script_noteworthy != "portal_war_room_map" || util::get_game_type() != #"zstandard") {
       s_portal.var_cd2f1fed = 1;
       s_portal notify(#"hash_3c91bf90cecbe758");
       s_portal.a_e_users = [];
@@ -996,7 +997,7 @@ function_2143dc13() {
   a_e_players = getplayers();
 
   foreach(e_player in a_e_players) {
-    if(e_player.var_298e4578 === level.a_s_portals[# "portal_panic_room"]) {
+    if(e_player.var_298e4578 === level.a_s_portals[#"portal_panic_room"]) {
       return true;
     }
   }

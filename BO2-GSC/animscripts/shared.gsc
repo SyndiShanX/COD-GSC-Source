@@ -19,9 +19,8 @@
 placeweaponon(weapon, position) {
   self notify("weapon_position_change");
 
-  if(!isDefined(self.weaponinfo[weapon])) {
+  if(!isDefined(self.weaponinfo[weapon]))
     self animscripts\init::initweapon(weapon);
-  }
 
   curposition = self.weaponinfo[weapon].position;
   assert(curposition == "none" || self.a.weaponpos[curposition] == weapon);
@@ -31,9 +30,8 @@ placeweaponon(weapon, position) {
   }
   self detachallweaponmodels();
 
-  if(curposition != "none") {
+  if(curposition != "none")
     self detachweapon(weapon);
-  }
 
   if(position == "none") {
     self updateattachedweaponmodels();
@@ -42,9 +40,8 @@ placeweaponon(weapon, position) {
     return;
   }
 
-  if(self.a.weaponpos[position] != "none") {
+  if(self.a.weaponpos[position] != "none")
     self detachweapon(self.a.weaponpos[position]);
-  }
 
   if(position == "left" || position == "right") {
     self attachweapon(weapon, position);
@@ -101,9 +98,8 @@ updateattachedweaponmodels() {
       }
       self setactorweapon(weapon);
 
-      if(self.weaponinfo[weapon].useclip && !self.weaponinfo[weapon].hasclip) {
+      if(self.weaponinfo[weapon].useclip && !self.weaponinfo[weapon].hasclip)
         self hidepart("tag_clip");
-      }
     }
   }
 }
@@ -152,11 +148,10 @@ dropaiweapon() {
   if(isDefined(current_weapon) && current_weapon != "none") {
     animscripts\shared::placeweaponon(current_weapon, "none");
 
-    if(current_weapon == self.primaryweapon) {
+    if(current_weapon == self.primaryweapon)
       self setprimaryweapon("none");
-    } else if(current_weapon == self.secondaryweapon) {
+    else if(current_weapon == self.secondaryweapon)
       self setsecondaryweapon("none");
-    }
   }
 
   if(self.dropweapon) {
@@ -213,9 +208,8 @@ dropallaiweapons() {
         droppedweapon = self dropweapon(weapon, self.weapon_positions[index], speed);
 
         if(isDefined(self.sidearm) && self.sidearm != "") {
-          if(issubstr(weapon, self.sidearm)) {
+          if(issubstr(weapon, self.sidearm))
             droppedsidearm = 1;
-          }
         }
       }
     }
@@ -247,9 +241,8 @@ swapdropweapon() {
 
         self placeweaponon(weapon, "none");
 
-        if(self.weapon == weapon) {
+        if(self.weapon == weapon)
           self setcurrentweapon(self.script_dropweapon);
-        }
 
         self placeweaponon(self.script_dropweapon, self.weapon_positions[i]);
         found_weapon = 1;
@@ -257,9 +250,8 @@ swapdropweapon() {
       }
     }
 
-    if(!found_weapon) {
+    if(!found_weapon)
       self swapdropweaponprimary();
-    }
 
     self.script_dropweapon = undefined;
   }
@@ -283,21 +275,19 @@ addphysweapon() {
 }
 
 has_script_drop_weapon() {
-  if(isDefined(self.script_dropweapon) && isstring(self.script_dropweapon) && self.script_dropweapon != "") {
+  if(isDefined(self.script_dropweapon) && isstring(self.script_dropweapon) && self.script_dropweapon != "")
     return true;
-  }
 
   return false;
 }
 
 player_weapon_drop(weapon_name) {
-  if(issubstr(tolower(weapon_name), "usrpg")) {
+  if(issubstr(tolower(weapon_name), "usrpg"))
     return "usrpg_player_sp";
-  } else if(issubstr(tolower(weapon_name), "rpg")) {
+  else if(issubstr(tolower(weapon_name), "rpg"))
     return "rpg_player_sp";
-  } else if(issubstr(tolower(weapon_name), "panzerschreck")) {
+  else if(issubstr(tolower(weapon_name), "panzerschreck"))
     return "panzerschreck_player_sp";
-  }
 
   return weapon_name;
 }
@@ -327,22 +317,20 @@ shownotetrack(note) {
   duration = anim.shownotetrackduration + int(20.0 * thisoffset / anim.shownotetrackspeed);
   color = (0.5, 0.75, 1);
 
-  if(note == "end" || note == "finish") {
+  if(note == "end" || note == "finish")
     color = (0.25, 0.4, 0.5);
-  } else if(note == "undefined") {
+  else if(note == "undefined")
     color = (1, 0.5, 0.5);
-  }
 
   for(i = 0; i < duration; i++) {
-    if(duration - i <= anim.shownotetrackduration) {
+    if(duration - i <= anim.shownotetrackduration)
       amnt = 1.0 * (i - (duration - anim.shownotetrackduration)) / anim.shownotetrackduration;
-    } else {
+    else
       amnt = 0.0;
-    }
 
     time = 1.0 * i / 20;
     alpha = 1.0 - amnt * amnt;
-    pos = self getEye() + (0, 0, 20 + anim.shownotetrackspeed * time - thisoffset);
+    pos = self geteye() + (0, 0, 20 + anim.shownotetrackspeed * time - thisoffset);
     print3d(pos, note, color, alpha);
     wait 0.05;
   }
@@ -362,23 +350,21 @@ reduceshownotetrackoffset() {
 
 handledogsoundnotetracks(note) {
   if(note == "sound_dogstep_run_default") {
-    self playSound("fly_dog_step_run_default");
+    self playsound("fly_dog_step_run_default");
     return true;
   }
 
   prefix = getsubstr(note, 0, 5);
 
-  if(prefix != "sound") {
+  if(prefix != "sound")
     return false;
-  }
 
   alias = "aml" + getsubstr(note, 5);
 
-  if(isalive(self)) {
+  if(isalive(self))
     self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-  } else {
+  else
     self thread play_sound_in_space(alias, self gettagorigin("tag_eye"));
-  }
 
   return true;
 }
@@ -477,14 +463,14 @@ registernotetracks() {
       if(!issentient(self)) {
         return;
       }
-      if(isDefined(anim.fire_notetrack_functions[self.a.script])) {
+      if(isDefined(anim.fire_notetrack_functions[self.a.script]))
         thread[[anim.fire_notetrack_functions[self.a.script]]]();
-      } else {
+      else
         thread[[animscripts\shared::shootnotetrack]]();
-      }
     }
 
-    notetrackstopanim(note, flagname) {}
+    notetrackstopanim(note, flagname) {
+    }
 
     notetrackstartragdoll(note, flagname) {
       if(isDefined(self.noragdoll)) {
@@ -498,31 +484,26 @@ registernotetracks() {
     }
 
     setanimmode(animmode, waittime) {
-      if(isDefined(waittime)) {
+      if(isDefined(waittime))
         wait(waittime);
-      }
 
-      if(isDefined(self)) {
+      if(isDefined(self))
         self animmode(animmode);
-      }
     }
 
     notetrackmovementstop(note, flagname) {
-      if(issentient(self)) {
+      if(issentient(self))
         self.a.movement = "stop";
-      }
     }
 
     notetrackmovementwalk(note, flagname) {
-      if(issentient(self)) {
+      if(issentient(self))
         self.a.movement = "walk";
-      }
     }
 
     notetrackmovementrun(note, flagname) {
-      if(issentient(self)) {
+      if(issentient(self))
         self.a.movement = "run";
-      }
     }
 
     notetrackposestand(note, flagname) {
@@ -575,9 +556,8 @@ registernotetracks() {
     }
 
     notetrackposeback(note, flagname) {
-      if(self.a.pose == "prone") {
+      if(self.a.pose == "prone")
         self exitpronewrapper(1.0);
-      }
 
       self.a.pose = "back";
       self notify("entered_pose" + "back");
@@ -603,9 +583,8 @@ registernotetracks() {
       self endon("placed_weapon_on_right");
       self waittill("killanimscript");
 
-      if(aihasweapon(self.weapon)) {
+      if(aihasweapon(self.weapon))
         animscripts\shared::placeweaponon(self.weapon, "right");
-      }
     }
 
     notetrackgundrop(note, flagname) {
@@ -615,11 +594,10 @@ registernotetracks() {
       pistolonlyai = aihasonlypistol();
       self animscripts\shared::dropaiweapon();
 
-      if(self.lastweapon == primaryweapon) {
+      if(self.lastweapon == primaryweapon)
         self setcurrentweapon(self.secondaryweapon);
-      } else if(self.lastweapon == secondaryweapon) {
+      else if(self.lastweapon == secondaryweapon)
         self setcurrentweapon(self.primaryweapon);
-      }
 
       self animscripts\anims::clearanimcache();
     }
@@ -659,15 +637,13 @@ registernotetracks() {
       assert(hassecondaryweapon(), "no secondary weapon available! check the aitype for this actor. ");
 
       if(self.weapon == self.primaryweapon) {
-        if(self.weapon != "none") {
+        if(self.weapon != "none")
           self animscripts\shared::placeweaponon(self.weapon, "back");
-        }
 
         self animscripts\shared::placeweaponon(self.secondaryweapon, "right");
       } else {
-        if(self.weapon != "none") {
+        if(self.weapon != "none")
           self animscripts\shared::placeweaponon(self.weapon, "back");
-        }
 
         self animscripts\shared::placeweaponon(self.primaryweapon, "right");
       }
@@ -675,11 +651,10 @@ registernotetracks() {
       clipsize = weaponclipsize(self.weapon);
 
       if(needtoreload(0.5)) {
-        if(clipsize > 1) {
+        if(clipsize > 1)
           self.bulletsinclip = int(clipsize * 0.5);
-        } else {
+        else
           self.bulletsinclip = clipsize;
-        }
       } else if(self.bulletsinclip > clipsize)
         self.bulletsinclip = clipsize;
 
@@ -687,73 +662,68 @@ registernotetracks() {
       self.lastweapon = self.weapon;
     }
 
-    notetrackdropclip(note, flagname) {}
+    notetrackdropclip(note, flagname) {
+    }
 
     notetrackrefillclip(note, flagname) {
-      if(self.weaponclass == "rocketlauncher") {
+      if(self.weaponclass == "rocketlauncher")
         self showrocket();
-      }
 
       self animscripts\weaponlist::refillclip();
     }
 
-    notetrackloadshell(note, flagname) {}
+    notetrackloadshell(note, flagname) {
+    }
 
     notetrackgravity(note, flagname) {
-      if(issubstr(note, "on")) {
+      if(issubstr(note, "on"))
         self animmode("gravity");
-      } else if(issubstr(note, "off")) {
+      else if(issubstr(note, "off"))
         self animmode("nogravity");
-      }
     }
 
     notetrackbodyfall(note, flagname) {
-      if(isDefined(self.groundtype)) {
+      if(isDefined(self.groundtype))
         groundtype = self.groundtype;
-      } else {
+      else
         groundtype = "dirt";
-      }
 
-      if(issubstr(note, "large")) {
-        self playSound("fly_bodyfall_large_" + groundtype);
-      } else if(issubstr(note, "small")) {
-        self playSound("fly_bodyfall_small_" + groundtype);
-      }
+      if(issubstr(note, "large"))
+        self playsound("fly_bodyfall_large_" + groundtype);
+      else if(issubstr(note, "small"))
+        self playsound("fly_bodyfall_small_" + groundtype);
     }
 
-    notetrackfootstep(note, flagname) {}
+    notetrackfootstep(note, flagname) {
+    }
 
     notetrackfootscrape(note, flagname) {
-      if(isDefined(self.groundtype)) {
+      if(isDefined(self.groundtype))
         groundtype = self.groundtype;
-      } else {
+      else
         groundtype = "dirt";
-      }
 
-      self playSound("fly_step_scrape_" + groundtype);
+      self playsound("fly_step_scrape_" + groundtype);
     }
 
     notetrackland(note, flagname) {
-      if(isDefined(self.groundtype)) {
+      if(isDefined(self.groundtype))
         groundtype = self.groundtype;
-      } else {
+      else
         groundtype = "dirt";
-      }
 
-      if(isplayer(self)) {
-        self playSound("fly_land_plr_" + groundtype);
-      } else {
-        self playSound("fly_land_npc_" + groundtype);
-      }
+      if(isplayer(self))
+        self playsound("fly_land_plr_" + groundtype);
+      else
+        self playsound("fly_land_npc_" + groundtype);
     }
 
     handlenotetrack(note, flagname, customfunction, var1) {
       self thread shownotetrack(note);
 
       if(isai(self) && self.isdog) {
-        if(handledogsoundnotetracks(note)) {
+        if(handledogsoundnotetracks(note))
           return;
-        }
       }
 
       if(!(isDefined(self.ignore_vo_notetracks) && self.ignore_vo_notetracks)) {
@@ -767,11 +737,10 @@ registernotetracks() {
 
       notetrackfunc = anim.notetracks[note];
 
-      if(isDefined(notetrackfunc)) {
+      if(isDefined(notetrackfunc))
         return [
-          }
           [notetrackfunc]
-      ](note, flagname);
+        ](note, flagname);
 
       switch (note) {
         case "end":
@@ -814,16 +783,14 @@ registernotetracks() {
           return note;
         default:
           if(isDefined(customfunction)) {
-            if(!isDefined(var1)) {
+            if(!isDefined(var1))
               return [
-                }
                 [customfunction]
-            ](note);
-            else {
+              ](note);
+            else
               return [
-                }
                 [customfunction]
-            ](note, var1);
+              ](note, var1);
           }
 
           break;
@@ -834,15 +801,13 @@ registernotetracks() {
       for(;;) {
         self waittill(flagname, note);
 
-        if(!isDefined(note)) {
+        if(!isDefined(note))
           note = "undefined";
-        }
 
         val = self handlenotetrack(note, flagname, customfunction, var1);
 
-        if(isDefined(val)) {
+        if(isDefined(val))
           return val;
-        }
       }
     }
 
@@ -852,20 +817,20 @@ registernotetracks() {
       for(;;) {
         self waittill(flagname, note);
 
-        if(!isDefined(note)) {
+        if(!isDefined(note))
           note = "undefined";
-        }
 
-        intercepted = [[interceptfunction]](note);
+        intercepted = [
+          [interceptfunction]
+        ](note);
 
         if(isDefined(intercepted) && intercepted) {
           continue;
         }
         val = self handlenotetrack(note, flagname);
 
-        if(isDefined(val)) {
+        if(isDefined(val))
           return val;
-        }
       }
     }
 
@@ -875,16 +840,16 @@ registernotetracks() {
       for(;;) {
         self waittill(flagname, note);
 
-        if(!isDefined(note)) {
+        if(!isDefined(note))
           note = "undefined";
-        }
 
         val = self handlenotetrack(note, flagname);
-        [[postfunction]](note);
+        [
+          [postfunction]
+        ](note);
 
-        if(isDefined(val)) {
+        if(isDefined(val))
           return val;
-        }
       }
     }
 
@@ -897,19 +862,19 @@ registernotetracks() {
     }
 
     donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, debugidentifier) {
-      if(isDefined(killstring)) {
+      if(isDefined(killstring))
         self endon(killstring);
-      }
 
       self endon("killanimscript");
 
-      if(!isDefined(debugidentifier)) {
+      if(!isDefined(debugidentifier))
         debugidentifier = "undefined";
-      }
 
       for(;;) {
         time = gettime();
-        returnednote = [[notetracksfunc]](flagname, customfunction, debugidentifier);
+        returnednote = [
+          [notetracksfunc]
+        ](flagname, customfunction, debugidentifier);
         timetaken = gettime() - time;
 
         if(timetaken < 0.05) {
@@ -929,13 +894,13 @@ registernotetracks() {
     }
 
     donotetracksfortime(time, flagname, customfunction, debugidentifier) {
-      ent = spawnStruct();
+      ent = spawnstruct();
       ent thread donotetracksfortimeendnotify(time);
       donotetracksfortimeproc(::donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
     }
 
     donotetracksfortimeintercept(time, flagname, interceptfunction, debugidentifier) {
-      ent = spawnStruct();
+      ent = spawnstruct();
       ent thread donotetracksfortimeendnotify(time);
       donotetracksfortimeproc(::donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
     }
@@ -961,9 +926,8 @@ registernotetracks() {
         self shootenemywrapper();
         self decrementbulletsinclip();
 
-        if(self.weaponclass == "rocketlauncher") {
+        if(self.weaponclass == "rocketlauncher")
           self.a.rockets--;
-        }
       }
     }
 
@@ -977,7 +941,7 @@ registernotetracks() {
       }
 
       weaporig = self gettagorigin("tag_weapon");
-      dir = anglesToForward(self gettagangles("tag_weapon"));
+      dir = anglestoforward(self gettagangles("tag_weapon"));
       pos = weaporig + vectorscale(dir, 1000);
       self.a.lastshoottime = gettime();
       self shoot(1, pos);
@@ -989,20 +953,19 @@ registernotetracks() {
         return;
       }
       weaporig = self gettagorigin("tag_weapon");
-      dir = anglesToForward(self gettagangles("tag_weapon"));
+      dir = anglestoforward(self gettagangles("tag_weapon"));
       hitenemy = 0;
 
       if(issentient(self.enemy) && isalive(self.enemy) && self canshoot(self.enemy getshootatpos())) {
-        enemydir = vectornormalize(self.enemy getEye() - weaporig);
+        enemydir = vectornormalize(self.enemy geteye() - weaporig);
 
-        if(vectordot(dir, enemydir) > cos(10)) {
+        if(vectordot(dir, enemydir) > cos(10))
           hitenemy = 1;
-        }
       }
 
-      if(hitenemy) {
+      if(hitenemy)
         self shootenemywrapper();
-      } else {
+      else {
         dir = dir + ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
         pos = weaporig + vectorscale(dir, 1000);
         self shootposwrapper(pos);
@@ -1013,9 +976,8 @@ registernotetracks() {
 
     getpredictedaimyawtoshootentorpos(time) {
       if(!isDefined(self.shootent)) {
-        if(!isDefined(self.shootpos)) {
+        if(!isDefined(self.shootpos))
           return 0;
-        }
 
         return getaimyawtopoint(self.shootpos);
       }
@@ -1026,9 +988,8 @@ registernotetracks() {
 
     getaimyawtoshootentorpos() {
       if(!isDefined(self.shootent)) {
-        if(!isDefined(self.shootpos)) {
+        if(!isDefined(self.shootpos))
           return 0;
-        }
 
         return getaimyawtopoint(self.shootpos);
       }
@@ -1039,18 +1000,16 @@ registernotetracks() {
     getaimpitchtoshootentorpos() {
       pitch = getpitchtoshootentorpos();
 
-      if(self.a.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean") {
+      if(self.a.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean")
         pitch = pitch - anim.covercrouchleanpitch;
-      }
 
       return pitch;
     }
 
     getpitchtoshootentorpos() {
       if(!isDefined(self.shootent)) {
-        if(!isDefined(self.shootpos)) {
+        if(!isDefined(self.shootpos))
           return 0;
-        }
 
         return animscripts\combat_utility::getpitchtospot(self.shootpos);
       }
@@ -1084,9 +1043,8 @@ registernotetracks() {
       self notify("trackLoopStart");
       self.pausetrackloop = 0;
 
-      if(shoulddebugaiming()) {
+      if(shoulddebugaiming())
         recordenttext("TrackLoop: Running", self, level.color_debug["red"], "Animscript");
-      }
 
     }
 
@@ -1097,9 +1055,8 @@ registernotetracks() {
         self waittill_any("killanimscript", "stop tracking", "melee");
         self.pausetrackloop = 1;
 
-        if(shoulddebugaiming()) {
+        if(shoulddebugaiming())
           recordenttext("TrackLoop: Paused", self, level.color_debug["red"], "Animscript");
-        }
 
       }
     }
@@ -1112,14 +1069,12 @@ registernotetracks() {
 
     scriptneedstagaim() {
       if(isDefined(self.a.script)) {
-        if(self.a.script == "move" || self.a.script == "cover_right" || self.a.script == "cover_left" || self.a.script == "cover_pillar") {
+        if(self.a.script == "move" || self.a.script == "cover_right" || self.a.script == "cover_left" || self.a.script == "cover_pillar")
           return true;
-        }
       }
 
-      if(isDefined(self.a.usetagaim) && self.a.usetagaim) {
+      if(isDefined(self.a.usetagaim) && self.a.usetagaim)
         return true;
-      }
 
       return false;
     }
@@ -1130,18 +1085,16 @@ registernotetracks() {
       if(scriptneedstagaim()) {
         origin = self gettagorigin("tag_aim");
 
-        if(!isDefined(origin) && getdvarint(#"_id_5CBE6F6A")) {
+        if(!isDefined(origin) && getdvarint(#"_id_5CBE6F6A"))
           println("no tag_aim in model " + self.model);
-        }
 
       }
 
       if(!isDefined(origin)) {
         eyeheight = self geteyeapprox()[2];
 
-        if(self.a.pose == "crouch") {
+        if(self.a.pose == "crouch")
           eyeheight = self.origin[2] + (eyeheight - self.origin[2]) * 0.5;
-        }
 
         origin = (self.origin[0], self.origin[1], eyeheight);
       }
@@ -1155,15 +1108,13 @@ registernotetracks() {
       if(scriptneedstagaim()) {
         angles = self gettagangles("tag_aim");
 
-        if(!isDefined(angles) && getdvarint(#"_id_5CBE6F6A")) {
+        if(!isDefined(angles) && getdvarint(#"_id_5CBE6F6A"))
           println("no tag_aim in model " + self.model);
-        }
 
       }
 
-      if(!isDefined(angles)) {
+      if(!isDefined(angles))
         angles = self.angles;
-      }
 
       return angles;
     }
@@ -1172,9 +1123,8 @@ registernotetracks() {
       if(getdvarint(#"_id_5CBE6F6A")) {
         ai_entnum = getdvarint(#"ai_debugEntIndex");
 
-        if(ai_entnum == -1 || ai_entnum == self getentitynumber()) {
+        if(ai_entnum == -1 || ai_entnum == self getentitynumber())
           return true;
-        }
       }
 
       return false;
@@ -1206,26 +1156,23 @@ registernotetracks() {
       for(;;) {
         debugaiming = 0;
 
-        if(shoulddebugaiming()) {
+        if(shoulddebugaiming())
           debugaiming = 1;
-        }
 
         rightaimlimit = self.rightaimlimit;
         leftaimlimit = self.leftaimlimit;
         upaimlimit = self.upaimlimit;
         downaimlimit = self.downaimlimit;
 
-        if(prevyawdelta > rightaimlimit) {
+        if(prevyawdelta > rightaimlimit)
           prevyawdelta = rightaimlimit;
-        } else if(prevyawdelta < leftaimlimit) {
+        else if(prevyawdelta < leftaimlimit)
           prevyawdelta = leftaimlimit;
-        }
 
-        if(prevpitchdelta > upaimlimit) {
+        if(prevpitchdelta > upaimlimit)
           prevpitchdelta = upaimlimit;
-        } else if(prevpitchdelta < downaimlimit) {
+        else if(prevpitchdelta < downaimlimit)
           prevpitchdelta = downaimlimit;
-        }
 
         aiminganimschanged = 0;
         aimblendtime = 0.05;
@@ -1240,13 +1187,11 @@ registernotetracks() {
         shootfrompos = self trackloopgetshootfrompos();
         shootpos = self.shootpos;
 
-        if(isDefined(self.shootent)) {
+        if(isDefined(self.shootent))
           shootpos = self.shootent getshootatpos();
-        }
 
-        if(!isDefined(shootpos) && self animscripts\cqb::shouldcqb()) {
+        if(!isDefined(shootpos) && self animscripts\cqb::shouldcqb())
           shootpos = trackloopgetcqbshootpos(shootfrompos);
-        }
 
         shootfromangles = self trackloopgetshootfromangles();
         shootfromyawangle = shootfromangles[1];
@@ -1256,7 +1201,7 @@ registernotetracks() {
 
         if(debugaiming) {
           tempangles = (shootfrompitchangle, self.desiredangle, shootfromangles[2]);
-          tempvector = anglesToForward(tempangles);
+          tempvector = anglestoforward(tempangles);
           recordline(shootfrompos, shootfrompos + vectorscale(tempvector, 100), level.color_debug["white"], "Animscript", self);
         }
 
@@ -1268,26 +1213,24 @@ registernotetracks() {
         } else if(abs(shootfromyawdelta) > 11)
           shootfromyawangle = prevshootfromyawangle + 11 * sign(shootfromyawdelta);
 
-        if(abs(shootfrompitchdelta) > 11) {
+        if(abs(shootfrompitchdelta) > 11)
           shootfrompitchangle = prevshootfrompitchangle + 11 * sign(shootfrompitchdelta);
-        }
 
         if(debugaiming) {
           recordenttext("actualAngle: " + shootfromangles[0] + " shootFromPitchAngle: " + shootfrompitchangle + " shootFromPitchDelta: " + shootfrompitchdelta, self, level.color_debug["cyan"], "Animscript");
           recordenttext("actualAngle: " + shootfromangles[1] + " shootFromYawAngle: " + shootfromyawangle + " shootFromYawDelta: " + shootfromyawdelta, self, level.color_debug["orange"], "Animscript");
-          facingvector = anglesToForward(shootfromangles);
+          facingvector = anglestoforward(shootfromangles);
           recordline(shootfrompos, shootfrompos + vectorscale(facingvector, 100), level.color_debug["blue"], "Animscript", self);
         }
 
         shootfromangles = (shootfrompitchangle, shootfromyawangle, shootfromangles[2]);
 
         if(debugaiming) {
-          facingvector = anglesToForward(shootfromangles);
+          facingvector = anglestoforward(shootfromangles);
           recordline(shootfrompos, shootfrompos + vectorscale(facingvector, 100), level.color_debug["green"], "Animscript", self);
 
-          if(isDefined(shootpos)) {
+          if(isDefined(shootpos))
             recordline(shootfrompos, shootpos, level.color_debug["red"], "Animscript", self);
-          }
         }
 
         if(!isDefined(shootpos)) {
@@ -1320,21 +1263,18 @@ registernotetracks() {
           yawdelta = 0;
           pitchdelta = 0;
         } else {
-          if(self.gunblockedbywall) {
+          if(self.gunblockedbywall)
             yawdelta = clamp(yawdelta, -10, 10);
-          }
 
-          if(yawdelta > rightaimlimit) {
+          if(yawdelta > rightaimlimit)
             yawdelta = rightaimlimit;
-          } else if(yawdelta < leftaimlimit) {
+          else if(yawdelta < leftaimlimit)
             yawdelta = leftaimlimit;
-          }
 
-          if(pitchdelta > upaimlimit) {
+          if(pitchdelta > upaimlimit)
             pitchdelta = upaimlimit;
-          } else if(pitchdelta < downaimlimit) {
+          else if(pitchdelta < downaimlimit)
             pitchdelta = downaimlimit;
-          }
         }
 
         if(firstframe) {
@@ -1346,15 +1286,13 @@ registernotetracks() {
           adjustedmaxpitchdeltachange = 5 + abs(shootfrompitchdelta);
           yawdeltachange = yawdelta - prevyawdelta;
 
-          if(abs(yawdeltachange) > adjustedmaxyawdeltachange) {
+          if(abs(yawdeltachange) > adjustedmaxyawdeltachange)
             yawdelta = prevyawdelta + adjustedmaxyawdeltachange * sign(yawdeltachange);
-          }
 
           pitchdeltachange = pitchdelta - prevpitchdelta;
 
-          if(abs(pitchdeltachange) > adjustedmaxpitchdeltachange) {
+          if(abs(pitchdeltachange) > adjustedmaxpitchdeltachange)
             pitchdelta = prevpitchdelta + adjustedmaxpitchdeltachange * sign(pitchdeltachange);
-          }
         }
 
         if(debugaiming) {
@@ -1409,16 +1347,15 @@ registernotetracks() {
 
     trackloopgetcqbshootpos(shootfrompos) {
       shootpos = undefined;
-      selfforward = anglesToForward(self.angles);
+      selfforward = anglestoforward(self.angles);
 
       if(isDefined(self.cqb_target)) {
         shootpos = self.cqb_target getshootatpos();
         dir = shootpos - shootfrompos;
         vdot = vectordot(dir, selfforward);
 
-        if(vdot < 0.0 || vdot * vdot < 0.413449 * lengthsquared(dir)) {
+        if(vdot < 0.0 || vdot * vdot < 0.413449 * lengthsquared(dir))
           shootpos = undefined;
-        }
       }
 
       if(!isDefined(shootpos) && isDefined(self.cqb_point_of_interest)) {
@@ -1426,9 +1363,8 @@ registernotetracks() {
         dir = shootpos - shootfrompos;
         vdot = vectordot(dir, selfforward);
 
-        if(vdot < 0.0 || vdot * vdot < 0.413449 * lengthsquared(dir)) {
+        if(vdot < 0.0 || vdot * vdot < 0.413449 * lengthsquared(dir))
           shootpos = undefined;
-        }
       }
 
       return shootpos;
@@ -1441,9 +1377,8 @@ registernotetracks() {
         self.a.aimweight_end = goalweight;
         self.a.aimweight_transframes = 0;
       } else {
-        if(!isDefined(self.a.aimweight)) {
+        if(!isDefined(self.a.aimweight))
           self.a.aimweight = 0;
-        }
 
         self.a.aimweight_start = self.a.aimweight;
         self.a.aimweight_end = goalweight;
@@ -1464,23 +1399,20 @@ registernotetracks() {
     decidenumshotsforburst() {
       numshots = 0;
 
-      if(animscripts\weaponlist::usingsemiautoweapon()) {
+      if(animscripts\weaponlist::usingsemiautoweapon())
         numshots = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
-      } else if(self.fastburst) {
+      else if(self.fastburst)
         numshots = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
-      } else {
+      else
         numshots = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
-      }
 
-      if(numshots <= self.bulletsinclip) {
+      if(numshots <= self.bulletsinclip)
         return numshots;
-      }
 
       assert(self.bulletsinclip >= 0, self.bulletsinclip);
 
-      if(self.bulletsinclip <= 0) {
+      if(self.bulletsinclip <= 0)
         return 1;
-      }
 
       return self.bulletsinclip;
     }
@@ -1491,13 +1423,12 @@ registernotetracks() {
       if(self.weaponclass == "mg") {
         choice = randomfloat(10);
 
-        if(choice < 3) {
+        if(choice < 3)
           numshots = randomintrange(2, 6);
-        } else if(choice < 8) {
+        else if(choice < 8)
           numshots = randomintrange(6, 12);
-        } else {
+        else
           numshots = randomintrange(12, 20);
-        }
       }
 
       return numshots;
@@ -1512,9 +1443,8 @@ registernotetracks() {
       }
       clipmodel = undefined;
 
-      if(self.weaponinfo[self.weapon].useclip) {
+      if(self.weaponinfo[self.weapon].useclip)
         clipmodel = getweaponclipmodel(self.weapon);
-      }
 
       if(self.weaponinfo[self.weapon].hasclip) {
         if(isDefined(clipmodel)) {
@@ -1565,9 +1495,8 @@ registernotetracks() {
       }
       self.a.reloadclipinhand = 0;
 
-      if(isDefined(currenttag)) {
+      if(isDefined(currenttag))
         self detach(clipmodel, currenttag);
-      }
 
       if(isalive(self)) {
         self showpart("tag_clip");
@@ -1617,9 +1546,8 @@ registernotetracks() {
     }
 
     playlookanimation(lookanim, looktime, canstopcallback) {
-      if(!isDefined(canstopcallback)) {
+      if(!isDefined(canstopcallback))
         canstopcallback = ::returntrue;
-      }
 
       for(i = 0; i < looktime * 10; i++) {
         if(isalive(self.enemy)) {
@@ -1641,11 +1569,10 @@ registernotetracks() {
 
     getsecondaryweapon() {
       if(isDefined(self.weapon)) {
-        if(self.weapon == self.primaryweapon && aihasweapon(self.secondaryweapon) && self.secondaryweaponclass != "pistol") {
+        if(self.weapon == self.primaryweapon && aihasweapon(self.secondaryweapon) && self.secondaryweaponclass != "pistol")
           return self.secondaryweapon;
-        } else if(self.weapon == self.secondaryweapon && aihasweapon(self.primaryweapon) && self.secondaryweaponclass != "pistol") {
+        else if(self.weapon == self.secondaryweapon && aihasweapon(self.primaryweapon) && self.secondaryweaponclass != "pistol")
           return self.primaryweapon;
-        }
       }
 
       return undefined;
@@ -1657,28 +1584,23 @@ registernotetracks() {
     }
 
     shouldthrowdownweapon() {
-      if(!hassecondaryweapon()) {
+      if(!hassecondaryweapon())
         return false;
-      }
 
-      if(getdvarint(#"_id_5F9CD874")) {
+      if(getdvarint(#"_id_5F9CD874"))
         return true;
-      }
 
-      if(self.weaponclass == "none") {
+      if(self.weaponclass == "none")
         return false;
-      }
 
-      if(isDefined(self.secondaryweapon) && self.weapon == self.secondaryweapon) {
+      if(isDefined(self.secondaryweapon) && self.weapon == self.secondaryweapon)
         return false;
-      }
 
       if(isDefined(self.shootpos)) {
         distsqtoshootpos = lengthsquared(self.origin - self.shootpos);
 
-        if(self.weaponclass == "rocketlauncher" && (distsqtoshootpos < 262144 || self.a.rockets < 1)) {
+        if(self.weaponclass == "rocketlauncher" && (distsqtoshootpos < 262144 || self.a.rockets < 1))
           return true;
-        }
       }
 
       return false;
@@ -1702,9 +1624,8 @@ registernotetracks() {
       while(note != "end") {
         self waittill("weapon swap", note);
 
-        if(note == "dropgun" || note == "gun drop") {
+        if(note == "dropgun" || note == "gun drop")
           dropaiweapon();
-        }
 
         if(note == "anim_gunhand = \"right\"") {
           assert(hassecondaryweapon(), "self.secondaryweapon not defined! check the aitype for this actor. ");
@@ -1712,9 +1633,8 @@ registernotetracks() {
         }
       }
 
-      if(self.bulletsinclip > weaponclipsize(self.weapon)) {
+      if(self.bulletsinclip > weaponclipsize(self.weapon))
         self.bulletsinclip = weaponclipsize(self.weapon);
-      }
 
       self notify("throw_down_weapon_done");
       self maps\_gameskill::didsomethingotherthanshooting();
@@ -1733,17 +1653,14 @@ registernotetracks() {
     }
 
     shouldswitchweapons() {
-      if(!hassecondaryweapon()) {
+      if(!hassecondaryweapon())
         return false;
-      }
 
-      if(self.a.atpillarnode) {
+      if(self.a.atpillarnode)
         return false;
-      }
 
-      if(self.a.pose == "prone") {
+      if(self.a.pose == "prone")
         return false;
-      }
 
       if(isDefined(self.a.weapon_switch_asap) && self.a.weapon_switch_asap) {
         assert(hassecondaryweapon(), "self.secondaryweapon not defined! check the aitype for this actor. ");
@@ -1752,23 +1669,19 @@ registernotetracks() {
       } else if(!(isDefined(level.supportsaiweaponswitching) && level.supportsaiweaponswitching))
         return false;
 
-      if(gettime() - self.a.weapon_switch_time < 6000) {
+      if(gettime() - self.a.weapon_switch_time < 6000)
         return false;
-      }
 
       curweaponclass = weaponanims();
 
-      if(curweaponclass == "none") {
+      if(curweaponclass == "none")
         return true;
-      }
 
-      if(shouldswitchweaponfordistance()) {
+      if(shouldswitchweaponfordistance())
         return true;
-      }
 
-      if(shouldforcebehavior("switchWeapons")) {
+      if(shouldforcebehavior("switchWeapons"))
         return true;
-      }
 
       return false;
     }
@@ -1793,29 +1706,25 @@ registernotetracks() {
 
             secondaryweapon_accuracy = getweaponaccuracy(self, self.secondaryweapon);
 
-            if(primaryweapon_accuracy > secondaryweapon_accuracy) {
+            if(primaryweapon_accuracy > secondaryweapon_accuracy)
               shoulduseweapon = self.primaryweapon;
-            } else {
+            else
               shoulduseweapon = self.secondaryweapon;
-            }
           } else
             shoulduseweapon = self.weapon;
         } else if(withinprimaryrange)
           shoulduseweapon = self.primaryweapon;
-        else if(withinsecondaryrange) {
+        else if(withinsecondaryrange)
           shoulduseweapon = self.secondaryweapon;
-        }
 
         assert(isDefined(shoulduseweapon));
 
         if(self.weapon != shoulduseweapon) {
-          if(self.a.weapon_switch_for_distance_time < 0) {
+          if(self.a.weapon_switch_for_distance_time < 0)
             self.a.weapon_switch_for_distance_time = gettime() + randomfloatrange(2, 4) * 1000;
-          }
 
-          if(isexposed() && gettime() < self.a.weapon_switch_for_distance_time) {
+          if(isexposed() && gettime() < self.a.weapon_switch_for_distance_time)
             return false;
-          }
 
           return true;
         }
@@ -1830,13 +1739,11 @@ registernotetracks() {
 
     isexposed() {
       if(self.a.script == "cover_crouch" || self.a.script == "cover_stand") {
-        if(isDefined(self.a.covermode) && self.a.covermode == "Hide") {
+        if(isDefined(self.a.covermode) && self.a.covermode == "Hide")
           return false;
-        }
       } else if(self.a.script == "cover_left" || self.a.script == "cover_right" || self.a.script == "cover_pillar") {
-        if(!isDefined(self.corneraiming) || !self.corneraiming) {
+        if(!isDefined(self.corneraiming) || !self.corneraiming)
           return false;
-        }
       }
 
       return true;
@@ -1848,20 +1755,17 @@ registernotetracks() {
       if(!isexposed()) {
         animname = "weapon_switch_cover";
 
-        if(getdvarint(#"_id_D2DF7981") == 1) {
+        if(getdvarint(#"_id_D2DF7981") == 1)
           animname = "weapon_switch_quadrants_cover";
-        } else if(getdvarint(#"_id_D2DF7981") == 2) {
+        else if(getdvarint(#"_id_D2DF7981") == 2)
           animname = "weapon_putaway_cover";
-        }
       } else if(getdvarint(#"_id_D2DF7981") == 1)
         animname = "weapon_switch_quadrants";
-      else if(getdvarint(#"_id_D2DF7981") == 2) {
+      else if(getdvarint(#"_id_D2DF7981") == 2)
         animname = "weapon_putaway";
-      }
 
-      if(isarray(animarray(animname))) {
+      if(isarray(animarray(animname)))
         return animarraypickrandom(animname);
-      }
 
       return animarray(animname);
     }
@@ -1869,15 +1773,13 @@ registernotetracks() {
     getweaponpulloutanim() {
       animname = "weapon_pullout";
 
-      if(!isexposed()) {
+      if(!isexposed())
         animname = "weapon_pullout_cover";
-      }
 
       assert(animarrayexist(animname));
 
-      if(isarray(animarray(animname))) {
+      if(isarray(animarray(animname)))
         return animarraypickrandom(animname);
-      }
 
       return animarray(animname);
     }
@@ -1914,15 +1816,13 @@ registernotetracks() {
     }
 
     isenemyinexplodablevolume() {
-      if(!isDefined(self.enemy)) {
+      if(!isDefined(self.enemy))
         return false;
-      }
 
       if(isDefined(self.enemy._explodable_targets)) {
         for(i = 0; i < self.enemy._explodable_targets.size; i++) {
-          if(isDefined(self.enemy._explodable_targets[i]) && self cansee(self.enemy._explodable_targets[i])) {
+          if(isDefined(self.enemy._explodable_targets[i]) && self cansee(self.enemy._explodable_targets[i]))
             return true;
-          }
         }
       } else if(isDefined(self.enemy.script_exploder) || self.enemy is_destructible())
         return true;
@@ -1936,9 +1836,8 @@ registernotetracks() {
         isasd = isDefined(self.enemy.vehicletype) && issubstr(self.enemy.vehicletype, "metalstorm");
         issentryturret = isDefined(self.enemy.vehicletype) && issubstr(self.enemy.vehicletype, "turret_sentry");
 
-        if(isbigdog || isasd || issentryturret) {
+        if(isbigdog || isasd || issentryturret)
           return true;
-        }
       }
 
       return false;
@@ -1949,13 +1848,11 @@ registernotetracks() {
       secondaryweaponclass = weaponclass(self getsecondaryweapon());
       favorrpgagainstenemy = isenemyinexplodablevolume() || isenemyvulnerablebyrpg();
 
-      if(favorrpgagainstenemy && secondaryweaponclass == "rocketlauncher" && self.weaponclass != "rocketlauncher") {
+      if(favorrpgagainstenemy && secondaryweaponclass == "rocketlauncher" && self.weaponclass != "rocketlauncher")
         return true;
-      }
 
-      if(!favorrpgagainstenemy && self.weaponclass == "rocketlauncher") {
+      if(!favorrpgagainstenemy && self.weaponclass == "rocketlauncher")
         return true;
-      }
 
       return false;
     }
@@ -1972,32 +1869,28 @@ registernotetracks() {
     }
 
     updatelaserstatus(toggle, skipaimcheck) {
-      if(isDefined(toggle) && toggle) {
+      if(isDefined(toggle) && toggle)
         self.a.laseron = 1;
-      } else {
+      else
         self.a.laseron = 0;
-      }
 
       isaimingatenemy = isDefined(skipaimcheck) && skipaimcheck || animscripts\combat_utility::aimedatshootentorpos();
 
-      if(self.a.laseron && canuselaser() && isaimingatenemy) {
+      if(self.a.laseron && canuselaser() && isaimingatenemy)
         self laseron();
-      } else {
+      else
         self laseroff();
-      }
     }
 
     canuselaser() {
-      if(!(isDefined(self.has_ir) && self.has_ir)) {
+      if(!(isDefined(self.has_ir) && self.has_ir))
         return 0;
-      }
 
       if(self.a.weaponpos["right"] == "none") {
         return;
       }
-      if(weaponanims() != "rifle" && weaponanims() != "mg" && weaponanims() != "smg") {
+      if(weaponanims() != "rifle" && weaponanims() != "mg" && weaponanims() != "smg")
         return 0;
-      }
 
       return isalive(self);
     }

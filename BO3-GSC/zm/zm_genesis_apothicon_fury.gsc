@@ -31,13 +31,13 @@
 #namespace zm_genesis_apothicon_fury;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothicon_fury", &__init__, undefined, undefined);
+  system::register("zm_genesis_apothicon_fury", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("apothicon_fury", &function_2c871f46);
-  spawner::add_archetype_spawn_function("apothicon_fury", &function_e5e94978);
-  spawner::add_archetype_spawn_function("apothicon_fury", &function_1dcdd145);
+  spawner::add_archetype_spawn_function("apothicon_fury", & function_2c871f46);
+  spawner::add_archetype_spawn_function("apothicon_fury", & function_e5e94978);
+  spawner::add_archetype_spawn_function("apothicon_fury", & function_1dcdd145);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
     clientfield::register("scriptmover", "apothicon_fury_spawn_meteor", 15000, 2, "int");
   }
@@ -52,17 +52,17 @@ function function_51dd865c() {
 
 function apothicon_fury_death() {
   self waittill("death", e_attacker);
-  if(isDefined(e_attacker) && isDefined(e_attacker.var_4d307aef)) {
+  if(isdefined(e_attacker) && isdefined(e_attacker.var_4d307aef)) {
     e_attacker.var_4d307aef++;
   }
-  if(isDefined(e_attacker) && isDefined(e_attacker.var_8b5008fe)) {
+  if(isdefined(e_attacker) && isdefined(e_attacker.var_8b5008fe)) {
     e_attacker.var_8b5008fe++;
   }
 }
 
 function function_21bbe70d(v_origin, v_angles, var_8d71b2b8) {
   var_33504256 = spawnactor("spawner_zm_genesis_apothicon_fury", v_origin, v_angles, undefined, 1, 1);
-  if(isDefined(var_33504256)) {
+  if(isdefined(var_33504256)) {
     var_33504256 endon("death");
     var_33504256.spawn_time = gettime();
     var_33504256.var_1cba9ac3 = 1;
@@ -78,9 +78,9 @@ function function_21bbe70d(v_origin, v_angles, var_8d71b2b8) {
     var_33504256.animname = "fury";
     var_33504256 thread zm_spawner::play_ambient_zombie_vocals();
     var_33504256 thread zm_audio::zmbaivox_notifyconvert();
-    var_33504256 playSound("zmb_vocals_fury_spawn");
+    var_33504256 playsound("zmb_vocals_fury_spawn");
     var_33504256 thread function_ab27e73a();
-    if(isDefined(var_8d71b2b8) && var_8d71b2b8) {
+    if(isdefined(var_8d71b2b8) && var_8d71b2b8) {
       wait(1);
       var_33504256.zombie_think_done = 1;
     }
@@ -92,7 +92,7 @@ function function_21bbe70d(v_origin, v_angles, var_8d71b2b8) {
 function private function_7ba80ea7() {
   self.is_zombie = 1;
   zombiehealth = level.zombie_health;
-  if(!isDefined(zombiehealth)) {
+  if(!isdefined(zombiehealth)) {
     zombiehealth = level.zombie_vars["zombie_health_start"];
   }
   if(level.round_number <= 20) {
@@ -104,7 +104,7 @@ function private function_7ba80ea7() {
       self.maxhealth = zombiehealth * 1.7;
     }
   }
-  if(!isDefined(self.maxhealth) || self.maxhealth <= 0 || self.maxhealth > 2147483647 || self.maxhealth != self.maxhealth) {
+  if(!isdefined(self.maxhealth) || self.maxhealth <= 0 || self.maxhealth > 2147483647 || self.maxhealth != self.maxhealth) {
     self.maxhealth = zombiehealth;
   }
   self.health = int(self.maxhealth);
@@ -112,8 +112,8 @@ function private function_7ba80ea7() {
 
 function private function_1be68e3f() {
   self endon("death");
-  while(true) {
-    if(isDefined(self.zone_name)) {
+  while (true) {
+    if(isdefined(self.zone_name)) {
       if(self.zone_name == "dark_arena_zone" || self.zone_name == "dark_arena2_zone") {
         if(!ispointonnavmesh(self.origin)) {
           point = getclosestpointonnavmesh(self.origin, 256, 30);
@@ -127,11 +127,11 @@ function private function_1be68e3f() {
 
 function function_ab27e73a() {
   self endon("death");
-  if(isDefined(level.var_31c836af) && level.var_31c836af > 0) {
+  if(isdefined(level.var_31c836af) && level.var_31c836af > 0) {
     self.health = level.var_31c836af;
   }
-  while(true) {
-    if(isDefined(level.var_2db0d4e8) && level.var_2db0d4e8) {
+  while (true) {
+    if(isdefined(level.var_2db0d4e8) && level.var_2db0d4e8) {
       print3d(self.origin, "" + self.health, (0, 0, 1), 1.2);
     }
     wait(0.05);
@@ -141,7 +141,7 @@ function function_ab27e73a() {
 function function_16beb600(var_8cc26a7f, var_7ab4c34a, var_535f5919, var_13d4cd83, var_3988ba7b, var_8d71b2b8 = 0) {
   function_b55fb314(var_8cc26a7f, var_7ab4c34a, var_535f5919, var_13d4cd83, var_3988ba7b);
   apothicon_fury = function_21bbe70d(var_13d4cd83, var_3988ba7b, var_8d71b2b8);
-  if(isDefined(apothicon_fury)) {
+  if(isdefined(apothicon_fury)) {
     return apothicon_fury;
   }
 }
@@ -152,7 +152,7 @@ function function_b55fb314(var_8cc26a7f, var_7ab4c34a, var_535f5919, var_13d4cd8
   var_dfcea895 = (var_13d4cd83[0] - var_7ab4c34a[0], var_13d4cd83[1] - var_7ab4c34a[1], 0);
   var_30280c29 = (var_7ab4c34a + (var_dfcea895 * 0.5)) + (0, 0, var_535f5919);
   var_be9b92b3 = spawn("script_model", var_7ab4c34a);
-  var_be9b92b3 setModel("tag_origin");
+  var_be9b92b3 setmodel("tag_origin");
   var_be9b92b3 clientfield::set("apothicon_fury_spawn_meteor", 1);
   var_22077f2a = var_7ab4c34a + (0, 0, var_7ae4bfa0 * 0.5);
   var_be9b92b3.angles = vectortoangles(var_22077f2a - var_be9b92b3.origin);
@@ -188,7 +188,7 @@ function function_2c871f46() {
 
 function function_e5e94978() {
   self endon("death");
-  while(isalive(self)) {
+  while (isalive(self)) {
     self waittill("damage");
     if(isplayer(self.attacker)) {
       if(zm_spawner::player_using_hi_score_weapon(self.attacker)) {
@@ -196,11 +196,13 @@ function function_e5e94978() {
       } else {
         str_notify = "damage_light";
       }
-      if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
+      if(!(isdefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
         self.attacker zm_score::player_add_points(str_notify, self.damagemod, self.damagelocation, undefined, self.team, self.damageweapon);
       }
-      if(isDefined(level.hero_power_update)) {
-        [[level.hero_power_update]](self.attacker, self);
+      if(isdefined(level.hero_power_update)) {
+        [
+          [level.hero_power_update]
+        ](self.attacker, self);
       }
     }
     util::wait_network_frame();
@@ -210,10 +212,10 @@ function function_e5e94978() {
 function function_1dcdd145() {
   self waittill("death");
   if(isplayer(self.attacker)) {
-    if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
+    if(!(isdefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       self.attacker zm_score::player_add_points("death", self.damagemod, self.damagelocation, undefined, self.team, self.damageweapon);
     }
-    if(isDefined(level.hero_power_update)) {
+    if(isdefined(level.hero_power_update)) {
       [
         [level.hero_power_update]
       ](self.attacker, self);
@@ -223,13 +225,13 @@ function function_1dcdd145() {
 
 function private function_bc2e7a98() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback(&function_744725d0);
+  zm_devgui::add_custom_devgui_callback( & function_744725d0);
 }
 
 function private function_744725d0(cmd) {
   if(cmd == "apothicon_fury_spawn") {
     queryresult = positionquery_source_navigation(level.players[0].origin, 128, 256, 128, 20);
-    if(isDefined(queryresult) && queryresult.data.size > 0) {
+    if(isdefined(queryresult) && queryresult.data.size > 0) {
       origin = queryresult.data[0].origin;
       angles = level.players[0].angles;
       level thread function_21bbe70d(origin, angles, 1);
@@ -263,12 +265,12 @@ function private function_744725d0(cmd) {
             if(cmd == "apothicon_fury_force_furious") {
               ais = getaiarchetypearray("apothicon_fury");
               foreach(ai in ais) {
-                if(!(isDefined(ai.isfurious) && ai.isfurious)) {
+                if(!(isdefined(ai.isfurious) && ai.isfurious)) {
                   apothiconfurybehavior::apothiconfuriousmodeinit(ai);
                 }
               }
             } else if(cmd == "apothicon_fury_debug_health") {
-              if(isDefined(level.var_2db0d4e8) && level.var_2db0d4e8) {
+              if(isdefined(level.var_2db0d4e8) && level.var_2db0d4e8) {
                 level.var_2db0d4e8 = 0;
               } else {
                 level.var_2db0d4e8 = 1;

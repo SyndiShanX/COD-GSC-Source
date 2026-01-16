@@ -16,5 +16,5 @@ function registerapothiconfuryinterfaceattributes() {
   ai::registermatchedinterface("apothicon_fury", "can_juke", 1, array(1, 0));
   ai::registermatchedinterface("apothicon_fury", "can_bamf", 1, array(1, 0));
   ai::registermatchedinterface("apothicon_fury", "can_be_furious", 1, array(1, 0));
-  ai::registermatchedinterface("apothicon_fury", "move_speed", "walk", array("walk", "run", "sprint", "super_sprint"), &apothiconfurybehaviorinterface::movespeedattributecallback);
+  ai::registermatchedinterface("apothicon_fury", "move_speed", "walk", array("walk", "run", "sprint", "super_sprint"), & apothiconfurybehaviorinterface::movespeedattributecallback);
 }

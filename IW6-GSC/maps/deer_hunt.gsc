@@ -27,32 +27,31 @@ main() {
   setup_flags();
   maps\_utility::transient_init("deer_hunt_intro_tr");
   maps\_utility::transient_init("deer_hunt_beach_tr");
-  maps\_utility::intro_screen_create(&"DEER_HUNT_INTROSCREEN_LINE_4", &"DEER_HUNT_INTROSCREEN_LINE_2", &"DEER_HUNT_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"DEER_HUNT_INTROSCREEN_LINE_4", & "DEER_HUNT_INTROSCREEN_LINE_2", & "DEER_HUNT_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_utility::intro_screen_custom_timing(0.05, 3);
   level.actionbinds = [];
-  maps\deer_hunt_util::registeractionbinding("matv_enter", "+activate", &"DEER_HUNT_MATV_HINT");
-  maps\deer_hunt_util::registeractionbinding("matv_enter", "+usereload", &"DEER_HUNT_MATV_HINT_RELOAD");
-  maps\deer_hunt_util::registeractionbinding("slide", "+gocrouch", &"DEER_HUNT_SLIDE_CROUCH");
-  maps\deer_hunt_util::registeractionbinding("slide", "+stance", &"DEER_HUNT_SLIDE_CROUCH_STANCE");
-  maps\deer_hunt_util::registeractionbinding("slide", "+togglecrouch", &"DEER_HUNT_SLIDE_CROUCH_TOGGLE");
-  maps\deer_hunt_util::registeractionbinding("slide", "+movedown", &"DEER_HUNT_SLIDE_CROUCH_HOLD");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+gocrouch", &"DEER_HUNT_CROUCH");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+stance", &"DEER_HUNT_CROUCH_STANCE");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+togglecrouch", &"DEER_HUNT_CROUCH_TOGGLE");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+movedown", &"DEER_HUNT_CROUCH_HOLD");
+  maps\deer_hunt_util::registeractionbinding("matv_enter", "+activate", & "DEER_HUNT_MATV_HINT");
+  maps\deer_hunt_util::registeractionbinding("matv_enter", "+usereload", & "DEER_HUNT_MATV_HINT_RELOAD");
+  maps\deer_hunt_util::registeractionbinding("slide", "+gocrouch", & "DEER_HUNT_SLIDE_CROUCH");
+  maps\deer_hunt_util::registeractionbinding("slide", "+stance", & "DEER_HUNT_SLIDE_CROUCH_STANCE");
+  maps\deer_hunt_util::registeractionbinding("slide", "+togglecrouch", & "DEER_HUNT_SLIDE_CROUCH_TOGGLE");
+  maps\deer_hunt_util::registeractionbinding("slide", "+movedown", & "DEER_HUNT_SLIDE_CROUCH_HOLD");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+gocrouch", & "DEER_HUNT_CROUCH");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+stance", & "DEER_HUNT_CROUCH_STANCE");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+togglecrouch", & "DEER_HUNT_CROUCH_TOGGLE");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+movedown", & "DEER_HUNT_CROUCH_HOLD");
   var_0 = maps\deer_hunt_util::getactionbind("slide");
   maps\_utility::add_hint_string("slide_hint", var_0.hint, ::player_slide_check);
   var_1 = maps\deer_hunt_util::getactionbind("crouch");
   maps\_utility::add_hint_string("crouch_hint", var_1.hint, ::player_crouch_check);
-  maps\_utility::add_hint_string("laser_hint", &"DEER_HUNT_LASER_HINT", maps\deer_hunt_util::player_is_using_missile_launcher);
+  maps\_utility::add_hint_string("laser_hint", & "DEER_HUNT_LASER_HINT", maps\deer_hunt_util::player_is_using_missile_launcher);
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   setup_motion_blur();
 
-  if(!maps\_utility::is_gen4()) {
+  if(!maps\_utility::is_gen4())
     setsaveddvar("sm_sunshadowscale", 0.7);
-  }
 
   maps\deer_hunt_audio::main();
   maps\_drone_deer::init();
@@ -69,11 +68,10 @@ main() {
   maps\_utility::add_global_spawn_function("allies", ::gun_inventory);
   thread objectives();
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     setsaveddvar("r_HudOutlineWidth", 3);
-  } else {
+  else
     setsaveddvar("r_HudOutlineWidth", 2);
-  }
 
   thread level_music();
   maps\deer_hunt_util::drone_civs_init();
@@ -125,13 +123,11 @@ gun_inventory() {
   }
   maps\_utility::disable_surprise();
 
-  if(!isDefined(level.possible_guns)) {
+  if(!isDefined(level.possible_guns))
     level.possible_guns = [];
-  }
 
-  if(!maps\_utility::is_in_array(level.possible_guns, self.weapon)) {
+  if(!maps\_utility::is_in_array(level.possible_guns, self.weapon))
     level.possible_guns = common_scripts\utility::add_to_array(level.possible_guns, self.weapon);
-  }
 }
 
 precache_stuff() {
@@ -176,13 +172,13 @@ objectives() {
     case "intro":
     case "default":
       common_scripts\utility::flag_wait("player_up");
-      objective_add(maps\_utility::obj("finish_sweep"), "current", &"DEER_HUNT_FINISH_PATROL");
+      objective_add(maps\_utility::obj("finish_sweep"), "current", & "DEER_HUNT_FINISH_PATROL");
     case "outside":
     case "lobby":
       common_scripts\utility::flag_wait("lobby_exit");
       thread maps\deer_hunt_util::try_slide_hint("lobby_exit", "promenade_exit_halfway");
       wait 15;
-      objective_add(maps\_utility::obj("meet_charlie"), "current", &"DEER_HUNT_MEET_CHARLIE_TEAM");
+      objective_add(maps\_utility::obj("meet_charlie"), "current", & "DEER_HUNT_MEET_CHARLIE_TEAM");
     case "street":
       common_scripts\utility::flag_wait("road_chasm_approach");
       maps\_utility::objective_complete(maps\_utility::obj("meet_charlie"));
@@ -196,26 +192,25 @@ objectives() {
       wait 15;
       maps\_utility::objective_complete(maps\_utility::obj("finish_sweep"));
       wait 2;
-      objective_add(maps\_utility::obj("la_river"), "current", &"DEER_HUNT_BACKUP_LARIVER");
+      objective_add(maps\_utility::obj("la_river"), "current", & "DEER_HUNT_BACKUP_LARIVER");
       common_scripts\utility::flag_wait("pipe_enter");
 
-      if(!common_scripts\utility::flag("did_slide_hint")) {
+      if(!common_scripts\utility::flag("did_slide_hint"))
         thread maps\_utility::display_hint_timeout("slide_hint", 7);
-      }
     case "lariver_defend":
     case "lariver":
       common_scripts\utility::flag_wait("drag_complete");
       wait 4;
-      objective_string(maps\_utility::obj("la_river"), &"DEER_HUNT_DEFEND_OBJ");
+      objective_string(maps\_utility::obj("la_river"), & "DEER_HUNT_DEFEND_OBJ");
       common_scripts\utility::flag_wait("defend_chopp2_dead");
       maps\_utility::objective_complete(maps\_utility::obj("la_river"));
       common_scripts\utility::flag_wait("load_matv");
       wait 2;
       maps\_utility::objective_complete(maps\_utility::obj("finish_sweep"));
       wait 2;
-      objective_add(maps\_utility::obj("go_to_base"), "current", &"DEER_HUNT_MISSION_BRIEF");
+      objective_add(maps\_utility::obj("go_to_base"), "current", & "DEER_HUNT_MISSION_BRIEF");
       wait 2;
-      objective_add(maps\_utility::obj("matv"), "current", &"DEER_HUNT_BACK_MATV");
+      objective_add(maps\_utility::obj("matv"), "current", & "DEER_HUNT_BACK_MATV");
       common_scripts\utility::flag_wait("matv_loaded");
       maps\_utility::objective_complete(maps\_utility::obj("matv"));
     case "ride":
@@ -224,7 +219,7 @@ objectives() {
       maps\_utility::objective_complete(maps\_utility::obj("go_to_base"));
       wait 2;
     case "house":
-      objective_add(maps\_utility::obj("elias"), "current", &"DEER_HUNT_REPORT_TO_ELIAS");
+      objective_add(maps\_utility::obj("elias"), "current", & "DEER_HUNT_REPORT_TO_ELIAS");
       common_scripts\utility::flag_wait("2nd_floor_start");
       maps\_utility::objective_complete(maps\_utility::obj("elias"));
     default:
@@ -391,13 +386,11 @@ flag_trigs() {
   var_1 = [];
   var_1[var_1.size] = "player_dropped_down";
 
-  foreach(var_3 in var_0) {
-    init_flag_and_set_on_targetname_trigger(var_3);
-  }
+  foreach(var_3 in var_0)
+  init_flag_and_set_on_targetname_trigger(var_3);
 
-  foreach(var_3 in var_1) {
-    thread maps\deer_hunt_util::set_flag_on_targetname_trigger_by_player(var_3);
-  }
+  foreach(var_3 in var_1)
+  thread maps\deer_hunt_util::set_flag_on_targetname_trigger_by_player(var_3);
 }
 
 init_flag_and_set_on_targetname_trigger(var_0) {
@@ -533,13 +526,11 @@ encounter1_start() {
   level.hesh maps\_utility::enable_cqbwalk();
   var_4 = common_scripts\utility::getstructarray("team2_encounter1", "targetname");
 
-  while(!isDefined(level.team2)) {
+  while(!isDefined(level.team2))
     wait 0.25;
-  }
 
-  foreach(var_3, var_6 in var_4) {
-    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
-  }
+  foreach(var_3, var_6 in var_4)
+  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
 
   maps\_utility::activate_trigger_with_targetname("dropdown_arrive");
   maps\_utility::activate_trigger_with_targetname("player_on_bus");
@@ -567,13 +558,11 @@ encounter2_start() {
 
   var_4 = common_scripts\utility::getstructarray("team2_encounter2", "targetname");
 
-  while(!isDefined(level.team2)) {
+  while(!isDefined(level.team2))
     wait 0.25;
-  }
 
-  foreach(var_3, var_6 in var_4) {
-    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
-  }
+  foreach(var_3, var_6 in var_4)
+  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
 
   maps\_utility::activate_trigger_with_targetname("encounter1_approach");
   maps\_utility::activate_trigger_with_targetname("hesh_to_dropdown");
@@ -598,9 +587,8 @@ lariver_start() {
 
   var_4 = common_scripts\utility::getstructarray("team2_lariver", "targetname");
 
-  foreach(var_3, var_6 in var_4) {
-    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
-  }
+  foreach(var_3, var_6 in var_4)
+  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
 
   thread maps\deer_hunt_intro::lariver_global_setup();
   thread maps\deer_hunt_intro::lariver_spawn_wall_battle_guys_early();
@@ -614,9 +602,8 @@ spawn_lariver_defend_balcony_guys() {
   maps\_utility::array_spawn_function_targetname("rpg_guys", maps\deer_hunt_intro::lariver_balcony_friendly_logic, 1);
   level.balcony_friendlies = maps\_utility::array_spawn_targetname("rpg_guys", 1);
 
-  foreach(var_1 in level.balcony_friendlies) {
-    var_1.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
-  }
+  foreach(var_1 in level.balcony_friendlies)
+  var_1.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
 }
 
 lariver_defend_start() {
@@ -644,9 +631,8 @@ lariver_defend_start() {
   level.matv attachpath(var_4);
   var_5 = common_scripts\utility::getstructarray("la_river_defend_team2", "targetname");
 
-  foreach(var_3, var_7 in var_5) {
-    level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
-  }
+  foreach(var_3, var_7 in var_5)
+  level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
 
   level.lariver_early_ai = level.balcony_friendlies;
   thread maps\deer_hunt_intro::lariver_defend_globals(1);

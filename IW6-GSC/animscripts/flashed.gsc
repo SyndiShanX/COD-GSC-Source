@@ -16,9 +16,8 @@ init_animset_flashed() {
 getnextflashanim() {
   var_0 = "soldier";
 
-  if(isDefined(self.animarchetype) && isDefined(anim.flashanimindex[self.animarchetype])) {
+  if(isDefined(self.animarchetype) && isDefined(anim.flashanimindex[self.animarchetype]))
     var_0 = self.animarchetype;
-  }
 
   anim.flashanimindex[var_0]++;
 
@@ -60,9 +59,8 @@ flashbangedloop(var_0, var_1) {
   self endon("death");
   self endon("killanimscript");
 
-  if(self.a.pose == "prone") {
+  if(self.a.pose == "prone")
     animscripts\utility::exitpronewrapper(1);
-  }
 
   self.a.pose = "stand";
   self.allowdeath = 1;

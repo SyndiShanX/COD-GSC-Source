@@ -25,9 +25,8 @@ setup_names() {
   var_0[var_0.size] = "czech_surnames";
   var_0[var_0.size] = "pmc";
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     level.names[var_0[var_1]] = [];
-  }
 
   add_name("american", "Smith");
   add_name("american", "Johnson");
@@ -198,9 +197,8 @@ init_script_friendnames() {
 normalize_script_friendname(var_0) {
   var_1 = strtok(var_0, " ");
 
-  if(var_1.size > 1) {
+  if(var_1.size > 1)
     var_0 = var_1[1];
-  }
 
   return var_0;
 }
@@ -208,9 +206,8 @@ normalize_script_friendname(var_0) {
 remove_script_friendnames_from_list(var_0) {
   foreach(var_2 in level.script_friendnames) {
     foreach(var_4 in level.names[var_0]) {
-      if(var_2 == var_4) {
+      if(var_2 == var_4)
         remove_name(var_0, var_4);
-      }
     }
   }
 }
@@ -272,17 +269,15 @@ get_name_for_nationality(var_0) {
     self.airank = "sergeant";
   }
 
-  if(isai(self) && self isbadguy()) {
+  if(isai(self) && self isbadguy())
     self.ainame = var_4;
-  } else {
+  else
     self.name = var_4;
-  }
 }
 
 getrankfromname(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     self.airank = "private";
-  }
 
   var_1 = strtok(var_0, " ");
   var_2 = var_1[0];

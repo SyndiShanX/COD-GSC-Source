@@ -136,34 +136,30 @@ drone_control_allied_quadrotor_spawnfunc() {
   self thread maps\_quadrotor::quadrotor_set_team("allies");
   self.takedamage = 1;
 
-  if(!flag("drone_control_lost")) {
+  if(!flag("drone_control_lost"))
     maps\_fire_direction::add_fire_direction_shooter(self);
-  }
 }
 
 quadrotor_reinforce(str_endon, str_spline_then_ai, str_goal_node_tn) {
   level notify("stop_ally_quadrotor_respawn");
   level endon("stop_ally_quadrotor_respawn");
 
-  if(isDefined(str_endon)) {
+  if(isDefined(str_endon))
     level endon(str_endon);
-  }
 
-  if(isDefined(str_goal_node_tn)) {
+  if(isDefined(str_goal_node_tn))
     goal_node = getnode(str_goal_node_tn, "targetname");
-  }
 
   while(true) {
-    a_vh_quads = getEntArray("allied_quadrotor", "targetname");
+    a_vh_quads = getentarray("allied_quadrotor", "targetname");
 
     if(a_vh_quads.size < 5) {
       vh_quadrotor = maps\_vehicle::spawn_vehicle_from_targetname("allied_quadrotor");
       vh_quadrotor.origin = level.player.origin + vectorscale((0, 0, 1), 256.0);
       vh_quadrotor setthreatbiasgroup("quadrotors");
 
-      if(isDefined(str_spline_then_ai)) {
+      if(isDefined(str_spline_then_ai))
         vh_quadrotor thread quadrotors_go_spline_then_ai(str_spline_then_ai);
-      }
 
       if(isDefined(goal_node)) {
         vh_quadrotor.goalpos = goal_node.origin;
@@ -197,9 +193,8 @@ drone_control_threat_control_think() {
     flag_set("drone_control_player_override");
     e_turret thread drone_control_turret_fire_think();
 
-    while(level.player istouching(t_street_trig)) {
+    while(level.player istouching(t_street_trig))
       wait 0.25;
-    }
 
     e_turret notify("stop_dc_turret_fire");
     e_turret maps\_turret::clear_turret_target(0);
@@ -211,17 +206,15 @@ drone_control_turret_kill() {
   level.player endon("death");
   flag_wait("drone_control_farmhouse_started");
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self notify("death");
-  }
 }
 
 drone_control_turret_death_cleanup() {
   self waittill("death");
 
-  if(flag("drone_control_player_override")) {
+  if(flag("drone_control_player_override"))
     flag_clear("drone_control_player_override");
-  }
 }
 
 drone_control_turret_fire_think() {
@@ -241,22 +234,19 @@ drone_control_turret_fire_think() {
 }
 
 drone_control_player_damage_callback(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  if(flag("drone_control_player_override")) {
+  if(flag("drone_control_player_override"))
     n_damage = int(n_damage * 2);
-  }
 
-  if(isDefined(e_attacker.script_noteworthy) && e_attacker.script_noteworthy == "allied_quadrotor") {
+  if(isDefined(e_attacker.script_noteworthy) && e_attacker.script_noteworthy == "allied_quadrotor")
     n_damage = int(n_damage / 2);
-  }
 
   return n_damage;
 }
 
 terrorist_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(isDefined(eattacker) && isplayer(eattacker)) {
-    if(!flag("player_shot_terrorist")) {
+    if(!flag("player_shot_terrorist"))
       flag_set("player_shot_terrorist");
-    }
   }
 
   return idamage;
@@ -266,7 +256,7 @@ gauntlet_upper_left_terrorists_trigger(str_level_endon, str_category) {
   level endon(str_level_endon);
   e_trigger = getent("gauntlet_upper_left_terrorists_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_spawners = getEntArray("gauntlet_upper_left_terrorists_spawner", "targetname");
+  a_spawners = getentarray("gauntlet_upper_left_terrorists_spawner", "targetname");
   simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
 }
 
@@ -291,9 +281,8 @@ drone_control_cleanup() {
   e_turret.delete_on_death = 1;
   e_turret notify("death");
 
-  if(!isalive(e_turret)) {
+  if(!isalive(e_turret))
     e_turret delete();
-  }
 
   wait 0.2;
   array_delete_ai_from_noteworthy("farmhouse_terrorist", 1);
@@ -304,15 +293,14 @@ drone_control_cleanup() {
 }
 
 array_delete_veh_from_targetname(targetname) {
-  vehicles = getEntArray(targetname, "targetname");
+  vehicles = getentarray(targetname, "targetname");
 
   foreach(veh in vehicles) {
     veh.delete_on_death = 1;
     veh notify("death");
 
-    if(!isalive(veh)) {
+    if(!isalive(veh))
       veh delete();
-    }
   }
 }
 
@@ -320,7 +308,7 @@ drone_control_go() {
   flag_wait("drone_control_alley_entered");
   level activate_drone_control();
   level.player.overrideplayerdamage = ::drone_control_player_damage_callback;
-  a_morals_actors = getEntArray("morals_actor", "script_noteworthy");
+  a_morals_actors = getentarray("morals_actor", "script_noteworthy");
   array_delete(a_morals_actors);
   setup_allied_quadrotors();
   level thread allied_quadrotor_control();
@@ -372,9 +360,8 @@ enable_drone_control() {
   assert(isplayer(self), "this must be called on the player");
   self endon("death");
 
-  while(isDefined(self.empgrenaded) && self.empgrenaded) {
+  while(isDefined(self.empgrenaded) && self.empgrenaded)
     wait 0.05;
-  }
 
   self maps\_fire_direction::init_fire_direction();
   self thread watch_for_emp_grenaded();
@@ -387,19 +374,16 @@ watch_for_emp_grenaded() {
   while(maps\_fire_direction::is_fire_direction_active()) {
     self waittill("emp_grenaded");
 
-    if(maps\_fire_direction::is_fire_direction_active()) {
+    if(maps\_fire_direction::is_fire_direction_active())
       self maps\_fire_direction::_fire_direction_disable();
-    }
 
     wait 0.05;
 
-    while(isDefined(self.empgrenaded) && self.empgrenaded) {
+    while(isDefined(self.empgrenaded) && self.empgrenaded)
       wait 0.05;
-    }
 
-    if(maps\_fire_direction::is_fire_direction_active()) {
+    if(maps\_fire_direction::is_fire_direction_active())
       self maps\_fire_direction::_fire_direction_enable();
-    }
   }
 }
 
@@ -408,14 +392,14 @@ drone_control_alley_qrotor_start() {
   level.player maps\_fire_direction::init_fire_direction();
 }
 
-drone_control_gauntlet_go() {}
+drone_control_gauntlet_go() {
+}
 
 setup_allied_quadrotors() {
-  a_vh_quads = getEntArray("allied_quadrotor", "targetname");
+  a_vh_quads = getentarray("allied_quadrotor", "targetname");
 
-  foreach(vh_quad in a_vh_quads) {
-    vh_quad setthreatbiasgroup("quadrotors");
-  }
+  foreach(vh_quad in a_vh_quads)
+  vh_quad setthreatbiasgroup("quadrotors");
 }
 
 drone_control_morals_rail_vtol_go() {
@@ -474,12 +458,11 @@ quadrotors_go_spline_then_ai(str_nd_start) {
 allied_quadrotor_control() {
   while(true) {
     v_movepoint = _get_player_look_position();
-    a_qrotors = getEntArray("allied_quadrotor", "script_noteworthy");
+    a_qrotors = getentarray("allied_quadrotor", "script_noteworthy");
 
     foreach(veh_qrotor in a_qrotors) {
-      if(!isDefined(veh_qrotor.quadrotor_doing_fire_direction)) {
+      if(!isDefined(veh_qrotor.quadrotor_doing_fire_direction))
         veh_qrotor.goalpos = v_movepoint;
-      }
     }
 
     wait 0.5;
@@ -487,11 +470,11 @@ allied_quadrotor_control() {
 }
 
 _get_player_look_position() {
-  v_eye_pos = level.player getEye();
+  v_eye_pos = level.player geteye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * randomfloatrange(400, 900);
-  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
 }
 
@@ -573,7 +556,8 @@ vo_hint_standing_by_for_targets() {
     wait(randomintrange(10, 16));
 
     if(level.player hasweapon("quadrotor_glove_sp")) {
-      if(flag("fire_direction_shader_on")) {}
+      if(flag("fire_direction_shader_on")) {
+      }
     }
   }
 }
@@ -621,7 +605,8 @@ vo_outskirts() {
   level.player say_dialog("sect_push_all_available_a_0", 0.2);
 }
 
-drone_nag() {}
+drone_nag() {
+}
 
 drone_kill_challenge(str_notify) {
   level waittill("drone_control_started");
@@ -631,9 +616,8 @@ drone_kill_challenge(str_notify) {
 challenge_qrkills_death_listener(str_notify) {
   self waittill("death", e_attacker, b_damage_from_underneath, str_weapon);
 
-  if(isDefined(e_attacker) && isDefined(e_attacker.model) && e_attacker.model == "veh_t6_drone_quad_rotor_sp") {
+  if(isDefined(e_attacker) && isDefined(e_attacker.model) && e_attacker.model == "veh_t6_drone_quad_rotor_sp")
     level.player notify(str_notify);
-  }
 }
 
 drone_control_quadrotor_sounds() {
@@ -653,9 +637,8 @@ drone_control_quadrotor_sounds() {
 
       level.player thread say_dialog("vtol_firing_0");
 
-      while(level.player attackbuttonpressed()) {
+      while(level.player attackbuttonpressed())
         wait 0.05;
-      }
     }
 
     wait 0.05;
@@ -664,10 +647,10 @@ drone_control_quadrotor_sounds() {
 
 drone_cam_pip_sounds() {
   level.sound_pip_ent = spawn("script_origin", level.player.origin);
-  level.player playSound("evt_pnp_on");
-  level.sound_pip_ent playLoopSound("evt_pnp_loop", 1);
+  level.player playsound("evt_pnp_on");
+  level.sound_pip_ent playloopsound("evt_pnp_loop", 1);
   wait 6;
-  level.player playSound("evt_pnp_off");
+  level.player playsound("evt_pnp_off");
   level.sound_pip_ent stoploopsound();
   level.sound_pip_ent delete();
 }

@@ -8,10 +8,11 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\killstreak_detect;
 #include scripts\killstreaks\mp\killstreak_vehicle;
+
 #namespace recon_car;
 
 autoexec __init__system__() {
-  system::register(#"recon_car", &__init__, undefined, # "killstreaks");
+  system::register(#"recon_car", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

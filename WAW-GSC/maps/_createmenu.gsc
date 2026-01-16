@@ -7,7 +7,7 @@
 
 createmenu_init() {
   level.menu_sys = [];
-  level.menu_sys["current_menu"] = spawnStruct();
+  level.menu_sys["current_menu"] = SpawnStruct();
 }
 
 add_menu(menu_name, title) {
@@ -15,7 +15,7 @@ add_menu(menu_name, title) {
     println("^1level.menu_sys[" + menu_name + "] already exists, change the menu_name");
     return;
   }
-  level.menu_sys[menu_name] = spawnStruct();
+  level.menu_sys[menu_name] = SpawnStruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
@@ -72,7 +72,7 @@ enable_menu(menu_name) {
   back_option_num = 0;
   if(isDefined(level.menu_sys[menu_name].options)) {
     options = level.menu_sys[menu_name].options;
-    for(i = 0; i < options.size; i++) {
+    for (i = 0; i < options.size; i++) {
       text = (i + 1) + ". " + options[i];
       level.menu_sys["current_menu"].options[i] = set_menu_hudelem(text, "options", 20 * i);
       back_option_num = i;
@@ -92,7 +92,7 @@ disable_menu(menu_name) {
     }
     if(isDefined(level.menu_sys[menu_name].options)) {
       options = level.menu_sys[menu_name].options;
-      for(i = 0; i < options.size; i++) {
+      for (i = 0; i < options.size; i++) {
         options[i] Destroy();
       }
     }
@@ -150,7 +150,7 @@ set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
 }
 
 menu_input() {
-  while(1) {
+  while (1) {
     level waittill("menu_button_pressed", keystring);
     menu_name = level.menu_sys["current_menu"].menu_name;
     if(keystring == "dpad_up" || keystring == "uparrow") {
@@ -256,7 +256,7 @@ list_menu(list, x, y, scale, func, sort, start_num) {
   }
   hud_array = [];
   space_apart = 15;
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     if(i == 0) {
       alpha = 0.3;
     } else if(i == 1) {
@@ -279,9 +279,11 @@ list_menu(list, x, y, scale, func, sort, start_num) {
   selected = false;
   level.menu_list_selected = false;
   if(isDefined(func)) {
-    [[func]](list[current_num]);
+    [
+      [func]
+    ](list[current_num]);
   }
-  while(true) {
+  while (true) {
     level waittill("menu_button_pressed", key);
     level.menu_list_selected = true;
     if(any_button_hit(key, "numbers")) {
@@ -309,12 +311,14 @@ list_menu(list, x, y, scale, func, sort, start_num) {
     if(current_num != old_num) {
       old_num = current_num;
       if(isDefined(func)) {
-        [[func]](list[current_num]);
+        [
+          [func]
+        ](list[current_num]);
       }
     }
     wait(0.1);
   }
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     hud_array[i] Destroy();
   }
   if(selected) {
@@ -323,7 +327,7 @@ list_menu(list, x, y, scale, func, sort, start_num) {
 }
 
 new_move_list_menu(hud_array, list, num) {
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     if(isDefined(list[i + (num - 2)])) {
       text = list[i + (num - 2)];
     } else {
@@ -353,7 +357,7 @@ move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
   } else {
     movement = space * -1;
   }
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     hud_array[i] MoveOverTime(time);
     if(side_movement) {
       hud_array[i].x = hud_array[i].x + movement;
@@ -434,7 +438,7 @@ hud_font_scaler(mult) {
   dif = og_scale - self.fontscale;
   time = 1;
   dif /= time * 20;
-  for(i = 0; i < time * 20; i++) {
+  for (i = 0; i < time * 20; i++) {
     self.fontscale += dif;
     wait(0.05);
   }
@@ -507,7 +511,7 @@ remove_hud(hud_name) {
     return;
   }
   huds = level.hud_array[hud_name];
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
   }
   level.hud_array[hud_name] = undefined;
@@ -526,7 +530,7 @@ set_menus_pos_by_num(hud_array, num, x, y, space, min_alpha, num_of_fades) {
   if(!isDefined(num_of_fades)) {
     num_of_fades = 3;
   }
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     temp = i - num;
     hud_array[i].y = y + (temp * space);
     if(temp < 0) {
@@ -548,7 +552,7 @@ move_menus(hud_array, x_shift, y_shift, num, min_alpha, num_of_fades) {
     num_of_fades = 3;
   }
   time = 0.1;
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     if(!isDefined(hud_array[i])) {
       continue;
     }
@@ -578,7 +582,7 @@ create_hud_list(list, x, y, space_apart, scale, alignX) {
     alignX = "center";
   }
   hud_array = [];
-  for(i = 0; i < list.size; i++) {
+  for (i = 0; i < list.size; i++) {
     alpha = 1 / (i + 1);
     if(alpha < 0.3) {
       alpha = 0.1;
@@ -702,7 +706,7 @@ dialog_text_box_input(cursor_x, cursor_y, word_length) {
   hud_word.sort = 75;
   hud_letters = [];
   word = "";
-  while(1) {
+  while (1) {
     level waittill("dialog_box_button_pressed", button);
     if(button == "end" || button == "button_y") {
       word = "-1";
@@ -711,7 +715,7 @@ dialog_text_box_input(cursor_x, cursor_y, word_length) {
       break;
     } else if(button == "backspace" || button == "del") {
       new_word = "";
-      for(i = 0; i < word.size - 1; i++) {
+      for (i = 0; i < word.size - 1; i++) {
         new_word = new_word + word[i];
       }
       word = new_word;
@@ -722,7 +726,7 @@ dialog_text_box_input(cursor_x, cursor_y, word_length) {
     }
     hud_word SetText(word);
     x = cursor_x;
-    for(i = 0; i < word.size; i++) {
+    for (i = 0; i < word.size; i++) {
       x += get_letter_space(word[i]);
     }
     level.dialog_box_cursor.x = x;
@@ -787,7 +791,7 @@ dialog_text_box_buttons() {
 
 dialog_text_box_cursor() {
   level endon("stop_dialog_text_box_cursor");
-  while(1) {
+  while (1) {
     level.dialog_box_cursor.alpha = 0;
     wait(0.5);
     level.dialog_box_cursor.alpha = 1;
@@ -833,7 +837,7 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
   notify_name = button_group + "_button_pressed";
   buttons = level.u_buttons[button_group];
   level.u_buttons_disable[button_group] = false;
-  while(1) {
+  while (1) {
     if(level.u_buttons_disable[button_group]) {
       wait(0.05);
       continue;
@@ -850,7 +854,7 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
       wait(0.1);
       continue;
     }
-    for(i = 0; i < buttons.size; i++) {
+    for (i = 0; i < buttons.size; i++) {
       if(level.player ButtonPressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.1);
@@ -886,7 +890,7 @@ any_button_hit(button_hit, type) {
   } else {
     buttons = level.buttons;
   }
-  for(i = 0; i < buttons.size; i++) {
+  for (i = 0; i < buttons.size; i++) {
     if(button_hit == buttons[i]) {
       return true;
     }

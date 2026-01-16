@@ -11,58 +11,58 @@
 #namespace entityheadicons;
 
 function init_shared() {
-  callback::on_start_gametype(&start_gametype);
+  callback::on_start_gametype( & start_gametype);
 }
 
 function start_gametype() {
-  if(isDefined(level.initedentityheadicons)) {
+  if(isdefined(level.initedentityheadicons)) {
     return;
   }
   level.initedentityheadicons = 1;
-  assert(isDefined(game[""]), "");
-  assert(isDefined(game[""]), "");
+  assert(isdefined(game[""]), "");
+  assert(isdefined(game[""]), "");
   if(!level.teambased) {
     return;
   }
-  if(!isDefined(level.setentityheadicon)) {
-    level.setentityheadicon = &setentityheadicon;
+  if(!isdefined(level.setentityheadicon)) {
+    level.setentityheadicon = & setentityheadicon;
   }
   level.entitieswithheadicons = [];
 }
 
 function setentityheadicon(team, owner, offset, objective, constant_size) {
-  if(!level.teambased && !isDefined(owner)) {
+  if(!level.teambased && !isdefined(owner)) {
     return;
   }
-  if(!isDefined(constant_size)) {
+  if(!isdefined(constant_size)) {
     constant_size = 0;
   }
-  if(!isDefined(self.entityheadiconteam)) {
+  if(!isdefined(self.entityheadiconteam)) {
     self.entityheadiconteam = "none";
     self.entityheadicons = [];
     self.entityheadobjectives = [];
   }
-  if(level.teambased && !isDefined(owner)) {
+  if(level.teambased && !isdefined(owner)) {
     if(team == self.entityheadiconteam) {
       return;
     }
     self.entityheadiconteam = team;
   }
-  if(isDefined(offset)) {
+  if(isdefined(offset)) {
     self.entityheadiconoffset = offset;
   } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
-  if(isDefined(self.entityheadicons)) {
-    for(i = 0; i < self.entityheadicons.size; i++) {
-      if(isDefined(self.entityheadicons[i])) {
+  if(isdefined(self.entityheadicons)) {
+    for (i = 0; i < self.entityheadicons.size; i++) {
+      if(isdefined(self.entityheadicons[i])) {
         self.entityheadicons[i] destroy();
       }
     }
   }
-  if(isDefined(self.entityheadobjectives)) {
-    for(i = 0; i < self.entityheadobjectives.size; i++) {
-      if(isDefined(self.entityheadobjectives[i])) {
+  if(isdefined(self.entityheadobjectives)) {
+    for (i = 0; i < self.entityheadobjectives.size; i++) {
+      if(isdefined(self.entityheadobjectives[i])) {
         objective_delete(self.entityheadobjectives[i]);
         self.entityheadobjectives[i] = undefined;
       }
@@ -71,13 +71,13 @@ function setentityheadicon(team, owner, offset, objective, constant_size) {
   self.entityheadicons = [];
   self.entityheadobjectives = [];
   self notify("kill_entity_headicon_thread");
-  if(!isDefined(objective)) {
+  if(!isdefined(objective)) {
     objective = game["entity_headicon_" + team];
   }
-  if(isDefined(objective)) {
-    if(isDefined(owner) && !level.teambased) {
+  if(isdefined(objective)) {
+    if(isdefined(owner) && !level.teambased) {
       if(!isplayer(owner)) {
-        assert(isDefined(owner.owner), "");
+        assert(isdefined(owner.owner), "");
         owner = owner.owner;
       }
       if(isstring(objective)) {
@@ -85,7 +85,7 @@ function setentityheadicon(team, owner, offset, objective, constant_size) {
       } else {
         owner updateentityheadclientobjective(self, objective, constant_size);
       }
-    } else if(isDefined(owner) && team != "none") {
+    } else if(isdefined(owner) && team != "none") {
       if(isstring(objective)) {
         owner updateentityheadteamicon(self, team, objective, constant_size);
       } else {
@@ -128,7 +128,7 @@ function updateentityheadteamobjective(entity, team, objective, constant_size) {
   headiconobjectiveid = gameobjects::get_next_obj_id();
   objective_add(headiconobjectiveid, "active", entity, objective);
   objective_team(headiconobjectiveid, team);
-  objective_setcolor(headiconobjectiveid, &"FriendlyBlue");
+  objective_setcolor(headiconobjectiveid, & "FriendlyBlue");
   entity.entityheadobjectives[entity.entityheadobjectives.size] = headiconobjectiveid;
 }
 
@@ -137,7 +137,7 @@ function updateentityheadclientobjective(entity, objective, constant_size) {
   objective_add(headiconobjectiveid, "active", entity, objective);
   objective_setinvisibletoall(headiconobjectiveid);
   objective_setvisibletoplayer(headiconobjectiveid, self);
-  objective_setcolor(headiconobjectiveid, &"FriendlyBlue");
+  objective_setcolor(headiconobjectiveid, & "FriendlyBlue");
   entity.entityheadobjectives[entity.entityheadobjectives.size] = headiconobjectiveid;
 }
 
@@ -145,13 +145,13 @@ function destroyheadiconsondeath() {
   self notify("destroyheadiconsondeath_singleton");
   self endon("destroyheadiconsondeath_singleton");
   self util::waittill_any("death", "hacked");
-  for(i = 0; i < self.entityheadicons.size; i++) {
-    if(isDefined(self.entityheadicons[i])) {
+  for (i = 0; i < self.entityheadicons.size; i++) {
+    if(isdefined(self.entityheadicons[i])) {
       self.entityheadicons[i] destroy();
     }
   }
-  for(i = 0; i < self.entityheadobjectives.size; i++) {
-    if(isDefined(self.entityheadobjectives[i])) {
+  for (i = 0; i < self.entityheadobjectives.size; i++) {
+    if(isdefined(self.entityheadobjectives[i])) {
       gameobjects::release_obj_id(self.entityheadobjectives[i]);
       objective_delete(self.entityheadobjectives[i]);
     }
@@ -159,16 +159,16 @@ function destroyheadiconsondeath() {
 }
 
 function destroyentityheadicons() {
-  if(isDefined(self.entityheadicons)) {
-    for(i = 0; i < self.entityheadicons.size; i++) {
-      if(isDefined(self.entityheadicons[i])) {
+  if(isdefined(self.entityheadicons)) {
+    for (i = 0; i < self.entityheadicons.size; i++) {
+      if(isdefined(self.entityheadicons[i])) {
         self.entityheadicons[i] destroy();
       }
     }
   }
-  if(isDefined(self.entityheadobjectives)) {
-    for(i = 0; i < self.entityheadobjectives.size; i++) {
-      if(isDefined(self.entityheadobjectives[i])) {
+  if(isdefined(self.entityheadobjectives)) {
+    for (i = 0; i < self.entityheadobjectives.size; i++) {
+      if(isdefined(self.entityheadobjectives[i])) {
         gameobjects::release_obj_id(self.entityheadobjectives[i]);
         objective_delete(self.entityheadobjectives[i]);
       }
@@ -184,7 +184,7 @@ function updateentityheadiconpos(headicon) {
 }
 
 function setentityheadiconshiddenwhilecontrolling() {
-  if(isDefined(self.entityheadicons)) {
+  if(isdefined(self.entityheadicons)) {
     foreach(icon in self.entityheadicons) {
       icon.hidewhileremotecontrolling = 1;
     }

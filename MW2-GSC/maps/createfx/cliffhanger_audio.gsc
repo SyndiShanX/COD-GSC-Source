@@ -31,4 +31,5 @@ init_animsounds() {
   addOnStart_animSound("generic", "sleep_react", "scn_relaxed_guard_chair_fall");
   addOnStart_animSound("generic", "c4plant", "scn_cliffhanger_plant_c4");
   addOnStart_animSound("price", "climb_catch", "scn_cliffhanger_price_bigjump_slide");
+
 }

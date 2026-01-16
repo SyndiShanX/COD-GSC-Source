@@ -32,7 +32,7 @@ add_zombie_weapon(weapon_name, hint, cost, weaponVO, variation_count, ammo_cost)
   }
   PrecacheItem(weapon_name);
   PrecacheString(hint);
-  struct = spawnStruct();
+  struct = SpawnStruct();
   if(!isDefined(level.zombie_weapons)) {
     level.zombie_weapons = [];
   }
@@ -58,71 +58,71 @@ include_zombie_weapon(weapon_name) {
 
 init_weapons() {
   PrecacheItem("zombie_melee");
-  add_zombie_weapon("colt", &"ZOMBIE_WEAPON_COLT_50", 50, "vox_crappy", 8);
-  add_zombie_weapon("colt_dirty_harry", &"ZOMBIE_WEAPON_COLT_DH_100", 100, "vox_357", 5);
-  add_zombie_weapon("nambu", &"ZOMBIE_WEAPON_NAMBU_50", 50, "vox_crappy", 8);
-  add_zombie_weapon("sw_357", &"ZOMBIE_WEAPON_SW357_100", 100, "vox_357", 5);
-  add_zombie_weapon("tokarev", &"ZOMBIE_WEAPON_TOKAREV_50", 50, "vox_crappy", 8);
-  add_zombie_weapon("walther", &"ZOMBIE_WEAPON_WALTHER_50", 50, "vox_crappy", 8);
-  add_zombie_weapon("zombie_colt", &"ZOMBIE_WEAPON_ZOMBIECOLT_25", 25, "vox_crappy", 8);
-  add_zombie_weapon("kar98k", &"ZOMBIE_WEAPON_KAR98K_200", 200, "", 0);
-  add_zombie_weapon("kar98k_bayonet", &"ZOMBIE_WEAPON_KAR98K_B_200", 200, "", 0);
-  add_zombie_weapon("mosin_rifle", &"ZOMBIE_WEAPON_MOSIN_200", 200, "", 0);
-  add_zombie_weapon("mosin_rifle_bayonet", &"ZOMBIE_WEAPON_MOSIN_B_200", 200, "", 0);
-  add_zombie_weapon("springfield", &"ZOMBIE_WEAPON_SPRINGFIELD_200", 200, "", 0);
-  add_zombie_weapon("springfield_bayonet", &"ZOMBIE_WEAPON_SPRINGFIELD_B_200", 200, "", 0);
-  add_zombie_weapon("zombie_type99_rifle", &"ZOMBIE_WEAPON_TYPE99_200", 200, "", 0);
-  add_zombie_weapon("type99_rifle_bayonet", &"ZOMBIE_WEAPON_TYPE99_B_200", 200, "", 0);
-  add_zombie_weapon("zombie_gewehr43", &"ZOMBIE_WEAPON_GEWEHR43_600", 600, "", 0);
-  add_zombie_weapon("zombie_m1carbine", &"ZOMBIE_WEAPON_M1CARBINE_600", 600, "", 0);
-  add_zombie_weapon("m1carbine_bayonet", &"ZOMBIE_WEAPON_M1CARBINE_B_600", 600, "", 0);
-  add_zombie_weapon("zombie_m1garand", &"ZOMBIE_WEAPON_M1GARAND_600", 600, "", 0);
-  add_zombie_weapon("m1garand_bayonet", &"ZOMBIE_WEAPON_M1GARAND_B_600", 600, "", 0);
-  add_zombie_weapon("svt40", &"ZOMBIE_WEAPON_SVT40_600", 600, "", 0);
-  add_zombie_weapon("fraggrenade", &"ZOMBIE_WEAPON_FRAGGRENADE_250", 250, "", 0);
-  add_zombie_weapon("molotov", &"ZOMBIE_WEAPON_MOLOTOV_200", 200, "vox_crappy", 8);
-  add_zombie_weapon("molotov_zombie", &"ZOMBIE_WEAPON_MOLOTOV_200", 200, "vox_crappy", 8);
-  add_zombie_weapon("stick_grenade", &"ZOMBIE_WEAPON_STICKGRENADE_250", 250, "", 0);
-  add_zombie_weapon("stielhandgranate", &"ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "", 0);
-  add_zombie_weapon("type97_frag", &"ZOMBIE_WEAPON_TYPE97FRAG_250", 250, "", 0);
-  add_zombie_weapon("kar98k_scoped_zombie", &"ZOMBIE_WEAPON_KAR98K_S_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("kar98k_scoped_bayonet_zombie", &"ZOMBIE_WEAPON_KAR98K_S_B_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("mosin_rifle_scoped_zombie", &"ZOMBIE_WEAPON_MOSIN_S_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("mosin_rifle_scoped_bayonet_zombie", &"ZOMBIE_WEAPON_MOSIN_S_B_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("springfield_scoped_zombie", &"ZOMBIE_WEAPON_SPRINGFIELD_S_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("springfield_scoped_bayonet_zombie", &"ZOMBIE_WEAPON_SPRINGFIELD_S_B_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("type99_rifle_scoped_zombie", &"ZOMBIE_WEAPON_TYPE99_S_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("type99_rifle_scoped_bayonet_zombie", &"ZOMBIE_WEAPON_TYPE99_S_B_750", 750, "vox_ppsh", 5);
-  add_zombie_weapon("zombie_mp40", &"ZOMBIE_WEAPON_MP40_1000", 1000, "vox_mp40", 2);
-  add_zombie_weapon("zombie_ppsh", &"ZOMBIE_WEAPON_PPSH_2000", 2000, "vox_ppsh", 5);
-  add_zombie_weapon("zombie_stg44", &"ZOMBIE_WEAPON_STG44_1200", 1200, "vox_mg", 9);
-  add_zombie_weapon("zombie_thompson", &"ZOMBIE_WEAPON_THOMPSON_1200", 1200, "", 0);
-  add_zombie_weapon("zombie_type100_smg", &"ZOMBIE_WEAPON_TYPE100_1000", 1000, "", 0);
-  add_zombie_weapon("zombie_doublebarrel", &"ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "vox_shotgun", 6);
-  add_zombie_weapon("zombie_doublebarrel_sawed", &"ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "vox_shotgun", 6);
-  add_zombie_weapon("zombie_shotgun", &"ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "vox_shotgun", 6);
-  add_zombie_weapon("zombie_30cal", &"ZOMBIE_WEAPON_30CAL_3000", 3000, "vox_mg", 9);
-  add_zombie_weapon("zombie_bar", &"ZOMBIE_WEAPON_BAR_1800", 1800, "vox_bar", 5);
-  add_zombie_weapon("dp28", &"ZOMBIE_WEAPON_DP28_2250", 2250, "vox_mg", 9);
-  add_zombie_weapon("zombie_fg42", &"ZOMBIE_WEAPON_FG42_1500", 1500, "vox_mg", 9);
-  add_zombie_weapon("fg42_scoped", &"ZOMBIE_WEAPON_FG42_S_1500", 1500, "vox_mg", 9);
-  add_zombie_weapon("zombie_mg42", &"ZOMBIE_WEAPON_MG42_3000", 3000, "vox_mg", 9);
-  add_zombie_weapon("type99_lmg", &"ZOMBIE_WEAPON_TYPE99_LMG_1750", 1750, "vox_mg", 9);
-  add_zombie_weapon("m1garand_gl_zombie", &"ZOMBIE_WEAPON_M1GARAND_GL_1500", 1500, "", 0);
-  add_zombie_weapon("mosin_launcher_zombie", &"ZOMBIE_WEAPON_MOSIN_GL_1200", 1200, "", 0);
-  add_zombie_weapon("30cal_bipod", &"ZOMBIE_WEAPON_30CAL_BIPOD_3500", 3500, "vox_mg", 5);
-  add_zombie_weapon("bar_bipod", &"ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "vox_bar", 5);
-  add_zombie_weapon("dp28_bipod", &"ZOMBIE_WEAPON_DP28_BIPOD_2500", 2500, "vox_mg", 5);
-  add_zombie_weapon("fg42_bipod", &"ZOMBIE_WEAPON_FG42_BIPOD_2000", 2000, "vox_mg", 5);
-  add_zombie_weapon("mg42_bipod", &"ZOMBIE_WEAPON_MG42_BIPOD_3250", 3250, "vox_mg", 5);
-  add_zombie_weapon("type99_lmg_bipod", &"ZOMBIE_WEAPON_TYPE99_LMG_BIPOD_2250", 2250, "vox_mg", 5);
-  add_zombie_weapon("bazooka", &"ZOMBIE_WEAPON_BAZOOKA_2000", 2000, "", 0);
-  add_zombie_weapon("panzerschrek_zombie", &"ZOMBIE_WEAPON_PANZERSCHREK_2000", 2000, "vox_panzer", 5);
-  add_zombie_weapon("m2_flamethrower_zombie", &"ZOMBIE_WEAPON_M2_FLAMETHROWER_3000", 3000, "vox_flame", 7);
-  add_zombie_weapon("mortar_round", &"ZOMBIE_WEAPON_MORTARROUND_2000", 2000, "");
-  add_zombie_weapon("satchel_charge", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "");
-  add_zombie_weapon("ray_gun", &"ZOMBIE_WEAPON_RAYGUN_10000", 10000, "vox_raygun", 6);
-  add_zombie_weapon("tesla_gun", &"ZOMBIE_BUY_TESLA", 10, "vox_tesla", 5);
+  add_zombie_weapon("colt", & "ZOMBIE_WEAPON_COLT_50", 50, "vox_crappy", 8);
+  add_zombie_weapon("colt_dirty_harry", & "ZOMBIE_WEAPON_COLT_DH_100", 100, "vox_357", 5);
+  add_zombie_weapon("nambu", & "ZOMBIE_WEAPON_NAMBU_50", 50, "vox_crappy", 8);
+  add_zombie_weapon("sw_357", & "ZOMBIE_WEAPON_SW357_100", 100, "vox_357", 5);
+  add_zombie_weapon("tokarev", & "ZOMBIE_WEAPON_TOKAREV_50", 50, "vox_crappy", 8);
+  add_zombie_weapon("walther", & "ZOMBIE_WEAPON_WALTHER_50", 50, "vox_crappy", 8);
+  add_zombie_weapon("zombie_colt", & "ZOMBIE_WEAPON_ZOMBIECOLT_25", 25, "vox_crappy", 8);
+  add_zombie_weapon("kar98k", & "ZOMBIE_WEAPON_KAR98K_200", 200, "", 0);
+  add_zombie_weapon("kar98k_bayonet", & "ZOMBIE_WEAPON_KAR98K_B_200", 200, "", 0);
+  add_zombie_weapon("mosin_rifle", & "ZOMBIE_WEAPON_MOSIN_200", 200, "", 0);
+  add_zombie_weapon("mosin_rifle_bayonet", & "ZOMBIE_WEAPON_MOSIN_B_200", 200, "", 0);
+  add_zombie_weapon("springfield", & "ZOMBIE_WEAPON_SPRINGFIELD_200", 200, "", 0);
+  add_zombie_weapon("springfield_bayonet", & "ZOMBIE_WEAPON_SPRINGFIELD_B_200", 200, "", 0);
+  add_zombie_weapon("zombie_type99_rifle", & "ZOMBIE_WEAPON_TYPE99_200", 200, "", 0);
+  add_zombie_weapon("type99_rifle_bayonet", & "ZOMBIE_WEAPON_TYPE99_B_200", 200, "", 0);
+  add_zombie_weapon("zombie_gewehr43", & "ZOMBIE_WEAPON_GEWEHR43_600", 600, "", 0);
+  add_zombie_weapon("zombie_m1carbine", & "ZOMBIE_WEAPON_M1CARBINE_600", 600, "", 0);
+  add_zombie_weapon("m1carbine_bayonet", & "ZOMBIE_WEAPON_M1CARBINE_B_600", 600, "", 0);
+  add_zombie_weapon("zombie_m1garand", & "ZOMBIE_WEAPON_M1GARAND_600", 600, "", 0);
+  add_zombie_weapon("m1garand_bayonet", & "ZOMBIE_WEAPON_M1GARAND_B_600", 600, "", 0);
+  add_zombie_weapon("svt40", & "ZOMBIE_WEAPON_SVT40_600", 600, "", 0);
+  add_zombie_weapon("fraggrenade", & "ZOMBIE_WEAPON_FRAGGRENADE_250", 250, "", 0);
+  add_zombie_weapon("molotov", & "ZOMBIE_WEAPON_MOLOTOV_200", 200, "vox_crappy", 8);
+  add_zombie_weapon("molotov_zombie", & "ZOMBIE_WEAPON_MOLOTOV_200", 200, "vox_crappy", 8);
+  add_zombie_weapon("stick_grenade", & "ZOMBIE_WEAPON_STICKGRENADE_250", 250, "", 0);
+  add_zombie_weapon("stielhandgranate", & "ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "", 0);
+  add_zombie_weapon("type97_frag", & "ZOMBIE_WEAPON_TYPE97FRAG_250", 250, "", 0);
+  add_zombie_weapon("kar98k_scoped_zombie", & "ZOMBIE_WEAPON_KAR98K_S_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("kar98k_scoped_bayonet_zombie", & "ZOMBIE_WEAPON_KAR98K_S_B_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("mosin_rifle_scoped_zombie", & "ZOMBIE_WEAPON_MOSIN_S_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("mosin_rifle_scoped_bayonet_zombie", & "ZOMBIE_WEAPON_MOSIN_S_B_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("springfield_scoped_zombie", & "ZOMBIE_WEAPON_SPRINGFIELD_S_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("springfield_scoped_bayonet_zombie", & "ZOMBIE_WEAPON_SPRINGFIELD_S_B_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("type99_rifle_scoped_zombie", & "ZOMBIE_WEAPON_TYPE99_S_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("type99_rifle_scoped_bayonet_zombie", & "ZOMBIE_WEAPON_TYPE99_S_B_750", 750, "vox_ppsh", 5);
+  add_zombie_weapon("zombie_mp40", & "ZOMBIE_WEAPON_MP40_1000", 1000, "vox_mp40", 2);
+  add_zombie_weapon("zombie_ppsh", & "ZOMBIE_WEAPON_PPSH_2000", 2000, "vox_ppsh", 5);
+  add_zombie_weapon("zombie_stg44", & "ZOMBIE_WEAPON_STG44_1200", 1200, "vox_mg", 9);
+  add_zombie_weapon("zombie_thompson", & "ZOMBIE_WEAPON_THOMPSON_1200", 1200, "", 0);
+  add_zombie_weapon("zombie_type100_smg", & "ZOMBIE_WEAPON_TYPE100_1000", 1000, "", 0);
+  add_zombie_weapon("zombie_doublebarrel", & "ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "vox_shotgun", 6);
+  add_zombie_weapon("zombie_doublebarrel_sawed", & "ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "vox_shotgun", 6);
+  add_zombie_weapon("zombie_shotgun", & "ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "vox_shotgun", 6);
+  add_zombie_weapon("zombie_30cal", & "ZOMBIE_WEAPON_30CAL_3000", 3000, "vox_mg", 9);
+  add_zombie_weapon("zombie_bar", & "ZOMBIE_WEAPON_BAR_1800", 1800, "vox_bar", 5);
+  add_zombie_weapon("dp28", & "ZOMBIE_WEAPON_DP28_2250", 2250, "vox_mg", 9);
+  add_zombie_weapon("zombie_fg42", & "ZOMBIE_WEAPON_FG42_1500", 1500, "vox_mg", 9);
+  add_zombie_weapon("fg42_scoped", & "ZOMBIE_WEAPON_FG42_S_1500", 1500, "vox_mg", 9);
+  add_zombie_weapon("zombie_mg42", & "ZOMBIE_WEAPON_MG42_3000", 3000, "vox_mg", 9);
+  add_zombie_weapon("type99_lmg", & "ZOMBIE_WEAPON_TYPE99_LMG_1750", 1750, "vox_mg", 9);
+  add_zombie_weapon("m1garand_gl_zombie", & "ZOMBIE_WEAPON_M1GARAND_GL_1500", 1500, "", 0);
+  add_zombie_weapon("mosin_launcher_zombie", & "ZOMBIE_WEAPON_MOSIN_GL_1200", 1200, "", 0);
+  add_zombie_weapon("30cal_bipod", & "ZOMBIE_WEAPON_30CAL_BIPOD_3500", 3500, "vox_mg", 5);
+  add_zombie_weapon("bar_bipod", & "ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "vox_bar", 5);
+  add_zombie_weapon("dp28_bipod", & "ZOMBIE_WEAPON_DP28_BIPOD_2500", 2500, "vox_mg", 5);
+  add_zombie_weapon("fg42_bipod", & "ZOMBIE_WEAPON_FG42_BIPOD_2000", 2000, "vox_mg", 5);
+  add_zombie_weapon("mg42_bipod", & "ZOMBIE_WEAPON_MG42_BIPOD_3250", 3250, "vox_mg", 5);
+  add_zombie_weapon("type99_lmg_bipod", & "ZOMBIE_WEAPON_TYPE99_LMG_BIPOD_2250", 2250, "vox_mg", 5);
+  add_zombie_weapon("bazooka", & "ZOMBIE_WEAPON_BAZOOKA_2000", 2000, "", 0);
+  add_zombie_weapon("panzerschrek_zombie", & "ZOMBIE_WEAPON_PANZERSCHREK_2000", 2000, "vox_panzer", 5);
+  add_zombie_weapon("m2_flamethrower_zombie", & "ZOMBIE_WEAPON_M2_FLAMETHROWER_3000", 3000, "vox_flame", 7);
+  add_zombie_weapon("mortar_round", & "ZOMBIE_WEAPON_MORTARROUND_2000", 2000, "");
+  add_zombie_weapon("satchel_charge", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "");
+  add_zombie_weapon("ray_gun", & "ZOMBIE_WEAPON_RAYGUN_10000", 10000, "vox_raygun", 6);
+  add_zombie_weapon("tesla_gun", & "ZOMBIE_BUY_TESLA", 10, "vox_tesla", 5);
   if(level.script != "nazi_zombie_prototype") {
     Precachemodel("zombie_teddybear");
   }
@@ -131,8 +131,8 @@ init_weapons() {
 }
 
 add_limited_tesla_gun() {
-  weapon_spawns = getEntArray("weapon_upgrade", "targetname");
-  for(i = 0; i < weapon_spawns.size; i++) {
+  weapon_spawns = GetEntArray("weapon_upgrade", "targetname");
+  for (i = 0; i < weapon_spawns.size; i++) {
     hint_string = weapon_spawns[i].zombie_weapon_upgrade;
     if(hint_string == "tesla_gun") {
       weapon_spawns[i] waittill("trigger");
@@ -151,8 +151,8 @@ add_limited_weapon(weapon_name, amount) {
 
 init_weapon_upgrade() {
   weapon_spawns = [];
-  weapon_spawns = getEntArray("weapon_upgrade", "targetname");
-  for(i = 0; i < weapon_spawns.size; i++) {
+  weapon_spawns = GetEntArray("weapon_upgrade", "targetname");
+  for (i = 0; i < weapon_spawns.size; i++) {
     hint_string = get_weapon_hint(weapon_spawns[i].zombie_weapon_upgrade);
     weapon_spawns[i] SetHintString(hint_string);
     weapon_spawns[i] setCursorHint("HINT_NOICON");
@@ -164,8 +164,8 @@ init_weapon_upgrade() {
 }
 
 init_weapon_cabinet() {
-  weapon_cabs = getEntArray("weapon_cabinet_use", "targetname");
-  for(i = 0; i < weapon_cabs.size; i++) {
+  weapon_cabs = GetEntArray("weapon_cabinet_use", "targetname");
+  for (i = 0; i < weapon_cabs.size; i++) {
     weapon_cabs[i] SetHintString(&"ZOMBIE_CABINET_OPEN_1500");
     weapon_cabs[i] setCursorHint("HINT_NOICON");
     weapon_cabs[i] UseTriggerRequireLookAt();
@@ -191,17 +191,17 @@ get_ammo_cost(weapon_name) {
 treasure_chest_init() {
   flag_init("moving_chest_enabled");
   flag_init("moving_chest_now");
-  level.chests = getEntArray("treasure_chest_use", "targetname");
+  level.chests = GetEntArray("treasure_chest_use", "targetname");
   if(level.chests.size > 1) {
     flag_set("moving_chest_enabled");
-    while(1) {
+    while (1) {
       level.chests = array_randomize(level.chests);
       if(!isDefined(level.chests[0].script_noteworthy) || (level.chests[0].script_noteworthy != "start_chest")) {
         break;
       }
     }
     level.chest_index = 0;
-    while(level.chest_index < level.chests.size) {
+    while (level.chest_index < level.chests.size) {
       if(level.chests[level.chest_index].script_noteworthy == "start_chest") {
         break;
       }
@@ -211,19 +211,19 @@ treasure_chest_init() {
       level.chest_accessed = 0;
     }
     if(level.script == "nazi_zombie_sumpf") {
-      level.pandora_light = spawn("script_model", (-4200, 0, 0));
+      level.pandora_light = Spawn("script_model", (-4200, 0, 0));
       level.pandora_light.angles = (-90, 0, 0);
-      level.pandora_light setModel("tag_origin");
-      playFXOnTag(level._effect["lght_marker"], level.pandora_light, "tag_origin");
+      level.pandora_light SetModel("tag_origin");
+      playfxontag(level._effect["lght_marker"], level.pandora_light, "tag_origin");
     }
-    for(i = 0; i < level.chests.size; i++) {
+    for (i = 0; i < level.chests.size; i++) {
       if(!isDefined(level.chests[i].script_noteworthy) || (level.chests[i].script_noteworthy != "start_chest")) {
         level.chests[i] hide_chest();
       } else {
         level.chest_index = i;
-        rubble = getEntArray(level.chests[i].script_noteworthy + "_rubble", "script_noteworthy");
+        rubble = getentarray(level.chests[i].script_noteworthy + "_rubble", "script_noteworthy");
         if(isDefined(rubble)) {
-          for(x = 0; x < rubble.size; x++) {
+          for (x = 0; x < rubble.size; x++) {
             rubble[x] hide();
           }
         } else {
@@ -241,7 +241,7 @@ set_treasure_chest_cost(cost) {
 
 hide_chest() {
   pieces = self get_chest_pieces();
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     pieces[i] disable_trigger();
     pieces[i] hide();
   }
@@ -265,28 +265,28 @@ play_crazi_sound() {
 
 show_magic_box() {
   pieces = self get_chest_pieces();
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     pieces[i] enable_trigger();
   }
   anchor = GetEnt(self.target, "targetname");
   anchorTarget = GetEnt(anchor.target, "targetname");
   level.pandora_light.angles = (-90, anchorTarget.angles[1] + 180, 0);
   if(isDefined(level.script) && level.script != "nazi_zombie_sumpf") {
-    playFX(level._effect["poltergeist"], pieces[0].origin);
+    playfx(level._effect["poltergeist"], pieces[0].origin);
   } else {
     level.pandora_light moveto(anchorTarget.origin, 0.05);
     wait(1);
-    playFXOnTag(level._effect["lght_marker_flare"], level.pandora_light, "tag_origin");
+    playfxontag(level._effect["lght_marker_flare"], level.pandora_light, "tag_origin");
   }
   playsoundatposition("box_poof", pieces[0].origin);
   wait(.5);
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     if(pieces[i].classname != "trigger_use") {
       pieces[i] show();
     }
   }
-  pieces[0] playSound("box_poof_land");
-  pieces[0] playSound("couch_slam");
+  pieces[0] playsound("box_poof_land");
+  pieces[0] playsound("couch_slam");
 }
 
 treasure_chest_think() {
@@ -299,7 +299,7 @@ treasure_chest_think() {
   self set_hint_string(self, "default_treasure_chest_" + cost);
   self setCursorHint("HINT_NOICON");
   user = undefined;
-  while(1) {
+  while (1) {
     self waittill("trigger", user);
     if(user in_revive_trigger()) {
       wait(0.1);
@@ -333,7 +333,7 @@ treasure_chest_think() {
     self setvisibletoplayer(user);
     self enable_trigger();
     self thread treasure_chest_timeout();
-    while(1) {
+    while (1) {
       self waittill("trigger", grabber);
       if(grabber == user || grabber == level) {
         if(grabber == user && is_player_valid(user) && user GetCurrentWeapon() != "mine_bouncing_betty") {
@@ -379,7 +379,7 @@ treasure_chest_move_vo() {
   sound = "plr_" + index + "_vox_box_move" + "_" + randomintrange(0, variation_count);
   if(level.player_is_speaking != 1 && isDefined(sound)) {
     level.player_is_speaking = 1;
-    self playSound(sound, "sound_done");
+    self playsound(sound, "sound_done");
     self waittill("sound_done");
     level.player_is_speaking = 0;
   }
@@ -394,11 +394,11 @@ treasure_chest_move(lid) {
   self setvisibletoall();
   fake_pieces = [];
   pieces = self get_chest_pieces();
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     if(pieces[i].classname == "script_model") {
       fake_pieces[fake_pieces.size] = spawn("script_model", pieces[i].origin);
       fake_pieces[fake_pieces.size - 1].angles = pieces[i].angles;
-      fake_pieces[fake_pieces.size - 1] setModel(pieces[i].model);
+      fake_pieces[fake_pieces.size - 1] setmodel(pieces[i].model);
       pieces[i] disable_trigger();
       pieces[i] hide();
     } else {
@@ -408,9 +408,9 @@ treasure_chest_move(lid) {
   }
   anchor = spawn("script_origin", fake_pieces[0].origin);
   soundpoint = spawn("script_origin", anchor.origin);
-  playFX(level._effect["poltergeist"], anchor.origin);
-  anchor playSound("box_move");
-  for(i = 0; i < fake_pieces.size; i++) {
+  playfx(level._effect["poltergeist"], anchor.origin);
+  anchor playsound("box_move");
+  for (i = 0; i < fake_pieces.size; i++) {
     fake_pieces[i] linkto(anchor);
   }
   playsoundatposition("whoosh", soundpoint.origin);
@@ -431,14 +431,14 @@ treasure_chest_move(lid) {
     anchor Vibrate(direction, 10, 0.5, 5);
   }
   anchor waittill("movedone");
-  playFX(level._effect["poltergeist"], anchor.origin);
+  playfx(level._effect["poltergeist"], anchor.origin);
   playsoundatposition("box_poof", soundpoint.origin);
-  for(i = 0; i < fake_pieces.size; i++) {
+  for (i = 0; i < fake_pieces.size; i++) {
     fake_pieces[i] delete();
   }
-  rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
+  rubble = getentarray(self.script_noteworthy + "_rubble", "script_noteworthy");
   if(isDefined(rubble)) {
-    for(i = 0; i < rubble.size; i++) {
+    for (i = 0; i < rubble.size; i++) {
       rubble[i] show();
     }
   } else {
@@ -456,7 +456,7 @@ treasure_chest_move(lid) {
     }
   }
   level.verify_chest = false;
-  while(level.verify_chest == false && (level.script == "nazi_zombie_asylum" || level.script == "nazi_zombie_factory" || level.script == "nazi_zombie_sumpf")) {
+  while (level.verify_chest == false && (level.script == "nazi_zombie_asylum" || level.script == "nazi_zombie_factory" || level.script == "nazi_zombie_sumpf")) {
     level.chest_index++;
     if(level.chest_index >= level.chests.size) {
       if(level.script == "nazi_zombie_sumpf") {
@@ -472,15 +472,15 @@ treasure_chest_move(lid) {
     }
     verify_chest_is_open();
     wait(0.01);
-    while(level.script != "nazi_zombie_sumpf" && level.script != "nazi_zombie_factory" && level.chests[level.chest_index].origin == level.chests[old_chest_index].origin) {
+    while (level.script != "nazi_zombie_sumpf" && level.script != "nazi_zombie_factory" && level.chests[level.chest_index].origin == level.chests[old_chest_index].origin) {
       level.chest_index++;
     }
   }
   level.chests[level.chest_index] show_magic_box();
   level notify("magic_box_light_switch");
-  rubble = getEntArray(level.chests[level.chest_index].script_noteworthy + "_rubble", "script_noteworthy");
+  rubble = getentarray(level.chests[level.chest_index].script_noteworthy + "_rubble", "script_noteworthy");
   if(isDefined(rubble)) {
-    for(i = 0; i < rubble.size; i++) {
+    for (i = 0; i < rubble.size; i++) {
       rubble[i] hide();
     }
   } else {
@@ -491,7 +491,7 @@ treasure_chest_move(lid) {
 rotateroll_box() {
   angles = 40;
   angles2 = 0;
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self RotateRoll(angles + angles2, 0.5);
     wait(0.7);
     angles2 = 40;
@@ -501,7 +501,7 @@ rotateroll_box() {
 }
 
 verify_chest_is_open() {
-  for(i = 0; i < level.open_chest_location.size; i++) {
+  for (i = 0; i < level.open_chest_location.size; i++) {
     if(isDefined(level.open_chest_location[i])) {
       if(level.open_chest_location[i] == level.chests[level.chest_index].script_noteworthy) {
         level.verify_chest = true;
@@ -514,7 +514,7 @@ verify_chest_is_open() {
 
 treasure_chest_user_hint(trigger, user) {
   dist = 128 * 128;
-  while(1) {
+  while (1) {
     if(!isDefined(trigger)) {
       break;
     }
@@ -522,7 +522,7 @@ treasure_chest_user_hint(trigger, user) {
       break;
     }
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] == user) {
         continue;
       }
@@ -558,7 +558,7 @@ treasure_chest_lid_close(timedOut) {
 treasure_chest_ChooseRandomWeapon(player) {
   keys = GetArrayKeys(level.zombie_weapons);
   filtered = [];
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(player HasWeapon(keys[i])) {
       continue;
     }
@@ -583,12 +583,12 @@ treasure_chest_ChooseRandomWeapon(player) {
         if(isDefined(level.pulls_since_last_ray_gun)) {
           if(level.pulls_since_last_ray_gun > 11) {
             number_to_add = .15 * filtered.size;
-            for(i = 1; i < number_to_add; i++) {
+            for (i = 1; i < number_to_add; i++) {
               filtered[filtered.size] = "ray_gun";
             }
           } else if(level.pulls_since_last_ray_gun > 7) {
             number_to_add = .1 * filtered.size;
-            for(i = 1; i < number_to_add; i++) {
+            for (i = 1; i < number_to_add; i++) {
               filtered[filtered.size] = "ray_gun";
             }
           }
@@ -598,19 +598,19 @@ treasure_chest_ChooseRandomWeapon(player) {
     if(isDefined(level.pulls_since_last_tesla_gun)) {
       if(isDefined(level.player_drops_tesla_gun) && level.player_drops_tesla_gun == true) {
         number_to_add = .2 * filtered.size;
-        for(i = 1; i < number_to_add; i++) {
+        for (i = 1; i < number_to_add; i++) {
           filtered[filtered.size] = "tesla_gun";
         }
       }
       if(!isDefined(level.player_seen_tesla_gun) || level.player_seen_tesla_gun == false) {
         if(level.round_number > 10) {
           number_to_add = .2 * filtered.size;
-          for(i = 1; i < number_to_add; i++) {
+          for (i = 1; i < number_to_add; i++) {
             filtered[filtered.size] = "tesla_gun";
           }
         } else if(level.round_number > 5) {
           number_to_add = .15 * filtered.size;
-          for(i = 1; i < number_to_add; i++) {
+          for (i = 1; i < number_to_add; i++) {
             filtered[filtered.size] = "tesla_gun";
           }
         }
@@ -620,14 +620,14 @@ treasure_chest_ChooseRandomWeapon(player) {
   if(isDefined(level.limited_weapons)) {
     keys2 = GetArrayKeys(level.limited_weapons);
     players = get_players();
-    for(q = 0; q < keys2.size; q++) {
+    for (q = 0; q < keys2.size; q++) {
       count = 0;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i] HasWeapon(keys2[q])) {
           count++;
         }
         if(players[i] maps\_laststand::player_is_in_laststand()) {
-          for(m = 0; m < players[i].weaponInventory.size; m++) {
+          for (m = 0; m < players[i].weaponInventory.size; m++) {
             if(players[i].weaponInventory[m] == keys2[q]) {
               count++;
             }
@@ -650,7 +650,7 @@ treasure_chest_weapon_spawn(chest, player) {
   model moveto(model.origin + (0, 0, floatHeight), 3, 2, 0.9);
   modelname = undefined;
   rand = undefined;
-  for(i = 0; i < 40; i++) {
+  for (i = 0; i < 40; i++) {
     if(i < 20) {
       wait(0.05);
     } else if(i < 30) {
@@ -668,7 +668,7 @@ treasure_chest_weapon_spawn(chest, player) {
       }
     }
     modelname = GetWeaponModel(rand);
-    model setModel(modelname);
+    model setmodel(modelname);
   }
   self.weapon_string = rand;
   random = Randomint(100);
@@ -707,7 +707,7 @@ treasure_chest_weapon_spawn(chest, player) {
       }
     }
     if(random <= chance_of_joker) {
-      model setModel("zombie_teddybear");
+      model SetModel("zombie_teddybear");
       model.angles = self.angles;
       wait 1;
       flag_set("moving_chest_now");
@@ -760,9 +760,9 @@ timer_til_despawn(floatHeight) {
 
 treasure_chest_glowfx() {
   fxObj = spawn("script_model", self.origin + (0, 0, 0));
-  fxobj setModel("tag_origin");
+  fxobj setmodel("tag_origin");
   fxobj.angles = self.angles + (90, 0, 0);
-  playFXOnTag(level._effect["chest_light"], fxObj, "tag_origin");
+  playfxontag(level._effect["chest_light"], fxObj, "tag_origin");
   self waittill_any("weapon_grabbed", "box_moving");
   fxobj delete();
 }
@@ -787,7 +787,7 @@ treasure_chest_give_weapon(weapon_string) {
     }
   }
   if(isDefined(primaryWeapons) && !isDefined(current_weapon)) {
-    for(i = 0; i < primaryWeapons.size; i++) {
+    for (i = 0; i < primaryWeapons.size; i++) {
       if(primaryWeapons[i] == "zombie_colt") {
         continue;
       }
@@ -809,13 +809,13 @@ treasure_chest_give_weapon(weapon_string) {
 }
 
 weapon_cabinet_think() {
-  weapons = getEntArray("cabinet_weapon", "targetname");
-  doors = getEntArray(self.target, "targetname");
-  for(i = 0; i < doors.size; i++) {
+  weapons = getentarray("cabinet_weapon", "targetname");
+  doors = getentarray(self.target, "targetname");
+  for (i = 0; i < doors.size; i++) {
     doors[i] NotSolid();
   }
   self.has_been_used_once = false;
-  while(1) {
+  while (1) {
     self waittill("trigger", player);
     if(player in_revive_trigger()) {
       wait(0.1);
@@ -842,7 +842,7 @@ weapon_cabinet_think() {
       player_has_weapon = false;
       weapons = player GetWeaponsList();
       if(isDefined(weapons)) {
-        for(i = 0; i < weapons.size; i++) {
+        for (i = 0; i < weapons.size; i++) {
           if(weapons[i] == self.zombie_weapon_upgrade) {
             player_has_weapon = true;
           }
@@ -873,8 +873,8 @@ weapon_cabinet_think() {
       self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
       self setCursorHint("HINT_NOICON");
       player maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
-      doors = getEntArray(self.target, "targetname");
-      for(i = 0; i < doors.size; i++) {
+      doors = getentarray(self.target, "targetname");
+      for (i = 0; i < doors.size; i++) {
         if(doors[i].model == "dest_test_cabinet_ldoor_dmg0") {
           doors[i] thread weapon_cabinet_door_open("left");
         } else if(doors[i].model == "dest_test_cabinet_rdoor_dmg0") {
@@ -884,7 +884,7 @@ weapon_cabinet_think() {
       player_has_weapon = false;
       weapons = player GetWeaponsList();
       if(isDefined(weapons)) {
-        for(i = 0; i < weapons.size; i++) {
+        for (i = 0; i < weapons.size; i++) {
           if(weapons[i] == self.zombie_weapon_upgrade) {
             player_has_weapon = true;
           }
@@ -918,7 +918,7 @@ weapon_spawn_think() {
     ammo_cost = cost;
   }
   self.first_time_triggered = false;
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
     if(!is_player_valid(player)) {
       player thread ignore_triggers(0.5);
@@ -939,7 +939,7 @@ weapon_spawn_think() {
     player_has_weapon = false;
     weapons = player GetWeaponsList();
     if(isDefined(weapons)) {
-      for(i = 0; i < weapons.size; i++) {
+      for (i = 0; i < weapons.size; i++) {
         if(weapons[i] == self.zombie_weapon_upgrade) {
           player_has_weapon = true;
         }
@@ -997,7 +997,7 @@ weapon_show(player) {
     yaw = weapon_yaw + 90;
   }
   self.og_origin = self.origin;
-  self.origin = self.origin + (anglesToForward((0, yaw, 0)) * 8);
+  self.origin = self.origin + (AnglesToForward((0, yaw, 0)) * 8);
   wait(0.05);
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);
@@ -1020,7 +1020,7 @@ weapon_give(weapon) {
     }
   }
   if(isDefined(primaryWeapons) && !isDefined(current_weapon)) {
-    for(i = 0; i < primaryWeapons.size; i++) {
+    for (i = 0; i < primaryWeapons.size; i++) {
       if(primaryWeapons[i] == "zombie_colt") {
         continue;
       }
@@ -1136,7 +1136,7 @@ do_player_weap_dialog(player_index, sound_to_play, waittime) {
   }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
-    self playSound(player_index + sound_to_play, "sound_done" + sound_to_play);
+    self playsound(player_index + sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.player_is_speaking = 0;
@@ -1173,7 +1173,7 @@ ammo_give(weapon) {
     }
   }
   if(give_ammo) {
-    self playSound("cha_ching");
+    self playsound("cha_ching");
     self GivemaxAmmo(weapon);
     return true;
   }
@@ -1187,7 +1187,7 @@ add_weapon_to_sound_array(vo, num) {
     return;
   }
   player = getplayers();
-  for(i = 0; i < player.size; i++) {
+  for (i = 0; i < player.size; i++) {
     index = maps\_zombiemode_weapons::get_player_index(player);
     player_index = "plr_" + index + "_";
     num = maps\_zombiemode_spawner::get_number_variants(player_index + vo);
@@ -1196,7 +1196,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_crappy":
       if(!isDefined(level.vox_crappy)) {
         level.vox_crappy = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_crappy[level.vox_crappy.size] = "vox_crappy_" + i;
         }
       }
@@ -1205,7 +1205,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_mg":
       if(!isDefined(level.vox_mg)) {
         level.vox_mg = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_mg[level.vox_mg.size] = "vox_mg_" + i;
         }
       }
@@ -1214,7 +1214,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_shotgun":
       if(!isDefined(level.vox_shotgun)) {
         level.vox_shotgun = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_shotgun[level.vox_shotgun.size] = "vox_shotgun_" + i;
         }
       }
@@ -1223,7 +1223,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_357":
       if(!isDefined(level.vox_357)) {
         level.vox_357 = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_357[level.vox_357.size] = "vox_357_" + i;
         }
       }
@@ -1232,7 +1232,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_bar":
       if(!isDefined(level.vox_bar)) {
         level.vox_bar = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_bar[level.vox_bar.size] = "vox_bar_" + i;
         }
       }
@@ -1241,7 +1241,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_flame":
       if(!isDefined(level.vox_flame)) {
         level.vox_flame = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_flame[level.vox_flame.size] = "vox_flame_" + i;
         }
       }
@@ -1250,7 +1250,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_raygun":
       if(!isDefined(level.vox_raygun)) {
         level.vox_raygun = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_raygun[level.vox_raygun.size] = "vox_raygun_" + i;
         }
       }
@@ -1259,7 +1259,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_tesla":
       if(!isDefined(level.vox_tesla)) {
         level.vox_tesla = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_tesla[level.vox_tesla.size] = "vox_tesla_" + i;
         }
       }
@@ -1268,7 +1268,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_sticky":
       if(!isDefined(level.vox_sticky)) {
         level.vox_sticky = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_sticky[level.vox_sticky.size] = "vox_sticky_" + i;
         }
       }
@@ -1277,7 +1277,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_ppsh":
       if(!isDefined(level.vox_ppsh)) {
         level.vox_ppsh = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_ppsh[level.vox_ppsh.size] = "vox_ppsh_" + i;
         }
       }
@@ -1286,7 +1286,7 @@ add_weapon_to_sound_array(vo, num) {
     case "vox_mp40":
       if(!isDefined(level.vox_mp40)) {
         level.vox_mp40 = [];
-        for(i = 0; i < num; i++) {
+        for (i = 0; i < num; i++) {
           level.vox_mp40[level.vox_mp40.size] = "vox_mp40_" + i;
         }
       }

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\weapons\lightninggun;
+
 #namespace lightninggun;
 
 autoexec __init__system__() {

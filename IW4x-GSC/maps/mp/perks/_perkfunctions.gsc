@@ -14,7 +14,7 @@ blastshieldUseTracker(perkName, useFunc) {
   self endon("end_perkUseTracker");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("empty_offhand");
 
     if(!isOffhandWeaponEnabled()) {
@@ -31,7 +31,9 @@ perkUseDeathTracker() {
   self._usePerkEnabled = undefined;
 }
 
-setRearView() {}
+setRearView() {
+  //self thread perkUseTracker( "specialty_rearview", ::toggleRearView );
+}
 
 unsetRearView() {
   self notify("end_perkUseTracker");
@@ -48,7 +50,7 @@ toggleRearView(isEnabled) {
 }
 
 setEndGame() {
-  if(isDefined(self.endGame)) {
+  if(isdefined(self.endGame)) {
     return;
   }
   self.maxhealth = (maps\mp\gametypes\_tweakables::getTweakableValue("player", "maxhealth") * 4);
@@ -84,7 +86,8 @@ endGameDeath(duration) {
   self endon("stopEndGame");
 
   wait(duration + 1);
-
+  //self visionSetNakedForPlayer("end_game2", 1 );
+  //wait(1);
   self _suicide();
 }
 
@@ -99,10 +102,11 @@ setCombatHigh() {
     self.moveSpeedScaler = 1.25;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
   }
+  //self visionSetNakedForPlayer( "end_game", 1 );
 
   if(level.splitscreen) {
     yOffset = 56;
-    iconSize = 21;
+    iconSize = 21; // 32/1.5
   } else {
     yOffset = 112;
     iconSize = 32;
@@ -220,18 +224,20 @@ trackSiegeEnable() {
   self endon("disconnect");
   self endon("stop_trackSiege");
 
-  for(;;) {
+  for (;;) {
     self waittill("gambit_on");
 
+    //self setStance( "crouch" );
+    //self thread stanceStateListener();
+    //self thread jumpStateListener();
     self.moveSpeedScaler = 0;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
     class = weaponClass(self getCurrentWeapon());
 
-    if(class == "pistol" || class == "smg") {
+    if(class == "pistol" || class == "smg")
       self setSpreadOverride(1);
-    } else {
+    else
       self setSpreadOverride(2);
-    }
 
     self player_recoilScaleOn(0);
     self allowJump(false);
@@ -243,7 +249,7 @@ trackSiegeDissable() {
   self endon("disconnect");
   self endon("stop_trackSiege");
 
-  for(;;) {
+  for (;;) {
     self waittill("gambit_off");
 
     unsetSiege();
@@ -256,7 +262,7 @@ stanceStateListener() {
 
   self notifyOnPlayerCommand("adjustedStance", "+stance");
 
-  for(;;) {
+  for (;;) {
     self waittill("adjustedStance");
     if(self.moveSPeedScaler != 0) {
       continue;
@@ -271,7 +277,7 @@ jumpStateListener() {
 
   self notifyOnPlayerCommand("jumped", "+goStand");
 
-  for(;;) {
+  for (;;) {
     self waittill("jumped");
     if(self.moveSPeedScaler != 0) {
       continue;
@@ -282,7 +288,8 @@ jumpStateListener() {
 
 unsetSiege() {
   self.moveSpeedScaler = 1;
-
+  //if siege is not cut add check to see if
+  //using lightweight and siege for movespeed scaler
   self resetSpreadOverride();
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
   self player_recoilScaleOff();
@@ -365,9 +372,8 @@ unsetBackShield() {
 }
 
 setLocalJammer() {
-  if(!self isEMPed()) {
+  if(!self isEMPed())
     self RadarJamOn();
-  }
 }
 
 unsetLocalJammer() {
@@ -436,7 +442,7 @@ killstreakThink(streakName, streakVal, endonString) {
   self endon("disconnect");
   self endon(endonString);
 
-  for(;;) {
+  for (;;) {
     self waittill("killed_enemy");
 
     if(self.pers["cur_kill_streak"] != streakVal) {
@@ -470,29 +476,28 @@ oneManArmyWeaponChangeTracker() {
   level endon("game_ended");
   self endon("stop_oneManArmyTracker");
 
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change", newWeapon);
 
     if(newWeapon != "onemanarmy_mp") {
       continue;
     }
+    //if( self isUsingRemote() )
+    //	continue;
 
     self thread selectOneManArmyClass();
   }
 }
 
 isOneManArmyMenu(menu) {
-  if(menu == game["menu_onemanarmy"]) {
+  if(menu == game["menu_onemanarmy"])
     return true;
-  }
 
-  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"]) {
+  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"])
     return true;
-  }
 
-  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"]) {
+  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"])
     return true;
-  }
 
   return false;
 }
@@ -581,9 +586,10 @@ giveOneManArmyClass(className) {
 
   self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], className, false);
 
-  if(isDefined(self.carryFlag)) {
+  // handle the fact that detachAll in giveLoadout removed the CTF flag from our back
+  // it would probably be better to handle this in _detachAll itself, but this is a safety fix
+  if(isDefined(self.carryFlag))
     self attach(self.carryFlag, "J_spine4", true);
-  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -607,9 +613,8 @@ omaUseBar(duration) {
   useBarText setText(&"MPUI_CHANGING_KIT");
 
   useBar updateBar(0, 1 / duration);
-  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05) {
+  for (waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05)
     wait(0.05);
-  }
 
   useBar destroyElem();
   useBarText destroyElem();
@@ -641,7 +646,9 @@ toggleBlastShield(isEnabled) {
   }
 }
 
-setFreefall() {}
+setFreefall() {
+  //eventually set a listener to do a roll when falling damage is taken
+}
 
 unsetFreefall() {}
 
@@ -659,9 +666,8 @@ unsetTacticalInsertion() {
 clearPreviousTISpawnpoint() {
   self waittill_any("disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self.setSpawnpoint)) {
+  if(isDefined(self.setSpawnpoint))
     self deleteTI(self.setSpawnpoint);
-  }
 }
 
 updateTISpawnPosition() {
@@ -670,21 +676,19 @@ updateTISpawnPosition() {
   level endon("game_ended");
   self endon("end_monitorTIUse");
 
-  while(isReallyAlive(self)) {
-    if(self isValidTISpawnPosition()) {
+  while (isReallyAlive(self)) {
+    if(self isValidTISpawnPosition())
       self.TISpawnPosition = self.origin;
-    }
 
     wait(0.05);
   }
 }
 
 isValidTISpawnPosition() {
-  if(Canspawn(self.origin) && self IsOnGround()) {
+  if(CanSpawn(self.origin) && self IsOnGround())
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 monitorTIUse() {
@@ -696,16 +700,16 @@ monitorTIUse() {
   self thread updateTISpawnPosition();
   self thread clearPreviousTISpawnpoint();
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", lightstick, weapName);
 
     if(weapName != "flare_mp") {
       continue;
     }
+    //lightstick delete();
 
-    if(isDefined(self.setSpawnPoint)) {
+    if(isDefined(self.setSpawnPoint))
       self deleteTI(self.setSpawnPoint);
-    }
 
     if(!isDefined(self.TISpawnPosition)) {
       continue;
@@ -731,11 +735,10 @@ monitorTIUse() {
 
 GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  } else {
+  else
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
-  }
 
   self thread GlowStickDamageListener(owner);
   self thread GlowStickEnemyUseListener(owner);
@@ -759,15 +762,17 @@ GlowStickSetupAndWaitForDeath(owner) {
 GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   self endon("death");
 
+  // PlayFXOnTag fails if run on the same frame the parent entity was created
   wait(0.05);
 
+  //PlayFXOnTag( showEffect, self, "TAG_FX" );
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
   TriggerFx(fxEnt);
 
   self thread deleteOnDeath(fxEnt);
 
-  for(;;) {
+  for (;;) {
     self hide();
     fxEnt hide();
     foreach(player in level.players) {
@@ -789,19 +794,18 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
 
 deleteOnDeath(ent) {
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isdefined(ent))
     ent delete();
-  }
 }
 
 GlowStickDamageListener(owner) {
   self endon("death");
 
   self setCanDamage(true);
-
+  // use large health to work around teamkilling issue
   self.health = 5000;
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker);
 
     if(level.teambased && isDefined(owner) && attacker != owner && (isDefined(attacker.team) && attacker.team == self.team)) {
@@ -812,7 +816,7 @@ GlowStickDamageListener(owner) {
     if(self.health < (5000 - 20)) {
       if(isDefined(owner) && attacker != owner) {
         attacker notify("destroyed_insertion", owner);
-        attacker notify("destroyed_explosive");
+        attacker notify("destroyed_explosive"); // count towards SitRep Pro challenge
         owner thread leaderDialogOnPlayer("ti_destroyed");
       }
 
@@ -831,7 +835,7 @@ GlowStickUseListener(owner) {
 
   self thread updateEnemyUse(owner);
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
 
     player playSound("chemlight_pu");
@@ -843,16 +847,15 @@ GlowStickUseListener(owner) {
 updateEnemyUse(owner) {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self setSelfUsable(owner);
     level waittill_either("joined_team", "player_spawned");
   }
 }
 
 deleteTI(TI) {
-  if(isDefined(TI.enemyTrigger)) {
+  if(isDefined(TI.enemyTrigger))
     TI.enemyTrigger Delete();
-  }
 
   spot = TI.origin;
   spotAngles = TI.angles;
@@ -881,15 +884,16 @@ GlowStickEnemyUseListener(owner) {
   self.enemyTrigger setHintString(&"MP_DESTROY_TI");
   self.enemyTrigger makeEnemyUsable(owner);
 
-  for(;;) {
+  for (;;) {
     self.enemyTrigger waittill("trigger", player);
 
     player notify("destroyed_insertion", owner);
-    player notify("destroyed_explosive");
+    player notify("destroyed_explosive"); // count towards SitRep Pro challenge
 
-    if(isDefined(owner) && player != owner) {
+    //playFX( level.spawnGlowSplat, self.origin);		
+
+    if(isDefined(owner) && player != owner)
       owner thread leaderDialogOnPlayer("ti_destroyed");
-    }
 
     player thread deleteTI(self);
   }
@@ -904,9 +908,10 @@ unsetLittlebirdSupport() {
 }
 
 setC4Death() {
-  if(!self _hasperk("specialty_pistoldeath")) {
+  if(!self _hasperk("specialty_pistoldeath"))
     self _setperk("specialty_pistoldeath");
-  }
 }
 
-unsetC4Death() {}
+unsetC4Death() {
+
+}

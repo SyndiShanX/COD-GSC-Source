@@ -83,7 +83,7 @@ main() {
     setSavedDvar("sv_saveOnStartMap", false);
     imagename = "levelshots / autosave / autosave_" + level.script + "start";
     // string not found for AUTOSAVE_LEVELSTART
-    SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
+    SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
     maps\_load::set_player_viewhand_model("viewhands_player_us_army");
   }
 
@@ -102,7 +102,7 @@ post_init() {
   maps\char_museum_anim::main();
 
   thread sign_departure_status();
-  array_thread(getEntArray("c4barrelPacks", "script_noteworthy"), ::c4_packs_think);
+  array_thread(getentarray("c4barrelPacks", "script_noteworthy"), ::c4_packs_think);
 
   SetSavedDvar("player_sprintUnlimited", "1");
   SetSavedDvar("ui_hidemap", "1");
@@ -111,15 +111,15 @@ post_init() {
   thread battlechatter_off();
 }
 
-/************************************************************************************************************/
 
+/************************************************************************************************************/
 /*													AF_CAVES												*/
 /************************************************************************************************************/
 
 afcaves_setup() {
   level.anim_ai["af_caves"] = [];
-  array_thread(getEntArray("ai_af_caves", "script_noteworthy"), ::add_spawn_function, ::afcaves_ai_setup);
-  array_thread(getEntArray("ai_af_caves", "script_noteworthy"), ::add_spawn_function, ::afcaves_ai_think);
+  array_thread(getentarray("ai_af_caves", "script_noteworthy"), ::add_spawn_function, ::afcaves_ai_setup);
+  array_thread(getentarray("ai_af_caves", "script_noteworthy"), ::add_spawn_function, ::afcaves_ai_think);
 }
 
 afcaves_main() {
@@ -128,18 +128,18 @@ afcaves_main() {
     flag_wait("museum_ready");
   }
 
-  array_thread(getEntArray("civ_af_caves_1", "script_noteworthy"), ::add_spawn_function, ::afcaves_civ1_think);
+  array_thread(getentarray("civ_af_caves_1", "script_noteworthy"), ::add_spawn_function, ::afcaves_civ1_think);
   thread afcaves_camera_think();
 
   flag_wait("af_caves_spawn_civs");
-  array_thread(getEntArray("civ_af_caves_1", "script_noteworthy"), ::spawn_ai, true);
+  array_thread(getentarray("civ_af_caves_1", "script_noteworthy"), ::spawn_ai, true);
 
   flag_wait("spawn_room1_civs");
-  array_thread(getEntArray("civ_af_caves_2", "script_noteworthy"), ::spawn_ai, true);
+  array_thread(getentarray("civ_af_caves_2", "script_noteworthy"), ::spawn_ai, true);
 
   flag_wait("af_caves_done");
   wait 1.25;
-  array_thread(getEntArray("civ_af_caves_3", "script_noteworthy"), ::delaythread, 1.25, ::spawn_ai, true);
+  array_thread(getentarray("civ_af_caves_3", "script_noteworthy"), ::delaythread, 1.25, ::spawn_ai, true);
   camera_move("camara_path_dc_burning", 25);
 }
 
@@ -188,7 +188,7 @@ afcaves_civ1_think() {
   }
 
   num = 0;
-  while(num < 6) {
+  while (num < 6) {
     wait .05;
 
     p1 = level.player.origin;
@@ -202,9 +202,8 @@ afcaves_civ1_think() {
 
     dot = vectordot(vectornormalize(p3 - p1), vectornormalize(p2 - p1));
 
-    if(dot < .999) {
+    if(dot < .999)
       continue;
-    }
 
     guys[num] ent_flag_set("do_anim");
     num++;
@@ -233,9 +232,8 @@ afcaves_ai_setup() {
 afcaves_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -252,14 +250,12 @@ afcaves_ai_think() {
       self thread ai_loop_random(node.animation, "foley_talk");
       break;
     case "afchase_ending_shepherd_gun_monologue":
-      if(isai(self)) {
+      if(isai(self))
         ai_wait_current_anim();
-      } else {
+      else
         ai_wait_current_anim(.40);
-      }
-      foreach(ent in level.anim_ai["af_caves"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["af_caves"])
+      ent ent_flag_clear("do_anim");
       flag_set("af_caves_done");
       break;
     default:
@@ -282,14 +278,12 @@ ai_zodiac_anims(animation) {
 }
 
 /************************************************************************************************************/
-
 /*													DC_BURNING												*/
 /************************************************************************************************************/
-
 dcburning_setup() {
   level.anim_ai["dc_burning"] = [];
-  array_thread(getEntArray("ai_dc_burning", "script_noteworthy"), ::add_spawn_function, ::dcburning_ai_setup);
-  array_thread(getEntArray("ai_dc_burning", "script_noteworthy"), ::add_spawn_function, ::dcburning_ai_think);
+  array_thread(getentarray("ai_dc_burning", "script_noteworthy"), ::add_spawn_function, ::dcburning_ai_setup);
+  array_thread(getentarray("ai_dc_burning", "script_noteworthy"), ::add_spawn_function, ::dcburning_ai_think);
 }
 
 dcburning_main() {
@@ -297,20 +291,19 @@ dcburning_main() {
 
   flag_wait("dc_burning_go");
   wait 2;
-  foreach(ent in level.anim_ai["dc_burning"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["dc_burning"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_dc_burning_1", "script_noteworthy"), ::delaythread, 11, ::spawn_ai, true);
+  array_thread(getentarray("civ_dc_burning_1", "script_noteworthy"), ::delaythread, 11, ::spawn_ai, true);
 
   flag_wait("dc_burning_done");
-  array_thread(getEntArray("civ_dc_burning_2", "script_noteworthy"), ::spawn_ai, true);
-  array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("civ_dc_burning_2", "script_noteworthy"), ::spawn_ai, true);
+  array_thread(getentarray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 
   wait 2;
 
-  array_thread(getEntArray("civ_dc_burning_3", "script_noteworthy"), ::spawn_ai, true);
-  array_thread(getEntArray("civ_dc_burning_4", "script_noteworthy"), ::delaythread, 1.25, ::spawn_ai, true);
+  array_thread(getentarray("civ_dc_burning_3", "script_noteworthy"), ::spawn_ai, true);
+  array_thread(getentarray("civ_dc_burning_4", "script_noteworthy"), ::delaythread, 1.25, ::spawn_ai, true);
   camera_move("camara_path_airport_mid", 35);
   level.camera ResumeSpeed(5);
   wait 2;
@@ -362,9 +355,8 @@ dcburning_ai_setup() {
       self gun_remove();
       break;
     case "riotshield_idle":
-      if(!isai(self)) {
+      if(!isai(self))
         self attach("weapon_riot_shield", "TAG_WEAPON_LEFT");
-      }
       break;
   }
 }
@@ -372,9 +364,8 @@ dcburning_ai_setup() {
 dcburning_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -414,8 +405,8 @@ dcburning_dunn(animation) {
   //self thread dcburning_dunn_gun( animation );	
   self ai_next_anim( % training_pit_open_case);
 
-  //this is important - dont take this out...its to make up for
-  //a sleight frame diference between drone and AI logic where in
+  //this is important - dont take this out...its to make up for 
+  //a sleight frame diference between drone and AI logic where in 
   //on the current_anim gets set one frame too late.
   percent = .41;
   delay = .1;
@@ -427,16 +418,15 @@ dcburning_dunn(animation) {
 }
 
 dcburning_dunn_stop() {
-  foreach(ent in level.anim_ai["dc_burning"]) {
-    ent ent_flag_clear("do_anim");
-  }
+  foreach(ent in level.anim_ai["dc_burning"])
+  ent ent_flag_clear("do_anim");
   flag_set("dc_burning_done");
 }
 
 #using_animtree("script_model");
 dcburning_dunn_gun_setup(node) {
   self.anim_gun = spawn("script_model", (0, 0, 0));
-  self.anim_gun setModel("viewmodel_desert_eagle");
+  self.anim_gun setmodel("viewmodel_desert_eagle");
   self.anim_gun.origin = node.origin;
   self.anim_gun.animname = "pit_gun";
   self.anim_gun assign_animtree();
@@ -468,14 +458,12 @@ dcburning_foley(animation) {
 }
 
 /************************************************************************************************************/
-
 /*													AIRPORT													*/
 /************************************************************************************************************/
-
 airport_setup() {
   level.anim_ai["airport"] = [];
-  array_thread(getEntArray("ai_airport", "script_noteworthy"), ::add_spawn_function, ::airport_ai_setup);
-  array_thread(getEntArray("ai_airport", "script_noteworthy"), ::add_spawn_function, ::airport_ai_think);
+  array_thread(getentarray("ai_airport", "script_noteworthy"), ::add_spawn_function, ::airport_ai_setup);
+  array_thread(getentarray("ai_airport", "script_noteworthy"), ::add_spawn_function, ::airport_ai_think);
 }
 
 airport_main() {
@@ -485,15 +473,14 @@ airport_main() {
   thread flag_set_delayed("looked_at_big_board", 3);
   wait 1.5;
 
-  foreach(ent in level.anim_ai["airport"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["airport"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_airport_1", "script_noteworthy"), ::delaythread, 6.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_airport_1", "script_noteworthy"), ::delaythread, 6.5, ::spawn_ai, true);
   flag_wait("airport_done");
   wait 1.5;
-  array_thread(getEntArray("civ_airport_2", "script_noteworthy"), ::delaythread, .5, ::spawn_ai, true);
-  array_thread(getEntArray("civ_airport_3", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_airport_2", "script_noteworthy"), ::delaythread, .5, ::spawn_ai, true);
+  array_thread(getentarray("civ_airport_3", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
 
   camera_move("camara_path_cliffhanger", 70);
 }
@@ -539,9 +526,8 @@ airport_ai_setup() {
 airport_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -550,9 +536,8 @@ airport_ai_think() {
   switch (node.animation) {
     case "airport_elevator_sequence_guy2":
       self ai_wait_current_anim(.42);
-      foreach(ent in level.anim_ai["airport"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["airport"])
+      ent ent_flag_clear("do_anim");
       flag_set("airport_done");
       break;
     case "airport_security_guard_pillar_react_R":
@@ -574,14 +559,12 @@ airport_security_guard() {
 }
 
 /************************************************************************************************************/
-
 /*												CLIFFHANGER													*/
 /************************************************************************************************************/
-
 cliffhanger_setup() {
   level.anim_ai["cliffhanger"] = [];
-  array_thread(getEntArray("ai_cliffhanger", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_ai_setup);
-  array_thread(getEntArray("ai_cliffhanger", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_ai_think);
+  array_thread(getentarray("ai_cliffhanger", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_ai_setup);
+  array_thread(getentarray("ai_cliffhanger", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_ai_think);
 }
 
 cliffhanger_main() {
@@ -589,14 +572,13 @@ cliffhanger_main() {
 
   flag_wait("cliffhanger_go");
   wait 2;
-  foreach(ent in level.anim_ai["cliffhanger"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["cliffhanger"])
+  ent ent_flag_set("do_anim");
 
   flag_wait("cliffhanger_done");
   wait 1.5;
-  array_thread(getEntArray("civ_favela_0", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
-  array_thread(getEntArray("civ_favela_1", "script_noteworthy"), ::delaythread, 1.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_favela_0", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_favela_1", "script_noteworthy"), ::delaythread, 1.5, ::spawn_ai, true);
 
   camera_move("camara_path_favela");
 }
@@ -644,9 +626,8 @@ cliffhanger_ai_setup() {
 cliffhanger_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -658,9 +639,8 @@ cliffhanger_ai_think() {
     	case "killhouse_sas_3":*/
     case "killhouse_sas_price":
       self ai_wait_current_anim(.5);
-      foreach(ent in level.anim_ai["cliffhanger"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["cliffhanger"])
+      ent ent_flag_clear("do_anim");
       flag_set("cliffhanger_done");
       break;
     case "guardA_standing_cold_idle":
@@ -677,14 +657,12 @@ cliffhanger_ai_think() {
 }
 
 /************************************************************************************************************/
-
 /*													FAVELA													*/
 /************************************************************************************************************/
-
 favela_setup() {
   level.anim_ai["favela"] = [];
-  array_thread(getEntArray("ai_favela", "script_noteworthy"), ::add_spawn_function, ::favela_ai_setup);
-  array_thread(getEntArray("ai_favela", "script_noteworthy"), ::add_spawn_function, ::favela_ai_think);
+  array_thread(getentarray("ai_favela", "script_noteworthy"), ::add_spawn_function, ::favela_ai_setup);
+  array_thread(getentarray("ai_favela", "script_noteworthy"), ::add_spawn_function, ::favela_ai_think);
 }
 
 favela_main() {
@@ -694,17 +672,16 @@ favela_main() {
 
   wait 3;
 
-  foreach(ent in level.anim_ai["favela"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["favela"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_favela_3", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
+  array_thread(getentarray("civ_favela_3", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
 
   flag_wait("favela_done");
 
   wait 1;
 
-  array_thread(getEntArray("civ_hallway1_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_hallway1_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
 
   camera_move("camara_path_hallway1", 70);
 }
@@ -748,9 +725,8 @@ favela_ai_setup() {
 favela_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -761,9 +737,8 @@ favela_ai_think() {
       link = spawn("script_origin", self.origin);
       self linkto(link);
       self ai_wait_current_anim(.20);
-      foreach(ent in level.anim_ai["favela"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["favela"])
+      ent ent_flag_clear("do_anim");
       flag_set("favela_done");
       break;
     case "favela_chaotic_standcover_gunjamB":
@@ -779,22 +754,20 @@ favela_ai_think() {
 }
 
 /************************************************************************************************************/
-
 /*												HALLWAY 1													*/
 /************************************************************************************************************/
-
 hallway1_main() {
   thread hallway1_camera_think();
 
-  array_thread(getEntArray("civ_hallway1_2", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_hallway1_2", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
 
   flag_wait("skip_vehicles");
 
   ai = get_living_ai_array("civ_talkers", "script_noteworthy");
   array_call(ai, ::delete);
-  array_thread(getEntArray("room3_civ_talkers", "targetname"), ::delaythread, .5, ::spawn_ai, true);
+  array_thread(getentarray("room3_civ_talkers", "targetname"), ::delaythread, .5, ::spawn_ai, true);
 
-  array_thread(getEntArray("civ_hallway1_3", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_hallway1_3", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
   flag_wait("hallway1_go");
 }
 
@@ -814,12 +787,10 @@ hallway1_camera_think() {
 }
 
 /************************************************************************************************************/
-
 /*												VEHICLES													*/
 /************************************************************************************************************/
-
 vehicles_main() {
-  array_thread(getEntArray("civ_vehicles_1", "script_noteworthy"), ::delaythread, 10, ::spawn_ai, true);
+  array_thread(getentarray("civ_vehicles_1", "script_noteworthy"), ::delaythread, 10, ::spawn_ai, true);
 
   thread vehicles_camera_think();
   flag_wait("vehicles_go");
@@ -840,14 +811,14 @@ vehicles_camera_think() {
 
   level.camera waittill("reached_end_node");
 
-  array_thread(getEntArray("civ_vehicles_2", "script_noteworthy"), ::delaythread, 2, ::spawn_ai, true);
+  array_thread(getentarray("civ_vehicles_2", "script_noteworthy"), ::delaythread, 2, ::spawn_ai, true);
 
   camera_move("camara_path_vehicles2", 20, .25, .75);
 
   wait 1.5;
 
-  array_thread(getEntArray("civ_vehicles_3", "script_noteworthy"), ::delaythread, 3.5, ::spawn_ai, true);
-  array_thread(getEntArray("civ_vehicles_4", "script_noteworthy"), ::delaythread, 10, ::spawn_ai, true);
+  array_thread(getentarray("civ_vehicles_3", "script_noteworthy"), ::delaythread, 3.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_vehicles_4", "script_noteworthy"), ::delaythread, 10, ::spawn_ai, true);
 
   camera_move("camara_path_vehicles3", 20, .75, .25);
   level.camera ResumeSpeed(2);
@@ -855,18 +826,16 @@ vehicles_camera_think() {
 }
 
 /************************************************************************************************************/
-
 /*												HALLWAY 2													*/
 /************************************************************************************************************/
-
 hallway2_main() {
   thread hallway2_camera_think();
 
   flag_wait("skip_vehicles_to");
   ai = get_living_ai_array("civ_talkers", "script_noteworthy");
   array_call(ai, ::delete);
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::delaythread, .5, ::spawn_ai, true);
-  array_thread(getEntArray("civ_hallway2_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::delaythread, .5, ::spawn_ai, true);
+  array_thread(getentarray("civ_hallway2_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
 
   flag_wait("hallway2_go");
 }
@@ -887,14 +856,12 @@ hallway2_camera_think() {
 }
 
 /************************************************************************************************************/
-
 /*													OILRIG													*/
 /************************************************************************************************************/
-
 oilrig_setup() {
   level.anim_ai["oilrig"] = [];
-  array_thread(getEntArray("ai_oilrig", "script_noteworthy"), ::add_spawn_function, ::oilrig_ai_setup);
-  array_thread(getEntArray("ai_oilrig", "script_noteworthy"), ::add_spawn_function, ::oilrig_ai_think);
+  array_thread(getentarray("ai_oilrig", "script_noteworthy"), ::add_spawn_function, ::oilrig_ai_setup);
+  array_thread(getentarray("ai_oilrig", "script_noteworthy"), ::add_spawn_function, ::oilrig_ai_think);
 }
 
 oilrig_main() {
@@ -903,13 +870,12 @@ oilrig_main() {
   flag_wait("oilrig_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["oilrig"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["oilrig"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_oilrig_1", "script_noteworthy"), ::delaythread, 12, ::spawn_ai, true);
+  array_thread(getentarray("civ_oilrig_1", "script_noteworthy"), ::delaythread, 12, ::spawn_ai, true);
   flag_wait("oilrig_done");
-  array_thread(getEntArray("civ_oilrig_2", "script_noteworthy"), ::delaythread, 1.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_oilrig_2", "script_noteworthy"), ::delaythread, 1.5, ::spawn_ai, true);
   wait 1.75;
   camera_move("camara_path_estate");
 }
@@ -933,14 +899,14 @@ oilrig_ai_setup() {
   wait .1;
   self ai_default_setup("oilrig");
   node = self.anim_node;
+
 }
 
 oilrig_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -949,16 +915,14 @@ oilrig_ai_think() {
   switch (node.animation) {
     case "roadkill_opening_foley":
       self ai_wait_current_anim(.73);
-      foreach(ent in level.anim_ai["oilrig"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["oilrig"])
+      ent ent_flag_clear("do_anim");
       flag_set("oilrig_done");
       break;
     case "roadkill_opening_shepherd":
       self ai_wait_current_anim(.83);
-      foreach(ent in level.anim_ai["oilrig"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["oilrig"])
+      ent ent_flag_clear("do_anim");
       flag_set("oilrig_done");
       break;
     case "oilrig_sub_B_idle_3":
@@ -971,14 +935,12 @@ oilrig_ai_think() {
 }
 
 /************************************************************************************************************/
-
 /*													ESTATE													*/
 /************************************************************************************************************/
-
 estate_setup() {
   level.anim_ai["estate"] = [];
-  array_thread(getEntArray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_setup);
-  array_thread(getEntArray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_think);
+  array_thread(getentarray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_setup);
+  array_thread(getentarray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_think);
   getent("bh_node", "target") estate_struct_setup();
 }
 
@@ -988,16 +950,15 @@ estate_main() {
   flag_wait("estate_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["estate"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["estate"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_estate_1", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
+  array_thread(getentarray("civ_estate_1", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
 
   flag_wait("estate_done");
   wait 2;
 
-  array_thread(getEntArray("civ_estate_2", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_estate_2", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
 
   camera_move("camara_path_hostage_mid", 55);
   level.camera ResumeSpeed(5);
@@ -1021,9 +982,8 @@ estate_camera_think() {
 }
 
 estate_ai_setup() {
-  if(isDefined(self.target) && self.target == "bh_ai_node") {
+  if(isdefined(self.target) && self.target == "bh_ai_node")
     self estate_bh_setup();
-  }
 
   self ai_default_setup("estate");
   node = self.anim_node;
@@ -1038,9 +998,8 @@ estate_ai_setup() {
     case "roadkill_cover_spotter":
     case "roadkill_cover_soldier":
     case "roadkill_cover_active_soldier2":
-      if(isai(self)) {
+      if(isai(self))
         self.a.pose = "crouch";
-      }
       break;
   }
 }
@@ -1048,9 +1007,8 @@ estate_ai_setup() {
 estate_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1060,9 +1018,8 @@ estate_ai_think() {
     case "bh_rope_drop_le":
     case "bh_6_drop":
       self ai_wait_current_anim(.936);
-      foreach(ent in level.anim_ai["estate"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["estate"])
+      ent ent_flag_clear("do_anim");
       flag_set("estate_done");
       break;
     default:
@@ -1074,32 +1031,29 @@ estate_ai_think() {
 estate_struct_setup() {
   helo = getent(self.target, "targetname");
 
-  node = spawnStruct();
-  if(level.level_mode == "free") {
+  node = spawnstruct();
+  if(level.level_mode == "free")
     node.origin = helo GetTagOrigin("TAG_DETACH") + (0, 0, -10);
-  } else {
+  else
     node.origin = helo GetTagOrigin("TAG_DETACH");
-  }
 
   node.angles = helo GetTagangles("TAG_DETACH");
   node.animation = "bh_6_drop";
   node.targetname = "bh_ai_node";
 
-  if(!isDefined(level.struct_class_names["targetname"][node.targetname])) {
+  if(!isdefined(level.struct_class_names["targetname"][node.targetname]))
     level.struct_class_names["targetname"][node.targetname] = [];
-  }
   size = level.struct_class_names["targetname"][node.targetname].size;
   level.struct_class_names["targetname"][node.targetname][size] = node;
 
-  node = spawnStruct();
+  node = spawnstruct();
   node.origin = helo GetTagOrigin("TAG_FASTROPE_LE") + (0, 0, .5);;
   node.angles = helo GetTagangles("TAG_FASTROPE_LE");
   node.animation = "bh_rope_drop_le";
   node.targetname = "bh_rope_node";
 
-  if(!isDefined(level.struct_class_names["targetname"][node.targetname])) {
+  if(!isdefined(level.struct_class_names["targetname"][node.targetname]))
     level.struct_class_names["targetname"][node.targetname] = [];
-  }
   size = level.struct_class_names["targetname"][node.targetname].size;
   level.struct_class_names["targetname"][node.targetname][size] = node;
 
@@ -1108,7 +1062,7 @@ estate_struct_setup() {
 
 estate_bh_setup() {
   rope = spawn("script_model", self.origin);
-  rope setModel("rope_test");
+  rope setmodel("rope_test");
 
   rope.target = "bh_rope_node";
   rope UseAnimTree(#animtree);
@@ -1121,30 +1075,26 @@ estate_bh_setup() {
 }
 
 /************************************************************************************************************/
-
 /*													HOSTAGE													*/
 /************************************************************************************************************/
-
 hostage_setup() {
   level.anim_ai["hostage"] = [];
-  array_thread(getEntArray("ai_hostage", "script_noteworthy"), ::add_spawn_function, ::hostage_ai_setup);
-  array_thread(getEntArray("ai_hostage", "script_noteworthy"), ::add_spawn_function, ::hostage_ai_think);
+  array_thread(getentarray("ai_hostage", "script_noteworthy"), ::add_spawn_function, ::hostage_ai_setup);
+  array_thread(getentarray("ai_hostage", "script_noteworthy"), ::add_spawn_function, ::hostage_ai_think);
 }
 
 hostage_main() {
-  if(level.start_point == "hostage") {
+  if(level.start_point == "hostage")
     level waittill("cam_hostage");
-  }
 
   thread hostage_camera_think();
 
   flag_wait("hostage_go");
 
-  foreach(ent in level.anim_ai["hostage"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["hostage"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_hostage_1", "script_noteworthy"), ::delaythread, 5, ::spawn_ai, true);
+  array_thread(getentarray("civ_hostage_1", "script_noteworthy"), ::delaythread, 5, ::spawn_ai, true);
 
   flag_wait("hostage_done");
   wait 1;
@@ -1166,9 +1116,8 @@ hostage_ai_setup() {
   switch (node.animation) {
     case "takedown_room1B_hostage":
       self.anim_mode = "gravity";
-      if(isai(self)) {
+      if(isai(self))
         self.a.pose = "crouch";
-      }
     case "takedown_room1B_soldier":
       self set_anim_time(node, .19);
       break;
@@ -1181,9 +1130,8 @@ hostage_ai_setup() {
 hostage_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1194,9 +1142,8 @@ hostage_ai_think() {
     case "takedown_room1B_soldier":
       self thread hostage_pose(node.animation);
       self ai_wait_current_anim(.74);
-      foreach(ent in level.anim_ai["hostage"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["hostage"])
+      ent ent_flag_clear("do_anim");
       flag_set("hostage_done");
       break;
     case "hostage_chair_dive":
@@ -1211,9 +1158,8 @@ hostage_ai_think() {
 hostage_pose(animation) {
   self endon("death");
 
-  if(!isai(self)) {
+  if(!isai(self))
     return;
-  }
 
   self ai_wait_current_anim(.39);
 
@@ -1245,23 +1191,20 @@ hostage_dive(animation) {
   self thread ai_current_anim_stop();
 
   self ai_next_anim( % hostage_chair_ground_idle);
-  if(isai(self)) {
+  if(isai(self))
     self.a.pose = "prone";
-  }
   self ai_next_anim( % hostage_chair_ground_idle);
   self ai_next_anim( % hostage_chair_ground_idle);
   self ai_next_anim( % hostage_chair_ground_idle);
 }
 
 /************************************************************************************************************/
-
 /*													TRAINER													*/
 /************************************************************************************************************/
-
 trainer_setup() {
   level.anim_ai["trainer"] = [];
-  array_thread(getEntArray("ai_trainer", "script_noteworthy"), ::add_spawn_function, ::trainer_ai_setup);
-  array_thread(getEntArray("ai_trainer", "script_noteworthy"), ::add_spawn_function, ::trainer_ai_think);
+  array_thread(getentarray("ai_trainer", "script_noteworthy"), ::add_spawn_function, ::trainer_ai_setup);
+  array_thread(getentarray("ai_trainer", "script_noteworthy"), ::add_spawn_function, ::trainer_ai_think);
 }
 
 trainer_main() {
@@ -1270,12 +1213,11 @@ trainer_main() {
   flag_wait("trainer_go");
   wait 2.5;
 
-  foreach(ent in level.anim_ai["trainer"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["trainer"])
+  ent ent_flag_set("do_anim");
 
   flag_wait("trainer_done");
-  array_thread(getEntArray("civ_trainer_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
+  array_thread(getentarray("civ_trainer_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
 
   wait 2;
   camera_move("camara_path_arcadia");
@@ -1325,9 +1267,8 @@ trainer_ai_setup() {
 trainer_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1338,9 +1279,8 @@ trainer_ai_think() {
     case "training_intro_translator_end":
     case "training_intro_foley_end":
       self ai_wait_current_anim(.50);
-      foreach(ent in level.anim_ai["trainer"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["trainer"])
+      ent ent_flag_clear("do_anim");
       flag_set("trainer_done");
       break;
     default:
@@ -1350,14 +1290,12 @@ trainer_ai_think() {
 }
 
 /************************************************************************************************************/
-
 /*													ARCADIA													*/
 /************************************************************************************************************/
-
 arcadia_setup() {
   level.anim_ai["arcadia"] = [];
-  array_thread(getEntArray("ai_arcadia", "script_noteworthy"), ::add_spawn_function, ::arcadia_ai_setup);
-  array_thread(getEntArray("ai_arcadia", "script_noteworthy"), ::add_spawn_function, ::arcadia_ai_think);
+  array_thread(getentarray("ai_arcadia", "script_noteworthy"), ::add_spawn_function, ::arcadia_ai_setup);
+  array_thread(getentarray("ai_arcadia", "script_noteworthy"), ::add_spawn_function, ::arcadia_ai_think);
 }
 
 arcadia_main() {
@@ -1366,11 +1304,10 @@ arcadia_main() {
   flag_wait("arcadia_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["arcadia"]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai["arcadia"])
+  ent ent_flag_set("do_anim");
 
-  array_thread(getEntArray("civ_arcadia_1", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
+  array_thread(getentarray("civ_arcadia_1", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
 
   flag_wait("arcadia_done");
 
@@ -1435,9 +1372,8 @@ arcadia_ai_setup() {
 arcadia_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1448,9 +1384,8 @@ arcadia_ai_think() {
     case "village_interrogationA_Price":
       self thread arcadia_pose(node.animation);
       self ai_wait_current_anim(.97);
-      foreach(ent in level.anim_ai["arcadia"]) {
-        ent ent_flag_clear("do_anim");
-      }
+      foreach(ent in level.anim_ai["arcadia"])
+      ent ent_flag_clear("do_anim");
       flag_set("arcadia_done");
       break;
     default:
@@ -1463,9 +1398,8 @@ arcadia_pose(animation) {
   self endon("panic_button");
   self endon("death");
 
-  if(!isai(self)) {
+  if(!isai(self))
     return;
-  }
 
   switch (animation) {
     case "village_interrogationA_Zak":
@@ -1480,10 +1414,8 @@ arcadia_pose(animation) {
 }
 
 /************************************************************************************************************/
-
 /*												BLACK CREDITS												*/
 /************************************************************************************************************/
-
 black_main() {
   thread maps\_credits::playCredits();
 
@@ -1499,10 +1431,8 @@ black_main() {
 }
 
 /************************************************************************************************************/
-
 /*											MUSEUM FREE ROAM												*/
 /************************************************************************************************************/
-
 museum_main() {
   // black screen while we do things in the background
   blackscreen_start();
@@ -1517,12 +1447,10 @@ museum_main() {
 
   set_console_status();
   if(level.Console) {
-    if(level.ps3) {
+    if(level.ps3)
       wait 9.0;
-    }
-    if(level.xenon) {
+    if(level.xenon)
       wait 6.0;
-    }
   } else {
     wait 2;
   }
@@ -1592,10 +1520,8 @@ museum_room2_anim_go() {
 }
 
 /************************************************************************************************************/
-
 /*												START POINTS												*/
 /************************************************************************************************************/
-
 start_common() {
   SetSavedDvar("hud_drawHUD", "0");
   SetSavedDvar("ammoCounterHide", "1");
@@ -1633,7 +1559,7 @@ start_common() {
   level.player delaycall(.1, ::freezecontrols, true);
   noself_delaycall(1, ::SetSavedDvar, "cg_fov", 45);
 
-  spawntrigs = getEntArray("spawntrig", "targetname");
+  spawntrigs = GetEntArray("spawntrig", "targetname");
   array_thread(spawntrigs, ::spawner_trig_think);
   ai_anim_setups();
 
@@ -1648,12 +1574,12 @@ player_lerp_eq() {
 }
 
 ai_anim_setups() {
-  array_thread(getEntArray("civ_talkers", "script_noteworthy"), ::add_spawn_function, ::civ_talkers);
-  array_thread(getEntArray("room1", "targetname"), ::set_diarama_ai);
-  array_thread(getEntArray("room2", "targetname"), ::set_diarama_ai);
-  array_thread(getEntArray("civilians", "targetname"), ::set_civilian_ai);
-  array_thread(getEntArray("civilians", "targetname"), ::add_spawn_function, ::delete_civ_on_goal);
-  array_thread(getEntArray("civ_talkers", "script_noteworthy"), ::set_civilian_ai);
+  array_thread(getentarray("civ_talkers", "script_noteworthy"), ::add_spawn_function, ::civ_talkers);
+  array_thread(getentarray("room1", "targetname"), ::set_diarama_ai);
+  array_thread(getentarray("room2", "targetname"), ::set_diarama_ai);
+  array_thread(getentarray("civilians", "targetname"), ::set_civilian_ai);
+  array_thread(getentarray("civilians", "targetname"), ::add_spawn_function, ::delete_civ_on_goal);
+  array_thread(getentarray("civ_talkers", "script_noteworthy"), ::set_civilian_ai);
 
   afcaves_setup();
   dcburning_setup();
@@ -1679,12 +1605,12 @@ start_free() {
 
   array_thread(level.players, ::museum_player_setup);
 
-  spawntrigs = getEntArray("spawntrig", "targetname");
+  spawntrigs = GetEntArray("spawntrig", "targetname");
   array_thread(spawntrigs, ::spawner_trig_think);
 
   ai_anim_setups();
 
-  array_thread(getEntArray("panic_button", "targetname"), ::panic_button);
+  array_thread(getentarray("panic_button", "targetname"), ::panic_button);
 }
 
 start_afcaves() {
@@ -1712,7 +1638,7 @@ start_airport() {
   wait .05;
   room1trig = GetEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
-  array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_cliffhanger() {
@@ -1722,7 +1648,7 @@ start_cliffhanger() {
   wait .05;
   room1trig = GetEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
-  array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_favela() {
@@ -1732,7 +1658,7 @@ start_favela() {
   wait .05;
   room1trig = GetEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
-  array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_hallway1() {
@@ -1742,7 +1668,7 @@ start_hallway1() {
   wait .05;
   room1trig = GetEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
-  array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_vehicles() {
@@ -1750,7 +1676,7 @@ start_vehicles() {
 
   flag_wait("museum_ready");
   wait .05;
-  array_thread(getEntArray("room3_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room3_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_hallway2() {
@@ -1767,7 +1693,7 @@ start_oilrig() {
   wait .05;
   room2trig = GetEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_estate() {
@@ -1777,7 +1703,7 @@ start_estate() {
   wait .05;
   room2trig = GetEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_hostage() {
@@ -1787,7 +1713,7 @@ start_hostage() {
   wait .05;
   room2trig = GetEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 
   camera_move("camara_path_hostage_mid", 500, 0, .05);
   level.camera ResumeSpeed(5);
@@ -1803,7 +1729,7 @@ start_trainer() {
   wait .05;
   room2trig = GetEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_arcadia() {
@@ -1813,7 +1739,7 @@ start_arcadia() {
   wait .05;
   room2trig = GetEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
-  array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
+  array_thread(getentarray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
 
 start_black() {
@@ -1836,9 +1762,8 @@ end_credits() {
   level.credits_speed = 25.5;
 
   thread maps\_credits::playCredits();
-  if(level.level_mode == "credits_1") {
+  if(level.level_mode == "credits_1")
     wait 3.5;
-  }
   thread fade_from_black();
 
   wait 290; //-> magic timing - do not change...change credit speed instead
@@ -1851,11 +1776,10 @@ end_credits() {
   thread music_stop(4);
   wait 5;
 
-  if(level.level_mode == "credits_1") {
+  if(level.level_mode == "credits_1")
     flag_set("af_chase_nextmission");
-  } else {
+  else
     nextmission();
-  }
 }
 
 fade_from_black() {

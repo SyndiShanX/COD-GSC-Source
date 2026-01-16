@@ -14,16 +14,16 @@ function autoexec main() {
   if(sessionmodeiszombiesgame() && getdvarint("splitscreen_playerCount") > 2) {
     return;
   }
-  ai::add_archetype_spawn_function("human", &secondaryanimationsinit);
-  ai::add_archetype_spawn_function("zombie", &secondaryanimationsinit);
-  ai::add_ai_spawn_function(&on_entity_spawn);
+  ai::add_archetype_spawn_function("human", & secondaryanimationsinit);
+  ai::add_archetype_spawn_function("zombie", & secondaryanimationsinit);
+  ai::add_ai_spawn_function( & on_entity_spawn);
 }
 
 function private secondaryanimationsinit(localclientnum) {
-  if(!isDefined(level.__facialanimationslist)) {
+  if(!isdefined(level.__facialanimationslist)) {
     buildandvalidatefacialanimationlist(localclientnum);
   }
-  self callback::on_shutdown(&on_entity_shutdown);
+  self callback::on_shutdown( & on_entity_shutdown);
   self thread secondaryfacialanimationthink(localclientnum);
 }
 
@@ -35,9 +35,9 @@ function private on_entity_spawn(localclientnum) {
 }
 
 function private on_entity_shutdown(localclientnum) {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("stopfacialthread");
-    if(isDefined(self.facialdeathanimstarted) && self.facialdeathanimstarted) {
+    if(isdefined(self.facialdeathanimstarted) && self.facialdeathanimstarted) {
       return;
     }
     self applydeathanim(localclientnum);
@@ -46,7 +46,7 @@ function private on_entity_shutdown(localclientnum) {
 }
 
 function buildandvalidatefacialanimationlist(localclientnum) {
-  assert(!isDefined(level.__facialanimationslist));
+  assert(!isdefined(level.__facialanimationslist));
   level.__facialanimationslist = [];
   level.__facialanimationslist["human"] = [];
   level.__facialanimationslist["human"]["combat"] = array("ai_face_male_generic_idle_1", "ai_face_male_generic_idle_2", "ai_face_male_generic_idle_3");
@@ -79,7 +79,7 @@ function buildandvalidatefacialanimationlist(localclientnum) {
 function private getfacialanimoverride(localclientnum) {
   if(sessionmodeiscampaigngame()) {
     primarydeltaanim = self getprimarydeltaanim();
-    if(isDefined(primarydeltaanim)) {
+    if(isdefined(primarydeltaanim)) {
       primarydeltaanimlength = getanimlength(primarydeltaanim);
       notetracks = getnotetracksindelta(primarydeltaanim, 0, 1);
       foreach(notetrack in notetracks) {
@@ -95,11 +95,11 @@ function private getfacialanimoverride(localclientnum) {
 }
 
 function private secondaryfacialanimationthink(localclientnum) {
-  assert(isDefined(self.archetype) && (self.archetype == "" || self.archetype == ""));
+  assert(isdefined(self.archetype) && (self.archetype == "" || self.archetype == ""));
   self endon("entityshutdown");
   self endon("stopfacialthread");
   self._currentfacestate = "inactive";
-  while(true) {
+  while (true) {
     if(self.archetype == "human" && self clientfield::get("facial_dial")) {
       self._currentfacestate = "inactive";
       self clearcurrentfacialanim(localclientnum);
@@ -114,13 +114,13 @@ function private secondaryfacialanimationthink(localclientnum) {
         return;
       }
       case "asm_status_inactive": {
-        if(isDefined(animoverride)) {
+        if(isdefined(animoverride)) {
           scriptedanim = self getprimarydeltaanim();
-          if(isDefined(scriptedanim) && (!isDefined(self._scriptedanim) || self._scriptedanim != scriptedanim)) {
+          if(isdefined(scriptedanim) && (!isdefined(self._scriptedanim) || self._scriptedanim != scriptedanim)) {
             self._scriptedanim = scriptedanim;
             forcenewanim = 1;
           }
-          if(isDefined(animoverride) && animoverride !== self._currentfaceanim) {
+          if(isdefined(animoverride) && animoverride !== self._currentfaceanim) {
             forcenewanim = 1;
           }
         } else {
@@ -134,7 +134,7 @@ function private secondaryfacialanimationthink(localclientnum) {
       }
     }
     closestplayer = arraygetclosest(self.origin, level.localplayers, getdvarint("ai_clientFacialCullDist", 2000));
-    if(!isDefined(closestplayer)) {
+    if(!isdefined(closestplayer)) {
       wait(0.5);
       continue;
     }
@@ -144,7 +144,7 @@ function private secondaryfacialanimationthink(localclientnum) {
     }
     currfacestate = self._currentfacestate;
     currentasmstate = self asmgetcurrentstate(localclientnum);
-    if(isDefined(currentasmstate)) {
+    if(isdefined(currentasmstate)) {
       currentasmstate = tolower(currentasmstate);
     }
     if(self asmisterminating(localclientnum)) {
@@ -153,10 +153,10 @@ function private secondaryfacialanimationthink(localclientnum) {
       if(asmstatus == "asm_status_inactive") {
         nextfacestate = "animscripted";
       } else {
-        if(isDefined(currentasmstate) && issubstr(currentasmstate, "pain")) {
+        if(isdefined(currentasmstate) && issubstr(currentasmstate, "pain")) {
           nextfacestate = "pain";
         } else {
-          if(isDefined(currentasmstate) && issubstr(currentasmstate, "melee")) {
+          if(isdefined(currentasmstate) && issubstr(currentasmstate, "melee")) {
             nextfacestate = "melee";
           } else {
             if(self asmisshootlayeractive(localclientnum)) {
@@ -173,10 +173,10 @@ function private secondaryfacialanimationthink(localclientnum) {
       }
     }
     if(currfacestate == "inactive" || currfacestate != nextfacestate || forcenewanim) {
-      assert(isDefined(level.__facialanimationslist[self.archetype][nextfacestate]));
+      assert(isdefined(level.__facialanimationslist[self.archetype][nextfacestate]));
       clearoncompletion = 0;
       animtoplay = array::random(level.__facialanimationslist[self.archetype][nextfacestate]);
-      if(isDefined(animoverride)) {
+      if(isdefined(animoverride)) {
         animtoplay = animoverride;
         assert(nextfacestate != "" || !isanimlooping(localclientnum, animtoplay), ("" + animtoplay) + "");
       }
@@ -192,7 +192,7 @@ function private secondaryfacialanimationthink(localclientnum) {
 
 function private applynewfaceanim(localclientnum, animation, clearoncompletion = 0) {
   clearcurrentfacialanim(localclientnum);
-  if(isDefined(animation)) {
+  if(isdefined(animation)) {
     self._currentfaceanim = animation;
     if(self hasdobj(localclientnum) && self hasanimtree()) {
       self setflaggedanimknob("ai_secondary_facial_anim", animation, 1, 0.1, 1);
@@ -205,16 +205,16 @@ function private applynewfaceanim(localclientnum, animation, clearoncompletion =
 }
 
 function private applydeathanim(localclientnum) {
-  if(isDefined(self._currentfacestate) && self._currentfacestate == "death") {
+  if(isdefined(self._currentfacestate) && self._currentfacestate == "death") {
     return;
   }
   if(getmigrationstatus(localclientnum)) {
     return;
   }
-  if(isDefined(self) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype]["death"])) {
+  if(isdefined(self) && isdefined(level.__facialanimationslist) && isdefined(level.__facialanimationslist[self.archetype]) && isdefined(level.__facialanimationslist[self.archetype]["death"])) {
     animtoplay = array::random(level.__facialanimationslist[self.archetype]["death"]);
     animoverride = self getfacialanimoverride(localclientnum);
-    if(isDefined(animoverride)) {
+    if(isdefined(animoverride)) {
       animtoplay = animoverride;
     }
     self._currentfacestate = "death";
@@ -223,7 +223,7 @@ function private applydeathanim(localclientnum) {
 }
 
 function private clearcurrentfacialanim(localclientnum) {
-  if(isDefined(self._currentfaceanim) && self hasdobj(localclientnum) && self hasanimtree()) {
+  if(isdefined(self._currentfaceanim) && self hasdobj(localclientnum) && self hasanimtree()) {
     self clearanim(self._currentfaceanim, 0.2);
   }
   self._currentfaceanim = undefined;

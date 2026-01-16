@@ -7,7 +7,7 @@
 #include xmodelalias\c_mul_cuban_forces_gear_als;
 
 main() {
-  self setModel("c_mul_cuban_forces_body1");
+  self setmodel("c_mul_cuban_forces_body1");
   self.headmodel = "c_mul_cuban_forces_head3";
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_mul_cuban_forces_gear_als::main());

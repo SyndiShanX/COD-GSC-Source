@@ -21,11 +21,10 @@ doorenterexitcheck() {
 
   var_1 = var_0.type == "Door Interior" || self comparenodedirtopathdir(var_0);
 
-  if(var_1) {
+  if(var_1)
     doorenter(var_0);
-  } else {
+  else
     doorexit(var_0);
-  }
 
   for(;;) {
     var_2 = self getdoorpathnode();
@@ -52,9 +51,8 @@ teamflashbangimmune() {
 dodoorgrenadethrow(var_0) {
   thread teamflashbangimmune();
 
-  if(self.grenadeweapon == "flash_grenade") {
+  if(self.grenadeweapon == "flash_grenade")
     self notify("flashbang_thrown");
-  }
 
   self orientmode("face current");
   var_0.nextdoorgrenadetime = gettime() + 5000;
@@ -80,9 +78,8 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
   var_7 = % cqb_stand_grenade_throw;
   var_8 = anglesToForward(var_0.angles);
 
-  if(var_0.type == "Door Interior" && !self comparenodedirtopathdir(var_0)) {
+  if(var_0.type == "Door Interior" && !self comparenodedirtopathdir(var_0))
     var_8 = -1 * var_8;
-  }
 
   var_9 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] + 64);
   var_10 = var_9;
@@ -92,11 +89,10 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
     var_12 = var_0.origin - self.origin;
     var_13 = vectordot(var_11, var_12);
 
-    if(var_13 > 20) {
+    if(var_13 > 20)
       var_13 = 20;
-    } else if(var_13 < -20) {
+    else if(var_13 < -20)
       var_13 = -20;
-    }
 
     var_10 = var_9 + var_13 * var_11;
   }
@@ -130,9 +126,8 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
       if(!var_5) {
         var_14 = var_9 + var_8 * 100;
 
-        if(!self isgrenadepossafe(self.enemy, var_14, 128)) {
+        if(!self isgrenadepossafe(self.enemy, var_14, 128))
           return;
-        }
       }
 
       var_5 = 1;
@@ -147,9 +142,8 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
     wait(var_4);
     var_15 = self getdoorpathnode();
 
-    if(!isDefined(var_15) || var_15 != var_0) {
+    if(!isDefined(var_15) || var_15 != var_0)
       return;
-    }
   }
 }
 
@@ -162,9 +156,9 @@ indoorcqbtogglecheck() {
   self.isindoor = 0;
 
   for(;;) {
-    if(self isindoor() && !self.doingambush) {
+    if(self isindoor() && !self.doingambush)
       doorenter_enable_cqbwalk();
-    } else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
+    else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
       self.minindoortime = undefined;
       doorexit_disable_cqbwalk();
     }
@@ -177,9 +171,8 @@ doorenter_enable_cqbwalk() {
   if(!isDefined(self.neverenablecqb) && !self.doingambush) {
     self.isindoor = 1;
 
-    if(!isDefined(self.cqbwalking) || !self.cqbwalking) {
+    if(!isDefined(self.cqbwalking) || !self.cqbwalking)
       maps\_utility::enable_cqbwalk(1);
-    }
   }
 }
 
@@ -187,9 +180,8 @@ doorexit_disable_cqbwalk() {
   if(!isDefined(self.cqbenabled)) {
     self.isindoor = 0;
 
-    if(isDefined(self.cqbwalking) && self.cqbwalking) {
+    if(isDefined(self.cqbwalking) && self.cqbwalking)
       maps\_utility::disable_cqbwalk();
-    }
   }
 }
 

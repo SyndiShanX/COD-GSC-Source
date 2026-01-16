@@ -8,6 +8,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\match;
+
 #namespace arena;
 
 autoexec __init__system__() {
@@ -25,7 +26,7 @@ __init__() {
 }
 
 on_connect() {
-  if(isDefined(self.pers[# "arenainit"]) && self.pers[# "arenainit"] == 1) {
+  if(isDefined(self.pers[#"arenainit"]) && self.pers[#"arenainit"] == 1) {
     return;
   }
 
@@ -36,11 +37,11 @@ on_connect() {
     self arenabeginmatch();
 
     if(function_945560bf() == 1) {
-      self.pers[# "hash_1b5251cc167039c8"] = self function_a200171d();
+      self.pers[#"hash_1b5251cc167039c8"] = self function_a200171d();
     }
   }
 
-  self.pers[# "arenainit"] = 1;
+  self.pers[#"arenainit"] = 1;
 }
 
 function_b856a952(team) {
@@ -50,12 +51,12 @@ function_b856a952(team) {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
 
-      if(isDefined(player.team) && player.team == team && !isDefined(player.pers[# "hash_6dbbb195b62e0dd3"])) {
-        if(isDefined(player.pers[# "arenainit"]) && player.pers[# "arenainit"] == 1) {
-          if(isDefined(player.pers[# "hash_1b5251cc167039c8"])) {
+      if(isDefined(player.team) && player.team == team && !isDefined(player.pers[#"hash_6dbbb195b62e0dd3"])) {
+        if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
+          if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
             player function_ca53535e(penalty);
-            player function_46445a75(player.pers[# "hash_1b5251cc167039c8"]);
-            player.pers[# "hash_6dbbb195b62e0dd3"] = 1;
+            player function_46445a75(player.pers[#"hash_1b5251cc167039c8"]);
+            player.pers[#"hash_6dbbb195b62e0dd3"] = 1;
           }
         }
       }
@@ -77,23 +78,23 @@ update_arena_challenge_seasons() {
 
   switch (eventtype) {
     case 0:
-      eventstate = # "rankedplaystats";
+      eventstate = #"rankedplaystats";
       break;
     case 1:
-      eventstate = # "leagueplaystats";
+      eventstate = #"leagueplaystats";
       break;
     case 4:
-      eventstate = # "hash_4986c748eb81d3c5";
+      eventstate = #"hash_4986c748eb81d3c5";
       break;
     default:
       return;
   }
 
-  perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, # "matchesstats", # "wins");
+  perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, #"matchesstats", #"wins");
 
   if(perseasonwins >= getdvarint(#"arena_seasonvetchallengewins", 0)) {
     arenaslot = arenagetslot();
-    currentseason = self stats::get_stat(#"arenastats", arenaslot, # "season");
+    currentseason = self stats::get_stat(#"arenastats", arenaslot, #"season");
     seasonvetchallengearraycount = self getdstatarraycount("arenaChallengeSeasons");
 
     for(i = 0; i < seasonvetchallengearraycount; i++) {
@@ -115,7 +116,7 @@ match_end() {
   for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
 
-    if(isDefined(player.pers[# "arenainit"]) && player.pers[# "arenainit"] == 1) {
+    if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
       if(match::get_flag("tie")) {
         player arenaendmatch(0);
       } else if(match::function_a2b53e17(player)) {
@@ -124,8 +125,8 @@ match_end() {
         player arenaendmatch(-1);
       }
 
-      if(isDefined(player.pers[# "hash_1b5251cc167039c8"])) {
-        player function_46445a75(player.pers[# "hash_1b5251cc167039c8"]);
+      if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+        player function_46445a75(player.pers[#"hash_1b5251cc167039c8"]);
       }
     }
   }
@@ -135,7 +136,7 @@ match_end() {
     return;
   }
 
-  if(game.outcome.team == # "allies") {
+  if(game.outcome.team == #"allies") {
     function_a357a2b8(1);
     return;
   }

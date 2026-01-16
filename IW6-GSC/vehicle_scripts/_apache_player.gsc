@@ -186,20 +186,18 @@ overrideaishot(var_0) {
 shootposwrapper(var_0, var_1) {
   self.a.lastshoottime = gettime();
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
   self notify("shooting");
   shootblankorrpg(var_0, var_1);
 }
 
 shootblankorrpg(var_0, var_1) {
-  if(weaponclass(self.weapon) == "rocketlauncher") {
+  if(weaponclass(self.weapon) == "rocketlauncher")
     self shoot(1, var_0, var_1);
-  } else {
+  else
     self shootblank(1, var_0, var_1);
-  }
 }
 
 _battlechatter_off() {
@@ -256,29 +254,23 @@ _end() {
   level.cover_warnings_disabled = var_0.cover_warnings_disabled;
   level.treadfx_maxheight = var_0.treadfx_maxheight;
 
-  if(isDefined(var_0.g_friendlynamedist)) {
+  if(isDefined(var_0.g_friendlynamedist))
     setsaveddvar("g_friendlyNameDist", var_0.g_friendlynamedist);
-  }
 
-  if(isDefined(var_0.hud_showstance)) {
+  if(isDefined(var_0.hud_showstance))
     setsaveddvar("hud_showStance", var_0.hud_showstance);
-  }
 
-  if(isDefined(var_0.compass)) {
+  if(isDefined(var_0.compass))
     setsaveddvar("compass", var_0.compass);
-  }
 
-  if(isDefined(var_0.ammocounterhide)) {
+  if(isDefined(var_0.ammocounterhide))
     setsaveddvar("ammoCounterHide", var_0.ammocounterhide);
-  }
 
-  if(isDefined(var_0.hud_fade_ammodisplay)) {
+  if(isDefined(var_0.hud_fade_ammodisplay))
     setsaveddvar("hud_fade_ammodisplay", var_0.hud_fade_ammodisplay);
-  }
 
-  if(isDefined(var_0.hud_fade_stance)) {
+  if(isDefined(var_0.hud_fade_stance))
     setsaveddvar("hud_fade_stance", var_0.hud_fade_stance);
-  }
 
   level.friendlyfire["max_participation"] = var_0.friendlyfire_max_participation;
 
@@ -484,17 +476,15 @@ monitoraltitude() {
     var_16 = bulletTrace(var_14, var_15, 0);
     var_17 = var_16["position"][2];
 
-    if(abs(var_17 - var_15[2]) <= 0.2) {
+    if(abs(var_17 - var_15[2]) <= 0.2)
       var_17 = var_5;
-    }
 
     if(var_13 != var_17) {
       var_13 = var_17;
       var_18 = var_17 - var_4;
 
-      if(isDefined(self.alt_override)) {
+      if(isDefined(self.alt_override))
         var_18 = max(var_18, self.alt_override);
-      }
 
       setsaveddvar("vehHelicopterMinAltitude", var_18);
       setsaveddvar("vehHelicopterMaxAltitude", var_18);
@@ -525,9 +515,8 @@ altitude_override_over_time(var_0, var_1) {
   self endon("LISTEN_heli_end");
 
   if(isDefined(var_1) && var_1 > 0) {
-    if(!isDefined(self.alt_override)) {
+    if(!isDefined(self.alt_override))
       self.alt_override = get_altitude_min();
-    }
 
     var_1 = max(var_1, 0.05);
     var_2 = self.alt_override;
@@ -607,13 +596,11 @@ monitorcockpitanims() {
 
       foreach(var_9 in var_5) {
         if(!var_0.cockpit_tubes.jiggle_disabled[var_9]) {
-          if(isDefined(var_0.cockpit_tubes.anims_curr[var_9])) {
+          if(isDefined(var_0.cockpit_tubes.anims_curr[var_9]))
             var_0.cockpit_tubes clearanim(var_0.cockpit_tubes.anims_curr[var_9], 0.2);
-          }
 
-          if(isDefined(var_6[var_9])) {
+          if(isDefined(var_6[var_9]))
             var_0.cockpit_tubes setanim(var_6[var_9], 1, 0.2, 1.0);
-          }
         }
       }
 
@@ -731,11 +718,10 @@ monitorhealth() {
         case "STATE_REGEN":
         case "STATE_PAIN":
         case "STATE_FULL":
-          if(apache_health_get() == 0) {
+          if(apache_health_get() == 0)
             var_4 = "STATE_INVULN";
-          } else {
+          else
             var_4 = "STATE_PAIN";
-          }
 
           break;
         case "STATE_INVULN":
@@ -780,9 +766,8 @@ apache_health_state_think(var_0) {
       wait 4.0;
       break;
     case "STATE_REGEN":
-      if(apache_health_pct_get() < 0.4) {
+      if(apache_health_pct_get() < 0.4)
         apache_health_pct_set(0.4);
-      }
 
       var_1 = int(max((apache_health_max_get() - apache_health_get()) / 200.0, 1));
 
@@ -858,15 +843,13 @@ monitorhealth_ondamage() {
         var_19 = 1 - (var_18 - var_17) / (var_16 - var_17);
         var_20 = level.apache_player_difficulty.dmg_bullet_chance_player_evade + (level.apache_player_difficulty.dmg_bullet_chance_player_static - level.apache_player_difficulty.dmg_bullet_chance_player_static) * var_19;
 
-        if(randomfloat(1.0) >= var_20) {
+        if(randomfloat(1.0) >= var_20)
           continue;
-        }
       }
     }
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       self playSound("apache_impact");
-    }
 
     var_21 = undefined;
 
@@ -886,9 +869,8 @@ monitorhealth_ondamage() {
         break;
     }
 
-    if(isDefined(var_13) && var_13 == "hind_turret") {
+    if(isDefined(var_13) && var_13 == "hind_turret")
       var_21 = var_2;
-    }
 
     self.apache_dmg_time = var_14;
     self.apache_dmg_recent = var_21;
@@ -926,11 +908,10 @@ monitorhealth_ondeath() {
     common_scripts\utility::waittill_any_timeout_no_endon_death(var_1, "crash_done");
   }
 
-  if(isDefined(level.lastplayerapachedamage) && gettime() - level.lastplayerapachedamage < 4000) {
-    maps\_player_death::grenade_death_hint(&"OILROCKS_KILLED_BY_MISSILE", &"OILROCKS_HINT_APACHE_FLARES");
-  } else {
+  if(isDefined(level.lastplayerapachedamage) && gettime() - level.lastplayerapachedamage < 4000)
+    maps\_player_death::grenade_death_hint(&"OILROCKS_KILLED_BY_MISSILE", & "OILROCKS_HINT_APACHE_FLARES");
+  else
     setdvar("ui_deadquote", "");
-  }
 
   maps\_utility::missionfailedwrapper();
 }
@@ -942,18 +923,16 @@ monitorhealth_ondeath_apache_crash() {
   self.perferred_crash_location.script_parameters = "direct";
   self.perferred_crash_location.radius = 60;
 
-  if(self vehicle_getspeed() > 40) {
+  if(self vehicle_getspeed() > 40)
     self vehicle_setspeedimmediate(40);
-  }
 
   var_2 = 600;
   var_3 = bulletTrace(self.origin - 160, self.origin - (0, 0, var_2), 0, self);
 
-  if(var_3["fraction"] > 0.98) {
+  if(var_3["fraction"] > 0.98)
     self.perferred_crash_location.origin = self.origin - (0, 0, var_2);
-  } else {
+  else
     self.perferred_crash_location.origin = self.origin + (0, 0, var_2);
-  }
 
   maps\_vehicle_code::helicopter_crash_move();
 }
@@ -977,9 +956,8 @@ monitorhealth_damagestates_cleanup() {
   var_0 = self;
   var_1 = self.heli;
 
-  foreach(var_3 in var_1.damage_states) {
-    var_3 damage_state_clear(0);
-  }
+  foreach(var_3 in var_1.damage_states)
+  var_3 damage_state_clear(0);
 
   var_0 damage_state_tag_ent_clear_all();
 }
@@ -1035,9 +1013,8 @@ monitorhealth_damagestates() {
     if(var_8 < var_6 || var_8 <= 0) {
       var_10 = var_9 damage_state_quake(var_7);
 
-      if(var_10) {
+      if(var_10)
         var_7 = gettime();
-      }
     }
 
     var_6 = var_8;
@@ -1097,9 +1074,8 @@ damage_state_build(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 damage_state_apply(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   foreach(var_3 in self.fx_array) {
     if(var_3["perm"] && self.perm_on) {
@@ -1123,15 +1099,13 @@ damage_state_apply(var_0, var_1) {
     if(self.prt_array[var_7]["activations"] > 0) {
       continue;
     }
-    if(isDefined(var_6["tag_hide"])) {
+    if(isDefined(var_6["tag_hide"]))
       self.vehicle hidepart(var_6["tag_hide"]);
-    }
 
     self.vehicle showpart(var_6["tag_show"]);
 
-    if(isDefined(var_6["sound"])) {
+    if(isDefined(var_6["sound"]))
       self.vehicle thread maps\_utility::play_sound_on_tag(var_6["sound"], var_6["tag_show"]);
-    }
   }
 
   foreach(var_9 in self.snd_array) {
@@ -1149,17 +1123,14 @@ damage_state_apply(var_0, var_1) {
     self.vehicle thread maps\_utility::play_sound_on_tag(var_9["alias"], var_9["tag"]);
   }
 
-  if(!var_1 && !var_0 && isDefined(self.distort_pct) && isDefined(self.distort_time)) {
+  if(!var_1 && !var_0 && isDefined(self.distort_pct) && isDefined(self.distort_time))
     self.vehicle.heli.owner digitaldistortsetparams(self.distort_pct, self.distort_time);
-  }
 
-  if(!self.perm_on) {
+  if(!self.perm_on)
     self.perm_on = 1;
-  }
 
-  if(!var_0 && !self.temp_on) {
+  if(!var_0 && !self.temp_on)
     self.temp_on = 1;
-  }
 }
 
 damage_state_clear(var_0) {
@@ -1182,9 +1153,8 @@ damage_state_clear(var_0) {
     }
     self.prt_array[var_6]["activations"]++;
 
-    if(isDefined(var_5["tag_hide"])) {
+    if(isDefined(var_5["tag_hide"]))
       self.vehicle showpart(var_5["tag_hide"]);
-    }
 
     self.vehicle hidepart(var_5["tag_show"]);
   }
@@ -1202,17 +1172,14 @@ damage_state_clear(var_0) {
     self.vehicle notify("stop sound" + var_8["alias"]);
   }
 
-  if(isDefined(self.distort_pct) && isDefined(self.distort_time)) {
+  if(isDefined(self.distort_pct) && isDefined(self.distort_time))
     self.vehicle.heli.owner digitaldistortsetparams(0.0, 0.0);
-  }
 
-  if(self.perm_on && !var_0) {
+  if(self.perm_on && !var_0)
     self.perm_on = 0;
-  }
 
-  if(self.temp_on) {
+  if(self.temp_on)
     self.temp_on = 0;
-  }
 }
 
 damage_state_quake(var_0) {
@@ -1244,15 +1211,13 @@ damage_state_prt_add(var_0, var_1, var_2, var_3, var_4) {
   var_5["tag_show"] = var_0;
   var_5["perm"] = var_1;
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_5["tag_hide"] = var_2;
-  }
 
   var_5["activations"] = common_scripts\utility::ter_op(isDefined(var_3), int(max(var_3, 1)), 1);
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_5["sound"] = var_4;
-  }
 
   self.prt_array[self.prt_array.size] = var_5;
 }
@@ -1271,21 +1236,18 @@ damage_state_notify_add(var_0) {
 }
 
 damage_state_notify_send_enter() {
-  if(isDefined(self.notify_msg)) {
+  if(isDefined(self.notify_msg))
     self.vehicle notify("LISTEN_apache_damage_state_enter", self.notify_msg);
-  }
 }
 
 damage_state_notify_send_exit() {
-  if(isDefined(self.notify_msg)) {
+  if(isDefined(self.notify_msg))
     self.vehicle notify("LISTEN_apache_damage_state_exit", self.notify_msg);
-  }
 }
 
 damage_state_tag_ent_get(var_0) {
-  if(!isDefined(self.vehicle.damage_state_tag_ents)) {
+  if(!isDefined(self.vehicle.damage_state_tag_ents))
     self.vehicle.damage_state_tag_ents = [];
-  }
 
   if(!isDefined(self.vehicle.damage_state_tag_ents[var_0])) {
     var_1 = common_scripts\utility::spawn_tag_origin();
@@ -1300,9 +1262,8 @@ damage_state_tag_ent_get(var_0) {
 
 damage_state_tag_ent_clear_all() {
   if(isDefined(self.damage_state_tag_ents)) {
-    foreach(var_1 in self.damage_state_tag_ents) {
-      var_1 delete();
-    }
+    foreach(var_1 in self.damage_state_tag_ents)
+    var_1 delete();
 
     self.damage_state_tag_ents = undefined;
   }
@@ -1398,17 +1359,14 @@ hud_set_target_default(var_0) {
 }
 
 getteam() {
-  if(isturret(self) && isDefined(self.script_team)) {
+  if(isturret(self) && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(maps\_vehicle::isvehicle() && isDefined(self.script_team)) {
+  if(maps\_vehicle::isvehicle() && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(isDefined(self.team)) {
+  if(isDefined(self.team))
     return self.team;
-  }
 
   return "none";
 }

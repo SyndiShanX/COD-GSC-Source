@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  self setModel("c_usa_secserv_body");
+  self setmodel("c_usa_secserv_body");
   self.headmodel = "c_usa_secserv_head_medium";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_usa_secserv_gear_medium";

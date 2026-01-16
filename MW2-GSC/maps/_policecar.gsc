@@ -26,7 +26,9 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {}
+init_local() {
+
+}
 
 //MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 set_vehicle_anims(positions) {
@@ -36,11 +38,11 @@ set_vehicle_anims(positions) {
   //tag_guy0(behind driver)
   //tag_guy1(behind passenger)	
 
-  //positions[ 0 ].sittag = "tag_driver";
+  //positions[ 0 ].sittag = "tag_driver"; 
   //positions[ 1 ].sittag = "tag_passenger";
   //positions[ 2 ].sittag = "tag_guy0"; //driver_side_rear
   //positions[ 3 ].sittag = "tag_guy1";//passenger_side_rear
-  //positions[ 4 ].sittag = "tag_guy2"; //driver_far_rear
+  //positions[ 4 ].sittag = "tag_guy2"; //driver_far_rear 
   //positions[ 5 ].sittag = "tag_guy3";//passenger_side_far_rear
 
   positions[0].vehicle_getoutanim = % uaz_driver_exit_into_stand_door;
@@ -74,10 +76,10 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 //MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 setanims() {
+
   positions = [];
-  for(i = 0; i < 6; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 6; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -104,6 +106,7 @@ setanims() {
   positions[3].getin = % uaz_passenger2_enter_from_huntedrun;
 
   return positions;
+
 }
 
 /*QUAKED script_vehicle_policecar_lapd (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER

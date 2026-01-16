@@ -12,6 +12,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\voice\voice_events;
+
 #namespace callback;
 
 callback(event, params) {
@@ -766,7 +767,7 @@ finishcustomtraversallistener() {
   self endon(#"death");
   self waittillmatch({
     #notetrack: "end"
-  }, # "custom_traversal_anim_finished");
+  }, #"custom_traversal_anim_finished");
   self finishtraversal();
   self unlink();
   self.usegoalanimweight = 0;
@@ -823,7 +824,7 @@ event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
 
   index = level.menuresponsequeue.size;
   level.menuresponsequeue[index] = {
-    #ent: self,
+    #ent: self, 
     #eventstruct: eventstruct
   };
   level notify(#"menuresponse_queue");
@@ -937,7 +938,7 @@ abort_level() {
 
 event_handler[glass_smash] codecallback_glasssmash(eventstruct) {
   level notify(#"glass_smash", {
-    #position: eventstruct.position,
+    #position: eventstruct.position, 
     #direction: eventstruct.direction
   });
 }

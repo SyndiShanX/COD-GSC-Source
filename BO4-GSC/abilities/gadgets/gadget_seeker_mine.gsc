@@ -5,6 +5,7 @@
 
 #include scripts\abilities\ability_player;
 #include scripts\core_common\system_shared;
+
 #namespace gadget_seeker_mine;
 
 autoexec __init__system__() {

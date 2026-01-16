@@ -13,11 +13,10 @@ init() {
 }
 
 turret_microwave_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     self thread turret_microwave_sound_start(localclientnum);
-  } else if(newval == 0) {
+  else if(newval == 0)
     self notify("sound_stop");
-  }
 }
 
 turret_microwave_sound_start(localclientnum) {
@@ -25,19 +24,19 @@ turret_microwave_sound_start(localclientnum) {
   self endon("sound_stop");
   origin = self gettagorigin("tag_flash");
   angles = self gettagangles("tag_flash");
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   forward = vectorscale(forward, 750);
-  trace = bulletTrace(origin, origin + forward, 0, self);
+  trace = bullettrace(origin, origin + forward, 0, self);
   start = origin;
   end = trace["position"];
   self thread turret_microwave_sound_off_waiter(localclientnum, start, end);
-  self playSound(0, "wpn_micro_turret_start");
+  self playsound(0, "wpn_micro_turret_start");
   soundlineemitter("wpn_micro_turret_loop", start, end);
 }
 
 turret_microwave_sound_off_waiter(localclientnum, start, end) {
   self waittill_any("sound_stop", "entityshutdown");
-  playSound(0, "wpn_micro_turret_stop", start);
+  playsound(0, "wpn_micro_turret_stop", start);
   soundstoplineemitter("wpn_micro_turret_loop", start, end);
 }
 

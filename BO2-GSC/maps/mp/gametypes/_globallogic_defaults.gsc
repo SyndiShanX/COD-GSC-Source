@@ -14,11 +14,10 @@
 #include maps\mp\gametypes\_rank;
 
 getwinningteamfromloser(losing_team) {
-  if(level.multiteam) {
+  if(level.multiteam)
     return "tie";
-  } else if(losing_team == "axis") {
+  else if(losing_team == "axis")
     return "allies";
-  }
 
   return "axis";
 }
@@ -33,7 +32,7 @@ default_onforfeit(team) {
   wait 10.0;
   announcement(game["strings"]["opponent_forfeiting_in"], 10.0, 0);
   wait 10.0;
-  endreason = &"";
+  endreason = & "";
 
   if(level.multiteam) {
     setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
@@ -55,11 +54,10 @@ default_onforfeit(team) {
 
   level.forcedend = 1;
 
-  if(isplayer(winner)) {
+  if(isplayer(winner))
     logstring("forfeit, win: " + winner getxuid() + "(" + winner.name + ")");
-  } else {
+  else
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("forfeit", winner);
-  }
 
   thread maps\mp\gametypes\_globallogic::endgame(winner, endreason);
 }
@@ -78,11 +76,10 @@ default_ondeadevent(team) {
     setdvar("ui_text_endreason", game["strings"]["tie"]);
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("tie");
 
-    if(level.teambased) {
+    if(level.teambased)
       thread maps\mp\gametypes\_globallogic::endgame("tie", game["strings"]["tie"]);
-    } else {
+    else
       thread maps\mp\gametypes\_globallogic::endgame(undefined, game["strings"]["tie"]);
-    }
   }
 }
 
@@ -100,15 +97,15 @@ default_onlastteamaliveevent(team) {
     setdvar("ui_text_endreason", game["strings"]["tie"]);
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("tie");
 
-    if(level.teambased) {
+    if(level.teambased)
       thread maps\mp\gametypes\_globallogic::endgame("tie", game["strings"]["tie"]);
-    } else {
+    else
       thread maps\mp\gametypes\_globallogic::endgame(undefined, game["strings"]["tie"]);
-    }
   }
 }
 
-default_onalivecountchange(team) {}
+default_onalivecountchange(team) {
+}
 
 default_onroundendgame(winner) {
   return winner;
@@ -118,13 +115,12 @@ default_ononeleftevent(team) {
   if(!level.teambased) {
     winner = maps\mp\gametypes\_globallogic_score::gethighestscoringplayer();
 
-    if(isDefined(winner)) {
+    if(isDefined(winner))
       logstring("last one alive, win: " + winner.name);
-    } else {
+    else
       logstring("last one alive, win: unknown");
-    }
 
-    thread maps\mp\gametypes\_globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
+    thread maps\mp\gametypes\_globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
@@ -149,11 +145,10 @@ default_ontimelimit() {
   } else {
     winner = maps\mp\gametypes\_globallogic_score::gethighestscoringplayer();
 
-    if(isDefined(winner)) {
+    if(isDefined(winner))
       logstring("time limit, win: " + winner.name);
-    } else {
+    else
       logstring("time limit, tie");
-    }
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["time_limit_reached"]);
@@ -162,9 +157,8 @@ default_ontimelimit() {
 }
 
 default_onscorelimit() {
-  if(!level.endgameonscorelimit) {
+  if(!level.endgameonscorelimit)
     return false;
-  }
 
   winner = undefined;
 
@@ -174,11 +168,10 @@ default_onscorelimit() {
   } else {
     winner = maps\mp\gametypes\_globallogic_score::gethighestscoringplayer();
 
-    if(isDefined(winner)) {
+    if(isDefined(winner))
       logstring("scorelimit, win: " + winner.name);
-    } else {
+    else
       logstring("scorelimit, tie");
-    }
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["score_limit_reached"]);
@@ -194,7 +187,7 @@ default_onspawnspectator(origin, angles) {
   }
 
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getEntArray(spawnpointname, "classname");
+  spawnpoints = getentarray(spawnpointname, "classname");
   assert(spawnpoints.size, "There are no mp_global_intermission spawn points in the map.There must be at least one.");
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(spawnpoints);
   self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -202,12 +195,12 @@ default_onspawnspectator(origin, angles) {
 
 default_onspawnintermission() {
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getEntArray(spawnpointname, "classname");
+  spawnpoints = getentarray(spawnpointname, "classname");
   spawnpoint = spawnpoints[0];
 
-  if(isDefined(spawnpoint)) {
+  if(isDefined(spawnpoint))
     self spawn(spawnpoint.origin, spawnpoint.angles);
-  } else {
+  else {
     maps\mp\_utility::error("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
 
   }
@@ -221,13 +214,11 @@ default_getteamkillpenalty(einflictor, attacker, smeansofdeath, sweapon) {
   teamkill_penalty = 1;
   score = maps\mp\gametypes\_globallogic_score::_getplayerscore(attacker);
 
-  if(score == 0) {
+  if(score == 0)
     teamkill_penalty = 2;
-  }
 
-  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sweapon)) {
+  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sweapon))
     teamkill_penalty = teamkill_penalty * maps\mp\killstreaks\_killstreaks::getkillstreakteamkillpenaltyscale(sweapon);
-  }
 
   return teamkill_penalty;
 }

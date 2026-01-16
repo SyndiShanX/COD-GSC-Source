@@ -53,13 +53,13 @@ aud_player_falls() {
   soundscripts\_audio_zone_manager::azm_set_filter_bypass(1);
   soundscripts\_snd_filters::snd_fade_in_filter("blur_event_filter", 0.5);
 
-  if(!isDefined(level.heartbeat_ent)) {
+  if(!isdefined(level.heartbeat_ent)) {
     level.heartbeat_ent = spawn("script_origin", level.player.origin);
     level.heartbeat_ent linkto(level.player);
   }
 
   level.heartbeat_ent stoploopsound();
-  level.player playSound("h1_heartbeat_fall");
+  level.player playsound("h1_heartbeat_fall");
   level.player thread maps\_utility::play_sound_on_entity("scn_player_fall_impact");
 }
 
@@ -87,11 +87,10 @@ aud_start_mix_player_dying() {
 }
 
 aud_player_walking_foley(var_0) {
-  if(var_0 == "crouch") {
+  if(var_0 == "crouch")
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_prone_gravel_aftermath");
-  } else if(var_0 == "prone") {
+  else if(var_0 == "prone")
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_prone_plr_gravel_aftermath");
-  } else {
+  else
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_crchwalk_plr_gravel_aftermath");
-  }
 }

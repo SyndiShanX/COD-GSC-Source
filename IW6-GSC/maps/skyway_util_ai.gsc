@@ -6,56 +6,48 @@
 ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
 
-  if(isarray(self)) {
+  if(isarray(self))
     var_6 = self;
-  } else {
+  else
     var_6[0] = self;
-  }
 
   level notify(var_0 + "kill");
   level endon(var_0 + "kill");
 
-  if(!common_scripts\utility::flag_exist("flag_allies_moving")) {
+  if(!common_scripts\utility::flag_exist("flag_allies_moving"))
     common_scripts\utility::flag_init("flag_allies_moving");
-  }
 
-  if(!common_scripts\utility::flag_exist("flag_allies_player_near")) {
+  if(!common_scripts\utility::flag_exist("flag_allies_player_near"))
     common_scripts\utility::flag_init("flag_allies_player_near");
-  }
 
   var_7 = getent(var_0, "script_noteworthy");
 
-  if(!isDefined(var_7)) {
+  if(!isDefined(var_7))
     var_7 = getent(var_0, "targetname");
-  }
 
   var_8 = 1;
 
-  if(isDefined(var_5) && var_5) {
+  if(isDefined(var_5) && var_5)
     var_8 = 0;
-  }
 
   if(isDefined(var_2)) {}
 
   var_9 = [];
 
   for(;;) {
-    if(isDefined(var_7.script_parameters)) {
+    if(isDefined(var_7.script_parameters))
       var_7._delay = float(var_7.script_parameters);
-    } else {
+    else
       var_7._delay = 0;
-    }
 
-    if(isDefined(var_7.script_namenumber)) {
+    if(isDefined(var_7.script_namenumber))
       var_7._enemy_num = int(var_7.script_namenumber);
-    }
 
     var_7._linked_triggers = [];
     var_9 = common_scripts\utility::array_add(var_9, var_7);
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_7.flag_end = var_2;
-    }
 
     if(isDefined(var_7.target)) {
       var_10 = getEntArray(var_7.target, "targetname");
@@ -87,9 +79,8 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
     break;
   }
 
-  if(!isDefined(level._ally_trigs)) {
+  if(!isDefined(level._ally_trigs))
     level._ally_trigs = [];
-  }
 
   level._ally_trigs[var_0] = var_9;
   common_scripts\utility::flag_set("flag_allies_player_near");
@@ -99,20 +90,17 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_9[var_15];
     var_7._index = var_15;
 
-    if(!isDefined(var_7.flag_end) || isDefined(var_7.flag_end) && !common_scripts\utility::flag(var_7.flag_end)) {
+    if(!isDefined(var_7.flag_end) || isDefined(var_7.flag_end) && !common_scripts\utility::flag(var_7.flag_end))
       var_6 ally_advance(var_7, var_1);
-    }
 
-    if(var_15 == 0) {
+    if(var_15 == 0)
       common_scripts\utility::flag_set(var_0);
-    }
 
     if(var_8 || isDefined(var_7.flag_end) && common_scripts\utility::flag(var_7.flag_end)) {
       if(isDefined(var_7._linked_triggers)) {
         foreach(var_17 in var_7._linked_triggers) {
-          if(isDefined(var_17) && !issubstr(var_17.classname, "friendly")) {
+          if(isDefined(var_17) && !issubstr(var_17.classname, "friendly"))
             var_17 delete();
-          }
         }
       }
 
@@ -121,31 +109,27 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(var_3)) {
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       self[[var_3]](var_4);
-    } else {
+    else
       self[[var_3]]();
-    }
   }
 }
 
 ally_advance(var_0, var_1) {
-  if(isDefined(var_0.flag_end)) {
+  if(isDefined(var_0.flag_end))
     level endon(var_0.flag_end);
-  }
 
   var_0 thread waittill_trig_or_time_out();
 
-  if(isDefined(var_1) && isDefined(var_0._enemy_num)) {
+  if(isDefined(var_1) && isDefined(var_0._enemy_num))
     var_0 thread waittill_enemy_num_remaining(var_1);
-  }
 
   var_0 waittill("trigger");
 
   if(var_0._linked_triggers.size > 0) {
-    foreach(var_3 in var_0._linked_triggers) {
-      var_3 notify("trigger");
-    }
+    foreach(var_3 in var_0._linked_triggers)
+    var_3 notify("trigger");
   }
 
   var_0 thread waittill_allies_at_goal(self);
@@ -153,9 +137,8 @@ ally_advance(var_0, var_1) {
 }
 
 waittill_trig_or_time_out() {
-  if(isDefined(self.flag_end)) {
+  if(isDefined(self.flag_end))
     level endon(self.flag_end);
-  }
 
   waittill_time_out();
   common_scripts\utility::flag_wait("flag_allies_player_near");
@@ -165,33 +148,29 @@ waittill_trig_or_time_out() {
 waittill_time_out() {
   self endon("trigger");
 
-  if(isDefined(self.flag_end)) {
+  if(isDefined(self.flag_end))
     level endon(self.flag_end);
-  }
 
   common_scripts\utility::flag_wait("flag_allies_player_near");
 
-  if(self._delay == 0) {
+  if(self._delay == 0)
     self waittill("trigger");
-  } else {
+  else
     wait(maps\skyway_util::kt_time(self._delay));
-  }
 }
 
 waittill_enemy_num_remaining(var_0) {
   self endon("trigger");
 
-  if(isDefined(self.flag_end)) {
+  if(isDefined(self.flag_end))
     level endon(self.flag_end);
-  }
 
   common_scripts\utility::flag_wait("flag_allies_player_near");
   var_1 = [];
 
   if(isstring(var_0)) {
-    if(isDefined(level._enemies[var_0])) {
+    if(isDefined(level._enemies[var_0]))
       var_1 = level._enemies[var_0];
-    }
   } else
     var_1 = var_0;
 
@@ -199,9 +178,8 @@ waittill_enemy_num_remaining(var_0) {
   var_3 = undefined;
   var_4 = 0;
 
-  if(var_2 != self._enemy_num) {
+  if(var_2 != self._enemy_num)
     var_3 = level.player.stats["kills"];
-  }
 
   for(;;) {
     if(isDefined(var_3)) {
@@ -226,9 +204,8 @@ waittill_allies_at_goal(var_0) {
   level notify("notify_kill_allies_at_goal");
   level endon("notify_kill_allies_at_goal");
 
-  if(isDefined(self.flag_end)) {
+  if(isDefined(self.flag_end))
     level endon(self.flag_end);
-  }
 
   common_scripts\utility::flag_set("flag_allies_moving");
   common_scripts\utility::flag_clear("flag_allies_player_near");
@@ -237,11 +214,10 @@ waittill_allies_at_goal(var_0) {
   var_2.threads = 0;
   var_3 = [];
 
-  if(isarray(var_0)) {
+  if(isarray(var_0))
     var_3 = var_0;
-  } else {
+  else
     var_3[0] = var_0;
-  }
 
   foreach(var_5 in var_3) {
     var_5._old_goalradius = var_5.goalradius;
@@ -257,9 +233,8 @@ waittill_allies_at_goal(var_0) {
 
   var_2 notify("die");
 
-  foreach(var_5 in var_3) {
-    var_5.goalradius = var_5._old_goalradius;
-  }
+  foreach(var_5 in var_3)
+  var_5.goalradius = var_5._old_goalradius;
 
   common_scripts\utility::flag_clear("flag_allies_moving");
   var_3 waittill_proximity();
@@ -269,9 +244,8 @@ waittill_allies_at_goal(var_0) {
 waittill_proximity() {
   var_0 = 250;
 
-  if(isDefined(level._ally_dist)) {
+  if(isDefined(level._ally_dist))
     var_0 = level._ally_dist;
-  }
 
   var_1 = var_0 * var_0;
 
@@ -279,9 +253,8 @@ waittill_proximity() {
     foreach(var_3 in self) {
       var_4 = distancesquared(var_3.origin, level.player.origin);
 
-      if(var_4 <= var_1) {
+      if(var_4 <= var_1)
         return;
-      }
     }
 
     wait 0.5;
@@ -309,13 +282,11 @@ ally_killer_tracker_proc() {
 }
 
 add_to_group(var_0) {
-  if(!isDefined(level._enemies)) {
+  if(!isDefined(level._enemies))
     level._enemies = [];
-  }
 
-  if(!isDefined(level._enemies[var_0])) {
+  if(!isDefined(level._enemies[var_0]))
     level._enemies[var_0] = [];
-  }
 
   level._enemies[var_0] = common_scripts\utility::array_add(level._enemies[var_0], self);
   self._current_index = var_0;
@@ -324,11 +295,10 @@ add_to_group(var_0) {
 opfor_killer_tracker() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isplayer(var_0))
     level.killer_tracker = 0;
-  } else {
+  else
     level.killer_tracker = level.killer_tracker + 1;
-  }
 
   level notify("killer_tracker_update");
 }
@@ -337,9 +307,8 @@ ignore_everything() {
   if(!isDefined(self) || !isai(self)) {
     return;
   }
-  if(isDefined(self._ignore_settings_old)) {
+  if(isDefined(self._ignore_settings_old))
     unignore_everything();
-  }
 
   self._ignore_settings_old = [];
   self.disableplayeradsloscheck = set_ignore_setting(self.disableplayeradsloscheck, "disableplayeradsloscheck", 1);
@@ -363,11 +332,10 @@ ignore_everything() {
 }
 
 set_ignore_setting(var_0, var_1, var_2) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self._ignore_settings_old[var_1] = var_0;
-  } else {
+  else
     self._ignore_settings_old[var_1] = "none";
-  }
 
   return var_2;
 }
@@ -377,9 +345,8 @@ unignore_everything(var_0) {
     return;
   }
   if(isDefined(var_0) && var_0) {
-    if(isDefined(self._ignore_settings_old)) {
+    if(isDefined(self._ignore_settings_old))
       self._ignore_settings_old = undefined;
-    }
   }
 
   self.disableplayeradsloscheck = restore_ignore_setting("disableplayeradsloscheck", 0);
@@ -404,11 +371,10 @@ unignore_everything(var_0) {
 
 restore_ignore_setting(var_0, var_1) {
   if(isDefined(self._ignore_settings_old)) {
-    if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none") {
+    if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none")
       return var_1;
-    } else {
+    else
       return self._ignore_settings_old[var_0];
-    }
   }
 
   return var_1;
@@ -418,13 +384,11 @@ ignore_until_goal(var_0) {
   self endon("death");
   ignore_everything();
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0.05;
-  }
 
-  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "no_ignoreme")) {
+  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "no_ignoreme"))
     maps\_utility::delaythread(var_0, maps\_utility::set_ignoreme, 0);
-  }
 
   self waittill("goal");
   unignore_everything();

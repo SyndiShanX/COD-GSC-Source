@@ -16,7 +16,9 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [[level.initializematchrules]]();
+    [
+      [level.initializematchrules]
+    ]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
@@ -58,29 +60,25 @@ main() {
     maps\mp\_utility::setoverridewatchdvar("timeLimit", 0);
   }
 
-  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
     level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
-  }
 
   var_0 = getent("sab_bomb_defuse_allies", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_0 delete();
-  }
 
   var_0 = getent("sab_bomb_defuse_axis", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_0 delete();
-  }
 
   setomnvar("ui_bomb_timer_endtime", 0);
 }
 
 wasonlyroundsab() {
-  if(maps\mp\_utility::getwatcheddvar("roundlimit") == 0 && maps\mp\_utility::getwatcheddvar("winlimit") == 1) {
+  if(maps\mp\_utility::getwatcheddvar("roundlimit") == 0 && maps\mp\_utility::getwatcheddvar("winlimit") == 1)
     return 1;
-  }
 
   return 0;
 }
@@ -113,40 +111,39 @@ onprecachegametype() {
 }
 
 onstartgametype() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = 0;
-  }
 
   setclientnamemode("auto_change");
 
   if(!intiebreaker()) {
-    maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_SAB");
-    maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_SAB");
+    maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_SAB");
+    maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_SAB");
 
     if(level.splitscreen) {
-      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SAB");
-      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SAB");
+      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_SAB");
+      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_SAB");
     } else {
-      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SAB_SCORE");
-      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SAB_SCORE");
+      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_SAB_SCORE");
+      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_SAB_SCORE");
     }
 
-    maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_SAB_HINT");
-    maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_SAB_HINT");
+    maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_SAB_HINT");
+    maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_SAB_HINT");
   } else {
-    maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
-    maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_WAR");
 
     if(level.splitscreen) {
-      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
-      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
+      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR");
+      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR");
     } else {
-      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR_SCORE");
-      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR_SCORE");
+      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR_SCORE");
+      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR_SCORE");
     }
 
-    maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR_HINT");
-    maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR_HINT");
+    maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_WAR_HINT");
+    maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_WAR_HINT");
   }
 
   initspawns();
@@ -185,7 +182,7 @@ initspawns() {
   var_0 = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_sab_spawn");
 
   foreach(var_2 in var_0) {
-    if(!isDefined(var_2.script_noteworthy)) {
+    if(!isdefined(var_2.script_noteworthy)) {
       spawnpointerror(var_2);
       continue;
     }
@@ -213,23 +210,20 @@ spawnpointerror(var_0) {}
 getspawnpoint() {
   var_0 = self.pers["team"];
 
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     var_0 = maps\mp\_utility::getotherteam(var_0);
-  }
 
-  if(level.usestartspawns) {
+  if(level.usestartspawns)
     var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_sab_spawn_" + var_0 + "_start");
-  } else if(isDefined(level.bombplanted) && level.bombplanted && (isDefined(level.bombowner) && var_0 == level.bombowner.team)) {
-    if(var_0 == "axis") {
+  else if(isdefined(level.bombplanted) && level.bombplanted && (isdefined(level.bombowner) && var_0 == level.bombowner.team)) {
+    if(var_0 == "axis")
       var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_axis_planted);
-    } else {
+    else
       var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_allies_planted);
-    }
   } else if(var_0 == "axis")
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_axis);
-  else {
+  else
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_allies);
-  }
 
   return var_1;
 }
@@ -240,9 +234,8 @@ onspawnplayer() {
   self.isbombcarrier = 0;
   self setclientomnvar("ui_carrying_bomb", self.isbombcarrier);
 
-  if(intiebreaker()) {
+  if(intiebreaker())
     thread setplayersuddendeathvalues();
-  }
 }
 
 updategametypedvars() {
@@ -259,12 +252,12 @@ sabotage() {
   maps\mp\gametypes\common_bomb_gameobject::loadbombfx();
   var_0 = getent("sab_bomb_pickup_trig", "targetname");
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     common_scripts\utility::error("No sab_bomb_pickup_trig trigger found in map.");
-  } else {
+  else {
     var_1 = maps\mp\gametypes\common_bomb_gameobject::getcarrybombvisuals("sab_bomb");
 
-    if(!isDefined(var_1)) {
+    if(!isdefined(var_1)) {
       common_scripts\utility::error("No sab_bomb script_model found in map.");
       return;
     }
@@ -279,12 +272,12 @@ sabotage() {
     level.sabbomb.autoresettime = 60.0;
     maps\mp\_utility::setmlgicons(level.sabbomb, "waypoint_bomb");
 
-    if(!isDefined(getent("sab_bomb_axis", "targetname"))) {
+    if(!isdefined(getent("sab_bomb_axis", "targetname"))) {
       common_scripts\utility::error("No sab_bomb_axis trigger found in map.");
       return;
     }
 
-    if(!isDefined(getent("sab_bomb_allies", "targetname"))) {
+    if(!isdefined(getent("sab_bomb_allies", "targetname"))) {
       common_scripts\utility::error("No sab_bomb_allies trigger found in map.");
       return;
     }
@@ -301,15 +294,14 @@ sabotage() {
 }
 
 shouldstreamcarrierclasstoplayer(var_0, var_1) {
-  if(var_1.team == var_0 maps\mp\gametypes\_gameobjects::getownerteam()) {
+  if(var_1.team == var_0 maps\mp\gametypes\_gameobjects::getownerteam())
     return 0;
-  }
 
   return 1;
 }
 
 createbombzone(var_0, var_1) {
-  var_2 = getEntArray(var_1.target, "targetname");
+  var_2 = getentarray(var_1.target, "targetname");
   var_3 = maps\mp\gametypes\common_bomb_gameobject::createbombzoneobject(var_0, "enemy", "none", var_1, level.sabbomb, 0);
   maps\mp\_utility::setmlgicons(var_3, "waypoint_esports_sab_target" + var_3.label);
   var_3.onuse = ::onuse;
@@ -320,15 +312,14 @@ createbombzone(var_0, var_1) {
 }
 
 onbeginuse(var_0) {
-  if(!maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"])) {
+  if(!maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"]))
     maps\mp\gametypes\common_bomb_gameobject::onbeginplantbomb(var_0);
-  } else {
+  else
     maps\mp\gametypes\common_bomb_gameobject::onbegindefusebomb(var_0, level.sabbombmodel);
-  }
 }
 
 onenduse(var_0, var_1, var_2) {
-  var_3 = isDefined(var_1) && var_1.isdefusing;
+  var_3 = isdefined(var_1) && var_1.isdefusing;
   maps\mp\gametypes\common_bomb_gameobject::onendusebomb(var_1, var_3);
 }
 
@@ -337,17 +328,15 @@ onpickup(var_0) {
   level.usestartspawns = 0;
   var_1 = var_0.pers["team"];
 
-  if(var_1 == "allies") {
+  if(var_1 == "allies")
     var_2 = "axis";
-  } else {
+  else
     var_2 = "allies";
-  }
 
   var_3 = undefined;
 
-  if(var_1 == maps\mp\gametypes\_gameobjects::getownerteam()) {
+  if(var_1 == maps\mp\gametypes\_gameobjects::getownerteam())
     var_3 = var_1;
-  }
 
   maps\mp\gametypes\common_bomb_gameobject::oncarrybombpickup(var_0, var_3);
   var_0 maps\mp\_utility::leaderdialogonplayer("obj_destroy", "bomb");
@@ -359,9 +348,8 @@ onpickup(var_0) {
     maps\mp\_utility::leaderdialog("obj_defend", var_2, "bomb");
   }
 
-  if(isDefined(level.carrierloadouts) && isDefined(level.carrierloadouts[var_1])) {
+  if(isdefined(level.carrierloadouts) && isdefined(level.carrierloadouts[var_1]))
     var_0 thread maps\mp\_utility::applycarrierclass();
-  }
 
   maps\mp\gametypes\_gameobjects::setownerteam(var_1);
   maps\mp\gametypes\_gameobjects::setvisibleteam("any");
@@ -396,7 +384,7 @@ onuse(var_0) {
     maps\mp\_utility::setmlgicons(self, "waypoint_esports_sab_planted" + var_3);
     level thread bombplanted(self, var_0);
 
-    if(isDefined(level.carrierloadouts) && isDefined(level.carrierloadouts[var_1])) {
+    if(isdefined(level.carrierloadouts) && isdefined(level.carrierloadouts[var_1])) {
       var_0 thread maps\mp\_utility::removecarrierclass();
       return;
     }
@@ -409,9 +397,8 @@ onuse(var_0) {
 getdefusetype(var_0) {
   var_1 = "defuse";
 
-  if(isDefined(level.bombowner) && level.bombowner.bombplantedtime + 3000 + level.defusetime * 1000 > gettime() && maps\mp\_utility::isreallyalive(level.bombowner)) {
+  if(isdefined(level.bombowner) && level.bombowner.bombplantedtime + 3000 + level.defusetime * 1000 > gettime() && maps\mp\_utility::isreallyalive(level.bombowner))
     var_1 = "ninja_defuse";
-  }
 
   return var_1;
 }
@@ -438,11 +425,10 @@ bombplanted(var_0, var_1) {
   var_0 maps\mp\gametypes\common_bomb_gameobject::onbombplanted(level.sabbombmodel.origin + (0, 0, 1));
   var_3 = var_0 maps\mp\gametypes\_gameobjects::getlabel();
 
-  if(var_3 == "_allies") {
+  if(var_3 == "_allies")
     setomnvar("ui_mlg_game_mode_status_1", 1);
-  } else if(var_3 == "_axis") {
+  else if(var_3 == "_axis")
     setomnvar("ui_mlg_game_mode_status_1", 2);
-  }
 
   bombtimerwait();
   setomnvar("ui_bomb_timer", 0);
@@ -499,9 +485,8 @@ handlehostmigration(var_0) {
   level waittill("host_migration_begin");
   var_1 = maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
-  if(var_1 > 0) {
+  if(var_1 > 0)
     setomnvar("ui_bomb_timer_endtime", var_0 + var_1);
-  }
 }
 
 givelastonteamwarning() {
@@ -527,7 +512,7 @@ suddendeaththread() {
   level.timelimitoverride = 1;
   level.insuddendeath = 1;
 
-  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+  for (var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread sabforcerespawn();
     level.players[var_0] thread setplayersuddendeathvalues();
   }
@@ -537,7 +522,7 @@ suddendeaththread() {
   level.sabsuddendeathtime = 90;
   var_1 = 0;
 
-  while(var_1 < level.sabsuddendeathtime) {
+  while (var_1 < level.sabsuddendeathtime) {
     if(!level.bombplanted) {
       var_1 = var_1 + 1;
       setgameendtime(gettime() + (level.sabsuddendeathtime - var_1) * 1000);
@@ -562,7 +547,7 @@ sabforcerespawn() {
   wait 0.05;
 
   if(self.sessionstate != "playing" || self.health <= 0) {
-    while(self.health <= 0) {
+    while (self.health <= 0) {
       self notify("force_spawn");
 
       if(maps\mp\_utility::isinkillcam()) {
@@ -581,9 +566,8 @@ sabwaitandspawnclient() {
   self.waitingtospawn = 1;
   maps\mp\gametypes\_playerlogic::waitandspawnclient();
 
-  if(isDefined(self)) {
+  if(isdefined(self))
     self.waitingtospawn = 0;
-  }
 }
 
 setplayersuddendeathvalues() {
@@ -591,9 +575,8 @@ setplayersuddendeathvalues() {
   self setclientdvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0, "cg_everyoneHearsEveryone", 0);
   maps\mp\_utility::gameflagwait("prematch_done");
 
-  while(self.sessionstate != "playing" || self.health <= 0) {
+  while (self.sessionstate != "playing" || self.health <= 0)
     wait 0.05;
-  }
 
   thread maps\mp\gametypes\_hud_message::splashnotify("sab_overtime");
 }
@@ -633,7 +616,7 @@ ondeadevent(var_0) {
 bombdefused(var_0, var_1, var_2) {
   var_0.bombplantedon = 0;
 
-  if(maps\mp\_utility::is_true(level.insuddendeath) && isDefined(level.plantingteamdead)) {
+  if(maps\mp\_utility::is_true(level.insuddendeath) && isdefined(level.plantingteamdead)) {
     maps\mp\gametypes\_gamescore::_setteamscore(var_2, 1);
     maps\mp\gametypes\_gamescore::updateteamscore(var_2);
     level.finalkillcam_winner = var_2;
@@ -646,9 +629,8 @@ bombdefused(var_0, var_1, var_2) {
   maps\mp\gametypes\_gamelogic::resumetimer();
   level.bombplanted = 0;
 
-  if(!maps\mp\_utility::is_true(level.insuddendeath)) {
+  if(!maps\mp\_utility::is_true(level.insuddendeath))
     level.timelimitoverride = 0;
-  }
 
   level notify("bomb_defused");
   var_0 maps\mp\gametypes\common_bomb_gameobject::resetbombzone(level.sabbomb, "enemy", "none", 0);

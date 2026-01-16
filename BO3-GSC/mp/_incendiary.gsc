@@ -19,7 +19,7 @@
 #namespace incendiary;
 
 function autoexec __init__sytem__() {
-  system::register("incendiary_grenade", &init_shared, undefined, undefined);
+  system::register("incendiary_grenade", & init_shared, undefined, undefined);
 }
 
 function init_shared() {
@@ -30,7 +30,7 @@ function init_shared() {
   level.incendiarydamageradius = getdvarint("scr_incendiaryDamageRadius", 125);
   level.incendiaryfiredamageticktime = getdvarfloat("scr_incendiaryfireDamageTickTime", 1);
   level.incendiarydamagethistick = [];
-  callback::on_spawned(&create_incendiary_watcher);
+  callback::on_spawned( & create_incendiary_watcher);
 }
 
 function updateincendiaryfromdvars() {
@@ -44,7 +44,7 @@ function updateincendiaryfromdvars() {
 
 function create_incendiary_watcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("incendiary_grenade", self.team);
-  watcher.onspawn = &incendiary_system_spawn;
+  watcher.onspawn = & incendiary_system_spawn;
 }
 
 function incendiary_system_spawn(watcher, player) {
@@ -123,11 +123,11 @@ function spawnalllocs(owner, startpos, normal, multiplier, rotation, killcament,
   locations["distSqrd"] = [];
   locations["fxtoplay"] = [];
   locations["radius"] = [];
-  for(fxindex = 0; fxindex < fxcount; fxindex++) {
+  for (fxindex = 0; fxindex < fxcount; fxindex++) {
     locations["point"][fxindex] = getlocationforfx(startpos, fxindex, fxcount, defaultdistance, rotation);
     locations["color"][fxindex] = colorarray[fxindex % colorarray.size];
   }
-  for(count = 0; count < fxcount; count++) {
+  for (count = 0; count < fxcount; count++) {
     trace = hitpos(startpos, locations["point"][count], locations["color"][count]);
     traceposition = trace["position"];
     locations["tracePos"][count] = traceposition;
@@ -147,8 +147,8 @@ function spawnalllocs(owner, startpos, normal, multiplier, rotation, killcament,
   spawntimedfx(incendiarygrenade, startpos, normal, level.incendiaryfireduration, self.team);
   level.incendiarydamageradius = getdvarint("scr_incendiaryDamageRadius", level.incendiarydamageradius);
   thread damageeffectarea(owner, startpos, level.incendiarydamageradius, level.incendiarydamageradius, killcament);
-  for(count = 0; count < locations["point"].size; count++) {
-    if(isDefined(locations["loc"][count])) {
+  for (count = 0; count < locations["point"].size; count++) {
+    if(isdefined(locations["loc"][count])) {
       normal = locations["normal"][count];
       spawntimedfx(incendiarygrenade, locations["loc"][count], normal, level.incendiaryfireduration, self.team);
     }
@@ -158,10 +158,10 @@ function spawnalllocs(owner, startpos, normal, multiplier, rotation, killcament,
 function incendiary_debug_line(from, to, color, depthtest, time) {
   debug_rcbomb = getdvarint("", 0);
   if(debug_rcbomb == 1) {
-    if(!isDefined(time)) {
+    if(!isdefined(time)) {
       time = 100;
     }
-    if(!isDefined(depthtest)) {
+    if(!isdefined(depthtest)) {
       depthtest = 1;
     }
     line(from, to, color, 1, depthtest, time);
@@ -175,14 +175,14 @@ function damageeffectarea(owner, position, radius, height, killcament) {
   if(getdvarint("")) {
     level thread util::drawcylinder(trigger_radius_position, radius, trigger_radius_height, undefined, "");
   }
-  if(isDefined(level.rapsonburnraps)) {
+  if(isdefined(level.rapsonburnraps)) {
     owner thread[[level.rapsonburnraps]](fireeffectarea);
   }
   var_5686ecd0 = owner.team;
   loopwaittime = level.incendiaryfiredamageticktime;
   durationofincendiary = level.incendiaryfireduration;
-  while(durationofincendiary > 0) {
-    if(isDefined(owner) && owner.team !== var_5686ecd0) {
+  while (durationofincendiary > 0) {
+    if(isdefined(owner) && owner.team !== var_5686ecd0) {
       break;
     }
     durationofincendiary = durationofincendiary - loopwaittime;
@@ -193,7 +193,7 @@ function damageeffectarea(owner, position, radius, height, killcament) {
     }
     wait(loopwaittime);
   }
-  if(isDefined(killcament)) {
+  if(isdefined(killcament)) {
     killcament entityheadicons::destroyentityheadicons();
   }
   fireeffectarea delete();
@@ -203,8 +203,8 @@ function damageeffectarea(owner, position, radius, height, killcament) {
 }
 
 function getpotentialtargets(owner) {
-  owner_team = (isDefined(owner) ? owner.team : undefined);
-  if(level.teambased && isDefined(owner_team) && level.friendlyfire == 0) {
+  owner_team = (isdefined(owner) ? owner.team : undefined);
+  if(level.teambased && isdefined(owner_team) && level.friendlyfire == 0) {
     enemy_team = (owner_team == "axis" ? "allies" : "axis");
     potential_targets = [];
     potential_targets = arraycombine(potential_targets, getplayers(enemy_team), 0, 0);
@@ -222,15 +222,15 @@ function getpotentialtargets(owner) {
   }
   potential_targets = [];
   foreach(target in all_targets) {
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       continue;
     }
-    if(!isDefined(target.team)) {
+    if(!isdefined(target.team)) {
       continue;
     }
-    if(isDefined(owner)) {
+    if(isdefined(owner)) {
       if(target != owner) {
-        if(!isDefined(owner_team)) {
+        if(!isdefined(owner_team)) {
           continue;
         }
         if(target.team == owner_team) {
@@ -238,10 +238,10 @@ function getpotentialtargets(owner) {
         }
       }
     } else {
-      if(!isDefined(self)) {
+      if(!isdefined(self)) {
         continue;
       }
-      if(!isDefined(self.team)) {
+      if(!isdefined(self.team)) {
         continue;
       }
       if(target.team == self.team) {
@@ -254,9 +254,9 @@ function getpotentialtargets(owner) {
 }
 
 function trytoapplyfiredamage(target, owner, position, fireeffectarea, resetfiretime, killcament) {
-  if(!isDefined(target.infirearea) || target.infirearea == 0) {
-    if(target istouching(fireeffectarea) && (!isDefined(target.sessionstate) || target.sessionstate == "playing")) {
-      trace = bulletTrace(position, target getshootatpos(), 0, target, 1);
+  if(!isdefined(target.infirearea) || target.infirearea == 0) {
+    if(target istouching(fireeffectarea) && (!isdefined(target.sessionstate) || target.sessionstate == "playing")) {
+      trace = bullettrace(position, target getshootatpos(), 0, target, 1);
       if(trace["fraction"] == 1) {
         target.lastburnedby = owner;
         target thread damageinfirearea(fireeffectarea, killcament, trace, position, resetfiretime);
@@ -276,7 +276,7 @@ function damageinfirearea(fireeffectarea, killcament, trace, position, resetfire
   if(candofiredamage(killcament, self, resetfiretime)) {
     level.incendiary_debug = getdvarint("", 0);
     if(level.incendiary_debug) {
-      if(!isDefined(level.incendiarydamagetime)) {
+      if(!isdefined(level.incendiarydamagetime)) {
         level.incendiarydamagetime = gettime();
       }
       iprintlnbold(level.incendiarydamagetime - gettime());
@@ -293,13 +293,13 @@ function sndfiredamage() {
   self endon("death");
   self endon("disconnect");
   self endon("sndfire");
-  if(!isDefined(self.sndfireent)) {
+  if(!isdefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
     self.sndfireent linkto(self, "tag_origin");
-    self.sndfireent playSound("chr_burn_start");
+    self.sndfireent playsound("chr_burn_start");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }
-  self.sndfireent playLoopSound("chr_burn_start_loop", 0.5);
+  self.sndfireent playloopsound("chr_burn_start_loop", 0.5);
   wait(3);
   self.sndfireent delete();
   self.sndfireent = undefined;
@@ -308,13 +308,13 @@ function sndfiredamage() {
 function sndfiredamage_deleteent(ent) {
   self endon("disconnect");
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     ent delete();
   }
 }
 
 function hitpos(start, end, color) {
-  trace = bulletTrace(start, end, 0, undefined);
+  trace = bullettrace(start, end, 0, undefined);
   level.incendiary_debug = getdvarint("", 0);
   if(level.incendiary_debug) {
     debugstar(trace[""], 2000, color);
@@ -325,7 +325,7 @@ function hitpos(start, end, color) {
 
 function candofiredamage(killcament, victim, resetfiretime) {
   entnum = victim getentitynumber();
-  if(!isDefined(level.incendiarydamagethistick[entnum])) {
+  if(!isdefined(level.incendiarydamagethistick[entnum])) {
     level.incendiarydamagethistick[entnum] = 0;
     level thread resetfiredamage(entnum, resetfiretime);
     return true;

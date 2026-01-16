@@ -35,9 +35,8 @@ main() {
     level.player maps\factory_util::turn_off_thermal_vision();
   }
 
-  foreach(var_1 in level.squad) {
-    var_1 pushplayer(1);
-  }
+  foreach(var_1 in level.squad)
+  var_1 pushplayer(1);
 
   maps\factory_util::safe_trigger_by_targetname("ambush_escape_allies_stop_midway");
   common_scripts\utility::flag_wait("spawn_loading_dock_vehicles");
@@ -56,16 +55,14 @@ loading_dock_vehicles() {
   thread maps\factory_chase::chase_ally_vehicle_setup();
   var_0 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("ambush_escape_vehicle");
 
-  foreach(var_2 in var_0) {
-    var_2 thread loading_dock_vehicle_setup();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread loading_dock_vehicle_setup();
 
   common_scripts\utility::flag_wait("ambush_escape_clear");
   var_4 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("ambush_escape_vehicle_second_wave");
 
-  foreach(var_2 in var_4) {
-    var_2 thread loading_dock_vehicle_setup();
-  }
+  foreach(var_2 in var_4)
+  var_2 thread loading_dock_vehicle_setup();
 }
 
 loading_dock_vehicle_setup() {
@@ -75,9 +72,8 @@ loading_dock_vehicle_setup() {
   wait(randomfloatrange(1.0, 2.0));
   maps\_vehicle::vehicle_lights_off("headlights");
 
-  foreach(var_1 in self.riders) {
-    var_1 thread loading_dock_enemies();
-  }
+  foreach(var_1 in self.riders)
+  var_1 thread loading_dock_enemies();
 
   level waittill("rooftop_complete");
   self delete();
@@ -89,9 +85,8 @@ loading_dock_enemies() {
   var_0 = getent("loading_dock_enemies_goal", "targetname");
   self setgoalvolume(var_0);
 
-  while(!self istouching(var_0)) {
+  while(!self istouching(var_0))
     wait 0.25;
-  }
 
   self delete();
 }

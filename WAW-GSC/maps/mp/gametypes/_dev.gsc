@@ -19,7 +19,7 @@ init() {
   setdvar("scr_takeperk", "");
   thread engagement_distance_debug_toggle();
   setdvar("debug_dynamic_ai_spawning", "0");
-  for(;;) {
+  for (;;) {
     updateDevSettings();
     wait .05;
   }
@@ -59,19 +59,19 @@ updateDevSettings() {
   updateMinimapSetting();
   if(level.players.size > 0) {
     if(getdvarint("scr_giveradar") == 1) {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         level.players[i] maps\mp\gametypes\_hardpoints::giveHardpointItem("radar_mp");
       }
       setdvar("scr_giveradar", "0");
     }
     if(getdvarint("scr_giveartillery") == 1) {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         level.players[i] maps\mp\gametypes\_hardpoints::giveHardpointItem("artillery_mp");
       }
       setdvar("scr_giveartillery", "0");
     }
     if(getdvarint("scr_givedogs") == 1) {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         level.players[i] maps\mp\gametypes\_hardpoints::giveHardpointItem("dogs_mp");
       }
       setdvar("scr_givedogs", "0");
@@ -79,7 +79,7 @@ updateDevSettings() {
   }
   if(getdvar("scr_giveperk") != "") {
     perk = getdvar("scr_giveperk");
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       level.players[i] setPerk(perk);
       level.players[i].extraPerks[perk] = 1;
     }
@@ -87,7 +87,7 @@ updateDevSettings() {
   }
   if(getdvar("scr_takeperk") != "") {
     perk = getdvar("scr_takeperk");
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       level.players[i] unsetPerk(perk);
       level.players[i].extraPerks[perk] = undefined;
     }
@@ -95,23 +95,20 @@ updateDevSettings() {
   }
   if(getDvar("scr_x_kills_y") != "") {
     nameTokens = strTok(getDvar("scr_x_kills_y"), " ");
-    if(nameTokens.size > 1) {
+    if(nameTokens.size > 1)
       thread xKillsY(nameTokens[0], nameTokens[1]);
-    }
     setDvar("scr_x_kills_y", "");
   }
   if(getDvar("scr_usedogs") != "") {
     ownerName = getDvar("scr_usedogs");
     setDvar("scr_usedogs", "");
     owner = undefined;
-    for(index = 0; index < level.players.size; index++) {
-      if(level.players[index].name == ownerName) {
+    for (index = 0; index < level.players.size; index++) {
+      if(level.players[index].name == ownerName)
         owner = level.players[index];
-      }
     }
-    if(isDefined(owner)) {
+    if(isDefined(owner))
       owner maps\mp\gametypes\_hardpoints::triggerHardpoint("dogs_mp");
-    }
   }
   if(getDvar("scr_set_level") != "") {
     level.players[0].pers["rank"] = 0;
@@ -120,7 +117,7 @@ updateDevSettings() {
     newRank = max(newRank, 1);
     setDvar("scr_set_level", "");
     lastXp = 0;
-    for(index = 0; index <= newRank; index++) {
+    for (index = 0; index <= newRank; index++) {
       newXp = maps\mp\gametypes\_rank::getRankInfoMinXP(index);
       level.players[0] thread maps\mp\gametypes\_rank::giveRankXP("kill", newXp - lastXp);
       lastXp = newXp;
@@ -145,9 +142,8 @@ updateDevSettings() {
     setDvar("scr_unlock_attachment", "");
   }
   if(getDvar("scr_do_notify") != "") {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++)
       level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(getDvar("scr_do_notify"), getDvar("scr_do_notify"), game["icons"]["allies"]);
-    }
     announcement(getDvar("scr_do_notify"));
     setDvar("scr_do_notify", "");
   }
@@ -156,18 +152,16 @@ updateDevSettings() {
     level.entArray = [];
     level.entCounts = [];
     level.entGroups = [];
-    for(index = 0; index < ents.size; index++) {
+    for (index = 0; index < ents.size; index++) {
       classname = ents[index].classname;
       if(!isSubStr(classname, "_spawn")) {
         curEnt = ents[index];
         level.entArray[level.entArray.size] = curEnt;
-        if(!isDefined(level.entCounts[classname])) {
+        if(!isDefined(level.entCounts[classname]))
           level.entCounts[classname] = 0;
-        }
         level.entCounts[classname]++;
-        if(!isDefined(level.entGroups[classname])) {
+        if(!isDefined(level.entGroups[classname]))
           level.entGroups[classname] = [];
-        }
         level.entGroups[classname][level.entGroups[classname].size] = curEnt;
       }
     }
@@ -184,20 +178,18 @@ giveExtraPerks() {
     return;
   }
   perks = getArrayKeys(self.extraPerks);
-  for(i = 0; i < perks.size; i++) {
+  for (i = 0; i < perks.size; i++)
     self setPerk(perks[i]);
-  }
 }
 
 xKillsY(attackerName, victimName) {
   attacker = undefined;
   victim = undefined;
-  for(index = 0; index < level.players.size; index++) {
-    if(level.players[index].name == attackerName) {
+  for (index = 0; index < level.players.size; index++) {
+    if(level.players[index].name == attackerName)
       attacker = level.players[index];
-    } else if(level.players[index].name == victimName) {
+    else if(level.players[index].name == victimName)
       victim = level.players[index];
-    }
   }
   if(!isAlive(attacker) || !isAlive(victim)) {
     return;
@@ -234,35 +226,31 @@ updateMinimapSetting() {
       players = get_players();
       if(players.size > 0) {
         player = players[0];
-        corners = getEntArray("minimap_corner", "targetname");
+        corners = getentarray("minimap_corner", "targetname");
         if(corners.size == 2) {
           viewpos = (corners[0].origin + corners[1].origin);
           viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
           maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-          if(corners[1].origin[0] > corners[0].origin[0]) {
+          if(corners[1].origin[0] > corners[0].origin[0])
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          } else {
+          else
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
-          }
-          if(corners[1].origin[1] > corners[0].origin[1]) {
+          if(corners[1].origin[1] > corners[0].origin[1])
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          } else {
+          else
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
-          }
           viewpostocorner = maxcorner - viewpos;
           viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
           origin = spawn("script_origin", player.origin);
           northvector = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
           eastvector = (northvector[1], 0 - northvector[0], 0);
           disttotop = vectordot(northvector, viewpostocorner);
-          if(disttotop < 0) {
+          if(disttotop < 0)
             disttotop = 0 - disttotop;
-          }
           disttoside = vectordot(eastvector, viewpostocorner);
-          if(disttoside < 0) {
+          if(disttoside < 0)
             disttoside = 0 - disttoside;
-          }
           if(requiredMapAspectRatio > 0) {
             mapAspectRatio = disttoside / disttotop;
             if(mapAspectRatio < requiredMapAspectRatio) {
@@ -288,11 +276,10 @@ updateMinimapSetting() {
             angleside = 2 * atan(disttoside / minimapheight);
             angletop = 2 * atan(disttotop * aspectratioguess / minimapheight);
           }
-          if(angleside > angletop) {
+          if(angleside > angletop)
             angle = angleside;
-          } else {
+          else
             angle = angletop;
-          }
           znear = minimapheight - 1000;
           if(znear < 16) znear = 16;
           if(znear > 10000) znear = 10000;
@@ -316,10 +303,9 @@ updateMinimapSetting() {
           player setclientdvar("cg_fov", angle);
           player setclientdvar("cg_fovmin", "1");
           if(isDefined(level.objPoints)) {
-            for(i = 0; i < level.objPointNames.size; i++) {
-              if(isDefined(level.objPoints[level.objPointNames[i]])) {
+            for (i = 0; i < level.objPointNames.size; i++) {
+              if(isDefined(level.objPoints[level.objPointNames[i]]))
                 level.objPoints[level.objPointNames[i]] destroy();
-              }
             }
             level.objPoints = [];
             level.objPointNames = [];
@@ -362,7 +348,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   corner3 = maxcorner - side;
   toppos = vecscale(mincorner + maxcorner, .5) + vecscale(sidenorth, .51);
   textscale = diaglen * .003;
-  while(1) {
+  while (1) {
     line(corner0, corner1);
     line(corner1, corner2);
     line(corner2, corner3);
@@ -374,7 +360,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 
 addTestClients() {
   wait 5;
-  for(;;) {
+  for (;;) {
     if(getdvarInt("scr_testclients") > 0) {
       break;
     }
@@ -382,7 +368,7 @@ addTestClients() {
   }
   testclients = getdvarInt("scr_testclients");
   setDvar("scr_testclients", 0);
-  for(i = 0; i < testclients; i++) {
+  for (i = 0; i < testclients; i++) {
     ent[i] = addtestclient();
     if(!isDefined(ent[i])) {
       println("Could not add test client");
@@ -397,24 +383,21 @@ addTestClients() {
 
 TestClient(team) {
   self endon("disconnect");
-  while(!isDefined(self.pers["team"])) {
+  while (!isDefined(self.pers["team"]))
     wait .05;
-  }
   self notify("menuresponse", game["menu_team"], team);
   wait 0.5;
   classes = getArrayKeys(level.classMap);
   okclasses = [];
-  for(i = 0; i < classes.size; i++) {
-    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]])) {
+  for (i = 0; i < classes.size; i++) {
+    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]]))
       okclasses[okclasses.size] = classes[i];
-    }
   }
   assert(okclasses.size);
-  while(1) {
+  while (1) {
     class = okclasses[randomint(okclasses.size)];
-    if(!level.oldschool) {
+    if(!level.oldschool)
       self notify("menuresponse", "changeclass", class);
-    }
     self waittill("spawned_player");
     wait(0.10);
   }
@@ -426,7 +409,7 @@ showOneSpawnPoint(
   notification) {
   k_player_height = get_player_height();
   center = spawn_point.origin;
-  forward = anglesToForward(spawn_point.angles);
+  forward = anglestoforward(spawn_point.angles);
   right = anglestoright(spawn_point.angles);
   forward = maps\mp\_utility::vector_scale(forward, 16);
   right = maps\mp\_utility::vector_scale(right, 16);
@@ -451,8 +434,8 @@ showOneSpawnPoint(
   thread lineUntilNotified(c, d, color, 0, notification);
   thread lineUntilNotified(d, a, color, 0, notification);
   center = center + (0, 0, k_player_height / 2);
-  arrow_forward = anglesToForward(spawn_point.angles);
-  arrowhead_forward = anglesToForward(spawn_point.angles);
+  arrow_forward = anglestoforward(spawn_point.angles);
+  arrowhead_forward = anglestoforward(spawn_point.angles);
   arrowhead_right = anglestoright(spawn_point.angles);
   arrow_forward = maps\mp\_utility::vector_scale(arrow_forward, 32);
   arrowhead_forward = maps\mp\_utility::vector_scale(arrowhead_forward, 24);
@@ -470,7 +453,7 @@ showOneSpawnPoint(
 showSpawnpoints() {
   if(isDefined(level.spawnpoints)) {
     color = (1, 1, 1);
-    for(spawn_point_index = 0; spawn_point_index < level.spawnpoints.size; spawn_point_index++) {
+    for (spawn_point_index = 0; spawn_point_index < level.spawnpoints.size; spawn_point_index++) {
       showOneSpawnPoint(level.spawnpoints[spawn_point_index], color, "hide_spawnpoints");
     }
   }
@@ -485,13 +468,13 @@ hideSpawnpoints() {
 showStartSpawnpoints() {
   if(isDefined(level.spawn_axis_start)) {
     color = (1, 0, 1);
-    for(spawn_point_index = 0; spawn_point_index < level.spawn_axis_start.size; spawn_point_index++) {
+    for (spawn_point_index = 0; spawn_point_index < level.spawn_axis_start.size; spawn_point_index++) {
       showOneSpawnPoint(level.spawn_axis_start[spawn_point_index], color, "hide_startspawnpoints");
     }
   }
   if(isDefined(level.spawn_allies_start)) {
     color = (0, 1, 1);
-    for(spawn_point_index = 0; spawn_point_index < level.spawn_allies_start.size; spawn_point_index++) {
+    for (spawn_point_index = 0; spawn_point_index < level.spawn_allies_start.size; spawn_point_index++) {
       showOneSpawnPoint(level.spawn_allies_start[spawn_point_index], color, "hide_startspawnpoints");
     }
   }
@@ -505,7 +488,7 @@ hideStartSpawnpoints() {
 
 print3DUntilNotified(origin, text, color, alpha, scale, notification) {
   level endon(notification);
-  for(;;) {
+  for (;;) {
     print3d(origin, text, color, alpha, scale);
     wait .05;
   }
@@ -513,7 +496,7 @@ print3DUntilNotified(origin, text, color, alpha, scale, notification) {
 
 lineUntilNotified(start, end, color, depthTest, notification) {
   level endon(notification);
-  for(;;) {
+  for (;;) {
     line(start, end, color, depthTest);
     wait .05;
   }
@@ -525,11 +508,10 @@ get_playerone() {
 
 engagement_distance_debug_toggle() {
   level endon("kill_engage_dist_debug_toggle_watcher");
-  if(!isDefined(getdvarint("debug_engage_dists"))) {
+  if(!isDefined(getdvarint("debug_engage_dists")))
     setdvar("debug_engage_dists", "0");
-  }
   lastState = getdvarint("debug_engage_dists");
-  while(1) {
+  while (1) {
     currentState = getdvarint("debug_engage_dists");
     if(dvar_turned_on(currentState) && !dvar_turned_on(lastState)) {
       weapon_engage_dists_init();
@@ -601,49 +583,49 @@ engagement_distance_debug_init() {
 
 engage_dist_debug_hud_destroy(hudArray, killNotify) {
   level waittill(killNotify);
-  for(i = 0; i < hudArray.size; i++) {
+  for (i = 0; i < hudArray.size; i++) {
     hudArray[i] Destroy();
   }
 }
 
 weapon_engage_dists_init() {
   level.engageDists = [];
-  genericPistol = spawnStruct();
+  genericPistol = spawnstruct();
   genericPistol.engageDistMin = 125;
   genericPistol.engageDistOptimal = 225;
   genericPistol.engageDistMulligan = 50;
   genericPistol.engageDistMax = 400;
-  shotty = spawnStruct();
+  shotty = spawnstruct();
   shotty.engageDistMin = 50;
   shotty.engageDistOptimal = 200;
   shotty.engageDistMulligan = 75;
   shotty.engageDistMax = 350;
-  genericSMG = spawnStruct();
+  genericSMG = spawnstruct();
   genericSMG.engageDistMin = 100;
   genericSMG.engageDistOptimal = 275;
   genericSMG.engageDistMulligan = 100;
   genericSMG.engageDistMax = 500;
-  genericLMG = spawnStruct();
+  genericLMG = spawnstruct();
   genericLMG.engageDistMin = 325;
   genericLMG.engageDistOptimal = 550;
   genericLMG.engageDistMulligan = 150;
   genericLMG.engageDistMax = 850;
-  genericRifleSA = spawnStruct();
+  genericRifleSA = spawnstruct();
   genericRifleSA.engageDistMin = 325;
   genericRifleSA.engageDistOptimal = 550;
   genericRifleSA.engageDistMulligan = 150;
   genericRifleSA.engageDistMax = 850;
-  genericRifleBolt = spawnStruct();
+  genericRifleBolt = spawnstruct();
   genericRifleBolt.engageDistMin = 350;
   genericRifleBolt.engageDistOptimal = 600;
   genericRifleBolt.engageDistMulligan = 150;
   genericRifleBolt.engageDistMax = 900;
-  genericHMG = spawnStruct();
+  genericHMG = spawnstruct();
   genericHMG.engageDistMin = 390;
   genericHMG.engageDistOptimal = 600;
   genericHMG.engageDistMulligan = 100;
   genericHMG.engageDistMax = 900;
-  genericSniper = spawnStruct();
+  genericSniper = spawnstruct();
   genericSniper.engageDistMin = 950;
   genericSniper.engageDistOptimal = 1700;
   genericSniper.engageDistMulligan = 300;
@@ -714,7 +696,7 @@ get_engage_dists(weapontypeStr) {
 engage_dists_watcher() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_engage_dists_watcher");
-  while(1) {
+  while (1) {
     player = get_playerone();
     playerWeapon = player GetCurrentWeapon();
     if(!isDefined(player.lastweapon)) {
@@ -743,13 +725,13 @@ debug_realtime_engage_dist() {
   level thread engage_dist_debug_hud_destroy(hudObjArray, "kill_all_engage_dist_debug");
   level.debugRTEngageDistColor = level.green;
   player = get_playerone();
-  while(1) {
+  while (1) {
     lastTracePos = (0, 0, 0);
     direction = player GetPlayerAngles();
-    direction_vec = anglesToForward(direction);
-    eye = player getEye();
+    direction_vec = AnglesToForward(direction);
+    eye = player GetEye();
     eye = (eye[0], eye[1], eye[2] + 20);
-    trace = bulletTrace(eye, eye + vector_scale(direction_vec, 10000), true, player);
+    trace = BulletTrace(eye, eye + vector_scale(direction_vec, 10000), true, player);
     tracePoint = trace["position"];
     traceNormal = trace["normal"];
     traceDist = int(Distance(eye, tracePoint));
@@ -788,7 +770,7 @@ debug_realtime_engage_dist() {
 }
 
 hudobj_changecolor(hudObjArray, newcolor) {
-  for(i = 0; i < hudObjArray.size; i++) {
+  for (i = 0; i < hudObjArray.size; i++) {
     hudObj = hudObjArray[i];
     if(hudObj.color != newcolor) {
       hudObj.color = newcolor;
@@ -834,9 +816,8 @@ engagedist_hud_changetext(engageDistType, units) {
 }
 
 plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (0, 1, 0);
-  }
   hangtime = .05;
   circleres = 6;
   hemires = circleres / 2;
@@ -846,11 +827,11 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
   rad = 0.00;
   timer = gettime() + (time * 1000);
   radius = radius1;
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     radius = radius2;
     angletoplayer = vectortoangles(normal);
-    for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+    for (i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     maps\mp\_utility::plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -860,15 +841,14 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
 }
 
 larry_thread() {
-  level.larry = spawnStruct();
+  level.larry = SpawnStruct();
   level.players[0] thread larry_init(level.larry);
   level waittill("kill_larry");
   larry_hud_destroy(level.larry);
-  if(isDefined(level.larry.model)) {
+  if(isDefined(level.larry.model))
     level.larry.model delete();
-  }
   if(isDefined(level.larry.ai)) {
-    for(i = 0; i < level.larry.ai.size; i++) {
+    for (i = 0; i < level.larry.ai.size; i++) {
       kick(level.larry.ai[i] GetEntityNumber());
     }
   }
@@ -879,10 +859,10 @@ larry_init(larry) {
   level endon("kill_larry");
   larry_hud_init(larry);
   larry.model = spawn("script_model", (0, 0, 0));
-  larry.model setModel("defaultactor");
+  larry.model setmodel("defaultactor");
   larry.ai = [];
   wait 0.1;
-  for(;;) {
+  for (;;) {
     wait(0.05);
     if(larry.ai.size > 0) {
       larry.model Hide();
@@ -891,16 +871,15 @@ larry_init(larry) {
     direction = self getPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = self getEye();
-    trace = bulletTrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
+    trace = bullettrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
     dist = distance(eye, trace["position"]);
     position = eye + vector_scale(direction_vec, (dist - 64));
     larry.model.origin = position;
     larry.model.angles = self.angles + (0, 180, 0);
     if(self UseButtonPressed()) {
       self larry_ai(larry);
-      while(self UseButtonPressed()) {
+      while (self UseButtonPressed())
         wait(0.05);
-      }
     }
   }
 }
@@ -917,7 +896,7 @@ larry_ai(larry) {
 
 larry_ai_thread(larry, origin, angles) {
   level endon("kill_larry");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     larry.menu[larry.menu_health] SetValue(self.health);
     larry.menu[larry.menu_damage] SetText("");
@@ -932,11 +911,11 @@ larry_ai_thread(larry, origin, angles) {
 
 larry_ai_damage(larry) {
   level endon("kill_larry");
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
     range = "";
     if(attacker == level.players[0]) {
-      eye = level.players[0] getEye();
+      eye = level.players[0] GetEye();
       eye = (eye[0], eye[1], eye[2] + 20);
       range = int(Distance(eye, self.origin));
     }
@@ -951,7 +930,7 @@ larry_ai_damage(larry) {
 
 larry_ai_health(larry) {
   level endon("kill_larry");
-  for(;;) {
+  for (;;) {
     wait(0.05);
     larry.menu[larry.menu_health] SetValue(self.health);
   }
@@ -995,7 +974,7 @@ larry_hud_init(larry) {
 larry_hud_destroy(larry) {
   if(isDefined(larry.hud)) {
     larry.hud Destroy();
-    for(i = 0; i < larry.menu.size; i++) {
+    for (i = 0; i < larry.menu.size; i++) {
       larry.menu[i] Destroy();
     }
     larry.clearTextMarker Destroy();

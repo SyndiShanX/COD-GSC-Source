@@ -16,17 +16,17 @@
 function init_shared() {
   level._effect["acousticsensor_enemy_light"] = "_t6/misc/fx_equip_light_red";
   level._effect["acousticsensor_friendly_light"] = "_t6/misc/fx_equip_light_green";
-  callback::add_weapon_watcher(&createacousticsensorwatcher);
+  callback::add_weapon_watcher( & createacousticsensorwatcher);
 }
 
 function createacousticsensorwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("acoustic_sensor", self.team);
-  watcher.onspawn = &onspawnacousticsensor;
-  watcher.ondetonatecallback = &acousticsensordetonate;
-  watcher.stun = &weaponobjects::weaponstun;
+  watcher.onspawn = & onspawnacousticsensor;
+  watcher.ondetonatecallback = & acousticsensordetonate;
+  watcher.stun = & weaponobjects::weaponstun;
   watcher.stuntime = 5;
   watcher.hackable = 1;
-  watcher.ondamage = &watchacousticsensordamage;
+  watcher.ondamage = & watchacousticsensordamage;
 }
 
 function onspawnacousticsensor(watcher, player) {
@@ -36,7 +36,7 @@ function onspawnacousticsensor(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playLoopSound("fly_acoustic_sensor_lp");
+  self playloopsound("fly_acoustic_sensor_lp");
   if(!self util::ishacked()) {
     player addweaponstat(self.weapon, "used", 1);
   }
@@ -44,10 +44,10 @@ function onspawnacousticsensor(watcher, player) {
 }
 
 function acousticsensordetonate(attacker, weapon, target) {
-  if(!isDefined(weapon) || !weapon.isemp) {
-    playFX(level._equipment_explode_fx, self.origin);
+  if(!isdefined(weapon) || !weapon.isemp) {
+    playfx(level._equipment_explode_fx, self.origin);
   }
-  if(isDefined(attacker)) {
+  if(isdefined(attacker)) {
     if(self.owner util::isenemyplayer(attacker)) {
       attacker challenges::destroyedequipment(weapon);
       scoreevents::processscoreevent("destroyed_motion_sensor", attacker, self.owner, weapon);
@@ -63,7 +63,7 @@ function destroyent() {
 
 function watchshutdown(player, origin) {
   self util::waittill_any("death", "hacked");
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player.acousticsensor = undefined;
   }
 }
@@ -71,16 +71,16 @@ function watchshutdown(player, origin) {
 function watchacousticsensordamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setCanDamage(1);
+  self setcandamage(1);
   damagemax = 100;
   if(!self util::ishacked()) {
     self.damagetaken = 0;
   }
-  while(true) {
+  while (true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isdefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(level.teambased && attacker.team == self.owner.team && attacker != self.owner) {
@@ -100,7 +100,7 @@ function watchacousticsensordamage(watcher) {
         }
       }
     }
-    if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
+    if(isplayer(attacker) && level.teambased && isdefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
       continue;
     }
     if(type == "MOD_MELEE" || weapon.isemp) {

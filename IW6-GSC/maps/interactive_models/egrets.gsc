@@ -42,9 +42,8 @@ main() {
     var_0.rigmodel_anims["land_groundmp"] = "bird_flock_large_land_ground";
   }
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive["egrets"] = var_0;
   thread maps\interactive_models\_birds::birds();

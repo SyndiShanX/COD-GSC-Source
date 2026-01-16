@@ -14,9 +14,8 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_team("allies");
   maps\_vehicle::build_unload_groups(::unload_groups);
 
-  if(!isDefined(anim._effect)) {
+  if(!isDefined(anim._effect))
     anim._effect = [];
-  }
 
   maps\_vehicle::build_light(var_2, "headlight_truck_left", "tag_headlight_left", "fx/misc/car_headlight_jeep_l_clk", "headlights");
   maps\_vehicle::build_light(var_2, "headlight_truck_right", "tag_headlight_right", "fx/misc/car_headlight_jeep_r_clk", "headlights");
@@ -40,9 +39,8 @@ init_local() {
   self.update_time = -1;
   self.kill_my_fx = 0;
 
-  if(!maps\_utility::is_specialop()) {
+  if(!maps\_utility::is_specialop())
     thread do_steering();
-  }
 
   self.bigjump_timedelta = 500;
   self.event_time = -1;
@@ -106,9 +104,8 @@ setridershooting() {
 }
 
 snowmobile_fx(var_0) {
-  if(isDefined(anim._effect[var_0])) {
+  if(isDefined(anim._effect[var_0]))
     playFXOnTag(anim._effect[var_0], self, "tag_deathfx");
-  }
 }
 
 listen_leftground() {
@@ -182,9 +179,8 @@ listen_collision() {
       }
     }
 
-    if(self.kill_my_fx == 0) {
+    if(self.kill_my_fx == 0)
       snowmobile_fx("snowmobile_collision");
-    }
   }
 }
 
@@ -227,9 +223,8 @@ init_snowmobile_mount_anims() {
       continue;
     }
 
-    if(issubstr(var_2, "snowmobile_driver_mount")) {
+    if(issubstr(var_2, "snowmobile_driver_mount"))
       level.snowmobile_mount_anims["snowmobile_driver"][var_2] = 1;
-    }
   }
 }
 
@@ -318,9 +313,8 @@ setanims() {
   init_snowmobile_mount_anims();
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 2; var_1++) {
+  for(var_1 = 0; var_1 < 2; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_driver";
   var_0[0].linktoblend = 1;

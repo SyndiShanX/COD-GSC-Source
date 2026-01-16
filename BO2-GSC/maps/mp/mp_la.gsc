@@ -29,19 +29,18 @@ main() {
   precachemodel("collision_physics_wall_128x128x10");
   precachemodel("p6_building_granite_tan_brokenb");
 
-  if(gamemodeismode(level.gamemode_wager_match)) {
+  if(gamemodeismode(level.gamemode_wager_match))
     maps\mp\_compass::setupminimap("compass_map_mp_la_wager");
-  } else {
+  else
     maps\mp\_compass::setupminimap("compass_map_mp_la");
-  }
 
   maps\mp\_load::main();
   maps\mp\mp_la_amb::main();
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -75,7 +74,7 @@ main() {
   spawncollision("collision_physics_wall_128x128x10", "collider", (-2067, 1390, -102), vectorscale((0, 1, 0), 270.0));
   concrete1 = spawn("script_model", (-2040.54, 636.504, -215.717));
   concrete1.angles = (0.0251585, 359.348, 178.338);
-  concrete1 setModel("p6_building_granite_tan_brokenb");
+  concrete1 setmodel("p6_building_granite_tan_brokenb");
   level.levelkothdisable = [];
   level.levelkothdisable[level.levelkothdisable.size] = spawn("trigger_radius", (-1337, 2016, 8.5), 0, 40, 50);
   level thread maps\mp\killstreaks\_turret_killstreak::addnoturrettrigger((-2295, 3843.5, -193), 80, 64);
@@ -95,7 +94,7 @@ levelspawndvars(reset_dvars) {
 
 destructible_lights() {
   wait 0.05;
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
     if(destructible.destructibledef == "veh_t6_police_car_destructible_mp") {

@@ -23,6 +23,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\weapons\weaponobjects;
+
 #namespace shockrifle;
 
 init_shared() {
@@ -82,7 +83,7 @@ function_c1aa8f6b(watcher) {
   watcher.timeout = level.var_a5ff950.shockduration;
   watcher.ondetonatecallback = &function_7ce0a335;
   watcher.activationdelay = 0;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
   watcher.onspawn = &function_aa6e2f52;
   watcher.ondamage = &function_bcc47944;
@@ -150,10 +151,10 @@ function_a6beb598(notifystr) {
 }
 
 function_5fff8c45(watcher, hitent) {
-  self endon(#"death", # "hacked", # "kill_target_detection");
+  self endon(#"death", #"hacked", #"kill_target_detection");
 
   if(isDefined(hitent)) {
-    hitent endoncallback(&function_a6beb598, # "hash_16c7de1837351e82");
+    hitent endoncallback(&function_a6beb598, #"hash_16c7de1837351e82");
     hitent.submunition = self;
   }
 
@@ -240,7 +241,7 @@ function_13c7b967(owner) {
   }
 
   obj_id = gameobjects::get_next_obj_id();
-  objective_add(obj_id, "invisible", self.origin, # "shockrifle_shocked");
+  objective_add(obj_id, "invisible", self.origin, #"shockrifle_shocked");
   objective_onentity(obj_id, self);
   objective_setvisibletoall(obj_id);
   objective_setteam(obj_id, owner getteam());
@@ -261,7 +262,7 @@ function_3474c820() {
 }
 
 function_5439aa67(shockcharge) {
-  self endon(#"death", # "shock_end");
+  self endon(#"death", #"shock_end");
 
   while(isDefined(self)) {
     if(self isplayerswimming()) {
@@ -368,7 +369,7 @@ function_e0141557(ent, var_51415470) {
     damage = 10000;
   } else if(isplayer && ent isplayerswimming()) {
     damage = 10000;
-  } else if((isplayer || isbot(ent)) && (ent isremotecontrolling() || ent.currentweapon.statname == # "recon_car")) {
+  } else if((isplayer || isbot(ent)) && (ent isremotecontrolling() || ent.currentweapon.statname == #"recon_car")) {
     damage = 10000;
   }
 
@@ -477,7 +478,7 @@ function_bcc47944(watcher) {
     }
 
     if(level.teambased) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }

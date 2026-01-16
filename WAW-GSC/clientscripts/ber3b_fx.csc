@@ -146,15 +146,15 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
-  while(1) {
+  while (1) {
     burst = RandomIntRange(burstMin, burstMax);
-    for(i = 0; i < burst; i++) {
+    for (i = 0; i < burst; i++) {
       traceDist = 10000;
-      target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+      target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
       BulletTracer(self.origin, target, false);
-      playFX(0, muzzleFlash, self.origin, anglesToForward(self.angles));
+      PlayFX(0, muzzleFlash, self.origin, AnglesToForward(self.angles));
       if(RandomInt(100) <= soundChance) {
-        playSound(0, fireSound, self.origin);
+        playsound(0, fireSound, self.origin);
       }
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
@@ -163,7 +163,7 @@ ambient_fakefire(endonString, delayStart) {
 }
 
 intro_fakefire_starter() {
-  while(1) {
+  while (1) {
     level waittill("intro_fakefire_start");
     println("*** Client : Starting intro fakefire");
     firePoints = GetStructArray("struct_intro_fakefire", "targetname");

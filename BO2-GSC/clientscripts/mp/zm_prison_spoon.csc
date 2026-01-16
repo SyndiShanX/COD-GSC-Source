@@ -12,8 +12,8 @@ spoon_visual_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   if(newval == 1) {
     s_spoon_pos = getstruct("struct_spoon_start", "targetname");
     m_spoon = spawn(localclientnum, s_spoon_pos.origin, "script_model");
-    m_spoon setModel("t6_wpn_zmb_spoon_world");
-    m_spoon playSound(0, "zmb_squest_spoon_in");
+    m_spoon setmodel("t6_wpn_zmb_spoon_world");
+    m_spoon playsound(0, "zmb_squest_spoon_in");
 
     for(i = 0; i < 20; i++) {
       m_spoon rotateyaw(90, 1);
@@ -27,12 +27,12 @@ spoon_visual_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     s_spoon = getstruct("s_rising_spork", "targetname");
     s_arm = getstruct("s_rising_arm", "targetname");
     self.my_m_spoon = spawn(localclientnum, s_spoon.origin, "script_model");
-    self.my_m_spoon setModel("t6_wpn_zmb_spork_world");
+    self.my_m_spoon setmodel("t6_wpn_zmb_spork_world");
     self.my_m_spoon.angles = s_spoon.angles;
     m_arm = spawn(localclientnum, s_arm.origin, "script_model");
-    m_arm setModel("c_zom_inmate_g_rarmspawn");
+    m_arm setmodel("c_zom_inmate_g_rarmspawn");
     m_arm.angles = s_arm.angles;
-    m_arm playSound(0, "zmb_squest_spork_out");
+    m_arm playsound(0, "zmb_squest_spork_out");
     self.my_m_spoon linkto(m_arm);
     m_arm moveto(m_arm.origin + vectorscale((0, 0, 1), 26.0), 5);
   } else if(newval == 3)

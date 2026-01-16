@@ -7,11 +7,12 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\fx_shared;
 #include scripts\core_common\struct;
+
 #namespace tacticalinsertion;
 
 init_shared() {
-  level._effect[# "tacticalinsertionfriendly"] = # "_t6/misc/fx_equip_tac_insert_light_grn";
-  level._effect[# "tacticalinsertionenemy"] = # "_t6/misc/fx_equip_tac_insert_light_red";
+  level._effect[#"tacticalinsertionfriendly"] = #"_t6/misc/fx_equip_tac_insert_light_grn";
+  level._effect[#"tacticalinsertionenemy"] = #"_t6/misc/fx_equip_tac_insert_light_red";
   clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", &spawned, 0, 0);
   latlongstruct = struct::get("lat_long", "targetname");
 
@@ -53,7 +54,7 @@ spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasti
 playflarefx(localclientnum) {
   self endon(#"death");
   level endon(#"player_switch");
-  self.tacticalinsertionfx = self fx::function_3539a829(localclientnum, level._effect[# "tacticalinsertionfriendly"], level._effect[# "tacticalinsertionenemy"], "tag_flash");
+  self.tacticalinsertionfx = self fx::function_3539a829(localclientnum, level._effect[#"tacticalinsertionfriendly"], level._effect[#"tacticalinsertionenemy"], "tag_flash");
   self thread watchtacinsertshutdown(localclientnum, self.tacticalinsertionfx);
   looporigin = self.origin;
   audio::playloopat("fly_tinsert_beep", looporigin);

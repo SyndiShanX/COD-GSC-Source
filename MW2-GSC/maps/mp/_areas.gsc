@@ -35,9 +35,8 @@ init() {
   destructibles = getEntArray("destructible_vehicle", "targetname");
 
   foreach(trigger in level.softLandingTriggers) {
-    if(trigger.script_type != "car") {
+    if(trigger.script_type != "car")
       continue;
-    }
 
     foreach(destructible in destructibles) {
       /*
@@ -48,9 +47,8 @@ init() {
       }
       */
 
-      if(distance(trigger.origin, destructible.origin) > 64.0) {
+      if(distance(trigger.origin, destructible.origin) > 64.0)
         continue;
-      }
 
       assert(!isDefined(trigger.destructible));
 
@@ -65,7 +63,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player.softLanding = undefined;
@@ -85,15 +83,14 @@ playerLeaveSoftLanding(trigger) {
 softLandingWaiter() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("soft_landing", trigger, damage);
 
     //if( damage < 10 )
     //	continue;
 
-    if(!isDefined(trigger.destructible)) {
+    if(!isDefined(trigger.destructible))
       continue;
-    }
 
     //magicBullet( "mp5_mp", self.origin, self.origin + (0,0,-100), self );
 

@@ -33,30 +33,30 @@ function function_471d1403() {
     if(room.type != 13) {
       continue;
     }
-    if(isDefined(room.var_2b9a70de) && level.doa.round_number == room.var_2b9a70de) {
+    if(isdefined(room.var_2b9a70de) && level.doa.round_number == room.var_2b9a70de) {
       level.doa.forced_magical_room = 13;
       level.doa.var_94073ca5 = room.name;
       level.doa.var_ff23f7c8 = level.doa.round_number;
       return;
     }
-    if(isDefined(room.var_5281efe5) && level.doa.round_number < room.var_5281efe5) {
+    if(isdefined(room.var_5281efe5) && level.doa.round_number < room.var_5281efe5) {
       continue;
     }
-    if(isDefined(room.var_cbad0e8f) && level.doa.round_number > room.var_cbad0e8f) {
+    if(isdefined(room.var_cbad0e8f) && level.doa.round_number > room.var_cbad0e8f) {
       continue;
     }
-    if(isDefined(room.var_5185e411) && !level[[room.var_5185e411]](room)) {
+    if(isdefined(room.var_5185e411) && !level[[room.var_5185e411]](room)) {
       continue;
     }
-    if(isDefined(room.var_a90de2a1)) {
+    if(isdefined(room.var_a90de2a1)) {
       if(room.var_57ce7582.size > 0) {
         var_cb365fdc = room.var_57ce7582[room.var_57ce7582.size - 1];
       }
-      if(isDefined(var_cb365fdc) && (level.doa.round_number - var_cb365fdc) < room.var_a90de2a1) {
+      if(isdefined(var_cb365fdc) && (level.doa.round_number - var_cb365fdc) < room.var_a90de2a1) {
         continue;
       }
     }
-    if(isDefined(room.random) && randomint(100) > room.random) {
+    if(isdefined(room.random) && randomint(100) > room.random) {
       continue;
     }
     possible[possible.size] = room;
@@ -86,7 +86,7 @@ function private function_4952be41(room) {
     timeout = room.timeout * 1000;
     expire = gettime() + timeout;
     var_4af4d74c = 0;
-    while(gettime() < expire) {
+    while (gettime() < expire) {
       if(level flag::get("doa_game_is_over")) {
         break;
       }
@@ -104,17 +104,17 @@ function private function_4952be41(room) {
       if(ratio < 0.2 && var_bd205c6c >= 0.2) {
         level thread doa_utility::function_37fb5c23(&"DOA_PLAYER_CHALLENGE_HURRY");
       }
-      if(isDefined(room.banner)) {
+      if(isdefined(room.banner)) {
         data = doa_utility::clamp(diff / timeout, 0, 1);
         level clientfield::set("pumpBannerBar", data);
       }
       var_bd205c6c = ratio;
       wait(0.1);
     }
-    if(isDefined(room.banner)) {
+    if(isdefined(room.banner)) {
       level clientfield::set("pumpBannerBar", 0);
     }
-    if(!(isDefined(room.var_674e3329) && room.var_674e3329)) {
+    if(!(isdefined(room.var_674e3329) && room.var_674e3329)) {
       level notify("hash_d1f5acf7");
     }
   }
@@ -129,7 +129,7 @@ function function_15a0c9b5(room) {
   level thread doa_pickups::function_c1869ec8();
   level waittill("hash_229914a6");
   level notify("hash_4d952f70");
-  if(isDefined(room.var_6f369ab4) && room.var_57ce7582.size >= room.var_6f369ab4) {
+  if(isdefined(room.var_6f369ab4) && room.var_57ce7582.size >= room.var_6f369ab4) {
     arrayremovevalue(level.doa.var_ec2bff7b, room, 0);
   }
   level notify("hash_3b432f18");
@@ -146,7 +146,7 @@ function function_15a0c9b5(room) {
     settopdowncamerayaw(0);
   }
   level.doa.var_52cccfb6 = room;
-  if(isDefined(room.var_45da785b)) {
+  if(isdefined(room.var_45da785b)) {
     level[[room.var_45da785b]](room);
   }
   doa_utility::function_390adefe(0);
@@ -155,19 +155,19 @@ function function_15a0c9b5(room) {
   level.voice waittill("sounddone");
   wait(0.75);
   level thread doa_utility::function_37fb5c23(room.text);
-  if(isDefined(room.vox)) {
-    level.voice playSound(room.vox);
+  if(isdefined(room.vox)) {
+    level.voice playsound(room.vox);
   }
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
   }
-  if(isDefined(room.var_58e293a2)) {
+  if(isdefined(room.var_58e293a2)) {
     level thread[[room.var_58e293a2]](room);
     level flag::wait_till("doa_challenge_running");
     level thread function_4952be41(room);
   }
-  if(isDefined(room.banner)) {
+  if(isdefined(room.banner)) {
     level clientfield::set("activateBanner", room.banner);
   }
   level notify("hash_6d346dac");
@@ -181,24 +181,24 @@ function function_15a0c9b5(room) {
     if(!level flag::get("doa_game_is_over")) {
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_FAILED");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_FAILED2"));
+      level thread doa_utility::function_37fb5c23((isdefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_FAILED2"));
     }
-    if(isDefined(room.var_1cd9eda)) {
+    if(isdefined(room.var_1cd9eda)) {
       level[[room.var_1cd9eda]](room);
     }
   } else {
     if(msg == "player_challenge_success") {
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_SUCCESS");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_SUCCESS2"));
-      if(isDefined(room.var_2530dc89)) {
+      level thread doa_utility::function_37fb5c23((isdefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_SUCCESS2"));
+      if(isdefined(room.var_2530dc89)) {
         level[[room.var_2530dc89]](room);
       }
     } else if(msg == "timeout") {
       level notify(room.name + "_challenge_timeout");
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_TIMEUP");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_TIMEUP2"));
+      level thread doa_utility::function_37fb5c23((isdefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_TIMEUP2"));
     }
   }
   if(!level flag::get("doa_game_is_over")) {
@@ -210,10 +210,10 @@ function function_15a0c9b5(room) {
     }
     doa_pickups::function_c1869ec8();
   }
-  if(isDefined(room.banner)) {
+  if(isdefined(room.banner)) {
     level clientfield::set("activateBanner", 0);
   }
-  if(isDefined(room.var_c64606ef)) {
+  if(isdefined(room.var_c64606ef)) {
     level[[room.var_c64606ef]](room);
   }
 }

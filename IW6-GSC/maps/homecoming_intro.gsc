@@ -227,9 +227,8 @@ intro_rangers_scene() {
   foreach(var_4 in var_2) {
     var_5 = var_4 maps\_utility::spawn_ai();
 
-    if(isai(var_5)) {
+    if(isai(var_5))
       var_5 maps\homecoming_util::ignore_everything();
-    }
 
     var_5 maps\_utility::magic_bullet_shield();
     var_5 maps\homecoming_util::set_ai_array("intro_convo_rangers");
@@ -273,9 +272,8 @@ intro_rangers_scene() {
   var_10 = common_scripts\utility::getstruct("dog_pass_off_spot", "targetname");
   var_11 = [level.hesh, level.intro_dog_guy, level.dog];
 
-  foreach(var_8 in var_11) {
-    var_8 thread intro_dog_pass_off(var_10);
-  }
+  foreach(var_8 in var_11)
+  var_8 thread intro_dog_pass_off(var_10);
 
   common_scripts\utility::flag_wait("FLAG_intro_passoff_start");
   level endon("TRIGFLAG_player_going_through_tent");
@@ -316,9 +314,8 @@ intro_rangers_aimers() {
   var_3 thread maps\_anim::anim_generic_loop(self, "readystand_idle");
   common_scripts\utility::flag_wait("FLAG_intro_rangers_move");
 
-  if(var_3 maps\homecoming_util::parameters_check("leave_delay")) {
+  if(var_3 maps\homecoming_util::parameters_check("leave_delay"))
     wait 0.4;
-  }
 
   var_3 notify("stop_loop");
   self stopanimscripted();
@@ -326,9 +323,8 @@ intro_rangers_aimers() {
 }
 
 intro_rangers_pathing() {
-  if(self != level.hesh) {
+  if(self != level.hesh)
     common_scripts\utility::flag_wait("FLAG_intro_rangers_move");
-  }
 
   var_0 = common_scripts\utility::getstruct("intro_" + self.animname + "_path", "targetname");
   thread maps\_utility::follow_path_and_animate(var_0, 0);
@@ -365,9 +361,8 @@ intro_dog_pass_off(var_0) {
     var_0 maps\_anim::anim_set_rate_single(level.intro_dog_guy, "dog_pass_off_start", 1.5);
     var_0 waittill("dog_pass_off_start");
 
-    if(!common_scripts\utility::flag("FLAG_intro_passoff_start")) {
+    if(!common_scripts\utility::flag("FLAG_intro_passoff_start"))
       var_0 thread maps\_anim::anim_loop_solo(level.intro_dog_guy, "dog_pass_off_start_idle");
-    }
 
     common_scripts\utility::flag_wait("FLAG_intro_handler_start");
     var_0 notify("stop_loop");
@@ -502,9 +497,8 @@ intro_house_blocker_truck() {
   common_scripts\utility::flag_wait_all("FLAG_intro_rangers_move3", "FLAG_ranger1_in_backyard", "FLAG_ranger2_in_backyard");
   var_4 = getent("bunker_playercheck_trig", "targetname");
 
-  while(!level.player istouching(var_4)) {
+  while(!level.player istouching(var_4))
     wait 0.05;
-  }
 
   getent("intro_bunker_truck_blocker", "targetname") maps\_utility::show_entity();
   var_5 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("intro_house_blocker_truck");
@@ -538,15 +532,13 @@ intro_animated_scenes() {
   var_2 = getent("intro_anim_ai", "targetname");
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4.script_soundalias)) {
+    if(isDefined(var_4.script_soundalias))
       var_4 thread intro_animated_scenes_sound();
-    }
 
     var_5 = var_1;
 
-    if(var_4 maps\homecoming_util::parameters_check("ai")) {
+    if(var_4 maps\homecoming_util::parameters_check("ai"))
       var_5 = var_2;
-    }
 
     switch (var_4.script_noteworthy) {
       case "sitting_wounded":
@@ -661,9 +653,8 @@ bared_wire_scene() {
   var_1 show();
   common_scripts\utility::flag_wait_all("TRIGFLAG_barbed_wire_close", "FLAG_waver_through_wire");
 
-  while(level.barbedwirerunners.size > 0) {
+  while(level.barbedwirerunners.size > 0)
     wait 0.1;
-  }
 
   var_4 = getanimlength(var_1 maps\_utility::getanim("wire_pull"));
   thread maps\_anim::anim_single(var_3, "wire_pull");
@@ -732,28 +723,24 @@ generic_looper(var_0) {
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1 maps\_utility::magic_bullet_shield();
 
-  if(maps\homecoming_util::parameters_check("notsolid")) {
+  if(maps\homecoming_util::parameters_check("notsolid"))
     var_1 notsolid();
-  }
 
-  if(maps\homecoming_util::parameters_check("nogun")) {
+  if(maps\homecoming_util::parameters_check("nogun"))
     var_1 maps\_utility::gun_remove();
-  }
 
   if(maps\homecoming_util::parameters_check("hide")) {
     var_1 maps\_utility::hide_entity();
     var_1 maps\_utility::flagwaitthread("TRIGFLAG_player_going_through_tent", maps\_utility::show_entity);
   }
 
-  if(maps\homecoming_util::parameters_check("radio")) {
+  if(maps\homecoming_util::parameters_check("radio"))
     var_1 attach("prop_uav_radio", "tag_inhand");
-  }
 
-  if(maps\homecoming_util::parameters_check("first_frame")) {
+  if(maps\homecoming_util::parameters_check("first_frame"))
     thread maps\_anim::anim_generic_first_frame(var_1, self.animation);
-  } else {
+  else
     thread maps\_anim::anim_generic_loop(var_1, self.animation);
-  }
 
   common_scripts\utility::flag_wait("TRIGFLAG_player_up_bunker_stairs");
   var_1 maps\homecoming_util::delete_safe();
@@ -764,9 +751,8 @@ intro_animated_scenes_sound() {
   var_0 = self.script_soundalias;
   var_1 = 100;
 
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     var_1 = self.radius;
-  }
 
   var_2 = spawn("trigger_radius", self.origin, 0, var_1, var_1);
 
@@ -789,7 +775,7 @@ wounded_carry_guy() {
   var_2 = var_1 maps\_utility::spawn_ai();
   var_2 useanimtree(#animtree);
   var_2.name = "Pvt. Gavin";
-  var_2 setlookattext("Pvt. Gavin", &"");
+  var_2 setlookattext("Pvt. Gavin", & "");
   var_2 thread maps\_utility::magic_bullet_shield();
   var_2 maps\homecoming_drones::drone_gun_remove();
   thread maps\_utility::magic_bullet_shield();
@@ -891,11 +877,10 @@ intro_fake_mortars() {
   var_3 = 0;
 
   for(;;) {
-    if(level.player istouching(var_1)) {
+    if(level.player istouching(var_1))
       wait(randomfloatrange(3, 5));
-    } else {
+    else
       wait(randomfloatrange(5, 8));
-    }
 
     var_4 = common_scripts\utility::random(var_2);
     var_2 = common_scripts\utility::array_remove(var_0, var_4);
@@ -921,9 +906,8 @@ intro_fake_mortars() {
       level.player playrumbleonentity("damage_light");
       physicsjolt(level.player.origin, 400, 200, anglesToForward(level.player.angles) * 0.05);
 
-      if(level.player istouching(var_1)) {
+      if(level.player istouching(var_1))
         playFX(level._effect["mortar"]["sand"], var_4.origin);
-      }
 
       var_4 thread common_scripts\utility::play_sound_in_space("mortar_explosion_big_dirt");
     }
@@ -945,9 +929,8 @@ intro_flavorburst(var_0) {
   for(;;) {
     var_2 = common_scripts\utility::getclosest(level.player.origin, var_1, 800);
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_2 thread custom_flavor_burst_on_me();
-    }
 
     wait 6;
   }
@@ -1001,9 +984,8 @@ intro_bunker_turrets() {
   for(;;) {
     wait(randomfloatrange(2.5, 4.5));
 
-    foreach(var_3 in var_0) {
-      var_3 linkto(var_7);
-    }
+    foreach(var_3 in var_0)
+    var_3 linkto(var_7);
 
     var_12 = undefined;
 
@@ -1061,9 +1043,8 @@ intro_runners() {
   self.badplaceawareness = 0;
   maps\_utility::magic_bullet_shield(1);
 
-  if(maps\homecoming_util::parameters_check("jog")) {
+  if(maps\homecoming_util::parameters_check("jog"))
     maps\_utility::set_generic_run_anim("combat_jog");
-  }
 
   thread maps\homecoming_util::move_on_path(common_scripts\utility::getstruct(self.target, "targetname"), 1);
 
@@ -1107,9 +1088,8 @@ intro_hesco_runners() {
     var_1 thread maps\_anim::anim_generic_loop(self, "covercrouch_hide_idle");
     maps\homecoming_util::waittill_trigger("hesco_runners_run_trig");
 
-    if(isDefined(var_0.script_duration)) {
+    if(isDefined(var_0.script_duration))
       wait(var_0.script_duration);
-    }
 
     var_1 notify("stop_loop");
     self stopanimscripted();
@@ -1152,9 +1132,8 @@ intro_bunker_house_runners() {
     if(maps\_utility::within_fov_of_players(self.origin, var_3)) {
       continue;
     }
-    if(!level.player maps\_utility::can_see_origin(self.origin)) {
+    if(!level.player maps\_utility::can_see_origin(self.origin))
       maps\homecoming_util::delete_safe();
-    }
   }
 
   maps\homecoming_util::delete_safe();

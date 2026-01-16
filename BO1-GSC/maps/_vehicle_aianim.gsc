@@ -24,9 +24,8 @@ vehicle_enter(vehicle, tag) {
   if(!isDefined(pos)) {
     return;
   }
-  if(pos == 0) {
+  if(pos == 0)
     self.drivingVehicle = true;
-  }
   animpos = anim_pos(vehicle, pos);
   vehicle.usedPositions[pos] = true;
   self.pos = pos;
@@ -128,13 +127,11 @@ handle_attached_guys() {
     }
   }
   self.attachedguys = [];
-  if(!(isDefined(level.vehicle_aianims) && isDefined(level.vehicle_aianims[type]))) {
+  if(!(isDefined(level.vehicle_aianims) && isDefined(level.vehicle_aianims[type])))
     return;
-  }
   maxpos = level.vehicle_aianims[type].size;
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "ai_wait_go") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "ai_wait_go")
     thread ai_wait_go();
-  }
   self.runningtovehicle = [];
   self.usedPositions = [];
   self.getinorgs = [];
@@ -142,9 +139,8 @@ handle_attached_guys() {
   vehicleanim = self get_aianims();
   for(i = 0; i < maxpos; i++) {
     self.usedPositions[i] = false;
-    if(isDefined(self.script_nomg) && self.script_nomg && isDefined(vehicleanim[i].bIsgunner) && vehicleanim[i].bIsgunner) {
+    if(isDefined(self.script_nomg) && self.script_nomg && isDefined(vehicleanim[i].bIsgunner) && vehicleanim[i].bIsgunner)
       self.usedpositions[1] = true;
-    }
   }
 }
 
@@ -172,9 +168,9 @@ guy_deathimate_me(guy, animpos) {
   guy linkto(self, animpos.sittag, (0, 0, 0), (0, 0, 0));
   guy notsolid();
   thread animontag(guy, animpos.sittag, animpos.death);
-  if(!isDefined(animpos.death_delayed_ragdoll)) {
+  if(!isDefined(animpos.death_delayed_ragdoll))
     guy waittillmatch("animontagdone", "start_ragdoll");
-  } else {
+  else {
     guy unlink();
     guy startragdoll();
     wait animpos.death_delayed_ragdoll;
@@ -190,15 +186,13 @@ guy_deathimate_me(guy, animpos) {
     guy startragdoll();
     wait .05;
   }
-  if(!guy isragdoll()) {
+  if(!guy isragdoll())
     guy delete();
-  }
 }
 
 load_ai(array, bGoddriver) {
-  if(!isDefined(bGoddriver)) {
+  if(!isDefined(bGoddriver))
     bGoddriver = false;
-  }
   if(!isDefined(array)) {
     array = vehicle_get_riders();
   }
@@ -219,12 +213,10 @@ vehicle_get_riders() {
   ai = getaiarray(self.vteam);
   for(i = 0; i < ai.size; i++) {
     guy = ai[i];
-    if(!isDefined(guy.script_vehicleride)) {
+    if(!isDefined(guy.script_vehicleride))
       continue;
-    }
-    if(guy.script_vehicleride != self.script_vehicleride) {
+    if(guy.script_vehicleride != self.script_vehicleride)
       continue;
-    }
     array[array.size] = guy;
   }
   return array;
@@ -233,15 +225,13 @@ vehicle_get_riders() {
 get_my_vehicleride() {
   array = [];
   assertex(isDefined(self.script_vehicleride), "Tried to get my ride but I have no .script_vehicleride");
-  vehicles = getEntArray("script_vehicle", "classname");
+  vehicles = getentarray("script_vehicle", "classname");
   for(i = 0; i < vehicles.size; i++) {
     vehicle = vehicles[i];
-    if(!isDefined(vehicle.script_vehicleride)) {
+    if(!isDefined(vehicle.script_vehicleride))
       continue;
-    }
-    if(vehicle.script_vehicleride != self.script_vehicleride) {
+    if(vehicle.script_vehicleride != self.script_vehicleride)
       continue;
-    }
     array[array.size] = vehicle;
   }
   assertex(array.size == 1, "Tried to get my ride but there was zero or multiple rides to choose from");
@@ -260,18 +250,16 @@ get_in_vehicle(guy, bGoddriver) {
 }
 
 handle_detached_guys_check() {
-  if(vehicle_hasavailablespots()) {
+  if(vehicle_hasavailablespots())
     return true;
-  }
   assertmsg("script sent too many ai to vehicle( max is: " + level.vehicle_aianims[self.vehicletype].size + " )");
 }
 
 vehicle_hasavailablespots() {
-  if(level.vehicle_aianims[self.vehicletype].size - self.runningtovehicle.size) {
+  if(level.vehicle_aianims[self.vehicletype].size - self.runningtovehicle.size)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 run_to_vehicle_loaded(vehicle) {
@@ -459,20 +447,17 @@ anim_pos_from_tag(vehicle, tag) {
 
 guy_deathhandle(guy, pos) {
   guy waittill("death");
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self.riders = array_remove(self.riders, guy);
   self.usedPositions[pos] = false;
 }
 
 setup_aianimthreads() {
-  if(!isDefined(level.vehicle_aianimthread)) {
+  if(!isDefined(level.vehicle_aianimthread))
     level.vehicle_aianimthread = [];
-  }
-  if(!isDefined(level.vehicle_aianimcheck)) {
+  if(!isDefined(level.vehicle_aianimcheck))
     level.vehicle_aianimcheck = [];
-  }
   level.vehicle_aianimthread["idle"] = ::guy_idle;
   level.vehicle_aianimthread["duck"] = ::guy_duck;
   level.vehicle_aianimthread["duck_once"] = ::guy_duck_once;
@@ -512,9 +497,8 @@ guy_handle(guy, pos) {
       ](guy, pos))
       continue;
     if(isDefined(self.groupedanim_pos)) {
-      if(pos != self.groupedanim_pos) {
+      if(pos != self.groupedanim_pos)
         continue;
-      }
       waittillframeend;
       self.groupedanim_pos = undefined;
     }
@@ -543,12 +527,10 @@ guy_queue_anim(guy, pos) {
   lastanimframe = gettime() - 100;
   while(1) {
     if(guy.queued_anim_threads.size) {
-      if(gettime() != lastanimframe) {
+      if(gettime() != lastanimframe)
         guy waittill("anim_on_tag_done");
-      }
-      if(!guy.queued_anim_threads.size) {
+      if(!guy.queued_anim_threads.size)
         continue;
-      }
       guy notify("newanim");
       thread[[guy.queued_anim_threads[0]]](guy, pos);
       guy.queued_anim_threads = array_remove(guy.queued_anim_threads, guy.queued_anim_threads[0]);
@@ -563,9 +545,8 @@ guy_queue_anim(guy, pos) {
 guy_stand(guy, pos) {
   animpos = anim_pos(self, pos);
   vehicleanim = self get_aianims();
-  if(!isDefined(animpos.standup)) {
+  if(!isDefined(animpos.standup))
     return;
-  }
   guy endon("newanim");
   self endon("death");
   guy endon("death");
@@ -582,13 +563,11 @@ guy_stand_attack(guy, pos) {
   mintime = 0;
   while(1) {
     timer2 = gettime() + 2000;
-    while(gettime() < timer2 && isDefined(guy.enemy)) {
+    while(gettime() < timer2 && isDefined(guy.enemy))
       animontag(guy, animpos.sittag, guy.vehicle_standattack, undefined, undefined, "firing");
-    }
     rnum = randomInt(5) + 10;
-    for(i = 0; i < rnum; i++) {
+    for(i = 0; i < rnum; i++)
       animontag(guy, animpos.sittag, animpos.standidle);
-    }
   }
 }
 
@@ -609,11 +588,10 @@ driver_idle_speed(driver, pos) {
   driver endon("death");
   animpos = anim_pos(self, pos);
   while(1) {
-    if(self getspeedmph() == 0) {
+    if(self getspeedmph() == 0)
       driver.vehicle_idle = animpos.idle_animstop;
-    } else {
+    else
       driver.vehicle_idle = animpos.idle_anim;
-    }
     wait .25;
   }
 }
@@ -623,9 +601,8 @@ guy_reaction(guy, pos) {
   guy endon("newanim");
   self endon("death");
   guy endon("death");
-  if(isDefined(animpos.reaction)) {
+  if(isDefined(animpos.reaction))
     animontag(guy, animpos.sittag, animpos.reaction);
-  }
   thread guy_idle(guy, pos);
 }
 
@@ -634,9 +611,8 @@ guy_turret_turnleft(guy, pos) {
   guy endon("newanim");
   self endon("death");
   guy endon("death");
-  while(1) {
+  while(1)
     animontag(guy, animpos.sittag, guy.turret_turnleft);
-  }
 }
 
 guy_turret_turnright(guy, pos) {
@@ -644,9 +620,8 @@ guy_turret_turnright(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = anim_pos(self, pos);
-  while(1) {
+  while(1)
     animontag(guy, animpos.sittag, guy.turret_turnleft);
-  }
 }
 
 guy_turret_fire(guy, pos) {
@@ -654,17 +629,15 @@ guy_turret_fire(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = anim_pos(self, pos);
-  if(isDefined(animpos.turret_fire)) {
+  if(isDefined(animpos.turret_fire))
     animontag(guy, animpos.sittag, animpos.turret_fire);
-  }
   thread guy_idle(guy, pos);
 }
 
 guy_idle(guy, pos, ignoredeath) {
   guy endon("newanim");
-  if(!isDefined(ignoredeath)) {
+  if(!isDefined(ignoredeath))
     self endon("death");
-  }
   guy endon("death");
   guy.vehicle_idling = true;
   guy notify("gotime");
@@ -672,28 +645,24 @@ guy_idle(guy, pos, ignoredeath) {
     return;
   }
   animpos = anim_pos(self, pos);
-  if(isDefined(animpos.mgturret)) {
+  if(isDefined(animpos.mgturret))
     return;
-  }
-  if(isDefined(animpos.hideidle) && animpos.hideidle) {
+  if(isDefined(animpos.hideidle) && animpos.hideidle)
     guy hide();
-  }
-  if(isDefined(animpos.idle_animstop) && isDefined(animpos.idle_anim)) {
+  if(isDefined(animpos.idle_animstop) && isDefined(animpos.idle_anim))
     thread driver_idle_speed(guy, pos);
-  }
   while(1) {
     guy notify("idle");
-    if(isDefined(guy.vehicle_idle_override)) {
+    if(isDefined(guy.vehicle_idle_override))
       animontag(guy, animpos.sittag, guy.vehicle_idle_override);
-    } else if(isDefined(animpos.idleoccurrence)) {
+    else if(isDefined(animpos.idleoccurrence)) {
       theanim = randomoccurrance(guy, animpos.idleoccurrence);
       animontag(guy, animpos.sittag, guy.vehicle_idle[theanim]);
     } else if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_idle))
       animontag(guy, animpos.sittag, animpos.player_idle);
     else {
-      if(isDefined(animpos.vehicle_idle)) {
+      if(isDefined(animpos.vehicle_idle))
         self thread setanimrestart_once(animpos.vehicle_idle);
-      }
       if(isDefined(guy.do_combat_idle) && guy.do_combat_idle && isDefined(guy.vehicle_idle_combat)) {
         animontag(guy, animpos.sittag, guy.vehicle_idle_combat);
       } else {
@@ -711,10 +680,9 @@ randomoccurrance(guy, occurrences) {
     range[i] = totaloccurrance;
   }
   pick = randomInt(totaloccurrance);
-  for(i = 0; i < occurrences.size; i++) {
+  for(i = 0; i < occurrences.size; i++)
     if(pick < range[i])
-  }
-  return i;
+      return i;
 }
 
 guy_duck_once_check(guy, pos) {
@@ -727,9 +695,8 @@ guy_duck_once(guy, pos) {
   guy endon("death");
   animpos = anim_pos(self, pos);
   if(isDefined(animpos.duck_once)) {
-    if(isDefined(animpos.vehicle_duck_once)) {
+    if(isDefined(animpos.vehicle_duck_once))
       self thread setanimrestart_once(animpos.vehicle_duck_once);
-    }
     animontag(guy, animpos.sittag, animpos.duck_once);
   }
   thread guy_idle(guy, pos);
@@ -745,9 +712,8 @@ guy_weave(guy, pos) {
   guy endon("death");
   animpos = anim_pos(self, pos);
   if(isDefined(animpos.weave)) {
-    if(isDefined(animpos.vehicle_weave)) {
+    if(isDefined(animpos.vehicle_weave))
       self thread setanimrestart_once(animpos.vehicle_weave);
-    }
     animontag(guy, animpos.sittag, animpos.weave);
   }
   thread guy_idle(guy, pos);
@@ -758,9 +724,8 @@ guy_duck(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = anim_pos(self, pos);
-  if(isDefined(animpos.duckin)) {
+  if(isDefined(animpos.duckin))
     animontag(guy, animpos.sittag, animpos.duckin);
-  }
   thread guy_duck_idle(guy, pos);
 }
 
@@ -770,9 +735,8 @@ guy_duck_idle(guy, pos) {
   guy endon("death");
   animpos = anim_pos(self, pos);
   theanim = randomoccurrance(guy, animpos.duckidleoccurrence);
-  while(1) {
+  while(1)
     animontag(guy, animpos.sittag, animpos.duckidle[theanim]);
-  }
 }
 
 guy_duck_out(guy, pos) {
@@ -796,44 +760,38 @@ guy_unload_que(guy) {
 }
 
 riders_unloadable(unload_group) {
-  if(!self.riders.size) {
+  if(!self.riders.size)
     return false;
-  }
   for(i = 0; i < self.riders.size; i++) {
     assert(isDefined(self.riders[i].pos));
-    if(check_unloadgroup(self.riders[i].pos, unload_group)) {
+    if(check_unloadgroup(self.riders[i].pos, unload_group))
       return true;
-    }
   }
   return false;
 }
 
 check_unloadgroup(pos, unload_group) {
-  if(!isDefined(unload_group)) {
+  if(!isDefined(unload_group))
     unload_group = self.unload_group;
-  }
   type = self.vehicletype;
-  if(!isDefined(level.vehicle_unloadgroups[type])) {
+  if(!isDefined(level.vehicle_unloadgroups[type]))
     return true;
-  }
   if(!isDefined(level.vehicle_unloadgroups[type][unload_group])) {
     println("Invalid Unload group on node at origin: " + self.currentnode.origin + " with group:( \"" + unload_group + "\" )");
     println("Unloading everybody");
     return true;
   }
   group = level.vehicle_unloadgroups[type][unload_group];
-  for(i = 0; i < group.size; i++) {
+  for(i = 0; i < group.size; i++)
     if(pos == group[i])
-  }
-  return true;
+      return true;
   return false;
 }
 
 getoutrig_model_idle(model, tag, animation) {
   self endon("unload");
-  while(1) {
+  while(1)
     animontag(model, tag, animation);
-  }
 }
 
 getoutrig_model(animpos, model, tag, animation, bIdletillunload) {
@@ -844,9 +802,8 @@ getoutrig_model(animpos, model, tag, animation, bIdletillunload) {
   }
   self.unloadque = array_add(self.unloadque, model);
   self thread getoutrig_abort(model, tag, animation);
-  if(!isDefined(self.crashing)) {
+  if(!isDefined(self.crashing))
     animontag(model, tag, animation);
-  }
   model unlink();
   if(!isDefined(self)) {
     model delete();
@@ -854,9 +811,8 @@ getoutrig_model(animpos, model, tag, animation, bIdletillunload) {
   }
   assert(isDefined(self.unloadque));
   self.unloadque = array_remove(self.unloadque, model);
-  if(!self.unloadque.size) {
+  if(!self.unloadque.size)
     self notify("unloaded");
-  }
   self.getoutrig[animpos.getoutrig] = undefined;
   wait 10;
   model delete();
@@ -864,20 +820,17 @@ getoutrig_model(animpos, model, tag, animation, bIdletillunload) {
 
 getoutrig_disable_abort_notify_after_riders_out() {
   wait .05;
-  while(isalive(self) && self.unloadque.size > 2) {
+  while(isalive(self) && self.unloadque.size > 2)
     wait .05;
-  }
-  if(!isalive(self) || (isDefined(self.crashing) && self.crashing)) {
+  if(!isalive(self) || (isDefined(self.crashing) && self.crashing))
     return;
-  }
   self notify("getoutrig_disable_abort");
 }
 
 getoutrig_abort_while_deploying() {
   self endon("end_getoutrig_abort_while_deploying");
-  while(!isDefined(self.crashing)) {
+  while(!isDefined(self.crashing))
     wait 0.05;
-  }
   array_delete(self.riders);
   self notify("crashed_while_deploying");
 }
@@ -885,9 +838,8 @@ getoutrig_abort_while_deploying() {
 getoutrig_abort(model, tag, animation) {
   totalAnimTime = getanimlength(animation);
   ropesFallAnimTime = totalAnimTime - 1.0;
-  if(self.vehicletype == "mi17") {
+  if(self.vehicletype == "mi17")
     ropesFallAnimTime = totalAnimTime - .5;
-  }
   ropesDeployedAnimTime = 2.5;
   assert(totalAnimTime > ropesDeployedAnimTime);
   assert(ropesFallAnimTime - ropesDeployedAnimTime > 0);
@@ -896,25 +848,20 @@ getoutrig_abort(model, tag, animation) {
   thread getoutrig_abort_while_deploying();
   waittill_notify_or_timeout("crashed_while_deploying", ropesDeployedAnimTime);
   self notify("end_getoutrig_abort_while_deploying");
-  while(!isDefined(self.crashing)) {
+  while(!isDefined(self.crashing))
     wait 0.05;
-  }
   thread animontag(model, tag, animation);
   waittillframeend;
   model setanimtime(animation, ropesFallAnimTime / totalAnimTime);
   for(i = 0; i < self.riders.size; i++) {
-    if(!isDefined(self.riders[i])) {
+    if(!isDefined(self.riders[i]))
       continue;
-    }
-    if(!isDefined(self.riders[i].ragdoll_getout_death)) {
+    if(!isDefined(self.riders[i].ragdoll_getout_death))
       continue;
-    }
-    if(self.riders[i].ragdoll_getout_death != 1) {
+    if(self.riders[i].ragdoll_getout_death != 1)
       continue;
-    }
-    if(!isDefined(self.riders[i].ridingvehicle)) {
+    if(!isDefined(self.riders[i].ridingvehicle))
       continue;
-    }
     self.riders[i] damage_notify_wrapper(100, self.riders[i].ridingvehicle);
   }
 }
@@ -922,31 +869,26 @@ getoutrig_abort(model, tag, animation) {
 setanimrestart_once(vehicle_anim, bClearAnim) {
   self endon("death");
   self endon("dont_clear_anim");
-  if(!isDefined(bClearAnim)) {
+  if(!isDefined(bClearAnim))
     bClearAnim = true;
-  }
   cycletime = getanimlength(vehicle_anim);
   self SetAnimRestart(vehicle_anim);
   wait cycletime;
-  if(bClearAnim) {
+  if(bClearAnim)
     self clearanim(vehicle_anim, 0);
-  }
 }
 
 getout_rigspawn(animatemodel, pos, bIdletillunload) {
-  if(!isDefined(bIdletillunload)) {
+  if(!isDefined(bIdletillunload))
     bIdletillunload = true;
-  }
   type = self.vehicletype;
   animpos = anim_pos(self, pos);
-  if(isDefined(self.attach_model_override) && isDefined(self.attach_model_override[animpos.getoutrig])) {
+  if(isDefined(self.attach_model_override) && isDefined(self.attach_model_override[animpos.getoutrig]))
     overrridegetoutrig = true;
-  } else {
+  else
     overrridegetoutrig = false;
-  }
-  if(!isDefined(animpos.getoutrig) || isDefined(self.getoutrig[animpos.getoutrig]) || overrridegetoutrig) {
+  if(!isDefined(animpos.getoutrig) || isDefined(self.getoutrig[animpos.getoutrig]) || overrridegetoutrig)
     return;
-  }
   origin = animatemodel gettagorigin(level.vehicle_attachedmodels[type][animpos.getoutrig].tag);
   angles = animatemodel gettagangles(level.vehicle_attachedmodels[type][animpos.getoutrig].tag);
   self.getoutriganimating[animpos.getoutrig] = true;
@@ -962,30 +904,26 @@ getout_rigspawn(animatemodel, pos, bIdletillunload) {
 }
 
 check_sound_tag_dupe(soundtag) {
-  if(!isDefined(self.sound_tag_dupe)) {
+  if(!isDefined(self.sound_tag_dupe))
     self.sound_tag_dupe = [];
-  }
   duped = false;
-  if(!isDefined(self.sound_tag_dupe[soundtag])) {
+  if(!isDefined(self.sound_tag_dupe[soundtag]))
     self.sound_tag_dupe[soundtag] = true;
-  } else {
+  else
     duped = true;
-  }
   thread check_sound_tag_dupe_reset(soundtag);
   return duped;
 }
 
 check_sound_tag_dupe_reset(soundtag) {
   wait .05;
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self.sound_tag_dupe[soundtag] = false;
   keys = getarraykeys(self.sound_tag_dupe);
-  for(i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++)
     if(self.sound_tag_dupe[keys[i]])
-  }
-  return;
+      return;
   self.sound_tag_dupe = undefined;
 }
 
@@ -1000,14 +938,12 @@ guy_unload(guy, pos) {
     thread guy_idle(guy, pos);
     return;
   }
-  if(isDefined(animpos.hideidle) && animpos.hideidle) {
+  if(isDefined(animpos.hideidle) && animpos.hideidle)
     guy show();
-  }
   thread guy_unload_que(guy);
   self endon("death");
-  if(isai(guy) && isalive(guy)) {
+  if(isai(guy) && isalive(guy))
     guy endon("death");
-  }
   animatemodel = getanimatemodel();
   if(isDefined(animpos.vehicle_getoutanim)) {
     animatemodel thread setanimrestart_once(animpos.vehicle_getoutanim, animpos.vehicle_getoutanim_clear);
@@ -1021,36 +957,30 @@ guy_unload(guy, pos) {
       origin = animatemodel gettagorigin(animpos.vehicle_getoutsoundtag);
     } else
       origin = animatemodel.origin;
-    if(isDefined(animpos.vehicle_getoutsound)) {
+    if(isDefined(animpos.vehicle_getoutsound))
       sound = animpos.vehicle_getoutsound;
-    } else {
+    else
       sound = "veh_truck_door_open";
-    }
-    if(!sound_tag_dupped) {
+    if(!sound_tag_dupped)
       thread maps\_utility::play_sound_in_space(sound, origin);
-    }
     sound_tag_dupped = undefined;
   }
   delay = 0;
-  if(isDefined(animpos.getout_timed_anim)) {
+  if(isDefined(animpos.getout_timed_anim))
     delay += getanimlength(animpos.getout_timed_anim);
-  }
-  if(isDefined(animpos.delay)) {
+  if(isDefined(animpos.delay))
     delay += animpos.delay;
-  }
-  if(isDefined(guy.delay)) {
+  if(isDefined(guy.delay))
     delay += guy.delay;
-  }
   if(delay > 0) {
     thread guy_idle(guy, pos);
     wait delay;
   }
   hascombatjumpout = isDefined(animpos.getout_combat);
-  if(!hascombatjumpout && guy.standing) {
+  if(!hascombatjumpout && guy.standing)
     guy_stand_down(guy, pos);
-  } else if(!hascombatjumpout && !guy.vehicle_idling && isDefined(guy.vehicle_idle)) {
+  else if(!hascombatjumpout && !guy.vehicle_idling && isDefined(guy.vehicle_idle))
     guy waittill("idle");
-  }
   guy.deathanim = undefined;
   guy notify("newanim");
   if(isai(guy)) {
@@ -1097,44 +1027,35 @@ guy_unload(guy, pos) {
         getoutrig_model = self getout_rigspawn(animatemodel, guy.pos, false);
       }
     }
-    if(isDefined(animpos.getoutsnd)) {
+    if(isDefined(animpos.getoutsnd))
       guy thread play_sound_on_tag(animpos.getoutsnd, "J_Wrist_RI", true);
-    }
-    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound)) {
+    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound))
       guy thread play_sound_on_entity(animpos.player_getout_sound);
-    }
-    if(isDefined(animpos.getoutloopsnd)) {
+    if(isDefined(animpos.getoutloopsnd))
       guy thread play_loop_sound_on_tag(animpos.getoutloopsnd);
-    }
-    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_loop)) {
+    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_loop))
       get_players()[0] thread play_loop_sound_on_entity(animpos.player_getout_sound_loop);
-    }
     guy notify("newanim");
     guy notify("jumping_out");
     guy.ragdoll_getout_death = true;
     if(isDefined(animpos.ragdoll_getout_death)) {
       guy.ragdoll_getout_death = true;
-      if(isDefined(animpos.ragdoll_fall_anim)) {
+      if(isDefined(animpos.ragdoll_fall_anim))
         guy.ragdoll_fall_anim = animpos.ragdoll_fall_anim;
-      }
     }
     animontag(guy, tag, animation);
     if(isDefined(animpos.getout_secondary)) {
       secondaryunloadtag = tag;
-      if(isDefined(animpos.getout_secondary_tag)) {
+      if(isDefined(animpos.getout_secondary_tag))
         secondaryunloadtag = animpos.getout_secondary_tag;
-      }
       animontag(guy, secondaryunloadtag, animpos.getout_secondary);
     }
-    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_loop)) {
+    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_loop))
       get_players()[0] thread stop_loop_sound_on_entity(animpos.player_getout_sound_loop);
-    }
-    if(isDefined(animpos.getoutloopsnd)) {
+    if(isDefined(animpos.getoutloopsnd))
       guy thread stop_loop_sound_on_entity(animpos.getoutloopsnd);
-    }
-    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_end)) {
+    if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_getout_sound_end))
       get_players()[0] thread play_sound_on_entity(animpos.player_getout_sound_end);
-    }
   }
   self.riders = array_remove(self.riders, guy);
   self.usedPositions[pos] = false;
@@ -1145,9 +1066,8 @@ guy_unload(guy, pos) {
     return;
   }
   guy unlink();
-  if(!isDefined(guy.magic_bullet_shield)) {
+  if(!isDefined(guy.magic_bullet_shield))
     guy.allowdeath = true;
-  }
   if(!isai(guy)) {
     if(is_true(guy.drone_delete_on_unload)) {
       guy delete();
@@ -1193,14 +1113,12 @@ guy_unload(guy, pos) {
 animontag(guy, tag, animation, notetracks, sthreads, flag) {
   guy notify("animontag_thread");
   guy endon("animontag_thread");
-  if(!isDefined(flag)) {
+  if(!isDefined(flag))
     flag = "animontagdone";
-  }
-  if(isDefined(self.modeldummy)) {
+  if(isDefined(self.modeldummy))
     animatemodel = self.modeldummy;
-  } else {
+  else
     animatemodel = self;
-  }
   if(!isDefined(tag)) {
     org = guy.origin;
     angles = guy.angles;
@@ -1208,13 +1126,11 @@ animontag(guy, tag, animation, notetracks, sthreads, flag) {
     org = animatemodel gettagOrigin(tag);
     angles = animatemodel gettagAngles(tag);
   }
-  if(isDefined(guy.ragdoll_getout_death)) {
+  if(isDefined(guy.ragdoll_getout_death))
     level thread animontag_ragdoll_death(guy, self);
-  }
   guy animscripted(flag, org, angles, animation);
-  if(isai(guy)) {
+  if(isai(guy))
     thread DoNoteTracks(guy, animatemodel, flag);
-  }
   if(isDefined(notetracks)) {
     for(i = 0; i < notetracks.size; i++) {
       guy waittillmatch(flag, notetracks[i]);
@@ -1243,12 +1159,10 @@ animontag_ragdoll_death_watch_for_damage_notdone() {
 }
 
 animontag_ragdoll_death(guy, vehicle) {
-  if(isDefined(guy.magic_bullet_shield) && guy.magic_bullet_shield) {
+  if(isDefined(guy.magic_bullet_shield) && guy.magic_bullet_shield)
     return;
-  }
-  if(!isAI(guy)) {
+  if(!isAI(guy))
     guy setCanDamage(true);
-  }
   guy endon("anim_on_tag_done");
   guy thread animontag_ragdoll_death_watch_for_damage();
   guy thread animontag_ragdoll_death_watch_for_damage_notdone();
@@ -1265,15 +1179,12 @@ animontag_ragdoll_death(guy, vehicle) {
     }
     guy waittill("vehicle_damage", damage, attacker, damageDirection, damagePoint, damageMod);
     explosiveDamage = call_overloaded_func("animscripts\pain", "isExplosiveDamageMOD", damageMod);
-    if(!isDefined(damage)) {
+    if(!isDefined(damage))
       continue;
-    }
-    if(damage < 1) {
+    if(damage < 1)
       continue;
-    }
-    if(!isDefined(attacker)) {
+    if(!isDefined(attacker))
       continue;
-    }
     if(isDefined(guy.ridingvehicle) && attacker == guy.ridingvehicle) {
       break;
     }
@@ -1281,9 +1192,8 @@ animontag_ragdoll_death(guy, vehicle) {
       break;
     }
   }
-  if(!isDefined(guy)) {
+  if(!isDefined(guy))
     return;
-  }
   arcademode_assignpoints("arcademode_score_enemyexitingcar", attacker);
   guy.deathanim = undefined;
   guy.deathFunction = undefined;
@@ -1298,9 +1208,8 @@ animontag_ragdoll_death(guy, vehicle) {
       guy waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
-  if(!isDefined(guy)) {
+  if(!isDefined(guy))
     return;
-  }
   guy.deathanim = undefined;
   guy.deathFunction = undefined;
   guy.anim_disablePain = true;
@@ -1331,9 +1240,8 @@ animatemoveintoplace(guy, org, angles, movetospotanim) {
 
 guy_vehicle_death(guy) {
   animpos = anim_pos(self, guy.pos);
-  if(isDefined(animpos.getout)) {
+  if(isDefined(animpos.getout))
     self endon("unload");
-  }
   guy endon("death");
   self endon("forcedremoval");
   self waittill("death");
@@ -1347,7 +1255,9 @@ guy_vehicle_death(guy) {
   if(isDefined(guy)) {
     origin = guy.origin;
     guy delete();
-    [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", origin);
+    [
+      [level.global_kill_func]
+    ]("MOD_RIFLE_BULLET", "torso_upper", origin);
   }
 }
 
@@ -1360,9 +1270,8 @@ guy_turn_right(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = anim_pos(self, pos);
-  if(isDefined(animpos.vehicle_turn_right)) {
+  if(isDefined(animpos.vehicle_turn_right))
     thread setanimrestart_once(animpos.vehicle_turn_right);
-  }
   animontag(guy, animpos.sittag, animpos.turn_right);
   thread guy_idle(guy, pos);
 }
@@ -1372,9 +1281,8 @@ guy_turn_left(guy, pos) {
   self endon("death");
   guy endon("death");
   animpos = anim_pos(self, pos);
-  if(isDefined(animpos.vehicle_turn_left)) {
+  if(isDefined(animpos.vehicle_turn_left))
     self thread setanimrestart_once(animpos.vehicle_turn_left);
-  }
   animontag(guy, animpos.sittag, animpos.turn_left);
   thread guy_idle(guy, pos);
 }
@@ -1385,16 +1293,14 @@ guy_turn_left_check(guy, pos) {
 
 guy_turn_hardright(guy, pos) {
   animpos = level.vehicle_aianims[self.vehicletype][pos];
-  if(isDefined(animpos.idle_hardright)) {
+  if(isDefined(animpos.idle_hardright))
     guy.vehicle_idle_override = animpos.idle_hardright;
-  }
 }
 
 guy_turn_hardleft(guy, pos) {
   animpos = level.vehicle_aianims[self.vehicletype][pos];
-  if(isDefined(animpos.idle_hardleft)) {
+  if(isDefined(animpos.idle_hardleft))
     guy.vehicle_idle_override = animpos.idle_hardleft;
-  }
 }
 
 guy_drive_reaction(guy, pos) {
@@ -1470,9 +1376,8 @@ set_pos(guy, maxpos) {
     }
     assert(!script_startingposition);
     for(j = 0; j < self.usedPositions.size; j++) {
-      if(self.usedPositions[j] == true) {
+      if(self.usedPositions[j] == true)
         continue;
-      }
       pos = j;
       break;
     }
@@ -1528,9 +1433,8 @@ guy_man_turret(guy, pos) {
   turret setturretignoregoals(true);
   guy.script_on_vehicle_turret = 1;
   while(1) {
-    if(!isDefined(guy getturret())) {
+    if(!isDefined(guy getturret()))
       guy useturret(turret);
-    }
     wait 1;
   }
 }
@@ -1538,9 +1442,8 @@ guy_man_turret(guy, pos) {
 guy_unlink_on_death(guy) {
   guy endon("jumpedout");
   guy waittill("death");
-  if(isDefined(guy)) {
+  if(isDefined(guy))
     guy unlink();
-  }
 }
 
 blowup_riders() {
@@ -1548,20 +1451,18 @@ blowup_riders() {
 }
 
 guy_blowup(guy) {
-  if(!isDefined(guy.pos)) {
+  if(!isDefined(guy.pos))
     return;
-  }
   pos = guy.pos;
   anim_pos = anim_pos(self, pos);
-  if(!isDefined(anim_pos.explosion_death)) {
+  if(!isDefined(anim_pos.explosion_death))
     return;
-  }
   [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", guy.origin);
   guy.deathanim = anim_pos.explosion_death;
   angles = self.angles;
   origin = guy.origin;
   if(isDefined(anim_pos.explosion_death_offset)) {
-    origin += vector_scale(anglesToForward(angles), anim_pos.explosion_death_offset[0]);
+    origin += vector_scale(anglestoforward(angles), anim_pos.explosion_death_offset[0]);
     origin += vector_scale(anglestoright(angles), anim_pos.explosion_death_offset[1]);
     origin += vector_scale(anglestoup(angles), anim_pos.explosion_death_offset[2]);
   }
@@ -1573,9 +1474,8 @@ guy_blowup(guy) {
   guy stopanimscripted();
   guy animscripted("deathanim", origin, angles, anim_pos.explosion_death);
   fraction = .3;
-  if(isDefined(anim_pos.explosion_death_ragdollfraction)) {
+  if(isDefined(anim_pos.explosion_death_ragdollfraction))
     fraction = anim_pos.explosion_death_ragdollfraction;
-  }
   animlength = getanimlength(anim_pos.explosion_death);
   timer = gettime() + (animlength * 1000);
   wait animlength * fraction;
@@ -1594,20 +1494,17 @@ guy_blowup(guy) {
   wait .05;
   force = vector_scale(force, 20000);
   for(i = 0; i < 3; i++) {
-    if(isDefined(guy)) {
+    if(isDefined(guy))
       org = guy.origin;
-    }
     wait(0.05);
   }
-  if(!guy isragdoll()) {
+  if(!guy isragdoll())
     guy delete();
-  }
 }
 
 convert_guy_to_drone(guy, bKeepguy) {
-  if(!isDefined(bKeepguy)) {
+  if(!isDefined(bKeepguy))
     bKeepguy = false;
-  }
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
   model setModel(guy.model);
@@ -1616,12 +1513,10 @@ convert_guy_to_drone(guy, bKeepguy) {
     model attach(guy getattachmodelname(i), guy getattachtagname(i));
   }
   model useanimtree(#animtree);
-  if(isDefined(guy.team)) {
+  if(isDefined(guy.team))
     model.team = guy.team;
-  }
-  if(!bKeepguy) {
+  if(!bKeepguy)
     guy delete();
-  }
   model makefakeai();
   return model;
 }
@@ -1637,7 +1532,7 @@ vehicle_getInstart(pos) {
 }
 
 vehicle_getanimstart(animation, tag, pos) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   origin = undefined;
   angles = undefined;
   assert(isDefined(animation));
@@ -1664,7 +1559,7 @@ get_availablepositions() {
       }
     }
   }
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.availablepositions = availablepositions;
   struct.nonanimatedpositions = nonanimatedpositions;
   return struct;
@@ -1678,9 +1573,8 @@ set_walkerpos(guy, maxpos) {
   } else {
     pos = -1;
     for(j = 0; j < self.walk_tags_used.size; j++) {
-      if(self.walk_tags_used[j] == true) {
+      if(self.walk_tags_used[j] == true)
         continue;
-      }
       pos = j;
       self.walk_tags_used[j] = true;
       break;
@@ -1691,13 +1585,11 @@ set_walkerpos(guy, maxpos) {
 }
 
 WalkWithVehicle(guy, pos) {
-  if(!isDefined(self.walkers)) {
+  if(!isDefined(self.walkers))
     self.walkers = [];
-  }
   self.walkers[self.walkers.size] = guy;
-  if(!isDefined(guy.FollowMode)) {
+  if(!isDefined(guy.FollowMode))
     guy.FollowMode = "close";
-  }
   guy.WalkingVehicle = self;
   if(guy.FollowMode == "close") {
     guy.vehiclewalkmember = pos;
@@ -1717,22 +1609,18 @@ vehiclewalker_removeonunload(vehicle) {
 }
 
 shiftSides(side) {
-  if(!isDefined(side)) {
+  if(!isDefined(side))
     return;
-  }
   if((side != "left") && (side != "right")) {
     return;
   }
-  if(!isDefined(self.WalkingVehicle)) {
+  if(!isDefined(self.WalkingVehicle))
     return;
-  }
-  if(self.WalkingVehicle.walk_tags[self.vehiclewalkmember].side == side) {
+  if(self.WalkingVehicle.walk_tags[self.vehiclewalkmember].side == side)
     return;
-  }
   for(i = 0; i < self.WalkingVehicle.walk_tags.size; i++) {
-    if(self.WalkingVehicle.walk_tags[i].side != side) {
+    if(self.WalkingVehicle.walk_tags[i].side != side)
       continue;
-    }
     if(self.WalkingVehicle.walk_tags_used[i] == false) {
       if(self.WalkingVehicle getspeedMPH() > 0) {
         self notify("stop updating goalpos");
@@ -1751,9 +1639,8 @@ shiftSides(side) {
 
 vehiclewalker_freespot_ondeath(guy) {
   guy waittill("death");
-  if(!isDefined(guy.WalkingVehicle)) {
+  if(!isDefined(guy.WalkingVehicle))
     return;
-  }
   guy.WalkingVehicle.walk_tags_used[guy.vehiclewalkmember] = false;
 }
 
@@ -1761,18 +1648,14 @@ vehiclewalker_teamUnderAttack() {
   self endon("death");
   for(;;) {
     self waittill("damage", amount, attacker);
-    if(!isDefined(attacker)) {
+    if(!isDefined(attacker))
       continue;
-    }
-    if((!isDefined(attacker.team)) || (isplayer(attacker))) {
+    if((!isDefined(attacker.team)) || (isplayer(attacker)))
       continue;
-    }
-    if((isDefined(self.RidingTank)) && (isDefined(self.RidingTank.allowUnloadIfAttacked)) && (self.RidingTank.allowUnloadIfAttacked == false)) {
+    if((isDefined(self.RidingTank)) && (isDefined(self.RidingTank.allowUnloadIfAttacked)) && (self.RidingTank.allowUnloadIfAttacked == false))
       continue;
-    }
-    if((isDefined(self.WalkingVehicle)) && (isDefined(self.WalkingVehicle.allowUnloadIfAttacked)) && (self.WalkingVehicle.allowUnloadIfAttacked == false)) {
+    if((isDefined(self.WalkingVehicle)) && (isDefined(self.WalkingVehicle.allowUnloadIfAttacked)) && (self.WalkingVehicle.allowUnloadIfAttacked == false))
       continue;
-    }
     self.WalkingVehicle.teamUnderAttack = true;
     self.WalkingVehicle notify("unload");
     return;
@@ -1782,34 +1665,29 @@ vehiclewalker_teamUnderAttack() {
 GetNewNodePositionAheadofVehicle(guy) {
   minimumDistance = 300 + (50 * (self getspeedMPH()));
   nextNode = undefined;
-  if(!isDefined(self.CurrentNode.target)) {
+  if(!isDefined(self.CurrentNode.target))
     return self.origin;
-  }
   nextNode = getVehicleNode(self.CurrentNode.target, "targetname");
   if(!isDefined(nextNode)) {
-    if(isDefined(guy.NodeAfterVehicleWalk)) {
+    if(isDefined(guy.NodeAfterVehicleWalk))
       return guy.NodeAfterVehicleWalk.origin;
-    } else {
+    else
       return self.origin;
-    }
   }
-  if(distance(self.origin, nextNode.origin) >= minimumDistance) {
+  if(distance(self.origin, nextNode.origin) >= minimumDistance)
     return nextNode.origin;
-  }
   for(;;) {
-    if(distance(self.origin, nextNode.origin) >= minimumDistance) {
+    if(distance(self.origin, nextNode.origin) >= minimumDistance)
       return nextNode.origin;
-    }
     if(!isDefined(nextNode.target)) {
       break;
     }
     nextNode = getVehicleNode(nextNode.target, "targetname");
   }
-  if(isDefined(guy.NodeAfterVehicleWalk)) {
+  if(isDefined(guy.NodeAfterVehicleWalk))
     return guy.NodeAfterVehicleWalk.origin;
-  } else {
+  else
     return self.origin;
-  }
 }
 
 vehiclewalker_updateGoalPos(tank, option) {
@@ -1831,9 +1709,8 @@ vehiclewalker_updateGoalPos(tank, option) {
     }
     if((isDefined(option)) && (option == "once")) {
       trace = bulletTrace((position + (0, 0, 100)), (position - (0, 0, 500)), false, undefined);
-      if(self.FollowMode == "close") {
+      if(self.FollowMode == "close")
         self teleport(trace["position"]);
-      }
       self setGoalPos(trace["position"]);
       return;
     }
@@ -1847,11 +1724,10 @@ vehiclewalker_updateGoalPos(tank, option) {
 }
 
 getanimatemodel() {
-  if(isDefined(self.modeldummy)) {
+  if(isDefined(self.modeldummy))
     return self.modeldummy;
-  } else {
+  else
     return self;
-  }
 }
 
 animpos_override_standattack(type, pos, animation) {
@@ -1871,18 +1747,15 @@ detach_models_with_substr(guy, substr) {
       tagsstodetach[index] = tagname;
     }
   }
-  for(i = 0; i < modelstodetach.size; i++) {
+  for(i = 0; i < modelstodetach.size; i++)
     guy detach(modelstodetach[i], tagsstodetach[i]);
-  }
 }
 
 should_give_orghealth() {
-  if(!isai(self)) {
+  if(!isai(self))
     return false;
-  }
-  if(!isDefined(self.orghealth)) {
+  if(!isDefined(self.orghealth))
     return false;
-  }
   return !isDefined(self.magic_bullet_shield);
 }
 
@@ -1916,7 +1789,7 @@ override_anim(action, tag, animation) {
   pos = anim_pos_from_tag(self, tag);
   AssertEx(isDefined(pos), "_vehicle_aianim::override_anim - No valid position set up for tag '" + tag + "' on vehicle of type '" + self.vehicletype + "'.");
   if(!isDefined(self.vehicle_aianims) || !isDefined(self.vehicle_aianims[pos])) {
-    self.vehicle_aianims[pos] = spawnStruct();
+    self.vehicle_aianims[pos] = SpawnStruct();
   }
   switch (action) {
     case "getin":

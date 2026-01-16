@@ -10,8 +10,8 @@
 CONST_KILLSTREAK_NAME = "mine_level_killstreak";
 CONST_KILLSTREAK_WEAPON = "killstreak_minemarker_mp";
 CONST_DEBUG_NAME = "Mine Killstreak";
-CONST_KILLSTREAK_LOC_NAME = &"MP_MINE_LEVEL_KILLSTREAK";
-CONST_KILLSTREAK_PICKUP = &"MP_MINE_LEVEL_KILLSTREAK_PICKUP";
+CONST_KILLSTREAK_LOC_NAME = & "MP_MINE_LEVEL_KILLSTREAK";
+CONST_KILLSTREAK_PICKUP = & "MP_MINE_LEVEL_KILLSTREAK_PICKUP";
 CONST_CRATE_WEIGHT = 90;
 
 main() {
@@ -594,9 +594,8 @@ initKillstreak() {
 }
 
 customCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;

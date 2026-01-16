@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_fav_tropical_fx.gsc
 ************************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 156
   ent = createLoopSound();
   ent.v["origin"] = (-6735.08, -1302.96, -337.372);
   ent.v["angles"] = (270, 0, 0);
@@ -889,4 +891,5 @@ main() {
   ent.v["angles"] = (309.703, 351.411, -85.1507);
   ent.v["fxid"] = "hallway_smoke_light";
   ent.v["delay"] = -15;
+
 }

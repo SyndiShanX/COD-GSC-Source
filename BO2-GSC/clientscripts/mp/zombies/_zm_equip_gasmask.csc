@@ -23,13 +23,12 @@ init_filter_indices() {
 }
 
 map_material_helper(player, materialname) {
-  if(!isDefined(level.filter_matid)) {
+  if(!isDefined(level.filter_matid))
     level.filter_matid = [];
-  }
 
-  if(isDefined(level.filter_matid[materialname])) {
+  if(isDefined(level.filter_matid[materialname]))
     player map_material(level.filter_matid[materialname], materialname);
-  } else {
+  else {
     level.filter_matid[materialname] = level.filter_matcount;
     player map_material(level.filter_matcount, materialname);
     level.filter_matcount++;
@@ -89,30 +88,26 @@ player_init() {
   wait 1.0;
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     init_filter_hazmat(players[i]);
-  }
 }
 
 playsounds_gasmask(on) {
-  if(!isDefined(self.gasmask_audio_ent)) {
+  if(!isDefined(self.gasmask_audio_ent))
     self.gasmask_audio_ent = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   if(on) {
-    self.gasmask_audio_ent playLoopSound("evt_gasmask_loop", 0.5);
+    self.gasmask_audio_ent playloopsound("evt_gasmask_loop", 0.5);
 
-    if(isDefined(level._audio_zombie_gasmask_func)) {
+    if(isDefined(level._audio_zombie_gasmask_func))
       level thread[[level._audio_zombie_gasmask_func]](on);
-    }
   } else {
-    playSound(0, "evt_gasmask_off", (0, 0, 0));
+    playsound(0, "evt_gasmask_off", (0, 0, 0));
     self.gasmask_audio_ent stoploopsound(0.5);
     self.gasmask_audio_ent delete();
     self.gasmask_audio_ent = undefined;
 
-    if(isDefined(level._audio_zombie_gasmask_func)) {
+    if(isDefined(level._audio_zombie_gasmask_func))
       level thread[[level._audio_zombie_gasmask_func]](on);
-    }
   }
 }

@@ -20,13 +20,13 @@
 #namespace zm_stalingrad_mounted_mg;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_mounted_mg", &__init__, &__main__, undefined);
+  system::register("zm_stalingrad_mounted_mg", & __init__, & __main__, undefined);
 }
 
 function __init__() {
   clientfield::register("vehicle", "overheat_fx", 12000, 1, "int");
   var_a7761466 = struct::get("pavlov_mg", "targetname");
-  s_unitrigger = var_a7761466 zm_unitrigger::create_unitrigger("", 64, &function_f734357f, &function_be759ad7);
+  s_unitrigger = var_a7761466 zm_unitrigger::create_unitrigger("", 64, & function_f734357f, & function_be759ad7);
   s_unitrigger.hint_parm1 = 1000;
   s_unitrigger.b_enabled = 1;
   s_unitrigger.b_in_use = 0;

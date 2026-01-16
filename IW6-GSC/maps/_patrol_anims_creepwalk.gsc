@@ -29,9 +29,8 @@ dogs() {}
 enable_creepwalk() {
   self.script_animation = "creepwalk";
 
-  if(isDefined(self.script_patroller) && self.script_patroller) {
+  if(isDefined(self.script_patroller) && self.script_patroller)
     maps\_patrol::set_patrol_run_anim_array();
-  }
 }
 
 init_creepwalk_archetype() {

@@ -10,13 +10,13 @@ snd_init_m1a1() {
 }
 
 snd_start_m1a1() {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     wait 1.0;
     snd_stop_m1a1(1.0);
   }
 
   thread snd_monitor_about_to_stop();
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_0.preset_name = "m1a1";
   soundscripts\_snd::snd_message("snd_start_vehicle", var_0);
 }
@@ -29,16 +29,15 @@ snd_monitor_about_to_stop() {
   if(var_0 > 1.0) {
     wait(var_0 - 1.0);
 
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       return;
-    }
   }
 
   self.about_to_stop = 1;
 }
 
 snd_stop_m1a1(var_0) {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     soundscripts\_snd::snd_message("snd_stop_vehicle", var_0);
     self notify("snd_stop_vehicle");
   }
@@ -101,35 +100,40 @@ snd_m1a1_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_idle_vel2vol", [[0.0, 1.0],
-    [8.0, 0.0]]);
+    [8.0, 0.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_idle_vel2pch", [[0.0, 1.0],
-    [2.5, 1.25]]);
+    [2.5, 1.25]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_engine_vel2vol", [[0.0, 0.0],
     [5.0, 0.7],
-    [8.0, 1.0]]);
+    [8.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_engine_vel2pch", [[0.0, 0.8],
     [8.0, 1.0],
-    [10.0, 1.1]]);
+    [10.0, 1.1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_treads_vel2vol", [[0.0, 0.0],
     [5.0, 0.7],
-    [8.0, 1.0]]);
+    [8.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_treads_vel2pch", [[0.0, 0.8],
-    [8.0, 1.2]]);
+    [8.0, 1.2]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 
 m1a1_input_callback_about_to_stop() {
   var_0 = soundscripts\_audio_vehicle_manager::avmx_get_vehicle_entity();
-  return isDefined(var_0.about_to_stop);
+  return isdefined(var_0.about_to_stop);
 }
 
 m1a1_condition_callback_to_idle(var_0, var_1) {
   var_2 = var_0["speed"];
   var_3 = var_0["about_to_stop"];
 
-  if(var_2 <= 0.01 || var_3 > 0.5) {
+  if(var_2 <= 0.01 || var_3 > 0.5)
     return 1;
-  }
 
   return 0;
 }
@@ -138,9 +142,8 @@ m1a1_condition_callback_to_engine(var_0, var_1) {
   var_2 = var_0["speed"];
   var_3 = var_0["about_to_stop"];
 
-  if(var_2 > 0.01 && var_3 < 0.5) {
+  if(var_2 > 0.01 && var_3 < 0.5)
     return 1;
-  }
 
   return 0;
 }

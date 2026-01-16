@@ -13,22 +13,22 @@
 #namespace callback;
 
 function callback(event, localclientnum, params) {
-  if(isDefined(level._callbacks) && isDefined(level._callbacks[event])) {
-    for(i = 0; i < level._callbacks[event].size; i++) {
+  if(isdefined(level._callbacks) && isdefined(level._callbacks[event])) {
+    for (i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i][0];
       obj = level._callbacks[event][i][1];
-      if(!isDefined(callback)) {
+      if(!isdefined(callback)) {
         continue;
       }
-      if(isDefined(obj)) {
-        if(isDefined(params)) {
+      if(isdefined(obj)) {
+        if(isdefined(params)) {
           obj thread[[callback]](localclientnum, self, params);
         } else {
           obj thread[[callback]](localclientnum, self);
         }
         continue;
       }
-      if(isDefined(params)) {
+      if(isdefined(params)) {
         self thread[[callback]](localclientnum, params);
         continue;
       }
@@ -38,22 +38,22 @@ function callback(event, localclientnum, params) {
 }
 
 function entity_callback(event, localclientnum, params) {
-  if(isDefined(self._callbacks) && isDefined(self._callbacks[event])) {
-    for(i = 0; i < self._callbacks[event].size; i++) {
+  if(isdefined(self._callbacks) && isdefined(self._callbacks[event])) {
+    for (i = 0; i < self._callbacks[event].size; i++) {
       callback = self._callbacks[event][i][0];
       obj = self._callbacks[event][i][1];
-      if(!isDefined(callback)) {
+      if(!isdefined(callback)) {
         continue;
       }
-      if(isDefined(obj)) {
-        if(isDefined(params)) {
+      if(isdefined(obj)) {
+        if(isdefined(params)) {
           obj thread[[callback]](localclientnum, self, params);
         } else {
           obj thread[[callback]](localclientnum, self);
         }
         continue;
       }
-      if(isDefined(params)) {
+      if(isdefined(params)) {
         self thread[[callback]](localclientnum, params);
         continue;
       }
@@ -63,31 +63,31 @@ function entity_callback(event, localclientnum, params) {
 }
 
 function add_callback(event, func, obj) {
-  assert(isDefined(event), "");
-  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
+  assert(isdefined(event), "");
+  if(!isdefined(level._callbacks) || !isdefined(level._callbacks[event])) {
     level._callbacks[event] = [];
   }
   foreach(callback in level._callbacks[event]) {
     if(callback[0] == func) {
-      if(!isDefined(obj) || callback[1] == obj) {
+      if(!isdefined(obj) || callback[1] == obj) {
         return;
       }
     }
   }
   array::add(level._callbacks[event], array(func, obj), 0);
-  if(isDefined(obj)) {
+  if(isdefined(obj)) {
     obj thread remove_callback_on_death(event, func);
   }
 }
 
 function add_entity_callback(event, func, obj) {
-  assert(isDefined(event), "");
-  if(!isDefined(self._callbacks) || !isDefined(self._callbacks[event])) {
+  assert(isdefined(event), "");
+  if(!isdefined(self._callbacks) || !isdefined(self._callbacks[event])) {
     self._callbacks[event] = [];
   }
   foreach(callback in self._callbacks[event]) {
     if(callback[0] == func) {
-      if(!isDefined(obj) || callback[1] == obj) {
+      if(!isdefined(obj) || callback[1] == obj) {
         return;
       }
     }
@@ -101,8 +101,8 @@ function remove_callback_on_death(event, func) {
 }
 
 function remove_callback(event, func, obj) {
-  assert(isDefined(event), "");
-  assert(isDefined(level._callbacks[event]), "");
+  assert(isdefined(event), "");
+  assert(isdefined(level._callbacks[event]), "");
   foreach(index, func_group in level._callbacks[event]) {
     if(func_group[0] == func) {
       if(func_group[1] === obj) {
@@ -159,15 +159,17 @@ function codecallback_finalizeinitialization() {
 }
 
 function codecallback_statechange(clientnum, system, newstate) {
-  if(!isDefined(level._systemstates)) {
+  if(!isdefined(level._systemstates)) {
     level._systemstates = [];
   }
-  if(!isDefined(level._systemstates[system])) {
-    level._systemstates[system] = spawnStruct();
+  if(!isdefined(level._systemstates[system])) {
+    level._systemstates[system] = spawnstruct();
   }
   level._systemstates[system].state = newstate;
-  if(isDefined(level._systemstates[system].callback)) {
-    [[level._systemstates[system].callback]](clientnum, newstate);
+  if(isdefined(level._systemstates[system].callback)) {
+    [
+      [level._systemstates[system].callback]
+    ](clientnum, newstate);
   } else {
     println(("" + system) + "");
   }
@@ -208,20 +210,24 @@ function codecallback_playerspawned(localclientnum) {
 }
 
 function codecallback_gibevent(localclientnum, type, locations) {
-  if(isDefined(level._gibeventcbfunc)) {
+  if(isdefined(level._gibeventcbfunc)) {
     self thread[[level._gibeventcbfunc]](localclientnum, type, locations);
   }
 }
 
 function codecallback_precachegametype() {
-  if(isDefined(level.callbackprecachegametype)) {
-    [[level.callbackprecachegametype]]();
+  if(isdefined(level.callbackprecachegametype)) {
+    [
+      [level.callbackprecachegametype]
+    ]();
   }
 }
 
 function codecallback_startgametype() {
-  if(isDefined(level.callbackstartgametype) && (!isDefined(level.gametypestarted) || !level.gametypestarted)) {
-    [[level.callbackstartgametype]]();
+  if(isdefined(level.callbackstartgametype) && (!isdefined(level.gametypestarted) || !level.gametypestarted)) {
+    [
+      [level.callbackstartgametype]
+    ]();
     level.gametypestarted = 1;
   }
 }
@@ -234,7 +240,7 @@ function codecallback_soundnotify(localclientnum, entity, note) {
   switch (note) {
     case "scr_bomb_beep": {
       if(getgametypesetting("silentPlant") == 0) {
-        entity playSound(localclientnum, "fly_bomb_buttons_npc");
+        entity playsound(localclientnum, "fly_bomb_buttons_npc");
       }
       break;
     }
@@ -242,8 +248,10 @@ function codecallback_soundnotify(localclientnum, entity, note) {
 }
 
 function codecallback_entityshutdown(localclientnum, entity) {
-  if(isDefined(level.callbackentityshutdown)) {
-    [[level.callbackentityshutdown]](localclientnum, entity);
+  if(isdefined(level.callbackentityshutdown)) {
+    [
+      [level.callbackentityshutdown]
+    ](localclientnum, entity);
   }
   entity entity_callback("hash_390259d9", localclientnum);
 }
@@ -258,8 +266,10 @@ function codecallback_localclientchanged(localclientnum, entity) {
 }
 
 function codecallback_airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittype, time, height) {
-  if(isDefined(level.callbackairsupport)) {
-    [[level.callbackairsupport]](localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittype, time, height);
+  if(isdefined(level.callbackairsupport)) {
+    [
+      [level.callbackairsupport]
+    ](localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittype, time, height);
   }
 }
 
@@ -289,8 +299,10 @@ function codecallback_killcamend(localclientnum, time) {
 }
 
 function codecallback_creatingcorpse(localclientnum, player) {
-  if(isDefined(level.callbackcreatingcorpse)) {
-    [[level.callbackcreatingcorpse]](localclientnum, player);
+  if(isdefined(level.callbackcreatingcorpse)) {
+    [
+      [level.callbackcreatingcorpse]
+    ](localclientnum, player);
   }
 }
 
@@ -299,57 +311,61 @@ function codecallback_playerfoliage(client_num, player, firstperson, quiet) {
 }
 
 function codecallback_activateexploder(exploder_id) {
-  if(!isDefined(level._exploder_ids)) {
+  if(!isdefined(level._exploder_ids)) {
     return;
   }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
     }
   }
-  if(!isDefined(exploder)) {
+  if(!isdefined(exploder)) {
     return;
   }
   exploder::activate_exploder(exploder);
 }
 
 function codecallback_deactivateexploder(exploder_id) {
-  if(!isDefined(level._exploder_ids)) {
+  if(!isdefined(level._exploder_ids)) {
     return;
   }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
     }
   }
-  if(!isDefined(exploder)) {
+  if(!isdefined(exploder)) {
     return;
   }
   exploder::stop_exploder(exploder);
 }
 
 function codecallback_chargeshotweaponsoundnotify(localclientnum, weapon, chargeshotlevel) {
-  if(isDefined(level.sndchargeshot_func)) {
+  if(isdefined(level.sndchargeshot_func)) {
     self[[level.sndchargeshot_func]](localclientnum, weapon, chargeshotlevel);
   }
 }
 
 function codecallback_hostmigration(localclientnum) {
   println("");
-  if(isDefined(level.callbackhostmigration)) {
-    [[level.callbackhostmigration]](localclientnum);
+  if(isdefined(level.callbackhostmigration)) {
+    [
+      [level.callbackhostmigration]
+    ](localclientnum);
   }
 }
 
 function codecallback_dogsoundnotify(client_num, entity, note) {
-  if(isDefined(level.callbackdogsoundnotify)) {
-    [[level.callbackdogsoundnotify]](client_num, entity, note);
+  if(isdefined(level.callbackdogsoundnotify)) {
+    [
+      [level.callbackdogsoundnotify]
+    ](client_num, entity, note);
   }
 }
 
@@ -363,16 +379,16 @@ function codecallback_playlightloopexploder(exploderindex) {
 
 function codecallback_stoplightloopexploder(exploderindex) {
   num = int(exploderindex);
-  if(isDefined(level.createfxexploders[num])) {
-    for(i = 0; i < level.createfxexploders[num].size; i++) {
+  if(isdefined(level.createfxexploders[num])) {
+    for (i = 0; i < level.createfxexploders[num].size; i++) {
       ent = level.createfxexploders[num][i];
-      if(!isDefined(ent.looperfx)) {
+      if(!isdefined(ent.looperfx)) {
         ent.looperfx = [];
       }
-      for(clientnum = 0; clientnum < level.max_local_clients; clientnum++) {
+      for (clientnum = 0; clientnum < level.max_local_clients; clientnum++) {
         if(localclientactive(clientnum)) {
-          if(isDefined(ent.looperfx[clientnum])) {
-            for(looperfxcount = 0; looperfxcount < ent.looperfx[clientnum].size; looperfxcount++) {
+          if(isdefined(ent.looperfx[clientnum])) {
+            for (looperfxcount = 0; looperfxcount < ent.looperfx[clientnum].size; looperfxcount++) {
               deletefx(clientnum, ent.looperfx[clientnum][looperfxcount]);
             }
           }
@@ -385,79 +401,101 @@ function codecallback_stoplightloopexploder(exploderindex) {
 }
 
 function codecallback_clientflag(localclientnum, flag, set) {
-  if(isDefined(level.callbackclientflag)) {
-    [[level.callbackclientflag]](localclientnum, flag, set);
+  if(isdefined(level.callbackclientflag)) {
+    [
+      [level.callbackclientflag]
+    ](localclientnum, flag, set);
   }
 }
 
 function codecallback_clientflagasval(localclientnum, val) {
-  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type])) {
+  if(isdefined(level._client_flagasval_callbacks) && isdefined(level._client_flagasval_callbacks[self.type])) {
     self thread[[level._client_flagasval_callbacks[self.type]]](localclientnum, val);
   }
 }
 
 function codecallback_extracamrenderhero(localclientnum, jobindex, extracamindex, sessionmode, characterindex) {
-  if(isDefined(level.extra_cam_render_hero_func_callback)) {
-    [[level.extra_cam_render_hero_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, characterindex);
+  if(isdefined(level.extra_cam_render_hero_func_callback)) {
+    [
+      [level.extra_cam_render_hero_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, characterindex);
   }
 }
 
 function codecallback_extracamrenderlobbyclienthero(localclientnum, jobindex, extracamindex, sessionmode) {
-  if(isDefined(level.extra_cam_render_lobby_client_hero_func_callback)) {
-    [[level.extra_cam_render_lobby_client_hero_func_callback]](localclientnum, jobindex, extracamindex, sessionmode);
+  if(isdefined(level.extra_cam_render_lobby_client_hero_func_callback)) {
+    [
+      [level.extra_cam_render_lobby_client_hero_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode);
   }
 }
 
 function codecallback_extracamrendercurrentheroheadshot(localclientnum, jobindex, extracamindex, sessionmode, characterindex, isdefaulthero) {
-  if(isDefined(level.extra_cam_render_current_hero_headshot_func_callback)) {
-    [[level.extra_cam_render_current_hero_headshot_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, characterindex, isdefaulthero);
+  if(isdefined(level.extra_cam_render_current_hero_headshot_func_callback)) {
+    [
+      [level.extra_cam_render_current_hero_headshot_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, characterindex, isdefaulthero);
   }
 }
 
 function codecallback_extracamrendercharacterbodyitem(localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender) {
-  if(isDefined(level.extra_cam_render_character_body_item_func_callback)) {
-    [[level.extra_cam_render_character_body_item_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender);
+  if(isdefined(level.extra_cam_render_character_body_item_func_callback)) {
+    [
+      [level.extra_cam_render_character_body_item_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender);
   }
 }
 
 function codecallback_extracamrendercharacterhelmetitem(localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender) {
-  if(isDefined(level.extra_cam_render_character_helmet_item_func_callback)) {
-    [[level.extra_cam_render_character_helmet_item_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender);
+  if(isdefined(level.extra_cam_render_character_helmet_item_func_callback)) {
+    [
+      [level.extra_cam_render_character_helmet_item_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, characterindex, itemindex, defaultitemrender);
   }
 }
 
 function codecallback_extracamrendercharacterheaditem(localclientnum, jobindex, extracamindex, sessionmode, headindex, defaultitemrender) {
-  if(isDefined(level.extra_cam_render_character_head_item_func_callback)) {
-    [[level.extra_cam_render_character_head_item_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, headindex, defaultitemrender);
+  if(isdefined(level.extra_cam_render_character_head_item_func_callback)) {
+    [
+      [level.extra_cam_render_character_head_item_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, headindex, defaultitemrender);
   }
 }
 
 function codecallback_extracamrenderoutfitpreview(localclientnum, jobindex, extracamindex, sessionmode, outfitindex) {
-  if(isDefined(level.extra_cam_render_outfit_preview_func_callback)) {
-    [[level.extra_cam_render_outfit_preview_func_callback]](localclientnum, jobindex, extracamindex, sessionmode, outfitindex);
+  if(isdefined(level.extra_cam_render_outfit_preview_func_callback)) {
+    [
+      [level.extra_cam_render_outfit_preview_func_callback]
+    ](localclientnum, jobindex, extracamindex, sessionmode, outfitindex);
   }
 }
 
 function codecallback_extracamrenderwcpaintjobicon(localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview) {
-  if(isDefined(level.extra_cam_render_wc_paintjobicon_func_callback)) {
-    [[level.extra_cam_render_wc_paintjobicon_func_callback]](localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview);
+  if(isdefined(level.extra_cam_render_wc_paintjobicon_func_callback)) {
+    [
+      [level.extra_cam_render_wc_paintjobicon_func_callback]
+    ](localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview);
   }
 }
 
 function codecallback_extracamrenderwcvarianticon(localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview) {
-  if(isDefined(level.extra_cam_render_wc_varianticon_func_callback)) {
-    [[level.extra_cam_render_wc_varianticon_func_callback]](localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview);
+  if(isdefined(level.extra_cam_render_wc_varianticon_func_callback)) {
+    [
+      [level.extra_cam_render_wc_varianticon_func_callback]
+    ](localclientnum, extracamindex, jobindex, attachmentvariantstring, weaponoptions, weaponplusattachments, loadoutslot, paintjobindex, paintjobslot, isfilesharepreview);
   }
 }
 
 function codecallback_collectibleschanged(changedclient, collectiblesarray, localclientnum) {
-  if(isDefined(level.on_collectibles_change)) {
-    [[level.on_collectibles_change]](changedclient, collectiblesarray, localclientnum);
+  if(isdefined(level.on_collectibles_change)) {
+    [
+      [level.on_collectibles_change]
+    ](changedclient, collectiblesarray, localclientnum);
   }
 }
 
 function add_weapon_type(weapontype, callback) {
-  if(!isDefined(level.weapon_type_callback_array)) {
+  if(!isdefined(level.weapon_type_callback_array)) {
     level.weapon_type_callback_array = [];
   }
   if(isstring(weapontype)) {
@@ -468,59 +506,59 @@ function add_weapon_type(weapontype, callback) {
 
 function spawned_weapon_type(localclientnum) {
   weapontype = self.weapon.rootweapon;
-  if(isDefined(level.weapon_type_callback_array) && isDefined(level.weapon_type_callback_array[weapontype])) {
+  if(isdefined(level.weapon_type_callback_array) && isdefined(level.weapon_type_callback_array[weapontype])) {
     self thread[[level.weapon_type_callback_array[weapontype]]](localclientnum);
   }
 }
 
 function codecallback_callclientscript(pself, label, param) {
-  if(!isDefined(level._animnotifyfuncs)) {
+  if(!isdefined(level._animnotifyfuncs)) {
     return;
   }
-  if(isDefined(level._animnotifyfuncs[label])) {
+  if(isdefined(level._animnotifyfuncs[label])) {
     pself[[level._animnotifyfuncs[label]]](param);
   }
 }
 
 function codecallback_callclientscriptonlevel(label, param) {
-  if(!isDefined(level._animnotifyfuncs)) {
+  if(!isdefined(level._animnotifyfuncs)) {
     return;
   }
-  if(isDefined(level._animnotifyfuncs[label])) {
+  if(isdefined(level._animnotifyfuncs[label])) {
     level[[level._animnotifyfuncs[label]]](param);
   }
 }
 
 function codecallback_serversceneinit(scene_name) {
-  if(isDefined(level.server_scenes[scene_name])) {
+  if(isdefined(level.server_scenes[scene_name])) {
     level thread scene::init(scene_name);
   }
 }
 
 function codecallback_serversceneplay(scene_name) {
   level thread scene_black_screen();
-  if(isDefined(level.server_scenes[scene_name])) {
+  if(isdefined(level.server_scenes[scene_name])) {
     level thread scene::play(scene_name);
   }
 }
 
 function codecallback_serverscenestop(scene_name) {
   level thread scene_black_screen();
-  if(isDefined(level.server_scenes[scene_name])) {
+  if(isdefined(level.server_scenes[scene_name])) {
     level thread scene::stop(scene_name, undefined, undefined, undefined, 1);
   }
 }
 
 function scene_black_screen() {
   foreach(i, player in level.localplayers) {
-    if(!isDefined(player.lui_black)) {
+    if(!isdefined(player.lui_black)) {
       player.lui_black = createluimenu(i, "FullScreenBlack");
       openluimenu(i, player.lui_black);
     }
   }
   wait(0.016);
   foreach(i, player in level.localplayers) {
-    if(isDefined(player.lui_black)) {
+    if(isdefined(player.lui_black)) {
       closeluimenu(i, player.lui_black);
       player.lui_black = undefined;
     }
@@ -528,7 +566,7 @@ function scene_black_screen() {
 }
 
 function codecallback_gadgetvisionpulse_reveal(local_client_num, entity, breveal) {
-  if(isDefined(level.gadgetvisionpulse_reveal_func)) {
+  if(isdefined(level.gadgetvisionpulse_reveal_func)) {
     entity[[level.gadgetvisionpulse_reveal_func]](local_client_num, breveal);
   }
 }

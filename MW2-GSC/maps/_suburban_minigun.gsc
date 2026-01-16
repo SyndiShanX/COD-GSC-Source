@@ -60,7 +60,9 @@ main(model, type) {
   build_radiusdamage((0, 0, 32), 300, 200, 0, false);
 }
 
-init_local() {}
+init_local() {
+
+}
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
@@ -85,9 +87,8 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 7; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 7; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

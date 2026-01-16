@@ -3,8 +3,11 @@
  * Script: character\mp_character_pmc_africa_assault_aa.gsc
 ************************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_pmc_africa_assault_aa");
+  self setmodel("mp_body_pmc_africa_assault_aa");
   codescripts\character::attachhead("alias_pmc_africa_heads", xmodelalias\alias_pmc_africa_heads::main());
   self setviewmodel("viewhands_pmc");
   self.voice = "russian";

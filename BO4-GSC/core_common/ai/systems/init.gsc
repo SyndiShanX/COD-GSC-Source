@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\name_shared;
+
 #namespace init;
 
 initweapon(weapon) {
@@ -181,11 +182,11 @@ firstinit() {
   }
 
   anim.notfirsttime = 1;
-  anim.grenadetimers[# "player_frag_grenade_sp"] = randomintrange(1000, 20000);
-  anim.grenadetimers[# "player_flash_grenade_sp"] = randomintrange(1000, 20000);
-  anim.grenadetimers[# "player_double_grenade"] = randomintrange(10000, 60000);
-  anim.grenadetimers[# "ai_frag_grenade_sp"] = randomintrange(0, 20000);
-  anim.grenadetimers[# "ai_flash_grenade_sp"] = randomintrange(0, 20000);
+  anim.grenadetimers[#"player_frag_grenade_sp"] = randomintrange(1000, 20000);
+  anim.grenadetimers[#"player_flash_grenade_sp"] = randomintrange(1000, 20000);
+  anim.grenadetimers[#"player_double_grenade"] = randomintrange(10000, 60000);
+  anim.grenadetimers[#"ai_frag_grenade_sp"] = randomintrange(0, 20000);
+  anim.grenadetimers[#"ai_flash_grenade_sp"] = randomintrange(0, 20000);
   anim.numgrenadesinprogresstowardsplayer = 0;
   anim.lastgrenadelandednearplayertime = -1000000;
   anim.lastfraggrenadetoplayerstart = -1000000;
@@ -215,8 +216,8 @@ setnextplayergrenadetime() {
       maxtime = 1;
     }
 
-    anim.grenadetimers[# "player_frag_grenade_sp"] = randomintrange(0, maxtime);
-    anim.grenadetimers[# "player_flash_grenade_sp"] = randomintrange(0, maxtime);
+    anim.grenadetimers[#"player_frag_grenade_sp"] = randomintrange(0, maxtime);
+    anim.grenadetimers[#"player_flash_grenade_sp"] = randomintrange(0, maxtime);
   }
 
   if(isDefined(anim.playerdoublegrenadetime)) {
@@ -227,7 +228,7 @@ setnextplayergrenadetime() {
       maxtime = mintime + 1;
     }
 
-    anim.grenadetimers[# "player_double_grenade"] = randomintrange(mintime, maxtime);
+    anim.grenadetimers[#"player_double_grenade"] = randomintrange(mintime, maxtime);
   }
 }
 

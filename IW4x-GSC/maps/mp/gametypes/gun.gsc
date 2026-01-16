@@ -9,10 +9,12 @@
 #include common_scripts\utility;
 
 main() {
+
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
 
+  //	must be done before scorelimit is set
   setGuns();
 
   registerTimeLimitDvar(level.gameType, 10);
@@ -36,6 +38,7 @@ main() {
   level.getSpawnPoint = ::getSpawnPoint;
   level.onPlayerKilled = ::onPlayerKilled;
   level.onTimeLimit = ::onTimeLimit;
+
 }
 
 onprecachegametype() {
@@ -45,14 +48,14 @@ onprecachegametype() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", &"OBJECTIVES_DM");
-  setObjectiveText("axis", &"OBJECTIVES_DM");
+  setObjectiveText("allies", & "OBJECTIVES_DM");
+  setObjectiveText("axis", & "OBJECTIVES_DM");
 
-  setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
-  setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
 
-  setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -92,19 +95,21 @@ onStartGameType() {
   allowed = [];
   maps\mp\gametypes\_gameobjects::main(allowed);
 
+  // Prevent class and team change. TODO: Must be disabled in _menus.gsc as well
   setDvar("ui_allow_classchange", 0);
   setdvar("ui_allow_teamchange", 0);
 
   level.QuickMessageToAll = true;
   level.blockWeaponDrops = true;
 
+  //	set index on enter	
   level thread onPlayerConnect();
 
   level.killstreakRewards = false;
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player.gun_firstSpawn = true;
@@ -120,19 +125,21 @@ onPlayerConnect() {
 }
 
 getSpawnPoint() {
+  //	first time here?
   if(self.gun_firstSpawn) {
     self.gun_firstSpawn = false;
 
+    //	everyone is a gamemode class in gun, no class selection
     self.pers["class"] = "gamemode";
     self.pers["lastClass"] = "";
     self.class = self.pers["class"];
     self.lastClass = self.pers["lastClass"];
 
-    if(cointoss()) {
+    //	random team
+    if(cointoss())
       self maps\mp\gametypes\_menus::addToTeam("axis", true);
-    } else {
+    else
       self maps\mp\gametypes\_menus::addToTeam("allies", true);
-    }
   }
 
   spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
@@ -142,6 +149,8 @@ getSpawnPoint() {
 }
 
 onSpawnPlayer() {
+  //	level.onSpawnPlayer() gets called before giveLoadout()
+  //	so wait until it is done then override weapons
   self.pers["gamemodeLoadout"] = level.gun_loadouts[self.pers["team"]];
   self thread waitLoadoutDone();
 
@@ -164,6 +173,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     if(sMeansOfDeath == "MOD_FALLING" || attacker == self || (sMeansOfDeath == "MOD_MELEE" && !isMeleeWeapon)) {
       self playLocalSound("mp_war_objective_lost");
 
+      //	drop level for suicide and getting knifed
       self.gunGamePrevGunIndex = self.gunGameGunIndex;
       self.gunGameGunIndex = int(max(0, self.gunGameGunIndex - 1));
 
@@ -186,6 +196,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") ||
       (sMeansOfDeath == "MOD_MELEE" && isMeleeWeapon)
     ) {
+      // Prevent sequential kills from counting by validating the primary weapon
+      // Let throwing knife kills count even though they're not the primary weapon
       if(sWeapon != attacker.primaryWeapon) {
         return;
       }
@@ -210,47 +222,53 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 }
 
 giveNextGun(doSetSpawnWeapon) {
+  //	get the next one
   newWeapon = level.gun_guns[self.gunGameGunIndex];
 
+  //	add attachments
   newWeapon = addAttachments(newWeapon);
 
+  //	give gun
   self takeAllWeapons();
   _giveWeapon(newWeapon);
 
-  if(isDefined(doSetSpawnWeapon)) {
+  //	set vars
+  if(isDefined(doSetSpawnWeapon))
     self setSpawnWeapon(newWeapon);
-  }
   weaponTokens = StrTok(newWeapon, "_");
   weaponName = weaponTokens[0];
 
   self.pers["primaryWeapon"] = weaponName;
   self.primaryWeapon = newWeapon;
 
+  //	use it!
   self GiveStartAmmo(newWeapon);
   self switchToWeapon(newWeapon);
 
+  //	gain/drop scoring/messaging
   if(self.gunGamePrevGunIndex > self.gunGameGunIndex) {
+    //	we dropped :(
     self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DROPPED_GUN_RANK");
   } else if(self.gunGamePrevGunIndex < self.gunGameGunIndex) {
+    //	we gained :)
     self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_GAINED_GUN_RANK");
   }
   self.gunGamePrevGunIndex = self.gunGameGunIndex;
 
+  //	update the personal gun progress hud
   self updateGunHUD();
 }
 
 addAttachments(weaponName) {
-  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach1"])) {
+  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach1"]))
     attach1 = level.gun_attachments[weaponName]["attach1"];
-  } else {
+  else
     attach1 = "none";
-  }
 
-  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach2"])) {
+  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach2"]))
     attach2 = level.gun_attachments[weaponName]["attach2"];
-  } else {
+  else
     attach2 = "none";
-  }
 
   fullWeaponName = buildWeaponName(weaponName, attach1, attach2);
   return fullWeaponName;
@@ -260,16 +278,15 @@ onTimeLimit() {
   level.finalKillCam_winner = "none";
   winners = getHighestProgressedPlayers();
 
-  if(!isDefined(winners) || !winners.size) {
+  if(!isDefined(winners) || !winners.size)
     thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
-  } else if(winners.size == 1) {
+  else if(winners.size == 1)
     thread maps\mp\gametypes\_gamelogic::endGame(winners[0], game["end_reason"]["time_limit_reached"]);
-  } else {
-    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex) {
+  else {
+    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex)
       thread maps\mp\gametypes\_gamelogic::endGame(winners[winners.size - 1], game["end_reason"]["time_limit_reached"]);
-    } else {
+    else
       thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
-    }
   }
 }
 
@@ -289,7 +306,7 @@ refillAmmo() {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(true) {
+  while (true) {
     self waittill("reload");
     self GiveStartAmmo(self.primaryWeapon);
   }
@@ -299,8 +316,9 @@ refillSingleCountAmmo() {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(true) {
+  while (true) {
     if(isReallyAlive(self) && self.team != "spectator" && isDefined(self.primaryWeapon) && self getAmmoCount(self.primaryWeapon) == 0) {
+      //	fake a reload time
       wait(2);
       self notify("reload");
       wait(1);
@@ -341,7 +359,7 @@ hideInKillCam() {
   self endon("disconnect");
   var_0 = 1;
 
-  for(;;) {
+  for (;;) {
     if(var_0 && (!isalive(self) || isinkillcam())) {
       self.gun_progressdisplay[0].alpha = 0;
       self.gun_progressdisplay[1].alpha = 0;
@@ -369,48 +387,50 @@ hideOnGameEnd() {
 setGuns() {
   level.gun_guns = [];
 
+  //	hand guns
   level.gun_guns[0] = "deserteagle";
-
+  //	machine pistols
   level.gun_guns[1] = "glock";
   level.gun_guns[2] = "tmp";
-
+  //	sub
   level.gun_guns[3] = "mp5k";
   level.gun_guns[4] = "p90";
   level.gun_guns[5] = "kriss";
-
+  //	assault - auto
   level.gun_guns[6] = "ak47";
   level.gun_guns[7] = "masada";
   level.gun_guns[8] = "scar";
-
+  //	lmg
   level.gun_guns[9] = "sa80";
   level.gun_guns[10] = "aug";
-
+  //	shotgun
   level.gun_guns[11] = "spas12";
   level.gun_guns[12] = "aa12";
   level.gun_guns[13] = "model1887";
-
+  //	assault - burst
   level.gun_guns[14] = "famas";
   level.gun_guns[15] = "m16";
-
+  //	sniper
   level.gun_guns[16] = "barrett";
   level.gun_guns[17] = "cheytac";
-
+  //	launcher
   level.gun_guns[18] = "m79";
   level.gun_guns[19] = "javelin";
 
+  //	default attachments for all guns that take them
   level.gun_attachments = [];
-
+  //	pistol
   level.gun_attachments["coltanaconda"]["attach1"] = "tactical";
   level.gun_attachments["usp"]["attach1"] = "tactical";
   level.gun_attachments["deserteagle"]["attach1"] = "tactical";
   level.gun_attachments["deserteaglegold"]["attach1"] = "tactical";
   level.gun_attachments["beretta"]["attach1"] = "tactical";
-
+  //	machine pistol
   level.gun_attachments["tmp"]["attach1"] = "reflex";
   level.gun_attachments["glock"]["attach1"] = "reflex";
   level.gun_attachments["pp2000"]["attach1"] = "reflex";
   level.gun_attachments["beretta393"]["attach1"] = "reflex";
-
+  //	smg
   level.gun_attachments["mp5k"]["attach1"] = "reflex";
   level.gun_attachments["mp5k"]["attach2"] = "xmags";
   level.gun_attachments["uzi"]["attach1"] = "reflex";
@@ -423,7 +443,7 @@ setGuns() {
   level.gun_attachments["ump45"]["attach2"] = "xmags";
   level.gun_attachments["ak74u"]["attach1"] = "reflex";
   level.gun_attachments["ak74u"]["attach2"] = "xmags";
-
+  //	assault
   level.gun_attachments["ak47"]["attach1"] = "reflex";
   level.gun_attachments["ak47"]["attach2"] = "xmags";
   level.gun_attachments["ak47classic"]["attach1"] = "reflex";
@@ -446,14 +466,14 @@ setGuns() {
   level.gun_attachments["tavor"]["attach2"] = "xmags";
   level.gun_attachments["tavor"]["attach1"] = "reflex";
   level.gun_attachments["tavor"]["attach2"] = "xmags";
-
+  //	sniper
   level.gun_attachments["barrett"]["attach1"] = "xmags";
   level.gun_attachments["wa2000"]["attach1"] = "xmags";
   level.gun_attachments["m21"]["attach1"] = "xmags";
   level.gun_attachments["cheytac"]["attach1"] = "xmags";
   level.gun_attachments["dragunov"]["attach1"] = "xmags";
   level.gun_attachments["m40a3"]["attach1"] = "xmags";
-
+  //	shotgun
   level.gun_attachments["ranger"]["attach1"] = "akimbo";
   level.gun_attachments["model1887"]["attach1"] = "akimbo";
   level.gun_attachments["striker"]["attach1"] = "grip";
@@ -464,7 +484,7 @@ setGuns() {
   level.gun_attachments["m1014"]["attach2"] = "xmags";
   level.gun_attachments["spas12"]["attach1"] = "grip";
   level.gun_attachments["spas12"]["attach2"] = "xmags";
-
+  //	lmg
   level.gun_attachments["rpd"]["attach1"] = "grip";
   level.gun_attachments["rpd"]["attach2"] = "reflex";
   level.gun_attachments["sa80"]["attach1"] = "grip";
@@ -478,7 +498,8 @@ setGuns() {
 }
 
 setSpecialLoadout() {
-  level.gun_loadouts["axis"]["loadoutPrimary"] = "masada";
+  //	no killstreaks defined for special classes		
+  level.gun_loadouts["axis"]["loadoutPrimary"] = "masada"; //can't use "none" for primary, this is replaced on spawn anyway
   level.gun_loadouts["axis"]["loadoutPrimaryAttachment"] = "none";
   level.gun_loadouts["axis"]["loadoutPrimaryAttachment2"] = "none";
   level.gun_loadouts["axis"]["loadoutPrimaryCamo"] = "none";
@@ -494,5 +515,7 @@ setSpecialLoadout() {
   level.gun_loadouts["axis"]["loadoutPerk2"] = "specialty_null";
   level.gun_loadouts["axis"]["loadoutPerk3"] = "specialty_null";
 
+  //	FFA games don't have teams, but players are allowed to choose team on the way in
+  //	just for character model and announcer voice variety.Same loadout for both.	
   level.gun_loadouts["allies"] = level.gun_loadouts["axis"];
 }

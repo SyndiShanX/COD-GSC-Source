@@ -23,7 +23,7 @@
 #namespace zm_tomb_ee_main_step_4;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_4", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_4", & init_stage, & stage_logic, & exit_stage);
 }
 
 function init_stage() {
@@ -31,7 +31,7 @@ function init_stage() {
   level.ee_mech_zombies_killed = 0;
   level.ee_mech_zombies_alive = 0;
   level.ee_mech_zombies_spawned = 0;
-  level.quadrotor_custom_behavior = &mech_zombie_hole_search;
+  level.quadrotor_custom_behavior = & mech_zombie_hole_search;
 }
 
 function stage_logic() {
@@ -39,7 +39,7 @@ function stage_logic() {
   level flag::wait_till("ee_quadrotor_disabled");
   level thread sndee4music();
   if(!level flag::get("ee_mech_zombie_fight_completed")) {
-    while(level.ee_mech_zombies_spawned < 8) {
+    while (level.ee_mech_zombies_spawned < 8) {
       if(level.ee_mech_zombies_alive < 4) {
         ai = zombie_utility::spawn_zombie(level.mechz_spawners[0]);
         ai thread ee_mechz_spawn(level.ee_mech_zombies_spawned % 4);
@@ -111,13 +111,13 @@ function ee_mechz_spawn(n_spawn_pos) {
   self thread zm_spawner::enemy_death_detection();
   a_spawner_structs = struct::get_array("mech_hole_spawner", "targetname");
   spawn_pos = a_spawner_structs[n_spawn_pos];
-  if(!isDefined(spawn_pos.angles)) {
+  if(!isdefined(spawn_pos.angles)) {
     spawn_pos.angles = (0, 0, 0);
   }
   self thread mechz_death_ee();
   self forceteleport(spawn_pos.origin, spawn_pos.angles);
   self zombie_utility::set_zombie_run_cycle("walk");
-  if(isDefined(level.mechz_find_flesh_override_func)) {
+  if(isdefined(level.mechz_find_flesh_override_func)) {
     level thread[[level.mechz_find_flesh_override_func]]();
   }
   self ee_mechz_do_jump(spawn_pos);
@@ -153,7 +153,7 @@ function ee_mechz_do_jump(s_spawn_pos) {
   self animscripted("zm_fly_out", self.origin, self.angles, "ai_zombie_mech_exit");
   self zombie_shared::donotetracks("zm_fly_out");
   self ghost();
-  if(isDefined(self.m_claw)) {
+  if(isdefined(self.m_claw)) {
     self.m_claw ghost();
   }
   old_fx = self.fx_field;
@@ -161,14 +161,14 @@ function ee_mechz_do_jump(s_spawn_pos) {
   self animscripted("zm_fly_hover_finished", self.origin, self.angles, "ai_zombie_mech_exit_hover");
   wait(level.mechz_jump_delay);
   s_landing_point = struct::get(s_spawn_pos.target, "targetname");
-  if(!isDefined(s_landing_point.angles)) {
+  if(!isdefined(s_landing_point.angles)) {
     s_landing_point.angles = (0, 0, 0);
   }
   self animscripted("zm_fly_in", s_landing_point.origin, s_landing_point.angles, "ai_zombie_mech_arrive");
   self show();
   self.fx_field = old_fx;
   self clientfield::set("mechz_fx", self.fx_field);
-  if(isDefined(self.m_claw)) {
+  if(isdefined(self.m_claw)) {
     self.m_claw show();
   }
   self zombie_shared::donotetracks("zm_fly_in");
@@ -188,7 +188,7 @@ function sndee4music() {
   level.music_override = 1;
   level clientfield::set("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playLoopSound("mus_mechz_fight_loop");
+  ent playloopsound("mus_mechz_fight_loop");
   level flag::wait_till("ee_mech_zombie_fight_completed");
   level clientfield::set("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;
@@ -198,7 +198,7 @@ function sndee4music() {
 
 function sndwait() {
   counter = 0;
-  while(isDefined(level.music_override) && level.music_override) {
+  while (isdefined(level.music_override) && level.music_override) {
     wait(1);
     counter++;
     if(counter >= 60) {

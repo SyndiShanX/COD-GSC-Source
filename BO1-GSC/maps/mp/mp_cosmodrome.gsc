@@ -53,18 +53,14 @@ isSmallMapVersion() {
     return true;
   }
   gametype = getDvar(#"g_gametype");
-  if(gametype == "oic") {
+  if(gametype == "oic")
     return true;
-  }
-  if(gametype == "hlnd") {
+  if(gametype == "hlnd")
     return true;
-  }
-  if(gametype == "shrp") {
+  if(gametype == "shrp")
     return true;
-  }
-  if(gametype == "gun") {
+  if(gametype == "gun")
     return true;
-  }
   return false;
 }
 cosmodrome_intermission() {
@@ -74,8 +70,8 @@ cosmodrome_intermission() {
     return;
   }
   if(isDefined(level.rocket_camera) && level.rocket_camera == true) {
-    lookat = spawn("script_model", rocket_base.origin + (0, 0, 1024));
-    lookat setModel("tag_origin");
+    lookat = Spawn("script_model", rocket_base.origin + (0, 0, 1024));
+    lookat SetModel("tag_origin");
     lookat LinkTo(rocket_base);
     self CameraSetPosition(self.origin);
     self CameraSetLookAt(lookat);
@@ -88,9 +84,9 @@ rocket_arm_think() {
   wait_time = set_dvar_int_if_unset("scr_rocket_arm_wait_secs", "5");
   arm_base = GetEnt("cosmodrome_rocket_arm_base", "targetname");
   AssertEx(isDefined(arm_base), "Unable to find entity with targetname: 'cosmodrome_rocket_arm_base'");
-  arm = getEntArray("cosmodrome_rocket_arm", "targetname");
+  arm = GetEntArray("cosmodrome_rocket_arm", "targetname");
   AssertEx(isDefined(arm), "Unable to find entity with targetname: 'cosmodrome_rocket_arm'");
-  for(i = 0; i < arm.size; i++) {
+  for (i = 0; i < arm.size; i++) {
     arm[i] LinkTo(arm_base);
   }
   if(!isDefined(arm_base.angles_target)) {
@@ -98,50 +94,50 @@ rocket_arm_think() {
   }
   arm_base.angles = (start_pitch, arm_base.angles[1], arm_base.angles[2]);
   wait(wait_time);
-  arm_base playLoopSound("evt_rocket_lp", .2);
-  arm_base playSound("evt_rocket_start");
+  arm_base playloopsound("evt_rocket_lp", .2);
+  arm_base PlaySound("evt_rocket_start");
   arm_base RotateTo(arm_base.angles_target, rotate_time);
   wait(rotate_time);
   arm_base stoploopsound(.3);
-  arm_base playSound("evt_rocket_end");
+  arm_base PlaySound("evt_rocket_end");
 }
 rocket_prelaunch(rocket_base) {
   snd_countdown();
-  claw_r = getEntArray("claw_r", "targetname");
-  claw_l = getEntArray("claw_l", "targetname");
-  claw_arm_r = getEntArray("claw_arm_r", "targetname");
-  claw_arm_l = getEntArray("claw_arm_l", "targetname");
+  claw_r = GetEntArray("claw_r", "targetname");
+  claw_l = GetEntArray("claw_l", "targetname");
+  claw_arm_r = GetEntArray("claw_arm_r", "targetname");
+  claw_arm_l = GetEntArray("claw_arm_l", "targetname");
   mover_r = GetEnt("claw_r_mover", "targetname");
   mover_l = GetEnt("claw_l_mover", "targetname");
   move_here_r = GetEnt("claw_r_move_here", "targetname");
   move_here_l = GetEnt("claw_l_move_here", "targetname");
-  for(i = 0; i < claw_r.size; i++) {
+  for (i = 0; i < claw_r.size; i++) {
     claw_r[i] LinkTo(mover_r);
   }
-  for(i = 0; i < claw_l.size; i++) {
+  for (i = 0; i < claw_l.size; i++) {
     claw_l[i] LinkTo(mover_l);
   }
   mover_r MoveTo(move_here_r.origin, 3.0);
   mover_l MoveTo(move_here_l.origin, 3.0);
   thread snd_rocket_gantry(mover_r, mover_l);
   wait(4.0);
-  for(i = 0; i < claw_r.size; i++) {
+  for (i = 0; i < claw_r.size; i++) {
     claw_r[i] Unlink();
     claw_r[i] LinkTo(move_here_r);
   }
-  for(i = 0; i < claw_l.size; i++) {
+  for (i = 0; i < claw_l.size; i++) {
     claw_l[i] Unlink();
     claw_l[i] LinkTo(move_here_l);
   }
-  for(i = 0; i < claw_arm_r.size; i++) {
+  for (i = 0; i < claw_arm_r.size; i++) {
     claw_arm_r[i] LinkTo(move_here_r);
   }
-  for(i = 0; i < claw_arm_l.size; i++) {
+  for (i = 0; i < claw_arm_l.size; i++) {
     claw_arm_l[i] LinkTo(move_here_l);
   }
   move_here_r RotateYaw(75, 3.0);
   move_here_l RotateYaw(-75, 3.0);
-  rocket_base playSound("evt_cosmo_launch");
+  rocket_base playsound("evt_cosmo_launch");
   playsoundatposition("evt_cosmo_air_distf", (0, 0, 0));
   playsoundatposition("evt_cosmo_air_distr", (0, 0, 0));
   wait(5);
@@ -150,14 +146,14 @@ Rocket_Think() {
   level.const_fx_exploder_rocket_coolant = 2;
   level.rocket_camera = false;
   flag_init("rocket_launch_grenade_detonate");
-  rocket = getEntArray("cosmodrome_rocket", "targetname");
+  rocket = GetEntArray("cosmodrome_rocket", "targetname");
   AssertEx(isDefined(rocket), "Unable to find entity with targetname: 'cosmodrome_rocket'");
   array_thread(rocket, ::rocket_sticky_grenade_think);
   rocket_base = GetEnt("cosmodrome_rocket_base", "script_noteworthy");
   AssertEx(isDefined(rocket_base), "Unable to find entity with script_noteworthy: 'cosmodrome_rocket_base'");
   level.rocket_base = rocket_base;
-  rocket_damage_triggers = getEntArray("cosmodrome_rocket_damage_trigger", "targetname");
-  rocket_collision = getEntArray("rocket_collision", "targetname");
+  rocket_damage_triggers = GetEntArray("cosmodrome_rocket_damage_trigger", "targetname");
+  rocket_collision = GetEntArray("rocket_collision", "targetname");
   killCamEnt = spawn("script_model", rocket_base.origin);
   rocket_base.killCamEnt = killCamEnt;
   killCamEnt.startTime = gettime();
@@ -184,25 +180,25 @@ Rocket_Think() {
   level notify("rocket_damage_stop");
   wait(2);
   level.rocket_camera = false;
-  for(i = 0; i < rocket_damage_triggers.size; i++) {
+  for (i = 0; i < rocket_damage_triggers.size; i++) {
     rocket_damage_triggers[i] delete();
   }
-  for(i = 0; i < rocket_collision.size; i++) {
+  for (i = 0; i < rocket_collision.size; i++) {
     rocket_collision[i] delete();
   }
 }
 snd_rocket_gantry(orignr, originl) {
-  orignr playSound("evt_gantry_disengage");
-  orignr playSound("evt_rocket_start");
+  orignr playsound("evt_gantry_disengage");
+  orignr playsound("evt_rocket_start");
 }
 snd_countdown() {
   countdownl = spawn("script_origin", (480, -1256, 224));
   countdownr = spawn("script_origin", (152, 1488, 224));
   clientnotify("snd_rocket_launch");
   if(isDefined(countdownl) && isDefined(countdownr)) {
-    countdownl playSound("vox_mp_com_1a_rua1");
+    countdownl playsound("vox_mp_com_1a_rua1");
     wait .112;
-    countdownr playSound("vox_mp_com_1a_rua1");
+    countdownr playsound("vox_mp_com_1a_rua1");
     wait 16.5;
     thread snd_launch();
   }
@@ -211,13 +207,13 @@ snd_launch() {
   countdownl = spawn("script_origin", (480, -1256, 224));
   countdownr = spawn("script_origin", (152, 1488, 224));
   wait 2;
-  countdownl playSound("vox_mp_com_2a_rua1");
+  countdownl playsound("vox_mp_com_2a_rua1");
   wait .112;
-  countdownr playSound("vox_mp_com_2a_rua1");
+  countdownr playsound("vox_mp_com_2a_rua1");
 }
 rocket_sticky_grenade_think() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_stuck", grenade_ent);
     grenade_ent thread sticky_grenade_think();
   }
@@ -233,9 +229,9 @@ destroy_greandes_in_trigger() {
   self endon("death");
   level endon("rocket_damage_stop");
   flag_wait("rocket_launch_grenade_detonate");
-  for(;;) {
-    grenades = getEntArray("grenade", "classname");
-    for(i = 0; i < grenades.size; i++) {
+  for (;;) {
+    grenades = GetEntArray("grenade", "classname");
+    for (i = 0; i < grenades.size; i++) {
       if(grenades[i] IsTouching(self)) {
         grenades[i] Detonate();
       }
@@ -318,7 +314,7 @@ rocket_damage_think() {
   level endon("rocket_damage_stop");
   damage_interval_secs = 1;
   assert(self.classname == "trigger_radius");
-  for(;;) {
+  for (;;) {
     self waittill("trigger", ent);
     if(IsPlayer(ent)) {
       player = ent;
@@ -344,7 +340,7 @@ rocket_damage_think() {
 radar_dish_think() {
   radar_dish = GetEnt("cosmodrome_radar_dish", "targetname");
   AssertEx(isDefined(radar_dish), "Unable to find entity with targetname: 'cosmodrome_radar_dish'");
-  for(;;) {
+  for (;;) {
     rotate_time = set_dvar_int_if_unset("scr_radar_dish_rotate_secs", "30");
     if(rotate_time <= 0) {
       return;
@@ -354,7 +350,7 @@ radar_dish_think() {
   }
 }
 devgui_cosmodrome(cmd) {
-  for(;;) {
+  for (;;) {
     wait(0.5);
     devgui_string = GetDvar(#"devgui_notify");
     switch (devgui_string) {
@@ -372,23 +368,23 @@ devgui_cosmodrome(cmd) {
   }
 }
 distant_rockets_think() {
-  distant_rocket = getEntArray("distant_rocket", "targetname");
+  distant_rocket = GetEntArray("distant_rocket", "targetname");
   AssertEx(isDefined(distant_rocket), "Unable to find entity with targetname: 'distant_rocket'");
-  distant_rocket_gantry1 = getEntArray("distant_rocket_gantry1", "targetname");
+  distant_rocket_gantry1 = GetEntArray("distant_rocket_gantry1", "targetname");
   AssertEx(isDefined(distant_rocket_gantry1), "Unable to find entity with targetname: 'distant_rocket_gantry1'");
-  distant_rocket_gantry2 = getEntArray("distant_rocket_gantry2", "targetname");
+  distant_rocket_gantry2 = GetEntArray("distant_rocket_gantry2", "targetname");
   AssertEx(isDefined(distant_rocket_gantry2), "Unable to find entity with targetname: 'distant_rocket_gantry2'");
-  distant_rocket_arm1 = getEntArray("distant_rocket_arm1", "targetname");
+  distant_rocket_arm1 = GetEntArray("distant_rocket_arm1", "targetname");
   AssertEx(isDefined(distant_rocket_arm1), "Unable to find entity with targetname: 'distant_rocket_arm1'");
-  distant_rocket_arm2 = getEntArray("distant_rocket_arm2", "targetname");
+  distant_rocket_arm2 = GetEntArray("distant_rocket_arm2", "targetname");
   AssertEx(isDefined(distant_rocket_arm2), "Unable to find entity with targetname: 'distant_rocket_arm2'");
-  distant_rocket_arm3 = getEntArray("distant_rocket_arm3", "targetname");
+  distant_rocket_arm3 = GetEntArray("distant_rocket_arm3", "targetname");
   AssertEx(isDefined(distant_rocket_arm3), "Unable to find entity with targetname: 'distant_rocket_arm3'");
-  distant_rocket_arm4 = getEntArray("distant_rocket_arm4", "targetname");
+  distant_rocket_arm4 = GetEntArray("distant_rocket_arm4", "targetname");
   AssertEx(isDefined(distant_rocket_arm4), "Unable to find entity with targetname: 'distant_rocket_arm4'");
   distant_rocket_engine = GetEnt("distant_rocket_engine", "script_noteworthy");
   AssertEx(isDefined(distant_rocket_engine), "Unable to find entity with script_noteworthy: 'distant_rocket_engine'");
-  distant_rocket_engine setModel("tag_origin");
+  distant_rocket_engine SetModel("tag_origin");
   distant_rocket_engine.angles = (-90, 0, 0);
   wait(3);
   level waittill("distant_rocket_launch");
@@ -402,10 +398,10 @@ distant_rockets_think() {
   array_thread(distant_rocket_arm3, ::distant_rocket_arm3_move);
   array_thread(distant_rocket_arm4, ::distant_rocket_arm4_move);
   wait(8);
-  distant_rocket_engine playSound("evt_dist_cosmo_launch");
-  distant_rocket_engine playSound("evt_dist_cosmo_air_distf");
+  distant_rocket_engine playsound("evt_dist_cosmo_launch");
+  distant_rocket_engine playsound("evt_dist_cosmo_air_distf");
   wait(3.5);
-  playFXOnTag(level._effect["rocket_blast_trail"], distant_rocket_engine, "tag_origin");
+  playfxontag(level._effect["rocket_blast_trail"], distant_rocket_engine, "tag_origin");
   array_thread(distant_rocket, ::rocket_move);
 }
 distant_rocket_gantry1_move() {
@@ -433,13 +429,13 @@ distant_rocket_arm4_move() {
   self waittill("rotatedone");
 }
 snd_distant_rocket_arm(distant_rocket_engine) {
-  distant_rocket_engine playLoopSound("evt_dist_rocket_lp", .5);
-  distant_rocket_engine playSound("evt_dist_rocket_start");
+  distant_rocket_engine playloopsound("evt_dist_rocket_lp", .5);
+  distant_rocket_engine PlaySound("evt_dist_rocket_start");
   wait(16);
   distant_rocket_engine stoploopsound(.3);
-  distant_rocket_engine playSound("evt_dist_rocket_end");
+  distant_rocket_engine PlaySound("evt_dist_rocket_end");
 }
 snd_distant_gantry(orignr, originl) {
-  orignr playSound("evt_dist_gantry_disengage");
-  orignr playSound("evt_dist_rocket_start");
+  orignr playsound("evt_dist_gantry_disengage");
+  orignr playsound("evt_dist_rocket_start");
 }

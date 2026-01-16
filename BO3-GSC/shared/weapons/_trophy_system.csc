@@ -13,14 +13,14 @@
 #namespace trophy_system;
 
 function init_shared(localclientnum) {
-  clientfield::register("missile", "trophy_system_state", 1, 2, "int", &trophy_state_change, 0, 1);
-  clientfield::register("scriptmover", "trophy_system_state", 1, 2, "int", &trophy_state_change_recon, 0, 0);
+  clientfield::register("missile", "trophy_system_state", 1, 2, "int", & trophy_state_change, 0, 1);
+  clientfield::register("scriptmover", "trophy_system_state", 1, 2, "int", & trophy_state_change_recon, 0, 0);
 }
 
 function trophy_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newval) {
@@ -44,7 +44,7 @@ function trophy_state_change(localclientnum, oldval, newval, bnewent, binitialsn
 function trophy_state_change_recon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newval) {

@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setModel("veh_t6_dlc_zm_robot_0");
+  self setmodel("veh_t6_dlc_zm_robot_0");
   self.voice = "american";
   self.skeleton = "base";
 }

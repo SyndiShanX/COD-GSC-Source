@@ -99,9 +99,8 @@ has_perk(perk_name, perk_level_list) {
 is_valid_perk(perk_name) {
   perk_0_list = GetArrayKeys(level.alien_perks["perk_0"]);
 
-  if(common_scripts\utility::array_contains(perk_0_list, perk_name)) {
+  if(common_scripts\utility::array_contains(perk_0_list, perk_name))
     return true;
-  }
 
   perk_1_list = GetArrayKeys(level.alien_perks["perk_1"]);
   return common_scripts\utility::array_contains(perk_1_list, perk_name);

@@ -12,6 +12,7 @@
 #include scripts\mp\mp_firingrange2_alt_scripted;
 #include scripts\mp\mp_firingrange2_alt_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_firingrange2_alt;
 
 event_handler[level_init] main(eventstruct) {

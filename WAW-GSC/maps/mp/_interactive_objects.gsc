@@ -10,17 +10,17 @@ init() {
   level.barrelExplodingThisFrame = false;
   qBarrels = false;
   all_barrels = [];
-  barrels = getEntArray("explodable_barrel", "targetname");
+  barrels = getentarray("explodable_barrel", "targetname");
   if((isDefined(barrels)) && (barrels.size > 0)) {
     qBarrels = true;
-    for(i = 0; i < barrels.size; i++) {
+    for (i = 0; i < barrels.size; i++) {
       all_barrels[all_barrels.size] = barrels[i];
     }
   }
-  barrels = getEntArray("explodable_barrel", "script_noteworthy");
+  barrels = getentarray("explodable_barrel", "script_noteworthy");
   if((isDefined(barrels)) && (barrels.size > 0)) {
     qBarrels = true;
-    for(i = 0; i < barrels.size; i++) {
+    for (i = 0; i < barrels.size; i++) {
       all_barrels[all_barrels.size] = barrels[i];
     }
   }
@@ -38,17 +38,17 @@ init() {
   }
   qCrates = false;
   all_crates = [];
-  crates = getEntArray("flammable_crate", "targetname");
+  crates = getentarray("flammable_crate", "targetname");
   if((isDefined(crates)) && (crates.size > 0)) {
     qCrates = true;
-    for(i = 0; i < crates.size; i++) {
+    for (i = 0; i < crates.size; i++) {
       all_crates[all_crates.size] = crates[i];
     }
   }
-  crates = getEntArray("flammable_crate", "script_noteworthy");
+  crates = getentarray("flammable_crate", "script_noteworthy");
   if((isDefined(crates)) && (crates.size > 0)) {
     qCrates = true;
-    for(i = 0; i < crates.size; i++) {
+    for (i = 0; i < crates.size; i++) {
       all_crates[all_crates.size] = crates[i];
     }
   }
@@ -75,9 +75,9 @@ explodable_barrel_think() {
   self endon("exploding");
   self breakable_clip();
   self.health = level.barrelHealth;
-  self setCanDamage(true);
+  self setcandamage(true);
   self.targetname = "explodable_barrel";
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("BARRELDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -111,17 +111,17 @@ explodable_barrel_burn() {
     offset2 = vector_multiply(up, (0, 0, 22)) + (0, 0, 14);
   }
   level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "barrel");
-  while(self.health > 0) {
+  while (self.health > 0) {
     if(!startedfx) {
-      playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
+      playfx(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
     if(count > 20) {
       count = 0;
     }
-    playFX(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
-    self playLoopSound("barrel_fuse");
+    playfx(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
+    self playloopsound("barrel_fuse");
     if(count == 0) {
       self.health -= (10 + randomInt(10));
     }
@@ -146,7 +146,7 @@ explodable_barrel_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.barrelExpSound, self.origin);
-  playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["barrel"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -183,8 +183,8 @@ flammable_crate_think() {
   self endon("exploding");
   self breakable_clip();
   self.health = level.crateHealth;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
       continue;
@@ -216,16 +216,16 @@ flammable_crate_burn() {
     offset1 = vector_multiply(up, (0, 0, 22)) - (0, 0, 30);
     offset2 = vector_multiply(up, (0, 0, 22)) + (0, 0, 14);
   }
-  while(self.health > 0) {
+  while (self.health > 0) {
     if(!startedfx) {
-      playFX(level.breakables_fx["ammo_crate"]["burn_start"], self.origin);
+      playfx(level.breakables_fx["ammo_crate"]["burn_start"], self.origin);
       level thread play_sound_in_space(level.crateIgnSound, self.origin);
       startedfx = true;
     }
     if(count > 20) {
       count = 0;
     }
-    playFX(level.breakables_fx["ammo_crate"]["burn"], self.origin);
+    playfx(level.breakables_fx["ammo_crate"]["burn"], self.origin);
     if(count == 0) {
       self.health -= (10 + randomInt(10));
     }
@@ -249,7 +249,7 @@ flammable_crate_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.crateExpSound, self.origin);
-  playFX(level.breakables_fx["ammo_crate"]["explode"], self.origin);
+  playfx(level.breakables_fx["ammo_crate"]["explode"], self.origin);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -299,11 +299,10 @@ getClosestEnt(org, array) {
   }
   dist = 256;
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }

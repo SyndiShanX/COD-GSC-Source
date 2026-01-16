@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\gestures;
 #include scripts\core_common\system_shared;
+
 #namespace dynent_world;
 
 autoexec __init__system__() {
@@ -22,7 +23,7 @@ __init__() {
 
   level thread devgui_loop();
 
-  level thread update_loop();
+    level thread update_loop();
   callback::on_connect(&on_player_connect);
   callback::on_disconnect(&on_player_disconnect);
   callback::on_player_killed(&on_player_killed);
@@ -102,7 +103,7 @@ private function_2f394f36() {
     box(boundsorigin, (0, 0, 0) - bounds, bounds, 0, (0, 0, 1), 1, 0, 5);
   }
 
-  viewheight = self getplayerviewheight();
+    viewheight = self getplayerviewheight();
   vieworigin = self.origin + (0, 0, viewheight);
   viewangles = self getplayerangles();
   viewforward = anglesToForward(viewangles);
@@ -121,27 +122,29 @@ private function_2f394f36() {
       sphere(dynent.origin, 9, (0, 0, 1), 1, 0, 8, 5);
     }
 
-    if(var_755fcbbd < 0) {
-      continue;
-    }
+      if(var_755fcbbd < 0) {
+        continue;
+      }
 
     if(isDefined(dynent.var_a548ec11) && gettime() <= dynent.var_a548ec11) {
+
       if(debug) {
         print3d(dynent.origin, "<dev string:x38>", (1, 1, 1), 1, 0.5, 5);
       }
 
-      continue;
+        continue;
     }
 
     stateindex = function_ffdbe8c2(dynent);
     bundle = function_489009c1(dynent);
 
     if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[stateindex]) && (isDefined(bundle.dynentstates[stateindex].var_efabe801) && bundle.dynentstates[stateindex].var_efabe801 || level.inprematchperiod && !(isDefined(bundle.dynentstates[stateindex].var_4a78f198) && bundle.dynentstates[stateindex].var_4a78f198))) {
+
       if(debug) {
         print3d(dynent.origin, "<dev string:x43>", (1, 1, 1), 1, 0.5, 5);
       }
 
-      continue;
+        continue;
     }
 
     if(isDefined(dynent.canuse) && !dynent[[dynent.canuse]](self)) {
@@ -179,7 +182,7 @@ private function_2f394f36() {
 }
 
 function_836af3b3(bundle, state) {
-  hintstring = # "";
+  hintstring = #"";
 
   if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[state]) && isDefined(bundle.dynentstates[state].hintstring)) {
     hintstring = bundle.dynentstates[state].hintstring;
@@ -267,7 +270,7 @@ private function_e882de59(trigger) {
   self notify("1fefc20570ca81a2");
   self endon("1fefc20570ca81a2");
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(self usebuttonpressed()) {
     waitframe(1);
@@ -428,7 +431,7 @@ private devgui_loop() {
     args = strtok(dvarstr, "<dev string:x11e>");
 
     switch (args[0]) {
-      case # "reset":
+      case #"reset":
         resetdynents();
         break;
     }
@@ -470,3 +473,4 @@ private function_6b66543a() {
     }
   }
 }
+

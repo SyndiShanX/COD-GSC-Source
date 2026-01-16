@@ -25,7 +25,7 @@ main() {
   level thread mission_objectives();
   level thread mission_object_control();
   level maps\_utility::delaythread(1.0, maps\_utility::set_team_bcvoice, "allies", "taskforce");
-  maps\_utility::intro_screen_create(&"LOKI_INTROSCREEN_LINE_0", &"LOKI_INTROSCREEN_LINE_1", &"LOKI_INTROSCREEN_LINE_2", &"LOKI_INTROSCREEN_LINE_6");
+  maps\_utility::intro_screen_create(&"LOKI_INTROSCREEN_LINE_0", & "LOKI_INTROSCREEN_LINE_1", & "LOKI_INTROSCREEN_LINE_2", & "LOKI_INTROSCREEN_LINE_6");
   maps\_utility::intro_screen_custom_func(::introscreen);
   level.player player_helmet();
   space_script_setup();
@@ -79,27 +79,24 @@ space_sprinting_adjustments() {
   for(;;) {
     maps\loki_util::jkuprint("not sprinting");
 
-    while(!self issprinting()) {
+    while(!self issprinting())
       common_scripts\utility::waitframe();
-    }
 
     maps\loki_util::jkuprint("sprinting");
     earthquake(0.05, 1, level.player.origin, 200);
     var_4 = maps\loki_util::create_rumble_ent(925, "blaa", 1.5);
     var_4 playrumbleonentity("light_2s");
 
-    while(self issprinting()) {
+    while(self issprinting())
       common_scripts\utility::waitframe();
-    }
 
     if(!self adsbuttonpressed()) {
       maps\loki_util::jkuprint("lerp out no ads");
       continue;
     }
 
-    while(self adsbuttonpressed()) {
+    while(self adsbuttonpressed())
       common_scripts\utility::waitframe();
-    }
 
     maps\loki_util::jkuprint("fov post ads");
     setsaveddvar("cg_fov", var_0);
@@ -115,9 +112,8 @@ player_helmet(var_0, var_1) {
   }
   var_2 = "halo_overlay_scuba";
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = var_1;
-  }
 
   self.hud_scubamask = maps\_hud_util::create_client_overlay(var_2, 1, self);
   self.hud_scubamask.foreground = 0;
@@ -126,9 +122,8 @@ player_helmet(var_0, var_1) {
   self.hud_scubamask_model setModel("viewmodel_us_space_helmet");
   self.hud_scubamask_model linktoplayerview(self, "tag_origin", (0, 0, 0), (0, 90, -4), 1);
 
-  if(getdvarint("demo_mode")) {
+  if(getdvarint("demo_mode"))
     self.hud_scubamask_model delete();
-  }
 }
 
 player_helmet_disable(var_0) {
@@ -230,15 +225,14 @@ mission_objectives() {
   switch (level.start_point) {
     case "infil":
       wait 25.5;
-      objective_add(maps\_utility::obj("obj_land"), "current", &"LOKI_OBJ_LAND");
+      objective_add(maps\_utility::obj("obj_land"), "current", & "LOKI_OBJ_LAND");
       common_scripts\utility::flag_wait("infil_done");
       wait 6.0;
     case "combat_one":
-      if(level.start_point == "combat_one") {
-        objective_add(maps\_utility::obj("obj_land"), "current", &"LOKI_OBJ_LAND");
-      }
+      if(level.start_point == "combat_one")
+        objective_add(maps\_utility::obj("obj_land"), "current", & "LOKI_OBJ_LAND");
 
-      objective_add(maps\_utility::obj("obj_locate_entrance"), "current", &"LOKI_OBJ_LOCATE_ENTRANCE");
+      objective_add(maps\_utility::obj("obj_locate_entrance"), "current", & "LOKI_OBJ_LOCATE_ENTRANCE");
       var_0 = getent("combat_one_trig_wave3", "targetname");
       var_0 waittill("trigger");
       wait 3.0;
@@ -247,7 +241,7 @@ mission_objectives() {
       wait 1.0;
 
       if(!common_scripts\utility::flag("start_fuel_explosion")) {
-        objective_add(maps\_utility::obj("obj_enter_hatch"), "current", &"LOKI_OBJ_ENTER_HATCH");
+        objective_add(maps\_utility::obj("obj_enter_hatch"), "current", & "LOKI_OBJ_ENTER_HATCH");
         common_scripts\utility::flag_wait("combat_one_done");
         wait 1.0;
         objective_state(maps\_utility::obj("obj_enter_hatch"), "failed");
@@ -260,40 +254,40 @@ mission_objectives() {
       common_scripts\utility::flag_wait("moving_cover_done2");
     case "combat_two":
       level waittill("combat_2_unlinked");
-      objective_add(maps\_utility::obj("obj_locate_control"), "current", &"LOKI_OBJ_LOCATE_CONTROL");
+      objective_add(maps\_utility::obj("obj_locate_control"), "current", & "LOKI_OBJ_LOCATE_CONTROL");
       maps\loki_combat_two::waittill_trigger_targetname("combat_two_third_wave_extra");
       objective_state(maps\_utility::obj("obj_locate_control"), "done");
       wait 0.5;
-      objective_add(maps\_utility::obj("obj_advance"), "current", &"LOKI_OBJ_ADVANCE");
+      objective_add(maps\_utility::obj("obj_advance"), "current", & "LOKI_OBJ_ADVANCE");
       common_scripts\utility::flag_wait("combat_two_done");
       maps\_utility::objective_complete(maps\_utility::obj("obj_advance"));
       wait 1.5;
     case "space_breach":
-      objective_add(maps\_utility::obj("obj_breach"), "current", &"LOKI_OBJ_BREACH");
+      objective_add(maps\_utility::obj("obj_breach"), "current", & "LOKI_OBJ_BREACH");
       common_scripts\utility::flag_wait("space_breach_done");
       maps\_utility::objective_complete(maps\_utility::obj("obj_breach"));
       wait 0.5;
 
       if(!common_scripts\utility::flag("attack_pressed")) {
-        objective_add(maps\_utility::obj("obj_start_rog"), "current", &"LOKI_OBJ_START_ROG");
+        objective_add(maps\_utility::obj("obj_start_rog"), "current", & "LOKI_OBJ_START_ROG");
         common_scripts\utility::flag_wait("console_activated");
         maps\_utility::objective_complete(maps\_utility::obj("obj_start_rog"));
       }
     case "rog":
       common_scripts\utility::flag_wait("ROG_look_at_sat_farm");
       wait 1.5;
-      objective_add(maps\_utility::obj("obj_rog_airfield"), "current", &"LOKI_OBJ_ROG_ELIMINATE");
+      objective_add(maps\_utility::obj("obj_rog_airfield"), "current", & "LOKI_OBJ_ROG_ELIMINATE");
       common_scripts\utility::flag_wait("ROG_look_at_train");
       maps\_utility::objective_complete(maps\_utility::obj("obj_rog_airfield"));
       common_scripts\utility::flag_wait("ROG_look_at_main_base");
       wait 1.5;
-      objective_add(maps\_utility::obj("obj_rog_train_protect"), "current", &"LOKI_OBJ_ROG_DEFEND");
+      objective_add(maps\_utility::obj("obj_rog_train_protect"), "current", & "LOKI_OBJ_ROG_DEFEND");
       common_scripts\utility::flag_wait("ROG_take_in_destruction");
       maps\_utility::objective_complete(maps\_utility::obj("obj_rog_train_protect"));
       common_scripts\utility::flag_wait("ROG_exit");
     case "ending":
       level waittill("waiting_for_player_to_fire");
-      objective_add(maps\_utility::obj("obj_rog_train_destroy"), "current", &"LOKI_OBJ_ROG_TRAIN_TARGET");
+      objective_add(maps\_utility::obj("obj_rog_train_destroy"), "current", & "LOKI_OBJ_ROG_TRAIN_TARGET");
       common_scripts\utility::flag_wait("player_flipped_switch");
   }
 }
@@ -400,17 +394,15 @@ loki_intro_lod_hide() {
 loki_control_room_boundaries() {
   var_0 = getEntArray("control_room_boundary_collision", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 notsolid();
-  }
+  foreach(var_2 in var_0)
+  var_2 notsolid();
 }
 
 loki_earth_control(var_0) {
   var_1 = getent("earth_model", "targetname");
 
-  if(!isDefined(level.earth_origin_start)) {
+  if(!isDefined(level.earth_origin_start))
     level.earth_origin_start = var_1.origin;
-  }
 
   switch (var_0) {
     case "hidden":

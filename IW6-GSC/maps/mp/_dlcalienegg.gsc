@@ -120,7 +120,7 @@ eggHasCompletedForMap(mapName) {
 
   bitFlag = level.dlcAlienEggs[mapName];
   if(isDefined(bitFlag) &&
-    (eggState &bitFlag) != 0) {
+    (eggState & bitFlag) != 0) {
     return true;
   }
 

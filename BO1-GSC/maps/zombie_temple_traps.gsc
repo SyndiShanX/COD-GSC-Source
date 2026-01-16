@@ -62,9 +62,8 @@ spear_trap_damage_all_characters(audio_counter, player) {
     if(self spear_trap_is_character_touching(char)) {
       self thread spear_damage_character(char);
     } else if(isPlayer(char) && (audio_counter == 0) && (randomintrange(0, 101) <= 10)) {
-      if(isDefined(player) && player == char) {
+      if(isDefined(player) && player == char)
         char thread delayed_spikes_close_vox();
-      }
     }
   }
 }
@@ -202,7 +201,7 @@ temple_trap_move_switch() {
     trap_switch playLoopSound("zmb_pressure_plate_loop");
     trap_switch waittill("movedone");
     trap_switch stopLoopSound();
-    trap_switch playSound("zmb_pressure_plate_lock");
+    trap_switch playsound("zmb_pressure_plate_lock");
   }
   self notify("switch_activated");
   self waittill("trap_ready");
@@ -212,7 +211,7 @@ temple_trap_move_switch() {
     trap_switch playLoopSound("zmb_pressure_plate_loop");
     trap_switch waittill("movedone");
     trap_switch stopLoopSound();
-    trap_switch playSound("zmb_pressure_plate_lock");
+    trap_switch playsound("zmb_pressure_plate_lock");
   }
 }
 
@@ -326,7 +325,7 @@ waterfall_trap_off() {
 
 waterfall_trap_damage() {
   self endon("trap_off");
-  fwd = anglesToForward(self.angles);
+  fwd = AnglesToForward(self.angles);
   zombies_knocked_down = [];
   while(1) {
     self waittill("trigger", who);
@@ -602,12 +601,12 @@ _maze_mover_move(goal, time) {
 
 _maze_mover_play_fx(fx_name, offset) {
   if(isDefined(fx_name)) {
-    vFwd = anglesToForward(self.angles);
+    vFwd = AnglesToForward(self.angles);
     org = self.origin;
     if(isDefined(offset)) {
       org += offset;
     }
-    playFX(fx_name, org, vFwd, (0, 0, 1));
+    PlayFX(fx_name, org, vFwd, (0, 0, 1));
   }
 }
 
@@ -901,7 +900,7 @@ delete_cell_corpses(mazeCell) {
 delete_corpse() {
   self endon("death");
   if(is_mature()) {
-    playFX(level._effect["animscript_gib_fx"], self.origin);
+    PlayFX(level._effect["animscript_gib_fx"], self.origin);
   }
   if(isDefined(self)) {
     self Delete();
@@ -1044,7 +1043,7 @@ maze_vibrate_floor(time) {
   if(is_true(self.isVibrating)) {
     return;
   }
-  self.floor playSound("evt_maze_floor_collapse");
+  self.floor playsound("evt_maze_floor_collapse");
   self.isVibrating = true;
   dir = (randomFloatRange(-1, 1), randomFloatRange(-1, 1), 0);
   self.floor vibrate(dir, 0.75, 0.3, time);

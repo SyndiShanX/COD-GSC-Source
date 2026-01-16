@@ -9,7 +9,7 @@
 #namespace mp_devgui;
 
 function autoexec __init__sytem__() {
-  system::register("mp_devgui", &__init__, undefined, undefined);
+  system::register("mp_devgui", & __init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -30,7 +30,7 @@ function create_mp_contracts_devgui(localclientnum) {
     return;
   }
   frontend_slots = 4;
-  for(slot = 0; slot < frontend_slots; slot++) {
+  for (slot = 0; slot < frontend_slots; slot++) {
     add_contract_slot(localclientnum, slot);
     wait(0.1);
   }
@@ -77,7 +77,7 @@ function add_blackjack_contract(localclientnum) {
   side_bet_root = "";
   stat_write_bjc = "";
   stat_write_bjc_master = "";
-  for(i = 0; i <= 6; i++) {
+  for (i = 0; i <= 6; i++) {
     cmds = (stat_write_bjc + "") + i;
     cmds = cmds + next_cmd;
     cmds = cmds + ((stat_write_bjc + "") + i);
@@ -138,7 +138,7 @@ function add_contract_slot(localclientnum, slot) {
   truncated_title_end_index = (max_title_width - ellipsis.size) - 1;
   cmds_added = 0;
   max_cmd_to_add = 5;
-  for(row = 1; row < num_rows; row++) {
+  for (row = 1; row < num_rows; row++) {
     row_info = tablelookuprow(table, row);
     if(strisnumber(row_info[0])) {
       table_index = int(row_info[0]);
@@ -263,7 +263,7 @@ function wrap_dvarconfig_cmds(cmds) {
 }
 
 function add_devgui_cmd(localclientnum, menu_path, cmds) {
-  /
+  /# /
   #
   adddebugcommand(localclientnum, ((("" + menu_path) + "") + cmds) + "");
 }
@@ -282,7 +282,7 @@ function calculate_schedule_start_time(ref_time) {
 function watch_devgui() {
   level notify("watch_devgui_client_mp_singleton");
   level endon("watch_devgui_client_mp_singleton");
-  while(true) {
+  while (true) {
     wait(0.1);
     if(!dvar_has_value("")) {
       continue;

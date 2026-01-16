@@ -4,9 +4,8 @@
 *****************************************************/
 
 init_coverwater(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "";
-  }
 
   level.cw_znear_default = getdvar("r_znear");
   level.cw_trigger_volumes = [];
@@ -73,9 +72,8 @@ init_coverwater(var_0) {
 }
 
 register_coverwater_area(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "";
-  }
 
   common_scripts\utility::array_thread(getEntArray(var_0 + "_above", "targetname"), ::water_surface_think, var_1);
   common_scripts\utility::array_thread(getEntArray(var_0 + "_under", "targetname"), ::water_surface_think, var_1);
@@ -86,9 +84,8 @@ register_coverwater_area(var_0, var_1) {
 
 flag_checker() {
   for(;;) {
-    if(common_scripts\utility::flag("cw_player_in_water")) {
+    if(common_scripts\utility::flag("cw_player_in_water"))
       jkuprint("flag getting set!");
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -160,11 +157,10 @@ player_underwater_think(var_0) {
   player_stop_bubbles();
   level.deathsdooroverride = undefined;
 
-  if(!isDefined(level._audio.in_deathsdoor)) {
+  if(!isDefined(level._audio.in_deathsdoor))
     level.player clearclienttriggeraudiozone(0.01);
-  } else {
+  else
     maps\_audio::set_deathsdoor();
-  }
 
   thread player_underwater_think(var_0);
 }
@@ -176,9 +172,8 @@ player_in_coverwater(var_0) {
   waittillframeend;
   level.player thread entity_fx_and_anims_think("cw_player_out_of_water", (0, 0, 0));
 
-  while(level.player istouching(var_0)) {
+  while(level.player istouching(var_0))
     common_scripts\utility::waitframe();
-  }
 
   common_scripts\utility::flag_clear("cw_player_in_water");
 }
@@ -191,11 +186,10 @@ ai_in_coverwater(var_0) {
   maps\_utility::ent_flag_set("cw_ai_in_of_coverwater");
   maps\_utility::ent_flag_clear("cw_ai_out_of_coverwater");
 
-  if(isDefined(self.cw_ai_only_stand)) {
+  if(isDefined(self.cw_ai_only_stand))
     self.cw_ai_only_stand = self.cw_ai_only_stand;
-  } else {
+  else
     self.cw_ai_only_stand = 1;
-  }
 
   if(self.team == "axis") {
     self.cw_previous_grenadeammo = self.grenadeammo;
@@ -206,9 +200,8 @@ ai_in_coverwater(var_0) {
 
   thread entity_fx_and_anims_think("cw_ai_out_of_coverwater", (0, 0, 0));
 
-  while(self istouching(var_0)) {
+  while(self istouching(var_0))
     common_scripts\utility::waitframe();
-  }
 
   self.in_coverwater = 0;
   maps\_utility::ent_flag_set("cw_ai_out_of_coverwater");
@@ -233,9 +226,8 @@ trigger_volume_think(var_0) {
 
     foreach(var_1 in var_3) {
       if(isplayer(var_1)) {
-        if(!common_scripts\utility::flag("cw_player_in_water")) {
+        if(!common_scripts\utility::flag("cw_player_in_water"))
           level.player thread player_in_coverwater(self);
-        }
 
         continue;
       }
@@ -247,9 +239,8 @@ trigger_volume_think(var_0) {
         continue;
       }
 
-      if(!var_1 maps\_utility::ent_flag("cw_ai_in_of_coverwater")) {
+      if(!var_1 maps\_utility::ent_flag("cw_ai_in_of_coverwater"))
         var_1 thread ai_in_coverwater(self);
-      }
     }
 
     common_scripts\utility::waitframe();
@@ -266,29 +257,27 @@ water_surface_think(var_0) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7);
     self.health = 1000000;
 
-    if(var_5 == "MOD_MELEE") {
+    if(var_5 == "MOD_MELEE")
       playFX(common_scripts\utility::getfx("melee_water"), var_4);
-    } else if(var_2.classname != "script_vehicle_nh90") {
+    else if(var_2.classname != "script_vehicle_nh90") {
       if(getsubstr(self.targetname, self.targetname.size - 5) == "above") {
         var_8 = var_4 - (0, 0, 1);
         var_9 = var_8 + 120 * var_3;
 
-        if(isplayer(var_2)) {
+        if(isplayer(var_2))
           magicbullet("coverwater_magicbullet_under", var_8, var_9, level.player);
-        } else {
+        else
           magicbullet("coverwater_magicbullet_under", var_8, var_9);
-        }
 
         playFX(common_scripts\utility::getfx("bullet_trail"), var_4, var_3);
       } else {
         var_8 = var_4 + (0, 0, 1);
         var_9 = var_8 + 120 * var_3;
 
-        if(isplayer(var_2)) {
+        if(isplayer(var_2))
           magicbullet("coverwater_magicbullet_above", var_8, var_9, level.player);
-        } else {
+        else
           magicbullet("coverwater_magicbullet_above", var_8, var_9);
-        }
 
         playFX(common_scripts\utility::getfx("water_under_splash"), var_4 - (0, 0, 1));
       }
@@ -301,9 +290,8 @@ water_surface_think(var_0) {
 player_water_height_think(var_0) {
   level endon(var_0);
 
-  if(!isDefined(level.flood_player_default_jump_height)) {
+  if(!isDefined(level.flood_player_default_jump_height))
     level.flood_player_default_jump_height = getdvarfloat("jump_height");
-  }
 
   var_1 = 40;
   var_2 = 50;
@@ -314,11 +302,10 @@ player_water_height_think(var_0) {
     if(is_player_eye_underwater()) {
       if(!common_scripts\utility::flag("cw_player_no_speed_adj")) {
         if(isDefined(level.cw_player_is_drowning) && level.cw_player_is_drowning) {
-          if(level.cw_player_drowning_damage_count > 10) {
+          if(level.cw_player_drowning_damage_count > 10)
             maps\flood_util::player_water_movement(var_1 * 0.5, 0.25);
-          } else {
+          else
             maps\flood_util::player_water_movement(var_1 * (1 - level.cw_player_drowning_damage_count * 0.05), 0.25);
-          }
         } else
           maps\flood_util::player_water_movement(var_1, 0.25);
       }
@@ -328,18 +315,16 @@ player_water_height_think(var_0) {
       var_4 = abs(level.player.origin[2] - var_3["position"][2]);
       var_5 = 100 - var_4 * (var_2 / 48);
 
-      if(var_5 > 100) {
+      if(var_5 > 100)
         var_5 = 100;
-      } else if(var_5 < var_2) {
+      else if(var_5 < var_2)
         var_5 = var_2;
-      }
 
       var_6 = level.flood_player_default_jump_height * (var_5 * 0.008);
       setsaveddvar("jump_height", var_6);
 
-      if(!common_scripts\utility::flag("cw_player_no_speed_adj")) {
+      if(!common_scripts\utility::flag("cw_player_no_speed_adj"))
         maps\flood_util::player_water_movement(var_5, 0.25);
-      }
     }
 
     wait 0.2;
@@ -347,9 +332,8 @@ player_water_height_think(var_0) {
 
   setsaveddvar("jump_height", level.flood_player_default_jump_height);
 
-  if(!common_scripts\utility::flag("cw_player_no_speed_adj")) {
+  if(!common_scripts\utility::flag("cw_player_no_speed_adj"))
     maps\flood_util::player_water_movement(100, 0.25);
-  }
 }
 
 player_surface_blur_think(var_0) {
@@ -389,30 +373,25 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("ai_stop_coverwater");
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 1;
-  }
 
   var_4 = gettime();
 
-  if(!isplayer(self) && var_2) {
+  if(!isplayer(self) && var_2)
     playFX(common_scripts\utility::getfx("cw_enter_splash_small"), self.origin);
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = (0, 0, 0);
-  }
 
-  if(!isDefined(self.cw_in_rising_water)) {
+  if(!isDefined(self.cw_in_rising_water))
     self.cw_in_rising_water = 0;
-  }
 
   for(;;) {
-    if(!isplayer(self) && self.cw_in_rising_water) {
+    if(!isplayer(self) && self.cw_in_rising_water)
       wait(randomfloatrange(0.05, 0.1));
-    } else {
+    else
       wait(randomfloatrange(0.15, 0.25));
-    }
 
     var_5 = self.origin;
     var_6 = var_5 + (0, 0, 84);
@@ -433,9 +412,8 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
       if(!self.cw_in_rising_water && var_9 > var_8) {
         if(!isDefined(self.animarchetype) || self.animarchetype != "waist_water") {
-          if(self.cw_ai_only_stand) {
+          if(self.cw_ai_only_stand)
             self allowedstances("stand");
-          }
 
           self.animarchetype = "waist_water";
           self.maxfaceenemydist = 1024;
@@ -447,18 +425,16 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
     if(isplayer(self)) {
       if(!common_scripts\utility::flag("cw_player_underwater")) {
-        if(distance(self getvelocity(), (0, 0, 0)) < 5) {
+        if(distance(self getvelocity(), (0, 0, 0)) < 5)
           var_10 = "water_stop_player";
-        } else {
+        else
           var_10 = "water_movement_player";
-        }
       }
     } else if(isDefined(level._effect["water_" + self.a.movement])) {
-      if(self.cw_in_rising_water) {
+      if(self.cw_in_rising_water)
         var_10 = "water_" + self.a.movement + "_rising";
-      } else {
+      else
         var_10 = "water_" + self.a.movement;
-      }
     }
 
     var_11 = common_scripts\utility::getfx(var_10);
@@ -473,11 +449,10 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
             if(gettime() - var_4 > 750) {
               var_4 = gettime();
 
-              if(randomint(3) == 0) {
+              if(randomint(3) == 0)
                 playFXOnTag(level._effect["scrnfx_water_splash_med"], level.cw_player_view_fx_source, "tag_origin");
-              } else {
+              else
                 playFXOnTag(level._effect["scrnfx_water_splash_high"], level.cw_player_view_fx_source, "tag_origin");
-              }
             }
           } else if(var_12 > 40) {
             if(gettime() - var_4 > 1500) {
@@ -491,26 +466,23 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
       if(isDefined(self.animarchetype) && self.animarchetype != "waist_water" || !isDefined(self.animarchetype)) {
         var_5 = var_5 + 25 * anglesToForward(self.angles);
 
-        if(self.cw_in_rising_water) {
+        if(self.cw_in_rising_water)
           playFX(common_scripts\utility::getfx("sprint_splash_rising"), var_5);
-        } else {
+        else
           playFX(common_scripts\utility::getfx("sprint_splash"), var_5);
-        }
       }
     }
 
     if(self.cw_in_rising_water) {
-      if(!common_scripts\utility::flag("cw_player_underwater")) {
+      if(!common_scripts\utility::flag("cw_player_underwater"))
         thread fx_water_surface_floater(var_5, var_11, var_7["entity"], var_0, 0);
-      }
 
       continue;
     }
 
     if(isplayer(self) && isDefined(level.cw_player_in_rising_water) && level.cw_player_in_rising_water) {
-      if(!common_scripts\utility::flag("cw_player_underwater")) {
+      if(!common_scripts\utility::flag("cw_player_underwater"))
         thread fx_water_surface_floater(var_5, var_11, var_7["entity"], var_0, 0);
-      }
 
       continue;
     }
@@ -519,11 +491,10 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
     var_14 = anglesToForward(var_13);
     var_15 = anglestoup(var_13);
 
-    if(self getEye()[2] + 6 - var_9 > 0) {
+    if(self getEye()[2] + 6 - var_9 > 0)
       playFX(var_11, var_5, var_15, var_14);
-    } else {
+    else
       playFX(common_scripts\utility::getfx("underwater_movement"), var_5, var_15, var_14);
-    }
   }
 }
 
@@ -537,9 +508,8 @@ do_wet_fx() {
   var_0[5] = "J_Neck";
 
   if(0) {
-    if(!isDefined(self.cw_playing_wet_fx)) {
+    if(!isDefined(self.cw_playing_wet_fx))
       self.cw_playing_wet_fx = 0;
-    }
 
     if(!self.cw_playing_wet_fx) {
       jkuprint("playing wet fx");
@@ -555,9 +525,8 @@ do_wet_fx() {
       }
     }
   } else {
-    if(!isDefined(self.cw_playing_wet_fx)) {
+    if(!isDefined(self.cw_playing_wet_fx))
       self.cw_playing_wet_fx = 0;
-    }
 
     if(self.cw_playing_wet_fx) {
       jkuprint("stopping wet fx");
@@ -585,9 +554,8 @@ fx_water_surface_floater(var_0, var_1, var_2, var_3, var_4) {
   var_6 hide();
   var_6.angles = (-90, 0, 0);
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_6 linkto(var_2);
-  }
 
   playFXOnTag(var_1, var_6, "tag_origin");
   wait 3;
@@ -595,20 +563,18 @@ fx_water_surface_floater(var_0, var_1, var_2, var_3, var_4) {
 }
 
 is_player_eye_underwater(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0;
-  }
 
   var_1 = level.player getEye() + (0, 0, var_0);
   var_2 = bulletTrace(var_1, var_1 + (0, 0, 250), 0, self);
 
-  if(var_2["surfacetype"] == "water") {
+  if(var_2["surfacetype"] == "water")
     return 1;
-  } else if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].script_noteworthy) && var_2["entity"].script_noteworthy == "consider_underwater") {
+  else if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].script_noteworthy) && var_2["entity"].script_noteworthy == "consider_underwater")
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 create_player_surfacing_effects() {
@@ -718,13 +684,11 @@ delay_with_bubbles(var_0, var_1, var_2, var_3, var_4) {
   level endon("cw_player_out_of_water");
 
   for(var_5 = 0; var_5 < var_0; var_5++) {
-    if(!var_3) {
+    if(!var_3)
       player_make_bubbles();
-    }
 
-    if(!var_2) {
+    if(!var_2)
       thread audio_underwater_breath_bubbles();
-    }
 
     wait(var_1);
   }
@@ -823,9 +787,8 @@ player_deal_underwater_damage(var_0, var_1, var_2, var_3) {
 
   for(;;) {
     if(gettime() - var_0 >= var_1) {
-      if(!isDefined(level.cw_player_is_drowning) && level.cw_player_drowning_animate) {
+      if(!isDefined(level.cw_player_is_drowning) && level.cw_player_drowning_animate)
         thread player_animate_underwater_damage();
-      }
 
       player_make_bubbles();
       level.cw_player_is_drowning = 1;
@@ -841,9 +804,8 @@ player_animate_underwater_damage() {
   level.player disableweapons();
   wait 0.4;
 
-  while(isDefined(level.cw_player_is_drowning) && level.cw_player_is_drowning) {
+  while(isDefined(level.cw_player_is_drowning) && level.cw_player_is_drowning)
     common_scripts\utility::waitframe();
-  }
 
   wait 0.4;
   level.player enableweapons();
@@ -857,13 +819,11 @@ ai_enemy_tracking(var_0, var_1) {
       var_3 = getaiarray("axis");
 
       foreach(var_5 in var_3) {
-        if(isDefined(var_5.enemy) && var_5.enemy != level.player) {
+        if(isDefined(var_5.enemy) && var_5.enemy != level.player)
           var_3 = common_scripts\utility::array_remove(var_3, var_5);
-        }
 
-        if(!isDefined(var_5.enemy)) {
+        if(!isDefined(var_5.enemy))
           var_3 = common_scripts\utility::array_remove(var_3, var_5);
-        }
       }
 
       if(var_3.size > 0) {
@@ -1197,13 +1157,11 @@ drip_on_player(var_0) {
   level endon(var_0);
   level endon("cw_player_underwater");
 
-  if(isDefined(level.drip_ent1)) {
+  if(isDefined(level.drip_ent1))
     level.drip_ent1 delete();
-  }
 
-  if(isDefined(level.drip_ent2)) {
+  if(isDefined(level.drip_ent2))
     level.drip_ent2 delete();
-  }
 
   level.splash_fx = "cw_player_drips";
 
@@ -1293,21 +1251,18 @@ audio_stop_choke() {
       level.underwater_choke_node stopsounds();
       wait 0.1;
 
-      if(isDefined(level.underwater_choke_node)) {
+      if(isDefined(level.underwater_choke_node))
         level.underwater_choke_node delete();
-      }
     } else {
       wait 1;
 
-      if(isDefined(level.underwater_choke_node)) {
+      if(isDefined(level.underwater_choke_node))
         level.underwater_choke_node stopsounds();
-      }
 
       wait 0.1;
 
-      if(isDefined(level.underwater_choke_node)) {
+      if(isDefined(level.underwater_choke_node))
         level.underwater_choke_node delete();
-      }
     }
   }
 
@@ -1317,44 +1272,38 @@ audio_stop_choke() {
 audio_wait_to_delete_water_node(var_0) {
   wait 0.2;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 stopsounds();
-  }
 
   wait 0.1;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 }
 
 audio_water_level_logic(var_0) {
   if(var_0 == "submerge") {
-    if(isDefined(level.emerge_node)) {
+    if(isDefined(level.emerge_node))
       thread audio_wait_to_delete_water_node(level.emerge_node);
-    }
 
     level.submerge_node = spawn("script_origin", level.player.origin);
     level.submerge_node playSound("flood_plr_water_submerge_ss", "sounddone");
     level.submerge_node waittill("sounddone");
 
-    if(isDefined(level.submerge_node)) {
+    if(isDefined(level.submerge_node))
       level.submerge_node delete();
-    }
   } else if(var_0 == "emerge") {
     thread audio_stop_choke();
 
-    if(isDefined(level.submerge_node)) {
+    if(isDefined(level.submerge_node))
       thread audio_wait_to_delete_water_node(level.submerge_node);
-    }
 
     level.emerge_node = spawn("script_origin", level.player.origin);
     level.emerge_node playSound("flood_plr_water_emerge_ss", "sounddone");
     level.emerge_node waittill("sounddone");
 
-    if(isDefined(level.emerge_node)) {
+    if(isDefined(level.emerge_node))
       level.emerge_node delete();
-    }
   }
 }
 
@@ -1399,9 +1348,8 @@ flashbang_fizzle() {
   self endon("death");
   var_0 = gettime();
 
-  while(gettime() - var_0 < 950) {
+  while(gettime() - var_0 < 950)
     common_scripts\utility::waitframe();
-  }
 
   foreach(var_2 in level.cw_trigger_volumes) {
     if(self istouching(var_2)) {
@@ -1413,7 +1361,6 @@ flashbang_fizzle() {
 }
 
 jkuprint(var_0) {
-  if(isDefined(level.jkudebug) && level.jkudebug) {
+  if(isDefined(level.jkudebug) && level.jkudebug)
     iprintln(var_0);
-  }
 }

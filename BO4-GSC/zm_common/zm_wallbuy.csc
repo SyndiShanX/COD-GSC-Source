@@ -11,10 +11,11 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_wallbuy;
 
 autoexec __init__system__() {
-  system::register(#"zm_wallbuy", &__init__, &__main__, # "zm");
+  system::register(#"zm_wallbuy", &__init__, &__main__, #"zm");
 }
 
 __init__() {
@@ -23,9 +24,9 @@ __init__() {
   }
 
   level flag::init("weapon_wallbuys_created");
-  level._effect[# "wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
-  level._effect[# "hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
-  level._effect[# "wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
+  level._effect[#"wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
+  level._effect[#"hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
+  level._effect[#"wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
   clientfield::register("scriptmover", "wallbuy_ambient_fx", 1, 1, "int", &function_51f5fb94, 0, 0);
   clientfield::register("scriptmover", "wallbuy_reveal_fx", 1, 1, "int", &function_5ed44212, 0, 0);
   init();
@@ -72,7 +73,7 @@ init() {
     spawnable_weapon.weapon = getweapon(spawnable_weapon.zombie_weapon_upgrade);
     weapon_group = function_e2703c27(spawnable_weapon.weapon);
 
-    if(weapon_group == # "weapon_pistol" && !getgametypesetting(#"zmweaponspistol") || weapon_group == # "weapon_cqb" && !getgametypesetting(#"zmweaponsshotgun") || weapon_group == # "weapon_smg" && !getgametypesetting(#"zmweaponssmg") || weapon_group == # "weapon_assault" && !getgametypesetting(#"zmweaponsar") || weapon_group == # "weapon_tactical" && !getgametypesetting(#"zmweaponstr") || weapon_group == # "weapon_lmg" && !getgametypesetting(#"zmweaponslmg") || weapon_group == # "weapon_sniper" && !getgametypesetting(#"zmweaponssniper") || weapon_group == # "weapon_knife" && !getgametypesetting(#"zmweaponsknife")) {
+    if(weapon_group == #"weapon_pistol" && !getgametypesetting(#"zmweaponspistol") || weapon_group == #"weapon_cqb" && !getgametypesetting(#"zmweaponsshotgun") || weapon_group == #"weapon_smg" && !getgametypesetting(#"zmweaponssmg") || weapon_group == #"weapon_assault" && !getgametypesetting(#"zmweaponsar") || weapon_group == #"weapon_tactical" && !getgametypesetting(#"zmweaponstr") || weapon_group == #"weapon_lmg" && !getgametypesetting(#"zmweaponslmg") || weapon_group == #"weapon_sniper" && !getgametypesetting(#"zmweaponssniper") || weapon_group == #"weapon_knife" && !getgametypesetting(#"zmweaponsknife")) {
       continue;
     }
 
@@ -151,7 +152,7 @@ wallbuy_player_connect(localclientnum) {
 
   for(i = 0; i < keys.size; i++) {
     wallbuy = level._active_wallbuys[keys[i]];
-    fx = level._effect[# "870mcs_zm_fx"];
+    fx = level._effect[#"870mcs_zm_fx"];
 
     if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
@@ -204,7 +205,7 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
         waitframe(1);
 
         if(localclientnum == 0) {
-          playSound(0, # "zmb_weap_wall", struct.origin);
+          playSound(0, #"zmb_weap_wall", struct.origin);
         }
 
         vec_offset = (0, 0, 0);
@@ -221,7 +222,9 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       break;
     case 2:
       if(isDefined(level.var_680d143d)) {
-        struct.models[localclientnum][[level.var_680d143d]]();
+        struct.models[localclientnum][
+          [level.var_680d143d]
+        ]();
       }
 
       break;
@@ -282,7 +285,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
         struct.fx[localclientnum] = undefined;
       }
 
-      fx = level._effect[# "870mcs_zm_fx"];
+      fx = level._effect[#"870mcs_zm_fx"];
 
       if(isDefined(level._effect[weaponname + "_fx"])) {
         fx = level._effect[weaponname + "_fx"];
@@ -302,7 +305,7 @@ function_51f5fb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.ambient_fx_id)) {
-      self.ambient_fx_id = util::playFXOnTag(localclientnum, level._effect[# "wallbuy_ambient_fx"], self, "tag_fx_wall_buy");
+      self.ambient_fx_id = util::playFXOnTag(localclientnum, level._effect[#"wallbuy_ambient_fx"], self, "tag_fx_wall_buy");
     }
 
     return;
@@ -314,12 +317,12 @@ function_51f5fb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(!isDefined(self.var_e51fbce7)) {
-    self.var_e51fbce7 = util::playFXOnTag(localclientnum, level._effect[# "hash_6928ec90dff78e0c"], self, "tag_fx_wall_buy");
+    self.var_e51fbce7 = util::playFXOnTag(localclientnum, level._effect[#"hash_6928ec90dff78e0c"], self, "tag_fx_wall_buy");
   }
 }
 
 function_5ed44212(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[# "wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
+    util::playFXOnTag(localclientnum, level._effect[#"wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
   }
 }

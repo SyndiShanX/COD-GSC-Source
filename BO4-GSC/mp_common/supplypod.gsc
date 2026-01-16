@@ -24,10 +24,11 @@
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
+
 #namespace supplypod;
 
 autoexec __init__system__() {
-  system::register(#"supplypod", &__init__, undefined, # "killstreaks");
+  system::register(#"supplypod", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -46,7 +47,7 @@ __init__() {
     level.killstreakbundle = [];
   }
 
-  level.killstreakbundle[# "killstreak_supplypod"] = level.var_934fb97.bundle;
+  level.killstreakbundle[#"killstreak_supplypod"] = level.var_934fb97.bundle;
   level.var_dc8edcba = &function_827486aa;
   setupcallbacks();
   setupclientfields();
@@ -145,7 +146,7 @@ function_29de6f1f(weapon, meansofdeath = undefined) {
   baseweapon = weapons::getbaseweapon(weapon);
   var_a489f56 = isDefined(baseweapon.issignatureweapon) && baseweapon.issignatureweapon || isDefined(baseweapon.var_76ce72e8) && baseweapon.var_76ce72e8;
   iskillstreak = isDefined(killstreaks::get_from_weapon(weapon));
-  ismelee = isDefined(meansofdeath) && (meansofdeath == # "mod_melee" || meansofdeath == # "mod_melee_weapon_butt");
+  ismelee = isDefined(meansofdeath) && (meansofdeath == #"mod_melee" || meansofdeath == #"mod_melee_weapon_butt");
   var_4ea2a976 = weapon.name == "launcher_standard_t8" || weapon.name == "sig_buckler_dw";
 
   if(var_a489f56 || iskillstreak || var_4ea2a976 || ismelee) {
@@ -232,11 +233,11 @@ supplypod_spawned(watcher, owner) {
 
   if(!(isDefined(self.previouslyhacked) && self.previouslyhacked)) {
     if(isDefined(owner)) {
-      owner stats::function_e24eec31(self.weapon, # "used", 1);
+      owner stats::function_e24eec31(self.weapon, #"used", 1);
       owner notify(#"supplypod");
     }
 
-    self waittilltimeout(0.05, # "stationary");
+    self waittilltimeout(0.05, #"stationary");
 
     if(!owner deployable::location_valid()) {
       owner setriotshieldfailhint();
@@ -521,7 +522,7 @@ private function_3c4843e3(supplypod, timetoadd) {
 function_a2c40499(player) {
   level endon(#"game_ended");
   self endon(#"hash_523ddcbd662010e5");
-  waitresult = player waittill(#"disconnect", # "joined_team", # "changed_specialist");
+  waitresult = player waittill(#"disconnect", #"joined_team", #"changed_specialist");
 
   if(!isDefined(self)) {
     return;
@@ -533,7 +534,7 @@ function_a2c40499(player) {
 
 watchfordeath() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist");
+  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
   self endon(#"hash_523ddcbd662010e5");
   waitresult = self waittill(#"death");
 
@@ -595,7 +596,7 @@ function_8d362deb(einflictor, attacker, idamage, idflags, smeansofdeath, weapon,
 
 function_438ca4e0() {
   supplypod = self;
-  supplypod endon(#"supplypod_removed", # "death");
+  supplypod endon(#"supplypod_removed", #"death");
   level waittill(#"game_ended");
 
   if(!isDefined(self)) {
@@ -793,10 +794,10 @@ supplypod_catch(supplypod) {
 
 function_18f999b5(waittime) {
   self notify(#"hash_10cd6a20d4e45365");
-  self endon(#"hash_10cd6a20d4e45365", # "disconnect");
-  result = self waittilltimeout(waittime, # "death");
+  self endon(#"hash_10cd6a20d4e45365", #"disconnect");
+  result = self waittilltimeout(waittime, #"death");
 
-  if(result._notify == # "timeout") {
+  if(result._notify == #"timeout") {
     self function_46d74bb7(1);
   } else if(isDefined(level.var_934fb97.bundle.var_98da26d) ? level.var_934fb97.bundle.var_98da26d : 0) {
     self.var_17d74a5c -= gettime();
@@ -876,8 +877,8 @@ onshutdown(supplypod) {
 function_b44dec0b(player) {
   supplypod = self;
   player endon(#"disconnect");
-  supplypod endon(#"death", # "hacked");
-  player waittill(#"joined_team", # "changed_specialist");
+  supplypod endon(#"death", #"hacked");
+  player waittill(#"joined_team", #"changed_specialist");
   supplypod thread function_827486aa(0);
 }
 
@@ -885,7 +886,7 @@ function_452147b1(weapon, weaponindex) {
   player = self;
   level endon(#"game_ended");
   player notify("on_death_ammon_backup" + weaponindex);
-  player endon("on_death_ammon_backup" + weaponindex, # "disconnect");
+  player endon("on_death_ammon_backup" + weaponindex, #"disconnect");
   player waittill(#"death");
   player.pers["pod_ammo" + weaponindex] = player getweaponammostock(weapon);
 }
@@ -894,7 +895,7 @@ function_5bc9564e(weapon) {
   player = self;
   level endon(#"game_ended");
   player notify(#"hash_620e9c8ce0a79cf7");
-  player endon(#"hash_620e9c8ce0a79cf7", # "disconnect");
+  player endon(#"hash_620e9c8ce0a79cf7", #"disconnect");
 
   while(isDefined(player.pod_ammo) && player.pod_ammo.size > 0) {
     weapon = player getcurrentweapon();

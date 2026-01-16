@@ -30,7 +30,7 @@ function main() {
 function zm_treasure_chest_init() {
   chest1 = struct::get("start_chest", "script_noteworthy");
   level.chests = [];
-  if(!isDefined(level.chests)) {
+  if(!isdefined(level.chests)) {
     level.chests = [];
   } else if(!isarray(level.chests)) {
     level.chests = array(level.chests);

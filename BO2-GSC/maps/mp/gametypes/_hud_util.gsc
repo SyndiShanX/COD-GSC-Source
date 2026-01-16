@@ -9,18 +9,16 @@ setparent(element) {
   if(isDefined(self.parent) && self.parent == element) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removechild(self);
-  }
 
   self.parent = element;
   self.parent addchild(self);
 
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     self setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  } else {
+  else
     self setpoint("TOP");
-  }
 }
 
 getparent() {
@@ -45,25 +43,21 @@ removechild(element) {
 }
 
 setpoint(point, relativepoint, xoffset, yoffset, movetime) {
-  if(!isDefined(movetime)) {
+  if(!isDefined(movetime))
     movetime = 0;
-  }
 
   element = self getparent();
 
-  if(movetime) {
+  if(movetime)
     self moveovertime(movetime);
-  }
 
-  if(!isDefined(xoffset)) {
+  if(!isDefined(xoffset))
     xoffset = 0;
-  }
 
   self.xoffset = xoffset;
 
-  if(!isDefined(yoffset)) {
+  if(!isDefined(yoffset))
     yoffset = 0;
-  }
 
   self.yoffset = yoffset;
   self.point = point;
@@ -116,9 +110,8 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
       break;
   }
 
-  if(!isDefined(relativepoint)) {
+  if(!isDefined(relativepoint))
     relativepoint = point;
-  }
 
   self.relativepoint = relativepoint;
   relativex = "center";
@@ -184,19 +177,17 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   } else if(relativex == "center" || element.alignx == "center") {
     offsetx = int(element.width / 2);
 
-    if(relativex == "left" || element.alignx == "right") {
+    if(relativex == "left" || element.alignx == "right")
       xfactor = -1;
-    } else {
+    else
       xfactor = 1;
-    }
   } else {
     offsetx = element.width;
 
-    if(relativex == "left") {
+    if(relativex == "left")
       xfactor = -1;
-    } else {
+    else
       xfactor = 1;
-    }
   }
 
   self.x = element.x + offsetx * xfactor;
@@ -207,19 +198,17 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   } else if(relativey == "middle" || element.aligny == "middle") {
     offsety = int(element.height / 2);
 
-    if(relativey == "top" || element.aligny == "bottom") {
+    if(relativey == "top" || element.aligny == "bottom")
       yfactor = -1;
-    } else {
+    else
       yfactor = 1;
-    }
   } else {
     offsety = element.height;
 
-    if(relativey == "top") {
+    if(relativey == "top")
       yfactor = -1;
-    } else {
+    else
       yfactor = 1;
-    }
   }
 
   self.y = element.y + offsety * yfactor;
@@ -244,35 +233,31 @@ setpointbar(point, relativepoint, xoffset, yoffset) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if(self.alignx == "left") {
+  if(self.alignx == "left")
     self.bar.x = self.x;
-  } else if(self.alignx == "right") {
+  else if(self.alignx == "right")
     self.bar.x = self.x - self.width;
-  } else {
+  else
     self.bar.x = self.x - int(self.width / 2);
-  }
 
-  if(self.aligny == "top") {
+  if(self.aligny == "top")
     self.bar.y = self.y;
-  } else if(self.aligny == "bottom") {
+  else if(self.aligny == "bottom")
     self.bar.y = self.y;
-  }
 
   self updatebar(self.bar.frac);
 }
 
 updatebar(barfrac, rateofchange) {
-  if(self.elemtype == "bar") {
+  if(self.elemtype == "bar")
     updatebarscale(barfrac, rateofchange);
-  }
 }
 
 updatebarscale(barfrac, rateofchange) {
   barwidth = int(self.width * barfrac + 0.5);
 
-  if(!barwidth) {
+  if(!barwidth)
     barwidth = 1;
-  }
 
   self.bar.frac = barfrac;
   self.bar setshader(self.bar.shader, barwidth, self.height);
@@ -310,11 +295,10 @@ createfontstring(font, fontscale) {
 }
 
 createserverfontstring(font, fontscale, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     fontelem = newteamhudelem(team);
-  } else {
+  else
     fontelem = newhudelem();
-  }
 
   fontelem.elemtype = "font";
   fontelem.font = font;
@@ -332,11 +316,10 @@ createserverfontstring(font, fontscale, team) {
 }
 
 createservertimer(font, fontscale, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     timerelem = newteamhudelem(team);
-  } else {
+  else
     timerelem = newhudelem();
-  }
 
   timerelem.elemtype = "timer";
   timerelem.font = font;
@@ -383,19 +366,17 @@ createicon(shader, width, height) {
   iconelem setparent(level.uiparent);
   iconelem.hidden = 0;
 
-  if(isDefined(shader)) {
+  if(isDefined(shader))
     iconelem setshader(shader, width, height);
-  }
 
   return iconelem;
 }
 
 createservericon(shader, width, height, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     iconelem = newteamhudelem(team);
-  } else {
+  else
     iconelem = newhudelem();
-  }
 
   iconelem.elemtype = "icon";
   iconelem.x = 0;
@@ -408,19 +389,17 @@ createservericon(shader, width, height, team) {
   iconelem setparent(level.uiparent);
   iconelem.hidden = 0;
 
-  if(isDefined(shader)) {
+  if(isDefined(shader))
     iconelem setshader(shader, width, height);
-  }
 
   return iconelem;
 }
 
 createserverbar(color, width, height, flashfrac, team, selected) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     barelem = newteamhudelem(team);
-  } else {
+  else
     barelem = newhudelem();
-  }
 
   barelem.x = 0;
   barelem.y = 0;
@@ -431,15 +410,13 @@ createserverbar(color, width, height, flashfrac, team, selected) {
   barelem setshader("progress_bar_fill", width, height);
   barelem.hidden = 0;
 
-  if(isDefined(flashfrac)) {
+  if(isDefined(flashfrac))
     barelem.flashfrac = flashfrac;
-  }
 
-  if(isDefined(team)) {
+  if(isDefined(team))
     barelemframe = newteamhudelem(team);
-  } else {
+  else
     barelemframe = newhudelem();
-  }
 
   barelemframe.elemtype = "icon";
   barelemframe.x = 0;
@@ -455,19 +432,17 @@ createserverbar(color, width, height, flashfrac, team, selected) {
   barelemframe.color = (1, 1, 1);
   barelemframe setparent(level.uiparent);
 
-  if(isDefined(selected)) {
+  if(isDefined(selected))
     barelemframe setshader("progress_bar_fg_sel", width, height);
-  } else {
+  else
     barelemframe setshader("progress_bar_fg", width, height);
-  }
 
   barelemframe.hidden = 0;
 
-  if(isDefined(team)) {
+  if(isDefined(team))
     barelembg = newteamhudelem(team);
-  } else {
+  else
     barelembg = newhudelem();
-  }
 
   barelembg.elemtype = "bar";
   barelembg.x = 0;
@@ -499,9 +474,8 @@ createbar(color, width, height, flashfrac) {
   barelem setshader("progress_bar_fill", width, height);
   barelem.hidden = 0;
 
-  if(isDefined(flashfrac)) {
+  if(isDefined(flashfrac))
     barelem.flashfrac = flashfrac;
-  }
 
   barelemframe = newclienthudelem(self);
   barelemframe.elemtype = "icon";
@@ -538,11 +512,10 @@ createbar(color, width, height, flashfrac) {
   barelembg.alpha = 0.5;
   barelembg setparent(level.uiparent);
 
-  if(!level.splitscreen) {
+  if(!level.splitscreen)
     barelembg setshader("progress_bar_bg", width + 4, height + 4);
-  } else {
+  else
     barelembg setshader("progress_bar_bg", width + 0, height + 0);
-  }
 
   barelembg.hidden = 0;
   return barelembg;
@@ -554,13 +527,11 @@ getcurrentfraction() {
   if(isDefined(self.bar.rateofchange)) {
     frac = frac + (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange;
 
-    if(frac > 1) {
+    if(frac > 1)
       frac = 1;
-    }
 
-    if(frac < 0) {
+    if(frac < 0)
       frac = 0;
-    }
   }
 
   return frac;
@@ -569,11 +540,10 @@ getcurrentfraction() {
 createprimaryprogressbar() {
   bar = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     bar setpoint("TOP", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  } else {
+  else
     bar setpoint("CENTER", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  }
 
   return bar;
 }
@@ -581,11 +551,10 @@ createprimaryprogressbar() {
 createprimaryprogressbartext() {
   text = createfontstring("objective", level.primaryprogressbarfontsize);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     text setpoint("TOP", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  } else {
+  else
     text setpoint("CENTER", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  }
 
   text.sort = -1;
   return text;
@@ -597,11 +566,10 @@ createsecondaryprogressbar() {
   secondaryprogressbary = getdvarintdefault("scr_secondaryProgressBarY", level.secondaryprogressbary);
   bar = createbar((1, 1, 1), level.secondaryprogressbarwidth, secondaryprogressbarheight);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     bar setpoint("TOP", undefined, secondaryprogressbarx, secondaryprogressbary);
-  } else {
+  else
     bar setpoint("CENTER", undefined, secondaryprogressbarx, secondaryprogressbary);
-  }
 
   return bar;
 }
@@ -611,11 +579,10 @@ createsecondaryprogressbartext() {
   secondaryprogressbartexty = getdvarintdefault("scr_bty", level.secondaryprogressbartexty);
   text = createfontstring("objective", level.primaryprogressbarfontsize);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     text setpoint("TOP", undefined, secondaryprogressbartextx, secondaryprogressbartexty);
-  } else {
+  else
     text setpoint("CENTER", undefined, secondaryprogressbartextx, secondaryprogressbartexty);
-  }
 
   text.sort = -1;
   return text;
@@ -643,22 +610,19 @@ hideelem() {
   }
   self.hidden = 1;
 
-  if(self.alpha != 0) {
+  if(self.alpha != 0)
     self.alpha = 0;
-  }
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     self.bar.hidden = 1;
 
-    if(self.bar.alpha != 0) {
+    if(self.bar.alpha != 0)
       self.bar.alpha = 0;
-    }
 
     self.barframe.hidden = 1;
 
-    if(self.barframe.alpha != 0) {
+    if(self.barframe.alpha != 0)
       self.barframe.alpha = 0;
-    }
   }
 }
 
@@ -669,21 +633,18 @@ showelem() {
   self.hidden = 0;
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
-    if(self.alpha != 0.5) {
+    if(self.alpha != 0.5)
       self.alpha = 0.5;
-    }
 
     self.bar.hidden = 0;
 
-    if(self.bar.alpha != 1) {
+    if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-    }
 
     self.barframe.hidden = 0;
 
-    if(self.barframe.alpha != 1) {
+    if(self.barframe.alpha != 1)
       self.barframe.alpha = 1;
-    }
   } else if(self.alpha != 1)
     self.alpha = 1;
 }
@@ -691,9 +652,8 @@ showelem() {
 flashthread() {
   self endon("death");
 
-  if(!self.hidden) {
+  if(!self.hidden)
     self.alpha = 1;
-  }
 
   while(true) {
     if(self.frac >= self.flashfrac) {
@@ -707,9 +667,8 @@ flashthread() {
 
       wait 0.7;
     } else {
-      if(!self.hidden && self.alpha != 1) {
+      if(!self.hidden && self.alpha != 1)
         self.alpha = 1;
-      }
 
       wait 0.05;
     }
@@ -720,14 +679,12 @@ destroyelem() {
   tempchildren = [];
 
   for(index = 0; index < self.children.size; index++) {
-    if(isDefined(self.children[index])) {
+    if(isDefined(self.children[index]))
       tempchildren[tempchildren.size] = self.children[index];
-    }
   }
 
-  for(index = 0; index < tempchildren.size; index++) {
+  for(index = 0; index < tempchildren.size; index++)
     tempchildren[index] setparent(self getparent());
-  }
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     self.bar destroy();
@@ -764,9 +721,8 @@ updatechildren() {
 createloadouticon(player, verindex, horindex, xpos, ypos) {
   iconsize = 32;
 
-  if(player issplitscreen()) {
+  if(player issplitscreen())
     iconsize = 22;
-  }
 
   ypos = ypos - (90 + iconsize * (3 - verindex));
   xpos = xpos - (10 + iconsize * horindex);
@@ -782,9 +738,8 @@ createloadouticon(player, verindex, horindex, xpos, ypos) {
 setloadouticoncoords(player, verindex, horindex, xpos, ypos) {
   iconsize = 32;
 
-  if(player issplitscreen()) {
+  if(player issplitscreen())
     iconsize = 22;
-  }
 
   ypos = ypos - (90 + iconsize * (3 - verindex));
   xpos = xpos - (10 + iconsize * horindex);
@@ -815,51 +770,43 @@ showloadoutattribute(iconelem, icon, alpha, textelem, text) {
   iconsize = 32;
   iconelem.alpha = alpha;
 
-  if(alpha) {
+  if(alpha)
     iconelem setshader(icon, iconsize, iconsize);
-  }
 
   if(isDefined(textelem)) {
     textelem.alpha = alpha;
 
-    if(alpha) {
+    if(alpha)
       textelem settext(text);
-    }
   }
 }
 
 hideloadoutattribute(iconelem, fadetime, textelem, hidetextonly) {
   if(isDefined(fadetime)) {
-    if(!isDefined(hidetextonly) || !hidetextonly) {
+    if(!isDefined(hidetextonly) || !hidetextonly)
       iconelem fadeovertime(fadetime);
-    }
 
-    if(isDefined(textelem)) {
+    if(isDefined(textelem))
       textelem fadeovertime(fadetime);
-    }
   }
 
-  if(!isDefined(hidetextonly) || !hidetextonly) {
+  if(!isDefined(hidetextonly) || !hidetextonly)
     iconelem.alpha = 0;
-  }
 
-  if(isDefined(textelem)) {
+  if(isDefined(textelem))
     textelem.alpha = 0;
-  }
 }
 
 showperks() {
   ypos = 40;
 
-  if(self issplitscreen()) {
+  if(self issplitscreen())
     ypos = 5;
-  }
 
-  if(!isDefined(self.perkhudelem)) {
+  if(!isDefined(self.perkhudelem))
     self.perkhudelem = createloadouticon(self, 0, 0, 200, ypos);
-  } else {
+  else
     self.perkhudelem setloadouticoncoords(self, 0, 0, 200, ypos);
-  }
 
   self.perkhudelem setperks(self);
   self.perkhudelem.x = -20;
@@ -886,9 +833,9 @@ showperk(index, perk, ypos) {
     self.perkname[index] setloadouttextcoords(160);
   }
 
-  if(perk == "perk_null" || perk == "weapon_null" || perk == "specialty_null") {
+  if(perk == "perk_null" || perk == "weapon_null" || perk == "specialty_null")
     alpha = 0;
-  } else {
+  else {
     assert(isDefined(level.perknames[perk]), perk);
     alpha = 1;
   }
@@ -912,15 +859,13 @@ hideperks(fadetime) {
 
   assert(isDefined(self.perkhudelem));
 
-  if(isDefined(self.perkhudelem)) {
+  if(isDefined(self.perkhudelem))
     hideloadoutattribute(self.perkhudelem, fadetime);
-  }
 }
 
 hideperk(index, fadetime, hidetextonly) {
-  if(!isDefined(fadetime)) {
+  if(!isDefined(fadetime))
     fadetime = 0.05;
-  }
 
   if(level.perksenabled == 1) {
     if(game["state"] == "postgame") {
@@ -935,32 +880,28 @@ hideperk(index, fadetime, hidetextonly) {
     assert(isDefined(self.perkicon[index]));
     assert(isDefined(self.perkname[index]));
 
-    if(isDefined(self.perkicon) && isDefined(self.perkicon[index]) && isDefined(self.perkname) && isDefined(self.perkname[index])) {
+    if(isDefined(self.perkicon) && isDefined(self.perkicon[index]) && isDefined(self.perkname) && isDefined(self.perkname[index]))
       hideloadoutattribute(self.perkicon[index], fadetime, self.perkname[index], hidetextonly);
-    }
   }
 }
 
 hideallperks(fadetime, hidetextonly) {
-  if(level.perksenabled == 1) {
+  if(level.perksenabled == 1)
     hideperks(fadetime);
-  }
 }
 
 showkillstreak(index, killstreak, xpos, ypos) {
   assert(game["state"] != "postgame");
 
-  if(!isDefined(self.killstreakicon)) {
+  if(!isDefined(self.killstreakicon))
     self.killstreakicon = [];
-  }
 
-  if(!isDefined(self.killstreakicon[index])) {
+  if(!isDefined(self.killstreakicon[index]))
     self.killstreakicon[index] = createloadouticon(self, 3, self.killstreak.size - 1 - index, xpos, ypos);
-  }
 
-  if(killstreak == "killstreak_null" || killstreak == "weapon_null") {
+  if(killstreak == "killstreak_null" || killstreak == "weapon_null")
     alpha = 0;
-  } else {
+  else {
     assert(isDefined(level.killstreakicons[killstreak]), killstreak);
     alpha = 1;
   }

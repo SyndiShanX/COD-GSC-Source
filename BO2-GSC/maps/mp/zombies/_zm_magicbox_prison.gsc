@@ -36,7 +36,7 @@ custom_joker_movement() {
   v_origin = self.weapon_model.origin - vectorscale((0, 0, 1), 5.0);
   self.weapon_model delete();
   m_lock = spawn("script_model", v_origin);
-  m_lock setModel(level.chest_joker_model);
+  m_lock setmodel(level.chest_joker_model);
   m_lock.angles = self.angles + vectorscale((0, 1, 0), 180.0);
   wait 0.5;
   level notify("weapon_fly_away_start");
@@ -53,23 +53,19 @@ custom_joker_movement() {
 }
 
 wait_then_create_base_magic_box_fx() {
-  while(!isDefined(level.chests)) {
+  while(!isDefined(level.chests))
     wait 0.5;
-  }
 
-  while(!isDefined(level.chests[level.chests.size - 1].zbarrier)) {
+  while(!isDefined(level.chests[level.chests.size - 1].zbarrier))
     wait 0.5;
-  }
 
-  foreach(chest in level.chests) {
-    chest.zbarrier setclientfield("magicbox_initial_fx", 1);
-  }
+  foreach(chest in level.chests)
+  chest.zbarrier setclientfield("magicbox_initial_fx", 1);
 }
 
 set_magic_box_zbarrier_state(state) {
-  for(i = 0; i < self getnumzbarrierpieces(); i++) {
+  for(i = 0; i < self getnumzbarrierpieces(); i++)
     self hidezbarrierpiece(i);
-  }
 
   self notify("zbarrier_state_change");
 
@@ -107,9 +103,8 @@ set_magic_box_zbarrier_state(state) {
       self.owner.is_locked = 0;
       break;
     default:
-      if(isDefined(level.custom_magicbox_state_handler)) {
+      if(isDefined(level.custom_magicbox_state_handler))
         self[[level.custom_magicbox_state_handler]](state);
-      }
 
       break;
   }
@@ -126,9 +121,8 @@ magic_box_arrives() {
   self setclientfield("magicbox_amb_fx", 1);
   self setzbarrierpiecestate(1, "opening");
 
-  while(self getzbarrierpiecestate(1) == "opening") {
+  while(self getzbarrierpiecestate(1) == "opening")
     wait 0.05;
-  }
 
   self notify("arrived");
   self.state = "close";
@@ -138,11 +132,10 @@ magic_box_leaves() {
   self setclientfield("magicbox_leaving_fx", 1);
   self setclientfield("magicbox_open_fx", 0);
   self setzbarrierpiecestate(1, "closing");
-  self playSound("zmb_hellbox_rise");
+  self playsound("zmb_hellbox_rise");
 
-  while(self getzbarrierpiecestate(1) == "closing") {
+  while(self getzbarrierpiecestate(1) == "closing")
     wait 0.1;
-  }
 
   self notify("left");
   self setclientfield("magicbox_amb_fx", 0);
@@ -151,22 +144,20 @@ magic_box_leaves() {
 magic_box_opens() {
   self setclientfield("magicbox_open_fx", 1);
   self setzbarrierpiecestate(2, "opening");
-  self playSound("zmb_hellbox_open");
+  self playsound("zmb_hellbox_open");
 
-  while(self getzbarrierpiecestate(2) == "opening") {
+  while(self getzbarrierpiecestate(2) == "opening")
     wait 0.1;
-  }
 
   self notify("opened");
 }
 
 magic_box_closes() {
   self setzbarrierpiecestate(2, "closing");
-  self playSound("zmb_hellbox_close");
+  self playsound("zmb_hellbox_close");
 
-  while(self getzbarrierpiecestate(2) == "closing") {
+  while(self getzbarrierpiecestate(2) == "closing")
     wait 0.1;
-  }
 
   self notify("closed");
   self setclientfield("magicbox_open_fx", 0);
@@ -184,9 +175,8 @@ magic_box_do_weapon_rise() {
   self setzbarrierpiecestate(3, "opening");
   self setzbarrierpiecestate(4, "opening");
 
-  while(self getzbarrierpiecestate(3) != "open") {
+  while(self getzbarrierpiecestate(3) != "open")
     wait 0.5;
-  }
 
   self hidezbarrierpiece(3);
   self hidezbarrierpiece(4);
@@ -197,9 +187,8 @@ handle_fire_sale() {
     level waittill("fire_sale_off");
 
     for(i = 0; i < level.chests.size; i++) {
-      if(level.chest_index != i && isDefined(level.chests[i].was_temp)) {
+      if(level.chest_index != i && isDefined(level.chests[i].was_temp))
         level.chests[i].zbarrier setclientfield("magicbox_amb_fx", 0);
-      }
     }
   }
 }

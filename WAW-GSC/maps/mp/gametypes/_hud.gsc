@@ -10,7 +10,7 @@ init() {
   precacheShader("score_bar_bg");
   precacheShader("score_bar_allies");
   precacheShader("score_bar_opfor");
-  level.uiParent = spawnStruct();
+  level.uiParent = spawnstruct();
   level.uiParent.horzAlign = "left";
   level.uiParent.vertAlign = "top";
   level.uiParent.alignX = "left";
@@ -21,8 +21,8 @@ init() {
   level.uiParent.height = 0;
   level.uiParent.children = [];
   level.fontHeight = 12;
-  level.hud["allies"] = spawnStruct();
-  level.hud["axis"] = spawnStruct();
+  level.hud["allies"] = spawnstruct();
+  level.hud["axis"] = spawnstruct();
   level.primaryProgressBarY = -61;
   level.primaryProgressBarX = 0;
   level.primaryProgressBarHeight = 9;
@@ -42,9 +42,8 @@ init() {
   level.teamProgressBarWidth = 192;
   level.teamProgressBarTextY = 8;
   level.teamProgressBarFontSize = 1.65;
-  if(getDvar("ui_score_bar") == "") {
+  if(getDvar("ui_score_bar") == "")
     setDvar("ui_score_bar", 0);
-  }
   setDvar("ui_generic_status_bar", 0);
   if(level.splitscreen) {
     level.lowerTextYAlign = "BOTTOM";
@@ -95,11 +94,11 @@ fontPulse(player) {
   player endon("joined_team");
   player endon("joined_spectators");
   scaleRange = self.maxFontScale - self.baseFontScale;
-  while(self.fontScale < self.maxFontScale) {
+  while (self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
     wait 0.05;
   }
-  while(self.fontScale > self.baseFontScale) {
+  while (self.fontScale > self.baseFontScale) {
     self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
     wait 0.05;
   }

@@ -55,4 +55,5 @@ rts_endmenu() {
   snd_set_snapshot("spl_rts_endmenu");
 }
 
-snd_play_loopers() {}
+snd_play_loopers() {
+}

@@ -11,6 +11,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\item_world_util;
+
 #namespace namespace_3b8b8298;
 
 autoexec __init__system__() {
@@ -41,13 +42,13 @@ private function_53d906fd(localclientnum) {
           if(item_world_util::function_2c7fc531(i)) {
             point = function_b1702735(i);
 
-            if(isDefined(point) && isDefined(point.itementry) && point.itementry.name === # "sig_blade_wz_item") {
+            if(isDefined(point) && isDefined(point.itementry) && point.itementry.name === #"sig_blade_wz_item") {
               point function_6b5dfd6c(localclientnum, playfx, 0, i, player);
             } else {
               level function_6b5dfd6c(localclientnum, 0, 0, i, player);
             }
           } else if(item_world_util::function_da09de95(i)) {
-            if(isDefined(level.item_spawn_drops[i]) && isDefined(level.item_spawn_drops[i].itementry) && level.item_spawn_drops[i].itementry.name === # "sig_blade_wz_item") {
+            if(isDefined(level.item_spawn_drops[i]) && isDefined(level.item_spawn_drops[i].itementry) && level.item_spawn_drops[i].itementry.name === #"sig_blade_wz_item") {
               level.item_spawn_drops[i] function_6b5dfd6c(localclientnum, playfx, 1, i);
             } else {
               level function_6b5dfd6c(localclientnum, 0, 1, i, player);
@@ -77,8 +78,8 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
   if(playfx) {
     if(!isDefined(player.var_c1c8ef9c[id])) {
       player.var_c1c8ef9c[id] = {
-        #var_9d888717: 0,
-        #fx_id: 0,
+        #var_9d888717: 0, 
+        #fx_id: 0, 
         #fxent: undefined
       };
 
@@ -87,10 +88,10 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
         player.var_c1c8ef9c[id].fxent = spawn(localclientnum, self.origin, "script_model");
         player.var_c1c8ef9c[id].fxent setModel("tag_origin");
         player.var_c1c8ef9c[id].fxent linkto(self);
-        player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, # "hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
+        player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, #"hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
       } else {
         player.var_c1c8ef9c[id].var_9d888717 = 1;
-        player.var_c1c8ef9c[id].fx_id = playFX(localclientnum, # "hash_3235e29f5bf57d5a", self.origin);
+        player.var_c1c8ef9c[id].fx_id = playFX(localclientnum, #"hash_3235e29f5bf57d5a", self.origin);
       }
     } else if(!(isDefined(player.var_c1c8ef9c[id].var_9d888717) && player.var_c1c8ef9c[id].var_9d888717)) {
       if(var_484cae2) {
@@ -98,10 +99,10 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
         player.var_c1c8ef9c[id].fxent = spawn(localclientnum, self.origin, "script_model");
         player.var_c1c8ef9c[id].fxent setModel("tag_origin");
         player.var_c1c8ef9c[id].fxent linkto(self);
-        player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, # "hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
+        player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, #"hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
       } else {
         player.var_c1c8ef9c[id].var_9d888717 = 1;
-        player.var_c1c8ef9c[id].fx_id = playFX(localclientnum, # "hash_3235e29f5bf57d5a", self.origin);
+        player.var_c1c8ef9c[id].fx_id = playFX(localclientnum, #"hash_3235e29f5bf57d5a", self.origin);
       }
     }
 

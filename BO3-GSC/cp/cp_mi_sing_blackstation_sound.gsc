@@ -104,7 +104,7 @@ function function_a339da70() {
   playerlist = getplayers();
   foreach(player in playerlist) {
     player playsoundtoplayer("evt_takedown_slowmo_02", player);
-    player playLoopSound("evt_time_slow_loop");
+    player playloopsound("evt_time_slow_loop");
     player clientfield::set_to_player("slowmo_duck_active", 1);
   }
 }

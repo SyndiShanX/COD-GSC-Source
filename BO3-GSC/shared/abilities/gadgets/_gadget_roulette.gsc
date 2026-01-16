@@ -21,20 +21,20 @@
 #namespace roulette;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_roulette", &__init__, undefined, undefined);
+  system::register("gadget_roulette", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "roulette_state", 11000, 2, "int");
-  ability_player::register_gadget_activation_callbacks(43, &gadget_roulette_on_activate, &gadget_roulette_on_deactivate);
-  ability_player::register_gadget_possession_callbacks(43, &gadget_roulette_on_give, &gadget_roulette_on_take);
-  ability_player::register_gadget_flicker_callbacks(43, &gadget_roulette_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(43, &gadget_roulette_is_inuse);
-  ability_player::register_gadget_ready_callbacks(43, &gadget_roulette_is_ready);
-  ability_player::register_gadget_is_flickering_callbacks(43, &gadget_roulette_is_flickering);
+  ability_player::register_gadget_activation_callbacks(43, & gadget_roulette_on_activate, & gadget_roulette_on_deactivate);
+  ability_player::register_gadget_possession_callbacks(43, & gadget_roulette_on_give, & gadget_roulette_on_take);
+  ability_player::register_gadget_flicker_callbacks(43, & gadget_roulette_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(43, & gadget_roulette_is_inuse);
+  ability_player::register_gadget_ready_callbacks(43, & gadget_roulette_is_ready);
+  ability_player::register_gadget_is_flickering_callbacks(43, & gadget_roulette_is_flickering);
   ability_player::register_gadget_should_notify(43, 0);
-  callback::on_connect(&gadget_roulette_on_connect);
-  callback::on_spawned(&gadget_roulette_on_player_spawn);
+  callback::on_connect( & gadget_roulette_on_connect);
+  callback::on_spawned( & gadget_roulette_on_player_spawn);
   if(sessionmodeismultiplayergame()) {
     level.gadgetrouletteprobabilities = [];
     level.gadgetrouletteprobabilities[0] = 0;
@@ -54,7 +54,7 @@ function __init__() {
 }
 
 function updatedvars() {
-  while(true) {
+  while (true) {
     wait(1);
   }
 }
@@ -90,7 +90,7 @@ function gadget_roulette_on_connect() {
 
 function roulette_init_allow_spin() {
   if(self.isroulette === 1) {
-    if(!isDefined(self.pers[# "hash_9f129a92"])) {
+    if(!isdefined(self.pers[# "hash_9f129a92"])) {
       self.pers[# "hash_9f129a92"] = 1;
     }
   }
@@ -143,14 +143,14 @@ function watchrespin(weapon) {
   self endon("hero_gadget_activated");
   self notify("watchrespin");
   self endon("watchrespin");
-  if(!isDefined(self.pers[# "hash_9f129a92"]) || self.pers[# "hash_9f129a92"] == 0) {
+  if(!isdefined(self.pers[# "hash_9f129a92"]) || self.pers[# "hash_9f129a92"] == 0) {
     return;
   }
   self thread watchrespingadgetactivated();
   self clientfield::set_to_player("roulette_state", 1);
   wait(getdvarfloat("scr_roulette_pre_respin_wait_time", 1.3));
-  while(true) {
-    if(!isDefined(self)) {
+  while (true) {
+    if(!isdefined(self)) {
       break;
     }
     if(self dpad_left_pressed()) {
@@ -166,7 +166,7 @@ function watchrespin(weapon) {
     }
     wait(0.05);
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("watchrespingadgetactivated");
   }
 }
@@ -174,7 +174,7 @@ function watchrespin(weapon) {
 function failsafe_reenable_offhand_special() {
   self endon("end_failsafe_reenable_offhand_special");
   wait(3);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self enableoffhandspecial();
   }
 }
@@ -192,31 +192,31 @@ function watchgadgetactivated(weapon) {
   self endon("watchgadgetactivated");
   self waittill("hero_gadget_activated");
   self.pers[# "hash_9f129a92"] = 1;
-  if(isDefined(weapon) || weapon.name != "gadget_roulette") {
+  if(isdefined(weapon) || weapon.name != "gadget_roulette") {
     self clientfield::set_to_player("roulette_state", 0);
   }
 }
 
 function giverandomweapon(weapon, isprimaryroll) {
-  for(i = 0; i < 3; i++) {
-    if(isDefined(self._gadgets_player[i])) {
+  for (i = 0; i < 3; i++) {
+    if(isdefined(self._gadgets_player[i])) {
       self takeweapon(self._gadgets_player[i]);
     }
   }
   randomweapon = weapon;
-  if(isDefined(self.pers[# "hash_65987563"])) {
+  if(isdefined(self.pers[# "hash_65987563"])) {
     randomweapon = self.pers[# "hash_65987563"];
   } else {
-    if(isDefined(self.pers[# "hash_cbcfa831"]) || isDefined(self.pers[# "hash_cbcfa832"])) {
+    if(isdefined(self.pers[# "hash_cbcfa831"]) || isdefined(self.pers[# "hash_cbcfa832"])) {
       randomweapon = getrandomgadget(isprimaryroll);
-      while(randomweapon == self.pers[# "hash_cbcfa831"] || (isDefined(self.pers[# "hash_cbcfa832"]) && randomweapon == self.pers[# "hash_cbcfa832"])) {
+      while (randomweapon == self.pers[# "hash_cbcfa831"] || (isdefined(self.pers[# "hash_cbcfa832"]) && randomweapon == self.pers[# "hash_cbcfa832"])) {
         randomweapon = getrandomgadget(isprimaryroll);
       }
     } else {
       randomweapon = getrandomgadget(isprimaryroll);
     }
   }
-  if(isDefined(level.playgadgetready) && !isprimaryroll) {
+  if(isdefined(level.playgadgetready) && !isprimaryroll) {
     self thread[[level.playgadgetready]](randomweapon, !isprimaryroll);
   }
   self thread gadget_roulette_on_deactivate_helper(weapon);
@@ -234,15 +234,15 @@ function gadget_roulette_on_deactivate_helper(weapon) {
   self notify("gadget_roulette_on_deactivate_helper");
   self endon("gadget_roulette_on_deactivate_helper");
   self waittill("heroability_off", weapon_off);
-  if(isDefined(weapon_off) && weapon_off.name == "gadget_speed_burst") {
+  if(isdefined(weapon_off) && weapon_off.name == "gadget_speed_burst") {
     self waittill("heroability_off", weapon_off);
   }
-  for(i = 0; i < 3; i++) {
-    if(isDefined(self) && isDefined(self._gadgets_player[i])) {
+  for (i = 0; i < 3; i++) {
+    if(isdefined(self) && isdefined(self._gadgets_player[i])) {
       self takeweapon(self._gadgets_player[i]);
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self giveweapon(level.gadget_roulette);
     self.pers[# "hash_65987563"] = undefined;
   }
@@ -252,7 +252,7 @@ function gadget_roulette_flicker(slot, weapon) {}
 
 function set_gadget_status(status, time) {
   timestr = "";
-  if(isDefined(time)) {
+  if(isdefined(time)) {
     timestr = (("^3") + ", time: ") + time;
   }
   if(getdvarint("scr_cpower_debug_prints") > 0) {
@@ -287,11 +287,11 @@ function getrandomgadget(isprimaryroll) {
 
 function registergadgettype(gadgetnamestring, primaryweight, secondaryweight) {
   gadgetweapon = getweapon(gadgetnamestring);
-  assert(isDefined(gadgetweapon));
+  assert(isdefined(gadgetweapon));
   if(gadgetweapon == level.weaponnone) {
     assertmsg(gadgetnamestring + "");
   }
-  if(!isDefined(level.gadgetrouletteprobabilities[gadgetweapon])) {
+  if(!isdefined(level.gadgetrouletteprobabilities[gadgetweapon])) {
     level.gadgetrouletteprobabilities[gadgetweapon] = [];
   }
   level.gadgetrouletteprobabilities[gadgetweapon][0] = primaryweight;

@@ -5,7 +5,7 @@
 ********************************/
 
 main(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -129,9 +129,8 @@ setallvehiclefx(var_0, var_1, var_2) {
   var_3 = get_trace_types();
   setvehiclefx(var_0, "none", undefined, var_2);
 
-  foreach(var_5 in var_3) {
-    setvehiclefx(var_0, var_5, var_1, var_2);
-  }
+  foreach(var_5 in var_3)
+  setvehiclefx(var_0, var_5, var_1, var_2);
 }
 
 get_trace_types() {

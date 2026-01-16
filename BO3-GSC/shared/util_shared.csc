@@ -12,22 +12,22 @@ function empty(a, b, c, d, e) {}
 
 function waitforallclients() {
   localclient = 0;
-  if(!isDefined(level.localplayers)) {
-    while(!isDefined(level.localplayers)) {
+  if(!isdefined(level.localplayers)) {
+    while (!isdefined(level.localplayers)) {
       wait(0.016);
     }
   }
-  while(level.localplayers.size <= 0) {
+  while (level.localplayers.size <= 0) {
     wait(0.016);
   }
-  while(localclient < level.localplayers.size) {
+  while (localclient < level.localplayers.size) {
     waitforclient(localclient);
     localclient++;
   }
 }
 
 function waitforclient(client) {
-  while(!clienthassnapshot(client)) {
+  while (!clienthassnapshot(client)) {
     wait(0.016);
   }
 }
@@ -44,7 +44,7 @@ function get_dvar_int_default(str_dvar, default_val) {
 
 function spawn_model(n_client, str_model, origin = (0, 0, 0), angles = (0, 0, 0)) {
   model = spawn(n_client, origin, "script_model");
-  model setModel(str_model);
+  model setmodel(str_model);
   model.angles = angles;
   return model;
 }
@@ -59,9 +59,9 @@ function waittill_string(msg, ent) {
 }
 
 function waittill_multiple(...) {
-  s_tracker = spawnStruct();
+  s_tracker = spawnstruct();
   s_tracker._wait_count = 0;
-  for(i = 0; i < vararg.size; i++) {
+  for (i = 0; i < vararg.size; i++) {
     self thread _waitlogic(s_tracker, vararg[i]);
   }
   if(s_tracker._wait_count > 0) {
@@ -72,9 +72,9 @@ function waittill_multiple(...) {
 function waittill_multiple_ents(...) {
   a_ents = [];
   a_notifies = [];
-  for(i = 0; i < vararg.size; i++) {
+  for (i = 0; i < vararg.size; i++) {
     if(i % 2) {
-      if(!isDefined(a_notifies)) {
+      if(!isdefined(a_notifies)) {
         a_notifies = [];
       } else if(!isarray(a_notifies)) {
         a_notifies = array(a_notifies);
@@ -82,18 +82,18 @@ function waittill_multiple_ents(...) {
       a_notifies[a_notifies.size] = vararg[i];
       continue;
     }
-    if(!isDefined(a_ents)) {
+    if(!isdefined(a_ents)) {
       a_ents = [];
     } else if(!isarray(a_ents)) {
       a_ents = array(a_ents);
     }
     a_ents[a_ents.size] = vararg[i];
   }
-  s_tracker = spawnStruct();
+  s_tracker = spawnstruct();
   s_tracker._wait_count = 0;
-  for(i = 0; i < a_ents.size; i++) {
+  for (i = 0; i < a_ents.size; i++) {
     ent = a_ents[i];
-    if(isDefined(ent)) {
+    if(isdefined(ent)) {
       ent thread _waitlogic(s_tracker, a_notifies[i]);
     }
   }
@@ -104,7 +104,7 @@ function waittill_multiple_ents(...) {
 
 function _waitlogic(s_tracker, notifies) {
   s_tracker._wait_count++;
-  if(!isDefined(notifies)) {
+  if(!isdefined(notifies)) {
     notifies = [];
   } else if(!isarray(notifies)) {
     notifies = array(notifies);
@@ -118,29 +118,29 @@ function _waitlogic(s_tracker, notifies) {
 }
 
 function waittill_any_return(string1, string2, string3, string4, string5, string6, string7) {
-  if(!isDefined(string1) || string1 != "entityshutdown" && (!isDefined(string2) || string2 != "entityshutdown") && (!isDefined(string3) || string3 != "entityshutdown") && (!isDefined(string4) || string4 != "entityshutdown") && (!isDefined(string5) || string5 != "entityshutdown") && (!isDefined(string6) || string6 != "entityshutdown") && (!isDefined(string7) || string7 != "entityshutdown")) {
+  if(!isdefined(string1) || string1 != "entityshutdown" && (!isdefined(string2) || string2 != "entityshutdown") && (!isdefined(string3) || string3 != "entityshutdown") && (!isdefined(string4) || string4 != "entityshutdown") && (!isdefined(string5) || string5 != "entityshutdown") && (!isdefined(string6) || string6 != "entityshutdown") && (!isdefined(string7) || string7 != "entityshutdown")) {
     self endon("entityshutdown");
   }
-  ent = spawnStruct();
-  if(isDefined(string1)) {
+  ent = spawnstruct();
+  if(isdefined(string1)) {
     self thread waittill_string(string1, ent);
   }
-  if(isDefined(string2)) {
+  if(isdefined(string2)) {
     self thread waittill_string(string2, ent);
   }
-  if(isDefined(string3)) {
+  if(isdefined(string3)) {
     self thread waittill_string(string3, ent);
   }
-  if(isDefined(string4)) {
+  if(isdefined(string4)) {
     self thread waittill_string(string4, ent);
   }
-  if(isDefined(string5)) {
+  if(isdefined(string5)) {
     self thread waittill_string(string5, ent);
   }
-  if(isDefined(string6)) {
+  if(isdefined(string6)) {
     self thread waittill_string(string6, ent);
   }
-  if(isDefined(string7)) {
+  if(isdefined(string7)) {
     self thread waittill_string(string7, ent);
   }
   ent waittill("returned", msg);
@@ -149,7 +149,7 @@ function waittill_any_return(string1, string2, string3, string4, string5, string
 }
 
 function waittill_any_ex(...) {
-  s_common = spawnStruct();
+  s_common = spawnstruct();
   e_current = self;
   n_arg_index = 0;
   if(strisnumber(vararg[0])) {
@@ -166,12 +166,12 @@ function waittill_any_ex(...) {
     a_params = vararg;
     n_start_index = n_arg_index;
   }
-  for(i = n_start_index; i < a_params.size; i++) {
+  for (i = n_start_index; i < a_params.size; i++) {
     if(!isstring(a_params[i])) {
       e_current = a_params[i];
       continue;
     }
-    if(isDefined(e_current)) {
+    if(isdefined(e_current)) {
       e_current thread waittill_string(a_params[i], s_common);
     }
   }
@@ -184,9 +184,9 @@ function waittill_any_array_return(a_notifies) {
   if(isinarray(a_notifies, "entityshutdown")) {
     self endon("entityshutdown");
   }
-  s_tracker = spawnStruct();
+  s_tracker = spawnstruct();
   foreach(str_notify in a_notifies) {
-    if(isDefined(str_notify)) {
+    if(isdefined(str_notify)) {
       self thread waittill_string(str_notify, s_tracker);
     }
   }
@@ -196,14 +196,14 @@ function waittill_any_array_return(a_notifies) {
 }
 
 function waittill_any(str_notify1, str_notify2, str_notify3, str_notify4, str_notify5) {
-  assert(isDefined(str_notify1));
+  assert(isdefined(str_notify1));
   waittill_any_array(array(str_notify1, str_notify2, str_notify3, str_notify4, str_notify5));
 }
 
 function waittill_any_array(a_notifies) {
-  assert(isDefined(a_notifies[0]), "");
-  for(i = 1; i < a_notifies.size; i++) {
-    if(isDefined(a_notifies[i])) {
+  assert(isdefined(a_notifies[0]), "");
+  for (i = 1; i < a_notifies.size; i++) {
+    if(isdefined(a_notifies[i])) {
       self endon(a_notifies[i]);
     }
   }
@@ -211,23 +211,23 @@ function waittill_any_array(a_notifies) {
 }
 
 function waittill_any_timeout(n_timeout, string1, string2, string3, string4, string5) {
-  if(!isDefined(string1) || string1 != "entityshutdown" && (!isDefined(string2) || string2 != "entityshutdown") && (!isDefined(string3) || string3 != "entityshutdown") && (!isDefined(string4) || string4 != "entityshutdown") && (!isDefined(string5) || string5 != "entityshutdown")) {
+  if(!isdefined(string1) || string1 != "entityshutdown" && (!isdefined(string2) || string2 != "entityshutdown") && (!isdefined(string3) || string3 != "entityshutdown") && (!isdefined(string4) || string4 != "entityshutdown") && (!isdefined(string5) || string5 != "entityshutdown")) {
     self endon("entityshutdown");
   }
-  ent = spawnStruct();
-  if(isDefined(string1)) {
+  ent = spawnstruct();
+  if(isdefined(string1)) {
     self thread waittill_string(string1, ent);
   }
-  if(isDefined(string2)) {
+  if(isdefined(string2)) {
     self thread waittill_string(string2, ent);
   }
-  if(isDefined(string3)) {
+  if(isdefined(string3)) {
     self thread waittill_string(string3, ent);
   }
-  if(isDefined(string4)) {
+  if(isdefined(string4)) {
     self thread waittill_string(string4, ent);
   }
-  if(isDefined(string5)) {
+  if(isdefined(string5)) {
     self thread waittill_string(string5, ent);
   }
   ent thread _timeout(n_timeout);
@@ -248,62 +248,62 @@ function waittill_notify_or_timeout(msg, timer) {
 }
 
 function waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {
-  assert(isDefined(ent1));
-  assert(isDefined(string1));
-  if(isDefined(ent2) && isDefined(string2)) {
+  assert(isdefined(ent1));
+  assert(isdefined(string1));
+  if(isdefined(ent2) && isdefined(string2)) {
     ent2 endon(string2);
   }
-  if(isDefined(ent3) && isDefined(string3)) {
+  if(isdefined(ent3) && isdefined(string3)) {
     ent3 endon(string3);
   }
-  if(isDefined(ent4) && isDefined(string4)) {
+  if(isdefined(ent4) && isdefined(string4)) {
     ent4 endon(string4);
   }
-  if(isDefined(ent5) && isDefined(string5)) {
+  if(isdefined(ent5) && isdefined(string5)) {
     ent5 endon(string5);
   }
-  if(isDefined(ent6) && isDefined(string6)) {
+  if(isdefined(ent6) && isdefined(string6)) {
     ent6 endon(string6);
   }
-  if(isDefined(ent7) && isDefined(string7)) {
+  if(isdefined(ent7) && isdefined(string7)) {
     ent7 endon(string7);
   }
   ent1 waittill(string1);
 }
 
 function waittill_any_ents_two(ent1, string1, ent2, string2) {
-  assert(isDefined(ent1));
-  assert(isDefined(string1));
-  if(isDefined(ent2) && isDefined(string2)) {
+  assert(isdefined(ent1));
+  assert(isdefined(string1));
+  if(isdefined(ent2) && isdefined(string2)) {
     ent2 endon(string2);
   }
   ent1 waittill(string1);
 }
 
 function single_func(entity = level, func, arg1, arg2, arg3, arg4, arg5, arg6) {
-  if(isDefined(arg6)) {
+  if(isdefined(arg6)) {
     return entity[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
   }
-  if(isDefined(arg5)) {
+  if(isdefined(arg5)) {
     return entity[[func]](arg1, arg2, arg3, arg4, arg5);
   }
-  if(isDefined(arg4)) {
+  if(isdefined(arg4)) {
     return entity[[func]](arg1, arg2, arg3, arg4);
   }
-  if(isDefined(arg3)) {
+  if(isdefined(arg3)) {
     return entity[[func]](arg1, arg2, arg3);
   }
-  if(isDefined(arg2)) {
+  if(isdefined(arg2)) {
     return entity[[func]](arg1, arg2);
   }
-  if(isDefined(arg1)) {
+  if(isdefined(arg1)) {
     return entity[[func]](arg1);
   }
   return entity[[func]]();
 }
 
 function new_func(func, arg1, arg2, arg3, arg4, arg5, arg6) {
-  s_func = spawnStruct();
+  s_func = spawnstruct();
   s_func.func = func;
   s_func.arg1 = arg1;
   s_func.arg2 = arg2;
@@ -319,12 +319,12 @@ function call_func(s_func) {
 }
 
 function array_ent_thread(entities, func, arg1, arg2, arg3, arg4, arg5) {
-  assert(isDefined(entities), "");
-  assert(isDefined(func), "");
+  assert(isdefined(entities), "");
+  assert(isdefined(func), "");
   if(isarray(entities)) {
     if(entities.size) {
       keys = getarraykeys(entities);
-      for(i = 0; i < keys.size; i++) {
+      for (i = 0; i < keys.size; i++) {
         single_thread(self, func, entities[keys[i]], arg1, arg2, arg3, arg4, arg5);
       }
     }
@@ -334,23 +334,23 @@ function array_ent_thread(entities, func, arg1, arg2, arg3, arg4, arg5) {
 }
 
 function single_thread(entity, func, arg1, arg2, arg3, arg4, arg5, arg6) {
-  assert(isDefined(entity), "");
-  if(isDefined(arg6)) {
+  assert(isdefined(entity), "");
+  if(isdefined(arg6)) {
     entity thread[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
   } else {
-    if(isDefined(arg5)) {
+    if(isdefined(arg5)) {
       entity thread[[func]](arg1, arg2, arg3, arg4, arg5);
     } else {
-      if(isDefined(arg4)) {
+      if(isdefined(arg4)) {
         entity thread[[func]](arg1, arg2, arg3, arg4);
       } else {
-        if(isDefined(arg3)) {
+        if(isdefined(arg3)) {
           entity thread[[func]](arg1, arg2, arg3);
         } else {
-          if(isDefined(arg2)) {
+          if(isdefined(arg2)) {
             entity thread[[func]](arg1, arg2);
           } else {
-            if(isDefined(arg1)) {
+            if(isdefined(arg1)) {
               entity thread[[func]](arg1);
             } else {
               entity thread[[func]]();
@@ -367,7 +367,7 @@ function add_listen_thread(wait_till, func, param1, param2, param3, param4, para
 }
 
 function add_listen_thread_internal(wait_till, func, param1, param2, param3, param4, param5) {
-  for(;;) {
+  for (;;) {
     level waittill(wait_till);
     single_thread(level, func, param1, param2, param3, param4, param5);
   }
@@ -375,8 +375,8 @@ function add_listen_thread_internal(wait_till, func, param1, param2, param3, par
 
 function timeout(n_time, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   self endon("entityshutdown");
-  if(isDefined(n_time)) {
-    __s = spawnStruct();
+  if(isdefined(n_time)) {
+    __s = spawnstruct();
     __s endon("timeout");
     __s delay_notify(n_time, "timeout");
   }
@@ -389,7 +389,7 @@ function delay(time_or_notify, str_endon, func, arg1, arg2, arg3, arg4, arg5, ar
 
 function _delay(time_or_notify, str_endon, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   self endon("entityshutdown");
-  if(isDefined(str_endon)) {
+  if(isdefined(str_endon)) {
     self endon(str_endon);
   }
   if(isstring(time_or_notify)) {
@@ -406,7 +406,7 @@ function delay_notify(time_or_notify, str_notify, str_endon) {
 
 function _delay_notify(time_or_notify, str_notify, str_endon) {
   self endon("entityshutdown");
-  if(isDefined(str_endon)) {
+  if(isdefined(str_endon)) {
     self endon(str_endon);
   }
   if(isstring(time_or_notify)) {
@@ -418,7 +418,7 @@ function _delay_notify(time_or_notify, str_notify, str_endon) {
 }
 
 function new_timer(n_timer_length) {
-  s_timer = spawnStruct();
+  s_timer = spawnstruct();
   s_timer.n_time_created = gettime();
   s_timer.n_length = n_timer_length;
   return s_timer;
@@ -438,7 +438,7 @@ function get_time_frac(n_end_time = self.n_length) {
 }
 
 function get_time_left() {
-  if(isDefined(self.n_length)) {
+  if(isdefined(self.n_length)) {
     n_current_time = get_time_in_seconds();
     return max(self.n_length - n_current_time, 0);
   }
@@ -450,7 +450,7 @@ function is_time_left() {
 }
 
 function timer_wait(n_wait) {
-  if(isDefined(self.n_length)) {
+  if(isdefined(self.n_length)) {
     n_wait = min(n_wait, get_time_left());
   }
   wait(n_wait);
@@ -458,7 +458,7 @@ function timer_wait(n_wait) {
   return n_current_time;
 }
 
-function add_remove_list(&a = [], on_off) {
+function add_remove_list( & a = [], on_off) {
   if(on_off) {
     if(!isinarray(a, self)) {
       arrayinsert(a, self, a.size);
@@ -468,12 +468,12 @@ function add_remove_list(&a = [], on_off) {
   }
 }
 
-function clean_deleted(&array) {
+function clean_deleted( & array) {
   done = 0;
-  while(!done && array.size > 0) {
+  while (!done && array.size > 0) {
     done = 1;
     foreach(key, val in array) {
-      if(!isDefined(val)) {
+      if(!isdefined(val)) {
         arrayremoveindex(array, key, 0);
         done = 0;
         break;
@@ -486,24 +486,24 @@ function get_eye() {
   if(sessionmodeiscampaigngame()) {
     if(self isplayer()) {
       linked_ent = self getlinkedent();
-      if(isDefined(linked_ent) && getdvarint("cg_cameraUseTagCamera") > 0) {
+      if(isdefined(linked_ent) && getdvarint("cg_cameraUseTagCamera") > 0) {
         camera = linked_ent gettagorigin("tag_camera");
-        if(isDefined(camera)) {
+        if(isdefined(camera)) {
           return camera;
         }
       }
     }
   }
-  pos = self getEye();
+  pos = self geteye();
   return pos;
 }
 
 function spawn_player_arms() {
   arms = spawn(self getlocalclientnumber(), self.origin + (vectorscale((0, 0, -1), 1000)), "script_model");
-  if(isDefined(level.player_viewmodel)) {
-    arms setModel(level.player_viewmodel);
+  if(isdefined(level.player_viewmodel)) {
+    arms setmodel(level.player_viewmodel);
   } else {
-    arms setModel("c_usa_cia_masonjr_viewhands");
+    arms setmodel("c_usa_cia_masonjr_viewhands");
   }
   return arms;
 }
@@ -513,13 +513,13 @@ function lerp_dvar(str_dvar, n_start_val = getdvarfloat(str_dvar), n_end_val, n_
   do {
     n_time_delta = s_timer timer_wait(0.01666);
     n_curr_val = lerpfloat(n_start_val, n_end_val, n_time_delta / n_lerp_time);
-    if(isDefined(b_saved_dvar) && b_saved_dvar) {
+    if(isdefined(b_saved_dvar) && b_saved_dvar) {
       setsaveddvar(str_dvar, n_curr_val);
     } else {
       setdvar(str_dvar, n_curr_val);
     }
   }
-  while(n_time_delta < n_lerp_time);
+  while (n_time_delta < n_lerp_time);
 }
 
 function is_valid_type_for_callback(type) {
@@ -544,11 +544,11 @@ function is_valid_type_for_callback(type) {
 }
 
 function wait_till_not_touching(e_to_check, e_to_touch) {
-  assert(isDefined(e_to_check), "");
-  assert(isDefined(e_to_touch), "");
+  assert(isdefined(e_to_check), "");
+  assert(isdefined(e_to_touch), "");
   e_to_check endon("entityshutdown");
   e_to_touch endon("entityshutdown");
-  while(e_to_check istouching(e_to_touch)) {
+  while (e_to_check istouching(e_to_touch)) {
     wait(0.05);
   }
 }
@@ -559,18 +559,18 @@ function error(message) {
 }
 
 function register_system(ssysname, cbfunc) {
-  if(!isDefined(level._systemstates)) {
+  if(!isdefined(level._systemstates)) {
     level._systemstates = [];
   }
   if(level._systemstates.size >= 32) {
     error("");
     return;
   }
-  if(isDefined(level._systemstates[ssysname])) {
+  if(isdefined(level._systemstates[ssysname])) {
     error("" + ssysname);
     return;
   }
-  level._systemstates[ssysname] = spawnStruct();
+  level._systemstates[ssysname] = spawnstruct();
   level._systemstates[ssysname].callback = cbfunc;
 }
 
@@ -581,24 +581,24 @@ function field_set_lighting_ent(localclientnum, oldval, newval, bnewent, binitia
 function field_use_lighting_ent(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}
 
 function waittill_dobj(localclientnum) {
-  while(isDefined(self) && !self hasdobj(localclientnum)) {
+  while (isdefined(self) && !self hasdobj(localclientnum)) {
     wait(0.016);
   }
 }
 
 function server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
-  if(isDefined(level_endon)) {
+  if(isdefined(level_endon)) {
     level endon(level_endon);
   }
   if(level.isdemoplaying && seconds != 0) {
-    if(!isDefined(waitbetweenchecks)) {
+    if(!isdefined(waitbetweenchecks)) {
       waitbetweenchecks = 0.2;
     }
     waitcompletedsuccessfully = 0;
     starttime = level.servertime;
     lasttime = starttime;
     endtime = starttime + (seconds * 1000);
-    while(level.servertime < endtime && level.servertime >= lasttime) {
+    while (level.servertime < endtime && level.servertime >= lasttime) {
       lasttime = level.servertime;
       wait(waitbetweenchecks);
     }
@@ -614,14 +614,14 @@ function server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
 
 function friend_not_foe(localclientindex, predicted) {
   player = getnonpredictedlocalplayer(localclientindex);
-  if(isDefined(predicted) && predicted || (isDefined(player) && isDefined(player.team) && player.team == "spectator")) {
+  if(isdefined(predicted) && predicted || (isdefined(player) && isdefined(player.team) && player.team == "spectator")) {
     player = getlocalplayer(localclientindex);
   }
-  if(isDefined(player) && isDefined(player.team)) {
+  if(isdefined(player) && isdefined(player.team)) {
     team = player.team;
     if(team == "free") {
       owner = self getowner(localclientindex);
-      if(isDefined(owner) && owner == player) {
+      if(isdefined(owner) && owner == player) {
         return true;
       }
     } else if(self.team == team) {
@@ -633,10 +633,10 @@ function friend_not_foe(localclientindex, predicted) {
 
 function friend_not_foe_team(localclientindex, team, predicted) {
   player = getnonpredictedlocalplayer(localclientindex);
-  if(isDefined(predicted) && predicted || (isDefined(player) && isDefined(player.team) && player.team == "spectator")) {
+  if(isdefined(predicted) && predicted || (isdefined(player) && isdefined(player.team) && player.team == "spectator")) {
     player = getlocalplayer(localclientindex);
   }
-  if(isDefined(player) && isDefined(player.team)) {
+  if(isdefined(player) && isdefined(player.team)) {
     if(player.team == team) {
       return true;
     }
@@ -645,7 +645,7 @@ function friend_not_foe_team(localclientindex, team, predicted) {
 }
 
 function isenemyplayer(player) {
-  assert(isDefined(player));
+  assert(isdefined(player));
   if(!player isplayer()) {
     return false;
   }
@@ -675,7 +675,7 @@ function init_utility() {
   level.numgametypereservedobjectives = [];
   level.releasedobjectives = [];
   maxlocalclients = getmaxlocalclients();
-  for(localclientnum = 0; localclientnum < maxlocalclients; localclientnum++) {
+  for (localclientnum = 0; localclientnum < maxlocalclients; localclientnum++) {
     level.releasedobjectives[localclientnum] = [];
     level.numgametypereservedobjectives[localclientnum] = 0;
   }
@@ -685,7 +685,7 @@ function init_utility() {
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = anglestoforward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -702,18 +702,18 @@ function is_gib_restricted_build() {
 }
 
 function registersystem(ssysname, cbfunc) {
-  if(!isDefined(level._systemstates)) {
+  if(!isdefined(level._systemstates)) {
     level._systemstates = [];
   }
   if(level._systemstates.size >= 32) {
     error("");
     return;
   }
-  if(isDefined(level._systemstates[ssysname])) {
+  if(isdefined(level._systemstates[ssysname])) {
     error("" + ssysname);
     return;
   }
-  level._systemstates[ssysname] = spawnStruct();
+  level._systemstates[ssysname] = spawnstruct();
   level._systemstates[ssysname].callback = cbfunc;
 }
 
@@ -728,27 +728,27 @@ function getstatstablename() {
 }
 
 function add_trigger_to_ent(ent, trig) {
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     ent._triggers = [];
   }
   ent._triggers[trig getentitynumber()] = 1;
 }
 
 function remove_trigger_from_ent(ent, trig) {
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     return;
   }
-  if(!isDefined(ent._triggers[trig getentitynumber()])) {
+  if(!isdefined(ent._triggers[trig getentitynumber()])) {
     return;
   }
   ent._triggers[trig getentitynumber()] = 0;
 }
 
 function ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers)) {
+  if(!isdefined(self._triggers)) {
     return false;
   }
-  if(!isDefined(self._triggers[trig getentitynumber()])) {
+  if(!isdefined(self._triggers[trig getentitynumber()])) {
     return false;
   }
   if(!self._triggers[trig getentitynumber()]) {
@@ -763,16 +763,20 @@ function trigger_thread(ent, on_enter_payload, on_exit_payload) {
     return;
   }
   add_trigger_to_ent(ent, self);
-  if(isDefined(on_enter_payload)) {
-    [[on_enter_payload]](ent);
+  if(isdefined(on_enter_payload)) {
+    [
+      [on_enter_payload]
+    ](ent);
   }
-  while(isDefined(ent) && ent istouching(self)) {
+  while (isdefined(ent) && ent istouching(self)) {
     wait(0.016);
   }
-  if(isDefined(ent) && isDefined(on_exit_payload)) {
-    [[on_exit_payload]](ent);
+  if(isdefined(ent) && isdefined(on_exit_payload)) {
+    [
+      [on_exit_payload]
+    ](ent);
   }
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     remove_trigger_from_ent(ent, self);
   }
 }
@@ -782,16 +786,20 @@ function local_player_trigger_thread_always_exit(ent, on_enter_payload, on_exit_
     return;
   }
   add_trigger_to_ent(ent, self);
-  if(isDefined(on_enter_payload)) {
-    [[on_enter_payload]](ent);
+  if(isdefined(on_enter_payload)) {
+    [
+      [on_enter_payload]
+    ](ent);
   }
-  while(isDefined(ent) && ent istouching(self) && ent issplitscreenhost()) {
+  while (isdefined(ent) && ent istouching(self) && ent issplitscreenhost()) {
     wait(0.016);
   }
-  if(isDefined(on_exit_payload)) {
-    [[on_exit_payload]](ent);
+  if(isdefined(on_exit_payload)) {
+    [
+      [on_exit_payload]
+    ](ent);
   }
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     remove_trigger_from_ent(ent, self);
   }
 }
@@ -804,15 +812,15 @@ function local_player_entity_thread(localclientnum, entity, func, arg1, arg2, ar
 
 function local_players_entity_thread(entity, func, arg1, arg2, arg3, arg4) {
   players = level.localplayers;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread local_player_entity_thread(i, entity, func, arg1, arg2, arg3, arg4);
   }
 }
 
 function debug_line(from, to, color, time) {
   level.debug_line = getdvarint("", 0);
-  if(isDefined(level.debug_line) && level.debug_line == 1) {
-    if(!isDefined(time)) {
+  if(isdefined(level.debug_line) && level.debug_line == 1) {
+    if(!isdefined(time)) {
       time = 1000;
     }
     line(from, to, color, 1, 1, time);
@@ -821,11 +829,11 @@ function debug_line(from, to, color, time) {
 
 function debug_star(origin, color, time) {
   level.debug_star = getdvarint("", 0);
-  if(isDefined(level.debug_star) && level.debug_star == 1) {
-    if(!isDefined(time)) {
+  if(isdefined(level.debug_star) && level.debug_star == 1) {
+    if(!isdefined(time)) {
       time = 1000;
     }
-    if(!isDefined(color)) {
+    if(!isdefined(color)) {
       color = (1, 1, 1);
     }
     debugstar(origin, time, color);
@@ -833,7 +841,7 @@ function debug_star(origin, color, time) {
 }
 
 function servertime() {
-  for(;;) {
+  for (;;) {
     level.servertime = getservertime(0);
     wait(0.016);
   }
@@ -860,7 +868,7 @@ function getnextobjid(localclientnum) {
 
 function releaseobjid(localclientnum, objid) {
   assert(objid < level.numgametypereservedobjectives[localclientnum]);
-  for(i = 0; i < level.releasedobjectives[localclientnum].size; i++) {
+  for (i = 0; i < level.releasedobjectives[localclientnum].size; i++) {
     if(objid == level.releasedobjectives[localclientnum][i]) {
       return;
     }
@@ -901,12 +909,12 @@ function is_safehouse(str_next_map = tolower(getdvarstring("mapname"))) {
 
 function button_held_think(which_button) {
   self endon("disconnect");
-  if(!isDefined(self._holding_button)) {
+  if(!isdefined(self._holding_button)) {
     self._holding_button = [];
   }
   self._holding_button[which_button] = 0;
   time_started = 0;
-  while(true) {
+  while (true) {
     if(self._holding_button[which_button]) {
       if(!self[[level._button_funcs[which_button]]]()) {
         self._holding_button[which_button] = 0;
@@ -928,15 +936,15 @@ function button_held_think(which_button) {
 }
 
 function init_button_wrappers() {
-  if(!isDefined(level._button_funcs)) {
-    level._button_funcs[4] = &up_button_pressed;
-    level._button_funcs[5] = &down_button_pressed;
+  if(!isdefined(level._button_funcs)) {
+    level._button_funcs[4] = & up_button_pressed;
+    level._button_funcs[5] = & down_button_pressed;
   }
 }
 
 function up_button_held() {
   init_button_wrappers();
-  if(!isDefined(self._up_button_think_threaded)) {
+  if(!isdefined(self._up_button_think_threaded)) {
     self thread button_held_think(4);
     self._up_button_think_threaded = 1;
   }
@@ -945,7 +953,7 @@ function up_button_held() {
 
 function down_button_held() {
   init_button_wrappers();
-  if(!isDefined(self._down_button_think_threaded)) {
+  if(!isdefined(self._down_button_think_threaded)) {
     self thread button_held_think(5);
     self._down_button_think_threaded = 1;
   }
@@ -957,7 +965,7 @@ function up_button_pressed() {
 }
 
 function waittill_up_button_pressed() {
-  while(!self up_button_pressed()) {
+  while (!self up_button_pressed()) {
     wait(0.05);
   }
 }
@@ -967,7 +975,7 @@ function down_button_pressed() {
 }
 
 function waittill_down_button_pressed() {
-  while(!self down_button_pressed()) {
+  while (!self down_button_pressed()) {
     wait(0.05);
   }
 }

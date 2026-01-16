@@ -44,10 +44,10 @@ main() {
 
   flag_set("so_killspree_trainer_initialized");
 
-  add_hint_string("hint_missed_target", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET", ::hint_missed_target_break);
-  add_hint_string("hint_missed_targets", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS", ::hint_missed_target_break);
-  add_hint_string("hint_missed_target_before_jump", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET_JUMP", ::hint_missed_target_break);
-  add_hint_string("hint_missed_target_before_jumps", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS_JUMP", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET", ::hint_missed_target_break);
+  add_hint_string("hint_missed_targets", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target_before_jump", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET_JUMP", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target_before_jumps", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS_JUMP", ::hint_missed_target_break);
 }
 
 precache_shaders() {
@@ -100,9 +100,9 @@ custom_eog_summary() {
     player set_custom_eog_summary(3, 1, "@SO_KILLSPREE_TRAINER_SCOREBOARD_CIVS_HIT");
 
     earned_stars = player get_current_stars();
-    assert(isDefined(earned_stars) && earned_stars < 4 && earned_stars >= 0);
+    assert(isdefined(earned_stars) && earned_stars < 4 && earned_stars >= 0);
 
-    if(earned_stars < 3 && isDefined(level.finished_time)) {
+    if(earned_stars < 3 && isdefined(level.finished_time)) {
       if(level.friendlies_hit != 0 && level.finished_time <= level.race_times["veteran"]) {
         player set_custom_eog_summary(5, 1, "@SO_KILLSPREE_TRAINER_SCOREBOARD_CIVS_KILLED");
         player set_custom_eog_summary(5, 2, "@SO_KILLSPREE_TRAINER_SCOREBOARD_CIVS_SPACE");
@@ -164,7 +164,7 @@ start_map() {
 
   init_course_triggers();
 
-  if(isDefined(level.challenge_time_limit)) {
+  if(IsDefined(level.challenge_time_limit)) {
     level.challenge_time_nudge = int(level.challenge_time_limit / 3);
     level.challenge_time_hurry = int(level.challenge_time_limit / 6);
   }
@@ -172,9 +172,9 @@ start_map() {
   // replaced pawlows with blackhawks to get rid of helicopter in the minimap.
   so_ambient_vehicles();
   array_thread(getstructarray("delete_heli_node", "script_noteworthy"), ::delete_heli_node);
-  array_thread(getEntArray("ai_ambient", "script_noteworthy"), maps\trainer::AI_delete);
-  array_thread(getEntArray("translator", "script_noteworthy"), maps\trainer::AI_delete);
-  array_thread(getEntArray("trainee_01", "script_noteworthy"), maps\trainer::AI_delete);
+  array_thread(GetEntArray("ai_ambient", "script_noteworthy"), maps\trainer::AI_delete);
+  array_thread(GetEntArray("translator", "script_noteworthy"), maps\trainer::AI_delete);
+  array_thread(GetEntArray("trainee_01", "script_noteworthy"), maps\trainer::AI_delete);
   array_thread(GetAiArray("allies"), maps\trainer::AI_delete);
 
   //	level.pitguy delete();
@@ -230,7 +230,7 @@ init_course_triggers() {
   level.so_end_trigger = get_script_flag_trigger("so_player_course_end");
   level.so_end_trigger trigger_off();
 
-  triggers = getEntArray("target_trigger", "targetname");
+  triggers = GetEntArray("target_trigger", "targetname");
 
   foreach(trigger in triggers) {
     trigger.script_linkto_num = int(trigger.script_linkto);
@@ -239,7 +239,7 @@ init_course_triggers() {
     // We want to trigger these manually via script depending on how many targets are hit.
     if(trigger.script_linkto != "1") {
       // Don't have the trigger go back to the realOrigin from trigger_on()
-      if(isDefined(trigger.realOrigin)) {
+      if(IsDefined(trigger.realOrigin)) {
         trigger.realOrigin = undefined;
       }
 
@@ -276,7 +276,7 @@ get_trigger_by_linkto(triggers, num) {
 }
 
 course_trigger_thread(triggers) {
-  for(i = 0; i < triggers.size; i++) {
+  for (i = 0; i < triggers.size; i++) {
     additional_trigger = undefined;
     trigger = triggers[i];
 
@@ -330,10 +330,10 @@ so_splash(type) {
   }
 
   if(type == "civilian_hit") {
-    str = &"SO_KILLSPREE_TRAINER_CIVILIAN_HIT";
+    str = & "SO_KILLSPREE_TRAINER_CIVILIAN_HIT";
   } else {
     level thread play_sound_in_space("emt_airhorn_area_clear", level.player.origin + (0, 0, 40));
-    str = &"SO_KILLSPREE_TRAINER_AREA_CLEARED";
+    str = & "SO_KILLSPREE_TRAINER_AREA_CLEARED";
   }
 
   splash = so_create_hud_item(2, 0, str);
@@ -368,27 +368,27 @@ so_splash(type) {
 course_trigger_logic(additional_trigger) {
   enemy_target_count = self.targetsEnemy.size;
 
-  if(isDefined(additional_trigger)) {
+  if(IsDefined(additional_trigger)) {
     enemy_target_count += additional_trigger.targetsEnemy.size;
   }
 
-  while(enemy_target_count > 0) {
+  while (enemy_target_count > 0) {
     level waittill("target_killed");
     enemy_target_count--;
   }
 }
 
 get_script_flag_trigger(str, exclude) {
-  array = getEntArray("trigger_multiple_flag_set_touching", "classname");
-  array = array_combine(array, getEntArray("trigger_multiple_specialops_flag_set", "classname"));
-  array = array_combine(array, getEntArray("trigger_multiple_flag_set", "classname"));
+  array = GetEntArray("trigger_multiple_flag_set_touching", "classname");
+  array = array_combine(array, GetEntArray("trigger_multiple_specialops_flag_set", "classname"));
+  array = array_combine(array, GetEntArray("trigger_multiple_flag_set", "classname"));
 
   foreach(ent in array) {
-    if(isDefined(exclude) && exclude == ent) {
+    if(IsDefined(exclude) && exclude == ent) {
       continue;
     }
 
-    if(isDefined(ent.script_flag) && ent.script_flag == str) {
+    if(IsDefined(ent.script_flag) && ent.script_flag == str) {
       return ent;
     }
   }
@@ -405,7 +405,7 @@ civilian_kill_thread() {
   level endon("challenge_done");
 
   count = 0;
-  while(1) {
+  while (1) {
     level waittill("civilian_killed");
 
     count++;
@@ -434,7 +434,7 @@ enemy_kill_thread() {
   level endon("special_op_terminated");
   level endon("challenge_done");
 
-  while(1) {
+  while (1) {
     level waittill("target_killed");
 
     foreach(player in level.players) {
@@ -463,12 +463,12 @@ pit_cases_and_door() {
   /*-----------------------
   PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
   -------------------------*/
-  level.pit_case_01 playSound("scn_trainer_case_open1");
-  pit_weapons_case_01 = getEntArray("pit_weapons_case_01", "script_noteworthy");
+  level.pit_case_01 playsound("scn_trainer_case_open1");
+  pit_weapons_case_01 = getentarray("pit_weapons_case_01", "script_noteworthy");
   array_thread(pit_weapons_case_01, maps\trainer::weapons_show);
 
-  level.pit_case_02 playSound("scn_trainer_case_open2");
-  pit_weapons_case_02 = getEntArray("pit_weapons_case_02", "script_noteworthy");
+  level.pit_case_02 playsound("scn_trainer_case_open2");
+  pit_weapons_case_02 = getentarray("pit_weapons_case_02", "script_noteworthy");
   array_thread(pit_weapons_case_02, maps\trainer::weapons_show);
 
   level.gate_cqb_enter thread maps\trainer::door_open();
@@ -476,7 +476,7 @@ pit_cases_and_door() {
 
 so_ambient_vehicles() {
   path_arr = getstructarray("blackhawk_path", "script_noteworthy");
-  heli_arr = getEntArray("heli_group_01", "targetname");
+  heli_arr = getentarray("heli_group_01", "targetname");
 
   blackhawk = undefined;
   foreach(heli in heli_arr) {
@@ -525,14 +525,14 @@ so_course_loop_think() {
   COURSE OBJECTIVE
   -------------------------*/
   if(level.first_time) {
-    maps\trainer::registerObjective("obj_course", &"SO_KILLSPREE_TRAINER_OBJ_MAIN", getEnt("origin_course_01", "targetname"));
+    maps\trainer::registerObjective("obj_course", & "SO_KILLSPREE_TRAINER_OBJ_MAIN", getEnt("origin_course_01", "targetname"));
     maps\trainer::setObjectiveState("obj_course", "current");
   }
 
   /*-----------------------
   RESET CQB COURSE AND OPEN DOOR
   -------------------------*/
-  course_triggers_01 = getEntArray("course_triggers_01", "script_noteworthy");
+  course_triggers_01 = getentarray("course_triggers_01", "script_noteworthy");
   array_notify(course_triggers_01, "activate");
 
   /*-----------------------
@@ -557,7 +557,7 @@ so_course_loop_think() {
 
   thread dialogue_course();
 
-  conversation_orgs_pit = getEntArray("conversation_orgs_pit", "targetname");
+  conversation_orgs_pit = getentarray("conversation_orgs_pit", "targetname");
   org = getclosest(level.player.origin, conversation_orgs_pit);
 
   if(cointoss()) {
@@ -577,9 +577,8 @@ so_course_loop_think() {
   foreach(player in level.players) {
     playerPrimaryWeapons = player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
-      foreach(weapon in playerPrimaryWeapons) {
-        player givemaxammo(weapon);
-      }
+      foreach(weapon in playerPrimaryWeapons)
+      player givemaxammo(weapon);
     }
   }
 
@@ -653,7 +652,7 @@ so_target_flag_management() {
 so_waittill_targets_killed(iNumberOfTargets, sFlagToSetWhenKilled) {
   iTargetsKilled = 0;
 
-  while(iTargetsKilled < iNumberOfTargets) {
+  while (iTargetsKilled < iNumberOfTargets) {
     level waittill("target_killed");
     iTargetsKilled++;
   }
@@ -668,7 +667,7 @@ so_melee_hint() {
 }
 
 add_client_hint_background(double_line) {
-  if(isDefined(double_line)) {
+  if(IsDefined(double_line)) {
     self.hintbackground = self createClientIcon("popmenu_bg", 650, 50);
   } else {
     self.hintbackground = self createClientIcon("popmenu_bg", 650, 30);
@@ -693,7 +692,7 @@ so_melee_hint_thread() {
   self.hintElem setText(&"TRAINER_HINT_MELEE");
 
   trigger = GetEnt("so_player_melee_trigger", "targetname");
-  while(!flag("melee_target_hit")) {
+  while (!flag("melee_target_hit")) {
     if(self IsTouching(trigger)) {
       self.hintElem.alpha = 1;
       self.hintbackground.alpha = 0.5;
@@ -716,23 +715,23 @@ so_melee_hint_thread() {
 }
 
 clear_client_hints() {
-  if(isDefined(self.hintElem)) {
+  if(IsDefined(self.hintElem)) {
     self.hintElem destroyElem();
   }
 
-  if(isDefined(self.iconElem)) {
+  if(IsDefined(self.iconElem)) {
     self.iconElem destroyElem();
   }
 
-  if(isDefined(self.iconElem2)) {
+  if(IsDefined(self.iconElem2)) {
     self.iconElem2 destroyElem();
   }
 
-  if(isDefined(self.iconElem3)) {
+  if(IsDefined(self.iconElem3)) {
     self.iconElem3 destroyElem();
   }
 
-  if(isDefined(self.hintbackground)) {
+  if(IsDefined(self.hintbackground)) {
     self.hintbackground destroyElem();
   }
 
@@ -784,7 +783,7 @@ course_gate_controll() {
 
   level.so_end_trigger trigger_on();
 
-  ents = getEntArray("gate_cqb_exit", "targetname");
+  ents = getentarray("gate_cqb_exit", "targetname");
   foreach(ent in ents) {
     if(ent.code_classname == "script_brushmodel") {
       ent NotSolid();
@@ -796,14 +795,14 @@ course_gate_controll() {
 display_counters() {
   ypos = so_hud_ypos();
 
-  self.HUDenemies = so_create_hud_item(3, ypos, &"SO_KILLSPREE_TRAINER_ENEMIES", self);
-  self.HUDcivvies = so_create_hud_item(4, ypos, &"SO_KILLSPREE_TRAINER_CIVVIES", self);
+  self.HUDenemies = so_create_hud_item(3, ypos, & "SO_KILLSPREE_TRAINER_ENEMIES", self);
+  self.HUDcivvies = so_create_hud_item(4, ypos, & "SO_KILLSPREE_TRAINER_CIVVIES", self);
 
-  self.HUDenemiesKilled = so_create_hud_item(3, ypos, &"SO_KILLSPREE_TRAINER_ENEMIES_COUNT", self);
+  self.HUDenemiesKilled = so_create_hud_item(3, ypos, & "SO_KILLSPREE_TRAINER_ENEMIES_COUNT", self);
   self.HUDenemiesKilled setValue(level.targets_hit);
   self.HUDenemiesKilled.alignx = "left";
 
-  self.HUDcivviesKilled = so_create_hud_item(4, ypos, &"SO_KILLSPREE_TRAINER_CIVVIES_COUNT", self);
+  self.HUDcivviesKilled = so_create_hud_item(4, ypos, & "SO_KILLSPREE_TRAINER_CIVVIES_COUNT", self);
   self.HUDcivviesKilled setValue(level.friendlies_hit);
   self.HUDcivviesKilled.alignx = "left";
 
@@ -861,16 +860,14 @@ set_failure_quote(type) {
 
 move_spawn_and_go(path_ent) {
   self.origin = path_ent.origin;
-  if(isDefined(path_ent.angles)) {
+  if(IsDefined(path_ent.angles))
     self.angles = path_ent.angles;
-  }
 
   // changes targetname of ai so that they to can spawn
-  other_ents = getEntArray(self.target, "targetname");
+  other_ents = getentarray(self.target, "targetname");
   foreach(ent in other_ents) {
-    if(isspawner(ent)) {
+    if(isspawner(ent))
       ent.targetname = path_ent.targetname;
-    }
   }
 
   self.target = path_ent.targetname;
@@ -940,7 +937,7 @@ star_challenge_sound_and_flash(star, removeTimer) {
 
   wait(timeToWait);
 
-  for(i = 0; i < secondsToTick; i++) {
+  for (i = 0; i < secondsToTick; i++) {
     self PlayLocalSound("so_snowrace_star_tick");
 
     star.alpha = 1;
@@ -981,7 +978,7 @@ dialogue_course() {
   thread do_course_dialogue("train_cpd_clearfirstgogogo");
 
   // Disable all of the course progression triggers
-  triggers = getEntArray("so_course_progression_triggers", "targetname");
+  triggers = GetEntArray("so_course_progression_triggers", "targetname");
   array_thread(triggers, ::trigger_off);
 
   // --------------------------------
@@ -1120,7 +1117,7 @@ hint_missed_target(trigger, flag_msg, hint_type) {
   // Since HintPrintWait() in _utility_code does not support break params, this is a work-around
   level.hint_break_flag = flag_msg;
 
-  while(1) {
+  while (1) {
     foreach(player in level.players) {
       if(player IsTouching(trigger) && !player.hint_missed_targets) {
         player.hint_missed_targets = true;

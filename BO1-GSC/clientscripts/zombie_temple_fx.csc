@@ -293,15 +293,15 @@ precache_fx_prop_anims() {
 }
 
 play_fx_prop_anims(localClientNum) {
-  fxanim_chains = getEntArray(localClientNum, "fxanim_gp_chain01_mod", "targetname");
+  fxanim_chains = GetEntArray(localClientNum, "fxanim_gp_chain01_mod", "targetname");
   for(i = 0; i < fxanim_chains.size; i++) {
     fxanim_chains[i] thread fxanim_think(localClientNum, "fxanim_gp_chain01", 1, 1);
   }
-  fxanim_chains = getEntArray(localClientNum, "fxanim_gp_chain02_mod", "targetname");
+  fxanim_chains = GetEntArray(localClientNum, "fxanim_gp_chain02_mod", "targetname");
   for(i = 0; i < fxanim_chains.size; i++) {
     fxanim_chains[i] thread fxanim_think(localClientNum, "fxanim_gp_chain02", 1, 1);
   }
-  fxanim_chains = getEntArray(localClientNum, "fxanim_gp_chain03_mod", "targetname");
+  fxanim_chains = GetEntArray(localClientNum, "fxanim_gp_chain03_mod", "targetname");
   for(i = 0; i < fxanim_chains.size; i++) {
     fxanim_chains[i] thread fxanim_think(localClientNum, "fxanim_gp_chain03", level.waits[i], 1);
   }

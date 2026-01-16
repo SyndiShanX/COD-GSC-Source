@@ -11,13 +11,14 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_white_special_rounds;
 
 init() {
-  level._effect[# "fx8_toxic_gas_lg"] = "maps/zm_white/fx8_toxic_gas_lg";
-  level._effect[# "fx8_toxic_gas_venting_lg"] = "maps/zm_white/fx8_toxic_gas_venting_lg";
-  level._effect[# "fx8_special_round_green_gas_md"] = "maps/zm_towers/fx8_special_round_green_gas_md";
-  level._effect[# "hash_670acb2528e7f014"] = # "hash_67f59250cb33cc07";
+  level._effect[#"fx8_toxic_gas_lg"] = "maps/zm_white/fx8_toxic_gas_lg";
+  level._effect[#"fx8_toxic_gas_venting_lg"] = "maps/zm_white/fx8_toxic_gas_venting_lg";
+  level._effect[#"fx8_special_round_green_gas_md"] = "maps/zm_towers/fx8_special_round_green_gas_md";
+  level._effect[#"hash_670acb2528e7f014"] = #"hash_67f59250cb33cc07";
   function_aa1e486e();
 }
 
@@ -34,20 +35,20 @@ register_clientfields() {
   clientfield::register("world", "portal_map_gas_indicator_yellow_house", 1, 1, "int", &portal_map_gas_indicator_yellow_house, 0, 0);
   clientfield::register("world", "portal_map_gas_indicator_generators", 1, 1, "int", &portal_map_gas_indicator_generators, 0, 0);
   clientfield::register("world", "generator_sound_sweetner", 1, 1, "int", &play_generator_sound_sweetner, 0, 0);
-  clientfield::register("world", "" + # "hash_1c11f70bb8445095", 1, 3, "int", &function_88991669, 0, 0);
+  clientfield::register("world", "" + #"hash_1c11f70bb8445095", 1, 3, "int", &function_88991669, 0, 0);
   clientfield::register("toplayer", "vent_interact_feedback", 20000, 1, "counter", &vent_interact_feedback, 0, 0);
 }
 
 function_e54e60de(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_toxic_gas_lg"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_toxic_gas_lg"], self, "tag_origin");
 }
 
 function_a9b5240b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_toxic_gas_venting_lg"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_toxic_gas_venting_lg"], self, "tag_origin");
 }
 
 function_32acf82a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_special_round_green_gas_md"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_special_round_green_gas_md"], self, "tag_origin");
 }
 
 vent_interact_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

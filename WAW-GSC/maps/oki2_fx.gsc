@@ -122,9 +122,9 @@ spawnFX() {
 player_rain() {
   self endon("death");
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     if(getdvar("oki2_rain") == "") {
-      playFX(level._effect["rain"], self.origin + (0, 0, 0));
+      playfx(level._effect["rain"], self.origin + (0, 0, 0));
     }
     wait(0.1);
   }
@@ -142,14 +142,14 @@ cliffside_ambient_fire() {
 battleship_artillery_fire() {
   level endon("stop firing");
   fire_starts = getstructarray("14inch", "targetname");
-  for(i = 0; i < fire_starts.size; i++) {
+  for (i = 0; i < fire_starts.size; i++) {
     level.battleship_firing_states[i] = "not_firing";
   }
-  while(1) {
+  while (1) {
     start_num = randomint(fire_starts.size);
     fire_point = fire_starts[start_num];
     start_point = fire_point;
-    while(level.battleship_firing_states[start_num] == "firing") {
+    while (level.battleship_firing_states[start_num] == "firing") {
       start_num = randomint(fire_starts.size);
       fire_point = fire_starts[start_num];
       start_point = fire_point;
@@ -157,9 +157,9 @@ battleship_artillery_fire() {
     }
     level.battleship_firing_states[start_num] = "firing";
     firetimes = randomint(3) + 1;
-    for(i = 0; i < firetimes; i++) {
+    for (i = 0; i < firetimes; i++) {
       fire_point = start_point;
-      while(1) {
+      while (1) {
         thread fire_arty_gun(fire_point.origin);
         if(isDefined(fire_point.target)) {
           fire_point = getstruct(fire_point.target, "targetname");
@@ -189,15 +189,15 @@ arty_launch() {
   ent = spawn("script_model", target.origin + (randomintrange(-100, 100), randomintrange(-100, 100), 0));
   wait(randomfloatrange(4, 5));
   if(target.script_fxid == "rock") {
-    playFX(level._effect["arty_strike_rock"], ent.origin);
+    playfx(level._effect["arty_strike_rock"], ent.origin);
   } else {
-    playFX(level.mortar, ent.origin);
+    playfx(level.mortar, ent.origin);
   }
   ent do_earthquake();
-  ent playSound("naval_gun_impact");
+  ent playsound("naval_gun_impact");
   if(target.script_fxid == "Rock") {
     wait(.5);
-    playFX(level._effect["falling_rocks"], ent.origin);
+    playfx(level._effect["falling_rocks"], ent.origin);
   }
   wait(1);
   ent delete();
@@ -206,7 +206,7 @@ arty_launch() {
 do_earthquake() {
   players = get_players();
   close = false;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(distancesquared(players[i].origin, self.origin) < (10000)) {
       close = true;
     }
@@ -221,14 +221,14 @@ do_earthquake() {
 play_fire_sound(org) {
   ent = spawn("script_model", org);
   wait(.1);
-  ent playSound("naval_gun_fire", "fired");
+  ent playsound("naval_gun_fire", "fired");
   ent waittill("fired");
   ent delete();
 }
 
 cliff_fire(fx_firepoint, gun) {
   level endon("stop_" + gun);
-  while(1) {
+  while (1) {
     thread model3_tracerfire(fx_firepoint, gun);
     wait(randomfloatrange(2, 5));
   }
@@ -236,16 +236,16 @@ cliff_fire(fx_firepoint, gun) {
 
 model3_tracerfire(fx_firepoint, gun) {
   ent = getstruct(fx_firepoint, "targetname");
-  playFX(level._effect["gunflash"], ent.origin, anglesToForward(ent.angles));
+  playfx(level._effect["gunflash"], ent.origin, AnglesToForward(ent.angles));
   snd = spawn("script_model", ent.origin);
   wait(.1);
-  snd playSound("model3_fire", "firedone");
+  snd playsound("model3_fire", "firedone");
   snd waittill("firedone");
   snd delete();
 }
 
 water_drops_init(startCount) {
-  trigs = getEntArray("trigger_water_drops", "targetname");
+  trigs = GetEntArray("trigger_water_drops", "targetname");
   ASSERTEX(isDefined(trigs) && trigs.size > 0, "Can't find any water drop fx triggers.");
   array_thread(trigs, ::water_drops_trigger_think);
   if(isDefined(startCount) && startCount > 0) {
@@ -259,7 +259,7 @@ water_drops_trigger_think() {
     ASSERTMSG("Water drop fx trigger at origin " + self.origin + " does not have script_int set.You need to set this to specify the amount of water drops that will be generated.");
     return;
   }
-  while(1) {
+  while (1) {
     self waittill("trigger", player);
     if(IsPlayer(player)) {
       player SetWaterDrops(self.script_int);

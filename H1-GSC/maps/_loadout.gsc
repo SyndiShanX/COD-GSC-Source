@@ -10,12 +10,11 @@ init_loadout() {
 }
 
 give_loadout() {
-  if(isDefined(level.dodgeloadout)) {
+  if(isdefined(level.dodgeloadout)) {
     return;
   }
-  if(!isDefined(level.campaign)) {
+  if(!isdefined(level.campaign))
     level.campaign = "american";
-  }
 
   var_0 = maps\_loadout_code::get_loadout();
   level.player maps\_loadout_code::setdefaultactionslot();

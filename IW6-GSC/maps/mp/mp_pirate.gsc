@@ -68,7 +68,7 @@ setupLevelKillstreak() {
 
   config = spawnStruct();
   config.crateWeight = 85;
-  config.crateHint = &"MP_PIRATE_CANNONS_USE";
+  config.crateHint = & "MP_PIRATE_CANNONS_USE";
   config.debugName = "Cannon Barrage";
   config.id = CONST_KILLSTREAK_CANNON;
   config.weaponName = "warhawk_mortar_mp";
@@ -513,11 +513,10 @@ bellsHitSway(attacker) {
   vec = AnglesToRight(self.angles);
   vec2 = VectorNormalize(attacker.origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
-  if(swing_dir > 0.0) {
+  if(swing_dir > 0.0)
     swing_dir = Max(0.3, swing_dir);
-  } else {
+  else
     swing_dir = Min(-0.3, swing_dir);
-  }
 
   self.is_swaying = true;
   self RotateRoll(15 * swing_dir, 1.0, 0, 0.5);
@@ -817,7 +816,9 @@ debugWatchDvars() {
     foreach(dvar, callback in level.dbgDvarCallback) {
       value = GetDvar(dvar);
       if(value != "") {
-        [[callback]](value);
+        [
+          [callback]
+        ](value);
         SetDvar(dvar, "");
       }
     }

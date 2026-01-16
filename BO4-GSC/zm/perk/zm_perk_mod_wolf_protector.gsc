@@ -20,6 +20,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_perk_mod_wolf_protector;
 
 autoexec __init__system__() {
@@ -33,7 +34,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_wolf_protector", "mod_wolf_protector", # "perk_wolf_protector", # "specialty_wolf_protector", 4000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_wolf_protector", "mod_wolf_protector", #"perk_wolf_protector", #"specialty_wolf_protector", 4000);
   zm_perks::register_perk_clientfields(#"specialty_mod_wolf_protector", &register_clientfield, &set_clientfield);
   zm_perks::register_perk_threads(#"specialty_mod_wolf_protector", &give_perk, &take_perk);
   callback::on_ai_killed(&on_ai_killed);
@@ -42,9 +43,9 @@ function_27473e44() {
   zm_powerups::register_powerup("wolf_bonus_hero_power", &zm_powerup_hero_weapon_power::hero_weapon_power);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("wolf_bonus_points", "zombie_z_money_icon", # "zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
-    zm_powerups::add_zombie_powerup("wolf_bonus_ammo", "p7_zm_power_up_max_ammo", # "hash_69256172c78db147", &zm_powerups::func_should_never_drop, 1, 0, 0);
-    zm_powerups::add_zombie_powerup("wolf_bonus_hero_power", "p8_zm_powerup_full_power", # "zombie_powerup_free_perk", &zm_powerup_hero_weapon_power::function_7e51ac0f, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("wolf_bonus_points", "zombie_z_money_icon", #"zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("wolf_bonus_ammo", "p7_zm_power_up_max_ammo", #"hash_69256172c78db147", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("wolf_bonus_hero_power", "p8_zm_powerup_full_power", #"zombie_powerup_free_perk", &zm_powerup_hero_weapon_power::function_7e51ac0f, 1, 0, 0);
   }
 }
 

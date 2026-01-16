@@ -53,17 +53,17 @@ function white_infinite_igc() {
   level thread function_19b91013();
   load::function_c32ba481(1);
   level thread newworld_util::function_30ec5bf7();
-  level util::do_chyron_text(&"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_1_FULL", "", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_SHORT", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_SHORT", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_SHORT", "", "");
-  if(isDefined(level.bzm_newworlddialogue1callback)) {
+  level util::do_chyron_text(&"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_1_FULL", "", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_SHORT", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_SHORT", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_SHORT", "", "");
+  if(isdefined(level.bzm_newworlddialogue1callback)) {
     level thread[[level.bzm_newworlddialogue1callback]]();
   }
-  level scene::add_scene_func("p7_fxanim_cp_newworld_train_intro_glass_bundle", &function_f910c34a);
-  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", &function_7b872728);
-  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", &function_f8514554);
+  level scene::add_scene_func("p7_fxanim_cp_newworld_train_intro_glass_bundle", & function_f910c34a);
+  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", & function_7b872728);
+  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", & function_f8514554);
   level scene::add_player_linked_scene("p7_fxanim_cp_newworld_train_intro_glass_bundle");
   level thread scene::play("p7_fxanim_cp_newworld_train_intro_glass_bundle");
   level thread scene::play("cin_new_01_01_whiteinfinite_1st_intro");
-  array::thread_all(level.activeplayers, &newworld_util::function_737d2864, &"CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", &"CP_MI_ZURICH_NEWWORLD_TIME_TRAIN1");
+  array::thread_all(level.activeplayers, & newworld_util::function_737d2864, & "CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", & "CP_MI_ZURICH_NEWWORLD_TIME_TRAIN1");
   level thread function_6fe6a34d();
   level waittill("hash_a4a076ed");
   setpauseworld(0);
@@ -111,7 +111,7 @@ function function_7b872728(a_ents) {
 
 function function_63d2d91e() {
   self clientfield::set("train_fx_occlude", 1);
-  var_bf143437 = getEntArray("probe_inf_white_igc", "script_noteworthy");
+  var_bf143437 = getentarray("probe_inf_white_igc", "script_noteworthy");
   foreach(var_7aa19f58 in var_bf143437) {
     var_7aa19f58 linkto(self);
   }
@@ -123,11 +123,11 @@ function function_63d2d91e() {
 function function_bb60f445(a_ents) {
   level waittill("hash_3886176e");
   var_6d4af883 = a_ents["whiteinfinite_civ_07"];
-  if(isDefined(var_6d4af883)) {
+  if(isdefined(var_6d4af883)) {
     var_6d4af883 clientfield::set("derez_ai_deaths", 1);
   }
   util::wait_network_frame();
-  if(isDefined(var_6d4af883)) {
+  if(isdefined(var_6d4af883)) {
     var_6d4af883 ghost();
   }
 }
@@ -184,9 +184,9 @@ function inbound_igc() {
   newworld_util::function_83a7d040();
   util::streamer_wait();
   newworld_util::player_snow_fx();
-  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", &taylor_inbound_igc, "play");
-  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", &function_985304c3, "play");
-  if(isDefined(level.bzm_newworlddialogue10callback)) {
+  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", & taylor_inbound_igc, "play");
+  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", & function_985304c3, "play");
+  if(isdefined(level.bzm_newworlddialogue10callback)) {
     level thread[[level.bzm_newworlddialogue10callback]]();
   }
   level thread function_64f742f7();
@@ -196,7 +196,7 @@ function inbound_igc() {
 
 function function_985304c3(a_ents) {
   level flag::clear("infinite_white_transition");
-  array::thread_all(level.activeplayers, &newworld_util::function_737d2864, &"CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", &"CP_MI_ZURICH_NEWWORLD_TIME_TRAIN2");
+  array::thread_all(level.activeplayers, & newworld_util::function_737d2864, & "CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", & "CP_MI_ZURICH_NEWWORLD_TIME_TRAIN2");
 }
 
 function taylor_inbound_igc(a_ents) {
@@ -237,13 +237,13 @@ function skipto_train_init(str_objective, b_starting) {
     level clientfield::set("train_main_fx_occlude", 1);
   }
   if(sessionmodeiscampaignzombiesgame()) {
-    a_e_clip = getEntArray("train_stairs_carver_zm", "targetname");
+    a_e_clip = getentarray("train_stairs_carver_zm", "targetname");
     foreach(e_clip in a_e_clip) {
       e_clip delete();
     }
   }
-  util::delay(0.6, undefined, &newworld_util::function_3e37f48b, 0);
-  util::delay(1, undefined, &function_1a874d86);
+  util::delay(0.6, undefined, & newworld_util::function_3e37f48b, 0);
+  util::delay(1, undefined, & function_1a874d86);
   level thread namespace_e38c3c58::function_c132cd41();
   level thread train_brake_flaps_init();
   battlechatter::function_d9f49fba(1);
@@ -263,7 +263,7 @@ function skipto_train_init(str_objective, b_starting) {
 
 function function_1a874d86() {
   foreach(e_player in level.activeplayers) {
-    if(isDefined(e_player.cybercom.var_7116dac7)) {
+    if(isdefined(e_player.cybercom.var_7116dac7)) {
       e_player giveweapon(e_player.cybercom.var_7116dac7);
       e_player.cybercom.activecybercommeleeweapon = e_player.cybercom.var_7116dac7;
       e_player.cybercom.var_7116dac7 = undefined;
@@ -304,10 +304,10 @@ function init_train_flags() {
 }
 
 function function_8b44d21a() {
-  var_31f0b803 = getEntArray("train_neon_glass_destructible_1", "script_noteworthy");
+  var_31f0b803 = getentarray("train_neon_glass_destructible_1", "script_noteworthy");
   var_6a5caae4 = struct::get("front_of_the_train", "targetname");
   var_31f0b803 = arraysort(var_31f0b803, var_6a5caae4.origin, 1);
-  for(i = 0; i < var_31f0b803.size; i++) {
+  for (i = 0; i < var_31f0b803.size; i++) {
     var_31f0b803[i] thread function_f889869b(i + 1);
   }
 }
@@ -337,7 +337,7 @@ function function_6cff67b8() {
 
 function function_7710c097() {
   level clientfield::set("train_dropdown_glass", 1);
-  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", &function_d6c3792a, "init");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", & function_d6c3792a, "init");
   level thread scene::init("cin_new_16_01_detachbombcar_aie_drop");
   trigger::wait_till("train_car_4_robot_spawns");
   level thread function_6a30b44c();
@@ -346,7 +346,7 @@ function function_7710c097() {
     ai_robot = spawner::simple_spawn_single("train_car_4_secondstory");
     ai_robot thread function_c19bd331();
   }
-  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", &function_613f8b51, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", & function_613f8b51, "play");
   level thread scene::play("cin_new_16_01_detachbombcar_aie_drop");
   level waittill("hash_60e2e11");
   level clientfield::set("train_dropdown_glass", 2);
@@ -366,9 +366,9 @@ function function_d6c3792a(a_ents) {
 
 function function_613f8b51(a_ents) {
   level waittill("hash_613f8b51");
-  var_31f0b803 = getEntArray("train_neon_glass_destructible_1", "script_noteworthy");
+  var_31f0b803 = getentarray("train_neon_glass_destructible_1", "script_noteworthy");
   var_31f0b803 = arraysort(var_31f0b803, a_ents["robot_second_floor_drop"].origin, 1);
-  if(isDefined(var_31f0b803[0])) {
+  if(isdefined(var_31f0b803[0])) {
     var_31f0b803[0] dodamage(100, var_31f0b803[0].origin);
   }
   a_ents["robot_second_floor_drop"] util::stop_magic_bullet_shield();
@@ -423,15 +423,15 @@ function function_f3519ceb() {
 }
 
 function setup_robot_spawn_scenes() {
-  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", &function_1d0cebf2, "init");
-  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", &charging_station_open, "done");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &init_train_wakeup_robot, "init");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &play_train_wakeup_robot, "play");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &done_train_wakeup_robot, "done");
+  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", & function_1d0cebf2, "init");
+  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", & charging_station_open, "done");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & init_train_wakeup_robot, "init");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & play_train_wakeup_robot, "play");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & done_train_wakeup_robot, "done");
 }
 
 function function_1d0cebf2(a_ents) {
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     if(self.script_noteworthy === "last_car_robot_chargers") {
       s_scene = struct::get(self.target, "targetname");
       ai_robot = spawner::simple_spawn_single("last_train_car_robot");
@@ -444,7 +444,7 @@ function function_1d0cebf2(a_ents) {
 }
 
 function charging_station_open(a_ents) {
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     s_scene = struct::get(self.target, "targetname");
     s_scene scene::play();
   }
@@ -460,15 +460,15 @@ function play_train_wakeup_robot(a_ents) {
     a_ents["train_wakeup_robot"] ai::set_behavior_attribute("move_mode", "rusher");
     a_ents["train_wakeup_robot"] ai::set_behavior_attribute("sprint", 1);
   }
-  if(isDefined(self.script_string)) {
+  if(isdefined(self.script_string)) {
     a_ents["train_wakeup_robot"].script_string = self.script_string;
   }
 }
 
 function done_train_wakeup_robot(a_ents) {
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     e_goalvolume = getent(self.target, "targetname");
-    if(!isDefined(e_goalvolume)) {
+    if(!isdefined(e_goalvolume)) {
       nd_target = getnode(self.target, "targetname");
       a_ents["train_wakeup_robot"] setgoal(nd_target, 1);
       return;
@@ -485,8 +485,8 @@ function function_704b33db() {
 }
 
 function function_5e667e1f() {
-  scene::add_scene_func("cin_gen_traversal_robot_climb_train_right", &function_b30301a7, "done");
-  scene::add_scene_func("cin_gen_traversal_robot_climb_train_left", &function_b30301a7, "done");
+  scene::add_scene_func("cin_gen_traversal_robot_climb_train_right", & function_b30301a7, "done");
+  scene::add_scene_func("cin_gen_traversal_robot_climb_train_left", & function_b30301a7, "done");
   switch (level.activeplayers.size) {
     case 1:
     case 2: {
@@ -506,14 +506,14 @@ function function_5e667e1f() {
       break;
     }
   }
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     ai_robot = spawner::simple_spawn_single("climb_up_robot");
     s_scene = struct::get("train_roof1_climb_up_0" + i, "targetname");
     s_scene thread scene::init(ai_robot);
   }
   level flag::wait_till("train_rooftop_roof1_climb_up_spawns");
   level thread function_f7302a65();
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     s_scene = struct::get("train_roof1_climb_up_0" + i, "targetname");
     s_scene thread scene::play();
     wait(0.1);
@@ -562,22 +562,22 @@ function function_54bd9482() {
 }
 
 function train_civilians(str_objective) {
-  scene::add_scene_func("cin_new_15_01_train_vign_drinks", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_drinks", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", &function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", &train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_drinks", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_drinks", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", & train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", & function_ffaa48a3, "play");
   if(str_objective === "train_inbound_igc" || str_objective === "train_train_start" || str_objective === "underground_staging_room_igc") {
     a_s_scenes = struct::get_array("train_civilians_car_1", "script_noteworthy");
     foreach(s_scene in a_s_scenes) {
@@ -610,14 +610,14 @@ function train_civilians(str_objective) {
 function train_civilian_logic(a_ents) {
   level endon("detach_bomb_igc_terminate");
   var_f11c18b5 = a_ents["train_civilian_model"];
-  if(!isDefined(var_f11c18b5)) {
+  if(!isdefined(var_f11c18b5)) {
     var_f11c18b5 = a_ents["train_civ_bartender_model"];
   }
   var_f11c18b5 endon("hash_bf294add");
-  var_f11c18b5 setCanDamage(1);
+  var_f11c18b5 setcandamage(1);
   var_f11c18b5.health = 100;
   var_f11c18b5.script_objective = "train_detach_bomb_igc";
-  while(true) {
+  while (true) {
     var_f11c18b5 waittill("damage", n_damage, attacker);
     if(n_damage > 1) {
       break;
@@ -626,13 +626,13 @@ function train_civilian_logic(a_ents) {
   if(isplayer(attacker)) {
     attacker thread function_8e9219f();
   }
-  if(!isDefined(var_f11c18b5)) {
+  if(!isdefined(var_f11c18b5)) {
     return;
   }
   self scene::stop();
   wait(0.05);
   var_f11c18b5 startragdoll();
-  if(isDefined(a_ents["prop"])) {
+  if(isdefined(a_ents["prop"])) {
     a_ents["prop"] physicslaunch();
   }
   wait(0.1875);
@@ -641,7 +641,7 @@ function train_civilian_logic(a_ents) {
   util::wait_network_frame();
   wait(0.1);
   var_f11c18b5 delete();
-  if(isDefined(a_ents["prop"])) {
+  if(isdefined(a_ents["prop"])) {
     a_ents["prop"] delete();
   }
 }
@@ -649,20 +649,20 @@ function train_civilian_logic(a_ents) {
 function function_ffaa48a3(a_ents) {
   level endon("detach_bomb_igc_terminate");
   var_f11c18b5 = a_ents["train_civilian_model"];
-  if(!isDefined(var_f11c18b5)) {
+  if(!isdefined(var_f11c18b5)) {
     var_f11c18b5 = a_ents["train_civ_bartender_model"];
   }
   var_f11c18b5 endon("hash_ddb95805");
-  while(isDefined(var_f11c18b5) && !var_f11c18b5 function_4a8e782e()) {
+  while (isdefined(var_f11c18b5) && !var_f11c18b5 function_4a8e782e()) {
     wait(0.1);
   }
-  if(!isDefined(var_f11c18b5)) {
+  if(!isdefined(var_f11c18b5)) {
     return;
   }
   self scene::stop();
   wait(0.05);
   var_f11c18b5 startragdoll();
-  if(isDefined(a_ents["prop"])) {
+  if(isdefined(a_ents["prop"])) {
     a_ents["prop"] physicslaunch();
   }
   wait(0.09375);
@@ -671,7 +671,7 @@ function function_ffaa48a3(a_ents) {
   util::wait_network_frame();
   wait(0.1);
   var_f11c18b5 delete();
-  if(isDefined(a_ents["prop"])) {
+  if(isdefined(a_ents["prop"])) {
     a_ents["prop"] delete();
   }
 }
@@ -698,8 +698,8 @@ function function_6114e822() {
   level thread function_783ceb85();
   var_83b961d3 = struct::get("robot_swing_enter_left", "targetname");
   var_d2b65346 = struct::get("robot_swing_enter_right", "targetname");
-  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", &function_e1da9958, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", &function_5e60279a, "done");
+  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", & function_e1da9958, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", & function_5e60279a, "done");
   wait(0.5);
   var_83b961d3 thread scene::play();
   if(level.activeplayers.size > 2) {
@@ -735,7 +735,7 @@ function function_e1da9958(a_ents) {
 
 function function_5e60279a(a_ents) {
   wait(0.05);
-  if(isDefined(self.target) && isalive(a_ents["train_wakeup_robot"])) {
+  if(isdefined(self.target) && isalive(a_ents["train_wakeup_robot"])) {
     nd_goal = getnode(self.target, "targetname");
     a_ents["train_wakeup_robot"] ai::force_goal(nd_goal, 8);
   }
@@ -757,21 +757,21 @@ function train_lockdown() {
   trigger::wait_till("train_lockdown", undefined, undefined, 0);
   exploder::exploder("ex_breakglass");
   clientfield::set("train_lockdown_shutters_1", 1);
-  array::run_all(getEntArray("train_lockdown_door", "targetname"), &movey, -64, 0.5);
+  array::run_all(getentarray("train_lockdown_door", "targetname"), & movey, -64, 0.5);
   level thread start_sequential_train_door_lockdown();
   level thread function_123070a9();
   wait(1.5);
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_b8f52cb2, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", &train_lockdown_glass_break_left, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", &train_lockdown_glass_break_right, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_84631064, "done");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_b8f52cb2, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", & train_lockdown_glass_break_left, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", & train_lockdown_glass_break_right, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_84631064, "done");
   level thread scene::play("cin_new_15_02_train_aie_smash");
   level waittill("train_lockdown_glass_break_right");
-  array::run_all(getEntArray("train_lockdown_glass", "targetname"), &delete);
+  array::run_all(getentarray("train_lockdown_glass", "targetname"), & delete);
 }
 
 function function_e7752aae() {
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_f1aa562d, "init");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_f1aa562d, "init");
   trigger::wait_till("start_lockdown_robots");
   level thread scene::init("cin_new_15_02_train_aie_smash");
 }
@@ -881,7 +881,7 @@ function wait_for_train_car_to_be_empty() {
   if(level flag::exists(("train_car_" + var_b2131754) + "_locked_down")) {
     level flag::wait_till(("train_car_" + var_b2131754) + "_locked_down");
   }
-  while(true) {
+  while (true) {
     b_empty_trigger = 1;
     foreach(player in level.players) {
       if(player istouching(self)) {
@@ -912,7 +912,7 @@ function train_car_door_lock(n_index) {
   var_3a80c4a6 = getent(("train_lockdown_door_0" + n_index) + "_r", "targetname");
   var_265e12e8 movey(-64, 0.2);
   var_3a80c4a6 movey(64, 0.2);
-  var_3a80c4a6 playSound("evt_train_door_close");
+  var_3a80c4a6 playsound("evt_train_door_close");
   var_265e12e8 waittill("movedone");
   var_265e12e8 disconnectpaths(0, 0);
   var_3a80c4a6 disconnectpaths(0, 0);
@@ -932,7 +932,7 @@ function function_42e02b4(n_index) {
   var_3a80c4a6 = getent(("train_lockdown_door_0" + n_index) + "_r", "targetname");
   var_265e12e8 movey(64, 0.2);
   var_3a80c4a6 movey(-64, 0.2);
-  var_3a80c4a6 playSound("evt_train_door_open");
+  var_3a80c4a6 playsound("evt_train_door_open");
   var_265e12e8 waittill("movedone");
   var_265e12e8 connectpaths();
   var_3a80c4a6 connectpaths();
@@ -988,7 +988,7 @@ function function_1b953f61() {
     }
   }
   var_2d8e6fdb = [];
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     ai_robot = spawner::simple_spawn_single("train_climb_robot");
     var_2d8e6fdb[var_2d8e6fdb.size] = ai_robot;
     s_scene = struct::get("train_roof2_climb1_0" + i, "targetname");
@@ -997,7 +997,7 @@ function function_1b953f61() {
   level thread function_fa538321(var_2d8e6fdb);
   level thread function_33267d4e();
   level flag::wait_till("train_climb_robot_scene");
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     s_scene = struct::get("train_roof2_climb1_0" + i, "targetname");
     s_scene thread scene::play();
     wait(0.25);
@@ -1030,13 +1030,13 @@ function function_33267d4e() {
       break;
     }
   }
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     ai_robot = spawner::simple_spawn_single("train_climb_robot");
     s_scene = struct::get("train_roof2_climb2_0" + i, "targetname");
     s_scene thread scene::init(ai_robot);
   }
   level flag::wait_till("spawn_wave2_climbers");
-  for(i = 1; i < (n_count + 1); i++) {
+  for (i = 1; i < (n_count + 1); i++) {
     s_scene = struct::get("train_roof2_climb2_0" + i, "targetname");
     s_scene thread scene::play();
     wait(0.25);
@@ -1047,9 +1047,9 @@ function train_wind_resistance() {
   level endon("detach_bomb_igc_terminate");
   level thread player_on_top_of_train_watcher();
   e_volume = getent("train_rooftop_volume", "targetname");
-  while(isDefined(e_volume)) {
+  while (isdefined(e_volume)) {
     foreach(player in level.players) {
-      if(!(isDefined(player.is_on_train_roof) && player.is_on_train_roof) && player istouching(e_volume)) {
+      if(!(isdefined(player.is_on_train_roof) && player.is_on_train_roof) && player istouching(e_volume)) {
         e_volume thread train_wind_resistance_player(player);
       }
     }
@@ -1079,7 +1079,7 @@ function train_wind_resistance_player(e_player) {
   e_player util::set_lighting_state(1);
   n_last_push = gettime();
   e_player thread player_is_ignored_when_climbing_to_roof();
-  while(e_player istouching(self)) {
+  while (e_player istouching(self)) {
     if(e_player.angles[1] >= -90 && e_player.angles[1] <= 90) {
       e_player setmovespeedscale(1.2);
     } else {
@@ -1095,7 +1095,7 @@ function train_wind_resistance_player(e_player) {
 
 function player_is_ignored_when_climbing_to_roof() {
   self endon("death");
-  if(!(isDefined(self.climbed_to_roof) && self.climbed_to_roof)) {
+  if(!(isdefined(self.climbed_to_roof) && self.climbed_to_roof)) {
     self.climbed_to_roof = 1;
     n_attackeraccuracy = self.attackeraccuracy;
     self.attackeraccuracy = 0.05;
@@ -1139,8 +1139,8 @@ function skipto_train_rooftop_init(str_objective, b_starting) {
     level thread function_75fc9f6a();
     level thread train_car_door_lock(1);
     level thread train_spawn_functions();
-    level thread array::run_all(getEntArray("train_lockdown_door", "targetname"), &movey, -64, 0.5);
-    level thread array::run_all(getEntArray("train_lockdown_glass", "targetname"), &delete);
+    level thread array::run_all(getentarray("train_lockdown_door", "targetname"), & movey, -64, 0.5);
+    level thread array::run_all(getentarray("train_lockdown_glass", "targetname"), & delete);
     level thread setup_robot_spawn_scenes();
     load::function_a2995f22();
     level clientfield::set("train_main_fx_occlude", 1);
@@ -1162,11 +1162,11 @@ function skipto_train_rooftop_init(str_objective, b_starting) {
   } else {
     newworld_util::function_c1c980d8("t_vol_cull_stragglers_train_start");
   }
-  var_a59819c6 = getEntArray("train_roof_diable_respawns", "targetname");
+  var_a59819c6 = getentarray("train_roof_diable_respawns", "targetname");
   foreach(var_1bad7ee6 in var_a59819c6) {
     var_1bad7ee6 trigger::use();
   }
-  callback::on_ai_killed(&function_9ee5007a);
+  callback::on_ai_killed( & function_9ee5007a);
   level thread train_wind_resistance();
   level thread train_player_checkpoints();
   level thread function_f9012fc();
@@ -1203,9 +1203,9 @@ function function_376cc585() {
 function skipto_train_rooftop_done(str_objective, b_starting, b_direct, player) {}
 
 function train_spawn_functions() {
-  spawner::add_spawn_function_group("train_robot_rushers", "script_noteworthy", &train_robot_rushers);
-  spawner::add_spawn_function_group("train_roof1_reinforcements", "targetname", &function_422fbc49);
-  spawner::add_spawn_function_group("train_rooftop_depth", "script_noteworthy", &function_ca6ecfb3);
+  spawner::add_spawn_function_group("train_robot_rushers", "script_noteworthy", & train_robot_rushers);
+  spawner::add_spawn_function_group("train_roof1_reinforcements", "targetname", & function_422fbc49);
+  spawner::add_spawn_function_group("train_rooftop_depth", "script_noteworthy", & function_ca6ecfb3);
 }
 
 function train_robot_rushers() {
@@ -1234,7 +1234,7 @@ function function_422fbc49() {
 function function_ca6ecfb3() {
   self endon("death");
   self.script_accuracy = 0.1;
-  while(true) {
+  while (true) {
     foreach(player in level.activeplayers) {
       if(distance2dsquared(self.origin, player.origin) <= 722500) {
         self.script_accuracy = 1;
@@ -1251,7 +1251,7 @@ function function_6ba3e1f3() {
 }
 
 function train_quadtank_scenes() {
-  scene::add_scene_func("cin_gen_ambient_quadtank_inactive", &function_3f4179e6, "play");
+  scene::add_scene_func("cin_gen_ambient_quadtank_inactive", & function_3f4179e6, "play");
   scene::play("cin_gen_ambient_quadtank_inactive");
 }
 
@@ -1389,20 +1389,20 @@ function function_84dc13df() {
   objectives::set("cp_level_newworld_train_subobj_hack_door");
   var_3b374bac = getent("train_detach_bomb_hack", "targetname");
   var_3b374bac triggerenable(1);
-  e_player = newworld_util::function_16dd8c5f("train_detach_bomb_hack", &"cp_level_newworld_access_door", &"CP_MI_ZURICH_NEWWORLD_HACK", "train_door_panel", "train_door_hacked", 0);
+  e_player = newworld_util::function_16dd8c5f("train_detach_bomb_hack", & "cp_level_newworld_access_door", & "CP_MI_ZURICH_NEWWORLD_HACK", "train_door_panel", "train_door_hacked", 0);
   objectives::complete("cp_level_newworld_train_subobj_hack_door");
   return e_player;
 }
 
 function function_cfb8d002() {
-  scene::add_scene_func("p7_fxanim_cp_newworld_train_end_bundle", &function_368767cf, "init");
+  scene::add_scene_func("p7_fxanim_cp_newworld_train_end_bundle", & function_368767cf, "init");
   level thread scene::init("p7_fxanim_cp_newworld_train_end_bundle");
 }
 
 function function_368767cf(a_ents) {
   var_3ebf068e = a_ents["newworld_train_end"];
   var_3ebf068e enablelinkto();
-  var_bf143437 = getEntArray("snw_bomb_detach", "script_noteworthy");
+  var_bf143437 = getentarray("snw_bomb_detach", "script_noteworthy");
   foreach(e_probe in var_bf143437) {
     e_probe linkto(var_3ebf068e);
   }
@@ -1412,15 +1412,15 @@ function function_368767cf(a_ents) {
 function detach_bomb_igc(e_player) {
   level notify("hash_70ca9767");
   level thread namespace_e38c3c58::function_922297e3();
-  if(isDefined(level.bzm_newworlddialogue11callback)) {
+  if(isdefined(level.bzm_newworlddialogue11callback)) {
     level thread[[level.bzm_newworlddialogue11callback]]();
   }
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_956507bd, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &derez_taylor, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_87eb5c2, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_80caa10e, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_7db3194d, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_37f058fc, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_956507bd, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & derez_taylor, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_87eb5c2, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_80caa10e, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_7db3194d, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_37f058fc, "play");
   level thread scene::play("cin_new_16_01_detachbombcar_1st_detach", e_player);
   hidemiscmodels("train_bomb_exterior_hide");
   var_3ebf068e = getent("newworld_train_end", "targetname");
@@ -1525,7 +1525,7 @@ function function_de13d6e2(var_be1a191b = 0) {
   }
   level.var_9cd0665b = a_env;
   foreach(var_7d2a21b6 in a_env) {
-    if(isDefined(var_7d2a21b6.var_685c7a0b)) {
+    if(isdefined(var_7d2a21b6.var_685c7a0b)) {
       foreach(var_f4933ec0 in var_7d2a21b6.var_685c7a0b) {
         var_f4933ec0 linkto(var_7d2a21b6);
       }
@@ -1535,15 +1535,15 @@ function function_de13d6e2(var_be1a191b = 0) {
 }
 
 function function_52874109(str_script_noteworthy) {
-  var_d3ec9eeb = getEntArray(str_script_noteworthy, "script_noteworthy");
-  if(isDefined(var_d3ec9eeb)) {
+  var_d3ec9eeb = getentarray(str_script_noteworthy, "script_noteworthy");
+  if(isdefined(var_d3ec9eeb)) {
     self.var_685c7a0b = var_d3ec9eeb;
   }
 }
 
 function function_8b08d700(var_7d2a21b6) {
-  assert(isDefined(var_7d2a21b6), "");
-  if(isDefined(var_7d2a21b6.var_685c7a0b)) {
+  assert(isdefined(var_7d2a21b6), "");
+  if(isdefined(var_7d2a21b6.var_685c7a0b)) {
     foreach(var_f4933ec0 in var_7d2a21b6.var_685c7a0b) {
       var_f4933ec0 hide();
     }
@@ -1552,8 +1552,8 @@ function function_8b08d700(var_7d2a21b6) {
 }
 
 function function_c7d3965b(var_7d2a21b6) {
-  assert(isDefined(var_7d2a21b6), "");
-  if(isDefined(var_7d2a21b6.var_685c7a0b)) {
+  assert(isdefined(var_7d2a21b6), "");
+  if(isdefined(var_7d2a21b6.var_685c7a0b)) {
     foreach(var_f4933ec0 in var_7d2a21b6.var_685c7a0b) {
       var_f4933ec0 ghost();
     }
@@ -1562,8 +1562,8 @@ function function_c7d3965b(var_7d2a21b6) {
 }
 
 function function_8db22683(var_7d2a21b6) {
-  assert(isDefined(var_7d2a21b6), "");
-  if(isDefined(var_7d2a21b6.var_685c7a0b)) {
+  assert(isdefined(var_7d2a21b6), "");
+  if(isdefined(var_7d2a21b6.var_685c7a0b)) {
     foreach(var_f4933ec0 in var_7d2a21b6.var_685c7a0b) {
       var_f4933ec0 show();
     }
@@ -1609,7 +1609,7 @@ function function_3641dc88() {
   iprintlnbold("");
   level clientfield::set("sndTrainContext", 2);
   level thread environment_transition(e_tunnel_1, e_tunnel_2, e_tunnel_3, var_718f1be5, var_9791964e, var_bd9410b7);
-  level util::delay(6, undefined, &newworld_util::player_snow_fx);
+  level util::delay(6, undefined, & newworld_util::player_snow_fx);
 }
 
 function function_c4addffd(n_delay = 3) {
@@ -1622,7 +1622,7 @@ function function_c4addffd(n_delay = 3) {
   newworld_util::function_85d8906c();
   level environment_transition(level.var_2982cbda[0], level.var_2982cbda[1], level.var_2982cbda[2], e_tunnel_1, e_tunnel_2, e_tunnel_3);
   wait(n_delay);
-  level util::delay(3, undefined, &newworld_util::player_snow_fx);
+  level util::delay(3, undefined, & newworld_util::player_snow_fx);
   level environment_transition(level.var_2982cbda[0], level.var_2982cbda[1], level.var_2982cbda[2], var_f9c66158, var_6bcdd093, var_45cb562a);
 }
 
@@ -1634,7 +1634,7 @@ function function_441a5f5c() {
   var_f1cc2435 = level.var_1bfadc08;
   var_17ce9e9e = level.var_8e024b43;
   var_3dd11907 = level.var_67ffd0da;
-  while(true) {
+  while (true) {
     iprintlnbold("");
     level environment_transition(level.var_2982cbda[0], level.var_2982cbda[1], level.var_2982cbda[2], var_f1cc2435, var_17ce9e9e, var_3dd11907);
     level clientfield::set("sndTrainContext", 1);
@@ -1655,7 +1655,7 @@ function environment_init(e_environment_1, e_environment_2, e_environment_3, b_i
   level flag::clear("train_terrain_transition");
   e_environment_1.origin = s_origin.origin - vectorscale((1, 0, 0), 36736);
   e_environment_2.origin = s_origin.origin;
-  if(isDefined(e_environment_3)) {
+  if(isdefined(e_environment_3)) {
     e_environment_3.origin = s_origin.origin + vectorscale((1, 0, 0), 36736);
   }
   level.v_train_terrain_origin = e_environment_1.origin;
@@ -1670,23 +1670,23 @@ function environment_move(e_environment_1, e_environment_2, e_environment_3) {
   level endon("detach_bomb_igc_terminate");
   level endon("hash_f49d815e");
   level.var_2982cbda = array(e_environment_1, e_environment_2, e_environment_3);
-  while(!level flag::get("train_terrain_transition")) {
+  while (!level flag::get("train_terrain_transition")) {
     function_c7d3965b(e_environment_1);
     e_environment_1.origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_1);
+    util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_1);
     e_environment_1 movex(36736, 4);
     e_environment_2 movex(36736, 4);
-    if(isDefined(e_environment_3)) {
+    if(isdefined(e_environment_3)) {
       e_environment_3 movex(36736, 4);
     }
     wait(4);
     if(level flag::get("train_terrain_transition")) {
       break;
     }
-    if(isDefined(e_environment_3)) {
+    if(isdefined(e_environment_3)) {
       function_c7d3965b(e_environment_3);
       e_environment_3.origin = level.v_train_terrain_origin;
-      util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_3);
+      util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_3);
       e_environment_1 movex(36736, 4);
       e_environment_2 movex(36736, 4);
       e_environment_3 movex(36736, 4);
@@ -1697,10 +1697,10 @@ function environment_move(e_environment_1, e_environment_2, e_environment_3) {
     }
     function_c7d3965b(e_environment_2);
     e_environment_2.origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_2);
+    util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_2);
     e_environment_1 movex(36736, 4);
     e_environment_2 movex(36736, 4);
-    if(isDefined(e_environment_3)) {
+    if(isdefined(e_environment_3)) {
       e_environment_3 movex(36736, 4);
     }
     wait(4);
@@ -1717,21 +1717,21 @@ function environment_transition(e_old_environment_1, e_old_environment_2, e_old_
   level flag::clear("train_terrain_move_complete");
   level flag::clear("train_terrain_transition");
   a_new = [];
-  if(isDefined(e_new_environment_3)) {
+  if(isdefined(e_new_environment_3)) {
     a_new[0] = e_new_environment_3;
   }
   a_new[a_new.size] = e_new_environment_2;
   a_new[a_new.size] = e_new_environment_1;
   n_new_terrain_size = a_new.size;
   a_old = [];
-  if(isDefined(e_old_environment_3)) {
+  if(isdefined(e_old_environment_3)) {
     a_old[0] = e_old_environment_3;
   }
   a_old[a_old.size] = e_old_environment_2;
   a_old[a_old.size] = e_old_environment_1;
   s_pos = struct::get("back_of_the_train", "targetname");
   a_old = arraysort(a_old, s_pos.origin, 0);
-  while(a_new.size > 0) {
+  while (a_new.size > 0) {
     e_old_end = a_old[a_old.size - 1];
     if(e_old_end === e_old_environment_1 || e_old_end === e_old_environment_2 || e_old_end === e_old_environment_3) {
       function_8b08d700(a_old[a_old.size - 1]);
@@ -1739,7 +1739,7 @@ function environment_transition(e_old_environment_1, e_old_environment_2, e_old_
     }
     function_c7d3965b(a_new[0]);
     a_new[0].origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", &function_8db22683, a_new[0]);
+    util::delay(0.1, "train_terrain_stop", & function_8db22683, a_new[0]);
     array::push_front(a_old, a_new[0]);
     array::pop_front(a_new, 0);
     foreach(e_track_model in a_old) {
@@ -1747,11 +1747,11 @@ function environment_transition(e_old_environment_1, e_old_environment_2, e_old_
     }
     wait(4);
   }
-  while(a_old.size > n_new_terrain_size) {
+  while (a_old.size > n_new_terrain_size) {
     function_8b08d700(a_old[a_old.size - 1]);
     array::pop(a_old, a_old.size - 1);
   }
-  if(isDefined(a_old[2])) {
+  if(isdefined(a_old[2])) {
     level thread environment_move(a_old[2], a_old[0], a_old[1]);
   } else {
     level thread environment_move(a_old[0], a_old[1], a_old[2]);
@@ -1793,7 +1793,7 @@ function function_f0cad19e() {
 function train_player_checkpoints() {
   level endon("detach_bomb_igc_terminate");
   level thread train_robot_fell_off();
-  a_e_triggers = getEntArray("train_bad_area", "targetname");
+  a_e_triggers = getentarray("train_bad_area", "targetname");
   foreach(e_trigger in a_e_triggers) {
     e_trigger thread train_player_fell_off();
   }
@@ -1802,9 +1802,9 @@ function train_player_checkpoints() {
 function train_player_fell_off() {
   level endon("hash_47ed8d40");
   a_s_teleports = struct::get_array(self.target, "targetname");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who) && (!(isDefined(e_who.var_511157e8) && e_who.var_511157e8))) {
+    if(isplayer(e_who) && (!(isdefined(e_who.var_511157e8) && e_who.var_511157e8))) {
       e_who playsoundtoplayer("evt_plr_derez", e_who);
       e_who thread function_c24ce0f9(a_s_teleports);
     }
@@ -1813,7 +1813,7 @@ function train_player_fell_off() {
 
 function function_c24ce0f9(a_s_teleports) {
   self endon("death");
-  while(true) {
+  while (true) {
     s_spot = array::random(a_s_teleports);
     if(!positionwouldtelefrag(s_spot.origin)) {
       self.var_511157e8 = 1;
@@ -1827,7 +1827,7 @@ function function_c24ce0f9(a_s_teleports) {
       util::wait_network_frame();
       self show();
       self clientfield::set("player_spawn_fx", 1);
-      self util::delay(2, "death", &clientfield::set, "player_spawn_fx", 0);
+      self util::delay(2, "death", & clientfield::set, "player_spawn_fx", 0);
       self thread function_f26eff53();
       wait(2);
       self disableinvulnerability();
@@ -1842,7 +1842,7 @@ function function_c24ce0f9(a_s_teleports) {
 function train_robot_fell_off() {
   level endon("detach_bomb_igc_terminate");
   e_trigger = getent("train_bad_area_robots", "targetname");
-  while(true) {
+  while (true) {
     e_trigger waittill("trigger", e_who);
     if(!isplayer(e_who)) {
       e_who kill();
@@ -1856,13 +1856,13 @@ function function_f9012fc() {
   foreach(player in level.players) {
     player thread grenade_toss(var_32400ae0);
   }
-  callback::on_spawned(&grenade_toss, var_32400ae0);
+  callback::on_spawned( & grenade_toss, var_32400ae0);
 }
 
 function grenade_toss(var_32400ae0) {
   level endon("detach_bomb_igc_terminate");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("grenade_fire", e_grenade);
     e_grenade thread function_337c8c84(var_32400ae0);
   }
@@ -1870,14 +1870,14 @@ function grenade_toss(var_32400ae0) {
 
 function function_337c8c84(var_32400ae0) {
   self endon("death");
-  if(isDefined(10)) {
-    __s = spawnStruct();
+  if(isdefined(10)) {
+    __s = spawnstruct();
     __s endon("timeout");
     __s util::delay_notify(10, "timeout");
   }
-  while(true) {
+  while (true) {
     if(self istouching(var_32400ae0)) {
-      if(isDefined(self)) {
+      if(isdefined(self)) {
         self makegrenadedud();
       }
       break;
@@ -1893,14 +1893,14 @@ function function_9ee5007a(params) {
 
 function function_be50cfd5() {
   self waittill("start_ragdoll");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("train_throw_robot_corpses", 1);
   }
 }
 
 function function_50171558() {
   self waittill("actor_corpse", e_corpse);
-  if(isDefined(e_corpse)) {
+  if(isdefined(e_corpse)) {
     e_corpse clientfield::set("train_throw_robot_corpses", 1);
   }
 }
@@ -1995,16 +1995,16 @@ function function_152eb171(var_12b288c7) {
 function function_e5b6ecf2(var_12b288c7, var_a74dbb8c) {
   self endon("death");
   level endon("hash_70ca9767");
-  if(isDefined(var_a74dbb8c)) {
+  if(isdefined(var_a74dbb8c)) {
     self util::waittill_any_timeout(30, "takedown_tutorial_success_vo_complete");
     wait(15);
   }
-  while(true) {
+  while (true) {
     self waittill(var_12b288c7);
-    if(isDefined(level.var_fc1953ce.is_talking) && level.var_fc1953ce.is_talking) {
+    if(isdefined(level.var_fc1953ce.is_talking) && level.var_fc1953ce.is_talking) {
       continue;
     }
-    if(isDefined(level.var_fc1953ce.var_c795bf9b) && level.var_fc1953ce.var_c795bf9b) {
+    if(isdefined(level.var_fc1953ce.var_c795bf9b) && level.var_fc1953ce.var_c795bf9b) {
       continue;
     }
     level.var_fc1953ce.var_c795bf9b = 1;
@@ -2034,7 +2034,7 @@ function function_11e947ae() {
 }
 
 function function_8e9219f() {
-  if(isDefined(self.var_470b117b) && self.var_470b117b) {
+  if(isdefined(self.var_470b117b) && self.var_470b117b) {
     return;
   }
   self.var_470b117b = 1;
@@ -2069,7 +2069,7 @@ function function_783ceb85() {
 function function_123070a9() {
   s_org = struct::get("train_lockdown_vo", "targetname");
   e_org = spawn("script_origin", (-20881, 15612, 4267));
-  while(!level flag::get("stop_train_lockdown_vo")) {
+  while (!level flag::get("stop_train_lockdown_vo")) {
     e_org dialog::say("trai_warning_train_going_0", undefined, 1);
     wait(5);
   }
@@ -2141,19 +2141,19 @@ function function_3fbeb972(var_12b288c7) {
       break;
     }
   }
-  self util::delay(30, "death", &function_7bece35e);
+  self util::delay(30, "death", & function_7bece35e);
 }
 
 function function_7bece35e() {
   self endon("death");
   level endon("hash_70ca9767");
-  while(true) {
+  while (true) {
     self waittill("hash_f045e164");
     wait(0.75);
-    if(isDefined(level.var_fc1953ce.is_talking) && level.var_fc1953ce.is_talking) {
+    if(isdefined(level.var_fc1953ce.is_talking) && level.var_fc1953ce.is_talking) {
       continue;
     }
-    if(isDefined(level.var_fc1953ce.var_c795bf9b) && level.var_fc1953ce.var_c795bf9b) {
+    if(isdefined(level.var_fc1953ce.var_c795bf9b) && level.var_fc1953ce.var_c795bf9b) {
       continue;
     }
     level.var_fc1953ce.var_c795bf9b = 1;
@@ -2205,10 +2205,10 @@ function function_13b3e595() {
 
 function function_f26eff53() {
   self endon("death");
-  if(isDefined(self.var_cd9625d0) && self.var_cd9625d0) {
+  if(isdefined(self.var_cd9625d0) && self.var_cd9625d0) {
     return;
   }
-  if(!isDefined(self.var_bd355621)) {
+  if(!isdefined(self.var_bd355621)) {
     self.var_bd355621 = array("tayr_watch_your_step_try_0", "tayr_you_fall_here_you_ge_0", "tayr_pick_yourself_up_and_0");
   }
   wait(0.5);
@@ -2228,7 +2228,7 @@ function function_d9c04d31() {
 }
 
 function debug_link_probe(e_probe) {
-  while(isDefined(e_probe) && isDefined(self)) {
+  while (isdefined(e_probe) && isdefined(self)) {
     line(e_probe.origin, self.origin, (1, 0, 0), 0.1);
     debug::debug_sphere(e_probe.origin, 16, (1, 0, 0), 0.5, 1);
     debug::drawarrow(self.origin, self.angles);

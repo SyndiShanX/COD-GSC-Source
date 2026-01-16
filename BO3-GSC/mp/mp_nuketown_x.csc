@@ -13,14 +13,14 @@
 #namespace mp_nuketown_x;
 
 function main() {
-  clientfield::register("scriptmover", "nuketown_population_ones", 1, 4, "int", &function_a3fc1001, 0, 0);
-  clientfield::register("scriptmover", "nuketown_population_tens", 1, 4, "int", &function_a3fc1001, 0, 0);
-  clientfield::register("world", "nuketown_endgame", 1, 1, "int", &function_db2629eb, 0, 0);
+  clientfield::register("scriptmover", "nuketown_population_ones", 1, 4, "int", & function_a3fc1001, 0, 0);
+  clientfield::register("scriptmover", "nuketown_population_tens", 1, 4, "int", & function_a3fc1001, 0, 0);
+  clientfield::register("world", "nuketown_endgame", 1, 1, "int", & function_db2629eb, 0, 0);
   namespace_6044bb60::main();
   namespace_4cda09f7::main();
   load::main();
-  level.domflagbasefxoverride = &dom_flag_base_fx_override;
-  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = & dom_flag_base_fx_override;
+  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_nuketown";
 }

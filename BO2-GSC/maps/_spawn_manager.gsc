@@ -17,7 +17,7 @@ spawn_manager_main() {
   level thread spawn_manager_throttle_think();
   level.spawn_managers = [];
   trigger_spawn_manager_setup();
-  array_func(getEntArray("spawn_manager", "classname"), ::spawn_manager_create_spawn_manager_struct);
+  array_func(getentarray("spawn_manager", "classname"), ::spawn_manager_create_spawn_manager_struct);
   array_thread(level.spawn_managers, ::spawn_manager_think);
   start_triggers();
 
@@ -32,16 +32,15 @@ trigger_spawn_manager_setup() {
   for(j = 0; j < triggers.size; j++) {
     trigger = triggers[j];
 
-    if(trigger has_spawnflag(512)) {
+    if(trigger has_spawnflag(512))
       trigger_spawn_manager_create(trigger);
-    }
   }
 }
 
 trigger_spawn_manager_create(trigger) {
   ents = undefined;
   assert(isDefined(trigger.target), "Trigger at " + trigger.origin + " is a spawn manager type ( TRIGGER_SPAWN_MANAGER ) but does not target any spawners");
-  ents = getEntArray(trigger.target, "targetname");
+  ents = getentarray(trigger.target, "targetname");
 
   for(i = 0; i < ents.size; i++) {
     ent = ents[i];
@@ -53,23 +52,20 @@ trigger_spawn_manager_create(trigger) {
 }
 
 spawn_manager_create_spawn_manager_struct(from_ent) {
-  if(!isDefined(from_ent)) {
+  if(!isDefined(from_ent))
     from_ent = self;
-  }
 
-  spawn_manager_ent = spawnStruct();
+  spawn_manager_ent = spawnstruct();
   spawn_manager_ent.script_noteworthy = "spawn_manager";
   is_trigger = issubstr(tolower(from_ent.classname), "trigger");
 
-  if(!isDefined(from_ent.targetname)) {
+  if(!isDefined(from_ent.targetname))
     from_ent.targetname = generate_targetname();
-  }
 
-  if(is_trigger || !isDefined(from_ent.name)) {
+  if(is_trigger || !isDefined(from_ent.name))
     spawn_manager_ent.sm_id = from_ent.targetname;
-  } else {
+  else
     spawn_manager_ent.sm_id = from_ent.name;
-  }
 
   foreach(sm in level.spawn_managers) {
     if(sm.sm_id == spawn_manager_ent.sm_id) {
@@ -81,65 +77,50 @@ spawn_manager_create_spawn_manager_struct(from_ent) {
   spawn_manager_ent.targetname = from_ent.targetname;
   spawn_manager_ent.target = from_ent.target;
 
-  if(is_trigger) {
+  if(is_trigger)
     from_ent.target = spawn_manager_ent.targetname;
-  }
 
-  if(isDefined(from_ent.script_wait)) {
+  if(isDefined(from_ent.script_wait))
     spawn_manager_ent.script_wait = from_ent.script_wait;
-  }
 
-  if(isDefined(from_ent.script_wait_min)) {
+  if(isDefined(from_ent.script_wait_min))
     spawn_manager_ent.script_wait_min = from_ent.script_wait_min;
-  }
 
-  if(isDefined(from_ent.script_wait_max)) {
+  if(isDefined(from_ent.script_wait_max))
     spawn_manager_ent.script_wait_max = from_ent.script_wait_max;
-  }
 
-  if(isDefined(from_ent.script_delay)) {
+  if(isDefined(from_ent.script_delay))
     spawn_manager_ent.script_delay = from_ent.script_delay;
-  }
 
-  if(isDefined(from_ent.script_delay_min)) {
+  if(isDefined(from_ent.script_delay_min))
     spawn_manager_ent.script_delay_min = from_ent.script_delay_min;
-  }
 
-  if(isDefined(from_ent.script_delay_max)) {
+  if(isDefined(from_ent.script_delay_max))
     spawn_manager_ent.script_delay_max = from_ent.script_delay_max;
-  }
 
-  if(isDefined(from_ent.sm_count)) {
+  if(isDefined(from_ent.sm_count))
     spawn_manager_ent.sm_count = from_ent.sm_count;
-  }
 
-  if(isDefined(from_ent.count)) {
+  if(isDefined(from_ent.count))
     spawn_manager_ent.count = from_ent.count;
-  }
 
-  if(isDefined(from_ent.sm_active_count)) {
+  if(isDefined(from_ent.sm_active_count))
     spawn_manager_ent.sm_active_count = from_ent.sm_active_count;
-  }
 
-  if(isDefined(from_ent.sm_group_size)) {
+  if(isDefined(from_ent.sm_group_size))
     spawn_manager_ent.sm_group_size = from_ent.sm_group_size;
-  }
 
-  if(isDefined(from_ent.sm_spawner_count)) {
+  if(isDefined(from_ent.sm_spawner_count))
     spawn_manager_ent.sm_spawner_count = from_ent.sm_spawner_count;
-  }
 
-  if(isDefined(from_ent.sm_die)) {
+  if(isDefined(from_ent.sm_die))
     spawn_manager_ent.sm_die = from_ent.sm_die;
-  }
 
-  if(isDefined(from_ent.script_next_spawn_manager)) {
+  if(isDefined(from_ent.script_next_spawn_manager))
     spawn_manager_ent.script_next_spawn_manager = from_ent.script_next_spawn_manager;
-  }
 
-  if(!is_trigger) {
+  if(!is_trigger)
     from_ent delete();
-  }
 
   level.spawn_managers[level.spawn_managers.size] = spawn_manager_ent;
 }
@@ -154,17 +135,15 @@ spawn_manager_setup() {
   assert(isDefined(self));
   assert(isDefined(self.target));
 
-  if(!isDefined(self.sm_group_size)) {
+  if(!isDefined(self.sm_group_size))
     self.sm_group_size = 1;
-  }
 
   self.sm_group_size_min = get_min_value(self.sm_group_size);
   self.sm_group_size_max = get_max_value(self.sm_group_size);
   assert(self.sm_group_size_max >= self.sm_group_size_min, "Max range should be greater or equal to the min value for sm_count on spawn manager " + self.sm_id);
 
-  if(!isDefined(self.sm_spawner_count)) {
+  if(!isDefined(self.sm_spawner_count))
     self.sm_spawner_count = self.allspawners.size;
-  }
 
   self.sm_spawner_count_min = get_min_value(self.sm_spawner_count);
   self.sm_spawner_count_max = get_max_value(self.sm_spawner_count);
@@ -194,9 +173,8 @@ spawn_manager_setup() {
   assert(self.sm_active_count_max >= self.sm_active_count_min, "Max range should be greater or equal to the min value for sm_active_count on spawn manager trigger with targetname " + self.targetname);
   self.sm_active_count = spawn_manager_random_count(self.sm_active_count_min, self.sm_active_count_max + 1);
 
-  if(!isDefined(self.script_forcespawn)) {
+  if(!isDefined(self.script_forcespawn))
     self.script_forcespawn = 0;
-  }
 
   assert(self.count >= self.count_min);
   assert(self.count <= self.count_max);
@@ -213,11 +191,10 @@ spawn_manager_can_spawn(spawngroupsize) {
   globalfree = level.spawn_manager_max_ai - level.spawn_manager_active_ai;
   assert(self.enable == flag("sm_" + self.sm_id + "_enabled"), "Spawn manager flags should not be set by the level script.");
 
-  if(self.script_forcespawn == 0) {
+  if(self.script_forcespawn == 0)
     return totalfree > 0 && activefree > 0 && globalfree > 0 && canspawngroup && self.enable;
-  } else {
+  else
     return totalfree > 0 && activefree > 0 && self.enable;
-  }
 }
 
 spawn_manager_spawn(maxdelay) {
@@ -225,9 +202,8 @@ spawn_manager_spawn(maxdelay) {
   start = gettime();
 
   for(;;) {
-    while(level.spawn_manager_frame_spawns >= level.spawn_manager_max_frame_spawn || getaicount() >= level.spawn_manager_max_ai) {
+    while(level.spawn_manager_frame_spawns >= level.spawn_manager_max_frame_spawn || getaicount() >= level.spawn_manager_max_ai)
       level waittill("spawn_manager_throttle_reset");
-    }
 
     ai = self spawn_ai();
 
@@ -247,30 +223,26 @@ spawn_manager_spawn_group(spawner, spawngroupsize) {
   for(i = 0; i < spawngroupsize; i++) {
     ai = undefined;
 
-    if(isDefined(spawner) && isDefined(spawner.targetname)) {
+    if(isDefined(spawner) && isDefined(spawner.targetname))
       ai = spawner spawn_manager_spawn(2.0);
-    } else {
+    else
       continue;
-    }
 
     if(!spawn_failed(ai)) {
       spawn_count++;
       level.spawn_manager_frame_spawns = level.spawn_manager_frame_spawns + 1;
 
-      if(isDefined(self.script_radius)) {
+      if(isDefined(self.script_radius))
         ai.script_radius = self.script_radius;
-      }
 
-      if(isDefined(spawner.script_radius)) {
+      if(isDefined(spawner.script_radius))
         ai.script_radius = spawner.script_radius;
-      }
 
       ai thread spawn_accounting(spawner, self);
     }
 
-    if(spawn_count == spawngroupsize) {
+    if(spawn_count == spawngroupsize)
       wait 0.05;
-    }
   }
 }
 
@@ -285,13 +257,11 @@ spawn_accounting(spawner, manager) {
   spawner.activeai[spawner.activeai.size] = self;
   self waittill("death");
 
-  if(isDefined(spawner)) {
+  if(isDefined(spawner))
     arrayremovevalue(spawner.activeai, self);
-  }
 
-  if(isDefined(manager)) {
+  if(isDefined(manager))
     arrayremovevalue(manager.activeai, self);
-  }
 
   level.spawn_manager_active_ai = level.spawn_manager_active_ai - 1;
 }
@@ -305,7 +275,7 @@ spawn_manager_think() {
   self.activeai = [];
   self.spawncount = 0;
   isfirsttime = 1;
-  self.allspawners = getEntArray(self.target, "targetname");
+  self.allspawners = getentarray(self.target, "targetname");
   assert(self.allspawners.size, "Spawn manager '" + self.sm_id + "' doesn't target any spawners.");
   self waittill("enable");
   script_delay();
@@ -314,9 +284,8 @@ spawn_manager_think() {
   while(self.spawncount < self.count && self.spawners.size > 0) {
     self spawn_manager_get_spawn_group_size();
 
-    if(self.sm_group_size + self.spawncount > self.count) {
+    if(self.sm_group_size + self.spawncount > self.count)
       self.sm_group_size = self.count - self.spawncount;
-    }
 
     spawned = 0;
 
@@ -350,23 +319,20 @@ spawn_manager_think() {
         }
 
         if(potential_spawners.size > 0 || priority_spawners.size > 0) {
-          if(priority_spawners.size > 0) {
+          if(priority_spawners.size > 0)
             spawner = random(priority_spawners);
-          } else {
+          else
             spawner = random(potential_spawners);
-          }
 
           assert(isDefined(spawner.count));
 
-          if(spawner.count < self.sm_group_size) {
+          if(spawner.count < self.sm_group_size)
             self.sm_group_size = spawner.count;
-          }
 
-          if(!isfirsttime) {
+          if(!isfirsttime)
             spawn_manager_wait();
-          } else {
+          else
             isfirsttime = 0;
-          }
 
           if(!self.enable) {
             continue;
@@ -380,9 +346,8 @@ spawn_manager_think() {
             current_spawner = self.spawners[i];
 
             if(isDefined(current_spawner)) {
-              if(current_spawner.sm_active_count > spawner_max_active_count) {
+              if(current_spawner.sm_active_count > spawner_max_active_count)
                 spawner_max_active_count = current_spawner.sm_active_count;
-              }
             }
           }
 
@@ -401,9 +366,8 @@ spawn_manager_think() {
     assert(!flag("sm_" + self.sm_id + "_killed"), "Spawn manager flags should not be set by the level script.");
     assert(!flag("sm_" + self.sm_id + "_complete"), "Spawn manager flags should not be set by the level script.");
 
-    if(self.script_forcespawn == 0) {
+    if(self.script_forcespawn == 0)
       wait(maps\_laststand::player_num_in_laststand() / get_players().size * 8);
-    }
   }
 
   self spawn_manager_flag_complete();
@@ -431,17 +395,15 @@ spawn_manager_enable_trigger_think(spawn_manager) {
 spawn_manager_kill_think() {
   self waittill("kill");
 
-  if(isDefined(self.script_next_spawn_manager)) {
+  if(isDefined(self.script_next_spawn_manager))
     spawn_manager_enable(self.script_next_spawn_manager);
-  }
 
   self spawn_manager_flag_disabled();
   self spawn_manager_flag_killed();
 
   for(i = 0; i < self.allspawners.size; i++) {
-    if(isDefined(self.allspawners[i])) {
+    if(isDefined(self.allspawners[i]))
       self.allspawners[i] delete();
-    }
   }
 
   array_wait(self.activeai, "death");
@@ -461,16 +423,14 @@ spawn_manager_kill_trigger_think() {
 
       for(sm_i = 0; sm_i < level.spawn_managers.size; sm_i++) {
         if(killspawner_num != 0) {
-          if(isDefined(level.spawn_managers[sm_i].sm_die) && level.spawn_managers[sm_i].sm_die == killspawner_num) {
+          if(isDefined(level.spawn_managers[sm_i].sm_die) && level.spawn_managers[sm_i].sm_die == killspawner_num)
             level.spawn_managers[sm_i] notify("kill");
-          }
 
           continue;
         }
 
-        if(level.spawn_managers[sm_i].sm_id == sm_kill_ids[id_i]) {
+        if(level.spawn_managers[sm_i].sm_id == sm_kill_ids[id_i])
           level.spawn_managers[sm_i] notify("kill");
-        }
       }
     }
   }
@@ -480,16 +440,14 @@ start_triggers(trigger_type) {
   triggers = get_triggers("trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_damage", "trigger_box");
 
   foreach(trig in triggers) {
-    if(isDefined(trig.sm_kill)) {
+    if(isDefined(trig.sm_kill))
       trig thread spawn_manager_kill_trigger_think();
-    }
 
     if(isDefined(trig.target)) {
       targets = get_spawn_manager_array(trig.target);
 
-      foreach(target in targets) {
-        trig thread spawn_manager_enable_trigger_think(target);
-      }
+      foreach(target in targets)
+      trig thread spawn_manager_enable_trigger_think(target);
     }
   }
 }
@@ -511,9 +469,8 @@ get_spawn_manager_array(targetname) {
     spawn_manager_array = [];
 
     for(i = 0; i < level.spawn_managers.size; i++) {
-      if(level.spawn_managers[i].targetname == targetname) {
+      if(level.spawn_managers[i].targetname == targetname)
         spawn_manager_array[spawn_manager_array.size] = level.spawn_managers[i];
-      }
     }
 
     return spawn_manager_array;
@@ -526,9 +483,8 @@ spawn_manager_get_spawners() {
   exclude = [];
 
   for(i = 0; i < self.allspawners.size; i++) {
-    if(isDefined(level._gamemode_norandomdogs) && self.allspawners[i].classname == "actor_enemy_dog_sp") {
+    if(isDefined(level._gamemode_norandomdogs) && self.allspawners[i].classname == "actor_enemy_dog_sp")
       exclude[exclude.size] = self.allspawners[i];
-    }
 
     self.allspawners[i] calculate_count();
   }
@@ -539,22 +495,19 @@ spawn_manager_get_spawners() {
   for(i = 0; i < self.allspawners.size; i++) {
     self.allspawners[i] spawner_calculate_active_count(self);
 
-    if(self.allspawners[i].sm_active_count_min >= self.sm_group_size_min) {
+    if(self.allspawners[i].sm_active_count_min >= self.sm_group_size_min)
       spawner_count_with_min_active++;
-    }
 
-    if(!isDefined(self.allspawners[i].activeai)) {
+    if(!isDefined(self.allspawners[i].activeai))
       self.allspawners[i].activeai = [];
-    }
   }
 
   assert(spawner_count_with_min_active >= self.allspawners.size, "On spawn manager '" + self.sm_id + "' with a min group size of " + self.sm_group_size_min + ", you must have all spawners with an active count of at least " + self.sm_group_size_min + ".");
   groupspawners = self.allspawners;
   spawner_count = self.sm_spawner_count;
 
-  if(spawner_count > self.allspawners.size) {
+  if(spawner_count > self.allspawners.size)
     spawner_count = self.allspawners.size;
-  }
 
   spawners = [];
 
@@ -568,9 +521,8 @@ spawn_manager_get_spawners() {
 }
 
 spawner_calculate_active_count(spawn_manager) {
-  if(!isDefined(self.sm_active_count)) {
+  if(!isDefined(self.sm_active_count))
     self.sm_active_count = level.spawn_manager_max_ai;
-  }
 
   self.sm_active_count_min = get_min_value(self.sm_active_count);
   self.sm_active_count_max = get_max_value(self.sm_active_count);
@@ -579,11 +531,10 @@ spawner_calculate_active_count(spawn_manager) {
 }
 
 spawn_manager_get_spawn_group_size() {
-  if(self.sm_group_size_min < self.sm_group_size_max) {
+  if(self.sm_group_size_min < self.sm_group_size_max)
     self.sm_group_size = randomintrange(self.sm_group_size_min, self.sm_group_size_max + 1);
-  } else {
+  else
     self.sm_group_size = self.sm_group_size_min;
-  }
 
   return self.sm_group_size;
 }
@@ -611,11 +562,10 @@ get_min_value(value) {
 
   for(i = num_players.size - 1; i >= 0; i--) {
     if(isDefined(values[i])) {
-      if(!isDefined(values[i + 1]) && i > 0) {
+      if(!isDefined(values[i + 1]) && i > 0)
         return int(values[i - 1]);
-      } else {
+      else
         return int(values[i]);
-      }
     }
   }
 
@@ -627,9 +577,8 @@ get_max_value(value) {
   num_players = get_players();
 
   for(i = num_players.size; i >= 0; i--) {
-    if(isDefined(values[i])) {
+    if(isDefined(values[i]))
       return int(values[i]);
-    }
   }
 
   return undefined;
@@ -644,20 +593,18 @@ spawn_manager_wait() {
   if(isDefined(self.script_wait)) {
     wait(self.script_wait);
 
-    if(isDefined(self.script_wait_add)) {
+    if(isDefined(self.script_wait_add))
       self.script_wait = self.script_wait + self.script_wait_add;
-    }
   } else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     coop_scalar = 1;
     players = get_players();
 
-    if(players.size == 2) {
+    if(players.size == 2)
       coop_scalar = 0.7;
-    } else if(players.size == 3) {
+    else if(players.size == 3)
       coop_scalar = 0.5;
-    } else if(players.size == 4) {
+    else if(players.size == 4)
       coop_scalar = 0.3;
-    }
 
     diff = self.script_wait_max - self.script_wait_min;
     wait(randomfloatrange(self.script_wait_min, self.script_wait_min + diff * coop_scalar));
@@ -704,21 +651,19 @@ spawn_manager_flag_cleared() {
 
 calculate_count() {
   if(!isDefined(self.sm_count)) {
-    if(isDefined(self.count) && self.count != 0) {
+    if(isDefined(self.count) && self.count != 0)
       self.sm_count = self.count;
-    } else {
+    else
       self.sm_count = 9999;
-    }
   }
 
   self.count_min = get_min_value(self.sm_count);
   self.count_max = get_max_value(self.sm_count);
 
-  if(isDefined(self.sm_id)) {
+  if(isDefined(self.sm_id))
     assert(self.count_max >= self.count_min, "Max range should be greater or equal to the min value for sm_count on spawn manager " + self.sm_id);
-  } else {
+  else
     assert(self.count_max >= self.count_min, "Max range should be greater or equal to the min value for sm_count on spawner with targetname " + self.targetname);
-  }
 
   self.count = spawn_manager_random_count(self.count_min, self.count_max + 1);
 }
@@ -765,9 +710,8 @@ spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_managers, pot
       level.spawn_manager_debug_hud_title.color = (1, 1, 1);
     }
 
-    if(!isDefined(level.spawn_manager_debug_hud)) {
+    if(!isDefined(level.spawn_manager_debug_hud))
       level.spawn_manager_debug_hud = [];
-    }
 
     level.spawn_manager_debug_hud_title settext("SPAWN MANAGER: Total AI: " + spawn_ai + "Active AI: " + active_ai + "/" + potential_ai + "Max AI: " + max_ai + "Active Managers: " + active_managers);
 
@@ -781,39 +725,34 @@ spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_managers, pot
       }
 
       if(isDefined(level.current_debug_spawn_manager) && level.debugactivemanagers[i] == level.current_debug_spawn_manager) {
-        if(!level.debugactivemanagers[i].enable) {
+        if(!level.debugactivemanagers[i].enable)
           level.spawn_manager_debug_hud[i].color = vectorscale((0, 1, 0), 0.4);
-        } else {
+        else
           level.spawn_manager_debug_hud[i].color = (0, 1, 0);
-        }
       } else if(level.debugactivemanagers[i].enable)
         level.spawn_manager_debug_hud[i].color = (1, 1, 1);
-      else {
+      else
         level.spawn_manager_debug_hud[i].color = vectorscale((1, 1, 1), 0.4);
-      }
 
       level.spawn_manager_debug_hud[i] settext("[" + level.debugactivemanagers[i].sm_id + "]" + " Count: " + level.debugactivemanagers[i].spawncount + "/" + level.debugactivemanagers[i].count + "(" + level.debugactivemanagers[i].count_min + "," + level.debugactivemanagers[i].count_max + ")" + " Active Count: " + level.debugactivemanagers[i].activeai.size + "/" + level.debugactivemanagers[i].sm_active_count + "(" + level.debugactivemanagers[i].sm_active_count_min + "," + level.debugactivemanagers[i].sm_active_count_max + ")" + " Group Size: " + level.debugactivemanagers[i].sm_group_size + "(" + level.debugactivemanagers[i].sm_group_size_min + "," + level.debugactivemanagers[i].sm_group_size_max + ")" + " Spawners: " + level.debugactivemanagers[i].spawners.size);
     }
 
     if(level.debugactivemanagers.size < level.spawn_manager_debug_hud.size) {
       for(i = level.debugactivemanagers.size; i < level.spawn_manager_debug_hud.size; i++) {
-        if(isDefined(level.spawn_manager_debug_hud[i])) {
+        if(isDefined(level.spawn_manager_debug_hud[i]))
           level.spawn_manager_debug_hud[i] destroy();
-        }
       }
     }
   }
 
   if(getdvar(#"_id_D0470A59") != "1") {
-    if(isDefined(level.spawn_manager_debug_hud_title)) {
+    if(isDefined(level.spawn_manager_debug_hud_title))
       level.spawn_manager_debug_hud_title destroy();
-    }
 
     if(isDefined(level.spawn_manager_debug_hud)) {
       for(i = 0; i < level.spawn_manager_debug_hud.size; i++) {
-        if(isDefined(level.spawn_manager_debug_hud) && isDefined(level.spawn_manager_debug_hud[i])) {
+        if(isDefined(level.spawn_manager_debug_hud) && isDefined(level.spawn_manager_debug_hud[i]))
           level.spawn_manager_debug_hud[i] destroy();
-        }
       }
 
       level.spawn_manager_debug_hud = undefined;
@@ -849,17 +788,15 @@ spawn_manager_debug_spawn_manager() {
         if(level.test_player buttonpressed("DPAD_UP")) {
           current_spawn_manager_index--;
 
-          if(current_spawn_manager_index < 0) {
+          if(current_spawn_manager_index < 0)
             current_spawn_manager_index = 0;
-          }
         }
 
         if(level.test_player buttonpressed("DPAD_DOWN")) {
           current_spawn_manager_index++;
 
-          if(current_spawn_manager_index > level.debugactivemanagers.size - 1) {
+          if(current_spawn_manager_index > level.debugactivemanagers.size - 1)
             current_spawn_manager_index = level.debugactivemanagers.size - 1;
-          }
         }
       }
 
@@ -883,9 +820,8 @@ spawn_manager_debug_spawn_manager() {
         }
       }
 
-      if(isDefined(level.current_debug_spawn_manager)) {
+      if(isDefined(level.current_debug_spawn_manager))
         level.current_debug_spawn_manager spawn_manager_debug_spawn_manager_values_dpad();
-      }
     } else
       destroy_tweak_hud_elements();
 
@@ -933,9 +869,8 @@ ent_print(text) {
 }
 
 spawn_manager_debug_spawn_manager_values_dpad() {
-  if(!isDefined(level.current_debug_index)) {
+  if(!isDefined(level.current_debug_index))
     level.current_debug_index = 0;
-  }
 
   if(!isDefined(level.spawn_manager_debug_hud2)) {
     level.spawn_manager_debug_hud2 = newhudelem();
@@ -1014,17 +949,15 @@ spawn_manager_debug_spawn_manager_values_dpad() {
     if(level.test_player buttonpressed("DPAD_DOWN")) {
       level.current_debug_index++;
 
-      if(level.current_debug_index > 7) {
+      if(level.current_debug_index > 7)
         level.current_debug_index = 7;
-      }
     }
 
     if(level.test_player buttonpressed("DPAD_UP")) {
       level.current_debug_index--;
 
-      if(level.current_debug_index < 0) {
+      if(level.current_debug_index < 0)
         level.current_debug_index = 0;
-      }
     }
   }
 
@@ -1033,34 +966,29 @@ spawn_manager_debug_spawn_manager_values_dpad() {
   decrease_value = 0;
 
   if(level.test_player buttonpressed("BUTTON_LTRIG")) {
-    if(level.test_player buttonpressed("DPAD_LEFT")) {
+    if(level.test_player buttonpressed("DPAD_LEFT"))
       decrease_value = 1;
-    }
 
-    if(level.test_player buttonpressed("DPAD_RIGHT")) {
+    if(level.test_player buttonpressed("DPAD_RIGHT"))
       increase_value = 1;
-    }
   }
 
   should_run_set_up = 0;
 
   if(increase_value || decrease_value) {
-    if(increase_value) {
+    if(increase_value)
       add = 1;
-    } else {
+    else
       add = -1;
-    }
 
     switch (level.current_debug_index) {
       case 0:
-        if(self.sm_active_count + add > self.sm_active_count_max) {
+        if(self.sm_active_count + add > self.sm_active_count_max)
           self.sm_active_count_max = self.sm_active_count + add;
-        }
 
         if(self.sm_active_count + add < self.sm_active_count_min) {
-          if(self.sm_active_count + add > 0) {
+          if(self.sm_active_count + add > 0)
             self.sm_active_count_min = self.sm_active_count + add;
-          }
         }
 
         should_run_set_up = 1;
@@ -1124,14 +1052,12 @@ spawn_manager_debug_spawn_manager_values_dpad() {
         }
 
         if(self.sm_spawner_count + add < self.sm_spawner_count_min) {
-          if(self.sm_spawner_count + add > 0) {
+          if(self.sm_spawner_count + add > 0)
             self.sm_spawner_count_min = self.sm_spawner_count + add;
-          }
         }
 
-        if(self.sm_spawner_count + add > self.sm_spawner_count_max) {
+        if(self.sm_spawner_count + add > self.sm_spawner_count_max)
           self.sm_spawner_count_max = self.sm_spawner_count + add;
-        }
 
         should_run_set_up = 1;
         self.sm_spawner_count = self.sm_spawner_count + add;
@@ -1157,9 +1083,8 @@ spawn_manager_debug_spawn_manager_values_dpad() {
     }
   }
 
-  if(should_run_set_up) {
+  if(should_run_set_up)
     level.current_debug_spawn_manager spawn_manager_debug_setup();
-  }
 
   if(isDefined(self)) {
     level.sm_active_count_title settext("sm_active_count: " + self.sm_active_count);
@@ -1261,13 +1186,11 @@ set_debug_hud_colors() {
 }
 
 spawn_manager_debug_setup() {
-  if(isDefined(level.current_debug_index) && level.current_debug_index != 5) {
+  if(isDefined(level.current_debug_index) && level.current_debug_index != 5)
     self.sm_spawner_count = spawn_manager_random_count(self.sm_spawner_count_min, self.sm_spawner_count_max + 1);
-  }
 
-  if(isDefined(level.current_debug_index) && level.current_debug_index != 0) {
+  if(isDefined(level.current_debug_index) && level.current_debug_index != 0)
     self.sm_active_count = spawn_manager_random_count(self.sm_active_count_min, self.sm_active_count_max + 1);
-  }
 
   self.spawners = self spawn_manager_get_spawners();
   assert(self.count >= self.count_min);
@@ -1292,35 +1215,27 @@ moniter_debug_hud2() {
 }
 
 destroy_tweak_hud_elements() {
-  if(isDefined(level.sm_active_count_title)) {
+  if(isDefined(level.sm_active_count_title))
     level.sm_active_count_title destroy();
-  }
 
-  if(isDefined(level.sm_active_count_min_hud)) {
+  if(isDefined(level.sm_active_count_min_hud))
     level.sm_active_count_min_hud destroy();
-  }
 
-  if(isDefined(level.sm_active_count_max_hud)) {
+  if(isDefined(level.sm_active_count_max_hud))
     level.sm_active_count_max_hud destroy();
-  }
 
-  if(isDefined(level.sm_group_size_min_hud)) {
+  if(isDefined(level.sm_group_size_min_hud))
     level.sm_group_size_min_hud destroy();
-  }
 
-  if(isDefined(level.sm_group_size_max_hud)) {
+  if(isDefined(level.sm_group_size_max_hud))
     level.sm_group_size_max_hud destroy();
-  }
 
-  if(isDefined(level.sm_spawner_count_title)) {
+  if(isDefined(level.sm_spawner_count_title))
     level.sm_spawner_count_title destroy();
-  }
 
-  if(isDefined(level.sm_spawner_count_min_hud)) {
+  if(isDefined(level.sm_spawner_count_min_hud))
     level.sm_spawner_count_min_hud destroy();
-  }
 
-  if(isDefined(level.sm_spawner_count_max_hud)) {
+  if(isDefined(level.sm_spawner_count_max_hud))
     level.sm_spawner_count_max_hud destroy();
-  }
 }

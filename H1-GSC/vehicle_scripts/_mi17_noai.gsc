@@ -48,13 +48,13 @@ init_local() {
 }
 
 set_deathanim_scene() {
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_0.anims = [];
   var_0.anims = common_scripts\utility::array_add(var_0.anims, % mi17_heli_hitreact_flyin_01);
   var_0.anims = common_scripts\utility::array_add(var_0.anims, % mi17_heli_hitreact_flyin_02);
   var_0.delay_crash = 1;
   maps\_vehicle::build_deathanim(var_0);
-  var_1 = spawnStruct();
+  var_1 = spawnstruct();
   var_1.anims = [];
   var_1.anims = common_scripts\utility::array_add(var_1.anims, % mi17_heli_hitreact_front);
   var_1.anims = common_scripts\utility::array_add(var_1.anims, % mi17_heli_hitreact_rear);
@@ -63,7 +63,7 @@ set_deathanim_scene() {
   var_1.alter_velocity = 1;
   var_1.delay_crash = 1;
   maps\_vehicle::build_deathanim(var_1, "unloading");
-  var_2 = spawnStruct();
+  var_2 = spawnstruct();
   var_2.anims = [];
   var_2.anims = common_scripts\utility::array_add(var_2.anims, % mi17_heli_hitreact_left);
   var_2.anims = common_scripts\utility::array_add(var_2.anims, % mi17_heli_hitreact_right);

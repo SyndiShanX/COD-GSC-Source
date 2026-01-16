@@ -23,6 +23,7 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_recon;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -45,7 +46,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_e31c5d7a = &ct_bots::function_e31c5d7a;
   callback::on_game_playing(&ct_core::function_1e84c767);
   globallogic_spawn::addsupportedspawnpointtype("ct");
-  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"acog", # "suppressed", # "stalker", # "stalker2"));
+  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"acog", #"suppressed", #"stalker", #"stalker2"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level flag::init("combat_training_started");
 
@@ -83,7 +84,7 @@ function_53d38216(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self.var_6b6241ac = undefined;
     self.var_45cac770 = undefined;
     self thread ct_utils::function_ee4639dd(-5);
@@ -142,21 +143,21 @@ function_b5955e0e(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 360000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 240000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 120000;
-  var_e7cc5e43[# "mp_offshore"][1] = 360000;
-  var_e7cc5e43[# "mp_offshore"][2] = 240000;
-  var_e7cc5e43[# "mp_offshore"][3] = 120000;
-  var_e7cc5e43[# "mp_seaside"][1] = 360000;
-  var_e7cc5e43[# "mp_seaside"][2] = 240000;
-  var_e7cc5e43[# "mp_seaside"][3] = 120000;
-  var_e7cc5e43[# "mp_silo"][1] = 360000;
-  var_e7cc5e43[# "mp_silo"][2] = 240000;
-  var_e7cc5e43[# "mp_silo"][3] = 120000;
-  var_e7cc5e43[# "mp_urban"][1] = 360000;
-  var_e7cc5e43[# "mp_urban"][2] = 240000;
-  var_e7cc5e43[# "mp_urban"][3] = 120000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 360000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 240000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 120000;
+  var_e7cc5e43[#"mp_offshore"][1] = 360000;
+  var_e7cc5e43[#"mp_offshore"][2] = 240000;
+  var_e7cc5e43[#"mp_offshore"][3] = 120000;
+  var_e7cc5e43[#"mp_seaside"][1] = 360000;
+  var_e7cc5e43[#"mp_seaside"][2] = 240000;
+  var_e7cc5e43[#"mp_seaside"][3] = 120000;
+  var_e7cc5e43[#"mp_silo"][1] = 360000;
+  var_e7cc5e43[#"mp_silo"][2] = 240000;
+  var_e7cc5e43[#"mp_silo"][3] = 120000;
+  var_e7cc5e43[#"mp_urban"][1] = 360000;
+  var_e7cc5e43[#"mp_urban"][2] = 240000;
+  var_e7cc5e43[#"mp_urban"][3] = 120000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(var_db89c655, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -199,7 +200,7 @@ function_fb0c03bc(b_success) {
 
 j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
-  level thread ct_bots::activate_bots(11, # "axis");
+  level thread ct_bots::activate_bots(11, #"axis");
   level thread function_98783e17();
   n_bomb_timer = int(gettime() + 1000 + int(360 * 1000));
   setmatchflag("bomb_timer_a", 1);
@@ -280,7 +281,7 @@ function_7e7652be() {
 }
 
 function_78a1b9ef() {
-  level endon(#"ct_fail_objective_killed", # "ct_player_success", # "ct_fail_timeover");
+  level endon(#"ct_fail_objective_killed", #"ct_player_success", #"ct_fail_timeover");
   self waittill(#"death");
 
   if(!level flag::get("ct_player_success")) {

@@ -8,7 +8,7 @@
 #namespace as_debug;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -16,7 +16,7 @@ function __init__() {
 }
 
 function debugdvars() {
-  while(true) {
+  while (true) {
     if(getdvarint("", 0)) {
       delete_all_ai_corpses();
     }
@@ -25,11 +25,11 @@ function debugdvars() {
 }
 
 function isdebugon() {
-  return getdvarint("") == 1 || (isDefined(anim.debugent) && anim.debugent == self);
+  return getdvarint("") == 1 || (isdefined(anim.debugent) && anim.debugent == self);
 }
 
 function drawdebuglineinternal(frompoint, topoint, color, durationframes) {
-  for(i = 0; i < durationframes; i++) {
+  for (i = 0; i < durationframes; i++) {
     line(frompoint, topoint, color);
     wait(0.05);
   }
@@ -42,7 +42,7 @@ function drawdebugline(frompoint, topoint, color, durationframes) {
 }
 
 function debugline(frompoint, topoint, color, durationframes) {
-  for(i = 0; i < (durationframes * 20); i++) {
+  for (i = 0; i < (durationframes * 20); i++) {
     line(frompoint, topoint, color);
     wait(0.05);
   }
@@ -62,10 +62,10 @@ function drawdebugcross(atpoint, radius, color, durationframes) {
 
 function updatedebuginfo() {
   self endon("death");
-  self.debuginfo = spawnStruct();
+  self.debuginfo = spawnstruct();
   self.debuginfo.enabled = getdvarint("") > 0;
   debugclearstate();
-  while(true) {
+  while (true) {
     wait(0.05);
     updatedebuginfointernal();
     wait(0.05);
@@ -73,7 +73,7 @@ function updatedebuginfo() {
 }
 
 function updatedebuginfointernal() {
-  if(isDefined(anim.debugent) && anim.debugent == self) {
+  if(isdefined(anim.debugent) && anim.debugent == self) {
     doinfo = 1;
   } else {
     doinfo = getdvarint("") > 0;
@@ -91,11 +91,11 @@ function updatedebuginfointernal() {
 }
 
 function drawdebugenttext(text, ent, color, channel) {
-  /
+  /# /
   #
-  assert(isDefined(ent));
+  assert(isdefined(ent));
   if(!getdvarint("")) {
-    if(!isDefined(ent.debuganimscripttime) || gettime() > ent.debuganimscripttime) {
+    if(!isdefined(ent.debuganimscripttime) || gettime() > ent.debuganimscripttime) {
       ent.debuganimscriptlevel = 0;
       ent.debuganimscripttime = gettime();
     }
@@ -115,15 +115,15 @@ function debugpushstate(statename, extrainfo) {
   if(ai_entnum > -1 && ai_entnum != self getentitynumber()) {
     return;
   }
-  assert(isDefined(self.debuginfo.states));
-  assert(isDefined(statename));
-  state = spawnStruct();
+  assert(isdefined(self.debuginfo.states));
+  assert(isdefined(statename));
+  state = spawnstruct();
   state.statename = statename;
   state.statelevel = self.debuginfo.statelevel;
   state.statetime = gettime();
   state.statevalid = 1;
   self.debuginfo.statelevel++;
-  if(isDefined(extrainfo)) {
+  if(isdefined(extrainfo)) {
     state.extrainfo = extrainfo + "";
   }
   self.debuginfo.states[self.debuginfo.states.size] = state;
@@ -137,12 +137,12 @@ function debugaddstateinfo(statename, extrainfo) {
   if(ai_entnum > -1 && ai_entnum != self getentitynumber()) {
     return;
   }
-  assert(isDefined(self.debuginfo.states));
-  if(isDefined(statename)) {
-    for(i = self.debuginfo.states.size - 1; i >= 0; i--) {
-      assert(isDefined(self.debuginfo.states[i]));
+  assert(isdefined(self.debuginfo.states));
+  if(isdefined(statename)) {
+    for (i = self.debuginfo.states.size - 1; i >= 0; i--) {
+      assert(isdefined(self.debuginfo.states[i]));
       if(self.debuginfo.states[i].statename == statename) {
-        if(!isDefined(self.debuginfo.states[i].extrainfo)) {
+        if(!isdefined(self.debuginfo.states[i].extrainfo)) {
           self.debuginfo.states[i].extrainfo = "";
         }
         self.debuginfo.states[i].extrainfo = self.debuginfo.states[i].extrainfo + (extrainfo + "");
@@ -151,8 +151,8 @@ function debugaddstateinfo(statename, extrainfo) {
     }
   } else if(self.debuginfo.states.size > 0) {
     lastindex = self.debuginfo.states.size - 1;
-    assert(isDefined(self.debuginfo.states[lastindex]));
-    if(!isDefined(self.debuginfo.states[lastindex].extrainfo)) {
+    assert(isdefined(self.debuginfo.states[lastindex]));
+    if(!isdefined(self.debuginfo.states[lastindex].extrainfo)) {
       self.debuginfo.states[lastindex].extrainfo = "";
     }
     self.debuginfo.states[lastindex].extrainfo = self.debuginfo.states[lastindex].extrainfo + (extrainfo + "");
@@ -164,27 +164,27 @@ function debugpopstate(statename, exitreason) {
     return;
   }
   ai_entnum = getdvarint("");
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   if(ai_entnum > -1 && ai_entnum != self getentitynumber()) {
     return;
   }
-  assert(isDefined(self.debuginfo.states));
-  if(isDefined(statename)) {
-    for(i = 0; i < self.debuginfo.states.size; i++) {
+  assert(isdefined(self.debuginfo.states));
+  if(isdefined(statename)) {
+    for (i = 0; i < self.debuginfo.states.size; i++) {
       if(self.debuginfo.states[i].statename == statename && self.debuginfo.states[i].statevalid) {
         self.debuginfo.states[i].statevalid = 0;
         self.debuginfo.states[i].exitreason = exitreason;
         self.debuginfo.statelevel = self.debuginfo.states[i].statelevel;
-        for(j = i + 1; j < self.debuginfo.states.size && self.debuginfo.states[j].statelevel > self.debuginfo.states[i].statelevel; j++) {
+        for (j = i + 1; j < self.debuginfo.states.size && self.debuginfo.states[j].statelevel > self.debuginfo.states[i].statelevel; j++) {
           self.debuginfo.states[j].statevalid = 0;
         }
         break;
       }
     }
   } else {
-    for(i = self.debuginfo.states.size - 1; i >= 0; i--) {
+    for (i = self.debuginfo.states.size - 1; i >= 0; i--) {
       if(self.debuginfo.states[i].statevalid) {
         self.debuginfo.states[i].statevalid = 0;
         self.debuginfo.states[i].exitreason = exitreason;
@@ -202,7 +202,7 @@ function debugclearstate() {
 }
 
 function debugshouldclearstate() {
-  if(isDefined(self.debuginfo) && isDefined(self.debuginfo.shouldclearonanimscriptchange) && self.debuginfo.shouldclearonanimscriptchange) {
+  if(isdefined(self.debuginfo) && isdefined(self.debuginfo.shouldclearonanimscriptchange) && self.debuginfo.shouldclearonanimscriptchange) {
     return true;
   }
   return false;
@@ -210,7 +210,7 @@ function debugshouldclearstate() {
 
 function debugcleanstatestack() {
   newarray = [];
-  for(i = 0; i < self.debuginfo.states.size; i++) {
+  for (i = 0; i < self.debuginfo.states.size; i++) {
     if(self.debuginfo.states[i].statevalid) {
       newarray[newarray.size] = self.debuginfo.states[i];
     }
@@ -220,7 +220,7 @@ function debugcleanstatestack() {
 
 function indent(depth) {
   indent = "";
-  for(i = 0; i < depth; i++) {
+  for (i = 0; i < depth; i++) {
     indent = indent + "";
   }
   return indent;
@@ -229,7 +229,7 @@ function indent(depth) {
 function debugdrawweightedpoints(entity, points, weights) {
   lowestvalue = 0;
   highestvalue = 0;
-  for(index = 0; index < points.size; index++) {
+  for (index = 0; index < points.size; index++) {
     if(weights[index] < lowestvalue) {
       lowestvalue = weights[index];
     }
@@ -237,7 +237,7 @@ function debugdrawweightedpoints(entity, points, weights) {
       highestvalue = weights[index];
     }
   }
-  for(index = 0; index < points.size; index++) {
+  for (index = 0; index < points.size; index++) {
     debugdrawweightedpoint(entity, points[index], weights[index], lowestvalue, highestvalue);
   }
 }

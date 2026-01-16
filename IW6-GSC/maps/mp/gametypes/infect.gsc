@@ -22,7 +22,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerTimeLimitDvar(level.gameType, 10);
@@ -50,15 +52,13 @@ main() {
   level.onTimeLimit = ::onTimeLimit;
   level.bypassClassChoiceFunc = ::alwaysGamemodeClass;
 
-  if(level.matchRules_damageMultiplier) {
+  if(level.matchRules_damageMultiplier)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   game["dialog"]["gametype"] = "infected";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
 
   game["dialog"]["offense_obj"] = "infct_hint";
 }
@@ -92,18 +92,18 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", &"OBJECTIVES_INFECT");
-  setObjectiveText("axis", &"OBJECTIVES_INFECT");
+  setObjectiveText("allies", & "OBJECTIVES_INFECT");
+  setObjectiveText("axis", & "OBJECTIVES_INFECT");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_INFECT");
-    setObjectiveScoreText("axis", &"OBJECTIVES_INFECT");
+    setObjectiveScoreText("allies", & "OBJECTIVES_INFECT");
+    setObjectiveScoreText("axis", & "OBJECTIVES_INFECT");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_INFECT_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_INFECT_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_INFECT_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_INFECT_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_INFECT_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_INFECT_HINT");
 
   initSpawns();
 
@@ -167,9 +167,8 @@ onPlayerConnect() {
 
     if(gameFlag("prematch_done")) {
       player.gameModeJoinedAtStart = false;
-      if(isDefined(level.infect_choseFirstInfected) && level.infect_choseFirstInfected) {
+      if(isDefined(level.infect_choseFirstInfected) && level.infect_choseFirstInfected)
         player.survivalStartTime = GetTime();
-      }
     }
 
     if(isDefined(level.infect_players[player.name])) {
@@ -242,21 +241,18 @@ onSpawnPlayer() {
       level.infect_choseFirstInfected = true;
       level.infect_allowSuicide = true;
       foreach(player in level.players) {
-        if(isDefined(player.infect_isBeingChosen)) {
+        if(isDefined(player.infect_isBeingChosen))
           player.infect_isBeingChosen = undefined;
-        }
       }
     }
 
     foreach(player in level.players) {
-      if(isDefined(player.isInitialInfected)) {
+      if(isDefined(player.isInitialInfected))
         player thread setInitialToNormalInfected();
-      }
     }
 
-    if(level.infect_teamScores["axis"] == 1) {
+    if(level.infect_teamScores["axis"] == 1)
       self.isInitialInfected = true;
-    }
 
     self initSurvivalTime(true);
   }
@@ -281,9 +277,8 @@ spawnWithPlayerSecondary() {
   if(playerWeapons.size > 1) {
     if(playerCurrentWeapon == "iw6_knifeonly_mp") {
       foreach(weapon in playerWeapons) {
-        if(weapon != playerCurrentWeapon) {
+        if(weapon != playerCurrentWeapon)
           self SetSpawnWeapon(weapon);
-        }
       }
     }
   }
@@ -293,13 +288,11 @@ setDefaultAmmoClip(team) {
   setDefaultAmmoClip = true;
 
   if(isDefined(self.isInitialInfected)) {
-    if(isUsingDefaultClass(team, 1)) {
+    if(isUsingDefaultClass(team, 1))
       setDefaultAmmoClip = false;
-    }
   } else {
-    if(isUsingDefaultClass(team, 0)) {
+    if(isUsingDefaultClass(team, 0))
       setDefaultAmmoClip = false;
-    }
   }
 
   return setDefaultAmmoClip;
@@ -325,9 +318,8 @@ onSpawnFinished() {
 
     self setMoveSpeedScale(CONST_INFECTED_MOVE_SCALAR);
 
-    if(setDefaultAmmoClip("axis")) {
+    if(setDefaultAmmoClip("axis"))
       self SetWeaponAmmoClip(CONST_INFECTED_LETHAL, 1);
-    }
 
     self thread setInfectedModels();
   }
@@ -409,9 +401,8 @@ chooseFirstInfected() {
   firstInfectedPlayer setFirstInfected(true);
 
   foreach(player in level.players) {
-    if(player == firstInfectedPlayer) {
+    if(player == firstInfectedPlayer)
       continue;
-    }
     player.survivalStartTime = GetTime();
   }
 }
@@ -419,35 +410,30 @@ chooseFirstInfected() {
 setFirstInfected(wasChosen) {
   self endon("disconnect");
 
-  if(wasChosen) {
+  if(wasChosen)
     self.infect_isBeingChosen = true;
-  }
 
-  while(!isReallyAlive(self) || self isUsingRemote()) {
+  while(!isReallyAlive(self) || self isUsingRemote())
     wait(0.05);
-  }
 
   if(isDefined(self.isCarrying) && self.isCarrying == true) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
 
-  while(self IsMantling()) {
+  while(self IsMantling())
     wait(0.05);
-  }
 
-  while(!self isOnGround() && !self IsOnLadder()) {
+  while(!self isOnGround() && !self IsOnLadder())
     wait(0.05);
-  }
 
   if(self isJuggernaut()) {
     self notify("lost_juggernaut");
     wait(0.05);
   }
 
-  while(!isAlive(self)) {
+  while(!isAlive(self))
     waitframe();
-  }
 
   if(wasChosen) {
     self maps\mp\gametypes\_menus::addToTeam("axis", undefined, true);
@@ -465,9 +451,8 @@ setFirstInfected(wasChosen) {
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
 
-  if(isDefined(self.setSpawnpoint)) {
+  if(isDefined(self.setSpawnpoint))
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
-  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -481,13 +466,11 @@ setFirstInfected(wasChosen) {
   self.faux_spawn_infected = true;
   self thread maps\mp\gametypes\_playerlogic::spawnPlayer(true);
 
-  if(wasChosen) {
+  if(wasChosen)
     level.infect_players[self.name] = true;
-  }
 
-  foreach(player in level.players) {
-    player thread maps\mp\gametypes\_hud_message::SplashNotify("first_infected");
-  }
+  foreach(player in level.players)
+  player thread maps\mp\gametypes\_hud_message::SplashNotify("first_infected");
   level thread teamPlayerCardSplash("callout_first_infected", self);
   playSoundOnPlayers("mp_enemy_obj_captured");
 
@@ -499,45 +482,38 @@ setInitialToNormalInfected(gotKill, sMeansOfDeath) {
 
   self.isInitialInfected = undefined;
   self.changingToRegularInfected = true;
-  if(isDefined(gotKill)) {
+  if(isDefined(gotKill))
     self.changingToRegularInfectedByKill = true;
-  }
 
-  while(!isReallyAlive(self)) {
+  while(!isReallyAlive(self))
     wait(0.05);
-  }
 
   if(isDefined(self.isCarrying) && self.isCarrying == true) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
 
-  while(self IsMantling()) {
+  while(self IsMantling())
     wait(0.05);
-  }
 
-  while(!self isOnGround()) {
+  while(!self isOnGround())
     wait(0.05);
-  }
 
   if(self isJuggernaut()) {
     self notify("lost_juggernaut");
     wait(0.05);
   }
 
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE") {
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE")
     wait(1.2);
-  }
 
-  while(!isReallyAlive(self)) {
+  while(!isReallyAlive(self))
     wait(0.05);
-  }
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
 
-  if(isDefined(self.setSpawnpoint)) {
+  if(isDefined(self.setSpawnpoint))
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
-  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -557,9 +533,9 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   wasSuicide = false;
 
   if(self.team == "allies" && isDefined(attacker)) {
-    if(isPlayer(attacker) && attacker != self) {
+    if(isPlayer(attacker) && attacker != self)
       processKill = true;
-    } else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
+    else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
       processKill = true;
       wasSuicide = true;
     }
@@ -587,15 +563,14 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     if(wasSuicide) {
       if(level.infect_teamScores["axis"] > 1) {
         foreach(player in level.players) {
-          if(isDefined(player.isInitialInfected)) {
+          if(isDefined(player.isInitialInfected))
             player thread setInitialToNormalInfected();
-          }
         }
       }
     } else {
-      if(isDefined(attacker.isInitialInfected)) {
+      if(isDefined(attacker.isInitialInfected))
         attacker thread setInitialToNormalInfected(true, sMeansOfDeath);
-      } else {
+      else {
         attacker thread maps\mp\gametypes\_rank::xpEventPopup("infected_survivor");
         maps\mp\gametypes\_gamescore::givePlayerScore("infected_survivor", attacker, self, true);
         attacker thread maps\mp\gametypes\_rank::giveRankXP("infected_survivor");
@@ -646,9 +621,8 @@ onFinalSurvivor() {
         level.infect_awardedFinalSurvivor = true;
       }
       thread teamPlayerCardSplash("callout_final_survivor", player);
-      if(!player isJuggernaut()) {
+      if(!player isJuggernaut())
         level thread finalSurvivorUAV(player);
-      }
       break;
     }
   }
@@ -664,9 +638,8 @@ finalSurvivorUAV(finalPlayer) {
   removeUAV = false;
   level.radarMode["axis"] = "normal_radar";
   foreach(player in level.players) {
-    if(player.team == "axis") {
+    if(player.team == "axis")
       player.radarMode = "normal_radar";
-    }
   }
   setTeamRadarStrength("axis", 1);
 
@@ -684,9 +657,8 @@ finalSurvivorUAV(finalPlayer) {
       setTeamRadar("axis", 1);
       removeUAV = true;
 
-      foreach(player in level.players) {
-        player playLocalSound("recondrone_tag");
-      }
+      foreach(player in level.players)
+      player playLocalSound("recondrone_tag");
     }
   }
 }
@@ -715,9 +687,8 @@ monitorDisconnect() {
   self endon("infect_monitor_disconnect");
 
   team = self.team;
-  if(!isDefined(team) && isDefined(self.bot_team)) {
+  if(!isDefined(team) && isDefined(self.bot_team))
     team = self.bot_team;
-  }
 
   self waittill("disconnect");
 
@@ -729,9 +700,8 @@ monitorDisconnect() {
         onFinalSurvivor();
       } else if(team == "axis" && level.infect_teamScores["axis"] == 1) {
         foreach(player in level.players) {
-          if(player != self && player.team == "axis") {
+          if(player != self && player.team == "axis")
             player setFirstInfected(false);
-          }
         }
       }
     } else if(level.infect_teamScores["allies"] == 0) {
@@ -775,9 +745,8 @@ getTeamSize(team) {
     if(player.sessionstate == "spectator" && !player.spectatekillcam) {
       continue;
     }
-    if(player.team == team) {
+    if(player.team == team)
       size++;
-    }
   }
 
   return size;
@@ -794,9 +763,9 @@ updateTeamScores() {
 }
 
 setSpecialLoadouts() {
-  if(isUsingDefaultClass("allies", 0)) {
+  if(isUsingDefaultClass("allies", 0))
     level.infect_loadouts["allies"] = getMatchRulesSpecialClass("allies", 0);
-  } else {
+  else {
     level.infect_loadouts["allies"]["loadoutPrimary"] = "iw6_maul";
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment"] = "none";
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment2"] = "none";
@@ -905,14 +874,12 @@ initSurvivalTime(infected) {
 }
 
 setSurvivalTime(infected) {
-  if(!isDefined(self.survivalStartTime)) {
+  if(!isDefined(self.survivalStartTime))
     self.survivalStartTime = self.spawnTime;
-  }
 
   timeSurvived = int((GetTime() - self.survivalStartTime) / 1000);
-  if(timeSurvived > 999) {
+  if(timeSurvived > 999)
     timeSurvived = 999;
-  }
   self setExtraScore0(timeSurvived);
 
   if(isDefined(infected) && infected) {

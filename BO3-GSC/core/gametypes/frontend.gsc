@@ -32,14 +32,14 @@ function callback_actorspawnedfrontend(spawner) {
 }
 
 function main() {
-  level.callbackstartgametype = &callback_void;
-  level.callbackplayerconnect = &callback_playerconnect;
-  level.callbackplayerdisconnect = &callback_void;
-  level.callbackentityspawned = &callback_void;
-  level.callbackactorspawned = &callback_actorspawnedfrontend;
+  level.callbackstartgametype = & callback_void;
+  level.callbackplayerconnect = & callback_playerconnect;
+  level.callbackplayerdisconnect = & callback_void;
+  level.callbackentityspawned = & callback_void;
+  level.callbackactorspawned = & callback_actorspawnedfrontend;
   level.orbis = getdvarstring("orbisGame") == "true";
   level.durango = getdvarstring("durangoGame") == "true";
-  scene::add_scene_func("sb_frontend_black_market", &black_market_play, "play");
+  scene::add_scene_func("sb_frontend_black_market", & black_market_play, "play");
   clientfield::register("world", "first_time_flow", 1, getminbitcountfornum(1), "int");
   clientfield::register("world", "cp_bunk_anim_type", 1, getminbitcountfornum(1), "int");
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int");
@@ -79,15 +79,15 @@ function set_current_safehouse_on_client() {
 
 function zm_frontend_zombie_logic() {
   wait(5);
-  a_sp_zombie = getEntArray("sp_zombie_frontend", "targetname");
-  while(true) {
+  a_sp_zombie = getentarray("sp_zombie_frontend", "targetname");
+  while (true) {
     a_sp_zombie = array::randomize(a_sp_zombie);
     foreach(sp_zombie in a_sp_zombie) {
-      while(getaicount() >= 20) {
+      while (getaicount() >= 20) {
         wait(1);
       }
       ai_zombie = sp_zombie spawnfromspawner();
-      if(isDefined(ai_zombie)) {
+      if(isdefined(ai_zombie)) {
         ai_zombie sethighdetail(1);
         ai_zombie setavoidancemask("avoid all");
         ai_zombie pushactors(0);
@@ -120,7 +120,7 @@ function black_market_play(a_ents) {
 
 function black_market_dialog() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("menuresponse", menu, response);
     if(menu != "BlackMarket") {
       continue;
@@ -179,7 +179,7 @@ function black_market_dialog() {
 }
 
 function play_black_market_dialog(dialogalias) {
-  if(!isDefined(dialogalias)) {
+  if(!isdefined(dialogalias)) {
     return;
   }
   level.blackmarketdealer stopsounds();
@@ -248,7 +248,7 @@ function play_black_market_animation(animname, idleanimname, originent, tagangle
 function dailychallengedevguiinit() {
   setdvar("", 0);
   num_rows = tablelookuprowcount("");
-  for(row_num = 2; row_num < num_rows; row_num++) {
+  for (row_num = 2; row_num < num_rows; row_num++) {
     challenge_name = tablelookupcolumnforrow("", row_num, 5);
     challenge_name = getsubstr(challenge_name, 11);
     display_row_num = row_num - 2;
@@ -259,7 +259,7 @@ function dailychallengedevguiinit() {
 
 function dailychallengedevguithink() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     daily_challenge_cmd = getdvarint("");
     if(daily_challenge_cmd == 0 || !sessionmodeiszombiesgame()) {
       wait(1);
@@ -277,7 +277,7 @@ function dailychallengedevguithink() {
 
 function function_4afc218() {
   setdvar("", 0);
-  while(true) {
+  while (true) {
     if(getdvarint("") <= 0 || !sessionmodeiszombiesgame()) {
       wait(1);
       continue;
@@ -300,7 +300,7 @@ function function_4afc218() {
 
 function function_ead1dc1a() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     if(getdvarstring("") == "") {
       wait(0.2);
       continue;

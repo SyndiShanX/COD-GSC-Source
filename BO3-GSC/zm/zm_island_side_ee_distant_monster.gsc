@@ -28,7 +28,7 @@
 #namespace zm_island_side_ee_distant_monster;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_distant_monster", &__init__, undefined, undefined);
+  system::register("zm_island_side_ee_distant_monster", & __init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -42,7 +42,7 @@ function main() {
 function on_player_spawned() {}
 
 function function_e94b80b9() {
-  while(level.round_number < 50) {
+  while (level.round_number < 50) {
     level waittill("start_of_round");
   }
   var_d95fb733 = 0;
@@ -54,7 +54,7 @@ function function_e94b80b9() {
     }
     wait(2);
   }
-  while(!(isDefined(var_d95fb733) && var_d95fb733));
+  while (!(isdefined(var_d95fb733) && var_d95fb733));
   function_549b07cb();
 }
 
@@ -70,7 +70,7 @@ function function_549b07cb() {
   var_53564731 linkto(e_vehicle);
   e_vehicle setspeed(5, 100);
   e_vehicle startpath();
-  var_53564731 playSound("zmb_distant_monster_mash");
+  var_53564731 playsound("zmb_distant_monster_mash");
   e_vehicle waittill("reached_end_node");
   e_vehicle.delete_on_death = 1;
   e_vehicle notify("death");
@@ -80,7 +80,7 @@ function function_549b07cb() {
 }
 
 function function_abe01b4d() {
-  zm_devgui::add_custom_devgui_callback(&function_603ad7e1);
+  zm_devgui::add_custom_devgui_callback( & function_603ad7e1);
   level.var_7b18dfab = 0;
   adddebugcommand("");
   adddebugcommand("");

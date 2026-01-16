@@ -19,8 +19,8 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "misdirection_enable", 1, 1, "int", &function_ec87e5c5, 0, 0);
-  clientfield::register("scriptmover", "makedecoy", 1, 1, "int", &function_ac2a831d, 0, 0);
+  clientfield::register("toplayer", "misdirection_enable", 1, 1, "int", & function_ec87e5c5, 0, 0);
+  clientfield::register("scriptmover", "makedecoy", 1, 1, "int", & function_ac2a831d, 0, 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("armor_pl", 0, "armor_on", undefined, 1, "mc/mtl_power_armor", 0);
 }
 
@@ -35,7 +35,7 @@ function function_2c16a75b(localclientnum) {
   amplitude = randomfloatrange(4, 12);
   dz = randomfloatrange(0.2, 1);
   z = randomint(360);
-  while(true) {
+  while (true) {
     z = z + dz;
     if(z > 360) {
       z = int(z) % 360;
@@ -50,8 +50,8 @@ function function_2c16a75b(localclientnum) {
 function function_ac2a831d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.decoy = spawn(localclientnum, self.origin, "script_model");
-    if(isDefined(self.decoy)) {
-      self.decoy setModel("veh_t7_wasp_cybercom");
+    if(isdefined(self.decoy)) {
+      self.decoy setmodel("veh_t7_wasp_cybercom");
       self.decoy.angles = (0, randomint(360), 0);
       self.decoy hide();
       self.decoy thread function_2c16a75b();
@@ -66,15 +66,15 @@ function function_ac2a831d(localclientnum, oldval, newval, bnewent, binitialsnap
       var_93429fd9 = 0.6;
       self.decoy mapshaderconstant(localclientnum, 0, var_aa5d763a, var_fc81e73c, var_754d7044, var_e754df7f, var_595c4eba);
       self.decoy mapshaderconstant(localclientnum, 0, var_6c5c3132, var_93429fd9, 0, 0, 0);
-      playFXOnTag(localclientnum, "vehicle/fx_veh_dni_wasp_rez_in", self.decoy, "tag_origin");
+      playfxontag(localclientnum, "vehicle/fx_veh_dni_wasp_rez_in", self.decoy, "tag_origin");
       wait(0.25);
       self.decoy show();
     }
-    self playSound(0, "gdt_cybercore_decoy_spawn");
-    self.snd = self playLoopSound("gdt_cybercore_decoy_lp", 0.75);
+    self playsound(0, "gdt_cybercore_decoy_spawn");
+    self.snd = self playloopsound("gdt_cybercore_decoy_lp", 0.75);
     self thread function_4fbb807c(self.origin);
-  } else if(isDefined(self.decoy)) {
-    playFXOnTag(localclientnum, "vehicle/fx_veh_dni_wasp_rez_out", self.decoy, "tag_origin");
+  } else if(isdefined(self.decoy)) {
+    playfxontag(localclientnum, "vehicle/fx_veh_dni_wasp_rez_out", self.decoy, "tag_origin");
     self.decoy duplicate_render::set_dr_flag("armor_on", 0);
     decoy = self.decoy;
     wait(0.25);
@@ -84,5 +84,5 @@ function function_ac2a831d(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_4fbb807c(sndorigin) {
   self waittill("entityshutdown");
-  playSound(0, "gdt_cybercore_decoy_delete", sndorigin);
+  playsound(0, "gdt_cybercore_decoy_delete", sndorigin);
 }

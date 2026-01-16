@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_grappler;
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_blight_father;
 
 autoexec __init__system__() {
@@ -21,19 +22,19 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "fx8_blightfather_weakspot_sack_amb"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
-  level._effect[# "fx8_blightfather_weakspot_elbow_amb"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
-  level._effect[# "fx8_blightfather_weakspot_jaw_amb"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
-  level._effect[# "fx8_plyr_pstfx_vomit_loop"] = "player/fx8_plyr_pstfx_vomit_loop";
-  level._effect[# "fx8_blightfather_vomit"] = "zm_ai/fx8_blightfather_vomit";
-  level._effect[# "fx8_blightfather_vomit_object"] = "zm_ai/fx8_blightfather_vomit_object";
-  level._effect[# "fx8_blightfather_vomit_purchase"] = "zm_ai/fx8_blightfather_vomit_purchase";
-  level._effect[# "fx8_blightfather_vomit_statue_purchase"] = "zm_ai/fx8_blightfather_vomit_statue_purchase";
-  level._effect[# "fx8_blightfather_vomit_box_purchase"] = "zm_ai/fx8_blightfather_vomit_box_purchase";
-  level._effect[# "fx8_blightfather_vomit_craft_purchase"] = "zm_ai/fx8_blightfather_vomit_craft_purchase";
-  level._effect[# "fx8_blightfather_maggot_spawn_burst"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
-  level._effect[# "fx8_blightfather_chaos_missle"] = "zm_ai/fx8_blightfather_chaos_missle";
-  level._effect[# "fx8_blightfather_maggot_death_exp"] = "zm_ai/fx8_blightfather_maggot_death_exp";
+  level._effect[#"fx8_blightfather_weakspot_sack_amb"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
+  level._effect[#"fx8_blightfather_weakspot_elbow_amb"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
+  level._effect[#"fx8_blightfather_weakspot_jaw_amb"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
+  level._effect[#"fx8_plyr_pstfx_vomit_loop"] = "player/fx8_plyr_pstfx_vomit_loop";
+  level._effect[#"fx8_blightfather_vomit"] = "zm_ai/fx8_blightfather_vomit";
+  level._effect[#"fx8_blightfather_vomit_object"] = "zm_ai/fx8_blightfather_vomit_object";
+  level._effect[#"fx8_blightfather_vomit_purchase"] = "zm_ai/fx8_blightfather_vomit_purchase";
+  level._effect[#"fx8_blightfather_vomit_statue_purchase"] = "zm_ai/fx8_blightfather_vomit_statue_purchase";
+  level._effect[#"fx8_blightfather_vomit_box_purchase"] = "zm_ai/fx8_blightfather_vomit_box_purchase";
+  level._effect[#"fx8_blightfather_vomit_craft_purchase"] = "zm_ai/fx8_blightfather_vomit_craft_purchase";
+  level._effect[#"fx8_blightfather_maggot_spawn_burst"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
+  level._effect[#"fx8_blightfather_chaos_missle"] = "zm_ai/fx8_blightfather_chaos_missle";
+  level._effect[#"fx8_blightfather_maggot_death_exp"] = "zm_ai/fx8_blightfather_maggot_death_exp";
   level.grappler_beam = "zod_blight_father_grapple_beam";
   footsteps::registeraitypefootstepcb(#"blight_father", &function_958ba8d1);
   clientfield::register("actor", "blight_father_amb_sac_clientfield", 1, 1, "int", &function_192c82f8, 0, 0);
@@ -88,7 +89,7 @@ private function_7d5fa1ae(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_c6aa29ea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_cc8c05d5 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_le");
+    self.var_cc8c05d5 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_le");
     return;
   }
 
@@ -100,7 +101,7 @@ private function_c6aa29ea(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_caf74103(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_e844c6a2 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_ri");
+    self.var_e844c6a2 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_ri");
     return;
   }
 
@@ -112,7 +113,7 @@ private function_caf74103(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_bc64a2a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_81531422 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_le_fx");
+    self.var_81531422 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_le_fx");
     return;
   }
 
@@ -124,7 +125,7 @@ private function_bc64a2a(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
 private function_c4fff539(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_40cb39ba = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_ri_fx");
+    self.var_40cb39ba = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_ri_fx");
     return;
   }
 
@@ -136,7 +137,7 @@ private function_c4fff539(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_de0a50df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_2beadf7 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_jaw_amb"], self, "tag_jaw");
+    self.var_2beadf7 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_jaw_amb"], self, "tag_jaw");
     return;
   }
 
@@ -149,16 +150,16 @@ private function_de0a50df(localclientnum, oldval, newval, bnewent, binitialsnap,
 private function_2c098ccc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 1:
-      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_purchase"], self, "tag_origin");
+      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_purchase"], self, "tag_origin");
       break;
     case 2:
-      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_statue_purchase"], self, "tag_origin");
+      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_statue_purchase"], self, "tag_origin");
       break;
     case 3:
-      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_box_purchase"], self, "tag_origin");
+      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_box_purchase"], self, "tag_origin");
       break;
     case 4:
-      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_craft_purchase"], self, "tag_origin");
+      self.var_32caa02 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_craft_purchase"], self, "tag_origin");
       break;
     default:
       if(isDefined(self.var_32caa02)) {
@@ -198,12 +199,12 @@ private tonguegrabrumble(localclientnum, oldvalue, newvalue, bnewent, binitialsn
 
 private function_59f8f265(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_b0d99f6 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit"], self, "tag_jaw");
+    self.var_b0d99f6 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit"], self, "tag_jaw");
     return;
   }
 
   if(newval == 2) {
-    self.var_b0d99f6 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_object"], self, "tag_jaw");
+    self.var_b0d99f6 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_object"], self, "tag_jaw");
     return;
   }
 
@@ -214,11 +215,11 @@ private function_59f8f265(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 private function_67ad42f3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_le");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_le");
 }
 
 private function_f102952d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_ri");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_ri");
 }
 
 private function_192c82f8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -236,7 +237,7 @@ private function_192c82f8(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_e47c2324(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_f2668f6d = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_chaos_missle"], self, "tag_origin");
+    self.var_f2668f6d = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_chaos_missle"], self, "tag_origin");
     return;
   }
 
@@ -250,8 +251,8 @@ private function_f02b0934(localclientnum, oldvalue, newvalue, bnewent, binitials
   angles = self.angles;
 
   if(isDefined(position) && isDefined(angles)) {
-    playFX(localclientnum, level._effect[# "fx8_blightfather_maggot_death_exp"], position, anglesToForward(angles), anglestoup(angles));
-    function_2a9101fe(localclientnum, # "hash_7867f8f9aaaa0c40", position);
+    playFX(localclientnum, level._effect[#"fx8_blightfather_maggot_death_exp"], position, anglesToForward(angles), anglestoup(angles));
+    function_2a9101fe(localclientnum, #"hash_7867f8f9aaaa0c40", position);
   }
 
   earthquake(localclientnum, 0.4, 0.8, self.origin, 300);
@@ -309,7 +310,7 @@ private function_2d7f68ab(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 
   if(newval) {
-    self.var_185f551 = playfxoncamera(localclientnum, level._effect[# "fx8_plyr_pstfx_vomit_loop"]);
+    self.var_185f551 = playfxoncamera(localclientnum, level._effect[#"fx8_plyr_pstfx_vomit_loop"]);
     self postfx::playpostfxbundle("pstfx_zm_caustic_glob");
     self thread function_1a4f64a();
     self notify(#"hash_6bc06e9af30f987");
@@ -327,7 +328,7 @@ private function_2d7f68ab(localclientnum, oldval, newval, bnewent, binitialsnap,
 function_1a4f64a() {
   self notify("6dcd79d7489a1b1");
   self endon("6dcd79d7489a1b1");
-  self endoncallback(&function_43ec7ca3, # "death");
+  self endoncallback(&function_43ec7ca3, #"death");
   self.var_7fd3b200 = 0;
   self thread function_cf88b888();
   self waittill(#"hash_3af6fe8d4a8fac02");
@@ -338,7 +339,7 @@ function_1a4f64a() {
 function_cf88b888() {
   self notify("77cd1973e51a1a17");
   self endon("77cd1973e51a1a17");
-  self endoncallback(&function_43ec7ca3, # "death", # "hash_3af6fe8d4a8fac02");
+  self endoncallback(&function_43ec7ca3, #"death", #"hash_3af6fe8d4a8fac02");
   var_893a571 = 0;
   self playrenderoverridebundle("rob_zm_viewarm_vomit");
 
@@ -360,7 +361,7 @@ function_cf88b888() {
 function_1ca2497b() {
   self notify("6b4310a91dda8e0b");
   self endon("6b4310a91dda8e0b");
-  self endoncallback(&function_43ec7ca3, # "death", # "hash_6bc06e9af30f987");
+  self endoncallback(&function_43ec7ca3, #"death", #"hash_6bc06e9af30f987");
   var_e935ecce = 0;
 
   while(!var_e935ecce) {

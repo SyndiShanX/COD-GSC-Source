@@ -144,11 +144,11 @@ spotlight_fx() {
 }
 
 spotlight_fx_spawn() {
-  org = spawn("script_model", self.origin);
+  org = Spawn("script_model", self.origin);
   org.angles = self.angles;
-  org setModel("tag_origin");
-  playFXOnTag(level._effect["spotlight_beam"], org, "tag_origin");
-  org playLoopSound("ber3b_lightbulb_loop");
+  org SetModel("tag_origin");
+  PlayFXOnTag(level._effect["spotlight_beam"], org, "tag_origin");
+  org playloopsound("ber3b_lightbulb_loop");
   self.fxOrg = org;
   self thread spotlight_damage_think();
 }
@@ -159,8 +159,8 @@ spotlight_damage_think() {
   }
   trig = undefined;
   model_undamaged = undefined;
-  ents = getEntArray(self.target, "targetname");
-  for(i = 0; i < ents.size; i++) {
+  ents = GetEntArray(self.target, "targetname");
+  for (i = 0; i < ents.size; i++) {
     ent = ents[i];
     if(ent.classname == "trigger_damage") {
       trig = ent;
@@ -188,7 +188,7 @@ spotlight_damage_think() {
   model_undamaged Hide();
   model_damaged Show();
   if(isDefined(self.fxOrg)) {
-    playFX(level._effect["spotlight_burst"], self.fxOrg.origin, self.fxOrg.angles);
+    PlayFX(level._effect["spotlight_burst"], self.fxOrg.origin, self.fxOrg.angles);
     if(self.targetname != "struct_spotlight_fx_non_prime") {
       light SetLightIntensity(light GetLightIntensity() - (light.ogIntensity / 2));
     }
@@ -219,7 +219,7 @@ set_vol_fog(section) {
 
 vision_sets_init() {
   VisionSetNaked("Ber3b", 0.1);
-  visionset_changetrigs = getEntArray("set_vision", "targetname");
+  visionset_changetrigs = GetEntArray("set_vision", "targetname");
   if(!isDefined(visionset_changetrigs) || visionset_changetrigs.size <= 0) {
     return;
   }
@@ -238,7 +238,7 @@ vision_set_trigger_think() {
   } else {
     visionSetTransTime = 1;
   }
-  while(1) {
+  while (1) {
     self waittill("trigger", player);
     if(IsPlayer(player)) {
       if(isDefined(player.activeVisionSet)) {
@@ -273,7 +273,7 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -284,7 +284,7 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
 }
 
 fire_flicker_init() {
-  lights = getEntArray("firecaster", "targetname");
+  lights = GetEntArray("firecaster", "targetname");
   if(!isDefined(lights) || lights.size <= 0) {
     return;
   }
@@ -294,10 +294,10 @@ fire_flicker_init() {
 ber3b_firelight() {
   full = self GetLightIntensity();
   old_intensity = full;
-  while(1) {
+  while (1) {
     intensity = RandomFloatRange(full * 0.63, full * 1.2);
     timer = RandomFloatRange(2, 5);
-    for(i = 0; i < timer; i++) {
+    for (i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
       self SetLightIntensity(new_intensity);
       wait(0.05);
@@ -360,13 +360,13 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
-  while(1) {
+  while (1) {
     burst = RandomIntRange(burstMin, burstMax);
-    for(i = 0; i < burst; i++) {
+    for (i = 0; i < burst; i++) {
       traceDist = 10000;
-      target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+      target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
       BulletTracer(self.origin, target, false);
-      playFX(muzzleFlash, self.origin, anglesToForward(self.angles));
+      PlayFX(muzzleFlash, self.origin, AnglesToForward(self.angles));
       if(RandomInt(100) <= soundChance) {
         thread play_sound_in_space(fireSound, self.origin);
       }
@@ -381,10 +381,10 @@ ambient_aaa_fx(endonString) {
     level endon(endonString);
   }
   self thread ambient_aaa_fx_rotate(endonString);
-  while(1) {
+  while (1) {
     firetime = RandomIntRange(3, 8);
-    for(i = 0; i < firetime * 5; i++) {
-      playFX(level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
+    for (i = 0; i < firetime * 5; i++) {
+      PlayFX(level._effect["aaa_tracer"], self.origin, AnglesToForward(self.angles));
       wait(RandomFloatRange(0.14, 0.19));
     }
     wait RandomFloatRange(1.5, 3);
@@ -395,7 +395,7 @@ ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
-  while(1) {
+  while (1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
     self RotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));

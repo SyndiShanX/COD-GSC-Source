@@ -26,7 +26,7 @@ zombie_jump_up() {
   self OrientMode("face angle", startnode.angles[1]);
   self clearanim( % stand_and_crouch, 0.1);
   self setFlaggedAnimKnoballRestart("diveanim", % ai_zombie_jump_up, % body, 1, .1, 1);
-  self playSound("dive_wall");
+  self playsound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traverseMode("nogravity");
   self waittillmatch("diveanim", "noclip");

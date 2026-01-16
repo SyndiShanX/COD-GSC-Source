@@ -9,6 +9,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_cleanup;
 
 autoexec __init__system__() {
@@ -242,9 +243,10 @@ cleanup_zombie() {
   waitframe(1);
 
   if(isDefined(self)) {
+
     debugstar(self.origin, 1000, (1, 1, 1));
 
-    self delete();
+      self delete();
   }
 }
 
@@ -310,8 +312,8 @@ private get_wait_locations_in_zones(a_zones) {
   a_wait_locations = [];
 
   foreach(zone in a_zones) {
-    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
-      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
+    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
+      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
       continue;
     }
 
@@ -334,9 +336,9 @@ private get_farthest_wait_location(a_wait_locations) {
 }
 
 private get_wait_locations_in_zone(zone) {
-  if(isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
+  if(isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
     a_wait_locations = [];
-    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
+    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
     return a_wait_locations;
   }
 
@@ -421,7 +423,7 @@ function_23621259(var_3a145c54 = 0) {
 
     if(self.health < self.maxhealth || isDefined(self.var_bd2c55ef) && self.var_bd2c55ef) {
       var_1a8c05ae = {
-        #n_health: self.health,
+        #n_health: self.health, 
         #var_e0d660f6: self.var_e0d660f6
       };
 

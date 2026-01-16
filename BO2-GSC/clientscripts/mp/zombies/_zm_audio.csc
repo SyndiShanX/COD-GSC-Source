@@ -21,9 +21,8 @@ init() {
   level.exert_sounds[0]["meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
   level.exert_sounds[0]["dtplandsoundplayer"] = "vox_exert_generic_pain";
 
-  if(isDefined(level.setupcustomcharacterexerts)) {
+  if(isDefined(level.setupcustomcharacterexerts))
     [[level.setupcustomcharacterexerts]]();
-  }
 
   level thread gameover_snapshot();
 }
@@ -45,25 +44,24 @@ charindex_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 }
 
 isspeaking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!bnewent) {
+  if(!bnewent)
     self.isspeaking = newval;
-  } else {
+  else
     self.isspeaking = 0;
-  }
 }
 
 zmbmuslooper() {
   ent = spawn(0, (0, 0, 0), "script_origin");
-  playSound(0, "mus_zmb_gamemode_start", (0, 0, 0));
+  playsound(0, "mus_zmb_gamemode_start", (0, 0, 0));
   wait 10;
-  ent playLoopSound("mus_zmb_gamemode_loop", 0.05);
+  ent playloopsound("mus_zmb_gamemode_loop", 0.05);
   ent thread waitfor_music_stop();
 }
 
 waitfor_music_stop() {
   level waittill("stpm");
   self stoploopsound(0.1);
-  playSound(0, "mus_zmb_gamemode_end", (0, 0, 0));
+  playsound(0, "mus_zmb_gamemode_end", (0, 0, 0));
   wait 1;
   self delete();
 }
@@ -75,9 +73,8 @@ playerfalldamagesound(client_num, firstperson) {
 clientvoicesetup() {
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     thread audio_player_connect(i);
-  }
 }
 
 audio_player_connect(localclientnum) {
@@ -96,19 +93,17 @@ playerexert(localclientnum, exert) {
   }
   id = level.exert_sounds[0][exert];
 
-  if(isarray(level.exert_sounds[0][exert])) {
+  if(isarray(level.exert_sounds[0][exert]))
     id = random(level.exert_sounds[0][exert]);
-  }
 
   if(isDefined(self.player_exert_id)) {
-    if(isarray(level.exert_sounds[self.player_exert_id][exert])) {
+    if(isarray(level.exert_sounds[self.player_exert_id][exert]))
       id = random(level.exert_sounds[self.player_exert_id][exert]);
-    } else {
+    else
       id = level.exert_sounds[self.player_exert_id][exert];
-    }
   }
 
-  self playSound(localclientnum, id);
+  self playsound(localclientnum, id);
 }
 
 sndvonotifydtp(localclientnum, notifystring) {
@@ -145,26 +140,26 @@ sndmeleeswipe(localclientnum, notifystring) {
       return;
     }
     if(is_true(player.is_player_zombie)) {
-      playSound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
+      playsound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "bowie_knife_zm") {
-      playSound(0, "zmb_bowie_swing_plr", player.origin);
+      playsound(0, "zmb_bowie_swing_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "spoon_zm_alcatraz") {
-      playSound(0, "zmb_spoon_swing_plr", player.origin);
+      playsound(0, "zmb_spoon_swing_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "spork_zm_alcatraz") {
-      playSound(0, "zmb_spork_swing_plr", player.origin);
+      playsound(0, "zmb_spork_swing_plr", player.origin);
       continue;
     }
 
-    playSound(0, "zmb_melee_whoosh_plr", player.origin);
+    playsound(0, "zmb_melee_whoosh_plr", player.origin);
   }
 }
 
@@ -202,9 +197,8 @@ gameover_snapshot() {
 }
 
 sndsetzombiecontext(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     self setsoundentcontext("grass", "no_grass");
-  } else {
+  else
     self setsoundentcontext("grass", "in_grass");
-  }
 }

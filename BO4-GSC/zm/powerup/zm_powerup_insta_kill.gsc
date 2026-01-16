@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_insta_kill;
 
 autoexec __init__system__() {
@@ -23,7 +24,7 @@ __init__() {
   zm_powerups::register_powerup("insta_kill", &grab_insta_kill);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", # "hash_1784640b956f2f85", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
+    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", #"hash_1784640b956f2f85", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
   }
 }
 
@@ -39,7 +40,7 @@ grab_insta_kill(player) {
 
 function_d7a1e6a8(e_powerup, player) {
   player notify(#"powerup instakill");
-  player endon(#"powerup instakill", # "disconnect");
+  player endon(#"powerup instakill", #"disconnect");
 
   if(player bgb::is_enabled(#"zm_bgb_temporal_gift")) {
     n_wait_time = 60;
@@ -49,7 +50,7 @@ function_d7a1e6a8(e_powerup, player) {
 
   player thread zm_powerups::function_5091b029("insta_kill");
   player zombie_utility::set_zombie_var_player(#"zombie_insta_kill", 1);
-  level waittilltimeout(n_wait_time, # "end_game");
+  level waittilltimeout(n_wait_time, #"end_game");
   player zombie_utility::set_zombie_var_player(#"zombie_insta_kill", 0);
   player notify(#"insta_kill_over");
 }

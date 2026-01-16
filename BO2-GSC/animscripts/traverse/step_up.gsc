@@ -11,11 +11,10 @@
 #include animscripts\run;
 
 main() {
-  if(self.type == "human") {
+  if(self.type == "human")
     step_up_human();
-  } else if(self.isdog) {
+  else if(self.isdog)
     dog_jump_up(40, 3);
-  }
 }
 
 #using_animtree("generic_human");

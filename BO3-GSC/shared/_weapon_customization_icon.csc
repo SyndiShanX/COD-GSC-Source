@@ -13,26 +13,26 @@
 #namespace weapon_customization_icon;
 
 function autoexec __init__sytem__() {
-  system::register("weapon_customization_icon", &__init__, undefined, undefined);
+  system::register("weapon_customization_icon", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.extra_cam_wc_paintjob_icon = [];
   level.extra_cam_wc_variant_icon = [];
-  level.extra_cam_render_wc_paintjobicon_func_callback = &process_wc_paintjobicon_extracam_request;
-  level.extra_cam_render_wc_varianticon_func_callback = &process_wc_varianticon_extracam_request;
-  level.weaponcustomizationiconsetup = &wc_icon_setup;
+  level.extra_cam_render_wc_paintjobicon_func_callback = & process_wc_paintjobicon_extracam_request;
+  level.extra_cam_render_wc_varianticon_func_callback = & process_wc_varianticon_extracam_request;
+  level.weaponcustomizationiconsetup = & wc_icon_setup;
 }
 
 function wc_icon_setup(localclientnum) {
-  level.extra_cam_wc_paintjob_icon[localclientnum] = spawnStruct();
-  level.extra_cam_wc_variant_icon[localclientnum] = spawnStruct();
+  level.extra_cam_wc_paintjob_icon[localclientnum] = spawnstruct();
+  level.extra_cam_wc_variant_icon[localclientnum] = spawnstruct();
   level thread update_wc_icon_extracam(localclientnum);
 }
 
 function update_wc_icon_extracam(localclientnum) {
   level endon("disconnect");
-  while(true) {
+  while (true) {
     level waittill("process_wc_icon_extracam_" + localclientnum, extracam_data_struct);
     setup_wc_weapon_model(localclientnum, extracam_data_struct);
     setup_wc_extracam_settings(localclientnum, extracam_data_struct);
@@ -42,35 +42,35 @@ function update_wc_icon_extracam(localclientnum) {
 function wait_for_extracam_close(localclientnum, camera_ent, extracam_data_struct) {
   level waittill((("render_complete_" + localclientnum) + "_") + extracam_data_struct.extracamindex);
   multi_extracam::extracam_reset_index(localclientnum, extracam_data_struct.extracamindex);
-  if(isDefined(extracam_data_struct.weapon_script_model)) {
+  if(isdefined(extracam_data_struct.weapon_script_model)) {
     extracam_data_struct.weapon_script_model delete();
   }
 }
 
 function getxcam(weapon_name, camera) {
   xcam = getweaponxcam(weapon_name, camera);
-  if(!isDefined(xcam)) {
+  if(!isdefined(xcam)) {
     xcam = getweaponxcam(getweapon("ar_damage"), camera);
   }
   return xcam;
 }
 
 function setup_wc_extracam_settings(localclientnum, extracam_data_struct) {
-  assert(isDefined(extracam_data_struct.jobindex));
-  if(!isDefined(level.camera_ents)) {
+  assert(isdefined(extracam_data_struct.jobindex));
+  if(!isdefined(level.camera_ents)) {
     level.camera_ents = [];
   }
   initializedextracam = 0;
-  camera_ent = (isDefined(level.camera_ents[localclientnum]) ? level.camera_ents[localclientnum][extracam_data_struct.extracamindex] : undefined);
-  if(!isDefined(camera_ent)) {
+  camera_ent = (isdefined(level.camera_ents[localclientnum]) ? level.camera_ents[localclientnum][extracam_data_struct.extracamindex] : undefined);
+  if(!isdefined(camera_ent)) {
     initializedextracam = 1;
-    if(isDefined(struct::get("weapon_icon_staging_camera"))) {
+    if(isdefined(struct::get("weapon_icon_staging_camera"))) {
       camera_ent = multi_extracam::extracam_init_index(localclientnum, "weapon_icon_staging_camera", extracam_data_struct.extracamindex);
     } else {
       camera_ent = multi_extracam::extracam_init_item(localclientnum, get_safehouse_position_struct(), extracam_data_struct.extracamindex);
     }
   }
-  assert(isDefined(camera_ent));
+  assert(isdefined(camera_ent));
   if(extracam_data_struct.loadoutslot == "default_camo_render") {
     extracam_data_struct.xcam = "ui_cam_icon_camo_export";
     extracam_data_struct.subxcam = "cam_icon";
@@ -80,7 +80,7 @@ function setup_wc_extracam_settings(localclientnum, extracam_data_struct) {
   }
   position = extracam_data_struct.weapon_position;
   camera_ent playextracamxcam(extracam_data_struct.xcam, 0, extracam_data_struct.subxcam, extracam_data_struct.notetrack, position.origin, position.angles, extracam_data_struct.weapon_script_model, position.origin, position.angles);
-  while(!extracam_data_struct.weapon_script_model isstreamed()) {
+  while (!extracam_data_struct.weapon_script_model isstreamed()) {
     wait(0.016);
   }
   if(extracam_data_struct.loadoutslot == "default_camo_render") {
@@ -97,14 +97,14 @@ function setup_wc_extracam_settings(localclientnum, extracam_data_struct) {
 
 function set_wc_icon_weapon_options(weapon_options_param, extracam_data_struct) {
   weapon_options = strtok(weapon_options_param, ",");
-  if(isDefined(weapon_options) && isDefined(extracam_data_struct.weapon_script_model)) {
+  if(isdefined(weapon_options) && isdefined(extracam_data_struct.weapon_script_model)) {
     extracam_data_struct.weapon_script_model setweaponrenderoptions(int(weapon_options[0]), int(weapon_options[1]), 0, 0, int(weapon_options[2]), extracam_data_struct.paintjobslot, extracam_data_struct.paintjobindex, 1, extracam_data_struct.isfilesharepreview);
   }
 }
 
 function spawn_weapon_model(localclientnum, origin, angles) {
   weapon_model = spawn(localclientnum, origin, "script_model");
-  if(isDefined(angles)) {
+  if(isdefined(angles)) {
     weapon_model.angles = angles;
   }
   weapon_model sethighdetail();
@@ -114,14 +114,14 @@ function spawn_weapon_model(localclientnum, origin, angles) {
 function set_wc_icon_cosmetic_variants(acv_param, weapon_full_name, extracam_data_struct) {
   acv_indexes = strtok(acv_param, ",");
   i = 0;
-  while((i + 1) < acv_indexes.size) {
+  while ((i + 1) < acv_indexes.size) {
     extracam_data_struct.weapon_script_model setattachmentcosmeticvariantindex(weapon_full_name, acv_indexes[i], int(acv_indexes[i + 1]));
     i = i + 2;
   }
 }
 
 function get_safehouse_position_struct() {
-  position = spawnStruct();
+  position = spawnstruct();
   position.angles = (0, 0, 0);
   switch (tolower(getdvarstring("mapname"))) {
     case "cp_sh_cairo": {
@@ -145,25 +145,25 @@ function setup_wc_weapon_model(localclientnum, extracam_data_struct) {
   weapon_full_name = extracam_data_struct.weaponplusattachments;
   weapon_options_param = extracam_data_struct.weaponoptions;
   acv_param = extracam_data_struct.attachmentvariantstring;
-  if(isDefined(weapon_full_name)) {
+  if(isdefined(weapon_full_name)) {
     position = struct::get("weapon_icon_staging");
-    if(!isDefined(position)) {
+    if(!isdefined(position)) {
       position = get_safehouse_position_struct();
     }
-    if(!isDefined(extracam_data_struct.weapon_script_model)) {
+    if(!isdefined(extracam_data_struct.weapon_script_model)) {
       extracam_data_struct.weapon_script_model = spawn_weapon_model(localclientnum, position.origin, position.angles);
     }
     extracam_data_struct.current_weapon = getweaponwithattachments(weapon_full_name);
-    if(isDefined(extracam_data_struct.current_weapon.frontendmodel)) {
+    if(isdefined(extracam_data_struct.current_weapon.frontendmodel)) {
       extracam_data_struct.weapon_script_model useweaponmodel(extracam_data_struct.current_weapon, extracam_data_struct.current_weapon.frontendmodel);
     } else {
       extracam_data_struct.weapon_script_model useweaponmodel(extracam_data_struct.current_weapon);
     }
     extracam_data_struct.weapon_position = position;
-    if(isDefined(acv_param) && acv_param != "none") {
+    if(isdefined(acv_param) && acv_param != "none") {
       set_wc_icon_cosmetic_variants(acv_param, weapon_full_name, extracam_data_struct);
     }
-    if(isDefined(weapon_options_param) && weapon_options_param != "none") {
+    if(isdefined(weapon_options_param) && weapon_options_param != "none") {
       set_wc_icon_weapon_options(weapon_options_param, extracam_data_struct);
     }
   }

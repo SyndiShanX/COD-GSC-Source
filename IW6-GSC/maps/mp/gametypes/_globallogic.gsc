@@ -39,9 +39,8 @@ init() {
 
   level.tiSpawnDelay = getDvarInt("scr_tispawndelay");
 
-  if(!isDefined(level.tweakablesInitialized)) {
+  if(!isDefined(level.tweakablesInitialized))
     maps\mp\gametypes\_tweakables::init();
-  }
 
   level.halftimeType = "halftime";
 
@@ -76,9 +75,8 @@ init() {
       baseLeaderboards = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
       gamemodeLeaderboard = " LB_GM_" + level.gametype;
 
-      if(getDvarInt("g_hardcore")) {
+      if(getDvarInt("g_hardcore"))
         gamemodeLeaderboard += "_HC";
-      }
     }
 
     precacheLeaderboards(baseLeaderboards + gamemodeLeaderboard + mapLeaderboard);
@@ -192,9 +190,8 @@ xpRateThread() {
 
   for(;;) {
     wait(5.0);
-    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis") {
+    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis")
       self maps\mp\gametypes\_rank::giveRankXP("kill", int(min(getDvarInt("scr_xprate"), 50)));
-    }
   }
 }
 
@@ -206,7 +203,7 @@ testMenu() {
     wait(10.0);
 
     notifyData = spawnStruct();
-    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
 

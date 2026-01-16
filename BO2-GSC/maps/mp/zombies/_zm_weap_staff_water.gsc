@@ -46,15 +46,14 @@ init_tag_array() {
 
 water_dart_cleanup() {
   while(true) {
-    a_grenades = getEntArray("grenade", "classname");
+    a_grenades = getentarray("grenade", "classname");
 
     foreach(e_grenade in a_grenades) {
       if(isDefined(e_grenade.model) && e_grenade.model == "p6_zm_tm_staff_projectile_ice") {
         time = gettime();
 
-        if(time - e_grenade.birthtime >= 1000) {
+        if(time - e_grenade.birthtime >= 1000)
           e_grenade delete();
-        }
       }
     }
 
@@ -99,9 +98,8 @@ watch_staff_water_impact() {
     if(str_weapon == "staff_water_upgraded2_zm" || str_weapon == "staff_water_upgraded3_zm") {
       n_lifetime = 6.0;
 
-      if(str_weapon == "staff_water_upgraded3_zm") {
+      if(str_weapon == "staff_water_upgraded3_zm")
         n_lifetime = 9.0;
-      }
 
       self thread staff_water_position_source(v_explode_point, n_lifetime, str_weapon);
     }
@@ -112,13 +110,11 @@ staff_water_kill_zombie(player, str_weapon) {
   self freeze_zombie();
   self do_damage_network_safe(player, self.health, str_weapon, "MOD_RIFLE_BULLET");
 
-  if(isDefined(self.deathanim)) {
+  if(isDefined(self.deathanim))
     self waittillmatch("death_anim", "shatter");
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self thread frozen_zombie_shatter();
-  }
 
   player maps\mp\zombies\_zm_score::player_add_points("death", "", "");
 }
@@ -142,13 +138,12 @@ freeze_zombie() {
   } else
     self.a.nodeath = undefined;
 
-  if(is_true(self.is_traversing)) {
+  if(is_true(self.is_traversing))
     self.deathanim = undefined;
-  }
 }
 
 _network_safe_play_fx(fx, v_origin) {
-  playFX(fx, v_origin, (0, 0, 1), (1, 0, 0));
+  playfx(fx, v_origin, (0, 0, 1), (1, 0, 0));
 }
 
 network_safe_play_fx(id, max, fx, v_origin) {
@@ -177,9 +172,8 @@ frozen_zombie_gib(gib_type) {
   self ghost();
   wait 0.4;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self self_delete();
-  }
 }
 
 staff_water_position_source(v_detonate, n_lifetime_sec, str_weapon) {
@@ -188,7 +182,7 @@ staff_water_position_source(v_detonate, n_lifetime_sec, str_weapon) {
   if(isDefined(v_detonate)) {
     level notify("blizzard_shot");
     e_fx = spawn("script_model", v_detonate + vectorscale((0, 0, 1), 33.0));
-    e_fx setModel("tag_origin");
+    e_fx setmodel("tag_origin");
     e_fx setclientfield("staff_blizzard_fx", 1);
     e_fx thread puzzle_debug_position("X", (0, 64, 255));
     wait 1;
@@ -222,9 +216,8 @@ ice_staff_blizzard_do_kills(player, str_weapon) {
             continue;
           }
 
-          if(isalive(zombie)) {
+          if(isalive(zombie))
             zombie thread ice_affect_zombie(str_weapon, player, 1);
-          }
         }
       }
     }
@@ -282,9 +275,8 @@ staff_water_zombie_range(v_source, n_range) {
       if(!bullet_trace_throttled(v_source, v_zombie_pos, undefined)) {
         continue;
       }
-      if(isDefined(a_zombies[i]) && isalive(a_zombies[i])) {
+      if(isDefined(a_zombies[i]) && isalive(a_zombies[i]))
         a_enemies[a_enemies.size] = a_zombies[i];
-      }
     }
   }
 
@@ -301,39 +293,34 @@ ice_affect_mechz(e_player, is_upgraded) {
   }
   self.is_on_ice = 1;
 
-  if(is_upgraded) {
+  if(is_upgraded)
     self do_damage_network_safe(e_player, 3300, "staff_water_upgraded_zm", "MOD_RIFLE_BULLET");
-  } else {
+  else
     self do_damage_network_safe(e_player, 2050, "staff_water_zm", "MOD_RIFLE_BULLET");
-  }
 
   wait 1.0;
   self.is_on_ice = 0;
 }
 
 ice_affect_zombie(str_weapon, e_player, always_kill, n_mod) {
-  if(!isDefined(str_weapon)) {
+  if(!isDefined(str_weapon))
     str_weapon = "staff_water_zm";
-  }
 
-  if(!isDefined(always_kill)) {
+  if(!isDefined(always_kill))
     always_kill = 0;
-  }
 
-  if(!isDefined(n_mod)) {
+  if(!isDefined(n_mod))
     n_mod = 1;
-  }
 
   self endon("death");
   instakill_on = e_player maps\mp\zombies\_zm_powerups::is_insta_kill_active();
 
-  if(str_weapon == "staff_water_zm") {
+  if(str_weapon == "staff_water_zm")
     n_damage = 2050;
-  } else if(str_weapon == "staff_water_upgraded_zm" || str_weapon == "staff_water_upgraded2_zm" || str_weapon == "staff_water_upgraded3_zm") {
+  else if(str_weapon == "staff_water_upgraded_zm" || str_weapon == "staff_water_upgraded2_zm" || str_weapon == "staff_water_upgraded3_zm")
     n_damage = 3300;
-  } else if(str_weapon == "one_inch_punch_ice_zm") {
+  else if(str_weapon == "one_inch_punch_ice_zm")
     n_damage = 11275;
-  }
 
   if(is_true(self.is_on_ice)) {
     return;
@@ -343,19 +330,17 @@ ice_affect_zombie(str_weapon, e_player, always_kill, n_mod) {
   n_speed = 0.3;
   self set_anim_rate(0.3);
 
-  if(instakill_on || always_kill) {
+  if(instakill_on || always_kill)
     wait(randomfloatrange(0.5, 0.7));
-  } else {
+  else
     wait(randomfloatrange(1.8, 2.3));
-  }
 
   if(self.health < n_damage || instakill_on || always_kill) {
     self set_anim_rate(1.0);
     wait_network_frame();
 
-    if(str_weapon != "one_inch_punch_ice_zm") {
+    if(str_weapon != "one_inch_punch_ice_zm")
       staff_water_kill_zombie(e_player, str_weapon);
-    }
   } else {
     self do_damage_network_safe(e_player, n_damage, str_weapon, "MOD_RIFLE_BULLET");
     self.deathanim = undefined;
@@ -371,9 +356,8 @@ set_anim_rate(n_speed) {
   n_rate = self getclientfield("anim_rate");
   self setentityanimrate(n_rate);
 
-  if(n_speed != 1.0) {
+  if(n_speed != 1.0)
     self.preserve_asd_substates = 1;
-  }
 
   wait_network_frame();
 
@@ -384,9 +368,8 @@ set_anim_rate(n_speed) {
 
   wait_network_frame();
 
-  if(n_speed == 1.0) {
+  if(n_speed == 1.0)
     self.preserve_asd_substates = 0;
-  }
 }
 
 staff_water_on_zombie_spawned() {
@@ -401,9 +384,8 @@ staff_water_death_event() {
     self.nodeathragdoll = 1;
     self freeze_zombie();
 
-    if(isDefined(self.deathanim)) {
+    if(isDefined(self.deathanim))
       self waittillmatch("death_anim", "shatter");
-    }
 
     self thread frozen_zombie_shatter();
   }
@@ -434,11 +416,10 @@ _icicle_locate_target(str_weapon) {
         b_trace_pass = bullet_trace_throttled(fire_origin, target gettagorigin(str_tag), target);
 
         if(b_trace_pass && isDefined(target) && isalive(target)) {
-          if(is_true(target.is_mechz)) {
+          if(is_true(target.is_mechz))
             target thread ice_affect_mechz(self, is_upgraded);
-          } else {
+          else
             target thread ice_affect_zombie(str_weapon, self);
-          }
 
           return;
         }

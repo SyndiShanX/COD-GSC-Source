@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_5f342394;
 
 autoexec __init__system__() {
@@ -63,7 +64,7 @@ private on_end(round_reset) {
 }
 
 private on_ai_killed(params) {
-  if(self.archetype === # "gladiator" && level.var_c23449d8 > 0) {
+  if(self.archetype === #"gladiator" && level.var_c23449d8 > 0) {
     var_d217c89e = 0;
 
     foreach(str_zone in level.var_8c6f70d0) {

@@ -179,11 +179,10 @@ load_story_stats() {
   dead_stat = level.player get_story_stat("DEFALCO_DEAD_IN_KARMA");
   level.is_defalco_alive = dead_stat;
 
-  if(dead_stat == 0) {
+  if(dead_stat == 0)
     level.is_defalco_alive = 1;
-  } else {
+  else
     level.is_defalco_alive = 0;
-  }
 }
 
 setup_skiptos() {
@@ -263,7 +262,8 @@ objectives_drone_control() {
   set_objective(level.obj_drone_control_bridge, s_obj_bridge, "breadcrumb");
 }
 
-objectives_hijacked() {}
+objectives_hijacked() {
+}
 
 objectives_capture() {
   flag_wait("obj_capture_sitrep");
@@ -293,9 +293,8 @@ nodeath_challenge(str_notify) {
   level.player waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0) {
+  if(n_deaths == 0)
     self notify(str_notify);
-  }
 }
 
 camomelee_challenge(str_notify) {
@@ -304,9 +303,8 @@ camomelee_challenge(str_notify) {
   while(true) {
     self waittill("melee_kill");
 
-    if(self ent_flag("camo_suit_on")) {
+    if(self ent_flag("camo_suit_on"))
       self notify(str_notify);
-    }
   }
 }
 
@@ -320,9 +318,8 @@ swordkills_challenge(str_notify) {
 watch_for_turret_kill() {
   self waittill("death", attacker, type, weapon);
 
-  if(isplayer(attacker) && !flag("morals_rail_done")) {
+  if(isplayer(attacker) && !flag("morals_rail_done"))
     level.player notify("turret_kill");
-  }
 }
 
 turretqrkills_challenge(str_notify) {
@@ -338,13 +335,11 @@ turretkills_challenge(str_notify) {
 }
 
 farid_undercover_damage_callback(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  if(!isDefined(e_attacker)) {
+  if(!isDefined(e_attacker))
     return n_damage;
-  }
 
-  if(!(isDefined(e_attacker.classname) && e_attacker.classname == "script_vehicle")) {
+  if(!(isDefined(e_attacker.classname) && e_attacker.classname == "script_vehicle"))
     flag_set("farid_not_undercover");
-  }
 
   return n_damage;
 }
@@ -356,20 +351,19 @@ killdrones_challenge(str_notify) {
 kill_drones_challenge_spawnfunc(str_notify) {
   self waittill("death", attacker);
 
-  if(isDefined(attacker) && attacker == level.player) {
+  if(isDefined(attacker) && attacker == level.player)
     level.player notify(str_notify);
-  }
 }
 
-pickingsides_challenge(str_notify) {}
+pickingsides_challenge(str_notify) {
+}
 
 explodingvehicles_challenge(str_notify) {
   level.callbackactorkilled = ::track_ai_explodingvehicles_death;
   level.carkills = 0;
 
-  while(level.carkills < 5) {
+  while(level.carkills < 5)
     wait 0.05;
-  }
 
   self notify(str_notify);
 }
@@ -377,9 +371,8 @@ explodingvehicles_challenge(str_notify) {
 track_ai_explodingvehicles_death(einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
   if(smeansofdeath == "MOD_EXPLOSIVE") {
     if(isDefined(einflictor) && isDefined(einflictor.destructibledef)) {
-      if(isDefined(einflictor.destructiblecar) && einflictor.destructiblecar) {
+      if(isDefined(einflictor.destructiblecar) && einflictor.destructiblecar)
         level.carkills++;
-      }
     }
   }
 }

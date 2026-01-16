@@ -84,7 +84,7 @@ function is_dead_sentient() {
 
 function waittill_dead(guys, num, timeoutlength) {
   allalive = 1;
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(isalive(guys[i])) {
       continue;
     }
@@ -94,47 +94,47 @@ function waittill_dead(guys, num, timeoutlength) {
   assert(allalive, "");
   if(!allalive) {
     newarray = [];
-    for(i = 0; i < guys.size; i++) {
+    for (i = 0; i < guys.size; i++) {
       if(isalive(guys[i])) {
         newarray[newarray.size] = guys[i];
       }
     }
     guys = newarray;
   }
-  ent = spawnStruct();
-  if(isDefined(timeoutlength)) {
+  ent = spawnstruct();
+  if(isdefined(timeoutlength)) {
     ent endon("thread_timed_out");
     ent thread waittill_dead_timeout(timeoutlength);
   }
   ent.count = guys.size;
-  if(isDefined(num) && num < ent.count) {
+  if(isdefined(num) && num < ent.count) {
     ent.count = num;
   }
-  array::thread_all(guys, &waittill_dead_thread, ent);
-  while(ent.count > 0) {
+  array::thread_all(guys, & waittill_dead_thread, ent);
+  while (ent.count > 0) {
     ent waittill("hash_27bc4415");
   }
 }
 
 function waittill_dead_or_dying(guys, num, timeoutlength) {
   newarray = [];
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(isalive(guys[i]) && !guys[i].ignoreforfixednodesafecheck) {
       newarray[newarray.size] = guys[i];
     }
   }
   guys = newarray;
-  ent = spawnStruct();
-  if(isDefined(timeoutlength)) {
+  ent = spawnstruct();
+  if(isdefined(timeoutlength)) {
     ent endon("thread_timed_out");
     ent thread waittill_dead_timeout(timeoutlength);
   }
   ent.count = guys.size;
-  if(isDefined(num) && num < ent.count) {
+  if(isdefined(num) && num < ent.count) {
     ent.count = num;
   }
-  array::thread_all(guys, &waittill_dead_or_dying_thread, ent);
-  while(ent.count > 0) {
+  array::thread_all(guys, & waittill_dead_or_dying_thread, ent);
+  while (ent.count > 0) {
     ent waittill("waittill_dead_guy_dead_or_dying");
   }
 }
@@ -169,22 +169,22 @@ function private wait_for_shoot() {
 function shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshotwait) {
   self endon("death");
   self endon("stop_shoot_at_target");
-  assert(isDefined(target), "");
-  assert(isDefined(mode), "");
+  assert(isdefined(target), "");
+  assert(isdefined(mode), "");
   mode_flag = mode === "normal" || mode === "shoot_until_target_dead" || mode === "kill_within_time";
   assert(mode_flag, "");
-  if(isDefined(duration)) {
+  if(isdefined(duration)) {
     assert(duration >= 0, "");
   } else {
     duration = 0;
   }
-  if(isDefined(sethealth) && isDefined(target)) {
+  if(isdefined(sethealth) && isdefined(target)) {
     target.health = sethealth;
   }
-  if(!isDefined(target) || (mode === "shoot_until_target_dead" && target.health <= 0)) {
+  if(!isdefined(target) || (mode === "shoot_until_target_dead" && target.health <= 0)) {
     return;
   }
-  if(isDefined(tag) && tag != "") {
+  if(isdefined(tag) && tag != "") {
     self setentitytarget(target, 1, tag);
   } else {
     self setentitytarget(target, 1);
@@ -212,17 +212,17 @@ function shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshot
   } else {
     self thread wait_for_shoot();
   }
-  if(isDefined(duration) && isDefined(target) && target.health > 0) {
+  if(isdefined(duration) && isdefined(target) && target.health > 0) {
     if(duration >= 0) {
       elapsed = 0;
-      while(isDefined(target) && target.health > 0 && elapsed <= duration) {
+      while (isdefined(target) && target.health > 0 && elapsed <= duration) {
         elapsed = elapsed + 0.05;
-        if(!(isDefined(self.start_duration_comp) && self.start_duration_comp)) {
+        if(!(isdefined(self.start_duration_comp) && self.start_duration_comp)) {
           elapsed = 0;
         }
         wait(0.05);
       }
-      if(isDefined(target) && mode == "kill_within_time") {
+      if(isdefined(target) && mode == "kill_within_time") {
         self.perfectaim = 1;
         self.aim_set_by_shoot_at_target = 1;
         target waittill("death");
@@ -236,7 +236,7 @@ function shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshot
 
 function stop_shoot_at_target() {
   self clearentitytarget();
-  if(isDefined(self.aim_set_by_shoot_at_target) && self.aim_set_by_shoot_at_target) {
+  if(isdefined(self.aim_set_by_shoot_at_target) && self.aim_set_by_shoot_at_target) {
     self.perfectaim = 0;
     self.aim_set_by_shoot_at_target = 0;
   }
@@ -246,22 +246,22 @@ function stop_shoot_at_target() {
 
 function wait_until_done_speaking() {
   self endon("death");
-  while(self.isspeaking) {
+  while (self.isspeaking) {
     wait(0.05);
   }
 }
 
 function set_goal(value, key = "targetname", b_force = 0) {
   goal = getnode(value, key);
-  if(isDefined(goal)) {
+  if(isdefined(goal)) {
     self setgoal(goal, b_force);
   } else {
     goal = getent(value, key);
-    if(isDefined(goal)) {
+    if(isdefined(goal)) {
       self setgoal(goal, b_force);
     } else {
       goal = struct::get(value, key);
-      if(isDefined(goal)) {
+      if(isdefined(goal)) {
         self setgoal(goal.origin, b_force);
       }
     }
@@ -271,7 +271,7 @@ function set_goal(value, key = "targetname", b_force = 0) {
 
 function force_goal(goto, n_radius, b_shoot = 1, str_end_on, b_keep_colors = 0, b_should_sprint = 0) {
   self endon("death");
-  s_tracker = spawnStruct();
+  s_tracker = spawnstruct();
   self thread _force_goal(s_tracker, goto, n_radius, b_shoot, str_end_on, b_keep_colors, b_should_sprint);
   s_tracker waittill("done");
 }
@@ -282,13 +282,13 @@ function _force_goal(s_tracker, goto, n_radius, b_shoot = 1, str_end_on, b_keep_
   flagsys::wait_till_clear("force_goal");
   flagsys::set("force_goal");
   goalradius = self.goalradius;
-  if(isDefined(n_radius)) {
+  if(isdefined(n_radius)) {
     assert(isfloat(n_radius) || isint(n_radius), "");
     self.goalradius = n_radius;
   }
   color_enabled = 0;
   if(!b_keep_colors) {
-    if(isDefined(colors::get_force_color())) {
+    if(isdefined(colors::get_force_color())) {
       color_enabled = 1;
       self colors::disable();
     }
@@ -309,8 +309,8 @@ function _force_goal(s_tracker, goto, n_radius, b_shoot = 1, str_end_on, b_keep_
   self set_ignoreme(1);
   self disable_pain();
   self pushplayer(1);
-  if(isDefined(goto)) {
-    if(isDefined(n_radius)) {
+  if(isdefined(goto)) {
+    if(isdefined(n_radius)) {
       assert(isfloat(n_radius) || isint(n_radius), "");
       self setgoal(goto);
     } else {
@@ -352,10 +352,10 @@ function painwaitinterval(msec) {
   self endon("painwaitinterval");
   self endon("painwaitintervalremove");
   self thread _allowpainrestore();
-  if(!isDefined(msec) || msec < 20) {
+  if(!isdefined(msec) || msec < 20) {
     msec = 20;
   }
-  while(isalive(self)) {
+  while (isalive(self)) {
     self waittill("pain");
     self.allowpain = 0;
     wait(msec / 1000);
@@ -366,46 +366,46 @@ function painwaitinterval(msec) {
 function patrol(start_path_node) {
   self endon("death");
   self endon("stop_patrolling");
-  assert(isDefined(start_path_node), self.targetname + "");
+  assert(isdefined(start_path_node), self.targetname + "");
   if(start_path_node.type == "BAD NODE") {
     errormsg = (((("" + start_path_node.targetname) + "") + int(start_path_node.origin[0]) + "") + int(start_path_node.origin[1]) + "") + int(start_path_node.origin[2]) + "";
     iprintln(errormsg);
     logprint(errormsg);
     return;
   }
-  assert(start_path_node.type == "" || isDefined(start_path_node.scriptbundlename), ("" + start_path_node.targetname) + "");
+  assert(start_path_node.type == "" || isdefined(start_path_node.scriptbundlename), ("" + start_path_node.targetname) + "");
   self notify("go_to_spawner_target");
   self.target = undefined;
   self.old_goal_radius = self.goalradius;
   self thread end_patrol_on_enemy_targetting();
   self.currentgoal = start_path_node;
   self.patroller = 1;
-  while(true) {
-    if(isDefined(self.currentgoal.type) && self.currentgoal.type == "Path") {
+  while (true) {
+    if(isdefined(self.currentgoal.type) && self.currentgoal.type == "Path") {
       if(self has_behavior_attribute("patrol")) {
         self set_behavior_attribute("patrol", 1);
       }
       self setgoal(self.currentgoal, 1);
       self waittill("goal");
-      if(isDefined(self.currentgoal.script_notify)) {
+      if(isdefined(self.currentgoal.script_notify)) {
         self notify(self.currentgoal.script_notify);
         level notify(self.currentgoal.script_notify);
       }
-      if(isDefined(self.currentgoal.script_flag_set)) {
+      if(isdefined(self.currentgoal.script_flag_set)) {
         flag = self.currentgoal.script_flag_set;
-        if(!isDefined(level.flag[flag])) {
+        if(!isdefined(level.flag[flag])) {
           level flag::init(flag);
         }
         level flag::set(flag);
       }
-      if(!isDefined(self.currentgoal.script_wait_min)) {
+      if(!isdefined(self.currentgoal.script_wait_min)) {
         self.currentgoal.script_wait_min = 0;
       }
-      if(!isDefined(self.currentgoal.script_wait_max)) {
+      if(!isdefined(self.currentgoal.script_wait_max)) {
         self.currentgoal.script_wait_max = 0;
       }
       assert(self.currentgoal.script_wait_min <= self.currentgoal.script_wait_max, "" + self.currentgoal.targetname);
-      if(!isDefined(self.currentgoal.scriptbundlename)) {
+      if(!isdefined(self.currentgoal.scriptbundlename)) {
         wait_variability = self.currentgoal.script_wait_max - self.currentgoal.script_wait_min;
         wait_time = self.currentgoal.script_wait_min + randomfloat(wait_variability);
         self notify("patrol_goal", self.currentgoal);
@@ -423,7 +423,7 @@ function patrol(start_path_node) {
 function patrol_next_node() {
   target_nodes = [];
   target_scenes = [];
-  if(isDefined(self.currentgoal.target)) {
+  if(isdefined(self.currentgoal.target)) {
     target_nodes = getnodearray(self.currentgoal.target, "targetname");
     target_scenes = struct::get_array(self.currentgoal.target, "targetname");
   }
@@ -441,8 +441,8 @@ function patrol_next_node() {
 function end_patrol_on_enemy_targetting() {
   self endon("death");
   self endon("stop_patrolling");
-  while(true) {
-    if(isDefined(self.enemy) || self.should_stop_patrolling === 1) {
+  while (true) {
+    if(isdefined(self.enemy) || self.should_stop_patrolling === 1) {
       self end_and_clean_patrol_behaviors();
     }
     wait(0.1);
@@ -450,13 +450,13 @@ function end_patrol_on_enemy_targetting() {
 }
 
 function end_and_clean_patrol_behaviors() {
-  if(isDefined(self.currentgoal) && isDefined(self.currentgoal.scriptbundlename) && isDefined(self._o_scene)) {
+  if(isdefined(self.currentgoal) && isdefined(self.currentgoal.scriptbundlename) && isdefined(self._o_scene)) {
     self._o_scene cscene::stop();
   }
   if(self has_behavior_attribute("patrol")) {
     self set_behavior_attribute("patrol", 0);
   }
-  if(isDefined(self.old_goal_radius)) {
+  if(isdefined(self.old_goal_radius)) {
     self.goalradius = self.old_goal_radius;
   }
   self clearforcedgoal();
@@ -466,22 +466,22 @@ function end_and_clean_patrol_behaviors() {
 
 function bloody_death(n_delay, hit_loc) {
   self endon("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   assert(isactor(self));
   assert(isalive(self));
-  if(isDefined(self.__bloody_death) && self.__bloody_death) {
+  if(isdefined(self.__bloody_death) && self.__bloody_death) {
     return;
   }
   self.__bloody_death = 1;
-  if(isDefined(n_delay)) {
+  if(isdefined(n_delay)) {
     wait(n_delay);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(hit_loc)) {
+  if(isdefined(hit_loc)) {
     assert(isinarray(array("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""), hit_loc), "");
   } else {
     hit_loc = array::random(array("helmet", "head", "neck", "torso_upper", "torso_mid", "torso_lower", "right_arm_upper", "left_arm_upper", "right_arm_lower", "left_arm_lower", "right_hand", "left_hand", "right_leg_upper", "left_leg_upper", "right_leg_lower", "left_leg_lower", "right_foot", "left_foot", "gun", "riotshield"));
@@ -490,7 +490,7 @@ function bloody_death(n_delay, hit_loc) {
 }
 
 function shouldregisterclientfieldforarchetype(archetype) {
-  if(isDefined(level.clientfieldaicheck) && level.clientfieldaicheck && !isarchetypeloaded(archetype)) {
+  if(isdefined(level.clientfieldaicheck) && level.clientfieldaicheck && !isarchetypeloaded(archetype)) {
     return false;
   }
   return true;

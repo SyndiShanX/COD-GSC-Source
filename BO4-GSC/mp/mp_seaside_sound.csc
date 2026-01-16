@@ -12,6 +12,6 @@ main() {
 church_bells() {
   while(true) {
     wait 300;
-    playSound(0, # "hash_5727281a9dcec94e", (-587, 2988, 1901));
+    playSound(0, #"hash_5727281a9dcec94e", (-587, 2988, 1901));
   }
 }

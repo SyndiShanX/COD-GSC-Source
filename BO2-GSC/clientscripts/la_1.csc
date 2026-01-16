@@ -81,9 +81,8 @@ animate_data_glove_hologram(localclientnum, set, newent) {
 }
 
 toggle_extra_cam(localclientnum, set, newent) {
-  if(!isDefined(level.extracamactive)) {
+  if(!isDefined(level.extracamactive))
     level.extracamactive = 0;
-  }
 
   if(!level.extracamactive && set) {
     println("**** extra cam on - client****");
@@ -122,9 +121,8 @@ get_time_delta() {
   if(isDefined(self.n_last_get_time)) {
     t_delta = t_now - self.n_last_get_time;
 
-    if(t_delta >= 500) {
+    if(t_delta >= 500)
       t_delta = 0;
-    }
   }
 
   self.n_last_get_time = t_now;
@@ -156,9 +154,8 @@ sonar_off(localclientnum) {
 }
 
 sonar_fade(localclientnum, sonar_turning_on) {
-  if(sonar_turning_on) {
+  if(sonar_turning_on)
     enable_filter_sonar_glass(level.localplayers[0], 0, 0);
-  }
 
   starttime = getrealtime();
   currenttime = starttime;
@@ -174,13 +171,12 @@ sonar_fade(localclientnum, sonar_turning_on) {
       currenttime = getrealtime();
       elapsedtime = (currenttime - starttime) / 1000.0;
 
-      if(elapsedtime > delaytotal) {
+      if(elapsedtime > delaytotal)
         elapsedtime = delaytotal;
-      }
 
-      if(elapsedtime < delaydark) {
+      if(elapsedtime < delaydark)
         set_filter_sonar_reveal_amount(level.localplayers[0], 0, elapsedtime / delaydark * 0.5);
-      } else {
+      else {
         println("csc " + localclientnum + " : turn sonar on");
 
         level.localplayers[0] setsonarenabled(1);
@@ -197,13 +193,12 @@ sonar_fade(localclientnum, sonar_turning_on) {
       currenttime = getrealtime();
       elapsedtime = (currenttime - starttime) / 1000.0;
 
-      if(elapsedtime > delaytotal) {
+      if(elapsedtime > delaytotal)
         elapsedtime = delaytotal;
-      }
 
-      if(elapsedtime < delaysonar) {
+      if(elapsedtime < delaysonar)
         set_filter_sonar_reveal_amount(level.localplayers[0], 0, 1 - elapsedtime / delaysonar * 0.5);
-      } else {
+      else {
         println("csc " + localclientnum + " : turn sonar off");
 
         level.localplayers[0] setsonarenabled(0);
@@ -212,11 +207,12 @@ sonar_fade(localclientnum, sonar_turning_on) {
     }
   }
 
-  if(!sonar_turning_on) {
+  if(!sonar_turning_on)
     disable_filter_sonar_glass(level.localplayers[0], 0, 0);
-  }
 }
 
-init_sam_hud_damage() {}
+init_sam_hud_damage() {
+}
 
-sam_damage() {}
+sam_damage() {
+}

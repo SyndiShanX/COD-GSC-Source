@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace sound;
 
 loop_fx_sound(alias, origin, ender) {
@@ -166,7 +167,7 @@ play_on_players(sound, team) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+      if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
         player playlocalsound(sound);
       }
     }

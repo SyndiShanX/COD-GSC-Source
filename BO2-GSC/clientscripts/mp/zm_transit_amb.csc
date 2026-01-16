@@ -188,7 +188,7 @@ bus_interior_loop_start() {
   while(true) {
     level waittill("buslps");
     ent = spawn(0, (0, 0, 0), "script_origin");
-    ent playLoopSound("zmb_bus_interior_loop", 4);
+    ent playloopsound("zmb_bus_interior_loop", 4);
     ent thread bus_interior_loop_end();
   }
 }
@@ -202,7 +202,7 @@ bus_interior_loop_end() {
 
 poweron_audio() {
   level waittill("pwr");
-  playSound(0, "zmb_power_on_quad", (0, 0, 0));
+  playsound(0, "zmb_power_on_quad", (0, 0, 0));
   array_thread(getstructarray("airraid", "targetname"), ::air_raid_alarm);
 }
 
@@ -210,7 +210,7 @@ air_raid_alarm() {
   level endon("pwr");
 
   while(true) {
-    playSound(0, "amb_alarm_airraid", self.origin);
+    playsound(0, "amb_alarm_airraid", self.origin);
     wait 11;
   }
 }
@@ -238,7 +238,7 @@ snd_start_autofx_audio() {
 earth_break() {
   level notify("earth_crack");
   level waittill("earth_crack");
-  playSound(0, "zmb_depot_crack", (-6832, 5256, 1));
+  playsound(0, "zmb_depot_crack", (-6832, 5256, 1));
   playloopat("zmb_crack_fires", (-6832, 5256, 1));
   playloopat("zmb_crack_fires", (-6734, 5218, -49));
   playloopat("zmb_crack_fires", (-6860, 5383, -56));
@@ -255,11 +255,10 @@ screecherstart() {
   while(true) {
     level waittill("scrStrt");
 
-    if(!isDefined(level.screecherent)) {
+    if(!isDefined(level.screecherent))
       level.screecherent = spawn(0, (0, 0, 0), "script_origin");
-    }
 
-    level.screecherent playLoopSound("zmb_screecher_arm_loop", 1);
+    level.screecherent playloopsound("zmb_screecher_arm_loop", 1);
   }
 }
 

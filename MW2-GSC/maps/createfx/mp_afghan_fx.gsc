@@ -993,4 +993,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "light_glow_white_bulb";
   ent.v["delay"] = -15;
+
 }

@@ -90,7 +90,7 @@ function main() {
   array::add(level.zod_character_names, "femme");
   array::add(level.zod_character_names, "magician");
   register_clientfields();
-  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
   level.debug_keyline_zombies = 0;
   zm_zod_fx::main();
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange_zod";
@@ -112,20 +112,20 @@ function main() {
   zm_zod_perks::init();
   load::main();
   thread zm_zod_amb::main();
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   duplicate_render::set_dr_filter_framebuffer("zod_ghost", 90, "zod_ghost", undefined, 0, "mc/hud_zod_ghost", 0);
   zm_zod_ffotd::main_end();
   util::waitforclient(0);
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "fullscreen_rain_fx", 1, 1, "int", &toggle_rain_overlay, 0, 1);
+  clientfield::register("toplayer", "fullscreen_rain_fx", 1, 1, "int", & toggle_rain_overlay, 0, 1);
   clientfield::register("world", "rain_state", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "junction_crane_state", 1, 1, "int", &junction_crane_state, 0, 1);
-  clientfield::register("toplayer", "devgui_lightning_test", 1, 1, "counter", &devgui_lightning_test, 0, 0);
+  clientfield::register("world", "junction_crane_state", 1, 1, "int", & junction_crane_state, 0, 1);
+  clientfield::register("toplayer", "devgui_lightning_test", 1, 1, "counter", & devgui_lightning_test, 0, 0);
   n_bits = getminbitcountfornum(8);
-  clientfield::register("toplayer", "player_rumble_and_shake", 1, n_bits, "int", &zm_zod_util::player_rumble_and_shake, 0, 0);
-  clientfield::register("actor", "ghost_actor", 1, 1, "int", &ghost_actor, 0, 0);
+  clientfield::register("toplayer", "player_rumble_and_shake", 1, n_bits, "int", & zm_zod_util::player_rumble_and_shake, 0, 0);
+  clientfield::register("actor", "ghost_actor", 1, 1, "int", & ghost_actor, 0, 0);
   n_bits = getminbitcountfornum(4);
   clientfield::register("clientuimodel", "zmInventory.player_character_identity", 1, n_bits, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_using_sprayer", 1, 1, "int", undefined, 0, 0);
@@ -141,9 +141,9 @@ function register_clientfields() {
   clientfield::register("clientuimodel", "zmInventory.widget_fuses", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_egg", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_sprayer", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "hide_perf_static_models", 1, 1, "int", &hide_perf_static_models, 0, 1);
-  clientfield::register("world", "breakable_show", 1, 3, "int", &function_66fdd0a3, 0, 1);
-  clientfield::register("world", "breakable_hide", 1, 3, "int", &function_5a6fb328, 0, 1);
+  clientfield::register("world", "hide_perf_static_models", 1, 1, "int", & hide_perf_static_models, 0, 1);
+  clientfield::register("world", "breakable_show", 1, 3, "int", & function_66fdd0a3, 0, 1);
+  clientfield::register("world", "breakable_hide", 1, 3, "int", & function_5a6fb328, 0, 1);
   visionset_mgr::register_visionset_info("zombie_noire", 1, 1, undefined, "zombie_noire");
 }
 
@@ -167,18 +167,18 @@ function toggle_rain_overlay(localclientnum, oldval, newval, bnewent, binitialsn
 function player_rain_thread(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
-  if(!self islocalplayer() || !isDefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
+  if(!self islocalplayer() || !isdefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
     return;
   }
-  while(true) {
-    if(!isDefined(self)) {
+  while (true) {
+    if(!isdefined(self)) {
       return;
     }
     var_53729670 = level clientfield::get("rain_state");
     if(var_53729670 === 1) {
-      fxid = playFX(localclientnum, level._effect["rain_acid"], self.origin);
+      fxid = playfx(localclientnum, level._effect["rain_acid"], self.origin);
     } else {
-      fxid = playFX(localclientnum, level._effect["rain_heavy"], self.origin);
+      fxid = playfx(localclientnum, level._effect["rain_heavy"], self.origin);
     }
     setfxoutdoor(localclientnum, fxid);
     wait(0.25);
@@ -202,11 +202,11 @@ function junction_crane_state(localclientnum, oldval, newval, bnewent, binitials
     unhidestaticmodel(var_3153c901[0]);
   } else {
     unhidestaticmodel(var_3153c901[0]);
-    if(isDefined(e_crane)) {
-      playFXOnTag(localclientnum, level._effect["crane_light"], e_crane, "j_light");
+    if(isdefined(e_crane)) {
+      playfxontag(localclientnum, level._effect["crane_light"], e_crane, "j_light");
     }
-    if(isDefined(e_phrase)) {
-      playFXOnTag(localclientnum, level._effect["cultist_crate_personal_item"], e_phrase, "tag_origin");
+    if(isdefined(e_phrase)) {
+      playfxontag(localclientnum, level._effect["cultist_crate_personal_item"], e_phrase, "tag_origin");
     }
   }
 }
@@ -353,7 +353,7 @@ function show_hide_pap_weed(localclientnum, oldval, newval, bnewent, binitialsna
 function devgui_lightning_test(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   setukkoscriptindex(localclientnum, 2, 1);
   exploder::exploder("fx_exploder_lightning_dock");
-  playSound(0, "amb_lightning_dist_low", (0, 0, 0));
+  playsound(0, "amb_lightning_dist_low", (0, 0, 0));
   wait(0.15);
   setukkoscriptindex(localclientnum, 3, 1);
   wait(0.2);
@@ -370,7 +370,7 @@ function devgui_lightning_test(localclientnum, oldval, newval, bnewent, binitial
 
 function function_f650f42a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
-    if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
+    if(!isdefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       return;
     }
   }
@@ -386,10 +386,10 @@ function ghost_actor(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 function hide_perf_static_models(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_bc94ac00 = findstaticmodelindexarray("fxanim_crate_waterfront_break_static");
   var_90dba62a = findstaticmodelindexarray("fxanim_crate_canal_static");
-  for(i = 0; i < var_bc94ac00.size; i++) {
+  for (i = 0; i < var_bc94ac00.size; i++) {
     hidestaticmodel(var_bc94ac00[i]);
   }
-  for(i = 0; i < var_90dba62a.size; i++) {
+  for (i = 0; i < var_90dba62a.size; i++) {
     hidestaticmodel(var_90dba62a[i]);
   }
   var_48d31804 = findstaticmodelindexarray("fxanim_pap_bridge_01_static");

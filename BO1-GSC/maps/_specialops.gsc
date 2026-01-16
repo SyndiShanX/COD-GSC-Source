@@ -43,9 +43,8 @@ type_so() {
     isDefined(self.script_specialops) &&
     (self.script_specialops == 1))
     return true;
-  else {
+  else
     return false;
-  }
 }
 
 type_reg() {
@@ -77,27 +76,20 @@ type_reg_vehicle() {
 }
 
 type_spawn_trigger() {
-  if(!isDefined(self.classname)) {
+  if(!isDefined(self.classname))
     return false;
-  }
-  if(self.classname == "trigger_multiple_spawn") {
+  if(self.classname == "trigger_multiple_spawn")
     return true;
-  }
-  if(self.classname == "trigger_multiple_spawn_reinforcement") {
+  if(self.classname == "trigger_multiple_spawn_reinforcement")
     return true;
-  }
-  if(self.classname == "trigger_multiple_friendly_respawn") {
+  if(self.classname == "trigger_multiple_friendly_respawn")
     return true;
-  }
-  if(isDefined(self.targetname) && self.targetname == "flood_spawner") {
+  if(isDefined(self.targetname) && self.targetname == "flood_spawner")
     return true;
-  }
-  if(isDefined(self.targetname) && self.targetname == "friendly_respawn_trigger") {
+  if(isDefined(self.targetname) && self.targetname == "friendly_respawn_trigger")
     return true;
-  }
-  if(isDefined(self.spawnflags) && self.spawnflags & 32) {
+  if(isDefined(self.spawnflags) && self.spawnflags & 32)
     return true;
-  }
   return false;
 }
 
@@ -176,7 +168,7 @@ delete_ent() {
 }
 
 delete_by_type(type_predicate) {
-  foreach(getEntArray(), ::delete_ent, type_predicate);
+  foreach(getentarray(), ::delete_ent, type_predicate);
 }
 
 noteworthy_check(value) {
@@ -184,11 +176,10 @@ noteworthy_check(value) {
     isDefined(self.script_noteworthy) &&
     (self.script_noteworthy != value))
     return true;
-  else {
+  else
     return false;
-  }
 }
 
 delete_by_noteworthy(level_name) {
-  foreach(getEntArray(), ::delete_ent, ::noteworthy_check, level_name);
+  foreach(getentarray(), ::delete_ent, ::noteworthy_check, level_name);
 }

@@ -90,25 +90,25 @@
 #namespace load;
 
 function main() {
-  /
+  /# /
   #
-  assert(isDefined(level.first_frame), "");
+  assert(isdefined(level.first_frame), "");
   level._loadstarted = 1;
   setclearanceceiling(30);
   register_clientfields();
   level.aitriggerspawnflags = getaitriggerflags();
   level.vehicletriggerspawnflags = getvehicletriggerflags();
   setup_traversals();
-  level.globallogic_audio_dialog_on_player_override = &globallogic_audio::leader_dialog_on_player;
+  level.globallogic_audio_dialog_on_player_override = & globallogic_audio::leader_dialog_on_player;
   level.growing_hitmarker = 1;
   system::wait_till("all");
   level flagsys::set("load_main_complete");
 }
 
 function setfootstepeffect(name, fx) {
-  assert(isDefined(name), "");
-  assert(isDefined(fx), "");
-  if(!isDefined(anim.optionalstepeffects)) {
+  assert(isdefined(name), "");
+  assert(isdefined(fx), "");
+  if(!isdefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
   }
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
@@ -137,12 +137,12 @@ function footsteps() {
 
 function init_traverse() {
   point = getent(self.target, "targetname");
-  if(isDefined(point)) {
+  if(isdefined(point)) {
     self.traverse_height = point.origin[2];
     point delete();
   } else {
     point = struct::get(self.target, "targetname");
-    if(isDefined(point)) {
+    if(isdefined(point)) {
       self.traverse_height = point.origin[2];
     }
   }
@@ -150,7 +150,7 @@ function init_traverse() {
 
 function setup_traversals() {
   potential_traverse_nodes = getallnodes();
-  for(i = 0; i < potential_traverse_nodes.size; i++) {
+  for (i = 0; i < potential_traverse_nodes.size; i++) {
     node = potential_traverse_nodes[i];
     if(node.type == "Begin") {
       node init_traverse();

@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
+
 #namespace status_effect_dot;
 
 autoexec __init__system__() {
@@ -58,7 +59,7 @@ dot_apply(var_756fda07, weapon, applicant) {
 
 private dot_rumble_loop() {
   self notify(#"dot_rumble_loop");
-  self endon(#"dot_rumble_loop", # "endstatuseffect");
+  self endon(#"dot_rumble_loop", #"endstatuseffect");
   waitframe(1);
 
   if(!isplayer(self.owner)) {

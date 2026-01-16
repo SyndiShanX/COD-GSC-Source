@@ -16,7 +16,7 @@ main(model, type) {
   build_deathmodel("vehicle_small_wagon_green", "vehicle_small_wagon_d_green");
   build_deathmodel("vehicle_small_wagon_blue", "vehicle_small_wagon_d_blue");
 
-  // don't know where the small_wagon series of destructibles went..
+  // don't know where the small_wagon series of destructibles went.. 
   //	build_destructible( "vehicle_small_wagon_white_destructible_mp", "vehicle_small_wagon_white" );
   //	build_destructible( "vehicle_small_wagon_blue_destructible_mp", "vehicle_small_wagon_blue" );
   //	build_destructible( "vehicle_small_wagon_green_destructible_mp", "vehicle_small_wagon_green" );
@@ -30,7 +30,9 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {}
+init_local() {
+
+}
 
 set_vehicle_anims(positions) {
   return positions;

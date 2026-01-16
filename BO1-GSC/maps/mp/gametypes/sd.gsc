@@ -8,9 +8,8 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(GetDvar(#"mapname") == "mp_background") {
+  if(GetDvar(#"mapname") == "mp_background")
     return;
-  }
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -98,9 +97,8 @@ sd_getTeamKillScore(eInflictor, attacker, sMeansOfDeath, sWeapon) {
   return int(teamkill_score);
 }
 onRoundSwitch() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
   if(game["teamScores"]["allies"] == level.scorelimit - 1 && game["teamScores"]["axis"] == level.scorelimit - 1) {
     aheadTeam = getBetterTeam();
     if(aheadTeam != game["defenders"]) {
@@ -119,7 +117,7 @@ getBetterTeam() {
   kills["axis"] = 0;
   deaths["allies"] = 0;
   deaths["axis"] = 0;
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     team = player.pers["team"];
     if(isDefined(team) && (team == "allies" || team == "axis")) {
@@ -127,25 +125,21 @@ getBetterTeam() {
       deaths[team] += player.deaths;
     }
   }
-  if(kills["allies"] > kills["axis"]) {
+  if(kills["allies"] > kills["axis"])
     return "allies";
-  } else if(kills["axis"] > kills["allies"]) {
+  else if(kills["axis"] > kills["allies"])
     return "axis";
-  }
-  if(deaths["allies"] < deaths["axis"]) {
+  if(deaths["allies"] < deaths["axis"])
     return "allies";
-  } else if(deaths["axis"] < deaths["allies"]) {
+  else if(deaths["axis"] < deaths["allies"])
     return "axis";
-  }
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     return "allies";
-  }
   return "axis";
 }
 onStartGameType() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
     oldDefenders = game["defenders"];
@@ -153,22 +147,22 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
   setClientNameMode("manual_change");
-  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
   level._effect["bombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_bomb");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints("mp_sd_spawn_attacker");
@@ -226,11 +220,10 @@ onSpawnPlayer() {
   self.isPlanting = false;
   self.isDefusing = false;
   self.isBombCarrier = false;
-  if(self.pers["team"] == game["attackers"]) {
+  if(self.pers["team"] == game["attackers"])
     spawnPointName = "mp_sd_spawn_attacker";
-  } else {
+  else
     spawnPointName = "mp_sd_spawn_defender";
-  }
   if(level.multiBomb && !isDefined(self.carryIcon) && self.pers["team"] == game["attackers"] && !level.bombPlanted) {
     if(self IsSplitscreen()) {
       self.carryIcon = createIcon("hud_suitcase_bomb", 35, 35);
@@ -261,11 +254,10 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   thread checkAllowSpectating();
   inBombZone = false;
   if(!isDefined(sWeapon) || !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(sWeapon)) {
-    for(index = 0; index < level.bombZones.size; index++) {
+    for (index = 0; index < level.bombZones.size; index++) {
       dist = Distance2d(self.origin, level.bombZones[index].curorigin);
-      if(dist < level.defaultOffenseRadius) {
+      if(dist < level.defaultOffenseRadius)
         inBombZone = true;
-      }
     }
     if(inBombZone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
       if(game["defenders"] == self.pers["team"]) {
@@ -281,9 +273,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       }
     }
   }
-  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isBombCarrier) && self.isBombCarrier == true) {
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isBombCarrier) && self.isBombCarrier == true)
     attacker maps\mp\_challenges::killedBombCarrier();
-  }
 }
 checkAllowSpectating() {
   wait(0.05);
@@ -297,14 +288,14 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update) {
+  if(update)
     maps\mp\gametypes\_spectating::updateSpectateSettings();
-  }
 }
 sd_endGame(winningTeam, endReasonText) {
-  if(isDefined(winningTeam)) {
-    [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
-  }
+  if(isDefined(winningTeam))
+    [[level._setTeamScore]](winningTeam, [
+      [level._getTeamScore]
+    ](winningTeam) + 1);
   thread maps\mp\gametypes\_globallogic::endGame(winningTeam, endReasonText);
 }
 sd_endGameWithKillcam(winningTeam, endReasonText) {
@@ -312,47 +303,40 @@ sd_endGameWithKillcam(winningTeam, endReasonText) {
   sd_endGame(winningTeam, endReasonText);
 }
 onDeadEvent(team) {
-  if(level.bombExploded || level.bombDefused) {
+  if(level.bombExploded || level.bombDefused)
     return;
-  }
   if(team == "all") {
-    if(level.bombPlanted) {
+    if(level.bombPlanted)
       sd_endGameWithKillcam(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    } else {
+    else
       sd_endGameWithKillcam(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
-    }
   } else if(team == game["attackers"]) {
-    if(level.bombPlanted) {
+    if(level.bombPlanted)
       return;
-    }
     sd_endGameWithKillcam(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
   } else if(team == game["defenders"]) {
     sd_endGameWithKillcam(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
   }
 }
 onOneLeftEvent(team) {
-  if(level.bombExploded || level.bombDefused) {
+  if(level.bombExploded || level.bombDefused)
     return;
-  }
   warnLastPlayer(team);
 }
 onTimeLimit() {
-  if(level.teamBased) {
+  if(level.teamBased)
     sd_endGame(game["defenders"], game["strings"]["time_limit_reached"]);
-  } else {
+  else
     sd_endGame(undefined, game["strings"]["time_limit_reached"]);
-  }
 }
 warnLastPlayer(team) {
-  if(!isDefined(level.warnedLastPlayer)) {
+  if(!isDefined(level.warnedLastPlayer))
     level.warnedLastPlayer = [];
-  }
-  if(isDefined(level.warnedLastPlayer[team])) {
+  if(isDefined(level.warnedLastPlayer[team]))
     return;
-  }
   level.warnedLastPlayer[team] = true;
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player.pers["team"]) && player.pers["team"] == team && isDefined(player.pers["class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
@@ -360,9 +344,8 @@ warnLastPlayer(team) {
       }
     }
   }
-  if(i == players.size) {
+  if(i == players.size)
     return;
-  }
   players[i] thread giveLastAttackerWarning();
 }
 giveLastAttackerWarning() {
@@ -370,12 +353,11 @@ giveLastAttackerWarning() {
   self endon("disconnect");
   fullHealthTime = 0;
   interval = .05;
-  while(1) {
-    if(self.health != self.maxhealth) {
+  while (1) {
+    if(self.health != self.maxhealth)
       fullHealthTime = 0;
-    } else {
+    else
       fullHealthTime += interval;
-    }
     wait interval;
     if(self.health == self.maxhealth && fullHealthTime >= 3) {
       break;
@@ -427,7 +409,7 @@ bombs() {
   }
   level.bombZones = [];
   bombZones = getEntArray("bombzone", "targetname");
-  for(index = 0; index < bombZones.size; index++) {
+  for (index = 0; index < bombZones.size; index++) {
     trigger = bombZones[index];
     visuals = getEntArray(bombZones[index].target, "targetname");
     bombZone = maps\mp\gametypes\_gameobjects::createUseObject(game["defenders"], trigger, visuals, (0, 0, 64));
@@ -435,9 +417,8 @@ bombs() {
     bombZone maps\mp\gametypes\_gameobjects::setUseTime(level.plantTime);
     bombZone maps\mp\gametypes\_gameobjects::setUseText(&"MP_PLANTING_EXPLOSIVE");
     bombZone maps\mp\gametypes\_gameobjects::setUseHintText(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
-    if(!level.multiBomb) {
+    if(!level.multiBomb)
       bombZone maps\mp\gametypes\_gameobjects::setKeyObject(level.sdBomb);
-    }
     label = bombZone maps\mp\gametypes\_gameobjects::getLabel();
     bombZone.label = label;
     bombZone maps\mp\gametypes\_gameobjects::set2DIcon("friendly", "compass_waypoint_defend" + label);
@@ -451,10 +432,9 @@ bombs() {
     bombZone.onCantUse = ::onCantUse;
     bombZone.useWeapon = "briefcase_bomb_mp";
     bombZone.visuals[0].killCamEnt = spawn("script_model", bombZone.visuals[0].origin + (0, 0, 128));
-    if(!level.multiBomb) {
+    if(!level.multiBomb)
       bombZone.trigger SetInvisibleToAll();
-    }
-    for(i = 0; i < visuals.size; i++) {
+    for (i = 0; i < visuals.size; i++) {
       if(isDefined(visuals[i].script_exploder)) {
         bombZone.exploderIndex = visuals[i].script_exploder;
         break;
@@ -466,12 +446,11 @@ bombs() {
     bombZone.bombDefuseTrig.origin += (0, 0, -10000);
     bombZone.bombDefuseTrig.label = label;
   }
-  for(index = 0; index < level.bombZones.size; index++) {
+  for (index = 0; index < level.bombZones.size; index++) {
     array = [];
-    for(otherindex = 0; otherindex < level.bombZones.size; otherindex++) {
-      if(otherindex != index) {
+    for (otherindex = 0; otherindex < level.bombZones.size; otherindex++) {
+      if(otherindex != index)
         array[array.size] = level.bombZones[otherindex];
-      }
     }
     level.bombZones[index].otherBombZones = array;
   }
@@ -481,14 +460,13 @@ onBeginUse(player) {
     player playSound("mpl_sd_bomb_defuse");
     player.isDefusing = true;
     player thread maps\mp\gametypes\_battlechatter_mp::gametypeSpecificBattleChatter("sd_enemyplant", player.pers["team"]);
-    if(isDefined(level.sdBombModel)) {
+    if(isDefined(level.sdBombModel))
       level.sdBombModel hide();
-    }
   } else {
     player.isPlanting = true;
     player thread maps\mp\gametypes\_battlechatter_mp::gametypeSpecificBattleChatter("sd_friendlyplant", player.pers["team"]);
     if(level.multibomb) {
-      for(i = 0; i < self.otherBombZones.size; i++) {
+      for (i = 0; i < self.otherBombZones.size; i++) {
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::disableObject();
       }
     }
@@ -496,9 +474,8 @@ onBeginUse(player) {
   player playSound("fly_bomb_raise_plr");
 }
 onEndUse(team, player, result) {
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return;
-  }
   player.isDefusing = false;
   player.isPlanting = false;
   player notify("event_ended");
@@ -508,7 +485,7 @@ onEndUse(team, player, result) {
     }
   } else {
     if(level.multibomb && !result) {
-      for(i = 0; i < self.otherBombZones.size; i++) {
+      for (i = 0; i < self.otherBombZones.size; i++) {
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::enableObject();
       }
     }
@@ -521,10 +498,9 @@ onUsePlantObject(player) {
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"])) {
     level thread bombPlanted(self, player);
     player logString("bomb planted: " + self.label);
-    for(index = 0; index < level.bombZones.size; index++) {
-      if(level.bombZones[index] == self) {
+    for (index = 0; index < level.bombZones.size; index++) {
+      if(level.bombZones[index] == self)
         continue;
-      }
       level.bombZones[index] maps\mp\gametypes\_gameobjects::disableObject();
     }
     thread playSoundOnPlayers("mus_sd_planted" + "_" + level.teamPostfix[player.pers["team"]]);
@@ -558,14 +534,12 @@ onUseDefuseObject(player) {
 }
 onDrop(player) {
   if(!level.bombPlanted) {
-    if(isDefined(player) && isDefined(player.name)) {
+    if(isDefined(player) && isDefined(player.name))
       printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", game["attackers"], player);
-    }
-    if(isDefined(player)) {
+    if(isDefined(player))
       player logString("bomb dropped");
-    } else {
+    else
       logString("bomb dropped");
-    }
   }
   player notify("event_ended");
   self maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_bomb");
@@ -587,7 +561,7 @@ onPickup(player) {
     player logString("bomb taken");
   }
   maps\mp\_utility::playSoundOnPlayers(game["bomb_recovered_sound"], game["attackers"]);
-  for(i = 0; i < level.bombZones.size; i++) {
+  for (i = 0; i < level.bombZones.size; i++) {
     level.bombZones[i].trigger SetInvisibleToAll();
     level.bombZones[i].trigger SetVisibleToPlayer(player);
   }
@@ -619,10 +593,9 @@ bombPlanted(destroyedObj, player) {
     level.sdBomb maps\mp\gametypes\_gameobjects::setDropped();
     level.sdBombModel = level.sdBomb.visuals[0];
   } else {
-    for(index = 0; index < level.players.size; index++) {
-      if(isDefined(level.players[index].carryIcon)) {
+    for (index = 0; index < level.players.size; index++) {
+      if(isDefined(level.players[index].carryIcon))
         level.players[index].carryIcon destroyElem();
-      }
     }
     trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), false, player);
     tempAngle = randomfloat(360);
@@ -658,9 +631,8 @@ bombPlanted(destroyedObj, player) {
   BombTimerWait();
   setMatchFlag("bomb_timer", 0);
   destroyedObj.visuals[0] maps\mp\gametypes\_globallogic_utils::stopTickingSound();
-  if(level.gameEnded || level.bombDefused) {
+  if(level.gameEnded || level.bombDefused)
     return;
-  }
   level.bombExploded = true;
   explosionOrigin = level.sdBombModel.origin + (0, 0, 12);
   level.sdBombModel hide();
@@ -675,12 +647,10 @@ bombPlanted(destroyedObj, player) {
   explosionEffect = spawnFx(level._effect["bombexplosion"], explosionOrigin + (0, 0, 50), (0, 0, 1), (cos(rot), sin(rot), 0));
   triggerFx(explosionEffect);
   thread playSoundinSpace("mpl_sd_exp_suitcase_bomb_main", explosionOrigin);
-  if(isDefined(destroyedObj.exploderIndex)) {
+  if(isDefined(destroyedObj.exploderIndex))
     exploder(destroyedObj.exploderIndex);
-  }
-  for(index = 0; index < level.bombZones.size; index++) {
+  for (index = 0; index < level.bombZones.size; index++)
     level.bombZones[index] maps\mp\gametypes\_gameobjects::disableObject();
-  }
   defuseObject maps\mp\gametypes\_gameobjects::disableObject();
   setGameEndTime(0);
   wait 3;
@@ -703,19 +673,16 @@ bombDefused() {
 }
 sd_isKillBoosting() {
   roundsPlayed = maps\mp\_utility::getRoundsPlayed();
-  if(level.playerKillsMax == 0) {
+  if(level.playerKillsMax == 0)
     return false;
-  }
-  if(game["totalKills"] > (level.totalKillsMax * (roundsPlayed + 1))) {
+  if(game["totalKills"] > (level.totalKillsMax * (roundsPlayed + 1)))
     return true;
-  }
-  if(self.kills > (level.playerKillsMax * (roundsPlayed + 1))) {
+  if(self.kills > (level.playerKillsMax * (roundsPlayed + 1)))
     return true;
-  }
   if(level.teambased && (self.team == "allies" || self.team == "axis")) {
-    if(game["totalKillsTeam"][self.team] > (level.playerKillsMax * (roundsPlayed + 1))) {
+    if(game["totalKillsTeam"][self.team] > (level.playerKillsMax * (roundsPlayed + 1)))
       return true;
-    }
   }
   return false;
 }
+

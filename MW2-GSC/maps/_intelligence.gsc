@@ -10,7 +10,7 @@
 //need to be able to save select dvar in menu (spending points while in the menu)
 //need to be able to save select dvar from script (dvars track which items are found)
 main() {
-  // && 1/30 pieces of enemy intel found.
+  // &&1/30 pieces of enemy intel found.
   precachestring(&"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE");
   precachestring(&"SCRIPT_INTELLIGENCE_PREV_FOUND");
   level.intel_items = create_array_of_intel_items();
@@ -35,9 +35,8 @@ main() {
 
 remove_all_intel() {
   foreach(index, trigger in level.intel_items) {
-    if(!isDefined(trigger.removed)) {
+    if(!isdefined(trigger.removed))
       trigger remove_intel_item();
-    }
   }
 }
 
@@ -51,8 +50,9 @@ remove_intel_item() {
   setDvar("ui_level_player_cheatpoints", level.intel_counter);
 
   self notify("end_trigger_thread");
-
+  /#
   println("^3Removed Intel: " + self.num);
+  # /
 }
 
 initialize_intel() {
@@ -73,32 +73,30 @@ intel_think() {
   }
 }
 
-//we poll constantly to see if the item's been picked up...this is because script only checks at the
+//we poll constantly to see if the item's been picked up...this is because script only checks at the 
 //beginning if the item was found or not...after that, it doesn't check anymore, however a player can
 //pick up intel, die, reload an earlier part of script and then pick up intel again...this polling
 //insures things like that dont happen.
 poll_for_found() {
   self endon("end_loop_thread");
 
-  while(!self check_item_found()) {
+  while (!self check_item_found())
     wait .1;
-  }
 
   self remove_intel_item();
 }
 
 check_item_found() {
   foreach(player in level.players) {
-    if(!player GetPlayerIntelIsFound(self.num)) {
+    if(!player GetPlayerIntelIsFound(self.num))
       return false;
-    }
   }
   return true;
 }
 
 create_array_of_intel_items() {
-  intelligence_items = getEntArray("intelligence_item", "targetname");
-  for(i = 0; i < intelligence_items.size; i++) {
+  intelligence_items = getentarray("intelligence_item", "targetname");
+  for (i = 0; i < intelligence_items.size; i++) {
     println(intelligence_items[i].origin);
     intelligence_items[i].item = getent(intelligence_items[i].target, "targetname");
     intelligence_items[i].found = false;
@@ -108,14 +106,13 @@ create_array_of_intel_items() {
 
 create_array_of_origins_from_table() {
   origins = [];
-  for(num = 1; num <= 64; num++) {
+  for (num = 1; num <= 64; num++) {
     location = tablelookup("maps/_intel_items.csv", 0, num, 4);
-    if(isDefined(location) && (location != "undefined")) {
+    if(isdefined(location) && (location != "undefined")) {
       locArray = strTok(location, ",");
       assert(locArray.size == 3);
-      for(i = 0; i < locArray.size; i++) {
+      for (i = 0; i < locArray.size; i++)
         locArray[i] = int(locArray[i]);
-      }
       origins[num] = (locArray[0], locArray[1], locArray[2]);
     } else {
       origins[num] = undefined;
@@ -128,7 +125,7 @@ wait_for_pickup() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
-    // Press and hold^3 && 1 ^7to secure the enemy intelligence.
+    // Press and hold^3 &&1 ^7to secure the enemy intelligence.
     self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
     self usetriggerrequirelookat();
   }
@@ -149,19 +146,18 @@ save_intel_for_all_players() {
   assert(!self check_item_found());
 
   foreach(player in level.players) {
-    if(player GetPlayerIntelIsFound(self.num)) {
+    if(player GetPlayerIntelIsFound(self.num))
       continue;
-    }
 
     player SetPlayerIntelFound(self.num);
   }
   logString("found intel item " + self.num);
 
   // updates percent complete
-
+  /#
   PrintLn(">> SP PERCENT UPDATE - save_intel_for_all_players()");
-
-  maps\_endmission::updateSpPercent();
+  # /
+    maps\_endmission::updateSpPercent();
 }
 
 give_point() {
@@ -181,9 +177,8 @@ intel_feedback(found_by_player) {
 
   foreach(player in level.players) {
     //if i did NOT find it, but I already had it, print nothing
-    if(found_by_player != player && player GetPlayerIntelIsFound(self.num)) {
+    if(found_by_player != player && player GetPlayerIntelIsFound(self.num))
       continue;
-    }
 
     remaining_print = player createClientFontString("objective", 1.5);
     remaining_print.glowColor = (0.7, 0.7, 0.3);
@@ -195,23 +190,21 @@ intel_feedback(found_by_player) {
     intel_found = 0;
 
     //if I found it and I already had it
-    if(found_by_player == player && player GetPlayerIntelIsFound(self.num)) {
-      remaining_print.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
-    } else {
-      // && 1/30 pieces of enemy intel found.
-      remaining_print.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
+    if(found_by_player == player && player GetPlayerIntelIsFound(self.num))
+      remaining_print.label = & "SCRIPT_INTELLIGENCE_PREV_FOUND";
+    else {
+      // &&1/30 pieces of enemy intel found.
+      remaining_print.label = & "SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
       player give_point();
       intel_found = (player GetLocalPlayerProfileData("cheatPoints"));
       remaining_print setValue(intel_found);
     }
 
-    if(intel_found == 22) {
+    if(intel_found == 22)
       player maps\_utility::player_giveachievement_wrapper("THE_ROAD_LESS_TRAVELED");
-    }
 
-    if(intel_found == 45) {
+    if(intel_found == 45)
       player maps\_utility::player_giveachievement_wrapper("LEAVE_NO_STONE_UNTURNED");
-    }
 
     remaining_print delaycall(delete_time, ::Destroy);
   }
@@ -230,50 +223,41 @@ setup_hud_elem() {
 
 assert_if_identical_origins() {
   origins = [];
-  for(i = 1; i < 65; i++) {
+  for (i = 1; i < 65; i++) {
     location = tablelookup("maps/_intel_items.csv", 0, i, 4);
     locArray = strTok(location, ",");
     //assert( locArray.size == 3 );
-    for(i = 0; i < locArray.size; i++) {
+    for (i = 0; i < locArray.size; i++)
       locArray[i] = int(locArray[i]);
-    }
     origins[i] = (locArray[0], locArray[1], locArray[2]);
 
     //if( distancesquared( first.origin, second.origin ) < 4 );
   }
 
-  for(i = 0; i < origins.size; i++) {
-    if(!isDefined(origins[i])) {
+  for (i = 0; i < origins.size; i++) {
+    if(!isdefined(origins[i]))
       continue;
-    }
-    if(origins[i] == "undefined") {
+    if(origins[i] == "undefined")
       continue;
-    }
-    for(j = 0; j < origins.size; j++) {
-      if(!isDefined(origins[j])) {
+    for (j = 0; j < origins.size; j++) {
+      if(!isdefined(origins[j]))
         continue;
-      }
-      if(origins[j] == "undefined") {
+      if(origins[j] == "undefined")
         continue;
-      }
-      if(i == j) {
+      if(i == j)
         continue;
-      }
-      if(origins[i] == origins[j]) {
+      if(origins[i] == origins[j])
         assertmsg("intel items in maps/_intel_items.csv with identical origins (" + origins[i] + ") ");
-      }
     }
   }
 }
 
 get_nums_from_origins(origin) {
-  for(i = 1; i < level.table_origins.size + 1; i++) {
-    if(!isDefined(level.table_origins[i])) {
+  for (i = 1; i < level.table_origins.size + 1; i++) {
+    if(!isdefined(level.table_origins[i]))
       continue;
-    }
-    if(distancesquared(origin, level.table_origins[i]) < squared(75)) {
+    if(distancesquared(origin, level.table_origins[i]) < squared(75))
       return i;
-    }
   }
 
   assertmsg("Add the origin of this intel item ( " + origin + " ) to maps/_intel_items.csv file");

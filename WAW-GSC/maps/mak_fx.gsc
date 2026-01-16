@@ -195,6 +195,6 @@ spawnFX() {
 
 cig_smoke(officer) {
   wait(1);
-  playFXOnTag(level._effect["cigarette"], officer, "tag_efx");
-  playFXOnTag(level._effect["cigarette_glow"], officer, "tag_efx");
+  PlayFxOnTag(level._effect["cigarette"], officer, "tag_efx");
+  PlayFxOnTag(level._effect["cigarette_glow"], officer, "tag_efx");
 }

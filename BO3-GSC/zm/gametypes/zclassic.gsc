@@ -11,15 +11,15 @@
 
 function main() {
   zm_gametype::main();
-  level.onprecachegametype = &onprecachegametype;
-  level.onstartgametype = &onstartgametype;
-  level._game_module_custom_spawn_init_func = &zm_gametype::custom_spawn_init_func;
-  level._game_module_stat_update_func = &zm_stats::survival_classic_custom_stat_update;
+  level.onprecachegametype = & onprecachegametype;
+  level.onstartgametype = & onstartgametype;
+  level._game_module_custom_spawn_init_func = & zm_gametype::custom_spawn_init_func;
+  level._game_module_stat_update_func = & zm_stats::survival_classic_custom_stat_update;
 }
 
 function onprecachegametype() {
   level.playersuicideallowed = 1;
-  level.canplayersuicide = &zm_gametype::canplayersuicide;
+  level.canplayersuicide = & zm_gametype::canplayersuicide;
 }
 
 function onstartgametype() {

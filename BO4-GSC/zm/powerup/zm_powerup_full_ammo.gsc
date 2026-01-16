@@ -18,6 +18,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_powerup_full_ammo;
 
 autoexec __init__system__() {
@@ -28,7 +29,7 @@ __init__() {
   zm_powerups::register_powerup("full_ammo", &grab_full_ammo);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", # "zombie/powerup_max_ammo", &function_b695b971, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", #"zombie/powerup_max_ammo", &function_b695b971, 0, 0, 0);
   }
 }
 
@@ -105,7 +106,9 @@ full_ammo_powerup(drop_item, player) {
 
   foreach(player in players) {
     if(isDefined(level.check_player_is_ready_for_ammo)) {
-      if([[level.check_player_is_ready_for_ammo]](player) == 0) {
+      if([
+          [level.check_player_is_ready_for_ammo]
+        ](player) == 0) {
         continue;
       }
     }

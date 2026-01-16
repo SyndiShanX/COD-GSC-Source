@@ -10,14 +10,14 @@ init() {
   game["headicon_axis"] = maps\mp\gametypes\_teams::getteamheadicon("axis");
   level thread onplayerconnect();
 
-  for(;;) {
+  for (;;) {
     updatefriendiconsettings();
     wait 5;
   }
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
     var_0 thread onplayerkilled();
@@ -27,7 +27,7 @@ onplayerconnect() {
 onplayerspawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     thread showfriendicon();
   }
@@ -36,7 +36,7 @@ onplayerspawned() {
 onplayerkilled() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self.headicon = "";
   }
@@ -66,10 +66,10 @@ updatefriendiconsettings() {
 updatefriendicons() {
   var_0 = level.players;
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
+    if(isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
       if(level.drawfriend) {
         if(var_2.pers["team"] == "allies") {
           var_2.headicon = game["headicon_allies"];
@@ -84,12 +84,11 @@ updatefriendicons() {
 
       var_0 = level.players;
 
-      for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      for (var_1 = 0; var_1 < var_0.size; var_1++) {
         var_2 = var_0[var_1];
 
-        if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
+        if(isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing")
           var_2.headicon = "";
-        }
       }
     }
   }

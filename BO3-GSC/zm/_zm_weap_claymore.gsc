@@ -21,20 +21,20 @@
 #namespace _zm_weap_claymore;
 
 function autoexec __init__sytem__() {
-  system::register("claymore", &__init__, undefined, undefined);
+  system::register("claymore", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["claymore_laser"] = "_t6/weapon/claymore/fx_claymore_laser";
-  zm_placeable_mine::add_mine_type("claymore", &"ZOMBIE_CLAYMORE_PICKUP");
-  zm_placeable_mine::add_planted_callback(&play_claymore_effects, "claymore");
-  zm_placeable_mine::add_planted_callback(&claymore_detonation, "claymore");
+  zm_placeable_mine::add_mine_type("claymore", & "ZOMBIE_CLAYMORE_PICKUP");
+  zm_placeable_mine::add_planted_callback( & play_claymore_effects, "claymore");
+  zm_placeable_mine::add_planted_callback( & claymore_detonation, "claymore");
 }
 
 function play_claymore_effects(e_planter) {
   self endon("death");
   self zm_utility::waittill_not_moving();
-  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
+  playfxontag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 function claymore_detonation(e_planter) {
@@ -45,35 +45,35 @@ function claymore_detonation(e_planter) {
   damagearea setexcludeteamfortrigger(self.owner.team);
   damagearea enablelinkto();
   damagearea linkto(self);
-  if(isDefined(self.isonbus) && self.isonbus) {
+  if(isdefined(self.isonbus) && self.isonbus) {
     damagearea setmovingplatformenabled(1);
   }
   self.damagearea = damagearea;
   self thread delete_mines_on_death(self.owner, damagearea);
-  if(!isDefined(self.owner.placeable_mines)) {
+  if(!isdefined(self.owner.placeable_mines)) {
     self.owner.placeable_mines = [];
   } else if(!isarray(self.owner.placeable_mines)) {
     self.owner.placeable_mines = array(self.owner.placeable_mines);
   }
   self.owner.placeable_mines[self.owner.placeable_mines.size] = self;
-  while(true) {
+  while (true) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner) {
+    if(isdefined(self.owner) && ent == self.owner) {
       continue;
     }
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] == self.team) {
+    if(isdefined(ent.pers) && isdefined(ent.pers["team"]) && ent.pers["team"] == self.team) {
       continue;
     }
-    if(isDefined(ent.ignore_placeable_mine) && ent.ignore_placeable_mine) {
+    if(isdefined(ent.ignore_placeable_mine) && ent.ignore_placeable_mine) {
       continue;
     }
     if(!ent should_trigger_claymore(self)) {
       continue;
     }
     if(ent damageconetrace(self.origin, self) > 0) {
-      self playSound("wpn_claymore_alert");
+      self playsound("wpn_claymore_alert");
       wait(0.4);
-      if(isDefined(self.owner)) {
+      if(isdefined(self.owner)) {
         self detonate(self.owner);
       } else {
         self detonate(undefined);
@@ -87,7 +87,7 @@ function private should_trigger_claymore(e_mine) {
   n_detonation_dot = cos(70);
   pos = self.origin + vectorscale((0, 0, 1), 32);
   dirtopos = pos - e_mine.origin;
-  objectforward = anglesToForward(e_mine.angles);
+  objectforward = anglestoforward(e_mine.angles);
   dist = vectordot(dirtopos, objectforward);
   if(dist < 20) {
     return 0;
@@ -99,11 +99,11 @@ function private should_trigger_claymore(e_mine) {
 
 function private delete_mines_on_death(player, ent) {
   self waittill("death");
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     arrayremovevalue(player.placeable_mines, self);
   }
   wait(0.05);
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     ent delete();
   }
 }

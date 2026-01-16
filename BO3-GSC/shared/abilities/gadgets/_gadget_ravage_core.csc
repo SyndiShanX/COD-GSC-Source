@@ -15,7 +15,7 @@
 #namespace _gadget_ravage_core;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_ravage_core", &__init__, undefined, undefined);
+  system::register("gadget_ravage_core", & __init__, undefined, undefined);
 }
 
 function __init__() {}

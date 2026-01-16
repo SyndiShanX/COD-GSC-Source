@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\killstreaks\killstreak_hacking;
+
 #namespace killstreak_detect;
 
 init_shared() {
@@ -22,10 +23,12 @@ killstreaktargetset(killstreakentity, offset = (0, 0, 0)) {
   target_set(killstreakentity, offset);
 
   killstreakentity thread killstreak_hacking::killstreak_switch_team(killstreakentity.owner);
+
 }
 
 killstreaktargetclear(killstreakentity) {
   target_remove(killstreakentity);
 
   killstreakentity thread killstreak_hacking::killstreak_switch_team_end();
+
 }

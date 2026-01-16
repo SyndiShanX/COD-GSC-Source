@@ -4,9 +4,11 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace self_revive_visuals;
 
 class cself_revive_visuals: cluielem {
+
   function set_revive_progress(localclientnum, value) {
     set_data(localclientnum, "revive_progress", value);
   }
@@ -16,7 +18,7 @@ class cself_revive_visuals: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "self_revive_visuals");
+    cluielem::open(localclientnum, #"self_revive_visuals");
   }
 
   function function_fa582112(localclientnum) {

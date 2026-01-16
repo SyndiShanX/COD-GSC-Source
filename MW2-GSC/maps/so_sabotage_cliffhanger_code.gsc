@@ -43,21 +43,21 @@ set_flags() {
 spawn_funcs() {
   add_global_spawn_function("axis", ::enemy_nerf);
 
-  array_thread(getEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
-  array_thread(getEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_crate_patroller);
-  array_thread(getEntArray("start_quonset_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
-  array_thread(getEntArray("right_side_start_guy", "script_noteworthy"), ::add_spawn_function, ::right_side_start_patroller);
+  array_thread(GetEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
+  array_thread(GetEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_crate_patroller);
+  array_thread(GetEntArray("start_quonset_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
+  array_thread(GetEntArray("right_side_start_guy", "script_noteworthy"), ::add_spawn_function, ::right_side_start_patroller);
 
-  array_thread(getEntArray("2story_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
-  array_thread(getEntArray("2story_sitter", "script_noteworthy"), ::add_spawn_function, ::twostory_sitter);
-  array_thread(getEntArray("container_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
+  array_thread(GetEntArray("2story_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
+  array_thread(GetEntArray("2story_sitter", "script_noteworthy"), ::add_spawn_function, ::twostory_sitter);
+  array_thread(GetEntArray("container_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
 
-  array_thread(getEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::reduce_footstep_detect_dist);
-  array_thread(getEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::reduce_footstep_detect_dist);
-  array_thread(getEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::increase_fov_when_player_is_near);
-  array_thread(getEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::increase_fov_when_player_is_near);
+  array_thread(GetEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::reduce_footstep_detect_dist);
+  array_thread(GetEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::reduce_footstep_detect_dist);
+  array_thread(GetEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::increase_fov_when_player_is_near);
+  array_thread(GetEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_code::increase_fov_when_player_is_near);
 
-  wind_blown_flags = getEntArray("wind_blown_flag", "targetname");
+  wind_blown_flags = GetEntArray("wind_blown_flag", "targetname");
   array_thread(wind_blown_flags, ::wind_blown_flag_think);
 }
 
@@ -149,7 +149,7 @@ tent_1_patrollers() {
 tent_1_crate_patroller() {
   self endon("death");
   nearDoorStruct = getstruct("struct_crate_patroller_enterhut2", "targetname");
-  while(1) {
+  while (1) {
     nearDoorStruct waittill("trigger", other);
 
     if(other == self) {
@@ -176,7 +176,7 @@ increase_fov_when_player_is_near() {
   self endon("death");
   self endon("enemy");
 
-  while(1) {
+  while (1) {
     if(player_is_near()) {
       self.fovcosine = 0.01;
       return;
@@ -187,9 +187,8 @@ increase_fov_when_player_is_near() {
 
 player_is_near() {
   foreach(player in level.players) {
-    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint)) {
+    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint))
       return true;
-    }
   }
 
   return false;
@@ -280,9 +279,8 @@ stealth_settings() {
 stealth_cliffhanger_clifftop() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     return;
-  }
 
   threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
   switch (self.team) {
@@ -341,20 +339,18 @@ dialog_stealth_spotted() {
   failure = array_randomize(failure);
   line = 0;
 
-  while(1) {
+  while (1) {
     flag_wait("_stealth_spotted");
 
     wait 1;
-    if(flag("_stealth_spotted")) {
+    if(flag("_stealth_spotted"))
       dialog_stealth_throttle(failure[line]);
-    }
 
     level.stealth_broken_time = gettime();
 
     line++;
-    if(line >= failure.size) {
+    if(line >= failure.size)
       line = 0;
-    }
 
     flag_waitopen("_stealth_spotted");
   }
@@ -372,48 +368,42 @@ dialog_stealth_failure() {
   failure[failure.size] = "cliff_pri_silencers";
   line = RandomInt(failure.size);
 
-  while(1) {
+  while (1) {
     flag_wait("_stealth_spotted");
     wait 1;
 
     flag_waitopen("_stealth_spotted");
     wait 1;
 
-    if(!flag("_stealth_spotted")) {
+    if(!flag("_stealth_spotted"))
       dialog_stealth_throttle(failure[line]);
-    }
     line++;
-    if(line >= failure.size) {
+    if(line >= failure.size)
       line = 0;
-    }
   }
 }
 
 dialog_stealth_throttle(dialog_alias) {
-  if(level.stealth_broken_time + 5000 < gettime()) {
+  if(level.stealth_broken_time + 5000 < gettime())
     radio_dialogue(dialog_alias);
-  }
 }
 
 dialog_unsilenced_weapons() {
   self endon("death");
   level endon("nonsilenced_weapon_pickup");
 
-  while(true) {
+  while (true) {
     self waittill("weapon_change");
 
     current_weapon = self getcurrentprimaryweapon();
-    if(!isDefined(current_weapon)) {
+    if(!isdefined(current_weapon))
       continue;
-    }
 
-    if(current_weapon == "none") {
+    if(current_weapon == "none")
       continue;
-    }
 
-    if(issubstr(current_weapon, "silence")) {
+    if(issubstr(current_weapon, "silence"))
       continue;
-    }
 
     //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
     thread radio_dialogue("cliff_pri_attractattn");
@@ -428,7 +418,7 @@ dialog_unsilenced_weapons() {
 so_stealth_music_control() {
   level endon("special_op_terminated");
   level endon("stop_stealth_music");
-  while(1) {
+  while (1) {
     thread stealth_music_hidden_loop();
     flag_wait("_stealth_spotted");
     music_stop(.2);
@@ -472,7 +462,7 @@ stealth_music_busted_loop() {
 // ---------------------------------------------------------------------------------
 
 start_truck_patrol() {
-  array_thread(getEntArray("truck_guys", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_stealth::base_truck_guys_think);
+  array_thread(getentarray("truck_guys", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_stealth::base_truck_guys_think);
 
   flag_wait("start_truck_patrol");
   level.truck_patrol = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("truck_patrol");
@@ -514,17 +504,15 @@ base_truck_think() {
 unload_and_attack_if_stealth_broken_and_close() {
   self endon("truck_guys_alerted");
 
-  while(1) {
+  while (1) {
     flag_wait("_stealth_spotted");
-    foreach(player in level.players) {
-      thread waittill_player_in_range(player);
-    }
+    foreach(player in level.players)
+    thread waittill_player_in_range(player);
     self waittill("player_in_range");
-    if(!flag("_stealth_spotted")) {
+    if(!flag("_stealth_spotted"))
       continue;
-    } else {
+    else
       break;
-    }
   }
   flag_set("truck_guys_alerted");
 }
@@ -539,26 +527,25 @@ waittill_player_in_range(player) {
 
 truck_headlights() {
   //level.truck_patrol maps\_vehicle::lights_on( "headlights" );
-  playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
-  playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
+  PlayFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
+  PlayFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
   //level.truck_patrol maps\_vehicle::lights_on( "brakelights" );
 
-  //taillights
-  playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
-  playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
+  //taillights 
+  PlayFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
+  PlayFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
 
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isdefined(self))
     delete_truck_headlights();
-  }
 }
 
 delete_truck_headlights() {
-  stopFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
-  stopFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
-  stopFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
-  stopFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
+  StopFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
+  StopFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
+  StopFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
+  StopFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
 }
 
 dialog_truck_coming() {
@@ -567,7 +554,7 @@ dialog_truck_coming() {
   level endon("jeep_blown_up");
 
   first_time = true;
-  while(1) {
+  while (1) {
     self waittill_player_in_truck_range();
     truck_coming = within_fov(self.origin, self.angles, self.close_player.origin, Cos(45));
     if(truck_coming) {
@@ -587,9 +574,8 @@ dialog_truck_coming() {
 
 waittill_player_in_truck_range() {
   self.close_player = undefined;
-  foreach(player in level.players) {
-    player thread watch_for_truck(self);
-  }
+  foreach(player in level.players)
+  player thread watch_for_truck(self);
 
   level waittill("player_in_truck_range");
 }
@@ -606,16 +592,14 @@ dialog_jeep_stopped() {
   level endon("special_op_terminated");
   self waittill("unloading");
 
-  if(flag("_stealth_spotted")) {
+  if(flag("_stealth_spotted"))
     return;
-  }
 
   //Heads up, the truck just stopped.	
   radio_dialogue("cliff_pri_headsup");
 
-  if(flag("_stealth_spotted")) {
+  if(flag("_stealth_spotted"))
     return;
-  }
 
   //Four tangos just got out and are looking around.	
   radio_dialogue("cliff_pri_lookingaround");
@@ -626,7 +610,7 @@ dialog_jeep_stopped() {
 setup_explosives() {
   level.plant_targets = [];
 
-  plant_targets = getEntArray("explosive_obj_model", "script_noteworthy");
+  plant_targets = getentarray("explosive_obj_model", "script_noteworthy");
 
   // hide everything first, will show only selected targets
   foreach(obj_model in plant_targets) {
@@ -636,7 +620,7 @@ setup_explosives() {
   }
 
   truncated_plant_targets = [];
-  for(i = 0; i < plant_targets.size; i++) {
+  for (i = 0; i < plant_targets.size; i++) {
     truncated_plant_targets[i] = plant_targets[i];
     truncated_plant_targets[i] show();
   }
@@ -649,9 +633,8 @@ setup_explosives() {
   waittillframeend;
 
   Objective_Add(1, "current", level.challenge_objective);
-  for(i = 0; i < level.plant_targets.size; i++) {
+  for (i = 0; i < level.plant_targets.size; i++)
     Objective_AdditionalPosition(1, level.plant_targets[i].id, level.plant_targets[i].origin);
-  }
 }
 
 setup_explosive() {
@@ -661,7 +644,7 @@ setup_explosive() {
   planted_model = getent(self.target, "targetname");
   planted_model hide();
 
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.obj_model = self;
   struct.objective_id = int(strTok(self.targetname, "_")[1]); // an int in string form
   struct.planted_model = planted_model;
@@ -705,16 +688,14 @@ explosives_planted_monitor() {
 
   flag_wait("explosives_ready");
 
-  while(1) {
+  while (1) {
     all_planted = true;
-    foreach(plant_target in level.plant_targets) {
-      if(plant_target.planted == false)
-    }
-    all_planted = false;
+    foreach(plant_target in level.plant_targets)
+    if(plant_target.planted == false)
+      all_planted = false;
 
-    if(all_planted) {
+    if(all_planted)
       break;
-    }
 
     level waittill("an_explosive_planted");
   }
@@ -733,26 +714,24 @@ explosives_planted_monitor() {
 
 wind_blown_flag_think() {
   animname = "flag_square";
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy))
     animname = self.script_noteworthy;
-  }
   waving_flag = spawn_anim_model(animname);
   waving_flag.origin = self.origin;
   waving_flag.angles = self.angles;
   self Delete();
 
   angles = VectorToAngles(waving_flag.angles);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   waving_flag thread flag_waves();
 }
 
 flag_waves() {
   animation = self getanim("flag_waves");
   self SetAnim(animation, 1, 0, 1);
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self))
       return;
-    }
     flap_rate = RandomFloatRange(0.8, 1.2);
     self SetAnim(animation, 1, 0, flap_rate);
     wait(RandomFloatRange(0.3, 0.7));
@@ -762,9 +741,8 @@ flag_waves() {
 // ---------------------------------------------------------------------------------
 
 force_players_prone() {
-  if(!is_coop()) {
+  if(!is_coop())
     return;
-  }
 
   foreach(player in level.players) {
     //		player AllowStand( false );
@@ -791,11 +769,10 @@ threeD_objective_hint() {
 // ---------------------------------------------------------------------------------
 
 type_spawners_special() {
-  special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
+  special_case = !(isdefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
   test = 0;
-  if(!special_case) {
+  if(!special_case)
     test = 0;
-  }
 
   original_case = self type_spawners();
   return special_case && original_case;
@@ -803,19 +780,17 @@ type_spawners_special() {
 
 type_vehicle_special() {
   // keep all collmaps
-  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap") {
+  if(isdefined(self.code_classname) && self.code_classname == "script_vehicle_collmap")
     return false;
-  }
 
-  special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "tarmac_snowmobile");
-  special_case2 = !(isDefined(self.targetname) && self.targetname == "truck_patrol");
+  special_case = !(isdefined(self.script_noteworthy) && self.script_noteworthy == "tarmac_snowmobile");
+  special_case2 = !(isdefined(self.targetname) && self.targetname == "truck_patrol");
 
   original_case = self type_vehicle();
 
   test = 0;
-  if(original_case) {
+  if(original_case)
     test = 0;
-  }
 
   return special_case && special_case2 && original_case;
 }

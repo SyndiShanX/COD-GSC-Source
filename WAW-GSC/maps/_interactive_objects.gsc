@@ -9,14 +9,12 @@
 main() {
   flag_init("no_ai_tv_damage");
   qBarrels = false;
-  barrels = getEntArray("explodable_barrel", "targetname");
-  if((isDefined(barrels)) && (barrels.size > 0)) {
+  barrels = getentarray("explodable_barrel", "targetname");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBarrels = true;
-  }
-  barrels = getEntArray("explodable_barrel", "script_noteworthy");
-  if((isDefined(barrels)) && (barrels.size > 0)) {
+  barrels = getentarray("explodable_barrel", "script_noteworthy");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBarrels = true;
-  }
   if(qBarrels) {
     PrecacheRumble("barrel_explosion");
     level.breakables_fx["barrel"]["explode"] = loadfx("destructibles/fx_barrelExp");
@@ -24,127 +22,108 @@ main() {
     level.breakables_fx["barrel"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qCrates = false;
-  crates = getEntArray("flammable_crate", "targetname");
-  if((isDefined(crates)) && (crates.size > 0)) {
+  crates = getentarray("flammable_crate", "targetname");
+  if((isDefined(crates)) && (crates.size > 0))
     qCrates = true;
-  }
-  crates = getEntArray("flammable_crate", "script_noteworthy");
-  if((isDefined(crates)) && (crates.size > 0)) {
+  crates = getentarray("flammable_crate", "script_noteworthy");
+  if((isDefined(crates)) && (crates.size > 0))
     qCrates = true;
-  }
   if(qCrates) {
     level.breakables_fx["ammo_crate"]["explode"] = loadfx("destructibles/fx_ammoboxExp");
   }
   qBagofbarrels = false;
-  bagofbarrels = getEntArray("explodable_bagofbarrels", "targetname");
-  if((isDefined(bagofbarrels)) && (bagofbarrels.size > 0)) {
+  bagofbarrels = getentarray("explodable_bagofbarrels", "targetname");
+  if((isDefined(bagofbarrels)) && (bagofbarrels.size > 0))
     qBagofbarrels = true;
-  }
-  bagofbarrels = getEntArray("explodable_bagofbarrels", "script_noteworthy");
-  if((isDefined(bagofbarrels)) && (bagofbarrels.size > 0)) {
+  bagofbarrels = getentarray("explodable_bagofbarrels", "script_noteworthy");
+  if((isDefined(bagofbarrels)) && (bagofbarrels.size > 0))
     qBagofbarrels = true;
-  }
   if(qBagofbarrels) {
     level.breakables_fx["bagofbarrels"]["explode"] = loadfx("maps/fly/fx_exp_bagobarrels");
     level.breakables_fx["bagofbarrels"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["bagofbarrels"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qBagofcrates = false;
-  bagofcrates = getEntArray("explodable_bagofcrates", "targetname");
-  if((isDefined(bagofcrates)) && (bagofcrates.size > 0)) {
+  bagofcrates = getentarray("explodable_bagofcrates", "targetname");
+  if((isDefined(bagofcrates)) && (bagofcrates.size > 0))
     qBagofcrates = true;
-  }
-  bagofcrates = getEntArray("explodable_bagofcrates", "script_noteworthy");
-  if((isDefined(bagofcrates)) && (bagofcrates.size > 0)) {
+  bagofcrates = getentarray("explodable_bagofcrates", "script_noteworthy");
+  if((isDefined(bagofcrates)) && (bagofcrates.size > 0))
     qBagofcrates = true;
-  }
   if(qBagofcrates) {
     level.breakables_fx["bagofcrates"]["explode"] = loadfx("maps/fly/fx_exp_bagocrates");
     level.breakables_fx["bagofcrates"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["bagofcrates"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qOiltank = false;
-  oiltanks = getEntArray("explodable_oiltank", "targetname");
-  if((isDefined(oiltanks)) && (oiltanks.size > 0)) {
+  oiltanks = getentarray("explodable_oiltank", "targetname");
+  if((isDefined(oiltanks)) && (oiltanks.size > 0))
     qOiltank = true;
-  }
-  oiltanks = getEntArray("explodable_oiltank", "script_noteworthy");
-  if((isDefined(oiltanks)) && (oiltanks.size > 0)) {
+  oiltanks = getentarray("explodable_oiltank", "script_noteworthy");
+  if((isDefined(oiltanks)) && (oiltanks.size > 0))
     qOiltank = true;
-  }
   if(qOiltank) {
     level.breakables_fx["oiltank"]["explode"] = loadfx("maps/fly/fx_exp_oil_tank_big");
     level.breakables_fx["oiltank"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["oiltank"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qOiltanksmall = false;
-  oiltank_small = getEntArray("explodable_oiltank_small", "targetname");
-  if((isDefined(oiltank_small)) && (oiltank_small.size > 0)) {
+  oiltank_small = getentarray("explodable_oiltank_small", "targetname");
+  if((isDefined(oiltank_small)) && (oiltank_small.size > 0))
     qOiltanksmall = true;
-  }
-  oiltank_small = getEntArray("explodable_oiltank_small", "script_noteworthy");
-  if((isDefined(oiltank_small)) && (oiltank_small.size > 0)) {
+  oiltank_small = getentarray("explodable_oiltank_small", "script_noteworthy");
+  if((isDefined(oiltank_small)) && (oiltank_small.size > 0))
     qOiltanksmall = true;
-  }
   if(qOiltank) {
     level.breakables_fx["oiltanksmall"]["explode"] = loadfx("maps/fly/fx_exp_oil_tank_sm");
     level.breakables_fx["oiltanksmall"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["oiltanksmall"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qLiferaft = false;
-  liferafts = getEntArray("explodable_liferaft", "targetname");
-  if((isDefined(liferafts)) && (liferafts.size > 0)) {
+  liferafts = getentarray("explodable_liferaft", "targetname");
+  if((isDefined(liferafts)) && (liferafts.size > 0))
     qLiferaft = true;
-  }
-  liferafts = getEntArray("explodable_liferaft", "script_noteworthy");
-  if((isDefined(liferafts)) && (liferafts.size > 0)) {
+  liferafts = getentarray("explodable_liferaft", "script_noteworthy");
+  if((isDefined(liferafts)) && (liferafts.size > 0))
     qLiferaft = true;
-  }
   if(qLiferaft) {
     level.breakables_fx["liferaft"]["explode"] = loadfx("maps/fly/fx_dest_life_raft");
     level.breakables_fx["liferaft"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["liferaft"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
   qTarpcrate = false;
-  tarpcrates = getEntArray("explodable_tarpcrate", "targetname");
-  if((isDefined(tarpcrates)) && (tarpcrates.size > 0)) {
+  tarpcrates = getentarray("explodable_tarpcrate", "targetname");
+  if((isDefined(tarpcrates)) && (tarpcrates.size > 0))
     qTarpcrate = true;
-  }
-  tarpcrates = getEntArray("explodable_tarpcrate", "script_noteworthy");
-  if((isDefined(tarpcrates)) && (tarpcrates.size > 0)) {
+  tarpcrates = getentarray("explodable_tarpcrate", "script_noteworthy");
+  if((isDefined(tarpcrates)) && (tarpcrates.size > 0))
     qTarpcrate = true;
-  }
   if(qTarpcrate) {
     level.breakables_fx["tarpcrate"]["explode"] = loadfx("maps/fly/fx_dest_life_raft");
     level.breakables_fx["tarpcrate"]["burn_start"] = loadfx("destructibles/fx_barrel_ignite");
     level.breakables_fx["tarpcrate"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
-  oilspill = getEntArray("oil_spill", "targetname");
+  oilspill = getentarray("oil_spill", "targetname");
   if(isDefined(oilspill) && oilspill.size > 0) {
     level.breakables_fx["oilspill"]["burn"] = loadfx("destructibles/fx_barrel_fire");
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/small_metalhit_1");
   }
-  tincans = getEntArray("tincan", "targetname");
-  if((isDefined(tincans)) && (tincans.size > 0)) {
+  tincans = getentarray("tincan", "targetname");
+  if((isDefined(tincans)) && (tincans.size > 0))
     level.breakables_fx["tincan"] = loadfx("props/tincan_bounce");
-  }
   qBreakables = false;
-  breakables = getEntArray("breakable", "targetname");
-  if((isDefined(breakables)) && (breakables.size > 0)) {
+  breakables = getentarray("breakable", "targetname");
+  if((isDefined(breakables)) && (breakables.size > 0))
     qBreakables = true;
-  }
-  breakables = getEntArray("breakable_vase", "targetname");
-  if((isDefined(breakables)) && (breakables.size > 0)) {
+  breakables = getentarray("breakable_vase", "targetname");
+  if((isDefined(breakables)) && (breakables.size > 0))
     qBreakables = true;
-  }
-  breakables = getEntArray("breakable box", "targetname");
-  if((isDefined(barrels)) && (barrels.size > 0)) {
+  breakables = getentarray("breakable box", "targetname");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBreakables = true;
-  }
-  breakables = getEntArray("breakable box", "script_noteworthy");
-  if((isDefined(barrels)) && (barrels.size > 0)) {
+  breakables = getentarray("breakable box", "script_noteworthy");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBreakables = true;
-  }
   if(qBreakables) {
     level.breakables_fx["vase"] = loadfx("props/vase_water");
     level.breakables_fx["bottle"] = loadfx("props/wine_bottle");
@@ -153,8 +132,8 @@ main() {
     level.breakables_fx["box"][2] = loadfx("props/crateExp_dust");
     level.breakables_fx["box"][3] = loadfx("props/crateExp_ammo");
   }
-  glassarray = getEntArray("glass", "targetname");
-  glassarray = array_combine(glassarray, getEntArray("glass", "script_noteworthy"));
+  glassarray = getentarray("glass", "targetname");
+  glassarray = array_combine(glassarray, getentarray("glass", "script_noteworthy"));
   if(isDefined(glassarray) && glassarray.size > 0) {
     level._glass_info = [];
     level._glass_info["glass_large"]["breakfx"] = loadfx("props/car_glass_large");
@@ -164,7 +143,7 @@ main() {
     level._glass_info["glass_small"]["breakfx"] = loadfx("props/car_glass_headlight");
     level._glass_info["glass_small"]["breaksnd"] = "veh_glass_break_small";
   }
-  tv_array = getEntArray("interactive_tv", "targetname");
+  tv_array = getentarray("interactive_tv", "targetname");
   if(isDefined(tv_array) && (tv_array.size > 0)) {
     precachemodel("com_tv2_d");
     precachemodel("com_tv1");
@@ -172,9 +151,9 @@ main() {
     precachemodel("com_tv1_testpattern");
     precachemodel("com_tv2_testpattern");
     level.breakables_fx["tv_explode"] = loadfx("explosions/tv_explosion");
-    level.tv_lite_array = getEntArray("interactive_tv_light", "targetname");
+    level.tv_lite_array = getentarray("interactive_tv_light", "targetname");
   }
-  security_camera_array = getEntArray("destroyable_security_camera", "script_noteworthy");
+  security_camera_array = getentarray("destroyable_security_camera", "script_noteworthy");
   if(isDefined(security_camera_array) && (security_camera_array.size > 0)) {
     precachemodel("com_security_camera");
     precachemodel("com_security_camera_destroyed");
@@ -209,8 +188,8 @@ explodable_barrel_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("BARRELDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -225,13 +204,11 @@ explodable_barrel_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_barrel_burn();
-    }
   }
 }
 
@@ -247,20 +224,19 @@ explodable_barrel_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.barrelHealth) {
+  while (self.damageTaken < level.barrelHealth) {
     if(!startedfx) {
-      playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
+      playfx(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
-      self playSound("barrel_fuse");
-      playFX(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
+      self playsound("barrel_fuse");
+      playfx(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
     }
     count++;
     wait 0.05;
@@ -282,7 +258,7 @@ explodable_barrel_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.barrelExpSound, self.origin);
-  playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["barrel"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   PlayRumbleOnPosition("barrel_explosion", self.origin + (0, 0, 32));
   level.barrelExplodingThisFrame = true;
@@ -309,11 +285,10 @@ explodable_barrel_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("exploding_barrel_test_d");
-  } else {
+  else
     self setModel("exploding_barrel_test_d");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -336,8 +311,8 @@ explodable_oiltank_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("OILTANKDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -351,13 +326,11 @@ explodable_oiltank_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_oiltank_burn();
-    }
   }
 }
 
@@ -373,16 +346,15 @@ explodable_oiltank_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
-      playFX(level.breakables_fx["oiltank"]["burn_start"], self.origin + offset1);
+      playfx(level.breakables_fx["oiltank"]["burn_start"], self.origin + offset1);
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
-    playFX(level.breakables_fx["oiltank"]["burn"], self.origin + offset2);
+    playfx(level.breakables_fx["oiltank"]["burn"], self.origin + offset2);
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -408,9 +380,9 @@ explodable_oiltank_explode() {
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.oiltankExpSound, self.origin);
   if(isDefined(self.script_vector)) {
-    playFX(level.breakables_fx["oiltank"]["explode"], self.origin + offset, (0, 0, 1));
+    playfx(level.breakables_fx["oiltank"]["explode"], self.origin + offset, (0, 0, 1));
   } else {
-    playFX(level.breakables_fx["oiltank"]["explode"], self.origin + offset);
+    playfx(level.breakables_fx["oiltank"]["explode"], self.origin + offset);
   }
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
@@ -421,9 +393,8 @@ explodable_oiltank_explode() {
   minDamage = 2000;
   maxDamage = 4000;
   blastRadius = 400;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -434,11 +405,10 @@ explodable_oiltank_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("static_peleliu_oiltanker_d");
-  } else {
+  else
     self setModel("static_peleliu_oiltanker_d");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -461,8 +431,8 @@ explodable_oiltank_small_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("OILTANKDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -476,13 +446,11 @@ explodable_oiltank_small_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_oiltank_small_burn();
-    }
   }
 }
 
@@ -498,14 +466,13 @@ explodable_oiltank_small_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -531,9 +498,9 @@ explodable_oiltank_small_explode() {
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.oiltanksmallExpSound, self.origin);
   if(isDefined(self.parent)) {
-    playFX(level.breakables_fx["oiltanksmall"]["explode"], self.origin + offset, anglesToForward(self.parent.angles) * -1, AnglesToUp(self.parent.angles));
+    playfx(level.breakables_fx["oiltanksmall"]["explode"], self.origin + offset, AnglesToForward(self.parent.angles) * -1, AnglesToUp(self.parent.angles));
   } else {
-    playFX(level.breakables_fx["oiltanksmall"]["explode"], self.origin + offset);
+    playfx(level.breakables_fx["oiltanksmall"]["explode"], self.origin + offset);
   }
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
@@ -544,9 +511,8 @@ explodable_oiltank_small_explode() {
   minDamage = 2000;
   maxDamage = 4000;
   blastRadius = 400;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -557,11 +523,10 @@ explodable_oiltank_small_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("static_peleliu_propane_d");
-  } else {
+  else
     self setModel("static_peleliu_propane_d");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -584,8 +549,8 @@ explodable_bagofbarrels_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("OILTANKDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -599,13 +564,11 @@ explodable_bagofbarrels_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_bagofbarrels_burn();
-    }
   }
 }
 
@@ -622,14 +585,13 @@ explodable_bagofbarrels_burn() {
     offset1 = vector_multiply(up, -116) - (0, 0, 30);
     offset2 = vector_multiply(up, -116) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -654,7 +616,7 @@ explodable_bagofbarrels_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.bagofbarrelsExpSound, self.origin);
-  playFX(level.breakables_fx["bagofbarrels"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["bagofbarrels"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -664,9 +626,8 @@ explodable_bagofbarrels_explode() {
   minDamage = 500;
   maxDamage = 1000;
   blastRadius = 200;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -677,11 +638,10 @@ explodable_bagofbarrels_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("dest_merchantship_net_barrels_dmg1");
-  } else {
+  else
     self setModel("dest_merchantship_net_barrels_dmg1");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -704,8 +664,8 @@ explodable_bagofcrates_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("BAGOFCRATESDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -719,13 +679,11 @@ explodable_bagofcrates_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_bagofcrates_burn();
-    }
   }
 }
 
@@ -741,14 +699,13 @@ explodable_bagofcrates_burn() {
     offset1 = vector_multiply(up, -116) - (0, 0, 30);
     offset2 = vector_multiply(up, -116) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -773,7 +730,7 @@ explodable_bagofcrates_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.bagofcratesExpSound, self.origin);
-  playFX(level.breakables_fx["bagofcrates"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["bagofcrates"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -783,9 +740,8 @@ explodable_bagofcrates_explode() {
   minDamage = 500;
   maxDamage = 1000;
   blastRadius = 200;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -796,11 +752,10 @@ explodable_bagofcrates_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("dest_merchantship_net_crates_dmg1");
-  } else {
+  else
     self setModel("dest_merchantship_net_crates_dmg1");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -823,8 +778,8 @@ explodable_liferaft_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("LIFEBOATDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -838,13 +793,11 @@ explodable_liferaft_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_liferaft_burn();
-    }
   }
 }
 
@@ -860,14 +813,13 @@ explodable_liferaft_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -892,7 +844,7 @@ explodable_liferaft_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.liferaftExpSound, self.origin);
-  playFX(level.breakables_fx["liferaft"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["liferaft"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -902,9 +854,8 @@ explodable_liferaft_explode() {
   minDamage = 50;
   maxDamage = 100;
   blastRadius = 1;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -915,11 +866,10 @@ explodable_liferaft_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("dest_merchantship_lifeboat_dmg1");
-  } else {
+  else
     self setModel("dest_merchantship_lifeboat_dmg1");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -942,8 +892,8 @@ explodable_tarpcrate_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     println("TARPCRATEDAMAGE: " + type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
@@ -957,13 +907,11 @@ explodable_tarpcrate_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread explodable_tarpcrate_burn();
-    }
   }
 }
 
@@ -979,14 +927,13 @@ explodable_tarpcrate_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.tankHealth) {
+  while (self.damageTaken < level.tankHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -1011,7 +958,7 @@ explodable_tarpcrate_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.tarpcrateExpSound, self.origin);
-  playFX(level.breakables_fx["tarpcrate"]["explode"], self.origin + offset);
+  playfx(level.breakables_fx["tarpcrate"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -1021,9 +968,8 @@ explodable_tarpcrate_explode() {
   minDamage = 50;
   maxDamage = 100;
   blastRadius = 1;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
@@ -1034,11 +980,10 @@ explodable_tarpcrate_explode() {
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("static_peleliu_crate_tarp_d");
-  } else {
+  else
     self setModel("static_peleliu_crate_tarp_d");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -1066,8 +1011,8 @@ flammable_crate_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damageTaken = 0;
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     if(type != "MOD_BURNED" && type != "MOD_EXPLOSIVE" && type != "MOD_PROJECTILE_SPLASH" && type != "MOD_PROJECTILE" && type != "MOD_GRENADE_SPLASH" && type != "MOD_GRENADE") {
       continue;
@@ -1080,13 +1025,11 @@ flammable_crate_think() {
     } else {
       self.damageOwner = attacker;
     }
-    if(level.barrelExplodingThisFrame) {
+    if(level.barrelExplodingThisFrame)
       wait randomfloat(1);
-    }
     self.damageTaken += amount;
-    if(self.damageTaken == amount) {
+    if(self.damageTaken == amount)
       self thread flammable_crate_burn();
-    }
   }
 }
 
@@ -1102,14 +1045,13 @@ flammable_crate_burn() {
     offset1 = vector_multiply(up, 22) - (0, 0, 30);
     offset2 = vector_multiply(up, 22) + (0, 0, 14);
   }
-  while(self.damageTaken < level.barrelHealth) {
+  while (self.damageTaken < level.barrelHealth) {
     if(!startedfx) {
       level thread play_sound_in_space(level.crateIgnSound, self.origin);
       startedfx = true;
     }
-    if(count > 20) {
+    if(count > 20)
       count = 0;
-    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -1134,7 +1076,7 @@ flammable_crate_explode() {
   }
   offset += (0, 0, 4);
   level thread play_sound_in_space(level.crateExpSound, self.origin);
-  playFX(level.breakables_fx["ammo_crate"]["explode"], self.origin);
+  playfx(level.breakables_fx["ammo_crate"]["explode"], self.origin);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelExplodingThisFrame = true;
   if(isDefined(self.remove)) {
@@ -1144,22 +1086,19 @@ flammable_crate_explode() {
   minDamage = 1;
   maxDamage = 250;
   blastRadius = 250;
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     blastRadius = self.radius;
-  }
   attacker = undefined;
-  if(isDefined(self.damageOwner)) {
+  if(isDefined(self.damageOwner))
     attacker = self.damageOwner;
-  }
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(isplayer(attacker)) {
     arcademode_assignpoints("arcademode_score_explodableitem", attacker);
   }
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     self setModel("global_flammable_crate_jap_piece01_d");
-  } else {
+  else
     self setModel("global_flammable_crate_jap_piece01_d");
-  }
   if(dot < .5) {
     start = (self.origin + vector_multiply(up, 22));
     pos = physicstrace(start, (start + (0, 0, -64)));
@@ -1177,11 +1116,11 @@ spawn_crate_chunks() {
   chunks[2] = spawn("script_model", self.origin + (0, 0, 32));
   chunks[3] = spawn("script_model", self.origin + (0, 0, 32));
   chunks[4] = spawn("script_model", self.origin + (0, 0, 32));
-  chunks[0] setModel("global_flammable_crate_jap_piece02_d");
-  chunks[1] setModel("global_flammable_crate_jap_piece03_d");
-  chunks[2] setModel("global_flammable_crate_jap_piece04_d");
-  chunks[3] setModel("global_flammable_crate_jap_piece05_d");
-  chunks[4] setModel("global_flammable_crate_jap_piece06_d");
+  chunks[0] setmodel("global_flammable_crate_jap_piece02_d");
+  chunks[1] setmodel("global_flammable_crate_jap_piece03_d");
+  chunks[2] setmodel("global_flammable_crate_jap_piece04_d");
+  chunks[3] setmodel("global_flammable_crate_jap_piece05_d");
+  chunks[4] setmodel("global_flammable_crate_jap_piece06_d");
   chunks[0].physPreset = "brick";
   chunks[1].physPreset = "brick";
   chunks[2].physPreset = "brick";
@@ -1198,17 +1137,15 @@ crate_chunks_delete() {
 shuddering_entity_think() {
   assert(self.classname == "script_model");
   helmet = false;
-  if(self.model == "prop_helmet_german_normandy") {
+  if(self.model == "prop_helmet_german_normandy")
     helmet = true;
-  }
-  self setCanDamage(true);
-  for(;;) {
+  self setcandamage(true);
+  for (;;) {
     self waittill("damage", other, damage, direction_vec, point);
-    if(helmet) {
+    if(helmet)
       self vibrate(direction_vec, 20, 0.6, 0.75);
-    } else {
+    else
       self vibrate(direction_vec, 0.4, 0.4, 0.4);
-    }
     self waittill("rotatedone");
   }
 }
@@ -1217,36 +1154,33 @@ tincan_think() {
   if(self.classname != "script_model") {
     return;
   }
-  self setCanDamage(true);
+  self setcandamage(true);
   self waittill("damage", damage, ent);
-  if(isSentient(ent)) {
+  if(isSentient(ent))
     direction_org = ((ent getEye()) - (0, 0, (randomint(50) + 50)));
-  } else {
+  else
     direction_org = ent.origin;
-  }
   direction_vec = vectornormalize(self.origin - direction_org);
   direction_vec = vectorScale(direction_vec, .5 + randomfloat(1));
   self notify("death");
-  playFX(level.breakables_fx["tincan"], self.origin, direction_vec);
+  playfx(level.breakables_fx["tincan"], self.origin, direction_vec);
   self delete();
 }
 
 helmet_pop() {
-  if(self.classname != "script_model") {
+  if(self.classname != "script_model")
     return;
-  }
   self xenon_auto_aim();
-  self setCanDamage(true);
+  self setcandamage(true);
   self thread helmet_logic();
 }
 
 helmet_logic() {
   self waittill("damage", damage, ent);
-  if(isSentient(ent)) {
+  if(isSentient(ent))
     direction_org = ent getEye();
-  } else {
+  else
     direction_org = ent.origin;
-  }
   direction_vec = vectornormalize(self.origin - direction_org);
   if(!isDefined(self.dontremove) && ent == level.player) {
     self thread animscripts\death::helmetLaunch(direction_vec);
@@ -1256,23 +1190,21 @@ helmet_logic() {
   self hide();
   model = spawn("script_model", self.origin + (0, 0, 5));
   model.angles = self.angles;
-  model setModel(self.model);
+  model setmodel(self.model);
   model thread animscripts\death::helmetLaunch(direction_vec);
   self.dontremove = false;
   self notify("ok_remove");
 }
 
 allowBreak(ent) {
-  if(!isDefined(level.breakingEnts)) {
+  if(!isDefined(level.breakingEnts))
     return true;
-  }
-  if(level.breakingEnts.size == 0) {
+  if(level.breakingEnts.size == 0)
     return false;
-  } else {
-    for(i = 0; i < level.breakingEnts.size; i++) {
-      if(ent == level.breakingEnts[i]) {
+  else {
+    for (i = 0; i < level.breakingEnts.size; i++) {
+      if(ent == level.breakingEnts[i])
         return true;
-      }
     }
     return false;
   }
@@ -1280,16 +1212,15 @@ allowBreak(ent) {
 }
 
 breakable_think_triggered(eBreakable) {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
     eBreakable notify("damage", 100, other);
   }
 }
 
 breakable_think() {
-  if(self.classname != "script_model") {
+  if(self.classname != "script_model")
     return;
-  }
   if(!isDefined(self.model)) {
     return;
   }
@@ -1418,25 +1349,22 @@ breakable_think() {
   }
   if(isDefined(self.target)) {
     trig = getent(self.target, "targetname");
-    if((isDefined(trig)) && (trig.classname == "trigger_multiple")) {
+    if((isDefined(trig)) && (trig.classname == "trigger_multiple"))
       trig thread breakable_think_triggered(self);
-    }
   }
-  self setCanDamage(true);
+  self setcandamage(true);
   self thread breakable_logic(type);
 }
 
 breakable_logic(type) {
   ent = undefined;
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, ent);
-    if(isDefined(ent) && ent.classname == "script_vehicle") {
+    if(isDefined(ent) && ent.classname == "script_vehicle")
       ent joltbody(self.origin + (0, 0, -90), .2);
-    }
     if(type == "wood box") {
-      if(!allowBreak(ent)) {
+      if(!allowBreak(ent))
         continue;
-      }
       if((!isDefined(level.flags)) || (!isDefined(level.flags["Breakable Boxes"]))) {
         break;
       }
@@ -1458,11 +1386,10 @@ breakable_logic(type) {
       fx = level.breakables_fx["vase"];
       break;
     case "wood box":
-      if(isDefined(level.crateImpactSound)) {
+      if(isDefined(level.crateImpactSound))
         soundAlias = level.crateImpactSound;
-      } else {
+      else
         soundAlias = "bullet_large_vase";
-      }
       fx = level.breakables_fx["box"][randomint(level.breakables_fx["box"].size)];
       hasDependant = true;
       break;
@@ -1476,20 +1403,18 @@ breakable_logic(type) {
   }
   thread play_sound_in_space(soundAlias, self.origin);
   self thread make_broken_peices(self, type);
-  if(isDefined(fx)) {
-    playFX(fx, self.origin);
-  }
+  if(isDefined(fx))
+    playfx(fx, self.origin);
   if(hasDependant) {
-    others = getEntArray("breakable", "targetname");
-    for(i = 0; i < others.size; i++) {
+    others = getentarray("breakable", "targetname");
+    for (i = 0; i < others.size; i++) {
       other = others[i];
       diffX = abs(self.origin[0] - other.origin[0]);
       diffY = abs(self.origin[1] - other.origin[1]);
       if((diffX <= 20) && (diffY <= 20)) {
         diffZ = (self.origin[2] - other.origin[2]);
-        if(diffZ <= 0) {
+        if(diffZ <= 0)
           other notify("damage", amount, ent);
-        }
       }
     }
   }
@@ -1497,18 +1422,16 @@ breakable_logic(type) {
     self.remove connectpaths();
     self.remove delete();
   }
-  if(!isDefined(self.dontremove)) {
+  if(!isDefined(self.dontremove))
     self delete();
-  } else {
+  else
     self.dontremove = false;
-  }
   self notify("ok_remove");
 }
 
 xenon_auto_aim() {
-  if((isDefined(level.console_auto_aim)) && (level.console_auto_aim.size > 0)) {
+  if((isDefined(level.console_auto_aim)) && (level.console_auto_aim.size > 0))
     self.autoaim = getClosestAccurantEnt(self.origin, level.console_auto_aim);
-  }
   if(isDefined(self.autoaim)) {
     level.console_auto_aim = array_remove(level.console_auto_aim, self.autoaim);
     self thread xenon_remove_auto_aim();
@@ -1532,26 +1455,23 @@ xenon_remove_auto_aim(wait_message) {
   self waittill("damage", amount, ent);
   self.autoaim disableAimAssist();
   self.autoaim delete();
-  if(self.dontremove) {
+  if(self.dontremove)
     self waittill("ok_remove");
-  }
   self delete();
 }
 
 xenon_enable_auto_aim(wait_message) {
   self endon("xenon_auto_aim_stop_logic");
   self endon("death");
-  if(!isDefined(wait_message)) {
+  if(!isDefined(wait_message))
     wait_message = true;
-  }
   if(isDefined(self.script_noteworthy) && wait_message) {
     string = "enable_xenon_autoaim_" + self.script_noteworthy;
     level waittill(string);
   }
   self.wait_message = false;
-  if(isDefined(self.recreate) && self.recreate == true) {
+  if(isDefined(self.recreate) && self.recreate == true)
     self waittill("recreate");
-  }
   self enableAimAssist();
 }
 
@@ -1563,12 +1483,10 @@ breakable_clip() {
       return;
     }
   }
-  if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0)) {
+  if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0))
     self.remove = getClosestEnt(self.origin, level.breakables_clip);
-  }
-  if(isDefined(self.remove)) {
+  if(isDefined(self.remove))
     level.breakables_clip = array_remove(level.breakables_clip, self.remove);
-  }
 }
 
 make_broken_peices(wholepiece, type) {
@@ -1708,31 +1626,27 @@ make_broken_peices(wholepiece, type) {
   array_thread(piece, ::pieces_move, wholepiece.origin);
   if((isDefined(level.breakables_peicesCollide[type])) && (level.breakables_peicesCollide[type] == true)) {
     height = piece[0].origin[2];
-    for(i = 0; i < piece.size; i++) {
-      if(height > piece[i].origin[2]) {
+    for (i = 0; i < piece.size; i++) {
+      if(height > piece[i].origin[2])
         height = piece[i].origin[2];
-      }
     }
     array_thread(piece, ::pieces_collision, height);
   } else {
     wait 2;
-    for(i = 0; i < piece.size; i++) {
-      if(isDefined(piece[i])) {
+    for (i = 0; i < piece.size; i++) {
+      if(isDefined(piece[i]))
         piece[i] delete();
-      }
     }
   }
 }
 
 list_add(model) {
-  if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex])) {
+  if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex]))
     level._breakable_utility_modelarray[level._breakable_utility_modelindex] delete();
-  }
   level._breakable_utility_modelarray[level._breakable_utility_modelindex] = model;
   level._breakable_utility_modelindex++;
-  if(!(level._breakable_utility_modelindex < level._breakable_utility_maxnum)) {
+  if(!(level._breakable_utility_modelindex < level._breakable_utility_maxnum))
     level._breakable_utility_modelindex = 0;
-  }
 }
 
 pieces_move(origin) {
@@ -1749,49 +1663,42 @@ pieces_move(origin) {
     x = 1;
     y = 1;
     z = 1;
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       x = -1;
-    }
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       y = -1;
-    }
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       z = -1;
-    }
     org rotatevelocity((250 * x, 250 * y, randomfloat(100) * z), 2, 0, .5);
   } else if(isDefined(self.type) && self.type == "plate") {
     vec = vectornormalize(end - origin);
     vec = vectorScale(vec, 125 + randomfloat(25));
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    } else {
+    else
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
-    }
   } else {
     vec = vectornormalize(end - origin);
     vec = vectorScale(vec, 60 + randomfloat(50));
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    } else {
+    else
       org rotateroll(800 + randomfloat(1000), 5, 0, 0);
-    }
   }
   org moveGravity(vec, 5);
   wait 5;
-  if(isDefined(self)) {
+  if(isDefined(self))
     self unlink();
-  }
   org delete();
 }
 
 pieces_collision(height) {
   self endon("death");
   wait .1;
-  trace = bulletTrace(self.origin, self.origin - (0, 0, 50000), false, undefined);
+  trace = bullettrace(self.origin, self.origin - (0, 0, 50000), false, undefined);
   vec = trace["position"];
-  while(self.origin[2] > vec[2]) {
+  while (self.origin[2] > vec[2])
     wait .05;
-  }
   self unlink();
   self.origin = (self.origin[0], self.origin[1], vec[2]);
   self notify("do not kill");
@@ -1808,7 +1715,7 @@ addpiece(rt, fw, up, xs, ys, zs, wholepiece, angles, model) {
   z = vectorScale(z, zs * scale);
   origin = wholepiece.origin + x + y + z;
   part = spawn("script_model", origin);
-  part setModel(model);
+  part setmodel(model);
   part.modelscale = scale;
   part.angles = wholepiece.angles + angles;
   list_add(part);
@@ -1821,11 +1728,10 @@ getFurthestEnt(org, array) {
   }
   dist = distance(array[0] getorigin(), org);
   ent = array[0];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist < dist) {
+    if(newdist < dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }
@@ -1838,11 +1744,10 @@ getClosestEnt(org, array) {
   }
   dist = 256;
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }
@@ -1855,11 +1760,10 @@ getClosestAccurantEnt(org, array) {
   }
   dist = 8;
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }
@@ -1872,11 +1776,10 @@ getClosestAimEnt(org, array) {
   }
   dist = 1000000;
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }

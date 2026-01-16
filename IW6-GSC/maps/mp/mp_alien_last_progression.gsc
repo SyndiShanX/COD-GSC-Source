@@ -16,9 +16,8 @@ nonlinear_progression_init() {
   common_scripts\utility::flag_init("drill_drilling");
   level.drill_health_hardcore = 1250;
 
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.drill_health_hardcore = 2000;
-  }
 
   level.gas_station_conduits_completed = 0;
   level.parking_conduits_completed = 0;
@@ -52,19 +51,17 @@ register_nonlinear_outpost(var_0, var_1) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(var_5.script_parameters == "outpost_transition") {
+      if(var_5.script_parameters == "outpost_transition")
         level setup_transition_encounter(var_5);
-      } else if(var_5.script_parameters == "outpost_conduit") {
+      else if(var_5.script_parameters == "outpost_conduit")
         level setup_conduit_encounter(var_5);
-      }
     }
 
     var_2.outpost_encounters[var_5.name] = var_5;
   }
 
-  if(!isDefined(level.outposts)) {
+  if(!isDefined(level.outposts))
     level.outposts = [];
-  }
 
   level.outposts[var_0] = var_2;
 }
@@ -123,16 +120,14 @@ run_non_linear_encounters() {
     if(!isDefined(var_0)) {
       return;
     }
-    foreach(var_2 in var_0.outpost_encounters) {
-      level thread outpost_encounter_enable(var_2);
-    }
+    foreach(var_2 in var_0.outpost_encounters)
+    level thread outpost_encounter_enable(var_2);
 
     if(level.allow_backtrack_encounters) {
       foreach(var_5 in level.outposts) {
         if(var_5.name != level.current_area_name && var_5.opened) {
-          foreach(var_2 in var_5.outpost_encounters) {
-            level thread outpost_encounter_enable(var_2);
-          }
+          foreach(var_2 in var_5.outpost_encounters)
+          level thread outpost_encounter_enable(var_2);
         }
       }
     }
@@ -143,9 +138,8 @@ run_non_linear_encounters() {
     common_scripts\utility::flag_clear("outpost_encounter_running");
     wait 5.0;
 
-    if(common_scripts\utility::flag("start_cross_vignette")) {
+    if(common_scripts\utility::flag("start_cross_vignette"))
       return;
-    }
   }
 }
 
@@ -166,9 +160,8 @@ outpost_encounter_enable(var_0) {
     var_1 = level.outposts[var_0.outpost_name].outpost_encounters;
 
     foreach(var_3 in var_1) {
-      if(var_3.name != var_0.name && var_3.type == "conduit") {
+      if(var_3.name != var_0.name && var_3.type == "conduit")
         return;
-      }
     }
   }
 
@@ -176,9 +169,8 @@ outpost_encounter_enable(var_0) {
   var_0.use_trigger makeusable();
   var_0.use_trigger waittill("trigger", var_5);
 
-  if(var_0.type == "conduit" && !level.force_blocker_order) {
+  if(var_0.type == "conduit" && !level.force_blocker_order)
     var_0 = update_conduit_struct_any_order(var_0);
-  }
 
   level thread[[var_0.encounter_start_func]](var_0, var_5);
   level notify("outpost_encounter_started");
@@ -190,19 +182,17 @@ encounter_outline_icon_hinttext(var_0) {
   }
   var_1 = "waypoint_alien_conduit";
 
-  if(var_0.type == "transition") {
+  if(var_0.type == "transition")
     var_1 = "waypoint_alien_gate";
-  }
 
   var_0.use_trigger thread maps\mp\alien\_hive::set_hive_icon(var_1, 1300);
   var_0.use_trigger setcursorhint("HINT_NOICON");
   var_0.use_trigger common_scripts\utility::trigger_on();
 
-  if(var_0.type == "transition") {
+  if(var_0.type == "transition")
     var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_TRANSITION_OPEN_HINT");
-  } else {
+  else
     var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_CONDUIT_START_HINT");
-  }
 
   var_2 = undefined;
   var_3 = undefined;
@@ -230,20 +220,18 @@ encounter_outline_icon_hinttext(var_0) {
   if(maps\mp\alien\_utility::alien_mode_has("outline") && isDefined(var_2)) {
     maps\mp\alien\_outline_proto::remove_from_outline_hive_watch_list(var_2);
 
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       maps\mp\alien\_outline_proto::remove_from_outline_hive_watch_list(var_3);
-    }
   }
 }
 
 encounter_complete() {
   var_0 = level.current_encounter_info;
 
-  if(var_0.type == "transition") {
+  if(var_0.type == "transition")
     thread transition_encounter_complete();
-  } else {
+  else
     thread conduit_encounter_complete();
-  }
 
   level thread maps\mp\mp_alien_last::remove_conduit_vo_once_complete();
 }
@@ -263,9 +251,8 @@ setup_conduit_encounter(var_0) {
         continue;
       }
 
-      if(var_3.script_parameters == "use_trigger") {
+      if(var_3.script_parameters == "use_trigger")
         var_0.use_trigger = var_3;
-      }
     }
   }
 
@@ -288,9 +275,8 @@ run_conduit_encounter(var_0, var_1) {
   var_3 = 1.75;
   thread maps\mp\alien\_hive::warn_all_players(var_3, var_2);
 
-  if(isDefined(var_0.encounter_func)) {
+  if(isDefined(var_0.encounter_func))
     level thread[[var_0.encounter_func]](var_0);
-  }
 
   level thread set_area_index_for_encounter(var_0.name);
   maps\mp\_utility::delaythread(2, maps\mp\alien\_challenge::spawn_challenge);
@@ -299,13 +285,12 @@ run_conduit_encounter(var_0, var_1) {
   maps\mp\alien\_gamescore::reset_encounter_performance();
   var_4 = level.cycle_count;
 
-  if(level.num_conduit_completed < 2) {
+  if(level.num_conduit_completed < 2)
     level.cycle_count = var_0.cycle_count;
-  } else if(level.num_conduit_completed < 4) {
+  else if(level.num_conduit_completed < 4)
     level.cycle_count = var_0.med_cycle;
-  } else {
+  else
     level.cycle_count = var_0.hard_cycle;
-  }
 
   maps\mp\alien\_spawn_director::start_cycle(level.cycle_count);
   level.cycle_count = level.cycle_count + 1;
@@ -322,9 +307,8 @@ run_conduit_encounter(var_0, var_1) {
   maps\mp\alien\_gamescore::calculate_and_show_encounter_scores(level.players, get_conduit_score_component_name_list());
   setomnvar("ui_alien_drill_state", 0);
 
-  if(isDefined(var_0.scene_trig)) {
+  if(isDefined(var_0.scene_trig))
     var_0.scene_trig notify("trigger", level.players[0]);
-  }
 
   increment_conduit_progress();
   give_players_rewards(var_0);
@@ -355,9 +339,8 @@ conduit_running(var_0, var_1, var_2) {
   level.drill thread maps\mp\alien\_drill::watch_drill_health_for_challenge();
   level.drill thread watch_drill_health_for_fx();
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
+  if(maps\mp\alien\_utility::alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_drill_watch_list(level.drill, 0);
-  }
 
   var_1 playSound("alien_conduit_on");
   level notify("dlc_vo_notify", "last_vo", "conduit_start");
@@ -390,9 +373,8 @@ set_conduit_state_run(var_0) {
   maps\mp\alien\_drill::update_drill_health_hud();
 
   foreach(var_3 in level.agentarray) {
-    if(isDefined(var_3.wave_spawned) && var_3.wave_spawned) {
+    if(isDefined(var_3.wave_spawned) && var_3.wave_spawned)
       var_3 getenemyinfo(level.drill);
-    }
   }
 
   thread sfx_conduit_on();
@@ -406,18 +388,16 @@ set_conduit_state_run(var_0) {
   thread maps\mp\alien\_drill::destroy_drill_icon();
   thread maps\mp\alien\_hud::turn_on_drill_meter_hud(self.depth);
 
-  if(level.encounter_type == "conduit") {
+  if(level.encounter_type == "conduit")
     level thread maps\mp\alien\_drill::watch_drill_depth_for_vo(self.depth);
-  }
 }
 
 offset_conduit_icon() {
   level endon("drill_detonated");
   level endon("game_ended");
 
-  while(!isDefined(self.icon)) {
+  while(!isDefined(self.icon))
     wait 0.1;
-  }
 
   self.icon.z = self.icon.z + 70;
 }
@@ -439,16 +419,14 @@ conduit_encounter_complete() {
   self makeunusable();
   self sethintstring("");
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
+  if(maps\mp\alien\_utility::alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::remove_from_outline_drill_watch_list(self);
-  }
 
   thread sfx_conduit_off();
   thread conduit_fx_on();
 
-  if(isDefined(level.drill)) {
+  if(isDefined(level.drill))
     level.drill.ignoreme = 1;
-  }
 
   level.num_conduit_completed++;
   common_scripts\utility::flag_clear("drill_detonated");
@@ -471,9 +449,8 @@ set_conduit_state_offline() {
 }
 
 force_end_conduit() {
-  if(!common_scripts\utility::flag("drill_drilling")) {
+  if(!common_scripts\utility::flag("drill_drilling"))
     common_scripts\utility::waittill_any_timeout(4, "drill_drilling");
-  }
 
   var_0 = level.current_encounter_info.conduit;
   var_0.layers = [];
@@ -484,13 +461,12 @@ force_end_conduit() {
 update_conduit_struct_any_order(var_0) {
   var_0 = level.outposts[var_0.outpost_name].outpost_encounters[var_0.name];
 
-  if(var_0.name == "conduit_gas_station_2" && level.gas_station_conduits_completed == 0) {
+  if(var_0.name == "conduit_gas_station_2" && level.gas_station_conduits_completed == 0)
     swap_conduit_cycles_and_encounter("gas_station", "conduit_gas_station_1", "conduit_gas_station_2");
-  } else if(var_0.name == "conduit_parking_2" && level.parking_conduits_completed == 0) {
+  else if(var_0.name == "conduit_parking_2" && level.parking_conduits_completed == 0)
     swap_conduit_cycles_and_encounter("parking", "conduit_parking_1", "conduit_parking_2");
-  } else if(var_0.name == "conduit_rooftop_2" && level.rooftop_conduits_completed == 0) {
+  else if(var_0.name == "conduit_rooftop_2" && level.rooftop_conduits_completed == 0)
     swap_conduit_cycles_and_encounter("rooftop", "conduit_rooftop_1", "conduit_rooftop_2");
-  }
 
   return var_0;
 }
@@ -516,9 +492,8 @@ swap_conduit_cycles_and_encounter(var_0, var_1, var_2) {
 increment_conduit_progress() {
   level.num_hive_destroyed++;
 
-  foreach(var_1 in level.players) {
-    var_1 maps\mp\alien\_persistence::eog_player_update_stat("hivesdestroyed", 1);
-  }
+  foreach(var_1 in level.players)
+  var_1 maps\mp\alien\_persistence::eog_player_update_stat("hivesdestroyed", 1);
 }
 
 watch_drill_health_for_fx() {
@@ -554,9 +529,8 @@ sfx_conduit_on() {
 
   wait 0.1;
 
-  if(isDefined(level.drill_sfx_lp)) {
+  if(isDefined(level.drill_sfx_lp))
     level.drill_sfx_lp playLoopSound("alien_conduit_on_lp");
-  }
 }
 
 sfx_conduit_off() {
@@ -568,33 +542,27 @@ sfx_conduit_off() {
     level.drill_sfx_lp playLoopSound("alien_conduit_powered_lp");
   }
 
-  if(isDefined(level.drill_sfx_dist_lp)) {
+  if(isDefined(level.drill_sfx_dist_lp))
     level.drill_sfx_dist_lp delete();
-  }
 
-  if(isDefined(level.drill_overheat_lp)) {
+  if(isDefined(level.drill_overheat_lp))
     level.drill_overheat_lp delete();
-  }
 
-  if(isDefined(level.drill_overheat_lp_02)) {
+  if(isDefined(level.drill_overheat_lp_02))
     level.drill_overheat_lp_02 delete();
-  }
 }
 
 sfx_conduit_offline() {
   var_0 = level.drill;
 
-  if(isDefined(level.drill_sfx_lp)) {
+  if(isDefined(level.drill_sfx_lp))
     level.drill_sfx_lp delete();
-  }
 
-  if(isDefined(level.drill_sfx_dist_lp)) {
+  if(isDefined(level.drill_sfx_dist_lp))
     level.drill_sfx_dist_lp delete();
-  }
 
-  if(isDefined(level.drill_overheat_lp_02)) {
+  if(isDefined(level.drill_overheat_lp_02))
     level.drill_overheat_lp_02 delete();
-  }
 }
 
 setup_transition_encounter(var_0) {
@@ -648,29 +616,24 @@ setup_transition_encounter(var_0) {
         continue;
       }
 
-      if(var_3.script_parameters == "outpost_gate_pivot_double") {
+      if(var_3.script_parameters == "outpost_gate_pivot_double")
         var_0.gate_pivot_double = var_3;
-      }
     }
   }
 
-  if(isDefined(var_0.gate_pivot) && isDefined(var_0.gate_clip)) {
+  if(isDefined(var_0.gate_pivot) && isDefined(var_0.gate_clip))
     var_0.gate_clip linkto(var_0.gate_pivot);
-  }
 
   if(isDefined(var_0.gate_pivot)) {
-    foreach(var_6 in var_0.gate_models) {
-      var_6 linkto(var_0.gate_pivot);
-    }
+    foreach(var_6 in var_0.gate_models)
+    var_6 linkto(var_0.gate_pivot);
   }
 
-  if(isDefined(var_0.gate_pivot_double) && isDefined(var_0.gate_clip_double)) {
+  if(isDefined(var_0.gate_pivot_double) && isDefined(var_0.gate_clip_double))
     var_0.gate_clip_double linkto(var_0.gate_pivot_double);
-  }
 
-  if(isDefined(var_0.gate_pivot_double)) {
+  if(isDefined(var_0.gate_pivot_double))
     var_0.gate_model_double linkto(var_0.gate_pivot_double);
-  }
 }
 
 run_transition_encounter(var_0, var_1) {
@@ -690,9 +653,8 @@ run_transition_encounter(var_0, var_1) {
   var_3 = 1.75;
   thread maps\mp\alien\_hive::warn_all_players(var_3, var_2);
 
-  if(level.cycle_count == 1) {
+  if(level.cycle_count == 1)
     level maps\mp\_utility::delaythread(1, maps\mp\alien\_music_and_dialog::playvoforwavestart);
-  }
 
   level thread set_area_index_for_encounter(var_0.name);
   maps\mp\_utility::delaythread(2, maps\mp\alien\_challenge::spawn_challenge);
@@ -720,13 +682,11 @@ run_transition_encounter(var_0, var_1) {
   var_6.completed = 1;
   level.outposts[var_5].opened = 1;
 
-  if(isDefined(var_0.use_trigger)) {
+  if(isDefined(var_0.use_trigger))
     thread wait_and_delete_proxy(var_0.use_trigger);
-  }
 
-  if(isDefined(var_6.use_trigger)) {
+  if(isDefined(var_6.use_trigger))
     thread wait_and_delete_proxy(var_6.use_trigger);
-  }
 
   if(var_0.name != "transition_left" && var_0.name != "transition_middle" && var_0.name != "transition_right") {
     level.outposts[level.current_area_name].outpost_encounters[var_0.name] = undefined;
@@ -735,9 +695,8 @@ run_transition_encounter(var_0, var_1) {
 
   level.num_transition_completed++;
 
-  if(isDefined(var_0.scene_trig)) {
+  if(isDefined(var_0.scene_trig))
     var_0.scene_trig notify("trigger", level.players[0]);
-  }
 
   give_players_rewards(var_0);
   level.current_area_name = var_5;
@@ -759,9 +718,8 @@ transition_running(var_0, var_1, var_2) {
   var_1 endon("stop_listening");
   var_1 endon("drill_complete");
 
-  if(isDefined(level.drill)) {
+  if(isDefined(level.drill))
     level.drill = undefined;
-  }
 
   var_3 = common_scripts\utility::getstruct("hidden_drill_pos", "targetname");
   level.drill = spawn("script_model", var_3.origin);
@@ -817,13 +775,11 @@ show_transition_objective(var_0, var_1) {
   if(!isDefined(var_0) || maps\mp\alien\_utility::is_true(var_0.completed) || !isDefined(var_0.objective_marker)) {
     return;
   }
-  if(isDefined(level.waypoint_icon)) {
+  if(isDefined(level.waypoint_icon))
     level.waypoint_icon destroy();
-  }
 
-  if(isDefined(level.ring_waypoint_icon)) {
+  if(isDefined(level.ring_waypoint_icon))
     level.ring_waypoint_icon destroy();
-  }
 
   var_2 = "waypoint_alien_blocker";
   var_3 = 14;
@@ -837,9 +793,8 @@ show_transition_objective(var_0, var_1) {
 }
 
 force_end_transition() {
-  if(!common_scripts\utility::flag("drill_drilling")) {
+  if(!common_scripts\utility::flag("drill_drilling"))
     common_scripts\utility::waittill_any_timeout(4, "drill_drilling");
-  }
 
   var_0 = level.current_encounter_info.use_trigger;
   var_0.layers = [];
@@ -854,9 +809,8 @@ opener_pivot(var_0, var_1) {
   }
   var_2 = common_scripts\utility::ter_op(var_1, var_0.close_delta, var_0.open_delta);
 
-  if(!var_1) {
+  if(!var_1)
     var_0.gate_clip connectpaths();
-  }
 
   level thread play_door_sounds(var_0);
   var_0.gate_pivot rotateby((0, var_2, 0), 1.0, 0.2, 0.2);
@@ -870,17 +824,15 @@ opener_slide(var_0, var_1, var_2) {
   }
   var_3 = common_scripts\utility::ter_op(var_1, var_0.close_delta, var_0.open_delta);
 
-  if(!var_1) {
+  if(!var_1)
     var_0.gate_clip connectpaths();
-  }
 
   level thread play_door_sounds(var_0);
 
-  if(maps\mp\alien\_utility::is_true(var_2)) {
+  if(maps\mp\alien\_utility::is_true(var_2))
     var_0.gate_pivot movex(var_3, 1.0, 0.1, 0.1);
-  } else {
+  else
     var_0.gate_pivot movez(var_3, 1.0, 0.1, 0.1);
-  }
 
   wait 1.5;
   var_0.gate_clip disconnectpaths();
@@ -892,9 +844,8 @@ opener_slide_x(var_0, var_1) {
   }
   var_2 = common_scripts\utility::ter_op(var_1, var_0.close_delta, var_0.open_delta);
 
-  if(!var_1) {
+  if(!var_1)
     var_0.gate_clip connectpaths();
-  }
 
   level thread play_door_sounds(var_0);
   var_0.gate_pivot movex(var_2, 2.0, 0.3, 0.6);
@@ -1033,11 +984,10 @@ set_debug_startpointlocations() {
 }
 
 init_drilling_parameters(var_0) {
-  if(var_0.type == "transition") {
+  if(var_0.type == "transition")
     var_1 = level.cycle_count;
-  } else {
+  else
     var_1 = var_0.cycle_count;
-  }
 
   var_2 = level.cycle_data.cycle_drill_layers[var_1];
   self.depth = var_2[var_2.size - 1];
@@ -1045,55 +995,47 @@ init_drilling_parameters(var_0) {
   self.layer_completed = 0;
   self.layers[0] = 0;
 
-  for(var_3 = 0; var_3 <= var_2.size - 2; var_3++) {
+  for(var_3 = 0; var_3 <= var_2.size - 2; var_3++)
     self.layers[self.layers.size] = var_2[var_3];
-  }
 }
 
 give_players_rewards(var_0, var_1, var_2) {
-  foreach(var_4 in level.players) {
-    var_4 thread maps\mp\alien\_hive::wait_to_give_rewards();
-  }
+  foreach(var_4 in level.players)
+  var_4 thread maps\mp\alien\_hive::wait_to_give_rewards();
 
   if(!maps\mp\alien\_utility::is_hardcore_mode()) {
-    if(isDefined(var_0) && isDefined(var_0.skill_point)) {
+    if(isDefined(var_0) && isDefined(var_0.skill_point))
       give_players_skill_points(var_0.skill_point);
-    } else {
+    else
       give_players_skill_points(var_1);
-    }
   } else if(isDefined(var_0) && isDefined(var_0.hardcore_skill_point))
     give_players_skill_points(var_0.hardcore_skill_point);
-  else {
+  else
     give_players_skill_points(var_2);
-  }
 
   if(isDefined(var_0) && maps\mp\alien\_utility::is_true(var_0.blocker)) {
-    foreach(var_4 in level.players) {
-      var_4 maps\mp\alien\_persistence::try_award_bonus_pool_token();
-    }
+    foreach(var_4 in level.players)
+    var_4 maps\mp\alien\_persistence::try_award_bonus_pool_token();
   }
 
   if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen() && isDefined(var_0)) {
-    if(var_0.type == "transition" && (level.num_transition_completed == 3 || level.num_transition_completed == 5)) {
+    if(var_0.type == "transition" && (level.num_transition_completed == 3 || level.num_transition_completed == 5))
       maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
-    }
   }
 }
 
 get_transition_score_component_name_list() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     return ["street_personal", "street_challenge"];
-  } else {
+  else
     return ["street_team", "street_personal", "street_challenge"];
-  }
 }
 
 get_conduit_score_component_name_list() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     return ["generator", "generator_personal", "generator_challenge"];
-  } else {
+  else
     return ["generator", "generator_team", "generator_personal", "generator_challenge"];
-  }
 }
 
 last_get_current_player_volumes_override_func() {
@@ -1182,11 +1124,10 @@ give_players_skill_points(var_0) {
 last_hotjoin_skill_points() {
   var_0 = 1;
 
-  if(maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(maps\mp\alien\_utility::is_hardcore_mode())
     var_1 = 0;
-  } else {
+  else
     var_1 = max(0, level.skill_points_earned_from_progression - var_0);
-  }
 
   var_2 = maps\mp\alien\_challenge::get_num_challenge_completed();
   return var_1 + var_2;

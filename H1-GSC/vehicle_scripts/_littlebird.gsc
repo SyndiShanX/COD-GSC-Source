@@ -11,9 +11,8 @@ armed(var_0, var_1) {
 #using_animtree("vehicles");
 
 main(var_0, var_1, var_2) {
-  if(armed(var_0, var_2)) {
+  if(armed(var_0, var_2))
     vehicle_scripts\_attack_heli::preload();
-  }
 
   if(issubstr(var_2, "bench")) {
     precachemodel("vehicle_sentinel_littlebird_benchleft");
@@ -25,11 +24,10 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_little_bird_armed");
   maps\_vehicle::build_deathmodel("vehicle_little_bird_bench");
 
-  if(issubstr(var_2, "kva") || issubstr(var_2, "atlas") || issubstr(var_2, "sentinel")) {
+  if(issubstr(var_2, "kva") || issubstr(var_2, "atlas") || issubstr(var_2, "sentinel"))
     maps\_vehicle::build_drive( % mil_helicopter_littlebird_ai_rotors, undefined, 0, 3.0);
-  } else {
+  else
     maps\_vehicle::build_drive( % mi28_rotors, undefined, 0, 3.0);
-  }
 
   maps\_vehicle::build_deathfx("fx\explosions\helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, 1);
   maps\_vehicle::build_deathfx("vfx\trail\trail_fire_smoke_l", "tag_engine", "littlebird_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1);
@@ -65,18 +63,16 @@ init_local() {
   thread attach_littlebird_parts();
   thread maps\_vehicle::vehicle_lights_on("running");
 
-  if(issubstr(self.classname, "sentinel")) {
+  if(issubstr(self.classname, "sentinel"))
     self hidepart("main_rotor_static_jnt");
-  }
 
   waittillframeend;
 
   if(!armed(self.model, self.classname)) {
     maps\_vehicle::mgoff();
 
-    foreach(var_1 in self.mgturret) {
-      var_1 hide();
-    }
+    foreach(var_1 in self.mgturret)
+    var_1 hide();
   }
 
   thread vehicle_scripts\_littlebird_aud::handle_littlebird_audio();
@@ -119,9 +115,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 8; var_1++) {
-    var_0[var_1] = spawnStruct();
-  }
+  for (var_1 = 0; var_1 < 8; var_1++)
+    var_0[var_1] = spawnstruct();
 
   var_0[0].sittag = "tag_pilot1";
   var_0[1].sittag = "tag_pilot2";
@@ -257,9 +252,8 @@ unload_groups() {
 }
 
 littlebird_emp_damage_function(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(var_4 == "MOD_ENERGY" && isDefined(self.emp_death_function)) {
+  if(var_4 == "MOD_ENERGY" && isdefined(self.emp_death_function))
     self thread[[self.emp_death_function]](var_1, var_4);
-  }
 }
 
 littlebird_emp_death(var_0, var_1) {
@@ -271,11 +265,13 @@ littlebird_emp_death(var_0, var_1) {
   var_2 = self vehicle_getvelocity();
   var_3 = 250;
 
-  if(isDefined(level.get_littlebird_crash_location_override)) {
-    var_4 = [[level.get_littlebird_crash_location_override]]();
-  } else {
+  if(isdefined(level.get_littlebird_crash_location_override))
+    var_4 = [
+      [level.get_littlebird_crash_location_override]
+    ]();
+  else {
     var_5 = (self.origin[0] + var_2[0] * 5, self.origin[1] + var_2[1] * 5, self.origin[2] - 2000);
-    var_4 = bulletTrace(self.origin, var_5, 0, self)["position"];
+    var_4 = bullettrace(self.origin, var_5, 0, self)["position"];
   }
 
   self notify("newpath");
@@ -293,23 +289,20 @@ littlebird_emp_death(var_0, var_1) {
   self.enablerocketdeath = 1;
   maps\_vehicle_code::vehicle_kill_common(var_0, var_1);
 
-  if(getdvar("mapname") == "lab") {
+  if(getdvar("mapname") == "lab")
     check_lab_achievement();
-  }
 
   self kill(self.origin, var_0);
 }
 
 check_lab_achievement() {
-  if(!isDefined(level.restricted_airspace)) {
+  if(!isdefined(level.restricted_airspace))
     level.restricted_airspace = 0;
-  }
 
   level.restricted_airspace++;
 
-  if(level.restricted_airspace >= 10) {
+  if(level.restricted_airspace >= 10)
     maps\_utility::giveachievement_wrapper("LEVEL_10A");
-  }
 }
 
 littlebird_deathspin() {
@@ -317,8 +310,8 @@ littlebird_deathspin() {
   self clearlookatent();
   self setyawspeed(400, 100, 100);
 
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self)) {
       return;
     }
     var_0 = randomintrange(90, 120);
@@ -336,10 +329,9 @@ littlebird_emp_crash_movement(var_0, var_1, var_2) {
   var_5 = undefined;
   var_6 = 90 * randomintrange(-2, 3);
 
-  for(;;) {
-    if(self.origin[2] < var_0[2] + var_1) {
+  for (;;) {
+    if(self.origin[2] < var_0[2] + var_1)
       self notify("near_goal");
-    }
 
     wait 0.05;
   }
@@ -350,8 +342,8 @@ helicopter_crash_rotate() {
   self clearlookatent();
   self setyawspeed(400, 100, 100);
 
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self)) {
       return;
     }
     var_0 = randomintrange(90, 120);

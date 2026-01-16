@@ -6,11 +6,12 @@
 #include scripts\weapons\molotov;
 #include scripts\weapons\proximity_grenade;
 #include scripts\weapons\weaponobjects;
+
 #namespace trapd;
 
 function_ae7e49da(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 0;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -34,7 +35,7 @@ function_ae7e49da(watcher) {
 
 function_1daa29fc(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 0;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -57,7 +58,7 @@ function_1daa29fc(watcher) {
 
 function_d8d3b49b(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 0;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -80,7 +81,7 @@ function_d8d3b49b(watcher) {
 
 function_518130e(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 0;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;

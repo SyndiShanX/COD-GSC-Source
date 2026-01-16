@@ -12,11 +12,11 @@
 #namespace castle_rocketshield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_castle_rocketshield", &__init__, undefined, undefined);
+  system::register("zm_weap_castle_rocketshield", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "rs_ammo", 1, 1, "int", &set_rocketshield_ammo, 0, 0);
+  clientfield::register("allplayers", "rs_ammo", 1, 1, "int", & set_rocketshield_ammo, 0, 0);
 }
 
 function set_rocketshield_ammo(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -36,14 +36,14 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = &onstartgametype;
-  level.onroundswitch = &onroundswitch;
-  level.onplayerkilled = &onplayerkilled;
-  level.onprecachegametype = &onprecachegametype;
-  level.onendgame = &onendgame;
-  level.onroundendgame = &onroundendgame;
-  level.ontimelimit = &ontimelimit;
-  level.gettimelimit = &gettimelimit;
+  level.onstartgametype = & onstartgametype;
+  level.onroundswitch = & onroundswitch;
+  level.onplayerkilled = & onplayerkilled;
+  level.onprecachegametype = & onprecachegametype;
+  level.onendgame = & onendgame;
+  level.onroundendgame = & onroundendgame;
+  level.ontimelimit = & ontimelimit;
+  level.gettimelimit = & gettimelimit;
   gameobjects::register_allowed_gameobject(level.gametype);
   game["dialog"]["gametype"] = "res_start";
   game["dialog"]["gametype_hardcore"] = "hcres_start";
@@ -57,7 +57,7 @@ function main() {
 function onprecachegametype() {}
 
 function onroundswitch() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["teamScores"]["allies"] == (level.scorelimit - 1) && game["teamScores"]["axis"] == (level.scorelimit - 1)) {
@@ -79,10 +79,10 @@ function getbetterteam() {
   kills["axis"] = 0;
   deaths["allies"] = 0;
   deaths["axis"] = 0;
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     team = player.pers["team"];
-    if(isDefined(team) && (team == "allies" || team == "axis")) {
+    if(isdefined(team) && (team == "allies" || team == "axis")) {
       kills[team] = kills[team] + player.kills;
       deaths[team] = deaths[team] + player.deaths;
     }
@@ -106,7 +106,7 @@ function getbetterteam() {
 }
 
 function onstartgametype() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["switchedsides"]) {
@@ -116,21 +116,21 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   level.usingextratime = 0;
-  game["strings"]["flags_capped"] = &"MP_TARGET_DESTROYED";
-  util::setobjectivetext(game["attackers"], &"OBJECTIVES_RES_ATTACKER");
-  util::setobjectivetext(game["defenders"], &"OBJECTIVES_RES_DEFENDER");
+  game["strings"]["flags_capped"] = & "MP_TARGET_DESTROYED";
+  util::setobjectivetext(game["attackers"], & "OBJECTIVES_RES_ATTACKER");
+  util::setobjectivetext(game["defenders"], & "OBJECTIVES_RES_DEFENDER");
   if(level.splitscreen) {
-    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_RES_ATTACKER");
-    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_RES_DEFENDER");
+    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_RES_ATTACKER");
+    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_RES_DEFENDER");
   } else {
-    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_RES_ATTACKER_SCORE");
-    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_RES_DEFENDER_SCORE");
+    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_RES_ATTACKER_SCORE");
+    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_RES_DEFENDER_SCORE");
   }
-  util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_RES_ATTACKER_HINT");
-  util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_RES_DEFENDER_HINT");
-  level.objectivehintpreparehq = &"MP_CONTROL_HQ";
-  level.objectivehintcapturehq = &"MP_CAPTURE_HQ";
-  level.objectivehintdefendhq = &"MP_DEFEND_HQ";
+  util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_RES_ATTACKER_HINT");
+  util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_RES_DEFENDER_HINT");
+  level.objectivehintpreparehq = & "MP_CONTROL_HQ";
+  level.objectivehintcapturehq = & "MP_CAPTURE_HQ";
+  level.objectivehintdefendhq = & "MP_DEFEND_HQ";
   level.flagbasefxid = [];
   level.flagbasefxid["allies"] = ("_t6/misc/fx_ui_flagbase_") + game["allies"];
   level.flagbasefxid["axis"] = ("_t6/misc/fx_ui_flagbase_") + game["axis"];
@@ -182,7 +182,7 @@ function onstartgametype() {
 }
 
 function onendgame(winningteam) {
-  for(i = 0; i < level.resflags.size; i++) {
+  for (i = 0; i < level.resflags.size; i++) {
     level.resflags[i] gameobjects::allow_use("none");
   }
 }
@@ -193,7 +193,7 @@ function onroundendgame(roundwinner) {
 }
 
 function res_endgame(winningteam, endreasontext) {
-  if(isDefined(winningteam) && winningteam != "tie") {
+  if(isdefined(winningteam) && winningteam != "tie") {
     globallogic_score::giveteamscoreforobjective(winningteam, 1);
   }
   thread globallogic::endgame(winningteam, endreasontext);
@@ -201,7 +201,7 @@ function res_endgame(winningteam, endreasontext) {
 
 function ontimelimit() {
   if(level.overtime) {
-    if(isDefined(level.resprogressteam)) {
+    if(isdefined(level.resprogressteam)) {
       res_endgame(level.resprogressteam, game["strings"]["time_limit_reached"]);
     } else {
       res_endgame("tie", game["strings"]["time_limit_reached"]);
@@ -215,7 +215,7 @@ function gettimelimit() {
   timelimit = globallogic_defaults::default_gettimelimit();
   if(level.usingextratime) {
     flagcount = 0;
-    if(isDefined(level.currentflag)) {
+    if(isdefined(level.currentflag)) {
       flagcount = flagcount + level.currentflag.orderindex;
     }
     return timelimit + (level.extratime * flagcount);
@@ -241,26 +241,26 @@ function resflagsinit() {
   level.flagmodel["allies"] = teams::get_flag_model("allies");
   level.flagmodel["axis"] = teams::get_flag_model("axis");
   level.flagmodel["neutral"] = teams::get_flag_model("neutral");
-  primaryflags = getEntArray("res_flag_primary", "targetname");
+  primaryflags = getentarray("res_flag_primary", "targetname");
   if(primaryflags.size < 2) {
     println("");
     callback::abort_level();
     return;
   }
   level.flags = [];
-  for(index = 0; index < primaryflags.size; index++) {
+  for (index = 0; index < primaryflags.size; index++) {
     level.flags[level.flags.size] = primaryflags[index];
   }
   level.resflags = [];
-  for(index = 0; index < level.flags.size; index++) {
+  for (index = 0; index < level.flags.size; index++) {
     trigger = level.flags[index];
-    if(isDefined(trigger.target)) {
+    if(isdefined(trigger.target)) {
       visuals[0] = getent(trigger.target, "targetname");
     } else {
       visuals[0] = spawn("script_model", trigger.origin);
       visuals[0].angles = trigger.angles;
     }
-    visuals[0] setModel(level.flagmodel[game["defenders"]]);
+    visuals[0] setmodel(level.flagmodel[game["defenders"]]);
     resflag = gameobjects::create_use_object(game["defenders"], trigger, visuals, level.iconoffset);
     resflag gameobjects::allow_use("none");
     resflag gameobjects::set_use_time(level.flagcapturetime);
@@ -269,18 +269,18 @@ function resflagsinit() {
     label = resflag gameobjects::get_label();
     resflag.label = label;
     resflag gameobjects::set_model_visibility(0);
-    resflag.onuse = &onuse;
-    resflag.onbeginuse = &onbeginuse;
-    resflag.onuseupdate = &onuseupdate;
-    resflag.onuseclear = &onuseclear;
-    resflag.onenduse = &onenduse;
+    resflag.onuse = & onuse;
+    resflag.onbeginuse = & onbeginuse;
+    resflag.onuseupdate = & onuseupdate;
+    resflag.onuseclear = & onuseclear;
+    resflag.onenduse = & onenduse;
     resflag.claimgraceperiod = level.flagcapturegraceperiod;
     resflag.decayprogress = level.flaginactivedecay;
     tracestart = visuals[0].origin + vectorscale((0, 0, 1), 32);
     traceend = visuals[0].origin + (vectorscale((0, 0, -1), 32));
-    trace = bulletTrace(tracestart, traceend, 0, undefined);
+    trace = bullettrace(tracestart, traceend, 0, undefined);
     upangles = vectortoangles(trace["normal"]);
-    resflag.baseeffectforward = anglesToForward(upangles);
+    resflag.baseeffectforward = anglestoforward(upangles);
     resflag.baseeffectright = anglestoright(upangles);
     resflag.baseeffectpos = trace["position"];
     level.flags[index].useobj = resflag;
@@ -292,7 +292,7 @@ function resflagsinit() {
   level.bestspawnflag = [];
   level.bestspawnflag["allies"] = getunownedflagneareststart("allies", undefined);
   level.bestspawnflag["axis"] = getunownedflagneareststart("axis", level.bestspawnflag["allies"]);
-  for(index = 0; index < level.resflags.size; index++) {
+  for (index = 0; index < level.resflags.size; index++) {
     level.resflags[index] createflagspawninfluencers();
   }
 }
@@ -303,12 +303,12 @@ function sortflags() {
   flagorder["_c"] = 2;
   flagorder["_d"] = 3;
   flagorder["_e"] = 4;
-  for(i = 0; i < level.resflags.size; i++) {
+  for (i = 0; i < level.resflags.size; i++) {
     level.resflags[i].orderindex = flagorder[level.resflags[i].label];
-    assert(isDefined(level.resflags[i].orderindex));
+    assert(isdefined(level.resflags[i].orderindex));
   }
-  for(i = 1; i < level.resflags.size; i++) {
-    for(j = 0; j < (level.resflags.size - i); j++) {
+  for (i = 1; i < level.resflags.size; i++) {
+    for (j = 0; j < (level.resflags.size - i); j++) {
       if(level.resflags[j].orderindex > (level.resflags[j + 1].orderindex)) {
         temp = level.resflags[j];
         level.resflags[j] = level.resflags[j + 1];
@@ -332,7 +332,7 @@ function setupnextflag(flagindex) {
 }
 
 function createtimerdisplay() {
-  flagspawninginstr = &"MP_HQ_AVAILABLE_IN";
+  flagspawninginstr = & "MP_HQ_AVAILABLE_IN";
   level.locationobjid = gameobjects::get_next_obj_id();
   level.timerdisplay = [];
   level.timerdisplay["allies"] = hud::createservertimer("objective", 1.4, "allies");
@@ -374,7 +374,7 @@ function showflag(flagindex) {
     objective_icon(level.locationobjid, "waypoint_targetneutral");
     objective_state(level.locationobjid, "active");
     updateobjectivehintmessages(level.objectivehintpreparehq, level.objectivehintdefendhq);
-    flagspawninginstr = &"MP_HQ_AVAILABLE_IN";
+    flagspawninginstr = & "MP_HQ_AVAILABLE_IN";
     level.timerdisplay["allies"].label = flagspawninginstr;
     level.timerdisplay["allies"] settimer(level.flagactivatedelay);
     level.timerdisplay["allies"].alpha = 1;
@@ -415,13 +415,13 @@ function hideflag(flagindex) {
 function getunownedflagneareststart(team, excludeflag) {
   best = undefined;
   bestdistsq = undefined;
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
     if(flag getflagteam() != "neutral") {
       continue;
     }
     distsq = distancesquared(flag.origin, level.startpos[team]);
-    if(!isDefined(excludeflag) || flag != excludeflag && (!isDefined(best) || distsq < bestdistsq)) {
+    if(!isdefined(excludeflag) || flag != excludeflag && (!isdefined(best) || distsq < bestdistsq)) {
       bestdistsq = distsq;
       best = flag;
     }
@@ -452,7 +452,7 @@ function onbeginuse(player) {
 }
 
 function onuseupdate(team, progress, change) {
-  if(!isDefined(level.resprogress)) {
+  if(!isdefined(level.resprogress)) {
     level.resprogress = progress;
   }
   if(progress > 0.05 && change && !self.didstatusnotify) {
@@ -496,7 +496,7 @@ function onenduse(team, player, success) {
 }
 
 function resetflagbaseeffect() {
-  if(isDefined(self.baseeffect)) {
+  if(isdefined(self.baseeffect)) {
     return;
   }
   team = self gameobjects::get_owner_team();
@@ -546,26 +546,26 @@ function onuse(player, team) {
       }
     }
     spawning::updateallspawnpoints();
-    string = &"";
+    string = & "";
     switch (label) {
       case "_a": {
-        string = &"MP_DOM_FLAG_A_CAPTURED_BY";
+        string = & "MP_DOM_FLAG_A_CAPTURED_BY";
         break;
       }
       case "_b": {
-        string = &"MP_DOM_FLAG_B_CAPTURED_BY";
+        string = & "MP_DOM_FLAG_B_CAPTURED_BY";
         break;
       }
       case "_c": {
-        string = &"MP_DOM_FLAG_C_CAPTURED_BY";
+        string = & "MP_DOM_FLAG_C_CAPTURED_BY";
         break;
       }
       case "_d": {
-        string = &"MP_DOM_FLAG_D_CAPTURED_BY";
+        string = & "MP_DOM_FLAG_D_CAPTURED_BY";
         break;
       }
       case "_e": {
-        string = &"MP_DOM_FLAG_E_CAPTURED_BY";
+        string = & "MP_DOM_FLAG_E_CAPTURED_BY";
         break;
       }
       default: {
@@ -575,11 +575,11 @@ function onuse(player, team) {
     assert(string != (&""));
     touchlist = [];
     touchkeys = getarraykeys(self.touchlist[team]);
-    for(i = 0; i < touchkeys.size; i++) {
+    for (i = 0; i < touchkeys.size; i++) {
       touchlist[touchkeys[i]] = self.touchlist[team][touchkeys[i]];
     }
     thread give_capture_credit(touchlist, string);
-    thread util::printandsoundoneveryone(team, oldteam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
+    thread util::printandsoundoneveryone(team, oldteam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
     if(getteamflagcount(team) == level.flags.size) {
       statusdialog("secure_all", team);
       statusdialog("lost_all", oldteam);
@@ -596,10 +596,10 @@ function give_capture_credit(touchlist, string) {
   wait(0.05);
   util::waittillslowprocessallowed();
   players = getarraykeys(touchlist);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player_from_touchlist = touchlist[players[i]].player;
     player_from_touchlist recordgameevent("capture");
-    if(isDefined(player_from_touchlist.pers["captures"])) {
+    if(isdefined(player_from_touchlist.pers["captures"])) {
       player_from_touchlist.pers["captures"]++;
       player_from_touchlist.captures = player_from_touchlist.pers["captures"];
     }
@@ -623,7 +623,7 @@ function onscoreclosemusic() {
   scoredif = abs(axisscore - alliedscore);
   scorethresholdstart = abs(scorelimit - scorethreshold);
   scorelimitcheck = scorelimit - 10;
-  if(!isDefined(level.playingactionmusic)) {
+  if(!isdefined(level.playingactionmusic)) {
     level.playingactionmusic = 0;
   }
   if(alliedscore > axisscore) {
@@ -654,7 +654,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     ownerteam = self.touchtriggers[triggerids[0]].useobj.ownerteam;
     team = self.pers["team"];
     if(team == ownerteam) {
-      if(!isDefined(attacker.res_offends)) {
+      if(!isdefined(attacker.res_offends)) {
         attacker.res_offends = 0;
       }
       attacker.res_offends++;
@@ -665,14 +665,14 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         self recordkillmodifier("defending");
       }
     } else {
-      if(!isDefined(attacker.res_defends)) {
+      if(!isdefined(attacker.res_defends)) {
         attacker.res_defends = 0;
       }
       attacker.res_defends++;
       if(level.playerdefensivemax >= attacker.res_defends) {
         attacker medals::defenseglobalcount();
         attacker thread challenges::killedbasedefender(self.touchtriggers[triggerids[0]]);
-        if(isDefined(attacker.pers["defends"])) {
+        if(isdefined(attacker.pers["defends"])) {
           attacker.pers["defends"]++;
           attacker.defends = attacker.pers["defends"];
         }
@@ -685,7 +685,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
 function getteamflagcount(team) {
   score = 0;
-  for(i = 0; i < level.flags.size; i++) {
+  for (i = 0; i < level.flags.size; i++) {
     if(level.resflags[i] gameobjects::get_owner_team() == team) {
       score++;
     }
@@ -704,7 +704,7 @@ function updateobjectivehintmessages(alliesobjective, axisobjective) {
 
 function createflagspawninfluencers() {
   ss = level.spawnsystem;
-  for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
+  for (flag_index = 0; flag_index < level.flags.size; flag_index++) {
     if(level.resflags[flag_index] == self) {
       break;
     }
@@ -716,9 +716,9 @@ function createflagspawninfluencers() {
 }
 
 function update_spawn_influencers(team) {
-  assert(isDefined(self.neutral_flag_influencer));
-  assert(isDefined(self.owned_flag_influencer));
-  assert(isDefined(self.enemy_flag_influencer));
+  assert(isdefined(self.neutral_flag_influencer));
+  assert(isdefined(self.owned_flag_influencer));
+  assert(isdefined(self.enemy_flag_influencer));
   if(team == "neutral") {
     enableinfluencer(self.neutral_flag_influencer, 1);
     enableinfluencer(self.owned_flag_influencer, 0);
@@ -756,7 +756,7 @@ function hud_setflagprogressbar(value, cappingteam) {
   if(value > 1) {
     value = 1;
   }
-  if(isDefined(cappingteam)) {
+  if(isdefined(cappingteam)) {
     if(cappingteam == game["attackers"]) {
       level.attackerscaptureprogresshud.bar.color = vectorscale((1, 1, 1), 255);
       level.defenderscaptureprogresshud.bar.color = vectorscale((1, 0, 0), 255);

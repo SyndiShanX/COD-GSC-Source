@@ -11,7 +11,9 @@
 
 codecallback_startgametype() {
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [[level.callbackstartgametype]]();
+    [
+      [level.callbackstartgametype]
+    ]();
     level.gametypestarted = 1;
   }
 }
@@ -30,20 +32,16 @@ codecallback_playerconnect() {
     iprintlnbold("_callbacksetup::SetupCallbacks() needs to be called in your main level function.");
     maps\_callbackglobal::callback_playerconnect();
 
-    if(isDefined(level._gamemode_playerconnect)) {
-      [
-        [level._gamemode_playerconnect]
-      ]();
-    }
+    if(isDefined(level._gamemode_playerconnect))
+      [[level._gamemode_playerconnect]]();
 
     return;
   }
 
   [[level.callbackplayerconnect]]();
 
-  if(isDefined(level._gamemode_playerconnect)) {
+  if(isDefined(level._gamemode_playerconnect))
     self thread[[level._gamemode_playerconnect]]();
-  }
 }
 
 codecallback_playerdisconnect() {
@@ -133,9 +131,8 @@ codecallback_saverestored() {
 }
 
 codecallback_disconnectedduringload(name) {
-  if(!isDefined(level._disconnected_clients)) {
+  if(!isDefined(level._disconnected_clients))
     level._disconnected_clients = [];
-  }
 
   level._disconnected_clients[level._disconnected_clients.size] = name;
 }
@@ -145,9 +142,8 @@ codecallback_faceeventnotify(notify_msg, ent) {
     if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg])) {
       forced = 0;
 
-      if(isDefined(level.face_event_handler.forced[notify_msg])) {
+      if(isDefined(level.face_event_handler.forced[notify_msg]))
         forced = level.face_event_handler.forced[notify_msg];
-      }
 
       ent sendfaceevent(level.face_event_handler.events[notify_msg], forced);
     }
@@ -157,9 +153,8 @@ codecallback_faceeventnotify(notify_msg, ent) {
 codecallback_actorshouldreact() {
   self endon("disconnect");
 
-  if(self animscripts\react::shouldreact()) {
+  if(self animscripts\react::shouldreact())
     self startactorreact();
-  }
 }
 
 codecallback_menuresponse(action, arg) {
@@ -169,7 +164,7 @@ codecallback_menuresponse(action, arg) {
   }
 
   index = level.menuresponsequeue.size;
-  level.menuresponsequeue[index] = spawnStruct();
+  level.menuresponsequeue[index] = spawnstruct();
   level.menuresponsequeue[index].action = action;
   level.menuresponsequeue[index].arg = arg;
   level.menuresponsequeue[index].ent = self;
@@ -222,4 +217,5 @@ setdefaultcallbacks() {
   level.callbackplayerlaststand = maps\_callbackglobal::callback_playerlaststand;
 }
 
-callbackvoid() {}
+callbackvoid() {
+}

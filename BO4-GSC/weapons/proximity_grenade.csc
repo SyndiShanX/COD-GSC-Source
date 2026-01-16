@@ -8,15 +8,16 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace proximity_grenade;
 
 init_shared() {
   clientfield::register("toplayer", "tazered", 1, 1, "int", undefined, 0, 0);
-  level._effect[# "prox_grenade_friendly_default"] = # "weapon/fx_prox_grenade_scan_blue";
-  level._effect[# "prox_grenade_friendly_warning"] = # "weapon/fx_prox_grenade_wrn_grn";
-  level._effect[# "prox_grenade_enemy_default"] = # "weapon/fx_prox_grenade_scan_orng";
-  level._effect[# "prox_grenade_enemy_warning"] = # "weapon/fx_prox_grenade_wrn_red";
-  level._effect[# "prox_grenade_player_shock"] = # "weapon/fx_prox_grenade_impact_player_spwner";
+  level._effect[#"prox_grenade_friendly_default"] = #"weapon/fx_prox_grenade_scan_blue";
+  level._effect[#"prox_grenade_friendly_warning"] = #"weapon/fx_prox_grenade_wrn_grn";
+  level._effect[#"prox_grenade_enemy_default"] = #"weapon/fx_prox_grenade_scan_orng";
+  level._effect[#"prox_grenade_enemy_warning"] = #"weapon/fx_prox_grenade_wrn_red";
+  level._effect[#"prox_grenade_player_shock"] = #"weapon/fx_prox_grenade_impact_player_spwner";
   callback::add_weapon_type(#"proximity_grenade", &proximity_spawned);
   level thread watchforproximityexplosion();
 }
@@ -26,8 +27,8 @@ proximity_spawned(localclientnum) {
     return;
   }
 
-  self.equipmentfriendfx = level._effect[# "prox_grenade_friendly_default"];
-  self.equipmentenemyfx = level._effect[# "prox_grenade_enemy_default"];
+  self.equipmentfriendfx = level._effect[#"prox_grenade_friendly_default"];
+  self.equipmentenemyfx = level._effect[#"prox_grenade_enemy_default"];
   self.equipmenttagfx = "tag_fx";
   self thread weaponobjects::equipmentteamobject(localclientnum);
 }

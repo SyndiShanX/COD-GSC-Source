@@ -35,6 +35,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_red;
 
 autoexec opt_in() {
@@ -44,22 +45,22 @@ autoexec opt_in() {
 
 event_handler[level_init] main(eventstruct) {
   clientfield::register("clientuimodel", "player_lives", 16000, 2, "int", undefined, 0, 0);
-  clientfield::register("scriptmover", "" + # "register_pegasus", 16000, 1, "counter", &register_pegasus, 0, 0);
-  clientfield::register("scriptmover", "" + # "medusa_eyes", 16000, 1, "int", &function_deaba617, 0, 0);
-  clientfield::register("scriptmover", "" + # "special_target", 16000, 1, "int", &function_adad910c, 0, 0);
-  clientfield::register("actor", "" + # "hash_2856f87ecdfaf62", 16000, 1, "counter", &function_f02d282d, 0, 0);
-  clientfield::register("actor", "" + # "hash_1bdce857fd614cef", 16000, 1, "counter", &function_ef690ed4, 0, 0);
-  clientfield::register("world", "" + # "postfx_play", 16000, 2, "int", &function_ea4a65c1, 0, 0);
-  clientfield::register("world", "" + # "hash_71f9fcfb2cd84a9c", 16000, 1, "int", &function_b16ffc7a, 0, 0);
-  clientfield::register("toplayer", "" + # "eye_vignette", 16000, 1, "int", &function_3b118f17, 0, 0);
+  clientfield::register("scriptmover", "" + #"register_pegasus", 16000, 1, "counter", &register_pegasus, 0, 0);
+  clientfield::register("scriptmover", "" + #"medusa_eyes", 16000, 1, "int", &function_deaba617, 0, 0);
+  clientfield::register("scriptmover", "" + #"special_target", 16000, 1, "int", &function_adad910c, 0, 0);
+  clientfield::register("actor", "" + #"hash_2856f87ecdfaf62", 16000, 1, "counter", &function_f02d282d, 0, 0);
+  clientfield::register("actor", "" + #"hash_1bdce857fd614cef", 16000, 1, "counter", &function_ef690ed4, 0, 0);
+  clientfield::register("world", "" + #"postfx_play", 16000, 2, "int", &function_ea4a65c1, 0, 0);
+  clientfield::register("world", "" + #"hash_71f9fcfb2cd84a9c", 16000, 1, "int", &function_b16ffc7a, 0, 0);
+  clientfield::register("toplayer", "" + #"eye_vignette", 16000, 1, "int", &function_3b118f17, 0, 0);
   level._uses_default_wallbuy_fx = 1;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_red_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_red_weapons.csv";
   level.var_5603a802 = "pstfx_gaussian_blur";
-  level._effect[# "fasttravel_rail_1p"] = # "hash_51fd09e47e0cd679";
-  level._effect[# "fasttravel_rail_3p"] = # "hash_51fd09e47e0cd679";
-  level._effect[# "fasttravel_rail_travel"] = # "hash_51fd09e47e0cd679";
+  level._effect[#"fasttravel_rail_1p"] = #"hash_51fd09e47e0cd679";
+  level._effect[#"fasttravel_rail_3p"] = #"hash_51fd09e47e0cd679";
+  level._effect[#"fasttravel_rail_travel"] = #"hash_51fd09e47e0cd679";
   zm_red_trap_boiling_bath::init();
   namespace_f2050961::init();
   zm_red_ww_quests::init();
@@ -208,7 +209,7 @@ function_ade26abd(str_dir) {
   var_10d4f67d endon(#"death");
   str_tag = "j_wingulna_le";
 
-  if(str_dir == # "right") {
+  if(str_dir == #"right") {
     str_tag = "j_wingulna_ri";
   }
 

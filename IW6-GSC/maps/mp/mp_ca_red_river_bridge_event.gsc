@@ -193,15 +193,11 @@ debugEvents() {
 
 checkDbgDvar(dvarName, callback, notifyStr) {
   if(GetDvarInt(dvarName) > 0) {
-    if(isDefined(callback)) {
-      [
-        [callback]
-      ](GetDvarInt(dvarName));
-    }
+    if(isDefined(callback))
+      [[callback]](GetDvarInt(dvarName));
 
-    if(isDefined(notifyStr)) {
+    if(isDefined(notifyStr))
       level notify(notifyStr);
-    }
 
     SetDvar(dvarName, 0);
   }

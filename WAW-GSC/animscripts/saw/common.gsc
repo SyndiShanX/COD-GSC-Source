@@ -11,26 +11,22 @@ main(turret) {
     return;
   }
   self.a.special = "saw";
-  if(isDefined(turret.script_delay_min)) {
+  if(isDefined(turret.script_delay_min))
     turret_delay = turret.script_delay_min;
-  } else {
+  else
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
-  }
-  if(isDefined(turret.script_delay_max)) {
+  if(isDefined(turret.script_delay_max))
     turret_delay_range = turret.script_delay_max - turret_delay;
-  } else {
+  else
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
-  }
-  if(isDefined(turret.script_burst_min)) {
+  if(isDefined(turret.script_burst_min))
     turret_burst = turret.script_burst_min;
-  } else {
+  else
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
-  }
-  if(isDefined(turret.script_burst_max)) {
+  if(isDefined(turret.script_burst_max))
     turret_burst_range = turret.script_burst_max - turret_burst;
-  } else {
+  else
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
-  }
   pauseUntilTime = getTime();
   turretState = "start";
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
@@ -52,7 +48,7 @@ main(turret) {
   self setAnimKnobLimitedRestart(self.additiveTurretFire);
   turret setAnimKnobLimitedRestart(turret.additiveTurretIdle);
   turret setAnimKnobLimitedRestart(turret.additiveTurretFire);
-  for(;;) {
+  for (;;) {
     if(turret.doFiring) {
       thread DoShoot(turret);
       self waitTimeOrUntilTurretStateChange(randomFloatRange(turret_burst, turret_burst + turret_burst_range), turret);
@@ -76,12 +72,11 @@ waitTimeOrUntilTurretStateChange(time, turret) {
 fireController(turret) {
   self endon("killanimscript");
   fovdot = cos(15);
-  for(;;) {
-    while(isDefined(self.enemy)) {
+  for (;;) {
+    while (isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
-      if(isSentient(enemypos)) {
+      if(isSentient(enemypos))
         enemypos += (0, 0, 32);
-      }
       turretAimPos = turret getTagAngles("tag_aim");
       if(within_fov(turret.origin, turretAimPos, enemypos, fovdot) || distanceSquared(turret.origin, enemyPos) < 200 * 200) {
         if(!turret.doFiring) {
@@ -114,10 +109,9 @@ turretTimer(duration, turret) {
 
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
-  while(1) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
+  while (1) {
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
       self stopUseTurret();
-    }
     wait .25;
   }
 }
@@ -165,7 +159,7 @@ preplacedPostScriptFunc(animscript) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectorNormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = anglestoforward(start_angles);
   dot = vectorDot(forward, normal);
   return dot >= fov;
 }
@@ -190,7 +184,7 @@ DoAim(turret) {
 TurretDoShoot(turret) {
   self endon("killanimscript");
   turret endon("turretstatechange");
-  for(;;) {
+  for (;;) {
     turret ShootTurret();
     wait 0.1;
   }

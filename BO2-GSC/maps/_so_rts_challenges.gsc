@@ -11,9 +11,8 @@
 #include maps\_so_rts_support;
 
 global_actor_killed_challenges_callback(e_inflictor, e_attacker, n_damage, str_means_of_death, str_weapon, v_dir, str_hit_loc, timeoffset) {
-  if(e_attacker.classname == "worldspawn") {
+  if(e_attacker.classname == "worldspawn")
     e_attacker = self.attacker;
-  }
 
   if(isplayer(e_attacker)) {
     if(self.team == "axis") {
@@ -216,9 +215,8 @@ process_challenge_explosive_car_kills(e_inflictor, e_attacker, n_damage, str_mea
 is_explosive_car_death(e_inflictor, e_attacker, n_damage, str_means_of_death) {
   if(isDefined(str_means_of_death) && str_means_of_death == "MOD_EXPLOSIVE") {
     if(isDefined(e_inflictor) && isDefined(e_inflictor.destructibledef)) {
-      if(isDefined(e_inflictor.destructiblecar) && e_inflictor.destructiblecar) {
+      if(isDefined(e_inflictor.destructiblecar) && e_inflictor.destructiblecar)
         return true;
-      }
     }
   }
 
@@ -244,20 +242,19 @@ process_challenge_vtol_kills() {
 
 process_challenge_quad_kills(rider, n_damage) {
   if(isDefined(level.rts.kill_stats.quad_kills) && level.rts.kill_stats.quad_kills != -1) {
-    if(isDefined(rider) && (isDefined(rider.quad_kill_counted) && rider.quad_kill_counted)) {
+    if(isDefined(rider) && (isDefined(rider.quad_kill_counted) && rider.quad_kill_counted))
       return;
-    } else if(isDefined(self.quad_kill_counted) && self.quad_kill_counted) {
+    else if(isDefined(self.quad_kill_counted) && self.quad_kill_counted) {
       return;
     }
     if(isDefined(rider) && rider.health - n_damage > 0) {
       return;
     }
     if(issubstr(level.player maps\_so_rts_support::get_player_rts_mode(), "quad")) {
-      if(isDefined(rider)) {
+      if(isDefined(rider))
         rider.quad_kill_counted = 1;
-      } else {
+      else
         self.quad_kill_counted = 1;
-      }
 
       level.rts.kill_stats.quad_kills++;
 
@@ -278,13 +275,12 @@ process_challenge_sentry_kills(str_weapon, str_means_of_death) {
     rts_mode = level.player maps\_so_rts_support::get_player_rts_mode();
     was_turret_kill = 0;
 
-    if(str_weapon == "auto_gun_turret_sp_minigun_rts") {
+    if(str_weapon == "auto_gun_turret_sp_minigun_rts")
       was_turret_kill = 1;
-    } else if(rts_mode == "sentry_turret_friendly") {
+    else if(rts_mode == "sentry_turret_friendly")
       was_turret_kill = 1;
-    } else if(rts_mode == "human" && level.rts.player.usingvehicle && str_means_of_death == "MOD_UNKNOWN") {
+    else if(rts_mode == "human" && level.rts.player.usingvehicle && str_means_of_death == "MOD_UNKNOWN")
       was_turret_kill = 1;
-    }
 
     if(was_turret_kill) {
       level.rts.kill_stats.sentry_kills++;

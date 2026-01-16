@@ -142,9 +142,8 @@ flip_sky() {
 connect_watch() {
   while(1) {
     level waittill("connected", player);
-    if(isDefined(level.vision_set_stage)) {
+    if(isDefined(level.vision_set_stage))
       player VisionSetStage(level.vision_set_stage, .1);
-    }
 
     player thread watch_throwing_knife();
     PlayFXOnTagForClients(level._effect["vfx_sunflare"], level.sunflare_ent, "tag_origin", player);
@@ -207,9 +206,8 @@ init_destroyed_zone() {
 }
 
 doNuke_fx_strikezone() {
-  if(!level.allow_level_killstreak) {
+  if(!level.allow_level_killstreak)
     return false;
-  }
 
   game["player_holding_level_killstrek"] = false;
   disable_strikezone_rog();
@@ -244,9 +242,8 @@ pre_teleport() {
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(fx_to_flash_time);
 
   foreach(player in level.players) {
-    if(isDefined(player.setSpawnPoint)) {
+    if(isDefined(player.setSpawnPoint))
       player maps\mp\perks\_perkfunctions::deleteTI(player.setSpawnPoint);
-    }
   }
 
   level thread nuke_slow_motion(.1, slow_mo_time + flash_fade_in_time, 0);
@@ -255,9 +252,8 @@ pre_teleport() {
   level thread nuke_earthquake(.5, 5);
   level thread rumble_all_players("hijack_plane_medium");
   level thread nuke_ground_tilt();
-  if(!levelFlag("post_game_level_event_active") && isDefined(level.nukeInfo.team)) {
+  if(!levelFlag("post_game_level_event_active") && isDefined(level.nukeInfo.team))
     level thread maps\mp\killstreaks\_nuke::nukeDeath();
-  }
 
   VisionSetNaked("mp_strikezone_flash", flash_fade_in_time);
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(flash_fade_in_time);
@@ -270,9 +266,8 @@ post_teleport() {
   level thread maps\mp\killstreaks\_nuke::nukeClearTimer();
   level thread updateMLGCameras();
 
-  if(level.gametype == "grnd") {
+  if(level.gametype == "grnd")
     level thread maps\mp\gametypes\grnd::cycleZones();
-  }
 
   flash_fade_out_time = 0.5;
   explosion_vision_time = 2.5;
@@ -323,9 +318,8 @@ nuke_activate_at_end_of_match() {
   flag_wait("teleport_setup_complete");
 
   level waittill("spawning_intermission");
-  if(level.allow_level_killstreak) {
+  if(level.allow_level_killstreak)
     level thread nuke_end_of_match();
-  }
 }
 
 nuke_end_of_match() {
@@ -340,9 +334,8 @@ nuke_end_of_match() {
 }
 
 nuke_fx_exploders(delay_time) {
-  if(isDefined(delay_time) && delay_time > 0) {
+  if(isDefined(delay_time) && delay_time > 0)
     wait delay_time;
-  }
 
   exploder(2);
   wait(2);
@@ -370,9 +363,8 @@ exploder_connect_watch(num, startTime) {
 }
 
 set_vision_set_stage(stage, time) {
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 1.0;
-  }
 
   foreach(player in level.players) {
     player VisionSetStage(stage, time);
@@ -382,9 +374,8 @@ set_vision_set_stage(stage, time) {
 }
 
 set_all_players_undying(enable) {
-  if(!isDefined(level.players_undying)) {
+  if(!isDefined(level.players_undying))
     level.players_undying = false;
-  }
 
   if(enable == level.players_undying) {
     return;
@@ -480,9 +471,8 @@ nuke_blur(scale, blend_time) {
 }
 
 rumble_all_players(rumble, loop) {
-  if(!isDefined(loop)) {
+  if(!isDefined(loop))
     loop = false;
-  }
 
   foreach(player in level.players) {
     if(loop) {
@@ -518,9 +508,8 @@ generic_swing_ents() {
   swing_origins = getEntArray("generic_swing", "targetname");
 
   foreach(swing in swing_origins) {
-    if(!isDefined(swing.angles)) {
+    if(!isDefined(swing.angles))
       swing.angles = (0, 0, 0);
-    }
 
     pivot = spawn("script_model", swing.origin);
     pivot.angles = swing.angles;
@@ -587,27 +576,23 @@ fall_object_init() {
 
   set_default_angles(things);
 
-  if(isDefined(self.start) && isDefined(self.end)) {
+  if(isDefined(self.start) && isDefined(self.end))
     self thread fall_object_run();
-  }
 }
 
 set_default_script_noteworthy(things, noteworthy) {
   if(!isDefined(things)) {
     return;
   }
-  if(!isDefined(noteworthy)) {
+  if(!isDefined(noteworthy))
     noteworthy = "";
-  }
 
-  if(!isArray(things)) {
+  if(!isArray(things))
     things = [things];
-  }
 
   foreach(thing in things) {
-    if(!isDefined(thing.script_noteworthy)) {
+    if(!isDefined(thing.script_noteworthy))
       thing.script_noteworthy = noteworthy;
-    }
   }
 }
 
@@ -615,18 +600,15 @@ set_default_angles(things, angles) {
   if(!isDefined(things)) {
     return;
   }
-  if(!isDefined(angles)) {
+  if(!isDefined(angles))
     angles = (0, 0, 0);
-  }
 
-  if(!isArray(things)) {
+  if(!isArray(things))
     things = [things];
-  }
 
   foreach(thing in things) {
-    if(!isDefined(thing.angles)) {
+    if(!isDefined(thing.angles))
       thing.angles = angles;
-    }
   }
 }
 
@@ -643,9 +625,8 @@ fall_object_run() {
   wait RandomFloatRange(0.8, 1.0);
 
   if(isDefined(self.script_delay)) {
-    if(self.script_delay < 0) {
+    if(self.script_delay < 0)
       self.script_delay = RandomFloatRange(30, 120);
-    }
 
     wait self.script_delay;
   }
@@ -657,9 +638,8 @@ fall_object_run() {
   time = dist / fall_speed;
 
   self moveTo(fall_to_origin, time, time, 0);
-  if(fall_to_angles != self.angles) {
+  if(fall_to_angles != self.angles)
     self RotateTo(fall_to_angles, time, 0, 0);
-  }
 
   wait time;
 }
@@ -706,15 +686,14 @@ ronnie_knife_watcher() {
 
 STRIKEZONE_ROG_WEIGHT = 55;
 strikezoneCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   level.allow_level_killstreak = allowLevelKillstreaks();
   if(!level.allow_level_killstreak || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "nuke", STRIKEZONE_ROG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_STRIKEZONE_ROG");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "nuke", STRIKEZONE_ROG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_STRIKEZONE_ROG");
   level thread strikezone_rog_post_teleport_init();
 }
 
@@ -722,9 +701,8 @@ strikezone_rog_post_teleport_init() {
   flag_wait("teleport_setup_complete");
 
   if(level.teleport_allowed) {
-    if(level.allow_level_killstreak) {
+    if(level.allow_level_killstreak)
       level thread watch_for_strikezone_rog_crate();
-    }
   } else {
     level.allow_level_killstreak = false;
     disable_strikezone_rog();

@@ -5,10 +5,11 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\supplydrop_shared;
+
 #namespace supplydrop;
 
 autoexec __init__system__() {
-  system::register(#"supplydrop", &__init__, undefined, # "killstreaks");
+  system::register(#"supplydrop", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

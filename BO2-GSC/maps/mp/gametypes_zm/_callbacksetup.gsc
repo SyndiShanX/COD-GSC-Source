@@ -12,7 +12,9 @@
 
 codecallback_startgametype() {
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [[level.callbackstartgametype]]();
+    [
+      [level.callbackstartgametype]
+    ]();
     level.gametypestarted = 1;
   }
 }
@@ -89,13 +91,13 @@ codecallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeat
   [[level.callbackvehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, damagefromunderneath, modelindex, partname);
 }
 
-codecallback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, sweapon, vpoint, fradius, fconeanglecos, vconedir, timeoffset) {}
+codecallback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, sweapon, vpoint, fradius, fconeanglecos, vconedir, timeoffset) {
+}
 
 codecallback_faceeventnotify(notify_msg, ent) {
   if(isDefined(ent) && isDefined(ent.do_face_anims) && ent.do_face_anims) {
-    if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg])) {
+    if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg]))
       ent sendfaceevent(level.face_event_handler.events[notify_msg]);
-    }
   }
 }
 
@@ -106,7 +108,7 @@ codecallback_menuresponse(action, arg) {
   }
 
   index = level.menuresponsequeue.size;
-  level.menuresponsequeue[index] = spawnStruct();
+  level.menuresponsequeue[index] = spawnstruct();
   level.menuresponsequeue[index].action = action;
   level.menuresponsequeue[index].arg = arg;
   level.menuresponsequeue[index].ent = self;
@@ -178,4 +180,5 @@ codecallback_glasssmash(pos, dir) {
   level notify("glass_smash", pos, dir);
 }
 
-callbackvoid() {}
+callbackvoid() {
+}

@@ -61,9 +61,8 @@ hud_addtargets(var_0, var_1) {
   var_17 = undefined;
 
   foreach(var_19 in var_0) {
-    if(target_istarget(var_19)) {
+    if(target_istarget(var_19))
       target_remove(var_19);
-    }
 
     if(!isDefined(var_19) || isDefined(var_19.shader) || target_getarray().size >= 64) {
       continue;
@@ -141,75 +140,63 @@ hud_addtargets(var_0, var_1) {
       target_setshader(var_19, var_2);
       target_setscaledrendermode(var_19, 0);
 
-      if(var_9) {
+      if(var_9)
         target_drawsingle(var_19);
-      }
 
-      if(var_14) {
+      if(var_14)
         target_drawsquare(var_19, var_16);
-      }
 
-      if(var_8) {
+      if(var_8)
         target_drawcornersonly(var_19, 1);
-      }
 
-      if(isDefined(var_15)) {
+      if(isDefined(var_15))
         target_setcolor(var_19, var_15);
-      }
 
-      if(isDefined(var_17)) {
+      if(isDefined(var_17))
         target_setdelay(var_19, var_17, 10, 25, randomfloatrange(1.25, 2.75));
-      }
 
       target_setmaxsize(var_19, var_11);
       target_setminsize(var_19, var_10, var_12);
       target_flush(var_19);
 
-      if(!var_12) {
+      if(!var_12)
         var_19.hud_player_target_hide_at_min = var_12;
-      }
     } else {
       target_set(var_19, var_5);
       target_setshader(var_19, var_2);
     }
 
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       target_setoffscreenshader(var_19, var_3);
-    }
 
     var_20.visibleto = [];
 
-    foreach(var_22 in level.players) {
-      var_20.visibleto[var_22 getentitynumber()] = undefined;
-    }
+    foreach(var_22 in level.players)
+    var_20.visibleto[var_22 getentitynumber()] = undefined;
 
-    if(!isDefined(var_20.weapon)) {
+    if(!isDefined(var_20.weapon))
       var_20.weapon = [];
-    }
 
     var_20.weapon["lockOn_missile"] = spawnStruct();
     var_20.weapon["lockOn_missile"].islockedon = [];
     var_19._target = var_20;
     thread hud_target_ondeath(var_19);
 
-    if(var_1 > 0) {
+    if(var_1 > 0)
       wait(var_1);
-    }
   }
 }
 
 ismissile(var_0) {
-  if(isDefined(var_0) && isDefined(var_0.classname) && issubstr(var_0.classname, "rocket")) {
+  if(isDefined(var_0) && isDefined(var_0.classname) && issubstr(var_0.classname, "rocket"))
     return 1;
-  }
 
   return 0;
 }
 
 isscriptmodel(var_0) {
-  if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "script_model") {
+  if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "script_model")
     return 1;
-  }
 
   return 0;
 }
@@ -228,9 +215,8 @@ hud_showtargets(var_0) {
 
 hud_outlineenable() {
   if(isDefined(self.team) && self.team == "allies" || isDefined(self.script_team) && self.script_team == "allies") {
-    if(!isai(self)) {
+    if(!isai(self))
       thread hud_outline_enable_withinview("friendly", cos(20));
-    }
 
     return;
   }
@@ -241,17 +227,15 @@ hud_outlineenable() {
     return;
   }
   if(isDefined(self.mgturret)) {
-    foreach(var_2 in self.mgturret) {
-      var_2 maps\_utility::set_hudoutline(var_0, 1);
-    }
+    foreach(var_2 in self.mgturret)
+    var_2 maps\_utility::set_hudoutline(var_0, 1);
   }
 
   maps\_utility::set_hudoutline(var_0, 1);
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self hudoutlinedisable();
-  }
 }
 
 hud_outline_enable_withinview(var_0, var_1) {
@@ -272,9 +256,8 @@ hud_outline_enable_withinview(var_0, var_1) {
         self hudoutlinedisable();
 
         if(isDefined(self.mgturret)) {
-          foreach(var_6 in self.mgturret) {
-            var_6 hudoutlinedisable();
-          }
+          foreach(var_6 in self.mgturret)
+          var_6 hudoutlinedisable();
         }
       }
 
@@ -286,9 +269,8 @@ hud_outline_enable_withinview(var_0, var_1) {
       maps\_utility::set_hudoutline(var_0, 1);
 
       if(isDefined(self.mgturret)) {
-        foreach(var_6 in self.mgturret) {
-          var_6 maps\_utility::set_hudoutline(var_0, 1);
-        }
+        foreach(var_6 in self.mgturret)
+        var_6 maps\_utility::set_hudoutline(var_0, 1);
       }
     }
   }
@@ -302,9 +284,8 @@ hud_hidetargets(var_0) {
       var_4 = var_3._target;
       var_4.visibleto[var_1 getentitynumber()] = undefined;
 
-      if(isDefined(var_3.mgturret)) {
+      if(isDefined(var_3.mgturret))
         common_scripts\utility::array_call(var_3.mgturret, ::hudoutlinedisable);
-      }
 
       var_3 hudoutlinedisable();
       target_hidefromplayer(var_3, var_1);
@@ -313,11 +294,10 @@ hud_hidetargets(var_0) {
 }
 
 onteam(var_0) {
-  if(maps\_vehicle::isvehicle()) {
+  if(maps\_vehicle::isvehicle())
     return isDefined(self.script_team) && self.script_team == var_0;
-  } else {
+  else
     return isDefined(self.team) && self.team == var_0;
-  }
 
   return 0;
 }
@@ -326,26 +306,23 @@ hud_target_ondeath(var_0) {
   var_0 waittill("death");
 
   if(isDefined(var_0) && target_istarget(var_0)) {
-    if(!isai(var_0)) {
+    if(!isai(var_0))
       hud_hidetargets([var_0]);
-    }
 
     target_remove(var_0);
   }
 }
 
 target_islockedontome(var_0) {
-  if(!isDefined(self._target)) {
+  if(!isDefined(self._target))
     return 0;
-  }
 
   var_1 = var_0 getentitynumber();
   var_2 = 0;
 
   foreach(var_4 in self._target.weapon) {
-    if(isDefined(var_4.islockedon[var_1])) {
+    if(isDefined(var_4.islockedon[var_1]))
       return 1;
-    }
   }
 
   return 0;
@@ -361,35 +338,30 @@ _end() {
     foreach(var_4 in var_1) {
       target_remove(var_4);
 
-      if(isDefined(var_4._target)) {
+      if(isDefined(var_4._target))
         var_4._target = undefined;
-      }
     }
   } else {
     foreach(var_4 in var_1) {
       target_hidefromplayer(var_4, var_0);
 
       if(isDefined(var_4._target)) {
-        foreach(var_8 in var_4._target.weapon) {
-          var_8.islockedon[var_2] = undefined;
-        }
+        foreach(var_8 in var_4._target.weapon)
+        var_8.islockedon[var_2] = undefined;
       }
     }
   }
 }
 
 gt_op(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isDefined(var_1))
     return common_scripts\utility::ter_op(var_0 > var_1, var_0, var_1);
-  }
 
-  if(isDefined(var_0) && !isDefined(var_1)) {
+  if(isDefined(var_0) && !isDefined(var_1))
     return var_0;
-  }
 
-  if(!isDefined(var_0) && isDefined(var_1)) {
+  if(!isDefined(var_0) && isDefined(var_1))
     return var_1;
-  }
 
   return var_2;
 }

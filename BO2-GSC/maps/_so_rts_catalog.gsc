@@ -22,9 +22,8 @@ preload() {
   level.rts.packages = package_populate();
 
   foreach(pkg in level.rts.packages) {
-    if(isDefined(pkg.marker) && pkg.marker != "") {
+    if(isDefined(pkg.marker) && pkg.marker != "")
       precachemodel(pkg.marker);
-    }
   }
 }
 
@@ -44,7 +43,7 @@ get_pkg_ref_by_index(idx) {
 init() {
   level.rts.packages_avail = package_generateavailable("allies");
   assert(isDefined(level.rts.rules), "rules must be initialized first");
-  level.rts.transport = spawnStruct();
+  level.rts.transport = spawnstruct();
   level.rts.transport.helo = [];
   level.rts.transport.vtol = [];
   level.rts.enemy_notification = 0;
@@ -53,7 +52,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.player_helo; i++) {
     unith = level.rts.transport.helo.size;
-    level.rts.transport.helo[unith] = spawnStruct();
+    level.rts.transport.helo[unith] = spawnstruct();
     level.rts.transport.helo[unith].state = 0;
     level.rts.transport.helo[unith].type = "helo";
     level.rts.transport.helo[unith].num = unith;
@@ -63,7 +62,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.enemy_helo; i++) {
     unith = level.rts.transport.helo.size;
-    level.rts.transport.helo[unith] = spawnStruct();
+    level.rts.transport.helo[unith] = spawnstruct();
     level.rts.transport.helo[unith].state = 0;
     level.rts.transport.helo[unith].type = "helo";
     level.rts.transport.helo[unith].num = unith;
@@ -73,7 +72,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.player_vtol; i++) {
     unitv = level.rts.transport.vtol.size;
-    level.rts.transport.vtol[unitv] = spawnStruct();
+    level.rts.transport.vtol[unitv] = spawnstruct();
     level.rts.transport.vtol[unitv].state = 0;
     level.rts.transport.vtol[unitv].type = "vtol";
     level.rts.transport.vtol[unitv].num = unitv;
@@ -83,7 +82,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.enemy_vtol; i++) {
     unitv = level.rts.transport.vtol.size;
-    level.rts.transport.vtol[unitv] = spawnStruct();
+    level.rts.transport.vtol[unitv] = spawnstruct();
     level.rts.transport.vtol[unitv].state = 0;
     level.rts.transport.vtol[unitv].type = "vtol";
     level.rts.transport.vtol[unitv].num = unitv;
@@ -103,7 +102,7 @@ package_populate() {
     if(!isDefined(ref) || ref == "") {
       continue;
     }
-    pkg = spawnStruct();
+    pkg = spawnstruct();
     pkg.idx = i;
     pkg.ref = ref;
     pkg.name = lookup_value(ref, i, 2);
@@ -113,32 +112,27 @@ package_populate() {
     assert(cost.size >= 1 && cost.size <= 2, "unexpected cost parameters");
 
     if(cost.size == 1) {
-      if(cost[0] == "na") {
+      if(cost[0] == "na")
         cost[0] = -1;
-      }
 
       pkg.cost["axis"] = int(cost[0]);
       pkg.cost["allies"] = int(cost[0]);
     } else {
-      if(cost[0] == "na") {
+      if(cost[0] == "na")
         cost[0] = -1;
-      }
 
-      if(cost[1] == "na") {
+      if(cost[1] == "na")
         cost[1] = -1;
-      }
 
       pkg.cost["axis"] = int(cost[0]);
       pkg.cost["allies"] = int(cost[1]);
     }
 
-    if(pkg.cost["axis"] != -1) {
+    if(pkg.cost["axis"] != -1)
       pkg.cost["axis"] = pkg.cost["axis"] * 1000;
-    }
 
-    if(pkg.cost["allies"] != -1) {
+    if(pkg.cost["allies"] != -1)
       pkg.cost["allies"] = pkg.cost["allies"] * 1000;
-    }
 
     pkg.units = [];
     pkg.units = strtok(lookup_value(ref, i, 5), " ");
@@ -156,9 +150,8 @@ package_populate() {
     assert(isDefined(pkg.delivery));
 
     if(pkg.delivery != "CODE") {
-      foreach(unit in pkg.units) {
-        assert(isDefined(level.rts.ai[unit]), "Package is referencing undefined ai unit-->" + unit);
-      }
+      foreach(unit in pkg.units)
+      assert(isDefined(level.rts.ai[unit]), "Package is referencing undefined ai unit-->" + unit);
     }
 
     pkg.enforce_deps = [];
@@ -171,20 +164,17 @@ package_populate() {
     assert(qty.size >= 1 && qty.size <= 2, "unexpected qty parameters");
 
     if(qty.size == 1) {
-      if(qty[0] == "inf") {
+      if(qty[0] == "inf")
         qty[0] = -1;
-      }
 
       pkg.qty["axis"] = -1;
       pkg.qty["allies"] = int(qty[0]);
     } else {
-      if(qty[0] == "inf") {
+      if(qty[0] == "inf")
         qty[0] = -1;
-      }
 
-      if(qty[1] == "inf") {
+      if(qty[1] == "inf")
         qty[1] = -1;
-      }
 
       pkg.qty["axis"] = int(qty[0]);
       pkg.qty["allies"] = int(qty[1]);
@@ -199,35 +189,30 @@ package_populate() {
     pkg.hot_key_command = lookup_value(ref, i, 15);
     pkg.hot_key_takeover = lookup_value(ref, i, 16);
 
-    if(pkg.hot_key_buy != "") {
+    if(pkg.hot_key_buy != "")
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_buy, ::package_buyunitpressed, pkg);
-    } else {
+    else
       pkg.hot_key_buy = undefined;
-    }
 
-    if(pkg.hot_key_command != "") {
+    if(pkg.hot_key_command != "")
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_command, ::package_commandunitpressed, pkg);
-    } else {
+    else
       pkg.hot_key_command = undefined;
-    }
 
-    if(pkg.hot_key_takeover != "") {
+    if(pkg.hot_key_takeover != "")
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_takeover, ::package_takeoverunitpressed, pkg);
-    } else {
+    else
       pkg.hot_key_takeover = undefined;
-    }
 
     pkg.notifyavail = lookup_value(ref, i, 17);
 
-    if(pkg.notifyavail == "") {
+    if(pkg.notifyavail == "")
       pkg.notifyavail = undefined;
-    }
 
     pkg.gateflag = lookup_value(ref, i, 18);
 
-    if(pkg.gateflag == "") {
+    if(pkg.gateflag == "")
       pkg.gateflag = undefined;
-    }
 
     pkg_types[pkg_types.size] = pkg;
   }
@@ -272,16 +257,15 @@ package_commandunitfps(squadid) {
   direction = maps\_so_rts_support::get_player_angles();
 
   if(isDefined(level.rts.player.ally) && isDefined(level.rts.player.ally.vehicle)) {
-    if(isDefined(level.rts.player.ally.vehicle.ai_ref.cmd_tag)) {
+    if(isDefined(level.rts.player.ally.vehicle.ai_ref.cmd_tag))
       eye = level.rts.player.ally.vehicle gettagorigin(level.rts.player.ally.vehicle.ai_ref.cmd_tag);
-    } else {
+    else
       eye = level.rts.player.origin;
-    }
   } else
     eye = level.rts.player.origin + vectorscale((0, 0, 1), 60.0);
 
-  direction_vec = anglesToForward(direction);
-  trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
+  direction_vec = anglestoforward(direction);
+  trace = bullettrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
   hitent = trace["entity"];
   tracepoint = trace["position"];
 
@@ -302,26 +286,22 @@ package_commandunitfps(squadid) {
   level.rts.targetteammate = undefined;
 
   if(isDefined(hitent)) {
-    if(isDefined(maps\_so_rts_poi::ispoient(hitent))) {
+    if(isDefined(maps\_so_rts_poi::ispoient(hitent)))
       level.rts.targetpoi = hitent;
-    } else {
+    else {
       if(!isDefined(hitent.team)) {
         return;
       }
-      if(hitent.team != level.rts.player.team) {
+      if(hitent.team != level.rts.player.team)
         level.rts.targetteamenemy = hitent;
-      } else {
+      else
         level.rts.targetteammate = hitent;
-      }
     }
   }
 
   foreach(squad in squads) {
-    if(isDefined(squad.package_commandunitfps_cb)) {
-      [
-        [squad.package_commandunitfps_cb]
-      ](trace);
-    }
+    if(isDefined(squad.package_commandunitfps_cb))
+      [[squad.package_commandunitfps_cb]](trace);
 
     if(isDefined(level.rts.targetteamenemy)) {
       thread maps\_so_rts_support::debug_sphere(tracepoint, 8, (1, 0, 0), 0.6, 3);
@@ -333,11 +313,10 @@ package_commandunitfps(squadid) {
     if(isDefined(level.rts.targetpoi)) {
       thread maps\_so_rts_support::debug_sphere(tracepoint, 8, (0, 0, 1), 0.6, 3);
 
-      if(!isDefined(level.rts.targetpoi.ai_ref)) {
+      if(!isDefined(level.rts.targetpoi.ai_ref))
         maps\_so_rts_squad::ordersquaddefend(level.rts.targetpoi.origin, squad.id);
-      } else {
+      else
         maps\_so_rts_squad::ordersquadfollowai(squad.id, level.rts.targetpoi);
-      }
 
       if(level.rts.targetpoi.team != level.rts.player.team) {
         luinotifyevent(&"rts_squad_start_attack", 3, squad.id, level.rts.targetpoi getentitynumber(), int(level.rts.targetpoi.ref.obj_zoff));
@@ -356,7 +335,7 @@ package_commandunitfps(squadid) {
       }
     }
 
-    groundpos = bulletTrace(tracepoint + vectorscale(trace["normal"], 36), tracepoint + vectorscale(trace["normal"], 36) + vectorscale((0, 0, -1), 100000.0), 0, level.rts.player)["position"] + vectorscale((0, 0, 1), 6.0);
+    groundpos = bullettrace(tracepoint + vectorscale(trace["normal"], 36), tracepoint + vectorscale(trace["normal"], 36) + vectorscale((0, 0, -1), 100000.0), 0, level.rts.player)["position"] + vectorscale((0, 0, 1), 6.0);
     level notify("squad_moved", groundpos, squad.id);
     level thread maps\_so_rts_squad::rts_move_squadstocursor(squad.id, groundpos);
   }
@@ -367,9 +346,8 @@ package_commandunitrts(squadid) {
   squads = [];
 
   if(!isDefined(squadid)) {
-    if(isDefined(level.rts.targetteammate)) {
+    if(isDefined(level.rts.targetteammate))
       level.rts.activesquad = level.rts.targetteammate.squadid;
-    }
 
     return;
   }
@@ -446,9 +424,8 @@ package_commandunitrts(squadid) {
 }
 
 package_highlightunits(squadid, clear) {
-  if(!isDefined(clear)) {
+  if(!isDefined(clear))
     clear = 1;
-  }
 
   if(squadid == 99) {
     if(is_true(clear)) {
@@ -471,9 +448,8 @@ package_highlightunits(squadid, clear) {
       squads[squads.size] = allysquads[i];
     }
 
-    foreach(squad in squads) {
-      rpc("clientscripts/_so_rts", "set_SquadIsHighlighted", squad.id);
-    }
+    foreach(squad in squads)
+    rpc("clientscripts/_so_rts", "set_SquadIsHighlighted", squad.id);
   } else if(level.rts.squads[squadid].selectable) {
     if(is_true(clear)) {
       luinotifyevent(&"rts_highlight_squad", 1, -1);
@@ -487,9 +463,8 @@ package_highlightunits(squadid, clear) {
 }
 
 package_commandunitpressed(pkg_ref, squad) {
-  if(!isDefined(squad)) {
+  if(!isDefined(squad))
     squad = maps\_so_rts_squad::getsquadbypkg(pkg_ref.ref, level.rts.player.team);
-  }
 
   if(isDefined(squad)) {
     if(!is_true(squad.selectable)) {
@@ -545,18 +520,17 @@ package_takeoverunitpressed(pkg_ref) {
       thread maps\_so_rts_main::player_in_control();
     } else {
       direction = maps\_so_rts_support::get_player_angles();
-      direction_vec = anglesToForward(direction);
-      eye = level.rts.player getEye();
-      trace = bulletTrace(eye, eye + vectorscale(direction_vec, 10000), 1, level.rts.player);
+      direction_vec = anglestoforward(direction);
+      eye = level.rts.player geteye();
+      trace = bullettrace(eye, eye + vectorscale(direction_vec, 10000), 1, level.rts.player);
       hitent = trace["entity"];
 
-      if(isDefined(hitent) && isDefined(hitent.squadid) && hitent.squadid == squad.id) {
+      if(isDefined(hitent) && isDefined(hitent.squadid) && hitent.squadid == squad.id)
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id, undefined, hitent);
-      } else if(isDefined(level.rts.squads[squad.id].primary_ai_switchtarget)) {
+      else if(isDefined(level.rts.squads[squad.id].primary_ai_switchtarget))
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id, undefined, level.rts.squads[squad.id].primary_ai_switchtarget);
-      } else {
+      else
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id);
-      }
     }
   }
 }
@@ -567,22 +541,20 @@ package_buyunitpressed(pkg_ref) {
   }
   level.rts.packages_avail = package_generateavailable(level.rts.player.team);
 
-  if(isinarray(level.rts.packages_avail, pkg_ref) && pkg_ref.selectable) {
+  if(isinarray(level.rts.packages_avail, pkg_ref) && pkg_ref.selectable)
     package_select(pkg_ref.ref);
-  } else {
+  else
     return;
-  }
 }
 
 package_getnumteamresources(team) {
   resources = 0;
 
   for(i = 0; i < level.rts.packages_avail.size; i++) {
-    if(level.rts.packages_avail[i].selectable == 0) {
+    if(level.rts.packages_avail[i].selectable == 0)
       continue;
-    } else if(level.rts.packages_avail[i].cost[team] >= 0) {
+    else if(level.rts.packages_avail[i].cost[team] >= 0)
       resources = resources + level.rts.packages_avail[i].qty[team] == -1 ? 1 : level.rts.packages_avail[i].qty[team];
-    }
   }
 
   resources = resources + numtransportsinboundforteam(team);
@@ -594,24 +566,21 @@ package_getnumteamresources(team) {
     resources = resources + squad.members.size;
   }
 
-  if(team == "allies" && isDefined(level.rts.player.ally)) {
+  if(team == "allies" && isDefined(level.rts.player.ally))
     resources = resources + 1;
-  }
 
   return resources;
 }
 
 package_select(pkg_ref, initial, cb) {
-  if(!isDefined(initial)) {
+  if(!isDefined(initial))
     initial = 0;
-  }
 
   if(!isDefined(pkg_ref)) {
-    if(level.rts.packages_avail[level.rts.package_index].selectable) {
+    if(level.rts.packages_avail[level.rts.package_index].selectable)
       thread spawn_package(level.rts.packages_avail[level.rts.package_index].ref, "allies", initial, cb);
-    } else {
+    else
       level thread maps\_so_rts_support::create_hud_message(&"SO_RTS_UNIT_NOTAVAIL");
-    }
   } else {
     for(i = 0; i < level.rts.packages_avail.size; i++) {
       if(level.rts.packages_avail[i].ref == pkg_ref) {
@@ -628,15 +597,13 @@ package_setpackagecost(ref, axiscost, allycost) {
   assert(isDefined(ref));
   axiscost = int(axiscost);
 
-  if(axiscost != -1) {
+  if(axiscost != -1)
     axiscost = axiscost * 1000;
-  }
 
   allycost = int(allycost);
 
-  if(allycost != -1) {
+  if(allycost != -1)
     allycost = allycost * 1000;
-  }
 
   pkg.cost["axis"] = axiscost;
   pkg.cost["allies"] = allycost;
@@ -644,18 +611,16 @@ package_setpackagecost(ref, axiscost, allycost) {
 
 package_getpackagebytype(ref) {
   for(i = 0; i < level.rts.packages.size; i++) {
-    if(level.rts.packages[i].ref == ref) {
+    if(level.rts.packages[i].ref == ref)
       return level.rts.packages[i];
-    }
   }
 
   return undefined;
 }
 
 package_generateavailable(myteam, forceall) {
-  if(!isDefined(myteam)) {
+  if(!isDefined(myteam))
     myteam = "allies";
-  }
 
   available_pkgs = [];
   time = gettime();
@@ -701,9 +666,8 @@ package_generateavailable(myteam, forceall) {
 
   if(!isDefined(forceall)) {
     foreach(pkg in available_pkgs) {
-      if(isDefined(pkg.notifyavail) && pkg.selectable == 1 && pkg.selectable != pkg.lastselectablestate) {
+      if(isDefined(pkg.notifyavail) && pkg.selectable == 1 && pkg.selectable != pkg.lastselectablestate)
         level notify(pkg.notifyavail);
-      }
     }
   }
 
@@ -715,9 +679,8 @@ setpkgdelivery(ref, delivery) {
   assert(delivery == "STANDARD" || delivery == "CODE" || delivery == "FASTROPE_HELO" || delivery == "FASTROPE_VTOL" || delivery == "CARGO_VTOL", "Unknown delivery option");
   pkg_ref = package_getpackagebytype(ref);
 
-  if(isDefined(pkg_ref)) {
+  if(isDefined(pkg_ref))
     pkg_ref.delivery = delivery;
-  }
 }
 
 setpkgqty(ref, team, qty, squadid) {
@@ -733,37 +696,32 @@ setpkgqty(ref, team, qty, squadid) {
   if(team == "allies") {
     level.rts.packages_avail = package_generateavailable("allies");
 
-    if(isDefined(squadid)) {
+    if(isDefined(squadid))
       luinotifyevent(&"rts_update_remaining_count", 2, squadid, pkg_ref.qty["allies"] > 0 ? pkg_ref.qty["allies"] : -1);
-    }
   }
 }
 
 setpkgdependancyenforcement(ref, team, state) {
   pkg_ref = package_getpackagebytype(ref);
 
-  if(isDefined(pkg_ref)) {
+  if(isDefined(pkg_ref))
     pkg_ref.enforce_deps[team] = state;
-  }
 
-  if(team == "allies") {
+  if(team == "allies")
     level.rts.packages_avail = package_generateavailable("allies");
-  }
 }
 
 candeliverpkg(team, delivery, pkg_ref) {
   if(pkg_ref.delivery == "CODE" || pkg_ref.delivery == "STANDARD") {
-    if(pkg_ref.nextavail["allies"] > gettime()) {
+    if(pkg_ref.nextavail["allies"] > gettime())
       return "not_ready";
-    }
   }
 
   if(pkg_ref.qty[team] != -1) {
-    if(pkg_ref.qty[team] > 0) {
+    if(pkg_ref.qty[team] > 0)
       return "ok";
-    } else {
+    else
       return "not_ready";
-    }
   }
 
   return "ok";
@@ -774,15 +732,13 @@ spawn_package(package_name, team, initial, callback) {
   assert(isDefined(pkg_ref));
   delivery = pkg_ref.delivery;
 
-  if(is_true(initial) && delivery != "CODE") {
+  if(is_true(initial) && delivery != "CODE")
     delivery = "STANDARD";
-  }
 
   if(delivery == "STANDARD" || delivery == "CODE") {
     if(is_true(initial) || pkg_ref.selectable && gettime() >= pkg_ref.nextavail[team]) {
-      if(pkg_ref.qty[team] > 0) {
+      if(pkg_ref.qty[team] > 0)
         pkg_ref.qty[team]--;
-      }
 
       pkg_ref.nextavail[team] = gettime() + pkg_ref.cost[team];
 
@@ -790,26 +746,22 @@ spawn_package(package_name, team, initial, callback) {
         case "STANDARD":
           squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, callback);
 
-          if(isDefined(squadid) && squadid == -1) {
+          if(isDefined(squadid) && squadid == -1)
             squadid = undefined;
-          }
 
-          if(team == level.rts.player.team && pkg_ref.qty[team] >= 0) {
+          if(team == level.rts.player.team && pkg_ref.qty[team] >= 0)
             luinotifyevent(&"rts_update_remaining_count", 2, squadid, pkg_ref.qty[team] > 0 ? pkg_ref.qty[team] : -1);
-          }
 
           return squadid;
           break;
         case "CODE":
           squadid = maps\_so_rts_catalog::spawn_package_code(pkg_ref, team, callback);
 
-          if(isDefined(squadid) && squadid == -1) {
+          if(isDefined(squadid) && squadid == -1)
             squadid = undefined;
-          }
 
-          if(team == level.rts.player.team && pkg_ref.qty[team] >= 0) {
+          if(team == level.rts.player.team && pkg_ref.qty[team] >= 0)
             luinotifyevent(&"rts_update_remaining_count", 2, squadid, pkg_ref.qty[team] > 0 ? pkg_ref.qty[team] : -1);
-          }
 
           return squadid;
           break;
@@ -844,33 +796,31 @@ spawn_package(package_name, team, initial, callback) {
     unit = allocatetransport(team, type, pkg_ref, cb, callback);
 
     if(isDefined(unit)) {
-      if(pkg_ref.qty[team] > 0) {
+      if(pkg_ref.qty[team] > 0)
         pkg_ref.qty[team]--;
-      }
 
-      if(team == level.rts.player.team && pkg_ref.qty[team] >= 0) {
+      if(team == level.rts.player.team && pkg_ref.qty[team] >= 0)
         luinotifyevent(&"rts_update_remaining_count", 2, unit.squadid, pkg_ref.qty[team] > 0 ? pkg_ref.qty[team] : -1);
-      }
     }
   }
 
-  if(result == "ok" && isDefined(unit)) {
+  if(result == "ok" && isDefined(unit))
     return unit.squadid;
-  }
 
   return undefined;
 }
 
 spawn_package_code(pkg_ref, team, callback) {
   if(isDefined(level.rts.codespawncb)) {
-    squadid = [[level.rts.codespawncb]](pkg_ref, team, callback);
+    squadid = [
+      [level.rts.codespawncb]
+    ](pkg_ref, team, callback);
     assert(isDefined(squadid), "Custom Code must return squadID");
     return squadid;
   }
 
-  if(isDefined(level.rts.switch_trans)) {
+  if(isDefined(level.rts.switch_trans))
     return -1;
-  }
 
   foreach(unit in pkg_ref.units) {
     switch (unit) {
@@ -910,9 +860,8 @@ transportthink(unit) {
         break;
       case 3:
         if(gettime() > unit.loadtime) {
-          if(unit.team == "allies") {
+          if(unit.team == "allies")
             maps\_so_rts_event::trigger_event("inc_" + unit.pkg_ref.ref);
-          }
 
           unit.state = 1;
 
@@ -935,9 +884,8 @@ transportthink(unit) {
 
         break;
       case 1:
-        if(isDefined(unit.flightannounce) && gettime() > unit.flightannounce && unit.team == "allies") {
+        if(isDefined(unit.flightannounce) && gettime() > unit.flightannounce && unit.team == "allies")
           unit.flightannounce = undefined;
-        }
 
         break;
     }
@@ -949,18 +897,16 @@ transportthink(unit) {
 getnumtransports(type, team, avail) {
   count = 0;
 
-  if(type == "helo") {
+  if(type == "helo")
     transports = level.rts.transport.helo;
-  } else if(type == "vtol") {
+  else if(type == "vtol")
     transports = level.rts.transport.vtol;
-  }
 
   for(i = 0; i < transports.size; i++) {
     if(transports[i].team == team) {
       if(isDefined(avail)) {
-        if(transports[i].state == 0) {
+        if(transports[i].state == 0)
           count++;
-        }
 
         continue;
       }
@@ -988,9 +934,8 @@ units_delivered(team, squadid) {
     level.rts.enemy_notification = gettime() + 6000;
   }
 
-  if(isDefined(level.rts.activesquad)) {
+  if(isDefined(level.rts.activesquad))
     package_highlightunits(level.rts.activesquad);
-  }
 }
 
 unloadtransport(unit) {
@@ -1008,13 +953,12 @@ deallocatetransport(unit) {
 istransportavailable(team, type) {
   availtransport = undefined;
 
-  if(type == "helo") {
+  if(type == "helo")
     transports = level.rts.transport.helo;
-  } else if(type == "vtol") {
+  else if(type == "vtol")
     transports = level.rts.transport.vtol;
-  } else {
+  else
     assert(0, "bad type passed");
-  }
 
   for(i = 0; i < transports.size; i++) {
     if(transports[i].team == team && transports[i].state == 0) {
@@ -1029,13 +973,12 @@ istransportavailable(team, type) {
 allocatetransport(team, type, pkg_ref, cb, paramcb) {
   availtransport = undefined;
 
-  if(type == "helo") {
+  if(type == "helo")
     transports = level.rts.transport.helo;
-  } else if(type == "vtol") {
+  else if(type == "vtol")
     transports = level.rts.transport.vtol;
-  } else {
+  else
     assert(0, "bad type passed");
-  }
 
   for(i = 0; i < transports.size; i++) {
     if(transports[i].team == team && transports[i].state == 0) {
@@ -1060,9 +1003,8 @@ allocatetransport(team, type, pkg_ref, cb, paramcb) {
       unloadnode = undefined;
 
       while(isDefined(lastnode.target)) {
-        if(!isDefined(unloadnode) && isDefined(lastnode.script_unload)) {
+        if(!isDefined(unloadnode) && isDefined(lastnode.script_unload))
           unloadnode = lastnode;
-        }
 
         lastnode = getvehiclenode(lastnode.target, "targetname");
       }
@@ -1073,7 +1015,8 @@ allocatetransport(team, type, pkg_ref, cb, paramcb) {
 
       println("**** transport - timeTo: (" + timeto + ") timeBack: (" + timeback + ")");
 
-      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {}
+      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
+      }
     }
   }
 
@@ -1085,9 +1028,8 @@ getnumberofpkgsbeingtransported(team, ref) {
   count = 0;
 
   for(i = 0; i < transports.size; i++) {
-    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref) && transports[i].pkg_ref.ref == ref) {
+    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref) && transports[i].pkg_ref.ref == ref)
       count++;
-    }
   }
 
   return count;
@@ -1098,9 +1040,8 @@ getnumberoftypebeingtransported(team, pkgtype) {
   count = 0;
 
   for(i = 0; i < transports.size; i++) {
-    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref) && transports[i].pkg_ref.squad_type == pkgtype) {
+    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref) && transports[i].pkg_ref.squad_type == pkgtype)
       count++;
-    }
   }
 
   return count;
@@ -1111,9 +1052,8 @@ numtransportsinboundforteam(team) {
   count = 0;
 
   for(i = 0; i < transports.size; i++) {
-    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref)) {
+    if(transports[i].team == team && transports[i].state != 0 && isDefined(transports[i].pkg_ref))
       count++;
-    }
   }
 
   return count;
@@ -1126,17 +1066,15 @@ pkg_ref_checkmaxspawn(pkg, team) {
 
   foreach(guy in ai_list) {
     if(isDefined(guy.squadid)) {
-      if(level.rts.squads[guy.squadid].pkg_ref.ref == pkg.ref) {
+      if(level.rts.squads[guy.squadid].pkg_ref.ref == pkg.ref)
         count++;
-      }
     }
   }
 
-  if(team == "allies") {
+  if(team == "allies")
     max = pkg.max_friendly;
-  } else {
+  else
     max = pkg.max_axis;
-  }
 
   return count < max;
 }

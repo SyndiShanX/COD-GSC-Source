@@ -93,6 +93,6 @@ lightning_randoms() {
 
   while(true) {
     wait(randomintrange(3, 11));
-    playSound(0, "amb_thunder", place[randomintrange(0, 10)]);
+    playsound(0, "amb_thunder", place[randomintrange(0, 10)]);
   }
 }

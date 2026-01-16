@@ -69,17 +69,15 @@ useRemoteUAV(lifeId, streakName) {
 
 exceededMaxRemoteUAVs(team) {
   if(level.gameType == "dm") {
-    if(isDefined(level.remote_uav[team]) || isDefined(level.remote_uav[level.otherTeam[team]])) {
+    if(isDefined(level.remote_uav[team]) || isDefined(level.remote_uav[level.otherTeam[team]]))
       return true;
-    } else {
+    else
       return false;
-    }
   } else {
-    if(isDefined(level.remote_uav[team])) {
+    if(isDefined(level.remote_uav[team]))
       return true;
-    } else {
+    else
       return false;
-    }
   }
 }
 
@@ -206,9 +204,8 @@ setCarryingRemoteUAV(carryRemoteUAV) {
     }
 
     if(!carryRemoteUAV.canBePlaced) {
-      if(self.team != "spectator") {
+      if(self.team != "spectator")
         self ForceUseHintOn(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
-      }
       continue;
     }
 
@@ -247,29 +244,23 @@ local_waittill_any_return(string1, string2, string3, string4, string5, string6) 
 
   ent = spawnStruct();
 
-  if(isDefined(string1)) {
+  if(isDefined(string1))
     self thread waittill_string(string1, ent);
-  }
 
-  if(isDefined(string2)) {
+  if(isDefined(string2))
     self thread waittill_string(string2, ent);
-  }
 
-  if(isDefined(string3)) {
+  if(isDefined(string3))
     self thread waittill_string(string3, ent);
-  }
 
-  if(isDefined(string4)) {
+  if(isDefined(string4))
     self thread waittill_string(string4, ent);
-  }
 
-  if(isDefined(string5)) {
+  if(isDefined(string5))
     self thread waittill_string(string5, ent);
-  }
 
-  if(isDefined(string6)) {
+  if(isDefined(string6))
     self thread waittill_string(string6, ent);
-  }
 
   ent waittill("returned", msg);
   ent notify("die");
@@ -303,9 +294,8 @@ carryRemoteUAV_delete(carryRemoteUAV) {
 isInRemoteNoDeploy() {
   if(isDefined(level.RemoteUAV_noDeployZones) && level.RemoteUAV_noDeployZones.size) {
     foreach(zone in level.RemoteUAV_noDeployZones) {
-      if(self isTouching(zone)) {
+      if(self isTouching(zone))
         return true;
-      }
     }
   }
   return false;
@@ -344,17 +334,14 @@ updateCarryRemoteUAVPlacement(carryRemoteUAV) {
 
     if(carryRemoteUAV.canBePlaced != lastCanPlaceCarryRemoteUAV) {
       if(carryRemoteUAV.canBePlaced) {
-        if(self.team != "spectator") {
+        if(self.team != "spectator")
           self ForceUseHintOn(&"KILLSTREAKS_REMOTE_UAV_PLACE");
-        }
 
-        if(self attackButtonPressed()) {
+        if(self attackButtonPressed())
           self notify("place_carryRemoteUAV");
-        }
       } else {
-        if(self.team != "spectator") {
+        if(self.team != "spectator")
           self ForceUseHintOn(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
-        }
       }
     }
 
@@ -371,9 +358,8 @@ carryRemoteUAV_handleExistence() {
   self.owner waittill_any("death", "disconnect", "joined_team", "joined_spectators");
 
   if(isDefined(self)) {
-    if(isDefined(self.soundEnt)) {
+    if(isDefined(self.soundEnt))
       self.soundEnt delete();
-    }
     self delete();
   }
 }
@@ -439,9 +425,8 @@ clearPlayerLockFromRemoteUAVLaunch(lockSpot) {
 
   msg = self waittill_any_return("disconnect", "death", "remoteuav_unlock");
 
-  if(msg != "disconnect") {
+  if(msg != "disconnect")
     self unlink();
-  }
   lockSpot delete();
 }
 
@@ -452,9 +437,8 @@ createRemoteUAV(lifeId, owner, streakName, origin, angles) {
     remoteUAV = spawnHelicopter(owner, origin, angles, "remote_uav_mp_pc", "vehicle_remote_uav");
   }
 
-  if(!isDefined(remoteUAV)) {
+  if(!isDefined(remoteUAV))
     return undefined;
-  }
 
   remoteUAV maps\mp\killstreaks\_helicopter::addToLittleBirdList();
   remoteUAV thread maps\mp\killstreaks\_helicopter::removeFromLittleBirdListOnDeath();
@@ -504,9 +488,8 @@ remoteUAV_ride(lifeId, remoteUAV, streakName) {
   remoteUAV.playerLinked = true;
   self.restoreAngles = self.angles;
 
-  if(getDvarInt("camera_thirdPerson")) {
+  if(getDvarInt("camera_thirdPerson"))
     self setThirdPersonDOF(false);
-  }
 
   self CameraLinkTo(remoteUAV, "tag_origin");
   self RemoteControlVehicle(remoteUAV);
@@ -543,9 +526,8 @@ remoteUAV_endride(remoteUAV) {
 
     self clearUsingRemote();
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       self setThirdPersonDOF(true);
-    }
 
     self CameraUnlink(remoteUAV);
     self RemoteControlVehicleOff(remoteUAV);
@@ -618,9 +600,9 @@ remoteUAV_Track(remoteUAV) {
     forward = anglesToForward(self getPlayerAngles());
     endpos = pos + forward * 1024;
     trace = bulletTrace(pos, endpos, true, remoteUAV);
-    if(isDefined(trace["position"])) {
+    if(isDefined(trace["position"]))
       targetPos = trace["position"];
-    } else {
+    else {
       targetPos = endpos;
       trace["endpos"] = endpos;
     }
@@ -641,18 +623,16 @@ remoteUAV_Track(remoteUAV) {
       lockedUAV = self remoteUAV_trackEntities(remoteUAV, entityList, targetPos);
     } else if(level.teamBased)
       lockedUAV = self remoteUAV_trackEntities(remoteUAV, level.uavmodels[level.otherTeam[self.team]], targetPos);
-    else {
+    else
       lockedUAV = self remoteUAV_trackEntities(remoteUAV, level.uavmodels, targetPos);
-    }
 
     lockedTarget = undefined;
-    if(isDefined(lockedPlayer)) {
+    if(isDefined(lockedPlayer))
       lockedTarget = lockedPlayer;
-    } else if(isDefined(lockedTurret)) {
+    else if(isDefined(lockedTurret))
       lockedTarget = lockedTurret;
-    } else if(isDefined(lockedUAV)) {
+    else if(isDefined(lockedUAV))
       lockedTarget = lockedUAV;
-    }
 
     if(isDefined(lockedTarget)) {
       if(!isDefined(self.lockedTarget) || (isDefined(self.lockedTarget) && self.lockedTarget != lockedTarget)) {
@@ -710,9 +690,8 @@ remoteUAV_trackEntities(remoteUAV, entities, targetPos) {
         remoteUAV.markedPlayers[id]["icon"] = entity maps\mp\_entityheadIcons::setHeadIcon(self, "veh_hud_target_marked", offset, 10, 10, false, 0.05, false, false, false, false);
         remoteUAV.markedPlayers[id]["icon"].shader = "veh_hud_target_marked";
 
-        if(!isDefined(entity.sentryType) || !isDefined(entity.turretType)) {
+        if(!isDefined(entity.sentryType) || !isDefined(entity.turretType))
           remoteUAV.markedPlayers[id]["icon"] SetTargetEnt(entity);
-        }
       } else if(isDefined(remoteUAV.markedPlayers[id]) && isDefined(remoteUAV.markedPlayers[id]["icon"]) && isDefined(remoteUAV.markedPlayers[id]["icon"].shader) && remoteUAV.markedPlayers[id]["icon"].shader != "veh_hud_target_marked") {
         remoteUAV.markedPlayers[id]["icon"].shader = "veh_hud_target_marked";
         remoteUAV.markedPlayers[id]["icon"] setShader("veh_hud_target_marked", 10, 10);
@@ -737,9 +716,8 @@ remoteUAV_trackEntities(remoteUAV, entities, targetPos) {
         remoteUAV.markedPlayers[id]["icon"] = entity maps\mp\_entityheadIcons::setHeadIcon(self, unmarkedShader, offset, 10, 10, false, 0.05, false, false, false, false);
         remoteUAV.markedPlayers[id]["icon"].shader = unmarkedShader;
 
-        if(!isDefined(entity.sentryType) || !isDefined(entity.turretType)) {
+        if(!isDefined(entity.sentryType) || !isDefined(entity.turretType))
           remoteUAV.markedPlayers[id]["icon"] SetTargetEnt(entity);
-        }
       }
 
       if((!isDefined(lockedTarget) || lockedTarget != entity) &&
@@ -762,9 +740,8 @@ remoteUAV_canTargetUAV(remoteUAV, uav) {
     forward = anglesToForward(self getPlayerAngles());
     toUAV = vectorNormalize(uav.origin - remoteUAV getTagOrigin("tag_turret"));
     dot = vectorDot(forward, toUAV);
-    if(dot > 0.985) {
+    if(dot > 0.985)
       return true;
-    }
   }
   return false;
 }
@@ -837,14 +814,13 @@ remoteUAV_markPlayer(targetPlayer) {
     }
   }
 
-  if(isPlayer(targetPlayer)) {
+  if(isPlayer(targetPlayer))
     targetPlayer setPerk("specialty_radarblip", true, false);
-  } else {
-    if(isDefined(targetPlayer.uavType)) {
+  else {
+    if(isDefined(targetPlayer.uavType))
       shaderName = "compassping_enemy_uav";
-    } else {
+    else
       shaderName = "compassping_sentry_enemy";
-    }
     if(level.teamBased) {
       curObjID = maps\mp\gametypes\_gameobjects::getNextObjID();
       objective_add(curObjID, "invisible", (0, 0, 0));
@@ -881,9 +857,9 @@ remoteUAV_processTaggedAssist(victim) {
 
   if(level.gameType != "dm") {
     self.taggedAssist = true;
-    if(isDefined(victim)) {
+    if(isDefined(victim))
       self thread maps\mp\gametypes\_gamescore::processAssist(victim);
-    } else {
+    else {
       maps\mp\gametypes\_gamescore::givePlayerScore("assist", self, undefined, true);
       self thread maps\mp\gametypes\_rank::giveRankXP("assist");
     }
@@ -895,17 +871,15 @@ remoteUAV_unmarkRemovedPlayer(remoteUAV) {
 
   msg = self waittill_any_return("death", "disconnect", "carried", "leaving");
 
-  if(msg == "leaving" || !isDefined(self.uavType)) {
+  if(msg == "leaving" || !isDefined(self.uavType))
     self.UAVRemoteMarkedBy = undefined;
-  }
   if(isDefined(remoteUAV)) {
-    if(isPlayer(self)) {
+    if(isPlayer(self))
       id = self.guid;
-    } else if(isDefined(self.birthtime)) {
+    else if(isDefined(self.birthtime))
       id = self.birthtime;
-    } else {
+    else
       id = self.birth_time;
-    }
 
     if(msg == "carried" || msg == "leaving") {
       remoteUAV.markedPlayers[id]["icon"] destroy();
@@ -917,18 +891,15 @@ remoteUAV_unmarkRemovedPlayer(remoteUAV) {
     }
   }
 
-  if(isPlayer(self)) {
+  if(isPlayer(self))
     self unsetPerk("specialty_radarblip", true);
-  } else {
-    if(isDefined(self.remoteUAVMarkedObjID01)) {
+  else {
+    if(isDefined(self.remoteUAVMarkedObjID01))
       _objective_delete(self.remoteUAVMarkedObjID01);
-    }
-    if(isDefined(self.remoteUAVMarkedObjID02)) {
+    if(isDefined(self.remoteUAVMarkedObjID02))
       _objective_delete(self.remoteUAVMarkedObjID02);
-    }
-    if(isDefined(self.remoteUAVMarkedObjID03)) {
+    if(isDefined(self.remoteUAVMarkedObjID03))
       _objective_delete(self.remoteUAVMarkedObjID03);
-    }
   }
 }
 
@@ -1004,13 +975,11 @@ remoteUAV_watch_distance() {
 
 remoteUAV_in_range() {
   if(isDefined(self.rangeTrigger)) {
-    if(!self isTouching(self.rangeTrigger) && !self.inHeliProximity) {
+    if(!self isTouching(self.rangeTrigger) && !self.inHeliProximity)
       return true;
-    }
   } else {
-    if(distance2D(self.origin, level.mapCenter) < self.maxDistance && self.origin[2] < self.maxHeight && !self.inHeliProximity) {
+    if(distance2D(self.origin, level.mapCenter) < self.maxDistance && self.origin[2] < self.maxHeight && !self.inHeliProximity)
       return true;
-    }
   }
   return false;
 }
@@ -1033,11 +1002,10 @@ remoteUAV_rangeCountdown() {
   self endon("death");
   self endon("in_range");
 
-  if(isDefined(self.heliInProximity)) {
+  if(isDefined(self.heliInProximity))
     countdown = UAV_REMOTE_HELI_RANGE_COUNTDOWN;
-  } else {
+  else
     countdown = UAV_REMOTE_PAST_RANGE_COUNTDOWN;
-  }
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(countdown);
 
@@ -1101,17 +1069,14 @@ remoteUAV_explode_on_death() {
 }
 
 remoteUAV_cleanup() {
-  if(self.playerLinked == true && isDefined(self.owner)) {
+  if(self.playerLinked == true && isDefined(self.owner))
     self.owner remoteUAV_endride(self);
-  }
 
-  if(isDefined(self.scrambler)) {
+  if(isDefined(self.scrambler))
     self.scrambler delete();
-  }
 
-  if(isDefined(self.centerRef)) {
+  if(isDefined(self.centerRef))
     self.centerRef delete();
-  }
 
   self remoteUAV_clearMarkedForOwner();
 
@@ -1131,11 +1096,10 @@ remoteUAV_light_fx() {
 }
 
 remoteUAV_dialog(dialogGroup) {
-  if(dialogGroup == "tag") {
+  if(dialogGroup == "tag")
     waitTime = 1000;
-  } else {
+  else
     waitTime = 5000;
-  }
 
   if(getTime() - level.RemoteUAV_lastDialogTime < waitTime) {
     return;
@@ -1222,11 +1186,10 @@ watchStingerProximity(missileTarget) {
       if(vectorDot(curVecToTarget, lastVecToTarget) < 0) {
         self playSound("exp_stinger_armor_destroy");
         playFX(level.RemoteUAV_fx["missile_explode"], self.origin);
-        if(isDefined(self.owner)) {
+        if(isDefined(self.owner))
           RadiusDamage(self.origin, 400, 1000, 1000, self.owner, "MOD_EXPLOSIVE", "stinger_mp");
-        } else {
+        else
           RadiusDamage(self.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
-        }
         self hide();
         wait(0.05);
         self delete();
@@ -1262,10 +1225,9 @@ watchSAMProximity(missileTarget, missileGroup) {
           distToTarget = distance(missile.origin, center);
           if(distToTarget < 4000) {
             newTarget = missileTarget deployFlares();
-            foreach(missileToRedirect in missileGroup) {
-              if(isDefined(missileToRedirect))
-            }
-            missileToRedirect Missile_SetTargetEnt(newTarget);
+            foreach(missileToRedirect in missileGroup)
+            if(isDefined(missileToRedirect))
+              missileToRedirect Missile_SetTargetEnt(newTarget);
             return;
           }
         } else {
@@ -1273,11 +1235,10 @@ watchSAMProximity(missileTarget, missileGroup) {
           if(vectorDot(curVecToTarget, missile.lastVecToTarget) < 0) {
             missile playSound("exp_stinger_armor_destroy");
             playFX(level.RemoteUAV_fx["missile_explode"], missile.origin);
-            if(isDefined(missile.owner)) {
+            if(isDefined(missile.owner))
               RadiusDamage(missile.origin, 400, 1000, 1000, missile.owner, "MOD_EXPLOSIVE", "stinger_mp");
-            } else {
+            else
               RadiusDamage(missile.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
-            }
             missile hide();
             missile.markForDetete = true;
           } else
@@ -1310,9 +1271,8 @@ deployFlares() {
 
 playFlareFx() {
   for(i = 0; i < 5; i++) {
-    if(!isDefined(self)) {
+    if(!isDefined(self))
       return;
-    }
     playFXOnTag(level._effect["vehicle_flares"], self, "TAG_FLARE");
     wait(0.15);
   }
@@ -1332,9 +1292,8 @@ remoteUAV_clearIncomingWarning() {
   while(true) {
     numIncoming = 0;
     for(i = 0; i < self.incomingMissiles.size; i++) {
-      if(isDefined(self.incomingMissiles[i]) && missile_isIncoming(self.incomingMissiles[i], self)) {
+      if(isDefined(self.incomingMissiles[i]) && missile_isIncoming(self.incomingMissiles[i], self))
         numIncoming++;
-      }
     }
     if(self.hasIncoming && !numIncoming) {
       self.hasIncoming = false;
@@ -1372,9 +1331,9 @@ remoteUAV_watchHeliProximity() {
       }
     }
 
-    if(!self.inHeliProximity && inHeliProximity) {
+    if(!self.inHeliProximity && inHeliProximity)
       self.inHeliProximity = true;
-    } else if(self.inHeliProximity && !inHeliProximity) {
+    else if(self.inHeliProximity && !inHeliProximity) {
       self.inHeliProximity = false;
       self.heliInProximity = undefined;
     }

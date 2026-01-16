@@ -4,9 +4,10 @@
 ********************************************************/
 
 main() {
+
   level.tweakfile = false;
 
-  //* Fog and vision section *
+  //* Fog and vision section * 
 
   setDevDvar("scr_fog_disable", "0");
 
@@ -206,4 +207,5 @@ main() {
   */
 
   //maps\_utility::vision_set_fog_changes( "oilrig_exterior_deck0", 0 );
+
 }

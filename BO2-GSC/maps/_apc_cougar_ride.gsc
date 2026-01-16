@@ -25,4 +25,5 @@ player_anims() {
   level.viewarms_steer_anim = % ch_la_04_01_drive_leftturn_player;
 }
 
-fx() {}
+fx() {
+}

@@ -20,12 +20,11 @@ autoexec init() {
   add_spawn_function_ai_group("g20_attackers", ::spawn_func_g20_attackers);
   add_spawn_function_veh("intersection_last_truck", ::intersection_last_truck);
   add_spawn_function_veh_by_type("civ_pickup_red_wturret_light", ::manage_vehicles_low_road);
-  a_dest = getEntArray("destructible", "targetname");
+  a_dest = getentarray("destructible", "targetname");
 
   foreach(dest in a_dest) {
-    if(!isDefined(dest.script_string) && !isDefined("explosion_car1") || isDefined(dest.script_string) && isDefined("explosion_car1") && dest.script_string == "explosion_car1") {
+    if(!isDefined(dest.script_string) && !isDefined("explosion_car1") || isDefined(dest.script_string) && isDefined("explosion_car1") && dest.script_string == "explosion_car1")
       level.explosion_car1 = dest;
-    }
   }
 }
 
@@ -59,9 +58,8 @@ main() {
   level thread drop_building1();
   building_collapse();
 
-  if(!flag("intersect_vip_cougar_died")) {
+  if(!flag("intersect_vip_cougar_died"))
     flag_set("intersect_vip_cougar_saved");
-  }
 
   la_2_transition();
   nextmission();
@@ -89,20 +87,17 @@ intersection_vo() {
   level thread collapse_vo();
   level thread intersection_vo_pmc_callouts();
 
-  if(!flag("harper_dead")) {
+  if(!flag("harper_dead"))
     level.harper thread priority_dialog("harp_we_re_too_late_sect_0", 2, "intersect_vip_cougar_died", "intersect_vip_cougar_saved");
-  } else {
+  else
     level.player thread priority_dialog("sect_dammit_into_radi_0", 2, "intersect_vip_cougar_died", "intersect_vip_cougar_saved");
-  }
 
   if(!flag("harper_dead")) {
-    if(!flag("building_collapsing")) {
+    if(!flag("building_collapsing"))
       level.harper thread queue_dialog("harp_they_have_another_gu_0", 0, "intersection_truck_right", "right_truck_dead");
-    }
 
-    if(!flag("building_collapsing")) {
+    if(!flag("building_collapsing"))
       level.harper thread queue_dialog("harp_take_it_down_0", 1, "intersection_truck_right", "right_truck_dead");
-    }
   } else
     queue_dialog_ally("lpd1_we_need_back_up_0", 1, undefined, "building_collapsing");
 
@@ -148,13 +143,12 @@ intersection_backtrack_fail() {
 
 init_vehicles() {
   a_vehicles = getvehiclearray();
-  a_destructibles = getEntArray("destructible", "targetname");
+  a_destructibles = getentarray("destructible", "targetname");
   a_vehicles = arraycombine(a_vehicles, a_destructibles, 1, 0);
 
   foreach(veh in a_vehicles) {
-    if(!isDefined(veh.script_noteworthy) && !isDefined("veh_explosion") || isDefined(veh.script_noteworthy) && isDefined("veh_explosion") && veh.script_noteworthy == "veh_explosion") {
+    if(!isDefined(veh.script_noteworthy) && !isDefined("veh_explosion") || isDefined(veh.script_noteworthy) && isDefined("veh_explosion") && veh.script_noteworthy == "veh_explosion")
       veh thread launch_car_on_deah();
-    }
   }
 }
 
@@ -162,9 +156,8 @@ spawn_right_truck() {
   flag_wait_any("intersect_vip_cougar_died", "intersect_vip_cougar_saved");
   flag_wait("looking_down_the_street");
 
-  if(!flag("right_truck_spawned")) {
+  if(!flag("right_truck_spawned"))
     trigger_use("right_truck_trigger");
-  }
 }
 
 launch_car_on_deah() {
@@ -179,7 +172,7 @@ set_aerial_vehicles() {
 
 line_manager() {
   flag_wait("player_reached_intersection");
-  a_volumes = getEntArray("goal_volume_intersection", "targetname");
+  a_volumes = getentarray("goal_volume_intersection", "targetname");
   a_volumes = sort_by_script_int(a_volumes, 1);
   add_spawn_function_group("sp_intersection1", "targetname", ::spawn_func_intersection_fallback_ai);
 
@@ -187,9 +180,8 @@ line_manager() {
     level.current_intersection_goal_volume = volume;
     level notify("intersection_goal_volume_update");
 
-    if(isDefined(volume.target)) {
+    if(isDefined(volume.target))
       trigger_use(volume.target);
-    }
 
     level.intersection_kill_count = 0;
     wait 1;
@@ -210,9 +202,8 @@ spawn_func_intersection_fallback_ai() {
 
   level.intersection_kill_count++;
 
-  if(level.intersection_kill_count > 8) {
+  if(level.intersection_kill_count > 8)
     level notify("intersection_kill_update");
-  }
 }
 
 #using_animtree("vehicles");
@@ -230,11 +221,10 @@ vip_cougar() {
 }
 
 cougar_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(str_means_of_death == "MOD_PROJECTILE") {
+  if(str_means_of_death == "MOD_PROJECTILE")
     n_damage = 1000;
-  } else {
+  else
     n_damage = 0;
-  }
 
   return n_damage;
 }
@@ -289,15 +279,13 @@ intersection_ss_turn_off_mbs_when_player_gets_there() {
 }
 
 intersection_ss_kill() {
-  if(!(!isDefined(self.script_string) && !isDefined("intersection_ss_hero") || isDefined(self.script_string) && isDefined("intersection_ss_hero") && self.script_string == "intersection_ss_hero")) {
+  if(!(!isDefined(self.script_string) && !isDefined("intersection_ss_hero") || isDefined(self.script_string) && isDefined("intersection_ss_hero") && self.script_string == "intersection_ss_hero"))
     self ragdoll_death();
-  }
 }
 
 intersection_ss_turn_off_mbs() {
-  if(!(!isDefined(self.script_string) && !isDefined("intersection_ss_hero") || isDefined(self.script_string) && isDefined("intersection_ss_hero") && self.script_string == "intersection_ss_hero")) {
+  if(!(!isDefined(self.script_string) && !isDefined("intersection_ss_hero") || isDefined(self.script_string) && isDefined("intersection_ss_hero") && self.script_string == "intersection_ss_hero"))
     self stop_magic_bullet_shield();
-  }
 }
 
 spawn_func_g20_attackers() {
@@ -315,7 +303,7 @@ sam_cougar() {
   e_target = spawn_model("tag_origin");
 
   while(true) {
-    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectornormalize(anglesToForward(vh_sam.angles)) * 7000 + random_vector(2000);
+    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectornormalize(anglestoforward(vh_sam.angles)) * 7000 + random_vector(2000);
     vh_sam set_turret_target(e_target, (0, 0, 0), 2);
     vh_sam fire_turret_for_time(2, 2);
     wait 6;
@@ -340,9 +328,8 @@ fa38_stop_snd() {
 intersection_last_truck() {
   self waittill("kill_car");
 
-  if(level.explosion_car1.health > 0) {
+  if(level.explosion_car1.health > 0)
     self shoot_turret_at_target(level.explosion_car1, -1, undefined, 1);
-  }
 
   self enable_turret(1);
 }
@@ -360,7 +347,7 @@ building_collapse() {
   battlechatter_off("axis");
   level thread harper_knocked_down();
   level.player thread player_knocked_down();
-  level.player playSound("evt_bldg_collapse_end");
+  level.player playsound("evt_bldg_collapse_end");
   setmusicstate("LA_1B_BUILDING_COLLAPSE");
   level.player magic_bullet_shield();
   level notify("stop_sam_cougar");
@@ -377,9 +364,8 @@ building_collapse() {
 }
 
 harper_knocked_down() {
-  if(!flag("harper_dead")) {
+  if(!flag("harper_dead"))
     level.harper animcustom(::harper_get_knocked_down);
-  }
 }
 
 #using_animtree("generic_human");
@@ -421,16 +407,14 @@ la_2_transition() {
   setdvar("la_1_ending_position", 1);
   b_saved_anderson = 0;
 
-  if(flag("anderson_saved")) {
+  if(flag("anderson_saved"))
     b_saved_anderson = 1;
-  }
 
   setdvar("la_F35_pilot_saved", b_saved_anderson);
   b_g20_saved_2nd = 0;
 
-  if(!flag("intersect_vip_cougar_died")) {
+  if(!flag("intersect_vip_cougar_died"))
     b_g20_saved_2nd = 1;
-  }
 
   setdvar("la_G20_2_saved", b_g20_saved_2nd);
 }

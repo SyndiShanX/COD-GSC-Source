@@ -18,11 +18,11 @@
 #namespace zm_melee_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("melee_weapon", &__init__, &__main__, undefined);
+  system::register("melee_weapon", & __init__, & __main__, undefined);
 }
 
 function private __init__() {
-  if(!isDefined(level._melee_weapons)) {
+  if(!isdefined(level._melee_weapons)) {
     level._melee_weapons = [];
   }
 }
@@ -33,18 +33,18 @@ function init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballisti
   weapon = getweapon(weapon_name);
   flourish_weapon = getweapon(flourish_weapon_name);
   ballistic_weapon = level.weaponnone;
-  if(isDefined(ballistic_weapon_name)) {
+  if(isdefined(ballistic_weapon_name)) {
     ballistic_weapon = getweapon(ballistic_weapon_name);
   }
   ballistic_upgraded_weapon = level.weaponnone;
-  if(isDefined(ballistic_upgraded_weapon_name)) {
+  if(isdefined(ballistic_upgraded_weapon_name)) {
     ballistic_upgraded_weapon = getweapon(ballistic_upgraded_weapon_name);
   }
   add_melee_weapon(weapon, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn);
-  melee_weapon_triggers = getEntArray(wallbuy_targetname, "targetname");
-  for(i = 0; i < melee_weapon_triggers.size; i++) {
+  melee_weapon_triggers = getentarray(wallbuy_targetname, "targetname");
+  for (i = 0; i < melee_weapon_triggers.size; i++) {
     knife_model = getent(melee_weapon_triggers[i].target, "targetname");
-    if(isDefined(knife_model)) {
+    if(isdefined(knife_model)) {
       knife_model hide();
     }
     melee_weapon_triggers[i] thread melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon);
@@ -55,20 +55,20 @@ function init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballisti
     melee_weapon_triggers[i] usetriggerrequirelookat();
   }
   melee_weapon_structs = struct::get_array(wallbuy_targetname, "targetname");
-  for(i = 0; i < melee_weapon_structs.size; i++) {
+  for (i = 0; i < melee_weapon_structs.size; i++) {
     prepare_stub(melee_weapon_structs[i].trigger_stub, weapon, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn);
   }
   zm_utility::register_melee_weapon_for_level(weapon.name);
-  if(!isDefined(level.ballistic_weapon)) {
+  if(!isdefined(level.ballistic_weapon)) {
     level.ballistic_weapon = [];
   }
   level.ballistic_weapon[weapon] = ballistic_weapon;
-  if(!isDefined(level.ballistic_upgraded_weapon)) {
+  if(!isdefined(level.ballistic_upgraded_weapon)) {
     level.ballistic_upgraded_weapon = [];
   }
   level.ballistic_upgraded_weapon[weapon] = ballistic_upgraded_weapon;
-  if(!isDefined(level.zombie_weapons[weapon])) {
-    if(isDefined(level.devgui_add_weapon)) {
+  if(!isdefined(level.zombie_weapons[weapon])) {
+    if(isdefined(level.devgui_add_weapon)) {
       [
         [level.devgui_add_weapon]
       ](weapon, "", weapon_name, cost);
@@ -77,12 +77,12 @@ function init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballisti
 }
 
 function prepare_stub(stub, weapon, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn) {
-  if(isDefined(stub)) {
+  if(isdefined(stub)) {
     stub.hint_string = hint_string;
     stub.cursor_hint = "HINT_WEAPON";
     stub.cursor_hint_weapon = weapon;
     stub.cost = cost;
-    if(!(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled)) {
+    if(!(isdefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled)) {
       stub.hint_parm1 = cost;
     }
     stub.weapon = weapon;
@@ -90,14 +90,14 @@ function prepare_stub(stub, weapon, flourish_weapon, ballistic_weapon, ballistic
     stub.flourish_weapon = flourish_weapon;
     stub.ballistic_weapon = ballistic_weapon;
     stub.ballistic_upgraded_weapon = ballistic_upgraded_weapon;
-    stub.trigger_func = &melee_weapon_think;
+    stub.trigger_func = & melee_weapon_think;
     stub.flourish_fn = flourish_fn;
   }
 }
 
 function find_melee_weapon(weapon) {
   melee_weapon = undefined;
-  for(i = 0; i < level._melee_weapons.size; i++) {
+  for (i = 0; i < level._melee_weapons.size; i++) {
     if(level._melee_weapons[i].weapon == weapon) {
       return level._melee_weapons[i];
     }
@@ -107,13 +107,13 @@ function find_melee_weapon(weapon) {
 
 function add_stub(stub, weapon) {
   melee_weapon = find_melee_weapon(weapon);
-  if(isDefined(stub) && isDefined(melee_weapon)) {
+  if(isdefined(stub) && isdefined(melee_weapon)) {
     prepare_stub(stub, melee_weapon.weapon, melee_weapon.flourish_weapon, melee_weapon.ballistic_weapon, melee_weapon.ballistic_upgraded_weapon, melee_weapon.cost, melee_weapon.wallbuy_targetname, melee_weapon.hint_string, melee_weapon.vo_dialog_id, melee_weapon.flourish_fn);
   }
 }
 
 function add_melee_weapon(weapon, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn) {
-  melee_weapon = spawnStruct();
+  melee_weapon = spawnstruct();
   melee_weapon.weapon = weapon;
   melee_weapon.flourish_weapon = flourish_weapon;
   melee_weapon.ballistic_weapon = ballistic_weapon;
@@ -123,7 +123,7 @@ function add_melee_weapon(weapon, flourish_weapon, ballistic_weapon, ballistic_u
   melee_weapon.hint_string = hint_string;
   melee_weapon.vo_dialog_id = vo_dialog_id;
   melee_weapon.flourish_fn = flourish_fn;
-  if(!isDefined(level._melee_weapons)) {
+  if(!isdefined(level._melee_weapons)) {
     level._melee_weapons = [];
   }
   level._melee_weapons[level._melee_weapons.size] = melee_weapon;
@@ -131,16 +131,16 @@ function add_melee_weapon(weapon, flourish_weapon, ballistic_weapon, ballistic_u
 
 function set_fallback_weapon(weapon_name, fallback_weapon_name) {
   melee_weapon = find_melee_weapon(getweapon(weapon_name));
-  if(isDefined(melee_weapon)) {
+  if(isdefined(melee_weapon)) {
     melee_weapon.fallback_weapon = getweapon(fallback_weapon_name);
   }
 }
 
 function determine_fallback_weapon() {
   fallback_weapon = level.weaponzmfists;
-  if(isDefined(self zm_utility::get_player_melee_weapon()) && self hasweapon(self zm_utility::get_player_melee_weapon())) {
+  if(isdefined(self zm_utility::get_player_melee_weapon()) && self hasweapon(self zm_utility::get_player_melee_weapon())) {
     melee_weapon = find_melee_weapon(self zm_utility::get_player_melee_weapon());
-    if(isDefined(melee_weapon) && isDefined(melee_weapon.fallback_weapon)) {
+    if(isdefined(melee_weapon) && isdefined(melee_weapon.fallback_weapon)) {
       return melee_weapon.fallback_weapon;
     }
   }
@@ -166,28 +166,28 @@ function take_fallback_weapon() {
 }
 
 function player_can_see_weapon_prompt() {
-  if(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching) {
+  if(isdefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching) {
     return true;
   }
-  if(isDefined(self zm_utility::get_player_melee_weapon()) && self hasweapon(self zm_utility::get_player_melee_weapon())) {
+  if(isdefined(self zm_utility::get_player_melee_weapon()) && self hasweapon(self zm_utility::get_player_melee_weapon())) {
     return false;
   }
   return true;
 }
 
 function spectator_respawn_all() {
-  for(i = 0; i < level._melee_weapons.size; i++) {
+  for (i = 0; i < level._melee_weapons.size; i++) {
     self spectator_respawn(level._melee_weapons[i].wallbuy_targetname, level._melee_weapons[i].weapon);
   }
 }
 
 function spectator_respawn(wallbuy_targetname, weapon) {
-  melee_triggers = getEntArray(wallbuy_targetname, "targetname");
+  melee_triggers = getentarray(wallbuy_targetname, "targetname");
   players = getplayers();
-  for(i = 0; i < melee_triggers.size; i++) {
+  for (i = 0; i < melee_triggers.size; i++) {
     melee_triggers[i] setvisibletoall();
-    if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
-      for(j = 0; j < players.size; j++) {
+    if(!(isdefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
+      for (j = 0; j < players.size; j++) {
         if(!players[j] player_can_see_weapon_prompt()) {
           melee_triggers[i] setinvisibletoplayer(players[j]);
         }
@@ -197,21 +197,21 @@ function spectator_respawn(wallbuy_targetname, weapon) {
 }
 
 function trigger_hide_all() {
-  for(i = 0; i < level._melee_weapons.size; i++) {
+  for (i = 0; i < level._melee_weapons.size; i++) {
     self trigger_hide(level._melee_weapons[i].wallbuy_targetname);
   }
 }
 
 function trigger_hide(wallbuy_targetname) {
-  melee_triggers = getEntArray(wallbuy_targetname, "targetname");
-  for(i = 0; i < melee_triggers.size; i++) {
+  melee_triggers = getentarray(wallbuy_targetname, "targetname");
+  for (i = 0; i < melee_triggers.size; i++) {
     melee_triggers[i] setinvisibletoplayer(self);
   }
 }
 
 function has_any_ballistic_knife() {
   primaryweapons = self getweaponslistprimaries();
-  for(i = 0; i < primaryweapons.size; i++) {
+  for (i = 0; i < primaryweapons.size; i++) {
     if(primaryweapons[i].isballisticknife) {
       return true;
     }
@@ -221,7 +221,7 @@ function has_any_ballistic_knife() {
 
 function has_upgraded_ballistic_knife() {
   primaryweapons = self getweaponslistprimaries();
-  for(i = 0; i < primaryweapons.size; i++) {
+  for (i = 0; i < primaryweapons.size; i++) {
     if(primaryweapons[i].isballisticknife && zm_weapons::is_weapon_upgraded(primaryweapons[i])) {
       return true;
     }
@@ -231,11 +231,11 @@ function has_upgraded_ballistic_knife() {
 
 function give_ballistic_knife(weapon, upgraded) {
   current_melee_weapon = self zm_utility::get_player_melee_weapon();
-  if(isDefined(current_melee_weapon)) {
-    if(upgraded && isDefined(level.ballistic_upgraded_weapon) && isDefined(level.ballistic_upgraded_weapon[current_melee_weapon])) {
+  if(isdefined(current_melee_weapon)) {
+    if(upgraded && isdefined(level.ballistic_upgraded_weapon) && isdefined(level.ballistic_upgraded_weapon[current_melee_weapon])) {
       weapon = level.ballistic_upgraded_weapon[current_melee_weapon];
     }
-    if(!upgraded && isDefined(level.ballistic_weapon) && isDefined(level.ballistic_weapon[current_melee_weapon])) {
+    if(!upgraded && isdefined(level.ballistic_weapon) && isdefined(level.ballistic_weapon[current_melee_weapon])) {
       weapon = level.ballistic_weapon[current_melee_weapon];
     }
   }
@@ -253,7 +253,7 @@ function change_melee_weapon(weapon, current_weapon) {
   had_ballistic_upgraded = 0;
   ballistic_was_primary = 0;
   primaryweapons = self getweaponslistprimaries();
-  for(i = 0; i < primaryweapons.size; i++) {
+  for (i = 0; i < primaryweapons.size; i++) {
     primary_weapon = primaryweapons[i];
     if(primary_weapon.isballisticknife) {
       had_ballistic = 1;
@@ -290,9 +290,9 @@ function change_melee_weapon(weapon, current_weapon) {
 
 function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon) {
   self.first_time_triggered = 0;
-  if(isDefined(self.stub)) {
+  if(isdefined(self.stub)) {
     self endon("kill_trigger");
-    if(isDefined(self.stub.first_time_triggered)) {
+    if(isdefined(self.stub.first_time_triggered)) {
       self.first_time_triggered = self.stub.first_time_triggered;
     }
     weapon = self.stub.weapon;
@@ -303,15 +303,15 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
     ballistic_weapon = self.stub.ballistic_weapon;
     ballistic_upgraded_weapon = self.stub.ballistic_upgraded_weapon;
     players = getplayers();
-    if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
-      for(i = 0; i < players.size; i++) {
+    if(!(isdefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
+      for (i = 0; i < players.size; i++) {
         if(!players[i] player_can_see_weapon_prompt()) {
           self setinvisibletoplayer(players[i]);
         }
       }
     }
   }
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
     if(!zm_utility::is_player_valid(player)) {
       player thread zm_utility::ignore_triggers(0.5);
@@ -343,11 +343,11 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
       wait(0.1);
       continue;
     }
-    if(player laststand::player_is_in_laststand() || (isDefined(player.intermission) && player.intermission)) {
+    if(player laststand::player_is_in_laststand() || (isdefined(player.intermission) && player.intermission)) {
       wait(0.1);
       continue;
     }
-    if(isDefined(player.check_override_melee_wallbuy_purchase)) {
+    if(isdefined(player.check_override_melee_wallbuy_purchase)) {
       if(player[[player.check_override_melee_wallbuy_purchase]](vo_dialog_id, flourish_weapon, weapon, ballistic_weapon, ballistic_upgraded_weapon, flourish_fn, self)) {
         continue;
       }
@@ -360,13 +360,13 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
       if(player zm_score::can_player_purchase(cost)) {
         if(self.first_time_triggered == 0) {
           model = getent(self.target, "targetname");
-          if(isDefined(model)) {
+          if(isdefined(model)) {
             model thread melee_weapon_show(player);
-          } else if(isDefined(self.clientfieldname)) {
+          } else if(isdefined(self.clientfieldname)) {
             level clientfield::set(self.clientfieldname, 1);
           }
           self.first_time_triggered = 1;
-          if(isDefined(self.stub)) {
+          if(isdefined(self.stub)) {
             self.stub.first_time_triggered = 1;
           }
         }
@@ -378,7 +378,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
       }
       continue;
     }
-    if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
+    if(!(isdefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
       self setinvisibletoplayer(player);
     }
   }
@@ -395,7 +395,7 @@ function melee_weapon_show(player) {
     yaw = weapon_yaw + 90;
   }
   self.og_origin = self.origin;
-  self.origin = self.origin + (anglesToForward((0, yaw, 0)) * 8);
+  self.origin = self.origin + (anglestoforward((0, yaw, 0)) * 8);
   wait(0.05);
   self show();
   zm_utility::play_sound_at_pos("weapon_show", self.origin, self);
@@ -406,24 +406,24 @@ function melee_weapon_show(player) {
 function award_melee_weapon(weapon_name) {
   weapon = getweapon(weapon_name);
   melee_weapon = find_melee_weapon(weapon);
-  if(isDefined(melee_weapon)) {
+  if(isdefined(melee_weapon)) {
     self give_melee_weapon(melee_weapon.vo_dialog_id, melee_weapon.flourish_weapon, melee_weapon.weapon, melee_weapon.ballistic_weapon, melee_weapon.ballistic_upgraded_weapon, melee_weapon.flourish_fn, undefined);
   }
 }
 
 function give_melee_weapon(vo_dialog_id, flourish_weapon, weapon, ballistic_weapon, ballistic_upgraded_weapon, flourish_fn, trigger) {
-  if(isDefined(flourish_fn)) {
+  if(isdefined(flourish_fn)) {
     self thread[[flourish_fn]]();
   }
   original_weapon = self do_melee_weapon_flourish_begin(flourish_weapon);
   self zm_audio::create_and_play_dialog("weapon_pickup", vo_dialog_id);
   self util::waittill_any("fake_death", "death", "player_downed", "weapon_change_complete");
   self do_melee_weapon_flourish_end(original_weapon, flourish_weapon, weapon, ballistic_weapon, ballistic_upgraded_weapon);
-  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission)) {
+  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission)) {
     return;
   }
-  if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
-    if(isDefined(trigger)) {
+  if(!(isdefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
+    if(isdefined(trigger)) {
       trigger setinvisibletoplayer(self);
     }
     self trigger_hide_all();
@@ -444,7 +444,7 @@ function do_melee_weapon_flourish_end(original_weapon, flourish_weapon, weapon, 
   assert(!original_weapon.isperkbottle);
   assert(original_weapon != level.weaponrevivetool);
   self zm_utility::enable_player_move_states();
-  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission)) {
+  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission)) {
     self takeweapon(weapon);
     self.lastactiveweapon = level.weaponnone;
     return;
@@ -470,7 +470,7 @@ function do_melee_weapon_flourish_end(original_weapon, flourish_weapon, weapon, 
     self zm_weapons::switch_back_primary_weapon();
   }
   self waittill("weapon_change_complete");
-  if(!self laststand::player_is_in_laststand() && (!(isDefined(self.intermission) && self.intermission))) {
+  if(!self laststand::player_is_in_laststand() && (!(isdefined(self.intermission) && self.intermission))) {
     self zm_utility::decrement_is_drinking();
   }
 }

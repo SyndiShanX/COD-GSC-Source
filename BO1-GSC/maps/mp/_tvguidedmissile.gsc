@@ -17,14 +17,14 @@ init() {
   level thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread OnPlayerSpawned();
   }
 }
 OnPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread watchForGuidedMissileFire();
   }
@@ -32,7 +32,7 @@ OnPlayerSpawned() {
 watchForGuidedMissileFire() {
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("missile_fire", missile, weap);
     switch (weap) {
       case "m220_tow_mp":
@@ -89,9 +89,9 @@ killBrushWatcher(player) {
   player endon("disconnect");
   self endon("death");
   player endon("guided_missile_exploded");
-  killbushes = getEntArray("trigger_hurt", "classname");
-  while(1) {
-    for(i = 0; i < killbushes.size; i++) {
+  killbushes = GetEntArray("trigger_hurt", "classname");
+  while (1) {
+    for (i = 0; i < killbushes.size; i++) {
       if(self istouching(killbushes[i])) {
         if(isDefined(killbushes[i].script_noteworthy) && killbushes[i].script_noteworthy == "tvguided_safe") {
           break;
@@ -110,11 +110,10 @@ killBrushWatcher(player) {
 MissileImpactWatcher(missile) {
   self endon("disconnect");
   self endon("guided_missile_exploded");
-  while(1) {
+  while (1) {
     self waittill("projectile_impact", weapon);
-    if(weapon != "m220_tow_mp") {
+    if(weapon != "m220_tow_mp")
       continue;
-    }
     self PlayRumbleOnEntity("grenade_rumble");
     Target_Remove(missile);
     if(!self GetWeaponAmmoStock("m220_tow_mp")) {
@@ -141,7 +140,7 @@ MissileDamageWatcher(player) {
   player endon("disconnect");
   self endon("death");
   player endon("guided_missile_exploded");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weapon);
     if(damage > 5) {
       if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weapon, attacker)) {
@@ -242,7 +241,7 @@ destroy_overlays_on_owner_disconnect(guided_missile_overlay, guided_missile_grai
 testAlphaOut(guided_missile_grain) {
   self endon("disconnect");
   self endon("guided_missile_exploded");
-  while(1) {
+  while (1) {
     guided_missile_grain.alpha += 0.05;
     wait(0.1);
   }
@@ -268,9 +267,8 @@ fade_to_white_on_death() {
   waittillframeend;
   self.guided_missile_lost_signal.alpha = 1.0;
   wait(1.0);
-  if(isDefined(self.guided_missile_lost_signal)) {
+  if(isDefined(self.guided_missile_lost_signal))
     self.guided_missile_lost_signal Destroy();
-  }
 }
 outOfBoundsWatcher(missile) {
   self endon("disconnect");
@@ -278,7 +276,7 @@ outOfBoundsWatcher(missile) {
   missile endon("death");
   missile.launchedCorrectly = false;
   missile.useMeshBounds = true;
-  for(;;) {
+  for (;;) {
     if(!(missile isMissileInsideHeightLock()) && missile.useMeshBounds) {
       if(!missile.launchedCorrectly) {
         missile.useMeshBounds = false;
@@ -287,36 +285,32 @@ outOfBoundsWatcher(missile) {
       }
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha)) {
+        if(isDefined(self.leaving_play_area.alpha))
           self.leaving_play_area.alpha = 1.0;
-        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(!missile.useMeshBounds && !(missile isMissileInsideHeightLockBackupCheck())) {
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha)) {
+        if(isDefined(self.leaving_play_area.alpha))
           self.leaving_play_area.alpha = 1.0;
-        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(missile.origin[2] >= level.GuidedMissileMaxHight) {
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha)) {
+        if(isDefined(self.leaving_play_area.alpha))
           self.leaving_play_area.alpha = 1.0;
-        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(isDefined(missile.beingWarnedAboutLeaving)) {
       missile notify("reentered_battlefield");
       missile.beingWarnedAboutLeaving = undefined;
-      if(isDefined(self.leaving_play_area.alpha)) {
+      if(isDefined(self.leaving_play_area.alpha))
         self.leaving_play_area.alpha = 0.0;
-      }
       missile ClearClientFlag(level.const_flag_outofbounds);
       self thread FadeFromWhite(missile);
     }
@@ -337,7 +331,7 @@ warnLeavingBattlefield(missile) {
   missile endon("reentered_battlefield");
   self thread DestroyMissileOutOfBounds(missile);
   self thread FadeToWhite(missile);
-  for(;;) {
+  for (;;) {
     wait 1.0;
     earthquake(0.4, 1.0, missile.origin, 500, self);
   }
@@ -354,7 +348,7 @@ FadeToWhite(missile) {
   self endon("guided_missile_exploded");
   missile endon("reentered_battlefield");
   fadeTime = GetTime() + (missile.outOfBoundsTime * 1000);
-  while(1) {
+  while (1) {
     newAlpha = 1.0 - Float((fadeTime - GetTime()) / (missile.outOfBoundsTime * 1000.0));
     self.guided_missile_lost_signal.alpha = newAlpha;
     if(newAlpha < 0.5) {
@@ -371,13 +365,12 @@ FadeFromWhite(missile) {
   missile endon("reentered_battlefield");
   beginning_alpha = self.guided_missile_lost_signal.alpha;
   fadeTime = GetTime() + (missile.fadeInTime * 1000);
-  while(1) {
+  while (1) {
     newAlpha = Float(fadeTime - GetTime()) / (missile.fadeInTime * 1000.0);
     newAlpha *= beginning_alpha;
     PrintLn("newAlpha fade out: " + newAlpha);
-    if(newAlpha < 0) {
+    if(newAlpha < 0)
       return;
-    }
     self.guided_missile_lost_signal.alpha = newAlpha;
     if(newAlpha < 0.5) {
       self PlayRumbleOnEntity("damage_light");

@@ -6,7 +6,7 @@
 
 setupminimap(var_0) {
   var_1 = level.requiredmapaspectratio;
-  var_2 = getEntArray("minimap_corner", "targetname");
+  var_2 = getentarray("minimap_corner", "targetname");
 
   if(var_2.size != 2) {
     return;

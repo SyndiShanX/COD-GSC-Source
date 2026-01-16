@@ -14,7 +14,7 @@
 #namespace newworld_util;
 
 function autoexec __init__sytem__() {
-  system::register("newworld_util", &__init__, undefined, undefined);
+  system::register("newworld_util", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -22,35 +22,35 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("actor", "derez_ai_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
-  clientfield::register("actor", "cs_rez_in_fx", 1, 2, "counter", &function_9b9abce4, 0, 0);
-  clientfield::register("actor", "cs_rez_out_fx", 1, 2, "counter", &function_be66c05b, 0, 0);
-  clientfield::register("actor", "chase_suspect_fx", 1, 1, "int", &function_6e7d0ca2, 0, 0);
-  clientfield::register("actor", "wall_run_fx", 1, 1, "int", &function_752d4412, 0, 0);
-  clientfield::register("scriptmover", "derez_ai_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
-  clientfield::register("scriptmover", "truck_explosion_fx", 1, 1, "int", &function_258012a1, 0, 0);
-  clientfield::register("scriptmover", "derez_model_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
-  clientfield::register("scriptmover", "emp_door_fx", 1, 1, "int", &function_ddee6a4e, 0, 0);
-  clientfield::register("scriptmover", "smoke_grenade_fx", 1, 1, "int", &function_ce461171, 0, 0);
-  clientfield::register("scriptmover", "frag_grenade_fx", 1, 1, "int", &function_1e4e8925, 0, 0);
-  clientfield::register("scriptmover", "wall_break_fx", 1, 1, "int", &function_c8c87ed0, 0, 0);
-  clientfield::register("scriptmover", "train_explosion_fx", 1, 1, "int", &function_8d759480, 0, 0);
-  clientfield::register("scriptmover", "wasp_hack_fx", 1, 1, "int", &function_ec9960ef, 0, 0);
-  clientfield::register("vehicle", "wasp_hack_fx", 1, 1, "int", &function_ec9960ef, 0, 0);
-  clientfield::register("vehicle", "emp_vehicles_fx", 1, 1, "int", &function_ddee6a4e, 0, 0);
-  clientfield::register("world", "player_snow_fx", 1, 4, "int", &callback_player_snow_fx, 0, 0);
-  clientfield::register("allplayers", "player_spawn_fx", 1, 1, "int", &callback_ally_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "emp_generator_fx", 1, 1, "int", &function_aad321ae, 0, 0);
-  clientfield::register("scriptmover", "train_fx_occlude", 1, 1, "int", &function_73c10276, 0, 0);
-  clientfield::register("world", "waterplant_rotate_fans", 1, 1, "int", &function_1e2a542f, 0, 0);
-  clientfield::register("world", "train_main_fx_occlude", 1, 1, "int", &function_4f8cc662, 0, 0);
-  clientfield::register("toplayer", "train_rumble_loop", 1, 1, "int", &function_b45c2459, 0, 0);
-  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", &postfx_futz, 0, 0);
+  clientfield::register("actor", "derez_ai_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
+  clientfield::register("actor", "cs_rez_in_fx", 1, 2, "counter", & function_9b9abce4, 0, 0);
+  clientfield::register("actor", "cs_rez_out_fx", 1, 2, "counter", & function_be66c05b, 0, 0);
+  clientfield::register("actor", "chase_suspect_fx", 1, 1, "int", & function_6e7d0ca2, 0, 0);
+  clientfield::register("actor", "wall_run_fx", 1, 1, "int", & function_752d4412, 0, 0);
+  clientfield::register("scriptmover", "derez_ai_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
+  clientfield::register("scriptmover", "truck_explosion_fx", 1, 1, "int", & function_258012a1, 0, 0);
+  clientfield::register("scriptmover", "derez_model_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
+  clientfield::register("scriptmover", "emp_door_fx", 1, 1, "int", & function_ddee6a4e, 0, 0);
+  clientfield::register("scriptmover", "smoke_grenade_fx", 1, 1, "int", & function_ce461171, 0, 0);
+  clientfield::register("scriptmover", "frag_grenade_fx", 1, 1, "int", & function_1e4e8925, 0, 0);
+  clientfield::register("scriptmover", "wall_break_fx", 1, 1, "int", & function_c8c87ed0, 0, 0);
+  clientfield::register("scriptmover", "train_explosion_fx", 1, 1, "int", & function_8d759480, 0, 0);
+  clientfield::register("scriptmover", "wasp_hack_fx", 1, 1, "int", & function_ec9960ef, 0, 0);
+  clientfield::register("vehicle", "wasp_hack_fx", 1, 1, "int", & function_ec9960ef, 0, 0);
+  clientfield::register("vehicle", "emp_vehicles_fx", 1, 1, "int", & function_ddee6a4e, 0, 0);
+  clientfield::register("world", "player_snow_fx", 1, 4, "int", & callback_player_snow_fx, 0, 0);
+  clientfield::register("allplayers", "player_spawn_fx", 1, 1, "int", & callback_ally_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "emp_generator_fx", 1, 1, "int", & function_aad321ae, 0, 0);
+  clientfield::register("scriptmover", "train_fx_occlude", 1, 1, "int", & function_73c10276, 0, 0);
+  clientfield::register("world", "waterplant_rotate_fans", 1, 1, "int", & function_1e2a542f, 0, 0);
+  clientfield::register("world", "train_main_fx_occlude", 1, 1, "int", & function_4f8cc662, 0, 0);
+  clientfield::register("toplayer", "train_rumble_loop", 1, 1, "int", & function_b45c2459, 0, 0);
+  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", & postfx_futz, 0, 0);
 }
 
 function callback_derez_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval == 1 && isDefined(localclientnum)) {
-    self playSound(0, "evt_ai_derez");
+  if(newval == 1 && isdefined(localclientnum)) {
+    self playsound(0, "evt_ai_derez");
     function_bd23b431(localclientnum, "player/fx_ai_dni_rez_out_arm_left_clean", "j_elbow_le");
     function_bd23b431(localclientnum, "player/fx_ai_dni_rez_out_arm_left_clean", "j_shoulder_le");
     function_bd23b431(localclientnum, "player/fx_ai_dni_rez_out_arm_right_clean", "j_elbow_ri");
@@ -89,7 +89,7 @@ function callback_player_snow_fx(localclientnum, oldval, newval, bnewent, biniti
 }
 
 function function_5677f0fa(localclientnum) {
-  if(!isDefined(level.player_snow_fx)) {
+  if(!isdefined(level.player_snow_fx)) {
     level.player_snow_fx = [];
   }
   self function_97cc38a5();
@@ -97,15 +97,15 @@ function function_5677f0fa(localclientnum) {
   level.player_snow_fx[n_index] = util::spawn_model(localclientnum, "tag_origin", self.origin);
   level.player_snow_fx[n_index] linkto(self);
   level.player_snow_fx[n_index] thread function_7683b584(self);
-  playFXOnTag(localclientnum, "weather/fx_snow_player_os_nworld", level.player_snow_fx[n_index], "tag_origin");
+  playfxontag(localclientnum, "weather/fx_snow_player_os_nworld", level.player_snow_fx[n_index], "tag_origin");
 }
 
 function function_97cc38a5(localclientnum) {
-  if(!isDefined(level.player_snow_fx)) {
+  if(!isdefined(level.player_snow_fx)) {
     level.player_snow_fx = [];
   }
   n_index = self getentitynumber();
-  if(isDefined(level.player_snow_fx[n_index])) {
+  if(isdefined(level.player_snow_fx[n_index])) {
     level.player_snow_fx[n_index] delete();
   }
 }
@@ -120,14 +120,14 @@ function function_120f324e(localclientnum, n_delay) {
   self notify("stop_snow_fx");
   self endon("stop_snow_fx");
   self function_97cc38a5(localclientnum);
-  while(isDefined(self)) {
-    playFXOnTag(localclientnum, "weather/fx_snow_player_slow_os_nworld", self, "none");
+  while (isdefined(self)) {
+    playfxontag(localclientnum, "weather/fx_snow_player_slow_os_nworld", self, "none");
     wait(n_delay);
   }
 }
 
 function function_ff1b6796(localclientnum) {
-  if(isDefined(self.var_f3f44e9)) {
+  if(isdefined(self.var_f3f44e9)) {
     return;
   }
   v_offset = (0, 0, 0);
@@ -205,7 +205,7 @@ function function_1c2b3dda(localclientnum, var_21082827 = 1) {
     self mapshaderconstant(0, 0, "scriptVector0", 1, 0, 0);
   }
   b_is_updating = 1;
-  while(b_is_updating) {
+  while (b_is_updating) {
     time = gettime();
     time_in_seconds = (time - start_time) / 1000;
     if(time_in_seconds >= 0.5) {
@@ -225,7 +225,7 @@ function function_1c2b3dda(localclientnum, var_21082827 = 1) {
 }
 
 function function_bd23b431(localclientnum, str_fx, str_tag) {
-  n_fx_id = playFXOnTag(localclientnum, str_fx, self, str_tag);
+  n_fx_id = playfxontag(localclientnum, str_fx, self, str_tag);
   setfxignorepause(localclientnum, n_fx_id, 1);
 }
 
@@ -269,7 +269,7 @@ function function_258012a1(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_aad321ae(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playFX(localclientnum, "explosions/fx_exp_emp_lg_nworld", self.origin);
+    playfx(localclientnum, "explosions/fx_exp_emp_lg_nworld", self.origin);
   }
 }
 
@@ -278,7 +278,7 @@ function function_73c10276(localclientnum, oldval, newval, bnewent, binitialsnap
     self.mdl_tag = util::spawn_model(localclientnum, "tag_origin", self.origin, self.angles);
     self.mdl_tag linkto(self);
     self.var_c604c399 = addboltedfxexclusionvolume(localclientnum, self.mdl_tag, "tag_origin", (1300 / 2, 450 / 2, 500 / 2));
-  } else if(isDefined(self.var_c604c399)) {
+  } else if(isdefined(self.var_c604c399)) {
     removefxexclusionvolume(localclientnum, self.var_c604c399);
     self.mdl_tag delete();
   }
@@ -302,8 +302,8 @@ function function_4f8cc662(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_ce461171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.smoke_fx = playFXOnTag(localclientnum, "explosions/fx_exp_grenade_smoke_nworld", self, "tag_origin");
-  } else if(isDefined(self.smoke_fx)) {
+    self.smoke_fx = playfxontag(localclientnum, "explosions/fx_exp_grenade_smoke_nworld", self, "tag_origin");
+  } else if(isdefined(self.smoke_fx)) {
     stopfx(localclientnum, self.smoke_fx);
   }
 }
@@ -311,7 +311,7 @@ function function_ce461171(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_1e4e8925(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     e_origin = util::spawn_model(localclientnum, "tag_origin", self.origin);
-    e_origin util::delay(30, undefined, &delete);
+    e_origin util::delay(30, undefined, & delete);
     e_origin fx_play_on_tag(localclientnum, "frag_grenade", "explosions/fx_exp_grenade_default", "tag_origin");
   } else {
     self fx_clear(localclientnum, "frag_grenade", "explosions/fx_exp_grenade_default");
@@ -321,7 +321,7 @@ function function_1e4e8925(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_c8c87ed0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     e_origin = util::spawn_model(localclientnum, "tag_origin", self.origin);
-    e_origin util::delay(5, undefined, &delete);
+    e_origin util::delay(5, undefined, & delete);
     e_origin fx_play_on_tag(localclientnum, "wall_break", "destruct/fx_dest_wall_nworld", "tag_origin");
   } else {
     self fx_clear(localclientnum, "wall_break", "destruct/fx_dest_wall_nworld");
@@ -356,7 +356,7 @@ function function_dd551c54(localclientnum) {
   self endon("death");
   self endon("entityshutdown");
   self endon("hash_2608c3ca");
-  while(true) {
+  while (true) {
     n_rand_wait = randomfloatrange(2, 7.5);
     wait(n_rand_wait);
     eqtype = randomint(5) + 1;
@@ -393,28 +393,28 @@ function function_bfff202d(localclientnum, n_duration) {
   self endon("death");
   self endon("entityshutdown");
   self endon("hash_2608c3ca");
-  if(isDefined(n_duration)) {
-    __s = spawnStruct();
+  if(isdefined(n_duration)) {
+    __s = spawnstruct();
     __s endon("timeout");
     __s util::delay_notify(n_duration, "timeout");
   }
-  while(true) {
+  while (true) {
     self playrumbleonentity(localclientnum, "cp_newworld_rumble_train_roof_loop");
     wait(0.185);
   }
 }
 
 function fx_clear(localclientnum, str_type, str_fx) {
-  if(!isDefined(self.a_fx)) {
+  if(!isdefined(self.a_fx)) {
     self.a_fx = [];
   }
-  if(!isDefined(self.a_fx[localclientnum])) {
+  if(!isdefined(self.a_fx[localclientnum])) {
     self.a_fx[localclientnum] = [];
   }
-  if(!isDefined(self.a_fx[localclientnum][str_type])) {
+  if(!isdefined(self.a_fx[localclientnum][str_type])) {
     self.a_fx[localclientnum][str_type] = [];
   }
-  if(isDefined(str_fx) && isDefined(self.a_fx[localclientnum][str_type][str_fx])) {
+  if(isdefined(str_fx) && isdefined(self.a_fx[localclientnum][str_type][str_fx])) {
     n_fx_id = self.a_fx[localclientnum][str_type][str_fx];
     deletefx(localclientnum, n_fx_id, 0);
     self.a_fx[localclientnum][str_type][str_fx] = undefined;
@@ -422,9 +422,9 @@ function fx_clear(localclientnum, str_type, str_fx) {
 }
 
 function fx_delete_type(localclientnum, str_type, b_stop_immediately = 1) {
-  if(isDefined(self.a_fx) && isDefined(self.a_fx[localclientnum]) && isDefined(self.a_fx[localclientnum][str_type])) {
+  if(isdefined(self.a_fx) && isdefined(self.a_fx[localclientnum]) && isdefined(self.a_fx[localclientnum][str_type])) {
     a_keys = getarraykeys(self.a_fx[localclientnum][str_type]);
-    for(i = 0; i < a_keys.size; i++) {
+    for (i = 0; i < a_keys.size; i++) {
       deletefx(localclientnum, self.a_fx[localclientnum][str_type][a_keys[i]], b_stop_immediately);
       self.a_fx[localclientnum][str_type][a_keys[i]] = undefined;
     }
@@ -436,7 +436,7 @@ function fx_play_on_tag(localclientnum, str_type, str_fx, str_tag = "tag_origin"
   if(b_kill_fx_with_same_type) {
     self fx_delete_type(localclientnum, str_type, 0);
   }
-  n_fx_id = playFXOnTag(localclientnum, str_fx, self, str_tag);
+  n_fx_id = playfxontag(localclientnum, str_fx, self, str_tag);
   if(var_ff19846d == 1) {
     setfxignorepause(localclientnum, n_fx_id, var_ff19846d);
   }
@@ -448,13 +448,13 @@ function fx_play(localclientnum, str_type, str_fx, b_kill_fx_with_same_type = 1,
   if(b_kill_fx_with_same_type) {
     self fx_delete_type(localclientnum, str_type, 0);
   }
-  if(isDefined(v_forward) && isDefined(v_up)) {
-    n_fx_id = playFX(localclientnum, str_fx, v_pos, v_forward, v_up);
+  if(isdefined(v_forward) && isdefined(v_up)) {
+    n_fx_id = playfx(localclientnum, str_fx, v_pos, v_forward, v_up);
   } else {
-    if(isDefined(v_forward)) {
-      n_fx_id = playFX(localclientnum, str_fx, v_pos, v_forward);
+    if(isdefined(v_forward)) {
+      n_fx_id = playfx(localclientnum, str_fx, v_pos, v_forward);
     } else {
-      n_fx_id = playFX(localclientnum, str_fx, v_pos);
+      n_fx_id = playfx(localclientnum, str_fx, v_pos);
     }
   }
   setfxignorepause(localclientnum, n_fx_id, var_ff19846d);
@@ -493,7 +493,7 @@ function function_1e2a542f(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_65012f08() {
   self endon("hash_c78324b7");
   rotate_time = 3;
-  while(true) {
+  while (true) {
     self rotateyaw(180, rotate_time);
     self waittill("rotatedone");
   }

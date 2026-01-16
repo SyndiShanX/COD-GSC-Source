@@ -26,11 +26,10 @@ main() {
   grenadeangle = 0;
   assert(isDefined(self.grenade));
 
-  if(isDefined(self.grenade)) {
+  if(isDefined(self.grenade))
     grenadeangle = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
-  } else {
+  else
     grenadeangle = self.angles[1];
-  }
 
   if(self.a.pose == "stand") {
     if(isDefined(self.grenade) && trydive(grenadeangle)) {
@@ -50,18 +49,16 @@ main() {
 trydive(grenadeangle) {
   diveanim = undefined;
 
-  if(abs(grenadeangle) > 90) {
+  if(abs(grenadeangle) > 90)
     diveanim = animarray("dive_forward");
-  } else {
+  else
     diveanim = animarray("dive_backward");
-  }
 
   moveby = getmovedelta(diveanim, 0, 0.5);
   divetopos = self localtoworldcoords(moveby);
 
-  if(!self maymovetopoint(divetopos)) {
+  if(!self maymovetopoint(divetopos))
     return false;
-  }
 
   self setflaggedanimknoballrestart("cowerstart", diveanim, % body, 1, 0.2);
   self animscripts\shared::donotetracks("cowerstart");

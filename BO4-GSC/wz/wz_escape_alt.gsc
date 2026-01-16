@@ -25,6 +25,7 @@
 #include scripts\wz_common\wz_ee_poster;
 #include scripts\wz_common\wz_loadouts;
 #include scripts\wz_common\wz_nixie_tubes;
+
 #namespace wz_escape_alt;
 
 event_handler[level_init] main(eventstruct) {
@@ -33,9 +34,9 @@ event_handler[level_init] main(eventstruct) {
 
   callback::on_vehicle_spawned(&on_vehicle_spawned);
 
-  if(!(isDefined(getgametypesetting(#"wzzombieapocalypse")) && getgametypesetting(#"wzzombieapocalypse"))) {
-    level.var_30783ca9 = &function_28990311;
-  }
+    if(!(isDefined(getgametypesetting(#"wzzombieapocalypse")) && getgametypesetting(#"wzzombieapocalypse"))) {
+      level.var_30783ca9 = &function_28990311;
+    }
 
   level.mapcenter = (0, 0, 0);
   setmapcenter(level.mapcenter);
@@ -47,7 +48,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread init_devgui();
 
-  level wz_escape_ai_zones::init();
+    level wz_escape_ai_zones::init();
   level.var_18bf5e98 = &function_d075b84e;
   var_80b6eb8c = isDefined(level.waverespawndelay) ? level.waverespawndelay : 30;
 
@@ -65,9 +66,9 @@ function_d075b84e() {
 
   if(isDefined(level.var_b4143320) && level.var_b4143320) {
     if(isDefined(getgametypesetting(#"hash_26f00de198472b81")) && getgametypesetting(#"hash_26f00de198472b81")) {
-      itemlist = # "zombie_itemlist_escape_hzc";
+      itemlist = #"zombie_itemlist_escape_hzc";
     } else {
-      itemlist = # "zombie_itemlist_escape";
+      itemlist = #"zombie_itemlist_escape";
     }
 
     if(randomint(100) <= 2) {
@@ -82,7 +83,9 @@ function_d075b84e() {
 }
 
 on_player_spawned() {
+
   self thread function_e8f0335f();
+
 }
 
 function_28990311() {
@@ -254,12 +257,12 @@ function_9cc59537() {
 
               a_trace = bulletTrace(point.origin + (0, 0, 24), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -269,12 +272,12 @@ function_9cc59537() {
             foreach(v_test in var_7cb887a8) {
               a_trace = bulletTrace(point.origin + (0, 0, 16), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -365,7 +368,7 @@ function_e8f0335f() {
     return;
   }
 
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   var_b3a9e916 = getdvarint(#"hash_796c892495c48172", 1);
 
   while(getdvarint(#"hash_15ce8723d2ead5ef", 1)) {
@@ -397,15 +400,15 @@ function_e8f0335f() {
     var_7cb887a8 = [];
     var_3e832e74 = 360 / 8;
 
-    if(var_11cc451b[# "position"][2] > physicstrace[# "position"][2]) {
+    if(var_11cc451b[#"position"][2] > physicstrace[#"position"][2]) {
       var_708a2754 = var_11cc451b;
     }
 
-    origin = var_708a2754[# "position"];
+    origin = var_708a2754[#"position"];
 
-    if(var_708a2754[# "fraction"] < 1 && vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.707) {
-      if(var_708a2754[# "position"][2] > -10000) {
-        origin = var_708a2754[# "position"];
+    if(var_708a2754[#"fraction"] < 1 && vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.707) {
+      if(var_708a2754[#"position"][2] > -10000) {
+        origin = var_708a2754[#"position"];
       }
     }
 
@@ -422,16 +425,16 @@ function_e8f0335f() {
       foreach(v_test in var_7cb887a8) {
         a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, level.players[0]);
 
-        if(isDefined(a_trace[# "entity"])) {
-          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[# "entity"]);
+        if(isDefined(a_trace[#"entity"])) {
+          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[#"entity"]);
         }
 
-        if(distancesquared(a_trace[# "position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
+        if(distancesquared(a_trace[#"position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
           v_color = (1, 0, 0);
           b_failed = 1;
 
           if(distance2d(origin, level.players[0] getorigin()) < 512) {
-            debugstar(a_trace[# "position"], 1, v_color);
+            debugstar(a_trace[#"position"], 1, v_color);
           }
         }
       }
@@ -469,7 +472,7 @@ private event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
     var_91d1913b = distance2d(dynent.origin, level.players[0].origin);
 
     if(level.players[0] util::is_player_looking_at(dynent.origin, 0.8, 0) && var_91d1913b <= 6000) {
-      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== # "hash_1dcbe8021fb16344") {
+      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== #"hash_1dcbe8021fb16344") {
         function_a476d876(dynent.origin, dynent.angles, (1, 0.5, 0), 10);
 
         if(var_91d1913b <= 768) {
@@ -631,7 +634,7 @@ function_f567f0cd() {
 }
 
 function_1221d304() {
-  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", # "vehicle_boct_mil_truck_cargo_wz_green", # "vehicle_boct_mil_truck_cargo_wz_tan", # "vehicle_boct_mil_boat_tactical_raft_wz_blk", # "vehicle_boct_mil_boat_tactical_raft_wz_gry", # "vehicle_boct_mil_boat_tactical_raft_wz_odg", # "veh_quad_player_wz_blk", # "hash_232abda4e81275f4", # "veh_quad_player_wz_grn", # "hash_2f8d60a5381870ee", # "veh_quad_player_wz_tan", # "vehicle_t8_mil_helicopter_light_transport_wz_grey", # "vehicle_t8_mil_helicopter_light_transport_wz_tan", # "vehicle_t8_mil_helicopter_light_transport_wz_dark", # "vehicle_t8_mil_helicopter_light_transport_wz_black", # "veh_fav_player_wz_blk", # "veh_fav_player_wz_grn", # "veh_fav_player_wz_tan", # "veh_muscle_car_convertible_player_wz_bandit_blk", # "veh_muscle_car_convertible_player_wz_blu", # "veh_muscle_car_convertible_player_wz_grn", # "veh_muscle_car_convertible_player_wz_org", # "veh_muscle_car_convertible_player_wz_phantom", # "veh_muscle_car_convertible_player_wz_red", # "veh_muscle_car_convertible_player_wz_replacer", # "veh_muscle_car_convertible_player_wz_wht", # "veh_muscle_car_convertible_player_wz_ylw", # "veh_muscle_car_convertible_player_wz_blk", # "veh_muscle_car_convertible_player_wz_racing_grn", # "veh_suv_player_police_wz", # "vehicle_boct_mil_boat_pbr_wz_police", # "veh_suv_player_wz_blk", # "veh_suv_player_wz_gry", # "veh_suv_player_wz_met_gry", # "veh_suv_player_wz_wht", # "vehicle_t8_mil_helicopter_light_transport_wz_police", # "veh_suv_player_private_security_wz", # "veh_quad_player_wz_police", # "hash_482e864157620248", # "hash_1d37bc413f25898e", # "hash_1d37af413f257377", # "hash_8ea0340ead96490", # "hash_79bf6a7491c80c7", # "hash_32e4c0a7619f03a9", # "hash_22d9b5a7a0d9dd73", # "vehicle_boct_mil_boat_pbr_wz_black", # "vehicle_boct_mil_boat_pbr_wz_green", # "vehicle_boct_mil_boat_pbr_wz_grey", # "vehicle_boct_mil_boat_pbr_wz_tan", # "vehicle_t8_mil_helicopter_light_gunner_wz_black", # "vehicle_t8_mil_helicopter_light_gunner_wz_dark", # "vehicle_t8_mil_helicopter_light_gunner_wz_green", # "vehicle_t8_mil_helicopter_light_gunner_wz_grey", # "vehicle_t8_mil_helicopter_light_gunner_wz_tan");
+  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", #"vehicle_boct_mil_truck_cargo_wz_green", #"vehicle_boct_mil_truck_cargo_wz_tan", #"vehicle_boct_mil_boat_tactical_raft_wz_blk", #"vehicle_boct_mil_boat_tactical_raft_wz_gry", #"vehicle_boct_mil_boat_tactical_raft_wz_odg", #"veh_quad_player_wz_blk", #"hash_232abda4e81275f4", #"veh_quad_player_wz_grn", #"hash_2f8d60a5381870ee", #"veh_quad_player_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_grey", #"vehicle_t8_mil_helicopter_light_transport_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_dark", #"vehicle_t8_mil_helicopter_light_transport_wz_black", #"veh_fav_player_wz_blk", #"veh_fav_player_wz_grn", #"veh_fav_player_wz_tan", #"veh_muscle_car_convertible_player_wz_bandit_blk", #"veh_muscle_car_convertible_player_wz_blu", #"veh_muscle_car_convertible_player_wz_grn", #"veh_muscle_car_convertible_player_wz_org", #"veh_muscle_car_convertible_player_wz_phantom", #"veh_muscle_car_convertible_player_wz_red", #"veh_muscle_car_convertible_player_wz_replacer", #"veh_muscle_car_convertible_player_wz_wht", #"veh_muscle_car_convertible_player_wz_ylw", #"veh_muscle_car_convertible_player_wz_blk", #"veh_muscle_car_convertible_player_wz_racing_grn", #"veh_suv_player_police_wz", #"vehicle_boct_mil_boat_pbr_wz_police", #"veh_suv_player_wz_blk", #"veh_suv_player_wz_gry", #"veh_suv_player_wz_met_gry", #"veh_suv_player_wz_wht", #"vehicle_t8_mil_helicopter_light_transport_wz_police", #"veh_suv_player_private_security_wz", #"veh_quad_player_wz_police", #"hash_482e864157620248", #"hash_1d37bc413f25898e", #"hash_1d37af413f257377", #"hash_8ea0340ead96490", #"hash_79bf6a7491c80c7", #"hash_32e4c0a7619f03a9", #"hash_22d9b5a7a0d9dd73", #"vehicle_boct_mil_boat_pbr_wz_black", #"vehicle_boct_mil_boat_pbr_wz_green", #"vehicle_boct_mil_boat_pbr_wz_grey", #"vehicle_boct_mil_boat_pbr_wz_tan", #"vehicle_t8_mil_helicopter_light_gunner_wz_black", #"vehicle_t8_mil_helicopter_light_gunner_wz_dark", #"vehicle_t8_mil_helicopter_light_gunner_wz_green", #"vehicle_t8_mil_helicopter_light_gunner_wz_grey", #"vehicle_t8_mil_helicopter_light_gunner_wz_tan");
 
   foreach(str_type in a_str_types) {
     if(self.vehicletype == str_type) {
@@ -644,66 +647,66 @@ function_1221d304() {
 
 function_b2775b52() {
   switch (self.vehicletype) {
-    case # "veh_quad_player_wz_blk":
-    case # "hash_232abda4e81275f4":
-    case # "veh_quad_player_wz_grn":
-    case # "veh_quad_player_wz_tan":
-    case # "hash_2f8d60a5381870ee":
+    case #"veh_quad_player_wz_blk":
+    case #"hash_232abda4e81275f4":
+    case #"veh_quad_player_wz_grn":
+    case #"veh_quad_player_wz_tan":
+    case #"hash_2f8d60a5381870ee":
       return (0, 0, 1);
-    case # "vehicle_boct_mil_truck_cargo_wz_tan":
-    case # "vehicle_boct_mil_truck_cargo_wz_dark":
-    case # "vehicle_boct_mil_truck_cargo_wz_green":
+    case #"vehicle_boct_mil_truck_cargo_wz_tan":
+    case #"vehicle_boct_mil_truck_cargo_wz_dark":
+    case #"vehicle_boct_mil_truck_cargo_wz_green":
       return (1, 0, 1);
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_grey":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_black":
-    case # "hash_482e864157620248":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_green":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_dark":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_grey":
-    case # "hash_1d37af413f257377":
-    case # "hash_1d37bc413f25898e":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_black":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_grey":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_black":
+    case #"hash_482e864157620248":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_green":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_grey":
+    case #"hash_1d37af413f257377":
+    case #"hash_1d37bc413f25898e":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_black":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_dark":
       return (1, 0, 0);
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_blk":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_gry":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_odg":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_blk":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_gry":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_odg":
       return (1, 0.5, 0);
-    case # "veh_fav_player_wz_blk":
-    case # "veh_fav_player_wz_tan":
-    case # "veh_fav_player_wz_grn":
-    case # "hash_79bf6a7491c80c7":
-    case # "hash_22d9b5a7a0d9dd73":
-    case # "hash_32e4c0a7619f03a9":
+    case #"veh_fav_player_wz_blk":
+    case #"veh_fav_player_wz_tan":
+    case #"veh_fav_player_wz_grn":
+    case #"hash_79bf6a7491c80c7":
+    case #"hash_22d9b5a7a0d9dd73":
+    case #"hash_32e4c0a7619f03a9":
       return (0.501961, 0.501961, 0);
-    case # "vehicle_boct_mil_boat_pbr_wz_tan":
-    case # "vehicle_boct_mil_boat_pbr_wz_grey":
-    case # "vehicle_boct_mil_boat_pbr_wz_green":
-    case # "vehicle_boct_mil_boat_pbr_wz_police":
-    case # "vehicle_boct_mil_boat_pbr_wz_black":
+    case #"vehicle_boct_mil_boat_pbr_wz_tan":
+    case #"vehicle_boct_mil_boat_pbr_wz_grey":
+    case #"vehicle_boct_mil_boat_pbr_wz_green":
+    case #"vehicle_boct_mil_boat_pbr_wz_police":
+    case #"vehicle_boct_mil_boat_pbr_wz_black":
       return (0, 1, 0);
-    case # "veh_suv_player_wz_blk":
-    case # "veh_suv_player_wz_met_gry":
-    case # "veh_suv_player_wz_wht":
-    case # "veh_suv_player_wz_gry":
-    case # "veh_suv_player_private_security_wz":
-    case # "veh_suv_player_police_wz":
+    case #"veh_suv_player_wz_blk":
+    case #"veh_suv_player_wz_met_gry":
+    case #"veh_suv_player_wz_wht":
+    case #"veh_suv_player_wz_gry":
+    case #"veh_suv_player_private_security_wz":
+    case #"veh_suv_player_police_wz":
       return (0, 1, 1);
-    case # "veh_muscle_car_convertible_player_wz_wht":
-    case # "veh_muscle_car_convertible_player_wz_replacer":
-    case # "veh_muscle_car_convertible_player_wz_grn":
-    case # "veh_muscle_car_convertible_player_wz_red":
-    case # "veh_muscle_car_convertible_player_wz_org":
-    case # "veh_muscle_car_convertible_player_wz_blk":
-    case # "veh_muscle_car_convertible_player_wz_bandit_blk":
-    case # "veh_muscle_car_convertible_player_wz_racing_grn":
-    case # "veh_muscle_car_convertible_player_wz_blu":
-    case # "veh_muscle_car_convertible_player_wz_ylw":
-    case # "veh_muscle_car_convertible_player_wz_phantom":
+    case #"veh_muscle_car_convertible_player_wz_wht":
+    case #"veh_muscle_car_convertible_player_wz_replacer":
+    case #"veh_muscle_car_convertible_player_wz_grn":
+    case #"veh_muscle_car_convertible_player_wz_red":
+    case #"veh_muscle_car_convertible_player_wz_org":
+    case #"veh_muscle_car_convertible_player_wz_blk":
+    case #"veh_muscle_car_convertible_player_wz_bandit_blk":
+    case #"veh_muscle_car_convertible_player_wz_racing_grn":
+    case #"veh_muscle_car_convertible_player_wz_blu":
+    case #"veh_muscle_car_convertible_player_wz_ylw":
+    case #"veh_muscle_car_convertible_player_wz_phantom":
       return (0, 1, 1);
-    case # "veh_quad_player_wz_police":
+    case #"veh_quad_player_wz_police":
       return (0.545098, 0.270588, 0.0745098);
     default:
       return (1, 0, 1);
@@ -719,7 +722,7 @@ function_4b227faf() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case # "wz_escape_zodiac":
+      case #"wz_escape_zodiac":
         var_dc1ea650 = group;
         break;
       default:
@@ -758,7 +761,7 @@ function_4b227faf() {
 
 function_df930125(str_type) {
   switch (str_type) {
-    case # "raft_items":
+    case #"raft_items":
       return (1, 0, 0);
     default:
       return (1, 0.5, 0);
@@ -809,3 +812,4 @@ private function_1880c93d() {
   var_fa3df96 = self item_inventory::function_e66dcff5(item);
   self item_world::function_de2018e3(item, self, var_fa3df96);
 }
+

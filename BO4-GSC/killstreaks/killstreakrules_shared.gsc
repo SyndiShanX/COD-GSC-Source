@@ -6,6 +6,7 @@
 #include scripts\core_common\popups_shared;
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\emp_shared;
+
 #namespace killstreakrules;
 
 init_shared() {
@@ -99,24 +100,24 @@ killstreakstart(hardpointtype, team, hacked, displayteammessage) {
   }
 
   level notify(#"killstreak_started", {
-    #hardpoint_type: hardpointtype,
-    #team: team,
+    #hardpoint_type: hardpointtype, 
+    #team: team, 
     #attacker: self
   });
   killstreak_id = level.globalkillstreakscalled;
   level.globalkillstreakscalled++;
   killstreak_data = [];
-  killstreak_data[# "caller"] = self getxuid();
-  killstreak_data[# "spawnid"] = getplayerspawnid(self);
-  killstreak_data[# "starttime"] = gettime();
-  killstreak_data[# "type"] = hardpointtype;
-  killstreak_data[# "endtime"] = 0;
+  killstreak_data[#"caller"] = self getxuid();
+  killstreak_data[#"spawnid"] = getplayerspawnid(self);
+  killstreak_data[#"starttime"] = gettime();
+  killstreak_data[#"type"] = hardpointtype;
+  killstreak_data[#"endtime"] = 0;
   level.matchrecorderkillstreakkills[killstreak_id] = 0;
   level.killstreaks_triggered[killstreak_id] = killstreak_data;
 
   killstreak_debug_text("<dev string:x53>" + hardpointtype + "<dev string:x6a>" + team + "<dev string:x78>" + killstreak_id);
 
-  return killstreak_id;
+    return killstreak_id;
 }
 
 displaykillstreakstartteammessagetoall(hardpointtype) {
@@ -168,7 +169,7 @@ killstreakstop(hardpointtype, team, id) {
 
   killstreak_debug_text("<dev string:x8c>" + hardpointtype + "<dev string:x6a>" + team + "<dev string:x78>" + idstr);
 
-  keys = getarraykeys(level.killstreaktype[hardpointtype]);
+    keys = getarraykeys(level.killstreaktype[hardpointtype]);
 
   foreach(key in keys) {
     if(!level.killstreaktype[hardpointtype][key].counts) {
@@ -196,29 +197,30 @@ killstreakstop(hardpointtype, team, id) {
   }
 
   if(!isDefined(id) || id == -1) {
+
     killstreak_debug_text("<dev string:xa3>" + hardpointtype);
 
-    if(sessionmodeismultiplayergame()) {
-      function_92d1707f(#"hash_710b205b26e46446", {
-        #starttime: 0,
-        #endtime: gettime(),
-        #name: hardpointtype,
-        #team: team
-      });
-    }
+      if(sessionmodeismultiplayergame()) {
+        function_92d1707f(#"hash_710b205b26e46446", {
+          #starttime: 0, 
+          #endtime: gettime(), 
+          #name: hardpointtype, 
+          #team: team
+        });
+      }
 
     return;
   }
 
-  level.killstreaks_triggered[id][# "endtime"] = gettime();
+  level.killstreaks_triggered[id][#"endtime"] = gettime();
   totalkillswiththiskillstreak = level.matchrecorderkillstreakkills[id];
 
   if(sessionmodeismultiplayergame()) {
     mpkillstreakuses = {
-      #starttime: level.killstreaks_triggered[id][# "starttime"],
-      #endtime: level.killstreaks_triggered[id][# "endtime"],
-      #spawnid: level.killstreaks_triggered[id][# "spawnid"],
-      #name: hardpointtype,
+      #starttime: level.killstreaks_triggered[id][#"starttime"], 
+      #endtime: level.killstreaks_triggered[id][#"endtime"], 
+      #spawnid: level.killstreaks_triggered[id][#"spawnid"], 
+      #name: hardpointtype, 
       #team: team
     };
     function_92d1707f(#"hash_710b205b26e46446", mpkillstreakuses);
@@ -259,9 +261,10 @@ iskillstreakallowed(hardpointtype, team, var_1d8339ae) {
 
     if(level.killstreakrules[key].max != 0) {
       if(level.killstreakrules[key].cur >= level.killstreakrules[key].max) {
+
         killstreak_debug_text("<dev string:xd2>" + key + "<dev string:xde>");
 
-        isallowed = 0;
+          isallowed = 0;
         break;
       }
     }
@@ -276,23 +279,25 @@ iskillstreakallowed(hardpointtype, team, var_1d8339ae) {
 
         killstreak_debug_text("<dev string:xd2>" + key + "<dev string:xe9>");
 
-        break;
+          break;
       }
     }
   }
 
   if(isDefined(self.laststand) && self.laststand) {
+
     killstreak_debug_text("<dev string:xf1>");
 
-    isallowed = 0;
+      isallowed = 0;
   }
 
   isemped = 0;
 
   if(self isempjammed()) {
+
     killstreak_debug_text("<dev string:x100>");
 
-    isallowed = 0;
+      isallowed = 0;
     isemped = 1;
 
     if(self emp::enemyempactive()) {
@@ -308,9 +313,10 @@ iskillstreakallowed(hardpointtype, team, var_1d8339ae) {
   }
 
   if(isDefined(level.var_7b151daa) && [[level.var_7b151daa]](self)) {
+
     killstreak_debug_text("<dev string:x10d>");
 
-    isallowed = 0;
+      isallowed = 0;
   }
 
   if(!(isDefined(var_1d8339ae) && var_1d8339ae)) {
@@ -338,3 +344,4 @@ killstreak_debug_text(text) {
     }
   }
 }
+

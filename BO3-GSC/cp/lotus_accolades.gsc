@@ -86,7 +86,7 @@ function function_a2c4c634() {
 }
 
 function function_d657f93a() {
-  callback::on_actor_killed(&function_8b3820b0);
+  callback::on_actor_killed( & function_8b3820b0);
 }
 
 function function_8b3820b0(params) {
@@ -99,23 +99,23 @@ function function_8b3820b0(params) {
 }
 
 function function_b68ffa5d() {
-  callback::on_ai_killed(&function_6e45ce5d);
+  callback::on_ai_killed( & function_6e45ce5d);
 }
 
 function function_6e45ce5d(params) {
   if(isplayer(params.eattacker)) {
     player = params.eattacker;
-    if(isDefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "raps" && player.hijacked_vehicle_entity != self) {
+    if(isdefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "raps" && player.hijacked_vehicle_entity != self) {
       player notify("hash_5cd1f75c");
-    } else if(isDefined(params.einflictor) && params.einflictor.archetype === "raps" && params.einflictor != self) {
+    } else if(isdefined(params.einflictor) && params.einflictor.archetype === "raps" && params.einflictor != self) {
       player notify("hash_5cd1f75c");
     }
   } else {
-    if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "raps" && isplayer(params.eattacker.iffowner)) {
+    if(isdefined(params.eattacker.iffowner) && params.eattacker.archetype === "raps" && isplayer(params.eattacker.iffowner)) {
       params.eattacker.iffowner notify("hash_5cd1f75c");
     } else if(self.archetype === "raps" && params.eattacker === self) {
       foreach(player in level.activeplayers) {
-        if(isDefined(player.hijacked_vehicle_entity)) {
+        if(isdefined(player.hijacked_vehicle_entity)) {
           if(player.hijacked_vehicle_entity.archetype === "raps") {
             if(self !== player.hijacked_vehicle_entity) {
               n_speed = length(player.hijacked_vehicle_entity getvelocity());
@@ -134,24 +134,24 @@ function function_6e45ce5d(params) {
 }
 
 function function_c6ba5108() {
-  callback::on_actor_killed(&function_8eb61d56);
+  callback::on_actor_killed( & function_8eb61d56);
 }
 
 function function_8eb61d56(params) {
-  if(isplayer(params.eattacker) && self.archetype == "robot" && (isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lot_10_01_skybridge_vign_jump_robot") || (isDefined(self.traversestartnode) && isDefined(self.traversestartnode.animscript) && issubstr(tolower(self.traversestartnode.animscript), "jump")))) {
+  if(isplayer(params.eattacker) && self.archetype == "robot" && (isdefined(self.current_scene) && issubstr(self.current_scene, "cin_lot_10_01_skybridge_vign_jump_robot") || (isdefined(self.traversestartnode) && isdefined(self.traversestartnode.animscript) && issubstr(tolower(self.traversestartnode.animscript), "jump")))) {
     params.eattacker notify("hash_4f2b7767");
   }
 }
 
 function function_367835e3() {
-  callback::on_ai_spawned(&function_109e560b);
+  callback::on_ai_spawned( & function_109e560b);
 }
 
 function function_109e560b() {
   self endon("death");
   if(self.archetype === "human_riotshield") {
     self thread function_d48890bb();
-    while(!isDefined(self.var_66202c1f)) {
+    while (!isdefined(self.var_66202c1f)) {
       self waittill("damage", n_damage, e_attacker, v_direction, v_point, s_type);
       if(isplayer(e_attacker) && (s_type === "MOD_RIFLE_BULLET" || s_type === "MOD_PISTOL_BULLET" || s_type === "MOD_HEAD_SHOT")) {
         self.var_66202c1f = 1;
@@ -169,7 +169,7 @@ function function_d48890bb() {
 
 function function_7c30e9e0() {
   level waittill("hash_c243f1de");
-  if(isDefined(world.var_aaf25bba) && world.var_aaf25bba) {
+  if(isdefined(world.var_aaf25bba) && world.var_aaf25bba) {
     foreach(player in level.players) {
       player notify("hash_d1ec3fad");
     }
@@ -181,7 +181,7 @@ function function_8c0cbe3e() {
 }
 
 function function_4815496() {
-  callback::on_actor_killed(&function_b9a9c8d8);
+  callback::on_actor_killed( & function_b9a9c8d8);
 }
 
 function function_b9a9c8d8(params) {
@@ -191,24 +191,24 @@ function function_b9a9c8d8(params) {
 }
 
 function function_9e965239() {
-  callback::on_actor_killed(&function_3bbd5251);
+  callback::on_actor_killed( & function_3bbd5251);
 }
 
 function function_3bbd5251(params) {
-  if(self.archetype == "robot" && isplayer(params.eattacker) && isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lotus_charging_station_awaken_robot")) {
+  if(self.archetype == "robot" && isplayer(params.eattacker) && isdefined(self.current_scene) && issubstr(self.current_scene, "cin_lotus_charging_station_awaken_robot")) {
     params.eattacker notify("hash_f0d8a6c8");
   }
 }
 
 function function_8593adf4() {
-  callback::on_ai_killed(&function_e36c85d8);
+  callback::on_ai_killed( & function_e36c85d8);
 }
 
 function function_e36c85d8(params) {
   if(isplayer(params.eattacker) && self.archetype == "robot") {
     player = params.eattacker;
     if(self clientfield::get("robot_EMP") || self clientfield::get("cybercom_sysoverload")) {
-      if(!isDefined(player.var_cacfc33c)) {
+      if(!isdefined(player.var_cacfc33c)) {
         player thread function_8dc27487(5);
       } else {
         if(player.var_cacfc33c < 5) {
@@ -230,7 +230,7 @@ function function_8dc27487(n_max_time) {
   self endon("hash_ada946c0");
   self.var_cacfc33c = 0;
   self.var_29d01adc = 1;
-  while(n_max_time > self.var_cacfc33c) {
+  while (n_max_time > self.var_cacfc33c) {
     wait(1);
     self.var_cacfc33c++;
   }
@@ -238,71 +238,71 @@ function function_8dc27487(n_max_time) {
 
 function function_75102c92() {
   level.var_d97ef4e5 = [];
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm_siege2nd";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm_siege1st";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_04_05_security_vign_melee_variation2";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm_alt";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm_alt2";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_overwhelm_end";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_02_01_startriots_vign_takeout_civkills";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_04_01_security_vign_holddown";
-  if(!isDefined(level.var_d97ef4e5)) {
+  if(!isdefined(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = [];
   } else if(!isarray(level.var_d97ef4e5)) {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_04_01_security_vign_beaten_breakout_loop";
-  callback::on_actor_killed(&function_f5ef0d83);
+  callback::on_actor_killed( & function_f5ef0d83);
 }
 
 function function_f5ef0d83(params) {
-  if(isplayer(params.eattacker) && self.team === "axis" && isDefined(self.current_scene) && array::contains(level.var_d97ef4e5, self.current_scene)) {
+  if(isplayer(params.eattacker) && self.team === "axis" && isdefined(self.current_scene) && array::contains(level.var_d97ef4e5, self.current_scene)) {
     params.eattacker notify("hash_c335c11b");
   }
 }
@@ -322,9 +322,9 @@ function function_c20741bf() {
 
 function function_fc480d54() {
   level waittill("hash_a450f864");
-  callback::on_ai_killed(&function_e8cf8caa);
+  callback::on_ai_killed( & function_e8cf8caa);
   level waittill("hash_65ad50c6");
-  callback::remove_on_ai_killed(&function_e8cf8caa);
+  callback::remove_on_ai_killed( & function_e8cf8caa);
 }
 
 function function_e8cf8caa(params) {
@@ -334,21 +334,21 @@ function function_e8cf8caa(params) {
 }
 
 function function_12b1c299() {
-  callback::on_ai_killed(&function_436940b1);
+  callback::on_ai_killed( & function_436940b1);
   level flag::wait_till("players_made_it_to_stand_down");
-  callback::remove_on_ai_killed(&function_436940b1);
+  callback::remove_on_ai_killed( & function_436940b1);
 }
 
 function function_436940b1(params) {
   if(self.archetype === "robot") {
     if(isplayer(params.eattacker)) {
       player = params.eattacker;
-      if(isDefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "amws" && player.hijacked_vehicle_entity != self) {
+      if(isdefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "amws" && player.hijacked_vehicle_entity != self) {
         player notify("hash_746844e8");
-      } else if(isDefined(params.einflictor) && params.einflictor.archetype === "amws" && params.einflictor != self) {
+      } else if(isdefined(params.einflictor) && params.einflictor.archetype === "amws" && params.einflictor != self) {
         player notify("hash_746844e8");
       }
-    } else if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "amws" && isplayer(params.eattacker.iffowner)) {
+    } else if(isdefined(params.eattacker.iffowner) && params.eattacker.archetype === "amws" && isplayer(params.eattacker.iffowner)) {
       params.eattacker.iffowner notify("hash_746844e8");
     }
   }
@@ -356,8 +356,8 @@ function function_436940b1(params) {
 
 function function_f53b652e() {
   level waittill("hash_a450f864");
-  array::thread_all(level.players, &function_d57bb90f);
-  callback::on_spawned(&function_d57bb90f);
+  array::thread_all(level.players, & function_d57bb90f);
+  callback::on_spawned( & function_d57bb90f);
 }
 
 function function_d57bb90f() {
@@ -368,15 +368,15 @@ function function_d57bb90f() {
   level endon("gunship_almost_dead");
   var_cc018542 = getweapon("launcher_standard");
   w_minigun = getweapon("minigun_lotus");
-  while(isDefined(level.vh_gunship)) {
+  while (isdefined(level.vh_gunship)) {
     level.vh_gunship waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     if(attacker === self && damage > 0) {
-      if(weapon === var_cc018542 && !isDefined(self.var_e1f9f377)) {
+      if(weapon === var_cc018542 && !isdefined(self.var_e1f9f377)) {
         self.var_e1f9f377 = 1;
       } else {
-        if(weapon === w_minigun && !isDefined(self.minigun_used)) {
+        if(weapon === w_minigun && !isdefined(self.minigun_used)) {
           self.minigun_used = 1;
-        } else if(isDefined(weapon) && !isDefined(self.var_9b4dd55d) && weapon != var_cc018542 && weapon != w_minigun) {
+        } else if(isdefined(weapon) && !isdefined(self.var_9b4dd55d) && weapon != var_cc018542 && weapon != w_minigun) {
           self.var_9b4dd55d = 1;
         }
       }
@@ -392,8 +392,8 @@ function function_aff09c5b() {
   foreach(player in level.players) {
     player flag::init("accolade_15_failed");
   }
-  callback::on_spawned(&function_428a25c7);
-  array::thread_all(level.players, &function_3d0c6b79);
+  callback::on_spawned( & function_428a25c7);
+  array::thread_all(level.players, & function_3d0c6b79);
   level waittill("gunship_almost_dead");
   foreach(player in level.players) {
     if(!player flag::get("accolade_15_failed")) {
@@ -414,7 +414,7 @@ function function_3d0c6b79() {
   self endon("death");
   self endon("hash_779aa062");
   w_gunship_cannon = getweapon("gunship_cannon");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     if(weapon === w_gunship_cannon) {
       iprintln("");

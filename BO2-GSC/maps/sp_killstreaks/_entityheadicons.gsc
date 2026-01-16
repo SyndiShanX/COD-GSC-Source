@@ -28,9 +28,8 @@ setentityheadicon(team, owner, offset, icon, constant_size, off) {
   if(!level.teambased && !isDefined(owner)) {
     return;
   }
-  if(!isDefined(constant_size)) {
+  if(!isDefined(constant_size))
     constant_size = 0;
-  }
 
   if(!isDefined(self.entityheadiconteam)) {
     self.entityheadiconteam = "none";
@@ -44,24 +43,21 @@ setentityheadicon(team, owner, offset, icon, constant_size, off) {
     self.entityheadiconteam = team;
   }
 
-  if(isDefined(offset)) {
+  if(isDefined(offset))
     self.entityheadiconoffset = offset;
-  } else {
+  else
     self.entityheadiconoffset = (0, 0, 0);
-  }
 
   for(i = 0; i < self.entityheadicons.size; i++) {
-    if(isDefined(self.entityheadicons[i])) {
+    if(isDefined(self.entityheadicons[i]))
       self.entityheadicons[i] destroy();
-    }
   }
 
   self.entityheadicons = [];
   self notify("kill_entity_headicon_thread");
 
-  if(!isDefined(icon)) {
+  if(!isDefined(icon))
     icon = game["entity_headicon_" + team];
-  }
 
   if(isDefined(owner) && !level.teambased) {
     if(!isplayer(owner)) {
@@ -85,11 +81,10 @@ updateentityheadteamicon(entity, team, icon, constant_size, off) {
   headicon.alpha = 0.8;
   headicon setshader(icon, 6, 6);
 
-  if(isDefined(off)) {
+  if(isDefined(off))
     headicon setwaypoint(constant_size, "", 0, off);
-  } else {
+  else
     headicon setwaypoint(constant_size);
-  }
 
   headicon settargetent(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
@@ -108,11 +103,10 @@ updateentityheadclienticon(entity, icon, constant_size, off) {
   headicon.alpha = 0.8;
   headicon setshader(icon, 6, 6);
 
-  if(isDefined(off)) {
+  if(isDefined(off))
     headicon setwaypoint(constant_size, "", 0, off);
-  } else {
+  else
     headicon setwaypoint(constant_size);
-  }
 
   headicon settargetent(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
@@ -122,18 +116,16 @@ destroyheadiconsondeath() {
   self waittill_any("death", "hacked");
 
   for(i = 0; i < self.entityheadicons.size; i++) {
-    if(isDefined(self.entityheadicons[i])) {
+    if(isDefined(self.entityheadicons[i]))
       self.entityheadicons[i] destroy();
-    }
   }
 }
 
 destroyentityheadicons() {
   if(isDefined(self.entityheadicons)) {
     for(i = 0; i < self.entityheadicons.size; i++) {
-      if(isDefined(self.entityheadicons[i])) {
+      if(isDefined(self.entityheadicons[i]))
         self.entityheadicons[i] destroy();
-      }
     }
   }
 }

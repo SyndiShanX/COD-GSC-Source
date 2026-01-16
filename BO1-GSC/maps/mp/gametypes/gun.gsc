@@ -55,55 +55,48 @@ main() {
   setscoreboardcolumns("kills", "deaths", "stabs", "humiliated");
 }
 addGunToProgression(gunName, altName) {
-  if(!isDefined(level.gunProgression)) {
+  if(!isDefined(level.gunProgression))
     level.gunProgression = [];
-  }
-  newWeapon = spawnStruct();
+  newWeapon = SpawnStruct();
   newWeapon.names = [];
   newWeapon.names[newWeapon.names.size] = gunName;
-  if(isDefined(altName)) {
+  if(isDefined(altName))
     newWeapon.names[newWeapon.names.size] = altName;
-  }
   level.gunProgression[level.gunProgression.size] = newWeapon;
 }
 giveCustomLoadout(takeAllWeapons, alreadySpawned) {
   chooseRandomBody = false;
-  if(!isDefined(alreadySpawned) || !alreadySpawned) {
+  if(!isDefined(alreadySpawned) || !alreadySpawned)
     chooseRandomBody = true;
-  }
   self maps\mp\gametypes\_wager::setupBlankRandomPlayer(takeAllWeapons, chooseRandomBody);
   self DisableWeaponCycling();
-  if(!isDefined(self.gunProgress)) {
+  if(!isDefined(self.gunProgress))
     self.gunProgress = 0;
-  }
   currentWeapon = level.gunProgression[self.gunProgress].names[0];
   self giveWeapon(currentWeapon);
   self switchToWeapon(currentWeapon);
   self giveWeapon("knife_mp");
-  if(!isDefined(alreadySpawned) || !alreadySpawned) {
+  if(!isDefined(alreadySpawned) || !alreadySpawned)
     self setSpawnWeapon(currentWeapon);
-  }
-  if(isDefined(takeAllWeapons) && !takeAllWeapons) {
+  if(isDefined(takeAllWeapons) && !takeAllWeapons)
     self thread takeOldWeapons(currentWeapon);
-  } else {
+  else
     self EnableWeaponCycling();
-  }
   return currentWeapon;
 }
 takeOldWeapons(currentWeapon) {
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change", newWeapon);
     if(newWeapon != "none") {
       break;
     }
   }
   weaponsList = self GetWeaponsList();
-  for(i = 0; i < weaponsList.size; i++) {
-    if((weaponsList[i] != currentWeapon) && (weaponsList[i] != "knife_mp")) {
+  for (i = 0; i < weaponsList.size; i++) {
+    if((weaponsList[i] != currentWeapon) && (weaponsList[i] != "knife_mp"))
       self TakeWeapon(weaponsList[i]);
-    }
   }
   self EnableWeaponCycling();
 }
@@ -112,19 +105,17 @@ promotePlayer(weaponUsed) {
   self endon("cancel_promotion");
   level endon("game_ended");
   wait 0.05;
-  for(i = 0; i < level.gunProgression[self.gunProgress].names.size; i++) {
+  for (i = 0; i < level.gunProgression[self.gunProgress].names.size; i++) {
     if(weaponUsed == level.gunProgression[self.gunProgress].names[i]) {
       if(self.gunProgress < level.gunProgression.size - 1) {
         self.gunProgress++;
-        if(IsAlive(self)) {
+        if(IsAlive(self))
           self thread giveCustomLoadout(false, true);
-        }
-        self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MPUI_PLAYER_KILLED", 0, &"MP_GUN_NEXT_LEVEL");
+        self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MPUI_PLAYER_KILLED", 0, & "MP_GUN_NEXT_LEVEL");
       }
       score = maps\mp\gametypes\_globallogic_score::_getPlayerScore(self);
-      if(score < level.gunProgression.size) {
+      if(score < level.gunProgression.size)
         maps\mp\gametypes\_globallogic_score::_setPlayerScore(self, score + 1);
-      }
       return;
     }
   }
@@ -136,13 +127,12 @@ demotePlayer() {
     score = maps\mp\gametypes\_globallogic_score::_getPlayerScore(self);
     maps\mp\gametypes\_globallogic_score::_setPlayerScore(self, score - 1);
     self.gunProgress--;
-    if(IsAlive(self)) {
+    if(IsAlive(self))
       self thread giveCustomLoadout(false, true);
-    }
   }
   self.pers["humiliated"]++;
   self.humiliated = self.pers["humiliated"];
-  self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, &"MP_GUN_PREV_LEVEL", "wm_humiliated");
+  self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, & "MP_GUN_PREV_LEVEL", "wm_humiliated");
 }
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   if(sMeansOfDeath == "MOD_SUICIDE") {
@@ -156,7 +146,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     }
     if(sMeansOfDeath == "MOD_MELEE") {
       self thread demotePlayer();
-      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, &"MP_GUN_PREV_LEVEL_OTHER", "wm_humiliation");
+      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, & "MP_GUN_PREV_LEVEL_OTHER", "wm_humiliation");
       return;
     }
     attacker thread promotePlayer(sWeapon);
@@ -175,20 +165,20 @@ onStartGameType() {
   setDvar("ui_weapon_tiers", level.gunProgression.size);
   makedvarserverinfo("ui_weapon_tiers", level.gunProgression.size);
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_GUN");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_GUN");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_GUN");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_GUN");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_GUN");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_GUN");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_GUN");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_GUN");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_GUN_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_GUN_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_GUN_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_GUN_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_GUN_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_GUN_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_GUN_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_GUN_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
-  newSpawns = getEntArray("mp_wager_spawn", "classname");
+  newSpawns = GetEntArray("mp_wager_spawn", "classname");
   if(newSpawns.size > 0) {
     maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", "mp_wager_spawn");
     maps\mp\gametypes\_spawnlogic::addSpawnPoints("axis", "mp_wager_spawn");
@@ -229,7 +219,7 @@ onSpawnPlayer() {
 infiniteAmmo() {
   self endon("death");
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     wait(0.1);
     weapon = self GetCurrentWeapon();
     self GiveMaxAmmo(weapon);
@@ -237,18 +227,15 @@ infiniteAmmo() {
 }
 onWagerAwards() {
   stabs = self maps\mp\gametypes\_globallogic_score::getPersStat("stabs");
-  if(!isDefined(stabs)) {
+  if(!isDefined(stabs))
     stabs = 0;
-  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", stabs, 0);
   headshots = self maps\mp\gametypes\_globallogic_score::getPersStat("headshots");
-  if(!isDefined(headshots)) {
+  if(!isDefined(headshots))
     headshots = 0;
-  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", headshots, 1);
   bestKillstreak = self maps\mp\gametypes\_globallogic_score::getPersStat("best_kill_streak");
-  if(!isDefined(bestKillstreak)) {
+  if(!isDefined(bestKillstreak))
     bestKillstreak = 0;
-  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", bestKillstreak, 2);
 }

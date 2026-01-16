@@ -13,9 +13,8 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   footsteps();
 }
@@ -138,14 +137,14 @@ precache_createfx_fx() {
   level._effect["fx_smk_tin_hat_sm"] = loadfx("smoke/fx_smk_tin_hat_sm");
 }
 
-footsteps() {}
+footsteps() {
+}
 
 toggle_water_fx_actor(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     self thread _play_water_fx_actor(localclientnum);
-  } else {
+  else
     self _kill_water_fx_actor(localclientnum);
-  }
 }
 
 _play_water_fx_actor(localclientnum) {
@@ -154,25 +153,24 @@ _play_water_fx_actor(localclientnum) {
 
   if(!isDefined(self.e_water_fx)) {
     self.e_water_fx = spawn(localclientnum, self.origin, "script_model");
-    self.e_water_fx setModel("tag_origin");
+    self.e_water_fx setmodel("tag_origin");
   }
 
   self.playing_water_fx = 0;
 
-  if(!self isplayer()) {
+  if(!self isplayer())
     self thread play_water_fx_audio();
-  }
 
   while(isDefined(self)) {
     v_start = self.origin + vectorscale((0, 0, 1), 50.0);
     v_end = self.origin - vectorscale((0, 0, 1), 150.0);
-    a_trace = bulletTrace(v_start, v_end, 0, undefined);
+    a_trace = bullettrace(v_start, v_end, 0, undefined);
 
     if(a_trace["surfacetype"] == "water") {
       self.e_water_fx.origin = a_trace["position"];
 
       if(!self.playing_water_fx) {
-        self.n_water_fx_id = playFXOnTag(localclientnum, level._effect["water_loop"], self.e_water_fx, "tag_origin");
+        self.n_water_fx_id = playfxontag(localclientnum, level._effect["water_loop"], self.e_water_fx, "tag_origin");
         self.playing_water_fx = 1;
       }
     } else if(self.playing_water_fx) {
@@ -192,17 +190,15 @@ _kill_water_fx_actor(localclientnum) {
     wait 2;
   }
 
-  if(isDefined(self.e_water_fx)) {
+  if(isDefined(self.e_water_fx))
     self.e_water_fx delete();
-  }
 }
 
 toggle_water_fx_model(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     self thread _play_water_fx_model(localclientnum);
-  } else {
+  else
     self _kill_water_fx_model(localclientnum);
-  }
 }
 
 _play_water_fx_model(localclientnum) {
@@ -211,21 +207,20 @@ _play_water_fx_model(localclientnum) {
 
   if(!isDefined(self.e_water_fx)) {
     self.e_water_fx = spawn(localclientnum, self.origin, "script_model");
-    self.e_water_fx setModel("tag_origin");
+    self.e_water_fx setmodel("tag_origin");
   }
 
   n_fx_id = level._effect["frogger_wake_" + self.model];
 
-  if(isDefined(n_fx_id)) {
-    self.n_water_fx_id = playFXOnTag(localclientnum, n_fx_id, self.e_water_fx, "tag_origin");
-  } else {
+  if(isDefined(n_fx_id))
+    self.n_water_fx_id = playfxontag(localclientnum, n_fx_id, self.e_water_fx, "tag_origin");
+  else
     return;
-  }
 
   while(isDefined(self)) {
     v_start = self.origin + vectorscale((0, 0, 1), 50.0);
     v_end = self.origin - vectorscale((0, 0, 1), 150.0);
-    a_trace = bulletTrace(v_start, v_end, 0, undefined);
+    a_trace = bullettrace(v_start, v_end, 0, undefined);
 
     if(a_trace["surfacetype"] == "water") {
       self.e_water_fx.origin = a_trace["position"];
@@ -249,9 +244,8 @@ _kill_water_fx_model(localclientnum) {
     wait 2;
   }
 
-  if(isDefined(self.e_water_fx)) {
+  if(isDefined(self.e_water_fx))
     self.e_water_fx delete();
-  }
 }
 
 play_water_fx_audio() {
@@ -265,11 +259,10 @@ play_water_fx_audio() {
 
   while(isDefined(self) && isDefined(self.playing_water_fx)) {
     while(isDefined(self)) {
-      if(self getspeed() > 50) {
-        self.e_water_fx playLoopSound("chr_swimming_swim_loop_npc", 0.1);
-      } else {
-        self.e_water_fx playLoopSound("chr_swimming_float_loop_npc", 0.1);
-      }
+      if(self getspeed() > 50)
+        self.e_water_fx playloopsound("chr_swimming_swim_loop_npc", 0.1);
+      else
+        self.e_water_fx playloopsound("chr_swimming_float_loop_npc", 0.1);
 
       wait 0.25;
     }

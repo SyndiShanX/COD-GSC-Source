@@ -90,13 +90,13 @@ escape_intro_vo() {
 escape_intro_spawn_funcs() {
   sp_st_fork = getent("st_fork_bad", "targetname");
   sp_st_fork add_spawn_function(::run_over);
-  a_st_scaffolding_left_0 = getEntArray("st_scaffolding_left_0", "targetname");
+  a_st_scaffolding_left_0 = getentarray("st_scaffolding_left_0", "targetname");
   array_thread(a_st_scaffolding_left_0, ::add_spawn_function, ::run_over);
   sp_st_scaffolding_middle_0 = getent("st_scaffolding_middle_0", "targetname");
   sp_st_scaffolding_middle_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
   sp_st_scaffolding_right_0 = getent("st_scaffolding_right_0", "targetname");
   sp_st_scaffolding_right_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
-  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
+  a_ai_targets = getentarray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   add_spawn_function_veh("di_soct_0", ::enemy_soct_shoot_logic);
   add_spawn_function_veh("di_soct_0", ::set_lock_on_target, vectorscale((0, 0, 1), 32.0));
@@ -122,17 +122,15 @@ drone_intro() {
   level notify("soct_intro_ready");
   level thread cleanup_di_right_guys();
 
-  if(-1) {
+  if(-1)
     level.vh_player_soct thread player_in_soct_keep_up_with_salazar_fail();
-  }
 
-  if(-1) {
+  if(-1)
     level.vh_player_soct thread player_in_soct_keep_moving_fail();
-  }
 }
 
 cleanup_di_right_guys() {
-  a_ents = getEntArray("di_right_0_ai", "targetname");
+  a_ents = getentarray("di_right_0_ai", "targetname");
 
   if(isDefined(a_ents) && a_ents.size > 0) {
     for(i = 0; i < a_ents.size; i++) {
@@ -145,21 +143,18 @@ cleanup_di_right_guys() {
 cleanup_intro_part1() {
   e_ent = getent("di_left_0_ai", "targetname");
 
-  if(isDefined(e_ent)) {
+  if(isDefined(e_ent))
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
-  }
 
   e_ent = getent("di_glass_building_1_ai", "targetname");
 
-  if(isDefined(e_ent)) {
+  if(isDefined(e_ent))
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
-  }
 
   e_ent = getent("di_glass_building_2_ai", "targetname");
 
-  if(isDefined(e_ent)) {
+  if(isDefined(e_ent))
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
-  }
 }
 
 drone_intro_lookat_targets() {
@@ -308,7 +303,7 @@ escape_intro_hints() {
   flag_wait("vehicle_switched");
   level notify("end_vehicle_switch");
   wait 1;
-  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", &"PAKISTAN_SHARED_SOCT_HINT_BRAKE");
+  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", & "PAKISTAN_SHARED_SOCT_HINT_BRAKE");
   trigger_wait("sm_st_fork");
   screen_message_delete();
 }
@@ -349,11 +344,10 @@ drone_intro_blockade() {
     self waittill("damage", n_damage, e_attacker, direction_vec, point, damagetype);
 
     if(e_attacker == level.player) {
-      if(damagetype == "MOD_PROJECTILE_SPLASH") {
+      if(damagetype == "MOD_PROJECTILE_SPLASH")
         n_damage = n_damage / 2;
-      } else if(damagetype == "MOD_PROJECTILE") {
+      else if(damagetype == "MOD_PROJECTILE")
         n_damage = 2600;
-      }
 
       self.n_damage_total = self.n_damage_total + n_damage;
     }
@@ -363,7 +357,7 @@ drone_intro_blockade() {
       level notify("di_blockade_destroyed");
       level.blockade_destroyed_time = gettime();
       s_blockade_obj = getstruct("blockade_obj", "targetname");
-      a_blockades = getEntArray("drone_blockade_01", "targetname");
+      a_blockades = getentarray("drone_blockade_01", "targetname");
       array_delete(a_blockades);
       b_blockade_destroyed = 1;
     }
@@ -409,9 +403,8 @@ remove_targets_at_drone_intro() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_enemies) {
-    if(ai_enemy istouching(self)) {
+    if(ai_enemy istouching(self))
       ai_enemy notify("end_lock_on");
-    }
   }
 }
 
@@ -424,23 +417,20 @@ drone_intro_soct_0_logic() {
 }
 
 kill_on_player_vehicle_swap() {
-  while(!isDefined(level.player.viewlockedentity)) {
+  while(!isDefined(level.player.viewlockedentity))
     wait 0.01;
-  }
 
   level.player.viewlockedentity waittill("change_seat");
   pak3_kill_vehicle(self);
   e_drone = getent("passenger_700_drone", "targetname");
 
-  if(isDefined(e_drone)) {
+  if(isDefined(e_drone))
     e_drone delete();
-  }
 
   e_drone = getent("shooter_700_drone", "targetname");
 
-  if(isDefined(e_drone)) {
+  if(isDefined(e_drone))
     e_drone delete();
-  }
 }
 
 soct_intro_chicken() {
@@ -511,9 +501,8 @@ scaffolding_damage_trigger1(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player) {
+    if(attacker == level.player)
       health = health - amount;
-    }
   }
 
   playsoundatposition("evt_soct_scaffold_1", self.origin);
@@ -526,9 +515,8 @@ scaffolding_damage_trigger2(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player) {
+    if(attacker == level.player)
       health = health - amount;
-    }
   }
 
   level notify("fxanim_drone_scaffold_02_start");
@@ -541,9 +529,8 @@ scaffolding_damage_trigger5(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player) {
+    if(attacker == level.player)
       health = health - amount;
-    }
   }
 
   level notify("fxanim_drone_scaffold_04_start");
@@ -573,9 +560,8 @@ start_left_balcony_damage_trigger() {
   while(health > 0) {
     e_damage_trigger waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player) {
+    if(attacker == level.player)
       health = health - amount;
-    }
   }
 
   level notify("fxanim_balcony_collapse_start");
@@ -611,9 +597,8 @@ blockage_walkway_damage_trigger(str_endon) {
             if(isalive(e_ent)) {
               dist = distance(damage_ori, e_ent.origin);
 
-              if(dist < 336) {
+              if(dist < 336)
                 e_ent dodamage(e_ent.health + 100, e_ent.origin, level.player);
-              }
             }
           }
         }

@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_death_dash;
 
 autoexec __init__system__() {
@@ -24,7 +25,7 @@ __init__() {
 function_27473e44() {
   zm_perks::register_perk_clientfields(#"specialty_death_dash", &client_field_func, &code_callback_func);
   zm_perks::register_perk_init_thread(#"specialty_death_dash", &init);
-  zm_perks::function_b60f4a9f(#"specialty_death_dash", # "p8_zm_vapor_altar_icon_01_blaze_phase", "zombie/fx8_perk_altar_symbol_ambient_blaze_phase", # "zmperksdeathdash");
+  zm_perks::function_b60f4a9f(#"specialty_death_dash", #"p8_zm_vapor_altar_icon_01_blaze_phase", "zombie/fx8_perk_altar_symbol_ambient_blaze_phase", #"zmperksdeathdash");
   zm_perks::function_f3c80d73("zombie_perk_bottle_death_dash", "zombie_perk_totem_death_dash");
 }
 
@@ -50,7 +51,7 @@ function_bfd817c1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = self playLoopSound(#"hash_4d72f993ab3784d0");
     }
 
-    self playrumbleonentity(localclientnum, # "damage_light");
+    self playrumbleonentity(localclientnum, #"damage_light");
     return;
   }
 
@@ -78,7 +79,7 @@ function_fe2634b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = undefined;
     }
 
-    self playrumbleonentity(localclientnum, # "damage_light");
+    self playrumbleonentity(localclientnum, #"damage_light");
     return;
   }
 
@@ -106,7 +107,7 @@ function_237b1f1e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = undefined;
     }
 
-    self playrumbleonentity(localclientnum, # "damage_heavy");
+    self playrumbleonentity(localclientnum, #"damage_heavy");
     return;
   }
 
@@ -126,7 +127,7 @@ function_dced8aba(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.death_dash_trail_fx = util::playFXOnTag(localclientnum, "zombie/fx8_perk_blaze_phase_trail", self, "tag_origin");
 
     if(!isDefined(self.var_884925ad)) {
-      self playSound(localclientnum, # "hash_1075f6d6c2524599");
+      self playSound(localclientnum, #"hash_1075f6d6c2524599");
       self.var_884925ad = self playLoopSound(#"hash_fa14d87437616df");
     }
 
@@ -139,7 +140,7 @@ function_dced8aba(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_884925ad)) {
-    self playSound(localclientnum, # "hash_42cb90d7c4d6ad08");
+    self playSound(localclientnum, #"hash_42cb90d7c4d6ad08");
     self stoploopsound(self.var_884925ad);
     self.var_884925ad = undefined;
   }

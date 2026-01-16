@@ -14,18 +14,18 @@
 #namespace ability_power;
 
 function autoexec __init__sytem__() {
-  system::register("ability_power", &__init__, undefined, undefined);
+  system::register("ability_power", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
 }
 
 function cpower_print(slot, str) {
   color = "";
   toprint = (color + "") + str;
   weaponname = "";
-  if(isDefined(self._gadgets_player[slot])) {
+  if(isdefined(self._gadgets_player[slot])) {
     weaponname = self._gadgets_player[slot].name;
   }
   if(getdvarint("") > 0) {
@@ -45,8 +45,8 @@ function is_weapon_or_variant_same_as_gadget(weapon, gadget) {
   if(weapon == gadget) {
     return true;
   }
-  if(isDefined(level.weaponlightninggun) && gadget == level.weaponlightninggun) {
-    if(isDefined(level.weaponlightninggunarc) && weapon == level.weaponlightninggunarc) {
+  if(isdefined(level.weaponlightninggun) && gadget == level.weaponlightninggun) {
+    if(isdefined(level.weaponlightninggunarc) && weapon == level.weaponlightninggunarc) {
       return true;
     }
   }
@@ -55,22 +55,22 @@ function is_weapon_or_variant_same_as_gadget(weapon, gadget) {
 
 function power_gain_event_score(eattacker, score, weapon, hero_restricted) {
   if(score > 0) {
-    for(slot = 0; slot < 3; slot++) {
+    for (slot = 0; slot < 3; slot++) {
       gadget = self._gadgets_player[slot];
-      if(isDefined(gadget)) {
+      if(isdefined(gadget)) {
         ignoreself = gadget.gadget_powergainscoreignoreself;
-        if(isDefined(weapon) && ignoreself && is_weapon_or_variant_same_as_gadget(weapon, gadget)) {
+        if(isdefined(weapon) && ignoreself && is_weapon_or_variant_same_as_gadget(weapon, gadget)) {
           continue;
         }
         ignorewhenactive = gadget.gadget_powergainscoreignorewhenactive;
         if(ignorewhenactive && self gadgetisactive(slot)) {
           continue;
         }
-        if(isDefined(hero_restricted) && hero_restricted && power_is_hero_ability(gadget)) {
+        if(isdefined(hero_restricted) && hero_restricted && power_is_hero_ability(gadget)) {
           continue;
         }
         scorefactor = gadget.gadget_powergainscorefactor;
-        if(isDefined(self.gadgetthiefactive) && self.gadgetthiefactive == 1) {
+        if(isdefined(self.gadgetthiefactive) && self.gadgetthiefactive == 1) {
           continue;
         }
         gametypefactor = getgametypesetting("scoreHeroPowerGainFactor");
@@ -90,8 +90,8 @@ function power_gain_event_score(eattacker, score, weapon, hero_restricted) {
 function power_gain_event_damage_actor(eattacker) {
   basegain = 0;
   if(basegain > 0) {
-    for(slot = 0; slot < 3; slot++) {
-      if(isDefined(self._gadgets_player[slot])) {
+    for (slot = 0; slot < 3; slot++) {
+      if(isdefined(self._gadgets_player[slot])) {
         self power_gain_event(slot, eattacker, basegain, "damaged actor");
       }
     }
@@ -100,8 +100,8 @@ function power_gain_event_damage_actor(eattacker) {
 
 function power_gain_event_killed_actor(eattacker, meansofdeath) {
   basegain = 5;
-  for(slot = 0; slot < 3; slot++) {
-    if(isDefined(self._gadgets_player[slot])) {
+  for (slot = 0; slot < 3; slot++) {
+    if(isdefined(self._gadgets_player[slot])) {
       if(meansofdeath == "MOD_MELEE_ASSASSINATE" && self ability_util::gadget_is_camo_suit_on()) {
         if(self._gadgets_player[slot].gadget_powertakedowngain > 0) {
           source = "assassinate actor";
@@ -120,7 +120,7 @@ function power_gain_event_killed_actor(eattacker, meansofdeath) {
 }
 
 function power_gain_event(slot, eattacker, val, source) {
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   powertoadd = val;
@@ -132,8 +132,8 @@ function power_gain_event(slot, eattacker, val, source) {
 
 function power_loss_event_took_damage(eattacker, einflictor, weapon, smeansofdeath, idamage) {
   baseloss = idamage;
-  for(slot = 0; slot < 3; slot++) {
-    if(isDefined(self._gadgets_player[slot])) {
+  for (slot = 0; slot < 3; slot++) {
+    if(isdefined(self._gadgets_player[slot])) {
       if(self gadgetisactive(slot)) {
         powerloss = baseloss * self._gadgets_player[slot].gadget_poweronlossondamage;
         if(powerloss > 0) {
@@ -175,9 +175,9 @@ function power_consume_timer_think(slot, weapon) {
   self endon("disconnect");
   self endon("death");
   time = gettime();
-  while(true) {
+  while (true) {
     wait(0.1);
-    if(!isDefined(self._gadgets_player[slot])) {
+    if(!isdefined(self._gadgets_player[slot])) {
       return;
     }
     if(!self gadgetisactive(slot)) {

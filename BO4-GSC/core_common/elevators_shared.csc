@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\map;
 #include scripts\core_common\struct;
+
 #namespace elevators;
 
 autoexec init() {

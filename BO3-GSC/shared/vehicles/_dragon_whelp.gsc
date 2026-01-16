@@ -22,21 +22,21 @@
 #namespace dragon;
 
 function autoexec __init__sytem__() {
-  system::register("dragon", &__init__, undefined, undefined);
+  system::register("dragon", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("dragon", &dragon_initialize);
+  vehicle::add_main_callback("dragon", & dragon_initialize);
 }
 
 function dragon_initialize() {
   self useanimtree($generic);
   self.health = self.healthdefault;
   self vehicle::friendly_fire_shield();
-  if(isDefined(self.scriptbundlesettings)) {
+  if(isdefined(self.scriptbundlesettings)) {
     self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   }
-  assert(isDefined(self.settings));
+  assert(isdefined(self.settings));
   self setneargoalnotifydist(self.radius * 1.5);
   self sethoverparams(self.radius, self.settings.defaultmovespeed * 2, self.radius);
   self setspeed(self.settings.defaultmovespeed);
@@ -49,22 +49,24 @@ function dragon_initialize() {
   self.goalheight = 512;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self.delete_on_death = 1;
-  self.overridevehicledamage = &dragon_callback_damage;
-  self.allowfriendlyfiredamageoverride = &dragon_allowfriendlyfiredamage;
+  self.overridevehicledamage = & dragon_callback_damage;
+  self.allowfriendlyfiredamageoverride = & dragon_allowfriendlyfiredamage;
   self.ignoreme = 1;
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   defaultrole();
 }
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
   if(sessionmodeiszombiesgame()) {
-    self vehicle_ai::add_state("power_up", undefined, &state_power_up_update, undefined);
-    self vehicle_ai::add_utility_connection("combat", "power_up", &should_go_for_power_up);
+    self vehicle_ai::add_state("power_up", undefined, & state_power_up_update, undefined);
+    self vehicle_ai::add_utility_connection("combat", "power_up", & should_go_for_power_up);
     self vehicle_ai::add_utility_connection("power_up", "combat");
   }
   setdvar("", 0);
@@ -74,22 +76,22 @@ function defaultrole() {
 }
 
 function private is_enemy_valid(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return false;
   }
   if(!isalive(target)) {
     return false;
   }
-  if(isDefined(self.intermission) && self.intermission) {
+  if(isdefined(self.intermission) && self.intermission) {
     return false;
   }
-  if(isDefined(target.ignoreme) && target.ignoreme) {
+  if(isdefined(target.ignoreme) && target.ignoreme) {
     return false;
   }
   if(target isnotarget()) {
     return false;
   }
-  if(isDefined(target._dragon_ignoreme) && target._dragon_ignoreme) {
+  if(isdefined(target._dragon_ignoreme) && target._dragon_ignoreme) {
     return false;
   }
   if(distancesquared(self.owner.origin, target.origin) > (self.settings.guardradius * self.settings.guardradius)) {
@@ -137,22 +139,22 @@ function private get_dragon_enemy() {
 
 function private dragon_target_selection() {
   self endon("death");
-  for(;;) {
-    if(!isDefined(self.owner)) {
+  for (;;) {
+    if(!isdefined(self.owner)) {
       wait(0.25);
       continue;
     }
-    if(isDefined(self.ignoreall) && self.ignoreall) {
+    if(isdefined(self.ignoreall) && self.ignoreall) {
       wait(0.25);
       continue;
     }
     if(getdvarint("", 0)) {
-      if(isDefined(self.dragonenemy)) {
+      if(isdefined(self.dragonenemy)) {
         line(self.origin, self.dragonenemy.origin, (1, 0, 0), 1, 0, 5);
       }
     }
     target = get_dragon_enemy();
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       self.dragonenemy = undefined;
     } else {
       self.dragonenemy = target;
@@ -168,7 +170,7 @@ function state_power_up_update(params) {
   closest = undefined;
   foreach(powerup in level.active_powerups) {
     powerup.navvolumeorigin = self getclosestpointonnavvolume(powerup.origin, 100);
-    if(!isDefined(powerup.navvolumeorigin)) {
+    if(!isdefined(powerup.navvolumeorigin)) {
       continue;
     }
     distsqr = distancesquared(powerup.origin, self.origin);
@@ -177,13 +179,13 @@ function state_power_up_update(params) {
       closest = powerup;
     }
   }
-  if(isDefined(closest) && distsqr < (2000 * 2000)) {
+  if(isdefined(closest) && distsqr < (2000 * 2000)) {
     self setvehgoalpos(closest.navvolumeorigin, 1, 1);
     if(vehicle_ai::waittill_pathresult()) {
       self vehicle_ai::waittill_pathing_done();
     }
-    if(isDefined(closest)) {
-      trace = bulletTrace(self.origin, closest.origin, 0, self);
+    if(isdefined(closest)) {
+      trace = bullettrace(self.origin, closest.origin, 0, self);
       if(trace["fraction"] == 1) {
         self setvehgoalpos(closest.origin, 1, 0);
       }
@@ -196,7 +198,7 @@ function should_go_for_power_up(from_state, to_state, connection) {
   if(level.whelp_no_power_up_pickup === 1) {
     return false;
   }
-  if(isDefined(self.dragonenemy)) {
+  if(isdefined(self.dragonenemy)) {
     return false;
   }
   if(level.active_powerups.size < 1) {
@@ -210,45 +212,45 @@ function state_combat_update(params) {
   self endon("death");
   idealdisttoowner = 300;
   self asmrequestsubstate("locomotion@movement");
-  while(!isDefined(self.owner)) {
+  while (!isdefined(self.owner)) {
     wait(0.05);
   }
   self thread attack_thread();
-  for(;;) {
+  for (;;) {
     self setspeed(self.settings.defaultmovespeed);
     self asmrequestsubstate("locomotion@movement");
-    if(isDefined(self.owner) && distance2dsquared(self.origin, self.owner.origin) < (idealdisttoowner * idealdisttoowner) && ispointinnavvolume(self.origin, "navvolume_small")) {
-      if(!isDefined(self.current_pathto_pos)) {
+    if(isdefined(self.owner) && distance2dsquared(self.origin, self.owner.origin) < (idealdisttoowner * idealdisttoowner) && ispointinnavvolume(self.origin, "navvolume_small")) {
+      if(!isdefined(self.current_pathto_pos)) {
         self.current_pathto_pos = self getclosestpointonnavvolume(self.origin, 100);
       }
       self setvehgoalpos(self.current_pathto_pos, 1, 0);
       wait(0.1);
       continue;
     }
-    if(isDefined(self.owner)) {
+    if(isdefined(self.owner)) {
       queryresult = positionquery_source_navigation(self.origin, 0, 256, 90, self.radius, self);
       sighttarget = undefined;
-      if(isDefined(self.dragonenemy)) {
-        sighttarget = self.dragonenemy getEye();
+      if(isdefined(self.dragonenemy)) {
+        sighttarget = self.dragonenemy geteye();
         positionquery_filter_sight(queryresult, sighttarget, (0, 0, 0), self, 4);
       }
-      if(isDefined(queryresult.centeronnav) && queryresult.centeronnav) {
+      if(isdefined(queryresult.centeronnav) && queryresult.centeronnav) {
         ownerorigin = self.owner.origin;
-        ownerforward = anglesToForward(self.owner.angles);
+        ownerforward = anglestoforward(self.owner.angles);
         best_point = undefined;
         best_score = -999999;
         foreach(point in queryresult.data) {
           distsqr = distance2dsquared(point.origin, ownerorigin);
           if(distsqr > (idealdisttoowner * idealdisttoowner)) {
-            if(!isDefined(point._scoredebug)) {
+            if(!isdefined(point._scoredebug)) {
               point._scoredebug = [];
             }
             point._scoredebug[""] = (sqrt(distsqr) * -1) * 2;
             point.score = point.score + ((sqrt(distsqr) * -1) * 2);
           }
-          if(isDefined(point.visibility) && point.visibility) {
+          if(isdefined(point.visibility) && point.visibility) {
             if(bullettracepassed(point.origin, sighttarget, 0, self)) {
-              if(!isDefined(point._scoredebug)) {
+              if(!isdefined(point._scoredebug)) {
                 point._scoredebug = [];
               }
               point._scoredebug[""] = 400;
@@ -259,13 +261,13 @@ function state_combat_update(params) {
           dirtoowner = vectornormalize((vectoowner[0], vectoowner[1], 0));
           if(vectordot(ownerforward, dirtoowner) > 0.34) {
             if(abs(vectoowner[2]) < 100) {
-              if(!isDefined(point._scoredebug)) {
+              if(!isdefined(point._scoredebug)) {
                 point._scoredebug = [];
               }
               point._scoredebug[""] = 300;
               point.score = point.score + 300;
             } else if(abs(vectoowner[2]) < 200) {
-              if(!isDefined(point._scoredebug)) {
+              if(!isdefined(point._scoredebug)) {
                 point._scoredebug = [];
               }
               point._scoredebug[""] = 100;
@@ -278,8 +280,8 @@ function state_combat_update(params) {
           }
         }
         self vehicle_ai::positionquery_debugscores(queryresult);
-        if(isDefined(best_point)) {
-          if(isDefined(getdvarint("")) && getdvarint("")) {
+        if(isdefined(best_point)) {
+          if(isdefined(getdvarint("")) && getdvarint("")) {
             recordline(self.origin, best_point.origin, (0.3, 1, 0));
             recordline(self.origin, self.owner.origin, (1, 0, 0.4));
           }
@@ -302,13 +304,13 @@ function state_combat_update(params) {
 function attack_thread() {
   self endon("change_state");
   self endon("death");
-  for(;;) {
+  for (;;) {
     wait(0.1);
     self vehicle_ai::evaluate_connections();
     if(!self vehicle_ai::iscooldownready("attack")) {
       continue;
     }
-    if(!isDefined(self.dragonenemy)) {
+    if(!isdefined(self.dragonenemy)) {
       continue;
     }
     self setlookatent(self.dragonenemy);
@@ -318,15 +320,15 @@ function attack_thread() {
     if(distance2dsquared(self.dragonenemy.origin, self.owner.origin) > (self.settings.guardradius * self.settings.guardradius)) {
       continue;
     }
-    eyeoffset = (self.dragonenemy getEye() - self.dragonenemy.origin) * 0.6;
-    if(!bullettracepassed(self.origin, self.dragonenemy getEye() - eyeoffset, 0, self, self.dragonenemy)) {
+    eyeoffset = (self.dragonenemy geteye() - self.dragonenemy.origin) * 0.6;
+    if(!bullettracepassed(self.origin, self.dragonenemy geteye() - eyeoffset, 0, self, self.dragonenemy)) {
       self.dragonenemy = undefined;
       continue;
     }
     aimoffset = (self.dragonenemy getvelocity() * 0.3) - eyeoffset;
     self setturrettargetent(self.dragonenemy, aimoffset);
     wait(0.2);
-    if(isDefined(self.dragonenemy)) {
+    if(isdefined(self.dragonenemy)) {
       self fireweapon(0, self.dragonenemy, (0, 0, 0), self);
       self vehicle_ai::cooldown("attack", 1);
     }
@@ -336,7 +338,7 @@ function attack_thread() {
 function go_back_on_navvolume() {
   queryresult = positionquery_source_navigation(self.origin, 0, 100, 90, self.radius, self);
   multiplier = 2;
-  while(queryresult.data.size < 1) {
+  while (queryresult.data.size < 1) {
     queryresult = positionquery_source_navigation(self.origin, 0, 100 * multiplier, 90 * multiplier, self.radius * multiplier, self);
     multiplier = multiplier + 2;
   }
@@ -350,7 +352,7 @@ function go_back_on_navvolume() {
         best_point = point;
       }
     }
-    if(isDefined(best_point)) {
+    if(isdefined(best_point)) {
       self setneargoalnotifydist(2);
       point = best_point;
       self.current_pathto_pos = point.origin;
@@ -377,14 +379,14 @@ function dragon_callback_damage(einflictor, eattacker, idamage, idflags, smeanso
 function state_death_update(params) {
   self endon("death");
   attacker = params.inflictor;
-  if(!isDefined(attacker)) {
+  if(!isdefined(attacker)) {
     attacker = params.attacker;
   }
-  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
+  if(attacker !== self && (!isdefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
     self.damage_on_death = 0;
     wait(0.05);
     attacker = params.inflictor;
-    if(!isDefined(attacker)) {
+    if(!isdefined(attacker)) {
       attacker = params.attacker;
     }
   }

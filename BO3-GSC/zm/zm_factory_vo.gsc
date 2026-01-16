@@ -14,7 +14,7 @@
 #namespace zm_factory_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_factory_vo", &__init__, &__main__, undefined);
+  system::register("zm_factory_vo", & __init__, & __main__, undefined);
 }
 
 function __init__() {}
@@ -70,7 +70,7 @@ function function_7884e6b8() {
   var_22f40782 = 0;
   level waittill("all_players_spawned");
   wait(1);
-  while(true) {
+  while (true) {
     if(level.round_number > 4) {
       level waittill("end_of_round");
       if(level.activeplayers.size > 1 && !level flag::get("flytrap")) {
@@ -127,7 +127,7 @@ function function_7884e6b8() {
 }
 
 function function_c23e3a71(var_49fefccd, n_index, b_wait_if_busy = 0, var_7e649f23 = 0, var_d1295208 = 0) {
-  assert(isDefined(var_49fefccd), "");
+  assert(isdefined(var_49fefccd), "");
   assert(n_index < var_49fefccd.size, "");
   var_3b5e4c24 = var_49fefccd[n_index];
   function_7aa5324a(var_3b5e4c24, b_wait_if_busy, var_7e649f23, var_d1295208);
@@ -135,7 +135,7 @@ function function_c23e3a71(var_49fefccd, n_index, b_wait_if_busy = 0, var_7e649f
 
 function function_7aa5324a(var_cbd11028, b_wait_if_busy = 0, n_priority = 0, var_d1295208 = 0) {
   function_218256bd(1);
-  for(i = 0; i < var_cbd11028.size; i++) {
+  for (i = 0; i < var_cbd11028.size; i++) {
     if(i == 0) {
       var_e27770b1 = 0;
     } else {
@@ -148,14 +148,14 @@ function function_7aa5324a(var_cbd11028, b_wait_if_busy = 0, n_priority = 0, var
 
 function function_218256bd(var_eca8128e) {
   foreach(player in level.activeplayers) {
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       player.dontspeak = var_eca8128e;
       player clientfield::set_to_player("isspeaking", var_eca8128e);
     }
   }
   if(var_eca8128e) {
     foreach(player in level.activeplayers) {
-      while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking)) {
+      while (isdefined(player) && (isdefined(player.isspeaking) && player.isspeaking)) {
         wait(0.1);
       }
     }
@@ -180,12 +180,12 @@ function function_7b697614(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_prio
   self endon("death");
   self endon("disconnect");
   if(!self flag::exists("in_beastmode") || !self flag::get("in_beastmode")) {
-    if(zm_audio::arenearbyspeakersactive(10000) && (!(isDefined(var_d1295208) && var_d1295208))) {
+    if(zm_audio::arenearbyspeakersactive(10000) && (!(isdefined(var_d1295208) && var_d1295208))) {
       return;
     }
-    if(isDefined(self.isspeaking) && self.isspeaking || (isDefined(level.sndvoxoverride) && level.sndvoxoverride)) {
-      if(isDefined(b_wait_if_busy) && b_wait_if_busy) {
-        while(self.isspeaking || (isDefined(level.sndvoxoverride) && level.sndvoxoverride)) {
+    if(isdefined(self.isspeaking) && self.isspeaking || (isdefined(level.sndvoxoverride) && level.sndvoxoverride)) {
+      if(isdefined(b_wait_if_busy) && b_wait_if_busy) {
+        while (self.isspeaking || (isdefined(level.sndvoxoverride) && level.sndvoxoverride)) {
           wait(0.1);
         }
         wait(0.35);
@@ -196,11 +196,11 @@ function function_7b697614(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_prio
     if(n_delay > 0) {
       wait(n_delay);
     }
-    if(isDefined(self.isspeaking) && self.isspeaking && (isDefined(self.b_wait_if_busy) && self.b_wait_if_busy)) {
-      while(self.isspeaking) {
+    if(isdefined(self.isspeaking) && self.isspeaking && (isdefined(self.b_wait_if_busy) && self.b_wait_if_busy)) {
+      while (self.isspeaking) {
         wait(0.1);
       }
-    } else if(isDefined(self.isspeaking) && self.isspeaking && (!(isDefined(self.b_wait_if_busy) && self.b_wait_if_busy)) || (isDefined(level.sndvoxoverride) && level.sndvoxoverride)) {
+    } else if(isdefined(self.isspeaking) && self.isspeaking && (!(isdefined(self.b_wait_if_busy) && self.b_wait_if_busy)) || (isdefined(level.sndvoxoverride) && level.sndvoxoverride)) {
       return;
     }
     self.isspeaking = 1;
@@ -229,7 +229,7 @@ function vo_clear() {
       break;
     }
   }
-  if(isDefined(b_in_a_e_speakers) && b_in_a_e_speakers) {
+  if(isdefined(b_in_a_e_speakers) && b_in_a_e_speakers) {
     arrayremovevalue(level.a_e_speakers, self);
   }
 }

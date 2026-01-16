@@ -36,3 +36,4 @@ damageEffectArea(owner, position, radius, height, killCamEnt) {
   owner thread maps\mp\_dogs::flash_dogs(effectArea);
   effectArea delete();
 }
+

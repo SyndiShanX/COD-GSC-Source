@@ -21,7 +21,7 @@ main() {
   self thread setMeleeAttackDist();
   level.dogRunTurnSpeed = 20;
   level.dogRunPainSpeed = 20;
-  self.a = spawnStruct();
+  self.a = SpawnStruct();
   self.a.pose = "stand";
   self.a.nextStandingHitDying = false;
   self.a.movement = "walk";
@@ -35,9 +35,8 @@ main() {
 change_anim_set(animset) {
   assert(animset == "shepherd" || animset == "zombie");
   self.animSet = animset;
-  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet])) {
+  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet]))
     self.stopAnimDistSq = anim.dogAnims[self.animSet].dogStoppingDistSq;
-  }
 }
 
 setMeleeAttackDist() {
@@ -90,7 +89,7 @@ calcAnimLengthVariables(animset) {
 }
 
 initZombieDogAnimations() {
-  anim.dogAnims["zombie"] = spawnStruct();
+  anim.dogAnims["zombie"] = spawnstruct();
   anim.dogAnims["zombie"].lookKnob[2] = % zombie_dog_look_2;
   anim.dogAnims["zombie"].lookKnob[4] = % zombie_dog_look_4;
   anim.dogAnims["zombie"].lookKnob[6] = % zombie_dog_look_6;

@@ -14,9 +14,9 @@ main() {
 
 monitor_potus_health() {
   while(true) {
-    if(!isDefined(level.convoy.vh_potus) || level.convoy.vh_potus.armor <= 0) {
+    if(!isDefined(level.convoy.vh_potus) || level.convoy.vh_potus.armor <= 0)
       str_text = "DEAD";
-    } else {
+    else {
       n_health = level.convoy.vh_potus.armor;
       n_health_max = level.convoy.vh_potus.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -29,9 +29,9 @@ monitor_potus_health() {
 
 monitor_g20_1_health() {
   while(true) {
-    if(!isDefined(level.convoy.vh_g20_1) || level.convoy.vh_g20_1.armor <= 0) {
+    if(!isDefined(level.convoy.vh_g20_1) || level.convoy.vh_g20_1.armor <= 0)
       str_text = "DEAD";
-    } else {
+    else {
       n_health = level.convoy.vh_g20_1.armor;
       n_health_max = level.convoy.vh_g20_1.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -44,9 +44,9 @@ monitor_g20_1_health() {
 
 monitor_g20_2_health() {
   while(true) {
-    if(!isDefined(level.convoy.vh_g20_2) || level.convoy.vh_g20_2.armor <= 0) {
+    if(!isDefined(level.convoy.vh_g20_2) || level.convoy.vh_g20_2.armor <= 0)
       str_text = "DEAD";
-    } else {
+    else {
       n_health = level.convoy.vh_g20_2.armor;
       n_health_max = level.convoy.vh_g20_2.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -59,11 +59,10 @@ monitor_g20_2_health() {
 
 monitor_lead_vehicle() {
   while(true) {
-    if(!isDefined(level.convoy.leader)) {
+    if(!isDefined(level.convoy.leader))
       str_text = "UNDEFINED";
-    } else {
+    else
       str_text = level.convoy.leader.targetname;
-    }
 
     self debug_hud_elem_set_text("Leader: " + str_text);
     wait 0.5;
@@ -74,9 +73,9 @@ monitor_f35_health() {
   flag_wait("player_flying");
 
   while(true) {
-    if(!isDefined(level.f35) || level.f35.health <= 0) {
+    if(!isDefined(level.f35) || level.f35.health <= 0)
       str_text = "DEAD";
-    } else {
+    else {
       n_health = level.f35.health_regen.health;
       n_health_max = level.f35.health_regen.health_max;
       str_text = n_health + " / " + n_health_max;
@@ -104,9 +103,8 @@ monitor_vehicle_counts() {
 }
 
 monitor_distance_to_convoy() {
-  while(!isDefined(level.convoy.distance_to_convoy)) {
+  while(!isDefined(level.convoy.distance_to_convoy))
     wait 0.5;
-  }
 
   while(true) {
     debug_hud_elem_set_text("Distance to convoy: " + level.convoy.distance_to_convoy);
@@ -115,9 +113,8 @@ monitor_distance_to_convoy() {
 }
 
 monitor_distance_to_failure() {
-  while(!isDefined(level.convoy.distance_max)) {
+  while(!isDefined(level.convoy.distance_max))
     wait 0.5;
-  }
 
   while(true) {
     n_warning_distance = level.convoy.distance_warning;

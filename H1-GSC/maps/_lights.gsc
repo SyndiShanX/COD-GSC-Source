@@ -5,11 +5,11 @@
 ********************************/
 
 init2() {
-  var_0 = getEntArray("generic_flickering", "targetname");
-  var_1 = getEntArray("generic_pulsing", "targetname");
-  var_2 = getEntArray("generic_double_strobe", "targetname");
-  var_3 = getEntArray("burning_trash_fire", "targetname");
-  var_4 = getEntArray("scripted_light", "targetname");
+  var_0 = getentarray("generic_flickering", "targetname");
+  var_1 = getentarray("generic_pulsing", "targetname");
+  var_2 = getentarray("generic_double_strobe", "targetname");
+  var_3 = getentarray("burning_trash_fire", "targetname");
+  var_4 = getentarray("scripted_light", "targetname");
   common_scripts\utility::array_thread(var_0, ::generic_flickering);
   common_scripts\utility::array_thread(var_1, ::generic_pulsing);
   common_scripts\utility::array_thread(var_2, ::generic_double_strobe);
@@ -27,7 +27,7 @@ flickerlight(var_0, var_1, var_2, var_3) {
   var_5 = 0.0;
   maps\_utility::ent_flag_init("stop_flicker");
 
-  for(;;) {
+  for (;;) {
     if(maps\_utility::ent_flag("stop_flicker")) {
       wait 0.05;
       continue;
@@ -36,17 +36,15 @@ flickerlight(var_0, var_1, var_2, var_3) {
     var_6 = var_4;
     var_4 = var_0 + (var_1 - var_0) * randomfloat(1.0);
 
-    if(var_2 != var_3) {
+    if(var_2 != var_3)
       var_5 = var_5 + randomfloatrange(var_2, var_3);
-    } else {
+    else
       var_5 = var_5 + var_2;
-    }
 
-    if(var_5 == 0) {
+    if(var_5 == 0)
       var_5 = var_5 + 0.0000001;
-    }
 
-    for(var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::ent_flag("stop_flicker"); var_5 = var_5 - 0.05) {
+    for (var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::ent_flag("stop_flicker"); var_5 = var_5 - 0.05) {
       self setlightcolor(var_4 + var_7 * var_5);
       wait 0.05;
     }
@@ -54,7 +52,7 @@ flickerlight(var_0, var_1, var_2, var_3) {
 }
 
 kill_flicker_when_damaged(var_0) {
-  var_1 = getEntArray(var_0, "script_noteworthy");
+  var_1 = getentarray(var_0, "script_noteworthy");
   var_2 = undefined;
   var_3 = 100000000.0;
 
@@ -67,7 +65,7 @@ kill_flicker_when_damaged(var_0) {
     }
   }
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2)) {
     var_2 waittill("damage", var_8, var_9, var_10, var_11, var_12, var_13, var_14);
     self notify("kill_flicker");
     wait 0.05;
@@ -89,10 +87,10 @@ generic_pulsing() {
   var_5 = (var_0 - var_1) / (var_3 / 0.05);
   var_6 = (var_0 - var_1) / (var_4 / 0.05);
 
-  for(;;) {
+  for (;;) {
     var_7 = 0;
 
-    while(var_7 < var_4) {
+    while (var_7 < var_4) {
       var_2 = var_2 - var_6;
       var_2 = clamp(var_2, 0, 100);
       self setlightintensity(var_2);
@@ -103,7 +101,7 @@ generic_pulsing() {
     wait 1;
     var_7 = 0;
 
-    while(var_7 < var_3) {
+    while (var_7 < var_3) {
       var_2 = var_2 + var_5;
       var_2 = clamp(var_2, 0, 100);
       self setlightintensity(var_2);
@@ -129,10 +127,10 @@ generic_double_strobe() {
   var_5 = 0;
   var_6 = [];
 
-  if(isDefined(self.script_noteworthy)) {
-    var_7 = getEntArray(self.script_noteworthy, "targetname");
+  if(isdefined(self.script_noteworthy)) {
+    var_7 = getentarray(self.script_noteworthy, "targetname");
 
-    for(var_8 = 0; var_8 < var_7.size; var_8++) {
+    for (var_8 = 0; var_8 < var_7.size; var_8++) {
       if(is_light_entity(var_7[var_8])) {
         var_5 = 1;
         var_6[var_6.size] = var_7[var_8];
@@ -146,7 +144,7 @@ generic_double_strobe() {
     }
   }
 
-  for(;;) {
+  for (;;) {
     self setlightintensity(var_1);
 
     if(var_2) {
@@ -183,13 +181,12 @@ generic_double_strobe() {
 }
 
 getclosests_flickering_model(var_0) {
-  var_1 = getEntArray("light_flicker_model", "targetname");
+  var_1 = getentarray("light_flicker_model", "targetname");
   var_2 = [];
   var_3 = common_scripts\utility::getclosest(var_0, var_1);
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     var_2[0] = var_3;
-  }
 
   return var_2;
 }
@@ -210,26 +207,24 @@ generic_flickering() {
   self.linked_prefab_ents = undefined;
   self.linked_things = [];
 
-  if(isDefined(self.script_linkto)) {
+  if(isdefined(self.script_linkto)) {
     self.linked_prefab_ents = common_scripts\utility::get_linked_ents();
 
     foreach(var_1 in self.linked_prefab_ents) {
-      if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "on") {
-        if(!isDefined(self.lit_models)) {
+      if(isdefined(var_1.script_noteworthy) && var_1.script_noteworthy == "on") {
+        if(!isdefined(self.lit_models))
           self.lit_models[0] = var_1;
-        } else {
+        else
           self.lit_models[self.lit_models.size] = var_1;
-        }
 
         continue;
       }
 
-      if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "off") {
-        if(!isDefined(self.unlit_models)) {
+      if(isdefined(var_1.script_noteworthy) && var_1.script_noteworthy == "off") {
+        if(!isdefined(self.unlit_models))
           self.unlit_models[0] = var_1;
-        } else {
+        else
           self.unlit_models[self.unlit_models.size] = var_1;
-        }
 
         self.unlit_model = var_1;
         continue;
@@ -244,15 +239,13 @@ generic_flickering() {
     self.linked_models = 1;
   }
 
-  if(isDefined(self.script_noteworthy)) {
-    self.linked_things = getEntArray(self.script_noteworthy, "targetname");
-  }
+  if(isdefined(self.script_noteworthy))
+    self.linked_things = getentarray(self.script_noteworthy, "targetname");
 
-  if(!self.linked_things.size && !isDefined(self.linked_prefab_ents)) {
+  if(!self.linked_things.size && !isdefined(self.linked_prefab_ents))
     self.linked_things = getclosests_flickering_model(self.origin);
-  }
 
-  for(var_3 = 0; var_3 < self.linked_things.size; var_3++) {
+  for (var_3 = 0; var_3 < self.linked_things.size; var_3++) {
     if(is_light_entity(self.linked_things[var_3])) {
       self.linked_lights = 1;
       self.linked_light_ents[self.linked_light_ents.size] = self.linked_things[var_3];
@@ -261,33 +254,33 @@ generic_flickering() {
     if(self.linked_things[var_3].classname == "script_model") {
       var_4 = self.linked_things[var_3];
 
-      if(!isDefined(self.lit_models)) {
+      if(!isdefined(self.lit_models))
         self.lit_models[0] = var_4;
-      } else {
+      else
         self.lit_models[self.lit_models.size] = var_4;
-      }
 
-      if(!isDefined(self.unlit_models)) {
+      if(!isdefined(self.unlit_models))
         self.unlit_models[0] = getent(var_4.target, "targetname");
-      } else {
+      else
         self.unlit_models[self.unlit_models.size] = getent(var_4.target, "targetname");
-      }
 
       self.linked_models = 1;
     }
   }
 
-  if(isDefined(self.lit_models)) {
+  if(isdefined(self.lit_models)) {
     foreach(var_4 in self.lit_models) {
-      if(isDefined(var_4) && isDefined(var_4.script_fxid)) {
+      if(isdefined(var_4) && isdefined(var_4.script_fxid)) {
         var_4.effect = common_scripts\utility::createoneshoteffect(var_4.script_fxid);
         var_6 = (0, 0, 0);
         var_7 = (0, 0, 0);
 
-        if(isDefined(var_4.script_parameters)) {
+        if(isdefined(var_4.script_parameters)) {
           var_8 = strtok(var_4.script_parameters, ", ");
 
-          if(var_8.size < 3) {} else if(var_8.size == 6) {
+          if(var_8.size < 3) {
+
+          } else if(var_8.size == 6) {
             var_9 = float(var_8[0]);
             var_10 = float(var_8[1]);
             var_11 = float(var_8[2]);
@@ -317,12 +310,12 @@ generic_flickering() {
 generic_flicker_msg_watcher() {
   maps\_utility::ent_flag_init("flicker_on");
 
-  if(isDefined(self.script_light_startnotify) && self.script_light_startnotify != "nil") {
-    for(;;) {
+  if(isdefined(self.script_light_startnotify) && self.script_light_startnotify != "nil") {
+    for (;;) {
       level waittill(self.script_light_startnotify);
       maps\_utility::ent_flag_set("flicker_on");
 
-      if(isDefined(self.script_light_stopnotify) && self.script_light_stopnotify != "nil") {
+      if(isdefined(self.script_light_stopnotify) && self.script_light_stopnotify != "nil") {
         level waittill(self.script_light_stopnotify);
         maps\_utility::ent_flag_clear("flicker_on");
       }
@@ -336,55 +329,49 @@ generic_flicker_pause() {
 
   if(!maps\_utility::ent_flag("flicker_on")) {
     if(self.linked_models) {
-      if(isDefined(self.lit_models)) {
+      if(isdefined(self.lit_models)) {
         foreach(var_2 in self.lit_models) {
           var_2 hide();
 
-          if(isDefined(var_2.effect)) {
+          if(isdefined(var_2.effect))
             var_2.effect common_scripts\utility::pauseeffect();
-          }
         }
       }
 
-      if(isDefined(self.unlit_models)) {
-        foreach(var_5 in self.unlit_models) {
-          var_5 show();
-        }
+      if(isdefined(self.unlit_models)) {
+        foreach(var_5 in self.unlit_models)
+        var_5 show();
       }
     }
 
     self setlightintensity(0);
 
     if(self.linked_lights) {
-      for(var_7 = 0; var_7 < self.linked_light_ents.size; var_7++) {
+      for (var_7 = 0; var_7 < self.linked_light_ents.size; var_7++)
         self.linked_light_ents[var_7] setlightintensity(0);
-      }
     }
 
     maps\_utility::ent_flag_wait("flicker_on");
     self setlightintensity(var_0);
 
     if(self.linked_lights) {
-      for(var_7 = 0; var_7 < self.linked_light_ents.size; var_7++) {
+      for (var_7 = 0; var_7 < self.linked_light_ents.size; var_7++)
         self.linked_light_ents[var_7] setlightintensity(var_0);
-      }
     }
 
     if(self.linked_models) {
-      if(isDefined(self.lit_models)) {
+      if(isdefined(self.lit_models)) {
         foreach(var_2 in self.lit_models) {
           var_2 show();
 
-          if(isDefined(var_2.effect)) {
+          if(isdefined(var_2.effect))
             var_2.effect maps\_utility::restarteffect();
-          }
         }
       }
 
-      if(isDefined(self.unlit_models)) {
-        foreach(var_5 in self.unlit_models) {
-          var_5 hide();
-        }
+      if(isdefined(self.unlit_models)) {
+        foreach(var_5 in self.unlit_models)
+        var_5 hide();
       }
     }
   }
@@ -400,10 +387,10 @@ generic_flicker() {
   var_4 = var_2;
   var_5 = 0;
 
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     generic_flicker_pause();
 
-    for(var_5 = randomintrange(1, 10); var_5; var_5--) {
+    for (var_5 = randomintrange(1, 10); var_5; var_5--) {
       generic_flicker_pause();
       wait(randomfloatrange(0.05, 0.1));
 
@@ -414,32 +401,29 @@ generic_flicker() {
           foreach(var_7 in self.lit_models) {
             var_7 hide();
 
-            if(isDefined(var_7.effect)) {
+            if(isdefined(var_7.effect))
               var_7.effect common_scripts\utility::pauseeffect();
-            }
           }
         }
 
-        if(isDefined(self.unlit_models)) {
-          foreach(var_10 in self.unlit_models) {
-            var_10 show();
-          }
+        if(isdefined(self.unlit_models)) {
+          foreach(var_10 in self.unlit_models)
+          var_10 show();
         }
       } else {
         var_4 = var_2;
 
         if(self.linked_models) {
-          if(isDefined(self.lit_models)) {
+          if(isdefined(self.lit_models)) {
             foreach(var_7 in self.lit_models) {
               var_7 show();
 
-              if(isDefined(var_7.effect)) {
+              if(isdefined(var_7.effect))
                 var_7.effect maps\_utility::restarteffect();
-              }
             }
           }
 
-          if(isDefined(self.unlit_models)) {
+          if(isdefined(self.unlit_models)) {
             foreach(var_10 in self.unlit_models) {
               var_10 hide();
               soundscripts\_audio::deprecated_aud_send_msg("light_flicker_on", var_10);
@@ -451,9 +435,8 @@ generic_flicker() {
       self setlightintensity(var_4);
 
       if(self.linked_lights) {
-        for(var_16 = 0; var_16 < self.linked_light_ents.size; var_16++) {
+        for (var_16 = 0; var_16 < self.linked_light_ents.size; var_16++)
           self.linked_light_ents[var_16] setlightintensity(var_4);
-        }
       }
     }
 
@@ -461,26 +444,23 @@ generic_flicker() {
     self setlightintensity(var_2);
 
     if(self.linked_lights) {
-      for(var_16 = 0; var_16 < self.linked_light_ents.size; var_16++) {
+      for (var_16 = 0; var_16 < self.linked_light_ents.size; var_16++)
         self.linked_light_ents[var_16] setlightintensity(var_2);
-      }
     }
 
     if(self.linked_models) {
-      if(isDefined(self.lit_models)) {
+      if(isdefined(self.lit_models)) {
         foreach(var_7 in self.lit_models) {
           var_7 show();
 
-          if(isDefined(var_7.effect)) {
+          if(isdefined(var_7.effect))
             var_7.effect maps\_utility::restarteffect();
-          }
         }
       }
 
-      if(isDefined(self.unlit_models)) {
-        foreach(var_10 in self.unlit_models) {
-          var_10 hide();
-        }
+      if(isdefined(self.unlit_models)) {
+        foreach(var_10 in self.unlit_models)
+        var_10 hide();
       }
     }
 
@@ -489,9 +469,8 @@ generic_flicker() {
 }
 
 generic_spot() {
-  for(;;) {
+  for (;;)
     waitframe();
-  }
 }
 
 flickerlightintensity(var_0, var_1) {
@@ -500,15 +479,14 @@ flickerlightintensity(var_0, var_1) {
   var_4 = var_2;
   var_5 = 0;
 
-  for(;;) {
-    for(var_5 = randomintrange(1, 10); var_5; var_5--) {
+  for (;;) {
+    for (var_5 = randomintrange(1, 10); var_5; var_5--) {
       wait(randomfloatrange(0.05, 0.1));
 
-      if(var_4 > 0.2) {
+      if(var_4 > 0.2)
         var_4 = randomfloatrange(0, 0.3);
-      } else {
+      else
         var_4 = var_2;
-      }
 
       self setlightintensity(var_4);
     }
@@ -527,12 +505,12 @@ burning_trash_fire() {
   var_0 = self getlightintensity();
   var_1 = var_0;
 
-  for(;;) {
+  for (;;) {
     var_2 = randomfloatrange(var_0 * 0.7, var_0 * 1.2);
     var_3 = randomfloatrange(0.3, 0.6);
     var_3 = var_3 * 20;
 
-    for(var_4 = 0; var_4 < var_3; var_4++) {
+    for (var_4 = 0; var_4 < var_3; var_4++) {
       var_5 = var_2 * (var_4 / var_3) + var_1 * ((var_3 - var_4) / var_3);
       self setlightintensity(var_5);
       wait 0.05;
@@ -546,32 +524,28 @@ strobelight(var_0, var_1, var_2, var_3) {
   var_4 = 360 / var_2;
   var_5 = 0;
 
-  for(;;) {
+  for (;;) {
     var_6 = sin(var_5 * var_4) * 0.5 + 0.5;
     self setlightintensity(var_0 + (var_1 - var_0) * var_6);
     wait 0.05;
     var_5 = var_5 + 0.05;
 
-    if(var_5 > var_2) {
+    if(var_5 > var_2)
       var_5 = var_5 - var_2;
-    }
 
-    if(isDefined(var_3)) {
-      if(common_scripts\utility::flag(var_3)) {
+    if(isdefined(var_3)) {
+      if(common_scripts\utility::flag(var_3))
         return;
-      }
     }
   }
 }
 
 changelightcolorto(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 0;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = 0;
-  }
 
   thread changelightcolortoworkerthread(var_0, var_1, var_2, var_3);
 }
@@ -582,14 +556,14 @@ changelightcolortoworkerthread(var_0, var_1, var_2, var_3) {
   var_6 = 0;
 
   if(var_6 < var_2) {
-    for(var_7 = var_5 / var_2; var_6 < var_2; var_6 = var_6 + 0.05) {
+    for (var_7 = var_5 / var_2; var_6 < var_2; var_6 = var_6 + 0.05) {
       var_8 = var_7 * var_6 * var_6;
       self setlightcolor(vectorlerp(var_4, var_0, var_8));
       wait 0.05;
     }
   }
 
-  while(var_6 < var_1 - var_3) {
+  while (var_6 < var_1 - var_3) {
     var_8 = var_5 * (2 * var_6 - var_2);
     self setlightcolor(vectorlerp(var_4, var_0, var_8));
     wait 0.05;
@@ -599,7 +573,7 @@ changelightcolortoworkerthread(var_0, var_1, var_2, var_3) {
   var_6 = var_1 - var_6;
 
   if(var_6 > 0) {
-    for(var_7 = var_5 / var_3; var_6 > 0; var_6 = var_6 - 0.05) {
+    for (var_7 = var_5 / var_3; var_6 > 0; var_6 = var_6 - 0.05) {
       var_8 = 1 - var_7 * var_6 * var_6;
       self setlightcolor(vectorlerp(var_4, var_0, var_8));
       wait 0.05;
@@ -619,12 +593,12 @@ tv_changes_intensity() {
   var_0 = self getlightintensity();
   var_1 = var_0;
 
-  for(;;) {
+  for (;;) {
     var_2 = randomfloatrange(var_0 * 0.7, var_0 * 1.2);
     var_3 = randomfloatrange(0.3, 1.2);
     var_3 = var_3 * 20;
 
-    for(var_4 = 0; var_4 < var_3; var_4++) {
+    for (var_4 = 0; var_4 < var_3; var_4++) {
       var_5 = var_2 * (var_4 / var_3) + var_1 * ((var_3 - var_4) / var_3);
       self setlightintensity(var_5);
       wait 0.05;
@@ -641,13 +615,13 @@ tv_changes_color() {
   var_2 = [];
   var_3 = [];
 
-  for(var_4 = 0; var_4 < 3; var_4++) {
+  for (var_4 = 0; var_4 < 3; var_4++) {
     var_2[var_4] = 0;
     var_3[var_4] = 0;
   }
 
-  for(;;) {
-    for(var_4 = 0; var_4 < var_2.size; var_4++) {
+  for (;;) {
+    for (var_4 = 0; var_4 < var_2.size; var_4++) {
       var_3[var_4] = var_2[var_4];
       var_2[var_4] = randomfloat(var_0) + var_1;
     }
@@ -655,12 +629,11 @@ tv_changes_color() {
     var_5 = randomfloatrange(0.3, 1.2);
     var_5 = var_5 * 20;
 
-    for(var_4 = 0; var_4 < var_5; var_4++) {
+    for (var_4 = 0; var_4 < var_5; var_4++) {
       var_6 = [];
 
-      for(var_7 = 0; var_7 < var_2.size; var_7++) {
+      for (var_7 = 0; var_7 < var_2.size; var_7++)
         var_6[var_7] = var_2[var_7] * (var_4 / var_5) + var_3[var_7] * ((var_5 - var_4) / var_5);
-      }
 
       self setlightcolor((var_6[0], var_6[1], var_6[2]));
       wait 0.05;
@@ -671,17 +644,15 @@ tv_changes_color() {
 sun_shadow_trigger(var_0) {
   var_1 = 1;
 
-  if(isDefined(var_0.script_duration)) {
+  if(isdefined(var_0.script_duration))
     var_1 = var_0.script_duration;
-  }
 
-  for(;;) {
+  for (;;) {
     var_0 waittill("trigger", var_2);
     var_0 set_sun_shadow_params(var_1);
 
-    while(var_2 istouching(var_0)) {
+    while (var_2 istouching(var_0))
       wait 0.25;
-    }
   }
 }
 
@@ -692,27 +663,22 @@ set_sun_shadow_params(var_0) {
   var_4 = getdvarfloat("sm_sunsamplesizenear", 0.25);
   var_5 = getdvarfloat("sm_qualityspotshadow", 1.0);
 
-  if(isDefined(self.script_sunenable)) {
+  if(isdefined(self.script_sunenable))
     var_1 = self.script_sunenable;
-  }
 
-  if(isDefined(self.script_sunshadowscale)) {
+  if(isdefined(self.script_sunshadowscale))
     var_2 = self.script_sunshadowscale;
-  }
 
-  if(isDefined(self.script_spotlimit)) {
+  if(isdefined(self.script_spotlimit))
     var_3 = self.script_spotlimit;
-  }
 
-  if(isDefined(self.script_sunsamplesizenear)) {
+  if(isdefined(self.script_sunsamplesizenear))
     var_4 = self.script_sunsamplesizenear;
-  }
 
   var_4 = min(max(0.016, var_4), 32);
 
-  if(isDefined(self.script_qualityspotshadow)) {
+  if(isdefined(self.script_qualityspotshadow))
     var_5 = self.script_qualityspotshadow;
-  }
 
   var_6 = getdvarint("sm_sunenable", 1);
   var_7 = getdvarfloat("sm_sunshadowscale", 1.0);
@@ -740,7 +706,7 @@ lerp_sunsamplesizenear_overtime(var_0, var_1) {
     var_5 = var_3 / var_4;
     var_6 = var_2;
 
-    for(var_7 = 0; var_7 < var_4; var_7++) {
+    for (var_7 = 0; var_7 < var_4; var_7++) {
       var_6 = var_6 + var_5;
       setsaveddvar("sm_sunSampleSizeNear", var_6);
       wait 0.05;
@@ -760,8 +726,8 @@ init_linked_ents() {
   self.unlit_models = [];
   self.linked_lights = [];
 
-  if(isDefined(self.target)) {
-    var_0 = getEntArray(self.target, "targetname");
+  if(isdefined(self.target)) {
+    var_0 = getentarray(self.target, "targetname");
 
     if(var_0.size == 0) {
       return;
@@ -775,7 +741,7 @@ init_linked_ents() {
 
       var_3 = 1;
 
-      if(isDefined(var_2.script_noteworthy)) {
+      if(isdefined(var_2.script_noteworthy)) {
         if(var_2.script_noteworthy == "on") {
           var_3 = 0;
           init_lit_model(var_2);
@@ -787,17 +753,15 @@ init_linked_ents() {
 
       if(var_3) {
         init_lit_model(var_2);
-        var_4 = getEntArray(var_2.target, "targetname");
+        var_4 = getentarray(var_2.target, "targetname");
 
-        foreach(var_6 in var_4) {
-          self.unlit_models[self.unlit_models.size] = var_6;
-        }
+        foreach(var_6 in var_4)
+        self.unlit_models[self.unlit_models.size] = var_6;
       }
     }
 
-    foreach(var_2 in self.lit_models) {
-      var_2.visible = 1;
-    }
+    foreach(var_2 in self.lit_models)
+    var_2.visible = 1;
 
     foreach(var_2 in self.unlit_models) {
       var_2.visible = 0;
@@ -812,25 +776,24 @@ init_lit_model(var_0) {
   var_2 = undefined;
   var_3 = undefined;
 
-  if(isDefined(var_0.script_fxid)) {
+  if(isdefined(var_0.script_fxid)) {
     var_1 = self.script_fxid;
     var_2 = var_0.origin;
     var_3 = var_0.angles;
-  } else if(isDefined(var_0.target)) {
+  } else if(isdefined(var_0.target)) {
     var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
 
-    if(isDefined(var_4) && isDefined(var_4.script_fxid)) {
+    if(isdefined(var_4) && isdefined(var_4.script_fxid)) {
       var_1 = var_4.script_fxid;
       var_2 = var_4.origin;
       var_3 = (0, 0, 0);
 
-      if(isDefined(var_4.angles)) {
+      if(isdefined(var_4.angles))
         var_3 = var_4.angles;
-      }
     }
   }
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1)) {
     var_0.effect = common_scripts\utility::createoneshoteffect(var_1);
     var_0.effect.v["origin"] = var_2;
     var_0.effect.v["angles"] = var_3;
@@ -841,7 +804,7 @@ pulse_think() {
   self endon("stop_scripted_light");
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     maps\_utility::script_wait();
     var_0 = self.script_intensity_min;
     var_1 = self.script_intensity_min + (self.script_intensity_max - self.script_intensity_min) * 0.4;
@@ -849,7 +812,7 @@ pulse_think() {
     var_3 = self.script_intensity_max;
     var_4 = randomintrange(self.script_count_min, self.script_count_max);
 
-    for(var_5 = 0; var_5 < var_4; var_5++) {
+    for (var_5 = 0; var_5 < var_4; var_5++) {
       var_6 = randomfloatrange(var_0, var_1);
       lerp_intensity(var_6, get_delay());
       maps\_utility::script_delay();
@@ -866,7 +829,7 @@ lerp_intensity(var_0, var_1) {
   var_3 = self getlightintensity();
   var_4 = (var_0 - var_3) / var_2;
 
-  for(var_5 = 0; var_5 < var_2; var_5++) {
+  for (var_5 = 0; var_5 < var_2; var_5++) {
     thread handle_linked_ents(var_0);
     self setlightintensity(var_3 + var_5 * var_4);
     wait 0.05;
@@ -874,9 +837,8 @@ lerp_intensity(var_0, var_1) {
 
   var_6[0] = self;
 
-  if(isDefined(self.linked_lights)) {
+  if(isdefined(self.linked_lights))
     var_6 = common_scripts\utility::array_combine(var_6, self.linked_lights);
-  }
 
   foreach(var_8 in var_6) {
     var_8 thread handle_linked_ents(var_0);
@@ -892,9 +854,8 @@ handle_linked_ents(var_0) {
       var_3.visible = var_1;
       var_3 show();
 
-      if(isDefined(var_3.effect)) {
+      if(isdefined(var_3.effect))
         var_3.effect thread maps\_utility::restarteffect();
-      }
 
       continue;
     }
@@ -903,9 +864,8 @@ handle_linked_ents(var_0) {
       var_3.visible = var_1;
       var_3 hide();
 
-      if(isDefined(var_3.effect)) {
+      if(isdefined(var_3.effect))
         var_3.effect thread common_scripts\utility::pauseeffect();
-      }
     }
   }
 
@@ -965,53 +925,43 @@ def_fire() {
 }
 
 set_threshold(var_0) {
-  if(!isDefined(self.script_threshold)) {
+  if(!isdefined(self.script_threshold))
     self.script_threshold = var_0;
-  }
 
   foreach(var_2 in self.linked_lights) {
-    if(!isDefined(var_2.script_threshold)) {
+    if(!isdefined(var_2.script_threshold))
       var_2.script_threshold = self.script_threshold;
-    }
   }
 }
 
 set_delays(var_0, var_1) {
-  if(!isDefined(self.script_delay_min)) {
+  if(!isdefined(self.script_delay_min))
     self.script_delay_min = var_0;
-  }
 
-  if(!isDefined(self.script_delay_max)) {
+  if(!isdefined(self.script_delay_max))
     self.script_delay_max = var_1;
-  }
 }
 
 set_waits(var_0, var_1) {
-  if(!isDefined(self.script_wait_min)) {
+  if(!isdefined(self.script_wait_min))
     self.script_wait_min = var_0;
-  }
 
-  if(!isDefined(self.script_wait_max)) {
+  if(!isdefined(self.script_wait_max))
     self.script_wait_max = var_1;
-  }
 }
 
 set_counts(var_0, var_1) {
-  if(!isDefined(self.script_count_min)) {
+  if(!isdefined(self.script_count_min))
     self.script_count_min = var_0;
-  }
 
-  if(!isDefined(self.script_count_max)) {
+  if(!isdefined(self.script_count_max))
     self.script_count_max = var_1;
-  }
 }
 
 set_intensities(var_0, var_1) {
-  if(!isDefined(self.script_intensity_min)) {
+  if(!isdefined(self.script_intensity_min))
     self.script_intensity_min = var_0;
-  }
 
-  if(!isDefined(self.script_intensity_max)) {
+  if(!isdefined(self.script_intensity_max))
     self.script_intensity_max = var_1;
-  }
 }

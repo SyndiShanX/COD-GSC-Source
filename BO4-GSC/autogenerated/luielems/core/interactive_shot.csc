@@ -4,20 +4,22 @@
 ************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace interactive_shot;
 
 class cinteractive_shot: cluielem {
+
   function set_text(localclientnum, value) {
     set_data(localclientnum, "text", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "interactive_shot");
+    cluielem::open(localclientnum, #"interactive_shot");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "text", # "");
+    set_data(localclientnum, "text", #"");
   }
 
   function register_clientside(uid) {

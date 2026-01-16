@@ -27,7 +27,7 @@ function function_7c5410c4() {
   self endon("hash_acd89108");
   self waittill("hash_7c5410c4");
   foreach(player in namespace_831a4a7c::function_5eb6e4d1()) {
-    if(isDefined(player.doa.timerhud)) {
+    if(isdefined(player.doa.timerhud)) {
       player closeluimenu(player.doa.timerhud);
       player.doa.timerhud = undefined;
     }
@@ -42,8 +42,8 @@ function function_92c929ab(val) {
 
 function function_676edeb7() {
   self endon("disconnect");
-  if(isDefined(self.doa)) {
-    if(isDefined(self.doa.respawning) && self.doa.respawning) {
+  if(isdefined(self.doa)) {
+    if(isdefined(self.doa.respawning) && self.doa.respawning) {
       var_132c0655 = math::clamp(self.var_9ea856f6 / 60, 0, 1);
       var_7d01b30f = 0;
       var_f63556d9 = 0;
@@ -68,7 +68,7 @@ function function_676edeb7() {
 }
 
 function function_93ccc5da() {
-  if(!isDefined(self) || !isDefined(self.doa)) {
+  if(!isdefined(self) || !isdefined(self.doa)) {
     return 0;
   }
   return self.doa.score + (self.doa.var_db3637c0 * (int((int(4000000) * 25) - 1)));
@@ -78,7 +78,7 @@ function function_80eb303(points, var_c979daec = 0) {
   if(!level flag::get("doa_game_is_running")) {
     return;
   }
-  if(!(isDefined(var_c979daec) && var_c979daec)) {
+  if(!(isdefined(var_c979daec) && var_c979daec)) {
     multiplier = self.doa.multiplier + self.doa.var_a3f61a60;
     max = level.doa.rules.max_multiplier;
     if(self.doa.fate == 11) {
@@ -125,15 +125,15 @@ function function_126dc996(multiplier) {
   self.doa.multiplier = doa_utility::clamp(multiplier, 1, max);
   self.doa.var_5d2140f2 = level.doa.rules.var_a9114441;
   if(self.doa.multiplier > 1) {
-    for(reductions = self.doa.multiplier - 1; reductions; reductions--) {
+    for (reductions = self.doa.multiplier - 1; reductions; reductions--) {
       self.doa.var_5d2140f2 = doa_utility::clamp(int((self.doa.var_5d2140f2 * 0.65) + 0.69), 1, level.doa.rules.var_a9114441);
     }
   }
 }
 
 function function_850bb47e(increment, forcex) {
-  if(!isDefined(forcex)) {
-    if(!isDefined(increment)) {
+  if(!isdefined(forcex)) {
+    if(!isdefined(increment)) {
       self.doa.var_d55e6679 = 0;
       self.doa.multiplier = 1;
       if(self.doa.fate == 2 || self.doa.fate == 11) {

@@ -8,9 +8,9 @@ anim_get_dvar_int(dvar, def) {
 }
 
 anim_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "") {
+  if(getdvar(dvar) != "")
     return getdvarfloat(dvar);
-  } else {
+  else {
     setdvar(dvar, def);
     return def;
   }
@@ -18,29 +18,27 @@ anim_get_dvar(dvar, def) {
 
 set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
-    if(isDefined(val1)) {
+    if(isDefined(val1))
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + getTime());
-    } else {
+    else
       println("DOG:Setting orient mode: " + mode + " " + getTime());
-    }
   }
-  if(isDefined(val1)) {
+  if(isDefined(val1))
     self OrientMode(mode, val1);
-  } else {
+  else
     self OrientMode(mode);
-  }
 }
 
 debug_anim_print(text) {
-  if(level.dog_debug_anims) {
+
+  if(level.dog_debug_anims)
     println(text + " " + getTime());
-  }
-  if(level.dog_debug_anims_ent == self getentnum()) {
+  if(level.dog_debug_anims_ent == self getentnum())
     println(text + " " + getTime());
-  }
 }
 
 debug_turn_print(text, line) {
+
   if(level.dog_debug_turns == self getentnum()) {
     duration = 200;
     currentYawColor = (1, 1, 1);
@@ -56,6 +54,7 @@ debug_turn_print(text, line) {
 }
 
 current_yaw_line_debug(duration) {
+
   currentYawColor = [];
   currentYawColor[0] = (0, 0, 1);
   currentYawColor[1] = (1, 0, 1);
@@ -64,9 +63,9 @@ current_yaw_line_debug(duration) {
   if(!isDefined(level.lastDebugHeight)) {
     level.lastDebugHeight = 15;
   }
-  while(gettime() - start_time < 1000) {
+  while (gettime() - start_time < 1000) {
     pos1 = (self.origin[0], self.origin[1], self.origin[2] + level.lastDebugHeight);
-    pos2 = pos1 + common_scripts\utility::vectorscale(anglesToForward(self.angles), (current_color_index + 1) * 10);
+    pos2 = pos1 + common_scripts\utility::vectorscale(anglestoforward(self.angles), (current_color_index + 1) * 10);
     line(pos1, pos2, currentYawColor[current_color_index], 0.3, 1, duration);
     current_color_index = (current_color_index + 1) % currentYawColor.size;
     wait(0.05);
@@ -94,9 +93,8 @@ getAnimDirection(damageyaw) {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffects)) {
+  if(!isDefined(anim.optionalStepEffects))
     anim.optionalStepEffects = [];
-  }
   anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }

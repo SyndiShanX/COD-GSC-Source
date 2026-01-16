@@ -15,16 +15,16 @@
 #namespace zm_equip_gasmask;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_gasmask", &__init__, &__main__, undefined);
+  system::register("zm_equip_gasmask", & __init__, & __main__, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "gasmaskoverlay", 21000, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadDown_PES", 21000, 1, "int");
-  zm_equipment::register("equip_gasmask", &"ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask");
-  zm_equipment::register_slot_watcher_override("equip_gasmask", &function_7cb416b);
+  zm_equipment::register("equip_gasmask", & "ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask");
+  zm_equipment::register_slot_watcher_override("equip_gasmask", & function_7cb416b);
   visionset_mgr::register_info("overlay", "zm_gasmask_postfx", 21000, 501, 32, 1);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   level.var_f486078e = getweapon("equip_gasmask");
 }
 
@@ -49,18 +49,18 @@ function gasmask_removed_watcher_thread() {
   self notify("only_one_gasmask_removed_thread");
   self endon("only_one_gasmask_removed_thread");
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("hash_5a02c845");
-    if(isDefined(level.zombiemode_gasmask_reset_player_model)) {
+    if(isdefined(level.zombiemode_gasmask_reset_player_model)) {
       ent_num = self.characterindex;
-      if(isDefined(self.zm_random_char)) {
+      if(isdefined(self.zm_random_char)) {
         ent_num = self.zm_random_char;
       }
       self[[level.zombiemode_gasmask_reset_player_model]](ent_num);
     }
-    if(isDefined(level.zombiemode_gasmask_reset_player_viewmodel)) {
+    if(isdefined(level.zombiemode_gasmask_reset_player_viewmodel)) {
       ent_num = self.characterindex;
-      if(isDefined(self.zm_random_char)) {
+      if(isdefined(self.zm_random_char)) {
         ent_num = self.zm_random_char;
       }
       self[[level.zombiemode_gasmask_reset_player_viewmodel]](ent_num);
@@ -78,11 +78,11 @@ function gasmask_activation_watcher_thread() {
   self notify("hash_b0734faa");
   self endon("hash_b0734faa");
   var_f499fcb0 = getweapon("lower_equip_gasmask");
-  if(isDefined(level.zombiemode_gasmask_reset_player_model)) {
+  if(isdefined(level.zombiemode_gasmask_reset_player_model)) {
     ent_num = self.characterindex;
     self[[level.zombiemode_gasmask_reset_player_model]](ent_num);
   }
-  while(true) {
+  while (true) {
     str_notify = self util::waittill_any_return("equip_gasmask_activate", "equip_gasmask_deactivate", "disconnect");
     if(!self zm_equipment::has_player_equipment(level.var_f486078e)) {
       continue;
@@ -90,9 +90,9 @@ function gasmask_activation_watcher_thread() {
     if(self zm_equipment::is_active(level.var_f486078e)) {
       self zm_utility::increment_is_drinking();
       self setactionslot(2, "");
-      if(isDefined(level.zombiemode_gasmask_change_player_headmodel)) {
+      if(isdefined(level.zombiemode_gasmask_change_player_headmodel)) {
         ent_num = self.characterindex;
-        if(isDefined(self.zm_random_char)) {
+        if(isdefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
         }
         self[[level.zombiemode_gasmask_change_player_headmodel]](ent_num, 1);
@@ -105,9 +105,9 @@ function gasmask_activation_watcher_thread() {
     } else {
       self zm_utility::increment_is_drinking();
       self setactionslot(2, "");
-      if(isDefined(level.zombiemode_gasmask_change_player_headmodel)) {
+      if(isdefined(level.zombiemode_gasmask_change_player_headmodel)) {
         ent_num = self.characterindex;
-        if(isDefined(self.zm_random_char)) {
+        if(isdefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
         }
         self[[level.zombiemode_gasmask_change_player_headmodel]](ent_num, 0);
@@ -134,7 +134,7 @@ function gasmask_activation_watcher_thread() {
       }
     }
     self setactionslot(2, "weapon", level.var_f486078e);
-    if(!self laststand::player_is_in_laststand() && (!(isDefined(self.intermission) && self.intermission))) {
+    if(!self laststand::player_is_in_laststand() && (!(isdefined(self.intermission) && self.intermission))) {
       self zm_utility::decrement_is_drinking();
     }
     self notify("equipment_select_response_done");
@@ -145,14 +145,14 @@ function function_4933258e() {
   self notify("hash_17dade16");
   self endon("hash_17dade16");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("player_given", equipment);
     if(equipment == level.var_f486078e) {
       self clientfield::set_player_uimodel("hudItems.showDpadDown_PES", 1);
     }
-    if(isDefined(level.zombiemode_gasmask_set_player_model)) {
+    if(isdefined(level.zombiemode_gasmask_set_player_model)) {
       ent_num = self.characterindex;
-      if(isDefined(self.zm_random_char)) {
+      if(isdefined(self.zm_random_char)) {
         ent_num = self.zm_random_char;
       }
       self[[level.zombiemode_gasmask_set_player_model]](ent_num);
@@ -163,7 +163,7 @@ function function_4933258e() {
 
 function remove_gasmask_on_player_bleedout() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("bled_out");
     self clientfield::set_player_uimodel("hudItems.showDpadDown_PES", 0);
     self clientfield::set_to_player("gasmaskoverlay", 0);
@@ -176,7 +176,7 @@ function remove_gasmask_on_player_bleedout() {
 function remove_gasmask_on_game_over() {
   self endon("hash_5a02c845");
   level waittill("pre_end_game");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set_to_player("gasmaskoverlay", 0);
     visionset_mgr::deactivate("overlay", "zm_gasmask_postfx", self);
   }
@@ -190,7 +190,7 @@ function gasmask_debug_print(msg, color) {
   if(!getdvarint("")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
   print3d(self.origin + vectorscale((0, 0, 1), 60), msg, color, 1, 1, 40);

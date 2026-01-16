@@ -16,6 +16,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
 #include scripts\weapons\weapons;
+
 #namespace molotov;
 
 autoexec __init__system__() {
@@ -27,7 +28,7 @@ init_shared() {
   level.var_e6a4f161 = params.var_18d16a6b;
   level.var_5d450296 = params.setype;
   level.var_e8a6b3ee = [];
-  level._effect[# "hash_31b6cc906e6d0ae0"] = # "hash_6b74a0816b45e3f8";
+  level._effect[#"hash_31b6cc906e6d0ae0"] = #"hash_6b74a0816b45e3f8";
   weaponobjects::function_e6400478(#"eq_molotov", &function_853f8cff, 1);
 }
 
@@ -36,9 +37,9 @@ function_853f8cff(watcher) {
 }
 
 function_f37c777a(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self thread function_1cdbb1e5(player, self.weapon);
 }
 
@@ -49,7 +50,7 @@ function_bba54dca() {
 }
 
 function_1cdbb1e5(owner, weapon) {
-  self endon(#"hacked", # "molotov_deleted");
+  self endon(#"hacked", #"molotov_deleted");
   assert(isDefined(weapon.customsettings), "<dev string:x38>" + weapon.name);
   self thread function_bba54dca();
   team = self.team;
@@ -61,7 +62,7 @@ function_1cdbb1e5(owner, weapon) {
   killcament setweapon(self.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   self thread function_71c73ece();
-  waitresult = self waittill(#"projectile_impact_explode", # "explode");
+  waitresult = self waittill(#"projectile_impact_explode", #"explode");
 
   if(waitresult._notify == "projectile_impact_explode") {
     if(isDefined(killcament)) {
@@ -95,7 +96,7 @@ get_water_depth(position) {
 }
 
 function_71c73ece() {
-  self endon(#"projectile_impact_explode", # "death");
+  self endon(#"projectile_impact_explode", #"death");
 
   while(true) {
     self.var_59ba00f5 = self getvelocity();
@@ -131,16 +132,16 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
     var_8ae62b02 = var_36c22d1d - (0, 0, 240);
     var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), self, 1);
 
-    if(var_69d15ad0[# "fraction"] < 1) {
-      position = var_69d15ad0[# "position"];
+    if(var_69d15ad0[#"fraction"] < 1) {
+      position = var_69d15ad0[#"position"];
 
-      if(var_69d15ad0[# "fraction"] > 0) {
-        normal = var_69d15ad0[# "normal"];
+      if(var_69d15ad0[#"fraction"] > 0) {
+        normal = var_69d15ad0[#"normal"];
       } else {
         normal = (0, 0, 1);
       }
 
-      var_1b1117c6 = 1.2 * var_69d15ad0[# "fraction"];
+      var_1b1117c6 = 1.2 * var_69d15ad0[#"fraction"];
       var_1f254a06 = normal;
 
       if(var_1b1117c6 > 0) {
@@ -154,11 +155,11 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
     var_8ae62b02 = var_36c22d1d - (0, 0, 20);
     var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), self, 1);
 
-    if(var_69d15ad0[# "fraction"] < 1) {
+    if(var_69d15ad0[#"fraction"] < 1) {
       position = var_36c22d1d;
 
-      if(var_69d15ad0[# "fraction"] > 0) {
-        normal = var_69d15ad0[# "normal"];
+      if(var_69d15ad0[#"fraction"] > 0) {
+        normal = var_69d15ad0[#"normal"];
       } else {
         normal = (0, 0, 1);
       }
@@ -170,21 +171,21 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
     var_36c22d1d = originalposition + vectorscale(var_493d36f9, 8);
     var_8ae62b02 = var_36c22d1d - (0, 0, 300);
     var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, (-3, -3, -3), (3, 3, 3), self, 1);
-    var_693f108f = var_69d15ad0[# "fraction"] * 300;
+    var_693f108f = var_69d15ad0[#"fraction"] * 300;
     var_959a2a8b = 0;
 
     if(var_693f108f > 10) {
       var_e76400c0 = originalposition;
       wallnormal = var_493d36f9;
-      var_d6d43109 = sqrt(1 - var_69d15ad0[# "fraction"]);
+      var_d6d43109 = sqrt(1 - var_69d15ad0[#"fraction"]);
       var_959a2a8b = 1;
     }
 
-    if(var_69d15ad0[# "fraction"] < 1) {
-      position = var_69d15ad0[# "position"];
+    if(var_69d15ad0[#"fraction"] < 1) {
+      position = var_69d15ad0[#"position"];
 
-      if(var_69d15ad0[# "fraction"] > 0) {
-        normal = var_69d15ad0[# "normal"];
+      if(var_69d15ad0[#"fraction"] > 0) {
+        normal = var_69d15ad0[#"normal"];
       } else {
         normal = (0, 0, 1);
       }
@@ -193,7 +194,7 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
     if(var_959a2a8b) {
       x = originalposition[0];
       y = originalposition[1];
-      lowestz = var_69d15ad0[# "position"][2];
+      lowestz = var_69d15ad0[#"position"][2];
       z = originalposition[2];
 
       while(z > lowestz) {
@@ -210,7 +211,7 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
         z -= randomintrange(20, 30);
       }
 
-      var_bc9ec158 = 0.6 * var_69d15ad0[# "fraction"];
+      var_bc9ec158 = 0.6 * var_69d15ad0[#"fraction"];
 
       if(var_bc9ec158 > 0) {
         wait var_bc9ec158;
@@ -222,7 +223,7 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
   desiredendpos = startpos + (0, 0, 60);
   function_1493c734(startpos, 20, (0, 1, 0), 0.6, 200);
   phystrace = physicstrace(startpos, desiredendpos, (-4, -4, -4), (4, 4, 4), self, 1);
-  goalpos = phystrace[# "fraction"] > 1 ? desiredendpos : phystrace[# "position"];
+  goalpos = phystrace[#"fraction"] > 1 ? desiredendpos : phystrace[#"position"];
 
   if(isDefined(killcament)) {
     killcament moveto(goalpos, 0.5);
@@ -233,10 +234,10 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
   if(normal[2] < 0.1 && !isDefined(var_e76400c0)) {
     black = (0.1, 0.1, 0.1);
     trace = hitpos(startpos, startpos + normal * -1 * 70 + (0, 0, -1) * 70, black);
-    traceposition = trace[# "position"];
+    traceposition = trace[#"position"];
 
-    if(trace[# "fraction"] < 0.9) {
-      var_252a0dc7 = trace[# "normal"];
+    if(trace[#"fraction"] < 0.9) {
+      var_252a0dc7 = trace[#"normal"];
       spawntimedfx(molotovfirewallweapon, traceposition, var_252a0dc7, int(customsettings.var_b79d64a9), team);
     }
   }
@@ -293,15 +294,15 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   colorarray[colorarray.size] = (0.2, 0.2, 0.9);
   colorarray[colorarray.size] = (0.9, 0.9, 0.9);
   locations = [];
-  locations[# "color"] = [];
-  locations[# "loc"] = [];
-  locations[# "tracepos"] = [];
-  locations[# "distsqrd"] = [];
-  locations[# "fxtoplay"] = [];
-  locations[# "radius"] = [];
-  locations[# "tallfire"] = [];
-  locations[# "smallfire"] = [];
-  locations[# "steam"] = [];
+  locations[#"color"] = [];
+  locations[#"loc"] = [];
+  locations[#"tracepos"] = [];
+  locations[#"distsqrd"] = [];
+  locations[#"fxtoplay"] = [];
+  locations[#"radius"] = [];
+  locations[#"tallfire"] = [];
+  locations[#"smallfire"] = [];
+  locations[#"steam"] = [];
   fxcount = customsettings.var_b650dc43;
   var_33ad9452 = isDefined(customsettings.var_bc24d9d3) ? customsettings.var_bc24d9d3 : 0;
   fxcount = int(math::clamp(fxcount * multiplier + 6, 6, customsettings.var_b650dc43));
@@ -319,46 +320,46 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   var_4997e17c = perpendicularvector(normal);
 
   for(fxindex = 0; fxindex < fxcount; fxindex++) {
-    locations[# "point"][fxindex] = function_523961e2(startpos, normal, var_4997e17c, fxindex, fxcount, defaultdistance, rotation);
-    function_1493c734(locations[# "point"][fxindex], 10, (0, fxindex * 20, 0), 0.6, 200);
-    locations[# "color"][fxindex] = colorarray[fxindex % colorarray.size];
+    locations[#"point"][fxindex] = function_523961e2(startpos, normal, var_4997e17c, fxindex, fxcount, defaultdistance, rotation);
+    function_1493c734(locations[#"point"][fxindex], 10, (0, fxindex * 20, 0), 0.6, 200);
+    locations[#"color"][fxindex] = colorarray[fxindex % colorarray.size];
   }
 
   var_1cac1ca8 = normal[2] > 0.5;
 
   for(count = 0; count < fxcount; count++) {
-    trace = hitpos(startpos, locations[# "point"][count], locations[# "color"][count]);
-    traceposition = trace[# "position"];
-    locations[# "tracepos"][count] = traceposition;
+    trace = hitpos(startpos, locations[#"point"][count], locations[#"color"][count]);
+    traceposition = trace[#"position"];
+    locations[#"tracepos"][count] = traceposition;
     hitsomething = 0;
 
-    if(trace[# "fraction"] < 0.7) {
+    if(trace[#"fraction"] < 0.7) {
       function_1493c734(traceposition, 10, (1, 0, 0), 0.6, 200);
-      locations[# "loc"][count] = traceposition;
-      locations[# "normal"][count] = trace[# "normal"];
+      locations[#"loc"][count] = traceposition;
+      locations[#"normal"][count] = trace[#"normal"];
 
       if(var_1cac1ca8) {
-        locations[# "tallfire"][count] = 1;
+        locations[#"tallfire"][count] = 1;
       }
 
       hitsomething = 1;
     }
 
     if(!hitsomething) {
-      tracedown = hitpos(traceposition, traceposition - normal * defaultdropdistance, locations[# "color"][count]);
+      tracedown = hitpos(traceposition, traceposition - normal * defaultdropdistance, locations[#"color"][count]);
 
-      if(tracedown[# "fraction"] != 1) {
-        function_1493c734(tracedown[# "position"], 10, (0, 0, 1), 0.6, 200);
-        locations[# "loc"][count] = tracedown[# "position"];
-        water_depth = get_water_depth(tracedown[# "position"]);
+      if(tracedown[#"fraction"] != 1) {
+        function_1493c734(tracedown[#"position"], 10, (0, 0, 1), 0.6, 200);
+        locations[#"loc"][count] = tracedown[#"position"];
+        water_depth = get_water_depth(tracedown[#"position"]);
 
         if(function_a66ba8cc(water_depth)) {
-          locations[# "normal"][count] = (0, 0, 1);
-          locations[# "steam"][count] = 1;
-          locations[# "loc"][count] -= (0, 0, water_depth);
+          locations[#"normal"][count] = (0, 0, 1);
+          locations[#"steam"][count] = 1;
+          locations[#"loc"][count] -= (0, 0, water_depth);
         } else {
-          locations[# "normal"][count] = tracedown[# "normal"];
-          locations[# "smallfire"][count] = 1;
+          locations[#"normal"][count] = tracedown[#"normal"];
+          locations[#"smallfire"][count] = 1;
         }
       }
     }
@@ -366,27 +367,27 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
     randangle = randomint(360);
     var_c4b09917 = randomfloatrange(-25, 25);
     var_7ee25402 = rotatepointaroundaxis(var_4997e17c, normal, randangle);
-    var_995eb37a = int(min(var_33ad9452 * multiplier * trace[# "fraction"] + 1, var_33ad9452));
+    var_995eb37a = int(min(var_33ad9452 * multiplier * trace[#"fraction"] + 1, var_33ad9452));
 
     for(var_ecef2fde = 0; var_ecef2fde < var_995eb37a && count % 2 == 0; var_ecef2fde++) {
       fraction = (var_ecef2fde + 1) / (var_995eb37a + 1);
       offsetpoint = startpos + (traceposition - startpos) * fraction + var_7ee25402 * var_c4b09917;
-      var_9417df90 = hitpos(offsetpoint, offsetpoint - normal * defaultdropdistance, locations[# "color"][count]);
+      var_9417df90 = hitpos(offsetpoint, offsetpoint - normal * defaultdropdistance, locations[#"color"][count]);
 
-      if(var_9417df90[# "fraction"] != 1) {
-        function_1493c734(var_9417df90[# "position"], 10, (0, 0, 1), 0.6, 200);
+      if(var_9417df90[#"fraction"] != 1) {
+        function_1493c734(var_9417df90[#"position"], 10, (0, 0, 1), 0.6, 200);
         locindex = count + fxcount * (var_ecef2fde + 1);
-        locations[# "loc"][locindex] = var_9417df90[# "position"];
-        water_depth = get_water_depth(var_9417df90[# "position"]);
+        locations[#"loc"][locindex] = var_9417df90[#"position"];
+        water_depth = get_water_depth(var_9417df90[#"position"]);
 
         if(function_a66ba8cc(water_depth)) {
-          locations[# "normal"][locindex] = (0, 0, 1);
-          locations[# "steam"][locindex] = 1;
-          locations[# "loc"][locindex] -= (0, 0, water_depth);
+          locations[#"normal"][locindex] = (0, 0, 1);
+          locations[#"steam"][locindex] = 1;
+          locations[#"loc"][locindex] -= (0, 0, water_depth);
           continue;
         }
 
-        locations[# "normal"][locindex] = var_9417df90[# "normal"];
+        locations[#"normal"][locindex] = var_9417df90[#"normal"];
       }
     }
   }
@@ -403,7 +404,7 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   }
 
   if(!is_under_water(var_6b23e1c9)) {
-    playFX(level._effect[# "hash_31b6cc906e6d0ae0"], var_6b23e1c9, forward, normal, 0, team);
+    playFX(level._effect[#"hash_31b6cc906e6d0ae0"], var_6b23e1c9, forward, normal, 0, team);
 
     if(!isDefined(var_e76400c0)) {
       spawntimedfx(molotovfireweapon, var_6b23e1c9, normal, int(customsettings.var_b79d64a9), team);
@@ -429,26 +430,26 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   var_4b424bc1.origin = startpos;
   thread damageeffectarea(owner, startpos, killcament, normal, molotovfireweapon, customsettings, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
   thread function_9464e4ad(owner, startpos, killcament, normal, molotovfireweapon, customsettings, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
-  var_b1dd2ca0 = getarraykeys(locations[# "loc"]);
+  var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
 
   foreach(lockey in var_b1dd2ca0) {
     if(!isDefined(lockey)) {
       continue;
     }
 
-    if(is_under_water(locations[# "loc"][lockey])) {
+    if(is_under_water(locations[#"loc"][lockey])) {
       continue;
     }
 
-    if(isDefined(locations[# "smallfire"][lockey])) {
+    if(isDefined(locations[#"smallfire"][lockey])) {
       fireweapon = molotovfiresmallweapon;
-    } else if(isDefined(locations[# "steam"][lockey])) {
+    } else if(isDefined(locations[#"steam"][lockey])) {
       fireweapon = molotovsteamweapon;
     } else {
-      fireweapon = isDefined(locations[# "tallfire"][lockey]) ? molotovfiretallweapon : molotovfireweapon;
+      fireweapon = isDefined(locations[#"tallfire"][lockey]) ? molotovfiretallweapon : molotovfireweapon;
     }
 
-    level thread function_42b9fdbe(fireweapon, locations[# "loc"][lockey], locations[# "normal"][lockey], int(customsettings.var_b79d64a9), team);
+    level thread function_42b9fdbe(fireweapon, locations[#"loc"][lockey], locations[#"normal"][lockey], int(customsettings.var_b79d64a9), team);
   }
 }
 
@@ -474,115 +475,115 @@ incendiary_debug_line(from, to, color, depthtest, time) {
   }
 }
 
-function damageeffectarea(owner, position, killcament, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime) {
-  level endon(#"game_ended");
-  radius = customsettings.var_6193a41b * radius_multiplier;
-  height = customsettings.var_cbd86f3e;
-  trigger_radius_position = position - (0, 0, height);
-  trigger_radius_height = height * 2;
+  function damageeffectarea(owner, position, killcament, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime) {
+    level endon(#"game_ended");
+    radius = customsettings.var_6193a41b * radius_multiplier;
+    height = customsettings.var_cbd86f3e;
+    trigger_radius_position = position - (0, 0, height);
+    trigger_radius_height = height * 2;
 
-  if(isDefined(var_e76400c0) && isDefined(wallnormal)) {
-    var_21f4217c = var_e76400c0 + vectorscale(wallnormal, 12) - (0, 0, var_cbaaea69);
-    var_289a74bc = spawn("trigger_radius", var_21f4217c, 0, 12, var_cbaaea69);
+    if(isDefined(var_e76400c0) && isDefined(wallnormal)) {
+      var_21f4217c = var_e76400c0 + vectorscale(wallnormal, 12) - (0, 0, var_cbaaea69);
+      var_289a74bc = spawn("trigger_radius", var_21f4217c, 0, 12, var_cbaaea69);
+
+      if(getdvarint(#"scr_draw_triggers", 0)) {
+        level thread util::drawcylinder(var_21f4217c, 12, var_cbaaea69, undefined, "<dev string:x74>", (1, 0, 0), 0.9);
+      }
+
+    }
+
+    if(radius >= 0.04) {
+      fireeffectarea = spawn("trigger_radius", trigger_radius_position, 0, radius, trigger_radius_height);
+      firesound = spawn("script_origin", fireeffectarea.origin);
+
+      if(isDefined(firesound)) {
+        firesound playLoopSound(#"hash_d2a83cecbfbd9e2");
+      }
+
+      level thread influencers::create_grenade_influencers(isDefined(owner) ? owner.team : undefined, weapon, fireeffectarea);
+    }
 
     if(getdvarint(#"scr_draw_triggers", 0)) {
-      level thread util::drawcylinder(var_21f4217c, 12, var_cbaaea69, undefined, "<dev string:x74>", (1, 0, 0), 0.9);
+      level thread util::drawcylinder(trigger_radius_position, radius, trigger_radius_height, undefined, "<dev string:x74>");
     }
 
-  }
+      self.var_ebf0b1c9 = [];
+    burntime = 0;
+    var_d0603aba = 1;
+    originalteam = isDefined(owner) ? owner.team : undefined;
 
-  if(radius >= 0.04) {
-    fireeffectarea = spawn("trigger_radius", trigger_radius_position, 0, radius, trigger_radius_height);
-    firesound = spawn("script_origin", fireeffectarea.origin);
+    while(gettime() < damageendtime && (!isDefined(owner) || owner.team == originalteam)) {
+      damageapplied = 0;
+      potential_targets = self getpotentialtargets(owner, customsettings);
 
-    if(isDefined(firesound)) {
-      firesound playLoopSound(#"hash_d2a83cecbfbd9e2");
+      if(isDefined(owner)) {
+        owner.var_52dceca = [];
+      }
+
+      foreach(target in potential_targets) {
+        self trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, killcament, weapon, customsettings);
+      }
+
+      if(isDefined(owner)) {
+        affectedplayers = owner.var_52dceca.size;
+
+        if(affectedplayers > 0 && burntime < gettime()) {
+          scoreevents::processscoreevent(#"hash_1343f5418bd52c6c", owner, undefined, weapon, affectedplayers);
+          burntime = gettime() + int(customsettings.var_5c06ec56 * 1000);
+        }
+
+        if(isDefined(level.playgadgetsuccess) && var_d0603aba) {
+          if(isDefined(level.var_ac6052e9)) {
+            var_9194a036 = [
+              [level.var_ac6052e9]
+            ]("molotovSuccessLineCount", 0);
+          }
+
+          if(affectedplayers >= (isDefined(var_9194a036) ? var_9194a036 : 3)) {
+            owner[[level.playgadgetsuccess]](weapon);
+          }
+        }
+
+        if(var_d0603aba) {
+          var_d0603aba = 0;
+        }
+      }
+
+      wait customsettings.var_90bd7d92;
     }
 
-    level thread influencers::create_grenade_influencers(isDefined(owner) ? owner.team : undefined, weapon, fireeffectarea);
-  }
+    arrayremovevalue(self.var_ebf0b1c9, undefined);
 
-  if(getdvarint(#"scr_draw_triggers", 0)) {
-    level thread util::drawcylinder(trigger_radius_position, radius, trigger_radius_height, undefined, "<dev string:x74>");
-  }
-
-  self.var_ebf0b1c9 = [];
-  burntime = 0;
-  var_d0603aba = 1;
-  originalteam = isDefined(owner) ? owner.team : undefined;
-
-  while(gettime() < damageendtime && (!isDefined(owner) || owner.team == originalteam)) {
-    damageapplied = 0;
-    potential_targets = self getpotentialtargets(owner, customsettings);
+    foreach(target in self.var_ebf0b1c9) {
+      target.var_84e41b20 = undefined;
+      target status_effect::function_408158ef(level.var_5d450296, level.var_e6a4f161);
+    }
 
     if(isDefined(owner)) {
       owner.var_52dceca = [];
     }
 
-    foreach(target in potential_targets) {
-      self trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, killcament, weapon, customsettings);
+    if(isDefined(killcament)) {
+      killcament entityheadicons::destroyentityheadicons();
     }
 
-    if(isDefined(owner)) {
-      affectedplayers = owner.var_52dceca.size;
+    if(isDefined(fireeffectarea)) {
+      fireeffectarea delete();
 
-      if(affectedplayers > 0 && burntime < gettime()) {
-        scoreevents::processscoreevent(#"hash_1343f5418bd52c6c", owner, undefined, weapon, affectedplayers);
-        burntime = gettime() + int(customsettings.var_5c06ec56 * 1000);
-      }
-
-      if(isDefined(level.playgadgetsuccess) && var_d0603aba) {
-        if(isDefined(level.var_ac6052e9)) {
-          var_9194a036 = [
-            [level.var_ac6052e9]
-          ]("molotovSuccessLineCount", 0);
-        }
-
-        if(affectedplayers >= (isDefined(var_9194a036) ? var_9194a036 : 3)) {
-          owner[[level.playgadgetsuccess]](weapon);
-        }
-      }
-
-      if(var_d0603aba) {
-        var_d0603aba = 0;
+      if(isDefined(firesound)) {
+        firesound thread stopfiresound();
       }
     }
 
-    wait customsettings.var_90bd7d92;
-  }
-
-  arrayremovevalue(self.var_ebf0b1c9, undefined);
-
-  foreach(target in self.var_ebf0b1c9) {
-    target.var_84e41b20 = undefined;
-    target status_effect::function_408158ef(level.var_5d450296, level.var_e6a4f161);
-  }
-
-  if(isDefined(owner)) {
-    owner.var_52dceca = [];
-  }
-
-  if(isDefined(killcament)) {
-    killcament entityheadicons::destroyentityheadicons();
-  }
-
-  if(isDefined(fireeffectarea)) {
-    fireeffectarea delete();
-
-    if(isDefined(firesound)) {
-      firesound thread stopfiresound();
+    if(isDefined(var_289a74bc)) {
+      var_289a74bc delete();
     }
-  }
 
-  if(isDefined(var_289a74bc)) {
-    var_289a74bc delete();
-  }
+    if(getdvarint(#"scr_draw_triggers", 0)) {
+      level notify(#"hash_33d328e380ab0acc");
+    }
 
-  if(getdvarint(#"scr_draw_triggers", 0)) {
-    level notify(#"hash_33d328e380ab0acc");
   }
-
-}
 
 stopfiresound() {
   firesound = self;
@@ -777,7 +778,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
   if(!var_be45d685 && (!isDefined(target.sessionstate) || target.sessionstate == "playing")) {
     trace = bulletTrace(position, target getshootatpos(), 0, target);
 
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       if(isplayer(target)) {
         target thread damageinfirearea(sourcepos, killcament, trace, position, weapon, customsettings, owner);
 
@@ -810,10 +811,11 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
 }
 
 damageinfirearea(origin, killcament, trace, position, weapon, customsettings, owner) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   timer = 0;
 
   if(candofiredamage(killcament, self, customsettings.var_90bd7d92)) {
+
     level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
 
     if(level.molotov_debug) {
@@ -825,7 +827,7 @@ damageinfirearea(origin, killcament, trace, position, weapon, customsettings, ow
       level.incendiarydamagetime = gettime();
     }
 
-    var_4dd4e6ee = owner;
+      var_4dd4e6ee = owner;
 
     if(!isDefined(self.var_84e41b20)) {
       self.var_84e41b20 = [];
@@ -844,7 +846,7 @@ damageinfirearea(origin, killcament, trace, position, weapon, customsettings, ow
 }
 
 function_37ddab3(origin, killcament, trace, position, weapon, customsettings, owner) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   timer = 0;
 
   if(candofiredamage(killcament, self, customsettings.var_8fbd03cb)) {
@@ -866,7 +868,7 @@ function_37ddab3(origin, killcament, trace, position, weapon, customsettings, ow
 
 sndfiredamage() {
   self notify(#"sndfire");
-  self endon(#"sndfire", # "death", # "disconnect");
+  self endon(#"sndfire", #"death", #"disconnect");
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
@@ -885,7 +887,7 @@ sndfiredamage() {
 }
 
 sndfiredamage_deleteent(ent) {
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
 
   if(isDefined(ent)) {
     ent delete();
@@ -898,12 +900,12 @@ hitpos(start, end, color) {
   level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
 
   if(level.molotov_debug) {
-    debugstar(trace[# "position"], 2000, color);
+    debugstar(trace[#"position"], 2000, color);
   }
 
-  thread incendiary_debug_line(start, trace[# "position"], color, 1, 80);
+  thread incendiary_debug_line(start, trace[#"position"], color, 1, 80);
 
-  return trace;
+    return trace;
 }
 
 candofiredamage(killcament, victim, resetfiretime) {
@@ -931,6 +933,7 @@ resetfiredamage(entnum, time) {
 }
 
 function_1493c734(origin, radius, color, alpha, time) {
+
   debug_fire = getdvarint(#"debug_molotov_fire", 0);
 
   if(debug_fire > 0) {

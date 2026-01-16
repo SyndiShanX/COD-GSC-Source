@@ -268,7 +268,9 @@ init_ape_zombie_anims() {
   level._zombie_melee["ape_zombie"][3] = % ai_semianaut_attack_v1;
   level._zombie_melee["ape_zombie"][3] = % ai_semianaut_attack_v1;
   if(isDefined(level.ape_zombie_anim_override)) {
-    [[level.ape_zombie_anim_override]]();
+    [
+      [level.ape_zombie_anim_override]
+    ]();
   }
   level._zombie_run_melee["ape_zombie"][0] = % ai_semianaut_attack_v1;
   level._zombie_run_melee["ape_zombie"][1] = % ai_semianaut_attack_v1;
@@ -518,7 +520,9 @@ ape_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
   for(i = 0; i < level.ape_zombie_spawners.size; i++) {
-    score = [[level.ape_zombie_spawn_heuristic]](level.ape_zombie_spawners[i]);
+    score = [
+      [level.ape_zombie_spawn_heuristic]
+    ](level.ape_zombie_spawners[i]);
     if(score > best_score) {
       best_spawner = level.ape_zombie_spawners[i];
       best_score = score;
@@ -589,7 +593,9 @@ ape_zombie_pick_idle_point() {
   best_score = -1;
   best_node = undefined;
   for(i = 0; i < level.ape_idle_nodes.size; i++) {
-    score = [[level.ape_zombie_pathfind_heuristic]](level.ape_idle_nodes[i]);
+    score = [
+      [level.ape_zombie_pathfind_heuristic]
+    ](level.ape_idle_nodes[i]);
     if(score > best_score) {
       best_score = score;
       best_node = level.ape_idle_nodes[i];
@@ -821,7 +827,7 @@ ape_zombie_check_for_activation() {
   self.ground_hit = true;
   self thread scream_a_watcher("groundhit_anim");
   self thread groundhit_watcher("groundhit_anim");
-  self playSound("zmb_engineer_vocals_hit");
+  self playsound("zmb_engineer_vocals_hit");
   self animcustom(::ape_zombie_play_activate);
   self waittill("play_activate_done");
   self.performing_activation = false;
@@ -867,12 +873,12 @@ ape_zombie_ground_hit_think() {
     if(!self.ground_hit && GetTime() >= self.nextGroundHit) {
       players = GetPlayers();
       closeEnough = false;
-      origin = self getEye();
+      origin = self GetEye();
       for(i = 0; i < players.size; i++) {
         if(players[i] maps\_laststand::player_is_in_laststand()) {
           continue;
         }
-        test_origin = players[i] getEye();
+        test_origin = players[i] GetEye();
         d = distanceSquared(origin, test_origin);
         if(d > level.ape_zombie_groundhit_trigger_radius * level.ape_zombie_groundhit_trigger_radius) {
           continue;
@@ -913,7 +919,7 @@ scream_a_watcher(animname) {
 groundhit_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "fire");
-  playFXOnTag(level._effect["ape_groundhit"], self, "tag_origin");
+  playfxontag(level._effect["ape_groundhit"], self, "tag_origin");
   origin = self.origin + (0, 0, 40);
   zombies_axis = get_array_of_closest(origin, GetAiSpeciesArray("axis", "all"), undefined, undefined, level.ape_zombie_groundhit_damage_radius);
   dogs = get_array_of_closest(origin, GetAiSpeciesArray("allies", "zombie_dog"), undefined, undefined, level.ape_zombie_groundhit_damage_radius);
@@ -926,7 +932,7 @@ groundhit_watcher(animname) {
       if(is_magic_bullet_shield_enabled(zombies[i])) {
         continue;
       }
-      test_origin = zombies[i] getEye();
+      test_origin = zombies[i] GetEye();
       if(!BulletTracePassed(origin, test_origin, false, undefined)) {
         continue;
       }
@@ -956,7 +962,7 @@ groundhit_watcher(animname) {
     if(!is_player_valid(players[i])) {
       continue;
     }
-    test_origin = players[i] getEye();
+    test_origin = players[i] GetEye();
     if(distanceSquared(origin, test_origin) > level.ape_zombie_groundhit_damage_radius * level.ape_zombie_groundhit_damage_radius) {
       continue;
     }
@@ -1013,7 +1019,7 @@ ape_zombie_die() {
   if(isDefined(self.curr_idle_node)) {
     self.curr_idle_node.is_claimed = false;
   }
-  self playSound("zmb_engineer_death_bells");
+  self playsound("zmb_engineer_death_bells");
   level maps\_zombiemode_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   if(self.damagemod == "MOD_BURNED") {
     self thread animscripts\zombie_death::flame_death_fx();
@@ -1194,7 +1200,7 @@ ape_dog_damage() {
 }
 
 ape_zombie_damage_fx(mod, hit_location, hit_origin, player) {
-  playFX(level._effect["ape_impact"], hit_origin);
+  Playfx(level._effect["ape_impact"], hit_origin);
 }
 
 ape_non_attacker(damage, weapon) {
@@ -1206,7 +1212,7 @@ ape_non_attacker(damage, weapon) {
 }
 
 ape_zombie_default_enter_level() {
-  playFX(level._effect["ape_spawn"], self.origin);
+  Playfx(level._effect["ape_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self.entered_level = true;
@@ -1226,7 +1232,7 @@ ape_zombie_push_zombies() {
   self endon("death");
   while(1) {
     pushed = 0;
-    origin = self getEye();
+    origin = self GetEye();
     zombies = get_array_of_closest(origin, GetAiSpeciesArray("axis", "all"), undefined, undefined, 60);
     for(i = 0; i < zombies.size; i++) {
       if(zombies[i].animname == "zombie") {

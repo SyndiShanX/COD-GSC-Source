@@ -12,14 +12,14 @@
 #namespace siegebot;
 
 function autoexec main() {
-  vehicle::add_vehicletype_callback("siegebot", &_setup_);
+  vehicle::add_vehicletype_callback("siegebot", & _setup_);
 }
 
 function _setup_(localclientnum) {
-  if(isDefined(self.scriptbundlesettings)) {
+  if(isdefined(self.scriptbundlesettings)) {
     settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   }
-  if(!isDefined(settings)) {
+  if(!isdefined(settings)) {
     return;
   }
 }

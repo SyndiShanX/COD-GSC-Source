@@ -16,7 +16,7 @@ createZombieEyes(localClientNum) {
       fx_eye_glow.angles = self GetTagAngles(linkTag);
       fx_eye_glow setModel(fxModel);
       fx_eye_glow LinkTo(self, linkTag);
-      playFXOnTag(localClientNum, level._effect["eye_glow"], fx_eye_glow, fxTag);
+      PlayFxOnTag(localClientNum, level._effect["eye_glow"], fx_eye_glow, fxTag);
       self._eyeArray[localClientNum] = fx_eye_glow;
     }
   }
@@ -113,7 +113,7 @@ vending_machine_flicker_light(fx_light, duration) {
 play_perk_fx_on_client(client_num, fx_light, duration) {
   fxObj = spawn(client_num, self.origin + (0, 0, -50), "script_model");
   fxobj setModel("tag_origin");
-  playFXOnTag(client_num, level._effect[fx_light], fxObj, "tag_origin");
+  playfxontag(client_num, level._effect[fx_light], fxObj, "tag_origin");
   realwait(duration);
   fxobj delete();
 }

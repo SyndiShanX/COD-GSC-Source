@@ -14,7 +14,7 @@
 #namespace scene;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,7 +27,7 @@ function __init__() {
 }
 
 function function_f69ab75e() {
-  while(true) {
+  while (true) {
     level flagsys::wait_till("");
     foreach(var_4d881e03 in function_c4a37ed9()) {
       var_4d881e03 thread debug_display();
@@ -46,10 +46,10 @@ function function_c4a37ed9() {
 
 function run_scene_tests() {
   level endon("run_scene_tests");
-  level.scene_test_struct = spawnStruct();
+  level.scene_test_struct = spawnstruct();
   level.scene_test_struct.origin = (0, 0, 0);
   level.scene_test_struct.angles = (0, 0, 0);
-  while(true) {
+  while (true) {
     str_scene = getdvarstring("");
     str_mode = tolower(getdvarstring("", ""));
     if(str_scene != "") {
@@ -58,12 +58,12 @@ function run_scene_tests() {
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
       foreach(s_instance in a_scenes) {
-        if(isDefined(s_instance)) {
+        if(isdefined(s_instance)) {
           b_found = 1;
           s_instance thread test_play(undefined, str_mode);
         }
       }
-      if(isDefined(level.active_scenes[str_scene])) {
+      if(isdefined(level.active_scenes[str_scene])) {
         foreach(s_instance in level.active_scenes[str_scene]) {
           if(!isinarray(a_scenes, s_instance)) {
             b_found = 1;
@@ -82,7 +82,7 @@ function run_scene_tests() {
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
       foreach(s_instance in a_scenes) {
-        if(isDefined(s_instance)) {
+        if(isdefined(s_instance)) {
           b_found = 1;
           s_instance thread test_init();
         }
@@ -101,7 +101,7 @@ function run_scene_tests() {
 }
 
 function clear_old_ents(str_scene) {
-  foreach(ent in getEntArray(0)) {
+  foreach(ent in getentarray(0)) {
     if(ent.scene_spawned === str_scene && ent.finished_scene === str_scene) {
       ent delete();
     }
@@ -111,7 +111,7 @@ function clear_old_ents(str_scene) {
 function toggle_scene_menu() {
   setdvar("", 0);
   n_scene_menu_last = -1;
-  while(true) {
+  while (true) {
     n_scene_menu = getdvarstring("");
     if(n_scene_menu != "") {
       n_scene_menu = int(n_scene_menu);
@@ -159,7 +159,7 @@ function create_scene_hud(scene_name, index) {
 }
 
 function display_scene_menu(str_type) {
-  if(!isDefined(str_type)) {
+  if(!isdefined(str_type)) {
     str_type = "";
   }
   level notify("scene_menu_cleanup");
@@ -186,7 +186,7 @@ function display_scene_menu(str_type) {
   scene_list_settext(elems, names, selected);
   old_selected = selected;
   level thread scene_menu_cleanup(elems, title);
-  while(true) {
+  while (true) {
     scene_list_settext(elems, names, selected);
     if(held) {
       wait(0.5);
@@ -253,7 +253,7 @@ function display_scene_menu(str_type) {
           }
         }
       }
-      while(level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("")) {
+      while (level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("")) {
         wait(0.016);
       }
     }
@@ -267,7 +267,7 @@ function display_mode() {
   setluimenudata(0, hudelem, "", 490);
   setluimenudata(0, hudelem, "", 500);
   openluimenu(0, hudelem);
-  while(level flagsys::get("")) {
+  while (level flagsys::get("")) {
     str_mode = tolower(getdvarstring("", ""));
     switch (str_mode) {
       case "": {
@@ -294,7 +294,7 @@ function display_mode() {
 
 function scene_list_menu() {
   hud_array = [];
-  for(i = 0; i < 22; i++) {
+  for (i = 0; i < 22; i++) {
     hud = create_scene_hud("", i);
     hud_array[hud_array.size] = hud;
   }
@@ -302,9 +302,9 @@ function scene_list_menu() {
 }
 
 function scene_list_settext(hud_array, strings, num) {
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     index = i + (num - 5);
-    if(isDefined(strings[index])) {
+    if(isdefined(strings[index])) {
       text = strings[index];
     } else {
       text = "";
@@ -349,7 +349,7 @@ function is_scene_initialized(str_scene) {
 function scene_menu_cleanup(elems, title) {
   level waittill("scene_menu_cleanup");
   closeluimenu(0, title);
-  for(i = 0; i < elems.size; i++) {
+  for (i = 0; i < elems.size; i++) {
     closeluimenu(0, elems[i]);
   }
 }
@@ -367,18 +367,24 @@ function debug_display() {
   self notify("hash_87671d41");
   self endon("hash_87671d41");
   level endon("kill_anim_debug");
-  while(true) {
+  while (true) {
     debug_frames = randomintrange(5, 15);
     debug_time = debug_frames / 60;
     sphere(self.origin, 1, (0, 1, 1), 1, 1, 8, debug_frames);
-    if(isDefined(self.scenes)) {
+    if(isdefined(self.scenes)) {
       foreach(i, o_scene in self.scenes) {
         n_offset = 15 * (i + 1);
-        print3d(self.origin - (0, 0, n_offset), [[o_scene]] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
-        print3d(self.origin - (0, 0, n_offset + 5), ("" + (isDefined([[o_scene]] - > get_state()) ? "" + ([[o_scene]] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
+        print3d(self.origin - (0, 0, n_offset), [
+          [o_scene]
+        ] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
+        print3d(self.origin - (0, 0, n_offset + 5), ("" + (isdefined([
+          [o_scene]
+        ] - > get_state()) ? "" + ([
+          [o_scene]
+        ] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
       }
     } else {
-      if(isDefined(self.scriptbundlename)) {
+      if(isdefined(self.scriptbundlename)) {
         print3d(self.origin - vectorscale((0, 0, 1), 15), self.scriptbundlename, (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
       } else {
         break;

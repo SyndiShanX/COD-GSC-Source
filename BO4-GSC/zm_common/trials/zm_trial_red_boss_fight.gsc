@@ -14,6 +14,7 @@
 #include scripts\zm\zm_red_fasttravel;
 #include scripts\zm_common\zm_aoe;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_red_boss_fight;
 
 autoexec __init__system__() {
@@ -50,13 +51,13 @@ private on_end(round_reset) {
 }
 
 private start_boss_fight() {
-  level endon(#"end_game", # "hash_7646638df88a3656");
+  level endon(#"end_game", #"hash_7646638df88a3656");
 
   level flag::set("<dev string:x38>");
   level flag::set(#"pap_quest_completed");
   level flag::set(#"zm_red_fasttravel_open");
 
-  level.var_5b175281 = level.check_for_valid_spawn_near_team_callback;
+    level.var_5b175281 = level.check_for_valid_spawn_near_team_callback;
   level.check_for_valid_spawn_near_team_callback = &function_7d23aaf2;
 
   if(level.var_27a02034) {

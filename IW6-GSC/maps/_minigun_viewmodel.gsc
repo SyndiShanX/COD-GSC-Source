@@ -6,17 +6,15 @@
 #using_animtree("vehicles");
 
 player_viewhands_minigun(var_0, var_1, var_2) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "viewhands_player_us_army";
-  }
 
   var_0 useanimtree(#animtree);
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_0.animname = "suburban_hands";
-  } else {
+  else
     var_0.animname = var_2;
-  }
 
   var_0.has_hands = 0;
   var_0 show_hands(var_1);
@@ -49,9 +47,8 @@ handle_mounting(var_0) {
 }
 
 show_hands(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "viewhands_player_us_army";
-  }
 
   var_1 = self;
 
@@ -64,9 +61,8 @@ show_hands(var_0) {
 }
 
 hide_hands(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "viewhands_player_us_army";
-  }
 
   var_1 = self;
 
@@ -93,39 +89,34 @@ player_viewhands_minigun_hand(var_0) {
   self endon("death");
   var_1 = undefined;
 
-  if(var_0 == "LEFT") {
+  if(var_0 == "LEFT")
     var_1 = ::spinbuttonpressed;
-  } else if(var_0 == "RIGHT") {
+  else if(var_0 == "RIGHT")
     var_1 = ::firebuttonpressed;
-  }
 
   for(;;) {
     if(level.player[[var_1]]()) {
       thread player_viewhands_minigun_presed(var_0);
 
-      while(level.player[[var_1]]()) {
+      while(level.player[[var_1]]())
         wait 0.05;
-      }
 
       continue;
     }
 
     thread player_viewhands_minigun_idle(var_0);
 
-    while(!level.player[[var_1]]()) {
+    while(!level.player[[var_1]]())
       wait 0.05;
-    }
   }
 }
 
 spinbuttonpressed() {
-  if(level.player adsbuttonpressed()) {
+  if(level.player adsbuttonpressed())
     return 1;
-  }
 
-  if(level.player attackbuttonpressed()) {
+  if(level.player attackbuttonpressed())
     return 1;
-  }
 
   return 0;
 }
@@ -137,11 +128,10 @@ firebuttonpressed() {
 player_viewhands_minigun_idle(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "LEFT") {
+  if(var_0 == "LEFT")
     var_1 = "L";
-  } else if(var_0 == "RIGHT") {
+  else if(var_0 == "RIGHT")
     var_1 = "R";
-  }
 
   self clearanim(maps\_utility::getanim("idle2fire_" + var_1), 0.2);
   self setflaggedanimrestart("anim", maps\_utility::getanim("fire2idle_" + var_1));
@@ -153,11 +143,10 @@ player_viewhands_minigun_idle(var_0) {
 player_viewhands_minigun_presed(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "LEFT") {
+  if(var_0 == "LEFT")
     var_1 = "L";
-  } else if(var_0 == "RIGHT") {
+  else if(var_0 == "RIGHT")
     var_1 = "R";
-  }
 
   self clearanim(maps\_utility::getanim("idle_" + var_1), 0.2);
   self setanim(maps\_utility::getanim("idle2fire_" + var_1));

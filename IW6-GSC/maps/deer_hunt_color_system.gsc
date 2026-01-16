@@ -25,11 +25,10 @@ color_trig_moves_enemies() {
 
     if(var_0 == level.player) {
       if(!maps\_utility::ent_flag("player_activated")) {
-        if(isDefined(self.targetname)) {
+        if(isDefined(self.targetname))
           var_1 = "player in color trig " + self.targetname;
-        } else {
+        else
           var_1 = "Player in color trig with no targetname at: " + self.origin;
-        }
 
         color_debug_println(var_1);
 
@@ -78,21 +77,19 @@ set_new_enemy_volume(var_0) {
 }
 
 temp_trigger_off() {
-  if(isDefined(self.targetname)) {
+  if(isDefined(self.targetname))
     var_0 = "Turning off trig " + self.targetname;
-  } else {
+  else
     var_0 = "Turning off trig with no target name at: " + self.origin;
-  }
 
   color_debug_println(var_0);
   common_scripts\utility::trigger_off();
   wait 30;
 
-  if(isDefined(self.targetname)) {
+  if(isDefined(self.targetname))
     var_0 = "Restoring trig " + self.targetname;
-  } else {
+  else
     var_0 = "Restoring trig with no target name at: " + self.origin;
-  }
 
   color_debug_println(var_0);
   common_scripts\utility::trigger_on();
@@ -143,9 +140,8 @@ first_guy_leap_frog_logic() {
     var_1 = self.goalpos;
   }
 
-  while(distance(self.origin, var_1) > var_0) {
+  while(distance(self.origin, var_1) > var_0)
     wait 0.5;
-  }
 
   self cleargoalvolume();
   self.goalradius = 200;
@@ -166,9 +162,8 @@ enemy_color_volume_logic() {
   level.color_volume_enemies = common_scripts\utility::add_to_array(level.color_volume_enemies, self);
   self.goalradius = 32;
 
-  if(isDefined(level.current_enemy_vol)) {
+  if(isDefined(level.current_enemy_vol))
     self setgoalvolumeauto(level.current_enemy_vol);
-  }
 
   for(;;) {
     self waittill("go_to_new_volume");

@@ -7,7 +7,8 @@
 #include clientscripts\mp\createfx\mp_meltdown_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_fumes_vent_xsm_int"] = loadfx("maps/mp_maps/fx_mp_fumes_vent_xsm_int");
@@ -65,7 +66,6 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

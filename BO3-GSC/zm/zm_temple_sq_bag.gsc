@@ -20,15 +20,15 @@
 function init() {
   level flag::init("given_dynamite");
   level flag::init("dynamite_chat");
-  zm_sidequests::declare_sidequest_stage("sq", "BaG", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "BaG", & init_stage, & stage_logic, & exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "BaG", 300);
 }
 
 function bag_debug() {
-  if(isDefined(level._debug_bag)) {
+  if(isdefined(level._debug_bag)) {
     return;
   }
-  if(!isDefined(level._debug_bag)) {
+  if(!isdefined(level._debug_bag)) {
     level._debug_bag = 1;
     level._hud_gongs = newdebughudelem();
     level._hud_gongs.location = 0;
@@ -106,16 +106,16 @@ function bag_debug() {
     level._resonating_label.alpha = 1;
     level._resonating_label settext("");
   }
-  gongs = getEntArray("", "");
-  while(true) {
-    if(isDefined(level._num_gongs)) {
+  gongs = getentarray("", "");
+  while (true) {
+    if(isdefined(level._num_gongs)) {
       level._hud_gongs setvalue(level._num_gongs);
     } else {
       level.var_e38ebc06 setvalue("");
     }
     gong_text = "";
-    for(i = 0; i < gongs.size; i++) {
-      if(isDefined(gongs[i].ringing) && gongs[i].ringing) {
+    for (i = 0; i < gongs.size; i++) {
+      if(isdefined(gongs[i].ringing) && gongs[i].ringing) {
         gong_text = gong_text + "";
         continue;
       }
@@ -145,8 +145,8 @@ function init_stage() {
   }
   level flag::clear("given_dynamite");
   level flag::clear("dynamite_chat");
-  gongs = getEntArray("sq_gong", "targetname");
-  array::thread_all(gongs, &gong_handler);
+  gongs = getentarray("sq_gong", "targetname");
+  array::thread_all(gongs, & gong_handler);
   level thread give_me_the_boom_stick();
   zm_temple_sq::reset_dynamite();
   level thread delayed_start_skit();
@@ -159,7 +159,7 @@ function delayed_start_skit() {
 
 function dynamite_debug() {
   self endon("caught");
-  while(!(isDefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
+  while (!(isdefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
     print3d(self.origin, "", vectorscale((0, 1, 0), 255), 2);
     wait(0.1);
   }
@@ -191,11 +191,11 @@ function fire_in_the_hole() {
 function butter_fingers() {
   self endon("boom");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
-    if(isDefined(who) && zombie_utility::is_player_valid(who)) {
+    if(isdefined(who) && zombie_utility::is_player_valid(who)) {
       who thread zm_audio::create_and_play_dialog("eggs", "quest8", 6);
-      who playSound("evt_sq_bag_dynamite_catch");
+      who playsound("evt_sq_bag_dynamite_catch");
       who._has_dynamite = 1;
       self.owner_ent notify("caught");
       self.owner_ent ghost();
@@ -213,9 +213,9 @@ function give_me_the_boom_stick() {
   level flag::wait_till("meteorite_shrunk");
   player_close = 0;
   player = undefined;
-  while(!player_close) {
+  while (!player_close) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distance2dsquared(players[i].origin, wall.origin) < 57600) {
         player_close = 1;
         player = players[i];
@@ -232,9 +232,9 @@ function give_me_the_boom_stick() {
   level._give_trig.radius = 48;
   level._give_trig.height = 72;
   not_given = 1;
-  while(not_given) {
+  while (not_given) {
     level._give_trig waittill("trigger", who);
-    if(isplayer(who) && zombie_utility::is_player_valid(who) && isDefined(who._has_dynamite) && who._has_dynamite) {
+    if(isplayer(who) && zombie_utility::is_player_valid(who) && isdefined(who._has_dynamite) && who._has_dynamite) {
       who._has_dynamite = undefined;
       who zm_sidequests::remove_sidequest_icon("sq", "dynamite");
       not_given = 0;
@@ -246,9 +246,9 @@ function give_me_the_boom_stick() {
   level function_69e4e9b6();
   players_far = 0;
   players = getplayers();
-  while(players_far < players.size) {
+  while (players_far < players.size) {
     players_far = 0;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distance2dsquared(players[i].origin, wall.origin) > 129600) {
         players_far++;
       }
@@ -270,7 +270,7 @@ function stage_logic() {
 
 function exit_stage(success) {
   if(success) {
-    zm_temple_sq_brock::create_radio(9, &zm_temple_sq_brock::radio9_override);
+    zm_temple_sq_brock::create_radio(9, & zm_temple_sq_brock::radio9_override);
     level._buttons_can_reset = 0;
   } else {
     zm_temple_sq_brock::create_radio(8);
@@ -278,28 +278,28 @@ function exit_stage(success) {
     ent = getent("sq_meteorite", "targetname");
     ent.origin = ent.original_origin;
     ent.angles = ent.original_angles;
-    ent setModel("p7_zm_sha_meteorite");
+    ent setmodel("p7_zm_sha_meteorite");
     zm_temple_sq::reset_dynamite();
     level flag::clear("pap_override");
     level thread zm_temple_sq_skits::fail_skit();
   }
-  if(isDefined(level.catch_trig)) {
+  if(isdefined(level.catch_trig)) {
     level.catch_trig delete();
     level.catch_trig = undefined;
   }
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i]._has_dynamite)) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(players[i]._has_dynamite)) {
       players[i]._has_dynamite = undefined;
       players[i] zm_sidequests::remove_sidequest_icon("sq", "dynamite");
     }
   }
-  if(isDefined(level._give_trig)) {
+  if(isdefined(level._give_trig)) {
     level._give_trig delete();
   }
-  gongs = getEntArray("sq_gong", "targetname");
-  array::thread_all(gongs, &dud_gong_handler);
-  if(isDefined(level._bag_sound_ent)) {
+  gongs = getentarray("sq_gong", "targetname");
+  array::thread_all(gongs, & dud_gong_handler);
+  if(isdefined(level._bag_sound_ent)) {
     level._bag_sound_ent delete();
     level._bag_sound_ent = undefined;
   }
@@ -307,7 +307,7 @@ function exit_stage(success) {
 }
 
 function resonate_runner() {
-  if(!isDefined(level._resonate_time) || level._resonate_time == 0) {
+  if(!isdefined(level._resonate_time) || level._resonate_time == 0) {
     level._resonate_time = 60;
   } else {
     level._resonate_time = level._resonate_time + 60;
@@ -315,7 +315,7 @@ function resonate_runner() {
   }
   level endon("wrong_gong");
   level flag::set("gongs_resonating");
-  while(level._resonate_time) {
+  while (level._resonate_time) {
     level._resonate_time--;
     wait(1);
   }
@@ -325,15 +325,15 @@ function resonate_runner() {
 function gong_resonate(player) {
   level endon("kill_resonate");
   self.ringing = 1;
-  if(isDefined(self.right_gong) && self.right_gong) {
-    self playLoopSound("mus_sq_bag_gong_correct_loop_" + level._num_gongs, 5);
+  if(isdefined(self.right_gong) && self.right_gong) {
+    self playloopsound("mus_sq_bag_gong_correct_loop_" + level._num_gongs, 5);
   } else {
-    self playSound("evt_sq_bag_gong_incorrect");
+    self playsound("evt_sq_bag_gong_incorrect");
   }
   if(level._num_gongs == 4) {
     level thread resonate_runner();
   }
-  if(isDefined(player) && isplayer(player)) {
+  if(isdefined(player) && isplayer(player)) {
     if(self.right_gong && level._num_gongs == 1) {
       player thread zm_audio::create_and_play_dialog("eggs", "quest8", 1);
     } else {
@@ -347,8 +347,8 @@ function gong_resonate(player) {
   if(self.right_gong == 0) {
     level notify("wrong_gong");
     level._resonate_time = 0;
-    gongs = getEntArray("sq_gong", "targetname");
-    for(i = 0; i < gongs.size; i++) {
+    gongs = getentarray("sq_gong", "targetname");
+    for (i = 0; i < gongs.size; i++) {
       if(gongs[i].right_gong) {
         if(gongs[i].ringing) {
           if(level._num_gongs >= 0) {
@@ -378,11 +378,11 @@ function gong_goes_bong(in_stage, player) {
 
 function gong_handler() {
   level endon("sq_bag_over");
-  if(!isDefined(self.ringing)) {
+  if(!isdefined(self.ringing)) {
     self.ringing = 0;
   }
   self thread debug_gong();
-  while(true) {
+  while (true) {
     self waittill("triggered", who);
     if(!self.ringing) {
       self gong_goes_bong(1, who);
@@ -393,7 +393,7 @@ function gong_handler() {
 function debug_gong() {
   level endon("bag_start");
   level endon("sq_bag_over");
-  while(!(isDefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
+  while (!(isdefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
     if(!self.ringing && self.right_gong) {
       print3d(self.origin + vectorscale((0, 0, 1), 64), "", vectorscale((0, 1, 0), 255), 1);
     }
@@ -402,12 +402,12 @@ function debug_gong() {
 }
 
 function gong_wobble() {
-  if(isDefined(self.wobble_threaded)) {
+  if(isdefined(self.wobble_threaded)) {
     return;
   }
   self.wobble_threaded = 1;
   self useanimtree($generic);
-  while(true) {
+  while (true) {
     self waittill("triggered");
     self animation::stop();
     self thread animation::play("p7_fxanim_zm_sha_gong_anim", self.origin, self.angles);
@@ -417,11 +417,11 @@ function gong_wobble() {
 function dud_gong_handler() {
   level endon("bag_start");
   self thread gong_wobble();
-  if(!isDefined(self.ringing)) {
+  if(!isdefined(self.ringing)) {
     self.ringing = 0;
   }
   self thread debug_gong();
-  while(true) {
+  while (true) {
     self waittill("triggered");
     if(!self.ringing) {
       self gong_goes_bong(0);
@@ -432,7 +432,7 @@ function dud_gong_handler() {
 function function_43e26f4d(player) {
   level endon("sq_std_over");
   struct = struct::get("sq_location_bag", "targetname");
-  if(!isDefined(struct)) {
+  if(!isdefined(struct)) {
     return;
   }
   level._bag_sound_ent = spawn("script_origin", struct.origin);
@@ -442,7 +442,7 @@ function function_43e26f4d(player) {
   level._bag_sound_ent waittill("sounddone");
   level._bag_sound_ent playsoundwithnotify("vox_egg_story_5_2", "sounddone");
   level._bag_sound_ent waittill("sounddone");
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     level.skit_vox_override = 1;
     player playsoundwithnotify("vox_egg_story_5_3" + zm_temple_sq::function_26186755(player.characterindex), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
@@ -459,7 +459,7 @@ function function_43e26f4d(player) {
 function function_69e4e9b6() {
   level endon("sq_std_over");
   struct = struct::get("sq_location_bag", "targetname");
-  if(!isDefined(struct)) {
+  if(!isdefined(struct)) {
     return;
   }
   level._bag_sound_ent = spawn("script_origin", struct.origin);

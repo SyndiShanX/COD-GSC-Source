@@ -7,9 +7,8 @@
 #include maps\_hud_util;
 
 init() {
-  if(level.script == "frontend") {
+  if(level.script == "frontend")
     return;
-  }
   PrecacheItem("syrette_sp");
   precachestring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   precachestring(&"GAME_PLAYER_NEEDS_TO_BE_REVIVED");
@@ -73,7 +72,9 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   setdvar(dvarName, self.downs);
   self AllowJump(false);
   if(isDefined(level.playerlaststand_func)) {
-    [[level.playerlaststand_func]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
+    [
+      [level.playerlaststand_func]
+    ](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   }
   if(!laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc)) {
     self mission_failed_during_laststand(self);
@@ -158,7 +159,9 @@ laststand_enable_player_weapons() {
     self TakeWeapon(self.laststandpistol);
   }
   if(isDefined(self.hadpistol) && self.hadpistol == true && isDefined(level.zombie_last_stand_ammo_return)) {
-    [[level.zombie_last_stand_ammo_return]]();
+    [
+      [level.zombie_last_stand_ammo_return]
+    ]();
   }
   self EnableWeaponCycling();
   self EnableOffhandWeapons();
@@ -191,7 +194,9 @@ laststand_give_pistol() {
   assert(isDefined(self.laststandpistol));
   assert(self.laststandpistol != "none");
   if(isDefined(level.zombie_last_stand)) {
-    [[level.zombie_last_stand]]();
+    [
+      [level.zombie_last_stand]
+    ]();
   } else {
     self GiveWeapon(self.laststandpistol);
     self GiveMaxAmmo(self.laststandpistol);
@@ -418,7 +423,7 @@ say_revived_vo() {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       if(players[i] == self) {
-        self playSound("plr_" + i + "_vox_revived" + "_" + randomintrange(0, 2));
+        self playsound("plr_" + i + "_vox_revived" + "_" + randomintrange(0, 2));
       }
     }
   }

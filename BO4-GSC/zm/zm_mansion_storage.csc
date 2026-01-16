@@ -15,33 +15,34 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
+
 #namespace mansion_storage;
 
 init() {
-  clientfield::register("scriptmover", "" + # "hash_65a58403194ef1b4", 8000, 1, "int", &function_438d8674, 0, 0);
-  clientfield::register("world", "" + # "start_billiards", 8000, 1, "int", &start_billiards, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_65a58403194ef1b4", 8000, 1, "int", &function_438d8674, 0, 0);
+  clientfield::register("world", "" + #"start_billiards", 8000, 1, "int", &start_billiards, 0, 0);
   serverfield::register("billiard_ball_sunk_sf", 8000, getminbitcountfornum(9), "int");
-  clientfield::register("world", "" + # "hash_354bb8ac5de6640a", 8000, getminbitcountfornum(9), "int", &function_954a27a2, 0, 0);
-  clientfield::register("world", "" + # "hash_75594bca6b54706e", 8000, 1, "int", &function_68e49445, 0, 0);
-  clientfield::register("world", "" + # "hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
-  clientfield::register("scriptmover", "" + # "barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
-  clientfield::register("scriptmover", "" + # "barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
-  level._effect[# "barrel_drip"] = # "hash_657c3b5d3d9bfdfa";
-  level._effect[# "barrel_splash"] = # "hash_42bcb312df258591";
-  level._effect[# "hash_6a63e8eb86cc88e2"] = # "hash_5934158bcfb9c884";
-  level._effect[# "hash_345c6b60fb9b8682"] = # "hash_782ae54493a94c4a";
+  clientfield::register("world", "" + #"hash_354bb8ac5de6640a", 8000, getminbitcountfornum(9), "int", &function_954a27a2, 0, 0);
+  clientfield::register("world", "" + #"hash_75594bca6b54706e", 8000, 1, "int", &function_68e49445, 0, 0);
+  clientfield::register("world", "" + #"hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
+  clientfield::register("scriptmover", "" + #"barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
+  clientfield::register("scriptmover", "" + #"barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
+  level._effect[#"barrel_drip"] = #"hash_657c3b5d3d9bfdfa";
+  level._effect[#"barrel_splash"] = #"hash_42bcb312df258591";
+  level._effect[#"hash_6a63e8eb86cc88e2"] = #"hash_5934158bcfb9c884";
+  level._effect[#"hash_345c6b60fb9b8682"] = #"hash_782ae54493a94c4a";
 }
 
 function_438d8674(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "hash_1789fef86cd8b57e"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_1789fef86cd8b57e"], self, "tag_origin");
 }
 
 function_3e37bb63(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "barrel_drip"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"barrel_drip"], self, "tag_origin");
 }
 
 function_5e130882(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "hash_6a63e8eb86cc88e2"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_6a63e8eb86cc88e2"], self, "tag_origin");
   wait 3;
 
   if(isDefined(self) && isDefined(self.fx)) {
@@ -76,23 +77,23 @@ function_eb218e8d() {
 
   self thread function_c7673785();
 
-  while(true) {
-    self.health = 99999;
+    while(true) {
+      self.health = 99999;
 
-    if(self.origin[2] <= n_elev) {
-      setdynentenabled(self, 0);
+      if(self.origin[2] <= n_elev) {
+        setdynentenabled(self, 0);
 
-      if(self.script_int == 8 && distance2dsquared(self.origin, struct::get("corner_target", "script_noteworthy").origin) <= 30 * 30) {
-        getlocalplayers()[0] serverfield::set("billiard_ball_sunk_sf", 10);
-      } else {
-        getlocalplayers()[0] serverfield::set("billiard_ball_sunk_sf", self.script_int);
+        if(self.script_int == 8 && distance2dsquared(self.origin, struct::get("corner_target", "script_noteworthy").origin) <= 30 * 30) {
+          getlocalplayers()[0] serverfield::set("billiard_ball_sunk_sf", 10);
+        } else {
+          getlocalplayers()[0] serverfield::set("billiard_ball_sunk_sf", self.script_int);
+        }
+
+        break;
       }
 
-      break;
+      waitframe(1);
     }
-
-    waitframe(1);
-  }
 }
 
 private function_c7673785() {
@@ -111,30 +112,30 @@ private function_c7673785() {
   }
 }
 
-function function_68e49445(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval) {
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_01");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_02");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_03");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_04");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_05");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_06");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_07");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_08");
-    forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_09");
-    return;
-  }
+  function function_68e49445(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+    if(newval) {
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_01");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_02");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_03");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_04");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_05");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_06");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_07");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_08");
+      forcestreamxmodel("p8_zm_man_cabinet_billiard_ball_09");
+      return;
+    }
 
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_01");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_02");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_03");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_04");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_05");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_06");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_07");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_08");
-  stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_09");
-}
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_01");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_02");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_03");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_04");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_05");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_06");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_07");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_08");
+    stopforcestreamingxmodel("p8_zm_man_cabinet_billiard_ball_09");
+  }
 
 function_2dbadedf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
@@ -152,7 +153,7 @@ function_954a27a2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(isDefined(var_4fe0b0ee)) {
       if(var_4fe0b0ee.origin[2] >= 27) {
-        playfxondynent(level._effect[# "hash_345c6b60fb9b8682"], var_4fe0b0ee);
+        playfxondynent(level._effect[#"hash_345c6b60fb9b8682"], var_4fe0b0ee);
       }
 
       setdynentenabled(var_4fe0b0ee, 0);

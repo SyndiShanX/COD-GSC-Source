@@ -8,7 +8,8 @@
 #include maps\_anim;
 #include maps\createfx\la_2_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["f35_light"] = loadfx("maps/la/fx_light_f35_ignore_z");
@@ -100,7 +101,7 @@ initmodelanims() {
 }
 
 crane_rooftop_fx(e_crane) {
-  playFXOnTag(level._effect["crane_slam"], e_crane, "crane_fx_jnt");
+  playfxontag(level._effect["crane_slam"], e_crane, "crane_fx_jnt");
   exploder(200);
 }
 
@@ -135,7 +136,7 @@ crane_destroy_panel_6(e_crane) {
 }
 
 billboard_death_1(e_billboard) {
-  e_billboard playSound("evt_billboard1_collapse");
+  e_billboard playsound("evt_billboard1_collapse");
   level notify("billboard_death_1");
 }
 

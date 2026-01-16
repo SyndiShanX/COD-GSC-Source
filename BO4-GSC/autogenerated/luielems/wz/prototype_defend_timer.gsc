@@ -5,9 +5,11 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace prototype_defend_timer;
 
 class cprototype_defend_timer: cluielem {
+
   function close(player) {
     cluielem::close_luielem(player);
   }

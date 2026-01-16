@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   character\mp_character_seal_udt_sniper::main();
 }
 

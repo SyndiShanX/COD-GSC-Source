@@ -80,13 +80,13 @@ black_hole_deployed(local_client_num, int_set, ent_new) {
 black_hole_fx_start(local_client_num, ent_bomb) {
   bomb_fx_spot = spawn(local_client_num, ent_bomb.origin, "script_model");
   bomb_fx_spot setModel("tag_origin");
-  playFXOnTag(local_client_num, level._effect["black_hole_bomb_portal"], bomb_fx_spot, "tag_origin");
-  playFXOnTag(local_client_num, level._effect["black_hole_bomb_marker_flare"], bomb_fx_spot, "tag_origin");
+  PlayFXOnTag(local_client_num, level._effect["black_hole_bomb_portal"], bomb_fx_spot, "tag_origin");
+  PlayFXOnTag(local_client_num, level._effect["black_hole_bomb_marker_flare"], bomb_fx_spot, "tag_origin");
   ent_bomb waittill("entityshutdown");
   event_horizon_spot = spawn(local_client_num, bomb_fx_spot.origin, "script_model");
   event_horizon_spot setModel("tag_origin");
   bomb_fx_spot Delete();
-  playFXOnTag(local_client_num, level._effect["black_hole_bomb_event_horizon"], event_horizon_spot, "tag_origin");
+  PlayFXOnTag(local_client_num, level._effect["black_hole_bomb_event_horizon"], event_horizon_spot, "tag_origin");
   wait(0.2);
   event_horizon_spot Delete();
 }
@@ -167,7 +167,7 @@ black_hole_vision_set(min_black_hole_dist, flt_transition_time, struct_closest_b
   self endon("death");
   set_dist = self._curr_black_hole_dist;
   if(set_dist < min_black_hole_dist) {
-    trace = bulletTrace(self getEye(), struct_closest_black_hole.origin, false, self);
+    trace = bullettrace(self GetEye(), struct_closest_black_hole.origin, false, self);
     if(trace["fraction"] > 0.85 && struct_closest_black_hole._black_hole_active == 1) {
       self black_hole_visionset_switch("inside_bh", flt_transition_time, int_local_client_num);
     } else {
@@ -179,7 +179,7 @@ black_hole_vision_set(min_black_hole_dist, flt_transition_time, struct_closest_b
 }
 
 black_hole_activated(ent_model, int_local_client_num) {
-  new_black_hole_struct = spawnStruct();
+  new_black_hole_struct = SpawnStruct();
   new_black_hole_struct.origin = ent_model.origin;
   new_black_hole_struct._black_hole_active = 1;
   level._current_black_hole_bombs = add_to_array(level._cosmodrome_black_hole_bombs, new_black_hole_struct);
@@ -202,7 +202,7 @@ black_hole_zombie_being_pulled(local_client_num, int_set, actor_new) {
     level thread black_hole_bomb_pulled_in_fx_clean(self, self._bhb_pulled_in_fx);
     players = getLocalPlayers();
     for(i = 0; i < players.size; i++) {
-      playFXOnTag(i, level._effect["black_hole_bomb_zombie_pull"], self._bhb_pulled_in_fx, "tag_origin");
+      PlayFXOnTag(i, level._effect["black_hole_bomb_zombie_pull"], self._bhb_pulled_in_fx, "tag_origin");
     }
   } else {
     if(isDefined(self._bhb_pulled_in_fx)) {

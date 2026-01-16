@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace dialog_shared;
 
 autoexec __init__system__() {
@@ -14,19 +15,19 @@ autoexec __init__system__() {
 
 __init__() {
   level.mpboostresponse = [];
-  level.mpboostresponse[# "battery"] = "Battery";
-  level.mpboostresponse[# "buffassault"] = "BuffAssault";
-  level.mpboostresponse[# "engineer"] = "Engineer";
-  level.mpboostresponse[# "firebreak"] = "Firebreak";
-  level.mpboostresponse[# "nomad"] = "Nomad";
-  level.mpboostresponse[# "prophet"] = "Prophet";
-  level.mpboostresponse[# "recon"] = "Recon";
-  level.mpboostresponse[# "ruin"] = "Ruin";
-  level.mpboostresponse[# "seraph"] = "Seraph";
-  level.mpboostresponse[# "swatpolice"] = "SwatPolice";
-  level.mpboostresponse[# "spectre"] = "Spectre";
-  level.mpboostresponse[# "reaper"] = "Reaper";
-  level.mpboostresponse[# "outrider"] = "Outrider";
+  level.mpboostresponse[#"battery"] = "Battery";
+  level.mpboostresponse[#"buffassault"] = "BuffAssault";
+  level.mpboostresponse[#"engineer"] = "Engineer";
+  level.mpboostresponse[#"firebreak"] = "Firebreak";
+  level.mpboostresponse[#"nomad"] = "Nomad";
+  level.mpboostresponse[#"prophet"] = "Prophet";
+  level.mpboostresponse[#"recon"] = "Recon";
+  level.mpboostresponse[#"ruin"] = "Ruin";
+  level.mpboostresponse[#"seraph"] = "Seraph";
+  level.mpboostresponse[#"swatpolice"] = "SwatPolice";
+  level.mpboostresponse[#"spectre"] = "Spectre";
+  level.mpboostresponse[#"reaper"] = "Reaper";
+  level.mpboostresponse[#"outrider"] = "Outrider";
   level.clientvoicesetup = &client_voice_setup;
   clientfield::register("world", "boost_number", 1, 2, "int", &set_boost_number, 1, 1);
   clientfield::register("allplayers", "play_boost", 1, 2, "int", &play_boost_vox, 1, 0);
@@ -198,7 +199,7 @@ get_player_dialog_alias(dialogkey, meansofdeath = undefined) {
 
   bundlename = self getmpdialogname();
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 

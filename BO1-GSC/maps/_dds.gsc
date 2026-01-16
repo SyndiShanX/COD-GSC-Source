@@ -8,7 +8,7 @@
 #include maps\_utility;
 
 dds_init() {
-  level.dds = spawnStruct();
+  level.dds = spawnstruct();
   level.dds.heartbeat = 0.25;
   level.dds.variant_limit = 18;
   level.dds.category_backoff_limit = 6;
@@ -46,7 +46,7 @@ init_dds_countryIDs(voice, dds_label) {
 }
 
 add_dds_countryID(voice, dds_label, max_voices) {
-  level.dds.countryIDs[voice] = spawnStruct();
+  level.dds.countryIDs[voice] = SpawnStruct();
   level.dds.countryIDs[voice].label = dds_label;
   level.dds.countryIDs[voice].count = 0;
   level.dds.countryIDs[voice].max_voices = max_voices;
@@ -189,9 +189,8 @@ dds_clear_all_queued_events_axis() {
 }
 
 dds_main_process() {
-  if(flag("dds_running_allies")) {
+  if(flag("dds_running_allies"))
     return;
-  }
   flag_set("dds_running_allies");
   dds_find_threats("allies", "axis");
   should_delay_dds = false;
@@ -216,9 +215,8 @@ dds_main_process() {
 }
 
 dds_main_process_axis() {
-  if(flag("dds_running_axis")) {
+  if(flag("dds_running_axis"))
     return;
-  }
   flag_set("dds_running_axis");
   dds_find_threats("axis", "allies");
   should_delay_dds = false;
@@ -298,9 +296,8 @@ is_dds_enabled() {
 
 exponent(base, power) {
   assert(power >= 0);
-  if(power == 0) {
+  if(power == 0)
     return 1;
-  }
   return base * exponent(base, (power - 1));
 }
 
@@ -470,18 +467,16 @@ get_nearest_common(response, player_can_say_line, distance) {
   } else {
     ai_array = GetAIArray("axis");
   }
-  if(ai_array.size <= 0) {
+  if(ai_array.size <= 0)
     return undefined;
-  }
   if(response && isDefined(self.talker)) {
     ai_array = remove_all_actors_with_same_characterID(ai_array, self.talker.dds_characterID);
     closest_ent = get_closest_living(self.talker.origin, ai_array);
   } else {
     closest_ent = get_closest_living(self.ent_origin, ai_array);
   }
-  if(!isDefined(closest_ent)) {
+  if(!isDefined(closest_ent))
     return undefined;
-  }
   dis_from_player = distance(player.origin, closest_ent.origin);
   if(dis_from_player > distance) {
     return undefined;
@@ -557,13 +552,11 @@ dds_get_alias_from_event(talker, category_alias_name, event_ent) {
     for(i = 0; i < variant_count_array.size; i++) {
       variant_num = random(variant_count_array);
       temp_alias = alias;
-      if(variant_num < 10) {
+      if(variant_num < 10)
         temp_alias += "0";
-      }
       temp_alias += variant_num;
-      if(!is_phrase_in_history(temp_alias)) {
+      if(!is_phrase_in_history(temp_alias))
         return temp_alias;
-      }
     }
   } else {
     return undefined;
@@ -584,9 +577,8 @@ dds_variant_count_for_alias(alias) {
   variant_count_array = [];
   for(i = 0; i < level.dds.variant_limit; i++) {
     prefix = "";
-    if(i < 10) {
+    if(i < 10)
       prefix = "0";
-    }
     if(SoundExists(alias + prefix + i)) {
       variant_count_array[variant_count_array.size] = i;
     }
@@ -611,9 +603,8 @@ get_landmark_qualifier(alias) {
     lm_script_area = self.node.script_area;
     lm_script_area_origin = self.node.origin;
   }
-  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin)) {
+  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin))
     return undefined;
-  }
   if((distance(self.origin, lm_script_area_origin) < 400) && SoundExists(alias + lm_script_area + "_00")) {
     return lm_script_area;
   }
@@ -840,9 +831,8 @@ dds_notify_mod(isAlliesLine, category_name) {
   if(!is_dds_enabled()) {
     return;
   }
-  if(!isDefined(self.damagemod)) {
+  if(!isDefined(self.damagemod))
     return;
-  }
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.team)) {
     if(isDefined(self.dds_dmg_attacker.team) && ((self.dds_dmg_attacker.team == self.team) || (self.team == "neutral"))) {
       return;
@@ -959,7 +949,7 @@ dds_notify(category_name, isAlliesLine) {
   }
   assertEx(isDefined(level.dds), "dds not init.");
   assertEx(isDefined(isAlliesLine), "isAlliesLine is not defined.");
-  event = spawnStruct();
+  event = spawnstruct();
   event.category_name = category_name;
   event.ent = self;
   event.ent_origin = self.origin;
@@ -1032,9 +1022,8 @@ dds_sort_ent_dist(eventArray) {
   }
   temp = undefined;
   for(i = 0; i < dist_array.size - 1; i++) {
-    if(dist_array[i] <= dist_array[i + 1]) {
+    if(dist_array[i] <= dist_array[i + 1])
       continue;
-    }
     temp = dist_array[i];
     dist_array[i] = dist_array[i + 1];
     dist_array[i + 1] = temp;

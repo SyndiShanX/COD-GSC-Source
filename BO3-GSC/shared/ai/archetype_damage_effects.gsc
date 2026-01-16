@@ -17,10 +17,10 @@
 function autoexec main() {
   clientfield::register("actor", "arch_actor_fire_fx", 1, 2, "int");
   clientfield::register("actor", "arch_actor_char", 1, 2, "int");
-  callback::on_actor_damage(&onactordamagecallback);
-  callback::on_vehicle_damage(&onvehicledamagecallback);
-  callback::on_actor_killed(&onactorkilledcallback);
-  callback::on_vehicle_killed(&onvehiclekilledcallback);
+  callback::on_actor_damage( & onactordamagecallback);
+  callback::on_vehicle_damage( & onvehicledamagecallback);
+  callback::on_actor_killed( & onactorkilledcallback);
+  callback::on_vehicle_killed( & onvehiclekilledcallback);
 }
 
 function onactordamagecallback(params) {
@@ -56,9 +56,9 @@ function onvehicledamage(params) {
 }
 
 function onactorkilled() {
-  if(isDefined(self.damagemod)) {
+  if(isdefined(self.damagemod)) {
     if(self.damagemod == "MOD_BURNED") {
-      if(isDefined(self.damageweapon) && isDefined(self.damageweapon.specialpain) && self.damageweapon.specialpain == 0) {
+      if(isdefined(self.damageweapon) && isdefined(self.damageweapon.specialpain) && self.damageweapon.specialpain == 0) {
         self clientfield::set("arch_actor_fire_fx", 2);
       }
     }

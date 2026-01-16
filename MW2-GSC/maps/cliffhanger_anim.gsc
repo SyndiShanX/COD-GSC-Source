@@ -164,6 +164,7 @@ generic_human() {
   level.scr_anim["welder_wing"]["welding"][0] = % cliffhanger_welder_wing;
   level.scr_anim["welder_engine"]["welding"][0] = % cliffhanger_welder_engine;
 
+
   //HANGER
   /*
   level.scr_anim[ "price" ][ "capture" ]			= %cliffhanger_capture_Price;
@@ -200,7 +201,7 @@ generic_human() {
   level.scr_anim["generic"]["capture_shoutingA"] = % CQB_stand_shout_A;
   level.scr_anim["generic"]["capture_shoutingB"] = % CQB_stand_shout_B;
 
-  //added 5 reaction animations for cliffhanger capture sequence.
+  //added 5 reaction animations for cliffhanger capture sequence. 
   level.scr_anim["generic"]["explosion_reactA"] = % CQB_stand_react_A;
   level.scr_anim["generic"]["explosion_reactB"] = % CQB_stand_react_B;
   level.scr_anim["generic"]["explosion_reactC"] = % CQB_stand_react_C;
@@ -259,23 +260,24 @@ set_deathanim_b(guy) {
 
 price_land_fx(price) {
   //iprintlnbold( "Touch Down" );
-  //playFXOnTag( getfx( "price_landing" ), price, "J_Ankle_RI");
+  //playfxontag( getfx( "price_landing" ), price, "J_Ankle_RI");
 
   tagPos = price gettagorigin("J_Ankle_RI"); // rough tag to play fx on
   tagPos = PhysicsTrace(tagPos + (0, 0, 64), tagPos + (0, 0, -64));
-  playFX(level._effect["price_landing"], tagPos);
+  playfx(level._effect["price_landing"], tagPos);
+
 }
 
 price_land_settle_fx(price) {
   tagPos = price gettagorigin("J_Ankle_LE"); // rough tag to play fx on
   tagPos = PhysicsTrace(tagPos + (0, 0, 64), tagPos + (0, 0, -64));
-  playFX(level._effect["price_landing"], tagPos);
+  playfx(level._effect["price_landing"], tagPos);
 }
 
 price_slide_fx(price) {
   self endon("stop_slide_fx");
-  while(true) {
-    playFXOnTag(getfx("price_sliding"), price, "J_Ankle_LE");
+  while (true) {
+    playfxontag(getfx("price_sliding"), price, "J_Ankle_LE");
     wait(.1);
   }
 }
@@ -319,7 +321,7 @@ script_models() {
 }
 
 locker_slam(price) {
-  locker_dyn_explosion_orgs = getEntArray("locker_dyn_explosion_org", "targetname");
+  locker_dyn_explosion_orgs = getentarray("locker_dyn_explosion_org", "targetname");
   foreach(org in locker_dyn_explosion_orgs) {
     PhysicsExplosionSphere(org.origin, 100, 80, 0.3);
   }
@@ -333,8 +335,9 @@ destroyed_fallen_tree_cliffhanger01() {
   flag_wait("destroyed_fallen_tree_cliffhanger01");
   exploder(18); //set in createfx
   wait(.25);
-  playFX(level._effect["tree_trunk_explosion"], node.origin);
+  playfx(level._effect["tree_trunk_explosion"], node.origin);
   node anim_single_solo(fallingtree, "destroyed_fallen_tree_cliffhanger01");
+
 }
 
 #using_animtree("player");
@@ -370,13 +373,14 @@ vehicles() {
 }
 
 snowmobile_skidout_fx(snowmobile) {
-  // commented out to hand off to code.the effect behavior "effect at spawn" playing from a
+
+  // commented out to hand off to code.the effect behavior "effect at spawn" playing from a 
   // "playfxontag" isn't taking on the bone position, as it should
-  //	playFXOnTag( getfx( "tread_snow_snowmobile_skidout" ), snowmobile, "tag_deathfx" );
+  //	playfxontag( getfx( "tread_snow_snowmobile_skidout" ), snowmobile, "tag_deathfx" );
 
   level endon("stop_skidout_fx");
-  while(true) {
-    playFXOnTag(getfx("tread_snow_snowmobile_skidout"), snowmobile, "tag_deathfx");
+  while (true) {
+    playfxontag(getfx("tread_snow_snowmobile_skidout"), snowmobile, "tag_deathfx");
     wait(.03);
   }
 }
@@ -387,8 +391,9 @@ snowmobile_stop_skidout_fx(snowmobile) {
 
 mig_touchdown_fx(mig) {
   //iprintlnbold( "Touch Down" );
-  playFXOnTag(getfx("mig_landing_snow"), mig, "tag_origin");
-  playFXOnTag(getfx("mig_landing_trail_snow"), mig, "origin_animate_jnt");
+  playfxontag(getfx("mig_landing_snow"), mig, "tag_origin");
+  playfxontag(getfx("mig_landing_trail_snow"), mig, "origin_animate_jnt");
+
 }
 
 #using_animtree("generic_human");
@@ -398,7 +403,7 @@ c4_swap(guy) {
   C4angles = guy gettagangles("TAG_INHAND");
 
   c4_model = spawn("script_model", C4org);
-  c4_model setModel("weapon_c4");
+  c4_model setmodel("weapon_c4");
   c4_model.angles = C4angles;
 
   c4_model thread maps\_c4::playC4Effects();
@@ -414,9 +419,8 @@ ignore_all(guy) {
 }
 
 ai_kill(guy) {
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
   guy.allowDeath = true;
   guy.a.nodeath = true;
   guy set_battlechatter(false);
@@ -426,7 +430,7 @@ ai_kill(guy) {
   /*
   tagPos = guy gettagorigin( "j_SpineUpper" );	// rough tag to play fx on
   tagPos = PhysicsTrace( tagPos + ( 0,0,64), tagPos + ( 0,0,-64) );
-  playFX( level._effect[ "deathfx_bloodpool_generic" ], tagPos );
+  playfx( level._effect[ "deathfx_bloodpool_generic" ], tagPos );
   */
 }
 
@@ -435,12 +439,19 @@ dialog() {
   //Soap, these muppets have no idea we’re here. Let’s take this nice and slow.	
   level.scr_sound["price"]["cliff_pri_noidea"] = "cliff_pri_noidea";
 
+
+
   //Target down.	
   level.scr_sound["price"]["cliff_pri_killfirm"] = "cliff_pri_killfirm";
+
+
+
+
 
   //RUN ACROSS TARMAC
   //Soap! Follow me! Let's go!!!	
   level.scr_sound["price"]["follow_me"] = "cliff_pri_followmeletsgo";
+
 
   //RUSSIAN YELLING
 
@@ -509,6 +520,7 @@ dialog() {
   //Target behind you.	
   level.scr_sound["price"]["cliff_pri_targetbehindyou"] = "cliff_pri_targetbehindyou";
 
+
   //THEY ARE RESPAWNING---
   //Hold up.	
   level.scr_sound["price"]["cliff_pri_holdup"] = "cliff_pri_holdup";
@@ -541,8 +553,11 @@ dialog() {
   //Nicely done.	
   level.scr_sound["price"]["cliff_pri_nicelydone"] = "cliff_pri_nicelydone";
 
+
   //PRICE KILLED SOMEONE---
   level.scr_sound["price"]["tango_down"] = "cliff_pri_killfirm";
+
+
 
   //LETS SPLIT UP -----
   //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
@@ -609,6 +624,7 @@ dialog() {
   //Four tangos just got out and are looking around.	
   level.scr_sound["price"]["cliff_pri_lookingaround"] = "cliff_pri_lookingaround";
 
+
   //STEALTH BROKEN****
   //Take cover! They're on to you!	
   level.scr_sound["price"]["cliff_pri_takecover"] = "cliff_pri_takecover";
@@ -635,9 +651,12 @@ dialog() {
   //There is a reason we brought silencers. 	
   level.scr_sound["price"]["cliff_pri_silencers"] = "cliff_pri_silencers";
 
+
+
   //* Let’s go.	
   level.scr_sound["price"]["letsgo"] = "cliff_pri_letsgo";
   level.scr_face["price"]["letsgo"] = % cliff_pri_letsgo;
+
 
   //* Good luck mate - see you on the far side.	
   level.scr_sound["price"]["thefarside"] = "cliff_pri_thefarside";
@@ -697,7 +716,7 @@ dialog() {
   // “Snowmobiles! Take ‘em out!!”	
   level.scr_sound["price"]["snowmoibles"] = "cliff_pri_snowmoibles";
 
-  // "Soap, I've been compromised! Keep a low profile and hold your fire."
+  // "Soap, I've been compromised! Keep a low profile and hold your fire." 
   level.scr_sound["price"]["compromised"] = "cliff_pri_compromised";
 
   // "Soap, Go to plan b
@@ -743,6 +762,14 @@ dialog() {
   level.scr_sound["price"]["runformigeast"] = "cliff_pri_runformigeast";
   level.scr_face["price"]["runformigeast"] = % cliff_pri_runformigeast;
 
+
+
+
+
+
+
+
+
   ///////////////////////////////////////////////
 
   ///////////////RADIO
@@ -752,6 +779,7 @@ dialog() {
 
   //PLAYER STABBED SOMEONE	
   level.scr_radio["cliff_pri_melee_plyr"] = "cliff_pri_melee_plyr";
+
 
   //PRICE OUT OF BASE DIALOG
   //HEART BEAT SETUP---
@@ -805,6 +833,7 @@ dialog() {
   //Target behind you.	
   level.scr_radio["cliff_pri_targetbehindyou"] = "cliff_pri_targetbehindyou";
 
+
   //THEY ARE RESPAWNING---
   //Hold up.	
   level.scr_radio["cliff_pri_holdup"] = "cliff_pri_holdup";
@@ -839,6 +868,8 @@ dialog() {
 
   //PRICE KILLED SOMEONE---
   level.scr_radio["tango_down"] = "UK_pri_inform_killfirm_generic_s";
+
+
 
   //LETS SPLIT UP -----
   //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
@@ -908,6 +939,7 @@ dialog() {
   //Four tangos just got out and are looking around.	
   level.scr_radio["cliff_pri_lookingaround"] = "cliff_pri_lookingaround";
 
+
   //STEALTH BROKEN****
   //Take cover! They're on to you!	
   level.scr_radio["cliff_pri_takecover"] = "cliff_pri_takecover";
@@ -937,11 +969,13 @@ dialog() {
   //There is a reason we brought silencers. 	
   level.scr_radio["cliff_pri_silencers"] = "cliff_pri_silencers";
 
+
   //////////////////////////in
   //PRICE: The truck is coming back.
   level.scr_radio["cliff_pri_truckcomingback"] = "cliff_pri_truckcomingback";
   //PRICE: The truck is coming.
   level.scr_radio["cliff_pri_truckiscoming"] = "cliff_pri_truckiscoming";
+
 
   //PRICE: They are going back to their positions.
   level.scr_radio["cliff_pri_theygoingback"] = "cliff_pri_theygoingback";
@@ -959,6 +993,9 @@ dialog() {
   //PRICE: Stay out of sight - you’ve alerted one of them!
   level.scr_radio["cliff_pri_sightalertedone"] = "cliff_pri_sightalertedone";
 
+
+
+
   //Keep an eye on your heart beat sensor, good luck.
   level.scr_radio["cliff_pri_keepeyeonheart"] = "cliff_pri_keepeyeonheart";
 
@@ -970,20 +1007,24 @@ dialog() {
   //I guess I have to do everything?	--
   level.scr_sound["price"]["cliff_pri_doeverything"] = "cliff_pri_doeverything";
 
+
   //Never mind.	--
   level.scr_radio["cliff_pri_nevermind"] = "cliff_pri_nevermind";
 
   //Then again, maybe not.	--
   level.scr_radio["cliff_pri_maybenot"] = "cliff_pri_maybenot";
 
+
   //Use the cover of the storm to enter the base. --	
   level.scr_radio["cliff_pri_coverofstorm"] = "cliff_pri_coverofstorm";
 
-  //Head southeast and plant your C4 at the fueling station.
+
+  //Head southeast and plant your C4 at the fueling station. 
   level.scr_radio["cliff_pri_yourein_2"] = "cliff_pri_yourein_2";
 
   //We may need to go to ‘Plan B’ if things go south.
   level.scr_radio["cliff_pri_yourein_3"] = "cliff_pri_yourein_3";
+
 
   //Soap, the fueling station is near the northeast corner of the runway.	
   level.scr_radio["cliff_pri_necorner"] = "cliff_pri_necorner";
@@ -991,20 +1032,25 @@ dialog() {
   //Soap - search the northeast part of the runway for the fueling station.	
   level.scr_radio["cliff_pri_searchntheast"] = "cliff_pri_searchntheast";
 
+
   //That's the fueling station.	
   level.scr_radio["cliff_pri_fuelingstation"] = "cliff_pri_fuelingstation";
 
   //You found it.	
   level.scr_radio["cliff_pri_foundit"] = "cliff_pri_foundit";
 
+
+
   //I'm headed for the hanger. Get there asap.	
   level.scr_radio["cliff_pri_getthereasap"] = "cliff_pri_getthereasap";
+
 
   //Soap I'm waiting behind the hangars at the southwest corner of the runway.	
   level.scr_radio["cliff_pri_behindhangars"] = "cliff_pri_behindhangars";
 
   //Soap, meet me behind the hangers at the southwest corner of the runway.	
   level.scr_radio["cliff_pri_meetme"] = "cliff_pri_meetme";
+
 
   //Brought some friends with you?	
   level.scr_sound["price"]["cliff_pri_broughtfriends"] = "cliff_pri_broughtfriends";
@@ -1063,4 +1109,5 @@ dialog() {
 
   // Soap! Get on that snowmobile let's go!	
   level.scr_sound["price"]["cliff_pri_snowmobileletsgo"] = "cliff_pri_snowmobileletsgo";
+
 }

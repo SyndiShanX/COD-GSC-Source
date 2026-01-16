@@ -98,9 +98,8 @@ finishLbStrikeUsage(lifeId, location, usedCallback, locationYaw) {
   wait(0.05);
   self thread stopLocationSelection(false);
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self thread[[usedCallback]](lifeId, location, locationYaw);
-  }
 }
 
 callStrike(lifeId, location, locationYaw) {
@@ -138,9 +137,8 @@ getFlightPath(location, locationYaw, rightOffset) {
   planeHalfDistance = 12000;
   flightPath = [];
 
-  if(isDefined(rightOffset) && rightOffset != 0) {
+  if(isDefined(rightOffset) && rightOffset != 0)
     location = location + (AnglesToRight(initialDirection) * rightOffset) + (0, 0, RandomInt(300));
-  }
 
   startPoint = (location + (anglesToForward(initialDirection) * (-1 * planeHalfDistance)));
 
@@ -283,9 +281,8 @@ startLbFiring1() {
       }
     }
 
-    if(fireOnTarget) {
+    if(fireOnTarget)
       self.mgTurret1 ShootTurret();
-    }
   }
 }
 
@@ -297,9 +294,8 @@ handleOwnerLeft() {
   self waittill("killstreak_disowned");
 
   for(i = 0; i < level.heli_flock.size; i++) {
-    if(isDefined(level.heli_flock[i])) {
+    if(isDefined(level.heli_flock[i]))
       level.heli_flock[i] notify("stopFiring");
-    }
   }
 
   for(i = 0; i < level.heli_flock.size; i++) {
@@ -318,9 +314,8 @@ notifyOnFlockDone() {
     selfendon("joined_spectators");
   }
 
-  while(heliFlockActive()) {
+  while(heliFlockActive())
     wait(0.5);
-  }
 
   self notify("flock_done");
 }
@@ -332,9 +327,8 @@ flock_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(isDefined(self.specialDamageCallback)) {
+    if(isDefined(self.specialDamageCallback))
       self[[self.specialDamageCallback]](undefined, attacker, damage, iDFlags, meansOfDeath, weapon, point, direction_vec, undefined, undefined, modelName, partName);
-    }
   }
 }
 
@@ -348,9 +342,8 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
   if(!maps\mp\gametypes\_weapons::friendlyFireCheck(self.owner, attacker)) {
     return;
   }
-  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
-  }
 
   self.wasDamaged = true;
 
@@ -360,9 +353,8 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
     attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("helicopter");
 
     if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
-      if(attacker _hasPerk("specialty_armorpiercing")) {
+      if(attacker _hasPerk("specialty_armorpiercing"))
         modifiedDamage += damage * level.armorPiercingMod;
-      }
     }
   }
 

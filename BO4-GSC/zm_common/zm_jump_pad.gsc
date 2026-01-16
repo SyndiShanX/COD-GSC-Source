@@ -11,6 +11,7 @@
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_jump_pad;
 
 autoexec __init__system__() {
@@ -89,7 +90,7 @@ delayed_jump_pad_start(who) {
 
 jump_pad_start(ent_player, endon_condition) {
   self endon(#"endon_condition");
-  ent_player endon(#"left_jump_pad", # "death", # "disconnect");
+  ent_player endon(#"left_jump_pad", #"death", #"disconnect");
   end_point = undefined;
   start_point = undefined;
   z_velocity = undefined;
@@ -139,11 +140,12 @@ jump_pad_start(ent_player, endon_condition) {
     sphere(end_point.origin, 12, (1, 0, 0), 1, 1, 12, 500);
   }
 
-  if(isDefined(self.script_string) && isDefined(level._jump_pad_override[self.script_string])) {
-    info_array = self[[level._jump_pad_override[self.script_string]]](start_point, end_point);
-    fling_this_way = info_array[0];
-    jump_time = info_array[1];
-  } else {
+    if(isDefined(self.script_string) && isDefined(level._jump_pad_override[self.script_string])) {
+      info_array = self[[level._jump_pad_override[self.script_string]]](start_point, end_point);
+      fling_this_way = info_array[0];
+      jump_time = info_array[1];
+    }
+  else {
     end_spot = end_point.origin;
 
     if(!(isDefined(self.script_airspeed) && self.script_airspeed)) {
@@ -207,7 +209,7 @@ jump_pad_start(ent_player, endon_condition) {
       n_reduction = getdvarfloat(#"hash_16fa72c379cf8968", 0);
     }
 
-    z_velocity = n_reduction * 2 * z_dist * world_gravity;
+      z_velocity = n_reduction * 2 * z_dist * world_gravity;
 
     if(z_velocity < 0) {
       z_velocity *= -1;
@@ -250,7 +252,7 @@ jump_pad_start(ent_player, endon_condition) {
       if(isDefined(level.var_8c6636af)) {
         self[[level.var_8c6636af]]();
       } else {
-        playFX(level._effect[# "jump_pad_jump"], self.origin);
+        playFX(level._effect[#"jump_pad_jump"], self.origin);
       }
 
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
@@ -267,7 +269,7 @@ jump_pad_start(ent_player, endon_condition) {
     if(isDefined(level.var_8c6636af)) {
       self[[level.var_8c6636af]]();
     } else {
-      playFX(level._effect[# "jump_pad_jump"], self.origin);
+      playFX(level._effect[#"jump_pad_jump"], self.origin);
     }
 
     ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
@@ -305,7 +307,7 @@ jump_pad_cancel(ent_player) {
 }
 
 jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   start_time = gettime();
   jump_time = flt_time * 500;
   attract_dist = undefined;
@@ -418,7 +420,7 @@ failsafe_pad_poi_clean(ent_trig, ent_poi) {
 }
 
 jump_pad_enemy_follow_or_ignore(ent_poi) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   zombies = getaiteamarray(level.zombie_team);
   players = getplayers();
   valid_players = 0;
@@ -476,7 +478,7 @@ jump_pad_ignore_poi_cleanup(ent_poi) {
 }
 
 stop_chasing_the_sky(ent_poi) {
-  self endon(#"death", # "stop_chasing_the_sky");
+  self endon(#"death", #"stop_chasing_the_sky");
 
   while(isDefined(self._pad_follow) && self._pad_follow) {
     if(isDefined(self.favoriteenemy)) {
@@ -510,7 +512,7 @@ jump_pad_player_overrides(st_behavior, int_clean) {
   }
 
   switch (st_behavior) {
-    case # "no_sprint":
+    case #"no_sprint":
       if(!int_clean) {}
 
       break;

@@ -21,10 +21,10 @@
 function init() {}
 
 function main() {
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_copycat", 6);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_copycat", &copycatgive, &copycattake);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_copycat", & copycatgive, & copycattake);
 }
 
 function on_player_connect() {}

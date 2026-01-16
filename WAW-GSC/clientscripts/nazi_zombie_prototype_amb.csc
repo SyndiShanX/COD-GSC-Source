@@ -23,28 +23,26 @@ main() {
 }
 
 add_song(song) {
-  if(!isDefined(level.radio_songs)) {
+  if(!isDefined(level.radio_songs))
     level.radio_songs = [];
-  }
   level.radio_songs[level.radio_songs.size] = song;
 }
 
 fade(id, time) {
   rate = 0;
-  if(time != 0) {
+  if(time != 0)
     rate = 1.0 / time;
-  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
-  while(SoundPlaying(id) && getSoundVolume(id) > .0001) {
+  while (SoundPlaying(id) && getSoundVolume(id) > .0001) {
     wait(.1);
   }
   stopSound(id);
 }
 
 radio_advance() {
-  for(;;) {
-    while(SoundPlaying(level.radio_id) || level.radio_index == 0) {
+  for (;;) {
+    while (SoundPlaying(level.radio_id) || level.radio_index == 0) {
       wait(1);
     }
     level notify("kzmb_next_song");
@@ -58,16 +56,16 @@ radio_thread() {
   assert(isDefined(level.radio_index));
   assert(level.radio_songs.size > 0);
   println("Starting radio at " + self.origin);
-  for(;;) {
+  for (;;) {
     level waittill("kzmb_next_song");
     println("client changing songs");
-    playSound(0, "static", self.origin);
+    playsound(0, "static", self.origin);
     if(SoundPlaying(level.radio_id)) {
       fade(level.radio_id, 1);
     } else {
       wait(.5);
     }
-    level.radio_id = playSound(0, level.radio_songs[level.radio_index], self.origin);
+    level.radio_id = playsound(0, level.radio_songs[level.radio_index], self.origin);
     level.radio_index += 1;
     if(level.radio_index >= level.radio_songs.size) {
       level.radio_index = 0;
@@ -92,10 +90,10 @@ radio_init() {
   add_song("pby_old");
   add_song("wild_card");
   add_song("");
-  radios = getEntArray(0, "kzmb", "targetname");
-  while(!isDefined(radios) || !radios.size) {
+  radios = getentarray(0, "kzmb", "targetname");
+  while (!isDefined(radios) || !radios.size) {
     wait(5);
-    radios = getEntArray(0, "kzmb", "targetname");
+    radios = getentarray(0, "kzmb", "targetname");
   }
   println("client found " + radios.size + " radios");
   array_thread(radios, ::radio_thread);

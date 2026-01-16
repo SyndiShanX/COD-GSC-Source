@@ -13,6 +13,7 @@
 #include scripts\zm_common\gametypes\globallogic_utils;
 #include scripts\zm_common\gametypes\spawnlogic;
 #include scripts\zm_common\util;
+
 #namespace globallogic_defaults;
 
 getwinningteamfromloser(losing_team) {
@@ -29,15 +30,15 @@ default_onforfeit(team) {
   level endon(#"forfeit in progress");
   level endon(#"abort forfeit");
   forfeit_delay = 20;
-  announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;
-  announcement(game.strings[# "opponent_forfeiting_in"], 10, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], 10, 0);
   wait 10;
-  endreason = # "";
+  endreason = #"";
 
   if(!isDefined(team)) {
-    setdvar(#"ui_text_endreason", game.strings[# "players_forfeited"]);
-    endreason = game.strings[# "players_forfeited"];
+    setdvar(#"ui_text_endreason", game.strings[#"players_forfeited"]);
+    endreason = game.strings[#"players_forfeited"];
     winner = level.players[0];
   } else if(isDefined(level.teams[team])) {
     endreason = game.strings[team + "_forfeited"];
@@ -57,7 +58,7 @@ default_onforfeit(team) {
     globallogic_utils::logteamwinstring("<dev string:x9c>", winner);
   }
 
-  thread globallogic::endgame(winner, endreason);
+    thread globallogic::endgame(winner, endreason);
 }
 
 default_ondeadevent(team) {
@@ -73,15 +74,15 @@ default_ondeadevent(team) {
     return;
   }
 
-  setdvar(#"ui_text_endreason", game.strings[# "tie"]);
+  setdvar(#"ui_text_endreason", game.strings[#"tie"]);
   globallogic_utils::logteamwinstring("tie");
 
   if(level.teambased) {
-    thread globallogic::endgame("tie", game.strings[# "tie"]);
+    thread globallogic::endgame("tie", game.strings[#"tie"]);
     return;
   }
 
-  thread globallogic::endgame(undefined, game.strings[# "tie"]);
+  thread globallogic::endgame(undefined, game.strings[#"tie"]);
 }
 
 default_onalivecountchange(team) {}
@@ -100,7 +101,7 @@ default_ononeleftevent(team) {
       print("<dev string:xbe>");
     }
 
-    thread globallogic::endgame(winner, # "mp_enemies_eliminated");
+      thread globallogic::endgame(winner, #"mp_enemies_eliminated");
     return;
   }
 
@@ -111,7 +112,7 @@ default_ononeleftevent(team) {
       continue;
     }
 
-    if(!isDefined(player.pers[# "team"]) || player.pers[# "team"] != team) {}
+    if(!isDefined(player.pers[#"team"]) || player.pers[#"team"] != team) {}
   }
 }
 
@@ -132,8 +133,8 @@ default_ontimelimit() {
 
   }
 
-  setdvar(#"ui_text_endreason", game.strings[# "time_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "time_limit_reached"]);
+  setdvar(#"ui_text_endreason", game.strings[#"time_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"time_limit_reached"]);
 }
 
 default_onscorelimit() {
@@ -157,8 +158,8 @@ default_onscorelimit() {
 
   }
 
-  setdvar(#"ui_text_endreason", game.strings[# "score_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "score_limit_reached"]);
+  setdvar(#"ui_text_endreason", game.strings[#"score_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"score_limit_reached"]);
   return true;
 }
 
@@ -186,6 +187,7 @@ default_onspawnintermission() {
   }
 
   util::error("<dev string:x185>" + spawnpointname + "<dev string:x18b>");
+
 }
 
 default_gettimelimit() {

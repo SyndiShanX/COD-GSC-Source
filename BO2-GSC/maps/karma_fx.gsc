@@ -10,7 +10,8 @@
 #include maps\karma_anim;
 #include maps\karma;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["sniper_glint"] = loadfx("misc/fx_misc_sniper_scope_glint");
@@ -236,17 +237,20 @@ createfx_setup() {
   maps\karma_anim::club_anims();
   level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "") {
+  if(level.skipto_point == "")
     level.skipto_point = "arrival";
-  }
 
   maps\karma::load_gumps_karma();
 }
 
-createfx_setup_gump_checkin() {}
+createfx_setup_gump_checkin() {
+}
 
-createfx_setup_gump_hotel() {}
+createfx_setup_gump_hotel() {
+}
 
-createfx_setup_gump_construction() {}
+createfx_setup_gump_construction() {
+}
 
-createfx_setup_gump_club() {}
+createfx_setup_gump_club() {
+}

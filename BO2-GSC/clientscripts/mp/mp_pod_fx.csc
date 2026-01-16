@@ -8,7 +8,8 @@
 #include clientscripts\mp\createfx\mp_pod_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_pod_glass_drop_trail"] = loadfx("maps/mp_maps/fx_mp_pod_glass_drop_trail");
@@ -83,7 +84,6 @@ main() {
   precache_fxanim_props_dlc4();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

@@ -15,16 +15,16 @@
 #namespace _gadget_combat_efficiency;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_combat_efficiency", &__init__, undefined, undefined);
+  system::register("gadget_combat_efficiency", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(15, &gadget_combat_efficiency_on_activate, &gadget_combat_efficiency_on_off);
-  ability_player::register_gadget_possession_callbacks(15, &gadget_combat_efficiency_on_give, &gadget_combat_efficiency_on_take);
-  ability_player::register_gadget_flicker_callbacks(15, &gadget_combat_efficiency_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(15, &gadget_combat_efficiency_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(15, &gadget_combat_efficiency_is_flickering);
-  ability_player::register_gadget_ready_callbacks(15, &gadget_combat_efficiency_ready);
+  ability_player::register_gadget_activation_callbacks(15, & gadget_combat_efficiency_on_activate, & gadget_combat_efficiency_on_off);
+  ability_player::register_gadget_possession_callbacks(15, & gadget_combat_efficiency_on_give, & gadget_combat_efficiency_on_take);
+  ability_player::register_gadget_flicker_callbacks(15, & gadget_combat_efficiency_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(15, & gadget_combat_efficiency_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(15, & gadget_combat_efficiency_is_flickering);
+  ability_player::register_gadget_ready_callbacks(15, & gadget_combat_efficiency_ready);
 }
 
 function gadget_combat_efficiency_is_inuse(slot) {
@@ -59,7 +59,7 @@ function gadget_combat_efficiency_on_off(slot, weapon) {
   self.combatefficiencylastontime = gettime();
   self addweaponstat(self.heroability, "scorestreaks_earned_2", int(self.scorestreaksearnedperuse / 2));
   self addweaponstat(self.heroability, "scorestreaks_earned_3", int(self.scorestreaksearnedperuse / 3));
-  if(isalive(self) && isDefined(level.playgadgetsuccess)) {
+  if(isalive(self) && isdefined(level.playgadgetsuccess)) {
     self[[level.playgadgetsuccess]](weapon);
   }
 }
@@ -68,7 +68,7 @@ function gadget_combat_efficiency_ready(slot, weapon) {}
 
 function set_gadget_combat_efficiency_status(weapon, status, time) {
   timestr = "";
-  if(isDefined(time)) {
+  if(isdefined(time)) {
     timestr = (("^3") + ", time: ") + time;
   }
   if(getdvarint("scr_cpower_debug_prints") > 0) {

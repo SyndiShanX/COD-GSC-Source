@@ -50,11 +50,10 @@ bulletwhizbyreaction() {
     var_1[3] = % exposed_idle_twitch_v4;
     var_2 = var_1[randomint(var_1.size)];
 
-    if(var_0) {
+    if(var_0)
       var_3 = 1 + randomfloat(0.5);
-    } else {
+    else
       var_3 = 0.2 + randomfloat(0.5);
-    }
 
     self setflaggedanimknobrestart("reactanim", var_2, 1, 0.1, 1);
     animscripts\notetracks::donotetracksfortime(var_3, "reactanim");
@@ -78,11 +77,10 @@ bulletwhizbyreaction() {
 
     var_6 = anglesToForward(self.angles);
 
-    if(isDefined(self.whizbyenemy)) {
+    if(isDefined(self.whizbyenemy))
       var_7 = vectornormalize(self.whizbyenemy.origin - self.origin);
-    } else {
+    else
       var_7 = var_6;
-    }
 
     if(vectordot(var_7, var_6) > 0) {
       var_8 = animscripts\utility::randomanimoftwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
@@ -158,11 +156,10 @@ getnewenemyreactionanim() {
     var_5[0] = % exposed_backpedal;
     var_5[1] = % exposed_idle_reactb;
 
-    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536) {
+    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536)
       self orientmode("face enemy");
-    } else {
+    else
       self orientmode("face point", self.reactiontargetpos);
-    }
 
     if(self.a.pose == "crouch") {
       var_3 = vectornormalize(self.reactiontargetpos - self.origin);
@@ -208,9 +205,9 @@ newenemyreactionanim() {
   self.lastreacttime = gettime();
   self.a.movement = "stop";
 
-  if(isDefined(self._stealth) && self.alertlevel != "combat") {
+  if(isDefined(self._stealth) && self.alertlevel != "combat")
     stealthnewenemyreactanim();
-  } else {
+  else {
     var_0 = getnewenemyreactionanim();
     self clearanim( % root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
@@ -234,7 +231,6 @@ newenemysurprisedreaction() {
   }
   self animmode("gravity");
 
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     newenemyreactionanim();
-  }
 }

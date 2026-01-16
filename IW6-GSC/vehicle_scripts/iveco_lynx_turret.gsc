@@ -33,21 +33,19 @@ init_local() {
 build_lynx_death(var_0) {
   level._effect["lynxfire"] = loadfx("fx/fire/firelp_med_pm_nolight");
 
-  if(isDefined(level.factory) && level.factory == 1) {
+  if(isDefined(level.factory) && level.factory == 1)
     level._effect["lynxexplode"] = loadfx("vfx/moments/factory/factory_chase_jeep_explosion");
-  } else {
+  else
     level._effect["lynxexplode"] = loadfx("fx/explosions/vehicle_explosion_gaz");
-  }
 
   level._effect["lynxcookoff"] = loadfx("fx/explosions/ammo_cookoff");
   level._effect["lynxsmfire"] = loadfx("fx/fire/firelp_small_pm_a");
   maps\_vehicle::build_deathmodel("vehicle_iveco_lynx_iw6", "vehicle_iveco_lynx_destroyed_iw6");
 
-  if(isDefined(level.factory) && level.factory == 1) {
+  if(isDefined(level.factory) && level.factory == 1)
     maps\_vehicle::build_deathfx("vfx/moments/factory/factory_chase_jeep_explosion", "tag_origin");
-  } else {
+  else
     maps\_vehicle::build_deathfx("fx/explosions/vehicle_explosion_gaz", "tag_origin");
-  }
 
   maps\_vehicle::build_deathfx("fx/fire/firelp_med_pm_nolight", "tag_origin", undefined, undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx/fire/firelp_small_pm_a", "tag_origin", undefined, undefined, undefined, 1, 3);
@@ -96,9 +94,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++) {
+  for(var_1 = 0; var_1 < 4; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_driver";
   var_0[1].sittag = "tag_passenger";

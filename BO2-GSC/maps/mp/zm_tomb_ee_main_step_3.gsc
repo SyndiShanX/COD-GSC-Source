@@ -33,13 +33,12 @@ exit_stage(success) {
   level.check_valid_poi = undefined;
   level notify("fire_link_cooldown");
   flag_set("fire_link_enabled");
-  a_buttons = getEntArray("fire_link_button", "targetname");
+  a_buttons = getentarray("fire_link_button", "targetname");
   array_delete(a_buttons);
   a_structs = getstructarray("fire_link", "targetname");
 
-  foreach(unitrigger_stub in a_structs) {
-    unregister_unitrigger(unitrigger_stub);
-  }
+  foreach(unitrigger_stub in a_structs)
+  unregister_unitrigger(unitrigger_stub);
 }
 
 create_buttons_and_triggers() {
@@ -52,7 +51,7 @@ create_buttons_and_triggers() {
     unitrigger_stub.cursor_hint = "HINT_NOICON";
     unitrigger_stub.require_look_at = 1;
     m_model = spawn("script_model", unitrigger_stub.origin);
-    m_model setModel("p_rus_alarm_button");
+    m_model setmodel("p_rus_alarm_button");
     m_model.angles = unitrigger_stub.angles;
     m_model.targetname = "fire_link_button";
     m_model thread ready_to_activate(unitrigger_stub);
@@ -91,9 +90,8 @@ watch_for_triple_attack() {
 mech_zombie_hole_valid(valid) {
   t_hole = getent("fire_link_damage", "targetname");
 
-  if(self istouching(t_hole)) {
+  if(self istouching(t_hole))
     return 1;
-  }
 
   return valid;
 }
@@ -103,18 +101,18 @@ activate_fire_link() {
 
   while(true) {
     self waittill("trigger", player);
-    self playSound("zmb_squest_robot_button");
+    self playsound("zmb_squest_robot_button");
 
     if(flag("three_robot_round")) {
       level thread fire_link_cooldown(self);
-      self playSound("zmb_squest_robot_button_activate");
-      self playLoopSound("zmb_squest_robot_button_timer", 0.5);
+      self playsound("zmb_squest_robot_button_activate");
+      self playloopsound("zmb_squest_robot_button_timer", 0.5);
       flag_waitopen("fire_link_enabled");
       self stoploopsound(0.5);
-      self playSound("zmb_squest_robot_button_deactivate");
+      self playsound("zmb_squest_robot_button_deactivate");
     } else {
-      self playSound("vox_maxi_robot_abort_0");
-      self playSound("zmb_squest_robot_button_deactivate");
+      self playsound("vox_maxi_robot_abort_0");
+      self playsound("zmb_squest_robot_button_deactivate");
       wait 3;
     }
   }
@@ -125,15 +123,13 @@ fire_link_cooldown(t_button) {
   level endon("fire_link_cooldown");
   flag_set("fire_link_enabled");
 
-  if(isDefined(t_button)) {
-    t_button playSound("vox_maxi_robot_activated_0");
-  }
+  if(isDefined(t_button))
+    t_button playsound("vox_maxi_robot_activated_0");
 
   wait 25;
 
-  if(isDefined(t_button)) {
-    t_button playSound("vox_maxi_robot_deactivated_0");
-  }
+  if(isDefined(t_button))
+    t_button playsound("vox_maxi_robot_deactivated_0");
 
   flag_clear("fire_link_enabled");
 }

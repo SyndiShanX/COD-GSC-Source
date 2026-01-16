@@ -28,7 +28,7 @@
 #namespace zm_audio_zhd;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio_zhd", &__init__, undefined, undefined);
+  system::register("zm_audio_zhd", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -46,19 +46,19 @@ function __init__() {
 function snd_zhdegg_activate() {
   level flag::wait_till("snd_zhdegg_activate");
   level function_513f51e1();
-  while(true) {
-    if(isDefined(level.var_61f315ab)) {
+  while (true) {
+    if(isdefined(level.var_61f315ab)) {
       success = [
         [level.var_61f315ab]
       ]();
     } else {
       success = level function_cf1b154();
     }
-    if(!(isDefined(success) && success)) {
+    if(!(isdefined(success) && success)) {
       level function_513f51e1(1);
       continue;
     }
-    if(isDefined(level.var_8229c449)) {
+    if(isdefined(level.var_8229c449)) {
       level[[level.var_8229c449]]();
     } else {
       level function_5b2770da();
@@ -70,10 +70,10 @@ function snd_zhdegg_activate() {
 
 function function_513f51e1(restart = 0) {
   s_ballerina_start = struct::get("s_ballerina_start", "targetname");
-  if(!isDefined(s_ballerina_start)) {
+  if(!isdefined(s_ballerina_start)) {
     return;
   }
-  if(!(isDefined(restart) && restart)) {
+  if(!(isdefined(restart) && restart)) {
     playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
     var_ac086ffb = util::spawn_model(s_ballerina_start.model, s_ballerina_start.origin - vectorscale((0, 0, 1), 20), s_ballerina_start.angles);
     var_ac086ffb clientfield::set("snd_zhdegg", 2);
@@ -95,16 +95,16 @@ function function_513f51e1(restart = 0) {
 function function_cf1b154() {
   var_d1f154fd = struct::get_array("s_ballerina_timed", "targetname");
   var_d1f154fd = array::randomize(var_d1f154fd);
-  if(isDefined(var_d1f154fd[0].script_int)) {
+  if(isdefined(var_d1f154fd[0].script_int)) {
     var_d1f154fd = array::sort_by_script_int(var_d1f154fd, 1);
   }
   n_amount = var_d1f154fd.size;
   if(n_amount >= 5) {
     n_amount = 5;
   }
-  for(i = 0; i < n_amount; i++) {
+  for (i = 0; i < n_amount; i++) {
     success = var_d1f154fd[i] function_3cf3ba48();
-    if(!(isDefined(success) && success)) {
+    if(!(isdefined(success) && success)) {
       return false;
     }
   }
@@ -114,7 +114,7 @@ function function_cf1b154() {
 function function_3cf3ba48() {
   self.var_ac086ffb = util::spawn_model(self.model, self.origin, self.angles);
   self.var_ac086ffb clientfield::set("snd_zhdegg", 1);
-  self.var_ac086ffb playLoopSound("mus_musicbox_lp", 2);
+  self.var_ac086ffb playloopsound("mus_musicbox_lp", 2);
   self.success = 0;
   self thread function_9d55fd08();
   self thread function_2fdaabf3();
@@ -133,7 +133,7 @@ function function_9d55fd08() {
   self endon("hash_636d801f");
   self endon("ballerina_destroyed");
   self endon("ballerina_timeout");
-  while(true) {
+  while (true) {
     self.var_ac086ffb rotateyaw(360, 4);
     wait(4);
   }
@@ -141,14 +141,14 @@ function function_9d55fd08() {
 
 function function_2fdaabf3() {
   self endon("ballerina_timeout");
-  self.var_ac086ffb setCanDamage(1);
+  self.var_ac086ffb setcandamage(1);
   self.var_ac086ffb.health = 1000000;
-  while(true) {
+  while (true) {
     self.var_ac086ffb waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(isDefined(level.var_252a085b) && level.var_252a085b) {
+    if(isdefined(level.var_252a085b) && level.var_252a085b) {
       continue;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isdefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_EXPLOSIVE") {
@@ -178,14 +178,14 @@ function function_5b2770da() {
   s_ballerina_end = struct::get("s_ballerina_end", "targetname");
   s_ballerina_end.var_ac086ffb = util::spawn_model(s_ballerina_end.model, s_ballerina_end.origin, s_ballerina_end.angles);
   s_ballerina_end.var_ac086ffb clientfield::set("snd_zhdegg", 1);
-  s_ballerina_end.var_ac086ffb playLoopSound("mus_musicbox_lp", 2);
+  s_ballerina_end.var_ac086ffb playloopsound("mus_musicbox_lp", 2);
   s_ballerina_end thread function_9d55fd08();
   s_ballerina_end zm_unitrigger::create_unitrigger(undefined, 65);
   s_ballerina_end waittill("trigger_activated");
   zm_unitrigger::unregister_unitrigger(s_ballerina_end.s_unitrigger);
   s_ballerina_end notify("hash_636d801f");
   s_ballerina_end.var_ac086ffb stoploopsound(0.5);
-  s_ballerina_end.var_ac086ffb playSound("zmb_challenge_skel_arm_up");
+  s_ballerina_end.var_ac086ffb playsound("zmb_challenge_skel_arm_up");
   var_f6c28cea = (2, 0, -6.5);
   var_e97ebb83 = (3.5, 0, -18.5);
   s_ballerina_end.var_3609adde = util::spawn_model("c_zom_dlc1_skeleton_zombie_body_s_rarm", s_ballerina_end.origin, s_ballerina_end.angles);
@@ -199,7 +199,7 @@ function function_5b2770da() {
   s_ballerina_end.var_3609adde clientfield::increment("snd_zhdegg_arm");
   s_ballerina_end.var_3609adde waittill("movedone");
   wait(1);
-  s_ballerina_end.var_ac086ffb playLoopSound("zmb_challenge_skel_arm_lp", 0.25);
+  s_ballerina_end.var_ac086ffb playloopsound("zmb_challenge_skel_arm_lp", 0.25);
   s_ballerina_end.var_ac086ffb movez(-40, 1.5);
   s_ballerina_end.var_3609adde movez(-40, 1.5);
   s_ballerina_end.var_2a9b65c7 movez(-40, 1.5);
@@ -216,8 +216,8 @@ function function_5b2770da() {
 function function_e753d4f() {
   level.var_2a0600f = 0;
   var_8bd44282 = struct::get_array("songstructs", "targetname");
-  array::thread_all(var_8bd44282, &function_929c4dba);
-  while(true) {
+  array::thread_all(var_8bd44282, & function_929c4dba);
+  while (true) {
     level waittill("hash_9b53c751");
     if(level.var_2a0600f == var_8bd44282.size) {
       break;
@@ -229,9 +229,9 @@ function function_e753d4f() {
 function function_929c4dba() {
   e_origin = spawn("script_origin", self.origin);
   e_origin zm_unitrigger::create_unitrigger();
-  e_origin playLoopSound("zmb_ee_mus_lp", 1);
+  e_origin playloopsound("zmb_ee_mus_lp", 1);
   e_origin thread zm_utility::print3d_ent("", (1, 1, 0), 3, vectorscale((0, 0, 1), 24));
-  while(!(isDefined(e_origin.b_activated) && e_origin.b_activated)) {
+  while (!(isdefined(e_origin.b_activated) && e_origin.b_activated)) {
     e_origin waittill("trigger_activated", who);
     if(!function_8090042c()) {
       continue;
@@ -245,26 +245,26 @@ function function_929c4dba() {
 }
 
 function function_8090042c() {
-  if(isDefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4 || (isDefined(level.musicsystemoverride) && level.musicsystemoverride)) {
+  if(isdefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4 || (isdefined(level.musicsystemoverride) && level.musicsystemoverride)) {
     return false;
   }
   return true;
 }
 
 function function_bd90259b(e_player) {
-  if(!(isDefined(self.b_activated) && self.b_activated)) {
+  if(!(isdefined(self.b_activated) && self.b_activated)) {
     self.b_activated = 1;
     level.var_2a0600f++;
     level notify("hash_9b53c751", e_player);
     self stoploopsound(0.2);
   }
-  self playSound("zmb_ee_mus_activate");
+  self playsound("zmb_ee_mus_activate");
 }
 
 function snd_monty_radio() {
   level waittill("connected", player);
   s_radio = struct::get("snd_monty_radio", "targetname");
-  if(!isDefined(s_radio)) {
+  if(!isdefined(s_radio)) {
     return;
   }
   s_radio zm_unitrigger::create_unitrigger();

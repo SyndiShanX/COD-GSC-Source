@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_perk_mod_quick_revive;
 
 autoexec __init__system__() {
@@ -20,7 +21,7 @@ __init__() {
 }
 
 enable_quick_revive_perk_for_level() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_quickrevive", "mod_revive", # "perk_quick_revive", # "specialty_quickrevive", 2500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_quickrevive", "mod_revive", #"perk_quick_revive", #"specialty_quickrevive", 2500);
   zm_perks::register_perk_threads(#"specialty_mod_quickrevive", &give_perk, &take_perk);
   callback::on_revived(&on_revived);
 }
@@ -51,7 +52,7 @@ on_revived(s_params) {
 }
 
 monitor_health_regen() {
-  self endon(#"hash_478eed143ecc82fc", # "disconnect");
+  self endon(#"hash_478eed143ecc82fc", #"disconnect");
 
   while(true) {
     self waittill(#"snd_breathing_better");
@@ -68,7 +69,7 @@ monitor_health_regen() {
 function_118be9d8() {
   self notify("16d61e93859b61b7");
   self endon("16d61e93859b61b7");
-  self endon(#"hash_478eed143ecc82fc", # "disconnect");
+  self endon(#"hash_478eed143ecc82fc", #"disconnect");
 
   if(!self hasperk(#"specialty_sprintspeed")) {
     self perks::perk_setperk(#"specialty_sprintspeed");

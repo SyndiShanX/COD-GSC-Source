@@ -7,7 +7,7 @@
 #include xmodelalias\c_mul_civ_rich_female_shot_clothes_als;
 
 main() {
-  self setModel("c_mul_civ_rich_female_shot_body1_2");
+  self setmodel("c_mul_civ_rich_female_shot_body1_2");
   self.headmodel = "c_mul_civ_rich_female_shot_head2";
   self attach(self.headmodel, "", 1);
   self.hatmodel = codescripts\character::randomelement(xmodelalias\c_mul_civ_rich_female_shot_clothes_als::main());

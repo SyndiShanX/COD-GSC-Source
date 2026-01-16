@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_bonus_points_player;
 
 autoexec __init__system__() {
@@ -21,8 +22,8 @@ __init__() {
   zm_powerups::register_powerup("bonus_points_player_shared", &function_ec014d54);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", # "zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
-    zm_powerups::add_zombie_powerup("bonus_points_player_shared", "zombie_z_money_icon", # "zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", #"zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_player_shared", "zombie_z_money_icon", #"zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 

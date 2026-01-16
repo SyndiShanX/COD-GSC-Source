@@ -28,8 +28,8 @@ main() {
   level.burning_zombies = [];
   level.use_zombie_heroes = true;
   level thread maps\_callbacksetup::SetupCallbacks();
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000);
-  maps\_zombiemode_weapons::add_zombie_weapon("ptrs41_zombie", &"ZOMBIE_WEAPON_PTRS41_750", 750, "vox_sniper", 5);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("ptrs41_zombie", & "ZOMBIE_WEAPON_PTRS41_750", 750, "vox_sniper", 5);
   precachestring(&"ZOMBIE_BETTY_HOWTO");
   precachemodel("zombie_zapper_cagelight_red");
   precachemodel("zombie_zapper_cagelight_green");
@@ -50,14 +50,14 @@ main() {
   level thread meteor_trigger();
   level thread book_useage();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread player_killstreak_timer();
     players[i] thread player_zombie_awareness();
   }
 }
 
 add_tesla_gun() {
-  while(1) {
+  while (1) {
     level waittill("between_round_over");
     if(level.round_number >= 5) {
       maps\_zombiemode_weapons::add_limited_weapon("tesla_gun", 1);
@@ -120,12 +120,12 @@ spawn_initial_outside_zombies(name) {
   if(flag("dog_round")) {
     return;
   }
-  while(get_enemy_count() == 0) {
+  while (get_enemy_count() == 0) {
     wait(1);
   }
   spawn_points = [];
-  spawn_points = getEntArray(name, "targetname");
-  for(i = 0; i < spawn_points.size; i++) {
+  spawn_points = GetEntArray(name, "targetname");
+  for (i = 0; i < spawn_points.size; i++) {
     ai = spawn_zombie(spawn_points[i]);
     if(isDefined(ai)) {
       ai maps\_zombiemode_spawner::zombie_setup_attack_properties();
@@ -137,7 +137,7 @@ spawn_initial_outside_zombies(name) {
 
 activate_door_flags(door, key) {
   purchase_trigs = getEntArray(door, key);
-  for(i = 0; i < purchase_trigs.size; i++) {
+  for (i = 0; i < purchase_trigs.size; i++) {
     if(!isDefined(level.flag[purchase_trigs[i].script_flag])) {
       flag_init(purchase_trigs[i].script_flag);
     }
@@ -146,7 +146,7 @@ activate_door_flags(door, key) {
 
 init_zombie_sumpf() {
   level.exterior_goals = getstructarray("exterior_goal", "targetname");
-  for(i = 0; i < level.exterior_goals.size; i++) {
+  for (i = 0; i < level.exterior_goals.size; i++) {
     level.exterior_goals[i].is_active = 1;
   }
   thread maps\nazi_zombie_sumpf_magic_box::magic_box_init();
@@ -157,8 +157,8 @@ init_zombie_sumpf() {
   zipHintDeactivated = getent("zipline_deactivated_hint_trigger", "targetname");
   zipHintDeactivated sethintstring(&"ZOMBIE_ZIPLINE_DEACTIVATED");
   zipHintDeactivated SetCursorHint("HINT_NOICON");
-  penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
-  for(i = 0; i < penBuyTrigger.size; i++) {
+  penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
+  for (i = 0; i < penBuyTrigger.size; i++) {
     penBuyTrigger[i] sethintstring(&"ZOMBIE_CLEAR_DEBRIS");
     penBuyTrigger[i] setCursorHint("HINT_NOICON");
   }
@@ -166,35 +166,35 @@ init_zombie_sumpf() {
 }
 
 turnLightGreen(name) {
-  zapper_lights = getEntArray(name, "targetname");
-  for(i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setModel("zombie_zapper_cagelight_green");
+  zapper_lights = getentarray(name, "targetname");
+  for (i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setmodel("zombie_zapper_cagelight_green");
     if(isDefined(zapper_lights[i].target)) {
       old_light_effect = getent(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", old_light_effect.origin);
-      light_effect setModel("tag_origin");
+      light_effect setmodel("tag_origin");
       light_effect.angles = (0, 270, 0);
       light_effect.targetname = "effect_" + name + i;
       old_light_effect delete();
       zapper_lights[i].target = light_effect.targetname;
-      playFXOnTag(level._effect["zapper_light_ready"], light_effect, "tag_origin");
+      playfxontag(level._effect["zapper_light_ready"], light_effect, "tag_origin");
     }
   }
 }
 
 turnLightRed(name) {
-  zapper_lights = getEntArray(name, "targetname");
-  for(i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setModel("zombie_zapper_cagelight_red");
+  zapper_lights = getentarray(name, "targetname");
+  for (i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setmodel("zombie_zapper_cagelight_red");
     if(isDefined(zapper_lights[i].target)) {
       old_light_effect = getent(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", old_light_effect.origin);
-      light_effect setModel("tag_origin");
+      light_effect setmodel("tag_origin");
       light_effect.angles = (0, 270, 0);
       light_effect.targetname = "effect_" + name + i;
       old_light_effect delete();
       zapper_lights[i].target = light_effect.targetname;
-      playFXOnTag(level._effect["zapper_light_notready"], light_effect, "tag_origin");
+      playfxontag(level._effect["zapper_light_notready"], light_effect, "tag_origin");
     }
   }
 }
@@ -209,10 +209,10 @@ book_useage() {
     maniac_r = getent("maniac_r", "targetname");
     book_trig waittill("trigger", player);
     if(isDefined(maniac_l)) {
-      maniac_l playSound("maniac_l");
+      maniac_l playsound("maniac_l");
     }
     if(isDefined(maniac_r)) {
-      maniac_r playSound("maniac_r");
+      maniac_r playsound("maniac_r");
     }
   }
 }
@@ -222,29 +222,29 @@ toilet_useage() {
   toilet_trig = getent("toilet", "targetname");
   toilet_trig SetCursorHint("HINT_NOICON");
   toilet_trig UseTriggerRequireLookAt();
-  toilet_trig playLoopSound("phone_hook");
+  toilet_trig playloopsound("phone_hook");
   if(!isDefined(level.eggs)) {
     level.eggs = 0;
   }
   toilet_trig waittill("trigger", player);
   toilet_trig stoploopsound(0.5);
-  toilet_trig playLoopSound("phone_dialtone");
+  toilet_trig playloopsound("phone_dialtone");
   wait(0.5);
   toilet_trig waittill("trigger", player);
   toilet_trig stoploopsound(0.5);
-  toilet_trig playSound("dial_9", "sound_done");
+  toilet_trig playsound("dial_9", "sound_done");
   toilet_trig waittill("sound_done");
   toilet_trig waittill("trigger", player);
-  toilet_trig playSound("dial_1", "sound_done");
+  toilet_trig playsound("dial_1", "sound_done");
   toilet_trig waittill("sound_done");
   toilet_trig waittill("trigger", player);
-  toilet_trig playSound("dial_1");
+  toilet_trig playsound("dial_1");
   wait(0.5);
-  toilet_trig playSound("riiing");
+  toilet_trig playsound("riiing");
   wait(1);
-  toilet_trig playSound("riiing");
+  toilet_trig playsound("riiing");
   wait(1);
-  toilet_trig playSound("toilet_flush", "sound_done");
+  toilet_trig playsound("toilet_flush", "sound_done");
   toilet_trig waittill("sound_done");
   playsoundatposition("cha_ching", toilet_trig.origin);
   level.eggs = 1;
@@ -254,7 +254,7 @@ toilet_useage() {
   if(!isDefined(self.vox_audio_secret)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_audio_secret");
     self.vox_audio_secret = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_audio_secret[self.vox_audio_secret.size] = "vox_audio_secret_" + i;
     }
     self.vox_audio_secret_available = self.vox_audio_secret;
@@ -278,18 +278,18 @@ play_radio_sounds() {
   radio_two stoploopsound(2);
   radio_three stoploopsound(2);
   wait(0.05);
-  pa_system playSound("secret_message", "message_complete");
+  pa_system playsound("secret_message", "message_complete");
   pa_system waittill("message_complete");
-  radio_one playSound("static");
-  radio_two playSound("static");
-  radio_three playSound("static");
+  radio_one playsound("static");
+  radio_two playsound("static");
+  radio_three playsound("static");
 }
 
 radio_eggs() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  while(level.radio_counter < 3) {
+  while (level.radio_counter < 3) {
     wait(2);
   }
   level thread play_radio_sounds();
@@ -304,7 +304,7 @@ battle_radio() {
   battle_radio_trig SetCursorHint("HINT_NOICON");
   battle_radio_origin = getent("battle_radio_origin", "targetname");
   battle_radio_trig waittill("trigger", player);
-  battle_radio_origin playSound("battle_message");
+  battle_radio_origin playsound("battle_message");
 }
 
 whisper_radio() {
@@ -316,7 +316,7 @@ whisper_radio() {
   whisper_radio_trig SetCursorHint("HINT_NOICON");
   whisper_radio_origin = getent("whisper_radio_origin", "targetname");
   whisper_radio_trig waittill("trigger");
-  whisper_radio_origin playSound("whisper_message");
+  whisper_radio_origin playsound("whisper_message");
 }
 
 radio_one() {
@@ -328,10 +328,10 @@ radio_one() {
   radio_one_trig UseTriggerRequireLookAt();
   radio_one_trig SetCursorHint("HINT_NOICON");
   radio_one = getent("radio_one_origin", "targetname");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     radio_one_trig waittill("trigger", players);
     level.radio_counter = level.radio_counter + 1;
-    radio_one playLoopSound("static_loop");
+    radio_one playloopsound("static_loop");
   }
 }
 
@@ -344,10 +344,10 @@ radio_two() {
   radio_two_trig UseTriggerRequireLookAt();
   radio_two_trig SetCursorHint("HINT_NOICON");
   radio_two = getent("radio_two_origin", "targetname");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     radio_two_trig waittill("trigger", players);
     level.radio_counter = level.radio_counter + 1;
-    radio_two playLoopSound("static_loop");
+    radio_two playloopsound("static_loop");
   }
 }
 
@@ -360,10 +360,10 @@ radio_three() {
   radio_three_trig UseTriggerRequireLookAt();
   radio_three_trig SetCursorHint("HINT_NOICON");
   radio_three = getent("radio_three_origin", "targetname");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     radio_three_trig waittill("trigger", players);
     level.radio_counter = level.radio_counter + 1;
-    radio_three playLoopSound("static_loop");
+    radio_three playloopsound("static_loop");
   }
 }
 
@@ -371,8 +371,8 @@ meteor_trigger() {
   level endon("meteor_triggered");
   dmgtrig = GetEnt("meteor", "targetname");
   player = getplayers();
-  for(i = 0; i < player.size; i++) {
-    while(1) {
+  for (i = 0; i < player.size; i++) {
+    while (1) {
       dmgtrig waittill("trigger", player);
       if(distancesquared(player.origin, dmgtrig.origin) < 1096 * 1096) {
         player thread meteor_dialog();
@@ -395,10 +395,10 @@ player_zombie_awareness() {
   self endon("disconnect");
   self endon("death");
   players = getplayers();
-  while(1) {
+  while (1) {
     wait(1);
     zombs = getaiarray("axis");
-    for(i = 0; i < zombs.size; i++) {
+    for (i = 0; i < zombs.size; i++) {
       if(DistanceSquared(zombs[i].origin, self.origin) < 200 * 200) {
         if(!isDefined(zombs[i])) {
           continue;
@@ -418,14 +418,14 @@ player_zombie_awareness() {
         if(distance2d(zombs[i].origin, self.origin) < dist) {
           yaw = self animscripts\utility::GetYawToSpot(zombs[i].origin);
           if(yaw < -95 || yaw > 95) {
-            zombs[i] playSound("behind_vocals");
+            zombs[i] playsound("behind_vocals");
           }
         }
       }
     }
     if(players.size > 1) {
       close_zombs = 0;
-      for(i = 0; i < zombs.size; i++) {
+      for (i = 0; i < zombs.size; i++) {
         if(DistanceSquared(zombs[i].origin, self.origin) < 250 * 250) {
           close_zombs++;
         }
@@ -445,7 +445,7 @@ play_oh_shit_dialog() {
   if(!isDefined(self.vox_oh_shit)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_oh_shit");
     self.vox_oh_shit = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_oh_shit[self.vox_oh_shit.size] = "vox_oh_shit_" + i;
     }
     self.vox_oh_shit_available = self.vox_oh_shit;

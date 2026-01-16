@@ -5,16 +5,15 @@
 
 obelisk_init() {
   level.scanned_obelisks = [];
-  level.drill_tutorial_text = &"MP_ALIEN_DESCENT_DRILL_TUTORIAL_HINT";
+  level.drill_tutorial_text = & "MP_ALIEN_DESCENT_DRILL_TUTORIAL_HINT";
 }
 
 obelisk() {
   var_0 = select_obelisks();
   level thread maps\mp\alien\_spawnlogic::encounter_cycle_spawn("drill_planted");
 
-  foreach(var_2 in var_0) {
-    var_2 thread obelisk_listener(var_2);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread obelisk_listener(var_2);
 
   level waittill("obelisk_destroyed");
   maps\mp\alien\_spawn_director::end_cycle();
@@ -26,9 +25,8 @@ obelisk_listener(var_0) {
   var_0 notify("stop_listening");
   var_0 endon("stop_listening");
 
-  if(isDefined(level.drill) && !isDefined(level.drill_carrier)) {
+  if(isDefined(level.drill) && !isDefined(level.drill_carrier))
     level waittill("drill_pickedup");
-  }
 
   var_1 = maps\mp\alien\_hive::get_hive_waypoint_dist(var_0, 1300);
   var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_scan", var_1);
@@ -37,9 +35,8 @@ obelisk_listener(var_0) {
   level.encounter_name = var_0.target;
   level.drill_carrier = undefined;
 
-  if(level.cycle_count == 1) {
+  if(level.cycle_count == 1)
     level maps\mp\_utility::delaythread(1, maps\mp\alien\_music_and_dialog::playvoforwavestart);
-  }
 
   var_0 thread scanning(var_0, var_0.origin, var_2);
   var_0 maps\mp\alien\_hive::disable_other_strongholds();
@@ -54,9 +51,8 @@ obelisk_listener(var_0) {
   level.current_hive_name = level.current_hive_name + "_post";
   level.num_hive_destroyed++;
 
-  if(isDefined(var_0.scene_trig)) {
+  if(isDefined(var_0.scene_trig))
     var_0.scene_trig notify("trigger", level.players[0]);
-  }
 
   give_players_rewards();
   level notify("obelisk_destroyed");
@@ -143,9 +139,8 @@ set_scanner_state_scan(var_0, var_1) {
   level thread obelisk_scan_fx(var_0);
 
   foreach(var_3 in level.agentarray) {
-    if(isDefined(var_3.wave_spawned) && var_3.wave_spawned) {
+    if(isDefined(var_3.wave_spawned) && var_3.wave_spawned)
       var_3 getenemyinfo(level.drill);
-    }
   }
 
   var_0.depth_marker = gettime();
@@ -186,15 +181,13 @@ scan_complete_sequence(var_0) {
     maps\mp\alien\_drill::drop_drill(var_1, var_0.angles - (0, 90, 0));
   }
 
-  if(isDefined(var_0.last_hive) && var_0.last_hive) {
+  if(isDefined(var_0.last_hive) && var_0.last_hive)
     common_scripts\utility::flag_set("hives_cleared");
-  }
 
   common_scripts\utility::flag_clear("drill_detonated");
 
-  if(!maps\mp\alien\_utility::is_true(level.no_grab_drill_vo)) {
+  if(!maps\mp\alien\_utility::is_true(level.no_grab_drill_vo))
     level maps\mp\_utility::delaythread(8, maps\mp\alien\_music_and_dialog::play_vo_for_grab_drill);
-  }
 }
 
 play_obelisk_scan_complete_animations(var_0) {
@@ -211,17 +204,15 @@ sfx_scanner_off(var_0) {
 }
 
 wait_for_all_scanned_obelisk_destroyed(var_0, var_1, var_2) {
-  foreach(var_4 in level.scanned_obelisks) {
-    var_4 thread obelisk_damage_listener(var_4, var_0, var_1, "waypoint_alien_destroy");
-  }
+  foreach(var_4 in level.scanned_obelisks)
+  var_4 thread obelisk_damage_listener(var_4, var_0, var_1, "waypoint_alien_destroy");
 
   for(;;) {
     level waittill("scanned_obelisk_destroyed", var_6);
     level.scanned_obelisks = common_scripts\utility::array_remove(level.scanned_obelisks, var_6);
 
-    if(level.scanned_obelisks.size == 0) {
+    if(level.scanned_obelisks.size == 0)
       return;
-    }
   }
 }
 
@@ -246,20 +237,17 @@ obelisk_damage_listener(var_0, var_1, var_2, var_3) {
     if(!isDefined(var_8.team) || var_8.team != "allies") {
       continue;
     }
-    if(isDefined(var_2) && isDefined(var_16) && !common_scripts\utility::array_contains(var_2, var_16)) {
+    if(isDefined(var_2) && isDefined(var_16) && !common_scripts\utility::array_contains(var_2, var_16))
       var_7 = int(var_7 * 0.1);
-    }
 
     if(isDefined(var_8)) {
       var_17 = "standard";
 
-      if(isDefined(var_16) && var_16 == "alienvanguard_projectile_mp") {
+      if(isDefined(var_16) && var_16 == "alienvanguard_projectile_mp")
         var_17 = "hitaliensoft";
-      }
 
-      if(!isplayer(var_8) && isDefined(var_8.inuseby)) {
+      if(!isplayer(var_8) && isDefined(var_8.inuseby))
         var_8 = var_8.inuseby;
-      }
 
       var_8 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_17);
     }
@@ -304,16 +292,14 @@ play_sfx(var_0, var_1, var_2) {
 }
 
 safe_delete(var_0) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 }
 
 get_obelisk_clip(var_0) {
   foreach(var_2 in self.removeables) {
-    if(var_2.classname == "script_brushmodel") {
+    if(var_2.classname == "script_brushmodel")
       return var_2;
-    }
   }
 }
 

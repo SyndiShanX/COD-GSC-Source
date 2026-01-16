@@ -96,9 +96,8 @@ doPerkFunctions(perkName) {
   self thread watchDeath(perkName);
   self thread checkForPerkUpgrade(perkName);
 
-  if(perkName == "specialty_hardline") {
+  if(perkName == "specialty_hardline")
     self maps\mp\killstreaks\_killstreaks::setStreakCountToNext();
-  }
 
   self maps\mp\_matchdata::logKillstreakEvent(perkName + "_ks", self.origin);
 }
@@ -106,9 +105,8 @@ doPerkFunctions(perkName) {
 doKillstreakFunctions(perkName, killstreakEvent) {
   self givePerk(perkName, false);
 
-  if(isDefined(killstreakEvent)) {
+  if(isDefined(killstreakEvent))
     self maps\mp\_matchdata::logKillstreakEvent(killstreakEvent, self.origin);
-  }
 }
 
 watchDeath(perkName) {
@@ -128,9 +126,8 @@ checkForPerkUpgrade(perkName) {
 isPerkStreakOn(streakName) {
   for(i = KILLSTREAK_SLOT_1; i < KILLSTREAK_SLOT_3 + 1; i++) {
     if(isDefined(self.pers["killstreaks"][i].streakName) && self.pers["killstreaks"][i].streakName == streakName) {
-      if(self.pers["killstreaks"][i].available) {
+      if(self.pers["killstreaks"][i].available)
         return true;
-      }
     }
   }
 

@@ -131,7 +131,7 @@ clear_whitescreen_mix() {
 }
 
 start_hind_shoots_the_tanker_mix() {
-  level.player playSound("scn_last_hind_flyby_boom");
+  level.player playsound("scn_last_hind_flyby_boom");
   soundscripts\_audio_mix_manager::mm_add_submix("hind_shoots_the_tanker_mix");
 }
 
@@ -201,32 +201,28 @@ start_scripted_sfx_node() {
     ["auto2637", undefined, undefined, undefined, "first_hind_mix"],
     ["auto4115", "scn_uaz_convoy_arrival_01", undefined, undefined, undefined],
     ["auto4059", "scn_uaz_convoy_arrival_02", undefined, undefined, undefined],
-    ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]];
+    ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]
+  ];
 
-  foreach(var_2 in var_0) {
-    thread handle_scripted_sfx_node(var_2);
-  }
+  foreach(var_2 in var_0)
+  thread handle_scripted_sfx_node(var_2);
 }
 
 handle_scripted_sfx_node(var_0) {
   var_1 = getvehiclenode(var_0[0], "targetname");
   var_1 waittill("trigger", var_2);
 
-  if(isDefined(var_0[1])) {
-    var_2 playSound(var_0[1]);
-  }
+  if(isdefined(var_0[1]))
+    var_2 playsound(var_0[1]);
 
-  if(isDefined(var_0[2])) {
+  if(isdefined(var_0[2]))
     var_2 stopsound(var_0[2]);
-  }
 
-  if(isDefined(var_0[3])) {
+  if(isdefined(var_0[3]))
     soundscripts\_audio_mix_manager::mm_add_submix(var_0[3]);
-  }
 
-  if(isDefined(var_0[4])) {
+  if(isdefined(var_0[4]))
     soundscripts\_audio_mix_manager::mm_clear_submix(var_0[4]);
-  }
 }
 
 presideswipe() {
@@ -272,31 +268,28 @@ passby_sfx() {
       return;
   }
 
-  while(!vehicleisclose(self, level.playersride)) {
+  while (!vehicleisclose(self, level.playersride))
     wait 0.05;
-  }
 
-  if(targetisinfront(level.playersride, self)) {
+  if(targetisinfront(level.playersride, self))
     thread maps\_utility::play_sound_on_entity(passby_get_aliases());
-  }
 }
 
 targetisinfront(var_0, var_1) {
-  var_2 = anglesToForward(var_0.angles);
+  var_2 = anglestoforward(var_0.angles);
   var_3 = var_1.origin - var_0.origin;
   var_4 = vectordot(var_2, var_3);
   return var_4 > 0;
 }
 
 vehicleisclose(var_0, var_1) {
-  if(!targetisinfront(var_0, var_1)) {
+  if(!targetisinfront(var_0, var_1))
     return 0;
-  }
 
   var_2 = distance(var_0.origin, var_1.origin);
   var_3 = 4800;
 
-  if(isDefined(var_0.veh_speed) && var_0.veh_speed > 0) {
+  if(isdefined(var_0.veh_speed) && var_0.veh_speed > 0) {
     var_4 = var_0.veh_speed * 63360 / 60 / 60;
     var_5 = level.playersride.veh_speed * 63360 / 60 / 60;
     var_3 = var_4 * 2.3 + var_5 * 2.3;
@@ -404,10 +397,9 @@ play_scripted_sfx_on_vehicle_spawn(var_0, var_1, var_2, var_3) {
   var_4 = maps\_utility::getvehiclearray();
 
   foreach(var_6 in var_4) {
-    if(var_6.classname == var_1 && isDefined(var_6.script_vehiclespawngroup) && var_6.script_vehiclespawngroup == var_2) {
-      if(isDefined(var_3)) {
+    if(var_6.classname == var_1 && isdefined(var_6.script_vehiclespawngroup) && var_6.script_vehiclespawngroup == var_2) {
+      if(isdefined(var_3))
         wait(var_3);
-      }
 
       var_6 thread maps\_utility::play_sound_on_tag_endon_death(var_0);
       return;

@@ -4,11 +4,10 @@
 *****************************************************/
 
 enable_dog_kinect() {
-  if(level.script == "enemyhq") {
+  if(level.script == "enemyhq")
     speechenablegrammar("speech/iw6/grammars/en-us_rileyenemyhq.cfg", 1);
-  } else if(level.script == "nml") {
+  else if(level.script == "nml")
     speechenablegrammar("speech/iw6/grammars/en-us_rileynml.cfg", 1);
-  }
 
   speechenable(1);
   setdvar("show_riley_commands", 0);
@@ -17,11 +16,10 @@ enable_dog_kinect() {
 disable_dog_kinect() {
   speechenable(0);
 
-  if(level.script == "enemyhq") {
+  if(level.script == "enemyhq")
     speechenablegrammar("speech/iw6/grammars/en-us_rileyenemyhq.cfg", 0);
-  } else if(level.script == "nml") {
+  else if(level.script == "nml")
     speechenablegrammar("speech/iw6/grammars/en-us_rileynml.cfg", 0);
-  }
 }
 
 speechcommands() {
@@ -36,9 +34,8 @@ listen_for_dog_kinect_commands(var_0) {
   for(;;) {
     level.player waittill("speechCommand", var_1, var_2);
 
-    if(getdvarint("show_riley_commands") == 1) {
+    if(getdvarint("show_riley_commands") == 1)
       iprintlnbold("speechCommand: " + var_2 + " at " + var_1 + " confidence.");
-    }
 
     var_3 = 0.3;
     var_4 = 0.7;
@@ -46,25 +43,22 @@ listen_for_dog_kinect_commands(var_0) {
     switch (var_2) {
       case "attack":
         if(var_1 > var_3) {
-          if(isDefined(var_0.controlling_dog) && var_0 maps\_utility::ent_flag("pause_dog_command")) {
+          if(isDefined(var_0.controlling_dog) && var_0 maps\_utility::ent_flag("pause_dog_command"))
             level.player notify("attack_command");
-          } else {
+          else
             level.player notify("fired_laser");
-          }
         }
 
         break;
       case "cancel":
-        if(var_1 > var_3) {
+        if(var_1 > var_3)
           var_0 notify("cancel_dog_attack");
-        }
 
         break;
       case "bark":
         if(var_1 > var_4) {
-          if(isDefined(var_0.controlling_dog)) {
+          if(isDefined(var_0.controlling_dog))
             level.player notify("LISTEN_ads_button_pressed");
-          }
         }
 
         break;
@@ -132,9 +126,8 @@ listen_for_dog_kinect_commands(var_0) {
         if(var_1 > var_3) {
           var_8 = findlocation(var_2);
 
-          if(isDefined(var_8)) {
+          if(isDefined(var_8))
             laser_designate_target_kinect(var_8);
-          }
         }
 
         break;
@@ -148,9 +141,8 @@ findlocation(var_0) {
   foreach(var_3 in var_1) {
     if(isDefined(var_3.locationaliases)) {
       foreach(var_5 in var_3.locationaliases) {
-        if(issubstr(var_5, var_0)) {
+        if(issubstr(var_5, var_0))
           return var_5;
-        }
       }
     }
   }

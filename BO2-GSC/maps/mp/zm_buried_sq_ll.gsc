@@ -22,9 +22,8 @@ init_stage() {
 stage_logic() {
   iprintlnbold("LL Started");
 
-  if(!isDefined(level.generator_power_states_color)) {
+  if(!isDefined(level.generator_power_states_color))
     level.generator_power_states_color = 0;
-  }
 
   sq_ll_show_code();
   wait_network_frame();
@@ -33,46 +32,43 @@ stage_logic() {
 
 sq_ll_show_code() {
   a_spots = getstructarray("sq_code_pos", "targetname");
-  a_signs = getEntArray("sq_tunnel_sign", "targetname");
+  a_signs = getentarray("sq_tunnel_sign", "targetname");
   a_codes = [];
 
   foreach(m_sign in a_signs) {
     if(flag("sq_is_max_tower_built")) {
-      if(isDefined(m_sign.is_max_sign)) {
+      if(isDefined(m_sign.is_max_sign))
         a_codes[a_codes.size] = m_sign.model + "_code";
-      }
 
       continue;
     }
 
-    if(isDefined(m_sign.is_ric_sign)) {
+    if(isDefined(m_sign.is_ric_sign))
       a_codes[a_codes.size] = m_sign.model + "_code";
-    }
   }
 
   for(i = 0; i < a_codes.size; i++) {
-    if(a_codes[i] == "p6_zm_bu_sign_tunnel_consumption_code") {
+    if(a_codes[i] == "p6_zm_bu_sign_tunnel_consumption_code")
       a_codes[i] = "p6_zm_bu_sign_tunnel_consump_code";
-    }
   }
 
   for(i = 0; i < a_codes.size; i++) {
     m_code = spawn("script_model", a_spots[i].origin);
     m_code.angles = a_spots[i].angles;
-    m_code setModel(a_codes[i]);
+    m_code setmodel(a_codes[i]);
   }
 
-  if(flag("sq_is_max_tower_built")) {
+  if(flag("sq_is_max_tower_built"))
     level thread sq_ll_show_code_vo_max();
-  } else {
+  else
     level thread sq_ll_show_code_vo_ric();
-  }
 }
 
-exit_stage(success) {}
+exit_stage(success) {
+}
 
 sq_ll_show_code_vo_max() {
-  a_signs = getEntArray("sq_tunnel_sign", "targetname");
+  a_signs = getentarray("sq_tunnel_sign", "targetname");
   maxissay("vox_maxi_sidequest_signs_0", a_signs[0]);
   maxissay("vox_maxi_sidequest_signs_1", a_signs[0]);
 }

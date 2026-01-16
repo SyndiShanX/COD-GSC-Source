@@ -51,10 +51,10 @@ main() {
   level.drone_spawnFunction["allies"] = character\char_usa_marine_r_rifle::main;
   maps\_drones::init();
   default_start(::event1_dogAttack);
-  add_start("ArtilleryKill", ::event1_dogAttack, &"STARTS_PEL1B_EVENT1");
-  add_start("ArtilleryKilla", ::event1a_skipto_setup, &"STARTS_PEL1B_EVENT1A");
-  add_start("FlameDeath", ::event1b_skipto_setup, &"STARTS_PEL1B_EVENT1b");
-  add_start("outro", ::outro_skipto_setup, &"STARTS_PEL1B_OUTRO");
+  add_start("ArtilleryKill", ::event1_dogAttack, & "STARTS_PEL1B_EVENT1");
+  add_start("ArtilleryKilla", ::event1a_skipto_setup, & "STARTS_PEL1B_EVENT1A");
+  add_start("FlameDeath", ::event1b_skipto_setup, & "STARTS_PEL1B_EVENT1b");
+  add_start("outro", ::outro_skipto_setup, & "STARTS_PEL1B_OUTRO");
   level.startskip = "event1";
   maps\_load::main();
   maps\_banzai::init();
@@ -75,7 +75,7 @@ main() {
   level.sarge setthreatbiasgroup("heroes");
   level.walker setthreatbiasgroup("heroes");
   level.allies = [];
-  level.allies = getEntArray("starting_allies", "targetname");
+  level.allies = getentarray("starting_allies", "targetname");
   players_ignoreall(level.allies, 1);
   array_thread(level.heroes, ::magic_bullet_shield);
   level thread setup_spawn_functions();
@@ -92,7 +92,7 @@ event1_dogAttack() {
   wait(0.1);
   freezecontrols_all(false);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] AllowCrouch(false);
     players[i] AllowProne(false);
     players[i] AllowStand(true);
@@ -132,7 +132,7 @@ event1_dogAttack() {
 
 event1_hide_hud() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "0");
     player SetClientDvar("compass", "0");
@@ -144,7 +144,7 @@ event1_hide_hud() {
 event1_show_hud() {
   level waittill("tank2_attacked");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "1");
     player SetClientDvar("compass", "1");
@@ -154,10 +154,9 @@ event1_show_hud() {
 }
 
 event1_tank3_targets_link() {
-  level.tank3_targets = getEntArray("tank2_firepoints", "targetname");
-  for(i = 0; i < level.tank3_targets.size - 1; i++) {
+  level.tank3_targets = getentarray("tank2_firepoints", "targetname");
+  for (i = 0; i < level.tank3_targets.size - 1; i++)
     level.tank3_targets[i] linkto(level.tank3);
-  }
   targetpos = getent("tank2_firepoints_final", "targetname");
   targetpos linkto(level.tank3);
 }
@@ -175,7 +174,7 @@ event1_battlechatter() {
 event1_set_start_position() {
   players = get_sorted_players();
   player_starts = get_sorted_starts();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetOrigin(player_starts[i].origin);
     players[i] SetPlayerAngles(player_starts[i].angles);
   }
@@ -203,28 +202,26 @@ event1_startothertanks() {
 }
 
 event1_player_ride_think() {
-  tags = getEntArray("player_dismount_points", "targetname");
-  for(i = 0; i < tags.size; i++) {
-    if(issubstr(tags[i].script_noteworthy, "flametank")) {
+  tags = getentarray("player_dismount_points", "targetname");
+  for (i = 0; i < tags.size; i++) {
+    if(issubstr(tags[i].script_noteworthy, "flametank"))
       tags[i] linkto(level.flametank);
-    } else if(issubstr(tags[i].script_noteworthy, "tank2")) {
+    else if(issubstr(tags[i].script_noteworthy, "tank2"))
       tags[i] linkto(level.tank3);
-    }
   }
   players = get_sorted_players();
   passenger_pos = 8;
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     if(isDefined(players[i])) {
       link_tag = "tag_passenger" + passenger_pos;
       fall_tag = getent("flametank_" + link_tag, "script_noteworthy");
       org = level.flametank gettagOrigin(link_tag);
       angles = level.flametank gettagangles(link_tag);
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
-      if(passenger_pos == 8) {
+      if(passenger_pos == 8)
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 80, 0));
-      } else {
+      else
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 280, 0));
-      }
       players[i] DisableWeapons();
       players[i] PlayerLinkToDelta(players[i].lvt_linkspot_ref, undefined, 1);
       players[i] setorigin(org);
@@ -236,18 +233,17 @@ event1_player_ride_think() {
     }
   }
   passenger_pos = 8;
-  for(i = 2; i < 4; i++) {
+  for (i = 2; i < 4; i++) {
     if(isDefined(players[i])) {
       link_tag = "tag_passenger" + passenger_pos;
       fall_tag = getent("tank2_" + link_tag, "script_noteworthy");
       org = level.tank3 gettagOrigin(link_tag);
       angles = level.tank3 gettagangles(link_tag);
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
-      if(passenger_pos == 8) {
+      if(passenger_pos == 8)
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 80, 0));
-      } else {
+      else
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 280, 0));
-      }
       players[i] DisableWeapons();
       players[i] PlayerLinkToDelta(level.tank3, link_tag, 1);
       players[i] setorigin(org);
@@ -288,16 +284,15 @@ event1_player_tank_dismount(player, fall_tag) {
   hud.alpha = 1.0;
   hud.sort = 20;
   hud.font = "default";
-  if(level.console) {
+  if(level.console)
     hud SetText(&"PEL1B_PLAYER_DISMOUNT");
-  } else {
+  else
     hud SetText(&"SCRIPT_PLATFORM_PEL1B_PLAYER_DISMOUNT");
-  }
   player thread event1_tank_explosion_effect();
   player.dismount_timer_over = false;
   player thread dismount_timer();
   player notify("attacked");
-  while((!player useButtonPressed()) && (player.dismount_timer_over != true)) {
+  while ((!player useButtonPressed()) && (player.dismount_timer_over != true)) {
     wait(0.05);
   }
   player notify("dismounted");
@@ -318,7 +313,7 @@ event1_player_tank_dismount(player, fall_tag) {
 
 dismount_timer() {
   timer = gettime() + (2 * 1000);
-  while(getTime() < timer) {
+  while (getTime() < timer) {
     wait(0.05);
   }
   self.dismount_timer_over = true;
@@ -358,8 +353,8 @@ event1_setup_aa_gun() {
 
 event1_aa_gun_fire() {
   self endon("crew dead");
-  targetent = getEntArray("event1_aa_gun_target", "targetname");
-  while(!flag("tank2_move_1")) {
+  targetent = getentarray("event1_aa_gun_target", "targetname");
+  while (!flag("tank2_move_1")) {
     self notify("change target");
     self thread maps\_triple25::triple25_shoot(targetent[randomintrange(0, targetent.size - 1)]);
     wait(randomintrange(0, 5));
@@ -392,8 +387,8 @@ event1_followtanks() {
 
 event1_unlockplayer() {
   blocker = [];
-  blocker = getEntArray("player_blocker", "targetname");
-  for(i = 0; i < blocker.size; i++) {
+  blocker = getentarray("player_blocker", "targetname");
+  for (i = 0; i < blocker.size; i++) {
     blocker[i] delete();
   }
 }
@@ -401,7 +396,7 @@ event1_unlockplayer() {
 event1_guys_with_player_follow_tanks() {}
 
 event1_tank2_attacked() {
-  riding_guys = getEntArray("passenger_" + level.tank2.targetname, "targetname");
+  riding_guys = getentarray("passenger_" + level.tank2.targetname, "targetname");
   thread event1_artillary_fire();
   tank2_first_attack = getvehiclenode("auto3590", "targetname");
   tank2_first_attack waittill("trigger");
@@ -437,10 +432,10 @@ japs_first_wave() {
 }
 
 event1_kill_if_riders_are_alive(tank) {
-  riding_guys = getEntArray("passenger_" + tank.targetname, "targetname");
+  riding_guys = getentarray("passenger_" + tank.targetname, "targetname");
   thread event1_tank3_riders_explosion_death(riding_guys);
   if(riding_guys.size > 0) {
-    for(i = 0; i < riding_guys.size; i++) {
+    for (i = 0; i < riding_guys.size; i++) {
       if(isDefined(riding_guys[i]) && isalive(riding_guys[i])) {
         thread event1_rider_dismount_anim(tank, riding_guys[i], "unloaded" + i);
       }
@@ -452,7 +447,7 @@ event1_kill_if_riders_are_alive(tank) {
 
 event1_tank3_riders_explosion_death(riding_guys) {
   level waittill("unload_done");
-  for(i = 0; i < riding_guys.size; i++) {
+  for (i = 0; i < riding_guys.size; i++) {
     if(isDefined(riding_guys[i]) && isalive(riding_guys[i])) {
       riding_guys[i].deathanim = level.explosion_anim["explosion_death"][i];
       riding_guys[i] dodamage(riding_guys[i].health + 100, riding_guys[i].origin);
@@ -464,13 +459,12 @@ event1_bomber_crash() {
   crash_plane = maps\_vehicle::waittill_vehiclespawn("event1b_crashing_plane1");
   hitnoode = getvehiclenode("auto5004", "targetname");
   hitnoode waittill("trigger");
-  looper = playFXOnTag(level._effect["bomber_wing_hit"], crash_plane, "tag_origin");
+  looper = PlayFXOnTag(level._effect["bomber_wing_hit"], crash_plane, "tag_origin");
   hitnoode = getvehiclenode("auto4225", "targetname");
   hitnoode waittill("trigger");
   players = get_sorted_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++)
     earthquake(0.4, 4, players[i].origin, 850);
-  }
   destroyed_model = getent("destroyed_corsair", "targetname");
   destroyed_model.origin = hitnoode.origin;
 }
@@ -495,16 +489,15 @@ event1_tank3_attacked() {
 right_art_target_strat() {
   flag_wait("tank2_move_1");
   art_on_right = getent("event1_art_right", "targetname");
-  while(!flag("tank3_reached")) {
+  while (!flag("tank3_reached")) {
     random_target = randomintrange(0, level.tank3_targets.size - 1);
     art_on_right setTurretTargetEnt(level.tank3_targets[random_target]);
     wait(randomintrange(3, 5));
   }
   art_on_right setTurretTargetEnt(getent("tank2_firepoints_final", "targetname"));
   wait(1);
-  if(isalive(level.tank3)) {
+  if(isalive(level.tank3))
     fire_shrecks_with_damage(level.tank3, level.tank3.health + 200);
-  }
 }
 
 event1_tank3_moveup_start() {
@@ -541,7 +534,7 @@ event1_tank3_moveup_start() {
 
 tank_loopfire_forever() {
   self endon("death");
-  while(!flag("tank3_reached")) {
+  while (!flag("tank3_reached")) {
     if(self.health > 0) {
       self fireweapon();
       wait(randomintrange(5, 8));
@@ -593,25 +586,24 @@ event1_hutexplosion() {
   hut_explode = getent("tank3_targets_2", "targetname");
   level waittill_any("hut_explode1", "hut_explode2");
   wait(2);
-  playFX(level._effect["hut_explosion"], hut_explode.origin);
+  playfx(level._effect["hut_explosion"], hut_explode.origin);
   playsoundatposition("hut_explo", hut_explode.origin);
   earthquake(0.3, 1.5, hut_explode.origin, 1000);
   event1_hutexplosion_remains();
-  things = getEntArray("hut_explosion_debris", "targetname");
-  for(i = 0; i < things.size; i++) {
+  things = getentarray("hut_explosion_debris", "targetname");
+  for (i = 0; i < things.size; i++) {
     things[i] delete();
   }
 }
 
 event1_hutexplosion_remains() {
   fire_points = getstructarray("hut_fire_effect", "targetname");
-  for(i = 0; i < fire_points.size; i++) {
+  for (i = 0; i < fire_points.size; i++) {
     size = randomintrange(0, 1);
-    if(size == 0) {
-      playFX(level._effect["fire_foliage_small"], fire_points[i].origin);
-    } else {
-      playFX(level._effect["fire_foliage_xsmall"], fire_points[i].origin);
-    }
+    if(size == 0)
+      playfx(level._effect["fire_foliage_small"], fire_points[i].origin);
+    else
+      playfx(level._effect["fire_foliage_xsmall"], fire_points[i].origin);
   }
 }
 
@@ -631,8 +623,8 @@ event1_hut_waiter_setup2() {
 event1_explosion_near_right_side_friendlies() {
   level waittill("tank3_attacked");
   friendlyattacked = getstructarray("right_friendly_attacked", "targetname");
-  for(i = 0; i < friendlyattacked.size; i++) {
-    playFX(level._effect["rocket_explode"], friendlyattacked[i].origin);
+  for (i = 0; i < friendlyattacked.size; i++) {
+    playfx(level._effect["rocket_explode"], friendlyattacked[i].origin);
   }
 }
 
@@ -651,7 +643,7 @@ event1_ai_takes_cover_behind_rocks() {
   lcount = 0;
   rightnodes = getnodearray("guys_go_right", "targetname");
   leftnodes = getnodearray("guys_go_left", "targetname");
-  for(i = 0; i < level.allies.size; i++) {
+  for (i = 0; i < level.allies.size; i++) {
     if(isDefined(level.allies[i]) && isalive(level.allies[i])) {
       if(level.allies[i].script_string == "guys_go_right") {
         level.allies[i] notify("unload");
@@ -662,9 +654,8 @@ event1_ai_takes_cover_behind_rocks() {
         level.allies[i] notify("unload");
         level.allies[i] setgoalnode(leftnodes[lcount]);
         lcount++;
-        if(level.allies[i].script_noteworthy == "guys_following_tank3_1") {
+        if(level.allies[i].script_noteworthy == "guys_following_tank3_1")
           level.allies[i] thread magic_bullet_shield();
-        }
         if(level.allies[i].script_noteworthy == "guys_following_tank2_1") {
           level.allies[i] thread magic_bullet_shield();
           level.allies[i] snare_trap_handle_triggerer();
@@ -681,7 +672,7 @@ event1_ai_kill_redshirts() {
 
 event1_riders_take_cover_and_die() {
   tank3 = getent("tank3", "targetname");
-  riding_guys = getEntArray("passenger_tank3", "targetname");
+  riding_guys = getentarray("passenger_tank3", "targetname");
   riding_guys[0] thread magic_bullet_shield();
   riding_guys[1] threadmagic_bullet_shield();
   riding_guys[0].script_vehicleride = 300;
@@ -697,11 +688,11 @@ event1_riders_take_cover_and_die() {
 }
 
 event1_ai_ride_think() {
-  tank2_riders = getEntArray("passenger_tank2", "targetname");
+  tank2_riders = getentarray("passenger_tank2", "targetname");
   tank2_riders[0] thread event1_rider_idle_anim(level.tank2, tank2_riders[0]);
   tank2_riders[1] thread event1_rider_idle_anim(level.tank2, tank2_riders[1]);
   tank2_riders[2] thread event1_rider_idle_anim(level.tank2, tank2_riders[2]);
-  tank3_riders = getEntArray("passenger_tank3", "targetname");
+  tank3_riders = getentarray("passenger_tank3", "targetname");
   tank3_riders[0] thread event1_rider_idle_anim(level.tank3, tank3_riders[0]);
   tank3_riders[1] thread event1_rider_idle_anim(level.tank3, tank3_riders[1]);
   flametank_riders[0] = getent("walker", "script_noteworthy");
@@ -712,7 +703,7 @@ event1_ai_ride_think() {
 
 event1_rider_idle_anim(tank, rider) {
   self endon("dismounting");
-  while(1) {
+  while (1) {
     rider.animname = "rider" + rider.script_startingposition;
     tag = "tag_passenger" + rider.script_startingposition;
     rider linkto(tank, tag);
@@ -722,7 +713,7 @@ event1_rider_idle_anim(tank, rider) {
 
 event1_rider_idle_anim_roebuck_roebuck(tank, rider) {
   self endon("dismounting");
-  while(1) {
+  while (1) {
     rider.animname = "roebuck";
     tag = "tag_passenger" + rider.script_startingposition;
     rider linkto(tank, tag);
@@ -738,9 +729,8 @@ event1_rider_dismount_anim(tank, rider, notify_string) {
   rider unlink();
   rider.animname = "rider" + rider.script_startingposition;
   rider anim_single_solo(rider, "dismountb", "tag_origin", undefined, rider);
-  if(isDefined(notify_string)) {
+  if(isDefined(notify_string))
     level notify(notify_string);
-  }
 }
 
 event1_followtankInternal(tank, pos, guy) {
@@ -771,8 +761,8 @@ event1_artillary_fire() {
 event1_artillery_random_target() {
   reverse_stop = getvehiclenode("auto4108", "targetname");
   reverse_stop waittill("trigger");
-  targets = getEntArray("at_gun_targets", "targetname");
-  while(!flag("left_tank_stop_fire")) {
+  targets = getentarray("at_gun_targets", "targetname");
+  while (!flag("left_tank_stop_fire")) {
     self setturrettargetent(targets[randomintrange(0, targets.size - 1)]);
     wait(randomintrange(0, 3));
   }
@@ -787,18 +777,17 @@ event1_arty_fire() {
 }
 
 event1_left_art_stop_fire() {
-  for(i = 0; i < self.arty_crew.size; i++) {
+  for (i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] thread magic_bullet_shield();
   }
   stop_fire_trig = getent("fourth_color_trig", "targetname");
   stop_fire_trig waittill("trigger");
   self notify("shut down arty");
   level notify("close to arty 1");
-  for(i = 0; i < self.arty_crew.size; i++) {
+  for (i = 0; i < self.arty_crew.size; i++) {
     if(isDefined(self.arty_crew[i]) && isalive(self.arty_crew[i])) {
-      if(isDefined(self.arty_crew[i].magic_bullet_shield)) {
+      if(isDefined(self.arty_crew[i].magic_bullet_shield))
         self.arty_crew[i] thread stop_magic_bullet_shield();
-      }
       self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
       self.arty_crew[i].goalradius = 2000;
     }
@@ -810,7 +799,7 @@ event1_right_art_stop_fire() {
   stop_fire_trig waittill("trigger");
   self notify("shut down arty");
   level notify("close to arty 2");
-  for(i = 0; i < self.arty_crew.size; i++) {
+  for (i = 0; i < self.arty_crew.size; i++) {
     if(isDefined(self.arty_crew[i]) && isalive(self.arty_crew[i])) {
       self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
       self.arty_crew[i].goalradius = 2000;
@@ -820,7 +809,7 @@ event1_right_art_stop_fire() {
 
 keep_flametank_alive() {
   self endon("death");
-  while(!flag("flametank_destroy_trig")) {
+  while (!flag("flametank_destroy_trig")) {
     self.health = 9999999;
     wait(0.05);
   }
@@ -829,7 +818,7 @@ keep_flametank_alive() {
 
 keep_tank_alive() {
   self endon("death");
-  while(!flag("tank3_reached")) {
+  while (!flag("tank3_reached")) {
     self.health = 9999999;
     wait(0.05);
   }
@@ -838,7 +827,7 @@ keep_tank_alive() {
 
 event1_flame_tank_waiter() {
   self endon("flametank_dead");
-  forward = anglesToForward(level.flametank.angles);
+  forward = AnglesToForward(level.flametank.angles);
   level.fake_target = getent("flametank_reset_target", "targetname");
   level.fake_target.origin = forward + (-300, 0, 0);
   level.fake_target linkto(level.flametank);
@@ -846,7 +835,7 @@ event1_flame_tank_waiter() {
   self waittill("tank2_attacked");
   level.flametank setspeed(0, 6, 20);
   level.flametank joltbody(level.flametank.origin + (0, 0, 20), 0.5);
-  level.flametank playSound("tank_gear_grind");
+  level.flametank playsound("tank_gear_grind");
   wait(2);
   fire_shrecks_without_damage(level.flametank, false);
   level.flametank disconnectpaths();
@@ -881,9 +870,8 @@ event1_set_up_grass_guy() {
   grass_trig = getent(self.script_string + "_trig", "targetname");
   grass_trig waittill("trigger", triggerer);
   if((issubstr(self.script_string, "4") || issubstr(self.script_string, "21")) && isplayer(triggerer)) {
-    if(isDefined(self.magic_bullet_shield)) {
+    if(isDefined(self.magic_bullet_shield))
       self thread stop_magic_bullet_shield();
-    }
   }
   self.surprisedplayer = true;
   self allowedstances("stand");
@@ -897,7 +885,7 @@ event1_set_up_grass_guy() {
     prone_anim = level.scr_anim["bunkers"]["prone_anim_fast_b"];
   }
   if(issubstr(self.script_string, "20") || issubstr(self.script_string, "21") || issubstr(self.script_string, "23")) {
-    playFX(level._effect["grass_guy_water"], self.origin + (0, -20, 20));
+    playfx(level._effect["grass_guy_water"], self.origin + (0, -20, 20));
     self setwetness(1.0, true);
   }
   level.animtimefudge = 0.05;
@@ -912,12 +900,11 @@ event1_set_up_grass_guy() {
 }
 
 track_grass_guy_achievement() {
-  while(1) {
+  while (1) {
     self waittill("damage", damage_amount, attacker, direction_vec, point, type);
     if(self.health <= 0 && !self.surprisedplayer) {
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isplayer(attacker))
         attacker maps\_utility::giveachievement_wrapper("ANY_ACHIEVEMENT_GRASSJAP");
-      }
     }
   }
 }
@@ -933,21 +920,18 @@ event1_cleanup() {
   trig waittill("trigger");
   japs1 = get_ai_group_ai("event1_japs_flow_1");
   japs2 = get_ai_group_ai("event1_japs_flow_2");
-  for(i = 0; i < japs1.size; i++) {
-    if(isDefined(japs1[i])) {
+  for (i = 0; i < japs1.size; i++) {
+    if(isDefined(japs1[i]))
       japs1[i] thread bloody_death();
-    }
   }
-  for(i = 0; i < japs2.size; i++) {
-    if(isDefined(japs2[i])) {
+  for (i = 0; i < japs2.size; i++) {
+    if(isDefined(japs2[i]))
       japs2[i] thread bloody_death();
-    }
   }
   grass_guys = get_ai_group_ai("event1_grass_guys");
-  for(i = 0; i < grass_guys.size; i++) {
-    if(isDefined(grass_guys[i])) {
+  for (i = 0; i < grass_guys.size; i++) {
+    if(isDefined(grass_guys[i]))
       grass_guys[i] thread bloody_death();
-    }
   }
 }
 
@@ -955,10 +939,9 @@ event1_cleanup2() {
   trig = getent("seventh_color_trig", "targetname");
   trig waittill("trigger");
   japs3 = get_ai_group_ai("event1_japs_flow_3");
-  for(i = 0; i < japs3.size; i++) {
-    if(isDefined(japs3[i])) {
+  for (i = 0; i < japs3.size; i++) {
+    if(isDefined(japs3[i]))
       japs3[i] thread bloody_death();
-    }
   }
 }
 
@@ -966,28 +949,26 @@ event1b_cleanup() {
   trig = getent("last_cleanup", "script_noteworthy");
   trig waittill("trigger");
   japs1 = get_ai_group_ai("event1_japs_flow_4");
-  for(i = 0; i < japs1.size; i++) {
-    if(isDefined(japs1[i])) {
+  for (i = 0; i < japs1.size; i++) {
+    if(isDefined(japs1[i]))
       japs1[i] thread bloody_death();
-    }
   }
 }
 
 event1b_friendlies_cleaup1() {
   trig = getent("eleventh_color_trig", "targetname");
   trig waittill("trigger");
-  riding_guys = getEntArray("passenger_tank3", "targetname");
+  riding_guys = getentarray("passenger_tank3", "targetname");
   guy = getent("guys_following_tank3_1", "script_noteworthy");
   squad = [];
   squad[0] = riding_guys[0];
   squad[1] = riding_guys[1];
   squad[2] = guy;
-  for(i = 0; i < squad.size - 1; i++) {
-    if(isDefined(squad[i].magic_bullet_shield)) {
+  for (i = 0; i < squad.size - 1; i++) {
+    if(isDefined(squad[i].magic_bullet_shield))
       squad[i] thread stop_magic_bullet_shield();
-    }
   }
-  for(i = 0; i < squad.size; i++) {
+  for (i = 0; i < squad.size; i++) {
     wait(randomintrange(2, 5));
     squad[i] thread bloody_death();
   }
@@ -999,18 +980,17 @@ event1b_friendlies_cleaup1_co_op() {
     return;
   }
   wait(randomintrange(5, 15));
-  riding_guys = getEntArray("passenger_tank3", "targetname");
+  riding_guys = getentarray("passenger_tank3", "targetname");
   guy = getent("guys_following_tank3_1", "script_noteworthy");
   squad = [];
   squad[0] = riding_guys[0];
   squad[1] = riding_guys[1];
   squad[2] = guy;
-  for(i = 0; i < squad.size - 1; i++) {
-    if(isDefined(squad[i].magic_bullet_shield)) {
+  for (i = 0; i < squad.size - 1; i++) {
+    if(isDefined(squad[i].magic_bullet_shield))
       squad[i] thread stop_magic_bullet_shield();
-    }
   }
-  for(i = 0; i < squad.size; i++) {
+  for (i = 0; i < squad.size; i++) {
     wait(randomintrange(5, 10));
     squad[i] thread bloody_death();
   }
@@ -1019,12 +999,11 @@ event1b_friendlies_cleaup1_co_op() {
 event1b_friendlies_hut_cleaup1() {
   trig = getent("event1_objective_clear_trig2", "targetname");
   trig waittill("trigger");
-  squad = getEntArray("right_side_friendlies", "script_noteworthy");
-  for(i = 0; i < squad.size; i++) {
+  squad = getentarray("right_side_friendlies", "script_noteworthy");
+  for (i = 0; i < squad.size; i++) {
     wait(randomintrange(0, 7));
-    if(isDefined(squad[i]) && isalive(squad[i])) {
+    if(isDefined(squad[i]) && isalive(squad[i]))
       squad[i] thread bloody_death();
-    }
   }
 }
 
@@ -1044,20 +1023,19 @@ planes_flying_strat(start_struct_name) {
 }
 
 sound_planes(wait_time) {
-  self playSound("squadron_by");
+  self playsound("squadron_by");
 }
 
 planes_move(start_struct, end_struct) {
-  for(i = 0; i < start_struct.size; i++) {
+  for (i = 0; i < start_struct.size; i++) {
     plane = spawn("script_model", start_struct[i].origin);
     plane.angles = start_struct[i].angles;
     plane setModel("vehicle_usa_aircraft_f4ucorsair");
     end_struct = getstruct("end_" + start_struct[i].script_int, "script_noteworthy");
     destination = end_struct.origin;
     plane thread flyto(destination, randomintrange(90, 120));
-    if(i == 3) {
+    if(i == 3)
       plane thread sound_planes();
-    }
   }
 }
 
@@ -1076,7 +1054,7 @@ event1a_skipto_setup() {
   players_ignoreall(level.allies, 0);
   wait_for_first_player();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     starts = getStructArray("event1a_start", "targetname");
     start = starts[randomint(starts.size)];
     players[i] setOrigin(start.origin);
@@ -1085,30 +1063,28 @@ event1a_skipto_setup() {
   level thread event1_right_artsetup();
   level.heroes[0] forceteleport((48036.4, 2199.24, 187.443), (0, 100.95, 0));
   level.heroes[1] forceteleport((47635.6, 2450.34, 198.352), (0, 356.25, 0));
-  for(i = 0; i < level.allies.size; i++) {
-    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker") {
+  for (i = 0; i < level.allies.size; i++) {
+    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker")
       level.allies[i] thread bloody_death();
-    }
   }
 }
 
 magic_bullet_to_keep_guys_alive(the_squad) {
-  for(i = 0; i < the_squad.size; i++) {
+  for (i = 0; i < the_squad.size; i++) {
     the_squad[i] thread magic_bullet_shield();
   }
 }
 stop_magic_bullet(the_squad) {
-  for(i = 0; i < the_squad.size; i++) {
-    if(isDefined(the_squad[i]) && isalive(the_squad[i]) && isDefined(the_squad[i].magic_bullet_shield)) {
+  for (i = 0; i < the_squad.size; i++) {
+    if(isDefined(the_squad[i]) && isalive(the_squad[i]) && isDefined(the_squad[i].magic_bullet_shield))
       the_squad[i] stop_magic_bullet_shield();
-    }
   }
 }
 
 set_objectives(objectiveId) {
   if(objectiveId == 0) {
     objective_add(0, "current");
-    objective_string(0, &"PEL1B_OBJECTIVE_MOVE_UP");
+    objective_string(0, & "PEL1B_OBJECTIVE_MOVE_UP");
   }
   if(objectiveId == 1) {
     level.obj_arty = 2;
@@ -1116,14 +1092,14 @@ set_objectives(objectiveId) {
     objective_add(1, "current");
     objective_additionalposition(1, 1, (48004.2, 2406, 174.6));
     objective_additionalposition(1, 2, (47438.2, 5726.9, 60.5));
-    objective_string(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+    objective_string(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   }
   if(objectiveId == 2) {
     flag_set("event1_objectives_done");
     objective_state(1, "done");
     objective_add(2, "current");
     objective_additionalposition(2, 1, (46093, 6259, 0));
-    objective_string(2, &"PEL1B_OBJECTIVE_FOLLOW_SQUAD");
+    objective_string(2, & "PEL1B_OBJECTIVE_FOLLOW_SQUAD");
     objective_state(2, "done");
     thread battlechatter_off("allies");
     thread battlechatter_off("axis");
@@ -1135,8 +1111,8 @@ event1_objective_blocker() {
   blocker = getent("event1_objective_clip", "targetname");
   blocker_trig = getent("event1_objective_clip_trig", "targetname");
   players = get_players();
-  while(!flag("event1_objectives_done")) {
-    for(i = 0; i < players.size; i++) {
+  while (!flag("event1_objectives_done")) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
       if(isDefined(player)) {
         if(isalive(player) && !flag("event1_objectives_done")) {
@@ -1167,7 +1143,7 @@ event1_objective_blocker() {
   blocker = getent("event1_objective_clip", "targetname");
   blocker delete();
   blocker_trig delete();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player)) {
       if(isalive(player) && isDefined(player.Warning_hud_created)) {
@@ -1180,13 +1156,13 @@ event1_objective_blocker() {
 fire_shrecks(spwn, targt, time) {
   shreck = spawn("script_model", spwn.origin);
   shreck.angles = targt.angles;
-  shreck setModel("weapon_ger_panzershreck_rocket");
+  shreck setmodel("weapon_ger_panzershreck_rocket");
   wait 0.1;
   shreck moveTo(targt.origin, time);
-  playFXOnTag(level._effect["rocket_trail"], shreck, "tag_origin");
-  shreck playLoopSound("rpg_rocket");
+  playfxontag(level._effect["rocket_trail"], shreck, "tag_origin");
+  shreck playloopsound("rpg_rocket");
   wait time;
-  playFX(level._effect["rocket_explode"], shreck.origin);
+  playfx(level._effect["rocket_explode"], shreck.origin);
   earthquake(0.3, 1.5, shreck.origin, 512);
   shreck stoploopsound();
   shreck hide();
@@ -1196,9 +1172,9 @@ fire_shrecks(spwn, targt, time) {
 
 shrecksmoke(time) {
   fxcounter = 0;
-  while(time > 0) {
+  while (time > 0) {
     time = time - 0.1;
-    playFX(level._effect["rocket_trail"], self.origin);
+    playfx(level._effect["rocket_trail"], self.origin);
     wait 0.1;
   }
 }
@@ -1211,16 +1187,15 @@ fire_shrecks_with_damage(tank, damage) {
 fire_shrecks_without_damage(tank, switchmodel) {
   shreck = spawn("script_model", tank.origin);
   shreck.angles = tank.angles;
-  if(switchmodel) {
-    shreck setModel("weapon_ger_panzershreck_rocket");
-  }
-  playFX(level._effect["rocket_explode"], shreck.origin);
-  shreck playSound("explo_metal_rand");
+  if(switchmodel)
+    shreck setmodel("weapon_ger_panzershreck_rocket");
+  playfx(level._effect["rocket_explode"], shreck.origin);
+  shreck playsound("explo_metal_rand");
 }
 
 tank_loopfire(tank, times) {
   self endon("death");
-  for(i = 0; i < times; i++) {
+  for (i = 0; i < times; i++) {
     if(tank.health > 0) {
       tank fireweapon();
       wait(randomintrange(2, 5));
@@ -1232,7 +1207,7 @@ player_shellshock() {
   tank2 = getent("tank2", "targetname");
   tank3 = getent("tank3", "targetname");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     distance1 = Distance(tank2.origin, players[i].origin);
     distance2 = Distance(tank3.origin, players[i].origin);
     if(distance1 < 200.0 || distance2 < 200.0) {
@@ -1245,10 +1220,9 @@ player_shellshock() {
 }
 
 players_ignoreall(squad, ignoreflag) {
-  for(i = 0; i < squad.size; i++) {
-    if(isalive(squad[i])) {
+  for (i = 0; i < squad.size; i++) {
+    if(isalive(squad[i]))
       squad[i].ignoreall = ignoreflag;
-    }
   }
 }
 
@@ -1272,10 +1246,10 @@ bloody_death() {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for(i = 0; i < 2 + randomint(3); i++) {
+  for (i = 0; i < 2 + randomint(3); i++) {
     random = randomintrange(0, tags.size);
     if(is_mature()) {
-      playFXOnTag(level.fleshhit, self, tags[random]);
+      playfxontag(level.fleshhit, self, tags[random]);
     }
     wait(randomfloat(0.2));
   }
@@ -1291,7 +1265,7 @@ satchel_setup(charge_trig, target_ent, flag_art) {
   ASSERTEX(isDefined(charge.script_noteworthy), "Charge should have a swap model specified as script_noteworthy");
   charge_trig waittill("trigger");
   iprintlnbold("Charge planted");
-  charge setModel(charge.script_noteworthy);
+  charge setmodel(charge.script_noteworthy);
   wait(5);
   charge delete();
   charge_trig delete();
@@ -1300,15 +1274,15 @@ satchel_setup(charge_trig, target_ent, flag_art) {
 }
 
 setup_spawn_functions() {
-  grass_guy = getEntArray("grass_guy", "script_noteworthy");
+  grass_guy = getentarray("grass_guy", "script_noteworthy");
   array_thread(grass_guy, ::add_spawn_function, ::event1_set_up_grass_guy);
-  suicide_guy3 = getEntArray("suicide_guy3", "script_noteworthy");
+  suicide_guy3 = getentarray("suicide_guy3", "script_noteworthy");
   array_thread(suicide_guy3, ::add_spawn_function, ::setup_suicide_guy);
-  suicide_guy1 = getEntArray("suicide_guy1", "script_noteworthy");
+  suicide_guy1 = getentarray("suicide_guy1", "script_noteworthy");
   array_thread(suicide_guy1, ::add_spawn_function, ::setup_suicide_guy);
-  japs_on_hut = getEntArray("event1_japs_on_hut", "script_noteworthy");
+  japs_on_hut = getentarray("event1_japs_on_hut", "script_noteworthy");
   array_thread(japs_on_hut, ::add_spawn_function, ::event1_japs_on_hut_strat);
-  trap_guy = getEntArray("event1_right_side_trap_guy", "targetname");
+  trap_guy = getentarray("event1_right_side_trap_guy", "targetname");
   array_thread(trap_guy, ::add_spawn_function, ::setup_right_side_trap_guy);
 }
 
@@ -1316,10 +1290,10 @@ event1_objective_thread_left_art() {
   trig = getent("arty_stop_fire_left", "targetname");
   trig waittill("trigger");
   trench_1 = getent("event1_objective_clear_trig1", "targetname");
-  while(1) {
+  while (1) {
     cleared = true;
     axis_guys = GetAiArray("axis");
-    for(i = 0; i < axis_guys.size; i++) {
+    for (i = 0; i < axis_guys.size; i++) {
       if(axis_guys[i] istouching(trench_1)) {
         cleared = false;
       }
@@ -1330,7 +1304,7 @@ event1_objective_thread_left_art() {
     wait(1);
   }
   level.obj_arty--;
-  Objective_String(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+  Objective_String(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   Objective_AdditionalPosition(1, 1, (0, 0, 0));
   level notify("event1_objective_left_art_done");
   autosave_by_name("after_left_artillery");
@@ -1341,10 +1315,10 @@ event1_objective_thread_right_art() {
   trig = getent("eleventh_color_trig", "targetname");
   trig waittill("trigger");
   trench_2 = getent("event1_objective_clear_trig2", "targetname");
-  while(1) {
+  while (1) {
     cleared = true;
     axis_guys = GetAiArray("axis");
-    for(i = 0; i < axis_guys.size; i++) {
+    for (i = 0; i < axis_guys.size; i++) {
       if(axis_guys[i] istouching(trench_2)) {
         cleared = false;
       }
@@ -1355,7 +1329,7 @@ event1_objective_thread_right_art() {
     wait(1);
   }
   level.obj_arty--;
-  Objective_String(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+  Objective_String(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   Objective_AdditionalPosition(1, 2, (0, 0, 0));
   level notify("event1_objective_right_art_done");
   autosave_by_name("after_right_artillery");
@@ -1394,8 +1368,8 @@ event1_held_guy() {
   level thread swap_flag();
   level endon("stop_held_guy_vignette");
   flag_wait("event1_held_guy");
-  spawners = getEntArray("event1_held_down_spawners", "targetname");
-  for(i = 0; i < spawners.size; i++) {
+  spawners = GetEntArray("event1_held_down_spawners", "targetname");
+  for (i = 0; i < spawners.size; i++) {
     spawners[i].animname = spawners[i].script_string;
     spawners[i] add_spawn_function(::guy_make_killable);
     if(spawners[i].animname == "ally_held_down") {
@@ -1415,11 +1389,11 @@ swap_flag() {
 
 play_rumble_effect() {
   players = get_players();
-  for(p = 0; p < players.size; p++) {
+  for (p = 0; p < players.size; p++) {
     players[p] PlayRumbleOnEntity("artillery_rumble");
   }
   wait(2);
-  for(p = 0; p < players.size; p++) {
+  for (p = 0; p < players.size; p++) {
     players[p] PlayRumbleOnEntity("artillery_rumble");
   }
 }
@@ -1430,7 +1404,7 @@ kill_ally(notify_str) {
   }
   self waittill(notify_str);
   self.skipDeathAnim = true;
-  self setCanDamage(true);
+  self setcandamage(true);
   self dodamage(self.health + 200, self.origin);
 }
 
@@ -1445,7 +1419,7 @@ spawn_and_play(spawners, anime, node, anim_reach, death_anim) {
 
 spawn_guys(spawners, target_name, ok_to_spawn) {
   guys = [];
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     guy = spawn_guy(spawners[i], target_name, ok_to_spawn);
     if(isDefined(guy)) {
       guys[guys.size] = guy;
@@ -1458,14 +1432,14 @@ spawn_guys(spawners, target_name, ok_to_spawn) {
 
 spawn_guy(spawner, target_name, ok_to_spawn) {
   if(isDefined(ok_to_spawn) && ok_to_spawn) {
-    while(!OkTospawn()) {
+    while (!OkToSpawn()) {
       wait(0.1);
     }
   }
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
-    guy = spawner Stalingradspawn();
+    guy = spawner StalingradSpawn();
   } else {
-    guy = spawner Dospawn();
+    guy = spawner DoSpawn();
   }
   if(!spawn_failed(guy)) {
     if(isDefined(target_name)) {
@@ -1482,16 +1456,15 @@ event1b_skipto_setup() {
   level.startskip = "1b";
   wait_for_first_player();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     starts = getStructArray("event1b_start", "targetname");
     start = starts[randomint(starts.size)];
     players[i] setOrigin(start.origin);
     players[i] setplayerangles(start.angles);
   }
-  for(i = 0; i < level.allies.size; i++) {
-    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker") {
+  for (i = 0; i < level.allies.size; i++) {
+    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker")
       level.allies[i] thread bloody_death();
-    }
   }
   tank1_trig = getent("tank1start", "targetname");
   tank1_trig notify("trigger");
@@ -1551,8 +1524,8 @@ outro_skipto_setup() {
   flag_wait_all("roebuck_reached_outro", "polonsky_reached_outro", "radio_guy_reached_outro");
   players = get_players();
   player_close = false;
-  while(!player_close) {
-    for(i = 0; i < players.size; i++) {
+  while (!player_close) {
+    for (i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, guys[0].origin) < 400 * 400) {
         player_close = true;
       }
@@ -1621,23 +1594,23 @@ event1b_tank1_movesup() {
   firenode[4] = getvehiclenode("auto3723", "targetname");
   firenode[0] waittill("trigger");
   self fireweapon();
-  points = getEntArray("left1", "script_noteworthy");
+  points = getentarray("left1", "script_noteworthy");
   self thread event1b_randomfirepoint(points, "left1");
   firenode[1] waittill("trigger");
   self notify("left1");
-  points = getEntArray("right1", "script_noteworthy");
+  points = getentarray("right1", "script_noteworthy");
   self thread event1b_randomfirepoint(points, "right1");
   firenode[2] waittill("trigger");
   self notify("right1");
-  points1 = getEntArray("left2", "script_noteworthy");
+  points1 = getentarray("left2", "script_noteworthy");
   self thread event1b_randomfirepoint(points1, "left2");
   firenode[3] waittill("trigger");
   self notify("left2");
-  points2 = getEntArray("right2", "script_noteworthy");
+  points2 = getentarray("right2", "script_noteworthy");
   self thread event1b_randomfirepoint(points2, "right2");
   firenode[4] waittill("trigger");
   self notify("right2");
-  points3 = getEntArray("left3", "script_noteworthy");
+  points3 = getentarray("left3", "script_noteworthy");
   self thread event1b_randomfirepoint(points3, "left3");
   tank1attacknode = getvehiclenode("auto3724", "targetname");
   tank1attacknode waittill("trigger");
@@ -1648,7 +1621,7 @@ event1b_randomfirepoint(points, endonwhat) {
   self endon(endonwhat);
   self endon("death");
   self clearturrettarget();
-  while(1) {
+  while (1) {
     ASSERT(points.size > 1, " There should be atleast one point to point to.");
     which = randomintrange(0, points.size - 1);
     if(isDefined(points[which])) {
@@ -1661,8 +1634,8 @@ event1b_randomfirepoint(points, endonwhat) {
 }
 
 event1b_fire_japs_up_hill() {
-  japs = getEntArray("event1b_japs", "targetname");
-  for(i = 0; i < 10; i++) {
+  japs = getentarray("event1b_japs", "targetname");
+  for (i = 0; i < 10; i++) {
     if(isDefined(japs)) {
       which = randomintrange(0, japs.size - 1);
       self setTurretTargetEnt(japs[which]);
@@ -1703,16 +1676,16 @@ event1b_tree_sniper() {
   tree = getent("test_tree", "script_noteworthy");
   tree thread flame_notify();
   model_tag_origin = spawn("script_model", tree.origin);
-  model_tag_origin setModel("tag_origin");
+  model_tag_origin setmodel("tag_origin");
   model_tag_origin linkto(tree, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["sniper_leaf_loop"], model_tag_origin, "TAG_ORIGIN");
+  playfxontag(level._effect["sniper_leaf_loop"], model_tag_origin, "TAG_ORIGIN");
   node = getvehiclenode("auto3730", "targetname");
   node waittill("trigger");
   model_tag_origin unlink();
   model_tag_origin delete();
   wait(0.05);
   orig = getent("test_orig", "targetname");
-  playFX(level._effect["sniper_leaf_canned"], tree.origin);
+  playfx(level._effect["sniper_leaf_canned"], tree.origin);
 }
 
 flame_notify() {
@@ -1720,11 +1693,11 @@ flame_notify() {
   node waittill("trigger");
   wait(0.05);
   guy = get_ai_group_ai("tree_guy")[0];
-  while(1) {
+  while (1) {
     self waittill("broken", broken_notify, attacker);
     if(broken_notify == "hideout_fronds_dmg0") {
       guy animscripts\death::flame_death_fx();
-      guy setCanDamage(true);
+      guy setcandamage(true);
       guy notify("fake tree death", attacker);
       break;
     }
@@ -1733,8 +1706,8 @@ flame_notify() {
 
 get_sorted_players() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
-    for(j = i; j < players.size; j++) {
+  for (i = 0; i < players.size; i++) {
+    for (j = i; j < players.size; j++) {
       if(players[j] GetEntityNumber() > players[i] GetEntityNumber()) {
         temp = players[i];
         players[i] = players[j];
@@ -1748,13 +1721,13 @@ get_sorted_players() {
 get_sorted_starts(start_name) {
   starts = getstructarray("player_starts", "targetname");
   player_starts = [];
-  for(i = 0; i < starts.size; i++) {
+  for (i = 0; i < starts.size; i++) {
     if(isDefined(starts[i].script_int)) {
       player_starts[player_starts.size] = starts[i];
     }
   }
-  for(i = 0; i < player_starts.size; i++) {
-    for(j = i; j < player_starts.size; j++) {
+  for (i = 0; i < player_starts.size; i++) {
+    for (j = i; j < player_starts.size; j++) {
       if(player_starts[j].script_int < player_starts[i].script_int) {
         temp = player_starts[i];
         player_starts[i] = player_starts[j];
@@ -1890,9 +1863,8 @@ snare_trap_thread() {
   wait(0.2);
   if(!isplayer(triggerer) && (triggerer.team != "axis") && (triggerer.script_noteworthy == "guys_following_tank2_1")) {
     flag_set("guy_trapped");
-    if(isDefined(triggerer.magic_bullet_shield)) {
+    if(isDefined(triggerer.magic_bullet_shield))
       triggerer thread stop_magic_bullet_shield();
-    }
     triggerer.NoFriendlyfire = true;
     playsoundatposition("trap_vx", triggerer.origin);
     triggerer thread bloody_death();
@@ -1930,14 +1902,12 @@ grass_guy_shoots_trapped_guy() {
   fireent = spawn("script_origin", firepoint.origin + (0, 0, -100));
   fireent.health = 1000000;
   self SetEntityTarget(fireent);
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     self thread stop_magic_bullet_shield();
-  }
   wait(randomintrange(4, 7));
   self.ignoreme = false;
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self ClearEntityTarget();
-  }
 }
 
 setup_right_side_trap_guy() {
@@ -1963,9 +1933,8 @@ right_side_grass_guy_trap_think() {
   wait(0.2);
   if(!isplayer(triggerer) && (triggerer.team != "axis") && (triggerer.script_noteworthy == "right_side_trap_guy")) {
     flag_set("guy_trapped2");
-    if(isDefined(self.magic_bullet_shield)) {
+    if(isDefined(self.magic_bullet_shield))
       triggerer thread stop_magic_bullet_shield();
-    }
     triggerer.NoFriendlyfire = true;
     playsoundatposition("trap_vx", triggerer.origin);
     triggerer thread blood_drop_effect();
@@ -1987,13 +1956,11 @@ grass_guy_shoots_trapped_guy2() {
   fireent = spawn("script_origin", firepoint.origin + (0, 0, -100));
   fireent.health = 1000000;
   self SetEntityTarget(fireent);
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     self thread stop_magic_bullet_shield();
-  }
   wait(randomintrange(5, 8));
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self ClearEntityTarget();
-  }
 }
 
 blood_drop_effect() {
@@ -2001,16 +1968,16 @@ blood_drop_effect() {
   if(!is_mature()) {
     return;
   }
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     tags = "j_head";
-    playFXOnTag(level._effect["blood_drop"], self, tags);
+    playfxontag(level._effect["blood_drop"], self, tags);
     wait(randomfloat(1, 2));
   }
 }
 
 print_trap_guy_overhead() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     print3d(self.origin + (0, 0, 80), "I am going to get trapped");
     wait(0.5);
   }

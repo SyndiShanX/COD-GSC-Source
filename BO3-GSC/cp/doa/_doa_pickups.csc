@@ -17,12 +17,12 @@
 #namespace doa_pickups;
 
 function init() {
-  clientfield::register("scriptmover", "pickuptype", 1, 10, "int", &function_892b2a87, 0, 0);
-  clientfield::register("scriptmover", "pickupwobble", 1, 1, "int", &function_77c1258e, 0, 0);
-  clientfield::register("scriptmover", "pickuprotate", 1, 1, "int", &pickuprotate, 0, 0);
-  clientfield::register("scriptmover", "pickupscale", 1, 8, "int", &function_b3289e6d, 0, 0);
-  clientfield::register("scriptmover", "pickupvisibility", 1, 1, "int", &function_68ad0d79, 0, 0);
-  clientfield::register("scriptmover", "pickupmoveto", 1, 4, "int", &function_474724d7, 0, 0);
+  clientfield::register("scriptmover", "pickuptype", 1, 10, "int", & function_892b2a87, 0, 0);
+  clientfield::register("scriptmover", "pickupwobble", 1, 1, "int", & function_77c1258e, 0, 0);
+  clientfield::register("scriptmover", "pickuprotate", 1, 1, "int", & pickuprotate, 0, 0);
+  clientfield::register("scriptmover", "pickupscale", 1, 8, "int", & function_b3289e6d, 0, 0);
+  clientfield::register("scriptmover", "pickupvisibility", 1, 1, "int", & function_68ad0d79, 0, 0);
+  clientfield::register("scriptmover", "pickupmoveto", 1, 4, "int", & function_474724d7, 0, 0);
   level.doa.pickups = [];
   function_db1442f2("zombietron_silver_coin", 1.25, 1, 0);
   function_db1442f2("zombietron_silver_brick", 1.25, 1, 1);
@@ -83,7 +83,7 @@ function function_f7726690(parent) {
   parent endon("entityshutdown");
   parent endon("hash_4c187db8");
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self.origin = parent.origin;
     wait(0.016);
   }
@@ -92,7 +92,7 @@ function function_f7726690(parent) {
 function function_6cb8e053() {
   self endon("hash_cfadee1b");
   self waittill("entityshutdown");
-  if(isDefined(self.fakemodel)) {
+  if(isdefined(self.fakemodel)) {
     self.fakemodel delete();
   }
 }
@@ -101,7 +101,7 @@ function function_ee036ce4() {
   self notify("hash_b14b3cac");
   self endon("hash_b14b3cac");
   self endon("entityshutdown");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     waittime = randomfloatrange(2.5, 5);
     yaw = randomint(360);
     if(yaw > 300) {
@@ -116,7 +116,7 @@ function function_ee036ce4() {
 }
 
 function function_77c1258e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self.fakemodel)) {
+  if(!isdefined(self.fakemodel)) {
     return;
   }
   if(newval) {
@@ -136,14 +136,14 @@ function function_6093755a() {
     dir = -180;
   }
   time = randomfloatrange(3, 7);
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self rotateto(self.angles + (0, dir, 0), time);
     wait(time);
   }
 }
 
 function pickuprotate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self.fakemodel)) {
+  if(!isdefined(self.fakemodel)) {
     return;
   }
   if(newval) {
@@ -155,7 +155,7 @@ function pickuprotate(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 function function_68ad0d79(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self.fakemodel)) {
+  if(!isdefined(self.fakemodel)) {
     return;
   }
   if(newval == 0) {
@@ -166,7 +166,7 @@ function function_68ad0d79(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_b3289e6d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self.fakemodel)) {
+  if(!isdefined(self.fakemodel)) {
     return;
   }
   scale = (newval / (256 - 1)) * 16;
@@ -179,7 +179,7 @@ function function_b3289e6d(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6b4a5f81(player) {
   self endon("entityshutdown");
   self show();
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     x = 2000;
     y = 3000;
     z = 1000;
@@ -210,7 +210,7 @@ function function_6b4a5f81(player) {
 }
 
 function function_474724d7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self.fakemodel)) {
+  if(!isdefined(self.fakemodel)) {
     return;
   }
   self notify("hash_4c187db8");
@@ -233,21 +233,21 @@ function function_474724d7(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_892b2a87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(level.doa.arenas[level.doa.current_arena].var_869acbe6) && level.doa.arenas[level.doa.current_arena].var_869acbe6 && localclientnum > 0) {
+  if(isdefined(level.doa.arenas[level.doa.current_arena].var_869acbe6) && level.doa.arenas[level.doa.current_arena].var_869acbe6 && localclientnum > 0) {
     return;
   }
-  type = newval &(64 - 1);
+  type = newval & (64 - 1);
   variant = undefined;
   if(newval > 38) {
     variant = newval >> 6;
     assert(type == 1 || type == 16);
   }
   def = function_bac08508(type, variant);
-  if(!isDefined(def)) {
+  if(!isdefined(def)) {
     return;
   }
   self.fakemodel = spawn(localclientnum, self.origin, "script_model");
-  self.fakemodel setModel(def.modelname);
+  self.fakemodel setmodel(def.modelname);
   self.fakemodel.angles = self.angles;
   self.fakemodel setscale(def.scale);
   self.fakemodel notsolid();
@@ -258,7 +258,7 @@ function function_892b2a87(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_bac08508(type, variant) {
   foreach(pickup in level.doa.pickups) {
     if(pickup.type == type) {
-      if(!isDefined(variant)) {
+      if(!isdefined(variant)) {
         return pickup;
       }
       if(variant === pickup.variant) {
@@ -269,7 +269,7 @@ function function_bac08508(type, variant) {
 }
 
 function function_db1442f2(modelname, modelscale, type, variant) {
-  pickup = spawnStruct();
+  pickup = spawnstruct();
   pickup.modelname = modelname;
   pickup.scale = modelscale;
   pickup.type = type;

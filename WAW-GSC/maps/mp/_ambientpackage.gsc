@@ -11,9 +11,9 @@ init() {
 }
 
 tidyup_triggers(client_num) {
-  amb_triggers = getEntArray("ambient_package", "targetname");
+  amb_triggers = GetEntArray("ambient_package", "targetname");
   if(isDefined(amb_triggers) && amb_triggers.size > 0) {
-    for(i = 0; i < amb_triggers.size; i++) {
+    for (i = 0; i < amb_triggers.size; i++) {
       trig = amb_triggers[i];
       if(isDefined(trig.in_volume) && isDefined(trig.in_volume[client_num])) {
         trig.in_volume[client_num] = 0;
@@ -24,16 +24,14 @@ tidyup_triggers(client_num) {
 
 monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
   trigPlayer endon("disconnect");
-  while(trigPlayer isTouching(self)) {
+  while (trigPlayer isTouching(self)) {
     wait 0.1;
   }
   self.in_volume[trigPlayer getentitynumber()] = 0;
-  if(useAmbientPackage) {
+  if(useAmbientPackage)
     deactivateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-  }
-  if(useAmbientRoom) {
+  if(useAmbientRoom)
     deactivateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
-  }
 }
 
 player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
@@ -42,12 +40,10 @@ player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
     self.in_volume[index] = 0;
   }
   if(self.in_volume[index] == 0) {
-    if(useAmbientPackage) {
+    if(useAmbientPackage)
       activateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-    }
-    if(useAmbientRoom) {
+    if(useAmbientRoom)
       activateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
-    }
     self.in_volume[index] = 1;
     self thread monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage);
   }
@@ -64,7 +60,7 @@ ambientPackageTrigger() {
     self.script_ambientpriority = 1;
   }
   self.in_volume = [];
-  for(;;) {
+  for (;;) {
     self waittill("trigger", trigPlayer);
     self player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage);
     wait(0.01);

@@ -20,7 +20,7 @@ init() {
 fire_muzzle_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     playviewmodelfx(localclientnum, level._effect["fire_muzzle"], "tag_flash");
-    playSound(localclientnum, "wpn_firestaff_fire_plr");
+    playsound(localclientnum, "wpn_firestaff_fire_plr");
   }
 }
 
@@ -45,11 +45,11 @@ zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 
   if(newval == 1) {
-    self.torso_fire_fx = playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, "j_spinelower");
-    self.head_fire_fx = playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, "j_head");
+    self.torso_fire_fx = playfxontag(localclientnum, level._effect["character_fire_death_torso"], self, "j_spinelower");
+    self.head_fire_fx = playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, "j_head");
     self.sndent = spawn(0, self.origin, "script_origin");
     self.sndent linkto(self);
-    self.sndent playLoopSound("zmb_fire_loop", 0.5);
+    self.sndent playloopsound("zmb_fire_loop", 0.5);
     self.sndent thread snddeleteent(self);
 
     if(!is_true(self.has_charred)) {

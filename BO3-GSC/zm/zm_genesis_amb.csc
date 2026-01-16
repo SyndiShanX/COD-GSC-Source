@@ -13,12 +13,12 @@ function main() {
 
 function function_d19cb2f8() {
   loopers = struct::get_array("exterior_goal", "targetname");
-  if(isDefined(loopers) && loopers.size > 0) {
+  if(isdefined(loopers) && loopers.size > 0) {
     delay = 0;
     if(getdvarint("") > 0) {
       println(("" + loopers.size) + "");
     }
-    for(i = 0; i < loopers.size; i++) {
+    for (i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
       if((delay % 20) == 0) {
@@ -32,27 +32,27 @@ function function_d19cb2f8() {
 }
 
 function soundloopthink() {
-  if(!isDefined(self.origin)) {
+  if(!isdefined(self.origin)) {
     return;
   }
-  if(!isDefined(self.script_sound)) {
+  if(!isdefined(self.script_sound)) {
     self.script_sound = "zmb_spawn_walla";
   }
   notifyname = "";
-  assert(isDefined(notifyname));
-  if(isDefined(self.script_string)) {
+  assert(isdefined(notifyname));
+  if(isdefined(self.script_string)) {
     notifyname = self.script_string;
   }
-  assert(isDefined(notifyname));
+  assert(isdefined(notifyname));
   started = 1;
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     started = self.script_int != 0;
   }
   if(started) {
     soundloopemitter(self.script_sound, self.origin);
   }
   if(notifyname != "") {
-    for(;;) {
+    for (;;) {
       level waittill(notifyname);
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);

@@ -14,7 +14,7 @@ init() {
     setdvar("destructibles_enable_physics", "1");
   }
   delete_these = getEntArray("delete_on_load", "targetname");
-  for(i = 0; i < delete_these.size; i++) {
+  for (i = 0; i < delete_these.size; i++) {
     delete_these[i] delete();
   }
   destructible = false;
@@ -55,7 +55,7 @@ destructible_recycle_spawn() {}
 destructibles_think() {
   self.exploded = false;
   immediateExplosion = false;
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
     if(type == "MOD_MELEE") {
       self.health += damage;
@@ -63,9 +63,8 @@ destructibles_think() {
       self.health = 200;
       immediateExplosion = true;
     }
-    if(self.health < 200) {
+    if(self.health < 200)
       self.health = 200;
-    }
     if(self.health <= 200 && !self.exploded) {
       self.exploded = true;
       attacker notify("destroyed_car");
@@ -74,9 +73,8 @@ destructibles_think() {
         if(isDefined(hood_tag)) {
           playFX(level._effect["dest_car_hoodfire"], hood_tag);
           self playDestructibleBattleChatter();
-          if(!immediateExplosion) {
+          if(!immediateExplosion)
             wait 3;
-          }
           playFX(level._effect["dest_car_fire"], self.origin + (0, 0, 15));
         }
       }
@@ -137,7 +135,7 @@ destructible_vehicle_play_explosion_sound() {
 
 printHealth() {
   self endon("vehicle destroyed");
-  for(;;) {
+  for (;;) {
     self waittill("damage");
     print3d(self.origin, self.health, (0, 1, 0), 1, 1, 1);
   }
@@ -171,9 +169,9 @@ explode_anim() {
 
 watch_for_players_in_fire() {
   level endon("game_ended");
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] istouching(self) && players[i].sessionstate == "playing") {
         x = 0;
       }

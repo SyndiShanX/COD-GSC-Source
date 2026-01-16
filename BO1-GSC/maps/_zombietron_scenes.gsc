@@ -76,7 +76,7 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
   subtitle.alpha = 1;
   subtitle.hidewheninmenu = true;
   level thread assassinateHudElem(subtitle, "exit_taken");
-  if(isDefined(instruction1)) {
+  if(isDefineD(instruction1)) {
     instruct1 = NewHudElem(level);
     instruct1.alignX = "center";
     instruct1.alignY = "middle";
@@ -87,11 +87,10 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct1.y -= 90;
     instruct1.color = (1.0, 0.84, 0.0);
     instruct1.alpha = 0;
-    if(isDefined(p1)) {
+    if(isDefined(p1))
       instruct1 SetText(instruction1, p1);
-    } else {
+    else
       instruct1 SetText(instruction1);
-    }
     instruct1 FadeOverTime(1);
     instruct1.alpha = 1;
     instruct1.hidewheninmenu = true;
@@ -108,11 +107,10 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct2.y -= 60;
     instruct2.color = (1.0, 0.84, 0.0);
     instruct2.alpha = 0;
-    if(isDefined(p2)) {
+    if(isDefined(p2))
       instruct2 SetText(instruction2, p2);
-    } else {
+    else
       instruct2 SetText(instruction2);
-    }
     instruct2 FadeOverTime(2);
     instruct2.alpha = 1;
     instruct2.hidewheninmenu = true;
@@ -129,11 +127,10 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct3.y -= 30;
     instruct3.color = (1.0, 0.84, 0.0);
     instruct3.alpha = 0;
-    if(isDefined(p3)) {
+    if(isDefined(p3))
       instruct3 SetText(instruction3, p3);
-    } else {
+    else
       instruct3 SetText(instruction3);
-    }
     instruct3 FadeOverTime(3);
     instruct3.alpha = 1;
     instruct3.hidewheninmenu = true;
@@ -205,16 +202,16 @@ loc_random_offset(loc) {
 game_tutorial_go() {
   level endon("exit_taken");
   level thread game_skipPage_watcher();
-  level game_tutorial_render_instructions(1, 8, &"ZOMBIETRON_INSTRUCTION1", &"ZOMBIETRON_INSTRUCTION2", &"ZOMBIETRON_INSTRUCTION3");
-  level game_tutorial_render_instructions(2, 8, &"ZOMBIETRON_INSTRUCTION4", &"ZOMBIETRON_INSTRUCTION5");
-  level game_tutorial_render_instructions(3, 8, &"ZOMBIETRON_INSTRUCTION6", &"ZOMBIETRON_INSTRUCTION7");
+  level game_tutorial_render_instructions(1, 8, & "ZOMBIETRON_INSTRUCTION1", & "ZOMBIETRON_INSTRUCTION2", & "ZOMBIETRON_INSTRUCTION3");
+  level game_tutorial_render_instructions(2, 8, & "ZOMBIETRON_INSTRUCTION4", & "ZOMBIETRON_INSTRUCTION5");
+  level game_tutorial_render_instructions(3, 8, & "ZOMBIETRON_INSTRUCTION6", & "ZOMBIETRON_INSTRUCTION7");
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
-  level game_tutorial_render_instructions(4, 8, &"ZOMBIETRON_INSTRUCTION8");
+  level game_tutorial_render_instructions(4, 8, & "ZOMBIETRON_INSTRUCTION8");
   maps\_zombietron_pickups::clear_all_pickups();
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
@@ -222,12 +219,12 @@ game_tutorial_go() {
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
-  level game_tutorial_render_instructions(5, 8, &"ZOMBIETRON_INSTRUCTION9");
+  level game_tutorial_render_instructions(5, 8, & "ZOMBIETRON_INSTRUCTION9");
   maps\_zombietron_pickups::clear_all_pickups();
   level thread maps\_zombietron_pickups::spawn_treasure(level.zombie_vars["zombie_treasure_boss"]);
-  level game_tutorial_render_instructions(6, 8, &"ZOMBIETRON_INSTRUCTION10", &"ZOMBIETRON_INSTRUCTION11", undefined, undefined, level.zombie_vars["extra_life_at_every"]);
-  level game_tutorial_render_instructions(7, 8, &"ZOMBIETRON_INSTRUCTION12");
-  level game_tutorial_render_instructions(8, 8, &"ZOMBIETRON_INSTRUCTION13");
+  level game_tutorial_render_instructions(6, 8, & "ZOMBIETRON_INSTRUCTION10", & "ZOMBIETRON_INSTRUCTION11", undefined, undefined, level.zombie_vars["extra_life_at_every"]);
+  level game_tutorial_render_instructions(7, 8, & "ZOMBIETRON_INSTRUCTION12");
+  level game_tutorial_render_instructions(8, 8, & "ZOMBIETRON_INSTRUCTION13");
 }
 
 begin_game_tutorial() {
@@ -262,15 +259,15 @@ begin_game_tutorial() {
   location = maps\_zombietron_pickups::get_random_pickup_location();
   above = location.origin + (0, 0, 100);
   below = location.origin + (0, 0, -500);
-  trace = bulletTrace(above, below, false, undefined);
+  trace = bullettrace(above, below, false, undefined);
   dest_point = (location.origin[0], location.origin[1], trace["position"][2]);
   teleporter = spawn("script_model", dest_point);
   teleporter setModel("zombie_teleporter_pad");
   playsoundatposition("zmb_teleporter_spawn", teleporter.origin);
   trigger = spawn("trigger_radius", location.origin, 0, 10, 50);
-  objective_add(2, "active", &"ZOMBIETRON_TUTORIAL3", trigger.origin);
-  Objective_String(2, &"ZOMBIETRON_TUTORIAL3");
-  objective_set3d(2, true, "default", &"ZOMBIETRON_TUTORIAL3");
+  objective_add(2, "active", & "ZOMBIETRON_TUTORIAL3", trigger.origin);
+  Objective_String(2, & "ZOMBIETRON_TUTORIAL3");
+  objective_set3d(2, true, "default", & "ZOMBIETRON_TUTORIAL3");
   objective_current(2);
   level thread tutorial_exit_watch(trigger);
   trigger waittill_any("trigger");
@@ -487,56 +484,56 @@ actor_end_bubbles(place) {
     case 0:
       if(GetPlayers().size > 1) {
         level thread bubble_message(&"ZOMBIETRON_BUBBLE_WINNER", originX, originY, 1.5);
-        self playSound("zmb_1st_vox_00");
+        self PlaySound("zmb_1st_vox_00");
         wait 2;
         level thread bubble_message(&"ZOMBIETRON_1ST", originX, originY, 6, self.score);
-        self playSound("zmb_1st_vox_01");
+        self PlaySound("zmb_1st_vox_01");
       } else {
         level thread bubble_message(&"ZOMBIETRON_BUBBLE_DEAD", originX, originY, 1.5);
-        self playSound("zmb_1st_vox_00");
+        self PlaySound("zmb_1st_vox_00");
         wait 2;
         level thread bubble_message(&"ZOMBIETRON_SCORE", originX, originY, 6, self.score);
-        self playSound("zmb_1st_vox_01");
+        self PlaySound("zmb_1st_vox_01");
       }
       wait 7;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_OHYEAH", originX, originY, 8);
-      self playSound("zmb_1st_vox_02");
+      self PlaySound("zmb_1st_vox_02");
       wait 13;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_WHAT", originX, originY, 2);
-      self playSound("zmb_1st_vox_03");
+      self PlaySound("zmb_1st_vox_03");
       wait 2;
       break;
     case 1:
       wait 1;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_NOTBAD", originX, originY, 1.5);
-      self playSound("zmb_2nd_vox_00");
+      self PlaySound("zmb_2nd_vox_00");
       wait 2;
       level thread bubble_message(&"ZOMBIETRON_2ND", originX, originY, 6, self.score);
-      self playSound("zmb_2nd_vox_01");
+      self PlaySound("zmb_2nd_vox_01");
       wait 7;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_BIGMONEY", originX, originY, 1.5);
-      self playSound("zmb_2nd_vox_02");
+      self PlaySound("zmb_2nd_vox_02");
       wait 2;
       break;
     case 2:
       wait 2;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_NEXTTIME", originX, originY, 1.5);
-      self playSound("zmb_3rd_vox_00");
+      self PlaySound("zmb_3rd_vox_00");
       wait 2;
       level thread bubble_message(&"ZOMBIETRON_3RD", originX, originY, 6, self.score);
-      self playSound("zmb_3rd_vox_01");
+      self PlaySound("zmb_3rd_vox_01");
       wait 9;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_BIGPRIZES", originX, originY, 1.5);
-      self playSound("zmb_3rd_vox_02");
+      self PlaySound("zmb_3rd_vox_02");
       wait 2;
       break;
     case 3:
       wait 3;
       level thread bubble_message(&"ZOMBIETRON_BUBBLE_FCUK", originX, originY, 1.5);
-      self playSound("zmb_4th_vox_00");
+      self PlaySound("zmb_4th_vox_00");
       wait 2;
       level thread bubble_message(&"ZOMBIETRON_4TH", originX, originY, 6, self.score);
-      self playSound("zmb_4th_vox_01");
+      self PlaySound("zmb_4th_vox_01");
       break;
   }
 }
@@ -585,7 +582,7 @@ end_of_game_summary_begin() {
   hide_temple_props("end");
   spotlight = getEnt("temple_light_spot", "targetname");
   spotlight setModel("tag_origin");
-  playFXOnTag(level._effect["spot_light"], spotlight, "tag_origin");
+  playfxontag(level._effect["spot_light"], spotlight, "tag_origin");
   if(isDefined(level.weatherFx)) {
     for(i = 0; i < level.weatherFx.size; i++) {
       level.weatherFx[i] Delete();
@@ -635,7 +632,7 @@ end_of_game_summary_begin() {
       dudes[i] UseAnimTree(#animtree);
       dudes[i] thread actor_end_idle(i);
       dudes[i] thread actor_end_bubbles(i);
-      playFXOnTag(level._effect[players[i].light_playFX], dudes[i], "tag_origin");
+      PlayFxOnTag(level._effect[players[i].light_playFX], dudes[i], "tag_origin");
     }
   }
   camPos = getEnt("temple_camera_spot", "targetname").origin;
@@ -661,13 +658,13 @@ end_of_game_summary_begin() {
   level thread maps\_zombietron_pickups::spawn_treasures(dudes[0].origin, 4, 24, true);
   wait 10;
   apeSpot = getEnt("temple_ape_spot", "targetname");
-  playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
+  Playfx(level._effect["ape_lightning_spawn"], apeSpot.origin);
   playsoundatposition("zmb_ape_prespawn", apeSpot.origin);
   wait(.5);
   playsoundatposition("zmb_ape_spawn", apeSpot.origin);
-  playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
+  Playfx(level._effect["ape_lightning_spawn"], apeSpot.origin);
   wait(.5);
-  playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
+  PlayFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
   ape = simple_spawn_single("ape_taunt", maps\_zombietron_ai_ape::ape_prespawn);
   wait(1.5);
   ape.script_noteworthy = "the_ape";
@@ -687,18 +684,18 @@ end_of_game_summary_begin() {
   wait 2.3;
   ape anim_stopanimscripted(0.15);
   Earthquake(0.5, 0.75, ape.origin, 1000);
-  playFXOnTag(level._effect["boss_takeoff"], ape, "tag_origin");
-  ape playSound("evt_turret_takeoff");
+  PlayFxOnTag(level._effect["boss_takeoff"], ape, "tag_origin");
+  ape PlaySound("evt_turret_takeoff");
   height = 800;
   timeMS = height / 1000 * 3000;
   target = dudes[0];
   ape maps\_zombietron_ai_ape::move_to_position_over_time(target.origin, timeMS, height);
-  target playSound("zmb_1st_vox_04");
-  ape playSound("evt_turret_land");
+  target PlaySound("zmb_1st_vox_04");
+  ape PlaySound("evt_turret_land");
   target startragdoll();
   target launchragdoll((0, 0, 200));
   PlayRumbleOnPosition("explosion_generic", ape.origin);
-  playFXOnTag(level._effect["boss_groundhit"], ape, "tag_origin");
+  PlayFxOnTag(level._effect["boss_groundhit"], ape, "tag_origin");
   level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
   ape thread maps\_anim::anim_single(ape, "chest_beat");
   wait 1;
@@ -711,8 +708,8 @@ end_of_game_summary_begin() {
   wait 2.9;
   level thread bubble_message(&"ZOMBIETRON_BUBBLE_HAHADOH", 350, 120, 1);
   wait 1.1;
-  playFXOnTag(level._effect["boss_takeoff"], ape, "tag_origin");
-  ape playSound("evt_turret_takeoff");
+  PlayFxOnTag(level._effect["boss_takeoff"], ape, "tag_origin");
+  ape PlaySound("evt_turret_takeoff");
   height = 800;
   timeMS = height / 1000 * 3000;
   ape thread maps\_zombietron_ai_ape::move_to_position_over_time(ape.origin, timeMS, height);

@@ -51,7 +51,8 @@ init_flags() {
   flag_init("pa_or_maybe_just_take_t_0 ");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_checkin() {
   arrival_anims();
@@ -291,7 +292,7 @@ civ_girl_goto_railing() {
   m_phone = spawn("script_model", ai_girl gettagorigin("tag_weapon_right"));
   m_phone.angles = ai_girl gettagangles("tag_weapon_right");
   m_phone.script_noteworthy = "cleanup_tower";
-  m_phone setModel("p6_anim_cell_phone");
+  m_phone setmodel("p6_anim_cell_phone");
   m_phone linkto(ai_girl, "tag_weapon_right");
   flag_wait("t_proceed_tower");
   wait 3;
@@ -363,9 +364,8 @@ scanner_prep() {
   assert(isDefined(self.script_animname), "Add an animname to the guy at " + self.origin);
   self add_cleanup_ent("checkin");
 
-  if(isDefined(self.script_string) && self.script_string == "scanner") {
+  if(isDefined(self.script_string) && self.script_string == "scanner")
     self thread scanner_model_swap();
-  }
 }
 
 scanner_model_swap() {
@@ -378,14 +378,13 @@ scanner_model_swap() {
   while(true) {
     flag_wait("scanner_on");
 
-    if(self.targetname == "checkin_security_ai") {
-      self setModel("c_mul_jinan_guard_bscatter_fb");
-    } else {
-      self setModel("c_mul_jinan_demoworker_bscatter_fb");
-    }
+    if(self.targetname == "checkin_security_ai")
+      self setmodel("c_mul_jinan_guard_bscatter_fb");
+    else
+      self setmodel("c_mul_jinan_demoworker_bscatter_fb");
 
     flag_wait("scanner_off");
-    self setModel(self.model_original);
+    self setmodel(self.model_original);
   }
 }
 
@@ -406,17 +405,15 @@ scanner_backdrop() {
     flag_clear("scanner_on");
     flag_set("scanner_off");
 
-    while(!level.player istouching(e_vol_backdrop)) {
+    while(!level.player istouching(e_vol_backdrop))
       wait 0.1;
-    }
 
     bm_backdrop trigger_on();
     flag_clear("scanner_off");
     flag_set("scanner_on");
 
-    while(level.player istouching(e_vol_backdrop)) {
+    while(level.player istouching(e_vol_backdrop))
       wait 0.1;
-    }
   }
 }
 
@@ -439,13 +436,11 @@ scanner_scenes(a_ai_explosives_workers, a_ai_security) {
     ai_worker thread scanner_ping_fx("J_Ankle_RI", (0, 0, 0));
   }
 
-  foreach(gun in getEntArray("scanner_gun", "targetname")) {
-    gun thread cleanup_red_guns();
-  }
+  foreach(gun in getentarray("scanner_gun", "targetname"))
+  gun thread cleanup_red_guns();
 
-  foreach(ping in getEntArray("scanner_gun_ping", "targetname")) {
-    ping thread cleanup_gun_pings();
-  }
+  foreach(ping in getentarray("scanner_gun_ping", "targetname"))
+  ping thread cleanup_gun_pings();
 
   trigger_wait("trig_enter_scanner");
   level thread lobby_naglines();
@@ -467,19 +462,19 @@ show_scanner_gun() {
   level endon("stop_scanner_gun_show");
   level notify("stop_scanner_gun_hide");
 
-  foreach(ai_security in getEntArray("checkin_security_ai", "targetname")) {
+  foreach(ai_security in getentarray("checkin_security_ai", "targetname")) {
     if(isDefined(ai_security.script_string) && ai_security.script_string == "scanner") {
       m_gun_tag_origin = spawn("script_model", ai_security.origin);
-      m_gun_tag_origin setModel("t6_wpn_pistol_fiveseven_world_detect");
+      m_gun_tag_origin setmodel("t6_wpn_pistol_fiveseven_world_detect");
       m_gun_tag_origin linkto(ai_security, "TAG_WEAPON_RIGHT", (0, 0, 0));
       m_gun_tag_origin.targetname = "scanner_gun";
       fxorg = spawn("script_model", (0, 0, 0));
-      fxorg setModel("tag_origin");
+      fxorg setmodel("tag_origin");
       fxorg.targetname = "scanner_gun_ping";
       fxorg.origin = ai_security gettagorigin("tag_weapon_right");
       fxorg.angles = ai_security gettagangles("tag_weapon_right");
       fxorg linkto(ai_security, "tag_weapon_right", vectorscale((-1, 0, 0), 10.0));
-      playFXOnTag(level._effect["scanner_ping"], fxorg, "tag_origin");
+      playfxontag(level._effect["scanner_ping"], fxorg, "tag_origin");
     }
   }
 }
@@ -490,14 +485,13 @@ hide_scanner_gun() {
   level notify("stop_scanner_gun_show");
 
   if(!flag("scanner_alert_start")) {
-    foreach(gun in getEntArray("scanner_gun", "targetname")) {
+    foreach(gun in getentarray("scanner_gun", "targetname")) {
       gun unlink();
       gun delete();
     }
 
-    foreach(ping in getEntArray("scanner_gun_ping", "targetname")) {
-      ping delete();
-    }
+    foreach(ping in getentarray("scanner_gun_ping", "targetname"))
+    ping delete();
 
     getent("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
   }
@@ -505,22 +499,22 @@ hide_scanner_gun() {
 
 scanner_ping_fx(e_tag, e_fx_offset) {
   fxorg = spawn("script_model", (0, 0, 0));
-  fxorg setModel("tag_origin");
+  fxorg setmodel("tag_origin");
   fxorg.origin = self gettagorigin(e_tag);
   fxorg.angles = self gettagangles(e_tag);
   fxorg linkto(self, e_tag, e_fx_offset);
   fxorg thread ping_fx_sounds();
-  playFXOnTag(level._effect["scanner_ping"], fxorg, "tag_origin");
+  playfxontag(level._effect["scanner_ping"], fxorg, "tag_origin");
   flag_wait("trig_player_blocker_2");
   fxorg delete();
 }
 
 ping_fx_sounds() {
   wait 4;
-  self playSound("evt_scanner_alarm");
+  self playsound("evt_scanner_alarm");
 
   while(isDefined(self)) {
-    self playSound("evt_scanner_ping");
+    self playsound("evt_scanner_ping");
     wait 2.3;
   }
 }
@@ -531,26 +525,26 @@ security_left_gate() {
   bm_clip_2 = getent("clip_scanner_blocker_2", "targetname");
   flag_wait("gate_alert");
   sec_gate_left_player rotateyaw(-90, 0.7, 0.5, 0.2);
-  sec_gate_left_player playSound("evt_scanner_gate_close");
+  sec_gate_left_player playsound("evt_scanner_gate_close");
   sec_gate_right_player rotateyaw(90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_on();
   flag_wait("gate_open");
   sec_gate_left_player rotateyaw(90, 0.7, 0.5, 0.2);
-  sec_gate_left_player playSound("evt_scanner_gate_open");
+  sec_gate_left_player playsound("evt_scanner_gate_open");
   sec_gate_right_player rotateyaw(-90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_off();
   flag_wait("trig_player_blocker_2");
   level notify("kill_scanner_gun_logic");
   level notify("kill_sliding_doors");
   sec_gate_left_player rotateyaw(-90, 0.7, 0.5, 0.2);
-  sec_gate_left_player playSound("evt_scanner_gate_close");
+  sec_gate_left_player playsound("evt_scanner_gate_close");
   sec_gate_right_player rotateyaw(90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_on();
 }
 
 security_gate() {
   sec_gate_left = getent("sec_gate_left", "targetname");
-  sec_gate_left playSound("evt_scanner_gate_close");
+  sec_gate_left playsound("evt_scanner_gate_close");
   sec_gate_left rotateyaw(-90, 0.7, 0.5, 0.2);
   sec_gate_right = getent("sec_gate_right", "targetname");
   sec_gate_right rotateyaw(90, 0.7, 0.5, 0.2);
@@ -600,9 +594,8 @@ securityr_and_workers_alert() {
 alert_trigger_check() {
   trig = getent("trig_workers_alert", "targetname");
 
-  while(!level.player istouching(trig)) {
+  while(!level.player istouching(trig))
     wait 0.05;
-  }
 
   flag_set("flag_left_alert_trigger");
 }
@@ -623,13 +616,11 @@ dynamic_ad_swap() {
   self ignorecheapentityflag(1);
   ai_check_other = undefined;
 
-  if(isDefined(self.script_string) && self.script_string == "harper") {
+  if(isDefined(self.script_string) && self.script_string == "harper")
     ai_check_other = level.ai_harper;
-  }
 
-  if(isDefined(self.script_string) && self.script_string == "salazar") {
+  if(isDefined(self.script_string) && self.script_string == "salazar")
     ai_check_other = level.ai_salazar;
-  }
 
   self setclientflag(8);
   b_other_in_range = 0;
@@ -698,7 +689,7 @@ player_group_think() {
   e_align = getent("align_player", "targetname");
   e_align linkto(bm_lift_left);
   m_tag_origin = spawn("script_model", e_align.origin);
-  m_tag_origin setModel("tag_origin");
+  m_tag_origin setmodel("tag_origin");
   m_tag_origin.angles = e_align.angles;
   m_tag_origin linkto(e_align);
   level.ai_harper set_blend_in_out_times(0);
@@ -740,13 +731,12 @@ player_group_think() {
   level thread checkin_cleanup();
   level notify("inside_tower_lift");
 
-  foreach(metalstorm in getEntArray("arrival_metalstorm", "targetname")) {
-    metalstorm delete();
-  }
+  foreach(metalstorm in getentarray("arrival_metalstorm", "targetname"))
+  metalstorm delete();
 
   clientnotify("sbpv");
-  level.player playSound("amb_elevator_start");
-  level.sound_elevator_ent_1 playLoopSound("amb_elevator_loop", 1);
+  level.player playsound("amb_elevator_start");
+  level.sound_elevator_ent_1 playloopsound("amb_elevator_loop", 1);
   level thread elevator_stop_delay_1();
   s_destination = getstruct("tower_lift_left_middle", "targetname");
   bm_lift_left setmovingplatformenabled(1);
@@ -769,8 +759,8 @@ player_group_think() {
   level clientnotify("edc");
   wait 1.0;
   level thread maps\_audio::switch_music_wait("KARMA_1_CONSTRUCTION", 9);
-  level.player playSound("amb_elevator_start_2");
-  level.sound_elevator_ent_1 playLoopSound("amb_elevator_loop", 1);
+  level.player playsound("amb_elevator_start_2");
+  level.sound_elevator_ent_1 playloopsound("amb_elevator_loop", 1);
   level thread elevator_stop_delay_2();
   wait 1.0;
   s_destination = getstruct("tower_lift_left_bottom", "targetname");
@@ -793,23 +783,21 @@ karma_remove_name(ent) {
 elevator_stop_delay_1() {
   wait 18;
   level.sound_elevator_ent_1 stoploopsound(1);
-  level.player playSound("amb_elevator_stop");
+  level.player playsound("amb_elevator_stop");
 }
 
 elevator_stop_delay_2() {
   wait 4.5;
   level.sound_elevator_ent_1 stoploopsound(1);
-  level.player playSound("amb_elevator_stop");
+  level.player playsound("amb_elevator_stop");
   wait 2.8;
   playsoundatposition("amb_elevator_open_final", (4480, -5945, -3508));
 
-  if(isDefined(level.sound_elevator_ent_1)) {
+  if(isDefined(level.sound_elevator_ent_1))
     level.sound_elevator_ent_1 delete();
-  }
 
-  if(isDefined(level.sound_elevator_ent_2)) {
+  if(isDefined(level.sound_elevator_ent_2))
     level.sound_elevator_ent_2 delete();
-  }
 }
 
 checkin_cleanup() {
@@ -859,7 +847,7 @@ pa_dialog() {
 }
 
 playpavox(alias) {
-  self playSound(alias, "sounddone");
+  self playsound(alias, "sounddone");
   self waittill("sounddone");
 }
 
@@ -967,11 +955,10 @@ tarmac_nag_lines() {
 
   while(!flag("scanner_alert_start") && n_current_line < 3) {
     if(distance2dsquared(level.ai_harper.origin, level.player.origin) > 262144) {
-      if(a_lines[n_current_line][1] == "harper") {
+      if(a_lines[n_current_line][1] == "harper")
         level.ai_harper say_dialog(a_lines[n_current_line][0]);
-      } else {
+      else
         level.ai_salazar say_dialog(a_lines[n_current_line][0]);
-      }
 
       n_current_line++;
       wait 10.0;

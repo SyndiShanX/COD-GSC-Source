@@ -21,21 +21,20 @@ main() {
   maps\mp\_utility::hardpointtriggerswap((2477, -937, 32), "patch_hp_zone_trigger_3");
   maps\mp\_utility::headquarterstriggerswap((2477, -937, 32), "patch_hq_zone_trigger_1");
 
-  if(level.gametype == "ctf") {
+  if(level.gametype == "ctf")
     maps\mp\gametypes\ctf::setflagbasefx("vfx\unique\vfx_marker_ctf", "vfx\unique\vfx_marker_ctf_red_mid");
-  }
 }
 
 misc_rotate_ceilingfans() {
-  common_scripts\utility::array_thread(getEntArray("me_fanceil_spin", "targetname"), ::ceilingfan_rotate_custom);
-  common_scripts\utility::array_thread(getEntArray("me_fanceil_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
+  common_scripts\utility::array_thread(getentarray("me_fanceil_spin", "targetname"), ::ceilingfan_rotate_custom);
+  common_scripts\utility::array_thread(getentarray("me_fanceil_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
 }
 
 ceilingfan_rotate_custom() {
   var_0 = 600;
   var_1 = 20000;
 
-  for(;;) {
+  for (;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }
@@ -45,7 +44,7 @@ ceilingfan_rotate_slow_custom() {
   var_0 = 50;
   var_1 = 20000;
 
-  for(;;) {
+  for (;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }

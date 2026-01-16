@@ -112,7 +112,8 @@ wind_init() {
   setsaveddvar("wind_global_low_strength_percent", 0.4);
 }
 
-precache_fxanim_props() {}
+precache_fxanim_props() {
+}
 
 footsteps() {
   loadfx("bio/player/fx_footstep_dust");

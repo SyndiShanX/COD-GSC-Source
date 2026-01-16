@@ -11,15 +11,15 @@
 #namespace arena;
 
 function autoexec __init__sytem__() {
-  system::register("arena", &__init__, undefined, undefined);
+  system::register("arena", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect(&on_connect);
+  callback::on_connect( & on_connect);
 }
 
 function on_connect() {
-  if(isDefined(self.pers["arenaInit"]) && self.pers["arenaInit"] == 1) {
+  if(isdefined(self.pers["arenaInit"]) && self.pers["arenaInit"] == 1) {
     return;
   }
   draftenabled = getgametypesetting("pregameDraftEnabled") == 1;
@@ -36,7 +36,7 @@ function update_arena_challenge_seasons() {
     arenaslot = arenagetslot();
     currentseason = self getdstat("arenaStats", arenaslot, "season");
     seasonvetchallengearraycount = self getdstatarraycount("arenaChallengeSeasons");
-    for(i = 0; i < seasonvetchallengearraycount; i++) {
+    for (i = 0; i < seasonvetchallengearraycount; i++) {
       challengeseason = self getdstat("arenaChallengeSeasons", i);
       if(challengeseason == currentseason) {
         return;
@@ -50,9 +50,9 @@ function update_arena_challenge_seasons() {
 }
 
 function match_end(winner) {
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(isDefined(player.pers["arenaInit"]) && player.pers["arenaInit"] == 1) {
+    if(isdefined(player.pers["arenaInit"]) && player.pers["arenaInit"] == 1) {
       if(winner == "tie") {
         player arenaendmatch(0);
         continue;

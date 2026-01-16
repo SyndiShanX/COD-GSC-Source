@@ -21,9 +21,8 @@ global_breakables_think() {
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_parameters)) {
-      if(issubstr(var_3.script_parameters, ".efx") || issubstr(var_3.script_parameters, ".EFX") || issubstr(var_3.script_parameters, "fx/")) {
+      if(issubstr(var_3.script_parameters, ".efx") || issubstr(var_3.script_parameters, ".EFX") || issubstr(var_3.script_parameters, "fx/"))
         var_1[var_1.size] = var_3;
-      }
     }
   }
 
@@ -32,9 +31,8 @@ global_breakables_think() {
       var_7 = strtok(var_6.groupname, "|");
 
       foreach(var_9 in var_7) {
-        if(var_9 != "NO_MODEL" && var_9 != "no_model") {
+        if(var_9 != "NO_MODEL" && var_9 != "no_model")
           precachemodel(var_9);
-        }
       }
 
       var_11 = strtok(var_6.script_parameters, "|");
@@ -62,9 +60,8 @@ global_breakable_target_damage_wait() {
     var_3 = getEntArray(var_1, "targetname");
 
     foreach(var_5 in var_3) {
-      if(isDefined(var_5)) {
+      if(isDefined(var_5))
         var_5 dodamage(var_2, var_0);
-      }
     }
   }
 }
@@ -72,9 +69,8 @@ global_breakable_target_damage_wait() {
 global_breakable_wait(var_0, var_1, var_2, var_3) {
   var_4 = self.origin;
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     thread global_breakable_target_damage_wait();
-  }
 
   self.health = var_3;
   self setCanDamage(1);
@@ -96,13 +92,11 @@ global_breakable_wait(var_0, var_1, var_2, var_3) {
   var_13 = "";
   var_14 = undefined;
 
-  if(isDefined(self.targetname) && self.targetname != "") {
+  if(isDefined(self.targetname) && self.targetname != "")
     var_13 = self.targetname;
-  }
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     var_14 = self.target;
-  }
 
   var_5 = -1;
 
@@ -121,31 +115,26 @@ global_breakable_wait(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(var_5 < 0) {
+  if(var_5 < 0)
     var_5 = 0;
-  }
 
-  if(var_5 > var_0.size - 1) {
+  if(var_5 > var_0.size - 1)
     var_5 = var_0.size - 1;
-  }
 
   var_17 = (0, 0, 0);
 
-  if(isDefined(self.origin)) {
+  if(isDefined(self.origin))
     var_17 = self.origin;
-  }
 
   var_18 = (0, 0, 0);
 
-  if(isDefined(self.angles)) {
+  if(isDefined(self.angles))
     var_18 = self.angles;
-  }
 
   var_19 = undefined;
 
-  if(isDefined(self.script_group) && self.script_group != 0) {
+  if(isDefined(self.script_group) && self.script_group != 0)
     var_19 = self.script_group;
-  }
 
   playFX(level._effect[var_1[var_5]], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   self delete();
@@ -168,9 +157,8 @@ global_breakable_wait(var_0, var_1, var_2, var_3) {
 
       var_22 = var_6;
 
-      if(var_22 <= 0) {
+      if(var_22 <= 0)
         var_22 = 1;
-      }
 
       var_20.health = var_22;
       var_20 thread global_breakable_wait(var_0, var_1, var_2, var_20.health);
@@ -192,9 +180,8 @@ global_fx_array_to_string(var_0) {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = var_1 + var_0[var_2];
 
-    if(var_2 != var_0.size - 1) {
+    if(var_2 != var_0.size - 1)
       var_1 = var_1 + "|";
-    }
   }
 
   return var_1;
@@ -206,9 +193,8 @@ init_fx_triggers() {
 }
 
 handle_exploder_trigger() {
-  if(!common_scripts\utility::flag_exist(self.script_flag)) {
+  if(!common_scripts\utility::flag_exist(self.script_flag))
     common_scripts\utility::flag_init(self.script_flag);
-  }
 
   var_0 = strtok(self.script_flag, "_");
   var_1 = var_0[1];
@@ -247,13 +233,11 @@ func_glass_handler() {
   while(var_7 != 0) {
     var_11 = var_10 + var_9 - 1;
 
-    if(var_11 > var_8) {
+    if(var_11 > var_8)
       var_11 = var_8;
-    }
 
-    if(var_10 == var_8) {
+    if(var_10 == var_8)
       var_10 = 0;
-    }
 
     while(var_10 < var_11) {
       var_12 = var_0[var_10];

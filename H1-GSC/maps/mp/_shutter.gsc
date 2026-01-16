@@ -6,52 +6,46 @@
 
 main() {
   level.inc = 0;
-  common_scripts\utility::array_levelthread(getEntArray("wire", "targetname"), ::wirewander);
-  var_0 = getEntArray("shutter_left", "targetname");
-  var_1 = getEntArray("shutter_right_open", "targetname");
+  common_scripts\utility::array_levelthread(getentarray("wire", "targetname"), ::wirewander);
+  var_0 = getentarray("shutter_left", "targetname");
+  var_1 = getentarray("shutter_right_open", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     var_0[var_0.size] = var_1[var_2];
-  }
 
-  var_1 = getEntArray("shutter_left_closed", "targetname");
+  var_1 = getentarray("shutter_left_closed", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     var_0[var_0.size] = var_1[var_2];
-  }
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
     var_3 rotateto((var_3.angles[0], var_3.angles[1] + 180, var_3.angles[2]), 0.1);
   }
 
   wait 0.2;
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++)
     var_0[var_2].startyaw = var_0[var_2].angles[1];
-  }
 
-  var_4 = getEntArray("shutter_right", "targetname");
-  var_1 = getEntArray("shutter_left_open", "targetname");
+  var_4 = getentarray("shutter_right", "targetname");
+  var_1 = getentarray("shutter_left_open", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     var_4[var_4.size] = var_1[var_2];
-  }
 
-  var_1 = getEntArray("shutter_right_closed", "targetname");
+  var_1 = getentarray("shutter_right_closed", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     var_4[var_4.size] = var_1[var_2];
-  }
 
-  for(var_2 = 0; var_2 < var_4.size; var_2++) {
+  for (var_2 = 0; var_2 < var_4.size; var_2++)
     var_4[var_2].startyaw = var_4[var_2].angles[1];
-  }
 
   var_1 = undefined;
   var_5 = "left";
 
-  for(;;) {
+  for (;;) {
     common_scripts\utility::array_levelthread(var_0, ::shutterwanderleft, var_5);
     common_scripts\utility::array_levelthread(var_4, ::shutterwanderright, var_5);
     level waittill("wind blows", var_5);
@@ -59,12 +53,11 @@ main() {
 }
 
 windcontroller() {
-  for(;;) {
+  for (;;) {
     var_0 = "left";
 
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       var_0 = "right";
-    }
 
     level notify("wind blows", var_0);
     wait(2 + randomfloat(10));
@@ -76,34 +69,30 @@ shutterwanderleft(var_0, var_1) {
   level endon("wind blows");
   var_2 = var_0.startyaw;
 
-  if(var_1 == "left") {
+  if(var_1 == "left")
     var_2 = var_2 + 179.9;
-  }
 
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
 
-  for(;;) {
+  for (;;) {
     var_4 = randomint(80);
 
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       var_4 = var_4 * -1;
-    }
 
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179)
       var_2 = var_5;
-    }
 
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
-    if(var_3 < 0.3) {
+    if(var_3 < 0.3)
       var_3 = 0.3;
-    }
 
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
@@ -115,34 +104,30 @@ shutterwanderright(var_0, var_1) {
   level endon("wind blows");
   var_2 = var_0.startyaw;
 
-  if(var_1 == "left") {
+  if(var_1 == "left")
     var_2 = var_2 + 179.9;
-  }
 
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
 
-  for(;;) {
+  for (;;) {
     var_4 = randomint(80);
 
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       var_4 = var_4 * -1;
-    }
 
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179)
       var_2 = var_5;
-    }
 
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
-    if(var_3 < 0.3) {
+    if(var_3 < 0.3)
       var_3 = 0.3;
-    }
 
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
@@ -150,7 +135,7 @@ shutterwanderright(var_0, var_1) {
 }
 
 wirewander(var_0) {
-  var_1 = getEntArray(var_0.target, "targetname");
+  var_1 = getentarray(var_0.target, "targetname");
   var_2 = var_1[0].origin;
   var_3 = var_1[1].origin;
   var_4 = vectortoangles(var_2 - var_3);
@@ -164,7 +149,7 @@ wirewander(var_0) {
   var_5 rotateroll(var_8 * 0.5, 0.2);
   wait 0.2;
 
-  for(;;) {
+  for (;;) {
     var_9 = var_6 + randomfloat(var_7) - var_7 * 0.5;
     var_5 rotateroll(var_8, var_9, var_9 * 0.5, var_9 * 0.5);
     wait(var_9);

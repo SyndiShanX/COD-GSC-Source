@@ -62,8 +62,8 @@ function init() {
 }
 
 function main() {
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   cybercom_gadget_system_overload::main();
   cybercom_gadget_exosuitbreakdown::main();
   cybercom_gadget_surge::main();
@@ -99,33 +99,33 @@ function function_12bffd86() {
   self notify("hash_12bffd86");
   self endon("hash_12bffd86");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     ret = self util::waittill_any_return("cybercom_activation_failed", "cybercom_activation_succeeded");
-    if(!isDefined(ret)) {
+    if(!isdefined(ret)) {
       continue;
     }
-    if(!isDefined(self.cybercom.activecybercomweapon)) {
+    if(!isdefined(self.cybercom.activecybercomweapon)) {
       continue;
     }
     ability = function_1a6a2760(self.cybercom.activecybercomweapon);
     upgraded = self hascybercomability(ability.name) == 2;
     if(ret == "cybercom_activation_succeeded") {
-      alias = "gdt_cybercore_activate" + (isDefined(upgraded) && (upgraded ? "_upgraded" : ""));
+      alias = "gdt_cybercore_activate" + (isdefined(upgraded) && (upgraded ? "_upgraded" : ""));
     } else {
       alias = "gdt_cybercore_activate_fail";
     }
-    if(!(isDefined(ability.passive) && ability.passive)) {
-      self playSound(alias);
+    if(!(isdefined(ability.passive) && ability.passive)) {
+      self playsound(alias);
     }
   }
 }
 
 function registerability(type, flag, passive = 0) {
-  if(!isDefined(level.cybercom)) {
+  if(!isdefined(level.cybercom)) {
     cybercom::initialize();
   }
   if(getabilitybyflag(type, flag) == undefined) {
-    ability = spawnStruct();
+    ability = spawnstruct();
     ability.type = type;
     ability.flag = flag;
     ability.passive = passive;
@@ -137,7 +137,7 @@ function registerability(type, flag, passive = 0) {
 }
 
 function ismeleeability(ability) {
-  if(isDefined(ability)) {
+  if(isdefined(ability)) {
     if(ability.type == 1 && ability.flag == 64) {
       return true;
     }
@@ -152,13 +152,13 @@ function ismeleeability(ability) {
 }
 
 function meleeabilitygiven(ability, upgrade) {
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return;
   }
   if(!ismeleeability(ability)) {
     return;
   }
-  if(!isDefined(upgrade)) {
+  if(!isdefined(upgrade)) {
     status = self hascybercomability(ability.name);
     if(status == 0) {
       return;
@@ -170,7 +170,7 @@ function meleeabilitygiven(ability, upgrade) {
   } else {
     weapon = ability.weapon;
   }
-  if(isDefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon != weapon) {
+  if(isdefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon != weapon) {
     self takeweapon(self.cybercom.activecybercommeleeweapon);
     self notify("weapon_taken", self.cybercom.activecybercommeleeweapon);
     level notify("weapon_taken", self.cybercom.activecybercommeleeweapon, self);
@@ -185,7 +185,7 @@ function meleeabilitygiven(ability, upgrade) {
 }
 
 function abilitytaken(ability) {
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return;
   }
   if(self hasweapon(ability.weapon)) {
@@ -193,10 +193,10 @@ function abilitytaken(ability) {
     self notify("weapon_taken", ability.weapon);
     level notify("weapon_taken", ability.weapon, self);
   }
-  if(isDefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon == ability.weapon) {
+  if(isdefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon == ability.weapon) {
     self.cybercom.activecybercommeleeweapon = undefined;
   }
-  if(isDefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == ability.weapon) {
+  if(isdefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == ability.weapon) {
     self.cybercom.activecybercomweapon = undefined;
   }
   if(self hasweapon(ability.weaponupgraded)) {
@@ -204,10 +204,10 @@ function abilitytaken(ability) {
     self notify("weapon_taken", ability.weaponupgraded);
     level notify("weapon_taken", ability.weaponupgraded, self);
   }
-  if(isDefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon == ability.weaponupgraded) {
+  if(isdefined(self.cybercom.activecybercommeleeweapon) && self.cybercom.activecybercommeleeweapon == ability.weaponupgraded) {
     self.cybercom.activecybercommeleeweapon = undefined;
   }
-  if(isDefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == ability.weaponupgraded) {
+  if(isdefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == ability.weaponupgraded) {
     self.cybercom.activecybercomweapon = undefined;
   }
 }
@@ -215,7 +215,7 @@ function abilitytaken(ability) {
 function giveability(name, upgrade) {
   assert(getdvarint(""), "");
   ability = getabilitybyname(name);
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return;
   }
   self setcybercomability(name, upgrade);
@@ -236,7 +236,7 @@ function equipability(name, var_a67a6c08 = 0) {
     return;
   }
   ability = getabilitybyname(name);
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return;
   }
   self.cybercom.flags.type = ability.type;
@@ -248,12 +248,12 @@ function equipability(name, var_a67a6c08 = 0) {
     weapon = ability.weapon;
   }
   if(!ismeleeability(ability)) {
-    if(isDefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
+    if(isdefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
       var_7116dac7 = self.cybercom.activecybercommeleeweapon;
       self takeweapon(self.cybercom.activecybercommeleeweapon);
       self.cybercom.activecybercommeleeweapon = undefined;
     }
-    if(isDefined(self.cybercom.activecybercomweapon) && weapon != self.cybercom.activecybercomweapon) {
+    if(isdefined(self.cybercom.activecybercomweapon) && weapon != self.cybercom.activecybercomweapon) {
       self takeweapon(self.cybercom.activecybercomweapon);
       self notify("weapon_taken", self.cybercom.activecybercomweapon);
       level notify("weapon_taken", self.cybercom.activecybercomweapon, self);
@@ -264,11 +264,11 @@ function equipability(name, var_a67a6c08 = 0) {
       level notify("weapon_given", weapon, self);
     }
     self.cybercom.activecybercomweapon = weapon;
-    if(!(isDefined(self.cybercom.given_first_ability) && self.cybercom.given_first_ability)) {
+    if(!(isdefined(self.cybercom.given_first_ability) && self.cybercom.given_first_ability)) {
       var_a67a6c08 = 1;
       self.cybercom.given_first_ability = 1;
     }
-    if(isDefined(var_7116dac7)) {
+    if(isdefined(var_7116dac7)) {
       self giveweapon(var_7116dac7);
       self.cybercom.activecybercommeleeweapon = var_7116dac7;
       var_7116dac7 = undefined;
@@ -289,7 +289,7 @@ function equipability(name, var_a67a6c08 = 0) {
   }
   bb::logcybercomevent(self, "equipped", name);
   var_6f5af609 = int(tablelookup("gamedata/stats/cp/cp_statstable.csv", 4, ability.name, 0));
-  if(isDefined(self.var_768ee804)) {
+  if(isdefined(self.var_768ee804)) {
     var_6f5af609 = var_6f5af609 | (self.var_768ee804 << 10);
   }
   self setdstat("PlayerStatsList", "LAST_CYBERCOM_EQUIPPED", "statValue", var_6f5af609);
@@ -309,11 +309,11 @@ function takeallabilities() {
     self abilitytaken(ability);
   }
   self clearcybercomability();
-  if(isDefined(self.cybercom.activecybercomweapon) && self hasweapon(self.cybercom.activecybercomweapon)) {
+  if(isdefined(self.cybercom.activecybercomweapon) && self hasweapon(self.cybercom.activecybercomweapon)) {
     self takeweapon(self.cybercom.activecybercomweapon);
   }
   self.cybercom.activecybercomweapon = undefined;
-  if(isDefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
+  if(isdefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
     self takeweapon(self.cybercom.activecybercommeleeweapon);
   }
   self.cybercom.activecybercommeleeweapon = undefined;
@@ -322,7 +322,7 @@ function takeallabilities() {
 
 function getabilitybyname(name) {
   foreach(ability in level.cybercom.abilities) {
-    if(!isDefined(ability)) {
+    if(!isdefined(ability)) {
       continue;
     }
     if(ability.name == name) {
@@ -334,21 +334,21 @@ function getabilitybyname(name) {
 function getabilitybyweaponname(name) {
   weapon = getweapon(name);
   foreach(ability in level.cybercom.abilities) {
-    if(isDefined(ability.weapon) && weapon.name == ability.weapon.name) {
+    if(isdefined(ability.weapon) && weapon.name == ability.weapon.name) {
       return ability;
     }
   }
 }
 
 function function_1a6a2760(weapon) {
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     return;
   }
   foreach(ability in level.cybercom.abilities) {
-    if(isDefined(ability.weapon) && weapon == ability.weapon) {
+    if(isdefined(ability.weapon) && weapon == ability.weapon) {
       return ability;
     }
-    if(isDefined(ability.weaponupgraded) && weapon == ability.weaponupgraded) {
+    if(isdefined(ability.weaponupgraded) && weapon == ability.weaponupgraded) {
       return ability;
     }
   }
@@ -365,7 +365,7 @@ function getabilitybyflag(type, flag) {
 
 function getavailableabilities() {
   abilities = [];
-  if(!isDefined(self.cybercom) || !isDefined(self.cybercom.flags) || !isDefined(self.cybercom.flags.type)) {
+  if(!isdefined(self.cybercom) || !isdefined(self.cybercom.flags) || !isdefined(self.cybercom.flags.type)) {
     return abilities;
   }
   foreach(ability in level.cybercom.abilities) {
@@ -389,7 +389,7 @@ function getabilitiesfortype(type) {
 
 function function_48868896() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("setcybercomability", var_4ccb808f);
     self equipability(var_4ccb808f);
   }

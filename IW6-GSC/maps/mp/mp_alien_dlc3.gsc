@@ -10,10 +10,10 @@ main() {
   level.skip_radius_damage_on_puddles = 1;
   level.generic_electric_trap_check = ::is_generic_electric_trap_func;
   level.initial_spawn_loc_override_func = ::descent_player_initial_spawn_loc_override;
-  level.introscreen_line_1 = &"MP_ALIEN_DESCENT_INTRO_LINE_1";
-  level.introscreen_line_2 = &"MP_ALIEN_DESCENT_INTRO_LINE_2";
-  level.introscreen_line_3 = &"MP_ALIEN_DESCENT_INTRO_LINE_3";
-  level.introscreen_line_4 = &"MP_ALIEN_DESCENT_INTRO_LINE_4";
+  level.introscreen_line_1 = & "MP_ALIEN_DESCENT_INTRO_LINE_1";
+  level.introscreen_line_2 = & "MP_ALIEN_DESCENT_INTRO_LINE_2";
+  level.introscreen_line_3 = & "MP_ALIEN_DESCENT_INTRO_LINE_3";
+  level.introscreen_line_4 = & "MP_ALIEN_DESCENT_INTRO_LINE_4";
   maps\mp\alien\_utility::alien_mode_enable("kill_resource", "wave", "airdrop", "lurker", "collectible", "loot", "pillage", "challenge", "outline", "scenes");
   level thread maps\mp\alien\_crafting::crafting_onplayerconnect();
   var_0 = ["caverns_01", "caverns_02", "caverns_03", "caverns_04"];
@@ -60,9 +60,8 @@ main() {
   level.alien_character_cac_table = "mp/alien/alien_cac_presets.csv";
   level.randombox_table = "mp/alien/beacon_deployable_randombox.csv";
 
-  if(!maps\mp\alien\_utility::is_chaos_mode()) {
+  if(!maps\mp\alien\_utility::is_chaos_mode())
     maps\mp\alien\_container_spawn::init_container_spawn();
-  }
 
   level.enter_area_func = ::descent_enter_area_func;
   level.leave_area_func = ::descent_leave_area_func;
@@ -82,11 +81,10 @@ main() {
   register_encounter();
   thread maps\mp\alien\_alien_class_skills_main::main();
 
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.base_player_count_multiplier = 1;
-  } else {
+  else
     level.base_player_count_multiplier = 0.49;
-  }
 
   level.additional_player_count_multiplier = 0.17;
   level.waypoint_dist_override = 2500;
@@ -141,9 +139,8 @@ main() {
 adjust_endgame_camera() {
   var_0 = getEntArray("mp_global_intermission", "classname");
 
-  foreach(var_2 in var_0) {
-    var_2.angles = (0, 91, 0);
-  }
+  foreach(var_2 in var_0)
+  var_2.angles = (0, 91, 0);
 }
 
 disable_broken_nodes() {
@@ -182,9 +179,8 @@ obelisk_emp_equipment(var_0) {
     var_6 = getEntArray(var_4.target, "targetname");
 
     foreach(var_8 in var_6) {
-      if(var_8.classname == "script_brushmodel") {
+      if(var_8.classname == "script_brushmodel")
         var_5 = var_8;
-      }
     }
 
     if(!isDefined(var_5)) {
@@ -215,9 +211,8 @@ play_ambient_fx() {
 }
 
 setup_dlc3_offhands() {
-  while(!isDefined(level.offhand_explosives)) {
+  while(!isDefined(level.offhand_explosives))
     wait 1;
-  }
 
   level.offhand_explosives = common_scripts\utility::array_add(level.offhand_explosives, "iw6_aliendlc22_mp");
   level.offhand_explosives = common_scripts\utility::array_add(level.offhand_explosives, "iw6_aliendlc31_mp");
@@ -269,9 +264,8 @@ player_on_obelisk_monitor() {
       var_5 = getEntArray(var_3.target, "targetname");
 
       foreach(var_7 in var_5) {
-        if(var_7.classname == "script_brushmodel") {
+        if(var_7.classname == "script_brushmodel")
           var_4 = var_7;
-        }
       }
 
       if(!isDefined(var_4)) {
@@ -313,9 +307,8 @@ chaos_player_on_obelisk_monitor() {
       foreach(var_7 in var_3) {
         var_8 = undefined;
 
-        if(var_7.classname == "script_brushmodel") {
+        if(var_7.classname == "script_brushmodel")
           var_8 = var_7;
-        }
 
         if(!isDefined(var_8)) {
           continue;
@@ -350,9 +343,8 @@ shroom_bounce_monitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isplayer(var_0))
       var_0 thread shroom_bounce();
-    }
   }
 }
 
@@ -369,9 +361,9 @@ shroom_bounce() {
   self.isbouncing = 1;
   var_0 = self getvelocity();
 
-  if(maps\mp\alien\_utility::is_true(maps\mp\alien\_utility::is_in_laststand())) {
+  if(maps\mp\alien\_utility::is_true(maps\mp\alien\_utility::is_in_laststand()))
     self setvelocity((var_0[0] + randomintrange(120, 150), var_0[1] + randomintrange(120, 150), randomintrange(200, 400)));
-  } else {
+  else {
     self setvelocity((var_0[0] + randomintrange(-160, 160), var_0[1] + randomintrange(-160, 160), randomintrange(700, 900)));
     self playlocalsound("plr_bounce");
   }
@@ -430,18 +422,16 @@ mp_alien_descent_onspawnplayer_func() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
-  if(common_scripts\utility::flag("everyone_in_ark") && !common_scripts\utility::flag("ark_console_cycle_over") && !isDefined(self.reviveent)) {
+  if(common_scripts\utility::flag("everyone_in_ark") && !common_scripts\utility::flag("ark_console_cycle_over") && !isDefined(self.reviveent))
     level thread maps\mp\alien\mp_alien_dlc3_ark::teleport_players_not_in_ark();
-  }
 }
 
 descent_get_non_agent_enemies() {
   var_0 = [];
 
   if(isDefined(level.alive_plants)) {
-    foreach(var_2 in level.alive_plants) {
-      var_0 = common_scripts\utility::array_add(var_0, var_2.coll_model);
-    }
+    foreach(var_2 in level.alive_plants)
+    var_0 = common_scripts\utility::array_add(var_0, var_2.coll_model);
 
     return var_0;
   }
@@ -467,9 +457,8 @@ monitorsprintslide() {
       continue;
     }
 
-    if(var_0 == "sprint_slide_begin") {
+    if(var_0 == "sprint_slide_begin")
       self.issliding = 1;
-    }
   }
 }
 
@@ -492,29 +481,29 @@ descent_locker_weapon_pickup_string_func(var_0) {
 
   switch (var_0) {
     case "weapon_vks":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_VKS";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_VKS";
     case "weapon_usr":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_USR";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_USR";
     case "weapon_remington_r5rgp":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_R5RGP";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_R5RGP";
     case "weapon_rm_22":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MAVERICK";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MAVERICK";
     case "weapon_evopro":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_RIPPER";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_RIPPER";
     case "weapon_k7":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_K7";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_K7";
     case "weapon_uts_15":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_UTS";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_UTS";
     case "weapon_maul":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MAUL";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MAUL";
     case "weapon_mk14_ebr_iw6":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MK14";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MK14";
     case "weapon_imbel_ia2":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_IMBEL";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_IMBEL";
     case "weapon_kac_chainsaw":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_KAC";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_KAC";
     case "weapon_ameli":
-      return &"ALIEN_PICKUPS_DESCENT_LOCKER_AMELI";
+      return & "ALIEN_PICKUPS_DESCENT_LOCKER_AMELI";
   }
 }
 
@@ -593,9 +582,8 @@ relocate_bad_pillage_spots() {
 
     var_0++;
 
-    if(var_0 % 10 == 0) {
+    if(var_0 % 10 == 0)
       wait 0.1;
-    }
   }
 }
 
@@ -615,9 +603,8 @@ adjust_weapon_position() {
 
     var_0++;
 
-    if(var_0 % 10 == 0) {
+    if(var_0 % 10 == 0)
       wait 0.1;
-    }
   }
 }
 
@@ -626,11 +613,11 @@ dlc3_get_hintstring_for_pillaged_item_func(var_0) {
 
   switch (var_0) {
     case "crafting":
-      return &"ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
+      return & "ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
     case "locker_key":
-      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
+      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
     case "locker_weapon":
-      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
+      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
   }
 }
 
@@ -639,65 +626,66 @@ dlc3_get_hintstring_for_item_pickup_func(var_0) {
 
   switch (var_0) {
     case "wire":
-      return &"ALIEN_CRAFTING_PICKUP_WIRE";
+      return & "ALIEN_CRAFTING_PICKUP_WIRE";
     case "amolecular":
-      return &"ALIEN_CRAFTING_PICKUP_AMOLECULAR";
+      return & "ALIEN_CRAFTING_PICKUP_AMOLECULAR";
     case "fuse":
-      return &"ALIEN_CRAFTING_PICKUP_FUSE";
+      return & "ALIEN_CRAFTING_PICKUP_FUSE";
     case "pipe":
-      return &"ALIEN_CRAFTING_PICKUP_PIPE";
+      return & "ALIEN_CRAFTING_PICKUP_PIPE";
     case "pressureplate":
-      return &"ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
+      return & "ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
     case "nucleicbattery":
-      return &"ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
+      return & "ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
     case "cellbattery":
-      return &"ALIEN_CRAFTING_PICKUP_CELLBATTERY";
+      return & "ALIEN_CRAFTING_PICKUP_CELLBATTERY";
     case "liquidbattery":
-      return &"ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
+      return & "ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
     case "tnt":
-      return &"ALIEN_CRAFTING_PICKUP_TNT";
+      return & "ALIEN_CRAFTING_PICKUP_TNT";
     case "resin":
-      return &"ALIEN_CRAFTING_PICKUP_RESIN";
+      return & "ALIEN_CRAFTING_PICKUP_RESIN";
     case "bbiolum":
-      return &"ALIEN_CRAFTING_PICKUP_BIOLUM";
+      return & "ALIEN_CRAFTING_PICKUP_BIOLUM";
     case "biolum":
-      return &"ALIEN_CRAFTING_PICKUP_BIOLUM";
+      return & "ALIEN_CRAFTING_PICKUP_BIOLUM";
     case "locker_key":
-      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
+      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
     case "locker_weapon":
-      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
+      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
     case "venomx":
-      return &"ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
+      return & "ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
     case "bbluebiolum":
     case "bluebiolum":
-      return &"ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
+      return & "ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
     case "oorangebiolum":
     case "orangebiolum":
-      return &"ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
+      return & "ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
     case "amethystbiolum":
-      return &"ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
+      return & "ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
     case "iw6_aliendlc22_mp":
-      return &"ALIEN_CRAFTING_PICKUP_PIPEBOMB";
+      return & "ALIEN_CRAFTING_PICKUP_PIPEBOMB";
     case "stickyflare":
     case "viewmodel_flare":
     case "iw6_aliendlc21_mp":
     case "flare":
-      return &"ALIEN_CRAFTING_PICKUP_STICKYFLARE";
+      return & "ALIEN_CRAFTING_PICKUP_STICKYFLARE";
     case "detonator":
-      return &"ALIEN_CRAFTING_PICKUP_DETONATOR";
+      return & "ALIEN_CRAFTING_PICKUP_DETONATOR";
     case "casing":
-      return &"ALIEN_CRAFTING_PICKUP_CASING";
+      return & "ALIEN_CRAFTING_PICKUP_CASING";
     case "iw6_aliendlc31_mp":
-      return &"ALIEN_CRAFTING_PICKUP_VENOMXGRENADE";
+      return & "ALIEN_CRAFTING_PICKUP_VENOMXGRENADE";
     case "iw6_aliendlc32_mp":
-      return &"ALIEN_CRAFTING_PICKUP_VENOMLXGRENADE";
+      return & "ALIEN_CRAFTING_PICKUP_VENOMLXGRENADE";
     case "iw6_aliendlc33_mp":
-      return &"ALIEN_CRAFTING_PICKUP_VENOMFXGRENADE";
+      return & "ALIEN_CRAFTING_PICKUP_VENOMFXGRENADE";
   }
 
-  if(isDefined(level.level_locker_weapon_pickup_string_func)) {
-    return [[level.level_locker_weapon_pickup_string_func]](var_0);
-  }
+  if(isDefined(level.level_locker_weapon_pickup_string_func))
+    return [
+      [level.level_locker_weapon_pickup_string_func]
+    ](var_0);
 }
 
 dlc3_build_pillageitem_array_func(var_0) {
@@ -745,24 +733,21 @@ init_attachment_and_crafting_locations() {
   common_scripts\utility::waitframe();
   setup_attachment_crafting_area(var_5, var_6, 3);
 
-  if(!isDefined(level.placeableconfigs)) {
+  if(!isDefined(level.placeableconfigs))
     level.placeableconfigs = [];
-  }
 
   level.trophy_use_pickupfunc = maps\mp\alien\_crafting::trophy_use_pickupfunc;
   level.custom_pet_bomb_check = maps\mp\alien\_crafting::crafting_pet_trap_check;
   level.resetplayercraftingitemsonrespawn = maps\mp\alien\_crafting::resetplayercraftingitemsonrespawn;
 
-  if(!maps\mp\alien\_utility::is_chaos_mode()) {
+  if(!maps\mp\alien\_utility::is_chaos_mode())
     maps\mp\alien\_crafting::setup_recipes();
-  }
 }
 
 setup_attachment_crafting_area(var_0, var_1, var_2) {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
-    for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    for(var_3 = 0; var_3 < var_0.size; var_3++)
       var_0[var_3] delete();
-    }
 
     return;
   }
@@ -772,9 +757,8 @@ setup_attachment_crafting_area(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(isarray(var_1)) {
       foreach(var_6 in var_1) {
-        if(var_0[var_3] == var_6) {
+        if(var_0[var_3] == var_6)
           var_4 = var_6;
-        }
       }
     } else
       var_4 = var_1;
@@ -807,13 +791,12 @@ setup_attachment_pickup_spot() {
   var_0.pillageinfo = spawnStruct();
   var_0.pillage_trigger = self;
   var_0.pillage_trigger.angles = self.angles;
-  var_1 = &"MP_ALIEN_DESCENT_ATTACHMENT_PICKUP";
+  var_1 = & "MP_ALIEN_DESCENT_ATTACHMENT_PICKUP";
   var_0.pillage_trigger sethintstring(var_1);
   var_0.pillage_trigger makeusable();
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
+  if(maps\mp\alien\_utility::alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_pillage_watch_list(var_0.pillage_trigger, 0);
-  }
 
   var_0.enabled = 1;
   var_0.searched = 1;
@@ -824,9 +807,8 @@ setup_attachment_pickup_spot() {
 }
 
 remove_alienmuzzlebrake(var_0) {
-  if(var_0 != "alienmuzzlebrake") {
+  if(var_0 != "alienmuzzlebrake")
     return var_0;
-  }
 
   var_1 = self getcurrentweapon();
   var_2 = getweaponbasename(var_1);
@@ -837,9 +819,8 @@ remove_alienmuzzlebrake(var_0) {
     case "weapon_shotgun":
       return "reflex";
     case "weapon_assault":
-      if(issubstr(var_2, "sc2010")) {
+      if(issubstr(var_2, "sc2010"))
         return "reflex";
-      }
 
       break;
   }
@@ -849,19 +830,19 @@ remove_alienmuzzlebrake(var_0) {
 
 descent_hint_precache() {
   var_0 = [];
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_AMELI"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_AMELI";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_K7"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_K7";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KAC"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_KAC";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KASTET"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_KASTET";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAUL"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MAUL";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MK14"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MK14";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_USR"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_USR";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_UTS"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_UTS";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_VKS"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_VKS";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_AMELI"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_AMELI";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_K7"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_K7";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KAC"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_KAC";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KASTET"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_KASTET";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAUL"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MAUL";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MK14"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MK14";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_USR"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_USR";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_UTS"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_UTS";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_VKS"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_VKS";
   return var_0;
 }
 
@@ -890,9 +871,8 @@ wait_spawn_intro_drill() {
 }
 
 descent_enter_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode()) {
+  if(!maps\mp\alien\_utility::is_chaos_mode())
     maps\mp\alien\_container_spawn::activate_container_spawners_in_area(var_0);
-  }
 }
 
 descent_leave_area_func(var_0) {}
@@ -945,9 +925,8 @@ descent_melee_override_func(var_0) {
 }
 
 descent_alien_idle_anim_state_override_func(var_0) {
-  if(!isDefined(self.alien_type)) {
+  if(!isDefined(self.alien_type))
     return undefined;
-  }
 
   switch (self.alien_type) {
     case "gargoyle":
@@ -987,9 +966,8 @@ descent_alien_turn_in_place_anim_state_override_func() {
 descent_alien_can_attack_drill_override_func(var_0) {
   switch (var_0) {
     case "gargoyle":
-      if(isDefined(level.vanguard_active) && level.vanguard_active) {
+      if(isDefined(level.vanguard_active) && level.vanguard_active)
         return 1;
-      }
     default:
       break;
   }
@@ -1022,9 +1000,8 @@ descent_alien_type_node_match_override_func(var_0) {
     case "elite":
       return 0;
     case "gargoyle":
-      if(getdvarint("scr_gargoyle_disable_fly_intro") != 1) {
+      if(getdvarint("scr_gargoyle_disable_fly_intro") != 1)
         return 0;
-      }
 
       break;
     default:
@@ -1035,9 +1012,8 @@ descent_alien_type_node_match_override_func(var_0) {
 descent_alien_jump_override(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy != "flyable") {
+  if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy != "flyable")
     var_4 = var_1.script_noteworthy;
-  }
 
   maps\mp\agents\alien\_alien_jump::jump(var_0.origin, var_0.angles, var_1.origin, var_1.angles, var_3, undefined, var_4);
 }
@@ -1113,9 +1089,8 @@ descent_alien_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_7 && isDefined(var_4) && maps\mp\alien\_utility::weapon_has_alien_attachment(var_4) && var_3 != "MOD_MELEE" && !maps\mp\alien\_utility::is_true(level.easter_egg_lodge_sign_active)) {
     playFX(level._effect["alien_ark_gib"], self.origin + (0, 0, 32));
 
-    if(maps\mp\alien\_utility::is_true(level.should_use_custom_death_func)) {
+    if(maps\mp\alien\_utility::is_true(level.should_use_custom_death_func))
       level thread maps\mp\mp_alien_dlc3_escape::alien_death_trail(self.origin);
-    }
 
     return 1;
   }
@@ -1154,13 +1129,11 @@ descent_intro_music_play() {
       var_1 stoplocalsound("us_spawn_music");
 
       if(!level.splitscreen || level.splitscreen && !isDefined(level.playeddescentstartingmusic)) {
-        if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
+        if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
           level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc3_descent_intro");
-        }
 
-        if(level.splitscreen) {
+        if(level.splitscreen)
           level.playeddescentstartingmusic = 1;
-        }
       }
 
       continue;
@@ -1195,9 +1168,8 @@ gate_blocker_glyphs(var_0) {
 gate_blocker(var_0) {
   level endon("game_ended");
 
-  while(!isDefined(level.drill_icon)) {
+  while(!isDefined(level.drill_icon))
     common_scripts\utility::waitframe();
-  }
 
   var_1 = gettime();
   level notify("alien_vanguard_access_0" + var_0);
@@ -1215,9 +1187,8 @@ gate_blocker(var_0) {
   maps\mp\_obelisk::wait_for_all_scanned_obelisk_destroyed(13000, ["alienvanguard_projectile_mp", "alienvanguard_projectile_mini_mp"], "waypoint_alien_destroy");
   level notify("ff_down");
 
-  foreach(var_4 in level.players) {
-    var_4 maps\mp\_utility::clearlowermessage("vanguard_use_hint");
-  }
+  foreach(var_4 in level.players)
+  var_4 maps\mp\_utility::clearlowermessage("vanguard_use_hint");
 
   switch (var_0) {
     case 1:
@@ -1238,9 +1209,8 @@ gate_blocker(var_0) {
   var_6 delete();
   var_2 setscriptablepartstate(0, "ff_down");
 
-  if(var_0 == 1) {
+  if(var_0 == 1)
     thread gate_blocker_glyphs(2);
-  }
 
   level notify("blocker_0" + var_0 + "_destroyed");
   level thread maps\mp\alien\_spawn_director::end_cycle();
@@ -1250,9 +1220,8 @@ gate_blocker(var_0) {
   give_players_blocker_rewards();
   level.vanguard_active = 0;
 
-  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen()) {
+  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen())
     maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
-  }
 
   level notify("descent_door_complete");
 }
@@ -1412,9 +1381,8 @@ transform_pos_ang(var_0, var_1, var_2) {
   var_3 = var_0.origin;
   var_4 = (0, 0, 0);
 
-  if(maps\mp\alien\_utility::is_true(var_2)) {
+  if(maps\mp\alien\_utility::is_true(var_2))
     var_4 = (0, 180, 0);
-  }
 
   var_5 = var_0.origin;
   var_6 = var_0.angles;
@@ -1444,19 +1412,17 @@ debug_open_blocker_doors() {
 }
 
 change_player_facing() {
-  while(!isDefined(level.players)) {
+  while(!isDefined(level.players))
     wait 0.1;
-  }
 
-  foreach(var_1 in level.players) {
-    var_1 setplayerangles(var_1.angles + (0, -90, 0));
-  }
+  foreach(var_1 in level.players)
+  var_1 setplayerangles(var_1.angles + (0, -90, 0));
 }
 
 set_spawn_table() {
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     set_chaos_spawn_table();
-  } else {
+  else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
       return;
@@ -1467,19 +1433,17 @@ set_spawn_table() {
 }
 
 set_container_spawn_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(maps\mp\alien\_utility::is_hardcore_mode())
     set_hardcore_container_spawn_table();
-  } else {
+  else
     set_regular_container_spawn_table();
-  }
 }
 
 set_alien_definition_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(maps\mp\alien\_utility::is_hardcore_mode())
     set_hardcore_alien_definition_table();
-  } else {
+  else
     set_regular_alien_definition_table();
-  }
 }
 
 set_chaos_spawn_table() {
@@ -1517,63 +1481,55 @@ set_chaos_spawn_table() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_dlc3_hardcore_sp.csv";
-  } else {
+  else
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_dlc3_hardcore_mp.csv";
-  }
 }
 
 set_regular_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.alien_cycle_table = "mp/alien/cycle_spawn_dlc3_sp.csv";
-  } else {
+  else
     level.alien_cycle_table = "mp/alien/cycle_spawn_dlc3.csv";
-  }
 }
 
 set_hardcore_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_hardcore_sp.csv";
-  } else {
+  else
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_hardcore.csv";
-  }
 }
 
 set_regular_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_sp.csv";
-  } else {
+  else
     level.container_spawn_table = "mp/alien/dlc3_container_spawn.csv";
-  }
 }
 
 set_regular_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_sp.csv";
-  } else {
+  else
     level.default_alien_definition = "mp/alien/dlc3_alien_definition.csv";
-  }
 }
 
 set_hardcore_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_hardcore_sp.csv";
-  } else {
+  else
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_hardcore.csv";
-  }
 }
 
 check_bridge_hives_and_play_vo() {
-  if(!isDefined(level.bridge_hives_done)) {
+  if(!isDefined(level.bridge_hives_done))
     level.bridge_hives_done = 0;
-  }
 
   level.bridge_hives_done++;
 
-  if(level.bridge_hives_done == 2) {
+  if(level.bridge_hives_done == 2)
     level thread stop_post_drill_vo_from_playing_next_obelisk();
-  }
 
   if(level.bridge_hives_done > 2) {
     level turn_off_drill();
@@ -1631,9 +1587,8 @@ add_waypoint_to_ark() {
 
   while(!var_3 && !common_scripts\utility::flag("entering_ark_flag")) {
     foreach(var_5 in level.players) {
-      if(distancesquared((var_0.x, var_0.y, var_0.z), var_5.origin) < var_2) {
+      if(distancesquared((var_0.x, var_0.y, var_0.z), var_5.origin) < var_2)
         var_3 = 1;
-      }
     }
 
     wait 0.1;
@@ -1648,9 +1603,8 @@ add_waypoint_to_ark() {
 
   while(!var_3) {
     foreach(var_5 in level.players) {
-      if(distancesquared((var_0.x, var_0.y, var_0.z), var_5.origin) < var_2) {
+      if(distancesquared((var_0.x, var_0.y, var_0.z), var_5.origin) < var_2)
         var_3 = 1;
-      }
     }
 
     wait 0.1;
@@ -1660,9 +1614,8 @@ add_waypoint_to_ark() {
 }
 
 turn_off_drill() {
-  while(!isDefined(level.drill_icon)) {
+  while(!isDefined(level.drill_icon))
     wait 0.05;
-  }
 
   level.drill_use_trig makeunusable();
   maps\mp\alien\_outline_proto::remove_from_drill_preplant_watch_list(level.drill);
@@ -1672,37 +1625,32 @@ turn_off_drill() {
 destroy_drill(var_0) {
   wait(var_0);
 
-  while(!isDefined(level.drill)) {
+  while(!isDefined(level.drill))
     wait 0.1;
-  }
 
   if(isDefined(level.drill)) {
     level.drill_carrier = undefined;
     level.drill delete();
   }
 
-  if(isDefined(level.drill_icon)) {
+  if(isDefined(level.drill_icon))
     level.drill_icon destroy();
-  }
 
-  if(isDefined(level.drill_use_trig)) {
+  if(isDefined(level.drill_use_trig))
     level.drill_use_trig delete();
-  }
 }
 
 start_ark_vo() {
   common_scripts\utility::flag_wait("entering_ark_flag");
   var_0 = 0;
 
-  if(!isDefined(level.ark_jump_to)) {
+  if(!isDefined(level.ark_jump_to))
     maps\mp\mp_alien_dlc3_vignettes::descent_vo_entering_ark();
-  }
 
   while(!var_0) {
     foreach(var_2 in level.players) {
-      if(var_2.origin[0] > 2000) {
+      if(var_2.origin[0] > 2000)
         var_0 = 1;
-      }
     }
 
     wait 0.1;
@@ -1756,9 +1704,8 @@ playdescentvo(var_0) {
     return;
   }
 
-  if(var_0 == "escape_level") {
+  if(var_0 == "escape_level")
     wait 5;
-  }
 
   var_1 = maps\mp\alien\_utility::get_array_of_valid_players();
 
@@ -1816,9 +1763,8 @@ init_weapon_stat_array() {
 }
 
 descent_weapon_stats_override_func(var_0) {
-  if(isDefined(level.weaponstats_weaponlist[var_0])) {
+  if(isDefined(level.weaponstats_weaponlist[var_0]))
     return level.weaponstats_weaponlist[var_0];
-  }
 
   return var_0;
 }
@@ -1904,11 +1850,10 @@ set_end_cam_position() {
 }
 
 descent_player_initial_spawn_loc_override() {
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     chaos_player_initial_spawn_loc_override();
-  } else {
+  else
     regular_player_initial_spawn_loc_override();
-  }
 }
 
 regular_player_initial_spawn_loc_override() {
@@ -1973,9 +1918,8 @@ common_jump_to_area3() {}
 get_first_num_elements(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1; var_3++) {
+  for(var_3 = 0; var_3 < var_1; var_3++)
     var_2[var_3] = var_0[var_3];
-  }
 
   return var_2;
 }
@@ -2002,27 +1946,24 @@ dlc3_egg() {
     if(isDefined(var_5.script_noteworthy)) {
       switch (var_5.script_noteworthy) {
         case "area1":
-          if(var_1.size >= 2) {
+          if(var_1.size >= 2)
             var_5 delete();
-          } else {
+          else
             var_1[var_1.size] = var_5;
-          }
 
           break;
         case "area2":
-          if(var_2.size >= 2) {
+          if(var_2.size >= 2)
             var_5 delete();
-          } else {
+          else
             var_2[var_2.size] = var_5;
-          }
 
           break;
         case "area3":
-          if(var_3.size >= 2) {
+          if(var_3.size >= 2)
             var_5 delete();
-          } else {
+          else
             var_3[var_3.size] = var_5;
-          }
 
           break;
       }
@@ -2031,9 +1972,8 @@ dlc3_egg() {
 
   var_0 = getEntArray("easter_egg", "targetname");
 
-  foreach(var_5 in var_0) {
-    var_5 thread wait_for_egg_dmg();
-  }
+  foreach(var_5 in var_0)
+  var_5 thread wait_for_egg_dmg();
 }
 
 wait_for_egg_dmg() {
@@ -2092,30 +2032,26 @@ dlc3_easter_egg_off() {
     var_1 thread maps\mp\alien\_alien_class_skills_main::remove_the_outline();
     stopFXOnTag(level.dig_fx["shrine"]["player"], var_1, "tag_origin");
 
-    if(isDefined(var_1.shrine_effect_ent)) {
+    if(isDefined(var_1.shrine_effect_ent))
       var_1.shrine_effect_ent delete();
-    }
   }
 }
 
 killfxonplayerdeath(var_0, var_1, var_2) {
   level endon("game_ended");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level endon(var_1);
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     level endon(var_2);
-  }
 
   common_scripts\utility::waittill_any("last_stand", "disconnect");
 
   if(isDefined(var_0)) {
     if(isarray(var_0)) {
-      foreach(var_4 in var_0) {
-        var_4 delete();
-      }
+      foreach(var_4 in var_0)
+      var_4 delete();
     } else
       var_0 delete();
   }
@@ -2124,24 +2060,20 @@ killfxonplayerdeath(var_0, var_1, var_2) {
 dlc3_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(self hasweapon("aliensoflam_mp")) {
+  if(self hasweapon("aliensoflam_mp"))
     var_4++;
-  }
 
-  if(self.hasriotshield || self.hasriotshieldequipped) {
+  if(self.hasriotshield || self.hasriotshieldequipped)
     var_4++;
-  }
 
   var_5 = self getcurrentweapon();
   var_6 = 0;
 
-  if(issubstr(var_5, "aliendlc11")) {
+  if(issubstr(var_5, "aliendlc11"))
     var_6 = 1;
-  }
 
-  if(var_6 && var_0.size + 1 > var_3 + var_4) {
+  if(var_6 && var_0.size + 1 > var_3 + var_4)
     return 0;
-  }
 
   return 1;
 }
@@ -2149,21 +2081,18 @@ dlc3_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
 dlc3_give_weapon_handler_func(var_0) {
   var_1 = self getcurrentweapon();
 
-  if(issubstr(var_1, "aliendlc11")) {
+  if(issubstr(var_1, "aliendlc11"))
     return 0;
-  }
 
   return undefined;
 }
 
 dlc_3_offset_locker_trigger_model() {
-  if(isDefined(self.locker_origin)) {
+  if(isDefined(self.locker_origin))
     self.pillage_trigger.origin = self.locker_origin;
-  }
 
-  if(isDefined(self.locker_angles)) {
+  if(isDefined(self.locker_angles))
     self.pillage_trigger.angles = self.locker_angles;
-  }
 
   var_0 = (0, 0, 20);
   var_1 = (0, 0, 13);

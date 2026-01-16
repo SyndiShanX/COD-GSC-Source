@@ -17,17 +17,15 @@ bot_koth_think() {
 
     println("distance: " + level.zone.trig.goal_radius);
 
-    ground = bulletTrace(level.zone.gameobject.curorigin, level.zone.gameobject.curorigin - vectorscale((0, 0, 1), 1024.0), 0, undefined);
+    ground = bullettrace(level.zone.gameobject.curorigin, level.zone.gameobject.curorigin - vectorscale((0, 0, 1), 1024.0), 0, undefined);
     level.zone.trig.goal = ground["position"] + vectorscale((0, 0, 1), 8.0);
   }
 
-  if(!bot_has_hill_goal()) {
+  if(!bot_has_hill_goal())
     self bot_move_to_hill();
-  }
 
-  if(self bot_is_at_hill()) {
+  if(self bot_is_at_hill())
     self bot_capture_hill();
-  }
 
   bot_hill_tactical_insertion();
   bot_hill_grenade();
@@ -37,9 +35,8 @@ bot_has_hill_goal() {
   origin = self getgoal("koth_hill");
 
   if(isDefined(origin)) {
-    if(distance2dsquared(level.zone.gameobject.curorigin, origin) < level.zone.trig.goal_radius * level.zone.trig.goal_radius) {
+    if(distance2dsquared(level.zone.gameobject.curorigin, origin) < level.zone.trig.goal_radius * level.zone.trig.goal_radius)
       return true;
-    }
   }
 
   return false;
@@ -85,31 +82,27 @@ bot_get_look_at() {
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
       return node.origin;
-    }
   }
 
   enemies = self maps\mp\bots\_bot::bot_get_enemies(0);
 
-  if(enemies.size) {
+  if(enemies.size)
     enemy = random(enemies);
-  }
 
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
       return node.origin;
-    }
   }
 
   spawn = random(level.spawnpoints);
   node = getvisiblenode(self.origin, spawn.origin);
 
-  if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
+  if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
     return node.origin;
-  }
 
   return level.zone.gameobject.curorigin;
 }
@@ -122,9 +115,8 @@ bot_capture_hill() {
     origin = self bot_get_look_at();
     z = 20;
 
-    if(distancesquared(origin, self.origin) > 262144) {
+    if(distancesquared(origin, self.origin) > 262144)
       z = randomintrange(16, 60);
-    }
 
     self lookat(origin + (0, 0, z));
 
@@ -163,24 +155,21 @@ any_other_team_touching(skip_team) {
     if(team == skip_team) {
       continue;
     }
-    if(level.zone.gameobject.numtouching[team]) {
+    if(level.zone.gameobject.numtouching[team])
       return true;
-    }
   }
 
   return false;
 }
 
 is_hill_contested(skip_team) {
-  if(any_other_team_touching(skip_team)) {
+  if(any_other_team_touching(skip_team))
     return true;
-  }
 
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(level.zone.gameobject.curorigin, 1);
 
-  if(isDefined(enemy) && distancesquared(enemy.origin, level.zone.gameobject.curorigin) < 262144) {
+  if(isDefined(enemy) && distancesquared(enemy.origin, level.zone.gameobject.curorigin) < 262144)
     return true;
-  }
 
   return false;
 }
@@ -195,21 +184,18 @@ bot_hill_grenade() {
     if(self getweaponammostock("proximity_grenade_mp") > 0) {
       origin = bot_get_look_at();
 
-      if(self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(origin)) {
+      if(self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(origin))
         return;
-      }
     }
   }
 
   if(!is_hill_contested(self.team)) {
-    if(!isDefined(level.next_smoke_time)) {
+    if(!isDefined(level.next_smoke_time))
       level.next_smoke_time = 0;
-    }
 
     if(gettime() > level.next_smoke_time) {
-      if(self maps\mp\bots\_bot_combat::bot_combat_throw_smoke(level.zone.gameobject.curorigin)) {
+      if(self maps\mp\bots\_bot_combat::bot_combat_throw_smoke(level.zone.gameobject.curorigin))
         level.next_smoke_time = gettime() + randomintrange(60000, 120000);
-      }
     }
 
     return;
@@ -217,27 +203,24 @@ bot_hill_grenade() {
 
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(level.zone.gameobject.curorigin, 0);
 
-  if(isDefined(enemy)) {
+  if(isDefined(enemy))
     origin = enemy.origin;
-  } else {
+  else
     origin = level.zone.gameobject.curorigin;
-  }
 
   dir = vectornormalize(self.origin - origin);
   dir = (0, dir[1], 0);
   origin = origin + vectorscale(dir, 128);
 
   if(maps\mp\bots\_bot::bot_get_difficulty() == "easy") {
-    if(!isDefined(level.next_grenade_time)) {
+    if(!isDefined(level.next_grenade_time))
       level.next_grenade_time = 0;
-    }
 
     if(gettime() > level.next_grenade_time) {
-      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin)) {
+      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin))
         self maps\mp\bots\_bot_combat::bot_combat_throw_tactical(origin);
-      } else {
+      else
         level.next_grenade_time = gettime() + randomintrange(60000, 120000);
-      }
     }
   } else if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin))
     self maps\mp\bots\_bot_combat::bot_combat_throw_tactical(origin);
@@ -260,9 +243,8 @@ bot_hill_tactical_insertion() {
     origin = self.origin + vectorscale(dir, dist);
     next = getnearestnode(origin);
 
-    if(isDefined(next) && nodesvisible(next, node)) {
+    if(isDefined(next) && nodesvisible(next, node))
       bot_combat_tactical_insertion(self.origin);
-    }
   }
 }
 

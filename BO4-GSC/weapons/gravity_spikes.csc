@@ -6,6 +6,7 @@
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\explode;
 #include scripts\core_common\system_shared;
+
 #namespace gravity_spikes;
 
 autoexec __init__system__() {
@@ -13,12 +14,13 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "gravity_spike_dust"] = # "weapon/fx_hero_grvity_spk_grnd_hit_dust";
+  level._effect[#"gravity_spike_dust"] = #"weapon/fx_hero_grvity_spk_grnd_hit_dust";
   level.gravity_spike_table = "surface_explosion_gravityspikes";
   level thread watchforgravityspikeexplosion();
   level.dirt_enable_gravity_spikes = getdvarint(#"scr_dirt_enable_gravity_spikes", 0);
 
   level thread updatedvars();
+
 }
 
 updatedvars() {
@@ -28,33 +30,33 @@ updatedvars() {
   }
 }
 
-function watchforgravityspikeexplosion() {
-  if(getactivelocalclients() > 1) {
-    return;
-  }
-
-  weapon_proximity = getweapon(#"hero_gravityspikes");
-  weapon_gravityslam = getweapon(#"eq_gravityslam");
-
-  while(true) {
-    waitresult = level waittill(#"explode");
-    weapon = waitresult.weapon;
-    owner_cent = waitresult.owner_cent;
-    position = waitresult.position;
-    localclientnum = waitresult.localclientnum;
-
-    if(weapon.rootweapon == getweapon(#"none") || weapon.rootweapon != weapon_proximity && weapon.rootweapon != weapon_gravityslam) {
-      continue;
+  function watchforgravityspikeexplosion() {
+    if(getactivelocalclients() > 1) {
+      return;
     }
 
-    if(isDefined(owner_cent) && owner_cent function_21c0fa55() && level.dirt_enable_gravity_spikes) {
-      owner_cent thread explode::dothedirty(localclientnum, 0, 1, 0, 1000, 500);
-    }
+    weapon_proximity = getweapon(#"hero_gravityspikes");
+    weapon_gravityslam = getweapon(#"eq_gravityslam");
 
-    thread do_gravity_spike_fx(localclientnum, owner_cent, weapon, position);
-    thread audio::dorattle(position, 200, 700);
+    while(true) {
+      waitresult = level waittill(#"explode");
+      weapon = waitresult.weapon;
+      owner_cent = waitresult.owner_cent;
+      position = waitresult.position;
+      localclientnum = waitresult.localclientnum;
+
+      if(weapon.rootweapon == getweapon(#"none") || weapon.rootweapon != weapon_proximity && weapon.rootweapon != weapon_gravityslam) {
+        continue;
+      }
+
+      if(isDefined(owner_cent) && owner_cent function_21c0fa55() && level.dirt_enable_gravity_spikes) {
+        owner_cent thread explode::dothedirty(localclientnum, 0, 1, 0, 1000, 500);
+      }
+
+      thread do_gravity_spike_fx(localclientnum, owner_cent, weapon, position);
+      thread audio::dorattle(position, 200, 700);
+    }
   }
-}
 
 do_gravity_spike_fx(localclientnum, owner, weapon, position) {
   radius_of_effect = 40;
@@ -102,17 +104,18 @@ do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count) {
   for(i = 0; i < count; i++) {
     fx_position = getideallocationforfx(center, i, count, radius, 0);
 
-    fx_position = randomizelocation(fx_position, randomization, randomization);
+      fx_position = randomizelocation(fx_position, randomization, randomization);
     trace = ground_trace(fx_position, owner);
 
-    if(trace[# "fraction"] < 1) {
-      fx = getfxfromsurfacetable(level.gravity_spike_table, trace[# "surfacetype"]);
+    if(trace[#"fraction"] < 1) {
+
+        fx = getfxfromsurfacetable(level.gravity_spike_table, trace[#"surfacetype"]);
 
       if(isDefined(fx)) {
         random_yaw = randomintrange(0, 359);
         angles = (0, random_yaw, 0);
         forward = anglesToForward(angles);
-        normal = trace[# "normal"];
+        normal = trace[#"normal"];
 
         if(lengthsquared(normal) == 0) {
           normal = (1, 0, 0);
@@ -123,10 +126,12 @@ do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count) {
           forward = anglesToForward(angles);
         }
 
-        playFX(localclientnum, fx, trace[# "position"], normal, forward);
-        playSound(0, "wpn_gravity_spikes_earth_crack", trace[# "position"]);
+        playFX(localclientnum, fx, trace[#"position"], normal, forward);
+        playSound(0, "wpn_gravity_spikes_earth_crack", trace[#"position"]);
       }
-    } else {}
+    } else {
+
+    }
 
     waitframe(1);
   }

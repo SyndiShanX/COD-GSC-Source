@@ -20,11 +20,11 @@
 #namespace spider;
 
 function autoexec __init__sytem__() {
-  system::register("spider", &__init__, undefined, undefined);
+  system::register("spider", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("spider", &spider_initialize);
+  vehicle::add_main_callback("spider", & spider_initialize);
   setdvar("", 0);
 }
 
@@ -39,7 +39,7 @@ function spider_initialize() {
   self.health = self.healthdefault;
   self useanimtree($generic);
   self vehicle::friendly_fire_shield();
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self enableaimassist();
   self setdrawinfrared(1);
@@ -50,10 +50,12 @@ function spider_initialize() {
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self setontargetangle(3);
-  self.overridevehicledamage = &spider_callback_damage;
+  self.overridevehicledamage = & spider_callback_damage;
   self thread vehicle_ai::nudge_collision();
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   self asmrequestsubstate("locomotion@movement");
   defaultrole();
@@ -61,12 +63,12 @@ function spider_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_range_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = &state_driving_update;
-  self vehicle_ai::add_state("meleeCombat", undefined, &state_melee_combat_update, undefined);
-  vehicle_ai::add_utility_connection("combat", "meleeCombat", &should_switch_to_melee);
-  vehicle_ai::add_utility_connection("meleeCombat", "combat", &should_switch_to_range);
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_range_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = & state_driving_update;
+  self vehicle_ai::add_state("meleeCombat", undefined, & state_melee_combat_update, undefined);
+  vehicle_ai::add_utility_connection("combat", "meleeCombat", & should_switch_to_melee);
+  vehicle_ai::add_utility_connection("meleeCombat", "combat", & should_switch_to_range);
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }
@@ -102,30 +104,30 @@ function getnextmoveposition_ranged(enemy) {
   vehicle_ai::positionquery_filter_outofgoalanchor(queryresult);
   positionquery_filter_inclaimedlocation(queryresult, self);
   vehicle_ai::positionquery_filter_engagementdist(queryresult, enemy, self.settings.engagementdistmin, self.settings.engagementdistmax);
-  if(isDefined(self.avoidentities) && isDefined(self.avoidentitiesdistance)) {
+  if(isdefined(self.avoidentities) && isdefined(self.avoidentitiesdistance)) {
     vehicle_ai::positionquery_filter_distawayfromtarget(queryresult, self.avoidentities, self.avoidentitiesdistance, -500);
   }
   best_point = undefined;
   best_score = -999999;
   foreach(point in queryresult.data) {
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = mapfloat(0, prefereddistawayfromorigin, 0, 300, point.disttoorigin2d);
     point.score = point.score + mapfloat(0, prefereddistawayfromorigin, 0, 300, point.disttoorigin2d);
     if(point.inclaimedlocation) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = -500;
       point.score = point.score + -500;
     }
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, randomness);
     point.score = point.score + randomfloatrange(0, randomness);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = point.distawayfromengagementarea * -1;
@@ -137,10 +139,10 @@ function getnextmoveposition_ranged(enemy) {
   }
   self vehicle_ai::positionquery_debugscores(queryresult);
   self.debug_ai_move_to_points_considered = queryresult.data;
-  if(!isDefined(best_point)) {
+  if(!isdefined(best_point)) {
     return undefined;
   }
-  if(isDefined(getdvarint("")) && getdvarint("")) {
+  if(isdefined(getdvarint("")) && getdvarint("")) {
     recordline(self.origin, best_point.origin, (0.3, 1, 0));
     recordline(self.origin, enemy.origin, (1, 0, 0.4));
   }
@@ -164,8 +166,8 @@ function state_range_combat_update(params) {
   self setspeed(self.settings.defaultmovespeed);
   self asmrequestsubstate("locomotion@movement");
   self.dont_move = undefined;
-  for(;;) {
-    if(!isDefined(self.enemy)) {
+  for (;;) {
+    if(!isdefined(self.enemy)) {
       self force_get_enemies();
       wait(0.1);
       continue;
@@ -173,7 +175,7 @@ function state_range_combat_update(params) {
       wait(0.1);
       continue;
     }
-    if(isDefined(self.can_reach_enemy)) {
+    if(isdefined(self.can_reach_enemy)) {
       if(!self[[self.can_reach_enemy]]()) {
         wait(0.1);
         continue;
@@ -184,7 +186,7 @@ function state_range_combat_update(params) {
     } else {
       self.current_pathto_pos = getnextmoveposition_ranged(self.enemy);
     }
-    if(isDefined(self.current_pathto_pos)) {
+    if(isdefined(self.current_pathto_pos)) {
       if(self setvehgoalpos(self.current_pathto_pos, 0, 1)) {
         self vehicle_ai::waittill_pathing_done();
       }
@@ -196,12 +198,12 @@ function state_range_combat_update(params) {
 function state_range_combat_attack() {
   self endon("change_state");
   self endon("death");
-  for(;;) {
-    if(!isDefined(self.enemy)) {
+  for (;;) {
+    if(!isdefined(self.enemy)) {
       wait(0.1);
       continue;
     }
-    state_params = spawnStruct();
+    state_params = spawnstruct();
     state_params.playtransition = 1;
     self vehicle_ai::evaluate_connections(undefined, state_params);
     can_attack = 1;
@@ -239,7 +241,7 @@ function do_ranged_attack(enemy) {
   goalangles = vectortoangles(v_to_enemy);
   anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
   angleadjustingstart = gettime();
-  while(anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 0.8) {
+  while (anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 0.8) {
     anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
     wait(0.05);
   }
@@ -268,7 +270,7 @@ function should_switch_to_melee(from_state, to_state, connection) {
   if(!vehicle_ai::iscooldownready("state_change")) {
     return false;
   }
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return false;
   }
   if(self.switch_to_melee === 1 || (distance2dsquared(self.origin, self.enemy.origin) < (self.settings.meleedist * self.settings.meleedist) && (abs(self.origin[2] - self.enemy.origin[2])) < self.settings.meleedist)) {
@@ -295,14 +297,14 @@ function state_melee_combat_update(params) {
   self asmrequestsubstate("locomotion@aggressive");
   self.dont_move = undefined;
   wait(0.5);
-  for(;;) {
+  for (;;) {
     foreach(player in level.players) {
       self getperfectinfo(player, 1);
       if(player.b_is_designated_target === 1) {
         self setpersonalthreatbias(player, 100000, 3);
       }
     }
-    if(!isDefined(self.enemy)) {
+    if(!isdefined(self.enemy)) {
       self force_get_enemies();
       wait(0.1);
       continue;
@@ -310,7 +312,7 @@ function state_melee_combat_update(params) {
       wait(0.1);
       continue;
     }
-    if(isDefined(self.can_reach_enemy)) {
+    if(isdefined(self.can_reach_enemy)) {
       if(!self[[self.can_reach_enemy]]()) {
         wait(0.1);
         continue;
@@ -318,25 +320,25 @@ function state_melee_combat_update(params) {
     }
     self.foundpath = 0;
     targetpos = spider_get_target_position();
-    if(isDefined(targetpos)) {
+    if(isdefined(targetpos)) {
       if(distancesquared(self.origin, targetpos) > (1000 * 1000) && self isposinclaimedlocation(targetpos)) {
         queryresult = positionquery_source_navigation(targetpos, 0, self.settings.max_move_dist, self.settings.max_move_dist, self.radius, self);
         positionquery_filter_inclaimedlocation(queryresult, self.enemy);
         best_point = undefined;
         best_score = -999999;
         foreach(point in queryresult.data) {
-          if(!isDefined(point._scoredebug)) {
+          if(!isdefined(point._scoredebug)) {
             point._scoredebug = [];
           }
           point._scoredebug[""] = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
           point.score = point.score + (mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin)));
-          if(!isDefined(point._scoredebug)) {
+          if(!isdefined(point._scoredebug)) {
             point._scoredebug = [];
           }
           point._scoredebug[""] = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
           point.score = point.score + (mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2])));
           if(point.inclaimedlocation === 1) {
-            if(!isDefined(point._scoredebug)) {
+            if(!isdefined(point._scoredebug)) {
               point._scoredebug = [];
             }
             point._scoredebug[""] = -500;
@@ -348,7 +350,7 @@ function state_melee_combat_update(params) {
           }
         }
         self vehicle_ai::positionquery_debugscores(queryresult);
-        if(isDefined(best_point)) {
+        if(isdefined(best_point)) {
           targetpos = best_point.origin;
         }
       }
@@ -364,7 +366,7 @@ function state_melee_combat_update(params) {
     if(!self.foundpath) {
       self.pathfailcount++;
       if(self.pathfailcount > 2) {
-        if(isDefined(self.enemy)) {
+        if(isdefined(self.enemy)) {
           self setpersonalthreatbias(self.enemy, -2000, 5);
         }
       }
@@ -386,10 +388,10 @@ function state_melee_combat_update(params) {
 function state_melee_combat_attack() {
   self endon("change_state");
   self endon("death");
-  for(;;) {
-    state_params = spawnStruct();
+  for (;;) {
+    state_params = spawnstruct();
     state_params.playtransition = 1;
-    if(!isDefined(self.enemy)) {
+    if(!isdefined(self.enemy)) {
       wait(0.1);
       self vehicle_ai::evaluate_connections(undefined, state_params);
       continue;
@@ -438,7 +440,7 @@ function should_switch_to_range(from_state, to_state, connection) {
   if(isalive(self.enemy) && distance2dsquared(self.origin, self.enemy.origin) > (self.settings.meleedist * 4) * (self.settings.meleedist * 4)) {
     return true;
   }
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return true;
   }
   return false;
@@ -452,8 +454,8 @@ function prevent_stuck() {
   wait(2);
   count = 0;
   previous_origin = undefined;
-  while(true) {
-    if(isDefined(previous_origin) && distancesquared(previous_origin, self.origin) < (0.1 * 0.1) && (!(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
+  while (true) {
+    if(isdefined(previous_origin) && distancesquared(previous_origin, self.origin) < (0.1 * 0.1) && (!(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
       count++;
     } else {
       previous_origin = self.origin;
@@ -470,34 +472,34 @@ function spider_get_target_position() {
   if(self.goalforced) {
     return self.goalpos;
   }
-  if(isDefined(self.settings.all_knowing)) {
-    if(isDefined(self.enemy)) {
+  if(isdefined(self.settings.all_knowing)) {
+    if(isdefined(self.enemy)) {
       target_pos = self.enemy.origin;
     }
   } else {
     target_pos = vehicle_ai::gettargetpos(vehicle_ai::getenemytarget());
   }
   enemy = self.enemy;
-  if(isDefined(target_pos)) {
+  if(isdefined(target_pos)) {
     target_pos_onnavmesh = getclosestpointonnavmesh(target_pos, self.settings.detonation_distance * 1.5, self.radius, 16777183);
   }
-  if(!isDefined(target_pos_onnavmesh)) {
-    if(isDefined(self.enemy)) {
+  if(!isdefined(target_pos_onnavmesh)) {
+    if(isdefined(self.enemy)) {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
-    if(isDefined(self.current_pathto_pos) && distancesquared(self.origin, self.current_pathto_pos) > (self.settings.meleereach * self.settings.meleereach)) {
+    if(isdefined(self.current_pathto_pos) && distancesquared(self.origin, self.current_pathto_pos) > (self.settings.meleereach * self.settings.meleereach)) {
       return self.current_pathto_pos;
     }
     return undefined;
   }
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy)) {
     if(distancesquared(target_pos, target_pos_onnavmesh) > (self.settings.detonation_distance * 0.9) * (self.settings.detonation_distance * 0.9)) {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
   }
-  if(isDefined(enemy) && isplayer(enemy)) {
+  if(isdefined(enemy) && isplayer(enemy)) {
     enemy_vel_offset = enemy getvelocity() * 0.5;
-    enemy_look_dir_offset = anglesToForward(enemy.angles);
+    enemy_look_dir_offset = anglestoforward(enemy.angles);
     if(distance2dsquared(self.origin, enemy.origin) > (500 * 500)) {
       enemy_look_dir_offset = enemy_look_dir_offset * 110;
     } else {
@@ -524,14 +526,14 @@ function path_update_interrupt_melee() {
   self notify("clear_interrupt_threads");
   self endon("clear_interrupt_threads");
   wait(0.1);
-  while(true) {
-    if(isDefined(self.current_pathto_pos)) {
+  while (true) {
+    if(isdefined(self.current_pathto_pos)) {
       if(distance2dsquared(self.current_pathto_pos, self.goalpos) > (self.goalradius * self.goalradius)) {
         wait(0.5);
         self notify("near_goal");
       }
       targetpos = spider_get_target_position();
-      if(isDefined(targetpos)) {
+      if(isdefined(targetpos)) {
         if(distancesquared(self.origin, targetpos) > (1000 * 1000)) {
           repath_range = self.settings.repath_range * 2;
           wait(0.1);
@@ -542,8 +544,8 @@ function path_update_interrupt_melee() {
           self notify("near_goal");
         }
       }
-      if(isDefined(self.enemy) && isplayer(self.enemy)) {
-        forward = anglesToForward(self.enemy getplayerangles());
+      if(isdefined(self.enemy) && isplayer(self.enemy)) {
+        forward = anglestoforward(self.enemy getplayerangles());
         dir_to_raps = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed * 2;
         if(vectordot(forward, dir_to_raps) > 0) {
@@ -567,7 +569,7 @@ function nudge_collision() {
   self endon("change_state");
   self notify("end_nudge_collision");
   self endon("end_nudge_collision");
-  while(true) {
+  while (true) {
     self waittill("veh_collision", velocity, normal);
     ang_vel = self getangularvelocity() * 0.8;
     self setangularvelocity(ang_vel);

@@ -9,7 +9,7 @@
 #namespace warlord;
 
 function autoexec __init__sytem__() {
-  system::register("warlord", &__init__, undefined, undefined);
+  system::register("warlord", & __init__, undefined, undefined);
 }
 
 function autoexec precache() {
@@ -25,10 +25,10 @@ function autoexec precache() {
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("warlord")) {
-    clientfield::register("actor", "warlord_type", 1, 2, "int", &warlordclientutils::warlordtypehandler, 0, 0);
-    clientfield::register("actor", "warlord_damage_state", 1, 2, "int", &warlordclientutils::warlorddamagestatehandler, 0, 0);
-    clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int", &warlordclientutils::warlordthrusterhandler, 0, 0);
-    clientfield::register("actor", "warlord_lights_state", 1, 1, "int", &warlordclientutils::warlordlightshandler, 0, 0);
+    clientfield::register("actor", "warlord_type", 1, 2, "int", & warlordclientutils::warlordtypehandler, 0, 0);
+    clientfield::register("actor", "warlord_damage_state", 1, 2, "int", & warlordclientutils::warlorddamagestatehandler, 0, 0);
+    clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int", & warlordclientutils::warlordthrusterhandler, 0, 0);
+    clientfield::register("actor", "warlord_lights_state", 1, 1, "int", & warlordclientutils::warlordlightshandler, 0, 0);
   }
 }
 
@@ -36,11 +36,11 @@ function __init__() {
 
 function warlorddamagestatehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(isDefined(entity.damagestatefx)) {
+  if(isdefined(entity.damagestatefx)) {
     stopfx(localclientnum, entity.damagestatefx);
     entity.damagestatefx = undefined;
   }
-  if(isDefined(entity.damageheavystatefx)) {
+  if(isdefined(entity.damageheavystatefx)) {
     stopfx(localclientnum, entity.damageheavystatefx);
     entity.damageheavystatefx = undefined;
   }
@@ -49,16 +49,16 @@ function warlorddamagestatehandler(localclientnum, oldvalue, newvalue, bnewent, 
       break;
     }
     case 2: {
-      entity.damageheavystatefx = playFXOnTag(localclientnum, level._effect["fx_elec_warlord_damage_2"], entity, "j_spine4");
-      playFXOnTag(localclientnum, level._effect["fx_elec_warlord_lower_damage_2"], entity, "j_mainroot");
+      entity.damageheavystatefx = playfxontag(localclientnum, level._effect["fx_elec_warlord_damage_2"], entity, "j_spine4");
+      playfxontag(localclientnum, level._effect["fx_elec_warlord_lower_damage_2"], entity, "j_mainroot");
     }
     case 1: {
-      entity.damagestatefx = playFXOnTag(localclientnum, level._effect["fx_elec_warlord_damage_1"], entity, "j_spine4");
-      playFXOnTag(localclientnum, level._effect["fx_elec_warlord_lower_damage_1"], entity, "j_mainroot");
+      entity.damagestatefx = playfxontag(localclientnum, level._effect["fx_elec_warlord_damage_1"], entity, "j_spine4");
+      playfxontag(localclientnum, level._effect["fx_elec_warlord_lower_damage_1"], entity, "j_mainroot");
       break;
     }
     case 3: {
-      playFXOnTag(localclientnum, level._effect["fx_exp_warlord_death"], entity, "j_spine4");
+      playfxontag(localclientnum, level._effect["fx_exp_warlord_death"], entity, "j_spine4");
       break;
     }
   }
@@ -71,9 +71,9 @@ function warlordtypehandler(localclientnum, oldvalue, newvalue, bnewent, binitia
 
 function warlordthrusterhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(isDefined(entity.thrusterfx)) {
+  if(isdefined(entity.thrusterfx)) {
     assert(isarray(entity.thrusterfx));
-    for(index = 0; index < entity.thrusterfx.size; index++) {
+    for (index = 0; index < entity.thrusterfx.size; index++) {
       stopfx(localclientnum, entity.thrusterfx[index]);
     }
   }
@@ -100,15 +100,15 @@ function warlordthrusterhandler(localclientnum, oldvalue, newvalue, bnewent, bin
       break;
     }
   }
-  for(index = 0; index < tags.size; index++) {
-    entity.thrusterfx[entity.thrusterfx.size] = playFXOnTag(localclientnum, level._effect["fx_exhaust_jetpack_warlord_juke"], entity, tags[index]);
+  for (index = 0; index < tags.size; index++) {
+    entity.thrusterfx[entity.thrusterfx.size] = playfxontag(localclientnum, level._effect["fx_exhaust_jetpack_warlord_juke"], entity, tags[index]);
   }
 }
 
 function warlordlightshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
   if(newvalue == 1) {
-    playFXOnTag(localclientnum, level._effect["fx_light_eye_glow_warlord"], entity, "tag_eye");
-    playFXOnTag(localclientnum, level._effect["fx_light_body_glow_warlord"], entity, "j_spine4");
+    playfxontag(localclientnum, level._effect["fx_light_eye_glow_warlord"], entity, "tag_eye");
+    playfxontag(localclientnum, level._effect["fx_light_body_glow_warlord"], entity, "j_spine4");
   }
 }

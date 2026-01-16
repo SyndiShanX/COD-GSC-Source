@@ -9,15 +9,14 @@ precache() {
   precachemodel("c_usa_mp_fbi_assault_snw_fb");
   precachemodel("c_usa_mp_fbi_assault_snw_viewhands");
 
-  if(level.multiteam) {
+  if(level.multiteam)
     game["set_player_model"]["team3"]["default"] = ::set_player_model;
-  } else {
+  else
     game["set_player_model"]["allies"]["default"] = ::set_player_model;
-  }
 }
 
 set_player_model() {
-  self setModel("c_usa_mp_fbi_assault_snw_fb");
+  self setmodel("c_usa_mp_fbi_assault_snw_fb");
   self setviewmodel("c_usa_mp_fbi_assault_snw_viewhands");
   heads = [];
 }

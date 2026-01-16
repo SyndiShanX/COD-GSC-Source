@@ -46,8 +46,8 @@ function intro_cyber_soldiers_main() {
   level.ai_hendricks sethighdetail(1);
   function_9f230ee1();
   cp_prologue_util::function_47a62798(0);
-  array::run_all(level.players, &util::set_low_ready, 0);
-  callback::remove_on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
+  array::run_all(level.players, & util::set_low_ready, 0);
+  callback::remove_on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
   level notify("hash_e1626ff0");
   level.ai_prometheus sethighdetail(0);
   level.ai_hendricks sethighdetail(0);
@@ -64,14 +64,14 @@ function cyber_hangar_gate_close() {
   wait(20);
   level thread scene::play("p7_fxanim_cp_prologue_hangar_doors_02_bundle");
   cyber_hangar_gate_r_pos = getent("cyber_hangar_gate_r_pos", "targetname");
-  cyber_hangar_gate_r_pos playSound("evt_hangar_start_r");
-  cyber_hangar_gate_r_pos playLoopSound("evt_hangar_loop_r");
+  cyber_hangar_gate_r_pos playsound("evt_hangar_start_r");
+  cyber_hangar_gate_r_pos playloopsound("evt_hangar_loop_r");
   cyber_hangar_gate_l_pos = getent("cyber_hangar_gate_l_pos", "targetname");
-  cyber_hangar_gate_l_pos playSound("evt_hangar_start_l");
-  cyber_hangar_gate_l_pos playLoopSound("evt_hangar_loop_l");
+  cyber_hangar_gate_l_pos playsound("evt_hangar_start_l");
+  cyber_hangar_gate_l_pos playloopsound("evt_hangar_loop_l");
   level waittill("hash_8e385112");
-  cyber_hangar_gate_r_pos playSound("evt_hangar_stop_r");
-  cyber_hangar_gate_l_pos playSound("evt_hangar_stop_l");
+  cyber_hangar_gate_r_pos playsound("evt_hangar_stop_r");
+  cyber_hangar_gate_l_pos playsound("evt_hangar_stop_l");
   cyber_hangar_gate_r_pos stoploopsound(0.1);
   cyber_hangar_gate_l_pos stoploopsound(0.1);
   level util::clientnotify("sndBW");
@@ -85,7 +85,7 @@ function function_4ed5ddb9(s_node) {
 }
 
 function ai_goal(str_node) {
-  if(isDefined(str_node)) {
+  if(isdefined(str_node)) {
     nd_goal = getnode(str_node, "targetname");
     self setgoal(nd_goal, 1, 16);
     return;
@@ -100,15 +100,15 @@ function function_9f230ee1() {
 
 function function_679e7da9(a_ents) {
   level thread function_ac290386();
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &namespace_21b2c1f2::function_43ead72c, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_39b556d, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_e98e1240, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_sarah_attack", &function_4e5acf5e, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_a21df404, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", &function_89f840a1, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", &function_d71a5c1b, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation", &function_73293683, "play");
-  if(isDefined(level.bzm_prologuedialogue5callback)) {
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & namespace_21b2c1f2::function_43ead72c, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_39b556d, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_e98e1240, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_sarah_attack", & function_4e5acf5e, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_a21df404, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", & function_89f840a1, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", & function_d71a5c1b, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation", & function_73293683, "play");
+  if(isdefined(level.bzm_prologuedialogue5callback)) {
     level thread[[level.bzm_prologuedialogue5callback]]();
   }
   level thread scene::play("cin_pro_09_01_intro_1st_cybersoldiers_diaz_attack");
@@ -138,9 +138,9 @@ function function_73293683(a_ents) {
 function function_ac290386() {
   level waittill("hash_b7587dcc");
   level waittill("hash_63ae24ea");
-  array::run_all(level.players, &util::set_low_ready, 1);
-  callback::on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
-  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.players, & util::set_low_ready, 1);
+  callback::on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
   level waittill("hash_af43d596");
   playsoundatposition("evt_soldierintro_walla_panic_1", (6859, 886, 191));
   playsoundatposition("evt_soldierintro_walla_panic_2", (6870, 598, 197));
@@ -209,7 +209,7 @@ function actor_camo(n_camo_state, b_use_spawn_fx = 1) {
   } else {
     self playsoundontag("gdt_activecamo_off_npc", "tag_eye");
   }
-  if(isDefined(b_use_spawn_fx) && b_use_spawn_fx) {
+  if(isdefined(b_use_spawn_fx) && b_use_spawn_fx) {
     self clientfield::set("cyber_soldier_camo", 2);
     wait(2);
   }
@@ -222,7 +222,7 @@ function link_traversals() {
 }
 
 function function_e3957b4() {
-  if(!isDefined(level.var_3dce3f88)) {
+  if(!isdefined(level.var_3dce3f88)) {
     level.var_3dce3f88 = spawn("script_model", level.e_lift.origin);
     level.e_lift linkto(level.var_3dce3f88);
   }
@@ -233,15 +233,15 @@ function function_e3957b4() {
   level thread link_traversals();
   level.ai_khalil unlink();
   level.snd_lift stoploopsound(0.1);
-  level.e_lift playSound("evt_freight_lift_stop");
+  level.e_lift playsound("evt_freight_lift_stop");
 }
 
 function function_f9753551() {
   level.e_lift = getent("freight_lift", "targetname");
-  level.e_lift playSound("evt_freight_lift_start");
+  level.e_lift playsound("evt_freight_lift_start");
   level.snd_lift = spawn("script_origin", level.e_lift.origin);
   level.snd_lift linkto(level.e_lift);
-  level.snd_lift playLoopSound("evt_freight_lift_loop");
+  level.snd_lift playloopsound("evt_freight_lift_loop");
   level.var_1dd14818 = 1;
   level.var_3dce3f88 movez(-354, 0.05);
   level.var_3dce3f88 waittill("movedone");

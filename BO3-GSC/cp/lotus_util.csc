@@ -44,11 +44,11 @@ function function_83b903a6(a_ents) {
 }
 
 function function_84d3f32a() {
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_casino_ext_parts_bundle", &function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_medical_ext_parts_bundle", &function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_merchant_ext_parts_bundle", &function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_restaurant_ext_parts_bundle", &function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_tattoo_ext_parts_bundle", &function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_casino_ext_parts_bundle", & function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_medical_ext_parts_bundle", & function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_merchant_ext_parts_bundle", & function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_restaurant_ext_parts_bundle", & function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_tattoo_ext_parts_bundle", & function_83b903a6);
 }
 
 function function_50d69c96(var_7f004376 = 12) {
@@ -57,7 +57,7 @@ function function_50d69c96(var_7f004376 = 12) {
   self endon("entityshutdown");
   var_4286d30 = self.origin[2];
   self function_5ffdcb9d(var_7f004376);
-  while(true) {
+  while (true) {
     n_z_diff = abs(self.origin[2] - var_4286d30);
     if(n_z_diff > 320) {
       var_4286d30 = self.origin[2];
@@ -71,7 +71,7 @@ function function_5ffdcb9d(var_7f004376) {
   var_707bc057 = struct::get_array("siege_anim");
   var_62b3e03f = function_eb04522d(self.origin[2], var_707bc057, var_7f004376);
   var_d47b3178 = arraycopy(var_62b3e03f);
-  if(isDefined(level.var_707bc057)) {
+  if(isdefined(level.var_707bc057)) {
     var_41cebe05 = arrayintersect(var_62b3e03f, level.var_707bc057);
     var_3b2cf31a = arraycopy(level.var_707bc057);
     foreach(s_crowd in var_41cebe05) {
@@ -99,30 +99,30 @@ function function_eb04522d(n_z, a_items, n_max = a_items.size) {
   }
   var_932b706d = [];
   var_b9b72b4f = [];
-  for(i = 0; i < a_items.size; i++) {
-    if(!isDefined(a_items[i])) {
+  for (i = 0; i < a_items.size; i++) {
+    if(!isdefined(a_items[i])) {
       continue;
     }
-    if(isDefined(a_items[i].b_ignore) && a_items[i].b_ignore) {
+    if(isdefined(a_items[i].b_ignore) && a_items[i].b_ignore) {
       continue;
     }
     n_length = abs(n_z - a_items[i].origin[2]);
-    if(!isDefined(var_932b706d)) {
+    if(!isdefined(var_932b706d)) {
       var_932b706d = [];
     } else if(!isarray(var_932b706d)) {
       var_932b706d = array(var_932b706d);
     }
     var_932b706d[var_932b706d.size] = n_length;
-    if(!isDefined(var_b9b72b4f)) {
+    if(!isdefined(var_b9b72b4f)) {
       var_b9b72b4f = [];
     } else if(!isarray(var_b9b72b4f)) {
       var_b9b72b4f = array(var_b9b72b4f);
     }
     var_b9b72b4f[var_b9b72b4f.size] = i;
   }
-  while(true) {
+  while (true) {
     b_change = 0;
-    for(i = 0; i < (var_932b706d.size - 1); i++) {
+    for (i = 0; i < (var_932b706d.size - 1); i++) {
       if(var_932b706d[i] <= (var_932b706d[i + 1])) {
         continue;
       }
@@ -140,7 +140,7 @@ function function_eb04522d(n_z, a_items, n_max = a_items.size) {
   }
   a_new = [];
   if(var_b9b72b4f.size > 0) {
-    for(i = 0; i < n_max; i++) {
+    for (i = 0; i < n_max; i++) {
       a_new[i] = a_items[var_b9b72b4f[i]];
     }
   }
@@ -164,13 +164,13 @@ function function_3e466373(n_local_client, n_val_new, str_name, str_key = "scrip
 
 function function_b33fd8cd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(isDefined(self.n_fx_id)) {
+    if(isdefined(self.n_fx_id)) {
       deletefx(localclientnum, self.n_fx_id, 1);
     }
     self.n_fx_id = playfxoncamera(localclientnum, level._effect["player_dust"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
   } else {
     self notify("hash_1f63111d");
-    if(isDefined(self.n_fx_id)) {
+    if(isdefined(self.n_fx_id)) {
       deletefx(localclientnum, self.n_fx_id, 1);
     }
   }
@@ -196,13 +196,13 @@ function falling_debris(localclientnum) {
   wait(1);
   var_3bd3acaa = struct::get_array("debris_spawn_point", "targetname");
   a_models = array("p7_ac_unit_large", "p7_barrel_keg_beer_metal_rusty", "p7_barrel_metal_55gal_blue_lt", "p7_barrel_plastic", "p7_barstool_modern_01", "p7_bed_frame_barrack", "p7_box_case_metal_02_large", "p7_bucket_plastic_5_gal_blue", "p7_cabinet_metal_large", "p7_cai_planter_01", "p7_cai_trashcan_metal", "p7_cargo_pallet_02", "p7_copier_plastic_med", "p7_dolly", "p7_sink_ceramic_old_01", "p7_vending_machine_food", "p7_water_heater_tank");
-  while(true) {
+  while (true) {
     foreach(n_index, var_520ab411 in var_3bd3acaa) {
       n_radius = var_520ab411.radius;
       n_x = var_520ab411.origin[0] + (cos(randomintrange(0, 360)) * n_radius);
       n_y = var_520ab411.origin[1] + (sin(randomintrange(0, 360)) * n_radius);
       var_4a6273cc = util::spawn_model(localclientnum, array::random(a_models), (n_x, n_y, var_520ab411.origin[2]), (randomint(360), randomint(360), randomint(360)));
-      if(isDefined(var_4a6273cc)) {
+      if(isdefined(var_4a6273cc)) {
         var_4a6273cc thread function_9259cfc(n_index + 1);
       }
       wait(0.05);
@@ -231,7 +231,7 @@ function function_20e0d03e() {
   self endon("movedone");
   n_rotate = randomint(3);
   n_time = randomintrange(1, 4);
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     switch (n_rotate) {
       case 0: {
         self rotatepitch(360, n_time);
@@ -255,7 +255,7 @@ function spinning_fan() {
   self endon("stop_spinning");
   self setscale(1.25);
   n_time = randomintrange(2, 4);
-  while(true) {
+  while (true) {
     self rotatepitch(360, n_time);
     self waittill("rotatedone");
   }
@@ -327,11 +327,11 @@ function player_frost_breath(localclientnum, oldval, newval, bnewent, binitialsn
     self endon("hash_aac931c8");
     self endon("disconnect");
     self endon("entityshutdown");
-    while(true) {
+    while (true) {
       if(self islocalplayer() && self getlocalclientnumber() === localclientnum) {
         playfxoncamera(localclientnum, level._effect["player_breath"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
       } else {
-        util::delay(randomfloatrange(5, 7), undefined, &playfxontag, localclientnum, level._effect["breath_third_person"], self, "j_head");
+        util::delay(randomfloatrange(5, 7), undefined, & playfxontag, localclientnum, level._effect["breath_third_person"], self, "j_head");
       }
       wait(randomintrange(5, 7));
     }
@@ -346,8 +346,8 @@ function function_b8a4442e(localclientnum, oldval, newval, bnewent, binitialsnap
     self endon("hash_dbbbf53a");
     self endon("disconnect");
     self endon("entityshutdown");
-    while(true) {
-      playFXOnTag(localclientnum, level._effect["breath_third_person"], self, "j_head");
+    while (true) {
+      playfxontag(localclientnum, level._effect["breath_third_person"], self, "j_head");
       wait(randomintrange(5, 7));
     }
   } else {

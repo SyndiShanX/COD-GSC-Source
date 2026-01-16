@@ -24,15 +24,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 32, 1);
-  level.cybercom.unstoppable_force = spawnStruct();
-  level.cybercom.unstoppable_force._is_flickering = &_is_flickering;
-  level.cybercom.unstoppable_force._on_flicker = &_on_flicker;
-  level.cybercom.unstoppable_force._on_give = &_on_give;
-  level.cybercom.unstoppable_force._on_take = &_on_take;
-  level.cybercom.unstoppable_force._on_connect = &_on_connect;
-  level.cybercom.unstoppable_force._on = &_on;
-  level.cybercom.unstoppable_force._off = &_off;
-  level.cybercom.unstoppable_force._is_primed = &_is_primed;
+  level.cybercom.unstoppable_force = spawnstruct();
+  level.cybercom.unstoppable_force._is_flickering = & _is_flickering;
+  level.cybercom.unstoppable_force._on_flicker = & _on_flicker;
+  level.cybercom.unstoppable_force._on_give = & _on_give;
+  level.cybercom.unstoppable_force._on_take = & _on_take;
+  level.cybercom.unstoppable_force._on_connect = & _on_connect;
+  level.cybercom.unstoppable_force._on = & _on;
+  level.cybercom.unstoppable_force._off = & _off;
+  level.cybercom.unstoppable_force._is_primed = & _is_primed;
   level.cybercom.unstoppable_force.weapon = getweapon("gadget_unstoppable_force");
 }
 
@@ -62,7 +62,7 @@ function _on(slot, weapon) {
   self thread function_875f1595(slot, weapon);
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_unstoppableforce");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -72,7 +72,7 @@ function _off(slot, weapon) {
   self clientfield::set_to_player("unstoppableforce_state", 0);
   self notify("unstoppable_watch_collisions");
   self notify("hash_1f17ce9a");
-  self playSound("gdt_unstoppable_stop");
+  self playsound("gdt_unstoppable_stop");
   self gadgetpowerset(slot, 0);
   self enableoffhandweapons();
   self enableweaponcycling();
@@ -98,7 +98,7 @@ function private function_98296a6a(slot, weapon) {
   if(endreason == 2) {
     earthquake(1, 0.75, self.origin, 100);
     self playrumbleonentity("riotshield_impact");
-    self playSound("gdt_unstoppable_hit_wall");
+    self playsound("gdt_unstoppable_hit_wall");
   }
 }
 
@@ -121,7 +121,7 @@ function private function_875f1595(slot, weapon) {
 }
 
 function private _is_good_target(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return false;
   }
   if(!isalive(target)) {
@@ -130,20 +130,20 @@ function private _is_good_target(target) {
   if(target cybercom::cybercom_aicheckoptout("cybercom_unstoppableforce")) {
     return false;
   }
-  if(!(isDefined(target.takedamage) && target.takedamage)) {
+  if(!(isdefined(target.takedamage) && target.takedamage)) {
     return false;
   }
   if(isactor(target)) {
-    if(target isinscriptedstate() && (!(isDefined(target.is_disabled) && target.is_disabled))) {
+    if(target isinscriptedstate() && (!(isdefined(target.is_disabled) && target.is_disabled))) {
       if(!target cybercom::function_421746e0()) {
         return false;
       }
     }
   }
-  if(!(isDefined(target.allowdeath) && target.allowdeath)) {
+  if(!(isdefined(target.allowdeath) && target.allowdeath)) {
     return false;
   }
-  if(isDefined(target.blockingpain) && target.blockingpain) {
+  if(isdefined(target.blockingpain) && target.blockingpain) {
     return false;
   }
   if(isactor(target) && target cybercom::function_78525729() != "stand" && target cybercom::function_78525729() != "crouch") {
@@ -200,7 +200,7 @@ function hit_enemy(guy, weapon) {
   }
   guy notify("hash_f8c5dd60", weapon, self);
   if(guy.archetype == "warlord") {
-    if(isDefined(guy.is_disabled) && guy.is_disabled) {
+    if(isdefined(guy.is_disabled) && guy.is_disabled) {
       guy dodamage(guy.health, self.origin, self, self, "none", "MOD_IMPACT", 512, level.cybercom.unstoppable_force.var_bf0de5fb, -1, 1);
     } else {
       guy dodamage(getdvarint("scr_unstoppable_warlord_damage", 40), self.origin, self, self, "none", "MOD_IMPACT", 512, level.cybercom.unstoppable_force.weapon, -1, 1);
@@ -214,9 +214,9 @@ function hit_enemy(guy, weapon) {
     }
   }
   if(guy.archetype == "robot") {
-    self playSound("gdt_unstoppable_hit_bot");
+    self playsound("gdt_unstoppable_hit_bot");
   } else {
-    self playSound("gdt_unstoppable_hit_human");
+    self playsound("gdt_unstoppable_hit_human");
   }
 }
 
@@ -225,13 +225,13 @@ function watch_collisions(weapon) {
   self endon("unstoppable_watch_collisions");
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     enemies = function_518996b3();
     hit = 0;
     foreach(guy in enemies) {
       hit++;
       if(isvehicle(guy)) {
-        self playSound("gdt_unstoppable_hit_veh");
+        self playsound("gdt_unstoppable_hit_veh");
         self function_649c2f65(guy, weapon);
         continue;
       }
@@ -249,10 +249,10 @@ function function_518996b3() {
   enemies = _get_valid_targets();
   view_pos = self.origin;
   validtargets = array::get_all_closest(view_pos, enemies, undefined, undefined, 120);
-  if(!isDefined(validtargets)) {
+  if(!isdefined(validtargets)) {
     return;
   }
-  forward = anglesToForward(self getplayerangles());
+  forward = anglestoforward(self getplayerangles());
   up = anglestoup(self getplayerangles());
   segment_start = view_pos + (36 * forward);
   segment_end = segment_start + ((120 - 36) * forward);
@@ -260,8 +260,8 @@ function function_518996b3() {
   fling_force_vlo = fling_force * 0.5;
   fling_force_vhi = fling_force * 0.6;
   enemies = [];
-  for(i = 0; i < validtargets.size; i++) {
-    if(!isDefined(validtargets[i]) || !isalive(validtargets[i])) {
+  for (i = 0; i < validtargets.size; i++) {
+    if(!isdefined(validtargets[i]) || !isalive(validtargets[i])) {
       continue;
     }
     test_origin = validtargets[i] getcentroid();
@@ -283,11 +283,11 @@ function function_518996b3() {
 }
 
 function function_b4852552(player) {
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   self dodamage(self.health, player.origin, player, player, "", "MOD_IMPACT");
-  if(isDefined(self.fling_vec)) {
+  if(isdefined(self.fling_vec)) {
     self startragdoll(1);
     self launchragdoll(self.fling_vec);
   }

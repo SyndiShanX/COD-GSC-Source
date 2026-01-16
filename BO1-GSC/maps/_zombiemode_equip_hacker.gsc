@@ -11,7 +11,7 @@ init() {
   if(!maps\_zombiemode_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
   }
-  maps\_zombiemode_equipment::register_equipment("equip_hacker_zm", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", "hacker");
+  maps\_zombiemode_equipment::register_equipment("equip_hacker_zm", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
   level thread hacker_on_player_connect();
@@ -440,9 +440,9 @@ hacker_do_hack(hackable) {
   }
   self stopLoopSound(.5);
   if(hacked) {
-    self playSound("vox_mcomp_hack_success");
+    self playsound("vox_mcomp_hack_success");
   } else {
-    self playSound("vox_mcomp_hack_fail");
+    self playsound("vox_mcomp_hack_fail");
   }
   if(isDefined(self.hackerProgressBar)) {
     self.hackerProgressBar maps\_hud_util::destroyElem();
@@ -551,7 +551,7 @@ hackable_object_thread() {
 hacker_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
-    struct = spawnStruct();
+    struct = SpawnStruct();
     struct.origin = player.origin;
     struct.radius = 48;
     struct.height = 64;

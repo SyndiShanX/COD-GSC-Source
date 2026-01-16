@@ -9,7 +9,7 @@
 #namespace zm_island_fx;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_fx", &__init__, undefined, undefined);
+  system::register("zm_island_fx", & __init__, undefined, undefined);
 }
 
 function __init__() {}

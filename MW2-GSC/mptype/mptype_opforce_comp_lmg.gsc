@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   character\mp_character_composite_lmg::main();
 }
 

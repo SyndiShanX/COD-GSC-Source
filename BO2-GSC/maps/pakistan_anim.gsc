@@ -685,7 +685,8 @@ vo_corpse_alley() {
   level.harper queue_dialog("harp_shit_look_must_0", 1);
 }
 
-vo_avoid_spotlight_detected() {}
+vo_avoid_spotlight_detected() {
+}
 
 vo_sewer_exterior() {
   if(!flag("drone_intro_attack") && !flag("drone_searcher_attack") && !flag("drone_bank_attack")) {
@@ -707,9 +708,8 @@ vo_sewer_exterior() {
   flag_wait_any("sewer_guards_cleared", "harper_kills_two");
   wait 0.5;
 
-  if(flag("harper_kills_two")) {
+  if(flag("harper_kills_two"))
     level.harper say_dialog("harp_thanks_for_nothing_0", 0.5);
-  }
 
   flag_wait("drones_gone");
   level.harper say_dialog("harp_we_re_clear_move_u_0", 0.5);

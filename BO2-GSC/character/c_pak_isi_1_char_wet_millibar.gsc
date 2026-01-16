@@ -7,7 +7,7 @@
 #include xmodelalias\c_pak_isi_head_char_wet_m_als;
 
 main() {
-  self setModel("c_pak_isi_body_char_wet_m");
+  self setmodel("c_pak_isi_body_char_wet_m");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_pak_isi_head_char_wet_m_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_pak_isi_gear1_char_wet_m";

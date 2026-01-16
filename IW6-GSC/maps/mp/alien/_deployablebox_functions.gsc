@@ -40,9 +40,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKEN";
   boxConfig.streakName = "deployable_explosives";
   boxConfig.dpadName = "dpad_team_explosives";
   boxConfig.splashName = "used_deployable_explosives";
@@ -68,9 +68,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
-  boxConfig.capturingString = &"KILLSTREAKS_BOX_GETTING_VEST";
-  boxConfig.eventString = &"KILLSTREAKS_DEPLOYED_VEST";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
+  boxConfig.capturingString = & "KILLSTREAKS_BOX_GETTING_VEST";
+  boxConfig.eventString = & "KILLSTREAKS_DEPLOYED_VEST";
   boxConfig.streakName = "deployable_vest";
   boxConfig.dpadName = "dpad_team_armor";
   boxConfig.splashName = "used_deployable_vest";
@@ -95,9 +95,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_ammo";
   boxConfig.dpadName = "dpad_team_ammo_reg";
   boxConfig.splashName = "used_deployable_ammo";
@@ -119,18 +119,16 @@ deployables_init() {
   boxConfig.maxUses = 3;
   maps\mp\alien\_deployablebox::init_deployable("deployable_ammo", boxConfig);
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     level.randombox_table = "mp/alien/chaos_deployable_randombox.csv";
-  }
-  if(!isDefined(level.randombox_table)) {
+  if(!isDefined(level.randombox_table))
     level.randombox_table = RANDOMBOX_TABLE;
-  }
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_RANDOM_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_RANDOM_TAKING";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_RANDOM_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_RANDOM_TAKING";
   boxConfig.streakName = "deployable_randombox";
   boxConfig.dpadName = "dpad_team_randombox";
   boxConfig.splashName = "used_deployable_randombox";
@@ -156,9 +154,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_CURRENCY_TAKEN";
   boxConfig.streakName = "deployable_currency";
   boxConfig.dpadName = "dpad_team_currency";
   boxConfig.splashName = "used_deployable_currency";
@@ -185,9 +183,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_ADRENALINE_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_ADRENALINE_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
   boxConfig.streakName = "deployable_adrenalinebox";
   boxConfig.dpadName = "dpad_team_adrenaline";
   boxConfig.splashName = "used_deployable_juicebox";
@@ -214,9 +212,9 @@ deployables_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
-  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
-  boxConfig.eventString = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKEN";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
+  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
+  boxConfig.eventString = & "KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKEN";
   boxConfig.streakName = "deployable_juicebox";
   boxConfig.dpadName = "dpad_team_boost";
   boxConfig.splashName = "used_deployable_juicebox";
@@ -248,9 +246,9 @@ specialammo_init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_INCENDIARYAMMO_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_INCENDIARYAMMO_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_specialammo_in";
   boxConfig.dpadName = "dpad_team_ammo_in";
   boxConfig.splashName = "used_deployable_in_ammo";
@@ -271,17 +269,16 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     boxConfig.maxUses = 1;
-  }
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_in", boxConfig);
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVEAMMO_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVEAMMO_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_specialammo_explo";
   boxConfig.dpadName = "dpad_team_ammo_explo";
   boxConfig.splashName = "used_deployable_exp_ammo";
@@ -302,18 +299,17 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     boxConfig.maxUses = 1;
-  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_explo", boxConfig);
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_STUNAMMO_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_STUNAMMO_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_specialammo";
   boxConfig.dpadName = "dpad_team_ammo_stun";
   boxConfig.splashName = "used_deployable_stun_ammo";
@@ -334,18 +330,17 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     boxConfig.maxUses = 1;
-  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo", boxConfig);
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_APAMMO_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_APAMMO_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_specialammo_ap";
   boxConfig.dpadName = "dpad_team_ammo_ap";
   boxConfig.splashName = "used_deployable_ap_ammo";
@@ -366,18 +361,17 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     boxConfig.maxUses = 1;
-  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_ap", boxConfig);
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = &"ALIENS_PATCH_COMBINED_AMMO_PICKUP";
-  boxConfig.capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  boxConfig.eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  boxConfig.hintString = & "ALIENS_PATCH_COMBINED_AMMO_PICKUP";
+  boxConfig.capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
   boxConfig.streakName = "deployable_specialammo_comb";
   boxConfig.dpadName = "dpad_placeholder_ammo_2";
   boxConfig.splashName = "used_deployable_ammo";
@@ -412,9 +406,8 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
     maps\mp\alien\_utility::deployable_box_onuse_message(boxent);
   }
 
-  while(self isChangingWeapon()) {
+  while(self isChangingWeapon())
     wait(0.05);
-  }
 
   if(!isDefined(ammo_type)) {
     assert(isDefined(boxent), "No boxent or special ammo type specified");
@@ -427,39 +420,34 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
 
   switch (ammo_type) {
     case "deployable_specialammo_ap":
-      if(!isDefined(self.special_ammocount_ap)) {
+      if(!isDefined(self.special_ammocount_ap))
         self.special_ammocount_ap = [];
-      }
       special_ammotype = "piercing";
       break;
 
     case "deployable_specialammo_in":
-      if(!isDefined(self.special_ammocount_in)) {
+      if(!isDefined(self.special_ammocount_in))
         self.special_ammocount_in = [];
-      }
 
       special_ammotype = "incendiary";
       break;
 
     case "deployable_specialammo":
-      if(!isDefined(self.special_ammocount)) {
+      if(!isDefined(self.special_ammocount))
         self.special_ammocount = [];
-      }
 
       special_ammotype = "stun";
       break;
 
     case "deployable_specialammo_explo":
-      if(!isDefined(self.special_ammocount_explo)) {
+      if(!isDefined(self.special_ammocount_explo))
         self.special_ammocount_explo = [];
-      }
 
       special_ammotype = "explosive";
       break;
     case "deployable_specialammo_comb":
-      if(!isDefined(self.special_ammocount_comb)) {
+      if(!isDefined(self.special_ammocount_comb))
         self.special_ammocount_comb = [];
-      }
 
       special_ammotype = "combined";
       break;
@@ -554,9 +542,8 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
         self SetWeaponAmmoStock(weapon, self.special_ammocount_comb[special_ammo_weapon]);
     }
 
-    if(!has_special_ammo && !is_chaos_mode()) {
+    if(!has_special_ammo && !is_chaos_mode())
       self zero_out_specialammo_clip(weapon);
-    }
   }
 
   cur_weapon = self GetCurrentPrimaryWeapon();
@@ -568,38 +555,32 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
         break;
 
       case "explosive":
-        if(!self _hasPerk("specialty_explosivebullets")) {
+        if(!self _hasPerk("specialty_explosivebullets"))
           self givePerk("specialty_explosivebullets", false);
-        }
 
         self SetClientOmnvar("ui_alien_specialammo", 3);
         break;
 
       case "stun":
-        if(!self _hasPerk("specialty_bulletdamage")) {
+        if(!self _hasPerk("specialty_bulletdamage"))
           self givePerk("specialty_bulletdamage", false);
-        }
 
         self SetClientOmnvar("ui_alien_specialammo", 1);
         break;
 
       case "piercing":
-        if(!self _hasPerk("specialty_armorpiercing")) {
+        if(!self _hasPerk("specialty_armorpiercing"))
           self givePerk("specialty_armorpiercing", false);
-        }
 
         self SetClientOmnvar("ui_alien_specialammo", 4);
         break;
       case "combined":
-        if(!self _hasPerk("specialty_explosivebullets")) {
+        if(!self _hasPerk("specialty_explosivebullets"))
           self givePerk("specialty_explosivebullets", false);
-        }
-        if(!self _hasPerk("specialty_bulletdamage")) {
+        if(!self _hasPerk("specialty_bulletdamage"))
           self givePerk("specialty_bulletdamage", false);
-        }
-        if(!self _hasPerk("specialty_armorpiercing")) {
+        if(!self _hasPerk("specialty_armorpiercing"))
           self givePerk("specialty_armorpiercing", false);
-        }
         self.has_incendiary_ammo = true;
 
         self SetClientOmnvar("ui_alien_specialammo", 5);
@@ -609,20 +590,18 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
 
   if(is_chaos_mode()) {
     perk = undefined;
-    if(special_ammotype != "incendiary") {
+    if(special_ammotype != "incendiary")
       self.has_incendiary_ammo = undefined;
-    } else if(special_ammotype != "stun") {
+    else if(special_ammotype != "stun")
       perk = "specialty_bulletdamage";
-    } else if(special_ammotype != "piercing") {
+    else if(special_ammotype != "piercing")
       perk = "specialty_armorpiercing";
-    } else if(special_ammotype != "explosive") {
+    else if(special_ammotype != "explosive")
       perk = "specialty_explosivebullets";
-    }
 
     if(isDefined(perk)) {
-      if(self _hasPerk(perk)) {
+      if(self _hasPerk(perk))
         self _unsetPerk(perk);
-      }
     }
   } else {
     self thread special_ammo_weapon_change_monitor(special_ammotype);
@@ -683,9 +662,8 @@ addFullCombinedClipToAllWeapons() {
 }
 
 weapon_can_use_specialammo(weapon_ref) {
-  if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon_ref) && !is_incompatible_weapon(weapon_ref)) {
+  if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon_ref) && !is_incompatible_weapon(weapon_ref))
     return true;
-  }
 
   return false;
 }
@@ -706,21 +684,19 @@ choose_item_inside_randombox(boxent) {
   rank = boxEnt.upgrade_rank;
 
   foreach(item, data in level.randombox_items) {
-    if(rank == 0) {
+    if(rank == 0)
       item_weight = data.level_0_weight;
-    } else if(rank == 1) {
+    else if(rank == 1)
       item_weight = data.level_1_weight;
-    } else if(rank == 2) {
+    else if(rank == 2)
       item_weight = data.level_2_weight;
-    } else if(rank == 3) {
+    else if(rank == 3)
       item_weight = data.level_3_weight;
-    } else if(rank == 4) {
+    else if(rank == 4)
       item_weight = data.level_4_weight;
-    }
 
-    for(j = 0; j < item_weight; j++) {
+    for(j = 0; j < item_weight; j++)
       dice[dice.size] = data;
-    }
   }
 
   random_item = dice[RandomIntRange(0, dice.size)];
@@ -765,80 +741,74 @@ give_randombox_item(item, boxent) {
 
 give_ammo_item(boxent) {
   self addAlienWeaponAmmo(boxEnt);
-  self setLowerMessage("ammo_message", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
+  self setLowerMessage("ammo_message", & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
 }
 
 give_soflam_item(boxent) {
   self _giveWeapon("aliensoflam_mp");
-  self setLowerMessage("soflam_messgae", &"ALIEN_COLLECTIBLES_FOUND_SOFLAM", 3);
+  self setLowerMessage("soflam_messgae", & "ALIEN_COLLECTIBLES_FOUND_SOFLAM", 3);
 }
 
 give_flare_item(boxent) {
-  if(self hasweapon("alienthrowingknife_mp")) {
+  if(self hasweapon("alienthrowingknife_mp"))
     self TakeWeapon("alienthrowingknife_mp");
-  }
 
-  if(self hasweapon("alientrophy_mp")) {
+  if(self hasweapon("alientrophy_mp"))
     self takeweapon("alientrophy_mp");
-  }
 
-  if(isDefined(level.give_randombox_item_check)) {
+  if(isDefined(level.give_randombox_item_check))
     self[[level.give_randombox_item_check]]("flare");
-  }
 
   self setOffhandSecondaryClass("flash");
   self _giveweapon("alienflare_mp");
   self SetWeaponAmmoClip("alienflare_mp", 1);
-  self setLowerMessage("flare_message", &"ALIEN_COLLECTIBLES_FOUND_FLARE", 3);
+  self setLowerMessage("flare_message", & "ALIEN_COLLECTIBLES_FOUND_FLARE", 3);
 }
 
 give_leash_item(boxent) {
   self SetOffhandSecondaryClass("throwingknife");
   self _giveWeapon("alienthrowingknife_mp");
-  self setLowerMessage("pet_leash_message", &"ALIEN_COLLECTIBLES_FOUND_PET_LEASH", 3);
+  self setLowerMessage("pet_leash_message", & "ALIEN_COLLECTIBLES_FOUND_PET_LEASH", 3);
 }
 
 give_armor_item(boxent) {
   if(!self isJuggernaut()) {
     boxEnt.boxType = "deployable_vest";
     self onUseDeployable_vest(boxEnt);
-    self setLowerMessage("armor_mesage", &"ALIEN_COLLECTIBLES_DEPLOYED_VEST", 3);
+    self setLowerMessage("armor_mesage", & "ALIEN_COLLECTIBLES_DEPLOYED_VEST", 3);
   }
 }
 
 give_explosive_item(boxent) {
   boxEnt.boxType = "deployable_explosives";
   self onUseDeployable_explosives(boxent);
-  self setLowerMessage("explosives_message", &"ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKEN", 3);
+  self setLowerMessage("explosives_message", & "ALIEN_COLLECTIBLES_DEPLOYABLE_EXPLOSIVES_TAKEN", 3);
 }
 
 give_boost_item(boxent) {
   self onUseDeployable_juicebox(boxent);
-  self setLowerMessage("mortar_shell_message", &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN", 3);
+  self setLowerMessage("mortar_shell_message", & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN", 3);
 }
 
 give_feral_item(boxent) {
   self onUseDeployable_adrenaline(boxent);
-  self setLowerMessage("feral_message", &"ALIEN_COLLECTIBLES_DEPLOYABLE_ADRENALINE_TAKEN", 3);
+  self setLowerMessage("feral_message", & "ALIEN_COLLECTIBLES_DEPLOYABLE_ADRENALINE_TAKEN", 3);
 }
 
 give_trophy_item(boxent) {
-  if(self hasweapon("alienthrowingknife_mp")) {
+  if(self hasweapon("alienthrowingknife_mp"))
     self TakeWeapon("alienthrowingknife_mp");
-  }
 
-  if(self hasweapon("alienflare_mp")) {
+  if(self hasweapon("alienflare_mp"))
     self takeweapon("alienflare_mp");
-  }
 
-  if(isDefined(level.give_randombox_item_check)) {
+  if(isDefined(level.give_randombox_item_check))
     self[[level.give_randombox_item_check]]("trophy");
-  }
 
   self setOffhandSecondaryClass("flash");
   self giveWeapon("alientrophy_mp", false);
   self SetWeaponAmmoClip("alientrophy_mp", 1);
-  self setLowerMessage("trophy_message", &"ALIEN_COLLECTIBLES_FOUND_TROPHY", 3);
+  self setLowerMessage("trophy_message", & "ALIEN_COLLECTIBLES_FOUND_TROPHY", 3);
 }
 
 give_special_ammo(boxent) {
@@ -851,25 +821,25 @@ give_special_ammo(boxent) {
   switch (type) {
     case "stun_ammo":
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo");
-      self setLowerMessage("sp_ammo", &"ALIENS_PATCH_STUN_AMMO_TAKEN", 3);
+      self setLowerMessage("sp_ammo", & "ALIENS_PATCH_STUN_AMMO_TAKEN", 3);
       break;
 
     case "incendiary_ammo":
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo_in");
-      self setLowerMessage("sp_ammo", &"ALIEN_COLLECTIBLES_INCENDIARY_AMMO_TAKEN", 3);
+      self setLowerMessage("sp_ammo", & "ALIEN_COLLECTIBLES_INCENDIARY_AMMO_TAKEN", 3);
       break;
     case "ap_ammo":
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo_ap");
-      self setLowerMessage("sp_ammo", &"ALIEN_COLLECTIBLES_AP_AMMO_TAKEN", 3);
+      self setLowerMessage("sp_ammo", & "ALIEN_COLLECTIBLES_AP_AMMO_TAKEN", 3);
       break;
 
     case "explosive_ammo":
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo_explo");
-      self setLowerMessage("sp_ammo", &"ALIEN_COLLECTIBLES_EXPLOSIVE_AMMO_TAKEN", 3);
+      self setLowerMessage("sp_ammo", & "ALIEN_COLLECTIBLES_EXPLOSIVE_AMMO_TAKEN", 3);
       break;
     case "combined_ammo":
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo_comb");
-      self setLowerMessage("sp_ammo", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
+      self setLowerMessage("sp_ammo", & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
       break;
 
   }
@@ -1022,24 +992,21 @@ custom_unset_adrenaline(death) {
 
   if(self has_perk("perk_medic")) {
     self.moveSpeedScaler = self perk_GetMoveSpeedScalar();
-    if(self has_perk("perk_medic", [2, 3, 4])) {
+    if(self has_perk("perk_medic", [2, 3, 4]))
       self givePerk("specialty_longersprint", false);
-    }
   } else {
     self.moveSpeedScaler = self maps\mp\alien\_prestige::prestige_getMoveSlowScalar();
   }
 
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
 
-  if(!is_true(level.easter_egg_lodge_sign_active)) {
+  if(!is_true(level.easter_egg_lodge_sign_active))
     self thread maps\mp\alien\_outline_proto::unset_alien_outline();
-  }
 
   self maps\mp\alien\_utility::restore_client_fog(0);
   self.isFeral = undefined;
-  if(!is_true(level.easter_egg_lodge_sign_active)) {
+  if(!is_true(level.easter_egg_lodge_sign_active))
     self notify("unset_adrenaline");
-  }
 }
 
 onUseDeployable_juicebox(boxEnt) {
@@ -1095,11 +1062,10 @@ custom_juicebox_logic(juicetime, rank, isEasterEgg) {
 
   self givePerk("specialty_fastermelee", false);
 
-  if(rank == 2 || rank == 3 || rank == 4) {
+  if(rank == 2 || rank == 3 || rank == 4)
     self.drillSpeedModifier = 0.75;
-  } else {
+  else
     self.drillSpeedModifier = 1.0;
-  }
 
   self thread unsetJuiceBoxOnDeath();
 
@@ -1140,16 +1106,14 @@ custom_unset_juicebox(death) {
 
   if(self isJuggernaut()) {
     Assert(isDefined(self.juggMoveSpeedScaler));
-    if(isDefined(self.juggMoveSpeedScaler)) {
+    if(isDefined(self.juggMoveSpeedScaler))
       self.moveSpeedScaler = self.juggMoveSpeedScaler;
-    } else {
+    else
       self.moveSpeedScaler = 0.7;
-    }
   }
 
-  if(self has_perk("perk_medic", [2, 3, 4])) {
+  if(self has_perk("perk_medic", [2, 3, 4]))
     self givePerk("specialty_longersprint", false);
-  }
 
   self _unsetPerk("specialty_fastreload");
 
@@ -1249,13 +1213,12 @@ addFullClipToAllWeapons(ammo_scalar) {
         weapon != "iw6_alienminigun4_mp" &&
         WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
-        if(self player_has_specialized_ammo(base_weapon)) {
+        if(self player_has_specialized_ammo(base_weapon))
           continue;
-        } else {
+        else {
           clip_size = WeaponClipSize(weapon);
-          if(isDefined(ammo_scalar)) {
+          if(isDefined(ammo_scalar))
             clip_size = int(self GetWeaponAmmoClip(weapon) + (clip_size * ammo_scalar));
-          }
 
           if(is_akimbo_weapon(weapon)) {
             left_clip = clip_size;
@@ -1419,9 +1382,8 @@ fillLaunchers(boxent, extra_ammo) {
             curStock = self GetWeaponAmmoStock(weaponName);
             newStock = curStock + extra_ammo;
             maxAmmo = WeaponMaxAmmo(weaponName);
-            if(newStock > maxAmmo) {
+            if(newStock > maxAmmo)
               newStock = maxAmmo;
-            }
             self SetWeaponAmmoStock(weaponName, newStock);
           }
         }

@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setModel("body_zakhaev_imran_gimp");
+  self setmodel("body_zakhaev_imran_gimp");
   self attach("head_zakhaev_imran", "", 1);
   self.headmodel = "head_zakhaev_imran";
   self.voice = "russian";

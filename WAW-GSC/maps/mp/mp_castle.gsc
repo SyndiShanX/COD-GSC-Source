@@ -21,11 +21,11 @@ main() {
   setdvar("r_specularcolorscale", "1");
   setdvar("compassmaxrange", "2100");
   thread trigger_killer((2166, -604, -556), 125, 10);
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_CASTLE_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_CASTLE_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_CASTLE_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_CASTLE_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_CASTLE_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_CASTLE_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_CASTLE_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_CASTLE_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_CASTLE_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_CASTLE_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_CASTLE_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_CASTLE_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_CASTLE_C";
@@ -48,7 +48,7 @@ main() {
 
 trigger_killer(position, width, height) {
   kill_trig = spawn("trigger_radius", position, 0, width, height);
-  while(1) {
+  while (1) {
     kill_trig waittill("trigger", player);
     if(isplayer(player)) {
       player suicide();

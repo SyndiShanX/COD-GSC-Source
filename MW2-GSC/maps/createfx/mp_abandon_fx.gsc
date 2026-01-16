@@ -985,4 +985,5 @@ main() {
   ent.v["fxid"] = "insects_carcass_runner";
   ent.v["delay"] = -15;
   ent.v["soundalias"] = "emt_fly_loop_res";
+
 }

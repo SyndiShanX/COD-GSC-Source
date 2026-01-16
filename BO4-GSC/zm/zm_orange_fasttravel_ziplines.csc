@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_fasttravel;
+
 #namespace zm_orange_fasttravel_ziplines;
 
 init() {
@@ -25,7 +26,7 @@ function_f747c7cd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 private function_97adc67(localclientnum) {
-  self endon(#"death", # "entityshutdown");
+  self endon(#"death", #"entityshutdown");
   util::waittill_dobj(localclientnum);
 
   if(!isDefined(self)) {
@@ -73,9 +74,9 @@ play_blur_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self postfx::playpostfxbundle("pstfx_speedblur");
     }
 
-    self postfx::function_c8b5f318("pstfx_speedblur", # "blur", 0.05);
-    self postfx::function_c8b5f318("pstfx_speedblur", # "inner mask", 0.3);
-    self postfx::function_c8b5f318("pstfx_speedblur", # "outer mask", 0.8);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"blur", 0.05);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"inner mask", 0.3);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"outer mask", 0.8);
     return;
   }
 

@@ -10,11 +10,10 @@ player_handle_zipline_turret(var_0) {
   var_1 setcursorhint("HINT_NOICON");
 
   if(!maps\cornered_code::is_e3()) {
-    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
+    if(level.player common_scripts\utility::is_player_gamepad_enabled())
       var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET_CONSOLE");
-    } else {
+    else
       var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET");
-    }
   }
 
   var_2 = common_scripts\utility::getstruct("zipline_launcher_lookat", "targetname");
@@ -34,9 +33,8 @@ player_handle_zipline_turret(var_0) {
   level.player allowcrouch(0);
   level.player allowprone(0);
 
-  if(level.player getstance() == "crouch" || level.player getstance() == "prone") {
+  if(level.player getstance() == "crouch" || level.player getstance() == "prone")
     wait 1;
-  }
 
   level.zipline_anim_struct maps\_anim::anim_first_frame_solo(level.cornered_player_arms, "cornered_launcher_setup_player");
   level.player playerlinktoblend(level.cornered_player_arms, "tag_player", 0.5);
@@ -64,9 +62,8 @@ player_handle_zipline_turret(var_0) {
   self disableturretdismount();
   var_0 turretfireenable();
 
-  if(!maps\cornered_code::is_e3()) {
+  if(!maps\cornered_code::is_e3())
     thread display_zipline_fire_hint();
-  }
 
   level.zipline_anim_struct maps\_anim::anim_first_frame_solo(level.cornered_player_arms, "cornered_zipline_launcher_fire_playerarms");
   var_0 waittill("turret_fire");
@@ -114,11 +111,10 @@ turret_moving() {
   while(!common_scripts\utility::flag("player_fired_zipline")) {
     var_1 = level.player getplayerangles();
 
-    if(distance(var_0, var_1) > 0.01) {
+    if(distance(var_0, var_1) > 0.01)
       thread maps\cornered_audio::aud_zipline("aim", distance(var_0, var_1));
-    } else {
+    else
       thread maps\cornered_audio::aud_zipline("stop_loop");
-    }
 
     var_0 = var_1;
     common_scripts\utility::waitframe();
@@ -206,7 +202,6 @@ turret_spawn_aim_arrow() {
 }
 
 turret_delete_aim_arrow() {
-  if(isDefined(self.aim_arrow)) {
+  if(isDefined(self.aim_arrow))
     self.aim_arrow destroy();
-  }
 }

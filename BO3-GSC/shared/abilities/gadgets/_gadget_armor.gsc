@@ -17,18 +17,18 @@
 #namespace armor;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_armor", &__init__, undefined, undefined);
+  system::register("gadget_armor", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(4, &gadget_armor_on, &gadget_armor_off);
-  ability_player::register_gadget_possession_callbacks(4, &gadget_armor_on_give, &gadget_armor_on_take);
-  ability_player::register_gadget_flicker_callbacks(4, &gadget_armor_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(4, &gadget_armor_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(4, &gadget_armor_is_flickering);
+  ability_player::register_gadget_activation_callbacks(4, & gadget_armor_on, & gadget_armor_off);
+  ability_player::register_gadget_possession_callbacks(4, & gadget_armor_on_give, & gadget_armor_on_take);
+  ability_player::register_gadget_flicker_callbacks(4, & gadget_armor_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(4, & gadget_armor_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(4, & gadget_armor_is_flickering);
   clientfield::register("allplayers", "armor_status", 1, 5, "int");
   clientfield::register("toplayer", "player_damage_type", 1, 1, "int");
-  callback::on_connect(&gadget_armor_on_connect);
+  callback::on_connect( & gadget_armor_on_connect);
 }
 
 function gadget_armor_is_inuse(slot) {
@@ -59,11 +59,11 @@ function gadget_armor_on(slot, weapon) {
   if(isalive(self)) {
     self flagsys::set("gadget_armor_on");
     self.shock_onpain = 0;
-    self.gadgethitpoints = isDefined(weapon.gadget_max_hitpoints) && (weapon.gadget_max_hitpoints > 0 ? weapon.gadget_max_hitpoints : undefined);
-    if(isDefined(self.overrideplayerdamage)) {
+    self.gadgethitpoints = isdefined(weapon.gadget_max_hitpoints) && (weapon.gadget_max_hitpoints > 0 ? weapon.gadget_max_hitpoints : undefined);
+    if(isdefined(self.overrideplayerdamage)) {
       self.originaloverrideplayerdamage = self.overrideplayerdamage;
     }
-    self.overrideplayerdamage = &armor_player_damage;
+    self.overrideplayerdamage = & armor_player_damage;
     self thread gadget_armor_status(slot, weapon);
   }
 }
@@ -74,11 +74,11 @@ function gadget_armor_off(slot, weapon) {
   self flagsys::clear("gadget_armor_on");
   self.shock_onpain = 1;
   self clientfield::set("armor_status", 0);
-  if(isDefined(self.originaloverrideplayerdamage)) {
+  if(isdefined(self.originaloverrideplayerdamage)) {
     self.overrideplayerdamage = self.originaloverrideplayerdamage;
     self.originaloverrideplayerdamage = undefined;
   }
-  if(armoron && isalive(self) && isDefined(level.playgadgetsuccess)) {
+  if(armoron && isalive(self) && isdefined(level.playgadgetsuccess)) {
     self[[level.playgadgetsuccess]](weapon);
   }
 }
@@ -90,7 +90,7 @@ function gadget_armor_flicker(slot, weapon) {
   }
   eventtime = self._gadgets_player[slot].gadget_flickertime;
   self set_gadget_status("Flickering", eventtime);
-  while(true) {
+  while (true) {
     if(!self gadgetflickering(slot)) {
       self set_gadget_status("Normal");
       return;
@@ -101,7 +101,7 @@ function gadget_armor_flicker(slot, weapon) {
 
 function set_gadget_status(status, time) {
   timestr = "";
-  if(isDefined(time)) {
+  if(isdefined(time)) {
     timestr = (("^3") + ", time: ") + time;
   }
   if(getdvarint("scr_cpower_debug_prints") > 0) {
@@ -194,13 +194,13 @@ function armor_damage_mod_allowed(weapon, smeansofdeath) {
 }
 
 function armor_should_take_damage(eattacker, weapon, smeansofdeath, shitloc) {
-  if(isDefined(eattacker) && !weaponobjects::friendlyfirecheck(self, eattacker)) {
+  if(isdefined(eattacker) && !weaponobjects::friendlyfirecheck(self, eattacker)) {
     return false;
   }
   if(!armor_damage_mod_allowed(weapon, smeansofdeath)) {
     return false;
   }
-  if(isDefined(shitloc) && (shitloc == "head" || shitloc == "helmet")) {
+  if(isdefined(shitloc) && (shitloc == "head" || shitloc == "helmet")) {
     return false;
   }
   return true;
@@ -209,13 +209,13 @@ function armor_should_take_damage(eattacker, weapon, smeansofdeath, shitloc) {
 function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, modelindex, psoffsettime) {
   damage = idamage;
   self.power_armor_took_damage = 0;
-  if(self armor_should_take_damage(eattacker, weapon, smeansofdeath, shitloc) && isDefined(self._gadget_armor_slot)) {
+  if(self armor_should_take_damage(eattacker, weapon, smeansofdeath, shitloc) && isdefined(self._gadget_armor_slot)) {
     self clientfield::set_to_player("player_damage_type", 1);
     if(self gadget_armor_is_inuse(self._gadget_armor_slot)) {
       armor_damage = damage * armor_damage_type_multiplier(smeansofdeath);
       damage = 0;
       if(armor_damage > 0) {
-        if(isDefined(self.gadgethitpoints)) {
+        if(isdefined(self.gadgethitpoints)) {
           hitpointsleft = self.gadgethitpoints;
         } else {
           hitpointsleft = self gadgetpowerchange(self._gadget_armor_slot, 0);
@@ -225,7 +225,7 @@ function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
         } else if(hitpointsleft < armor_damage) {
           damage = armor_damage - hitpointsleft;
         }
-        if(isDefined(self.gadgethitpoints)) {
+        if(isdefined(self.gadgethitpoints)) {
           self hitpoints_loss_event(armor_damage);
         } else {
           self ability_power::power_loss_event(self._gadget_armor_slot, eattacker, armor_damage, "armor damage");
@@ -251,16 +251,16 @@ function hitpoints_loss_event(val) {
 
 function gadget_armor_status(slot, weapon) {
   self endon("disconnect");
-  maxhitpoints = isDefined(weapon.gadget_max_hitpoints) && (weapon.gadget_max_hitpoints > 0 ? weapon.gadget_max_hitpoints : 100);
-  while(self flagsys::get("gadget_armor_on")) {
-    if(isDefined(self.gadgethitpoints) && self.gadgethitpoints <= 0) {
+  maxhitpoints = isdefined(weapon.gadget_max_hitpoints) && (weapon.gadget_max_hitpoints > 0 ? weapon.gadget_max_hitpoints : 100);
+  while (self flagsys::get("gadget_armor_on")) {
+    if(isdefined(self.gadgethitpoints) && self.gadgethitpoints <= 0) {
       self playsoundtoplayer("wpn_power_armor_destroyed_plr", self);
       self playsoundtoallbutplayer("wpn_power_armor_destroyed_npc", self);
       self gadgetdeactivate(slot, weapon);
       self gadgetpowerset(slot, 0);
       break;
     }
-    if(isDefined(self.gadgethitpoints)) {
+    if(isdefined(self.gadgethitpoints)) {
       hitpointsratio = self.gadgethitpoints / maxhitpoints;
     } else {
       hitpointsratio = self gadgetpowerchange(self._gadget_armor_slot, 0) / maxhitpoints;

@@ -41,9 +41,9 @@ saygenericdialogue(typestring) {
 saygenericdialoguewithimportance(typestring, importance) {
   soundalias = "dds_";
 
-  if(isDefined(self.dds_characterid)) {
+  if(isDefined(self.dds_characterid))
     soundalias = soundalias + self.dds_characterid;
-  } else {
+  else {
     println("this AI does not have a dds_characterID");
 
     return;
@@ -51,9 +51,8 @@ saygenericdialoguewithimportance(typestring, importance) {
 
   soundalias = soundalias + ("_" + typestring);
 
-  if(soundexists(soundalias)) {
+  if(soundexists(soundalias))
     self thread playfacethread(undefined, soundalias, importance);
-  }
 }
 
 setidlefacedelayed(facialanimationarray) {
@@ -72,7 +71,8 @@ sayspecificdialogue(facialanim, soundalias, importance, notifystring, waitornot,
   self thread playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait);
 }
 
-playidleface() {}
+playidleface() {
+}
 
 playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait) {
   if(!isDefined(soundalias)) {
@@ -81,29 +81,23 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
     return;
   }
 
-  if(!isDefined(level.numberofimportantpeopletalking)) {
+  if(!isDefined(level.numberofimportantpeopletalking))
     level.numberofimportantpeopletalking = 0;
-  }
 
-  if(!isDefined(level.talknotifyseed)) {
+  if(!isDefined(level.talknotifyseed))
     level.talknotifyseed = 0;
-  }
 
-  if(!isDefined(notifystring)) {
+  if(!isDefined(notifystring))
     notifystring = "PlayFaceThread " + soundalias;
-  }
 
-  if(!isDefined(self.a)) {
-    self.a = spawnStruct();
-  }
+  if(!isDefined(self.a))
+    self.a = spawnstruct();
 
-  if(!isDefined(self.a.facialsounddone)) {
+  if(!isDefined(self.a.facialsounddone))
     self.a.facialsounddone = 1;
-  }
 
-  if(!isDefined(self.istalking)) {
+  if(!isDefined(self.istalking))
     self.istalking = 0;
-  }
 
   if(self.istalking) {
     if(importance < self.a.currentdialogimportance) {
@@ -116,26 +110,22 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
       }
       println("WARNING: delaying alias " + self.a.facialsoundalias + " to play " + soundalias);
 
-      while(isDefined(self) && self.istalking) {
+      while(isDefined(self) && self.istalking)
         self waittill("done speaking");
-      }
 
-      if(!isDefined(self)) {
+      if(!isDefined(self))
         return;
-      }
     } else {
       println("WARNING: interrupting alias " + self.a.facialsoundalias + " to play " + soundalias);
 
       self stopsound(self.a.facialsoundalias);
       self notify("cancel speaking");
 
-      while(isDefined(self) && self.istalking) {
+      while(isDefined(self) && self.istalking)
         self waittill("done speaking");
-      }
 
-      if(!isDefined(self)) {
+      if(!isDefined(self))
         return;
-      }
     }
   }
 
@@ -150,13 +140,11 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
   self.a.facialsoundalias = soundalias;
   self.a.currentdialogimportance = importance;
 
-  if(importance == 1.0) {
+  if(importance == 1.0)
     level.numberofimportantpeopletalking = level.numberofimportantpeopletalking + 1;
-  }
 
-  if(level.numberofimportantpeopletalking > 1) {
+  if(level.numberofimportantpeopletalking > 1)
     println("WARNING: multiple high priority dialogs are happening at once " + soundalias);
-  }
 
   uniquenotify = notifystring + " " + level.talknotifyseed;
   level.talknotifyseed = level.talknotifyseed + 1;
@@ -165,17 +153,15 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
   if(!soundexists(soundalias)) {
     println("Warning: " + soundalias + " does not exist");
 
-    if(isstring(soundalias) && "vox_" != getsubstr(soundalias, 0, 4)) {
+    if(isstring(soundalias) && "vox_" != getsubstr(soundalias, 0, 4))
       play_sound = 0;
-    }
   }
 
   if(play_sound) {
-    if(isDefined(self.type) && self.type == "human") {
+    if(isDefined(self.type) && self.type == "human")
       self playsoundontag(soundalias, "J_Head", uniquenotify);
-    } else {
-      self playSound(soundalias, uniquenotify);
-    }
+    else
+      self playsound(soundalias, uniquenotify);
   }
 
   self waittill_any("death", "cancel speaking", uniquenotify);

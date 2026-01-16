@@ -90,9 +90,8 @@ face_swap(localclientnum, a_n_target_val) {
   self mapshaderconstant(localclientnum, 1, "ScriptVector1");
 
   if(!isDefined(self.n_layer_transparency)) {
-    for(i = 0; i < a_n_target_val.size; i++) {
+    for(i = 0; i < a_n_target_val.size; i++)
       self.n_layer_transparency[i] = a_n_target_val[i];
-    }
   }
 
   a_n_step = [];
@@ -123,9 +122,8 @@ face_swap(localclientnum, a_n_target_val) {
       if(self.n_layer_transparency[i] != a_n_target_val[i]) {
         b_transitioning = 1;
 
-        if(a_n_step[i] > 0 && self.n_layer_transparency[i] > a_n_target_val[i] || a_n_step[i] < 0 && self.n_layer_transparency[i] < a_n_target_val[i]) {
+        if(a_n_step[i] > 0 && self.n_layer_transparency[i] > a_n_target_val[i] || a_n_step[i] < 0 && self.n_layer_transparency[i] < a_n_target_val[i])
           self.n_layer_transparency[i] = a_n_target_val[i];
-        }
       }
     }
 
@@ -139,15 +137,15 @@ face_swap(localclientnum, a_n_target_val) {
 argusbuildui(localclientnum, usertag) {
   switch (usertag) {
     case "heli_vtol":
-      return argusimageandtext2ui(localclientnum, "white", &"KARMA_ARGUS_HELI_VTOL", &"KARMA_ARGUS_HELI_VTOL_INFO");
+      return argusimageandtext2ui(localclientnum, "white", & "KARMA_ARGUS_HELI_VTOL", & "KARMA_ARGUS_HELI_VTOL_INFO");
     case "metal_storm":
-      return argusimageandtext2ui(localclientnum, "white", &"KARMA_ARGUS_METAL_STORM", &"KARMA_ARGUS_METAL_STORM_INFO");
+      return argusimageandtext2ui(localclientnum, "white", & "KARMA_ARGUS_METAL_STORM", & "KARMA_ARGUS_METAL_STORM_INFO");
     case "al_jinan":
-      return argusimageandtext2ui(localclientnum, "white", &"KARMA_ARGUS_AL_JINAN", &"KARMA_ARGUS_AL_JINAN_INFO");
+      return argusimageandtext2ui(localclientnum, "white", & "KARMA_ARGUS_AL_JINAN", & "KARMA_ARGUS_AL_JINAN_INFO");
     case "scanner":
-      return argusimageandtext2ui(localclientnum, "white", &"KARMA_ARGUS_SCANNER", &"KARMA_ARGUS_SCANNER_INFO");
+      return argusimageandtext2ui(localclientnum, "white", & "KARMA_ARGUS_SCANNER", & "KARMA_ARGUS_SCANNER_INFO");
     case "heli_hip":
-      return argusimageandtext2ui(localclientnum, "white", &"KARMA_ARGUS_HELI_HIP", &"KARMA_ARGUS_HELI_HIP_INFO");
+      return argusimageandtext2ui(localclientnum, "white", & "KARMA_ARGUS_HELI_HIP", & "KARMA_ARGUS_HELI_HIP_INFO");
   }
 }
 

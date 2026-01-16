@@ -17,7 +17,7 @@ init() {
   if(isDefined(level.kzmb_key)) {
     key = level.kzmb_key;
   }
-  radios = getEntArray(name, key);
+  radios = getentarray(name, key);
   if(!isDefined(radios) || !radios.size) {
     println("no radios");
     return;
@@ -28,7 +28,7 @@ init() {
 }
 
 zombie_radio_play() {
-  self setCanDamage(true);
+  self setcandamage(true);
   if(!isDefined(level.music_override)) {
     level.music_override = false;
   }

@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_escape_travel;
 
 init_alcatraz_zipline() {
@@ -87,7 +88,7 @@ init_alcatraz_zipline() {
   e_gondola gondola_doors_move("roof", 1);
   level flag::set("gondola_initialized");
   gondola_lights_green();
-  e_gondola clientfield::set("" + # "gondola_light", 1);
+  e_gondola clientfield::set("" + #"gondola_light", 1);
   level.var_b9656485 = 0;
   level.var_cf10ac23 = 0;
   level.var_b5f05d46 = 0;
@@ -162,7 +163,7 @@ gondola_hostmigration() {
 
 link_player_to_gondola() {
   if(self function_9a8ab327() && isplayer(self)) {
-    self endon(#"disconnect", # "death");
+    self endon(#"disconnect", #"death");
     e_origin = util::spawn_model("tag_origin", self.origin, self.angles);
     level.var_ee9168a2[level.var_ee9168a2.size] = e_origin;
     e_origin linkto(level.e_gondola);
@@ -203,16 +204,16 @@ establish_gondola_door_definition(mdl_door) {
   str_identifier = mdl_door.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.door_roof_left = mdl_door;
       break;
-    case # "roof right":
+    case #"roof right":
       self.door_roof_right = mdl_door;
       break;
-    case # "docks left":
+    case #"docks left":
       self.door_docks_left = mdl_door;
       break;
-    case # "docks right":
+    case #"docks right":
       self.door_docks_right = mdl_door;
       break;
   }
@@ -223,16 +224,16 @@ establish_gondola_gate_definition(mdl_gate) {
   str_identifier = mdl_gate.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.gate_roof_left = mdl_gate;
       break;
-    case # "roof right":
+    case #"roof right":
       self.gate_roof_right = mdl_gate;
       break;
-    case # "docks left":
+    case #"docks left":
       self.gate_docks_left = mdl_gate;
       break;
-    case # "docks right":
+    case #"docks right":
       self.gate_docks_right = mdl_gate;
       break;
   }
@@ -242,16 +243,16 @@ establish_gondola_landing_door_definition(mdl_door) {
   str_identifier = mdl_door.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.landing_door_roof_left = mdl_door;
       break;
-    case # "roof right":
+    case #"roof right":
       self.landing_door_roof_right = mdl_door;
       break;
-    case # "docks left":
+    case #"docks left":
       self.landing_door_docks_left = mdl_door;
       break;
-    case # "docks right":
+    case #"docks right":
       self.landing_door_docks_right = mdl_door;
       break;
   }
@@ -261,16 +262,16 @@ establish_gondola_landing_gate_definition(mdl_gate) {
   str_identifier = mdl_gate.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.landing_gate_roof_left = mdl_gate;
       break;
-    case # "roof right":
+    case #"roof right":
       self.landing_gate_roof_right = mdl_gate;
       break;
-    case # "docks left":
+    case #"docks left":
       self.landing_gate_docks_left = mdl_gate;
       break;
-    case # "docks right":
+    case #"docks right":
       self.landing_gate_docks_right = mdl_gate;
       break;
   }
@@ -567,7 +568,7 @@ move_gondola(b_suppress_doors_close = 0) {
 
   foreach(player in a_players) {
     if(player function_9a8ab327()) {
-      player clientfield::set_to_player("" + # "rumble_gondola", 1);
+      player clientfield::set_to_player("" + #"rumble_gondola", 1);
       player.is_on_gondola = 1;
     }
   }
@@ -582,8 +583,8 @@ move_gondola(b_suppress_doors_close = 0) {
     }
   }
 
-  if(isDefined(level.ai[# "axis"])) {
-    foreach(e_enemy in level.ai[# "axis"]) {
+  if(isDefined(level.ai[#"axis"])) {
+    foreach(e_enemy in level.ai[#"axis"]) {
       if(e_enemy function_9a8ab327()) {
         e_enemy.no_powerups = 1;
       }
@@ -631,7 +632,7 @@ move_gondola(b_suppress_doors_close = 0) {
 
   foreach(player in a_players) {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
-      player clientfield::set_to_player("" + # "rumble_gondola", 0);
+      player clientfield::set_to_player("" + #"rumble_gondola", 0);
       player.is_on_gondola = undefined;
     }
   }
@@ -748,7 +749,7 @@ gondola_moving_vo() {
   if(!level function_dc269d0d(a_zombies, level.e_gondola)) {
     if(isDefined(level.var_105462b6)) {
       if(level.var_b9656485 < 3) {
-        level.var_105462b6 zm_audio::create_and_play_dialog(#"gondola", # "active", undefined);
+        level.var_105462b6 zm_audio::create_and_play_dialog(#"gondola", #"active", undefined);
         level.var_b9656485++;
       }
 
@@ -785,7 +786,7 @@ function_6a4544e() {
   var_1b66809c = array_players_on_gondola();
 
   if(var_1b66809c.size == 1) {
-    var_1b66809c[0] zm_audio::create_and_play_dialog(#"gondola", # "ride_solo", undefined, 1);
+    var_1b66809c[0] zm_audio::create_and_play_dialog(#"gondola", #"ride_solo", undefined, 1);
     return;
   }
 

@@ -17,7 +17,7 @@ main() {
   self.root_anim = % root;
   self.meleeattackdist = 0;
   thread setmeleeattackdist();
-  self.a = spawnStruct();
+  self.a = spawnstruct();
   self.a.pose = "stand";
   self.a.nextstandinghitdying = 0;
   self.a.movement = "run";
@@ -36,19 +36,18 @@ main() {
 setmeleeattackdist() {
   self endon("death");
 
-  for(;;) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+  for (;;) {
+    if(isdefined(self.enemy) && isplayer(self.enemy))
       self.meleeattackdist = anim.dogattackplayerdist;
-    } else {
+    else
       self.meleeattackdist = anim.dogattackaidist;
-    }
 
     self waittill("enemy");
   }
 }
 
 initdoganimations() {
-  if(!isDefined(level.dogsinitialized)) {
+  if(!isdefined(level.dogsinitialized)) {
     level.dogsinitialized = 1;
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING");
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE");
@@ -60,7 +59,7 @@ initdoganimations() {
     precachestring(&"NEW_DOG_DEATH_TOO_SOON_ALT");
   }
 
-  if(isDefined(anim.notfirsttimedogs)) {
+  if(isdefined(anim.notfirsttimedogs)) {
     return;
   }
   precacheshader("hud_dog_melee");
@@ -102,9 +101,8 @@ initdoganimations() {
   var_1 = 5;
   var_2 = [];
 
-  for(var_3 = 0; var_3 <= var_1; var_3++) {
+  for (var_3 = 0; var_3 <= var_1; var_3++)
     var_2[var_2.size] = var_3 / var_1;
-  }
 
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = common_scripts\utility::array_randomize(var_2);

@@ -78,9 +78,8 @@ watch_weapon_usage() {
         break;
       case "grenade":
       case "rocketlauncher":
-        if(weaponinventorytype(curweapon) != "item") {
+        if(weaponinventorytype(curweapon) != "item")
           self thread maps\_shellshock::rocket_earthquake();
-        }
 
         break;
       default:
@@ -163,9 +162,8 @@ begin_grenade_tracking() {
   starttime = gettime();
   self waittill("grenade_fire", grenade, weaponname);
 
-  if(gettime() - starttime > 1000) {
+  if(gettime() - starttime > 1000)
     grenade.iscooked = 1;
-  }
 
   switch (weaponname) {
     case "frag_grenade_80s_sp":
@@ -229,22 +227,19 @@ watch_emp_grenade(owner, weaponname) {
   ents = getdamageableents(origin, 512);
 
   foreach(ent in ents) {
-    if(isplayer(ent.entity) || isDefined(ent.entity.classname) && ent.entity.classname == "script_vehicle" || isDefined(ent.entity.isbigdog) && ent.entity.isbigdog) {
+    if(isplayer(ent.entity) || isDefined(ent.entity.classname) && ent.entity.classname == "script_vehicle" || isDefined(ent.entity.isbigdog) && ent.entity.isbigdog)
       ent.entity dodamage(1, origin, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname);
-    }
   }
 }
 
 getdamageableents(pos, radius, dolos, startradius) {
   ents = [];
 
-  if(!isDefined(dolos)) {
+  if(!isDefined(dolos))
     dolos = 0;
-  }
 
-  if(!isDefined(startradius)) {
+  if(!isDefined(startradius))
     startradius = 0;
-  }
 
   players = getplayers();
 
@@ -256,7 +251,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, playerpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, playerpos, startradius, undefined))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 1;
       newent.isadestructable = 0;
       newent.entity = players[i];
@@ -272,7 +267,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, guys[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = guys[i];
@@ -288,7 +283,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, vehicles[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = vehicles[i];
@@ -297,14 +292,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, grenades[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = grenades[i];
@@ -313,14 +308,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
   for(i = 0; i < destructibles.size; i++) {
     entpos = destructibles[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructibles[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = destructibles[i];
@@ -329,14 +324,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructables = getEntArray("destructable", "targetname");
+  destructables = getentarray("destructable", "targetname");
 
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructables[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 1;
       newent.entity = destructables[i];
@@ -352,13 +347,12 @@ weapondamagetracepassed(from, to, startradius, ignore) {
   midpos = undefined;
   diff = to - from;
 
-  if(lengthsquared(diff) < startradius * startradius) {
+  if(lengthsquared(diff) < startradius * startradius)
     midpos = to;
-  }
 
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
-  trace = bulletTrace(midpos, to, 0, ignore);
+  trace = bullettrace(midpos, to, 0, ignore);
   return trace["fraction"] == 1;
 }
 
@@ -380,8 +374,8 @@ watchsmokegrenadedetonation() {
   self waittill("explode", position, surface);
   smokesound = spawn("script_origin", (0, 0, 1));
   smokesound.origin = position;
-  smokesound playSound("wpn_smoke_hiss_start");
-  smokesound playLoopSound("wpn_smoke_hiss_lp");
+  smokesound playsound("wpn_smoke_hiss_start");
+  smokesound playloopsound("wpn_smoke_hiss_lp");
   wait 6;
   playsoundatposition("wpn_smoke_hiss_end", position);
   smokesound stoploopsound(0.5);
@@ -390,9 +384,8 @@ watchsmokegrenadedetonation() {
 }
 
 isreloadablealtweapon(weapon) {
-  if(getsubstr(weapon, 0, 3) == "gl_") {
+  if(getsubstr(weapon, 0, 3) == "gl_")
     return true;
-  }
 
   switch (weapon) {
     case "exptitus6_sp":
@@ -408,7 +401,7 @@ scavenger_think() {
   primary_weapons = player getweaponslistprimaries();
   offhand_weapons = array_exclude(player getweaponslist(), primary_weapons);
   arrayremovevalue(offhand_weapons, "knife_sp");
-  player playSound("fly_equipment_pickup_npc");
+  player playsound("fly_equipment_pickup_npc");
   player playlocalsound("fly_equipment_pickup_plr");
 
   for(i = 0; i < offhand_weapons.size; i++) {
@@ -485,9 +478,8 @@ scavenger_think() {
 }
 
 islauncherkweapon(weapon) {
-  if(getsubstr(weapon, 0, 2) == "gl_") {
+  if(getsubstr(weapon, 0, 2) == "gl_")
     return true;
-  }
 
   switch (weapon) {
     case "china_lake_sp":

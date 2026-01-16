@@ -33,17 +33,17 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   if(self.team == "spectator") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isdefined(eattacker) && isplayer(eattacker) && isdefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   self.idflags = idflags;
   self.idflagstime = gettime();
   eattacker = globallogic_player::figure_out_attacker(eattacker);
-  if(!isDefined(vdir)) {
+  if(!isdefined(vdir)) {
     idflags = idflags | 4;
   }
   friendly = 0;
-  if(self.health == self.maxhealth || !isDefined(self.attackers)) {
+  if(self.health == self.maxhealth || !isdefined(self.attackers)) {
     self.attackers = [];
     self.attackerdata = [];
     self.attackerdamage = [];
@@ -60,15 +60,15 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
       idamage = 150;
     }
   }
-  if(isDefined(self.overrideactordamage)) {
+  if(isdefined(self.overrideactordamage)) {
     idamage = self[[self.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
   }
   friendlyfire = [[level.figure_out_friendly_fire]](self);
-  if(friendlyfire == 0 && self.archetype === "robot" && isDefined(eattacker) && eattacker.team === self.team) {
+  if(friendlyfire == 0 && self.archetype === "robot" && isdefined(eattacker) && eattacker.team === self.team) {
     return;
   }
-  if(isDefined(self.aioverridedamage)) {
-    for(index = 0; index < self.aioverridedamage.size; index++) {
+  if(isdefined(self.aioverridedamage)) {
+    for (index = 0; index < self.aioverridedamage.size; index++) {
       damagecallback = self.aioverridedamage[index];
       idamage = self[[damagecallback]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
     }
@@ -77,10 +77,10 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
     idamage = int(idamage + 0.5);
   }
-  if(weapon == level.weaponnone && isDefined(einflictor)) {
-    if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
+  if(weapon == level.weaponnone && isdefined(einflictor)) {
+    if(isdefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       weapon = getweapon("explodable_barrel");
-    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isdefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       weapon = getweapon("destructible_car");
     }
   }
@@ -90,7 +90,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
     prevhealthratio = self.health / self.maxhealth;
     isshootingownclone = 0;
-    if(isDefined(self.isaiclone) && self.isaiclone && isplayer(eattacker) && self.owner == eattacker) {
+    if(isdefined(self.isaiclone) && self.isaiclone && isplayer(eattacker) && self.owner == eattacker) {
       isshootingownclone = 1;
     }
     if(level.teambased && isplayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"] && !isshootingownclone) {
@@ -123,26 +123,26 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
       }
       friendly = 1;
     } else {
-      if(isDefined(eattacker) && isDefined(self.script_owner) && eattacker == self.script_owner && !level.hardcoremode && !isshootingownclone) {
+      if(isdefined(eattacker) && isdefined(self.script_owner) && eattacker == self.script_owner && !level.hardcoremode && !isshootingownclone) {
         return;
       }
-      if(isDefined(eattacker) && isDefined(self.script_owner) && isDefined(eattacker.script_owner) && eattacker.script_owner == self.script_owner) {
+      if(isdefined(eattacker) && isdefined(self.script_owner) && isdefined(eattacker.script_owner) && eattacker.script_owner == self.script_owner) {
         return;
       }
       if(idamage < 1) {
         idamage = 1;
       }
-      if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor) && isDefined(einflictor.iscooked)) {
+      if(issubstr(smeansofdeath, "MOD_GRENADE") && isdefined(einflictor) && isdefined(einflictor.iscooked)) {
         self.wascooked = gettime();
       } else {
         self.wascooked = undefined;
       }
-      self.lastdamagewasfromenemy = isDefined(eattacker) && eattacker != self;
+      self.lastdamagewasfromenemy = isdefined(eattacker) && eattacker != self;
       self globallogic_player::giveattackerandinflictorownerassist(eattacker, einflictor, idamage, smeansofdeath, weapon);
       self finishactordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, surfacetype, vsurfacenormal);
     }
-    if(isDefined(eattacker) && eattacker != self) {
-      if(weapon.name != "artillery" && (!isDefined(einflictor) || !isai(einflictor) || !isDefined(einflictor.controlled) || einflictor.controlled)) {
+    if(isdefined(eattacker) && eattacker != self) {
+      if(weapon.name != "artillery" && (!isdefined(einflictor) || !isai(einflictor) || !isdefined(einflictor.controlled) || einflictor.controlled)) {
         if(idamage > 0 && shitloc !== "riotshield") {
           eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon, self);
         }
@@ -175,12 +175,12 @@ function callback_actorkilled(einflictor, attacker, idamage, smeansofdeath, weap
   if(game["state"] == "postgame") {
     return;
   }
-  if(isai(attacker) && isDefined(attacker.script_owner)) {
+  if(isai(attacker) && isdefined(attacker.script_owner)) {
     if(attacker.script_owner.team != self.team) {
       attacker = attacker.script_owner;
     }
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
+  if(attacker.classname == "script_vehicle" && isdefined(attacker.owner)) {
     attacker = attacker.owner;
   }
   _gadget_clone::processclonescoreevent(self, attacker, weapon);

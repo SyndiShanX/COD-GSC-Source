@@ -31,9 +31,8 @@ subclass_militia() {
   self.canflank = 1;
 
   if(isDefined(level.randomizemilitiaarray) && level.randomizemilitiaarray) {
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       setup_militia_anim_array();
-    }
   } else
     setup_militia_anim_array();
 }

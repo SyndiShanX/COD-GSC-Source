@@ -11,16 +11,16 @@
 #namespace rotating_object;
 
 function autoexec __init__sytem__() {
-  system::register("rotating_object", &__init__, undefined, undefined);
+  system::register("rotating_object", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect(&main);
+  callback::on_localclient_connect( & main);
 }
 
 function main(localclientnum) {
-  rotating_objects = getEntArray(localclientnum, "rotating_object", "targetname");
-  array::thread_all(rotating_objects, &rotating_object_think);
+  rotating_objects = getentarray(localclientnum, "rotating_object", "targetname");
+  array::thread_all(rotating_objects, & rotating_object_think);
 }
 
 function rotating_object_think() {
@@ -30,10 +30,10 @@ function rotating_object_think() {
   direction = 360;
   revolutions = 100;
   rotate_time = 12;
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     axis = self.script_noteworthy;
   }
-  if(isDefined(self.script_float)) {
+  if(isdefined(self.script_float)) {
     rotate_time = self.script_float;
   }
   if(rotate_time == 0) {
@@ -44,7 +44,7 @@ function rotating_object_think() {
     rotate_time = rotate_time * -1;
   }
   angles = self.angles;
-  while(true) {
+  while (true) {
     switch (axis) {
       case "roll": {
         self rotateroll(direction * revolutions, rotate_time * revolutions);

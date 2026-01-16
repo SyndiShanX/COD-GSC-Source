@@ -12,6 +12,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_zombie_speed_changes;
 
 autoexec __init__system__() {
@@ -65,7 +66,7 @@ function_fe65f5a6(var_b7358df3, e_player, n_timeout = 1) {
   self endon(#"death");
   self.var_cda2fa8 = 1;
 
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== # "zombie_dog") {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== #"zombie_dog") {
     self waittill(#"completed_emerging_into_playable_area");
   }
 

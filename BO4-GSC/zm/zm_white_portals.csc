@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_fasttravel;
+
 #namespace zm_white_portals;
 
 init() {
@@ -29,7 +30,7 @@ main() {
     util::waitforclient(localclientnum);
   }
 
-  level._effect[# "fasttravel_end"] = # "tools/fx_null";
+  level._effect[#"fasttravel_end"] = #"tools/fx_null";
 
   if(!isDefined(level.var_22677da8)) {
     level.var_22677da8 = [];
@@ -92,18 +93,18 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[# "portal_ready"] = # "maps/zm_office/fx8_teleporter_ready";
-  level._effect[# "portal_cooldown"] = # "hash_7793c4c65b08e6ed";
-  level._effect[# "hash_32b0f959e6b81272"] = # "hash_4860741425dc1daa";
-  level._effect[# "hash_44687d6082f9a0a4"] = # "hash_a4954ed961d6327";
-  level._effect[# "hash_2e43973bc23c661d"] = # "hash_28fc28160d26395e";
-  level._effect[# "hash_69091fb60c4fb574"] = # "hash_35e8a88a4a4563b4";
-  level._effect[# "hash_690922b60c4fba8d"] = # "hash_205d49f043463dd2";
-  level._effect[# "hash_690921b60c4fb8da"] = # "hash_19301646fb93e04c";
-  level._effect[# "hash_3ae2cb0d50ae8e3e"] = # "hash_2cafcfa899f12c0";
-  level._effect[# "teleport_depart"] = # "hash_1a6b5072e162ccd4";
-  level._effect[# "teleport_arrive"] = # "hash_50655ac7dc942305";
-  level._effect[# "map_indicator"] = # "hash_62d58a4d86948967";
+  level._effect[#"portal_ready"] = #"maps/zm_office/fx8_teleporter_ready";
+  level._effect[#"portal_cooldown"] = #"hash_7793c4c65b08e6ed";
+  level._effect[#"hash_32b0f959e6b81272"] = #"hash_4860741425dc1daa";
+  level._effect[#"hash_44687d6082f9a0a4"] = #"hash_a4954ed961d6327";
+  level._effect[#"hash_2e43973bc23c661d"] = #"hash_28fc28160d26395e";
+  level._effect[#"hash_69091fb60c4fb574"] = #"hash_35e8a88a4a4563b4";
+  level._effect[#"hash_690922b60c4fba8d"] = #"hash_205d49f043463dd2";
+  level._effect[#"hash_690921b60c4fb8da"] = #"hash_19301646fb93e04c";
+  level._effect[#"hash_3ae2cb0d50ae8e3e"] = #"hash_2cafcfa899f12c0";
+  level._effect[#"teleport_depart"] = #"hash_1a6b5072e162ccd4";
+  level._effect[#"teleport_arrive"] = #"hash_50655ac7dc942305";
+  level._effect[#"map_indicator"] = #"hash_62d58a4d86948967";
 }
 
 function_3ad8c656() {
@@ -126,12 +127,12 @@ function_38a241a1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_69108708(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   println("<dev string:x68>", localclientnum);
-  util::playFXOnTag(localclientnum, level._effect[# "teleport_depart"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"teleport_depart"], self, "tag_origin");
 }
 
 function_98cff177(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   println("<dev string:x90>", localclientnum);
-  util::playFXOnTag(localclientnum, level._effect[# "teleport_arrive"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"teleport_arrive"], self, "tag_origin");
 }
 
 function_e4ea441(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -141,22 +142,22 @@ function_e4ea441(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
   switch (newval) {
     case 1:
-      self.effect_id = util::playFXOnTag(localclientnum, level._effect[# "hash_69091fb60c4fb574"], self, "tag_origin");
+      self.effect_id = util::playFXOnTag(localclientnum, level._effect[#"hash_69091fb60c4fb574"], self, "tag_origin");
       self.var_81884612 = self playLoopSound(#"evt_teleporter_loop", 1.75);
       break;
     case 2:
-      self.effect_id = util::playFXOnTag(localclientnum, level._effect[# "hash_690922b60c4fba8d"], self, "tag_origin");
+      self.effect_id = util::playFXOnTag(localclientnum, level._effect[#"hash_690922b60c4fba8d"], self, "tag_origin");
       self.var_81884612 = self playLoopSound(#"evt_teleporter_loop", 1.75);
       break;
     case 3:
-      self.effect_id = util::playFXOnTag(localclientnum, level._effect[# "hash_690921b60c4fb8da"], self, "tag_origin");
+      self.effect_id = util::playFXOnTag(localclientnum, level._effect[#"hash_690921b60c4fb8da"], self, "tag_origin");
       self.var_81884612 = self playLoopSound(#"evt_teleporter_loop", 1.75);
       break;
     case 4:
-      self.effect_id = util::playFXOnTag(localclientnum, level._effect[# "hash_44687d6082f9a0a4"], self, "tag_origin");
+      self.effect_id = util::playFXOnTag(localclientnum, level._effect[#"hash_44687d6082f9a0a4"], self, "tag_origin");
       break;
     case 5:
-      self.effect_id = util::playFXOnTag(localclientnum, level._effect[# "hash_2e43973bc23c661d"], self, "tag_origin");
+      self.effect_id = util::playFXOnTag(localclientnum, level._effect[#"hash_2e43973bc23c661d"], self, "tag_origin");
       break;
   }
 }
@@ -173,12 +174,12 @@ portal_ready_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(newval > 1) {
-    var_dabe3ecb.effect_id = util::playFXOnTag(localclientnum, level._effect[# "portal_ready"], var_dabe3ecb, "tag_origin");
+    var_dabe3ecb.effect_id = util::playFXOnTag(localclientnum, level._effect[#"portal_ready"], var_dabe3ecb, "tag_origin");
     return;
   }
 
   if(newval == 1) {
-    var_dabe3ecb.effect_id = util::playFXOnTag(localclientnum, level._effect[# "portal_cooldown"], var_dabe3ecb, "tag_origin");
+    var_dabe3ecb.effect_id = util::playFXOnTag(localclientnum, level._effect[#"portal_cooldown"], var_dabe3ecb, "tag_origin");
   }
 }
 

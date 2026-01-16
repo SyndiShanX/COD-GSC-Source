@@ -6,12 +6,10 @@
 #include maps\mp\_utility;
 
 init() {
-  if(!isGameRepEnabled()) {
+  if(!isGameRepEnabled())
     return;
-  }
-  if(isGameRepInitialized()) {
+  if(isGameRepInitialized())
     return;
-  }
   game["gameRepInitialized"] = true;
   game["gameRep"]["players"] = [];
   game["gameRep"]["playerNames"] = [];
@@ -20,9 +18,8 @@ init() {
   gameRepInitializeParams();
 }
 isGameRepInitialized() {
-  if(!isDefined(game["gameRepInitialized"]) || !game["gameRepInitialized"]) {
+  if(!isDefined(game["gameRepInitialized"]) || !game["gameRepInitialized"])
     return false;
-  }
   return true;
 }
 isGameRepEnabled() {
@@ -90,13 +87,12 @@ gameRepInitializeParams() {
   game["gameRep"]["gameLimit"]["default"]["splitscreen"] = 8;
 }
 gameRepPlayerConnected() {
-  if(!isGameRepEnabled()) {
+  if(!isGameRepEnabled())
     return;
-  }
   name = self.name;
   if(!isDefined(game["gameRep"]["players"][name])) {
     game["gameRep"]["players"][name] = [];
-    for(j = 0; j < game["gameRep"]["params"].size; j++) {
+    for (j = 0; j < game["gameRep"]["params"].size; j++) {
       paramName = game["gameRep"]["params"][j];
       game["gameRep"]["players"][name][paramName] = 0;
     }
@@ -113,9 +109,8 @@ gameRepPlayerConnected() {
   }
 }
 gameRepPlayerDisconnected() {
-  if(!isGameRepEnabled()) {
+  if(!isGameRepEnabled())
     return;
-  }
   name = self.name;
   self gameRepUpdateNonPersistentPlayerInformation();
   self gameRepUpdatePersistentPlayerInformation();
@@ -124,29 +119,25 @@ gameRepPlayerDisconnected() {
 gameRepUpdateNonPersistentPlayerInformation() {
   name = self.name;
   game["gameRep"]["players"][name]["totalTimePlayed"] += self.timePlayed["total"];
-  if(isDefined(self.tacticalInsertionCount)) {
+  if(isDefined(self.tacticalInsertionCount))
     game["gameRep"]["players"][name]["tacticalInsertions"] += self.tacticalInsertionCount;
-  }
 }
 gameRepUpdatePersistentPlayerInformation() {
   name = self.name;
-  if(!isDefined(game["gameRep"]["players"][name])) {
+  if(!isDefined(game["gameRep"]["players"][name]))
     return;
-  }
-  if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0) {
+  if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0)
     timePlayed = game["gameRep"]["players"][name]["totalTimePlayed"];
-  } else {
+  else
     timePlayed = 1;
-  }
   game["gameRep"]["players"][name]["score"] += self.score;
   game["gameRep"]["players"][name]["scorePerMin"] = int(game["gameRep"]["players"][name]["score"] / (timePlayed / 60));
   game["gameRep"]["players"][name]["kills"] += self.kills;
   game["gameRep"]["players"][name]["deaths"] += self.deaths;
-  if(game["gameRep"]["players"][name]["deaths"] != 0) {
+  if(game["gameRep"]["players"][name]["deaths"] != 0)
     game["gameRep"]["players"][name]["killDeathRatio"] = int((game["gameRep"]["players"][name]["kills"] / game["gameRep"]["players"][name]["deaths"]) * 100);
-  } else {
+  else
     game["gameRep"]["players"][name]["killDeathRatio"] = game["gameRep"]["players"][name]["kills"] * 100;
-  }
   game["gameRep"]["players"][name]["plants"] += self.plants;
   game["gameRep"]["players"][name]["defuses"] += self.defuses;
   game["gameRep"]["players"][name]["captures"] += self.captures;
@@ -154,32 +145,27 @@ gameRepUpdatePersistentPlayerInformation() {
   game["gameRep"]["players"][name]["xp"] += self.pers["summary"]["xp"];
 }
 getParamValueForPlayer(playerName, paramName) {
-  if(isDefined(game["gameRep"]["players"][playerName][paramName])) {
+  if(isDefined(game["gameRep"]["players"][playerName][paramName]))
     return game["gameRep"]["players"][playerName][paramName];
-  }
   assertmsg("Unknown parameter " + paramName + "for individual player");
 }
 isGameRepParamValid(paramName) {
   gametype = level.gametype;
-  if(!isDefined(game["gameRep"]["gameLimit"][gametype][paramName]) && !isDefined(game["gameRep"]["gameLimit"]["default"][paramName])) {
+  if(!isDefined(game["gameRep"]["gameLimit"][gametype][paramName]) && !isDefined(game["gameRep"]["gameLimit"]["default"][paramName]))
     return false;
-  }
   return true;
 }
 isGameRepParamIgnoredForReporting(paramName) {
-  if(isDefined(game["gameRep"]["ignoreParams"][paramName])) {
+  if(isDefined(game["gameRep"]["ignoreParams"][paramName]))
     return true;
-  }
   return false;
 }
 getGameRepParamLimit(paramName) {
   gametype = level.gametype;
-  if(isDefined(game["gameRep"]["gameLimit"][gametype][paramName])) {
+  if(isDefined(game["gameRep"]["gameLimit"][gametype][paramName]))
     return game["gameRep"]["gameLimit"][gametype][paramName];
-  }
-  if(isDefined(game["gameRep"]["gameLimit"]["default"][paramName])) {
+  if(isDefined(game["gameRep"]["gameLimit"]["default"][paramName]))
     return game["gameRep"]["gameLimit"]["default"][paramName];
-  }
   assertmsg("Default values for parameter " + paramName + " is not defined.");
 }
 setMaximumParamValueForCurrentGame(paramName, value) {
@@ -192,38 +178,35 @@ setMaximumParamValueForCurrentGame(paramName, value) {
   }
 }
 gameRepUpdateInformationForRound() {
-  if(!isGameRepEnabled()) {
+  if(!isGameRepEnabled())
     return;
-  }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player gameRepUpdateNonPersistentPlayerInformation();
   }
 }
 gameRepAnalyzeAndReport() {
-  if(!isGameRepEnabled()) {
+  if(!isGameRepEnabled())
     return;
-  }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player gameRepUpdatePersistentPlayerInformation();
   }
   splitscreenPlayerCount = 0;
-  for(i = 0; i < game["gameRep"]["playerNames"].size; i++) {
+  for (i = 0; i < game["gameRep"]["playerNames"].size; i++) {
     playerName = game["gameRep"]["playerNames"][i];
-    for(j = 0; j < game["gameRep"]["params"].size; j++) {
+    for (j = 0; j < game["gameRep"]["params"].size; j++) {
       paramName = game["gameRep"]["params"][j];
-      if(isGameRepParamValid(paramName)) {
+      if(isGameRepParamValid(paramName))
         setMaximumParamValueForCurrentGame(paramName, getParamValueForPlayer(playerName, paramName));
-      }
     }
     paramName = "splitscreen";
     splitscreenPlayerCount += getParamValueForPlayer(playerName, paramName);
     setMaximumParamValueForCurrentGame(paramName, splitscreenPlayerCount);
   }
-  for(j = 0; j < game["gameRep"]["params"].size; j++) {
+  for (j = 0; j < game["gameRep"]["params"].size; j++) {
     paramName = game["gameRep"]["params"][j];
     if(isGameRepParamValid(paramName) && game["gameRep"]["max"][paramName] >= getGameRepParamLimit(paramName)) {
       gameRepPrepareAndReportFilm();
@@ -238,16 +221,14 @@ gameRepAnalyzeAndReport() {
 }
 gameRepPrepareAndReportFilm(name) {
   columnIndex = 1;
-  for(j = 0; j < game["gameRep"]["params"].size; j++) {
+  for (j = 0; j < game["gameRep"]["params"].size; j++) {
     paramName = game["gameRep"]["params"][j];
-    if(isGameRepParamIgnoredForReporting(paramName)) {
+    if(isGameRepParamIgnoredForReporting(paramName))
       continue;
-    }
-    if(isDefined(game["gameRep"]["max"][paramName])) {
+    if(isDefined(game["gameRep"]["max"][paramName]))
       reportFilm(columnIndex, game["gameRep"]["max"][paramName]);
-    } else {
+    else
       reportFilm(columnIndex, 0);
-    }
     columnIndex++;
   }
 }

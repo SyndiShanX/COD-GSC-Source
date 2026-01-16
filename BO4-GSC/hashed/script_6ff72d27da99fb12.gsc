@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace namespace_8cefe82f;
 
 autoexec __init__system__() {
@@ -48,7 +49,7 @@ private on_end(round_reset) {
 
 private function_7650d9fb(n_timer, var_f97d1a30) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "hash_6223843ef1e3c6de", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"hash_6223843ef1e3c6de", #"host_migration_begin");
 
   if(!(isDefined(var_f97d1a30) && var_f97d1a30)) {
     wait 12;
@@ -61,7 +62,7 @@ private function_7650d9fb(n_timer, var_f97d1a30) {
     }
 
     self start_timer(n_timer, var_f97d1a30);
-    s_waitresult = self waittilltimeout(n_timer, # "fasttravel_bought");
+    s_waitresult = self waittilltimeout(n_timer, #"fasttravel_bought");
     self stop_timer();
 
     if(s_waitresult._notify == "timeout") {
@@ -87,7 +88,7 @@ private on_player_spawned() {
 private start_timer(timeout, var_f97d1a30) {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
-    level.var_f995ece6 zm_trial_timer::set_timer_text(self, # "hash_459951bdd5145bf0");
+    level.var_f995ece6 zm_trial_timer::set_timer_text(self, #"hash_459951bdd5145bf0");
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, 1);
     self zm_trial_util::start_timer(timeout);
     self thread function_a0f0109f(timeout, var_f97d1a30);
@@ -99,8 +100,8 @@ function_a0f0109f(timeout, var_f97d1a30) {
     return;
   }
 
-  self endon(#"disconnect", # "hash_2a79adac1fd03c09");
-  level endon(#"hash_7646638df88a3656", # "end_game", # "host_migration_begin");
+  self endon(#"disconnect", #"hash_2a79adac1fd03c09");
+  level endon(#"hash_7646638df88a3656", #"end_game", #"host_migration_begin");
 
   if(!isDefined(self.n_time_remaining)) {
     self.n_time_remaining = timeout;
@@ -123,7 +124,7 @@ private stop_timer() {
 }
 
 private function_ff66b979() {
-  level endon(#"end_round", # "host_migration_begin");
+  level endon(#"end_round", #"host_migration_begin");
 
   foreach(player in getplayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {

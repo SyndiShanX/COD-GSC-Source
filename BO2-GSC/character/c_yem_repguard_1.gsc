@@ -7,7 +7,7 @@
 #include xmodelalias\c_yem_repguard_head_als;
 
 main() {
-  self setModel("c_yem_repguard_body");
+  self setmodel("c_yem_repguard_body");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_yem_repguard_head_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_yem_repguard_gear1";

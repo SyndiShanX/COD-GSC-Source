@@ -17,7 +17,7 @@
 #namespace collectibles;
 
 function autoexec __init__sytem__() {
-  system::register("bzm_collectibles", &__init__, &__main__, undefined);
+  system::register("bzm_collectibles", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -43,7 +43,7 @@ function function_ab60ef67() {
   level.var_8a9d11b = 0;
   level.var_7e93a355 = 0;
   level.collectibles = [];
-  mdl_collectibles = getEntArray("collectible", "script_noteworthy");
+  mdl_collectibles = getentarray("collectible", "script_noteworthy");
   if(mdl_collectibles.size <= 1) {
     return;
   }
@@ -63,7 +63,7 @@ function function_ab60ef67() {
     collectible = function_8765a33c(mdl_collectible);
     array::add(level.collectibles, collectible, 0);
   }
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function private function_b963f25(mdl_collectible) {
@@ -71,7 +71,7 @@ function private function_b963f25(mdl_collectible) {
   mdl_collectible.offset = vectorscale((0, 0, 1), 5);
   mdl_collectible.origin = mdl_collectible.origin + vectorscale((0, 0, 1), 35);
   var_3efe1e22 = level.var_3efe1e22[mdl_collectible.model];
-  if(isDefined(var_3efe1e22)) {
+  if(isdefined(var_3efe1e22)) {
     mdl_collectible.radius = var_3efe1e22.radius;
     mdl_collectible.offset = mdl_collectible.offset + var_3efe1e22.offset;
   }
@@ -90,23 +90,23 @@ function function_8765a33c(mdl_collectible) {
   trigger_use setteamfortrigger("none");
   trigger_use setcursorhint("HINT_INTERACTIVE_PROMPT");
   trigger_use sethintstring(&"COLLECTIBLE_PICK_UP");
-  var_837a6185 = gameobjects::create_use_object("any", trigger_use, array(mdl_collectible), (0, 0, 0), &"cp_magic_song");
+  var_837a6185 = gameobjects::create_use_object("any", trigger_use, array(mdl_collectible), (0, 0, 0), & "cp_magic_song");
   var_837a6185 gameobjects::allow_use("any");
   var_837a6185 gameobjects::set_use_time(0.35);
   var_837a6185 gameobjects::set_owner_team("allies");
   var_837a6185 gameobjects::set_visible_team("any");
   var_837a6185.mdl_collectible = mdl_collectible;
-  var_837a6185.onuse = &onuse;
-  var_837a6185.onbeginuse = &onbeginuse;
+  var_837a6185.onuse = & onuse;
+  var_837a6185.onbeginuse = & onbeginuse;
   var_837a6185.single_use = 1;
   var_837a6185.origin = mdl_collectible.origin;
   var_837a6185.angles = var_837a6185.angles;
-  if(isDefined(mdl_collectible.script_int)) {
+  if(isdefined(mdl_collectible.script_int)) {
     var_837a6185.index = mdl_collectible.script_int - 1;
   } else {
     var_837a6185.index = (int(getsubstr(mdl_collectible.model, mdl_collectible.model.size - 2))) - 1;
   }
-  mdl_collectible setModel("p7_zm_teddybear_sitting");
+  mdl_collectible setmodel("p7_zm_teddybear_sitting");
   mdl_collectible clientfield::set("powerup_on_fx", 2);
   mdl_collectible setscale(0.7);
   level thread debug_draw_line(var_837a6185.origin);
@@ -209,14 +209,14 @@ function onuse(e_player) {
         break;
       }
     }
-    if(isDefined(state)) {
+    if(isdefined(state)) {
       iprintln("" + unlockname);
       music::setmusicstate(state);
       level.bonuszm_musicoverride = 1;
       level thread function_d789d2e(state);
     }
     foreach(player in level.players) {
-      if(isDefined(unlockname)) {
+      if(isdefined(unlockname)) {
         player unlocksongbyalias(unlockname);
       }
     }
@@ -226,7 +226,7 @@ function onuse(e_player) {
 function function_d789d2e(state) {
   aliasname = ("mus_" + state) + "_intro";
   playbacktime = soundgetplaybacktime(aliasname);
-  if(!isDefined(playbacktime) || playbacktime <= 0) {
+  if(!isdefined(playbacktime) || playbacktime <= 0) {
     waittime = 1;
   } else {
     waittime = playbacktime * 0.001;
@@ -238,16 +238,16 @@ function function_d789d2e(state) {
 function onbeginuse(e_player) {}
 
 function debug_draw_line(origin1) {
-  while(true) {
+  while (true) {
     recordline(origin1, origin1 + vectorscale((0, 0, 1), 2000), (1, 1, 1), "");
     wait(0.05);
   }
 }
 
 function function_7c315d3a() {
-  while(true) {
+  while (true) {
     level waittill("scene_sequence_started");
-    if(isDefined(level.bonuszm_musicoverride) && level.bonuszm_musicoverride) {
+    if(isdefined(level.bonuszm_musicoverride) && level.bonuszm_musicoverride) {
       level clientfield::set("cpzm_song_suppression", 1);
     }
     level waittill("scene_sequence_ended");

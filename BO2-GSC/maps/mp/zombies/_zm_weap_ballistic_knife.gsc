@@ -8,9 +8,8 @@
 #include maps\mp\zombies\_zm_stats;
 
 init() {
-  if(!isDefined(level.ballistic_knife_autorecover)) {
+  if(!isDefined(level.ballistic_knife_autorecover))
     level.ballistic_knife_autorecover = 1;
-  }
 
   if(isDefined(level._uses_retrievable_ballisitic_knives) && level._uses_retrievable_ballisitic_knives == 1) {
     precachemodel("t5_weapon_ballistic_knife_projectile");
@@ -28,18 +27,17 @@ on_spawn(watcher, player) {
 
   if(isDefined(endpos)) {
     retrievable_model = spawn("script_model", endpos);
-    retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
+    retrievable_model setmodel("t5_weapon_ballistic_knife_blade_retrieve");
     retrievable_model setowner(player);
     retrievable_model.owner = player;
     retrievable_model.angles = angles;
     retrievable_model.name = watcher.weapon;
 
     if(isDefined(prey)) {
-      if(isplayer(prey) && player.team == prey.team) {
+      if(isplayer(prey) && player.team == prey.team)
         isfriendly = 1;
-      } else if(isai(prey) && player.team == prey.team) {
+      else if(isai(prey) && player.team == prey.team)
         isfriendly = 1;
-      }
 
       if(!isfriendly) {
         retrievable_model linkto(prey, bone);
@@ -52,17 +50,15 @@ on_spawn(watcher, player) {
 
     watcher.objectarray[watcher.objectarray.size] = retrievable_model;
 
-    if(isfriendly) {
+    if(isfriendly)
       retrievable_model waittill("stationary");
-    }
 
     retrievable_model thread drop_knives_to_ground(player);
 
-    if(isfriendly) {
+    if(isfriendly)
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    } else {
+    else
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
-    }
 
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
@@ -72,7 +68,7 @@ wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
   wait 2;
-  self setModel("t5_weapon_ballistic_knife_blade_retrieve");
+  self setmodel("t5_weapon_ballistic_knife_blade_retrieve");
 }
 
 on_spawn_retrieve_trigger(watcher, player) {
@@ -107,27 +103,24 @@ on_spawn_retrieve_trigger(watcher, player) {
 
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
-  hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
+  hint_string = & "WEAPON_BALLISTIC_KNIFE_PICKUP";
 
-  if(isDefined(hint_string)) {
+  if(isDefined(hint_string))
     pickup_trigger sethintstring(hint_string);
-  } else {
+  else
     pickup_trigger sethintstring(&"GENERIC_PICKUP");
-  }
 
   pickup_trigger setteamfortrigger(player.team);
   player clientclaimtrigger(pickup_trigger);
   pickup_trigger enablelinkto();
 
-  if(isDefined(prey)) {
+  if(isDefined(prey))
     pickup_trigger linkto(prey);
-  } else {
+  else
     pickup_trigger linkto(retrievable_model);
-  }
 
-  if(isDefined(level.knife_planted)) {
+  if(isDefined(level.knife_planted))
     [[level.knife_planted]](retrievable_model, pickup_trigger, prey);
-  }
 
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
@@ -171,21 +164,18 @@ watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundon
     total_ammo = ammo_stock + ammo_clip;
     hasreloaded = 1;
 
-    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon) {
+    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon)
       hasreloaded = 0;
-    }
 
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
     if(autorecover || player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() || is_true(trigger.force_pickup)) {
-      if(isDefined(playersoundonuse)) {
+      if(isDefined(playersoundonuse))
         player playlocalsound(playersoundonuse);
-      }
 
-      if(isDefined(npcsoundonuse)) {
-        player playSound(npcsoundonuse);
-      }
+      if(isDefined(npcsoundonuse))
+        player playsound(npcsoundonuse);
 
       player thread[[callback]](weapon, model, trigger);
       break;
@@ -200,9 +190,9 @@ pick_up(weapon, model, trigger) {
     if(current_weapon != weapon) {
       clip_ammo = self getweaponammoclip(weapon);
 
-      if(!clip_ammo) {
+      if(!clip_ammo)
         self setweaponammoclip(weapon, 1);
-      } else {
+      else {
         new_ammo_stock = self getweaponammostock(weapon) + 1;
         self setweaponammostock(weapon, new_ammo_stock);
       }
@@ -220,9 +210,8 @@ pick_up(weapon, model, trigger) {
 
 destroy_ent() {
   if(isDefined(self)) {
-    if(isDefined(self.glowing_model)) {
+    if(isDefined(self.glowing_model))
       self.glowing_model delete();
-    }
 
     self delete();
   }

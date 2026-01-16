@@ -10,31 +10,31 @@
 #namespace fx;
 
 function autoexec __init__sytem__() {
-  system::register("fx", &__init__, undefined, undefined);
+  system::register("fx", & __init__, undefined, undefined);
 }
 
 function __init__() {}
 
 function set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglesToForward(self.v["angles"]);
+  self.v["forward"] = anglestoforward(self.v["angles"]);
 }
 
 function get(fx) {
-  assert(isDefined(level._effect[fx]), ("" + fx) + "");
+  assert(isdefined(level._effect[fx]), ("" + fx) + "");
   return level._effect[fx];
 }
 
 function create_effect(type, fxid) {
   ent = undefined;
-  if(!isDefined(level.createfxent)) {
+  if(!isdefined(level.createfxent)) {
     level.createfxent = [];
   }
   if(type == "exploder") {
-    ent = spawnStruct();
+    ent = spawnstruct();
   } else {
-    if(!isDefined(level._fake_createfx_struct)) {
-      level._fake_createfx_struct = spawnStruct();
+    if(!isdefined(level._fake_createfx_struct)) {
+      level._fake_createfx_struct = spawnstruct();
     }
     ent = level._fake_createfx_struct;
   }
@@ -62,27 +62,27 @@ function create_oneshot_effect(fxid) {
 
 function play(str_fx, v_origin = (0, 0, 0), v_angles = (0, 0, 0), time_to_delete_or_notify, b_link_to_self = 0, str_tag, b_no_cull, b_ignore_pause_world) {
   self notify(str_fx);
-  if(!isDefined(time_to_delete_or_notify) || (!isstring(time_to_delete_or_notify) && time_to_delete_or_notify == -1) && (isDefined(b_link_to_self) && b_link_to_self) && isDefined(str_tag)) {
-    playFXOnTag(get(str_fx), self, str_tag, b_ignore_pause_world);
+  if(!isdefined(time_to_delete_or_notify) || (!isstring(time_to_delete_or_notify) && time_to_delete_or_notify == -1) && (isdefined(b_link_to_self) && b_link_to_self) && isdefined(str_tag)) {
+    playfxontag(get(str_fx), self, str_tag, b_ignore_pause_world);
     return self;
   }
-  if(isDefined(time_to_delete_or_notify)) {
+  if(isdefined(time_to_delete_or_notify)) {
     m_fx = util::spawn_model("tag_origin", v_origin, v_angles);
-    if(isDefined(b_link_to_self) && b_link_to_self) {
-      if(isDefined(str_tag)) {
+    if(isdefined(b_link_to_self) && b_link_to_self) {
+      if(isdefined(str_tag)) {
         m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
         m_fx linkto(self);
       }
     }
-    if(isDefined(b_no_cull) && b_no_cull) {
+    if(isdefined(b_no_cull) && b_no_cull) {
       m_fx setforcenocull();
     }
-    playFXOnTag(get(str_fx), m_fx, "tag_origin", b_ignore_pause_world);
+    playfxontag(get(str_fx), m_fx, "tag_origin", b_ignore_pause_world);
     m_fx thread _play_fx_delete(self, time_to_delete_or_notify);
     return m_fx;
   }
-  playFX(get(str_fx), v_origin, anglesToForward(v_angles), anglestoup(v_angles), b_ignore_pause_world);
+  playfx(get(str_fx), v_origin, anglestoforward(v_angles), anglestoup(v_angles), b_ignore_pause_world);
 }
 
 function _play_fx_delete(ent, time_to_delete_or_notify = -1) {
@@ -95,7 +95,7 @@ function _play_fx_delete(ent, time_to_delete_or_notify = -1) {
       ent waittill("death");
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }

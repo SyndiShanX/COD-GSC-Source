@@ -153,30 +153,25 @@ checkRoomForAnim(stepAnim) {
 
 shouldSideStep() {
   if(canSideStep() && IsPlayer(self.enemy) && self.enemy IsLookingAt(self)) {
-    if(self.zombie_move_speed != "sprint" || RandomFloat(1) < level.SIDE_STEP_CHANCE) {
+    if(self.zombie_move_speed != "sprint" || RandomFloat(1) < level.SIDE_STEP_CHANCE)
       return "step";
-    } else {
+    else
       return "roll";
-    }
   }
   return "none";
 }
 
 canSideStep() {
   if(!isDefined(self.zombie_can_sidestep) || !self.zombie_can_sidestep) {
-    if(!issubstr(self.classname, "zombie_spetznaz")) {
+    if(!issubstr(self.classname, "zombie_spetznaz"))
       return false;
-    }
   }
-  if(GetTime() - self.a.lastSideStepTime < level.REACTION_INTERVAL) {
+  if(GetTime() - self.a.lastSideStepTime < level.REACTION_INTERVAL)
     return false;
-  }
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
-  if(self.a.pose != "stand") {
+  if(self.a.pose != "stand")
     return false;
-  }
   distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.MIN_REACTION_DIST_SQ) {
     return false;
@@ -208,15 +203,12 @@ canForwardStep() {
   if(!isDefined(self.zombie_can_forwardstep) || !self.zombie_can_forwardstep) {
     return false;
   }
-  if(GetTime() - self.a.lastSideStepTime < level.FORWARD_REACTION_INTERVAL) {
+  if(GetTime() - self.a.lastSideStepTime < level.FORWARD_REACTION_INTERVAL)
     return false;
-  }
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
-  if(self.a.pose != "stand") {
+  if(self.a.pose != "stand")
     return false;
-  }
   distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.FORWARD_MIN_REACTION_DIST_SQ) {
     return false;

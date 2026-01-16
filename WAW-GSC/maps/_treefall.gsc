@@ -4,8 +4,8 @@
 *****************************************************/
 
 main() {
-  treetrigs = getEntArray("treetrig", "targetname");
-  for(i = 0; i < treetrigs.size; i++) {
+  treetrigs = getentarray("treetrig", "targetname");
+  for (i = 0; i < treetrigs.size; i++) {
     treetrigs[i] thread treefall();
   }
 }

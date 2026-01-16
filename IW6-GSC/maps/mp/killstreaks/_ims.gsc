@@ -22,9 +22,9 @@ init() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
-  config.placeString = &"KILLSTREAKS_HINTS_IMS_PLACE";
-  config.cannotPlaceString = &"KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
+  config.hintString = & "KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
+  config.placeString = & "KILLSTREAKS_HINTS_IMS_PLACE";
+  config.cannotPlaceString = & "KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
   config.streakName = "ims";
   config.splashName = "used_ims";
   config.maxHealth = 1000;
@@ -69,9 +69,8 @@ init() {
 
 tryUseIMS(lifeId, streakName) {
   prevIMSList = [];
-  if(isDefined(self.imsList)) {
+  if(isDefined(self.imsList))
     prevIMSList = self.imsList;
-  }
 
   result = self giveIMS("ims");
 
@@ -79,12 +78,10 @@ tryUseIMS(lifeId, streakName) {
     result = false;
 
     if(isDefined(self.imsList)) {
-      if(!prevIMSList.size && self.imsList.size) {
+      if(!prevIMSList.size && self.imsList.size)
         result = true;
-      }
-      if(prevIMSList.size && prevIMSList[0] != self.imsList[0]) {
+      if(prevIMSList.size && prevIMSList[0] != self.imsList[0])
         result = true;
-      }
     }
   }
 
@@ -136,11 +133,10 @@ setCarryingIMS(imsForPlayer, allowCancel) {
   }
 
   for(;;) {
-    if(is_aliens()) {
+    if(is_aliens())
       result = waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
-    } else {
+    else
       result = waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement");
-    }
 
     if(result == "cancel_ims" || result == "force_cancel_placement" || result == "player_action_slot_restart") {
       if(!allowCancel && result == "cancel_ims") {
@@ -358,13 +354,11 @@ ims_handleDeath() {
     self notify("deleting");
   }
 
-  if(isDefined(self.objIdFriendly)) {
+  if(isDefined(self.objIdFriendly))
     _objective_delete(self.objIdFriendly);
-  }
 
-  if(isDefined(self.objIdEnemy)) {
+  if(isDefined(self.objIdEnemy))
     _objective_delete(self.objIdEnemy);
-  }
 
   self maps\mp\gametypes\_weapons::equipmentDeleteVfx();
 
@@ -413,9 +407,8 @@ ims_handleUse() {
     }
     imsForPlayer = createIMSForPlayer(self.imsType, player);
 
-    if(!isDefined(imsForPlayer)) {
+    if(!isDefined(imsForPlayer))
       continue;
-    }
     imsForPlayer.ims = self;
     self ims_setInactive();
     self ims_hideAllParts();
@@ -432,14 +425,12 @@ ims_setPlaced() {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedBy)) {
+  if(isDefined(self.carriedBy))
     self.carriedBy forceUseHintOff();
-  }
   self.carriedBy = undefined;
 
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner.isCarrying = false;
-  }
 
   self.firstPlacement = undefined;
 
@@ -497,9 +488,8 @@ ims_setCancelled(playDestroyVfx) {
 
     if(isDefined(owner.imsList)) {
       foreach(ims in owner.imsList) {
-        if(isDefined(ims.bombSquadModel)) {
+        if(isDefined(ims.bombSquadModel))
           ims.bombSquadModel delete();
-        }
       }
     }
   }
@@ -532,9 +522,8 @@ ims_setCarried(carrier) {
   self thread ims_onCarrierDisconnect(carrier);
   self thread ims_onGameEnded();
   self thread ims_onEnterRide(carrier);
-  if(is_aliens() && isDefined(level.drop_ims_when_grabbed_func)) {
+  if(is_aliens() && isDefined(level.drop_ims_when_grabbed_func))
     self thread[[level.drop_ims_when_grabbed_func]](carrier);
-  }
 
   self notify("carried");
 
@@ -543,9 +532,8 @@ ims_setCarried(carrier) {
     self.ims.carriedBy = carrier;
     self.ims.isPlaced = false;
 
-    if(isDefined(self.ims.bombSquadModel)) {
+    if(isDefined(self.ims.bombSquadModel))
       self.ims.bombSquadModel Hide();
-    }
   }
 }
 
@@ -598,11 +586,10 @@ ims_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced && carrier.team != "spectator") {
+  if(self.canBePlaced && carrier.team != "spectator")
     self thread ims_setPlaced();
-  } else {
+  else
     self ims_setCancelled();
-  }
 }
 
 ims_onCarrierDisconnect(carrier) {
@@ -643,11 +630,10 @@ ims_setActive() {
   owner = self.owner;
   owner ForceUseHintOff();
   if(!is_aliens()) {
-    if(level.teamBased) {
+    if(level.teamBased)
       self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 60));
-    } else {
+    else
       self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 60));
-    }
   }
   self MakeUsable();
   self setCanDamage(true);
@@ -665,11 +651,10 @@ ims_setActive() {
   owner.imsList[0] = self;
 
   foreach(player in level.players) {
-    if(player == owner) {
+    if(player == owner)
       self enablePlayerUse(player);
-    } else {
+    else
       self disablePlayerUse(player);
-    }
   }
 
   if(self.shouldSplash) {
@@ -683,11 +668,10 @@ ims_setActive() {
 
   self.killcam_ents = [];
   for(i = 0; i < self.config.numExplosives; i++) {
-    if(numExplosivesExceedModelCapacity()) {
+    if(numExplosivesExceedModelCapacity())
       TagIndex = shiftIndexForward(i + 1, self.config.numExplosives - CONST_NUM_LID_ON_MODEL);
-    } else {
+    else
       TagIndex = i + 1;
-    }
 
     tag_origin = self GetTagOrigin(self.config.explTagRoot + TagIndex + KS_ATTACH);
     tag_origin_with_pos_offset = self GetTagOrigin(self.config.explTagRoot + TagIndex + KS_ATTACH) + positionOffset;
@@ -702,9 +686,8 @@ ims_setActive() {
 
   lowestZ = results[0];
   for(i = 0; i < results.size; i++) {
-    if(results[i]["position"][2] < lowestZ["position"][2]) {
+    if(results[i]["position"][2] < lowestZ["position"][2])
       lowestZ = results[i];
-    }
   }
 
   self.attackHeightPos = lowestZ["position"] - (0, 0, 20) - self.origin;
@@ -721,9 +704,8 @@ ims_setActive() {
   self ims_Start();
   self thread ims_WatchPlayerConnected();
 
-  foreach(player in level.players) {
-    self thread ims_playerJoinedTeam(player);
-  }
+  foreach(player in level.players)
+  self thread ims_playerJoinedTeam(player);
 
   self thread debug_draw();
 }
@@ -733,9 +715,8 @@ debug_draw() {
 
   while(true) {
     if(GetDvarInt("scr_ims_debug_draw") != 0) {
-      if(isDefined(self.attackTrigger)) {
+      if(isDefined(self.attackTrigger))
         draw_volume(self.attackTrigger, 1.0, (0, 0, 1));
-      }
 
       foreach(player in level.players) {
         if(player.team == self.team) {
@@ -805,24 +786,21 @@ ims_setInactive() {
   self MakeUnusable();
   self FreeEntitySentient();
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
-  }
 
-  if(isDefined(self.attackTrigger)) {
+  if(isDefined(self.attackTrigger))
     self.attackTrigger delete();
-  }
 
   if(isDefined(self.killcam_ents)) {
     foreach(ent in self.killcam_ents) {
       if(isDefined(ent)) {
-        if(isDefined(self.owner) && isDefined(self.owner.imsKillCamEnt) && ent == self.owner.imsKillCamEnt) {
+        if(isDefined(self.owner) && isDefined(self.owner.imsKillCamEnt) && ent == self.owner.imsKillCamEnt)
           continue;
-        } else {
+        else
           ent Delete();
-        }
       }
     }
   }
@@ -836,9 +814,8 @@ ims_setInactive() {
 }
 
 isFriendlyToIMS(ims) {
-  if(level.teamBased && self.team == ims.team) {
+  if(level.teamBased && self.team == ims.team)
     return true;
-  }
 
   return false;
 }
@@ -862,17 +839,15 @@ ims_attackTargets() {
       if(level.teambased && targetEnt.pers["team"] == self.team) {
         continue;
       }
-      if(!isReallyAlive(targetEnt)) {
+      if(!isReallyAlive(targetEnt))
         continue;
-      }
     } else {
       if(isDefined(targetEnt.owner)) {
         if(isDefined(self.owner) && targetEnt.owner == self.owner) {
           continue;
         }
-        if(level.teambased && targetEnt.owner.pers["team"] == self.team) {
+        if(level.teambased && targetEnt.owner.pers["team"] == self.team)
           continue;
-        }
       }
     }
 
@@ -936,9 +911,8 @@ ims_attackTargets() {
 }
 
 fire_sensor(targetEnt, explNum) {
-  if(numExplosivesExceedModelCapacity()) {
+  if(numExplosivesExceedModelCapacity())
     explNum = shiftIndexForward(explNum, self.config.numExplosives - CONST_NUM_LID_ON_MODEL);
-  }
 
   sensor = self.explosive1;
   self.explosive1 = undefined;
@@ -959,15 +933,13 @@ fire_sensor(targetEnt, explNum) {
     killCamEnt = sensor.killCamEnt;
     killCamEnt Unlink();
 
-    if(isDefined(self.owner)) {
+    if(isDefined(self.owner))
       self.owner.imsKillCamEnt = killCamEnt;
-    }
 
     killCamEnt MoveTo(self.attackHeightPos + self.origin + self.config.killCamOffset, self.attackMoveTime, self.attackMoveTime * 0.25, self.attackMoveTime * 0.25);
 
-    if(!numExplosivesExceedModelCapacity()) {
+    if(!numExplosivesExceedModelCapacity())
       killCamEnt thread deleteAfterTime(5.0);
-    }
   }
 
   sensor playSound("ims_launch");
@@ -997,9 +969,8 @@ deleteAfterTime(time) {
 
   level maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(time);
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 ims_timeOut() {
@@ -1014,9 +985,8 @@ ims_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       lifeSpan = max(0, lifeSpan - 1.0);
-    }
   }
 
   self notify("death");
@@ -1065,9 +1035,8 @@ imsCreateExplosiveWithKillCam() {
   }
 
   if(i <= self.config.numExplosives) {
-    if(numExplosivesExceedModelCapacity()) {
+    if(numExplosivesExceedModelCapacity())
       i = shiftIndexForward(i, self.config.numExplosives - CONST_NUM_LID_ON_MODEL);
-    }
 
     expl = self imsCreateExplosive(i);
     expl LinkTo(self);
@@ -1095,9 +1064,8 @@ imsOpenDoor(explNum, config, immediate) {
 imsOpenAllDoors(modelEnt, immediate) {
   numDoors = self.hasExplosiveFired.size;
   if(numDoors > 0) {
-    if(numExplosivesExceedModelCapacity()) {
+    if(numExplosivesExceedModelCapacity())
       numDoors = shiftIndexForward(numDoors, self.config.numExplosives - CONST_NUM_LID_ON_MODEL);
-    }
 
     modelEnt imsOpenDoor(numDoors, self.config, immediate);
   }

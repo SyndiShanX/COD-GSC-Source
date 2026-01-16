@@ -3,6 +3,9 @@
  * Script: mptype\mptype_delta_multicam_assault.gsc
 ****************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   switch (codescripts\character::get_random_character(4)) {
     case 0:

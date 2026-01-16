@@ -14,7 +14,7 @@ function autoexec main() {
   if(sessionmodeiscampaigndeadopsgame() && getdvarint("splitscreen_playerCount") > 2) {
     return;
   }
-  ai::add_ai_spawn_function(&initializenotetrackhandlers);
+  ai::add_ai_spawn_function( & initializenotetrackhandlers);
 }
 
 function private initializenotetrackhandlers(localclientnum) {
@@ -31,11 +31,11 @@ function private addsurfacenotetrackfxhandler(localclientnum, notetrack, surface
 function private handlesurfacenotetrackfx(localclientnum, notetrack, surfacetable) {
   entity = self;
   entity endon("entityshutdown");
-  while(true) {
+  while (true) {
     entity waittill(notetrack);
     fxname = entity getaifxname(localclientnum, surfacetable);
-    if(isDefined(fxname)) {
-      playFX(localclientnum, fxname, entity.origin);
+    if(isdefined(fxname)) {
+      playfx(localclientnum, fxname, entity.origin);
     }
   }
 }

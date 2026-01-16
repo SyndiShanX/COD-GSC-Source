@@ -11,11 +11,10 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_hovercraft_enemy");
   maps\_vehicle::build_deathmodel("vehicle_hovercraft");
 
-  if(var_2 == "script_vehicle_hovercraft_enemy") {
+  if(var_2 == "script_vehicle_hovercraft_enemy")
     maps\_vehicle::build_drive( % hovercraft_enemy_upper_fans, undefined, 0);
-  } else {
+  else
     maps\_vehicle::build_drive( % hovercraft_movement, undefined, 0);
-  }
 
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_rumble("tank_rumble", 0.15, 4.5, 600, 1, 1);
@@ -121,7 +120,9 @@ water_splash() {
   if(!isDefined(self.water_splash_info)) {
     var_2 = spawnStruct();
     self.water_splash_info = var_2;
-    [[self.water_splash_reset_function]](var_2);
+    [
+      [self.water_splash_reset_function]
+    ](var_2);
   } else
     var_2 = self.water_splash_info;
 
@@ -136,13 +137,11 @@ water_splash() {
     if(self vehicle_getspeed() < 1) {
       continue;
     }
-    if(distancesquared(self.origin, level.player getEye()) < 64000000) {
+    if(distancesquared(self.origin, level.player getEye()) < 64000000)
       wait(var_2.splash_delay);
-    }
 
-    for(var_5 = 0; var_5 < var_2.water_tags.size; var_5++) {
+    for(var_5 = 0; var_5 < var_2.water_tags.size; var_5++)
       water_splash_single(var_5);
-    }
 
     var_0 = maps\_vehicle::get_dummy();
 
@@ -179,9 +178,8 @@ water_splash_single(var_0, var_1) {
   var_10 = var_9["surfacetype"];
   self.surfacetype = var_10;
 
-  if(var_10 != "water") {
+  if(var_10 != "water")
     var_1 = 0;
-  }
 
   var_6 = var_9["position"];
 
@@ -195,9 +193,8 @@ water_splash_single(var_0, var_1) {
   if(distancesquared(var_6, level.player getEye()) < 64000000) {
     if(isDefined(self.use_big_splash)) {
       if(var_4 == "TAG_FX_WATER_SPLASH3" || var_4 == "TAG_FX_WATER_SPLASH7") {
-        if(isDefined(var_2.water_fx[var_10 + "_big"])) {
+        if(isDefined(var_2.water_fx[var_10 + "_big"]))
           var_10 = var_10 + "_big";
-        }
       }
     }
 

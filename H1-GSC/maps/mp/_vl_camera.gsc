@@ -5,23 +5,22 @@
 ********************************/
 
 init_camera() {
-  level.dof_tuner = spawnStruct();
+  level.dof_tuner = spawnstruct();
   level.dof_tuner.fstopperunit = 0.25;
   level.dof_tuner.scaler = -0.3;
   level.dof_tuner.fstopbase = 3;
 }
 
 setup_camparams() {
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_0.dof_time = 12;
   var_0.gamelobbygroup_camera_normalz = 507;
   var_0.gamelobbygroup_camera_normaldistance = 96.8;
   var_0.pushmode = [];
   var_1 = getdvarint("virtualLobbyMode", 0);
 
-  if(var_1 == 0) {
+  if(var_1 == 0)
     setdvar("virtualLobbyReady", "0");
-  }
 
   level.camparams = var_0;
 }
@@ -31,13 +30,13 @@ spawncamera(var_0) {
   var_2 = (0, 87, 0);
   var_3 = common_scripts\utility::getstruct("camera", "targetname");
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3)) {
     var_1 = var_3.origin;
     var_2 = var_3.angles;
   }
 
   var_4 = spawn("script_model", var_1);
-  var_4 setModel("tag_player");
+  var_4 setmodel("tag_player");
   var_4.angles = var_2;
   var_4.startorigin = var_1;
   var_4.startangles = var_2;
@@ -66,9 +65,8 @@ playerupdatecamera() {
 
   if(var_1.newmode != var_1.mode) {
     if(var_1.newmode == "cac") {
-      if(var_1.mode == "cac_weap") {
+      if(var_1.mode == "cac_weap")
         var_2.cut = 1;
-      }
     } else if(var_1.newmode == "game_lobby") {
       var_3 = 0;
 
@@ -77,13 +75,11 @@ playerupdatecamera() {
         break;
       }
 
-      if(var_1.mode == "cao" || var_1.mode == "cac") {
+      if(var_1.mode == "cao" || var_1.mode == "cac")
         var_2.finished = 1;
-      }
 
-      if(isDefined(level.vlavatars) && isDefined(level.vl_focus) && isDefined(level.vlavatars[level.vl_focus])) {
+      if(isdefined(level.vlavatars) && isdefined(level.vl_focus) && isdefined(level.vlavatars[level.vl_focus]))
         var_0 maps\mp\_vl_base::prep_for_controls(level.vlavatars[level.vl_focus], level.vlavatars[level.vl_focus].angles);
-      }
 
       var_2.cut = 1;
       level.vl_focus = var_3;
@@ -182,11 +178,10 @@ set_avatar_dof(var_0) {
 }
 
 fstop_clamp(var_0) {
-  if(var_0 < 0.125) {
+  if(var_0 < 0.125)
     var_0 = 0.125;
-  } else if(var_0 > 128) {
+  else if(var_0 > 128)
     var_0 = 128;
-  }
 
   return var_0;
 }
@@ -194,11 +189,10 @@ fstop_clamp(var_0) {
 vl_dof_based_on_focus_weap_cac(var_0) {
   var_1 = 0;
 
-  if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
+  if(maps\mp\_vl_cao::iscollectionsmenuactive())
     var_1 = -0.0740886 * var_0 + 9.45422;
-  } else {
+  else
     var_1 = -0.200097 * var_0 + 19.836;
-  }
 
   var_1 = fstop_clamp(var_1);
   playervlsetphysicaldepthoffield(var_1, var_0);
@@ -211,7 +205,7 @@ playervlsetphysicaldepthoffield(var_0, var_1) {
 }
 
 fixlocalfocus() {
-  if(!isDefined(level.vlavatars[level.vl_focus])) {
+  if(!isdefined(level.vlavatars[level.vl_focus])) {
     foreach(var_2, var_1 in level.vlavatars) {
       level.vl_focus = var_2;
       break;
@@ -222,37 +216,33 @@ fixlocalfocus() {
 cammove(var_0, var_1, var_2, var_3) {
   self unlink();
 
-  if(isDefined(self.cut)) {
+  if(isdefined(self.cut))
     self.origin = var_0;
-  } else {
+  else
     self moveto(var_0, var_1, var_2, var_3);
-  }
 }
 
 camrotate(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.cut)) {
+  if(isdefined(self.cut))
     self.angles = var_0;
-  } else {
+  else
     self rotateto(var_0, var_1, var_2, var_3);
-  }
 }
 
 checkcamposition(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 2;
-  }
 
   var_3 = distance(var_1, var_0.origin);
 
-  if(var_3 >= var_2) {
+  if(var_3 >= var_2)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 updatecamerafinish(var_0) {
-  if(isDefined(var_0.cut)) {
+  if(isdefined(var_0.cut)) {
     var_0 dontinterpolate();
     var_0.cut = undefined;
   }
@@ -273,7 +263,7 @@ updatecameracacweap(var_0, var_1) {
 }
 
 updatecameracac(var_0, var_1, var_2, var_3) {
-  var_4 = var_2.avatar_spawnpoint.origin + anglesToForward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
+  var_4 = var_2.avatar_spawnpoint.origin + anglestoforward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
   var_5 = (var_4[0], var_4[1], var_1.gamelobbygroup_camera_normalz);
   var_6 = (0, var_2.avatar_spawnpoint.angles[1] + 180 + var_3, 0);
   var_0.cut = 1;
@@ -311,7 +301,7 @@ updatecameraarmory(var_0, var_1, var_2, var_3) {
 }
 
 updatecameraequip(var_0, var_1, var_2, var_3) {
-  var_4 = var_2.avatar_spawnpoint.origin + anglesToForward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
+  var_4 = var_2.avatar_spawnpoint.origin + anglestoforward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
   var_5 = (var_4[0], var_4[1], var_1.gamelobbygroup_camera_normalz);
   var_6 = (0, var_2.avatar_spawnpoint.angles[1] + 180 + var_3, 0);
   var_0.cut = 1;
@@ -326,7 +316,7 @@ updatecameralobby(var_0, var_1, var_2) {
   var_4 = "camera" + var_3;
   var_5 = common_scripts\utility::getstruct(var_4, "targetname");
 
-  if(!isDefined(var_5.angles)) {
+  if(!isdefined(var_5.angles)) {
     var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
     var_7 = var_6.origin - var_5.origin;
     var_5.angles = vectortoangles(var_7);

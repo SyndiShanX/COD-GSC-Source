@@ -281,9 +281,8 @@ skipto_setup() {
   flag_set("docks_cleared");
   flag_set("docks_entering_elevator");
 
-  if(skipto == "sniper") {
+  if(skipto == "sniper")
     return;
-  }
 }
 
 setup_objectives() {
@@ -309,15 +308,13 @@ setup_objectives() {
     house_objectives();
     airfield_objectives();
   } else if(level.script == "panama_2") {
-    while(!isDefined(level.mason) || !isDefined(level.noriega)) {
+    while(!isDefined(level.mason) || !isDefined(level.noriega))
       wait 0.05;
-    }
 
     slums_objectives();
   } else {
-    while(!isDefined(level.mason) || !isDefined(level.noriega)) {
+    while(!isDefined(level.mason) || !isDefined(level.noriega))
       wait 0.05;
-    }
 
     chase_objectives();
     docks_objectives();
@@ -339,9 +336,8 @@ challenge_nodeath(str_notify) {
   flag_wait("challenge_nodeath_check_start");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0) {
+  if(n_deaths == 0)
     self notify(str_notify);
-  }
 
   flag_set("challenge_nodeath_check_end");
 }
@@ -472,24 +468,21 @@ destroy_parking_lot_vehicles_before_parking_lot_on_veteran() {
   if(getdifficulty() == "fu") {
     structs = getstructarray("destroy_vehicles_struct", "targetname");
 
-    foreach(struct in structs) {
-      radiusdamage(struct.origin, 1000, 9001, 9001);
-    }
+    foreach(struct in structs)
+    radiusdamage(struct.origin, 1000, 9001, 9001);
   }
 }
 
 load_gumps_panama() {
-  if(level.script == "panama_2" || level.script == "panama_3") {
+  if(level.script == "panama_2" || level.script == "panama_3")
     return;
-  }
 }
 
 nightingale_watch() {
   self endon("death");
 
-  if(level.script == "panama") {
+  if(level.script == "panama")
     self thread nightingale_hint();
-  }
 
   while(true) {
     self waittill("grenade_fire", e_grenade, str_weapon_name);
@@ -503,7 +496,7 @@ nightingale_watch() {
 }
 
 nightingale_think() {
-  playFXOnTag(level._effect["nightingale_smoke"], self, "tag_fx");
+  playfxontag(level._effect["nightingale_smoke"], self, "tag_fx");
 
   for(i = 0; i < 256; i++) {
     v_start_pos = self.origin + vectorscale((0, 0, 1), 10.0);
@@ -535,9 +528,8 @@ nightingale_grab_enemy_attention() {
     wait 1;
   }
 
-  if(n_enemies_attracted > 7) {
+  if(n_enemies_attracted > 7)
     level notify("nightingale_challenge_completed");
-  }
 }
 
 nightingale_react_logic(e_grenade) {
@@ -559,9 +551,8 @@ nightingale_hint() {
   level thread hint_timer("nightingale_selected");
   screen_message_create(&"PANAMA_HINT_NIGHTINGALE_SELECT");
 
-  while(!level.player actionslotonebuttonpressed()) {
+  while(!level.player actionslotonebuttonpressed())
     wait 0.05;
-  }
 
   level notify("nightingale_selected");
   level thread hint_timer("nightingale_threw");
@@ -616,7 +607,7 @@ movedecoy(count, fire_time, main_dir, max_offset_angle) {
 
   for(i = 0; i < 1; i++) {
     angles = (0, randomintrange(current_main_dir - max_offset_angle, current_main_dir + max_offset_angle), 0);
-    dir = anglesToForward(angles);
+    dir = anglestoforward(angles);
     dir = vectorscale(dir, randomfloatrange(min_speed, max_speed));
     deltatime = (gettime() - start_time) * 0.001;
     up = (0, 0, intial_up - 800 * deltatime);
@@ -639,9 +630,8 @@ simulateweaponfire() {
   clipsize = 5;
   reloadtime = 1.0;
 
-  if(clipsize > 30) {
+  if(clipsize > 30)
     clipsize = 30;
-  }
 
   burst_spacing_min = 2;
   burst_spacing_max = 6;
@@ -656,15 +646,13 @@ simulateweaponfire() {
 fireburst(weapon, firetime, count, interrupt) {
   interrupt_shot = count;
 
-  if(interrupt) {
+  if(interrupt)
     interrupt_shot = int(count * randomfloatrange(0.6, 0.8));
-  }
 
   wait(firetime * interrupt_shot);
 
-  if(interrupt) {
+  if(interrupt)
     wait(firetime * (count - interrupt_shot));
-  }
 }
 
 trackmaindirection() {
@@ -677,9 +665,8 @@ trackmaindirection() {
     self waittill("grenade_bounce", pos, normal);
     dot = vectordot(normal, up);
 
-    if(dot < 0.5 && dot > -0.5) {
+    if(dot < 0.5 && dot > -0.5)
       self.main_dir = int(vectortoangles((normal[0], normal[1], 0))[1]);
-    }
   }
 }
 
@@ -690,7 +677,7 @@ ir_strobe_watch() {
     return;
   }
   if(level.script == "panama_2") {
-    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", &"PANAMA_SELECT_IRSTROBE");
+    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", & "PANAMA_SELECT_IRSTROBE");
     self thread watch_ir_strobe_equipped();
     self waittill_notify_or_timeout("strobe_equipped", 10);
     self notify("hint_over");
@@ -703,9 +690,8 @@ ir_strobe_watch() {
   level.strobe_vo_tracker = 0;
 
   if(level.script == "panama_2") {
-    while(self getcurrentweapon() != "irstrobe_dpad_sp") {
+    while(self getcurrentweapon() != "irstrobe_dpad_sp")
       wait 0.05;
-    }
 
     screen_message_create(&"PANAMA_HINT_THROW_IRSTROBE");
     self thread watch_ir_strobe_fired();
@@ -733,9 +719,8 @@ ir_strobe_watch() {
 watch_ir_strobe_equipped() {
   self endon("hint_over");
 
-  while(!self actionslotfourbuttonpressed()) {
+  while(!self actionslotfourbuttonpressed())
     wait 0.05;
-  }
 
   self notify("strobe_equipped");
 }
@@ -743,9 +728,8 @@ watch_ir_strobe_equipped() {
 watch_ir_strobe_fired() {
   self endon("hint_over");
 
-  while(!self attackbuttonpressed()) {
+  while(!self attackbuttonpressed())
     wait 0.05;
-  }
 
   self notify("strobe_fired");
 }
@@ -771,27 +755,26 @@ _ir_strobe_queue() {
 _ir_strobe_logic() {
   wait 2;
   e_model = spawn("script_model", self.origin);
-  e_model setModel("tag_origin");
-  playFXOnTag(level._effect["ir_strobe"], e_model, "tag_origin");
-  e_model playLoopSound("fly_irstrobe_beep", 0.1);
+  e_model setmodel("tag_origin");
+  playfxontag(level._effect["ir_strobe"], e_model, "tag_origin");
+  e_model playloopsound("fly_irstrobe_beep", 0.1);
   self ent_flag_wait("start_fire");
   level.player queue_dialog(level.strobe_vo[level.strobe_vo_tracker], 0.5);
   level.strobe_vo_tracker++;
 
-  if(level.strobe_vo_tracker == level.strobe_vo.size) {
+  if(level.strobe_vo_tracker == level.strobe_vo.size)
     level.strobe_vo_tracker = 0;
-  }
 
   wait 3;
-  tracedata = bulletTrace(self.origin, self.origin + vectorscale((0, 0, 1), 256.0), 0, self);
+  tracedata = bullettrace(self.origin, self.origin + vectorscale((0, 0, 1), 256.0), 0, self);
 
   if(tracedata["fraction"] == 1 && !flag("post_gauntlet_mason_open_door")) {
     v_end_pos = self.origin;
     ac130_shoot(v_end_pos, 1);
   } else if(isDefined(tracedata["entity"]) && tracedata["entity"].classname == "script_vehicle") {
-    if(tracedata["entity"].vehicletype == "apc_m113") {
+    if(tracedata["entity"].vehicletype == "apc_m113")
       wait 6;
-    } else {
+    else {
       v_end_pos = self.origin;
       ac130_shoot(v_end_pos, 1);
     }
@@ -804,28 +787,26 @@ _ir_strobe_logic() {
 }
 
 air_ambience(str_veh_targetname, str_paths, flag_ender, n_min_wait, n_max_wait) {
-  if(!isDefined(n_min_wait)) {
+  if(!isDefined(n_min_wait))
     n_min_wait = 4.0;
-  }
 
-  if(!isDefined(n_max_wait)) {
+  if(!isDefined(n_max_wait))
     n_max_wait = 6.0;
-  }
 
   a_paths = getvehiclenodearray(str_paths, "targetname");
   nd_last_path = a_paths[0];
 
   while(!flag(flag_ender)) {
-    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {}
+    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {
+    }
 
     nd_last_path = nd_path;
     v_jet = spawn_vehicle_from_targetname(str_veh_targetname);
     v_jet thread _air_ambience_think(nd_path);
     v_jet setforcenocull();
 
-    if(v_jet.vehicletype == "plane_mig23") {
+    if(v_jet.vehicletype == "plane_mig23")
       v_jet thread add_jet_fx();
-    }
 
     wait(randomfloatrange(n_min_wait, n_max_wait));
   }
@@ -837,20 +818,19 @@ _air_ambience_think(nd_path) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 add_jet_fx() {
-  playFXOnTag(level._effect["jet_contrail"], self, "tag_wingtip_l");
-  playFXOnTag(level._effect["jet_contrail"], self, "tag_wingtip_r");
-  playFXOnTag(level._effect["jet_exhaust"], self, "tag_engine_fx");
+  playfxontag(level._effect["jet_contrail"], self, "tag_wingtip_l");
+  playfxontag(level._effect["jet_contrail"], self, "tag_wingtip_r");
+  playfxontag(level._effect["jet_exhaust"], self, "tag_engine_fx");
 }
 
 ac130_ambience(flag_ender) {
   while(!flag(flag_ender)) {
-    v_forward = anglesToForward(level.player getplayerangles()) * 5000;
+    v_forward = anglestoforward(level.player getplayerangles()) * 5000;
     v_end_pos = level.player.origin + (v_forward[0], v_forward[1], 0);
     v_offset = (randomintrange(-2000, 2000), randomintrange(-2000, 2000), 0);
     v_end_pos = v_end_pos + v_offset;
@@ -872,18 +852,18 @@ ac130_shoot(v_end_pos, b_close) {
 
   for(i = 0; i < 60; i++) {
     v_offset_end = v_end_pos + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
-    sound_ent playLoopSound("wpn_ac130_fire_loop_npc", 0.25);
+    sound_ent playloopsound("wpn_ac130_fire_loop_npc", 0.25);
     playsoundatposition("prj_ac130_impact", v_offset_end);
     magicbullet("ac130_vulcan_minigun", v_start_pos, v_offset_end);
     wait 0.1;
   }
 
-  sound_ent playSound("wpn_ac130_fire_loop_ring_npc");
+  sound_ent playsound("wpn_ac130_fire_loop_ring_npc");
   sound_ent delete();
 
   if(isDefined(b_close) && b_close) {
     level.player notify("stop_rumble_check");
-    level.player playSound("evt_ac130_fire");
+    level.player playsound("evt_ac130_fire");
   }
 }
 
@@ -891,9 +871,8 @@ _ac130_vibration(v_start_pos) {
   self endon("stop_rumble_check");
 
   while(true) {
-    if(distance2d(v_start_pos, self.origin) < 1028) {
+    if(distance2d(v_start_pos, self.origin) < 1028)
       self playrumbleonentity("damage_heavy");
-    }
 
     wait 0.05;
   }
@@ -942,7 +921,7 @@ sky_fire_light_ambience(str_area, flag_ender) {
 player_lock_in_position(origin, angles) {
   link_to_ent = spawn("script_model", origin);
   link_to_ent.angles = angles;
-  link_to_ent setModel("tag_origin");
+  link_to_ent setmodel("tag_origin");
   self playerlinktoabsolute(link_to_ent, "tag_origin");
   self waittill("unlink_from_ent");
   self unlink();
@@ -954,25 +933,22 @@ old_man_woods(str_movie_name, notify_special) {
   flag_clear("movie_done");
   cin_id = play_movie_async(str_movie_name, 0, 0, undefined, 1, "movie_done", 1);
 
-  while(!iscinematicinprogress(cin_id)) {
+  while(!iscinematicinprogress(cin_id))
     wait 0.05;
-  }
 
   wait 1;
   flag_set("movie_started");
 
-  while(iscinematicinprogress(cin_id)) {
+  while(iscinematicinprogress(cin_id))
     wait 0.05;
-  }
 
   flag_set("movie_done");
   flag_clear("movie_started");
 
-  if(isDefined(notify_special)) {
+  if(isDefined(notify_special))
     level clientnotify(notify_special);
-  } else {
+  else
     level clientnotify("omw_off");
-  }
 }
 
 run_anim_to_idle(str_start_scene, str_idle_scene) {
@@ -1006,9 +982,8 @@ notify_on_lookat_trigger(str_trig_name, str_notify) {
 }
 
 waittill_done_talking() {
-  while(isDefined(self.is_talking) && self.is_talking) {
+  while(isDefined(self.is_talking) && self.is_talking)
     wait 0.05;
-  }
 }
 
 screen_fade_in_delay(n_duration, n_delay) {
@@ -1028,16 +1003,14 @@ blackscreen(fadein, stay, fadeout) {
   blackscreen.vertalign = "fullscreen";
   blackscreen setshader("black", 640, 480);
 
-  if(fadein > 0) {
+  if(fadein > 0)
     blackscreen fadeovertime(fadein);
-  }
 
   blackscreen.alpha = 1;
   wait(stay);
 
-  if(fadeout > 0) {
+  if(fadeout > 0)
     blackscreen fadeovertime(fadeout);
-  }
 
   blackscreen.alpha = 0;
   blackscreen destroy();
@@ -1066,15 +1039,13 @@ player_flak_jacket_override(e_inflictor, e_attacker, n_damage, n_dflags, str_mea
 get_whole_number(num) {
   negative = 1;
 
-  if(num < 0) {
+  if(num < 0)
     negative = -1;
-  }
 
   num = abs(num);
 
-  for(count = 0; num >= 1; count = count + 1) {
+  for(count = 0; num >= 1; count = count + 1)
     num = num - 1;
-  }
 
   return count * negative;
 }
@@ -1083,9 +1054,8 @@ check_for_friendly_fire_noriega() {
   while(true) {
     self waittill("damage", amount, attacker);
 
-    if(attacker == level.player) {
+    if(attacker == level.player)
       missionfailedwrapper(&"PANAMA_FRIENDLY_FIRE_FAILURE");
-    }
 
     wait 0.05;
   }

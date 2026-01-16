@@ -267,7 +267,7 @@ bookcase_push_detach(guy) {
   angles = guy gettagangles("tag_weapon_left");
   bookcase = spawn("script_model", orig);
   bookcase.angles = angles;
-  bookcase setModel("static_berlin_bookshelf_short_ber2");
+  bookcase setmodel("static_berlin_bookshelf_short_ber2");
 }
 
 unlink_boxcar_guys(guy) {
@@ -357,7 +357,7 @@ ruins_chimney() {
   parent.animname = "chimney";
   parent UseAnimTree(#animtree);
   pieces = getEntArray("chimneychunk", "targetname");
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     pieces[i].animname = "chimney";
     pieces[i] LinkTo(parent, pieces[i].script_linkto);
   }
@@ -365,8 +365,8 @@ ruins_chimney() {
   parent anim_single_solo(parent, "crumble");
   wire1_fx2 = parent getTagOrigin("wire1_fx2");
   wire2_fx2 = parent getTagOrigin("wire2_fx2");
-  playFXOnTag(level._effect["wire_sparks"], parent, "wire1_fx2");
-  playFXOnTag(level._effect["wire_sparks"], parent, "wire2_fx2");
+  playFXonTag(level._effect["wire_sparks"], parent, "wire1_fx2");
+  playFXonTag(level._effect["wire_sparks"], parent, "wire2_fx2");
   SetClientSysState("levelNotify", "elec_loop");
 }
 
@@ -377,17 +377,17 @@ chimey_rumble() {
 
 chimney_crumble_fx(parent) {
   fx = getStruct("chimney_fx", "targetname");
-  playFX(level._effect["chimney_collapse"], fx.origin);
+  playfx(level._effect["chimney_collapse"], fx.origin);
 }
 
 chimney_wire1_fx(parent) {
   wire1_fx1 = parent getTagOrigin("wire1_fx1");
-  playFXOnTag(level._effect["transformer_explode"], parent, "wire1_fx1");
+  playFXonTag(level._effect["transformer_explode"], parent, "wire1_fx1");
 }
 
 chimney_wire2_fx(parent) {
   wire1_fx2 = parent getTagOrigin("wire2_fx1");
-  playFXOnTag(level._effect["transformer_sparks"], parent, "wire2_fx1");
+  playFXonTag(level._effect["transformer_sparks"], parent, "wire2_fx1");
 }
 
 #using_animtree("ber1_intro_house");
@@ -411,7 +411,7 @@ draw_notetrack(msg) {
   self endon("death");
   self notify("stop_draw_notetrack");
   self endon("stop_draw_notetrack");
-  while(1) {
+  while (1) {
     self waittill(msg, notetrack);
     println("Notetrack found: ", notetrack);
     iprintln("Notetrack found: ", notetrack);

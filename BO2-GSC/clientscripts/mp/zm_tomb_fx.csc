@@ -7,7 +7,8 @@
 #include clientscripts\mp\createfx\zm_tomb_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -119,9 +120,8 @@ main() {
   precache_fxanim_props_dlc4();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   level thread trap_fx_monitor("flame_trap", "str_flame_trap");
 }
@@ -170,38 +170,33 @@ setup_prop_anims() {
   waitforclient(0);
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] thread play_fx_prop_anims(i);
-  }
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think, localclientnum);
-  fxanim_props = getEntArray(localclientnum, "fxanim_dlc4", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim_dlc4", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think_dlc4, localclientnum);
 }
 
 fxanim_props_wait_1(localclientnum) {
-  if(isDefined(self.fxanim_waittill_1)) {
+  if(isDefined(self.fxanim_waittill_1))
     level waittill(self.fxanim_waittill_1);
-  }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.fxanim_scene_1)) {
-    if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
+    if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1]))
       self setflaggedanim("tomb_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
-    }
 
     if(isDefined(level.scr_anim["fxanim_props_dlc4"][self.fxanim_scene_1])) {
-      if(issubstr(self.fxanim_scene_1, "chamber_rocks")) {
+      if(issubstr(self.fxanim_scene_1, "chamber_rocks"))
         self thread chamber_rocks_think();
-      } else {
+      else
         self setflaggedanim("tomb_fxanim", level.scr_anim["fxanim_props_dlc4"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
-      }
     }
   }
 }
@@ -227,51 +222,47 @@ trap_fx_monitor(str_name, str_side) {
     a_trap_points = getstructarray(str_name, "targetname");
 
     for(i = 0; i < a_trap_points.size; i++) {
-      if(str_name == "flame_trap") {
+      if(str_name == "flame_trap")
         a_trap_points[i] thread flame_trap_fx(str_name, str_side);
-      }
     }
   }
 }
 
 flame_trap_fx(str_name, str_side) {
   vec_ang = self.angles;
-  vec_forward = anglesToForward(vec_ang);
+  vec_forward = anglestoforward(vec_ang);
 
   if(isDefined(self.a_loopfx)) {
-    for(i = 0; i < self.a_loopfx.size; i++) {
+    for(i = 0; i < self.a_loopfx.size; i++)
       stopfx(i, self.a_loopfx[i]);
-    }
 
     self.a_loopfx = [];
   }
 
-  if(!isDefined(self.a_loopfx)) {
+  if(!isDefined(self.a_loopfx))
     self.a_loopfx = [];
-  }
 
   a_players = getlocalplayers();
 
   for(i = 0; i < a_players.size; i++) {
-    self.a_loopfx[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+    self.a_loopfx[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait 1;
     level.b_play_fire_loop_fx = 1;
     level thread monitor_fire_loop();
 
     while(level.b_play_fire_loop_fx) {
-      self.a_loopfx[i] = playFX(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
+      self.a_loopfx[i] = playfx(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
       wait 1;
     }
 
-    self.a_loopfx[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+    self.a_loopfx[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait 1;
   }
 
   level waittill(str_side + "off");
 
-  for(i = 0; i < self.a_loopfx.size; i++) {
+  for(i = 0; i < self.a_loopfx.size; i++)
     stopfx(i, self.a_loopfx[i]);
-  }
 
   self.a_loopfx = [];
 }

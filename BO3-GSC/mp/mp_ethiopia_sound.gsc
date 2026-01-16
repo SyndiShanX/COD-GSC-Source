@@ -15,13 +15,13 @@ function main() {
 
 function snd_dmg_monk() {
   trigger = getent("snd_monkey", "targetname");
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return;
   }
-  while(true) {
+  while (true) {
     trigger waittill("trigger", who);
     if(isplayer(who)) {
-      trigger playSound("amb_monkey_shot");
+      trigger playsound("amb_monkey_shot");
       wait(15);
     }
   }
@@ -29,13 +29,13 @@ function snd_dmg_monk() {
 
 function snd_dmg_cheet() {
   trigger = getent("snd_cheet", "targetname");
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return;
   }
-  while(true) {
+  while (true) {
     trigger waittill("trigger", who);
     if(isplayer(who)) {
-      trigger playSound("amb_cheeta_shot");
+      trigger playsound("amb_cheeta_shot");
       wait(15);
     }
   }
@@ -43,13 +43,13 @@ function snd_dmg_cheet() {
 
 function snd_dmg_boar() {
   trigger = getent("snd_boar", "targetname");
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return;
   }
-  while(true) {
+  while (true) {
     trigger waittill("trigger", who);
     if(isplayer(who)) {
-      trigger playSound("amb_boar_shot");
+      trigger playsound("amb_boar_shot");
       wait(15);
     }
   }

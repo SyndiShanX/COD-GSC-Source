@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_rust_long_fx.gsc
 *********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 182
   ent = createLoopSound();
   ent.v["origin"] = (61.589, -251.13, -145.273);
   ent.v["angles"] = (270, 0, 0);
@@ -935,4 +937,5 @@ main() {
   ent.v["origin"] = (1655.88, -231.347, -222.549);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "elm_wind_leafy_whistle";
+
 }

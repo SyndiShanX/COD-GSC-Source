@@ -27,7 +27,7 @@
 #namespace weapons;
 
 function autoexec __init__sytem__() {
-  system::register("weapons", &__init__, undefined, undefined);
+  system::register("weapons", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -51,15 +51,15 @@ function bestweapon_init(weapon, options, acvi) {
 }
 
 function bestweapon_find(weapon, options, acvi) {
-  if(!isDefined(self.pers["bestWeapon"])) {
+  if(!isdefined(self.pers["bestWeapon"])) {
     self.pers["bestWeapon"] = [];
   }
-  if(!isDefined(self.pers["bestWeapon"][weapon.name])) {
+  if(!isdefined(self.pers["bestWeapon"][weapon.name])) {
     self.pers["bestWeapon"][weapon.name] = [];
   }
   name = weapon.name;
   size = self.pers["bestWeapon"][name].size;
-  for(index = 0; index < size; index++) {
+  for (index = 0; index < size; index++) {
     if(self.pers["bestWeapon"][name][index]["weapon"] == weapon && self.pers["bestWeapon"][name][index]["options"] == options && self.pers["bestWeapon"][name][index]["acvi"] == acvi) {
       return index;
     }
@@ -70,16 +70,16 @@ function bestweapon_find(weapon, options, acvi) {
 function bestweapon_get() {
   most_kills = 0;
   most_spawns = 0;
-  if(!isDefined(self.pers["bestWeapon"])) {
+  if(!isdefined(self.pers["bestWeapon"])) {
     return;
   }
   best_key = 0;
   best_index = 0;
   weapon_keys = getarraykeys(self.pers["bestWeapon"]);
-  for(key_index = 0; key_index < weapon_keys.size; key_index++) {
+  for (key_index = 0; key_index < weapon_keys.size; key_index++) {
     key = weapon_keys[key_index];
     size = self.pers["bestWeapon"][key].size;
-    for(index = 0; index < size; index++) {
+    for (index = 0; index < size; index++) {
       kill_count = self.pers["bestWeapon"][key][index]["kill_count"];
       spawned_with = self.pers["bestWeapon"][key][index]["spawned_with"];
       if(kill_count > most_kills) {
@@ -102,7 +102,7 @@ function bestweapon_get() {
 
 function showcaseweapon_get() {
   showcaseweapondata = self getplayershowcaseweapon();
-  if(!isDefined(showcaseweapondata)) {
+  if(!isdefined(showcaseweapondata)) {
     return undefined;
   }
   showcase_weapon = [];
@@ -111,13 +111,13 @@ function showcaseweapon_get() {
   attachmentindices = [];
   tokenizedattachmentinfo = strtok(showcaseweapondata.attachmentinfo, ",");
   index = 0;
-  while((index + 1) < tokenizedattachmentinfo.size) {
+  while ((index + 1) < tokenizedattachmentinfo.size) {
     attachmentnames[attachmentnames.size] = tokenizedattachmentinfo[index];
     attachmentindices[attachmentindices.size] = int(tokenizedattachmentinfo[index + 1]);
     index = index + 2;
   }
   index = tokenizedattachmentinfo.size;
-  while((index + 1) < 16) {
+  while ((index + 1) < 16) {
     attachmentnames[attachmentnames.size] = "none";
     attachmentindices[attachmentindices.size] = 0;
     index = index + 2;

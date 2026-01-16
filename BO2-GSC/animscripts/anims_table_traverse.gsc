@@ -123,9 +123,8 @@ setup_stairs_anim_array(animtype, array) {
   array[animtype]["move"]["stand"]["rifle"]["staircase_down_8x16_aim_left"] = % ai_staircase_run_down_8x16_aim_4;
   array[animtype]["move"]["stand"]["rifle"]["staircase_down_8x16_aim_right"] = % ai_staircase_run_down_8x16_aim_6;
 
-  if(is_true(level.supportspistolanimations)) {
+  if(is_true(level.supportspistolanimations))
     array = setup_pistol_stairs_anim_array(animtype, array);
-  }
 
   array = setup_civilian_stairs_anim_array(animtype, array);
   return array;

@@ -16,7 +16,7 @@ function main() {
   precache();
   mp_ethiopia_fx::main();
   mp_ethiopia_sound::main();
-  level.add_raps_drop_locations = &add_raps_drop_locations;
+  level.add_raps_drop_locations = & add_raps_drop_locations;
   load::main();
   compass::setupminimap("compass_map_mp_ethiopia");
   setdvar("compassmaxrange", "2100");
@@ -39,26 +39,26 @@ function main() {
 
 function precache() {}
 
-function add_raps_drop_locations(&drop_candidate_array) {
-  if(!isDefined(drop_candidate_array)) {
+function add_raps_drop_locations( & drop_candidate_array) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
   }
   drop_candidate_array[drop_candidate_array.size] = (350, 650, -222);
-  if(!isDefined(drop_candidate_array)) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
   }
   drop_candidate_array[drop_candidate_array.size] = (-100, 420, -223);
-  if(!isDefined(drop_candidate_array)) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
   }
   drop_candidate_array[drop_candidate_array.size] = (2900, -140, -23);
-  if(!isDefined(drop_candidate_array)) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
@@ -78,7 +78,7 @@ function spawnkilltrigger() {
 function watchkilltrigger() {
   level endon("game_ended");
   trigger = self;
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
     player dodamage(1000, trigger.origin + (0, 0, 0), trigger, trigger, "none", "MOD_SUICIDE", 0);
   }

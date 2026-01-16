@@ -15,9 +15,8 @@ init() {
   level.uiparent.height = 0;
   level.uiparent.children = [];
 
-  if(level.console) {
+  if(level.console)
     level.fontheight = 12;
-  } else {
+  else
     level.fontheight = 12;
-  }
 }

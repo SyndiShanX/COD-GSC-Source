@@ -5,7 +5,7 @@
 *************************************************************/
 
 main() {
-  self setModel("body_sp_cobra_pilot_desert_velinda_burned");
+  self setmodel("body_sp_cobra_pilot_desert_velinda_burned");
   self attach("head_sp_cobra_pilot_velinda_damaged", "", 1);
   self.headmodel = "head_sp_cobra_pilot_velinda_damaged";
   self.voice = "american";

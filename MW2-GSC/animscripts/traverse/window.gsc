@@ -21,7 +21,7 @@ main() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("diveanim", % windowclimb, % body, 1, .1, 1);

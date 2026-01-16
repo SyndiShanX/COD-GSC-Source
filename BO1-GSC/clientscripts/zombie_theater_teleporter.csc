@@ -130,7 +130,7 @@ start_extra_cam() {
       level.cam_corona = spawn(localClientNum, level.cameraEnt.origin + (0, 1, 0), "script_model");
       level.cam_corona setModel("tag_origin");
       level.cam_corona.angles = level.cameraEnt.angles;
-      playFXOnTag(localClientNum, level._effect["fx_mp_light_lamp"], level.cam_corona, "tag_origin");
+      PlayFxOnTag(localClientNum, level._effect["fx_mp_light_lamp"], level.cam_corona, "tag_origin");
     }
   }
 }

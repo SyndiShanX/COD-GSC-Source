@@ -96,7 +96,7 @@ path_hudshow() {
   flag_clear("path_Notviewing");
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
   players[0] freezecontrols(true);
-  players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_scale(anglesToForward(self.angles), 3));
+  players[0] setorigin(self.origin + (players[0].origin - players[0] geteye()) - vector_scale(anglestoforward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   flag_set("path_refresh");
   while(players[0] islookingorg(self) && players[0] usebuttonpressed()) {
@@ -115,7 +115,7 @@ path_getvisible() {
     for(i = 0; i < level.path_views[ident].size; i++) {
       players = get_players();
       if(players[0] islookingorg(level.path_views[ident][i])) {
-        newdist = distance(players[0] getEye(), level.path_views[ident][i].origin);
+        newdist = distance(players[0] geteye(), level.path_views[ident][i].origin);
         if(newdist < dist) {
           dist = newdist;
           index = i;
@@ -124,7 +124,7 @@ path_getvisible() {
       }
     }
   }
-  outvar = spawnStruct();
+  outvar = spawnstruct();
   outvar.index = index;
   outvar.ident = outident;
   return outvar;
@@ -143,7 +143,7 @@ path_viewwait(index) {
       wait .05;
       continue;
     }
-    thread draw_arrow_time(self.origin, self.origin + vector_scale(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
+    thread draw_arrow_time(self.origin, self.origin + vector_scale(anglestoforward(self.angles), arrowlength), (0, 1, 1), frametime);
     if(level.path_selectindex == index) {
       thread plot_circle_star_fortime(level.path_selectrad, frametime, (1, 1, 0));
     } else {
@@ -183,9 +183,9 @@ plot_circle_star_fortime(radius, time, color) {
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] getEye());
+    angletoplayer = vectortoangles(self.origin - players[0] geteye());
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+      plotpoints[plotpoints.size] = self.origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     for(i = 0; i < plotpoints.size; i++) {
@@ -212,9 +212,9 @@ plot_circle_fortime(radius, time, color) {
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] getEye());
+    angletoplayer = vectortoangles(self.origin - players[0] geteye());
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+      plotpoints[plotpoints.size] = self.origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -271,13 +271,13 @@ path_setview() {
 
 path_setvieworgang(view) {
   players = get_players();
-  view.origin = players[0] getEye();
+  view.origin = players[0] geteye();
   view.angles = players[0] getplayerangles();
 }
 
 path_trigger_setvieworgang(view) {
   players = get_players();
-  view.origin = players[0] getEye();
+  view.origin = players[0] geteye();
   view.radius = 200;
 }
 
@@ -399,7 +399,7 @@ path_getcurrentview() {
 }
 
 path_trigger_newview(bScriptAdded) {
-  view = spawnStruct();
+  view = spawnstruct();
   if(!bScriptAdded) {
     path_trigger_setvieworgang(view);
   }
@@ -414,7 +414,7 @@ path_trigger_newview(bScriptAdded) {
 }
 
 path_newview(bScriptAdded) {
-  view = spawnStruct();
+  view = spawnstruct();
   if(!bScriptAdded) {
     path_setvieworgang(view);
   }
@@ -444,10 +444,10 @@ path_createid(ident) {
 path_create(position, angle, ident) {}
 path_trigger_create(position, radius, ident) {}
 islookingorg(view) {
-  normalvec = vectorNormalize(view.origin - self getEye());
-  veccomp = vectorNormalize((view.origin - (0, 0, level.path_selectrad * 2)) - self getEye());
+  normalvec = vectorNormalize(view.origin - self geteye());
+  veccomp = vectorNormalize((view.origin - (0, 0, level.path_selectrad * 2)) - self geteye());
   insidedot = vectordot(normalvec, veccomp);
-  anglevec = anglesToForward(self getplayerangles());
+  anglevec = anglestoforward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;

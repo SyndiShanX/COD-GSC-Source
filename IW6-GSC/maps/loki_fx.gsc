@@ -204,9 +204,8 @@ main() {
   thread fx_setup_mask();
   thread helmet_damage();
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     setsaveddvar("r_mbEnable", 0);
-  }
 
   setsaveddvar("actor_spaceLightingOffset", -6);
 }
@@ -221,18 +220,16 @@ fx_setup_mask() {
 }
 
 fx_helmet_mask_on() {
-  if(isDefined(level.helmet_mask_fx)) {
+  if(isDefined(level.helmet_mask_fx))
     level.helmet_mask_fx delete();
-  }
 
   level.helmet_mask_fx = spawnfx(level._effect["vfx_scrnfx_loki_helmet"], level.player.origin);
   triggerfx(level.helmet_mask_fx);
 }
 
 fx_helmet_mask_off() {
-  if(isDefined(level.helmet_mask_fx)) {
+  if(isDefined(level.helmet_mask_fx))
     level.helmet_mask_fx delete();
-  }
 }
 
 helmet_damage() {
@@ -527,17 +524,15 @@ fx_debri_combat_one() {
 ending_white_fade(var_0, var_1, var_2) {
   var_3 = maps\_hud_util::create_client_overlay("white", 0, level.player);
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     var_3 fadeovertime(var_0);
-  }
 
   var_3.alpha = 0.75;
   wait(var_0);
   wait(var_1);
 
-  if(var_2 > 0) {
+  if(var_2 > 0)
     var_3 fadeovertime(var_2);
-  }
 
   var_3.alpha = 0;
   wait(var_2);
@@ -575,11 +570,10 @@ ai_space_headshot_death_fxnow() {
       playFXOnTag(common_scripts\utility::getfx("space_headshot_fxnow_02"), self, "J_Head");
       self setModel(self.model + "_cracked");
 
-      if(gettimescale() < 0.5) {
+      if(gettimescale() < 0.5)
         self playSound("space_npc_helmet_shatter_slomo");
-      } else {
+      else
         self playSound("space_npc_helmet_shatter");
-      }
     }
   }
 }

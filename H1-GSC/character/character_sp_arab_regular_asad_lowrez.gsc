@@ -5,7 +5,7 @@
 ***************************************************************/
 
 main() {
-  self setModel("body_sp_arab_regular_asad_h1_lowrez");
+  self setmodel("body_sp_arab_regular_asad_h1_lowrez");
   self attach("head_sp_arab_regular_asad_h1_lowrez", "", 1);
   self.headmodel = "head_sp_arab_regular_asad_h1_lowrez";
   self.hatmodel = "helmet_sp_arab_regular_asad_h1_lowrez";

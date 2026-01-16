@@ -179,7 +179,7 @@ turn_light_red(clientNum, light_num, play_fx) {
       lights[i].fx = spawn(clientNum, (lights[i].origin[0], lights[i].origin[1], lights[i].origin[2] - 10), "script_model");
       lights[i].fx setModel("tag_origin");
       lights[i].fx.angles = lights[i].angles;
-      playFXOnTag(clientNum, level._effect["boxlight_light_ready"], lights[i].fx, "tag_origin");
+      playfxontag(clientNum, level._effect["boxlight_light_ready"], lights[i].fx, "tag_origin");
     } else {
       lights[i] setModel("zombie_zapper_cagelight_red");
     }
@@ -202,7 +202,7 @@ turn_light_green(clientNum, light_num, play_fx) {
       lights[i].fx = spawn(clientNum, (lights[i].origin[0], lights[i].origin[1], lights[i].origin[2] - 10), "script_model");
       lights[i].fx setModel("tag_origin");
       lights[i].fx.angles = lights[i].angles;
-      playFXOnTag(clientNum, level._effect["boxlight_light_ready"], lights[i].fx, "tag_origin");
+      playfxontag(clientNum, level._effect["boxlight_light_ready"], lights[i].fx, "tag_origin");
     } else {
       lights[i] setModel("zombie_zapper_cagelight_green");
     }
@@ -263,7 +263,7 @@ theatre_ZPO_listener() {
 }
 
 eeroom_visionset_init() {
-  eeroom_visionset_triggers = getEntArray(0, "trigger_eeroom_visionset", "targetname");
+  eeroom_visionset_triggers = GetEntArray(0, "trigger_eeroom_visionset", "targetname");
   if(!isDefined(eeroom_visionset_triggers)) {
     return;
   }
@@ -310,7 +310,7 @@ eeroom_visionset_off(ent_player) {
 theater_light_model_swap_init() {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    theater_light_models = getEntArray(i, "model_lights_on", "targetname");
+    theater_light_models = GetEntArray(i, "model_lights_on", "targetname");
     if(isDefined(theater_light_models) && theater_light_models.size > 0) {
       array_thread(theater_light_models, ::theater_light_model_swap);
     }

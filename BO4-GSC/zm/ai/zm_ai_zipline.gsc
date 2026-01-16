@@ -11,6 +11,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\zm_common\zm_cleanup_mgr;
+
 #namespace zm_ai_zipline;
 
 autoexec __init__system__() {
@@ -34,7 +35,7 @@ __init__() {
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x66>");
 
-  zm_cleanup::function_cdf5a512(#"zombie", &function_16f40942);
+    zm_cleanup::function_cdf5a512(#"zombie", &function_16f40942);
   level.var_e5a996e8 = &function_e5a996e8;
 }
 
@@ -84,37 +85,38 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
       line(var_8e89eaf2, var_3573db0e, (1, 1, 0));
       sphere(var_8e89eaf2, 2, (1, 0.5, 0), 0.3, 0, 8, 1);
 
-      if(isDefined(var_6f06d19d) && isDefined(var_ca144d1e)) {
-        var_af2e4b51 = function_61418721(self.var_b20b0960.origin, var_6f06d19d, var_ca144d1e);
-        var_2b30dcba = vectornormalize(self.var_b20b0960.origin - var_af2e4b51);
-        var_41aabd6d = number_b_(self.var_b20b0960.origin, (0, 0, 1), var_af2e4b51, var_2b30dcba);
+        if(isDefined(var_6f06d19d) && isDefined(var_ca144d1e)) {
+          var_af2e4b51 = function_61418721(self.var_b20b0960.origin, var_6f06d19d, var_ca144d1e);
+          var_2b30dcba = vectornormalize(self.var_b20b0960.origin - var_af2e4b51);
+          var_41aabd6d = number_b_(self.var_b20b0960.origin, (0, 0, 1), var_af2e4b51, var_2b30dcba);
 
-        if(isDefined(var_41aabd6d)) {
-          var_b43bc141 = self.var_b20b0960.origin + (0, 0, 1) * var_41aabd6d;
-          height_difference = var_b43bc141[2] - self.var_b20b0960.origin[2];
+          if(isDefined(var_41aabd6d)) {
+            var_b43bc141 = self.var_b20b0960.origin + (0, 0, 1) * var_41aabd6d;
+            height_difference = var_b43bc141[2] - self.var_b20b0960.origin[2];
 
-          line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
-          record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
+  
+            line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
+            record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
+  
+          }
+
+          var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
+          var_2eb8d479 = var_3a080e11 + (0, 0, 1);
+          forward = vectornormalize(var_bb4eaebf.origin - vnd_start.origin);
+          right = vectorcross((0, 0, 1), forward);
+          up = vectorcross(forward, right);
+          angles = axistoangles(forward, up);
+          var_c246e8d5 = coordtransformtranspose(var_3a080e11, var_8e89eaf2, angles);
+          var_e941deaa = vectornormalize(var_c246e8d5);
+
+          line(var_8e89eaf2, var_8e89eaf2 + var_c246e8d5, (1, 0, 1));
+          line(var_6f06d19d, var_ca144d1e, (1, 0.5, 0));
+          line(var_8e89eaf2, var_3a080e11, (1, 1, 0));
+          sphere(var_6f06d19d, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
+          sphere(var_ca144d1e, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
+          record3dtext("<dev string:xae>" + var_c246e8d5, var_8e89eaf2 + var_c246e8d5, (1, 1, 1), "<dev string:xb1>");
 
         }
-
-        var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
-        var_2eb8d479 = var_3a080e11 + (0, 0, 1);
-        forward = vectornormalize(var_bb4eaebf.origin - vnd_start.origin);
-        right = vectorcross((0, 0, 1), forward);
-        up = vectorcross(forward, right);
-        angles = axistoangles(forward, up);
-        var_c246e8d5 = coordtransformtranspose(var_3a080e11, var_8e89eaf2, angles);
-        var_e941deaa = vectornormalize(var_c246e8d5);
-
-        line(var_8e89eaf2, var_8e89eaf2 + var_c246e8d5, (1, 0, 1));
-        line(var_6f06d19d, var_ca144d1e, (1, 0.5, 0));
-        line(var_8e89eaf2, var_3a080e11, (1, 1, 0));
-        sphere(var_6f06d19d, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
-        sphere(var_ca144d1e, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
-        record3dtext("<dev string:xae>" + var_c246e8d5, var_8e89eaf2 + var_c246e8d5, (1, 1, 1), "<dev string:xb1>");
-
-      }
 
       for(var_31120f24 = vnd_start; isDefined(var_31120f24.target); var_31120f24 = var_bb4eaebf) {
         var_bb4eaebf = getvehiclenode(var_31120f24.target, "targetname");
@@ -139,9 +141,10 @@ function_aeb6539c(origin, angles) {
 
 private function_dedfe444(entity) {
   if(isDefined(entity.traversestartnode) && isDefined(entity.traversestartnode.script_noteworthy) && entity.traversestartnode.script_noteworthy == "zipline_traversal" && isDefined(entity.traversestartnode.var_e45a0969) && entity shouldstarttraversal()) {
+
     record3dtext("<dev string:xba>", self.origin, (1, 0, 0), "<dev string:xb1>");
 
-    return true;
+      return true;
   }
 
   return false;

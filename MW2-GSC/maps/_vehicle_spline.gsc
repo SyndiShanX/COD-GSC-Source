@@ -27,24 +27,25 @@ init_vehicle_splines() {
   flag_init("ai_snowmobiles_ram_player");
   flag_set("ai_snowmobiles_ram_player");
 
-  enable_spline_paths = getEntArray("enable_spline_path", "targetname");
+  enable_spline_paths = getentarray("enable_spline_path", "targetname");
   array_thread(enable_spline_paths, ::enable_spline_path_think);
 }
 
 enable_spline_path_think() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
     other notify("enable_spline_path");
   }
 }
 
 make_road_path() {
+
   level.drive_spline_path_fun = ::bike_drives_path;
 
   path = process_path();
   flag_init("race_complete");
   level.player_view_org = spawn("script_model", (0, 0, 0));
-  level.player_view_org setModel("tag_origin");
+  level.player_view_org setmodel("tag_origin");
 
   level.enemy_snowmobiles = [];
   level.bike_score = 0;
@@ -66,10 +67,9 @@ get_guy_from_spawner() {
 
 #using_animtree("generic_human");
 orient_dir(yaw) {
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self))
       return;
-    }
     self OrientMode("face angle", yaw);
     wait(0.05);
   }
@@ -80,12 +80,11 @@ process_path() {
   level.snowmobile_path = path;
   //drop_path_to_ground( path );
   add_collision_to_path(path);
-
-  if(getdebugdvarint("vehicle_spline_debug")) {
+  /#
+  if(getdebugdvarint("vehicle_spline_debug"))
     thread draw_path(path);
-  }
-
-  return path;
+  # /
+    return path;
 }
 
 droppedLine(start, end, color, depth, cull, timer) {
@@ -107,10 +106,10 @@ draw_path(path) {
   old_left_node = undefined;
   old_right_node = undefined;
 
-  for(i = 0; i < path.size; i++) {
+  for (i = 0; i < path.size; i++) {
     node = path[i];
     angles = vectortoangles(node.next_node.midpoint - node.midpoint);
-    forward = anglesToForward(angles) * node.dist_to_next_targ;
+    forward = anglestoforward(angles) * node.dist_to_next_targ;
 
     width = node.road_width * 0.5;
     start1 = get_position_from_spline(node, 0, width);
@@ -123,6 +122,7 @@ draw_path(path) {
 
     droppedLineZ(node.z, start1, start2, (0, 0.5, 1), 1, 1, 50000);
     droppedLineZ(node.z, end1, end2, (0, 0.5, 1), 1, 1, 50000);
+
 
     /*		
     start = node.origins[ "left" ];
@@ -143,7 +143,7 @@ draw_path(path) {
     /*		
     midpoint1 = node.midpoint;
     midpoint2 = node.next_node.midpoint;
-    		
+		
     angles = vectortoangles( midpoint1 - midpoint2 );
     right = anglestoright( angles );
     road_half_width = node.road_width * 0.5;
@@ -151,7 +151,7 @@ draw_path(path) {
     right_node = node.midpoint + right * road_half_width * -1;
 
     droppedLineZ( node.z, left_node, right_node, ( 1, 0.3, 0 ), 1, 0, 50000 );
-    if( isDefined( old_left_node ) )
+    if( isdefined( old_left_node ) )
     {
     	droppedLineZ( node.z, left_node, old_left_node, ( 1, 0.3, 0 ), 1, 0, 50000 );
     	droppedLineZ( node.z, right_node, old_right_node, ( 1, 0.3, 0 ), 1, 0, 50000 );
@@ -203,9 +203,10 @@ draw_col_vol_offset(Z, vol, offset, forward, right) {
   end = get_position_from_spline(targ, vol["max"], vol[offset]);
   droppedLineZ(z, start, end, (0.5, 0, 1), 1, 1, 50000);
 
+
   /*
   angles = vectortoangles( self.next_node.origin - self.origin );
-  forward = anglesToForward( angles );
+  forward = anglestoforward( angles );
   right = anglestoright( angles );
 
   start = self.midpoint - right * vol[ "right_offset" ] + forward * vol[ "min" ];
@@ -224,27 +225,27 @@ draw_col_vol_offset(Z, vol, offset, forward, right) {
 
 create_path() {
   targ = getstruct("road_path_left", "targetname");
-  assert(isDefined(targ));
+  assert(isdefined(targ));
 
   path = [];
 
+  /#
   targ.z = targ.origin[2];
-
-  targ.origin = (targ.origin[0], targ.origin[1], 0);
+  # /
+    targ.origin = (targ.origin[0], targ.origin[1], 0);
 
   count = 0;
   prev_targ = targ;
-  for(;;) {
+  for (;;) {
     next_targ = targ;
-    if(isDefined(targ.target)) {
+    if(isdefined(targ.target))
       next_targ = getstruct(targ.target, "targetname");
-    }
 
-    if(!isDefined(next_targ.z)) {
+    /#
+    if(!isdefined(next_targ.z))
       next_targ.z = next_targ.origin[2];
-    }
-
-    next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
+    # /
+      next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
 
     path[path.size] = targ;
     targ.next_node = next_targ;
@@ -260,49 +261,47 @@ create_path() {
     targ.index = count;
     count++;
 
-    if(targ == next_targ) {
+    if(targ == next_targ)
       break;
-    }
     prev_targ = targ;
     targ = next_targ;
   }
 
   targ = getstruct("road_path_right", "targetname");
-
+  /#
   targ.z = targ.origin[2];
-
-  targ.origin = (targ.origin[0], targ.origin[1], 0);
+  # /
+    targ.origin = (targ.origin[0], targ.origin[1], 0);
 
   new_count = 0;
-  for(;;) {
+  for (;;) {
     next_targ = targ;
-    if(isDefined(targ.target)) {
+    if(isdefined(targ.target))
       next_targ = getstruct(targ.target, "targetname");
-    }
 
     /*			
     		vehicle_node = undefined;
-    		if( isDefined( targ.script_linkto ) )
+    		if( isdefined( targ.script_linkto ) )
     		{
     			vehicle_node = getVehicleNode( targ.script_linkto, "script_linkname" );
     		}
     */
 
-    if(!isDefined(next_targ.z)) {
+    /#
+    if(!isdefined(next_targ.z))
       next_targ.z = next_targ.origin[2];
-    }
-
-    next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
+    # /
+      next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
 
     assertex(count >= new_count, "Had more right road nodes than left road nodes.");
 
     parent = path[new_count];
-    assertex(isDefined(parent), "Had more left road nodes than right road nodes.");
+    assertex(isdefined(parent), "Had more left road nodes than right road nodes.");
     parent.origins["right"] = targ.origin;
     parent.road_width = distance(parent.origins["right"], parent.origins["left"]);
 
     /*
-    		if( isDefined( vehicle_node ) )
+    		if( isdefined( vehicle_node ) )
     		{
     			parent.vehicle_node = vehicle_node;
     		}
@@ -310,9 +309,8 @@ create_path() {
 
     new_count++;
 
-    if(targ == next_targ) {
+    if(targ == next_targ)
       break;
-    }
 
     targ = next_targ;
   }
@@ -380,7 +378,7 @@ add_collision_to_path(path) {
   }
 
   // add the hard collision radiuses to the nearest path points
-  moto_collision = getEntArray("moto_collision", "targetname");
+  moto_collision = getentarray("moto_collision", "targetname");
   foreach(col_radius in moto_collision) {
     closest_nodes = get_array_of_closest(col_radius.origin, path, undefined, 2);
     foreach(node in closest_nodes) {
@@ -422,18 +420,15 @@ get_offset_percent(targ, next_targ, progress, offset) {
 }
 
 add_collision_to_path_ent(targ, col_org) {
-  if(targ == targ.next_node) {
+  if(targ == targ.next_node)
     return;
-  }
 
   max_dist = targ.road_width;
-  if(targ.dist_to_next_targ > max_dist) {
+  if(targ.dist_to_next_targ > max_dist)
     max_dist = targ.dist_to_next_targ;
-  }
 
-  if(distance(col_org.origin, targ.next_node.midpoint) > max_dist * 1.5) {
+  if(distance(col_org.origin, targ.next_node.midpoint) > max_dist * 1.5)
     return;
-  }
 
   next_org = getstruct(col_org.target, "targetname");
 
@@ -443,12 +438,10 @@ add_collision_to_path_ent(targ, col_org) {
   prog2 = get_progression_between_points(next_org.origin, targ.midpoint, targ.next_node.midpoint);
   progress2 = prog2["progress"];
 
-  if(progress1 < 0 || progress2 < 0) {
+  if(progress1 < 0 || progress2 < 0)
     return;
-  }
-  if(progress1 > targ.dist_to_next_targ && progress2 > targ.dist_to_next_targ) {
+  if(progress1 > targ.dist_to_next_targ && progress2 > targ.dist_to_next_targ)
     return;
-  }
 
   assertex(progress1 >= 0, "Negative progress");
   assertex(progress2 >= 0, "Negative progress");
@@ -508,14 +501,12 @@ add_collision_offsets_to_path_ent(targ, close_org, far_org) {
   start_min_progress = min_progress;
 
   // travel down the path and set collision	
-  for(;;) {
+  for (;;) {
     add_vol_to_node(targ, max_progress, min_progress, right_offset, left_offset, right_offset_percent, left_offset_percent);
-    if(!isDefined(targ.next_node)) {
+    if(!isdefined(targ.next_node))
       break;
-    }
-    if(targ.dist_to_next_targ >= max_progress) {
+    if(targ.dist_to_next_targ >= max_progress)
       break;
-    }
 
     max_progress -= targ.dist_to_next_targ;
     targ = targ.next_node;
@@ -527,13 +518,11 @@ add_collision_offsets_to_path_ent(targ, close_org, far_org) {
   min_progress = start_min_progress;
 
   // travel up the path and set collision	
-  for(;;) {
-    if(!isDefined(targ.previous_node)) {
+  for (;;) {
+    if(!isdefined(targ.previous_node))
       break;
-    }
-    if(min_progress > 0) {
+    if(min_progress > 0)
       break;
-    }
 
     targ = targ.previous_node;
     max_progress = targ.dist_to_next_targ;
@@ -545,14 +534,12 @@ add_collision_offsets_to_path_ent(targ, close_org, far_org) {
 add_vol_to_node(targ, max_col_progress, min_col_progress, right_offset, left_offset, right_offset_percent, left_offset_percent) {
   colvol = [];
   colvol["max"] = max_col_progress;
-  if(colvol["max"] > targ.dist_to_next_targ) {
+  if(colvol["max"] > targ.dist_to_next_targ)
     colvol["max"] = targ.dist_to_next_targ;
-  }
 
   colvol["min"] = min_col_progress;
-  if(colvol["min"] < 0) {
+  if(colvol["min"] < 0)
     colvol["min"] = 0;
-  }
 
   assert(colvol["min"] < colvol["max"]);
 
@@ -590,7 +577,7 @@ get_progression_between_points(start, first_point, second_point) {
   prog = [];
 
   angles = vectortoangles(second_point - first_point);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
 
   end = first_point;
   difference = vectornormalize(end - start);
@@ -609,35 +596,33 @@ get_progression_between_points(start, first_point, second_point) {
   difference = vectornormalize(offset_org - start);
   dot = vectordot(right, difference);
   prog["dot"] = dot;
-  if(dot > 0) {
+  if(dot > 0)
     prog["offset"] *= -1;
-  }
 
   return prog;
+
 }
 
 wipe_out(bike) {
   foreach(col_radius in self.targ.col_radiuses) {
     crashPoint = (self.origin[0], self.origin[1], 0);
 
-    if(distance((col_radius.origin[0], col_radius.origin[1], 0), crashPoint) < col_radius.radius) {
+    if(distance((col_radius.origin[0], col_radius.origin[1], 0), crashPoint) < col_radius.radius)
       return true;
-    }
   }
 
-  if(bike.health >= 100) // 0 && bike.rider.health >= 100 ) {
+  if(bike.health >= 100) // 0 && bike.rider.health >= 100 )
     return false;
-}
 
-level.bike_score++;
+  level.bike_score++;
 
-return true;
+  return true;
 }
 
 vehicle_line(bike) {
   self endon("death");
   bike endon("death");
-  for(;;) {
+  for (;;) {
     line(self.origin, bike.origin, (0.2, 0.8, 0.3), 1, 0);
     wait(0.05);
   }
@@ -645,13 +630,11 @@ vehicle_line(bike) {
 
 spawner_random_team() {
   waittillframeend;
-  if(!isDefined(self.riders)) {
+  if(!isdefined(self.riders))
     return;
-  }
   team = "axis";
-  if(cointoss()) {
+  if(cointoss())
     team = "allies";
-  }
   foreach(guy in self.riders) {
     guy.team = team;
   }
@@ -666,20 +649,19 @@ get_spawn_position(player_targ, my_progress) {
   // pick a random track offset then adjust it for obstacles
   half_road_width = targ.road_width * 0.5;
   offset = undefined;
-  if(isDefined(level.player.offset)) {
+  if(isdefined(level.player.offset)) {
     random_offset = 500;
-    if(cointoss()) {
+    if(cointoss())
       random_offset *= -1;
-    }
     offset = level.player.offset + random_offset;
   } else {
     offset = randomfloatrange(half_road_width * -1, half_road_width);
   }
 
   obstacle_array = get_obstacle_dodge_amount(targ, progress, offset);
-  if(isDefined(obstacle_array["dodge"])) {
+  if(isdefined(obstacle_array["dodge"]))
     offset = obstacle_array["dodge"];
-  }
+
 
   // get the point on the spline
   spawn_pos = get_position_from_spline_unlimited(targ, progress, offset);
@@ -692,31 +674,33 @@ get_spawn_position(player_targ, my_progress) {
 }
 
 debug_enemy_vehicles() {
-  if(!getdebugdvarint("vehicle_spline_debug")) {
+  /#
+  if(!getdebugdvarint("vehicle_spline_debug"))
     return;
-  }
 
   level notify("stop_debugging_enemy_vehicles");
   array_thread(level.enemy_snowmobiles, ::debug_enemy_vehicles_line);
+  # /
 }
 
 debug_enemy_vehicles_line() {
   self endon("death");
   level endon("stop_debugging_enemy_vehicles");
-  for(;;) {
+  for (;;) {
     line(self.origin, level.player.origin, (1, 0.5, 0));
     wait(0.05);
   }
 }
 
 spawn_enemy_bike() {
-  assertex(isDefined(level.enemy_snowmobiles), "Please add maps\_vehicle_spline::init_vehicle_splines(); to the beginning of your script");
+  assertex(isdefined(level.enemy_snowmobiles), "Please add maps\_vehicle_spline::init_vehicle_splines(); to the beginning of your script");
 
+  /#
   debug_enemy_vehicles();
+  # /
 
-  if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max) {
-    return;
-  }
+    if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max)
+      return;
 
   player_targ = get_player_targ();
   player_progress = get_player_progress();
@@ -741,7 +725,7 @@ spawn_enemy_bike() {
   spawn_pos = drop_to_ground(spawn_pos);
 
   snowmobile_spawner = getent("snowmobile_spawner", "targetname");
-  assertEx(isDefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
+  assertEx(isdefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
   targ = spawn_array["targ"];
 
   snowmobile_spawner.origin = spawn_pos;
@@ -749,9 +733,8 @@ spawn_enemy_bike() {
   //snowmobile_spawner.angles = vectortoangles( snowmobile_path_node.next_node.midpoint - snowmobile_path_node.midpoint );
   snowmobile_spawner.angles = vectortoangles(targ.next_node.midpoint - targ.midpoint);
   /*
-  if( isalive( level.player ) && isDefined( level.player.vehicle ) ) {
+  if( isalive( level.player ) && isdefined( level.player.vehicle ) )
   	snowmobile_spawner.angles = level.player.vehicle.angles;
-  }
   */
 
   ai_spawners = snowmobile_spawner get_vehicle_ai_spawners();
@@ -766,9 +749,8 @@ spawn_enemy_bike() {
   bike thread crash_detection();
   bike.left_spline_path_time = gettime() - 3000;
   waittillframeend; // for bike.riders to get defined
-  if(!isalive(bike)) {
+  if(!isalive(bike))
     return;
-  }
 
   targ bike_drives_path(bike);
 }
@@ -781,31 +763,29 @@ crash_detection() {
 
 rider_death_detection(bike) {
   self waittill("death");
-  if(isDefined(bike)) {
+  if(isdefined(bike)) {
     bike wipeout("driver died!");
   }
 }
 
 wipeout(msg) {
+  /#
   if(!self.wipeout) {
-    if(getdebugdvarint("vehicle_spline_debug")) {
+    if(getdebugdvarint("vehicle_spline_debug"))
       Print3d(self.origin, msg, (1, 0.25, 0), 1, 1.5, 400);
-    }
   }
-
-  self.wipeout = true;
+  # /
+    self.wipeout = true;
 }
 
 update_bike_player_avoidance(my_bike) {
   bikes = [];
   foreach(bike in level.enemy_snowmobiles) {
-    if(!isalive(bike)) {
+    if(!isalive(bike))
       continue;
-    }
 
-    if(bike.wipeout) {
+    if(bike.wipeout)
       continue;
-    }
 
     bikes[bikes.size] = bike;
   }
@@ -833,27 +813,24 @@ update_bike_player_avoidance(my_bike) {
 }
 
 bike_drives_path(bike) {
-  if(!isDefined(bike.left_spline_path_time)) {
+  if(!isdefined(bike.left_spline_path_time))
     bike.left_spline_path_time = gettime();
-  }
 
   bike.wipeout = false;
   update_bike_player_avoidance(bike);
 
   // speed = randomfloatrange( 50, 70 );
 
-  if(!isDefined(bike.player_offset)) {
+  if(!isdefined(bike.player_offset))
     bike.player_offset = 250;
-  }
 
   bike.steering = 0;
   offset = randomfloatrange(0, 1);
-  if(!isDefined(bike.offset_percent)) {
+  if(!isdefined(bike.offset_percent))
     bike.offset_percent = offset * 2 - 1;
-  }
 
   targ = self;
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.origin = self.midpoint;
   ent.progress = 0;
   ent.tilt_vel = 0;
@@ -866,9 +843,8 @@ bike_drives_path(bike) {
   /*
   foreach ( rider in bike.riders )
   {
-  	if( !isDefined( rider.magic_bullet_shield ) ) {
+  	if( !isdefined( rider.magic_bullet_shield ) )
   		rider thread magic_bullet_shield();
-  	}
   }
   */
 
@@ -881,7 +857,7 @@ bike_drives_path(bike) {
 
   ent.bike = bike;
   //bike EnableAimAssist();
-  //bike playLoopSound( "veh_motorcycle_dist_loop" );
+  //bike playloopsound( "veh_motorcycle_dist_loop" );
 
   bike.health = 100;
 
@@ -896,29 +872,28 @@ bike_drives_path(bike) {
 
   bike.old_pos = bike.origin;
 
-  for(;;) {
-    if(getdebugdvarint("vehicle_spline_debug")) {
+  for (;;) {
+    /#
+    if(getdebugdvarint("vehicle_spline_debug"))
       bike debug_bike_line();
-    }
+    # /
 
-    if(!isalive(bike)) {
-      break;
-    }
+      if(!isalive(bike))
+        break;
 
     set_bike_position(ent);
 
-    if(!isalive(bike)) {
+    if(!isalive(bike))
       break;
-    }
     if(abs(bike.progress_dif) > 6000 && gettime() > bike.left_spline_path_time + 4000) {
       bike wipeout("left behind!");
     }
 
     waittillframeend; // for bike_ent wipeout to occur
     if(bike.wipeout) {
-      if(isDefined(bike.hero)) {
+
+      if(isdefined(bike.hero))
         continue;
-      }
 
       bike VehPhys_Crash();
       foreach(rider in bike.riders) {
@@ -928,7 +903,7 @@ bike_drives_path(bike) {
         }
       }
       wait(5);
-      if(isDefined(bike)) {
+      if(isdefined(bike)) {
         bike delete();
       }
 
@@ -938,68 +913,60 @@ bike_drives_path(bike) {
       //			bike hide();
     }
 
-    if(ent ent_flag("biker_reaches_path_end") || flag("race_complete")) {
+    if(ent ent_flag("biker_reaches_path_end") || flag("race_complete"))
       break;
-    }
   }
 
   update_bike_player_avoidance();
 
   ent notify("stop_bike");
   level notify("biker_dies");
-  if(bike.wipeout && !flag("race_complete")) {
+  if(bike.wipeout && !flag("race_complete"))
     wait(5);
-  }
 
   ent ent_flag_clear("biker_reaches_path_end");
+
 }
 
 get_obstacle_dodge_amount(targ, progress, offset) {
   array["near_obstacle"] = false;
   foreach(vol in targ.col_volumes) {
-    if(progress < vol["min"]) {
+    if(progress < vol["min"])
       continue;
-    }
-    if(progress > vol["max"]) {
+    if(progress > vol["max"])
       continue;
-    }
     array["near_obstacle"] = true;
-    if(offset < vol["left_offset"]) {
+    if(offset < vol["left_offset"])
       continue;
-    }
-    if(offset > vol["right_offset"]) {
+    if(offset > vol["right_offset"])
       continue;
-    }
 
     org = (targ.midpoint + targ.next_node.midpoint) * 0.5;
     //droppedLineZ( targ.z, org, origin, RED, 1, 0, 1 );
-    if(offset > vol["mid_offset"]) {
+    if(offset > vol["mid_offset"])
       array["dodge"] = vol["right_offset"];
-    } else {
+    else
       array["dodge"] = vol["left_offset"];
-    }
     break;
   }
   return array;
 }
 
 sweep_tells_vehicles_to_get_off_path() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isDefined(other.script_noteworthy)) {
+    if(!isdefined(other.script_noteworthy))
       continue;
-    }
-    if(other.script_noteworthy != "sweepable") {
+    if(other.script_noteworthy != "sweepable")
       continue;
-    }
     timer = randomfloatrange(0, 1);
     other thread notify_delay("enable_spline_path", timer);
   }
 }
 
 drawmyoff() {
-  for(;;) {
-    if(isDefined(level.player.vehicle)) {
+  for (;;) {
+    if(isdefined(level.player.vehicle)) {
       my_speed = self vehicle_getSpeed();
       p_speed = level.player.vehicle vehicle_getSpeed();
       Print3d(self.origin + (0, 0, 64), my_speed - p_speed, (1, 0, 0.2), 1, 1.2);
@@ -1012,27 +979,25 @@ drawmyoff() {
 }
 
 priceliner() {
+  /#
   create_dvar("price_line", 0);
-  for(;;) {
-    if(!isDefined(level.player.vehicle)) {
+  for (;;) {
+    if(!isdefined(level.player.vehicle))
       return;
-    }
 
-    forward = anglesToForward(level.player.vehicle.angles);
+    forward = anglestoforward(level.player.vehicle.angles);
     forward *= -150;
-    if(getdebugdvarint("price_line")) {
+    if(getdebugdvarint("price_line"))
       Line(level.player.origin + forward, self.origin, (1, 0, 0));
-    }
     wait(0.05);
   }
-
+  # /
 }
 
 modulate_speed_based_on_progress() {
   /*
-  if( flag( "price_leaves_player_throttling" ) ) {
+  if( flag( "price_leaves_player_throttling" ) )
   	return;
-  }
   level endon( "price_leaves_player_throttling" );
   */
 
@@ -1044,106 +1009,107 @@ modulate_speed_based_on_progress() {
   self endon("stop_modulating_speed");
 
   hud = undefined;
-
+  /#
   hud = maps\_hud_util::createFontString("default", 1.5);
   hud maps\_hud_util::setPoint("MIDDLE", "MIDDLE", 0, 30);
   hud.color = (1, 1, 1);
   hud.alpha = 1;
+  # /
 
-  for(;;) {
-    //		wait( randomfloatrange( 0.4, 1.2 ) );
-    wait(0.05);
+    for (;;) {
+      //		wait( randomfloatrange( 0.4, 1.2 ) );
+      wait(0.05);
 
-    targ = self.targ;
-    if(targ == targ.next_node) {
-      // reached end
-      return;
-    }
-
-    array = get_progression_between_points(self.origin, self.targ.midpoint, self.targ.next_node.midpoint);
-    progress = array["progress"];
-    progress += level.POS_LOOKAHEAD_DIST;
-
-    ent = move_to_correct_segment(self.targ, progress);
-    progress = ent.progress;
-    self.targ = ent.targ;
-    self.progress = progress;
-
-    player_targ = get_player_targ();
-    player_progress = get_player_progress();
-    dif = progress_dif(self.targ, self.progress, player_targ, player_progress);
-    level.progress_dif = dif;
-
-    /*
-    if( dif < -1000 )
-    {
-    	// catch up
-    	if( isDefined( player_targ.next_node ) && isDefined( player_targ.next_node.vehicle_node ) )
-    	{
-    		path = player_targ.next_node.vehicle_node;
-    		endpos = self get_bike_pos_from_spline( player_targ, player_progress - 500, 0, path.origin[ 2 ] );
-    		self Vehicle_Teleport( endpos, self.angles );
-    		self startPath( path );
-    		Line( level.player.origin, endpos, (1,0,1), 1, 0, 500 );
-    	}
-    }
-    */
-
-    if(!isDefined(level.player.vehicle)) {
-      self Vehicle_SetSpeed(65, 1, 1);
-      continue;
-    }
-
-    if(abs(dif > 3500)) {
-      speed = 65;
-
-      // if we're between these two speeds, then
-      //normal_max = 600;
-      //normal_min = 300;
-      //dif_min = 300;
-
-      dif *= -1;
-      dif += 750; // go this far ahead of the player
-      speed = level.player.vehicle.veh_speed + dif * 0.05;
-      max_speed = level.player.vehicle.veh_speed;
-      if(max_speed < 100) {
-        max_speed = 100;
+      targ = self.targ;
+      if(targ == targ.next_node) {
+        // reached end
+        return;
       }
 
-      if(speed > max_speed) {
-        speed = max_speed;
-      } else {
+      array = get_progression_between_points(self.origin, self.targ.midpoint, self.targ.next_node.midpoint);
+      progress = array["progress"];
+      progress += level.POS_LOOKAHEAD_DIST;
+
+      ent = move_to_correct_segment(self.targ, progress);
+      progress = ent.progress;
+      self.targ = ent.targ;
+      self.progress = progress;
+
+      player_targ = get_player_targ();
+      player_progress = get_player_progress();
+      dif = progress_dif(self.targ, self.progress, player_targ, player_progress);
+      level.progress_dif = dif;
+
+
+      /*
+      if( dif < -1000 )
+      {
+      	// catch up
+      	if( isdefined( player_targ.next_node ) && isdefined( player_targ.next_node.vehicle_node ) )
+      	{
+      		path = player_targ.next_node.vehicle_node;
+      		endpos = self get_bike_pos_from_spline( player_targ, player_progress - 500, 0, path.origin[ 2 ] );
+      		self Vehicle_Teleport( endpos, self.angles );
+      		self startPath( path );
+      		Line( level.player.origin, endpos, (1,0,1), 1, 0, 500 );
+      	}
+      }
+      */
+
+      if(!isdefined(level.player.vehicle)) {
+        self Vehicle_SetSpeed(65, 1, 1);
+        continue;
+      }
+
+      if(abs(dif > 3500)) {
+        speed = 65;
+
+        // if we're between these two speeds, then 
+        //normal_max = 600; 
+        //normal_min = 300;
+        //dif_min = 300;
+
+        dif *= -1;
+        dif += 750; // go this far ahead of the player
+        speed = level.player.vehicle.veh_speed + dif * 0.05;
+        max_speed = level.player.vehicle.veh_speed;
+        if(max_speed < 100)
+          max_speed = 100;
+
+        if(speed > max_speed)
+          speed = max_speed;
+        else
         if(speed < self.min_speed)
+          speed = self.min_speed;
+        level.desired_speed = speed;
+
+        //my_speed = self vehicle_getSpeed();
+        //if( abs( player_speed - my_speed ) > 50 )
+        //	self Vehicle_SetSpeedImmediate( speed, 90, 20 );
+        //else
+        self Vehicle_SetSpeed(speed, 90, 20);
+      } else {
+        price_match_player_speed(10, 10);
+        /#
+        //hud setText( int( array["progress"] ) + " mult:" + multiplier + " dspeed:" + int( my_speed ) + " aspeed:" + int( self.veh_speed ) );
+        # /
       }
-      speed = self.min_speed;
-      level.desired_speed = speed;
-
-      //my_speed = self vehicle_getSpeed();
-      //if( abs( player_speed - my_speed ) > 50 )
-      //	self Vehicle_SetSpeedImmediate( speed, 90, 20 );
-      //else
-      self Vehicle_SetSpeed(speed, 90, 20);
-    } else {
-      price_match_player_speed(10, 10);
-
-      //hud setText( int( array["progress"] ) + " mult:" + multiplier + " dspeed:" + int( my_speed ) + " aspeed:" + int( self.veh_speed ) );
 
     }
-
-  }
 }
 
 price_match_player_speed(maxaccell, maxdecel) {
+
   angles = self.angles;
   angles = (0, angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
 
   array = get_progression_between_points(level.player.vehicle.origin, self.origin + forward * 1, self.origin - forward * 1);
   progress = array["progress"];
 
-  if(progress > 4000) {
+  if(progress > 4000)
     self Vehicle_SetSpeed(0, 90, 20);
-  } else {
+  else {
     dot = get_dot(self.origin, self.angles, level.player.origin);
     multiplier = 1;
 
@@ -1151,32 +1117,25 @@ price_match_player_speed(maxaccell, maxdecel) {
       // we're ahead of the player
 
       /*
-      if( progress > 3000 ) {
+      if( progress > 3000 )
       	multiplier = 0.1;
-      }
-      else {
+      else
       if( progress > 1000 )
-      }
       	multiplier = 0.2;
-      else {
+      else
       if( progress > 500 )
-      }
       	multiplier = 0.6;
-      else {
+      else
       if( progress > 300 )
-      }
       	multiplier = 0.9;
-      else {
+      else
       if( progress > 150 )
-      }
       	multiplier = 0.98;
-      else {
+      else
       if( progress > 100 )
-      }
       	multiplier = 0.99;
-      else {
+      else
       if( progress > 50 )
-      }
       	multiplier = 1.0;
       	
       multiplier += randomfloatrange( -0.5, 0.5 );
@@ -1190,9 +1149,8 @@ price_match_player_speed(maxaccell, maxdecel) {
 
       multiplier = 1;
     } else {
-      if(progress > -500) {
+      if(progress > -500)
         multiplier = 1.25;
-      }
 
       if(multiplier > 0.95 && dot > 0.97) {
         // player is ahead of us, don't run him over
@@ -1201,12 +1159,10 @@ price_match_player_speed(maxaccell, maxdecel) {
     }
 
     my_speed = 70 * multiplier;
-    if(my_speed < self.min_speed) {
+    if(my_speed < self.min_speed)
       my_speed = self.min_speed;
-    }
-    if(my_speed < 25) {
+    if(my_speed < 25)
       my_speed = 25;
-    }
 
     /*
     if( my_speed + 8 < self.veh_speed )
@@ -1215,12 +1171,10 @@ price_match_player_speed(maxaccell, maxdecel) {
     }
     else
     {
-    	if( my_speed > self.veh_speed + 50 ) {
+    	if( my_speed > self.veh_speed + 50 )
     		self Vehicle_SetSpeedImmediate( my_speed, 90, 90 );
-    	}
-    	else {
+    	else
     		self Vehicle_SetSpeed( my_speed, 90, 90 );
-    	}
     }
     */
 
@@ -1230,16 +1184,17 @@ price_match_player_speed(maxaccell, maxdecel) {
 }
 
 match_player_speed(maxaccell, maxdecel) {
+
   angles = self.angles;
   angles = (0, angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
 
   array = get_progression_between_points(level.player.vehicle.origin, self.origin + forward * 1, self.origin - forward * 1);
   progress = array["progress"];
 
-  if(progress > 4000) {
+  if(progress > 4000)
     self Vehicle_SetSpeed(0, 90, 20);
-  } else {
+  else {
     if(progress < level.SPLINE_MIN_PROGRESS && gettime() > self.left_spline_path_time + 4000) {
       self wipeout("low progress!");
     }
@@ -1249,18 +1204,16 @@ match_player_speed(maxaccell, maxdecel) {
 
     multiplier = 1;
 
-    if(progress > 150) {
+    if(progress > 150)
       multiplier = 0.6;
-    } else {
-      if(progress > 100)
-    }
-    multiplier = 1.0;
-    else {
-      if(progress < -100)
-    }
-    multiplier = 1.5;
+    else
+    if(progress > 100)
+      multiplier = 1.0;
+    else
+    if(progress < -100)
+      multiplier = 1.5;
 
-    if(isDefined(level.player.offset)) {
+    if(isdefined(level.player.offset)) {
       if(progress > 250) {
         // we're speeding up from behind so stay to the side
         //				range = 200;
@@ -1280,9 +1233,8 @@ match_player_speed(maxaccell, maxdecel) {
     }
 
     my_speed = level.player.vehicle.veh_speed * multiplier;
-    if(my_speed < 25) {
+    if(my_speed < 25)
       my_speed = 25;
-    }
 
     /*
     if( my_speed + 8 < self.veh_speed )
@@ -1291,12 +1243,10 @@ match_player_speed(maxaccell, maxdecel) {
     }
     else
     {
-    	if( my_speed > self.veh_speed + 50 ) {
+    	if( my_speed > self.veh_speed + 50 )
     		self Vehicle_SetSpeedImmediate( my_speed, 90, 90 );
-    	}
-    	else {
+    	else
     		self Vehicle_SetSpeed( my_speed, 90, 90 );
-    	}
     }
     */
 
@@ -1311,12 +1261,11 @@ track_player_progress(org) {
   self.targ = get_my_spline_node(org);
   self.progress = 0;
   player_sweep_trigger = getent("player_sweep_trigger", "targetname");
-  sweep_trigger = isDefined(player_sweep_trigger);
-  if(sweep_trigger) {
+  sweep_trigger = isdefined(player_sweep_trigger);
+  if(sweep_trigger)
     player_sweep_trigger thread sweep_tells_vehicles_to_get_off_path();
-  }
 
-  for(;;) {
+  for (;;) {
     if(self.targ == self.targ.next_node) {
       // reached end
       return;
@@ -1353,7 +1302,7 @@ track_player_progress(org) {
     /*
     sweep_targ = self.targ;
     progress += 2000;
-    for( ;; )
+    for ( ;; )
     {
     	if( progress > sweep_targ.dist_to_next_targ )
     	{
@@ -1367,10 +1316,10 @@ track_player_progress(org) {
     player_sweep_trigger.origin = ( player_sweep_trigger.origin[ 0 ], player_sweep_trigger.origin[ 1 ], self.origin[ 2 ] - 500 );
 
     		
-    		
+		
     sweep_yaw = vectortoangles( sweep_targ.origin - sweep_targ.next_node.origin )[ 1 ];
     sweep_yaw_next = vectortoangles( sweep_targ.next_node.origin - sweep_targ.next_node.next_node.origin )[ 1 ];
-    		
+		
     yaw = sweep_yaw * progress_percent + sweep_yaw_next * ( 1 - progress_percent );
     player_sweep_trigger.angles = ( 0, yaw, 0 );
     */
@@ -1380,11 +1329,11 @@ track_player_progress(org) {
 }
 
 progress_dif(targ, progress, targ2, progress2) {
-  while(targ.index > targ2.index) {
+  while (targ.index > targ2.index) {
     targ = targ.prev_node;
     progress += targ.dist_to_next_targ;
   }
-  while(targ2.index > targ.index) {
+  while (targ2.index > targ.index) {
     targ2 = targ2.prev_node;
     progress2 += targ2.dist_to_next_targ;
   }
@@ -1472,11 +1421,14 @@ set_bike_position(ent) {
 
   chaseCam = false;
 
+  /#
+
   if(getdvarint("chasecam")) {
     chasecam = true;
   }
+  # /
 
-  current_road_width = targ.road_width;
+    current_road_width = targ.road_width;
 
   ent = move_to_correct_segment(targ, progress);
   progress = ent.progress;
@@ -1490,11 +1442,11 @@ set_bike_position(ent) {
 
   obstacle_array = get_obstacle_dodge_amount(targ, progress, offset);
 
-  if(isDefined(obstacle_array["dodge"])) {
+  if(isdefined(obstacle_array["dodge"])) {
     // is there an obstacle? dodge it
     offset = obstacle_array["dodge"];
   } else {
-    if(isDefined(bike.preferred_offset)) {
+    if(isdefined(bike.preferred_offset)) {
       offset = bike.preferred_offset;
     }
   }
@@ -1503,12 +1455,11 @@ set_bike_position(ent) {
   offset_limit = 0.95;
   road_half_width = targ.road_width * 0.5;
   road_half_width -= 50; // bring the edge in a little
-  if(offset > road_half_width) {
+  if(offset > road_half_width)
     offset = road_half_width;
-  } else {
-    if(offset < -1 * road_half_width)
-  }
-  offset = -1 * road_half_width;
+  else
+  if(offset < -1 * road_half_width)
+    offset = -1 * road_half_width;
 
   //speed = 70;
   if(targ != targ.next_node) {
@@ -1517,33 +1468,31 @@ set_bike_position(ent) {
     dot = get_dot(bike.origin, bike.angles, endpos);
     //Print3d( bike.origin, dot, (0,0.3,1), 1, 1, int( timer * 20 ) );
 
-    if(dot < 0.97) {
+    if(dot < 0.97)
       speed = 50;
-    } else {
-      if(dot < 0.96)
-    }
-    speed = 25;
-    else {
-      if(dot < 0.95)
-    }
-    speed = 15;
+    else
+    if(dot < 0.96)
+      speed = 25;
+    else
+    if(dot < 0.95)
+      speed = 15;
 
     bike vehicleDriveTo(endpos, speed);
-    if(!isDefined(level.player.vehicle)) {
+    if(!isdefined(level.player.vehicle)) {
       bike Vehicle_SetSpeed(65, 1, 1);
     } else {
       bike.veh_topspeed = level.player.vehicle.veh_topspeed * 1.3;
       bike match_player_speed(45, 30);
     }
 
-    if(getdebugdvarint("vehicle_spline_debug") && isDefined(level.player.vehicle)) {
-      if(bike.veh_speed > level.player.vehicle.veh_speed)
-    }
-    thread Linedraw(bike.origin, endpos, (0.9, 0.1, 0.3), 1, 0, timer);
-    else {
-      thread Linedraw(bike.origin, endpos, (0.3, 0.1, 0.9), 1, 0, timer);
-    }
+    /#
+    if(getdebugdvarint("vehicle_spline_debug") && isdefined(level.player.vehicle))
 
+      if(bike.veh_speed > level.player.vehicle.veh_speed)
+        thread Linedraw(bike.origin, endpos, (0.9, 0.1, 0.3), 1, 0, timer);
+      else
+        thread Linedraw(bike.origin, endpos, (0.3, 0.1, 0.9), 1, 0, timer);
+    # /
   }
 
   bike.progress_targ = targ;
@@ -1559,10 +1508,10 @@ get_bike_pos_from_spline(targ, progress, offset, z) {
 }
 
 move_to_correct_segment(targ, progress) {
-  ent = spawnStruct();
+  ent = spawnstruct();
 
   // convert progress to proper progress and targ	
-  for(;;) {
+  for (;;) {
     if(targ == targ.next_node) {
       break;
     }
@@ -1589,7 +1538,7 @@ move_to_correct_segment(targ, progress) {
 
 get_position_from_spline_unlimited(targ, progress, offset) {
   // travels down the path first
-  for(;;) {
+  for (;;) {
     if(targ == targ.next_node) {
       return targ.midpoint;
     }
@@ -1605,8 +1554,10 @@ get_position_from_spline_unlimited(targ, progress, offset) {
   return get_position_from_spline(targ, progress, offset);
 }
 
+
 //get_position_from_spline( targ, progress, offset )
 //{
+
 /*
 angles = vectortoangles( targ.midpoint - targ.next_node.midpoint );
 right = anglestoright( angles );
@@ -1633,36 +1584,36 @@ get_position_from_spline(targ, progress, offset) {
   return targ.midpoint + forward * progress + right * offset;
 
   /*
-  //	assertex( progress >= 0, "Negative progress" );
-  	// translates an offset distance to a percentage
-  	dist = distance( targ.midpoint, next_targ.midpoint );
-  	assertex( progress <= dist, "Too much progress" );
+//	assertex( progress >= 0, "Negative progress" );
+	// translates an offset distance to a percentage
+	dist = distance( targ.midpoint, next_targ.midpoint );
+	assertex( progress <= dist, "Too much progress" );
 
-  	progress_percent = 1 - ( progress / targ.dist_to_next_targ );
+	progress_percent = 1 - ( progress / targ.dist_to_next_targ );
 
-  	offset_side = "left";
-  	if( offset < 0 )
-  	{
-  		offset_side = "right";
-  	}
+	offset_side = "left";
+	if( offset < 0 )
+	{
+		offset_side = "right";
+	}
 
-  	// bumper meaning the outer edge of the current targ area
-  	bumper_start = targ.origins[ offset_side ];
-  	bumper_end = next_targ.origins[ offset_side ];
+	// bumper meaning the outer edge of the current targ area
+	bumper_start = targ.origins[ offset_side ];
+	bumper_end = next_targ.origins[ offset_side ];
 
-  	// the origin equivalent to our progress, on the bumper
-  	bumper_org = bumper_start * progress_percent + bumper_end * ( 1 - progress_percent );
+	// the origin equivalent to our progress, on the bumper
+	bumper_org = bumper_start * progress_percent + bumper_end * ( 1 - progress_percent );
 
-  	center_start = targ.midpoint;
-  	center_end = next_targ.midpoint;
+	center_start = targ.midpoint;
+	center_end = next_targ.midpoint;
 
-  	// our progress on the center divider
-  	center_org = center_start * progress_percent + center_end * ( 1 - progress_percent );
+	// our progress on the center divider
+	center_org = center_start * progress_percent + center_end * ( 1 - progress_percent );
 
-  	//droppedLine( center_org, bumper_org, GREEN, 1, 0, 5000 );
-  	offset_percent = 1 - abs( offset_percent );
-  	return center_org * offset_percent + bumper_org * ( 1 - offset_percent );
-  	*/
+	//droppedLine( center_org, bumper_org, GREEN, 1, 0, 5000 );
+	offset_percent = 1 - abs( offset_percent );
+	return center_org * offset_percent + bumper_org * ( 1 - offset_percent );
+	*/
 }
 
 get_position_from_progress(targ, progress) {
@@ -1672,19 +1623,18 @@ get_position_from_progress(targ, progress) {
 
 bike_ent_wipe_out_check(bike) {
   self endon("stop_bike");
-  for(;;) {
+  for (;;) {
     //self.wipeout = wipe_out( bike );
     self.wipeout = false; // need to find out from c0de
 
-    if(self.wipeout) {
+    if(self.wipeout)
       break;
-    }
     wait(0.05);
   }
 }
 
 draw_bike_debug() {
-  for(;;) {
+  for (;;) {
     waittillframeend;
     Print3d(self.origin, self.goal_dir, (1, 1, 1), 2);
     wait(0.05);
@@ -1693,13 +1643,13 @@ draw_bike_debug() {
 
 track_progress() {
   self endon("stop_bike");
-  for(;;) {
+  for (;;) {
     start = (self.origin[0], self.origin[1], 0);
     end = (self.targ.midpoint[0], self.targ.midpoint[1], 0);
     next_targ = (self.next_targ.midpoint[0], self.next_targ.midpoint[1], 0);
 
     difference = vectornormalize(end - start);
-    forward = anglesToForward(self.angles);
+    forward = anglestoforward(self.angles);
     dot = vectordot(forward, difference);
 
     normal = vectorNormalize(next_targ - end);
@@ -1728,37 +1678,32 @@ bike_avoids_obstacles(bike) {
 bike_randomly_changes_lanes() {
   self endon("stop_bike");
   self endon("end_path");
-  for(;;) {
+  for (;;) {
     if(self.targ.col_volumes.size == 0 && self.dodge_dir == 0) {
-      if(cointoss()) {
+      if(cointoss())
         self.goal_dir++;
-      } else {
+      else
         self.goal_dir--;
-      }
 
-      if(self.goal_dir > 1) {
+      if(self.goal_dir > 1)
         self.goal_dir -= 3;
-      } else {
-        if(self.goal_dir < -1)
-      }
-      self.goal_dir += 3;
+      else
+      if(self.goal_dir < -1)
+        self.goal_dir += 3;
     }
     wait(randomfloatrange(1, 3));
   }
 }
 
 should_stabilize() {
-  if(self.goal_dir == 0) {
+  if(self.goal_dir == 0)
     return true;
-  }
 
-  if(self.goal_dir == 1 && self.offset > self.safe_offset) {
+  if(self.goal_dir == 1 && self.offset > self.safe_offset)
     return true;
-  }
 
-  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1) {
+  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1)
     return true;
-  }
 
   return false;
 }
@@ -1768,7 +1713,7 @@ bike_turns() {
   tilt_vel_max = 12;
   tilt_rate = 3;
   max_turn_speed = 130;
-  for(;;) {
+  for (;;) {
     if(should_stabilize()) {
       // stabilizing
       if(self.tilt > 0) {
@@ -1814,9 +1759,8 @@ stabalize(max_turn_speed, tilt_rate) {
     self.tilt += tilt_rate;
   }
 
-  if(abs(self.tilt) < tilt_rate) {
+  if(abs(self.tilt) < tilt_rate)
     self.tilt = tilt_rate;
-  }
 }
 
 tilt_right(max_turn_speed, tilt_rate) {
@@ -1826,9 +1770,8 @@ tilt_right(max_turn_speed, tilt_rate) {
   }
 
   self.tilt += tilt_rate;
-  if(self.tilt >= max_turn_speed) {
+  if(self.tilt >= max_turn_speed)
     self.tilt = max_turn_speed;
-  }
 }
 
 tilt_left(max_turn_speed, tilt_rate) {
@@ -1838,9 +1781,8 @@ tilt_left(max_turn_speed, tilt_rate) {
   }
 
   self.tilt -= tilt_rate;
-  if(self.tilt < max_turn_speed * -1) {
+  if(self.tilt < max_turn_speed * -1)
     self.tilt = max_turn_speed * -1;
-  }
 }
 
 /*
@@ -1867,15 +1809,14 @@ bike_ent_drives_path( ent, targ )
 
 	frame_time = 0.05;
 
-	for( ;; )
+	for ( ;; )
 	{
 		if( ent.progress_percent >= 1.0 )
 		{
 			ent.progress_percent -= 1.0;
 			targ = next_targ;
-			if( !isDefined( targ.target ) ) {
+			if( !isdefined( targ.target ) )
 				break;
-			}
 
 			next_targ = getent( targ.target, "targetname" );
 			ent.targ = targ;
@@ -1887,12 +1828,10 @@ bike_ent_drives_path( ent, targ )
 		}
 
 		ent.offset += ent.tilt * 0.05;
-		if( ent.offset > ent.right_offset ) {
+		if( ent.offset > ent.right_offset )
 			ent.offset = ent.right_offset;
-		}
-		else {
+		else
 		if( ent.offset < ent.right_offset * - 1 )
-		}
 			ent.offset = ent.right_offset * - 1;
 
 		road_width = targ.road_width;
@@ -1928,7 +1867,7 @@ bike_ent_drives_path( ent, targ )
 */
 
 get_player_progress() {
-  if(isDefined(level.player.progress)) {
+  if(isdefined(level.player.progress)) {
     return level.player.progress;
   }
 
@@ -1936,17 +1875,15 @@ get_player_progress() {
 }
 
 get_player_targ() {
-  if(isDefined(level.player.targ)) {
+  if(isdefined(level.player.targ))
     return level.player.targ;
-  }
   return level.snowmobile_path[0];
 }
 
 debug_bike_line() {
   color = (0.2, 0.2, 1.0);
-  if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed) {
+  if(isdefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed)
     color = (1.0, 0.2, 0.2);
-  }
 
   Line(self.old_pos, self.origin, color, 1, 0, 50000);
   self.old_pos = self.origin;

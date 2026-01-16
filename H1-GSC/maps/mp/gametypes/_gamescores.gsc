@@ -7,23 +7,21 @@
 gethighestscoringplayer() {
   updateplacement();
 
-  if(!level.placement["all"].size) {
+  if(!level.placement["all"].size)
     return undefined;
-  } else {
+  else
     return level.placement["all"][0];
-  }
 }
 
 gethighestscoringplayersarray(var_0) {
   var_1 = [];
 
-  if(var_0 < 0) {
+  if(var_0 < 0)
     return var_1;
-  }
 
   updateplacement();
 
-  for(var_2 = 0; var_2 < var_0; var_2++) {
+  for (var_2 = 0; var_2 < var_0; var_2++) {
     if(level.placement["all"].size == var_2) {
       break;
     }
@@ -65,9 +63,8 @@ displaypoints(var_0) {
 }
 
 giveplayerscore(var_0, var_1, var_2) {
-  if(isDefined(var_1.owner)) {
+  if(isdefined(var_1.owner))
     var_1 = var_1.owner;
-  }
 
   if(!isplayer(var_1)) {
     return;
@@ -80,9 +77,8 @@ giveplayerscore(var_0, var_1, var_2) {
   if(var_4 == 0) {
     return;
   }
-  if(var_1.pers["score"] < 65535) {
+  if(var_1.pers["score"] < 65535)
     var_1.score = var_1.pers["score"];
-  }
 
   if(level.teambased) {
     var_1 maps\mp\gametypes\_persistence::statsetchild("round", "score", var_1.score);
@@ -100,13 +96,13 @@ giveplayerscore(var_0, var_1, var_2) {
 onplayerscore(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isDefined(level.onplayerscore)) {
-    var_3 = [[level.onplayerscore]](var_0, var_1, var_2);
-  }
+  if(isdefined(level.onplayerscore))
+    var_3 = [
+      [level.onplayerscore]
+    ](var_0, var_1, var_2);
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = maps\mp\gametypes\_rank::getscoreinfovalue(var_0);
-  }
 
   var_1.pers["score"] = var_1.pers["score"] + var_3 * level.objectivepointsmod;
 }
@@ -141,9 +137,8 @@ giveteamscoreforobjectiveendofframe() {
     level.laststatustime = gettime();
     maps\mp\_utility::leaderdialog("lead_taken", var_0, "status");
 
-    if(level.waswinning != "none") {
+    if(level.waswinning != "none")
       maps\mp\_utility::leaderdialog("lead_lost", level.waswinning, "status");
-    }
   }
 
   if(var_0 != "none") {
@@ -156,9 +151,8 @@ giveteamscoreforobjectiveendofframe() {
     }
     var_3 = var_1 / var_2 * 100;
 
-    if(var_3 > level.scorepercentagecutoff) {
+    if(var_3 > level.scorepercentagecutoff)
       setnojipscore(1);
-    }
   }
 }
 
@@ -168,7 +162,7 @@ getwinningteam() {
   var_2 = game["teamScores"][var_0[0]];
   var_3 = 1;
 
-  for(var_4 = 1; var_4 < var_0.size; var_4++) {
+  for (var_4 = 1; var_4 < var_0.size; var_4++) {
     if(game["teamScores"][var_0[var_4]] > var_2) {
       var_1 = var_0[var_4];
       var_2 = game["teamScores"][var_0[var_4]];
@@ -192,9 +186,9 @@ _setteamscore(var_0, var_1) {
   game["teamScores"][var_0] = var_1;
   updateteamscore(var_0);
 
-  if(maps\mp\_utility::inovertime() && !isDefined(level.overtimescorewinoverride) || isDefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride) {
+  if(maps\mp\_utility::inovertime() && !isdefined(level.overtimescorewinoverride) || isdefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride)
     thread maps\mp\gametypes\_gamelogic::onscorelimit();
-  } else {
+  else {
     thread maps\mp\gametypes\_gamelogic::checkteamscorelimitsoon(var_0);
     thread maps\mp\gametypes\_gamelogic::checkscorelimit();
   }
@@ -203,11 +197,10 @@ _setteamscore(var_0, var_1) {
 updateteamscore(var_0) {
   var_1 = 0;
 
-  if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
+  if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased())
     var_1 = _getteamscore(var_0);
-  } else {
+  else
     var_1 = game["roundsWon"][var_0];
-  }
 
   setteamscore(var_0, var_1);
 }
@@ -222,9 +215,8 @@ sendupdatedteamscores() {
   wait 0.05;
   maps\mp\_utility::waittillslowprocessallowed();
 
-  foreach(var_1 in level.players) {
-    var_1 updatescores();
-  }
+  foreach(var_1 in level.players)
+  var_1 updatescores();
 }
 
 sendupdateddmscores() {
@@ -233,7 +225,7 @@ sendupdateddmscores() {
   wait 0.05;
   maps\mp\_utility::waittillslowprocessallowed();
 
-  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+  for (var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] updatedmscores();
     level.players[var_0].updateddmscores = 1;
   }
@@ -244,14 +236,12 @@ removedisconnectedplayerfromplacement() {
   var_1 = level.placement["all"].size;
   var_2 = 0;
 
-  for(var_3 = 0; var_3 < var_1; var_3++) {
-    if(level.placement["all"][var_3] == self) {
+  for (var_3 = 0; var_3 < var_1; var_3++) {
+    if(level.placement["all"][var_3] == self)
       var_2 = 1;
-    }
 
-    if(var_2) {
+    if(var_2)
       level.placement["all"][var_3] = level.placement["all"][var_3 + 1];
-    }
   }
 
   if(!var_2) {
@@ -259,9 +249,8 @@ removedisconnectedplayerfromplacement() {
   }
   level.placement["all"][var_1 - 1] = undefined;
 
-  if(level.multiteambased) {
+  if(level.multiteambased)
     mtdm_updateteamplacement();
-  }
 
   if(level.teambased) {
     updateteamplacement();
@@ -270,7 +259,7 @@ removedisconnectedplayerfromplacement() {
 
   var_1 = level.placement["all"].size;
 
-  for(var_3 = 0; var_3 < var_1; var_3++) {
+  for (var_3 = 0; var_3 < var_1; var_3++) {
     var_4 = level.placement["all"][var_3];
     var_4 notify("update_outcome");
   }
@@ -280,7 +269,7 @@ updateplacement() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(isDefined(var_2.connectedpostgame)) {
+    if(isdefined(var_2.connectedpostgame)) {
       continue;
     }
     if(var_2.pers["team"] == "spectator" || var_2.pers["team"] == "none") {
@@ -289,52 +278,44 @@ updateplacement() {
     var_0[var_0.size] = var_2;
   }
 
-  for(var_4 = 1; var_4 < var_0.size; var_4++) {
+  for (var_4 = 1; var_4 < var_0.size; var_4++) {
     var_2 = var_0[var_4];
     var_5 = var_2.score;
 
-    if(!level.teambased) {
+    if(!level.teambased)
       var_5 = var_2.extrascore0;
-    }
 
-    for(var_6 = var_4 - 1; var_6 >= 0 && getbetterplayer(var_2, var_0[var_6]) == var_2; var_6--) {
+    for (var_6 = var_4 - 1; var_6 >= 0 && getbetterplayer(var_2, var_0[var_6]) == var_2; var_6--)
       var_0[var_6 + 1] = var_0[var_6];
-    }
 
     var_0[var_6 + 1] = var_2;
   }
 
   level.placement["all"] = var_0;
 
-  if(level.multiteambased) {
+  if(level.multiteambased)
     mtdm_updateteamplacement();
-  } else if(level.teambased) {
+  else if(level.teambased)
     updateteamplacement();
-  }
 }
 
 getbetterplayer(var_0, var_1) {
-  if(var_0.score > var_1.score) {
+  if(var_0.score > var_1.score)
     return var_0;
-  }
 
-  if(var_1.score > var_0.score) {
+  if(var_1.score > var_0.score)
     return var_1;
-  }
 
-  if(var_0.deaths < var_1.deaths) {
+  if(var_0.deaths < var_1.deaths)
     return var_0;
-  }
 
-  if(var_1.deaths < var_0.deaths) {
+  if(var_1.deaths < var_0.deaths)
     return var_1;
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     return var_0;
-  } else {
+  else
     return var_1;
-  }
 }
 
 updateteamplacement() {
@@ -344,7 +325,7 @@ updateteamplacement() {
   var_1 = level.placement["all"];
   var_2 = var_1.size;
 
-  for(var_3 = 0; var_3 < var_2; var_3++) {
+  for (var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = var_1[var_3];
     var_5 = var_4.pers["team"];
     var_0[var_5][var_0[var_5].size] = var_4;
@@ -357,39 +338,37 @@ updateteamplacement() {
 mtdm_updateteamplacement() {
   var_0["spectator"] = [];
 
-  foreach(var_2 in level.teamnamelist) {
-    var_0[var_2] = [];
-  }
+  foreach(var_2 in level.teamnamelist)
+  var_0[var_2] = [];
 
   var_4 = level.placement["all"];
   var_5 = var_4.size;
 
-  for(var_6 = 0; var_6 < var_5; var_6++) {
+  for (var_6 = 0; var_6 < var_5; var_6++) {
     var_7 = var_4[var_6];
     var_8 = var_7.pers["team"];
     var_0[var_8][var_0[var_8].size] = var_7;
   }
 
-  foreach(var_2 in level.teamnamelist) {
-    level.placement[var_2] = var_0[var_2];
-  }
+  foreach(var_2 in level.teamnamelist)
+  level.placement[var_2] = var_0[var_2];
 }
 
 initialdmscoreupdate() {
   wait 0.2;
   var_0 = 0;
 
-  for(;;) {
+  for (;;) {
     var_1 = 0;
     var_2 = level.players;
 
-    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    for (var_3 = 0; var_3 < var_2.size; var_3++) {
       var_4 = var_2[var_3];
 
-      if(!isDefined(var_4)) {
+      if(!isdefined(var_4)) {
         continue;
       }
-      if(isDefined(var_4.updateddmscores)) {
+      if(isdefined(var_4.updateddmscores)) {
         continue;
       }
       var_4.updateddmscores = 1;
@@ -398,8 +377,7 @@ initialdmscoreupdate() {
       wait 0.5;
     }
 
-    if(!var_1) {
+    if(!var_1)
       wait 3;
-    }
   }
 }

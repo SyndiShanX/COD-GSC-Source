@@ -4,9 +4,8 @@
 *****************************************************/
 
 array_keep_values(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1) || !isDefined(var_2)) {
+  if(!isDefined(var_1) || !isDefined(var_2))
     return var_0;
-  }
 
   var_3 = tolower(common_scripts\utility::ter_op(isDefined(var_3), var_3, "and"));
 
@@ -51,9 +50,8 @@ array_keep_values(var_0, var_1, var_2, var_3) {
         break;
     }
 
-    if(var_5) {
+    if(var_5)
       var_4[var_4.size] = var_7;
-    }
   }
 
   return var_4;
@@ -72,46 +70,39 @@ array_keep_key_values(var_0, var_1, var_2) {
       }
     }
 
-    if(var_6) {
+    if(var_6)
       var_3[var_3.size] = var_5;
-    }
   }
 
   return var_3;
 }
 
 compare_value(var_0, var_1) {
-  if(!isDefined(self) || !isDefined(var_1)) {
+  if(!isDefined(self) || !isDefined(var_1))
     return 0;
-  }
 
   return compare(get_key(var_0), var_1);
 }
 
 compare(var_0, var_1) {
-  if(isDefined(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isDefined(var_1))
     return common_scripts\utility::ter_op(var_0 == var_1, 1, 0);
-  }
 
-  if(isDefined(var_0) && !isDefined(var_1)) {
+  if(isDefined(var_0) && !isDefined(var_1))
     return 0;
-  }
 
-  if(!isDefined(var_0) && isDefined(var_1)) {
+  if(!isDefined(var_0) && isDefined(var_1))
     return 0;
-  }
 
-  if(!isDefined(var_0) && !isDefined(var_1)) {
+  if(!isDefined(var_0) && !isDefined(var_1))
     return 0;
-  }
 }
 
 get_key(var_0, var_1) {
   var_2 = undefined;
 
-  if(!isDefined(self) || !isDefined(var_0)) {
+  if(!isDefined(self) || !isDefined(var_0))
     return common_scripts\utility::ter_op(isDefined(var_1) && !isDefined(var_2), var_1, var_2);
-  }
 
   switch (var_0) {
     case "alpha":
@@ -189,17 +180,14 @@ get_key(var_0, var_1) {
 }
 
 getteam() {
-  if(isturret(self) && isDefined(self.script_team)) {
+  if(isturret(self) && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(maps\_vehicle::isvehicle() && isDefined(self.script_team)) {
+  if(maps\_vehicle::isvehicle() && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(isDefined(self.team)) {
+  if(isDefined(self.team))
     return self.team;
-  }
 
   return "none";
 }
@@ -239,9 +227,8 @@ giveunlimitedrpgammo() {
 addasapachehudtarget(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1) && var_1 > 0) {
+  if(isDefined(var_1) && var_1 > 0)
     wait(var_1);
-  }
 
   var_0 vehicle_scripts\_apache_player::hud_addandshowtargets([self]);
 }
@@ -259,9 +246,8 @@ apache_sun_settings() {
 }
 
 apache_sun_settings_restore() {
-  foreach(var_2, var_1 in level.apache_sun_settings) {
-    setsaveddvar(var_2, var_1);
-  }
+  foreach(var_2, var_1 in level.apache_sun_settings)
+  setsaveddvar(var_2, var_1);
 }
 
 spawn_apache_player(var_0, var_1, var_2) {
@@ -281,9 +267,8 @@ spawn_apache_player_at_struct(var_0, var_1, var_2) {
   var_5 = isDefined(var_1) && isDefined(var_2);
   var_6 = 1;
 
-  if(isDefined(level.apache_difficulty) && isDefined(level.apache_difficulty.flares_auto)) {
+  if(isDefined(level.apache_difficulty) && isDefined(level.apache_difficulty.flares_auto))
     var_6 = level.apache_difficulty.flares_auto;
-  }
 
   var_3 vehicle_scripts\_apache_player::_start(level.player, var_5, var_6);
   var_3 thread apache_mission_impact_water_think();
@@ -291,20 +276,17 @@ spawn_apache_player_at_struct(var_0, var_1, var_2) {
   var_3 maps\oilrocks_apache_code::update_targets();
 
   if(var_5) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       setsaveddvar("vehHelicopterMaxAltitude", var_1);
-    }
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       setsaveddvar("vehHelicopterMinAltitude", var_2);
-    }
   }
 
   var_3 childthread maps\oilrocks_apache_code::manage_active_hind_forced_targets();
 
-  if(isDefined(level.apache_savecheck)) {
+  if(isDefined(level.apache_savecheck))
     level.autosave_check_override = level.apache_savecheck;
-  }
 
   return var_3;
 }
@@ -321,22 +303,19 @@ apache_mission_impact_water_think() {
 apache_mission_impact_water_missiles() {
   self endon("LISTEN_heli_end");
 
-  for(;;) {
+  for(;;)
     level waittill("LISTEN_apache_player_missile_fire", var_0);
-  }
 }
 
 apache_mission_impact_water_missile_think() {
   self endon("death");
 
-  while(isvalidmissile(self) && self.origin[2] >= level.apache_missile_water_z) {
+  while(isvalidmissile(self) && self.origin[2] >= level.apache_missile_water_z)
     wait 0.05;
-  }
 
   if(isvalidmissile(self) && isDefined(self.origin)) {
-    if(self.origin[2] < level.apache_missile_water_z) {
+    if(self.origin[2] < level.apache_missile_water_z)
       playFX(common_scripts\utility::getfx("FX_vfx_apache_missile_water_impact"), (self.origin[0], self.origin[1], level.apache_missile_water_z_actual + 5), (0, 0, 1), anglesToForward((0, randomint(360), 0)));
-    }
 
     self delete();
   }
@@ -351,15 +330,13 @@ get_apache_spawn_struct(var_0) {
 }
 
 friendly_setup() {
-  if(isai(self)) {
+  if(isai(self))
     maps\_utility::deletable_magic_bullet_shield();
-  }
 }
 
 get_obj_ent_hvt() {
-  if(!isDefined(level.obj_ent_hvt)) {
+  if(!isDefined(level.obj_ent_hvt))
     level.obj_ent_hvt = common_scripts\utility::spawn_tag_origin();
-  }
 
   level.obj_ent_hvt unlink();
   return level.obj_ent_hvt;
@@ -375,9 +352,8 @@ player_in_out_apache() {
     var_0 = level.player.riding_heli.origin;
     var_1 = level.player.riding_heli.angles;
 
-    foreach(var_3 in level.apache_target_manager) {
-      level.player.riding_heli thread vehicle_scripts\_apache_player::hud_hidetargets([var_3]);
-    }
+    foreach(var_3 in level.apache_target_manager)
+    level.player.riding_heli thread vehicle_scripts\_apache_player::hud_hidetargets([var_3]);
 
     level notify("new_missile_nag_thread");
     level.player.riding_heli vehicle_scripts\_apache_player::_end();
@@ -412,16 +388,14 @@ spawn_infantry_friends(var_0) {
   var_2 = array_keep_key_values(var_2, "script_noteworthy", ["blackhawk_riders"]);
 
   foreach(var_6, var_4 in var_2) {
-    if(var_0) {
+    if(var_0)
       var_4.script_drone = 1;
-    }
 
     var_4.count = 1;
     var_5 = var_4 maps\_utility::spawn_ai(1);
 
-    if(!isDefined(var_4.script_friendname)) {
+    if(!isDefined(var_4.script_friendname))
       var_4.script_friendname = var_5.name;
-    }
 
     var_5 thermaldrawdisable();
     var_5.script_startingposition = 5;
@@ -465,9 +439,8 @@ assign_friendly_heros() {
     if(!isDefined(var_1.script_friendname)) {
       continue;
     }
-    if(!isDefined(var_1.magic_bullet_shield)) {
+    if(!isDefined(var_1.magic_bullet_shield))
       var_1 friendly_setup();
-    }
 
     switch (var_1.script_friendname) {
       case "Merrick":

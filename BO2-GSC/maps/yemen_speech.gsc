@@ -48,11 +48,10 @@ init_doors() {
 skipto_intro() {
   dead_stat = level.player get_story_stat("DEFALCO_DEAD_IN_KARMA");
 
-  if(dead_stat == 0) {
+  if(dead_stat == 0)
     level.is_defalco_alive = 1;
-  } else {
+  else
     level.is_defalco_alive = 0;
-  }
 }
 
 skipto_intro_defalco_alive() {
@@ -170,7 +169,8 @@ run_player_intro() {
 }
 
 menendez_intro_hallway() {
-  if(level.is_defalco_alive == 1) {} else
+  if(level.is_defalco_alive == 1) {
+  } else
     level thread menendez_greeters_animate("speech_greeter_intro_1");
 
   level thread menendez_greeters_animate("speech_greeter_intro_2");
@@ -192,9 +192,8 @@ menendez_intro_hallway_animate_group(str_scene) {
   level waittill("start_hallway_guards");
   level thread run_scene_and_delete(str_scene);
 
-  if(str_scene != "speech_intro_salute_c" && str_scene != "speech_intro_salute_g" && str_scene != "speech_intro_salute_h" && str_scene != "speech_intro_salute_i") {
+  if(str_scene != "speech_intro_salute_c" && str_scene != "speech_intro_salute_g" && str_scene != "speech_intro_salute_h" && str_scene != "speech_intro_salute_i")
     maps\yemen_utility::give_scene_models_guns(str_scene);
-  }
 
   scene_wait(str_scene);
   level thread run_scene_and_delete(str_scene + "_endloop");
@@ -225,11 +224,10 @@ menendez_intro_cleanup() {
   wait_network_frame();
   end_scene("speech_opendoors_doors");
   delete_scene("speech_opendoors_doors", 1);
-  a_fans = getEntArray("hallway_fan", "script_noteworthy");
+  a_fans = getentarray("hallway_fan", "script_noteworthy");
 
-  foreach(fan in a_fans) {
-    fan delete();
-  }
+  foreach(fan in a_fans)
+  fan delete();
 }
 
 menendez_intro_opendoors(guy) {
@@ -242,17 +240,15 @@ menendez_speech_opendoors(guy) {
 }
 
 menendez_exit_opendoors(guy) {
-  if(level.is_defalco_alive == 1) {
+  if(level.is_defalco_alive == 1)
     run_scene_and_delete("menendez_exit_doors_defalco");
-  } else {
+  else
     run_scene_and_delete("menendez_exit_doors");
-  }
 }
 
 menendez_intro_unlink_player(guy) {
-  if(!flag("speech_player_intro_done")) {
+  if(!flag("speech_player_intro_done"))
     end_scene("speech_player_intro");
-  }
 
   set_objective(level.obj_speech, level.menendez, "follow");
   level waittill("menendez_at_door");
@@ -296,11 +292,10 @@ menendez_speech() {
 menendez_speech_player() {
   level.player enableinvulnerability();
 
-  if(level.is_defalco_alive) {
+  if(level.is_defalco_alive)
     level thread run_scene_and_delete("speech_walk_no_defalco_player");
-  } else {
+  else
     level thread run_scene_and_delete("speech_walk_no_defalco_player");
-  }
 
   m_player_body = get_model_or_models_from_scene("speech_walk_no_defalco_player", "player_body");
   m_player_body attach("c_mul_cordis_head1_1", "", 1);
@@ -402,11 +397,10 @@ speech_vtols_arrive() {
   level thread speech_vtol();
   wait 3;
 
-  if(level.is_defalco_alive) {
+  if(level.is_defalco_alive)
     scene_wait("speech_walk_no_defalco");
-  } else {
+  else
     scene_wait("speech_walk_no_defalco");
-  }
 
   flag_set("menendez_exited");
 }
@@ -432,9 +426,9 @@ speech_vtol() {
   magicbullet("usrpg_magic_bullet_sp", getstruct("speech_rpg_start").origin, veh_vtol.origin - (0, 50, -50));
   wait 2.6;
   stop_exploder(27);
-  playFXOnTag(getfx("speech_vtol_exp"), veh_vtol, "tag_origin");
-  veh_vtol playSound("evt_vtol_rocket_hit");
-  veh_vtol playSound("evt_vtol_down");
+  playfxontag(getfx("speech_vtol_exp"), veh_vtol, "tag_origin");
+  veh_vtol playsound("evt_vtol_rocket_hit");
+  veh_vtol playsound("evt_vtol_down");
   playrumbleonposition("artillery_rumble", level.player.origin);
   earthquake(0.35, 4, veh_vtol.origin, 2000);
   run_scene_and_delete("speech_vtol_crash");

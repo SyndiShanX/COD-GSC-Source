@@ -15,7 +15,7 @@
 #namespace zm_cosmodrome_ai_monkey;
 
 function init() {
-  level.monkey_zombie_enter_level = &monkey_cosmodrome_enter_level;
+  level.monkey_zombie_enter_level = & monkey_cosmodrome_enter_level;
 }
 
 function monkey_cosmodrome_enter_level() {
@@ -26,7 +26,7 @@ function monkey_cosmodrome_enter_level() {
   lander = spawn("script_model", start_launch);
   angles = vectortoangles(end.origin - start_launch);
   lander.angles = angles;
-  lander setModel("p7_fxanim_zm_asc_lander_crash_mod");
+  lander setmodel("p7_fxanim_zm_asc_lander_crash_mod");
   lander hide();
   lander thread clear_lander();
   self hide();
@@ -52,13 +52,13 @@ function clear_lander() {
 }
 
 function monkey_lander_get_closest_dest() {
-  if(!isDefined(level._lander_endarray)) {
+  if(!isdefined(level._lander_endarray)) {
     level._lander_endarray = [];
   }
-  if(!isDefined(level._lander_endarray[self.script_noteworthy])) {
+  if(!isdefined(level._lander_endarray[self.script_noteworthy])) {
     level._lander_endarray[self.script_noteworthy] = [];
     end_spots = struct::get_array("monkey_land", "targetname");
-    for(i = 0; i < end_spots.size; i++) {
+    for (i = 0; i < end_spots.size; i++) {
       if(self.script_noteworthy == end_spots[i].script_noteworthy) {
         level._lander_endarray[self.script_noteworthy][level._lander_endarray[self.script_noteworthy].size] = end_spots[i];
       }
@@ -66,7 +66,7 @@ function monkey_lander_get_closest_dest() {
   }
   choice = level._lander_endarray[self.script_noteworthy][0];
   max_dist = 1410065408;
-  for(i = 0; i < level._lander_endarray[self.script_noteworthy].size; i++) {
+  for (i = 0; i < level._lander_endarray[self.script_noteworthy].size; i++) {
     dist = distance2d(self.origin, level._lander_endarray[self.script_noteworthy][i].origin);
     if(dist < max_dist) {
       max_dist = dist;
@@ -77,12 +77,12 @@ function monkey_lander_get_closest_dest() {
 }
 
 function monkey_cosmodrome_prespawn() {
-  self.lander_death = &monkey_cosmodrome_lander_death;
+  self.lander_death = & monkey_cosmodrome_lander_death;
 }
 
 function monkey_cosmodrome_failsafe() {
   self endon("death");
-  while(true) {
+  while (true) {
     if(self.state != "bhb_jump") {
       if(!zm_utility::check_point_in_playable_area(self.origin)) {
         break;

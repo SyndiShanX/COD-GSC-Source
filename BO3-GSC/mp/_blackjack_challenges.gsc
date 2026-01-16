@@ -17,25 +17,25 @@
 #namespace blackjack_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("blackjack_challenges", &__init__, undefined, undefined);
+  system::register("blackjack_challenges", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&start_gametype);
+  callback::on_start_gametype( & start_gametype);
 }
 
 function start_gametype() {
-  if(!isDefined(level.challengescallbacks)) {
+  if(!isdefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
   }
   waittillframeend();
   if(challenges::canprocesschallenges()) {
-    challenges::registerchallengescallback("playerKilled", &challenge_kills);
-    challenges::registerchallengescallback("roundEnd", &challenge_round_ended);
-    challenges::registerchallengescallback("gameEnd", &challenge_game_ended);
-    scoreevents::register_hero_ability_kill_event(&on_hero_ability_kill);
+    challenges::registerchallengescallback("playerKilled", & challenge_kills);
+    challenges::registerchallengescallback("roundEnd", & challenge_round_ended);
+    challenges::registerchallengescallback("gameEnd", & challenge_game_ended);
+    scoreevents::register_hero_ability_kill_event( & on_hero_ability_kill);
   }
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
 }
 
 function on_player_connect() {
@@ -45,7 +45,7 @@ function on_player_connect() {
     isblackjack = specialistindex == 9;
     if(isblackjack) {
       player thread track_blackjack_consumable();
-      if(!isDefined(self.pers["blackjack_challenge_active"])) {
+      if(!isdefined(self.pers["blackjack_challenge_active"])) {
         remaining_time = player consumableget("blackjack", "awarded") - player consumableget("blackjack", "consumed");
         if(remaining_time > 0) {
           special_card_earned = player get_challenge_stat("special_card_earned");
@@ -68,10 +68,10 @@ function is_challenge_active() {
 
 function on_hero_ability_kill(ability, victimability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
-  if(!isDefined(player.isroulette) || !player.isroulette) {
+  if(!isdefined(player.isroulette) || !player.isroulette) {
     return;
   }
   if(player is_challenge_active()) {
@@ -135,10 +135,10 @@ function challenge_kills(data) {
   attacker = data.attacker;
   player = attacker;
   weapon = data.weapon;
-  if(!isDefined(weapon) || weapon == level.weaponnone) {
+  if(!isdefined(weapon) || weapon == level.weaponnone) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
   if(attackeristhief) {
@@ -167,10 +167,10 @@ function set_challenge_stat(stat_name, stat_value) {
 }
 
 function get_hero_weapon_mask(attacker, weapon) {
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     return 0;
   }
-  if(isDefined(weapon.isheroweapon) && !weapon.isheroweapon) {
+  if(isdefined(weapon.isheroweapon) && !weapon.isheroweapon) {
     return 0;
   }
   switch (weapon.name) {
@@ -224,7 +224,7 @@ function get_hero_weapon_mask(attacker, weapon) {
 }
 
 function get_hero_ability_mask(ability) {
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return 0;
   }
   switch (ability.name) {
@@ -271,11 +271,11 @@ function get_hero_ability_mask(ability) {
 }
 
 function challenge_game_ended(data) {
-  if(!isDefined(data)) {
+  if(!isdefined(data)) {
     return;
   }
   player = data.player;
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return;
   }
   if(!isplayer(player)) {
@@ -291,11 +291,11 @@ function challenge_game_ended(data) {
 }
 
 function challenge_round_ended(data) {
-  if(!isDefined(data)) {
+  if(!isdefined(data)) {
     return;
   }
   player = data.player;
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return;
   }
   if(!isplayer(player)) {
@@ -316,10 +316,10 @@ function track_blackjack_consumable() {
   self endon("track_blackjack_consumable_singleton");
   self endon("disconnect");
   player = self;
-  if(!isDefined(player.last_blackjack_consumable_time)) {
+  if(!isdefined(player.last_blackjack_consumable_time)) {
     player.last_blackjack_consumable_time = 0;
   }
-  while(isDefined(player)) {
+  while (isdefined(player)) {
     random_wait_time = getdvarfloat("mp_blackjack_consumable_wait", 20) + (randomfloatrange(-5, 5));
     wait(random_wait_time);
     player report_consumable();
@@ -328,10 +328,10 @@ function track_blackjack_consumable() {
 
 function report_consumable() {
   player = self;
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return;
   }
-  if(!isDefined(player.timeplayed) || !isDefined(player.timeplayed["total"])) {
+  if(!isdefined(player.timeplayed) || !isdefined(player.timeplayed["total"])) {
     return;
   }
   current_time_played = player.timeplayed["total"];

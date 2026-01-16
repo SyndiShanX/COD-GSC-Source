@@ -52,9 +52,8 @@ setVictoryQuote() {
 }
 
 setDeadQuote() {
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _quotes.gsc. Function: setDeadQuote()\n");
-  }
   level endon("mine death");
   level notify("new_quote_string");
   level endon("new_quote_string");
@@ -119,9 +118,8 @@ setDeadQuote() {
     i = randomInt(deadquotes.size);
     setdvar("ui_deadquote", "");
   }
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _quotes.gsc. Function: setDeadQuote() - COMPLETE\n");
-  }
 }
 
 displayMissionFailed() {

@@ -181,15 +181,13 @@ odin_lgt_flicker(var_0, var_1, var_2, var_3) {
     var_4 = var_0 + (var_1 - var_0) * randomfloat(1.0);
     var_9 = randomintrange(1, 10);
 
-    if(var_2 != var_3) {
+    if(var_2 != var_3)
       var_5 = var_5 + randomfloatrange(var_2, var_3);
-    } else {
+    else
       var_5 = var_5 + var_2;
-    }
 
-    if(var_5 == 0) {
+    if(var_5 == 0)
       var_5 = var_5 + 0.0000001;
-    }
 
     for(var_11 = (var_10 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::ent_flag("stop_flicker"); var_5 = var_5 - 0.05) {
       self setlightcolor(var_4 + var_11 * var_5);
@@ -199,11 +197,10 @@ odin_lgt_flicker(var_0, var_1, var_2, var_3) {
     while(var_9) {
       wait(randomfloatrange(0.05, 0.1));
 
-      if(var_8 > 0.2) {
+      if(var_8 > 0.2)
         var_8 = randomfloatrange(0, 0.3);
-      } else {
+      else
         var_8 = var_6;
-      }
 
       self setlightintensity(var_8);
       var_9--;
@@ -230,28 +227,25 @@ changelightintensityovertime(var_0, var_1) {
 }
 
 place_sun_with_moving_source(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     common_scripts\utility::flag_wait(var_2);
-  }
 
   var_4 = 0;
   var_5 = 0;
   var_6 = maps\_utility::create_sunflare_setting("odin_spin");
 
   for(;;) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_7 = var_0 gettagorigin("tag_flash");
-    } else {
+    else
       var_7 = var_0.origin;
-    }
 
     var_4 = atan((level.player.origin[2] - var_7[2]) / sqrt(squared(level.player.origin[0] - var_7[0]) + squared(level.player.origin[1] - var_7[1])));
 
-    if(level.player.origin[0] < var_7[0]) {
+    if(level.player.origin[0] < var_7[0])
       var_5 = atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-    } else {
+    else
       var_5 = 180 + atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-    }
 
     var_6.position = (var_4, var_5, 0);
     maps\_art::sunflare_changes("odin_spin", 0);
@@ -273,9 +267,8 @@ lgt_init() {
   level.spinsuntranstime = 0.25;
   var_0 = getEntArray("lgt_odin_pulsing", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 thread odin_lgt_pulsing(1);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread odin_lgt_pulsing(1);
 
   thread lgt_intro_sequence();
   thread lgt_ally_sequence();
@@ -385,9 +378,8 @@ lgt_sat_sequence() {
 lgt_odin_firing() {
   var_0 = getEntArray("lgt_odin_destruction", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 thread odin_lgt_pulsing(1);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread odin_lgt_pulsing(1);
 
   thread rotatelights("lgt_odin_spin_ref", "lgt_odin_spinning", "pitch");
   thread rotatelights("lgt_odin_spin_ref_1", "lgt_odin_spinning_1", "yaw");
@@ -420,9 +412,8 @@ rotatelights(var_0, var_1, var_2) {
   }
   var_4 thread rotateme(-360, var_2, 1.0);
 
-  foreach(var_6 in var_3) {
-    var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
-  }
+  foreach(var_6 in var_3)
+  var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
 }
 
 rotateme(var_0, var_1, var_2) {
@@ -582,11 +573,10 @@ fx_escape_fire_rods() {
     var_11.angles = vectortoangles(var_9);
     var_6 linkto(var_11);
 
-    if(var_7 == "tag_fx_impact_1") {
+    if(var_7 == "tag_fx_impact_1")
       var_12 = vectortoangles(var_10) + (0, 0, -40);
-    } else {
+    else
       var_12 = vectortoangles(var_10) + (0, 0, randomfloatrange(-4, 4));
-    }
 
     var_11 rotateto(var_12, 4, 2, 2);
     thread fire_sat_rcs_thrusters(var_11.angles, vectortoangles(var_10), 4);
@@ -607,9 +597,8 @@ fx_escape_fire_rods() {
     var_3 thread rog_fire_at_off_axis_target(8, var_7, var_4, "player_exited_escape_hallway", "odin_interior_rog", "odin_interior");
     var_5 = var_5 + 1;
 
-    if(var_5 > 7) {
+    if(var_5 > 7)
       var_5 = 2;
-    }
   }
 
   var_3 delete();
@@ -652,9 +641,8 @@ fx_spin_fire_rods() {
       level.satellite_small_thrusts = 1;
     }
 
-    if(!common_scripts\utility::flag("first_finale_stage_done")) {
+    if(!common_scripts\utility::flag("first_finale_stage_done"))
       thread fire_sat_rcs_thrusters((var_6.angles - var_12) * var_15, (var_17 - var_12) * var_15, 6);
-    }
 
     if(common_scripts\utility::flag("lgt_flag_spin_over")) {
       var_6 rotateto(var_17, 6, 3, 3);
@@ -679,9 +667,8 @@ fx_spin_fire_rods() {
 
     var_5 = var_5 + 1;
 
-    if(var_5 > 11) {
+    if(var_5 > 11)
       var_5 = 4;
-    }
 
     wait 1;
   }
@@ -700,9 +687,8 @@ rog_fire_at_off_axis_target(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 = var_7.origin - var_6.origin;
   var_6.angles = vectortoangles(var_10);
 
-  if(!common_scripts\utility::flag(var_3)) {
+  if(!common_scripts\utility::flag(var_3))
     var_6 thread god_rays_from_rog(8, var_4, var_5);
-  }
 
   var_6 moveto(var_7.origin, var_0 * 0.1, var_0 * 0.1, 0);
   var_6 waittill("movedone");
@@ -745,11 +731,10 @@ god_rays_from_rog(var_0, var_1, var_2) {
       var_7 = self.origin;
       var_3 = atan((level.player.origin[2] - var_7[2]) / sqrt(squared(level.player.origin[0] - var_7[0]) + squared(level.player.origin[1] - var_7[1])));
 
-      if(level.player.origin[0] < var_7[0]) {
+      if(level.player.origin[0] < var_7[0])
         var_4 = atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-      } else {
+      else
         var_4 = 180 + atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-      }
 
       var_6.position = (var_3, var_4, 0);
       wait 0.05;
@@ -788,46 +773,40 @@ fire_sat_rcs_thrusters(var_0, var_1, var_2) {
     var_6 = 3;
   }
 
-  if(var_0[1] < var_1[1]) {
+  if(var_0[1] < var_1[1])
     var_3 = 5;
-  } else {
+  else
     var_6 = 5;
-  }
 
-  if(var_0[0] < var_1[0]) {
+  if(var_0[0] < var_1[0])
     var_5 = 3;
-  } else {
+  else
     var_4 = 3;
-  }
 
   thread maps\odin_audio::sfx_satellite_lat_thruster_loop(level.thruster_01_lat_fx);
   thread maps\odin_audio::sfx_satellite_thruster_initial_burst(level.thruster_03_lat_fx);
   thread maps\odin_audio::sfx_satellite_thruster_initial_burst(level.thruster_01_lat_fx);
 
   for(var_7 = 0; var_7 < var_2 * 2; var_7++) {
-    if(var_3 > randomfloatrange(1, 6)) {
+    if(var_3 > randomfloatrange(1, 6))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    }
 
-    if(var_6 > randomfloatrange(1, 6)) {
+    if(var_6 > randomfloatrange(1, 6))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    }
 
-    if(var_5 > randomfloatrange(1, 5)) {
+    if(var_5 > randomfloatrange(1, 5))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    }
 
-    if(var_4 > randomfloatrange(1, 5)) {
+    if(var_4 > randomfloatrange(1, 5))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    }
 
     wait 0.15;
     stopFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
@@ -844,29 +823,25 @@ fire_sat_rcs_thrusters(var_0, var_1, var_2) {
   thread maps\odin_audio::sfx_satellite_thruster_initial_burst(level.thruster_01_lat_fx);
 
   for(var_7 = 0; var_7 < var_2 * 2; var_7++) {
-    if(var_6 > randomfloatrange(1, 6)) {
+    if(var_6 > randomfloatrange(1, 6))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    }
 
-    if(var_3 > randomfloatrange(1, 6)) {
+    if(var_3 > randomfloatrange(1, 6))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    }
 
-    if(var_4 > randomfloatrange(1, 5)) {
+    if(var_4 > randomfloatrange(1, 5))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    }
 
-    if(var_5 > randomfloatrange(1, 5)) {
+    if(var_5 > randomfloatrange(1, 5))
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    } else {
+    else
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    }
 
     wait 0.15;
     stopFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
@@ -883,9 +858,8 @@ rog_firing_fx_at_player(var_0) {
   if(distance2d(var_0, level.player.origin) < 15000) {
     earthquake(0.1, 3, var_0, 14000);
 
-    if(!common_scripts\utility::flag("hold_satellite_back_thrusters")) {
+    if(!common_scripts\utility::flag("hold_satellite_back_thrusters"))
       thread rog_firing_back_thrusters();
-    }
 
     wait 1.0;
     playFX(level._effect["odin_fire_close"], var_0);
@@ -975,13 +949,11 @@ odin_missile_rod(var_0, var_1, var_2) {
 }
 
 fx_rog_trail(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 2;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 3;
-  }
 
   wait(var_0);
 
@@ -992,11 +964,10 @@ fx_rog_trail(var_0, var_1) {
   playFXOnTag(level._effect["odin_rog_trail_geotrail_runner"], self, "tag_origin");
   wait(var_1);
 
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  } else {
+  else
     killfxontag(level._effect["odin_rog_trail_flare"], self, "tag_origin");
-  }
 }
 
 sfx_and_visual_shake() {
@@ -1139,9 +1110,8 @@ fx_burnup_sat() {
   var_0[var_0.size] = getent("odin_sat_section_04_pod_doorR_04", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(maps\_utility::hastag(var_2.model, "tag_fx_tip")) {
+    if(maps\_utility::hastag(var_2.model, "tag_fx_tip"))
       playFXOnTag(level._effect["odin_burnup_sat_door_trail_runner"], var_2, "tag_fx_tip");
-    }
 
     wait(randomfloatrange(0.1, 0.5));
   }
@@ -1161,14 +1131,12 @@ fx_burnup_sat() {
   wait 1.9;
 
   foreach(var_2 in var_0) {
-    if(maps\_utility::hastag(var_2.model, "tag_fx_tip")) {
+    if(maps\_utility::hastag(var_2.model, "tag_fx_tip"))
       killfxontag(level._effect["odin_burnup_sat_door_trail_runner"], var_2, "tag_fx_tip");
-    }
   }
 
-  foreach(var_2 in var_5) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_5)
+  var_2 delete();
 
   common_scripts\utility::flag_set("clear_for_sat_clean");
 }
@@ -1341,9 +1309,8 @@ fx_sat_rcs_damage(var_0) {
 }
 
 fx_sat_rcs_damage_kill() {
-  foreach(var_1 in level.fx_sat_rcs_damage) {
-    var_1 delete();
-  }
+  foreach(var_1 in level.fx_sat_rcs_damage)
+  var_1 delete();
 
   level.fx_sat_rcs_damage = [];
 }
@@ -1446,27 +1413,23 @@ fx_setup_sat_lights() {
 }
 
 fx_sat_doors_open(var_0) {
-  foreach(var_2 in var_0) {
-    playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
-  }
+  foreach(var_2 in var_0)
+  playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
 
   wait 18;
 
-  foreach(var_2 in var_0) {
-    stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
-  }
+  foreach(var_2 in var_0)
+  stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
 }
 
 fx_sat_doors_close(var_0) {
-  foreach(var_2 in var_0) {
-    playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
-  }
+  foreach(var_2 in var_0)
+  playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
 
   wait 20;
 
-  foreach(var_2 in var_0) {
-    stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
-  }
+  foreach(var_2 in var_0)
+  stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
 }
 
 airlock_glass_fog() {

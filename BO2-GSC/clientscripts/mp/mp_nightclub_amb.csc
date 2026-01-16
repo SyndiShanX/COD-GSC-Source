@@ -110,7 +110,6 @@ snd_start_autofnightclub_audio() {
 }
 
 snd_start_club_music() {
-  if(getgametypesetting("allowMapScripting")) {
+  if(getgametypesetting("allowMapScripting"))
     playloopat("amb_nightclub_music", (-16604, 1089, 98));
-  }
 }

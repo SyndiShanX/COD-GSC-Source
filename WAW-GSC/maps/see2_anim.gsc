@@ -255,7 +255,7 @@ play_player_anim_outro(i, player, anim_node) {
   player PlayerLinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
   flag_set("player_ready_for_outro");
   setmusicstate("LEVEL_END");
-  while(!flag("player_ready_for_outro") || !flag("outro_group_1_ready") || !flag("outro_group_2_ready")) {
+  while (!flag("player_ready_for_outro") || !flag("outro_group_1_ready") || !flag("outro_group_2_ready")) {
     wait(0.05);
   }
   anim_node anim_single_solo(hands, "outro");

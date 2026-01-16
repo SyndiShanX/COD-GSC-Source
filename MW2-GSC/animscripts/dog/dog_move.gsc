@@ -15,9 +15,8 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % german_shepherd_run_stop, 0);
 
-  if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run" && (!isDefined(self.disableExits) || self.disableExits == false)) {
+  if(!isdefined(self.traverseComplete) && !isdefined(self.skipStartMove) && self.a.movement == "run" && (!isdefined(self.disableExits) || self.disableExits == false))
     self startMove();
-  }
 
   self thread randomSoundDuringRunLoop();
 
@@ -40,13 +39,12 @@ main() {
   //self thread animscripts\dog\dog_stop::lookAtTarget( "normal" );
   self thread pathChangeCheck();
 
-  while(1) {
+  while (1) {
     self moveLoop();
 
     if(self.a.movement == "run") {
-      if(self.disableArrivals == false) {
+      if(self.disableArrivals == false)
         self thread stopMove();
-      }
 
       // if a "run" notify is received while stopping, clear stop anim and go back to moveLoop
       self waittill("run");
@@ -61,23 +59,21 @@ moveLoop() {
 
   self.moveLoopCleanupFunc = undefined;
 
-  while(1) {
-    if(self.disableArrivals) {
+  while (1) {
+    if(self.disableArrivals)
       self.stopAnimDistSq = 0;
-    } else {
+    else
       self.stopAnimDistSq = anim.dogStoppingDistSq;
-    }
 
     if(isDefined(self.moveLoopCleanupFunc)) {
       self[[self.moveLoopCleanupFunc]]();
       self.moveLoopCleanupFunc = undefined;
     }
 
-    if(isDefined(self.moveLoopOverrideFunc)) {
+    if(isdefined(self.moveLoopOverrideFunc))
       self[[self.moveLoopOverrideFunc]]();
-    } else {
+    else
       self moveLoopStep();
-    }
   }
 }
 
@@ -109,24 +105,22 @@ pathChangeCheck() {
 
   self.ignorePathChange = undefined; // this will be turned on / off in other threads at appropriate times
 
-  while(1) {
+  while (1) {
     // no other thread should end on "path_changed"
     self waittill("path_changed", doingReacquire, newDir);
 
     // no need to check for doingReacquire since faceMotion should be a good check
-    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
+    if(isdefined(self.ignorePathChange) || isdefined(self.noTurnAnims))
       continue;
-    }
 
-    if(self.a.movement != "run") {
+    if(self.a.movement != "run")
       continue;
-    }
 
     angleDiff = AngleClamp180(self.angles[1] - vectortoyaw(newDir));
 
     turnAnim = pathChange_getDogTurnAnim(angleDiff);
 
-    if(isDefined(turnAnim)) {
+    if(isdefined(turnAnim)) {
       self.turnAnim = turnAnim;
       self.turnTime = getTime();
       self.moveLoopOverrideFunc = ::pathChange_doDogTurnAnim;
@@ -155,9 +149,8 @@ pathChange_doDogTurnAnim() {
 
   turnAnim = self.turnAnim;
 
-  if(gettime() > self.turnTime + 50) {
+  if(gettime() > self.turnTime + 50)
     return; // too late
-  }
 
   self animMode("zonly_physics", false);
   self clearanim( % root, 0.2);
@@ -191,7 +184,7 @@ pathChange_cleanupDogTurnAnim() {
 
 startMoveTrackLookAhead() {
   self endon("killanimscript");
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     lookaheadAngle = vectortoangles(self.lookaheaddir);
     self OrientMode("face angle", lookaheadAngle);
   }
@@ -208,21 +201,19 @@ playMoveStartAnim() {
     angle = AngleClamp180(lookaheadAngle[1] - self.angles[1]);
 
     if(angle >= 0) {
-      if(angle < 45) {
+      if(angle < 45)
         index = 8;
-      } else if(angle < 135) {
+      else if(angle < 135)
         index = 6;
-      } else {
+      else
         index = 3;
-      }
     } else {
-      if(angle > -45) {
+      if(angle > -45)
         index = 8;
-      } else if(angle > -135) {
+      else if(angle > -135)
         index = 4;
-      } else {
+      else
         index = 1;
-      }
     }
 
     self setanimrestart(anim.dogStartMoveAnim[index], 1, 0.2, 1);
@@ -248,10 +239,10 @@ playMoveStartAnim() {
 }
 
 startMove() {
-  if(isDefined(self.pathgoalpos)) {
+  if(isdefined(self.pathgoalpos)) {
     wait 0.05; // wait for lookaheaddir to settle
 
-    if(isDefined(self.pathgoalpos)) {
+    if(isdefined(self.pathgoalpos)) {
       self playMoveStartAnim();
       return;
     }
@@ -280,9 +271,8 @@ stopMove() {
 
 dogPlaySoundAndNotify(sound, notifyStr) {
   self play_sound_on_tag_endon_death(sound, "tag_eye");
-  if(isalive(self)) {
+  if(isalive(self))
     self notify(notifyStr);
-  }
 }
 
 randomSoundDuringRunLoop() {
@@ -290,30 +280,28 @@ randomSoundDuringRunLoop() {
 
   wait 0.2; // incase move script gets killed right away
 
-  while(1) {
-    if(getdebugdvar("debug_dog_sound") != "") {
+  while (1) {
+    /#
+    if(getdebugdvar("debug_dog_sound") != "")
       iprintln("dog " + (self getentnum()) + " bark start " + getTime());
-    }
-
-    sound = undefined;
-    if(isDefined(self.script_growl)) {
+    # /
+      sound = undefined;
+    if(isdefined(self.script_growl))
       sound = "anml_dog_growl";
-    } else if(!isDefined(self.script_nobark)) {
+    else if(!isdefined(self.script_nobark))
       sound = "anml_dog_bark";
-    }
 
-    if(!isDefined(sound)) {
+    if(!isdefined(sound))
       break;
-    }
 
     self thread dogPlaySoundAndNotify(sound, "randomRunSound");
     self waittill("randomRunSound");
-
-    if(getdebugdvar("debug_dog_sound") != "") {
+    /#
+    if(getdebugdvar("debug_dog_sound") != "")
       iprintln("dog " + (self getentnum()) + " bark end " + getTime());
-    }
+    # /
 
-    wait(randomfloatrange(0.1, 0.3));
+      wait(randomfloatrange(0.1, 0.3));
   }
 }
 
@@ -324,34 +312,29 @@ getRunAnimWeights() {
   weights["right"] = 0;
 
   if(self.leanAmount > 0) {
-    if(self.leanAmount < 0.95) {
+    if(self.leanAmount < 0.95)
       self.leanAmount = 0.95;
-    }
 
     weights["left"] = 0;
     weights["right"] = (1 - self.leanAmount) * 20;
 
-    if(weights["right"] > 1) {
+    if(weights["right"] > 1)
       weights["right"] = 1;
-    } else if(weights["right"] < 0) {
+    else if(weights["right"] < 0)
       weights["right"] = 0;
-    }
 
     weights["center"] = 1 - weights["right"];
   } else if(self.leanAmount < 0) {
-    if(self.leanAmount > -0.95) {
+    if(self.leanAmount > -0.95)
       self.leanAmount = -0.95;
-    }
 
     weights["right"] = 0;
     weights["left"] = (1 + self.leanAmount) * 20;
 
-    if(weights["left"] > 1) {
+    if(weights["left"] > 1)
       weights["left"] = 1;
-    }
-    if(weights["left"] < 0) {
+    if(weights["left"] < 0)
       weights["left"] = 0;
-    }
 
     weights["center"] = 1 - weights["left"];
   } else {

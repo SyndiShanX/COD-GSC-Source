@@ -500,9 +500,8 @@ BlendIntoStandRun() {
 }
 
 PlayBlendTransitionStandWalk(animname) {
-  if(self.a.movement != "stop") {
+  if(self.a.movement != "stop")
     self endon("movemode");
-  }
   PlayBlendTransition(animname, 0.6, "stand", "walk", 1);
 }
 
@@ -766,9 +765,8 @@ PlayTransitionAnimation(transAnim, endPose, endMovement, endAiming, finalAnim, r
 }
 
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAnim, rate, waitSetStatesEnabled) {
-  if(!isDefined(rate)) {
+  if(!isDefined(rate))
     rate = 1;
-  }
   if(waitSetStatesEnabled) {
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
   }

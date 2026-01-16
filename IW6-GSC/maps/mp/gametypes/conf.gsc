@@ -21,7 +21,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -43,17 +45,15 @@ main() {
   level.onNormalDeath = ::onNormalDeath;
   level.onPrecacheGameType = ::onPrecacheGameType;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   game["dialog"]["gametype"] = "kill_confirmed";
 
   game["dialog"]["kill_confirmed"] = "kill_confirmed";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
 
   level.conf_fx["vanish"] = loadFx("fx/impacts/small_snowhit");
 }
@@ -81,9 +81,8 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -92,18 +91,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", &"OBJECTIVES_CONF");
-  setObjectiveText("axis", &"OBJECTIVES_CONF");
+  setObjectiveText("allies", & "OBJECTIVES_CONF");
+  setObjectiveText("axis", & "OBJECTIVES_CONF");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_CONF");
-    setObjectiveScoreText("axis", &"OBJECTIVES_CONF");
+    setObjectiveScoreText("allies", & "OBJECTIVES_CONF");
+    setObjectiveScoreText("axis", & "OBJECTIVES_CONF");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_CONF_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_CONF_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_CONF_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_CONF_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_CONF_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_CONF_HINT");
 
   initSpawns();
 
@@ -128,9 +127,8 @@ initSpawns() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(maps\mp\gametypes\_spawnlogic::shouldUseTeamStartspawn()) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -146,9 +144,8 @@ getSpawnPoint() {
 onNormalDeath(victim, attacker, lifeId) {
   level thread spawnDogTags(victim, attacker);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
     attacker.finalKill = true;
-  }
 }
 
 spawnDogTags(victim, attacker) {
@@ -222,13 +219,11 @@ showToTeam(gameObject, team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == team) {
+    if(player.team == team)
       self ShowToPlayer(player);
-    }
 
-    if(player.team == "spectator" && team == "allies") {
+    if(player.team == "spectator" && team == "allies")
       self ShowToPlayer(player);
-    }
   }
 
   for(;;) {
@@ -236,17 +231,14 @@ showToTeam(gameObject, team) {
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == team) {
+      if(player.team == team)
         self ShowToPlayer(player);
-      }
 
-      if(player.team == "spectator" && team == "allies") {
+      if(player.team == "spectator" && team == "allies")
         self ShowToPlayer(player);
-      }
 
-      if(gameObject.victimTeam == player.team && player == gameObject.attacker) {
+      if(gameObject.victimTeam == player.team && player == gameObject.attacker)
         objective_state(gameObject.objId, "invisible");
-      }
     }
   }
 }
@@ -266,9 +258,8 @@ onUse(player) {
     player incPersStat("denied", 1);
     player maps\mp\gametypes\_persistence::statSetChild("round", "denied", player.pers["denied"]);
 
-    if(IsPlayer(player)) {
+    if(IsPlayer(player))
       player setExtraScore0(player.pers["confirmed"] + player.pers["denied"]);
-    }
 
     if(self.victim == player) {
       event = "tags_retrieved";
@@ -276,9 +267,8 @@ onUse(player) {
       event = "kill_denied";
     }
 
-    if(isDefined(self.attacker)) {
+    if(isDefined(self.attacker))
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup("kill_denied");
-    }
 
     player thread onPickup(event);
 
@@ -292,9 +282,8 @@ onUse(player) {
     player incPersStat("confirmed", 1);
     player maps\mp\gametypes\_persistence::statSetChild("round", "confirmed", player.pers["confirmed"]);
 
-    if(self.attacker != player) {
+    if(self.attacker != player)
       self.attacker thread onPickup(event);
-    }
 
     player onPickup(event);
 
@@ -315,9 +304,8 @@ onPickup(event) {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(!isDefined(self.pers)) {
+  while(!isDefined(self.pers))
     wait(0.05);
-  }
 
   self thread maps\mp\gametypes\_rank::xpEventPopup(event);
   maps\mp\gametypes\_gamescore::givePlayerScore(event, self, undefined, true);
@@ -358,9 +346,8 @@ clearOnVictimDisconnect(victim) {
   if(isDefined(level.dogtags[guid])) {
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-    if(isDefined(level.dogtags[guid].attacker)) {
+    if(isDefined(level.dogtags[guid].attacker))
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup("kill_denied");
-    }
 
     playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
@@ -369,9 +356,8 @@ clearOnVictimDisconnect(victim) {
     if(isDefined(level.dogtags[guid])) {
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
-      }
       level.dogtags[guid] notify("deleted");
 
       level.dogtags[guid] = undefined;

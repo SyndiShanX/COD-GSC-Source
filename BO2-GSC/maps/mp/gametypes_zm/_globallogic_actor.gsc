@@ -24,9 +24,8 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
   self.idflagstime = gettime();
   eattacker = maps\mp\gametypes_zm\_globallogic_player::figureoutattacker(eattacker);
 
-  if(!isDefined(vdir)) {
+  if(!isDefined(vdir))
     idflags = idflags | level.idflags_no_knockback;
-  }
 
   friendly = 0;
 
@@ -36,40 +35,35 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
     self.attackerdamage = [];
   }
 
-  if(maps\mp\gametypes_zm\_globallogic_utils::isheadshot(sweapon, shitloc, smeansofdeath, einflictor)) {
+  if(maps\mp\gametypes_zm\_globallogic_utils::isheadshot(sweapon, shitloc, smeansofdeath, einflictor))
     smeansofdeath = "MOD_HEAD_SHOT";
-  }
 
   if(level.onlyheadshots) {
-    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {
+    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET")
       return;
-    } else if(smeansofdeath == "MOD_HEAD_SHOT") {
+    else if(smeansofdeath == "MOD_HEAD_SHOT")
       idamage = 150;
-    }
   }
 
   if(sweapon == "none" && isDefined(einflictor)) {
-    if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
+    if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel")
       sweapon = "explodable_barrel_mp";
-    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_"))
       sweapon = "destructible_car_mp";
-    }
   }
 
-  if(!(idflags &level.idflags_no_protection)) {
-    if(isplayer(eattacker)) {
+  if(!(idflags & level.idflags_no_protection)) {
+    if(isplayer(eattacker))
       eattacker.pers["participation"]++;
-    }
 
     prevhealthratio = self.health / self.maxhealth;
 
     if(level.teambased && isplayer(eattacker) && self != eattacker && self.aiteam == eattacker.pers["team"]) {
-      if(level.friendlyfire == 0) {
+      if(level.friendlyfire == 0)
         return;
-      } else if(level.friendlyfire == 1) {
-        if(idamage < 1) {
+      else if(level.friendlyfire == 1) {
+        if(idamage < 1)
           idamage = 1;
-        }
 
         self.lastdamagewasfromenemy = 0;
         self finishactordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
@@ -78,9 +72,8 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       else if(level.friendlyfire == 3) {
         idamage = int(idamage * 0.5);
 
-        if(idamage < 1) {
+        if(idamage < 1)
           idamage = 1;
-        }
 
         self.lastdamagewasfromenemy = 0;
         self finishactordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
@@ -94,19 +87,16 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       if(isDefined(eattacker) && isDefined(self.script_owner) && isDefined(eattacker.script_owner) && eattacker.script_owner == self.script_owner) {
         return;
       }
-      if(idamage < 1) {
+      if(idamage < 1)
         idamage = 1;
-      }
 
-      if(isDefined(eattacker) && isplayer(eattacker) && isDefined(sweapon) && !issubstr(smeansofdeath, "MOD_MELEE")) {
+      if(isDefined(eattacker) && isplayer(eattacker) && isDefined(sweapon) && !issubstr(smeansofdeath, "MOD_MELEE"))
         eattacker thread maps\mp\gametypes_zm\_weapons::checkhit(sweapon);
-      }
 
-      if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor) && isDefined(einflictor.iscooked)) {
+      if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor) && isDefined(einflictor.iscooked))
         self.wascooked = gettime();
-      } else {
+      else
         self.wascooked = undefined;
-      }
 
       self.lastdamagewasfromenemy = isDefined(eattacker) && eattacker != self;
       self finishactordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
@@ -114,16 +104,14 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
     if(isDefined(eattacker) && eattacker != self) {
       if(sweapon != "artillery_mp" && (!isDefined(einflictor) || !isai(einflictor))) {
-        if(idamage > 0) {
+        if(idamage > 0)
           eattacker thread maps\mp\gametypes_zm\_damagefeedback::updatedamagefeedback(smeansofdeath, einflictor);
-        }
       }
     }
   }
 
-  if(getdvarint(#"g_debugDamage")) {
+  if(getdvarint(#"g_debugDamage"))
     println("actor:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isplayer(einflictor) + " damage:" + idamage + shitloc + ";" + boneindex + "\\n");
-  }
 
   if(1) {
     lpselfnum = self getentitynumber();
@@ -151,14 +139,12 @@ callback_actorkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir
     return;
   }
   if(isai(attacker) && isDefined(attacker.script_owner)) {
-    if(attacker.script_owner.team != self.aiteam) {
+    if(attacker.script_owner.team != self.aiteam)
       attacker = attacker.script_owner;
-    }
   }
 
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
     attacker = attacker.owner;
-  }
 
   if(isDefined(attacker) && isplayer(attacker)) {
     if(!level.teambased || self.aiteam != attacker.pers["team"]) {

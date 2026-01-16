@@ -18,7 +18,7 @@
 #namespace load;
 
 function autoexec __init__sytem__() {
-  system::register("load", &__init__, undefined, undefined);
+  system::register("load", & __init__, undefined, undefined);
 }
 
 function __init__() {

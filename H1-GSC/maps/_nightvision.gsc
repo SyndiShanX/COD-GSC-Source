@@ -5,19 +5,17 @@
 ********************************/
 
 main(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = level.players;
-  }
 
-  if(!isDefined(level.nightvisionlightset)) {
+  if(!isdefined(level.nightvisionlightset))
     level.nightvisionlightset = "nightvision";
-  }
 
   thread init_and_run(var_0, var_1);
 }
 
 init_and_run(var_0, var_1) {
-  var_1 = common_scripts\utility::ter_op(isDefined(var_1), var_1, 1);
+  var_1 = common_scripts\utility::ter_op(isdefined(var_1), var_1, 1);
   precachenightvisioncodeassets();
   precacheshellshock("nightvision");
   level.nightvision_dlight_effect = loadfx("fx\misc\NV_dlight");
@@ -25,7 +23,7 @@ init_and_run(var_0, var_1) {
   level.nightvision_distortion_effect = loadfx("vfx\distortion\distortion_nightvision");
   level.nightvision_phosphor_effect = loadfx("vfx\ui\nvg_phosphor");
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
     var_3 maps\_utility::ent_flag_init("nightvision_enabled");
     var_3 maps\_utility::ent_flag_init("nightvision_on");
@@ -40,7 +38,7 @@ init_and_run(var_0, var_1) {
   waittillframeend;
   wait 0.05;
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
     var_3 thread nightvision_toggle();
   }
@@ -49,7 +47,7 @@ init_and_run(var_0, var_1) {
 nightvision_toggle() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("night_vision_on");
     nightvision_on();
     var_0 = spawnfx(level.nightvision_distortion_effect, level.player.origin);
@@ -67,11 +65,10 @@ nightvision_toggle() {
 }
 
 nightvision_check(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = level.player;
-  }
 
-  return isDefined(var_0.nightvision_enabled);
+  return isdefined(var_0.nightvision_enabled);
 }
 
 nightvision_on() {
@@ -90,9 +87,8 @@ nightvision_on() {
   var_0 = getaiarray("allies");
   common_scripts\utility::array_thread(var_0, ::enable_ir_beacon);
 
-  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon)) {
+  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon))
     maps\_utility::add_global_spawn_function("allies", ::enable_ir_beacon);
-  }
 }
 
 has_laser_sight_nightvision(var_0) {
@@ -103,17 +99,16 @@ h1_view_weapon_laser_update() {
   level endon("night_vision_off");
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     if(self getcurrentweapon() == "none") {
       waitframe();
       continue;
     }
 
-    if(has_laser_sight_nightvision(self getcurrentweapon())) {
+    if(has_laser_sight_nightvision(self getcurrentweapon()))
       self laseron();
-    } else {
+    else
       self laseroff();
-    }
 
     common_scripts\utility::waittill_any("weapon_switch_started", "weapon_taken");
     self laseroff();
@@ -125,7 +120,7 @@ enable_ir_beacon() {
   if(!isai(self)) {
     return;
   }
-  if(!isDefined(self.has_ir)) {
+  if(!isdefined(self.has_ir)) {
     return;
   }
   animscripts\shared::updatelaserstatus();
@@ -136,25 +131,23 @@ loopreflectoreffect() {
   level endon("night_vision_off");
   self endon("death");
 
-  for(;;) {
-    if(self gettagindex("tag_reflector_arm_le") != -1) {
-      playFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_le");
-    }
+  for (;;) {
+    if(self gettagindex("tag_reflector_arm_le") != -1)
+      playfxontag(level.nightvision_reflector_effect, self, "tag_reflector_arm_le");
 
-    if(self gettagindex("tag_reflector_arm_ri") != -1) {
-      playFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_ri");
-    }
+    if(self gettagindex("tag_reflector_arm_ri") != -1)
+      playfxontag(level.nightvision_reflector_effect, self, "tag_reflector_arm_ri");
 
     wait 0.1;
   }
 }
 
 stop_reflector_effect() {
-  if(!isDefined(self.has_ir)) {
+  if(!isdefined(self.has_ir)) {
     return;
   }
-  stopFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_le");
-  stopFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_ri");
+  stopfxontag(level.nightvision_reflector_effect, self, "tag_reflector_arm_le");
+  stopfxontag(level.nightvision_reflector_effect, self, "tag_reflector_arm_ri");
 }
 
 nightvision_off() {
@@ -162,9 +155,8 @@ nightvision_off() {
   self laseroff();
   level notify("night_vision_off");
 
-  if(isDefined(level.nightvision_dlight)) {
+  if(isdefined(level.nightvision_dlight))
     level.nightvision_dlight delete();
-  }
 
   self notify("nightvision_shellshock_off");
   maps\_utility::ent_flag_clear("nightvision_on");
@@ -173,15 +165,13 @@ nightvision_off() {
   level.player setclutoverridedisableforplayer(0);
   var_0 = 0;
 
-  for(var_1 = 0; var_1 < level.players.size; var_1++) {
-    if(nightvision_check(level.players[var_1])) {
+  for (var_1 = 0; var_1 < level.players.size; var_1++) {
+    if(nightvision_check(level.players[var_1]))
       var_0 = 1;
-    }
   }
 
-  if(!var_0) {
+  if(!var_0)
     maps\_utility::remove_global_spawn_function("allies", ::enable_ir_beacon);
-  }
 
   thread nightvision_effectsoff();
 }
@@ -197,19 +187,17 @@ nightvision_effectsoff() {
 }
 
 shouldbreaknvghintprint() {
-  if(isDefined(self.nightvision_started)) {
+  if(isdefined(self.nightvision_started))
     return 1;
-  }
 
-  return isDefined(self.end_nightvision_hint);
+  return isdefined(self.end_nightvision_hint);
 }
 
 should_break_disable_nvg_print() {
-  if(!isDefined(self.nightvision_started)) {
+  if(!isdefined(self.nightvision_started))
     return 1;
-  }
 
-  return isDefined(self.end_nightvision_disable_hint);
+  return isdefined(self.end_nightvision_disable_hint);
 }
 
 force_remove_nightvision() {
@@ -226,7 +214,7 @@ monitor_blowouts() {
   level.r_ssrblendscale_default_value = getdvarfloat("r_ssrBlendScale");
   level.r_ssrblendscale_nvg_value = monitor_blowouts_getvalue(level.r_ssrblendscale_default_value);
 
-  for(;;) {
+  for (;;) {
     level.player maps\_utility::ent_flag_wait("nightvision_on");
     thread maps\_utility::lerp_saveddvar("r_ssrBlendScale", level.r_ssrblendscale_nvg_value, 0.25);
     level.player maps\_utility::ent_flag_waitopen("nightvision_on");

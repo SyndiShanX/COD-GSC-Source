@@ -36,9 +36,8 @@ create_intel_section(var_0) {
       if(isDefined(var_4) && var_4.size > 1) {
         var_5 = "";
 
-        foreach(var_7 in var_4) {
-          var_5 = var_5 + var_7;
-        }
+        foreach(var_7 in var_4)
+        var_5 = var_5 + var_7;
 
         iprintln(var_5);
         var_4 = strtok(var_5, ",");
@@ -47,13 +46,11 @@ create_intel_section(var_0) {
 
       var_3.intel_type = var_4[0];
 
-      if(isDefined(var_4[1])) {
+      if(isDefined(var_4[1]))
         var_3.script_model = var_4[1];
-      }
 
-      if(isDefined(var_4[2])) {
+      if(isDefined(var_4[2]))
         var_3.location = var_4[2];
-      }
 
       var_3.is_intel = 1;
 
@@ -77,9 +74,8 @@ create_intel_section(var_0) {
 create_intel_from_pillage_spot(var_0) {
   var_1 = self;
 
-  if(isDefined(self.pillageinfo)) {
+  if(isDefined(self.pillageinfo))
     self.pillageinfo = undefined;
-  }
 
   var_1.script_model = "cnd_cellphone_01_on";
   var_1.intel_type = "intel_easy";
@@ -113,11 +109,10 @@ intel_pillage_allowed_func() {
 
   var_1 = "intel_episode_" + level.extinction_episode + "_sequenced_count";
 
-  if(self getcoopplayerdatareservedint(var_1) < var_0) {
+  if(self getcoopplayerdatareservedint(var_1) < var_0)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 init_player_intel_total() {
@@ -149,9 +144,8 @@ init_player_intel_total() {
     var_3.progress = aliens_get_intel_num_collected(self) - var_1;
     var_4 = self getcoopplayerdatareservedint("intel_episode_4_location_4");
 
-    if(var_4 && var_2 == "mp_alien_last") {
+    if(var_4 && var_2 == "mp_alien_last")
       var_3.progress = var_3.progress - 1;
-    }
 
     maps\mp\alien\_achievement::update_achievement(var_0, 0);
   }
@@ -165,9 +159,8 @@ intel_on_player_connect() {
   wait 1.0;
 
   foreach(var_1 in level.intel_type_2) {
-    if(has_player_found(var_1.location)) {
+    if(has_player_found(var_1.location))
       turn_off_intel_for_player(var_1);
-    }
   }
 }
 
@@ -175,9 +168,8 @@ build_intel_pillageitem_arrays(var_0) {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
-  while(!isDefined(level.pillageinfo)) {
+  while(!isDefined(level.pillageinfo))
     wait 0.1;
-  }
 
   switch (var_0) {
     case "easy":
@@ -196,9 +188,8 @@ has_player_found(var_0) {
   if(isDefined(var_0)) {
     var_1 = "intel_episode_" + level.extinction_episode + "_location_" + var_0;
 
-    if(self getcoopplayerdatareservedint(var_1)) {
+    if(self getcoopplayerdatareservedint(var_1))
       return 1;
-    }
   }
 
   return 0;
@@ -208,9 +199,8 @@ turn_off_intel_for_player(var_0) {
   var_0.pillage_trigger disableplayeruse(self);
 
   if(var_0.type == 2) {
-    if(!isDefined(self.outline_player_intel_found_list)) {
+    if(!isDefined(self.outline_player_intel_found_list))
       self.outline_player_intel_found_list = [];
-    }
 
     if(!common_scripts\utility::array_contains(self.outline_player_intel_found_list, var_0)) {
       self.outline_player_intel_found_list[self.outline_player_intel_found_list.size] = var_0;
@@ -225,9 +215,8 @@ wait_then_add_player_to_intel_array(var_0, var_1) {
   var_2 = var_0.name;
   wait(var_1);
 
-  if(!isDefined(self.player_has_found_me)) {
+  if(!isDefined(self.player_has_found_me))
     self.player_has_found_me = [];
-  }
 
   self.player_has_found_me[var_2] = 1;
 }
@@ -238,9 +227,8 @@ intel_listener() {
   if(isDefined(self.script_model)) {
     self.pillage_trigger setModel(self.script_model);
 
-    if(isDefined(self.angles)) {
+    if(isDefined(self.angles))
       self.pillage_trigger.angles = self.angles;
-    }
   } else
     self.pillage_trigger setModel("tag_origin");
 
@@ -248,22 +236,19 @@ intel_listener() {
   self.pillage_trigger setcursorhint("HINT_NOICON");
   self.pillage_trigger makeusable();
 
-  if(self.type == 1) {
+  if(self.type == 1)
     self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
-  } else {
+  else
     self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
-  }
 
   for(;;) {
     self.pillage_trigger waittill("trigger", var_0);
 
-    if(self.type == 1 && var_0 intel_pillage_allowed_func()) {
+    if(self.type == 1 && var_0 intel_pillage_allowed_func())
       give_player_intel(var_0);
-    }
 
-    if(self.type == 2 && !var_0 has_player_found(self.location)) {
+    if(self.type == 2 && !var_0 has_player_found(self.location))
       give_player_intel(var_0);
-    }
   }
 }
 
@@ -330,9 +315,8 @@ aliens_get_intel_num_collected(var_0) {
   for(var_7 = 0; var_7 < var_2; var_7++) {
     var_8 = "intel_episode_" + level.extinction_episode + "_location_" + (var_7 + 1);
 
-    if(var_0 getcoopplayerdatareservedint(var_8)) {
+    if(var_0 getcoopplayerdatareservedint(var_8))
       var_6++;
-    }
   }
 
   return var_1 + var_5 + var_6;
@@ -426,9 +410,8 @@ give_player_intel(var_0) {
 play_intel_pickup_vo(var_0) {
   wait 1.0;
 
-  if(soundexists(var_0)) {
+  if(soundexists(var_0))
     self playsoundtoplayer(var_0, self);
-  }
 }
 
 get_vo_to_play(var_0) {
@@ -480,9 +463,8 @@ drop_pillage_intel_on_ground(var_0) {
 
 turn_off_pillage_intel_for_players() {
   foreach(var_1 in level.players) {
-    if(!var_1 intel_pillage_allowed_func()) {
+    if(!var_1 intel_pillage_allowed_func())
       var_1 thread turn_off_intel_for_player(self);
-    }
   }
 }
 
@@ -494,13 +476,11 @@ toggle_usablity_on_distance() {
   var_2 = 1024;
   var_3 = 4900;
 
-  if(self.type == var_0) {
+  if(self.type == var_0)
     var_3 = 27225;
-  }
 
-  while(!isDefined(level.players)) {
+  while(!isDefined(level.players))
     wait 0.1;
-  }
 
   for(;;) {
     foreach(var_5 in level.players) {
@@ -509,12 +489,11 @@ toggle_usablity_on_distance() {
       }
       var_6 = 1;
 
-      if(distancesquared(var_5.origin, self.pillage_trigger.origin) > var_3) {
+      if(distancesquared(var_5.origin, self.pillage_trigger.origin) > var_3)
         var_6 = 0;
-      }
 
       if(distancesquared(var_5.origin, self.pillage_trigger.origin) < var_2 && should_display_already_found_message(var_5)) {
-        var_5 maps\mp\_utility::setlowermessage("already_have_intel", &"ALIEN_PILLAGE_INTEL_ALREADY_HAVE_INTEL", 2);
+        var_5 maps\mp\_utility::setlowermessage("already_have_intel", & "ALIEN_PILLAGE_INTEL_ALREADY_HAVE_INTEL", 2);
         common_scripts\utility::waitframe();
         continue;
       }
@@ -527,15 +506,13 @@ toggle_usablity_on_distance() {
         var_6 = 0;
       }
 
-      if(isDefined(var_5.outline_player_intel_found_list) && common_scripts\utility::array_contains(var_5.outline_player_intel_found_list, self)) {
+      if(isDefined(var_5.outline_player_intel_found_list) && common_scripts\utility::array_contains(var_5.outline_player_intel_found_list, self))
         var_6 = 0;
-      }
 
-      if(var_6) {
+      if(var_6)
         enable_usability(var_5);
-      } else {
+      else
         disable_usability(var_5);
-      }
 
       common_scripts\utility::waitframe();
     }
@@ -545,9 +522,8 @@ toggle_usablity_on_distance() {
 }
 
 should_display_already_found_message(var_0) {
-  if(isDefined(self.player_has_found_me) && isDefined(self.player_has_found_me[var_0.name]) && self.player_has_found_me[var_0.name]) {
+  if(isDefined(self.player_has_found_me) && isDefined(self.player_has_found_me[var_0.name]) && self.player_has_found_me[var_0.name])
     return 1;
-  }
 
   return 0;
 }
@@ -569,52 +545,44 @@ intel_pillage_outline() {
     }
     var_2 = get_intel_item_outline_color(var_1);
 
-    if(var_2 == 3) {
+    if(var_2 == 3)
       maps\mp\alien\_outline_proto::enable_outline_for_player(var_1.pillage_trigger, self, 3, 0, "high");
-    } else if(var_2 == 4) {
+    else if(var_2 == 4)
       maps\mp\alien\_outline_proto::enable_outline_for_player(var_1.pillage_trigger, self, 1, 0, "high");
-    } else {
+    else
       maps\mp\alien\_outline_proto::disable_outline_for_player(var_1.pillage_trigger, self);
-    }
 
-    if(var_3 % 10 == 0) {
+    if(var_3 % 10 == 0)
       common_scripts\utility::waitframe();
-    }
   }
 }
 
 get_intel_item_outline_color(var_0) {
-  if(!isDefined(var_0) || !isDefined(var_0.pillage_trigger)) {
+  if(!isDefined(var_0) || !isDefined(var_0.pillage_trigger))
     return 0;
-  }
 
-  if(isDefined(self.outline_player_intel_found_list) && common_scripts\utility::array_contains(self.outline_player_intel_found_list, var_0)) {
+  if(isDefined(self.outline_player_intel_found_list) && common_scripts\utility::array_contains(self.outline_player_intel_found_list, var_0))
     return 0;
-  }
 
-  if(var_0.type == 1) {
+  if(var_0.type == 1)
     var_1 = 27225;
-  } else {
+  else
     var_1 = 4900;
-  }
 
   var_2 = distancesquared(self.origin, var_0.origin) < var_1;
 
-  if(!var_2) {
+  if(!var_2)
     return 0;
-  }
 
-  if(maps\mp\alien\_utility::is_holding_deployable() || maps\mp\alien\_utility::has_special_weapon()) {
+  if(maps\mp\alien\_utility::is_holding_deployable() || maps\mp\alien\_utility::has_special_weapon())
     return 4;
-  }
 
   return 3;
 }
 
 add_to_outline_intel_watch_list(var_0) {
-  if(!common_scripts\utility::array_contains(level.outline_intel_watch_list, var_0)) {
+  if(!common_scripts\utility::array_contains(level.outline_intel_watch_list, var_0))
     level.outline_intel_watch_list[level.outline_intel_watch_list.size] = var_0;
-  }
 }
 
 remove_from_outline_intel_watch_list(var_0) {

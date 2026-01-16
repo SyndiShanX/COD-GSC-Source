@@ -69,9 +69,8 @@ watch_staff_air_impact() {
   while(true) {
     self waittill("projectile_impact", str_weap_name, v_explode_point, n_radius, projectile);
 
-    if(str_weap_name == "staff_air_upgraded2_zm" || str_weap_name == "staff_air_upgraded3_zm") {
+    if(str_weap_name == "staff_air_upgraded2_zm" || str_weap_name == "staff_air_upgraded3_zm")
       self thread staff_air_find_source(v_explode_point, str_weap_name);
-    }
   }
 }
 
@@ -90,11 +89,10 @@ staff_air_find_source(v_detonate, str_weapon) {
         if(is_true(a_zombies[i].staff_hit)) {
           continue;
         }
-        if(distance2dsquared(v_detonate, a_zombies[i].origin) <= 10000) {
+        if(distance2dsquared(v_detonate, a_zombies[i].origin) <= 10000)
           self thread staff_air_zombie_source(a_zombies[0], str_weapon);
-        } else {
+        else
           self thread staff_air_position_source(v_detonate, str_weapon);
-        }
 
         return;
       }
@@ -110,9 +108,8 @@ staff_air_zombie_source(ai_zombie, str_weapon) {
   v_whirlwind_pos = ai_zombie.origin;
   self thread staff_air_position_source(v_whirlwind_pos, str_weapon);
 
-  if(!isDefined(ai_zombie.is_mechz)) {
+  if(!isDefined(ai_zombie.is_mechz))
     self thread source_zombie_death(ai_zombie);
-  }
 }
 
 staff_air_position_source(v_detonate, str_weapon) {
@@ -124,9 +121,8 @@ staff_air_position_source(v_detonate, str_weapon) {
   if(flag("whirlwind_active")) {
     level notify("whirlwind_stopped");
 
-    while(flag("whirlwind_active")) {
+    while(flag("whirlwind_active"))
       wait_network_frame();
-    }
 
     wait 0.3;
   }
@@ -134,7 +130,7 @@ staff_air_position_source(v_detonate, str_weapon) {
   flag_set("whirlwind_active");
   n_time = self.chargeshotlevel * 3.5;
   e_whirlwind = spawn("script_model", v_detonate + vectorscale((0, 0, 1), 100.0));
-  e_whirlwind setModel("tag_origin");
+  e_whirlwind setmodel("tag_origin");
   e_whirlwind.angles = vectorscale((-1, 0, 0), 90.0);
   e_whirlwind thread puzzle_debug_position("X", vectorscale((1, 1, 0), 255.0));
   e_whirlwind moveto(groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
@@ -252,9 +248,8 @@ whirlwind_move_zombie(e_whirlwind) {
   self linkto(self.e_linker);
   self thread whirlwind_unlink(e_whirlwind);
 
-  if(isDefined(e_whirlwind)) {
+  if(isDefined(e_whirlwind))
     n_dist_sq = distance2dsquared(e_whirlwind.origin, self.origin);
-  }
 
   n_fling_range_sq = 900;
 
@@ -266,9 +261,8 @@ whirlwind_move_zombie(e_whirlwind) {
       self thread whirlwind_attract_anim(e_whirlwind.origin, b_supercharged);
       n_movetime = 1.0;
 
-      if(b_supercharged) {
+      if(b_supercharged)
         n_movetime = 0.8;
-      }
 
       self.e_linker thread move_along_ground_position(e_whirlwind.origin, n_movetime);
     } else
@@ -292,9 +286,8 @@ source_zombie_death(ai_zombie) {
   n_range = get_air_blast_range(self.chargeshotlevel);
   tag = "J_SpineUpper";
 
-  if(ai_zombie.isdog) {
+  if(ai_zombie.isdog)
     tag = "J_Spine1";
-  }
 
   v_source = ai_zombie gettagorigin(tag);
   ai_zombie thread staff_air_fling_zombie(self);
@@ -365,9 +358,9 @@ staff_air_fling_zombie(player) {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.is_source) || cointoss()) {
+  if(isDefined(self.is_source) || cointoss())
     self thread zombie_launch(player, "staff_air_upgraded_zm");
-  } else {
+  else {
     self do_damage_network_safe(player, self.health, "staff_air_upgraded_zm", "MOD_IMPACT");
     level thread staff_air_gib(self);
   }
@@ -376,9 +369,11 @@ staff_air_fling_zombie(player) {
 zombie_launch(e_attacker, str_weapon) {
   self do_damage_network_safe(e_attacker, self.health, str_weapon, "MOD_IMPACT");
 
-  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
+  if(isDefined(level.ragdoll_limit_check) && ![
+      [level.ragdoll_limit_check]
+    ]())
     level thread staff_air_gib(self);
-  } else {
+  else {
     self startragdoll();
     self setclientfield("air_staff_launch", 1);
   }
@@ -390,9 +385,8 @@ determine_launch_vector(e_attacker, ai_target) {
 }
 
 staff_air_gib(ai_zombie) {
-  if(cointoss()) {
+  if(cointoss())
     ai_zombie thread zombie_gib_all();
-  }
 
   ai_zombie thread zombie_gib_guts();
 }
@@ -446,9 +440,8 @@ wind_damage_cone(str_weapon) {
   foreach(target in a_targets) {
     if(isai(target)) {
       if(within_fov(fire_origin, fire_angles, target gettagorigin("j_spine4"), cos(n_fov))) {
-        if(self maps\mp\zombies\_zm_powerups::is_insta_kill_active()) {
+        if(self maps\mp\zombies\_zm_powerups::is_insta_kill_active())
           n_damage = target.health;
-        }
 
         target do_damage_network_safe(self, n_damage, str_weapon, "MOD_IMPACT");
       }
@@ -473,9 +466,8 @@ stun_zombie() {
   self.is_electrocuted = 1;
   tag = "J_SpineUpper";
 
-  if(self.isdog) {
+  if(self.isdog)
     tag = "J_Spine1";
-  }
 
   self animscripted(self.origin, self.angles, "zm_electric_stun");
   self maps\mp\animscripts\shared::donotetracks("stunned");
@@ -487,9 +479,8 @@ stun_zombie() {
 whirlwind_attract_anim_watch_cancel() {
   self endon("death");
 
-  while(flag("whirlwind_active")) {
+  while(flag("whirlwind_active"))
     wait_network_frame();
-  }
 
   self.deathanim = undefined;
   self stopanimscripted();
@@ -497,9 +488,8 @@ whirlwind_attract_anim_watch_cancel() {
 }
 
 whirlwind_attract_anim(v_attract_point, b_move_fast) {
-  if(!isDefined(b_move_fast)) {
+  if(!isDefined(b_move_fast))
     b_move_fast = 0;
-  }
 
   self endon("death");
   level endon("whirlwind_stopped");
@@ -515,20 +505,18 @@ whirlwind_attract_anim(v_attract_point, b_move_fast) {
     self.needs_run_update = 1;
     self._had_legs = 1;
 
-    if(b_move_fast) {
+    if(b_move_fast)
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast");
-    } else {
+    else
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind");
-    }
   } else {
     self.needs_run_update = 1;
     self._had_legs = 0;
 
-    if(b_move_fast) {
+    if(b_move_fast)
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_crawl");
-    } else {
+    else
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast_crawl");
-    }
   }
 
   if(is_true(self.nogravity)) {

@@ -112,11 +112,10 @@ init() {
 }
 
 add_flyover_audio_entry(source, vehicle_type, sound_alias1, sound_alias2, time) {
-  if(!isDefined(level._flyover_audio_table[source][vehicle_type])) {
+  if(!isDefined(level._flyover_audio_table[source][vehicle_type]))
     level._flyover_audio_table[source][vehicle_type] = [];
-  }
 
-  entry = spawnStruct();
+  entry = spawnstruct();
   entry.sound_alias1 = sound_alias1;
   entry.sound_alias2 = sound_alias2;
   entry.time = time;
@@ -137,17 +136,14 @@ main() {
         if(isDefined(self.viewlockedentity) && vehicle == self.viewlockedentity) {
           continue;
         }
-        if(!isDefined(vehicle.flyby_timeout)) {
+        if(!isDefined(vehicle.flyby_timeout))
           vehicle.flyby_timeout = [];
-        }
 
-        if(!isDefined(vehicle.flyby_audio_start_delay)) {
+        if(!isDefined(vehicle.flyby_audio_start_delay))
           vehicle.flyby_audio_start_delay = [];
-        }
 
-        if(!isDefined(vehicle.flyby_audio_entry)) {
+        if(!isDefined(vehicle.flyby_audio_entry))
           vehicle.flyby_audio_entry = [];
-        }
 
         velocity = vehicle.velocity;
         velocity = (velocity[0], velocity[1], 0);
@@ -167,9 +163,8 @@ update_flyby_audio(source, p1, p2, velocity) {
   if(isDefined(self.flyby_timeout[source]) && self.flyby_timeout[source] > 0) {
     self.flyby_timeout[source] = self.flyby_timeout[source] - 50;
 
-    if(self.flyby_timeout[source] < 0) {
+    if(self.flyby_timeout[source] < 0)
       self.flyby_timeout[source] = 0;
-    }
 
     return;
   }
@@ -213,11 +208,10 @@ update_flyby_audio(source, p1, p2, velocity) {
       self.flyby_audio_start_delay[source] = self.flyby_audio_start_delay[source] - 50;
 
       if(self.flyby_audio_start_delay[source] < 0) {
-        self playSound(self.flyby_audio_entry[source].sound_alias1);
+        self playsound(self.flyby_audio_entry[source].sound_alias1);
 
-        if(isDefined(self.flyby_audio_entry[source].sound_alias2) && self.flyby_audio_entry[source].sound_alias2 != "null") {
-          self playSound(self.flyby_audio_entry[source].sound_alias2);
-        }
+        if(isDefined(self.flyby_audio_entry[source].sound_alias2) && self.flyby_audio_entry[source].sound_alias2 != "null")
+          self playsound(self.flyby_audio_entry[source].sound_alias2);
 
         self.flyby_timeout[source] = self.flyby_audio_entry[source].time;
         self.flyby_audio_entry[source] = undefined;
@@ -229,18 +223,15 @@ update_flyby_audio(source, p1, p2, velocity) {
 get_best_entry(source, vehicletype, time) {
   entries = level._flyover_audio_table[source]["default"];
 
-  if(isDefined(level._flyover_audio_table[source][vehicletype])) {
+  if(isDefined(level._flyover_audio_table[source][vehicletype]))
     entries = level._flyover_audio_table[source][vehicletype];
-  }
 
-  if(!isDefined(entries)) {
+  if(!isDefined(entries))
     return undefined;
-  }
 
   for(i = 0; i < entries.size; i++) {
-    if(time < entries[i].time) {
+    if(time < entries[i].time)
       return entries[i];
-    }
   }
 
   return undefined;
@@ -269,17 +260,15 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
   last_pos = undefined;
   start_time = 0;
 
-  if(!isDefined(soundalias_1)) {
+  if(!isDefined(soundalias_1))
     self.soundalias_1 = "veh_mig_flyby";
-  } else {
+  else
     self.soundalias_1 = soundalias_1;
-  }
 
-  if(!isDefined(soundalias_2)) {
+  if(!isDefined(soundalias_2))
     self.soundalias_2 = "veh_mig_flyby_lfe";
-  } else {
+  else
     self.soundalias_2 = soundalias_2;
-  }
 
   while(isDefined(self)) {
     if(isDefined(last_pos)) {
@@ -299,11 +288,10 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
         assert(isDefined(time));
 
         if(time < apex) {
-          self playSound(self.soundalias_1);
+          self playsound(self.soundalias_1);
 
-          if(self.soundalias_2 != "null") {
-            self playSound(self.soundalias_2);
-          }
+          if(self.soundalias_2 != "null")
+            self playsound(self.soundalias_2);
 
           start_time = gettime();
           break;
@@ -330,11 +318,10 @@ closest_point_on_line_to_point(point, linestart, lineend) {
   delta = point - linestart;
   t = vectordot(delta, dir) / dist;
 
-  if(t < 0.0) {
+  if(t < 0.0)
     return linestart;
-  } else if(t > 1.0) {
+  else if(t > 1.0)
     return lineend;
-  }
 
   return linestart + dir * (t * dist);
 }

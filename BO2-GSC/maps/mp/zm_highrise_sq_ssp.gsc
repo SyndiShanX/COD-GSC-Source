@@ -45,15 +45,14 @@ stage_logic_1() {
 }
 
 ssp1_sliquify_balls() {
-  a_balls = getEntArray("sq_sliquify_ball", "targetname");
+  a_balls = getentarray("sq_sliquify_ball", "targetname");
   level thread vo_sliquify_fail_watch();
   level thread ssp1_advance_dragon();
   level thread vo_richtofen_sliquify_confirm();
   level thread vo_maxis_sliquify_fail();
 
-  for(i = 0; i < a_balls.size; i++) {
+  for(i = 0; i < a_balls.size; i++)
     a_balls[i] thread ssp1_watch_ball("ssp1_ball" + i + "_complete");
-  }
 
   while(!flag("ssp1_ball0_complete") || !flag("ssp1_ball1_complete")) {
     flag_wait_any("ssp1_ball0_complete", "ssp1_ball1_complete");
@@ -66,7 +65,7 @@ ssp1_sliquify_balls() {
 ssp1_watch_ball(str_complete_flag) {
   self watch_model_sliquification(20, str_complete_flag);
   self thread ssp1_rotate_ball();
-  self playLoopSound("zmb_sq_ball_rotate_loop", 0.25);
+  self playloopsound("zmb_sq_ball_rotate_loop", 0.25);
 }
 
 ssp1_rotate_ball() {
@@ -96,11 +95,10 @@ corpse_room_watcher() {
   while(!flag("ssp2_resurrection_done")) {
     level waittill("ssp2_corpse_made", is_in_room);
 
-    if(is_in_room) {
+    if(is_in_room)
       n_count++;
-    } else {
+    else
       n_count = 0;
-    }
 
     if(n_count == 1 && !flag("ssp2_maxis_keep_going_said")) {
       flag_set("ssp2_maxis_keep_going_said");
@@ -124,11 +122,10 @@ ssp_2_zombie_death_check() {
   }
   t_corpse_room = getent("corpse_room_trigger", "targetname");
 
-  if(self istouching(t_corpse_room)) {
+  if(self istouching(t_corpse_room))
     level notify("ssp2_corpse_made", 1);
-  } else {
+  else
     level notify("ssp2_corpse_made", 0);
-  }
 }
 
 corpse_room_cleanup_watcher() {
@@ -148,9 +145,8 @@ corpse_room_cleanup_watcher() {
     n_count = 0;
 
     foreach(m_corpse in a_corpses) {
-      if(m_corpse istouching(t_corpse_room)) {
+      if(m_corpse istouching(t_corpse_room))
         n_count++;
-      }
     }
 
     if(n_count < 15) {
@@ -193,11 +189,12 @@ exit_stage_1(success) {
   flag_set("ssp1_complete");
 }
 
-exit_stage_2(success) {}
+exit_stage_2(success) {
+}
 
 watch_model_sliquification(n_end_limit, str_complete_flag) {
   n_count = 0;
-  self setCanDamage(1);
+  self setcandamage(1);
 
   while(!flag(str_complete_flag)) {
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weaponname);
@@ -210,16 +207,14 @@ watch_model_sliquification(n_end_limit, str_complete_flag) {
 
         self notify("sq_sliquified");
 
-        if(isDefined(self.t_pickup)) {
+        if(isDefined(self.t_pickup))
           self.t_pickup delete();
-        }
 
         flag_set(str_complete_flag);
       } else if(n_count == 1)
         level notify("ssp1_ball_first_sliquified");
-      else if(n_count == 10) {
+      else if(n_count == 10)
         level notify("ssp1_ball_sliquified_2");
-      }
     }
   }
 }

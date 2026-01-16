@@ -28,6 +28,7 @@
 #include scripts\mp_common\gametypes\spawnlogic;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
+
 #namespace clean;
 
 autoexec __init__system__() {
@@ -69,12 +70,12 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_audio::set_leader_gametype_dialog("startStockpile", "hcStartStockpile", stockpileorders, stockpileorders, "bbStartStockpile", "hcbbStartStockpile");
   level.goalfx = "ui/fx8_fracture_deposit_point";
   level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end";
-  level.var_dfce3f1c = # "clean_deposit";
+  level.var_dfce3f1c = #"clean_deposit";
 
   if(isDefined(level.var_c5e28dc5) && level.var_c5e28dc5) {
     level.goalfx = "ui/fx8_fracture_deposit_point_ire";
     level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end_ire";
-    level.var_dfce3f1c = # "hash_6c8a4a73bc07da57";
+    level.var_dfce3f1c = #"hash_6c8a4a73bc07da57";
   }
 
   callback::on_connect(&onplayerconnect);
@@ -120,7 +121,7 @@ onstartgametype() {
   level.var_9d4a9561 = 0;
   level.var_b8c2e6df = 0;
 
-  waitframe(1);
+    waitframe(1);
 
   for(i = 0; i < 50; i++) {
     level.tacos[i] = function_f82f0bb5();
@@ -128,8 +129,8 @@ onstartgametype() {
 }
 
 onplayerconnect() {
-  self.pers[# "cleandeposits"] = 0;
-  self.pers[# "cleandenies"] = 0;
+  self.pers[#"cleandeposits"] = 0;
+  self.pers[#"cleandenies"] = 0;
 }
 
 function_aafe4c74() {
@@ -165,19 +166,19 @@ debug_print() {
   }
 }
 
-function onspawnplayer(predictedspawn) {
-  if(level.usestartspawns && !level.ingraceperiod) {
-    level.usestartspawns = 0;
-  }
+  function onspawnplayer(predictedspawn) {
+    if(level.usestartspawns && !level.ingraceperiod) {
+      level.usestartspawns = 0;
+    }
 
-  self.var_916cc864 = 0;
-  self.var_91be2350 = 0;
-  self.var_129c990c = 0;
-  self.carriedtacos = 0;
-  self.var_3e52c359 = 0;
-  self clientfield::set_player_uimodel("hudItems.cleanCarryCount", 0);
-  spawning::onspawnplayer(predictedspawn);
-}
+    self.var_916cc864 = 0;
+    self.var_91be2350 = 0;
+    self.var_129c990c = 0;
+    self.carriedtacos = 0;
+    self.var_3e52c359 = 0;
+    self clientfield::set_player_uimodel("hudItems.cleanCarryCount", 0);
+    spawning::onspawnplayer(predictedspawn);
+  }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   if(isplayer(attacker) && attacker.team != self.team) {
@@ -226,7 +227,7 @@ function_b25ab1e7() {
   var_ba985a3c = undefined;
 
   foreach(taco in level.tacos) {
-    if(taco.interactteam == # "none") {
+    if(taco.interactteam == #"none") {
       return taco;
     }
 
@@ -240,22 +241,23 @@ function_b25ab1e7() {
   }
 
   if(isDefined(var_ba985a3c) && var_ba985a3c.droptime != gettime()) {
+
     level.var_9d4a9561++;
 
-    var_ba985a3c registermp_multi_kill_medals_interface();
+      var_ba985a3c registermp_multi_kill_medals_interface();
     return var_ba985a3c;
   }
 
   level.var_b8c2e6df++;
 
-  return undefined;
+    return undefined;
 }
 
 function_f82f0bb5() {
   visuals = [];
   trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
   trigger.var_a865c2cd = 0;
-  taco = gameobjects::create_use_object(#"any", trigger, visuals, undefined, # "clean_taco");
+  taco = gameobjects::create_use_object(#"any", trigger, visuals, undefined, #"clean_taco");
   taco notsolid();
   taco ghost();
   taco gameobjects::set_use_time(0);
@@ -265,12 +267,13 @@ function_f82f0bb5() {
 }
 
 function_903c4eff(victim, attacker, pos, yawangle) {
+
   level.activedrops++;
   level.var_8b5ef67d = max(level.var_8b5ef67d, level.activedrops);
 
-  if(!isDefined(yawangle)) {
-    yawangle = randomint(360);
-  }
+    if(!isDefined(yawangle)) {
+      yawangle = randomint(360);
+    }
 
   if(!isDefined(pos)) {
     pos = victim.origin + (0, 0, 40);
@@ -311,7 +314,7 @@ function_903c4eff(victim, attacker, pos, yawangle) {
 function_8cb72ba4() {
   level endon(#"game_ended");
   self endon(#"reset");
-  self.var_2581d0d endon(#"death", # "stationary");
+  self.var_2581d0d endon(#"death", #"stationary");
 
   while(true) {
     if(!isDefined(self.var_2581d0d)) {
@@ -352,13 +355,14 @@ timeout_wait() {
 
   level.var_bb42ed2++;
 
-  self thread registermp_multi_kill_medals_interface();
+    self thread registermp_multi_kill_medals_interface();
 }
 
 registermp_multi_kill_medals_interface() {
+
   level.activedrops--;
 
-  self notify(#"reset");
+    self notify(#"reset");
   self clientfield::set("taco_flag", 0);
   self clientfield::set("taco_player_entnum", 15);
   self stoploopsound();
@@ -382,9 +386,10 @@ function_c1780fc7() {
   function_998dec78();
 
   if(!isDefined(level.cleandepositpoints)) {
+
     util::error("<dev string:x7a>");
 
-    return;
+      return;
   }
 
   level.cleandeposithubs = [];
@@ -432,7 +437,7 @@ function_bad2b0d4(origin) {
 function_b8a3dde4() {
   level endon(#"game_ended");
   self.baseeffect = spawnfx(level.goalfx, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
   wait_time = level.cleandepositonlinetime;
 
@@ -448,7 +453,7 @@ function_b8a3dde4() {
 
   self.baseeffect delete();
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
 }
@@ -626,9 +631,9 @@ function_83e87bd5(player) {
   time = gettime();
   player.var_916cc864 = time;
 
-  if(isDefined(player.pers[# "cleandeposits"])) {
-    player.pers[# "cleandeposits"] += 1;
-    player.cleandeposits = player.pers[# "cleandeposits"];
+  if(isDefined(player.pers[#"cleandeposits"])) {
+    player.pers[#"cleandeposits"] += 1;
+    player.cleandeposits = player.pers[#"cleandeposits"];
     [[level.var_37d62931]](player, 1);
   }
 
@@ -687,9 +692,9 @@ function_95cbd646(player) {
   if(self.victimteam == player.team) {
     player playSound("mpl_fracture_enemy_pickup_m");
 
-    if(isDefined(player.pers[# "cleandenies"])) {
-      player.pers[# "cleandenies"] += 1;
-      player.cleandenies = player.pers[# "cleandenies"];
+    if(isDefined(player.pers[#"cleandenies"])) {
+      player.pers[#"cleandenies"] += 1;
+      player.cleandenies = player.pers[#"cleandenies"];
       [
         [level.var_37d62931]
       ](player, 1);
@@ -766,7 +771,7 @@ function_bbcf6af(attacker, yawangle) {
 
   dropcount += getdvarint(#"extratacos", 0);
 
-  var_8a33c2ea = 360 / (dropcount + 1);
+    var_8a33c2ea = 360 / (dropcount + 1);
 
   for(i = 0; i < dropcount; i++) {
     taco = function_b25ab1e7();

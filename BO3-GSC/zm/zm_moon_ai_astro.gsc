@@ -13,12 +13,12 @@
 #namespace zm_moon_ai_astro;
 
 function init() {
-  level.astro_zombie_enter_level = &moon_astro_enter_level;
-  level.aat["zm_aat_blast_furnace"].validation_func = &function_82c2a8f1;
-  level.aat["zm_aat_dead_wire"].validation_func = &function_82c2a8f1;
-  level.aat["zm_aat_fire_works"].validation_func = &function_82c2a8f1;
-  level.aat["zm_aat_thunder_wall"].validation_func = &function_82c2a8f1;
-  level.aat["zm_aat_turned"].validation_func = &function_82c2a8f1;
+  level.astro_zombie_enter_level = & moon_astro_enter_level;
+  level.aat["zm_aat_blast_furnace"].validation_func = & function_82c2a8f1;
+  level.aat["zm_aat_dead_wire"].validation_func = & function_82c2a8f1;
+  level.aat["zm_aat_fire_works"].validation_func = & function_82c2a8f1;
+  level.aat["zm_aat_thunder_wall"].validation_func = & function_82c2a8f1;
+  level.aat["zm_aat_turned"].validation_func = & function_82c2a8f1;
 }
 
 function zombie_set_fake_playername() {
@@ -26,7 +26,7 @@ function zombie_set_fake_playername() {
 }
 
 function function_82c2a8f1() {
-  if(isDefined(self) && isDefined(self.animname) && self.animname == "astro_zombie") {
+  if(isdefined(self) && isdefined(self.animname) && self.animname == "astro_zombie") {
     return false;
   }
   return true;
@@ -38,15 +38,15 @@ function moon_astro_enter_level() {
   self.entered_level = 1;
   self.no_widows_wine = 1;
   astro_struct = self moon_astro_get_spawn_struct();
-  if(isDefined(astro_struct)) {
+  if(isdefined(astro_struct)) {
     self forceteleport(astro_struct.origin, astro_struct.angles);
     util::wait_network_frame();
   }
-  playFX(level._effect["astro_spawn"], self.origin);
-  self playSound("zmb_hellhound_bolt");
-  self playSound("zmb_hellhound_spawn");
+  playfx(level._effect["astro_spawn"], self.origin);
+  self playsound("zmb_hellhound_bolt");
+  self playsound("zmb_hellhound_spawn");
   playrumbleonposition("explosion_generic", self.origin);
-  self playLoopSound("zmb_zombie_astronaut_loop", 1);
+  self playloopsound("zmb_zombie_astronaut_loop", 1);
   self thread play_line_if_player_can_see();
   self zombie_set_fake_playername();
   util::wait_network_frame();
@@ -55,7 +55,7 @@ function moon_astro_enter_level() {
 
 function play_line_if_player_can_see() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(distancesquared(self.origin, players[i].origin) <= 640000) {
       cansee = self zmhd_cleanup::player_can_see_me(players[i]);
       if(cansee) {
@@ -68,25 +68,25 @@ function play_line_if_player_can_see() {
 
 function moon_astro_get_spawn_struct() {
   keys = getarraykeys(level.zones);
-  for(i = 0; i < level.zones.size; i++) {
+  for (i = 0; i < level.zones.size; i++) {
     if(keys[i] == "nml_zone") {
       continue;
     }
     if(level.zones[keys[i]].is_occupied) {
       locs = struct::get_array(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
-      if(isDefined(locs) && locs.size > 0) {
+      if(isdefined(locs) && locs.size > 0) {
         locs = array::randomize(locs);
         return locs[0];
       }
     }
   }
-  for(i = 0; i < level.zones.size; i++) {
+  for (i = 0; i < level.zones.size; i++) {
     if(keys[i] == "nml_zone") {
       continue;
     }
     if(level.zones[keys[i]].is_active) {
       locs = struct::get_array(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
-      if(isDefined(locs) && locs.size > 0) {
+      if(isdefined(locs) && locs.size > 0) {
         locs = array::randomize(locs);
         return locs[0];
       }

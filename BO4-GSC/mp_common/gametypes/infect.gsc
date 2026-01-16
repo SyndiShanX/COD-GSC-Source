@@ -35,12 +35,13 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapons;
+
 #namespace infect;
 
 event_handler[gametype_init] main(eventstruct) {
   globallogic::init();
   infection::initialize();
-  infection::function_153000d0(#"hash_70fe115fad3f4fa", # "hash_3ca96ae1bd7d344f");
+  infection::function_153000d0(#"hash_70fe115fad3f4fa", #"hash_3ca96ae1bd7d344f");
   level.var_757f1b92 = getweapon("melee_bowie_bloody");
   level.var_4ae49bbd = getweapon("hatchet");
   level.var_30783ca9 = &function_1a87243c;
@@ -152,7 +153,7 @@ function_8d346fd8(winningteam) {
   players = level.players;
 
   for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].pers[# "team"])) {
+    if(!isDefined(players[i].pers[#"team"])) {
       continue;
     }
 
@@ -165,29 +166,29 @@ function_8d346fd8(winningteam) {
       continue;
     }
 
-    if(players[i].pers[# "team"] == winningteam) {
+    if(players[i].pers[#"team"] == winningteam) {
       globallogic_score::updatewinstats(players[i]);
       continue;
     }
 
-    if(level.rankedmatch && !level.leaguematch && players[i].pers[# "latejoin"] === 1) {
+    if(level.rankedmatch && !level.leaguematch && players[i].pers[#"latejoin"] === 1) {
       globallogic_score::updatelosslatejoinstats(players[i]);
     }
 
     if(!level.disablestattracking) {
-      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", # "statvalue", 0);
+      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", #"statvalue", 0);
     }
   }
 }
 
 inithud() {
   level.var_43406ee9 = spawnStruct();
-  level.var_43406ee9.label = # "hash_7bf80a392d947b6e";
+  level.var_43406ee9.label = #"hash_7bf80a392d947b6e";
   level.var_43406ee9.alpha = 0;
   level.var_43406ee9.archived = 0;
   level.var_43406ee9.hidewheninmenu = 1;
   level.var_6c6b8981 = spawnStruct();
-  level.var_6c6b8981.label = # "hash_29028683f846db5d";
+  level.var_6c6b8981.label = #"hash_29028683f846db5d";
   level.var_6c6b8981.alpha = 0;
   level.var_6c6b8981.archived = 0;
   level.var_6c6b8981.hidewheninmenu = 1;
@@ -198,7 +199,7 @@ onplayerconnect() {
   self.var_fc81f69c = level.inprematchperiod;
 
   if(self.sessionteam != "spectator") {
-    self.pers[# "needteam"] = 1;
+    self.pers[#"needteam"] = 1;
   }
 
   if(self infection::function_687661ea()) {
@@ -277,7 +278,7 @@ onroundendgame(roundwinner) {
     foreach(team in level.teams) {
       [
         [level._setteamscore]
-      ](team, game.stat[# "roundswon"][team]);
+      ](team, game.stat[#"roundswon"][team]);
     }
   }
 
@@ -285,7 +286,7 @@ onroundendgame(roundwinner) {
 }
 
 function_f86ae9e5() {
-  return self.pers[# "time_played_moving"] > 0;
+  return self.pers[#"time_played_moving"] > 0;
 }
 
 function_24ca3437(team, var_efb758a8, calloutplayer) {
@@ -328,9 +329,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
       scoreevents::processscoreevent("infected_infect_3_enemies", attacker, self, weapon);
     }
 
-    if(isDefined(attacker.pers[# "infects"])) {
-      attacker.pers[# "infects"] += 1;
-      attacker.infects = attacker.pers[# "infects"];
+    if(isDefined(attacker.pers[#"infects"])) {
+      attacker.pers[#"infects"] += 1;
+      attacker.infects = attacker.pers[#"infects"];
     }
 
     [[level.var_37d62931]](attacker, 1);
@@ -351,7 +352,7 @@ function_98c89d66(victim, wassuicide) {
     }
   }
 
-  victim waittilltimeout(1.5, # "begin_killcam");
+  victim waittilltimeout(1.5, #"begin_killcam");
 
   if(isDefined(victim)) {
     level thread function_a5abd7ee();
@@ -398,7 +399,7 @@ function_98c89d66(victim, wassuicide) {
 function_cc49dfcf() {
   level endon(#"game_ended");
   self endon(#"disconnect");
-  waitresult = self waittill(#"player_input_revive", # "death");
+  waitresult = self waittill(#"player_input_revive", #"death");
   return waitresult._notify;
 }
 
@@ -447,7 +448,7 @@ function_4928e571() {
 
 finalsurvivoruav(finalsurvivor) {
   level endon(#"game_ended");
-  finalsurvivor endon(#"disconnect", # "death");
+  finalsurvivor endon(#"disconnect", #"death");
   level endon(#"hash_c99e3873a00e736");
   level thread enduavonlatejoiner(finalsurvivor);
   setteamspyplane(game.attackers, 1);
@@ -480,7 +481,7 @@ finalsurvivoruav(finalsurvivor) {
 
 enduavonlatejoiner(finalsurvivor) {
   level endon(#"game_ended");
-  finalsurvivor endon(#"disconnect", # "death");
+  finalsurvivor endon(#"disconnect", #"death");
 
   while(true) {
     var_63f8204e = function_4d9c9e8e(game.defenders);
@@ -629,7 +630,7 @@ settimer(time) {
 }
 
 choosefirstinfected() {
-  level endon(#"game_ended", # "infect_stopcountdown");
+  level endon(#"game_ended", #"infect_stopcountdown");
   level.infect_allowsuicide = 0;
   level.var_b93ecc24 = undefined;
 
@@ -673,7 +674,7 @@ choosefirstinfected() {
   wait 30;
 
   foreach(player in level.players) {
-    if(player.team == # "allies") {
+    if(player.team == #"allies") {
       scoreevents::processscoreevent("infected_survive_30_seconds", player);
     }
   }
@@ -681,7 +682,7 @@ choosefirstinfected() {
 
 function_a6489256() {
   while(true) {
-    waitresult = level waittill(#"game_ended", # "infect_stopcountdown");
+    waitresult = level waittill(#"game_ended", #"infect_stopcountdown");
 
     if(isDefined(level.var_43406ee9)) {
       level.var_43406ee9.alpha = 0;
@@ -697,7 +698,7 @@ function_a6489256() {
 
 function_a5abd7ee() {
   level notify(#"timeextended");
-  level endon(#"game_ended", # "hash_14fed44cd3ece79d", # "timeextended");
+  level endon(#"game_ended", #"hash_14fed44cd3ece79d", #"timeextended");
   timeout = 0;
 
   while(isDefined(level.var_43406ee9) && level.var_43406ee9.alpha > 0) {
@@ -716,7 +717,7 @@ function_a5abd7ee() {
 
 function_3ba09e5e() {
   while(true) {
-    waitresult = level waittill(#"game_ended", # "hash_14fed44cd3ece79d");
+    waitresult = level waittill(#"game_ended", #"hash_14fed44cd3ece79d");
 
     if(isDefined(level.var_6c6b8981)) {
       level.var_6c6b8981.alpha = 0;
@@ -811,18 +812,18 @@ forcespawnteam(team) {
 
 playerforcespawn() {
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect", # "spawned");
+  self endon(#"death", #"disconnect", #"spawned");
 
   if(isDefined(self.hasspawned) && self.hasspawned) {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
   self function_219eee6b();
-  self.pers[# "class"] = level.defaultclass;
+  self.pers[#"class"] = level.defaultclass;
   self.curclass = level.defaultclass;
   self globallogic_ui::closemenus();
   self closemenu("ChooseClass_InGame");
@@ -841,30 +842,30 @@ function_e030bdaf(player, wassuicide = 0) {
 
 function_57f1203() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self waittill(#"weapon_change");
   self enableoffhandspecial();
 }
 
 changeteam(team) {
-  if(team === # "axis") {
+  if(team === #"axis") {
     self infection::function_d3da95cf();
   } else {
     if(self.sessionstate != "dead") {
       self.switching_teams = 1;
       self.switchedteamsresetgadgets = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
     }
 
     self teams::function_dc7eaabd(team);
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "spawnweapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
-    self.pers[# "teamtime"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"spawnweapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
+    self.pers[#"teamtime"] = undefined;
   }
 
-  self clientfield::set("Infected.player_infected", team === # "axis");
+  self clientfield::set("Infected.player_infected", team === #"axis");
   self globallogic_ui::updateobjectivetext();
   self notify(#"end_respawn");
 }
@@ -876,7 +877,7 @@ function_4d9c9e8e(team) {
 
 updateteamscore(team) {
   score = function_4d9c9e8e(team);
-  game.stat[# "teamscores"][team] = score;
+  game.stat[#"teamscores"][team] = score;
   globallogic_score::updateteamscores(team);
 }
 
@@ -956,15 +957,15 @@ gettimelimit(var_abfac690 = 0) {
 function_ef516d85(winner, endtype, endreasontext, outcometext, team, winnerenum, notifyroundendtoui, matchbonus) {
   if(endtype == "roundend") {
     if(winner == "tie") {
-      outcometext = game.strings[# "draw"];
-    } else if(isDefined(self.pers[# "team"]) && winner == team) {
-      outcometext = game.strings[# "victory"];
+      outcometext = game.strings[#"draw"];
+    } else if(isDefined(self.pers[#"team"]) && winner == team) {
+      outcometext = game.strings[#"victory"];
       overridespectator = 1;
     } else {
-      outcometext = game.strings[# "defeat"];
+      outcometext = game.strings[#"defeat"];
 
-      if((level.rankedmatch || level.leaguematch) && self.pers[# "latejoin"] === 1) {
-        endreasontext = game.strings[# "join_in_progress_loss"];
+      if((level.rankedmatch || level.leaguematch) && self.pers[#"latejoin"] === 1) {
+        endreasontext = game.strings[#"join_in_progress_loss"];
       }
 
       overridespectator = 1;
@@ -975,12 +976,12 @@ function_ef516d85(winner, endtype, endreasontext, outcometext, team, winnerenum,
     if(team == "spectator" && overridespectator) {
       foreach(team in level.teams) {
         if(endreasontext == game.strings[team + "_eliminated"]) {
-          endreasontext = game.strings[# "cod_caster_team_eliminated"];
+          endreasontext = game.strings[#"cod_caster_team_eliminated"];
           break;
         }
       }
 
-      outcometext = game.strings[# "cod_caster_team_wins"];
+      outcometext = game.strings[#"cod_caster_team_wins"];
     }
 
     self luinotifyevent(#"show_outcome", 5, outcometext, endreasontext, int(matchbonus), winnerenum, notifyroundendtoui);

@@ -25,9 +25,8 @@ scene_pre_briefing() {
 scale_over_time(start_scale, end_scale, time_s) {
   holo = self;
 
-  if(isDefined(self.animname)) {
+  if(isDefined(self.animname))
     holo = getent(self.animname + "_scalable", "targetname");
-  }
 
   if(!isDefined(holo)) {
     return;
@@ -223,17 +222,14 @@ scene_pre_models() {
 }
 
 raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_model_tag, str_fx) {
-  if(!isDefined(position_ent_name)) {
+  if(!isDefined(position_ent_name))
     position_ent_name = undefined;
-  }
 
-  if(!isDefined(scale)) {
+  if(!isDefined(scale))
     scale = 4.0;
-  }
 
-  if(!isDefined(str_fx)) {
+  if(!isDefined(str_fx))
     str_fx = undefined;
-  }
 
   self unlink();
   end_pos = self.origin + vectorscale((0, 0, 1), 32.0);
@@ -254,9 +250,8 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
     wait 0.05;
   }
 
-  if(isDefined(str_fx)) {
+  if(isDefined(str_fx))
     self play_fx(str_fx, self.origin, self.angles, "kill_raise_model_fx", 1);
-  }
 
   level waittill(done_level_notify);
   self notify("stop_spinning");
@@ -275,9 +270,8 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
     wait 0.05;
   }
 
-  if(isDefined(parent_model)) {
+  if(isDefined(parent_model))
     self linkto(parent_model);
-  }
 
   self clearclientflag(14);
 }
@@ -297,23 +291,23 @@ scene_drone_models() {
   model_list = [];
   base = spawn("script_model", base_pos);
   base.angles = base_start_angles;
-  base setModel("p6_hologram_dr_base_map");
+  base setmodel("p6_hologram_dr_base_map");
   model_list[model_list.size] = base;
   dish = spawn("script_model", base gettagorigin("j_dish"));
   dish.angles = base gettagangles("j_dish");
-  dish setModel("p6_hologram_dr_dish");
+  dish setmodel("p6_hologram_dr_dish");
   model_list[model_list.size] = dish;
   tank = spawn("script_model", base gettagorigin("j_tank"));
   tank.angles = base gettagangles("j_tank");
-  tank setModel("p6_hologram_dr_tank");
+  tank setmodel("p6_hologram_dr_tank");
   model_list[model_list.size] = tank;
   transformer = spawn("script_model", base gettagorigin("j_transformer"));
   transformer.angles = base gettagangles("j_transformer");
-  transformer setModel("p6_hologram_dr_transformer");
+  transformer setmodel("p6_hologram_dr_transformer");
   model_list[model_list.size] = transformer;
   computer = spawn("script_model", base gettagorigin("j_computer"));
   computer.angles = base gettagangles("j_computer");
-  computer setModel("p6_hologram_dr_computer");
+  computer setmodel("p6_hologram_dr_computer");
   model_list[model_list.size] = computer;
 
   for(i = 0; i < model_list.size; i++) {
@@ -321,9 +315,8 @@ scene_drone_models() {
     model_list[i] hide();
     model_list[i] clearclientflag(14);
 
-    if(model_list[i] != base) {
+    if(model_list[i] != base)
       model_list[i] linkto(base);
-    }
   }
 
   level waittill("multimedia_up");
@@ -356,16 +349,14 @@ scene_drone_models() {
   base notify("stop_geo_fx");
   holo_table_exploder_switch(undefined);
 
-  foreach(model in model_list) {
-    model clearclientflag(15);
-  }
+  foreach(model in model_list)
+  model clearclientflag(15);
 
   level waittill("drone_fade_out");
   fade_out(1);
 
-  foreach(model in model_list) {
-    model delete();
-  }
+  foreach(model in model_list)
+  model delete();
 }
 
 hologram_start() {
@@ -377,7 +368,7 @@ hologram_start() {
 scene_dockside_models() {
   show_holotable_fuzz(0);
   dockside_base = getent("dockside_base", "targetname");
-  dockside_props = getEntArray("dockside_prop", "script_noteworthy");
+  dockside_props = getentarray("dockside_prop", "script_noteworthy");
   e_surface = getent("holo_table_surface", "targetname");
   e_angled = getent("holo_table_surface", "targetname");
 
@@ -407,9 +398,8 @@ scene_dockside_models() {
   foreach(prop in dockside_props) {
     prop setclientflag(15);
 
-    if(prop.targetname == "dockside_ship") {
+    if(prop.targetname == "dockside_ship")
       dockside_ship = prop;
-    }
 
     prop clearclientflag(14);
     prop show();
@@ -439,9 +429,8 @@ scene_dockside_models() {
   dockside_base clearclientflag(15);
   dockside_base notify("hide_base");
 
-  foreach(prop in dockside_props) {
-    prop clearclientflag(15);
-  }
+  foreach(prop in dockside_props)
+  prop clearclientflag(15);
 
   fade_out(1.0);
 }

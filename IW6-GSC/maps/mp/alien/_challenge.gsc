@@ -15,9 +15,8 @@ init_challenge() {
 
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     level.alien_challenge_table = "mp/alien/" + map_name + "_hardcore_challenges.csv";
-    if(!TableExists(level.alien_challenge_table)) {
+    if(!TableExists(level.alien_challenge_table))
       level.alien_challenge_table = "mp/alien/" + map_name + "_challenges.csv";
-    }
   }
 
   init_challenge_type();
@@ -58,9 +57,8 @@ update_challenge(challenge_name, param_1, param_2, param_3, param_4, param_5, pa
 }
 
 end_current_challenge() {
-  if(current_challenge_exist() && alien_mode_has("challenge")) {
+  if(current_challenge_exist() && alien_mode_has("challenge"))
     deactivate_current_challenge();
-  }
 }
 
 remove_all_challenge_cases() {
@@ -71,9 +69,8 @@ get_valid_challenge() {
   valid_challenges = [];
 
   foreach(challenge in level.challenge_data) {
-    if(isDefined(challenge.already_issued)) {
+    if(isDefined(challenge.already_issued))
       continue;
-    }
     if(level.players.size == 1 && !is_true(challenge.allowedinsolo)) {
       continue;
     }
@@ -126,26 +123,22 @@ should_skip_challenge(challenge) {
     challenge.ref == "new_weapon" ||
     challenge.ref == "snipers_only");
 
-  if(!is_weapon_challenge) {
+  if(!is_weapon_challenge)
     return false;
-  }
 
   num_pistol_prestige_players = 0;
   foreach(player in level.players) {
-    if(player maps\mp\alien\_prestige::prestige_getPistolsOnly() == 1) {
+    if(player maps\mp\alien\_prestige::prestige_getPistolsOnly() == 1)
       num_pistol_prestige_players++;
-    }
   }
 
-  if(challenge.ref == "new_weapon" && num_pistol_prestige_players > 0) {
+  if(challenge.ref == "new_weapon" && num_pistol_prestige_players > 0)
     return true;
-  }
 
-  if(num_pistol_prestige_players >= level.players.size - 1) {
+  if(num_pistol_prestige_players >= level.players.size - 1)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 deactivate_current_challenge() {
@@ -165,9 +158,8 @@ deactivate_current_challenge() {
 
     if(!is_casual_mode()) {
       if(level.num_challenge_completed == 10) {
-        foreach(player in level.players) {
-          player maps\mp\alien\_persistence::give_player_tokens(2, true);
-        }
+        foreach(player in level.players)
+        player maps\mp\alien\_persistence::give_player_tokens(2, true);
       }
     }
   } else {
@@ -232,17 +224,14 @@ challenge_countdown() {
 }
 
 can_pick_up_challenge(player) {
-  if(!IsPlayer(player)) {
+  if(!IsPlayer(player))
     return false;
-  }
 
-  if(isAI(player)) {
+  if(isAI(player))
     return false;
-  }
 
-  if(!isAlive(player) || (isDefined(player.fauxDead) && player.fauxDead)) {
+  if(!isAlive(player) || (isDefined(player.fauxDead) && player.fauxDead))
     return false;
-  }
 
   return true;
 }
@@ -332,9 +321,8 @@ handle_challenge_hotjoin() {
     self setClientOmnvar("ui_intel_percent", int(level.current_challenge_percent));
     self SetClientOmnvar("ui_intel_target_player", int(level.current_challenge_target_player));
     self setclientOmnvar("ui_intel_title", int(level.current_challenge_title));
-    if(level.current_challenge_timer > 0) {
+    if(level.current_challenge_timer > 0)
       self SetClientOmnvar("ui_intel_timer", int(gettime() + (level.current_challenge_timer * 1000)));
-    }
 
     self SetClientOmnvar("ui_intel_challenge_scalar", level.current_challenge_scalar);
   }
@@ -357,9 +345,8 @@ handle_challenge_hotjoin() {
 }
 
 get_num_challenge_completed() {
-  if(!isDefined(level.num_challenge_completed)) {
+  if(!isDefined(level.num_challenge_completed))
     return 0;
-  } else {
+  else
     return level.num_challenge_completed;
-  }
 }

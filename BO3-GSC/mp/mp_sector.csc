@@ -12,9 +12,9 @@
 #namespace mp_sector;
 
 function main() {
-  hour_hand = getEntArray(0, "hour_hand", "targetname");
-  minute_hand = getEntArray(0, "minute_hand", "targetname");
-  second_hand = getEntArray(0, "second_hand", "targetname");
+  hour_hand = getentarray(0, "hour_hand", "targetname");
+  minute_hand = getentarray(0, "minute_hand", "targetname");
+  second_hand = getentarray(0, "second_hand", "targetname");
   foreach(hand in hour_hand) {
     hand.targetname = "second_hand";
   }
@@ -28,8 +28,8 @@ function main() {
   mp_sector_sound::main();
   level.disablefxaniminsplitscreencount = 3;
   load::main();
-  level.domflagbasefxoverride = &dom_flag_base_fx_override;
-  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = & dom_flag_base_fx_override;
+  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_sector";
 }

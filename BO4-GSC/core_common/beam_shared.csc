@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace beam;
 
 launch(ent_1, str_tag1, ent_2, str_tag2, str_beam_type, var_ee0708f0) {

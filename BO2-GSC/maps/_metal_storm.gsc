@@ -37,29 +37,25 @@ init(variant) {
   level.difficultysettings["asd_health_boost"]["hardened"] = 70;
   level.difficultysettings["asd_health_boost"]["veteran"] = 140;
 
-  if(tolower(getdvar(#"mapname")) == "so_rts_mp_drone") {
+  if(tolower(getdvar(#"mapname")) == "so_rts_mp_drone")
     level.asd_use_double_wide = 0;
-  } else if(tolower(getdvar(#"mapname")) == "so_tut_mp_drone") {
+  else if(tolower(getdvar(#"mapname")) == "so_tut_mp_drone")
     level.asd_use_double_wide = 0;
-  } else {
+  else
     level.asd_use_double_wide = 1;
-  }
 }
 
 precache_damage_fx() {
   precachemodel("veh_t6_drone_tank_alt_dead");
 
-  if(!isDefined(level.fx_damage_effects)) {
+  if(!isDefined(level.fx_damage_effects))
     level.fx_damage_effects = [];
-  }
 
-  if(!isDefined(level.fx_damage_effects[self.vehicletype])) {
+  if(!isDefined(level.fx_damage_effects[self.vehicletype]))
     level.fx_damage_effects[self.vehicletype] = [];
-  }
 
-  for(i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++)
     level.fx_damage_effects[self.vehicletype][i] = loadfx("destructibles/fx_metalstorm_damagestate0" + (i + 1));
-  }
 
   level._effect["metalstorm_busted"] = loadfx("destructibles/fx_metalstorm_damagestate_back01");
   level._effect["metalstorm_explo"] = loadfx("destructibles/fx_metalstorm_death01a");
@@ -90,13 +86,11 @@ metalstorm_think2() {
   self.turret_on_target = 0;
   self.vehhighlyawareradius = 80;
 
-  if(!isDefined(self.goalradius)) {
+  if(!isDefined(self.goalradius))
     self.goalradius = 600;
-  }
 
-  if(!isDefined(self.goalpos)) {
+  if(!isDefined(self.goalpos))
     self.goalpos = self.origin;
-  }
 
   self setvehgoalpos(self.goalpos, 1);
   self.state_machine = create_state_machine("metalstormbrain", self);
@@ -109,32 +103,28 @@ metalstorm_think2() {
   scripted add_connection_by_type("scripted", 999, 4, undefined, "enter_vehicle");
 
   if(isDefined(self.script_startstate)) {
-    if(self.script_startstate == "off") {
+    if(self.script_startstate == "off")
       self metalstorm_off();
-    } else {
+    else
       self.state_machine set_state(self.script_startstate);
-    }
   } else
     metalstorm_start_ai();
 
   self thread metalstorm_set_team(self.vteam);
   waittillframeend;
 
-  if(self.vteam == "axis") {
+  if(self.vteam == "axis")
     self.health = self.health + maps\_gameskill::getcurrentdifficultysetting("asd_health_boost");
-  }
 }
 
 can_enter_main() {
-  if(!isalive(self)) {
+  if(!isalive(self))
     return false;
-  }
 
   driver = self getseatoccupant(0);
 
-  if(isDefined(driver)) {
+  if(isDefined(driver))
     return false;
-  }
 
   return true;
 }
@@ -147,14 +137,13 @@ metalstorm_off() {
   self vehicle_toggle_sounds(0);
   self veh_toggle_exhaust_fx(0);
   angles = self gettagangles("tag_flash");
-  target_vec = self.origin + anglesToForward((0, angles[1], 0)) * 1000;
+  target_vec = self.origin + anglestoforward((0, angles[1], 0)) * 1000;
   target_vec = target_vec + vectorscale((0, 0, -1), 700.0);
   self settargetorigin(target_vec);
   self.off = 1;
 
-  if(!isDefined(self.emped)) {
+  if(!isDefined(self.emped))
     self disableaimassist();
-  }
 }
 
 metalstorm_on() {
@@ -163,7 +152,7 @@ metalstorm_on() {
   self enableaimassist();
   self vehicle_toggle_sounds(1);
   self bootup();
-  self playSound("veh_metalstorm_boot_up");
+  self playsound("veh_metalstorm_boot_up");
   self veh_toggle_exhaust_fx(1);
   self.off = undefined;
   metalstorm_start_ai();
@@ -178,13 +167,12 @@ bootup() {
   }
 
   angles = self gettagangles("tag_flash");
-  target_vec = self.origin + anglesToForward((0, angles[1], 0)) * 1000;
+  target_vec = self.origin + anglestoforward((0, angles[1], 0)) * 1000;
   self.turretrotscale = 0.3;
   driver = self getseatoccupant(0);
 
-  if(!isDefined(driver)) {
+  if(!isDefined(driver))
     self settargetorigin(target_vec);
-  }
 
   wait 1;
   self.turretrotscale = 1;
@@ -227,9 +215,8 @@ metalstorm_turret_scan(scan_forever) {
       self.turret_on_target = 0;
       self.turret_state++;
 
-      if(self.turret_state >= 5) {
+      if(self.turret_state >= 5)
         self.turret_state = 0;
-      }
     }
 
     switch (self.turret_state) {
@@ -239,16 +226,16 @@ metalstorm_turret_scan(scan_forever) {
           break;
         }
       case 1:
-        target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
+        target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
         break;
       case 2:
-        target_vec = self.origin + anglesToForward((0, self.angles[1] + 90, 0)) * 1000;
+        target_vec = self.origin + anglestoforward((0, self.angles[1] + 90, 0)) * 1000;
         break;
       case 3:
-        target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
+        target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
         break;
       case 4:
-        target_vec = self.origin + anglesToForward((0, self.angles[1] - 90, 0)) * 1000;
+        target_vec = self.origin + anglestoforward((0, self.angles[1] - 90, 0)) * 1000;
         break;
     }
 
@@ -300,9 +287,8 @@ metalstorm_grenade_watcher() {
       self fireweapon();
 
       if(randomint(100) > 40 && self.turret_on_target) {
-        if(isDefined(grenade)) {
+        if(isDefined(grenade))
           grenade resetmissiledetonationtime(0);
-        }
 
         break;
       }
@@ -341,9 +327,8 @@ metalstorm_weapon_think() {
 
       cant_see_enemy_count = 0;
 
-      if(isplayer(self.enemy)) {
-        self playSound("wpn_metalstorm_lock_on");
-      }
+      if(isplayer(self.enemy))
+        self playsound("wpn_metalstorm_lock_on");
 
       self thread metalstorm_blink_lights();
       self laseron();
@@ -351,9 +336,8 @@ metalstorm_weapon_think() {
 
       if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
         if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 640000 || enemy_is_tank) {
-          if(enemy_is_hind) {
+          if(enemy_is_hind)
             self setgunnertargetent(self.enemy, vectorscale((0, 0, -1), 40.0), 0);
-          }
 
           self firegunnerweapon(0);
           self cleargunnertarget(0);
@@ -367,11 +351,10 @@ metalstorm_weapon_think() {
       cant_see_enemy_count++;
       wait 0.5;
 
-      if(cant_see_enemy_count > 2) {
+      if(cant_see_enemy_count > 2)
         self metalstorm_turret_scan(0);
-      } else if(cant_see_enemy_count > 1) {
+      else if(cant_see_enemy_count > 1)
         self cleartargetentity();
-      }
     }
   }
 }
@@ -383,11 +366,10 @@ metalstorm_fire_for_time(totalfiretime) {
   firetime = weaponfiretime(weaponname);
 
   for(time = 0; time < totalfiretime; time = time + firetime) {
-    if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
+    if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0)
       self fireweapon(undefined, undefined, 1);
-    } else {
+    else
       self fireweapon();
-    }
 
     wait(firetime);
   }
@@ -396,9 +378,8 @@ metalstorm_fire_for_time(totalfiretime) {
 metalstorm_start_ai(state) {
   self.goalpos = self.origin;
 
-  if(!isDefined(state)) {
+  if(!isDefined(state))
     state = "main";
-  }
 
   self.state_machine set_state(state);
 }
@@ -408,13 +389,12 @@ metalstorm_stop_ai() {
 }
 
 metalstorm_main() {
-  while(isDefined(self.emped)) {
+  while(isDefined(self.emped))
     wait 1;
-  }
 
-  if(isDefined(self.vmaxaispeedoverridge)) {
+  if(isDefined(self.vmaxaispeedoverridge))
     self setspeed(self.vmaxaispeedoverridge, 5, 5);
-  } else {
+  else {
     self setspeed(5, 5, 5);
     self setvehmaxspeed(0);
   }
@@ -437,9 +417,8 @@ metalstorm_debug() {
       circle(self.goalpos, self.goalradius, (1, 0, 0), 0, 10);
     }
 
-    if(isDefined(self.enemy)) {
+    if(isDefined(self.enemy))
       line(self.origin + vectorscale((0, 0, 1), 30.0), self.enemy.origin + vectorscale((0, 0, 1), 30.0), (1, 0, 0), 1, 1);
-    }
 
     wait 0.05;
   }
@@ -449,9 +428,8 @@ metalstorm_debug() {
 metalstorm_check_move(position) {
   results = physicstraceex(self.origin, position, (-15, -15, -5), (15, 15, 5), self);
 
-  if(results["fraction"] == 1) {
+  if(results["fraction"] == 1)
     return true;
-  }
 
   return false;
 }
@@ -503,9 +481,8 @@ waittill_enemy_too_close_or_timeout(time) {
       if(!isDefined(self.goal_node)) {
         return;
       }
-      if(distance2dsquared(self.enemy.origin, self.goal_node.origin) < 22500) {
+      if(distance2dsquared(self.enemy.origin, self.goal_node.origin) < 22500)
         return;
-      }
     }
   }
 }
@@ -514,9 +491,8 @@ metalstorm_movementupdate() {
   self endon("death");
   self endon("change_state");
 
-  if(distance2dsquared(self.origin, self.goalpos) > 400) {
+  if(distance2dsquared(self.origin, self.goalpos) > 400)
     self setvehgoalpos(self.goalpos, 1, 2, level.asd_use_double_wide);
-  }
 
   wait 0.5;
   goalfailures = 0;
@@ -533,15 +509,13 @@ metalstorm_movementupdate() {
         self.move_now = undefined;
         wait 0.1;
       } else if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
-        if(abs(angleclamp180(self.angles[0])) > 6 || abs(angleclamp180(self.angles[2])) > 6) {
+        if(abs(angleclamp180(self.angles[0])) > 6 || abs(angleclamp180(self.angles[2])) > 6)
           self setbrake(1);
-        }
 
         waittill_enemy_too_close_or_timeout(randomfloatrange(3, 4));
       } else {
-        if(abs(angleclamp180(self.angles[0])) > 6 || abs(angleclamp180(self.angles[2])) > 6) {
+        if(abs(angleclamp180(self.angles[0])) > 6 || abs(angleclamp180(self.angles[2])) > 6)
           self setbrake(1);
-        }
 
         wait 0.5;
       }
@@ -587,25 +561,21 @@ metalstorm_find_new_position() {
       dist_away_from_sweet_line = abs(dist_in_front_of_enemy - 350);
       score = 1 + randomfloat(0.15);
 
-      if(dist_away_from_sweet_line > 100) {
+      if(dist_away_from_sweet_line > 100)
         score = score - clamp(dist_away_from_sweet_line / 800, 0, 0.5);
-      }
 
-      if(distance2dsquared(node.origin, self.enemy.origin) > 302500) {
+      if(distance2dsquared(node.origin, self.enemy.origin) > 302500)
         score = score - 0.2;
-      }
 
-      if(distance2dsquared(self.origin, node.origin) < 14400) {
+      if(distance2dsquared(self.origin, node.origin) < 14400)
         score = score - 0.2;
-      }
 
       if(isDefined(node.metal_storm_previous_goal)) {
         score = score - 0.2;
         node.metal_storm_previous_goal--;
 
-        if(node.metal_storm_previous_goal == 0) {
+        if(node.metal_storm_previous_goal == 0)
           node.metal_storm_previous_goal = undefined;
-        }
       }
 
       if(score > best_score) {
@@ -620,17 +590,15 @@ metalstorm_find_new_position() {
       }
       score = randomfloat(1);
 
-      if(distance2dsquared(self.origin, node.origin) < 100) {
+      if(distance2dsquared(self.origin, node.origin) < 100)
         score = score - 0.5;
-      }
 
       if(isDefined(node.metal_storm_previous_goal)) {
         score = score - 0.2;
         node.metal_storm_previous_goal--;
 
-        if(node.metal_storm_previous_goal == 0) {
+        if(node.metal_storm_previous_goal == 0)
           node.metal_storm_previous_goal = undefined;
-        }
       }
 
       if(score > best_score) {
@@ -688,26 +656,24 @@ metalstorm_update_damage_fx() {
   next_damage_state = 0;
   max_health = self.healthdefault;
 
-  if(isDefined(self.health_max)) {
+  if(isDefined(self.health_max))
     max_health = self.health_max;
-  }
 
   health_pct = self.health / max_health;
 
-  if(health_pct <= 0.75 && health_pct > 0.5) {
+  if(health_pct <= 0.75 && health_pct > 0.5)
     next_damage_state = 1;
-  } else if(health_pct <= 0.5 && health_pct > 0.25) {
+  else if(health_pct <= 0.5 && health_pct > 0.25)
     next_damage_state = 2;
-  } else if(health_pct <= 0.25 && health_pct > 0.1) {
+  else if(health_pct <= 0.25 && health_pct > 0.1)
     next_damage_state = 3;
-  } else if(health_pct <= 0.1) {
+  else if(health_pct <= 0.1)
     next_damage_state = 4;
-  }
 
   if(next_damage_state != self.current_damage_state) {
     if(isDefined(level.fx_damage_effects[self.vehicletype][next_damage_state - 1])) {
       fx_ent = self get_damage_fx_ent();
-      playFXOnTag(level.fx_damage_effects[self.vehicletype][next_damage_state - 1], fx_ent, "tag_origin");
+      playfxontag(level.fx_damage_effects[self.vehicletype][next_damage_state - 1], fx_ent, "tag_origin");
     } else
       get_damage_fx_ent();
 
@@ -729,11 +695,10 @@ update_damage_states() {
       return;
     }
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || mod == "MOD_MELEE") {
-      if(part == "tag_control_panel" || part == "tag_body_panel") {
-        playFX(level._effect["metalstorm_hit_back"], point, dir);
-      } else {
-        playFX(level._effect["metalstorm_hit"], point, dir);
-      }
+      if(part == "tag_control_panel" || part == "tag_body_panel")
+        playfx(level._effect["metalstorm_hit_back"], point, dir);
+      else
+        playfx(level._effect["metalstorm_hit"], point, dir);
     }
 
     self.turret_state = 0;
@@ -744,12 +709,11 @@ update_damage_states() {
 }
 
 get_damage_fx_ent() {
-  if(isDefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
-  }
 
   self.damage_fx_ent = spawn("script_model", (0, 0, 0));
-  self.damage_fx_ent setModel("tag_origin");
+  self.damage_fx_ent setmodel("tag_origin");
   self.damage_fx_ent.origin = self.origin;
   self.damage_fx_ent.angles = self.angles;
   self.damage_fx_ent linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
@@ -757,13 +721,11 @@ get_damage_fx_ent() {
 }
 
 cleanup_fx_ents() {
-  if(isDefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
-  }
 
-  if(isDefined(self.stun_fx)) {
+  if(isDefined(self.stun_fx))
     self.stun_fx delete();
-  }
 }
 
 metalstorm_freeze_blink_lights() {
@@ -788,9 +750,9 @@ metalstorm_freeze_death(attacker, mod) {
   level notify("asd_freezed");
   level.player inc_general_stat("mechanicalkills");
   goaldist = randomfloatrange(350, 450);
-  deathgoal = self.origin + anglesToForward(self.angles) * goaldist;
-  playFXOnTag(level._effect["freeze_short_circuit"], self, "tag_origin");
-  self setModel("veh_t6_drone_tank_freeze");
+  deathgoal = self.origin + anglestoforward(self.angles) * goaldist;
+  playfxontag(level._effect["freeze_short_circuit"], self, "tag_origin");
+  self setmodel("veh_t6_drone_tank_freeze");
   self setvehgoalpos(deathgoal, 0);
   self thread metalstorm_freeze_blink_lights();
   self setclientflag(12);
@@ -799,9 +761,9 @@ metalstorm_freeze_death(attacker, mod) {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setModel("tag_origin");
+    self.stun_fx setmodel("tag_origin");
     self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
-    playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
+    playfxontag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 
   wait 1;
@@ -817,9 +779,8 @@ metalstorm_freeze_death(attacker, mod) {
   self clearturrettarget();
   wait 2;
 
-  if(isDefined(self.stun_fx)) {
+  if(isDefined(self.stun_fx))
     self.stun_fx delete();
-  }
 }
 
 metalstorm_death() {
@@ -827,9 +788,8 @@ metalstorm_death() {
   self notify("nodeath_thread");
   self waittill("death", attacker, damagefromunderneath, weapon, point, dir, mod);
 
-  if(isDefined(self.eye_fx_ent)) {
+  if(isDefined(self.eye_fx_ent))
     self.eye_fx_ent delete();
-  }
 
   if(isDefined(self.delete_on_death)) {
     self cleanup_fx_ents();
@@ -849,12 +809,12 @@ metalstorm_death() {
   self veh_toggle_tread_fx(0);
   self veh_toggle_exhaust_fx(0);
 
-  if(isDefined(mod) && mod == "MOD_GAS" && isDefined(level.metalstorm_freeze_death)) {
+  if(isDefined(mod) && mod == "MOD_GAS" && isDefined(level.metalstorm_freeze_death))
     self metalstorm_freeze_death(attacker, mod);
-  } else {
+  else {
     fx_ent = self get_damage_fx_ent();
-    playFXOnTag(level._effect["metalstorm_explo"], fx_ent, "tag_origin");
-    self playSound("veh_metalstorm_dying");
+    playfxontag(level._effect["metalstorm_explo"], fx_ent, "tag_origin");
+    self playsound("veh_metalstorm_dying");
     self metalstorm_crash_movement(attacker);
   }
 
@@ -869,14 +829,13 @@ metalstorm_death() {
 
   wait 40;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 death_fx() {
-  playFXOnTag(self.deathfx, self, self.deathfxtag);
-  self playSound("veh_metalstorm_sparks");
+  playfxontag(self.deathfx, self, self.deathfxtag);
+  self playsound("veh_metalstorm_sparks");
 }
 
 metalstorm_crash_movement(attacker) {
@@ -889,28 +848,26 @@ metalstorm_crash_movement(attacker) {
   if(!isDefined(self.off)) {
     self thread death_turret_rotate();
     self.turretrotscale = 1.0;
-    self playSound("wpn_turret_alert");
+    self playsound("wpn_turret_alert");
     self thread metalstorm_fire_for_time(randomfloatrange(1.5, 4.0));
     self setspeed(7);
     deathmove = randomint(8);
 
     if(deathmove == 0) {
       goaldist = randomfloatrange(350, 450);
-      deathgoal = self.origin + anglesToForward(self.angles) * goaldist;
+      deathgoal = self.origin + anglestoforward(self.angles) * goaldist;
     } else if(deathmove == 1) {
       goaldist = randomfloatrange(350, 450);
-      deathgoal = self.origin + anglesToForward(self.angles) * (goaldist * -1);
+      deathgoal = self.origin + anglestoforward(self.angles) * (goaldist * -1);
     } else if(deathmove <= 4)
       self thread spin_crash();
-    else if(isDefined(attacker)) {
+    else if(isDefined(attacker))
       deathgoal = attacker.origin;
-    } else {
+    else
       self thread spin_crash();
-    }
 
-    if(isDefined(deathgoal)) {
+    if(isDefined(deathgoal))
       self setvehgoalpos(deathgoal, 0);
-    }
 
     wait 0.5;
     self waittill_any_timeout(2.5, "near_goal", "veh_collision");
@@ -925,15 +882,14 @@ metalstorm_crash_movement(attacker) {
   self setbrake(1);
   self thread maps\_vehicle_death::death_radius_damage();
 
-  if(self.team == "allies" || issubstr(self.vehicletype, "karma")) {
+  if(self.team == "allies" || issubstr(self.vehicletype, "karma"))
     self thread maps\_vehicle_death::set_death_model(self.deathmodel, self.modelswapdelay);
-  } else {
+  else
     self thread maps\_vehicle_death::set_death_model("veh_t6_drone_tank_alt_dead", self.modelswapdelay);
-  }
 
   self death_fx();
   self launchvehicle((randomfloatrange(-20, 20), randomfloatrange(-20, 20), 32), (randomfloatrange(-5, 5), randomfloatrange(-5, 5), 0), 1, 0);
-  self playSound("exp_metalstorm_vehicle");
+  self playsound("exp_metalstorm_vehicle");
   self notify("crash_done");
 }
 
@@ -941,21 +897,19 @@ spin_crash() {
   self endon("crash_done");
   turn_rate = 5 + randomfloatrange(0, 20);
 
-  if(randomint(100) > 50) {
+  if(randomint(100) > 50)
     turn_rate = turn_rate * -1;
-  }
 
   count = 0;
 
   while(isDefined(self)) {
-    deathgoal = self.origin + anglesToForward((0, self.angles[1] + turn_rate, 0)) * 300;
+    deathgoal = self.origin + anglestoforward((0, self.angles[1] + turn_rate, 0)) * 300;
     self setvehgoalpos(deathgoal, 0);
     wait 0.05;
     count++;
 
-    if(count % 10 == 0) {
+    if(count % 10 == 0)
       turn_rate = turn_rate + randomfloatrange(-10, 10);
-    }
   }
 }
 
@@ -966,18 +920,16 @@ death_turret_rotate() {
 
   while(true) {
     pitch = randomfloatrange(-60, 20);
-    target_vec = self.origin + anglesToForward((pitch, randomfloat(360), 0)) * 1000;
+    target_vec = self.origin + anglestoforward((pitch, randomfloat(360), 0)) * 1000;
     driver = self getseatoccupant(0);
 
-    if(!isDefined(driver)) {
+    if(!isDefined(driver))
       self settargetorigin(target_vec);
-    }
 
     wait(randomfloatrange(0.3, 0.6));
 
-    if(pitch < 0 && randomint(100) > 50) {
+    if(pitch < 0 && randomint(100) > 50)
       self firegunnerweapon(0);
-    }
   }
 }
 
@@ -992,16 +944,16 @@ metalstorm_emped() {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setModel("tag_origin");
+    self.stun_fx setmodel("tag_origin");
     self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
-    playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
+    playfxontag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 
   wait(randomfloatrange(4, 8));
   self.stun_fx delete();
   self.emped = undefined;
   self metalstorm_on();
-  self playSound("veh_qrdrone_boot_asd");
+  self playsound("veh_qrdrone_boot_asd");
 }
 
 metalstormcallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -1009,28 +961,24 @@ metalstormcallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeans
   is_damaged_by_god_rod = isDefined(sweapon) && sweapon == "god_rod_sp";
 
   if(is_damaged_by_grenade || is_damaged_by_god_rod) {
-    if(sweapon == "titus_explosive_dart_sp" && idamage > 50 && self.vteam == "axis") {
+    if(sweapon == "titus_explosive_dart_sp" && idamage > 50 && self.vteam == "axis")
       idamage = int(idamage * 10);
-    } else {
+    else
       idamage = int(idamage * 3);
-    }
   }
 
-  if(smeansofdeath == "MOD_GAS") {
+  if(smeansofdeath == "MOD_GAS")
     idamage = self.health + 100;
-  }
 
   driver = self getseatoccupant(0);
 
   if(sweapon == "emp_grenade_sp" && smeansofdeath != "MOD_IMPACT") {
-    if(!isDefined(driver)) {
+    if(!isDefined(driver))
       self thread metalstorm_emped();
-    }
   }
 
-  if(isDefined(driver)) {
+  if(isDefined(driver))
     driver finishplayerdamage(einflictor, eattacker, 1, idflags, smeansofdeath, sweapon, vpoint, vdir, "none", 0, psoffsettime);
-  }
 
   return idamage;
 }
@@ -1039,16 +987,14 @@ metalstorm_set_team(team) {
   self.vteam = team;
 
   if(isDefined(self.vehmodelenemy)) {
-    if(team == "allies") {
-      self setModel(self.vehmodel);
-    } else {
-      self setModel(self.vehmodelenemy);
-    }
+    if(team == "allies")
+      self setmodel(self.vehmodel);
+    else
+      self setmodel(self.vehmodelenemy);
   }
 
-  if(!isDefined(self.off)) {
+  if(!isDefined(self.off))
     metalstorm_blink_lights();
-  }
 }
 
 metalstorm_blink_lights() {
@@ -1069,7 +1015,7 @@ metalstorm_player_bullet_shake(player) {
   while(true) {
     self waittill("turret_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglesToForward(angles);
+    dir = anglestoforward(angles);
     self launchvehicle(dir * -5, self.origin + vectorscale((0, 0, 1), 30.0), 0);
     earthquake(0.2, 0.2, player.origin, 200);
   }
@@ -1085,7 +1031,7 @@ metalstorm_player_rocket_recoil(player) {
   while(true) {
     player waittill("missile_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglesToForward(angles);
+    dir = anglestoforward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
     earthquake(0.4, 0.3, player.origin, 200);
     self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
@@ -1100,7 +1046,7 @@ metalstorm_rocket_recoil() {
   while(true) {
     self waittill("missile_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglesToForward(angles);
+    dir = anglestoforward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
     self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
   }
@@ -1114,7 +1060,7 @@ metalstorm_player_hit_dudes_sound() {
     self waittill("touch", enemy);
 
     if(isDefined(enemy) && isai(enemy)) {
-      self playSound("veh_rts_hit_npc");
+      self playsound("veh_rts_hit_npc");
       wait 0.3;
     }
   }

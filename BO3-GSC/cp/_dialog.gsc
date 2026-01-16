@@ -16,13 +16,13 @@
 #namespace dialog;
 
 function autoexec __init__sytem__() {
-  system::register("dialog", &__init__, undefined, undefined);
+  system::register("dialog", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  level.vo = spawnStruct();
+  level.vo = spawnstruct();
   level.vo.nag_groups = [];
-  callback::on_spawned(&dialog_onplayerspawned);
+  callback::on_spawned( & dialog_onplayerspawned);
 }
 
 function dialog_onplayerspawned() {
@@ -30,16 +30,16 @@ function dialog_onplayerspawned() {
 }
 
 function add(str_dialog_name, str_vox_file) {
-  assert(isDefined(str_dialog_name), "");
-  assert(isDefined(str_vox_file), "");
-  if(!isDefined(level.scr_sound)) {
+  assert(isdefined(str_dialog_name), "");
+  assert(isdefined(str_vox_file), "");
+  if(!isdefined(level.scr_sound)) {
     level.scr_sound = [];
   }
-  if(!isDefined(level.scr_sound["generic"])) {
+  if(!isdefined(level.scr_sound["generic"])) {
     level.scr_sound["generic"] = [];
   }
   level.scr_sound["generic"][str_dialog_name] = str_vox_file;
-  animation::add_global_notetrack_handler("vox#" + str_dialog_name, &notetrack_say, 0, str_dialog_name);
+  animation::add_global_notetrack_handler("vox#" + str_dialog_name, & notetrack_say, 0, str_dialog_name);
 }
 
 function notetrack_say(str_vo_line) {
@@ -60,10 +60,10 @@ function notetrack_say(str_vo_line) {
 
 function is_player_dialog(str_script_id) {
   str_alias = undefined;
-  if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"])) {
+  if(isdefined(level.scr_sound) && isdefined(level.scr_sound["generic"])) {
     str_alias = level.scr_sound["generic"][str_script_id];
   }
-  if(!isDefined(str_alias)) {
+  if(!isdefined(str_alias)) {
     return 0;
   }
   return strendswith(str_alias, "plyr");
@@ -72,7 +72,7 @@ function is_player_dialog(str_script_id) {
 function say(str_vo_line, n_delay, b_fake_ent = 0, e_to_player, var_43937b21) {
   ent = self;
   if(self == level) {
-    if(isDefined(var_43937b21) && var_43937b21) {
+    if(isdefined(var_43937b21) && var_43937b21) {
       ent = spawn("script_model", (0, 0, 0));
       level.e_speaker = ent;
     } else {
@@ -87,7 +87,7 @@ function say(str_vo_line, n_delay, b_fake_ent = 0, e_to_player, var_43937b21) {
   ent waittillmatch("hash_90f83311");
   if(self == level) {
     ent delete();
-    if(isDefined(level.e_speaker)) {
+    if(isdefined(level.e_speaker)) {
       level.e_speaker delete();
     }
   }
@@ -99,15 +99,15 @@ function private _say(str_vo_line, n_delay, b_fake_ent = 0, e_to_player) {
   self thread _on_kill_pending_dialog(str_vo_line);
   level endon("kill_pending_dialog");
   self endon("kill_pending_dialog");
-  if(isDefined(n_delay) && n_delay > 0) {
+  if(isdefined(n_delay) && n_delay > 0) {
     wait(n_delay);
   }
   if(self.classname === "script_origin") {
     b_fake_ent = 1;
   }
   if(!b_fake_ent) {
-    if(!isDefined(self.health) || self.health <= 0) {
-      if(!isplayer(self) || (!(isDefined(self.laststand) && self.laststand))) {
+    if(!isdefined(self.health) || self.health <= 0) {
+      if(!isplayer(self) || (!(isdefined(self.laststand) && self.laststand))) {
         assertmsg("");
         self.is_about_to_talk = undefined;
         self notify("hash_90f83311", str_vo_line);
@@ -116,12 +116,12 @@ function private _say(str_vo_line, n_delay, b_fake_ent = 0, e_to_player) {
     }
   }
   self.is_talking = 1;
-  if(isDefined(self.archetype) && (self.archetype == "human" || self.archetype == "human_riotshield" || self.archetype == "human_rpg" || self.archetype == "civilian")) {
+  if(isdefined(self.archetype) && (self.archetype == "human" || self.archetype == "human_riotshield" || self.archetype == "human_rpg" || self.archetype == "civilian")) {
     self clientfield::set("facial_dial", 1);
   }
   self face::sayspecificdialogue(0, str_vo_line, 1, undefined, undefined, undefined, e_to_player);
   self waittillmatch("hash_90f83311");
-  if(isDefined(self.archetype) && (self.archetype == "human" || self.archetype == "human_riotshield" || self.archetype == "human_rpg" || self.archetype == "civilian")) {
+  if(isdefined(self.archetype) && (self.archetype == "human" || self.archetype == "human_riotshield" || self.archetype == "human_rpg" || self.archetype == "civilian")) {
     self clientfield::set("facial_dial", 0);
   }
   self.is_talking = undefined;
@@ -153,44 +153,44 @@ function remote(str_vo_line, n_delay, str_type = "dni", e_to_player, var_43937b2
     str_who = undefined;
     switch (a_script_id[a_script_id.size - 1]) {
       case "diaz": {
-        str_who = &"CPUI_DIAZ_SEBASTIAN";
+        str_who = & "CPUI_DIAZ_SEBASTIAN";
         break;
       }
       case "ecmd": {
-        str_who = &"CPUI_EGYPTIAN_COMMAND";
+        str_who = & "CPUI_EGYPTIAN_COMMAND";
         break;
       }
       case "xiul": {
-        str_who = &"CPUI_GOH_XIULAN";
+        str_who = & "CPUI_GOH_XIULAN";
         break;
       }
       case "hend": {
-        str_who = &"CPUI_HENDRICKS_JACOB";
+        str_who = & "CPUI_HENDRICKS_JACOB";
         break;
       }
       case "khal": {
-        str_who = &"CPUI_KHALIL_ZEYAD";
+        str_who = & "CPUI_KHALIL_ZEYAD";
         break;
       }
       case "mare": {
-        str_who = &"CPUI_MARETTI_PETER";
+        str_who = & "CPUI_MARETTI_PETER";
         break;
       }
       case "kane": {
-        str_who = &"CPUI_KANE_RACHEL";
+        str_who = & "CPUI_KANE_RACHEL";
         break;
       }
       case "hall": {
-        str_who = &"CPUI_HALL_SARAH";
+        str_who = & "CPUI_HALL_SARAH";
         break;
       }
       case "tayr": {
-        str_who = &"CPUI_TAYLOR_JOHN";
+        str_who = & "CPUI_TAYLOR_JOHN";
         break;
       }
       case "vtpl":
       case "wapl": {
-        str_who = &"CPUI_VTOL_PILOT";
+        str_who = & "CPUI_VTOL_PILOT";
         break;
       }
       default: {
@@ -198,9 +198,9 @@ function remote(str_vo_line, n_delay, str_type = "dni", e_to_player, var_43937b2
         break;
       }
     }
-    if(isDefined(str_who) && !sessionmodeiscampaignzombiesgame()) {
+    if(isdefined(str_who) && !sessionmodeiscampaignzombiesgame()) {
       foreach(player in level.players) {
-        if(!isDefined(e_to_player) || e_to_player == player) {
+        if(!isdefined(e_to_player) || e_to_player == player) {
           player luinotifyevent(&"offsite_comms_message", 1, str_who);
         }
       }
@@ -210,7 +210,7 @@ function remote(str_vo_line, n_delay, str_type = "dni", e_to_player, var_43937b2
   if(!sessionmodeiscampaignzombiesgame()) {
     if(str_type === "dni") {
       foreach(player in level.players) {
-        if(!isDefined(e_to_player) || e_to_player == player) {
+        if(!isdefined(e_to_player) || e_to_player == player) {
           player luinotifyevent(&"offsite_comms_complete");
         }
       }

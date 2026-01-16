@@ -4,8 +4,8 @@
 *****************************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("up_hint", &"LOKI_HINT_UP", ::no_hint);
-  maps\_utility::add_hint_string("down_hint", &"LOKI_HINT_DOWN", ::no_hint_down);
+  maps\_utility::add_hint_string("up_hint", & "LOKI_HINT_UP", ::no_hint);
+  maps\_utility::add_hint_string("down_hint", & "LOKI_HINT_DOWN", ::no_hint_down);
 }
 
 section_precache() {
@@ -136,13 +136,12 @@ start_fuel_leak_fx_main(var_0, var_1, var_2, var_3) {
   stopFXOnTag(common_scripts\utility::getfx("vfx_fuel_leak_zerog"), self, "tag_origin");
   wait 0.5;
 
-  if(isDefined(var_1) || var_0 == "fuel_explosion_spark_point2") {
+  if(isDefined(var_1) || var_0 == "fuel_explosion_spark_point2")
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 0);
-  } else if(level.bullet_caused_fuel_leaks.size < 2 && var_0 == "fuel_explosion_spark_point0") {
+  else if(level.bullet_caused_fuel_leaks.size < 2 && var_0 == "fuel_explosion_spark_point0")
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 0);
-  } else {
+  else
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 1);
-  }
 
   playFXOnTag(common_scripts\utility::getfx("vfx_fuel_fire_zerog_cglight"), self, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("spc_fire_puff_big_single_runner"), self, "tag_origin");
@@ -177,11 +176,10 @@ start_fuel_explosion_fx(var_0, var_1, var_2, var_3, var_4) {
   var_6 = maps\loki_util::create_rumble_ent(var_4, "combat_one_cleanup", 3);
   var_6 playrumbleonentity("light_1s");
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     playFX(common_scripts\utility::getfx(var_1), var_5.origin);
-  } else {
+  else
     playFX(common_scripts\utility::getfx(var_1), var_5.origin, var_2);
-  }
 }
 
 test_lights() {
@@ -217,17 +215,15 @@ movement_hints() {
 }
 
 no_hint() {
-  if(!isalive(level.player)) {
+  if(!isalive(level.player))
     return 1;
-  }
 
   return 0;
 }
 
 no_hint_down() {
-  if(!isalive(level.player) || common_scripts\utility::flag("stop_movement_hint")) {
+  if(!isalive(level.player) || common_scripts\utility::flag("stop_movement_hint"))
     return 1;
-  }
 
   return 0;
 }
@@ -239,9 +235,9 @@ move_explosion_buildup_rumble() {
   while(!common_scripts\utility::flag("explosion")) {
     var_1 = distance(var_0.origin, level.player.origin);
 
-    if(var_1 > 666) {
+    if(var_1 > 666)
       var_0.origin = var_0.origin + (0, 0, -7);
-    } else if(distance(var_0.origin, level.player.origin) < 200) {} else {
+    else if(distance(var_0.origin, level.player.origin) < 200) {} else {
       maps\loki_util::jkuprint("fast move");
       var_0.origin = var_0.origin + (0, 0, -17);
     }
@@ -267,9 +263,8 @@ instant_explosion() {
 moving_cover_pre_tele(var_0) {
   level.player endon("death");
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0;
-  }
 
   common_scripts\utility::flag_wait("start_fuel_explosion");
   level notify("explosion_started");
@@ -294,20 +289,17 @@ moving_cover_pre_tele(var_0) {
   level maps\_utility::delaythread(1.4, ::start_fuel_explosion_fx, "fuel_explosion_point3", "fuel_explosion_zerog", undefined, 0.45, 200);
   common_scripts\utility::flag_set("turn_off_creaks");
 
-  if(!var_0) {
+  if(!var_0)
     level maps\_utility::delaythread(0.75, ::explosion_anim, var_1, var_2);
-  }
 
-  if(!var_0) {
+  if(!var_0)
     wait 0.6;
-  }
 
   maps\_utility::radio_dialogue_clear_stack();
   level thread maps\_utility::smart_radio_dialogue_interrupt("loki_kgn_shit");
 
-  if(!var_0) {
+  if(!var_0)
     wait 0.9;
-  }
 
   level.player.og_health = level.player.health;
   level.player.demigod = 1;
@@ -333,9 +325,8 @@ moving_cover_pre_tele(var_0) {
   level thread maps\loki_moving_cover::hit_panel(level.player, 0.65, 0.5, 2);
   level.player playrumbleonentity("heavy_3s");
 
-  if(!var_0) {
+  if(!var_0)
     wait 0.6;
-  }
 
   level.player.demigod = 0;
   level thread maps\loki_util::player_boundaries_off();
@@ -357,9 +348,8 @@ moving_cover_pre_tele(var_0) {
 explosion_anim(var_0, var_1) {
   var_2 = getEntArray("explosion_hide", "targetname");
 
-  foreach(var_4 in var_2) {
-    var_4 hide();
-  }
+  foreach(var_4 in var_2)
+  var_4 hide();
 
   var_0 maps\_anim::anim_single_solo(var_1, "explosion_part1");
 }
@@ -483,26 +473,23 @@ track_ai() {
   level.allies[2] setgoalpos(var_7.origin);
   wait(var_5);
 
-  if(!common_scripts\utility::flag("start_fuel_explosion")) {
+  if(!common_scripts\utility::flag("start_fuel_explosion"))
     level maps\_utility::smart_radio_dialogue("loki_kgn_entrancesecuredmovein");
-  }
 }
 
 smart_radio_dialogue_enable_bc(var_0, var_1, var_2, var_3) {
   level endon("explosion");
   level endon("player_can_move_to_door");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     level endon(var_2);
-  }
 
   wait(var_0);
   level maps\_utility::smart_radio_dialogue(var_1);
   wait(randomfloatrange(1, 2));
 
-  if(isDefined(var_3) && var_3) {
+  if(isDefined(var_3) && var_3)
     maps\_utility::battlechatter_on("allies");
-  }
 }
 
 ally0_move_to_end() {
@@ -538,9 +525,8 @@ set_goalvolume_after_node_reached(var_0, var_1) {
   self.goalradius = self.og_goalradius;
   wait 10;
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     self setgoalvolumeauto(getent(var_0, "targetname"));
-  }
 }
 
 spawn_wave1_enemies(var_0) {
@@ -571,18 +557,16 @@ trigger_wave2() {
   var_1 = get_all_wave_guys();
 
   foreach(var_3 in var_1) {
-    if(isDefined(self.og_goalradius)) {
+    if(isDefined(self.og_goalradius))
       self.goalradius = self.og_goalradius;
-    }
 
     level thread maps\loki_util::reassign_goal_volume(var_3, "combat_one_wave2");
   }
 
   var_5 = maps\loki_util::spawn_space_ais_from_targetname("combat_one_wave2_new");
 
-  foreach(var_7 in var_5) {
-    var_7 thread combat_one_enemy();
-  }
+  foreach(var_7 in var_5)
+  var_7 thread combat_one_enemy();
 }
 
 trigger_wave3() {
@@ -593,9 +577,8 @@ trigger_wave3() {
   common_scripts\utility::flag_set("combat_one_wave3_spawned");
   var_1 = get_all_wave_guys();
 
-  foreach(var_3 in var_1) {
-    level thread maps\loki_util::reassign_goal_volume(var_3, "combat_one_wave3");
-  }
+  foreach(var_3 in var_1)
+  level thread maps\loki_util::reassign_goal_volume(var_3, "combat_one_wave3");
 
   level thread maps\loki_util::loki_autosave_now();
   var_5 = door_traversal();
@@ -649,17 +632,14 @@ enemy_attack_player_when_flashing() {
 }
 
 cool_spawn(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = undefined;
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 1;
-  }
 
   var_5 = [];
   var_6 = getent("combat_one_door_col", "targetname");
@@ -671,14 +651,12 @@ cool_spawn(var_0, var_1, var_2, var_3, var_4) {
     var_8 thread ignore_and_move_fast(var_3);
     var_5 = common_scripts\utility::add_to_array(var_5, var_8);
 
-    if(!var_2) {
+    if(!var_2)
       wait 0.5;
-    }
   }
 
-  if(!var_2 && var_4) {
+  if(!var_2 && var_4)
     var_6 common_scripts\utility::delaycall(8, ::rotateto, (0, 0, 0), 1, 0.5, 0.5);
-  }
 
   var_6 common_scripts\utility::delaycall(8, ::solid);
   var_6 common_scripts\utility::delaycall(8.1, ::disconnectpaths);
@@ -734,9 +712,8 @@ check_for_death_during_traversal() {
   self endon("death");
   self endon("door_traversal_finished");
 
-  while(self.health > 1) {
+  while(self.health > 1)
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
 
   self stopanimscripted();
 }
@@ -750,9 +727,8 @@ ignore_and_move_fast(var_0) {
   var_2 = self.moveplaybackrate;
   self.moveplaybackrate = 1.5;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self setgoalvolumeauto(getent(var_0, "targetname"));
-  }
 
   wait 1.5;
   self.health = var_1;
@@ -795,17 +771,15 @@ get_all_allies() {
 unlink_final_exposed_nodes() {
   var_0 = getnodearray("combat_one_final_exposed_node", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 disconnectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 disconnectnode();
 }
 
 link_final_exposed_nodes() {
   var_0 = getnodearray("combat_one_final_exposed_node", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 connectnode();
-  }
+  foreach(var_2 in var_0)
+  var_2 connectnode();
 }
 
 unlink_door_traversal_nodes() {
@@ -824,11 +798,10 @@ force_traversal(var_0, var_1, var_2, var_3) {
   var_4 = getnode(var_1, "targetname");
   var_5 = getent(var_0, "targetname");
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_6 = undefined;
-  } else {
+  else
     var_6 = getnode(var_2, "targetname");
-  }
 
   var_7 = get_all_allies();
 
@@ -845,9 +818,8 @@ force_traversal(var_0, var_1, var_2, var_3) {
       var_9.ignoreme = 0;
       var_9 notify("stop_traversal_hit_detection");
 
-      if(isDefined(var_6)) {
+      if(isDefined(var_6))
         var_9 setgoalnode(var_6);
-      }
 
       return 1;
     }
@@ -872,9 +844,8 @@ force_traversal_check_hit() {
 
 player_in_combat_area() {
   for(;;) {
-    if(common_scripts\utility::flag("in_combat_area")) {
+    if(common_scripts\utility::flag("in_combat_area"))
       iprintln("player safe");
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -889,9 +860,8 @@ solarpanels_damage_think() {
   if(var_0 < 200) {
     wait 0.1;
 
-    if(randomint(3) == 0) {
+    if(randomint(3) == 0)
       self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    }
   }
 
   var_11 = getglass(self.target);
@@ -925,9 +895,8 @@ solarpanel_disconnect_nodes() {
     var_3 = get_all_wave_guys();
 
     foreach(var_5 in var_3) {
-      if(var_5 nearnode(var_2)) {
+      if(var_5 nearnode(var_2))
         maps\loki_util::jkuprint("crap my node sucks now");
-      }
     }
   }
 
@@ -940,23 +909,20 @@ random_explosions(var_0, var_1, var_2) {
   level endon("stop_explosions");
   playFX(common_scripts\utility::getfx("fuel_explosion_zerog"), var_0);
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     earthquake(0.6, 1, level.player.origin, 1600);
-  }
 
   for(;;) {
     wait(randomfloatrange(1, 3));
     thread maps\loki_audio::sfx_gas_line_dist_explo(var_0);
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       playFX(common_scripts\utility::getfx("fuel_explosion_zerog"), var_0);
-    } else {
+    else
       playFX(common_scripts\utility::getfx("explosion_small"), var_0);
-    }
 
-    if(!isDefined(var_1)) {
+    if(!isDefined(var_1))
       earthquake(0.3, 1, level.player.origin, 1600);
-    }
   }
 }
 
@@ -1017,9 +983,8 @@ do_tile_single(var_0, var_1) {
     self waittill("damage", var_3, var_4, var_5, var_2, var_6, var_7, var_8, var_9, var_10, var_11);
 
     if(var_6 == "MOD_GRENADE_SPLASH" || var_6 == "MOD_EXPLOSIVE") {
-      if(var_6 == "MOD_EXPLOSIVE" && var_4.classname == "script_model") {
+      if(var_6 == "MOD_EXPLOSIVE" && var_4.classname == "script_model")
         var_2 = var_4 getcentroid();
-      }
 
       thread dogrenadesplash(var_2);
       continue;
@@ -1049,9 +1014,8 @@ featherents(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(var_1) {
+    if(var_1)
       var_2[var_2.size] = var_4;
-    }
 
     var_1 = !var_1;
   }
@@ -1068,9 +1032,8 @@ get_touching_tiles(var_0) {
   self.touchingtiles = [];
 
   foreach(var_2 in var_0) {
-    if(var_2 istouchinglinktos(self) && var_2 != self) {
+    if(var_2 istouchinglinktos(self) && var_2 != self)
       self.touchingtiles[self.touchingtiles.size] = var_2;
-    }
   }
 }
 
@@ -1078,9 +1041,8 @@ get_edge_tiles(var_0) {
   self.edgetiles = [];
 
   foreach(var_2 in var_0) {
-    if(var_2 istouchinglinktos(self) && var_2 != self) {
+    if(var_2 istouchinglinktos(self) && var_2 != self)
       self.edgetiles[self.edgetiles.size] = var_2;
-    }
   }
 }
 
@@ -1092,9 +1054,8 @@ islinkedto(var_0) {
   var_1 = common_scripts\utility::get_linked_ents();
 
   foreach(var_3 in var_1) {
-    if(var_3 == var_0) {
+    if(var_3 == var_0)
       return 1;
-    }
   }
 
   return 0;
@@ -1112,9 +1073,8 @@ tile_spider(var_0) {
   var_1.livingedgeconnections = 0;
 
   foreach(var_3 in self.touchingtiles) {
-    if(var_3.tilealive && var_3.edgetiles.size) {
+    if(var_3.tilealive && var_3.edgetiles.size)
       var_1.livingedgeconnections++;
-    }
   }
 
   while(!var_1.foundwall && var_1.totestarray.size > 0) {
@@ -1134,35 +1094,30 @@ tile_spider(var_0) {
 }
 
 nonedgemaintains(var_0) {
-  if(self.edgetiles.size > 0) {
+  if(self.edgetiles.size > 0)
     return 1;
-  }
 
-  if(var_0.livingedgeconnections > 1) {
+  if(var_0.livingedgeconnections > 1)
     return 1;
-  }
 
   return 1;
 }
 
 tile_attached_to_edge(var_0) {
-  if(common_scripts\utility::array_contains(var_0.testedarray, self)) {
+  if(common_scripts\utility::array_contains(var_0.testedarray, self))
     return;
-  } else {
+  else
     var_0.testedarray[var_0.testedarray.size] = self;
-  }
 
-  if(self.edgetiles.size > 0) {
+  if(self.edgetiles.size > 0)
     var_0.foundwall = 1;
-  }
 
   foreach(var_2 in self.touchingtiles) {
     if(!var_2.tilealive) {
       continue;
     }
-    if(!common_scripts\utility::array_contains(var_0.testedarray, var_2)) {
+    if(!common_scripts\utility::array_contains(var_0.testedarray, var_2))
       var_0.totestarray[var_0.totestarray.size] = var_2;
-    }
   }
 }
 
@@ -1177,18 +1132,16 @@ tile_death(var_0) {
   self rotatevelocity(var_1, 0.5);
   self movegravity((0, 0, -3), 1);
 
-  foreach(var_3 in self.touchingtiles) {
-    var_3 maps\_utility::delaythread(randomfloatrange(0.05, 0.1), ::tile_spider, var_0);
-  }
+  foreach(var_3 in self.touchingtiles)
+  var_3 maps\_utility::delaythread(randomfloatrange(0.05, 0.1), ::tile_spider, var_0);
 
   thread decrementlevelbreaks();
   thread fallingtileeffect();
 }
 
 fallingtileeffect() {
-  while(self.origin[2] > -64) {
+  while(self.origin[2] > -64)
     wait 0.05;
-  }
 
   var_0 = maps\_utility::set_z(self.origin, -64);
 }

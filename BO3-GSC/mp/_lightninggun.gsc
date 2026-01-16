@@ -11,7 +11,7 @@
 #namespace lightninggun;
 
 function autoexec __init__sytem__() {
-  system::register("lightninggun", &__init__, undefined, undefined);
+  system::register("lightninggun", & __init__, undefined, undefined);
 }
 
 function __init__() {

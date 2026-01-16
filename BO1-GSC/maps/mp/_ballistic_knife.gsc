@@ -10,15 +10,15 @@ init() {
   PrecacheModel("t5_weapon_ballistic_knife_blade");
   PrecacheModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
-onspawn(watcher, player) {
+onSpawn(watcher, player) {
   player endon("death");
   player endon("disconnect");
   level endon("game_ended");
   self waittill("stationary", endpos, normal, angles, attacker, prey, bone);
   isFriendly = false;
   if(isDefined(endpos)) {
-    retrievable_model = spawn("script_model", endpos);
-    retrievable_model setModel("t5_weapon_ballistic_knife_blade");
+    retrievable_model = Spawn("script_model", endpos);
+    retrievable_model SetModel("t5_weapon_ballistic_knife_blade");
     retrievable_model SetTeam(player.team);
     retrievable_model SetOwner(player);
     retrievable_model.owner = player;
@@ -26,11 +26,10 @@ onspawn(watcher, player) {
     retrievable_model.name = watcher.weapon;
     retrievable_model.targetname = "sticky_weapon";
     if(isDefined(prey)) {
-      if(level.teamBased && isPlayer(prey) && player.team == prey.team) {
+      if(level.teamBased && isPlayer(prey) && player.team == prey.team)
         isFriendly = true;
-      } else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam) {
+      else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam)
         isFriendly = true;
-      }
       if(!isFriendly) {
         if(IsAlive(prey)) {
           retrievable_model dropToGround(retrievable_model.origin, 80);
@@ -43,41 +42,37 @@ onspawn(watcher, player) {
       }
     }
     watcher.objectArray[watcher.objectArray.size] = retrievable_model;
-    if(isFriendly) {
+    if(isFriendly)
       retrievable_model waittill("stationary");
-    }
     retrievable_model thread dropKnivesToGround();
-    if(isFriendly) {
+    if(isFriendly)
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    } else {
+    else
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
-    }
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
 }
 wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
-  glowing_retrievable_model = spawn("script_model", self.origin);
+  glowing_retrievable_model = Spawn("script_model", self.origin);
   self.glowing_model = glowing_retrievable_model;
   glowing_retrievable_model.angles = self.angles;
   glowing_retrievable_model LinkTo(self);
   if(isDefined(prey) && !IsAlive(prey)) {
     wait(2);
   }
-  glowing_retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
+  glowing_retrievable_model SetModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
 watch_shutdown() {
   pickUpTrigger = self.pickUpTrigger;
   otherTeamPickUpTrigger = self.otherTeamPickUpTrigger;
   glowing_model = self.glowing_model;
   self waittill("death");
-  if(isDefined(pickUpTrigger)) {
+  if(isDefined(pickUpTrigger))
     pickUpTrigger delete();
-  }
-  if(isDefined(otherTeamPickUpTrigger)) {
+  if(isDefined(otherTeamPickUpTrigger))
     otherTeamPickUpTrigger delete();
-  }
   if(isDefined(glowing_model)) {
     glowing_model delete();
   }
@@ -87,9 +82,8 @@ onSpawnRetrieveTrigger(watcher, player) {
   player endon("disconnect");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isDefined(retrievable_model)) {
+  if(!isDefined(retrievable_model))
     return;
-  }
   vec_scale = 10;
   trigger_pos = [];
   if(isDefined(prey) && (isPlayer(prey) || isAI(prey))) {
@@ -101,29 +95,27 @@ onSpawnRetrieveTrigger(watcher, player) {
     trigger_pos[1] = retrievable_model.origin[1] + (vec_scale * normal[1]);
     trigger_pos[2] = retrievable_model.origin[2] + (vec_scale * normal[2]);
   }
-  pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
+  pickup_trigger = Spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
   pickup_trigger SetCursorHint("HINT_NOICON", watcher.weapon);
   pickup_trigger.owner = player;
   retrievable_model.pickUpTrigger = pickup_trigger;
-  hint_string = &"MP_BALLISTIC_KNIFE_PICKUP";
+  hint_string = & "MP_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
     pickup_trigger SetHintString(hint_string);
   } else {
     pickup_trigger SetHintString(&"MP_GENERIC_PICKUP");
   }
-  if(!level.teamBased) {
+  if(!level.teamBased)
     pickup_trigger SetTeamForTrigger("none");
-  } else {
+  else
     pickup_trigger SetTeamForTrigger(player.team);
-  }
   pickup_trigger EnableLinkTo();
-  if(isDefined(prey)) {
+  if(isDefined(prey))
     pickup_trigger LinkTo(prey);
-  } else {
+  else
     pickup_trigger LinkTo(retrievable_model);
-  }
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.pickUpSoundPlayer, watcher.pickUpSound);
-  other_team_pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
+  other_team_pickup_trigger = Spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
   other_team_pickup_trigger SetCursorHint("HINT_NOICON");
   retrievable_model.otherTeamPickUpTrigger = other_team_pickup_trigger;
   if(isDefined(hint_string)) {
@@ -149,9 +141,9 @@ watch_trigger_visibility(triggers, weap_name) {
   self endon("watchTriggerVisibility");
   self endon("death");
   max_ammo = WeaponMaxAmmo(weap_name) + 1;
-  while(true) {
+  while (true) {
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!IsAlive(players[i])) {
         wait(0.05);
         continue;
@@ -197,7 +189,7 @@ watch_trigger_visibility(triggers, weap_name) {
 }
 debug_print(endpos) {
   self endon("death");
-  while(true) {
+  while (true) {
     Print3d(endpos, "pickup_trigger");
     wait(0.05);
   }
@@ -206,27 +198,21 @@ watch_use_trigger(trigger, model, callback, playerSoundOnUse, npcSoundOnUse) {
   self endon("death");
   self endon("delete");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
-    if(!IsAlive(player)) {
+    if(!IsAlive(player))
       continue;
-    }
-    if(!player IsOnGround()) {
+    if(!player IsOnGround())
       continue;
-    }
-    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam)) {
+    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam))
       continue;
-    }
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
       continue;
-    }
     if(player UseButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse)) {
+      if(isDefined(playerSoundOnUse))
         player playLocalSound(playerSoundOnUse);
-      }
-      if(isDefined(npcSoundOnUse)) {
+      if(isDefined(npcSoundOnUse))
         player playSound(npcSoundOnUse);
-      }
       self thread[[callback]](player);
       break;
     }
@@ -252,12 +238,10 @@ destroy_ent() {
   if(isDefined(self)) {
     pickUpTrigger = self.pickUpTrigger;
     otherTeamPickUpTrigger = self.otherTeamPickUpTrigger;
-    if(isDefined(pickUpTrigger)) {
+    if(isDefined(pickUpTrigger))
       pickUpTrigger delete();
-    }
-    if(isDefined(otherTeamPickUpTrigger)) {
+    if(isDefined(otherTeamPickUpTrigger))
       otherTeamPickUpTrigger delete();
-    }
     if(isDefined(self.glowing_model)) {
       self.glowing_model delete();
     }
@@ -266,7 +250,7 @@ destroy_ent() {
 }
 dropKnivesToGround() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     level waittill("drop_objects_to_ground", origin, radius);
     self dropToGround(origin, radius);
   }

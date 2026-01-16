@@ -68,11 +68,10 @@ set_level_lighting_values() {
 }
 
 setup_fade_angle_lights() {
-  var_0 = getEntArray("fade_angle_light", "targetname");
+  var_0 = getentarray("fade_angle_light", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread update_fade_angle_lights();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread update_fade_angle_lights();
 }
 
 update_fade_angle_lights() {
@@ -80,29 +79,26 @@ update_fade_angle_lights() {
   var_1 = 135.0;
   var_2 = 3000000.0;
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0])) {
+    if(isdefined(var_3[0]))
       var_0 = float(var_3[0]);
-    }
 
-    if(isDefined(var_3[1])) {
+    if(isdefined(var_3[1]))
       var_1 = float(var_3[1]);
-    }
 
-    if(isDefined(var_3[2])) {
+    if(isdefined(var_3[2]))
       var_2 = float(var_3[2]);
-    }
   }
 
   var_4 = var_0 / 180.0;
   var_5 = var_1 / 180.0;
   var_6 = (var_1 - var_0) / 180.0;
-  var_7 = anglesToForward(self.angles);
+  var_7 = anglestoforward(self.angles);
   var_8 = vectornormalize((var_7[0], var_7[1], 0.0));
 
-  for(;;) {
+  for (;;) {
     var_9 = level.player.origin - (self.origin + var_7 * self.radius * 0.75);
     var_9 = vectornormalize((var_9[0], var_9[1], 0.0));
     var_10 = vectordot(var_8, var_9);
@@ -113,11 +109,10 @@ update_fade_angle_lights() {
 }
 
 setup_fade_distance_lights() {
-  var_0 = getEntArray("fade_distance_light", "targetname");
+  var_0 = getentarray("fade_distance_light", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread update_fade_distance_lights();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread update_fade_distance_lights();
 }
 
 update_fade_distance_lights() {
@@ -125,23 +120,20 @@ update_fade_distance_lights() {
   var_1 = 1000.0;
   var_2 = 100000.0;
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0])) {
+    if(isdefined(var_3[0]))
       var_0 = float(var_3[0]);
-    }
 
-    if(isDefined(var_3[1])) {
+    if(isdefined(var_3[1]))
       var_1 = float(var_3[1]);
-    }
 
-    if(isDefined(var_3[2])) {
+    if(isdefined(var_3[2]))
       var_2 = float(var_3[2]);
-    }
   }
 
-  for(;;) {
+  for (;;) {
     var_4 = length(level.player.origin - self.origin);
     var_5 = clamp((var_4 - var_0) / (var_1 - var_0), 0.0, 1.0);
     self setlightintensity(var_2 * var_5);
@@ -150,7 +142,7 @@ update_fade_distance_lights() {
 }
 
 setup_lighting_pass_archway() {
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_wait("lighting_player_entered_alley");
     common_scripts\utility::flag_clear("lighting_player_entered_bog");
     apply_lighting_pass_bog_street_part01();
@@ -161,7 +153,7 @@ setup_lighting_pass_archway() {
 }
 
 setup_lighting_pass_interior() {
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_wait("lighting_player_interior");
     apply_lighting_pass_bog_inside();
     common_scripts\utility::flag_waitopen("lighting_player_interior");
@@ -170,9 +162,8 @@ setup_lighting_pass_interior() {
 }
 
 apply_lighting_pass_bog_outside(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 5.0;
-  }
 
   maps\_utility::vision_set_fog_changes("bog_b", 2);
   level.player maps\_utility::set_light_set_player("bog_b");
@@ -204,11 +195,13 @@ play_flickering_light() {
   var_2["off"] = "emt_light_flicker_off";
   var_2["loop"] = "emt_light_flicker_lp";
   var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]];
+    [var_1, 1.0]
+  ];
   thread maps\_lighting::model_flicker_preset("model_flicker_01", 0, var_0, var_1, undefined, undefined, 0.005, 0.5, 0.005, 0.05, undefined, var_2, 1500);
   var_0 = 1800;
   var_1 = 25000;
   var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]];
+    [var_1, 1.0]
+  ];
   thread maps\_lighting::model_flicker_preset("model_flicker_03", 0, var_0, var_1, undefined, undefined, 0.005, 0.5, 0.005, 0.05, undefined, var_2, 1500);
 }

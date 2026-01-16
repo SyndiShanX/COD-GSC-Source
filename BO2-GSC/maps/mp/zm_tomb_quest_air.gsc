@@ -32,11 +32,10 @@ main() {
 }
 
 air_puzzle_1_init() {
-  level.a_ceiling_rings = getEntArray("ceiling_ring", "script_noteworthy");
+  level.a_ceiling_rings = getentarray("ceiling_ring", "script_noteworthy");
 
-  foreach(e_ring in level.a_ceiling_rings) {
-    e_ring ceiling_ring_init();
-  }
+  foreach(e_ring in level.a_ceiling_rings)
+  e_ring ceiling_ring_init();
 }
 
 air_puzzle_1_cleanup() {
@@ -59,9 +58,8 @@ check_puzzle_solved() {
   num_solved = 0;
 
   foreach(e_ring in level.a_ceiling_rings) {
-    if(e_ring.script_int != e_ring.position) {
+    if(e_ring.script_int != e_ring.position)
       return false;
-    }
   }
 
   return true;
@@ -77,16 +75,15 @@ ceiling_ring_randomize() {
 ceiling_ring_update_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
   self rotateto(new_angles, 0.5, 0.2, 0.2);
-  self playSound("zmb_squest_wind_ring_turn");
+  self playsound("zmb_squest_wind_ring_turn");
   self waittill("rotatedone");
 }
 
 ceiling_ring_rotate() {
   self.position = (self.position + 1) % 4;
 
-  if(self.position == self.script_int) {
+  if(self.position == self.script_int)
     iprintlnbold("Ring is in place.");
-  }
 
   self ceiling_ring_update_position();
   solved = check_puzzle_solved();
@@ -103,7 +100,7 @@ ceiling_ring_init() {
 
 ceiling_ring_run() {
   level endon("air_puzzle_1_complete");
-  self setCanDamage(1);
+  self setcandamage(1);
   self.position = 0;
   ceiling_ring_randomize();
   n_rotations = 0;
@@ -117,9 +114,8 @@ ceiling_ring_run() {
       rumble_nearby_players(self.origin, 1500, 2);
       n_rotations++;
 
-      if(n_rotations % 4 == 0) {
+      if(n_rotations % 4 == 0)
         level notify("vo_puzzle_bad", attacker);
-      }
     } else
       level notify("vo_puzzle_confused", attacker);
   }
@@ -137,18 +133,16 @@ air_puzzle_2_init() {
 air_puzzle_2_run() {
   a_smoke_pos = getstructarray("puzzle_smoke_origin", "targetname");
 
-  foreach(s_smoke_pos in a_smoke_pos) {
-    s_smoke_pos thread air_puzzle_smoke();
-  }
+  foreach(s_smoke_pos in a_smoke_pos)
+  s_smoke_pos thread air_puzzle_smoke();
 
   while(true) {
     level waittill("air_puzzle_smoke_solved");
     all_smoke_solved = 1;
 
     foreach(s_smoke_pos in a_smoke_pos) {
-      if(!s_smoke_pos.solved) {
+      if(!s_smoke_pos.solved)
         all_smoke_solved = 0;
-      }
     }
 
     if(all_smoke_solved) {
@@ -171,10 +165,10 @@ air_puzzle_2_run() {
 air_puzzle_smoke() {
   self.e_fx = spawn("script_model", self.origin);
   self.e_fx.angles = self.angles;
-  self.e_fx setModel("tag_origin");
-  self.e_fx playLoopSound("zmb_squest_wind_incense_loop", 2);
+  self.e_fx setmodel("tag_origin");
+  self.e_fx playloopsound("zmb_squest_wind_incense_loop", 2);
   s_dest = getstruct("puzzle_smoke_dest", "targetname");
-  playFXOnTag(level._effect["air_puzzle_smoke"], self.e_fx, "tag_origin");
+  playfxontag(level._effect["air_puzzle_smoke"], self.e_fx, "tag_origin");
   self thread air_puzzle_run_smoke_direction();
   flag_wait("air_puzzle_2_complete");
   self.e_fx movez(-1000, 1.0, 0.1, 0.1);
@@ -191,7 +185,7 @@ air_puzzle_run_smoke_direction() {
   v_to_dest = vectornormalize(s_dest.origin - self.origin);
   f_min_dot = cos(self.script_int);
   self.solved = 0;
-  self.detector_brush setCanDamage(1);
+  self.detector_brush setcandamage(1);
   direction_failures = 0;
 
   while(true) {
@@ -209,9 +203,8 @@ air_puzzle_run_smoke_direction() {
       if(!self.solved) {
         direction_failures++;
 
-        if(direction_failures > 4) {
+        if(direction_failures > 4)
           level notify("vo_puzzle_confused", attacker);
-        }
       } else if(randomint(100) < 10)
         level notify("vo_puzzle_good", attacker);
 

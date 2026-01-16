@@ -25,9 +25,8 @@ map_material_helper(player, materialname) {
 init_filter_scope(player) {
   init_filter_indices();
 
-  if(getactivelocalclients() == 1) {
+  if(getactivelocalclients() == 1)
     player map_material(0, "generic_filter_scope");
-  }
 }
 
 init_filter_infrared(player) {

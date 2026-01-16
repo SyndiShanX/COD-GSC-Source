@@ -10,13 +10,11 @@
 DEFAULT_HIVE_WAYPOINT_DIST = 1300;
 
 init_hives() {
-  if(!flag_exist("hives_cleared")) {
+  if(!flag_exist("hives_cleared"))
     flag_init("hives_cleared");
-  }
 
-  if(!flag_exist("blocker_hive_destroyed")) {
+  if(!flag_exist("blocker_hive_destroyed"))
     flag_init("blocker_hive_destroyed");
-  }
 
   init_hive_locs();
 }
@@ -29,9 +27,8 @@ regular_hive(custom_get_score_component_list_func) {
 
     level thread maps\mp\alien\_spawnlogic::encounter_cycle_spawn("drill_planted", "door_planted");
 
-    foreach(regular_hive in selected_regular_hives) {
-      regular_hive thread regular_hive_listener(get_hive_score_component_list_func(custom_get_score_component_list_func));
-    }
+    foreach(regular_hive in selected_regular_hives)
+    regular_hive thread regular_hive_listener(get_hive_score_component_list_func(custom_get_score_component_list_func));
 
     result = level waittill_any_return("regular_hive_destroyed", "regular_door_destroyed");
     if(result == "regular_hive_destroyed") {
@@ -48,9 +45,8 @@ regular_hive_listener(get_score_component_list_func) {
   self notify("stop_listening");
   self endon("stop_listening");
 
-  if(isDefined(level.drill) && !isDefined(level.drill_carrier) && !is_true(level.automatic_drill)) {
+  if(isDefined(level.drill) && !isDefined(level.drill_carrier) && !is_true(level.automatic_drill))
     level waittill("drill_pickedup", player);
-  }
 
   icon = "waypoint_alien_destroy";
   waypoint_dist = get_hive_waypoint_dist(self, DEFAULT_HIVE_WAYPOINT_DIST);
@@ -70,30 +66,26 @@ regular_hive_listener(get_score_component_list_func) {
     self thread maps\mp\alien\_drill::drill_plant_BBPrint(planter);
   }
 
-  if(level.cycle_count == 1) {
+  if(level.cycle_count == 1)
     level delaythread(1, maps\mp\alien\_music_and_dialog::playVOForWaveStart);
-  }
 
   if(self is_door()) {
     level notify("door_planted");
     level notify("start_spawn_event", self.target);
-    if(is_true(level.current_cycle_started_by_timeout)) {
+    if(is_true(level.current_cycle_started_by_timeout))
       level.cycle_count--;
-    }
 
     if(getdvarint("scr_debugcyclecount") == 1) {
-      if(is_true(level.current_cycle_started_by_timeout)) {
+      if(is_true(level.current_cycle_started_by_timeout))
         println("CYCLE_COUNT_DEBUG -- > Cycle Count DECREMENTED to: " + level.cycle_count);
-      }
 
       println("CYCLE_COUNT_DEBUG -- > Spawning Door Event " + self.target);
     }
 
   }
 
-  if(!self is_door()) {
+  if(!self is_door())
     maps\mp\_utility::delaythread(2, maps\mp\alien\_challenge::spawn_challenge);
-  }
 
   level.drill_carrier = undefined;
 
@@ -119,9 +111,8 @@ regular_hive_listener(get_score_component_list_func) {
 
   self thread maps\mp\alien\_drill::drill_detonate();
 
-  if(isDefined(self.scene_trig)) {
+  if(isDefined(self.scene_trig))
     self.scene_trig notify("trigger", level.players[0]);
-  }
 
   level.current_hive_name += "_post";
 
@@ -165,17 +156,14 @@ blocker_hive_explode_sequence(attackable_ent, blocker_hive) {
   level.current_hive_name += "_post";
   level.num_hive_destroyed++;
 
-  if(isPlayingSolo() && !IsSplitScreen()) {
+  if(isPlayingSolo() && !IsSplitScreen())
     maps\mp\alien\_laststand::give_lastStand(level.players[0], 1);
-  }
 
-  if(isDefined(blocker_hive.drill_teleport_structs) && !is_true(level.automatic_drill)) {
+  if(isDefined(blocker_hive.drill_teleport_structs) && !is_true(level.automatic_drill))
     level thread maps\mp\alien\_drill::teleport_drill(blocker_hive.drill_teleport_structs[randomint(blocker_hive.drill_teleport_structs.size)].origin);
-  }
 
-  if(isDefined(blocker_hive.scene_trig)) {
+  if(isDefined(blocker_hive.scene_trig))
     blocker_hive.scene_trig notify("trigger", level.players[0]);
-  }
 
   maps\mp\alien\_achievement::update_blocker_hive_achievements(blocker_hive.target);
   level maps\mp\alien\_challenge_function::hide_barrier_hive_intel();
@@ -218,17 +206,17 @@ create_attackable_ent(blocker_hive) {
     attackable_ent.maxhealth = int(CONST_BLOCKER_HIVE_HP_SOLO_SCALE * attackable_ent.maxhealth);
   }
 
-  if(isDefined(level.create_attackable_ent_override_func)) {
-    attackable_ent = [[level.create_attackable_ent_override_func]](attackable_ent);
-  }
+  if(isDefined(level.create_attackable_ent_override_func))
+    attackable_ent = [
+      [level.create_attackable_ent_override_func]
+    ](attackable_ent);
 
   return attackable_ent;
 }
 
 hive_explode(fx_count) {
-  if(!isDefined(fx_count)) {
+  if(!isDefined(fx_count))
     fx_count = 2;
-  }
 
   for(i = 0; i < fx_count; i++) {
     wait randomfloatrange(0.5, 1);
@@ -279,14 +267,12 @@ monitor_attackable_ent_damage(blocker_hive) {
       self.health += damage;
     }
 
-    if(isDefined(weapon) && weapon == "iw6_alienpanzerfaust3_mp") {
+    if(isDefined(weapon) && weapon == "iw6_alienpanzerfaust3_mp")
       self DoDamage(damage, self.origin, attacker, attacker, "MOD_PROJECTILE_SPLASH");
-    }
 
     if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
-      if(!isDefined(attacker.hive_damage)) {
+      if(!isDefined(attacker.hive_damage))
         attacker.hive_damage = 0;
-      }
 
       attacker.hive_damage += damage;
 
@@ -304,13 +290,11 @@ monitor_attackable_ent_damage(blocker_hive) {
       }
     }
 
-    if(isDefined(attacker.owner) && isalive(attacker.owner) && isplayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isalive(attacker.owner) && isplayer(attacker.owner))
       attacker = attacker.owner;
-    }
 
-    if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isalive(attacker) && isplayer(attacker))
       attacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback("standard");
-    }
 
     if(!stageOnePainReached && self.health < stageOnePainThreshold) {
       thread warn_all_players(BLOCKER_HIVE_PAIN_WARN_DELAY, BLOCKER_HIVE_PAIN_EARTHQUAKE_INTENSITY);
@@ -320,17 +304,15 @@ monitor_attackable_ent_damage(blocker_hive) {
     if(!stageTwoPainReached && self.health < stageTwoPainThreshold) {
       thread warn_all_players(BLOCKER_HIVE_PAIN_WARN_DELAY, BLOCKER_HIVE_PAIN_EARTHQUAKE_INTENSITY);
       blocker_hive hive_play_first_pain_animations();
-      if(isDefined(level.hive_heli)) {
+      if(isDefined(level.hive_heli))
         level.hive_heli maps\mp\alien\_music_and_dialog::play_pilot_vo("so_alien_plt_hivehalfdead");
-      }
       stageTwoPainReached = true;
     }
 
     if(!nearDeathReached && self.health < nearDeathPainThreshold) {
       blocker_hive hive_play_second_pain_animations();
-      if(isDefined(level.hive_heli)) {
+      if(isDefined(level.hive_heli))
         level.hive_heli maps\mp\alien\_music_and_dialog::play_pilot_vo("so_alien_plt_hivealmostdead");
-      }
       nearDeathReached = true;
     }
   }
@@ -372,9 +354,8 @@ kill_hive_burning_on_death() {
 
   self waittill("death");
 
-  if(isDefined(self.gasFire)) {
+  if(isDefined(self.gasFire))
     self.gasFire delete();
-  }
 }
 
 cool_down_threat(timer) {
@@ -385,17 +366,15 @@ cool_down_threat(timer) {
   self thread reset_threat_on_death();
   self thread reset_threat_on_blocker_destroyed();
 
-  if(GetDvarInt("alien_debug_director") > 0) {
+  if(GetDvarInt("alien_debug_director") > 0)
     IPrintLnBold(self.name + " threat: " + self.threatbias);
-  }
 
   wait timer;
 
   self.threatbias = int(max(0, self.threatbias - CONST_THREAT_INCREMENT));
 
-  if(GetDvarInt("alien_debug_director") > 0) {
+  if(GetDvarInt("alien_debug_director") > 0)
     IPrintLnBold(self.name + " threat: " + self.threatbias);
-  }
 }
 
 reset_threat_on_death() {
@@ -420,17 +399,15 @@ give_door_score() {
 }
 
 get_door_score_component_list() {
-  if(is_progression_door(self)) {
+  if(is_progression_door(self))
     return ["progression_door"];
-  } else {
+  else
     return ["side_area"];
-  }
 }
 
 is_progression_door(stronghold_struct) {
-  if(!isDefined(level.progression_doors) || !isDefined(stronghold_struct.target)) {
+  if(!isDefined(level.progression_doors) || !isDefined(stronghold_struct.target))
     return false;
-  }
 
   return array_contains(level.progression_doors, stronghold_struct.target);
 }
@@ -442,9 +419,8 @@ give_players_rewards(is_blocker_hive, get_score_component_list_func) {
     player maps\mp\alien\_persistence::eog_player_update_stat("hivesdestroyed", 1);
     player thread wait_to_give_rewards();
 
-    if(is_blocker_hive) {
+    if(is_blocker_hive)
       player maps\mp\alien\_persistence::try_award_bonus_pool_token();
-    }
   }
 }
 
@@ -454,19 +430,17 @@ calculate_and_show_hive_scores(get_score_component_list_func) {
 }
 
 get_blocker_hive_score_component_name_list() {
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     return ["personal_blocker"];
-  } else {
+  else
     return ["team_blocker", "personal_blocker"];
-  }
 }
 
 get_regular_hive_score_component_name_list() {
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     return ["drill", "personal", "challenge"];
-  } else {
+  else
     return ["drill", "team", "personal", "challenge"];
-  }
 }
 
 wait_to_give_rewards() {
@@ -487,9 +461,8 @@ wait_to_give_rewards() {
 disable_other_strongholds() {
   foreach(stronghold_loc in level.stronghold_hive_locs) {
     if(self != stronghold_loc) {
-      if(isDefined(stronghold_loc.icon)) {
+      if(isDefined(stronghold_loc.icon))
         stronghold_loc.icon Destroy();
-      }
 
       stronghold_loc MakeUnusable();
       stronghold_loc SetHintString("");
@@ -503,28 +476,23 @@ set_hive_icon(shader, coll_dist, icon_width, icon_height) {
 
   self endon("stop_listening");
 
-  if(!isDefined(coll_dist)) {
+  if(!isDefined(coll_dist))
     coll_dist = 1000;
-  }
-  if(isDefined(level.drill_icon_draw_dist_override)) {
+  if(isDefined(level.drill_icon_draw_dist_override))
     coll_dist = level.drill_icon_draw_dist_override;
-  }
 
-  if(!isDefined(icon_width)) {
+  if(!isDefined(icon_width))
     icon_width = 14;
-  }
 
-  if(!isDefined(icon_height)) {
+  if(!isDefined(icon_height))
     icon_height = 14;
-  }
 
   someone_is_close = false;
   while(!someone_is_close) {
     someone_is_close = false;
     foreach(player in level.players) {
-      if(isalive(player) && Distance(player.origin, self.origin) <= coll_dist) {
+      if(isalive(player) && Distance(player.origin, self.origin) <= coll_dist)
         someone_is_close = true;
-      }
     }
     wait 0.05;
   }
@@ -550,16 +518,14 @@ set_hive_icon(shader, coll_dist, icon_width, icon_height) {
   while(isDefined(self.icon)) {
     someone_is_close = false;
     foreach(player in level.players) {
-      if(isalive(player) && Distance(player.origin, self.origin) <= coll_dist) {
+      if(isalive(player) && Distance(player.origin, self.origin) <= coll_dist)
         someone_is_close = true;
-      }
     }
 
-    if(someone_is_close) {
+    if(someone_is_close)
       icon_fade_in(self.icon);
-    } else {
+    else
       icon_fade_out(self.icon);
-    }
 
     wait 0.05;
   }
@@ -584,9 +550,8 @@ icon_fade_out(icon) {
 }
 
 destroy_hive_icon() {
-  if(isDefined(self.icon)) {
+  if(isDefined(self.icon))
     self.icon Destroy();
-  }
 }
 
 hive_pain_monitor() {
@@ -615,9 +580,8 @@ hive_pain_monitor() {
 }
 
 get_hive_score_component_list_func(custom_func) {
-  if(isDefined(custom_func)) {
+  if(isDefined(custom_func))
     return custom_func;
-  }
 
   return::get_regular_hive_score_component_name_list;
 }
@@ -636,9 +600,8 @@ hive_play_second_pain_animations() {
 
 hive_play_drill_planted_animations(delay_override) {
   START_PAIN_DELAY = 0.2;
-  if(isDefined(delay_override)) {
+  if(isDefined(delay_override))
     START_PAIN_DELAY = delay_override;
-  }
 
   self thread play_hive_scriptable_animations("start_pain", START_PAIN_DELAY, "loop_pain1", true);
 }
@@ -659,24 +622,20 @@ play_hive_scriptable_animations(start_anim, time_delay, secondary_anim, use_inte
   foreach(ent in self.scriptables) {
     ent thread play_hive_anim(start_anim, time_delay, secondary_anim);
 
-    if(use_interval_delay) {
+    if(use_interval_delay)
       wait RandomFloatRange(MIN_DELAY, MAX_DELAY);
-    }
   }
 }
 
 play_hive_anim(start_anim, time_delay, secondary_anim) {
-  if(isDefined(start_anim)) {
+  if(isDefined(start_anim))
     self SetScriptablePartState(0, start_anim);
-  }
 
-  if(isDefined(time_delay)) {
+  if(isDefined(time_delay))
     wait time_delay;
-  }
 
-  if(isDefined(secondary_anim)) {
+  if(isDefined(secondary_anim))
     self SetScriptablePartState(0, secondary_anim);
-  }
 }
 
 dependent_hives_removed() {
@@ -746,9 +705,8 @@ delete_removables() {
   assert(isDefined(self.removeables));
 
   foreach(ent in self.removeables) {
-    if(isDefined(ent)) {
+    if(isDefined(ent))
       ent delete();
-    }
   }
 }
 
@@ -756,20 +714,17 @@ show_dead_hive_model() {
   if(!isDefined(self.dead_hive_model)) {
     return;
   }
-  foreach(piece in self.dead_hive_model) {
-    piece show();
-  }
+  foreach(piece in self.dead_hive_model)
+  piece show();
 }
 
 is_blocker_hive() {
-  if(!isDefined(level.blocker_hives) || !isDefined(self.target)) {
+  if(!isDefined(level.blocker_hives) || !isDefined(self.target))
     return false;
-  }
 
   foreach(hive_struct in level.blocker_hives) {
-    if(hive_struct == self.target) {
+    if(hive_struct == self.target)
       return true;
-    }
   }
 
   return false;
@@ -798,9 +753,8 @@ init_hive_locs() {
   stronghold_hive_locs = getEntArray("stronghold_bomb_loc", "targetname");
 
   door_locs = getEntArray("stronghold_door_loc", "targetname");
-  if(isDefined(door_locs) && door_locs.size > 0) {
+  if(isDefined(door_locs) && door_locs.size > 0)
     stronghold_hive_locs = array_combine(stronghold_hive_locs, door_locs);
-  }
 
   foreach(location_ent in stronghold_hive_locs) {
     if(isDefined(location_ent.target)) {
@@ -808,17 +762,16 @@ init_hive_locs() {
       assert(isDefined(targeted_ents) && targeted_ents.size > 0);
       location_ent.scriptables = GetScriptableArray(location_ent.target, "targetname");
 
-      foreach(scriptable in location_ent.scriptables) {
-        scriptable.is_hive = true;
-      }
+      foreach(scriptable in location_ent.scriptables)
+      scriptable.is_hive = true;
 
       removeables = [];
       fx_ents = [];
 
       foreach(ent in targeted_ents) {
-        if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "fx_ent") {
+        if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "fx_ent")
           fx_ents[fx_ents.size] = ent;
-        } else if(isDefined(ent.script_noteworthy) && IsSubStr(ent.script_noteworthy, "waypointdist")) {
+        else if(isDefined(ent.script_noteworthy) && IsSubStr(ent.script_noteworthy, "waypointdist")) {
           tok = StrTok(ent.script_noteworthy, " ");
           if(isDefined(tok) && tok.size && tok[0] == "waypointdist") {
             assert(tok.size == 2);
@@ -851,9 +804,8 @@ init_hive_locs() {
       location_ent.dead_hive_model = getEntArray(dead_hive_targetname, "targetname");
 
       if(isDefined(location_ent.dead_hive_model)) {
-        foreach(piece in location_ent.dead_hive_model) {
-          piece hide();
-        }
+        foreach(piece in location_ent.dead_hive_model)
+        piece hide();
       }
 
       if(location_ent is_blocker_hive()) {
@@ -887,13 +839,11 @@ init_blocker_hive_animation_state() {
 }
 
 get_hive_waypoint_dist(hive, default_waypoint_dist) {
-  if(isDefined(hive.waypoint_dist)) {
+  if(isDefined(hive.waypoint_dist))
     return hive.waypoint_dist;
-  }
 
-  if(isDefined(level.waypoint_dist_override)) {
+  if(isDefined(level.waypoint_dist_override))
     return level.waypoint_dist_override;
-  }
 
   return default_waypoint_dist;
 }
@@ -904,17 +854,15 @@ get_blocker_hive_index() {
   index_1 = level.cycle_end_area_list[0];
   index_2 = level.cycle_end_area_list[1];
 
-  if(level.cycle_count == (index_1 - 1) || level.cycle_count == index_1) {
+  if(level.cycle_count == (index_1 - 1) || level.cycle_count == index_1)
     return 1;
-  } else {
+  else
     return 2;
-  }
 }
 
 skip_hive() {
-  if(!isDefined(level.cycle_count)) {
+  if(!isDefined(level.cycle_count))
     level.cycle_count = maps\mp\alien\_spawnlogic::init_cycle_count();
-  }
 
   level.cycle_count++;
   level.num_hive_destroyed++;
@@ -923,9 +871,8 @@ skip_hive() {
 beat_regular_hive() {
   selected_hive = get_selected_hive();
 
-  if(!flag("drill_drilling")) {
+  if(!flag("drill_drilling"))
     beat_pre_drilling_sequence(selected_hive);
-  }
 
   beat_drilling_sequence(selected_hive);
 }
@@ -943,9 +890,8 @@ beat_pre_drilling_sequence(selected_hive) {
   level notify("drill_pickedup");
   waitframe();
 
-  if(!isDefined(level.drill_carrier)) {
+  if(!isDefined(level.drill_carrier))
     set_fake_drill_carrier();
-  }
 
   selected_hive notify("trigger", level.drill_carrier);
   wait 7.5;
@@ -954,9 +900,8 @@ beat_pre_drilling_sequence(selected_hive) {
 set_fake_drill_carrier() {
   level.drill_carrier = level.players[0];
 
-  if(!isDefined(level.drill_carrier.lastweapon)) {
+  if(!isDefined(level.drill_carrier.lastweapon))
     level.drill_carrier.lastweapon = level.drill_carrier getWeaponsListAll()[0];
-  }
 }
 
 beat_drilling_sequence(selected_hive) {
@@ -970,9 +915,8 @@ get_selected_hive() {
 
   if(flag("drill_drilling")) {
     foreach(regular_hive in regular_hives_in_area) {
-      if(regular_hive.target == level.current_hive_name) {
+      if(regular_hive.target == level.current_hive_name)
         return regular_hive;
-      }
     }
   } else {
     random_hive_index = randomIntRange(0, regular_hives_in_area.size);
@@ -995,11 +939,10 @@ debug_spitter_population() {
       }
       level.spitters_array[level.spitters_array.size] = agent;
 
-      if(agent GetThreatBiasGroup() == "spitters") {
+      if(agent GetThreatBiasGroup() == "spitters")
         level.spitters_against_chopper[level.spitters_against_chopper.size] = agent;
-      } else {
+      else
         level.spitters_against_players[level.spitters_against_players.size] = agent;
-      }
     }
     wait 0.5;
   }

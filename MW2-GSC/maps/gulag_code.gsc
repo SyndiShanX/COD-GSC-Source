@@ -57,7 +57,7 @@ spawn_player_heli() {
   level.player PlayerSetGroundReferenceEnt(tag_origin);
 
   gulag_center = GetEnt("gulag_center", "targetname");
-  level.view_org = spawn("script_origin", (0, 0, 0));
+  level.view_org = Spawn("script_origin", (0, 0, 0));
   level.view_org.origin = gulag_center.origin;
 
   level.gulag_center_org = gulag_center.origin;
@@ -81,6 +81,8 @@ spawn_player_heli() {
   wait(3);
   //	level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
   level.player LerpViewAngleClamp(1, 0.25, 0.25, arcRight, arcLeft, arcTop, arcBottom);
+
+
 
   flag_wait("approach_dialogue");
   arcRight = 45;
@@ -175,13 +177,14 @@ recenter_player_view_target( ent )
 */
 
 draw_ent_line(ent) {
-  for(;;) {
+  for (;;) {
     //line( ent.origin, level.player_heli.origin, (1,0,1) );
     wait(0.05);
   }
 }
 
 player_view_blends_to_heli_tag() {
+
   ent = spawn_tag_origin();
   ent LinkTo(level.player_heli, "tag_guy2", (0, 0, -16), (0, 90, 0));
   //	ent thread maps\_debug::drawTagForever( "tag_origin", (1,0.5,0) );
@@ -266,7 +269,7 @@ explosion_knocks_player_heli_out_of_control()
 
 spawn_friendly_helis(heli_spawners) {
   foreach(heli_spawner in heli_spawners) {
-    ai_spawners = getEntArray(heli_spawner.target, "targetname");
+    ai_spawners = GetEntArray(heli_spawner.target, "targetname");
     foreach(ai_spawner in ai_spawners) {
       ai_spawner.count = 1;
     }
@@ -290,9 +293,8 @@ spawn_friendly_helis(heli_spawners) {
     //heli SetAirResistance( 1500 );
     //heli thread show_color();
     //heli thread track_heli_times();
-    if(!issubstr(heli.classname, "armed")) {
+    if(!issubstr(heli.classname, "armed"))
       continue;
-    }
 
     level.heli_armed = heli;
   }
@@ -300,7 +302,7 @@ spawn_friendly_helis(heli_spawners) {
 }
 
 controller_view_line() {
-  for(;;) {
+  for (;;) {
     //	Line( self.origin, level.player.origin, ( 1, 0.7, 0 ) );
     wait(0.05);
   }
@@ -322,7 +324,7 @@ doomed_just_doomed_think() {
   self.attackeraccuracy = 1.0;
   self.health = 50;
   self.threatbias = 200;
-  for(;;) {
+  for (;;) {
     wait(3);
     self.attackeraccuracy += 0.2;
     self.threatbias += 40;
@@ -336,12 +338,11 @@ dying_buddy_makes_me_stronger()
 	self endon( "stop_adding_mbs" );
 	self waittill( "death" );
 	allies = GetAIArray( "allies" );
-	if( allies.size >= 5 ) {
+	if( allies.size >= 5 )
 		return;
-	}
 
 	// make 3 guys MBS	
-	for( i = 0; i < 3; i++ )
+	for ( i = 0; i < 3; i++ )
 	{
 		allies[ i ] thread magic_bullet_shield();
 	}
@@ -355,9 +356,8 @@ friendlies_gulag_exterior_logic(ent) {
   self endon("new_color_being_set"); // got turned into a color guy again
   self.qSetGoalPos = false;
   //self.fixednode = 0;
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield))
     self.health = 280;
-  }
 
   self.baseaccuracy = 2;
   //self enable_heat_behavior();
@@ -380,7 +380,7 @@ friendlies_gulag_exterior_logic(ent) {
   //	self disable_ai_color();
   //	self.goalradius = 150;
   //	
-  //	for( ;; )
+  //	for ( ;; )
   //	{
   //		wait( 1 );
   //		if( IsAlive( ent.leader ) )
@@ -397,19 +397,19 @@ friendlies_gulag_exterior_logic(ent) {
   //	
 }
 
+
 handle_landing() {
   self ent_flag_wait("prep_unload");
   flag_set("a_heli_landed");
   waittillframeend; // wait until the vehicle script can turn the riders into real ai
 
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.leader = undefined;
 
   foreach(rider in self.riders) {
     if(IsAI(rider)) {
-      if(!isDefined(ent.leader) && rider != level.soap) {
+      if(!isdefined(ent.leader) && rider != level.soap)
         ent.leader = rider;
-      }
 
       rider thread friendlies_gulag_exterior_logic(ent);
     }
@@ -424,16 +424,15 @@ friendlies_traverse_gulag_exterior() {
 
   activate_trigger_with_targetname("friendlies_leave_courtyard");
 
-  for(i = 1; i <= 5; i++) {
+  for (i = 1; i <= 5; i++) {
     // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"
     msg = "ext_progress_" + i;
     trigger = GetEnt(msg, "targetname");
-    if(flag_exist(msg)) {
+    if(flag_exist(msg))
       flag_wait(msg);
-    }
 
     volume = trigger get_color_volume_from_trigger();
-    //if( isDefined( volume ) )
+    //if( IsDefined( volume ) )
     volume waittill_volume_dead_or_dying();
 
     if(msg == "ext_progress_5") {
@@ -447,20 +446,18 @@ friendlies_traverse_gulag_exterior() {
 }
 
 friendlies_traverse_showers() {
-  if(flag("leaving_bathroom_vol2")) {
+  if(flag("leaving_bathroom_vol2"))
     return;
-  }
   level endon("leaving_bathroom_vol2");
 
-  for(i = 1; i <= 5; i++) {
+  for (i = 1; i <= 5; i++) {
     // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"
     msg = "bathroom_int" + i;
     trigger = GetEnt(msg, "targetname");
     flag_wait(msg);
     volume = trigger get_color_volume_from_trigger();
-    if(isDefined(volume)) {
+    if(IsDefined(volume))
       volume waittill_volume_dead_or_dying();
-    }
     trigger activate_trigger();
   }
 }
@@ -469,7 +466,7 @@ track_heli_times() {
   level.heli_time_tracker[self.target] = [];
 
   start_time = GetTime();
-  for(;;) {
+  for (;;) {
     last_time = GetTime();
     self waittill("reached_current_node", nextpoint, theFlag);
     array = [];
@@ -487,11 +484,10 @@ debug_heli_times() {
   foreach(name, time_array in level.heli_time_tracker) {
     PrintLn("Heli " + name + ":");
     foreach(index, array in time_array) {
-      if(isDefined(array["flag"])) {
+      if(IsDefined(array["flag"]))
         PrintLn(array["name"] + " " + array["total_time"] + " " + array["flag"]);
-      } else {
+      else
         PrintLn(array["name"] + " " + array["total_time"]);
-      }
     }
     PrintLn(" ");
   }
@@ -532,10 +528,9 @@ bhd_force_fire() {
   duration = 10;
   turrets = self.mgturret;
 
-  for(;;) {
-    if(isDefined(delay)) {
+  for (;;) {
+    if(IsDefined(delay))
       wait(delay);
-    }
     //		
     self mgon();
     /*
@@ -564,7 +559,7 @@ heli_force_fire() {
   self endon("death");
   self ent_flag_init("force_fire");
 
-  for(;;) {
+  for (;;) {
     self ent_flag_wait("force_fire");
     fire_until_flag_clears();
     self.turretTarget Delete();
@@ -574,21 +569,19 @@ heli_force_fire() {
 fire_until_flag_clears() {
   self endon("force_fire");
   turrets = self.turrets;
-  if(!isDefined(turrets)) {
+  if(!isdefined(turrets))
     turrets = self.mgturret;
-  }
   node = self.currentNode;
 
-  if(isDefined(node.script_forcefire_delay)) {
+  if(IsDefined(node.script_forcefire_delay))
     wait(node.script_forcefire_delay);
-  }
 
-  AssertEx(isDefined(node.script_forcefire_duration), "forcefire duration not set on node at " + self.origin);
+  AssertEx(IsDefined(node.script_forcefire_duration), "forcefire duration not set on node at " + self.origin);
   self delayThread(node.script_forcefire_duration, ::ent_flag_clear, "force_fire");
 
   // force the turrets to fire straight
-  target = spawn("script_origin", (0, 0, 0));
-  forward = anglesToForward(self.angles);
+  target = Spawn("script_origin", (0, 0, 0));
+  forward = AnglesToForward(self.angles);
   up = AnglesToUp(self.angles);
   target.origin = self.origin + forward * 400 + up * -400;
   target LinkTo(self);
@@ -598,12 +591,11 @@ fire_until_flag_clears() {
     turret SetTargetEntity(target);
   }
 
-  for(;;) {
+  for (;;) {
     foreach(turret in turrets) {
       turret Show();
-      if(!turret IsFiringTurret()) {
+      if(!turret IsFiringTurret())
         turret ShootTurret();
-      }
     }
 
     wait 0.1;
@@ -614,7 +606,7 @@ show_color() {
   self endon("death");
 
   last_pos = self.origin;
-  for(;;) {
+  for (;;) {
     Line(self.origin, last_pos, self.start_color, 1, 1, 500);
     last_pos = self.origin;
 
@@ -631,7 +623,7 @@ pitch_modifier() {
   pitch = 10;
   roll = 60;
   self SetMaxPitchRoll(pitch, roll);
-  for(;;) {
+  for (;;) {
     if(self ent_flag("lock_pitch")) {
       self SetMaxPitchRoll(5, 60);
     } else
@@ -645,16 +637,18 @@ pitch_modifier() {
   }
 }
 
+
 remap_targets(ent_targetname, new_targetname) {
   // remap them so the guys riding in the heli come along too
-  ents = getEntArray(ent_targetname, "targetname");
+  ents = GetEntArray(ent_targetname, "targetname");
   foreach(ent in ents) {
     ent.targetname = new_targetname;
   }
 }
 
+
 player_heli_stabilizes() {
-  for(;;) {
+  for (;;) {
     self SetHoverParams(50, 1, 0.5);
     flag_wait("stabilize");
     self SetHoverParams(0, 0, 0);
@@ -663,20 +657,20 @@ player_heli_stabilizes() {
 
 }
 
+
 destroy_close_missiles() {
   fx = getfx("missile_explosion");
   self endon("death");
 
-  for(;;) {
-    rockets = getEntArray("rocket", "classname");
+  for (;;) {
+    rockets = GetEntArray("rocket", "classname");
     foreach(rocket in rockets) {
-      if(rocket.model != "projectile_stinger_missile") {
+      if(rocket.model != "projectile_stinger_missile")
         continue;
-      }
 
       if(Distance(self.origin, rocket.origin) < 100) {
         flag_set("aa_hit");
-        playFX(fx, rocket.origin);
+        PlayFX(fx, rocket.origin);
         rocket Delete();
       }
     }
@@ -686,33 +680,30 @@ destroy_close_missiles() {
 
 modify_player_heli_yaw_over_time() {
   level endon("player_heli_uses_modified_yaw");
-  if(flag("player_heli_uses_modified_yaw")) {
+  if(flag("player_heli_uses_modified_yaw"))
     return;
-  }
 
   // the player's heli rotates slowly over time to give a better viwe
   yaw_progress_ent = getstruct("yaw_progress_ent", "targetname");
   yaw_progress_ent_target = getstruct(yaw_progress_ent.target, "targetname");
 
   pitch_target_org = getstruct("pitch_target", "targetname");
-  pitch_target = spawn("script_origin", pitch_target_org.origin);
+  pitch_target = Spawn("script_origin", pitch_target_org.origin);
   self SetLookAtEnt(pitch_target);
 
   fly_in_progress = getstruct("fly_in_progress", "targetname");
   fly_in_progress_target = getstruct(fly_in_progress.target, "targetname");
   fly_in_progress_dist = Distance(fly_in_progress.origin, fly_in_progress_target.origin);
 
-  for(;;) {
+  for (;;) {
     progress_array = get_progression_between_points(self.origin, fly_in_progress.origin, fly_in_progress_target.origin);
     progress = progress_array["progress"];
 
     progress_percent = progress / fly_in_progress_dist;
-    if(progress_percent < 0) {
+    if(progress_percent < 0)
       progress_percent = 0;
-    }
-    if(progress_percent > 1) {
+    if(progress_percent > 1)
       progress_percent = 1;
-    }
     level.progress = progress_percent;
 
     pitch_target.origin = yaw_progress_ent.origin * (1 - progress_percent) + yaw_progress_ent_target.origin * (progress_percent);
@@ -735,18 +726,17 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
   start_dif *= 5;
   self.start_dif = start_dif;
 
-  for(;;) {
+  for (;;) {
     my_progress = self.progress - start_dif;
     my_progress -= 50;
     // dif is the difference in units of progress between player and me
     dif = level.player_heli.progress - my_progress;
 
-    if(dif < min_units) {
+    if(dif < min_units)
       dif = min_units;
-    } else {
-      if(dif > max_units)
-    }
-    dif = max_units;
+    else
+    if(dif > max_units)
+      dif = max_units;
 
     dif += min_units * -1;
 
@@ -763,12 +753,13 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
 }
 
 track_fly_in_progress(fly_in_progress, fly_in_progress_target, fly_in_progress_dist) {
+
   if(self != level.player_heli) {
     thread modify_speed_to_match_player_heli(fly_in_progress_dist);
   }
 
   self.start_dif = 0;
-  for(;;) {
+  for (;;) {
     progress_array = get_progression_between_points(self.origin, fly_in_progress.origin, fly_in_progress_target.origin);
     self.progress = progress_array["progress"];
     //Print3d( self.origin + (0,0,32), self.progress + " " + self.start_dif, (1,0.5,1), 1, 2 );
@@ -783,7 +774,7 @@ init_tv_movies() {
   wait(1);
   SetSavedDvar("cg_cinematicFullScreen", "0");
 
-  while(1) {
+  while (1) {
     flag_wait("player_near_tv");
     CinematicInGameLoopResident("gulag_securitycam");
 
@@ -797,13 +788,13 @@ tv_movies_stop() {
   level notify("stop_tv_loop");
 
   /*
-  videos = getEntArray( "interactive_tv", "targetname" );
+  videos = GetEntArray( "interactive_tv", "targetname" );
 
   foreach ( video in videos )
   {
   	if( IsSubStr( video.model, "tv1_cinematic" ) )
   	{
-  		video setModel( "com_tv1_testpattern" );
+  		video SetModel( "com_tv1_testpattern" );
   	}
   }
   */
@@ -823,20 +814,19 @@ armed_heli_fires_turrets() {
 glassy_pain() {
   glass = getfx("glassy_pain");
   self waittill("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   angles = VectorToAngles(randomvector(10));
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
-  playFX(glass, self.origin + (0, 0, 40), forward, up);
+  PlayFX(glass, self.origin + (0, 0, 40), forward, up);
 }
 
 player_heli_rotates_properly_around_gulag() {
   level endon("stop_moving_gulag_center");
   gulag_center = GetEnt("gulag_center", "targetname");
   org = gulag_center.origin;
-  follow_ent = spawn("script_origin", (0, 0, 0));
+  follow_ent = Spawn("script_origin", (0, 0, 0));
 
   self SetLookAtEnt(follow_ent);
   thread player_heli_processess_rotation(gulag_center, follow_ent);
@@ -856,6 +846,7 @@ player_heli_rotates_properly_around_gulag() {
   //thread player_heli_processess_rotation( gulag_center, follow_ent );
 
   flag_set("clear_dof");
+
 
   level.player.ignoreme = false;
   level.soap.ignoreme = false;
@@ -924,6 +915,7 @@ player_heli_rotates_properly_around_gulag() {
   //wait( 4 );
   flag_wait("stop_rotating_around_gulag");
   level notify("stop_rotating_around_gulag_break");
+
 
   //	self ClearLookAtEnt();
   fly_in_lookat_ent = GetEnt("fly_in_lookat_ent", "targetname");
@@ -997,7 +989,7 @@ ground_ref_freaks_out() {
 
 player_heli_processess_rotation(gulag_center, follow_ent) {
   level endon("stop_rotating_around_gulag_break");
-  for(;;) {
+  for (;;) {
     angles = VectorToAngles(self.origin - gulag_center.origin);
     right = AnglesToRight(angles);
 
@@ -1014,14 +1006,13 @@ toggle_f15_viewing(dvar_val) {
   //hide/show models and f15 for zach
   self endon("death");
   old_dvar = -1;
-  for(;;) {
+  for (;;) {
     dvar = GetDvarInt("f15");
     if(dvar != old_dvar) {
-      if(dvar == dvar_val || dvar == 2) {
+      if(dvar == dvar_val || dvar == 2)
         self Show();
-      } else {
+      else
         self Hide();
-      }
     }
     old_dvar = dvar;
     wait(0.05);
@@ -1029,6 +1020,7 @@ toggle_f15_viewing(dvar_val) {
 }
 
 spawn_intro_plane(scene, looker) {
+
   spawner = GetEnt(scene + "_f15", "targetname");
   plane = spawner spawn_vehicle();
   waittillframeend; // wait for the default vehicle stuff to happen
@@ -1065,7 +1057,7 @@ spawn_intro_plane(scene, looker) {
   missile1 thread delete_on_animend();
   missile2 thread delete_on_animend();
 
-  pilot = spawn("script_model", (0, 0, 0));
+  pilot = Spawn("script_model", (0, 0, 0));
   pilot.origin = plane.origin;
   pilot.angles = plane.angles;
   pilot.animname = "pilot";
@@ -1082,8 +1074,8 @@ spawn_intro_plane(scene, looker) {
   /*
   model thread maps\_f15::playConTrail();
   afterburners = getfx( "afterburner" );
-  playFXOnTag( afterburners, model, "tag_engine_right" );
-  playFXOnTag( afterburners, model, "tag_engine_left" );	
+  PlayFXOnTag( afterburners, model, "tag_engine_right" );
+  PlayFXOnTag( afterburners, model, "tag_engine_left" );	
   */
 
 }
@@ -1183,11 +1175,10 @@ looker_guy() {
 
 soap_looks_at_targets() {
   level endon("gulag_perimeter");
-  if(flag("gulag_perimeter")) {
+  if(flag("gulag_perimeter"))
     return;
-  }
 
-  for(;;) {
+  for (;;) {
     flag_wait("soap_snipes_tower");
     looker_attacks_ground();
     flag_waitopen("soap_snipes_tower");
@@ -1198,7 +1189,7 @@ soap_looks_at_targets() {
 looker_attacks_ground() {
   level endon("soap_snipes_tower");
   wait(4.4);
-  for(;;) {
+  for (;;) {
     if(IsAlive(self.enemy)) {
       self SetLookAtEntity(self.enemy);
       self Shoot();
@@ -1213,13 +1204,13 @@ looker_attacks_ground() {
 
 tarp_pull_org_think() {
   self.operational = true;
-  launcher = spawn("script_model", (0, 0, 0));
-  launcher setModel("vehicle_slamraam_launcher_no_spike");
+  launcher = Spawn("script_model", (0, 0, 0));
+  launcher SetModel("vehicle_slamraam_launcher_no_spike");
   launcher.origin = self.origin;
   launcher.angles = self.angles;
 
-  all_missiles_model = spawn("script_model", (0, 0, 0));
-  all_missiles_model setModel("vehicle_slamraam_missiles");
+  all_missiles_model = Spawn("script_model", (0, 0, 0));
+  all_missiles_model SetModel("vehicle_slamraam_missiles");
   all_missiles_model.origin = self.origin;
   all_missiles_model.angles = self.angles;
   self.all_missiles_model = all_missiles_model;
@@ -1230,6 +1221,7 @@ tarp_pull_org_think() {
   tarp = spawn_anim_model("tarp");
   self anim_first_frame_solo(tarp, "pulldown");
   self.tarp = tarp;
+
 }
 
 slamraam_tracks_player() {
@@ -1238,20 +1230,19 @@ slamraam_tracks_player() {
   delayThread(12, ::Send_notify, "stop_tracking");
 
   first_rotate = true;
-  for(;;) {
+  for (;;) {
     angles = VectorToAngles(level.player.origin - self.origin);
     yaw = angles[1];
     current_yaw = self.angles[1];
 
-    forward1 = anglesToForward((0, yaw, 0));
-    forward2 = anglesToForward((0, current_yaw, 0));
+    forward1 = AnglesToForward((0, yaw, 0));
+    forward2 = AnglesToForward((0, current_yaw, 0));
     dot = VectorDot(forward1, forward2);
 
     //yaw_dif = abs( current_yaw - yaw );
     yaw_dif = 0;
-    if(dot < 1) {
+    if(dot < 1)
       yaw_dif = ACos(dot);
-    }
 
     //println( "yaw " + yaw + " new_yaw " + current_yaw + " dif " + yaw_dif );
 
@@ -1273,6 +1264,7 @@ slamraam_tracks_player() {
 }
 
 slamraam_attacks(fire_delay, between_sets_delay) {
+
   tags = [];
   tags[tags.size] = "tag_missle1";
   tags[tags.size] = "tag_missle2";
@@ -1291,24 +1283,23 @@ slamraam_attacks(fire_delay, between_sets_delay) {
 
   self endon("lose_operation");
   // wait until the turret is on target
-  for(;;) {
-    if(within_fov_2d(launcher.origin, launcher.angles, level.player.origin, 0.96)) {
+  for (;;) {
+    if(within_fov_2d(launcher.origin, launcher.angles, level.player.origin, 0.96))
       break;
-    }
     wait(0.05);
   }
 
-  if(isDefined(fire_delay)) {
+  if(IsDefined(fire_delay)) {
     // fire_delay exists so the turret can track before it fires
     wait(fire_delay);
   }
 
   // spawn single missiles for each missile spot
   foreach(index, tag in tags) {
-    model = spawn("script_model", (0, 0, 0));
+    model = Spawn("script_model", (0, 0, 0));
     model.origin = launcher GetTagOrigin(tag);
     model.angles = launcher GetTagAngles(tag);
-    model setModel("projectile_slamraam_missile");
+    model SetModel("projectile_slamraam_missile");
     model LinkTo(launcher);
     missiles[index] = model;
   }
@@ -1320,17 +1311,16 @@ slamraam_attacks(fire_delay, between_sets_delay) {
   self.all_missiles_model Delete();
 
   // launch missiles from all the spots
-  for(index = 0; index < 4; index++) {
+  for (index = 0; index < 4; index++) {
     tag = tags[index];
     launcher slamraam_fires_missile(tag, missiles[index]);
   }
 
-  if(isDefined(between_sets_delay)) {
+  if(IsDefined(between_sets_delay))
     wait(between_sets_delay);
-  }
 
   // launch missiles from all the spots
-  for(index = 4; index < tags.size; index++) {
+  for (index = 4; index < tags.size; index++) {
     tag = tags[index];
     launcher slamraam_fires_missile(tag, missiles[index]);
   }
@@ -1339,7 +1329,7 @@ slamraam_attacks(fire_delay, between_sets_delay) {
 slamraam_fires_missile(tag, missile) {
   org = self GetTagOrigin(tag);
   angles = self GetTagAngles(tag);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   MagicBullet(level.slamraam_missile, org, org + forward * 5000);
   wait(0.05);
   missile Delete();
@@ -1352,17 +1342,17 @@ tarp_spawner_think() {
 
   // the animname is on the spawner
   self.animname = self.script_parameters;
-  AssertEx(isDefined(self.animname), "No animname?! But why.");
+  AssertEx(IsDefined(self.animname), "No animname?! But why.");
 
   org = self.origin;
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     ent = get_target_ent();
     org = ent.origin;
   }
   // the tarp ents are in a prefab and the geo is locked so just find the nearest
-  tarp_ents = getEntArray("tarp_pull_org", "targetname");
+  tarp_ents = GetEntArray("tarp_pull_org", "targetname");
   node = getClosest(org, tarp_ents, 1000);
-  AssertEx(isDefined(node), "Tarp guy couldn't find a tarp to pull within 1000 units of his .target origin.");
+  AssertEx(IsDefined(node), "Tarp guy couldn't find a tarp to pull within 1000 units of his .target origin.");
   node.guys[node.guys.size] = self;
 
   // when they spawn they get put into node.guys
@@ -1390,39 +1380,35 @@ tarp_gets_pulled(node, tarp_guys) {
 
   node anim_reach(tarp_guys, "pulldown");
 
-  if(!node.operational) {
+  if(!node.operational)
     return false;
-  }
 
   tarp_guys = remove_dead_from_array(tarp_guys);
   tarp_guys[tarp_guys.size] = node.tarp;
 
-  if(isDefined(node.tarp_needs_living_ai_to_get_pulled)) {
+  if(IsDefined(node.tarp_needs_living_ai_to_get_pulled)) {
     living_guys = 0;
     foreach(guy in tarp_guys) {
-      if(IsAlive(guy)) {
+      if(IsAlive(guy))
         living_guys++;
-      }
     }
 
-    if(!living_guys) {
+    if(!living_guys)
       return false;
-    }
   }
 
   level notify("tarp_activate");
   node delayThread(3.15, ::send_notify, "tarp_activate");
 
   time = anim_get_shortest_animation_time(tarp_guys, "pulldown");
-  AssertEx(!isDefined(node.tarp.tarp_fell), "Tarp fell twice!");
+  AssertEx(!isdefined(node.tarp.tarp_fell), "Tarp fell twice!");
   node.tarp.tarp_fell = true;
   AssertEx(node.operational, "The node was not operational.");
   node thread anim_single_run(tarp_guys, "pulldown");
   wait(time);
   tarp_guys = remove_dead_from_array(tarp_guys);
-  if(tarp_guys.size) {
+  if(tarp_guys.size)
     thread tarp_guys_idle_and_recover(node, tarp_guys);
-  }
 
   return true;
 }
@@ -1432,9 +1418,8 @@ anim_get_shortest_animation_time(guys, scene) {
   foreach(guy in guys) {
     animation = guy getanim(scene);
     new_time = GetAnimLength(animation);
-    if(new_time < time) {
+    if(new_time < time)
       time = new_time;
-    }
   }
 
   AssertEx(time < 999999, "Tried to anim_get_shortest_animation_time but there was no guys with scenes");
@@ -1446,9 +1431,8 @@ tarp_guys_idle_and_recover(node, tarp_guys) {
 
   tarp_guys = remove_dead_from_array(tarp_guys);
   foreach(guy in tarp_guys) {
-    if(IsAlive(guy)) {
+    if(IsAlive(guy))
       guy SetGoalPos(guy.origin);
-    }
 
     if(guy.animname == "operator") {
       // operator has an idle
@@ -1456,7 +1440,7 @@ tarp_guys_idle_and_recover(node, tarp_guys) {
     }
   }
 
-  if(isDefined(idler)) {
+  if(IsDefined(idler)) {
     node thread anim_loop_solo(idler, "idle");
   }
 
@@ -1482,7 +1466,7 @@ rotate_until_f15_dies(model) {
   sinner = 0;
   base = 0.35;
 
-  for(i = 0; i < rotate_frames; i++) {
+  for (i = 0; i < rotate_frames; i++) {
     rotate_rate = min_rotate + (i * rotate_range / rotate_frames);
     model SetAnim(level.rotate_anims_vehicle["x_right"], 1, 10, rotate_rate);
 
@@ -1495,7 +1479,7 @@ rotate_until_f15_dies(model) {
   	model SetAnim( level.rotate_anims_vehicle[ "x_right" ], 1, 10, 0.2 );
   	wait( 1.5 );
   	
-  	for( i = 0; i < rotate_frames; i++ )
+  	for ( i = 0; i < rotate_frames; i++ )
   	{
   		sinner += 18;
   		//rotate_rate = min_rotate + ( i * rotate_range / rotate_frames );
@@ -1523,17 +1507,17 @@ gulag_top_drones() {
   flag_wait("approach_dialogue");
 
   // we'll do something better with the gates.
-  gulag_top_gates = getEntArray("gulag_top_gate", "targetname");
+  gulag_top_gates = GetEntArray("gulag_top_gate", "targetname");
   array_call(gulag_top_gates, ::NotSolid);
   array_call(gulag_top_gates, ::Hide);
 
-  gulag_ring_drones = getEntArray("gulag_ring_drone", "targetname");
+  gulag_ring_drones = GetEntArray("gulag_ring_drone", "targetname");
   array_thread(gulag_ring_drones, ::gulag_ring_drone_think);
 
-  gulag_top_drones = getEntArray("gulag_top_drone", "targetname");
+  gulag_top_drones = GetEntArray("gulag_top_drone", "targetname");
   array_thread(gulag_top_drones, ::gulag_top_drone_think);
 
-  //	gulag_drone_triggers = getEntArray( "gulag_drone_trigger", "targetname" );
+  //	gulag_drone_triggers = GetEntArray( "gulag_drone_trigger", "targetname" );
   //	array_thread( gulag_drone_triggers, ::gulag_drone_trigger_think );
 }
 
@@ -1560,9 +1544,8 @@ spawn_a_drone() {
     max_drones = 10;
   }
 
-  if(level.total_drones >= max_drones) {
+  if(level.total_drones >= max_drones)
     return;
-  }
 
   self.count = 1;
   self spawn_ai();
@@ -1597,9 +1580,9 @@ gulag_drone_think() {
 spawn_drones_forever(min, max) {
   self add_spawn_function(::gulag_drone_think);
   level endon("stop_gulag_drones");
-  for(;;) {
+  for (;;) {
     count = RandomIntRange(min, max);
-    for(i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
       self spawn_a_drone();
       wait(RandomFloatRange(0.4, 0.7));
     }
@@ -1617,7 +1600,7 @@ blend_in_gulag_dof(time) {
   end["farEnd"] = 10000;
   end["farBlur"] = 2;
 
-  for(;;) {
+  for (;;) {
     blend_dof(start, end, time);
 
     flag_wait("clear_dof");
@@ -1628,6 +1611,7 @@ blend_in_gulag_dof(time) {
   }
 }
 
+
 blow_up_first_tower_soon() {
   flag_wait("blow_up_first_tower_soon");
   wait(1.5);
@@ -1636,6 +1620,7 @@ blow_up_first_tower_soon() {
   exploder("tower_explosion");
   wait(.15);
   exploder("tower_explosion_fx");
+
 }
 
 remove_rpgs() {
@@ -1650,20 +1635,18 @@ remove_rpgs() {
     guy.a.rockets = 0;
 
     // kill left over tower guys
-    if(guy.origin[2] > tower_height_ent.origin[2]) {
+    if(guy.origin[2] > tower_height_ent.origin[2])
       guy Kill();
-    }
   }
 }
 
 GetNodeChain(name, type) {
   control_room_chain = GetNode(name, type);
   nodes = [];
-  for(;;) {
+  for (;;) {
     nodes[nodes.size] = control_room_chain;
-    if(!isDefined(control_room_chain.target)) {
+    if(!isdefined(control_room_chain.target))
       break;
-    }
     control_room_chain = GetNode(control_room_chain.target, type);
   }
   return nodes;
@@ -1673,15 +1656,13 @@ friendlies_postup_at_chain(ai, name) {
   level notify("new_ai_move_command");
   level endon("new_ai_move_command");
   nodes = GetNodeChain(name, "targetname");
-  for(i = 0; i < ai.size; i++) {
-    if(i >= nodes.size) {
+  for (i = 0; i < ai.size; i++) {
+    if(i >= nodes.size)
       break;
-    }
     guy = ai[i];
     node = nodes[i];
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
 
     guy SetGoalNode(node);
     guy.goalradius = 64;
@@ -1708,17 +1689,16 @@ gulag_cellblocks_friendlies_go_to_control_room() {
   ai = GetAIArray("allies");
 
   // some of the friendlies will stay at their node
-  for(i = 0; i < nodes.size; i++) {
+  for (i = 0; i < nodes.size; i++) {
     node = nodes[i];
     node.filled = false;
-    if(i >= 1 && i <= 4) {
+    if(i >= 1 && i <= 4)
       node.stays_in_control_room = true;
-    }
   }
 
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     node = nodes[i];
-    AssertEx(isDefined(node), "Too many friendlies!");
+    AssertEx(IsDefined(node), "Too many friendlies!");
     node.filled = true;
 
     ai[i] thread ai_goes_to_control_room_node(node);
@@ -1732,7 +1712,7 @@ ai_goes_to_control_room_node(node) {
   self.goalradius = 64;
   self.fixednode = true;
   self.stays_in_control_room = node.stays_in_control_room;
-  if(isDefined(self.stays_in_control_room)) {
+  if(IsDefined(self.stays_in_control_room)) {
     self endon("death");
     self waittill("goal");
     self.ignoreme = true;
@@ -1743,18 +1723,16 @@ ai_goes_to_control_room_node(node) {
 get_cellblock_mbs() {
   ai = get_cellblock_friendlies();
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield)) {
+    if(IsDefined(guy.magic_bullet_shield))
       return guy;
-    }
   }
 }
 
 get_mbs(ai) {
   guys = [];
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield)) {
+    if(IsDefined(guy.magic_bullet_shield))
       guys[guys.size] = guy;
-    }
   }
   return guys;
 }
@@ -1762,19 +1740,17 @@ get_mbs(ai) {
 gulag_cellblocks_friendlies_go_to_goalvolume(goalvolNum) {
   level notify("new_ai_move_command");
 
-  if(!isDefined(goalvolNum)) {
+  if(!isdefined(goalvolNum))
     goalvolNum = level.last_cellblock_vol;
-  }
 
-  AssertEx(isDefined(goalvolNum), "Must have volnum!");
+  AssertEx(IsDefined(goalvolNum), "Must have volnum!");
   level.last_cellblock_vol = goalvolNum;
   nodes = GetNodeArray("cell_goalnode", "targetname");
 
   node = undefined;
   foreach(node in nodes) {
-    if(node.script_goalvolume == goalvolNum) {
+    if(node.script_goalvolume == goalvolNum)
       break;
-    }
   }
   AssertEx(node.script_goalvolume == goalvolNum, "Didnt find cell_goalnode with vol " + goalvolNum);
 
@@ -1793,25 +1769,24 @@ reinforcement_friendlies() {
   self waittill("trigger");
 
   // these guys fill in for any dead
-  /# flag_assert( "control_room" );
+  /# flag_assert( "control_room" ); #/
 
   ai = GetAIArray("allies");
-  spawners = getEntArray(self.target, "targetname");
+  spawners = GetEntArray(self.target, "targetname");
 
   count = 0;
-  for(i = ai.size; i < 7; i++) {
+  for (i = ai.size; i < 7; i++) {
     spawner = spawners[count];
     spawner spawn_ai();
     count++;
 
-    if(count >= spawners.size) {
+    if(count >= spawners.size)
       return;
-    }
   }
 }
 
 setup_celldoor(targetname) {
-  door_ents = getEntArray(targetname, "targetname");
+  door_ents = GetEntArray(targetname, "targetname");
 
   door = undefined;
   org = undefined;
@@ -1828,7 +1803,7 @@ setup_celldoor(targetname) {
     }
   }
 
-  AssertEx(isDefined(door), "Found no script_brushmodel for " + targetname);
+  AssertEx(IsDefined(door), "Found no script_brushmodel for " + targetname);
 
   model_storage = [];
   foreach(index, model in models) {
@@ -1845,27 +1820,26 @@ setup_celldoor(targetname) {
   flag_wait("gulag_cell_doors_enabled");
 
   foreach(array in model_storage) {
-    if(array["model"] != "metal_prison_door") {
+    if(array["model"] != "metal_prison_door")
       continue;
-    }
 
-    model = spawn("script_model", (0, 0, 0));
+    model = Spawn("script_model", (0, 0, 0));
     model.origin = array["origin"];
     model.angles = array["angles"];
-    model setModel(array["model"]);
+    model SetModel(array["model"]);
     model LinkTo(door);
   }
 
   door.org = org;
 
-  lights = getEntArray("door_light", "targetname");
+  lights = GetEntArray("door_light", "targetname");
   closest_lights = get_array_of_closest(door.origin, lights, undefined, 2, 100);
 
   door.lights = [];
 
-  for(i = 0; i < closest_lights.size; i++) {
+  for (i = 0; i < closest_lights.size; i++) {
     light = closest_lights[i];
-    AssertEx(isDefined(light), "Ran out of lights!");
+    AssertEx(IsDefined(light), "Ran out of lights!");
     door.lights[door.lights.size] = light;
     light.targetname = undefined; // so future doors don't grab this one
   }
@@ -1874,31 +1848,28 @@ setup_celldoor(targetname) {
 }
 
 play_dlight(color) {
-  if(!self.lights.size) {
+  if(!self.lights.size)
     return;
-  }
 
   self notify("stop_dyn");
   self endon("stop_dyn");
-  if(isDefined(self.fx)) {
+  if(IsDefined(self.fx))
     self.fx Delete();
-  }
 
   fx = getfx("dlight_" + color);
 
   col = (0, 0.5, 1);
-  if(color == "red") {
+  if(color == "red")
     col = (1, 0, 0);
-  }
 
-  if(isDefined(self.looper)) {
+  if(IsDefined(self.looper))
     self.looper Delete();
-  }
   self.looper = PlayLoopedFX(fx, 50, self.dlight_origin, 2000);
 }
 
 ghost_tries_to_open_door() {
-  ents = getEntArray("cell_door_weapons", "targetname");
+
+  ents = getentarray("cell_door_weapons", "targetname");
   loc = ents[0].origin;
   thread play_sound_in_space("scn_gulag_jail_door_buzzer", loc);
   wait(1.2);
@@ -1911,9 +1882,9 @@ ghost_tries_to_open_door() {
   thread play_sound_in_space("scn_gulag_armory_door_open", loc);
 
   /*
-  ents = getEntArray( "cell_door_weapons", "targetname" );
+  ents = getentarray( "cell_door_weapons", "targetname" );
   loc = ents[0].origin;
-  	
+	
   thread play_sound_in_space( "scn_gulag_jail_door_buzzer", loc );
   wait( 1.2 );
   thread play_sound_in_space( "scn_gulag_jail_door_unlock", loc );
@@ -1925,7 +1896,7 @@ ghost_tries_to_open_door() {
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
   wait( 0.5 );
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-  	
+	
   wait( 1 );
 
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
@@ -1948,7 +1919,7 @@ door_logic() {
   flag_init("open_" + self.targetname);
   self.closed = true;
   self.start_pos = self.origin;
-  forward = anglesToForward(self.org.angles);
+  forward = AnglesToForward(self.org.angles);
   right = AnglesToRight(self.org.angles);
 
   movetime = 3;
@@ -1972,7 +1943,7 @@ door_logic() {
   }
 
   foreach(light in self.lights) {
-    light setModel("com_emergencylightcase");
+    light SetModel("com_emergencylightcase");
     fx = get_global_fx("light_red_steady_FX_origin");
     light.looper = PlayLoopedFX(fx, 50, light.fx_org, 2500);
   }
@@ -1983,7 +1954,7 @@ door_logic() {
 
   buzz_sound_org = self.origin + right * 128 + forward * -64 + (0, 0, 32);
 
-  for(;;) {
+  for (;;) {
     // "open_cell_door_weapons"
     flag_wait("open_" + self.targetname);
 
@@ -1991,9 +1962,10 @@ door_logic() {
     thread play_sound_in_space("scn_gulag_jail_door_buzzer", buzz_sound_org);
     delayThread(1.2, ::play_sound_in_space, "scn_gulag_jail_door_unlock", self.origin);
 
+
     // opened
     foreach(light in self.lights) {
-      light setModel("com_emergencylightcase_blue");
+      light SetModel("com_emergencylightcase_blue");
       fx = get_global_fx("light_blue_steady_FX_origin");
       light.looper Delete();
       light.looper = PlayLoopedFX(fx, 50, light.fx_org, 2500);
@@ -2003,18 +1975,18 @@ door_logic() {
     wait(2);
 
     if(self.targetname == "cell_door_weapons") {
-      self playSound("scn_gulag_armory_door_open");
+      self PlaySound("scn_gulag_armory_door_open");
       // special slow open
       self MoveTo(self.start_pos + forward * 16, movetime * 0.25, move_in, 0);
 
       wait(movetime * 0.25);
-      self playSound("door_bounce");
+      self PlaySound("door_bounce");
       exploder("door_dies"); // sparks
       delayThread(1, ::exploder, "door_dies"); // sparks
       delayThread(1.3, ::exploder, "door_dies"); // sparks
       delayThread(2, ::exploder, "door_dies"); // sparks
       foreach(light in self.lights) {
-        light setModel("com_emergencylightcase_blue_off");
+        light SetModel("com_emergencylightcase_blue_off");
         light.looper Delete();
       }
       self.looper Delete();
@@ -2033,21 +2005,20 @@ door_logic() {
 
       foreach(light in self.lights) {
         light notify("stop_flickering");
-        light setModel("com_emergencylightcase_blue");
-        if(isDefined(light.looper)) {
+        light SetModel("com_emergencylightcase_blue");
+        if(IsDefined(light.looper))
           light.looper Delete();
-        }
 
         fx = get_global_fx("light_blue_steady_FX_origin");
         light.looper = PlayLoopedFX(fx, 50, light.fx_org, 2500);
       }
 
-      self playSound("scn_gulag_armory_door_open2");
+      self PlaySound("scn_gulag_armory_door_open2");
       // special slow open
       self MoveTo(self.start_pos + forward * 48, movetime * 0.75, move_in, 0);
       wait(movetime * 0.75);
     } else {
-      self playSound("scn_gulag_jail_door_open");
+      self PlaySound("scn_gulag_jail_door_open");
       // normal
       self MoveTo(self.start_pos + forward * 64, movetime, move_in, move_out);
       wait(movetime);
@@ -2061,7 +2032,7 @@ door_logic() {
 
     // closed
     foreach(light in self.lights) {
-      light setModel("com_emergencylightcase");
+      light SetModel("com_emergencylightcase");
       fx = get_global_fx("light_red_steady_FX_origin");
       light.looper Delete();
       light.looper = PlayLoopedFX(fx, 50, light.fx_org, 2500);
@@ -2078,16 +2049,16 @@ door_logic() {
 }
 
 blue_flicker_model_for_time(time) {
+
   time = 0.5;
   frames = time * 20;
-  for(i = 0; i < frames; i++) {
-    self setModel("com_emergencylightcase_blue");
+  for (i = 0; i < frames; i++) {
+    self SetModel("com_emergencylightcase_blue");
     wait(0.055);
-    self setModel("com_emergencylightcase_blue_off");
+    self SetModel("com_emergencylightcase_blue_off");
     wait(0.095);
-    if(RandomInt(100) > 75) {
+    if(RandomInt(100) > 75)
       exploder("door_dies");
-    }
   }
 }
 
@@ -2095,7 +2066,7 @@ blue_light_flickers() {
   self endon("stop_flickering");
   fx = getfx("dlight_blue_flicker");
 
-  for(;;) {
+  for (;;) {
     self.looper = PlayLoopedFX(fx, 150, self.fx_org, 2500);
     blue_flicker_model_for_time(0.5);
     self.looper Delete();
@@ -2124,18 +2095,16 @@ friendly_cellblock_respawner() {
   // respawns buddies
   level.cellblock_spawner = GetEnt("friendly_cellblock_spawner", "targetname");
 
-  for(;;) {
+  for (;;) {
     flag_wait("cellblock_respawn");
 
-    for(;;) {
+    for (;;) {
       wait(1);
-      if(!flag("cellblock_respawn")) {
+      if(!flag("cellblock_respawn"))
         break;
-      }
 
-      if(GetAIArray("allies").size >= 7) {
+      if(GetAIArray("allies").size >= 7)
         continue;
-      }
 
       spawner = level.cellblock_spawner;
       spawner.count = 1;
@@ -2148,7 +2117,7 @@ friendly_cellblock_respawner() {
 }
 
 fake_celldoor(name) {
-  door_ents = getEntArray(name, "targetname");
+  door_ents = GetEntArray(name, "targetname");
 
   door = undefined;
   org = undefined;
@@ -2165,7 +2134,7 @@ fake_celldoor(name) {
     }
   }
 
-  AssertEx(isDefined(door), "Found no script_brushmodel for " + name);
+  AssertEx(IsDefined(door), "Found no script_brushmodel for " + name);
 
   foreach(model in models) {
     model LinkTo(door);
@@ -2180,9 +2149,8 @@ get_cellblock_friendlies() {
 
   guys = [];
   foreach(guy in ai) {
-    if(isDefined(guy.stays_in_control_room)) {
+    if(IsDefined(guy.stays_in_control_room))
       continue;
-    }
 
     guys[guys.size] = guy;
   }
@@ -2207,7 +2175,7 @@ friendlies_ignore_grenades_for_awhile() {
 
 go_to_rappel_room() {
   /*		
-  if( !isDefined( self.magic_bullet_shield ) )
+  if( !isdefined( self.magic_bullet_shield ) )
   {
   	self.health = 1;
   	self.threatbias = 500;
@@ -2257,7 +2225,7 @@ hero_rappels() {
 }
 
 cellblock_rappel_player() {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.rope_obj = level.cellblock_rope_player_obj;
   ent.rope = level.cellblock_rope_player;
   ent.flag_name = "player_rappels";
@@ -2271,12 +2239,13 @@ cellblock_rappel_player() {
   wait(1.8);
   // Captain MacTavish, last floor clear. We'll link up with you at the bottom.		
   radio_dialogue("gulag_tf1_captainlastfloor");
+
 }
 
 player_rappels(ent) {
   trigger_ent = GetEnt("rappel_trigger", "script_noteworthy");
 
-  // Press and hold^3 && 1 ^7to rappel.
+  // Press and hold^3 &&1 ^7to rappel.
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
   flag_wait(ent.flag_name);
   trigger_ent Delete();
@@ -2285,9 +2254,8 @@ player_rappels(ent) {
     level.player SetStance("stand");
     wait(0.4);
   }
-  if(isDefined(ent.rope_obj)) {
+  if(IsDefined(ent.rope_obj))
     ent.rope_obj Delete();
-  }
 
   // player rappels
   player_rig = spawn_anim_model("player_rappel", ent.rope_ent.origin);
@@ -2343,9 +2311,8 @@ spawn_rappel_rope() {
 }
 
 gulag_player_loadout() {
-  if(is_specialop()) {
+  if(is_specialop())
     return;
-  }
 
   level.player GiveWeapon("m14_scoped_arctic");
   level.player GiveWeapon("fraggrenade");
@@ -2391,20 +2358,18 @@ overlook_spawner_think() {
   self.IgnoreRandomBulletDamage = true;
   self.suppressionwait = 0;
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
 
-    if(!isalive(attacker)) {
+    if(!isalive(attacker))
       continue;
-    }
 
     if(attacker == level.player) {
       flag_set("force_bhd_start");
     }
 
-    if(!isalive(self)) {
+    if(!isalive(self))
       return;
-    }
   }
 
   //	wait( 5 );
@@ -2424,9 +2389,8 @@ bhd_heli_attack_setup() {
 }
 
 bhd_heli_rotates_left_and_right() {
-  if(flag("overlook_cleared")) {
+  if(flag("overlook_cleared"))
     return;
-  }
 
   self SetYawSpeed(80, 60, 60, 0);
   self SetTurningAbility(1);
@@ -2454,13 +2418,12 @@ bhd_heli_rotates_left_and_right() {
   lowest_dot_guy = undefined;
   foreach(guy in ai) {
     newdot = get_dot(self.origin, (0, yaw + 30, 0), guy.origin);
-    if(newdot >= dot) {
+    if(newdot >= dot)
       continue;
-    }
     dot = newdot;
     lowest_dot_guy = guy;
   }
-  if(isDefined(lowest_dot_guy)) {
+  if(IsDefined(lowest_dot_guy)) {
     foreach(turret in self.mgturret) {
       turret SetTargetEntity(lowest_dot_guy);
       //Line( turret.origin, lowest_dot_guy.origin, (1,0,1), 1, 1, 250 );
@@ -2483,23 +2446,21 @@ bhd_heli_rotates_left_and_right() {
 
 rotate_relative_to_overlook_guys(yaw) {
   level endon("stop_shooting_right_side");
-  if(flag("stop_shooting_right_side")) {
+  if(flag("stop_shooting_right_side"))
     return;
-  }
   rotate_relative_to_yaw(yaw);
 }
 
 rotate_relative_to_left_guys(yaw) {
   level endon("bhd_heli_flies_off");
-  if(flag("bhd_heli_flies_off")) {
+  if(flag("bhd_heli_flies_off"))
     return;
-  }
   rotate_relative_to_yaw(yaw);
 }
 
 rotate_relative_to_yaw(yaw) {
   range = 12;
-  for(;;) {
+  for (;;) {
     self SetGoalYaw(yaw - range);
     wait(1.5);
     self SetGoalYaw(yaw + range);
@@ -2524,7 +2485,7 @@ bhd_heli_attacks_overlook_guys(heli) {
 
 bhd_physics_explosion_from_turrets() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     level waittill("physics_jump", origin);
     //vec = randomvector( 8 );
     vec = (30, -30, 160);
@@ -2537,18 +2498,16 @@ set_off_overlook_grenades() {
   structs = getstructarray("heli_grenade_struct", "targetname");
   fx = getfx("grenade_wood");
 
-  for(;;) {
+  for (;;) {
     wait(0.05);
-    if(flag("stop_shooting_right_side")) {
+    if(flag("stop_shooting_right_side"))
       break;
-    }
 
     if(self IsFiringTurret()) {
       struct = get_highest_dot(self.origin, self.origin + self.forward, structs);
 
-      if(struct.time > GetTime()) {
+      if(struct.time > GetTime())
         continue;
-      }
 
       //dont fire this one again for 300ms
       struct.time = GetTime() + 250;
@@ -2556,7 +2515,7 @@ set_off_overlook_grenades() {
       z = abs(vec[2]) * -1;
       vec = (vec[0], vec[1], z);
       //MagicGrenadeManual( "fraggrenade", struct.origin, vec, 0.2 );
-      playFX(fx, struct.origin);
+      PlayFX(fx, struct.origin);
       play_sound_in_space("grenade_explode_wood", struct.origin);
 
       //PhysicsExplosionSphere( struct.origin, 350, 350, 3 );
@@ -2571,11 +2530,10 @@ bhd_turrets_kill_overlook_guys(heli, odd) {
   self SetMode("manual");
 
   // for offset based on the way the enemies are killed, so we kill 2 out of 3 frames instead of 1 out of every 3.
-  if(odd) {
+  if(odd)
     wait(0.05);
-  }
 
-  targ_ent = spawn("script_origin", (0, 0, 0));
+  targ_ent = Spawn("script_origin", (0, 0, 0));
   targ_ent.script_ghettotag = true; // keep these even through world cleanse
   self StartFiring();
   exploders = get_exploder_array("110");
@@ -2584,13 +2542,12 @@ bhd_turrets_kill_overlook_guys(heli, odd) {
   self.forward = (0, 0, 0);
   thread set_off_overlook_grenades();
 
-  for(;;) {
-    if(flag("stop_shooting_right_side")) {
+  for (;;) {
+    if(flag("stop_shooting_right_side"))
       break;
-    }
 
     angles = heli.angles;
-    forward = anglesToForward(heli.angles);
+    forward = AnglesToForward(heli.angles);
     self.forward = forward;
     ent = get_highest_dot(self.origin, self.origin + forward, exploders);
     targ_ent.origin = ent.origin;
@@ -2613,6 +2570,7 @@ bhd_turrets_kill_overlook_guys(heli, odd) {
 }
 
 bhd_dialogue_and_m203_hint() {
+
   kill_deathflag("first_second_story_guys_dead", 4);
 
   // Two-One is in position for gun run.	
@@ -2628,9 +2586,8 @@ bhd_dialogue_and_m203_hint() {
   flag_clear("player_shot_at_m203_guys");
   flag_wait("player_shot_at_m203_guys");
 
-  if(should_break_m203_hint()) {
+  if(should_break_m203_hint())
     return;
-  }
 
   // Roach! Hostiles on the third floor, use your M203!	
   level.soap dialogue_queue("gulag_cmt_usem203");
@@ -2643,17 +2600,16 @@ turret_rains_down_shells() {
   self endon("death");
   fx = getfx("minigun_shell_eject");
   self.last_casing_impact_sound_time = 0;
-  for(;;) {
+  for (;;) {
     if(self IsFiringTurret()) {
       // spinup
       wait(2);
 
-      for(;;) {
-        if(!self IsFiringTurret()) {
+      for (;;) {
+        if(!self IsFiringTurret())
           break;
-        }
 
-        playFXOnTag(fx, self, "tag_flash");
+        PlayFXOnTag(fx, self, "tag_flash");
         thread shell_casing_impact_sound();
         wait(0.05);
       }
@@ -2669,9 +2625,8 @@ turret_rains_down_shells() {
 
 shell_casing_impact_sound() {
   // dont play the sound TOO often
-  if(GetTime() < self.last_casing_impact_sound_time + 2500) {
+  if(GetTime() < self.last_casing_impact_sound_time + 2500)
     return;
-  }
 
   self.last_casing_impact_sound_time = GetTime();
 
@@ -2729,9 +2684,8 @@ bhd_heli_think() {
   bhd_kill_trigger = GetEnt("bhd_kill_trigger", "targetname");
   ai = GetAIArray("axis");
   foreach(guy in ai) {
-    if(guy IsTouching(bhd_kill_trigger)) {
+    if(guy IsTouching(bhd_kill_trigger))
       guy Kill();
-    }
   }
 
   /*
@@ -2746,9 +2700,8 @@ bhd_heli_think() {
   ai = GetAIArray( "axis" );
   foreach ( guy in ai )
   {
-  	if( guy IsTouching( bhd_kill_trigger ) ) {
+  	if( guy IsTouching( bhd_kill_trigger ) )
   		guy Kill();
-  	}
   }
   */
 }
@@ -2845,40 +2798,36 @@ guy_gets_riotshield() {
 
   self.grenadeawareness = 0;
 
-  friendly_riotshields = getEntArray("friendly_riotshield", "targetname");
+  friendly_riotshields = GetEntArray("friendly_riotshield", "targetname");
   friendly_riotshields = remove_undefined_from_array(friendly_riotshields);
   shield = getClosest(self.origin, friendly_riotshields, 64);
-  if(!isDefined(shield)) {
+  if(!isdefined(shield))
     return;
-  }
   shield Delete();
 }
 
 friendly_hole_rappel() {
   flag_init("hole_rappel_failsafe"); // needed in case ai hits the wrong trigger
-  ai_hole_rappel_triggers = getEntArray("ai_hole_rappel_trigger", "targetname");
+  ai_hole_rappel_triggers = GetEntArray("ai_hole_rappel_trigger", "targetname");
   array_thread(ai_hole_rappel_triggers, ::ai_hole_rappel_trigger_think);
   flag_wait("hole_rappel_failsafe");
   wait(4);
 
-  ai_hole_rappel_triggers = getEntArray("ai_hole_rappel_trigger", "targetname");
-  if(!ai_hole_rappel_triggers.size) {
+  ai_hole_rappel_triggers = GetEntArray("ai_hole_rappel_trigger", "targetname");
+  if(!ai_hole_rappel_triggers.size)
     return;
-  }
   AssertEx(ai_hole_rappel_triggers.size == 1, "Impossible size!");
 
   ai = GetAIArray("allies");
   guy = undefined;
   foreach(guy in ai) {
-    if(isDefined(guy.hole_rappel)) {
+    if(IsDefined(guy.hole_rappel))
       continue;
-    }
     break;
   }
 
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
 
   // force this guy to rappel
   ai_hole_rappel_triggers[0] notify("trigger", guy);
@@ -2888,14 +2837,12 @@ ai_hole_rappel_trigger_think() {
   guy = undefined;
   index = self.script_index;
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", guy);
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
-    if(guy.team != "allies") {
+    if(guy.team != "allies")
       continue;
-    }
 
     break;
   }
@@ -2955,7 +2902,7 @@ bathroom_spawn_rappel_rope() {
 }
 
 bathroom_rappel_player() {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.rope = level.bathroom_rope_player;
   ent.rope_obj = level.bathroom_rope_player_obj;
   ent.flag_name = "player_hole_rappel";
@@ -2989,7 +2936,7 @@ price_spawn_think() {
 
 earthquakes() {
   level endon("lift_off");
-  for(;;) {
+  for (;;) {
     Earthquake(0.2, 4, level.player.origin + randomvector(1000), 5000);
     wait(RandomFloatRange(6, 8));
   }
@@ -3006,9 +2953,8 @@ ending_rope() {
   org = rope.origin;
   rope.origin += (0, 0, 600);
 
-  if(!ending_start) {
+  if(!ending_start)
     flag_wait("rope_drops_now");
-  }
 
   rope Show();
   rope MoveTo(org, 1, 1, 0);
@@ -3017,7 +2963,7 @@ ending_rope() {
   rope glow();
 
   trigger_ent = getEntWithFlag("player_ropes");
-  // Press and hold^3 && 1 ^7to rappel.
+  // Press and hold^3 &&1 ^7to rappel.
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
 
   escape_lift = spawn_vehicle_from_targetname("escape_lift");
@@ -3044,16 +2990,17 @@ ending_rope() {
   level.player PlayerLinkToBlend(escape_lift_ent, "tag_origin", 2, 1.5, 0);
   //	( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
   //level.player SetPlayerAngles( ( 5, -180, 0 ) );
+
 }
 
 gulag_become_soap() {
-  AssertEx(!isDefined(level.soap), "Too much soap!");
+  AssertEx(!isdefined(level.soap), "Too much soap!");
   level.soap = self;
   self.animname = "soap";
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield))
     self thread magic_bullet_shield();
-  }
   self make_hero();
+
 }
 
 going_in_hot() {
@@ -3105,14 +3052,13 @@ handle_gulag_world_fx() {
 
   fx_collection["outside"] = [];
 
-  dummy = spawn("script_origin", (0, 0, 0));
+  dummy = Spawn("script_origin", (0, 0, 0));
 
   volname_list = [];
   volname_list[0] = endlog_volume_name;
   foreach(volname in volnames) {
-    if(volname == volname_list[0]) {
+    if(volname == volname_list[0])
       continue;
-    }
 
     volname_list[volname_list.size] = volname;
   }
@@ -3121,7 +3067,7 @@ handle_gulag_world_fx() {
     touched = false;
     dummy.origin = EntFx.v["origin"];
 
-    for(i = 0; i < volname_list.size; i++) {
+    for (i = 0; i < volname_list.size; i++) {
       name = volname_list[i];
       volume = volumes[name];
 
@@ -3132,16 +3078,14 @@ handle_gulag_world_fx() {
       }
     }
 
-    if(!touched) {
+    if(!touched)
       fx_collection["outside"][fx_collection["outside"].size] = entFx;
-    }
   }
   dummy Delete();
 
   foreach(volume in volumes) {
-    if(volume != endlog_volume) {
+    if(volume != endlog_volume)
       volume Delete();
-    }
   }
 
   wait(0.05);
@@ -3166,8 +3110,8 @@ handle_gulag_world_fx() {
 }
 
 cleanse_the_world() {
-  if(isDefined(level.intel_items)) {
-    intel_items = getEntArray("intelligence_item", "targetname");
+  if(IsDefined(level.intel_items)) {
+    intel_items = GetEntArray("intelligence_item", "targetname");
     foreach(trig in intel_items) {
       trig.script_ghettotag = 1;
       trig.item.script_ghettotag = 1;
@@ -3176,7 +3120,7 @@ cleanse_the_world() {
 
   volume = GetEnt("interior_entity_volume", "targetname");
 
-  entities = getEntArray();
+  entities = GetEntArray();
 
   ignore_classnames = [];
   ignore_classnames["script_model"] = true;
@@ -3188,20 +3132,17 @@ cleanse_the_world() {
   ignore_classnames["stage"] = true;
 
   foreach(ent in entities) {
-    if(IsAlive(ent)) {
+    if(IsAlive(ent))
       continue;
-    }
 
     // keep these
-    if(isDefined(ent.script_ghettotag)) {
+    if(IsDefined(ent.script_ghettotag))
       continue;
-    }
 
-    if(ent.origin[2] < 1850) {
+    if(ent.origin[2] < 1850)
       continue;
-    }
 
-    if(!isDefined(ent.classname)) {
+    if(!isdefined(ent.classname)) {
       if(!ent IsTouching(volume)) {
         // looper that should be off anyway
         ent Delete();
@@ -3210,17 +3151,15 @@ cleanse_the_world() {
       continue;
     }
 
-    if(isDefined(ignore_classnames[ent.classname])) {
+    if(IsDefined(ignore_classnames[ent.classname]))
       continue;
-    }
 
-    if(isDefined(ignore_classnames[ent.code_classname])) {
+    if(IsDefined(ignore_classnames[ent.code_classname]))
       continue;
-    }
 
     if(ent needs_ent_testing()) {
       // triggers must have their center in the vol to survive
-      org = spawn("script_origin", ent.origin);
+      org = Spawn("script_origin", ent.origin);
       if(!org IsTouching(volume)) {
         ent Delete();
       }
@@ -3229,32 +3168,29 @@ cleanse_the_world() {
       continue;
     }
 
-    if(!ent IsTouching(volume)) {
+    if(!ent IsTouching(volume))
       ent Delete();
-    }
   }
 
   // update bcs array
   locs = [];
   foreach(loc in anim.bcs_locations) {
-    if(!isDefined(loc)) {
+    if(!isdefined(loc))
       continue;
-    }
     locs[locs.size] = loc;
   }
   anim.bcs_locations = locs;
 }
 
 needs_ent_testing() {
-  if(IsSubStr(self.code_classname, "trigger")) {
+  if(IsSubStr(self.code_classname, "trigger"))
     return true;
-  }
   return self.code_classname == "info_volume";
 }
 
 handle_exterior_fx(array, outside_array) {
   first = true;
-  for(;;) {
+  for (;;) {
     flag_wait("disable_exterior_fx");
 
     if(first) {
@@ -3300,7 +3236,7 @@ handle_exterior_fx(array, outside_array) {
 }
 
 handle_interior_fx(array) {
-  for(;;) {
+  for (;;) {
     count = 0;
     foreach(fx in array) {
       fx pauseEffect();
@@ -3328,7 +3264,7 @@ handle_interior_fx(array) {
 }
 
 handle_endlog_fx(array) {
-  for(;;) {
+  for (;;) {
     count = 0;
     foreach(fx in array) {
       fx pauseEffect();
@@ -3359,7 +3295,7 @@ dont_use_the_door() {
   level endon("player_enters_bathroom");
   level endon("breaching");
 
-  for(;;) {
+  for (;;) {
     flag_wait("player_tries_door_that_cant_open");
 
     // Roach - not the door! Plant the breaching charge on the wall over here!	
@@ -3378,16 +3314,15 @@ dont_use_the_door() {
 
 wait_until_player_breaches_bathroom() {
   level endon("breaching");
-  if(flag("player_enters_bathroom")) {
+  if(flag("player_enters_bathroom"))
     return;
-  }
   level endon("player_enters_bathroom");
 
   flag_wait("tunnel_guys_die");
 
   thread dont_use_the_door();
 
-  for(;;) {
+  for (;;) {
     // Roach - plant the breaching charge on the wall!	
     level.soap dialogue_queue("gulag_cmt_plantbreach");
 
@@ -3405,7 +3340,7 @@ cellblock_spawn_lots_of_grenades() {
 throw_crazy_grenades() {
   self endon("death");
   self.grenadeweapon = "armory_grenade";
-  for(;;) {
+  for (;;) {
     anim.grenadeTimers["AI_armory_grenade"] = 0;
     level.player.grenadeTimers["armory_grenade"] = 0;
     self.grenadeammo = 5;
@@ -3416,9 +3351,8 @@ throw_crazy_grenades() {
 }
 
 armory_grenade_think() {
-  if(RandomInt(100) > 60) {
+  if(RandomInt(100) > 60)
     return;
-  }
   wait(RandomFloat(3));
 
   targ = getstruct(self.target, "targetname");
@@ -3427,25 +3361,22 @@ armory_grenade_think() {
 }
 
 wait_while_enemy_near_player() {
-  if(flag("player_nears_cell_door1")) {
+  if(flag("player_nears_cell_door1"))
     return;
-  }
   level endon("player_nears_cell_door1");
 
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
     found_ai = false;
     foreach(guy in ai) {
-      if(Distance(guy.origin, level.player.origin) > 600) {
+      if(Distance(guy.origin, level.player.origin) > 600)
         continue;
-      }
       found_ai = true;
       break;
     }
 
-    if(!found_ai) {
+    if(!found_ai)
       return;
-    }
 
     wait(1);
   }
@@ -3454,6 +3385,7 @@ wait_while_enemy_near_player() {
 close_fighter_think() {
   self SetEngagementMinDist(0, 0);
   self SetEngagementMaxDist(400, 800);
+
 }
 
 heli_strike() {
@@ -3484,9 +3416,8 @@ armory_laser_ambush() {
   //enable_dontevershoot();
 
   level.armory_laser_index += 0.35;
-  if(level.armory_laser_index > 1.5) {
+  if(level.armory_laser_index > 1.5)
     level.armory_laser_index = 1.5;
-  }
   wait(level.armory_laser_index);
   thread enable_lasers(); // maps\_spawner::ai_lasers();
   wait(RandomFloatRange(2, 2.5));
@@ -3515,19 +3446,18 @@ disable_lasers() {
 
 updateLaserStatus_forced() {
   // we have no weapon so there's no laser to turn off or on
-  if(self.a.weaponPos["right"] == "none") {
+  if(self.a.weaponPos["right"] == "none")
     return;
-  }
 
-  if(animscripts\shared::canUseLaser()) {
+  if(animscripts\shared::canUseLaser())
     self LaserForceOn();
-  } else {
+  else
     self LaserForceOff();
-  }
 }
 
+
 gulag_cellblock_smoke() {
-  cellblock_smoke_grenade_orgs = getEntArray("cellblock_smoke_grenade_org", "targetname");
+  cellblock_smoke_grenade_orgs = GetEntArray("cellblock_smoke_grenade_org", "targetname");
   foreach(ent in cellblock_smoke_grenade_orgs) {
     MagicGrenadeManual("smoke_grenade_american", ent.origin, ent.origin + (0, 0, 20), 0);
   }
@@ -3543,22 +3473,19 @@ flee_armory_think() {
 
 ambush_behavior() {
   // drone?
-  if(!issentient(self)) {
+  if(!issentient(self))
     return;
-  }
 
-  if(self.subclass == "riotshield") {
+  if(self.subclass == "riotshield")
     return;
-  }
 
   self.combatMode = "ambush";
 }
 
 ending_flee_spawner_think() {
   level.ending_flee_guys++;
-  if(level.ending_flee_max < level.ending_flee_guys) {
+  if(level.ending_flee_max < level.ending_flee_guys)
     level.ending_flee_max = level.ending_flee_guys;
-  }
 
   thread ending_flee_behavior();
   self waittill("death");
@@ -3574,9 +3501,8 @@ ending_flee_behavior() {
   flee_chance = 1 - level.ending_flee_guys / level.ending_flee_max;
   flee_chance += 0.2;
 
-  if(RandomFloat(1) > flee_chance) {
+  if(RandomFloat(1) > flee_chance)
     return;
-  }
 
   ending_flee_node = GetNode("ending_flee_node", "targetname");
 
@@ -3585,19 +3511,17 @@ ending_flee_behavior() {
 }
 
 nodes_are_periodically_bad() {
-  if(flag("nvg_leave_cellarea")) {
+  if(flag("nvg_leave_cellarea"))
     return;
-  }
   level endon("nvg_leave_cellarea");
 
-  if(flag("checking_to_sweep_cells")) {
+  if(flag("checking_to_sweep_cells"))
     return;
-  }
   level endon("checking_to_sweep_cells");
 
   wait(5);
 
-  for(;;) {
+  for (;;) {
     timer = RandomFloatRange(3, 7);
     wait(timer);
     BadPlace_Cylinder("", 2, self.origin, 16, 64, "axis");
@@ -3612,17 +3536,15 @@ bathroom_balcony_spawner() {
 }
 
 bathroom_periodic_autosave() {
-  if(flag("player_exited_bathroom")) {
+  if(flag("player_exited_bathroom"))
     return;
-  }
   level endon("player_exited_bathroom");
 
-  if(flag("bathroom_room2_enemies_dead")) {
+  if(flag("bathroom_room2_enemies_dead"))
     return;
-  }
   level endon("bathroom_room2_enemies_dead");
 
-  for(;;) {
+  for (;;) {
     wait(45);
     autosave_by_name("bathroom_autosave");
   }
@@ -3632,40 +3554,36 @@ riot_escort_spawner() {
   self endon("death");
   waittillframeend; // want to be sure the guy we're supposed to escort could have spawned
   self waittill("goal");
-  ents = getEntArray(self.script_linkto, "script_linkname");
+  ents = GetEntArray(self.script_linkto, "script_linkname");
   escort = undefined;
   foreach(ent in ents) {
-    if(!isalive(ent)) {
+    if(!isalive(ent))
       continue;
-    }
 
     escort = ent;
     break;
   }
 
-  if(!isalive(escort)) {
+  if(!isalive(escort))
     return;
-  }
 
   self.goalradius = 128;
 
-  for(;;) {
-    if(!isalive(escort)) {
+  for (;;) {
+    if(!isalive(escort))
       break;
-    }
 
     self SetGoalPos(escort.origin);
     wait(1);
   }
 
-  AssertEx(isDefined(self GetGoalVolume()), "Riot escort has no goalvolume");
+  AssertEx(IsDefined(self GetGoalVolume()), "Riot escort has no goalvolume");
   self SetGoalVolumeAuto(self GetGoalVolume());
 }
 
 bathroom_second_wave() {
-  if(flag("bathroom_second_wave_trigger")) {
+  if(flag("bathroom_second_wave_trigger"))
     return;
-  }
 
   flag_set("bathroom_second_wave_trigger");
 
@@ -3676,7 +3594,7 @@ bathroom_second_wave() {
 }
 
 debug_center(ent) {
-  for(;;) {
+  for (;;) {
     //line( level.player.origin, ent.origin );
     wait(0.05);
   }
@@ -3736,7 +3654,7 @@ gulag_center_shifts_as_we_move_in() {
   array["delay"] = array["time"];
   waits[waits.size] = array;
 
-  //6
+  //6 
   array = [];
   array["pre_delay"] = 3;
   array["flag"] = "slamraam_killed_0";
@@ -3762,40 +3680,40 @@ gulag_center_shifts_as_we_move_in() {
   waits[waits.size] = array;
 
   /*
-  	//9 heli spins out of control
-  	array = [];
-  	array[ "flag" ] = "player_heli_backs_up";
-  	array[ "time" ] = 1.8;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
+	//9 heli spins out of control
+	array = [];
+	array[ "flag" ] = "player_heli_backs_up";
+	array[ "time" ] = 1.8;
+	array[ "in" ] = array[ "time" ] * 0.25;
+	array[ "out" ] = array[ "time" ] * 0.25;
+	array[ "delay" ] = array[ "time" ];
+	waits[ waits.size ] = array;
 
-  	//10 heli spins out of control
-  	array = [];
-  	array[ "time" ] = 1.8;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
-  	
-  	//11 back to above center
-  	array = [];
-  //	array[ "pre_delay" ] = 5;
-  	array[ "time" ] = 4;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ] + 2;
-  	waits[ waits.size ] = array;
-  	
-  	//12 to center
-  	array = [];
-  	array[ "time" ] = 4;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
-  	*/
+	//10 heli spins out of control
+	array = [];
+	array[ "time" ] = 1.8;
+	array[ "in" ] = array[ "time" ] * 0.25;
+	array[ "out" ] = array[ "time" ] * 0.25;
+	array[ "delay" ] = array[ "time" ];
+	waits[ waits.size ] = array;
+	
+	//11 back to above center
+	array = [];
+//	array[ "pre_delay" ] = 5;
+	array[ "time" ] = 4;
+	array[ "in" ] = array[ "time" ] * 0.25;
+	array[ "out" ] = array[ "time" ] * 0.25;
+	array[ "delay" ] = array[ "time" ] + 2;
+	waits[ waits.size ] = array;
+	
+	//12 to center
+	array = [];
+	array[ "time" ] = 4;
+	array[ "in" ] = array[ "time" ] * 0.25;
+	array[ "out" ] = array[ "time" ] * 0.25;
+	array[ "delay" ] = array[ "time" ];
+	waits[ waits.size ] = array;
+	*/
 
   flag_wait("slamraam_gets_players_attention");
 
@@ -3805,9 +3723,8 @@ gulag_center_shifts_as_we_move_in() {
   //thread debug_center( center );
 
   // for starts
-  if(!isDefined(level.player_view_controller)) {
+  if(!isdefined(level.player_view_controller))
     return;
-  }
 
   level.player_view_controller ClearTargetEntity();
   level.player_view_controller SetTargetEntity(center);
@@ -3823,51 +3740,47 @@ gulag_center_shifts_as_we_move_in() {
     index = 1;
   }
 
-  for(;;) {
+  for (;;) {
     level.times[index] = GetTime();
     next_ent = GetEnt(ent.target, "targetname");
 
     array = waits[index];
 
-    if(isDefined(array["flag"])) {
+    if(IsDefined(array["flag"])) {
       flag_wait(array["flag"]);
     }
-    if(isDefined(array["pre_delay"])) {
+    if(IsDefined(array["pre_delay"])) {
       wait(array["pre_delay"]);
     }
 
     center MoveTo(next_ent.origin, array["time"], array["in"], array["out"]);
-
+    /#
     center thread ent_debug_print(index);
-
-    if(isDefined(array["delay"])) {
-      wait(array["delay"]);
-    }
+    # /
+      if(IsDefined(array["delay"]))
+        wait(array["delay"]);
 
     ent = next_ent;
     index++;
-    if(index >= waits.size) {
+    if(index >= waits.size)
       break;
-    }
-    if(!isDefined(ent.target)) {
+    if(!isdefined(ent.target))
       break;
-    }
   }
 }
 
 ent_debug_print(index) {
   self notify("new_debug_print");
   self endon("new_debug_print");
-  for(;;) {
+  for (;;) {
     //Print3d( self.origin, index, (0,1,1), 1, 6 );
     wait(0.05);
   }
 }
 
 second_tower_stabilize_dialogue() {
-  if(flag("second_tower_clear")) {
+  if(flag("second_tower_clear"))
     return;
-  }
   level endon("second_tower_clear");
 
   wait(2.5);
@@ -3883,7 +3796,7 @@ second_tower_stabilize_dialogue() {
 
 spawn_perimeter_tarp_guys() {
   level.perimeter_tarp_guys = [];
-  perimeter_tarp_spawners = getEntArray("perimeter_tarp_spawner", "targetname");
+  perimeter_tarp_spawners = GetEntArray("perimeter_tarp_spawner", "targetname");
   array_spawn_function(perimeter_tarp_spawners, ::perimeter_tarp_spawner_think);
   array_thread(perimeter_tarp_spawners, ::spawn_ai);
 }
@@ -3899,20 +3812,17 @@ should_break_m203_hint(nothing) {
   // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();
   prefix = GetSubStr(weapon, 0, 4);
-  if(prefix == "m203") {
+  if(prefix == "m203")
     return true;
-  }
 
   // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     ammo = player GetWeaponAmmoClip(weapon);
-    if(!issubstr(weapon, "m203")) {
+    if(!issubstr(weapon, "m203"))
       continue;
-    }
-    if(ammo > 0) {
+    if(ammo > 0)
       return false;
-    }
   }
 
   return true;
@@ -3928,15 +3838,14 @@ prepare_perimeter_slamraam_attack() {
   delayThread(7, ::spawn_perimeter_tarp_guys);
   wait(3.70);
 
-  spawners = getEntArray("intro_heli_1", "targetname");
+  spawners = GetEntArray("intro_heli_1", "targetname");
   orgs = getstructarray("heli_restart_path", "script_noteworthy");
 
   foreach(spawner in spawners) {
     old_origin = spawner.origin;
     foreach(org in orgs) {
-      if(org.script_parameters != spawner.script_parameters) {
+      if(org.script_parameters != spawner.script_parameters)
         continue;
-      }
 
       // move the helis to the origins
       remap_targets(spawner.target, org.targetname);
@@ -3948,12 +3857,12 @@ prepare_perimeter_slamraam_attack() {
     AssertEx(old_origin != spawner.origin, "Spawner didn't move!");
   }
 
-  spawners = getEntArray("intro_heli_1", "targetname");
+  spawners = GetEntArray("intro_heli_1", "targetname");
   thread spawn_friendly_helis(spawners);
 }
 
 perimeter_slamraams_defend() {
-  perimeter_slamraams = getEntArray("perimeter_slamraam", "script_noteworthy");
+  perimeter_slamraams = GetEntArray("perimeter_slamraam", "script_noteworthy");
   slamraams = array_index_by_parameters(perimeter_slamraams);
 
   base = 20;
@@ -3972,21 +3881,18 @@ slamraam_gets_pulled_by_nearby_AI(delay) {
   perimeter_guys = array_removeDead(level.perimeter_tarp_guys);
   foreach(index, guy in perimeter_guys) {
     // this guy is already pulling a tarp?
-    if(isDefined(guy.pulling_tarp)) {
+    if(IsDefined(guy.pulling_tarp))
       perimeter_guys[index] = undefined;
-    }
   }
 
-  for(;;) {
+  for (;;) {
     perimeter_guys = array_removeDead(perimeter_guys);
-    if(!perimeter_guys.size) {
+    if(!perimeter_guys.size)
       return;
-    }
 
     guys = get_array_of_closest(self.origin, perimeter_guys, undefined, 2, 1000, 0);
-    if(guys.size != 2) {
+    if(guys.size != 2)
       return;
-    }
 
     foreach(guy in guys) {
       guy.pulling_tarp = true;
@@ -3995,9 +3901,8 @@ slamraam_gets_pulled_by_nearby_AI(delay) {
     guys[1].animname = "operator";
 
     if(tarp_gets_pulled(self, guys)) {
-      if(!self.operational) {
+      if(!self.operational)
         return;
-      }
 
       self thread slamraam_attacks(1.2, 0.5);
       break;
@@ -4007,16 +3912,16 @@ slamraam_gets_pulled_by_nearby_AI(delay) {
 }
 
 all_missiles_model_can_die(slamraam) {
-  self setCanDamage(true);
+  self SetCanDamage(true);
   self.health = 250;
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
     if(IsAlive(attacker) && IsPlayer(attacker)) {
       if(self.health <= 0) {
         // slamraam_killed_0 slamraam_killed_1 slamraam_killed_2
         flag_set("slamraam_killed_" + slamraam.script_parameters);
         slamraam.operational = false;
-        playFX(getfx("slamraam_explosion"), slamraam.origin);
+        PlayFX(getfx("slamraam_explosion"), slamraam.origin);
         slamraam notify("lose_operation");
         slamraam.launcher Delete();
 
@@ -4025,20 +3930,18 @@ all_missiles_model_can_die(slamraam) {
       }
     }
 
-    if(!isDefined(self) || self.health <= 0) {
+    if(!isdefined(self) || self.health <= 0)
       return;
-    }
   }
 }
 
 slamraam_tarp_falls() {
   progress = 0.5;
   animation = self.tarp getanim("pulldown");
-  if(isDefined(self.tarp.tarp_fell)) {
+  if(IsDefined(self.tarp.tarp_fell)) {
     // has it already passed the progress point?
-    if(self.tarp GetAnimTime(animation) >= progress) {
+    if(self.tarp GetAnimTime(animation) >= progress)
       return;
-    }
   } else {
     // tarp hasn't fallen so pull it down
     self.tarp.tarp_fell = true;
@@ -4051,12 +3954,12 @@ slamraam_tarp_falls() {
 }
 
 gulag_boats() {
-  later_boats = getEntArray("later_boats", "targetname");
+  later_boats = GetEntArray("later_boats", "targetname");
   array_call(later_boats, ::Hide);
 
   flag_wait("new_friendly_helis_spawn");
 
-  early_boats = getEntArray("early_boats", "targetname");
+  early_boats = GetEntArray("early_boats", "targetname");
   array_call(early_boats, ::Delete);
   array_call(later_boats, ::Show);
 
@@ -4085,23 +3988,21 @@ gulag_boats() {
 boat_artillery_think() {
   wait(RandomFloat(1.3));
   angles = VectorToAngles(level.player.origin - self.origin);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
   fx = getfx("0_boat_artillery");
-  playFX(fx, self.origin, forward, up);
+  PlayFX(fx, self.origin, forward, up);
 }
 
 heli_smoke_trigger_think() {
-  if(!isDefined(level.heli_smoke_touched)) {
+  if(!isdefined(level.heli_smoke_touched))
     level.heli_smoke_touched = [];
-  }
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
     msg = other.unique_id;
-    if(isDefined(level.heli_smoke_touched[msg])) {
+    if(IsDefined(level.heli_smoke_touched[msg]))
       continue;
-    }
     level.heli_smoke_touched[msg] = true;
     other thread make_heli_smoke();
   }
@@ -4110,28 +4011,28 @@ heli_smoke_trigger_think() {
 make_heli_smoke() {
   fx = getfx("smoke_swirl_runner_dual");
 
-  playFXOnTag(fx, self, "tag_origin");
+  PlayFXOnTag(fx, self, "tag_origin");
   //Print3d( self.origin, "X", (1,0,0), 1, 5, 100 );
 }
 
 f15_missile_spawner_think() {
   fx = getfx("f15_missile");
-  playFXOnTag(fx, self, "tag_origin");
-  self playSound("scn_gulag_f15_missile_fire3");
+  PlayFXOnTag(fx, self, "tag_origin");
+  self PlaySound("scn_gulag_f15_missile_fire3");
 }
 
 f15_gulag_attack() {
   flag_wait("f15_gulag_attack");
-  f15_gulag_attacks = getEntArray("f15_gulag_attack", "targetname");
+  f15_gulag_attacks = GetEntArray("f15_gulag_attack", "targetname");
 
-  f15_missile_spawners = getEntArray("f15_missile_spawner", "targetname");
+  f15_missile_spawners = GetEntArray("f15_missile_spawner", "targetname");
   array_thread(f15_missile_spawners, ::add_spawn_function, ::f15_missile_spawner_think);
 
   spawn_vehicles_from_targetname_and_drive("f15_missile_spawner");
 
   plane = spawn_vehicle_from_targetname_and_drive("f15_gulag_attack");
   plane.animname = "f15";
-  plane playSound("scn_gulag_f15_overhead");
+  plane PlaySound("scn_gulag_f15_overhead");
   level.plane_buzzes_gulag = plane;
   animation = plane getanim("landing_gear");
 
@@ -4149,30 +4050,27 @@ f15_gets_afterburner() {
 
 helis_respawn_to_land() {
   // don't need these extra guys for the actual landing
-  extra_flyin_spawners = getEntArray("extra_flyin_spawner", "script_noteworthy");
+  extra_flyin_spawners = GetEntArray("extra_flyin_spawner", "script_noteworthy");
   array_thread(extra_flyin_spawners, ::self_delete);
 
-  spawners = getEntArray("heli_respawn_spawner", "script_noteworthy");
+  spawners = GetEntArray("heli_respawn_spawner", "script_noteworthy");
   orgs = getstructarray("heli_landing_org", "script_noteworthy");
 
   real_spawners = [];
   foreach(spawner in spawners) {
-    if(IsAlive(spawner)) {
+    if(IsAlive(spawner))
       continue;
-    }
     old_origin = spawner.origin;
     foreach(org in orgs) {
-      if(org.script_parameters != spawner.script_parameters) {
+      if(org.script_parameters != spawner.script_parameters)
         continue;
-      }
 
       // move the helis to the origins
       remap_targets(spawner.target, org.targetname);
       parm = org.script_parameters;
       /*
-      if( parm == "purple" || parm == "green" ) {
+      if( parm == "purple" || parm == "green" )
       	org.speed = 40;
-      }
       */
       spawner.target = org.targetname;
       spawner.origin = org.origin;
@@ -4202,16 +4100,14 @@ control_room_destructibles_turn_on() {
 }
 
 damage_targ_trigger_think() {
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
-    if(!isalive(attacker)) {
+    if(!isalive(attacker))
       continue;
-    }
     //		if( attacker != level.player )
     //			continue;
-    if(Distance(attacker.origin, self.origin) > 940) {
+    if(Distance(attacker.origin, self.origin) > 940)
       continue;
-    }
     break;
   }
 
@@ -4227,11 +4123,10 @@ allies_have_low_attacker_accuracy() {
 ally_gets_missed_trigger_think() {
   AssertEx(self.spawnflags & 8, "Incorrect spawnflags, must check notplayer");
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
     other.attackeraccuracy = 0;
     other.IgnoreRandomBulletDamage = true;
   }
@@ -4240,22 +4135,20 @@ ally_gets_missed_trigger_think() {
 ally_can_get_hit_trigger_think() {
   AssertEx(self.spawnflags & 8, "Incorrect spawnflags, must check notplayer");
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
     other.attackeraccuracy = 1;
     other.IgnoreRandomBulletDamage = false;
   }
 }
 
 ally_in_armory_think() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
     other.armory = true;
   }
 }
@@ -4263,14 +4156,12 @@ ally_in_armory_think() {
 friendlies_ditch_riot_shields_trigger_think() {
   stopped = [];
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
-    if(isDefined(stopped[other.unique_id])) {
+    if(IsDefined(stopped[other.unique_id]))
       continue;
-    }
 
     stopped[other.unique_id] = true;
     other.grenadeawareness = 0.9;
@@ -4290,7 +4181,7 @@ update_soap_spawner(spawners) {
 }
 
 hallway_collapse_light_think() {
-  playFX(getfx("sparks_e_sound"), self.origin);
+  PlayFX(getfx("sparks_e_sound"), self.origin);
   self SetLightIntensity(0);
 }
 
@@ -4299,9 +4190,8 @@ hallway_collapse_dyn_think() {
 }
 
 drop_riotshield() {
-  if(level.player GetCurrentWeapon() != "riotshield") {
+  if(level.player GetCurrentWeapon() != "riotshield")
     return;
-  }
 
   level.player TakeWeapon("riotshield");
 
@@ -4312,14 +4202,13 @@ drop_riotshield() {
   }
 
   org = level.player.origin + (0, 0, 64);
-  spawn("weapon_riotshield", org);
-  shields = getEntArray("weapon_riotshield", "code_classname");
+  Spawn("weapon_riotshield", org);
+  shields = GetEntArray("weapon_riotshield", "code_classname");
   wait(0.05);
   shield = getClosest(level.player.origin, shields);
-  for(i = 0; i < 100; i++) {
-    if(!isDefined(shield)) {
+  for (i = 0; i < 100; i++) {
+    if(!isdefined(shield))
       return;
-    }
     shield.angles = (270, 180, 0);
     wait(0.05);
   }
@@ -4338,6 +4227,7 @@ soap_is_angry_about_attack() {
   // Bravo Six - they've agreed to stop firing for now. Keep going, I’ll keep you posted. Out.	
   // Quarterback to Task Force - Admiral Tarkovsky's a real loose cannon, but he’s agreed to stop firing for now. Keep going, we’ll keep you posted. Out.	
   delayThread(3, ::radio_dialogue, "gulag_hqr_loosecannon");
+
 }
 
 gulag_cellblocks_spotlight() {
@@ -4346,12 +4236,12 @@ gulag_cellblocks_spotlight() {
 
   turret = GetEnt("gulag_spotlight", "targetname");
   turret SetMode("manual");
-  ent = spawn("script_origin", (0, 0, 0));
+  ent = Spawn("script_origin", (0, 0, 0));
 
   turret SetTargetEntity(ent);
 
   fx = getfx("_attack_heli_spotlight");
-  //playFXOnTag( fx, turret, "tag_aim" );
+  //PlayFXOnTag( fx, turret, "tag_aim" );
 
   fx_tag = "tag_light";
   add_wait(::flag_wait, "spotlight_turns_on");
@@ -4363,27 +4253,27 @@ gulag_cellblocks_spotlight() {
   gulag_spotlight_searches(ent, turret);
   wait(2.5);
   ent Delete();
-  stopFXOnTag(fx, turret, fx_tag);
+  StopFXOnTag(fx, turret, fx_tag);
+
 }
 
 gulag_spotlight_searches(ent, turret) {
   level endon("rappel_time");
 
-  forward = anglesToForward(turret.angles);
+  forward = AnglesToForward(turret.angles);
   ent.origin = turret.origin + forward * 500 + (0, 0, -500);
 
   units_per_second = 200;
   //ent thread print3dforever();
 
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
 
     guys = [];
     foreach(guy in ai) {
       z_offset = abs(guy.origin[2] - level.player.origin[2]);
-      if(z_offset > 64) {
+      if(z_offset > 64)
         continue;
-      }
       guys[guys.size] = guy;
     }
 
@@ -4400,12 +4290,11 @@ gulag_spotlight_searches(ent, turret) {
     vec += (0, 0, extra_z);
     time = dist / units_per_second;
     random_min = RandomFloatRange(0.7, 1.3);
-    if(time < random_min) {
+    if(time < random_min)
       time = random_min;
-    }
 
     spotlight_org = guy.origin + (0, 0, 40) + vec;
-    if(isDefined(level.spotlight_override_pos)) {
+    if(IsDefined(level.spotlight_override_pos)) {
       spotlight_org = level.spotlight_override_pos;
     }
 
@@ -4415,7 +4304,7 @@ gulag_spotlight_searches(ent, turret) {
 }
 
 print3dforever() {
-  for(;;) {
+  for (;;) {
     Print3d(self.origin, ".", (0, 1, 0), 1, 1, 20);
     wait(0.05);
   }
@@ -4427,12 +4316,10 @@ catwalk_spawner() {
 
   ai = GetAIArray("axis");
   foreach(guy in ai) {
-    if(guy == self) {
+    if(guy == self)
       continue;
-    }
-    if(!guy IsTouching(volume)) {
+    if(!guy IsTouching(volume))
       continue;
-    }
 
     time = RandomFloatRange(0.5, 1.5);
     guy delayCall(time, ::Kill);
@@ -4445,10 +4332,12 @@ get_global_fx(name) {
 }
 
 insure_player_has_enemies_to_fight_for_door_sequence() {
+  /#
   flag_assert("open_cell_door2");
+  # /
 
-  level endon("open_cell_door2");
-  spawners = getEntArray("close_fighter_spawner", "targetname");
+    level endon("open_cell_door2");
+  spawners = GetEntArray("close_fighter_spawner", "targetname");
   vol = GetEnt("door_guys_fight_vol", "targetname");
 
   vol waittill_volume_dead();
@@ -4484,12 +4373,10 @@ lower_cellblock_enemies_retreat_and_delete() {
   node = GetNode("cells_last_flee_node", "targetname");
   ai = GetAIArray("axis");
   foreach(guy in ai) {
-    if(!isDefined(guy.script_goalvolume)) {
+    if(!isdefined(guy.script_goalvolume))
       continue;
-    }
-    if(guy.script_goalvolume == "cells_north") {
+    if(guy.script_goalvolume == "cells_north")
       guy thread go_to_node_and_delete(node);
-    }
   }
 }
 
@@ -4509,7 +4396,7 @@ player_riotshield_threatbias() {
 
   thread modulate_player_attacker_accuracy_for_armory();
 
-  for(;;) {
+  for (;;) {
     if(level.player GetCurrentWeapon() == "riotshield") {
       level.player.threatbias = bias + 1000;
       thread accurate_vs_nearest_baddie();
@@ -4523,12 +4410,11 @@ player_riotshield_threatbias() {
 
 accurate_vs_nearest_baddie() {
   level.player endon("weapon_change");
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
     guy = getClosest(level.player.origin, ai, 700);
-    if(IsAlive(guy)) {
+    if(IsAlive(guy))
       guy thread high_attacker_accuracy();
-    }
     wait(1);
   }
 }
@@ -4558,16 +4444,14 @@ modulate_player_attacker_accuracy_for_armory() {
 
 change_accuracy_while_in_armory() {
   level endon("run_from_armory");
-  if(flag("run_from_armory")) {
+  if(flag("run_from_armory"))
     return;
-  }
 
-  for(;;) {
+  for (;;) {
     level.player waittill("weapon_change");
 
-    if(level.player GetCurrentWeapon() != "riotshield") {
+    if(level.player GetCurrentWeapon() != "riotshield")
       continue;
-    }
 
     anim.shootEnemyWrapper_func = ::shootWrapper_playerRiotshield;
 
@@ -4583,12 +4467,10 @@ change_accuracy_while_in_armory() {
 }
 
 shootWrapper_playerRiotshield() {
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return;
-  }
-  if(!isalive(level.player)) {
+  if(!isalive(level.player))
     return;
-  }
 
   dotrange = [];
   dotrange[0] = 0.85;
@@ -4599,9 +4481,9 @@ shootWrapper_playerRiotshield() {
 
   if(self.enemy == level.player) {
     angles = level.player GetPlayerAngles();
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     vec = VectorToAngles(self.origin - level.player.origin);
-    vec_forward = anglesToForward(vec);
+    vec_forward = AnglesToForward(vec);
 
     if(VectorDot(forward, vec_forward) >= dot_limit) {
       // guys in front of you get full accuracy but hit the shield
@@ -4616,9 +4498,8 @@ shootWrapper_playerRiotshield() {
 }
 
 clear_rioter() {
-  if(!isDefined(self.rioter)) {
+  if(!isdefined(self.rioter))
     return;
-  }
 
   self.disableBulletWhizbyReaction = false;
 
@@ -4660,23 +4541,20 @@ hallway_hider_spawner() {
 
   wait_for_player_sweeps_cells();
 
-  if(!self.saw_player && !self.stays_alive) {
+  if(!self.saw_player && !self.stays_alive)
     self Delete();
-  }
 
   self.goalradius = radius; // move to node
 }
 
 wait_for_player_sweeps_cells() {
   level endon("lets_sweep_the_nvg_cells");
-  if(flag("lets_sweep_the_nvg_cells")) {
+  if(flag("lets_sweep_the_nvg_cells"))
     return;
-  }
 
-  for(;;) {
-    if(self CanSee(level.player)) {
+  for (;;) {
+    if(self CanSee(level.player))
       break;
-    }
     wait(0.05);
   }
   self.saw_player = true;
@@ -4705,20 +4583,19 @@ friendlies_move_up_through_cells() {
 }
 
 friendlies_check_each_cell() {
-  if(flag("nvg_leave_cellarea")) {
+  if(flag("nvg_leave_cellarea"))
     return;
-  }
   level endon("nvg_leave_cellarea");
 
   level.nvg_hall_flags = [];
   level.clear_callout_index = 0;
   run_thread_on_targetname("friendly_clears_cell_trigger", ::friendly_clears_cell_trigger);
 
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.index = 1;
   struct thread constantly_activates_trigger();
 
-  for(;;) {
+  for (;;) {
     // struct activates the trigger constantly so that friendlies fill in the holes
 
     flag_wait("nvg_moveup" + struct.index);
@@ -4733,7 +4610,7 @@ friendlies_check_each_cell() {
 constantly_activates_trigger() {
   level endon("nvg_leave_cellarea");
   self endon("stop");
-  for(;;) {
+  for (;;) {
     activate_trigger_with_targetname("friendly_nvg_cell_hall_moveup" + self.index);
     wait(0.5);
   }
@@ -4743,36 +4620,32 @@ guy_follows_nvg_node_chain(node) {
   self endon("death");
   level endon("stop_following_node_chain");
 
-  if(flag("nvg_leave_cellarea")) {
+  if(flag("nvg_leave_cellarea"))
     return;
-  }
   level endon("nvg_leave_cellarea");
 
   self disable_ai_color();
-  for(;;) {
+  for (;;) {
     self setgoalnode(node);
     flag_wait(node.script_flag);
-    if(!isDefined(node.target)) {
+    if(!isdefined(node.target))
       return;
-    }
 
     node = getnode(node.target, "targetname");
   }
 }
 
 friendly_clears_cell_trigger() {
-  if(flag("nvg_leave_cellarea")) {
+  if(flag("nvg_leave_cellarea"))
     return;
-  }
   level endon("nvg_leave_cellarea");
 
   // friendly touches a trigger then clears the bad guy in the volume and yells "clear" then sets a flag to move up
   // if multiple triggers share the same flag, both must be cleared before moving up
 
   myFlag = self.script_flag;
-  if(!isDefined(level.nvg_hall_flags[myFlag])) {
+  if(!isdefined(level.nvg_hall_flags[myFlag]))
     level.nvg_hall_flags[myFlag] = 0;
-  }
 
   level.nvg_hall_flags[myFlag]++;
   volume = GetEnt(self.target, "targetname");
@@ -4780,23 +4653,22 @@ friendly_clears_cell_trigger() {
 
   found_enemy = undefined;
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
 
-    if(isDefined(node)) {
+    if(isdefined(node)) {
       other thread guy_follows_nvg_node_chain(node);
     }
 
-    if(isDefined(other.node) && isDefined(other.node.radius)) {
+    if(isdefined(other.node) && isdefined(other.node.radius)) {
       // low visibility so we dont get shot by the wrong guys
       other.maxvisibledist = other.node.radius;
     }
 
     found_enemy = volume waittill_volume_dead_or_dying();
 
-    if(IsAlive(other) && other IsTouching(self)) {
+    if(IsAlive(other) && other IsTouching(self))
       break;
-    }
   }
 
   clear_callouts = [];
@@ -4825,7 +4697,7 @@ friendly_clears_cell_trigger() {
   level.nvg_hall_flags[myFlag]--;
   if(!level.nvg_hall_flags[myFlag]) {
     // if both sides are cleared, we can move up now
-    // nvg_moveup1, nvg_moveup2, nvg_moveup3, nvg_moveup4
+    // nvg_moveup1, nvg_moveup2, nvg_moveup3, nvg_moveup4 
     flag_set(myFlag);
   }
 }
@@ -4842,7 +4714,7 @@ nvg_hallway_fight() {
   flag_wait("nvg_enemy_flag");
   wait(1.5);
   vol = GetEnt("nvg_vol", "targetname");
-  for(;;) {
+  for (;;) {
     vol waittill_volume_dead_or_dying();
     wait(2.8);
 
@@ -4850,18 +4722,16 @@ nvg_hallway_fight() {
     wait_for_buffer_time_to_pass(anim.lastTeamSpeakTime["axis"], 2.5);
 
     hostiles = vol get_ai_touching_volume("axis");
-    if(!hostiles.size) {
+    if(!hostiles.size)
       break;
-    }
   }
 
   flag_set("checking_to_sweep_cells");
   axis = GetAIArray("axis");
   remaining_guys = [];
   foreach(guy in axis) {
-    if(isDefined(guy.hallway_hider)) {
+    if(IsDefined(guy.hallway_hider))
       continue;
-    }
     guy ClearGoalVolume();
     guy SetGoalPos(level.soap.origin);
     guy.combatmode = "no_cover";
@@ -4887,16 +4757,14 @@ nvg_hallway_fight() {
   level.hallway_hiders = array_randomize(level.hallway_hiders);
 
   foreach(guy in level.hallway_hiders) {
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
 
     // some guys are randomly assigned to stay alive
     guy.stays_alive = true;
     hider_count--;
-    if(!hider_count) {
+    if(!hider_count)
       break;
-    }
   }
 
   delaythread(1.5, ::flag_set, "lets_sweep_the_nvg_cells");
@@ -4915,15 +4783,13 @@ kill_all_axis_now() {
 }
 
 riot_shield_detector_think() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
 
-    if(IsSubStr(other.classname, "riot")) {
+    if(IsSubStr(other.classname, "riot"))
       break;
-    }
   }
 
   wait(2.5);
@@ -4932,6 +4798,7 @@ riot_shield_detector_think() {
 
   // Cook your grenades to detonate behind them!	
   level.soap dialogue_queue("gulag_cmt_cookgrenades");
+
 }
 
 player_gets_hud_back() {
@@ -4949,7 +4816,7 @@ gulag_player_snipes() {
 
 gulag_landing_update_entities() {
   flag_wait("player_lands");
-  gulag_top_gates = getEntArray("gulag_top_gate", "targetname");
+  gulag_top_gates = GetEntArray("gulag_top_gate", "targetname");
   array_call(gulag_top_gates, ::Solid);
   array_call(gulag_top_gates, ::Show);
 
@@ -4971,9 +4838,8 @@ gulag_landing_update_entities() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(guy.baseaccuracy > 2) {
+    if(guy.baseaccuracy > 2)
       guy.baseaccuracy = 2;
-    }
   }
 }
 
@@ -5024,7 +4890,7 @@ price_breach_dof() {
   dof_see_soap["farBlur"] = 4;
 
   // control our blend with this origin;
-  ent = spawn("script_origin", (0, 0, 0));
+  ent = Spawn("script_origin", (0, 0, 0));
   ent.origin = (65, 0, 0);
   ent thread set_fov_from_x();
 
@@ -5062,6 +4928,7 @@ price_breach_dof() {
   flag_wait("background_explosion");
 
   blend_dof(dof_see_soap, start, 1);
+
 }
 
 ent_blends_out_fov() {
@@ -5078,7 +4945,7 @@ ent_blends_out_fov() {
 
 set_fov_from_x() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     SetSavedDvar("cg_fov", self.origin[0]);
     wait(0.05);
   }
@@ -5102,15 +4969,13 @@ sewer_slide_trigger() {
   targets = getstructarray(self.target, "targetname");
   targets = array_index_by_script_index(targets);
   index = 0;
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
 
-    if(!first_touch(other)) {
+    if(!first_touch(other))
       continue;
-    }
 
     org = targets[index];
     index++;
@@ -5135,14 +5000,14 @@ ai_field_blocker() {
 }
 
 lasers_scan_armory() {
-  model = spawn("script_model", (0, 0, 0));
+  model = Spawn("script_model", (0, 0, 0));
   model.origin = self.origin;
-  model setModel("tag_laser");
+  model SetModel("tag_laser");
   model thread laser_scans_armory(self.target);
 }
 
 laser_scans_armory(target) {
-  dest = spawn("script_origin", (0, 0, 0));
+  dest = Spawn("script_origin", (0, 0, 0));
   thread draw_laser_line(dest);
 
   dest thread laser_jitters();
@@ -5164,7 +5029,7 @@ laser_jitters() {
   self endon("stop_jitter");
   org = self.origin;
 
-  for(;;) {
+  for (;;) {
     neworg = org + randomvector(30);
     movetime = RandomFloatRange(0.5, 0.75);
     self MoveTo(neworg, movetime);
@@ -5180,7 +5045,7 @@ draw_laser_line(dest) {
   wait(0.05);
   self.angles = VectorToAngles(dest.origin - self.origin);
   wait(0.05);
-  for(;;) {
+  for (;;) {
     self RotateTo(VectorToAngles(dest.origin - self.origin), 0.1);
     //		Line( self.origin, dest.origin, (0,1,0) );
 
@@ -5216,30 +5081,29 @@ intro_heli_treadfx() {
   start_time = GetTime();
   self endon("death");
   level endon("stop_special_treadfx");
-  if(!isDefined(level.skip_treadfx)) {
+  if(!isdefined(level.skip_treadfx))
     return;
-  }
 
   fx = level._vehicle_effect[self.vehicletype]["water"];
 
-  for(;;) {
+  for (;;) {
     //angles = self.angles;
     //angles = ( 0, angles[1], 0 );
-    //forward = anglesToForward( self.angles );
+    //forward = AnglesToForward( self.angles );
     //up = AnglesToUp( self.angles );
     //start = self.origin + forward * 500 + up * -500;
     //end = self.origin + forward * 7000 + up * -3000;
     start = self.origin + (0, 0, -500);
     end = self.origin + (0, 0, -5000);
-    trace = bulletTrace(start, end, false, self);
+    trace = BulletTrace(start, end, false, self);
     //Line( start, end );
 
     pos = trace["position"];
 
-    if(isDefined(pos)) {
+    if(IsDefined(pos)) {
       trace_dist = Distance(start, pos);
       if(trace_dist < 1200) {
-        playFX(fx, pos);
+        PlayFX(fx, pos);
         printpos(trace["surfacetype"], pos, start_time);
       }
     }
@@ -5248,12 +5112,10 @@ intro_heli_treadfx() {
 }
 
 printpos(surface, pos, start_time) {
-  if(!isDefined(surface)) {
+  if(!isdefined(surface))
     return;
-  }
-  if(surface != "water" && surface != "ice") {
+  if(surface != "water" && surface != "ice")
     return;
-  }
 
   time = GetTime() * 0.001;
   PrintLn("	add_waterfx( " + time + ", " + pos + " );");
@@ -5266,17 +5128,17 @@ add_waterfx(time, pos) {
   time *= 1000;
 
   remainder = time - GetTime();
-  if(remainder > 0) {
+  if(remainder > 0)
     wait(remainder * 0.001);
-  }
 
-  playFX(level.special_water_fx, pos);
+  PlayFX(level.special_water_fx, pos);
   //Print3d( pos, "x", (1,0,0), 1, 5, 100 );
 }
 
 draw_waterfx() {
   level.special_water_fx = level._vehicle_effect["littlebird"]["water"];
   maps\gulag_water_fx::load_waterfx();
+
 }
 
 kill_slide_trigger() {
@@ -5288,19 +5150,17 @@ kill_slide_trigger() {
 }
 
 low_health_destructible() {
-  if(self.code_classname != "script_model") {
+  if(self.code_classname != "script_model")
     return;
-  }
   thread part_blows_up_early();
 }
 
 part_blows_up_early() {
   self waittill("damage");
   count = 0;
-  for(;;) {
-    if(!isDefined(self.destructible_parts)) {
+  for (;;) {
+    if(!isdefined(self.destructible_parts))
       return;
-    }
     self DoDamage(500, self.origin, level.player);
     //self.destructible_parts[0].v["health"] = 1;
     waittillframeend;
@@ -5312,10 +5172,12 @@ part_blows_up_early() {
   }
 }
 
-flyby_earthquake() {}
+flyby_earthquake() {
+
+}
 
 landing_blocker_think() {
-  landing_blockers = getEntArray("landing_blocker", "targetname");
+  landing_blockers = GetEntArray("landing_blocker", "targetname");
   foreach(blocker in landing_blockers) {
     blocker ConnectPaths();
     blocker NotSolid();
@@ -5352,22 +5214,20 @@ ghost_uses_laptop() {
 }
 
 teleport_ghost_to_laptop_if_possible() {
-  if(flag("ghost_uses_laptop")) {
+  if(flag("ghost_uses_laptop"))
     return;
-  }
   level endon("ghost_uses_laptop");
 
   struct = getstruct("ghost_teleport_look_target_struct", "targetname");
 
-  for(;;) {
-    if(!player_looking_at(struct.origin, 0.7, true)) {
+  for (;;) {
+    if(!player_looking_at(struct.origin, 0.7, true))
       break;
-    }
 
     wait(0.05);
   }
 
-  AssertEx(isDefined(level.ghost.goalpos), "no ghost goalpos");
+  AssertEx(IsDefined(level.ghost.goalpos), "no ghost goalpos");
   level.ghost Teleport(level.ghost.goalpos);
 }
 
@@ -5388,47 +5248,43 @@ dies_fast_to_explosive() {
 }
 
 die_fast_to_explosive_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isDefined(type)) {
+  if(!isdefined(type))
     return;
-  }
-  if(type != "MOD_TRIGGER_HURT") {
+  if(type != "MOD_TRIGGER_HURT")
     return;
-  }
   self DoDamage(50, point, attacker, attacker);
 }
 
 bloody_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
   angles = direction_vec; // + ( 0, 180, 0 );
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
 
   fx = getfx("headshot");
-  playFX(fx, point, forward, up);
+  PlayFX(fx, point, forward, up);
   //	Line( point, point + forward * 500, (1,0,0), 1, 1, 5000 );
 }
 
 friendlies_traverse_bathroom() {
-  if(flag("player_exited_bathroom")) {
+  if(flag("player_exited_bathroom"))
     return;
-  }
-  if(flag("leaving_bathroom_vol2")) {
+  if(flag("leaving_bathroom_vol2"))
     return;
-  }
 
   level endon("player_exited_bathroom");
   level endon("leaving_bathroom_vol2");
 
   level.old_bathroom_index = -1;
 
-  volumes = getEntArray("bathroom_enemy_volume", "targetname");
+  volumes = GetEntArray("bathroom_enemy_volume", "targetname");
   volumes = array_index_by_script_index(volumes);
   foreach(volume in volumes) {
     volume.friendly_trigger = GetEnt(volume.target, "targetname");
   }
 
-  for(;;) {
+  for (;;) {
     axis = GetAIArray("axis");
-    for(i = 0; i < volumes.size; i++) {
+    for (i = 0; i < volumes.size; i++) {
       volume = volumes[i];
       if(volume array_member_touches(axis)) {
         if(volume.script_index != level.old_bathroom_index) {
@@ -5446,25 +5302,21 @@ friendlies_traverse_bathroom() {
 }
 
 array_member_touches(array) {
-  parms = isDefined(self.script_parameters);
+  parms = IsDefined(self.script_parameters);
 
   foreach(member in array) {
-    if(!isalive(member)) {
+    if(!isalive(member))
       continue;
-    }
-    if(member doingLongDeath()) {
+    if(member doingLongDeath())
       continue;
-    }
     if(parms) {
       // if the volume has parameters, the member's classname must have the parms as a substr
       // so we'll flee riotshield guys
-      if(!issubstr(member.classname, self.script_parameters)) {
+      if(!issubstr(member.classname, self.script_parameters))
         continue;
-      }
     }
-    if(member IsTouching(self)) {
+    if(member IsTouching(self))
       return true;
-    }
   }
   return false;
 }
@@ -5489,7 +5341,7 @@ enemies_attack_friendlies_in_armory_first_wave() {
 enemies_attack_friendlies_in_armory_second_wave() {
   array_spawn_targetname("cellblock_armory_second_wave_spawner");
 
-  cellblock_armory_attacker_spawners = getEntArray("cellblock_armory_attacker_spawner", "targetname");
+  cellblock_armory_attacker_spawners = GetEntArray("cellblock_armory_attacker_spawner", "targetname");
   array_thread(cellblock_armory_attacker_spawners, ::spawn_ai);
 }
 
@@ -5497,9 +5349,8 @@ friendlies_grab_riotshields() {
   level.riotshield_friendlies = [];
   ai = GetAIArray();
   foreach(guy in ai) {
-    if(!isDefined(guy.armory)) {
+    if(!isdefined(guy.armory))
       continue;
-    }
 
     guy thread guy_gets_riotshield();
     level.riotshield_friendlies[level.riotshield_friendlies.size] = guy;
@@ -5507,12 +5358,11 @@ friendlies_grab_riotshields() {
 }
 
 wait_until_first_wave_ends() {
-  if(flag("cellblock_first_wave")) {
+  if(flag("cellblock_first_wave"))
     return;
-  }
   level endon("cellblock_first_wave");
 
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent delaythread(35, ::send_notify, "stop");
   ent endon("stop");
 
@@ -5521,7 +5371,7 @@ wait_until_first_wave_ends() {
     guy disable_long_death();
   }
 
-  for(;;) {
+  for (;;) {
     ai = getaiarray("axis");
     if(ai.size <= 2) {
       return;
@@ -5539,19 +5389,17 @@ player_riotshield_nag() {
 
   index = 0;
 
-  for(;;) {
-    if(player_has_weapon("riotshield")) {
+  for (;;) {
+    if(player_has_weapon("riotshield"))
       return;
-    }
 
     msg = lines[index];
     index++;
 
     level.soap thread dialogue_queue(msg);
 
-    if(index >= lines.size) {
+    if(index >= lines.size)
       return;
-    }
 
     timer = randomfloatrange(4, 5);
     wait(timer);
@@ -5559,12 +5407,10 @@ player_riotshield_nag() {
 }
 
 armory_roach_is_down() {
-  if(!isalive(level.player)) {
+  if(!isalive(level.player))
     return;
-  }
-  if(!isalive(level.soap)) {
+  if(!isalive(level.soap))
     return;
-  }
 
   level.soap endon("death");
   lines = [];
@@ -5585,22 +5431,20 @@ player_riotshield_bash_hint() {
   notifyOnCommand("player_did_melee", "+melee");
 
   thread detect_draw_hint();
-  for(;;) {
+  for (;;) {
     level.player waittill("player_did_melee");
-    if(player_current_weapon("riotshield")) {
+    if(player_current_weapon("riotshield"))
       flag_set("player_learned_melee_bash");
-    }
   }
 }
 
 detect_draw_hint() {
-  for(;;) {
+  for (;;) {
     if(player_current_weapon("riotshield")) {
       ai = getaiarray("axis");
       foreach(guy in ai) {
-        if(!isalive(guy)) {
+        if(!isalive(guy))
           continue;
-        }
 
         if(distance(guy.origin, level.player.origin) < 250) {
           display_hint("riot_bash");
@@ -5614,9 +5458,8 @@ detect_draw_hint() {
 }
 
 stop_bash_hint() {
-  if(!player_current_weapon("riotshield")) {
+  if(!player_current_weapon("riotshield"))
     return true;
-  }
 
   return flag("player_learned_melee_bash");
 }
@@ -5637,30 +5480,26 @@ throw_flash_trigger() {
   node = getnode(throw_flash_trigger.target, "targetname");
 
   throw_flash_trigger waittill("trigger", other);
-  if(!isalive(other)) {
+  if(!isalive(other))
     return;
-  }
   other endon("death");
   wait(2);
-  for(;;) {
+  for (;;) {
     dist = distance(other.origin, node.origin);
-    if(dist < 8) {
+    if(dist < 8)
       break;
-    }
-    if(dist > 250) {
+    if(dist > 250)
       return;
-    }
     wait(0.05);
   }
 
   ai = getaiarray("axis");
   volume = GetEnt("tunnel_pre_hallway_volume", "targetname");
-  if(!volume array_touches_self(ai)) {
+  if(!volume array_touches_self(ai))
     return;
-  }
 
   other.allowdeath = true;
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.origin = node.origin;
   struct.angles = node.angles + (0, -90, 0);
   struct anim_generic(other, "grenade_throw");
@@ -5670,9 +5509,8 @@ throw_flash_trigger() {
 
 array_touches_self(array) {
   foreach(guy in array) {
-    if(guy istouching(self)) {
+    if(guy istouching(self))
       return true;
-    }
   }
 
   return false;
@@ -5680,9 +5518,8 @@ array_touches_self(array) {
 
 move_on_pipe() {
   self endon("death");
-  if(isDefined(self.node)) {
+  if(isdefined(self.node))
     self.node script_delay();
-  }
 
   self.fixednode = false;
   self anim_stopanimscripted();
@@ -5691,9 +5528,8 @@ move_on_pipe() {
 }
 
 old_soap() {
-  if(!getdvarint("soap")) {
+  if(!getdvarint("soap"))
     return;
-  }
 
   wait(2.7);
 
@@ -5714,17 +5550,15 @@ no_grenades() {
 }
 
 remove_nearby_origins(orgs, min_dist) {
-  for(i = 0; i < orgs.size; i++) {
-    if(!isDefined(orgs[i])) {
+  for (i = 0; i < orgs.size; i++) {
+    if(!isdefined(orgs[i]))
       continue;
-    }
 
     origin = orgs[i];
 
-    for(p = 0; p < orgs.size; p++) {
-      if(!isDefined(orgs[p])) {
+    for (p = 0; p < orgs.size; p++) {
+      if(!isdefined(orgs[p]))
         continue;
-      }
       other_origin = orgs[p];
 
       if(origin == other_origin) {
@@ -5745,7 +5579,7 @@ remove_nearby_origins(orgs, min_dist) {
 pa_system() {
   // run before _load so minimum extra entity overhead in case of entity limit
   orgs = [];
-  speakers = getEntArray("pa_speaker", "targetname");
+  speakers = getentarray("pa_speaker", "targetname");
 
   // only need the origin, so delete the ent
   foreach(speaker in speakers) {
@@ -5839,21 +5673,20 @@ pa_system() {
 }
 
 pa_broadcast(alias) {
-  eyepos = level.player getEye();
+  eyepos = level.player geteye();
 
   dist = 500000;
   org = undefined;
   foreach(origin in level.pa_broadcast_orgs) {
     newdist = Distance(origin, eyepos);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
 
     dist = newdist;
     org = origin;
   }
 
-  assertex(isDefined(org), "no org!");
+  assertex(isdefined(org), "no org!");
   play_sound_in_space(alias, org);
 }
 

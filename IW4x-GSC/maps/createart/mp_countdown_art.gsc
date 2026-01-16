@@ -3,7 +3,9 @@
  * Script: maps\createart\mp_countdown_art.gsc
 ***********************************************/
 
+//_createart generated.modify at your own risk. Changing values should be fine.
 main() {
+
   level.tweakfile = true;
 
   setdvar("scr_fog_exp_halfplane", "8193");

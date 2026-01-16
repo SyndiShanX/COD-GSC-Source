@@ -221,7 +221,7 @@ church_bells() {
   while(true) {
     level waittill("chc_bls");
     wait 2;
-    playSound(0, "amb_church_bells", (-4144, -1455, 2635));
+    playsound(0, "amb_church_bells", (-4144, -1455, 2635));
   }
 }
 
@@ -232,7 +232,7 @@ hallwaysnap() {
 masonintrosnapandloop() {
   snd_set_snapshot("spl_nica_mason_intro");
   ent = spawn(0, (0, 0, 0), "script_origin");
-  ent playLoopSound("evt_mason_fake_amb_front", 3);
+  ent playloopsound("evt_mason_fake_amb_front", 3);
   level waittill("stopIntroSnap");
   snd_set_snapshot("default");
   ent stoploopsound(14);
@@ -249,7 +249,7 @@ levelintrosnapandloop() {
   wait 7;
   snd_set_snapshot("spl_nica_intro");
   ent = spawn(0, (0, 0, 0), "script_origin");
-  ent playLoopSound("evt_mason_fake_amb_front", 1.75);
+  ent playloopsound("evt_mason_fake_amb_front", 1.75);
   level waittill("stopLevelIntroSnap");
   snd_set_snapshot("spl_nica_transition");
   ent delete();

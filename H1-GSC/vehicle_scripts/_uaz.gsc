@@ -65,9 +65,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 6; var_1++) {
-    var_0[var_1] = spawnStruct();
-  }
+  for (var_1 = 0; var_1 < 6; var_1++)
+    var_0[var_1] = spawnstruct();
 
   var_0[0].sittag = "tag_driver";
   var_0[1].sittag = "tag_passenger";

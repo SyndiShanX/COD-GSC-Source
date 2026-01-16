@@ -12,14 +12,14 @@ function autoexec main() {
   fxbundles = struct::get_script_bundles("fxcharacterdef");
   processedfxbundles = [];
   foreach(fxbundlename, fxbundle in fxbundles) {
-    processedfxbundle = spawnStruct();
+    processedfxbundle = spawnstruct();
     processedfxbundle.effectcount = fxbundle.effectcount;
     processedfxbundle.fx = [];
     processedfxbundle.name = fxbundlename;
-    for(index = 1; index <= fxbundle.effectcount; index++) {
+    for (index = 1; index <= fxbundle.effectcount; index++) {
       fx = getstructfield(fxbundle, ("effect" + index) + "_fx");
-      if(isDefined(fx)) {
-        fxstruct = spawnStruct();
+      if(isdefined(fx)) {
+        fxstruct = spawnstruct();
         fxstruct.attachtag = getstructfield(fxbundle, ("effect" + index) + "_attachtag");
         fxstruct.fx = getstructfield(fxbundle, ("effect" + index) + "_fx");
         fxstruct.stopongib = fxclientutils::_gibpartnametogibflag(getstructfield(fxbundle, ("effect" + index) + "_stopongib"));
@@ -35,26 +35,26 @@ function autoexec main() {
 #namespace fxclientutils;
 
 function private _configentity(localclientnum, entity) {
-  if(!isDefined(entity._fxcharacter)) {
+  if(!isdefined(entity._fxcharacter)) {
     entity._fxcharacter = [];
     handledgibs = array(8, 16, 32, 128, 256);
     foreach(gibflag in handledgibs) {
-      gibclientutils::addgibcallback(localclientnum, entity, gibflag, &_gibhandler);
+      gibclientutils::addgibcallback(localclientnum, entity, gibflag, & _gibhandler);
     }
-    for(index = 1; index <= 20; index++) {
-      destructclientutils::adddestructpiececallback(localclientnum, entity, index, &_destructhandler);
+    for (index = 1; index <= 20; index++) {
+      destructclientutils::adddestructpiececallback(localclientnum, entity, index, & _destructhandler);
     }
   }
 }
 
 function private _destructhandler(localclientnum, entity, piecenumber) {
-  if(!isDefined(entity._fxcharacter)) {
+  if(!isdefined(entity._fxcharacter)) {
     return;
   }
   foreach(fxbundlename, fxbundleinst in entity._fxcharacter) {
     fxbundle = struct::get_script_bundle("fxcharacterdef", fxbundlename);
-    for(index = 0; index < fxbundle.fx.size; index++) {
-      if(isDefined(fxbundleinst[index]) && fxbundle.fx[index].stoponpiecedestroyed === piecenumber) {
+    for (index = 0; index < fxbundle.fx.size; index++) {
+      if(isdefined(fxbundleinst[index]) && fxbundle.fx[index].stoponpiecedestroyed === piecenumber) {
         stopfx(localclientnum, fxbundleinst[index]);
         fxbundleinst[index] = undefined;
       }
@@ -63,13 +63,13 @@ function private _destructhandler(localclientnum, entity, piecenumber) {
 }
 
 function private _gibhandler(localclientnum, entity, gibflag) {
-  if(!isDefined(entity._fxcharacter)) {
+  if(!isdefined(entity._fxcharacter)) {
     return;
   }
   foreach(fxbundlename, fxbundleinst in entity._fxcharacter) {
     fxbundle = struct::get_script_bundle("fxcharacterdef", fxbundlename);
-    for(index = 0; index < fxbundle.fx.size; index++) {
-      if(isDefined(fxbundleinst[index]) && fxbundle.fx[index].stopongib === gibflag) {
+    for (index = 0; index < fxbundle.fx.size; index++) {
+      if(isdefined(fxbundleinst[index]) && fxbundle.fx[index].stopongib === gibflag) {
         stopfx(localclientnum, fxbundleinst[index]);
         fxbundleinst[index] = undefined;
       }
@@ -78,7 +78,7 @@ function private _gibhandler(localclientnum, entity, gibflag) {
 }
 
 function private _gibpartnametogibflag(gibpartname) {
-  if(isDefined(gibpartname)) {
+  if(isdefined(gibpartname)) {
     switch (gibpartname) {
       case "head": {
         return 8;
@@ -100,20 +100,20 @@ function private _gibpartnametogibflag(gibpartname) {
 }
 
 function private _isgibbed(localclientnum, entity, stopongibflag) {
-  if(!isDefined(stopongibflag)) {
+  if(!isdefined(stopongibflag)) {
     return 0;
   }
   return gibclientutils::isgibbed(localclientnum, entity, stopongibflag);
 }
 
 function private _ispiecedestructed(localclientnum, entity, stoponpiecedestroyed) {
-  if(!isDefined(stoponpiecedestroyed)) {
+  if(!isdefined(stoponpiecedestroyed)) {
     return 0;
   }
   return destructclientutils::ispiecedestructed(localclientnum, entity, stoponpiecedestroyed);
 }
 
-function private _shouldplayFX(localclientnum, entity, fxstruct) {
+function private _shouldplayfx(localclientnum, entity, fxstruct) {
   if(_isgibbed(localclientnum, entity, fxstruct.stopongib)) {
     return false;
   }
@@ -124,19 +124,19 @@ function private _shouldplayFX(localclientnum, entity, fxstruct) {
 }
 
 function playfxbundle(localclientnum, entity, fxscriptbundle) {
-  if(!isDefined(fxscriptbundle)) {
+  if(!isdefined(fxscriptbundle)) {
     return;
   }
   _configentity(localclientnum, entity);
   fxbundle = struct::get_script_bundle("fxcharacterdef", fxscriptbundle);
-  if(isDefined(entity._fxcharacter[fxbundle.name])) {
+  if(isdefined(entity._fxcharacter[fxbundle.name])) {
     return;
   }
-  if(isDefined(fxbundle)) {
+  if(isdefined(fxbundle)) {
     playingfx = [];
-    for(index = 0; index < fxbundle.fx.size; index++) {
+    for (index = 0; index < fxbundle.fx.size; index++) {
       fxstruct = fxbundle.fx[index];
-      if(_shouldplayFX(localclientnum, entity, fxstruct)) {
+      if(_shouldplayfx(localclientnum, entity, fxstruct)) {
         playingfx[index] = gibclientutils::_playgibfx(localclientnum, entity, fxstruct.fx, fxstruct.attachtag);
       }
     }
@@ -158,14 +158,14 @@ function stopallfxbundles(localclientnum, entity) {
 }
 
 function stopfxbundle(localclientnum, entity, fxscriptbundle) {
-  if(!isDefined(fxscriptbundle)) {
+  if(!isdefined(fxscriptbundle)) {
     return;
   }
   _configentity(localclientnum, entity);
   fxbundle = struct::get_script_bundle("fxcharacterdef", fxscriptbundle);
-  if(isDefined(entity._fxcharacter[fxbundle.name])) {
+  if(isdefined(entity._fxcharacter[fxbundle.name])) {
     foreach(fx in entity._fxcharacter[fxbundle.name]) {
-      if(isDefined(fx)) {
+      if(isdefined(fx)) {
         stopfx(localclientnum, fx);
       }
     }

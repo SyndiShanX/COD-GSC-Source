@@ -26,9 +26,8 @@ main() {
   missionSettings add_level("oki3", false, "", true, "OKI3_VETERAN_ACHIEVEMENT", "OKINAWA_ACHIEVEMENT", true);
   missionSettings add_level("ber3", false, "", true, "BER3_VETERAN_ACHIEVEMENT", "BERLIN_ACHIEVEMENT", true);
   missionSettings add_level("ber3b", false, "", true, "BER3B_VETERAN_ACHIEVEMENT", "BERLIN_ACHIEVEMENT", true);
-  if(!is_german_build()) {
+  if(!is_german_build())
     missionSettings add_level("outro", false);
-  }
   missionSettings add_level("credits", false);
   level.missionSettings = missionSettings;
 }
@@ -36,7 +35,7 @@ main() {
 _nextmission() {
   level.nextmission = true;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] player_is_in_laststand()) {
       players[i] notify("player_revived");
       setClientSysState("lsm", "0", players[i]);
@@ -90,7 +89,7 @@ _nextmission() {
     if(players.size == 4) {
       highest_score = -99999;
       highest = 0;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i].score > highest_score) {
           highest = i;
           highest_score = players[i].score;
@@ -99,7 +98,7 @@ _nextmission() {
       players[highest] giveachievement_wrapper("COOP_ACHIEVEMENT_HIGHSCORE", false);
     }
   }
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     weaps = [];
     weaps[0] = "m2_flamethrower";
     weaps[1] = "m2_flamethrower_wet";
@@ -125,7 +124,7 @@ _nextmission() {
   nextlevel_index = level_index + 1;
   if(coopGame()) {
     found = false;
-    for(; nextlevel_index < level.missionSettings.levels.size; nextlevel_index++) {
+    for (; nextlevel_index < level.missionSettings.levels.size; nextlevel_index++) {
       if(level.missionSettings get_coop(nextlevel_index)) {
         found = true;
         break;
@@ -136,11 +135,10 @@ _nextmission() {
       assert(nextlevel_index >= 0);
       assert(nextlevel_index < level.missionSettings.levels.size);
       if(IsSplitScreen()) {
-        if(!arcadeMode()) {
+        if(!arcadeMode())
           maps\_cooplogic::endGame();
-        } else {
+        else
           exitLevel(false);
-        }
         SetUINextLevel(level.missionSettings get_level_name(nextlevel_index));
         wait 1;
         return;
@@ -174,13 +172,11 @@ _nextmission() {
   if(!coopGame() && !IsSplitScreen()) {
     award = true;
     hardcore_award = true;
-    for(i = 0; i < level.missionSettings.levels.size; i++) {
-      if(level.missionSettings get_level_name(i) == "credits") {
+    for (i = 0; i < level.missionSettings.levels.size; i++) {
+      if(level.missionSettings get_level_name(i) == "credits")
         continue;
-      }
-      if(level.missionSettings get_level_name(i) == "outro") {
+      if(level.missionSettings get_level_name(i) == "outro")
         continue;
-      }
       if(level.missionSettings get_level_name(i) == "nazi_zombie_prototype") {
         continue;
       }
@@ -215,7 +211,7 @@ set_level_completed(level_index) {
   }
   newString = "";
   gameskill = level.gameskill;
-  for(index = 0; index < missionString.size; index++) {
+  for (index = 0; index < missionString.size; index++) {
     if(index != levelOffset) {
       newString += missionString[index];
     } else {
@@ -252,7 +248,7 @@ get_mission_dvar(missionIndex) {
 get_lowest_skill() {
   missionString = GetDvar("mis_difficulty");
   lowestSkill = 4;
-  for(index = 0; index < self.levels.size; index++) {
+  for (index = 0; index < self.levels.size; index++) {
     if(Int(missionString[index]) < lowestSkill) {
       lowestSkill = Int(missionString[index]);
     }
@@ -261,7 +257,7 @@ get_lowest_skill() {
 }
 
 create_mission(HardenedAward) {
-  mission = spawnStruct();
+  mission = SpawnStruct();
   mission.levels = [];
   mission.HardenedAward = HardenedAward;
   return (mission);
@@ -270,7 +266,7 @@ create_mission(HardenedAward) {
 add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement, campaign, coop) {
   assert(isDefined(keepweapons));
   level_index = self.levels.size;
-  self.levels[level_index] = spawnStruct();
+  self.levels[level_index] = SpawnStruct();
   self.levels[level_index].name = levelName;
   self.levels[level_index].keepWeapons = keepWeapons;
   self.levels[level_index].achievement = achievement;
@@ -281,7 +277,7 @@ add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement
 }
 
 get_level_index(levelName) {
-  for(i = 0; i < self.levels.size; i++) {
+  for (i = 0; i < self.levels.size; i++) {
     if(self.levels[i].name != levelName) {
       continue;
     }
@@ -326,7 +322,7 @@ is_campaign_complete(level_index) {
   campaign = self.levels[level_index].campaign;
   count = 0;
   complete_count = 0;
-  for(i = 0; i < self.levels.size; i++) {
+  for (i = 0; i < self.levels.size; i++) {
     if(i == level_index) {
       continue;
     }
@@ -349,20 +345,17 @@ get_campaign(level_index) {
 }
 
 get_coop(level_index) {
-  if(self get_level_name(level_index) == "credits") {
+  if(self get_level_name(level_index) == "credits")
     return false;
-  }
-  if(self get_level_name(level_index) == "outro") {
+  if(self get_level_name(level_index) == "outro")
     return false;
-  }
   return self.levels[level_index].coop;
 }
 
 get_first_coop_index() {
-  for(i = 0; i < level.missionSettings.levels.size; i++) {
-    if(self get_coop(i)) {
+  for (i = 0; i < level.missionSettings.levels.size; i++) {
+    if(self get_coop(i))
       return i;
-    }
   }
   return -1;
 }
@@ -376,7 +369,7 @@ has_campaign(level_index) {
 }
 
 check_other_hasLevelVeteranAchievement(level_index) {
-  for(i = 0; i < self.levels.size; i++) {
+  for (i = 0; i < self.levels.size; i++) {
     if(i == level_index) {
       continue;
     }
@@ -415,7 +408,7 @@ force_all_complete() {
   println("tada!");
   missionString = GetDvar("mis_difficulty");
   newString = "";
-  for(index = 0; index < missionString.size; index++) {
+  for (index = 0; index < missionString.size; index++) {
     if(index < 20) {
       newString += 2;
     } else {

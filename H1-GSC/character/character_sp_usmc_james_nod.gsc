@@ -5,7 +5,7 @@
 *****************************************************/
 
 main() {
-  self setModel("body_usmc_desert_assault_james");
+  self setmodel("body_usmc_desert_assault_james");
   self attach("head_usmc_desert_support_ryan_nv", "", 1);
   self.headmodel = "head_usmc_desert_support_ryan_nv";
   self.voice = "american";

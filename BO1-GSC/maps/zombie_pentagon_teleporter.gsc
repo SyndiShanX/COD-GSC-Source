@@ -58,13 +58,13 @@ pack_hideaway_init() {
     flag_wait("open_pack_hideaway");
     hideaway NotSolid();
     hideaway RotateYaw(180, 2.5);
-    hideaway playSound("evt_packapunch_revolve_start");
+    hideaway PlaySound("evt_packapunch_revolve_start");
     hideaway playLoopSound("evt_packapunch_revolve_loop");
     hideaway waittill("rotatedone");
     level.punch_trigger SetVisibleToAll();
     level.punch_trigger trigger_on();
     hideaway stopLoopSound(1);
-    hideaway playSound("evt_packapunch_revolve_end");
+    hideaway PlaySound("evt_packapunch_revolve_end");
     level.punch_sign Unlink();
     wait(40);
     if(flag("pack_machine_in_use")) {
@@ -79,13 +79,13 @@ pack_hideaway_init() {
       level.punch_trigger SetInvisibleToPlayer(players[i]);
     }
     hideaway RotateYaw(180, 2.5);
-    hideaway playSound("evt_packapunch_revolve_start");
+    hideaway PlaySound("evt_packapunch_revolve_start");
     hideaway playLoopSound("evt_packapunch_revolve_loop");
     flag_clear("open_pack_hideaway");
     wait_network_frame();
     hideaway waittill("rotatedone");
     hideaway stopLoopSound(1);
-    hideaway playSound("evt_packapunch_revolve_end");
+    hideaway PlaySound("evt_packapunch_revolve_end");
   }
 }
 
@@ -300,11 +300,11 @@ teleport_player(user) {
     desired_origin = destination.origin + stand_offset;
   }
   wait_network_frame();
-  playFX(level._effect["transporter_start"], user.origin);
+  PlayFX(level._effect["transporter_start"], user.origin);
   playsoundatposition("evt_teleporter_out", user.origin);
   user SetOrigin(desired_origin);
   user SetPlayerAngles(destination.angles);
-  playFX(level._effect["transporter_beam"], user.origin);
+  PlayFX(level._effect["transporter_beam"], user.origin);
   playsoundatposition("evt_teleporter_go", user.origin);
   wait(0.5);
   user enableweapons();
@@ -419,7 +419,7 @@ delete_zombie_noone_looking(how_close, verticle_only, need_to_see) {
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = anglesToForward(playerAngles);
+  playerForwardVec = AnglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();
@@ -443,16 +443,16 @@ open_portal_rooms() {
   war_room_screen_north = getEnt("war_room_screen_north", "targetname");
   war_room_screen_ramp = getEnt("war_room_screen_ramp", "targetname");
   flag_wait("power_on");
-  yellow_conf_screen playSound("evt_teleporter_door_short");
+  yellow_conf_screen PlaySound("evt_teleporter_door_short");
   yellow_conf_screen MoveZ(116, 1.5);
   yellow_conf_screen ConnectPaths();
-  power_room_screen playSound("evt_teleporter_door_short");
+  power_room_screen PlaySound("evt_teleporter_door_short");
   power_room_screen MoveZ(116, 1.5);
   power_room_screen ConnectPaths();
-  jfk_room_screen playSound("evt_teleporter_door_long");
+  jfk_room_screen PlaySound("evt_teleporter_door_long");
   jfk_room_screen MoveZ(150, 2.0);
   jfk_room_screen ConnectPaths();
-  war_room_screen_north playSound("evt_teleporter_door_short");
+  war_room_screen_north PlaySound("evt_teleporter_door_short");
   level thread war_room_portal_door();
   war_room_screen_north MoveZ(-122, 1.5);
   war_room_screen_ramp MoveY(46, 1.5);
@@ -462,7 +462,7 @@ open_portal_rooms() {
 
 war_room_portal_door() {
   war_room_screen_south = getEnt("war_room_screen_south", "targetname");
-  war_room_screen_south playSound("evt_teleporter_door_short");
+  war_room_screen_south PlaySound("evt_teleporter_door_short");
   war_room_screen_south MoveZ(-120, 1.5);
   war_room_screen_south waittill("movedone");
   war_room_screen_south ConnectPaths();
@@ -537,7 +537,7 @@ zombie_through_portal(portal_enter, portal_exit, targeted_player) {
   if(isDefined(self.pre_teleport_func)) {
     self[[self.pre_teleport_func]]();
   }
-  playFX(level._effect["transporter_start"], self.origin);
+  PlayFX(level._effect["transporter_start"], self.origin);
   playsoundatposition("evt_teleporter_out", portal_enter.origin);
   final_destination = getstructarray(portal_exit.target, "targetname");
   for(i = 0; i < final_destination.size; i++) {
@@ -545,8 +545,8 @@ zombie_through_portal(portal_enter, portal_exit, targeted_player) {
       portal_exit = final_destination[i];
     }
   }
-  self forceteleport(portal_exit.origin + (anglesToForward(portal_exit.angles) * RandomFloatRange(0, 64)), portal_exit.angles);
-  playFX(level._effect["transporter_beam"], portal_exit.origin);
+  self forceteleport(portal_exit.origin + (AnglesToForward(portal_exit.angles) * RandomFloatRange(0, 64)), portal_exit.angles);
+  PlayFX(level._effect["transporter_beam"], portal_exit.origin);
   playsoundatposition("evt_teleporter_go", portal_exit.origin);
   self.teleporting = false;
   self.ignoreall = false;
@@ -595,7 +595,7 @@ defcon_sign_setup() {
         }
         if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_handle") {
           self.lights[j] rotatePitch(-180, .5);
-          self.lights[j] playSound("zmb_defcon_switch");
+          self.lights[j] playsound("zmb_defcon_switch");
         }
       }
     }
@@ -628,7 +628,7 @@ defcon_sign_setup() {
         }
         if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_handle") {
           self.lights[j] rotatePitch(180, .5);
-          self.lights[j] playSound("zmb_defcon_switch");
+          self.lights[j] playsound("zmb_defcon_switch");
         }
       }
     }
@@ -785,7 +785,7 @@ check_if_empty_floors() {
       if(num_floor1 == num_floor1_laststand && players.size > 1 && flag("power_on")) {
         zombies[i] thread send_zombies_out(level.portal_top);
       } else if(num_floor1 == num_floor1_laststand && players.size > 1 && !flag("power_on")) {
-        playFX(level._effect["transporter_start"], zombies[i].origin);
+        PlayFX(level._effect["transporter_start"], zombies[i].origin);
         zombies[i] thread cleanup_unoccupied_floor();
       } else if(num_floor1 == 0) {
         if(flag("power_on")) {
@@ -800,7 +800,7 @@ check_if_empty_floors() {
       if(num_floor2 == num_floor2_laststand && players.size > 1 && flag("power_on")) {
         zombies[i] thread send_zombies_out(level.portal_mid);
       } else if(num_floor2 == num_floor2_laststand && players.size > 1 && !flag("power_on")) {
-        playFX(level._effect["transporter_start"], zombies[i].origin);
+        PlayFX(level._effect["transporter_start"], zombies[i].origin);
         zombies[i] thread cleanup_unoccupied_floor();
       } else if(num_floor2 == 0) {
         if(flag("power_on")) {
@@ -815,7 +815,7 @@ check_if_empty_floors() {
       if(num_floor3 == num_floor3_laststand && players.size > 1 && flag("power_on")) {
         zombies[i] thread send_zombies_out(level.portal_power);
       } else if(num_floor3 == num_floor3_laststand && players.size > 1 && !flag("power_on")) {
-        playFX(level._effect["transporter_start"], zombies[i].origin);
+        PlayFX(level._effect["transporter_start"], zombies[i].origin);
         zombies[i] thread cleanup_unoccupied_floor();
       } else if(num_floor3 == 0) {
         if(flag("power_on")) {
@@ -849,11 +849,11 @@ send_zombies_out(portal) {
   while(Distance(self.origin, portal.origin) > self.goalradius && self.timed_out == false) {
     wait(0.1);
   }
-  playFX(level._effect["transporter_start"], self.origin);
+  PlayFX(level._effect["transporter_start"], self.origin);
   playsoundatposition("evt_teleporter_out", self.origin);
   if(portal == level.portal_pack) {
-    self forceteleport(level.portal_mid.origin + (anglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
-    playFX(level._effect["transporter_beam"], level.portal_top.origin);
+    self forceteleport(level.portal_mid.origin + (AnglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
+    PlayFX(level._effect["transporter_beam"], level.portal_top.origin);
     playsoundatposition("evt_teleporter_go", level.portal_top.origin);
     self thread cleanup_unoccupied_floor(move_speed);
   } else {
@@ -911,16 +911,16 @@ cleanup_unoccupied_floor(move_speed, current_floor, next_floor) {
   if(flag("power_on")) {
     if(num_floor3 > 0 && num_floor3 != num_floor3_laststand && self.floor != 3) {
       num = RandomIntRange(0, level.portal_bottom.size);
-      self forceteleport(level.portal_bottom[num].origin + (anglesToForward(level.portal_bottom[num].angles) * RandomFloatRange(0, 32)), level.portal_bottom[num].angles);
-      playFX(level._effect["transporter_beam"], level.portal_bottom[num].origin);
+      self forceteleport(level.portal_bottom[num].origin + (AnglesToForward(level.portal_bottom[num].angles) * RandomFloatRange(0, 32)), level.portal_bottom[num].angles);
+      PlayFX(level._effect["transporter_beam"], level.portal_bottom[num].origin);
       playsoundatposition("evt_teleporter_go", level.portal_bottom[num].origin);
     } else if(num_floor2 > 0 && num_floor2 != num_floor2_laststand && self.floor != 2) {
-      self forceteleport(level.portal_mid.origin + (anglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
-      playFX(level._effect["transporter_beam"], level.portal_mid.origin);
+      self forceteleport(level.portal_mid.origin + (AnglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
+      PlayFX(level._effect["transporter_beam"], level.portal_mid.origin);
       playsoundatposition("evt_teleporter_go", level.portal_mid.origin);
     } else if(num_floor1 > 0 && num_floor1 != num_floor1_laststand && self.floor != 1) {
-      self forceteleport(level.portal_top.origin + (anglesToForward(level.portal_top.angles) * RandomFloatRange(0, 32)), level.portal_top.angles);
-      playFX(level._effect["transporter_beam"], level.portal_top.origin);
+      self forceteleport(level.portal_top.origin + (AnglesToForward(level.portal_top.angles) * RandomFloatRange(0, 32)), level.portal_top.angles);
+      PlayFX(level._effect["transporter_beam"], level.portal_top.origin);
       playsoundatposition("evt_teleporter_go", level.portal_top.origin);
     }
     self.teleporting = false;

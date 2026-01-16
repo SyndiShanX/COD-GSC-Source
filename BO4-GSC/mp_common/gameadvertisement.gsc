@@ -7,13 +7,15 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\dev;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace gameadvertisement;
 
 init() {
+
   level.sessionadvertstatus = 1;
   thread sessionadvertismentupdatedebughud();
 
-  level.gameadvertisementrulescorepercent = getgametypesetting(#"gameadvertisementrulescorepercent");
+    level.gameadvertisementrulescorepercent = getgametypesetting(#"gameadvertisementrulescorepercent");
   level.gameadvertisementruletimeleft = 60000 * getgametypesetting(#"gameadvertisementruletimeleft");
   level.gameadvertisementruleround = getgametypesetting(#"gameadvertisementruleround");
   level.gameadvertisementruleroundswon = getgametypesetting(#"gameadvertisementruleroundswon");
@@ -26,9 +28,10 @@ init() {
 }
 
 setadvertisedstatus(onoff) {
+
   level.sessionadvertstatus = onoff;
 
-  changeadvertisedstatus(onoff);
+    changeadvertisedstatus(onoff);
 }
 
 sessionadvertisementcheck() {
@@ -67,16 +70,17 @@ teamscorelimitcheck(rulescorepercent, debug_count) {
     minscorepercentageleft = 100;
 
     foreach(team, _ in level.teams) {
-      scorepercentageleft = 100 - game.stat[# "teamscores"][team] / scorelimit * 100;
+      scorepercentageleft = 100 - game.stat[#"teamscores"][team] / scorelimit * 100;
 
       if(minscorepercentageleft > scorepercentageleft) {
         minscorepercentageleft = scorepercentageleft;
       }
 
       if(rulescorepercent >= scorepercentageleft) {
+
         debug_count = updatedebughud(debug_count, "<dev string:x5c>", int(scorepercentageleft));
 
-        return false;
+          return false;
       }
     }
 
@@ -106,18 +110,20 @@ default_rules() {
   debug_count = 1;
 
   if(level.gameadvertisementrulescorepercent) {
+
     debug_count = updatedebughud(debug_count, "<dev string:x76>", level.gameadvertisementrulescorepercent);
 
-    if(level.teambased) {
-      if(currentround >= level.gameadvertisementruleround - 1) {
-        if(teamscorelimitcheck(level.gameadvertisementrulescorepercent, debug_count) == 0) {
-          return false;
+      if(level.teambased) {
+        if(currentround >= level.gameadvertisementruleround - 1) {
+          if(teamscorelimitcheck(level.gameadvertisementrulescorepercent, debug_count) == 0) {
+            return false;
+          }
+
+          debug_count++;
+
         }
-
-        debug_count++;
-
       }
-    } else if(level.scorelimit) {
+    else if(level.scorelimit) {
       highestscore = 0;
       players = getplayers();
 
@@ -131,45 +137,49 @@ default_rules() {
 
       debug_count = updatedebughud(debug_count, "<dev string:x5c>", int(scorepercentageleft));
 
-      if(level.gameadvertisementrulescorepercent >= scorepercentageleft) {
-        return false;
-      }
+        if(level.gameadvertisementrulescorepercent >= scorepercentageleft) {
+          return false;
+        }
     }
   }
 
   if(level.gameadvertisementruletimeleft && currentround >= level.gameadvertisementruleround - 1) {
+
     debug_count = updatedebughud(debug_count, "<dev string:xa9>", level.gameadvertisementruletimeleft / 60000);
 
-    if(timelimitcheck(level.gameadvertisementruletimeleft) == 0) {
-      return false;
-    }
+      if(timelimitcheck(level.gameadvertisementruletimeleft) == 0) {
+        return false;
+      }
   }
 
   if(level.gameadvertisementruleround) {
+
     debug_count = updatedebughud(debug_count, "<dev string:xd8>", level.gameadvertisementruleround);
     debug_count = updatedebughud(debug_count, "<dev string:xe5>", currentround);
 
-    if(level.gameadvertisementruleround <= currentround) {
-      return false;
-    }
+      if(level.gameadvertisementruleround <= currentround) {
+        return false;
+      }
   }
 
   if(level.gameadvertisementruleroundswon) {
+
     debug_count = updatedebughud(debug_count, "<dev string:xf7>", level.gameadvertisementruleroundswon);
 
-    maxroundswon = 0;
+      maxroundswon = 0;
 
     foreach(team, _ in level.teams) {
-      roundswon = game.stat[# "teamscores"][team];
+      roundswon = game.stat[#"teamscores"][team];
 
       if(maxroundswon < roundswon) {
         maxroundswon = roundswon;
       }
 
       if(level.gameadvertisementruleroundswon <= roundswon) {
+
         debug_count = updatedebughud(debug_count, "<dev string:x113>", maxroundswon);
 
-        return false;
+          return false;
       }
     }
 
@@ -326,3 +336,4 @@ sessionadvertismentupdatedebughud() {
     }
   }
 }
+

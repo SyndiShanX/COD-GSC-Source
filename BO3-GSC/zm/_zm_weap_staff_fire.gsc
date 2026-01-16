@@ -20,15 +20,15 @@
 #namespace zm_weap_staff_fire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_fire", &__init__, undefined, undefined);
+  system::register("zm_weap_staff_fire", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("actor", "fire_char_fx", 21000, 1, "int");
   clientfield::register("toplayer", "fire_muzzle_fx", 21000, 1, "counter");
-  callback::on_spawned(&onplayerspawned);
-  zm_spawner::register_zombie_damage_callback(&staff_fire_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback(&staff_fire_death_event);
+  callback::on_spawned( & onplayerspawned);
+  zm_spawner::register_zombie_damage_callback( & staff_fire_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback( & staff_fire_death_event);
   level.w_staff_fire = getweapon("staff_fire");
   level.w_staff_fire_upgraded = getweapon("staff_fire_upgraded");
 }
@@ -44,9 +44,9 @@ function watch_staff_fire_fired() {
   self notify("watch_staff_fired");
   self endon("disconnect");
   self endon("watch_staff_fired");
-  while(true) {
+  while (true) {
     self waittill("missile_fire", e_projectile, w_weapon);
-    if(isDefined(e_projectile.additional_shot) && e_projectile.additional_shot) {
+    if(isdefined(e_projectile.additional_shot) && e_projectile.additional_shot) {
       continue;
     }
     if(w_weapon.name == "staff_fire" || w_weapon.name == "staff_fire_upgraded") {
@@ -59,9 +59,9 @@ function watch_staff_fire_upgrade_fired() {
   self notify("watch_staff_upgrade_fired");
   self endon("disconnect");
   self endon("watch_staff_upgrade_fired");
-  while(true) {
+  while (true) {
     self waittill("grenade_fire", e_projectile, w_weapon);
-    if(isDefined(e_projectile.additional_shot) && e_projectile.additional_shot) {
+    if(isdefined(e_projectile.additional_shot) && e_projectile.additional_shot) {
       continue;
     }
     if(w_weapon.name == "staff_fire_upgraded2" || w_weapon.name == "staff_fire_upgraded3") {
@@ -79,12 +79,12 @@ function fire_spread_shots(w_weapon) {
   v_fwd = self getweaponforwarddir();
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
-  trace = bulletTrace(fire_origin, fire_origin + (v_fwd * 100), 0, undefined);
+  trace = bullettrace(fire_origin, fire_origin + (v_fwd * 100), 0, undefined);
   if(trace["fraction"] != 1) {
     return;
   }
   v_left_angles = (fire_angles[0], fire_angles[1] - 15, fire_angles[2]);
-  v_left = anglesToForward(v_left_angles);
+  v_left = anglestoforward(v_left_angles);
   e_proj = magicbullet(w_weapon, fire_origin + (v_fwd * 50), fire_origin + (v_left * 100), self);
   e_proj.additional_shot = 1;
   util::wait_network_frame();
@@ -93,7 +93,7 @@ function fire_spread_shots(w_weapon) {
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
   v_right_angles = (fire_angles[0], fire_angles[1] + 15, fire_angles[2]);
-  v_right = anglesToForward(v_right_angles);
+  v_right = anglestoforward(v_right_angles);
   e_proj = magicbullet(w_weapon, fire_origin + (v_fwd * 50), fire_origin + (v_right * 100), self);
   e_proj.additional_shot = 1;
 }
@@ -101,7 +101,7 @@ function fire_spread_shots(w_weapon) {
 function fire_staff_area_of_effect(e_attacker, w_weapon) {
   self waittill("explode", v_pos);
   ent = spawn("script_origin", v_pos);
-  ent playLoopSound("wpn_firestaff_grenade_loop", 1);
+  ent playloopsound("wpn_firestaff_grenade_loop", 1);
   level thread zm_tomb_utility::puzzle_debug_position("", vectorscale((1, 0, 0), 255), v_pos, undefined, 5);
   n_alive_time = 5;
   aoe_radius = 80;
@@ -109,7 +109,7 @@ function fire_staff_area_of_effect(e_attacker, w_weapon) {
     aoe_radius = 100;
   }
   n_step_size = 0.2;
-  while(n_alive_time > 0) {
+  while (n_alive_time > 0) {
     if((n_alive_time - n_step_size) <= 0) {
       aoe_radius = aoe_radius * 2;
     }
@@ -118,14 +118,14 @@ function fire_staff_area_of_effect(e_attacker, w_weapon) {
     wait(n_step_size);
     n_alive_time = n_alive_time - n_step_size;
     foreach(e_target in a_targets) {
-      if(isDefined(e_target) && isalive(e_target)) {
-        if(!(isDefined(e_target.is_on_fire) && e_target.is_on_fire)) {
+      if(isdefined(e_target) && isalive(e_target)) {
+        if(!(isdefined(e_target.is_on_fire) && e_target.is_on_fire)) {
           e_target thread flame_damage_fx(w_weapon, e_attacker);
         }
       }
     }
   }
-  ent playSound("wpn_firestaff_proj_impact");
+  ent playsound("wpn_firestaff_proj_impact");
   ent delete();
 }
 
@@ -138,7 +138,7 @@ function grenade_waittill_still_or_bounce() {
     util::wait_network_frame();
     util::wait_network_frame();
   }
-  while(prev_origin != self.origin);
+  while (prev_origin != self.origin);
 }
 
 function fire_staff_update_grenade_fuse() {
@@ -155,16 +155,16 @@ function fire_additional_shots(w_weapon) {
   if(w_weapon.name == "staff_fire_upgraded3") {
     n_shots = 2;
   }
-  for(i = 1; i <= n_shots; i++) {
+  for (i = 1; i <= n_shots; i++) {
     wait(0.35);
-    if(isDefined(self) && self getcurrentweapon() == level.w_staff_fire_upgraded) {
+    if(isdefined(self) && self getcurrentweapon() == level.w_staff_fire_upgraded) {
       v_player_angles = vectortoangles(self getweaponforwarddir());
       n_player_pitch = v_player_angles[0];
       n_player_pitch = n_player_pitch + (5 * i);
       n_player_yaw = v_player_angles[1] + (randomfloatrange(-15, 15));
       v_shot_angles = (n_player_pitch, n_player_yaw, v_player_angles[2]);
       v_shot_start = self getweaponmuzzlepoint();
-      v_shot_end = v_shot_start + anglesToForward(v_shot_angles);
+      v_shot_end = v_shot_start + anglestoforward(v_shot_angles);
       e_proj = magicbullet(w_weapon, v_shot_start, v_shot_end, self);
       e_proj.additional_shot = 1;
       e_proj thread fire_staff_update_grenade_fuse();
@@ -183,7 +183,7 @@ function staff_fire_zombie_damage_response(mod, hit_location, hit_origin, player
 }
 
 function is_staff_fire_damage(weapon) {
-  return isDefined(weapon) && (weapon.name == "staff_fire" || weapon.name == "staff_fire_upgraded" || weapon.name == "staff_fire_upgraded2" || weapon.name == "staff_fire_upgraded3") && (!(isDefined(self.set_beacon_damage) && self.set_beacon_damage));
+  return isdefined(weapon) && (weapon.name == "staff_fire" || weapon.name == "staff_fire_upgraded" || weapon.name == "staff_fire_upgraded2" || weapon.name == "staff_fire_upgraded3") && (!(isdefined(self.set_beacon_damage) && self.set_beacon_damage));
 }
 
 function staff_fire_zombie_hit_response_internal(mod, damageweapon, player, amount) {
@@ -194,7 +194,7 @@ function staff_fire_zombie_hit_response_internal(mod, damageweapon, player, amou
   if(mod != "MOD_BURNED" && mod != "MOD_GRENADE_SPLASH") {
     pct_from_center = (amount - 1) / 10;
     pct_damage = 0.5 + (0.5 * pct_from_center);
-    if(isDefined(self.is_mechz) && self.is_mechz) {
+    if(isdefined(self.is_mechz) && self.is_mechz) {
       self thread mechz_flame_damage(damageweapon, player, pct_damage);
       return;
     }
@@ -219,7 +219,7 @@ function on_fire_timeout(n_duration) {
 }
 
 function flame_damage_fx(damageweapon, e_attacker, pct_damage = 1) {
-  was_on_fire = isDefined(self.is_on_fire) && self.is_on_fire;
+  was_on_fire = isdefined(self.is_on_fire) && self.is_on_fire;
   n_initial_dmg = get_impact_damage(damageweapon) * pct_damage;
   is_upgraded = damageweapon.name == "staff_fire_upgraded" || damageweapon.name == "staff_fire_upgraded2" || damageweapon.name == "staff_fire_upgraded3";
   if(is_upgraded && pct_damage > 0.5 && n_initial_dmg > self.health && math::cointoss()) {
@@ -247,7 +247,7 @@ function _fire_stun_zombie_internal(do_stun, run_cycle) {
   if(!isalive(self)) {
     return;
   }
-  if(!(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(!(isdefined(self.missinglegs) && self.missinglegs)) {
     self zombie_utility::set_zombie_run_cycle(run_cycle);
   }
   self.var_262d5062 = do_stun;
@@ -257,14 +257,14 @@ function zombie_set_and_restore_flame_state() {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.is_mechz) && self.is_mechz) {
+  if(isdefined(self.is_mechz) && self.is_mechz) {
     return;
   }
   self clientfield::set("fire_char_fx", 1);
   self thread function_50814f21(1);
   self.disablemelee = 1;
   prev_run_cycle = self.zombie_move_speed;
-  if(!(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(!(isdefined(self.missinglegs) && self.missinglegs)) {
     self.deathanim = "zm_death_fire";
   }
   if(self.ai_state == "find_flesh") {
@@ -361,8 +361,8 @@ function flame_damage_over_time(e_attacker, damageweapon, pct_damage) {
   n_duration = get_damage_duration(damageweapon);
   n_damage = n_damage * pct_damage;
   self thread on_fire_timeout(n_duration);
-  while(true) {
-    if(isDefined(e_attacker) && isplayer(e_attacker)) {
+  while (true) {
+    if(isdefined(e_attacker) && isplayer(e_attacker)) {
       if(e_attacker zm_powerups::is_insta_kill_active()) {
         n_damage = self.health;
       }
@@ -395,32 +395,32 @@ function function_50814f21(is_on_fire) {
   }
   if(is_on_fire && !issubstr(self.model, "_fire")) {
     self.no_gib = 1;
-    if(!isDefined(self.old_model)) {
+    if(!isdefined(self.old_model)) {
       self.old_model = self.model;
       self.var_f08c601 = self.head;
       self.var_7cff9f25 = self.hatmodel;
     }
-    self setModel(self.old_model + "_fire");
-    if(isDefined(self.var_f08c601) && (!(isDefined(self.head_gibbed) && self.head_gibbed))) {
+    self setmodel(self.old_model + "_fire");
+    if(isdefined(self.var_f08c601) && (!(isdefined(self.head_gibbed) && self.head_gibbed))) {
       self detach(self.head);
       self attach(self.var_f08c601 + "_fire");
       self.head = self.var_f08c601 + "_fire";
     }
-    if(isDefined(self.var_7cff9f25) && (!(isDefined(self.hat_gibbed) && self.hat_gibbed))) {
+    if(isdefined(self.var_7cff9f25) && (!(isdefined(self.hat_gibbed) && self.hat_gibbed))) {
       self detach(self.hatmodel);
       self attach(self.var_7cff9f25 + "_fire");
       self.hatmodel = self.var_7cff9f25 + "_fire";
     }
-  } else if(!is_on_fire && isDefined(self.old_model)) {
+  } else if(!is_on_fire && isdefined(self.old_model)) {
     self.no_gib = undefined;
-    self setModel(self.old_model);
+    self setmodel(self.old_model);
     self.old_model = undefined;
-    if(isDefined(self.var_f08c601) && (!(isDefined(self.head_gibbed) && self.head_gibbed))) {
+    if(isdefined(self.var_f08c601) && (!(isdefined(self.head_gibbed) && self.head_gibbed))) {
       self detach(self.head);
       self attach(self.var_f08c601);
       self.var_f08c601 = undefined;
     }
-    if(isDefined(self.var_7cff9f25) && (!(isDefined(self.hat_gibbed) && self.hat_gibbed))) {
+    if(isdefined(self.var_7cff9f25) && (!(isdefined(self.hat_gibbed) && self.hat_gibbed))) {
       self detach(self.hatmodel);
       self attach(self.var_7cff9f25);
       self.var_7cff9f25 = undefined;

@@ -4,6 +4,7 @@
 ******************************************/
 
 main() {
+  //ambient fx
   level._effect["insects_carcass_runner"] = loadfx("misc/insects_carcass_runner");
 
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
@@ -16,7 +17,7 @@ main() {
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   level._effect["room_smoke_200"] = loadfx("smoke/room_smoke_200");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_fav_tropical_fx::main();
-  }
+
 }

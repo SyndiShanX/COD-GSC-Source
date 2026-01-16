@@ -28,7 +28,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -44,9 +46,8 @@ main() {
     level.prematchPeriod = 0;
   }
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   level.teamBased = true;
   level.getTeamAssignment = ::getTeamAssignment;
@@ -83,18 +84,16 @@ main() {
   SetDvarIfUninitialized("alien_cover_node_retreat", 0);
   SetDvarIfUninitialized("alien_retreat_towards_spawn", 1);
 
-  if(is_hardcore_mode()) {
+  if(is_hardcore_mode())
     SetOmnvar("ui_aliens_hardcore", true);
-  }
 
   if(is_chaos_mode()) {
     SetOmnvar("ui_alien_chaos", true);
     maps\mp\alien\_chaos::set_chaos_area();
   }
 
-  if(!isDefined(level.ricochetDamageMax)) {
+  if(!isDefined(level.ricochetDamageMax))
     level.ricochetDamageMax = 25;
-  }
 
   level.getNodeArrayFunction = ::GetNodeArray;
 
@@ -242,7 +241,9 @@ onPrecacheGameType() {
 
 onStartGameType() {
   if(isDefined(level.custom_onStartGameTypeFunc)) {
-    [[level.custom_onStartGameTypeFunc]]();
+    [
+      [level.custom_onStartGameTypeFunc]
+    ]();
   }
 
   SetNoJIPTime(true);
@@ -258,19 +259,19 @@ onStartGameType() {
 
   level.damageListSize = 20;
 
-  setObjectiveText("allies", &"ALIEN_OBJECTIVES_ALIENS");
-  setObjectiveText("axis", &"ALIEN_OBJECTIVES_ALIENS");
+  setObjectiveText("allies", & "ALIEN_OBJECTIVES_ALIENS");
+  setObjectiveText("axis", & "ALIEN_OBJECTIVES_ALIENS");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"ALIEN_OBJECTIVES_ALIENS");
-    setObjectiveScoreText("axis", &"ALIEN_OBJECTIVES_ALIENS");
+    setObjectiveScoreText("allies", & "ALIEN_OBJECTIVES_ALIENS");
+    setObjectiveScoreText("axis", & "ALIEN_OBJECTIVES_ALIENS");
   } else {
-    setObjectiveScoreText("allies", &"ALIEN_OBJECTIVES_ALIENS_SCORE");
-    setObjectiveScoreText("axis", &"ALIEN_OBJECTIVES_ALIENS_SCORE");
+    setObjectiveScoreText("allies", & "ALIEN_OBJECTIVES_ALIENS_SCORE");
+    setObjectiveScoreText("axis", & "ALIEN_OBJECTIVES_ALIENS_SCORE");
   }
 
-  setObjectiveHintText("allies", &"ALIEN_OBJECTIVES_ALIENS_HINT");
-  setObjectiveHintText("axis", &"ALIEN_OBJECTIVES_ALIENS_HINT");
+  setObjectiveHintText("allies", & "ALIEN_OBJECTIVES_ALIENS_HINT");
+  setObjectiveHintText("axis", & "ALIEN_OBJECTIVES_ALIENS_HINT");
 
   maps\mp\alien\_persistence::BBData_init();
   maps\mp\alien\_persistence::rank_init();
@@ -299,9 +300,8 @@ onStartGameType() {
     maps\mp\alien\_utility::alien_mode_enable("kill_resource");
   }
 
-  if(alien_mode_has("collectible")) {
+  if(alien_mode_has("collectible"))
     maps\mp\alien\_collectibles::pre_load();
-  }
 
   maps\mp\alien\_deployablebox_functions::pre_load();
 
@@ -342,13 +342,11 @@ onStartGameType() {
 
   level.gameTweaks["spectatetype"].value = 1;
 
-  if(should_enable_pillage()) {
+  if(should_enable_pillage())
     thread maps\mp\alien\_pillage::pillage_init();
-  }
 
-  if(alien_mode_has("challenge")) {
+  if(alien_mode_has("challenge"))
     maps\mp\alien\_challenge::init_challenge();
-  }
 
   maps\mp\alien\_unlock::init_unlock();
 
@@ -360,9 +358,8 @@ onStartGameType() {
   if(level.splitscreen) {
     level.lowerTextFontSize = 1.35;
   }
-  if(!level.console) {
+  if(!level.console)
     level.lowerTextFontSize = 1;
-  }
 
   level.teamTweaks["fftype"].value = 1;
 
@@ -384,9 +381,8 @@ onStartGameType() {
 }
 
 should_enable_pillage() {
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     return false;
-  }
 
   return alien_mode_has("pillage");
 }
@@ -405,18 +401,16 @@ handle_nondeterministic_entities() {
 }
 
 handle_nondeterministic_entities_internal() {
-  if(alien_mode_has("collectible")) {
+  if(alien_mode_has("collectible"))
     maps\mp\alien\_collectibles::post_load();
-  }
 
   if(!alien_mode_has("nogame") && alien_mode_has("wave") && maps\mp\alien\_spawnlogic::use_spawn_director()) {
     maps\mp\alien\_hive::remove_unused_hives(level.removed_hives);
     level.removed_hives = undefined;
   }
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     maps\mp\alien\_chaos::create_alien_eggs();
-  }
 }
 
 spawnAllyPet(type, count, origin, owner, spawn_angles, isTrapPet) {
@@ -474,9 +468,8 @@ spawnAllyPet(type, count, origin, owner, spawn_angles, isTrapPet) {
 
     alien SetScriptablePartState("body", "pet");
 
-    if(isDefined(self.entityHeadIcon)) {
+    if(isDefined(self.entityHeadIcon))
       self.entityHeadIcon destroy();
-    }
 
     alien thread ally_pet_time_out(isTrapPet);
     alien thread kill_alien_on_owner_disconnect(owner);
@@ -489,9 +482,8 @@ ally_pet_time_out(isTrapPet) {
 
   PET_TIME_OUT_SEC = 180;
 
-  if(is_true(isTrapPet)) {
+  if(is_true(isTrapPet))
     PET_TIME_OUT_SEC = PET_TIME_OUT_SEC * 1.25;
-  }
 
   wait(PET_TIME_OUT_SEC);
 
@@ -513,17 +505,15 @@ onPlayerConnect() {
     level waittill("connected", player);
 
     if(!IsAI(player)) {
-      if(is_chaos_mode()) {
+      if(is_chaos_mode())
         maps\mp\alien\_chaos::chaos_onPlayerConnect(player);
-      }
 
       player maps\mp\alien\_alien_matchdata::on_player_connect();
 
-      if(isDefined(player.connecttime)) {
+      if(isDefined(player.connecttime))
         player.connect_time = player.connecttime;
-      } else {
+      else
         player.connect_time = gettime();
-      }
 
       player maps\mp\alien\_prestige::init_player_prestige();
 
@@ -540,11 +530,10 @@ onPlayerConnect() {
       player thread maps\mp\alien\_persistence::play_time_monitor();
       player initial_spawn_pos_override();
 
-      if(!is_casual_mode()) {
+      if(!is_casual_mode())
         player SetClientOmnvar("allow_write_leaderboards", 1);
-      } else {
+      else
         player SetClientOmnvar("allow_write_leaderboards", 0);
-      }
 
       if(flag_exist("hives_cleared") && flag("hives_cleared")) {
         player.threatbias = 100000;
@@ -564,15 +553,13 @@ onPlayerConnect() {
       }
 
       hotjoin_skill_points = get_hotjoin_skill_points();
-      if(hotjoin_skill_points > 0) {
+      if(hotjoin_skill_points > 0)
         player maps\mp\alien\_persistence::give_player_points(hotjoin_skill_points);
-      }
 
       player resetUIDvarsOnConnect();
 
-      if(alien_mode_has("outline")) {
+      if(alien_mode_has("outline"))
         player thread maps\mp\alien\_outline_proto::outline_monitor();
-      }
 
       if(alien_mode_has("challenge")) {
         if(maps\mp\alien\_challenge::current_challenge_exist() && alien_mode_has("challenge")) {
@@ -585,9 +572,8 @@ onPlayerConnect() {
       player thread enable_disable_usability_monitor();
       player thread monitorDisownKillstreaks();
 
-      if(flag_exist("drill_drilling")) {
+      if(flag_exist("drill_drilling"))
         player thread maps\mp\alien\_drill::check_for_player_near_hive_with_drill();
-      }
 
       player thread maps\mp\alien\_hud::intro_black_screen();
 
@@ -601,27 +587,26 @@ onPlayerConnect() {
 }
 
 initial_spawn_pos_override() {
-  if(isDefined(level.initial_spawn_loc_override_func)) {
+  if(isDefined(level.initial_spawn_loc_override_func))
     self[[level.initial_spawn_loc_override_func]]();
-  }
 }
 
 get_hotjoin_skill_points() {
-  if(isDefined(level.hotjoin_skill_points_fun)) {
-    return [[level.hotjoin_skill_points_fun]]();
-  } else {
+  if(isDefined(level.hotjoin_skill_points_fun))
+    return [
+      [level.hotjoin_skill_points_fun]
+    ]();
+  else
     return default_hotjoin_skill_points();
-  }
 }
 
 default_hotjoin_skill_points() {
   HIVE_SKILL_POINT_PENALTY = 1;
 
-  if(is_hardcore_mode()) {
+  if(is_hardcore_mode())
     point_from_hive_destroyed = 0;
-  } else {
+  else
     point_from_hive_destroyed = max(0, level.num_hive_destroyed - HIVE_SKILL_POINT_PENALTY);
-  }
 
   point_from_challenge_completed = maps\mp\alien\_challenge::get_num_challenge_completed();
   return (point_from_hive_destroyed + point_from_challenge_completed);
@@ -644,9 +629,8 @@ init_threatbiasgroups() {
 threat_bias_grouping() {
   level endon("game_ended");
 
-  while(!ThreatBiasGroupExists("players")) {
+  while(!ThreatBiasGroupExists("players"))
     wait 0.05;
-  }
 
   self SetThreatBiasGroup("players");
 }
@@ -670,9 +654,8 @@ player_hotjoin() {
     return;
   }
   foreach(alien in aliens) {
-    if(isDefined(alien) && is_true(alien.pet)) {
+    if(isDefined(alien) && is_true(alien.pet))
       maps\mp\alien\_outline_proto::enable_outline_for_player(alien, self, 3, false, "high");
-    }
   }
 
 }
@@ -719,9 +702,8 @@ onSpawnPlayer() {
   self player_init_damageShield();
   self maps\mp\alien\_laststand::player_init_lastStand();
 
-  if(self maps\mp\alien\_persistence::is_upgrade_enabled("shock_melee_upgrade")) {
+  if(self maps\mp\alien\_persistence::is_upgrade_enabled("shock_melee_upgrade"))
     self thread melee_strength_timer();
-  }
 
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("locker_key_upgrade")) {
     map = GetDvar("ui_mapname");
@@ -730,13 +712,11 @@ onSpawnPlayer() {
     }
   }
 
-  if(alien_mode_has("loot")) {
+  if(alien_mode_has("loot"))
     self maps\mp\alien\_collectibles::player_loot_init();
-  }
 
-  if(alien_mode_has("airdrop")) {
+  if(alien_mode_has("airdrop"))
     self thread maps\mp\alien\_drill::watchBomb();
-  }
 
   self thread maps\mp\alien\_collectibles::watchThrowableItems();
   self thread maps\mp\alien\_utility::trackRiotShield();
@@ -754,21 +734,17 @@ onSpawnPlayer() {
 
   self thread watchDisconnectEndGame();
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     maps\mp\alien\_chaos::chaos_onSpawnPlayer(self);
-  }
 
-  if(isDefined(level.custom_onSpawnPlayer_func)) {
+  if(isDefined(level.custom_onSpawnPlayer_func))
     self[[level.custom_onSpawnPlayer_func]]();
-  }
 
-  if(isDefined(level.resetPlayerCraftingItemsOnRespawn)) {
+  if(isDefined(level.resetPlayerCraftingItemsOnRespawn))
     self[[level.resetPlayerCraftingItemsOnRespawn]]();
-  }
 
-  if(self has_pistols_only_relic_and_no_deployables()) {
+  if(self has_pistols_only_relic_and_no_deployables())
     self thread check_for_player_near_weapon();
-  }
 
   self thread setup_class_nameplates();
 
@@ -782,15 +758,13 @@ watchDisconnectEndGame() {
 
   self waittill("disconnect");
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     gameShouldEnd = maps\mp\alien\_chaos_laststand::chaos_gameShouldEnd(self);
-  } else {
+  else
     gameShouldEnd = maps\mp\alien\_laststand::gameShouldEnd(self);
-  }
 
-  if(gameShouldEnd) {
+  if(gameShouldEnd)
     level thread AlienEndGame("axis", maps\mp\alien\_hud::get_end_game_string_index("kia"));
-  }
 }
 
 kick_for_inactivity() {
@@ -858,9 +832,8 @@ alienPlayerHealthHints() {
 }
 
 has_healthpack() {
-  if(isDefined(self.has_health_pack) && self.has_health_pack) {
+  if(isDefined(self.has_health_pack) && self.has_health_pack)
     return true;
-  }
 
   return false;
 }
@@ -1087,15 +1060,13 @@ healthRegen(hurtTime, healthRatio, healthCap) {
     regenData = spawnStruct();
     getRegenData(regenData);
     if(!self has_fragile_relic_and_is_sprinting()) {
-      if(self.health < Int(healthCap)) {
+      if(self.health < Int(healthCap))
         if((self.health + regenData.regenAmount) > Int(healthCap))
-      }
-      self.health = Int(healthCap);
-      else {
-        self.health += regenData.regenAmount;
-      } else {
+          self.health = Int(healthCap);
+        else
+          self.health += regenData.regenAmount;
+      else
         break;
-      }
     }
     wait(regenData.waitTimeBetweenRegen);
   }
@@ -1147,11 +1118,10 @@ resetUIDvarsOnSpectate() {}
 
 alien_make_entity_sentient(team, expendable) {
   if(self should_make_entity_sentient()) {
-    if(isDefined(expendable)) {
+    if(isDefined(expendable))
       return self MakeEntitySentient(team, expendable);
-    } else {
+    else
       return self MakeEntitySentient(team);
-    }
   }
 }
 
@@ -1224,11 +1194,10 @@ custom_giveloadout(fakespawn) {
     case "perk_pistol_magnum_2":
     case "perk_pistol_magnum_3":
     case "perk_pistol_magnum_4":
-      if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade")) {
+      if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade"))
         self.default_starting_pistol = "iw6_alienmagnum_mp_acogpistol_scope5";
-      } else {
+      else
         self.default_starting_pistol = "iw6_alienmagnum_mp";
-      }
       break;
 
     case "perk_pistol_m9a1":
@@ -1265,9 +1234,8 @@ custom_giveloadout(fakespawn) {
   if(isDefined(fakespawn) && fakespawn) {
     return;
   }
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     self.default_starting_pistol = "iw6_alienp226_mp";
-  }
 
   self giveweapon(self.default_starting_pistol);
   self scale_ammo_based_on_nerf(self.default_starting_pistol);
@@ -1285,9 +1253,8 @@ custom_giveloadout(fakespawn) {
     self SetWeaponAmmoClip("alienflare_mp", 1);
   }
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     self maps\mp\alien\_chaos::chaos_custom_giveloadout(self);
-  }
 }
 
 getPlayerModelIndex() {
@@ -1313,9 +1280,8 @@ set_player_character_model() {
 }
 
 setCharacterModels(bodyModelName, headModelName, viewModelName) {
-  if(isDefined(self.headModel)) {
+  if(isDefined(self.headModel))
     self Detach(self.headModel);
-  }
   self setModel(bodyModelName);
   self SetViewModel(viewModelName);
   self Attach(headModelName, "", true);
@@ -1338,20 +1304,16 @@ setModelFromCustomization() {
 }
 
 setVOPrefix() {
-  if(!isDefined(level.cac_vo_male)) {
+  if(!isDefined(level.cac_vo_male))
     level.cac_vo_male = array_randomize(["p2_", "p4_", "p3_"]);
-  }
-  if(!isDefined(level.cac_vo_female)) {
+  if(!isDefined(level.cac_vo_female))
     level.cac_vo_female = array_randomize(["p1_"]);
-  }
 
-  if(!isDefined(level.male_index)) {
+  if(!isDefined(level.male_index))
     level.male_index = 0;
-  }
 
-  if(!isDefined(level.female_index)) {
+  if(!isDefined(level.female_index))
     level.female_index = 0;
-  }
 
   if(!isDefined(self.vo_prefix)) {
     if(self HasFemaleCustomizationModel()) {
@@ -1406,9 +1368,8 @@ special_weapon_hints() {
       } else if(weapon == "alienflare_mp") {
         self thread show_tutorial_text(weapon);
       } else if(weapon == "aliensemtex_mp") {
-        if(!is_chaos_mode()) {
+        if(!is_chaos_mode())
           self thread show_tutorial_text(weapon);
-        }
       } else if(weapon == "alienthrowingknife_mp") {
         self thread show_tutorial_text(weapon);
       } else if(weapon == "alienmortar_shell_mp") {
@@ -1458,56 +1419,56 @@ show_tutorial_text(weapon) {
     case "alienbetty_mp":
       if(!self.betty_tutorial_given) {
         self.betty_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_BETTY", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_BETTY", 3.5);
       }
       break;
 
     case "alienclaymore_mp":
       if(!self.claymore_tutorial_given) {
         self.claymore_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_CLAYMORE", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_CLAYMORE", 3.5);
       }
       break;
 
     case "alienthrowingknife_mp":
       if(!self.pet_tutorial_given) {
         self.pet_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_PET", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_PET", 3.5);
       }
       break;
 
     case "alienflare_mp":
       if(!self.flare_tutorial_given) {
         self.flare_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_FLARE", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_FLARE", 3.5);
       }
       break;
 
     case "aliensemtex_mp":
       if(!self.semtex_tutorial_given) {
         self.semtex_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_SEMTEX", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_SEMTEX", 3.5);
       }
       break;
 
     case "alienmortar_shell_mp":
       if(!self.mortar_tutorial_given) {
         self.mortar_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_MORTARSHELL", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_MORTARSHELL", 3.5);
       }
       break;
 
     case "aliensoflam_mp":
       if(!self.soflam_tutorial_given) {
         self.soflam_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_SOFLAM", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_SOFLAM", 3.5);
       }
       break;
 
     case "alientrophy_mp":
       if(!self.trophy_tutorial_given) {
         self.trophy_tutorial_given = true;
-        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_TROPHY", 3.5);
+        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_TROPHY", 3.5);
       }
       break;
     case "alienbomb_mp":
@@ -1519,11 +1480,10 @@ show_tutorial_text(weapon) {
 }
 
 get_drill_tutorial_text() {
-  if(isDefined(level.drill_tutorial_text)) {
+  if(isDefined(level.drill_tutorial_text))
     return level.drill_tutorial_text;
-  }
 
-  return &"ALIEN_COLLECTIBLES_GO_PLANT_BOMB";
+  return & "ALIEN_COLLECTIBLES_GO_PLANT_BOMB";
 }
 
 enable_disable_usability_monitor() {
@@ -1619,9 +1579,8 @@ killstreakInit() {
   level.killstreakWeildWeapons["iw5_barrettexp_mp_barrettscope"] = "heli_sniper";
   level.killstreakWeildWeapons["airdrop_marker_mp"] = "airdrop_assault";
 
-  if(isDefined(level.mapCustomKillstreakFunc)) {
+  if(isDefined(level.mapCustomKillstreakFunc))
     [[level.mapCustomKillstreakFunc]]();
-  }
 
   level.killstreakRoundDelay = getIntProperty("scr_game_killstreakdelay", 8);
 }
@@ -1696,9 +1655,8 @@ AlienEndGame(winner, endReasonTextIndex) {
 
   level.intermission = true;
 
-  if(isDefined(level.pre_end_game_display_func)) {
+  if(isDefined(level.pre_end_game_display_func))
     [[level.pre_end_game_display_func]]();
-  }
 
   maps\mp\alien\_hud::displayAlienGameEnd(winner, endReasonTextIndex);
 
@@ -1708,9 +1666,8 @@ AlienEndGame(winner, endReasonTextIndex) {
 
   intermission_func = maps\mp\gametypes\_playerlogic::spawnIntermission;
 
-  if(isDefined(level.custom_intermission_func)) {
+  if(isDefined(level.custom_intermission_func))
     intermission_func = level.custom_intermission_func;
-  }
 
   foreach(player in level.players) {
     player thread[[intermission_func]]();
@@ -1729,9 +1686,8 @@ AlienEndGame(winner, endReasonTextIndex) {
 
   maps\mp\alien\_alien_matchdata::EndGame(end_condition, play_time);
 
-  if(isDefined(level.end_game_scoreboard_wait_time)) {
+  if(isDefined(level.end_game_scoreboard_wait_time))
     end_game_scoreboard_wait_time = level.end_game_scoreboard_wait_time;
-  }
 
   wait(end_game_scoreboard_wait_time);
 
@@ -1757,24 +1713,20 @@ setRoundGameMode() {
 
 blackBox_EndGame_Score() {
   cyclenum = -1;
-  if(isDefined(level.current_cycle_num)) {
+  if(isDefined(level.current_cycle_num))
     cyclenum = level.current_cycle_num;
-  }
 
   player_name = "unknown";
-  if(isDefined(self.name)) {
+  if(isDefined(self.name))
     player_name = self.name;
-  }
 
   hive_name = "unknown";
-  if(isDefined(level.current_hive_name)) {
+  if(isDefined(level.current_hive_name))
     hive_name = level.current_hive_name;
-  }
 
   final_score = 0;
-  if(isDefined(self.end_game_score) && isDefined(self.end_game_score["total_score"])) {
+  if(isDefined(self.end_game_score) && isDefined(self.end_game_score["total_score"]))
     final_score = self.end_game_score["total_score"];
-  }
 
   total_xp = self maps\mp\alien\_persistence::get_player_session_xp();
 
@@ -1800,34 +1752,28 @@ blackBox_EndGame(endcondition, playtime) {
   assertex(isDefined(level.alienBBData), "BBData tracking is not initialized in script!");
 
   player0rank = -1;
-  if(isDefined(level.players[0])) {
+  if(isDefined(level.players[0]))
     player0rank = int(level.players[0] maps\mp\alien\_persistence::get_player_rank());
-  }
 
   player1rank = -1;
-  if(isDefined(level.players[1])) {
+  if(isDefined(level.players[1]))
     player1rank = int(level.players[1] maps\mp\alien\_persistence::get_player_rank());
-  }
 
   player2rank = -1;
-  if(isDefined(level.players[2])) {
+  if(isDefined(level.players[2]))
     player2rank = int(level.players[2] maps\mp\alien\_persistence::get_player_rank());
-  }
 
   player3rank = -1;
-  if(isDefined(level.players[3])) {
+  if(isDefined(level.players[3]))
     player3rank = int(level.players[3] maps\mp\alien\_persistence::get_player_rank());
-  }
 
   hivescleared = 0;
-  if(isDefined(level.current_cycle_num)) {
+  if(isDefined(level.current_cycle_num))
     hivescleared = level.current_cycle_num;
-  }
 
   hivename = "unknown";
-  if(isDefined(level.current_hive_name)) {
+  if(isDefined(level.current_hive_name))
     hivename = level.current_hive_name;
-  }
 
   timesdowned = level.alienBBData["times_downed"];
   timesdied = level.alienBBData["times_died"];
@@ -1892,11 +1838,10 @@ blackBox_EndGame(endcondition, playtime) {
     player_ent_number = int(player GetEntityNumber());
     player_ref = "EoGPlayer" + player_ent_number;
 
-    if(isDefined(player.name)) {
+    if(isDefined(player.name))
       player_name = player.name;
-    } else {
+    else
       player_name = "-error";
-    }
 
     player_play_time = getTime() - player.connect_time;
 
@@ -1987,17 +1932,15 @@ get_end_condition(endReasonTextIndex) {
 get_play_time() {
   playtime = 0;
 
-  if(isDefined(level.startTime)) {
+  if(isDefined(level.startTime))
     playtime = getTime() - level.startTime;
-  }
 
   return playtime;
 }
 
 alien_customprematchperiod() {
-  if(!is_true(level.introscreen_done)) {
+  if(!is_true(level.introscreen_done))
     level.prematchPeriod = 10;
-  }
 
   if(!maps\mp\alien\_intro_sequence::intro_sequence_enabled()) {
     wait_time = 3;
@@ -2017,9 +1960,8 @@ alien_customprematchperiod() {
       level.players[index] freezeControlsWrapper(false);
       level.players[index] enableWeapons();
 
-      if(!isDefined(level.players[index].pers["team"])) {
+      if(!isDefined(level.players[index].pers["team"]))
         continue;
-      }
     }
 
     return;
@@ -2028,14 +1970,12 @@ alien_customprematchperiod() {
   if(level.prematchPeriod > 0) {
     player = level wait_for_first_player_connect();
 
-    if(maps\mp\alien\_intro_sequence::intro_sequence_enabled()) {
+    if(maps\mp\alien\_intro_sequence::intro_sequence_enabled())
       level thread maps\mp\alien\_intro_sequence::play_intro_sequence(player);
-    }
 
     level thread show_introscreen_text();
-    if(isDefined(level.intro_dialogue_func)) {
+    if(isDefined(level.intro_dialogue_func))
       level thread[[level.intro_dialogue_func]]();
-    }
 
     wait(level.prematchPeriod - 3);
     if(isDefined(level.postIntroscreenFunc)) {
@@ -2060,9 +2000,8 @@ alien_customprematchperiod() {
     level.players[index] freezeControlsWrapper(false);
     level.players[index] enableWeapons();
 
-    if(!isDefined(level.players[index].pers["team"])) {
+    if(!isDefined(level.players[index].pers["team"]))
       continue;
-    }
   }
 
 }
@@ -2121,36 +2060,29 @@ setup_last_hive(last_hive_name) {
 }
 
 register_encounter(encounter_func, skill_point_reward, hardcore_skill_point_reward, advance_to_next_area, debug_skip_func, debug_pre_encounter_func, debug_force_end_func) {
-  if(!isDefined(level.encounters)) {
+  if(!isDefined(level.encounters))
     level.encounters = [];
-  }
 
   encounter_info = spawnStruct();
   encounter_info.func = encounter_func;
 
-  if(isDefined(hardcore_skill_point_reward)) {
+  if(isDefined(hardcore_skill_point_reward))
     encounter_info.hardcore_skill_point = hardcore_skill_point_reward;
-  }
 
-  if(isDefined(skill_point_reward)) {
+  if(isDefined(skill_point_reward))
     encounter_info.skill_point = skill_point_reward;
-  }
 
-  if(isDefined(advance_to_next_area)) {
+  if(isDefined(advance_to_next_area))
     encounter_info.go_next_area = advance_to_next_area;
-  }
 
-  if(isDefined(debug_skip_func)) {
+  if(isDefined(debug_skip_func))
     encounter_info.skip_func = debug_skip_func;
-  }
 
-  if(isDefined(debug_pre_encounter_func)) {
+  if(isDefined(debug_pre_encounter_func))
     encounter_info.pre_encounter_func = debug_pre_encounter_func;
-  }
 
-  if(isDefined(debug_force_end_func)) {
+  if(isDefined(debug_force_end_func))
     encounter_info.force_end_func = debug_force_end_func;
-  }
 
   level.encounters[level.encounters.size] = encounter_info;
 }
@@ -2165,7 +2097,9 @@ run_encounters() {
     return;
   }
   if(isDefined(level.dlc_run_encounters_override)) {
-    [[level.dlc_run_encounters_override]]();
+    [
+      [level.dlc_run_encounters_override]
+    ]();
     return;
   }
 
@@ -2179,42 +2113,34 @@ run_encounters() {
   foreach(encounter_info in level.encounters) {
     level.current_encounter_info = encounter_info;
 
-    if(should_run_pre_encounter_func(start_point_enable, encounter_index, start_point_index)) {
-      [
-        [encounter_info.pre_encounter_func]
-      ]();
-    }
+    if(should_run_pre_encounter_func(start_point_enable, encounter_index, start_point_index))
+      [[encounter_info.pre_encounter_func]]();
 
     if(should_skip_encounter(start_point_enable, encounter_index, start_point_index)) {
       [
         [encounter_info.skip_func]
       ]();
 
-      if(isDefined(encounter_info.skill_point)) {
+      if(isDefined(encounter_info.skill_point))
         inc_starting_skill_point(encounter_info.skill_point);
-      }
 
-      if(is_true(encounter_info.go_next_area)) {
+      if(is_true(encounter_info.go_next_area))
         inc_current_area_index();
-      }
     } else {
       [
         [encounter_info.func]
       ]();
 
       if(!is_hardcore_mode()) {
-        if(isDefined(encounter_info.skill_point)) {
+        if(isDefined(encounter_info.skill_point))
           give_players_points(encounter_info.skill_point);
-        }
       } else {
-        if(isDefined(encounter_info.hardcore_skill_point)) {
+        if(isDefined(encounter_info.hardcore_skill_point))
           give_players_points(encounter_info.hardcore_skill_point);
-        }
       }
 
-      if(is_true(encounter_info.go_next_area)) {
+      if(is_true(encounter_info.go_next_area))
         maps\mp\alien\_collectibles::advance_to_next_area();
-      }
     }
 
     encounter_index++;
@@ -2227,17 +2153,15 @@ init_locker_key_upgrade() {
   level endon("game_ended");
   wait 5.0;
 
-  if(!isDefined(level.starting_locker_key_names)) {
+  if(!isDefined(level.starting_locker_key_names))
     level.starting_locker_key_names = [];
-  }
 
   player_name = self getxuid();
 
   if(is_true(level.onlineGame)) {
     for(i = 0; i < level.starting_locker_key_names.size; i++) {
-      if(level.starting_locker_key_names[i] == player_name) {
+      if(level.starting_locker_key_names[i] == player_name)
         return;
-      }
     }
   }
 
@@ -2248,21 +2172,18 @@ init_locker_key_upgrade() {
 }
 
 should_give_starting_flare() {
-  if(!(self has_perk("perk_health", [0, 1, 2, 3, 4]))) {
+  if(!(self has_perk("perk_health", [0, 1, 2, 3, 4])))
     return false;
-  }
 
-  if(!isDefined(level.starting_flare_names)) {
+  if(!isDefined(level.starting_flare_names))
     level.starting_flare_names = [];
-  }
 
   player_name = self getxuid();
 
   if(is_true(level.onlineGame)) {
     for(i = 0; i < level.starting_flare_names.size; i++) {
-      if(level.starting_flare_names[i] == player_name) {
+      if(level.starting_flare_names[i] == player_name)
         return false;
-      }
     }
   }
 
@@ -2271,47 +2192,41 @@ should_give_starting_flare() {
 }
 
 is_start_point_enable() {
-  if(maps\mp\alien\_debug::startPointEnabled()) {
+  if(maps\mp\alien\_debug::startPointEnabled())
     return true;
-  }
 
   return false;
 }
 
 get_start_point_index(start_point_enable) {
-  if(start_point_enable) {
+  if(start_point_enable)
     return maps\mp\alien\_debug::getStartPointIndex();
-  }
 
   return 0;
 }
 
 should_run_pre_encounter_func(start_point_enable, encounter_index, start_point_index) {
-  if(start_point_enable) {
+  if(start_point_enable)
     return (encounter_index == start_point_index);
-  }
 
   return false;
 }
 
 should_skip_encounter(start_point_enable, encounter_index, start_point_index) {
-  if(start_point_enable) {
+  if(start_point_enable)
     return (encounter_index < start_point_index);
-  }
 
   return false;
 }
 
 give_players_points(skill_point) {
-  foreach(player in level.players) {
-    player maps\mp\alien\_persistence::give_player_points(int(skill_point));
-  }
+  foreach(player in level.players)
+  player maps\mp\alien\_persistence::give_player_points(int(skill_point));
 }
 
 inc_starting_skill_point(skill_point) {
-  if(!isDefined(level.debug_starting_skill_point)) {
+  if(!isDefined(level.debug_starting_skill_point))
     level.debug_starting_skill_point = 0;
-  }
 
   level.debug_starting_skill_point += skill_point;
 }
@@ -2341,9 +2256,8 @@ melee_strength_timer() {
       }
     } else if(!self MeleeButtonPressed())
       melee_button_released = true;
-    else {
+    else
       melee_button_released = false;
-    }
     wait 0.05;
   }
 }

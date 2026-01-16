@@ -10,6 +10,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\round;
 #include scripts\mp_common\teams\teams;
+
 #namespace platoons;
 
 autoexec __init__system__() {
@@ -34,7 +35,7 @@ update_status() {
   }
 
   params = {
-    #var_1ab40902: [],
+    #var_1ab40902: [], 
     #var_42c20e77: []
   };
 
@@ -165,7 +166,7 @@ function_77ad4730() {
     }
   }
 
-  return assignment;
+    return assignment;
 }
 
 function_4b016b57() {
@@ -173,10 +174,10 @@ function_4b016b57() {
     return;
   }
 
-  team = self.pers[# "team"];
+  team = self.pers[#"team"];
   platoon = getteamplatoon(team);
 
-  if(platoon != # "invalid" && platoon != # "none") {
+  if(platoon != #"invalid" && platoon != #"none") {
     return;
   }
 
@@ -187,7 +188,7 @@ function_4b016b57() {
 function_a214d798(platoon) {
   players = [];
 
-  if(platoon == # "none" || platoon == # "invalid") {
+  if(platoon == #"none" || platoon == #"invalid") {
     return players;
   }
 

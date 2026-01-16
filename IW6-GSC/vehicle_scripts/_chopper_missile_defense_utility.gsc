@@ -36,9 +36,8 @@ missile_monitormisstarget(var_0, var_1, var_2, var_3, var_4) {
   var_5 endon("missile_monitorMissTarget");
   var_5 endon("death");
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_5 endon(var_4);
-  }
 
   var_0 endon("death");
   var_1 = common_scripts\utility::ter_op(isDefined(var_1), var_1, 0);
@@ -55,16 +54,14 @@ missile_monitormisstarget(var_0, var_1, var_2, var_3, var_4) {
     var_8 = vectornormalize(var_0.origin - var_5.origin);
   }
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_5.missed_target = var_0;
-  }
 
   var_5 notify(var_3);
   var_5 missile_cleartarget();
 
-  if(isDefined(var_0) && isDefined(var_0.missile_defense) && isDefined(var_0.missile_defense.firedonme) && var_0.missile_defense.firedonme.size) {
+  if(isDefined(var_0) && isDefined(var_0.missile_defense) && isDefined(var_0.missile_defense.firedonme) && var_0.missile_defense.firedonme.size)
     var_0.missile_defense.firedonme = common_scripts\utility::array_remove(var_0.missile_defense.firedonme, var_5);
-  }
 
   if(!var_1) {
     return;
@@ -72,9 +69,8 @@ missile_monitormisstarget(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_2)) {
     var_9 = squared(var_2);
 
-    while(distancesquared(var_5.origin, var_0.origin) < var_9) {
+    while(distancesquared(var_5.origin, var_0.origin) < var_9)
       wait 0.05;
-    }
   }
 
   var_5 delete();
@@ -86,11 +82,10 @@ do_evade(var_0) {
   }
   var_1 = "";
 
-  if(self.classname == "script_vehicle_apache_iw6") {
+  if(self.classname == "script_vehicle_apache_iw6")
     var_1 = "apache";
-  } else if(self.classname == "script_vehicle_hind_battle_oilrocks") {
+  else if(self.classname == "script_vehicle_hind_battle_oilrocks")
     var_1 = "battlehind";
-  }
 
   if(var_1 == "") {
     return;
@@ -127,9 +122,8 @@ add_valid_evade(var_0, var_1) {
   var_2 = self localtoworldcoords(getmovedelta(var_0, 0, 1));
 
   foreach(var_4 in getEntArray("no_chopper_evade_area", "targetname")) {
-    if(ispointinvolume(var_2, var_4)) {
+    if(ispointinvolume(var_2, var_4))
       return var_1;
-    }
   }
 
   var_1[var_1.size] = var_0;
@@ -156,14 +150,12 @@ monitorflarerelease_auto(var_0, var_1) {
     var_11 = 1;
 
     if(var_4) {
-      if(isDefined(var_0)) {
+      if(isDefined(var_0))
         var_11 = self[[var_0]]();
-      }
 
       if(var_11) {
-        if(isDefined(level.apache_chatter_func)) {
+        if(isDefined(level.apache_chatter_func))
           self.owner[[level.apache_chatter_func]]("flares_out");
-        }
 
         for(var_12 = 0; var_12 < var_6; var_12++) {
           var_13 = common_scripts\utility::array_randomize(["right", "left"]);
@@ -177,9 +169,8 @@ monitorflarerelease_auto(var_0, var_1) {
       var_4 = 0;
 
       if(var_11) {
-        if(isDefined(var_1)) {
+        if(isDefined(var_1))
           self childthread[[var_1]](var_7);
-        }
 
         continue;
       }
@@ -227,9 +218,8 @@ monitorenemymissilelockon(var_0) {
       continue;
     }
     if(isDefined(var_0)) {
-      if(!isenemylockedontome(var_2)) {
+      if(!isenemylockedontome(var_2))
         self childthread[[var_0]](var_2);
-      }
     }
 
     self.lockedontome = common_scripts\utility::array_removeundefined(self.lockedontome);
@@ -266,11 +256,10 @@ flare_trackvelocity() {
 
 dsq_2d_ents_lt(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       return common_scripts\utility::ter_op(dsq_2d_ents(var_0, var_0) < squared(var_2) && abs(var_1.origin[2] - var_0.origin[2]) < var_3, 1, 0);
-    } else {
+    else
       return common_scripts\utility::ter_op(dsq_2d_ents(var_0, var_1) < squared(var_2), 1, 0);
-    }
   }
 
   return common_scripts\utility::ter_op(isDefined(var_4), var_4, 0);
@@ -281,9 +270,8 @@ dsq_2d_ents(var_0, var_1) {
 }
 
 dsq_ents_lt(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
+  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2))
     return common_scripts\utility::ter_op(distancesquared(var_0.origin, var_1.origin) < squared(var_2), 1, 0);
-  }
 
   return common_scripts\utility::ter_op(isDefined(var_3), var_3, 0);
 }
@@ -293,25 +281,21 @@ flat_angle_yaw(var_0) {
 }
 
 gt_op(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isDefined(var_1))
     return common_scripts\utility::ter_op(var_0 > var_1, var_0, var_1);
-  }
 
-  if(isDefined(var_0) && !isDefined(var_1)) {
+  if(isDefined(var_0) && !isDefined(var_1))
     return var_0;
-  }
 
-  if(!isDefined(var_0) && isDefined(var_1)) {
+  if(!isDefined(var_0) && isDefined(var_1))
     return var_1;
-  }
 
   return var_2;
 }
 
 override_array_delete(var_0, var_1, var_2) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = ["death"];
-  }
 
   var_2 = gt_op(var_2, 0);
 
@@ -327,16 +311,14 @@ override_array_delete(var_0, var_1, var_2) {
         continue;
       }
 
-      foreach(var_6 in var_1) {
-        var_4 notify(var_6);
-      }
+      foreach(var_6 in var_1)
+      var_4 notify(var_6);
 
       if(var_2 > 0) {
         wait 0.05;
 
-        if(isDefined(var_4)) {
+        if(isDefined(var_4))
           var_4 delete();
-        }
       } else
         var_4 delete();
     }
@@ -349,9 +331,8 @@ on_param_death_delete_self(var_0) {
   self endon("death");
   var_0 waittill("death");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 shootflares(var_0) {
@@ -361,22 +342,20 @@ shootflares(var_0) {
   var_1 = self.owner;
   var_2 = var_1.angles;
 
-  if(isDefined(self.flarerig_tagangles)) {
+  if(isDefined(self.flarerig_tagangles))
     var_2 = flat_angle_yaw(var_1 gettagangles(self.flarerig_tagangles));
-  } else if(isplayer(var_1)) {
+  else if(isplayer(var_1))
     var_2 = (var_1 getplayerangles()[0], var_2[1], var_2[2]);
-  }
 
   var_3 = var_1.origin;
 
   if(isDefined(self.flarerig_tagorigin)) {
     var_4 = self.flarerig_tagorigin;
 
-    if(maps\_utility::hastag(var_1.model, self.flarerig_tagorigin)) {
+    if(maps\_utility::hastag(var_1.model, self.flarerig_tagorigin))
       var_3 = var_1 gettagorigin(self.flarerig_tagorigin);
-    } else if(maps\_utility::hastag(var_1.model, "tag_origin")) {
+    else if(maps\_utility::hastag(var_1.model, "tag_origin"))
       var_3 = var_1 gettagorigin("tag_origin");
-    }
   }
 
   var_5 = maps\_utility::spawn_anim_model(self.flarerig_name);
@@ -392,9 +371,8 @@ shootflares(var_0) {
   if(self.flarerig_link) {
     var_1 playrumbleonentity("smg_fire");
 
-    if(isDefined(self.vehicle)) {
+    if(isDefined(self.vehicle))
       var_5 linkto(self.vehicle, "tag_origin");
-    }
   }
 
   self.flares = common_scripts\utility::array_removeundefined(self.flares);
@@ -421,27 +399,24 @@ shootflares(var_0) {
   wait 0.05;
 
   foreach(var_14, var_15 in var_11) {
-    if(isDefined(var_15)) {
+    if(isDefined(var_15))
       playFXOnTag(self.flarefx, var_11[var_14], "tag_origin");
-    }
   }
 
   var_5 thread maps\_utility::play_sound_on_tag(self.flaresound, "tag_fx", 1);
   var_5 waittillmatch("flare_anim", "end");
 
   foreach(var_14, var_15 in var_11) {
-    if(isDefined(var_15)) {
+    if(isDefined(var_15))
       stopFXOnTag(self.flarefx, var_11[var_14], "tag_origin");
-    }
   }
 
   var_5 delete();
   var_11 = common_scripts\utility::array_removeundefined(var_11);
   common_scripts\utility::array_thread(var_11, ::flare_doburnout);
 
-  if(isDefined(self.flares)) {
+  if(isDefined(self.flares))
     self.flares = common_scripts\utility::array_removeundefined(self.flares);
-  }
 }
 
 flare_doburnout() {
@@ -477,9 +452,8 @@ flare_monitortakingoutmissile(var_0, var_1, var_2) {
     waittillframeend;
 
     if(var_4 == "LISTEN_missile_missed_flare" || isDefined(var_1.missed_target) && var_1.missed_target == var_1.mytarget || distancesquared(self.origin, var_1.origin) <= var_3) {
-      if(self islinked()) {
+      if(self islinked())
         self unlink();
-      }
 
       var_5 = flat_angle_yaw(var_1.angles);
       var_6 = anglesToForward(var_5);
@@ -488,9 +462,8 @@ flare_monitortakingoutmissile(var_0, var_1, var_2) {
       earthquake(0.5, 0.6, var_1.origin, 2048);
       thread common_scripts\utility::play_sound_in_space("chopper_trophy_fire", var_1.origin);
 
-      if(var_2.owner == level.player) {
+      if(var_2.owner == level.player)
         thread common_scripts\utility::play_sound_in_space("chopper_trophy_fire_shards", var_1.origin);
-      }
 
       var_1 delete();
       self delete();
@@ -504,9 +477,8 @@ monitorflares() {
     self.firedonme = array_removeinvalidmissiles(self.firedonme);
     self.flares = common_scripts\utility::array_removeundefined(self.flares);
 
-    if(self.firedonme.size && self.flares.size) {
+    if(self.firedonme.size && self.flares.size)
       pairflareswithclosestmissile();
-    }
 
     wait 0.05;
   }
@@ -526,20 +498,17 @@ pairflareswithclosestmissile() {
       if(isDefined(var_6.mytarget)) {
         continue;
       }
-      if(!isDefined(var_3)) {
+      if(!isDefined(var_3))
         var_3 = var_6;
-      }
 
       var_7 = distancesquared(var_3.origin, var_2.origin);
       var_8 = distancesquared(var_6.origin, var_2.origin);
 
-      if(var_7 < var_0 * var_0) {
+      if(var_7 < var_0 * var_0)
         var_4 = 1;
-      }
 
-      if(var_8 < var_7) {
+      if(var_8 < var_7)
         var_3 = var_6;
-      }
     }
 
     if(isDefined(var_3) && var_4) {

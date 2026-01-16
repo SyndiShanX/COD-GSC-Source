@@ -29,6 +29,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_powerups;
 
 init() {
@@ -66,7 +67,7 @@ init() {
     level.zombie_powerups = [];
   }
 
-  level._effect[# "powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
+  level._effect[#"powerup_off"] = #"zombie/fx_powerup_off_green_zmb";
   init_powerups();
 
   if(!level.enable_magic || !zm_custom::function_901b751c(#"zmpowerupsactive")) {
@@ -87,7 +88,7 @@ init_powerups() {
     level.active_powerups = [];
   }
 
-  add_zombie_powerup("insta_kill_ug", "zombie_skull", # "hash_1784640b956f2f85", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
+  add_zombie_powerup("insta_kill_ug", "zombie_skull", #"hash_1784640b956f2f85", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
 
   if(isDefined(level.var_cacd8f96)) {
     [[level.var_cacd8f96]]();
@@ -176,9 +177,9 @@ powerup_hud_monitor() {
           continue;
         }
 
-        if(player.team === # "spectator") {
-          continue;
-        }
+          if(player.team === #"spectator") {
+            continue;
+          }
 
         if(isDefined(level.var_209e0eb4)) {
           if(![
@@ -254,7 +255,7 @@ get_next_powerup() {
   if(isDefined(level.var_ab5b85bf)) {
     powerup = level.var_ab5b85bf;
     level.var_ab5b85bf = undefined;
-  } else if(level.zm_genesis_robot_pay_towardsreactswordstart == 0 && zm_custom::function_901b751c(#"zmpowerupmaxammo") && isDefined(level.zombie_powerups[# "full_ammo"].func_should_drop_with_regular_powerups) && [[level.zombie_powerups[# "full_ammo"].func_should_drop_with_regular_powerups]]()) {
+  } else if(level.zm_genesis_robot_pay_towardsreactswordstart == 0 && zm_custom::function_901b751c(#"zmpowerupmaxammo") && isDefined(level.zombie_powerups[#"full_ammo"].func_should_drop_with_regular_powerups) && [[level.zombie_powerups[#"full_ammo"].func_should_drop_with_regular_powerups]]()) {
     powerup = "full_ammo";
   } else {
     powerup = level.zombie_powerup_array[level.zombie_powerup_index];
@@ -270,16 +271,17 @@ get_next_powerup() {
 }
 
 get_valid_powerup() {
+
   if(isDefined(level.zombie_devgui_power) && level.zombie_devgui_power == 1) {
     level.zombie_devgui_power = 0;
     return level.zombie_powerup_array[level.zombie_powerup_index];
   }
 
-  if(isDefined(level.zombie_powerup_boss)) {
-    i = level.zombie_powerup_boss;
-    level.zombie_powerup_boss = undefined;
-    return level.zombie_powerup_array[i];
-  }
+    if(isDefined(level.zombie_powerup_boss)) {
+      i = level.zombie_powerup_boss;
+      level.zombie_powerup_boss = undefined;
+      return level.zombie_powerup_array[i];
+    }
 
   if(isDefined(level.zombie_powerup_ape)) {
     str_powerup = level.zombie_powerup_ape;
@@ -318,7 +320,7 @@ minigun_no_drop() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_minigun_on"] == 1) {
+    if(players[i].zombie_vars[#"zombie_powerup_minigun_on"] == 1) {
       return true;
     }
   }
@@ -446,8 +448,8 @@ function_b753385f(weapon) {
       trace = groundtrace(self.origin + (0, 0, 5), self.origin + (0, 0, -300), 0, undefined);
     }
 
-    origin = trace[# "position"];
-    hit_ent = trace[# "entity"];
+    origin = trace[#"position"];
+    hit_ent = trace[#"entity"];
     var_d13d4980 = undefined;
 
     if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
@@ -490,34 +492,34 @@ add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_with_regular
   }
 
   switch (powerup_name) {
-    case # "small_ammo":
-    case # "full_ammo":
+    case #"small_ammo":
+    case #"full_ammo":
       str_rule = "zmPowerupMaxAmmo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       str_rule = "zmPowerupFireSale";
       break;
-    case # "bonus_points_player_shared":
-    case # "bonus_points_player":
-    case # "bonus_points_team":
+    case #"bonus_points_player_shared":
+    case #"bonus_points_player":
+    case #"bonus_points_team":
       str_rule = "zmPowerupChaosPoints";
       break;
-    case # "free_perk":
+    case #"free_perk":
       str_rule = "zmPowerupFreePerk";
       break;
-    case # "nuke":
+    case #"nuke":
       str_rule = "zmPowerupNuke";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       str_rule = "zmPowerupSpecialWeapon";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       str_rule = "zmPowerupInstakill";
       break;
-    case # "double_points":
+    case #"double_points":
       str_rule = "zmPowerupDouble";
       break;
-    case # "carpenter":
+    case #"carpenter":
       str_rule = "zmPowerupCarpenter";
       break;
     default:
@@ -562,7 +564,7 @@ add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_with_regular
     struct.on_name = on_name;
   }
 
-  if(isDefined(powerup_name) && powerup_name == # "full_ammo") {
+  if(isDefined(powerup_name) && powerup_name == #"full_ammo") {
     level.var_aebef29d = gettime() / 1000;
   }
 }
@@ -702,7 +704,7 @@ powerup_drop(drop_point, powerup, var_4e31704a = 1) {
 
   print_powerup_drop(powerup.powerup_name, str_debug);
 
-  bb::logpowerupevent(powerup, undefined, "_dropped");
+    bb::logpowerupevent(powerup, undefined, "_dropped");
   powerup thread powerup_timeout();
   powerup thread powerup_wobble();
   powerup util::delay(0.1, "powerup_timedout", &powerup_grab);
@@ -749,7 +751,7 @@ function_37e79fb6(powerup) {
 }
 
 function_27437dae() {
-  self endon(#"death", # "powerup_timedout", # "powerup_grabbed");
+  self endon(#"death", #"powerup_timedout", #"powerup_grabbed");
 
   if(!zm_utility::function_21f4ac36() || !isDefined(level.var_a2a9b2de)) {
     return;
@@ -796,33 +798,33 @@ specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay 
   }
 
   switch (var_5a63971) {
-    case # "full_ammo":
+    case #"full_ammo":
       str_rule = "zmPowerupMaxAmmo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       str_rule = "zmPowerupFireSale";
       break;
-    case # "bonus_points_player_shared":
-    case # "bonus_points_player":
-    case # "bonus_points_team":
+    case #"bonus_points_player_shared":
+    case #"bonus_points_player":
+    case #"bonus_points_team":
       str_rule = "zmPowerupChaosPoints";
       break;
-    case # "free_perk":
+    case #"free_perk":
       str_rule = "zmPowerupFreePerk";
       break;
-    case # "nuke":
+    case #"nuke":
       str_rule = "zmPowerupNuke";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       str_rule = "zmPowerupSpecialWeapon";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       str_rule = "zmPowerupInstakill";
       break;
-    case # "double_points":
+    case #"double_points":
       str_rule = "zmPowerupDouble";
       break;
-    case # "carpenter":
+    case #"carpenter":
       str_rule = "zmPowerupCarpenter";
       break;
     default:
@@ -843,7 +845,7 @@ specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay 
   }
 
   s_trace = physicstrace(powerup_location + (0, 0, 10), powerup_location + (0, 0, -100), (0, 0, 0), (0, 0, 0), undefined, 2 | 16);
-  hit_ent = s_trace[# "entity"];
+  hit_ent = s_trace[#"entity"];
 
   if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
     powerup = spawn("script_model", powerup_location + (0, 0, 40));
@@ -892,12 +894,12 @@ function_14b7208c(str_powerup, powerup_team, powerup_location, powerup_player) {
   if(str_powerup === "nuke") {
     name = string(randomint(2147483647));
     origin = self.origin;
-    badplace_cylinder(name, 0, origin, var_ce95e926, var_f9f778c1, # "allies");
+    badplace_cylinder(name, 0, origin, var_ce95e926, var_f9f778c1, #"allies");
 
     while(isDefined(self)) {
       if(distance2dsquared(origin, self.origin) > var_d2057007 * var_d2057007) {
         origin = self.origin;
-        badplace_cylinder(name, 0, origin, var_ce95e926, var_f9f778c1, # "allies");
+        badplace_cylinder(name, 0, origin, var_ce95e926, var_f9f778c1, #"allies");
       }
 
       wait 1;
@@ -989,12 +991,12 @@ powerup_setup(powerup_override, powerup_team, powerup_location, powerup_player, 
 }
 
 powerup_zombie_grab_trigger_cleanup(trigger) {
-  self waittill(#"powerup_timedout", # "powerup_grabbed", # "hacked");
+  self waittill(#"powerup_timedout", #"powerup_grabbed", #"hacked");
   trigger delete();
 }
 
 powerup_zombie_grab(powerup_team) {
-  self endon(#"powerup_timedout", # "powerup_grabbed", # "hacked");
+  self endon(#"powerup_timedout", #"powerup_grabbed", #"hacked");
   zombie_grab_trigger = spawn("trigger_radius", self.origin - (0, 0, 40), (512 | 1) + 8, 32, 72);
   zombie_grab_trigger enablelinkto();
   zombie_grab_trigger linkto(self);
@@ -1061,7 +1063,7 @@ powerup_grab(powerup_team) {
     return;
   }
 
-  self endon(#"powerup_timedout", # "powerup_grabbed");
+  self endon(#"powerup_timedout", #"powerup_grabbed");
   range_squared = 4096;
 
   while(isDefined(self)) {
@@ -1138,7 +1140,7 @@ powerup_grab(powerup_team) {
           }
         } else {
           switch (self.powerup_name) {
-            case # "teller_withdrawl":
+            case #"teller_withdrawl":
               level thread teller_withdrawl(self, player);
               break;
             default:
@@ -1389,7 +1391,7 @@ function_d5b6ce91() {
 }
 
 powerup_wobble() {
-  self endon(#"powerup_grabbed", # "powerup_timedout");
+  self endon(#"powerup_grabbed", #"powerup_timedout");
 
   if(isDefined(level.zombie_powerups[self.powerup_name]) && isDefined(level.zombie_powerups[self.powerup_name].var_cad40b46) && level.zombie_powerups[self.powerup_name].var_cad40b46) {
     return;
@@ -1455,7 +1457,7 @@ powerup_timeout() {
     return;
   }
 
-  self endon(#"powerup_grabbed", # "death", # "powerup_reset");
+  self endon(#"powerup_grabbed", #"death", #"powerup_reset");
   self powerup_show();
   wait_time = 15;
 
@@ -1635,7 +1637,7 @@ tesla_powerup_active() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_tesla_on"]) {
+    if(players[i].zombie_vars[#"zombie_powerup_tesla_on"]) {
       return true;
     }
   }
@@ -1669,14 +1671,14 @@ print_powerup_drop(powerup, type) {
   println("<dev string:x18d>");
 }
 
-function register_carpenter_node(node, callback) {
-  if(!isDefined(level._additional_carpenter_nodes)) {
-    level._additional_carpenter_nodes = [];
-  }
+  function register_carpenter_node(node, callback) {
+    if(!isDefined(level._additional_carpenter_nodes)) {
+      level._additional_carpenter_nodes = [];
+    }
 
-  node._post_carpenter_callback = callback;
-  level._additional_carpenter_nodes[level._additional_carpenter_nodes.size] = node;
-}
+    node._post_carpenter_callback = callback;
+    level._additional_carpenter_nodes[level._additional_carpenter_nodes.size] = node;
+  }
 
 func_should_never_drop() {
   return false;
@@ -1687,7 +1689,7 @@ func_should_always_drop() {
 }
 
 powerup_emp() {
-  self endon(#"powerup_timedout", # "powerup_grabbed");
+  self endon(#"powerup_timedout", #"powerup_grabbed");
 
   if(!zm_utility::should_watch_for_emp()) {
     return;
@@ -1697,7 +1699,7 @@ powerup_emp() {
     waitresult = level waittill(#"emp_detonate");
 
     if(distancesquared(waitresult.position, self.origin) < waitresult.radius * waitresult.radius) {
-      playFX(level._effect[# "powerup_off"], self.origin);
+      playFX(level._effect[#"powerup_off"], self.origin);
       self thread powerup_delete_delayed();
       self notify(#"powerup_timedout");
     }
@@ -1722,12 +1724,12 @@ get_powerups(origin, radius) {
 
 should_award_stat(powerup_name) {
   switch (powerup_name) {
-    case # "blue_monkey":
-    case # "bonus_points_player_shared":
-    case # "teller_withdrawl":
-    case # "wolf_bonus_hero_power":
-    case # "wolf_bonus_ammo":
-    case # "wolf_bonus_points":
+    case #"blue_monkey":
+    case #"bonus_points_player_shared":
+    case #"teller_withdrawl":
+    case #"wolf_bonus_hero_power":
+    case #"wolf_bonus_ammo":
+    case #"wolf_bonus_points":
       return false;
   }
 
@@ -1856,7 +1858,7 @@ weapon_powerup(ent_player, time, str_weapon, allow_cycling = 0) {
 }
 
 weapon_powerup_change(ent_player, str_gun_return_notify, str_weapon) {
-  ent_player endon(#"death", # "player_downed", str_gun_return_notify, # "replace_weapon_powerup");
+  ent_player endon(#"death", #"player_downed", str_gun_return_notify, #"replace_weapon_powerup");
 
   while(true) {
     waitresult = ent_player waittill(#"weapon_change");
@@ -1870,7 +1872,7 @@ weapon_powerup_change(ent_player, str_gun_return_notify, str_weapon) {
 }
 
 weapon_powerup_countdown(ent_player, str_gun_return_notify, time, str_weapon) {
-  ent_player endon(#"death", # "player_downed", str_gun_return_notify, # "replace_weapon_powerup");
+  ent_player endon(#"death", #"player_downed", str_gun_return_notify, #"replace_weapon_powerup");
   str_weapon_time = "zombie_powerup_" + str_weapon + "_time";
   ent_player.zombie_vars[str_weapon_time] = time;
 
@@ -1883,7 +1885,7 @@ weapon_powerup_countdown(ent_player, str_gun_return_notify, time, str_weapon) {
 }
 
 weapon_powerup_replace(ent_player, str_gun_return_notify, str_weapon) {
-  ent_player endon(#"death", # "player_downed", str_gun_return_notify);
+  ent_player endon(#"death", #"player_downed", str_gun_return_notify);
   str_weapon_on = "zombie_powerup_" + str_weapon + "_on";
   ent_player waittill(#"replace_weapon_powerup");
   ent_player takeweapon(level.zombie_powerup_weapon[str_weapon]);
@@ -1894,7 +1896,7 @@ weapon_powerup_replace(ent_player, str_gun_return_notify, str_weapon) {
 }
 
 weapon_powerup_remove(ent_player, str_gun_return_notify, str_weapon, b_switch_back_weapon = 1) {
-  ent_player endon(#"death", # "player_downed");
+  ent_player endon(#"death", #"player_downed");
   str_weapon_on = "zombie_powerup_" + str_weapon + "_on";
   ent_player takeweapon(level.zombie_powerup_weapon[str_weapon]);
   ent_player.zombie_vars[str_weapon_on] = 0;

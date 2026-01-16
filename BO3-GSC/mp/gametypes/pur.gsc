@@ -27,16 +27,16 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.cumulativeroundscores = getgametypesetting("cumulativeRoundScores");
   level.teambased = 1;
-  level.onstartgametype = &onstartgametype;
-  level.onspawnplayer = &onspawnplayer;
-  level.onroundendgame = &onroundendgame;
-  level.onroundswitch = &onroundswitch;
-  level.ondeadevent = &ondeadevent;
-  level.onlastteamaliveevent = &onlastteamaliveevent;
-  level.onalivecountchange = &onalivecountchange;
-  level.spawnmessage = &pur_spawnmessage;
-  level.onspawnspectator = &onspawnspectator;
-  level.onrespawndelay = &getrespawndelay;
+  level.onstartgametype = & onstartgametype;
+  level.onspawnplayer = & onspawnplayer;
+  level.onroundendgame = & onroundendgame;
+  level.onroundswitch = & onroundswitch;
+  level.ondeadevent = & ondeadevent;
+  level.onlastteamaliveevent = & onlastteamaliveevent;
+  level.onalivecountchange = & onalivecountchange;
+  level.spawnmessage = & pur_spawnmessage;
+  level.onspawnspectator = & onspawnspectator;
+  level.onrespawndelay = & getrespawndelay;
   gameobjects::register_allowed_gameobject("tdm");
   game["dialog"]["gametype"] = "tdm_start";
   game["dialog"]["gametype_hardcore"] = "hctdm_start";
@@ -48,7 +48,7 @@ function main() {
 
 function onstartgametype() {
   setclientnamemode("auto_change");
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["switchedsides"]) {
@@ -61,12 +61,12 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.teams) {
-    util::setobjectivetext(team, &"OBJECTIVES_TDM");
-    util::setobjectivehinttext(team, &"OBJECTIVES_TDM_HINT");
+    util::setobjectivetext(team, & "OBJECTIVES_TDM");
+    util::setobjectivehinttext(team, & "OBJECTIVES_TDM_HINT");
     if(level.splitscreen) {
-      util::setobjectivescoretext(team, &"OBJECTIVES_TDM");
+      util::setobjectivescoretext(team, & "OBJECTIVES_TDM");
     } else {
-      util::setobjectivescoretext(team, &"OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext(team, & "OBJECTIVES_TDM_SCORE");
     }
     spawnlogic::place_spawn_points(spawning::gettdmstartspawnname(team));
     spawnlogic::add_spawn_points(team, "mp_tdm_spawn");
@@ -90,7 +90,7 @@ function onstartgametype() {
 }
 
 function waitthenspawn() {
-  while(self.sessionstate == "dead") {
+  while (self.sessionstate == "dead") {
     wait(0.05);
   }
 }
@@ -115,7 +115,7 @@ function onalivecountchange(team) {
 
 function onlastteamaliveevent(team) {
   if(level.multiteam) {
-    pur_endgamewithkillcam(team, &"MP_ALL_TEAMS_ELIMINATED");
+    pur_endgamewithkillcam(team, & "MP_ALL_TEAMS_ELIMINATED");
   } else {
     if(team == game["attackers"]) {
       pur_endgamewithkillcam(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
@@ -132,7 +132,7 @@ function ondeadevent(team) {
 }
 
 function onendgame(winningteam) {
-  if(isDefined(winningteam) && isDefined(level.teams[winningteam])) {
+  if(isdefined(winningteam) && isdefined(level.teams[winningteam])) {
     globallogic_score::giveteamscoreforobjective(winningteam, 1);
   }
 }
@@ -164,7 +164,7 @@ function onroundendgame(roundwinner) {
 
 function onscoreclosemusic() {
   teamscores = [];
-  while(!level.gameended) {
+  while (!level.gameended) {
     scorelimit = level.scorelimit;
     scorethreshold = scorelimit * 0.1;
     scorethresholdstart = abs(scorelimit - scorethreshold);
@@ -207,11 +207,11 @@ function initpurgatoryenemycountelem(team, y_pos) {
   self.purpurgatorycountelem[team].hidewheninmenu = 1;
   self.purpurgatorycountelem[team].archived = 0;
   self.purpurgatorycountelem[team].alpha = 1;
-  self.purpurgatorycountelem[team].label = &"MP_PURGATORY_ENEMY_COUNT";
+  self.purpurgatorycountelem[team].label = & "MP_PURGATORY_ENEMY_COUNT";
 }
 
 function initplayerhud() {
-  if(isDefined(self.purpurgatorycountelem)) {
+  if(isdefined(self.purpurgatorycountelem)) {
     if(self.pers["team"] == self.purhudteam) {
       return;
     }
@@ -237,7 +237,7 @@ function initplayerhud() {
   self.purpurgatorycountelem[team].hidewheninmenu = 1;
   self.purpurgatorycountelem[team].archived = 0;
   self.purpurgatorycountelem[team].alpha = 1;
-  self.purpurgatorycountelem[team].label = &"MP_PURGATORY_TEAMMATE_COUNT";
+  self.purpurgatorycountelem[team].label = & "MP_PURGATORY_TEAMMATE_COUNT";
   foreach(team in level.teams) {
     if(team == self.team) {
       continue;
@@ -252,7 +252,7 @@ function initplayerhud() {
 function updateplayerhud() {
   self endon("disconnect");
   level endon("end_game");
-  while(true) {
+  while (true) {
     if(self.team != "spectator") {
       self.purpurgatorycountelem[self.team] setvalue(level.deadplayers[self.team].size);
       foreach(team in level.teams) {
@@ -301,9 +301,9 @@ function updatequeuemessage(team) {
   self endon("updatequeuemessage");
   util::waittillslowprocessallowed();
   players = level.deadplayers[team];
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
-    if(!player.waitingtospawn && player.sessionstate != "dead" && !isDefined(player.killcam)) {
+    if(!player.waitingtospawn && player.sessionstate != "dead" && !isdefined(player.killcam)) {
       player displayspawnmessage();
     }
   }

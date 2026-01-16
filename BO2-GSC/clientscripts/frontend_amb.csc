@@ -99,11 +99,10 @@ sndplaycreditsmusic(section) {
   level endon("stopCreditsMusic");
 
   for(i = 0; i < level.credits_track[section].size; i++) {
-    level.credits_trackid = playSound(0, level.credits_track[section][i], (0, 0, 0));
+    level.credits_trackid = playsound(0, level.credits_track[section][i], (0, 0, 0));
 
-    while(soundplaying(level.credits_trackid)) {
+    while(soundplaying(level.credits_trackid))
       wait 0.1;
-    }
   }
 }
 

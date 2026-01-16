@@ -42,9 +42,8 @@ bot_fireteam_connect_monitor() {
           if(level.bots_fireteam_humans.size == 1) {
             num_human_players = 0;
             foreach(client in level.players) {
-              if(isDefined(client) && !IsBot(client)) {
+              if(isDefined(client) && !IsBot(client))
                 num_human_players++;
-              }
             }
             if(num_human_players == 1) {
               spawn_bots(team_limit - 1, get_enemy_team(player.team));
@@ -72,9 +71,8 @@ bot_fireteam_setup_callback_class() {
 }
 
 bot_fireteam_loadout_class_callback() {
-  if(isDefined(self.botLastLoadout)) {
+  if(isDefined(self.botLastLoadout))
     return self.botLastLoadout;
-  }
 
   self.class_num = level.bots_fireteam_num_classes_loaded[self.team];
   level.bots_fireteam_num_classes_loaded[self.team] += 1;
@@ -105,19 +103,16 @@ bot_fireteam_loadout_class_callback() {
     playerData = GetSubStr(loadoutValueArray["loadoutStreakType"], 11) + "Streaks";
 
     loadoutValueArray["loadoutStreak1"] = self.fireteam_commander bot_fireteam_cac_getStreak(self.class_num, playerData, 0);
-    if(loadoutValueArray["loadoutStreak1"] == "none") {
+    if(loadoutValueArray["loadoutStreak1"] == "none")
       loadoutValueArray["loadoutStreak1"] = undefined;
-    }
 
     loadoutValueArray["loadoutStreak2"] = self.fireteam_commander bot_fireteam_cac_getStreak(self.class_num, playerData, 1);
-    if(loadoutValueArray["loadoutStreak2"] == "none") {
+    if(loadoutValueArray["loadoutStreak2"] == "none")
       loadoutValueArray["loadoutStreak2"] = undefined;
-    }
 
     loadoutValueArray["loadoutStreak3"] = self.fireteam_commander bot_fireteam_cac_getStreak(self.class_num, playerData, 2);
-    if(loadoutValueArray["loadoutStreak3"] == "none") {
+    if(loadoutValueArray["loadoutStreak3"] == "none")
       loadoutValueArray["loadoutStreak3"] = undefined;
-    }
 
     bot_fireteam_test_killstreaks(loadoutValueArray, self);
 
@@ -129,15 +124,12 @@ bot_fireteam_loadout_class_callback() {
 }
 
 bot_fireteam_test_killstreaks(loadoutValueArray, bot) {
-  if(isDefined(loadoutValueArray["loadoutStreak1"])) {
+  if(isDefined(loadoutValueArray["loadoutStreak1"]))
     bot_killstreak_valid_for_specific_streakType(loadoutValueArray["loadoutStreak1"], loadoutValueArray["loadoutStreakType"], true);
-  }
-  if(isDefined(loadoutValueArray["loadoutStreak2"])) {
+  if(isDefined(loadoutValueArray["loadoutStreak2"]))
     bot_killstreak_valid_for_specific_streakType(loadoutValueArray["loadoutStreak2"], loadoutValueArray["loadoutStreakType"], true);
-  }
-  if(isDefined(loadoutValueArray["loadoutStreak3"])) {
+  if(isDefined(loadoutValueArray["loadoutStreak3"]))
     bot_killstreak_valid_for_specific_streakType(loadoutValueArray["loadoutStreak3"], loadoutValueArray["loadoutStreakType"], true);
-  }
 }
 
 bot_fireteam_cac_getWeapon(classIndex, weaponIndex) {
@@ -380,9 +372,9 @@ fireteam_tdm_find_hunt_zone(whichTeam) {
         first_search = false;
         changeZones = false;
         curZone = undefined;
-        if(isDefined(level.fireteam_hunt_target_zone[whichTeam])) {
+        if(isDefined(level.fireteam_hunt_target_zone[whichTeam]))
           curZone = level.fireteam_hunt_target_zone[whichTeam];
-        } else {
+        else {
           first_search = true;
           changeZones = true;
           curZone = leaderZone;
@@ -489,9 +481,8 @@ bot_fireteam_hunt_zone_find_node() {
     tries = 0;
     while(!isDefined(node_to_guard) || !self BotNodeAvailable(node_to_guard)) {
       tries++;
-      if(tries >= 10) {
+      if(tries >= 10)
         return bot_random_path_default();
-      }
 
       node_to_guard = nodes_to_select_from[RandomInt(nodes_to_select_from.size)];
     }
@@ -513,9 +504,8 @@ bot_fireteam_hunt_zone_find_node() {
     }
   }
 
-  if(!result) {
+  if(!result)
     return bot_random_path_default();
-  }
 
   return result;
 }

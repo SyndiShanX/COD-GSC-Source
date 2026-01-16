@@ -19,7 +19,7 @@ main() {
   setExpFog(3674.792, 4740, 0.076471, 0.118235, 0.07451, 0.8, 0);
   visionSetNaked("oilrig", 0);
 
-  array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
+  array_thread(getentarray("compassTriggers", "targetname"), ::compass_triggers_think);
 
   thread level_think();
 
@@ -31,20 +31,21 @@ main() {
 compass_triggers_think() {
   assertEx(isDefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
 
-  while(true) {
+  while (true) {
     self waittill("trigger");
     maps\mp\_compass::setupMiniMap(self.script_noteworthy);
   }
 }
 
 level_think() {
+
   eDerrick_thing = getent("derrick_thing", "targetname");
   eDerrick_thing.origin = eDerrick_thing.origin + (0, 0, -2816);
   assert(isDefined(eDerrick_thing));
   time = 2;
   speed = 300;
 
-  while(true) {
+  while (true) {
     eDerrick_thing rotatevelocity((0, speed, 0), time);
     wait(time);
   }
@@ -52,7 +53,7 @@ level_think() {
 }
 
 custom_kill_trigger() {
-  while(true) {
+  while (true) {
     wait 0.1;
 
     foreach(player in level.players) {
@@ -60,7 +61,8 @@ custom_kill_trigger() {
         continue;
       }
 
-      if(player.origin[2] < -350.0) {
+      if(player.origin[2] < -350.0) // -2948.0 <- water level
+      {
         player suicide();
       }
     }

@@ -17,11 +17,10 @@ set_glass_zero_gravity() {
 }
 
 player_space() {
-  if(!issplitscreen()) {
+  if(!issplitscreen())
     thread player_space_breathe_sound();
-  } else if(self == level.player) {
+  else if(self == level.player)
     thread player_space_breathe_sound();
-  }
 
   thread player_scuba_bubbles();
 }
@@ -46,9 +45,8 @@ stop_player_space() {
 }
 
 debug_org() {
-  for(;;) {
+  for(;;)
     wait 0.5;
-  }
 }
 
 player_scuba_bubbles() {
@@ -67,9 +65,8 @@ player_scuba_bubbles() {
     self waittill("space_breathe_sound_starting");
     wait 2.1;
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       self waittill("space_breathe_sound_starting");
-    }
   }
 }
 
@@ -103,11 +100,9 @@ player_space_helmet(var_0) {
 }
 
 player_space_helmet_disable(var_0) {
-  if(isDefined(self.hud_space_helmet_rim)) {
+  if(isDefined(self.hud_space_helmet_rim))
     self.hud_space_helmet_rim maps\_hud_util::destroyelem();
-  }
 
-  if(isDefined(self.hud_space_helmet_overlay)) {
+  if(isDefined(self.hud_space_helmet_overlay))
     self.hud_space_helmet_overlay maps\_hud_util::destroyelem();
-  }
 }

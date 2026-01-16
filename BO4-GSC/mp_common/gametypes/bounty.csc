@@ -10,6 +10,7 @@
 #include scripts\killstreaks\mp\killstreak_vehicle;
 #include scripts\mp_common\dynamic_loadout;
 #include scripts\mp_common\laststand;
+
 #namespace bounty;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -55,7 +56,7 @@ private function_f7842f51(localclientnum) {
 }
 
 private function_bd48b229(localclientnum, fxarray) {
-  self waittill(#"hash_eca936d9bc271de", # "death");
+  self waittill(#"hash_eca936d9bc271de", #"death");
 
   if(isDefined(fxarray)) {
     foreach(fx in fxarray) {
@@ -75,7 +76,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 spawned(localclientnum, killstreak_duration) {
   if(localclientnum === 0) {
-    if(self.team === # "neutral") {
+    if(self.team === #"neutral") {
       self.var_22a05c26 = level.var_c80088b7;
     }
   }

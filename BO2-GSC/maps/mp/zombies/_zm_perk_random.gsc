@@ -33,13 +33,13 @@ init() {
 }
 
 init_machines() {
-  machines = getEntArray("random_perk_machine", "targetname");
+  machines = getentarray("random_perk_machine", "targetname");
 
   foreach(machine in machines) {
     machine.artifact_glow_setting = 1;
     machine.machinery_glow_setting = 0.0;
     machine.is_current_ball_location = 0;
-    machine.unitrigger_stub = spawnStruct();
+    machine.unitrigger_stub = spawnstruct();
     machine.unitrigger_stub.origin = machine.origin + anglestoright(machine.angles) * 22.5;
     machine.unitrigger_stub.angles = machine.angles;
     machine.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -57,11 +57,10 @@ wunderfizztrigger_update_prompt(player) {
   can_use = self wunderfizzstub_update_prompt(player);
 
   if(isDefined(self.hint_string)) {
-    if(isDefined(self.hint_parm1)) {
+    if(isDefined(self.hint_parm1))
       self sethintstring(self.hint_string, self.hint_parm1);
-    } else {
+    else
       self sethintstring(self.hint_string);
-    }
   }
 
   return can_use;
@@ -70,14 +69,13 @@ wunderfizztrigger_update_prompt(player) {
 wunderfizzstub_update_prompt(player) {
   self setcursorhint("HINT_NOICON");
 
-  if(!self trigger_visible_to_player(player)) {
+  if(!self trigger_visible_to_player(player))
     return false;
-  }
 
   self.hint_parm1 = undefined;
 
   if(isDefined(self.stub.trigger_target.is_locked) && self.stub.trigger_target.is_locked) {
-    self.hint_string = &"ZM_TOMB_RPU";
+    self.hint_string = & "ZM_TOMB_RPU";
     return false;
   } else if(self.stub.trigger_target.is_current_ball_location) {
     if(isDefined(self.stub.trigger_target.machine_user)) {
@@ -85,11 +83,11 @@ wunderfizzstub_update_prompt(player) {
         n_purchase_limit = player get_player_perk_purchase_limit();
 
         if(player.num_perks >= n_purchase_limit) {
-          self.hint_string = &"ZM_TOMB_RPT";
+          self.hint_string = & "ZM_TOMB_RPT";
           self.hint_parm1 = n_purchase_limit;
           return false;
         } else {
-          self.hint_string = &"ZM_TOMB_RPP";
+          self.hint_string = & "ZM_TOMB_RPP";
           return true;
         }
       } else
@@ -98,17 +96,17 @@ wunderfizzstub_update_prompt(player) {
       n_purchase_limit = player get_player_perk_purchase_limit();
 
       if(player.num_perks >= n_purchase_limit) {
-        self.hint_string = &"ZM_TOMB_RPT";
+        self.hint_string = & "ZM_TOMB_RPT";
         self.hint_parm1 = n_purchase_limit;
         return false;
       } else {
-        self.hint_string = &"ZM_TOMB_RPB";
+        self.hint_string = & "ZM_TOMB_RPB";
         self.hint_parm1 = level._random_zombie_perk_cost;
         return true;
       }
     }
   } else {
-    self.hint_string = &"ZM_TOMB_RPE";
+    self.hint_string = & "ZM_TOMB_RPE";
     return false;
   }
 }
@@ -118,38 +116,32 @@ trigger_visible_to_player(player) {
   visible = 1;
 
   if(isDefined(self.stub.trigger_target.machine_user)) {
-    if(player != self.stub.trigger_target.machine_user || is_placeable_mine(self.stub.trigger_target.machine_user getcurrentweapon())) {
+    if(player != self.stub.trigger_target.machine_user || is_placeable_mine(self.stub.trigger_target.machine_user getcurrentweapon()))
       visible = 0;
-    }
   } else if(!player can_buy_perk())
     visible = 0;
 
-  if(!visible) {
+  if(!visible)
     return false;
-  }
 
   self setvisibletoplayer(player);
   return true;
 }
 
 can_buy_perk() {
-  if(isDefined(self.is_drinking) && self.is_drinking > 0) {
+  if(isDefined(self.is_drinking) && self.is_drinking > 0)
     return false;
-  }
 
   current_weapon = self getcurrentweapon();
 
-  if(is_placeable_mine(current_weapon) || is_equipment_that_blocks_purchase(current_weapon)) {
+  if(is_placeable_mine(current_weapon) || is_equipment_that_blocks_purchase(current_weapon))
     return false;
-  }
 
-  if(self in_revive_trigger()) {
+  if(self in_revive_trigger())
     return false;
-  }
 
-  if(current_weapon == "none") {
+  if(current_weapon == "none")
     return false;
-  }
 
   return true;
 }
@@ -173,20 +165,19 @@ precache() {
 machines_setup() {
   wait 0.5;
   level.perk_bottle_weapon_array = arraycombine(level.machine_assets, level._custom_perks, 0, 1);
-  start_machines = getEntArray("start_machine", "script_noteworthy");
+  start_machines = getentarray("start_machine", "script_noteworthy");
   assert(isDefined(start_machines.size != 0), "missing start random perk machine");
 
-  if(start_machines.size == 1) {
+  if(start_machines.size == 1)
     level.random_perk_start_machine = start_machines[0];
-  } else {
+  else
     level.random_perk_start_machine = start_machines[randomint(start_machines.size)];
-  }
 
-  machines = getEntArray("random_perk_machine", "targetname");
+  machines = getentarray("random_perk_machine", "targetname");
 
   foreach(machine in machines) {
     spawn_location = spawn("script_model", machine.origin);
-    spawn_location setModel("tag_origin");
+    spawn_location setmodel("tag_origin");
     spawn_location.angles = machine.angles;
     forward_dir = anglestoright(machine.angles);
     spawn_location.origin = spawn_location.origin + vectorscale((0, 0, 1), 65.0);
@@ -215,15 +206,13 @@ machine_power_indicators() {
   while(true) {
     self conditional_power_indicators();
 
-    while(isDefined(self.is_locked) && self.is_locked) {
+    while(isDefined(self.is_locked) && self.is_locked)
       wait 1;
-    }
 
     self conditional_power_indicators();
 
-    while(!(isDefined(self.is_locked) && self.is_locked)) {
+    while(!(isDefined(self.is_locked) && self.is_locked))
       wait 1;
-    }
   }
 }
 
@@ -267,9 +256,8 @@ machine_think() {
   self showpart("j_ball");
   self thread update_animation("start");
 
-  while(isDefined(self.is_locked) && self.is_locked) {
+  while(isDefined(self.is_locked) && self.is_locked)
     wait 1;
-  }
 
   self conditional_power_indicators();
 
@@ -279,7 +267,7 @@ machine_think() {
     level notify("pmmove");
 
     if(player.score < level._random_zombie_perk_cost) {
-      self playSound("evt_perk_deny");
+      self playsound("evt_perk_deny");
       player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
       continue;
     }
@@ -302,9 +290,8 @@ machine_think() {
     player maps\mp\zombies\_zm_score::minus_to_player_score(level._random_zombie_perk_cost);
     self thread update_animation("in_use");
 
-    if(isDefined(level.perk_random_vo_func_usemachine) && isDefined(player)) {
+    if(isDefined(level.perk_random_vo_func_usemachine) && isDefined(player))
       player thread[[level.perk_random_vo_func_usemachine]]();
-    }
 
     while(true) {
       thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
@@ -319,12 +306,12 @@ machine_think() {
       self notify("done_cycling");
 
       if(self.num_time_used >= self.num_til_moved) {
-        self.bottle_spawn_location setModel("t6_wpn_zmb_perk_bottle_bear_world");
+        self.bottle_spawn_location setmodel("t6_wpn_zmb_perk_bottle_bear_world");
         level notify("pmmove");
         self thread update_animation("shut_down");
         wait 3;
         player maps\mp\zombies\_zm_score::add_to_player_score(level._random_zombie_perk_cost);
-        self.bottle_spawn_location setModel("tag_origin");
+        self.bottle_spawn_location setmodel("tag_origin");
         level notify("random_perk_moving");
         self setclientfield("perk_bottle_cycle_state", 0);
         self setclientfield("turn_on_location_indicator", 0);
@@ -335,7 +322,7 @@ machine_think() {
         thread maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, ::wunderfizz_unitrigger_think);
         break;
       } else
-        self.bottle_spawn_location setModel(model);
+        self.bottle_spawn_location setmodel(model);
 
       self.grab_perk_hint = 1;
       thread maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, ::wunderfizz_unitrigger_think);
@@ -347,13 +334,12 @@ machine_think() {
       thread maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, ::wunderfizz_unitrigger_think);
       level notify("pmstop");
 
-      if(player.num_perks >= player get_player_perk_purchase_limit()) {
+      if(player.num_perks >= player get_player_perk_purchase_limit())
         player maps\mp\zombies\_zm_score::add_to_player_score(level._random_zombie_perk_cost);
-      }
 
       self setclientfield("perk_bottle_cycle_state", 0);
       self.machine_user = undefined;
-      self.bottle_spawn_location setModel("tag_origin");
+      self.bottle_spawn_location setmodel("tag_origin");
       self thread update_animation("idle");
       break;
     }
@@ -375,10 +361,10 @@ grab_check(player, random_perk) {
         continue;
       }
 
-      if(player.num_perks < player get_player_perk_purchase_limit()) {
+      if(player.num_perks < player get_player_perk_purchase_limit())
         perk_is_bought = 1;
-      } else {
-        self playSound("evt_perk_deny");
+      else {
+        self playsound("evt_perk_deny");
         player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "sigh");
         self notify("time_out_or_perk_grab");
         return;
@@ -394,9 +380,8 @@ grab_check(player, random_perk) {
   gun = player maps\mp\zombies\_zm_perks::perk_give_bottle_begin(random_perk);
   evt = player waittill_any_return("fake_death", "death", "player_downed", "weapon_change_complete");
 
-  if(evt == "weapon_change_complete") {
+  if(evt == "weapon_change_complete")
     player thread maps\mp\zombies\_zm_perks::wait_give_perk(random_perk, 1);
-  }
 
   player maps\mp\zombies\_zm_perks::perk_give_bottle_end(gun, random_perk);
 
@@ -421,7 +406,7 @@ time_out_check() {
 machine_selector() {
   while(true) {
     level waittill("random_perk_moving");
-    machines = getEntArray("random_perk_machine", "targetname");
+    machines = getentarray("random_perk_machine", "targetname");
 
     if(machines.size == 1) {
       new_machine = machines[0];
@@ -440,9 +425,8 @@ machine_selector() {
 }
 
 include_perk_in_random_rotation(perk) {
-  if(!isDefined(level._random_perk_machine_perk_list)) {
+  if(!isDefined(level._random_perk_machine_perk_list))
     level._random_perk_machine_perk_list = [];
-  }
 
   level._random_perk_machine_perk_list = add_to_array(level._random_perk_machine_perk_list, perk);
 }
@@ -450,22 +434,19 @@ include_perk_in_random_rotation(perk) {
 get_weighted_random_perk(player) {
   keys = array_randomize(getarraykeys(level._random_perk_machine_perk_list));
 
-  if(isDefined(level.custom_random_perk_weights)) {
+  if(isDefined(level.custom_random_perk_weights))
     keys = player[[level.custom_random_perk_weights]]();
-  }
 
   forced_perk = getdvar(#"_id_B097C64C");
 
-  if(forced_perk != "" && isDefined(level._random_perk_machine_perk_list[forced_perk])) {
+  if(forced_perk != "" && isDefined(level._random_perk_machine_perk_list[forced_perk]))
     arrayinsert(keys, forced_perk, 0);
-  }
 
   for(i = 0; i < keys.size; i++) {
-    if(player hasperk(level._random_perk_machine_perk_list[keys[i]])) {
+    if(player hasperk(level._random_perk_machine_perk_list[keys[i]]))
       continue;
-    } else {
+    else
       return level._random_perk_machine_perk_list[keys[i]];
-    }
   }
 
   return level._random_perk_machine_perk_list[keys[0]];
@@ -474,7 +455,7 @@ get_weighted_random_perk(player) {
 perk_bottle_motion() {
   putouttime = 3;
   putbacktime = 10;
-  v_float = anglesToForward(self.angles - (0, 90, 0)) * 10;
+  v_float = anglestoforward(self.angles - (0, 90, 0)) * 10;
   self.bottle_spawn_location.origin = self.origin + (0, 0, 53);
   self.bottle_spawn_location.angles = self.angles;
   self.bottle_spawn_location.origin = self.bottle_spawn_location.origin - v_float;
@@ -494,13 +475,12 @@ start_perk_bottle_cycling() {
 
   while(true) {
     for(i = 0; i < array_key.size; i++) {
-      if(isDefined(level.perk_bottle_weapon_array[array_key[i]].weapon)) {
+      if(isDefined(level.perk_bottle_weapon_array[array_key[i]].weapon))
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].weapon);
-      } else {
+      else
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].perk_bottle);
-      }
 
-      self.bottle_spawn_location setModel(model);
+      self.bottle_spawn_location setmodel(model);
       wait 0.2;
     }
   }
@@ -550,9 +530,8 @@ get_perk_weapon_model(perk) {
       break;
   }
 
-  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_bottle)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_bottle))
     weapon = level._custom_perks[perk].perk_bottle;
-  }
 
   return getweaponmodel(weapon);
 }
@@ -589,16 +568,15 @@ machine_sounds() {
     level waittill("pmstrt");
     rndprk_ent = spawn("script_origin", self.origin);
     rndprk_ent stopsounds();
-    rndprk_ent playSound("zmb_rand_perk_start");
-    rndprk_ent playLoopSound("zmb_rand_perk_loop", 0.5);
+    rndprk_ent playsound("zmb_rand_perk_start");
+    rndprk_ent playloopsound("zmb_rand_perk_loop", 0.5);
     state_switch = level waittill_any_return("pmstop", "pmmove");
     rndprk_ent stoploopsound(1);
 
-    if(state_switch == "pmstop") {
-      rndprk_ent playSound("zmb_rand_perk_stop");
-    } else {
-      rndprk_ent playSound("zmb_rand_perk_leave");
-    }
+    if(state_switch == "pmstop")
+      rndprk_ent playsound("zmb_rand_perk_stop");
+    else
+      rndprk_ent playsound("zmb_rand_perk_leave");
 
     rndprk_ent delete();
   }

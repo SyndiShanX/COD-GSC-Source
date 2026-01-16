@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace postfx;
 
 autoexec __init__system__() {
@@ -127,7 +128,7 @@ watchentityshutdown(playbundlename) {
   self notify("6433c543b3eba711" + playbundlename);
   self endon("6433c543b3eba711" + playbundlename);
   localclientnum = self.localclientnum;
-  self waittill(#"death", # "finished_playing_postfx_bundle");
+  self waittill(#"death", #"finished_playing_postfx_bundle");
   codestoppostfxbundlelocal(localclientnum, playbundlename);
 }
 

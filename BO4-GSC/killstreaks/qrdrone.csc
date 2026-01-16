@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace qrdrone;
 
 init_shared() {
@@ -15,9 +16,9 @@ init_shared() {
     level.var_2444b2ee = {};
     type = "qrdrone_mp";
     clientfield::register("vehicle", "qrdrone_state", 1, 3, "int", &statechange, 0, 0);
-    level._effect[# "qrdrone_enemy_light"] = # "hash_6b275eecd5caf9d7";
-    level._effect[# "qrdrone_friendly_light"] = # "hash_4c41f659efb80ad3";
-    level._effect[# "qrdrone_viewmodel_light"] = # "hash_4c3b0a59efb20e21";
+    level._effect[#"qrdrone_enemy_light"] = #"hash_6b275eecd5caf9d7";
+    level._effect[#"qrdrone_friendly_light"] = #"hash_4c41f659efb80ad3";
+    level._effect[#"qrdrone_viewmodel_light"] = #"hash_4c3b0a59efb20e21";
     clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int", &start_blink, 0, 0);
     clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int", &final_blink, 0, 0);
     clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int", &out_of_range_update, 0, 0);
@@ -66,15 +67,15 @@ restartfx(localclientnum, blinkstage) {
 
 watchrestartfx(localclientnum) {
   self endon(#"death");
-  level waittill(#"demo_jump", # "player_switch", # "killcam_begin", # "killcam_end");
+  level waittill(#"demo_jump", #"player_switch", #"killcam_begin", #"killcam_end");
   self restartfx(localclientnum, clientfield::get("qrdrone_state"));
 }
 
 spawn_solid_fx(localclientnum) {
   if(self function_4add50a7()) {
-    fx_handle = util::playFXOnTag(localclientnum, level._effect[# "qrdrone_viewmodel_light"], self, "tag_body");
+    fx_handle = util::playFXOnTag(localclientnum, level._effect[#"qrdrone_viewmodel_light"], self, "tag_body");
   } else {
-    fx_handle = self fx::function_3539a829(localclientnum, level._effect[# "qrdrone_friendly_light"], level._effect[# "qrdrone_enemy_light"], "tag_body");
+    fx_handle = self fx::function_3539a829(localclientnum, level._effect[#"qrdrone_friendly_light"], level._effect[#"qrdrone_enemy_light"], "tag_body");
   }
 
   self thread cleanupfx(localclientnum, fx_handle);
@@ -108,7 +109,7 @@ blink_fx_and_sound(localclientnum, soundalias) {
 }
 
 cleanupfx(localclientnum, handle) {
-  self waittill(#"death", # "blink", # "stopfx", # "restart_fx");
+  self waittill(#"death", #"blink", #"stopfx", #"restart_fx");
   stopfx(localclientnum, handle);
 }
 
@@ -162,7 +163,7 @@ loop_local_sound(localclientnum, alias, interval, fx) {
 
 check_for_player_switch_or_time_jump(localclientnum) {
   self endon(#"death");
-  level waittill(#"demo_jump", # "player_switch", # "killcam_begin");
+  level waittill(#"demo_jump", #"player_switch", #"killcam_begin");
   self notify(#"stopfx");
   waittillframeend();
   self thread blink_light(localclientnum);
@@ -189,16 +190,16 @@ blink_light(localclientnum) {
   }
 
   if(self function_4add50a7()) {
-    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_viewmodel_light"]);
+    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_viewmodel_light"]);
     return;
   }
 
   if(self function_4e0ca360()) {
-    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_friendly_light"]);
+    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_friendly_light"]);
     return;
   }
 
-  self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_enemy_light"]);
+  self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_enemy_light"]);
 }
 
 collisionhandler(localclientnum) {

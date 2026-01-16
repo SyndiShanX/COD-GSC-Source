@@ -7,9 +7,11 @@
 #include clientscripts\createfx\karma_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_kar_shrimp_crowd_neutral"] = loadfx("maps/karma/fx_kar_shrimp_crowd_neutral");
@@ -127,7 +129,6 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

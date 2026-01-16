@@ -7,6 +7,7 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\system_shared;
+
 #namespace spectating;
 
 autoexec __init__system__() {
@@ -51,7 +52,7 @@ get_splitscreen_team() {
 
     team = level.players[index].sessionteam;
 
-    if(team != # "spectator") {
+    if(team != #"spectator") {
       return team;
     }
   }
@@ -84,13 +85,13 @@ other_local_player_still_alive() {
 set_permissions() {
   team = self.sessionteam;
 
-  if(team == # "spectator") {
+  if(team == #"spectator") {
     if(self issplitscreen() && !level.splitscreen) {
       team = get_splitscreen_team();
     }
 
-    if(team == # "spectator") {
-      self.spectatorteam = # "invalid";
+    if(team == #"spectator") {
+      self.spectatorteam = #"invalid";
       self allowspectateallteams(1);
       self allowspectateteam("freelook", 0);
       self allowspectateteam(#"none", 1);
@@ -105,19 +106,19 @@ set_permissions() {
 
   switch (level.spectatetype) {
     case 0:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
       self allowspectateteam(#"none", 1);
       self allowspectateteam("localplayers", 0);
       break;
     case 3:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
 
       if(self issplitscreen() && self other_local_player_still_alive()) {
         self allowspectateteam(#"none", 0);
         break;
       }
     case 1:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
 
       if(!level.teambased) {
         self allowspectateallteams(1);
@@ -131,7 +132,7 @@ set_permissions() {
 
       break;
     case 2:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
       self allowspectateteam(#"none", 1);
       self allowspectateallteams(1);
 
@@ -154,7 +155,7 @@ set_permissions() {
     }
 
     if(isDefined(level.spectateoverride[team].allowenemyspectate)) {
-      if(level.spectateoverride[team].allowenemyspectate == # "all") {
+      if(level.spectateoverride[team].allowenemyspectate == #"all") {
         self allowspectateallteams(1);
         return;
       }
@@ -186,7 +187,7 @@ function_4c37bb21(var_2b7584f0) {
       continue;
     }
 
-    if(player.spectatorteam != # "invalid") {
+    if(player.spectatorteam != #"invalid") {
       spectator_team = player.spectatorteam;
       break;
     }
@@ -207,7 +208,7 @@ function_4c37bb21(var_2b7584f0) {
 }
 
 set_permissions_for_machine() {
-  if(level.spectatetype == 4 && self.spectatorteam != # "invalid") {
+  if(level.spectatetype == 4 && self.spectatorteam != #"invalid") {
     var_c37023cb = 1;
 
     if(sessionmodeismultiplayergame()) {
@@ -243,7 +244,7 @@ set_permissions_for_machine() {
 }
 
 function_7d15f599() {
-  livesleft = !(level.numlives && !self.pers[# "lives"]);
+  livesleft = !(level.numlives && !self.pers[#"lives"]);
 
   if(!level.alivecount[self.team] && !livesleft) {
     return false;
@@ -311,7 +312,7 @@ function_18b8b7e4(players, origin) {
 }
 
 function_7ad5ad8() {
-  if(self.team == # "spectator") {
+  if(self.team == #"spectator") {
     return undefined;
   }
 

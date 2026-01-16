@@ -76,8 +76,8 @@ function autoexec opt_in() {
 function main() {
   zm_island_ffotd::main_start();
   zm_island_fx::main();
-  callback::on_localplayer_spawned(&on_localplayer_spawned);
-  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
+  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   register_clientfields();
@@ -118,16 +118,16 @@ function register_clientfields() {
   var_ddba80d7 = getminbitcountfornum(3);
   clientfield::register("clientuimodel", "zmInventory.widget_shield_parts", 9000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_crafted_shield", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "postfx_futz_mild", 9000, 1, "counter", &postfx_futz_mild, 0, 0);
-  clientfield::register("toplayer", "water_motes", 9000, 1, "int", &water_motes, 0, 0);
-  clientfield::register("toplayer", "play_bubbles", 9000, 1, "int", &function_58e931d1, 0, 0);
-  clientfield::register("toplayer", "set_world_fog", 9000, var_ddba80d7, "int", &function_346468e3, 0, 0);
-  clientfield::register("toplayer", "speed_burst", 9000, 1, "int", &player_speed_changed, 0, 1);
-  clientfield::register("toplayer", "tp_water_sheeting", 9000, 1, "int", &water_sheeting_toggle, 0, 0);
-  clientfield::register("toplayer", "wind_blur", 9000, 1, "int", &function_4a01cc4e, 0, 0);
-  clientfield::register("scriptmover", "set_heavy_web_fade_material", 9000, 1, "int", &set_heavy_web_fade_material, 0, 0);
-  clientfield::register("world", "force_stream_spiders", 9001, 1, "int", &force_stream_spiders, 0, 0);
-  clientfield::register("world", "force_stream_takeo_arms", 11001, 1, "int", &force_stream_takeo_arms, 0, 0);
+  clientfield::register("toplayer", "postfx_futz_mild", 9000, 1, "counter", & postfx_futz_mild, 0, 0);
+  clientfield::register("toplayer", "water_motes", 9000, 1, "int", & water_motes, 0, 0);
+  clientfield::register("toplayer", "play_bubbles", 9000, 1, "int", & function_58e931d1, 0, 0);
+  clientfield::register("toplayer", "set_world_fog", 9000, var_ddba80d7, "int", & function_346468e3, 0, 0);
+  clientfield::register("toplayer", "speed_burst", 9000, 1, "int", & player_speed_changed, 0, 1);
+  clientfield::register("toplayer", "tp_water_sheeting", 9000, 1, "int", & water_sheeting_toggle, 0, 0);
+  clientfield::register("toplayer", "wind_blur", 9000, 1, "int", & function_4a01cc4e, 0, 0);
+  clientfield::register("scriptmover", "set_heavy_web_fade_material", 9000, 1, "int", & set_heavy_web_fade_material, 0, 0);
+  clientfield::register("world", "force_stream_spiders", 9001, 1, "int", & force_stream_spiders, 0, 0);
+  clientfield::register("world", "force_stream_takeo_arms", 11001, 1, "int", & force_stream_takeo_arms, 0, 0);
 }
 
 function include_weapons() {
@@ -258,10 +258,10 @@ function postfx_futz_mild(localclientnum, oldval, newval, bnewent, binitialsnap,
 function water_motes(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   wait(0.1);
   if(newval) {
-    if(isDefined(self) && !isDefined(self.var_8e8c7340)) {
+    if(isdefined(self) && !isdefined(self.var_8e8c7340)) {
       self.var_8e8c7340 = playviewmodelfx(localclientnum, level._effect["water_motes"], "tag_camera");
     }
-  } else if(isDefined(self) && isDefined(self.var_8e8c7340)) {
+  } else if(isdefined(self) && isdefined(self.var_8e8c7340)) {
     deletefx(localclientnum, self.var_8e8c7340, 1);
     self.var_8e8c7340 = undefined;
   }
@@ -277,14 +277,14 @@ function function_58e931d1(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6e954d4(localclientnum) {
   self endon("death");
-  if(!isDefined(self.var_b5e2500e)) {
+  if(!isdefined(self.var_b5e2500e)) {
     self.var_b5e2500e = playfxoncamera(localclientnum, level._effect["bubbles"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
     self thread function_738868d4(localclientnum);
   }
 }
 
 function function_6fb5501(localclientnum) {
-  if(isDefined(self.var_b5e2500e)) {
+  if(isdefined(self.var_b5e2500e)) {
     deletefx(localclientnum, self.var_b5e2500e, 1);
     self.var_b5e2500e = undefined;
   }
@@ -330,7 +330,7 @@ function player_speed_changed(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function mapped_material_id(materialname) {
-  if(!isDefined(level.filter_matid)) {
+  if(!isdefined(level.filter_matid)) {
     level.filter_matid = [];
   }
   return level.filter_matid[materialname];
@@ -339,8 +339,8 @@ function mapped_material_id(materialname) {
 function water_sheeting_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     startwatersheetingfx(localclientnum, 1);
-    playSound(localclientnum, "evt_sewer_transport_start");
-    self.var_14108ea4 = self playLoopSound("evt_sewer_transport_loop", 0.3);
+    playsound(localclientnum, "evt_sewer_transport_start");
+    self.var_14108ea4 = self playloopsound("evt_sewer_transport_loop", 0.3);
   } else {
     stopwatersheetingfx(localclientnum, 0);
     self stoploopsound(self.var_14108ea4);
@@ -361,10 +361,10 @@ function set_heavy_web_fade_material(localclientnum, oldval, newval, bnewent, bi
   } else {
     var_b05b3457 = 0.01;
     var_bbfa5d7d = newval;
-    self playSound(0, "zmb_spider_web_hero_destroy");
+    self playsound(0, "zmb_spider_web_hero_destroy");
     i = 1;
-    while(i > var_bbfa5d7d) {
-      if(isDefined(self)) {
+    while (i > var_bbfa5d7d) {
+      if(isdefined(self)) {
         self mapshaderconstant(localclientnum, 0, "scriptVector2", i, i, i, 0);
         wait(var_b05b3457);
       } else {
@@ -372,7 +372,7 @@ function set_heavy_web_fade_material(localclientnum, oldval, newval, bnewent, bi
       }
       i = i - var_b05b3457;
     }
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       self mapshaderconstant(localclientnum, 0, "scriptVector2", 0, 0, 0, 0);
     }
   }

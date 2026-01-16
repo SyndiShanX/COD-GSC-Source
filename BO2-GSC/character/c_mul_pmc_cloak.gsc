@@ -4,7 +4,7 @@
 *****************************************/
 
 main() {
-  self setModel("c_mul_pmc_body_1_1_cl");
+  self setmodel("c_mul_pmc_body_1_1_cl");
   self.headmodel = "c_mul_pmc_head_3_1_cl";
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_mul_pmc_gear_datapad_cl";

@@ -21,7 +21,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerScoreLimitDvar(level.gameType, BLITZ_SCORE_LIMIT);
@@ -46,15 +48,13 @@ main() {
   level.initGametypeAwards = ::initGametypeAwards;
   level.spawnNodeType = ter_op(GetDvarInt("scr_altBlitzSpawns", 0) == 1, "mp_tdm_spawn", "mp_blitz_spawn");
 
-  if(level.matchRules_damageMultiplier) {
+  if(level.matchRules_damageMultiplier)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   game["dialog"]["gametype"] = "blitz";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
 
   game["dialog"]["offense_obj"] = "bltz_hint";
   game["dialog"]["defense_obj"] = "bltz_hint";
@@ -85,24 +85,23 @@ initEffects() {
 }
 
 onStartGameType() {
-  setObjectiveText("allies", &"OBJECTIVES_BLITZ");
-  setObjectiveText("axis", &"OBJECTIVES_BLITZ");
+  setObjectiveText("allies", & "OBJECTIVES_BLITZ");
+  setObjectiveText("axis", & "OBJECTIVES_BLITZ");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ");
-    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ");
+    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ");
+    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_BLITZ_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_BLITZ_HINT");
 
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -186,18 +185,19 @@ createPortal(trigger, team) {
   portal.trigger = trigger;
 
   if(isDefined(level.matchRecording_generateID) && isDefined(level.matchRecording_logEvent)) {
-    if(!isDefined(game["blitzPortalLogIDs"])) {
+    if(!isDefined(game["blitzPortalLogIDs"]))
       game["blitzPortalLogIDs"] = [];
-    }
 
-    if(!isDefined(game["blitzPortalLogIDs"][team])) {
+    if(!isDefined(game["blitzPortalLogIDs"][team]))
       game["blitzPortalLogIDs"][team] = [
-        }
-        [level.matchRecording_generateID]]();
+        [level.matchRecording_generateID]
+      ]();
 
     stateValue = ter_op(team == "allies", 0, 1);
 
-    [[level.matchRecording_logEvent]](game["blitzPortalLogIDs"][team], undefined, "PORTAL", portal.origin[0], portal.origin[1], GetTime(), stateValue);
+    [
+      [level.matchRecording_logEvent]
+    ](game["blitzPortalLogIDs"][team], undefined, "PORTAL", portal.origin[0], portal.origin[1], GetTime(), stateValue);
   }
 
   return portal;
@@ -237,9 +237,8 @@ assignTeamSpawns() {
       } else {
         portalADist = undefined;
         portalBDist = undefined;
-        if(isPathDataAvailable) {
+        if(isPathDataAvailable)
           portalADist = GetPathDist(spawnPoint.origin, portalA.origin, 999999);
-        }
 
         if(isDefined(portalADist) && (portalADist != -1)) {
           portalBDist = GetPathDist(spawnPoint.origin, portalB.origin, 999999);
@@ -363,24 +362,20 @@ hideOpenPortalFX(portalTeam) {
     }
     if(player.team == "allies" || player.team == "axis") {
       if(player.team == portalTeam) {
-        if(isDefined(player.defend_fx_ent)) {
+        if(isDefined(player.defend_fx_ent))
           player.defend_fx_ent Delete();
-        }
       } else {
-        if(isDefined(player.goal_fx_ent)) {
+        if(isDefined(player.goal_fx_ent))
           player.goal_fx_ent Delete();
-        }
       }
     } else {
       isMLG = player isMLGSpectator();
       if((isMLG && portalTeam == (player GetMLGSpectatorTeam())) || (!isMLG && portalTeam == "allies")) {
-        if(isDefined(player.defend_fx_ent)) {
+        if(isDefined(player.defend_fx_ent))
           player.defend_fx_ent Delete();
-        }
       } else {
-        if(isDefined(player.goal_fx_ent)) {
+        if(isDefined(player.goal_fx_ent))
           player.goal_fx_ent Delete();
-        }
       }
 
     }
@@ -428,24 +423,20 @@ hideClosePortalFX(portalTeam) {
     }
     if(player.team == "allies" || player.team == "axis") {
       if(player.team == portalTeam) {
-        if(isDefined(player.closed_defend_fx_ent)) {
+        if(isDefined(player.closed_defend_fx_ent))
           player.closed_defend_fx_ent Delete();
-        }
       } else {
-        if(isDefined(player.closed_goal_fx_ent)) {
+        if(isDefined(player.closed_goal_fx_ent))
           player.closed_goal_fx_ent Delete();
-        }
       }
     } else {
       isMLG = player isMLGSpectator();
       if((isMLG && portalTeam == (player GetMLGSpectatorTeam())) || (!isMLG && portalTeam == "allies")) {
-        if(isDefined(player.closed_defend_fx_ent)) {
+        if(isDefined(player.closed_defend_fx_ent))
           player.closed_defend_fx_ent Delete();
-        }
       } else {
-        if(isDefined(player.closed_goal_fx_ent)) {
+        if(isDefined(player.closed_goal_fx_ent))
           player.closed_goal_fx_ent Delete();
-        }
       }
     }
   }
@@ -581,21 +572,17 @@ showSpectatorPortalFX() {
 }
 
 clearPortalFX() {
-  if(isDefined(self.defend_fx_ent)) {
+  if(isDefined(self.defend_fx_ent))
     self.defend_fx_ent delete();
-  }
 
-  if(isDefined(self.closed_defend_fx_ent)) {
+  if(isDefined(self.closed_defend_fx_ent))
     self.closed_defend_fx_ent delete();
-  }
 
-  if(isDefined(self.goal_fx_ent)) {
+  if(isDefined(self.goal_fx_ent))
     self.goal_fx_ent delete();
-  }
 
-  if(isDefined(self.closed_goal_fx_ent)) {
+  if(isDefined(self.closed_goal_fx_ent))
     self.closed_goal_fx_ent delete();
-  }
 }
 
 runPortalStatus(portal, label) {
@@ -688,25 +675,20 @@ runPortalThink(portal) {
 }
 
 validScorerCheck(player, portal, portalTeam) {
-  if(!isPlayer(player)) {
+  if(!isPlayer(player))
     return false;
-  }
 
-  if(player.team == portalTeam || player.team == "spectator") {
+  if(player.team == portalTeam || player.team == "spectator")
     return false;
-  }
 
-  if(checkGuardedPortal(portal, portalTeam)) {
+  if(checkGuardedPortal(portal, portalTeam))
     return false;
-  }
 
-  if(player IsLinked()) {
+  if(player IsLinked())
     return false;
-  }
 
-  if(isDefined(player.isCarrying) && player.isCarrying) {
+  if(isDefined(player.isCarrying) && player.isCarrying)
     return false;
-  }
 
   return true;
 }
@@ -760,9 +742,8 @@ checkGuardedPortal(portal, portalTeam) {
       continue;
     }
     if(player.team == portalTeam && IsAlive(player) && !isDefined(player.fauxDead)) {
-      if(DistanceSquared(portal.origin, player.origin) < BLITZ_TRIGGER_RADIUS_SQUARED) {
+      if(DistanceSquared(portal.origin, player.origin) < BLITZ_TRIGGER_RADIUS_SQUARED)
         return true;
-      }
     }
   }
 
@@ -808,9 +789,8 @@ teleport_player(origin, angles) {
   fx_origin = self gettagorigin("j_SpineUpper");
   playFX(level._effect["blitz_teleport"], fx_origin);
 
-  if(isDefined(self.setSpawnPoint)) {
+  if(isDefined(self.setSpawnPoint))
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnPoint);
-  }
 
   self CancelMantle();
   self SetOrigin(origin);
@@ -823,11 +803,10 @@ teleport_player(origin, angles) {
 }
 
 create_client_overlay(shader_name, start_alpha, player) {
-  if(isDefined(player)) {
+  if(isDefined(player))
     overlay = newClientHudElem(player);
-  } else {
+  else
     overlay = newHudElem();
-  }
   overlay.x = 0;
   overlay.y = 0;
   overlay setshader(shader_name, 640, 480);
@@ -937,9 +916,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 blitzGetTeam(object) {
   objectTeam = object.team;
 
-  if(!isDefined(objectTeam)) {
+  if(!isDefined(objectTeam))
     objectTeam = object.ownerTeam;
-  }
 
   return objectTeam;
 }
@@ -992,9 +970,8 @@ onSpawnPlayer() {
   self.teleporting = false;
 
   self setExtraScore0(0);
-  if(isDefined(self.pers["captures"])) {
+  if(isDefined(self.pers["captures"]))
     self setExtraScore0(self.pers["captures"]);
-  }
 }
 
 initGametypeAwards() {
@@ -1062,13 +1039,11 @@ blitzDebug() {
       }
 
       foreach(portal in level.portalList) {
-        if(portal.ownerTeam == "allies") {
+        if(portal.ownerTeam == "allies")
           print3d(portal.origin + heightOffsetNames, "allies portal");
-        }
 
-        if(portal.ownerTeam == "axis") {
+        if(portal.ownerTeam == "axis")
           print3d(portal.origin + heightOffsetNames, "axis portal");
-        }
       }
 
       waitframe();

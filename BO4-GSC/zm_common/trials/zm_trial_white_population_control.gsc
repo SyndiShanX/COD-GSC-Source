@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_white_population_control;
 
 autoexec __init__system__() {
@@ -79,7 +80,7 @@ private function_75f0aac6() {
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if(waitresult.weapon.name === # "galvaknuckles_t8" && level.population_count === 0) {
+    if(waitresult.weapon.name === #"galvaknuckles_t8" && level.population_count === 0) {
       level.var_5cf4858b = 1;
       zm_trial_util::function_7d32b7d0(1);
       level flag::clear(#"infinite_round_spawning");

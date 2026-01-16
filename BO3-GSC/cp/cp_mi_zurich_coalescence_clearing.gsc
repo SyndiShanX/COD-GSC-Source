@@ -31,8 +31,8 @@
 
 function main() {
   init_clientfields();
-  scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", &function_7685bfc5, "play");
-  scene::add_scene_func("p7_fxanim_cp_zurich_rock_slide_bundle", &zurich_util::function_9f90bc0f, "done", "clearing_path_selected");
+  scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", & function_7685bfc5, "play");
+  scene::add_scene_func("p7_fxanim_cp_zurich_rock_slide_bundle", & zurich_util::function_9f90bc0f, "done", "clearing_path_selected");
   level._effect["krueger_body_fx"] = "player/fx_ai_marker_body_kreuger";
   level._effect["krueger_beam_fx"] = "light/fx_beam_marker_kreuger";
 }
@@ -46,10 +46,10 @@ function init_clientfields() {
 
 function skipto_start(str_objective, b_starting) {
   level zurich_util::enable_surreal_ai_fx(1, 0.5);
-  spawner::add_spawn_function_group("raven_enemies_clearing_start", "script_aigroup", &function_a1a182e);
+  spawner::add_spawn_function_group("raven_enemies_clearing_start", "script_aigroup", & function_a1a182e);
   level flag::wait_till("all_players_spawned");
   skipto::teleport_players(str_objective, 0);
-  array::thread_all(level.activeplayers, &util::player_frost_breath, 1);
+  array::thread_all(level.activeplayers, & util::player_frost_breath, 1);
   level zurich_util::function_b0f0dd1f(1, "reverse_snow");
   if(b_starting) {
     util::set_streamer_hint(3);
@@ -64,7 +64,7 @@ function skipto_start(str_objective, b_starting) {
 function skipto_start_done(str_objective, b_starting, b_direct, player) {}
 
 function function_a3f52108(str_objective) {
-  array::thread_all(level.players, &function_32cf3cd);
+  array::thread_all(level.players, & function_32cf3cd);
   var_4ccf970 = thread zurich_util::function_a00fa665(str_objective);
   level thread function_e8e4006f();
   level thread function_8727b592();
@@ -79,7 +79,7 @@ function function_a1a182e() {
 
 function function_6a2abd6d() {
   trigger::wait_till("trig_clearing_enemy_cleanup");
-  array::run_all(getaiarray("clearing_start_enemies", "script_noteworthy"), &delete);
+  array::run_all(getaiarray("clearing_start_enemies", "script_noteworthy"), & delete);
 }
 
 function function_8727b592() {
@@ -91,14 +91,14 @@ function function_8727b592() {
 }
 
 function function_e8e4006f() {
-  scene::add_scene_func("cin_zur_09_02_standoff_1st_forest", &function_5b75f492, "done");
-  scene::add_scene_func("cin_zur_09_02_standoff_1st_forest", &function_cf93f22a, "play");
+  scene::add_scene_func("cin_zur_09_02_standoff_1st_forest", & function_5b75f492, "done");
+  scene::add_scene_func("cin_zur_09_02_standoff_1st_forest", & function_cf93f22a, "play");
   level scene::init("cin_zur_09_02_standoff_1st_forest");
-  scene::add_scene_func("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle", &function_7d18154f, "init");
+  scene::add_scene_func("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle", & function_7d18154f, "init");
   level scene::init("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle");
   wait(3);
   level thread util::screen_fade_in(2, "white");
-  if(isDefined(level.bzm_zurichdialogue4callback)) {
+  if(isdefined(level.bzm_zurichdialogue4callback)) {
     level thread[[level.bzm_zurichdialogue4callback]]();
   }
   level thread scene::play("cin_zur_09_02_standoff_1st_forest");
@@ -119,14 +119,16 @@ function function_cf93f22a(a_ents) {
 }
 
 function function_44dc9752() {
-  scene::add_scene_func("cin_zur_09_02_standoff_3rd_forest_part2_sh010", &function_eb4d9424, "play");
-  scene::add_scene_func("cin_zur_09_02_standoff_3rd_forest_part2_sh010", &zurich_util::function_f3e247d6, "init");
+  scene::add_scene_func("cin_zur_09_02_standoff_3rd_forest_part2_sh010", & function_eb4d9424, "play");
+  scene::add_scene_func("cin_zur_09_02_standoff_3rd_forest_part2_sh010", & zurich_util::function_f3e247d6, "init");
   level scene::init("p7_fxanim_cp_zurich_rock_slide_bundle");
   t_waterfall = trigger::wait_till("t_waterfall_igc");
-  if(isDefined(level.bzm_forceaicleanup)) {
-    [[level.bzm_forceaicleanup]]();
+  if(isdefined(level.bzm_forceaicleanup)) {
+    [
+      [level.bzm_forceaicleanup]
+    ]();
   }
-  if(isDefined(level.bzm_zurichdialogue4_1callback)) {
+  if(isdefined(level.bzm_zurichdialogue4_1callback)) {
     level thread[[level.bzm_zurichdialogue4_1callback]]();
   }
   level scene::play("cin_zur_09_02_standoff_3rd_forest_part2_sh010", t_waterfall.who);
@@ -134,16 +136,16 @@ function function_44dc9752() {
   util::clear_streamer_hint();
   util::set_streamer_hint(5);
   level waittill("hash_4e38f7bd");
-  scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", &zurich_util::function_f3e247d6, "init");
+  scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", & zurich_util::function_f3e247d6, "init");
   level scene::init("cin_zur_10_01_kruger_3rd_questioned_sh010");
 }
 
 function function_eb4d9424(a_ents) {
   var_f91fd6fe = a_ents["kruger"];
   var_f91fd6fe waittill("hash_b172f51e");
-  playFXOnTag(level._effect["krueger_body_fx"], var_f91fd6fe, "j_spine4");
+  playfxontag(level._effect["krueger_body_fx"], var_f91fd6fe, "j_spine4");
   level waittill("hash_89688662");
-  playFXOnTag(level._effect["krueger_beam_fx"], var_f91fd6fe, "tag_origin");
+  playfxontag(level._effect["krueger_beam_fx"], var_f91fd6fe, "tag_origin");
 }
 
 function function_5b75f492(a_ents) {
@@ -176,7 +178,7 @@ function function_32cf3cd() {
 }
 
 function skipto_waterfall(str_objective, b_starting) {
-  spawner::add_spawn_function_group("spawn_manager_waterfall_guy", "targetname", &function_2afd205d);
+  spawner::add_spawn_function_group("spawn_manager_waterfall_guy", "targetname", & function_2afd205d);
   if(b_starting) {
     load::function_73adcefc();
     level scene::init("cin_zur_09_02_standoff_3rd_forest_part2_sh010");
@@ -187,26 +189,26 @@ function skipto_waterfall(str_objective, b_starting) {
     level clientfield::set("zurich_waterfall_bodies", 1);
     level clientfield::set("clearing_vinewall_init", 5);
     level scene::init("p7_fxanim_cp_zurich_rock_slide_bundle");
-    scene::add_scene_func("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle", &function_7d18154f, "init");
+    scene::add_scene_func("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle", & function_7d18154f, "init");
     level scene::init("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle");
     load::function_a2995f22();
     skipto::teleport_players(str_objective, 0);
-    array::thread_all(level.activeplayers, &util::player_frost_breath, 1);
+    array::thread_all(level.activeplayers, & util::player_frost_breath, 1);
     level function_44dc9752();
   }
   level thread function_83fcefa6();
-  array::thread_all(level.activeplayers, &zurich_util::function_39af75ef, "clearing_path_selected");
+  array::thread_all(level.activeplayers, & zurich_util::function_39af75ef, "clearing_path_selected");
   level thread function_6c92c263(1);
 }
 
 function skipto_waterfall_done(str_objective, b_starting, b_direct, player) {}
 
 function function_83fcefa6() {
-  array::run_all(level.activeplayers, &playrumbleonentity, "cp_infection_hideout_stretch");
+  array::run_all(level.activeplayers, & playrumbleonentity, "cp_infection_hideout_stretch");
   playsoundatposition("evt_waterfall_rumble", (0, 0, 0));
   objectives::breadcrumb("trig_clearing_waterfall_breadcrumb");
   trigger::wait_till("trig_clearing_waterfall_breadcrumb");
-  if(isDefined(level.bzm_zurichdialogue6callback)) {
+  if(isdefined(level.bzm_zurichdialogue6callback)) {
     level thread[[level.bzm_zurichdialogue6callback]]();
   }
   level thread scene::play("p7_fxanim_cp_zurich_rock_slide_bundle");
@@ -233,17 +235,17 @@ function skipto_path_choice(str_objective, b_starting) {
     zurich_util::enable_surreal_ai_fx(1, 0.5);
     level thread zurich_util::function_11b424e5(1);
     var_4ccf970 = zurich_util::function_a00fa665("clearing_start");
-    array::thread_all(level.activeplayers, &util::player_frost_breath, 1);
+    array::thread_all(level.activeplayers, & util::player_frost_breath, 1);
     level zurich_util::function_b0f0dd1f(1, "reverse_snow");
     level clientfield::set("zurich_waterfall_bodies", 1);
     level clientfield::set("clearing_vinewall_init", 5);
-    scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", &zurich_util::function_f3e247d6, "init");
+    scene::add_scene_func("cin_zur_10_01_kruger_3rd_questioned_sh010", & zurich_util::function_f3e247d6, "init");
     level scene::init("cin_zur_10_01_kruger_3rd_questioned_sh010");
     level scene::init("p7_fxanim_cp_zurich_tree_krueger_split_rt_bundle");
     util::set_streamer_hint(5);
     load::function_a2995f22();
     skipto::teleport_players(str_objective, 0);
-    if(isDefined(level.bzm_zurichdialogue7callback)) {
+    if(isdefined(level.bzm_zurichdialogue7callback)) {
       level thread[[level.bzm_zurichdialogue7callback]]();
     }
   }
@@ -256,8 +258,8 @@ function function_eadc4ffc() {
   foreach(ai in a_hostile_ai) {
     ai delete();
   }
-  scene::add_scene_func("cin_zur_11_01_paths_1st_still_chance", &function_36f7aa25, "play");
-  scene::add_scene_func("cin_zur_11_01_paths_1st_still_chance", &function_bf68487, "done");
+  scene::add_scene_func("cin_zur_11_01_paths_1st_still_chance", & function_36f7aa25, "play");
+  scene::add_scene_func("cin_zur_11_01_paths_1st_still_chance", & function_bf68487, "done");
   level.ai_taylor = util::get_hero("taylor_hero");
   level.ai_taylor ghost();
   level thread scene::init("cin_zur_11_01_paths_1st_still_chance", level.ai_taylor);
@@ -307,7 +309,7 @@ function function_bf68487(a_ents) {
 }
 
 function function_eae5713() {
-  scene::add_scene_func("cin_zur_09_01_standoff_vign_far_as_i_go", &function_4ac14422, "play");
+  scene::add_scene_func("cin_zur_09_01_standoff_vign_far_as_i_go", & function_4ac14422, "play");
   var_ce37baf2 = getent("trig_waterfall_burn", "targetname");
   var_9d50b546 = getent("clip_burn_vine_01", "targetname");
   var_ce37baf2 setinvisibletoall();
@@ -315,7 +317,7 @@ function function_eae5713() {
   var_ce37baf2 setvisibletoall();
   level thread function_51277233();
   var_ce37baf2 zurich_util::function_f3bcbbb1();
-  if(isDefined(level.bzm_zurichdialogue7callback)) {
+  if(isdefined(level.bzm_zurichdialogue7callback)) {
     level thread[[level.bzm_zurichdialogue7callback]]();
   }
   level scene::play("cin_zur_09_01_standoff_vign_far_as_i_go", var_ce37baf2.e_player);
@@ -359,7 +361,7 @@ function function_75ab0e6a(str_objective, var_7c092e3a = 0) {
   level endon("hash_c7f297ae");
   s_start_pos = struct::get(str_objective + "_taylor_start", "targetname");
   var_8a1e3703 = 0;
-  if(!isDefined(level.ai_taylor)) {
+  if(!isdefined(level.ai_taylor)) {
     var_8a1e3703 = 1;
     level function_6aede49e(str_objective);
     level.ai_taylor forceteleport(s_start_pos.origin, s_start_pos.angles);
@@ -372,7 +374,7 @@ function function_75ab0e6a(str_objective, var_7c092e3a = 0) {
   if(var_7c092e3a > 0) {
     wait(var_7c092e3a);
   }
-  if(isDefined(s_start_pos.target)) {
+  if(isdefined(s_start_pos.target)) {
     nd_goal = getnode(s_start_pos.target, "targetname");
     level.ai_taylor ai::set_behavior_attribute("forceTacticalWalk", 1);
     level.ai_taylor ai::set_ignoreall(1);
@@ -428,17 +430,17 @@ function function_1270c207(str_objective, b_starting) {
     if(!b_starting) {
       level.var_75ba074a = undefined;
     }
-    load::function_a2995f22(isDefined(b_starting) && (b_starting ? 2 : 0));
+    load::function_a2995f22(isdefined(b_starting) && (b_starting ? 2 : 0));
     skipto::teleport_players(str_objective, 0);
     level zurich_util::function_b0f0dd1f(1, "red_rain");
-    array::thread_all(level.activeplayers, &util::player_frost_breath, 1);
+    array::thread_all(level.activeplayers, & util::player_frost_breath, 1);
     level thread zurich_util::function_11b424e5(1);
     if(!b_starting) {
       wait(1);
       level util::streamer_wait();
       foreach(player in level.players) {
         player.dont_show_hud = undefined;
-        player util::delay(0.3, undefined, &util::show_hud, 1);
+        player util::delay(0.3, undefined, & util::show_hud, 1);
       }
       level thread util::screen_fade_in(2, "black");
     }
@@ -447,7 +449,7 @@ function function_1270c207(str_objective, b_starting) {
       level thread function_f1073c0f();
     }
     if(str_objective === "clearing_hub_3") {
-      while(!isDefined(level.ai_taylor)) {
+      while (!isdefined(level.ai_taylor)) {
         util::wait_network_frame();
       }
       level.ai_taylor function_65667fec();
@@ -479,8 +481,8 @@ function function_82fb3fff() {
 }
 
 function function_c998741b(str_objective) {
-  var_89060212 = getEntArray("trig_vine_doors", "script_noteworthy");
-  array::run_all(var_89060212, &setinvisibletoall);
+  var_89060212 = getentarray("trig_vine_doors", "script_noteworthy");
+  array::run_all(var_89060212, & setinvisibletoall);
   switch (str_objective) {
     case "clearing_hub": {
       var_3e0e2df1 = "zurich";
@@ -506,10 +508,10 @@ function function_c998741b(str_objective) {
   var_ce37baf2 setvisibletoall();
   var_ce37baf2.var_afacae68 = 0;
   var_ce37baf2 function_860aaa8a(var_9d50b546);
-  array::thread_all(level.activeplayers, &util::freeze_player_controls, 1);
+  array::thread_all(level.activeplayers, & util::freeze_player_controls, 1);
   level clientfield::set("clearing_vinewall_open", n_fxanim);
   wait(0.5);
-  array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
+  array::thread_all(level.players, & clientfield::increment_to_player, "postfx_transition");
   playsoundatposition("evt_clearing_trans_out", (0, 0, 0));
   wait(1);
   level util::screen_fade_out(1, "black");
@@ -531,7 +533,7 @@ function function_c998741b(str_objective) {
     }
   }
   level util::streamer_wait();
-  array::thread_all(level.activeplayers, &util::freeze_player_controls, 0);
+  array::thread_all(level.activeplayers, & util::freeze_player_controls, 0);
   level thread zurich_util::function_11b424e5(0);
   level notify("hash_c7f297ae");
   skipto::objective_completed(str_objective);

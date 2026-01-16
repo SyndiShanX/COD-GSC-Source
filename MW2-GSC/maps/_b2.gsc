@@ -34,6 +34,7 @@ init_local() {
   thread playConTrail();
 }
 
+
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   return positions;
@@ -42,9 +43,8 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 1; i++)
+    positions[i] = spawnstruct();
 
   return positions;
 }
@@ -57,32 +57,34 @@ playEngineEffects() {
   self ent_flag_set("engineeffects");
   engineeffects = getfx("engineeffect");
 
-  for(;;) {
+  for (;;) {
     self ent_flag_wait("engineeffects");
-    playFXOnTag(engineeffects, self, "tag_engine_right");
-    playFXOnTag(engineeffects, self, "tag_engine_left");
+    playfxontag(engineeffects, self, "tag_engine_right");
+    playfxontag(engineeffects, self, "tag_engine_left");
     self ent_flag_waitopen("engineeffects");
-    stopFXOnTag(engineeffects, self, "tag_engine_left");
-    stopFXOnTag(engineeffects, self, "tag_engine_right");
+    StopFXOnTag(engineeffects, self, "tag_engine_left");
+    StopFXOnTag(engineeffects, self, "tag_engine_right");
   }
 }
 
 playAfterBurner() {
-  //After Burners are pretty much like turbo boost. They don't use them all the time except when
+  //After Burners are pretty much like turbo boost. They don't use them all the time except when 
   //bursts of speed are needed. Needs a cool sound when they're triggered. Currently, they are set
   //to be on all the time, but it would be cool to see them engauge as they fly away.
 
-  playFXOnTag(level._effect["afterburner"], self, "tag_engine_right");
-  playFXOnTag(level._effect["afterburner"], self, "tag_engine_left");
+  playfxontag(level._effect["afterburner"], self, "tag_engine_right");
+  playfxontag(level._effect["afterburner"], self, "tag_engine_left");
+
 }
 
 playConTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
+  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as 
+  //one effect. It can't be played in a wait loop like other effects because a geo trail is one 
   //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
-  playFXOnTag(level._effect["contrail"], self, "tag_right_wingtip");
-  playFXOnTag(level._effect["contrail"], self, "tag_left_wingtip");
+  playfxontag(level._effect["contrail"], self, "tag_right_wingtip");
+  playfxontag(level._effect["contrail"], self, "tag_left_wingtip");
 }
+
 
 /*QUAKED script_vehicle_b2 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

@@ -59,7 +59,7 @@ set_custom_global_fx(var_0, var_1, var_2, var_3, var_4) {
 }
 
 create_custom_global_fx() {
-  if(!isDefined(level.global_fx_custom)) {
+  if(!isdefined(level.global_fx_custom)) {
     return;
   }
   foreach(var_1 in level.global_fx_custom) {

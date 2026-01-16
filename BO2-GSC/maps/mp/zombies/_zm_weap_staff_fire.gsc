@@ -52,9 +52,8 @@ watch_staff_fire_fired() {
     if(is_true(e_projectile.additional_shot)) {
       continue;
     }
-    if(str_weapon == "staff_fire_zm" || str_weapon == "staff_fire_upgraded_zm") {
+    if(str_weapon == "staff_fire_zm" || str_weapon == "staff_fire_upgraded_zm")
       self fire_spread_shots(str_weapon);
-    }
   }
 }
 
@@ -83,13 +82,13 @@ fire_spread_shots(str_weapon) {
   v_fwd = self getweaponforwarddir();
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
-  trace = bulletTrace(fire_origin, fire_origin + v_fwd * 100.0, 0, undefined);
+  trace = bullettrace(fire_origin, fire_origin + v_fwd * 100.0, 0, undefined);
 
   if(trace["fraction"] != 1) {
     return;
   }
   v_left_angles = (fire_angles[0], fire_angles[1] - 15, fire_angles[2]);
-  v_left = anglesToForward(v_left_angles);
+  v_left = anglestoforward(v_left_angles);
   e_proj = magicbullet(str_weapon, fire_origin + v_fwd * 50.0, fire_origin + v_left * 100.0, self);
   e_proj.additional_shot = 1;
   wait_network_frame();
@@ -98,7 +97,7 @@ fire_spread_shots(str_weapon) {
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
   v_right_angles = (fire_angles[0], fire_angles[1] + 15, fire_angles[2]);
-  v_right = anglesToForward(v_right_angles);
+  v_right = anglestoforward(v_right_angles);
   e_proj = magicbullet(str_weapon, fire_origin + v_fwd * 50.0, fire_origin + v_right * 100.0, self);
   e_proj.additional_shot = 1;
 }
@@ -106,23 +105,21 @@ fire_spread_shots(str_weapon) {
 fire_staff_area_of_effect(e_attacker, str_weapon) {
   self waittill("explode", v_pos);
   ent = spawn("script_origin", v_pos);
-  ent playLoopSound("wpn_firestaff_grenade_loop", 1);
+  ent playloopsound("wpn_firestaff_grenade_loop", 1);
 
   level thread puzzle_debug_position("X", vectorscale((1, 0, 0), 255.0), v_pos, undefined, 5.0);
 
   n_alive_time = 5.0;
   aoe_radius = 80;
 
-  if(str_weapon == "staff_fire_upgraded3_zm") {
+  if(str_weapon == "staff_fire_upgraded3_zm")
     aoe_radius = 100;
-  }
 
   n_step_size = 0.2;
 
   while(n_alive_time > 0.0) {
-    if(n_alive_time - n_step_size <= 0.0) {
+    if(n_alive_time - n_step_size <= 0.0)
       aoe_radius = aoe_radius * 2;
-    }
 
     a_targets = getaiarray("axis");
     a_targets = get_array_of_closest(v_pos, a_targets, undefined, undefined, aoe_radius);
@@ -131,14 +128,13 @@ fire_staff_area_of_effect(e_attacker, str_weapon) {
 
     foreach(e_target in a_targets) {
       if(isDefined(e_target) && isalive(e_target)) {
-        if(!is_true(self.is_on_fire)) {
+        if(!is_true(self.is_on_fire))
           e_target thread flame_damage_fx(str_weapon, e_attacker);
-        }
       }
     }
   }
 
-  ent playSound("wpn_firestaff_proj_impact");
+  ent playsound("wpn_firestaff_proj_impact");
   ent delete();
 }
 
@@ -167,9 +163,8 @@ fire_additional_shots(str_weapon) {
   self endon("weapon_change");
   n_shots = 1;
 
-  if(str_weapon == "staff_fire_upgraded3_zm") {
+  if(str_weapon == "staff_fire_upgraded3_zm")
     n_shots = 2;
-  }
 
   for(i = 1; i <= n_shots; i++) {
     wait 0.35;
@@ -181,7 +176,7 @@ fire_additional_shots(str_weapon) {
       n_player_yaw = v_player_angles[1] + randomfloatrange(-15.0, 15.0);
       v_shot_angles = (n_player_pitch, n_player_yaw, v_player_angles[2]);
       v_shot_start = self getweaponmuzzlepoint();
-      v_shot_end = v_shot_start + anglesToForward(v_shot_angles);
+      v_shot_end = v_shot_start + anglestoforward(v_shot_angles);
       e_proj = magicbullet(str_weapon, v_shot_start, v_shot_end, self);
       e_proj.additional_shot = 1;
       e_proj thread fire_staff_update_grenade_fuse();
@@ -241,9 +236,8 @@ on_fire_timeout(n_duration) {
 }
 
 flame_damage_fx(damageweapon, e_attacker, pct_damage) {
-  if(!isDefined(pct_damage)) {
+  if(!isDefined(pct_damage))
     pct_damage = 1.0;
-  }
 
   was_on_fire = is_true(self.is_on_fire);
   n_initial_dmg = get_impact_damage(damageweapon) * pct_damage;
@@ -252,11 +246,10 @@ flame_damage_fx(damageweapon, e_attacker, pct_damage) {
   if(is_upgraded && pct_damage > 0.5 && n_initial_dmg > self.health && cointoss()) {
     self do_damage_network_safe(e_attacker, self.health, damageweapon, "MOD_BURNED");
 
-    if(cointoss()) {
+    if(cointoss())
       self thread zombie_gib_all();
-    } else {
+    else
       self thread zombie_gib_guts();
-    }
 
     return;
   }
@@ -270,22 +263,19 @@ flame_damage_fx(damageweapon, e_attacker, pct_damage) {
     self thread flame_damage_over_time(e_attacker, damageweapon, pct_damage);
   }
 
-  if(n_initial_dmg > 0) {
+  if(n_initial_dmg > 0)
     self do_damage_network_safe(e_attacker, n_initial_dmg, damageweapon, "MOD_BURNED");
-  }
 }
 
 _fire_stun_zombie_internal(do_stun, run_cycle) {
   if(!isalive(self)) {
     return;
   }
-  if(is_true(self.has_legs)) {
+  if(is_true(self.has_legs))
     self set_zombie_run_cycle(run_cycle);
-  }
 
-  if(do_stun) {
+  if(do_stun)
     self animscripted(self.origin, self.angles, "zm_afterlife_stun");
-  }
 }
 
 fire_stun_zombie_choked(do_stun, run_cycle) {
@@ -304,21 +294,18 @@ zombie_set_and_restore_flame_state() {
   self.disablemelee = 1;
   prev_run_cycle = self.zombie_move_speed;
 
-  if(is_true(self.has_legs)) {
+  if(is_true(self.has_legs))
     self.deathanim = "zm_death_fire";
-  }
 
-  if(self.ai_state == "find_flesh") {
+  if(self.ai_state == "find_flesh")
     self fire_stun_zombie_choked(1, "burned");
-  }
 
   self waittill("stop_flame_damage");
   self.deathanim = undefined;
   self.disablemelee = undefined;
 
-  if(self.ai_state == "find_flesh") {
+  if(self.ai_state == "find_flesh")
     self fire_stun_zombie_choked(0, prev_run_cycle);
-  }
 
   self setclientfield("fire_char_fx", 0);
 }
@@ -385,9 +372,8 @@ flame_damage_over_time(e_attacker, damageweapon, pct_damage) {
 
   while(true) {
     if(isDefined(e_attacker) && isplayer(e_attacker)) {
-      if(e_attacker maps\mp\zombies\_zm_powerups::is_insta_kill_active()) {
+      if(e_attacker maps\mp\zombies\_zm_powerups::is_insta_kill_active())
         n_damage = self.health;
-      }
     }
 
     self do_damage_network_safe(e_attacker, n_damage, damageweapon, "MOD_BURNED");
@@ -399,9 +385,8 @@ mechz_flame_damage(damageweapon, e_attacker, pct_damage) {
   self endon("death");
   n_initial_dmg = get_impact_damage(damageweapon);
 
-  if(n_initial_dmg > 0) {
+  if(n_initial_dmg > 0)
     self do_damage_network_safe(e_attacker, n_initial_dmg, damageweapon, "MOD_BURNED");
-  }
 }
 
 stop_zombie() {

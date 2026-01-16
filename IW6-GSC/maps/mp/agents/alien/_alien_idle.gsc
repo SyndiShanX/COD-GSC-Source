@@ -21,9 +21,8 @@ main() {
     } else if(isDefined(self.enemy_downed) && self.enemy_downed) {
       play_enemy_downed_idle();
 
-      if(level.gameEnded) {
+      if(level.gameEnded)
         self.enemy_downed = false;
-      }
     } else {
       play_idle();
     }
@@ -33,13 +32,11 @@ main() {
 init_alien_idle() {
   self.idle_anim_counter = 0;
   self.consecutive_posture_counter = 0;
-  if(isDefined(self.xyanimscale)) {
+  if(isDefined(self.xyanimscale))
     self ScrAgentSetAnimScale(self.xyanimscale, 1.0);
-  }
 
-  if(isDefined(self.idle_state_locked) && self.idle_state_locked) {
+  if(isDefined(self.idle_state_locked) && self.idle_state_locked)
     self.stateLocked = true;
-  }
 }
 
 end_script() {
@@ -76,9 +73,8 @@ play_idle() {
 selectIdleAnimState() {
   if(isDefined(level.dlc_idle_anim_state_override_func)) {
     animState = self[[level.dlc_idle_anim_state_override_func]](self.enemy);
-    if(isDefined(animState)) {
+    if(isDefined(animState))
       return animState;
-    }
   }
 
   if(isAlive(self.enemy)) {
@@ -103,11 +99,10 @@ selectIdleAnimState() {
 
 faceTarget() {
   faceTarget = undefined;
-  if(IsAlive(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1600 * 1600) {
+  if(IsAlive(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1600 * 1600)
     faceTarget = self.enemy;
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     faceTarget = self.owner;
-  }
 
   if(isDefined(faceTarget)) {
     self maps\mp\agents\alien\_alien_anim_utils::turnTowardsEntity(faceTarget);
@@ -116,21 +111,21 @@ faceTarget() {
 
 onDamage(eInflictor, eAttacker, iThatDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   if(isDefined(level.dlc_can_do_pain_override_func)) {
-    painAllowed = [[level.dlc_can_do_pain_override_func]]("idle");
-    if(!painAllowed) {
+    painAllowed = [
+      [level.dlc_can_do_pain_override_func]
+    ]("idle");
+    if(!painAllowed)
       return;
-    }
   }
 
-  if(maps\mp\alien\_utility::is_pain_available(eAttacker, sMeansOfDeath)) {
+  if(maps\mp\alien\_utility::is_pain_available(eAttacker, sMeansOfDeath))
     self DoPain(iDFlags, vDir, sHitLoc, iThatDamage, sMeansOfDeath);
-  }
 }
 
 DoPain(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath) {
   self endon("killanimscript");
 
-  is_stun = (iDFlags &level.iDFLAGS_STUN);
+  is_stun = (iDFlags & level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";
@@ -157,19 +152,19 @@ DoPain(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath) {
 
   self PlayAnimNUntilNotetrack(animState, animIndex, pain_notify);
 
-  if(!isDefined(self.idle_state_locked) || !self.idle_state_locked) {
+  if(!isDefined(self.idle_state_locked) || !self.idle_state_locked)
     self.stateLocked = false;
-  }
 
   self SetAnimState("idle");
 }
 
 getBasePainAnimState() {
   if(isDefined(level.dlc_alien_pain_anim_state_override_func)) {
-    animState = [[level.dlc_alien_pain_anim_state_override_func]]("idle");
-    if(isDefined(animState)) {
+    animState = [
+      [level.dlc_alien_pain_anim_state_override_func]
+    ]("idle");
+    if(isDefined(animState))
       return animState;
-    }
   }
 
   return "idle_pain";

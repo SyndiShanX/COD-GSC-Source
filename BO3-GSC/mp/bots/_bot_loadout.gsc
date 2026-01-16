@@ -10,7 +10,7 @@
 #namespace bot_loadout;
 
 function in_whitelist(itemname) {
-  if(!isDefined(itemname)) {
+  if(!isdefined(itemname)) {
     return false;
   }
   switch (itemname) {
@@ -71,7 +71,7 @@ function build_classes() {
   secondaryweapons = self get_available_items(undefined, "secondary");
   lethals = self get_available_items(undefined, "primarygadget");
   tacticals = self get_available_items(undefined, "secondarygadget");
-  if(isDefined(level.perksenabled) && level.perksenabled) {
+  if(isdefined(level.perksenabled) && level.perksenabled) {
     specialties1 = self get_available_items(undefined, "specialty1");
     specialties2 = self get_available_items(undefined, "specialty2");
     specialties3 = self get_available_items(undefined, "specialty3");
@@ -88,17 +88,17 @@ function build_classes() {
     }
     otheritems = array(lethals, tacticals, specialties1, specialties2, specialties3);
     otheritems = array::randomize(otheritems);
-    for(i = 0; i < otheritems.size; i++) {
+    for (i = 0; i < otheritems.size; i++) {
       pick_item(pickeditems, otheritems[i]);
     }
-    for(i = 0; i < pickeditems.size && i < level.maxallocation; i++) {
+    for (i = 0; i < pickeditems.size && i < level.maxallocation; i++) {
       self botclassadditem(classindex, pickeditems[i]);
     }
   }
 }
 
-function pick_item(&pickeditems, items) {
-  if(!isDefined(items) || items.size <= 0) {
+function pick_item( & pickeditems, items) {
+  if(!isdefined(items) || items.size <= 0) {
     return;
   }
   pickeditems[pickeditems.size] = array::random(items);
@@ -118,7 +118,7 @@ function pick_classes() {
     }
     primary = self getloadoutweapon(classindex, "primary");
     secondary = self getloadoutweapon(classindex, "secondary");
-    botclass = spawnStruct();
+    botclass = spawnstruct();
     botclass.name = classname;
     botclass.index = classindex;
     botclass.value = classvalue;
@@ -133,7 +133,7 @@ function pick_classes() {
 
 function get_current_class() {
   currvalue = self.pers["class"];
-  if(!isDefined(currvalue)) {
+  if(!isdefined(currvalue)) {
     return undefined;
   }
   foreach(botclass in self.loadoutclasses) {
@@ -172,14 +172,14 @@ function pick_hero_ability() {
 
 function pick_killstreaks() {
   killstreaks = array::randomize(self get_available_items("killstreak"));
-  for(i = 0; i < 3 && i < killstreaks.size; i++) {
+  for (i = 0; i < 3 && i < killstreaks.size; i++) {
     self botclassadditem(0, killstreaks[i]);
   }
 }
 
 function get_available_items(filtergroup, filterslot) {
   items = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     row = tablelookuprownum(level.statstableid, 0, i);
     if(row < 0) {
       continue;
@@ -200,13 +200,13 @@ function get_available_items(filtergroup, filterslot) {
     if(!sessionmodeisprivate() && self isitemlocked(number)) {
       continue;
     }
-    if(isDefined(filtergroup)) {
+    if(isdefined(filtergroup)) {
       group = tablelookupcolumnforrow(level.statstableid, row, 2);
       if(group != filtergroup) {
         continue;
       }
     }
-    if(isDefined(filterslot)) {
+    if(isdefined(filterslot)) {
       slot = tablelookupcolumnforrow(level.statstableid, row, 13);
       if(slot != filterslot) {
         continue;
@@ -218,7 +218,7 @@ function get_available_items(filtergroup, filterslot) {
 }
 
 function get_item_name(itemreference) {
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     row = tablelookuprownum(level.statstableid, 0, i);
     if(row < 0) {
       continue;
@@ -236,7 +236,7 @@ function get_item_name(itemreference) {
 function init() {
   level endon("game_ended");
   level.bot_banned_killstreaks = array("KILLSTREAK_RCBOMB", "KILLSTREAK_QRDRONE", "KILLSTREAK_REMOTE_MISSILE", "KILLSTREAK_REMOTE_MORTAR", "KILLSTREAK_HELICOPTER_GUNNER");
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     if(!player istestclient()) {
       continue;
@@ -247,7 +247,7 @@ function init() {
 
 function on_bot_connect() {
   self endon("disconnect");
-  if(isDefined(self.pers["bot_loadout"])) {
+  if(isdefined(self.pers["bot_loadout"])) {
     return;
   }
   wait(0.1);
@@ -271,7 +271,7 @@ function on_bot_connect() {
   }
   max_allocation = 10;
   if(!sessionmodeisprivate()) {
-    for(i = 1; i <= 3; i++) {
+    for (i = 1; i <= 3; i++) {
       if(self isitemlocked(rank::getitemindex("feature_allocation_slot_" + i))) {
         max_allocation--;
       }
@@ -293,13 +293,13 @@ function construct_loadout(allocation_max) {
   construct_class(3, item_list, allocation_max);
   construct_class(4, item_list, allocation_max);
   killstreaks = item_list["killstreak1"];
-  if(isDefined(item_list["killstreak2"])) {
+  if(isdefined(item_list["killstreak2"])) {
     killstreaks = arraycombine(killstreaks, item_list["killstreak2"], 1, 0);
   }
-  if(isDefined(item_list["killstreak3"])) {
+  if(isdefined(item_list["killstreak3"])) {
     killstreaks = arraycombine(killstreaks, item_list["killstreak3"], 1, 0);
   }
-  if(isDefined(killstreaks) && killstreaks.size) {
+  if(isdefined(killstreaks) && killstreaks.size) {
     choose_weapon(0, killstreaks);
     choose_weapon(0, killstreaks);
     choose_weapon(0, killstreaks);
@@ -329,16 +329,16 @@ function chose_action(action1, chance1, action2, chance2, action3, chance3, acti
   chance3 = int(chance3 / 10);
   chance4 = int(chance4 / 10);
   actions = [];
-  for(i = 0; i < chance1; i++) {
+  for (i = 0; i < chance1; i++) {
     actions[actions.size] = action1;
   }
-  for(i = 0; i < chance2; i++) {
+  for (i = 0; i < chance2; i++) {
     actions[actions.size] = action2;
   }
-  for(i = 0; i < chance3; i++) {
+  for (i = 0; i < chance3; i++) {
     actions[actions.size] = action3;
   }
-  for(i = 0; i < chance4; i++) {
+  for (i = 0; i < chance4; i++) {
     actions[actions.size] = action4;
   }
   return array::random(actions);
@@ -354,11 +354,11 @@ function item_is_claimed(item) {
 }
 
 function choose_weapon(weaponclass, items) {
-  if(!isDefined(items) || !items.size) {
+  if(!isdefined(items) || !items.size) {
     return undefined;
   }
   start = randomint(items.size);
-  for(i = 0; i < items.size; i++) {
+  for (i = 0; i < items.size; i++) {
     weapon = items[start];
     if(!item_is_claimed(weapon)) {
       break;
@@ -375,7 +375,7 @@ function build_weapon_options_list(optiontype) {
   level.botweaponoptionsprob[optiontype] = [];
   csv_filename = "gamedata/weapons/common/attachmentTable.csv";
   prob = 0;
-  for(row = 0; row < 255; row++) {
+  for (row = 0; row < 255; row++) {
     if(tablelookupcolumnforrow(csv_filename, row, 1) == optiontype) {
       index = level.botweaponoptionsid[optiontype].size;
       level.botweaponoptionsid[optiontype][index] = int(tablelookupcolumnforrow(csv_filename, row, 0));
@@ -386,7 +386,7 @@ function build_weapon_options_list(optiontype) {
 }
 
 function choose_weapon_option(weaponclass, optiontype, primary) {
-  if(!isDefined(level.botweaponoptionsid)) {
+  if(!isdefined(level.botweaponoptionsid)) {
     level.botweaponoptionsid = [];
     level.botweaponoptionsprob = [];
     build_weapon_options_list("camo");
@@ -401,7 +401,7 @@ function choose_weapon_option(weaponclass, optiontype, primary) {
     maxprob = maxprob + (4 * maxprob) * ((20 - self.pers["rank"]) / 20);
   }
   rnd = randomint(int(maxprob));
-  for(i = 0; i < numoptions; i++) {
+  for (i = 0; i < numoptions; i++) {
     if(level.botweaponoptionsprob[optiontype][i] > rnd) {
       self botclasssetweaponoption(weaponclass, primary, optiontype, level.botweaponoptionsid[optiontype][i]);
       break;
@@ -483,7 +483,7 @@ function choose_secondary_attachments(weaponclass, weapon, allocation, allocatio
 
 function build_item_list() {
   items = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     row = tablelookuprownum(level.statstableid, 0, i);
     if(row > -1) {
       slot = tablelookupcolumnforrow(level.statstableid, row, 13);
@@ -499,7 +499,7 @@ function build_item_list() {
         continue;
       }
       name = tablelookupcolumnforrow(level.statstableid, row, 3);
-      if(!isDefined(items[slot])) {
+      if(!isdefined(items[slot])) {
         items[slot] = [];
       }
       items[slot][items[slot].size] = name;

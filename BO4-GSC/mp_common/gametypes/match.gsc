@@ -8,6 +8,7 @@
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\gametypes\overtime;
 #include scripts\mp_common\gametypes\round;
+
 #namespace match;
 
 autoexec __init__system__() {
@@ -94,11 +95,11 @@ is_winning_team(team) {
 }
 
 function_a2b53e17(player) {
-  if(game.outcome.platoon !== # "none" && getteamplatoon(player.pers[# "team"]) === game.outcome.platoon) {
+  if(game.outcome.platoon !== #"none" && getteamplatoon(player.pers[#"team"]) === game.outcome.platoon) {
     return true;
   }
 
-  if(game.outcome.team !== # "free" && player.pers[# "team"] === game.outcome.team) {
+  if(game.outcome.team !== #"free" && player.pers[#"team"] === game.outcome.team) {
     return true;
   }
 

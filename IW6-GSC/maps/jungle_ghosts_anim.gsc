@@ -308,9 +308,8 @@ heli_crash_box_hit_2(var_0) {
     foreach(var_6 in var_4) {
       var_7 = "weapon_honeybadger+acog_sp";
 
-      if(common_scripts\utility::cointoss()) {
+      if(common_scripts\utility::cointoss())
         var_7 = "weapon_honeybadger+reflex_sp";
-      }
 
       spawn(var_7, var_6.origin + (randomintrange(-50, 50), randomintrange(-50, 50), 0));
       spawn("weapon_p226_tactical+silencerpistol_sp+tactical_sp", var_6.origin + (randomintrange(-50, 50), randomintrange(-50, 50), 0));
@@ -319,9 +318,8 @@ heli_crash_box_hit_2(var_0) {
 
   wait 3;
 
-  foreach(var_10 in var_2) {
-    var_10 delete();
-  }
+  foreach(var_10 in var_2)
+  var_10 delete();
 }
 
 heli_crash_blade_hit_2(var_0) {
@@ -431,33 +429,26 @@ player_anims() {
 falling_impact(var_0) {
   level.impact_tree++;
 
-  if(level.impact_tree == 2) {
+  if(level.impact_tree == 2)
     common_scripts\utility::flag_set("kill_face_fx");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::blood_splat_on_screen("left");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::blood_splat_on_screen("right");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::grenade_dirt_on_screen("left");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::grenade_dirt_on_screen("right");
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     level.player thread maps\_gameskill::grenade_dirt_on_screen("bottom");
-  }
 
   earthquake(randomfloatrange(0.4, 0.45), randomfloatrange(1, 1.25), level.player.origin, 200);
   level.player playrumbleonentity("grenade_rumble");

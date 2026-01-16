@@ -37,6 +37,7 @@ main(model, type) {
   build_light(model, "wingtip_red", "tag_light_R_wing", "misc/aircraft_light_wingtip_red", "running", 0.05);
   build_light(model, "tail_red", "tag_light_tail", "misc/aircraft_light_white_blink", "running", 0.05);
   build_light(model, "white_blink", "tag_light_belly", "misc/aircraft_light_red_blink", "running", 1.0);
+
 }
 
 init_local() {
@@ -55,9 +56,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 1; i++)
+    positions[i] = spawnstruct();
 
   return positions;
 }

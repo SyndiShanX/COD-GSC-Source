@@ -9,11 +9,12 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_sq;
+
 #namespace zm_audio_sq;
 
 init() {
   clientfield::register("scriptmover", "medallion_fx", 1, 1, "int");
-  zm_sq::register(#"music_sq", # "first_location", # "hash_3531cfab5aa57f4b", &function_fe4dc0ff, &function_3f739fed);
+  zm_sq::register(#"music_sq", #"first_location", #"hash_3531cfab5aa57f4b", &function_fe4dc0ff, &function_3f739fed);
   zm_sq::start(#"music_sq");
 }
 

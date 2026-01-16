@@ -78,7 +78,8 @@ main() {
   thread snd_start_autofx_audio();
 }
 
-snd_play_loopers() {}
+snd_play_loopers() {
+}
 
 snd_start_autofx_audio() {
   snd_play_auto_fx("fx_village_tube_light", "amb_tube_light", 0, 0, 0, 0);

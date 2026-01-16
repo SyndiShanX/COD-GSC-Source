@@ -77,9 +77,10 @@ vo_listener_init() {
     var_0["bomber_attack"] = ::playvoforbomberattack;
   }
 
-  if(isDefined(level.level_specific_vo_callouts)) {
-    var_0 = [[level.level_specific_vo_callouts]](var_0);
-  }
+  if(isDefined(level.level_specific_vo_callouts))
+    var_0 = [
+      [level.level_specific_vo_callouts]
+    ](var_0);
 
   for(;;) {
     level waittill("dlc_vo_notify", var_1, var_2);
@@ -193,9 +194,9 @@ playvoforreloading(var_0) {
   var_1 = 60000;
   var_2 = gettime();
 
-  if(!isDefined(var_0.next_reload_vo_time)) {
+  if(!isDefined(var_0.next_reload_vo_time))
     var_0.next_reload_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  } else if(var_2 < var_0.next_reload_vo_time) {
+  else if(var_2 < var_0.next_reload_vo_time) {
     return;
   }
   var_3 = var_0.vo_prefix + "inform_reloading_generic";
@@ -213,9 +214,8 @@ check_for_reloading() {
     var_1 = weaponclipsize(var_0);
     var_2 = self getcurrentweaponclipammo();
 
-    if(var_2 < var_1 / 3) {
+    if(var_2 < var_1 / 3)
       level notify("dlc_vo_notify", "inform_reloading_generic", self);
-    }
   }
 }
 
@@ -226,13 +226,11 @@ check_for_grenade_throw() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(var_1 == "iw6_aliendlc21_mp") {
+    if(var_1 == "iw6_aliendlc21_mp")
       level notify("dlc_vo_notify", "sticky_flare", self);
-    }
 
-    if(var_1 == "iw6_aliendlc22_mp") {
+    if(var_1 == "iw6_aliendlc22_mp")
       level notify("dlc_vo_notify", "pipe_bomb", self);
-    }
   }
 }
 
@@ -267,9 +265,8 @@ playvoforstickyflare(var_0) {
   var_1 = var_0.vo_prefix + "sticky_live";
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       return;
-    }
   }
 
   var_0 thread play_vo_on_player(var_1);
@@ -284,9 +281,8 @@ playvoforvenom(var_0) {
   var_1 = var_0.vo_prefix + "venom_live";
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       return;
-    }
   }
 
   var_0 thread play_vo_on_player(var_1);
@@ -297,9 +293,9 @@ playvoforcraftingpiece(var_0) {
   var_2 = 30000;
   var_3 = gettime();
 
-  if(!isDefined(var_0.next_crafting_vo_time)) {
+  if(!isDefined(var_0.next_crafting_vo_time))
     var_0.next_crafting_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  } else if(var_3 < var_0.next_crafting_vo_time) {
+  else if(var_3 < var_0.next_crafting_vo_time) {
     return;
   }
   var_0 play_vo_on_player(var_1, undefined, undefined, undefined, undefined, 1);
@@ -311,9 +307,9 @@ playvoforweaponcraftingpiece(var_0) {
   var_2 = 30000;
   var_3 = gettime();
 
-  if(!isDefined(var_0.next_crafting_vo_time)) {
+  if(!isDefined(var_0.next_crafting_vo_time))
     var_0.next_crafting_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  } else if(var_3 < var_0.next_crafting_vo_time) {
+  else if(var_3 < var_0.next_crafting_vo_time) {
     return;
   }
   var_0 play_vo_on_player(var_1, undefined, undefined, undefined, undefined, 1);
@@ -449,9 +445,9 @@ playvoformammoth(var_0, var_1) {
   var_2 = 15000;
   var_3 = gettime();
 
-  if(!isDefined(level.next_mammoth_vo_time)) {
+  if(!isDefined(level.next_mammoth_vo_time))
     level.next_mammoth_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  } else if(var_3 < level.next_mammoth_vo_time) {
+  else if(var_3 < level.next_mammoth_vo_time) {
     return;
   }
   if(var_0 == "warn_dig" && randomint(2) == 0) {
@@ -502,9 +498,9 @@ playvoforbomberspawn(var_0) {
   var_1 = 5000;
   var_2 = gettime();
 
-  if(!isDefined(level.next_bomber_spawn_vo_time)) {
+  if(!isDefined(level.next_bomber_spawn_vo_time))
     level.next_bomber_spawn_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  } else if(var_2 < level.next_bomber_spawn_vo_time) {
+  else if(var_2 < level.next_bomber_spawn_vo_time) {
     return;
   }
   var_3 = maps\mp\alien\_utility::get_array_of_valid_players(1, var_0.origin);
@@ -526,9 +522,9 @@ playvoforbomberattack(var_0) {
   var_1 = 15000;
   var_2 = gettime();
 
-  if(!isDefined(level.next_bomber_vo_time)) {
+  if(!isDefined(level.next_bomber_vo_time))
     level.next_bomber_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  } else if(var_2 < level.next_bomber_vo_time) {
+  else if(var_2 < level.next_bomber_vo_time) {
     return;
   }
   if(randomint(100) > 50) {
@@ -549,9 +545,8 @@ playvoforneutralizedalien(var_0) {
   var_1 = var_0.vo_prefix + "neutralized_alien";
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       return;
-    }
   }
 
   var_0 thread play_vo_on_player(var_1, undefined, 3);
@@ -561,9 +556,8 @@ playvoforkilledgargoyle(var_0) {
   var_1 = var_0.vo_prefix + "defeat_gargoyle";
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       return;
-    }
   }
 
   var_0 thread play_vo_on_player(var_1, undefined, 3);
@@ -583,9 +577,8 @@ playvofordooropen(var_0) {
     wait 1;
     var_1++;
 
-    if(var_1 > var_2) {
+    if(var_1 > var_2)
       return;
-    }
   }
 
   var_3 = maps\mp\alien\_utility::get_array_of_valid_players(1, var_0.origin);
@@ -605,27 +598,25 @@ player_dlc_pain_vo(var_0) {
   if(level.script == "mp_alien_last" && maps\mp\alien\_utility::is_true(var_0.vo_system_playing_vo)) {
     return;
   }
-  if(!isDefined(var_0.next_pain_vo_time)) {
+  if(!isDefined(var_0.next_pain_vo_time))
     var_0.next_pain_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  } else if(var_2 < var_0.next_pain_vo_time) {
+  else if(var_2 < var_0.next_pain_vo_time) {
     return;
   }
   var_3 = var_0.vo_prefix + "pain";
 
-  if(soundexists(var_0.vo_prefix + "plr_" + "pain")) {
+  if(soundexists(var_0.vo_prefix + "plr_" + "pain"))
     var_0 playlocalsound(var_0.vo_prefix + "plr_" + "pain");
-  } else {
+  else
     var_0 playlocalsound(var_3);
-  }
 
   var_0.next_pain_vo_time = var_2 + randomintrange(var_1, var_1 + 1500);
 }
 
 is_vo_system_playing() {
   foreach(var_1 in level.players) {
-    if(maps\mp\alien\_utility::is_true(var_1.vo_system_playing_vo)) {
+    if(maps\mp\alien\_utility::is_true(var_1.vo_system_playing_vo))
       return 1;
-    }
   }
 
   return 0;
@@ -633,9 +624,8 @@ is_vo_system_playing() {
 
 remove_drill_vo_once_repaired() {
   for(;;) {
-    while(!isDefined(level.drill)) {
+    while(!isDefined(level.drill))
       wait 0.1;
-    }
 
     level.drill waittill("drill_repaired");
 
@@ -660,9 +650,8 @@ remove_drill_vo_once_complete() {
 }
 
 remove_drill_vo_on_player(var_0) {
-  foreach(var_3, var_2 in level.alien_vo_priority_level) {
-    maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
-  }
+  foreach(var_3, var_2 in level.alien_vo_priority_level)
+  maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
 }
 
 player_casualty_vo(var_0) {
@@ -727,16 +716,14 @@ downed_sequence_vo_handler() {
   level notify("dlc_vo_notify", "reaction_casualty_generic", self);
   wait 10.0;
 
-  while(self.being_revived) {
+  while(self.being_revived)
     wait 0.1;
-  }
 
   self notify("dlc_vo_notify", "bleeding_out", self);
   wait 8.0;
 
-  while(self.being_revived) {
+  while(self.being_revived)
     wait 0.1;
-  }
 
   self notify("dlc_vo_notify", "bleeding_out", self);
 }
@@ -758,9 +745,9 @@ playdirectionvo(var_0) {
   var_4 = gettime();
   var_5 = 0;
 
-  if(!isDefined(level.next_direction_vo_time)) {
+  if(!isDefined(level.next_direction_vo_time))
     level.next_direction_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
-  } else if(var_4 < level.next_direction_vo_time) {
+  else if(var_4 < level.next_direction_vo_time) {
     return;
   }
   if(!isDefined(level.last_direction_vo) || level.last_direction_vo != var_0) {
@@ -770,32 +757,27 @@ playdirectionvo(var_0) {
     level.next_direction_vo_time = var_4 + randomintrange(var_3, var_3 + 1500);
     var_5++;
 
-    if(var_5 > 5) {
+    if(var_5 > 5)
       level.last_direction_vo = undefined;
-    }
 
     return;
   }
 
   level.next_direction_vo_time = var_4 + randomintrange(var_3, var_3 + 1500);
 
-  if(var_0 == "rooftop") {
+  if(var_0 == "rooftop")
     var_0 = "roof";
-  }
 
-  if(var_0 == "security_gate") {
+  if(var_0 == "security_gate")
     var_0 = "gate";
-  }
 
   var_6 = var_2.vo_prefix + "from_" + var_0;
 
-  if(var_0 == "spawn_vent" || var_0 == "spawn_grate") {
+  if(var_0 == "spawn_vent" || var_0 == "spawn_grate")
     var_6 = var_2.vo_prefix + var_0;
-  }
 
-  if(var_0 == "above" || var_0 == "walls" || var_0 == "spores") {
+  if(var_0 == "above" || var_0 == "walls" || var_0 == "spores")
     var_6 = var_2.vo_prefix + "spawn_" + var_0;
-  }
 
   var_2 play_vo_on_player(var_6, undefined, 1);
 }
@@ -803,9 +785,8 @@ playdirectionvo(var_0) {
 check_for_direction_vo() {
   var_0 = getEntArray("vo_direction_trigger", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread notify_when_triggered(var_2.script_noteworthy);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread notify_when_triggered(var_2.script_noteworthy);
 }
 
 notify_when_triggered(var_0) {
@@ -816,9 +797,8 @@ notify_when_triggered(var_0) {
 
     if(isagent(var_1) && isDefined(var_1.team) && var_1.team == "axis" && isDefined(var_1.alien_type) && var_1.alien_type != "spider") {
       if(isDefined(level.current_direction_triggers)) {
-        if(!is_in_array(level.current_direction_triggers, var_0)) {
+        if(!is_in_array(level.current_direction_triggers, var_0))
           continue;
-        }
       }
 
       level notify("dlc_vo_notify", "direction_vo", var_0);
@@ -849,9 +829,9 @@ playspidervo(var_0) {
   var_4 = gettime();
   var_5 = 0;
 
-  if(!isDefined(level.next_spider_vo_time)) {
+  if(!isDefined(level.next_spider_vo_time))
     level.next_spider_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
-  } else if(var_4 < level.next_spider_vo_time) {
+  else if(var_4 < level.next_spider_vo_time) {
     return;
   }
   if(!isDefined(level.last_spider_vo) || level.last_spider_vo != var_0) {
@@ -861,9 +841,8 @@ playspidervo(var_0) {
     level.next_spider_vo_time = var_4 + randomintrange(var_3, var_3 + 1500);
     var_5++;
 
-    if(var_5 > 5) {
+    if(var_5 > 5)
       level.last_spider_vo = undefined;
-    }
 
     return;
   }
@@ -889,9 +868,8 @@ playspiderretreatvo() {
 
 is_in_array(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2] == var_1) {
+    if(var_0[var_2] == var_1)
       return 1;
-    }
   }
 
   return 0;

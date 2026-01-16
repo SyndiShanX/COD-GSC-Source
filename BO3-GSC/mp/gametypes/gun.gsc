@@ -21,12 +21,12 @@
 
 function main() {
   globallogic::init();
-  level.onstartgametype = &onstartgametype;
-  level.onspawnplayer = &onspawnplayer;
-  level.onplayerkilled = &onplayerkilled;
-  level.onendgame = &onendgame;
+  level.onstartgametype = & onstartgametype;
+  level.onspawnplayer = & onspawnplayer;
+  level.onplayerkilled = & onplayerkilled;
+  level.onendgame = & onendgame;
   globallogic_audio::set_leader_gametype_dialog("startGunGame", "hcSstartGunGame", "", "");
-  level.givecustomloadout = &givecustomloadout;
+  level.givecustomloadout = & givecustomloadout;
   level.setbacksperdemotion = getgametypesetting("setbacks");
   level.inactivitykick = 60;
   gameobjects::register_allowed_gameobject(level.gametype);
@@ -187,7 +187,7 @@ function inactivitykick() {
   if(level.inactivitykick == 0) {
     return;
   }
-  while(level.inactivitykick > self.timeplayed["total"]) {
+  while (level.inactivitykick > self.timeplayed["total"]) {
     wait(1);
   }
   if(self.pers["participation"] == 0 && self.pers["time_played_moving"] < 1) {
@@ -215,12 +215,12 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     self thread demoteplayer();
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isdefined(attacker) && isplayer(attacker)) {
     if(attacker == self) {
       self thread demoteplayer(attacker);
       return;
     }
-    if(isDefined(attacker.lastpromotiontime) && (attacker.lastpromotiontime + 3000) > gettime()) {
+    if(isdefined(attacker.lastpromotiontime) && (attacker.lastpromotiontime + 3000) > gettime()) {
       scoreevents::processscoreevent("kill_in_3_seconds_gun", attacker, self, weapon);
     }
     if(weapon_utils::ismeleemod(smeansofdeath)) {
@@ -237,35 +237,39 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
-    [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + level.gungamekillscore);
+  if(isdefined(winningplayer) && isplayer(winningplayer)) {
+    [
+      [level._setplayerscore]
+    ](winningplayer, [
+      [level._getplayerscore]
+    ](winningplayer) + level.gungamekillscore);
   }
 }
 
 function addguntoprogression(weaponname, attachment1, attachment2, attachment3, attachment4, attachment5, attachment6, attachment7, attachment8) {
   attachments = [];
-  if(isDefined(attachment1)) {
+  if(isdefined(attachment1)) {
     attachments[attachments.size] = attachment1;
   }
-  if(isDefined(attachment2)) {
+  if(isdefined(attachment2)) {
     attachments[attachments.size] = attachment2;
   }
-  if(isDefined(attachment3)) {
+  if(isdefined(attachment3)) {
     attachments[attachments.size] = attachment3;
   }
-  if(isDefined(attachment4)) {
+  if(isdefined(attachment4)) {
     attachments[attachments.size] = attachment4;
   }
-  if(isDefined(attachment5)) {
+  if(isdefined(attachment5)) {
     attachments[attachments.size] = attachment5;
   }
-  if(isDefined(attachment6)) {
+  if(isdefined(attachment6)) {
     attachments[attachments.size] = attachment6;
   }
-  if(isDefined(attachment7)) {
+  if(isdefined(attachment7)) {
     attachments[attachments.size] = attachment7;
   }
-  if(isDefined(attachment8)) {
+  if(isdefined(attachment8)) {
     attachments[attachments.size] = attachment8;
   }
   weapon = getweapon(weaponname, attachments);
@@ -273,13 +277,13 @@ function addguntoprogression(weaponname, attachment1, attachment2, attachment3, 
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, &"OBJECTIVES_GUN");
+  util::setobjectivetext(team, & "OBJECTIVES_GUN");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, &"OBJECTIVES_GUN");
+    util::setobjectivescoretext(team, & "OBJECTIVES_GUN");
   } else {
-    util::setobjectivescoretext(team, &"OBJECTIVES_GUN_SCORE");
+    util::setobjectivescoretext(team, & "OBJECTIVES_GUN_SCORE");
   }
-  util::setobjectivehinttext(team, &"OBJECTIVES_GUN_HINT");
+  util::setobjectivehinttext(team, & "OBJECTIVES_GUN_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
 }
@@ -304,7 +308,7 @@ function givecustomloadout(takeoldweapon = 0) {
     }
     self thread takeoldweapon(oldweapon);
   }
-  if(!isDefined(self.gunprogress)) {
+  if(!isdefined(self.gunprogress)) {
     self.gunprogress = 0;
   }
   currentweapon = level.gunprogression[self.gunprogress];
@@ -322,7 +326,7 @@ function promoteplayer(weaponused) {
   self endon("cancel_promotion");
   level endon("game_ended");
   wait(0.05);
-  if(weaponused.rootweapon == level.gunprogression[self.gunprogress].rootweapon || (isDefined(level.gunprogression[self.gunprogress].dualwieldweapon) && level.gunprogression[self.gunprogress].dualwieldweapon.rootweapon == weaponused.rootweapon)) {
+  if(weaponused.rootweapon == level.gunprogression[self.gunprogress].rootweapon || (isdefined(level.gunprogression[self.gunprogress].dualwieldweapon) && level.gunprogression[self.gunprogress].dualwieldweapon.rootweapon == weaponused.rootweapon)) {
     if(self.gunprogress < (level.gunprogression.size - 1)) {
       self.gunprogress++;
       if(isalive(self)) {
@@ -342,7 +346,7 @@ function demoteplayer(attacker) {
   self endon("disconnect");
   self notify("cancel_promotion");
   currentgunprogress = self.gunprogress;
-  for(i = 0; i < level.setbacksperdemotion; i++) {
+  for (i = 0; i < level.setbacksperdemotion; i++) {
     if(self.gunprogress <= 0) {
       break;
     }
@@ -352,7 +356,7 @@ function demoteplayer(attacker) {
   if(currentgunprogress != self.gunprogress && isalive(self)) {
     self thread givecustomloadout(1);
   }
-  if(isDefined(attacker)) {
+  if(isdefined(attacker)) {
     self addplayerstatwithgametype("HUMILIATE_ATTACKER", 1);
     attacker recordgameevent("capture");
   }
@@ -367,7 +371,7 @@ function demoteplayer(attacker) {
 function infiniteammo() {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     wait(0.1);
     weapon = self getcurrentweapon();
     if(weapon.rootweapon == level.var_a4fbd7a3) {

@@ -38,15 +38,14 @@ init() {
   level._effect["rcbombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_rc_bomb");
   car_size = getdvar(#"scr_rcbomb_car_size");
 
-  if(car_size == "") {
+  if(car_size == "")
     setdvar("scr_rcbomb_car_size", "1");
-  }
 
   setdvar("scr_rcbomb_notimeout", 0);
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowrcbomb")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("rcbomb_mp", "rcbomb_mp", "killstreak_rcbomb", "rcbomb_used", ::usekillstreakrcbomb);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", &"KILLSTREAK_EARNED_RCBOMB", &"KILLSTREAK_RCBOMB_NOT_AVAILABLE", &"KILLSTREAK_RCBOMB_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", & "KILLSTREAK_EARNED_RCBOMB", & "KILLSTREAK_RCBOMB_NOT_AVAILABLE", & "KILLSTREAK_RCBOMB_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("rcbomb_mp", "mpl_killstreak_rcbomb", "kls_rcbomb_used", "", "kls_rcbomb_enemy", "", "kls_rcbomb_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("rcbomb_mp", "scr_givercbomb");
     maps\mp\killstreaks\_killstreaks::allowkillstreakassists("rcbomb_mp", 1);
@@ -69,9 +68,8 @@ loadtreadfx(type) {
 }
 
 usekillstreakrcbomb(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return 0;
-  }
 
   if(!self isonground() || self isusingremote()) {
     self iprintlnbold(&"KILLSTREAK_RCBOMB_NOT_PLACEABLE");
@@ -80,9 +78,8 @@ usekillstreakrcbomb(hardpointtype) {
 
   placement = self.rcbombplacement;
 
-  if(!isDefined(placement)) {
+  if(!isDefined(placement))
     placement = getrcbombplacement();
-  }
 
   if(!isDefined(placement)) {
     self iprintlnbold(&"KILLSTREAK_RCBOMB_NOT_PLACEABLE");
@@ -99,28 +96,24 @@ usekillstreakrcbomb(hardpointtype) {
   result = self maps\mp\killstreaks\_killstreaks::initridekillstreak("rcbomb");
 
   if(result != "success") {
-    if(result != "disconnect") {
+    if(result != "disconnect")
       self clearusingremote();
-    }
 
     return 0;
   }
 
-  if(level.gameended) {
+  if(level.gameended)
     return 0;
-  }
 
   ret = self usercbomb(placement);
 
-  if(!isDefined(ret) && level.gameended) {
+  if(!isDefined(ret) && level.gameended)
     ret = 1;
-  } else if(!isDefined(ret)) {
+  else if(!isDefined(ret))
     ret = 0;
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self clearusingremote();
-  }
 
   return ret;
 }
@@ -158,9 +151,8 @@ giveplayercontrolofrcbomb() {
   self addweaponstat("rcbomb_mp", "used", 1);
   xpamount = maps\mp\killstreaks\_killstreaks::getxpamountforkillstreak("rcbomb_mp");
 
-  if(maps\mp\_scoreevents::shouldaddrankxp(self)) {
+  if(maps\mp\_scoreevents::shouldaddrankxp(self))
     self addrankxpvalue("killstreakCalledIn", xpamount);
-  }
 
   self freeze_player_controls(0);
   self.rcbomb usevehicle(self, 0);
@@ -191,9 +183,8 @@ usercbomb(placement) {
     self.rcbomb thread trigger_hurt_monitor();
     self.rcbomb.team = self.team;
 
-    if(!isDefined(self.rcbomb)) {
+    if(!isDefined(self.rcbomb))
       return false;
-    }
 
     self maps\mp\gametypes\_weaponobjects::addweaponobjecttowatcher("rcbomb", self.rcbomb);
   }
@@ -201,9 +192,8 @@ usercbomb(placement) {
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team, undefined, 0);
 
   if(killstreak_id == -1) {
-    if(isDefined(self.rcbomb)) {
+    if(isDefined(self.rcbomb))
       self.rcbomb delete();
-    }
 
     return false;
   }
@@ -229,13 +219,11 @@ usercbomb(placement) {
   self.enteringvehicle = 0;
   self stopshellshock();
 
-  if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext)) {
+  if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext))
     level thread maps\mp\_popups::displaykillstreakteammessagetoall(hardpointtype, self);
-  }
 
-  if(isDefined(level.rcbomb_vision)) {
+  if(isDefined(level.rcbomb_vision))
     self thread setvisionsetwaiter();
-  }
 
   self updaterulesonend();
   return true;
@@ -268,11 +256,10 @@ watchforscramblers() {
       }
     }
 
-    if(shouldscramble == 1 && scrambled == 0) {
+    if(shouldscramble == 1 && scrambled == 0)
       self setclientflag(9);
-    } else if(shouldscramble == 0 && scrambled == 1) {
+    else if(shouldscramble == 0 && scrambled == 1)
       self clearclientflag(9);
-    }
 
     wait_delay = randomfloatrange(0.25, 0.5);
     wait(wait_delay);
@@ -302,9 +289,8 @@ updatekillstreakondeletion(team) {
   self waittill("weapon_object_destroyed");
   maps\mp\killstreaks\_killstreakrules::killstreakstop("rcbomb_mp", team, killstreak_id);
 
-  if(isDefined(self.rcbomb)) {
+  if(isDefined(self.rcbomb))
     self.rcbomb delete();
-  }
 }
 
 cardetonatewaiter(vehicle) {
@@ -312,9 +298,8 @@ cardetonatewaiter(vehicle) {
   vehicle endon("death");
   watcher = maps\mp\gametypes\_weaponobjects::getweaponobjectwatcher("rcbomb");
 
-  while(!self attackbuttonpressed()) {
+  while(!self attackbuttonpressed())
     wait 0.05;
-  }
 
   watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(vehicle, 0);
   self thread maps\mp\gametypes\_hud::fadetoblackforxsec(getdvarfloat(#"_id_CDE26736"), getdvarfloat(#"_id_AFCAD5CD"), getdvarfloat(#"_id_88490433"), getdvarfloat(#"_id_A925AA4E"));
@@ -421,17 +406,15 @@ cartimer(vehicle) {
 }
 
 detonateiftouchingsphere(origin, radius) {
-  if(distancesquared(self.origin, origin) < radius * radius) {
+  if(distancesquared(self.origin, origin) < radius * radius)
     self rcbomb_force_explode();
-  }
 }
 
 detonatealliftouchingsphere(origin, radius) {
-  rcbombs = getEntArray("rcbomb", "targetname");
+  rcbombs = getentarray("rcbomb", "targetname");
 
-  for(index = 0; index < rcbombs.size; index++) {
+  for(index = 0; index < rcbombs.size; index++)
     rcbombs[index] detonateiftouchingsphere(origin, radius);
-  }
 }
 
 blowup(attacker, weaponname) {
@@ -440,9 +423,8 @@ blowup(attacker, weaponname) {
   explosionorigin = self.origin;
   explosionangles = self.angles;
 
-  if(!isDefined(attacker)) {
+  if(!isDefined(attacker))
     attacker = self.owner;
-  }
 
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
   origin = self.origin + vectorscale((0, 0, 1), 10.0);
@@ -455,10 +437,10 @@ blowup(attacker, weaponname) {
     physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
     maps\mp\gametypes\_shellshock::rcbomb_earthquake(origin);
     playsoundatposition("mpl_rc_exp", self.origin);
-    playFX(level._effect["rcbombexplosion"], explosionorigin, (0, 0, 1));
+    playfx(level._effect["rcbombexplosion"], explosionorigin, (0, 0, 1));
   }
 
-  self setModel(self.death_model);
+  self setmodel(self.death_model);
   self hide();
   self setclientfield("rcbomb_death", 1);
 
@@ -475,7 +457,8 @@ blowup(attacker, weaponname) {
         attacker addweaponstat("rcbomb_mp", "destroyed", 1);
         attacker addweaponstat(weaponname, "destroyed_controlled_killstreak", 1);
       }
-    } else {}
+    } else {
+    }
   }
 
   wait 1;
@@ -483,28 +466,24 @@ blowup(attacker, weaponname) {
   if(isDefined(self.neverdelete) && self.neverdelete) {
     return;
   }
-  if(isDefined(self.owner.jump_hud)) {
+  if(isDefined(self.owner.jump_hud))
     self.owner.jump_hud destroy();
-  }
 
   self.owner unlink();
 
-  if(isDefined(level.gameended) && level.gameended) {
+  if(isDefined(level.gameended) && level.gameended)
     self.owner freezecontrolswrapper(1);
-  }
 
   self.owner.killstreak_waitamount = undefined;
   self delete();
 }
 
 rccarallowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, sweapon) {
-  if(isDefined(eattacker) && eattacker == self.owner) {
+  if(isDefined(eattacker) && eattacker == self.owner)
     return true;
-  }
 
-  if(isDefined(einflictor) && einflictor islinkedto(self)) {
+  if(isDefined(einflictor) && einflictor islinkedto(self))
     return true;
-  }
 
   return false;
 }
@@ -546,7 +525,7 @@ calculatespawnorigin(origin, angles) {
   for(i = 0; i < testangles.size; i++) {
     testcheck[i] = 0;
     startangles[i] = (0, angles[1], 0);
-    startpoint = origin + vectorscale(anglesToForward(startangles[i] + testangles[i]), distance_from_player);
+    startpoint = origin + vectorscale(anglestoforward(startangles[i] + testangles[i]), distance_from_player);
     endpoint = startpoint - vectorscale((0, 0, 1), 100.0);
     startpoint = startpoint + (0, 0, startheight);
     mask = level.physicstracemaskphysics | level.physicstracemaskvehicle;
@@ -572,7 +551,7 @@ calculatespawnorigin(origin, angles) {
       testcheck[i] = 1;
 
       if(testspawnorigin(startpoints[i], startangles[i])) {
-        placement = spawnStruct();
+        placement = spawnstruct();
         placement.origin = startpoints[i];
         placement.angles = startangles[i];
         return placement;
@@ -584,7 +563,7 @@ calculatespawnorigin(origin, angles) {
     if(!testcheck[i]) {
       if(wheelcounts[i] >= 2) {
         if(testspawnorigin(startpoints[i], startangles[i])) {
-          placement = spawnStruct();
+          placement = spawnstruct();
           placement.origin = startpoints[i];
           placement.angles = startangles[i];
           return placement;
@@ -613,7 +592,7 @@ testwheellocations(origin, angles, heightoffset) {
     startpoint = origin + wheel;
     endpoint = startpoint + (0, 0, -1 * height - heightoffset);
     startpoint = startpoint + (0, 0, height - heightoffset);
-    trace = bulletTrace(startpoint, endpoint, 0, self);
+    trace = bullettrace(startpoint, endpoint, 0, self);
 
     if(trace["fraction"] < 1) {
       touchcount++;
@@ -675,9 +654,8 @@ trigger_hurt_monitor() {
     if(ent.classname == "trigger_hurt") {
       if(level.script == "mp_castaway") {
         if(ent.spawnflags & 16) {
-          if(self depthinwater() < 23) {
+          if(self depthinwater() < 23)
             continue;
-          }
         }
       }
 
@@ -691,9 +669,8 @@ rcbomb_force_explode() {
   self endon("death");
   assert(self.targetname == "rcbomb");
 
-  while(!isDefined(self getseatoccupant(0))) {
+  while(!isDefined(self getseatoccupant(0)))
     wait 0.1;
-  }
 
   self dodamage(10, self.origin + vectorscale((0, 0, 1), 10.0), self.owner, self.owner, "none", "MOD_EXPLOSIVE");
 }
@@ -701,15 +678,13 @@ rcbomb_force_explode() {
 rcbomb_debug_box(origin, mins, maxs, color) {
   debug_rcbomb = getdvar(#"_id_8EAE5CA0");
 
-  if(debug_rcbomb == "1") {
+  if(debug_rcbomb == "1")
     box(origin, mins, maxs, 0, color, 1, 1, 300);
-  }
 }
 
 rcbomb_debug_line(start, end, color) {
   debug_rcbomb = getdvar(#"_id_8EAE5CA0");
 
-  if(debug_rcbomb == "1") {
+  if(debug_rcbomb == "1")
     line(start, end, color, 1, 1, 300);
-  }
 }

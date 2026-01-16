@@ -25,15 +25,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 4, 1);
-  level.cybercom.concussive_wave = spawnStruct();
-  level.cybercom.concussive_wave._is_flickering = &_is_flickering;
-  level.cybercom.concussive_wave._on_flicker = &_on_flicker;
-  level.cybercom.concussive_wave._on_give = &_on_give;
-  level.cybercom.concussive_wave._on_take = &_on_take;
-  level.cybercom.concussive_wave._on_connect = &_on_connect;
-  level.cybercom.concussive_wave._on = &_on;
-  level.cybercom.concussive_wave._off = &_off;
-  level.cybercom.concussive_wave._is_primed = &_is_primed;
+  level.cybercom.concussive_wave = spawnstruct();
+  level.cybercom.concussive_wave._is_flickering = & _is_flickering;
+  level.cybercom.concussive_wave._on_flicker = & _on_flicker;
+  level.cybercom.concussive_wave._on_give = & _on_give;
+  level.cybercom.concussive_wave._on_take = & _on_take;
+  level.cybercom.concussive_wave._on_connect = & _on_connect;
+  level.cybercom.concussive_wave._on = & _on;
+  level.cybercom.concussive_wave._off = & _off;
+  level.cybercom.concussive_wave._is_primed = & _is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -49,8 +49,8 @@ function _on_give(slot, weapon) {
     self.cybercom.spikeweapon = getweapon("hero_gravityspikes_cybercom_upgraded");
   }
   self.cybercom.concussive_wave_knockdown_damage = 5 * getdvarfloat("scr_concussive_wave_scale", 1);
-  self.cybercom.targetlockcb = &_get_valid_targets;
-  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.targetlockcb = & _get_valid_targets;
+  self.cybercom.targetlockrequirementcb = & _lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -76,7 +76,7 @@ function _on(slot, weapon) {
   level.var_b1ae49b1 = gettime();
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_concussive");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -89,7 +89,7 @@ function _off(slot, weapon) {
 function _is_primed(slot, weapon) {}
 
 function ai_activateconcussivewave(damage, var_9bc2efcb = 1) {
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
@@ -109,7 +109,7 @@ function private _lock_requirement(target) {
   if(target cybercom::cybercom_aicheckoptout("cybercom_concussive")) {
     return false;
   }
-  if(isDefined(target.usingvehicle) && target.usingvehicle) {
+  if(isdefined(target.usingvehicle) && target.usingvehicle) {
     return false;
   }
   return true;
@@ -117,27 +117,27 @@ function private _lock_requirement(target) {
 
 function is_jumping() {
   ground_ent = self getgroundent();
-  return !isDefined(ground_ent);
+  return !isdefined(ground_ent);
 }
 
 function create_damage_wave(damage, attacker) {
   if(!isplayer(attacker)) {
-    playFX("weapon/fx_ability_concussive_wave_impact", attacker.origin);
+    playfx("weapon/fx_ability_concussive_wave_impact", attacker.origin);
   }
-  assert(isDefined(attacker));
+  assert(isdefined(attacker));
   enemies = _get_valid_targets();
   if(enemies.size == 0) {
     return;
   }
-  radius = (isDefined(attacker.cybercom) ? attacker.cybercom.concussive_wave_radius : getdvarint("scr_concussive_wave_radius", 310));
-  var_7c2e0a1a = (isDefined(attacker.cybercom) ? attacker.cybercom.var_46ad3e37 : getdvarint("scr_concussive_wave_kill_radius", 195));
-  var_f52a5901 = (isDefined(attacker.cybercom) ? attacker.cybercom.concussive_wave_knockdown_damage : 5);
+  radius = (isdefined(attacker.cybercom) ? attacker.cybercom.concussive_wave_radius : getdvarint("scr_concussive_wave_radius", 310));
+  var_7c2e0a1a = (isdefined(attacker.cybercom) ? attacker.cybercom.var_46ad3e37 : getdvarint("scr_concussive_wave_kill_radius", 195));
+  var_f52a5901 = (isdefined(attacker.cybercom) ? attacker.cybercom.concussive_wave_knockdown_damage : 5);
   closetargets = arraysortclosest(enemies, attacker.origin, enemies.size, 0, radius);
   weapon = getweapon("gadget_concussive_wave");
   physicsexplosionsphere(attacker.origin, 512, 512, 1);
-  if(isDefined(closetargets) && closetargets.size) {
+  if(isdefined(closetargets) && closetargets.size) {
     foreach(enemy in closetargets) {
-      if(!isDefined(enemy) || !isDefined(enemy.origin)) {
+      if(!isdefined(enemy) || !isdefined(enemy.origin)) {
         continue;
       }
       if(!cybercom::targetisvalid(enemy, weapon)) {
@@ -191,7 +191,7 @@ function function_74fb2002(n_time, attacker, weapon) {
 
 function function_f98dd1a9(enemy, attacker) {
   v_to_enemy = enemy.origin - attacker.origin;
-  var_2e3e72d7 = anglesToForward(attacker.angles);
+  var_2e3e72d7 = anglestoforward(attacker.angles);
   return vectordot(var_2e3e72d7, vectornormalize(v_to_enemy));
 }
 
@@ -211,21 +211,21 @@ function create_concussion_wave(damage, slot, weapon) {
   self.cybercom.var_dd2f3b84 = 1;
   self clientfield::set_to_player("cybercom_disabled", 1);
   self.var_bdd60914 = self allowsprint(0);
-  if(isDefined(self.cybercom) && isDefined(self.cybercom.spikeweapon)) {
+  if(isdefined(self.cybercom) && isdefined(self.cybercom.spikeweapon)) {
     spikeweapon = self.cybercom.spikeweapon;
   } else {
     spikeweapon = getweapon("hero_gravityspikes_cybercom");
   }
-  assert(isDefined(spikeweapon));
+  assert(isdefined(spikeweapon));
   self.cybercom.var_ebeecfd5 = 1;
   self giveweapon(spikeweapon);
   self setweaponammoclip(spikeweapon, 2);
   if(self hascybercomability("cybercom_concussive") == 2) {
     failsafe = gettime() + 800;
-    while(self is_jumping() == 0 && self hasweapon(spikeweapon) && gettime() < failsafe) {
+    while (self is_jumping() == 0 && self hasweapon(spikeweapon) && gettime() < failsafe) {
       wait(0.05);
     }
-    while(self is_jumping() == 1 && self hasweapon(spikeweapon) && gettime() < failsafe) {
+    while (self is_jumping() == 1 && self hasweapon(spikeweapon) && gettime() < failsafe) {
       wait(0.05);
     }
   } else {
@@ -233,7 +233,7 @@ function create_concussion_wave(damage, slot, weapon) {
   }
   self playrumbleonentity("grenade_rumble");
   earthquake(0.6, 0.5, self.origin, 256);
-  if(isDefined(spikeweapon) && self hasweapon(spikeweapon)) {
+  if(isdefined(spikeweapon) && self hasweapon(spikeweapon)) {
     self takeweapon(spikeweapon);
   }
   self.cybercom.var_ebeecfd5 = undefined;

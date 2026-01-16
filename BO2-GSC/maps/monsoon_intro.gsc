@@ -96,18 +96,16 @@ eagle_eye_setup() {
 wingsuit_ai_setup(str_model, str_orig_model) {
   self gun_switchto("none", "right");
 
-  if(self != level.crosby) {
+  if(self != level.crosby)
     self attach("c_usa_seal6_helmet_prop", "J_Head");
-  }
 
-  self setModel(str_model);
+  self setmodel(str_model);
   flag_wait("wingsuit_landing_started");
   wait 5;
-  self setModel(str_orig_model);
+  self setmodel(str_orig_model);
 
-  if(self != level.crosby) {
+  if(self != level.crosby)
     self detach("c_usa_seal6_helmet_prop", "J_Head");
-  }
 
   self gun_switchto(self.primaryweapon, "right");
 }
@@ -124,7 +122,7 @@ eagle_eye_far_flung() {
   flag_set("goggles_started");
   level clientnotify("sndFakeAmb");
   flag_set("intro_start_ambient_activity");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"goggles_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "goggles_hud");
   wait 20;
   flag_set("goggles_done");
   wait 1;
@@ -175,7 +173,7 @@ eagle_eye_vo() {
 eagle_eye_vertigo() {
   flag_set("vertigo_started");
   o_player_start = getent("intro_far_flung_player_spot_org", "targetname");
-  a_m_fx_models = getEntArray("enemy_marker_model", "targetname");
+  a_m_fx_models = getentarray("enemy_marker_model", "targetname");
   o_player_start delete();
   array_delete(a_m_fx_models);
 }
@@ -213,7 +211,7 @@ eagle_eye_leap_of_faith() {
   level thread eagle_eye_squad_waits();
   level.crosby thread eagle_eye_crosby_jumps();
   level waittill("uncage_player");
-  array_delete(getEntArray("wingsuit_launch_blocker", "targetname"));
+  array_delete(getentarray("wingsuit_launch_blocker", "targetname"));
   level.player thread jump_fail_check();
   flag_set("jet_stream_launch_obj");
   flag_wait("leap_of_faith_started");
@@ -332,9 +330,8 @@ goggles_controls() {
 }
 
 goggles_zoom(b_zoom) {
-  if(!isDefined(b_zoom)) {
+  if(!isDefined(b_zoom))
     b_zoom = 1;
-  }
 
   if(b_zoom == 0) {
     level thread goggles_zoom_sound("out");
@@ -361,11 +358,10 @@ goggles_zoom(b_zoom) {
 goggles_zoom_sound(str_direction) {
   e_binoc = spawn("script_origin", level.player.origin);
 
-  if(str_direction == "in") {
-    e_binoc playSound("evt_binocs_hud_zoom_out");
-  } else {
-    e_binoc playSound("evt_binocs_hud_zoom_in");
-  }
+  if(str_direction == "in")
+    e_binoc playsound("evt_binocs_hud_zoom_out");
+  else
+    e_binoc playsound("evt_binocs_hud_zoom_in");
 
   e_binoc delete();
 }
@@ -404,9 +400,8 @@ ambient_guards() {
   sp_intro add_spawn_function(::ambient_guard_think);
   add_spawn_function_veh("intro_turret", ::ambient_turret_think);
 
-  for(i = 1; i < 5; i++) {
+  for(i = 1; i < 5; i++)
     level thread run_scene_and_delete("intro_vig_" + i);
-  }
 
   wait 0.3;
   s_align = getstruct("camo_battle_intro", "targetname");
@@ -459,9 +454,8 @@ ambient_heli() {
   vh_heli.delete_on_death = 1;
   vh_heli notify("death");
 
-  if(!isalive(vh_heli)) {
+  if(!isalive(vh_heli))
     vh_heli delete();
-  }
 }
 
 lift_control() {
@@ -505,9 +499,8 @@ ambient_poi_zoom() {
     wait 0.05;
   }
 
-  if(isDefined(level.cin_id)) {
+  if(isDefined(level.cin_id))
     stop3dcinematic(level.cin_id);
-  }
 
   if(isDefined(str_poi)) {
     remove_visor_text("MONSOON_POI_SCANNING");
@@ -519,9 +512,8 @@ ambient_poi_zoom() {
 
 looking_at_poi() {
   foreach(poi in level.intro_poi) {
-    if(level.player is_looking_at(poi.origin, 0.995)) {
+    if(level.player is_looking_at(poi.origin, 0.995))
       return poi.script_noteworthy;
-    }
   }
 
   return undefined;
@@ -533,15 +525,16 @@ cliff_intro_harper_intro(guy) {
 
 cliff_swing_success_window_assist_start(guy) {
   level.player thread player_camera_shake_loop(0.15, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_SWING", "lstick", "left");
+  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_SWING", "lstick", "left");
 }
 
 cliff_swing_success_window_grab_start(guy) {
   level.player thread player_camera_shake_loop(0.25, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
+  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
 }
 
-cliff_swing_6_landing(guy) {}
+cliff_swing_6_landing(guy) {
+}
 
 cliff_swing_flying_rumble(guy) {
   level.player playrumblelooponentity("monsoon_player_swing");
@@ -588,11 +581,10 @@ cliff_swing_fail(str_flag, str_scene) {
   level thread timescale_tween(1.8, 1.0, 0.5);
 
   if(!flag(str_flag)) {
-    if(str_flag == "input_lstick_detected") {
+    if(str_flag == "input_lstick_detected")
       delay_thread(0.75, ::missionfailedwrapper);
-    } else if(str_flag == "cliff_hands_up") {
+    else if(str_flag == "cliff_hands_up")
       delay_thread(0.75, ::missionfailedwrapper);
-    }
 
     run_scene(str_scene);
   }
@@ -627,13 +619,11 @@ cliff_swing(str_prompt, str_button, str_idle_anim, str_swing_anim, str_flag, str
     level thread cliff_swing_crosby();
   }
 
-  if(str_button == "jump_button") {
+  if(str_button == "jump_button")
     level.player thread cliff_swing_player_fx();
-  }
 
-  if(str_swing_anim == "cliff_swing_2") {
+  if(str_swing_anim == "cliff_swing_2")
     level.harper thread say_dialog("harp_surface_is_a_little_0", 0.5);
-  }
 
   level thread cliff_swing_rope(str_swing_anim);
   run_scene(str_swing_anim);
@@ -652,7 +642,7 @@ cliff_swing_player_fx() {
   m_player_body = getent("player_body", "targetname");
 
   for(i = 0; i < 10; i++) {
-    playFXOnTag(getfx("fx_water_rope_swing"), m_player_body, "tag_camera");
+    playfxontag(getfx("fx_water_rope_swing"), m_player_body, "tag_camera");
     wait 0.2;
   }
 }
@@ -683,9 +673,8 @@ cliff_swing_nag_vo() {
     level.a_cliff_nag[i] = "played";
     n_nag++;
 
-    if(n_nag >= 3) {
+    if(n_nag >= 3)
       return;
-    }
   }
 }
 
@@ -704,9 +693,8 @@ cliff_swing_crosby() {
 scene_idle_waittill_input(str_prompt, str_button, str_scenename) {
   level thread run_scene(str_scenename);
 
-  if(str_button == "ltrig") {
+  if(str_button == "ltrig")
     autosave_now();
-  }
 
   level.player waittill_input(str_prompt, str_button);
 }
@@ -728,14 +716,13 @@ cliff_swing_success_window_player(n_time_scale, n_scale_timer, str_rumble, str_p
     flag_set("cliff_hands_up");
     run_scene("cliff_impact_raise");
 
-    if(!flag("cliff_swing_fail_checked")) {
+    if(!flag("cliff_swing_fail_checked"))
       level thread run_scene("cliff_impact_ready");
-    } else {
+    else {
       m_body_double = get_model_or_models_from_scene("cliff_impact_raise", "player_body_double");
 
-      if(isDefined(m_body_double)) {
+      if(isDefined(m_body_double))
         m_body_double delete();
-      }
     }
   }
 }
@@ -747,9 +734,8 @@ real_body_hide(player_body) {
 real_body_show(player_body) {
   fake_player_body = getent("player_body_double", "targetname");
 
-  if(isDefined(fake_player_body)) {
+  if(isDefined(fake_player_body))
     fake_player_body delete();
-  }
 
   player_body show();
   flag_clear("cliff_hands_up");
@@ -816,7 +802,7 @@ cliff_swing_tree_fall_rumble(m_player_body) {
 }
 
 nano_glove_left_on(m_player_body) {
-  playFXOnTag(getfx("nanoglove_impact"), m_player_body, "j_index_le_1");
+  playfxontag(getfx("nanoglove_impact"), m_player_body, "j_index_le_1");
   m_player_body ignorecheapentityflag(1);
   m_player_body setclientflag(2);
 }
@@ -827,7 +813,7 @@ nano_glove_left_off(m_player_body) {
 }
 
 nano_glove_right_on(m_player_body) {
-  playFXOnTag(getfx("nanoglove_impact"), m_player_body, "j_index_ri_1");
+  playfxontag(getfx("nanoglove_impact"), m_player_body, "j_index_ri_1");
   m_player_body ignorecheapentityflag(1);
   m_player_body setclientflag(1);
 }
@@ -843,6 +829,6 @@ nano_gloves_off(m_player_body) {
 }
 
 cliff_swing_impact_player(m_player_body) {
-  playFXOnTag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_le_1");
-  playFXOnTag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_ri_1");
+  playfxontag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_le_1");
+  playfxontag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_ri_1");
 }

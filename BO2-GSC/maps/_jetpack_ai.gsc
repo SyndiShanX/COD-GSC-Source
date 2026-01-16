@@ -57,27 +57,25 @@ init_jetpack_drone_anims() {
 }
 
 create_jetpack_ai(s_align, strname_or_ai, b_drone, func_spawn) {
-  if(!isDefined(b_drone)) {
+  if(!isDefined(b_drone))
     b_drone = 0;
-  }
 
   need_to_spawn_ai = !isai(strname_or_ai);
 
   if(need_to_spawn_ai) {
-    a_sp_jetpack = getEntArray(strname_or_ai, "targetname");
+    a_sp_jetpack = getentarray(strname_or_ai, "targetname");
 
-    if(a_sp_jetpack.size > 1) {
+    if(a_sp_jetpack.size > 1)
       sp_jetpack = random(a_sp_jetpack);
-    } else {
+    else
       sp_jetpack = a_sp_jetpack[0];
-    }
   }
 
   ai_jetpack = undefined;
 
-  if(b_drone) {
+  if(b_drone)
     ai_jetpack = create_fake_jetpack_ai(sp_jetpack);
-  } else {
+  else {
     if(need_to_spawn_ai) {
       ai_jetpack = simple_spawn_single(sp_jetpack);
 
@@ -102,9 +100,8 @@ create_jetpack_ai(s_align, strname_or_ai, b_drone, func_spawn) {
   ai_jetpack endon("death");
   ai_jetpack _attach_jetpack_fx();
 
-  if(isDefined(func_spawn)) {
+  if(isDefined(func_spawn))
     ai_jetpack thread[[func_spawn]]();
-  }
 
   ai_jetpack _play_landing_anim();
   ai_jetpack stop_magic_bullet_shield();
@@ -135,17 +132,17 @@ create_fake_jetpack_ai(sp_jetpack) {
   ai_jetpack getdronemodel(sp_jetpack.classname);
   ai_jetpack makefakeai();
   ai_jetpack.team = "axis";
-  ai_jetpack setCanDamage(1);
+  ai_jetpack setcandamage(1);
   ai_jetpack init_anim_model("jetpack_drone", 0, #animtree);
   return ai_jetpack;
 }
 
 _create_and_link_jetpack() {
-  v_origin = self gettagorigin("J_SpineUpper") + -10 * anglesToForward(self.angles);
+  v_origin = self gettagorigin("J_SpineUpper") + -10 * anglestoforward(self.angles);
   v_angles = self gettagangles("J_SpineUpper") + vectorscale((0, 0, 1), 90.0);
   self.m_jetpack = spawn("script_model", v_origin);
   self.m_jetpack.angles = v_angles;
-  self.m_jetpack setModel("veh_t6_air_jetpack");
+  self.m_jetpack setmodel("veh_t6_air_jetpack");
   self.m_jetpack linkto(self, "J_SpineUpper");
 }
 
@@ -168,7 +165,7 @@ _jetpack_set_altitude(ai_jetpack) {
 _jetpack_deploy_chute(ai_jetpack) {
   m_chute = spawn("script_model", (0, 0, 0));
   m_chute.angles = ai_jetpack.s_align.angles;
-  m_chute setModel("fxanim_gp_parachute_jetpack_mod");
+  m_chute setmodel("fxanim_gp_parachute_jetpack_mod");
   m_chute useanimtree(#animtree);
   m_chute endon("death");
   ai_jetpack.s_align anim_single_aligned(m_chute, "chute_" + ai_jetpack.n_jetpack_anim, undefined, "chute", 0.0);
@@ -178,7 +175,7 @@ _jetpack_deploy_chute(ai_jetpack) {
 _jetpack_set_grounded(ai_jetpack) {
   ai_jetpack ent_flag_set("near_ground");
   ai_jetpack.m_jetpack unlink();
-  v_release = anglesToForward(ai_jetpack.angles) * 10;
+  v_release = anglestoforward(ai_jetpack.angles) * 10;
   ai_jetpack.m_jetpack physicslaunch(ai_jetpack.m_jetpack.origin + vectorscale((0, 0, -1), 3.0), v_release);
   ai_jetpack.m_jetpack notify("detach");
 }
@@ -206,9 +203,8 @@ _jetpack_death_watch() {
     }
   }
 
-  if(isDefined(e_attacker) && isplayer(e_attacker)) {
+  if(isDefined(e_attacker) && isplayer(e_attacker))
     level notify("jetpack_guy_killed_midair");
-  }
 }
 
 _jetpack_ai_kill(ai_jetpack) {
@@ -220,21 +216,19 @@ _jetpack_ai_kill(ai_jetpack) {
     ai_jetpack ragdoll_death();
     physicsexplosionsphere(v_origin, 150, 50, 1);
   } else {
-    if(ai_jetpack ent_flag("high_altitude")) {
+    if(ai_jetpack ent_flag("high_altitude"))
       ai_jetpack delete();
-    } else {
+    else
       ai_jetpack ragdoll_death();
-    }
 
     physicsexplosionsphere(v_origin, 150, 50, 1);
   }
 }
 
 _jetpack_destroy() {
-  playFX(getfx("jetpack_explode"), self gettagorigin("tag_body_animate"), self gettagangles("tag_body_animate"));
+  playfx(getfx("jetpack_explode"), self gettagorigin("tag_body_animate"), self gettagangles("tag_body_animate"));
   wait 0.1;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }

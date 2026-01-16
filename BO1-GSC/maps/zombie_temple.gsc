@@ -141,9 +141,9 @@ init_sounds() {
 }
 
 custom_add_weapons() {
-  maps\_zombiemode_weapons::add_zombie_weapon("shrink_ray_zm", "shrink_ray_upgraded_zm", &"ZOMBIE_TEMPLE_SHRINK_RAY", 2000, "shrink", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("blow_gun_zm", "blow_gun_upgraded_zm", &"ZOMBIE_TEMPLE_BLOW_GUN", 2000, "darts", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("spikemore_zm", undefined, &"ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE", 1000, "spikemore", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("shrink_ray_zm", "shrink_ray_upgraded_zm", & "ZOMBIE_TEMPLE_SHRINK_RAY", 2000, "shrink", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("blow_gun_zm", "blow_gun_upgraded_zm", & "ZOMBIE_TEMPLE_BLOW_GUN", 2000, "darts", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("spikemore_zm", undefined, & "ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE", 1000, "spikemore", "", undefined);
 }
 
 precache_assets() {
@@ -344,7 +344,7 @@ merge(left, right, less_than) {
 
 double_door_fx() {
   flag_wait("cave01_to_cave02");
-  door_ents = getEntArray("cave01_to_cave02_door", "targetname");
+  door_ents = getentarray("cave01_to_cave02_door", "targetname");
   doors_x = 0;
   doors_y = 0;
   doors_z = 0;
@@ -357,7 +357,7 @@ double_door_fx() {
   doors_y /= door_ents.size;
   doors_z /= door_ents.size;
   door_origin = (doors_x, doors_y, doors_z);
-  playFX(level._effect["square_door_open"], door_origin);
+  PlayFX(level._effect["square_door_open"], door_origin);
 }
 
 init_rolling_doors() {
@@ -366,7 +366,7 @@ init_rolling_doors() {
 }
 
 rolling_door_think() {
-  self.door_moveDir = anglesToForward(self.angles);
+  self.door_moveDir = AnglesToForward(self.angles);
   self.door_moveDist = self.script_float;
   self.door_moveTime = self.script_timer;
   self.door_radius = self.script_radius;
@@ -374,7 +374,7 @@ rolling_door_think() {
   flag_wait(self.door_wait);
   PlaySoundAtPosition("evt_door_stone_disc", self.origin);
   self play_sound_on_ent("purchase");
-  playFX(level._effect["rolling_door_open"], self.origin);
+  PlayFX(level._effect["rolling_door_open"], self.origin);
   pi = 3.1415926;
   endOrigin = self.origin + (self.door_moveDir * self.door_moveDist);
   self moveTo(endOrigin, self.door_moveTime, 0.1, 0.1);
@@ -400,7 +400,7 @@ temple_powerup_fx_func() {
   self.fx_green = maps\_zombiemode_net::network_safe_spawn("powerup_fx", 2, "script_model", self.origin);
   self.fx_green setModel("tag_origin");
   self.fx_green LinkTo(self);
-  playFXOnTag(level._effect["powerup_on"], self.fx_green, "tag_origin");
+  playfxontag(level._effect["powerup_on"], self.fx_green, "tag_origin");
   self thread delete_powerup_fx_wait();
 }
 
@@ -492,7 +492,7 @@ perk_machines_compare_func(m1, m2) {
 }
 
 _add_machine(machines, target, script_label, script_noteworthy, script_sound, script_string, model) {
-  s = spawnStruct();
+  s = spawnstruct();
   s.target = target;
   s.script_label = script_label;
   s.script_noteworthy = script_noteworthy;
@@ -774,7 +774,7 @@ temple_check_valid_spawn(revivee) {
 }
 
 temple_revive_solo_fx() {
-  vending_triggers = getEntArray("zombie_vending", "targetname");
+  vending_triggers = getentarray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     if(vending_triggers[i].script_noteworthy == "specialty_quickrevive") {
       vending_triggers[i] delete();

@@ -41,11 +41,11 @@ function main() {
   if(util::isprophuntgametype()) {
     spawncollision("collision_clip_wall_64x64x10", "collider", (-1745, 1550, 248), (0, 0, 0));
   }
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -75,7 +75,7 @@ function spawnkilltrigger() {
 function watchkilltrigger() {
   level endon("game_ended");
   trigger = self;
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
     player dodamage(1000, trigger.origin + (0, 0, 0), trigger, trigger, "none", "MOD_SUICIDE", 0);
   }

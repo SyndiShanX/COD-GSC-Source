@@ -12,7 +12,7 @@ init() {
   level.ambientNumSeqMissedSounds = 0;
   thread updateActiveAmbientPackage();
   level.ambientPackageScriptOriginPool = [];
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     level.ambientPackageScriptOriginPool[i] = spawnStruct();
     level.ambientPackageScriptOriginPool[i].org = spawnfakeent(0);
     level.ambientPackageScriptOriginPool[i].inuse = false;
@@ -43,12 +43,10 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
   index = level.ambientPackages[package].elements.size;
   level.ambientPackages[package].elements[index] = spawnStruct();
   level.ambientPackages[package].elements[index].alias = alias;
-  if(spawnMin < 0) {
+  if(spawnMin < 0)
     spawnMin = 0;
-  }
-  if(spawnMin >= spawnMax) {
+  if(spawnMin >= spawnMax)
     spawnMax = spawnMin + 1;
-  }
   level.ambientPackages[package].elements[index].spawnMin = spawnMin;
   level.ambientPackages[package].elements[index].spawnMax = spawnMax;
   level.ambientPackages[package].elements[index].distMin = -1;
@@ -111,7 +109,7 @@ activateAmbientPackage(clientNum, package, priority) {
     assertmsg("activateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb.csc main before it can be activated");
     return;
   }
-  for(i = 0; i < level.ambientPackages[package].priority.size; i++) {
+  for (i = 0; i < level.ambientPackages[package].priority.size; i++) {
     if(level.ambientPackages[package].priority[i] == priority) {
       level.ambientPackages[package].refcount[i]++;
       break;
@@ -129,7 +127,7 @@ activateAmbientRoom(clientNum, room, priority) {
     assertmsg("activateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb.csc main before it can be activated");
     return;
   }
-  for(i = 0; i < level.ambientRooms[room].priority.size; i++) {
+  for (i = 0; i < level.ambientRooms[room].priority.size; i++) {
     if(level.ambientRooms[room].priority[i] == priority) {
       level.ambientRooms[room].refcount[i]++;
       break;
@@ -157,7 +155,7 @@ ambientPackageCmdHandler(clientNum, state, oldState) {
           assertmsg("activateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb.csc main before it can be activated");
           return;
         }
-        for(i = 0; i < level.ambientPackages[package].priority.size; i++) {
+        for (i = 0; i < level.ambientPackages[package].priority.size; i++) {
           if(level.ambientPackages[package].priority[i] == priority) {
             level.ambientPackages[package].refcount[i]++;
             break;
@@ -173,7 +171,7 @@ ambientPackageCmdHandler(clientNum, state, oldState) {
           assertmsg("deactivateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb.csc main before it can be deactivated");
           return;
         }
-        for(i = 0; i < level.ambientPackages[package].priority.size; i++) {
+        for (i = 0; i < level.ambientPackages[package].priority.size; i++) {
           if(level.ambientPackages[package].priority[i] == priority && level.ambientPackages[package].refcount[i]) {
             level.ambientPackages[package].refcount[i]--;
 
@@ -203,7 +201,7 @@ ambientRoomCmdHandler(clientNum, state, oldState) {
           assertmsg("activateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb.csc main before it can be activated");
           return;
         }
-        for(i = 0; i < level.ambientRooms[room].priority.size; i++) {
+        for (i = 0; i < level.ambientRooms[room].priority.size; i++) {
           if(level.ambientRooms[room].priority[i] == priority) {
             level.ambientRooms[room].refcount[i]++;
             break;
@@ -220,7 +218,7 @@ ambientRoomCmdHandler(clientNum, state, oldState) {
           assertmsg("deactivateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb.csc main before it can be deactivated");
           return;
         }
-        for(i = 0; i < level.ambientRooms[room].priority.size; i++) {
+        for (i = 0; i < level.ambientRooms[room].priority.size; i++) {
           if(level.ambientRooms[room].priority[i] == priority && level.ambientRooms[room].refcount[i]) {
             level.ambientRooms[room].refcount[i]--;
 
@@ -240,7 +238,7 @@ ambientElementThread() {
   level endon("killambientElementThread" + level.activeAmbientPackage);
   timer = 0;
   if(self.distMin < 0) {
-    for(;;) {
+    for (;;) {
       timer = randomfloatrange(self.spawnMin, self.spawnMax);
       wait timer;
       if(getdvarint("debug_audio") > 0) {
@@ -253,7 +251,7 @@ ambientElementThread() {
     angle = 0;
     offset = (0, 0, 0);
     index = -1;
-    for(;;) {
+    for (;;) {
       timer = randomfloatrange(self.spawnMin, self.spawnMax);
       wait timer;
       index = getScriptOriginPoolIndex();
@@ -261,7 +259,7 @@ ambientElementThread() {
         dist = randomintrange(self.distMin, self.distMax);
         angle = randomintrange(self.angleMin, self.angleMax);
         player_angle = getlocalclientangles(0)[1];
-        offset = anglesToForward((0, angle + player_angle, 0));
+        offset = anglestoforward((0, angle + player_angle, 0));
         offset = vectorscale(offset, dist);
         pos = getlocalclienteyepos(0) + offset;
         setfakeentorg(0, level.ambientPackageScriptOriginPool[index].org, pos);
@@ -274,7 +272,7 @@ ambientElementThread() {
           }
           print3d(pos, "AP : " + self.alias, col, 1, 3, 30);
         }
-        while(level.ambientPackageScriptOriginPool[index].soundId != -1) {
+        while (level.ambientPackageScriptOriginPool[index].soundId != -1) {
           wait(0.01);
         }
       }
@@ -283,7 +281,7 @@ ambientElementThread() {
 }
 
 getScriptOriginPoolIndex() {
-  for(index = 0; index < level.ambientPackageScriptOriginPool.size; index++) {
+  for (index = 0; index < level.ambientPackageScriptOriginPool.size; index++) {
     if(!level.ambientPackageScriptOriginPool[index].inuse) {
       level.ambientPackageScriptOriginPool[index].inuse = true;
       level.ambientNumSeqMissedSounds = 0;
@@ -299,7 +297,7 @@ getScriptOriginPoolIndex() {
 }
 
 scriptOriginPoolThread() {
-  for(;;) {
+  for (;;) {
     if(self.inuse == true) {
       if(isDefined(self.soundId)) {
         if(self.SoundId != -1) {
@@ -320,8 +318,8 @@ findHighestPriorityAmbientPackage() {
   package = "";
   priority = -1;
   packageArray = getArrayKeys(level.ambientPackages);
-  for(i = 0; i < packageArray.size; i++) {
-    for(j = 0; j < level.ambientPackages[packageArray[i]].priority.size; j++) {
+  for (i = 0; i < packageArray.size; i++) {
+    for (j = 0; j < level.ambientPackages[packageArray[i]].priority.size; j++) {
       if(level.ambientPackages[packageArray[i]].refcount[j] && level.ambientPackages[packageArray[i]].priority[j] > priority) {
         package = packageArray[i];
         priority = level.ambientPackages[packageArray[i]].priority[j];
@@ -332,7 +330,7 @@ findHighestPriorityAmbientPackage() {
 }
 
 updateActiveAmbientPackage() {
-  for(;;) {
+  for (;;) {
     level waittill("updateActiveAmbientPackage");
     newAmbientPackage = findHighestPriorityAmbientPackage();
     println("*** nap " + newAmbientPackage + " " + level.activeAmbientPackage);
@@ -355,8 +353,8 @@ findHighestPriorityAmbientRoom() {
   priority = -1;
   roomArray = getArrayKeys(level.ambientRooms);
   if(isDefined(roomArray)) {
-    for(i = 0; i < roomArray.size; i++) {
-      for(j = 0; j < level.ambientRooms[roomArray[i]].priority.size; j++) {
+    for (i = 0; i < roomArray.size; i++) {
+      for (j = 0; j < level.ambientRooms[roomArray[i]].priority.size; j++) {
         if(level.ambientRooms[roomArray[i]].refcount[j]) {}
         if(level.ambientRooms[roomArray[i]].refcount[j] && level.ambientRooms[roomArray[i]].priority[j] > priority) {
           room = roomArray[i];
@@ -369,11 +367,10 @@ findHighestPriorityAmbientRoom() {
 }
 
 updateActiveAmbientRoom() {
-  for(;;) {
+  for (;;) {
     newAmbientRoom = findHighestPriorityAmbientRoom();
-    if(newAmbientRoom == level.activeAmbientRoom) {
+    if(newAmbientRoom == level.activeAmbientRoom)
       level waittill("updateActiveAmbientRoom");
-    }
     println("*** nar " + newAmbientRoom + " " + level.activeAmbientRoom);
     if(newAmbientRoom == level.activeAmbientRoom) {
       continue;
@@ -388,13 +385,12 @@ updateActiveAmbientRoom() {
       oldroom.ent = tmp;
     } else {
       if(isDefined(newroom) && isDefined(newroom.tone)) {
-        newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadeIn);
+        newroom.id = playloopsound(0, newroom.ent, newroom.tone, newroom.fadeIn);
       } else {}
       if(isDefined(oldroom) && isDefined(oldroom.tone)) {
         stoploopsound(0, oldroom.ent, oldroom.fadeOut);
-        while(SoundPlaying(oldroom.id)) {
+        while (SoundPlaying(oldroom.id))
           wait(.01);
-        }
       } else {}
     }
     if(!isDefined(newroom.reverb)) {

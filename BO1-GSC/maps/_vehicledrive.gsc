@@ -188,7 +188,7 @@ vehicle_reloadsound() {
   while(1) {
     self waittill("turret_fire");
     wait .5;
-    self playSound("tank_reload");
+    self playsound("tank_reload");
   }
 }
 

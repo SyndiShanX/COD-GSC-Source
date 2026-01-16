@@ -25,7 +25,7 @@ function init_shared() {
   level.smokegrenadetotaltime = level.smokegrenadeduration + level.smokegrenadedissipation;
   level.fx_smokegrenade_single = "smoke_center";
   level.smoke_grenade_triggers = [];
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function watchsmokegrenadedetonation(owner, statweapon, grenadeweaponname, duration, totaltime) {
@@ -46,7 +46,7 @@ function smokedetonate(owner, statweapon, smokeweapon, position, radius, effectl
   ent setowner(owner);
   ent thread smokeblocksight(radius);
   ent thread spawnsmokegrenadetrigger(smokeblockduration);
-  if(isDefined(owner)) {
+  if(isdefined(owner)) {
     owner.smokegrenadetime = gettime();
     owner.smokegrenadeposition = position;
   }
@@ -56,7 +56,7 @@ function smokedetonate(owner, statweapon, smokeweapon, position, radius, effectl
 
 function damageeffectarea(owner, position, radius, height, killcament) {
   effectarea = spawn("trigger_radius", position, 0, radius, height);
-  if(isDefined(level.dogsonflashdogs)) {
+  if(isdefined(level.dogsonflashdogs)) {
     owner thread[[level.dogsonflashdogs]](effectarea);
   }
   effectarea delete();
@@ -64,7 +64,7 @@ function damageeffectarea(owner, position, radius, height, killcament) {
 
 function smokeblocksight(radius) {
   self endon("death");
-  while(true) {
+  while (true) {
     fxblocksight(self, radius);
     if(getdvarint("", 0)) {
       sphere(self.origin, 128, (1, 0, 0), 0.25, 0, 10, 15);
@@ -76,7 +76,7 @@ function smokeblocksight(radius) {
 function spawnsmokegrenadetrigger(duration) {
   team = self.team;
   trigger = spawn("trigger_radius", self.origin, 0, 128, 128);
-  if(!isDefined(level.smoke_grenade_triggers)) {
+  if(!isdefined(level.smoke_grenade_triggers)) {
     level.smoke_grenade_triggers = [];
   } else if(!isarray(level.smoke_grenade_triggers)) {
     level.smoke_grenade_triggers = array(level.smoke_grenade_triggers);
@@ -107,7 +107,7 @@ function begin_other_grenade_tracking() {
   self notify("smoketrackingstart");
   self endon("smoketrackingstart");
   weapon_smoke = getweapon("willy_pete");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon, cooktime);
     if(grenade util::ishacked()) {
       continue;
@@ -121,16 +121,16 @@ function begin_other_grenade_tracking() {
 function playsmokesound(position, duration, startsound, stopsound, loopsound) {
   smokesound = spawn("script_origin", (0, 0, 1));
   smokesound.origin = position;
-  if(isDefined(startsound)) {
-    smokesound playSound(startsound);
+  if(isdefined(startsound)) {
+    smokesound playsound(startsound);
   }
-  if(isDefined(loopsound)) {
-    smokesound playLoopSound(loopsound);
+  if(isdefined(loopsound)) {
+    smokesound playloopsound(loopsound);
   }
   if(duration > 0.5) {
     wait(duration - 0.5);
   }
-  if(isDefined(stopsound)) {
+  if(isdefined(stopsound)) {
     thread sound::play_in_space(stopsound, position);
   }
   smokesound stoploopsound(0.5);

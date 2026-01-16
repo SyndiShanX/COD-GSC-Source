@@ -26,9 +26,9 @@ moon_astro_enter_level() {
     self ForceTeleport(astro_struct.origin, astro_struct.angles);
     wait_network_frame();
   }
-  playFX(level._effect["astro_spawn"], self.origin);
-  self playSound("zmb_hellhound_bolt");
-  self playSound("zmb_hellhound_spawn");
+  Playfx(level._effect["astro_spawn"], self.origin);
+  self playsound("zmb_hellhound_bolt");
+  self playsound("zmb_hellhound_spawn");
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self playLoopSound("zmb_zombie_astronaut_loop", 1);
   self thread play_line_if_player_can_see();

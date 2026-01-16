@@ -34,6 +34,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_orange_mq_fuse;
 
 preload() {
@@ -167,7 +168,7 @@ function_d6a4619a() {
   for(b_hidden = 0; !b_hidden; b_hidden = 1) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === # "ww_tesla_sniper_t8" || s_result.weapon.name === # "ww_tesla_sniper_upgraded_t8") {
+    if(s_result.weapon.name === #"ww_tesla_sniper_t8" || s_result.weapon.name === #"ww_tesla_sniper_upgraded_t8") {
       if(self.targetname == "big_bird_wing_n") {
         exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_left");
       } else {
@@ -225,7 +226,7 @@ function_c723e684(var_a276c861) {
 }
 
 is_soul_capture(var_88206a50, ent) {
-  if(isDefined(ent) && ent.subarchetype === # "zombie_electric") {
+  if(isDefined(ent) && ent.subarchetype === #"zombie_electric") {
     b_killed_by_player = isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.e_vol;
     return (b_killed_by_player && ent istouching(var_e93788f1));
@@ -242,20 +243,20 @@ soul_captured(var_f0e6c7a2, ent) {
     var_f0e6c7a2.var_7944be4a = n_souls_required;
   }
 
-  if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
-    var_f0e6c7a2 function_a66f0de2();
-  }
+    if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
+      var_f0e6c7a2 function_a66f0de2();
+    }
 }
 
 function_a66f0de2() {
   switch (self.script_noteworthy) {
-    case # "little_bird_1":
+    case #"little_bird_1":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_2");
       break;
-    case # "little_bird_2":
+    case #"little_bird_2":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_3");
       break;
-    case # "little_bird_3":
+    case #"little_bird_3":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_1");
       break;
   }

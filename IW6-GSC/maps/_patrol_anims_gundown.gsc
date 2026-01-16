@@ -29,7 +29,6 @@ dogs() {}
 enable_gundown() {
   self.script_animation = "gundown";
 
-  if(isDefined(self.script_patroller) && self.script_patroller) {
+  if(isDefined(self.script_patroller) && self.script_patroller)
     maps\_patrol::set_patrol_run_anim_array();
-  }
 }

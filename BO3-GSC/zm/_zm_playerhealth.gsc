@@ -15,21 +15,21 @@
 #namespace zm_playerhealth;
 
 function autoexec __init__sytem__() {
-  system::register("zm_playerhealth", &__init__, undefined, undefined);
+  system::register("zm_playerhealth", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "sndZombieHealth", 21000, 1, "int");
-  level.global_damage_func_ads = &empty_kill_func;
-  level.global_damage_func = &empty_kill_func;
+  level.global_damage_func_ads = & empty_kill_func;
+  level.global_damage_func = & empty_kill_func;
   level.difficultytype[0] = "easy";
   level.difficultytype[1] = "normal";
   level.difficultytype[2] = "hardened";
   level.difficultytype[3] = "veteran";
-  level.difficultystring["easy"] = &"GAMESKILL_EASY";
-  level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
-  level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
-  level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
+  level.difficultystring["easy"] = & "GAMESKILL_EASY";
+  level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
+  level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
+  level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
   thread playerhealthdebug();
   level.gameskill = 1;
   switch (level.gameskill) {
@@ -59,11 +59,11 @@ function __init__() {
   level.invultime_postshield = 0.3;
   level.playerhealth_regularregendelay = 2400;
   level.worthydamageratio = 0.1;
-  callback::on_spawned(&on_player_spawned);
-  if(!isDefined(level.vsmgr_prio_overlay_zm_player_health_blur)) {
+  callback::on_spawned( & on_player_spawned);
+  if(!isdefined(level.vsmgr_prio_overlay_zm_player_health_blur)) {
     level.vsmgr_prio_overlay_zm_player_health_blur = 22;
   }
-  visionset_mgr::register_info("overlay", "zm_health_blur", 1, level.vsmgr_prio_overlay_zm_player_health_blur, 1, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "zm_health_blur", 1, level.vsmgr_prio_overlay_zm_player_health_blur, 1, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
 }
 
 function on_player_spawned() {
@@ -80,9 +80,9 @@ function player_health_visionset() {
 function playerhurtcheck() {
   self endon("nohealthoverlay");
   self.hurtagain = 0;
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
-    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isdefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
@@ -96,11 +96,11 @@ function playerhealthregen() {
   self endon("playerhealthregen");
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(self.flag)) {
+  if(!isdefined(self.flag)) {
     self.flag = [];
     self.flags_lock = [];
   }
-  if(!isDefined(self.flag["player_has_red_flashing_overlay"])) {
+  if(!isdefined(self.flag["player_has_red_flashing_overlay"])) {
     self flag::init("player_has_red_flashing_overlay");
     self flag::init("player_is_invulnerable");
   }
@@ -117,7 +117,7 @@ function playerhealthregen() {
   newhealth = 0;
   lastinvulratio = 1;
   self thread playerhurtcheck();
-  if(!isDefined(self.veryhurt)) {
+  if(!isdefined(self.veryhurt)) {
     self.veryhurt = 0;
   }
   self.bolthit = 0;
@@ -125,7 +125,7 @@ function playerhealthregen() {
     setdvar("scr_playerInvulTimeScale", 1);
   }
   playerinvultimescale = getdvarfloat("scr_playerInvulTimeScale");
-  for(;;) {
+  for (;;) {
     wait(0.05);
     waittillframeend();
     if(self.health == self.maxhealth) {
@@ -189,7 +189,7 @@ function playerhealthregen() {
     if(self.health <= 1) {
       self setnormalhealth(2 / self.maxhealth);
       invulworthyhealthdrop = 1;
-      if(!isDefined(level.player_deathinvulnerabletimeout)) {
+      if(!isdefined(level.player_deathinvulnerabletimeout)) {
         level.player_deathinvulnerabletimeout = 0;
       }
       if(level.player_deathinvulnerabletimeout < gettime()) {
@@ -240,7 +240,7 @@ function playerinvul(timer) {
 function healthoverlay() {
   self endon("disconnect");
   self endon("nohealthoverlay");
-  if(!isDefined(self._health_overlay)) {
+  if(!isdefined(self._health_overlay)) {
     self._health_overlay = newclienthudelem(self);
     self._health_overlay.x = 0;
     self._health_overlay.y = 0;
@@ -255,7 +255,7 @@ function healthoverlay() {
   self thread healthoverlay_remove(overlay);
   self thread watchhideredflashingoverlay(overlay);
   pulsetime = 0.8;
-  for(;;) {
+  for (;;) {
     if(overlay.alpha > 0) {
       overlay fadeovertime(0.5);
     }
@@ -293,7 +293,7 @@ function fadefunc(overlay, severity, mult, hud_scaleonly) {
 
 function watchhideredflashingoverlay(overlay) {
   self endon("death_or_disconnect");
-  while(isDefined(overlay)) {
+  while (isdefined(overlay)) {
     self waittill("clear_red_flashing_overlay");
     self clientfield::set_to_player("sndZombieHealth", 0);
     self flag::clear("player_has_red_flashing_overlay");
@@ -310,12 +310,12 @@ function redflashingoverlay(overlay) {
   self endon("disconnect");
   self endon("clear_red_flashing_overlay");
   self.stopflashingbadlytime = gettime() + level.longregentime;
-  if(!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isDefined(self.is_zombie) && self.is_zombie))) {
+  if(!(isdefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isdefined(self.is_zombie) && self.is_zombie))) {
     fadefunc(overlay, 1, 1, 0);
-    while(gettime() < self.stopflashingbadlytime && isalive(self) && (!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isDefined(self.is_zombie) && self.is_zombie)))) {
+    while (gettime() < self.stopflashingbadlytime && isalive(self) && (!(isdefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isdefined(self.is_zombie) && self.is_zombie)))) {
       fadefunc(overlay, 0.9, 1, 0);
     }
-    if(!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isDefined(self.is_zombie) && self.is_zombie))) {
+    if(!(isdefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && (!(isdefined(self.is_zombie) && self.is_zombie))) {
       if(isalive(self)) {
         fadefunc(overlay, 0.65, 0.8, 0);
       }
@@ -350,15 +350,15 @@ function playerhealthdebug() {
     setdvar("", "");
   }
   waittillframeend();
-  while(true) {
-    while(true) {
+  while (true) {
+    while (true) {
       if(getdvarstring("") != "") {
         break;
       }
       wait(0.5);
     }
     thread printhealthdebug();
-    while(true) {
+    while (true) {
       if(getdvarstring("") == "") {
         break;
       }
@@ -378,13 +378,13 @@ function printhealthdebug() {
   level.healthbarkeys[0] = "";
   level.healthbarkeys[1] = "";
   level.healthbarkeys[2] = "";
-  if(!isDefined(level.playerinvultimeend)) {
+  if(!isdefined(level.playerinvultimeend)) {
     level.playerinvultimeend = 0;
   }
-  if(!isDefined(level.player_deathinvulnerabletimeout)) {
+  if(!isdefined(level.player_deathinvulnerabletimeout)) {
     level.player_deathinvulnerabletimeout = 0;
   }
-  for(i = 0; i < level.healthbarkeys.size; i++) {
+  for (i = 0; i < level.healthbarkeys.size; i++) {
     key = level.healthbarkeys[i];
     textelem = newhudelem();
     textelem.x = x;
@@ -419,10 +419,10 @@ function printhealthdebug() {
     level.healthbarhudelems[key] = textelem;
   }
   level flag::wait_till("");
-  while(true) {
+  while (true) {
     wait(0.05);
     players = getplayers();
-    for(i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
+    for (i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
       key = level.healthbarkeys[i];
       player = players[0];
       width = 0;
@@ -450,10 +450,10 @@ function printhealthdebug() {
 }
 
 function destroyhealthdebug() {
-  if(!isDefined(level.healthbarhudelems)) {
+  if(!isdefined(level.healthbarhudelems)) {
     return;
   }
-  for(i = 0; i < level.healthbarkeys.size; i++) {
+  for (i = 0; i < level.healthbarkeys.size; i++) {
     level.healthbarhudelems[level.healthbarkeys[i]].bgbar destroy();
     level.healthbarhudelems[level.healthbarkeys[i]].bar destroy();
     level.healthbarhudelems[level.healthbarkeys[i]] destroy();

@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init_elec_trap_trigs() {
-  trap_trigs = getEntArray("elec_trap_trig", "targetname");
+  trap_trigs = getentarray("elec_trap_trig", "targetname");
   if(level.mutators["mutator_noTraps"]) {
     maps\_zombiemode_traps::disable_traps(trap_trigs);
     return;
@@ -103,28 +103,28 @@ electric_trap_move_switch(parent) {
   tswitch = getEnt(parent.script_linkto, "script_linkname");
   if(tswitch.script_linkname == "110") {
     tswitch rotatePitch(180, .5);
-    tswitch playSound("amb_sparks_l_b");
+    tswitch playsound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatePitch(-180, .5);
   } else if(tswitch.script_linkname == "111") {
     tswitch rotatePitch(180, .5);
-    tswitch playSound("amb_sparks_l_b");
+    tswitch playsound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatePitch(-180, .5);
   } else if(tswitch.script_linkname == "112") {
     tswitch rotatePitch(180, .5);
-    tswitch playSound("amb_sparks_l_b");
+    tswitch playsound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatePitch(-180, .5);
   } else if(tswitch.script_linkname == "113") {
     tswitch rotatePitch(180, .5);
-    tswitch playSound("amb_sparks_l_b");
+    tswitch playsound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
@@ -145,7 +145,7 @@ activate_electric_trap(who) {
 
 electric_trap_fx(notify_ent) {
   self.tag_origin = spawn("script_model", self.origin);
-  self.tag_origin playSound("zmb_elec_start");
+  self.tag_origin playsound("zmb_elec_start");
   self.tag_origin playLoopSound("zmb_elec_loop");
   self thread play_electrical_sound();
   wait(25);
@@ -206,7 +206,7 @@ player_elec_damage() {
     self shellshock("electrocution", shocktime);
     if(level.elec_loop == 0) {
       elec_loop = 1;
-      self playSound("zombie_arc");
+      self playsound("zombie_arc");
     }
     if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
       radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
@@ -224,7 +224,7 @@ zombie_elec_death(flame_chance) {
   if(flame_chance > 90 && level.burning_zombies.size < 6) {
     level.burning_zombies[level.burning_zombies.size] = self;
     self thread zombie_flame_watch();
-    self playSound("ignite");
+    self playsound("ignite");
     self thread animscripts\zombie_death::flame_death_fx();
     wait(randomfloat(1.25));
   } else {
@@ -244,7 +244,7 @@ zombie_elec_death(flame_chance) {
       self thread play_elec_vocals();
     }
     wait(randomfloat(1.25));
-    self playSound("zmb_zombie_arc");
+    self playsound("zmb_zombie_arc");
   }
   self dodamage(self.health + 666, self.origin);
 }
@@ -273,11 +273,11 @@ electroctute_death_fx() {
   tagArray[3] = "J_Knee_LE";
   tagArray = array_randomize(tagArray);
   if(isDefined(tagArray[0])) {
-    playFXOnTag(level._effect["elec_md"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["elec_md"], self, tagArray[0]);
   }
-  self playSound("zmb_elec_jib_zombie");
+  self playsound("zmb_elec_jib_zombie");
   wait 1;
-  self playSound("zmb_elec_jib_zombie");
+  self playsound("zmb_elec_jib_zombie");
   tagArray[0] = "J_Wrist_RI";
   tagArray[1] = "J_Wrist_LE";
   if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
@@ -286,10 +286,10 @@ electroctute_death_fx() {
   }
   tagArray = array_randomize(tagArray);
   if(isDefined(tagArray[0])) {
-    playFXOnTag(level._effect["elec_sm"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["elec_sm"], self, tagArray[0]);
   }
   if(isDefined(tagArray[1])) {
-    playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
+    PlayFxOnTag(level._effect["elec_sm"], self, tagArray[1]);
   }
 }
 

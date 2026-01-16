@@ -53,18 +53,16 @@ main(var_0, var_1, var_2) {
 }
 
 init_local() {
-  if(self.classname != "script_vehicle_nh90_cheaper") {
+  if(self.classname != "script_vehicle_nh90_cheaper")
     self.fastropeoffset = 744 + distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-  }
 
   self.script_badplace = 0;
   maps\_vehicle::vehicle_lights_on("running");
 }
 
 set_vehicle_anims(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1].vehicle_getoutanim = % bh_idle;
-  }
 
   return var_0;
 }
@@ -83,9 +81,8 @@ setplayer_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 9; var_1++) {
+  for(var_1 = 0; var_1 < 9; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].idle[0] = % helicopter_pilot1_idle;
   var_0[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;
@@ -204,9 +201,8 @@ set_attached_models() {
   var_0["TAG_FastRope_RI"].dropanim = % bh_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     precachemodel(var_0[var_1[var_2]].model);
-  }
 
   return var_0;
 }

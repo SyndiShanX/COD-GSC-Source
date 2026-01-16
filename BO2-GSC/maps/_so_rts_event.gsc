@@ -69,58 +69,48 @@ event_populate(table) {
     assert(isDefined(types[type]), "Illegal type parsed in event table:" + type);
     type = types[type];
 
-    if(param1 == "") {
+    if(param1 == "")
       param1 = undefined;
-    }
 
-    if(param2 == "") {
+    if(param2 == "")
       param2 = undefined;
-    }
 
-    if(param3 == "") {
+    if(param3 == "")
       param3 = undefined;
-    }
 
-    if(cooldown == 0) {
+    if(cooldown == 0)
       cooldown = undefined;
-    }
 
-    if(latency == 0) {
+    if(latency == 0)
       latency = undefined;
-    }
 
-    if(triggernotify == "") {
+    if(triggernotify == "")
       triggernotify = undefined;
-    }
 
-    if(maxplays == 0) {
+    if(maxplays == 0)
       maxplays = undefined;
-    }
 
-    if(daisy == "") {
+    if(daisy == "")
       daisy = undefined;
-    }
 
-    if(type == 5) {
+    if(type == 5)
       assert(isDefined(param1), "param1 must contain the list of event refs to trigger seperated by a space");
-    }
 
     register_event(ref, make_event_param(type, param1, param2, param3), cooldown, latency, triggernotify, maxplays, priority, daisy, unique);
   }
 }
 
 event_clearall(type) {
-  if(!isDefined(type)) {
+  if(!isDefined(type))
     level.rts.event_queue = [];
-  } else {
+  else {
     unprocessed = [];
 
     for(i = 0; i < level.rts.event_queue.size; i++) {
       event = level.rts.event_queue[i];
 
-      if(event.data.type != type) {
+      if(event.data.type != type)
         unprocessed[unprocessed.size] = event;
-      }
     }
 
     level.rts.event_queue = unprocessed;
@@ -133,9 +123,8 @@ event_clearqueuebyref(ref) {
   for(i = 0; i < level.rts.event_queue.size; i++) {
     event = level.rts.event_queue[i];
 
-    if(event.def.ref != ref) {
+    if(event.def.ref != ref)
       unprocessed[unprocessed.size] = event;
-    }
   }
 
   level.rts.event_queue = unprocessed;
@@ -162,9 +151,8 @@ event_process() {
         }
 
         if(isDefined(event.def.lastexecutedat) && isDefined(event.def.cooldown)) {
-          if(time < event.def.lastexecutedat + event.def.cooldown) {
+          if(time < event.def.lastexecutedat + event.def.cooldown)
             continue;
-          }
         }
 
         result = event_trigger(event);
@@ -178,9 +166,8 @@ event_process() {
       }
 
       for(i = 0; i < level.rts.event_queue.size; i++) {
-        if(!isDefined(level.rts.event_queue[i].executedat)) {
+        if(!isDefined(level.rts.event_queue[i].executedat))
           unprocessed[unprocessed.size] = level.rts.event_queue[i];
-        }
       }
 
       level.rts.event_queue = unprocessed;
@@ -192,19 +179,16 @@ event_process() {
 
         param = isDefined(event.data.param1) ? event.data.param1 : "";
 
-        if(isDefined(event.expired) && event.expired) {
+        if(isDefined(event.expired) && event.expired)
           param = "n/a";
-        }
 
-        if(level.rts.event_types[event.data.type] == "callback") {
+        if(level.rts.event_types[event.data.type] == "callback")
           param = "n/a";
-        }
 
-        if(level.rts.event_types[event.data.type] == "sfx" || level.rts.event_types[event.data.type] == "fx") {
+        if(level.rts.event_types[event.data.type] == "sfx" || level.rts.event_types[event.data.type] == "fx")
           tabtype = "\\t\\t\\t";
-        } else {
+        else
           tabtype = "\\t\\t";
-        }
 
         println("[Events in queue: " + level.rts.event_queue.size + "]\\t" + isDefined(event.expired) && event.expired ? "EXPIRED: " : "processed: " + event.executedat + "\\t\\tType: " + level.rts.event_types[event.data.type] + tabtype + "(" + event.def.priority + ")Event (" + event.def.ref + ")\\t\\tTriggered: " + isDefined(event.dynamic_alias) ? event.dynamic_alias : param);
 
@@ -217,7 +201,7 @@ event_process() {
 }
 
 make_event_param(type, param1, param2, param3) {
-  dataparam = spawnStruct();
+  dataparam = spawnstruct();
   dataparam.type = type;
   dataparam.param1 = param1;
   dataparam.param2 = param2;
@@ -226,16 +210,14 @@ make_event_param(type, param1, param2, param3) {
 }
 
 register_event(ref, dataparam, cooldown, latency, trignotify, onetimeonly, priority, daisy, unique) {
-  if(!isDefined(priority)) {
+  if(!isDefined(priority))
     priority = 0;
-  }
 
-  if(!isDefined(unique)) {
+  if(!isDefined(unique))
     unique = 0;
-  }
 
   assert(!isDefined(level.rts.events[ref]), "Event with this ref name already exists");
-  event = spawnStruct();
+  event = spawnstruct();
   event.ref = ref;
   event.cooldown = cooldown;
   event.latency = latency;
@@ -247,13 +229,11 @@ register_event(ref, dataparam, cooldown, latency, trignotify, onetimeonly, prior
   event.daisy = daisy;
   event.unique = unique;
 
-  if(isDefined(event.onnotify)) {
+  if(isDefined(event.onnotify))
     level thread event_listener(event);
-  }
 
-  if(isDefined(event.latency) && event.latency <= 0) {
+  if(isDefined(event.latency) && event.latency <= 0)
     event.latency = 100;
-  }
 
   level.rts.events[ref] = event;
 }
@@ -263,11 +243,10 @@ event_listener(event) {
   level waittill(event.onnotify);
   add_event_to_trigger(event);
 
-  if(isDefined(event.onetimeonly) && event.onetimeonly) {
+  if(isDefined(event.onetimeonly) && event.onetimeonly)
     return;
-  } else {
+  else
     level thread event_listener(event);
-  }
 }
 
 priorityeventcompfunc(e1, e2, param) {
@@ -278,34 +257,30 @@ add_event_to_trigger(event_ref, param) {
   timestamp = gettime();
 
   if(isDefined(event_ref.lastexecutedat) && isDefined(event_ref.cooldown)) {
-    if(timestamp < event_ref.lastexecutedat + event_ref.cooldown) {
+    if(timestamp < event_ref.lastexecutedat + event_ref.cooldown)
       return false;
-    }
   }
 
-  if(isDefined(event_ref.onetimeonly) && event_ref.onetimeonly && event_ref.count > 0) {
+  if(isDefined(event_ref.onetimeonly) && event_ref.onetimeonly && event_ref.count > 0)
     return false;
-  }
 
   if(event_ref.unique) {
     foreach(ev in level.rts.event_queue) {
-      if(ev.def.ref == event_ref.ref) {
+      if(ev.def.ref == event_ref.ref)
         return false;
-      }
     }
   }
 
   if(event_ref.data.type == 5) {
     refs = strtok(event_ref.data.param1, " ");
 
-    for(i = 0; i < refs.size; i++) {
+    for(i = 0; i < refs.size; i++)
       trigger_event(refs[i], param);
-    }
 
     return true;
   }
 
-  event = spawnStruct();
+  event = spawnstruct();
   event.def = event_ref;
   event.data = event_ref.data;
   event.timestamp = timestamp;
@@ -313,25 +288,22 @@ add_event_to_trigger(event_ref, param) {
   event_ref.count++;
   level.rts.event_queue[level.rts.event_queue.size] = event;
 
-  if(level.rts.event_queue.size > 1) {
+  if(level.rts.event_queue.size > 1)
     level.rts.event_queue = maps\_utility_code::mergesort(level.rts.event_queue, ::priorityeventcompfunc);
-  }
 
-  if(isDefined(event_ref.daisy)) {
+  if(isDefined(event_ref.daisy))
     trigger_event(event_ref.daisy, param);
-  }
 
   return true;
 }
 
 trigger_event(ref, param) {
-  if(!flag("rts_event_ready")) {
+  if(!flag("rts_event_ready"))
     return 0;
-  }
 
-  if(isDefined(level.rts.events[ref])) {
+  if(isDefined(level.rts.events[ref]))
     return add_event_to_trigger(level.rts.events[ref], param);
-  } else {
+  else {
     println("@@@@@ (" + gettime() + ") WARNING: Event triggered but no reference was found (" + ref + ")");
 
   }
@@ -354,11 +326,11 @@ event_notesendondeath(note) {
   level notify(note + "done");
 }
 
-event_playSound(alias, note, guy) {
+event_playsound(alias, note, guy) {
   level.rts.events_dialogchannellock = guy getentitynumber();
 
   guy thread event_notesendondeath(note);
-  guy playSound(alias, note);
+  guy playsound(alias, note);
   guy waittill(note);
   level.rts.events_dialogchannellock = undefined;
   level notify(note + "_done");
@@ -369,42 +341,37 @@ event_trigger(event) {
 
   switch (event.data.type) {
     case 0:
-      if(isDefined(level.rts.events_dialogchannellock)) {
+      if(isDefined(level.rts.events_dialogchannellock))
         return 0;
-      }
 
       alias = event.data.param1;
       assert(isDefined(alias), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
 
       if(isDefined(event.data.param2)) {
-        if(event.data.param2 == "player") {
+        if(event.data.param2 == "player")
           target = level.rts.player;
-        } else {
+        else
           target = getent(event.data.param2, "targetname");
-        }
       }
 
-      if(isDefined(target) && (target == level.rts.player || isDefined(target.rts_unloaded))) {
-        thread event_playSound(alias, event.def.ref, target);
-      } else {
+      if(isDefined(target) && (target == level.rts.player || isDefined(target.rts_unloaded)))
+        thread event_playsound(alias, event.def.ref, target);
+      else {
         target = event.data.param3;
         assert(target == "allies" || target == "axis" || target == "dparam", "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
 
-        if(target == "dparam") {
+        if(target == "dparam")
           assert(isDefined(event.dparam), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-        }
 
         guys = getvalidvoxlist(target, event.dparam);
 
-        if(guys.size == 0) {
+        if(guys.size == 0)
           return 0;
-        }
 
         guy = guys[randomint(guys.size)];
 
-        if(!isDefined(guy)) {
+        if(!isDefined(guy))
           return 0;
-        }
 
         if(issubstr(alias, "#%#")) {
           tokens = strtok(alias, "#%#");
@@ -412,7 +379,7 @@ event_trigger(event) {
         }
 
         event.dynamic_alias = alias;
-        thread event_playSound(alias, event.def.ref, guy);
+        thread event_playsound(alias, event.def.ref, guy);
       }
 
       return 1;
@@ -421,29 +388,26 @@ event_trigger(event) {
       assert(isDefined(alias), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
 
       if(isDefined(event.data.param2)) {
-        if(event.data.param2 == "player") {
+        if(event.data.param2 == "player")
           position = level.rts.player.origin;
-        } else {
+        else {
           target = getent(event.data.param2, "targetname");
           assert(isDefined(target), "entity not found");
 
-          if(isDefined(target)) {
+          if(isDefined(target))
             position = target.origin;
-          }
         }
       }
 
-      if(isDefined(event.dparam)) {
+      if(isDefined(event.dparam))
         entity = event.dparam;
-      }
 
-      if(isDefined(entity)) {
-        entity playSound(alias);
-      } else if(isDefined(position)) {
+      if(isDefined(entity))
+        entity playsound(alias);
+      else if(isDefined(position))
         playsoundatposition(alias, position);
-      } else {
+      else
         level.rts.player playlocalsound(alias);
-      }
 
       return 1;
     case 2:
@@ -458,21 +422,20 @@ event_trigger(event) {
       tag = event.data.param3;
 
       if(isDefined(tag)) {
-        if(isDefined(event.dparam)) {
+        if(isDefined(event.dparam))
           entity = event.dparam;
-        } else if(isDefined(event.data.param2)) {
+        else if(isDefined(event.data.param2))
           entity = getent(event.data.param2, "targetname");
-        }
 
         assert(isDefined(entity), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-        playFXOnTag(level._effect[alias], entity, tag);
+        playfxontag(level._effect[alias], entity, tag);
       } else {
-        if(isDefined(event.dparam)) {
+        if(isDefined(event.dparam))
           position = event.dparam;
-        } else if(isDefined(event.data.param2)) {
-          if(event.data.param2 == "player") {
+        else if(isDefined(event.data.param2)) {
+          if(event.data.param2 == "player")
             position = level.rts.player.origin;
-          } else {
+          else {
             entity = getent(event.data.param2, "targetname");
             assert(isDefined(entity), "entity not found");
             position = entity.origin;
@@ -480,7 +443,7 @@ event_trigger(event) {
         }
 
         assert(isDefined(position), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-        playFX(level._effect[alias], position);
+        playfx(level._effect[alias], position);
       }
 
       return 1;
@@ -499,9 +462,10 @@ allocvoxid(param) {
   if(!isDefined(level.rts.voxids[self.team])) {
     return;
   }
-  if(isDefined(level.rts.customvoxallocid)) {
-    return [[level.rts.customvoxallocid]](param);
-  }
+  if(isDefined(level.rts.customvoxallocid))
+    return [
+      [level.rts.customvoxallocid]
+    ](param);
 
   for(i = 0; i <= 5; i++) {
     voxid = "so" + i;
@@ -523,18 +487,18 @@ voxdeallocatewatch() {
 }
 
 getvalidvoxlist(team, dparam) {
-  if(isDefined(level.rts.customvoxlist)) {
-    return [[level.rts.customvoxlist]](team, dparam);
-  }
+  if(isDefined(level.rts.customvoxlist))
+    return [
+      [level.rts.customvoxlist]
+    ](team, dparam);
 
   guys = [];
 
   for(i = 0; i <= 5; i++) {
     voxid = "so" + i;
 
-    if(isDefined(level.rts.voxids["allies"][voxid])) {
+    if(isDefined(level.rts.voxids["allies"][voxid]))
       guys[guys.size] = level.rts.voxids["allies"][voxid];
-    }
   }
 
   return guys;

@@ -22,7 +22,7 @@ function autoexec main() {
 
 function private _throwstowedweapon(entity, weapon, weaponmodel) {
   entity waittill("death");
-  if(isDefined(entity)) {
+  if(isdefined(entity)) {
     weaponmodel unlink();
     entity throwweapon(weapon, gettagforpos("back"), 0);
   }
@@ -31,14 +31,14 @@ function private _throwstowedweapon(entity, weapon, weaponmodel) {
 
 function stowweapon(weapon, positionoffset, orientationoffset) {
   entity = self;
-  if(!isDefined(positionoffset)) {
+  if(!isdefined(positionoffset)) {
     positionoffset = (0, 0, 0);
   }
-  if(!isDefined(orientationoffset)) {
+  if(!isdefined(orientationoffset)) {
     orientationoffset = (0, 0, 0);
   }
   weaponmodel = spawn("script_model", (0, 0, 0));
-  weaponmodel setModel(weapon.worldmodel);
+  weaponmodel setmodel(weapon.worldmodel);
   weaponmodel linkto(entity, "tag_stowed_back", positionoffset, orientationoffset);
   entity thread _throwstowedweapon(entity, weapon, weaponmodel);
 }
@@ -48,7 +48,7 @@ function placeweaponon(weapon, position) {
   if(isstring(weapon)) {
     weapon = getweapon(weapon);
   }
-  if(!isDefined(self.weaponinfo[weapon.name])) {
+  if(!isdefined(self.weaponinfo[weapon.name])) {
     self init::initweapon(weapon);
   }
   curposition = self.weaponinfo[weapon.name].position;
@@ -57,7 +57,7 @@ function placeweaponon(weapon, position) {
     self.a.weaponpos = [];
   }
   assert(isarray(self.a.weaponpos));
-  assert(position == "" || isDefined(self.a.weaponpos[position]), ("" + position) + "");
+  assert(position == "" || isdefined(self.a.weaponpos[position]), ("" + position) + "");
   assert(isweapon(weapon));
   if(position != "none" && self.a.weaponpos[position] == weapon) {
     return;
@@ -95,8 +95,8 @@ function updatescriptweaponinfoandpos(weapon, position) {
 }
 
 function detachallweaponmodels() {
-  if(isDefined(self.weapon_positions)) {
-    for(index = 0; index < self.weapon_positions.size; index++) {
+  if(isdefined(self.weapon_positions)) {
+    for (index = 0; index < self.weapon_positions.size; index++) {
       weapon = self.a.weaponpos[self.weapon_positions[index]];
       if(weapon == level.weaponnone) {
         continue;
@@ -107,8 +107,8 @@ function detachallweaponmodels() {
 }
 
 function updateattachedweaponmodels() {
-  if(isDefined(self.weapon_positions)) {
-    for(index = 0; index < self.weapon_positions.size; index++) {
+  if(isdefined(self.weapon_positions)) {
+    for (index = 0; index < self.weapon_positions.size; index++) {
       weapon = self.a.weaponpos[self.weapon_positions[index]];
       if(weapon == level.weaponnone) {
         continue;
@@ -155,14 +155,14 @@ function throwweapon(weapon, positiontag, scavenger) {
   startposition = self gettagorigin(positiontag);
   startangles = self gettagangles(positiontag);
   wait(waittime);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     endposition = self gettagorigin(positiontag);
     endangles = self gettagangles(positiontag);
     linearvelocity = (endposition - startposition) * (1 / waittime) * linearscalar;
     angularvelocity = (vectornormalize(endangles - startangles)) * angularscalar;
     throwweapon = self dropweapon(weapon, positiontag, linearvelocity, angularvelocity, scavenger);
-    if(isDefined(throwweapon)) {
-      throwweapon setcontents(throwweapon setcontents(0) &(~(((32768 | 67108864) | 8388608) | 33554432)));
+    if(isdefined(throwweapon)) {
+      throwweapon setcontents(throwweapon setcontents(0) & (~(((32768 | 67108864) | 8388608) | 33554432)));
     }
     return throwweapon;
   }
@@ -173,11 +173,11 @@ function dropaiweapon() {
   if(self.weapon == level.weaponnone) {
     return;
   }
-  if(isDefined(self.script_nodropsecondaryweapon) && self.script_nodropsecondaryweapon && self.weapon == self.initial_secondaryweapon) {
+  if(isdefined(self.script_nodropsecondaryweapon) && self.script_nodropsecondaryweapon && self.weapon == self.initial_secondaryweapon) {
     println(("" + self.weapon.name) + "");
     return;
   }
-  if(isDefined(self.script_nodropsidearm) && self.script_nodropsidearm && self.weapon == self.sidearm) {
+  if(isdefined(self.script_nodropsidearm) && self.script_nodropsidearm && self.weapon == self.sidearm) {
     println(("" + self.weapon.name) + "");
     return;
   }
@@ -185,7 +185,7 @@ function dropaiweapon() {
   current_weapon = self.weapon;
   dropweaponname = player_weapon_drop(current_weapon);
   position = self.weaponinfo[current_weapon.name].position;
-  shoulddropweapon = !isDefined(self.dontdropweapon) || self.dontdropweapon === 0;
+  shoulddropweapon = !isdefined(self.dontdropweapon) || self.dontdropweapon === 0;
   if(current_weapon.isscavengable == 0) {
     shoulddropweapon = 0;
   }
@@ -206,7 +206,7 @@ function dropaiweapon() {
 }
 
 function dropallaiweapons() {
-  if(isDefined(self.a.dropping_weapons) && self.a.dropping_weapons) {
+  if(isdefined(self.a.dropping_weapons) && self.a.dropping_weapons) {
     return;
   }
   if(!self.dropweapon) {
@@ -219,17 +219,17 @@ function dropallaiweapons() {
   self.a.dropping_weapons = 1;
   self detachallweaponmodels();
   droppedsidearm = 0;
-  if(isDefined(self.weapon_positions)) {
-    for(index = 0; index < self.weapon_positions.size; index++) {
+  if(isdefined(self.weapon_positions)) {
+    for (index = 0; index < self.weapon_positions.size; index++) {
       weapon = self.a.weaponpos[self.weapon_positions[index]];
       if(weapon != level.weaponnone) {
         self.weaponinfo[weapon.name].position = "none";
         self.a.weaponpos[self.weapon_positions[index]] = level.weaponnone;
-        if(isDefined(self.script_nodropsecondaryweapon) && self.script_nodropsecondaryweapon && weapon == self.initial_secondaryweapon) {
+        if(isdefined(self.script_nodropsecondaryweapon) && self.script_nodropsecondaryweapon && weapon == self.initial_secondaryweapon) {
           println(("" + weapon.name) + "");
           continue;
         }
-        if(isDefined(self.script_nodropsidearm) && self.script_nodropsidearm && weapon == self.sidearm) {
+        if(isdefined(self.script_nodropsidearm) && self.script_nodropsidearm && weapon == self.sidearm) {
           println(("" + weapon.name) + "");
           continue;
         }
@@ -266,70 +266,76 @@ function player_weapon_drop(weapon) {
 function handlenotetrack(note, flagname, customfunction, var1) {}
 
 function donotetracks(flagname, customfunction, debugidentifier, var1) {
-  for(;;) {
+  for (;;) {
     self waittill(flagname, note);
-    if(!isDefined(note)) {
+    if(!isdefined(note)) {
       note = "undefined";
     }
     val = self handlenotetrack(note, flagname, customfunction, var1);
-    if(isDefined(val)) {
+    if(isdefined(val)) {
       return val;
     }
   }
 }
 
 function donotetracksintercept(flagname, interceptfunction, debugidentifier) {
-  assert(isDefined(interceptfunction));
-  for(;;) {
+  assert(isdefined(interceptfunction));
+  for (;;) {
     self waittill(flagname, note);
-    if(!isDefined(note)) {
+    if(!isdefined(note)) {
       note = "undefined";
     }
-    intercepted = [[interceptfunction]](note);
-    if(isDefined(intercepted) && intercepted) {
+    intercepted = [
+      [interceptfunction]
+    ](note);
+    if(isdefined(intercepted) && intercepted) {
       continue;
     }
     val = self handlenotetrack(note, flagname);
-    if(isDefined(val)) {
+    if(isdefined(val)) {
       return val;
     }
   }
 }
 
 function donotetrackspostcallback(flagname, postfunction) {
-  assert(isDefined(postfunction));
-  for(;;) {
+  assert(isdefined(postfunction));
+  for (;;) {
     self waittill(flagname, note);
-    if(!isDefined(note)) {
+    if(!isdefined(note)) {
       note = "undefined";
     }
     val = self handlenotetrack(note, flagname);
-    [[postfunction]](note);
-    if(isDefined(val)) {
+    [
+      [postfunction]
+    ](note);
+    if(isdefined(val)) {
       return val;
     }
   }
 }
 
 function donotetracksforever(flagname, killstring, customfunction, debugidentifier) {
-  donotetracksforeverproc(&donotetracks, flagname, killstring, customfunction, debugidentifier);
+  donotetracksforeverproc( & donotetracks, flagname, killstring, customfunction, debugidentifier);
 }
 
 function donotetracksforeverintercept(flagname, killstring, interceptfunction, debugidentifier) {
-  donotetracksforeverproc(&donotetracksintercept, flagname, killstring, interceptfunction, debugidentifier);
+  donotetracksforeverproc( & donotetracksintercept, flagname, killstring, interceptfunction, debugidentifier);
 }
 
 function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, debugidentifier) {
-  if(isDefined(killstring)) {
+  if(isdefined(killstring)) {
     self endon(killstring);
   }
   self endon("killanimscript");
-  if(!isDefined(debugidentifier)) {
+  if(!isdefined(debugidentifier)) {
     debugidentifier = "undefined";
   }
-  for(;;) {
+  for (;;) {
     time = gettime();
-    returnednote = [[notetracksfunc]](flagname, customfunction, debugidentifier);
+    returnednote = [
+      [notetracksfunc]
+    ](flagname, customfunction, debugidentifier);
     timetaken = gettime() - time;
     if(timetaken < 0.05) {
       time = gettime();
@@ -346,15 +352,15 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
 }
 
 function donotetracksfortime(time, flagname, customfunction, debugidentifier) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc(&donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
+  donotetracksfortimeproc( & donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
 }
 
 function donotetracksfortimeintercept(time, flagname, interceptfunction, debugidentifier) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc(&donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
+  donotetracksfortimeproc( & donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
 }
 
 function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction, debugidentifier, ent) {

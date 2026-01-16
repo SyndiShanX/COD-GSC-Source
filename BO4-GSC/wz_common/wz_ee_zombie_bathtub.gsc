@@ -13,6 +13,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\wz_common\wz_ai_utils;
+
 #namespace namespace_87f097c4;
 
 autoexec __init__system__() {
@@ -38,6 +39,7 @@ __init__() {
   }
 
   function_4ed420e3();
+
 }
 
 on_ai_killed(params) {
@@ -177,3 +179,4 @@ function_7eabf705() {
     waitframe(1);
   }
 }
+

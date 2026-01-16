@@ -10,9 +10,8 @@ init() {
   precacheString(&"PLATFORM_PRESS_TO_RESPAWN");
   precacheShader("white");
   level.killcam = maps\mp\gametypes\_tweakables::getTweakableValue("game", "allowkillcam");
-  if(level.killcam) {
+  if(level.killcam)
     setArchive(true);
-  }
 }
 
 killcam(
@@ -46,20 +45,17 @@ killcam(
   } else
     camtime = getdvarfloat("scr_killcam_time");
   if(isDefined(maxtime)) {
-    if(camtime > maxtime) {
+    if(camtime > maxtime)
       camtime = maxtime;
-    }
-    if(camtime < .05) {
+    if(camtime < .05)
       camtime = .05;
-    }
   }
-  if(getdvar("scr_killcam_posttime") == "") {
+  if(getdvar("scr_killcam_posttime") == "")
     postdelay = 2;
-  } else {
+  else {
     postdelay = getdvarfloat("scr_killcam_posttime");
-    if(postdelay < 0.05) {
+    if(postdelay < 0.05)
       postdelay = 0.05;
-    }
   }
   killcamlength = camtime + postdelay;
   if(isDefined(maxtime) && killcamlength > maxtime) {
@@ -80,9 +76,8 @@ killcam(
   self.sessionstate = "spectator";
   self.spectatorclient = attackerNum;
   self.killcamentity = -1;
-  if(killcamentityindex >= 0) {
+  if(killcamentityindex >= 0)
     self thread setKillCamEntity(killcamentityindex, killcamentitystarttime - killcamstarttime - 100);
-  }
   self.archivetime = killcamoffset;
   self.killcamlength = killcamlength;
   self.psoffsettime = offsetTime;
@@ -119,20 +114,18 @@ killcam(
       self.kc_skiptext.fontscale = 2;
     }
   }
-  if(respawn) {
+  if(respawn)
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_RESPAWN");
-  } else {
+  else
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_SKIP");
-  }
   self.kc_skiptext.alpha = 1;
   if(!level.splitscreen) {
     if(!isDefined(self.kc_timer)) {
       self.kc_timer = createFontString("objective", 2.0);
-      if(level.console) {
+      if(level.console)
         self.kc_timer setPoint("BOTTOM", undefined, 0, -80);
-      } else {
+      else
         self.kc_timer setPoint("BOTTOM", undefined, 0, -60);
-      }
       self.kc_timer.archived = false;
       self.kc_timer.foreground = true;
     }
@@ -160,9 +153,8 @@ setKillCamEntity(killcamentityindex, delayms) {
   self endon("disconnect");
   self endon("end_killcam");
   self endon("spawned");
-  if(delayms > 0) {
+  if(delayms > 0)
     wait delayms / 1000;
-  }
   self.killcamentity = killcamentityindex;
 }
 
@@ -176,35 +168,29 @@ waitKillcamTime() {
 waitSkipKillcamButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while(self useButtonPressed()) {
+  while (self useButtonPressed())
     wait .05;
-  }
-  while(!(self useButtonPressed())) {
+  while (!(self useButtonPressed()))
     wait .05;
-  }
   self notify("end_killcam");
 }
 
 waitSkipKillcamSafeSpawnButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while(self fragButtonPressed()) {
+  while (self fragButtonPressed())
     wait .05;
-  }
-  while(!(self fragButtonPressed())) {
+  while (!(self fragButtonPressed()))
     wait .05;
-  }
   self.wantSafeSpawn = true;
   self notify("end_killcam");
 }
 
 endKillcam() {
-  if(isDefined(self.kc_skiptext)) {
+  if(isDefined(self.kc_skiptext))
     self.kc_skiptext.alpha = 0;
-  }
-  if(isDefined(self.kc_timer)) {
+  if(isDefined(self.kc_timer))
     self.kc_timer.alpha = 0;
-  }
   if(!level.splitscreen) {
     self hidePerk(0);
     self hidePerk(1);

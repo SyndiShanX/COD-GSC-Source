@@ -127,21 +127,18 @@ begin_other_grenade_tracking() {
 
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS)) {
+  if(!isDefined(doLOS))
     doLOS = false;
-  }
-  if(!isDefined(startRadius)) {
+  if(!isDefined(startRadius))
     startRadius = 0;
-  }
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
+    if(!isalive(players[i]) || players[i].sessionstate != "playing")
       continue;
-    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = true;
       newent.isADestructable = false;
       newent.entity = players[i];
@@ -154,7 +151,7 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
     entpos = guys[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, guys[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = guys[i];
@@ -162,12 +159,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, grenades[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = grenades[i];
@@ -175,12 +172,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
   for(i = 0; i < destructibles.size; i++) {
     entpos = destructibles[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, destructibles[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = destructibles[i];
@@ -188,12 +185,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  destructables = getEntArray("destructable", "targetname");
+  destructables = getentarray("destructable", "targetname");
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, destructables[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = true;
       newent.entity = destructables[i];
@@ -207,12 +204,11 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius) {
+  if(lengthsquared(diff) < startRadius * startRadius)
     midpos = to;
-  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
-  trace = bulletTrace(midpos, to, false, ignore);
+  trace = bullettrace(midpos, to, false, ignore);
   return (trace["fraction"] == 1);
 }
 
@@ -235,9 +231,8 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
   } else if(IsAlive(self.entity)) {
     self.entity DoDamage(iDamage, damagepos, eAttacker, eInflictor, sMeansOfDeath, 0);
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp")) {
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp"))
       return;
-    }
     self.entity damage_notify_wrapper(iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
   }
 }
@@ -246,7 +241,7 @@ watchSmokeGrenadeDetonation() {
   self waittill("explode", position, surface);
   smokeSound = spawn("script_origin", (0, 0, 1));
   smokeSound.origin = position;
-  smokeSound playSound("wpn_smoke_hiss_start");
+  smokeSound playsound("wpn_smoke_hiss_start");
   smokeSound playLoopSound("wpn_smoke_hiss_lp");
   wait(6);
   playsoundatposition("wpn_smoke_hiss_end", position);

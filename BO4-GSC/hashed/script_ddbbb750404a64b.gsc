@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_287e05a2;
 
 autoexec __init__system__() {
@@ -23,9 +24,9 @@ __init__() {
 }
 
 private on_begin(str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef, var_11ec7b7b, var_cac66d30) {
-  if(str_zone1 == # "hash_13aa327bb61b59de") {
-    if(str_zone2 == # "zm_red_dark_side") {
-      level.var_da1e5199 = array(#"zone_river_upper", # "zone_river_lower", # "zone_serpent_pass_upper", # "zone_serpent_pass_center", # "zone_serpent_pass_lower", # "zone_serpent_pass_bridge", # "zone_drakaina_arena", # "zone_cliff_tombs_upper", # "zone_cliff_tombs_forge", # "zone_cliff_tombs_center", # "zone_cliff_tombs_lower", # "zone_cliff_tombs_bridge", # "zone_ww_quest_death", # "zone_ww_quest_air");
+  if(str_zone1 == #"hash_13aa327bb61b59de") {
+    if(str_zone2 == #"zm_red_dark_side") {
+      level.var_da1e5199 = array(#"zone_river_upper", #"zone_river_lower", #"zone_serpent_pass_upper", #"zone_serpent_pass_center", #"zone_serpent_pass_lower", #"zone_serpent_pass_bridge", #"zone_drakaina_arena", #"zone_cliff_tombs_upper", #"zone_cliff_tombs_forge", #"zone_cliff_tombs_center", #"zone_cliff_tombs_lower", #"zone_cliff_tombs_bridge", #"zone_ww_quest_death", #"zone_ww_quest_air");
     }
   } else {
     level.var_da1e5199 = array(str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef, var_11ec7b7b, var_cac66d30);

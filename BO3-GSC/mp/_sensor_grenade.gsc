@@ -11,7 +11,7 @@
 #namespace sensor_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("sensor_grenade", &__init__, undefined, undefined);
+  system::register("sensor_grenade", & __init__, undefined, undefined);
 }
 
 function __init__() {

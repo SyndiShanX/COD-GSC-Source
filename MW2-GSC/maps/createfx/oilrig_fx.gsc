@@ -1594,4 +1594,5 @@ main() {
   ent.v["exploder"] = "exploder_ambush_afterfx";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "nil";
+
 }

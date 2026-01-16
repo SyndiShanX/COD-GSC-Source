@@ -265,9 +265,8 @@ commander_order_ack() {
 
     org = self.origin;
     spectatedBot = self GetSpectatingPlayer();
-    if(isDefined(spectatedBot)) {
+    if(isDefined(spectatedBot))
       org = spectatedBot.origin;
-    }
 
     foreach(player in level.players) {
       if(isDefined(player) && IsAlive(player) && IsBot(player) && isDefined(player.team) && player.team == self.team) {
@@ -527,44 +526,36 @@ monitor_enter_commander_mode() {
 }
 
 commander_can_takeover_bot(bot) {
-  if(!isDefined(bot)) {
+  if(!isDefined(bot))
     return false;
-  }
 
-  if(!IsBot(bot)) {
+  if(!IsBot(bot))
     return false;
-  }
 
-  if(!IsAlive(bot)) {
+  if(!IsAlive(bot))
     return false;
-  }
 
-  if(!bot.connected) {
+  if(!bot.connected)
     return false;
-  }
 
-  if(bot.team != self.team) {
+  if(bot.team != self.team)
     return false;
-  }
 
   botUsingKillstreak = bot maps\mp\killstreaks\_killstreaks::is_using_killstreak();
-  if(botUsingKillstreak) {
+  if(botUsingKillstreak)
     return false;
-  }
 
   botUsingDeployableBox = self maps\mp\killstreaks\_deployablebox::isHoldingDeployableBox();
-  if(botUsingDeployableBox) {
+  if(botUsingDeployableBox)
     return false;
-  }
 
   return true;
 }
 
 player_get_player_index() {
   for(i = 0; i < level.players.size; i++) {
-    if(level.players[i] == self) {
+    if(level.players[i] == self)
       return i;
-    }
   }
   return -1;
 }
@@ -821,9 +812,8 @@ bot_free_to_move() {
   }
   self BotSetFlag("disable_movement", false);
 
-  if(isDefined(self.badplacename)) {
+  if(isDefined(self.badplacename))
     BadPlace_Delete(self.badplacename);
-  }
 
   self notify("freed_to_move");
 }

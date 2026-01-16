@@ -42,7 +42,7 @@ last_stand_thread(clientNum) {
   maxPause = 2.0;
   pause = startPause;
   vol = startVol;
-  while(1) {
+  while (1) {
     id = PlayLocalSound(clientNum, "heart_beat");
     setSoundVolume(id, vol);
     realWait(pause);
@@ -87,9 +87,8 @@ main() {
   clientscripts\_utility::registerSystem("levelNotify", ::levelNotifyHandler);
   clientscripts\_utility::registerSystem("lsm", ::last_stand_monitor);
   level.createFX_enabled = (getdvar("createfx") != "");
-  if(!isDefined(level.scr_anim)) {
+  if(!isDefined(level.scr_anim))
     level.scr_anim[0][0] = 0;
-  }
   clientscripts\_global_fx::main();
   clientscripts\_busing::busInit();
   clientscripts\_ambientpackage::init();
@@ -97,7 +96,7 @@ main() {
   clientscripts\_vehicle::init_vehicles();
   clientscripts\_collectibles::init();
   clientscripts\_russian_diary::init();
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     level thread effects_init_thread(i, "effects_init_" + i);
   }
   add_listen_thread("rfo1", clientscripts\_utility::loop_sound_on_client, "breathing_hurt", 0.3, 0.7, "rfo2");

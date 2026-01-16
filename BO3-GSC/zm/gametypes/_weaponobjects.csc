@@ -13,7 +13,7 @@
 #namespace weaponobjects;
 
 function autoexec __init__sytem__() {
-  system::register("weaponobjects", &__init__, undefined, undefined);
+  system::register("weaponobjects", & __init__, undefined, undefined);
 }
 
 function __init__() {

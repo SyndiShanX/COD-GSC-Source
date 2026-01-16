@@ -91,11 +91,10 @@ initreadystand() {
       }
 
       if(isDefined(anim.coverexit[var_3]) && isDefined(anim.coverexit[var_3][var_1])) {
-        if(animhasnotetrack(anim.coverexit[var_3][var_1], "code_move")) {
+        if(animhasnotetrack(anim.coverexit[var_3][var_1], "code_move"))
           var_4 = getnotetracktimes(anim.coverexit[var_3][var_1], "code_move")[0];
-        } else {
+        else
           var_4 = 1;
-        }
 
         anim.coverexitdist[var_3][var_1] = getmovedelta(anim.coverexit[var_3][var_1], 0, var_4);
         anim.coverexitangles[var_3][var_1] = getangledelta(anim.coverexit[var_3][var_1], 0, 1);
@@ -113,17 +112,15 @@ initreadystand() {
       }
       var_5 = lengthsquared(anim.covertransdist[var_3][var_1]);
 
-      if(anim.covertranslongestdist[var_3] < var_5) {
+      if(anim.covertranslongestdist[var_3] < var_5)
         anim.covertranslongestdist[var_3] = var_5;
-      }
     }
 
     anim.covertranslongestdist[var_3] = sqrt(anim.covertranslongestdist[var_3]);
   }
 
-  if(!isDefined(anim.longestexposedapproachdist)) {
+  if(!isDefined(anim.longestexposedapproachdist))
     anim.longestexposedapproachdist = 0;
-  }
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
@@ -147,9 +144,8 @@ initreadystand() {
       }
       var_6 = length(anim.covertransdist[var_3][var_1]);
 
-      if(var_6 > anim.longestexposedapproachdist) {
+      if(var_6 > anim.longestexposedapproachdist)
         anim.longestexposedapproachdist = var_6;
-      }
     }
   }
 
@@ -157,38 +153,33 @@ initreadystand() {
 }
 
 create_default_entries() {
-  while(!isDefined(anim.archetypes)) {
+  while(!isDefined(anim.archetypes))
     wait 0.1;
-  }
 
   var_0 = "exposed_ready";
   var_1 = "cover_trans_angles";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_trans_dist";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_exit_angles";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_exit_dist";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   anim.archetypes["soldier"]["cover_trans"][var_0][1] = % run_trans_2_readystand_1;
   anim.archetypes["soldier"]["cover_trans"][var_0][2] = % run_trans_2_readystand_2;
@@ -211,30 +202,26 @@ create_default_entries() {
   var_1 = "cover_trans_angles";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_trans_dist";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_exit_angles";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   var_1 = "cover_exit_dist";
   anim.archetypes["soldier"][var_1][var_0] = [];
 
-  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++) {
+  for(var_2 = 0; var_2 < anim.archetypes["soldier"][var_1]["exposed"].size; var_2++)
     anim.archetypes["soldier"][var_1][var_0][var_2] = anim.archetypes["soldier"][var_1]["exposed"][var_2];
-  }
 
   anim.archetypes["soldier"]["cover_trans"][var_0][1] = % cqb_trans_2_readystand_1;
   anim.archetypes["soldier"]["cover_trans"][var_0][2] = % cqb_trans_2_readystand_2;

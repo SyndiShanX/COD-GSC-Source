@@ -20,7 +20,7 @@
 function main_start() {
   var_6674aa0f = struct::get("upper_courtyard_landing_pad12");
   var_6674aa0f.origin = var_6674aa0f.origin + vectorscale((1, 0, 0), 30);
-  level.var_2d0e5eb6 = &function_8921895f;
+  level.var_2d0e5eb6 = & function_8921895f;
   level.var_92a78c17 = spawn("trigger_box", (101, -6298, -625), 0, 425, 178, 520);
   level.var_92a78c17.angles = vectorscale((0, 1, 0), 317.8);
 }
@@ -79,7 +79,7 @@ function function_8921895f() {
   var_cdb0f86b = getarraykeys(level.zombie_powerups);
   var_b4442b55 = array("bonus_points_team", "shield_charge", "ww_grenade", "genesis_random_weapon");
   var_d7a75a6e = [];
-  for(i = 0; i < var_cdb0f86b.size; i++) {
+  for (i = 0; i < var_cdb0f86b.size; i++) {
     var_77917a61 = 0;
     foreach(var_68de493a in var_b4442b55) {
       if(var_cdb0f86b[i] == var_68de493a) {
@@ -105,7 +105,7 @@ function function_d7b99564() {
   var_e8eee856.script_string = "find_flesh";
   var_e8eee856.is_enabled = 1;
   level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"] = [];
-  if(!isDefined(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
+  if(!isdefined(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
     level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"] = [];
   } else if(!isarray(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
     level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"] = array(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"]);
@@ -118,7 +118,7 @@ function function_d7b99564() {
   var_c2ec6ded.script_noteworthy = "riser_location";
   var_c2ec6ded.script_string = "find_flesh";
   var_c2ec6ded.is_enabled = 1;
-  if(!isDefined(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
+  if(!isdefined(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
     level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"] = [];
   } else if(!isarray(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"])) {
     level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"] = array(level.zones["zm_asylum_power_room_zone"].a_loc_types["riser_location"]);

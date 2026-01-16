@@ -10,9 +10,8 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 precacheReviveModels() {
-  if(isDefined(level.reviveFeature) && !level.reviveFeature) {
+  if(isDefined(level.reviveFeature) && !level.reviveFeature)
     return;
-  }
   precacheModel("char_rus_bandages1");
 }
 
@@ -54,34 +53,27 @@ revive_init() {
 
 tryGoingDown(damage, hitloc) {
   Assert(isDefined(level.reviveFeature), "level.reviveFeature is not initialized.");
-  if(!level.reviveFeature) {
+  if(!level.reviveFeature)
     return false;
-  }
   if(!GetDvarInt(#"scr_aiReviveFeature")) {
-    if(!shouldReviveSequenceHappen()) {
+    if(!shouldReviveSequenceHappen())
       return false;
-    }
   }
-  if(!IsAI(self) || !IsAlive(self) || (self.isdog) || (self.team != "axis") || (self.a.canBleed == false) || (self.a.pose == "back")) {
+  if(!IsAI(self) || !IsAlive(self) || (self.isdog) || (self.team != "axis") || (self.a.canBleed == false) || (self.a.pose == "back"))
     return false;
-  }
-  if(self.a.pose == "prone") {
+  if(self.a.pose == "prone")
     return false;
-  }
-  if(isDefined(self.a.usingTurret)) {
+  if(isDefined(self.a.usingTurret))
     return false;
-  }
   if(!GetDvarInt(#"scr_aiReviveFeature")) {
     friendlies = GetAIArray(self.team);
     alive_nearby_ai = get_array_of_closest(self.origin, friendlies, undefined, undefined, anim.reviverPingDist);
-    if(alive_nearby_ai.size <= 2) {
+    if(alive_nearby_ai.size <= 2)
       return false;
-    }
   }
   if((self.a.isreviver == false) && (self.a.revivedOnce == false) && (self.a.reviveMe == false) && isAIDamageFatal(damage) && !damageLocation(hitloc)) {
-    if(!IsReviveOnSafeTerrain()) {
+    if(!IsReviveOnSafeTerrain())
       return false;
-    }
     Assert(IsAlive(self) == true, "AI is already dead or in extended death and cant be put down.");
     self.a.reviveMe = true;
     self thread killMeOnScriptInterrupt();
@@ -119,19 +111,16 @@ reviver_selection_think(team) {
     reviver_found = false;
     while(!reviver_found) {
       friendlies = GetAIArray(self.team);
-      if(self.a.oldRevivers.size > 0) {
+      if(self.a.oldRevivers.size > 0)
         ai = get_array_of_closest(self.origin, friendlies, self.a.oldRevivers, undefined, anim.reviverPingDist);
-      } else {
+      else
         ai = get_array_of_closest(self.origin, friendlies, undefined, undefined, anim.reviverPingDist);
-      }
       for(i = 0; i < ai.size; i++) {
         current_ai = ai[i];
-        if(isAIOldReviver(current_ai) || (current_ai.a.canRevive == false)) {
+        if(isAIOldReviver(current_ai) || (current_ai.a.canRevive == false))
           continue;
-        }
-        if(isDefined(current_ai.ignoreall) && current_ai.ignoreall == true) {
+        if(isDefined(current_ai.ignoreall) && current_ai.ignoreall == true)
           continue;
-        }
         if((current_ai != self) && isDefined(current_ai.a.revivedOnce) && (current_ai.a.reviveMe == false) && (current_ai.a.isReviver == false)) {
           AssertEx(isDefined(self.predictedRevivePoint), "Predicted revive point is not calculated.");
           if(findpath(current_ai.origin, self.predictedRevivePoint)) {
@@ -144,9 +133,8 @@ reviver_selection_think(team) {
           }
         }
       }
-      if(!reviver_found) {
+      if(!reviver_found)
         wait(2);
-      }
     }
   }
 }
@@ -193,11 +181,10 @@ handle_reviver_goal_change() {
   self free_reviver("goalradius_changed");
   wait(0.05);
   if(isDefined(self.a.bleeder) && IsAlive(self.a.bleeder)) {
-    if(self.a.revivedOnce) {
+    if(self.a.revivedOnce)
       self.a.bleeder thread bleeder_getup();
-    } else {
+    else
       self.a.bleeder thread reviver_selection_think(self.a.bleeder.team);
-    }
   }
 }
 
@@ -238,9 +225,8 @@ free_reviver(reason) {
       self notify("reevaluate_reviver");
       self.a.bleeder notify("reevaluate_reviver");
     }
-    if(isDefined(self.ReviveOldgoalradius)) {
+    if(isDefined(self.ReviveOldgoalradius))
       self.goalradius = self.ReviveOldgoalradius;
-    }
     if(IsAlive(self) && isDefined(reason) && reason != "death") {
       self notify("killanimscript");
       waittillframeend;
@@ -257,9 +243,8 @@ free_bleeder() {
     self.a.falling = false;
     self.health = RandomIntRange(90, 120);
     self notify("ready_after_revived");
-    if(isDefined(self.a.special) && self.a.special == "bleeder_death") {
+    if(isDefined(self.a.special) && self.a.special == "bleeder_death")
       self.a.special = "none";
-    }
     if(IsAlive(self)) {
       self notify("killanimscript");
       waittillframeend;
@@ -304,9 +289,8 @@ bleeder_bleed_to_death() {
   self endon("revived");
   self.bleedOutTime = RandomIntRange(anim.bleederBleedOutTimeMin, anim.bleederBleedOutTimeMax);
   wait(self.bleedOutTime / 1000);
-  if(isDefined(self) && IsAlive(self)) {
+  if(isDefined(self) && IsAlive(self))
     self DoDamage(self.health + 200, self.origin);
-  }
 }
 
 fall_down_to_bleed() {
@@ -400,18 +384,16 @@ getReviverGetUpAnim() {
 }
 
 damageLocation(hitloc) {
-  if(hitloc == "helmet" || hitloc == "head") {
+  if(hitloc == "helmet" || hitloc == "head")
     return true;
-  }
   return false;
 }
 
 isAIOldReviver(ai) {
   if(self.a.oldRevivers.size > 0) {
     for(i = 0; i < self.a.oldRevivers.size; i++) {
-      if(isDefined(self.a.oldRevivers[i]) && self.a.oldRevivers[i] == ai) {
+      if(isDefined(self.a.oldRevivers[i]) && self.a.oldRevivers[i] == ai)
         return true;
-      }
     }
   }
   return false;
@@ -426,27 +408,23 @@ IsReviveOnSafeTerrain() {
   self endon("death");
   groundPos = physicstrace(self.origin, self.origin - (0, 0, 10000));
   bleederDistanceFromGround = distance(self.origin, groundPos);
-  if((bleederDistanceFromGround > 2) || (bleederDistanceFromGround < 0)) {
+  if((bleederDistanceFromGround > 2) || (bleederDistanceFromGround < 0))
     return false;
-  }
   angleDelta = getAngleDelta(anim.bleed[self.a.pose]["fall"], 0, 1);
   finalYaw = self.angles[1] + angleDelta;
   finalAngles = (self.angles[0], finalYaw, self.angles[2]);
   moveDelta = GetMoveDelta(anim.bleed[self.a.pose]["fall"], 0, 1);
   endPoint = self localToWorldCoords(moveDelta);
-  if(!self mayMoveToPoint(endPoint)) {
+  if(!self mayMoveToPoint(endPoint))
     return false;
-  }
   self.predictedRevivePoint = getPredictedRevivePoint(endPoint, finalAngles);
   groundPos = physicstrace(self.predictedRevivePoint, self.predictedRevivePoint - (0, 0, 10000));
   revivePointDistanceFromGround = distance(self.predictedRevivePoint, groundPos);
-  if(revivePointDistanceFromGround < 0 || revivePointDistanceFromGround > 15) {
+  if(revivePointDistanceFromGround < 0 || revivePointDistanceFromGround > 15)
     return false;
-  }
   diff = abs(bleederDistanceFromGround - revivePointDistanceFromGround);
-  if(diff > 15) {
+  if(diff > 15)
     return false;
-  }
   return true;
 }
 
@@ -458,9 +436,8 @@ getPredictedRevivePoint(endPoint, finalAngles) {
 isAIDamageFatal(damage) {
   Assert(IsAlive(self) == true, "AI is already dead or in extended death and cant be put down.");
   health = self.health - damage;
-  if(health <= 0) {
+  if(health <= 0)
     return true;
-  }
   return false;
 }
 
@@ -468,17 +445,15 @@ shouldBleed() {
   self endon("death");
   Assert(IsAlive(self) == true, "AI is already dead or in extended death and cant be put down.");
   Assert(IsAlive(self.a.revivedOnce) == false, "AI is already revived/bleeded once.");
-  if((self.a.reviveMe == true) && (self.a.bleeding == false) && (self.a.falling == false)) {
+  if((self.a.reviveMe == true) && (self.a.bleeding == false) && (self.a.falling == false))
     return true;
-  }
   return false;
 }
 
 isBleedingOrFalling() {
   Assert(IsAlive(self) == true, "AI is already dead or in extended death and cant be put down.");
-  if((self.a.bleeding == true) || (self.a.falling == true)) {
+  if((self.a.bleeding == true) || (self.a.falling == true))
     return true;
-  }
   return false;
 }
 
@@ -486,9 +461,8 @@ shouldReviveSequenceHappen() {
   if(GetTime() < anim.nextReviveSequenceTime) {
     return false;
   }
-  if((randomInt(100) > 40)) {
+  if((randomInt(100) > 40))
     return false;
-  }
   return true;
 }
 
@@ -509,19 +483,17 @@ resetReviveSequenceTimer() {
 }
 
 isReviverOrBleeder() {
-  if(isDefined(self) &IsAI(self)) {
-    if(self.a.isReviver || self.a.reviveMe) {
+  if(isDefined(self) & IsAI(self)) {
+    if(self.a.isReviver || self.a.reviveMe)
       return true;
-    }
   }
   return false;
 }
 
 isBleeder() {
-  if(isDefined(self) &IsAI(self)) {
-    if(self.a.reviveMe) {
+  if(isDefined(self) & IsAI(self)) {
+    if(self.a.reviveMe)
       return true;
-    }
   }
   return false;
 }

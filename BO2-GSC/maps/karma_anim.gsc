@@ -137,7 +137,7 @@ civilian_anims() {
   level.scr_anim["club_pmc9"]["death"] = % exposed_death_firing;
   level.scr_anim["salazar_target1"]["death"] = % ai_death_sniper_4;
   level.scr_anim["player_target1"]["death"] = % stand_death_chest_spin;
-  level.drones = spawnStruct();
+  level.drones = spawnstruct();
   level.drones.anims["civ_walk"][0] = % ai_civ_m_walk_00;
   level.drones.anims["civ_walk"][1] = % ai_civ_m_walk_01;
   level.drones.anims["civ_walk"][2] = % ai_civ_m_walk_03;
@@ -237,7 +237,8 @@ set_blend_in_out_times(time) {
   self anim_set_blend_out_time(time);
 }
 
-arrival_precache_anims() {}
+arrival_precache_anims() {
+}
 
 #using_animtree("vehicles");
 #using_animtree("player");
@@ -572,7 +573,8 @@ checkin_anims() {
   precache_assets(1);
 }
 
-dropdown_precache_anims() {}
+dropdown_precache_anims() {
+}
 
 #using_animtree("generic_human");
 
@@ -680,7 +682,8 @@ spiderbot_anims() {
   precache_assets(1);
 }
 
-construction_precache_anims() {}
+construction_precache_anims() {
+}
 
 #using_animtree("player");
 #using_animtree("generic_human");
@@ -776,7 +779,8 @@ construction_anims() {
   precache_assets(1);
 }
 
-club_precache_anims() {}
+club_precache_anims() {
+}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");

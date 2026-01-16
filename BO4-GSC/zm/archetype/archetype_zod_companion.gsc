@@ -38,6 +38,7 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
+
 #namespace archetype_zod_companion;
 
 autoexec main() {
@@ -48,6 +49,7 @@ autoexec main() {
   zodcompanionbehavior::registerbehaviorscriptfunctions();
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
+
 }
 
 #namespace zodcompanionbehavior;
@@ -160,18 +162,18 @@ zodcompanioncanpreemptivejuke(entity) {
 
     record3dtext(angledifference, entity.origin + (0, 0, 5), (0, 1, 0), "<dev string:x48>");
 
-    if(angledifference > 135) {
-      enemyangles = entity.enemy getgunangles();
-      toenemy = entity.enemy.origin - entity.origin;
-      forward = anglesToForward(enemyangles);
-      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+      if(angledifference > 135) {
+        enemyangles = entity.enemy getgunangles();
+        toenemy = entity.enemy.origin - entity.origin;
+        forward = anglesToForward(enemyangles);
+        dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
 
-      record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x48>");
+        record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x48>");
 
-      if(dotproduct > 0.9848) {
-        return zodcompanioncanjuke(entity);
+          if(dotproduct > 0.9848) {
+            return zodcompanioncanjuke(entity);
+          }
       }
-    }
   }
 
   return false;
@@ -600,7 +602,7 @@ private zodcompanionsetdesiredstancetostand(behaviortreeentity) {
 }
 
 zod_companion_revive_player(player) {
-  self endon(#"death", # "revive_terminated", # "end_game");
+  self endon(#"death", #"revive_terminated", #"end_game");
 
   if(!(isDefined(self.reviving_a_player) && self.reviving_a_player)) {
     self.reviving_a_player = 1;
@@ -664,7 +666,7 @@ zod_companion_revive_player(player) {
 }
 
 zod_companion_monitor_revive_attempt(player) {
-  self endon(#"death", # "revive_terminated");
+  self endon(#"death", #"revive_terminated");
 
   while(true) {
     if(!isDefined(player)) {

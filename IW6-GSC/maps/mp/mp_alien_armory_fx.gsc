@@ -86,9 +86,8 @@ fx_spider_exit_b() {
   common_scripts\utility::exploder(240);
   var_1 = getscriptablearray("spider_retreat_b_tank", "targetname");
 
-  if(isDefined(var_1[0])) {
+  if(isDefined(var_1[0]))
     var_1[0] setscriptablepartstate(0, 2);
-  }
 }
 
 fx_cross_lab_light_on() {
@@ -220,9 +219,8 @@ fx_set_spider_fog_1() {
 
   level.spider_fog_setting = var_0;
 
-  foreach(var_2 in level.players) {
-    var_2 fx_set_spider_fog(3);
-  }
+  foreach(var_2 in level.players)
+  var_2 fx_set_spider_fog(3);
 }
 
 fx_set_spider_fog_3() {
@@ -272,7 +270,6 @@ fx_set_spider_fog_3() {
 
   level.spider_fog_setting = var_0;
 
-  foreach(var_2 in level.players) {
-    var_2 fx_set_spider_fog(6);
-  }
+  foreach(var_2 in level.players)
+  var_2 fx_set_spider_fog(6);
 }

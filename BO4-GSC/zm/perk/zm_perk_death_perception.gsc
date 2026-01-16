@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_death_perception;
 
 autoexec __init__system__() {
@@ -20,9 +21,9 @@ __main__() {}
 
 enable_death_perception_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_awareness", # "perk_death_perception", 2000, # "hash_237b1e920f98800b", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), # "zmperksdeathperception");
+    zm_perks::register_perk_basic_info(#"specialty_awareness", #"perk_death_perception", 2000, #"hash_237b1e920f98800b", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), #"zmperksdeathperception");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_awareness", # "perk_death_perception", 2000, # "hash_44056ea72a6d4fd5", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), # "zmperksdeathperception");
+    zm_perks::register_perk_basic_info(#"specialty_awareness", #"perk_death_perception", 2000, #"hash_44056ea72a6d4fd5", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), #"zmperksdeathperception");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_awareness", &function_f9d745da);
@@ -35,10 +36,10 @@ enable_death_perception_perk_for_level() {
 function_9b484511() {}
 
 function_f9d745da() {
-  level.machine_assets[# "specialty_awareness"] = spawnStruct();
-  level.machine_assets[# "specialty_awareness"].weapon = getweapon("zombie_perk_bottle_death_perception");
-  level.machine_assets[# "specialty_awareness"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_awareness"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_awareness"] = spawnStruct();
+  level.machine_assets[#"specialty_awareness"].weapon = getweapon("zombie_perk_bottle_death_perception");
+  level.machine_assets[#"specialty_awareness"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_awareness"].on_model = "p7_zm_vending_nuke";
 }
 
 function_14ab8b5c() {

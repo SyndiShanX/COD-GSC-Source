@@ -12,9 +12,8 @@ init() {
   precacheshader("zombie_stopwatch");
   precacheshader("zombie_stopwatch_glass");
 
-  if(!isDefined(level.stopwatch_length_width)) {
+  if(!isDefined(level.stopwatch_length_width))
     level.stopwatch_length_width = 96;
-  }
 }
 
 start_timer(time, stop_notify) {
@@ -43,13 +42,11 @@ start_timer(time, stop_notify) {
 
   self thread update_hud_position();
 
-  if(isDefined(stop_notify)) {
+  if(isDefined(stop_notify))
     self thread wait_for_stop_notify(stop_notify);
-  }
 
-  if(time > 60) {
+  if(time > 60)
     time = 0;
-  }
 
   self.stopwatch_elem setclock(time, 60, "zombie_stopwatch", level.stopwatch_length_width, level.stopwatch_length_width);
   self.stopwatch_elem.alpha = 1;

@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_spectre;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ __init__() {
 
 function_14430aff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self notify(#"hash_2e4cc87f4b3a6396");
-  self endon(#"death", # "hash_2e4cc87f4b3a6396");
+  self endon(#"death", #"hash_2e4cc87f4b3a6396");
 
   if(bwastimejump || bnewent) {
     if(self function_d2503806(#"hash_79bdfb09e317953")) {
@@ -44,9 +45,9 @@ function_14430aff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self playrenderoverridebundle(#"hash_79bdfb09e317953");
 
     if(function_5c10bd79(localclientnum) == self) {
-      playSound(localclientnum, # "hash_2a2ce981dd655c9d");
+      playSound(localclientnum, #"hash_2a2ce981dd655c9d");
     } else {
-      self playSound(localclientnum, # "hash_15fe9b5adcf69ee1");
+      self playSound(localclientnum, #"hash_15fe9b5adcf69ee1");
     }
   }
 
@@ -62,11 +63,11 @@ function_14430aff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self stoprenderoverridebundle(#"hash_79bdfb09e317953");
 
     if(function_5c10bd79(localclientnum) == self) {
-      playSound(localclientnum, # "hash_1e69f4ab3ad9d506");
+      playSound(localclientnum, #"hash_1e69f4ab3ad9d506");
       return;
     }
 
-    self playSound(localclientnum, # "hash_6920e6c1de254c0a");
+    self playSound(localclientnum, #"hash_6920e6c1de254c0a");
   }
 }
 
@@ -92,7 +93,7 @@ private function_49c88376(localclientnum, value) {
 
 private function_4695335(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playSound(localclientnum, # "hash_11ab19e8dda10854");
+    playSound(localclientnum, #"hash_11ab19e8dda10854");
 
     if(!self function_d2503806(#"hash_62ee6965d1ee1724")) {
       self playrenderoverridebundle(#"hash_62ee6965d1ee1724");

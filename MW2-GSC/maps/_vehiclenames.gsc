@@ -3,20 +3,21 @@
  * Script: maps\_vehiclenames.gsc
 ********************************************************/
 
+main() {
+
+}
+
 get_name() {
   american_names = 9;
   british_names = 18;
   russian_names = 15;
 
-  if(!(isDefined(game["americanvehiclenames"]))) {
+  if(!(isdefined(game["americanvehiclenames"])))
     game["americanvehiclenames"] = randomint(american_names);
-  }
-  if(!(isDefined(game["britishvehiclenames"]))) {
+  if(!(isdefined(game["britishvehiclenames"])))
     game["britishvehiclenames"] = randomint(british_names);
-  }
-  if(!(isDefined(game["russianvehiclenames"]))) {
+  if(!(isdefined(game["russianvehiclenames"])))
     game["russianvehiclenames"] = randomint(russian_names);
-  }
 
   if(level.campaign == "british") {
     game["britishvehiclenames"]++;
@@ -152,8 +153,7 @@ get_russian_name() {
 }
 
 add_group_name(vehiclename) {
-  if(isDefined(self.script_tankgroup)) {
+  if(isdefined(self.script_tankgroup))
     vehiclename = self.script_tankgroup + ": " + vehiclename;
-  }
   return vehiclename;
 }

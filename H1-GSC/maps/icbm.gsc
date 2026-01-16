@@ -6,12 +6,11 @@
 
 dead_script() {
   level.playerisinside = 0;
-  var_0 = getEntArray("flag_set", "targetname");
+  var_0 = getentarray("flag_set", "targetname");
 
   foreach(var_2 in var_0) {
-    if(var_2.script_flag == "player_is_inside") {
+    if(var_2.script_flag == "player_is_inside")
       var_2.script_noteworthy = "skip_blockout_delete";
-    }
   }
 
   var_4 = getent("sunrise2", "targetname");
@@ -42,15 +41,15 @@ main() {
   level.friendlies = [];
   level.tango_down_dialog = 0;
   maps\_utility::default_start(::landed_start);
-  maps\_utility::add_start("landed", ::landed_start, &"STARTS_LANDED");
-  maps\_utility::add_start("basement", ::basement_start, &"STARTS_BASEMENT");
-  maps\_utility::add_start("house2", ::house2_start, &"STARTS_HOUSE2");
-  maps\_utility::add_start("rescued", ::rescued_start, &"STARTS_RESCUED");
-  maps\_utility::add_start("tower", ::tower_start, &"STARTS_TOWER");
-  maps\_utility::add_start("fense", ::fense_start, &"STARTS_FENSE");
-  maps\_utility::add_start("base", ::base_start, &"STARTS_BASE");
-  maps\_utility::add_start("base2", ::base2_start, &"STARTS_BASE2");
-  maps\_utility::add_start("launch", ::launch_start, &"STARTS_LAUNCH");
+  maps\_utility::add_start("landed", ::landed_start, & "STARTS_LANDED");
+  maps\_utility::add_start("basement", ::basement_start, & "STARTS_BASEMENT");
+  maps\_utility::add_start("house2", ::house2_start, & "STARTS_HOUSE2");
+  maps\_utility::add_start("rescued", ::rescued_start, & "STARTS_RESCUED");
+  maps\_utility::add_start("tower", ::tower_start, & "STARTS_TOWER");
+  maps\_utility::add_start("fense", ::fense_start, & "STARTS_FENSE");
+  maps\_utility::add_start("base", ::base_start, & "STARTS_BASE");
+  maps\_utility::add_start("base2", ::base2_start, & "STARTS_BASE2");
+  maps\_utility::add_start("launch", ::launch_start, & "STARTS_LAUNCH");
   precachemodel("wpn_h1_melee_combat_knife_vm");
   precacheitem("m4m203_silencer_reflex");
   precacheitem("m4m203_silencer");
@@ -71,7 +70,7 @@ main() {
   precachestring(&"ICBM_PLANT_C4_ON_TOWER_LEGS");
   precachestring(&"ICBM_GET_TO_A_SAFE_DISTANCE");
   precachestring(&"ICBM_MISSIONFAIL_ICBM_CHOPPERS_SHOT");
-  maps\_utility::add_hint_string("one_more_c4", &"ICBM_ONE_MORE_C4", undefined);
+  maps\_utility::add_hint_string("one_more_c4", & "ICBM_ONE_MORE_C4", undefined);
   setsaveddvar("r_reactiveMotionWindAmplitudeScale", 3);
   setsaveddvar("r_reactiveMotionWindStrength", 1);
   setsaveddvar("r_reactiveMotionWindFrequencyScale", 3);
@@ -219,33 +218,33 @@ main() {
   common_scripts\utility::flag_init("run_to_gate");
   common_scripts\utility::flag_init("aa_base_fight");
   common_scripts\utility::flag_init("get_yer_ass");
-  var_1 = getEntArray("price", "script_noteworthy");
+  var_1 = getentarray("price", "script_noteworthy");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, maps\_stealth_logic::friendly_init);
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, maps\icbm_code::price_think);
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "icbm_friendlies");
-  var_2 = getEntArray("mark", "script_noteworthy");
+  var_2 = getentarray("mark", "script_noteworthy");
   common_scripts\utility::array_thread(var_2, maps\_utility::add_spawn_function, maps\icbm_code::griggs_think);
   common_scripts\utility::array_thread(var_2, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "icbm_friendlies");
-  var_3 = getEntArray("gaz", "script_noteworthy");
+  var_3 = getentarray("gaz", "script_noteworthy");
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, maps\_stealth_logic::friendly_init);
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, maps\icbm_code::gaz_think);
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "icbm_friendlies");
-  var_4 = getEntArray("friendly", "script_noteworthy");
+  var_4 = getentarray("friendly", "script_noteworthy");
   common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, maps\_stealth_logic::friendly_init);
   common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, maps\icbm_code::friendly_think);
   common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "icbm_friendlies");
-  var_5 = getEntArray("respawned_friendly", "script_noteworthy");
+  var_5 = getentarray("respawned_friendly", "script_noteworthy");
   common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, maps\_stealth_logic::friendly_init);
   common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, maps\icbm_code::respawned_friendly_think);
   common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "icbm_friendlies");
-  var_6 = getEntArray("truck_guys", "script_noteworthy");
+  var_6 = getentarray("truck_guys", "script_noteworthy");
   common_scripts\utility::array_thread(var_6, maps\_utility::add_spawn_function, maps\icbm_code::truck_guys_think);
   level notify("setup_initial_level_lighting");
   level thread objectives();
   level thread maps\icbm_code::missile_launch01();
   level thread maps\icbm_code::missile_launch02();
   level thread maps\icbm_code::tower_collapse();
-  var_7 = getEntArray("patroller", "script_noteworthy");
+  var_7 = getentarray("patroller", "script_noteworthy");
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\_stealth_logic::stealth_ai);
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\icbm_code::attach_flashlight, 1, 1);
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\icbm_code::detach_flashlight_onspotted);
@@ -253,24 +252,24 @@ main() {
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\icbm_dialog::dialog_contacts_in_the_woods);
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\icbm_dialog::dialog_tango_down);
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\icbm_code::woods_patroller_think);
-  var_8 = getEntArray("stealth_idles", "script_noteworthy");
+  var_8 = getentarray("stealth_idles", "script_noteworthy");
   common_scripts\utility::array_thread(var_8, maps\_utility::add_spawn_function, maps\_stealth_logic::stealth_ai);
   common_scripts\utility::array_thread(var_8, maps\_utility::add_spawn_function, maps\icbm_code::idle_anim_think);
   common_scripts\utility::array_thread(var_8, maps\_utility::add_spawn_function, maps\icbm_code::ignoreme_till_stealth_broken);
-  var_9 = getEntArray("second_squad_talker", "script_noteworthy");
+  var_9 = getentarray("second_squad_talker", "script_noteworthy");
   common_scripts\utility::array_thread(var_9, maps\_utility::add_spawn_function, maps\icbm_code::second_squad_talker_think);
-  var_10 = getEntArray("base_fight_dogs", "script_noteworthy");
+  var_10 = getentarray("base_fight_dogs", "script_noteworthy");
   common_scripts\utility::array_thread(var_10, maps\_utility::add_spawn_function, maps\icbm_code::set_threatbias_group, "dogs");
-  var_11 = getEntArray("no_sight_brush", "targetname");
+  var_11 = getentarray("no_sight_brush", "targetname");
   common_scripts\utility::array_thread(var_11, maps\icbm_code::clip_nosight_logic);
-  var_12 = getEntArray("first_fight_guys", "script_noteworthy");
+  var_12 = getentarray("first_fight_guys", "script_noteworthy");
   common_scripts\utility::array_thread(var_12, maps\_utility::add_spawn_function, ::first_fight_counter);
-  var_13 = getEntArray("third_fight_counter", "script_noteworthy");
+  var_13 = getentarray("third_fight_counter", "script_noteworthy");
   common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, ::third_fight_counter);
   maps\icbm_code::remove_vehicle_delete_trigger("delete_choppers1");
   maps\icbm_code::remove_vehicle_delete_trigger("delete_choppers2");
   maps\icbm_code::remove_vehicle_delete_trigger("delete_choppers3");
-  var_14 = getEntArray("sound_fade_then_delete", "script_noteworthy");
+  var_14 = getentarray("sound_fade_then_delete", "script_noteworthy");
   common_scripts\utility::array_thread(var_14, maps\icbm_code::sound_fade_then_delete);
   thread maps\_utility::ai_team_run_twitch_think("allies", "intro_dialog_done", undefined, "landed", undefined);
   wait 0.05;
@@ -295,7 +294,7 @@ setup_bm21_deathanim() {
   level.vttype = "bm21_troops";
   level.vtclassname = "script_vehicle_bm21_mobile_cover_no_bench";
   maps\_vehicle::build_deathmodel("vehicle_bm21_mobile_cover_no_bench", "vehicle_bm21_mobile_bed_dstry");
-  var_3 = spawnStruct();
+  var_3 = spawnstruct();
   var_3.anims = [];
   var_3.anims[var_3.anims.size] = % vehicle_80s_sedan1_destroy;
   var_3.delay_crash = 1;
@@ -309,7 +308,7 @@ setup_bm21_deathanim() {
 objectives() {
   common_scripts\utility::flag_wait("first_obj");
   var_0 = getent("obj_grigsby", "targetname");
-  objective_add(2, "active", &"ICBM_LOCATE_SSGTGRIGGS", var_0.origin);
+  objective_add(2, "active", & "ICBM_LOCATE_SSGTGRIGGS", var_0.origin);
   objective_current(2);
   var_1 = getent("house01_basement_door_model", "targetname");
   objective_position(2, var_1.origin + (50, 33, 0));
@@ -324,13 +323,13 @@ objectives() {
   objective_state(2, "done");
   common_scripts\utility::flag_wait("griggs_is_good");
   var_0 = getent("obj_tower", "targetname");
-  objective_add(3, "active", &"ICBM_DESTROY_THE_POWER_TRANSMISSION", var_0.origin);
+  objective_add(3, "active", & "ICBM_DESTROY_THE_POWER_TRANSMISSION", var_0.origin);
   objective_current(3);
   common_scripts\utility::flag_wait("tower_destroyed");
   objective_state(3, "done");
   common_scripts\utility::flag_wait("tower_blown");
   var_0 = getent("second_squad", "targetname");
-  objective_add(4, "active", &"ICBM_REGROUP_WITH_SECOND_SQUAD", var_0.origin);
+  objective_add(4, "active", & "ICBM_REGROUP_WITH_SECOND_SQUAD", var_0.origin);
   objective_current(4);
   common_scripts\utility::flag_wait("objective_regroup_complete");
   objective_state(4, "done");
@@ -338,7 +337,7 @@ objectives() {
 
 landed_start() {
   soundscripts\_snd::snd_message("start_landed_checkpoint");
-  var_0 = getEntArray("chute_start_spawners", "targetname");
+  var_0 = getentarray("chute_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   var_1 = getent("landed_start", "targetname");
   level.player setorigin(var_1.origin);
@@ -354,11 +353,10 @@ landed_to_basement_handler() {
   maps\_utility::activate_trigger_with_targetname("start_colors");
   maps\_utility::disable_trigger_with_targetname("start_colors");
 
-  if(0) {
+  if(0)
     thread maps\icbm_code::min_spec_kill_fx();
-  } else {
+  else
     level thread maps\icbm_fx::playereffect();
-  }
 
   maps\_utility::battlechatter_off("allies");
   var_0 thread maps\icbm_code::truck_setup();
@@ -370,18 +368,16 @@ landed_to_basement_handler() {
   common_scripts\utility::array_thread(level.friendlies, maps\icbm_code::friendlies_stop_on_truck_spotted);
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "_stealth_spotted", maps\icbm_code::stop_make_friendies_ignored);
 
-  if(getdvarint("use_old_intro") == 1) {
+  if(getdvarint("use_old_intro") == 1)
     maps\icbm_dialog::dialog_intro();
-  } else {
+  else
     maps\icbm_dialog::dialog_intro_h1();
-  }
 
   common_scripts\utility::flag_set("first_obj");
   maps\_utility::autosave_by_name("moveout02");
 
-  if(!common_scripts\utility::flag("truckguys dead") && !common_scripts\utility::flag("spawned_woods_patrol")) {
+  if(!common_scripts\utility::flag("truckguys dead") && !common_scripts\utility::flag("spawned_woods_patrol"))
     maps\_utility::activate_trigger_with_targetname("friendlies_moves_up_the_hill");
-  }
 
   common_scripts\utility::flag_wait("truckguys dead");
   maps\icbm_dialog::dialog_ambush_finished();
@@ -399,7 +395,7 @@ landed_to_basement_handler() {
 
 basement_start() {
   soundscripts\_snd::snd_message("start_basement_checkpoint");
-  var_0 = getEntArray("basement_start_spawners", "targetname");
+  var_0 = getentarray("basement_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   var_1 = getent("basement_start", "targetname");
   level.player setorigin(var_1.origin);
@@ -424,9 +420,8 @@ basement_to_house1_handler() {
   soundscripts\_snd::snd_message("first_house_mix");
   common_scripts\utility::flag_wait("open_basement");
 
-  while(distance(level.gaz.origin, level.price.origin) > 500) {
+  while (distance(level.gaz.origin, level.price.origin) > 500)
     wait 1;
-  }
 
   maps\icbm_code::price_opens_door(var_0, var_1, "price_basement_door_anim_complete");
   level.price maps\_utility::enable_ai_color();
@@ -480,7 +475,7 @@ house1_to_house2_handler() {
   maps\_utility::autosave_by_name("leaving_house1");
   thread maps\icbm_code::make_friendies_ignored();
   thread maps\icbm_code::disable_ignoreme_on_stealth_spotted();
-  var_2 = getEntArray("outside_spawners", "targetname");
+  var_2 = getentarray("outside_spawners", "targetname");
   thread maps\icbm_code::friendlies_fighting_nodes();
   common_scripts\utility::array_thread(var_2, maps\_utility::spawn_ai);
   level.price maps\_anim::anim_single_queue(level.price, "keepquiet");
@@ -506,7 +501,7 @@ house1_to_house2_handler() {
 
 house2_start() {
   soundscripts\_snd::snd_message("start_house2_checkpoint");
-  var_0 = getEntArray("house2_start_spawners", "targetname");
+  var_0 = getentarray("house2_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   var_1 = getent("house2_start", "targetname");
   level.player setorigin(var_1.origin);
@@ -537,7 +532,7 @@ house2_to_griggs_handler() {
   thread maps\_utility::do_in_order(maps\_utility::trigger_wait_targetname, "gaz_h2_floor_clear", maps\icbm_dialog::dialog_proceed_upstairs);
   thread maps\icbm_code::start_interogation();
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "player_shooting_interogators", common_scripts\utility::flag_set, "get_yer_ass");
-  var_3 = getEntArray("captured_griggs", "targetname");
+  var_3 = getentarray("captured_griggs", "targetname");
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, maps\icbm_code::captured_griggs_think);
   common_scripts\utility::array_thread(var_3, maps\_utility::spawn_ai);
   thread rescue_breach_setup();
@@ -572,18 +567,17 @@ rescue_breach_setup() {
   level.gaz maps\_utility::enable_ai_color();
   level.price maps\_utility::enable_ai_color();
   maps\_utility::activate_trigger_with_targetname("post_breach_nodes");
-  level.player playSound("icbm_pri_gogogo");
+  level.player playsound("icbm_pri_gogogo");
 }
 
 fail_on_damage() {
   level endon("griggs_loose");
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isplayer(var_1)) {
+    if(isplayer(var_1))
       maps\_friendlyfire::missionfail();
-    }
   }
 }
 
@@ -594,11 +588,10 @@ rescue_sequence() {
   thread maps\icbm_code::disable_friendly_deadlyness();
   thread maps\icbm_dialog::dialog_rescue();
 
-  if(getdvarint("use_old_griggs_rescue") == 1) {
+  if(getdvarint("use_old_griggs_rescue") == 1)
     maps\_utility::trigger_wait("player_is_behind_griggs", "targetname");
-  } else {
+  else
     level.player thread disable_weapon_when_near_griggs();
-  }
 
   var_0 = getent("grigs_use_trigger", "targetname");
   var_0 thread player_cut_grigs_loose();
@@ -615,7 +608,7 @@ rescue_sequence() {
 disable_weapon_when_near_griggs() {
   var_0 = 0;
 
-  while(!common_scripts\utility::flag("griggs_loose")) {
+  while (!common_scripts\utility::flag("griggs_loose")) {
     if(!var_0 && distancesquared(level.player.origin, level.griggs.origin) < 15000) {
       level.player disableweapons();
       var_0 = 1;
@@ -633,9 +626,9 @@ disable_weapon_when_near_griggs() {
 allow_free_griggs_when_looking_in_position() {
   var_0 = cos(30);
 
-  for(;;) {
+  for (;;) {
     waitframe();
-    var_1 = common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.griggs.origin, var_0);
+    var_1 = common_scripts\utility::within_fov(level.player geteye(), level.player getplayerangles(), level.griggs.origin, var_0);
 
     if((var_1 || level.player islookingat(level.griggs)) && level.player istouching(self) && !level.player isleaning()) {
       self sethintstring(&"ICBM_GRIGGSUSETRIGGER");
@@ -675,7 +668,7 @@ player_cut_grigs_loose() {
     level.player_rescue_model.angles = level.griggs_node.angles;
     level.player_rescue_model hide();
     var_0 = spawn("script_model", level.player_rescue_model gettagorigin("tag_weapon"));
-    var_0 setModel("wpn_h1_melee_combat_knife_vm");
+    var_0 setmodel("wpn_h1_melee_combat_knife_vm");
     var_0.angles = level.player_rescue_model gettagangles("tag_weapon");
     var_0 linkto(level.player_rescue_model, "tag_weapon");
     level.griggs_node maps\_anim::anim_first_frame_solo(level.player_rescue_model, "grigsby_rescue_player");
@@ -719,7 +712,7 @@ h1_cutgriggsloose_dof() {
 
 rescued_start() {
   soundscripts\_snd::snd_message("start_rescued_checkpoint");
-  var_0 = getEntArray("rescue_start_spawners", "targetname");
+  var_0 = getentarray("rescue_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   var_1 = getent("rescue_start", "targetname");
   level.player setorigin(var_1.origin);
@@ -746,7 +739,7 @@ griggs_to_flyover_handler() {
   thread maps\icbm_dialog::dialog_blow_up_tower();
   common_scripts\utility::flag_wait("player_in_chopper_area");
   common_scripts\_exploder::exploder(8);
-  var_0 = getEntArray("mi_17_01", "targetname");
+  var_0 = getentarray("mi_17_01", "targetname");
   common_scripts\utility::array_thread(var_0, maps\icbm_code::chopper_fail_mission);
   maps\_utility::activate_trigger_with_targetname("choppers");
   soundscripts\_snd::snd_message("start_tower_first_choppers_fly_by");
@@ -761,7 +754,7 @@ tower_start() {
   var_0 = getent("tower_start", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getEntArray("tower_start_spawners", "targetname");
+  var_1 = getentarray("tower_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   thread maps\icbm_lighting::skip_to_sunrise2();
   common_scripts\utility::flag_set("first_obj");
@@ -782,9 +775,8 @@ dialog_plant_at_tower() {
   wait 0.2;
   level.price maps\_anim::anim_single_queue(level.price, "killthepower");
 
-  if(!common_scripts\utility::flag("c4_planted")) {
+  if(!common_scripts\utility::flag("c4_planted"))
     level.price maps\_anim::anim_single_queue(level.price, "jackgriggsplant");
-  }
 }
 
 flyover_to_tower_handler() {
@@ -794,7 +786,7 @@ flyover_to_tower_handler() {
   var_2.multiple_c4 = 1;
   var_3 = var_2 maps\_c4::c4_location("tag_origin", (-185.75, -178, 57.87), (288, 270, 0));
   var_4 = var_2 maps\_c4::c4_location("tag_origin", (184.3, -178.1, 57.9), (288, 270, 0));
-  objective_string(3, &"ICBM_PLANT_C4_ON_TOWER_LEGS", 2);
+  objective_string(3, & "ICBM_PLANT_C4_ON_TOWER_LEGS", 2);
   objective_position(3, var_0.origin);
   objective_additionalposition(3, 1, var_1.origin);
   level thread maps\icbm_code::base_lights();
@@ -809,18 +801,18 @@ flyover_to_tower_handler() {
   } else
     objective_additionalposition(3, 1, (0, 0, 0));
 
-  objective_string(3, &"ICBM_PLANT_C4_ON_TOWER_LEGS", 1);
+  objective_string(3, & "ICBM_PLANT_C4_ON_TOWER_LEGS", 1);
   thread second_c4_plant_check();
   level waittill("c4_in_place", var_5);
   common_scripts\utility::flag_set("c4_planted");
   var_7 = getent("obj_get_clear", "targetname");
   objective_additionalposition(3, var_6, var_7.origin);
-  objective_string(3, &"ICBM_GET_TO_A_SAFE_DISTANCE");
+  objective_string(3, & "ICBM_GET_TO_A_SAFE_DISTANCE");
   level thread c4_set();
   var_2 waittill("c4_detonation");
   common_scripts\utility::flag_set("music_endon_tower_collapse");
   common_scripts\utility::flag_set("tower_destroyed");
-  var_2 playSound("scn_icbm_tower_crash");
+  var_2 playsound("scn_icbm_tower_crash");
   wait 2;
   common_scripts\utility::flag_set("lights_off");
   common_scripts\utility::flag_clear("lights_on");
@@ -830,7 +822,7 @@ second_c4_plant_check() {
   var_0 = 1;
   var_1 = 0;
 
-  for(;;) {
+  for (;;) {
     if(common_scripts\utility::flag("c4_planted")) {
       break;
     }
@@ -888,12 +880,11 @@ c4_set() {
 }
 
 play_power_alarm() {
-  var_0 = getEntArray("emt_alarm_power_on", "targetname");
+  var_0 = getentarray("emt_alarm_power_on", "targetname");
   common_scripts\utility::flag_wait("lights_on");
 
-  foreach(var_2 in var_0) {
-    var_2 thread common_scripts\utility::play_loopsound_in_space("h1_emt_alarm_power_on", var_2.origin);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread common_scripts\utility::play_loopsound_in_space("h1_emt_alarm_power_on", var_2.origin);
 }
 
 fense_start() {
@@ -901,7 +892,7 @@ fense_start() {
   var_0 = getent("fense_start", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getEntArray("fense_start_spawners", "targetname");
+  var_1 = getentarray("fense_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   thread maps\icbm_lighting::skip_to_sunrise2();
   common_scripts\utility::flag_set("first_obj");
@@ -938,9 +929,8 @@ fense_to_base_handler() {
   level.griggs_at_fence = 0;
   level.gaz_at_fence = 0;
 
-  while(!level.griggs_at_fence || !level.gaz_at_fence) {
+  while (!level.griggs_at_fence || !level.gaz_at_fence)
     wait 0.05;
-  }
 
   level.fence_cut_node thread maps\_anim::anim_single_solo(var_0, "model_cut");
   level.griggs maps\_utility::enable_ai_color();
@@ -991,7 +981,7 @@ base_start() {
   var_0 = getent("base_start", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getEntArray("base_start_spawners", "targetname");
+  var_1 = getentarray("base_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   common_scripts\utility::flag_set("first_obj");
   common_scripts\utility::flag_set("price_basement_door_anim_complete");
@@ -1009,7 +999,7 @@ base2_start() {
   var_0 = getent("base2_start", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getEntArray("base2_start_spawners", "targetname");
+  var_1 = getentarray("base2_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   common_scripts\utility::flag_set("first_obj");
   common_scripts\utility::flag_set("price_basement_door_anim_complete");
@@ -1095,7 +1085,7 @@ trucks_incoming() {
   maps\_utility::trigger_wait("incoming_oldbase", "targetname");
   soundscripts\_snd::snd_message("aud_start_bm21_scripted_sfx");
   maps\_utility::autosave_by_name("trucks_incoming");
-  level.player playSound("icbm_gm5_3trucks");
+  level.player playsound("icbm_gm5_3trucks");
 }
 
 base_to_second_squad_handler() {
@@ -1117,7 +1107,7 @@ launch_start() {
   var_0 = getent("launch_start", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getEntArray("launch_start_spawners", "targetname");
+  var_1 = getentarray("launch_start_spawners", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   common_scripts\utility::flag_set("first_obj");
   common_scripts\utility::flag_set("price_basement_door_anim_complete");
@@ -1135,16 +1125,16 @@ meet_second_squad_handler() {
   var_0 = getnode("end_scene_node", "targetname");
   maps\_utility::activate_trigger_with_targetname("base_clear_moveout");
 
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     var_0 thread maps\icbm_code::anim_reach_and_approach_solo_set_flag(level.price, "icbm_end_price", "price_reached_end_anim");
-  } else {
+  else {
     var_0 thread maps\icbm_code::anim_reach_solo_set_flag(level.price, "icbm_end_price_idle", "price_reached_end_anim");
     thread final_anim_price_idle(var_0);
   }
 
   level thread missile_launch();
   level.currentcolorforced["allies"]["r"] = undefined;
-  var_1 = getEntArray("second_squad_spawner", "targetname");
+  var_1 = getentarray("second_squad_spawner", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, maps\_utility::magic_bullet_shield);
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
   maps\_utility::trigger_wait("buddies_at_launch", "targetname");
@@ -1155,11 +1145,10 @@ meet_second_squad_handler() {
   maps\_utility::musicplaywrapper("icbm_launch_music");
   maps\_utility::activate_trigger_with_targetname("second_squad_trigger");
 
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     var_0 thread maps\icbm_code::anim_reach_and_approach_solo_set_flag(level.gm5, "icbm_end_sniper", "gm5_reached_end_anim");
-  } else {
+  else
     var_0 thread maps\icbm_code::anim_reach_solo_set_flag(level.gm5, "icbm_end_sniper", "gm5_reached_end_anim");
-  }
 
   common_scripts\utility::flag_wait("dialog_holdfire_done");
   common_scripts\utility::flag_wait("gm5_reached_end_anim");
@@ -1167,9 +1156,8 @@ meet_second_squad_handler() {
   thread final_anim_then_run_off(var_0);
   common_scripts\utility::flag_set("start_launch_scene");
 
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     level.gm5 maps\_anim::anim_single_queue(level.gm5, "goodtosee");
-  }
 
   level.price maps\_utility::enable_ai_color();
   level.gm5 maps\_utility::enable_ai_color();
@@ -1177,22 +1165,20 @@ meet_second_squad_handler() {
 }
 
 final_anim_then_run_off(var_0) {
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     var_0 thread maps\_anim::anim_custom_animmode_solo(level.gm5, "gravity", "icbm_end_sniper");
-  } else {
+  else {
     wait 0.8;
     var_0 thread maps\_anim::anim_single_solo(level.gm5, "icbm_end_sniper");
   }
 
-  if(getdvarint("use_old_endrun") != 1) {
+  if(getdvarint("use_old_endrun") != 1)
     var_0 notify("stop_price_idle");
-  }
 
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     var_0 maps\_anim::anim_custom_animmode_solo(level.price, "gravity", "icbm_end_price");
-  } else {
+  else
     var_0 maps\_anim::anim_single_solo(level.price, "icbm_end_price");
-  }
 
   maps\_utility::activate_trigger_with_targetname("run_to_gate_uk");
   maps\_utility::activate_trigger_with_targetname("run_to_gate_us");
@@ -1202,9 +1188,8 @@ final_anim_then_run_off(var_0) {
 final_anim_price_idle(var_0) {
   common_scripts\utility::flag_wait("price_reached_end_anim");
 
-  if(!common_scripts\utility::flag("gm5_reached_end_anim")) {
+  if(!common_scripts\utility::flag("gm5_reached_end_anim"))
     var_0 thread maps\_anim::anim_loop_solo(level.price, "icbm_end_price_idle", undefined, "stop_price_idle");
-  }
 }
 
 dialog_treeline_hold_fire() {
@@ -1216,7 +1201,7 @@ dialog_treeline_hold_fire() {
 }
 
 missile_sounds() {
-  level.player playSound("scn_icbm_missile_launch");
+  level.player playsound("scn_icbm_missile_launch");
   wait 4;
   var_0 = getent("icbm_missile02", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("scn_icbm_missile1_loop");
@@ -1248,9 +1233,9 @@ missile_launch() {
   level.griggs maps\_anim::anim_single_queue(level.griggs, "problemhere");
   common_scripts\utility::flag_set("launch_01");
 
-  if(getdvarint("use_old_endrun") == 1) {
+  if(getdvarint("use_old_endrun") == 1)
     level.price maps\_anim::anim_single_queue(level.price, "onemissile");
-  } else {
+  else {
     level.price waittillmatch("single anim", "dialog");
     wait 3;
   }

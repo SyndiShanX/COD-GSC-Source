@@ -33,9 +33,8 @@ create_weapon_drop_array() {
       for(j = 0; j < primary_weapon_attachments[attachment_categories[l]].size; j++) {
         new_weapon = primary_weapons[i] + "_" + primary_weapon_attachments[attachment_categories[l]][j] + _sp;
 
-        if(isassetloaded("weapon", new_weapon)) {
+        if(isassetloaded("weapon", new_weapon))
           anim.droppable_weapons[base_weapon][attachment_categories[l]][anim.droppable_weapons[base_weapon][attachment_categories[l]].size] = new_weapon;
-        }
       }
     }
 
@@ -64,25 +63,20 @@ create_weapon_drop_array() {
   build_weight_arrays_by_ai_class("Prisoners", 0, 50, 25, 25, 10);
   build_weight_arrays_by_ai_class("hazmat", 0, 50, 25, 25, 10);
 
-  if(!isDefined(level.rw_enabled)) {
+  if(!isDefined(level.rw_enabled))
     level.rw_enabled = 1;
-  }
 
-  if(!isDefined(level.rw_attachments_allowed)) {
+  if(!isDefined(level.rw_attachments_allowed))
     level.rw_attachments_allowed = 0;
-  }
 
-  if(!isDefined(level.rw_gl_allowed)) {
+  if(!isDefined(level.rw_gl_allowed))
     level.rw_gl_allowed = 1;
-  }
 
-  if(!isDefined(level.rw_mk_allowed)) {
+  if(!isDefined(level.rw_mk_allowed))
     level.rw_mk_allowed = 1;
-  }
 
-  if(!isDefined(level.rw_ft_allowed)) {
+  if(!isDefined(level.rw_ft_allowed))
     level.rw_ft_allowed = 1;
-  }
 
   flag_set("weapon_drop_arrays_built");
 }
@@ -99,32 +93,27 @@ build_weight_arrays_by_ai_class(_ai_class, _overwrite, _base_weapon, _scoped_att
 }
 
 get_weapon_name_with_attachments(weapon_name) {
-  if(!isDefined(anim.droppable_weapons)) {
+  if(!isDefined(anim.droppable_weapons))
     return weapon_name;
-  }
 
-  if(!level.rw_enabled) {
+  if(!level.rw_enabled)
     return weapon_name;
-  }
 
-  if(!isDefined(anim.droppable_weapons[weapon_name]) || anim.droppable_weapons[weapon_name].size == 0) {
+  if(!isDefined(anim.droppable_weapons[weapon_name]) || anim.droppable_weapons[weapon_name].size == 0)
     return weapon_name;
-  }
 
   ai_class = get_ai_class_for_weapon_drop(self.classname);
 
-  if(ai_class == "not_defined" || !isDefined(anim.droppable_weapons[ai_class])) {
+  if(ai_class == "not_defined" || !isDefined(anim.droppable_weapons[ai_class]))
     return weapon_name;
-  }
 
   keys = array("base", "sites", "ammo", "alt_weapon");
   total_weight = 0;
 
   for(i = 0; i < keys.size; i++) {
     if(keys[i] == "alt_weapon") {
-      if(level.rw_attachments_allowed) {
+      if(level.rw_attachments_allowed)
         total_weight = total_weight + anim.droppable_weapons[ai_class][keys[i]];
-      }
 
       continue;
     }
@@ -132,9 +121,8 @@ get_weapon_name_with_attachments(weapon_name) {
     total_weight = total_weight + anim.droppable_weapons[ai_class][keys[i]];
   }
 
-  if(total_weight == 0) {
+  if(total_weight == 0)
     return weapon_name;
-  }
 
   random_choice = randomint(total_weight);
   current_key = "none";
@@ -149,13 +137,11 @@ get_weapon_name_with_attachments(weapon_name) {
     }
   }
 
-  if(current_key == "base") {
+  if(current_key == "base")
     return weapon_name;
-  }
 
-  if(anim.droppable_weapons[weapon_name][current_key].size == 0) {
+  if(anim.droppable_weapons[weapon_name][current_key].size == 0)
     return weapon_name;
-  }
 
   if(current_key != "alt_weapon") {
     random_weap_int = randomint(anim.droppable_weapons[weapon_name][current_key].size);
@@ -191,9 +177,9 @@ get_weapon_name_with_attachments(weapon_name) {
       }
     }
 
-    if(possible_alt_weapons.size == 0) {
+    if(possible_alt_weapons.size == 0)
       return weapon_name;
-    } else {
+    else {
       random_weapon_int = randomint(possible_alt_weapons.size);
       return possible_alt_weapons[random_weapon_int];
     }
@@ -201,39 +187,37 @@ get_weapon_name_with_attachments(weapon_name) {
 }
 
 get_ai_class_for_weapon_drop(_classname) {
-  if(issubstr(_classname, "Spetsnaz_e")) {
+  if(issubstr(_classname, "Spetsnaz_e"))
     return "Spetsnaz";
-  } else if(issubstr(_classname, "NVA_e")) {
+  else if(issubstr(_classname, "NVA_e"))
     return "NVA";
-  } else if(issubstr(_classname, "VC_e")) {
+  else if(issubstr(_classname, "VC_e"))
     return "VC";
-  } else if(issubstr(_classname, "RU_e")) {
+  else if(issubstr(_classname, "RU_e"))
     return "RU";
-  } else if(issubstr(_classname, "CU_e")) {
+  else if(issubstr(_classname, "CU_e"))
     return "CU";
-  } else if(issubstr(_classname, "USMarines")) {
+  else if(issubstr(_classname, "USMarines"))
     return "Marines";
-  } else if(issubstr(_classname, "USBlackops")) {
+  else if(issubstr(_classname, "USBlackops"))
     return "Blackops";
-  } else if(issubstr(_classname, "USSpecs")) {
+  else if(issubstr(_classname, "USSpecs"))
     return "Specops";
-  } else if(issubstr(_classname, "UWB")) {
+  else if(issubstr(_classname, "UWB"))
     return "UWB";
-  } else if(issubstr(_classname, "CU_a")) {
+  else if(issubstr(_classname, "CU_a"))
     return "Rebels";
-  } else if(issubstr(_classname, "Prisoner")) {
+  else if(issubstr(_classname, "Prisoner"))
     return "Prisoners";
-  } else if(issubstr(_classname, "a_hazmat")) {
+  else if(issubstr(_classname, "a_hazmat"))
     return "hazmat";
-  }
 
   return "not_defined";
 }
 
 override_weapon_drop_weights_by_level() {
-  while(!isDefined(level.script) || !flag("weapon_drop_arrays_built")) {
+  while(!isDefined(level.script) || !flag("weapon_drop_arrays_built"))
     wait 0.1;
-  }
 
   switch (level.script) {
     case "cuba":
@@ -325,50 +309,42 @@ set_random_cammo_drop() {
     switch (level.script) {
       case "cuba":
         if(weapon_class == "assault") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(9);
-          }
         } else if(weapon_class == "lmg") {
           if(issubstr(name, "rpk")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(14);
-            }
           } else if(issubstr(name, "m60")) {
-            if(randomint(100) > 24) {
+            if(randomint(100) > 24)
               weapon itemweaponsetoptions(9);
-            }
           }
         } else if(weapon_class == "launcher") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(14);
-          }
         }
 
         break;
       case "vorkuta":
         if(weapon_class == "assault" || weapon_class == "shotgun") {
-          if(randomint(100) > 89) {
+          if(randomint(100) > 89)
             weapon itemweaponsetoptions(12);
-          }
         }
 
         break;
       case "flashpoint":
         if(weapon_class == "assault") {
           if(issubstr(name, "ak47")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(14);
-            }
           } else if(issubstr(name, "mp5k"))
             weapon itemweaponsetoptions(1);
         } else if(weapon_class == "smg") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(5);
-          }
         } else if(weapon_class == "sniper") {
-          if(randomint(100) > 49) {
+          if(randomint(100) > 49)
             weapon itemweaponsetoptions(5);
-          }
         } else if(weapon_class == "launcher")
           weapon itemweaponsetoptions(6);
 
@@ -376,66 +352,54 @@ set_random_cammo_drop() {
       case "khe_sanh":
         if(weapon_class == "assault") {
           if(issubstr(name, "m16")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(1);
-            }
           } else if(issubstr(name, "m14")) {
-            if(randomint(100) > 56) {
+            if(randomint(100) > 56)
               weapon itemweaponsetoptions(1);
-            }
           } else if(issubstr(name, "ak74")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(7);
-            }
           }
         } else if(weapon_class == "launcher") {
           if(issubstr(name, "china")) {
-            if(randomint(100) > 49) {
+            if(randomint(100) > 49)
               weapon itemweaponsetoptions(6);
-            }
           } else if(issubstr(name, "tow"))
             weapon itemweaponsetoptions(6);
-          else if(issubstr(name, "law")) {
+          else if(issubstr(name, "law"))
             weapon itemweaponsetoptions(1);
-          } else if(issubstr(name, "rpg")) {
+          else if(issubstr(name, "rpg"))
             weapon itemweaponsetoptions(7);
-          }
         } else if(weapon_class == "shotgun") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(1);
-          }
         } else if(weapon_class == "lmg") {
           if(issubstr(name, "rpk")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(7);
-            }
           } else if(issubstr(name, "m60")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(1);
-            }
           }
         }
 
         break;
       case "hue_city":
         if(weapon_class == "shotgun") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(7);
-          }
         } else if(weapon_class == "assault") {
           if(issubstr(name, "commando")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(9);
-            }
           } else if(issubstr(name, "fnfal")) {
-            if(randomint(100) > 74) {
+            if(randomint(100) > 74)
               weapon itemweaponsetoptions(7);
-            }
           }
         } else if(weapon_class == "lmg") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(7);
-          }
         }
 
         break;
@@ -443,73 +407,60 @@ set_random_cammo_drop() {
         break;
       case "creek_1":
         if(weapon_class == "sniper") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(9);
-          }
         } else if(weapon_class == "assault") {
           if(issubstr(name, "commando")) {
-            if(randomint(100) > 79) {
+            if(randomint(100) > 79)
               weapon itemweaponsetoptions(8);
-            }
           } else if(issubstr(name, "ak47")) {
-            if(randomint(100) > 79) {
+            if(randomint(100) > 79)
               weapon itemweaponsetoptions(13);
-            }
           }
         }
 
         break;
       case "river":
         if(weapon_class == "sniper") {
-          if(randomint(100) > 74) {
+          if(randomint(100) > 74)
             weapon itemweaponsetoptions(9);
-          }
         } else if(weapon_class == "assault") {
-          if(issubstr(name, "commando")) {
+          if(issubstr(name, "commando"))
             weapon itemweaponsetoptions(13);
-          } else if(issubstr(name, "ak74")) {
-            if(randomint(100) > 79) {
+          else if(issubstr(name, "ak74")) {
+            if(randomint(100) > 79)
               weapon itemweaponsetoptions(9);
-            }
           } else if(issubstr(name, "m16")) {
-            if(randomint(100) > 19) {
+            if(randomint(100) > 19)
               weapon itemweaponsetoptions(13);
-            }
           }
         } else if(weapon_class == "smg") {
-          if(randomint(100) > 49) {
+          if(randomint(100) > 49)
             weapon itemweaponsetoptions(9);
-          }
         } else if(weapon_class == "shotgun") {
-          if(randomint(100) > 49) {
+          if(randomint(100) > 49)
             weapon itemweaponsetoptions(13);
-          }
         } else if(weapon_class == "launcher") {
-          if(randomint(100) > 59) {
+          if(randomint(100) > 59)
             weapon itemweaponsetoptions(13);
-          }
         }
 
         break;
       case "pow":
         if(weapon_class == "assault") {
           if(issubstr(name, "ak47") || issubstr(name, "galil")) {
-            if(randomint(100) > 39) {
+            if(randomint(100) > 39)
               weapon itemweaponsetoptions(14);
-            }
           }
         } else if(weapon_class == "smg") {
-          if(randomint(100) > 49) {
+          if(randomint(100) > 49)
             weapon itemweaponsetoptions(14);
-          }
         } else if(weapon_class == "shotgun") {
-          if(randomint(100) > 39) {
+          if(randomint(100) > 39)
             weapon itemweaponsetoptions(9);
-          }
         } else if(weapon_class == "lmg") {
-          if(randomint(100) > 39) {
+          if(randomint(100) > 39)
             weapon itemweaponsetoptions(13);
-          }
         }
 
         break;
@@ -520,44 +471,37 @@ set_random_cammo_drop() {
       case "wmd_sr71":
         if(weapon_class == "assault") {
           if(issubstr(name, "famas")) {
-            if(randomint(100) > 39) {
+            if(randomint(100) > 39)
               weapon itemweaponsetoptions(2);
-            }
           }
         } else if(weapon_class == "shotgun") {
-          if(randomint(100) > 39) {
+          if(randomint(100) > 39)
             weapon itemweaponsetoptions(11);
-          }
         } else if(weapon_class == "lmg") {
-          if(randomint(100) > 39) {
+          if(randomint(100) > 39)
             weapon itemweaponsetoptions(11);
-          }
         } else if(weapon_class == "smg") {
-          if(randomint(100) > 39) {
+          if(randomint(100) > 39)
             weapon itemweaponsetoptions(2);
-          }
         }
 
         break;
       case "rebirth":
-        if(weapon_class == "launcher") {
+        if(weapon_class == "launcher")
           weapon itemweaponsetoptions(7);
-        } else if(weapon_class == "assault") {
-          if(issubstr(name, "enfield")) {
+        else if(weapon_class == "assault") {
+          if(issubstr(name, "enfield"))
             weapon itemweaponsetoptions(7);
-          }
         } else if(weapon_class == "lmg") {
-          if(issubstr(name, "hk21")) {
+          if(issubstr(name, "hk21"))
             weapon itemweaponsetoptions(7);
-          }
         }
 
         break;
       case "underwaterbase":
         if(weapon_class == "assault") {
-          if(issubstr(name, "ak74")) {
+          if(issubstr(name, "ak74"))
             weapon itemweaponsetoptions(7);
-          }
         }
 
         break;
@@ -570,17 +514,16 @@ set_random_cammo_drop() {
 get_weapon_type(weapon_name) {
   _classname = tolower(weapon_name);
 
-  if(issubstr(_classname, "ks23") || issubstr(_classname, "rottweil") || issubstr(_classname, "ithaca") || issubstr(_classname, "spas")) {
+  if(issubstr(_classname, "ks23") || issubstr(_classname, "rottweil") || issubstr(_classname, "ithaca") || issubstr(_classname, "spas"))
     return "shotgun";
-  } else if(issubstr(_classname, "m16") || issubstr(_classname, "fnfal") || issubstr(_classname, "ak47") || issubstr(_classname, "ak74") || issubstr(_classname, "mp5k") || issubstr(_classname, "m14") || issubstr(_classname, "commando") || issubstr(_classname, "g11") || issubstr(_classname, "aug") || issubstr(_classname, "famas") || issubstr(_classname, "galil") || issubstr(_classname, "enfield")) {
+  else if(issubstr(_classname, "m16") || issubstr(_classname, "fnfal") || issubstr(_classname, "ak47") || issubstr(_classname, "ak74") || issubstr(_classname, "mp5k") || issubstr(_classname, "m14") || issubstr(_classname, "commando") || issubstr(_classname, "g11") || issubstr(_classname, "aug") || issubstr(_classname, "famas") || issubstr(_classname, "galil") || issubstr(_classname, "enfield"))
     return "assault";
-  } else if(issubstr(_classname, "skorpion") || issubstr(_classname, "pm63") || issubstr(_classname, "kiparis") || issubstr(_classname, "spectre") || issubstr(_classname, "uzi") || issubstr(_classname, "ppsh") || issubstr(_classname, "mp40") || issubstr(_classname, "sten") || issubstr(_classname, "mp44") || issubstr(_classname, "mac11")) {
+  else if(issubstr(_classname, "skorpion") || issubstr(_classname, "pm63") || issubstr(_classname, "kiparis") || issubstr(_classname, "spectre") || issubstr(_classname, "uzi") || issubstr(_classname, "ppsh") || issubstr(_classname, "mp40") || issubstr(_classname, "sten") || issubstr(_classname, "mp44") || issubstr(_classname, "mac11"))
     return "smg";
-  } else if(issubstr(_classname, "rpk") || issubstr(_classname, "m60") || issubstr(_classname, "hk21") || issubstr(_classname, "mg42") || issubstr(_classname, "stoner")) {
+  else if(issubstr(_classname, "rpk") || issubstr(_classname, "m60") || issubstr(_classname, "hk21") || issubstr(_classname, "mg42") || issubstr(_classname, "stoner"))
     return "lmg";
-  } else if(issubstr(_classname, "dragon") || issubstr(_classname, "wa2000") || issubstr(_classname, "psg")) {
+  else if(issubstr(_classname, "dragon") || issubstr(_classname, "wa2000") || issubstr(_classname, "psg"))
     return "sniper";
-  } else if(issubstr(_classname, "tow") || issubstr(_classname, "rpg") || issubstr(_classname, "fhj18") || issubstr(_classname, "strela") || issubstr(_classname, "panzer") || issubstr(_classname, "china") || issubstr(_classname, "m202") || issubstr(_classname, "law")) {
+  else if(issubstr(_classname, "tow") || issubstr(_classname, "rpg") || issubstr(_classname, "fhj18") || issubstr(_classname, "strela") || issubstr(_classname, "panzer") || issubstr(_classname, "china") || issubstr(_classname, "m202") || issubstr(_classname, "law"))
     return "launcher";
-  }
 }

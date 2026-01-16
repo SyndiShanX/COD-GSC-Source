@@ -10,16 +10,16 @@
 #namespace laststand;
 
 function player_is_in_laststand() {
-  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
-    return isDefined(self.revivetrigger);
+  if(!(isdefined(self.no_revive_trigger) && self.no_revive_trigger)) {
+    return isdefined(self.revivetrigger);
   }
-  return isDefined(self.laststand) && self.laststand;
+  return isdefined(self.laststand) && self.laststand;
 }
 
 function player_num_in_laststand() {
   num = 0;
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] player_is_in_laststand()) {
       num++;
     }
@@ -43,7 +43,7 @@ function laststand_allowed(sweapon, smeansofdeath, shitloc) {
 }
 
 function cleanup_suicide_hud() {
-  if(isDefined(self.suicideprompt)) {
+  if(isdefined(self.suicideprompt)) {
     self.suicideprompt destroy();
   }
   self.suicideprompt = undefined;
@@ -56,10 +56,10 @@ function clean_up_suicide_hud_on_end_game() {
   self endon("bled_out");
   level util::waittill_any("game_ended", "stop_suicide_trigger");
   self cleanup_suicide_hud();
-  if(isDefined(self.suicidetexthud)) {
+  if(isdefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
   }
-  if(isDefined(self.suicideprogressbar)) {
+  if(isdefined(self.suicideprogressbar)) {
     self.suicideprogressbar hud::destroyelem();
   }
 }
@@ -69,17 +69,17 @@ function clean_up_suicide_hud_on_bled_out() {
   self endon("stop_revive_trigger");
   self util::waittill_any("bled_out", "player_revived", "fake_death");
   self cleanup_suicide_hud();
-  if(isDefined(self.suicideprogressbar)) {
+  if(isdefined(self.suicideprogressbar)) {
     self.suicideprogressbar hud::destroyelem();
   }
-  if(isDefined(self.suicidetexthud)) {
+  if(isdefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
   }
 }
 
 function is_facing(facee, requireddot = 0.9) {
   orientation = self getplayerangles();
-  forwardvec = anglesToForward(orientation);
+  forwardvec = anglestoforward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -106,8 +106,8 @@ function revive_hud_create() {
 }
 
 function revive_hud_show() {
-  assert(isDefined(self));
-  assert(isDefined(self.revive_hud));
+  assert(isdefined(self));
+  assert(isdefined(self.revive_hud));
   self.revive_hud.alpha = 1;
 }
 
@@ -120,7 +120,7 @@ function revive_hud_show_n_fade(time) {
 function drawcylinder(pos, rad, height) {
   currad = rad;
   curheight = height;
-  for(r = 0; r < 20; r++) {
+  for (r = 0; r < 20; r++) {
     theta = (r / 20) * 360;
     theta2 = ((r + 1) / 20) * 360;
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));
@@ -131,7 +131,7 @@ function drawcylinder(pos, rad, height) {
 
 function get_lives_remaining() {
   assert(level.laststandgetupallowed, "");
-  if(level.laststandgetupallowed && isDefined(self.laststand_info) && isDefined(self.laststand_info.type_getup_lives)) {
+  if(level.laststandgetupallowed && isdefined(self.laststand_info) && isdefined(self.laststand_info.type_getup_lives)) {
     return max(0, self.laststand_info.type_getup_lives);
   }
   return 0;
@@ -139,22 +139,22 @@ function get_lives_remaining() {
 
 function update_lives_remaining(increment) {
   assert(level.laststandgetupallowed, "");
-  assert(isDefined(increment), "");
-  increment = (isDefined(increment) ? increment : 0);
+  assert(isdefined(increment), "");
+  increment = (isdefined(increment) ? increment : 0);
   self.laststand_info.type_getup_lives = max(0, (increment ? self.laststand_info.type_getup_lives + 1 : self.laststand_info.type_getup_lives - 1));
   self notify("laststand_lives_updated");
 }
 
 function player_getup_setup() {
   println("");
-  self.laststand_info = spawnStruct();
+  self.laststand_info = spawnstruct();
   self.laststand_info.type_getup_lives = 0;
 }
 
 function laststand_getup_damage_watcher() {
   self endon("player_revived");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("damage");
     self.laststand_info.getup_bar_value = self.laststand_info.getup_bar_value - 0.1;
     if(self.laststand_info.getup_bar_value < 0) {
@@ -179,9 +179,9 @@ function laststand_getup_hud() {
   hudelem.hidewheninmenu = 1;
   hudelem.hidewhendead = 1;
   hudelem.sort = 2;
-  hudelem.label = &"SO_WAR_LASTSTAND_GETUP_BAR";
+  hudelem.label = & "SO_WAR_LASTSTAND_GETUP_BAR";
   self thread laststand_getup_hud_destroy(hudelem);
-  while(true) {
+  while (true) {
     hudelem setvalue(self.laststand_info.getup_bar_value);
     wait(0.05);
   }
@@ -198,7 +198,7 @@ function cleanup_laststand_on_disconnect() {
   self endon("bled_out");
   trig = self.revivetrigger;
   self waittill("disconnect");
-  if(isDefined(trig)) {
+  if(isdefined(trig)) {
     trig delete();
   }
 }

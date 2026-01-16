@@ -24,6 +24,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\util;
+
 #namespace ct_core;
 
 function_46e95cc7() {
@@ -61,7 +62,7 @@ function_46e95cc7() {
   level.disablemomentum = 1;
   level.overrideteamscore = 1;
   level.forceusekillstreak = 1;
-  level.forcedplayerteam = # "allies";
+  level.forcedplayerteam = #"allies";
   ct_difficulty::function_be562a72();
   level.var_edd52efc = &function_edd52efc;
   level thread function_6a1d53f3();
@@ -102,7 +103,7 @@ function_1dd43d36(spawn_weapon) {
       }
     }
 
-    arrayremovevalue(attachments, # "");
+    arrayremovevalue(attachments, #"");
     primary_weapon = getweapon(s_weaponprimary, attachments);
     stashweapon = getdvarint(#"hash_48162cd174e3034d", 0) || isDefined(spawn_weapon);
 
@@ -158,7 +159,7 @@ function_1dd43d36(spawn_weapon) {
       }
     }
 
-    arrayremovevalue(attachments, # "");
+    arrayremovevalue(attachments, #"");
     secondary_weapon = getweapon(var_670cba7, attachments);
 
     if(getdvarint(#"hash_48162cd174e3034d", 0)) {
@@ -276,7 +277,7 @@ function_f8f94589(gamedifficulty) {
 }
 
 function_1e84c767() {
-  level waittill(#"custom_draft_completed", # "draft_complete");
+  level waittill(#"custom_draft_completed", #"draft_complete");
   level.usingmomentum = 0;
   level.var_90bb9821 = 0;
   setdvar(#"scr_disablechallenges", 1);
@@ -319,26 +320,27 @@ function_1e84c767() {
 
   level.var_63c19b1b = getdvarint(#"hash_6c85efe41dc0fd26", 0) == 1;
 
-  if(!(isDefined(level.var_63c19b1b) && level.var_63c19b1b)) {
-    gamedifficulty = function_1aeaebae();
-    level thread function_f8f94589(gamedifficulty);
+    if(!(isDefined(level.var_63c19b1b) && level.var_63c19b1b)) {
+      gamedifficulty = function_1aeaebae();
+      level thread function_f8f94589(gamedifficulty);
 
-    if(player function_c2c1d36b(player function_76785843()) == # "not_started") {
-      player function_3b91934f(player function_76785843(), # "tutorial_started");
-      player function_ea859fe2();
+      if(player function_c2c1d36b(player function_76785843()) == #"not_started") {
+        player function_3b91934f(player function_76785843(), #"tutorial_started");
+        player function_ea859fe2();
+      }
+
+      s_result = level waittill(#"combattraining_logic_finished");
+      b_completed = s_result.success;
+      level waittill(#"hash_699329b4df616aed");
     }
-
-    s_result = level waittill(#"combattraining_logic_finished");
-    b_completed = s_result.success;
-    level waittill(#"hash_699329b4df616aed");
-  } else {
+  else {
     b_completed = 1;
   }
 
   if(util::function_8570168d() && b_completed) {
     str_state = player function_c2c1d36b(player function_76785843());
 
-    if(str_state == # "skirmish_completed") {
+    if(str_state == #"skirmish_completed") {
       player thread ct_tutorial_skirmish::function_b4ebcd8a();
       player function_ea859fe2();
       function_588a84ce();
@@ -346,8 +348,8 @@ function_1e84c767() {
       return;
     }
 
-    if(str_state == # "tutorial_started" || str_state == # "tutorial_completed") {
-      player function_3b91934f(player function_76785843(), # "tutorial_completed");
+    if(str_state == #"tutorial_started" || str_state == #"tutorial_completed") {
+      player function_3b91934f(player function_76785843(), #"tutorial_completed");
       player function_ea859fe2();
       waitframe(1);
       player thread ct_tutorial_skirmish::function_b4ebcd8a();
@@ -389,8 +391,8 @@ function_a217c7b4(b_success) {
 }
 
 function_45a4f027() {
-  function_c7c103cd(#"allies", # "invalid");
-  function_c7c103cd(#"axis", # "invalid");
+  function_c7c103cd(#"allies", #"invalid");
+  function_c7c103cd(#"axis", #"invalid");
 }
 
 on_end_game(params) {

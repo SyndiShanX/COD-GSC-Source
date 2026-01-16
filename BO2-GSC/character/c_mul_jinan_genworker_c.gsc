@@ -4,7 +4,7 @@
 *************************************************/
 
 main() {
-  self setModel("c_mul_al_jinan_bellhop_body");
+  self setmodel("c_mul_al_jinan_bellhop_body");
   self.headmodel = "c_mul_jinan_genworker_head5";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_storm_spring_fx.gsc
 ************************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 208
   ent = createLoopSound();
   ent.v["origin"] = (1731.92, 912.655, 129.185);
   ent.v["angles"] = (270, 0, 0);

@@ -17,6 +17,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
+
 #namespace planner_mp_squad_utility;
 
 autoexec __init__system__() {
@@ -218,7 +219,7 @@ private function_6d153384(position) {
   maxdist = 0;
   var_4764de7f = position;
 
-  foreach(spawn in level.spawn_start[# "free"]) {
+  foreach(spawn in level.spawn_start[#"free"]) {
     dist = distancesquared(position, spawn.origin);
 
     if(dist > maxdist) {
@@ -231,12 +232,12 @@ private function_6d153384(position) {
 }
 
 private function_69e73bdb(position) {
-  if(!isDefined(level.spawn_start) || !isDefined(level.spawn_start[# "allies"]) || !isDefined(level.spawn_start[# "axis"]) || level.spawn_start[# "allies"].size == 0 || level.spawn_start[# "axis"].size == 0) {
+  if(!isDefined(level.spawn_start) || !isDefined(level.spawn_start[#"allies"]) || !isDefined(level.spawn_start[#"axis"]) || level.spawn_start[#"allies"].size == 0 || level.spawn_start[#"axis"].size == 0) {
     return undefined;
   }
 
-  var_192c21ed = level.spawn_start[# "allies"][0].origin;
-  var_945e5bae = level.spawn_start[# "axis"][0].origin;
+  var_192c21ed = level.spawn_start[#"allies"][0].origin;
+  var_945e5bae = level.spawn_start[#"axis"][0].origin;
   var_eb097b41 = distancesquared(position, var_192c21ed);
   var_75b1f52d = distancesquared(position, var_945e5bae);
   return var_eb097b41 < var_75b1f52d ? var_945e5bae : var_192c21ed;
@@ -248,7 +249,7 @@ function_55cc58c4(planner, var_973c5ec5) {
 
   if(isarray(var_72d5b8ac) && var_72d5b8ac.size == 2) {
     foreach(var_2b511b1a in var_72d5b8ac) {
-      zone = var_2b511b1a[# "controlzone"][# "__unsafe__"][# "controlzone"];
+      zone = var_2b511b1a[#"controlzone"][#"__unsafe__"][#"controlzone"];
 
       if(zone.gameobject.trigger istriggerenabled() && zone != var_973c5ec5) {
         var_757ff5c1 = zone;
@@ -267,7 +268,7 @@ private function_984c7289(planner, constants) {
   }
 
   for(i = 0; i < controlzones.size; i++) {
-    zone = controlzones[i][# "__unsafe__"][# "controlzone"];
+    zone = controlzones[i][#"__unsafe__"][#"controlzone"];
 
     if(isDefined(zone) && isDefined(zone.gameobject)) {
       return true;
@@ -285,9 +286,9 @@ private function_3e055926(planner, constants) {
   }
 
   for(i = 0; i < domflags.size; i++) {
-    domflag = domflags[i][# "__unsafe__"][# "domflag"];
+    domflag = domflags[i][#"__unsafe__"][#"domflag"];
 
-    if(isDefined(domflag) && domflags[i][# "claimed"] == 0) {
+    if(isDefined(domflag) && domflags[i][#"claimed"] == 0) {
       return true;
     }
   }
@@ -302,7 +303,7 @@ private function_ca867965(planner, constants) {
     return false;
   }
 
-  zone = kothzone[0][# "__unsafe__"][# "kothzone"];
+  zone = kothzone[0][#"__unsafe__"][#"kothzone"];
 
   if(isDefined(zone) && isDefined(zone.trig) && zone.trig istriggerenabled()) {
     return true;
@@ -321,7 +322,7 @@ private function_16b44b20(planner, constants) {
   bots = planner::getblackboardattribute(planner, "doppelbots");
 
   if(isDefined(bots)) {
-    bot = bots[0][# "__unsafe__"][# "bot"];
+    bot = bots[0][#"__unsafe__"][#"bot"];
 
     if(isDefined(bot) && isalive(bot)) {
       var_7fe54ea1 = bot getentitynumber();
@@ -350,7 +351,7 @@ private function_16b44b20(planner, constants) {
     }
   }
 
-  bomb = sdbomb[0][# "__unsafe__"][# "sdbomb"];
+  bomb = sdbomb[0][#"__unsafe__"][#"sdbomb"];
 
   if(isDefined(bomb) && bomb.trigger istriggerenabled()) {
     return true;
@@ -367,7 +368,7 @@ private function_c1f972ba(planner, constants) {
   }
 
   for(i = 0; i < bombzones.size; i++) {
-    zone = bombzones[i][# "__unsafe__"][# "sdbombzone"];
+    zone = bombzones[i][#"__unsafe__"][#"sdbombzone"];
 
     if(isDefined(zone)) {
       return true;
@@ -384,7 +385,7 @@ private function_a5c008c(planner, constants) {
     return false;
   }
 
-  defuse = defuseobj[0][# "__unsafe__"][# "sddefuseobj"];
+  defuse = defuseobj[0][#"__unsafe__"][#"sddefuseobj"];
 
   if(isDefined(defuse)) {
     return true;
@@ -397,7 +398,7 @@ private function_b6cc50c3(planner, constants) {
   bots = planner::getblackboardattribute(planner, "doppelbots");
 
   for(i = 0; i < bots.size; i++) {
-    bot = bots[0][# "__unsafe__"][# "bot"];
+    bot = bots[0][#"__unsafe__"][#"bot"];
 
     if(isDefined(bot.isbombcarrier) && bot.isbombcarrier || isDefined(level.multibomb) && level.multibomb) {
       return true;
@@ -440,11 +441,11 @@ private function_c586e586(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.controlzone = controlzone[0][# "__unsafe__"][# "controlzone"];
+  params.controlzone = controlzone[0][#"__unsafe__"][#"controlzone"];
   var_a83322cd = params.controlzone.gameobject.trigger istriggerenabled();
 
   if(!var_a83322cd) {
@@ -551,13 +552,13 @@ private function_2b5c33a8(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   var_2bd3822d = [];
 
   foreach(flag in domflags) {
-    var_796d54f2 = flag[# "__unsafe__"][# "domflag"];
+    var_796d54f2 = flag[#"__unsafe__"][#"domflag"];
 
     if(!isDefined(var_2bd3822d)) {
       var_2bd3822d = [];
@@ -716,11 +717,11 @@ private function_e32ce201(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.kothzone = kothzone[0][# "__unsafe__"][# "kothzone"];
+  params.kothzone = kothzone[0][#"__unsafe__"][#"kothzone"];
   params.var_f76f8cf6 = planner::getblackboardattribute(planner, "mp_laneNum");
   params.var_46b70ee6 = getclosesttacpoint(params.kothzone.gameobject.origin).region;
 
@@ -791,11 +792,11 @@ private function_f3fefad8(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.sdbomb = sdbomb[0][# "__unsafe__"][# "sdbomb"];
+  params.sdbomb = sdbomb[0][#"__unsafe__"][#"sdbomb"];
 
   if(isDefined(params.sdbomb)) {
     foreach(bot in bots) {
@@ -876,11 +877,11 @@ private function_5b04cb13(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.sdbombzone = sdbombzone[0][# "__unsafe__"][# "sdbombzone"];
+  params.sdbombzone = sdbombzone[0][#"__unsafe__"][#"sdbombzone"];
 
   if(isDefined(params.sdbombzone)) {
     foreach(bot in bots) {
@@ -939,11 +940,11 @@ private function_f08360d0(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.sddefuseobj = sddefuseobj[0][# "__unsafe__"][# "sddefuseobj"];
+  params.sddefuseobj = sddefuseobj[0][#"__unsafe__"][#"sddefuseobj"];
 
   if(isDefined(params.sddefuseobj)) {
     foreach(bot in bots) {
@@ -1001,11 +1002,11 @@ private function_458e36c0(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.sdbombzone = sdbombzone[0][# "__unsafe__"][# "sdbombzone"];
+  params.sdbombzone = sdbombzone[0][#"__unsafe__"][#"sdbombzone"];
 
   if(isDefined(params.sdbombzone)) {
     foreach(bot in bots) {
@@ -1080,7 +1081,7 @@ private function_8c1624c4(planner, constants) {
       bots = array(bots);
     }
 
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   if(!isDefined(bots[0]) || game.state != "playing") {
@@ -1094,7 +1095,7 @@ private function_8c1624c4(planner, constants) {
     print("<dev string:x38>");
   }
 
-  var_79a83b2e = undefined;
+    var_79a83b2e = undefined;
 
   if(isDefined(bots[0].bot.var_f9954cf6)) {
     var_79a83b2e = bots[0].bot.var_f9954cf6;

@@ -51,26 +51,23 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  while(!isDefined(level.gametypestarted)) {
+  while(!isDefined(level.gametypestarted))
     wait(0.05);
-  }
 
   maps\mp\mp_boneyard_ns_killstreak::boneyard_killstreak_disable();
 
   flag_inits();
-  if(level.gameType == "sd" || level.gameType == "sr" || level.gameType == "grind") {
+  if(level.gameType == "sd" || level.gameType == "sr" || level.gameType == "grind")
     setup_no_events(true, CONST_HORIZONTAL_FIRE);
-  } else if(level.gameType == "blitz" || level.gameType == "horde" || isMLGSystemLink()) {
+  else if(level.gameType == "blitz" || level.gameType == "horde" || isMLGSystemLink())
     setup_no_events(true);
-  } else {
+  else
     setup_events();
-  }
 
   thread join_sync_exploders();
 
-  if(level.gameType == "horde" || level.gameType == "infect") {
+  if(level.gameType == "horde" || level.gameType == "infect")
     setup_safeguard();
-  }
 
   level thread initExtraCollision();
 }
@@ -124,14 +121,12 @@ setup_events() {
   GetEnt("remd_02_proxy", "targetname") Delete();
 
   level.rocket_explo = getEntArray("rocket_explo_obj", "targetname");
-  foreach(part in level.rocket_explo) {
-    part setup_rocket_explo_part();
-  }
+  foreach(part in level.rocket_explo)
+  part setup_rocket_explo_part();
 
   tanks = GetScriptableArray("scriptable_toy_com_propane_tank02_cheap", "classname");
-  foreach(tank in tanks) {
-    tank thread rocket_explo_tank_clip_swap();
-  }
+  foreach(tank in tanks)
+  tank thread rocket_explo_tank_clip_swap();
 
   level thread maps\mp\mp_boneyard_ns_killstreak::boneyard_killstreak_activate();
   level thread maps\mp\mp_boneyard_ns_killstreak::boneyard_killstreak_endgame();
@@ -161,9 +156,8 @@ setup_no_events(enable_killstreak, killstreak_exception) {
       ent Delete();
     }
 
-    if(isDefined(level.explo_nums["rocket_explo"][part.script_label])) {
+    if(isDefined(level.explo_nums["rocket_explo"][part.script_label]))
       mp_exploder(level.explo_nums["rocket_explo"][part.script_label], -60);
-    }
   }
 
   thread sound_fire_elements();
@@ -183,9 +177,8 @@ setup_no_events(enable_killstreak, killstreak_exception) {
   level.exploder_queue[5].startTime = 0;
 
   tanks = GetScriptableArray("scriptable_toy_com_propane_tank02_cheap", "classname");
-  foreach(tank in tanks) {
-    tank thread rocket_explo_tank_clip_swap();
-  }
+  foreach(tank in tanks)
+  tank thread rocket_explo_tank_clip_swap();
 
   delayThread(3, ::mp_exploder, 21);
 
@@ -302,9 +295,8 @@ setup_rocket_explo_part() {
       ent LinkTo(self);
       self.linked_ents[self.linked_ents.size] = ent;
 
-      if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "push_kill") {
+      if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "push_kill")
         self.kill_ents[self.kill_ents.size] = ent;
-      }
     }
   }
 
@@ -324,9 +316,8 @@ setup_rocket_explo_part() {
   }
 
   wait(0.1);
-  foreach(node in self.crash_path) {
-    DisconnectNodePair(node, GetNode(node.target, "targetname"));
-  }
+  foreach(node in self.crash_path)
+  DisconnectNodePair(node, GetNode(node.target, "targetname"));
 }
 
 set_up_building_facade() {
@@ -396,9 +387,8 @@ event_rocket_countdown(count_time, count_sfx) {
   flag_set("flag_rocket_countdown");
 
   for(i = count_time; i >= 0; i--) {
-    if(i == 20) {
+    if(i == 20)
       mp_exploder(16);
-    }
 
     if(isDefined(count_sfx[i])) {
       level.launch_vo1 playSound(count_sfx[i]);
@@ -482,9 +472,8 @@ event_rocket_explode(count_time, launch_time) {
 
   thread building_impact_timing();
 
-  foreach(part in level.rocket_explo) {
-    part thread rocket_explo_drop_part();
-  }
+  foreach(part in level.rocket_explo)
+  part thread rocket_explo_drop_part();
 
   explo_time = GetAnimLength(rocket_anim) * GetNotetrackTimes(rocket_anim, "rog_hit")[0];
   wait(explo_time);
@@ -624,9 +613,8 @@ rocket_explo_drop_part() {
   self ScriptModelPlayAnimDeltaMotion(level.anim_names["rocket_explo"][self.fall_anim]);
   wait(anim_length);
 
-  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone()) {
+  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone())
     wait(0.05);
-  }
 
   stopFXOnTag(level._effect["vfx_debris_trail_xlarge"], self, "tag_origin");
 
@@ -642,16 +630,14 @@ rocket_explo_drop_part() {
   self.clip delayCall(0.05, ::SetAISightLineVisible, 1);
 
   wait(0.1);
-  foreach(node in self.crash_path) {
-    ConnectNodePair(node, GetNode(node.target, "targetname"));
-  }
+  foreach(node in self.crash_path)
+  ConnectNodePair(node, GetNode(node.target, "targetname"));
 }
 
 rocket_explo_drop_part_safety_check() {
   foreach(player in level.players) {
-    if(player IsTouching(self.clip)) {
+    if(player IsTouching(self.clip))
       self.clip maps\mp\_movers::unresolved_collision_owner_damage(player);
-    }
   }
 }
 
@@ -661,9 +647,8 @@ rocket_explo_part_ground_hit(anim_length) {
 
   level notify("rocket_" + self.fall_anim);
 
-  if(isDefined(level.explo_nums["rocket_explo"][self.fall_anim])) {
+  if(isDefined(level.explo_nums["rocket_explo"][self.fall_anim]))
     mp_exploder(level.explo_nums["rocket_explo"][self.fall_anim]);
-  }
   Earthquake(0.6, 1.5, self.origin, 800);
   self thread sound_logic_impacts(self.fall_anim);
 
@@ -734,9 +719,8 @@ kill_survivors(crashNotify, crashLoc, crashRadius, crashRadiusHeight) {
 
 damage_radius_check(zone) {
   foreach(player in level.participants) {
-    if(player IsTouching(zone)) {
+    if(player IsTouching(zone))
       player DoDamage(1000, player.origin, undefined, undefined, "MOD_CRUSH");
-    }
   }
 
   zone delete();
@@ -766,18 +750,16 @@ join_sync_exploders_proc() {
     wait(0.05);
     mytime = explo.startTime - GetTime() + explo.time;
 
-    if(myTime > -60000) {
+    if(myTime > -60000)
       ActivateClientExploder(explo.num, self, myTime / 1000.0);
-    } else {
+    else
       ActivateClientExploder(explo.num, self, -60);
-    }
   }
 
-  if(flag("flag_rocket_launched")) {
+  if(flag("flag_rocket_launched"))
     GetScriptableArray("countdown_clock", "targetname")[0] SetScriptablePartState(0, 0);
-  } else if(flag("flag_rocket_countdown_fx")) {
+  else if(flag("flag_rocket_countdown_fx"))
     self thread join_sync_countdown();
-  }
 }
 
 join_sync_countdown() {
@@ -792,13 +774,11 @@ join_sync_countdown() {
 mp_exploder(num, startTime) {
   exploder(num, undefined, startTime);
 
-  if(!isDefined(startTime)) {
+  if(!isDefined(startTime))
     startTime = 0;
-  }
 
-  if(!isDefined(level.exploder_queue)) {
+  if(!isDefined(level.exploder_queue))
     level.exploder_queue = [];
-  }
 
   level.exploder_queue[num] = spawnStruct();
   level.exploder_queue[num].num = num;
@@ -873,9 +853,8 @@ fire_horiz_fire() {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
     attacker = level.fire_horiz.player;
-    if(!isDefined(level.fire_horiz.player) || !IsPlayer(level.fire_horiz.player)) {
+    if(!isDefined(level.fire_horiz.player) || !IsPlayer(level.fire_horiz.player))
       attacker = undefined;
-    }
 
     thread maps\mp\mp_boneyard_ns_killstreak::damage_characters(level.fire_horiz, attacker, 25);
     thread maps\mp\mp_boneyard_ns_killstreak::damage_targets(level.fire_horiz, attacker, level.remote_uav, 50);

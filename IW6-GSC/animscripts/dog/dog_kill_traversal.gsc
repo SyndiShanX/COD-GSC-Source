@@ -4,9 +4,8 @@
 **************************************************/
 
 check_kill_traversal(var_0) {
-  if(self.team != "allies") {
+  if(self.team != "allies")
     return 0;
-  }
 
   self endon("killanimscript");
   var_1 = self getnegotiationstartnode();
@@ -52,9 +51,8 @@ dog_get_within_range(var_0, var_1, var_2) {
   var_3 = [];
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
-    if(distance(var_1[var_4].origin, var_0) <= var_2) {
+    if(distance(var_1[var_4].origin, var_0) <= var_2)
       var_3[var_3.size] = var_1[var_4];
-    }
   }
 
   return var_3;
@@ -92,16 +90,14 @@ human_traverse_kill() {
   self.a.pose = "stand";
   self.a.special = "none";
 
-  if(animscripts\utility::usingsidearm()) {
+  if(animscripts\utility::usingsidearm())
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
-  }
 
   self clearanim( % body, 0.1);
   self setflaggedanimrestart("aianim", level.scr_anim["generic"][self.traversedata["traverseAnim"]][1], 1, 0.1, 1);
 
-  if(isDefined(self.traversedata["linkMe"])) {
+  if(isDefined(self.traversedata["linkMe"]))
     thread dog_link();
-  }
 
   animscripts\shared::donotetracks("aianim");
   self waittillmatch("aianim", "end");

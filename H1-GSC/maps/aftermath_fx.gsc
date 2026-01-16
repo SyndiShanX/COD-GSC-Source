@@ -60,10 +60,10 @@ precachefx() {
 }
 
 playereffect() {
-  var_0 = getEntArray("player", "classname")[0];
+  var_0 = getentarray("player", "classname")[0];
 
-  for(;;) {
-    playFX(level._effect["ash_turb_aftermath"], var_0.origin + (0, 0, 100), var_0.origin + (0, 0, 150));
+  for (;;) {
+    playfx(level._effect["ash_turb_aftermath"], var_0.origin + (0, 0, 100), var_0.origin + (0, 0, 150));
     wait 0.2;
   }
 }

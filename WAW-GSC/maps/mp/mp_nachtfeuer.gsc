@@ -20,11 +20,11 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "german";
   game["axis_soldiertype"] = "german";
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_NACHTFEUER_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_NACHTFEUER_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_NACHTFEUER_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_NACHTFEUER_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_NACHTFEUER_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_NACHTFEUER_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_NACHTFEUER_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_NACHTFEUER_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_NACHTFEUER_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_NACHTFEUER_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_NACHTFEUER_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_NACHTFEUER_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_NACHTFEUER_C";
@@ -43,8 +43,8 @@ main() {
 }
 
 move_spawn_point(targetname, start_point, new_point) {
-  spawn_points = getEntArray(targetname, "classname");
-  for(i = 0; i < spawn_points.size; i++) {
+  spawn_points = getentarray(targetname, "classname");
+  for (i = 0; i < spawn_points.size; i++) {
     if(distancesquared(spawn_points[i].origin, start_point) < 1) {
       spawn_points[i].origin = new_point;
       return;
@@ -54,7 +54,7 @@ move_spawn_point(targetname, start_point, new_point) {
 
 remove_dog_spawn_point(point) {
   spawn_points = [];
-  for(i = 0; i < level.dogspawnnodes.size; i++) {
+  for (i = 0; i < level.dogspawnnodes.size; i++) {
     if(distancesquared(level.dogspawnnodes[i].origin, point) > 25) {
       spawn_points[spawn_points.size] = level.dogspawnnodes[i];
     }

@@ -25,9 +25,8 @@ watchflaredetonation(owner) {
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
-      if(!isDefined(players[i].item)) {
+      if(!isDefined(players[i].item))
         players[i].item = 0;
-      }
 
       if(!isDefined(players[i].inflarevisionarea) || players[i].inflarevisionarea == 0) {
         if(players[i].sessionstate == "playing") {
@@ -69,11 +68,10 @@ flarevision(player, flareeffectarea, position) {
     count++;
   }
 
-  if(!isDefined(flareeffectarea)) {
+  if(!isDefined(flareeffectarea))
     wait(flare_get_dvar("flareBurnOutFadeWait", level.flareburnoutfadewait));
-  } else if(distancesquared(position, player.origin) < level.flarevisioneffectradius * level.flarevisioneffectradius) {
+  else if(distancesquared(position, player.origin) < level.flarevisioneffectradius * level.flarevisioneffectradius)
     wait(flare_get_dvar("flareLookAwayFadeWait", level.flarelookawayfadewait));
-  }
 
   player.inflarevisionarea = 0;
   player visionsetlerpratio(0);
@@ -84,9 +82,9 @@ flare_get_dvar_int(dvar, def) {
 }
 
 flare_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "") {
+  if(getdvar(dvar) != "")
     return getdvarfloat(dvar);
-  } else {
+  else {
     setdvar(dvar, def);
     return def;
   }
@@ -94,18 +92,16 @@ flare_get_dvar(dvar, def) {
 
 player_is_driver() {
   if(ismp()) {
-    if(!isalive(self)) {
+    if(!isalive(self))
       return false;
-    }
 
     vehicle = self getvehicleoccupied();
 
     if(isDefined(vehicle)) {
       seat = vehicle getoccupantseat(self);
 
-      if(isDefined(seat) && seat == 0) {
+      if(isDefined(seat) && seat == 0)
         return true;
-      }
     }
   }
 

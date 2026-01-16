@@ -45,7 +45,7 @@ function saygenericdialogue(typestring) {
 
 function saygenericdialoguewithimportance(typestring, importance) {
   soundalias = "dds_";
-  if(isDefined(self.dds_characterid)) {
+  if(isdefined(self.dds_characterid)) {
     soundalias = soundalias + self.dds_characterid;
   } else {
     println("");
@@ -77,32 +77,32 @@ function playidleface() {}
 
 function playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot, timetowait, toplayer) {
   self endon("death");
-  if(!isDefined(str_script_alias)) {
+  if(!isdefined(str_script_alias)) {
     wait(1);
     self notify(notifystring);
     return;
   }
   str_notify_alias = str_script_alias;
-  if(!isDefined(level.numberofimportantpeopletalking)) {
+  if(!isdefined(level.numberofimportantpeopletalking)) {
     level.numberofimportantpeopletalking = 0;
   }
-  if(!isDefined(level.talknotifyseed)) {
+  if(!isdefined(level.talknotifyseed)) {
     level.talknotifyseed = 0;
   }
-  if(!isDefined(notifystring)) {
+  if(!isdefined(notifystring)) {
     notifystring = "PlayFaceThread " + str_script_alias;
   }
-  if(!isDefined(self.a)) {
-    self.a = spawnStruct();
+  if(!isdefined(self.a)) {
+    self.a = spawnstruct();
   }
-  if(!isDefined(self.a.facialsounddone)) {
+  if(!isdefined(self.a.facialsounddone)) {
     self.a.facialsounddone = 1;
   }
-  if(!isDefined(self.istalking)) {
+  if(!isdefined(self.istalking)) {
     self.istalking = 0;
   }
   if(self.istalking) {
-    if(isDefined(self.a.currentdialogimportance)) {
+    if(isdefined(self.a.currentdialogimportance)) {
       if(importance < self.a.currentdialogimportance) {
         wait(1);
         self notify(notifystring);
@@ -113,7 +113,7 @@ function playfacethread(facialanim, str_script_alias, importance, notifystring, 
           return;
         }
         println((("" + self.a.facialsoundalias) + "") + str_script_alias);
-        while(self.istalking) {
+        while (self.istalking) {
           self waittill("hash_90f83311");
         }
       }
@@ -121,7 +121,7 @@ function playfacethread(facialanim, str_script_alias, importance, notifystring, 
       println((("" + self.a.facialsoundalias) + "") + str_script_alias);
       self stopsound(self.a.facialsoundalias);
       self notify("hash_ad4a3c97");
-      while(self.istalking) {
+      while (self.istalking) {
         self waittill("hash_90f83311");
       }
     }
@@ -145,15 +145,15 @@ function playfacethread(facialanim, str_script_alias, importance, notifystring, 
   }
   uniquenotify = (notifystring + " ") + level.talknotifyseed;
   level.talknotifyseed = level.talknotifyseed + 1;
-  if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"])) {
+  if(isdefined(level.scr_sound) && isdefined(level.scr_sound["generic"])) {
     str_vox_file = level.scr_sound["generic"][str_script_alias];
   }
-  if(isDefined(str_vox_file)) {
+  if(isdefined(str_vox_file)) {
     if(soundexists(str_vox_file)) {
       if(isplayer(toplayer)) {
         self thread _play_sound_to_player_with_notify(str_vox_file, toplayer, uniquenotify);
       } else {
-        if(isDefined(self gettagorigin("J_Head"))) {
+        if(isdefined(self gettagorigin("J_Head"))) {
           self playsoundwithnotify(str_vox_file, uniquenotify, "J_Head");
         } else {
           self playsoundwithnotify(str_vox_file, uniquenotify);
@@ -171,7 +171,7 @@ function playfacethread(facialanim, str_script_alias, importance, notifystring, 
     level.numberofimportantpeopletalking = level.numberofimportantpeopletalking - 1;
     level.importantpeopletalkingtime = gettime();
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.istalking = 0;
     self.a.facialsounddone = 1;
     self.a.facialsoundnotify = undefined;
@@ -198,11 +198,11 @@ function _play_sound_to_player_with_notify(soundalias, toplayer, uniquenotify) {
 
 function private _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
   setdvar("bgcache_disablewarninghints", 1);
-  if(!b_missing_vo && isDefined(self.propername)) {
+  if(!b_missing_vo && isdefined(self.propername)) {
     str_line = (self.propername + ": ") + str_line;
   }
   foreach(player in level.players) {
-    if(!isDefined(player getluimenu("TempDialog"))) {
+    if(!isdefined(player getluimenu("TempDialog"))) {
       player openluimenu("TempDialog");
     }
     player setluimenudata(player getluimenu("TempDialog"), "dialogText", str_line);
@@ -216,7 +216,7 @@ function private _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
   n_wait_time = math::clamp(n_wait_time, 2, 5);
   util::waittill_any_timeout(n_wait_time, "death", "cancel speaking");
   foreach(player in level.players) {
-    if(isDefined(player getluimenu("TempDialog"))) {
+    if(isdefined(player getluimenu("TempDialog"))) {
       player closeluimenu(player getluimenu("TempDialog"));
     }
   }

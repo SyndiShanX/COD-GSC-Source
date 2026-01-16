@@ -22,24 +22,24 @@
 
 function main() {
   setdvar("doa_redins_rally", 0);
-  level.var_2eda2d85 = &function_62423327;
-  level.var_1f314fb9 = &function_4eb73a5;
+  level.var_2eda2d85 = & function_62423327;
+  level.var_1f314fb9 = & function_4eb73a5;
   namespace_e8effba5::main();
   namespace_4fca3ee8::main();
   setdvar("bg_friendlyFireMode", 0);
-  clientfield::register("world", "redinsExploder", 1, 2, "int", &function_1dd0a889, 0, 0);
-  clientfield::register("world", "activateBanner", 1, 3, "int", &function_99e9c8d, 0, 0);
-  clientfield::register("world", "pumpBannerBar", 1, 8, "float", &function_98982de8, 0, 0);
-  clientfield::register("world", "redinstutorial", 1, 1, "int", &function_c7163a08, 0, 0);
-  clientfield::register("world", "redinsinstruct", 1, 12, "int", &function_9cbb849c, 0, 0);
-  clientfield::register("scriptmover", "runcowanim", 1, 1, "int", &function_caf96f2d, 0, 0);
-  clientfield::register("scriptmover", "runsiegechickenanim", 8000, 2, "int", &function_f9064aec, 0, 0);
+  clientfield::register("world", "redinsExploder", 1, 2, "int", & function_1dd0a889, 0, 0);
+  clientfield::register("world", "activateBanner", 1, 3, "int", & function_99e9c8d, 0, 0);
+  clientfield::register("world", "pumpBannerBar", 1, 8, "float", & function_98982de8, 0, 0);
+  clientfield::register("world", "redinstutorial", 1, 1, "int", & function_c7163a08, 0, 0);
+  clientfield::register("world", "redinsinstruct", 1, 12, "int", & function_9cbb849c, 0, 0);
+  clientfield::register("scriptmover", "runcowanim", 1, 1, "int", & function_caf96f2d, 0, 0);
+  clientfield::register("scriptmover", "runsiegechickenanim", 8000, 2, "int", & function_f9064aec, 0, 0);
   namespace_693feb87::main();
   load::main();
 }
 
 function function_4eb73a5(localclientnum, mapname, var_5fb1dd3e) {
-  if(isDefined(level.weatherfx) && isDefined(level.weatherfx[localclientnum])) {
+  if(isdefined(level.weatherfx) && isdefined(level.weatherfx[localclientnum])) {
     stopfx(localclientnum, level.weatherfx[localclientnum]);
     level.weatherfx[localclientnum] = 0;
   }
@@ -133,7 +133,7 @@ function function_4eb73a5(localclientnum, mapname, var_5fb1dd3e) {
 function function_62423327(arena) {
   switch (arena.name) {
     case "redins": {
-      arena.var_f3114f93 = &function_787f2b69;
+      arena.var_f3114f93 = & function_787f2b69;
       arena.var_aad78940 = 99;
       arena.var_f4f1abf3 = 1;
       arena.var_dd94482c = (1 + 8) + 4;
@@ -141,7 +141,7 @@ function function_62423327(arena) {
       break;
     }
     case "tankmaze": {
-      arena.var_f3114f93 = &function_52612667;
+      arena.var_f3114f93 = & function_52612667;
       arena.var_aad78940 = 99;
       arena.var_dd94482c = 1 + 4;
       arena.var_ecf7ec70 = 2;
@@ -154,7 +154,7 @@ function function_62423327(arena) {
       break;
     }
     case "truck_soccer": {
-      arena.var_f3114f93 = &function_b5e8546d;
+      arena.var_f3114f93 = & function_b5e8546d;
       arena.var_aad78940 = 99;
       arena.var_dd94482c = (1 + 8) + 4;
       arena.var_ecf7ec70 = 2;
@@ -189,7 +189,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
   setuimodelvalue(createuimodel(level.var_7e2a814c, "gbanner"), "");
   switch (newval) {
     case 6: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BOSS_CYBERSILVERBACK_MECH");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BOSS_CYBERSILVERBACK_MECH");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "255 0 0");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "255 128 0");
@@ -197,7 +197,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
       break;
     }
     case 5: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BOSS_CYBERSILVERBACK");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BOSS_CYBERSILVERBACK");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "255 0 0");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "255 128 0");
@@ -205,7 +205,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
       break;
     }
     case 4: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BOSS_MARGWA");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BOSS_MARGWA");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "255 0 0");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "255 128 0");
@@ -213,7 +213,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
       break;
     }
     case 1: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BOSS_STONEGUARDIAN");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BOSS_STONEGUARDIAN");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "255 0 0");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "255 128 0");
@@ -221,7 +221,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
       break;
     }
     case 2: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BANNER_CHICKENBOWL");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BANNER_CHICKENBOWL");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "128 128 128");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "255 255 255");
@@ -229,7 +229,7 @@ function function_99e9c8d(localclientnum, oldval, newval, bnewent, binitialsnap,
       break;
     }
     case 3: {
-      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), &"CP_DOA_BO3_BANNER_TANKMAZE");
+      setuimodelvalue(getuimodel(level.var_7e2a814c, "gbanner"), & "CP_DOA_BO3_BANNER_TANKMAZE");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "gpr0"), 1);
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb1"), "16 16 16");
       setuimodelvalue(getuimodel(level.var_7e2a814c, "grgb2"), "31 10 255");
@@ -282,7 +282,7 @@ function function_7183a31d(fieldname, diff) {
 
 function function_ec984567() {
   level endon("hash_ec7ca67b");
-  while(true) {
+  while (true) {
     level waittill("hash_48152b36", fieldname, diff);
     if(diff > 0) {
       level thread function_7183a31d(fieldname, diff);
@@ -320,16 +320,16 @@ function function_9cbb849c(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_c7163a08(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval == 1 && (!(isDefined(level.var_f64ff200) && level.var_f64ff200))) {
-    if(!isDefined(level.var_8c2ba713)) {
+  if(newval == 1 && (!(isdefined(level.var_f64ff200) && level.var_f64ff200))) {
+    if(!isdefined(level.var_8c2ba713)) {
       level.var_8c2ba713 = createluimenu(localclientnum, "DOA_ControlsMenu");
     }
-    if(isDefined(level.var_8c2ba713)) {
+    if(isdefined(level.var_8c2ba713)) {
       openluimenu(localclientnum, level.var_8c2ba713);
       level.var_f64ff200 = 1;
       string = "CP_DOA_BO3_REDINS_HINT" + randomint(8);
       setuimodelvalue(createuimodel(level.var_7e2a814c, "hint"), istring(string));
-      while(true) {
+      while (true) {
         level waittill("countdown", val);
         if(val <= 1) {
           break;
@@ -349,7 +349,7 @@ function function_96abee17(localclientnum) {
 
 function function_52612667(localclientnum) {
   level endon("hash_ec7ca67b");
-  if(isDefined(level.weatherfx) && isDefined(level.weatherfx[localclientnum])) {
+  if(isdefined(level.weatherfx) && isdefined(level.weatherfx[localclientnum])) {
     stopfx(localclientnum, level.weatherfx[localclientnum]);
     level.weatherfx[localclientnum] = 0;
   }
@@ -359,7 +359,7 @@ function function_52612667(localclientnum) {
 
 function function_787f2b69(localclientnum) {
   level endon("hash_ec7ca67b");
-  if(isDefined(level.weatherfx) && isDefined(level.weatherfx[localclientnum])) {
+  if(isdefined(level.weatherfx) && isdefined(level.weatherfx[localclientnum])) {
     stopfx(localclientnum, level.weatherfx[localclientnum]);
     level.weatherfx[localclientnum] = 0;
   }
@@ -369,14 +369,14 @@ function function_787f2b69(localclientnum) {
   setuimodelvalue(createuimodel(level.var_7e2a814c, "driving"), 1);
   setdvar("doa_redins_rally", 1);
   level thread function_ec984567();
-  while(true) {
-    for(i = 0; i < 4; i++) {
+  while (true) {
+    for (i = 0; i < 4; i++) {
       setuimodelvalue(getuimodel(level.var_b9d30140[i], "name"), "");
       setuimodelvalue(getuimodel(level.var_b9d30140[i], "generic_txt"), "");
     }
     foreach(player in getplayers(localclientnum)) {
       setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "name"), "");
-      setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "generic_txt"), (isDefined(player.name) ? player.name : ""));
+      setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "generic_txt"), (isdefined(player.name) ? player.name : ""));
       switch (player getentitynumber()) {
         case 0: {
           rgb = "0 255 0";
@@ -420,10 +420,10 @@ function function_27542390(localclientnum, state) {
   self endon("animstate");
   self.animstate = state;
   self useanimtree($chicken_mech);
-  while(true) {
+  while (true) {
     switch (self.animstate) {
       case 0: {
-        if(isDefined(self.animation)) {
+        if(isdefined(self.animation)) {
           self clearanim(self.animation, 0);
           self.animation = undefined;
         }
@@ -443,7 +443,7 @@ function function_27542390(localclientnum, state) {
         break;
       }
     }
-    if(isDefined(self.animation)) {
+    if(isdefined(self.animation)) {
       time = getanimlength(self.animation);
       wait(time);
     } else {

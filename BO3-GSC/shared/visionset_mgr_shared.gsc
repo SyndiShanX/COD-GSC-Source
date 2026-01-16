@@ -11,7 +11,7 @@
 #namespace visionset_mgr;
 
 function autoexec __init__sytem__() {
-  system::register("visionset_mgr", &__init__, undefined, undefined);
+  system::register("visionset_mgr", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -20,9 +20,9 @@ function __init__() {
   level.vsmgr = [];
   level thread register_type("visionset");
   level thread register_type("overlay");
-  callback::on_finalize_initialization(&finalize_clientfields);
+  callback::on_finalize_initialization( & finalize_clientfields);
   level thread monitor();
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
 }
 
 function register_info(type, name, version, priority, lerp_step_count, should_activate_per_player, lerp_thread, ref_count_lerp_thread) {
@@ -31,7 +31,7 @@ function register_info(type, name, version, priority, lerp_step_count, should_ac
   validate_info(type, lower_name, priority);
   add_sorted_name_key(type, lower_name);
   add_sorted_priority_key(type, lower_name, priority);
-  level.vsmgr[type].info[lower_name] = spawnStruct();
+  level.vsmgr[type].info[lower_name] = spawnstruct();
   level.vsmgr[type].info[lower_name] add_info(type, lower_name, version, priority, lerp_step_count, should_activate_per_player, lerp_thread, ref_count_lerp_thread);
   if(level.vsmgr[type].highest_version < version) {
     level.vsmgr[type].highest_version = version;
@@ -50,11 +50,11 @@ function activate(type, name, player, opt_param_1, opt_param_2, opt_param_3) {
       return;
     }
   }
-  if(isDefined(state.lerp_thread)) {
+  if(isdefined(state.lerp_thread)) {
     state thread lerp_thread_wrapper(state.lerp_thread, opt_param_1, opt_param_2, opt_param_3);
   } else {
     players = getplayers();
-    for(player_index = 0; player_index < players.size; player_index++) {
+    for (player_index = 0; player_index < players.size; player_index++) {
       state set_state_active(players[player_index], 1);
     }
   }
@@ -73,7 +73,7 @@ function deactivate(type, name, player) {
     }
   }
   players = getplayers();
-  for(player_index = 0; player_index < players.size; player_index++) {
+  for (player_index = 0; player_index < players.size; player_index++) {
     state set_state_inactive(players[player_index]);
   }
   state notify("visionset_mgr_deactivate_all");
@@ -81,7 +81,7 @@ function deactivate(type, name, player) {
 
 function set_state_active(player, lerp) {
   player_entnum = player getentitynumber();
-  if(!isDefined(self.players[player_entnum])) {
+  if(!isdefined(self.players[player_entnum])) {
     return;
   }
   self.players[player_entnum].active = 1;
@@ -90,7 +90,7 @@ function set_state_active(player, lerp) {
 
 function set_state_inactive(player) {
   player_entnum = player getentitynumber();
-  if(!isDefined(self.players[player_entnum])) {
+  if(!isdefined(self.players[player_entnum])) {
     return;
   }
   self.players[player_entnum].active = 0;
@@ -99,7 +99,7 @@ function set_state_inactive(player) {
 
 function timeout_lerp_thread(timeout, opt_param_2, opt_param_3) {
   players = getplayers();
-  for(player_index = 0; player_index < players.size; player_index++) {
+  for (player_index = 0; player_index < players.size; player_index++) {
     self set_state_active(players[player_index], 1);
   }
   wait(timeout);
@@ -115,16 +115,16 @@ function timeout_lerp_thread_per_player(player, timeout, opt_param_2, opt_param_
 function duration_lerp_thread(duration, max_duration) {
   start_time = gettime();
   end_time = start_time + (int(duration * 1000));
-  if(isDefined(max_duration)) {
+  if(isdefined(max_duration)) {
     start_time = end_time - (int(max_duration * 1000));
   }
-  while(true) {
+  while (true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
     if(0 >= lerp) {
       break;
     }
     players = getplayers();
-    for(player_index = 0; player_index < players.size; player_index++) {
+    for (player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
     wait(0.05);
@@ -135,10 +135,10 @@ function duration_lerp_thread(duration, max_duration) {
 function duration_lerp_thread_per_player(player, duration, max_duration) {
   start_time = gettime();
   end_time = start_time + (int(duration * 1000));
-  if(isDefined(max_duration)) {
+  if(isdefined(max_duration)) {
     start_time = end_time - (int(max_duration * 1000));
   }
-  while(true) {
+  while (true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
     if(0 >= lerp) {
       break;
@@ -152,7 +152,7 @@ function duration_lerp_thread_per_player(player, duration, max_duration) {
 function ramp_in_thread_per_player(player, duration) {
   start_time = gettime();
   end_time = start_time + (int(duration * 1000));
-  while(true) {
+  while (true) {
     lerp = calc_ramp_in_lerp(start_time, end_time);
     if(1 <= lerp) {
       break;
@@ -164,8 +164,8 @@ function ramp_in_thread_per_player(player, duration) {
 
 function ramp_in_out_thread_hold_func() {
   level endon("kill_ramp_in_out_thread_hold_func");
-  while(true) {
-    for(player_index = 0; player_index < level.players.size; player_index++) {
+  while (true) {
+    for (player_index = 0; player_index < level.players.size; player_index++) {
       self set_state_active(level.players[player_index], 1);
     }
     wait(0.05);
@@ -175,13 +175,13 @@ function ramp_in_out_thread_hold_func() {
 function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
   start_time = gettime();
   end_time = start_time + (int(ramp_in * 1000));
-  while(true) {
+  while (true) {
     lerp = calc_ramp_in_lerp(start_time, end_time);
     if(1 <= lerp) {
       break;
     }
     players = getplayers();
-    for(player_index = 0; player_index < players.size; player_index++) {
+    for (player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
     wait(0.05);
@@ -195,13 +195,13 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
   level notify("kill_ramp_in_out_thread_hold_func");
   start_time = gettime();
   end_time = start_time + (int(ramp_out * 1000));
-  while(true) {
+  while (true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
     if(0 >= lerp) {
       break;
     }
     players = getplayers();
-    for(player_index = 0; player_index < players.size; player_index++) {
+    for (player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
     wait(0.05);
@@ -212,7 +212,7 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
 function ramp_in_out_thread_per_player_internal(player, ramp_in, full_period, ramp_out) {
   start_time = gettime();
   end_time = start_time + (int(ramp_in * 1000));
-  while(true) {
+  while (true) {
     lerp = calc_ramp_in_lerp(start_time, end_time);
     if(1 <= lerp) {
       break;
@@ -228,7 +228,7 @@ function ramp_in_out_thread_per_player_internal(player, ramp_in, full_period, ra
   }
   start_time = gettime();
   end_time = start_time + (int(ramp_out * 1000));
-  while(true) {
+  while (true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
     if(0 >= lerp) {
       break;
@@ -260,7 +260,7 @@ function ramp_in_out_thread_per_player(player, ramp_in, full_period, ramp_out) {
 }
 
 function register_type(type) {
-  level.vsmgr[type] = spawnStruct();
+  level.vsmgr[type] = spawnstruct();
   level.vsmgr[type].type = type;
   level.vsmgr[type].in_use = 0;
   level.vsmgr[type].highest_version = 0;
@@ -274,7 +274,7 @@ function register_type(type) {
 
 function finalize_clientfields() {
   typekeys = getarraykeys(level.vsmgr);
-  for(type_index = 0; type_index < typekeys.size; type_index++) {
+  for (type_index = 0; type_index < typekeys.size; type_index++) {
     level.vsmgr[typekeys[type_index]] thread finalize_type_clientfields();
   }
   level.vsmgr_initializing = 0;
@@ -288,7 +288,7 @@ function finalize_type_clientfields() {
   self.in_use = 1;
   self.cf_slot_bit_count = getminbitcountfornum(self.info.size - 1);
   self.cf_lerp_bit_count = self.info[self.sorted_name_keys[0]].lerp_bit_count;
-  for(i = 0; i < self.sorted_name_keys.size; i++) {
+  for (i = 0; i < self.sorted_name_keys.size; i++) {
     self.info[self.sorted_name_keys[i]].slot_index = i;
     if(self.info[self.sorted_name_keys[i]].lerp_bit_count > self.cf_lerp_bit_count) {
       self.cf_lerp_bit_count = self.info[self.sorted_name_keys[i]].lerp_bit_count;
@@ -303,21 +303,21 @@ function finalize_type_clientfields() {
 
 function validate_info(type, name, priority) {
   keys = getarraykeys(level.vsmgr);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(type == keys[i]) {
       break;
     }
   }
   assert(i < keys.size, ("" + type) + "");
   keys = getarraykeys(level.vsmgr[type].info);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     assert(level.vsmgr[type].info[keys[i]].name != name, ((("" + type) + "") + name) + "");
     assert(level.vsmgr[type].info[keys[i]].priority != priority, ((((((("" + type) + "") + priority) + "") + name) + "") + level.vsmgr[type].info[keys[i]].name) + "");
   }
 }
 
 function add_sorted_name_key(type, name) {
-  for(i = 0; i < level.vsmgr[type].sorted_name_keys.size; i++) {
+  for (i = 0; i < level.vsmgr[type].sorted_name_keys.size; i++) {
     if(name < level.vsmgr[type].sorted_name_keys[i]) {
       break;
     }
@@ -326,7 +326,7 @@ function add_sorted_name_key(type, name) {
 }
 
 function add_sorted_priority_key(type, name, priority) {
-  for(i = 0; i < level.vsmgr[type].sorted_prio_keys.size; i++) {
+  for (i = 0; i < level.vsmgr[type].sorted_prio_keys.size; i++) {
     if(priority > level.vsmgr[type].info[level.vsmgr[type].sorted_prio_keys[i]].priority) {
       break;
     }
@@ -341,10 +341,10 @@ function add_info(type, name, version, priority, lerp_step_count, should_activat
   self.priority = priority;
   self.lerp_step_count = lerp_step_count;
   self.lerp_bit_count = getminbitcountfornum(lerp_step_count);
-  if(!isDefined(ref_count_lerp_thread)) {
+  if(!isdefined(ref_count_lerp_thread)) {
     ref_count_lerp_thread = 0;
   }
-  self.state = spawnStruct();
+  self.state = spawnstruct();
   self.state.type = type;
   self.state.name = name;
   self.state.should_activate_per_player = should_activate_per_player;
@@ -363,14 +363,14 @@ function on_player_connect() {
 function player_setup() {
   self.vsmgr_player_entnum = self getentitynumber();
   typekeys = getarraykeys(level.vsmgr);
-  for(type_index = 0; type_index < typekeys.size; type_index++) {
+  for (type_index = 0; type_index < typekeys.size; type_index++) {
     type = typekeys[type_index];
     if(!level.vsmgr[type].in_use) {
       continue;
     }
-    for(name_index = 0; name_index < level.vsmgr[type].sorted_name_keys.size; name_index++) {
+    for (name_index = 0; name_index < level.vsmgr[type].sorted_name_keys.size; name_index++) {
       name_key = level.vsmgr[type].sorted_name_keys[name_index];
-      level.vsmgr[type].info[name_key].state.players[self.vsmgr_player_entnum] = spawnStruct();
+      level.vsmgr[type].info[name_key].state.players[self.vsmgr_player_entnum] = spawnstruct();
       level.vsmgr[type].info[name_key].state.players[self.vsmgr_player_entnum].active = 0;
       level.vsmgr[type].info[name_key].state.players[self.vsmgr_player_entnum].lerp = 0;
       if(level.vsmgr[type].info[name_key].state.ref_count_lerp_thread && level.vsmgr[type].info[name_key].state.should_activate_per_player) {
@@ -384,12 +384,12 @@ function player_setup() {
 function player_shutdown() {
   self.vsmgr_player_entnum = self getentitynumber();
   typekeys = getarraykeys(level.vsmgr);
-  for(type_index = 0; type_index < typekeys.size; type_index++) {
+  for (type_index = 0; type_index < typekeys.size; type_index++) {
     type = typekeys[type_index];
     if(!level.vsmgr[type].in_use) {
       continue;
     }
-    for(name_index = 0; name_index < level.vsmgr[type].sorted_name_keys.size; name_index++) {
+    for (name_index = 0; name_index < level.vsmgr[type].sorted_name_keys.size; name_index++) {
       name_key = level.vsmgr[type].sorted_name_keys[name_index];
       deactivate_per_player(type, name_key, self);
     }
@@ -397,21 +397,21 @@ function player_shutdown() {
 }
 
 function monitor() {
-  while(level.vsmgr_initializing) {
+  while (level.vsmgr_initializing) {
     wait(0.05);
   }
   typekeys = getarraykeys(level.vsmgr);
-  while(true) {
+  while (true) {
     wait(0.05);
     waittillframeend();
     players = getplayers();
-    for(type_index = 0; type_index < typekeys.size; type_index++) {
+    for (type_index = 0; type_index < typekeys.size; type_index++) {
       type = typekeys[type_index];
       if(!level.vsmgr[type].in_use) {
         continue;
       }
-      for(player_index = 0; player_index < players.size; player_index++) {
-        if(!isDefined(players[player_index].vsmgr_player_entnum)) {
+      for (player_index = 0; player_index < players.size; player_index++) {
+        if(!isdefined(players[player_index].vsmgr_player_entnum)) {
           continue;
         }
         update_clientfields(players[player_index], level.vsmgr[type]);
@@ -422,7 +422,7 @@ function monitor() {
 
 function get_first_active_name(type_struct) {
   size = type_struct.sorted_prio_keys.size;
-  for(prio_index = 0; prio_index < size; prio_index++) {
+  for (prio_index = 0; prio_index < size; prio_index++) {
     prio_key = type_struct.sorted_prio_keys[prio_index];
     if(type_struct.info[prio_key].state.players[self.vsmgr_player_entnum].active) {
       return prio_key;
@@ -462,7 +462,7 @@ function activate_per_player(type, name, player, opt_param_1, opt_param_2, opt_p
       return;
     }
   }
-  if(isDefined(state.lerp_thread)) {
+  if(isdefined(state.lerp_thread)) {
     state thread lerp_thread_per_player_wrapper(state.lerp_thread, player, opt_param_1, opt_param_2, opt_param_3);
   } else {
     state set_state_active(player, 1);

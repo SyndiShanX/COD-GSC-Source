@@ -44,22 +44,21 @@ main() {
   } else
     return;
 
-  cablecars = getEntArray("cablecar", "targetname");
-  cablecarkilltrigger = getEntArray("cable_car_kill_trigger", "targetname");
+  cablecars = getentarray("cablecar", "targetname");
+  cablecarkilltrigger = getentarray("cable_car_kill_trigger", "targetname");
   assert(isDefined(cablecars));
   assert(isDefined(cablecarkilltrigger));
   level.cablecardefaultangle = cablecars[0].angles;
   distancebetweencars = tracklength / cablecars.size;
 
-  if(getgametypesetting("allowMapScripting")) {
+  if(getgametypesetting("allowMapScripting"))
     currentdistanceforcar = 0;
-  } else {
+  else
     currentdistanceforcar = distancebetweencars * 0.8;
-  }
 
   for(i = 0; i < cablecars.size; i++) {
     cablecar = cablecars[i];
-    cablecar thread waitthenplayFX(0.1, level.cablecarlightsfx, "tag_origin");
+    cablecar thread waitthenplayfx(0.1, level.cablecarlightsfx, "tag_origin");
     cablecar.killtrigger = getclosest(cablecar.origin, cablecarkilltrigger);
     assert(isDefined(cablecar.killtrigger));
     cablecar.killtrigger enablelinkto();
@@ -71,20 +70,19 @@ main() {
 
     grip = spawn("script_model", cablecar.origin);
 
-    if(cablecar.nextnodeindex >= level.cablecartrack.size - 1) {
+    if(cablecar.nextnodeindex >= level.cablecartrack.size - 1)
       grip.angles = vectortoangles(level.cablecartrack[cablecar.nextnodeindex - 1].origin - level.cablecartrack[cablecar.nextnodeindex].origin);
-    } else {
-      if(is_true(level.cablecartrack[cablecar.nextnodeindex].pause)) {
+    else {
+      if(is_true(level.cablecartrack[cablecar.nextnodeindex].pause))
         carnode = level.cablecartrack[cablecar.nextnodeindex + 2];
-      } else {
+      else
         carnode = level.cablecartrack[cablecar.nextnodeindex];
-      }
 
       grip.angles = vectortoangles(carnode.origin - cablecar.origin);
     }
 
     grip.origin = grip.origin - (0, cos(grip.angles[1]) * -12, 8);
-    grip setModel("dh_cable_car_top_piece");
+    grip setmodel("dh_cable_car_top_piece");
     cablecar.grip = grip;
 
     if(getgametypesetting("allowMapScripting")) {
@@ -97,12 +95,12 @@ main() {
   }
 }
 
-waitthenplayFX(time, fxnum, tag) {
+waitthenplayfx(time, fxnum, tag) {
   self endon("death");
   wait(time);
 
   for(;;) {
-    playFXOnTag(fxnum, self, tag);
+    playfxontag(fxnum, self, tag);
     level waittill("host_migration_end");
   }
 }
@@ -110,9 +108,8 @@ waitthenplayFX(time, fxnum, tag) {
 setpointontrack(distancealongtrack, tracklength) {
   pointontrack = level.cablecartrack[0].origin;
 
-  while(distancealongtrack > tracklength) {
+  while(distancealongtrack > tracklength)
     distancealongtrack = tracklength * -1;
-  }
 
   remainingdistance = distancealongtrack;
 
@@ -134,21 +131,18 @@ setpointontrack(distancealongtrack, tracklength) {
 
     nextnodeisstop = 0;
 
-    if(level.cablecartrack.size > i + 1) {
+    if(level.cablecartrack.size > i + 1)
       nextnodeisstop = is_true(level.cablecartrack[i + 1].pause);
-    }
 
     currentnodeisstop = 0;
 
-    if(is_true(cablecartracknode.pause)) {
+    if(is_true(cablecartracknode.pause))
       currentnodeisstop = 1;
-    }
 
     distance = cablecartracknode.stepdistance;
 
-    if(nextnodeisstop || currentnodeisstop) {
+    if(nextnodeisstop || currentnodeisstop)
       distance = distance * 2;
-    }
 
     if(!isDefined(distance)) {
       pointontrack = cablecartracknode.origin;
@@ -171,9 +165,8 @@ setpointontrack(distancealongtrack, tracklength) {
 
   self.angles = level.cablecardefaultangle;
 
-  if(distancealongtrack < level.distancetofirstrotate) {
+  if(distancealongtrack < level.distancetofirstrotate)
     self.angles = self.angles + vectorscale((0, 1, 0), 180.0);
-  }
 
   self.origin = pointontrack;
 }
@@ -187,13 +180,12 @@ createcablecarpath(cablecar) {
   movetime = -1;
 
   while(isDefined(currentnode)) {
-    cablecarnodestruct = spawnStruct();
+    cablecarnodestruct = spawnstruct();
     cablecarnodestruct.origin = currentnode.origin;
     level.cablecartrack[level.cablecartrack.size] = cablecarnodestruct;
 
-    if(isDefined(currentnode.target)) {
+    if(isDefined(currentnode.target))
       nextnode = getent(currentnode.target, "targetname");
-    }
 
     if(!isDefined(nextnode)) {
       break;
@@ -205,9 +197,8 @@ createcablecarpath(cablecar) {
     assert(movetime > 0);
     pauseratio = 1;
 
-    if(isDefined(nextnode.script_noteworthy) && nextnode.script_noteworthy == "stop") {
+    if(isDefined(nextnode.script_noteworthy) && nextnode.script_noteworthy == "stop")
       pauseratio = pauseratio * 2;
-    }
 
     if(isDefined(currentnode.script_noteworthy)) {
       if(currentnode.script_noteworthy == "stop") {
@@ -217,24 +208,21 @@ createcablecarpath(cablecar) {
         pauseratio = pauseratio * 2;
       } else if(currentnode.script_noteworthy == "rotate")
         cablecarnodestruct.rotate = 1;
-      else if(currentnode.script_noteworthy == "forceorigin") {
+      else if(currentnode.script_noteworthy == "forceorigin")
         cablecarnodestruct.forceorigin = 1;
-      } else {
-        if(isDefined(level.gondolasounds[currentnode.script_noteworthy])) {
+      else {
+        if(isDefined(level.gondolasounds[currentnode.script_noteworthy]))
           cablecarnodestruct.playsound = level.gondolasounds[currentnode.script_noteworthy];
-        }
 
-        if(isDefined(level.gondolaloopsounds[currentnode.script_noteworthy])) {
+        if(isDefined(level.gondolaloopsounds[currentnode.script_noteworthy]))
           cablecarnodestruct.playloopsound = level.gondolaloopsounds[currentnode.script_noteworthy];
-        }
       }
     }
 
     tracklength = tracklength + stepdistance * pauseratio;
 
-    if(is_true(cablecarnodestruct.rotate)) {
+    if(is_true(cablecarnodestruct.rotate))
       level.distancetofirstrotate = tracklength;
-    }
 
     cablecarnodestruct.movetime = movetime;
     previousnode = currentnode;
@@ -251,9 +239,8 @@ watchpronetouch() {
 
     if(isplayer(entity)) {
       if(entity.origin[2] < 940) {
-        if(entity getstance() == "prone") {
+        if(entity getstance() == "prone")
           entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_HIT_BY_OBJECT", 0, "gondola_mp");
-        }
       }
     }
   }
@@ -271,18 +258,16 @@ cablecarrun(cablecar) {
   grip.forceangles = 0;
 
   if(isDefined(cablecar.needtopauseatstart)) {
-    if(cablecar.needtopauseatstart > 0) {
+    if(cablecar.needtopauseatstart > 0)
       wait(cablecar.needtopauseatstart);
-    }
   }
 
   for(;;) {
     for(i = nextnodeindex; i < level.cablecartrack.size; i++) {
       nextnode = level.cablecartrack[i + 1];
 
-      if(!isDefined(nextnode)) {
+      if(!isDefined(nextnode))
         nextnode = level.cablecartrack[0];
-      }
 
       currentnode = level.cablecartrack[i];
       acceltime = 0;
@@ -292,29 +277,25 @@ cablecarrun(cablecar) {
       if(isDefined(nextnode.pause) || isDefined(currentnode) && isDefined(currentnode.pause)) {
         currentmovetime = currentmovetime * 2;
 
-        if(isDefined(nextnode.pause)) {
+        if(isDefined(nextnode.pause))
           deceltime = currentmovetime - 0.1;
-        }
 
-        if(isDefined(currentnode) && isDefined(currentnode.pause)) {
+        if(isDefined(currentnode) && isDefined(currentnode.pause))
           acceltime = currentmovetime - 0.1;
-        }
       }
 
       debug_star(nextnode.origin, (1, 1, 1), 1000);
 
       if(isDefined(currentnode)) {
-        if(isDefined(currentnode.playsound)) {
-          cablecar playSound(currentnode.playsound);
-        }
+        if(isDefined(currentnode.playsound))
+          cablecar playsound(currentnode.playsound);
 
         if(isDefined(currentnode.playloopsound)) {
           cablecar stoploopsound();
-          cablecar playSound("veh_cable_car_leave");
+          cablecar playsound("veh_cable_car_leave");
 
-          if(currentnode.playloopsound != "") {
-            cablecar playLoopSound(currentnode.playloopsound);
-          }
+          if(currentnode.playloopsound != "")
+            cablecar playloopsound(currentnode.playloopsound);
         }
       }
 
@@ -324,11 +305,10 @@ cablecarrun(cablecar) {
         cablecar.hidden = 1;
         cablecar.origin = cablecar.origin + vectorscale((0, 0, -1), 1000.0);
 
-        if(cablecar.angles[1] > 360) {
+        if(cablecar.angles[1] > 360)
           cablecar.angles = cablecar.angles - vectorscale((0, 1, 0), 180.0);
-        } else {
+        else
           cablecar.angles = cablecar.angles + vectorscale((0, 1, 0), 180.0);
-        }
       }
 
       if(isDefined(currentnode) && isDefined(nextnode)) {
@@ -355,13 +335,11 @@ cablecarrun(cablecar) {
       } else {
         heightoffset = -66.6;
 
-        if(is_true(cablecar.hidden)) {
+        if(is_true(cablecar.hidden))
           heightoffset = heightoffset + -1000;
-        }
 
-        if(deceltime > 0) {
+        if(deceltime > 0)
           cablecar thread prettyslowdown(currentmovetime - deceltime);
-        }
 
         grip thread hostmigrationawaremoveto(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
         cablecar hostmigrationawaremoveto(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, heightoffset), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
@@ -370,9 +348,8 @@ cablecarrun(cablecar) {
       if(cablecar.hidden == 1) {
         cablecar.hidden = 0;
 
-        if(is_true(cablecar.hidden)) {
+        if(is_true(cablecar.hidden))
           cablecar.origin = cablecar.origin - vectorscale((0, 0, -1), 1000.0);
-        }
 
         cablecar show();
         grip show();
@@ -410,9 +387,8 @@ hostmigrationawaremoveto(origin, movetime, acceltime, deceltime, waittime) {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
     mstimedifference = starttime + waittime * 1000 - endtime;
 
-    if(mstimedifference > 500) {
+    if(mstimedifference > 500)
       wait(mstimedifference / 1000);
-    }
   }
 }
 
@@ -423,12 +399,11 @@ waitendonmigration(time) {
 }
 
 prettyslowdown(waittime) {
-  if(waittime > 0) {
+  if(waittime > 0)
     wait(waittime);
-  }
 
   self stoploopsound();
-  self playSound(level.gondolasounds["slow_down"]);
+  self playsound(level.gondolasounds["slow_down"]);
   originalangle = self.angles;
   swingtime = getdvarfloatdefault("scr_cable_swing_time", 1.5);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time", 1.5);
@@ -441,8 +416,8 @@ prettyslowdown(waittime) {
 
 prettyspeedup() {
   self stoploopsound();
-  self playSound(level.gondolasounds["rollers_start"]);
-  self playLoopSound(level.gondolaloopsounds["start"]);
+  self playsound(level.gondolasounds["rollers_start"]);
+  self playloopsound(level.gondolaloopsounds["start"]);
   originalangle = self.angles;
   swingtime = getdvarfloatdefault("scr_cable_swing_time_up", 1.0);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time_up", 1.5);
@@ -464,22 +439,20 @@ cablecar_ai_watch() {
       for(i = 0; i < self.nodes.size; i++) {
         node = self.nodes[i];
 
-        foreach(team in level.teams) {
-          node setdangerous(team, 0);
-        }
+        foreach(team in level.teams)
+        node setdangerous(team, 0);
       }
     }
 
-    dir = vectornormalize(anglesToForward(self.angles));
+    dir = vectornormalize(anglestoforward(self.angles));
     dangerorigin = self.origin - dir * 196;
     nodes = getnodesinradius(dangerorigin, 256, 0, 196);
 
     for(i = 0; i < nodes.size; i++) {
       node = nodes[i];
 
-      foreach(team in level.teams) {
-        node setdangerous(team, 1);
-      }
+      foreach(team in level.teams)
+      node setdangerous(team, 1);
     }
 
     if(nodes.size > 0) {
@@ -502,9 +475,8 @@ cablecar_move_think(kill_trigger, checkmoving) {
     pixbeginevent("cablecar_move_think");
 
     if(checkmoving) {
-      if(self.ismoving == 0) {
+      if(self.ismoving == 0)
         self waittill("started_moving");
-      }
     }
 
     entities = getdamageableentarray(self.origin, 200);
@@ -576,18 +548,16 @@ cablecar_move_think(kill_trigger, checkmoving) {
         if(isDefined(entity.carried) && entity.carried == 1) {
           continue;
         }
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-        }
 
         continue;
       }
 
       if(isplayer(entity)) {
         if(entity getstance() == "prone") {
-          if(entity isonground() == 0) {
+          if(entity isonground() == 0)
             destroycorpses = 1;
-          }
         }
 
         entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_HIT_BY_OBJECT", 0, "gondola_mp");
@@ -606,14 +576,12 @@ cablecar_move_think(kill_trigger, checkmoving) {
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger)) {
+        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger))
           flag maps\mp\gametypes\ctf::returnflag();
-        }
       }
     } else if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(kill_trigger)) {
+      if(level.sdbomb.visuals[0] istouching(kill_trigger))
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
-      }
     }
 
     pixendevent();
@@ -621,13 +589,11 @@ cablecar_move_think(kill_trigger, checkmoving) {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -640,12 +606,12 @@ getwatcherforweapon(weapname) {
 }
 
 destroy_supply_crates() {
-  crates = getEntArray("care_package", "script_noteworthy");
+  crates = getentarray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
-        playFX(level._supply_drop_explosion_fx, crate.origin);
+        playfx(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
@@ -658,8 +624,7 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distancesquared(corpses[i].origin, self.origin) < 40000) {
+    if(distancesquared(corpses[i].origin, self.origin) < 40000)
       corpses[i] delete();
-    }
   }
 }

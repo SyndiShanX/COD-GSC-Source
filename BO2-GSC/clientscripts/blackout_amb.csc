@@ -221,7 +221,7 @@ set_knocked_out(suffix, snapshot) {
 bridge_walla_on_off() {
   wait 2;
   ent = spawn(0, (323, 984, 500), "script_origin");
-  ent playLoopSound("amb_walla_fighting_loud", 1);
+  ent playloopsound("amb_walla_fighting_loud", 1);
   level waittill("stop_Bwalla");
   wait 3;
   ent stoploopsound(5);
@@ -246,40 +246,36 @@ walla_vignettes() {
   location[11] = (1415, 1560, -352);
   location = array_randomize(location);
 
-  for(i = 0; i < location.size; i++) {
+  for(i = 0; i < location.size; i++)
     level thread play_walla_vignettes(location[i], undefined);
-  }
 
   oneshot = [];
-  oneshot[0] = spawnStruct();
+  oneshot[0] = spawnstruct();
   oneshot[0].location = (2343, 915, -250);
   oneshot[0].alias = "amb_walla_execution";
-  oneshot[1] = spawnStruct();
+  oneshot[1] = spawnstruct();
   oneshot[1].location = (1744, 2602, -475);
   oneshot[1].alias = "amb_walla_crying";
 
-  for(i = 0; i < oneshot.size; i++) {
+  for(i = 0; i < oneshot.size; i++)
     level thread play_walla_vignettes(oneshot[i], 1);
-  }
 }
 
 play_walla_vignettes(array_value, oneshot) {
   if(isDefined(oneshot)) {
     player = getlocalplayers()[0];
 
-    while(distance(player.origin, array_value.location) > 200) {
+    while(distance(player.origin, array_value.location) > 200)
       wait 0.5;
-    }
 
-    playSound(0, array_value.alias, array_value.location);
+    playsound(0, array_value.alias, array_value.location);
     return;
   }
 
-  if(randomintrange(0, 100) <= 75) {
+  if(randomintrange(0, 100) <= 75)
     playloopat("amb_walla_fighting_" + randomintrange(0, 2), array_value);
-  } else {
+  else
     playloopat("amb_walla_stuck", array_value);
-  }
 }
 
 random_alarms() {
@@ -304,9 +300,8 @@ random_alarms() {
   location[15] = (376, -237, 118);
   location[16] = (376, -237, 377);
 
-  for(i = 0; i < location.size; i++) {
+  for(i = 0; i < location.size; i++)
     playloopat("amb_alarm_looper", location[i]);
-  }
 }
 
 snd_start_autofx_audio() {
@@ -333,7 +328,7 @@ interrogation_lightflicker() {
 
 play_flicker(light, power) {
   level endon("INT_out");
-  light_id = light playLoopSound("amb_interrogation_light", 2);
+  light_id = light playloopsound("amb_interrogation_light", 2);
   setsoundvolume(light_id, 0.8);
   setsoundpitch(light_id, 1);
 
@@ -347,7 +342,7 @@ play_flicker(light, power) {
 
 play_off(light, power) {
   level waittill("INT_out");
-  playSound(0, "amb_interrogation_power_down", power.origin);
+  playsound(0, "amb_interrogation_power_down", power.origin);
   light delete();
   power delete();
 }
@@ -362,19 +357,19 @@ make_flicker_change(id, volume, pitch, rate, waittime) {
 
 play_generator(ent) {
   level endon("INT_out");
-  ent_id = ent playLoopSound("amb_interrogation_power", 2);
+  ent_id = ent playloopsound("amb_interrogation_power", 2);
   setsoundvolume(ent_id, 1);
   setsoundpitch(ent_id, 1);
 
   while(true) {
     level waittill("INT_flick");
-    playSound(0, "amb_interrogation_power_down", ent.origin);
+    playsound(0, "amb_interrogation_power_down", ent.origin);
     setsoundvolumerate(ent_id, 0.2);
     setsoundpitchrate(ent_id, 0.2);
     setsoundvolume(ent_id, 0);
     setsoundpitch(ent_id, 0.5);
     wait 2.5;
-    playSound(0, "amb_interrogation_power_up", ent.origin);
+    playsound(0, "amb_interrogation_power_up", ent.origin);
     setsoundvolumerate(ent_id, 0.8);
     setsoundpitchrate(ent_id, 0.8);
     setsoundvolume(ent_id, 1);
@@ -390,14 +385,14 @@ play_ceiling_water_splash() {
 
 snd_commotion_start() {
   sound_ent_commotion = spawn(0, (317, 318, 344), "script_origin");
-  sound_ent_commotion playLoopSound("amb_commotion_chat", 2);
+  sound_ent_commotion playloopsound("amb_commotion_chat", 2);
   level waittill("snd_argument");
   wait 41;
   sound_ent_commotion stoploopsound(8);
-  playSound(0, "amb_commotion_argument", sound_ent_commotion.origin);
+  playsound(0, "amb_commotion_argument", sound_ent_commotion.origin);
   snd_set_snapshot("default");
   level waittill("argument_done");
-  sound_ent_commotion playLoopSound("amb_ship_alarm", 0.1);
+  sound_ent_commotion playloopsound("amb_ship_alarm", 0.1);
 }
 
 sndmaskoff() {

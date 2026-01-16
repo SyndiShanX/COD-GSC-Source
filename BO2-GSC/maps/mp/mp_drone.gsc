@@ -29,11 +29,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_drone");
   maps\mp\_load::main();
   maps\mp\mp_drone_amb::main();
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -68,9 +68,8 @@ main() {
   spawncollision("collision_physics_wall_512x512x10", "collider", (-1091.83, 3083.21, 503), (360, 136.6, -180));
   spawncollision("collision_physics_wall_512x512x10", "collider", (-1504.82, 1671.75, 503), (1.0, 174.2, -180));
 
-  if(getgametypesetting("allowMapScripting")) {
+  if(getgametypesetting("allowMapScripting"))
     level maps\mp\mp_drone_doors::init();
-  }
 
   level.remotemotarviewleft = 35;
   level.remotemotarviewright = 35;
@@ -80,7 +79,7 @@ main() {
 
   foreach(welder in welders) {
     collision = spawn("script_model", welder);
-    collision setModel("fxanim_gp_robot_arm_welder_server_side_mod");
+    collision setmodel("fxanim_gp_robot_arm_welder_server_side_mod");
   }
 }
 
@@ -92,13 +91,11 @@ levelspawndvars(reset_dvars) {
 geo_changes() {
   rts_floor = getent("overwatch_floor", "targetname");
 
-  if(isDefined(rts_floor)) {
+  if(isDefined(rts_floor))
     rts_floor delete();
-  }
 
-  removes = getEntArray("rts_only", "targetname");
+  removes = getentarray("rts_only", "targetname");
 
-  foreach(removal in removes) {
-    removal delete();
-  }
+  foreach(removal in removes)
+  removal delete();
 }

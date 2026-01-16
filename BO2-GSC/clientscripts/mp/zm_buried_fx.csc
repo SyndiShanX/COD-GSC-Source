@@ -9,7 +9,8 @@
 #include clientscripts\mp\_fx;
 #include clientscripts\mp\zm_buried_amb;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("maps/zombie/fx_zombie_eye_single_blue");
@@ -19,9 +20,8 @@ precache_scripted_fx() {
   level._effect["player_possessed_eyes"] = loadfx("maps/zombie_buried/fx_buried_eye_stulhinger");
   gametype = getdvar(#"ui_gametype");
 
-  if(gametype == "zcleansed") {
+  if(gametype == "zcleansed")
     level._effect["blue_eyes_player"] = loadfx("maps/zombie/fx_zombie_eye_returned_blue");
-  }
 
   level._effect["headshot"] = loadfx("impacts/fx_flesh_hit");
   level._effect["headshot_nochunks"] = loadfx("misc/fx_zombie_bloodsplat");
@@ -152,9 +152,8 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }
 
 setup_prop_anims() {
@@ -173,19 +172,17 @@ setup_prop_anims() {
   waitforclient(0);
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     level thread play_fx_prop_anims(i);
-  }
 }
 
 play_fx_prop_anims(localclientnum) {
   whitelist = array("fxanim_zom_buried_catwalk_mod", "fxanim_zom_buried_fountain_mod", "fxanim_gp_piano_old_mod", "fxanim_zom_buried_wood_planks_mod", "fxanim_zom_board_drop_start_mod", "fxanim_zom_buried_board_drop_start_mod", "fxanim_zom_buried_fountain_mod", "p6_zm_bu_pipe_busted_b", "p6_zm_bu_pipe_64a", "fxanim_zom_buried_sign_general_store_mod", "fxanim_zom_buried_sign_sheriff_mod");
 
-  while(!clienthassnapshot(localclientnum)) {
+  while(!clienthassnapshot(localclientnum))
     wait 0.05;
-  }
 
-  fxanim_prop_candidates = getEntArray(localclientnum, "fxanim_dlc3", "targetname");
+  fxanim_prop_candidates = getentarray(localclientnum, "fxanim_dlc3", "targetname");
 
   if(getlocalplayers().size > 2) {
     ss_fxanim_props = [];
@@ -194,9 +191,8 @@ play_fx_prop_anims(localclientnum) {
       if(!isinarray(whitelist, prop.model)) {
         event = "none";
 
-        if(isDefined(prop.fxanim_waittill_1)) {
+        if(isDefined(prop.fxanim_waittill_1))
           event = prop.fxanim_waittill_1;
-        }
 
         println("WHITELIST : " + prop.model + " not contained in whitelist, event [" + event + "] - removed for lcn " + localclientnum);
 
@@ -214,16 +210,14 @@ play_fx_prop_anims(localclientnum) {
 
   foreach(prop in fxanim_prop_candidates) {
     if(isDefined(prop.fxanim_waittill_1)) {
-      if(!isinarray(level.fxanim_notifies_to_become_clientfields, prop.fxanim_waittill_1)) {
+      if(!isinarray(level.fxanim_notifies_to_become_clientfields, prop.fxanim_waittill_1))
         fxanim_props[fxanim_props.size] = prop;
-      } else {
-        if(!isDefined(level._fxanim_clientfield_props[prop.fxanim_waittill_1])) {
+      else {
+        if(!isDefined(level._fxanim_clientfield_props[prop.fxanim_waittill_1]))
           level._fxanim_clientfield_props[prop.fxanim_waittill_1] = [];
-        }
 
-        if(!isDefined(level._fxanim_clientfield_props[prop.fxanim_waittill_1][localclientnum])) {
+        if(!isDefined(level._fxanim_clientfield_props[prop.fxanim_waittill_1][localclientnum]))
           level._fxanim_clientfield_props[prop.fxanim_waittill_1][localclientnum] = [];
-        }
 
         level._fxanim_clientfield_props[prop.fxanim_waittill_1][localclientnum][level._fxanim_clientfield_props[prop.fxanim_waittill_1][localclientnum].size] = prop;
       }
@@ -252,9 +246,8 @@ fxanim_props_think(localclientnum) {
     level waittill(self.fxanim_waittill_1);
   }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(!isDefined(self.fxanim_scene_1)) {
     self delete();
@@ -266,9 +259,8 @@ fxanim_props_think(localclientnum) {
   if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
     self setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
 
-    if(self.fxanim_scene_1 == "rock_crusher") {
+    if(self.fxanim_scene_1 == "rock_crusher")
       self thread fxanim_fx_init(localclientnum);
-    }
   }
 }
 
@@ -276,13 +268,11 @@ fxanim_fx_init(localclientnum) {
   while(true) {
     self waittill("buried_fxanim", note);
 
-    if(note == "bar_01_spark") {
-      playFXOnTag(localclientnum, level._effect["crusher_sparks"], self, "bar_01_fx_jnt");
-    }
+    if(note == "bar_01_spark")
+      playfxontag(localclientnum, level._effect["crusher_sparks"], self, "bar_01_fx_jnt");
 
-    if(note == "pivot_a_spark") {
-      playFXOnTag(localclientnum, level._effect["crusher_sparks"], self, "pivot_a_fx_jnt");
-    }
+    if(note == "pivot_a_spark")
+      playfxontag(localclientnum, level._effect["crusher_sparks"], self, "pivot_a_fx_jnt");
   }
 }
 
@@ -297,16 +287,14 @@ randomized_fxanim_init(notice) {
   while(true) {
     wait(randomfloatrange(30, 60));
 
-    if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
+    if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1]))
       self setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
-    }
   }
 }
 
 fxanim_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  while(!isDefined(level._fxanim_clientfield_props) || !isDefined(level._fxanim_clientfield_props[fieldname])) {
+  while(!isDefined(level._fxanim_clientfield_props) || !isDefined(level._fxanim_clientfield_props[fieldname]))
     wait 0.05;
-  }
 
   ents = level._fxanim_clientfield_props[fieldname][localclientnum];
 
@@ -319,9 +307,8 @@ fxanim_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsna
   if(binitialsnap || bwasdemojump || bnewent) {
     timeval = 1.0;
 
-    if(!newval) {
+    if(!newval)
       timeval = 0.0;
-    }
 
     foreach(ent in ents) {
       if(!isDefined(ent.has_anim_tree)) {
@@ -337,18 +324,16 @@ fxanim_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsna
       if(localclientnum == 0) {
         val = 0;
 
-        if(newval) {
+        if(newval)
           val = 1;
-        }
 
         clientscripts\mp\zm_buried_amb::fxanim_loop_audio(fieldname, val);
         handle_fxanim_exploders(fieldname, val);
       }
     }
   } else if(newval) {
-    if(isDefined(ents[0].fxanim_wait)) {
+    if(isDefined(ents[0].fxanim_wait))
       wait(ents[0].fxanim_wait);
-    }
 
     foreach(ent in ents) {
       if(isDefined(ent)) {
@@ -357,9 +342,8 @@ fxanim_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsna
           ent.has_anim_tree = 1;
         }
 
-        if(isDefined(ent.fxanim_scene_1)) {
+        if(isDefined(ent.fxanim_scene_1))
           ent setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"][ent.fxanim_scene_1], 1.0, 0.0, 1.0);
-        }
       }
 
       if(localclientnum == 0) {
@@ -372,9 +356,8 @@ fxanim_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsna
     handle_fxanim_exploders(fieldname, val);
 
     foreach(ent in ents) {
-      if(isDefined(ent) && isDefined(ent.fxanim_scene_1) && isDefined(level.scr_anim["fxanim_props"][ent.fxanim_scene_1])) {
+      if(isDefined(ent) && isDefined(ent.fxanim_scene_1) && isDefined(level.scr_anim["fxanim_props"][ent.fxanim_scene_1]))
         ent clearanim(level.scr_anim["fxanim_props"][ent.fxanim_scene_1], 0);
-      }
     }
   }
 }
@@ -383,9 +366,8 @@ handle_fxanim_exploders(fieldname, val) {
   if(!isDefined(level._fxanim_exploders[fieldname])) {
     return;
   }
-  if(val) {
+  if(val)
     clientscripts\mp\_fx::activate_exploder(level._fxanim_exploders[fieldname]);
-  } else {
+  else
     clientscripts\mp\_fx::deactivate_exploder(level._fxanim_exploders[fieldname]);
-  }
 }

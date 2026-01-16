@@ -13,12 +13,12 @@
 #namespace animation;
 
 function autoexec __init__sytem__() {
-  system::register("animation", &__init__, undefined, undefined);
+  system::register("animation", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int", &cf_cracks_on, 0, 0);
-  clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int", &cf_cracks_off, 0, 0);
+  clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int", & cf_cracks_on, 0, 0);
+  clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int", & cf_cracks_off, 0, 0);
   setup_notetracks();
 }
 
@@ -43,7 +43,7 @@ function _play(animation, v_origin_or_ent = self, v_angles_or_tag, n_rate = 1, n
     self animscripted("_anim_notify_", v_origin_or_ent, v_angles_or_tag, animation, n_blend_in, n_rate);
   } else {
     if(isstring(v_angles_or_tag)) {
-      assert(isDefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
+      assert(isdefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
       v_pos = v_origin_or_ent gettagorigin(v_angles_or_tag);
       v_ang = v_origin_or_ent gettagangles(v_angles_or_tag);
       self.origin = v_pos;
@@ -51,7 +51,7 @@ function _play(animation, v_origin_or_ent = self, v_angles_or_tag, n_rate = 1, n
       b_link = 1;
       self animscripted("_anim_notify_", self.origin, self.angles, animation, n_blend_in, n_rate);
     } else {
-      v_angles = (isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
+      v_angles = (isdefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
       self animscripted("_anim_notify_", v_origin_or_ent.origin, v_angles, animation, n_blend_in, n_rate);
     }
   }
@@ -77,17 +77,17 @@ function private waittill_end() {
 
 function _get_align_ent(e_align) {
   e = self;
-  if(isDefined(e_align)) {
+  if(isdefined(e_align)) {
     e = e_align;
   }
-  if(!isDefined(e.angles)) {
+  if(!isdefined(e.angles)) {
     e.angles = (0, 0, 0);
   }
   return e;
 }
 
-function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isDefined(self.angles) ? self.angles : (0, 0, 0))) {
-  s = spawnStruct();
+function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isdefined(self.angles) ? self.angles : (0, 0, 0))) {
+  s = spawnstruct();
   if(isvec(v_origin_or_ent)) {
     assert(isvec(v_angles_or_tag), "");
     s.origin = v_origin_or_ent;
@@ -102,7 +102,7 @@ function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isDefi
       s.angles = e_align.angles;
     }
   }
-  if(!isDefined(s.angles)) {
+  if(!isdefined(s.angles)) {
     s.angles = (0, 0, 0);
   }
   return s;
@@ -120,21 +120,21 @@ function play_siege(str_anim, str_shot = "default", n_rate = 1, b_loop = 0) {
 }
 
 function add_notetrack_func(funcname, func) {
-  if(!isDefined(level._animnotifyfuncs)) {
+  if(!isdefined(level._animnotifyfuncs)) {
     level._animnotifyfuncs = [];
   }
-  assert(!isDefined(level._animnotifyfuncs[funcname]), "");
+  assert(!isdefined(level._animnotifyfuncs[funcname]), "");
   level._animnotifyfuncs[funcname] = func;
 }
 
 function add_global_notetrack_handler(str_note, func, ...) {
-  if(!isDefined(level._animnotetrackhandlers)) {
+  if(!isdefined(level._animnotetrackhandlers)) {
     level._animnotetrackhandlers = [];
   }
-  if(!isDefined(level._animnotetrackhandlers[str_note])) {
+  if(!isdefined(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = [];
   }
-  if(!isDefined(level._animnotetrackhandlers[str_note])) {
+  if(!isdefined(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = [];
   } else if(!isarray(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = array(level._animnotetrackhandlers[str_note]);
@@ -143,7 +143,7 @@ function add_global_notetrack_handler(str_note, func, ...) {
 }
 
 function call_notetrack_handler(str_note) {
-  if(isDefined(level._animnotetrackhandlers) && isDefined(level._animnotetrackhandlers[str_note])) {
+  if(isdefined(level._animnotetrackhandlers) && isdefined(level._animnotetrackhandlers[str_note])) {
     foreach(handler in level._animnotetrackhandlers[str_note]) {
       func = handler[0];
       args = handler[1];
@@ -185,24 +185,24 @@ function call_notetrack_handler(str_note) {
 }
 
 function setup_notetracks() {
-  add_notetrack_func("flag::set", &flag::set);
-  add_notetrack_func("flag::clear", &flag::clear);
-  add_notetrack_func("postfx::PlayPostFxBundle", &postfx::playpostfxbundle);
-  add_notetrack_func("postfx::StopPostFxBundle", &postfx::stoppostfxbundle);
-  add_global_notetrack_handler("red_cracks_on", &cracks_on, "red");
-  add_global_notetrack_handler("green_cracks_on", &cracks_on, "green");
-  add_global_notetrack_handler("blue_cracks_on", &cracks_on, "blue");
-  add_global_notetrack_handler("all_cracks_on", &cracks_on, "all");
-  add_global_notetrack_handler("red_cracks_off", &cracks_off, "red");
-  add_global_notetrack_handler("green_cracks_off", &cracks_off, "green");
-  add_global_notetrack_handler("blue_cracks_off", &cracks_off, "blue");
-  add_global_notetrack_handler("all_cracks_off", &cracks_off, "all");
+  add_notetrack_func("flag::set", & flag::set);
+  add_notetrack_func("flag::clear", & flag::clear);
+  add_notetrack_func("postfx::PlayPostFxBundle", & postfx::playpostfxbundle);
+  add_notetrack_func("postfx::StopPostFxBundle", & postfx::stoppostfxbundle);
+  add_global_notetrack_handler("red_cracks_on", & cracks_on, "red");
+  add_global_notetrack_handler("green_cracks_on", & cracks_on, "green");
+  add_global_notetrack_handler("blue_cracks_on", & cracks_on, "blue");
+  add_global_notetrack_handler("all_cracks_on", & cracks_on, "all");
+  add_global_notetrack_handler("red_cracks_off", & cracks_off, "red");
+  add_global_notetrack_handler("green_cracks_off", & cracks_off, "green");
+  add_global_notetrack_handler("blue_cracks_off", & cracks_off, "blue");
+  add_global_notetrack_handler("all_cracks_off", & cracks_off, "all");
 }
 
 function handle_notetracks() {
   level endon("demo_jump");
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("_anim_notify_", str_note);
     if(str_note != "end" && str_note != "loop_end") {
       self thread call_notetrack_handler(str_note);

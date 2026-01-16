@@ -18,19 +18,19 @@ function main() {
   clientfield::register("world", "light_show", 21000, 2, "int");
   level flag::init("show_morse_code");
   init_morse_code();
-  while(!level flag::exists("start_zombie_round_logic")) {
+  while (!level flag::exists("start_zombie_round_logic")) {
     wait(0.5);
   }
   level flag::wait_till("start_zombie_round_logic");
-  chamber_discs = getEntArray("crypt_puzzle_disc", "script_noteworthy");
+  chamber_discs = getentarray("crypt_puzzle_disc", "script_noteworthy");
   lit_discs = [];
   foreach(disc in chamber_discs) {
-    if(isDefined(disc.script_int)) {
+    if(isdefined(disc.script_int)) {
       lit_discs[disc.script_int - 1] = disc;
     }
   }
   level flag::wait_till_any(array("ee_all_staffs_upgraded", "show_morse_code"));
-  while(true) {
+  while (true) {
     clientfield::set("light_show", 1);
     if(randomint(100) < 10) {
       turn_all_lights_off(lit_discs);
@@ -109,18 +109,18 @@ function phrase_convert_to_cipher(str_phrase, str_key) {
   alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   alphabet_vals = [];
   num = 0;
-  for(i = 0; i < alphabet.size; i++) {
+  for (i = 0; i < alphabet.size; i++) {
     letter = alphabet[i];
     alphabet_vals[letter] = num;
     num++;
   }
   encrypted_phrase = [];
   j = 0;
-  for(i = 0; i < str_phrase.size; i++) {
+  for (i = 0; i < str_phrase.size; i++) {
     cipher_letter = str_key[j % str_key.size];
     original_letter = str_phrase[i];
     n_original_letter = alphabet_vals[original_letter];
-    if(!isDefined(n_original_letter)) {
+    if(!isdefined(n_original_letter)) {
       encrypted_phrase[encrypted_phrase.size] = original_letter;
       continue;
     }
@@ -133,11 +133,11 @@ function phrase_convert_to_cipher(str_phrase, str_key) {
 }
 
 function light_show_morse(a_discs, message) {
-  for(i = 0; i < message.size; i++) {
+  for (i = 0; i < message.size; i++) {
     letter = message[i];
     letter_code = level.morse_letters[letter];
-    if(isDefined(letter_code)) {
-      for(j = 0; j < letter_code.size; j++) {
+    if(isdefined(letter_code)) {
+      for (j = 0; j < letter_code.size; j++) {
         turn_all_lights_on(a_discs);
         if(letter_code[j] == ".") {
           wait(0.2);

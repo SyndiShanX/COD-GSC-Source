@@ -228,9 +228,8 @@ intro_begin() {
   wait 0.2;
 
   foreach(var_56 in var_0) {
-    if(isDefined(var_56.magic_bullet_shield)) {
+    if(isDefined(var_56.magic_bullet_shield))
       var_56 maps\_utility::stop_magic_bullet_shield();
-    }
 
     var_56 delete();
   }
@@ -248,32 +247,26 @@ intro_begin() {
   common_scripts\utility::flag_set("stop_red_flickering_light");
   level.playertank waittillmatch("single anim", "end");
 
-  if(isDefined(var_51)) {
+  if(isDefined(var_51))
     var_51 delete();
-  }
 
-  if(isDefined(var_52)) {
+  if(isDefined(var_52))
     var_52 delete();
-  }
 
-  if(isDefined(var_54)) {
+  if(isDefined(var_54))
     var_54 delete();
-  }
 
-  if(isDefined(var_50)) {
+  if(isDefined(var_50))
     var_50 delete();
-  }
 
-  if(isDefined(var_53)) {
+  if(isDefined(var_53))
     var_53 delete();
-  }
 
   common_scripts\utility::flag_wait("crash_site_end");
 
   if(isDefined(var_49)) {
-    if(isDefined(var_49.magic_bullet_shield)) {
+    if(isDefined(var_49.magic_bullet_shield))
       var_49 maps\_utility::stop_magic_bullet_shield();
-    }
 
     var_49 delete();
   }
@@ -485,9 +478,8 @@ crashedtank_waits() {
   stopFXOnTag(level._effect["vfx_tank_landing_dust"], self, "tag_origin");
   common_scripts\utility::flag_wait("crash_site_end");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 playerc17_waits() {
@@ -579,17 +571,15 @@ tank_deploy_chutes(var_0) {
   var_1 thread maps\_anim::anim_single_solo(var_3, "pilot_chute_deploy");
   self waittillmatch("single anim", "spawn_main_chutes");
 
-  foreach(var_7 in var_4) {
-    var_7 show();
-  }
+  foreach(var_7 in var_4)
+  var_7 show();
 
   var_1 thread maps\_anim::anim_single(var_4, "main_chute_deploy");
   common_scripts\utility::flag_wait("crash_site_end");
   var_3 delete();
 
-  foreach(var_7 in var_4) {
-    var_7 delete();
-  }
+  foreach(var_7 in var_4)
+  var_7 delete();
 }
 
 intro_cleanup() {
@@ -683,9 +673,8 @@ setup_bullet_pinholes() {
         continue;
       }
 
-      if(var_2.script_parameters == "strafe_2_bullet_tags") {
+      if(var_2.script_parameters == "strafe_2_bullet_tags")
         level.strafe_2_bullet_tags = common_scripts\utility::array_add(level.strafe_2_bullet_tags, var_2);
-      }
     }
   }
 }
@@ -704,18 +693,16 @@ bullet_strafe_start() {
 start_strafe_1() {
   level.strafe_1_bullet_tags = sortbydistance(level.strafe_1_bullet_tags, level.player.origin);
 
-  foreach(var_1 in level.strafe_1_bullet_tags) {
-    var_1 thread bullet_strafe_start();
-  }
+  foreach(var_1 in level.strafe_1_bullet_tags)
+  var_1 thread bullet_strafe_start();
 }
 
 start_strafe_2() {
   level.strafe_2_bullet_tags = sortbydistance(level.strafe_2_bullet_tags, level.player.origin);
   level.strafe_2_bullet_tags = common_scripts\utility::array_reverse(level.strafe_2_bullet_tags);
 
-  foreach(var_1 in level.strafe_2_bullet_tags) {
-    var_1 thread bullet_strafe_start();
-  }
+  foreach(var_1 in level.strafe_2_bullet_tags)
+  var_1 thread bullet_strafe_start();
 }
 
 cleanup_bullet_pinhole_stuff() {
@@ -729,15 +716,13 @@ saf_c17_lower_backdoor_top_setup(var_0) {
   var_1 = getent("saf_c17_lower_backdoor_top", "script_noteworthy");
   var_2 = getEntArray("saf_c17_lower_backdoor_top_script_model", "script_noteworthy");
 
-  foreach(var_4 in var_2) {
-    var_4 linkto(var_1);
-  }
+  foreach(var_4 in var_2)
+  var_4 linkto(var_1);
 
   common_scripts\utility::flag_wait("cargo_doors_opened");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     wait(var_0);
-  }
 
   common_scripts\utility::exploder(2006);
   var_1 rotateroll(30, 8.0);
@@ -750,15 +735,13 @@ saf_c17_lower_backdoor_setup(var_0) {
   var_1 = getent("saf_c17_lower_backdoor", "script_noteworthy");
   var_2 = getEntArray("saf_c17_lower_backdoor_script_model", "script_noteworthy");
 
-  foreach(var_4 in var_2) {
-    var_4 linkto(var_1);
-  }
+  foreach(var_4 in var_2)
+  var_4 linkto(var_1);
 
   common_scripts\utility::flag_wait("cargo_doors_opened");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     wait(var_0);
-  }
 
   var_1 rotateroll(30, 8.0);
   level waittill("stop_camera_roll");

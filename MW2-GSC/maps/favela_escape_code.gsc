@@ -14,15 +14,15 @@
 triggered_hostile_bursts_setup() {
   triggered_hostile_burst_setup_lines();
 
-  allents = getEntArray();
+  allents = GetEntArray();
 
-  while(!isDefined(level.struct_class_names)) {
+  while (!IsDefined(level.struct_class_names)) {
     wait(0.05);
   }
 
   trigs = [];
   foreach(ent in allents) {
-    if(!isDefined(ent.code_classname)) {
+    if(!isdefined(ent.code_classname)) {
       continue;
     }
 
@@ -32,14 +32,14 @@ triggered_hostile_bursts_setup() {
   }
 
   foreach(trig in trigs) {
-    if(!isDefined(trig.target)) {
+    if(!IsDefined(trig.target)) {
       continue;
     }
 
     orgs = GetStructArray(trig.target, "targetname");
 
     foreach(org in orgs) {
-      if(isDefined(org.script_noteworthy) && org.script_noteworthy == "hostile_burst") {
+      if(IsDefined(org.script_noteworthy) && org.script_noteworthy == "hostile_burst") {
         trig thread triggered_hostile_burst(org);
       }
     }
@@ -127,12 +127,12 @@ triggered_hostile_burst(org) {
   }
 
   burst = undefined;
-  if(isDefined(org.script_parameters)) {
+  if(IsDefined(org.script_parameters)) {
     burst = org.script_parameters;
   }
 
-  if(!isDefined(burst)) {
-    if(!isDefined(level.triggeredHostileBurstIndex)) {
+  if(!IsDefined(burst)) {
+    if(!IsDefined(level.triggeredHostileBurstIndex)) {
       level.triggeredHostileBurstIndex = 0;
     }
 
@@ -156,7 +156,7 @@ favesc_combat_music() {
   alias = "favelaescape_combat";
   tracktime = MusicLength(alias);
 
-  while(!flag("market_evac_insidepath_start")) {
+  while (!flag("market_evac_insidepath_start")) {
     MusicPlayWrapper(alias);
     wait(tracktime);
     music_stop(1);
@@ -292,14 +292,14 @@ radiotower_stop_roof_respawners() {
   killsBeforeShutdown = 5;
 
   // this spawnfunc will track their deaths
-  roofspawners = getEntArray("spawner_radiotower_wave1", "targetname");
+  roofspawners = GetEntArray("spawner_radiotower_wave1", "targetname");
   array_thread(roofspawners, ::add_spawn_function, ::radiotower_roofguy_spawnfunc);
 
-  if(!isDefined(level.roofGuysKilled)) {
+  if(!IsDefined(level.roofGuysKilled)) {
     level.roofGuysKilled = 0;
   }
 
-  while(level.roofGuysKilled < killsBeforeShutdown) {
+  while (level.roofGuysKilled < killsBeforeShutdown) {
     wait(0.1);
   }
 
@@ -343,7 +343,7 @@ radiotower_runup_scout() {
 
   guy waittill("goal");
 
-  if(isDefined(guy)) {
+  if(IsDefined(guy)) {
     guy clear_ignore_everything();
     guy.ignoreme = false;
     guy.fixednode = false;
@@ -374,7 +374,7 @@ radiotower_doorkick_1() {
   // timer, dot (fov = 80)
   tracer waittill_player_lookat_for_time(1, 0.7);
 
-  spawners = getEntArray("spawner_radiotower_doorkick_1", "targetname");
+  spawners = GetEntArray("spawner_radiotower_doorkick_1", "targetname");
   door = GetEnt("sbmodel_radiotower_doorkick_1", "targetname");
   kickRef = GetStruct("struct_radiotower_doorkick_1_animref", "targetname");
 
@@ -407,6 +407,7 @@ radiotower_curtainpull_1() {
   trigger_wait("trig_radiotower_rooftop_spawn", "script_noteworthy");
 
   spawner spawn_ai();
+
 }
 
 distant_curtainpull_waitfunc(guy, node) {
@@ -425,7 +426,7 @@ radiotower_hiding_door_guy_cleanup() {
 
   worldOrigin = (4374, 1252, 1060);
 
-  ents = getEntArray("hiding_door_spawner", "script_noteworthy");
+  ents = GetEntArray("hiding_door_spawner", "script_noteworthy");
   spawner = getclosest(worldOrigin, ents);
 
   door_clips = level._hiding_door_pushplayer_clips;
@@ -447,7 +448,7 @@ radiotower_hiding_door_guy_cleanup_cancel(spawner, killtrig) {
 }
 
 radiotower_gate_open(doFx) {
-  if(!isDefined(doFx)) {
+  if(!IsDefined(doFx)) {
     doFx = true;
   }
 
@@ -458,7 +459,7 @@ radiotower_gate_open(doFx) {
 
   gates[0] = gateLeft;
   gates[1] = gateRight;
-  gates[0] playSound("scn_favela_escape_wood_gate");
+  gates[0] PlaySound("scn_favela_escape_wood_gate");
   array_thread(gates, ::sbmodel_rotate, openTime);
 
   if(doFx) {
@@ -517,7 +518,7 @@ radiotower_enemy_vehicles_badplaces() {
     names[names.size] = badplaceName;
   }
 
-  while(!flag("radiotower_vehicle1_donut_done") && self.health > 0 && self Vehicle_GetSpeed() > 1) {
+  while (!flag("radiotower_vehicle1_donut_done") && self.health > 0 && self Vehicle_GetSpeed() > 1) {
     wait(0.1);
   }
 
@@ -548,7 +549,7 @@ radiotower_technical_setup() {
 
   // find the gunner
   gunner = self vehicle_get_gunner();
-  ASSERT(isDefined(gunner));
+  ASSERT(IsDefined(gunner));
 
   self ent_flag_init("godoff");
   self thread technical_temp_invincibility(gunner);
@@ -568,7 +569,7 @@ technical_waittill_stopped() {
 
   self waitfor_some_speed();
 
-  while(self Vehicle_GetSpeed() > 0) {
+  while (self Vehicle_GetSpeed() > 0) {
     wait(0.05);
   }
 
@@ -608,11 +609,11 @@ technical_temp_invincibility(gunner) {
   self thread reset_health_at_end_node();
   self thread reset_health_at_low_speed();
 
-  while(isDefined(self) && !self.resetHealth && !self ent_flag("godoff")) {
+  while (IsDefined(self) && !self.resetHealth && !self ent_flag("godoff")) {
     wait(0.05);
   }
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self thread maps\_vehicle::godoff();
     self vehicle_set_health(1500);
     self notify("technical_health_reset");
@@ -627,7 +628,7 @@ vehicle_rider_reset_health(vehicle, gunner) {
   self.allowdeath = true;
 
   // hack to fix gunner pain anims snapping them back to the turret
-  if(isDefined(gunner) && self == gunner) {
+  if(IsDefined(gunner) && self == gunner) {
     self.health = 1;
   } else {
     self.health = 150;
@@ -666,7 +667,7 @@ waitfor_low_speed() {
   self endon("death");
   self endon("technical_health_reset");
 
-  while(self Vehicle_GetSpeed() > 2) {
+  while (self Vehicle_GetSpeed() > 2) {
     wait(0.1);
   }
 }
@@ -675,7 +676,7 @@ waitfor_some_speed() {
   self endon("death");
   self endon("technical_health_reset");
 
-  while(self Vehicle_GetSpeed() < 1) {
+  while (self Vehicle_GetSpeed() < 1) {
     wait(0.1);
   }
 }
@@ -750,9 +751,9 @@ radiotower_enemy_callout_rooftop() {
 
   /*
   startTime = GetTime();
-  	
+	
   flag_waitopen( "scripted_dialogue" );
-  	
+	
   if( seconds( GetTime() - startTime ) < 0.5 )
   {
   	wait( 2 );
@@ -778,12 +779,12 @@ radiotower_enemies_retreat() {
   // don't retreat until after the second vehicle shows up
   flag_wait("radiotower_escape_technical_2_arrival");
 
-  while(get_alive_enemies().size >= 6) {
+  while (get_alive_enemies().size >= 6) {
     wait(0.1);
   }
 
   // turn off triggers in case player comes back through here for some reason
-  spawntrigs = getEntArray("trig_radiotower_cleanup_at_exit", "script_noteworthy");
+  spawntrigs = GetEntArray("trig_radiotower_cleanup_at_exit", "script_noteworthy");
   array_thread(spawntrigs, ::trigger_off);
 
   // activate killspawner
@@ -831,7 +832,7 @@ radiotower_enemies_retreat() {
   flag_set("radiotower_escape_moveup");
 
   // turn off triggers that can send friendlies back after we force them forward
-  trigs = getEntArray("trig_radiotower_escape_removeAtExit", "targetname");
+  trigs = GetEntArray("trig_radiotower_escape_removeAtExit", "targetname");
   array_thread(trigs, ::trigger_off);
 
   // put soap on the right color chain, if the player didn't hit that trigger already
@@ -839,7 +840,7 @@ radiotower_enemies_retreat() {
 
   // move friendlies up if the player hasn't already
   trig = GetEnt("trig_script_color_allies_b5", "targetname");
-  if(isDefined(trig)) {
+  if(IsDefined(trig)) {
     trig notify("trigger");
   }
 }
@@ -891,7 +892,7 @@ vista1_door1_kick() {
 
   door = GetEnt("sbmodel_vista1_door1", "targetname");
   animref = GetStruct("struct_vista1_door1_animref", "targetname");
-  spawners = getEntArray("spawner_vista1_door1_houseguy", "targetname");
+  spawners = GetEntArray("spawner_vista1_door1_houseguy", "targetname");
 
   thread door_kick_housespawn(spawners, door, animref);
 }
@@ -952,7 +953,7 @@ vista1_wavingguy_cleanup() {
 street_roof1_doorkick() {
   trigger_wait_targetname_multiple("trig_street_roof1_doorkick");
 
-  spawners = getEntArray("spawner_street_roof1_doorkick", "targetname");
+  spawners = GetEntArray("spawner_street_roof1_doorkick", "targetname");
   door = GetEnt("sbmodel_street_roof1_doorkick", "targetname");
   kickRef = GetStruct("struct_street_roof1_doorkick_animref", "targetname");
 
@@ -965,7 +966,7 @@ street_mid_intersection_clearout() {
 
   thread street_mid_intersection_kill_inside_guys();
 
-  vols = getEntArray("volume_enemies_street_mid_intersection", "targetname");
+  vols = GetEntArray("volume_enemies_street_mid_intersection", "targetname");
   ASSERT(vols.size);
 
   array_thread(vols, ::street_mid_intersection_clearout_volume);
@@ -981,7 +982,7 @@ street_mid_intersection_clearout_volume() {
 
   clearoutWaitTime = milliseconds(5);
 
-  while(1) {
+  while (1) {
     wait(RandomFloatRange(0.5, 1)); // don't grab the aiarray at the same time for each volume
 
     ais = self get_ai_touching_volume("axis", "human");
@@ -995,8 +996,8 @@ street_mid_intersection_clearout_volume() {
         continue;
       }
 
-      if(isDefined(guy.volume_clearout)) {
-        if(GetTime() > guy.volume_clearout + clearoutWaitTime && !isDefined(guy.waitingToKill)) {
+      if(IsDefined(guy.volume_clearout)) {
+        if(GetTime() > guy.volume_clearout + clearoutWaitTime && !IsDefined(guy.waitingToKill)) {
           guy.waitingToKill = true;
           guy thread kill_when_player_not_looking();
         }
@@ -1015,7 +1016,7 @@ street_mid_intersection_clearout_volume() {
 kill_when_player_not_looking() {
   self endon("death");
 
-  while(within_fov(level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine["45"])) {
+  while (within_fov(level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine["45"])) {
     wait(RandomFloatRange(0.5, 2));
   }
 
@@ -1030,7 +1031,7 @@ vista2_technical_prethink() {
 vista2_technical() {
   arr = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(3);
   technical = arr[0];
-  ASSERT(isDefined(technical));
+  ASSERT(IsDefined(technical));
 
   technical thread radiotower_technical_setup();
 }
@@ -1190,7 +1191,7 @@ market_kill_extra_redshirts() {
   redshirts = get_nonhero_friends();
 
   singleguy = redshirts[0];
-  if(isDefined(singleguy)) {
+  if(IsDefined(singleguy)) {
     singleguy set_force_color("p");
   }
 
@@ -1217,7 +1218,7 @@ market_hero1_change_color() {
 market_door1() {
   trigger_wait_targetname("trig_market_door1");
 
-  door1_spawners = getEntArray("spawner_market_door_1", "targetname");
+  door1_spawners = GetEntArray("spawner_market_door_1", "targetname");
   door1 = GetEnt("sbmodel_market_door_1", "targetname");
   door1_physicsRef = GetStruct("struct_physicsref_market_door1", "targetname");
   door1_animRef = GetStruct("struct_animref_market_door1_kick", "targetname");
@@ -1256,7 +1257,7 @@ market_evac_dialogue() {
 }
 
 spawn_chopper(spawngroup, followPath) {
-  if(!isDefined(followPath)) {
+  if(!IsDefined(followPath)) {
     followPath = true;
   }
 
@@ -1268,7 +1269,7 @@ spawn_chopper(spawngroup, followPath) {
     arr = maps\_vehicle::scripted_spawn(spawngroup);
   }
   chopper = arr[0];
-  ASSERT(isDefined(chopper));
+  ASSERT(IsDefined(chopper));
 
   chopper.health = 2000000;
   Missile_CreateRepulsorEnt(chopper, 1150, 850);
@@ -1376,11 +1377,11 @@ market_evac_enemy_foreshadowing() {
   lineWaitMax = 13;
 
   spots = GetStructArray("struct_market_evac_foreshadow_dialoguespot", "targetname");
-  playOrg = spawn("script_origin", (0, 0, 0));
+  playOrg = Spawn("script_origin", (0, 0, 0));
 
   wait(RandomFloat(firstWaitMax));
 
-  while(!flag(killflag)) {
+  while (!flag(killflag)) {
     lines = array_randomize(lines);
     spots = array_randomize(spots);
     spotIndex = 0;
@@ -1391,7 +1392,7 @@ market_evac_enemy_foreshadowing() {
       }
 
       playOrg.origin = spots[spotIndex].origin;
-      playOrg playSound(line, "sound_done");
+      playOrg PlaySound(line, "sound_done");
       playOrg waittill("sound_done");
 
       if(spotIndex == (spots.size - 1)) {
@@ -1413,8 +1414,8 @@ market_evac_fakefire_smallarms() {
 }
 
 fakefire_smallarms_spot(flagname) {
-  if(!isDefined(flagname)) {
-    if(isDefined(self.script_flag)) {
+  if(!IsDefined(flagname)) {
+    if(IsDefined(self.script_flag)) {
       flagname = self.script_flag;
     }
   }
@@ -1423,7 +1424,7 @@ fakefire_smallarms_spot(flagname) {
     return;
   }
 
-  ASSERT(isDefined(flagname));
+  ASSERT(IsDefined(flagname));
 
   spot = self;
 
@@ -1439,12 +1440,12 @@ fakefire_smallarms_spot(flagname) {
 
   start = spot.origin;
 
-  while(!flag(flagname) && isDefined(level.chopper)) {
+  while (!flag(flagname) && IsDefined(level.chopper)) {
     weapon = get_random(weapons);
     burstShots = RandomIntRange(5, 12);
 
-    for(i = 0; i < burstShots; i++) {
-      if(!isDefined(level.chopper)) {
+    for (i = 0; i < burstShots; i++) {
+      if(!IsDefined(level.chopper)) {
         break;
       }
 
@@ -1454,16 +1455,16 @@ fakefire_smallarms_spot(flagname) {
       targetOrigin = (x, y, z);
 
       angles = VectorToAngles(targetOrigin - start);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       vec = vector_multiply(forward, 12);
       end = start + vec;
 
       // make sure we're not going to hit sarge or the player
-      trace = bulletTrace(spot.origin, end, true);
+      trace = BulletTrace(spot.origin, end, true);
       traceEnt = trace["entity"];
 
-      if(isDefined(traceEnt)) {
-        if(isDefined(level.sarge)) {
+      if(IsDefined(traceEnt)) {
+        if(IsDefined(level.sarge)) {
           if(traceEnt == level.sarge) {
             continue;
           }
@@ -1489,16 +1490,16 @@ market_evac_fakefire_rpgs() {
   // the ones with script_start set should go first
   fireSpots = [];
   foreach(spot in allSpots) {
-    if(isDefined(spot.script_start)) {
+    if(IsDefined(spot.script_start)) {
       fireSpots[fireSpots.size] = spot;
     }
   }
 
   // bubble sort by script_start so the highest ones go first
   lastIndex = fireSpots.size - 1;
-  for(i = 0; i < lastIndex; i++) // sort needs to add one to compare so the max is size-1
+  for (i = 0; i < lastIndex; i++) // sort needs to add one to compare so the max is size-1
   {
-    for(j = 0; j < lastIndex - i; j++) // don't look past the number of previous sorts, since they will be lowest
+    for (j = 0; j < lastIndex - i; j++) // don't look past the number of previous sorts, since they will be lowest
     {
       if(fireSpots[j + 1].script_start < fireSpots[j].script_start) {
         temp = fireSpots[j];
@@ -1529,11 +1530,11 @@ market_evac_fakefire_rpgs() {
     wait(RandomFloatRange(0.8, 1.5));
   }
 
-  while(!flag("market_evac_chopper_leaves_scene") && isDefined(level.chopper)) {
+  while (!flag("market_evac_chopper_leaves_scene") && IsDefined(level.chopper)) {
     fireSpots = array_randomize(fireSpots);
 
     foreach(spot in fireSpots) {
-      if(flag("market_evac_chopper_leaves_scene") || !isDefined(level.chopper)) {
+      if(flag("market_evac_chopper_leaves_scene") || !IsDefined(level.chopper)) {
         break;
       }
 
@@ -1560,14 +1561,14 @@ market_evac_remove_helperclip() {
 }
 
 market_evac_enemies() {
-  ambushers = getEntArray("ai_market_evac_ambusher", "script_noteworthy");
+  ambushers = GetEntArray("ai_market_evac_ambusher", "script_noteworthy");
   array_thread(ambushers, ::add_spawn_function, ::market_evac_enemy_spawnfunc);
 
   wait(1.5);
   trigger_activate_targetname("trig_market_evac_spawn1");
 
   /*
-  spawners_rpgs = getEntArray( "spawner_market_evac_ambush_rpg", "targetname" );
+  spawners_rpgs = GetEntArray( "spawner_market_evac_ambush_rpg", "targetname" );
   rpgers = spawn_group( spawners_rpgs );
   */
 
@@ -1580,7 +1581,7 @@ market_evac_enemies() {
 
   numGuysAliveBeforeContinuing = 2;
 
-  while(1) {
+  while (1) {
     marketguys = market_evac_get_active_enemies();
 
     guysFound = 0;
@@ -1610,7 +1611,7 @@ market_evac_get_active_enemies() {
 
   marketguys = [];
   foreach(guy in ais) {
-    if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == "ai_market_evac_ambusher") {
+    if(IsDefined(guy.script_noteworthy) && guy.script_noteworthy == "ai_market_evac_ambusher") {
       marketguys[marketguys.size] = guy;
     }
   }
@@ -1624,7 +1625,7 @@ market_evac_enemy_spawnfunc() {
   // make these guys less accurate so the event is easier
   self.baseaccuracy = self.baseaccuracy * 0.35;
 
-  if(isDefined(level.chopper)) {
+  if(IsDefined(level.chopper)) {
     self SetEntityTarget(level.chopper, 0.4);
   }
 
@@ -1633,9 +1634,9 @@ market_evac_enemy_spawnfunc() {
 }
 
 market_evac_housespawners() {
-  door1_spawners = getEntArray("spawner_market_evac_door1", "targetname");
-  door2_spawners = getEntArray("spawner_market_evac_door2", "targetname");
-  door3_spawners = getEntArray("spawner_market_evac_door3", "targetname");
+  door1_spawners = GetEntArray("spawner_market_evac_door1", "targetname");
+  door2_spawners = GetEntArray("spawner_market_evac_door2", "targetname");
+  door3_spawners = GetEntArray("spawner_market_evac_door3", "targetname");
   door1 = GetEnt("sbmodel_market_evac_door1", "targetname");
   door2 = GetEnt("sbmodel_market_evac_door2", "targetname");
   door3 = GetEnt("sbmodel_market_evac_door3", "targetname");
@@ -1663,11 +1664,11 @@ market_evac_bugplayer() {
   // "Roach! You can climb up over here!"
   lines[lines.size] = "favesc_cmt_climbuphere";
 
-  while(!flag(stopflag) && isDefined(level.sarge)) {
+  while (!flag(stopflag) && IsDefined(level.sarge)) {
     lines = array_randomize(lines);
 
     foreach(line in lines) {
-      while(Distance(level.player.origin, level.sarge.origin) < 256) {
+      while (Distance(level.player.origin, level.sarge.origin) < 256) {
         wait(1);
       }
 
@@ -1680,7 +1681,7 @@ market_evac_bugplayer() {
 }
 
 market_evac_playermantle_watch(zTest) {
-  while(level.player.origin[2] < zTest) {
+  while (level.player.origin[2] < zTest) {
     wait(0.05);
   }
 
@@ -1693,17 +1694,17 @@ market_evac_playermantle_helper(zTest) {
   NotifyOnCommand("mantle", "+gostand");
   NotifyOnCommand("mantle", "+moveup");
 
-  while(1) {
+  while (1) {
     if(level.player IsTouching(trig) && !level.player CanMantle() && level.player.origin[2] < zTest) {
       SetSavedDvar("hud_forceMantleHint", 1);
 
-      while(level.player IsTouching(trig)) {
+      while (level.player IsTouching(trig)) {
         level.player player_mantle_wait(trig);
         level.player ForceMantle();
         SetSavedDvar("hud_forceMantleHint", 0);
 
         // wait for mantle to be done
-        while(!level.player IsOnGround()) {
+        while (!level.player IsOnGround()) {
           wait(0.05);
         }
 
@@ -1726,7 +1727,7 @@ player_mantle_wait(trig) {
 player_left_trigger_notify(trig) {
   self endon("mantle");
 
-  while(self IsTouching(trig)) {
+  while (self IsTouching(trig)) {
     wait(0.05);
   }
 
@@ -1782,7 +1783,7 @@ roofrun_nag_dialogue() {
   nagIdx = 0;
   minWait = 10000;
   nextTime = -1;
-  while(1) {
+  while (1) {
     wait(0.1);
 
     lowSpeed = false;
@@ -1815,7 +1816,7 @@ roofrun_nag_dialogue() {
 }
 
 roofrun_waitfor_finish() {
-  while(level.runnersDone < level.friends.size) {
+  while (level.runnersDone < level.friends.size) {
     wait(0.05);
   }
 
@@ -1829,17 +1830,17 @@ roofrun_player_bigjump() {
   edgeref = GetStruct("struct_player_bigjump_edge_reference", "targetname");
   groundref = GetStruct("struct_player_recovery_animref", "targetname");
 
-  jumpForward = anglesToForward(edgeref.angles);
+  jumpForward = AnglesToForward(edgeref.angles);
   thread player_jump_watcher();
 
   // takes care of a player who missed the cool animated jump and just fell
   thread player_normalfall_watcher();
   level endon("player_fell_normally");
 
-  while(1) {
+  while (1) {
     breakout = false;
 
-    while(level.player IsTouching(jumpstart_trig)) {
+    while (level.player IsTouching(jumpstart_trig)) {
       flag_wait("player_jumping");
       if(player_leaps(jumpstart_trig, jumpForward, 0.915, true)) // 0.925
       {
@@ -1878,10 +1879,10 @@ roofrun_player_bigjump() {
   animstartangles = GetStartAngles(startpoint, startangles, anime_jump);
 
   // spawn our animref spot
-  animref = spawn("script_origin", startpoint);
+  animref = Spawn("script_origin", startpoint);
   animref.angles = startangles;
 
-  // spawn &set up the rig
+  // spawn & set up the rig
   player_rig = spawn_anim_model(animname, animstartorigin);
   player_rig.angles = animstartangles;
   player_rig Hide();
@@ -1909,7 +1910,7 @@ roofrun_player_bigjump() {
 
     flag_set("bigjump_sargeplayer_interact_start");
 
-    if(isDefined(level.sarge.animlooporg)) {
+    if(IsDefined(level.sarge.animlooporg)) {
       level.sarge.animlooporg notify("stop_loop");
     }
 
@@ -1934,7 +1935,7 @@ roofrun_player_bigjump_rumble() {
   level.player PlayRumbleOnEntity("artillery_rumble");
   wait(0.25);
   endTime = GetTime() + milliseconds(0.4);
-  while(GetTime() < endTime) {
+  while (GetTime() < endTime) {
     level.player PlayRumbleOnEntity("damage_light");
     wait(0.115);
   }
@@ -1973,14 +1974,14 @@ player_normalfall_watcher() {
 
 roofrun_player_recovery(player_rig, groundref) {
   // either we got here after the animated jump...
-  if(isDefined(player_rig)) {
+  if(IsDefined(player_rig)) {
     player_rig waittillmatch("single anim", "blackout");
   }
   // ...or we fell
   else {
     level.player EnableInvulnerability(); // don't die from the fall
 
-    while(!level.player IsOnGround()) {
+    while (!level.player IsOnGround()) {
       wait(0.05);
     }
 
@@ -2003,7 +2004,7 @@ roofrun_player_recovery(player_rig, groundref) {
   shockfile = "favela_escape_player_recovery";
   level.player Shellshock(shockfile, blacktime + 0.1);
 
-  if(!isDefined(groundref)) {
+  if(!IsDefined(groundref)) {
     groundref = GetStruct("struct_player_recovery_animref", "targetname");
   }
 
@@ -2027,7 +2028,7 @@ roofrun_player_recovery(player_rig, groundref) {
   animstartangles = GetStartAngles(groundref.origin, groundref.angles, recover_animation);
 
   // if the player fell, we need to set up the rig for the first time
-  if(!isDefined(player_rig)) {
+  if(!IsDefined(player_rig)) {
     player_rig = spawn_anim_model("player_bigjump", animstartorigin);
     player_rig.angles = animstartangles;
     level.player PlayerLinkToBlend(player_rig, "tag_player", 0.05);
@@ -2037,7 +2038,7 @@ roofrun_player_recovery(player_rig, groundref) {
   foreach(guy in level.friends) {
     guy notify("stop_loop");
 
-    if(isDefined(guy.animlooporg)) {
+    if(IsDefined(guy.animlooporg)) {
       guy.animlooporg notify("stop_loop");
     }
   }
@@ -2045,7 +2046,7 @@ roofrun_player_recovery(player_rig, groundref) {
 
   // delete chopper
   chopper = get_vehicle("veh_chopper_roofrun", "targetname");
-  if(isDefined(chopper)) {
+  if(IsDefined(chopper)) {
     chopper Delete();
   }
 
@@ -2103,7 +2104,7 @@ recovery_fov_change() {
 
 bigjump_save() {
   // we can force save since we are in a known state of goodness and safeness
-  SaveGame("bigjump_recovery", &"AUTOSAVE_AUTOSAVE");
+  SaveGame("bigjump_recovery", & "AUTOSAVE_AUTOSAVE");
 }
 
 roofrun_modulate_playerspeed(targetEnt) {
@@ -2127,7 +2128,7 @@ roofrun_modulate_playerspeed(targetEnt) {
   playerFailDist = 850;
   playerFailDmg = 75;
 
-  while(!flag("roofrun_done")) {
+  while (!flag("roofrun_done")) {
     distFromTarget = get_dist_to_plane_nearest_player(targetEnt);
 
     println(distFromTarget);
@@ -2135,7 +2136,7 @@ roofrun_modulate_playerspeed(targetEnt) {
     /* do damage if the player is too far back
     if( distFromTarget > playerFailDist )
     {
-    	forward = anglesToForward( level.player GetPlayerAngles() );
+    	forward = AnglesToForward( level.player GetPlayerAngles() );
     	backward = vector_multiply( forward, -1 );
     	dmgOrigin = level.player.origin + ( 0, 0, 50 );
     	dmgOrigin += vector_multiply( backward, 5000 );
@@ -2206,13 +2207,13 @@ get_fraction(value, min, max) {
 player_sprint_multiplier_blend(goal, time) {
   curr = GetDvarFloat("player_sprintSpeedScale");
 
-  if(isDefined(time)) {
+  if(IsDefined(time)) {
     range = goal - curr;
     interval = .05;
     numcycles = time / interval;
     fraction = range / numcycles;
 
-    while(abs(goal - curr) > abs(fraction * 1.1)) {
+    while (abs(goal - curr) > abs(fraction * 1.1)) {
       curr += fraction;
       SetSavedDvar("player_sprintSpeedScale", curr);
       wait interval;
@@ -2227,7 +2228,7 @@ roofrun_sarge(skipToBigJump) {
 
   self ent_flag_wait("roofrun_start");
 
-  if(!isDefined(skipToBigJump)) {
+  if(!IsDefined(skipToBigJump)) {
     skipToBigJump = false;
   }
 
@@ -2255,7 +2256,7 @@ roofrun_sarge(skipToBigJump) {
 
   // big jump
   animref = GetStruct("roofrun_bigjump3", "targetname");
-  temp = spawn("script_origin", animref.origin);
+  temp = Spawn("script_origin", animref.origin);
   temp.angles = animref.angles;
   animref = temp;
 
@@ -2290,7 +2291,7 @@ roofrun_hero1(skipToBigJump) {
 
   self ent_flag_wait("roofrun_start");
 
-  if(!isDefined(skipToBigJump)) {
+  if(!IsDefined(skipToBigJump)) {
     skipToBigJump = false;
   }
 
@@ -2332,7 +2333,7 @@ roofrun_redshirt(skipToBigJump) {
 
   self ent_flag_wait("roofrun_start");
 
-  if(!isDefined(skipToBigJump)) {
+  if(!IsDefined(skipToBigJump)) {
     skipToBigJump = false;
   }
 
@@ -2399,22 +2400,22 @@ roofrun_friendly_setup() {
 
   self scr_moveplaybackrate(1);
 
-  if(!isDefined(self.roofrunStoredVals)) {
+  if(!IsDefined(self.roofrunStoredVals)) {
     self.og_walkDistFacingMotion = self.walkDistFacingMotion;
   }
   self.walkDistFacingMotion = 0;
 
-  if(!isDefined(self.roofrunStoredVals)) {
+  if(!IsDefined(self.roofrunStoredVals)) {
     self.og_maxsightdistsqrd = self.maxsightdistsqrd;
   }
   self.maxsightdistsqrd = 0;
 
-  if(!isDefined(self.roofrunStoredVals)) {
+  if(!IsDefined(self.roofrunStoredVals)) {
     self.og_pathRandomPercent = self.pathRandomPercent;
   }
   self.pathRandomPercent = 0;
 
-  if(!isDefined(self.roofrunStoredVals)) {
+  if(!IsDefined(self.roofrunStoredVals)) {
     self.og_animname = self.animname;
   }
   self.animname = "freerunner";
@@ -2447,11 +2448,11 @@ roofrun_friendly_cleanup() {
 }
 
 player_leaps(trig, jump_forward, goodDot, checkIsOnGround) {
-  if(!isDefined(goodDot)) {
+  if(!IsDefined(goodDot)) {
     goodDot = 0.965;
   }
 
-  if(!isDefined(checkIsOnGround)) {
+  if(!IsDefined(checkIsOnGround)) {
     checkIsOnGround = true;
   }
 
@@ -2470,7 +2471,7 @@ player_leaps(trig, jump_forward, goodDot, checkIsOnGround) {
   // gotta jump straight
   player_angles = level.player GetPlayerAngles();
   player_angles = (0, player_angles[1], 0);
-  player_forward = anglesToForward(player_angles);
+  player_forward = anglestoforward(player_angles);
   dot = vectordot(player_forward, jump_forward);
   if(dot < goodDot) {
     return false;
@@ -2503,7 +2504,7 @@ bigjump_roof_anim(player_rig, animref) {
 }
 
 bigjump_roof_setup() {
-  ents = getEntArray("roof_fall", "targetname");
+  ents = GetEntArray("roof_fall", "targetname");
   // find the sbmodel
   sbmodel = undefined;
 
@@ -2514,7 +2515,7 @@ bigjump_roof_setup() {
     }
   }
 
-  ASSERT(isDefined(sbmodel));
+  ASSERT(IsDefined(sbmodel));
 
   ents = array_remove(ents, sbmodel);
 
@@ -2545,7 +2546,7 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
   blurTransTime = 0.5;
   waitMin = 0.75;
   waitMax = 1.25;
-  while(GetTime() < endtime) {
+  while (GetTime() < endtime) {
     SetBlur(blurHigh, blurTransTime);
     wait(RandomFloatRange(waitMin, waitMax));
     SetBlur(blurLow, blurTransTime);
@@ -2566,7 +2567,7 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
   dof_see_hands[ "farBlur" ] = 2.5;
   thread blend_dof( dof_start, dof_see_hands, 3 );
   SetBlur( 0, 3 );
-  	
+	
 
   flag_wait( "notetrack_player_lowerhands" );
   /*-----------------------
@@ -2590,7 +2591,7 @@ bigjump_heartbeat(waitTime) {
   beatTime = 1.5;
 
   endTime = GetTime() + milliseconds(waitTime);
-  while(GetTime() < endTime) {
+  while (GetTime() < endTime) {
     play_sound_in_space("breathing_heartbeat", level.player.origin);
 
     if(GetTime() < endTime) {
@@ -2605,7 +2606,7 @@ bigjump_heartbeat(waitTime) {
 
   tracker = 0;
 
-  while(!flag("player_recovery_done")) {
+  while (!flag("player_recovery_done")) {
     alias = "breathing_hurt";
 
     // just do a regular heartbeat on odd numbered beats
@@ -2640,7 +2641,7 @@ bigjump_dialogue(waitTime) {
 }
 
 bigjump_angrymob(waitTime) {
-  if(isDefined(waitTime)) {
+  if(IsDefined(waitTime)) {
     wait(waitTime);
   }
 
@@ -2664,7 +2665,7 @@ bigjump_angrymob_left_roof() {
   animref_center = GetStruct("struct_mob_roof_2", "targetname");
   animref_left = GetStruct("struct_mob_roof_1", "targetname");
   animref_right = GetStruct("struct_mob_roof_3", "targetname");
-  roofspawners = getEntArray("spawner_mob_left_roof", "targetname");
+  roofspawners = GetEntArray("spawner_mob_left_roof", "targetname");
 
   roofguys = spawn_group(roofspawners, true, false);
   ASSERT(roofguys.size == 4);
@@ -2683,7 +2684,7 @@ bigjump_angrymob_left_roof() {
 
 bigjump_angrymob_left_ground() {
   animref = GetEnt("animref_mob_left", "targetname");
-  spawners = getEntArray("spawner_mob_left", "targetname");
+  spawners = GetEntArray("spawner_mob_left", "targetname");
 
   anims = [];
   anims[anims.size] = "mob_left_A";
@@ -2708,7 +2709,7 @@ bigjump_angrymob_left_ground() {
 
 bigjump_angrymob_right_ground() {
   animref = GetEnt("animref_mob_right", "targetname");
-  spawners = getEntArray("spawner_mob_right", "targetname");
+  spawners = GetEntArray("spawner_mob_right", "targetname");
 
   anims = [];
   anims[anims.size] = "mob2_arc_A";
@@ -2764,7 +2765,7 @@ angrymob_animdone_think(anime, animref) {
   flag_wait("solorun_mob_start_shooting");
 
   /*
-  if( isDefined( animref ) )
+  if( IsDefined( animref ) )
   {
   	animref anim_stopanimscripted();
   }
@@ -2772,7 +2773,7 @@ angrymob_animdone_think(anime, animref) {
   self notify("stop_animmode");
   //self anim_stopanimscripted();
 
-  if(isDefined(self.angrymob_newrunanim)) {
+  if(IsDefined(self.angrymob_newrunanim)) {
     self clear_run_anim();
   }
 
@@ -2783,7 +2784,7 @@ angrymob_animdone_think(anime, animref) {
 // --- SOLO RUN ---
 // ----------------
 solorun_chaser_spawnfunc() {
-  if(!isDefined(level.chasers)) {
+  if(!IsDefined(level.chasers)) {
     level.chasers = [];
   }
 
@@ -2793,7 +2794,7 @@ solorun_chaser_spawnfunc() {
 solorun_chasers_remove() {
   flag_wait("solorun_player_off_balcony");
 
-  if(!isDefined(level.chasers)) {
+  if(!IsDefined(level.chasers)) {
     return;
   }
 
@@ -2808,24 +2809,24 @@ dont_shoot_player_in_back() {
   level.player endon("death");
 
   // don't fire at the player while he's not looking
-  while(1) {
+  while (1) {
     playerangles = level.player GetPlayerAngles();
-    player_forward = anglesToForward(playerangles);
-    vec = VectorNormalize(self.origin - level.player getEye());
+    player_forward = AnglesToForward(playerangles);
+    vec = VectorNormalize(self.origin - level.player GetEye());
     anglesFromPlayer = VectorToAngles(vec);
-    forward_to_self = anglesToForward(anglesFromPlayer);
+    forward_to_self = AnglesToForward(anglesFromPlayer);
 
     dot = vectordot(player_forward, forward_to_self);
 
     // in view of the player
     if(dot > 0.75 || flag("solorun_player_progression_stalled")) {
-      if(isDefined(self.dontEverShoot)) {
+      if(IsDefined(self.dontEverShoot)) {
         self.dontEverShoot = undefined;
       }
     }
     // not in view
     else {
-      if(!isDefined(self.dontEverShoot)) {
+      if(!IsDefined(self.dontEverShoot)) {
         self.dontEverShoot = true;
       }
     }
@@ -2837,7 +2838,7 @@ dont_shoot_player_in_back() {
 solorun_chaser_remove() {
   self endon("death");
 
-  while(player_can_see_ai(self)) {
+  while (player_can_see_ai(self)) {
     wait(0.1);
   }
 
@@ -2846,13 +2847,13 @@ solorun_chaser_remove() {
 
 solorun_timer_prethink() {
   dvar = GetDvarInt("timer_off");
-  if(isDefined(dvar) && dvar > 0) {
+  if(IsDefined(dvar) && dvar > 0) {
     return;
   }
 
   flag_wait("solorun_timer_start");
   timerTime = 30;
-  timerLoc = &"FAVELA_ESCAPE_CHOPPER_TIMER";
+  timerLoc = & "FAVELA_ESCAPE_CHOPPER_TIMER";
   thread solorun_timer(timerTime, timerLoc, true);
 
   thread solorun_timer_extend_when_close(timerTime, timerLoc);
@@ -2881,13 +2882,11 @@ solorun_timer_extend_when_close(timerTime, timerLoc) {
 }
 
 solorun_timer(iSeconds, sLabel, bUseTick) {
-  if(getdvar("notimer") == "1") {
+  if(getdvar("notimer") == "1")
     return;
-  }
 
-  if(!isDefined(bUseTick)) {
+  if(!isdefined(bUseTick))
     bUseTick = false;
-  }
   // destroy any previous timer just in case
   killTimer();
   level endon("kill_timer");
@@ -2901,9 +2900,8 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   level.start_time = gettime();
 
   // -- timer expired --
-  if(bUseTick == true) {
+  if(bUseTick == true)
     thread timer_tick();
-  }
   wait(iSeconds);
 
   flag_set("timer_expired");
@@ -2915,7 +2913,7 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
 timer_tick() {
   level endon("stop_timer_tick");
   level endon("kill_timer");
-  while(true) {
+  while (true) {
     wait(1);
     level.player thread play_sound_on_entity("countdown_beep");
     level notify("timer_tick");
@@ -2923,7 +2921,7 @@ timer_tick() {
 }
 
 solorun_timer_expired() {
-  deadquote = &"FAVELA_ESCAPE_CHOPPER_TIMER_EXPIRED";
+  deadquote = & "FAVELA_ESCAPE_CHOPPER_TIMER_EXPIRED";
   level.player endon("death");
   level endon("kill_timer");
   level notify("mission failed");
@@ -2937,7 +2935,7 @@ solorun_timer_expired() {
 killTimer() {
   level notify("kill_timer");
 
-  if(isDefined(level.timer)) {
+  if(IsDefined(level.timer)) {
     level.timer Destroy();
   }
 }
@@ -2956,7 +2954,7 @@ solorun_start_playerfail(timeout) {
   thread solorun_start_playerfail_timeout(timeout);
   thread solorun_player_leaves_trigger(trig);
 
-  while(1) {
+  while (1) {
     if(solorun_start_playerfail_should_damage(xTest, trig, "solorun_mob_start_shooting")) {
       dmgspot = level.player.origin;
 
@@ -2997,7 +2995,7 @@ solorun_start_playerfail_timeout(timeout) {
 solorun_player_leaves_trigger(trig) {
   level endon("solorun_mob_start_shooting");
 
-  while(1) {
+  while (1) {
     trig waittill("trigger", other);
     if(IsPlayer(other)) {
       break;
@@ -3005,7 +3003,7 @@ solorun_player_leaves_trigger(trig) {
     wait(0.05);
   }
 
-  while(level.player IsTouching(trig)) {
+  while (level.player IsTouching(trig)) {
     wait(0.05);
   }
 
@@ -3075,7 +3073,7 @@ solorun_player_difficulty_adjustment() {
 
   safeZoneTrig = GetEnt("trig_solorun_start_playersafezone", "targetname");
 
-  while(1) {
+  while (1) {
     // first make sure he's not running around outside the solorun start area
     if(flag("solorun_player_outside_first_house") && !level.player IsTouching(safeZoneTrig) && !earlySuperHardSettings) {
       earlySuperHardSettings = true;
@@ -3203,13 +3201,13 @@ solorun_playerhurt_replacehint() {
   wait(1);
 
   // "You are Hurt, Run For Your Life!"
-  level.strings["take_cover"].text = &"FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
+  level.strings["take_cover"].text = & "FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
 }
 
 solorun_player_progression_tracker() {
   level endon("trig_solorun_player_on_slide");
 
-  trigs = getEntArray("trig_solorun_roof_progression", "targetname");
+  trigs = GetEntArray("trig_solorun_roof_progression", "targetname");
   ASSERT(trigs.size);
 
   level.solorun_progression_hilo = 0;
@@ -3218,7 +3216,7 @@ solorun_player_progression_tracker() {
   lastTrigNum = 1;
   maxCap = 1;
 
-  while(1) {
+  while (1) {
     foreach(trig in trigs) {
       if(level.player IsTouching(trig)) {
         if(trig.script_count > lastTrigNum) {
@@ -3231,7 +3229,7 @@ solorun_player_progression_tracker() {
           level.solorun_progression_hilo--;
         }
 
-        while(level.player IsTouching(trig)) {
+        while (level.player IsTouching(trig)) {
           wait(0.05);
         }
 
@@ -3251,8 +3249,8 @@ solorun_player_progression_hilo_watcher() {
   flagstr = "solorun_player_progression_stalled";
   og_hilo = 0;
 
-  while(1) {
-    while(level.solorun_progression_hilo == og_hilo) {
+  while (1) {
+    while (level.solorun_progression_hilo == og_hilo) {
       wait(0.1);
     }
 
@@ -3283,7 +3281,7 @@ solorun_sprint_tracker() {
 
   //level.player ent_flag_wait( "player_has_red_flashing_overlay" );
 
-  while(level.player.health > (level.player.maxhealth * 0.9) && !flag(flagstr)) {
+  while (level.player.health > (level.player.maxhealth * 0.9) && !flag(flagstr)) {
     wait(0.1);
   }
 
@@ -3294,7 +3292,7 @@ solorun_sprint_tracker() {
 }
 
 sprint_hint(flagstr) {
-  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."
+  hintstr = & "FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."
   if(!level.console) {
     change = false;
 
@@ -3308,7 +3306,7 @@ sprint_hint(flagstr) {
     }
 
     if(change) {
-      hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."
+      hintstr = & "FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."
     }
   }
 
@@ -3329,7 +3327,7 @@ sprint_hint(flagstr) {
 
   //endTime = GetTime() + 5000;
   //while( !flag( flagstr ) && GetTime() < endTime && level.player.health > 0 )
-  while(!flag(flagstr) && level.player.health > 0) {
+  while (!flag(flagstr) && level.player.health > 0) {
     wait(0.05);
   }
 
@@ -3350,10 +3348,10 @@ set_flag_on_sprint(flagstr) {
 player_bullet_whizbys() {
   thread player_bullet_whizby_sounds();
 
-  dmgtrigs = getEntArray("solorun_dmgtrig", "targetname");
+  dmgtrigs = GetEntArray("solorun_dmgtrig", "targetname");
   array_thread(dmgtrigs, ::player_bullet_whizby_dmgtrigs);
 
-  trigs = getEntArray("trig_solorun_squibs", "targetname");
+  trigs = GetEntArray("trig_solorun_squibs", "targetname");
   array_thread(trigs, ::player_bullet_whizby_trig);
 }
 
@@ -3373,12 +3371,12 @@ player_bullet_whizby_sounds() {
   weapons = level.scriptedweapons;
   sounds = level.scriptedweaponsounds;
 
-  while(1) {
+  while (1) {
     weapon = get_random(weapons);
     numShots = RandomIntRange(shotsMin, shotsMax);
 
-    for(i = 0; i < numShots; i++) {
-      playereye = level.player getEye();
+    for (i = 0; i < numShots; i++) {
+      playereye = level.player GetEye();
 
       thread play_sound_in_space(sounds[weapon], playereye);
 
@@ -3399,12 +3397,12 @@ player_bullet_whizby_dmgtrigs() {
 }
 
 player_bullet_whizby_trig() {
-  ASSERT(isDefined(self.target));
+  ASSERT(IsDefined(self.target));
 
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
 
-    if(IsAlive(other) && isDefined(other.team) && other.team == "axis") {
+    if(IsAlive(other) && IsDefined(other.team) && other.team == "axis") {
       break;
     }
 
@@ -3436,8 +3434,8 @@ player_bullet_whizby_trig() {
 
   foreach(squib in squibs) {
     // aim in the direction the squib is pointing
-    ASSERT(isDefined(squib.angles));
-    forward = anglesToForward(squib.angles);
+    ASSERT(IsDefined(squib.angles));
+    forward = AnglesToForward(squib.angles);
     forwardscaled = vector_multiply(forward, 1024);
     targetspot = squib.origin + forwardscaled;
 
@@ -3456,16 +3454,16 @@ get_targeted_line_array(start) {
   arr[0] = start;
   point = start;
 
-  while(isDefined(point.target)) {
+  while (IsDefined(point.target)) {
     nextpoint = GetStruct(point.target, "targetname");
-    if(!isDefined(nextpoint)) {
+    if(!IsDefined(nextpoint)) {
       nextpoint = GetEnt(point.target, "targetname");
     }
-    if(!isDefined(nextpoint)) {
+    if(!IsDefined(nextpoint)) {
       nextpoint = GetNode(point.target, "targetname");
     }
 
-    if(isDefined(nextpoint)) {
+    if(IsDefined(nextpoint)) {
       arr[arr.size] = nextpoint;
     } else {
       break;
@@ -3481,14 +3479,14 @@ player_bullet_whizby_location_trig() {
   spots = GetStructArray(self.target, "targetname");
   ASSERT(spots.size);
 
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
 
     if(IsPlayer(other) && !flag("whizby_location_updating")) {
       flag_set("whizby_location_updating");
 
       level.whizbyStarts = spots;
-      while(other IsTouching(self)) {
+      while (other IsTouching(self)) {
         wait(0.1);
       }
 
@@ -3522,7 +3520,7 @@ solorun_rooftop_squibs() {
 
   weapons = level.scriptedweapons;
 
-  while(1) {
+  while (1) {
     weapon = get_random(weapons);
     numShots = RandomIntRange(shotsMin, shotsMax);
 
@@ -3530,28 +3528,28 @@ solorun_rooftop_squibs() {
     enemy = undefined;
     foreach(guy in axis) {
       if(guy CanSee(level.player) && !player_can_see_ai(guy)) {
-        if(!isDefined(enemy) || (Distance(guy.origin, level.player.origin) < Distance(enemy.origin, level.player.origin))) {
+        if(!IsDefined(enemy) || (Distance(guy.origin, level.player.origin) < Distance(enemy.origin, level.player.origin))) {
           enemy = guy;
         }
       }
     }
 
-    if(!isDefined(enemy)) {
+    if(!IsDefined(enemy)) {
       wait(1);
       continue;
     }
 
-    for(i = 0; i < numShots; i++) {
+    for (i = 0; i < numShots; i++) {
       if(!IsAlive(enemy) || player_can_see_ai(enemy)) {
         wait(0.05);
         continue;
       }
 
-      startPos = enemy getEye() + (0, 0, 32);
+      startPos = enemy GetEye() + (0, 0, 32);
 
-      playereye = level.player getEye();
+      playereye = level.player GetEye();
       playerangles = level.player.angles;
-      forward = anglesToForward(playerangles);
+      forward = AnglesToForward(playerangles);
       refPoint = playereye + (forward * 256);
       startZ = refPoint[2] + 256;
 
@@ -3562,10 +3560,10 @@ solorun_rooftop_squibs() {
       endPos = groundpos((endX, endY, endZ));
 
       // make sure we're not going to hit the player
-      trace = bulletTrace(startPos, endPos, true);
+      trace = BulletTrace(startPos, endPos, true);
       traceEnt = trace["entity"];
 
-      if(isDefined(traceEnt)) {
+      if(IsDefined(traceEnt)) {
         if(IsPlayer(traceEnt)) {
           continue;
         }
@@ -3596,7 +3594,7 @@ solorun_chopper_audio() {
   trigger_wait_targetname("trig_balcony_chopper_spawn");
 
   chopper = undefined;
-  while(!isDefined(chopper)) {
+  while (!IsDefined(chopper)) {
     wait(0.05);
     chopper = get_vehicle("solorun_balcony_chopper", "targetname");
   }
@@ -3605,7 +3603,7 @@ solorun_chopper_audio() {
 }
 
 solorun_rooftop_chopper_fakefire() {
-  trigs = getEntArray("solorun_chopper_fakefire_trig", "targetname");
+  trigs = GetEntArray("solorun_chopper_fakefire_trig", "targetname");
 
   array_thread(trigs, ::solorun_rooftop_chopper_fakefire_trig);
 }
@@ -3639,7 +3637,7 @@ solorun_chopper_spawnfunc() {
 solorun_dialogue(bugplayer) {
   balconyflag = "solorun_player_at_balcony";
 
-  if(!isDefined(bugplayer) || bugplayer) {
+  if(!IsDefined(bugplayer) || bugplayer) {
     thread solorun_dialogue_bugplayer_inside(balconyflag);
   }
 
@@ -3687,7 +3685,7 @@ solorun_dialogue_bugplayer_inside(ender) {
 solorun_chopperjump_killtrig() {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
 
     if(IsPlayer(other)) {
@@ -3700,7 +3698,7 @@ solorun_chopperjump_killtrig() {
 }
 
 solorun_chopperjump(waitBeforeJump) {
-  if(!isDefined(waitBeforeJump) || waitBeforeJump) {
+  if(!IsDefined(waitBeforeJump) || waitBeforeJump) {
     flag_wait("trig_solorun_player_on_slide");
   }
 
@@ -3759,16 +3757,16 @@ solorun_chopperjump(waitBeforeJump) {
 
   // catch the jump
   jumpstart_vol = GetEnt("trig_player_chopperjump", "script_noteworthy");
-  jumpForward = anglesToForward((0, 90, 0));
+  jumpForward = AnglesToForward((0, 90, 0));
   thread player_jump_watcher();
 
   altLookSpots = GetStructArray("struct_chopperjump_alt_lookspot", "targetname");
   ASSERT(altLookSpots.size);
 
-  while(1) {
+  while (1) {
     breakout = false;
 
-    while(level.player IsTouching(jumpstart_vol)) {
+    while (level.player IsTouching(jumpstart_vol)) {
       flag_wait("player_jumping");
       if(player_leaps_to_chopper(jumpstart_vol, ladder, altLookSpots, true)) {
         breakout = true;
@@ -3816,14 +3814,14 @@ solorun_chopperjump(waitBeforeJump) {
 solorun_chopperjump_rumble() {
   level.player PlayRumbleOnEntity("artillery_rumble");
   wait(0.5);
-  while(!flag("level_faded_to_black")) {
+  while (!flag("level_faded_to_black")) {
     level.player PlayRumbleOnEntity("damage_light");
     wait(0.115);
   }
 }
 
 player_leaps_to_chopper(volume, ladder, altLookSpots, checkIsOnGround) {
-  if(!isDefined(checkIsOnGround)) {
+  if(!IsDefined(checkIsOnGround)) {
     checkIsOnGround = true;
   }
 
@@ -3935,7 +3933,7 @@ player_jump_watcher() {
   NotifyOnCommand("playerjump", "+gostand");
   NotifyOnCommand("playerjump", "+moveup");
 
-  while(1) {
+  while (1) {
     level.player waittill("playerjump");
     wait(0.1); // jumps don't happen immediately
 
@@ -3944,7 +3942,7 @@ player_jump_watcher() {
       println("jumping");
     }
 
-    while(!level.player IsOnGround()) {
+    while (!level.player IsOnGround()) {
       wait(0.05);
     }
     flag_clear(jumpflag);
@@ -3992,22 +3990,22 @@ get_single_redshirt() {
 }
 
 setup_color_friendly_spawners() {
-  spawners = getEntArray("color_friendly_spawner", "targetname");
+  spawners = GetEntArray("color_friendly_spawner", "targetname");
   ASSERT(spawners.size);
 
   level._color_friendly_spawners = spawners;
 }
 
 enemy_cleanup() {
-  cleanuptrigs = getEntArray("enemy_cleanup_trigger", "targetname");
+  cleanuptrigs = GetEntArray("enemy_cleanup_trigger", "targetname");
   array_thread(cleanuptrigs, ::enemy_cleanup_trigger_think);
 }
 
 enemy_cleanup_trigger_think() {
   assertstr = "Enemy cleanup trigger at origin " + self.origin + " needs to target a volume.";
-  ASSERTEX(isDefined(self.target), assertstr);
+  ASSERTEX(IsDefined(self.target), assertstr);
 
-  killVolumes = getEntArray(self.target, "targetname");
+  killVolumes = GetEntArray(self.target, "targetname");
   ASSERTEX(killVolumes.size, assertstr);
 
   self waittill("trigger");
@@ -4033,19 +4031,19 @@ enemy_cleanup_trigger_think() {
 }
 
 try_spawn_loop(numTries, waitTime) {
-  if(!isDefined(numTries)) {
+  if(!IsDefined(numTries)) {
     numTries = 10;
   }
 
-  if(!isDefined(waitTime)) {
+  if(!IsDefined(waitTime)) {
     waitTime = 0.05;
   }
 
-  for(i = 0; i < numTries; i++) {
-    if(isDefined(self.forcespawn) && self.forcespawn > 0) {
-      guy = self Stalingradspawn();
+  for (i = 0; i < numTries; i++) {
+    if(IsDefined(self.forcespawn) && self.forcespawn > 0) {
+      guy = self StalingradSpawn();
     } else {
-      guy = self Dospawn();
+      guy = self DoSpawn();
     }
 
     if(!spawn_failed(guy)) {
@@ -4065,11 +4063,11 @@ spawn_group_staggered(aSpawners, doSafe) {
 spawn_group(aSpawners, doSafe, doStaggered) {
   ASSERTEX((aSpawners.size > 0), "The array passed to array_spawn function is empty");
 
-  if(!isDefined(doSafe)) {
+  if(!IsDefined(doSafe)) {
     doSafe = false;
   }
 
-  if(!isDefined(doStaggered)) {
+  if(!IsDefined(doStaggered)) {
     doStaggered = false;
   }
 
@@ -4098,9 +4096,9 @@ spawn_group(aSpawners, doSafe, doStaggered) {
 ai_unlimited_rocket_ammo() {
   self endon("death");
 
-  ASSERT(isDefined(self.a.rockets));
+  ASSERT(IsDefined(self.a.rockets));
 
-  while(1) {
+  while (1) {
     if(self.a.rockets < 3) {
       self.a.rockets = 3;
     }
@@ -4115,14 +4113,14 @@ bloody_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
   }
 
   angles = VectorToAngles(direction_vec);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
 
   anglesReversed = VectorToAngles(direction_vec) + (0, 180, 0);
-  backward = anglesToForward(anglesReversed);
+  backward = AnglesToForward(anglesReversed);
 
-  playFX(getfx("headshot"), point, forward, up);
-  playFX(getfx("bodyshot"), point, backward, up);
+  PlayFX(getfx("headshot"), point, forward, up);
+  PlayFX(getfx("bodyshot"), point, backward, up);
 }
 
 // ---- door kicker guys ----
@@ -4134,13 +4132,13 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
 
   // if one of them has script_parameters set to "kicker" then he should kick the door
   foreach(spawner in spawners) {
-    if(isDefined(spawner.script_parameters) && spawner.script_parameters == "kicker") {
+    if(IsDefined(spawner.script_parameters) && spawner.script_parameters == "kicker") {
       kickerSpawner = spawner;
       break;
     }
   }
 
-  if(!isDefined(kickerSpawner)) {
+  if(!IsDefined(kickerSpawner)) {
     kickerSpawner = spawners[0];
   }
 
@@ -4155,7 +4153,7 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
 
   kickAnime = "door_kick_in";
   kickNotetrack = "kick";
-  if(isDefined(animRef.script_noteworthy)) {
+  if(IsDefined(animRef.script_noteworthy)) {
     switch (animRef.script_noteworthy) {
       case "wave":
         kickAnime = "doorburst_wave";
@@ -4180,7 +4178,7 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
   door thread sbmodel_rotate(0.25, true);
 
   // optionally push some stuff out of the way when the door opens
-  if(isDefined(physicsRef)) {
+  if(IsDefined(physicsRef)) {
     PhysicsExplosionCylinder(physicsRef.origin, physicsRef.radius, (physicsRef.radius / 2), 1.0);
   }
 
@@ -4190,12 +4188,12 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
   kicker waittillmatch("single anim", "end");
 
   if(IsAlive(kicker)) {
-    if(isDefined(kickerSpawner.script_playerseek) && kickerSpawner.script_playerseek > 0) {
+    if(IsDefined(kickerSpawner.script_playerseek) && kickerSpawner.script_playerseek > 0) {
       kicker playerseek();
     } else {
-      if(isDefined(kickerSpawner.target)) {
+      if(IsDefined(kickerSpawner.target)) {
         node = GetNode(kickerSpawner.target, "targetname");
-        if(isDefined(node)) {
+        if(IsDefined(node)) {
           kicker set_temp_goalradius(96);
           kicker SetGoalNode(node);
 
@@ -4218,7 +4216,7 @@ chaotic_above_shooter() {
 
   // favela_chaotic_above_through, favela_chaotic_above_through_uzi, favela_chaotic_above_through_back
   anime = "favela_chaotic_above_through";
-  if(isDefined(animref.script_noteworthy)) {
+  if(IsDefined(animref.script_noteworthy)) {
     anime = animref.script_noteworthy;
   }
 
@@ -4236,9 +4234,9 @@ window_smash_stop_inside() {
 
   node = GetNode(self.target, "targetname");
 
-  if(isDefined(self.script_playerseek) && self.script_playerseek) {
+  if(IsDefined(self.script_playerseek) && self.script_playerseek) {
     self playerseek();
-  } else if(isDefined(node)) {
+  } else if(IsDefined(node)) {
     self SetGoalNode(node);
   }
 }
@@ -4247,9 +4245,9 @@ window_smash(smashAnime) {
   self endon("death");
 
   errorstr = "window smash guy at origin " + self.origin + " needs to be targeting a script_struct that he can use as his animref.";
-  ASSERTEX(isDefined(self.target), errorstr);
+  ASSERTEX(IsDefined(self.target), errorstr);
   animref = GetStruct(self.target, "targetname");
-  ASSERTEX(isDefined(animref), errorstr);
+  ASSERTEX(IsDefined(animref), errorstr);
 
   animref anim_generic_reach(self, smashAnime);
   animref anim_generic(self, smashAnime);
@@ -4257,20 +4255,18 @@ window_smash(smashAnime) {
 
 // ---- curtain pulldown guys ----
 curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
-  if(!isDefined(bWaitForPlayer)) {
+  if(!isdefined(bWaitForPlayer))
     bWaitForPlayer = false;
-  }
 
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   node = self curtain_pulldown_getnode();
-  assert(isDefined(node));
+  assert(isdefined(node));
 
   curtain = curtain_pulldown_spawnmodel(node);
 
   self waittill("spawned", guy);
-  if(spawn_failed(guy)) {
+  if(spawn_failed(guy))
     return;
-  }
 
   guy endon("death");
 
@@ -4289,7 +4285,7 @@ curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
   if(bWaitForPlayer) {
     node anim_first_frame_solo(guy, "pulldown");
 
-    if(isDefined(specialWaitFunc)) {
+    if(IsDefined(specialWaitFunc)) {
       [
         [specialWaitFunc]
       ](guy, node);
@@ -4311,7 +4307,7 @@ curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
 
 // broke out into a separate function so we can spawn the model early
 curtain_pulldown_spawnmodel(node) {
-  if(isDefined(node.curtain)) {
+  if(IsDefined(node.curtain)) {
     return node.curtain;
   }
 
@@ -4324,18 +4320,17 @@ curtain_pulldown_spawnmodel(node) {
 }
 
 curtain_pulldown_getnode() {
-  nodes = getEntArray(self.target, "targetname");
+  nodes = getentarray(self.target, "targetname");
   foreach(node in nodes) {
-    if(node.classname == "script_origin") {
+    if(node.classname == "script_origin")
       return node;
-    }
   }
   assertMsg("curtain pulldown guy doesn't target a script_origin");
 }
 
 dialogue(msg) {
-  if(!isDefined(level.scripted_dialogue_struct)) {
-    level.scripted_dialogue_struct = spawnStruct();
+  if(!IsDefined(level.scripted_dialogue_struct)) {
+    level.scripted_dialogue_struct = SpawnStruct();
   }
 
   level.scripted_dialogue_struct function_stack(::dialogue_stack, self, msg);
@@ -4346,7 +4341,7 @@ dialogue_stack(guy, msg) {
 }
 
 dialogue_print(line, timeout) {
-  if(!isDefined(timeout)) {
+  if(!IsDefined(timeout)) {
     timeout = 3;
   }
 
@@ -4354,9 +4349,8 @@ dialogue_print(line, timeout) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint)) {
+  if(isDefined(level.tempHint))
     level.tempHint destroyElem();
-  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -40);
@@ -4386,8 +4380,8 @@ playsound_from_random_spot(soundalias, moveSpots) {
     moveSpots = newArr;
   }
 
-  org = spawn("script_origin", get_random(moveSpots).origin);
-  org playSound(soundAlias, "sound_done");
+  org = Spawn("script_origin", get_random(moveSpots).origin);
+  org PlaySound(soundAlias, "sound_done");
   org waittill("sound_done");
   org Delete();
 }
@@ -4401,7 +4395,7 @@ delete_at_path_end() {
 
   wait(0.1);
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self Delete();
   }
 }
@@ -4427,7 +4421,7 @@ ignore_and_delete_at_path_end() {
 
   self ignore_everything();
 
-  while(1) {
+  while (1) {
     msg = self waittill_any_return("reached_path_end", "damage");
 
     if(msg == "damage") {
@@ -4438,7 +4432,7 @@ ignore_and_delete_at_path_end() {
   }
 
   wait(0.1);
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self Delete();
   }
 }
@@ -4499,7 +4493,7 @@ scr_walkDistFacingMotion(dist) {
 }
 
 set_temp_goalradius(newRadius) {
-  if(!isDefined(self.og_goalradius)) {
+  if(!IsDefined(self.og_goalradius)) {
     self.og_goalradius = self.goalradius;
   }
 
@@ -4507,7 +4501,7 @@ set_temp_goalradius(newRadius) {
 }
 
 restore_goalradius() {
-  if(isDefined(self.og_goalradius)) {
+  if(IsDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
   }
 }
@@ -4518,18 +4512,18 @@ set_threatbias_group(groupname) {
 }
 
 reset_threatbias_group() {
-  ASSERT(isDefined(self.og_threatbiasgroup));
+  ASSERT(IsDefined(self.og_threatbiasgroup));
   self SetThreatBiasGroup(self.og_threatbiasgroup);
 }
 
 magic_bullet_shield_safe() {
-  if(!isDefined(self.magic_bullet_shield) || !self.magic_bullet_shield) {
+  if(!IsDefined(self.magic_bullet_shield) || !self.magic_bullet_shield) {
     self thread magic_bullet_shield();
   }
 }
 
 stop_magic_bullet_shield_safe() {
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+  if(IsDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     self thread stop_magic_bullet_shield();
   }
 }
@@ -4558,7 +4552,7 @@ clear_ignore_everything() {
   self.disableBulletWhizbyReaction = false;
   self enable_pain();
 
-  if(isDefined(self.og_newEnemyReactionDistSq)) {
+  if(IsDefined(self.og_newEnemyReactionDistSq)) {
     self.newEnemyReactionDistSq = self.og_newEnemyReactionDistSq;
   }
 }
@@ -4593,7 +4587,7 @@ goto_scripted_goalnode(node) {
 }
 
 group_waitfor_scriptedgoal(arr) {
-  while(1) {
+  while (1) {
     foundOne = false;
 
     foreach(guy in arr) {
@@ -4622,7 +4616,7 @@ get_nonhero_friends() {
   nonheroes = [];
 
   foreach(guy in level.friends) {
-    if(!isDefined(guy.isHero)) {
+    if(!IsDefined(guy.isHero)) {
       nonheroes[nonheroes.size] = guy;
     }
   }
@@ -4635,7 +4629,7 @@ remove_nonhero_friends(exceptThisMany) {
 
   nonheroes = get_nonhero_friends();
 
-  if(isDefined(exceptThisMany)) {
+  if(IsDefined(exceptThisMany)) {
     nonheroes = array_remove(nonheroes, nonheroes[0]);
   }
 
@@ -4660,7 +4654,7 @@ favela_escape_friendly_startup_thread() {
 
 // adds a guy to level.friends
 friend_add() {
-  if(!isDefined(level.friends)) {
+  if(!IsDefined(level.friends)) {
     level.friends = [];
   }
 
@@ -4672,7 +4666,7 @@ friend_add() {
 
 // removes a guy from level.friends
 friend_remove() {
-  ASSERT(isDefined(level.friends));
+  ASSERT(IsDefined(level.friends));
   level.friends = array_remove(level.friends, self);
 }
 
@@ -4682,7 +4676,7 @@ remove_from_friends_on_death() {
 }
 
 delete_all_friends() {
-  if(isDefined(level.scripted_dialogue_struct)) {
+  if(IsDefined(level.scripted_dialogue_struct)) {
     // clear the dialogue function stack so it's not waiting to run a function that depends on one of these guys being alive
     level.scripted_dialogue_struct function_stack_clear();
   }
@@ -4712,7 +4706,7 @@ warp_friends_and_player(str) {
   playerSpot = GetStruct(str + "_player", "targetname");
 
   ASSERT(friendSpots.size >= level.friends.size);
-  ASSERT(isDefined(playerSpot));
+  ASSERT(IsDefined(playerSpot));
 
   foreach(index, guy in level.friends) {
     origin = friendSpots[index].origin;
@@ -4728,7 +4722,7 @@ teleport_to_node(node) {
 }
 
 teleport_to_origin(origin, angles) {
-  if(!isDefined(angles)) {
+  if(!IsDefined(angles)) {
     angles = (0, 0, 0);
   }
 
@@ -4775,13 +4769,13 @@ bloody_death(delay) {
     return;
   }
 
-  if(isDefined(self.bloody_death) && self.bloody_death) {
+  if(IsDefined(self.bloody_death) && self.bloody_death) {
     return;
   }
 
   self.bloody_death = true;
 
-  if(isDefined(delay)) {
+  if(IsDefined(delay)) {
     wait(RandomFloat(delay));
   }
 
@@ -4795,7 +4789,7 @@ bloody_death(delay) {
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
 
-  for(i = 0; i < 3 + RandomInt(5); i++) {
+  for (i = 0; i < 3 + RandomInt(5); i++) {
     random = RandomIntRange(0, tags.size);
     //vec = self GetTagOrigin( tags[random] );
     self thread bloody_death_fx(tags[random], undefined);
@@ -4806,11 +4800,11 @@ bloody_death(delay) {
 }
 
 bloody_death_fx(tag, fxName) {
-  if(!isDefined(fxName)) {
+  if(!IsDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
 
-  playFXOnTag(fxName, self, tag);
+  PlayFxOnTag(fxName, self, tag);
 }
 
 // -------------------------------
@@ -4827,11 +4821,11 @@ color_flags_advance(baseName, numTotalFlags, startFlagNum) {
   team = "allies";
 
   // maybe we want to start from the middle of the chain, like for a start point
-  if(!isDefined(startFlagNum)) {
+  if(!IsDefined(startFlagNum)) {
     startFlagNum = 1;
   }
 
-  for(i = startFlagNum; i <= numTotalFlags; i++) {
+  for (i = startFlagNum; i <= numTotalFlags; i++) {
     // final name looks like "[baseName]_1" or whatever
     name = baseName + "_" + i;
     flagtrig = GetEnt(name, "targetname");
@@ -4850,11 +4844,11 @@ color_flags_advance(baseName, numTotalFlags, startFlagNum) {
     infos = [];
     foreach(colorCode in colorCodes) {
       volume = level.arrays_of_colorCoded_volumes[team][colorCode];
-      if(isDefined(volume)) {
+      if(IsDefined(volume)) {
         // can only support one volume per colorCode at the moment
         ASSERTEX(!color_flags_dupe_info(infos, colorCode), "More than one volume found for colorCode " + colorCode + ", currently we only support one volume per colorCode.");
 
-        info = spawnStruct();
+        info = spawnstruct();
 
         // set up arrays for us to manually pass to activate_color_trigger_internal
         info.colorCodes[0] = colorCode;
@@ -4882,7 +4876,7 @@ color_flags_advance_cleanup() {
 color_flags_advance_queue_manager(color) {
   level endon("color_flags_advance_stop");
 
-  while(1) {
+  while (1) {
     // if we have any volumes of this color to wait for, do them in order
     if(level.color_flags_advance_queue[color].size) {
       // process the first volume in the stack, if the stack has any entries
@@ -4901,7 +4895,7 @@ color_flags_advance_queue_manager(color) {
 color_flags_advance_queue_add() {
   color = self.colors[0];
 
-  if(!isDefined(level.color_flags_advance_queue)) {
+  if(!IsDefined(level.color_flags_advance_queue)) {
     level.color_flags_advance_queue = [];
   }
 
@@ -4967,19 +4961,19 @@ color_flags_dupe_info(infos, colorCode) {
 // --- AIRLINER STUFF ---
 // ----------------------
 airliner_flyby_trigs() {
-  ASSERT(isDefined(level.airliner));
+  ASSERT(IsDefined(level.airliner));
   airliner_hide();
 
   lockflag = "airliner_flyby";
   flag_init(lockflag);
 
-  trigs = getEntArray("trig_airliner_flyby", "targetname");
+  trigs = GetEntArray("trig_airliner_flyby", "targetname");
   array_thread(trigs, ::airliner_flyby, lockflag);
 }
 
 airliner_setup() {
   // gets all the ents in the prefab
-  ents = getEntArray("sbmodel_airliner_flyby", "targetname");
+  ents = GetEntArray("sbmodel_airliner_flyby", "targetname");
   level.airlinerParts = ents;
 
   org = undefined;
@@ -4992,7 +4986,7 @@ airliner_setup() {
   // find the script_origins and sort them
   foreach(ent in ents) {
     if(ent.code_classname == "script_origin") {
-      ASSERT(isDefined(ent.script_noteworthy));
+      ASSERT(IsDefined(ent.script_noteworthy));
 
       switch (ent.script_noteworthy) {
         case "origin_marker":
@@ -5022,10 +5016,10 @@ airliner_setup() {
     }
   }
 
-  ASSERT(isDefined(org));
+  ASSERT(IsDefined(org));
   otherents = array_remove(ents, org);
 
-  // turn on lights &exhaust
+  // turn on lights & exhaust
   light_wingtip_left = airliner_fx(light_wingtip_left, "airliner_wingtip_left");
   light_belly = airliner_fx(light_belly, "airliner_belly");
   light_tail = airliner_fx(light_tail, "airliner_tail");
@@ -5049,11 +5043,11 @@ airliner_setup() {
 }
 
 airliner_fx(spot, fxid) {
-  if(isDefined(spot)) {
+  if(IsDefined(spot)) {
     newspot = spot spawn_tag_origin();
     spot = newspot;
 
-    playFXOnTag(getfx(fxid), spot, "tag_origin");
+    PlayFxOnTag(getfx(fxid), spot, "tag_origin");
 
     return spot;
   }
@@ -5073,7 +5067,7 @@ airliner_fx_group(group, fxid) {
     group = newspots;
 
     foreach(spot in group) {
-      playFXOnTag(getfx(fxid), spot, "tag_origin");
+      PlayFxOnTag(getfx(fxid), spot, "tag_origin");
     }
 
     return group;
@@ -5093,14 +5087,14 @@ airliner_show() {
 airliner_flyby(lockflag) {
   pathStart = GetStruct(self.target, "targetname");
   pathEnd = GetStruct(pathStart.target, "targetname");
-  ASSERT(isDefined(pathStart), isDefined(pathEnd));
+  ASSERT(IsDefined(pathStart), IsDefined(pathEnd));
 
   self waittill("trigger");
 
   level notify("airliner_flyby");
 
   speed = 1500;
-  if(isDefined(pathStart.speed)) {
+  if(IsDefined(pathStart.speed)) {
     speed = pathStart.speed;
   }
 
@@ -5110,7 +5104,7 @@ airliner_flyby(lockflag) {
   // move jet to path origin and unhide
   level.airliner.origin = pathStart.origin;
 
-  if(isDefined(pathStart.angles)) {
+  if(IsDefined(pathStart.angles)) {
     level.airliner.angles = pathStart.angles;
   } else {
     level.airliner.angles = level.airliner.og_angles;
@@ -5136,7 +5130,7 @@ airliner_flyby(lockflag) {
 }
 
 airliner_flyby_audio(start, end, trig) {
-  if(isDefined(trig.script_sound)) {
+  if(IsDefined(trig.script_sound)) {
     self play_sound_on_entity(trig.script_sound);
     return;
   }
@@ -5149,7 +5143,7 @@ airliner_flyby_audio(start, end, trig) {
 
   self thread play_loop_sound_on_entity(loop);
 
-  while(DistanceSquared(self.origin, boomspot) < boomDistSqd) {
+  while (DistanceSquared(self.origin, boomspot) < boomDistSqd) {
     wait(0.05);
   }
 
@@ -5168,18 +5162,18 @@ stop_sound(alias) {
 // -- UTIL STUFF --
 // -----------------
 sbmodel_rotate(rotateTime, makeNotSolid) {
-  if(!isDefined(makeNotSolid)) {
+  if(!IsDefined(makeNotSolid)) {
     makeNotSolid = false;
   }
 
   linker = GetEnt(self.target, "targetname");
-  ASSERTEX(isDefined(linker), "sbmodel_rotate(): sbmodel at origin " + self.origin + " doesn't have a linker entity targeted. Did you make it a script_struct instead of a script_origin by mistake?");
+  ASSERTEX(IsDefined(linker), "sbmodel_rotate(): sbmodel at origin " + self.origin + " doesn't have a linker entity targeted. Did you make it a script_struct instead of a script_origin by mistake?");
 
   self LinkTo(linker);
 
   self ConnectPaths();
 
-  ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
+  ASSERTEX(IsDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
 
   linker.og_angles = linker.angles;
 
@@ -5199,7 +5193,7 @@ sbmodel_rotate(rotateTime, makeNotSolid) {
 }
 
 make_solid_again_when_player_isnt_touching() {
-  while(level.player IsTouching(self)) {
+  while (level.player IsTouching(self)) {
     wait(0.05);
   }
 
@@ -5208,13 +5202,13 @@ make_solid_again_when_player_isnt_touching() {
 
 sbmodel_rotate_back(rotateTime) {
   linker = GetEnt(self.target, "targetname");
-  ASSERTEX(isDefined(linker.og_angles));
+  ASSERTEX(IsDefined(linker.og_angles));
 
   self LinkTo(linker);
 
   self ConnectPaths();
 
-  ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
+  ASSERTEX(IsDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
 
   linker RotateTo(linker.og_angles, rotateTime);
   linker waittill("rotatedone");
@@ -5242,7 +5236,7 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
   // get info about the direction of the line
   vec = VectorNormalize(lineEnd.origin - lineStart.origin);
   angles = VectorToAngles(vec);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
 
   // how random our squib placement will be
   offsetMin = -25;
@@ -5253,7 +5247,7 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
 
   startTime = GetTime();
 
-  for(i = 0; i < numSquibs; i++) {
+  for (i = 0; i < numSquibs; i++) {
     truePos = groundpos(targetOrigin);
     //Print3D( truePos, "*", ( 1, 1, 1 ), 0.8, 0.5, 90 );
 
@@ -5261,7 +5255,7 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
     offsetY = RandomFloatRange(offsetMin, offsetMax);
     adjustedPos = (truePos[0] + offsetX, truePos[1] + offsetY, truePos[2]);
 
-    ASSERTEX(isDefined(turret), "minigun_squib_line(): the turret deleted after " + seconds(GetTime() - startTime) + " seconds!");
+    ASSERTEX(IsDefined(turret), "minigun_squib_line(): the turret deleted after " + seconds(GetTime() - startTime) + " seconds!");
     MagicBullet(weaponType, turret GetTagOrigin("tag_flash"), adjustedPos);
 
     foreach(guy in axis) {
@@ -5286,7 +5280,7 @@ player_can_see(origin) {
     return false;
   }
 
-  if(SightTracePassed(level.player getEye(), origin, false, level.player)) {
+  if(SightTracePassed(level.player GetEye(), origin, false, level.player)) {
     return true;
   }
 
@@ -5294,7 +5288,7 @@ player_can_see(origin) {
 }
 
 deletetrigs() {
-  trigs = getEntArray("delete", "script_noteworthy");
+  trigs = GetEntArray("delete", "script_noteworthy");
   array_thread(trigs, ::delete_after_touch);
 }
 
@@ -5302,7 +5296,7 @@ delete_after_touch() {
   self waittill("trigger");
   wait(0.05);
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self Delete();
   }
 }
@@ -5315,7 +5309,7 @@ minigun_spinup() {
 
   self StartBarrelSpin();
 
-  while(self GetBarrelSpinRate() < 1) {
+  while (self GetBarrelSpinRate() < 1) {
     wait(0.05);
   }
 }
@@ -5324,7 +5318,7 @@ keep_objective_on_entity(objective_number, ent) {
   ent endon("death");
   level endon("objective_complete" + objective_number);
 
-  for(;;) {
+  for (;;) {
     objective_position(objective_number, ent.origin);
     wait 0.05;
   }
@@ -5334,13 +5328,13 @@ keep_objective_on_entity(objective_number, ent) {
 trigger_wait_fuse(trig, fuseTime) {
   self endon("death");
 
-  while(isDefined(self) && isDefined(trig)) {
+  while (IsDefined(self) && IsDefined(trig)) {
     trig waittill("trigger", other);
 
     if(self == other) {
       endTime = GetTime() + milliseconds(fuseTime);
 
-      while(GetTime() < endTime) {
+      while (GetTime() < endTime) {
         wait(0.1);
 
         if(!self IsTouching(trig)) {
@@ -5360,7 +5354,7 @@ trigger_wait_fuse(trig, fuseTime) {
 
 // like trigger_wait_targetname, except it works for multiple triggers named with the same targetname
 trigger_wait_targetname_multiple(trigTN) {
-  trigs = getEntArray(trigTN, "targetname");
+  trigs = GetEntArray(trigTN, "targetname");
   if(!trigs.size) {
     AssertMsg("no triggers found with targetname: " + trigTN);
     return;
@@ -5390,14 +5384,14 @@ trigger_wait_multiple_think(trigTN) {
 // normally, like killspawners, etc.
 trigger_activate_targetname_safe(trigTN) {
   trig = GetEnt(trigTN, "targetname");
-  if(isDefined(trig)) {
+  if(IsDefined(trig)) {
     trig notify("trigger");
   }
 }
 
 trigger_activate_targetname(trigTN) {
   trig = GetEnt(trigTN, "targetname");
-  ASSERT(isDefined(trig));
+  ASSERT(IsDefined(trig));
 
   trig notify("trigger");
 }
@@ -5409,13 +5403,13 @@ flag_wait_thread(flag, process) {
 }
 
 waittill_defined(ent) {
-  while(!isDefined(ent)) {
+  while (!IsDefined(ent)) {
     wait(0.05);
   }
 }
 
 waittill_undefined(ent) {
-  while(isDefined(ent)) {
+  while (IsDefined(ent)) {
     wait(0.05);
   }
 }
@@ -5433,7 +5427,7 @@ fade_to_black(fadeTime, isForeground) {
   level.black_overlay FadeOverTime(fadeTime);
   level.black_overlay.alpha = 1;
 
-  if(isDefined(isForeground)) {
+  if(IsDefined(isForeground)) {
     level.black_overlay.foreground = isForeground;
   }
 
@@ -5441,7 +5435,7 @@ fade_to_black(fadeTime, isForeground) {
 }
 
 fade_in_from_black(fadeTime) {
-  ASSERT(isDefined(level.black_overlay));
+  ASSERT(IsDefined(level.black_overlay));
 
   level.black_overlay FadeOverTime(fadeTime);
   level.black_overlay.alpha = 0;
@@ -5451,7 +5445,7 @@ fade_in_from_black(fadeTime) {
 }
 
 remove_all_flood_spawners() {
-  trigs = getEntArray("flood_spawner", "targetname");
+  trigs = getentarray("flood_spawner", "targetname");
   foreach(trig in trigs) {
     trig Delete();
   }
@@ -5468,7 +5462,7 @@ get_random(arr) {
 }
 
 player_dots() {
-  for(;;) {
+  for (;;) {
     Print3d(level.player.origin, ".", (1, 1, 1), 1, 1, 500);
     wait(0.05);
   }
@@ -5482,19 +5476,19 @@ player_fake_flashlight() {
   SetSavedDvar("r_spotlightEndRadius", 325);
   SetSavedDvar("r_spotlightBrightness", 0.9);
   fxspot = spawn_tag_origin();
-  fxspot.origin = level.player getEye();
+  fxspot.origin = level.player GetEye();
   fxspot.angles = level.player GetPlayerAngles();
   fxspot thread flashlight_updater();
   fx = getfx("flashlight");
-  playFXOnTag(fx, fxspot, "tag_origin");
+  PlayFxOnTag(fx, fxspot, "tag_origin");
 
   level.player.fakeflashlight = fxspot;
 }
 
 flashlight_updater() {
-  while(1) {
+  while (1) {
     playerAngles = level.player GetPlayerAngles();
-    playerEye = level.player getEye();
+    playerEye = level.player GetEye();
 
     if(self.angles != playerAngles) {
       self.angles = playerAngles;

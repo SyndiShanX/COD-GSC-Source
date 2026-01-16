@@ -31,15 +31,14 @@ spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasde
 missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self useanimtree(#animtree);
 
-  if(newval == 2) {
+  if(newval == 2)
     self setanimrestart( % o_drone_tank_missile1_fire, 1.0, 0.0, 0.5);
-  } else if(newval == 1) {
+  else if(newval == 1)
     self setanimrestart( % o_drone_tank_missile2_fire, 1.0, 0.0, 0.5);
-  } else if(newval == 0) {
+  else if(newval == 0)
     self setanimrestart( % o_drone_tank_missile3_fire, 1.0, 0.0, 0.5);
-  } else if(newval == 4) {
+  else if(newval == 4)
     self setanimrestart( % o_drone_tank_missile_full_reload, 1.0, 0.0, 1.0);
-  }
 }
 
 play_light_fx(localclientnum) {
@@ -67,15 +66,13 @@ play_light_fx(localclientnum) {
       continue;
     } else if(isinvehicle(localclientnum, self))
       self stop_light_fx(localclientnum);
-    else if(player getinkillcam(localclientnum)) {
+    else if(player getinkillcam(localclientnum))
       continue;
-    } else if(self.friend != self friendnotfoe(localclientnum)) {
+    else if(self.friend != self friendnotfoe(localclientnum))
       self stop_light_fx(localclientnum);
-    }
 
-    if(!isinvehicle(localclientnum, self) && !isDefined(self.fx)) {
+    if(!isinvehicle(localclientnum, self) && !isDefined(self.fx))
       self start_light_fx(localclientnum);
-    }
   }
 }
 
@@ -118,10 +115,10 @@ start_light_fx(localclientnum) {
     return;
   }
   if(friend) {
-    self.fx = playFXOnTag(localclientnum, level._ai_tank_fx["light_green"], self, "tag_scanner");
+    self.fx = playfxontag(localclientnum, level._ai_tank_fx["light_green"], self, "tag_scanner");
     self.friend = 1;
   } else {
-    self.fx = playFXOnTag(localclientnum, level._ai_tank_fx["light_red"], self, "tag_scanner");
+    self.fx = playfxontag(localclientnum, level._ai_tank_fx["light_red"], self, "tag_scanner");
     self.friend = 0;
   }
 }
@@ -134,8 +131,8 @@ stop_light_fx(localclientnum) {
 }
 
 start_stun_fx(localclientnum) {
-  self.stun_fx = playFXOnTag(localclientnum, level._ai_tank_fx["stun"], self, "tag_origin");
-  playSound(localclientnum, "veh_talon_shutdown", self.origin);
+  self.stun_fx = playfxontag(localclientnum, level._ai_tank_fx["stun"], self, "tag_origin");
+  playsound(localclientnum, "veh_talon_shutdown", self.origin);
 }
 
 stop_stun_fx(localclientnum) {
@@ -152,10 +149,10 @@ play_driving_fx(localclientnum) {
 
   for(;;) {
     if(self getspeed() >= 40) {
-      forward = anglesToForward(self.angles);
+      forward = anglestoforward(self.angles);
       up = anglestoup(self.angles);
       fx = self get_surface_fx();
-      playFX(localclientnum, fx, self.origin, forward, up);
+      playfx(localclientnum, fx, self.origin, forward, up);
       wait 0.5;
       continue;
     }
@@ -177,9 +174,8 @@ play_driving_rumble(localclientnum) {
       if(speed >= 40 || speed <= -40) {
         player = getlocalplayer(localclientnum);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player earthquake(0.1, 0.1, self.origin, 200);
-        }
       }
     }
 
@@ -196,9 +192,9 @@ rebooting(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   if(player getinkillcam(localclientnum)) {
     return;
   }
-  if(newval) {
+  if(newval)
     self thread start_reboot_fx(localclientnum);
-  } else {
+  else {
     self notify("reboot_disable");
     self stop_light_fx(localclientnum);
   }

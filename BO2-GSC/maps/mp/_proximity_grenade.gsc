@@ -107,9 +107,8 @@ proximitydetonate(attacker, weaponname) {
 
 proximitygrenadedamageplayer(eattacker, einflictor) {
   if(!self hasperk("specialty_proximityprotection")) {
-    if(!level.proximitygrenadeeffectdebug) {
+    if(!level.proximitygrenadeeffectdebug)
       self thread damageplayerinradius(einflictor.origin, eattacker, einflictor);
-    }
   }
 }
 
@@ -132,7 +131,7 @@ watchproximitygrenadehitplayer(owner) {
 }
 
 performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
+  forwardvec = vectornormalize(anglestoforward(self.angles));
   rightvec = vectornormalize(anglestoright(self.angles));
   explosionvec = vectornormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
@@ -159,11 +158,10 @@ damageplayerinradius(position, owner, einflictor) {
   }
 
   damage = level.proximitygrenadedotdamageamount;
-  playFXOnTag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
+  playfxontag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
 
-  if(level.hardcoremode) {
+  if(level.hardcoremode)
     damage = level.proximitygrenadedotdamageamounthardcore;
-  }
 
   if(self mayapplyscreeneffect()) {
     shellshock_duration = 1.5;
@@ -172,7 +170,7 @@ damageplayerinradius(position, owner, einflictor) {
   }
 
   self playrumbleonentity("proximity_grenade");
-  self playSound("wpn_taser_mine_zap");
+  self playsound("wpn_taser_mine_zap");
   self setclientuivisibilityflag("hud_visible", 0);
 
   for(i = 0; i < level.proximitygrenadedotdamageinstances; i++) {

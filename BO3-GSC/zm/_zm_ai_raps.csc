@@ -20,22 +20,22 @@
 #namespace zm_ai_raps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_raps", &__init__, undefined, undefined);
+  system::register("zm_ai_raps", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_round_fx", 1, 1, "counter", &elemental_round_fx, 0, 0);
-  clientfield::register("toplayer", "elemental_round_ring_fx", 1, 1, "counter", &elemental_round_ring_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_round_fx", 1, 1, "counter", & elemental_round_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_round_ring_fx", 1, 1, "counter", & elemental_round_ring_fx, 0, 0);
   visionset_mgr::register_visionset_info("zm_elemental_round_visionset", 1, 31, undefined, "zm_elemental_round_visionset");
   level._effect["elemental_round"] = "zombie/fx_meatball_round_tell_zod_zmb";
-  vehicle::add_vehicletype_callback("raps", &_setup_);
+  vehicle::add_vehicletype_callback("raps", & _setup_);
 }
 
 function _setup_(localclientnum) {
   self.notifyonbulletimpact = 1;
   self thread wait_for_bullet_impact(localclientnum);
   self setanim("ai_zombie_zod_insanity_elemental_idle", 1);
-  if(isDefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
+  if(isdefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
     self duplicate_render::set_dr_flag("keyline_active", 1);
     self duplicate_render::update_dr_filters(localclientnum);
   }
@@ -63,13 +63,13 @@ function elemental_round_ring_fx(localclientnum, oldval, newval, bnewent, biniti
 
 function wait_for_bullet_impact(localclientnum) {
   self endon("entityshutdown");
-  if(isDefined(self.scriptbundlesettings)) {
+  if(isdefined(self.scriptbundlesettings)) {
     settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   } else {
     return;
   }
-  while(true) {
+  while (true) {
     self waittill("damage", attacker, impactpos, effectdir, partname);
-    playFX(localclientnum, settings.weakspotfx, impactpos, effectdir);
+    playfx(localclientnum, settings.weakspotfx, impactpos, effectdir);
   }
 }

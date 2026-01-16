@@ -11,10 +11,10 @@
 
 main() {
   anim.boatanims = [];
-  anim.boatanims["left"] = spawnStruct();
+  anim.boatanims["left"] = spawnstruct();
   anim.boatanims["left"].base = % zodiac_aim_left;
   anim.boatanims["left"].trans = % zodiac_trans_R2L; // Why would we use the "R_2_L" animation to transition from the "left" pose to the "right" pose, you ask? I don't know, my friend. I don't know.
-  anim.boatanims["left"].aim = spawnStruct();
+  anim.boatanims["left"].aim = spawnstruct();
   anim.boatanims["left"].aim.left = % zodiac_rightside_aim4;
   anim.boatanims["left"].aim.center = % zodiac_rightside_aim5;
   anim.boatanims["left"].aim.right = % zodiac_rightside_aim6;
@@ -24,10 +24,10 @@ main() {
   anim.boatanims["left"].idle = % zodiac_rightside_idle;
   anim.boatanims["left"].twitch = array( % zodiac_rightside_shift, % zodiac_rightside_react);
 
-  anim.boatanims["right"] = spawnStruct();
+  anim.boatanims["right"] = spawnstruct();
   anim.boatanims["right"].base = % zodiac_aim_right;
   anim.boatanims["right"].trans = % zodiac_trans_L2R;
-  anim.boatanims["right"].aim = spawnStruct();
+  anim.boatanims["right"].aim = spawnstruct();
   anim.boatanims["right"].aim.left = % zodiac_leftside_aim4;
   anim.boatanims["right"].aim.center = % zodiac_leftside_aim5;
   anim.boatanims["right"].aim.right = % zodiac_leftside_aim6;
@@ -39,16 +39,13 @@ main() {
 }
 
 draw_line_toshootpos() {
-  while(1) {
-    if(isDefined(self.shootpos)) {
+  while (1) {
+    if(isdefined(self.shootpos))
       Line(self.shootpos, self.origin, (1, 0, 0), 1);
-    }
-    if(isDefined(self.favoriteenemy)) {
+    if(isdefined(self.favoriteenemy))
       Line(self.favoriteenemy.origin, self.origin, (0, 0, 1), 1);
-    }
-    if(isDefined(self.zodiac_enemy)) {
+    if(isdefined(self.zodiac_enemy))
       Line(self.zodiac_enemy.origin, self.origin, (0, 1, 0), 1);
-    }
     wait .05;
   }
 
@@ -62,18 +59,16 @@ endthink() // this function is not called right now, but it should be if an AI e
 think() {
   self endon("killanimscript"); // (includes death)
 
-  if(!ent_flag_exist("transitioning_positions")) {
+  if(!ent_flag_exist("transitioning_positions"))
     ent_flag_init("transitioning_positions");
-  } else {
+  else
     ent_flag_clear("transitioning_positions");
-  }
 
   animscripts\utility::initialize("zodiac");
 
   self.a.boatAimYaw = 0;
-  if(!isDefined(self.a.boat_pose)) {
+  if(!isdefined(self.a.boat_pose))
     self.a.boat_pose = "right";
-  }
 
   self.a.last_boat_pose_switch = gettime();
 
@@ -91,7 +86,7 @@ think() {
   self childthread idleAimDir();
   //	self childthread draw_line_toshootpos();
 
-  for(;;) {
+  for (;;) {
     self thread disableBoatIdle();
 
     if(self shouldReload()) {
@@ -148,25 +143,21 @@ shouldReload() {
     // it looks bad to reload when we have targets.
     // we'll reload when we get a chance.
 
-    if(!isDefined(self.a.wantBoatReloadTime)) {
+    if(!isDefined(self.a.wantBoatReloadTime))
       self.a.wantBoatReloadTime = gettime();
-    }
     self animscripts\weaponList::RefillClip();
   }
 
   if(isDefined(self.a.wantBoatReloadTime)) {
     // don't wait too long.
-    if(gettime() - self.a.wantBoatReloadTime > 2500) {
+    if(gettime() - self.a.wantBoatReloadTime > 2500)
       return true;
-    }
 
-    if(!canAimAtEnemy()) {
+    if(!canAimAtEnemy())
       return true;
-    }
 
-    if(self.a.lastShootTime < gettime() - 1500) {
+    if(self.a.lastShootTime < gettime() - 1500)
       return true;
-    }
   }
 
   return false;
@@ -185,9 +176,8 @@ boatReload() {
 }
 
 disableBoatIdle() {
-  if(!isDefined(self.a.boatIdle)) {
+  if(!isDefined(self.a.boatIdle))
     return;
-  }
 
   self endon("killanimscript");
 
@@ -204,35 +194,29 @@ disableBoatIdle() {
 enableBoatIdle() {
   self notify("want_boat_idle");
 
-  if(isDefined(self.a.boatIdle)) {
+  if(isdefined(self.a.boatIdle))
     return;
-  }
   self.a.boatIdle = true;
 
   self endon("end_boat_idle");
 
   idleAnim = anim.boatanims[self.a.boat_pose].idle;
-  if(isDefined(idleAnim)) {
+  if(isDefined(idleAnim))
     self setAnimKnob(idleAnim, 1, 0.2);
-  }
 }
 
 shouldDoTwitch() {
-  if(self.a.lastShootTime > gettime() - 2000) {
+  if(self.a.lastShootTime > gettime() - 2000)
     return false;
-  }
 
-  if(gettime() < self.a.lastBoatTwitchTime + 1500) {
+  if(gettime() < self.a.lastBoatTwitchTime + 1500)
     return false;
-  }
 
-  if(isDefined(self.enemy) && self.enemy sightconetrace(self getEye())) {
+  if(isDefined(self.enemy) && self.enemy sightconetrace(self getEye()))
     return false;
-  }
 
-  if(!isDefined(anim.boatanims[self.a.boat_pose].twitch)) {
+  if(!isDefined(anim.boatanims[self.a.boat_pose].twitch))
     return false;
-  }
 
   return true;
 }
@@ -241,10 +225,9 @@ doBoatTwitch() {
   twitches = anim.boatanims[self.a.boat_pose].twitch;
 
   twitchAnim = twitches[randomint(twitches.size)];
-  for(i = 0; i < 5; i++) {
-    if(!isDefined(self.a.lastBoatTwitchAnim) || twitchAnim != self.a.lastBoatTwitchAnim) {
+  for (i = 0; i < 5; i++) {
+    if(!isdefined(self.a.lastBoatTwitchAnim) || twitchAnim != self.a.lastBoatTwitchAnim)
       break;
-    }
     twitchAnim = twitches[randomint(twitches.size)];
   }
 
@@ -256,7 +239,7 @@ doBoatTwitch() {
 }
 
 zodiacShootBehavior() {
-  if(!isDefined(self.enemy) || !self.enemy sightconetrace(self getEye())) {
+  if(!isdefined(self.enemy) || !self.enemy sightconetrace(self getEye())) {
     self.shootent = undefined;
     self.shootpos = undefined;
     self.shootstyle = "none";
@@ -267,11 +250,10 @@ zodiacShootBehavior() {
   self.shootpos = self.enemy getShootAtPos();
   distSq = distanceSquared(self.origin, self.enemy.origin);
 
-  if(distSq < 4000 * 4000) {
+  if(distSq < 4000 * 4000)
     self.shootstyle = "burst";
-  } else {
+  else
     self.shootstyle = "single";
-  }
 }
 
 watchVelocity() {
@@ -279,7 +261,7 @@ watchVelocity() {
   self.prevpos = self.origin;
   self.boatvelocity = (0, 0, 0);
 
-  for(;;) {
+  for (;;) {
     wait .05;
     self.boatvelocity = (self.origin - self.prevpos) / .05;
     self.prevpos = self.origin;
@@ -294,21 +276,19 @@ waitRandomTimeBoat() {
 idleAimDir() {
   self endon("killanimscript");
 
-  for(;;) {
-    if(self.a.boat_pose == "left") {
+  for (;;) {
+    if(self.a.boat_pose == "left")
       self.idleAimYaw = randomfloatrange(-20, 40);
-    } else {
+    else
       self.idleAimYaw = randomfloatrange(-40, 20);
-    }
 
     self waitRandomTimeBoat();
   }
 }
 
 getBoatAimYawToShootPos(predictionTime) {
-  if(!isDefined(self.shootPos)) {
+  if(!isDefined(self.shootPos))
     return 0;
-  }
 
   predictedShootPos = self.shootPos - self.boatvelocity * predictionTime;
 
@@ -317,9 +297,8 @@ getBoatAimYawToShootPos(predictionTime) {
 }
 
 canAimAtEnemy() {
-  if(!isDefined(self.shootPos)) {
+  if(!isDefined(self.shootPos))
     return false;
-  }
 
   aimYaw = getDesiredBoatAimYaw();
   anims = anim.boatanims[self.a.boat_pose];
@@ -331,11 +310,10 @@ getDesiredBoatAimYaw() {
 
   if(isDefined(self.shootPos)) {
     aimYaw = getBoatAimYawToShootPos(.1);
-    if(self.a.boat_pose == "left") {
+    if(self.a.boat_pose == "left")
       aimYaw = AngleClamp180(aimYaw + 40.5);
-    } else {
+    else
       aimYaw = AngleClamp180(aimYaw - 36);
-    }
   } else {
     aimYaw = self.idleAimYaw;
   }
@@ -346,33 +324,29 @@ getDesiredBoatAimYaw() {
 updateBoatAim() {
   // need to be able to aim quickly because we're moving quickly, so don't cap too much
   maxTurn = 15;
-  if(!isDefined(self.shootPos)) {
+  if(!isDefined(self.shootPos))
     maxTurn = 5;
-  }
 
   aimYaw = getDesiredBoatAimYaw();
 
   if(abs(aimYaw - self.a.boatAimYaw) > maxTurn) {
-    if(aimYaw < self.a.boatAimYaw) {
+    if(aimYaw < self.a.boatAimYaw)
       aimYaw = self.a.boatAimYaw - maxTurn;
-    } else {
+    else
       aimYaw = self.a.boatAimYaw + maxTurn;
-    }
   }
 
   anims = anim.boatanims[self.a.boat_pose];
   if(aimYaw < 0) {
     frac = aimYaw / anims.leftAimLimit;
-    if(frac > 1) {
+    if(frac > 1)
       frac = 1;
-    }
     self setAnimKnob(anims.aim.center, 1 - frac, 0.1);
     self setAnim(anims.aim.left, frac, 0.1);
   } else {
     frac = aimYaw / anims.rightAimLimit;
-    if(frac > 1) {
+    if(frac > 1)
       frac = 1;
-    }
     self setAnimKnob(anims.aim.center, 1 - frac, 0.1);
     self setAnim(anims.aim.right, frac, 0.1);
   }
@@ -385,7 +359,7 @@ updateBoatAimThread() {
   self endon("killanimscript");
   self endon("end_shootUntilNeedToChangePose");
 
-  for(;;) {
+  for (;;) {
     updateBoatAim();
     wait .1;
   }
@@ -408,14 +382,12 @@ watchForNeedToChangePoseOrTimeout() {
 
   endtime = gettime() + 4000 + randomint(2000);
 
-  while(1) {
-    if(gettime() > endtime || needToChangePose() != "none") {
+  while (1) {
+    if(gettime() > endtime || needToChangePose() != "none")
       break;
-    }
 
-    if(self shouldReload()) {
+    if(self shouldReload())
       break;
-    }
 
     wait .1;
   }
@@ -424,73 +396,62 @@ watchForNeedToChangePoseOrTimeout() {
 }
 
 needToChangePose_other() {
-  if(self.a.last_boat_pose_switch > gettime() - 2000) {
+  if(self.a.last_boat_pose_switch > gettime() - 2000)
     return "none";
-  }
 
-  if(self.a.lastShootTime > gettime() - 2000) {
+  if(self.a.lastShootTime > gettime() - 2000)
     return "none";
-  }
 
-  if(!isDefined(self.shootPos)) {
+  if(!isDefined(self.shootPos))
     return "none";
-  }
 
   aimYaw = getBoatAimYawToShootPos(0.5); // half second prediction
 
   if(self.a.boat_pose == "left") {
-    if(aimYaw > 15 && aimYaw < 160) {
+    if(aimYaw > 15 && aimYaw < 160)
       return "right";
-    }
   } else if(self.a.boat_pose == "right") {
-    if(aimYaw < -15 && aimYaw > -160) {
+    if(aimYaw < -15 && aimYaw > -160)
       return "left";
-    }
   }
 
   return "none";
 }
 
 needToChangePose() {
-  if(isDefined(self.use_auto_pose)) {
+  if(isdefined(self.use_auto_pose))
     return needToChangePose_other();
-  }
 
   if(isDefined(self.scripted_boat_pose)) {
-    if(self.a.boat_pose == self.scripted_boat_pose) {
+    if(self.a.boat_pose == self.scripted_boat_pose)
       return "none";
-    }
 
     return self.scripted_boat_pose;
   }
 
   // we always want the "left" pose now
-  if(self.a.boat_pose == "right") {
+  if(self.a.boat_pose == "right")
     return "left";
-  }
 
   return "none";
 
   /*
-  if( !isDefined( self.shootPos ) ) {
+  if( !isDefined( self.shootPos ) )
   	return "none";
-  }
-  	
+	
   aimYaw = getBoatAimYawToShootPos( 0.5 ); // half second prediction
-  	
+	
   if( self.a.boat_pose == "left" )
   {
-  	if( aimYaw > 15 && aimYaw < 160 ) {
+  	if( aimYaw > 15 && aimYaw < 160 )
   		return "right";
-  	}
   }
   else if( self.a.boat_pose == "right" )
   {
-  	if( aimYaw < -15 && aimYaw > -160 ) {
+  	if( aimYaw < -15 && aimYaw > -160 )
   		return "left";
-  	}
   }
-  	
+	
   return "none";
   */
 }

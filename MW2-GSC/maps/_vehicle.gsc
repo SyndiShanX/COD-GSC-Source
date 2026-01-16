@@ -3,9 +3,9 @@
  * Script: maps\_vehicle.gsc
 ********************************************************/
 
-/*
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 VEHICLE script
 
@@ -15,8 +15,8 @@ It handles initializing a vehicle( giving it life, turrets, machine guns, treads
 It also handles spawning of vehicles in a very ugly way for now, we're getting code to make it pretty
 
 Most things you see in the vehicle menu in Radiant are handled here.There's all sorts of properties
-that you can set on a trigger to access some of this functionality.A trigger can spawn a vehicle,
-toggle different behaviors,
+that you can set on a trigger to access some of this functionality.A trigger can spawn a vehicle, 
+toggle different behaviors, 
 
 HIGH LEVEL FUNCTIONS
 // vehicle_init( vehicle )
@@ -34,8 +34,8 @@ HIGH LEVEL FUNCTIONS
 	to move this functionality to CODE side because we have to use a lot of wrappers for
 	attaching a vehicle to a path
 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 */
 #include maps\_utility;
 #include maps\_anim;
@@ -47,10 +47,10 @@ CONST_MPHCONVERSION = 17.6;
 CONST_bp_height = 300;
 
 init_vehicles() {
+
   // For Engineering when they need test specific functionality of vehicles
-  if(isDefined(level.disableVehicleScripts) && level.disableVehicleScripts) {
+  if(IsDefined(level.disableVehicleScripts) && level.disableVehicleScripts)
     return;
-  }
 
   level.heli_default_decel = 10; // will likely go back to 10 in the near future
 
@@ -67,7 +67,7 @@ init_vehicles() {
 
   setup_vehicle_spawners();
 
-  array_thread(getEntArray("truckjunk", "targetname"), ::truckjunk);
+  array_thread(GetEntArray("truckjunk", "targetname"), ::truckjunk);
 
   // pre - associate ai and spawners with their vehicles
   setup_ai();
@@ -91,8 +91,9 @@ init_vehicles() {
 
   init_level_has_vehicles();
 
-  add_hint_string("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
-  add_hint_string("invulerable_bullets", &"SCRIPT_INVULERABLE_BULLETS", undefined);
+  add_hint_string("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
+  add_hint_string("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
+
 }
 
 init_helicopter_list() {
@@ -128,19 +129,17 @@ init_level_has_vehicles() {
   level.levelHasVehicles = false;
   // if there are any vehicles prespawned of any team in the level then there are vehicles
 
-  vehicles = getEntArray("script_vehicle", "code_classname");
-  if(vehicles.size > 0) {
+  vehicles = GetEntArray("script_vehicle", "code_classname");
+  if(vehicles.size > 0)
     level.levelHasVehicles = true;
-  }
 }
 
 trigger_getlinkmap(trigger) {
   linkMap = [];
-  if(isDefined(trigger.script_linkTo)) {
+  if(IsDefined(trigger.script_linkTo)) {
     links = StrTok(trigger.script_linkTo, " ");
-    foreach(link in links) {
-      linkMap[link] = true;
-    }
+    foreach(link in links)
+    linkMap[link] = true;
     links = undefined;
   }
   return linkMap;
@@ -149,18 +148,16 @@ trigger_getlinkmap(trigger) {
 // setup_script_gatetrigger( trigger, linkMap )
 setup_script_gatetrigger(trigger) {
   gates = [];
-  if(isDefined(trigger.script_gatetrigger)) {
+  if(IsDefined(trigger.script_gatetrigger))
     return level.vehicle_gatetrigger[trigger.script_gatetrigger];
-  }
   return gates;
 }
 
 // setup_script_vehiclespawngroup( trigger, vehicles, linkMap )
 setup_script_vehiclespawngroup(trigger, vehicles) {
   script_vehiclespawngroup = false;
-  if(isDefined(trigger.script_VehicleSpawngroup)) {
+  if(IsDefined(trigger.script_VehicleSpawngroup))
     script_vehiclespawngroup = true;
-  }
   return script_vehiclespawngroup;
 }
 
@@ -172,27 +169,26 @@ setup_vehicle_spawners() {
 }
 
 vehicle_spawn_think() {
-  if(isDefined(self.script_kill_vehicle_spawner)) {
+  if(IsDefined(self.script_kill_vehicle_spawner)) {
     group = self.script_kill_vehicle_spawner;
-    if(!isDefined(level.vehicle_killspawn_groups[group])) {
+    if(!isdefined(level.vehicle_killspawn_groups[group])) {
       level.vehicle_killspawn_groups[group] = [];
     }
     level.vehicle_killspawn_groups[group][level.vehicle_killspawn_groups[group].size] = self;
   }
 
-  if(isDefined(self.script_deathflag)) {
+  if(IsDefined(self.script_deathflag))
     thread maps\_spawner::vehicle_spawner_deathflag();
-  }
 
   self thread vehicle_linked_entities_think();
 
   self.count = 1;
   self.spawn_functions = [];
-  for(;;) {
+  for (;;) {
     vehicle = undefined;
     self waittill("spawned", vehicle);
     self.count--;
-    if(!isDefined(vehicle)) {
+    if(!isdefined(vehicle)) {
       PrintLn("Vehicle spawned from spawner at " + self.origin + " but didnt exist!");
       continue;
     }
@@ -206,143 +202,125 @@ vehicle_spawn_think() {
 vehicle_linked_entities_think() {
   //hides linked entities until spwned, then shows and links them to the spawned vehicle, then deletes them when vehicle dies
 
-  if(!isDefined(self.script_vehiclecargo)) {
+  if(!isdefined(self.script_vehiclecargo))
     return;
-  }
-  if(!isDefined(self.script_linkTo)) {
+  if(!isdefined(self.script_linkTo))
     return;
-  }
 
   //this is just to get at least one of the ents it is linked to...code doesn't really support script_Linking to a prefab
-  aLinkedEnts = getEntArray(self.script_linkTo, "script_linkname");
-  if(aLinkedEnts.size == 0) {
+  aLinkedEnts = GetEntArray(self.script_linkTo, "script_linkname");
+  if(aLinkedEnts.size == 0)
     return;
-  }
 
   //need cargo to have a unique targetname....we can't get script_linkTo arrays within a prefab,
   //and we can't target a vehicle to the cargo since we need to target it to its nodes
   targetname = aLinkedEnts[0].targetname;
-  aLinkedEnts = getEntArray(targetname, "targetname");
+  aLinkedEnts = GetEntArray(targetname, "targetname");
 
   eOrg = undefined;
   foreach(ent in aLinkedEnts) {
-    if(ent.classname == "script_origin") {
+    if(ent.classname == "script_origin")
       eOrg = ent;
-    }
     ent Hide();
   }
 
-  AssertEx(isDefined(eOrg), "Vehicles that have script_linkTo pointing to entities must have one of those entities be a script_origin to be used as a link point of reference");
+  AssertEx(IsDefined(eOrg), "Vehicles that have script_linkTo pointing to entities must have one of those entities be a script_origin to be used as a link point of reference");
 
   foreach(ent in aLinkedEnts) {
-    if(ent != eOrg) {
+    if(ent != eOrg)
       ent LinkTo(eOrg);
-    }
   }
 
   self waittill("spawned", vehicle);
 
   foreach(ent in aLinkedEnts) {
     ent Show();
-    if(ent != eOrg) {
+    if(ent != eOrg)
       ent LinkTo(vehicle);
-    }
   }
   vehicle waittill("death");
 
-  foreach(ent in aLinkedEnts) {
-    ent Delete();
-  }
+  foreach(ent in aLinkedEnts)
+  ent Delete();
 }
 
 is_trigger_once() {
   // these triggers only trigger once where vehicle paths trigger everytime a vehicle crosses them
-  if(!isDefined(self.classname)) {
+  if(!isdefined(self.classname))
     return false;
-  }
 
-  if(self.classname == "trigger_multiple") {
+  if(self.classname == "trigger_multiple")
     return true;
-  }
 
-  if(self.classname == "trigger_radius") {
+  if(self.classname == "trigger_radius")
     return true;
-  }
 
-  if(self.classname == "trigger_lookat") {
+  if(self.classname == "trigger_lookat")
     return true;
-  }
 
   return self.classname == "trigger_disk";
 }
 
 trigger_process(trigger, vehicles) {
+
   bTriggerOnce = trigger is_trigger_once();
 
   trigger.processed_trigger = undefined; // clear out this flag that was used to get the trigger to this point.
 
   // override to make a trigger loop
-  if(isDefined(trigger.script_noteworthy) && trigger.script_noteworthy == "trigger_multiple") {
+  if(IsDefined(trigger.script_noteworthy) && trigger.script_noteworthy == "trigger_multiple")
     bTriggeronce = false;
-  }
 
   gates = setup_script_gatetrigger(trigger);
 
-  script_vehiclespawngroup = isDefined(trigger.script_VehicleSpawngroup);
+  script_vehiclespawngroup = IsDefined(trigger.script_VehicleSpawngroup);
   // origin paths and script struct paths get this value
-  script_vehicledetour = isDefined(trigger.script_vehicledetour) && (is_node_script_origin(trigger) || is_node_script_struct(trigger));
+  script_vehicledetour = IsDefined(trigger.script_vehicledetour) && (is_node_script_origin(trigger) || is_node_script_struct(trigger));
 
   // ground paths get this value
-  detoured = isDefined(trigger.detoured) && !(is_node_script_origin(trigger) || is_node_script_struct(trigger));
+  detoured = IsDefined(trigger.detoured) && !(is_node_script_origin(trigger) || is_node_script_struct(trigger));
   gotrigger = true;
 
   vehicles = undefined;
 
-  while(gotrigger) {
+  while (gotrigger) {
     trigger waittill("trigger", other);
 
-    if(isDefined(trigger.script_vehicletriggergroup)) {
-      if(!isDefined(other.script_vehicletriggergroup)) {
+    if(IsDefined(trigger.script_vehicletriggergroup)) {
+      if(!isdefined(other.script_vehicletriggergroup))
         continue;
-      }
-      if(other.script_vehicletriggergroup != trigger.script_vehicletriggergroup) {
+      if(other.script_vehicletriggergroup != trigger.script_vehicletriggergroup)
         continue;
-      }
     }
 
-    if(isDefined(trigger.enabled) && !trigger.enabled) {
+    if(IsDefined(trigger.enabled) && !trigger.enabled)
       trigger waittill("enable");
-    }
 
-    if(isDefined(trigger.script_flag_set)) {
-      if(isDefined(other.vehicle_flags)) {
+    if(IsDefined(trigger.script_flag_set)) {
+      if(IsDefined(other.vehicle_flags))
         other.vehicle_flags[trigger.script_flag_set] = true;
-      }
       other notify("vehicle_flag_arrived", trigger.script_flag_set);
       flag_set(trigger.script_flag_set);
     }
 
-    if(isDefined(trigger.script_flag_clear)) {
-      if(isDefined(other.vehicle_flags)) {
+    if(IsDefined(trigger.script_flag_clear)) {
+      if(IsDefined(other.vehicle_flags))
         other.vehicle_flags[trigger.script_flag_clear] = false;
-      }
       flag_clear(trigger.script_flag_clear);
     }
 
-    if(script_vehicledetour) {
+    if(script_vehicledetour)
       other thread path_detour_script_origin(trigger);
-    } else if(detoured && isDefined(other)) {
+    else if(detoured && IsDefined(other))
       other thread path_detour(trigger);
-    }
 
     trigger script_delay();
 
-    if(bTriggeronce) {
+    if(bTriggeronce)
       gotrigger = false;
-    }
 
-    if(isDefined(trigger.script_vehicleGroupDelete)) {
-      if(!isDefined(level.vehicle_DeleteGroup[trigger.script_vehicleGroupDelete])) {
+    if(IsDefined(trigger.script_vehicleGroupDelete)) {
+      if(!isdefined(level.vehicle_DeleteGroup[trigger.script_vehicleGroupDelete])) {
         PrintLn("failed to find deleteable vehicle with script_vehicleGroupDelete group number: ", trigger.script_vehicleGroupDelete);
         level.vehicle_DeleteGroup[trigger.script_vehicleGroupDelete] = [];
       }
@@ -353,11 +331,10 @@ trigger_process(trigger, vehicles) {
       scripted_spawn(trigger.script_VehicleSpawngroup);
     }
 
-    if(gates.size > 0 && bTriggeronce) {
+    if(gates.size > 0 && bTriggeronce)
       array_levelthread(gates, ::path_gate_open);
-    }
-    if(isDefined(trigger.script_VehicleStartMove)) {
-      if(!isDefined(level.vehicle_StartMoveGroup[trigger.script_VehicleStartMove])) {
+    if(IsDefined(trigger.script_VehicleStartMove)) {
+      if(!isdefined(level.vehicle_StartMoveGroup[trigger.script_VehicleStartMove])) {
         PrintLn("^3Vehicle start trigger is: ", trigger.script_VehicleStartMove);
         return;
       }
@@ -369,60 +346,55 @@ trigger_process(trigger, vehicles) {
 path_detour_get_detourpath(detournode) {
   detourpath = undefined;
   foreach(vehicle_detourpath in level.vehicle_detourpaths[detournode.script_vehicledetour]) {
-    if(vehicle_detourpath != detournode) {
+    if(vehicle_detourpath != detournode)
       if(!islastnode(vehicle_detourpath))
-    }
-    detourpath = vehicle_detourpath;
+        detourpath = vehicle_detourpath;
   }
   return detourpath;
 }
 
 path_detour_script_origin(detournode) {
   detourpath = path_detour_get_detourpath(detournode);
-  if(isDefined(detourpath)) {
+  if(IsDefined(detourpath))
     self thread vehicle_paths(detourpath);
-  }
 }
 
 crash_detour_check(detourpath) {
-  Assert(isDefined(detourpath.script_crashtype));
+  Assert(IsDefined(detourpath.script_crashtype));
 
   // long somewhat complex set of conditions on which a vehicle will detour through a crashpath.
   return (
     (
-      isDefined(self.deaddriver) ||
+      IsDefined(self.deaddriver) ||
       (self.health < self.healthbuffer) ||
       detourpath.script_crashtype == "forced"
     ) &&
     (
-      !isDefined(detourpath.derailed) ||
+      !isdefined(detourpath.derailed) ||
       detourpath.script_crashtype == "plane"
     )
   );
 }
 
 crash_derailed_check(detourpath) {
-  return isDefined(detourpath.derailed) && detourpath.derailed;
+  return IsDefined(detourpath.derailed) && detourpath.derailed;
 }
 
 path_detour(node) {
   detournode = GetVehicleNode(node.target, "targetname");
   detourpath = path_detour_get_detourpath(detournode);
 
-  // be more aggressive with this maybe?
-  if(!isDefined(detourpath)) {
+  // be more aggressive with this maybe? 
+  if(!IsDefined(detourpath))
     return;
-  }
 
-  if(node.detoured && !isDefined(detourpath.script_vehicledetourgroup)) {
+  if(node.detoured && !isdefined(detourpath.script_vehicledetourgroup))
     return;
-  }
 
   // if a detourpath have a crashtype it's a crashpath and should only be used by crashing vehicles.
-  if(isDefined(detourpath.script_crashtype)) {
-    if(!crash_detour_check(detourpath)) {
+  if(IsDefined(detourpath.script_crashtype)) {
+    if(!crash_detour_check(detourpath))
       return;
-    }
 
     self notify("crashpath", detourpath);
     detourpath.derailed = 1;
@@ -430,33 +402,28 @@ path_detour(node) {
     self _SetSwitchNode(node, detourpath);
     return;
   } else {
-    if(crash_derailed_check(detourpath)) {
+    if(crash_derailed_check(detourpath))
       return; // .derailed crashpaths fail crash check. this keeps other vehicles from following.
-    }
 
     // detour paths specific to grouped vehicles. So they can share a lane and detour when they need to be exciting.			
-    if(isDefined(detourpath.script_vehicledetourgroup)) {
-      if(!isDefined(self.script_vehicledetourgroup)) {
+    if(IsDefined(detourpath.script_vehicledetourgroup)) {
+      if(!isdefined(self.script_vehicledetourgroup))
         return;
-      }
-      if(detourpath.script_vehicledetourgroup != self.script_vehicledetourgroup) {
+      if(detourpath.script_vehicledetourgroup != self.script_vehicledetourgroup)
         return;
-      }
     }
 
     self notify("newpath");
     self _SetSwitchNode(detournode, detourpath);
     thread detour_flag(detourpath);
-    if(!islastnode(detournode) && !(isDefined(node.scriptdetour_persist) && node.scriptdetour_persist)) {
+    if(!islastnode(detournode) && !(IsDefined(node.scriptdetour_persist) && node.scriptdetour_persist))
       node.detoured = 1;
-    }
     self.attachedpath = detourpath;
     thread vehicle_paths();
 
     // handle transmission for physics vehicles.
-    if(self Vehicle_IsPhysVeh() && isDefined(detournode.script_transmission)) {
+    if(self Vehicle_IsPhysVeh() && IsDefined(detournode.script_transmission))
       self thread reverse_node(detournode);
-    }
     return;
   }
 }
@@ -466,11 +433,10 @@ reverse_node(detournode) {
 
   detournode waittillmatch("trigger", self);
   self.veh_transmission = detournode.script_transmission;
-  if(self.veh_transmission == "forward") {
+  if(self.veh_transmission == "forward")
     self vehicle_wheels_forward();
-  } else {
+  else
     self vehicle_wheels_backward();
-  }
 }
 
 _SetSwitchNode(detournode, detourpath) {
@@ -487,17 +453,15 @@ detour_flag(detourpath) {
 
 vehicle_Levelstuff(vehicle, trigger) {
   // associate with links. false
-  if(isDefined(vehicle.script_linkName)) {
+  if(IsDefined(vehicle.script_linkName))
     level.vehicle_link = array_2dadd(level.vehicle_link, vehicle.script_linkname, vehicle);
-  }
 
-  if(isDefined(vehicle.script_VehicleStartMove)) {
+  if(IsDefined(vehicle.script_VehicleStartMove))
     level.vehicle_StartMoveGroup = array_2dadd(level.vehicle_StartMoveGroup, vehicle.script_VehicleStartMove, vehicle);
-  }
 
-  if(isDefined(vehicle.script_vehicleGroupDelete)) {
+  if(IsDefined(vehicle.script_vehicleGroupDelete))
     level.vehicle_DeleteGroup = array_2dadd(level.vehicle_DeleteGroup, vehicle.script_vehicleGroupDelete, vehicle);
-  }
+
 }
 
 spawn_array(spawners) {
@@ -507,25 +471,23 @@ spawn_array(spawners) {
   foreach(spawner in spawners) {
     spawner.count = 1;
     dronespawn = false;
-    if(isDefined(spawner.script_drone)) {
+    if(IsDefined(spawner.script_drone)) {
       dronespawn = true;
       spawned = dronespawn_bodyonly(spawner);
       spawned maps\_drone::drone_give_soul();
-      Assert(isDefined(spawned));
+      Assert(IsDefined(spawned));
     } else {
-      dontShareEnemyInfo = (isDefined(spawner.script_stealth) && flag("_stealth_enabled") && !flag("_stealth_spotted"));
+      dontShareEnemyInfo = (IsDefined(spawner.script_stealth) && flag("_stealth_enabled") && !flag("_stealth_spotted"));
 
-      if(isDefined(spawner.script_forcespawn) || stalinggradspawneverybody) {
-        spawned = spawner Stalingradspawn(dontShareEnemyInfo);
-      } else {
-        spawned = spawner Dospawn(dontShareEnemyInfo);
-      }
+      if(IsDefined(spawner.script_forcespawn) || stalinggradspawneverybody)
+        spawned = spawner StalingradSpawn(dontShareEnemyInfo);
+      else
+        spawned = spawner DoSpawn(dontShareEnemyInfo);
     }
 
-    if(!dronespawn && !isalive(spawned)) {
+    if(!dronespawn && !isalive(spawned))
       continue;
-    }
-    Assert(isDefined(spawned));
+    Assert(IsDefined(spawned));
     ai[ai.size] = spawned;
   }
 
@@ -536,9 +498,8 @@ spawn_array(spawners) {
 remove_non_riders_from_array(aiarray) {
   living_ai = [];
   foreach(ai in aiarray) {
-    if(!ai_should_be_added(ai)) {
+    if(!ai_should_be_added(ai))
       continue;
-    }
 
     living_ai[living_ai.size] = ai;
   }
@@ -546,17 +507,14 @@ remove_non_riders_from_array(aiarray) {
 }
 
 ai_should_be_added(ai) {
-  if(IsAlive(ai)) {
+  if(IsAlive(ai))
     return true;
-  }
 
-  if(!isDefined(ai)) {
+  if(!isdefined(ai))
     return false;
-  }
 
-  if(!isDefined(ai.classname)) {
+  if(!isdefined(ai.classname))
     return false;
-  }
 
   return ai.classname == "script_model";
 }
@@ -577,29 +535,24 @@ ai_should_be_added(ai) {
 */
 get_vehicle_ai_spawners() {
   spawners = [];
-  if(isDefined(self.target)) {
-    targets = getEntArray(self.target, "targetname");
+  if(IsDefined(self.target)) {
+    targets = GetEntArray(self.target, "targetname");
     foreach(target in targets) {
-      if(!IsSubStr(target.code_classname, "actor")) {
+      if(!IsSubStr(target.code_classname, "actor"))
         continue;
-      }
-      if(!(target.spawnflags & 1)) {
+      if(!(target.spawnflags & 1))
         continue;
-      }
-      if(isDefined(target.dont_auto_ride)) {
+      if(IsDefined(target.dont_auto_ride))
         continue;
-      }
       spawners[spawners.size] = target;
     }
   }
 
-  if(!isDefined(self.script_vehicleride)) {
+  if(!isdefined(self.script_vehicleride))
     return spawners;
-  }
 
-  if(isDefined(level.vehicle_RideSpawners[self.script_vehicleride])) {
+  if(IsDefined(level.vehicle_RideSpawners[self.script_vehicleride]))
     spawners = array_combine(spawners, level.vehicle_RideSpawners[self.script_vehicleride]);
-  }
 
   return spawners;
 }
@@ -617,12 +570,10 @@ get_vehicle_ai_spawners() {
 =============
 */
 get_vehicle_ai_riders() {
-  if(!isDefined(self.script_vehicleride)) {
+  if(!isdefined(self.script_vehicleride))
     return [];
-  }
-  if(!isDefined(level.vehicle_RideAI[self.script_vehicleride])) {
+  if(!isdefined(level.vehicle_RideAI[self.script_vehicleride]))
     return [];
-  }
 
   return level.vehicle_RideAI[self.script_vehicleride];
 }
@@ -633,9 +584,8 @@ spawn_group() {
   }
 
   spawners = get_vehicle_ai_spawners();
-  if(!spawners.size) {
+  if(!spawners.size)
     return [];
-  }
 
   startinvehicles = [];
 
@@ -645,9 +595,8 @@ spawn_group() {
 
   ai = sort_by_startingpos(ai);
 
-  foreach(guy in ai) {
-    self thread maps\_vehicle_aianim::guy_enter(guy);
-  }
+  foreach(guy in ai)
+  self thread maps\_vehicle_aianim::guy_enter(guy);
   // disabling the array_levelthread because it threads them in reverse. I don't really want to be the one to mess with that right now.
   // 	array_levelthread( ai, maps\_vehicle_aianim::guy_enter, self );
   return ai;
@@ -657,35 +606,30 @@ sort_by_startingpos(guysarray) {
   firstarray = [];
   secondarray = [];
   foreach(guy in guysarray) {
-    if(isDefined(guy.script_startingposition)) {
+    if(IsDefined(guy.script_startingposition))
       firstarray[firstarray.size] = guy;
-    } else {
+    else
       secondarray[secondarray.size] = guy;
-    }
   }
   return array_combine(firstarray, secondarray);
 }
 
 vehicle_rider_walk_setup(vehicle) {
-  if(!isDefined(self.script_vehiclewalk)) {
+  if(!isdefined(self.script_vehiclewalk))
     return;
-  }
 
-  if(isDefined(self.script_followmode)) {
+  if(IsDefined(self.script_followmode))
     self.FollowMode = self.script_followmode;
-  } else {
+  else
     self.FollowMode = "cover nodes";
-  }
 
   // check if the AI should go to a node after walking with the vehicle
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target))
     return;
-  }
 
   node = GetNode(self.target, "targetname");
-  if(isDefined(node)) {
+  if(IsDefined(node))
     self.NodeAftervehicleWalk = node;
-  }
 }
 
 runtovehicle(guy) {
@@ -698,7 +642,7 @@ runtovehicle(guy) {
   closenode = climbinnode[0];
   currentdist = 5000;
   thenode = undefined;
-  for(i = 0; i < climbinnode.size; i++) {
+  for (i = 0; i < climbinnode.size; i++) {
     climborg = self GetTagOrigin(climbinnode[i]);
     climbang = self GetTagAngles(climbinnode[i]);
     org = GetStartOrigin(climborg, climbang, climbinanim[i]);
@@ -712,7 +656,7 @@ runtovehicle(guy) {
   climbang = undefined;
   climborg = undefined;
   thread runtovehicle_setgoal(guy);
-  while(!guy.vehicle_goal) {
+  while (!guy.vehicle_goal) {
     climborg = self GetTagOrigin(climbinnode[thenode]);
     climbang = self GetTagAngles(climbinnode[thenode]);
     org = GetStartOrigin(climborg, climbang, climbinanim[thenode]);
@@ -741,45 +685,39 @@ runtovehicle_setgoal(guy) {
 
 setup_groundnode_detour(node) {
   realdetournode = GetVehicleNode(node.targetname, "target");
-  if(!isDefined(realdetournode)) {
+  if(!isdefined(realdetournode))
     return;
-  }
   realdetournode.detoured = 0;
-  AssertEx(!isDefined(realdetournode.script_vehicledetour), "Detour nodes require one non-detour node before another detournode!");
+  AssertEx(!isdefined(realdetournode.script_vehicledetour), "Detour nodes require one non-detour node before another detournode!");
   add_proccess_trigger(realdetournode);
 }
 
 turn_unloading_drones_to_ai() {
   unload_group = self get_unload_group();
   foreach(index, rider in self.riders) {
-    if(!isalive(rider)) {
+    if(!isalive(rider))
       continue;
-    }
 
     // does this guy unload?
-    if(isDefined(unload_group[rider.vehicle_position])) {
+    if(IsDefined(unload_group[rider.vehicle_position]))
       self.riders[index] = self guy_becomes_real_ai(rider, rider.vehicle_position);
-    }
   }
 }
 
 add_proccess_trigger(trigger) {
   // TODO: next game. stop trying to make everything a trigger.remove trigger process. I'd do it this game but there is too much complexity in Detour nodes.
   // .processedtrigger is a flag that I set to keep a trigger from getting added twice.
-  if(isDefined(trigger.processed_trigger)) {
+  if(IsDefined(trigger.processed_trigger))
     return;
-  }
   level.vehicle_processtriggers[level.vehicle_processtriggers.size] = trigger;
   trigger.processed_trigger = true;
 }
 
 islastnode(node) {
-  if(!isDefined(node.target)) {
+  if(!isdefined(node.target))
     return true;
-  }
-  if(!isDefined(GetVehicleNode(node.target, "targetname")) && !isDefined(get_vehiclenode_any_dynamic(node.target))) {
+  if(!isdefined(GetVehicleNode(node.target, "targetname")) && !isdefined(get_vehiclenode_any_dynamic(node.target)))
     return true;
-  }
   return false;
 }
 
@@ -787,13 +725,11 @@ get_path_getfunc(pathpoint) {
   get_func = ::get_from_vehicle_node;
 
   // get_func is differnt for struct types and script_origin types of paths
-  if(isHelicopter() && isDefined(pathpoint.target)) {
-    if(isDefined(get_from_entity(pathpoint.target))) {
+  if(isHelicopter() && IsDefined(pathpoint.target)) {
+    if(IsDefined(get_from_entity(pathpoint.target)))
       get_func = ::get_from_entity;
-    }
-    if(isDefined(get_from_spawnStruct(pathpoint.target))) {
+    if(IsDefined(get_from_spawnstruct(pathpoint.target)))
       get_func = ::get_from_spawnstruct;
-    }
   }
   return get_func;
 }
@@ -802,28 +738,25 @@ path_array_setup(pathpoint) {
   get_func = ::get_from_vehicle_node;
 
   // get_func is differnt for struct types and script_origin types of paths
-  if(isHelicopter() && isDefined(pathpoint.target)) {
-    if(isDefined(get_from_entity(pathpoint.target))) {
+  if(isHelicopter() && IsDefined(pathpoint.target)) {
+    if(IsDefined(get_from_entity(pathpoint.target)))
       get_func = ::get_from_entity;
-    }
-    if(isDefined(get_from_spawnStruct(pathpoint.target))) {
+    if(IsDefined(get_from_spawnstruct(pathpoint.target)))
       get_func = ::get_from_spawnstruct;
-    }
   }
 
   arraycount = 0;
   pathpoints = [];
-  while(isDefined(pathpoint)) {
+  while (IsDefined(pathpoint)) {
     pathpoints[arraycount] = pathpoint;
     arraycount++;
 
-    if(isDefined(pathpoint.target)) {
+    if(IsDefined(pathpoint.target))
       pathpoint = [
-        }
-        [get_func]](pathpoint.target);
-    else {
+        [get_func]
+      ](pathpoint.target);
+    else
       break;
-    }
   }
   return pathpoints;
 }
@@ -854,41 +787,36 @@ node_wait(nextpoint, lastpoint) {
 */
 
 vehicle_paths(node, bhelicopterwaitforstart) {
-  AssertEx(isDefined(node) || isDefined(self.attachedpath), "vehicle_path() called without a path");
+  AssertEx(IsDefined(node) || IsDefined(self.attachedpath), "vehicle_path() called without a path");
   self notify("newpath");
 
-  if(!isDefined(bhelicopterwaitforstart)) {
+  if(!isdefined(bhelicopterwaitforstart))
     bhelicopterwaitforstart = false; // helicopters emulate StartPath() function waiting for a special scripted notify before going
-  }
 
-  if(ishelicopter()) {
+  if(ishelicopter())
     self endon("death");
-  }
 
   // dynamicpaths unique.node isn't defined by info vehicle node calls to this function
-  if(isDefined(node)) {
+  if(IsDefined(node))
     self.attachedpath = node;
-  }
 
   pathstart = self.attachedpath;
   self.currentNode = self.attachedpath;
 
-  if(!isDefined(pathstart)) {
+  if(!isdefined(pathstart))
     return;
-  }
 
   self endon("newpath");
 
-  // this converts chains of whatever types of vehicle nodes and turns them into this array,
+  // this converts chains of whatever types of vehicle nodes and turns them into this array, 
   // from this point most of the script won't care what kind of path it is.
   // 	pathpoints = path_array_setup( pathpoint );
 
   pathpoint = pathstart;
 
   // dynamic paths / struct path unique
-  if(bhelicopterwaitforstart) {
+  if(bhelicopterwaitforstart)
     self waittill("start_dynamicpath");
-  }
 
   // default type is for vehicle nodes	
   wait_func = ::node_wait;
@@ -901,166 +829,146 @@ vehicle_paths(node, bhelicopterwaitforstart) {
   nextpoint = pathstart;
   get_func = get_path_getfunc(pathstart);
 
-  while(isDefined(nextpoint)) {
-    if(isHelicopter() && isDefined(nextpoint.script_linkTo)) {
+  while (IsDefined(nextpoint)) {
+
+    if(isHelicopter() && IsDefined(nextpoint.script_linkTo))
       set_lookat_from_dest(nextpoint);
-    }
 
-    [[wait_func]](nextpoint, lastpoint);
+    [
+      [wait_func]
+    ](nextpoint, lastpoint);
 
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       return;
-    }
 
     self.currentNode = nextpoint;
 
-    if(isDefined(nextpoint.gateopen) && !nextpoint.gateopen) {
+    if(IsDefined(nextpoint.gateopen) && !nextpoint.gateopen)
       self thread path_gate_wait_till_open(nextpoint); // threaded because vehicle may Vehicle_SetSpeed( 0, 15 ) and run into the next node
-    }
 
-    // pretend like helicopter nodes are triggers.
+    // pretend like helicopter nodes are triggers. 
     if(isHelicopter()) {
       nextpoint notify("trigger", self);
 
-      if(isDefined(nextpoint.script_helimove)) {
+      if(IsDefined(nextpoint.script_helimove)) {
         set_heli_move(nextpoint.script_helimove);
       }
     }
 
-    if(isDefined(nextpoint.script_noteworthy)) {
+    if(IsDefined(nextpoint.script_noteworthy)) {
       self notify(nextpoint.script_noteworthy);
       self notify("noteworthy", nextpoint.script_noteworthy);
     }
 
     waittillframeend; // this lets other scripts interupt
 
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       return;
-    }
 
-    if(isDefined(nextpoint.script_prefab_exploder)) {
+    if(IsDefined(nextpoint.script_prefab_exploder)) {
       nextpoint.script_exploder = nextpoint.script_prefab_exploder;
       nextpoint.script_prefab_exploder = undefined;
     }
 
-    if(isDefined(nextpoint.script_exploder)) {
+    if(IsDefined(nextpoint.script_exploder)) {
       delay = nextpoint.script_exploder_delay;
-      if(isDefined(delay)) {
+      if(IsDefined(delay)) {
         level delayThread(delay, ::exploder, nextpoint.script_exploder);
       } else {
         level exploder(nextpoint.script_exploder);
       }
     }
 
-    if(isDefined(nextpoint.script_flag_set)) {
-      if(isDefined(self.vehicle_flags)) {
+    if(IsDefined(nextpoint.script_flag_set)) {
+      if(IsDefined(self.vehicle_flags))
         self.vehicle_flags[nextpoint.script_flag_set] = true;
-      }
       self notify("vehicle_flag_arrived", nextpoint.script_flag_set);
       flag_set(nextpoint.script_flag_set);
     }
 
-    if(isDefined(nextpoint.script_ent_flag_set)) {
+    if(IsDefined(nextpoint.script_ent_flag_set)) {
       self ent_flag_set(nextpoint.script_ent_flag_set);
     }
 
-    if(isDefined(nextpoint.script_ent_flag_clear)) {
+    if(IsDefined(nextpoint.script_ent_flag_clear)) {
       self ent_flag_clear(nextpoint.script_ent_flag_clear);
     }
 
-    if(isDefined(nextpoint.script_flag_clear)) {
-      if(isDefined(self.vehicle_flags)) {
+    if(IsDefined(nextpoint.script_flag_clear)) {
+      if(IsDefined(self.vehicle_flags))
         self.vehicle_flags[nextpoint.script_flag_clear] = false;
-      }
       flag_clear(nextpoint.script_flag_clear);
     }
 
-    if(isDefined(nextpoint.script_noteworthy)) {
-      if(nextpoint.script_noteworthy == "kill") {
+    if(IsDefined(nextpoint.script_noteworthy)) {
+      if(nextpoint.script_noteworthy == "kill")
         self force_kill();
-      }
-      if(nextpoint.script_noteworthy == "godon") {
+      if(nextpoint.script_noteworthy == "godon")
         self godon();
-      }
-      if(nextpoint.script_noteworthy == "godoff") {
+      if(nextpoint.script_noteworthy == "godoff")
         self godoff();
-      }
       if(nextpoint.script_noteworthy == "deleteme") {
         level thread deleteent(self);
         return; // this could be disasterous
       }
     }
 
-    if(isDefined(nextpoint.script_crashtypeoverride)) {
+    if(IsDefined(nextpoint.script_crashtypeoverride))
       self.script_crashtypeoverride = nextpoint.script_crashtypeoverride;
-    }
-    if(isDefined(nextpoint.script_badplace)) {
+    if(IsDefined(nextpoint.script_badplace))
       self.script_badplace = nextpoint.script_badplace;
-    }
-    if(isDefined(nextpoint.script_turretmg)) {
+    if(IsDefined(nextpoint.script_turretmg))
       self.script_turretmg = nextpoint.script_turretmg;
-    }
-    if(isDefined(nextpoint.script_team)) {
+    if(IsDefined(nextpoint.script_team))
       self.script_team = nextpoint.script_team;
-    }
-    if(isDefined(nextpoint.script_turningdir)) {
+    if(IsDefined(nextpoint.script_turningdir))
       self notify("turning", nextpoint.script_turningdir);
-    }
 
-    if(isDefined(nextpoint.script_deathroll)) {
+    if(IsDefined(nextpoint.script_deathroll))
       if(nextpoint.script_deathroll == 0)
-    }
-    self thread deathrolloff();
-    else {
-      self thread deathrollon();
-    }
+        self thread deathrolloff();
+      else
+        self thread deathrollon();
 
-    if(isDefined(nextpoint.script_vehicleaianim)) {
-      if(isDefined(nextpoint.script_parameters) && nextpoint.script_parameters == "queue") {
+    if(IsDefined(nextpoint.script_vehicleaianim)) {
+      if(IsDefined(nextpoint.script_parameters) && nextpoint.script_parameters == "queue")
         self.queueanim = true;
-      }
-      //			if( isDefined( nextpoint.script_startingposition ) )
+      //			if( IsDefined( nextpoint.script_startingposition ) )
       //				self.groupedanim_pos = nextpoint.script_startingposition;
       //			self vehicle_ai_event( nextpoint.script_vehicleaianim );
     }
 
-    if(isDefined(nextpoint.script_wheeldirection)) {
+    if(IsDefined(nextpoint.script_wheeldirection))
       self wheeldirectionchange(nextpoint.script_wheeldirection);
-    }
 
-    if(vehicle_should_unload(wait_func, nextpoint)) {
+    if(vehicle_should_unload(wait_func, nextpoint))
       self thread unload_node(nextpoint);
-    }
 
     // physics vehicles have transmission "forward" or "reverse"
 
     if(self Vehicle_IsPhysVeh()) {
-      if(isDefined(nextpoint.script_transmission)) {
+      if(IsDefined(nextpoint.script_transmission)) {
         self.veh_transmission = nextpoint.script_transmission;
-        if(self.veh_transmission == "forward") {
+        if(self.veh_transmission == "forward")
           self vehicle_wheels_forward();
-        } else {
+        else
           self vehicle_wheels_backward();
-        }
       }
 
-      if(isDefined(nextpoint.script_pathtype)) {
+      if(IsDefined(nextpoint.script_pathtype))
         self.veh_pathtype = nextpoint.script_pathtype;
-      }
     }
 
-    if(isDefined(nextpoint.script_delay)) {
+    if(IsDefined(nextpoint.script_delay)) {
       if(isHelicopter()) {
         // helicopters do the script_delay in heli_wait_node()
       } else {
         decel = 35;
-        if(isDefined(nextpoint.script_decel)) {
+        if(IsDefined(nextpoint.script_decel))
           decel = nextpoint.script_decel;
-        }
         self Vehicle_SetSpeed(0, decel);
-        if(isDefined(nextpoint.target)) {
+        if(IsDefined(nextpoint.target))
           self thread overshoot_next_node([
-            }
             [get_func]
           ](nextpoint.target));
         nextpoint script_delay();
@@ -1069,8 +977,8 @@ vehicle_paths(node, bhelicopterwaitforstart) {
       }
     }
 
-    if(isDefined(nextpoint.script_flag_wait)) {
-      if(!isDefined(self.vehicle_flags)) {
+    if(IsDefined(nextpoint.script_flag_wait)) {
+      if(!isdefined(self.vehicle_flags)) {
         self.vehicle_flags = [];
       }
 
@@ -1081,12 +989,11 @@ vehicle_paths(node, bhelicopterwaitforstart) {
       // may have to provide a smoother way to stop and go tho, this is rather arbitrary, for tanks
       // in this case
 
-      if(!flag(nextpoint.script_flag_wait) || isDefined(nextpoint.script_delay_post)) {
+      if(!flag(nextpoint.script_flag_wait) || IsDefined(nextpoint.script_delay_post)) {
         if(!isHelicopter()) {
           decel = 35;
-          if(isDefined(nextpoint.script_decel)) {
+          if(IsDefined(nextpoint.script_decel))
             decel = nextpoint.script_decel;
-          }
           self Vehicle_SetSpeed(0, decel);
           self thread overshoot_next_node([
             [get_func]
@@ -1098,16 +1005,14 @@ vehicle_paths(node, bhelicopterwaitforstart) {
       flag_wait(nextpoint.script_flag_wait);
 
       // added script_delay_post to vehicle paths
-      if(isDefined(nextpoint.script_delay_post)) {
+      if(IsDefined(nextpoint.script_delay_post))
         wait nextpoint.script_delay_post;
-      }
 
       if(!isHelicopter()) {
         accel = 10;
 
-        if(isDefined(nextpoint.script_accel)) {
+        if(IsDefined(nextpoint.script_accel))
           accel = nextpoint.script_accel;
-        }
 
         self ResumeSpeed(accel);
       }
@@ -1115,28 +1020,26 @@ vehicle_paths(node, bhelicopterwaitforstart) {
       self notify("delay_passed");
     }
 
-    if(isDefined(self.set_lookat_point)) {
+    if(IsDefined(self.set_lookat_point)) {
       self.set_lookat_point = undefined;
       self ClearLookAtEnt();
     }
 
-    if(isDefined(nextpoint.script_vehicle_lights_off)) {
+    if(IsDefined(nextpoint.script_vehicle_lights_off))
       self thread lights_off(nextpoint.script_vehicle_lights_off);
-    }
-    if(isDefined(nextpoint.script_vehicle_lights_on)) {
+    if(IsDefined(nextpoint.script_vehicle_lights_on))
       self thread lights_on(nextpoint.script_vehicle_lights_on);
-    }
-    if(isDefined(nextpoint.script_forcecolor)) {
+    if(IsDefined(nextpoint.script_forcecolor))
       self thread vehicle_script_forcecolor_riders(nextpoint.script_forcecolor);
-    }
 
     lastpoint = nextpoint;
-    if(!isDefined(nextpoint.target)) {
+    if(!isdefined(nextpoint.target))
       break;
-    }
-    nextpoint = [[get_func]](nextpoint.target);
+    nextpoint = [
+      [get_func]
+    ](nextpoint.target);
 
-    if(!isDefined(nextpoint)) {
+    if(!isdefined(nextpoint)) {
       nextpoint = lastpoint;
       assertmsg("can't find nextpoint for node at origin (node targets nothing or different type?): " + lastpoint.origin);
       break;
@@ -1144,7 +1047,7 @@ vehicle_paths(node, bhelicopterwaitforstart) {
 
   }
 
-  if(isDefined(self.script_turretmg)) {
+  if(IsDefined(self.script_turretmg)) {
     if(self.script_turretmg == 1) {
       self mgOn();
     } else {
@@ -1152,39 +1055,32 @@ vehicle_paths(node, bhelicopterwaitforstart) {
     }
   }
 
-  if(isDefined(nextpoint.script_land)) {
+  if(IsDefined(nextpoint.script_land))
     self thread vehicle_landvehicle();
-  }
 
   self notify("reached_dynamic_path_end");
 
-  if(isDefined(self.script_vehicle_selfremove)) {
+  if(IsDefined(self.script_vehicle_selfremove))
     self Delete();
-  }
 }
 
 vehicle_should_unload(wait_func, nextpoint) {
-  //	if( isDefined( nextpoint.script_unload ) || ( wait_func == ::node_wait && islastnode( nextpoint ) && !isDefined( self.dontunloadonend ) && !is_script_vehicle_selfremove() ) )
+  //	if( IsDefined( nextpoint.script_unload ) || ( wait_func == ::node_wait && islastnode( nextpoint ) && !isdefined( self.dontunloadonend ) && !is_script_vehicle_selfremove() ) )
 
-  if(isDefined(nextpoint.script_unload)) {
+  if(IsDefined(nextpoint.script_unload))
     return true;
-  }
 
-  if(wait_func != ::node_wait) {
+  if(wait_func != ::node_wait)
     return false;
-  }
 
-  if(!islastnode(nextpoint)) {
+  if(!islastnode(nextpoint))
     return false;
-  }
 
-  if(isDefined(self.dontunloadonend)) {
+  if(isdefined(self.dontunloadonend))
     return false;
-  }
 
-  if(self.vehicletype == "empty") {
+  if(self.vehicletype == "empty")
     return false;
-  }
 
   return !is_script_vehicle_selfremove();
 }
@@ -1193,10 +1089,9 @@ overshoot_next_node(vnode) {
   // asserts if the next node in a chain is reached while trying to come to a complete stop.
   // This can happen if the deceleration is too low and/or the next node is too close the the delay node.
   // If this happens the vehicle script will have missed the notify on the upcomming node and be stuck waiting for it.
-
-  if(!isDefined(vnode)) {
+  /#
+  if(!isdefined(vnode))
     return;
-  }
 
   self endon("delay_passed");
   vnode waittillmatch("trigger", self);
@@ -1206,13 +1101,14 @@ overshoot_next_node(vnode) {
   PrintLn("^1A vehicle most likely overshoot a node at " + vnode.origin + " while trying to come to a stop.");
   PrintLn("^1This will stop any future nodes for that vehicle to be handled by the vehicle script.");
   PrintLn("^1**************************************************************************************");
+  # /
 }
 
 is_script_vehicle_selfremove() {
-  if(!isDefined(self.script_vehicle_selfremove)) {
+  if(!isdefined(self.script_vehicle_selfremove))
     return false;
-  }
   return self.script_vehicle_selfremove;
+
 }
 
 /*
@@ -1251,21 +1147,19 @@ set_heli_move(heliMove) {
 
 must_stop_at_next_point(nextpoint) {
   // gotta be able to slow down for unload nodes
-  if(isDefined(nextpoint.script_unload)) {
+  if(IsDefined(nextpoint.script_unload))
     return true;
-  }
 
-  if(isDefined(nextpoint.script_delay)) {
+  if(IsDefined(nextpoint.script_delay))
     return true;
-  }
   // gotta stop if it depends on a flag
-  return isDefined(nextpoint.script_flag_wait) && !flag(nextpoint.script_flag_wait);
+  return IsDefined(nextpoint.script_flag_wait) && !flag(nextpoint.script_flag_wait);
 }
 
 heli_wait_node(nextpoint, lastpoint) {
   self endon("newpath");
   // this handles a single node on helicopter path.they are script_structs in radiant, or script_origins
-  if(isDefined(nextpoint.script_unload) && isDefined(self.fastropeoffset)) {
+  if(IsDefined(nextpoint.script_unload) && IsDefined(self.fastropeoffset)) {
     nextpoint.radius = 2;
     neworg = groundpos(nextpoint.origin) + (0, 0, self.fastropeoffset);
 
@@ -1277,17 +1171,17 @@ heli_wait_node(nextpoint, lastpoint) {
     self SetHoverParams(0, 0, 0);
   }
 
-  if(isDefined(lastpoint)) {
-    if(isDefined(lastpoint.script_airresistance)) {
+  if(IsDefined(lastpoint)) {
+    if(IsDefined(lastpoint.script_airresistance)) {
       self SetAirResistance(lastpoint.script_airresistance);
     }
 
-    if(isDefined(lastpoint.speed)) {
+    if(IsDefined(lastpoint.speed)) {
       speed = lastpoint.speed;
 
       accel = 25;
       decel = undefined;
-      if(isDefined(lastpoint.script_decel)) {
+      if(IsDefined(lastpoint.script_decel)) {
         decel = lastpoint.script_decel;
       } else {
         if(must_stop_at_next_point(nextpoint)) {
@@ -1295,7 +1189,7 @@ heli_wait_node(nextpoint, lastpoint) {
         }
       }
 
-      if(isDefined(lastpoint.script_accel)) {
+      if(IsDefined(lastpoint.script_accel)) {
         accel = lastpoint.script_accel;
       } else {
         max_accel = speed / 4;
@@ -1303,12 +1197,11 @@ heli_wait_node(nextpoint, lastpoint) {
           accel = max_accel;
         }
 
-        if(accel < 15) {
+        if(accel < 15)
           accel = 15;
-        }
       }
 
-      if(isDefined(decel)) {
+      if(IsDefined(decel)) {
         self Vehicle_SetSpeed(speed, accel, decel);
       } else {
         self Vehicle_SetSpeed(speed, accel);
@@ -1322,7 +1215,7 @@ heli_wait_node(nextpoint, lastpoint) {
 
   self set_heli_goal(nextpoint);
 
-  if(isDefined(nextpoint.radius)) {
+  if(IsDefined(nextpoint.radius)) {
     self SetNearGoalNotifyDist(nextpoint.radius);
     AssertEx(nextpoint.radius > 0, "radius: " + nextpoint.radius);
     self waittill_any("near_goal", "goal");
@@ -1330,21 +1223,21 @@ heli_wait_node(nextpoint, lastpoint) {
     self waittill("goal");
   }
 
-  if(isDefined(nextpoint.script_flag_set)) {
+  /#
+  if(IsDefined(nextpoint.script_flag_set))
     self notify("reached_current_node", nextpoint, nextpoint.script_flag_set);
-  } else {
+  else
     self notify("reached_current_node", nextpoint);
-  }
+  # /
 
-  if(isDefined(nextpoint.script_firelink)) {
-    thread heli_firelink(nextpoint);
-    //		self SetVehWeapon( "hind_turret" );
-  }
-
-  if(isDefined(nextpoint.script_stopnode)) {
-    if(nextpoint.script_stopnode) {
-      self notify("reached_stop_node");
+    if(IsDefined(nextpoint.script_firelink)) {
+      thread heli_firelink(nextpoint);
+      //		self SetVehWeapon( "hind_turret" );
     }
+
+  if(IsDefined(nextpoint.script_stopnode)) {
+    if(nextpoint.script_stopnode)
+      self notify("reached_stop_node");
     nextpoint script_delay();
   }
 
@@ -1353,10 +1246,10 @@ heli_wait_node(nextpoint, lastpoint) {
 
 heli_firelink(nextpoint) {
   target = GetEnt(nextpoint.script_linkto, "script_linkname");
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     target = getstruct(nextpoint.script_linkto, "script_linkname");
 
-    AssertEx(isDefined(target), "No target for script_firelink");
+    AssertEx(IsDefined(target), "No target for script_firelink");
   }
   fire_burst = nextpoint.script_fireLink;
 
@@ -1398,50 +1291,48 @@ set_heli_goal(node) {
   self endon("death");
 
   stop = false;
-  if(!isDefined(stop)) {
+  if(!isdefined(stop))
     stop = true;
-  }
-  if(isDefined(node.script_stopnode)) // z: stop at nodes if there is a script_stopnode = 1 value
+  if(IsDefined(node.script_stopnode)) // z: stop at nodes if there is a script_stopnode = 1 value
     stop = node.script_stopnode;
-  if(isDefined(node.script_unload)) {
+  if(IsDefined(node.script_unload))
     stop = true;
-  }
 
-  script_anglevehicle = isDefined(node.script_anglevehicle) && node.script_anglevehicle;
-  script_goalyaw = isDefined(node.script_goalyaw) && node.script_goalyaw;
+  script_anglevehicle = IsDefined(node.script_anglevehicle) && node.script_anglevehicle;
+  script_goalyaw = IsDefined(node.script_goalyaw) && node.script_goalyaw;
 
-  if(isDefined(node.script_anglevehicle) || isDefined(node.script_goalyaw)) {
+  if(IsDefined(node.script_anglevehicle) || IsDefined(node.script_goalyaw))
     self forcetarget(node, script_goalyaw, script_anglevehicle);
-  } else {
+  else
     self unforcetarget();
-  }
 
-  if(isDefined(node.script_flag_wait)) {
+  if(IsDefined(node.script_flag_wait)) {
     if(!flag(node.script_flag_wait)) {
       // if the flag gets set during flight, we should update the setvehgoalpos to not stop
       stop = true;
     }
   }
-  if(!isDefined(node.target)) {
+  if(!isdefined(node.target)) {
     // stop if this is the end of the path
     stop = true;
   } else
-  if(isDefined(node.script_delay)) {
+  if(IsDefined(node.script_delay)) {
     stop = true;
   }
 
+  /#
   index = -1;
   foreach(index, struct in level.struct) {
-    if(node == struct) {
+    if(node == struct)
       break;
-    }
   }
+  # /
 
-  self setvehgoalpos_wrap(node.origin, stop); // Z: second param = false dont stop at each node.
+    self setvehgoalpos_wrap(node.origin, stop); // Z: second param = false dont stop at each node.
 }
 
 forcetarget(node, script_goalyaw, script_anglevehicle) {
-  AssertEx(isDefined(node.angles), "Node with targetname ", node.target, " has no .angles");
+  AssertEx(IsDefined(node.angles), "Node with targetname ", node.target, " has no .angles");
   // [ 14:45 ] [ jiesang - ?? ]: lookat entity > goalyaw > targetyaw
   if(script_goalyaw) {
     self ClearTargetYaw();
@@ -1458,9 +1349,8 @@ unforcetarget() {
 }
 
 deathrollon() {
-  if(self.health > 0) {
+  if(self.health > 0)
     self.rollingdeath = 1;
-  }
 }
 
 deathrolloff() {
@@ -1485,39 +1375,39 @@ deathrolloff() {
 getonpath(skip_attach) {
   path_start = undefined;
   type = self.vehicletype;
-  if(isDefined(self.dontgetonpath)) {
+  if(isdefined(self.dontgetonpath))
     return;
-  }
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     path_start = GetVehicleNode(self.target, "targetname");
 
-    if(ishelicopter() && isDefined(path_start)) {
+    /#
+    if(ishelicopter() && IsDefined(path_start)) {
       PrintLn("helicopter node targetname: " + path_start.targetname);
       PrintLn("vehicletype: " + self.vehicletype);
       AssertMsg("helicopter on vehicle path( see console for info )");
     }
+    # /
 
-    if(!isDefined(path_start)) {
-      // get path start from the array of targets that may include guys that ride in the vehicle
-      path_start_array = getEntArray(self.target, "targetname");
-      foreach(path in path_start_array) {
-        if(path.code_classname == "script_origin") {
-          path_start = path;
-          break;
+      if(!isdefined(path_start)) {
+        // get path start from the array of targets that may include guys that ride in the vehicle
+        path_start_array = GetEntArray(self.target, "targetname");
+        foreach(path in path_start_array) {
+          if(path.code_classname == "script_origin") {
+            path_start = path;
+            break;
+          }
         }
       }
-    }
 
-    if(!isDefined(path_start)) {
+    if(!isdefined(path_start)) {
       path_start = getstruct(self.target, "targetname");
     }
   }
 
-  if(!isDefined(path_start)) {
-    if(ishelicopter()) {
+  if(!isdefined(path_start)) {
+    if(ishelicopter())
       self Vehicle_SetSpeed(60, 20, level.heli_default_decel);
-    }
 
     return;
   }
@@ -1527,22 +1417,19 @@ getonpath(skip_attach) {
   if(!isHelicopter()) {
     self.origin = path_start.origin;
 
-    if(!isDefined(skip_attach)) {
+    if(!isdefined(skip_attach))
       self AttachPath(path_start);
-    }
   } else {
-    if(isDefined(self.speed)) {
+    if(IsDefined(self.speed)) {
       self Vehicle_SetSpeedImmediate(self.speed, 20);
     } else
-    if(isDefined(path_start.speed)) {
+    if(IsDefined(path_start.speed)) {
       accel = 20;
       decel = level.heli_default_decel;
-      if(isDefined(path_start.script_accel)) {
+      if(IsDefined(path_start.script_accel))
         accel = path_start.script_accel;
-      }
-      if(isDefined(path_start.script_decel)) {
+      if(IsDefined(path_start.script_decel))
         accel = path_start.script_decel;
-      }
 
       self Vehicle_SetSpeedImmediate(path_start.speed, accel, decel);
     } else {
@@ -1551,14 +1438,13 @@ getonpath(skip_attach) {
     }
   }
 
-  if(!isDefined(self.dontDisconnectPaths)) {
+  if(!isdefined(self.dontDisconnectPaths))
     self DisconnectPaths();
-  }
   self thread vehicle_paths(undefined, isHelicopter());
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: create_vehicle_from_spawngroup_and_gopath( <spawnGroup> )"
 "Summary: spawns and returns and array of the vehicles in the specified spawngroup starting them on their paths"
@@ -1568,14 +1454,13 @@ getonpath(skip_attach) {
 "Example: maps\_vehicle::create_vehicle_from_spawngroup_and_gopath( spawnGroup )"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 create_vehicle_from_spawngroup_and_gopath(spawnGroup) {
   vehicleArray = maps\_vehicle::scripted_spawn(spawnGroup);
-  foreach(vehicle in vehicleArray) {
-    level thread maps\_vehicle::gopath(vehicle);
-  }
+  foreach(vehicle in vehicleArray)
+  level thread maps\_vehicle::gopath(vehicle);
   return vehicleArray;
 }
 
@@ -1595,18 +1480,17 @@ create_vehicle_from_spawngroup_and_gopath(spawnGroup) {
 */
 gopath(vehicle) {
   // helis notify reached_dynamic_path_end on end
-  if(!isDefined(vehicle)) {
+  if(!isdefined(vehicle)) {
     vehicle = self;
     AssertEx(self.code_classname == "script_vehicle", "Tried to do goPath on a non-vehicle");
   }
 
-  if(isDefined(vehicle.script_VehicleStartMove)) {
+  if(IsDefined(vehicle.script_VehicleStartMove))
     level.vehicle_StartMoveGroup[vehicle.script_VehicleStartMove] = array_remove(level.vehicle_StartMoveGroup[vehicle.script_VehicleStartMove], vehicle);
-  }
 
   vehicle endon("death");
 
-  if(isDefined(vehicle.hasstarted)) {
+  if(IsDefined(vehicle.hasstarted)) {
     PrintLn("vehicle already moving when triggered with a startmove");
     return;
   } else
@@ -1617,11 +1501,11 @@ gopath(vehicle) {
 
   vehicle notify("start_vehiclepath");
 
-  if(vehicle isHelicopter()) {
+  if(vehicle isHelicopter())
     vehicle notify("start_dynamicpath");
-  } else {
+  else
     vehicle StartPath();
-  }
+
 }
 
 path_gate_open(node) {
@@ -1636,13 +1520,12 @@ path_gate_wait_till_open(pathspot) {
   self vehicle_setspeed_wrapper(0, 15, "path gate closed");
   pathspot waittill("gate opened");
   self.waitingforgate = false;
-  if(self.health > 0) {
+  if(self.health > 0)
     script_resumespeed("gate opened", level.vehicle_ResumeSpeed);
-  }
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: scripted_spawn( <group> )"
 "Summary: spawns and returns a vehiclegroup, you will need to tell it to maps\_vehicle::gopath() when you want it to go"
@@ -1652,16 +1535,15 @@ path_gate_wait_till_open(pathspot) {
 "Example: bmps = maps\_vehicle::scripted_spawn( 32 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 scripted_spawn(group) {
   spawners = _getvehiclespawnerarray_by_spawngroup(group);
 
   vehicles = [];
-  foreach(spawner in spawners) {
-    vehicles[vehicles.size] = vehicle_spawn(spawner);
-  }
+  foreach(spawner in spawners)
+  vehicles[vehicles.size] = vehicle_spawn(spawner);
   return vehicles;
 }
 
@@ -1680,14 +1562,14 @@ LevelOn: A Level"
 */
 vehicle_spawn(vspawner) {
   Assert(isSpawner(vspawner));
-  AssertEx(!isDefined(vspawner.vehicle_spawned_thisframe), "spawning two vehicles on one spawner on the same frame is not allowed");
-  vehicle = vspawner Vehicle_Dospawn();
-  Assert(isDefined(vehicle));
+  AssertEx(!isdefined(vspawner.vehicle_spawned_thisframe), "spawning two vehicles on one spawner on the same frame is not allowed");
+  vehicle = vspawner Vehicle_DoSpawn();
+  Assert(IsDefined(vehicle));
   vspawner.vehicle_spawned_thisframe = vehicle;
   vspawner.last_spawned_vehicle = vehicle;
   vspawner thread remove_vehicle_spawned_thisframe();
   thread vehicle_init(vehicle);
-  // want to get this put in code and rearrange all this stuff so that people can use Vehicle_Dospawn() directly and not have to initialize the vehicle scripts.
+  // want to get this put in code and rearrange all this stuff so that people can use Vehicle_DoSpawn() directly and not have to initialize the vehicle scripts.
   vspawner notify("spawned", vehicle);
   return vehicle;
 }
@@ -1695,10 +1577,9 @@ vehicle_spawn(vspawner) {
 // this is getting a little strange.. kind of a special case for a mo script that I really don't want to spend time unravelling scoutsniper
 get_vehicle_spawned_from_spawner_with_targetname(targetname) {
   spawner = GetEnt(targetname, "targetname");
-  Assert(isDefined(spawner));
-  if(isDefined(spawner.last_spawned_vehicle)) {
+  Assert(IsDefined(spawner));
+  if(IsDefined(spawner.last_spawned_vehicle))
     return spawner.last_spawned_vehicle;
-  }
   return undefined;
 }
 
@@ -1712,16 +1593,15 @@ waittill_vehiclespawn(targetname) {
   Assert(isSpawner(spawner));
 
   // for those vehicles spawned on the first frame. trying to avoid waittillframeend juggling though I don't think this is much better =/.
-  if(isDefined(spawner.vehicle_spawned_thisframe)) {
+  if(IsDefined(spawner.vehicle_spawned_thisframe))
     return spawner.vehicle_spawned_thisframe;
-  }
 
   spawner waittill("spawned", vehicle);
   return vehicle;
 }
 
 waittill_vehiclespawn_noteworthy(noteworthy) {
-  potential_spawners = getEntArray(noteworthy, "script_noteworthy");
+  potential_spawners = GetEntArray(noteworthy, "script_noteworthy");
   spawner = undefined;
   foreach(test in potential_spawners) {
     if(isSpawner(test)) {
@@ -1730,12 +1610,11 @@ waittill_vehiclespawn_noteworthy(noteworthy) {
     }
   }
 
-  Assert(isDefined(spawner));
+  Assert(IsDefined(spawner));
 
   // for those vehicles spawned on the first frame. trying to avoid waittillframeend juggling though I don't think this is much better =/.
-  if(isDefined(spawner.vehicle_spawned_thisframe)) {
+  if(IsDefined(spawner.vehicle_spawned_thisframe))
     return spawner.vehicle_spawned_thisframe;
-  }
 
   spawner = GetEnt(noteworthy, "script_noteworthy");
   spawner waittill("spawned", vehicle);
@@ -1743,16 +1622,15 @@ waittill_vehiclespawn_noteworthy(noteworthy) {
 }
 
 waittill_vehiclespawn_noteworthy_array(noteworthy) {
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.array_count = 0;
   struct.vehicles = [];
 
   array = [];
-  potentials_array = getEntArray(noteworthy, "script_noteworthy");
+  potentials_array = GetEntArray(noteworthy, "script_noteworthy");
   foreach(test in potentials_array) {
-    if(isSpawner(test)) {
+    if(isSpawner(test))
       array[array.size] = test;
-    }
   }
 
   Assert(array.size);
@@ -1765,18 +1643,16 @@ waittill_vehiclespawn_noteworthy_array_countdown(spawner, struct) {
   struct.array_count++;
 
   // for those vehicles spawned on the first frame. trying to avoid waittillframeend juggling though I don't think this is much better =/.
-  if(!isDefined(spawner.vehicle_spawned_thisframe)) {
+  if(!isdefined(spawner.vehicle_spawned_thisframe))
     spawner waittill("spawned", vehicle);
-  } else {
+  else
     vehicle = spawner.vehicle_spawned_thisframe;
-  }
 
-  Assert(isDefined(vehicle));
+  Assert(IsDefined(vehicle));
   struct.array_count--;
   struct.vehicles[struct.vehicles.size] = vehicle;
-  if(!struct.array_count) {
+  if(!struct.array_count)
     struct notify("all_vehicles_spawned");
-  }
 }
 
 vehicle_init(vehicle) {
@@ -1787,21 +1663,18 @@ vehicle_init(vehicle) {
     return;
   }
 
-  if(vehicle.vehicletype == "bog_mortar") {
+  if(vehicle.vehicletype == "bog_mortar")
     return;
-  }
-  if((isDefined(vehicle.script_noteworthy)) && (vehicle.script_noteworthy == "playervehicle")) {
+  if((IsDefined(vehicle.script_noteworthy)) && (vehicle.script_noteworthy == "playervehicle"))
     return; // TODO:I really don't think we should branch off the players vehicle so early. - nate
-  }
 
   vehicle set_ai_number(); // unique id for each vehicle or ai
 
   // TODO: These shouldn't be asigned to everyvehicle
   vehicle.zerospeed = true;
 
-  if(!isDefined(vehicle.modeldummyon)) {
+  if(!isdefined(vehicle.modeldummyon))
     vehicle.modeldummyon = false;
-  }
 
   type = vehicle.vehicletype;
 
@@ -1812,9 +1685,9 @@ vehicle_init(vehicle) {
   vehicle vehicle_setteam();
 
   // init pointer is specified in the precache script( IE maps\_tiger::main() )
-  // only special case gag works should exist in this thread,
+  // only special case gag works should exist in this thread, 
 
-  if(!isDefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model])) {
+  if(!isdefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model])) {
     PrintLn("vehicle.vehicletype is: " + vehicle.vehicletype);
     PrintLn("vehicle.model is: " + vehicle.model);
   }
@@ -1823,9 +1696,9 @@ vehicle_init(vehicle) {
   vehicle thread maingun_FX();
   vehicle thread playTankExhaust();
 
-  if(!isDefined(vehicle.script_avoidplayer)) {
+
+  if(!isdefined(vehicle.script_avoidplayer))
     vehicle.script_avoidplayer = false;
-  }
 
   vehicle ent_flag_init("unloaded");
   vehicle ent_flag_init("loaded");
@@ -1834,7 +1707,7 @@ vehicle_init(vehicle) {
   vehicle.unload_group = "default";
 
   vehicle.fastroperig = [];
-  if(isDefined(level.vehicle_attachedmodels) && isDefined(level.vehicle_attachedmodels[type])) {
+  if(IsDefined(level.vehicle_attachedmodels) && IsDefined(level.vehicle_attachedmodels[type])) {
     rigs = level.vehicle_attachedmodels[type];
     strings = GetArrayKeys(rigs);
     foreach(string in strings) {
@@ -1847,50 +1720,43 @@ vehicle_init(vehicle) {
   vehicle thread vehicle_badplace();
 
   // toggle vehicle lights on / off
-  if(isDefined(vehicle.script_vehicle_lights_on)) {
+  if(IsDefined(vehicle.script_vehicle_lights_on))
     vehicle thread lights_on(vehicle.script_vehicle_lights_on);
-  }
 
-  if(isDefined(vehicle.script_godmode)) {
+  if(IsDefined(vehicle.script_godmode)) {
     vehicle godon();
   }
 
   // regenerate friendly fire damage
-  if(!vehicle isCheap()) {
+  if(!vehicle isCheap())
     vehicle thread friendlyfire_shield();
-  }
 
   // handles guys riding and doing stuff on vehicles
   vehicle thread maps\_vehicle_aianim::handle_attached_guys();
 
-  if(isDefined(vehicle.script_friendname)) {
-    vehicle setVehicleLookAtText(vehicle.script_friendname, &"");
-  }
+  if(isdefined(vehicle.script_friendname))
+    vehicle setVehicleLookAtText(vehicle.script_friendname, & "");
 
   // special stuff for unloading
-  if(!vehicle isCheap()) {
+  if(!vehicle isCheap())
     vehicle thread vehicle_handleunloadevent();
-  }
 
-  if(isDefined(vehicle.script_dontunloadonend)) {
+  if(isdefined(vehicle.script_dontunloadonend))
     vehicle.dontunloadonend = true;
-  }
 
   // Make the main turret think
   vehicle thread turret_attack_think();
 
   // Shellshock player on main turret fire.
-  if(!vehicle isCheap()) {
+  if(!vehicle isCheap())
     vehicle thread vehicle_shoot_shock(); // moved to indiviual tank scripts.
-  }
 
   // make the vehicle rumble
   vehicle thread vehicle_rumble();
 
   // make vehicle shake physics objects.
-  if(isDefined(vehicle.script_physicsjolt) && vehicle.script_physicsjolt) {
+  if(IsDefined(vehicle.script_physicsjolt) && vehicle.script_physicsjolt)
     vehicle thread physicsjolt_proximity();
-  }
 
   // handle tread effects
   vehicle thread vehicle_treads();
@@ -1903,23 +1769,21 @@ vehicle_init(vehicle) {
   // make the wheels rotate
   vehicle thread animate_drive_idle();
 
-  if(isDefined(vehicle.script_deathflag)) {
+  if(IsDefined(vehicle.script_deathflag)) {
     vehicle thread maps\_spawner::vehicle_deathflag();
   }
 
   // handle machine guns
-  if(!vehicle isCheap()) {
+  if(!vehicle isCheap())
     vehicle thread mginit();
-  }
 
-  if(isDefined(level.vehicleSpawnCallbackThread)) {
+  if(IsDefined(level.vehicleSpawnCallbackThread))
     level thread[[level.vehicleSpawnCallbackThread]](vehicle);
-  }
 
   // this got kind of ugly and hackery but it's how I deal with player driveable vehicles in decoytown, elalamein, 88ridge and libya
-  //	if( isDefined( vehicle.spawnflags ) && vehicle.spawnflags & 1 )
+  //	if( IsDefined( vehicle.spawnflags ) && vehicle.spawnflags & 1 )
   //	{
-  //		startinvehicle = ( isDefined( vehicle.script_noteworthy ) && vehicle.script_noteworthy == "startinside" );// can't see making a whole new keys.txt entry for something that's only going to be used once in any given level.
+  //		startinvehicle = ( IsDefined( vehicle.script_noteworthy ) && vehicle.script_noteworthy == "startinside" );// can't see making a whole new keys.txt entry for something that's only going to be used once in any given level.
   //		vehicle maps\_vehicledrive::setup_vehicle_other();
   //		vehicle thread maps\_vehicledrive::vehicle_wait( startinvehicle );
   //		vehicle_Levelstuff( vehicle );
@@ -1930,26 +1794,23 @@ vehicle_init(vehicle) {
   // associate vehicle with living level variables.
   vehicle_Levelstuff(vehicle);
 
-  if(isDefined(vehicle.script_team)) {
+  if(IsDefined(vehicle.script_team))
     vehicle SetVehicleTeam(vehicle.script_team);
-  }
 
   // every vehicle that stops will disconnect its paths
-  if(!vehicle isCheap()) {
+  if(!vehicle isCheap())
     vehicle thread disconnect_paths_whenstopped();
-  }
 
   // get on path and start the path handler thread
   vehicle thread getonpath();
 
   // helicopters do dust kickup fx
-  if(vehicle hasHelicopterDustKickup()) {
+  if(vehicle hasHelicopterDustKickup())
     vehicle thread aircraft_dust_kickup();
-  }
 
   // physics vehicles have pathtypes constrained or follow
   if(vehicle Vehicle_IsPhysVeh()) {
-    if(!isDefined(vehicle.script_pathtype)) {
+    if(!isdefined(vehicle.script_pathtype)) {
       //vehicle.veh_pathtype = "follow";
     } else {
       vehicle.veh_pathtype = vehicle.script_pathtype;
@@ -1964,38 +1825,31 @@ vehicle_init(vehicle) {
 }
 
 kill_damage(type) {
-  if(!isDefined(level.vehicle_death_radiusdamage) || !isDefined(level.vehicle_death_radiusdamage[type])) {
+  if(!isdefined(level.vehicle_death_radiusdamage) || !isdefined(level.vehicle_death_radiusdamage[type]))
     return;
-  }
 
-  if(isDefined(self.deathdamage_max)) {
+  if(IsDefined(self.deathdamage_max))
     maxdamage = self.deathdamage_max;
-  } else {
+  else
     maxdamage = level.vehicle_death_radiusdamage[type].maxdamage;
-  }
-  if(isDefined(self.deathdamage_min)) {
+  if(IsDefined(self.deathdamage_min))
     mindamage = self.deathdamage_min;
-  } else {
+  else
     mindamage = level.vehicle_death_radiusdamage[type].mindamage;
-  }
 
-  if(isDefined(level.vehicle_death_radiusdamage[type].delay)) {
+  if(IsDefined(level.vehicle_death_radiusdamage[type].delay))
     wait level.vehicle_death_radiusdamage[type].delay;
-  }
 
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return; // deleted in this time.
-  }
 
-  if(level.vehicle_death_radiusdamage[type].bKillplayer) {
+  if(level.vehicle_death_radiusdamage[type].bKillplayer)
     level.player EnableHealthShield(false);
-  }
 
   self RadiusDamage(self.origin + level.vehicle_death_radiusdamage[type].offset, level.vehicle_death_radiusdamage[type].range, maxdamage, mindamage, self);
 
-  if(level.vehicle_death_radiusdamage[type].bKillplayer) {
+  if(level.vehicle_death_radiusdamage[type].bKillplayer)
     level.player EnableHealthShield(true);
-  }
 }
 
 vehicle_kill() {
@@ -2007,17 +1861,16 @@ vehicle_kill() {
   cause = undefined;
   registered_kill = false;
 
-  while(1) {
+  while (1) {
     // waittill death twice. in some cases the vehicle dies and does a bunch of stuff. then it gets deleted. which it then needs to do more stuff
-    if(isDefined(self)) {
+    if(IsDefined(self))
       self waittill("death", attacker, cause);
-    }
 
     if(!registered_kill) {
       registered_kill = true;
-      if(isDefined(attacker) && isDefined(cause)) {
+      if(IsDefined(attacker) && IsDefined(cause)) {
         attacker maps\_player_stats::register_kill(self, cause);
-        if(isDefined(self.damage_type)) {
+        if(IsDefined(self.damage_type)) {
           self.damage_type = undefined;
         }
       }
@@ -2025,54 +1878,47 @@ vehicle_kill() {
 
     self notify("clear_c4");
 
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
     // some tank and turret cleanup
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
-    if(isDefined(self.rumbletrigger)) {
+    if(IsDefined(self.rumbletrigger))
       self.rumbletrigger Delete();
-    }
 
-    if(isDefined(self.mgturret)) {
+    if(IsDefined(self.mgturret)) {
       array_levelthread(self.mgturret, ::turret_deleteme);
       self.mgturret = undefined;
     }
 
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-    if(isDefined(self.script_team)) {
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
+    if(IsDefined(self.script_team))
       level.vehicles[self.script_team] = array_remove(level.vehicles[self.script_team], self);
-    }
 
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
     // previously unstuff
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
-    if(isDefined(self.script_linkName)) {
+    if(IsDefined(self.script_linkName))
       level.vehicle_link[self.script_linkName] = array_remove(level.vehicle_link[self.script_linkName], self);
-    }
 
     // dis - associate with targets
 
-    if(isDefined(self.script_VehicleStartMove)) {
+    if(IsDefined(self.script_VehicleStartMove))
       level.vehicle_StartMoveGroup[self.script_VehicleStartMove] = array_remove(level.vehicle_StartMoveGroup[self.script_VehicleStartMove], self);
-    }
 
-    if(isDefined(self.script_vehicleGroupDelete)) {
+    if(IsDefined(self.script_vehicleGroupDelete))
       level.vehicle_DeleteGroup[self.script_vehicleGroupDelete] = array_remove(level.vehicle_DeleteGroup[self.script_vehicleGroupDelete], self);
-    }
 
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
     // if vehicle is gone then delete the ai here.
-    if(!isDefined(self) || is_corpse()) {
-      if(isDefined(self.riders)) {
+    if(!isdefined(self) || is_corpse()) {
+      if(IsDefined(self.riders))
         foreach(rider in self.riders)
-      }
-      if(isDefined(rider)) {
+      if(IsDefined(rider))
         rider Delete();
-      }
 
       if(is_corpse()) {
         self.riders = [];
@@ -2083,16 +1929,14 @@ vehicle_kill() {
       return;
     }
 
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
-    if(isDefined(level.vehicle_rumble[type])) {
+    if(IsDefined(level.vehicle_rumble[type]))
       self StopRumble(level.vehicle_rumble[type].rumble);
-    }
 
-    if(isDefined(level.vehicle_death_thread[type])) {
+    if(IsDefined(level.vehicle_death_thread[type]))
       thread[[level.vehicle_death_thread[type]]]();
-    }
 
     // kill riders riders blow up
     self array_levelthread(self.riders, maps\_vehicle_aianim::guy_vehicle_death, attacker, type);
@@ -2102,13 +1946,12 @@ vehicle_kill() {
     thread kill_damage(type);
     thread kill_badplace(type);
 
-    kill_lights(model); // delay hacked.. isDefined() checks for deleted each time.
+    kill_lights(model); // delay hacked.. IsDefined() checks for deleted each time.
 
     delete_corpses_around_vehicle();
 
-    if(isDefined(level.vehicle_deathmodel[model])) {
+    if(IsDefined(level.vehicle_deathmodel[model]))
       self thread set_death_model(level.vehicle_deathmodel[model], level.vehicle_deathmodel_delay[model]);
-    }
 
     rocketdeath = vehicle_should_do_rocket_death(model, attacker, cause);
     vehOrigin = self.origin;
@@ -2116,15 +1959,13 @@ vehicle_kill() {
     thread kill_fx(model, rocketdeath);
 
     // all the vehicles get the same jolt..
-    if(self.code_classname == "script_vehicle") {
+    if(self.code_classname == "script_vehicle")
       self thread kill_jolt(type);
-    }
 
-    if(isDefined(self.delete_on_death)) {
+    if(IsDefined(self.delete_on_death)) {
       wait 0.05;
-      if(!isDefined(self.dontDisconnectPaths) && !self Vehicle_IsPhysVeh()) {
+      if(!isdefined(self.dontDisconnectPaths) && !self Vehicle_IsPhysVeh())
         self DisconnectPaths();
-      }
 
       self FreeVehicle();
       wait 0.05;
@@ -2133,11 +1974,10 @@ vehicle_kill() {
       continue;
     }
 
-    if(isDefined(self.free_on_death)) {
+    if(IsDefined(self.free_on_death)) {
       self notify("newpath");
-      if(!isDefined(self.dontDisconnectPaths)) {
+      if(!isdefined(self.dontDisconnectPaths))
         self DisconnectPaths();
-      }
 
       Vehicle_kill_badplace_forever();
       self FreeVehicle();
@@ -2146,38 +1986,32 @@ vehicle_kill() {
 
     vehicle_do_crash(model, attacker, cause);
 
-    if(!rocketdeath) {
+    if(!rocketdeath)
       vehOrigin = self.origin;
-    }
-    if(isDefined(level.vehicle_death_earthquake[type])) {
+    if(IsDefined(level.vehicle_death_earthquake[type]))
       earthquake(
-      }
-      level.vehicle_death_earthquake[type].scale,
+        level.vehicle_death_earthquake[type].scale,
         level.vehicle_death_earthquake[type].duration,
         vehOrigin,
         level.vehicle_death_earthquake[type].radius
-    );
+      );
 
     wait .5;
 
-    if(is_corpse()) {
+    if(is_corpse())
       continue;
-    }
 
-    if(isDefined(self)) {
-      while(isDefined(self.dontfreeme) && isDefined(self)) {
+    if(IsDefined(self)) {
+      while (IsDefined(self.dontfreeme) && IsDefined(self))
         wait .05;
-      }
-      if(!isDefined(self)) {
+      if(!isdefined(self))
         continue;
-      }
 
       if(self Vehicle_IsPhysVeh()) {
         // if it's a physics vehicle then don't free it, since that stops it from doing physics when dead.
         // wait for 0 speed then disconnect paths and kill badplaces.
-        while(self.veh_speed != 0) {
+        while (self.veh_speed != 0)
           wait 1;
-        }
         self DisconnectPaths();
         self notify("kill_badplace_forever");
         self kill(); // make sure it's dead.
@@ -2188,9 +2022,8 @@ vehicle_kill() {
       } else
         self FreeVehicle();
 
-      if(self.modeldummyon) {
+      if(self.modeldummyon)
         self Hide();
-      }
     }
 
     if(vehicle_is_crashing()) {
@@ -2203,44 +2036,39 @@ vehicle_kill() {
 
 vehicle_should_do_rocket_death(model, attacker, cause) {
   //ability to disable by setting this variable to false.
-  if(isDefined(self.enableRocketDeath) && self.enableRocketDeath == false) {
+  if(IsDefined(self.enableRocketDeath) && self.enableRocketDeath == false)
     return false;
-  }
-  if(!isDefined(cause)) {
+  if(!IsDefined(cause))
     return false;
-  }
-  if(!((cause == "MOD_PROJECTILE") || (cause == "MOD_PROJECTILE_SPLASH"))) {
+  if(!((cause == "MOD_PROJECTILE") || (cause == "MOD_PROJECTILE_SPLASH")))
     return false;
-  }
 
   return vehicle_has_rocket_death(model);
 }
 
 vehicle_has_rocket_death(model) {
-  return isDefined(level.vehicle_death_fx["rocket_death" + self.vehicletype + model]) && isDefined(self.enableRocketDeath) && self.enableRocketDeath == true;
+  return IsDefined(level.vehicle_death_fx["rocket_death" + self.vehicletype + model]) && IsDefined(self.enableRocketDeath) && self.enableRocketDeath == true;
 }
 
 vehicle_is_crashing() {
-  return (isDefined(self.crashing)) && (self.crashing == true);
+  return (IsDefined(self.crashing)) && (self.crashing == true);
 }
+
 
 vehicle_do_crash(model, attacker, cause) {
   // crazy crashpath stuff.
   crashtype = "tank";
-  if(self Vehicle_IsPhysVeh()) {
+  if(self Vehicle_IsPhysVeh())
     crashtype = "physics";
-  } else {
-    if(isDefined(self.script_crashtypeoverride))
-  }
-  crashtype = self.script_crashtypeoverride;
-  else {
-    if(self isHelicopter())
-  }
-  crashtype = "helicopter";
-  else {
-    if(isDefined(self.currentnode) && crash_path_check(self.currentnode))
-  }
-  crashtype = "none";
+  else
+  if(IsDefined(self.script_crashtypeoverride))
+    crashtype = self.script_crashtypeoverride;
+  else
+  if(self isHelicopter())
+    crashtype = "helicopter";
+  else
+  if(IsDefined(self.currentnode) && crash_path_check(self.currentnode))
+    crashtype = "none";
 
   switch (crashtype) {
     case "helicopter":
@@ -2248,21 +2076,19 @@ vehicle_do_crash(model, attacker, cause) {
       break;
 
     case "tank":
-      if(!isDefined(self.rollingdeath)) {
+      if(!isdefined(self.rollingdeath))
         self vehicle_setspeed_wrapper(0, 25, "Dead");
-      } else {
+      else {
         self vehicle_setspeed_wrapper(8, 25, "Dead rolling out of path intersection");
         self waittill("deathrolloff");
         self vehicle_setspeed_wrapper(0, 25, "Dead, finished path intersection");
       }
 
       self notify("deadstop");
-      if(!isDefined(self.dontDisconnectPaths)) {
+      if(!isdefined(self.dontDisconnectPaths))
         self DisconnectPaths();
-      }
-      if((isDefined(self.tankgetout)) && (self.tankgetout > 0)) {
+      if((IsDefined(self.tankgetout)) && (self.tankgetout > 0))
         self waittill("animsdone"); // tankgetout will never get notified if there are no guys getting out
-      }
 
       break;
 
@@ -2270,77 +2096,65 @@ vehicle_do_crash(model, attacker, cause) {
       self VehPhys_Crash();
 
       self notify("deadstop");
-      if(!isDefined(self.dontDisconnectPaths)) {
+      if(!isdefined(self.dontDisconnectPaths))
         self DisconnectPaths();
-      }
-      if((isDefined(self.tankgetout)) && (self.tankgetout > 0)) {
+      if((IsDefined(self.tankgetout)) && (self.tankgetout > 0))
         self waittill("animsdone"); // tankgetout will never get notified if there are no guys getting out
-      }
       break;
   }
 
-  if(isDefined(level.vehicle_hasMainTurret[model]) && level.vehicle_hasMainTurret[model]) {
+  if(IsDefined(level.vehicle_hasMainTurret[model]) && level.vehicle_hasMainTurret[model])
     self ClearTurretTarget();
-  }
 
   if(self isHelicopter()) {
-    if((isDefined(self.crashing)) && (self.crashing == true)) {
+    if((IsDefined(self.crashing)) && (self.crashing == true))
       self waittill("crash_done");
-    }
   } else {
-    while(!is_corpse() && isDefined(self) && self Vehicle_GetSpeed() > 0) {
+    while (!is_corpse() && IsDefined(self) && self Vehicle_GetSpeed() > 0)
       wait .1;
-    }
   }
 
   self notify("stop_looping_death_fx");
   self notify("death_finished");
+
 }
 
 is_corpse() {
   is_corpse = false;
-  if(isDefined(self) && self.classname == "script_vehicle_corpse") {
+  if(IsDefined(self) && self.classname == "script_vehicle_corpse")
     is_corpse = true;
-  }
   return is_corpse;
 }
 
 set_death_model(sModel, fDelay) {
-  Assert(isDefined(sModel));
-  if(isDefined(fDelay) && (fDelay > 0)) {
+  Assert(IsDefined(sModel));
+  if(IsDefined(fDelay) && (fDelay > 0))
     wait fDelay;
-  }
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   eModel = get_dummy();
-  if(isDefined(self.clear_anims_on_death)) {
+  if(IsDefined(self.clear_anims_on_death))
     eModel ClearAnim( % root, 0);
-  }
-  if(isDefined(self)) {
-    eModel setModel(sModel);
-  }
+  if(IsDefined(self))
+    eModel SetModel(sModel);
 }
 
 helicopter_crash(attacker, cause) {
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(IsDefined(attacker) && IsPlayer(attacker))
     self.achievement_attacker = attacker;
-  }
 
   self.crashing = true;
 
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
 
-  if(isDefined(attacker) && (IsPlayer(attacker))) {
+  if(IsDefined(attacker) && (IsPlayer(attacker))) {
     thread arcadeMode_kill(self.origin, "explosive", 750);
     attacker thread giveXp("kill", 1000);
 
     if(GetDvar("money_sharing") == "1") {
-      foreach(player in level.players) {
-        player thread giveMoney("kill", 750, attacker);
-      }
+      foreach(player in level.players)
+      player thread giveMoney("kill", 750, attacker);
     } else
       attacker thread giveMoney("kill", 750);
   }
@@ -2350,49 +2164,46 @@ helicopter_crash(attacker, cause) {
 
 _hasweapon(weapon) {
   weapons = self GetWeaponsListAll();
-  for(i = 0; i < weapons.size; i++) {
-    if(IsSubStr(weapons[i], weapon)) {
+  for (i = 0; i < weapons.size; i++) {
+    if(IsSubStr(weapons[i], weapon))
       return true;
-    }
   }
   return false;
 }
 
 get_unused_crash_locations() {
   unusedLocations = [];
-  for(i = 0; i < level.helicopter_crash_locations.size; i++) {
-    if(isDefined(level.helicopter_crash_locations[i].claimed)) {
+  for (i = 0; i < level.helicopter_crash_locations.size; i++) {
+    if(IsDefined(level.helicopter_crash_locations[i].claimed))
       continue;
-    }
     unusedLocations[unusedLocations.size] = level.helicopter_crash_locations[i];
   }
   return unusedLocations;
 }
 
 detach_getoutrigs() {
-  if(!isDefined(self.fastroperig)) {
+  if(!isdefined(self.fastroperig))
     return;
-  }
-  if(!self.fastroperig.size) {
+  if(!self.fastroperig.size)
     return;
-  }
   keys = GetArrayKeys(self.fastroperig);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     self.fastroperig[keys[i]] Unlink();
   }
 }
 
 helicopter_crash_move(attacker, cause) {
-  if(isDefined(self.perferred_crash_location)) {
+
+  if(IsDefined(self.perferred_crash_location))
     crashLoc = self.perferred_crash_location;
-  } else {
+  else {
     // get the nearest unused crash location
     AssertEx(level.helicopter_crash_locations.size > 0, "A helicopter tried to crash but you didn't have any script_origins with targetname helicopter_crash_location in the level");
     unusedLocations = get_unused_crash_locations();
     AssertEx(unusedLocations.size > 0, "You dont have enough script_origins with targetname helicopter_crash_location in the level");
     crashLoc = getClosest(self.origin, unusedLocations);
   }
-  Assert(isDefined(crashLoc));
+  Assert(IsDefined(crashLoc));
 
   crashLoc.claimed = true;
 
@@ -2402,8 +2213,8 @@ helicopter_crash_move(attacker, cause) {
   self thread helicopter_crash_rotate();
   self notify("newpath");
 
-  if(isDefined(crashLoc.script_parameters) && crashLoc.script_parameters == "direct") {
-    Assert(isDefined(crashLoc.radius));
+  if(IsDefined(crashLoc.script_parameters) && crashLoc.script_parameters == "direct") {
+    Assert(IsDefined(crashLoc.radius));
     crash_speed = 60;
     self Vehicle_SetSpeed(crash_speed, 15, 10);
     self SetNearGoalNotifyDist(crashLoc.radius);
@@ -2417,10 +2228,10 @@ helicopter_crash_move(attacker, cause) {
 
     msg = "blank";
 
-    while(msg != "death") {
+    while (msg != "death") {
       msg = self waittill_any("goal", "near_goal", "death");
       // waittill_any ends on "death"
-      if(!isDefined(msg) && !isDefined(self)) {
+      if(!isdefined(msg) && !isdefined(self)) {
         crashLoc.claimed = undefined;
         self notify("crash_done");
         return;
@@ -2443,10 +2254,9 @@ helicopter_crash_rotate() {
 
   //self SetMaxPitchRoll( 150, 600 );
   self SetYawSpeed(400, 100, 100);
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self))
       return;
-    }
     iRand = RandomIntRange(90, 120);
     self SetTargetYaw(self.angles[1] + iRand);
     wait 0.5;
@@ -2457,52 +2267,48 @@ crash_path_check(node) {
   // find a crashnode on the current path
   // this only works on ground info_vehicle_node vheicles. not dynamic helicopter script_origin paths. they have their own dynamic crashing.
   targ = node;
-  while(isDefined(targ)) {
-    if((isDefined(targ.detoured)) && (targ.detoured == 0)) {
+  while (IsDefined(targ)) {
+    if((IsDefined(targ.detoured)) && (targ.detoured == 0)) {
       detourpath = path_detour_get_detourpath(GetVehicleNode(targ.target, "targetname"));
-      if(isDefined(detourpath) && isDefined(detourpath.script_crashtype)) {
+      if(IsDefined(detourpath) && IsDefined(detourpath.script_crashtype))
         return true;
-      }
     }
-    if(isDefined(targ.target)) {
+    if(IsDefined(targ.target))
       targ = GetVehicleNode(targ.target, "targetname");
-    } else {
+    else
       targ = undefined;
-    }
   }
   return false;
+
 }
 
 death_firesound(sound) {
   self thread play_loop_sound_on_tag(sound, undefined, false);
   self waittill_any("fire_extinguish", "stop_crash_loop_sound");
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self notify("stop sound" + sound);
 }
 
 kill_fx(model, rocketdeath) {
-  if(self isDestructible()) {
+  if(self isDestructible())
     return;
-  }
 
   level notify("vehicle_explosion", self.origin);
   self notify("explode");
   type = self.vehicletype;
   typemodel = type + model;
-  if(rocketdeath) {
+  if(rocketdeath)
     typemodel = "rocket_death" + typemodel;
-  }
 
-  for(i = 0; i < level.vehicle_death_fx[typemodel].size; i++) {
+  for (i = 0; i < level.vehicle_death_fx[typemodel].size; i++) {
     struct = level.vehicle_death_fx[typemodel][i];
     thread kill_fx_thread(model, struct, type);
   }
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: vehicle_flag_arrived( <msg> )"
 "Summary: Script waits until the vehicle hits the node that has script_flag_wait with this msg"
@@ -2512,89 +2318,83 @@ kill_fx(model, rocketdeath) {
 "Example: heli vehicle_flag_arrived( "surrender_to_me" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 vehicle_flag_arrived(msg) {
-  if(!isDefined(self.vehicle_flags)) {
+  if(!isdefined(self.vehicle_flags)) {
     self.vehicle_flags = [];
   }
 
-  while(!isDefined(self.vehicle_flags[msg])) {
+  while (!isdefined(self.vehicle_flags[msg])) {
     self waittill("vehicle_flag_arrived", notifymsg);
-    if(msg == notifymsg) {
+    if(msg == notifymsg)
       return;
-    }
   }
 }
 
 kill_fx_thread(model, struct, type) {
-  Assert(isDefined(struct));
-  if(isDefined(struct.waitDelay)) {
-    if(struct.waitDelay >= 0) {
+  Assert(IsDefined(struct));
+  if(IsDefined(struct.waitDelay)) {
+    if(struct.waitDelay >= 0)
       wait struct.waitDelay;
-    } else {
+    else
       self waittill("death_finished");
-    }
   }
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     // self may have been removed during the wait
     return;
   }
 
-  if(isDefined(struct.notifyString)) {
+  if(IsDefined(struct.notifyString))
     self notify(struct.notifyString);
-  }
 
   eModel = get_dummy();
-  if(isDefined(struct.selfDeleteDelay)) {
+  if(IsDefined(struct.selfDeleteDelay))
     self delayCall(struct.selfDeleteDelay, ::Delete);
-  }
-  if(isDefined(struct.effect)) {
-    if((struct.bEffectLooping) && (!isDefined(self.delete_on_death))) {
-      if(isDefined(struct.tag)) {
-        if((isDefined(struct.stayontag)) && (struct.stayontag == true)) {
+  if(IsDefined(struct.effect)) {
+    if((struct.bEffectLooping) && (!isdefined(self.delete_on_death))) {
+      if(IsDefined(struct.tag)) {
+        if((IsDefined(struct.stayontag)) && (struct.stayontag == true))
           thread loop_fx_on_vehicle_tag(struct.effect, struct.delay, struct.tag);
-        } else {
+        else
           thread playLoopedFxontag(struct.effect, struct.delay, struct.tag);
-        }
       } else {
         forward = (eModel.origin + (0, 0, 100)) - eModel.origin;
-        playFX(struct.effect, eModel.origin, forward);
+        PlayFX(struct.effect, eModel.origin, forward);
       }
-    } else if(isDefined(struct.tag))
-      playFXOnTag(struct.effect, deathfx_ent(), struct.tag);
+    } else if(IsDefined(struct.tag))
+      PlayFXOnTag(struct.effect, deathfx_ent(), struct.tag);
     else {
       forward = (eModel.origin + (0, 0, 100)) - eModel.origin;
-      playFX(struct.effect, eModel.origin, forward);
+      PlayFX(struct.effect, eModel.origin, forward);
     }
   }
 
-  if((isDefined(struct.sound)) && (!isDefined(self.delete_on_death))) {
-    if(struct.bSoundlooping) {
+  if((IsDefined(struct.sound)) && (!isdefined(self.delete_on_death))) {
+    if(struct.bSoundlooping)
       thread death_firesound(struct.sound);
-    } else {
+    else
       self play_sound_in_space(struct.sound);
-    }
   }
 }
 
 loop_fx_on_vehicle_tag(effect, loopTime, tag) {
-  Assert(isDefined(effect));
-  Assert(isDefined(tag));
-  Assert(isDefined(loopTime));
+  Assert(IsDefined(effect));
+  Assert(IsDefined(tag));
+  Assert(IsDefined(loopTime));
 
   self endon("stop_looping_death_fx");
 
-  while(isDefined(self)) {
-    playFXOnTag(effect, deathfx_ent(), tag);
+  while (IsDefined(self)) {
+    PlayFXOnTag(effect, deathfx_ent(), tag);
     wait loopTime;
   }
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_radiusdamage( <offset> , <range> , <maxdamage> , <mindamage> , <bKillplayer> , <delay> )"
 "Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
@@ -2610,20 +2410,17 @@ loop_fx_on_vehicle_tag(effect, loopTime, tag) {
 "Example: build_radiusdamage( ( 0, 0, 53 ), 512, 300, 20, false );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_radiusdamage(offset, range, maxdamage, mindamage, bKillplayer, delay) {
-  if(!isDefined(level.vehicle_death_radiusdamage)) {
+  if(!isdefined(level.vehicle_death_radiusdamage))
     level.vehicle_death_radiusdamage = [];
-  }
-  if(!isDefined(bKillplayer)) {
+  if(!isdefined(bKillplayer))
     bKillplayer = false;
-  }
-  if(!isDefined(offset)) {
+  if(!isdefined(offset))
     offset = (0, 0, 0);
-  }
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.offset = offset;
   struct.range = range;
   struct.maxdamage = maxdamage;
@@ -2633,8 +2430,8 @@ build_radiusdamage(offset, range, maxdamage, mindamage, bKillplayer, delay) {
   level.vehicle_death_radiusdamage[level.vttype] = struct;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_rumble( <rumble> , <scale> , <duration> , <radius> , <basetime> , <randomaditionaltime> )"
 "Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
@@ -2649,22 +2446,21 @@ build_radiusdamage(offset, range, maxdamage, mindamage, bKillplayer, delay) {
 "Example: build_rumble( "tank_rumble", 0.15, 4.5, 600, 1, 1 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
-  if(!isDefined(level.vehicle_rumble)) {
+  if(!isdefined(level.vehicle_rumble))
     level.vehicle_rumble = [];
-  }
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
-  Assert(isDefined(rumble));
+  Assert(IsDefined(rumble));
   PreCacheRumble(rumble);
   struct.rumble = rumble;
   level.vehicle_rumble[level.vttype] = struct;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_deathquake( <scale> , <duration> , <radius> )"
 "Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
@@ -2675,41 +2471,35 @@ build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
 "MandatoryArg: <radius> : radius"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_deathquake(scale, duration, radius) {
-  if(!isDefined(level.vehicle_death_earthquake)) {
+  if(!isdefined(level.vehicle_death_earthquake))
     level.vehicle_death_earthquake = [];
-  }
   level.vehicle_death_earthquake[level.vttype] = build_quake(scale, duration, radius);
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
-  if(isDefined(basetime)) {
+  if(IsDefined(basetime))
     struct.basetime = basetime;
-  }
-  if(isDefined(randomaditionaltime)) {
+  if(IsDefined(randomaditionaltime))
     struct.randomaditionaltime = randomaditionaltime;
-  }
   return struct;
 }
 
 build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, selfDeleteDelay) {
-  if(!isDefined(bSoundlooping)) {
+  if(!isdefined(bSoundlooping))
     bSoundlooping = false;
-  }
-  if(!isDefined(bEffectLooping)) {
+  if(!isdefined(bEffectLooping))
     bEffectLooping = false;
-  }
-  if(!isDefined(delay)) {
+  if(!isdefined(delay))
     delay = 1;
-  }
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.effect = _loadfx(effect);
   struct.tag = tag;
   struct.sound = sound;
@@ -2723,8 +2513,8 @@ build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, st
   return struct;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_deathfx_override( <type> , <model>, <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay>)"
 "Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences"
@@ -2745,7 +2535,7 @@ build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, st
 "Example: build_deathfx_override( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_deathfx_override(type, model, effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, delete_vehicle_delay) {
@@ -2755,28 +2545,26 @@ build_deathfx_override(type, model, effect, tag, sound, bEffectLooping, delay, b
   typemodel = type + model;
 
   //for pre precache script calls.
-  if(!isDefined(level.vehicle_death_fx)) {
+  if(!isdefined(level.vehicle_death_fx))
     level.vehicle_death_fx = [];
-  }
 
-  // overwrite the deathfx post precache.
-  if(!is_overrode(typemodel)) {
+  // overwrite the deathfx post precache. 
+  if(!is_overrode(typemodel))
     level.vehicle_death_fx[typemodel] = [];
-  }
 
   level.vehicle_death_fx_override[typemodel] = true;
 
-  if(!isDefined(level.vehicle_death_fx[typemodel])) {
+  if(!isdefined(level.vehicle_death_fx[typemodel]))
     level.vehicle_death_fx[typemodel] = [];
-  }
 
   level.vehicle_death_fx[typemodel][level.vehicle_death_fx[typemodel].size] = build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, delete_vehicle_delay);
 
   level.vtoverride = undefined;
 }
 
-/*
-=============
+
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )"
 "Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences"
@@ -2795,43 +2583,38 @@ build_deathfx_override(type, model, effect, tag, sound, bEffectLooping, delay, b
 "Example: build_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_deathfx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, delete_vehicle_delay) {
-  AssertEx(isDefined(effect), "Failed to build death effect because there is no effect specified for the model used for that vehicle.");
+  AssertEx(IsDefined(effect), "Failed to build death effect because there is no effect specified for the model used for that vehicle.");
   typemodel = level.vttype + level.vtmodel;
 
-  // don't build the deathfx if it's already in place. for call before _load.gsc.
-  if(is_overrode(typemodel)) {
+  // don't build the deathfx if it's already in place. for call before _load.gsc. 
+  if(is_overrode(typemodel))
     return;
-  }
 
-  if(!isDefined(level.vehicle_death_fx[typemodel])) {
+  if(!isdefined(level.vehicle_death_fx[typemodel]))
     level.vehicle_death_fx[typemodel] = [];
-  }
 
   level.vehicle_death_fx[typemodel][level.vehicle_death_fx[typemodel].size] = build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, delete_vehicle_delay);
 }
 
 is_overrode(typemodel) {
-  if(!isDefined(level.vehicle_death_fx_override)) {
+  if(!IsDefined(level.vehicle_death_fx_override))
     return false;
-  }
 
-  if(!isDefined(level.vehicle_death_fx_override[typemodel])) {
+  if(!IsDefined(level.vehicle_death_fx_override[typemodel]))
     return false;
-  }
 
-  if(isDefined(level.vtoverride)) {
+  if(IsDefined(level.vtoverride))
     return true; // not overrode if overriding.
-  }
 
   return level.vehicle_death_fx_override[typemodel];
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_rocket_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )"
 "Summary: Specify the alternate set of effects for a death on a vehicle caused by rockets"
@@ -2850,7 +2633,7 @@ is_overrode(typemodel) {
 "Example: build_rocket_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_rocket_deathfx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString, delete_vehicle_delay) {
@@ -2864,30 +2647,26 @@ precache_scripts() {
   // find all the vehicles in the level and initialize precaching( calling of vehicles main() mostly )
   allvehiclesprespawn = [];
 
-  vehicles = getEntArray("script_vehicle", "code_classname");
+  vehicles = GetEntArray("script_vehicle", "code_classname");
 
   level.needsprecaching = [];
   playerdrivablevehicles = [];
   allvehiclesprespawn = [];
-  if(!isDefined(level.vehicleInitThread)) {
+  if(!isdefined(level.vehicleInitThread))
     level.vehicleInitThread = [];
-  }
 
-  for(i = 0; i < vehicles.size; i++) {
+  for (i = 0; i < vehicles.size; i++) {
     vehicles[i].vehicletype = ToLower(vehicles[i].vehicletype);
-    if(vehicles[i].vehicletype == "bog_mortar" || vehicles[i].vehicletype == "empty") {
+    if(vehicles[i].vehicletype == "bog_mortar" || vehicles[i].vehicletype == "empty")
       continue;
-    }
 
-    if(isDefined(vehicles[i].spawnflags) && vehicles[i].spawnflags & 1) {
+    if(IsDefined(vehicles[i].spawnflags) && vehicles[i].spawnflags & 1)
       playerdrivablevehicles[playerdrivablevehicles.size] = vehicles[i];
-    }
 
     allvehiclesprespawn[allvehiclesprespawn.size] = vehicles[i];
 
-    if(!isDefined(level.vehicleInitThread[vehicles[i].vehicletype])) {
+    if(!isdefined(level.vehicleInitThread[vehicles[i].vehicletype]))
       level.vehicleInitThread[vehicles[i].vehicletype] = [];
-    }
 
     loadstring = "maps\\\_" + vehicles[i].vehicletype + "::main( \"" + vehicles[i].model + "\" );";
 
@@ -2898,9 +2677,8 @@ precache_scripts() {
     PrintLn("----------------------------------------------------------------------------------");
     PrintLn("---missing vehicle script: run repackage zone and precache scripts from launcher--");
     PrintLn("----------------------------------------------------------------------------------");
-    for(i = 0; i < level.needsprecaching.size; i++) {
+    for (i = 0; i < level.needsprecaching.size; i++)
       PrintLn(level.needsprecaching[i]);
-    }
     PrintLn("----------------------------------------------------------------------------------");
     AssertEx(false, "missing vehicle scripts, see above console prints");
     level waittill("never");
@@ -2912,17 +2690,14 @@ precache_scripts() {
 }
 
 precachesetup(string, vehicle) {
-  if(isDefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model])) {
+  if(IsDefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model]))
     return;
-  }
   matched = false;
-  for(i = 0; i < level.needsprecaching.size; i++) {
+  for (i = 0; i < level.needsprecaching.size; i++)
     if(level.needsprecaching[i] == string)
-  }
-  matched = true;
-  if(!matched) {
+      matched = true;
+  if(!matched)
     level.needsprecaching[level.needsprecaching.size] = string;
-  }
 }
 
 vehicle_kill_disconnect_paths_forever() {
@@ -2932,9 +2707,8 @@ vehicle_kill_disconnect_paths_forever() {
 disconnect_paths_whenstopped() {
   self endon("death");
   dont_disconnect_paths = false;
-  if(isDefined(self.script_disconnectpaths) && !self.script_disconnectpaths) {
+  if(IsDefined(self.script_disconnectpaths) && !self.script_disconnectpaths)
     dont_disconnect_paths = true;
-  }
 
   //if( IsSubStr( self.vehicletype, "snowmobile" ) )
   //	dont_disconnect_paths = true;
@@ -2944,15 +2718,13 @@ disconnect_paths_whenstopped() {
     return;
   }
   wait(RandomFloat(1));
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     if(self Vehicle_GetSpeed() < 1) {
-      if(!isDefined(self.dontDisconnectPaths)) {
+      if(!isdefined(self.dontDisconnectPaths))
         self DisconnectPaths();
-      }
       self notify("speed_zero_path_disconnect");
-      while(self Vehicle_GetSpeed() < 1) {
+      while (self Vehicle_GetSpeed() < 1)
         wait .05;
-      }
     }
     self ConnectPaths();
     wait 1;
@@ -2960,42 +2732,41 @@ disconnect_paths_whenstopped() {
 }
 
 vehicle_setspeed_wrapper(speed, rate, msg) {
-  if(self Vehicle_GetSpeed() == 0 && speed == 0) {
+  if(self Vehicle_GetSpeed() == 0 && speed == 0)
     return; // potential for disaster? keeps messages from overriding previous messages
-  }
 
+  /#
   self thread debug_vehiclesetspeed(speed, rate, msg);
-
-  self Vehicle_SetSpeed(speed, rate);
+  # /
+    self Vehicle_SetSpeed(speed, rate);
 }
 
 debug_vehiclesetspeed(speed, rate, msg) {
+  /#
   self notify("new debug_vehiclesetspeed");
   self endon("new debug_vehiclesetspeed");
   self endon("resuming speed");
   self endon("death");
-  while(1) {
-    while(GetDvar("debug_vehiclesetspeed") != "off") {
+  while (1) {
+    while (GetDvar("debug_vehiclesetspeed") != "off") {
       Print3d(self.origin + (0, 0, 192), "vehicle setspeed: " + msg, (1, 1, 1), 1, 3);
       wait .05;
     }
     wait .5;
   }
-
+  # /
 }
 
 script_resumespeed(msg, rate) {
   self endon("death");
   fSetspeed = 0;
   type = "resumespeed";
-  if(!isDefined(self.resumemsgs)) {
+  if(!isdefined(self.resumemsgs))
     self.resumemsgs = [];
-  }
-  if(isDefined(self.waitingforgate) && self.waitingforgate) {
+  if(IsDefined(self.waitingforgate) && self.waitingforgate)
     return; // ignore resumespeeds on waiting for gate.
-  }
 
-  if(isDefined(self.attacking)) {
+  if(IsDefined(self.attacking)) {
     if(self.attacking) {
       fSetspeed = self.attackspeed;
       type = "setspeed";
@@ -3003,22 +2774,21 @@ script_resumespeed(msg, rate) {
   }
 
   self.zerospeed = false;
-  if(fSetspeed == 0) {
+  if(fSetspeed == 0)
     self.zerospeed = true;
-  }
-  if(type == "resumespeed") {
+  if(type == "resumespeed")
     self ResumeSpeed(rate);
-  } else if(type == "setspeed") {
+  else if(type == "setspeed")
     self vehicle_setspeed_wrapper(fSetspeed, 15, "resume setspeed from attack");
-  }
   self notify("resuming speed");
-  /# self thread debug_vehicleresume( msg + " :" + type );
+  /# self thread debug_vehicleresume( msg + " :" + type ); #/
+
 }
 
+/#
 debug_vehicleresume(msg) {
-  if(GetDvar("debug_vehicleresume") == "off") {
+  if(GetDvar("debug_vehicleresume") == "off")
     return;
-  }
   self endon("death");
   number = self.resumemsgs.size;
   self.resumemsgs[number] = msg;
@@ -3027,32 +2797,31 @@ debug_vehicleresume(msg) {
 
   wait timer;
   newarray = [];
-  for(i = 0; i < self.resumemsgs.size; i++) {
-    if(i != number) {
+  for (i = 0; i < self.resumemsgs.size; i++) {
+    if(i != number)
       newarray[newarray.size] = self.resumemsgs[i];
-    }
   }
   self.resumemsgs = newarray;
 }
+# /
 
-print_resumespeed(timer) {
-  self notify("newresumespeedmsag");
-  self endon("newresumespeedmsag");
-  self endon("death");
-  while(GetTime() < timer && isDefined(self.resumemsgs)) {
-    if(self.resumemsgs.size > 6) {
-      start = self.resumemsgs.size - 5;
-    } else {
-      start = 0;
+  print_resumespeed(timer) {
+    self notify("newresumespeedmsag");
+    self endon("newresumespeedmsag");
+    self endon("death");
+    while (GetTime() < timer && IsDefined(self.resumemsgs)) {
+      if(self.resumemsgs.size > 6)
+        start = self.resumemsgs.size - 5;
+      else
+        start = 0;
+      for (i = start; i < self.resumemsgs.size; i++) // only display last 5 messages
+      {
+        position = i * 32;
+        Print3d(self.origin + (0, 0, position), "resuming speed: " + self.resumemsgs[i], (0, 1, 0), 1, 3);
+      }
+      wait .05;
     }
-    for(i = start; i < self.resumemsgs.size; i++) // only display last 5 messages
-    {
-      position = i * 32;
-      Print3d(self.origin + (0, 0, position), "resuming speed: " + self.resumemsgs[i], (0, 1, 0), 1, 3);
-    }
-    wait .05;
   }
-}
 
 force_kill() {
   if(isDestructible()) {
@@ -3099,24 +2868,22 @@ godoff() {
 }
 
 setturretfireondrones(b) {
-  if(isDefined(self.mgturret) && self.mgturret.size) {
-    for(i = 0; i < self.mgturret.size; i++)
-  }
-  self.mgturret[i].script_fireondrones = b;
+  if(IsDefined(self.mgturret) && self.mgturret.size)
+    for (i = 0; i < self.mgturret.size; i++)
+      self.mgturret[i].script_fireondrones = b;
 }
 
 getnormalanimtime(animation) {
   animtime = self GetAnimTime(animation);
   animlength = GetAnimLength(animation);
-  if(animtime == 0) {
+  if(animtime == 0)
     return 0;
-  }
   return self GetAnimTime(animation) / GetAnimLength(animation);
 }
 
 rotor_anim() {
   length = GetAnimLength(self getanim("rotors"));
-  for(;;) {
+  for (;;) {
     self SetAnim(self getanim("rotors"), 1, 0, 1);
     wait(length);
   }
@@ -3134,50 +2901,45 @@ suspend_drive_anims() {
 idle_animations() {
   self UseAnimTree(#animtree);
 
-  if(!isDefined(level.vehicle_IdleAnim[self.model])) {
+  if(!isdefined(level.vehicle_IdleAnim[self.model]))
     return;
-  }
 
-  foreach(animation in level.vehicle_IdleAnim[self.model]) {
-    self setanim(animation);
-  }
+  foreach(animation in level.vehicle_IdleAnim[self.model])
+  self setanim(animation);
+
 }
 
 animate_drive_idle() {
   self endon("suspend_drive_anims");
 
-  if(!isDefined(self.wheeldir)) {
+  if(!isdefined(self.wheeldir))
     self.wheeldir = 1;
-  }
   model = self.model;
 
   newanimtime = undefined;
   self UseAnimTree(#animtree);
-  if(!isDefined(level.vehicle_DriveIdle[model])) {
+  if(!isdefined(level.vehicle_DriveIdle[model]))
     return;
-  }
-  if(!isDefined(level.vehicle_DriveIdle_r[model])) {
+  if(!isdefined(level.vehicle_DriveIdle_r[model]))
     level.vehicle_DriveIdle_r[model] = level.vehicle_DriveIdle[model]; // use forward animation if no backwards anim exists
-  }
   self endon("death");
   normalspeed = level.vehicle_DriveIdle_normal_speed[model];
 
   thread animate_drive_idle_death();
 
   animrate = 1.0;
-  if((isDefined(level.vehicle_DriveIdle_animrate)) && (isDefined(level.vehicle_DriveIdle_animrate[model]))) {
+  if((IsDefined(level.vehicle_DriveIdle_animrate)) && (IsDefined(level.vehicle_DriveIdle_animrate[model])))
     animrate = level.vehicle_DriveIdle_animrate[model];
-  }
 
   lastdir = self.wheeldir;
 
   animatemodel = self;
   animation = level.vehicle_DriveIdle[model];
 
-  while(1) {
+  while (1) {
     // 		animatemodel = get_dummy();
     if(!normalspeed) {
-      if(isDefined(self.suspend_driveanims)) {
+      if(IsDefined(self.suspend_driveanims)) {
         wait .05;
         continue;
       }
@@ -3204,19 +2966,17 @@ animate_drive_idle() {
       }
 
       newanimtime = 0.01;
-      if(newanimtime >= 1 || newanimtime == 0) {
+      if(newanimtime >= 1 || newanimtime == 0)
         newanimtime = 0.01; // think setting animtime to 0 or 1 messes things up
-      }
       lastdir = self.wheeldir;
     }
 
-    if(speed == 0) {
+    if(speed == 0)
       animatemodel SetAnim(animation, 1, .05, 0);
-    } else {
+    else
       animatemodel SetAnim(animation, 1, .05, speed / normalspeed);
-    }
 
-    if(isDefined(newanimtime)) {
+    if(IsDefined(newanimtime)) {
       animatemodel SetAnimTime(animation, newanimtime);
       newanimtime = undefined;
     }
@@ -3238,74 +2998,69 @@ animate_drive_idle_death() {
   model = self.model;
   self UseAnimTree(#animtree);
   self waittill("death_finished");
-  if(isDefined(self)) {
+  if(IsDefined(self))
     self ClearAnim(level.vehicle_DriveIdle[model], 0);
-  }
 }
 
 setup_dynamic_detour(pathnode, get_func) {
   prevnode = [[get_func]](pathnode.targetname);
-  AssertEx(isDefined(prevnode), "detour can't be on start node");
+  AssertEx(IsDefined(prevnode), "detour can't be on start node");
   prevnode.detoured = 0;
 }
 
-/*
+/* 
 setup_origins()
 {
-	triggers = [];
-	origins = getEntArray( "script_origin", "classname" );
-	for( i = 0; i < origins.size; i++ )
+	triggers = []; 
+	origins = GetEntArray( "script_origin", "classname" );
+	for ( i = 0; i < origins.size; i++ )
 	{
-		if( isDefined( origins[ i ].script_vehicledetour ) )
+		if( IsDefined( origins[ i ].script_vehicledetour ) )
 		{
+
 			level.vehicle_detourpaths = array_2dadd( level.vehicle_detourpaths, origins[ i ].script_vehicledetour, origins[ i ] );
-			if( level.vehicle_detourpaths[ origins[ i ].script_vehicledetour ].size > 2 ) {
+			if( level.vehicle_detourpaths[ origins[ i ].script_vehicledetour ].size > 2 )
 				PrintLn( "more than two script_vehicledetour grouped in group number: ", origins[ i ].script_vehicledetour );
-			}
 
 			prevnode = GetEnt( origins[ i ].targetname, "target" );
-			AssertEx( isDefined( prevnode ), "detour can't be on start node" );
-			triggers[ triggers.size ] = prevnode;
-			prevnode.detoured = 0;
-			prevnode = undefined;
+			AssertEx( IsDefined( prevnode ), "detour can't be on start node" );
+			triggers[ triggers.size ] = prevnode; 
+			prevnode.detoured = 0; 
+			prevnode = undefined; 
 		}
 	}
-	return triggers;
+	return triggers; 
 }
 */
 
 setup_ai() {
   ai = GetAIArray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_vehicleride)) {
+  for (i = 0; i < ai.size; i++) {
+    if(IsDefined(ai[i].script_vehicleride))
       level.vehicle_RideAI = array_2dadd(level.vehicle_RideAI, ai[i].script_vehicleride, ai[i]);
-    } else {
-      if(isDefined(ai[i].script_vehiclewalk))
-    }
-    level.vehicle_WalkAI = array_2dadd(level.vehicle_WalkAI, ai[i].script_vehiclewalk, ai[i]);
+    else
+    if(IsDefined(ai[i].script_vehiclewalk))
+      level.vehicle_WalkAI = array_2dadd(level.vehicle_WalkAI, ai[i].script_vehiclewalk, ai[i]);
   }
   ai = GetSpawnerArray();
 
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_vehicleride)) {
+  for (i = 0; i < ai.size; i++) {
+    if(IsDefined(ai[i].script_vehicleride))
       level.vehicle_RideSpawners = array_2dadd(level.vehicle_RideSpawners, ai[i].script_vehicleride, ai[i]);
-    }
-    if(isDefined(ai[i].script_vehiclewalk)) {
+    if(IsDefined(ai[i].script_vehiclewalk))
       level.vehicle_walkspawners = array_2dadd(level.vehicle_walkspawners, ai[i].script_vehiclewalk, ai[i]);
-    }
   }
 }
 
 array_2dadd(array, firstelem, newelem) {
-  if(!isDefined(array[firstelem])) {
+  if(!isdefined(array[firstelem]))
     array[firstelem] = [];
-  }
   array[firstelem][array[firstelem].size] = newelem;
   return array;
 }
 
 is_node_script_origin(pathnode) {
-  return isDefined(pathnode.classname) && pathnode.classname == "script_origin";
+  return IsDefined(pathnode.classname) && pathnode.classname == "script_origin";
 }
 
 // this determines if the node will be sent through trigger_process.The uber trigger function that may get phased out.
@@ -3313,24 +3068,21 @@ node_trigger_process() {
   processtrigger = false;
 
   // special treatment for start nodes
-  if(isDefined(self.spawnflags) && (self.spawnflags & 1)) {
-    if(isDefined(self.script_crashtype)) {
+  if(IsDefined(self.spawnflags) && (self.spawnflags & 1)) {
+    if(IsDefined(self.script_crashtype))
       level.vehicle_crashpaths[level.vehicle_crashpaths.size] = self;
-    }
     level.vehicle_startnodes[level.vehicle_startnodes.size] = self;
   }
 
-  if(isDefined(self.script_vehicledetour) && isDefined(self.targetname)) {
+  if(IsDefined(self.script_vehicledetour) && IsDefined(self.targetname)) {
     get_func = undefined;
     // get_func is differnt for struct types and script_origin types of paths
-    if(isDefined(get_from_entity(self.targetname))) {
+    if(IsDefined(get_from_entity(self.targetname)))
       get_func = ::get_from_entity_target;
-    }
-    if(isDefined(get_from_spawnStruct(self.targetname))) {
+    if(IsDefined(get_from_spawnstruct(self.targetname)))
       get_func = ::get_from_spawnstruct_target;
-    }
 
-    if(isDefined(get_func)) {
+    if(IsDefined(get_func)) {
       setup_dynamic_detour(self, get_func);
       processtrigger = true; // the node with the script_vehicledetour waits for the trigger here unlike ground nodes which need to know 1 node in advanced that there's a detour, tricky tricky.
     } else {
@@ -3338,49 +3090,44 @@ node_trigger_process() {
     }
 
     level.vehicle_detourpaths = array_2dadd(level.vehicle_detourpaths, self.script_vehicledetour, self);
-    if(level.vehicle_detourpaths[self.script_vehicledetour].size > 2) {
+    if(level.vehicle_detourpaths[self.script_vehicledetour].size > 2)
       PrintLn("more than two script_vehicledetour grouped in group number: ", self.script_vehicledetour);
-    }
   }
 
   // if a gate isn't open then the vehicle will stop there and wait for it to become open.
-  if(isDefined(self.script_gatetrigger)) {
+  if(IsDefined(self.script_gatetrigger)) {
     level.vehicle_gatetrigger = array_2dadd(level.vehicle_gatetrigger, self.script_gatetrigger, self);
     self.gateopen = false;
   }
 
-  // init the flags!
-  if(isDefined(self.script_flag_set)) {
-    if(!isDefined(level.flag[self.script_flag_set])) {
+  // init the flags! 
+  if(IsDefined(self.script_flag_set)) {
+    if(!isDefined(level.flag[self.script_flag_set]))
       flag_init(self.script_flag_set);
-    }
   }
 
-  // init the flags!
-  if(isDefined(self.script_flag_clear)) {
-    if(!isDefined(level.flag[self.script_flag_clear])) {
+  // init the flags! 
+  if(IsDefined(self.script_flag_clear)) {
+    if(!isDefined(level.flag[self.script_flag_clear]))
       flag_init(self.script_flag_clear);
-    }
   }
 
-  if(isDefined(self.script_flag_wait)) {
-    if(!isDefined(level.flag[self.script_flag_wait])) {
+  if(IsDefined(self.script_flag_wait)) {
+    if(!isDefined(level.flag[self.script_flag_wait]))
       flag_init(self.script_flag_wait);
-    }
   }
 
   // various nodes that will be sent through trigger_process
   if(
-    isDefined(self.script_VehicleSpawngroup) ||
-    isDefined(self.script_VehicleStartMove) ||
-    isDefined(self.script_gatetrigger) ||
-    isDefined(self.script_vehicleGroupDelete)
+    IsDefined(self.script_VehicleSpawngroup) ||
+    IsDefined(self.script_VehicleStartMove) ||
+    IsDefined(self.script_gatetrigger) ||
+    IsDefined(self.script_vehicleGroupDelete)
   )
     processtrigger = true;
 
-  if(processtrigger) {
+  if(processtrigger)
     add_proccess_trigger(self);
-  }
 }
 
 setup_triggers() {
@@ -3396,21 +3143,21 @@ setup_triggers() {
   level.vehicle_processtriggers = [];
 
   triggers = [];
-  triggers = array_combine(GetAllVehicleNodes(), getEntArray("script_origin", "code_classname"));
+  triggers = array_combine(GetAllVehicleNodes(), GetEntArray("script_origin", "code_classname"));
   triggers = array_combine(triggers, level.struct);
-  triggers = array_combine(triggers, getEntArray("trigger_radius", "code_classname"));
-  triggers = array_combine(triggers, getEntArray("trigger_disk", "code_classname"));
-  triggers = array_combine(triggers, getEntArray("trigger_multiple", "code_classname"));
-  triggers = array_combine(triggers, getEntArray("trigger_lookat", "code_classname"));
+  triggers = array_combine(triggers, GetEntArray("trigger_radius", "code_classname"));
+  triggers = array_combine(triggers, GetEntArray("trigger_disk", "code_classname"));
+  triggers = array_combine(triggers, GetEntArray("trigger_multiple", "code_classname"));
+  triggers = array_combine(triggers, GetEntArray("trigger_lookat", "code_classname"));
 
   array_thread(triggers, ::node_trigger_process);
+
 }
 
 is_node_script_struct(node) {
-  if(!isDefined(node.targetname)) {
+  if(!IsDefined(node.targetname))
     return false;
-  }
-  return isDefined(getstruct(node.targetname, "targetname"));
+  return IsDefined(getstruct(node.targetname, "targetname"));
 }
 
 setup_vehicles(vehicles) {
@@ -3418,23 +3165,23 @@ setup_vehicles(vehicles) {
   level.failed_spawnvehicles = [];
 
   foreach(vehicle in vehicles) {
-    //here's a hook for gags on vehicles.
+
+    //here's a hook for gags on vehicles. 
     vehicle setup_gags();
 
-    if(vehicle check_spawn_group_isspawner()) {
+    if(vehicle check_spawn_group_isspawner())
       continue;
-    } else {
+    else
       nonspawned[nonspawned.size] = vehicle;
-    }
   }
 
   //print list of spawngroups that fail due to lack of spawner spawnflag
   check_failed_spawn_groups();
 
   // init vehicles that aren't spawned
-  foreach(live_vehicle in nonspawned) {
-    thread vehicle_init(live_vehicle);
-  }
+  foreach(live_vehicle in nonspawned)
+  thread vehicle_init(live_vehicle);
+
 }
 
 check_failed_spawn_groups() {
@@ -3448,37 +3195,40 @@ check_failed_spawn_groups() {
     PrintLn("Error: spawner at: " + failed_spawner.origin);
   }
   AssertMsg("Spawngrouped vehicle( s ) without spawnflag checked, see console");
+
 }
 
 check_spawn_group_isspawner() {
-  if(isDefined(self.script_VehicleSpawngroup) && !isSpawner(self)) {
+  if(IsDefined(self.script_VehicleSpawngroup) && !isSpawner(self)) {
     level.failed_spawnvehicles[level.failed_spawnvehicles.size] = self;
     return true;
   }
   return isSpawner(self);
 }
 
+
+
 vehicle_life() {
+
   type = self.vehicletype;
 
-  if(!isDefined(level.vehicle_life) || !isDefined(level.vehicle_life[self.vehicletype])) {
+  if(!isdefined(level.vehicle_life) || !isdefined(level.vehicle_life[self.vehicletype])) {
     wait 2;
   }
-  AssertEx(isDefined(level.vehicle_life[type]), "need to specify build_life() in vehicle script for vehicletype: " + type);
+  AssertEx(IsDefined(level.vehicle_life[type]), "need to specify build_life() in vehicle script for vehicletype: " + type);
 
-  if(isDefined(self.script_startinghealth)) {
+  if(IsDefined(self.script_startinghealth))
     self.health = self.script_startinghealth;
-  } else {
-    if(level.vehicle_life[type] == -1) {
+  else {
+    if(level.vehicle_life[type] == -1)
       return;
-    } else if(isDefined(level.vehicle_life_range_low[type]) && isDefined(level.vehicle_life_range_high[type])) {
+    else if(IsDefined(level.vehicle_life_range_low[type]) && IsDefined(level.vehicle_life_range_high[type]))
       self.health = (RandomInt(level.vehicle_life_range_high[type] - level.vehicle_life_range_low[type]) + level.vehicle_life_range_low[type]);
-    } else {
+    else
       self.health = level.vehicle_life[type];
-    }
   }
 
-  if(isDefined(level.destructible_model[self.model])) {
+  if(IsDefined(level.destructible_model[self.model])) {
     self.health = 2000;
     self.destructible_type = level.destructible_model[self.model];
     self common_scripts\_destructible::setup_destructibles(true);
@@ -3487,79 +3237,70 @@ vehicle_life() {
 }
 
 mginit() {
+
   typemodel = self.vehicletype + self.model;
 
-  if(((isDefined(self.script_nomg)) && (self.script_nomg > 0))) {
+  if(((IsDefined(self.script_nomg)) && (self.script_nomg > 0)))
     return;
-  }
 
-  if(!isDefined(level.vehicle_mgturret[typemodel])) {
+  if(!isdefined(level.vehicle_mgturret[typemodel]))
     return;
-  }
 
   mgangle = 0;
-  if(isDefined(self.script_mg_angle)) {
+  if(IsDefined(self.script_mg_angle))
     mgangle = self.script_mg_angle;
-  }
 
   turret_templates = level.vehicle_mgturret[typemodel];
-  if(!isDefined(turret_templates)) {
+  if(!isdefined(turret_templates))
     return;
-  }
 
-  one_turret = isDefined(self.script_noteworthy) && self.script_noteworthy == "onemg";
+  one_turret = IsDefined(self.script_noteworthy) && self.script_noteworthy == "onemg";
 
   foreach(index, turret_template in turret_templates) {
     turret = SpawnTurret("misc_turret", (0, 0, 0), turret_template.info);
     turret LinkTo(self, turret_template.tag, (0, 0, 0), (0, -1 * mgangle, 0));
-    turret setModel(turret_template.model);
+    turret SetModel(turret_template.model);
     turret.angles = self.angles;
     turret.isvehicleattached = true; // lets mgturret know not to mess with this turret
     turret.ownerVehicle = self;
-    Assert(isDefined(self.script_team));
+    Assert(IsDefined(self.script_team));
     turret.script_team = self.script_team; // lets mgturret know not to mess with this turret
     turret thread maps\_mgturret::burst_fire_unmanned();
     turret MakeUnusable();
     set_turret_team(turret);
     level thread maps\_mgturret::mg42_setdifficulty(turret, getDifficulty());
 
-    if(isDefined(self.script_fireondrones)) {
+    if(IsDefined(self.script_fireondrones))
       turret.script_fireondrones = self.script_fireondrones;
-    }
-    if(isDefined(turret_template.deletedelay)) {
+    if(IsDefined(turret_template.deletedelay))
       turret.deletedelay = turret_template.deletedelay;
-    }
 
-    if(isDefined(turret_template.maxrange)) {
+    if(IsDefined(turret_template.maxrange))
       turret.maxrange = turret_template.maxrange;
-    }
 
     //default drop pitch defaultdroppitch, defaultdropyaw
-    if(isDefined(turret_template.defaultdroppitch)) {
+    if(IsDefined(turret_template.defaultdroppitch))
       turret SetDefaultDropPitch(turret_template.defaultdroppitch);
-    }
 
     self.mgturret[index] = turret;
 
-    if(one_turret) {
+    if(one_turret)
       break;
-    }
   }
 
   foreach(i, turret in self.mgturret) {
     defaultOnMode = level.vehicle_mgturret[typemodel][i].defaultONmode;
-    if(isDefined(defaultOnMode)) {
+    if(IsDefined(defaultOnMode)) {
       turret turret_set_default_on_mode(defaultOnMode);
     }
   }
 
-  if(!isDefined(self.script_turretmg)) {
+  if(!isdefined(self.script_turretmg))
     self.script_turretmg = true;;
-  }
 
-  if(isDefined(self.script_turretmg) && self.script_turretmg == 0) {
+  if(IsDefined(self.script_turretmg) && self.script_turretmg == 0)
     self thread mgoff();
-  } else {
+  else {
     self.script_turretmg = 1;
     self thread mgon();
   }
@@ -3569,19 +3310,17 @@ mginit() {
 
 mgtoggle() {
   self endon("death");
-  if(self.script_turretmg) {
+  if(self.script_turretmg)
     lasttoggle = 1;
-  } else {
+  else
     lasttoggle = 0;
-  }
-  while(1) {
+  while (1) {
     if(lasttoggle != self.script_turretmg) {
       lasttoggle = self.script_turretmg;
-      if(self.script_turretmg) {
+      if(self.script_turretmg)
         self thread mgon();
-      } else {
+      else
         self thread mgoff();
-      }
     }
     wait .5;
   }
@@ -3609,14 +3348,12 @@ mgoff() {
     return;
   }
 
-  if(!isDefined(self.mgturret)) {
+  if(!isdefined(self.mgturret))
     return;
-  }
 
   foreach(i, turret in self.mgturret) {
-    if(isDefined(turret.script_fireondrones)) {
+    if(IsDefined(turret.script_fireondrones))
       turret.script_fireondrones = false;
-    }
 
     turret SetMode("manual");
   }
@@ -3644,18 +3381,16 @@ mgon() {
     return;
   }
 
-  if(!isDefined(self.mgturret)) {
+  if(!isdefined(self.mgturret))
     return;
-  }
 
   foreach(turret in self.mgturret) {
     turret Show(); // for hidden turrets on vehicles that shouldn't have turrets
 
-    if(isDefined(turret.script_fireondrones)) {
+    if(IsDefined(turret.script_fireondrones))
       turret.script_fireondrones = true;
-    }
 
-    if(isDefined(turret.defaultONmode)) {
+    if(IsDefined(turret.defaultONmode)) {
       turret SetMode(turret.defaultONmode);
     } else {
       turret SetMode("auto_nonai");
@@ -3691,53 +3426,44 @@ turret_set_default_on_mode(defaultOnMode) {
 }
 
 isHelicopter() {
-  return isDefined(level.helicopter_list[self.vehicletype]);
+  return IsDefined(level.helicopter_list[self.vehicletype]);
 }
 
 isAirplane() {
-  return isDefined(level.airplane_list[self.vehicletype]);
+  return IsDefined(level.airplane_list[self.vehicletype]);
 }
 
 isCheap() {
-  if(!isDefined(self.script_cheap)) {
+  if(!isdefined(self.script_cheap))
     return false;
-  }
 
-  if(!self.script_cheap) {
+  if(!self.script_cheap)
     return false;
-  }
 
   return true;
 }
 
 hasHelicopterDustKickup() {
-  if(!isHelicopter() && !isAirplane()) {
+  if(!isHelicopter() && !isAirplane())
     return false;
-  }
 
-  if(isCheap()) {
+  if(isCheap())
     return false;
-  }
 
   return true;
 }
 
 hasHelicopterTurret() {
-  if(!isDefined(self.vehicletype)) {
+  if(!isdefined(self.vehicletype))
     return false;
-  }
-  if(isCheap()) {
+  if(isCheap())
     return false;
-  }
-  if(self.vehicletype == "cobra") {
+  if(self.vehicletype == "cobra")
     return true;
-  }
-  if(self.vehicletype == "cobra_player") {
+  if(self.vehicletype == "cobra_player")
     return true;
-  }
-  if(self.vehicletype == "viper") {
+  if(self.vehicletype == "viper")
     return true;
-  }
   return false;
 }
 
@@ -3747,12 +3473,11 @@ Chopper_Turret_On() {
 
   cosine55 = Cos(55);
 
-  while(self.health > 0) {
+  while (self.health > 0) {
     // target range, target fov, getAITargets, doTrace
     eTarget = self maps\_helicopter_globals::getEnemyTarget(16000, cosine55, true, true);
-    if(isDefined(eTarget)) {
+    if(IsDefined(eTarget))
       self thread maps\_helicopter_globals::shootEnemyTarget_Bullets(eTarget);
-    }
     wait 2;
   }
 }
@@ -3763,12 +3488,12 @@ chopper_Turret_Off() {
 
 playLoopedFxontag(effect, durration, tag) {
   eModel = get_dummy();
-  effectorigin = spawn("script_origin", eModel.origin);
+  effectorigin = Spawn("script_origin", eModel.origin);
 
   self endon("fire_extinguish");
   thread playLoopedFxontag_originupdate(tag, effectorigin);
-  while(1) {
-    playFX(effect, effectorigin.origin, effectorigin.upvec);
+  while (1) {
+    PlayFX(effect, effectorigin.origin, effectorigin.upvec);
     wait durration;
   }
 }
@@ -3776,13 +3501,13 @@ playLoopedFxontag(effect, durration, tag) {
 playLoopedFxontag_originupdate(tag, effectorigin) {
   effectorigin.angles = self GetTagAngles(tag);
   effectorigin.origin = self GetTagOrigin(tag);
-  effectorigin.forwardvec = anglesToForward(effectorigin.angles);
+  effectorigin.forwardvec = AnglesToForward(effectorigin.angles);
   effectorigin.upvec = AnglesToUp(effectorigin.angles);
-  while(isDefined(self) && self.code_classname == "script_vehicle" && self Vehicle_GetSpeed() > 0) {
+  while (IsDefined(self) && self.code_classname == "script_vehicle" && self Vehicle_GetSpeed() > 0) {
     eModel = get_dummy();
     effectorigin.angles = eModel GetTagAngles(tag);
     effectorigin.origin = eModel GetTagOrigin(tag);
-    effectorigin.forwardvec = anglesToForward(effectorigin.angles);
+    effectorigin.forwardvec = AnglesToForward(effectorigin.angles);
     effectorigin.upvec = AnglesToUp(effectorigin.angles);
     wait .05;
   }
@@ -3810,18 +3535,16 @@ playLoopedFxontag_originupdate(tag, effectorigin) {
 */
 
 build_turret(info, tag, model, maxrange, defaultONmode, deletedelay, defaultdroppitch, defaultdropyaw) {
-  if(!isDefined(level.vehicle_mgturret)) {
+  if(!isdefined(level.vehicle_mgturret))
     level.vehicle_mgturret = [];
-  }
 
   typemodel = level.vttype + level.vtmodel;
-  if(!isDefined(level.vehicle_mgturret[typemodel])) {
+  if(!isdefined(level.vehicle_mgturret[typemodel]))
     level.vehicle_mgturret[typemodel] = [];
-  }
 
   PreCacheModel(model);
   PreCacheTurret(info);
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.info = info;
   struct.tag = tag;
   struct.model = model;
@@ -3834,12 +3557,16 @@ build_turret(info, tag, model, maxrange, defaultONmode, deletedelay, defaultdrop
 }
 
 setup_dvars() {
+  /#
   SetDvarIfUninitialized("debug_tankcrush", "0");
   SetDvarIfUninitialized("debug_vehicleresume", "off");
   SetDvarIfUninitialized("debug_vehiclesetspeed", "off");
+  # /
 }
 
-empty_var(var) {}
+empty_var(var) {
+
+}
 
 setup_levelvars() {
   level.vehicle_ResumeSpeed = 5;
@@ -3854,217 +3581,172 @@ setup_levelvars() {
   level.vehicle_crashpaths = [];
   level.vehicle_link = [];
   level.vehicle_detourpaths = [];
-  // 	level.vehicle_linkedpaths = [];
+  // 	level.vehicle_linkedpaths = []; 
   level.vehicle_startnodes = [];
   level.vehicle_killspawn_groups = [];
 
-  if(!isDefined(level.drive_spline_path_fun)) {
+  if(!isdefined(level.drive_spline_path_fun))
     level.drive_spline_path_fun = ::empty_var;
-  }
 
-  level.helicopter_crash_locations = getEntArray("helicopter_crash_location", "targetname");
+  level.helicopter_crash_locations = GetEntArray("helicopter_crash_location", "targetname");
 
-  level.playervehicle = spawn("script_origin", (0, 0, 0)); // no isdefined for level.playervehicle
+  level.playervehicle = Spawn("script_origin", (0, 0, 0)); // no isdefined for level.playervehicle
   level.playervehiclenone = level.playervehicle; // no isdefined for level.playervehicle
 
-  // TODO in a thousand next games.. I don't like managing this variable. not so much that I don't like it, just that I haven't been = /
+  // TODO in a thousand next games.. I don't like managing this variable. not so much that I don't like it, just that I haven't been = / 
   level.vehicles = []; // will contain all the vehicles that are spawned and alive
   level.vehicles["allies"] = [];
   level.vehicles["axis"] = [];
   level.vehicles["neutral"] = [];
   level.vehicles["team3"] = [];
 
-  if(!isDefined(level.vehicle_team)) {
+  if(!isdefined(level.vehicle_team))
     level.vehicle_team = [];
-  }
-  if(!isDefined(level.vehicle_deathmodel)) {
+  if(!isdefined(level.vehicle_deathmodel))
     level.vehicle_deathmodel = [];
-  }
-  if(!isDefined(level.vehicle_death_thread)) {
+  if(!isdefined(level.vehicle_death_thread))
     level.vehicle_death_thread = [];
-  }
-  if(!isDefined(level.vehicle_DriveIdle)) {
+  if(!isdefined(level.vehicle_DriveIdle))
     level.vehicle_DriveIdle = [];
-  }
-  if(!isDefined(level.vehicle_DriveIdle_r)) {
+  if(!isdefined(level.vehicle_DriveIdle_r))
     level.vehicle_DriveIdle_r = [];
-  }
-  if(!isDefined(level.attack_origin_condition_threadd)) {
+  if(!isdefined(level.attack_origin_condition_threadd))
     level.attack_origin_condition_threadd = [];
-  }
-  if(!isDefined(level.vehiclefireanim)) {
+  if(!isdefined(level.vehiclefireanim))
     level.vehiclefireanim = [];
-  }
-  if(!isDefined(level.vehiclefireanim_settle)) {
+  if(!isdefined(level.vehiclefireanim_settle))
     level.vehiclefireanim_settle = [];
-  }
-  if(!isDefined(level.vehicle_hasname)) {
+  if(!isdefined(level.vehicle_hasname))
     level.vehicle_hasname = [];
-  }
-  if(!isDefined(level.vehicle_turret_requiresrider)) {
+  if(!isdefined(level.vehicle_turret_requiresrider))
     level.vehicle_turret_requiresrider = [];
-  }
-  if(!isDefined(level.vehicle_rumble)) {
+  if(!isdefined(level.vehicle_rumble))
     level.vehicle_rumble = [];
-  }
-  if(!isDefined(level.vehicle_mgturret)) {
+  if(!isdefined(level.vehicle_mgturret))
     level.vehicle_mgturret = [];
-  }
-  if(!isDefined(level.vehicle_isStationary)) {
+  if(!isdefined(level.vehicle_isStationary))
     level.vehicle_isStationary = [];
-  }
-  if(!isDefined(level.vehicle_rumble)) {
+  if(!isdefined(level.vehicle_rumble))
     level.vehicle_rumble = [];
-  }
-  if(!isDefined(level.vehicle_death_earthquake)) {
+  if(!isdefined(level.vehicle_death_earthquake))
     level.vehicle_death_earthquake = [];
-  }
-  if(!isDefined(level.vehicle_treads)) {
+  if(!isdefined(level.vehicle_treads))
     level.vehicle_treads = [];
-  }
-  if(!isDefined(level.vehicle_compassicon)) {
+  if(!isdefined(level.vehicle_compassicon))
     level.vehicle_compassicon = [];
-  }
-  if(!isDefined(level.vehicle_unloadgroups)) {
+  if(!isdefined(level.vehicle_unloadgroups))
     level.vehicle_unloadgroups = [];
-  }
-  if(!isDefined(level.vehicle_aianims)) {
+  if(!isdefined(level.vehicle_aianims))
     level.vehicle_aianims = [];
-  }
-  if(!isDefined(level.vehicle_unloadwhenattacked)) {
+  if(!isdefined(level.vehicle_unloadwhenattacked))
     level.vehicle_unloadwhenattacked = [];
-  }
-  if(!isDefined(level.vehicle_exhaust)) {
+  if(!isdefined(level.vehicle_exhaust))
     level.vehicle_exhaust = [];
-  }
-  if(!isDefined(level.vehicle_deckdust)) {
+  if(!isdefined(level.vehicle_deckdust))
     level.vehicle_deckdust = [];
-  }
-  if(!isDefined(level.vehicle_shoot_shock)) {
+  if(!isdefined(level.vehicle_shoot_shock))
     level.vehicle_shoot_shock = [];
-  }
-  if(!isDefined(level.vehicle_frontarmor)) {
+  if(!isdefined(level.vehicle_frontarmor))
     level.vehicle_frontarmor = [];
-  }
-  if(!isDefined(level.destructible_model)) {
+  if(!isdefined(level.destructible_model))
     level.destructible_model = [];
-  }
-  if(!isDefined(level.vehicle_types)) {
+  if(!isdefined(level.vehicle_types))
     level.vehicle_types = [];
-  }
-  if(!isDefined(level.vehicle_compass_types)) {
+  if(!isdefined(level.vehicle_compass_types))
     level.vehicle_compass_types = [];
-  }
-  if(!isDefined(level.vehicle_grenadeshield)) {
+  if(!isdefined(level.vehicle_grenadeshield))
     level.vehicle_grenadeshield = [];
-  }
-  if(!isDefined(level.vehicle_bulletshield)) {
+  if(!isdefined(level.vehicle_bulletshield))
     level.vehicle_bulletshield = [];
-  }
-  if(!isDefined(level.vehicle_death_jolt)) {
+  if(!isdefined(level.vehicle_death_jolt))
     level.vehicle_death_jolt = [];
-  }
-  if(!isDefined(level.vehicle_death_badplace)) {
+  if(!isdefined(level.vehicle_death_badplace))
     level.vehicle_death_badplace = [];
-  }
-  if(!isDefined(level.vehicle_IdleAnim)) {
+  if(!isdefined(level.vehicle_IdleAnim))
     level.vehicle_IdleAnim = [];
-  }
 
   maps\_vehicle_aianim::setup_aianimthreads();
+
 }
 
 attacker_isonmyteam(attacker) {
-  if((isDefined(attacker)) && isDefined(attacker.script_team) && (isDefined(self.script_team)) && (attacker.script_team == self.script_team)) {
+  if((IsDefined(attacker)) && IsDefined(attacker.script_team) && (IsDefined(self.script_team)) && (attacker.script_team == self.script_team))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 is_invulnerable_from_ai(attacker) {
   //vehicles with script_AI_invulnerable = 1 cannot be damaged by attacking AI
-  if(!isDefined(self.script_AI_invulnerable)) {
+  if(!isdefined(self.script_AI_invulnerable))
     return false;
-  }
-  if((isDefined(attacker)) && (IsAI(attacker)) && (self.script_AI_invulnerable == 1)) {
+  if((IsDefined(attacker)) && (IsAI(attacker)) && (self.script_AI_invulnerable == 1))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 is_godmode() {
-  if(isDefined(self.godmode) && self.godmode) {
+  if(IsDefined(self.godmode) && self.godmode)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 attacker_troop_isonmyteam(attacker) {
-  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(attacker) && IsPlayer(attacker)) {
+  if(IsDefined(self.script_team) && self.script_team == "allies" && IsDefined(attacker) && IsPlayer(attacker))
     return true; // player is always on the allied team.. hahah! future CoD games that let the player be the enemy be damned!
-  } else if(IsAI(attacker) && attacker.team == self.script_team) {
+  else if(IsAI(attacker) && attacker.team == self.script_team)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 has_frontarmor() {
-  return (isDefined(level.vehicle_frontarmor[self.vehicletype]));
+  return (IsDefined(level.vehicle_frontarmor[self.vehicletype]));
 }
 
 grenadeshielded(type) {
-  if(!isDefined(self.script_grenadeshield)) {
+  if(!isdefined(self.script_grenadeshield))
     return false;
-  }
 
   type = ToLower(type);
 
-  if(!isDefined(type) || !IsSubStr(type, "grenade")) {
+  if(!IsDefined(type) || !IsSubStr(type, "grenade"))
     return false;
-  }
 
-  if(self.script_grenadeshield) {
+  if(self.script_grenadeshield)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 bulletshielded(type) {
-  if(!isDefined(self.script_bulletshield)) {
+  if(!isdefined(self.script_bulletshield))
     return false;
-  }
 
   type = ToLower(type);
   // hack to make explosive bullets bypass the bulletshield. -R
-  if(!isDefined(type) || !IsSubStr(type, "bullet") || IsSubStr(type, "explosive")) {
+  if(!IsDefined(type) || !IsSubStr(type, "bullet") || IsSubStr(type, "explosive"))
     return false;
-  }
 
-  if(self.script_bulletshield) {
+  if(self.script_bulletshield)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 friendlyfire_shield() {
   self endon("death");
   self endon("stop_friendlyfire_shield");
 
-  if(isDefined(level.vehicle_bulletshield[self.vehicletype]) && !isDefined(self.script_bulletshield)) {
+  if(IsDefined(level.vehicle_bulletshield[self.vehicletype]) && !isdefined(self.script_bulletshield))
     self.script_bulletshield = level.vehicle_bulletshield[self.vehicletype];
-  }
 
-  if(isDefined(level.vehicle_grenadeshield[self.vehicletype]) && !isDefined(self.script_grenadeshield)) {
+  if(IsDefined(level.vehicle_grenadeshield[self.vehicletype]) && !isdefined(self.script_grenadeshield))
     self.script_grenadeshield = level.vehicle_bulletshield[self.vehicletype];
-  }
 
-  if(isDefined(self.script_mp_style_helicopter)) {
+  if(IsDefined(self.script_mp_style_helicopter)) {
     self.script_mp_style_helicopter = true;
     self.bullet_armor = 5000;
     self.health = 350;
@@ -4077,15 +3759,14 @@ friendlyfire_shield() {
   attacker = undefined;
   type = undefined;
 
-  while(self.health > 0) {
+  while (self.health > 0) {
     self waittill("damage", amount, attacker, direction_vec, point, type, modelName, tagName);
 
-    if(isDefined(attacker)) {
+    if(IsDefined(attacker))
       attacker maps\_player_stats::register_shot_hit();
-    }
 
     if(
-      (!isDefined(attacker) && self.script_team != "neutral") ||
+      (!IsDefined(attacker) && self.script_team != "neutral") ||
       is_godmode() ||
       attacker_isonmyteam(attacker) ||
       attacker_troop_isonmyteam(attacker) ||
@@ -4106,15 +3787,13 @@ friendlyfire_shield() {
     } else
       self.currenthealth = self.health;
 
-    if(common_scripts\_destructible::getDamageType(type) == "splash") {
+    if(common_scripts\_destructible::getDamageType(type) == "splash")
       self.rocket_destroyed_for_achievement = true; // little bit of hackery, not perfect but contributes to achievement script for determining that this heli was destroyed by the players RPG.
-    } else {
+    else
       self.rocket_destroyed_for_achievement = undefined;
-    }
 
-    if(self.health < self.healthbuffer && !isDefined(self.vehicle_stays_alive)) {
+    if(self.health < self.healthbuffer && !isdefined(self.vehicle_stays_alive))
       break;
-    }
     amount = undefined;
     attacker = undefined;
     direction_vec = undefined;
@@ -4128,28 +3807,23 @@ friendlyfire_shield() {
 }
 
 hit_bullet_armor(type) {
-  if(!self.script_mp_style_helicopter) {
+  if(!self.script_mp_style_helicopter)
     return false;
-  }
-  if(self.bullet_armor <= 0) {
+  if(self.bullet_armor <= 0)
     return false;
-  }
-  if(!(isDefined(type))) {
+  if(!(IsDefined(type)))
     return false;
-  }
-  if(!IsSubStr(type, "BULLET")) {
+  if(!IsSubStr(type, "BULLET"))
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 regen_front_armor(attacker, amount) {
-  forwardvec = anglesToForward(self.angles);
+  forwardvec = AnglesToForward(self.angles);
   othervec = VectorNormalize(attacker.origin - self.origin);
-  if(VectorDot(forwardvec, othervec) > .86) {
+  if(VectorDot(forwardvec, othervec) > .86)
     self.health += Int(amount * level.vehicle_frontarmor[self.vehicletype]);
-  }
 }
 
 vehicle_kill_rumble_forever() {
@@ -4161,54 +3835,50 @@ vehicle_rumble() {
 
   self endon("kill_rumble_forever");
   type = self.vehicletype;
-  if(!isDefined(level.vehicle_rumble[type])) {
+  if(!isdefined(level.vehicle_rumble[type]))
     return;
-  }
 
   rumblestruct = level.vehicle_rumble[type];
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
-  areatrigger = spawn("trigger_radius", self.origin + (0, 0, zoffset), 0, rumblestruct.radius, height);
+  areatrigger = Spawn("trigger_radius", self.origin + (0, 0, zoffset), 0, rumblestruct.radius, height);
   areatrigger EnableLinkTo();
   areatrigger LinkTo(self);
   self.rumbletrigger = areatrigger;
   self endon("death");
   // 	( rumble, scale, duration, radius, basetime, randomaditionaltime )
-  if(!isDefined(self.rumbleon)) {
+  if(!isdefined(self.rumbleon))
     self.rumbleon = true;
-  }
-  if(isDefined(rumblestruct.scale)) {
+  if(IsDefined(rumblestruct.scale))
     self.rumble_scale = rumblestruct.scale;
-  } else {
+  else
     self.rumble_scale = 0.15;
-  }
 
-  if(isDefined(rumblestruct.duration)) {
+  if(IsDefined(rumblestruct.duration))
     self.rumble_duration = rumblestruct.duration;
-  } else {
+  else
     self.rumble_duration = 4.5;
-  }
 
-  if(isDefined(rumblestruct.radius)) {
+  if(IsDefined(rumblestruct.radius)) {
     self.rumble_radius = rumblestruct.radius;
   } else {
     self.rumble_radius = 600;
   }
 
-  if(isDefined(rumblestruct.basetime)) {
+  if(IsDefined(rumblestruct.basetime)) {
     self.rumble_basetime = rumblestruct.basetime;
   } else {
     self.rumble_basetime = 1;
   }
 
-  if(isDefined(rumblestruct.randomaditionaltime)) {
+  if(IsDefined(rumblestruct.randomaditionaltime)) {
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
   } else {
     self.rumble_randomaditionaltime = 1;
   }
 
   areatrigger.radius = self.rumble_radius;
-  while(1) {
+  while (1) {
     areatrigger waittill("trigger");
     if(self Vehicle_GetSpeed() == 0 || !self.rumbleon) {
       wait .1;
@@ -4216,7 +3886,7 @@ vehicle_rumble() {
     }
 
     self PlayRumbleLoopOnEntity(level.vehicle_rumble[type].rumble);
-    while(level.player IsTouching(areatrigger) && self.rumbleon && self Vehicle_GetSpeed() > 0) {
+    while (level.player IsTouching(areatrigger) && self.rumbleon && self Vehicle_GetSpeed() > 0) {
       Earthquake(self.rumble_scale, self.rumble_duration, self.origin, self.rumble_radius); // scale duration source radius
       wait(self.rumble_basetime + RandomFloat(self.rumble_randomaditionaltime));
     }
@@ -4229,52 +3899,46 @@ vehicle_kill_badplace_forever() {
 }
 
 vehicle_badplace() {
-  if(!isDefined(self.script_badplace)) {
+  if(!isdefined(self.script_badplace))
     return;
-  }
   self endon("kill_badplace_forever");
-  if(!self Vehicle_IsPhysVeh()) {
+  if(!self Vehicle_IsPhysVeh())
     self endon("death");
-  }
   self endon("delete");
-  if(isDefined(level.custombadplacethread)) {
+  if(IsDefined(level.custombadplacethread)) {
     self thread[[level.custombadplacethread]]();
     return;
   }
-  hasturret = isDefined(level.vehicle_hasMainTurret[self.model]) && level.vehicle_hasMainTurret[self.model];
+  hasturret = IsDefined(level.vehicle_hasMainTurret[self.model]) && level.vehicle_hasMainTurret[self.model];
   bp_duration = .5;
   bp_angle_left = 17;
   bp_angle_right = 17;
-  for(;;) {
+  for (;;) {
     if(!self.script_badplace) {
       // 			BadPlace_Delete( "tankbadplace" );
-      while(!self.script_badplace) {
+      while (!self.script_badplace)
         wait .5;
-      }
     }
     speed = self Vehicle_GetSpeed();
     if(speed <= 0) {
       wait bp_duration;
       continue;
     }
-    if(speed < 5) {
+    if(speed < 5)
       bp_radius = 200;
-    } else if((speed > 5) && (speed < 8)) {
+    else if((speed > 5) && (speed < 8))
       bp_radius = 350;
-    } else {
+    else
       bp_radius = 500;
-    }
 
-    if(isDefined(self.BadPlaceModifier)) {
+    if(IsDefined(self.BadPlaceModifier))
       bp_radius = (bp_radius * self.BadPlaceModifier);
-    }
 
-    // 			bp_direction = anglesToForward( self.angles );
-    if(hasturret) {
-      bp_direction = anglesToForward(self GetTagAngles("tag_turret"));
-    } else {
-      bp_direction = anglesToForward(self.angles);
-    }
+    // 			bp_direction = AnglesToForward( self.angles );
+    if(hasturret)
+      bp_direction = AnglesToForward(self GetTagAngles("tag_turret"));
+    else
+      bp_direction = AnglesToForward(self.angles);
 
     // have to use unique names for each bad place. if not they will be shared for all vehicles and thats not good. - R
     BadPlace_Arc(self.unique_id + "arc", bp_duration, self.origin, bp_radius * 1.9, CONST_bp_height, bp_direction, bp_angle_left, bp_angle_right, "axis", "team3", "allies");
@@ -4285,27 +3949,23 @@ vehicle_badplace() {
 }
 
 no_treads() {
-  if(self isHelicopter()) {
+  if(self isHelicopter())
     return true;
-  }
 
-  if(self isAirplane()) {
+  if(self isAirplane())
     return true;
-  }
 
   return false;
 }
 
 vehicle_treads() {
-  if(!isDefined(level.vehicle_treads[self.vehicletype])) {
+  if(!isdefined(level.vehicle_treads[self.vehicletype]))
     return;
-  }
 
-  if(no_treads()) {
+  if(no_treads())
     return;
-  }
 
-  if(isDefined(level.tread_override_thread)) {
+  if(IsDefined(level.tread_override_thread)) {
     self thread[[level.tread_override_thread]]("tag_origin", "back_left", (160, 0, 0));
     return;
   }
@@ -4331,10 +3991,10 @@ tread(tagname, side, relativeOffset, secondTag, fakespeed) {
   self endon("death");
   treadfx = treadget(self, side);
   self endon("kill_treads_forever");
-  for(;;) {
+  for (;;) {
     speed = self Vehicle_GetSpeed();
     if(speed == 0) {
-      if(isDefined(fakespeed)) {
+      if(isdefined(fakespeed)) {
         speed = fakespeed;
       } else {
         wait 0.1;
@@ -4344,63 +4004,59 @@ tread(tagname, side, relativeOffset, secondTag, fakespeed) {
     speed *= CONST_MPHCONVERSION;
     waitTime = (1 / speed);
     waitTime = (waitTime * 35);
-    if(waitTime < 0.1) {
+    if(waitTime < 0.1)
       waitTime = 0.1;
-    } else if(waitTime > 0.3) {
+    else if(waitTime > 0.3)
       waitTime = 0.3;
-    }
     wait waitTime;
     lastfx = treadfx;
     treadfx = treadget(self, side);
     if(treadfx != -1) {
       ang = self GetTagAngles(tagname);
-      forwardVec = anglesToForward(ang);
+      forwardVec = AnglesToForward(ang);
 
       effectOrigin = self GetTagOrigin(tagname);
 
       // if two tags then use the center between the two
-      if(isDefined(secondTag)) {
+      if(IsDefined(secondTag)) {
         secondTagOrigin = self GetTagOrigin(secondTag);
         effectOrigin = (effectOrigin + secondTagOrigin) / 2;
       }
 
       forwardVec = vector_multiply(forwardVec, waitTime);
       upVec = AnglesToUp(ang);
-      playFX(treadfx, effectOrigin, upVec, forwardVec);
+      PlayFX(treadfx, effectOrigin, upVec, forwardVec);
     }
   }
 }
 
 treadget(vehicle, side) {
   surface = self GetWheelSurface(side);
-  if(!isDefined(vehicle.vehicletype)) {
+  if(!isdefined(vehicle.vehicletype)) {
     treadfx = -1;
     return treadfx;
   }
 
-  if(!isDefined(level._vehicle_effect[vehicle.vehicletype])) {
+  if(!isdefined(level._vehicle_effect[vehicle.vehicletype])) {
     PrintLn("no treads setup for vehicle type: ", vehicle.vehicletype);
     wait 1;
     return -1;
   }
   treadfx = level._vehicle_effect[vehicle.vehicletype][surface];
 
-  if(surface == "ice") {
+  if(surface == "ice")
     self notify("iminwater");
-  }
 
-  if(!isDefined(treadfx)) {
+  if(!isdefined(treadfx))
     treadfx = -1;
-  }
 
   return treadfx;
 }
 
 turret_attack_think() {
   // chad - disable this for now, will eventually handle shooting of missiles at targets
-  if(self isHelicopter()) {
+  if(self isHelicopter())
     return;
-  }
 
   // Nathan - Turrets don't think anymore. Sorry, and your welcome.
   thread turret_shoot();
@@ -4408,11 +4064,11 @@ turret_attack_think() {
 
 isStationary() {
   type = self.vehicletype;
-  if(isDefined(level.vehicle_isStationary[type]) && level.vehicle_isStationary[type]) {
+  if(IsDefined(level.vehicle_isStationary[type]) && level.vehicle_isStationary[type])
     return true;
-  } else {
+  else
     return false;
-  }
+
 }
 
 turret_shoot() {
@@ -4424,34 +4080,31 @@ turret_shoot() {
   if(level.vehicle_mainTurrets[self.model].size) {
     turrets = GetArrayKeys(level.vehicle_mainTurrets[self.model]);
   }
-  while(self.health > 0) {
+  while (self.health > 0) {
     self waittill("turret_fire"); // next game remove this. just a simple fireturret command should do
     self notify("groupedanimevent", "turret_fire");
-    if(!turrets.size) {
+    if(!turrets.size)
       self FireWeapon();
-    } else {
+    else {
       self FireWeapon(turrets[index]);
       index++;
-      if(index >= turrets.size) {
+      if(index >= turrets.size)
         index = 0;
-      }
     }
   }
 }
 
 vehicle_shoot_shock() {
   // if no shellshock is specified just get out of here.
-  if(!isDefined(level.vehicle_shoot_shock[self.model])) {
+  if(!isdefined(level.vehicle_shoot_shock[self.model]))
     return;
-  }
 
-  if(GetDvar("disable_tank_shock_minspec") == "1") {
+  if(GetDvar("disable_tank_shock_minspec") == "1")
     return;
-  }
 
   self endon("death");
 
-  if(!isDefined(level.vehicle_shoot_shock_overlay)) {
+  if(!isdefined(level.vehicle_shoot_shock_overlay)) {
     level.vehicle_shoot_shock_overlay = NewHudElem();
     level.vehicle_shoot_shock_overlay.x = 0;
     level.vehicle_shoot_shock_overlay.y = 0;
@@ -4463,39 +4116,34 @@ vehicle_shoot_shock() {
     level.vehicle_shoot_shock_overlay.alpha = 0;
   }
 
-  while(true) {
+  while (true) {
     self waittill("weapon_fired"); // waits for Code notify when FireWeapon() is called.
-    if(isDefined(self.shock_distance)) {
+    if(IsDefined(self.shock_distance))
       shock_distance = self.shock_distance;
-    } else {
+    else
       shock_distance = 400;
-    }
 
-    if(isDefined(self.black_distance)) {
+    if(IsDefined(self.black_distance))
       black_distance = self.black_distance;
-    } else {
+    else
       black_distance = 800;
-    }
 
     player_distance = Distance(self.origin, level.player.origin);
-    if(player_distance > black_distance) {
+    if(player_distance > black_distance)
       continue;
-    }
 
     // 		might add this at some point, but it's so subtle now that I don't think it matters.
-    // 		if( SightTracePassed( level.player getEye(), self.origin + ( 0, 0, 64 ), false, self ) )
+    // 		if( SightTracePassed( level.player GetEye(), self.origin + ( 0, 0, 64 ), false, self ) )
 
     level.vehicle_shoot_shock_overlay.alpha = .5;
     level.vehicle_shoot_shock_overlay FadeOverTime(0.2);
     level.vehicle_shoot_shock_overlay.alpha = 0;
 
-    if(player_distance > shock_distance) {
+    if(player_distance > shock_distance)
       continue;
-    }
 
-    if(isDefined(level.player.flashendtime) && ((level.player.flashendtime - GetTime()) > 200)) {
+    if(IsDefined(level.player.flashendtime) && ((level.player.flashendtime - GetTime()) > 200))
       continue;
-    }
 
     fraction = player_distance / shock_distance;
     time = 4 - (3 * fraction);
@@ -4505,23 +4153,19 @@ vehicle_shoot_shock() {
 
 vehicle_compasshandle() {
   type = self.vehicletype;
-  if(!isDefined(level.vehicle_compassicon[type])) {
+  if(!isdefined(level.vehicle_compassicon[type]))
     return;
-  }
-  if(!level.vehicle_compassicon[type]) {
+  if(!level.vehicle_compassicon[type])
     return;
-  }
   self enable_vehicle_compass();
 }
 
 vehicle_setteam() {
   type = self.vehicletype;
-  if(!isDefined(self.script_team) && isDefined(level.vehicle_team[type])) {
+  if(!isdefined(self.script_team) && IsDefined(level.vehicle_team[type]))
     self.script_team = level.vehicle_team[type];
-  }
-  if(isDefined(level.vehicle_hasname[type])) {
+  if(IsDefined(level.vehicle_hasname[type]))
     self thread maps\_vehiclenames::get_name();
-  }
 
   level.vehicles[self.script_team] = array_add(level.vehicles[self.script_team], self);
 }
@@ -4534,18 +4178,19 @@ vehicle_handleunloadevent() {
   }
 }
 
+
 get_vehiclenode_any_dynamic(target) {
   // the should return undefined
   path_start = GetVehicleNode(target, "targetname");
 
-  if(!isDefined(path_start)) {
+  if(!isdefined(path_start)) {
     path_start = GetEnt(target, "targetname");
   } else if(ishelicopter()) {
     PrintLn("helicopter node targetname: " + path_start.targetname);
     PrintLn("vehicletype: " + self.vehicletype);
     AssertMsg("helicopter on vehicle path( see console for info )");
   }
-  if(!isDefined(path_start)) {
+  if(!isdefined(path_start)) {
     path_start = getstruct(target, "targetname");
   }
   return path_start;
@@ -4559,30 +4204,27 @@ vehicle_resumepathvehicle() {
 
   node = undefined;
 
-  if(isDefined(self.currentnode.target)) {
+  if(IsDefined(self.currentnode.target))
     node = get_vehiclenode_any_dynamic(self.currentnode.target);
-  }
-  if(!isDefined(node)) {
+  if(!isdefined(node))
     return;
-  }
   vehicle_paths(node);
 }
 
+
+
 setvehgoalpos_wrap(origin, bStop) {
-  if(self.health <= 0) {
+  if(self.health <= 0)
     return;
-  }
-  if(isDefined(self.originheightoffset)) {
+  if(IsDefined(self.originheightoffset))
     origin += (0, 0, self.originheightoffset); // TODO - FIXME: this is temporarily set in the vehicles init_local function working on getting it this requirement removed
-  }
   self SetVehGoalPos(origin, bStop);
   //Line( self.origin, origin, (0,1,1), 1, 1, 5000 );
 }
 
 vehicle_liftoffvehicle(height) {
-  if(!isDefined(height)) {
+  if(!isdefined(height))
     height = 512;
-  }
   dest = self.origin + (0, 0, height);
   self SetNearGoalNotifyDist(10);
   self setvehgoalpos_wrap(dest, 1);
@@ -4594,16 +4236,13 @@ waittill_stable() {
   offset = 12;
   stabletime = 400;
   timer = GetTime() + stabletime;
-  while(isDefined(self)) {
-    if(abs(self.angles[0]) > offset) {
+  while (IsDefined(self)) {
+    if(abs(self.angles[0]) > offset)
       timer = GetTime() + stabletime;
-    }
-    if(abs(self.angles[2]) > offset) {
+    if(abs(self.angles[2]) > offset)
       timer = GetTime() + stabletime;
-    }
-    if(GetTime() > timer) {
+    if(GetTime() > timer)
       break;
-    }
     wait .05;
   }
 }
@@ -4623,42 +4262,40 @@ littlebird_landing() {
 
 get_landing_node() {
   node = self.currentnode;
-  for(;;) {
+  for (;;) {
     nextnode = getent_or_struct(node.target, "targetname");
-    AssertEx(isDefined(nextnode), "Was looking for landing node with script_unload but ran out of nodes to look through.");
-    if(isDefined(nextnode.script_unload)) {
+    AssertEx(IsDefined(nextnode), "Was looking for landing node with script_unload but ran out of nodes to look through.");
+    if(IsDefined(nextnode.script_unload))
       return nextnode;
-    }
     node = nextnode;
   }
 }
 
 unload_node(node) {
-  if(isDefined(self.ent_flag["prep_unload"]) && self ent_flag("prep_unload")) {
+  if(IsDefined(self.ent_flag["prep_unload"]) && self ent_flag("prep_unload")) {
     // this vehicle is already in the process of unloading
     return;
   }
 
   if(IsSubStr(self.classname, "snowmobile")) {
-    while(self.veh_speed > 15) {
+    while (self.veh_speed > 15) {
       wait(0.05);
     }
   }
 
-  if(!isDefined(node.script_flag_wait) && !isDefined(node.script_delay)) {
+  if(!isdefined(node.script_flag_wait) && !isdefined(node.script_delay)) {
     // going to stop anyway so no need to kill the path
     self notify("newpath");
   }
 
-  Assert(isDefined(self));
+  Assert(IsDefined(self));
   // 	self vehicle_detachfrompath();
 
   pathnode = GetNode(node.targetname, "target");
-  if(isDefined(pathnode) && self.riders.size) {
+  if(IsDefined(pathnode) && self.riders.size) {
     foreach(rider in self.riders) {
-      if(IsAI(rider)) {
+      if(IsAI(rider))
         rider thread maps\_spawner::go_to_node(pathnode);
-      }
     }
   }
 
@@ -4671,40 +4308,35 @@ unload_node(node) {
 
   // 	self vehicle_to_dummy	();
 
-  if(isDefined(node.script_noteworthy)) {
+  if(IsDefined(node.script_noteworthy))
     if(node.script_noteworthy == "wait_for_flag")
-  }
-  flag_wait(node.script_flag);
+      flag_wait(node.script_flag);
 
   self vehicle_unload(node.script_unload);
 
-  if(maps\_vehicle_aianim::riders_unloadable(node.script_unload)) {
+  if(maps\_vehicle_aianim::riders_unloadable(node.script_unload))
     self waittill("unloaded");
-  }
 
   // 	self dummy_to_vehicle();
 
   // if we want the helis to hang around for bog_b we can do some script_magic here.
-  // 	wait 1;
+  // 	wait 1; 
 
-  if(isDefined(node.script_flag_wait) || isDefined(node.script_delay)) {
+  if(IsDefined(node.script_flag_wait) || IsDefined(node.script_delay)) {
     return;
   }
 
-  if(isDefined(self)) {
+  if(IsDefined(self))
     thread vehicle_resumepathvehicle();
-  }
 }
 
 move_turrets_here(model) {
   typemodel = self.vehicletype + self.model;
-  if(!isDefined(self.mgturret)) {
+  if(!isdefined(self.mgturret))
     return;
-  }
-  if(self.mgturret.size == 0) {
+  if(self.mgturret.size == 0)
     return;
-  }
-  AssertEx(isDefined(level.vehicle_mgturret[typemodel]), "no turrets specified for model");
+  AssertEx(IsDefined(level.vehicle_mgturret[typemodel]), "no turrets specified for model");
 
   foreach(i, turret in self.mgturret) {
     turret Unlink();
@@ -4718,13 +4350,14 @@ vehicle_pathdetach() {
 
   self SetGoalYaw(flat_angle(self.angles)[1]);
   self SetVehGoalPos(self.origin + (0, 0, 4), 1);
+
 }
 
 vehicle_to_dummy() {
   // create a dummy model that takes the place of a vehicle, the vehicle gets hidden
-  AssertEx(!isDefined(self.modeldummy), "Vehicle_to_dummy was called on a vehicle that already had a dummy.");
-  self.modeldummy = spawn("script_model", self.origin);
-  self.modeldummy setModel(self.model);
+  AssertEx(!isdefined(self.modeldummy), "Vehicle_to_dummy was called on a vehicle that already had a dummy.");
+  self.modeldummy = Spawn("script_model", self.origin);
+  self.modeldummy SetModel(self.model);
   self.modeldummy.origin = self.origin;
   self.modeldummy.angles = self.angles;
   self.modeldummy UseAnimTree(#animtree);
@@ -4761,7 +4394,7 @@ model_dummy_death() {
   // delete model dummy when the vehicle is deleted.
   modeldummy = self.modeldummy;
   modeldummy endon("death");
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     self waittill("death");
     waittillframeend;
   }
@@ -4771,7 +4404,7 @@ model_dummy_death() {
 // will get back to this if people are using vehicle to dummy..
 //move_lights_here( model )
 //{
-//	if( !isDefined( self.lights ) )
+//	if( !isdefined( self.lights ) )
 //		return;
 //
 //	lights = level.vehicle_lights_group[ self.model ][ group ];
@@ -4786,9 +4419,9 @@ model_dummy_death() {
 //}
 
 move_ghettotags_here(model) {
-  if(!isDefined(self.ghettotags)) {
+
+  if(!isdefined(self.ghettotags))
     return;
-  }
   foreach(ghettotag in self.ghettotags) {
     ghettotag Unlink();
     ghettotag LinkTo(model);
@@ -4797,11 +4430,11 @@ move_ghettotags_here(model) {
 }
 
 dummy_to_vehicle() {
-  AssertEx(isDefined(self.modeldummy), "Tried to turn a vehicle from a dummy into a vehicle. Can only be called on vehicles that have been turned into dummies with vehicle_to_dummy.");
+  AssertEx(IsDefined(self.modeldummy), "Tried to turn a vehicle from a dummy into a vehicle. Can only be called on vehicles that have been turned into dummies with vehicle_to_dummy.");
 
-  if(self isHelicopter()) {
+  if(self isHelicopter())
     self.modeldummy.origin = self GetTagOrigin("tag_ground");
-  } else {
+  else {
     self.modeldummy.origin = self.origin;
     self.modeldummy.angles = self.angles;
   }
@@ -4829,41 +4462,37 @@ dummy_to_vehicle() {
 }
 
 move_riders_here(base) {
-  if(!isDefined(self.riders)) {
+  if(!isdefined(self.riders))
     return;
-  }
   riders = self.riders;
   // move rider characters to their new location
   foreach(guy in riders) {
-    if(!isDefined(guy)) {
+    if(!isdefined(guy))
       continue;
-    }
     guy Unlink();
     animpos = maps\_vehicle_aianim::anim_pos(self, guy.vehicle_position);
     guy LinkTo(base, animpos.sittag, (0, 0, 0), (0, 0, 0));
-    if(IsAI(guy)) {
+    if(IsAI(guy))
       guy Teleport(base GetTagOrigin(animpos.sittag));
-    } else {
+    else
       guy.origin = base GetTagOrigin(animpos.sittag);
-    }
   }
 }
 
 spawn_vehicles_from_targetname_newstyle(name) {
   vehicles = [];
-  test = getEntArray(name, "targetname");
+  test = GetEntArray(name, "targetname");
   test_return = [];
 
-  //strip out non vehicles..
+  //strip out non vehicles.. 
   foreach(v in test) {
-    if(!isDefined(v.code_classname) || v.code_classname != "script_vehicle") {
+    if(!isdefined(v.code_classname) || v.code_classname != "script_vehicle")
       continue;
-    }
-    if(isSpawner(v)) {
+    if(isSpawner(v))
       vehicles[vehicles.size] = vehicle_spawn(v);
-    }
   }
   return vehicles;
+
 }
 
 /*
@@ -4947,9 +4576,8 @@ spawn_vehicle_from_targetname_and_drive(name) {
 spawn_vehicles_from_targetname_and_drive(name) {
   // spawns 1 vehicle and makes sure it gets 1
   vehicleArray = spawn_vehicles_from_targetname(name);
-  for(i = 0; i < vehicleArray.size; i++) {
+  for (i = 0; i < vehicleArray.size; i++)
     foreach(vehicle in vehicleArray)
-  }
   thread gopath(vehicle);
   return vehicleArray;
 }
@@ -4958,12 +4586,11 @@ aircraft_dust_kickup(model) {
   self endon("death_finished");
   self endon("stop_kicking_up_dust");
 
-  assert(isDefined(self.vehicletype));
+  assert(IsDefined(self.vehicletype));
 
   maxHeight = 1200;
-  if(isDefined(level.treadfx_maxheight)) {
+  if(isdefined(level.treadfx_maxheight))
     maxHeight = level.treadfx_maxheight;
-  }
 
   minHeight = 350;
 
@@ -4974,9 +4601,8 @@ aircraft_dust_kickup(model) {
   doTraceThisFrame = numFramesPerTrace;
 
   defaultRepeatRate = 1.0;
-  if(self isAirplane()) {
+  if(self isAirplane())
     defaultRepeatRate = 0.15;
-  }
 
   repeatRate = defaultRepeatRate;
 
@@ -4984,23 +4610,19 @@ aircraft_dust_kickup(model) {
   d = undefined;
 
   trace_ent = self;
-  if(isDefined(model)) {
+  if(IsDefined(model))
     trace_ent = model;
-  }
 
-  while(isDefined(self)) {
-    if(isDefined(level.skip_treadfx)) {
+  while (IsDefined(self)) {
+    if(isdefined(level.skip_treadfx))
       return true;
-    }
 
-    if(repeatRate <= 0) {
+    if(repeatRate <= 0)
       repeatRate = defaultRepeatRate;
-    }
     wait repeatRate;
 
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       return;
-    }
 
     doTraceThisFrame--;
 
@@ -5009,58 +4631,58 @@ aircraft_dust_kickup(model) {
     if(doTraceThisFrame <= 0) {
       doTraceThisFrame = numFramesPerTrace;
 
-      trace = bulletTrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
+      trace = BulletTrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
 
-      //if( isDefined( trace ) && isDefined( trace[ "position" ] ) )
+      /#
+      //if( IsDefined( trace ) && IsDefined( trace[ "position" ] ) )
       //	thread draw_line_for_time( trace_ent.origin, trace[ "position" ], 1, 0, 0, 2.0 );
+      # /
 
-      /*
-      trace[ "entity" ]
-      trace[ "fraction" ]
-      trace[ "normal" ]
-      trace[ "position" ]
-      trace[ "surfacetype" ]
-      */
+        /* 
+        trace[ "entity" ]
+        trace[ "fraction" ]
+        trace[ "normal" ]
+        trace[ "position" ]
+        trace[ "surfacetype" ]
+        */
 
-      d = Distance(trace_ent.origin, trace["position"]);
+        d = Distance(trace_ent.origin, trace["position"]);
 
       repeatRate = ((d - minHeight) / (maxHeight - minHeight)) * (slowestRepeatWait - fastestRepeatWait) + fastestRepeatWait;
     }
 
-    if(!isDefined(trace)) {
+    if(!isdefined(trace))
       continue;
-    }
 
-    Assert(isDefined(d));
+    Assert(IsDefined(d));
 
     if(d > maxHeight) {
       repeatRate = defaultRepeatRate;
       continue;
     }
 
-    if(isDefined(trace["entity"])) {
+    if(IsDefined(trace["entity"])) {
       repeatRate = defaultRepeatRate;
       continue;
     }
 
-    if(!isDefined(trace["position"])) {
+    if(!isdefined(trace["position"])) {
       repeatRate = defaultRepeatRate;
       continue;
     }
 
-    if(!isDefined(trace["surfacetype"])) {
+    if(!isdefined(trace["surfacetype"]))
       trace["surfacetype"] = "dirt";
-    }
 
     //iprintln( "surface: " + trace[ "surfacetype" ] );
 
-    AssertEx(isDefined(level._vehicle_effect[self.vehicletype]), self.vehicletype + " vehicle script hasn't run _tradfx properly");
-    AssertEx(isDefined(level._vehicle_effect[self.vehicletype][trace["surfacetype"]]), "UNKNOWN SURFACE TYPE: " + trace["surfacetype"]);
+    AssertEx(IsDefined(level._vehicle_effect[self.vehicletype]), self.vehicletype + " vehicle script hasn't run _tradfx properly");
+    AssertEx(IsDefined(level._vehicle_effect[self.vehicletype][trace["surfacetype"]]), "UNKNOWN SURFACE TYPE: " + trace["surfacetype"]);
 
     // prof_end( "aircraft_dust_kickup" );
 
     if(level._vehicle_effect[self.vehicletype][trace["surfacetype"]] != -1) {
-      playFX(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
+      PlayFX(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
       //Print3d( trace[ "position" ], trace[ "surfacetype" ], (0,1,0), 1, 1.1, 150 );
     } else {
       //Print3d( trace[ "position" ], trace[ "surfacetype" ], (1,0,0), 1, 1.1, 150 );
@@ -5071,53 +4693,56 @@ aircraft_dust_kickup(model) {
 tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   // Chad G's tank crushing vehicle script. Self corrects for node positioning errors.
 
-  Assert(isDefined(crushedVehicle));
-  Assert(isDefined(endNode));
-  Assert(isDefined(tankAnim));
-  Assert(isDefined(truckAnim));
-  Assert(isDefined(animTree));
+  Assert(IsDefined(crushedVehicle));
+  Assert(IsDefined(endNode));
+  Assert(IsDefined(tankAnim));
+  Assert(IsDefined(truckAnim));
+  Assert(IsDefined(animTree));
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
   // Create an animatable tank and move the real tank to the next path and store required info
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
   animatedTank = vehicle_to_dummy();
   self Vehicle_SetSpeed(7, 5, 5);
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
   // Total time for animation, and correction and uncorrection times
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
   animLength = GetAnimLength(tankAnim);
   move_to_time = (animLength / 3);
   move_from_time = (animLength / 3);
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
   // Node information used for calculating both starting and ending points for the animation
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
   // get node vecs
   node_origin = crushedVehicle.origin;
   node_angles = crushedVehicle.angles;
-  node_forward = anglesToForward(node_angles);
+  node_forward = AnglesToForward(node_angles);
   node_up = AnglesToUp(node_angles);
   node_right = AnglesToRight(node_angles);
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
   // Calculate Starting Point for the animation from crushedVehicle and create the dummy
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
   // get anim starting point origin and angle
   anim_start_org = GetStartOrigin(node_origin, node_angles, tankAnim);
   anim_start_ang = GetStartAngles(node_origin, node_angles, tankAnim);
 
   // get anim starting point vecs
-  animStartingVec_Forward = anglesToForward(anim_start_ang);
+  animStartingVec_Forward = AnglesToForward(anim_start_ang);
   animStartingVec_Up = AnglesToUp(anim_start_ang);
   animStartingVec_Right = AnglesToRight(anim_start_ang);
 
   // get tank vecs
-  tank_Forward = anglesToForward(animatedTank.angles);
+  tank_Forward = AnglesToForward(animatedTank.angles);
   tank_Up = AnglesToUp(animatedTank.angles);
   tank_Right = AnglesToRight(animatedTank.angles);
 
@@ -5126,13 +4751,13 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   offset_Forward = VectorDot(offset_Vec, animStartingVec_Forward);
   offset_Up = VectorDot(offset_Vec, animStartingVec_Up);
   offset_Right = VectorDot(offset_Vec, animStartingVec_Right);
-  dummy = spawn("script_origin", animatedTank.origin);
+  dummy = Spawn("script_origin", animatedTank.origin);
   dummy.origin += vector_multiply(tank_Forward, offset_Forward);
   dummy.origin += vector_multiply(tank_Up, offset_Up);
   dummy.origin += vector_multiply(tank_Right, offset_Right);
 
   // set dummy angles to reflect the different in animation starting angles and the tanks actual angles
-  offset_Vec = anglesToForward(node_angles);
+  offset_Vec = AnglesToForward(node_angles);
   offset_Forward = VectorDot(offset_Vec, animStartingVec_Forward);
   offset_Up = VectorDot(offset_Vec, animStartingVec_Up);
   offset_Right = VectorDot(offset_Vec, animStartingVec_Right);
@@ -5141,10 +4766,11 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   dummyVec += vector_multiply(tank_Right, offset_Right);
   dummy.angles = VectorToAngles(dummyVec);
 
-  // -- -- -- -- -- -- -- -- -- -- -
-  // Debug Lines
-  // -- -- -- -- -- -- -- -- -- -- -
 
+  // -- -- -- -- -- -- -- -- -- -- - 
+  // Debug Lines
+  // -- -- -- -- -- -- -- -- -- -- - 
+  /#
   if(GetDvar("debug_tankcrush") == "1") {
     // line to where tank1 is
     thread draw_line_from_ent_for_time(level.player, animatedTank.origin, 1, 0, 0, animLength / 2);
@@ -5155,21 +4781,21 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
     // line to the dummy
     thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
   }
+  # /
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  // Animate the animatable tank and self correct into the crushed vehicle
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    // Animate the animatable tank and self correct into the crushed vehicle
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-  if(isDefined(soundAlias)) {
-    level thread play_sound_in_space(soundAlias, node_origin);
-  }
+    if(IsDefined(soundAlias))
+      level thread play_sound_in_space(soundAlias, node_origin);
 
   animatedTank LinkTo(dummy);
   crushedVehicle UseAnimTree(animTree);
   animatedTank UseAnimTree(animTree);
 
-  Assert(isDefined(level._vehicle_effect["tankcrush"]["window_med"]));
-  Assert(isDefined(level._vehicle_effect["tankcrush"]["window_large"]));
+  Assert(IsDefined(level._vehicle_effect["tankcrush"]["window_med"]));
+  Assert(IsDefined(level._vehicle_effect["tankcrush"]["window_large"]));
 
   crushedVehicle thread tank_crush_fx_on_tag("tag_window_left_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.2);
   crushedVehicle thread tank_crush_fx_on_tag("tag_window_right_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.4);
@@ -5186,31 +4812,31 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   animLength -= move_to_time;
   animLength -= move_from_time;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
   // Tank plays animation in the exact correct location for a while
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
   wait animLength;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
   // Calculate Ending Point for the animation from crushedVehicle
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
   // get anim ending point origin and angle
   // anim_end_org = anim_start_org + GetMoveDelta( tankAnim, 0, 1 );
-  temp = spawn("script_model", (anim_start_org));
+  temp = Spawn("script_model", (anim_start_org));
   temp.angles = anim_start_ang;
   anim_end_org = temp LocalToWorldCoords(GetMoveDelta(tankAnim, 0, 1));
   anim_end_ang = anim_start_ang + (0, GetAngleDelta(tankAnim, 0, 1), 0);
   temp Delete();
 
   // get anim ending point vecs
-  animEndingVec_Forward = anglesToForward(anim_end_ang);
+  animEndingVec_Forward = AnglesToForward(anim_end_ang);
   animEndingVec_Up = AnglesToUp(anim_end_ang);
   animEndingVec_Right = AnglesToRight(anim_end_ang);
 
   // get ending tank pos vecs
   attachPos = self GetAttachPos(endNode);
-  tank_Forward = anglesToForward(attachPos[1]);
+  tank_Forward = AnglesToForward(attachPos[1]);
   tank_Up = AnglesToUp(attachPos[1]);
   tank_Right = AnglesToRight(attachPos[1]);
 
@@ -5225,7 +4851,7 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   dummy.final_origin += vector_multiply(tank_Right, offset_Right);
 
   // set dummy angles to reflect the different in animation starting angles and the tanks actual angles
-  offset_Vec = anglesToForward(node_angles);
+  offset_Vec = AnglesToForward(node_angles);
   offset_Forward = VectorDot(offset_Vec, animEndingVec_Forward);
   offset_Up = VectorDot(offset_Vec, animEndingVec_Up);
   offset_Right = VectorDot(offset_Vec, animEndingVec_Right);
@@ -5234,9 +4860,9 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
   dummyVec += vector_multiply(tank_Right, offset_Right);
   dummy.final_angles = VectorToAngles(dummyVec);
 
-  // -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- - 
   // Debug Lines
-  // -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- - 
   if(GetDvar("debug_tankcrush") == "1") {
     // line to where tank2 is
     thread draw_line_from_ent_for_time(level.player, self.origin, 1, 0, 0, animLength / 2);
@@ -5248,17 +4874,19 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
     thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
   }
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
   // Tank uncorrects to the real location of the tank on the spline
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 
 
   dummy MoveTo(dummy.final_origin, move_from_time, (move_from_time / 2), (move_from_time / 2));
   dummy RotateTo(dummy.final_angles, move_from_time, (move_from_time / 2), (move_from_time / 2));
   wait move_from_time;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
   // Tank is done animating now, remove the animatable tank and show the real one( they should be perfectly aligned now )
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
   self DontInterpolate();
   self AttachPath(endNode);
@@ -5266,22 +4894,21 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
 }
 
 tank_crush_fx_on_tag(tagName, fxName, soundAlias, startDelay) {
-  if(isDefined(startDelay)) {
+  if(IsDefined(startDelay))
     wait startDelay;
-  }
-  playFXOnTag(fxName, self, tagName);
-  if(isDefined(soundAlias)) {
+  PlayFXOnTag(fxName, self, tagName);
+  if(IsDefined(soundAlias))
     self thread play_sound_on_tag(soundAlias, tagName);
-  }
 }
 
 loadplayer(position, animfudgetime) {
+  /#
   SetDvarIfUninitialized("fastrope_arms", "0");
+  # /
 
-  if(!isDefined(animfudgetime)) {
-    animfudgetime = 0;
-  }
-  Assert(isDefined(self.riders));
+    if(!isdefined(animfudgetime))
+      animfudgetime = 0;
+  Assert(IsDefined(self.riders));
   Assert(self.riders.size);
   guy = undefined;
   foreach(rider in self.riders) {
@@ -5294,7 +4921,7 @@ loadplayer(position, animfudgetime) {
   }
 
   AssertEx(!isai(guy), "guy in position of player needs to have script_drone set, use script_startingposition ans script drone in your map");
-  Assert(isDefined(guy));
+  Assert(IsDefined(guy));
   thread show_rigs(position);
   animpos = maps\_vehicle_aianim::anim_pos(self, position);
 
@@ -5302,8 +4929,8 @@ loadplayer(position, animfudgetime) {
   // 	guy StopUseAnimTree();
   guy notify("newanim");
   guy DetachAll();
-  // 	guy setModel( "" );
-  guy setModel("fastrope_arms");
+  // 	guy SetModel( "" );
+  guy SetModel("fastrope_arms");
   guy UseAnimTree(animpos.player_animtree);
   thread maps\_vehicle_aianim::guy_idle(guy, position);
   // PlayerLinkToDelta( <linkto entity> , <tag> , <viewpercentag fraction> , <right arc> , <left arc> , <top arc> , <bottom arc> )
@@ -5321,11 +4948,13 @@ loadplayer(position, animfudgetime) {
   animtime -= animfudgetime;
   self waittill("unloading");
 
-  if(GetDvar("fastrope_arms") != "0") {
-    guy Show();
-  }
+  /#
 
-  level.player DisableWeapons();
+  if(GetDvar("fastrope_arms") != "0")
+    guy Show();
+  # /
+
+    level.player DisableWeapons();
   // 	guy waittill( "jumpedout" );
 
   guy NotSolid();
@@ -5341,22 +4970,18 @@ loadplayer(position, animfudgetime) {
 show_rigs(position) {
   wait .01;
   self thread maps\_vehicle_aianim::getout_rigspawn(self, position); // spawn the getoutrig for this position
-  if(!self.riders.size) {
+  if(!self.riders.size)
     return;
-  }
-  foreach(rider in self.riders) {
-    self thread maps\_vehicle_aianim::getout_rigspawn(self, rider.vehicle_position);
-  }
+  foreach(rider in self.riders)
+  self thread maps\_vehicle_aianim::getout_rigspawn(self, rider.vehicle_position);
 }
 
 turret_deleteme(turret) {
-  if(isDefined(self)) {
-    if(isDefined(turret.deletedelay))
-  }
-  wait turret.deletedelay;
-  if(isDefined(turret)) {
+  if(IsDefined(self))
+    if(IsDefined(turret.deletedelay))
+      wait turret.deletedelay;
+  if(IsDefined(turret))
     turret Delete();
-  }
 }
 
 /*
@@ -5392,21 +5017,19 @@ vehicle_wheels_backward() {
 }
 
 wheeldirectionchange(direction) {
-  if(direction <= 0) {
+  if(direction <= 0)
     self.wheeldir = 0;
-  } else {
+  else
     self.wheeldir = 1;
-  }
 }
 
 maingun_FX() {
-  if(!isDefined(level.vehicle_deckdust[self.model])) {
+  if(!isdefined(level.vehicle_deckdust[self.model]))
     return;
-  }
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("weapon_fired"); // waits for Code notify when FireWeapon() is called.
-    playFXOnTag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
+    PlayFXOnTag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
     barrel_origin = self GetTagOrigin("tag_flash");
     ground = PhysicsTrace(barrel_origin, barrel_origin + (0, 0, -128));
     PhysicsExplosionSphere(ground, 192, 100, 1);
@@ -5415,25 +5038,22 @@ maingun_FX() {
 
 playTankExhaust() {
   self endon("death");
-  if(!isDefined(level.vehicle_exhaust[self.model])) {
+  if(!isdefined(level.vehicle_exhaust[self.model]))
     return;
-  }
 
   exhaustDelay = 0.1;
-  while(isDefined(self)) {
-    if(!isDefined(self)) {
+  while (IsDefined(self)) {
+    if(!isdefined(self))
       return;
-    }
-    if(!isalive(self)) {
+    if(!isalive(self))
       return;
-    }
-    playFXOnTag(level.vehicle_exhaust[self.model], self, "tag_engine_exhaust");
+    PlayFXOnTag(level.vehicle_exhaust[self.model], self, "tag_engine_exhaust");
     wait exhaustDelay;
   }
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_light( <model> , <name> , <tag> , <effect> , <group> , <delay> )"
 "Summary: contstruct a light fx to play on a vehicle tag, see lights_on lights_off"
@@ -5448,21 +5068,18 @@ playTankExhaust() {
 "Example: build_light( model, "taillight_R", 	"TAG_REAR_LIGHT_RIGHT", 	"misc/car_taillight_btr80", 		"running", 	0.1 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_light(model, name, tag, effect, group, delay) {
-  if(!isDefined(level.vehicle_lights)) {
+  if(!isdefined(level.vehicle_lights))
     level.vehicle_lights = [];
-  }
-  if(!isDefined(level.vehicle_lights_group_override)) {
+  if(!isdefined(level.vehicle_lights_group_override))
     level.vehicle_lights_group_override = [];
-  }
-  if(isDefined(level.vehicle_lights_group_override[group]) && !level.vtoverride) {
+  if(IsDefined(level.vehicle_lights_group_override[group]) && !level.vtoverride)
     return; // this light group has been overwritten and shouldn't be set.
-  }
 
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.name = name;
   struct.tag = tag;
   struct.delay = delay;
@@ -5471,13 +5088,13 @@ build_light(model, name, tag, effect, group, delay) {
   level.vehicle_lights[model][name] = struct;
 
   group_light(model, name, "all");
-  if(isDefined(group)) {
+  if(IsDefined(group))
     group_light(model, name, group);
-  }
+
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_light_override( <type>, <model> , <name> , <tag> , <effect> , <group> , <delay> )"
 "Summary: contstruct a light fx override to play on a vehicle tag, see lights_on lights_off."
@@ -5493,7 +5110,7 @@ build_light(model, name, tag, effect, group, delay) {
 "Example: build_light_override( "btr80", "vehicle_btr80", "spotlight", 		"TAG_FRONT_LIGHT_RIGHT", "misc/spotlight_btr80_daytime", 	"spotlight", 			0.2 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_light_override(type, model, name, tag, effect, group, delay) {
@@ -5506,19 +5123,15 @@ build_light_override(type, model, name, tag, effect, group, delay) {
 }
 
 group_light(model, name, group) {
-  if(!isDefined(level.vehicle_lights_group)) {
+  if(!isdefined(level.vehicle_lights_group))
     level.vehicle_lights_group = [];
-  }
-  if(!isDefined(level.vehicle_lights_group[model])) {
+  if(!isdefined(level.vehicle_lights_group[model]))
     level.vehicle_lights_group[model] = [];
-  }
-  if(!isDefined(level.vehicle_lights_group[model][group])) {
+  if(!isdefined(level.vehicle_lights_group[model][group]))
     level.vehicle_lights_group[model][group] = [];
-  }
-  foreach(lightgroup_name in level.vehicle_lights_group[model][group]) {
-    if(name == lightgroup_name)
-  }
-  return; // this group has already been defined. supporting overrides post precache script. this part doesn't need to be overwritten.
+  foreach(lightgroup_name in level.vehicle_lights_group[model][group])
+  if(name == lightgroup_name)
+    return; // this group has already been defined. supporting overrides post precache script. this part doesn't need to be overwritten.
   level.vehicle_lights_group[model][group][level.vehicle_lights_group[model][group].size] = name;
 }
 
@@ -5531,56 +5144,50 @@ lights_delayfxforframe() {
   level notify("new_lights_delayfxforframe");
   level endon("new_lights_delayfxforframe");
 
-  if(!isDefined(level.fxdelay)) {
+  if(!isdefined(level.fxdelay))
     level.fxdelay = 0;
-  }
 
   level.fxdelay += RandomFloatRange(0.2, 0.4);
 
-  if(level.fxdelay > 2) {
+  if(level.fxdelay > 2)
     level.fxdelay = 0;
-  }
 
   wait 0.05;
 
   level.fxdelay = undefined;
+
 }
 
 lights_on_internal(group) {
   level.lastlighttime = GetTime();
-  if(!isDefined(group)) {
+  if(!isdefined(group))
     group = "all";
-  }
 
   if(!isDefined(level.vehicle_lights_group[self.model]) ||
-    !isDefined(level.vehicle_lights_group[self.model][group])
+    !isdefined(level.vehicle_lights_group[self.model][group])
   )
     return;
   thread lights_delayfxforframe();
-  if(!isDefined(self.lights)) {
+  if(!isdefined(self.lights))
     self.lights = [];
-  }
   lights = level.vehicle_lights_group[self.model][group];
 
   count = 0;
 
   delayoffsetter = [];
-  for(i = 0; i < lights.size; i++) {
-    if(isDefined(self.lights[lights[i]])) {
+  for (i = 0; i < lights.size; i++) {
+    if(IsDefined(self.lights[lights[i]]))
       continue; // light is already on
-    }
 
     template = level.vehicle_lights[self.model][lights[i]];
 
-    if(isDefined(template.delay)) {
+    if(IsDefined(template.delay))
       delay = template.delay;
-    } else {
+    else
       delay = 0;
-    }
 
-    while(isDefined(delayoffsetter["" + delay])) {
+    while (IsDefined(delayoffsetter["" + delay]))
       delay += .05; // don't start these on the same frame.
-    }
 
     delay += level.fxdelay;
 
@@ -5591,19 +5198,19 @@ lights_on_internal(group) {
     childthread noself_delayCall(delay, ::playfxontag, template.effect, self, template.tag);
 
     self.lights[lights[i]] = true;
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       break;
-    }
 
   }
   level.fxdelay = false;
+
 }
 
 deathfx_ent() {
-  if(!isDefined(self.deathfx_ent)) {
-    ent = spawn("script_model", (0, 0, 0));
+  if(!isdefined(self.deathfx_ent)) {
+    ent = Spawn("script_model", (0, 0, 0));
     emodel = get_dummy();
-    ent setModel(self.model);
+    ent SetModel(self.model);
     ent.origin = emodel.origin;
     ent.angles = emodel.angles;
     ent NotSolid();
@@ -5611,7 +5218,7 @@ deathfx_ent() {
     ent LinkTo(emodel);
     self.deathfx_ent = ent;
   } else
-    self.deathfx_ent setModel(self.model);
+    self.deathfx_ent SetModel(self.model);
   return self.deathfx_ent;
 }
 
@@ -5621,16 +5228,13 @@ lights_off(group, model) {
 }
 
 lights_off_internal(group, model) {
-  if(!isDefined(model)) {
+  if(!isdefined(model))
     model = self.model;
-  }
-  if(!isDefined(group)) {
+  if(!isdefined(group))
     group = "all";
-  }
-  if(!isDefined(self.lights)) {
+  if(!isdefined(self.lights))
     return;
-  }
-  if(!isDefined(level.vehicle_lights_group[model][group])) {
+  if(!isdefined(level.vehicle_lights_group[model][group])) {
     PrintLn("vehicletype: " + self.vehicletype);
     PrintLn("light group: " + group);
     AssertMsg("lights not defined for this vehicle( see console");
@@ -5638,9 +5242,9 @@ lights_off_internal(group, model) {
   lights = level.vehicle_lights_group[model][group];
 
   count = 0;
-  for(i = 0; i < lights.size; i++) {
+  for (i = 0; i < lights.size; i++) {
     template = level.vehicle_lights[model][lights[i]];
-    stopFXOnTag(template.effect, self, template.tag);
+    StopFXOnTag(template.effect, self, template.tag);
 
     count++;
     if(count > 2) {
@@ -5648,18 +5252,17 @@ lights_off_internal(group, model) {
       wait .05; // hackin around lights limitations.. seee BUGZILLA 87770
     }
 
-    //handle delete while shutting of lights.
-    if(!isDefined(self)) {
+    //handle delete while shutting of lights. 
+    if(!isdefined(self))
       return;
-    }
 
     self.lights[lights[i]] = undefined;
   }
 
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_deathmodel( <model> , <deathmodel> )"
 "Summary: called in individual vehicle file - assigns death model to vehicles with this model. "
@@ -5671,27 +5274,24 @@ lights_off_internal(group, model) {
 "Example: build_deathmodel( "bmp", "bmp_destroyed" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_deathmodel(model, deathmodel, swapDelay) {
-  if(model != level.vtmodel) {
+  if(model != level.vtmodel)
     return;
-  }
-  if(!isDefined(deathmodel)) {
+  if(!isdefined(deathmodel))
     deathmodel = model;
-  }
   PreCacheModel(model);
   PreCacheModel(deathmodel);
   level.vehicle_deathmodel[model] = deathmodel;
-  if(!isDefined(swapDelay)) {
+  if(!isdefined(swapDelay))
     swapDelay = 0;
-  }
   level.vehicle_deathmodel_delay[model] = swapDelay;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_shoot_shock( <shock> )"
 "Summary: called in individual vehicle file - assigns shock file to be played when main cannon on a tank fires "
@@ -5701,7 +5301,7 @@ build_deathmodel(model, deathmodel, swapDelay) {
 "Example: build_shoot_shock( "tankblast" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_shoot_shock(shock) {
@@ -5711,8 +5311,8 @@ build_shoot_shock(shock) {
   level.vehicle_shoot_shock[level.vtmodel] = shock;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_idle( animation )"
 "Summary: called in individual vehicle file - assigns animations to be used on vehicles"
@@ -5722,21 +5322,20 @@ build_shoot_shock(shock) {
 "Example: build_idle( %abrams_idle );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_idle(animation) {
-  if(!isDefined(level.vehicle_IdleAnim)) {
+
+  if(!isdefined(level.vehicle_IdleAnim))
     level.vehicle_IdleAnim = [];
-  }
-  if(!isDefined(level.vehicle_IdleAnim[level.vtmodel])) {
+  if(!isdefined(level.vehicle_IdleAnim[level.vtmodel]))
     level.vehicle_IdleAnim[level.vtmodel] = [];
-  }
   level.vehicle_IdleAnim[level.vtmodel][level.vehicle_IdleAnim[level.vtmodel].size] = animation;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_drive( <forward> , <reverse> , <normalspeed> , <rate> )"
 "Summary: called in individual vehicle file - assigns animations to be used on vehicles"
@@ -5749,26 +5348,23 @@ build_idle(animation) {
 "Example: build_drive( %abrams_movement, %abrams_movement_backwards, 10 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_drive(forward, reverse, normalspeed, rate) {
-  if(!isDefined(normalspeed)) {
+  if(!isdefined(normalspeed))
     normalspeed = 10;
-  }
   level.vehicle_DriveIdle[level.vtmodel] = forward;
 
-  if(isDefined(reverse)) {
+  if(IsDefined(reverse))
     level.vehicle_DriveIdle_r[level.vtmodel] = reverse;
-  }
   level.vehicle_DriveIdle_normal_speed[level.vtmodel] = normalspeed;
-  if(isDefined(rate)) {
+  if(IsDefined(rate))
     level.vehicle_DriveIdle_animrate[level.vtmodel] = rate;
-  }
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_template( <type> , <model> , <typeoverride> )"
 "Summary: called in individual vehicle file - mandatory to call this in all vehicle files at the top!"
@@ -5780,22 +5376,19 @@ build_drive(forward, reverse, normalspeed, rate) {
 "Example: build_template( "bmp", model, type );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_template(type, model, typeoverride) {
-  if(isDefined(typeoverride)) {
+  if(IsDefined(typeoverride))
     type = typeoverride;
-  }
   typemodel = type + model;
   PrecacheVehicle(type);
 
-  if(!isDefined(level.vehicle_death_fx)) {
+  if(!isdefined(level.vehicle_death_fx))
     level.vehicle_death_fx = [];
-  }
-  if(!isDefined(level.vehicle_death_fx[typemodel])) {
+  if(!isdefined(level.vehicle_death_fx[typemodel]))
     level.vehicle_death_fx[typemodel] = []; // can have overrides
-  }
 
   level.vehicle_compassicon[type] = false;
   level.vehicle_team[type] = "axis";
@@ -5806,8 +5399,8 @@ build_template(type, model, typeoverride) {
   level.vttype = type;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_exhaust( <exhaust_effect_str> )"
 "Summary: called in individual vehicle file - assign an exhaust effect to this vehicle!"
@@ -5817,15 +5410,15 @@ build_template(type, model, typeoverride) {
 "Example: build_exhaust( "distortion/abrams_exhaust" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_exhaust(effect) {
   level.vehicle_exhaust[level.vtmodel] = _loadfx(effect);
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_treadfx()"
 "Summary: called in individual vehicle file - enables treadfx"
@@ -5834,18 +5427,17 @@ build_exhaust(effect) {
 "Example: build_treadfx();"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_treadfx(type) {
-  if(!isDefined(type)) {
+  if(!IsDefined(type))
     type = level.vttype;
-  }
   maps\_treadfx::main(type);
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_team( <team> )"
 "Summary: called in individual vehicle file - sets team"
@@ -5855,15 +5447,15 @@ build_treadfx(type) {
 "Example: build_team( "allies" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_team(team) {
   level.vehicle_team[level.vttype] = team;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_mainturret( <firetime> , <tag1> , <tag2> , <tag3> , <tag4> )"
 "Summary: called in individual vehicle file - enables main( cannon ) turret"
@@ -5876,23 +5468,20 @@ build_team(team) {
 "Example: build_mainturret();"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_mainturret(tag1, tag2, tag3, tag4) {
   level.vehicle_hasMainTurret[level.vtmodel] = true;
-  if(isDefined(tag1)) {
+  if(IsDefined(tag1))
     level.vehicle_mainTurrets[level.vtmodel][tag1] = true;
-  }
-  if(isDefined(tag2)) {
+  if(IsDefined(tag2))
     level.vehicle_mainTurrets[level.vtmodel][tag2] = true;
-  }
-  if(isDefined(tag3)) {
+  if(IsDefined(tag3))
     level.vehicle_mainTurrets[level.vtmodel][tag3] = true;
-  }
-  if(isDefined(tag4)) {
+  if(IsDefined(tag4))
     level.vehicle_mainTurrets[level.vtmodel][tag4] = true;
-  }
+
 }
 
 /*
@@ -5909,7 +5498,7 @@ build_mainturret(tag1, tag2, tag3, tag4) {
 =============
 */
 build_bulletshield(bShield) {
-  Assert(isDefined(bShield));
+  Assert(IsDefined(bShield));
   level.vehicle_bulletshield[level.vttype] = bShield;
 }
 
@@ -5927,12 +5516,14 @@ build_bulletshield(bShield) {
 =============
 */
 build_grenadeshield(bShield) {
-  Assert(isDefined(bShield));
+  Assert(IsDefined(bShield));
   level.vehicle_grenadeshield[level.vttype] = bShield;
 }
 
-/*
-=============
+
+
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_aianims( <aithread> , <vehiclethread> )"
 "Summary: called in individual vehicle file - set threads for ai animation and vehicle animation assignments"
@@ -5943,18 +5534,20 @@ build_grenadeshield(bShield) {
 "Example: build_aianims( ::setanims, ::set_vehicle_anims );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_aianims(aithread, vehiclethread) {
   level.vehicle_aianims[level.vttype] = [[aithread]]();
-  if(isDefined(vehiclethread)) {
-    level.vehicle_aianims[level.vttype] = [[vehiclethread]](level.vehicle_aianims[level.vttype]);
-  }
+  if(IsDefined(vehiclethread))
+    level.vehicle_aianims[level.vttype] = [
+      [vehiclethread]
+    ](level.vehicle_aianims[level.vttype]);
 }
 
-/*
-=============
+
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_frontarmor( <armor> )"
 "Summary: called in individual vehicle file - sets percentage of health to regen on attacks from the front"
@@ -5964,7 +5557,7 @@ build_aianims(aithread, vehiclethread) {
 "Example: build_frontarmor( .33 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_frontarmor(armor) {
@@ -5975,8 +5568,8 @@ build_hidden_riders_until_unload() {
   level.hidden_riders_until_unload[level.vttype] = true;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_attach_models( <modelsthread> )"
 "Summary: called in individual vehicle file - thread for building attached models( ropes ) with animation"
@@ -5986,14 +5579,14 @@ build_hidden_riders_until_unload() {
 "Example: build_attach_models( ::set_attached_models );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 build_attach_models(modelsthread) {
   level.vehicle_attachedmodels[level.vttype] = [[modelsthread]]();;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_unload_groups( <unloadgroupsthread> )"
 "Summary: called in individual vehicle file - thread for building unload groups"
@@ -6003,15 +5596,15 @@ build_attach_models(modelsthread) {
 "Example: build_unload_groups( ::Unload_Groups );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_unload_groups(unloadgroupsthread) {
   level.vehicle_unloadgroups[level.vttype] = [[unloadgroupsthread]]();
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_life( <health> , <minhealth> , <maxhealth> , )"
 "Summary: called in individual vehicle file - sets health for vehicles"
@@ -6023,7 +5616,7 @@ build_unload_groups(unloadgroupsthread) {
 "Example: build_life( 999, 500, 1500 );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_life(health, minhealth, maxhealth) {
@@ -6032,8 +5625,8 @@ build_life(health, minhealth, maxhealth) {
   level.vehicle_life_range_high[level.vttype] = maxhealth;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_compassicon( <type>, <enable> )"
 "Summary: called in individual vehicle file - enables vehicle on the compass with the icontype set to the type. defaults to enabled"
@@ -6044,22 +5637,21 @@ build_life(health, minhealth, maxhealth) {
 "Example: build_compassicon( "automobile", false );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_compassicon(compasstype, enabled) {
-  Assert(isDefined(compasstype));
+  Assert(IsDefined(compasstype));
 
-  if(!isDefined(enabled)) {
+  if(!isdefined(enabled))
     enabled = false;
-  }
 
   level.vehicle_compassicon[level.vttype] = enabled;
   level.vehicle_compass_types[level.vttype] = compassType;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_deckdust( <effect> )"
 "Summary: called in individual vehicle file - sets a deckdust effect on a vehicle?"
@@ -6069,15 +5661,15 @@ build_compassicon(compasstype, enabled) {
 "Example: build_deckdust( "dust/abrams_desk_dust" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_deckdust(effect) {
   level.vehicle_deckdust[level.vtmodel] = _loadfx(effect);
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_destructible( <model> , <destructible> )"
 "Summary: called in individual vehicle file: asigns destructible type to model."
@@ -6089,20 +5681,18 @@ build_deckdust(effect) {
 "
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 build_destructible(model, destructible) {
-  if(isDefined(level.vehicle_csv_export)) {
+  if(IsDefined(level.vehicle_csv_export))
     return;
-  }
 
-  Assert(isDefined(model));
-  Assert(isDefined(destructible));
-  if(model != level.vtmodel) {
+  Assert(IsDefined(model));
+  Assert(IsDefined(destructible));
+  if(model != level.vtmodel)
     return;
-  }
-  struct = spawnStruct();
-  passer = spawnStruct();
+  struct = SpawnStruct();
+  passer = SpawnStruct();
   passer.model = model; //
 
   struct.destuctableInfo = passer common_scripts\_destructible_types::makeType(destructible);;
@@ -6112,8 +5702,8 @@ build_destructible(model, destructible) {
   level.destructible_model[level.vtmodel] = destructible;
 }
 
-/*
-=============
+/* 
+============= 
 ///ScriptDocBegin
 "Name: build_localinit( <init_thread> )"
 "Summary: called in individual vehicle file - mandatory for all vehicle files, this sets the individual init thread for those special sequences, it is also used to determine that a vehicle is being precached or not"
@@ -6123,22 +5713,21 @@ build_destructible(model, destructible) {
 "Example: build_localinit( ::init_local );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
-=============
+============= 
 */
 
 build_localinit(init_thread) {
   level.vehicleInitThread[level.vttype][level.vtmodel] = init_thread;
 }
 
-get_from_spawnStruct(target) {
+get_from_spawnstruct(target) {
   return getstruct(target, "targetname");
 }
 
 get_from_entity(target) {
-  ent = getEntArray(target, "targetname");
-  if(isDefined(ent) && ent.size > 0) {
+  ent = GetEntArray(target, "targetname");
+  if(IsDefined(ent) && ent.size > 0)
     return ent[RandomInt(ent.size)];
-  }
   return undefined;
 }
 
@@ -6160,9 +5749,8 @@ set_lookat_from_dest(dest) {
   // temp fix for an issue with Hunted
   // I use script_linktos as well but for some other purpose.
   // I don't have the time to fix this propper now.
-  if(!isDefined(viewTarget) || level.script == "hunted") {
+  if(!isdefined(viewTarget) || level.script == "hunted")
     return;
-  }
 
   self SetLookAtEnt(viewTarget);
   self.set_lookat_point = true;
@@ -6170,9 +5758,9 @@ set_lookat_from_dest(dest) {
 
 get_deletegroups(script_vehiclegroupdelete) {
   deletegroups = [];
-  vehicles = getEntArray("script_vehicle", "code_classname");
+  vehicles = GetEntArray("script_vehicle", "code_classname");
   foreach(vehicle in vehicles) {
-    if(!isDefined(vehicle.script_vehicleGroupDelete) ||
+    if(!isdefined(vehicle.script_vehicleGroupDelete) ||
       vehicle.script_vehicleGroupDelete != script_vehiclegroupdelete
     )
       continue;
@@ -6182,18 +5770,17 @@ get_deletegroups(script_vehiclegroupdelete) {
 }
 
 damage_hint_bullet_only() {
+
   level.armorDamageHints = false;
   self.displayingDamageHints = false;
   self thread damage_hints_cleanup();
 
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(!isplayer(attacker)) {
+    if(!isplayer(attacker))
       continue;
-    }
-    if(isDefined(self.has_semtex_on_it)) {
+    if(isdefined(self.has_semtex_on_it))
       continue;
-    }
 
     type = ToLower(type);
 
@@ -6202,9 +5789,8 @@ damage_hint_bullet_only() {
       case "mod_rifle_bullet":
       case "bullet":
         if(!level.armorDamageHints) {
-          if(isDefined(level.thrown_semtex_grenades) && level.thrown_semtex_grenades > 0) {
+          if(isdefined(level.thrown_semtex_grenades) && level.thrown_semtex_grenades > 0)
             break;
-          }
 
           level.armorDamageHints = true;
           self.displayingDamageHints = true;
@@ -6219,18 +5805,17 @@ damage_hint_bullet_only() {
 }
 
 damage_hints() {
+
   level.armorDamageHints = false;
   self.displayingDamageHints = false;
   self thread damage_hints_cleanup();
 
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(!isplayer(attacker)) {
+    if(!isplayer(attacker))
       continue;
-    }
-    if(isDefined(self.has_semtex_on_it)) {
+    if(isdefined(self.has_semtex_on_it))
       continue;
-    }
 
     type = ToLower(type);
 
@@ -6241,17 +5826,15 @@ damage_hints() {
       case "mod_rifle_bullet":
       case "bullet":
         if(!level.armorDamageHints) {
-          if(isDefined(level.thrown_semtex_grenades) && level.thrown_semtex_grenades > 0) {
+          if(isdefined(level.thrown_semtex_grenades) && level.thrown_semtex_grenades > 0)
             break;
-          }
 
           level.armorDamageHints = true;
           self.displayingDamageHints = true;
-          if((type == "mod_grenade") || (type == "mod_grenade_splash")) {
+          if((type == "mod_grenade") || (type == "mod_grenade_splash"))
             attacker display_hint("invulerable_frags");
-          } else {
+          else
             attacker display_hint("invulerable_bullets");
-          }
           wait(4);
           level.armorDamageHints = false;
           self.displayingDamageHints = false;
@@ -6263,86 +5846,76 @@ damage_hints() {
 
 damage_hints_cleanup() {
   self waittill("death");
-  if(self.displayingDamageHints) {
+  if(self.displayingDamageHints)
     level.armorDamageHints = false;
-  }
 }
 
 copy_destructable_attachments(modeldummy) {
   // does all attachments
   attachedModelCount = self GetAttachSize();
   attachedModels = [];
-  for(i = 0; i < attachedModelCount; i++) {
+  for (i = 0; i < attachedModelCount; i++)
     attachedModels[i] = ToLower(self GetAttachModelName(i));
-  }
 
-  for(i = 0; i < attachedModels.size; i++) {
+  for (i = 0; i < attachedModels.size; i++)
     modeldummy Attach(attachedModels[i], ToLower(self GetAttachTagName(i)));
-  }
 
-  // original model still has it's own attachments because that's too much script to rewrite
-  // to move them completely to the dummy, I just want to translate the effects of an
-  // explosion to the dummy so that's all I'm doing.So don't expect a dummy destructable
+  // original model still has it's own attachments because that's too much script to rewrite 
+  // to move them completely to the dummy, I just want to translate the effects of an 
+  // explosion to the dummy so that's all I'm doing.So don't expect a dummy destructable 
   // vehicle to react to damage and all of that jazz it's the original model that will do this
 }
 
 get_dummy() {
-  if(self.modeldummyon) {
+  if(self.modeldummyon)
     eModel = self.modeldummy;
-  } else {
+  else
     eModel = self;
-  }
   return eModel;
 }
 
 apply_truckjunk(eVehicle, truckjunk) {
-  if(!isDefined(self.truckjunk)) {
+  if(!isdefined(self.truckjunk))
     return;
-  }
 
   junkarray = self.truckjunk;
   self.truckjunk = [];
   foreach(truckjunk in junkarray) {
-    model = spawn("script_model", self.origin);
-    model setModel(truckjunk.model);
+    model = Spawn("script_model", self.origin);
+    model SetModel(truckjunk.model);
     model LinkTo(self, "tag_body", truckjunk.origin, truckjunk.angles);
     self.truckjunk[self.truckjunk.size] = truckjunk;
   }
 }
 
 truckjunk() {
-  Assert(isDefined(self.target));
+  Assert(IsDefined(self.target));
   spawner = GetEnt(self.target, "targetname");
-  Assert(isDefined(spawner));
+  Assert(IsDefined(spawner));
   Assert(isSpawner(spawner));
 
   ghettotag = ghetto_tag_create(spawner);
 
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy))
     ghettotag.script_noteworthy = self.script_noteworthy;
-  }
-  if(!isDefined(spawner.truckjunk)) {
+  if(!isdefined(spawner.truckjunk))
     spawner.truckjunk = [];
-  }
-  if(isDefined(self.script_startingposition)) {
+  if(IsDefined(self.script_startingposition))
     ghettotag.script_startingposition = self.script_startingposition;
-  }
   spawner.truckjunk[spawner.truckjunk.size] = ghettotag;
 
   self Delete();
 }
 
 ghetto_tag_create(target) {
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.origin = self.origin - target GetTagOrigin("tag_body");
   struct.angles = self.angles - target GetTagAngles("tag_body");
   struct.model = self.model;
-  if(isDefined(struct.targetname)) {
+  if(IsDefined(struct.targetname))
     level.struct_class_names["targetname"][struct.targetname] = undefined; // done with this forever. don't stick around
-  }
-  if(isDefined(struct.target)) {
+  if(IsDefined(struct.target))
     level.struct_class_names["target"][struct.target] = undefined; // done with this forever. don't stick around
-  }
   return struct;
 }
 
@@ -6350,22 +5923,22 @@ ghetto_tag_create(target) {
 //{
 //
 //	if( 1 ) return;
-//
+///#
 //
 //	// starts a map with the necessary blank layer info and a blank worldspawn.
 //	// Throught he magic of junction this file ends up in "map_source\xenon_export\jeepride_veh_ref.map"
-//	// I keep the directory structure somewhat flat because permissions in winnt is painful when dealing with the xenonremote share stuff.
+//	// I keep the directory structure somewhat flat because permissions in winnt is painful when dealing with the xenonremote share stuff. 
 //	// junction.bat keeps it in check
 //
 //	// this simple script exports all of the vehicles as script models that have a delete_on_load targetname
 //
-//	predumpvehicles = getEntArray( "script_vehicle", "code_classname" );
+//	predumpvehicles = GetEntArray( "script_vehicle", "code_classname" );
 //	vehicles = [];
 //
 //	// dumping can jump a frame in which the information could be altered, this stores the necessary info real quick
-//	for( i = 0 ; i < predumpvehicles.size ; i++ )
+//	for ( i = 0 ; i < predumpvehicles.size ; i++ )
 //	{
-//		struct = spawnStruct();
+//		struct = SpawnStruct();
 //		struct.classname = predumpvehicles[ i ].classname;
 //		struct.origin = predumpvehicles[ i ].origin;
 //		struct.angles = predumpvehicles[ i ].angles;
@@ -6375,7 +5948,7 @@ ghetto_tag_create(target) {
 //		struct.script_VehicleStartMove = predumpvehicles[ i ].script_vehiclestartmove;
 //		struct.model = predumpvehicles[ i ].model;
 //		struct.angles = predumpvehicles[ i ].angles;
-//		if( isDefined( level.playersride ) && predumpvehicles[ i ] == level.playersride )
+//		if( IsDefined( level.playersride ) && predumpvehicles[ i ] == level.playersride )
 //			struct.playersride = true;
 //		vehicles[ i ] = struct;
 //	}
@@ -6393,7 +5966,7 @@ ghetto_tag_create(target) {
 //			fileprint_map_keypairprint( "model", vehicle.model );
 //			fileprint_map_keypairprint( "origin", origin );
 //			fileprint_map_keypairprint( "angles", angles );
-//			if( isDefined( vehicle.playersride ) )
+//			if( IsDefined( vehicle.playersride ) )
 //				fileprint_map_keypairprint( "target", "delete_on_load" );// _load deletes these.
 //			else
 //			{
@@ -6401,30 +5974,30 @@ ghetto_tag_create(target) {
 //				fileprint_map_keypairprint( "targetname", "delete_on_load" );// _load deletes these.
 //			}
 //
-//			if( isDefined( vehicle.speedbeforepause ) )
+//			if( IsDefined( vehicle.speedbeforepause ) )
 //				fileprint_map_keypairprint( "current_speed", vehicle.speedbeforepause );
-//			if( isDefined( vehicle.script_VehicleSpawngroup ) )
+//			if( IsDefined( vehicle.script_VehicleSpawngroup ) )
 //				fileprint_map_keypairprint( "script_vehiclespawngroup", vehicle.script_VehicleSpawngroup );
-//			if( isDefined( vehicle.script_VehicleStartMove ) )
+//			if( IsDefined( vehicle.script_VehicleStartMove ) )
 //				fileprint_map_keypairprint( "script_vehiclestartmove", vehicle.script_VehicleStartMove );
 //		fileprint_map_entity_end();
-//
+//#/
 //}
 
 //dump_handle()
 //{
-//	
+//	/#
 //	button1 = "r";
 //	button2 = "CTRL";
-//	while( 1 )
+//	while ( 1 )
 //	{
-//		while( !twobuttonspressed( button1, button2 ) )
+//		while ( !twobuttonspressed( button1, button2 ) )
 //			wait .05;
 //		vehicle_dump();
-//		while( twobuttonspressed( button1, button2 ) )
+//		while ( twobuttonspressed( button1, button2 ) )
 //			wait .05;
 //	}
-//	
+//	#/
 //}
 
 twobuttonspressed(button1, button2) {
@@ -6474,16 +6047,13 @@ vehicle_load_ai_single(guy, goddriver, group) {
 }
 
 kill_badplace(type) {
-  if(!isDefined(level.vehicle_death_badplace[type])) {
+  if(!isdefined(level.vehicle_death_badplace[type]))
     return;
-  }
   struct = level.vehicle_death_badplace[type];
-  if(isDefined(struct.delay)) {
+  if(IsDefined(struct.delay))
     wait struct.delay;
-  }
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   BadPlace_Cylinder("vehicle_kill_badplace", struct.duration, self.origin, struct.radius, struct.height, struct.team1, struct.team2);
 }
 
@@ -6506,11 +6076,10 @@ kill_badplace(type) {
 =============
 */
 build_death_badplace(delay, duration, height, radius, team1, team2) {
-  if(!isDefined(level.vehicle_death_badplace)) {
+  if(!isdefined(level.vehicle_death_badplace))
     level.vehicle_death_badplace = [];
-  }
 
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.delay = delay;
   struct.duration = duration;
   struct.height = height;
@@ -6519,42 +6088,39 @@ build_death_badplace(delay, duration, height, radius, team1, team2) {
   struct.team2 = team2;
 
   level.vehicle_death_badplace[level.vttype] = struct;
+
 }
 
 build_death_jolt(delay) {
-  if(!isDefined(level.vehicle_death_jolt)) {
+  if(!isdefined(level.vehicle_death_jolt))
     level.vehicle_death_jolt = [];
-  }
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.delay = delay;
   level.vehicle_death_jolt[level.vttype] = struct;
 }
 
 kill_jolt(type) {
-  if(isDefined(level.vehicle_death_jolt[type])) {
+  if(IsDefined(level.vehicle_death_jolt[type])) {
     self.dontfreeme = true;
     wait level.vehicle_death_jolt[type].delay; // this is all that exists currently, not to elaborate untill needed.
   }
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self JoltBody((self.origin + (23, 33, 64)), 3);
   wait 2;
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self.dontfreeme = undefined;
 }
 
 heli_squashes_stuff(ender) {
   self endon("death");
   level endon(ender);
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
     if(IsAlive(other)) {
-      if(other.team == "allies" && !isplayer(other)) {
+      if(other.team == "allies" && !isplayer(other))
         continue;
-      }
       other Kill((0, 0, 0));
     }
   }
@@ -6563,40 +6129,36 @@ heli_squashes_stuff(ender) {
 _getvehiclespawnerarray_by_spawngroup(spawngroup) {
   spawners = _getvehiclespawnerarray();
   array = [];
-  foreach(spawner in spawners) {
-    if(isDefined(spawner.script_VehicleSpawngroup) && spawner.script_VehicleSpawngroup == spawngroup)
-  }
-  array[array.size] = spawner;
+  foreach(spawner in spawners)
+  if(IsDefined(spawner.script_VehicleSpawngroup) && spawner.script_VehicleSpawngroup == spawngroup)
+    array[array.size] = spawner;
 
   return array;
 }
 
 _getvehiclespawnerarray(targetname) {
-  vehicles = getEntArray("script_vehicle", "code_classname");
-  if(isDefined(targetname)) {
+  vehicles = GetEntArray("script_vehicle", "code_classname");
+  if(IsDefined(targetname)) {
     newArray = [];
     foreach(vehicle in vehicles) {
-      if(!isDefined(vehicle.targetname)) {
+      if(!isdefined(vehicle.targetname))
         continue;
-      }
-      if(vehicle.targetname == targetname) {
+      if(vehicle.targetname == targetname)
         newArray = array_add(newArray, vehicle);
-      }
     }
     vehicles = newArray;
   }
 
   array = [];
   foreach(vehicle in vehicles) {
-    if(isSpawner(vehicle)) {
+    if(isSpawner(vehicle))
       array[array.size] = vehicle;
-    }
   }
   return array;
 }
 
 get_compassTypeForVehicleType(type) {
-  if(!isDefined(level.vehicle_compass_types[type])) {
+  if(!isdefined(level.vehicle_compass_types[type])) {
     PrintLn("Compass - type doesn't exist for type '" + type + "'.");
     PrintLn("Set it in vehicle script:_" + type + ".gsc with build_compassicon.");
     AssertMsg("Compass - type for model doesn't exits, see console for info");
@@ -6605,17 +6167,15 @@ get_compassTypeForVehicleType(type) {
 }
 
 setup_gags() {
-  if(!isDefined(self.script_parameters)) {
+  if(!isdefined(self.script_parameters))
     return;
-  }
-  if(self.script_parameters == "gag_ride_in") {
+  if(self.script_parameters == "gag_ride_in")
     setup_gag_ride();
-  }
 }
 
 setup_gag_ride() {
-  Assert(isDefined(self.targetname));
-  linked = getEntArray(self.targetname, "target");
+  Assert(IsDefined(self.targetname));
+  linked = GetEntArray(self.targetname, "target");
   self.script_vehicleride = auto_assign_ride_group();
   foreach(ent in linked) {
     ent.qSetGoalPos = false;
@@ -6626,23 +6186,21 @@ setup_gag_ride() {
 }
 
 auto_assign_ride_group() {
-  if(!isDefined(level.vehicle_group_autoasign)) {
+  if(!isdefined(level.vehicle_group_autoasign))
     level.vehicle_group_autoasign = 1000;
-  } else {
+  else
     level.vehicle_group_autoasign++;
-  }
   return level.vehicle_group_autoasign;
 }
 
 vehicle_script_forcecolor_riders(script_forcecolor) {
   foreach(rider in self.riders) {
-    if(IsAI(rider)) {
+    if(IsAI(rider))
       rider set_force_color(script_forcecolor);
-    } else if(isDefined(rider.spawner)) {
+    else if(IsDefined(rider.spawner))
       rider.spawner.script_forcecolor = script_forcecolor;
-    } else {
+    else
       AssertMsg("rider who's not an ai without a spawner..");
-    }
 
   }
 }
@@ -6650,9 +6208,8 @@ vehicle_script_forcecolor_riders(script_forcecolor) {
 vehicle_spawn_group_limit_riders(group, ridermax) {
   spawners = sort_by_startingpos(level.vehicle_RideSpawners[group]);
   array = [];
-  for(i = 0; i < ridermax; i++) {
+  for (i = 0; i < ridermax; i++)
     array[array.size] = spawners[i];
-  }
   level.vehicle_RideSpawners[group] = array;
 }
 
@@ -6679,9 +6236,8 @@ update_steering(snowmobile) {
       delta = steering_goal - snowmobile.steering;
       if(delta != 0) {
         factor = snowmobile.steering_maxdelta / abs(delta);
-        if(factor < 1) {
+        if(factor < 1)
           delta *= factor;
-        }
         snowmobile.steering += delta;
       }
     } else {
@@ -6690,6 +6246,7 @@ update_steering(snowmobile) {
   }
   return snowmobile.steering;
 }
+
 
 /*
 =============
@@ -6710,9 +6267,8 @@ mount_snowmobile(vehicle, sit_position) {
   self endon("death");
   self endon("long_death");
 
-  if(doinglongdeath()) {
+  if(doinglongdeath())
     return;
-  }
 
   rider_types = [];
   rider_types[0] = "snowmobile_driver";
@@ -6723,7 +6279,7 @@ mount_snowmobile(vehicle, sit_position) {
   tags["snowmobile_passenger"] = "tag_passenger";
 
   rider_type = rider_types[sit_position];
-  AssertEx(isDefined(rider_type), "Tried to make a guy mount a snowmobile but it already had 2 riders!");
+  AssertEx(IsDefined(rider_type), "Tried to make a guy mount a snowmobile but it already had 2 riders!");
   tag = tags[rider_type];
 
   tag_origin = vehicle GetTagOrigin(tag);
@@ -6744,7 +6300,7 @@ mount_snowmobile(vehicle, sit_position) {
     }
   }
 
-  AssertEx(isDefined(closest_scene_name), "Somehow an AI could not find an animation to mount a snowmobile");
+  AssertEx(IsDefined(closest_scene_name), "Somehow an AI could not find an animation to mount a snowmobile");
 
   closest_org = drop_to_ground(closest_org);
   self.goalradius = 8;
@@ -6773,11 +6329,11 @@ get_my_spline_node(org) {
   org = (org[0], org[1], 0);
   all_nodes = get_array_of_closest(org, level.snowmobile_path);
   close_nodes = [];
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     close_nodes[i] = all_nodes[i];
   }
 
-  for(i = 0; i < level.snowmobile_path.size; i++) {
+  for (i = 0; i < level.snowmobile_path.size; i++) {
     foreach(node in close_nodes) {
       if(node == level.snowmobile_path[i]) {
         return node;
@@ -6788,14 +6344,12 @@ get_my_spline_node(org) {
 }
 
 spawn_vehicle_and_attach_to_spline_path(default_speed) {
-  if(level.enemy_snowmobiles.size >= 8) {
+  if(level.enemy_snowmobiles.size >= 8)
     return;
-  }
 
   vehicle = self spawn_vehicle();
-  if(isDefined(default_speed)) {
+  if(IsDefined(default_speed))
     vehicle VehPhys_SetSpeed(default_speed);
-  }
 
   vehicle thread vehicle_becomes_crashable();
 
@@ -6839,10 +6393,9 @@ kill_vehicle_spawner(trigger) {
 */
 spawn_vehicle_and_gopath() {
   vehicle = self spawn_vehicle();
-  if(isDefined(self.script_speed)) {
-    if(!isHelicopter()) {
+  if(IsDefined(self.script_speed)) {
+    if(!isHelicopter())
       vehicle VehPhys_SetSpeed(self.script_speed); // used to default to 70
-    }
   }
   vehicle thread maps\_vehicle::gopath(vehicle);
   return vehicle;
@@ -6863,8 +6416,8 @@ spawn_vehicle_and_gopath() {
 =============
 */
 attach_vehicle_triggers() {
-  triggers = getEntArray("vehicle_touch_trigger", "targetname");
-  other_triggers = getEntArray("vehicle_use_trigger", "targetname");
+  triggers = GetEntArray("vehicle_touch_trigger", "targetname");
+  other_triggers = GetEntArray("vehicle_use_trigger", "targetname");
   triggers = array_combine(triggers, other_triggers);
 
   origin = undefined;
@@ -6879,13 +6432,11 @@ attach_vehicle_triggers() {
   vehicle_triggers = [];
 
   foreach(trigger in triggers) {
-    if(trigger.script_noteworthy != self.model) {
+    if(trigger.script_noteworthy != self.model)
       continue;
-    }
 
-    if(trigger.origin != origin) {
+    if(trigger.origin != origin)
       continue;
-    }
 
     vehicle_triggers[vehicle_triggers.size] = trigger;
   }
@@ -6896,9 +6447,8 @@ attach_vehicle_triggers() {
     // remove the trigger's targetname so other vehicles dont get these triggers.
     trigger.targetname = undefined;
     trigger thread manual_tag_linkto(self, "tag_origin");
-    if(!isDefined(self.vehicle_triggers[trigger.code_classname])) {
+    if(!isdefined(self.vehicle_triggers[trigger.code_classname]))
       self.vehicle_triggers[trigger.code_classname] = [];
-    }
 
     self.vehicle_triggers[trigger.code_classname][self.vehicle_triggers[trigger.code_classname].size] = trigger;
   }
@@ -6907,9 +6457,8 @@ attach_vehicle_triggers() {
 humvee_antenna_animates(anims) {
   self UseAnimTree(#animtree);
   humvee_antenna_animates_until_death(anims);
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
 
   self clearanim(anims["idle"], 0);
   self clearanim(anims["rot_l"], 0);
@@ -6920,11 +6469,10 @@ humvee_antenna_animates_until_death(anims) {
   self endon("death");
   //	self setanim( anims[ "idle" ], 1, 0, 1 );
 
-  for(;;) {
+  for (;;) {
     weight = self.veh_speed / 18;
-    if(weight <= 0.0001) {
+    if(weight <= 0.0001)
       weight = 0.0001;
-    }
 
     rate = randomfloatrange(0.3, 0.7);
     self setanim(anims["idle"], weight, 0, rate);
@@ -6940,13 +6488,11 @@ humvee_antenna_animates_until_death(anims) {
 }
 
 manual_tag_linkto(entity, tag) {
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self))
       break;
-    }
-    if(!isDefined(entity)) {
+    if(!isdefined(entity))
       break;
-    }
 
     org = entity GetTagOrigin(tag);
     ang = entity GetTagAngles(tag);
@@ -6959,14 +6505,13 @@ manual_tag_linkto(entity, tag) {
 littlebird_lands_and_unloads(vehicle) {
   vehicle SetDeceleration(6);
   vehicle SetAcceleration(4);
-  AssertEx(isDefined(self.angles), "Landing nodes must have angles set.");
+  AssertEx(IsDefined(self.angles), "Landing nodes must have angles set.");
   vehicle SetTargetYaw(self.angles[1]);
 
   vehicle Vehicle_SetSpeed(20, 7, 7);
 
-  while(Distance(flat_origin(vehicle.origin), flat_origin(self.origin)) > 512) {
+  while (Distance(flat_origin(vehicle.origin), flat_origin(self.origin)) > 512)
     wait .05;
-  }
 
   vehicle endon("death");
 
@@ -6986,7 +6531,7 @@ littlebird_lands_and_unloads(vehicle) {
   vehicle Vehicle_SetSpeed(20, 22, 7);
   vehicle notify("nearing_landing");
 
-  if(isDefined(vehicle.custom_landing)) {
+  if(isdefined(vehicle.custom_landing)) {
     switch (vehicle.custom_landing) {
       case "hover_then_land":
         vehicle Vehicle_SetSpeed(10, 22, 7);
@@ -7016,11 +6561,11 @@ littlebird_lands_and_unloads(vehicle) {
   vehicle notify("stable_for_unlink");
   wait .2;
 
-  if(isDefined(self.script_flag_set)) {
+  if(IsDefined(self.script_flag_set)) {
     flag_set(self.script_flag_set);
   }
 
-  if(isDefined(self.script_flag_wait)) {
+  if(IsDefined(self.script_flag_wait)) {
     flag_wait(self.script_flag_wait);
   }
 
@@ -7029,10 +6574,10 @@ littlebird_lands_and_unloads(vehicle) {
 
 // feel free to tear this apart once you have a real context
 setup_gag_stage_littlebird_unload() {
-  Assert(isDefined(self.targetname));
-  Assert(isDefined(self.angles));
+  Assert(IsDefined(self.targetname));
+  Assert(IsDefined(self.angles));
 
-  while(1) {
+  while (1) {
     self waittill("trigger", vehicle);
     littlebird_lands_and_unloads(vehicle);
   }
@@ -7043,19 +6588,19 @@ setup_gag_stage_littlebird_unload() {
   //	{
   //		relativeorigin = guy.origin-vehicle.origin;
   //		relativeangles = guy.angles-vehicle.angles;
-  //		PrintLn("Error: relativeorigin " + relativeorigin );
-  //		PrintLn("Error: relativeangles " + relativeangles );
+  //		PrintLn("Error: relativeorigin " + relativeorigin ); 
+  //		PrintLn("Error: relativeangles " + relativeangles ); 
   //	}
 }
 
 setup_gag_stage_littlebird_load() {
-  Assert(isDefined(self.targetname));
-  Assert(isDefined(self.angles));
+  Assert(IsDefined(self.targetname));
+  Assert(IsDefined(self.angles));
 
   //	nodes = getstructarray(self.targetname,"target");
   //	Assert(nodes.size);
 
-  while(1) {
+  while (1) {
     self waittill("trigger", vehicle);
 
     vehicle SetDeceleration(6);
@@ -7063,9 +6608,8 @@ setup_gag_stage_littlebird_load() {
     vehicle SetTargetYaw(self.angles[1]);
     vehicle Vehicle_SetSpeed(20, 7, 7);
 
-    while(Distance(flat_origin(vehicle.origin), flat_origin(self.origin)) > 256) {
+    while (Distance(flat_origin(vehicle.origin), flat_origin(self.origin)) > 256)
       wait .05;
-    }
 
     vehicle endon("death");
     vehicle thread vehicle_land_beneath_node(220, self);
@@ -7087,20 +6631,18 @@ setup_gag_stage_littlebird_load() {
   //	{
   //		relativeorigin = guy.origin-vehicle.origin;
   //		relativeangles = guy.angles-vehicle.angles;
-  //		PrintLn("Error: relativeorigin " + relativeorigin );
-  //		PrintLn("Error: relativeangles " + relativeangles );
+  //		PrintLn("Error: relativeorigin " + relativeorigin ); 
+  //		PrintLn("Error: relativeangles " + relativeangles ); 
   //	}
 }
 
 vehicle_land_beneath_node(neargoal, node, height) {
-  if(!isDefined(height)) {
+  if(!isdefined(height))
     height = 0;
-  }
 
   self notify("newpath");
-  if(!isDefined(neargoal)) {
+  if(!IsDefined(neargoal))
     neargoal = 2;
-  }
   self SetNearGoalNotifyDist(neargoal);
   self SetHoverParams(0, 0, 0);
   self ClearGoalYaw();
@@ -7112,9 +6654,8 @@ vehicle_land_beneath_node(neargoal, node, height) {
 
 vehicle_landvehicle(neargoal, node) {
   self notify("newpath");
-  if(!isDefined(neargoal)) {
+  if(!IsDefined(neargoal))
     neargoal = 2;
-  }
   self SetNearGoalNotifyDist(neargoal);
   self SetHoverParams(0, 0, 0);
   self ClearGoalYaw();
@@ -7122,6 +6663,7 @@ vehicle_landvehicle(neargoal, node) {
   self setvehgoalpos_wrap(groundpos(self.origin), 1);
   self waittill("goal");
 }
+
 
 /*
 =============
@@ -7139,17 +6681,17 @@ vehicle_landvehicle(neargoal, node) {
 
 vehicle_get_riders_by_group(groupname) {
   group = [];
-  Assert(isDefined(self.vehicletype));
-  if(!isDefined(level.vehicle_unloadgroups[self.vehicletype])) {
+  Assert(IsDefined(self.vehicletype));
+  if(!IsDefined(level.vehicle_unloadgroups[self.vehicletype])) {
     return group;
   }
   vehicles_groups = level.vehicle_unloadgroups[self.vehicletype];
-  if(!isDefined(groupname)) {
+  if(!IsDefined(groupname)) {
     return group;
   }
 
   foreach(guy in self.riders) {
-    Assert(isDefined(guy.vehicle_position));
+    Assert(IsDefined(guy.vehicle_position));
     foreach(groupid in vehicles_groups[groupname]) {
       if(guy.vehicle_position == groupid) {
         group[group.size] = guy;
@@ -7198,21 +6740,18 @@ vehicle_unload(who) {
   if(ent_flag_exist("no_riders_until_unload")) {
     ent_flag_set("no_riders_until_unload");
     ai = spawn_group();
-    foreach(a in ai) {
-      spawn_failed(a);
-    }
+    foreach(a in ai)
+    spawn_failed(a);
   }
-  if(isDefined(who)) {
+  if(IsDefined(who))
     self.unload_group = who;
-  }
   // makes ai unload
   foreach(guy in self.riders) {
-    if(IsAlive(guy)) {
+    if(IsAlive(guy))
       guy notify("unload");
-    }
   }
   ai = self vehicle_ai_event("unload");
-  // 		if( isDefined( level.vehicle_hasMainTurret[ self.model ] ) && level.vehicle_hasMainTurret[ self.model ] && riders_check() )
+  // 		if( IsDefined( level.vehicle_hasMainTurret[ self.model ] ) && level.vehicle_hasMainTurret[ self.model ] && riders_check() )
   // 			self ClearTurretTarget();
   return ai;
 }
@@ -7231,14 +6770,13 @@ vehicle_unload(who) {
 =============
 */
 get_stage_nodes(pickup_node_before_stage, side) {
-  Assert(isDefined(pickup_node_before_stage.target));
+  Assert(IsDefined(pickup_node_before_stage.target));
   targeted_nodes = GetNodeArray(pickup_node_before_stage.target, "targetname");
   stage_side_nodes = [];
   foreach(node in targeted_nodes) {
-    Assert(isDefined(node.script_noteworthy));
-    if(node.script_noteworthy == "stage_" + side) {
+    Assert(IsDefined(node.script_noteworthy));
+    if(node.script_noteworthy == "stage_" + side)
       stage_side_nodes[stage_side_nodes.size] = node;
-    }
   }
   return stage_side_nodes;
 }
@@ -7258,17 +6796,15 @@ get_stage_nodes(pickup_node_before_stage, side) {
 =============
 */
 set_stage(pickup_node_before_stage, guys, side) {
-  if(!ent_flag_exist("staged_guy_" + side)) {
+  if(!ent_flag_exist("staged_guy_" + side))
     ent_flag_init("staged_guy_" + side);
-  } else {
+  else
     ent_flag_clear("staged_guy_" + side);
-  }
 
-  if(!ent_flag_exist("guy2_in_" + side)) {
+  if(!ent_flag_exist("guy2_in_" + side))
     ent_flag_init("guy2_in_" + side);
-  } else {
+  else
     ent_flag_clear("guy2_in_" + side);
-  }
 
   //if( ! ent_flag_exist( "all_aboard" ) )
   //ent_flag_init( "all_aboard" );
@@ -7278,8 +6814,8 @@ set_stage(pickup_node_before_stage, guys, side) {
   nodes = get_stage_nodes(pickup_node_before_stage, side);
   Assert(nodes.size);
   heli_node = getstruct(pickup_node_before_stage.target, "targetname");
-  stage_heli = spawn("script_model", (0, 0, 0));
-  stage_heli setModel(self.model);
+  stage_heli = Spawn("script_model", (0, 0, 0));
+  stage_heli SetModel(self.model);
   stage_heli.origin = drop_to_ground(heli_node.origin) + (0, 0, self.originheightoffset);
   stage_heli.angles = heli_node.angles;
   stage_heli Hide();
@@ -7293,20 +6829,20 @@ set_stage(pickup_node_before_stage, guys, side) {
 
     //check to see if there is already a guy destined for this node with .script_startingposition
     foreach(rider in guys) {
-      if((isDefined(rider.script_startingposition)) && (rider.script_startingposition == node.script_startingposition)) {
+      if((isdefined(rider.script_startingposition)) && (rider.script_startingposition == node.script_startingposition)) {
         guy = rider;
         break;
       }
     }
 
-    if(!isDefined(guy)) {
+    if(!isdefined(guy)) {
       guy = getClosest(node.origin, guys);
     }
 
-    Assert(isDefined(guy));
+    Assert(IsDefined(guy));
 
     //used to associate this node with a position
-    Assert(isDefined(node.script_startingposition));
+    Assert(IsDefined(node.script_startingposition));
     guy.script_startingposition = node.script_startingposition;
 
     if(guy.script_startingposition == 2 || guy.script_startingposition == 5) {
@@ -7322,12 +6858,13 @@ set_stage(pickup_node_before_stage, guys, side) {
     guys = array_remove(guys, guy);
   }
 
-  Assert(isDefined(hop_on_guy1));
-  Assert(isDefined(patting_back_second_guy));
-  Assert(isDefined(stage_guy));
+  Assert(IsDefined(hop_on_guy1));
+  Assert(IsDefined(patting_back_second_guy));
+  Assert(IsDefined(stage_guy));
 
   self thread stage_guy(stage_guy, side, patting_back_second_guy, stage_heli);
   self thread delete_on_death(stage_heli);
+
 }
 
 /*
@@ -7344,22 +6881,22 @@ set_stage(pickup_node_before_stage, guys, side) {
 =============
 */
 load_side(side, riders) {
+
   hop_on_guy1 = undefined;
   patting_back_second_guy = undefined;
   stage_guy = undefined;
   foreach(rider in riders) {
-    Assert(isDefined(rider.script_startingposition));
-    if(rider.script_startingposition == 2 || rider.script_startingposition == 5) {
+    Assert(IsDefined(rider.script_startingposition));
+    if(rider.script_startingposition == 2 || rider.script_startingposition == 5)
       hop_on_guy1 = rider;
-    } else if(rider.script_startingposition == 3 || rider.script_startingposition == 6) {
+    else if(rider.script_startingposition == 3 || rider.script_startingposition == 6)
       stage_guy = rider;
-    } else if(rider.script_startingposition == 4 || rider.script_startingposition == 7) {
+    else if(rider.script_startingposition == 4 || rider.script_startingposition == 7)
       patting_back_second_guy = rider;
-    }
   }
-  Assert(isDefined(hop_on_guy1));
-  Assert(isDefined(patting_back_second_guy));
-  Assert(isDefined(stage_guy));
+  Assert(IsDefined(hop_on_guy1));
+  Assert(IsDefined(patting_back_second_guy));
+  Assert(IsDefined(stage_guy));
 
   //	stage_guy = getClosest( self.origin, riders );
   //	riders = array_remove( riders, stage_guy );
@@ -7405,26 +6942,22 @@ stage_guy(guy, side, otherguy, stag_objected) {
 
 kill_riders(riders) {
   foreach(rider in riders) {
-    if(!IsAlive(rider)) {
+    if(!IsAlive(rider))
       continue;
-    }
-    if(!isDefined(rider.ridingvehicle) && !isDefined(rider.drivingVehicle)) {
+    if(!isdefined(rider.ridingvehicle) && !isdefined(rider.drivingVehicle))
       continue;
-    }
 
-    if(isDefined(rider.magic_bullet_shield)) {
+    if(isdefined(rider.magic_bullet_shield))
       rider stop_magic_bullet_shield();
-    }
     rider Kill();
   }
 }
 
 vehicle_rider_death_detection(vehicle, riders) {
   // this is just plain wrong.. I'm just going to hack around it for af_chase since we're supposed to be finished with the game.. -Nate
-  if(level.script == "af_chase") {
-    if(isDefined(self.vehicle_position) && self.vehicle_position != 0)
-  }
-  return;
+  if(level.script == "af_chase")
+    if(isdefined(self.vehicle_position) && self.vehicle_position != 0)
+      return;
 
   self.health = 1;
   vehicle endon("death");
@@ -7471,7 +7004,8 @@ vehicle_turret_scan_on() {
 
   positive_range = RandomInt(2);
 
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
+
     if(cointoss()) {
       self vehicle_aim_turret_at_angle(0);
       wait(RandomFloatRange(2, 10));
@@ -7508,7 +7042,7 @@ vehicle_turret_scan_off() {
 
 vehicle_aim_turret_at_angle(iAngle) {
   self endon("death");
-  vec = anglesToForward(self.angles + (0, iAngle, 0));
+  vec = AnglesToForward(self.angles + (0, iAngle, 0));
   vec *= 10000;
   vec = vec + (0, 0, 70);
   self SetTurretTargetVec(vec);
@@ -7530,29 +7064,25 @@ vehicle_get_path_array() {
   self endon("death");
   aPathNodes = [];
   eStartNode = self.attachedpath;
-  if(!isDefined(self.attachedpath)) {
+  if(!isdefined(self.attachedpath))
     return aPathNodes;
-  }
   nextNode = eStartNode;
   nextNode.counted = false;
-  while(isDefined(nextNode)) {
+  while (IsDefined(nextNode)) {
     //end loop if next node links back to some other node already in the array
-    if((isDefined(nextNode.counted)) && (nextNode.counted == true)) {
+    if((IsDefined(nextNode.counted)) && (nextNode.counted == true))
       break;
-    }
     //add the next node to the array
     aPathNodes = array_add(aPathNodes, nextNode);
     nextNode.counted = true;
     //end loop if not targeting a new node
-    if(!isDefined(nextNode.target)) {
+    if(!isdefined(nextNode.target))
       break;
-    }
 
-    if(!isHelicopter()) {
+    if(!isHelicopter())
       nextNode = GetVehicleNode(nextNode.target, "targetname");
-    } else {
+    else
       nextNode = getent_or_struct(nextNode.target, "targetname");
-    }
   }
 
   return aPathNodes;

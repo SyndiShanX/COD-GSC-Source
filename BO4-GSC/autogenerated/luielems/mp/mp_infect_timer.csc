@@ -4,15 +4,17 @@
 *********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_infect_timer;
 
 class cmp_infect_timer: cluielem {
+
   function function_8c8674a4(localclientnum, value) {
     set_data(localclientnum, "infectionTimeRemaining", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "mp_infect_timer");
+    cluielem::open(localclientnum, #"mp_infect_timer");
   }
 
   function function_fa582112(localclientnum) {

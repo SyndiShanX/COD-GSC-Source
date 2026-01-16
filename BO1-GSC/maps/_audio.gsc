@@ -14,7 +14,7 @@ main() {
 
 fadeinSound() {
   flag_wait("all_players_connected");
-  get_players()[0] playSound("uin_transition_" + level.script);
+  get_players()[0] playsound("uin_transition_" + level.script);
 }
 
 wait_until_first_player() {
@@ -27,7 +27,7 @@ wait_until_first_player() {
 thread_sound_trigger() {
   self waittill("trigger");
   struct_targs = getstructarray(self.target, "targetname");
-  ent_targs = getEntArray(self.target, "targetname");
+  ent_targs = getentarray(self.target, "targetname");
   if(isDefined(struct_targs)) {
     for(i = 0; i < struct_targs.size; i++) {
       if(!level.clientscripts) {
@@ -93,7 +93,7 @@ line_sound_player() {
   if(isDefined(self.script_looping)) {
     self playLoopSound(self.script_sound);
   } else {
-    self playSound(self.script_sound);
+    self playsound(self.script_sound);
   }
 }
 
@@ -143,7 +143,7 @@ static_sound_random_play(soundpoint) {
   }
   while(1) {
     wait(RandomFloatRange(self.script_wait_min, self.script_wait_max));
-    soundpoint playSound(self.script_sound);
+    soundpoint playsound(self.script_sound);
   }
 }
 
@@ -178,7 +178,7 @@ create_2D_sound_list(sound_alias) {
   }
   variation = random(level.sound_alias_available);
   level.sound_alias_available = array_remove(level.sound_alias_available, variation);
-  player[0] playSound(variation, "sound_done");
+  player[0] playsound(variation, "sound_done");
   player[0] waittill("sound_done");
   level notify("2D_sound_finished");
 }
@@ -219,5 +219,5 @@ death_sounds() {
   self thread missionFailWatcher();
   self waittill_either("death_notify", "death");
   println("Sound : do death sound");
-  self playSound("chr_death");
+  self playsound("chr_death");
 }

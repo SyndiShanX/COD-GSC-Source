@@ -78,7 +78,7 @@ monsoon_fxanim_deconstruct() {
   maps\_fxanim::fxanim_reconstruct("fxanim_server_arm_loop");
   maps\_fxanim::fxanim_reconstruct("fxanim_metal_storm_enter");
   e_volume = getent("model_convert", "targetname");
-  a_fxanims = getEntArray("fxanim", "script_noteworthy");
+  a_fxanims = getentarray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_fxanims) {
     if(isDefined(m_fxanim) && !m_fxanim istouching(e_volume)) {
@@ -88,7 +88,7 @@ monsoon_fxanim_deconstruct() {
     }
   }
 
-  a_script_models = getEntArray("script_model", "classname");
+  a_script_models = getentarray("script_model", "classname");
 
   foreach(script_model in a_script_models) {
     if(!script_model istouching(e_volume)) {
@@ -125,7 +125,7 @@ on_player_connect() {
   level thread bruteforce_perk_asd();
   add_spawn_function_veh_by_type("apc_gaz_tigr_monsoon", ::add_ai_to_gaz);
   add_spawn_function_veh_by_type("apc_gaz_tigr_wturret_monsoon", ::add_ai_to_gaz);
-  a_triggers = getEntArray("trigger_c4", "script_noteworthy");
+  a_triggers = getentarray("trigger_c4", "script_noteworthy");
   array_thread(a_triggers, ::plant_c4_trigger_think);
 
   if(!flag("monsoon_gump_interior")) {
@@ -270,11 +270,10 @@ level_init() {
   trig_player_celerium_door = getent("trig_player_celerium_door", "targetname");
   trig_player_celerium_door trigger_off();
   level.metalstorm_freeze_death = 1;
-  a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
+  a_escape_trigs = getentarray("escape_trigs", "script_noteworthy");
 
-  foreach(trig in a_escape_trigs) {
-    trig trigger_off();
-  }
+  foreach(trig in a_escape_trigs)
+  trig trigger_off();
 
   trig_briggs_player_use = getent("briggs_player_use", "targetname");
   trig_briggs_player_use trigger_off();

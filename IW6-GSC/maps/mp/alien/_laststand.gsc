@@ -33,33 +33,29 @@ DROP_TO_GROUND_DOWN_DIST = -64;
 Callback_PlayerLastStandAlien(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, bleedOutSpawnEntity) {
   blackBox_lastStand(attacker, iDamage);
 
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     maps\mp\alien\_chaos_laststand::chaos_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity);
-  } else {
+  else
     regularExtinction_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity);
-  }
 }
 
 regularExtinction_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity) {
   gameShouldEnd = gameShouldEnd(self);
 
-  if(gameShouldEnd) {
+  if(gameShouldEnd)
     level thread maps\mp\gametypes\aliens::AlienEndGame("axis", maps\mp\alien\_hud::get_end_game_string_index("kia"));
-  }
 
-  if(self.inLastStand) {
+  if(self.inLastStand)
     forceBleedOut(bleedOutSpawnEntity);
-  } else {
+  else
     dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity, gameShouldEnd);
-  }
 }
 
 forceBleedOut(bleedOutSpawnEntity) {
   Assert(is_killed_by_kill_trigger(bleedOutSpawnEntity));
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     self setOrigin(bleedOutSpawnEntity.origin);
-  }
 
   self.bleedOutSpawnEntityOverride = bleedOutSpawnEntity;
 
@@ -79,9 +75,8 @@ dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
   if(mayDoLastStandAlien(self, gameShouldEnd, bleedOutSpawnEntity)) {
     revived = waitInLastStand(bleedOutSpawnEntity, gameShouldEnd);
 
-    if(!revived) {
+    if(!revived)
       waitInSpecator(bleedOutSpawnEntity, gameShouldEnd);
-    }
   } else {
     waitInSpecator(bleedOutSpawnEntity, gameShouldEnd);
   }
@@ -221,9 +216,8 @@ exit_GamemodeSpecificAction() {
   self SetSpawnWeapon(self.lastWeapon);
   maps\mp\alien\_death::set_kill_trigger_event_processed(self, false);
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     maps\mp\alien\_chaos_laststand::chaos_exit_GamemodeSpecificAction(self);
-  }
 }
 
 waitInLastStand(bleedOutSpawnEntity, gameShouldEnd) {
@@ -231,9 +225,8 @@ waitInLastStand(bleedOutSpawnEntity, gameShouldEnd) {
   self endon("revive");
   level endon("game_ended");
 
-  if(self maps\mp\alien\_debug::shouldSelfRevive()) {
+  if(self maps\mp\alien\_debug::shouldSelfRevive())
     return debug_self_revive();
-  }
 
   if(!gameShouldEnd) {
     self visionFadeToBlack(CONST_BLEED_OUT_TIME);
@@ -248,11 +241,10 @@ waitInLastStand(bleedOutSpawnEntity, gameShouldEnd) {
     }
   }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     return (wait_for_self_revive(bleedOutSpawnEntity, gameShouldEnd));
-  } else {
+  else
     return (wait_to_be_revived(self, self.origin, undefined, undefined, true, CONST_NORMAL_REVIVE_TIME, (0.33, 0.75, 0.24), CONST_BLEED_OUT_TIME, false, gameShouldEnd));
-  }
 }
 
 waitInSpecator(bleedOutSpawnEntity, gameShouldEnd) {
@@ -295,12 +287,10 @@ waitInSpecator(bleedOutSpawnEntity, gameShouldEnd) {
   self.forceSpawnOrigin = spawnLoc;
   self.forceSpawnAngles = spawnAngle;
 
-  if(isDefined(self.forceTeleportOrigin)) {
+  if(isDefined(self.forceTeleportOrigin))
     self.forceSpawnOrigin = self.forceTeleportOrigin;
-  }
-  if(isDefined(self.forceTeleportAngles)) {
+  if(isDefined(self.forceTeleportAngles))
     self.forceSpawnAngles = self.forceTeleportAngles;
-  }
 
   self maps\mp\gametypes\_playerlogic::spawnPlayer(true);
 }
@@ -312,11 +302,10 @@ wait_for_self_revive(bleedOutSpawnEntity, gameShouldEnd) {
     return false;
   }
 
-  if(is_killed_by_kill_trigger(bleedOutSpawnEntity)) {
+  if(is_killed_by_kill_trigger(bleedOutSpawnEntity))
     self setOrigin(bleedOutSpawnEntity.origin);
-  } else {
+  else
     wait CONST_SELF_REVIVE_WAIT;
-  }
 
   self setClientOmnvar("ui_laststand_end_milliseconds", 0);
   return true;
@@ -328,13 +317,11 @@ wait_to_be_revived(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToO
   reviveEnt = makeReviveEntity(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToOwner);
   reviveEnt thread cleanUpReviveEnt(downedPlayer);
 
-  if(is_true(isChaosMode)) {
+  if(is_true(isChaosMode))
     self _disableWeapon();
-  }
 
-  if(shouldSpectate) {
+  if(shouldSpectate)
     self thread enter_spectate(downedPlayer, spawnLoc, reviveEnt);
-  }
 
   if(gameShouldEnd) {
     level waittill("forever");
@@ -343,9 +330,8 @@ wait_to_be_revived(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToO
   } else {
     reviveIconEnt = reviveEnt;
 
-    if(shouldSpectate) {
+    if(shouldSpectate)
       reviveIconEnt = makeReviveIconEntity(downedPlayer, reviveEnt);
-    }
 
     reviveIconEnt maps\mp\alien\_hud::makeReviveIcon(downedPlayer, iconColor, timeLimit);
 
@@ -354,22 +340,19 @@ wait_to_be_revived(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToO
 
     reviveEnt thread lastStandWaittillLifeReceived(downedPlayer, reviveTime);
 
-    if(isDefined(timeLimit)) {
+    if(isDefined(timeLimit))
       result = reviveEnt waittill_any_ents_or_timeout_return(timeLimit, reviveEnt, "revive_success", downedPlayer, "force_bleed_out", downedPlayer, "revive_success");
-    } else if(!isDefined(timelimit) && is_true(isChaosMode)) {
+    else if(!isDefined(timelimit) && is_true(isChaosMode))
       result = reviveEnt waittill_any_ents_return(reviveEnt, "revive_success", downedPlayer, "force_bleed_out", downedPlayer, "revive_success");
-    } else {
+    else
       result = reviveEnt waittill_any_return("revive_success");
-    }
 
-    if(result == "timeout" && is_being_revived(downedPlayer)) {
+    if(result == "timeout" && is_being_revived(downedPlayer))
       result = reviveEnt waittill_any_return("revive_success", "revive_fail");
-    }
 
     if(result == "revive_success") {
-      if(is_true(isChaosMode)) {
+      if(is_true(isChaosMode))
         self _enableWeapon();
-      }
       return true;
     } else
       return false;
@@ -390,9 +373,8 @@ lastStandWaittillLifeReceived(downedPlayer, reviveTime) {
     }
     reviveTimeScaler = reviver maps\mp\alien\_perk_utility::perk_GetReviveTimeScalar();
 
-    if(downedPlayer maps\mp\alien\_persistence::is_upgrade_enabled("faster_revive_upgrade")) {
+    if(downedPlayer maps\mp\alien\_persistence::is_upgrade_enabled("faster_revive_upgrade"))
       reviveTimeScaler = reviveTimeScaler * CONST_FAST_REVIVE_UPGRADE_SCALAR;
-    }
 
     reviveTimeScaled = int(reviveTime / reviveTimeScaler);
     revive_success = get_revive_result(downedPlayer, reviver, self.origin, reviveTimeScaled);
@@ -433,17 +415,14 @@ makeReviveEntity(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToOwn
   reviveEnt.inUse = false;
   reviveEnt.targetname = "revive_trigger";
 
-  if(isDefined(entityModel)) {
+  if(isDefined(entityModel))
     reviveEnt setModel(entityModel);
-  }
 
-  if(isDefined(entityModelAnim)) {
+  if(isDefined(entityModelAnim))
     reviveEnt ScriptModelPlayAnim(entityModelAnim);
-  }
 
-  if(linkToOwner) {
+  if(linkToOwner)
     reviveEnt linkTo(downedPlayer, "tag_origin", REVIVE_ENT_VERTICAL_OFFSET, (0, 0, 0));
-  }
 
   return reviveEnt;
 }
@@ -457,29 +436,25 @@ makeReviveIconEntity(downedPlayer, reviveEnt) {
 }
 
 mayDoLastStandAlien(player, gameShouldEnd, bleedOutSpawnEntity) {
-  if(alien_mode_has("nogame")) {
+  if(alien_mode_has("nogame"))
     return true;
-  }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     return solo_mayDoLastStand(gameShouldEnd, bleedOutSpawnEntity);
-  } else {
+  else
     return coop_mayDoLastStand(bleedOutSpawnEntity);
-  }
 }
 
 solo_mayDoLastStand(gameShouldEnd, bleedOutSpawnEntity) {
-  if(gameShouldEnd && is_killed_by_kill_trigger(bleedOutSpawnEntity)) {
+  if(gameShouldEnd && is_killed_by_kill_trigger(bleedOutSpawnEntity))
     return false;
-  }
 
   return true;
 }
 
 coop_mayDoLastStand(bleedOutSpawnEntity) {
-  if(is_killed_by_kill_trigger(bleedOutSpawnEntity)) {
+  if(is_killed_by_kill_trigger(bleedOutSpawnEntity))
     return false;
-  }
 
   return true;
 }
@@ -508,9 +483,8 @@ only_use_weapon(weapon) {
 
   can_use_pistol = can_use_pistol_during_last_stand(self);
 
-  if(can_use_pistol) {
+  if(can_use_pistol)
     save_weapon_list[save_weapon_list.size] = pistol;
-  }
 
   self _takeWeaponsExceptList(save_weapon_list);
 
@@ -526,9 +500,8 @@ only_use_weapon(weapon) {
 }
 
 can_use_pistol_during_last_stand(player) {
-  if(is_chaos_mode() && player get_last_stand_count() == 0) {
+  if(is_chaos_mode() && player get_last_stand_count() == 0)
     return false;
-  }
 
   return true;
 }
@@ -541,11 +514,10 @@ cleanUpReviveEnt(owner) {
 }
 
 player_init_laststand() {
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     maps\mp\alien\_chaos_laststand::chaos_player_init_laststand();
-  } else {
+  else
     regularExtinction_player_init_laststand();
-  }
 }
 
 regularExtinction_player_init_laststand() {
@@ -568,43 +540,37 @@ init_selfrevive_icon(initial_lastStand_count) {
 }
 
 give_lastStand(player, num) {
-  if(!isDefined(num)) {
+  if(!isDefined(num))
     num = 1;
-  }
 
   new_last_stand_count = (player get_last_stand_count()) + num;
   set_last_stand_count(player, new_last_stand_count);
 }
 
 take_lastStand(player, num) {
-  if(!isDefined(num)) {
+  if(!isDefined(num))
     num = 1;
-  }
 
   new_last_stand_count = (player get_last_stand_count()) - num;
   set_last_stand_count(player, max(new_last_stand_count, 0));
 }
 
 gameShouldEnd(player_just_down) {
-  if(maps\mp\alien\_debug::self_revive_activated()) {
+  if(maps\mp\alien\_debug::self_revive_activated())
     return false;
-  }
 
-  if(alien_mode_has("nogame")) {
+  if(alien_mode_has("nogame"))
     return false;
-  }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     return solo_gameShouldEnd(player_just_down);
-  } else {
+  else
     return coop_gameShouldEnd(player_just_down);
-  }
 }
 
 solo_gameShouldEnd(player_just_down) {
-  if(player_just_down.inLastStand) {
+  if(player_just_down.inLastStand)
     return false;
-  }
 
   return (player_just_down get_last_stand_count() == 0);
 }
@@ -618,9 +584,8 @@ everyone_else_all_in_lastStand(player_just_down) {
     if(player == player_just_down) {
       continue;
     }
-    if(!player_in_laststand(player)) {
+    if(!player_in_laststand(player))
       return false;
-    }
   }
   return true;
 }
@@ -805,18 +770,16 @@ blackBox_lastStand(attacker, iDamage) {
     attacker_agent_type = "unknown agent";
     if(isDefined(attacker.agent_type)) {
       attacker_agent_type = attacker.agent_type;
-      if(isDefined(attacker.alien_type)) {
+      if(isDefined(attacker.alien_type))
         attacker_agent_type = attacker.alien_type;
-      }
     }
   } else {
     attacker_alive_time = 0;
 
-    if(isplayer(attacker)) {
+    if(isplayer(attacker))
       attacker_agent_type = "player";
-    } else {
+    else
       attacker_agent_type = "nonagent";
-    }
   }
 
   attackerx = 0.0;
@@ -829,19 +792,16 @@ blackBox_lastStand(attacker, iDamage) {
   }
 
   victimname = "";
-  if(isDefined(self.name)) {
+  if(isDefined(self.name))
     victimname = self.name;
-  }
 
   cyclenum = -1;
-  if(isDefined(level.current_cycle_num)) {
+  if(isDefined(level.current_cycle_num))
     cyclenum = level.current_cycle_num;
-  }
 
   hivename = "unknown";
-  if(isDefined(level.current_hive_name)) {
+  if(isDefined(level.current_hive_name))
     hivename = level.current_hive_name;
-  }
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     attackerorigin = (attackerx, attackery, attackerz);
@@ -886,29 +846,23 @@ waittill_any_ents_or_timeout_return(timeout, ent1, string1, ent2, string2, ent3,
 
   ent1 childthread waittill_string(string1, ent);
 
-  if((isDefined(ent2)) && (isDefined(string2))) {
+  if((isDefined(ent2)) && (isDefined(string2)))
     ent2 childthread waittill_string(string2, ent);
-  }
 
-  if((isDefined(ent3)) && (isDefined(string3))) {
+  if((isDefined(ent3)) && (isDefined(string3)))
     ent3 childthread waittill_string(string3, ent);
-  }
 
-  if((isDefined(ent4)) && (isDefined(string4))) {
+  if((isDefined(ent4)) && (isDefined(string4)))
     ent4 childthread waittill_string(string4, ent);
-  }
 
-  if((isDefined(ent5)) && (isDefined(string5))) {
+  if((isDefined(ent5)) && (isDefined(string5)))
     ent5 childthread waittill_string(string5, ent);
-  }
 
-  if((isDefined(ent6)) && (isDefined(string6))) {
+  if((isDefined(ent6)) && (isDefined(string6)))
     ent6 childthread waittill_string(string6, ent);
-  }
 
-  if((isDefined(ent7)) && (isDefined(string7))) {
+  if((isDefined(ent7)) && (isDefined(string7)))
     ent7 childthread waittill_string(string7, ent);
-  }
 
   ent childthread _timeout(timeOut);
 
@@ -927,29 +881,23 @@ waittill_any_ents_return(ent1, string1, ent2, string2, ent3, string3, ent4, stri
 
   ent1 childthread waittill_string(string1, ent);
 
-  if((isDefined(ent2)) && (isDefined(string2))) {
+  if((isDefined(ent2)) && (isDefined(string2)))
     ent2 childthread waittill_string(string2, ent);
-  }
 
-  if((isDefined(ent3)) && (isDefined(string3))) {
+  if((isDefined(ent3)) && (isDefined(string3)))
     ent3 childthread waittill_string(string3, ent);
-  }
 
-  if((isDefined(ent4)) && (isDefined(string4))) {
+  if((isDefined(ent4)) && (isDefined(string4)))
     ent4 childthread waittill_string(string4, ent);
-  }
 
-  if((isDefined(ent5)) && (isDefined(string5))) {
+  if((isDefined(ent5)) && (isDefined(string5)))
     ent5 childthread waittill_string(string5, ent);
-  }
 
-  if((isDefined(ent6)) && (isDefined(string6))) {
+  if((isDefined(ent6)) && (isDefined(string6)))
     ent6 childthread waittill_string(string6, ent);
-  }
 
-  if((isDefined(ent7)) && (isDefined(string7))) {
+  if((isDefined(ent7)) && (isDefined(string7)))
     ent7 childthread waittill_string(string7, ent);
-  }
 
   ent waittill("returned", msg);
   ent notify("die");

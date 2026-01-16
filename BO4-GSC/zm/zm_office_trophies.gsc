@@ -9,6 +9,7 @@
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_office_trophies;
 
 init() {
@@ -38,7 +39,7 @@ function_b091b039() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x4b>");
 
-  self zm_utility::giveachievement_wrapper("zm_office_cold_war", 0);
+    self zm_utility::giveachievement_wrapper("zm_office_cold_war", 0);
 }
 
 function_ea30554a() {
@@ -46,12 +47,13 @@ function_ea30554a() {
 
   iprintln("<dev string:x60>" + self.var_e9f787ee);
 
-  if(self.var_e9f787ee > 114) {
-    iprintlnbold("<dev string:x38>" + "<dev string:x76>");
+    if(self.var_e9f787ee > 114) {
 
-    self zm_utility::giveachievement_wrapper("zm_office_ice", 0);
-    self.var_5a15be2a = undefined;
-  }
+      iprintlnbold("<dev string:x38>" + "<dev string:x76>");
+
+        self zm_utility::giveachievement_wrapper("zm_office_ice", 0);
+      self.var_5a15be2a = undefined;
+    }
 }
 
 function_7fe4eb1d(s_params) {
@@ -65,12 +67,13 @@ function_7fe4eb1d(s_params) {
 
   iprintln("<dev string:x86>" + level.n_electric_trap_kills);
 
-  if(level.n_electric_trap_kills > 114) {
-    iprintlnbold("<dev string:x38>" + "<dev string:x9e>");
+    if(level.n_electric_trap_kills > 114) {
 
-    zm_utility::giveachievement_wrapper("zm_office_shock", 1);
-    callback::remove_on_ai_killed(&function_7fe4eb1d);
-  }
+      iprintlnbold("<dev string:x38>" + "<dev string:x9e>");
+
+        zm_utility::giveachievement_wrapper("zm_office_shock", 1);
+      callback::remove_on_ai_killed(&function_7fe4eb1d);
+    }
 }
 
 function_60193f7d() {
@@ -80,9 +83,10 @@ function_60193f7d() {
   }
 
   if(level.round_number > 19) {
+
     iprintlnbold("<dev string:x38>" + "<dev string:xb0>");
 
-    zm_utility::giveachievement_wrapper("zm_office_power", 1);
+      zm_utility::giveachievement_wrapper("zm_office_power", 1);
     callback::function_50fdac80(&function_60193f7d);
   }
 }
@@ -94,7 +98,7 @@ function_8addaa01(params) {
     return;
   }
 
-  if(self.archetype != # "nova_crawler" || params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET") {
+  if(self.archetype != #"nova_crawler" || params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET") {
     return;
   }
 
@@ -102,12 +106,13 @@ function_8addaa01(params) {
 
   iprintln("<dev string:xc2>" + e_attacker.var_d67976f1);
 
-  if(e_attacker.var_d67976f1 > 49) {
-    iprintlnbold("<dev string:x38>" + "<dev string:xdd>");
+    if(e_attacker.var_d67976f1 > 49) {
 
-    e_attacker zm_utility::giveachievement_wrapper("zm_office_strike", 0);
-    e_attacker.var_d67976f1 = undefined;
-  }
+      iprintlnbold("<dev string:x38>" + "<dev string:xdd>");
+
+        e_attacker zm_utility::giveachievement_wrapper("zm_office_strike", 0);
+      e_attacker.var_d67976f1 = undefined;
+    }
 }
 
 function_dab4588() {
@@ -117,9 +122,10 @@ function_dab4588() {
   }
 
   if(level.round_number > 19) {
+
     iprintlnbold("<dev string:x38>" + "<dev string:xf0>");
 
-    zm_utility::giveachievement_wrapper("zm_office_office", 1);
+      zm_utility::giveachievement_wrapper("zm_office_office", 1);
     callback::function_50fdac80(&function_dab4588);
   }
 }
@@ -129,18 +135,18 @@ on_player_last_stand() {
 }
 
 function_edf1b266() {
-  self endon(#"death", # "disconnect", # "player_revived");
+  self endon(#"death", #"disconnect", #"player_revived");
   self waittill(#"teleporting");
   self thread function_1ac7a037();
 }
 
 function_1ac7a037() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self waittill(#"player_revived");
 
   iprintlnbold("<dev string:x38>" + "<dev string:x103>");
 
-  self zm_utility::giveachievement_wrapper("zm_office_crawl", 0);
+    self zm_utility::giveachievement_wrapper("zm_office_crawl", 0);
 }
 
 function_60f79e9c(params) {
@@ -158,12 +164,13 @@ function_60f79e9c(params) {
 
   iprintln("<dev string:x115>" + e_attacker.var_32ab02ea);
 
-  if(e_attacker.var_32ab02ea > 49) {
-    iprintlnbold("<dev string:x38>" + "<dev string:x126>");
+    if(e_attacker.var_32ab02ea > 49) {
 
-    e_attacker zm_utility::giveachievement_wrapper("zm_office_gas", 0);
-    e_attacker.var_32ab02ea = undefined;
-  }
+      iprintlnbold("<dev string:x38>" + "<dev string:x126>");
+
+        e_attacker zm_utility::giveachievement_wrapper("zm_office_gas", 0);
+      e_attacker.var_32ab02ea = undefined;
+    }
 }
 
 function_1cc0b38a() {
@@ -182,13 +189,14 @@ function_d62a70b4() {
 
     iprintln("<dev string:x136>" + level.var_2ae5b6fb);
 
-    if(level.var_2ae5b6fb > 4) {
-      iprintlnbold("<dev string:x38>" + "<dev string:x153>");
+      if(level.var_2ae5b6fb > 4) {
 
-      zm_utility::giveachievement_wrapper("zm_office_pentupagon", 1);
-      level notify(#"hash_40475441c5bdca82");
-      callback::remove_on_round_end(&function_d62a70b4);
-    }
+        iprintlnbold("<dev string:x38>" + "<dev string:x153>");
+
+          zm_utility::giveachievement_wrapper("zm_office_pentupagon", 1);
+        level notify(#"hash_40475441c5bdca82");
+        callback::remove_on_round_end(&function_d62a70b4);
+      }
 
     return;
   }
@@ -198,7 +206,7 @@ function_d62a70b4() {
 
     iprintln("<dev string:x136>" + level.var_2ae5b6fb);
 
-    level thread function_98390b60();
+      level thread function_98390b60();
   }
 }
 
@@ -247,5 +255,5 @@ player_teleport_watcher() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x183>");
 
-  self zm_utility::giveachievement_wrapper("zm_office_everywhere", 0);
+    self zm_utility::giveachievement_wrapper("zm_office_everywhere", 0);
 }

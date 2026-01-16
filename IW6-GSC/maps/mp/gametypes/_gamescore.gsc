@@ -10,11 +10,10 @@
 getHighestScoringPlayer() {
   updatePlacement();
 
-  if(!level.placement["all"].size) {
+  if(!level.placement["all"].size)
     return (undefined);
-  } else {
+  else
     return (level.placement["all"][0]);
-  }
 }
 
 getLosingPlayers() {
@@ -34,11 +33,10 @@ getLosingPlayers() {
 }
 
 givePlayerScore(event, player, victim, overrideCheckPlayerScoreLimitSoon, overridePointsPopup, bScaleDown) {
-  if(is_aliens()) {
+  if(is_aliens())
     return;
-  } else {
+  else
     givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSoon, overridePointsPopup, bScaleDown);
-  }
 }
 
 givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSoon, overridePointsPopup, bScaleDown) {
@@ -55,17 +53,14 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
   if(!IsPlayer(player)) {
     return;
   }
-  if(!isDefined(overrideCheckPlayerScoreLimitSoon)) {
+  if(!isDefined(overrideCheckPlayerScoreLimitSoon))
     overrideCheckPlayerScoreLimitSoon = false;
-  }
 
-  if(!isDefined(overridePointsPopup)) {
+  if(!isDefined(overridePointsPopup))
     overridePointsPopup = false;
-  }
 
-  if(!isDefined(bScaleDown)) {
+  if(!isDefined(bScaleDown))
     bScaleDown = false;
-  }
 
   prevScore = player.pers["score"];
   onPlayerScore(event, player, victim, bScaleDown);
@@ -74,50 +69,42 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
   if(score_change == 0) {
     return;
   }
-  if(bScaleDown) {
+  if(bScaleDown)
     score_change = int(score_change * 10);
-  }
 
   eventValue = maps\mp\gametypes\_rank::getScoreInfoValue(event);
 
   if(!player rankingEnabled() && !level.hardcoreMode && !overridePointsPopup) {
-    if(gameModeUsesDeathmatchScoring(level.gameType)) {
+    if(gameModeUsesDeathmatchScoring(level.gameType))
       player thread maps\mp\gametypes\_rank::xpPointsPopup(eventValue);
-    } else {
+    else
       player thread maps\mp\gametypes\_rank::xpPointsPopup(score_change);
-    }
   }
 
-  if(gameModeUsesDeathmatchScoring(level.gameType)) {
+  if(gameModeUsesDeathmatchScoring(level.gameType))
     player maps\mp\gametypes\_persistence::statAdd("score", eventValue);
-  } else if(!IsSquadsMode()) {
+  else if(!IsSquadsMode())
     player maps\mp\gametypes\_persistence::statAdd("score", score_change);
-  }
 
-  if(player.pers["score"] >= 65000) {
+  if(player.pers["score"] >= 65000)
     player.pers["score"] = 65000;
-  }
 
   player.score = player.pers["score"];
   scoreChildStat = player.score;
 
-  if(bScaleDown) {
+  if(bScaleDown)
     scoreChildStat = int(scoreChildStat * 10);
-  }
 
-  if(gameModeUsesDeathmatchScoring(level.gameType)) {
+  if(gameModeUsesDeathmatchScoring(level.gameType))
     player maps\mp\gametypes\_persistence::statSetChild("round", "score", scoreChildStat * eventValue);
-  } else {
+  else
     player maps\mp\gametypes\_persistence::statSetChild("round", "score", scoreChildStat);
-  }
 
-  if(!level.teambased) {
+  if(!level.teambased)
     thread sendUpdatedDMScores();
-  }
 
-  if(!overrideCheckPlayerScoreLimitSoon) {
+  if(!overrideCheckPlayerScoreLimitSoon)
     player maps\mp\gametypes\_gamelogic::checkPlayerScoreLimitSoon();
-  }
 
   scoreEndedMatch = player maps\mp\gametypes\_gamelogic::checkScoreLimit();
 }
@@ -125,7 +112,9 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
 onPlayerScore(event, player, victim, bScaleDown) {
   score = undefined;
   if(isDefined(level.onPlayerScore)) {
-    score = [[level.onPlayerScore]](event, player, victim);
+    score = [
+      [level.onPlayerScore]
+    ](event, player, victim);
   }
   if(!isDefined(score)) {
     score = maps\mp\gametypes\_rank::getScoreInfoValue(event);
@@ -133,9 +122,8 @@ onPlayerScore(event, player, victim, bScaleDown) {
 
   score = score * level.objectivePointsMod;
 
-  if(bScaleDown) {
+  if(bScaleDown)
     score = int(score / 10);
-  }
 
   assert(isDefined(score));
 
@@ -156,9 +144,8 @@ _setPlayerScore(player, score) {
 }
 
 _getPlayerScore(player) {
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     player = self;
-  }
   return player.pers["score"];
 }
 
@@ -174,9 +161,8 @@ giveTeamScoreForObjective(team, score) {
   if(!level.splitScreen && isWinning != "none" && isWinning != level.wasWinning && getTime() - level.lastStatusTime > 5000 && getScoreLimit() != 1) {
     level.lastStatusTime = getTime();
     leaderDialog("lead_taken", isWinning, "status");
-    if(level.wasWinning != "none") {
+    if(level.wasWinning != "none")
       leaderDialog("lead_lost", level.wasWinning, "status");
-    }
   }
 
   if(isWinning != "none") {
@@ -190,9 +176,8 @@ giveTeamScoreForObjective(team, score) {
     }
     scorePercentage = (teamScore / scoreLimit) * 100;
 
-    if(scorePercentage > level.scorePercentageCutOff) {
+    if(scorePercentage > level.scorePercentageCutOff)
       SetNoJIPScore(true);
-    }
   }
 }
 
@@ -200,9 +185,8 @@ getWinningTeam() {
   assert(level.teamBased == true);
   teams_list = level.teamNameList;
 
-  if(!isDefined(level.wasWinning)) {
+  if(!isDefined(level.wasWinning))
     level.wasWinning = "none";
-  }
 
   winning_team = "none";
   winning_score = 0;
@@ -237,9 +221,9 @@ _setTeamScore(team, teamScore) {
 
   updateTeamScore(team);
 
-  if(game["status"] == "overtime" && !isDefined(level.overtimeScoreWinOverride) || (isDefined(level.overtimeScoreWinOverride) && !level.overtimeScoreWinOverride)) {
+  if(game["status"] == "overtime" && !isDefined(level.overtimeScoreWinOverride) || (isDefined(level.overtimeScoreWinOverride) && !level.overtimeScoreWinOverride))
     thread maps\mp\gametypes\_gamelogic::onScoreLimit();
-  } else {
+  else {
     thread maps\mp\gametypes\_gamelogic::checkTeamScoreLimitSoon(team);
     thread maps\mp\gametypes\_gamelogic::checkScoreLimit();
   }
@@ -250,11 +234,10 @@ updateTeamScore(team) {
 
   teamScore = 0;
 
-  if(!isRoundBased() || !isObjectiveBased() || level.gameType == "blitz") {
+  if(!isRoundBased() || !isObjectiveBased() || level.gameType == "blitz")
     teamScore = _getTeamScore(team);
-  } else {
+  else
     teamScore = game["roundsWon"][team];
-  }
 
   setTeamScore(team, teamScore);
 }
@@ -270,9 +253,8 @@ sendUpdatedTeamScores() {
 
   WaitTillSlowProcessAllowed();
 
-  foreach(player in level.players) {
-    player updateScores();
-  }
+  foreach(player in level.players)
+  player updateScores();
 }
 
 sendUpdatedDMScores() {
@@ -293,13 +275,11 @@ removeDisconnectedPlayerFromPlacement() {
   numPlayers = level.placement["all"].size;
   found = false;
   for(i = 0; i < numPlayers; i++) {
-    if(level.placement["all"][i] == self) {
+    if(level.placement["all"][i] == self)
       found = true;
-    }
 
-    if(found) {
+    if(found)
       level.placement["all"][i] = level.placement["all"][i + 1];
-    }
   }
   if(!found) {
     return;
@@ -341,9 +321,8 @@ updatePlacement() {
     player = placementAll[i];
     playerScore = player.score;
 
-    for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--) {
+    for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
       placementAll[j + 1] = placementAll[j];
-    }
     placementAll[j + 1] = player;
   }
 
@@ -359,27 +338,22 @@ updatePlacement() {
 }
 
 getBetterPlayer(playerA, playerB) {
-  if(playerA.score > playerB.score) {
+  if(playerA.score > playerB.score)
     return playerA;
-  }
 
-  if(playerB.score > playerA.score) {
+  if(playerB.score > playerA.score)
     return playerB;
-  }
 
-  if(playerA.deaths < playerB.deaths) {
+  if(playerA.deaths < playerB.deaths)
     return playerA;
-  }
 
-  if(playerB.deaths < playerA.deaths) {
+  if(playerB.deaths < playerA.deaths)
     return playerB;
-  }
 
-  if(cointoss()) {
+  if(cointoss())
     return playerA;
-  } else {
+  else
     return playerB;
-  }
 }
 
 updateTeamPlacement() {
@@ -450,9 +424,8 @@ initialDMScoreUpdate() {
       wait .5;
     }
 
-    if(!didAny) {
+    if(!didAny)
       wait 3;
-    }
   }
 }
 
@@ -460,11 +433,10 @@ processAssist(killedplayer) {
   if(isDefined(level.assists_disabled)) {
     return;
   }
-  if(is_aliens()) {
+  if(is_aliens())
     return;
-  } else {
+  else
     processAssist_regularMP(killedplayer);
-  }
 }
 
 processAssist_regularMP(killedplayer) {
@@ -502,11 +474,10 @@ processShieldAssist(killedPlayer) {
   if(isDefined(level.assists_disabled)) {
     return;
   }
-  if(is_aliens()) {
+  if(is_aliens())
     return;
-  } else {
+  else
     processShieldAssist_regularMP(killedPlayer);
-  }
 }
 
 processShieldAssist_regularMP(killedPlayer) {

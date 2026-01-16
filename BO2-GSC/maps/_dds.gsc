@@ -10,7 +10,7 @@
 #include animscripts\combat_utility;
 
 dds_init() {
-  level.dds = spawnStruct();
+  level.dds = spawnstruct();
   level.dds.heartbeat = 0.25;
   level.dds.max_active_events = 6;
   level.dds.variant_limit = 17;
@@ -33,9 +33,8 @@ dds_init() {
 
   level.debug_dds_on = getdvar(#"_id_38E629E6");
 
-  if(level.debug_dds_on != "") {
+  if(level.debug_dds_on != "")
     level thread dds_debug();
-  }
 }
 
 init_dds_countryids(voice, dds_label) {
@@ -62,7 +61,7 @@ init_dds_countryids(voice, dds_label) {
 }
 
 add_dds_countryid(voice, dds_label, max_voices) {
-  level.dds.countryids[voice] = spawnStruct();
+  level.dds.countryids[voice] = spawnstruct();
   level.dds.countryids[voice].label = dds_label;
   level.dds.countryids[voice].count = 0;
   level.dds.countryids[voice].max_voices = max_voices;
@@ -164,7 +163,7 @@ init_dds_categories_axis() {
 }
 
 add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset, should_squelch) {
-  new_category = spawnStruct();
+  new_category = spawnstruct();
   new_category.name = name;
   new_category.alias_name = alias_name;
   new_category.duration = duration;
@@ -184,7 +183,7 @@ add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_a
 }
 
 add_dds_category_axis(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset, notused) {
-  new_category_axis = spawnStruct();
+  new_category_axis = spawnstruct();
   new_category_axis.name = name;
   new_category_axis.alias_name = alias_name;
   new_category_axis.duration = duration;
@@ -206,13 +205,11 @@ init_dds_active_events() {
   level.dds.active_events = [];
   level.dds.active_events_axis = [];
 
-  for(i = 0; i < level.dds.categories.size; i++) {
+  for(i = 0; i < level.dds.categories.size; i++)
     level.dds.active_events[level.dds.categories[i].name] = [];
-  }
 
-  for(i = 0; i < level.dds.categories_axis.size; i++) {
+  for(i = 0; i < level.dds.categories_axis.size; i++)
     level.dds.active_events_axis[level.dds.categories_axis[i].name] = [];
-  }
 }
 
 dds_clear_old_expired_events() {
@@ -222,9 +219,8 @@ dds_clear_old_expired_events() {
     for(j = 0; j < level.dds.active_events[category.name].size; j++) {
       level.dds.active_events[category.name][j].duration = level.dds.active_events[category.name][j].duration - level.dds.heartbeat;
 
-      if(level.dds.active_events[category.name][j].duration <= 0 || level.dds.active_events[category.name][j].clear_event_on_prob) {
+      if(level.dds.active_events[category.name][j].duration <= 0 || level.dds.active_events[category.name][j].clear_event_on_prob)
         arrayremovevalue(level.dds.active_events[category.name], level.dds.active_events[category.name][j]);
-      }
     }
   }
 }
@@ -236,26 +232,23 @@ dds_clear_old_expired_events_axis() {
     for(j = 0; j < level.dds.active_events_axis[category.name].size; j++) {
       level.dds.active_events_axis[category.name][j].duration = level.dds.active_events_axis[category.name][j].duration - level.dds.heartbeat;
 
-      if(level.dds.active_events_axis[category.name][j].duration <= 0 || level.dds.active_events_axis[category.name][j].clear_event_on_prob) {
+      if(level.dds.active_events_axis[category.name][j].duration <= 0 || level.dds.active_events_axis[category.name][j].clear_event_on_prob)
         arrayremovevalue(level.dds.active_events_axis[category.name], level.dds.active_events_axis[category.name][j]);
-      }
     }
   }
 }
 
 dds_clear_all_queued_events() {
   for(i = 0; i < level.dds.categories.size; i++) {
-    for(j = 0; j < level.dds.active_events[level.dds.categories[i].name].size; j++) {
+    for(j = 0; j < level.dds.active_events[level.dds.categories[i].name].size; j++)
       level.dds.active_events[level.dds.categories[i].name] = [];
-    }
   }
 }
 
 dds_clear_all_queued_events_axis() {
   for(i = 0; i < level.dds.categories_axis.size; i++) {
-    for(j = 0; j < level.dds.active_events_axis[level.dds.categories_axis[i].name].size; j++) {
+    for(j = 0; j < level.dds.active_events_axis[level.dds.categories_axis[i].name].size; j++)
       level.dds.active_events_axis[level.dds.categories_axis[i].name] = [];
-    }
   }
 }
 
@@ -282,11 +275,10 @@ dds_main_process() {
       should_delay_dds = 0;
     }
 
-    if(!dds_process_active_events()) {
+    if(!dds_process_active_events())
       wait(level.dds.heartbeat);
-    } else {
+    else
       wait 0.1;
-    }
   }
 }
 
@@ -313,11 +305,10 @@ dds_main_process_axis() {
       should_delay_dds = 0;
     }
 
-    if(dds_process_active_events_axis()) {
+    if(dds_process_active_events_axis())
       wait(level.dds.heartbeat);
-    } else {
+    else
       wait 0.1;
-    }
   }
 }
 
@@ -331,9 +322,8 @@ dds_enable(team) {
     level thread dds_main_process_axis();
   } else if(team == "allies")
     level thread dds_main_process();
-  else if(team == "axis") {
+  else if(team == "axis")
     level thread dds_main_process_axis();
-  }
 }
 
 dds_disable(team) {
@@ -370,9 +360,8 @@ dds_send_team_notify_on_disable(team) {
 }
 
 is_dds_enabled() {
-  if(level.createfx_enabled || !flag("dds_running_allies") && !flag("dds_running_axis")) {
+  if(level.createfx_enabled || !flag("dds_running_allies") && !flag("dds_running_axis"))
     return false;
-  }
 
   return true;
 }
@@ -380,9 +369,8 @@ is_dds_enabled() {
 exponent(base, power) {
   assert(power >= 0);
 
-  if(power == 0) {
+  if(power == 0)
     return 1;
-  }
 
   return base * exponent(base, power - 1);
 }
@@ -391,9 +379,8 @@ dds_process_active_events() {
   for(i = 0; i < level.dds.categories.size; i++) {
     category = level.dds.categories[i];
 
-    if(level.debug_dds_on != "") {
+    if(level.debug_dds_on != "")
       debug_update_timeouts(category.name, category.timeout, category.last_timeout, 1);
-    }
 
     if(category.timeout > 0) {
       category.timeout = category.timeout - level.dds.heartbeat;
@@ -407,9 +394,8 @@ dds_process_active_events() {
 
       for(j = 0; j < level.dds.active_events[category.name].size; j++) {
         if(randomfloat(1) >= category.probability) {
-          if(level.debug_dds_on != "") {
+          if(level.debug_dds_on != "")
             debug_active_event_stat(category.name, "probability_skipped", 1);
-          }
 
           level.dds.active_events[category.name][j].clear_event_on_prob = 1;
           continue;
@@ -419,40 +405,35 @@ dds_process_active_events() {
           continue;
         }
         if(dds_event_activate(level.dds.active_events[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, category.should_squelch)) {
-          if(!category.timeout_reset) {
+          if(!category.timeout_reset)
             category.timeout = category.timeout_reset;
-          } else {
+          else {
             if(gettime() - category.last_time < category.last_timeout * 1.5 * 1000) {
               category.backoff_count++;
 
-              if(category.backoff_count > level.dds.category_backoff_limit) {
+              if(category.backoff_count > level.dds.category_backoff_limit)
                 category.backoff_count = level.dds.category_backoff_limit;
-              }
             } else {
               category.backoff_count--;
 
-              if(category.backoff_count < 0) {
+              if(category.backoff_count < 0)
                 category.backoff_count = 0;
-              }
             }
 
             category.timeout = category.timeout_reset * exponent(2, category.backoff_count) + randomint(2);
             category.last_timeout = category.timeout;
             category.last_time = gettime();
 
-            if(level.debug_dds_on != "") {
+            if(level.debug_dds_on != "")
               debug_reset_timeouts(category.name, category.timeout, category.last_timeout, category.last_time, 1);
-            }
 
           }
 
-          if(level.debug_dds_on != "") {
+          if(level.debug_dds_on != "")
             debug_sphere_draw_type("process", category.name, level.dds.active_events[category.name][j], undefined);
-          }
 
-          if(category.clear_on_action_success) {
+          if(category.clear_on_action_success)
             level.dds.active_events[category.name] = [];
-          }
 
           return true;
         } else
@@ -468,9 +449,8 @@ dds_process_active_events_axis() {
   for(i = 0; i < level.dds.categories_axis.size; i++) {
     category = level.dds.categories_axis[i];
 
-    if(level.debug_dds_on != "") {
+    if(level.debug_dds_on != "")
       debug_update_timeouts(category.name, category.timeout, category.last_timeout, 0);
-    }
 
     if(category.timeout > 0) {
       category.timeout = category.timeout - level.dds.heartbeat;
@@ -484,9 +464,8 @@ dds_process_active_events_axis() {
 
       for(j = 0; j < level.dds.active_events_axis[category.name].size; j++) {
         if(randomfloat(1) >= category.probability) {
-          if(level.debug_dds_on != "") {
+          if(level.debug_dds_on != "")
             debug_active_event_stat(category.name, "probability_skipped", 0);
-          }
 
           level.dds.active_events_axis[category.name][j].clear_event_on_prob = 1;
           continue;
@@ -496,40 +475,35 @@ dds_process_active_events_axis() {
           continue;
         }
         if(dds_event_activate(level.dds.active_events_axis[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, 0)) {
-          if(!category.timeout_reset) {
+          if(!category.timeout_reset)
             category.timeout = category.timeout_reset;
-          } else {
+          else {
             if(gettime() - category.last_time < category.last_timeout * 1.5 * 1000) {
               category.backoff_count++;
 
-              if(category.backoff_count > level.dds.category_backoff_limit) {
+              if(category.backoff_count > level.dds.category_backoff_limit)
                 category.backoff_count = level.dds.category_backoff_limit;
-              }
             } else {
               category.backoff_count--;
 
-              if(category.backoff_count < 0) {
+              if(category.backoff_count < 0)
                 category.backoff_count = 0;
-              }
             }
 
             category.timeout = category.timeout_reset * exponent(2, category.backoff_count) + randomint(2);
             category.last_timeout = category.timeout;
             category.last_time = gettime();
 
-            if(level.debug_dds_on != "") {
+            if(level.debug_dds_on != "")
               debug_reset_timeouts(category.name, category.timeout, category.last_timeout, category.last_time, 0);
-            }
 
           }
 
-          if(level.debug_dds_on != "") {
+          if(level.debug_dds_on != "")
             debug_sphere_draw_type("process", category.name, level.dds.active_events_axis[category.name][j], undefined);
-          }
 
-          if(category.clear_on_action_success) {
+          if(category.clear_on_action_success)
             level.dds.active_events_axis[category.name] = [];
-          }
 
           return true;
         } else
@@ -550,16 +524,14 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
 
   category_name = event.category_name;
 
-  if(isDefined(event.category_response_name)) {
+  if(isDefined(event.category_response_name))
     category_name = event.category_response_name;
-  }
 
   talker = event[[get_talker_func]](isDefined(event.category_response_name), distance);
 
   if(!isDefined(talker) || !isalive(talker)) {
-    if(level.debug_dds_on != "") {
+    if(level.debug_dds_on != "")
       debug_active_event_stat(category_name, "no_one_to_talk_count", event.isalliesline);
-    }
 
     event.processed = 1;
     return false;
@@ -567,44 +539,38 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
 
   phrase = dds_get_alias_from_event(talker, event.category_alias_name, event.ent);
 
-  if(!isDefined(phrase)) {
+  if(!isDefined(phrase))
     return false;
-  }
 
   if(isDefined(event.category_response_name)) {
-    if(event.isalliesline) {
+    if(event.isalliesline)
       wait(level.dds.response_wait);
-    } else {
+    else
       wait(level.dds.response_wait_axis);
-    }
   }
 
   if(level.debug_dds_on != "") {
     print_dds = getdvarintdefault("dds_usingDebug", 0);
 
-    if(isDefined(print_dds) && print_dds == 1) {
+    if(isDefined(print_dds) && print_dds == 1)
       talker thread debug_print_dialogue(phrase);
-    }
 
     debug_active_event_stat(category_name, "processed_count", event.isalliesline);
     debug_sphere_draw_type("speaker", category_name, event, talker);
   }
 
-  if(!getdvarint(#"_id_5C6D79F8")) {
+  if(!getdvarint(#"_id_5C6D79F8"))
     should_squelch = 0;
-  }
 
   if(isalive(talker)) {
-    if(should_squelch && !isplayer(talker) && talker.voice != "russian_english") {
+    if(should_squelch && !isplayer(talker) && talker.voice != "russian_english")
       talker animscripts\face::playfacethread(undefined, "dds_squelch_strt", 0.5, "dds_squelch_strt");
-    }
 
     talker animscripts\face::playfacethread(undefined, phrase, 0.5, phrase);
   }
 
-  if(should_squelch && !isplayer(talker) && isalive(talker) && talker.voice != "russian_english") {
+  if(should_squelch && !isplayer(talker) && isalive(talker) && talker.voice != "russian_english")
     talker animscripts\face::playfacethread(undefined, "dds_squelch_end", 0.5, "dds_squelch_end");
-  }
 
   event.talker = talker;
   event.talker_origin = talker.origin;
@@ -612,9 +578,8 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
   event.processed = 1;
   add_phrase_to_history(phrase);
 
-  if(rspns_cat_name != "") {
+  if(rspns_cat_name != "")
     dds_notify_response(event, talker, phrase, rspns_cat_name);
-  }
 
   return true;
 }
@@ -630,15 +595,13 @@ get_nearest_common(response, player_can_say_line, distance) {
   if(self.isalliesline) {
     ai_array = getaiarray("allies");
 
-    if(player_can_say_line) {
+    if(player_can_say_line)
       ai_array[ai_array.size] = player;
-    }
   } else
     ai_array = getaiarray("axis");
 
-  if(ai_array.size <= 0) {
+  if(ai_array.size <= 0)
     return undefined;
-  }
 
   ai_array = remove_all_actors_that_are_squelched(ai_array);
 
@@ -648,19 +611,16 @@ get_nearest_common(response, player_can_say_line, distance) {
   } else
     closest_ent = get_closest_living(self.ent_origin, ai_array);
 
-  if(!isDefined(closest_ent)) {
+  if(!isDefined(closest_ent))
     return undefined;
-  }
 
   dis_sq_from_player = distancesquared(player.origin, closest_ent.origin);
 
-  if(dis_sq_from_player > distance * distance) {
+  if(dis_sq_from_player > distance * distance)
     return undefined;
-  }
 
-  if(response && dis_sq_from_player < level.dds.response_distance_min * level.dds.response_distance_min) {
+  if(response && dis_sq_from_player < level.dds.response_distance_min * level.dds.response_distance_min)
     return undefined;
-  }
 
   return closest_ent;
 }
@@ -669,9 +629,8 @@ remove_all_actors_that_are_squelched(ai_array) {
   non_squelched = [];
 
   foreach(ai in ai_array) {
-    if(!isDefined(ai.bsc_squelched)) {
+    if(!isDefined(ai.bsc_squelched))
       non_squelched[non_squelched.size] = ai;
-    }
   }
 
   return non_squelched;
@@ -681,13 +640,12 @@ remove_all_actors_with_same_characterid(ai_array, talker_characterid) {
   i = 0;
 
   while(i < ai_array.size) {
-    if(!isDefined(ai_array[i].dds_characterid)) {
+    if(!isDefined(ai_array[i].dds_characterid))
       arrayremovevalue(ai_array, ai_array[i]);
-    } else if(ai_array[i].dds_characterid == talker_characterid) {
+    else if(ai_array[i].dds_characterid == talker_characterid)
       arrayremovevalue(ai_array, ai_array[i]);
-    } else {
+    else
       i++;
-    }
   }
 
   return ai_array;
@@ -704,9 +662,8 @@ get_nearest_not_plr(response, distance) {
 get_attacker(response, distance) {
   if(isDefined(self.ent_attacker) && isalive(self.ent_attacker)) {
     if(isDefined(self.ent_team)) {
-      if(isDefined(self.ent_attacker.team) && self.ent_team == self.ent_attacker.team) {
+      if(isDefined(self.ent_attacker.team) && self.ent_team == self.ent_attacker.team)
         return undefined;
-      }
 
       if(isDefined(self.ent_attacker.vteam) && self.ent_team == self.ent_attacker.vteam) {
         println("^5 killed by a vehicle");
@@ -722,9 +679,8 @@ get_attacker(response, distance) {
 }
 
 get_self_ent(response, distance) {
-  if(isDefined(self.ent) && isalive(self.ent)) {
+  if(isDefined(self.ent) && isalive(self.ent))
     return self.ent;
-  }
 
   return undefined;
 }
@@ -747,9 +703,8 @@ dds_get_alias_from_event(talker, category_alias_name, event_ent) {
   if(isDefined(event_ent) && category_alias_name == "thrt") {
     qualifier = event_ent get_landmark_qualifier(alias);
 
-    if(isDefined(qualifier)) {
+    if(isDefined(qualifier))
       alias = alias + (qualifier + "_");
-    }
   }
 
   variant_num = 0;
@@ -760,40 +715,35 @@ dds_get_alias_from_event(talker, category_alias_name, event_ent) {
       variant_num = random(variant_count_array);
       temp_alias = alias;
 
-      if(variant_num < 10) {
+      if(variant_num < 10)
         temp_alias = temp_alias + "0";
-      }
 
       temp_alias = temp_alias + variant_num;
 
-      if(!is_phrase_in_history(temp_alias)) {
+      if(!is_phrase_in_history(temp_alias))
         return temp_alias;
-      }
     }
   } else {
     missing_dds = getdvarintdefault("dds_usingDebug", 0);
 
-    if(isDefined(missing_dds) && missing_dds == 1) {
+    if(isDefined(missing_dds) && missing_dds == 1)
       println("^5 did not find an alias: '" + alias + "'");
-    }
 
     return undefined;
   }
 
   missing_dds = getdvarintdefault("dds_usingDebug", 0);
 
-  if(isDefined(missing_dds) && missing_dds == 1) {
+  if(isDefined(missing_dds) && missing_dds == 1)
     println("^6all variants for alias: '" + alias + "' are in the phrase history.");
-  }
 
   return undefined;
 }
 
 is_phrase_in_history(phrase) {
   for(i = 0; i < level.dds.history.size; i++) {
-    if(level.dds.history[i] == phrase) {
+    if(level.dds.history[i] == phrase)
       return true;
-    }
   }
 
   return false;
@@ -805,13 +755,11 @@ dds_variant_count_for_alias(alias) {
   for(i = 0; i < level.dds.variant_limit; i++) {
     prefix = "";
 
-    if(i < 10) {
+    if(i < 10)
       prefix = "0";
-    }
 
-    if(soundexists(alias + prefix + i)) {
+    if(soundexists(alias + prefix + i))
       variant_count_array[variant_count_array.size] = i;
-    }
   }
 
   return variant_count_array;
@@ -836,21 +784,18 @@ get_landmark_qualifier(alias) {
     lm_script_area_origin = self.node.origin;
   }
 
-  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin)) {
+  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin))
     return undefined;
-  }
 
-  if(distancesquared(self.origin, lm_script_area_origin) < 160000 && soundexists(alias + lm_script_area + "_00")) {
+  if(distancesquared(self.origin, lm_script_area_origin) < 160000 && soundexists(alias + lm_script_area + "_00"))
     return lm_script_area;
-  }
 
   return undefined;
 }
 
 get_event_override(alias) {
-  if(isDefined(level.dds.event_override_name) && randomfloat(1) >= level.dds.event_override_probability && soundexists(alias + level.dds.event_override_name + "_00")) {
+  if(isDefined(level.dds.event_override_name) && randomfloat(1) >= level.dds.event_override_probability && soundexists(alias + level.dds.event_override_name + "_00"))
     return level.dds.event_override_name;
-  }
 
   return undefined;
 }
@@ -887,7 +832,7 @@ dds_getclock_position(pos) {
     return;
   }
   playerangles = level.player getplayerangles();
-  playerforwardvec = anglesToForward(playerangles);
+  playerforwardvec = anglestoforward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   playerpos = level.player getorigin();
   playertobanzaivec = pos - playerpos;
@@ -897,9 +842,8 @@ dds_getclock_position(pos) {
   crossplayerenemy = vectorcross(playerunitforwardvec, playertobanzaiunitvec);
   dir = vectordot(crossplayerenemy, anglestoup(playerangles));
 
-  if(dir < 0) {
+  if(dir < 0)
     anglefromcenter = anglefromcenter * -1;
-  }
 
   a = anglefromcenter + 180;
   hour = 6;
@@ -911,9 +855,8 @@ dds_getclock_position(pos) {
 
     hour = hour - 1;
 
-    if(hour < 1) {
+    if(hour < 1)
       hour = 12;
-    }
   }
 
   return hour;
@@ -927,15 +870,15 @@ dds_threat_notify(isalliesline) {
   playerpos = level.player.origin;
   distance = distancesquared(playerpos, aipos);
 
-  if(distance < 200) {
+  if(distance < 200)
     self dds_notify("thrt_dist10", isalliesline);
-  } else if(distance < 500) {
+  else if(distance < 500)
     self dds_notify("thrt_dist20", isalliesline);
-  } else if(distance < 1000) {
+  else if(distance < 1000)
     self dds_notify("thrt_dist30", isalliesline);
-  } else if(randomint(100) > 50) {
+  else if(randomint(100) > 50)
     self dds_notify("thrt_open", isalliesline);
-  } else {
+  else {
     oclock = dds_getclock_position(aipos);
     self dds_notify("thrt_clock" + oclock, isalliesline);
   }
@@ -1091,13 +1034,11 @@ dds_watch_grenade_flee() {
   while(true) {
     self waittill("grenade_flee", weaponname);
 
-    if(weaponname == "frag_grenade_sp" || weaponname == "frag_grenade_future_sp" || weaponname == "frag_grenade_80s_sp") {
+    if(weaponname == "frag_grenade_sp" || weaponname == "frag_grenade_future_sp" || weaponname == "frag_grenade_80s_sp")
       self dds_notify("react_grenade", self.team == "allies");
-    }
 
-    if(weaponname == "emp_grenade_sp") {
+    if(weaponname == "emp_grenade_sp")
       self dds_notify("react_emp", self.team == "allies");
-    }
   }
 }
 
@@ -1131,19 +1072,17 @@ update_actor_damage(eattacker, damage_mod) {
         return;
     }
 
-    if(self.team == eattacker.team) {
+    if(self.team == eattacker.team)
       self notify("dds_friendly_fire");
-    } else if(self.team == "neutral") {
+    else if(self.team == "neutral")
       self dds_notify("civ_fire", eattacker.team == "allies");
-    }
   }
 }
 
 check_kill_damage(mod, dmg_mod) {
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.dds_dmg_attacker.dds_dmg_attacker)) {
-    if(self == self.dds_dmg_attacker.dds_dmg_attacker) {
+    if(self == self.dds_dmg_attacker.dds_dmg_attacker)
       return "kill_dmg_" + dmg_mod;
-    }
   }
 
   return mod;
@@ -1157,11 +1096,10 @@ dds_notify_mod(isalliesline, category_name) {
     return;
   }
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.team)) {
-    if(isDefined(self.dds_dmg_attacker.team) && (self.dds_dmg_attacker.team == self.team || self.team == "neutral")) {
+    if(isDefined(self.dds_dmg_attacker.team) && (self.dds_dmg_attacker.team == self.team || self.team == "neutral"))
       return;
-    } else if(isDefined(self.dds_dmg_attacker.vteam) && self.dds_dmg_attacker.vteam == self.team) {
+    else if(isDefined(self.dds_dmg_attacker.vteam) && self.dds_dmg_attacker.vteam == self.team)
       return;
-    }
   }
 
   is_bullet_kill = 0;
@@ -1215,9 +1153,8 @@ dds_notify_mod(isalliesline, category_name) {
     is_bullet_kill = 1;
   }
 
-  if(isplayer(self.attacker) && is_bullet_kill) {
+  if(isplayer(self.attacker) && is_bullet_kill)
     self.attacker ent_flag_set("dds_killstreak");
-  }
 }
 
 dds_notify_casualty() {
@@ -1299,13 +1236,12 @@ dds_notify(category_name, isalliesline) {
   assert(isDefined(isalliesline), "isAlliesLine is not defined.");
 
   if(!isalliesline) {
-    if(level.dds.active_events_axis[category_name].size > level.dds.max_active_events) {
+    if(level.dds.active_events_axis[category_name].size > level.dds.max_active_events)
       return;
-    }
   } else if(level.dds.active_events[category_name].size > level.dds.max_active_events) {
     return;
   }
-  event = spawnStruct();
+  event = spawnstruct();
   event.category_name = category_name;
   event.ent = self;
   event.ent_origin = self.origin;
@@ -1377,9 +1313,8 @@ dds_notify_response(event, talker, phrase, rspns_cat_name) {
 
 find_dds_category_by_name(category_array, category_name) {
   for(i = 0; i < category_array.size; i++) {
-    if(category_array[i].name == category_name) {
+    if(category_array[i].name == category_name)
       return category_array[i];
-    }
   }
 
   return undefined;
@@ -1412,9 +1347,8 @@ dds_sort_ent_dist(eventarray) {
 
   new_array = [];
 
-  for(i = 0; i < index_array.size; i++) {
+  for(i = 0; i < index_array.size; i++)
     new_array[i] = eventarray[index_array[i]];
-  }
 
   return new_array;
 }
@@ -1433,9 +1367,8 @@ debug_destroy_hud_elem() {
       for(i = 0; i < level.dds.debug.hud_categories.size; i++) {
         if(isDefined(level.dds.debug.hud_categories) && isDefined(level.dds.debug.hud_categories[i]) && isDefined(level.dds.debug.hud_stats) && isDefined(level.dds.debug.hud_stats[i])) {
           for(j = 0; j < level.dds.debug.hud_stats[i].size; j++) {
-            if(isDefined(level.dds.debug.hud_stats) && isDefined(level.dds.debug.hud_stats[i][j])) {
+            if(isDefined(level.dds.debug.hud_stats) && isDefined(level.dds.debug.hud_stats[i][j]))
               level.dds.debug.hud_stats[i][j] destroy();
-            }
           }
 
           level.dds.debug.hud_categories[i] destroy();
@@ -1447,9 +1380,8 @@ debug_destroy_hud_elem() {
 
     if(isDefined(level.dds.debug_hud_columns)) {
       for(i = 0; i < level.dds.debug_hud_columns.size; i++) {
-        if(isDefined(level.dds.debug_hud_columns) && isDefined(level.dds.debug_hud_columns[i])) {
+        if(isDefined(level.dds.debug_hud_columns) && isDefined(level.dds.debug_hud_columns[i]))
           level.dds.debug_hud_columns[i] destroy();
-        }
       }
 
       level.dds.debug_hud_columns = undefined;
@@ -1474,13 +1406,13 @@ debug_destroy_hud_elem() {
 }
 
 dds_debug() {
-  level.dds.debug = spawnStruct();
+  level.dds.debug = spawnstruct();
   level.dds.debug.active_event_stats = [];
   level.dds.debug.active_event_stats_axis = [];
   level.dds.debug.stat_types = array("A. Events: ", "T. Notifies: ", "Processed: ", "Time1: ", "Cat. T.O.: ", "Backoff T.O.: ");
 
   for(i = 0; i < level.dds.categories.size; i++) {
-    level.dds.debug.active_event_stats[level.dds.categories[i].name] = spawnStruct();
+    level.dds.debug.active_event_stats[level.dds.categories[i].name] = spawnstruct();
     level.dds.debug.active_event_stats[level.dds.categories[i].name].cur_active_events = 0;
     level.dds.debug.active_event_stats[level.dds.categories[i].name].total_notify_count = 0;
     level.dds.debug.active_event_stats[level.dds.categories[i].name].processed_count = 0;
@@ -1492,7 +1424,7 @@ dds_debug() {
   }
 
   for(i = 0; i < level.dds.categories_axis.size; i++) {
-    level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name] = spawnStruct();
+    level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name] = spawnstruct();
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].cur_active_events = 0;
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].total_notify_count = 0;
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].processed_count = 0;
@@ -1510,13 +1442,11 @@ dds_debug() {
       continue;
     }
 
-    for(i = 0; i < level.dds.categories.size; i++) {
+    for(i = 0; i < level.dds.categories.size; i++)
       level.dds.debug.active_event_stats[level.dds.categories[i].name].cur_active_events = level.dds.active_events[level.dds.categories[i].name].size;
-    }
 
-    for(i = 0; i < level.dds.categories_axis.size; i++) {
+    for(i = 0; i < level.dds.categories_axis.size; i++)
       level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].cur_active_events = level.dds.active_events_axis[level.dds.categories_axis[i].name].size;
-    }
 
     debug_hud_update();
     wait(level.dds.heartbeat);
@@ -1526,21 +1456,17 @@ dds_debug() {
 
 debug_update_timeouts(category_name, timeout, last_timeout, isallies) {
   if(isallies) {
-    if(level.dds.debug.active_event_stats[category_name].category_timeout > 0) {
+    if(level.dds.debug.active_event_stats[category_name].category_timeout > 0)
       level.dds.debug.active_event_stats[category_name].category_timeout = level.dds.debug.active_event_stats[category_name].category_timeout - level.dds.heartbeat;
-    }
 
-    if(level.dds.debug.active_event_stats[category_name].backoff_timeout > 0) {
+    if(level.dds.debug.active_event_stats[category_name].backoff_timeout > 0)
       level.dds.debug.active_event_stats[category_name].backoff_timeout = level.dds.debug.active_event_stats[category_name].backoff_timeout - level.dds.heartbeat;
-    }
   } else {
-    if(level.dds.debug.active_event_stats_axis[category_name].category_timeout > 0) {
+    if(level.dds.debug.active_event_stats_axis[category_name].category_timeout > 0)
       level.dds.debug.active_event_stats_axis[category_name].category_timeout = level.dds.debug.active_event_stats_axis[category_name].category_timeout - level.dds.heartbeat;
-    }
 
-    if(level.dds.debug.active_event_stats_axis[category_name].backoff_timeout > 0) {
+    if(level.dds.debug.active_event_stats_axis[category_name].backoff_timeout > 0)
       level.dds.debug.active_event_stats_axis[category_name].backoff_timeout = level.dds.debug.active_event_stats_axis[category_name].backoff_timeout - level.dds.heartbeat;
-    }
   }
 
 }
@@ -1586,14 +1512,12 @@ debug_hud_update() {
       }
     }
 
-    if(!isDefined(level.dds.debug.hud_stats)) {
+    if(!isDefined(level.dds.debug.hud_stats))
       level.dds.debug.hud_stats = [];
-    }
 
     for(i = 0; i < level.dds.categories.size; i++) {
-      if(!isDefined(level.dds.debug.hud_stats[i])) {
+      if(!isDefined(level.dds.debug.hud_stats[i]))
         level.dds.debug.hud_stats[i] = [];
-      }
 
       for(j = 0; j < level.dds.debug.stat_types.size; j++) {
         if(!isDefined(level.dds.debug.hud_stats[i][j])) {
@@ -1660,16 +1584,15 @@ debug_sphere_draw_type(event_type, category_name, event, speaker) {
   if(!isDefined(event)) {
     return;
   }
-  draw_info = spawnStruct();
+  draw_info = spawnstruct();
   draw_info.event_type = event_type;
   draw_info.ent_number = event.ent_number;
   draw_info.ent_origin = event.ent_origin;
   draw_info.category_name = category_name;
   draw_info.color = level.color_debug["white"];
 
-  if(isDefined(event.category_response_name) && event.category_response_name == category_name) {
+  if(isDefined(event.category_response_name) && event.category_response_name == category_name)
     draw_info.ent_origin = event.talker_origin;
-  }
 
   switch (event_type) {
     case "notify":
@@ -1701,11 +1624,10 @@ debug_sphere_draw_type(event_type, category_name, event, speaker) {
 }
 
 debug_draw_info() {
-  if(isDefined(self.ent_number)) {
+  if(isDefined(self.ent_number))
     ent_print_text = "ent triggered: " + self.ent_number;
-  } else {
+  else
     ent_print_text = "ent triggered: unknown";
-  }
 
   display_ent_origin = self.ent_origin;
 
@@ -1719,9 +1641,8 @@ debug_draw_info() {
   if(isDefined(draw_3d_sphere) && draw_3d_sphere == 1) {
     debugstar(display_ent_origin + vectorscale((0, 0, 1), 70.0), int(100), self.color);
 
-    if(isDefined(self.speaker_ent_number)) {
+    if(isDefined(self.speaker_ent_number))
       line(self.ent_origin + vectorscale((0, 0, 1), 70.0), self.speaker_ent_origin + vectorscale((0, 0, 1), 70.0), self.color, 1, 1, int(100));
-    }
   }
 
   draw_3d_text = getdvarintdefault("dds_drawDebugText", 0);
@@ -1765,9 +1686,8 @@ debug_print_dialogue(soundalias) {
   size = soundalias.size;
   time = gettime() + 3000;
 
-  if(size > 25) {
+  if(size > 25)
     time = gettime() + size * 0.1 * 1000;
-  }
 
   while(gettime() < time && isalive(self)) {
     print3d(self.origin + vectorscale((0, 0, 1), 72.0), soundalias);

@@ -47,7 +47,7 @@ cornered_rappel_pre_load() {
   precachemodel("cnd_garden_glass_entry_ally");
   precachemodel("cnd_garden_glass_entry_baker");
   precachemodel("cnd_garden_glass_entry_player");
-  maps\_utility::add_hint_string("rappel_down", &"CORNERED_RAPPEL_DOWN", ::player_combat_rappel_is_jumping);
+  maps\_utility::add_hint_string("rappel_down", & "CORNERED_RAPPEL_DOWN", ::player_combat_rappel_is_jumping);
   level.copymachine = getent("photocopier", "script_noteworthy");
   level.grenade_roll_grenade = getent("grenade_roll_grenade", "targetname");
   level.grenade_roll_grenade hide();
@@ -117,19 +117,17 @@ player_combat_rappel_begin() {
   level.combat_rappel_rope_coil_player maps\_utility::glow();
   var_0 = getent("player_rappel_trigger", "targetname");
 
-  if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
+  if(level.player common_scripts\utility::is_player_gamepad_enabled())
     var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
-  } else {
+  else
     var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
-  }
 
   var_1 = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_0, level.player_start_rappel_struct, cos(60), 0, 1);
   common_scripts\utility::flag_set("c_rappel_player_on_rope");
 
-  if(isDefined(level.player.has_binoculars) && level.player.has_binoculars == 1) {
+  if(isDefined(level.player.has_binoculars) && level.player.has_binoculars == 1)
     level.player maps\cornered_binoculars::take_binoculars();
-  }
 
   level.combat_rappel_rope_coil_player maps\_utility::stopglow();
   level.cnd_rappel_railing_obj maps\_utility::stopglow();
@@ -236,13 +234,11 @@ lerp_player_view_jump(var_0) {
 }
 
 player_combat_rappel() {
-  if(common_scripts\utility::flag("c_rappel_player_pressed_jump")) {
+  if(common_scripts\utility::flag("c_rappel_player_pressed_jump"))
     common_scripts\utility::flag_clear("c_rappel_player_pressed_jump");
-  }
 
-  if(common_scripts\utility::flag("c_rappel_jumpdown_allowed")) {
+  if(common_scripts\utility::flag("c_rappel_jumpdown_allowed"))
     common_scripts\utility::flag_clear("c_rappel_jumpdown_allowed");
-  }
 
   common_scripts\utility::flag_clear("player_allow_rappel_down");
   level.player thread maps\cornered_code::unlimited_ammo();
@@ -293,9 +289,8 @@ player_combat_rappel() {
 handle_rope_hitting_enemies() {
   level endon("c_rappel_final_jump_starting");
 
-  while(!isDefined(level.cnd_rappel_player_rope)) {
+  while(!isDefined(level.cnd_rappel_player_rope))
     common_scripts\utility::waitframe();
-  }
 
   for(;;) {
     var_0 = level.cnd_rappel_player_rope gettagorigin("joint9");
@@ -306,24 +301,21 @@ handle_rope_hitting_enemies() {
     var_5 = var_4["entity"];
     var_6 = isDefined(var_5) && isDefined(var_5.animname) && (var_5.animname == "rorke" || var_5.animname == "baker");
 
-    if(isDefined(var_5) && isai(var_5) && isalive(var_5) && !var_6 && !isDefined(var_5.balcony_death)) {
+    if(isDefined(var_5) && isai(var_5) && isalive(var_5) && !var_6 && !isDefined(var_5.balcony_death))
       var_5 kill();
-    }
 
     wait 0.1;
   }
 }
 
 need_to_hold() {
-  if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled()) {
+  if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled())
     return 1;
-  }
 
   var_0 = getkeybinding("+gostand");
 
-  if(var_0["key1"] == &"KEY_MWHEELUP" || var_0["key2"] == &"KEY_MWHEELUP" || var_0["key1"] == &"KEY_MWHEELDOWN" || var_0["key2"] == &"KEY_MWHEELDOWN") {
+  if(var_0["key1"] == & "KEY_MWHEELUP" || var_0["key2"] == & "KEY_MWHEELUP" || var_0["key1"] == & "KEY_MWHEELDOWN" || var_0["key2"] == & "KEY_MWHEELDOWN")
     return 0;
-  }
 
   return 1;
 }
@@ -348,9 +340,8 @@ player_wait_for_jump_button() {
       if(var_1 && var_0 < 0.25) {
         continue;
       }
-      if(!common_scripts\utility::flag("player_jumping")) {
+      if(!common_scripts\utility::flag("player_jumping"))
         common_scripts\utility::flag_set("c_rappel_player_pressed_jump");
-      }
     }
   }
 }
@@ -380,9 +371,8 @@ combat_rappel_garden_entry_should_shift_allies(var_0) {
 combat_rappel_garden_entry_allies(var_0) {
   var_1 = "rappel_combat_end";
 
-  if(combat_rappel_garden_entry_should_shift_allies(var_0)) {
+  if(combat_rappel_garden_entry_should_shift_allies(var_0))
     var_1 = "rappel_combat_end_shift";
-  }
 
   foreach(var_3 in level.allies) {
     var_3 maps\cornered_code_rappel_allies::ally_rappel_stop_aiming();
@@ -396,14 +386,12 @@ combat_rappel_garden_entry_allies(var_0) {
 combat_rappel_garden_entry_ropes(var_0) {
   var_1 = "cornered_combat_rappel_garden_entry_rope_";
 
-  if(combat_rappel_garden_entry_should_shift_allies(var_0)) {
+  if(combat_rappel_garden_entry_should_shift_allies(var_0))
     var_1 = "cornered_combat_rappel_garden_entry_shift_rope_";
-  }
 
   foreach(var_3 in level.allies) {
-    if(!isDefined(var_3.cnd_rappel_tele_rope)) {
+    if(!isDefined(var_3.cnd_rappel_tele_rope))
       var_3.cnd_rappel_tele_rope = maps\_utility::spawn_anim_model("rope");
-    }
 
     var_4 = var_1 + var_3.animname;
     var_3.cnd_rappel_tele_rope.animname = "rope";
@@ -415,9 +403,8 @@ get_tree() {
   var_0 = common_scripts\utility::getstruct("garden_baker", "targetname");
   var_1 = getEntArray("garden_entry_tree", "targetname");
 
-  if(var_1.size == 1) {
+  if(var_1.size == 1)
     return var_1[0];
-  }
 
   var_2 = undefined;
   var_3 = -1;
@@ -438,9 +425,8 @@ get_bush() {
   var_0 = common_scripts\utility::getstruct("garden_baker", "targetname");
   var_1 = getEntArray("garden_entry_bush", "targetname");
 
-  if(var_1.size == 1) {
+  if(var_1.size == 1)
     return var_1[0];
-  }
 
   var_2 = undefined;
   var_3 = -1;
@@ -493,11 +479,10 @@ combat_rappel_garden_entry_grenades() {
     }
     var_6 = undefined;
 
-    if(var_5 == "grenade_explode1") {
+    if(var_5 == "grenade_explode1")
       var_6 = var_1;
-    } else if(var_5 == "grenade_explode2") {
+    else if(var_5 == "grenade_explode2")
       var_6 = var_2;
-    }
 
     if(!isDefined(var_6)) {
       continue;
@@ -567,9 +552,8 @@ combat_rappel_garden_entry_enemy_death() {
 }
 
 combat_rappel_garden_entry_setup_jumpoints() {
-  if(!isDefined(level.player_start_rappel_struct)) {
+  if(!isDefined(level.player_start_rappel_struct))
     level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
-  }
 
   var_0 = level.player_start_rappel_struct;
   level.jump_anims = [];
@@ -708,13 +692,11 @@ combat_rappel_garden_entry_slowmo() {
   var_0 = maps\_utility::get_living_ai_array("garden_entry_fodder", "script_noteworthy");
   var_1 = maps\_utility::get_living_ai_array("garden_entry_temp_fodder", "script_noteworthy");
 
-  foreach(var_3 in var_0) {
-    var_3.health = 1;
-  }
+  foreach(var_3 in var_0)
+  var_3.health = 1;
 
-  foreach(var_3 in var_1) {
-    var_3.health = 1;
-  }
+  foreach(var_3 in var_1)
+  var_3.health = 1;
 
   wait 2.0;
   level.player lerpviewangleclamp(0.2, 0, 0, 0, 0, 0, 0);
@@ -725,17 +707,15 @@ combat_rappel_garden_entry_slowmo() {
   level.player lerpviewangleclamp(0, 0, 0, 55, 55, 55, 10);
 
   foreach(var_3 in var_0) {
-    if(isalive(var_3)) {
+    if(isalive(var_3))
       var_3 kill();
-    }
   }
 
   common_scripts\utility::flag_wait("garden_player_in_garden");
 
   foreach(var_3 in var_1) {
-    if(isalive(var_3)) {
+    if(isalive(var_3))
       var_3.health = 150;
-    }
   }
 }
 
@@ -759,9 +739,8 @@ combat_rappel_garden_entry_set_small_rotate_jump() {
 }
 
 combat_rappel_garden_entry() {
-  if(!isDefined(level.player_start_rappel_struct)) {
+  if(!isDefined(level.player_start_rappel_struct))
     level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
-  }
 
   thread combat_rappel_garden_entry_setup_weapon();
   level.player enableinvulnerability();
@@ -788,9 +767,8 @@ combat_rappel_garden_entry() {
   level.rappel_player_legs delete();
   level.rappel_player_arms delete();
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 delete();
-  }
 
   setsaveddvar("cg_hudGrenadeIconOffset", var_2);
   level.player enableweapons();
@@ -831,9 +809,8 @@ combat_rappel_garden_entry_player(var_0, var_1) {
     common_scripts\utility::waitframe();
   }
 
-  if(!isDefined(level.start_point) || level.start_point != "garden") {
+  if(!isDefined(level.start_point) || level.start_point != "garden")
     combat_rappel_garden_entry_double_jump(var_0);
-  }
 
   var_7 = 0.2;
   combat_rappel_garden_entry_blend_to_position(var_7, var_0);
@@ -902,9 +879,8 @@ combat_rappel_garden_entry_blend_to_position(var_0, var_1) {
   thread maps\cornered_code::lerp_entity_to_position_accurate(level.rappel_player_legs, var_2, var_3, var_0);
   level.player playerlinktoblend(level.rappel_player_arms, "tag_player", var_0);
 
-  foreach(var_7 in level.allies) {
-    var_7 maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
-  }
+  foreach(var_7 in level.allies)
+  var_7 maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
 
   wait(var_0);
   level.rappel_player_legs linkto(var_1, "J_prop_1", (0, 0, 0), (0, 0, 0));
@@ -933,13 +909,11 @@ player_clear_groundref() {
 }
 
 allies_to_rappel() {
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isDefined(self.magic_bullet_shield))
     maps\_utility::magic_bullet_shield();
-  }
 
-  if(isDefined(level.combat_rappel_startpoint)) {
+  if(isDefined(level.combat_rappel_startpoint))
     level.player_start_rappel_struct thread maps\_anim::anim_loop_solo(self, "cornered_junction_c4_idle_" + self.animname, "stop_loop_" + self.animname);
-  }
 
   common_scripts\utility::flag_wait("c_rappel_player_on_rope");
   thread allies_rappel_anims();
@@ -1115,19 +1089,16 @@ enemy_drones_pt1_lower_runners() {
 }
 
 enemy_drone_anim(var_0, var_1, var_2) {
-  if(isDefined(var_0) && var_0 != 0) {
+  if(isDefined(var_0) && var_0 != 0)
     wait(var_0);
-  }
 
-  if(isDefined(var_2) && var_2 == 1) {
+  if(isDefined(var_2) && var_2 == 1)
     thread maps\_anim::anim_generic_loop(self, self.script_animation);
-  } else {
+  else
     thread maps\_anim::anim_generic(self, self.script_animation);
-  }
 
-  if(isDefined(var_1) && var_1 != 0) {
+  if(isDefined(var_1) && var_1 != 0)
     wait(var_1);
-  }
 
   self delete();
 }
@@ -1156,17 +1127,15 @@ enemy_pt1_setup(var_0) {
   var_3 = sortbydistance(var_2, self.origin);
   var_4 = randomint(2);
 
-  if(var_4 == 1) {
+  if(var_4 == 1)
     var_5 = var_3[1];
-  } else {
+  else
     var_5 = var_3[0];
-  }
 
   if(self.script_noteworthy == "p1_lower") {
     foreach(var_7 in var_2) {
-      if(isDefined(var_7.script_noteworthy) && var_7.script_noteworthy == "p1_lower_center_node") {
+      if(isDefined(var_7.script_noteworthy) && var_7.script_noteworthy == "p1_lower_center_node")
         var_5 = var_7;
-      }
     }
   }
 
@@ -1188,26 +1157,22 @@ play_random_window_lean_anim(var_0) {
   self endon("enemy_above_shot");
   var_1 = randomintrange(1, 8);
 
-  if(distance(self.origin, level.player.origin) <= 256) {
+  if(distance(self.origin, level.player.origin) <= 256)
     var_1 = 2;
-  }
 
-  if(self istouching(level.cr_rorke_volume) && var_1 == 3) {
+  if(self istouching(level.cr_rorke_volume) && var_1 == 3)
     var_1 = 4;
-  }
 
-  if(self istouching(level.cr_baker_volume) && var_1 == 4) {
+  if(self istouching(level.cr_baker_volume) && var_1 == 4)
     var_1 = 3;
-  }
 
   var_0 maps\_anim::anim_single_solo(self, "enemy_above_" + var_1 + "_start");
   thread maps\_anim::anim_loop_solo(self, "enemy_above_" + var_1 + "_loop", "stop_loop");
 
-  if(var_1 == 5 || var_1 == 6 || var_1 == 7) {
+  if(var_1 == 5 || var_1 == 6 || var_1 == 7)
     var_2 = randomfloatrange(1.0, 2.25);
-  } else {
+  else
     var_2 = randomintrange(5, 10);
-  }
 
   wait(var_2);
   self notify("stop_loop");
@@ -1218,9 +1183,8 @@ eliminate_used_nodes(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(!isDefined(var_3.chosen) || !var_3.chosen) {
+    if(!isDefined(var_3.chosen) || !var_3.chosen)
       var_1[var_1.size] = var_3;
-    }
   }
 
   return var_1;
@@ -1316,9 +1280,8 @@ copymachine_break_glass(var_0) {
 copymachine_cleanup() {
   common_scripts\utility::flag_wait("rappel_finished");
 
-  if(isDefined(level.copymachine)) {
+  if(isDefined(level.copymachine))
     level.copymachine delete();
-  }
 }
 
 combat_rappel_enemies_pt2() {
@@ -1384,9 +1347,8 @@ kill_pt3_enemies_on_player_jump() {
   if(level.all_rappel_pt3_enemies.size > 0) {
     foreach(var_1 in level.all_rappel_pt3_enemies) {
       if(isalive(var_1)) {
-        if(isDefined(var_1.magic_bullet_shield) && var_1.magic_bullet_shield) {
+        if(isDefined(var_1.magic_bullet_shield) && var_1.magic_bullet_shield)
           var_1 maps\_utility::stop_magic_bullet_shield();
-        }
 
         var_1 kill();
       }
@@ -1405,9 +1367,8 @@ player_kills_all_pt3_enemies() {
 monitor_deaths_on_dynamic_array(var_0, var_1, var_2, var_3) {
   self endon("timeout");
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 10;
-  }
 
   var_4 = 0;
   thread monitor_timeout(var_3, var_1);
@@ -1429,9 +1390,8 @@ monitor_timeout(var_0, var_1) {
   wait(var_0);
   self notify("timeout");
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     common_scripts\utility::flag_set(var_1);
-  }
 }
 
 break_enemy_windows() {
@@ -1445,9 +1405,8 @@ break_window(var_0) {
   for(var_1 = 1; var_1 <= 8; var_1++) {
     var_2 = common_scripts\utility::getstruct(var_0 + "_glass_damage_struct_" + var_1, "script_noteworthy");
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       glassradiusdamage(var_2.origin, 96, 50, 50);
-    }
   }
 }
 
@@ -1455,13 +1414,13 @@ send_to_death_volume() {
   self endon("death");
   var_0 = undefined;
 
-  if(isalive(self) && self.script_noteworthy == "p1_upper") {
+  if(isalive(self) && self.script_noteworthy == "p1_upper")
     var_0 = getent("p1_upper_volume", "targetname");
-  } else if(isalive(self) && self.script_noteworthy == "copymachine_ai" || isalive(self) && self.script_noteworthy == "p1_junction") {
+  else if(isalive(self) && self.script_noteworthy == "copymachine_ai" || isalive(self) && self.script_noteworthy == "p1_junction")
     var_0 = getent("p1_junction_volume", "targetname");
-  } else if(isalive(self) && self.script_noteworthy == "p1_lower") {
+  else if(isalive(self) && self.script_noteworthy == "p1_lower")
     var_0 = getent("p1_lower_volume", "targetname");
-  } else if(isalive(self) && self.script_noteworthy == "p1_ahead") {
+  else if(isalive(self) && self.script_noteworthy == "p1_ahead") {
     var_1 = getEntArray("p1_ahead_volume", "targetname");
     var_1 = sortbydistance(var_1, self.origin);
     var_0 = var_1[0];
@@ -1474,9 +1433,8 @@ send_to_death_volume() {
   }
 
   if(isalive(self)) {
-    if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+    if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
       maps\_utility::stop_magic_bullet_shield();
-    }
 
     self kill();
   }

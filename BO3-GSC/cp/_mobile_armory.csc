@@ -8,11 +8,11 @@
 #namespace _mobile_armory;
 
 function autoexec __init__sytem__() {
-  system::register("cp_mobile_armory", &__init__, &__main__, undefined);
+  system::register("cp_mobile_armory", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "mobile_armory_cac", 1, 4, "int", &function_dd709a6d, 0, 0);
+  clientfield::register("toplayer", "mobile_armory_cac", 1, 4, "int", & function_dd709a6d, 0, 0);
 }
 
 function __main__() {}
@@ -21,10 +21,10 @@ function function_dd709a6d(localclientnum, oldval, newval, bnewent, binitialsnap
   if(isspectating(localclientnum, 0)) {
     return;
   }
-  if(!isDefined(self.var_c8b2875a)) {
+  if(!isdefined(self.var_c8b2875a)) {
     self.var_c8b2875a = createluimenu(localclientnum, "ChooseClass_InGame");
   }
-  if(isDefined(self.var_c8b2875a)) {
+  if(isdefined(self.var_c8b2875a)) {
     if(newval) {
       setluimenudata(localclientnum, self.var_c8b2875a, "isInMobileArmory", 1);
       var_5ebe0017 = newval >> 1;

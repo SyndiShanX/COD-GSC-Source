@@ -11,17 +11,17 @@ function main() {
     setdvar("mgTurret", "off");
   }
   level.magic_distance = 24;
-  turretinfos = getEntArray("turretInfo", "targetname");
-  for(index = 0; index < turretinfos.size; index++) {
+  turretinfos = getentarray("turretInfo", "targetname");
+  for (index = 0; index < turretinfos.size; index++) {
     turretinfos[index] delete();
   }
 }
 
 function set_difficulty(difficulty) {
   init_turret_difficulty_settings();
-  turrets = getEntArray("misc_turret", "classname");
-  for(index = 0; index < turrets.size; index++) {
-    if(isDefined(turrets[index].script_skilloverride)) {
+  turrets = getentarray("misc_turret", "classname");
+  for (index = 0; index < turrets.size; index++) {
+    if(isdefined(turrets[index].script_skilloverride)) {
       switch (turrets[index].script_skilloverride) {
         case "easy": {
           difficulty = "easy";
@@ -82,16 +82,16 @@ function turret_set_difficulty(turret, difficulty) {
 function turret_suppression_fire(targets) {
   self endon("death");
   self endon("stop_suppression_fire");
-  if(!isDefined(self.suppresionfire)) {
+  if(!isdefined(self.suppresionfire)) {
     self.suppresionfire = 1;
   }
-  for(;;) {
-    while(self.suppresionfire) {
+  for (;;) {
+    while (self.suppresionfire) {
       self settargetentity(targets[randomint(targets.size)]);
       wait(2 + randomfloat(2));
     }
     self cleartargetentity();
-    while(!self.suppresionfire) {
+    while (!self.suppresionfire) {
       wait(1);
     }
   }
@@ -116,29 +116,29 @@ function burst_fire(turret, manual_target) {
   turret endon("death");
   turret endon("stopfiring");
   self endon("stop_using_built_in_burst_fire");
-  if(isDefined(turret.script_delay_min)) {
+  if(isdefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
   } else {
     turret_delay = burst_fire_settings("delay");
   }
-  if(isDefined(turret.script_delay_max)) {
+  if(isdefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
   } else {
     turret_delay_range = burst_fire_settings("delay_range");
   }
-  if(isDefined(turret.script_burst_min)) {
+  if(isdefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
   } else {
     turret_burst = burst_fire_settings("burst");
   }
-  if(isDefined(turret.script_burst_max)) {
+  if(isdefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
   } else {
     turret_burst_range = burst_fire_settings("burst_range");
   }
-  while(true) {
+  while (true) {
     turret startfiring();
-    if(isDefined(manual_target)) {
+    if(isdefined(manual_target)) {
       turret thread random_spread(manual_target);
     }
     turret do_shoot();
@@ -155,25 +155,25 @@ function burst_fire_unmanned() {
   self endon("death");
   self endon("remote_start");
   level endon("game_ended");
-  if(isDefined(self.controlled) && self.controlled) {
+  if(isdefined(self.controlled) && self.controlled) {
     return;
   }
-  if(isDefined(self.script_delay_min)) {
+  if(isdefined(self.script_delay_min)) {
     turret_delay = self.script_delay_min;
   } else {
     turret_delay = burst_fire_settings("delay");
   }
-  if(isDefined(self.script_delay_max)) {
+  if(isdefined(self.script_delay_max)) {
     turret_delay_range = self.script_delay_max - turret_delay;
   } else {
     turret_delay_range = burst_fire_settings("delay_range");
   }
-  if(isDefined(self.script_burst_min)) {
+  if(isdefined(self.script_burst_min)) {
     turret_burst = self.script_burst_min;
   } else {
     turret_burst = burst_fire_settings("burst");
   }
-  if(isDefined(self.script_burst_max)) {
+  if(isdefined(self.script_burst_max)) {
     turret_burst_range = self.script_burst_max - turret_burst;
   } else {
     turret_burst_range = burst_fire_settings("burst_range");
@@ -181,8 +181,8 @@ function burst_fire_unmanned() {
   pauseuntiltime = gettime();
   turretstate = "start";
   self.script_shooting = 0;
-  for(;;) {
-    if(isDefined(self.manual_targets)) {
+  for (;;) {
+    if(isdefined(self.manual_targets)) {
       self cleartargetentity();
       self settargetentity(self.manual_targets[randomint(self.manual_targets.size)]);
     }
@@ -190,7 +190,7 @@ function burst_fire_unmanned() {
     if(self isfiringturret() && duration <= 0) {
       if(turretstate != "fire") {
         turretstate = "fire";
-        self playSound("mpl_turret_alert");
+        self playsound("mpl_turret_alert");
         self thread do_shoot();
         self.script_shooting = 1;
       }
@@ -213,7 +213,7 @@ function burst_fire_unmanned() {
 function do_shoot() {
   self endon("death");
   self endon("turretstatechange");
-  for(;;) {
+  for (;;) {
     self shootturret();
     wait(0.112);
   }
@@ -225,7 +225,7 @@ function turret_timer(duration) {
   }
   self endon("turretstatechange");
   wait(duration);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("turretstatechange");
   }
 }
@@ -237,7 +237,7 @@ function random_spread(ent) {
   self endon("stopfiring");
   self settargetentity(ent);
   self.manual_target = ent;
-  while(true) {
+  while (true) {
     if(isplayer(ent)) {
       ent.origin = self.manual_target getorigin();
     } else {

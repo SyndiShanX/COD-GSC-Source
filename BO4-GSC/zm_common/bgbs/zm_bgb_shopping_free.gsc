@@ -9,10 +9,11 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_shopping_free;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_shopping_free", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_shopping_free", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -24,7 +25,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
 }
 
 disable() {}

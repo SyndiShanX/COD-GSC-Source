@@ -37,43 +37,37 @@ init() {
   level.prestigenumber = 5;
   level.defaultclass = "CLASS_ASSAULT";
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowfrag")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowfrag"))
     level.weapons["frag"] = "frag_grenade_mp";
-  } else {
+  else
     level.weapons["frag"] = "";
-  }
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsmoke")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsmoke"))
     level.weapons["smoke"] = "smoke_grenade_mp";
-  } else {
+  else
     level.weapons["smoke"] = "";
-  }
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowflash")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowflash"))
     level.weapons["flash"] = "flash_grenade_mp";
-  } else {
+  else
     level.weapons["flash"] = "";
-  }
 
   level.weapons["concussion"] = "concussion_grenade_mp";
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsatchel")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsatchel"))
     level.weapons["satchel_charge"] = "satchel_charge_mp";
-  } else {
+  else
     level.weapons["satchel_charge"] = "";
-  }
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowbetty")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowbetty"))
     level.weapons["betty"] = "mine_bouncing_betty_mp";
-  } else {
+  else
     level.weapons["betty"] = "";
-  }
 
-  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowrpgs")) {
+  if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowrpgs"))
     level.weapons["rpg"] = "rpg_mp";
-  } else {
+  else
     level.weapons["rpg"] = "";
-  }
 
   create_class_exclusion_list();
   cac_init();
@@ -109,9 +103,8 @@ init() {
           continue;
         }
 
-        for(k = 0; k < attachment_tokens.size; k++) {
+        for(k = 0; k < attachment_tokens.size; k++)
           weapon_class_register(weapon + "_" + attachment_tokens[k] + "_mp", weapon_type);
-        }
       }
     }
   }
@@ -131,22 +124,19 @@ create_class_exclusion_list() {
 
   level.attachmentexclusions = [];
 
-  for(currentdvar = 0; getdvar(#"_id_7F6F03E6" + currentdvar) != ""; currentdvar++) {
+  for(currentdvar = 0; getdvar(#"_id_7F6F03E6" + currentdvar) != ""; currentdvar++)
     level.attachmentexclusions[currentdvar] = getdvar(#"_id_7F6F03E6" + currentdvar);
-  }
 }
 
 is_item_excluded(itemindex) {
-  if(!level.onlinegame) {
+  if(!level.onlinegame)
     return false;
-  }
 
   numexclusions = level.itemexclusions.size;
 
   for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
-    if(itemindex == level.itemexclusions[exclusionindex]) {
+    if(itemindex == level.itemexclusions[exclusionindex])
       return true;
-    }
   }
 
   return false;
@@ -156,27 +146,24 @@ is_attachment_excluded(attachment) {
   numexclusions = level.attachmentexclusions.size;
 
   for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
-    if(attachment == level.attachmentexclusions[exclusionindex]) {
+    if(attachment == level.attachmentexclusions[exclusionindex])
       return true;
-    }
   }
 
   return false;
 }
 
 set_statstable_id() {
-  if(!isDefined(level.statstableid)) {
+  if(!isDefined(level.statstableid))
     level.statstableid = tablelookupfindcoreasset("mp/statsTable.csv");
-  }
 }
 
 get_item_count(itemreference) {
   set_statstable_id();
   itemcount = int(tablelookup(level.statstableid, 4, itemreference, 5));
 
-  if(itemcount < 1) {
+  if(itemcount < 1)
     itemcount = 1;
-  }
 
   return itemcount;
 }
@@ -186,9 +173,8 @@ getdefaultclassslotwithexclusions(classname, slotname) {
   set_statstable_id();
   itemindex = int(tablelookup(level.statstableid, 4, itemreference, 0));
 
-  if(is_item_excluded(itemindex)) {
+  if(is_item_excluded(itemindex))
     itemreference = tablelookup(level.statstableid, 0, 0, 4);
-  }
 
   return itemreference;
 }
@@ -198,19 +184,18 @@ load_default_loadout(class, classnum) {
 }
 
 weapon_class_register(weapon, weapon_type) {
-  if(issubstr("weapon_smg weapon_cqb weapon_assault weapon_lmg weapon_sniper weapon_shotgun weapon_launcher weapon_special", weapon_type)) {
+  if(issubstr("weapon_smg weapon_cqb weapon_assault weapon_lmg weapon_sniper weapon_shotgun weapon_launcher weapon_special", weapon_type))
     level.primary_weapon_array[weapon] = 1;
-  } else if(issubstr("weapon_pistol", weapon_type)) {
+  else if(issubstr("weapon_pistol", weapon_type))
     level.side_arm_array[weapon] = 1;
-  } else if(weapon_type == "weapon_grenade") {
+  else if(weapon_type == "weapon_grenade")
     level.grenade_array[weapon] = 1;
-  } else if(weapon_type == "weapon_explosive") {
+  else if(weapon_type == "weapon_explosive")
     level.inventory_array[weapon] = 1;
-  } else if(weapon_type == "weapon_rifle") {
+  else if(weapon_type == "weapon_rifle")
     level.inventory_array[weapon] = 1;
-  } else {
+  else
     assert(0, "Weapon group info is missing from statsTable for: " + weapon_type);
-  }
 }
 
 cac_init() {
@@ -296,9 +281,8 @@ getclasschoice(response) {
 getloadoutitemfromddlstats(customclassnum, loadoutslot) {
   itemindex = self getloadoutitem(customclassnum, loadoutslot);
 
-  if(is_item_excluded(itemindex) && !is_warlord_perk(itemindex)) {
+  if(is_item_excluded(itemindex) && !is_warlord_perk(itemindex))
     return 0;
-  }
 
   return itemindex;
 }
@@ -306,19 +290,17 @@ getloadoutitemfromddlstats(customclassnum, loadoutslot) {
 getattachmentstring(weaponnum, attachmentnum) {
   attachmentstring = getitemattachment(weaponnum, attachmentnum);
 
-  if(attachmentstring != "none" && !is_attachment_excluded(attachmentstring)) {
+  if(attachmentstring != "none" && !is_attachment_excluded(attachmentstring))
     attachmentstring = attachmentstring + "_";
-  } else {
+  else
     attachmentstring = "";
-  }
 
   return attachmentstring;
 }
 
 getattachmentsdisabled() {
-  if(!isDefined(level.attachmentsdisabled)) {
+  if(!isDefined(level.attachmentsdisabled))
     return 0;
-  }
 
   return level.attachmentsdisabled;
 }
@@ -327,11 +309,10 @@ getkillstreakindex(class, killstreaknum) {
   killstreaknum++;
   killstreakstring = "killstreak" + killstreaknum;
 
-  if(getdvarint(#"_id_826EB3B9") == 2) {
+  if(getdvarint(#"_id_826EB3B9") == 2)
     return getdvarint(#"_id_E1D3321F" + killstreakstring);
-  } else {
+  else
     return self getloadoutitem(class, killstreakstring);
-  }
 }
 
 givekillstreaks(classnum) {
@@ -361,13 +342,11 @@ givekillstreaks(classnum) {
 
             if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
               if(maps\mp\killstreaks\_killstreak_weapons::isheldkillstreakweapon(weapon)) {
-                if(!isDefined(self.pers["held_killstreak_ammo_count"][weapon])) {
+                if(!isDefined(self.pers["held_killstreak_ammo_count"][weapon]))
                   self.pers["held_killstreak_ammo_count"][weapon] = 0;
-                }
 
-                if(!isDefined(self.pers["held_killstreak_clip_count"][weapon])) {
+                if(!isDefined(self.pers["held_killstreak_clip_count"][weapon]))
                   self.pers["held_killstreak_clip_count"][weapon] = 0;
-                }
 
                 if(self.pers["held_killstreak_ammo_count"][weapon] > 0) {
                   self setweaponammoclip(weapon, self.pers["held_killstreak_clip_count"][weapon]);
@@ -377,15 +356,14 @@ givekillstreaks(classnum) {
               } else {
                 quantity = self.pers["killstreak_quantity"][weapon];
 
-                if(!isDefined(quantity)) {
+                if(!isDefined(quantity))
                   quantity = 0;
-                }
 
                 self setweaponammoclip(weapon, quantity);
               }
             }
 
-            sortdata = spawnStruct();
+            sortdata = spawnstruct();
             sortdata.cost = level.killstreaks[killstreaktype].momentumcost;
             sortdata.weapon = weapon;
             sortindex = 0;
@@ -396,9 +374,8 @@ givekillstreaks(classnum) {
               }
             }
 
-            for(i = sortedkillstreaks.size; i > sortindex; i--) {
+            for(i = sortedkillstreaks.size; i > sortindex; i--)
               sortedkillstreaks[i] = sortedkillstreaks[i - 1];
-            }
 
             sortedkillstreaks[sortindex] = sortdata;
           }
@@ -415,18 +392,16 @@ givekillstreaks(classnum) {
   actionslotorder[2] = 1;
 
   if(isDefined(level.usingmomentum) && level.usingmomentum) {
-    for(sortindex = 0; sortindex < sortedkillstreaks.size && sortindex < actionslotorder.size; sortindex++) {
+    for(sortindex = 0; sortindex < sortedkillstreaks.size && sortindex < actionslotorder.size; sortindex++)
       self setactionslot(actionslotorder[sortindex], "weapon", sortedkillstreaks[sortindex].weapon);
-    }
   }
 }
 
 is_warlord_perk(itemindex) {
-  if(itemindex == 168 || itemindex == 169) {
+  if(itemindex == 168 || itemindex == 169)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 isperkgroup(perkname) {
@@ -439,9 +414,8 @@ logclasschoice(class, primaryweapon, specialtype, perks) {
   }
   self logstring("choseclass: " + class + " weapon: " + primaryweapon + " special: " + specialtype);
 
-  for(i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++)
     self logstring("perk" + i + ": " + perks[i]);
-  }
 
   self.lastclass = class;
 }
@@ -460,21 +434,18 @@ initweaponattachments(weaponname) {
 }
 
 isequipmentallowed(equipment) {
-  if(equipment == "camera_spike_mp" && self issplitscreen()) {
+  if(equipment == "camera_spike_mp" && self issplitscreen())
     return false;
-  }
 
-  if(equipment == level.tacticalinsertionweapon && level.disabletacinsert) {
+  if(equipment == level.tacticalinsertionweapon && level.disabletacinsert)
     return false;
-  }
 
   return true;
 }
 
 isleagueitemrestricted(item) {
-  if(level.leaguematch) {
+  if(level.leaguematch)
     return isitemrestricted(item);
-  }
 
   return 0;
 }
@@ -482,38 +453,33 @@ isleagueitemrestricted(item) {
 giveloadoutlevelspecific(team, class) {
   pixbeginevent("giveLoadoutLevelSpecific");
 
-  if(isDefined(level.givecustomcharacters)) {
+  if(isDefined(level.givecustomcharacters))
     self[[level.givecustomcharacters]]();
-  }
 
-  if(isDefined(level.givecustomloadout)) {
+  if(isDefined(level.givecustomloadout))
     self[[level.givecustomloadout]]();
-  }
 
   pixendevent();
 }
 
 removeduplicateattachments(weapon) {
-  if(!isDefined(weapon)) {
+  if(!isDefined(weapon))
     return undefined;
-  }
 
   attachments = strtok(weapon, "+");
 
   for(attachmentindex = 1; attachmentindex < attachments.size; attachmentindex++) {
     for(attachmentindex2 = attachmentindex + 1; attachmentindex2 < attachments.size; attachmentindex2++) {
-      if(attachments[attachmentindex] == attachments[attachmentindex2]) {
+      if(attachments[attachmentindex] == attachments[attachmentindex2])
         attachments[attachmentindex2] = "none";
-      }
     }
   }
 
   uniqueattachmentsweapon = attachments[0];
 
   for(attachmentindex = 1; attachmentindex < attachments.size; attachmentindex++) {
-    if(attachments[attachmentindex] != "none") {
+    if(attachments[attachmentindex] != "none")
       uniqueattachmentsweapon = uniqueattachmentsweapon + "+" + attachments[attachmentindex];
-    }
   }
 
   return uniqueattachmentsweapon;
@@ -538,9 +504,8 @@ giveloadout(team, class) {
     pixbeginevent("custom class");
     class_num = int(class [class.size - 1]) - 1;
 
-    if(-1 == class_num) {
+    if(-1 == class_num)
       class_num = 9;
-    }
 
     self.class_num = class_num;
     self reset_specialty_slots(class_num);
@@ -576,23 +541,21 @@ giveloadout(team, class) {
   spawnweapon = "";
   initialweaponcount = 0;
 
-  if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none" && !maps\mp\killstreaks\_killstreaks::iskillstreakweapon(self.pers["weapon"])) {
+  if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none" && !maps\mp\killstreaks\_killstreaks::iskillstreakweapon(self.pers["weapon"]))
     weapon = self.pers["weapon"];
-  } else {
+  else {
     weapon = self getloadoutweapon(class_num, "primary");
     weapon = removeduplicateattachments(weapon);
 
-    if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon)) {
+    if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon))
       weapon = "weapon_null_mp";
-    }
   }
 
   sidearm = self getloadoutweapon(class_num, "secondary");
   sidearm = removeduplicateattachments(sidearm);
 
-  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sidearm)) {
+  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sidearm))
     sidearm = "weapon_null_mp";
-  }
 
   self.primaryweaponkill = 0;
   self.secondaryweaponkill = 0;
@@ -603,31 +566,26 @@ giveloadout(team, class) {
     self.secondaryloadoutweapon = sidearm;
     self.secondaryloadoutaltweapon = weaponaltweaponname(sidearm);
   } else {
-    if(self isbonuscardactive(0, self.class_num)) {
+    if(self isbonuscardactive(0, self.class_num))
       self.primaryloadoutweapon = weapon;
-    }
 
-    if(self isbonuscardactive(1, self.class_num)) {
+    if(self isbonuscardactive(1, self.class_num))
       self.secondaryloadoutweapon = sidearm;
-    }
   }
 
-  if(sidearm != "weapon_null_mp") {
+  if(sidearm != "weapon_null_mp")
     secondaryweaponoptions = self calcweaponoptions(class_num, 1);
-  }
 
   primaryweapon = weapon;
 
-  if(primaryweapon != "weapon_null_mp") {
+  if(primaryweapon != "weapon_null_mp")
     primaryweaponoptions = self calcweaponoptions(class_num, 0);
-  }
 
   if(sidearm != "" && sidearm != "weapon_null_mp" && sidearm != "weapon_null") {
     self giveweapon(sidearm, 0, secondaryweaponoptions);
 
-    if(self hasperk("specialty_extraammo")) {
+    if(self hasperk("specialty_extraammo"))
       self givemaxammo(sidearm);
-    }
 
     spawnweapon = sidearm;
     initialweaponcount++;
@@ -640,9 +598,8 @@ giveloadout(team, class) {
   println("^5GiveWeapon( " + weapon + " ) -- weapon");
 
   if(primaryweapon != "" && primaryweapon != "weapon_null_mp" && primaryweapon != "weapon_null") {
-    if(self hasperk("specialty_extraammo")) {
+    if(self hasperk("specialty_extraammo"))
       self givemaxammo(primaryweapon);
-    }
 
     self giveweapon(primaryweapon, 0, primaryweaponoptions);
     spawnweapon = primaryweapon;
@@ -652,18 +609,15 @@ giveloadout(team, class) {
   if(initialweaponcount < 2) {
     self giveweapon("knife_held_mp", 0, knifeweaponoptions);
 
-    if(initialweaponcount == 0) {
+    if(initialweaponcount == 0)
       spawnweapon = "knife_held_mp";
-    }
   }
 
-  if(!isDefined(self.spawnweapon) && isDefined(self.pers["spawnWeapon"])) {
+  if(!isDefined(self.spawnweapon) && isDefined(self.pers["spawnWeapon"]))
     self.spawnweapon = self.pers["spawnWeapon"];
-  }
 
-  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"]) {
+  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"])
     spawnweapon = self.spawnweapon;
-  }
 
   self.pers["changed_class"] = 0;
   assert(spawnweapon != "");
@@ -672,23 +626,19 @@ giveloadout(team, class) {
   self setspawnweapon(spawnweapon);
   grenadetypeprimary = self getloadoutitemref(class_num, "primarygrenade");
 
-  if(isleagueitemrestricted(grenadetypeprimary)) {
+  if(isleagueitemrestricted(grenadetypeprimary))
     grenadetypeprimary = "";
-  }
 
-  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(grenadetypeprimary + "_mp")) {
+  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(grenadetypeprimary + "_mp"))
     grenadetypeprimary = "";
-  }
 
   grenadetypesecondary = self getloadoutitemref(class_num, "specialgrenade");
 
-  if(isleagueitemrestricted(grenadetypesecondary)) {
+  if(isleagueitemrestricted(grenadetypesecondary))
     grenadetypesecondary = "";
-  }
 
-  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(grenadetypesecondary + "_mp")) {
+  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(grenadetypesecondary + "_mp"))
     grenadetypesecondary = "";
-  }
 
   if(grenadetypeprimary != "" && grenadetypeprimary != "weapon_null_mp" && isequipmentallowed(grenadetypeprimary)) {
     grenadetypeprimary = grenadetypeprimary + "_mp";
@@ -701,11 +651,10 @@ giveloadout(team, class) {
   }
 
   if(!(grenadetypeprimary != "" && grenadetypeprimary != "weapon_null_mp" && isequipmentallowed(grenadetypeprimary))) {
-    if(grenadetypesecondary != level.weapons["frag"]) {
+    if(grenadetypesecondary != level.weapons["frag"])
       grenadetypeprimary = level.weapons["frag"];
-    } else {
+    else
       grenadetypeprimary = level.weapons["flash"];
-    }
   }
 
   println("^5GiveWeapon( " + grenadetypeprimary + " ) -- grenadeTypePrimary");
@@ -716,9 +665,8 @@ giveloadout(team, class) {
   self.grenadetypeprimary = grenadetypeprimary;
   self.grenadetypeprimarycount = primarygrenadecount;
 
-  if(self.grenadetypeprimarycount > 1) {
+  if(self.grenadetypeprimarycount > 1)
     self dualgrenadesactive();
-  }
 
   if(grenadetypesecondary != "" && grenadetypesecondary != "weapon_null_mp" && isequipmentallowed(grenadetypesecondary)) {
     self setoffhandsecondaryclass(grenadetypesecondary);
@@ -751,26 +699,23 @@ giveloadout(team, class) {
   self thread initweaponattachments(spawnweapon);
   self setplayerrenderoptions(playerrenderoptions);
 
-  if(isDefined(self.movementspeedmodifier)) {
+  if(isDefined(self.movementspeedmodifier))
     self setmovespeedscale(self.movementspeedmodifier * self getmovespeedscale());
-  }
 
   if(isDefined(level.givecustomloadout)) {
     spawnweapon = self[[level.givecustomloadout]]();
 
-    if(isDefined(spawnweapon)) {
+    if(isDefined(spawnweapon))
       self thread initweaponattachments(spawnweapon);
-    }
   }
 
   self cac_selector();
 
   if(!isDefined(self.firstspawn)) {
-    if(isDefined(spawnweapon)) {
+    if(isDefined(spawnweapon))
       self initialweaponraise(spawnweapon);
-    } else {
+    else
       self initialweaponraise(weapon);
-    }
   } else
     self seteverhadweaponall(1);
 
@@ -779,9 +724,9 @@ giveloadout(team, class) {
 }
 
 setweaponammooverall(weaponname, amount) {
-  if(isweaponcliponly(weaponname)) {
+  if(isweaponcliponly(weaponname))
     self setweaponammoclip(weaponname, amount);
-  } else {
+  else {
     self setweaponammoclip(weaponname, amount);
     diff = amount - self getweaponammoclip(weaponname);
     assert(diff >= 0);
@@ -794,9 +739,8 @@ onplayerconnecting() {
     level waittill("connecting", player);
 
     if(!level.oldschool) {
-      if(!isDefined(player.pers["class"])) {
+      if(!isDefined(player.pers["class"]))
         player.pers["class"] = "";
-      }
 
       player.class = player.pers["class"];
       player.lastclass = "";
@@ -837,9 +781,8 @@ cac_selector() {
   for(i = 0; i < perks.size; i++) {
     perk = perks[i];
 
-    if(perk == "specialty_detectexplosive") {
+    if(perk == "specialty_detectexplosive")
       self.detectexplosives = 1;
-    }
   }
 }
 
@@ -867,22 +810,20 @@ cac_get_dvar_int(dvar, def) {
 }
 
 cac_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "") {
+  if(getdvar(dvar) != "")
     return getdvarfloat(dvar);
-  } else {
+  else {
     setdvar(dvar, def);
     return def;
   }
 }
 
 cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker))
     return damage;
-  }
 
-  if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon)) {
+  if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon))
     return damage;
-  }
 
   old_damage = damage;
   final_damage = damage;
@@ -890,23 +831,20 @@ cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, infl
   if(attacker hasperk("specialty_bulletdamage") && isprimarydamage(meansofdeath)) {
     final_damage = damage * (100 + level.cac_bulletdamage_data) / 100;
 
-    if(getdvarint(#"_id_5ABA6445")) {
+    if(getdvarint(#"_id_5ABA6445"))
       println("Perk/> " + attacker.name + "'s bullet damage did extra damage to vehicle");
-    }
 
   } else if(attacker hasperk("specialty_explosivedamage") && isplayerexplosiveweapon(weapon, meansofdeath)) {
     final_damage = damage * (100 + level.cac_explosivedamage_data) / 100;
 
-    if(getdvarint(#"_id_5ABA6445")) {
+    if(getdvarint(#"_id_5ABA6445"))
       println("Perk/> " + attacker.name + "'s explosive damage did extra damage to vehicle");
-    }
 
   } else
     final_damage = old_damage;
 
-  if(getdvarint(#"_id_5ABA6445")) {
+  if(getdvarint(#"_id_5ABA6445"))
     println("Perk/> Damage Factor: " + final_damage / old_damage + " - Pre Damage: " + old_damage + " - Post Damage: " + final_damage);
-  }
 
   return int(final_damage);
 }
@@ -916,75 +854,64 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   assert(isDefined(attacker));
   assert(isplayer(victim));
 
-  if(victim == attacker) {
+  if(victim == attacker)
     return damage;
-  }
 
-  if(!isplayer(attacker)) {
+  if(!isplayer(attacker))
     return damage;
-  }
 
-  if(damage <= 0) {
+  if(damage <= 0)
     return damage;
-  }
 
   debug = 0;
 
-  if(getdvarint(#"_id_5ABA6445")) {
+  if(getdvarint(#"_id_5ABA6445"))
     debug = 1;
-  }
 
   final_damage = damage;
 
   if(attacker hasperk("specialty_bulletdamage") && isprimarydamage(mod)) {
     if(victim hasperk("specialty_armorvest") && !isheaddamage(hitloc)) {
-      if(debug) {
+      if(debug)
         println("Perk/> " + victim.name + "'s armor countered " + attacker.name + "'s increased bullet damage");
-      }
 
     } else {
       final_damage = damage * (100 + level.cac_bulletdamage_data) / 100;
 
-      if(debug) {
+      if(debug)
         println("Perk/> " + attacker.name + "'s bullet damage did extra damage to " + victim.name);
-      }
 
     }
   } else if(victim hasperk("specialty_armorvest") && isprimarydamage(mod) && !isheaddamage(hitloc)) {
     final_damage = damage * (level.cac_armorvest_data * 0.01);
 
-    if(debug) {
+    if(debug)
       println("Perk/> " + attacker.name + "'s bullet damage did less damage to " + victim.name);
-    }
 
   } else if(victim hasperk("specialty_fireproof") && isfiredamage(weapon, mod)) {
     final_damage = damage * ((100 - level.cac_fireproof_data) / 100);
 
-    if(debug) {
+    if(debug)
       println("Perk/> " + attacker.name + "'s flames did less damage to " + victim.name);
-    }
 
   } else if(attacker hasperk("specialty_explosivedamage") && isplayerexplosiveweapon(weapon, mod)) {
     final_damage = damage * (100 + level.cac_explosivedamage_data) / 100;
 
-    if(debug) {
+    if(debug)
       println("Perk/> " + attacker.name + "'s explosive damage did extra damage to " + victim.name);
-    }
 
   } else if(victim hasperk("specialty_flakjacket") && isexplosivedamage(weapon, mod) && !victim grenadestuck(inflictor)) {
     cac_data = level.hardcoremode ? level.cac_flakjacket_hardcore_data : level.cac_flakjacket_data;
 
-    if(level.teambased && attacker.team != victim.team) {
+    if(level.teambased && attacker.team != victim.team)
       victim thread maps\mp\_challenges::flakjacketprotected(weapon, attacker);
-    } else if(attacker != victim) {
+    else if(attacker != victim)
       victim thread maps\mp\_challenges::flakjacketprotected(weapon, attacker);
-    }
 
     final_damage = int(damage * (cac_data / 100));
 
-    if(debug) {
+    if(debug)
       println("Perk/> " + victim.name + "'s flak jacket decreased " + attacker.name + "'s grenade damage");
-    }
 
   }
 
@@ -995,15 +922,13 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   victim.cac_debug_weapon = tolower(weapon);
   victim.cac_debug_range = int(distance(attacker.origin, victim.origin));
 
-  if(debug) {
+  if(debug)
     println("Perk/> Damage Factor: " + final_damage / damage + " - Pre Damage: " + damage + " - Post Damage: " + final_damage);
-  }
 
   final_damage = int(final_damage);
 
-  if(final_damage < 1) {
+  if(final_damage < 1)
     final_damage = 1;
-  }
 
   return final_damage;
 }
@@ -1042,21 +967,18 @@ isprimarydamage(meansofdeath) {
 }
 
 isfiredamage(weapon, meansofdeath) {
-  if((issubstr(weapon, "flame") || issubstr(weapon, "napalmblob_") || issubstr(weapon, "napalm_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH")) {
+  if((issubstr(weapon, "flame") || issubstr(weapon, "napalmblob_") || issubstr(weapon, "napalm_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH"))
     return true;
-  }
 
-  if(getsubstr(weapon, 0, 3) == "ft_") {
+  if(getsubstr(weapon, 0, 3) == "ft_")
     return true;
-  }
 
   return false;
 }
 
 isplayerexplosiveweapon(weapon, meansofdeath) {
-  if(!isexplosivedamage(weapon, meansofdeath)) {
+  if(!isexplosivedamage(weapon, meansofdeath))
     return false;
-  }
 
   switch (weapon) {
     case "airstrike_mp":

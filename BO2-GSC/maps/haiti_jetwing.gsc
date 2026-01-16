@@ -18,9 +18,8 @@ jetwing_init(drop_speed) {
   self.smoke_damage = 0;
   self setspeed(drop_speed, 100, 100);
 
-  if(!isDefined(level.player_burned)) {
+  if(!isDefined(level.player_burned))
     level.player_burned = 0;
-  }
 
   self.overridevehicledamage = ::jetwing_damage_override;
   self thread jetwing_damage_watcher();
@@ -38,9 +37,8 @@ jetwing_strafe_controls() {
     if(!self.rolling) {
       stick = level.player getnormalizedmovement();
 
-      if(getlocalprofileint("input_invertPitch") == 1) {
+      if(getlocalprofileint("input_invertPitch") == 1)
         stick = (stick[0] * -1, stick[1], stick[2]);
-      }
 
       desired_vel_y = abs(self.jetwing_offset[1]) >= 2500 && self.jetwing_offset[1] * stick[1] >= 0 ? 0 : stick[1] * max_strafe_vel[1];
       desired_vel_z = abs(self.jetwing_offset[2]) >= 1500 && self.jetwing_offset[2] * stick[0] >= 0 ? 0 : stick[0] * max_strafe_vel[2];
@@ -63,8 +61,8 @@ jetwing_fx(start_origin) {
   self endon("exit_vehicle");
 
   while(true) {
-    fwd = anglesToForward(level.jetwing.angles);
-    playFX(level._effect["jetwing_whoosh"], level.player.origin + fwd * 100, fwd);
+    fwd = anglestoforward(level.jetwing.angles);
+    playfx(level._effect["jetwing_whoosh"], level.player.origin + fwd * 100, fwd);
     wait 0.15;
   }
 }
@@ -92,9 +90,8 @@ jetwing_barrel_roll() {
       self.current_roll = angleclamp180(self.current_roll);
       self.roll_time = self.roll_time + 0.05;
 
-      if(self.roll_time > 0.5) {
+      if(self.roll_time > 0.5)
         self.rolling = 0;
-      }
 
       offset = self getpathfixedoffset();
       self.current_offset = self.current_offset + 4000 * self.roll_dir * 0.05;
@@ -114,9 +111,9 @@ jetwing_rumble() {
   while(true) {
     vr = abs(self getspeed() / self getmaxspeed());
 
-    if(vr < 0.1) {
+    if(vr < 0.1)
       wait 0.3;
-    } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
+    else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       earthquake(0.15, 0.1, self.origin, 200);
       level.player playrumbleonentity("pullout_small");
       wait 0.2;
@@ -149,10 +146,10 @@ jetwing_collision() {
   level waittill("jetpack_go");
 
   while(true) {
-    forward = anglesToForward(level.jetwing.angles);
+    forward = anglestoforward(level.jetwing.angles);
     start = level.jetwing.origin + forward * 100;
     end = start + forward * 1000;
-    trace = bulletTrace(start, end, 0, level.jetwing);
+    trace = bullettrace(start, end, 0, level.jetwing);
 
     if(isDefined(trace["entity"]) && trace["entity"].classname != "script_vehicle") {
       if(trace["fraction"] < 0.08) {
@@ -169,7 +166,7 @@ jetwing_collision() {
 }
 
 jetwing_instructions() {
-  screen_message_create(&"HAITI_JETWING_MOVE", &"HAITI_JETWING_LOOK");
+  screen_message_create(&"HAITI_JETWING_MOVE", & "HAITI_JETWING_LOOK");
   wait 4;
   screen_message_delete();
 }
@@ -245,9 +242,8 @@ ai_jetwing_think(speed, delay) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 ai_jetwing_follow() {
@@ -268,9 +264,8 @@ ai_jetwing_follow() {
 }
 
 ai_jetwing_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(smeansofdeath == "MOD_BURNED") {
+  if(smeansofdeath == "MOD_BURNED")
     idamage = 0;
-  }
 
   return idamage;
 }
@@ -281,7 +276,7 @@ ai_jetwing_death() {
   self maps\_vehicle::getoffpath();
   angles = self.angles;
   angles = (angles[0], angles[1], 0);
-  fwd = anglesToForward(angles);
+  fwd = anglestoforward(angles);
   right = anglestoright(angles);
   up = anglestoup(angles);
   r = randomintrange(100, 300) * -1;
@@ -304,7 +299,7 @@ ai_jetwing_avoid_fire() {
         dir = vectornormalize(delta);
         angles = self.angles;
         angles = (angles[0], angles[1], 0);
-        fwd = anglesToForward(angles);
+        fwd = anglestoforward(angles);
         right = anglestoright(angles);
         up = anglestoup(angles);
         t = vectordot(delta, fwd);
@@ -353,9 +348,8 @@ ai_landing_jetwing_think(speed, delay) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 ai_landing_jetwing_speed() {
@@ -381,7 +375,7 @@ ai_landing_jetwing_think2() {
   current_variable_offset = (0, 0, 0);
   target_variable_offset = (0, 0, 0);
   v_angles = level.player getplayerangles();
-  v_fwd = anglesToForward(v_angles);
+  v_fwd = anglestoforward(v_angles);
   v_right = anglestoright(v_angles);
   v_up = anglestoup(v_angles);
   v_desired_pos = level.player.origin + (v_fwd * v_offset[0] + v_right * v_offset[1] + v_up * v_offset[2]);
@@ -392,7 +386,7 @@ ai_landing_jetwing_think2() {
 
   while(true) {
     v_angles = level.player getplayerangles();
-    v_fwd = anglesToForward(v_angles);
+    v_fwd = anglestoforward(v_angles);
     v_right = anglestoright(v_angles);
     v_up = anglestoup(v_angles);
     v_desired_pos = level.player.origin + (v_fwd * v_offset[0] + v_right * v_offset[1] + v_up * v_offset[2]);
@@ -414,11 +408,10 @@ ai_landing_jetwing_think2() {
     v = vectornormalize(v_desired_vel);
     d = vectordot(v, (0, 0, 1));
 
-    if(d != 0 && abs(d) < 0.9) {
+    if(d != 0 && abs(d) < 0.9)
       n_yaw = vectoangles(v_desired_vel);
-    } else {
+    else
       n_yaw = v_angles[1];
-    }
 
     n_yaw_vel = (n_yaw - self.angles[1]) / 0.05;
     n_roll = n_yaw_vel / 25 * 75;
@@ -444,26 +437,24 @@ ai_landing_jetwing_think2() {
 
 jetwings_spread(delay) {
   wait(delay);
-  jetwing_ai = getEntArray("ai_jetwing", "targetname");
-  jetwing_ai_chinese = getEntArray("ai_jetwing_chinese", "targetname");
-  jetwing_ai_usa = getEntArray("ai_jetwing_usa", "targetname");
+  jetwing_ai = getentarray("ai_jetwing", "targetname");
+  jetwing_ai_chinese = getentarray("ai_jetwing_chinese", "targetname");
+  jetwing_ai_usa = getentarray("ai_jetwing_usa", "targetname");
   jetwings = arraycombine(jetwing_ai, jetwing_ai_chinese, 0, 0);
   jetwings = arraycombine(jetwings, jetwing_ai_usa, 0, 0);
 
-  foreach(jetwing in jetwings) {
-    jetwing pathvariableoffset(vectorscale((1, 1, 1), 500.0), randomfloatrange(1.5, 2.5));
-  }
+  foreach(jetwing in jetwings)
+  jetwing pathvariableoffset(vectorscale((1, 1, 1), 500.0), randomfloatrange(1.5, 2.5));
 }
 
 jetwings_regroup(delay) {
   wait(delay);
-  jetwing_ai = getEntArray("ai_jetwing", "targetname");
-  jetwing_ai_chinese = getEntArray("ai_jetwing_chinese", "targetname");
-  jetwing_ai_usa = getEntArray("ai_jetwing_usa", "targetname");
+  jetwing_ai = getentarray("ai_jetwing", "targetname");
+  jetwing_ai_chinese = getentarray("ai_jetwing_chinese", "targetname");
+  jetwing_ai_usa = getentarray("ai_jetwing_usa", "targetname");
   jetwings = arraycombine(jetwing_ai, jetwing_ai_chinese, 0, 0);
   jetwings = arraycombine(jetwings, jetwing_ai_usa, 0, 0);
 
-  foreach(jetwing in jetwings) {
-    jetwing pathvariableoffset((75, 75, 50), randomfloatrange(1, 2));
-  }
+  foreach(jetwing in jetwings)
+  jetwing pathvariableoffset((75, 75, 50), randomfloatrange(1, 2));
 }

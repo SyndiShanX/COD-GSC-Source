@@ -21,7 +21,7 @@
 #namespace zm_genesis_minor_ee;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_minor_ee", &__init__, &__main__, undefined);
+  system::register("zm_genesis_minor_ee", & __init__, & __main__, undefined);
 }
 
 function __init__() {}

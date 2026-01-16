@@ -48,40 +48,36 @@ entity_died(localclientnum, set, newent) {
 }
 
 gpr_updated(localclientnum, set, newent) {
-  signbit = self.gpr &-2147483648;
+  signbit = self.gpr & -2147483648;
   self.gpr = self.gpr & 2147483647;
   data = self.gpr & 268435455;
   op = self.gpr >> 28;
 
-  if(signbit != 0) {
+  if(signbit != 0)
     op = op | 8;
-  }
 
   switch (op) {
     case 2:
       val = data & 65535;
 
-      if(val > 0) {
+      if(val > 0)
         self target_unit_highlight(localclientnum, 1, val);
-      } else {
+      else
         self target_unit_highlight(localclientnum, 0, 0);
-      }
 
       break;
     case 1:
       val = data & 65535;
 
-      if(val == 0) {
+      if(val == 0)
         self.sonarteam = "axis";
-      } else if(val == 1) {
+      else if(val == 1)
         self.sonarteam = "allies";
-      }
 
       level.entities = remove_the_dead(level.entities);
 
-      if(!isinarray(level.entities, self)) {
+      if(!isinarray(level.entities, self))
         level.entities[level.entities.size] = self;
-      }
 
       self thread set_rampsonarcolor(localclientnum);
       self update_hudoutline();
@@ -91,9 +87,8 @@ gpr_updated(localclientnum, set, newent) {
       break;
   }
 
-  if(isDefined(level.gpr_cb)) {
+  if(isDefined(level.gpr_cb))
     [[level.gpr_cb]](localclientnum, op, data);
-  }
 }
 
 inittransitiontime(time) {
@@ -114,9 +109,8 @@ set_rampsonarcolor(localclientnum) {
   steps = 60;
 
   while(isDefined(self) && steps > 0) {
-    if(cur < 0) {
+    if(cur < 0)
       cur = 0;
-    }
 
     self setshaderconstant(localclientnum, 3, cur, unused, unused, unused);
     cur = cur + inc;
@@ -124,9 +118,8 @@ set_rampsonarcolor(localclientnum) {
     wait(waitinc);
   }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self setshaderconstant(localclientnum, 3, 0, unused, unused, unused);
-  }
 }
 
 set_sonarpulse(localclientnum) {
@@ -143,20 +136,17 @@ set_sonarpulse(localclientnum) {
   while(isDefined(self)) {
     steps = 60;
 
-    if(cur == 0) {
+    if(cur == 0)
       inc = increment;
-    } else {
+    else
       inc = increment * -1;
-    }
 
     while(isDefined(self) && steps > 0) {
-      if(cur < 0) {
+      if(cur < 0)
         cur = 0;
-      }
 
-      if(cur > 1) {
+      if(cur > 1)
         cur = 1;
-      }
 
       self setshaderconstant(localclientnum, 3, cur, unused, unused, unused);
       cur = cur + inc;
@@ -167,22 +157,19 @@ set_sonarpulse(localclientnum) {
 }
 
 set_squadishighlighted(squadid, forced) {
-  if(!isDefined(forced)) {
+  if(!isDefined(forced))
     forced = 0;
-  }
 
-  foreach(ent in level.entities) {
-    ent notify("orange_julius");
-  }
+  foreach(ent in level.entities)
+  ent notify("orange_julius");
 
   if(squadid != -1) {
     if(level.rts_mode || forced) {
       squad = [];
 
       foreach(ent in level.entities) {
-        if(isDefined(ent) && isDefined(ent.squadid) && ent.squadid == squadid) {
+        if(isDefined(ent) && isDefined(ent.squadid) && ent.squadid == squadid)
           squad[squad.size] = ent;
-        }
       }
 
       foreach(ent in squad) {
@@ -195,33 +182,28 @@ set_squadishighlighted(squadid, forced) {
 }
 
 update_hudoutline(forced, onlyenemy) {
-  if(!isDefined(forced)) {
+  if(!isDefined(forced))
     forced = 0;
-  }
 
-  if(!isDefined(onlyenemy)) {
+  if(!isDefined(onlyenemy))
     onlyenemy = 0;
-  }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(level.sonar_forced) && level.sonar_forced) {
+  if(isDefined(level.sonar_forced) && level.sonar_forced)
     forced = 1;
-  }
 
-  if(isDefined(level.sonar_onlyenemy) && level.sonar_onlyenemy) {
+  if(isDefined(level.sonar_onlyenemy) && level.sonar_onlyenemy)
     onlyenemy = 1;
-  }
 
   if(level.rts_mode || forced) {
     self setshaderconstant(0, 3, 0, 0, 0, 0);
 
-    if(self.sonarteam == "axis") {
+    if(self.sonarteam == "axis")
       self sethudoutlinecolor(1);
-    } else if(self.sonarteam == "allies" && onlyenemy == 0) {
+    else if(self.sonarteam == "allies" && onlyenemy == 0)
       self sethudoutlinecolor(2);
-    }
   } else {
     self notify("orange_julius");
     self sethudoutlinecolor(0);
@@ -232,34 +214,29 @@ remove_the_dead(arrayin) {
   alive = [];
 
   for(i = 0; i < arrayin.size; i++) {
-    if(isDefined(arrayin[i])) {
+    if(isDefined(arrayin[i]))
       alive[alive.size] = arrayin[i];
-    }
   }
 
   return alive;
 }
 
 update_all_hudoutlines(forced, onlyenemy) {
-  if(!isDefined(forced)) {
+  if(!isDefined(forced))
     forced = 0;
-  }
 
-  if(!isDefined(onlyenemy)) {
+  if(!isDefined(onlyenemy))
     onlyenemy = 0;
-  }
 
   level.entities = remove_the_dead(level.entities);
 
-  for(i = 0; i < level.entities.size; i++) {
+  for(i = 0; i < level.entities.size; i++)
     level.entities[i] update_hudoutline(forced, onlyenemy);
-  }
 }
 
 force_all_hudoutlineson(on, onlyenemy) {
-  if(!isDefined(onlyenemy)) {
+  if(!isDefined(onlyenemy))
     onlyenemy = 0;
-  }
 
   if(on) {
     enable_filter_hud_outline(level.localplayers[0], 2, 0);
@@ -274,27 +251,23 @@ force_all_hudoutlineson(on, onlyenemy) {
 }
 
 target_unit_highlight(localclientnum, onoff, progvalue) {
-  if(onoff < 0) {
+  if(onoff < 0)
     onoff = -1;
-  }
 
-  if(onoff > 0) {
+  if(onoff > 0)
     onoff = onoff | 1;
-  }
 
-  if(isDefined(self.max_health) && isDefined(self.health)) {
+  if(isDefined(self.max_health) && isDefined(self.health))
     health = (self.max_health << 16) + self.health;
-  } else {
+  else
     health = -1;
-  }
 
   self settargethighlight(localclientnum, onoff, progvalue, health);
 }
 
 toggle_reticle(localclientnum, set, newent) {
-  if(!isDefined(level.targeting_reticle)) {
+  if(!isDefined(level.targeting_reticle))
     level.targeting_reticle = 0;
-  }
 
   if(!level.targeting_reticle && set) {
     enable_filter_rts_hologram(level.localplayers[localclientnum], 0, level.hologrammateialname);
@@ -308,9 +281,8 @@ toggle_reticle(localclientnum, set, newent) {
 }
 
 toggle_reticle_alt(localclientnum, set, newent) {
-  if(!isDefined(level.targeting_reticle_alt)) {
+  if(!isDefined(level.targeting_reticle_alt))
     level.targeting_reticle_alt = 0;
-  }
 
   if(!level.targeting_reticle_alt && set) {
     enable_filter_rts_hologram_no_sonar(level.localplayers[localclientnum], 3, level.hologrammateialname);
@@ -324,9 +296,8 @@ toggle_reticle_alt(localclientnum, set, newent) {
 }
 
 toggle_satellite_hotness(localclientnum, set, newent) {
-  if(!isDefined(level.satellitetransisionactive)) {
+  if(!isDefined(level.satellitetransisionactive))
     level.satellitetransisionactive = 0;
-  }
 
   println("**** satellite - client**** set(" + set + ") active (" + level.satellitetransisionactive + ")");
 
@@ -338,9 +309,8 @@ toggle_satellite_hotness(localclientnum, set, newent) {
 }
 
 toggle_satellite_remotemissile(localclientnum, set, newent) {
-  if(!isDefined(level.satellitetransisionactive)) {
+  if(!isDefined(level.satellitetransisionactive))
     level.satellitetransisionactive = 0;
-  }
 
   if(!level.satellitetransisionactive && set) {
     enable_filter_satellite_transition(level.localplayers[localclientnum], 1);
@@ -371,18 +341,16 @@ satellite_transition(localclientnum, duration) {
     currenttime = getrealtime();
     elapsedtime = (currenttime - starttime - heldtime) / 1000.0;
 
-    if(elapsedtime > totalduration) {
+    if(elapsedtime > totalduration)
       elapsedtime = totalduration;
-    }
 
-    if(elapsedtime < halftime) {
+    if(elapsedtime < halftime)
       val = elapsedtime / halftime;
-    } else {
-      if(elapsedtime < halftime + statictime) {
+    else {
+      if(elapsedtime < halftime + statictime)
         val = 1;
-      } else {
+      else
         val = 1 - (elapsedtime - halftime - statictime) / halftime;
-      }
 
       if(level.holdfullstatic) {
         val = 1;
@@ -454,9 +422,8 @@ waitfor_rtson() {
 
     level.rts_mode = 1;
 
-    if(note == "rts_ON") {
+    if(note == "rts_ON")
       update_all_hudoutlines();
-    }
   }
 }
 
@@ -531,7 +498,7 @@ waitfor_characterswitch() {
   while(true) {
     level waittill("chr_swtch_start");
     snd_set_snapshot("spl_rts_character_switch");
-    playSound(0, "evt_command_switch_static", (0, 0, 0));
+    playsound(0, "evt_command_switch_static", (0, 0, 0));
     level waittill("chr_swtch_end");
     snd_set_snapshot("default");
   }
@@ -543,8 +510,8 @@ commandservosounds() {
   move_volume = 0;
   pansoundent = spawn(0, (0, 0, 0), "script_origin");
   movesoundent = spawn(0, (0, 0, 0), "script_origin");
-  panlooper = pansoundent playLoopSound("evt_rts_cmd_pan_lp", 0.1);
-  movelooper = movesoundent playLoopSound("evt_rts_cmd_move_lp", 0.1);
+  panlooper = pansoundent playloopsound("evt_rts_cmd_pan_lp", 0.1);
+  movelooper = movesoundent playloopsound("evt_rts_cmd_move_lp", 0.1);
 
   while(level.rts_mode == 1) {
     pan = player getnormalizedcameramovement();
@@ -552,17 +519,15 @@ commandservosounds() {
     pan = abs(pan[0]);
     move = abs(move[0]);
 
-    if(pan > 0) {
+    if(pan > 0)
       pan_volume = 1;
-    } else {
+    else
       pan_volume = 0;
-    }
 
-    if(move > 0) {
+    if(move > 0)
       move_volume = 1;
-    } else {
+    else
       move_volume = 0;
-    }
 
     setsoundvolume(panlooper, pan_volume);
     setsoundvolume(movelooper, move_volume);
@@ -574,13 +539,12 @@ commandservosounds() {
 }
 
 vehicleloopsounds(string, alias) {
-  if(!isDefined(level.vehicle_sound_ent)) {
+  if(!isDefined(level.vehicle_sound_ent))
     level.vehicle_sound_ent = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   while(true) {
     level waittill(string);
-    level.vehicle_sound_ent playLoopSound(alias, 1);
+    level.vehicle_sound_ent playloopsound(alias, 1);
     level waittill_any("chr_swtch_start", "rts_ON");
     level.vehicle_sound_ent stoploopsound(1);
   }
@@ -612,7 +576,7 @@ rtshealthsystem(clientnum) {
     if(health > 60) {
       if(level.health_ambient_room_change) {
         setsoundcontext("health", "full");
-        playSound(0, level.healthsound + "_out", (0, 0, 0));
+        playsound(0, level.healthsound + "_out", (0, 0, 0));
         deactivateambientroom(0, "health", 100);
         level.health_ambient_room_change = 0;
         level notify("pain_out");
@@ -622,7 +586,7 @@ rtshealthsystem(clientnum) {
     } else {
       if(!level.health_ambient_room_change) {
         setsoundcontext("health", "half");
-        playSound(0, level.healthsound + "_in", (0, 0, 0));
+        playsound(0, level.healthsound + "_in", (0, 0, 0));
         activateambientroom(0, "health", 100);
         level.health_ambient_room_change = 1;
       }

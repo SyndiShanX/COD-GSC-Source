@@ -21,15 +21,15 @@
 #namespace zm_genesis_hope;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_hope", &__init__, undefined, undefined);
+  system::register("zm_genesis_hope", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["spark_of_hope"] = "dlc4/genesis/fx_quest_hope";
-  clientfield::register("world", "hope_state", 15000, getminbitcountfornum(4), "int", &super_ee, 0, 0);
+  clientfield::register("world", "hope_state", 15000, getminbitcountfornum(4), "int", & super_ee, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.super_ee", 15000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "hope_spark", 15000, 1, "int", &function_2e70599d, 0, 0);
-  clientfield::register("scriptmover", "hope_spark", 15000, 1, "int", &function_2e70599d, 0, 0);
+  clientfield::register("toplayer", "hope_spark", 15000, 1, "int", & function_2e70599d, 0, 0);
+  clientfield::register("scriptmover", "hope_spark", 15000, 1, "int", & function_2e70599d, 0, 0);
 }
 
 function super_ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -59,13 +59,13 @@ function super_ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function function_2e70599d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.fx_spark = playFXOnTag(localclientnum, level._effect["spark_of_hope"], self, "j_spine4");
-    self.var_d0642fb4 = self playLoopSound("zmb_overachiever_spark_lp", 1);
+    self.fx_spark = playfxontag(localclientnum, level._effect["spark_of_hope"], self, "j_spine4");
+    self.var_d0642fb4 = self playloopsound("zmb_overachiever_spark_lp", 1);
   } else {
-    if(isDefined(self.fx_spark)) {
+    if(isdefined(self.fx_spark)) {
       stopfx(localclientnum, self.fx_spark);
     }
-    if(isDefined(self.var_d0642fb4)) {
+    if(isdefined(self.var_d0642fb4)) {
       self stoploopsound(self.var_d0642fb4);
       self.var_d0642fb4 = undefined;
     }
@@ -73,12 +73,12 @@ function function_2e70599d(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_5f968055(localclientnum, b_on) {
-  if(isDefined(self.fx_spark)) {
+  if(isdefined(self.fx_spark)) {
     stopfx(localclientnum, self.fx_spark);
   }
   if(b_on) {
-    self.fx_spark = playFX(localclientnum, level._effect["spark_of_hope"], self.origin);
-    playSound(0, "zmb_overachiever_spark_spawn", self.origin);
+    self.fx_spark = playfx(localclientnum, level._effect["spark_of_hope"], self.origin);
+    playsound(0, "zmb_overachiever_spark_spawn", self.origin);
     audio::playloopat("zmb_overachiever_spark_lp_3d", self.origin);
   } else {
     audio::stoploopat("zmb_overachiever_spark_lp_3d", self.origin);

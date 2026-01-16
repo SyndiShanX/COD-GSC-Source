@@ -159,4 +159,5 @@ main() {
   ent.normalFogScale = 10;
 
   maps\_utility::fog_set_changes("afch_fog_start", 0);
+
 }

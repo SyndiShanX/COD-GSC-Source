@@ -27,7 +27,7 @@ function warning(msg) {
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = anglestoforward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -43,24 +43,24 @@ function isbulletimpactmod(smeansofdeath) {
 function waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while(self usebuttonpressed() != 1) {
+  while (self usebuttonpressed() != 1) {
     wait(0.05);
   }
 }
 
 function setlowermessage(text, time, combinemessageandtimer) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != (&"")) {
+  if(isdefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
   self.lowermessage settext(text);
-  if(isDefined(time) && time > 0) {
-    if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
-      self.lowertimer.label = &"";
+  if(isdefined(time) && time > 0) {
+    if(!isdefined(combinemessageandtimer) || !combinemessageandtimer) {
+      self.lowertimer.label = & "";
     } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -68,7 +68,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = &"";
+    self.lowertimer.label = & "";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -80,29 +80,29 @@ function setlowermessage(text, time, combinemessageandtimer) {
 }
 
 function setlowermessagevalue(text, value, combinemessage) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != (&"")) {
+  if(isdefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
-  if(!isDefined(combinemessage) || !combinemessage) {
+  if(!isdefined(combinemessage) || !combinemessage) {
     self.lowermessage settext(text);
   } else {
     self.lowermessage settext("");
   }
-  if(isDefined(value) && value > 0) {
-    if(!isDefined(combinemessage) || !combinemessage) {
-      self.lowertimer.label = &"";
+  if(isdefined(value) && value > 0) {
+    if(!isdefined(combinemessage) || !combinemessage) {
+      self.lowertimer.label = & "";
     } else {
       self.lowertimer.label = text;
     }
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = &"";
+    self.lowertimer.label = & "";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -114,11 +114,11 @@ function setlowermessagevalue(text, value, combinemessage) {
 }
 
 function clearlowermessage(fadetime) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
   self notify("lower_message_set");
-  if(!isDefined(fadetime) || fadetime == 0) {
+  if(!isdefined(fadetime) || fadetime == 0) {
     setlowermessage(&"");
   } else {
     self endon("disconnect");
@@ -133,30 +133,30 @@ function clearlowermessage(fadetime) {
 }
 
 function printonteam(text, team) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintln(text);
     }
   }
 }
 
 function printboldonteam(text, team) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text);
     }
   }
 }
 
 function printboldonteamarg(text, team, arg) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -166,9 +166,9 @@ function printonteamarg(text, team, arg) {}
 
 function printonplayers(text, team) {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(team)) {
-      if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(team)) {
+      if(isdefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
         players[i] iprintln(text);
       }
       continue;
@@ -178,30 +178,30 @@ function printonplayers(text, team) {
 }
 
 function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendly, soundenemy, printarg) {
-  shoulddosounds = isDefined(soundfriendly);
+  shoulddosounds = isdefined(soundfriendly);
   shoulddoenemysounds = 0;
-  if(isDefined(soundenemy)) {
+  if(isdefined(soundenemy)) {
     assert(shoulddosounds);
     shoulddoenemysounds = 1;
   }
-  if(!isDefined(printarg)) {
+  if(!isdefined(printarg)) {
     printarg = "";
   }
   if(level.splitscreen || !shoulddosounds) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != (&"")) {
+      if(isdefined(playerteam)) {
+        if(playerteam == team && isdefined(printfriendly) && printfriendly != (&"")) {
           player iprintln(printfriendly, printarg);
           continue;
         }
-        if(isDefined(printenemy) && printenemy != (&"")) {
-          if(isDefined(enemyteam) && playerteam == enemyteam) {
+        if(isdefined(printenemy) && printenemy != (&"")) {
+          if(isdefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
           }
-          if(!isDefined(enemyteam) && playerteam != team) {
+          if(!isdefined(enemyteam) && playerteam != team) {
             player iprintln(printenemy, printarg);
           }
         }
@@ -214,19 +214,19 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
   } else {
     assert(shoulddosounds);
     if(shoulddoenemysounds) {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isDefined(playerteam)) {
+        if(isdefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != (&"")) {
+            if(isdefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isDefined(enemyteam) && playerteam == enemyteam || (!isDefined(enemyteam) && playerteam != team)) {
-            if(isDefined(printenemy) && printenemy != (&"")) {
+          if(isdefined(enemyteam) && playerteam == enemyteam || (!isdefined(enemyteam) && playerteam != team)) {
+            if(isdefined(printenemy) && printenemy != (&"")) {
               player iprintln(printenemy, printarg);
             }
             player playlocalsound(soundenemy);
@@ -234,23 +234,23 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
         }
       }
     } else {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isDefined(playerteam)) {
+        if(isdefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != (&"")) {
+            if(isdefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isDefined(printenemy) && printenemy != (&"")) {
-            if(isDefined(enemyteam) && playerteam == enemyteam) {
+          if(isdefined(printenemy) && printenemy != (&"")) {
+            if(isdefined(enemyteam) && playerteam == enemyteam) {
               player iprintln(printenemy, printarg);
               continue;
             }
-            if(!isDefined(enemyteam) && playerteam != team) {
+            if(!isdefined(enemyteam) && playerteam != team) {
               player iprintln(printenemy, printarg);
             }
           }
@@ -278,7 +278,7 @@ function getotherteam(team) {
 }
 
 function getteammask(team) {
-  if(!level.teambased || !isDefined(team) || !isDefined(level.spawnsystem.ispawn_teammask[team])) {
+  if(!level.teambased || !isdefined(team) || !isdefined(level.spawnsystem.ispawn_teammask[team])) {
     return level.spawnsystem.ispawn_teammask_free;
   }
   return level.spawnsystem.ispawn_teammask[team];
@@ -297,13 +297,13 @@ function getotherteamsmask(skip_team) {
 
 function wait_endon(waittime, endonstring, endonstring2, endonstring3, endonstring4) {
   self endon(endonstring);
-  if(isDefined(endonstring2)) {
+  if(isdefined(endonstring2)) {
     self endon(endonstring2);
   }
-  if(isDefined(endonstring3)) {
+  if(isdefined(endonstring3)) {
     self endon(endonstring3);
   }
-  if(isDefined(endonstring4)) {
+  if(isdefined(endonstring4)) {
     self endon(endonstring4);
   }
   wait(waittime);
@@ -312,26 +312,26 @@ function wait_endon(waittime, endonstring, endonstring2, endonstring3, endonstri
 
 function plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isDefined(r)) {
+  if(!isdefined(r)) {
     r = 1;
   }
-  if(!isDefined(g)) {
+  if(!isdefined(g)) {
     g = 1;
   }
-  if(!isDefined(b)) {
+  if(!isdefined(b)) {
     b = 1;
   }
-  if(!isDefined(timer)) {
+  if(!isdefined(timer)) {
     timer = 0.05;
   }
-  for(i = 1; i < plotpoints.size; i++) {
+  for (i = 1; i < plotpoints.size; i++) {
     line(lastpoint, plotpoints[i], (r, g, b), 1, timer);
     lastpoint = plotpoints[i];
   }
 }
 
 function getfx(fx) {
-  assert(isDefined(level._effect[fx]), ("" + fx) + "");
+  assert(isdefined(level._effect[fx]), ("" + fx) + "");
   return level._effect[fx];
 }
 
@@ -359,30 +359,30 @@ function set_dvar_int_if_unset(dvar, value, reset = 0) {
 }
 
 function add_trigger_to_ent(ent) {
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     ent._triggers = [];
   }
   ent._triggers[self getentitynumber()] = 1;
 }
 
 function remove_trigger_from_ent(ent) {
-  if(!isDefined(ent)) {
+  if(!isdefined(ent)) {
     return;
   }
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     return;
   }
-  if(!isDefined(ent._triggers[self getentitynumber()])) {
+  if(!isdefined(ent._triggers[self getentitynumber()])) {
     return;
   }
   ent._triggers[self getentitynumber()] = 0;
 }
 
 function ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers)) {
+  if(!isdefined(self._triggers)) {
     return false;
   }
-  if(!isDefined(self._triggers[trig getentitynumber()])) {
+  if(!isdefined(self._triggers[trig getentitynumber()])) {
     return false;
   }
   if(!self._triggers[trig getentitynumber()]) {
@@ -407,17 +407,17 @@ function trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ender = (("end_trig_death_monitor" + self getentitynumber()) + " ") + ent getentitynumber();
   self thread trigger_thread_death_monitor(ent, ender);
   endon_condition = "leave_trigger_" + self getentitynumber();
-  if(isDefined(on_enter_payload)) {
+  if(isdefined(on_enter_payload)) {
     self thread[[on_enter_payload]](ent, endon_condition);
   }
-  while(isDefined(ent) && ent istouching(self)) {
+  while (isdefined(ent) && ent istouching(self)) {
     wait(0.01);
   }
   ent notify(endon_condition);
-  if(isDefined(ent) && isDefined(on_exit_payload)) {
+  if(isdefined(ent) && isdefined(on_exit_payload)) {
     self thread[[on_exit_payload]](ent);
   }
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     self remove_trigger_from_ent(ent);
   }
   self notify(ender);
@@ -428,11 +428,11 @@ function isstrstart(string1, substr) {
 }
 
 function iskillstreaksenabled() {
-  return isDefined(level.killstreaksenabled) && level.killstreaksenabled;
+  return isdefined(level.killstreaksenabled) && level.killstreaksenabled;
 }
 
 function setusingremote(remotename, set_killstreak_delay_killcam = 1) {
-  if(isDefined(self.carryicon)) {
+  if(isdefined(self.carryicon)) {
     self.carryicon.alpha = 0;
   }
   assert(!self isusingremote());
@@ -520,7 +520,7 @@ function getplayerfromclientnum(clientnum) {
   if(clientnum < 0) {
     return undefined;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     if(level.players[i] getentitynumber() == clientnum) {
       return level.players[i];
     }
@@ -530,21 +530,21 @@ function getplayerfromclientnum(clientnum) {
 
 function ispressbuild() {
   buildtype = getdvarstring("buildType");
-  if(isDefined(buildtype) && buildtype == "press") {
+  if(isdefined(buildtype) && buildtype == "press") {
     return true;
   }
   return false;
 }
 
 function isflashbanged() {
-  return isDefined(self.flashendtime) && gettime() < self.flashendtime;
+  return isdefined(self.flashendtime) && gettime() < self.flashendtime;
 }
 
 function domaxdamage(origin, attacker, inflictor, headshot, mod) {
-  if(isDefined(self.damagedtodeath) && self.damagedtodeath) {
+  if(isdefined(self.damagedtodeath) && self.damagedtodeath) {
     return;
   }
-  if(isDefined(self.maxhealth)) {
+  if(isdefined(self.maxhealth)) {
     damage = self.maxhealth + 1;
   } else {
     damage = self.health + 1;
@@ -554,7 +554,7 @@ function domaxdamage(origin, attacker, inflictor, headshot, mod) {
 }
 
 function self_delete() {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
@@ -562,16 +562,16 @@ function self_delete() {
 function screen_message_create(string_message_1, string_message_2, string_message_3, n_offset_y, n_time) {
   level notify("screen_message_create");
   level endon("screen_message_create");
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isdefined(level.missionfailed) && level.missionfailed) {
     return;
   }
   if(getdvarint("hud_missionFailed") == 1) {
     return;
   }
-  if(!isDefined(n_offset_y)) {
+  if(!isdefined(n_offset_y)) {
     n_offset_y = 0;
   }
-  if(!isDefined(level._screen_message_1)) {
+  if(!isdefined(level._screen_message_1)) {
     level._screen_message_1 = newhudelem();
     level._screen_message_1.elemtype = "font";
     level._screen_message_1.font = "objective";
@@ -587,8 +587,8 @@ function screen_message_create(string_message_1, string_message_2, string_messag
     level._screen_message_1.hidewheninmenu = 1;
   }
   level._screen_message_1 settext(string_message_1);
-  if(isDefined(string_message_2)) {
-    if(!isDefined(level._screen_message_2)) {
+  if(isdefined(string_message_2)) {
+    if(!isdefined(level._screen_message_2)) {
       level._screen_message_2 = newhudelem();
       level._screen_message_2.elemtype = "font";
       level._screen_message_2.font = "objective";
@@ -604,11 +604,11 @@ function screen_message_create(string_message_1, string_message_2, string_messag
       level._screen_message_2.hidewheninmenu = 1;
     }
     level._screen_message_2 settext(string_message_2);
-  } else if(isDefined(level._screen_message_2)) {
+  } else if(isdefined(level._screen_message_2)) {
     level._screen_message_2 destroy();
   }
-  if(isDefined(string_message_3)) {
-    if(!isDefined(level._screen_message_3)) {
+  if(isdefined(string_message_3)) {
+    if(!isdefined(level._screen_message_3)) {
       level._screen_message_3 = newhudelem();
       level._screen_message_3.elemtype = "font";
       level._screen_message_3.font = "objective";
@@ -624,26 +624,26 @@ function screen_message_create(string_message_1, string_message_2, string_messag
       level._screen_message_3.hidewheninmenu = 1;
     }
     level._screen_message_3 settext(string_message_3);
-  } else if(isDefined(level._screen_message_3)) {
+  } else if(isdefined(level._screen_message_3)) {
     level._screen_message_3 destroy();
   }
-  if(isDefined(n_time) && n_time > 0) {
+  if(isdefined(n_time) && n_time > 0) {
     wait(n_time);
     screen_message_delete();
   }
 }
 
 function screen_message_delete(delay) {
-  if(isDefined(delay)) {
+  if(isdefined(delay)) {
     wait(delay);
   }
-  if(isDefined(level._screen_message_1)) {
+  if(isdefined(level._screen_message_1)) {
     level._screen_message_1 destroy();
   }
-  if(isDefined(level._screen_message_2)) {
+  if(isdefined(level._screen_message_2)) {
     level._screen_message_2 destroy();
   }
-  if(isDefined(level._screen_message_3)) {
+  if(isdefined(level._screen_message_3)) {
     level._screen_message_3 destroy();
   }
 }
@@ -656,48 +656,48 @@ function ghost_wait_show(wait_time = 0.1) {
 }
 
 function ghost_wait_show_to_player(player, wait_time = 0.1, self_endon_string1) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self endon("death");
   self.abort_ghost_wait_show_to_player = undefined;
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player endon("death");
     player endon("disconnect");
     player endon("joined_team");
     player endon("joined_spectators");
   }
-  if(isDefined(self_endon_string1)) {
+  if(isdefined(self_endon_string1)) {
     self endon(self_endon_string1);
   }
   self ghost();
   self setinvisibletoall();
   self setvisibletoplayer(player);
   wait(wait_time);
-  if(!isDefined(self.abort_ghost_wait_show_to_player)) {
+  if(!isdefined(self.abort_ghost_wait_show_to_player)) {
     self showtoplayer(player);
   }
 }
 
 function ghost_wait_show_to_others(player, wait_time = 0.1, self_endon_string1) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self endon("death");
   self.abort_ghost_wait_show_to_others = undefined;
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player endon("death");
     player endon("disconnect");
     player endon("joined_team");
     player endon("joined_spectators");
   }
-  if(isDefined(self_endon_string1)) {
+  if(isdefined(self_endon_string1)) {
     self endon(self_endon_string1);
   }
   self ghost();
   self setinvisibletoplayer(player);
   wait(wait_time);
-  if(!isDefined(self.abort_ghost_wait_show_to_others)) {
+  if(!isdefined(self.abort_ghost_wait_show_to_others)) {
     self show();
     self setinvisibletoplayer(player);
   }
@@ -709,7 +709,7 @@ function use_button_pressed() {
 }
 
 function waittill_use_button_pressed() {
-  while(!self use_button_pressed()) {
+  while (!self use_button_pressed()) {
     wait(0.05);
   }
 }
@@ -717,7 +717,7 @@ function waittill_use_button_pressed() {
 function show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notify = "notify_turn_off_hint_text", n_display_time = 4) {
   self endon("notify_turn_off_hint_text");
   self endon("hint_text_removed");
-  if(isDefined(self.hint_menu_handle)) {
+  if(isdefined(self.hint_menu_handle)) {
     hide_hint_text(0);
   }
   self.hint_menu_handle = self openluimenu("MPHintText");
@@ -735,7 +735,7 @@ function show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notif
 
 function hide_hint_text(b_fade_before_hiding = 1) {
   self endon("hint_text_removed");
-  if(isDefined(self.hint_menu_handle)) {
+  if(isdefined(self.hint_menu_handle)) {
     if(b_fade_before_hiding) {
       lui::play_animation(self.hint_menu_handle, "fadeout");
       waittill_any_timeout(0.75, "kill_hint_text", "death", "hint_text_removed");
@@ -770,14 +770,14 @@ function set_team_radar(team, value) {
 }
 
 function init_player_contract_events() {
-  if(!isDefined(level.player_contract_events)) {
+  if(!isdefined(level.player_contract_events)) {
     level.player_contract_events = [];
   }
 }
 
 function register_player_contract_event(event_name, event_func, max_param_count = 0) {
-  if(!isDefined(level.player_contract_events[event_name])) {
-    level.player_contract_events[event_name] = spawnStruct();
+  if(!isdefined(level.player_contract_events[event_name])) {
+    level.player_contract_events[event_name] = spawnstruct();
     level.player_contract_events[event_name].param_count = max_param_count;
     level.player_contract_events[event_name].events = [];
   }
@@ -786,15 +786,15 @@ function register_player_contract_event(event_name, event_func, max_param_count 
 }
 
 function player_contract_event(event_name, param1 = undefined, param2 = undefined, param3 = undefined) {
-  if(!isDefined(level.player_contract_events[event_name])) {
+  if(!isdefined(level.player_contract_events[event_name])) {
     return;
   }
-  param_count = (isDefined(level.player_contract_events[event_name].param_count) ? level.player_contract_events[event_name].param_count : 0);
+  param_count = (isdefined(level.player_contract_events[event_name].param_count) ? level.player_contract_events[event_name].param_count : 0);
   switch (param_count) {
     case 0:
     default: {
       foreach(event_func in level.player_contract_events[event_name].events) {
-        if(isDefined(event_func)) {
+        if(isdefined(event_func)) {
           self[[event_func]]();
         }
       }
@@ -802,7 +802,7 @@ function player_contract_event(event_name, param1 = undefined, param2 = undefine
     }
     case 1: {
       foreach(event_func in level.player_contract_events[event_name].events) {
-        if(isDefined(event_func)) {
+        if(isdefined(event_func)) {
           self[[event_func]](param1);
         }
       }
@@ -810,7 +810,7 @@ function player_contract_event(event_name, param1 = undefined, param2 = undefine
     }
     case 2: {
       foreach(event_func in level.player_contract_events[event_name].events) {
-        if(isDefined(event_func)) {
+        if(isdefined(event_func)) {
           self[[event_func]](param1, param2);
         }
       }
@@ -818,7 +818,7 @@ function player_contract_event(event_name, param1 = undefined, param2 = undefine
     }
     case 3: {
       foreach(event_func in level.player_contract_events[event_name].events) {
-        if(isDefined(event_func)) {
+        if(isdefined(event_func)) {
           self[[event_func]](param1, param2, param3);
         }
       }
@@ -849,11 +849,11 @@ function is_objective_game(game_type) {
 }
 
 function isprophuntgametype() {
-  return isDefined(level.isprophunt) && level.isprophunt;
+  return isdefined(level.isprophunt) && level.isprophunt;
 }
 
 function isprop() {
-  return isDefined(self.pers["team"]) && self.pers["team"] == game["defenders"];
+  return isdefined(self.pers["team"]) && self.pers["team"] == game["defenders"];
 }
 
 function function_a7d853be(amount) {
@@ -863,5 +863,5 @@ function function_a7d853be(amount) {
 }
 
 function function_938b1b6b() {
-  return isDefined(level.var_f817b02b) && level.var_f817b02b;
+  return isdefined(level.var_f817b02b) && level.var_f817b02b;
 }

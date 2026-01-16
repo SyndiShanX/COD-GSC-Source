@@ -141,12 +141,11 @@ start_last_mig29_mix() {
 }
 
 play_technical_scripted_sfx_sequence() {
-  var_0 = getEntArray("script_vehicle_pickup_technical", "classname");
+  var_0 = getentarray("script_vehicle_pickup_technical", "classname");
 
   foreach(var_2 in var_0) {
-    if(var_2.script_vehiclespawngroup == 5) {
+    if(var_2.script_vehiclespawngroup == 5)
       var_2.script_disablevehicleaudio = 1;
-    }
   }
 
   var_4 = getvehiclenode("auto2665", "targetname");
@@ -159,7 +158,7 @@ play_technical_scripted_sfx_sequence() {
 
 play_scripted_technical_sfx(var_0) {
   self waittill("trigger", var_1);
-  var_1 playSound(var_0);
+  var_1 playsound(var_0);
   var_1 common_scripts\utility::waittill_either("driver dead", "death");
   var_1 stopsounds();
 }

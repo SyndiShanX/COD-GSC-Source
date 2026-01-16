@@ -17,15 +17,15 @@
 #namespace gameobjects;
 
 function autoexec __init__sytem__() {
-  system::register("gameobjects", &__init__, undefined, undefined);
+  system::register("gameobjects", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.numgametypereservedobjectives = 0;
   level.releasedobjectives = [];
-  callback::on_spawned(&on_player_spawned);
-  callback::on_disconnect(&on_disconnect);
-  callback::on_laststand(&on_player_last_stand);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_disconnect( & on_disconnect);
+  callback::on_laststand( & on_player_last_stand);
 }
 
 function main() {
@@ -33,7 +33,7 @@ function main() {
   level.vehiclestimed = getgametypesetting("vehiclesTimed");
   level.objectivepingdelay = getgametypesetting("objectivePingTime");
   level.nonteambasedteam = "allies";
-  if(!isDefined(level.allowedgameobjects)) {
+  if(!isdefined(level.allowedgameobjects)) {
     level.allowedgameobjects = [];
   }
   if(level.script == "") {
@@ -43,8 +43,8 @@ function main() {
     level.allowedgameobjects[level.allowedgameobjects.size] = "vehicle";
     filter_script_vehicles_from_vehicle_descriptors(level.allowedgameobjects);
   }
-  entities = getEntArray();
-  for(entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
+  entities = getentarray();
+  for (entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
     entity = entities[entity_index];
     if(!entity_is_allowed(entity, level.allowedgameobjects)) {
       entity delete();
@@ -53,7 +53,7 @@ function main() {
 }
 
 function register_allowed_gameobject(gameobject) {
-  if(!isDefined(level.allowedgameobjects)) {
+  if(!isdefined(level.allowedgameobjects)) {
     level.allowedgameobjects = [];
   }
   level.allowedgameobjects[level.allowedgameobjects.size] = gameobject;
@@ -65,11 +65,11 @@ function clear_allowed_gameobjects() {
 
 function entity_is_allowed(entity, allowed_game_modes) {
   allowed = 1;
-  if(isDefined(entity.script_gameobjectname) && entity.script_gameobjectname != "[all_modes]") {
+  if(isdefined(entity.script_gameobjectname) && entity.script_gameobjectname != "[all_modes]") {
     allowed = 0;
     gameobjectnames = strtok(entity.script_gameobjectname, " ");
-    for(i = 0; i < allowed_game_modes.size && !allowed; i++) {
-      for(j = 0; j < gameobjectnames.size && !allowed; j++) {
+    for (i = 0; i < allowed_game_modes.size && !allowed; i++) {
+      for (j = 0; j < gameobjectnames.size && !allowed; j++) {
         allowed = gameobjectnames[j] == allowed_game_modes[i];
       }
     }
@@ -80,19 +80,19 @@ function entity_is_allowed(entity, allowed_game_modes) {
 function location_is_allowed(entity, location) {
   allowed = 1;
   location_list = undefined;
-  if(isDefined(entity.script_noteworthy)) {
+  if(isdefined(entity.script_noteworthy)) {
     location_list = entity.script_noteworthy;
   }
-  if(isDefined(entity.script_location)) {
+  if(isdefined(entity.script_location)) {
     location_list = entity.script_location;
   }
-  if(isDefined(location_list)) {
+  if(isdefined(location_list)) {
     if(location_list == "[all_modes]") {
       allowed = 1;
     } else {
       allowed = 0;
       gameobjectlocations = strtok(location_list, " ");
-      for(j = 0; j < gameobjectlocations.size; j++) {
+      for (j = 0; j < gameobjectlocations.size; j++) {
         if(gameobjectlocations[j] == location) {
           allowed = 1;
           break;
@@ -104,14 +104,14 @@ function location_is_allowed(entity, location) {
 }
 
 function filter_script_vehicles_from_vehicle_descriptors(allowed_game_modes) {
-  vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
-  script_vehicles = getEntArray("script_vehicle", "classname");
+  vehicle_descriptors = getentarray("vehicle_descriptor", "targetname");
+  script_vehicles = getentarray("script_vehicle", "classname");
   vehicles_to_remove = [];
-  for(descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
+  for (descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
     descriptor = vehicle_descriptors[descriptor_index];
     closest_distance_sq = 1E+12;
     closest_vehicle = undefined;
-    for(vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
+    for (vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
       vehicle = script_vehicles[vehicle_index];
       dsquared = distancesquared(vehicle getorigin(), descriptor getorigin());
       if(dsquared < closest_distance_sq) {
@@ -119,13 +119,13 @@ function filter_script_vehicles_from_vehicle_descriptors(allowed_game_modes) {
         closest_vehicle = vehicle;
       }
     }
-    if(isDefined(closest_vehicle)) {
+    if(isdefined(closest_vehicle)) {
       if(!entity_is_allowed(descriptor, allowed_game_modes)) {
         vehicles_to_remove[vehicles_to_remove.size] = closest_vehicle;
       }
     }
   }
-  for(vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
+  for (vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
     vehicles_to_remove[vehicle_index] delete();
   }
 }
@@ -161,10 +161,10 @@ function on_player_last_stand() {
 }
 
 function gameobjects_dropped() {
-  if(isDefined(self.carryobject)) {
+  if(isdefined(self.carryobject)) {
     self.carryobject thread set_dropped();
   }
-  if(isDefined(self.packobject) && self.packobject.size > 0) {
+  if(isdefined(self.packobject) && self.packobject.size > 0) {
     foreach(item in self.packobject) {
       item thread set_dropped();
     }
@@ -172,7 +172,7 @@ function gameobjects_dropped() {
 }
 
 function create_carry_object(ownerteam, trigger, visuals, offset, objectivename, hitsound) {
-  carryobject = spawnStruct();
+  carryobject = spawnstruct();
   carryobject.type = "carryObject";
   carryobject.curorigin = trigger.origin;
   carryobject.entnum = trigger getentitynumber();
@@ -185,19 +185,19 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
   trigger.baseorigin = trigger.origin;
   carryobject.trigger = trigger;
   carryobject.useweapon = undefined;
-  if(!isDefined(offset)) {
+  if(!isdefined(offset)) {
     offset = (0, 0, 0);
   }
   carryobject.offset3d = offset;
   carryobject.newstyle = 0;
-  if(isDefined(objectivename)) {
+  if(isdefined(objectivename)) {
     if(!sessionmodeiscampaigngame()) {
       carryobject.newstyle = 1;
     }
   } else {
-    objectivename = &"";
+    objectivename = & "";
   }
-  for(index = 0; index < visuals.size; index++) {
+  for (index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
     visuals[index].baseangles = visuals[index].angles;
   }
@@ -280,7 +280,7 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
     carryobject.decayprogress = 0;
     carryobject.teamusetimes = [];
     carryobject.teamusetexts = [];
-    carryobject.onuse = &set_picked_up;
+    carryobject.onuse = & set_picked_up;
     carryobject thread use_object_prox_think();
   }
   carryobject thread update_carry_object_origin();
@@ -291,7 +291,7 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
 function carry_object_use_think() {
   level endon("game_ended");
   self.trigger endon("destroyed");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(self.isresetting) {
       continue;
@@ -299,7 +299,7 @@ function carry_object_use_think() {
     if(!isalive(player)) {
       continue;
     }
-    if(isDefined(player.laststand) && player.laststand) {
+    if(isdefined(player.laststand) && player.laststand) {
       continue;
     }
     if(!self can_interact_with(player)) {
@@ -311,7 +311,7 @@ function carry_object_use_think() {
     if(player.throwinggrenade) {
       continue;
     }
-    if(isDefined(self.carrier)) {
+    if(isdefined(self.carrier)) {
       continue;
     }
     if(player isinvehicle()) {
@@ -320,7 +320,7 @@ function carry_object_use_think() {
     if(player isremotecontrolling() || player util::isusingremote()) {
       continue;
     }
-    if(isDefined(player.selectinglocation) && player.selectinglocation) {
+    if(isdefined(player.selectinglocation) && player.selectinglocation) {
       continue;
     }
     if(player isweaponviewonlylinked()) {
@@ -336,7 +336,7 @@ function carry_object_use_think() {
 function carry_object_prox_think() {
   level endon("game_ended");
   self.trigger endon("destroyed");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(self.isresetting) {
       continue;
@@ -344,7 +344,7 @@ function carry_object_prox_think() {
     if(!isalive(player)) {
       continue;
     }
-    if(isDefined(player.laststand) && player.laststand) {
+    if(isdefined(player.laststand) && player.laststand) {
       continue;
     }
     if(!self can_interact_with(player)) {
@@ -356,7 +356,7 @@ function carry_object_prox_think() {
     if(player.throwinggrenade) {
       continue;
     }
-    if(isDefined(self.carrier)) {
+    if(isdefined(self.carrier)) {
       continue;
     }
     if(player isinvehicle()) {
@@ -365,7 +365,7 @@ function carry_object_prox_think() {
     if(player isremotecontrolling() || player util::isusingremote()) {
       continue;
     }
-    if(isDefined(player.selectinglocation) && player.selectinglocation) {
+    if(isdefined(player.selectinglocation) && player.selectinglocation) {
       continue;
     }
     if(player isweaponviewonlylinked()) {
@@ -383,7 +383,7 @@ function pickup_object_delay(origin) {
   self endon("death");
   self endon("disconnect");
   self.canpickupobject = 0;
-  for(;;) {
+  for (;;) {
     if(distancesquared(self.origin, origin) > 4096) {
       break;
     }
@@ -397,11 +397,11 @@ function set_picked_up(player) {
     return;
   }
   if(self.type == "carryObject") {
-    if(isDefined(player.carryobject)) {
-      if(isDefined(player.carryobject.swappable) && player.carryobject.swappable) {
+    if(isdefined(player.carryobject)) {
+      if(isdefined(player.carryobject.swappable) && player.carryobject.swappable) {
         player.carryobject thread set_dropped();
       } else {
-        if(isDefined(self.onpickupfailed)) {
+        if(isdefined(self.onpickupfailed)) {
           self[[self.onpickupfailed]](player);
         }
         return;
@@ -409,8 +409,8 @@ function set_picked_up(player) {
     }
     player give_object(self);
   } else if(self.type == "packObject") {
-    if(isDefined(level.max_packobjects) && level.max_packobjects <= player.packobject.size) {
-      if(isDefined(self.onpickupfailed)) {
+    if(isdefined(level.max_packobjects) && level.max_packobjects <= player.packobject.size) {
+      if(isdefined(self.onpickupfailed)) {
         self[[self.onpickupfailed]](player);
       }
       return;
@@ -421,7 +421,7 @@ function set_picked_up(player) {
   self ghost_visuals();
   self.trigger.origin = self.trigger.origin + vectorscale((0, 0, 1), 10000);
   self notify("pickup_object");
-  if(isDefined(self.onpickup)) {
+  if(isdefined(self.onpickup)) {
     self[[self.onpickup]](player);
   }
   self update_compass_icons();
@@ -432,7 +432,7 @@ function set_picked_up(player) {
 function unlink_grenades() {
   radius = 32;
   origin = self.origin;
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
   radiussq = radius * radius;
   linkedgrenades = [];
   foreach(grenade in grenades) {
@@ -463,8 +463,8 @@ function update_carry_object_origin() {
     return;
   }
   objpingdelay = level.objectivepingdelay;
-  for(;;) {
-    if(isDefined(self.carrier) && level.teambased) {
+  for (;;) {
+    if(isdefined(self.carrier) && level.teambased) {
       self.curorigin = self.carrier.origin + vectorscale((0, 0, 1), 75);
       foreach(team in level.teams) {
         self.objpoints[team] objpoints::update_origin(self.curorigin);
@@ -494,7 +494,7 @@ function update_carry_object_origin() {
       self util::wait_endon(objpingdelay, "dropped", "reset");
       continue;
     }
-    if(isDefined(self.carrier)) {
+    if(isdefined(self.carrier)) {
       self.curorigin = self.carrier.origin + vectorscale((0, 0, 1), 75);
       self.objpoints[level.nonteambasedteam] objpoints::update_origin(self.curorigin);
       objective_position(self.objid[level.nonteambasedteam], self.curorigin);
@@ -519,8 +519,8 @@ function update_carry_object_objective_origin() {
     return;
   }
   objpingdelay = level.objectivepingdelay;
-  for(;;) {
-    if(isDefined(self.carrier)) {
+  for (;;) {
+    if(isdefined(self.carrier)) {
       self.curorigin = self.carrier.origin;
       objective_position(self.objectiveid, self.curorigin);
       self util::wait_endon(objpingdelay, "dropped", "reset");
@@ -532,15 +532,15 @@ function update_carry_object_objective_origin() {
 }
 
 function give_object(object) {
-  assert(!isDefined(self.carryobject));
+  assert(!isdefined(self.carryobject));
   self.carryobject = object;
   self thread track_carrier(object);
-  if(isDefined(object.carryweapon)) {
-    if(isDefined(object.carryweaponthink)) {
+  if(isdefined(object.carryweapon)) {
+    if(isdefined(object.carryweaponthink)) {
       self thread[[object.carryweaponthink]]();
     }
     count = 0;
-    while(self ismeleeing() && count < 10) {
+    while (self ismeleeing() && count < 10) {
       count++;
       wait(0.2);
     }
@@ -556,11 +556,11 @@ function give_object(object) {
     self thread manual_drop_think();
   }
   self.disallowvehicleusage = 1;
-  if(isDefined(object.visiblecarriermodel)) {
+  if(isdefined(object.visiblecarriermodel)) {
     self weapons::force_stowed_weapon_update();
   }
   if(!object.newstyle) {
-    if(isDefined(object.carryicon)) {
+    if(isdefined(object.carryicon)) {
       if(self issplitscreen()) {
         self.carryicon = hud::createicon(object.carryicon, 35, 35);
         self.carryicon.x = -130;
@@ -601,7 +601,7 @@ function return_home() {
   self move_visuals_to_base();
   self.trigger.origin = self.trigger.baseorigin;
   self.curorigin = self.trigger.origin;
-  if(isDefined(self.onreset)) {
+  if(isdefined(self.onreset)) {
     self[[self.onreset]](prev_origin);
   }
   self clear_carrier();
@@ -612,7 +612,7 @@ function return_home() {
 }
 
 function is_object_away_from_home() {
-  if(isDefined(self.carrier)) {
+  if(isdefined(self.carrier)) {
     return true;
   }
   if(distancesquared(self.trigger.origin, self.trigger.baseorigin) > 4) {
@@ -643,7 +643,7 @@ function set_drop_offset(height) {
 }
 
 function set_dropped() {
-  if(isDefined(self.setdropped)) {
+  if(isdefined(self.setdropped)) {
     if([
         [self.setdropped]
       ]()) {
@@ -655,12 +655,12 @@ function set_dropped() {
   startorigin = (0, 0, 0);
   endorigin = (0, 0, 0);
   body = undefined;
-  if(isDefined(self.carrier) && self.carrier.team != "spectator") {
+  if(isdefined(self.carrier) && self.carrier.team != "spectator") {
     startorigin = self.carrier.origin + vectorscale((0, 0, 1), 20);
     endorigin = self.carrier.origin - vectorscale((0, 0, 1), 2000);
     body = self.carrier.body;
   } else {
-    if(isDefined(self.safeorigin)) {
+    if(isdefined(self.safeorigin)) {
       startorigin = self.safeorigin + vectorscale((0, 0, 1), 20);
       endorigin = self.safeorigin - vectorscale((0, 0, 1), 20);
     } else {
@@ -672,14 +672,14 @@ function set_dropped() {
   trace = physicstrace(startorigin, endorigin, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
   droppingplayer = self.carrier;
   self clear_carrier();
-  if(isDefined(trace)) {
+  if(isdefined(trace)) {
     tempangle = randomfloat(360);
     droporigin = trace["position"] + (0, 0, self.dropoffset);
     if(trace["fraction"] < 1) {
       forward = (cos(tempangle), sin(tempangle), 0);
       forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
       if(sessionmodeismultiplayergame()) {
-        if(isDefined(trace["walkable"])) {
+        if(isdefined(trace["walkable"])) {
           if(trace["walkable"] == 0) {
             if(self should_be_reset(trace["position"][2], startorigin[2], 1)) {
               self thread return_home();
@@ -688,7 +688,7 @@ function set_dropped() {
             }
             end_reflect = (forward * 1000) + trace["position"];
             reflect_trace = physicstrace(trace["position"], end_reflect, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
-            if(isDefined(reflect_trace) && reflect_trace["normal"][2] < 0) {
+            if(isdefined(reflect_trace) && reflect_trace["normal"][2] < 0) {
               droporigin_reflect = reflect_trace["position"] + (0, 0, self.dropoffset);
               if(self should_be_reset(droporigin_reflect[2], trace["position"][2], 1)) {
                 self thread return_home();
@@ -717,7 +717,7 @@ function set_dropped() {
     self.trigger.origin = self.trigger.baseorigin;
     self.curorigin = self.trigger.baseorigin;
   }
-  if(isDefined(self.ondrop)) {
+  if(isdefined(self.ondrop)) {
     self[[self.ondrop]](droppingplayer);
   }
   self update_icons_and_objective();
@@ -741,7 +741,7 @@ function get_carrier() {
 }
 
 function clear_carrier() {
-  if(!isDefined(self.carrier)) {
+  if(!isdefined(self.carrier)) {
     return;
   }
   self.carrier take_object(self);
@@ -760,22 +760,22 @@ function is_touching_any_trigger(triggers, minz, maxz) {
 }
 
 function is_touching_any_trigger_key_value(value, key, minz, maxz) {
-  return self is_touching_any_trigger(getEntArray(value, key), minz, maxz);
+  return self is_touching_any_trigger(getentarray(value, key), minz, maxz);
 }
 
 function should_be_reset(minz, maxz, testhurttriggers) {
   if(self.visuals[0] is_touching_any_trigger_key_value("minefield", "targetname", minz, maxz)) {
     return true;
   }
-  if(isDefined(testhurttriggers) && testhurttriggers && self.visuals[0] is_touching_any_trigger_key_value("trigger_hurt", "classname", minz, maxz)) {
+  if(isdefined(testhurttriggers) && testhurttriggers && self.visuals[0] is_touching_any_trigger_key_value("trigger_hurt", "classname", minz, maxz)) {
     return true;
   }
   if(self.visuals[0] is_touching_any_trigger(level.oob_triggers, minz, maxz)) {
     return true;
   }
-  elevators = getEntArray("script_elevator", "targetname");
+  elevators = getentarray("script_elevator", "targetname");
   foreach(elevator in elevators) {
-    assert(isDefined(elevator.occupy_volume));
+    assert(isdefined(elevator.occupy_volume));
     if(self.visuals[0] istouchingswept(elevator.occupy_volume, minz, maxz)) {
       return true;
     }
@@ -791,34 +791,34 @@ function pickup_timeout(minz, maxz) {
     self thread return_home();
     return;
   }
-  if(isDefined(self.pickuptimeoutoverride)) {
+  if(isdefined(self.pickuptimeoutoverride)) {
     self thread[[self.pickuptimeoutoverride]]();
-  } else if(isDefined(self.autoresettime)) {
+  } else if(isdefined(self.autoresettime)) {
     wait(self.autoresettime);
-    if(!isDefined(self.carrier)) {
+    if(!isdefined(self.carrier)) {
       self thread return_home();
     }
   }
 }
 
 function take_object(object) {
-  if(isDefined(object.visiblecarriermodel)) {
+  if(isdefined(object.visiblecarriermodel)) {
     self weapons::detach_all_weapons();
   }
   shouldenableweapon = 1;
-  if(isDefined(object.carryweapon) && !isDefined(self.player_disconnected)) {
+  if(isdefined(object.carryweapon) && !isdefined(self.player_disconnected)) {
     shouldenableweapon = 0;
     self thread wait_take_carry_weapon(object.carryweapon);
   }
   if(object.type == "carryObject") {
-    if(isDefined(self.carryicon)) {
+    if(isdefined(self.carryicon)) {
       self.carryicon hud::destroyelem();
     }
     self.carryobject = undefined;
   } else if(object.type == "packObject") {
-    if(isDefined(self.packicon) && self.packicon.size > 0) {
-      for(i = 0; i < self.packicon.size; i++) {
-        if(isDefined(self.packicon[i].script_string)) {
+    if(isdefined(self.packicon) && self.packicon.size > 0) {
+      for (i = 0; i < self.packicon.size; i++) {
+        if(isdefined(self.packicon[i].script_string)) {
           if(self.packicon[i].script_string == object.packicon) {
             elem = self.packicon[i];
             arrayremovevalue(self.packicon, elem);
@@ -830,7 +830,7 @@ function take_object(object) {
     }
     arrayremovevalue(self.packobject, object);
   }
-  if(!isalive(self) || isDefined(self.player_disconnected)) {
+  if(!isalive(self) || isdefined(self.player_disconnected)) {
     return;
   }
   self notify("drop_object");
@@ -838,7 +838,7 @@ function take_object(object) {
   if(object.triggertype == "proximity") {
     self thread pickup_object_delay(object.trigger.origin);
   }
-  if(isDefined(object.visiblecarriermodel)) {
+  if(isdefined(object.visiblecarriermodel)) {
     self weapons::force_stowed_weapon_update();
   }
   if(!object.allowweapons && shouldenableweapon) {
@@ -881,9 +881,9 @@ function track_carrier(object) {
   self endon("death");
   self endon("drop_object");
   wait(0.05);
-  while(isDefined(object.carrier) && object.carrier == self && isalive(self)) {
+  while (isdefined(object.carrier) && object.carrier == self && isalive(self)) {
     if(self isonground()) {
-      trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 20), self.origin - vectorscale((0, 0, 1), 20), 0, undefined);
+      trace = bullettrace(self.origin + vectorscale((0, 0, 1), 20), self.origin - vectorscale((0, 0, 1), 20), 0, undefined);
       if(trace["fraction"] < 1) {
         object.safeorigin = trace["position"];
       }
@@ -897,14 +897,14 @@ function manual_drop_think() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
+  for (;;) {
+    while (self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
       wait(0.05);
     }
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self meleebuttonpressed()) {
+    while (!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self meleebuttonpressed()) {
       wait(0.05);
     }
-    if(isDefined(self.carryobject) && !self usebuttonpressed()) {
+    if(isdefined(self.carryobject) && !self usebuttonpressed()) {
       self.carryobject thread set_dropped();
     }
   }
@@ -923,21 +923,21 @@ function create_use_object(ownerteam, trigger, visuals, offset, objectivename, a
   }
   useobject.trigger = trigger;
   useobject linkto(trigger);
-  for(index = 0; index < visuals.size; index++) {
+  for (index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
     visuals[index].baseangles = visuals[index].angles;
   }
   useobject.visuals = visuals;
   useobject _set_team(ownerteam);
-  if(!isDefined(offset)) {
+  if(!isdefined(offset)) {
     offset = (0, 0, 0);
   }
   useobject.offset3d = offset;
   useobject.newstyle = 0;
-  if(isDefined(objectivename)) {
+  if(isdefined(objectivename)) {
     useobject.newstyle = 1;
   } else {
-    objectivename = &"";
+    objectivename = & "";
   }
   useobject.compassicons = [];
   useobject.objid = [];
@@ -1018,26 +1018,26 @@ function create_use_object(ownerteam, trigger, visuals, offset, objectivename, a
 }
 
 function set_key_object(object) {
-  if(!isDefined(object)) {
+  if(!isdefined(object)) {
     self.keyobject = undefined;
     return;
   }
-  if(!isDefined(self.keyobject)) {
+  if(!isdefined(self.keyobject)) {
     self.keyobject = [];
   }
   self.keyobject[self.keyobject.size] = object;
 }
 
 function has_key_object(use) {
-  if(!isDefined(use.keyobject)) {
+  if(!isdefined(use.keyobject)) {
     return false;
   }
-  for(x = 0; x < use.keyobject.size; x++) {
-    if(isDefined(self.carryobject) && self.carryobject == use.keyobject[x]) {
+  for (x = 0; x < use.keyobject.size; x++) {
+    if(isdefined(self.carryobject) && self.carryobject == use.keyobject[x]) {
       return true;
     }
-    if(isDefined(self.packobject)) {
-      for(i = 0; i < self.packobject.size; i++) {
+    if(isdefined(self.packobject)) {
+      for (i = 0; i < self.packobject.size; i++) {
         if(self.packobject[i] == use.keyobject[x]) {
           return true;
         }
@@ -1052,7 +1052,7 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
   if(self.usetime > 0 && disableinitialholddelay) {
     self.trigger usetriggerignoreuseholdtime();
   }
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(level.gameended) {
       continue;
@@ -1063,7 +1063,7 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
     if(!self can_interact_with(player)) {
       continue;
     }
-    if(isDefined(self.caninteractwithplayer) && ![
+    if(isdefined(self.caninteractwithplayer) && ![
         [self.caninteractwithplayer]
       ](player)) {
       continue;
@@ -1074,16 +1074,16 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
     if(player isinvehicle()) {
       continue;
     }
-    if(isDefined(self.keyobject) && !player has_key_object(self)) {
-      if(isDefined(self.oncantuse)) {
+    if(isdefined(self.keyobject) && !player has_key_object(self)) {
+      if(isdefined(self.oncantuse)) {
         self[[self.oncantuse]](player);
       }
       continue;
     }
     result = 1;
     if(self.usetime > 0) {
-      if(isDefined(self.onbeginuse)) {
-        if(isDefined(self.classobj)) {
+      if(isdefined(self.onbeginuse)) {
+        if(isdefined(self.classobj)) {
           [
             [self.classobj]
           ] - > onbeginuse(player);
@@ -1093,15 +1093,15 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
       }
       team = player.pers["team"];
       result = self use_hold_think(player, disableweaponcyclingduringhold);
-      if(isDefined(self.onenduse)) {
+      if(isdefined(self.onenduse)) {
         self[[self.onenduse]](team, player, result);
       }
     }
-    if(!(isDefined(result) && result)) {
+    if(!(isdefined(result) && result)) {
       continue;
     }
-    if(isDefined(self.onuse)) {
-      if(isDefined(self.onuse_thread) && self.onuse_thread) {
+    if(isdefined(self.onuse)) {
+      if(isdefined(self.onuse_thread) && self.onuse_thread) {
         self thread use_object_onuse(player);
       } else {
         self use_object_onuse(player);
@@ -1113,8 +1113,10 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
 function use_object_onuse(player) {
   level endon("game_ended");
   self.trigger endon("destroyed");
-  if(isDefined(self.classobj)) {
-    [[self.classobj]] - > onuse(player);
+  if(isdefined(self.classobj)) {
+    [
+      [self.classobj]
+    ] - > onuse(player);
   } else {
     self[[self.onuse]](player);
   }
@@ -1127,9 +1129,9 @@ function get_earliest_claim_player() {
   if(self.touchlist[team].size > 0) {
     earliesttime = undefined;
     players = getarraykeys(self.touchlist[team]);
-    for(index = 0; index < players.size; index++) {
+    for (index = 0; index < players.size; index++) {
       touchdata = self.touchlist[team][players[index]];
-      if(!isDefined(earliesttime) || touchdata.starttime < earliesttime) {
+      if(!isdefined(earliesttime) || touchdata.starttime < earliesttime) {
         earliestplayer = touchdata.player;
         earliesttime = touchdata.starttime;
       }
@@ -1142,14 +1144,14 @@ function use_object_prox_think() {
   level endon("game_ended");
   self.trigger endon("destroyed");
   self thread prox_trigger_think();
-  while(true) {
+  while (true) {
     if(self.usetime && self.curprogress >= self.usetime) {
       self clear_progress();
       creditplayer = get_earliest_claim_player();
-      if(isDefined(self.onenduse)) {
-        self[[self.onenduse]](self get_claim_team(), creditplayer, isDefined(creditplayer));
+      if(isdefined(self.onenduse)) {
+        self[[self.onenduse]](self get_claim_team(), creditplayer, isdefined(creditplayer));
       }
-      if(isDefined(creditplayer) && isDefined(self.onuse)) {
+      if(isdefined(creditplayer) && isdefined(self.onuse)) {
         self[[self.onuse]](creditplayer);
       }
       if(!self.mustmaintainclaim) {
@@ -1159,7 +1161,7 @@ function use_object_prox_think() {
     }
     if(self.claimteam != "none") {
       if(self use_object_locked_for_team(self.claimteam)) {
-        if(isDefined(self.onenduse)) {
+        if(isdefined(self.onenduse)) {
           self[[self.onenduse]](self get_claim_team(), self.claimplayer, 0);
         }
         self set_claim_team("none");
@@ -1168,8 +1170,8 @@ function use_object_prox_think() {
       } else {
         if(self.usetime && (!self.mustmaintainclaim || self get_owner_team() != self get_claim_team())) {
           if(self.decayprogress && !self.numtouching[self.claimteam]) {
-            if(isDefined(self.claimplayer)) {
-              if(isDefined(self.onenduse)) {
+            if(isdefined(self.claimplayer)) {
+              if(isdefined(self.onenduse)) {
                 self[[self.onenduse]](self get_claim_team(), self.claimplayer, 0);
               }
               self.claimplayer = undefined;
@@ -1183,7 +1185,7 @@ function use_object_prox_think() {
               self clear_progress();
             }
             self update_current_progress();
-            if(isDefined(self.onuseupdate)) {
+            if(isdefined(self.onuseupdate)) {
               self[[self.onuseupdate]](self get_claim_team(), self.curprogress / self.usetime, ((50 * self.userate) * decayscale) / self.usetime);
             }
             if(self.curprogress == 0) {
@@ -1191,7 +1193,7 @@ function use_object_prox_think() {
             }
           } else {
             if(!self.numtouching[self.claimteam]) {
-              if(isDefined(self.onenduse)) {
+              if(isdefined(self.onenduse)) {
                 self[[self.onenduse]](self get_claim_team(), self.claimplayer, 0);
               }
               self set_claim_team("none");
@@ -1199,14 +1201,14 @@ function use_object_prox_think() {
             } else {
               self.curprogress = self.curprogress + (50 * self.userate);
               self update_current_progress();
-              if(isDefined(self.onuseupdate)) {
+              if(isdefined(self.onuseupdate)) {
                 self[[self.onuseupdate]](self get_claim_team(), self.curprogress / self.usetime, (50 * self.userate) / self.usetime);
               }
             }
           }
         } else {
           if(!self.mustmaintainclaim) {
-            if(isDefined(self.onuse)) {
+            if(isdefined(self.onuse)) {
               self[[self.onuse]](self.claimplayer);
             }
             if(!self.mustmaintainclaim) {
@@ -1215,7 +1217,7 @@ function use_object_prox_think() {
             }
           } else {
             if(!self.numtouching[self.claimteam]) {
-              if(isDefined(self.onunoccupied)) {
+              if(isdefined(self.onunoccupied)) {
                 self[[self.onunoccupied]]();
               }
               self set_claim_team("none");
@@ -1223,7 +1225,7 @@ function use_object_prox_think() {
             } else if(self.cancontestclaim) {
               numother = get_num_touching_except_team(self.claimteam);
               if(numother > 0) {
-                if(isDefined(self.oncontested)) {
+                if(isdefined(self.oncontested)) {
                   self[[self.oncontested]]();
                 }
                 self set_claim_team("none");
@@ -1239,13 +1241,13 @@ function use_object_prox_think() {
       }
       if(self.mustmaintainclaim && self get_owner_team() != "none") {
         if(!self.numtouching[self get_owner_team()]) {
-          if(isDefined(self.onunoccupied)) {
+          if(isdefined(self.onunoccupied)) {
             self[[self.onunoccupied]]();
           }
         } else if(self.cancontestclaim && self.lastclaimteam != "none" && self.numtouching[self.lastclaimteam]) {
           numother = get_num_touching_except_team(self.lastclaimteam);
           if(numother == 0) {
-            if(isDefined(self.onuncontested)) {
+            if(isdefined(self.onuncontested)) {
               self[[self.onuncontested]](self.lastclaimteam);
             }
           }
@@ -1258,14 +1260,14 @@ function use_object_prox_think() {
 }
 
 function use_object_locked_for_team(team) {
-  if(isDefined(self.teamlock) && isDefined(level.teams[team])) {
+  if(isdefined(self.teamlock) && isdefined(level.teams[team])) {
     return self.teamlock[team];
   }
   return 0;
 }
 
 function can_claim(player) {
-  if(isDefined(self.carrier)) {
+  if(isdefined(self.carrier)) {
     return false;
   }
   if(self.cancontestclaim) {
@@ -1274,7 +1276,7 @@ function can_claim(player) {
       return false;
     }
   }
-  if(!isDefined(self.keyobject) || player has_key_object(self)) {
+  if(!isdefined(self.keyobject) || player has_key_object(self)) {
     return true;
   }
   return false;
@@ -1284,23 +1286,23 @@ function prox_trigger_think() {
   level endon("game_ended");
   self.trigger endon("destroyed");
   entitynumber = self.entnum;
-  if(!isDefined(self.trigger.remote_control_player_can_trigger)) {
+  if(!isdefined(self.trigger.remote_control_player_can_trigger)) {
     self.trigger.remote_control_player_can_trigger = 0;
   }
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(!isplayer(player)) {
       continue;
     }
     if(player.using_map_vehicle === 1) {
-      if(!isDefined(self.allow_map_vehicles) || self.allow_map_vehicles == 0) {
+      if(!isdefined(self.allow_map_vehicles) || self.allow_map_vehicles == 0) {
         continue;
       }
     }
     if(!isalive(player) || self use_object_locked_for_team(player.pers["team"])) {
       continue;
     }
-    if(isDefined(player.laststand) && player.laststand) {
+    if(isdefined(player.laststand) && player.laststand) {
       continue;
     }
     if(player.spawntime == gettime()) {
@@ -1311,7 +1313,7 @@ function prox_trigger_think() {
         continue;
       }
     }
-    if(isDefined(player.selectinglocation) && player.selectinglocation) {
+    if(isdefined(player.selectinglocation) && player.selectinglocation) {
       continue;
     }
     if(player isweaponviewonlylinked()) {
@@ -1320,7 +1322,7 @@ function prox_trigger_think() {
     if(self is_excluded(player)) {
       continue;
     }
-    if(isDefined(self.canuseobject) && ![
+    if(isdefined(self.canuseobject) && ![
         [self.canuseobject]
       ](player)) {
       continue;
@@ -1330,24 +1332,24 @@ function prox_trigger_think() {
         set_claim_team(player.pers["team"]);
         self.claimplayer = player;
         relativeteam = self get_relative_team(player.pers["team"]);
-        if(isDefined(self.teamusetimes[relativeteam])) {
+        if(isdefined(self.teamusetimes[relativeteam])) {
           self.usetime = self.teamusetimes[relativeteam];
         }
-        if(self.usetime && isDefined(self.onbeginuse)) {
+        if(self.usetime && isdefined(self.onbeginuse)) {
           self[[self.onbeginuse]](self.claimplayer);
         }
-      } else if(isDefined(self.oncantuse)) {
+      } else if(isdefined(self.oncantuse)) {
         self[[self.oncantuse]](player);
       }
     }
-    if(isalive(player) && !isDefined(player.touchtriggers[entitynumber])) {
+    if(isalive(player) && !isdefined(player.touchtriggers[entitynumber])) {
       player thread trigger_touch_think(self);
     }
   }
 }
 
 function is_excluded(player) {
-  if(!isDefined(self.exclusions)) {
+  if(!isdefined(self.exclusions)) {
     return false;
   }
   foreach(exclusion in self.exclusions) {
@@ -1361,7 +1363,7 @@ function is_excluded(player) {
 function clear_progress() {
   self.curprogress = 0;
   self update_current_progress();
-  if(isDefined(self.onuseclear)) {
+  if(isdefined(self.onuseclear)) {
     self[[self.onuseclear]]();
   }
 }
@@ -1388,11 +1390,11 @@ function continue_trigger_touch_think(team, object) {
     return false;
   }
   if(self.using_map_vehicle === 1) {
-    if(!isDefined(object.allow_map_vehicles) || object.allow_map_vehicles == 0) {
+    if(!isdefined(object.allow_map_vehicles) || object.allow_map_vehicles == 0) {
       return false;
     }
   } else {
-    if(!isDefined(object) || !isDefined(object.trigger) || !isDefined(object.trigger.remote_control_player_can_trigger) || object.trigger.remote_control_player_can_trigger == 0) {
+    if(!isdefined(object) || !isdefined(object.trigger) || !isdefined(object.trigger.remote_control_player_can_trigger) || object.trigger.remote_control_player_can_trigger == 0) {
       if(self isinvehicle()) {
         return false;
       }
@@ -1406,10 +1408,10 @@ function continue_trigger_touch_think(team, object) {
   if(self use_object_locked_for_team(team)) {
     return false;
   }
-  if(isDefined(self.laststand) && self.laststand) {
+  if(isdefined(self.laststand) && self.laststand) {
     return false;
   }
-  if(!isDefined(object) || !isDefined(object.trigger)) {
+  if(!isdefined(object) || !isdefined(object.trigger)) {
     return false;
   }
   if(!object.trigger istriggerenabled()) {
@@ -1429,22 +1431,22 @@ function trigger_touch_think(object) {
     object update_use_rate();
   }
   touchname = "player" + self.clientid;
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.player = self;
   struct.starttime = gettime();
   object.touchlist[team][touchname] = struct;
   objective_setplayerusing(object.objectiveid, self);
   self.touchtriggers[object.entnum] = object.trigger;
-  if(isDefined(object.ontouchuse)) {
+  if(isdefined(object.ontouchuse)) {
     object[[object.ontouchuse]](self);
   }
-  while(self continue_trigger_touch_think(team, object)) {
+  while (self continue_trigger_touch_think(team, object)) {
     if(object.usetime) {
       self update_prox_bar(object, 0);
     }
     wait(0.05);
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     if(object.usetime) {
       self update_prox_bar(object, 1);
     }
@@ -1465,7 +1467,7 @@ function trigger_touch_think(object) {
       object update_current_progress();
     }
   }
-  if(isDefined(self) && isDefined(object.onendtouchuse)) {
+  if(isdefined(self) && isdefined(object.onendtouchuse)) {
     object[[object.onendtouchuse]](self);
   }
   object update_use_rate();
@@ -1477,15 +1479,15 @@ function update_prox_bar(object, forceremove) {
   }
   if(!forceremove && object.decayprogress) {
     if(!object can_interact_with(self)) {
-      if(isDefined(self.proxbar)) {
+      if(isdefined(self.proxbar)) {
         self.proxbar hud::hideelem();
       }
-      if(isDefined(self.proxbartext)) {
+      if(isdefined(self.proxbartext)) {
         self.proxbartext hud::hideelem();
       }
       return;
     }
-    if(!isDefined(self.proxbar)) {
+    if(!isdefined(self.proxbar)) {
       self.proxbar = hud::createprimaryprogressbar();
       self.proxbar.lastuserate = -1;
     }
@@ -1499,15 +1501,15 @@ function update_prox_bar(object, forceremove) {
       self.proxbar.lastuserate = -1;
     }
   } else if(forceremove || !object can_interact_with(self) || self.pers["team"] != object.claimteam) {
-    if(isDefined(self.proxbar)) {
+    if(isdefined(self.proxbar)) {
       self.proxbar hud::hideelem();
     }
-    if(isDefined(self.proxbartext)) {
+    if(isdefined(self.proxbartext)) {
       self.proxbartext hud::hideelem();
     }
     return;
   }
-  if(!isDefined(self.proxbar)) {
+  if(!isdefined(self.proxbar)) {
     self.proxbar = hud::createprimaryprogressbar();
     self.proxbar.lastuserate = -1;
     self.proxbar.lasthostmigrationstate = 0;
@@ -1517,7 +1519,7 @@ function update_prox_bar(object, forceremove) {
     self.proxbar.lastuserate = -1;
     self.proxbar.lasthostmigrationstate = 0;
   }
-  if(!isDefined(self.proxbartext)) {
+  if(!isdefined(self.proxbartext)) {
     self.proxbartext = hud::createprimaryprogressbartext();
     self.proxbartext settext(object.usetext);
   }
@@ -1525,7 +1527,7 @@ function update_prox_bar(object, forceremove) {
     self.proxbartext hud::showelem();
     self.proxbartext settext(object.usetext);
   }
-  if(self.proxbar.lastuserate != object.userate || self.proxbar.lasthostmigrationstate != isDefined(level.hostmigrationtimer)) {
+  if(self.proxbar.lastuserate != object.userate || self.proxbar.lasthostmigrationstate != isdefined(level.hostmigrationtimer)) {
     if(object.curprogress > object.usetime) {
       object.curprogress = object.usetime;
     }
@@ -1533,7 +1535,7 @@ function update_prox_bar(object, forceremove) {
       if(object.curprogress > 0) {
         progress = object.curprogress / object.usetime;
         rate = (1000 / object.usetime) * (object.userate * -1);
-        if(isDefined(level.hostmigrationtimer)) {
+        if(isdefined(level.hostmigrationtimer)) {
           rate = 0;
         }
         self.proxbar hud::updatebar(progress, rate);
@@ -1541,12 +1543,12 @@ function update_prox_bar(object, forceremove) {
     } else {
       progress = object.curprogress / object.usetime;
       rate = (1000 / object.usetime) * object.userate;
-      if(isDefined(level.hostmigrationtimer)) {
+      if(isdefined(level.hostmigrationtimer)) {
         rate = 0;
       }
       self.proxbar hud::updatebar(progress, rate);
     }
-    self.proxbar.lasthostmigrationstate = isDefined(level.hostmigrationtimer);
+    self.proxbar.lasthostmigrationstate = isdefined(level.hostmigrationtimer);
     self.proxbar.lastuserate = object.userate;
   }
 }
@@ -1580,14 +1582,14 @@ function update_use_rate() {
   } else if(numclaimants && !numother) {
     self.userate = numclaimants;
   }
-  if(isDefined(self.onupdateuserate)) {
+  if(isdefined(self.onupdateuserate)) {
     self[[self.onupdateuserate]]();
   }
 }
 
 function use_hold_think(player, disableweaponcyclingduringhold) {
   player notify("use_hold");
-  if(!(isDefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
+  if(!(isdefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
     if(!sessionmodeismultiplayergame()) {
       gameobject_link = util::spawn_model("tag_origin", player.origin, player.angles);
       player playerlinkto(gameobject_link);
@@ -1599,7 +1601,7 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
   player clientclaimtrigger(self.trigger);
   player.claimtrigger = self.trigger;
   useweapon = self.useweapon;
-  if(isDefined(useweapon)) {
+  if(isdefined(useweapon)) {
     player giveweapon(useweapon);
     player setweaponammostock(useweapon, 0);
     player setweaponammoclip(useweapon, 0);
@@ -1618,28 +1620,28 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
   }
   result = use_hold_think_loop(player);
   self.inuse = 0;
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     if(enableweaponcyclingafterhold === 1) {
       player enableweaponcycling();
     }
     objective_clearplayerusing(self.objectiveid, player);
     self clear_progress();
-    if(isDefined(player.attachedusemodel)) {
+    if(isdefined(player.attachedusemodel)) {
       player detach(player.attachedusemodel, "tag_inhand");
       player.attachedusemodel = undefined;
     }
     player notify("done_using");
-    if(isDefined(useweapon)) {
+    if(isdefined(useweapon)) {
       player thread take_use_weapon(useweapon);
     }
     player.claimtrigger = undefined;
     player clientreleasetrigger(self.trigger);
-    if(isDefined(useweapon)) {
+    if(isdefined(useweapon)) {
       player killstreaks::switch_to_last_non_killstreak_weapon();
     } else if(self.keepweapon !== 1) {
       player util::_enableweapon();
     }
-    if(!(isDefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
+    if(!(isdefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
       player unlink();
     }
     if(!isalive(player)) {
@@ -1649,7 +1651,7 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
       player waitthenfreezeplayercontrolsifgameendedstill();
     }
   }
-  if(isDefined(gameobject_link)) {
+  if(isdefined(gameobject_link)) {
     gameobject_link delete();
   }
   return result;
@@ -1658,7 +1660,7 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
 function waitthenfreezeplayercontrolsifgameendedstill(wait_time = 1) {
   player = self;
   wait(wait_time);
-  if(isDefined(player) && level.gameended) {
+  if(isdefined(player) && level.gameended) {
     player freezecontrols(1);
   }
 }
@@ -1668,7 +1670,7 @@ function take_use_weapon(useweapon) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(self getcurrentweapon() == useweapon && !self.throwinggrenade) {
+  while (self getcurrentweapon() == useweapon && !self.throwinggrenade) {
     wait(0.05);
   }
   self takeweapon(useweapon);
@@ -1679,7 +1681,7 @@ function continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
   if(!isalive(player)) {
     return false;
   }
-  if(isDefined(player.laststand) && player.laststand) {
+  if(isdefined(player.laststand) && player.laststand) {
     return false;
   }
   if(self.curprogress >= usetime) {
@@ -1697,14 +1699,14 @@ function continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
   if(player isremotecontrolling() || player util::isusingremote()) {
     return false;
   }
-  if(isDefined(player.selectinglocation) && player.selectinglocation) {
+  if(isdefined(player.selectinglocation) && player.selectinglocation) {
     return false;
   }
   if(player isweaponviewonlylinked()) {
     return false;
   }
   if(!player istouching(self.trigger)) {
-    if(!isDefined(player.cursorhintent) || player.cursorhintent != self) {
+    if(!isdefined(player.cursorhintent) || player.cursorhintent != self) {
       return false;
     }
   }
@@ -1714,7 +1716,7 @@ function continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
   if(waitforweapon && timedout > maxwaittime) {
     return false;
   }
-  if(isDefined(self.interrupted) && self.interrupted) {
+  if(isdefined(self.interrupted) && self.interrupted) {
     return false;
   }
   if(level.gameended) {
@@ -1725,7 +1727,7 @@ function continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
 
 function update_current_progress() {
   if(self.usetime) {
-    if(isDefined(self.curprogress)) {
+    if(isdefined(self.curprogress)) {
       progress = float(self.curprogress) / self.usetime;
     } else {
       progress = 0;
@@ -1740,9 +1742,9 @@ function use_hold_think_loop(player) {
   waitforweapon = 1;
   timedout = 0;
   usetime = self.usetime;
-  while(self continue_hold_think_loop(player, waitforweapon, timedout, usetime)) {
+  while (self continue_hold_think_loop(player, waitforweapon, timedout, usetime)) {
     timedout = timedout + 0.05;
-    if(!isDefined(useweapon) || player getcurrentweapon() == useweapon) {
+    if(!isdefined(useweapon) || player getcurrentweapon() == useweapon) {
       self.curprogress = self.curprogress + (50 * self.userate);
       self update_current_progress();
       self.userate = 1;
@@ -1772,7 +1774,7 @@ function personal_use_bar(object) {
   if(object.newstyle) {
     return;
   }
-  if(isDefined(self.usebar)) {
+  if(isdefined(self.usebar)) {
     return;
   }
   self.usebar = hud::createprimaryprogressbar();
@@ -1780,9 +1782,9 @@ function personal_use_bar(object) {
   self.usebartext settext(object.usetext);
   usetime = object.usetime;
   lastrate = -1;
-  lasthostmigrationstate = isDefined(level.hostmigrationtimer);
-  while(isalive(self) && object.inuse && !level.gameended) {
-    if(lastrate != object.userate || lasthostmigrationstate != isDefined(level.hostmigrationtimer)) {
+  lasthostmigrationstate = isdefined(level.hostmigrationtimer);
+  while (isalive(self) && object.inuse && !level.gameended) {
+    if(lastrate != object.userate || lasthostmigrationstate != isdefined(level.hostmigrationtimer)) {
       if(object.curprogress > usetime) {
         object.curprogress = usetime;
       }
@@ -1790,7 +1792,7 @@ function personal_use_bar(object) {
         if(object.curprogress > 0) {
           progress = object.curprogress / usetime;
           rate = (1000 / usetime) * (object.userate * -1);
-          if(isDefined(level.hostmigrationtimer)) {
+          if(isdefined(level.hostmigrationtimer)) {
             rate = 0;
           }
           self.proxbar hud::updatebar(progress, rate);
@@ -1798,7 +1800,7 @@ function personal_use_bar(object) {
       } else {
         progress = object.curprogress / usetime;
         rate = (1000 / usetime) * object.userate;
-        if(isDefined(level.hostmigrationtimer)) {
+        if(isdefined(level.hostmigrationtimer)) {
           rate = 0;
         }
         self.usebar hud::updatebar(progress, rate);
@@ -1812,7 +1814,7 @@ function personal_use_bar(object) {
       }
     }
     lastrate = object.userate;
-    lasthostmigrationstate = isDefined(level.hostmigrationtimer);
+    lasthostmigrationstate = isdefined(level.hostmigrationtimer);
     wait(0.05);
   }
   self.usebar hud::destroyelem();
@@ -1832,7 +1834,7 @@ function update_trigger() {
     } else {
       if(self.interactteam == "friendly") {
         self.trigger triggerenable(1);
-        if(isDefined(level.teams[self.ownerteam])) {
+        if(isdefined(level.teams[self.ownerteam])) {
           self.trigger setteamfortrigger(self.ownerteam);
         } else {
           self.trigger triggerenable(0);
@@ -1860,7 +1862,7 @@ function update_objective() {
     } else {
       if(self.visibleteam == "enemy") {
         objective_state(self.objectiveid, "active");
-        objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] &(~level.spawnsystem.ispawn_teammask[self.ownerteam]));
+        objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] & (~level.spawnsystem.ispawn_teammask[self.ownerteam]));
       } else {
         objective_state(self.objectiveid, "invisible");
         objective_visibleteams(self.objectiveid, 0);
@@ -1871,7 +1873,7 @@ function update_objective() {
     if(isalive(self.carrier)) {
       objective_onentity(self.objectiveid, self.carrier);
     } else {
-      if(isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
+      if(isdefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
         objective_onentity(self.objectiveid, self.visuals[0]);
       } else {
         objective_clearentity(self.objectiveid);
@@ -1904,11 +1906,11 @@ function update_world_icon(relativeteam, showicon) {
   if(self.newstyle) {
     return;
   }
-  if(!isDefined(self.worldicons[relativeteam])) {
+  if(!isdefined(self.worldicons[relativeteam])) {
     showicon = 0;
   }
   updateteams = get_update_teams(relativeteam);
-  for(index = 0; index < updateteams.size; index++) {
+  for (index = 0; index < updateteams.size; index++) {
     if(!level.teambased && updateteams[index] != level.nonteambasedteam) {
       continue;
     }
@@ -1922,16 +1924,16 @@ function update_world_icon(relativeteam, showicon) {
       objpoint.alpha = objpoint.basealpha;
       objpoint.isshown = 1;
       iswaypoint = 1;
-      if(isDefined(self.worldiswaypoint[relativeteam])) {
+      if(isdefined(self.worldiswaypoint[relativeteam])) {
         iswaypoint = self.worldiswaypoint[relativeteam];
       }
-      if(isDefined(self.compassicons[relativeteam])) {
+      if(isdefined(self.compassicons[relativeteam])) {
         objpoint setwaypoint(iswaypoint, self.worldicons[relativeteam]);
       } else {
         objpoint setwaypoint(iswaypoint);
       }
       if(self.type == "carryObject" || self.type == "packObject") {
-        if(isDefined(self.carrier) && !should_ping_object(relativeteam)) {
+        if(isdefined(self.carrier) && !should_ping_object(relativeteam)) {
           objpoint settargetent(self.carrier);
         } else {
           objpoint cleartargetent();
@@ -1971,7 +1973,7 @@ function update_compass_icon(relativeteam, showicon) {
     return;
   }
   updateteams = get_update_teams(relativeteam);
-  for(index = 0; index < updateteams.size; index++) {
+  for (index = 0; index < updateteams.size; index++) {
     showiconthisteam = showicon;
     if(!showiconthisteam && should_show_compass_due_to_radar(updateteams[index])) {
       showiconthisteam = 1;
@@ -1981,7 +1983,7 @@ function update_compass_icon(relativeteam, showicon) {
     } else {
       objid = self.objid[level.nonteambasedteam];
     }
-    if(!isDefined(self.compassicons[relativeteam]) || !showiconthisteam) {
+    if(!isdefined(self.compassicons[relativeteam]) || !showiconthisteam) {
       if(!sessionmodeiscampaigngame()) {
         objective_state(objid, "invisible");
       }
@@ -2005,7 +2007,7 @@ function update_compass_icon(relativeteam, showicon) {
 }
 
 function hide_waypoint(e_player) {
-  if(isDefined(e_player)) {
+  if(isdefined(e_player)) {
     assert(isplayer(e_player), "");
     objective_setinvisibletoplayer(self.objectiveid, e_player);
   } else {
@@ -2014,7 +2016,7 @@ function hide_waypoint(e_player) {
 }
 
 function show_waypoint(e_player) {
-  if(isDefined(e_player)) {
+  if(isdefined(e_player)) {
     assert(isplayer(e_player), "");
     objective_setvisibletoplayer(self.objectiveid, e_player);
   } else {
@@ -2060,7 +2062,7 @@ function get_update_teams(relativeteam) {
 
 function should_show_compass_due_to_radar(team) {
   showcompass = 0;
-  if(!isDefined(self.carrier)) {
+  if(!isdefined(self.carrier)) {
     return 0;
   }
   if(self.carrier hasperk("specialty_gpsjammer") == 0) {
@@ -2077,7 +2079,7 @@ function should_show_compass_due_to_radar(team) {
 function update_visibility_according_to_radar() {
   self endon("death");
   self endon("carrier_cleared");
-  while(true) {
+  while (true) {
     level waittill("radar_status_change");
     self update_compass_icons();
   }
@@ -2146,14 +2148,14 @@ function set_visible_team(relativeteam) {
 
 function set_model_visibility(visibility) {
   if(visibility) {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] thread make_solid();
       }
     }
   } else {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] ghost();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] notify("changing_solidness");
@@ -2167,8 +2169,8 @@ function make_solid() {
   self endon("death");
   self notify("changing_solidness");
   self endon("changing_solidness");
-  while(true) {
-    for(i = 0; i < level.players.size; i++) {
+  while (true) {
+    for (i = 0; i < level.players.size; i++) {
       if(level.players[i] istouching(self)) {
         break;
       }
@@ -2195,7 +2197,7 @@ function set_2d_icon(relativeteam, shader) {
 }
 
 function set_3d_icon(relativeteam, shader) {
-  if(!isDefined(shader)) {
+  if(!isdefined(shader)) {
     self.worldicons_disabled[relativeteam] = 1;
   } else {
     self.worldicons_disabled[relativeteam] = 0;
@@ -2206,17 +2208,17 @@ function set_3d_icon(relativeteam, shader) {
 
 function set_3d_icon_color(relativeteam, v_color, alpha) {
   updateteams = get_update_teams(relativeteam);
-  for(index = 0; index < updateteams.size; index++) {
+  for (index = 0; index < updateteams.size; index++) {
     if(!level.teambased && updateteams[index] != level.nonteambasedteam) {
       continue;
     }
     opname = (("objpoint_" + updateteams[index]) + "_") + self.entnum;
     objpoint = objpoints::get_by_name(opname);
-    if(isDefined(objpoint)) {
-      if(isDefined(v_color)) {
+    if(isdefined(objpoint)) {
+      if(isdefined(v_color)) {
         objpoint.color = v_color;
       }
-      if(isDefined(alpha)) {
+      if(isdefined(alpha)) {
         objpoint.alpha = alpha;
       }
     }
@@ -2228,7 +2230,7 @@ function set_objective_color(relativeteam, v_color, alpha = 1) {
     objective_setcolor(self.objectiveid, v_color[0], v_color[1], v_color[2], alpha);
   } else {
     a_teams = get_update_teams(relativeteam);
-    for(index = 0; index < a_teams.size; index++) {
+    for (index = 0; index < a_teams.size; index++) {
       if(!level.teambased && a_teams[index] != level.nonteambasedteam) {
         continue;
       }
@@ -2239,7 +2241,7 @@ function set_objective_color(relativeteam, v_color, alpha = 1) {
 
 function set_objective_entity(entity) {
   if(self.newstyle) {
-    if(isDefined(self.objectiveid)) {
+    if(isdefined(self.objectiveid)) {
       objective_onentity(self.objectiveid, entity);
     }
   } else {
@@ -2252,8 +2254,8 @@ function set_objective_entity(entity) {
 
 function get_objective_ids(str_team) {
   a_objective_ids = [];
-  if(isDefined(self.newstyle) && self.newstyle) {
-    if(!isDefined(a_objective_ids)) {
+  if(isdefined(self.newstyle) && self.newstyle) {
+    if(!isdefined(a_objective_ids)) {
       a_objective_ids = [];
     } else if(!isarray(a_objective_ids)) {
       a_objective_ids = array(a_objective_ids);
@@ -2261,9 +2263,9 @@ function get_objective_ids(str_team) {
     a_objective_ids[a_objective_ids.size] = self.objectiveid;
   } else {
     a_keys = getarraykeys(self.objid);
-    for(i = 0; i < a_keys.size; i++) {
-      if(!isDefined(str_team) || str_team == a_keys[i]) {
-        if(!isDefined(a_objective_ids)) {
+    for (i = 0; i < a_keys.size; i++) {
+      if(!isdefined(str_team) || str_team == a_keys[i]) {
+        if(!isdefined(a_objective_ids)) {
           a_objective_ids = [];
         } else if(!isarray(a_objective_ids)) {
           a_objective_ids = array(a_objective_ids);
@@ -2271,7 +2273,7 @@ function get_objective_ids(str_team) {
         a_objective_ids[a_objective_ids.size] = self.objid[a_keys[i]];
       }
     }
-    if(!isDefined(a_objective_ids)) {
+    if(!isdefined(a_objective_ids)) {
       a_objective_ids = [];
     } else if(!isarray(a_objective_ids)) {
       a_objective_ids = array(a_objective_ids);
@@ -2284,17 +2286,17 @@ function get_objective_ids(str_team) {
 function hide_icon_distance_and_los(v_color, hide_distance, los_check, ignore_ent) {
   self endon("disabled");
   self endon("destroyed_complete");
-  while(true) {
+  while (true) {
     hide = 0;
-    if(isDefined(self.worldicons_disabled["friendly"]) && self.worldicons_disabled["friendly"] == 1) {
+    if(isdefined(self.worldicons_disabled["friendly"]) && self.worldicons_disabled["friendly"] == 1) {
       hide = 1;
     }
     if(!hide) {
       hide = 1;
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         n_dist = distance(level.players[i].origin, self.curorigin);
         if(n_dist < hide_distance) {
-          if(isDefined(los_check) && los_check) {
+          if(isdefined(los_check) && los_check) {
             b_cansee = level.players[i] gameobject_is_player_looking_at(self.curorigin, 0.8, 1, ignore_ent, 42);
             if(b_cansee) {
               hide = 0;
@@ -2318,23 +2320,23 @@ function hide_icon_distance_and_los(v_color, hide_distance, los_check, ignore_en
 
 function gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, ignore_trace_distance) {
   assert(isplayer(self), "");
-  if(!isDefined(dot)) {
+  if(!isdefined(dot)) {
     dot = 0.7;
   }
-  if(!isDefined(do_trace)) {
+  if(!isdefined(do_trace)) {
     do_trace = 1;
   }
   eye = self util::get_eye();
-  delta_vec = anglesToForward(vectortoangles(origin - eye));
-  view_vec = anglesToForward(self getplayerangles());
+  delta_vec = anglestoforward(vectortoangles(origin - eye));
+  view_vec = anglestoforward(self getplayerangles());
   new_dot = vectordot(delta_vec, view_vec);
   if(new_dot >= dot) {
     if(do_trace) {
-      trace = bulletTrace(eye, origin, 0, ignore_ent);
+      trace = bullettrace(eye, origin, 0, ignore_ent);
       if(trace["position"] == origin) {
         return true;
       }
-      if(isDefined(ignore_trace_distance)) {
+      if(isdefined(ignore_trace_distance)) {
         n_mag = distance(origin, eye);
         n_dist = distance(trace["position"], eye);
         n_delta = abs(n_dist - n_mag);
@@ -2375,10 +2377,10 @@ function hide_icons(team) {
 }
 
 function show_icons(team) {
-  if(isDefined(self.hidden_compassicon[team])) {
+  if(isdefined(self.hidden_compassicon[team])) {
     self set_2d_icon(team, self.hidden_compassicon[team]);
   }
-  if(isDefined(self.hidden_worldicon[team])) {
+  if(isdefined(self.hidden_worldicon[team])) {
     self set_3d_icon(team, self.hidden_worldicon[team]);
   }
 }
@@ -2410,13 +2412,13 @@ function destroy_object(deletetrigger, forcehide = 1, b_connect_paths = 0) {
     if(b_connect_paths) {
       visual connectpaths();
     }
-    if(isDefined(visual)) {
+    if(isdefined(visual)) {
       visual ghost();
       visual delete();
     }
   }
   self.trigger notify("destroyed");
-  if(isDefined(deletetrigger) && deletetrigger) {
+  if(isdefined(deletetrigger) && deletetrigger) {
     self.trigger delete();
   } else {
     self.trigger triggerenable(1);
@@ -2426,32 +2428,32 @@ function destroy_object(deletetrigger, forcehide = 1, b_connect_paths = 0) {
 
 function disable_object(forcehide) {
   self notify("disabled");
-  if(self.type == "carryObject" || self.type == "packObject" || (isDefined(forcehide) && forcehide)) {
-    if(isDefined(self.carrier)) {
+  if(self.type == "carryObject" || self.type == "packObject" || (isdefined(forcehide) && forcehide)) {
+    if(isdefined(self.carrier)) {
       self.carrier take_object(self);
     }
-    for(index = 0; index < self.visuals.size; index++) {
-      if(isDefined(self.visuals[index])) {
+    for (index = 0; index < self.visuals.size; index++) {
+      if(isdefined(self.visuals[index])) {
         self.visuals[index] ghost();
       }
     }
   }
   self.trigger triggerenable(0);
   self set_visible_team("none");
-  if(isDefined(self.objectiveid)) {
+  if(isdefined(self.objectiveid)) {
     objective_clearentity(self.objectiveid);
   }
 }
 
 function enable_object(forceshow) {
-  if(self.type == "carryObject" || self.type == "packObject" || (isDefined(forceshow) && forceshow)) {
-    for(index = 0; index < self.visuals.size; index++) {
+  if(self.type == "carryObject" || self.type == "packObject" || (isdefined(forceshow) && forceshow)) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
     }
   }
   self.trigger triggerenable(1);
   self set_visible_team("any");
-  if(isDefined(self.objectiveid)) {
+  if(isdefined(self.objectiveid)) {
     objective_onentity(self.objectiveid, self);
   }
 }
@@ -2484,7 +2486,7 @@ function is_friendly_team(team) {
 
 function can_interact_with(player) {
   if(player.using_map_vehicle === 1) {
-    if(!isDefined(self.allow_map_vehicles) || self.allow_map_vehicles == 0) {
+    if(!isdefined(self.allow_map_vehicles) || self.allow_map_vehicles == 0) {
       return false;
     }
   }
@@ -2516,7 +2518,7 @@ function can_interact_with(player) {
         if(team != self.ownerteam) {
           return true;
         } else {
-          if(isDefined(self.decayprogress) && self.decayprogress && self.curprogress > 0) {
+          if(isdefined(self.decayprogress) && self.decayprogress && self.curprogress > 0) {
             return true;
           } else {
             return false;
@@ -2546,7 +2548,7 @@ function is_team(team) {
       break;
     }
   }
-  if(isDefined(level.teams[team])) {
+  if(isdefined(level.teams[team])) {
     return true;
   }
   return false;
@@ -2605,11 +2607,11 @@ function get_next_obj_id() {
 
 function release_obj_id(objid) {
   assert(objid < level.numgametypereservedobjectives);
-  for(i = 0; i < level.releasedobjectives.size; i++) {
+  for (i = 0; i < level.releasedobjectives.size; i++) {
     if(objid == level.releasedobjectives[i] && objid == 127) {
       return;
     }
-    /
+    /# /
     #
     assert(objid != level.releasedobjectives[i]);
   }
@@ -2619,20 +2621,20 @@ function release_obj_id(objid) {
 }
 
 function release_all_objective_ids() {
-  if(isDefined(self.objid)) {
+  if(isdefined(self.objid)) {
     a_keys = getarraykeys(self.objid);
-    for(i = 0; i < a_keys.size; i++) {
+    for (i = 0; i < a_keys.size; i++) {
       release_obj_id(self.objid[a_keys[i]]);
     }
   }
-  if(isDefined(self.objectiveid)) {
+  if(isdefined(self.objectiveid)) {
     release_obj_id(self.objectiveid);
   }
 }
 
 function get_label() {
   label = self.trigger.script_label;
-  if(!isDefined(label)) {
+  if(!isdefined(label)) {
     label = "";
     return label;
   }
@@ -2659,11 +2661,11 @@ function get_flags(flags) {
 }
 
 function create_pack_object(ownerteam, trigger, visuals, offset, objectivename) {
-  if(!isDefined(level.max_packobjects)) {
+  if(!isdefined(level.max_packobjects)) {
     level.max_packobjects = 4;
   }
   assert(level.max_packobjects < 5, "");
-  packobject = spawnStruct();
+  packobject = spawnstruct();
   packobject.type = "packObject";
   packobject.curorigin = trigger.origin;
   packobject.entnum = trigger getentitynumber();
@@ -2675,19 +2677,19 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename) 
   trigger.baseorigin = trigger.origin;
   packobject.trigger = trigger;
   packobject.useweapon = undefined;
-  if(!isDefined(offset)) {
+  if(!isdefined(offset)) {
     offset = (0, 0, 0);
   }
   packobject.offset3d = offset;
   packobject.newstyle = 0;
-  if(isDefined(objectivename)) {
+  if(isdefined(objectivename)) {
     if(!sessionmodeiscampaigngame()) {
       packobject.newstyle = 1;
     }
   } else {
-    objectivename = &"";
+    objectivename = & "";
   }
-  for(index = 0; index < visuals.size; index++) {
+  for (index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
     visuals[index].baseangles = visuals[index].angles;
   }
@@ -2761,7 +2763,7 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename) 
     packobject.decayprogress = 0;
     packobject.teamusetimes = [];
     packobject.teamusetexts = [];
-    packobject.onuse = &set_picked_up;
+    packobject.onuse = & set_picked_up;
     packobject thread use_object_prox_think();
   }
   packobject thread update_carry_object_origin();
@@ -2773,7 +2775,7 @@ function give_pack_object(object) {
   self.packobject[self.packobject.size] = object;
   self thread track_carrier(object);
   if(!object.newstyle) {
-    if(isDefined(object.packicon)) {
+    if(isdefined(object.packicon)) {
       if(self issplitscreen()) {
         elem = hud::createicon(object.packicon, 25, 25);
         elem.y = -90;
@@ -2808,11 +2810,11 @@ function get_packicon_offset(index = 0) {
 }
 
 function adjust_remaining_packicons() {
-  if(!isDefined(self.packicon)) {
+  if(!isdefined(self.packicon)) {
     return;
   }
   if(self.packicon.size > 0) {
-    for(i = 0; i < self.packicon.size; i++) {
+    for (i = 0; i < self.packicon.size; i++) {
       self.packicon[i].x = get_packicon_offset(i);
     }
   }

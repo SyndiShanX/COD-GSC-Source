@@ -3,6 +3,7 @@
  * Script: maps\createfx\mp_shipment_long_fx.gsc
 *************************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
@@ -713,4 +714,5 @@ main() {
   ent.v["origin"] = (-858.4, -322.3, 320);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_rain_roof";
+
 }

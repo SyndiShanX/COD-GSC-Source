@@ -21,7 +21,9 @@ init() {
   level thread powercell_init_dropoff();
   level thread test();
   if(isDefined(level.powercell_init_func)) {
-    [[level.powercell_init_func]]();
+    [
+      [level.powercell_init_func]
+    ]();
   }
 }
 
@@ -61,7 +63,7 @@ powercell_fx() {
   self.fx = spawn("script_model", self.origin);
   self.fx.angles = self.angles;
   self.fx setModel("tag_origin");
-  playFXOnTag(level._effect["powercell"], self.fx, "tag_origin");
+  playfxontag(level._effect["powercell"], self.fx, "tag_origin");
   self waittill("powercell_picked_up");
   self.fx delete();
 }
@@ -130,7 +132,9 @@ powercell_dropoff() {
       self thread play_sound_on_entity("zmb_power_cell_insert");
       user notify("powercell_dropoff");
       if(isDefined(level.powercell_dropoff_func)) {
-        [[level.powercell_dropoff_func]]();
+        [
+          [level.powercell_dropoff_func]
+        ]();
       }
       user maps\_zombiemode_rank::giveRankXP("powercell");
     } else {

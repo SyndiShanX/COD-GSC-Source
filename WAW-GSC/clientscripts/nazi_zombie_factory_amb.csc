@@ -34,18 +34,18 @@ main() {
     }
     teleportation_audio(pad) {
       teleport_delay = 2;
-      while(1) {
+      while (1) {
         level waittill("tpw" + pad);
         if(isDefined(self.script_sound)) {
           if(self.targetname == "telepad_" + pad) {
-            playSound(0, self.script_sound + "_warmup", self.origin);
+            playsound(0, self.script_sound + "_warmup", self.origin);
             realwait(teleport_delay);
-            playSound(0, self.script_sound + "_cooldown", self.origin);
+            playsound(0, self.script_sound + "_cooldown", self.origin);
           }
           if(self.targetname == "homepad") {
             realwait(teleport_delay);
-            playSound(0, self.script_sound + "_warmup", self.origin);
-            playSound(0, self.script_sound + "_cooldown", self.origin);
+            playsound(0, self.script_sound + "_warmup", self.origin);
+            playsound(0, self.script_sound + "_cooldown", self.origin);
           }
         }
       }
@@ -57,21 +57,21 @@ main() {
     }
     pole_fx_audio(pad) {
       level waittill("scd" + pad);
-      while(1) {
-        playFX(0, level._effect["zombie_elec_pole_terminal"], self.origin, anglesToForward(self.angles));
-        playSound(0, "pole_spark", self.origin);
+      while (1) {
+        playfx(0, level._effect["zombie_elec_pole_terminal"], self.origin, anglestoforward(self.angles));
+        playsound(0, "pole_spark", self.origin);
         realwait(randomintrange(2, 7));
       }
     }
     pa_level_start() {
       wait(2);
-      playSound(0, "pa_buzz", self.origin);
+      playsound(0, "pa_buzz", self.origin);
       wait(1.2);
       self pa_play_dialog("pa_level_start");
     }
     pa_power_on() {
       level waittill("pl1");
-      playSound(0, "pa_buzz", self.origin);
+      playsound(0, "pa_buzz", self.origin);
       wait(1.2);
       self pa_play_dialog("pa_power_on");
     }

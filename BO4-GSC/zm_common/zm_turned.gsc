@@ -18,6 +18,7 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_turned;
 
 init() {
@@ -41,13 +42,13 @@ init() {
 
 setup_zombie_exerts() {
   waitframe(1);
-  level.exert_sounds[1][# "burp"] = "null";
-  level.exert_sounds[1][# "hitmed"] = "null";
-  level.exert_sounds[1][# "hitlrg"] = "null";
+  level.exert_sounds[1][#"burp"] = "null";
+  level.exert_sounds[1][#"hitmed"] = "null";
+  level.exert_sounds[1][#"hitlrg"] = "null";
 }
 
 delay_turning_on_eyes() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   util::wait_network_frame();
   wait 0.1;
   self clientfield::set("player_has_eyes", 1);
@@ -83,7 +84,7 @@ turn_to_zombie() {
   self notify(#"zombify");
   self.is_in_process_of_zombify = 1;
   self.team = level.zombie_team;
-  self.pers[# "team"] = level.zombie_team;
+  self.pers[#"team"] = level.zombie_team;
   self.sessionteam = level.zombie_team;
   util::wait_network_frame();
   self zm_gametype::onspawnplayer();
@@ -174,7 +175,7 @@ turn_to_human() {
   self.is_zombie = 0;
   self notify(#"clear_red_flashing_overlay");
   self.team = self.prevteam;
-  self.pers[# "team"] = self.prevteam;
+  self.pers[#"team"] = self.prevteam;
   self.sessionteam = self.prevteam;
   util::wait_network_frame();
   self zm_gametype::onspawnplayer();
@@ -235,7 +236,7 @@ deletezombiesinradius(origin) {
   foreach(zombie in zombies) {
     if(isDefined(zombie) && isalive(zombie) && !(isDefined(zombie.is_being_used_as_spawner) && zombie.is_being_used_as_spawner)) {
       if(distancesquared(zombie.origin, origin) < maxradius * maxradius) {
-        playFX(level._effect[# "wood_chunk_destory"], zombie.origin);
+        playFX(level._effect[#"wood_chunk_destory"], zombie.origin);
         zombie thread silentlyremovezombie();
       }
 
@@ -262,7 +263,7 @@ turned_give_melee_weapon() {
 }
 
 turned_player_buttons() {
-  self endon(#"disconnect", # "humanify");
+  self endon(#"disconnect", #"humanify");
   level endon(#"end_game");
 
   while(isDefined(self.is_zombie) && self.is_zombie) {

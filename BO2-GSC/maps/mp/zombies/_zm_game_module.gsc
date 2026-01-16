@@ -20,12 +20,11 @@ register_game_module(index, module_name, pre_init_func, post_init_func, pre_init
     if(!isDefined(level._game_modules[i])) {
       continue;
     }
-    if(isDefined(level._game_modules[i].index) && level._game_modules[i].index == index) {
+    if(isDefined(level._game_modules[i].index) && level._game_modules[i].index == index)
       assert(level._game_modules[i].index != index, "A Game module is already registered for index (" + index + ")");
-    }
   }
 
-  level._game_modules[level._num_registered_game_modules] = spawnStruct();
+  level._game_modules[level._num_registered_game_modules] = spawnstruct();
   level._game_modules[level._num_registered_game_modules].index = index;
   level._game_modules[level._num_registered_game_modules].module_name = module_name;
   level._game_modules[level._num_registered_game_modules].pre_init_func = pre_init_func;
@@ -58,14 +57,12 @@ get_current_game_module() {
 }
 
 get_game_module(game_module_index) {
-  if(!isDefined(game_module_index)) {
+  if(!isDefined(game_module_index))
     return undefined;
-  }
 
   for(i = 0; i < level._game_modules.size; i++) {
-    if(level._game_modules[i].index == game_module_index) {
+    if(level._game_modules[i].index == game_module_index)
       return level._game_modules[i];
-    }
   }
 
   return undefined;
@@ -103,9 +100,8 @@ kill_all_zombies() {
 freeze_players(freeze) {
   players = get_players();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] freeze_player_controls(freeze);
-  }
 }
 
 turn_power_on_and_open_doors() {
@@ -113,7 +109,7 @@ turn_power_on_and_open_doors() {
   level.power_local_doors_globally = 1;
   flag_set("power_on");
   level setclientfield("zombie_power_on", 1);
-  zombie_doors = getEntArray("zombie_door", "targetname");
+  zombie_doors = getentarray("zombie_door", "targetname");
 
   foreach(door in zombie_doors) {
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "electric_door") {
@@ -121,9 +117,8 @@ turn_power_on_and_open_doors() {
       continue;
     }
 
-    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door") {
+    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door")
       door notify("local_power_on");
-    }
   }
 }
 
@@ -132,9 +127,8 @@ respawn_spectators_and_freeze_players() {
 
   foreach(player in players) {
     if(player.sessionstate == "spectator") {
-      if(isDefined(player.spectate_hud)) {
+      if(isDefined(player.spectate_hud))
         player.spectate_hud destroy();
-      }
 
       player[[level.spawnplayer]]();
     }
@@ -144,17 +138,14 @@ respawn_spectators_and_freeze_players() {
 }
 
 damage_callback_no_pvp_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isplayer(eattacker) && eattacker == self) {
+  if(isDefined(eattacker) && isplayer(eattacker) && eattacker == self)
     return idamage;
-  }
 
-  if(isDefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(eattacker) && !isplayer(eattacker))
     return idamage;
-  }
 
-  if(!isDefined(eattacker)) {
+  if(!isDefined(eattacker))
     return idamage;
-  }
 
   return 0;
 }
@@ -171,18 +162,16 @@ respawn_players() {
 zombie_goto_round(target_round) {
   level notify("restart_round");
 
-  if(target_round < 1) {
+  if(target_round < 1)
     target_round = 1;
-  }
 
   level.zombie_total = 0;
   maps\mp\zombies\_zm::ai_calculate_health(target_round);
   zombies = get_round_enemy_array();
 
   if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
+    for(i = 0; i < zombies.size; i++)
       zombies[i] dodamage(zombies[i].health + 666, zombies[i].origin);
-    }
   }
 
   respawn_players();
@@ -205,24 +194,21 @@ wait_for_team_death_and_round_end() {
         continue;
       }
       if(player._encounters_team == "A") {
-        if(is_player_valid(player)) {
+        if(is_player_valid(player))
           cia_alive++;
-        }
 
         continue;
       }
 
-      if(is_player_valid(player)) {
+      if(is_player_valid(player))
         cdc_alive++;
-      }
     }
 
     if(cia_alive == 0 && cdc_alive == 0 && !level.isresetting_grief && !(isDefined(level.host_ended_game) && level.host_ended_game)) {
       wait 0.5;
 
-      if(isDefined(level._grief_reset_message)) {
+      if(isDefined(level._grief_reset_message))
         level thread[[level._grief_reset_message]]();
-      }
 
       level.isresetting_grief = 1;
       level notify("end_round_think");
@@ -292,23 +278,20 @@ wait_for_team_death() {
 
     foreach(player in players) {
       if(player._encounters_team == "A") {
-        if(is_player_valid(player) || isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive && isDefined(player.lives) && player.lives > 0) {
+        if(is_player_valid(player) || isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive && isDefined(player.lives) && player.lives > 0)
           cia_alive++;
-        }
 
         continue;
       }
 
-      if(is_player_valid(player) || isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive && isDefined(player.lives) && player.lives > 0) {
+      if(is_player_valid(player) || isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive && isDefined(player.lives) && player.lives > 0)
         cdc_alive++;
-      }
     }
 
-    if(cia_alive == 0) {
+    if(cia_alive == 0)
       winner = "B";
-    } else if(cdc_alive == 0) {
+    else if(cdc_alive == 0)
       winner = "A";
-    }
 
     wait 0.05;
   }
@@ -339,7 +322,7 @@ game_module_custom_intermission(intermission_struct) {
   if(!isDefined(level.intermission_cam_model)) {
     level.intermission_cam_model = spawn("script_model", s_point.origin);
     level.intermission_cam_model.angles = s_point.angles;
-    level.intermission_cam_model setModel("tag_origin");
+    level.intermission_cam_model setmodel("tag_origin");
   }
 
   self.game_over_bg = newclienthudelem(self);
@@ -354,9 +337,8 @@ game_module_custom_intermission(intermission_struct) {
   self linkto(level.intermission_cam_model);
   level.intermission_cam_model moveto(getstruct(s_point.target, "targetname").origin, 12);
 
-  if(isDefined(level.intermission_cam_model.angles)) {
+  if(isDefined(level.intermission_cam_model.angles))
     level.intermission_cam_model rotateto(getstruct(s_point.target, "targetname").angles, 12);
-  }
 
   self.game_over_bg fadeovertime(2);
   self.game_over_bg.alpha = 0;
@@ -368,9 +350,8 @@ create_fireworks(launch_spots, min_wait, max_wait, randomize) {
   level endon("stop_fireworks");
 
   while(true) {
-    if(isDefined(randomize) && randomize) {
+    if(isDefined(randomize) && randomize)
       launch_spots = array_randomize(launch_spots);
-    }
 
     foreach(spot in launch_spots) {
       level thread fireworks_launch(spot);
@@ -383,10 +364,10 @@ create_fireworks(launch_spots, min_wait, max_wait, randomize) {
 
 fireworks_launch(launch_spot) {
   firework = spawn("script_model", launch_spot.origin + (randomintrange(-60, 60), randomintrange(-60, 60), 0));
-  firework setModel("tag_origin");
+  firework setmodel("tag_origin");
   wait_network_frame();
-  playFXOnTag(level._effect["fw_trail_cheap"], firework, "tag_origin");
-  firework playLoopSound("zmb_souls_loop", 0.75);
+  playfxontag(level._effect["fw_trail_cheap"], firework, "tag_origin");
+  firework playloopsound("zmb_souls_loop", 0.75);
   dest = launch_spot;
 
   while(isDefined(dest) && isDefined(dest.target)) {
@@ -400,7 +381,7 @@ fireworks_launch(launch_spot) {
     firework waittill("movedone");
   }
 
-  firework playSound("zmb_souls_end");
-  playFX(level._effect["fw_pre_burst"], firework.origin);
+  firework playsound("zmb_souls_end");
+  playfx(level._effect["fw_pre_burst"], firework.origin);
   firework delete();
 }

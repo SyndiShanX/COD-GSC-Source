@@ -76,7 +76,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player thread onMenuResponse();
@@ -84,21 +84,17 @@ onPlayerConnect() {
 }
 
 isOptionsMenu(menu) {
-  if(menu == game["menu_changeclass"]) {
+  if(menu == game["menu_changeclass"])
     return true;
-  }
 
-  if(menu == game["menu_team"]) {
+  if(menu == game["menu_team"])
     return true;
-  }
 
-  if(menu == game["menu_controls"]) {
+  if(menu == game["menu_controls"])
     return true;
-  }
 
-  if(isSubStr(menu, "pc_options")) {
+  if(isSubStr(menu, "pc_options"))
     return true;
-  }
 
   return false;
 }
@@ -106,7 +102,7 @@ isOptionsMenu(menu) {
 onMenuResponse() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("menuresponse", menu, response);
 
     if(response == "back") {
@@ -114,12 +110,10 @@ onMenuResponse() {
       self closeInGameMenu();
 
       if(isOptionsMenu(menu)) {
-        if(self.pers["team"] == "allies") {
+        if(self.pers["team"] == "allies")
           self openpopupMenu(game["menu_class_allies"]);
-        }
-        if(self.pers["team"] == "axis") {
+        if(self.pers["team"] == "axis")
           self openpopupMenu(game["menu_class_axis"]);
-        }
       }
       continue;
     }
@@ -144,13 +138,11 @@ onMenuResponse() {
       continue;
     }
 
-    if(response == "changeclass_marines_splitscreen") {
+    if(response == "changeclass_marines_splitscreen")
       self openpopupMenu("changeclass_marines_splitscreen");
-    }
 
-    if(response == "changeclass_opfor_splitscreen") {
+    if(response == "changeclass_opfor_splitscreen")
       self openpopupMenu("changeclass_opfor_splitscreen");
-    }
 
     if(response == "endgame") {
       if(level.splitscreen) {
@@ -203,13 +195,12 @@ onMenuResponse() {
       self.selectedClass = true;
       self[[level.class]](response);
     } else if(!level.console) {
-      if(menu == game["menu_quickcommands"]) {
+      if(menu == game["menu_quickcommands"])
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      } else if(menu == game["menu_quickstatements"]) {
+      else if(menu == game["menu_quickstatements"])
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      } else if(menu == game["menu_quickresponses"]) {
+      else if(menu == game["menu_quickresponses"])
         maps\mp\gametypes\_quickmessages::quickresponses(response);
-      }
     }
   }
 }
@@ -218,9 +209,8 @@ getTeamAssignment() {
   teams[0] = "allies";
   teams[1] = "axis";
 
-  if(!level.teamBased) {
+  if(!level.teamBased)
     return teams[randomInt(2)];
-  }
 
   if(self.sessionteam != "none" && self.sessionteam != "spectator" && self.sessionstate != "playing" && self.sessionstate != "dead") {
     assignment = self.sessionteam;
@@ -229,13 +219,12 @@ getTeamAssignment() {
 
     // if teams are equal return the team with the lowest score
     if(playerCounts["allies"] == playerCounts["axis"]) {
-      if(getTeamScore("allies") == getTeamScore("axis")) {
+      if(getTeamScore("allies") == getTeamScore("axis"))
         assignment = teams[randomInt(2)];
-      } else if(getTeamScore("allies") < getTeamScore("axis")) {
+      else if(getTeamScore("allies") < getTeamScore("axis"))
         assignment = "allies";
-      } else {
+      else
         assignment = "axis";
-      }
     } else if(playerCounts["allies"] < playerCounts["axis"]) {
       assignment = "allies";
     } else {
@@ -267,9 +256,8 @@ menuAutoAssign() {
   self.pers["class"] = undefined;
   self.class = undefined;
 
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     self.statusicon = "hud_status_dead";
-  }
 
   self notify("end_respawn");
 
@@ -285,9 +273,8 @@ beginClassChoice(forceNewChoice) {
   // menu_class_team is where you can choose to change your team, class, controls, or leave game.
   self openpopupMenu(game["menu_changeclass_" + team]);
 
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     self thread maps\mp\gametypes\_playerlogic::predictAboutToSpawnPlayerOverTime(0.1);
-  }
 }
 
 beginTeamChoice() {
@@ -314,9 +301,8 @@ menuAllies() {
     }
 
     // allow respawn when switching teams during grace period.
-    if(level.inGracePeriod && !self.hasDoneCombat) {
+    if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
-    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
@@ -345,9 +331,8 @@ menuAxis() {
     }
 
     // allow respawn when switching teams during grace period.
-    if(level.inGracePeriod && !self.hasDoneCombat) {
+    if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
-    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
@@ -369,9 +354,8 @@ menuAxis() {
 menuSpectator() {
   self closeMenus();
 
-  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
+  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator")
     return;
-  }
 
   if(isAlive(self)) {
     assert(isDefined(self.pers["team"]));
@@ -400,9 +384,8 @@ menuClass(response) {
   }
 
   // this should probably be an assert
-  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis")) {
+  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis"))
     return;
-  }
 
   class = self maps\mp\gametypes\_class::getClassChoice(response);
   primary = self maps\mp\gametypes\_class::getWeaponChoice(response);
@@ -413,17 +396,16 @@ menuClass(response) {
   }
 
   if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
+    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary))
     return;
-  }
+
   if(self.sessionstate == "playing") {
     self.pers["class"] = class;
     self.class = class;
     self.pers["primary"] = primary;
 
-    if(game["state"] == "postgame") {
+    if(game["state"] == "postgame")
       return;
-    }
 
     if(level.inGracePeriod && !self.hasDoneCombat) // used weapons check?
     {
@@ -439,23 +421,21 @@ menuClass(response) {
     self.class = class;
     self.pers["primary"] = primary;
 
-    if(game["state"] == "postgame") {
+    if(game["state"] == "postgame")
       return;
-    }
 
-    if(game["state"] == "playing" && !isInKillcam()) {
+    if(game["state"] == "playing" && !isInKillcam())
       self thread maps\mp\gametypes\_playerlogic::spawnClient();
-    }
   }
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 }
 
+
 addToTeam(team, firstConnect) {
   // UTS update playerCount remove from team
-  if(isDefined(self.team)) {
+  if(isDefined(self.team))
     self maps\mp\gametypes\_playerlogic::removeFromTeamCount();
-  }
 
   self.pers["team"] = team;
   // this is the only place self.team should ever be set
@@ -466,27 +446,24 @@ addToTeam(team, firstConnect) {
     if(level.teamBased) {
       self.sessionteam = team;
     } else {
-      if(team == "spectator") {
+      if(team == "spectator")
         self.sessionteam = "spectator";
-      } else {
+      else
         self.sessionteam = "none";
-      }
     }
   }
 
   // UTS update playerCount add to team
-  if(game["state"] != "postgame") {
+  if(game["state"] != "postgame")
     self maps\mp\gametypes\_playerlogic::addToTeamCount();
-  }
 
   self updateObjectiveText();
 
   // give "joined_team" and "joined_spectators" handlers a chance to start
   // these are generally triggered from the "connected" notify, which can happen on the same
   // frame as these notifies
-  if(isDefined(firstConnect) && firstConnect) {
+  if(isDefined(firstConnect) && firstConnect)
     waittillframeend;
-  }
 
   self updateMainMenu();
 

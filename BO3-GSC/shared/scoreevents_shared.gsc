@@ -20,23 +20,25 @@ function processscoreevent(event, player, victim, weapon) {
     return scoregiven;
   }
   if(getdvarint("teamOpsEnabled") == 1) {
-    if(isDefined(level.teamopsonprocessplayerevent)) {
+    if(isdefined(level.teamopsonprocessplayerevent)) {
       level[[level.teamopsonprocessplayerevent]](event, player);
     }
   }
-  if(isDefined(level.challengesoneventreceived)) {
+  if(isdefined(level.challengesoneventreceived)) {
     player thread[[level.challengesoneventreceived]](event);
   }
   if(isregisteredevent(event) && (!sessionmodeiszombiesgame() || level.onlinegame)) {
     allowplayerscore = 0;
-    if(!isDefined(weapon) || !killstreaks::is_killstreak_weapon(weapon)) {
+    if(!isdefined(weapon) || !killstreaks::is_killstreak_weapon(weapon)) {
       allowplayerscore = 1;
     } else {
       allowplayerscore = killstreakweaponsallowedscore(event);
     }
     if(allowplayerscore) {
-      if(isDefined(level.scoreongiveplayerscore)) {
-        scoregiven = [[level.scoreongiveplayerscore]](event, player, victim, undefined, weapon);
+      if(isdefined(level.scoreongiveplayerscore)) {
+        scoregiven = [
+          [level.scoreongiveplayerscore]
+        ](event, player, victim, undefined, weapon);
         isscoreevent = scoregiven > 0;
         if(isscoreevent) {
           hero_restricted = is_hero_score_event_restricted(event);
@@ -47,7 +49,7 @@ function processscoreevent(event, player, victim, weapon) {
   }
   if(shouldaddrankxp(player) && getdvarint("teamOpsEnabled") == 0) {
     pickedup = 0;
-    if(isDefined(weapon) && isDefined(player.pickedupweapons) && isDefined(player.pickedupweapons[weapon])) {
+    if(isdefined(weapon) && isdefined(player.pickedupweapons) && isdefined(player.pickedupweapons[weapon])) {
       pickedup = 1;
     }
     if(sessionmodeiscampaigngame()) {
@@ -58,8 +60,8 @@ function processscoreevent(event, player, victim, weapon) {
     player addrankxp(event, weapon, player.class_num, pickedup, isscoreevent, xp_difficulty_multiplier);
   }
   pixendevent();
-  if(sessionmodeiscampaigngame() && isDefined(xp_difficulty_multiplier)) {
-    if(isDefined(victim) && isDefined(victim.team)) {
+  if(sessionmodeiscampaigngame() && isdefined(xp_difficulty_multiplier)) {
+    if(isdefined(victim) && isdefined(victim.team)) {
       if(victim.team == "axis" || victim.team == "team3") {
         scoregiven = scoregiven * xp_difficulty_multiplier;
       }
@@ -75,7 +77,7 @@ function shouldaddrankxp(player) {
   if(level.gametype == "fr") {
     return false;
   }
-  if(!isDefined(level.rankcap) || level.rankcap == 0) {
+  if(!isdefined(level.rankcap) || level.rankcap == 0) {
     return true;
   }
   if(player.pers["plevel"] > 0 || player.pers["rank"] > level.rankcap) {
@@ -93,7 +95,7 @@ function uninterruptedobitfeedkills(attacker, weapon) {
 }
 
 function isregisteredevent(type) {
-  if(isDefined(level.scoreinfo[type])) {
+  if(isdefined(level.scoreinfo[type])) {
     return true;
   }
   return false;
@@ -119,7 +121,7 @@ function getscoreeventtablename() {
 function getscoreeventtableid() {
   scoreinfotableloaded = 0;
   scoreinfotableid = tablelookupfindcoreasset(getscoreeventtablename());
-  if(isDefined(scoreinfotableid)) {
+  if(isdefined(scoreinfotableid)) {
     scoreinfotableloaded = 1;
   }
   assert(scoreinfotableloaded, "" + getscoreeventtablename());
@@ -146,15 +148,15 @@ function getxpeventcolumn(gametype) {
 
 function getcolumnoffsetforgametype(gametype) {
   foundgamemode = 0;
-  if(!isDefined(level.scoreeventtableid)) {
+  if(!isdefined(level.scoreeventtableid)) {
     level.scoreeventtableid = getscoreeventtableid();
   }
-  assert(isDefined(level.scoreeventtableid));
-  if(!isDefined(level.scoreeventtableid)) {
+  assert(isdefined(level.scoreeventtableid));
+  if(!isdefined(level.scoreeventtableid)) {
     return -1;
   }
   gamemodecolumn = 14;
-  for(;;) {
+  for (;;) {
     column_header = tablelookupcolumnforrow(level.scoreeventtableid, 0, gamemodecolumn);
     if(column_header == "") {
       gamemodecolumn = 14;
@@ -174,37 +176,37 @@ function killstreakweaponsallowedscore(type) {
   if(getdvarint("teamOpsEnabled") == 1) {
     return false;
   }
-  if(isDefined(level.scoreinfo[type]["allowKillstreakWeapons"]) && level.scoreinfo[type]["allowKillstreakWeapons"] == 1) {
+  if(isdefined(level.scoreinfo[type]["allowKillstreakWeapons"]) && level.scoreinfo[type]["allowKillstreakWeapons"] == 1) {
     return true;
   }
   return false;
 }
 
 function is_hero_score_event_restricted(event) {
-  if(!isDefined(level.scoreinfo[event]["allow_hero"]) || level.scoreinfo[event]["allow_hero"] != 1) {
+  if(!isdefined(level.scoreinfo[event]["allow_hero"]) || level.scoreinfo[event]["allow_hero"] != 1) {
     return true;
   }
   return false;
 }
 
 function givecratecapturemedal(crate, capturer) {
-  if(isDefined(crate) && isDefined(capturer) && isDefined(crate.owner) && isplayer(crate.owner)) {
+  if(isdefined(crate) && isdefined(capturer) && isdefined(crate.owner) && isplayer(crate.owner)) {
     if(level.teambased) {
       if(capturer.team != crate.owner.team) {
         crate.owner playlocalsound("mpl_crate_enemy_steals");
-        if(!isDefined(crate.hacker)) {
+        if(!isdefined(crate.hacker)) {
           processscoreevent("capture_enemy_crate", capturer);
         }
-      } else if(isDefined(crate.owner) && capturer != crate.owner) {
+      } else if(isdefined(crate.owner) && capturer != crate.owner) {
         crate.owner playlocalsound("mpl_crate_friendly_steals");
-        if(!isDefined(crate.hacker)) {
+        if(!isdefined(crate.hacker)) {
           level.globalsharepackages++;
           processscoreevent("share_care_package", crate.owner);
         }
       }
     } else if(capturer != crate.owner) {
       crate.owner playlocalsound("mpl_crate_enemy_steals");
-      if(!isDefined(crate.hacker)) {
+      if(!isdefined(crate.hacker)) {
         processscoreevent("capture_enemy_crate", capturer);
       }
     }
@@ -212,72 +214,72 @@ function givecratecapturemedal(crate, capturer) {
 }
 
 function register_hero_ability_kill_event(event_func) {
-  if(!isDefined(level.hero_ability_kill_events)) {
+  if(!isdefined(level.hero_ability_kill_events)) {
     level.hero_ability_kill_events = [];
   }
   level.hero_ability_kill_events[level.hero_ability_kill_events.size] = event_func;
 }
 
 function register_hero_ability_multikill_event(event_func) {
-  if(!isDefined(level.hero_ability_multikill_events)) {
+  if(!isdefined(level.hero_ability_multikill_events)) {
     level.hero_ability_multikill_events = [];
   }
   level.hero_ability_multikill_events[level.hero_ability_multikill_events.size] = event_func;
 }
 
 function register_hero_weapon_multikill_event(event_func) {
-  if(!isDefined(level.hero_weapon_multikill_events)) {
+  if(!isdefined(level.hero_weapon_multikill_events)) {
     level.hero_weapon_multikill_events = [];
   }
   level.hero_weapon_multikill_events[level.hero_weapon_multikill_events.size] = event_func;
 }
 
 function register_thief_shutdown_enemy_event(event_func) {
-  if(!isDefined(level.thief_shutdown_enemy_events)) {
+  if(!isdefined(level.thief_shutdown_enemy_events)) {
     level.thief_shutdown_enemy_events = [];
   }
   level.thief_shutdown_enemy_events[level.thief_shutdown_enemy_events.size] = event_func;
 }
 
 function hero_ability_kill_event(ability, victim_ability) {
-  if(!isDefined(level.hero_ability_kill_events)) {
+  if(!isdefined(level.hero_ability_kill_events)) {
     return;
   }
   foreach(event_func in level.hero_ability_kill_events) {
-    if(isDefined(event_func)) {
+    if(isdefined(event_func)) {
       self[[event_func]](ability, victim_ability);
     }
   }
 }
 
 function hero_ability_multikill_event(killcount, ability) {
-  if(!isDefined(level.hero_ability_multikill_events)) {
+  if(!isdefined(level.hero_ability_multikill_events)) {
     return;
   }
   foreach(event_func in level.hero_ability_multikill_events) {
-    if(isDefined(event_func)) {
+    if(isdefined(event_func)) {
       self[[event_func]](killcount, ability);
     }
   }
 }
 
 function hero_weapon_multikill_event(killcount, weapon) {
-  if(!isDefined(level.hero_weapon_multikill_events)) {
+  if(!isdefined(level.hero_weapon_multikill_events)) {
     return;
   }
   foreach(event_func in level.hero_weapon_multikill_events) {
-    if(isDefined(event_func)) {
+    if(isdefined(event_func)) {
       self[[event_func]](killcount, weapon);
     }
   }
 }
 
 function thief_shutdown_enemy_event() {
-  if(!isDefined(level.thief_shutdown_enemy_event)) {
+  if(!isdefined(level.thief_shutdown_enemy_event)) {
     return;
   }
   foreach(event_func in level.thief_shutdown_enemy_event) {
-    if(isDefined(event_func)) {
+    if(isdefined(event_func)) {
       self[[event_func]]();
     }
   }

@@ -19,9 +19,8 @@ init() {
 
 check_interactive_hands() {}
 spawned_banzai_immediate() {
-  if(spawn_failed(self)) {
+  if(spawn_failed(self))
     return;
-  }
   banzai_force();
 }
 
@@ -33,7 +32,7 @@ banzai() {
   self call_overloaded_func("animscripts\banzai", "init");
   self endon("death");
   self endon("stop_banzai_thread");
-  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (isDefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
+  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (Isdefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
     self waittill("reached_path_end");
   }
   wait_time = 3 + RandomFloat(2);
@@ -55,7 +54,7 @@ banzai_force() {
   self endon("death");
   self.banzai = true;
   self.inmeleecharge = true;
-  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (isDefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
+  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (Isdefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
     self waittill("reached_path_end");
   }
   self banzai_charge(true);
@@ -63,69 +62,52 @@ banzai_force() {
 
 may_banzai_attack(enemy, maxAttackers) {
   assert(isDefined(enemy));
-  if(enemy call_overloaded_func("animscripts\banzai", "in_banzai_melee") && distanceSquared(self.origin, enemy.origin) < 96 * 96) {
+  if(enemy call_overloaded_func("animscripts\banzai", "in_banzai_melee") && distanceSquared(self.origin, enemy.origin) < 96 * 96)
     return false;
-  }
-  if(isDefined(enemy.num_banzai_chargers) && enemy.num_banzai_chargers >= maxAttackers) {
+  if(isDefined(enemy.num_banzai_chargers) && enemy.num_banzai_chargers >= maxAttackers)
     return false;
-  }
-  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack) {
+  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack)
     return false;
-  }
   if(isDefined(enemy.magic_bullet_shield) && enemy.magic_bullet_shield) {
-    if(enemy.a.pose != "stand") {
+    if(enemy.a.pose != "stand")
       return false;
-    }
   }
   if(IsPlayer(enemy)) {
-    if(isDefined(enemy.usingturret) && enemy.usingturret) {
+    if(isDefined(enemy.usingturret) && enemy.usingturret)
       return false;
-    }
-    if(isDefined(enemy.usingvehicle) && enemy.usingvehicle) {
+    if(isDefined(enemy.usingvehicle) && enemy.usingvehicle)
       return false;
-    }
-    if(!check_player_can_see_me(enemy)) {
+    if(!check_player_can_see_me(enemy))
       return false;
-    }
-    if(enemy maps\_laststand::player_is_in_laststand()) {
+    if(enemy maps\_laststand::player_is_in_laststand())
       return false;
-    }
-    if(isDefined(self.primaryweapon) && self.primaryweapon == "type100_smg") {
+    if(isDefined(self.primaryweapon) && self.primaryweapon == "type100_smg")
       return false;
-    }
   }
   return true;
 }
 
 should_switch_immediately(enemy) {
-  if(!isDefined(enemy)) {
+  if(!isDefined(enemy))
     return true;
-  }
-  if(!IsAlive(enemy)) {
+  if(!IsAlive(enemy))
     return true;
-  }
-  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack) {
+  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack)
     return true;
-  }
   if(isDefined(enemy.magic_bullet_shield) && enemy.magic_bullet_shield) {
-    if(enemy.a.pose != "stand") {
+    if(enemy.a.pose != "stand")
       return true;
-    }
   }
   if(IsPlayer(enemy)) {
-    if(isDefined(enemy.usingTurret) && enemy.usingTurret) {
+    if(isDefined(enemy.usingTurret) && enemy.usingTurret)
       return true;
-    }
-    if(isDefined(enemy.usingVehicle) && enemy.usingvehicle) {
+    if(isDefined(enemy.usingVehicle) && enemy.usingvehicle)
       return true;
-    }
-    if(enemy maps\_laststand::player_is_in_laststand()) {
+    if(enemy maps\_laststand::player_is_in_laststand())
       return true;
-    }
     if(distanceSquared(self.origin, enemy.origin) < 20736) {
-      if(self.a.movement == "stop" && (self.origin[2] < (enemy.origin[2] - 24))) {
+      if(self.a.movement == "stop" && (self.origin[2] < (enemy.origin[2] - 24)))
         return true;
-      }
     }
   }
   return false;
@@ -153,16 +135,14 @@ find_enemy() {
     enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
     for(numAttackers = 1; numAttackers <= 2; numAttackers++) {
       for(i = 0; i < enemies.size; i++) {
-        if(may_banzai_attack(enemies[i], numAttackers)) {
+        if(may_banzai_attack(enemies[i], numAttackers))
           return enemies[i];
-        }
       }
     }
     players = get_array_of_closest(self.origin, players, undefined, undefined, maxDistance);
     for(i = 0; i < players.size; i++) {
-      if(may_banzai_attack(players[i], numAttackers)) {
+      if(may_banzai_attack(players[i], numAttackers))
         return players[i];
-      }
     }
     return undefined;
   }
@@ -181,23 +161,21 @@ find_enemy() {
   enemies = GetAiArray(opposite_team);
   enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
   for(i = 0; i < enemies.size; i++) {
-    if(may_banzai_attack(enemies[i], 2)) {
+    if(may_banzai_attack(enemies[i], 2))
       return enemies[i];
-    }
   }
   return undefined;
 }
 
 check_player_can_see_me(player) {
-  if(!isDefined(self.script_banzai_within_fov) || !self.script_banzai_within_fov) {
+  if(!isDefined(self.script_banzai_within_fov) || !self.script_banzai_within_fov)
     return true;
-  }
   return player_can_see_me(player);
 }
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = anglesToForward(playerAngles);
+  playerForwardVec = AnglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self GetOrigin();
   playerPos = player GetOrigin();
@@ -366,7 +344,7 @@ draw_forward_line_until_notify(ent, r, g, b, notifyEnt, notifyString) {
   notifyEnt endon("death");
   notifyEnt endon(notifyString);
   while(1) {
-    forwardVec = VectorNormalize(anglesToForward(ent.angles));
+    forwardVec = VectorNormalize(AnglesToForward(ent.angles));
     pointForward = ent.origin + forwardVec * 64;
     line(ent.origin, pointForward, (r, g, b), 0.05);
     wait .05;

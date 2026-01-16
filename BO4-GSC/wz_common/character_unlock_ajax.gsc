@@ -8,10 +8,11 @@
 #include scripts\mp_common\item_drop;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_ajax;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ajax", &__init__, undefined, # "character_unlock_ajax_fixup");
+  system::register(#"character_unlock_ajax", &__init__, undefined, #"character_unlock_ajax_fixup");
 }
 
 __init__() {
@@ -30,11 +31,11 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d >= 3 && self character_unlock::function_f0406288(#"ajax_unlock")) {
-      self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 1);
+      self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 1);
     }
   }
 }
@@ -51,11 +52,11 @@ on_drop_item(params) {
     return;
   }
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d < 3 && self character_unlock::function_c70bcc7a(#"ajax_unlock")) {
-      self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 0);
+      self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 0);
     }
   }
 }
@@ -63,12 +64,12 @@ on_drop_item(params) {
 on_item_use(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     if(self character_unlock::function_c70bcc7a(#"ajax_unlock")) {
       var_b6015a5d = self function_b854ffba();
 
       if(var_b6015a5d < 3) {
-        self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 0);
+        self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 0);
       }
     }
   }
@@ -81,7 +82,7 @@ private function_b854ffba() {
     foreach(item in self.inventory.items) {
       itementry = item.itementry;
 
-      if(isDefined(itementry) && itementry.name === # "cu01_item") {
+      if(isDefined(itementry) && itementry.name === #"cu01_item") {
         var_b6015a5d += item.count;
       }
     }

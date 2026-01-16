@@ -10,18 +10,16 @@
 start_shrimp_path(shrimp_effect, str_path_start, min_speed, max_speed, min_respawn_delay, max_respawn_delay, start_delay, str_kill_flag, activate_all_paths) {
   level endon("stop_shrimps");
 
-  if(isDefined(start_delay)) {
+  if(isDefined(start_delay))
     wait(start_delay);
-  }
 
   a_all_path_starts = getstructarray(str_path_start, "targetname");
   assert(isDefined(a_all_path_starts), "Shrimp missing start struct - " + str_path_start);
 
-  if(!isDefined(activate_all_paths)) {
+  if(!isDefined(activate_all_paths))
     only_one_path_required = randomint(a_all_path_starts.size);
-  } else {
+  else
     only_one_path_required = undefined;
-  }
 
   for(i = 0; i < a_all_path_starts.size; i++) {
     if(!isDefined(only_one_path_required) || only_one_path_required == i) {
@@ -36,9 +34,8 @@ _setup_shrimp_path(shrimp_effect, s_path_start, min_speed, max_speed, min_respaw
 
   while(true) {
     if(isDefined(str_kill_flag)) {
-      if(flag(str_kill_flag)) {
+      if(flag(str_kill_flag))
         return;
-      }
     }
 
     speed = randomfloatrange(min_speed, max_speed);
@@ -51,13 +48,12 @@ _setup_shrimp_path(shrimp_effect, s_path_start, min_speed, max_speed, min_respaw
 shrimp_move_down_spline(shrimp_effect, s_path_start, move_speed, start_delay, str_kill_flag) {
   level endon("stop_shrimps");
 
-  if(isDefined(start_delay)) {
+  if(isDefined(start_delay))
     wait(start_delay);
-  }
 
   e_move = spawn("script_model", s_path_start.origin);
-  e_move setModel("tag_origin");
-  playFXOnTag(shrimp_effect, e_move, "tag_origin");
+  e_move setmodel("tag_origin");
+  playfxontag(shrimp_effect, e_move, "tag_origin");
 
   for(s_dest_struct = getstruct(s_path_start.target, "targetname"); isDefined(s_dest_struct); s_dest_struct = getstruct(s_dest_struct.target, "targetname")) {
     v_dir = vectornormalize(s_dest_struct.origin - e_move.origin);
@@ -66,7 +62,7 @@ shrimp_move_down_spline(shrimp_effect, s_path_start, move_speed, start_delay, st
 
     while(dist > move_speed && dist <= last_dist) {
       v_fwd = vectornormalize(level.player.origin - e_move.origin);
-      v_fwd = anglesToForward(v_fwd);
+      v_fwd = anglestoforward(v_fwd);
       e_move.angles = v_fwd;
       e_move.origin = e_move.origin + v_dir * move_speed;
       dist = distance(s_dest_struct.origin, e_move.origin);

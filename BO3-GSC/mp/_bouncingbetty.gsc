@@ -12,7 +12,7 @@
 #namespace bouncingbetty;
 
 function autoexec __init__sytem__() {
-  system::register("bouncingbetty", &__init__, undefined, undefined);
+  system::register("bouncingbetty", & __init__, undefined, undefined);
 }
 
 function __init__() {

@@ -11,10 +11,10 @@
 main() {
   level.additional_boss_weapon = ::update_weapon_placement;
 
-  level.introscreen_line_1 = &"MP_ALIEN_TOWN_INTRO_LINE_1";
-  level.introscreen_line_2 = &"MP_ALIEN_TOWN_INTRO_LINE_2";
-  level.introscreen_line_3 = &"MP_ALIEN_TOWN_INTRO_LINE_3";
-  level.introscreen_line_4 = &"MP_ALIEN_TOWN_INTRO_LINE_4";
+  level.introscreen_line_1 = & "MP_ALIEN_TOWN_INTRO_LINE_1";
+  level.introscreen_line_2 = & "MP_ALIEN_TOWN_INTRO_LINE_2";
+  level.introscreen_line_3 = & "MP_ALIEN_TOWN_INTRO_LINE_3";
+  level.introscreen_line_4 = & "MP_ALIEN_TOWN_INTRO_LINE_4";
   level.intro_dialogue_func = ::mp_alien_town_intro_dialog;
   level.postIntroscreenFunc = ::mp_alien_town_post_intro_func;
   level.custom_onStartGameTypeFunc = ::mp_alien_town_onStartGameTypeFunc;
@@ -26,9 +26,8 @@ main() {
   level._effect["alien_ark_gib"] = loadfx("vfx/gameplay/alien/vfx_alien_ark_gib_01");
   level.custom_alien_death_func = maps\mp\alien\_death::general_alien_custom_death;
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     level.adjust_spawnLocation_func = ::town_chaos_adjust_spawnLocation;
-  }
 
   alien_mode_enable("kill_resource", "wave", "airdrop", "lurker", "collectible", "loot", "pillage", "challenge", "outline", "scenes");
   alien_areas = ["lodge", "city", "lake"];
@@ -193,29 +192,29 @@ encounter_init() {
 town_hint_precache() {
   all_hints_array = [];
 
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MAUL"] = &"ALIEN_COLLECTIBLES_PICKUP_MAUL";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_AK12"] = &"ALIEN_COLLECTIBLES_PICKUP_AK12";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_M27"] = &"ALIEN_COLLECTIBLES_PICKUP_M27";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK"] = &"ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MK32"] = &"ALIEN_COLLECTIBLES_PICKUP_MK32";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_HONEYBADGER"] = &"ALIEN_COLLECTIBLES_PICKUP_HONEYBADGER";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_VKS"] = &"ALIEN_COLLECTIBLES_PICKUP_VKS";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_FP6"] = &"ALIEN_COLLECTIBLES_PICKUP_FP6";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_KRISS"] = &"ALIEN_COLLECTIBLES_PICKUP_KRISS";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MICROTAR"] = &"ALIEN_COLLECTIBLES_PICKUP_MICROTAR";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_P226"] = &"ALIEN_COLLECTIBLES_PICKUP_P226";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_L115A3"] = &"ALIEN_COLLECTIBLES_PICKUP_L115A3";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_SC2010"] = &"ALIEN_COLLECTIBLES_PICKUP_SC2010";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_KAC"] = &"ALIEN_COLLECTIBLES_PICKUP_KAC";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_IMBEL"] = &"ALIEN_COLLECTIBLES_PICKUP_IMBEL";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MTS255"] = &"ALIEN_COLLECTIBLES_PICKUP_MTS255";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PANZERFAUST"] = &"ALIEN_COLLECTIBLES_PICKUP_PANZERFAUST";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_CBJMS"] = &"ALIEN_COLLECTIBLES_PICKUP_CBJMS";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PP19"] = &"ALIEN_COLLECTIBLES_PICKUP_PP19";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_VEPR"] = &"ALIEN_COLLECTIBLES_PICKUP_VEPR";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_BREN"] = &"ALIEN_COLLECTIBLES_PICKUP_BREN";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_RGM"] = &"ALIEN_COLLECTIBLES_PICKUP_RGM";
-  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_G28"] = &"ALIEN_COLLECTIBLES_PICKUP_G28";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MAUL"] = & "ALIEN_COLLECTIBLES_PICKUP_MAUL";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_AK12"] = & "ALIEN_COLLECTIBLES_PICKUP_AK12";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_M27"] = & "ALIEN_COLLECTIBLES_PICKUP_M27";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK"] = & "ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MK32"] = & "ALIEN_COLLECTIBLES_PICKUP_MK32";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_HONEYBADGER"] = & "ALIEN_COLLECTIBLES_PICKUP_HONEYBADGER";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_VKS"] = & "ALIEN_COLLECTIBLES_PICKUP_VKS";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_FP6"] = & "ALIEN_COLLECTIBLES_PICKUP_FP6";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_KRISS"] = & "ALIEN_COLLECTIBLES_PICKUP_KRISS";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MICROTAR"] = & "ALIEN_COLLECTIBLES_PICKUP_MICROTAR";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_P226"] = & "ALIEN_COLLECTIBLES_PICKUP_P226";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_L115A3"] = & "ALIEN_COLLECTIBLES_PICKUP_L115A3";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_SC2010"] = & "ALIEN_COLLECTIBLES_PICKUP_SC2010";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_KAC"] = & "ALIEN_COLLECTIBLES_PICKUP_KAC";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_IMBEL"] = & "ALIEN_COLLECTIBLES_PICKUP_IMBEL";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_MTS255"] = & "ALIEN_COLLECTIBLES_PICKUP_MTS255";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PANZERFAUST"] = & "ALIEN_COLLECTIBLES_PICKUP_PANZERFAUST";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_CBJMS"] = & "ALIEN_COLLECTIBLES_PICKUP_CBJMS";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_PP19"] = & "ALIEN_COLLECTIBLES_PICKUP_PP19";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_VEPR"] = & "ALIEN_COLLECTIBLES_PICKUP_VEPR";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_BREN"] = & "ALIEN_COLLECTIBLES_PICKUP_BREN";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_RGM"] = & "ALIEN_COLLECTIBLES_PICKUP_RGM";
+  all_hints_array["ALIEN_COLLECTIBLES_PICKUP_G28"] = & "ALIEN_COLLECTIBLES_PICKUP_G28";
 
   return all_hints_array;
 }
@@ -327,9 +326,8 @@ test_meteoroid() {
 amb_quakes() {
   level.quake_trigs = getEntArray("quake_trig", "targetname");
 
-  foreach(quake_trig in level.quake_trigs) {
-    quake_trig thread run_quake_scene();
-  }
+  foreach(quake_trig in level.quake_trigs)
+  quake_trig thread run_quake_scene();
 }
 
 run_quake_scene() {
@@ -346,13 +344,11 @@ run_quake_scene() {
       if(!isDefined(targeted_ent.script_noteworthy)) {
         continue;
       }
-      if(targeted_ent.script_noteworthy == "moveable") {
+      if(targeted_ent.script_noteworthy == "moveable")
         self.movables[self.movables.size] = targeted_ent;
-      }
 
-      if(targeted_ent.script_noteworthy == "fx") {
+      if(targeted_ent.script_noteworthy == "fx")
         self.fx[self.fx.size] = targeted_ent;
-      }
     }
   }
 
@@ -371,9 +367,8 @@ run_quake_scene() {
         PhysicsJitter(quake_origin, outter_radius, inner_radius, 4.0, 6.0);
         player PlayRumbleOnEntity("heavy_3s");
 
-        foreach(movable in self.movables) {
-          self thread quake_rotate(movable);
-        }
+        foreach(movable in self.movables)
+        self thread quake_rotate(movable);
 
         count--;
         wait RandomIntRange(20, 30);
@@ -433,22 +428,19 @@ mp_alien_town_intro_dialog() {
 }
 
 should_play_next_hive_vo_func() {
-  if(level.cycle_count + 1 == 14) {
+  if(level.cycle_count + 1 == 14)
     return false;
-  }
 
-  if(flag_exist("hives_cleared") && flag("hives_cleared")) {
+  if(flag_exist("hives_cleared") && flag("hives_cleared"))
     return false;
-  }
 
   return (!isDefined(level.blocker_hives[level.cycle_count + 1]));
 }
 
 mp_alien_town_post_intro_func() {
   foreach(player in level.players) {
-    if(isDefined(player.default_starting_pistol)) {
+    if(isDefined(player.default_starting_pistol))
       player SwitchToWeapon(player.default_starting_pistol);
-    }
   }
 }
 
@@ -492,9 +484,8 @@ set_drill_location(target_name, location, orientation) {
 }
 
 TU_electric_fence_fix() {
-  while(!isDefined(level.electric_fences)) {
+  while(!isDefined(level.electric_fences))
     wait 0.05;
-  }
 
   wait 5;
 
@@ -503,15 +494,13 @@ TU_electric_fence_fix() {
     target_name_array = StrTok(fence.generator.target, "_");
     if(target_name_array.size > 0) {
       foreach(name in target_name_array) {
-        if(IsSubStr(name, "auto")) {
+        if(IsSubStr(name, "auto"))
           target_name = name;
-        }
       }
     }
 
-    if(isDefined(fence.generator.target) && (target_name == "auto92")) {
+    if(isDefined(fence.generator.target) && (target_name == "auto92"))
       fence.shock_trig.origin += (0, 0, 30);
-    }
 
     if(isDefined(fence.generator.target) && (target_name == "auto3")) {
       fence.shock_trig.origin += (102, 64, 30);
@@ -588,11 +577,10 @@ delete_intro_heli_clip() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore_sp.csv";
-  } else {
+  else
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore.csv";
-  }
 }
 
 mp_alien_town_onSpawnPlayer_func() {

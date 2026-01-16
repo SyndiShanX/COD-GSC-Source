@@ -4,11 +4,12 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace fx;
 
 set_forward_and_up_vectors() {
-  self.v[# "up"] = anglestoup(self.v[# "angles"]);
-  self.v[# "forward"] = anglesToForward(self.v[# "angles"]);
+  self.v[#"up"] = anglestoup(self.v[#"angles"]);
+  self.v[#"forward"] = anglesToForward(self.v[#"angles"]);
 }
 
 get(fx) {
@@ -38,23 +39,23 @@ create_effect(type, fxid) {
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
-  ent.v[# "type"] = type;
-  ent.v[# "fxid"] = fxid;
-  ent.v[# "angles"] = (0, 0, 0);
-  ent.v[# "origin"] = (0, 0, 0);
+  ent.v[#"type"] = type;
+  ent.v[#"fxid"] = fxid;
+  ent.v[#"angles"] = (0, 0, 0);
+  ent.v[#"origin"] = (0, 0, 0);
   ent.drawn = 1;
   return ent;
 }
 
 create_loop_effect(fxid) {
   ent = create_effect("loopfx", fxid);
-  ent.v[# "delay"] = 0.5;
+  ent.v[#"delay"] = 0.5;
   return ent;
 }
 
 create_oneshot_effect(fxid) {
   ent = create_effect("oneshotfx", fxid);
-  ent.v[# "delay"] = -15;
+  ent.v[#"delay"] = -15;
   return ent;
 }
 
@@ -93,7 +94,7 @@ _play_fx_delete(ent, time_to_delete_or_notify = -1) {
   if(isstring(time_to_delete_or_notify) || ishash(time_to_delete_or_notify)) {
     ent util::waittill_either("death", time_to_delete_or_notify);
   } else if(time_to_delete_or_notify > 0) {
-    ent waittilltimeout(time_to_delete_or_notify, # "death");
+    ent waittilltimeout(time_to_delete_or_notify, #"death");
   } else {
     ent waittill(#"death");
   }

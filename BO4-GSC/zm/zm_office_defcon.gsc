@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_office_defcon;
 
 pentagon_packapunch_init() {
@@ -22,10 +23,10 @@ pentagon_packapunch_init() {
   level.defcon_level = 1;
   level.defcon_activated = 0;
   level.ignore_spawner_func = &pentagon_ignore_spawner;
-  level._effect[# "hash_4ec0caccaa9167d3"] = # "hash_6cd6da1c7e245c1c";
-  level.var_5531a118 = level._effect[# "hash_4ec0caccaa9167d3"];
-  level._effect[# "hash_415ba37393754417"] = # "hash_35cb5be5a38af07c";
-  level.var_2e21f906 = level._effect[# "hash_415ba37393754417"];
+  level._effect[#"hash_4ec0caccaa9167d3"] = #"hash_6cd6da1c7e245c1c";
+  level.var_5531a118 = level._effect[#"hash_4ec0caccaa9167d3"];
+  level._effect[#"hash_415ba37393754417"] = #"hash_35cb5be5a38af07c";
+  level.var_2e21f906 = level._effect[#"hash_415ba37393754417"];
   level thread defcon_sign_lights();
   punch_switches = getEntArray("punch_switch", "targetname");
 
@@ -43,7 +44,7 @@ defcon_sign_setup() {
   level waittill(#"hash_2124984d1ece329c");
   self.lights = getEntArray(self.target, "targetname");
 
-  if(isDefined(self.lights) && util::get_game_type() != # "zstandard") {
+  if(isDefined(self.lights) && util::get_game_type() != #"zstandard") {
     for(j = 0; j < self.lights.size; j++) {
       if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_bulb") {
         self.lights[j] setModel("p8_zm_off_trap_switch_light_green_on");
@@ -87,7 +88,7 @@ defcon_sign_setup() {
     if(level.defcon_level != 4) {
       level.defcon_level++;
 
-      if(level.zombie_vars[# "zombie_powerup_bonfire_sale_on"] == 0) {
+      if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0) {
         level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
       }
 
@@ -95,7 +96,7 @@ defcon_sign_setup() {
     } else {
       level.defcon_level = 5;
 
-      if(level.zombie_vars[# "zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("bonfire_reset")) {
+      if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("bonfire_reset")) {
         if(level flag::get(#"hash_38f45c699c5d5d63")) {
           level thread namespace_8f53e87b::function_777b7961(user);
         } else {
@@ -107,7 +108,7 @@ defcon_sign_setup() {
       level flag::set("defcon_active");
       zm_office_teleporters::function_c71dfad1(1);
 
-      if(level.zombie_vars[# "zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("bonfire_reset")) {
+      if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("bonfire_reset")) {
         level thread play_defcon5_alarms();
       }
     }
@@ -201,11 +202,11 @@ start_defcon_countdown() {
     return;
   }
 
-  if(level.zones[# "war_room_zone_south"].is_enabled) {
+  if(level.zones[#"war_room_zone_south"].is_enabled) {
     if(!level flag::get("war_room_entry")) {
       level flag::set("war_room_entry");
     } else {
-      level.zones[# "conference_level2"].is_enabled = 1;
+      level.zones[#"conference_level2"].is_enabled = 1;
     }
   } else if(!level flag::get("war_room_special")) {
     level flag::set("war_room_special");
@@ -254,7 +255,7 @@ defcon_pack_poi() {
   num_players = zm_zonemgr::get_players_in_zone(zone_name);
 
   if(num_players == players.size) {
-    if(level.zones[# "war_room_zone_south"].is_enabled) {
+    if(level.zones[#"war_room_zone_south"].is_enabled) {
       poi1 zm_utility::activate_zombie_point_of_interest();
     } else {
       poi2 zm_utility::activate_zombie_point_of_interest();
@@ -297,7 +298,7 @@ pentagon_ignore_spawner(spawner) {
 pack_door_init() {
   trigger = getent("pack_room_door", "targetname");
 
-  if(util::get_game_type() === # "zstandard") {
+  if(util::get_game_type() === #"zstandard") {
     trigger hide();
   }
 
@@ -312,7 +313,7 @@ pack_door_init() {
   while(true) {
     trigger setcursorhint("HINT_NOICON");
     trigger sethintstring(#"hash_11b82b0d638f6098");
-    level waittill(#"defcon_activated", # "player_in_pack");
+    level waittill(#"defcon_activated", #"player_in_pack");
     players = getplayers();
     trigger sethintstring("");
 
@@ -347,7 +348,7 @@ pack_door_init() {
     }
 
     level notify(#"pack_room_reset");
-    level.zones[# "conference_level2"].is_enabled = 0;
+    level.zones[#"conference_level2"].is_enabled = 0;
     util::wait_network_frame();
   }
 }
@@ -443,7 +444,7 @@ function_d2f6cecb() {
 
   level.defcon_level = 5;
 
-  if(level.zombie_vars[# "zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("<dev string:x43>")) {
+  if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("<dev string:x43>")) {
     level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
   }
 
@@ -451,7 +452,7 @@ function_d2f6cecb() {
   level flag::set("<dev string:x53>");
   zm_office_teleporters::function_c71dfad1(1);
 
-  if(level.zombie_vars[# "zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("<dev string:x43>")) {
+  if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("<dev string:x43>")) {
     level thread play_defcon5_alarms();
   }
 
@@ -478,3 +479,4 @@ function_d2f6cecb() {
     }
   }
 }
+

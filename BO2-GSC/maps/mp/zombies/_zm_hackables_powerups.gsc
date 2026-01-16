@@ -30,7 +30,7 @@ hack_powerups() {
     level waittill("powerup_dropped", powerup);
 
     if(!unhackable_powerup(powerup.powerup_name)) {
-      struct = spawnStruct();
+      struct = spawnstruct();
       struct.origin = powerup.origin;
       struct.radius = 65;
       struct.height = 72;
@@ -66,9 +66,8 @@ powerup_hack(hacker) {
     }
   } else if(self.powerup.powerup_name == "full_ammo")
     self.powerup maps\mp\zombies\_zm_powerups::powerup_setup("fire_sale");
-  else {
+  else
     self.powerup maps\mp\zombies\_zm_powerups::powerup_setup("full_ammo");
-  }
 
   maps\mp\zombies\_zm_equip_hacker::deregister_hackable_struct(self);
 }

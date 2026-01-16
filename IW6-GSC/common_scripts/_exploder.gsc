@@ -12,9 +12,8 @@ setup_individual_exploder(ent) {
   }
 
   targetname = ent.targetname;
-  if(!isDefined(targetname)) {
+  if(!isDefined(targetname))
     targetname = "";
-  }
 
   level.exploders[exploder_num][level.exploders[exploder_num].size] = ent;
   if(exploder_model_starts_hidden(ent)) {
@@ -36,9 +35,8 @@ setup_individual_exploder(ent) {
   if(exploder_model_is_chunk(ent)) {
     ent Hide();
     ent NotSolid();
-    if(isDefined(ent.spawnflags) && (ent.spawnflags & 1)) {
+    if(isDefined(ent.spawnflags) && (ent.spawnflags & 1))
       ent ConnectPaths();
-    }
     return;
   }
 }
@@ -48,14 +46,12 @@ setupExploders() {
 
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
-  for(i = 0; i < smodels.size; i++) {
+  for(i = 0; i < smodels.size; i++)
     ents[ents.size] = smodels[i];
-  }
 
   foreach(ent in ents) {
-    if(isDefined(ent.script_prefab_exploder)) {
+    if(isDefined(ent.script_prefab_exploder))
       ent.script_exploder = ent.script_prefab_exploder;
-    }
 
     if(isDefined(ent.masked_exploder)) {
       continue;
@@ -69,58 +65,48 @@ setupExploders() {
 
   potentialExploders = getEntArray("script_brushmodel", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
+    if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
-    }
 
-    if(isDefined(potentialExploders[i].script_exploder)) {
+    if(isDefined(potentialExploders[i].script_exploder))
       script_exploders[script_exploders.size] = potentialExploders[i];
-    }
   }
 
   potentialExploders = getEntArray("script_model", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
+    if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
-    }
 
-    if(isDefined(potentialExploders[i].script_exploder)) {
+    if(isDefined(potentialExploders[i].script_exploder))
       script_exploders[script_exploders.size] = potentialExploders[i];
-    }
   }
 
   potentialExploders = getEntArray("item_health", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
+    if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
-    }
 
-    if(isDefined(potentialExploders[i].script_exploder)) {
+    if(isDefined(potentialExploders[i].script_exploder))
       script_exploders[script_exploders.size] = potentialExploders[i];
-    }
   }
 
   potentialExploders = level.struct;
   for(i = 0; i < potentialExploders.size; i++) {
-    if(!isDefined(potentialExploders[i])) {
+    if(!isDefined(potentialExploders[i]))
       continue;
-    }
-    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
+    if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
-    }
 
     if(isDefined(potentialExploders[i].script_exploder)) {
-      if(!isDefined(potentialExploders[i].angles)) {
+      if(!isDefined(potentialExploders[i].angles))
         potentialExploders[i].angles = (0, 0, 0);
-      }
       script_exploders[script_exploders.size] = potentialExploders[i];
 
     }
   }
 
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
-  }
 
   acceptableTargetnames = [];
   acceptableTargetnames["exploderchunk visible"] = true;
@@ -154,25 +140,22 @@ setupExploders() {
     ent.v["physics"] = exploder.script_physics;
     ent.v["type"] = "exploder";
 
-    if(!isDefined(exploder.script_fxid)) {
+    if(!isDefined(exploder.script_fxid))
       ent.v["fxid"] = "No FX";
-    } else {
+    else
       ent.v["fxid"] = exploder.script_fxid;
-    }
     ent.v["exploder"] = exploder.script_exploder;
     AssertEx(isDefined(exploder.script_exploder), "Exploder at origin " + exploder.origin + " has no script_exploder");
     if(isDefined(level.createFXexploders)) {
       ary = level.createFXexploders[ent.v["exploder"]];
-      if(!isDefined(ary)) {
+      if(!isDefined(ary))
         ary = [];
-      }
       ary[ary.size] = ent;
       level.createFXexploders[ent.v["exploder"]] = ary;
     }
 
-    if(!isDefined(ent.v["delay"])) {
+    if(!isDefined(ent.v["delay"]))
       ent.v["delay"] = 0;
-    }
 
     if(isDefined(exploder.target)) {
       get_ent = getEntArray(ent.v["target"], "targetname")[0];
@@ -198,11 +181,10 @@ setupExploders() {
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
     }
 
-    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
+    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname]))
       ent.v["exploder_type"] = exploder.targetname;
-    } else {
+    else
       ent.v["exploder_type"] = "normal";
-    }
 
     if(isDefined(exploder.masked_exploder)) {
       ent.v["masked_exploder"] = exploder.model;
@@ -221,9 +203,8 @@ setup_flag_exploders() {
   exploder_flags = [];
 
   foreach(ent in level.createFXent) {
-    if(ent.v["type"] != "exploder") {
+    if(ent.v["type"] != "exploder")
       continue;
-    }
     theFlag = ent.v["flag"];
 
     if(!isDefined(theFlag)) {
@@ -243,24 +224,21 @@ setup_flag_exploders() {
 }
 
 exploder_flag_wait(msg) {
-  if(!flag_exist(msg)) {
+  if(!flag_exist(msg))
     flag_init(msg);
-  }
   flag_wait(msg);
 
   foreach(ent in level.createFXent) {
-    if(ent.v["type"] != "exploder") {
+    if(ent.v["type"] != "exploder")
       continue;
-    }
     theFlag = ent.v["flag"];
 
     if(!isDefined(theFlag)) {
       continue;
     }
 
-    if(theFlag != msg) {
+    if(theFlag != msg)
       continue;
-    }
     ent activate_individual_exploder();
   }
 }
@@ -290,9 +268,8 @@ show_exploder_models_proc(num) {
           ent.model Show();
         }
 
-        if(isDefined(ent.brush_shown)) {
+        if(isDefined(ent.brush_shown))
           ent.model Show();
-        }
       }
     }
   } else {
@@ -315,9 +292,8 @@ show_exploder_models_proc(num) {
           ent.model Show();
         }
 
-        if(isDefined(ent.brush_shown)) {
+        if(isDefined(ent.brush_shown))
           ent.model Show();
-        }
 
       }
     }
@@ -393,9 +369,8 @@ hide_exploder_models_proc(num) {
     exploders = level.createFXexploders[num];
     if(isDefined(exploders)) {
       foreach(ent in exploders) {
-        if(isDefined(ent.model)) {
+        if(isDefined(ent.model))
           ent.model Hide();
-        }
       }
     }
   } else {
@@ -413,9 +388,8 @@ hide_exploder_models_proc(num) {
       if(ent.v["exploder"] + "" != num) {
         continue;
       }
-      if(isDefined(ent.model)) {
+      if(isDefined(ent.model))
         ent.model Hide();
-      }
 
     }
   }
@@ -429,9 +403,8 @@ delete_exploder_proc(num) {
     exploders = level.createFXexploders[num];
     if(isDefined(exploders)) {
       foreach(ent in exploders) {
-        if(isDefined(ent.model)) {
+        if(isDefined(ent.model))
           ent.model Delete();
-        }
       }
     }
   } else {
@@ -449,9 +422,8 @@ delete_exploder_proc(num) {
       if(ent.v["exploder"] + "" != num) {
         continue;
       }
-      if(isDefined(ent.model)) {
+      if(isDefined(ent.model))
         ent.model Delete();
-      }
     }
   }
 
@@ -459,86 +431,74 @@ delete_exploder_proc(num) {
 }
 
 exploder_damage() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     delay = self.v["delay"];
-  } else {
+  else
     delay = 0;
-  }
 
-  if(isDefined(self.v["damage_radius"])) {
+  if(isDefined(self.v["damage_radius"]))
     radius = self.v["damage_radius"];
-  } else {
+  else
     radius = 128;
-  }
 
   damage = self.v["damage"];
   origin = self.v["origin"];
 
   wait(delay);
 
-  if(isDefined(level.custom_radius_damage_for_exploders)) {
+  if(isDefined(level.custom_radius_damage_for_exploders))
     [[level.custom_radius_damage_for_exploders]](origin, radius, damage);
-  } else {
+  else
+
     RadiusDamage(origin, radius, damage, damage);
-  }
 }
 
 activate_individual_exploder_proc() {
-  if(isDefined(self.v["firefx"])) {
+  if(isDefined(self.v["firefx"]))
     self thread fire_effect();
-  }
 
-  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
+  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
     self thread cannon_effect();
-  } else {
-    if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
-  }
-  self thread sound_effect();
+  else
+  if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
+    self thread sound_effect();
 
-  if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
+  if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil")
     self thread effect_loopsound();
-  }
 
-  if(isDefined(self.v["damage"])) {
+  if(isDefined(self.v["damage"]))
     self thread exploder_damage();
-  }
 
-  if(isDefined(self.v["earthquake"])) {
+  if(isDefined(self.v["earthquake"]))
     self thread exploder_earthquake();
-  }
 
-  if(isDefined(self.v["rumble"])) {
+  if(isDefined(self.v["rumble"]))
     self thread exploder_rumble();
-  }
 
-  if(self.v["exploder_type"] == "exploder") {
+  if(self.v["exploder_type"] == "exploder")
     self thread brush_show();
-  } else {
-    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
-  }
-  self thread brush_throw();
-  else {
+  else
+  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
+    self thread brush_throw();
+  else
     self thread brush_delete();
-  }
 }
 
 brush_delete() {
   num = self.v["exploder"];
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  } else {
+  else
     wait(0.05);
-  }
 
   if(!isDefined(self.model)) {
     return;
   }
   Assert(isDefined(self.model));
 
-  if(isDefined(self.model.classname)) {
+  if(isDefined(self.model.classname))
     if(isSP() && (self.model.spawnflags & 1))
-  }
-  self.model call[[level.connectPathsFunction]]();
+      self.model call[[level.connectPathsFunction]]();
 
   if(level.createFX_enabled) {
     if(isDefined(self.exploded)) {
@@ -555,9 +515,8 @@ brush_delete() {
     return;
   }
 
-  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
     self.v["exploder"] = undefined;
-  }
 
   waittillframeend;
 
@@ -567,14 +526,12 @@ brush_delete() {
 }
 
 brush_throw() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  }
 
   ent = undefined;
-  if(isDefined(self.v["target"])) {
+  if(isDefined(self.v["target"]))
     ent = get_target_ent(self.v["target"]);
-  }
 
   if(!isDefined(ent)) {
     self.model Delete();
@@ -583,9 +540,8 @@ brush_throw() {
 
   self.model Show();
 
-  if(isDefined(self.v["delay_post"])) {
+  if(isDefined(self.v["delay_post"]))
     wait(self.v["delay_post"]);
-  }
 
   startorg = self.v["origin"];
   startang = self.v["angles"];
@@ -599,9 +555,8 @@ brush_throw() {
   physics = isDefined(self.v["physics"]);
   if(physics) {
     target = undefined;
-    if(isDefined(ent.target)) {
+    if(isDefined(ent.target))
       target = ent get_target_ent();
-    }
 
     if(!isDefined(target)) {
       contact_point = startorg;
@@ -637,9 +592,8 @@ brush_throw() {
 }
 
 brush_show() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  }
 
   Assert(isDefined(self.model));
 
@@ -648,9 +602,8 @@ brush_show() {
     self.model Solid();
   } else {
     model = self.model spawn_tag_origin();
-    if(isDefined(self.model.script_linkname)) {
+    if(isDefined(self.model.script_linkname))
       model.script_linkname = self.model.script_linkname;
-    }
     model setModel(self.model.script_modelname);
     model Show();
   }
@@ -658,11 +611,10 @@ brush_show() {
   self.brush_shown = true;
 
   if(isSP() && !isDefined(self.model.script_modelname) && (self.model.spawnflags & 1)) {
-    if(!isDefined(self.model.disconnect_paths)) {
+    if(!isDefined(self.model.disconnect_paths))
       self.model call[[level.connectPathsFunction]]();
-    } else {
+    else
       self.model call[[level.disconnectPathsFunction]]();
-    }
   }
 
   if(level.createFX_enabled) {
@@ -689,23 +641,19 @@ exploder_rumble() {
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"])) {
+  if(!isDefined(self.v["delay"]))
     self.v["delay"] = 0;
-  }
 
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
-  if(isDefined(self.v["delay_min"])) {
+  if(isDefined(self.v["delay_min"]))
     min_delay = self.v["delay_min"];
-  }
 
-  if(isDefined(self.v["delay_max"])) {
+  if(isDefined(self.v["delay_max"]))
     max_delay = self.v["delay_max"];
-  }
 
-  if(min_delay > 0) {
+  if(min_delay > 0)
     wait(RandomFloatRange(min_delay, max_delay));
-  }
 }
 
 effect_loopsound() {
@@ -753,20 +701,17 @@ fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isDefined(ender)) {
+  if(!isDefined(ender))
     ender = "createfx_effectStopper";
-  }
 
   fireFxDelay = 0.5;
-  if(isDefined(self.v["firefxdelay"])) {
+  if(isDefined(self.v["firefxdelay"]))
     fireFxDelay = self.v["firefxdelay"];
-  }
 
   self exploder_delay();
 
-  if(isDefined(firefxSound)) {
+  if(isDefined(firefxSound))
     loop_fx_sound(firefxSound, origin, 1, ender);
-  }
 
   playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
@@ -782,9 +727,8 @@ cannon_effect() {
   }
   self exploder_delay();
 
-  if(isDefined(self.looper)) {
+  if(isDefined(self.looper))
     self.looper Delete();
-  }
 
   self.looper = SpawnFx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   TriggerFX(self.looper);
@@ -826,9 +770,8 @@ activate_exploder(num, players, startTime) {
     }
   }
 
-  if(!shouldRunServerSideEffects() && !found_server_exploder) {
+  if(!shouldRunServerSideEffects() && !found_server_exploder)
     activate_clientside_exploder(num, players, startTime);
-  }
 }
 
 activate_clientside_exploder(exploderName, players, startTime) {
@@ -842,35 +785,30 @@ activate_clientside_exploder(exploderName, players, startTime) {
 }
 
 is_valid_clientside_exploder_name(exploderName) {
-  if(!isDefined(exploderName)) {
+  if(!isDefined(exploderName))
     return false;
-  }
 
   exploder_num = exploderName;
   if(IsString(exploderName)) {
     exploder_num = Int(exploderName);
-    if(exploder_num == 0 && exploderName != "0") {
+    if(exploder_num == 0 && exploderName != "0")
       return false;
-    }
   }
 
   return exploder_num >= 0;
 }
 
 shouldRunServerSideEffects() {
-  if(isSP()) {
+  if(isSP())
     return true;
-  }
 
-  if(!isDefined(level.createFX_enabled)) {
+  if(!isDefined(level.createFX_enabled))
     level.createFX_enabled = (GetDvar("createfx") != "");
-  }
 
-  if(level.createFX_enabled) {
+  if(level.createFX_enabled)
     return true;
-  } else {
+  else
     return GetDvar("clientSideEffects") != "1";
-  }
 }
 
 exploder_before_load(num, players, startTime) {

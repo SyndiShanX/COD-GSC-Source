@@ -23,8 +23,8 @@
 #namespace drone_strike;
 
 function init() {
-  killstreaks::register("drone_strike", "drone_strike", "killstreak_drone_strike", "drone_strike_used", &activatedronestrike, 1);
-  killstreaks::register_strings("drone_strike", &"KILLSTREAK_DRONE_STRIKE_EARNED", &"KILLSTREAK_DRONE_STRIKE_NOT_AVAILABLE", &"KILLSTREAK_DRONE_STRIKE_INBOUND", &"KILLSTREAK_DRONE_STRIKE_INBOUND_NEAR_PLAYER", &"KILLSTREAK_DRONE_STRIKE_HACKED");
+  killstreaks::register("drone_strike", "drone_strike", "killstreak_drone_strike", "drone_strike_used", & activatedronestrike, 1);
+  killstreaks::register_strings("drone_strike", & "KILLSTREAK_DRONE_STRIKE_EARNED", & "KILLSTREAK_DRONE_STRIKE_NOT_AVAILABLE", & "KILLSTREAK_DRONE_STRIKE_INBOUND", & "KILLSTREAK_DRONE_STRIKE_INBOUND_NEAR_PLAYER", & "KILLSTREAK_DRONE_STRIKE_HACKED");
   killstreaks::register_dialog("drone_strike", "mpl_killstreak_drone_strike", "droneStrikeDialogBundle", undefined, "friendlyDroneStrike", "enemyDroneStrike", "enemyDroneStrikeMultiple", "friendlyDroneStrikeHacked", "enemyDroneStrikeHacked", "requestDroneStrike", "threatDroneStrike");
   killstreaks::set_team_kill_penalty_scale("drone_strike", level.teamkillreducedpenalty);
 }
@@ -34,7 +34,7 @@ function activatedronestrike() {
     return false;
   }
   result = self selectdronestrikepath();
-  if(!isDefined(result) || !result) {
+  if(!isdefined(result) || !result) {
     return false;
   }
   return true;
@@ -45,14 +45,14 @@ function selectdronestrikepath() {
   self.selectinglocation = 1;
   self thread airsupport::endselectionthink();
   locations = [];
-  if(!isDefined(self.pers["drone_strike_radar_used"]) || !self.pers["drone_strike_radar_used"]) {
+  if(!isdefined(self.pers["drone_strike_radar_used"]) || !self.pers["drone_strike_radar_used"]) {
     self thread planemortar::singleradarsweep();
   }
   location = self waitforlocationselection();
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return 0;
   }
-  if(!isDefined(location.origin)) {
+  if(!isdefined(location.origin)) {
     self.pers["drone_strike_radar_used"] = 1;
     self notify("cancel_selection");
     return 0;
@@ -63,14 +63,14 @@ function selectdronestrikepath() {
     return 0;
   }
   self.pers["drone_strike_radar_used"] = 0;
-  return self airsupport::finishhardpointlocationusage(location, &dronestrikelocationselected);
+  return self airsupport::finishhardpointlocationusage(location, & dronestrikelocationselected);
 }
 
 function waitforlocationselection() {
   self endon("emp_jammed");
   self endon("emp_grenaded");
   self waittill("confirm_location", location, yaw);
-  locationinfo = spawnStruct();
+  locationinfo = spawnstruct();
   locationinfo.origin = location;
   locationinfo.yaw = yaw;
   return locationinfo;
@@ -101,17 +101,17 @@ function startdronestrike(position, yaw, team, killstreak_id) {
   self endon("joined_spectators");
   self endon("disconnect");
   angles = (0, yaw, 0);
-  direction = anglesToForward(angles);
+  direction = anglestoforward(angles);
   height = airsupport::getminimumflyheight() + 3000;
   selectedposition = (position[0], position[1], height);
   startpoint = selectedposition + (vectorscale(direction, -14000));
   endpoint = selectedposition + (vectorscale(direction, -6000));
   tracestartpos = (position[0], position[1], height);
   traceendpos = (position[0], position[1], height * -1);
-  trace = bulletTrace(tracestartpos, traceendpos, 0, undefined);
+  trace = bullettrace(tracestartpos, traceendpos, 0, undefined);
   targetpoint = (trace["fraction"] < 1 ? trace["position"] : (position[0], position[1], 0));
   initialoffset = (vectorscale(direction, ((12 * 0.5) - 1) * 500)) * -1;
-  for(i = 0; i < 12; i++) {
+  for (i = 0; i < 12; i++) {
     right = anglestoright(angles);
     rightoffset = vectorscale(right, 300);
     leftoffset = vectorscale(right, 900);
@@ -120,7 +120,7 @@ function startdronestrike(position, yaw, team, killstreak_id) {
     self thread spawndrone(startpoint - rightoffset, forwardoffset - rightoffset, targetpoint, angles, self.team, killstreak_id);
     self thread spawndrone(startpoint + leftoffset, forwardoffset + leftoffset, targetpoint, angles, self.team, killstreak_id);
     wait(1);
-    self playSound("mpl_thunder_flyover_wash");
+    self playsound("mpl_thunder_flyover_wash");
   }
   wait(3);
   self notify("drone_strike_complete");
@@ -139,10 +139,10 @@ function spawndrone(startpoint, endpoint, targetpoint, angles, team, killstreak_
   drone endon("delete");
   drone endon("death");
   drone.angles = angles;
-  drone setModel("veh_t7_drone_rolling_thunder");
+  drone setmodel("veh_t7_drone_rolling_thunder");
   drone setenemymodel("veh_t7_drone_rolling_thunder");
   drone notsolid();
-  playFXOnTag("killstreaks/fx_rolling_thunder_thruster_trails", drone, "tag_fx");
+  playfxontag("killstreaks/fx_rolling_thunder_thruster_trails", drone, "tag_fx");
   drone clientfield::set("enemyvehicle", 1);
   drone setupdamagehandling();
   drone thread watchforemp(self);
@@ -166,7 +166,7 @@ function spawndrone(startpoint, endpoint, targetpoint, angles, team, killstreak_
   bomb setowner(self);
   bomb.owner = self;
   bomb.team = team;
-  bomb playSound("mpl_thunder_incoming_start");
+  bomb playsound("mpl_thunder_incoming_start");
   bomb setupdamagehandling();
   bomb thread watchforemp(self);
   bomb.owner thread watchownerevents(bomb);
@@ -178,27 +178,27 @@ function spawndrone(startpoint, endpoint, targetpoint, angles, team, killstreak_
 
 function setupdamagehandling() {
   drone = self;
-  drone setCanDamage(1);
+  drone setcandamage(1);
   drone.maxhealth = killstreak_bundles::get_max_health("drone_strike");
   drone.lowhealth = killstreak_bundles::get_low_health("drone_strike");
   drone.health = drone.maxhealth;
-  drone thread killstreaks::monitordamage("drone_strike", drone.maxhealth, &destroydroneplane, drone.lowhealth, undefined, 0, &empdamagedrone, 1);
+  drone thread killstreaks::monitordamage("drone_strike", drone.maxhealth, & destroydroneplane, drone.lowhealth, undefined, 0, & empdamagedrone, 1);
 }
 
 function destroydroneplane(attacker, weapon) {
   self endon("death");
   attacker = self[[level.figure_out_attacker]](attacker);
-  if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
+  if(isdefined(attacker) && (!isdefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     attacker challenges::addflyswatterstat(weapon, self);
     scoreevents::processscoreevent("destroyed_rolling_thunder_drone", attacker, self.owner, weapon);
-    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_ROLLING_THUNDER_DRONE", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_ROLLING_THUNDER_DRONE", attacker.entnum);
   }
   params = level.killstreakbundle["drone_strike"];
-  if(isDefined(params.ksexplosionfx)) {
-    playFXOnTag(params.ksexplosionfx, self, "tag_origin");
+  if(isdefined(params.ksexplosionfx)) {
+    playfxontag(params.ksexplosionfx, self, "tag_origin");
   }
-  self setModel("tag_origin");
+  self setmodel("tag_origin");
   wait(0.5);
   self delete();
 }
@@ -207,7 +207,7 @@ function watchownerevents(bomb) {
   player = self;
   bomb endon("death");
   player util::waittill_any("disconnect", "joined_team", "joined_spectators");
-  if(isDefined(isalive(bomb))) {
+  if(isdefined(isalive(bomb))) {
     bomb delete();
   }
 }
@@ -235,14 +235,14 @@ function dronestrikeawardempscoreevent(attacker, victim) {
   scoreevents::processscoreevent("destroyed_rolling_thunder_all_drones", attacker, victim, getweapon("emp"));
   challenges::destroyedaircraft(attacker, getweapon("emp"), 0);
   attacker challenges::addflyswatterstat(getweapon("emp"), self);
-  luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_ROLLING_THUNDER_ALL_DRONES", attacker.entnum);
+  luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_ROLLING_THUNDER_ALL_DRONES", attacker.entnum);
   owner globallogic_audio::play_taacom_dialog("destroyed", "drone_strike");
 }
 
 function blowupdronestrike() {
   params = level.killstreakbundle["drone_strike"];
-  if(isDefined(self) && isDefined(params.ksexplosionfx)) {
-    playFX(params.ksexplosionfx, self.origin);
+  if(isdefined(self) && isdefined(params.ksexplosionfx)) {
+    playfx(params.ksexplosionfx, self.origin);
   }
   self delete();
 }

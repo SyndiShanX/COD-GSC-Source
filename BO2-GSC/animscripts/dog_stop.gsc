@@ -32,20 +32,18 @@ isfacingenemy(tolerancecosangle) {
   vectoenemy = self.enemy.origin - self.origin;
   disttoenemy = length(vectoenemy);
 
-  if(disttoenemy < 1) {
+  if(disttoenemy < 1)
     return true;
-  }
 
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   return (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy > tolerancecosangle;
 }
 
 randomattackidle() {
-  if(isfacingenemy(-0.5)) {
+  if(isfacingenemy(-0.5))
     self orientmode("face current");
-  } else {
+  else
     self orientmode("face enemy");
-  }
 
   self clearanim( % german_shepherd_attackidle_knob, 0.1);
 
@@ -69,13 +67,12 @@ randomattackidle() {
 
   rand = randomint(100);
 
-  if(rand < idlechance) {
+  if(rand < idlechance)
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
-  } else if(rand < barkchance) {
+  else if(rand < barkchance)
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
-  } else {
+  else
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
-  }
 }
 
 shouldattackidle() {
@@ -83,13 +80,11 @@ shouldattackidle() {
 }
 
 should_growl() {
-  if(isDefined(self.script_growl)) {
+  if(isDefined(self.script_growl))
     return 1;
-  }
 
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return 1;
-  }
 
   return !self cansee(self.enemy);
 }
@@ -113,7 +108,6 @@ lookattarget(lookposeset) {
   self animscripts\shared::setaiminganims( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
   self animscripts\shared::trackloopstart();
 
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     self.shootent = self.enemy;
-  }
 }

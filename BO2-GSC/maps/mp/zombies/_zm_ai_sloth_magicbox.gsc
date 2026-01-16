@@ -17,25 +17,21 @@
 box_lock_condition() {
   box = level.chests[level.chest_index];
 
-  if(!isDefined(box)) {
+  if(!isDefined(box))
     return false;
-  }
 
   self sloth_debug_context(box, sqrt(32400));
 
-  if(flag("moving_chest_now")) {
+  if(flag("moving_chest_now"))
     return false;
-  }
 
-  if(is_true(box._box_open) || is_true(box._box_opened_by_fire_sale)) {
+  if(is_true(box._box_open) || is_true(box._box_opened_by_fire_sale))
     return false;
-  }
 
   dist = distancesquared(self.origin, box.origin);
 
-  if(dist < 32400) {
+  if(dist < 32400)
     return true;
-  }
 
   return false;
 }
@@ -69,9 +65,8 @@ common_move_to_maze(box) {
   self endon("death");
 
   while(true) {
-    if(self common_abort_box(box)) {
+    if(self common_abort_box(box))
       return false;
-    }
 
     if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
       break;
@@ -88,9 +83,8 @@ common_move_to_courtyard(box) {
   self endon("death");
 
   while(true) {
-    if(self common_abort_box(box)) {
+    if(self common_abort_box(box))
       return false;
-    }
 
     if(!self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
       break;
@@ -185,37 +179,32 @@ box_lock_action() {
 }
 
 box_move_condition() {
-  if(flag("moving_chest_now")) {
+  if(flag("moving_chest_now"))
     return false;
-  }
 
   self.box_move = undefined;
   self.box_current = undefined;
   self.box_current_in_maze = 0;
   box_current = level.chests[level.chest_index];
 
-  if(is_true(box_current._box_open) || is_true(box_current._box_opened_by_fire_sale)) {
+  if(is_true(box_current._box_open) || is_true(box_current._box_opened_by_fire_sale))
     return false;
-  }
 
   if(box_current.script_noteworthy == "courtroom_chest1") {
-    if(!maps\mp\zm_buried::is_courthouse_open()) {
+    if(!maps\mp\zm_buried::is_courthouse_open())
       return false;
-    }
   }
 
   if(box_current.script_noteworthy == "tunnels_chest1") {
-    if(!maps\mp\zm_buried::is_tunnel_open()) {
+    if(!maps\mp\zm_buried::is_tunnel_open())
       return false;
-    }
   }
 
   if(box_current.script_noteworthy == "maze_chest1" || box_current.script_noteworthy == "maze_chest2") {
     self.box_current_in_maze = 1;
 
-    if(!is_maze_open()) {
+    if(!is_maze_open())
       return false;
-    }
   }
 
   for(i = 0; i < level.chests.size; i++) {
@@ -251,14 +240,12 @@ box_move_action() {
 
   if(is_true(self.box_current_in_maze)) {
     if(!is_true(self.box_move_in_maze)) {
-      if(!self common_move_to_maze(self.box_current)) {
+      if(!self common_move_to_maze(self.box_current))
         return;
-      }
     }
   } else if(is_true(self.box_move_in_maze)) {
-    if(!self common_move_to_courtyard(self.box_current)) {
+    if(!self common_move_to_courtyard(self.box_current))
       return;
-    }
   }
 
   if(!self common_move_to_box(self.box_current, 1024, 0, "zm_pull_magicbox")) {
@@ -272,9 +259,8 @@ box_move_action() {
     return;
   }
 
-  if(isDefined(level.sloth.custom_box_move_func)) {
+  if(isDefined(level.sloth.custom_box_move_func))
     self thread[[level.sloth.custom_box_move_func]](0);
-  }
 
   level.sloth_moving_box = 1;
   self.ignore_common_run = 1;
@@ -306,18 +292,16 @@ box_move_action() {
   self.context_done = 1;
   level.sloth_moving_box = undefined;
 
-  if(isDefined(level.sloth.custom_box_move_func)) {
+  if(isDefined(level.sloth.custom_box_move_func))
     self thread[[level.sloth.custom_box_move_func]](1);
-  }
 }
 
 box_notetracks(note, box) {
-  if(flag("moving_chest_now") || is_true(box._box_open) || is_true(box._box_opened_by_fire_sale)) {
+  if(flag("moving_chest_now") || is_true(box._box_open) || is_true(box._box_opened_by_fire_sale))
     return false;
-  }
 
   if(note == "pulled") {
-    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
     tag_name = "tag_stowed_back";
     twr_origin = self gettagorigin(tag_name);
     twr_angles = self gettagangles(tag_name);
@@ -325,7 +309,7 @@ box_notetracks(note, box) {
     if(!isDefined(self.box_model)) {
       self.box_model = spawn("script_model", twr_origin);
       self.box_model.angles = twr_angles;
-      self.box_model setModel(level.small_magic_box);
+      self.box_model setmodel(level.small_magic_box);
       self.box_model linkto(self, tag_name);
       self.box_model_visible = 1;
     } else {
@@ -335,7 +319,7 @@ box_notetracks(note, box) {
 
     self.box_current maps\mp\zombies\_zm_magicbox::hide_chest();
   } else if(note == "placed") {
-    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
     self box_model_hide();
 
     if(isDefined(self.box_move.zbarrier)) {
@@ -345,7 +329,7 @@ box_notetracks(note, box) {
       level.chest_index = self.box_move_index;
     }
   } else if(note == "locked")
-    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
 }
 
 box_model_hide() {
@@ -364,18 +348,16 @@ box_move_interrupt() {
     }
   }
 
-  if(isDefined(level.sloth.custom_box_move_func)) {
+  if(isDefined(level.sloth.custom_box_move_func))
     self thread[[level.sloth.custom_box_move_func]](1);
-  }
 
   level.sloth_moving_box = undefined;
   self box_model_hide();
 }
 
 box_spin_condition() {
-  if(flag("moving_chest_now")) {
+  if(flag("moving_chest_now"))
     return false;
-  }
 
   box = level.chests[level.chest_index];
 
@@ -383,9 +365,8 @@ box_spin_condition() {
     ground_pos = groundpos(box.origin);
     dist = distancesquared(self.origin, ground_pos);
 
-    if(dist < 32400) {
+    if(dist < 32400)
       return true;
-    }
   }
 
   return false;
@@ -396,7 +377,7 @@ box_spin_action() {
   self endon("stop_action");
   self maps\mp\zombies\_zm_ai_sloth::common_context_action();
   box = level.chests[level.chest_index];
-  hackable = spawnStruct();
+  hackable = spawnstruct();
   hackable.chest = box;
 
   if(!self common_move_to_box(box, 1024, 1, "zm_cycle_magicbox")) {
@@ -427,9 +408,8 @@ box_trigger() {
     thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.chest.unitrigger_stub);
     self.chest.zbarrier waittill("randomization_done");
 
-    if(!flag("moving_chest_now")) {
+    if(!flag("moving_chest_now"))
       thread maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(self.chest.unitrigger_stub, maps\mp\zombies\_zm_magicbox::magicbox_unitrigger_think);
-    }
   }
 }
 

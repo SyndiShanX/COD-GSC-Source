@@ -18,6 +18,7 @@ class phalanx {
   var breakingpoint_;
   var currentsentientcount_;
 
+
   constructor() {
     sentienttiers_ = [];
     startsentientcount_ = 0;
@@ -26,7 +27,9 @@ class phalanx {
     scattered_ = 0;
   }
 
+
   destructor() {}
+
 
   function scatterphalanx() {
     if(!scattered_) {
@@ -44,11 +47,13 @@ class phalanx {
     }
   }
 
+
   function resumefire() {
     _resumefiresentients(sentienttiers_["phalanx_tier1"]);
     _resumefiresentients(sentienttiers_["phalanx_tier2"]);
     _resumefiresentients(sentienttiers_["phalanx_tier3"]);
   }
+
 
   function resumeadvance() {
     if(!scattered_) {
@@ -61,6 +66,7 @@ class phalanx {
       _assignphalanxstance(sentienttiers_["phalanx_tier1"], "crouch");
     }
   }
+
 
   function initialize(phalanxtype, origin, destination, breakingpoint, maxtiersize = 10, tieronespawner = undefined, tiertwospawner = undefined, tierthreespawner = undefined) {
     assert(isstring(phalanxtype));
@@ -88,6 +94,7 @@ class phalanx {
     self thread _updatephalanxthread(self);
   }
 
+
   function haltadvance() {
     if(!scattered_) {
       foreach(tier in sentienttiers_) {
@@ -96,11 +103,13 @@ class phalanx {
     }
   }
 
+
   function haltfire() {
     foreach(tier in sentienttiers_) {
       _haltfire(tier);
     }
   }
+
 
   function private _updatephalanx() {
     if(scattered_) {
@@ -118,17 +127,20 @@ class phalanx {
     return true;
   }
 
+
   function private _updatephalanxthread(phalanx) {
-    while([
+    while ([
         [phalanx]
       ] - > _updatephalanx()) {
       wait(1);
     }
   }
 
+
   function private _rotatevec(vector, angle) {
     return ((vector[0] * cos(angle)) - (vector[1] * sin(angle)), (vector[0] * sin(angle)) + (vector[1] * cos(angle)), vector[2]);
   }
+
 
   function private _resumefiresentients(sentients) {
     assert(isarray(sentients));
@@ -137,11 +149,13 @@ class phalanx {
     }
   }
 
+
   function private _resumefire(sentient) {
-    if(isDefined(sentient) && isalive(sentient)) {
+    if(isdefined(sentient) && isalive(sentient)) {
       sentient.ignoreall = 0;
     }
   }
+
 
   function private _releasesentients(sentients) {
     foreach(sentient in sentients) {
@@ -151,8 +165,9 @@ class phalanx {
     }
   }
 
+
   function private _releasesentient(sentient) {
-    if(isDefined(sentient) && isalive(sentient)) {
+    if(isdefined(sentient) && isalive(sentient)) {
       sentient clearuseposition();
       sentient pathmode("move delayed", 1, randomfloatrange(0.5, 1));
       sentient ai::set_behavior_attribute("phalanx", 0);
@@ -161,30 +176,32 @@ class phalanx {
         sentient.allowpain = 1;
       }
       sentient setavoidancemask("avoid all");
-      aiutility::removeaioverridedamagecallback(sentient, &_dampenexplosivedamage);
-      if(isDefined(sentient.archetype) && sentient.archetype == "robot") {
+      aiutility::removeaioverridedamagecallback(sentient, & _dampenexplosivedamage);
+      if(isdefined(sentient.archetype) && sentient.archetype == "robot") {
         sentient ai::set_behavior_attribute("move_mode", "normal");
         sentient ai::set_behavior_attribute("force_cover", 0);
       }
     }
   }
 
+
   function private _prunedead(sentients) {
     livesentients = [];
     foreach(index, sentient in sentients) {
-      if(isDefined(sentient) && isalive(sentient)) {
+      if(isdefined(sentient) && isalive(sentient)) {
         livesentients[index] = sentient;
       }
     }
     return livesentients;
   }
 
+
   function private _movephalanxtier(sentients, phalanxtype, tier, destination, forward) {
     positions = _getphalanxpositions(phalanxtype, tier);
     angles = vectortoangles(forward);
     assert(sentients.size <= positions.size, "");
     foreach(index, sentient in sentients) {
-      if(isDefined(sentient) && isalive(sentient)) {
+      if(isdefined(sentient) && isalive(sentient)) {
         assert(isvec(positions[index]), (((("" + index) + "") + tier) + "") + phalanxtype);
         orientedpos = _rotatevec(positions[index], angles[1] - 90);
         navmeshposition = getclosestpointonnavmesh(destination + orientedpos, 200);
@@ -193,6 +210,7 @@ class phalanx {
     }
   }
 
+
   function _initializesentient(sentient) {
     assert(isactor(sentient));
     sentient ai::set_behavior_attribute("phalanx", 1);
@@ -200,26 +218,28 @@ class phalanx {
       sentient.allowpain = 0;
     }
     sentient setavoidancemask("avoid none");
-    if(isDefined(sentient.archetype) && sentient.archetype == "robot") {
+    if(isdefined(sentient.archetype) && sentient.archetype == "robot") {
       sentient ai::set_behavior_attribute("move_mode", "marching");
       sentient ai::set_behavior_attribute("force_cover", 1);
     }
-    aiutility::addaioverridedamagecallback(sentient, &_dampenexplosivedamage, 1);
+    aiutility::addaioverridedamagecallback(sentient, & _dampenexplosivedamage, 1);
   }
+
 
   function private _haltfire(sentients) {
     assert(isarray(sentients));
     foreach(sentient in sentients) {
-      if(isDefined(sentient) && isalive(sentient)) {
+      if(isdefined(sentient) && isalive(sentient)) {
         sentient.ignoreall = 1;
       }
     }
   }
 
+
   function private _haltadvance(sentients) {
     assert(isarray(sentients));
     foreach(sentient in sentients) {
-      if(isDefined(sentient) && isalive(sentient) && sentient haspath()) {
+      if(isdefined(sentient) && isalive(sentient) && sentient haspath()) {
         navmeshposition = getclosestpointonnavmesh(sentient.origin, 200);
         sentient useposition(navmeshposition);
         sentient clearpath();
@@ -227,12 +247,14 @@ class phalanx {
     }
   }
 
+
   function private _getphalanxspawner(tier) {
     spawner = getspawnerarray(tier, "targetname");
     assert(spawner.size >= 0, ("" + "") + "");
     assert(spawner.size == 1, ("" + "") + "");
     return spawner[0];
   }
+
 
   function private _getphalanxpositions(phalanxtype, tier) {
     switch (phalanxtype) {
@@ -347,10 +369,11 @@ class phalanx {
     assert(("" + tier) + "");
   }
 
+
   function private _dampenexplosivedamage(inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
     entity = self;
     isexplosive = isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdamage);
-    if(isexplosive && isDefined(inflictor) && isDefined(inflictor.weapon)) {
+    if(isexplosive && isdefined(inflictor) && isdefined(inflictor.weapon)) {
       weapon = inflictor.weapon;
       distancetoentity = distance(entity.origin, inflictor.origin);
       fractiondistance = 1;
@@ -361,6 +384,7 @@ class phalanx {
     }
     return damage;
   }
+
 
   function private _createphalanxtier(phalanxtype, tier, phalanxposition, forward, maxtiersize, spawner = undefined) {
     sentients = [];
@@ -386,10 +410,11 @@ class phalanx {
     return sentients;
   }
 
+
   function private _assignphalanxstance(sentients, stance) {
     assert(isarray(sentients));
     foreach(sentient in sentients) {
-      if(isDefined(sentient) && isalive(sentient)) {
+      if(isdefined(sentient) && isalive(sentient)) {
         sentient ai::set_behavior_attribute("phalanx_force_stance", stance);
       }
     }

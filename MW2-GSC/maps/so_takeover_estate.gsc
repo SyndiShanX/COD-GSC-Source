@@ -12,10 +12,9 @@
 main() {
   level.so_compass_zoom = "far";
 
-  no_prone_water = getEntArray("no_prone_water", "targetname");
-  foreach(trigger in no_prone_water) {
-    trigger.script_specialops = 1;
-  }
+  no_prone_water = getentarray("no_prone_water", "targetname");
+  foreach(trigger in no_prone_water)
+  trigger.script_specialops = 1;
 
   // settings for this challenge
   level.pmc_gametype = "mode_elimination";
@@ -55,10 +54,10 @@ remove_sp_elements() {
   getent("dsm", "targetname") delete();
   getent("dsm_obj", "targetname") delete();
 
-  array_call(getEntArray("window_newspaper", "targetname"), ::delete);
-  array_call(getEntArray("window_pane", "targetname"), ::delete);
-  array_call(getEntArray("window_brokenglass", "targetname"), ::delete);
-  array_call(getEntArray("window_blinds", "targetname"), ::delete);
-  array_call(getEntArray("paper_window_sightblocker", "targetname"), ::delete);
-  array_call(getEntArray("sp_claymore_pickups", "targetname"), ::delete);
+  array_call(getentarray("window_newspaper", "targetname"), ::delete);
+  array_call(getentarray("window_pane", "targetname"), ::delete);
+  array_call(getentarray("window_brokenglass", "targetname"), ::delete);
+  array_call(getentarray("window_blinds", "targetname"), ::delete);
+  array_call(getentarray("paper_window_sightblocker", "targetname"), ::delete);
+  array_call(getentarray("sp_claymore_pickups", "targetname"), ::delete);
 }

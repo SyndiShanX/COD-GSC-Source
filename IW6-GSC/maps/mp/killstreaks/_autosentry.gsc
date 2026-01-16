@@ -38,7 +38,7 @@ init() {
   level.sentrySettings["sentry_minigun"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["sentry_minigun"].modelBombSquad = "weapon_sentry_chaingun_bombsquad";
   level.sentrySettings["sentry_minigun"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["sentry_minigun"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["sentry_minigun"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["sentry_minigun"].headIcon = true;
   level.sentrySettings["sentry_minigun"].teamSplash = "used_sentry";
   level.sentrySettings["sentry_minigun"].shouldSplash = false;
@@ -66,7 +66,7 @@ init() {
   level.sentrySettings["sam_turret"].modelPlacement = "mp_sam_turret_placement";
   level.sentrySettings["sam_turret"].modelPlacementFailed = "mp_sam_turret_placement_failed";
   level.sentrySettings["sam_turret"].modelDestroyed = "mp_sam_turret";
-  level.sentrySettings["sam_turret"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["sam_turret"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["sam_turret"].headIcon = true;
   level.sentrySettings["sam_turret"].teamSplash = "used_sam_turret";
   level.sentrySettings["sam_turret"].shouldSplash = false;
@@ -117,11 +117,10 @@ giveSentry(sentryType) {
 
   self.isCarrying = false;
 
-  if(isDefined(sentryGun)) {
+  if(isDefined(sentryGun))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 setCarryingSentry(sentryGun, allowCancel) {
@@ -424,9 +423,8 @@ sentry_handleDeath() {
   }
   self SetTurretMinimapVisible(false);
 
-  if(isDefined(self.ownerTrigger)) {
+  if(isDefined(self.ownerTrigger))
     self.ownerTrigger delete();
-  }
 
   self playSound("sentry_explode");
 
@@ -464,9 +462,8 @@ sentry_handleDeath() {
 
   self maps\mp\gametypes\_weapons::equipmentDeleteVfx();
 
-  if(isDefined(self.killCamEnt)) {
+  if(isDefined(self.killCamEnt))
     self.killCamEnt delete();
-  }
 
   self delete();
 }
@@ -484,9 +481,8 @@ sentry_handleUse() {
     if(!isReallyAlive(player)) {
       continue;
     }
-    if(self.sentryType == "sam_turret" || self.sentryType == "scramble_turret") {
+    if(self.sentryType == "sam_turret" || self.sentryType == "scramble_turret")
       self setMode(level.sentrySettings[self.sentryType].sentryModeOff);
-    }
 
     player setCarryingSentry(self, false);
   }
@@ -561,15 +557,12 @@ turret_handleUse() {
   for(;;) {
     self waittill("trigger", player);
 
-    if(isDefined(self.carriedBy)) {
+    if(isDefined(self.carriedBy))
       continue;
-    }
-    if(isDefined(self.inUseBy)) {
+    if(isDefined(self.inUseBy))
       continue;
-    }
-    if(!isReallyAlive(player)) {
+    if(!isReallyAlive(player))
       continue;
-    }
     player removePerks();
     player removeWeapons();
 
@@ -605,16 +598,14 @@ turret_handleUse() {
         break;
       }
 
-      if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime) {
+      if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime)
         barFrac = 1;
-      } else {
+      else
         barFrac = self.heatLevel / level.sentrySettings[self.sentryType].overheatTime;
-      }
       player.turret_overheat_bar updateBar(barFrac);
 
-      if(string_starts_with(self.sentryType, "minigun_turret")) {
+      if(string_starts_with(self.sentryType, "minigun_turret"))
         minigun_turret = "minigun_turret";
-      }
 
       if(self.forceDisable || self.overheated) {
         self TurretFireDisable();
@@ -622,11 +613,10 @@ turret_handleUse() {
         playingHeatFX = false;
       } else if(self.heatLevel > level.sentrySettings[self.sentryType].overheatTime * 0.75 && string_starts_with(self.sentryType, "minigun_turret")) {
         player.turret_overheat_bar.bar.color = colorUnstable;
-        if(RandomIntRange(0, 10) < 6) {
+        if(RandomIntRange(0, 10) < 6)
           self TurretFireEnable();
-        } else {
+        else
           self TurretFireDisable();
-        }
         if(!playingHeatFX) {
           playingHeatFX = true;
           self thread PlayHeatFX();
@@ -680,9 +670,8 @@ sentry_moving_platform_death(data) {
 sentry_setPlaced() {
   self setModel(level.sentrySettings[self.sentryType].modelBase);
 
-  if(self GetMode() == "manual") {
+  if(self GetMode() == "manual")
     self SetMode(level.sentrySettings[self.sentryType].sentryModeOff);
-  }
 
   self thread sentry_handleDamage();
   self thread sentry_handleDeath();
@@ -703,9 +692,8 @@ sentry_setPlaced() {
     case "gl_turret_4":
       self.angles = self.carriedBy.angles;
 
-      if(IsAlive(self.originalOwner)) {
+      if(IsAlive(self.originalOwner))
         self.originalOwner setLowerMessage("pickup_hint", level.sentrySettings[self.sentryType].ownerHintString, 3.0, undefined, undefined, undefined, undefined, undefined, true);
-      }
 
       self.ownerTrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
       self.ownerTrigger EnableLinkTo();
@@ -748,9 +736,8 @@ sentry_setPlaced() {
   data.deathOverrideCallback = ::sentry_moving_platform_death;
   self thread maps\mp\_movers::handle_moving_platforms(data);
 
-  if(self.sentryType != "multiturret") {
+  if(self.sentryType != "multiturret")
     self playSound("sentry_gun_plant");
-  }
 
   self thread maps\mp\gametypes\_weapons::doBlinkingLight(level.sentrySettings[self.sentryType].lightFXTag);
 
@@ -767,9 +754,8 @@ sentry_setCancelled(playDestroyVfx) {
 
     owner _enableWeapon();
 
-    if(isDefined(self.bombSquadModel)) {
+    if(isDefined(self.bombSquadModel))
       self.bombSquadModel delete();
-    }
   }
 
   if(isDefined(playDestroyVfx) && playDestroyVfx) {
@@ -781,11 +767,10 @@ sentry_setCancelled(playDestroyVfx) {
 
 sentry_setCarried(carrier) {
   assert(isPlayer(carrier));
-  if(isDefined(self.originalOwner)) {
+  if(isDefined(self.originalOwner))
     assertEx(carrier == self.originalOwner, "sentry_setCarried() specified carrier does not own this sentry");
-  } else {
+  else
     assertEx(carrier == self.owner, "sentry_setCarried() specified carrier does not own this sentry");
-  }
 
   self setModel(level.sentrySettings[self.sentryType].modelPlacement);
 
@@ -809,15 +794,13 @@ sentry_setCarried(carrier) {
 
   self sentry_setInactive();
 
-  if(isDefined(self GetLinkedParent())) {
+  if(isDefined(self GetLinkedParent()))
     self unlink();
-  }
 
   self notify("carried");
 
-  if(isDefined(self.bombSquadModel)) {
+  if(isDefined(self.bombSquadModel))
     self.bombSquadModel Hide();
-  }
 }
 
 updateSentryPlacement(sentryGun) {
@@ -866,9 +849,9 @@ sentry_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced) {
+  if(self.canBePlaced)
     self sentry_setPlaced();
-  } else {
+  else {
     self sentry_setCancelled(false);
   }
 }
@@ -906,11 +889,10 @@ sentry_setActive() {
   self setHintString(level.sentrySettings[self.sentryType].hintString);
 
   if(level.sentrySettings[self.sentryType].headIcon) {
-    if(level.teamBased) {
+    if(level.teamBased)
       self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-    } else {
+    else
       self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, 65));
-    }
   }
 
   self makeUsable();
@@ -937,11 +919,10 @@ sentry_setActive() {
         entNum = self GetEntityNumber();
         self addToTurretList(entNum);
 
-        if(player == self.owner) {
+        if(player == self.owner)
           self enablePlayerUse(player);
-        } else {
+        else
           self disablePlayerUse(player);
-        }
         break;
     }
   }
@@ -978,11 +959,10 @@ sentry_setInactive() {
       break;
   }
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
-  }
 }
 
 sentry_makeSolid() {
@@ -994,9 +974,8 @@ sentry_makeNotSolid() {
 }
 
 isFriendlyToSentry(sentryGun) {
-  if(level.teamBased && self.team == sentryGun.team) {
+  if(level.teamBased && self.team == sentryGun.team)
     return true;
-  }
 
   return false;
 }
@@ -1045,19 +1024,17 @@ sentry_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       lifeSpan = max(0, lifeSpan - 1.0);
-    }
   }
 
   if(isDefined(self.owner)) {
-    if(self.sentryType == "sam_turret") {
+    if(self.sentryType == "sam_turret")
       self.owner thread leaderDialogOnPlayer("sam_gone");
-    } else if(self.sentryType == "scramble_turret") {
+    else if(self.sentryType == "scramble_turret")
       self.owner thread leaderDialogOnPlayer("sam_gone");
-    } else {
+    else
       self.owner thread leaderDialogOnPlayer("sentry_gone");
-    }
   }
   self notify("death");
 }
@@ -1146,11 +1123,10 @@ sentry_heatMonitor() {
   overheatCoolDown = level.sentrySettings[self.sentryType].cooldownTime;
 
   for(;;) {
-    if(self.heatLevel != lastHeatLevel) {
+    if(self.heatLevel != lastHeatLevel)
       wait(fireTime);
-    } else {
+    else
       self.heatLevel = max(0, self.heatLevel - 0.05);
-    }
 
     if(self.heatLevel > overheatTime) {
       self.overheated = true;
@@ -1262,9 +1238,8 @@ sentry_beepSounds() {
   for(;;) {
     wait(3.0);
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       self playSound("sentry_gun_beep");
-    }
   }
 }
 
@@ -1530,9 +1505,8 @@ scrambleTurretAttackTargets() {
   while(true) {
     self.scrambleTargetEnt = scramble_acquireTarget();
 
-    if(isDefined(self.scrambleTargetEnt) && isDefined(self.scrambleTargetEnt.scrambled) && !self.scrambleTargetEnt.scrambled) {
+    if(isDefined(self.scrambleTargetEnt) && isDefined(self.scrambleTargetEnt.scrambled) && !self.scrambleTargetEnt.scrambled)
       self scrambleTarget();
-    }
 
     wait(0.05);
   }

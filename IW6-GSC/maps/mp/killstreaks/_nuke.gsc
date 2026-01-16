@@ -51,13 +51,11 @@ tryUseNuke(lifeId, streakName, allowCancel) {
     return false;
   }
 
-  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw)) {
+  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw))
     return false;
-  }
 
-  if(!isDefined(allowCancel)) {
+  if(!isDefined(allowCancel))
     allowCancel = true;
-  }
 
   self thread doNuke(allowCancel);
   self notify("used_nuke");
@@ -89,12 +87,13 @@ doNuke(allowCancel) {
   if(level.teambased) {
     thread teamPlayerCardSplash("used_nuke", self, self.team);
   } else {
-    if(!level.hardcoreMode) {
+    if(!level.hardcoreMode)
       self IPrintLnBold(&"KILLSTREAKS_FRIENDLY_TACTICAL_NUKE");
-    }
   }
 
-  if(!isDefined(level.doNuke_fx) || ![[level.doNuke_fx]]()) {
+  if(!isDefined(level.doNuke_fx) || ![
+      [level.doNuke_fx]
+    ]()) {
     if(!isDefined(level.nuke_soundObject)) {
       level.nuke_soundObject = spawn("script_origin", (0, 0, 1));
       level.nuke_soundObject hide();
@@ -109,9 +108,8 @@ doNuke(allowCancel) {
     level thread delaythread_nuke((level.nukeTimer + 1.5), ::nukeEarthquake);
     level thread nukeAftermathEffect();
 
-    if(level.cancelMode && allowCancel) {
+    if(level.cancelMode && allowCancel)
       level thread cancelNukeOnDeath(self);
-    }
   }
 
   level thread update_ui_timers();
@@ -155,9 +153,8 @@ nukeDeathSimple() {
 cancelNukeOnDeath(player) {
   player waittill_any("death", "disconnect");
 
-  if(isDefined(player) && level.cancelMode == 2) {
+  if(isDefined(player) && level.cancelMode == 2)
     player thread maps\mp\killstreaks\_emp::EMP_Use(0, 0);
-  }
 
   nukeClearTimer();
   level.nukeIncoming = undefined;
@@ -168,9 +165,8 @@ cancelNukeOnDeath(player) {
 nukeSoundIncoming() {
   level endon("nuke_cancelled");
 
-  if(isDefined(level.nuke_soundObject)) {
+  if(isDefined(level.nuke_soundObject))
     level.nuke_soundObject playSound("nuke_incoming");
-  }
 }
 
 nukeSoundExplosion() {
@@ -184,9 +180,8 @@ nukeSoundExplosion() {
 
 nukeClearTimer() {
   uiBombTimer = 0;
-  if(isDefined(level.prevUIBombTimer)) {
+  if(isDefined(level.prevUIBombTimer))
     uiBombTimer = level.prevUIBombTimer;
-  }
   SetOmnvar("ui_bomb_timer", uiBombTimer);
 }
 
@@ -323,21 +318,18 @@ nukeDeath() {
 }
 
 nukeCanKill(character) {
-  if(!isDefined(level.nukeInfo)) {
+  if(!isDefined(level.nukeInfo))
     return false;
-  }
 
   if(level.teambased) {
-    if(isDefined(level.nukeInfo.team) && character.team == level.nukeInfo.team) {
+    if(isDefined(level.nukeInfo.team) && character.team == level.nukeInfo.team)
       return false;
-    }
   } else {
     isKillstreakPlayer = isDefined(level.nukeInfo.player) && (character == level.nukeInfo.player);
     ownerIsPlayer = isDefined(level.nukeInfo.player) && isDefined(character.owner) && (character.owner == level.nukeInfo.player);
 
-    if(isKillstreakPlayer || ownerIsPlayer) {
+    if(isKillstreakPlayer || ownerIsPlayer)
       return false;
-    }
   }
 
   return true;

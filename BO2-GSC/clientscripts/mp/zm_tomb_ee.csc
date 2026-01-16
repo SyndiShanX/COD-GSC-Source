@@ -25,9 +25,8 @@ init() {
 }
 
 toggle_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     setdvar("ui_zm_outromovie", "zm_tomb_ee");
-  }
 }
 
 toggle_wagon_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -46,7 +45,7 @@ wagon_fire_fx_loop(localclientnum, fieldname) {
   s_pos = getstruct(fieldname, "targetname");
 
   while(true) {
-    playFX(localclientnum, level._effect["wagon_fire"], s_pos.origin, anglesToForward(s_pos.angles), anglestoup(s_pos.angles));
+    playfx(localclientnum, level._effect["wagon_fire"], s_pos.origin, anglestoforward(s_pos.angles), anglestoup(s_pos.angles));
     wait 0.5;
   }
 }
@@ -55,25 +54,24 @@ sndwagonfire(ison, fieldname) {
   struct = getstruct(fieldname, "targetname");
   origin = struct.origin;
 
-  if(ison) {
+  if(ison)
     playloopat("amb_fire_xlg", origin);
-  } else {
+  else
     stoploopat("amb_fire_xlg", origin);
-  }
 }
 
 toggle_fist_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     if(!isDefined(self.has_soul)) {
       self.has_soul = 1;
-      self.fist_fx_r = playFXOnTag(localclientnum, level._effect["fist_glow"], self, "J_Wrist_RI");
-      self.fist_fx_l = playFXOnTag(localclientnum, level._effect["fist_glow"], self, "J_Wrist_LE");
+      self.fist_fx_r = playfxontag(localclientnum, level._effect["fist_glow"], self, "J_Wrist_RI");
+      self.fist_fx_l = playfxontag(localclientnum, level._effect["fist_glow"], self, "J_Wrist_LE");
     }
 
     if(!isDefined(self.sndfist)) {
       self.sndfist = spawn(0, self.origin, "script_origin");
       self.sndfist linkto(self);
-      self.sndfist playLoopSound("zmb_squest_punchtime_fist_loop", 1);
+      self.sndfist playloopsound("zmb_squest_punchtime_fist_loop", 1);
       self thread snddeletesndent(self.sndfist);
     }
   } else {
@@ -95,13 +93,13 @@ snddeletesndent(ent) {
 zombie_soul_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   v_dest = getent(localclientnum, "ee_sam_portal", "targetname").origin;
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
-  e_fx setModel("tag_origin");
-  playSound(localclientnum, "zmb_squest_charge_soul_leave", self.origin);
-  playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
+  e_fx setmodel("tag_origin");
+  playsound(localclientnum, "zmb_squest_charge_soul_leave", self.origin);
+  playfxontag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
   e_fx moveto(v_dest + vectorscale((0, 0, 1), 5.0), 1);
   e_fx waittill("movedone");
-  playSound(localclientnum, "zmb_squest_charge_soul_impact", v_dest);
-  playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
+  playsound(localclientnum, "zmb_squest_charge_soul_impact", v_dest);
+  playfxontag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
   wait 0.3;
   e_fx delete();
 }
@@ -115,12 +113,12 @@ set_ee_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   if(newval == 1) {
-    e_fx.fx_id = playFXOnTag(localclientnum, level._effect["foot_box_glow"], e_fx, "tag_origin");
-    e_fx playLoopSound("zmb_squest_sam_portal_closed_loop", 1);
+    e_fx.fx_id = playfxontag(localclientnum, level._effect["foot_box_glow"], e_fx, "tag_origin");
+    e_fx playloopsound("zmb_squest_sam_portal_closed_loop", 1);
   } else if(newval == 2) {
-    e_fx.fx_id = playFXOnTag(localclientnum, level._effect["ee_vortex"], e_fx, "tag_origin");
-    playSound(0, "zmb_squest_sam_portal_open", e_fx.origin);
-    e_fx playLoopSound("zmb_squest_sam_portal_open_loop", 1);
+    e_fx.fx_id = playfxontag(localclientnum, level._effect["ee_vortex"], e_fx, "tag_origin");
+    playsound(0, "zmb_squest_sam_portal_open", e_fx.origin);
+    e_fx playloopsound("zmb_squest_sam_portal_open_loop", 1);
   }
 }
 
@@ -131,9 +129,8 @@ run_plane_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   while(true) {
     e_player = getlocalplayer(localclientnum);
 
-    if(isDefined(e_player) && is_true(e_player.zombie_blood_fx) && !isDefined(self.plane_fx)) {
-      self.plane_fx = playFXOnTag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
-    }
+    if(isDefined(e_player) && is_true(e_player.zombie_blood_fx) && !isDefined(self.plane_fx))
+      self.plane_fx = playfxontag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
 
     if(isDefined(e_player) && !is_true(e_player.zombie_blood_fx) && isDefined(self.plane_fx)) {
       stopfx(localclientnum, self.plane_fx);
@@ -148,13 +145,13 @@ tablet_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   a_structs = getstructarray("tablet_charge_pos", "targetname");
   s_box = get_array_of_closest(self.origin, a_structs)[0];
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
-  e_fx setModel("tag_origin");
-  e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
-  playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
+  e_fx setmodel("tag_origin");
+  e_fx playsound(localclientnum, "zmb_squest_charge_soul_leave");
+  playfxontag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
   e_fx moveto(s_box.origin, 1);
   e_fx waittill("movedone");
-  playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
-  playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
+  playsound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
+  playfxontag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
   wait 0.3;
   e_fx delete();
 }
@@ -165,7 +162,7 @@ toggle_beacon_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       self.beacon_portal = 1;
       self thread create_beacon_portal(localclientnum);
       self.m_reward = spawn(localclientnum, (-141, 4464, -322) + (8, 35, 20), "script_model");
-      self.m_reward setModel(getweaponmodel("beacon_zm"));
+      self.m_reward setmodel(getweaponmodel("beacon_zm"));
       self.m_reward thread rotate_beacon(localclientnum);
     }
   } else if(isDefined(self.beacon_portal)) {
@@ -179,9 +176,9 @@ rotate_beacon(localclientnum) {
   self endon("entityshutdown");
   self endon("death");
   self waittill_dobj(localclientnum);
-  playFXOnTag(localclientnum, level._effect["staff_soul"], self, "tag_origin");
-  self playSound(localclientnum, "zmb_spawn_powerup");
-  self playLoopSound("zmb_spawn_powerup_loop", 0.5);
+  playfxontag(localclientnum, level._effect["staff_soul"], self, "tag_origin");
+  self playsound(localclientnum, "zmb_spawn_powerup");
+  self playloopsound("zmb_spawn_powerup_loop", 0.5);
   self movey(-50, 2, 0, 1);
   self waittill("movedone");
 
@@ -196,7 +193,7 @@ create_beacon_portal(localclientnum) {
   self endon("stop_beacon_portal");
 
   while(true) {
-    playFX(localclientnum, level._effect["bottle_glow"], (-141, 4464, -322) + (60, 10, 25));
+    playfx(localclientnum, level._effect["bottle_glow"], (-141, 4464, -322) + (60, 10, 25));
     wait 0.1;
   }
 }

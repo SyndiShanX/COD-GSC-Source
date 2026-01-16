@@ -50,9 +50,8 @@ skipto_lab_battle() {
   m_asd_intro_tile_fall delete();
   level thread challenge_kill_challenge_watch();
 
-  foreach(hero in level.heroes) {
-    hero change_movemode("cqb_walk");
-  }
+  foreach(hero in level.heroes)
+  hero change_movemode("cqb_walk");
 
   level thread emergency_light_init();
   level.ignoreneutralfriendlyfire = 1;
@@ -215,12 +214,12 @@ init_lab_interior() {
   a_lab_lens_flare = getstructarray("lab_lens_flare", "targetname");
 
   foreach(lens_flare in a_lab_lens_flare) {
-    v_forward = anglesToForward(lens_flare.angles);
-    playFX(level._effect["light_lens_flare"], lens_flare.origin, v_forward);
+    v_forward = anglestoforward(lens_flare.angles);
+    playfx(level._effect["light_lens_flare"], lens_flare.origin, v_forward);
     wait 0.05;
   }
 
-  a_destroyed_lobby_asd = getEntArray("destroyed_lobby_asd", "targetname");
+  a_destroyed_lobby_asd = getentarray("destroyed_lobby_asd", "targetname");
 
   foreach(asd in a_destroyed_lobby_asd) {
     asd hide();
@@ -228,20 +227,18 @@ init_lab_interior() {
   }
 
   wait 0.05;
-  a_exit_blood_02 = getEntArray("exit_blood_02", "targetname");
+  a_exit_blood_02 = getentarray("exit_blood_02", "targetname");
 
   foreach(blood in a_exit_blood_02) {
-    if(!is_mature()) {
+    if(!is_mature())
       blood hide();
-    }
   }
 
   wait 0.05;
-  a_exit_blood_01 = getEntArray("exit_blood_01", "targetname");
+  a_exit_blood_01 = getentarray("exit_blood_01", "targetname");
 
-  foreach(blood in a_exit_blood_01) {
-    blood hide();
-  }
+  foreach(blood in a_exit_blood_01)
+  blood hide();
 
   wait 0.05;
   wait 0.05;
@@ -254,18 +251,16 @@ init_lab_interior() {
   trig_elevator_panel sethintstring("");
   trig_elevator_panel setcursorhint("HINT_NOICON");
   wait 0.05;
-  a_defend_crash_show = getEntArray("defend_crash_show", "targetname");
+  a_defend_crash_show = getentarray("defend_crash_show", "targetname");
 
-  foreach(crash_piece in a_defend_crash_show) {
-    crash_piece hide();
-  }
+  foreach(crash_piece in a_defend_crash_show)
+  crash_piece hide();
 
   wait 0.05;
-  a_defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
+  a_defend_pillar_show = getentarray("defend_pillar_show", "targetname");
 
-  foreach(piece in a_defend_pillar_show) {
-    piece hide();
-  }
+  foreach(piece in a_defend_pillar_show)
+  piece hide();
 
   wait 0.05;
   e_escape_blast_doors = getent("escape_blast_doors", "targetname");
@@ -300,9 +295,8 @@ lab_entrance() {
   level thread clean_room_doors();
   level.ignoreneutralfriendlyfire = 1;
 
-  foreach(hero in level.heroes) {
-    hero.grenadeawareness = 0;
-  }
+  foreach(hero in level.heroes)
+  hero.grenadeawareness = 0;
 
   level.harper thread harper_lab_intro();
   level.salazar thread salazar_lab_intro();
@@ -350,39 +344,35 @@ lab_entrance() {
   bm_lab_door_left_rear_clip connectpaths();
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500) {
+  if(n_distance < 500)
     level.player playrumbleonentity("damage_heavy");
-  }
 
   level.player setlowready(0);
   m_lab_door_left movey(90, 5, 1);
   m_lab_door_right movey(-90, 5, 1);
-  m_lab_door_right playSound("evt_lab_round_doors");
+  m_lab_door_right playsound("evt_lab_round_doors");
   wait 1.5;
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500) {
+  if(n_distance < 500)
     level.player playrumbleonentity("damage_heavy");
-  }
 
   m_lab_door_left_rear movey(83, 5, 1);
   m_lab_door_right_rear movey(-83, 5, 1);
-  m_lab_door_left_rear playSound("evt_lab_round_doors");
+  m_lab_door_left_rear playsound("evt_lab_round_doors");
   m_lab_door_left waittill("movedone");
   s_front_lab_door_rumble_dist.is_moving = 0;
   n_distance = distance2d(s_front_lab_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500) {
+  if(n_distance < 500)
     level.player playrumbleonentity("damage_heavy");
-  }
 
   m_lab_door_left_rear waittill("movedone");
   s_rear_lab_door_rumble_dist.is_moving = 0;
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500) {
+  if(n_distance < 500)
     level.player playrumbleonentity("damage_heavy");
-  }
 
   flag_set("lab_entrance_open");
   level thread maps\createart\monsoon_art::lab_vision();
@@ -551,7 +541,7 @@ clean_room_doors() {
   exploder(1350);
   spray_ent = spawn("script_origin", (8382, 55196, -887));
   playsoundatposition("evt_spray_start", (8382, 55196, -887));
-  spray_ent playLoopSound("evt_spray_loop", 0.5);
+  spray_ent playloopsound("evt_spray_loop", 0.5);
   wait 5;
   spray_ent stoploopsound(0.5);
   playsoundatposition("evt_spray_stop", (8382, 55196, -887));
@@ -598,9 +588,9 @@ player_asd_intro() {
   level notify("fxanim_metal_storm_enter01_start");
   earthquake(0.75, 2, level.player.origin, 1000);
   level.player shellshock("default", 8.5);
-  level.player playSound("evt_lab_entrance_exp");
+  level.player playsound("evt_lab_entrance_exp");
   level.player playrumbleonentity("grenade_rumble");
-  level.player setCanDamage(0);
+  level.player setcandamage(0);
   level clientnotify("snd_alarm");
   setsaveddvar("bg_fallDamageMinHeight", 512);
   setsaveddvar("bg_fallDamageMaxHeight", 850);
@@ -608,9 +598,8 @@ player_asd_intro() {
   m_asd_intro_tile_fall delete();
   setmusicstate("MONSOON_BASE_FIGHT_1");
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
     level.player ent_flag_clear("camo_suit_on");
-  }
 
   level.player stopsounds();
   bm_player_asd_window = getent("player_asd_window", "targetname");
@@ -625,7 +614,7 @@ player_asd_intro() {
   run_scene("asd_intro_player_intro");
   flag_set("end_player_asd_anim");
   autosave_by_name("asd_intro");
-  level.player setCanDamage(1);
+  level.player setcandamage(1);
   s_hallway_rockets_start = getstruct("hallway_rockets_start", "targetname");
   s_asd_hallway_target = getstruct("asd_hallway_target", "targetname");
   magicbullet("metalstorm_launcher", s_hallway_rockets_start.origin, s_asd_hallway_target.origin);
@@ -645,12 +634,12 @@ asd_fall_back_think() {
 }
 
 harper_grenade_launch(guy) {
-  playFXOnTag(getfx("grenade_arm_launcher"), level.harper, "J_Wrist_RI");
+  playfxontag(getfx("grenade_arm_launcher"), level.harper, "J_Wrist_RI");
 }
 
 asd_grenade_defense(guy) {
   s_midair_nade_explosion = getstruct("midair_nade_explosion", "targetname");
-  playFX(getfx("c4_explode"), s_midair_nade_explosion.origin);
+  playfx(getfx("c4_explode"), s_midair_nade_explosion.origin);
   level notify("fxanim_metal_storm_enter02_start");
   level.player playrumbleonentity("grenade_rumble");
   earthquake(0.2, 0.5, level.player.origin, 1000);
@@ -677,9 +666,8 @@ asd_tutorial_intro() {
   level.vh_asd_tutorial_2 thread watch_asd_tutorial_2_death();
   flag_wait("end_player_asd_anim");
 
-  foreach(hero in level.heroes) {
-    hero.grenadeawareness = 1;
-  }
+  foreach(hero in level.heroes)
+  hero.grenadeawareness = 1;
 
   level thread asd_lobby_guys();
   level thread lab_battle_dead_bodies();
@@ -689,13 +677,11 @@ asd_tutorial_intro() {
 asd_cleanup() {
   flag_wait("elevator_is_ready");
 
-  if(isDefined(level.vh_asd_tutorial) && isalive(level.vh_asd_tutorial)) {
+  if(isDefined(level.vh_asd_tutorial) && isalive(level.vh_asd_tutorial))
     level.vh_asd_tutorial notify("death");
-  }
 
-  if(isDefined(level.vh_asd_tutorial_2) && isalive(level.vh_asd_tutorial_2)) {
+  if(isDefined(level.vh_asd_tutorial_2) && isalive(level.vh_asd_tutorial_2))
     level.vh_asd_tutorial_2 notify("death");
-  }
 }
 
 watch_asd_tutorial_death() {
@@ -806,7 +792,7 @@ vo_player_asd() {
 asd_lobby_think() {
   self endon("death");
   self thread asd_hallway_gunfire();
-  self setCanDamage(0);
+  self setcandamage(0);
   self veh_magic_bullet_shield(1);
   self maps\_metal_storm::metalstorm_stop_ai();
   nd_start_node = getvehiclenode(self.target, "targetname");
@@ -815,7 +801,7 @@ asd_lobby_think() {
   self setspeed(0, 3, 2);
   flag_wait("end_player_asd_anim");
   self maps\_vehicle::vehicle_pathdetach();
-  self setCanDamage(1);
+  self setcandamage(1);
   self veh_magic_bullet_shield(0);
   self thread asd_health_watch();
   s_asd_tutorial_spot = getstruct("asd_tutorial_spot", "targetname");
@@ -881,26 +867,23 @@ asd_battle_dialog() {
   waittill_ai_group_cleared("lobby_guys");
   level.player queue_dialog("sect_keep_pushing_0", 0.5);
 
-  if(is_mature()) {
+  if(is_mature())
     level.harper queue_dialog("harp_they_sure_as_hell_do_0", 0.5);
-  } else {
+  else
     level.harper queue_dialog("harp_they_definitely_don_0", 0.5);
-  }
 }
 
 color_trig_cleanup() {
   trigger_wait("trig_color_lobby_mid");
   trig_left_lobby_guy = getent("trig_left_lobby_guy", "targetname");
 
-  if(isDefined(trig_left_lobby_guy)) {
+  if(isDefined(trig_left_lobby_guy))
     trig_left_lobby_guy delete();
-  }
 
   trig_right_lobby_guy = getent("trig_right_lobby_guy", "targetname");
 
-  if(isDefined(trig_left_lobby_guy)) {
+  if(isDefined(trig_left_lobby_guy))
     trig_right_lobby_guy delete();
-  }
 }
 
 remove_hallway_ai_clip() {
@@ -996,9 +979,8 @@ asd_tutorial_timeout() {
 asd_health_watch() {
   self endon("death");
 
-  while(self.health > 100) {
+  while(self.health > 100)
     wait 0.05;
-  }
 
   trigger_use("trig_color_lobby_front");
   flag_set("asd_becomes_active");
@@ -1007,9 +989,9 @@ asd_health_watch() {
 
 player_nitrogen_death(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime) {
   if(smeansofdeath == "MOD_GAS") {
-    if(isDefined(level.player.b_been_frozen) && level.player.b_been_frozen) {
+    if(isDefined(level.player.b_been_frozen) && level.player.b_been_frozen)
       return 0;
-    } else {
+    else {
       level.dont_save_now = 1;
       level.player.b_been_frozen = 1;
       level.player.ignoreme = 1;
@@ -1056,23 +1038,20 @@ setup_ambient_2_1_asd() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 lab_color_triggers() {
-  a_lab_color_triggers = getEntArray("lab_color_triggers", "script_noteworthy");
+  a_lab_color_triggers = getentarray("lab_color_triggers", "script_noteworthy");
 
-  foreach(trigger in a_lab_color_triggers) {
-    trigger thread notify_targeted_trigger();
-  }
+  foreach(trigger in a_lab_color_triggers)
+  trigger thread notify_targeted_trigger();
 
-  a_lower_lab_color_triggers = getEntArray("lower_lab_color_triggers", "script_noteworthy");
+  a_lower_lab_color_triggers = getentarray("lower_lab_color_triggers", "script_noteworthy");
 
-  foreach(trigger in a_lower_lab_color_triggers) {
-    trigger thread notify_targeted_trigger();
-  }
+  foreach(trigger in a_lower_lab_color_triggers)
+  trigger thread notify_targeted_trigger();
 }
 
 notify_targeted_trigger() {
@@ -1086,7 +1065,7 @@ lab_spawn_funcs() {
   ai_isaac add_spawn_function(::setup_isaac);
   ai_window_jumper = getent("window_jumper", "targetname");
   ai_window_jumper add_spawn_function(::init_window_jumper);
-  a_lab_scientist = getEntArray("ambient_lab_scientists", "script_noteworthy");
+  a_lab_scientist = getentarray("ambient_lab_scientists", "script_noteworthy");
   array_thread(a_lab_scientist, ::add_spawn_function, ::init_lab_scientists);
   ai_left_lobby_guy = getent("left_lobby_guy", "script_noteworthy");
   ai_left_lobby_guy add_spawn_function(::trigger_left_lobby_color);
@@ -1100,13 +1079,13 @@ lab_spawn_funcs() {
   add_spawn_function_veh("asd_defend_2", maps\monsoon_lab_defend::init_defend_right_asd);
   add_spawn_function_veh("asd_ambient_2_1", ::setup_ambient_2_1_asd);
   add_spawn_function_veh("right_path_asd", maps\monsoon_lab_defend::init_right_path_asd);
-  a_guy_ragdoll_death = getEntArray("guy_ragdoll_death", "script_noteworthy");
+  a_guy_ragdoll_death = getentarray("guy_ragdoll_death", "script_noteworthy");
   array_thread(a_guy_ragdoll_death, ::add_spawn_function, ::init_guy_ragdoll_death);
-  a_corpse_guy = getEntArray("corpse_guy", "script_noteworthy");
+  a_corpse_guy = getentarray("corpse_guy", "script_noteworthy");
   array_thread(a_corpse_guy, ::add_spawn_function, ::init_guy_ragdoll_death);
   e_crawl_back_guy = getent("crawl_back_guy", "targetname");
   e_crawl_back_guy add_spawn_function(::init_crawl_back_guy);
-  a_ending_friendlies = getEntArray("ending_friendlies", "script_noteworthy");
+  a_ending_friendlies = getentarray("ending_friendlies", "script_noteworthy");
   array_thread(a_ending_friendlies, ::add_spawn_function, ::init_ending_friendlies);
 }
 
@@ -1224,7 +1203,7 @@ lift_destruction() {
 
 elevator_damage_watch(str_model_swap, n_exploder) {
   self endon("lift_model_broken");
-  self setCanDamage(1);
+  self setcandamage(1);
   self.b_model_broken = 0;
   self waittill("damage", num_damage, e_attacker);
   flag_set("set_off_hallway_destruction");
@@ -1232,7 +1211,7 @@ elevator_damage_watch(str_model_swap, n_exploder) {
   if(!self.b_model_broken) {
     if(isDefined(e_attacker) && isDefined(e_attacker.targetname) && e_attacker.targetname == "nitrogen_asd") {
       exploder(n_exploder);
-      self setModel(str_model_swap);
+      self setmodel(str_model_swap);
       self.b_model_broken = 1;
       self notify("lift_model_broken");
     }
@@ -1288,17 +1267,16 @@ init_lab_scientists() {
   self thread lab_scientist_screams();
   self waittill_notify_or_timeout("goal", 10);
 
-  if(self cansee(level.player)) {
+  if(self cansee(level.player))
     self die();
-  } else {
+  else
     self delete();
-  }
 }
 
 lab_scientist_screams() {
   self endon("death");
   wait(randomintrange(1, 4));
-  self playSound("vox_scientist_screams");
+  self playsound("vox_scientist_screams");
 }
 
 window_jumper() {
@@ -1544,9 +1522,8 @@ monitor_harper_color_chains() {
 kill_ai_group(str_ai_group) {
   a_str_ai_group = get_ai_group_ai(str_ai_group);
 
-  foreach(guy in a_str_ai_group) {
-    guy die();
-  }
+  foreach(guy in a_str_ai_group)
+  guy die();
 }
 
 monitor_salazar_color_chains() {
@@ -1590,9 +1567,8 @@ monitor_lift_guys() {
   flag_set("lift_guys_cleared");
   ai_axis = getaiarray("axis");
 
-  foreach(ai in ai_axis) {
-    ai die();
-  }
+  foreach(ai in ai_axis)
+  ai die();
 }
 
 elevator_transition() {
@@ -1607,9 +1583,8 @@ elevator_transition() {
   autosave_by_name("lab_interior_elevator");
   setmusicstate("MONSOON_LAB_UPSTAIRS_CLEAR");
 
-  foreach(hero in level.heroes) {
-    hero disable_ai_color(1);
-  }
+  foreach(hero in level.heroes)
+  hero disable_ai_color(1);
 
   level thread elevator_harper_approach();
   level thread elevator_salazar_approach();
@@ -1634,9 +1609,8 @@ elevator_transition() {
   setsaveddvar("bg_fallDamageMaxHeight", 512);
   level thread run_scene("scientist_4");
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
     level.player ent_flag_clear("camo_suit_on");
-  }
 
   delay_thread(0.05, maps\_camo_suit::data_glove_on, "player_lift_interact");
   run_scene("player_lift_interact");
@@ -1859,7 +1833,7 @@ inside_lift_move_down() {
   bm_door_south_r linkto(m_lift);
   level.player playrumbleonentity("damage_heavy");
   level.player playrumblelooponentity("tank_rumble");
-  level.player setCanDamage(0);
+  level.player setcandamage(0);
   delay_thread(1, ::flag_set, "lift_pre_ambush_fire");
   delay_thread(2, ::flag_set, "spawn_nitrogen_guys");
   delay_thread(6, ::flag_set, "start_shooting_lift");
@@ -1890,7 +1864,7 @@ inside_lift_move_down() {
   bm_door_south_r movey(-60, 2, 0.5);
   bm_door_south_r waittill("movedone");
   flag_set("lift_at_bottom");
-  level.player setCanDamage(1);
+  level.player setcandamage(1);
   bm_door_south_l linkto(m_lift);
   bm_door_south_r linkto(m_lift);
   bm_door_north_l linkto(m_lift);
@@ -1907,7 +1881,7 @@ inside_lift_move_down() {
 
 elevator_loop_n_stop_sounds() {
   elevator_ent_2 = spawn("script_origin", (0, 0, 0));
-  elevator_ent_2 playLoopSound("evt_elevator_loop", 2.5);
+  elevator_ent_2 playloopsound("evt_elevator_loop", 2.5);
   wait 6;
   elevator_ent_2 stoploopsound(1);
   playsoundatposition("evt_elevator_stop", (9277, 57793, -943));
@@ -1918,7 +1892,7 @@ inside_lift_move_up() {
   m_lift = getent("lift_interior_m", "targetname");
   flag_wait("start_lift_move_up");
   elevator_ent = spawn("script_origin", (9385, 57792, -987));
-  elevator_ent playLoopSound("evt_elevator_loop_3d", 0.5);
+  elevator_ent playloopsound("evt_elevator_loop_3d", 0.5);
   level thread elevator_stop_1_sound(elevator_ent);
   m_lift play_fx("lift_light", m_lift.origin, m_lift.angles, undefined, 1);
   s_elevator_spotight_struct = getstruct("elevator_spotight_struct", "targetname");
@@ -2080,9 +2054,8 @@ fight_to_isaac_main() {
   autosave_by_name("lift_at_bottom");
   level thread asd_nitrogen_challenge_watch();
 
-  foreach(hero in level.heroes) {
-    hero enable_ai_color();
-  }
+  foreach(hero in level.heroes)
+  hero enable_ai_color();
 
   level thread reverse_hero_rampage();
   simple_spawn("lab_nitrogen_guys_back_up", ::init_lab_nitrogen_guys_back_up);
@@ -2096,9 +2069,8 @@ fight_to_isaac_main() {
   level thread monitor_lower_level_ai_groups("3_1_right_path", "3_1_right_path_cleared");
   vh_left_path_turret = getent("left_path_turret", "script_noteworthy");
 
-  if(isDefined(vh_left_path_turret)) {
+  if(isDefined(vh_left_path_turret))
     vh_left_path_turret thread maps\_cic_turret::cic_turret_on();
-  }
 
   use_trigger_on_group_count("3_1_left_path", "trig_3_1_left_cleared", 1);
   use_trigger_on_group_clear("3_1_right_path", "trig_3_1_right_cleared");
@@ -2109,9 +2081,8 @@ fight_to_isaac_main() {
   level.vh_right_path_asd = spawn_vehicle_from_targetname("right_path_asd");
   level thread watch_sal_at_asd();
 
-  if(isDefined(level.vh_nitrogen_asd)) {
+  if(isDefined(level.vh_nitrogen_asd))
     level.vh_nitrogen_asd notify("death");
-  }
 
   use_trigger_on_group_count("3_2_right_path", "trig_3_2_right_half", 2);
   use_trigger_on_group_clear("3_2_right_path", "trig_3_2_right_cleared");
@@ -2119,13 +2090,11 @@ fight_to_isaac_main() {
   use_trigger_on_group_clear("3_2_left_path", "trig_3_2_left_cleared");
   trigger_wait("trig_end_of_lower_lab");
 
-  if(isDefined(level.vh_right_path_asd)) {
+  if(isDefined(level.vh_right_path_asd))
     level.vh_right_path_asd notify("death");
-  }
 
-  if(isDefined(vh_left_path_turret)) {
+  if(isDefined(vh_left_path_turret))
     vh_left_path_turret notify("death");
-  }
 
   level.harper.perfectaim = 1;
   level.salazar.perfectaim = 1;
@@ -2137,9 +2106,8 @@ fight_to_isaac_main() {
   setmusicstate("MONSOON_ISAAC");
   a_ai_axis = getaiarray("axis");
 
-  foreach(ai in a_ai_axis) {
-    ai die();
-  }
+  foreach(ai in a_ai_axis)
+  ai die();
 
   nd_harper_pre_ddm = getnode("harper_pre_ddm", "targetname");
   nd_salazar_pre_ddm = getnode("salazar_pre_ddm", "targetname");
@@ -2160,18 +2128,16 @@ watch_harp_at_turret() {
   flag_wait("harper_at_turret");
   vh_left_path_turret = getent("left_path_turret", "script_noteworthy");
 
-  if(isDefined(vh_left_path_turret)) {
+  if(isDefined(vh_left_path_turret))
     vh_left_path_turret notify("death");
-  }
 }
 
 watch_sal_at_asd() {
   level endon("start_lab_defend");
   flag_wait("sal_at_asd_vol");
 
-  if(isDefined(level.vh_right_path_asd)) {
+  if(isDefined(level.vh_right_path_asd))
     level.vh_right_path_asd notify("death");
-  }
 
   trig_sal_at_asd_vol = getent("sal_at_asd_vol", "targetname");
   a_axis_ai = getaiarray("axis");
@@ -2277,11 +2243,10 @@ harper_titus_asd(ai_harper) {
   e_titus_target = spawn("script_origin", s_harper_titus_target.origin);
   e_titus_target.angles = s_harper_titus_target.angles;
 
-  if(isDefined(level.vh_nitrogen_asd)) {
+  if(isDefined(level.vh_nitrogen_asd))
     ai_harper maps\_titus::magic_bullet_titus(level.vh_nitrogen_asd.origin + vectorscale((0, 0, 1), 40.0));
-  } else {
+  else
     ai_harper maps\_titus::magic_bullet_titus(e_titus_target.origin);
-  }
 }
 
 challenge_camo_kills(str_notify) {

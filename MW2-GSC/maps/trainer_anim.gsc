@@ -192,7 +192,7 @@ anims() {
   level.scr_anim["generic"]["training_woundedwalk_soldier_1"] = % training_woundedwalk_soldier_1;
   level.scr_anim["generic"]["training_woundedwalk_soldier_2"] = % training_woundedwalk_soldier_2;
 
-  //one-off then loop
+  //one-off then loop 
   level.scr_anim["generic"]["hostage_pickup_runout_guy1"] = % hostage_pickup_runout_guy1;
   level.scr_anim["generic"]["hostage_pickup_runout_guy2"] = % hostage_pickup_runout_guy2;
 
@@ -261,6 +261,7 @@ anims() {
   addNotetrack_customFunction("dunn", "case_flip_02", ::notetrack_dunn_case_flip_02, "training_pit_open_case");
   addNotetrack_customFunction("dunn", "button_press", ::notetrack_dunn_button_press, "training_pit_open_case");
   addNotetrack_flag("dunn", "dialog", "dunn_notetrack_open_case_dialogue", "training_pit_open_case");
+
 }
 
 notetrack_dunn_welcome_dialogue_01(guy) {
@@ -570,6 +571,7 @@ dialogue() {
   //Sgt. Foley Let's go, Private. Pick up some of the frag grenades from the table
   //Sgt. FoleyGrab some frags from the table, Private
   //Sgt. Foley Private Allen, you need to pick up some frags from the table to complete this demonstration
+
 
   //Sgt. Foley	training	Private, throw a grenade and take out those targets.	
   level.scr_sound["foley"]["frag_nag_00"] = "train_fly_throwagrenade";
@@ -903,6 +905,9 @@ dialogue() {
   //Ranger 1	training	Come on Allen!	
   //level.scr_sound[ "generic" ][ "train_ar1_comeon" ] = "train_ar1_comeon";
 
+
+
+
   //Yeah that guy was my C. O.	
   //level.scr_sound[ "conversation_xx" ][ xx ] = "train_ar4_myco";
 
@@ -935,6 +940,8 @@ dialogue() {
 
   //Nobody can tell if your high if you're wearing shades, that's the whole point of shades.	
   //level.scr_sound[ "conversation_xx" ][ xx ] = "train_ar4_shades";		
+
+
 
   /*-----------------------
   RANDOM CONVERSATIONS #1
@@ -1198,6 +1205,7 @@ dialogue() {
 
   //Don't ask don't tell bro.	
   level.scr_sound["conversation_03"][25] = "train_ar4_dontaskdonttell";
+
 }
 
 #using_animtree("vehicles");
@@ -1215,6 +1223,7 @@ vehicles() {
 
   level.scr_anim["hummer"]["hummer_sequence"] = % training_humvee_door;
   level.scr_animtree["hummer"] = #animtree;
+
 }
 
 #using_animtree("script_model");
@@ -1236,7 +1245,7 @@ model_anims() {
   level.scr_anim["tarp"]["training_camo_tarp_wind"][0] = % training_camo_tarp_wind;
   level.scr_animtree["tarp"] = #animtree;
 
-  tarps = getEntArray("tarps", "targetname");
+  tarps = getentarray("tarps", "targetname");
   foreach(tarp in tarps) {
     tarp.animent = spawn("script_origin", (0, 0, 0));
     tarp.animent.origin = tarp.origin;
@@ -1250,22 +1259,24 @@ model_anims() {
 
 #using_animtree("animated_props");
 basketball_anims() {
+
   level.scr_anim["basketball"]["training_basketball_loop"][0] = % training_basketball_ball;
   level.scr_animtree["basketball"] = #animtree;
 
   addNotetrack_customFunction("basketball", "ps_scn_trainer_bball_dribble", ::bounce_fx);
   addNotetrack_customFunction("basketball", "ps_scn_trainer_bball_bounce_pass", ::bounce_fx);
+
 }
 
 bounce_fx(basketball) {
   //iprintlnbold( "Boing" );
-  playFXOnTag(getfx("ball_bounce_dust_runner"), basketball, "tag_origin");
+  playfxontag(getfx("ball_bounce_dust_runner"), basketball, "tag_origin");
+
 }
 
 trainee_fire_weapon(guy) {
-  if(!flag("player_near_range")) {
+  if(!flag("player_near_range"))
     return;
-  }
-  guy playSound("drone_m4carbine_fire_npc");
-  playFXOnTag(getfx("m16_muzzleflash"), guy, "tag_flash");
+  guy playsound("drone_m4carbine_fire_npc");
+  PlayFXOnTag(getfx("m16_muzzleflash"), guy, "tag_flash");
 }

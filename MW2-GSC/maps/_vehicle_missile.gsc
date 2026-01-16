@@ -6,9 +6,8 @@
 #include maps\_utility;
 
 main() {
-  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "") {
+  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "")
     setdvar("cobrapilot_surface_to_air_missiles_enabled", "1");
-  }
 
   self tryReload();
   self thread fireMissile();
@@ -24,62 +23,52 @@ detachall_on_death() {
 turret_think() {
   self endon("death");
 
-  if(!isDefined(self.script_turret)) {
+  if(!isdefined(self.script_turret))
     return;
-  }
-  if(self.script_turret == 0) {
+  if(self.script_turret == 0)
     return;
-  }
-  assert(isDefined(self.script_team));
+  assert(isdefined(self.script_team));
 
   // if the turret has a radius then use that radius instead of a default value
   self.attackRadius = 30000;
-  if(isDefined(self.radius)) {
+  if(isdefined(self.radius))
     self.attackRadius = self.radius;
-  }
 
-  while(!isDefined(level.cobrapilot_difficulty)) {
+  while (!isdefined(level.cobrapilot_difficulty))
     wait 0.05;
-  }
 
   difficultyScaler = 1.0;
-  if(level.cobrapilot_difficulty == "easy") {
+  if(level.cobrapilot_difficulty == "easy")
     difficultyScaler = 0.5;
-  } else {
-    if(level.cobrapilot_difficulty == "medium")
-  }
-  difficultyScaler = 1.7;
-  else {
-    if(level.cobrapilot_difficulty == "hard")
-  }
-  difficultyScaler = 1.0;
-  else {
-    if(level.cobrapilot_difficulty == "insane")
-  }
-  difficultyScaler = 1.5;
+  else
+  if(level.cobrapilot_difficulty == "medium")
+    difficultyScaler = 1.7;
+  else
+  if(level.cobrapilot_difficulty == "hard")
+    difficultyScaler = 1.0;
+  else
+  if(level.cobrapilot_difficulty == "insane")
+    difficultyScaler = 1.5;
 
   self.attackRadius *= difficultyScaler;
 
-  if(getdvar("cobrapilot_debug") == "1") {
+  if(getdvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + difficultyScaler);
-  }
 
-  for(;;) {
+  for (;;) {
     wait(2 + randomfloat(1));
 
     // get a target
     eTarget = undefined;
     eTarget = maps\_helicopter_globals::getEnemyTarget(self.attackRadius, undefined, false, true);
 
-    if(!isDefined(eTarget)) {
+    if(!isdefined(eTarget))
       continue;
-    }
 
     // offset where the missile should aim
     aimOrigin = eTarget.origin;
-    if(isDefined(eTarget.script_targetoffset_z)) {
+    if(isdefined(eTarget.script_targetoffset_z))
       aimOrigin += (0, 0, eTarget.script_targetoffset_z);
-    }
 
     // aim the turret at the target
     self setTurretTargetVec(aimOrigin);
@@ -88,30 +77,27 @@ turret_think() {
     self clearTurretTarget();
 
     // once the turret it aimed make sure the target is still within attacking range
-    if(distance(self.origin, eTarget.origin) > self.attackRadius) {
+    if(distance(self.origin, eTarget.origin) > self.attackRadius)
       continue;
-    }
 
     // make sure a sight trace can still pass so the missile doens't launch into a wall or something
     sightTracePassed = false;
     sightTracePassed = sighttracepassed(self.origin, eTarget.origin + (0, 0, 150), false, self);
-    if(!sightTracePassed) {
+    if(!sightTracePassed)
       continue;
-    }
 
     // fire the missile and wait a while
     if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
       self notify("shoot_target", eTarget);
       self waittill("missile_fired", eMissile);
-      if(isDefined(eMissile)) {
+      if(isdefined(eMissile)) {
         if(level.cobrapilot_difficulty == "hard") {
           wait(1 + randomfloat(2));
           continue;
         } else if(level.cobrapilot_difficulty == "insane")
           continue;
-        else {
+        else
           eMissile waittill("death");
-        }
       }
       continue;
     }
@@ -128,43 +114,38 @@ turret_rotate_timeout(turret, time) {
 within_attack_range(targetEnt) {
   d = distance((self.origin[0], self.origin[1], 0), (targetEnt.origin[0], targetEnt.origin[1], 0));
   zDiff = (targetEnt.origin[2] - self.origin[2]);
-  if(zDiff <= 750) {
+  if(zDiff <= 750)
     return false;
-  }
   zMod = zDiff * 2.5;
-  if(d <= (self.attackRadius + zMod)) {
+  if(d <= (self.attackRadius + zMod))
     return true;
-  }
   return false;
 }
 
 fireMissile() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("shoot_target", targetEnt);
 
-    assert(isDefined(targetEnt));
-    assert(isDefined(self.missileTags[self.missileLaunchNextTag]));
+    assert(isdefined(targetEnt));
+    assert(isdefined(self.missileTags[self.missileLaunchNextTag]));
 
     // fire the missile
     eMissile = undefined;
 
-    if(!isDefined(targetEnt.script_targetoffset_z)) {
+    if(!isdefined(targetEnt.script_targetoffset_z))
       targetEnt.script_targetoffset_z = 0;
-    }
     offset = (0, 0, targetEnt.script_targetoffset_z);
 
     eMissile = self fireWeapon(self.missileTags[self.missileLaunchNextTag], targetEnt, offset);
-    assert(isDefined(eMissile));
+    assert(isdefined(eMissile));
 
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getdvar("cobrapilot_debug") == "1")
       level thread draw_missile_target_line(eMissile, targetEnt, offset);
-    }
 
-    if(!isDefined(targetEnt.incomming_Missiles)) {
+    if(!isdefined(targetEnt.incomming_Missiles))
       targetEnt.incomming_Missiles = [];
-    }
     targetEnt.incomming_Missiles = array_add(targetEnt.incomming_Missiles, eMissile);
     thread maps\_helicopter_globals::missile_deathWait(eMissile, targetEnt);
 
@@ -190,27 +171,23 @@ fireMissile() {
 draw_missile_target_line(eMissile, targetEnt, offset) {
   eMissile endon("death");
 
-  for(;;) {
+  for (;;) {
     line(eMissile.origin, targetEnt.origin + offset);
     wait 0.05;
   }
 }
 
 tryReload() {
-  if(!isDefined(self.missileAmmo)) {
+  if(!isdefined(self.missileAmmo))
     self.missileAmmo = 0;
-  }
-  if(!isDefined(self.missileLaunchNextTag)) {
+  if(!isdefined(self.missileLaunchNextTag))
     self.missileLaunchNextTag = 0;
-  }
 
-  if(self.missileAmmo > 0) {
+  if(self.missileAmmo > 0)
     return;
-  }
 
-  for(i = 0; i < self.missileTags.size; i++) {
+  for (i = 0; i < self.missileTags.size; i++)
     self attach(self.missileModel, self.missileTags[i]);
-  }
 
   self.missileAmmo = self.missileTags.size;
   self.missileLaunchNextTag = 0;

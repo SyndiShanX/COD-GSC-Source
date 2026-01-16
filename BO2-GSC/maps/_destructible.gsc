@@ -7,16 +7,15 @@
 #include common_scripts\utility;
 
 init() {
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
   array_thread(destructibles, ::destructible_think);
 
   if(destructibles.size <= 0) {
     return;
   }
   for(i = 0; i < destructibles.size; i++) {
-    if(issubstr(destructibles[i].destructibledef, "barrel")) {
+    if(issubstr(destructibles[i].destructibledef, "barrel"))
       destructibles[i] thread destructible_barrel_death_think();
-    }
   }
 }
 
@@ -37,13 +36,12 @@ destructible_event_callback(destructible_event, attacker) {
     tokens = strtok(destructible_event, "_");
     explosion_radius = tokens[1];
 
-    if(explosion_radius == "sm") {
+    if(explosion_radius == "sm")
       explosion_radius = 150;
-    } else if(explosion_radius == "lg") {
+    else if(explosion_radius == "lg")
       explosion_radius = 450;
-    } else {
+    else
       explosion_radius = int(explosion_radius);
-    }
 
     destructible_event = "explode_complex";
   }
@@ -84,11 +82,10 @@ destructible_event_callback(destructible_event, attacker) {
 simple_explosion(attacker) {
   offset = vectorscale((0, 0, 1), 5.0);
 
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     self radiusdamage(self.origin + offset, 300, 300, 100, attacker);
-  } else {
+  else
     self radiusdamage(self.origin + offset, 300, 300, 100);
-  }
 
   physicsexplosionsphere(self.origin + offset, 255, 254, 0.3);
   self dodamage(20000, self.origin + offset);
@@ -97,11 +94,10 @@ simple_explosion(attacker) {
 complex_explosion(attacker, max_radius) {
   offset = vectorscale((0, 0, 1), 5.0);
 
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     self radiusdamage(self.origin + offset, max_radius, 300, 100, attacker);
-  } else {
+  else
     self radiusdamage(self.origin + offset, max_radius, 300, 100);
-  }
 
   physicsexplosionsphere(self.origin + offset, max_radius, max_radius - 1, 0.3);
   self dodamage(20000, self.origin + offset);
@@ -173,9 +169,8 @@ destructible_barrel_fire_think(attacker) {
 }
 
 destructible_barrel_explosion(attacker, physics_explosion) {
-  if(!isDefined(physics_explosion)) {
+  if(!isDefined(physics_explosion))
     physics_explosion = 1;
-  }
 
   if(!isDefined(self)) {
     return;
@@ -190,9 +185,8 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   playrumbleonposition("grenade_rumble", self.origin);
   earthquake(0.5, 0.5, self.origin, 800);
 
-  if(physics_explosion) {
+  if(physics_explosion)
     physicsexplosionsphere(self.origin, 255, 254, 0.3, 25, 400);
-  }
 
   self dodamage(self.health + 10000, self.origin + (0, 0, 1));
 }
@@ -223,9 +217,8 @@ destructible_car_fire_think(attacker) {
 }
 
 getdamagetype(type) {
-  if(!isDefined(type)) {
+  if(!isDefined(type))
     return "unknown";
-  }
 
   type = tolower(type);
 

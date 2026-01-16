@@ -121,9 +121,8 @@ monitor_reload_empty() {
   for(;;) {
     var_0 waittill("LISTEN_hydra_lockOn_missile_fire_release");
 
-    if(!missile_check_ammo()) {
+    if(!missile_check_ammo())
       var_0 maps\_utility::play_sound_on_entity("apache_player_empty_click");
-    }
   }
 }
 
@@ -131,15 +130,13 @@ missile_check_ammo() {
   self.has_straight_missiles = has_ammo_for_missile("missile_straight");
   self.has_homing_missiles = has_ammo_for_missile("missile");
 
-  if(!self.has_straight_missiles) {
+  if(!self.has_straight_missiles)
     hud_highlight_no_missiles();
-  } else {
+  else
     hud_highlight_straight_missile();
-  }
 
-  if(!self.has_straight_missiles && !self.has_homing_missiles) {
+  if(!self.has_straight_missiles && !self.has_homing_missiles)
     return 0;
-  }
 
   return 1;
 }
@@ -160,9 +157,8 @@ _fire() {
 }
 
 get_side_next_missile() {
-  if(!isDefined(self.side_last)) {
+  if(!isDefined(self.side_last))
     self.side_last = "left";
-  }
 
   self.side_last = common_scripts\utility::ter_op(self.side_last == "left", "right", "left");
   return self.side_last;
@@ -215,9 +211,8 @@ deactivate() {
 }
 
 monitorreload(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "missile";
-  }
 
   var_1 = self.owner;
 
@@ -257,11 +252,10 @@ hud_start() {
   var_0 = self.hud;
 
   foreach(var_2 in var_0["missile"]) {
-    if(var_2.islockedontarget) {
+    if(var_2.islockedontarget)
       var_2 setshader("apache_ammo_lock", 16, 16);
-    } else {
+    else
       var_2 setshader("apache_ammo", 16, 16);
-    }
 
     if(var_2.isavailable) {
       var_2.alpha = common_scripts\utility::ter_op(isDefined(self.isactive), 1.0, 0.2);
@@ -287,17 +281,15 @@ lockontargets() {
     var_1 = self.targets_tracking;
 
     foreach(var_3 in var_1) {
-      if(isDefined(var_3) && !target_istarget(var_3)) {
+      if(isDefined(var_3) && !target_istarget(var_3))
         removetrackingtarget(var_3);
-      }
     }
 
     var_5 = self.targets;
 
     foreach(var_3 in var_5) {
-      if(isDefined(var_3) && !target_istarget(var_3)) {
+      if(isDefined(var_3) && !target_istarget(var_3))
         removelockedontarget(var_3);
-      }
     }
 
     var_8 = target_getarray();
@@ -315,20 +307,17 @@ lockontargets() {
       if(var_10 || var_11) {
         var_12 = undefined;
 
-        if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS")) {
+        if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS"))
           var_12 = vehicle_scripts\_apache_player_pilot::fov_get_ads();
-        } else {
+        else
           var_12 = vehicle_scripts\_apache_player_pilot::fov_get_default();
-        }
 
         if(!target_isincircle(var_3, var_0, var_12, 80) || !target_trace_to_owners_eyes(var_3, var_0) || !target_in_range_for_lock(var_3, var_0)) {
-          if(var_10) {
+          if(var_10)
             removelockedontarget(var_3);
-          }
 
-          if(var_11) {
+          if(var_11)
             removetrackingtarget(var_3);
-          }
         }
       }
     }
@@ -363,30 +352,26 @@ lockontargets() {
         var_17 = targetsfilter(var_0, var_17);
         var_17 = targetssortbydot(var_17, var_0 getEye(), var_0 getplayerangles());
 
-        if(isDefined(var_17[0])) {
+        if(isDefined(var_17[0]))
           addtrackingtarget(var_17[0], 0.15);
-        }
       }
     }
 
-    if(self.targets.size) {
+    if(self.targets.size)
       hud_highlight_homing_missile();
-    } else {
+    else
       hud_highlight_straight_missile();
-    }
 
     wait 0.05;
   }
 }
 
 target_trace_to_owners_eyes(var_0, var_1) {
-  if(!isDefined(var_0.target_trace_to_owners_eyes)) {
+  if(!isDefined(var_0.target_trace_to_owners_eyes))
     var_0.target_trace_to_owners_eyes = gettime();
-  }
 
-  if(gettime() - var_0.target_trace_to_owners_eyes < 750) {
+  if(gettime() - var_0.target_trace_to_owners_eyes < 750)
     return 1;
-  }
 
   var_2 = var_1 getEye();
   var_3 = var_0 getcentroid();
@@ -396,9 +381,8 @@ target_trace_to_owners_eyes(var_0, var_1) {
   var_5 = bulletTrace(var_4, var_3, 0, var_1.riding_vehicle);
   var_6 = var_5["fraction"] == 1 || isDefined(var_5["entity"]) && var_5["entity"] == var_0;
 
-  if(var_6) {
+  if(var_6)
     var_0.target_trace_to_owners_eyes = gettime();
-  }
 
   return var_6;
 }
@@ -416,9 +400,8 @@ lockontargets_stop() {
     if(!isDefined(var_2)) {
       continue;
     }
-    if(var_2 target_islockedon(var_0) && (!isDefined(var_2.missiles_chasing) || var_2.missiles_chasing <= 0)) {
+    if(var_2 target_islockedon(var_0) && (!isDefined(var_2.missiles_chasing) || var_2.missiles_chasing <= 0))
       removelockedontarget(var_2);
-    }
   }
 
   foreach(var_2 in self.targets_tracking) {
@@ -436,16 +419,14 @@ targetsfilter(var_0, var_1) {
   var_2 = [];
   var_3 = undefined;
 
-  if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS")) {
+  if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS"))
     var_3 = vehicle_scripts\_apache_player_pilot::fov_get_ads();
-  } else {
+  else
     var_3 = vehicle_scripts\_apache_player_pilot::fov_get_default();
-  }
 
   foreach(var_5 in var_1) {
-    if(var_5 maps\_vehicle::isvehicle() && !onsameteam(var_0, var_5) && !var_5 target_islockedon(var_0) && target_isincircle(var_5, var_0, var_3, 48) && var_0 sillyboxtrace(var_0 getEye(), var_5)) {
+    if(var_5 maps\_vehicle::isvehicle() && !onsameteam(var_0, var_5) && !var_5 target_islockedon(var_0) && target_isincircle(var_5, var_0, var_3, 48) && var_0 sillyboxtrace(var_0 getEye(), var_5))
       var_2[var_2.size] = var_5;
-    }
   }
 
   return var_2;
@@ -454,29 +435,23 @@ targetsfilter(var_0, var_1) {
 sillyboxtrace(var_0, var_1) {
   var_2 = self getEye();
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 0, 1), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 0, 1), 0, self.riding_heli))
     return 1;
-  }
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 0, -1), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 0, -1), 0, self.riding_heli))
     return 1;
-  }
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 1, 0), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(0, 1, 0), 0, self.riding_heli))
     return 1;
-  }
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(0, -1, 0), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(0, -1, 0), 0, self.riding_heli))
     return 1;
-  }
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(1, 0, 0), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(1, 0, 0), 0, self.riding_heli))
     return 1;
-  }
 
-  if(sighttracepassed(var_2, var_1 getpointinbounds(-1, 0, 0), 0, self.riding_heli)) {
+  if(sighttracepassed(var_2, var_1 getpointinbounds(-1, 0, 0), 0, self.riding_heli))
     return 1;
-  }
 
   return 0;
 }
@@ -486,17 +461,14 @@ onsameteam(var_0, var_1) {
 }
 
 getteam() {
-  if(isturret(self) && isDefined(self.script_team)) {
+  if(isturret(self) && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(maps\_vehicle::isvehicle() && isDefined(self.script_team)) {
+  if(maps\_vehicle::isvehicle() && isDefined(self.script_team))
     return self.script_team;
-  }
 
-  if(isDefined(self.team)) {
+  if(isDefined(self.team))
     return self.team;
-  }
 
   return "none";
 }
@@ -506,11 +478,10 @@ isturret(var_0) {
 }
 
 onteam(var_0) {
-  if(maps\_vehicle::isvehicle()) {
+  if(maps\_vehicle::isvehicle())
     return isDefined(self.script_team) && self.script_team == var_0;
-  } else {
+  else
     return isDefined(self.team) && self.team == var_0;
-  }
 
   return 0;
 }
@@ -523,9 +494,8 @@ hud_flashalpha(var_0, var_1, var_2) {
     self.alpha = 0;
     wait(var_1);
 
-    if(isDefined(var_2) && var_2 > 0) {
+    if(isDefined(var_2) && var_2 > 0)
       wait(var_2);
-    }
 
     self fadeovertime(var_1);
     self.alpha = var_0;
@@ -534,11 +504,10 @@ hud_flashalpha(var_0, var_1, var_2) {
 }
 
 target_islockedon(var_0) {
-  if(isDefined(self._target)) {
+  if(isDefined(self._target))
     return isDefined(self._target.weapon["lockOn_missile"].islockedon[var_0 getentitynumber()]);
-  } else {
+  else
     return 0;
-  }
 }
 
 islockedontarget(var_0) {
@@ -564,23 +533,20 @@ addlockedontarget(var_0) {
   if(!isdummytarget(var_0)) {
     var_0 target_set_islockedon(var_1);
 
-    if(target_istarget(var_0)) {
+    if(target_istarget(var_0))
       vehicle_scripts\_apache_player::hud_set_target_locked(var_0);
-    }
   }
 
   if(!isDefined(var_0.lock_dummy)) {
-    if(!lock_dummy_add(var_0)) {
+    if(!lock_dummy_add(var_0))
       return;
-    }
   }
 
   thread addlockedontarget_update(var_0);
   hud_marklocked_firstavailablemissileicon("missile");
 
-  if(!isdummytarget(var_0)) {
+  if(!isdummytarget(var_0))
     var_1 thread maps\_utility::play_sound_on_entity("apache_lockon_missile_locked");
-  }
 
   if(var_0 maps\_vehicle::isvehicle()) {
     var_0.request_move = 1;
@@ -607,9 +573,8 @@ addlockedontarget_update(var_0) {
 }
 
 target_set_islockedon(var_0) {
-  if(isDefined(self._target)) {
+  if(isDefined(self._target))
     self._target.weapon["lockOn_missile"].islockedon[var_0 getentitynumber()] = 1;
-  }
 }
 
 isdummytarget(var_0) {
@@ -617,25 +582,22 @@ isdummytarget(var_0) {
 }
 
 removelockedontarget(var_0) {
-  if(islockedontarget(var_0)) {
+  if(islockedontarget(var_0))
     self.targets = common_scripts\utility::array_remove(self.targets, var_0);
-  }
 
   var_1 = self.owner;
   var_0 target_unset_islockedon(var_1);
 
-  if(target_istarget(var_0)) {
+  if(target_istarget(var_0))
     vehicle_scripts\_apache_player::hud_set_target_default(var_0);
-  }
 
   lock_dummy_remove(var_0);
   hud_markunlocked_firstlockedmissileicon(0, "missile");
 }
 
 target_unset_islockedon(var_0) {
-  if(isDefined(self._target)) {
+  if(isDefined(self._target))
     self._target.weapon["lockOn_missile"].islockedon[var_0 getentitynumber()] = undefined;
-  }
 }
 
 hud_markunlocked_firstlockedmissileicon(var_0, var_1) {
@@ -675,11 +637,10 @@ hud_marklocked_firstavailablemissileicon(var_0) {
     }
   }
 
-  if(var_1) {
+  if(var_1)
     hud_highlight_homing_missile();
-  } else {
+  else
     hud_highlight_straight_missile();
-  }
 
   return var_1;
 }
@@ -773,9 +734,8 @@ lock_dummy_add_ondeath(var_0) {
 lock_dummy_add(var_0) {
   var_1 = (0, 0, 64);
 
-  if(var_0 maps\_vehicle::ishelicopter()) {
+  if(var_0 maps\_vehicle::ishelicopter())
     var_1 = (0, 0, -72);
-  }
 
   var_0.lock_dummy = var_0 common_scripts\utility::spawn_tag_origin();
   var_0.lock_dummy setModel("fx");
@@ -812,9 +772,8 @@ removetrackingtarget(var_0, var_1) {
     self.targets_tracking[var_0.unique_id] = undefined;
     remove_targets_tracking_undefined();
 
-    if(var_1) {
+    if(var_1)
       lock_dummy_remove(var_0);
-    }
 
     var_0 notify("removeTrackingTarget");
   }
@@ -824,9 +783,8 @@ remove_targets_tracking_undefined() {
   var_0 = [];
 
   foreach(var_3, var_2 in self.targets_tracking) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_0[var_3] = var_2;
-    }
   }
 
   self.targets_tracking = var_0;
@@ -856,9 +814,8 @@ fire_lockon() {
     playFX(var_4, var_11 + var_12 * 120, var_12);
     var_14 = undefined;
 
-    if(isDefined(var_5.missile_targetoffset)) {
+    if(isDefined(var_5.missile_targetoffset))
       var_14 = var_5.missile_targetoffset;
-    }
 
     var_13 maps\_utility::delaythread(0.1, ::passive_missile_settargetandflightmode, var_5, "direct", var_14);
     thread common_scripts\utility::play_sound_in_space(var_10, var_11);
@@ -867,22 +824,19 @@ fire_lockon() {
     var_13 thread vehicle_scripts\_chopper_missile_defense_utility::missile_monitormisstarget(var_5, 0, undefined, "LISTEN_missile_missed_target", "LISTEN_missile_attached_to_flare");
     var_5 thread target_monitorfreelockedon(var_0, var_13);
 
-    if(!hud_markunlocked_firstlockedmissileicon(1, "missile")) {
+    if(!hud_markunlocked_firstlockedmissileicon(1, "missile"))
       hud_markused_firstavailablemissileicon("missile");
-    }
 
     var_0.last_lockon_fire_time = gettime();
     self.ammo["missile"]--;
     var_3--;
     var_2++;
 
-    if(var_2 >= self.targets.size) {
+    if(var_2 >= self.targets.size)
       var_2 = 0;
-    }
 
-    if(var_3 > 0) {
+    if(var_3 > 0)
       wait 0.15;
-    }
   }
 }
 
@@ -896,9 +850,8 @@ passive_missile_settargetandflightmode(var_0, var_1, var_2) {
 target_monitorfreelockedon(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(self.missiles_chasing)) {
+  if(!isDefined(self.missiles_chasing))
     self.missiles_chasing = 0;
-  }
 
   self.missiles_chasing++;
   var_2 = var_0 getentitynumber();
@@ -915,16 +868,14 @@ target_monitorfreelockedon(var_0, var_1) {
       return;
     }
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       target_unset_islockedon(var_0);
-    }
 
     if(isDefined(self.lock_dummy)) {
       lock_dummy_remove(self);
 
-      if(target_istarget(self)) {
+      if(target_istarget(self))
         vehicle_scripts\_apache_player::hud_set_target_default(self);
-      }
     }
   }
 }
@@ -952,9 +903,8 @@ missile_move_firemissile() {
     var_0 = anglesToForward(self.angles);
     var_1 = self.origin;
 
-    if(!isDefined(self.homing)) {
+    if(!isDefined(self.homing))
       self moveto(var_1 + 0.1 * self.speed * var_0, 0.1);
-    }
 
     var_2 = bullettracepassed(var_1, var_1 + self.trace_length * var_0, 1, self);
 
@@ -966,9 +916,8 @@ missile_move_firemissile() {
     if(!var_2) {
       var_3 = level;
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         var_3 = self.owner;
-      }
 
       radiusdamage(self.origin, 512, 4000, 1000, var_3, "MOD_EXPLOSIVE");
       self delete();
@@ -1004,29 +953,25 @@ fire_hydra(var_0) {
     var_19 = anglestoup(var_16);
     var_20 = 0.0;
 
-    if(1) {
+    if(1)
       var_20 = randomfloatrange(-14, 14);
-    }
 
     var_21 = 0.0;
 
-    if(1) {
+    if(1)
       var_21 = randomfloatrange(-14, 14);
-    }
 
     var_22 = var_2 gettagorigin(var_13);
     var_23 = var_1 getplayerangles();
     var_24 = 0.0;
 
-    if(0) {
+    if(0)
       var_24 = randomfloatrange(-0.0, 0.0);
-    }
 
     var_25 = 0.0;
 
-    if(0) {
+    if(0)
       var_25 = randomfloatrange(-0.0, 0.0);
-    }
 
     var_23 = var_23 + (var_24, var_25, 0);
     var_26 = anglesToForward(var_23);
@@ -1043,9 +988,8 @@ fire_hydra(var_0) {
       self.ammo["missile_straight"]--;
     }
 
-    if(var_10 + 1 < var_4) {
+    if(var_10 + 1 < var_4)
       wait 0.1;
-    }
   }
 
   if(var_0) {
@@ -1071,9 +1015,8 @@ targetssortbydot(var_0, var_1, var_2) {
   var_4 = [];
   var_5 = [];
 
-  foreach(var_7 in var_0) {
-    var_5[var_5.size] = vectordot(var_3, vectornormalize(var_7.origin - var_1));
-  }
+  foreach(var_7 in var_0)
+  var_5[var_5.size] = vectordot(var_3, vectornormalize(var_7.origin - var_1));
 
   return doublereversebubblesort(var_5, var_0);
 }
@@ -1098,33 +1041,28 @@ doublereversebubblesort(var_0, var_1) {
 }
 
 dsq_ents_lt(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
+  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2))
     return common_scripts\utility::ter_op(distancesquared(var_0.origin, var_1.origin) < squared(var_2), 1, 0);
-  }
 
   return common_scripts\utility::ter_op(isDefined(var_3), var_3, 0);
 }
 
 are_opposite_sign(var_0, var_1) {
-  if(var_0 < 0 && var_1 > 0 || var_0 > 0 && var_1 < 0 || var_0 == 0 && var_1 != 0 || var_0 != 0 && var_1 == 0) {
+  if(var_0 < 0 && var_1 > 0 || var_0 > 0 && var_1 < 0 || var_0 == 0 && var_1 != 0 || var_0 != 0 && var_1 == 0)
     return 1;
-  }
 
   return 0;
 }
 
 get_sign(var_0) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     return 0;
-  }
 
-  if(var_0 < 0) {
+  if(var_0 < 0)
     return -1;
-  }
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     return 1;
-  }
 }
 
 get_angle_delta(var_0, var_1) {
@@ -1145,17 +1083,14 @@ set_key(var_0, var_1) {
 }
 
 gt_op(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isDefined(var_1))
     return common_scripts\utility::ter_op(var_0 > var_1, var_0, var_1);
-  }
 
-  if(isDefined(var_0) && !isDefined(var_1)) {
+  if(isDefined(var_0) && !isDefined(var_1))
     return var_0;
-  }
 
-  if(!isDefined(var_0) && isDefined(var_1)) {
+  if(!isDefined(var_0) && isDefined(var_1))
     return var_1;
-  }
 
   return var_2;
 }

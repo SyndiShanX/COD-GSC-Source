@@ -20,11 +20,11 @@ main() {
   maps\mp\mp_golfcourse_amb::main();
   maps\mp\gametypes\_teamset_cubans::level_init();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -38,10 +38,10 @@ main() {
     spawncollision("collision_geo_64x64x256", "collider", (-551, -965, -105), (0, 340.8, 0));
   }
   spawncollision("collision_wall_256x256x10", "collider", (416, 592, -172), (0, 45, -7));
-  scoreboard1 = spawn("script_model", (-2046, 839, -215));
+  scoreboard1 = Spawn("script_model", (-2046, 839, -215));
   if(isDefined(scoreboard1)) {
     scoreboard1.angles = (0, 180, 0);
-    scoreboard1 setModel("p_gc_signpost_short");
+    scoreboard1 SetModel("p_gc_signpost_short");
   }
 }
 sprinklers_init() {
@@ -66,7 +66,7 @@ sprinklers_init() {
   exploders[exploders.size] = 3010;
   exploders[exploders.size] = 3011;
   exploders[exploders.size] = 3012;
-  for(i = 0; i < exploders.size; i++) {
+  for (i = 0; i < exploders.size; i++) {
     sprinkler_init(exploders[i]);
   }
 }
@@ -76,24 +76,24 @@ sprinkler_init(exploder_num) {
   create_fx_ent.fake_health = 40;
   radius = 10;
   height = 10;
-  create_fx_ent.damage_trigger = spawn("trigger_damage", create_fx_ent.v["origin"] - (0, 0, 5), 0, radius, height);
+  create_fx_ent.damage_trigger = Spawn("trigger_damage", create_fx_ent.v["origin"] - (0, 0, 5), 0, radius, height);
   create_fx_ent.destroyed_exploder = exploder_num + 1000;
   if(exploder_num == 1001 || exploder_num == 1002 || exploder_num == 1003) {
     radius = 125;
     height = 150;
     start = create_fx_ent.v["origin"] + vector_scale(create_fx_ent.v["forward"], 384);
     end = start + (0, 0, -8000);
-    trace = bulletTrace(start, end, false, undefined, false, false);
+    trace = BulletTrace(start, end, false, undefined, false, false);
     origin = trace["position"];
     create_fx_ent thread sprinkler_water_think(origin, radius, height);
     create_fx_ent.soundent = spawn("script_origin", create_fx_ent.v["origin"]);
-    create_fx_ent.soundent playLoopSound("amb_sprinkler");
+    create_fx_ent.soundent playloopsound("amb_sprinkler");
   }
   create_fx_ent thread sprinkler_think(exploder_num);
   exploder(exploder_num);
 }
 sprinkler_think(exploder_num) {
-  for(;;) {
+  for (;;) {
     self.damage_trigger waittill("damage", amount, attacker, direction, point, type);
     if(isDefined(type)) {
       if(type == "MOD_MELEE" || type == "MOD_EXPLOSIVE" || type == "MOD_IMPACT") {
@@ -124,8 +124,8 @@ sprinkler_think(exploder_num) {
   self.water_trigger delete();
 }
 sprinkler_water_think(origin, radius, height) {
-  self.water_trigger = spawn("trigger_radius", origin, 0, radius, height);
-  for(;;) {
+  self.water_trigger = Spawn("trigger_radius", origin, 0, radius, height);
+  for (;;) {
     self.water_trigger waittill("trigger", entity);
     if(!isDefined(entity) || !IsPlayer(entity) || !IsAlive(entity)) {
       continue;
@@ -149,7 +149,7 @@ sprinkler_water_drops(trigger) {
   trigger endon("death");
   self thread water_drop_end_think();
   trigger thread water_drop_death_think(self);
-  for(;;) {
+  for (;;) {
     if(!self IsTouching(trigger)) {
       self notify("water_drop_end");
       return;
@@ -176,20 +176,16 @@ water_drop_death_think(player) {
 }
 exploder_find(num) {
   num = int(num);
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent)) {
+    if(!isDefined(ent))
       continue;
-    }
-    if(ent.v["type"] != "exploder") {
+    if(ent.v["type"] != "exploder")
       continue;
-    }
-    if(!isDefined(ent.v["exploder"])) {
+    if(!isDefined(ent.v["exploder"]))
       continue;
-    }
-    if(ent.v["exploder"] != num) {
+    if(ent.v["exploder"] != num)
       continue;
-    }
     return ent;
   }
   return undefined;
@@ -227,3 +223,4 @@ gopher_init() {
   game["gopher_fx"] = true;
   exploder(random(exploders));
 }
+

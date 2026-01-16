@@ -17,19 +17,18 @@ initsosproxy(var_0) {
   if(!var_0 isskillenabled()) {
     return;
   }
-  if(isDefined(var_0.sos_id)) {
+  if(isdefined(var_0.sos_id)) {
     return;
   }
   var_0.sos_id = level.sos_id;
   level.sos_id++;
-  var_1 = spawnStruct();
+  var_1 = spawnstruct();
   var_1.begin_time = maps\mp\_utility::getgametimepassedseconds();
   var_1.begin_sos_rating = var_0 getplayerdata("rankedMatchData", "sosRating");
   var_1.begin_sos_weight = var_0 getplayerdata("rankedMatchData", "sosWeight");
 
-  if(var_1.begin_sos_weight <= 0.5) {
+  if(var_1.begin_sos_weight <= 0.5)
     var_1.begin_sos_rating = level.skill_sos_default_rating;
-  }
 
   var_1.begin_gdf_rating = var_0 getplayerdata("rankedMatchData", "gdfRating");
   var_1.begin_gdf_variance = var_0 getplayerdata("rankedMatchData", "gdfVariance");
@@ -39,9 +38,8 @@ initsosproxy(var_0) {
 }
 
 process() {
-  foreach(var_1 in level.players) {
-    var_1 _updateskill();
-  }
+  foreach(var_1 in level.players)
+  var_1 _updateskill();
 }
 
 processplayer() {
@@ -52,33 +50,29 @@ onplayerspawned() {
   level.sos_players = [];
   level.sos_id = 0;
 
-  for(;;) {
+  for (;;) {
     level waittill("player_spawned", var_0);
     initsosproxy(var_0);
   }
 }
 
 isskillenabled() {
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return 0;
-  }
 
-  if(isbot(self)) {
+  if(isbot(self))
     return 0;
-  }
 
-  if(!maps\mp\_utility::rankingenabled()) {
+  if(!maps\mp\_utility::rankingenabled())
     return 0;
-  }
 
   return 1;
 }
 
 _ipow(var_0, var_1) {
-  for(var_2 = 1; var_1; var_0 = var_0 * var_0) {
-    if(var_1 & 1) {
+  for (var_2 = 1; var_1; var_0 = var_0 * var_0) {
+    if(var_1 & 1)
       var_2 = var_2 * var_0;
-    }
 
     var_1 = var_1 >> 1;
   }
@@ -94,13 +88,11 @@ _cube_root(var_0) {
 }
 
 _rational_tanh(var_0) {
-  if(var_0 <= -3) {
+  if(var_0 <= -3)
     return -1;
-  }
 
-  if(var_0 >= 3) {
+  if(var_0 >= 3)
     return 1;
-  }
 
   var_1 = var_0 * var_0;
   var_2 = var_0 * (27 + var_1) / (27 + 9 * var_1);
@@ -108,13 +100,11 @@ _rational_tanh(var_0) {
 }
 
 _inv_rational_tanh(var_0) {
-  if(var_0 <= -1) {
+  if(var_0 <= -1)
     return -3;
-  }
 
-  if(var_0 >= 1) {
+  if(var_0 >= 1)
     return 3;
-  }
 
   var_1 = var_0 * var_0;
   var_2 = var_1 * var_0;
@@ -167,9 +157,8 @@ _calc_rating(var_0, var_1, var_2, var_3) {
   var_4 = var_0 + var_2 * 0.5 + var_3;
   var_5 = var_0 + var_2 + var_1 + 2.0 * var_3;
 
-  if(var_5 == 0) {
+  if(var_5 == 0)
     return 0.5;
-  }
 
   var_6 = var_4 / var_5;
   return var_6;
@@ -186,17 +175,14 @@ _normalize_assoc(var_0) {
   var_1 = 0;
   var_2 = 0;
 
-  foreach(var_4 in var_0) {
-    var_1 = var_1 + abs(var_4);
-  }
+  foreach(var_4 in var_0)
+  var_1 = var_1 + abs(var_4);
 
-  if(var_1 != 0) {
+  if(var_1 != 0)
     var_2 = 1.0 / var_1;
-  }
 
-  foreach(var_7, var_4 in var_0) {
-    var_0[var_7] = var_0[var_7] * var_2;
-  }
+  foreach(var_7, var_4 in var_0)
+  var_0[var_7] = var_0[var_7] * var_2;
 
   return var_0;
 }
@@ -205,18 +191,16 @@ _dot_assoc(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_5, var_4 in var_0) {
-    if(isDefined(var_1[var_5])) {
+    if(isdefined(var_1[var_5]))
       var_2 = var_2 + var_4 * var_1[var_5];
-    }
   }
 
   return var_2;
 }
 
 _rating_error(var_0) {
-  if(var_0 < -10) {
+  if(var_0 < -10)
     return 0 - var_0;
-  }
 
   return _norm_pdf(var_0) / _norm_cdf(var_0);
 }
@@ -234,9 +218,8 @@ _norm_cdf(var_0) {
   var_2 = 1.0 / (1.0 + 0.5 * var_1);
   var_3 = var_2 * _func_0E5(var_1 * var_1 * -1 - 1.26551 + var_2 * (1.00002 + var_2 * (0.374092 + var_2 * (0.0967842 + var_2 * (-0.186288 + var_2 * (0.278868 + var_2 * (-1.1352 + var_2 * (1.48852 + var_2 * (-0.822152 + var_2 * 0.170873)))))))));
 
-  if(var_0 >= 0) {
+  if(var_0 >= 0)
     var_3 = 2.0 - var_3;
-  }
 
   return 0.5 * var_3;
 }
@@ -245,38 +228,36 @@ _updatesosproxy(var_0) {
   if(isbot(var_0)) {
     return;
   }
-  if(!isDefined(var_0.sos_id)) {
+  if(!isdefined(var_0.sos_id)) {
     return;
   }
   level.sos_players[var_0.sos_id].latest_time = maps\mp\_utility::getgametimepassedseconds();
   var_1 = level.sos_players[var_0.sos_id].latest_time - level.sos_players[var_0.sos_id].begin_time;
 
-  if(var_1 > level.skill_rdur_min_sec && isDefined(var_0.pers) && isDefined(var_0.pers["score"])) {
+  if(var_1 > level.skill_rdur_min_sec && isdefined(var_0.pers) && isdefined(var_0.pers["score"]))
     level.sos_players[var_0.sos_id].score_per_second = var_0.pers["score"] / var_1;
-  } else {
+  else
     level.sos_players[var_0.sos_id].score_per_second = undefined;
-  }
 }
 
 _updateskill() {
   if(!isskillenabled()) {
     return;
   }
-  if(isDefined(self.skillcalculated) || !isDefined(self.sos_id)) {
+  if(isdefined(self.skillcalculated) || !isdefined(self.sos_id)) {
     return;
   }
   self.skillcalculated = 1;
 
-  if(!isDefined(level.sos_players[self.sos_id])) {
+  if(!isdefined(level.sos_players[self.sos_id])) {
     return;
   }
-  foreach(var_1 in level.players) {
-    _updatesosproxy(var_1);
-  }
+  foreach(var_1 in level.players)
+  _updatesosproxy(var_1);
 
   var_3 = level.sos_players[self.sos_id];
 
-  if(!isDefined(var_3.score_per_second)) {
+  if(!isdefined(var_3.score_per_second)) {
     return;
   }
   var_4 = var_3.latest_time - var_3.begin_time;
@@ -290,15 +271,14 @@ _updateskill() {
   var_12 = 0;
   var_13 = 0;
 
-  if(var_10 == 0.0) {
+  if(var_10 == 0.0)
     var_10 = min(1.0, max(0.8596 + abs(var_3.begin_gdf_rating) * -0.18397, 0.05));
-  }
 
   foreach(var_22, var_15 in level.sos_players) {
     if(var_22 == self.sos_id) {
       continue;
     }
-    if(!isDefined(var_15.score_per_second)) {
+    if(!isdefined(var_15.score_per_second)) {
       continue;
     }
     var_16 = var_15.latest_time - max(var_3.begin_time, var_15.begin_time);
@@ -308,11 +288,10 @@ _updateskill() {
     }
     var_17 = 7.0 + var_10;
 
-    if(var_15.begin_gdf_variance) {
+    if(var_15.begin_gdf_variance)
       var_17 = var_17 + var_15.begin_gdf_variance;
-    } else {
+    else
       var_17 = var_17 + min(max(abs(var_15.begin_gdf_rating) * -0.18397 + 0.8596, 0.05), 1.0);
-    }
 
     var_18 = sqrt(var_17);
     var_19 = (var_11 - var_15.begin_gdf_rating) / var_18;

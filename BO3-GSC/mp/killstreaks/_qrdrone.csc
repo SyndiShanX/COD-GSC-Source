@@ -13,22 +13,22 @@
 #namespace qrdrone;
 
 function autoexec __init__sytem__() {
-  system::register("qrdrone", &__init__, undefined, undefined);
+  system::register("qrdrone", & __init__, undefined, undefined);
 }
 
 function __init__() {
   type = "qrdrone_mp";
-  clientfield::register("helicopter", "qrdrone_state", 1, 3, "int", &statechange, 0, 0);
-  clientfield::register("vehicle", "qrdrone_state", 1, 3, "int", &statechange, 0, 0);
+  clientfield::register("helicopter", "qrdrone_state", 1, 3, "int", & statechange, 0, 0);
+  clientfield::register("vehicle", "qrdrone_state", 1, 3, "int", & statechange, 0, 0);
   level._effect["qrdrone_enemy_light"] = "killstreaks/fx_drgnfire_light_red_3p";
   level._effect["qrdrone_friendly_light"] = "killstreaks/fx_drgnfire_light_green_3p";
   level._effect["qrdrone_viewmodel_light"] = "killstreaks/fx_drgnfire_light_green_1p";
-  clientfield::register("helicopter", "qrdrone_countdown", 1, 1, "int", &start_blink, 0, 0);
-  clientfield::register("helicopter", "qrdrone_timeout", 1, 1, "int", &final_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int", &start_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int", &final_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int", &out_of_range_update, 0, 0);
-  vehicle::add_vehicletype_callback("qrdrone_mp", &spawned);
+  clientfield::register("helicopter", "qrdrone_countdown", 1, 1, "int", & start_blink, 0, 0);
+  clientfield::register("helicopter", "qrdrone_timeout", 1, 1, "int", & final_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int", & start_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int", & final_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int", & out_of_range_update, 0, 0);
+  vehicle::add_vehicletype_callback("qrdrone_mp", & spawned);
 }
 
 function spawned(localclientnum) {
@@ -80,12 +80,12 @@ function watchrestartfx(localclientnum) {
 
 function spawn_solid_fx(localclientnum) {
   if(self islocalclientdriver(localclientnum)) {
-    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
+    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
   } else {
     if(self util::friend_not_foe(localclientnum)) {
-      fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
+      fx_handle = playfxontag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
     } else {
-      fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
+      fx_handle = playfxontag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
     }
   }
   self thread cleanupfx(localclientnum, fx_handle);
@@ -99,11 +99,11 @@ function blink_fx_and_sound(localclientnum, soundalias) {
   self endon("entityshutdown");
   self endon("restart_fx");
   self endon("fx_death");
-  if(!isDefined(self.interval)) {
+  if(!isdefined(self.interval)) {
     self.interval = 1;
   }
-  while(true) {
-    self playSound(localclientnum, soundalias);
+  while (true) {
+    self playsound(localclientnum, soundalias);
     self spawn_solid_fx(localclientnum);
     util::server_wait(localclientnum, self.interval / 2);
     self notify("stopfx");
@@ -136,7 +136,7 @@ function final_blink(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
 function out_of_range_update(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   model = getuimodel(getuimodelforcontroller(localclientnum), "vehicle.outOfRange");
-  if(isDefined(model)) {
+  if(isdefined(model)) {
     setuimodelvalue(model, newval);
   }
 }
@@ -146,11 +146,11 @@ function loop_local_sound(localclientnum, alias, interval, fx) {
   self endon("stopfx");
   level endon("demo_jump");
   level endon("player_switch");
-  if(!isDefined(self.interval)) {
+  if(!isdefined(self.interval)) {
     self.interval = interval;
   }
-  while(true) {
-    self playSound(localclientnum, alias);
+  while (true) {
+    self playsound(localclientnum, alias);
     self spawn_solid_fx(localclientnum);
     util::server_wait(localclientnum, self.interval / 2);
     self notify("stopfx");
@@ -168,7 +168,7 @@ function check_for_player_switch_or_time_jump(localclientnum) {
   self notify("stopfx");
   waittillframeend();
   self thread blink_light(localclientnum);
-  if(isDefined(self.blinkstarttime) && self.blinkstarttime <= level.servertime) {
+  if(isdefined(self.blinkstarttime) && self.blinkstarttime <= level.servertime) {
     self.interval = 1;
     self thread start_blink(localclientnum, 1);
   } else {
@@ -183,7 +183,7 @@ function blink_light(localclientnum) {
   level endon("player_switch");
   level endon("killcam_begin");
   self waittill("blink");
-  if(!isDefined(self.blinkstarttime)) {
+  if(!isdefined(self.blinkstarttime)) {
     self.blinkstarttime = level.servertime;
   }
   if(self islocalclientdriver(localclientnum)) {
@@ -199,12 +199,12 @@ function blink_light(localclientnum) {
 
 function collisionhandler(localclientnum) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("veh_collision", hip, hitn, hit_intensity);
     driver_local_client = self getlocalclientdriver();
-    if(isDefined(driver_local_client)) {
+    if(isdefined(driver_local_client)) {
       player = getlocalplayer(driver_local_client);
-      if(isDefined(player)) {
+      if(isdefined(player)) {
         if(hit_intensity > 15) {
           player playrumbleonentity(driver_local_client, "damage_heavy");
         } else {
@@ -217,11 +217,11 @@ function collisionhandler(localclientnum) {
 
 function enginestutterhandler(localclientnum) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("veh_engine_stutter");
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
-      if(isDefined(player)) {
+      if(isdefined(player)) {
         player playrumbleonentity(localclientnum, "rcbomb_engine_stutter");
       }
     }
@@ -229,20 +229,20 @@ function enginestutterhandler(localclientnum) {
 }
 
 function getminimumflyheight() {
-  if(!isDefined(level.airsupportheightscale)) {
+  if(!isdefined(level.airsupportheightscale)) {
     level.airsupportheightscale = 1;
   }
   airsupport_height = struct::get("air_support_height", "targetname");
-  if(isDefined(airsupport_height)) {
+  if(isdefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
   } else {
     println("");
     planeflyheight = 850;
-    if(isDefined(level.airsupportheightscale)) {
+    if(isdefined(level.airsupportheightscale)) {
       level.airsupportheightscale = getdvarint("scr_airsupportHeightScale", level.airsupportheightscale);
       planeflyheight = planeflyheight * getdvarint("scr_airsupportHeightScale", level.airsupportheightscale);
     }
-    if(isDefined(level.forceairsupportmapheight)) {
+    if(isdefined(level.forceairsupportmapheight)) {
       planeflyheight = planeflyheight + level.forceairsupportmapheight;
     }
   }
@@ -252,7 +252,7 @@ function getminimumflyheight() {
 function qrdrone_watch_distance() {
   self endon("entityshutdown");
   qrdrone_height = struct::get("qrdrone_height", "targetname");
-  if(isDefined(qrdrone_height)) {
+  if(isdefined(qrdrone_height)) {
     self.maxheight = qrdrone_height.origin[2];
   } else {
     self.maxheight = int(getminimumflyheight());
@@ -264,18 +264,18 @@ function qrdrone_watch_distance() {
   soundent = spawn(0, self.origin, "script_origin");
   soundent linkto(self);
   self thread qrdrone_staticstopondeath(soundent);
-  while(true) {
+  while (true) {
     if(!self qrdrone_in_range()) {
       staticalpha = 0;
-      while(!self qrdrone_in_range()) {
-        if(isDefined(self.heliinproximity)) {
+      while (!self qrdrone_in_range()) {
+        if(isdefined(self.heliinproximity)) {
           dist = distance(self.origin, self.heliinproximity.origin);
           staticalpha = 1 - ((dist - 150) / 150);
         } else {
           dist = distance(self.origin, inrangepos);
           staticalpha = min(1, dist / 200);
         }
-        sid = soundent playLoopSound("veh_qrdrone_static_lp", 0.2);
+        sid = soundent playloopsound("veh_qrdrone_static_lp", 0.2);
         self vehicle::set_static_amount(staticalpha * 2);
         wait(0.05);
       }
@@ -297,7 +297,7 @@ function qrdrone_in_range() {
 
 function qrdrone_staticfade(staticalpha, sndent, sid) {
   self endon("entityshutdown");
-  while(self qrdrone_in_range()) {
+  while (self qrdrone_in_range()) {
     staticalpha = staticalpha - 0.05;
     if(staticalpha <= 0) {
       sndent stopallloopsounds(0.5);

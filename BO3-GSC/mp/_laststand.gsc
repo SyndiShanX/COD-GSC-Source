@@ -22,7 +22,7 @@
 #namespace laststand;
 
 function autoexec __init__sytem__() {
-  system::register("laststand", &__init__, undefined, undefined);
+  system::register("laststand", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,12 +32,12 @@ function __init__() {
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isdefined(attacker) && isplayer(attacker) && attacker != self) {
     attacker.kills++;
-    if(isDefined(weapon)) {
+    if(isdefined(weapon)) {
       dmgweapon = weapon;
       weaponpickedup = 0;
-      if(isDefined(attacker.pickedupweapons) && isDefined(attacker.pickedupweapons[weapon])) {
+      if(isdefined(attacker.pickedupweapons) && isdefined(attacker.pickedupweapons[weapon])) {
         weaponpickedup = 1;
       }
       attacker addweaponstat(dmgweapon, "kills", 1, attacker.class_num, weaponpickedup);
@@ -50,15 +50,15 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   if(self player_is_in_laststand()) {
     return;
   }
-  if(isDefined(self.resurrect_not_allowed_by)) {
+  if(isdefined(self.resurrect_not_allowed_by)) {
     return;
   }
   self globallogic_player::callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, 0, 1);
   self notify("entering_last_stand");
-  if(isDefined(level._game_module_player_laststand_callback)) {
+  if(isdefined(level._game_module_player_laststand_callback)) {
     self[[level._game_module_player_laststand_callback]](einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride);
   }
-  self.laststandparams = spawnStruct();
+  self.laststandparams = spawnstruct();
   self.laststandparams.einflictor = einflictor;
   self.laststandparams.attacker = attacker;
   self.laststandparams.idamage = idamage;
@@ -76,7 +76,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   self.meleeattackers = undefined;
   self.no_revive_trigger = 1;
   callback::callback("hash_6751ab5b");
-  assert(isDefined(self.resurrect_weapon));
+  assert(isdefined(self.resurrect_weapon));
   assert(self.resurrect_weapon != level.weaponnone);
   slot = self ability_util::gadget_slot_for_type(40);
   self gadgetstatechange(slot, self.resurrect_weapon, 2);
@@ -94,7 +94,7 @@ function makesureswitchtoweapon() {
   self endon("player_input_revive");
   self endon("player_input_suicide");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     if(self getcurrentweapon() != self.resurrect_weapon) {
       self switchtoweapon(self.resurrect_weapon);
     }
@@ -107,7 +107,7 @@ function laststand_disable_player_weapons() {
   self.lastactiveweapon = self getcurrentweapon();
   if(self isthrowinggrenade()) {
     primaryweapons = self getweaponslistprimaries();
-    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
       self.lastactiveweapon = primaryweapons[0];
       self switchtoweaponimmediate(self.lastactiveweapon);
     }
@@ -119,11 +119,11 @@ function laststand_enable_player_weapons(b_allow_grenades = 1) {
   if(b_allow_grenades) {
     self enableoffhandweapons();
   }
-  if(isDefined(self.lastactiveweapon) && self.lastactiveweapon != level.weaponnone && self hasweapon(self.lastactiveweapon)) {
+  if(isdefined(self.lastactiveweapon) && self.lastactiveweapon != level.weaponnone && self hasweapon(self.lastactiveweapon)) {
     self switchtoweapon(self.lastactiveweapon);
   } else {
     primaryweapons = self getweaponslistprimaries();
-    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
     }
   }
@@ -133,14 +133,14 @@ function laststand_clean_up_on_interrupt(playerbeingrevived, revivergun) {
   self endon("do_revive_ended_normally");
   revivetrigger = playerbeingrevived.revivetrigger;
   playerbeingrevived util::waittill_any("disconnect", "game_ended", "death");
-  if(isDefined(revivetrigger)) {
+  if(isdefined(revivetrigger)) {
     revivetrigger delete();
   }
   self cleanup_suicide_hud();
-  if(isDefined(self.reviveprogressbar)) {
+  if(isdefined(self.reviveprogressbar)) {
     self.reviveprogressbar hud::destroyelem();
   }
-  if(isDefined(self.revivetexthud)) {
+  if(isdefined(self.revivetexthud)) {
     self.revivetexthud destroy();
   }
 }
@@ -161,7 +161,7 @@ function bleed_out() {
   self.ignoreme = 0;
   self.laststand = undefined;
   self.uselaststandparams = 1;
-  if(!isDefined(self.laststandparams.attacker)) {
+  if(!isdefined(self.laststandparams.attacker)) {
     self.laststandparams.attacker = self;
   }
   self suicide();

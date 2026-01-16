@@ -22,9 +22,8 @@ achievement_sound_func(achievement_name_lower) {
   if(!sessionmodeisonlinegame()) {
     return;
   }
-  for(i = 0; i < self getentitynumber() + 1; i++) {
+  for(i = 0; i < self getentitynumber() + 1; i++)
     wait_network_frame();
-  }
 
   self thread do_player_general_vox("general", "achievement");
 }
@@ -120,13 +119,11 @@ _zombie_blood_achievement_think() {
   self endon("zombie_blood_over");
   b_finished_achievement = 0;
 
-  if(!isDefined(self.zombie_blood_revives)) {
+  if(!isDefined(self.zombie_blood_revives))
     self.zombie_blood_revives = 0;
-  }
 
-  if(!isDefined(self.zombie_blood_generators_started)) {
+  if(!isDefined(self.zombie_blood_generators_started))
     self.zombie_blood_generators_started = 0;
-  }
 
   b_did_capture = 0;
   n_revives = 0;
@@ -134,15 +131,13 @@ _zombie_blood_achievement_think() {
   while(true) {
     str_action = waittill_any_return("completed_zone_capture", "do_revive_ended_normally", "revived_player_with_quadrotor", "revived_player_with_upgraded_staff");
 
-    if(issubstr(str_action, "revive")) {
+    if(issubstr(str_action, "revive"))
       self.zombie_blood_revives++;
-    } else if(str_action == "completed_zone_capture") {
+    else if(str_action == "completed_zone_capture")
       self.zombie_blood_generators_started++;
-    }
 
-    if(self.zombie_blood_generators_started > 0 && self.zombie_blood_revives >= 3) {
+    if(self.zombie_blood_generators_started > 0 && self.zombie_blood_revives >= 3)
       return true;
-    }
   }
 }
 
@@ -172,15 +167,14 @@ watch_equipped_weapons_for_upgraded_staffs() {
     if(self.sessionstate != "playing") {
       continue;
     }
-    if(str_weapon == "staff_water_upgraded_zm") {
+    if(str_weapon == "staff_water_upgraded_zm")
       self notify("upgraded_water_staff_equipped");
-    } else if(str_weapon == "staff_lightning_upgraded_zm") {
+    else if(str_weapon == "staff_lightning_upgraded_zm")
       self notify("upgraded_lightning_staff_equipped");
-    } else if(str_weapon == "staff_fire_upgraded_zm") {
+    else if(str_weapon == "staff_fire_upgraded_zm")
       self notify("upgraded_fire_staff_equipped");
-    } else if(str_weapon == "staff_air_upgraded_zm") {
+    else if(str_weapon == "staff_air_upgraded_zm")
       self notify("upgraded_air_staff_equipped");
-    }
   }
 }
 

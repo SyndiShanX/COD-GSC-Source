@@ -33,7 +33,7 @@ function array_average(array) {
   assert(isarray(array));
   assert(array.size > 0);
   total = 0;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     total = total + array[i];
   }
   return total / array.size;
@@ -43,11 +43,11 @@ function array_std_deviation(array, mean) {
   assert(isarray(array));
   assert(array.size > 0);
   tmp = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     tmp[i] = (array[i] - mean) * (array[i] - mean);
   }
   total = 0;
-  for(i = 0; i < tmp.size; i++) {
+  for (i = 0; i < tmp.size; i++) {
     total = total + tmp[i];
   }
   return sqrt(total / array.size);

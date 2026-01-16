@@ -10,8 +10,8 @@
 hack_perks() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
-    struct = spawnStruct();
-    machine = getEntArray(vending_triggers[i].target, "targetname");
+    struct = SpawnStruct();
+    machine = getentarray(vending_triggers[i].target, "targetname");
     struct.origin = machine[0].origin + (AnglesToRight(machine[0].angles) * 18) + (0, 0, 48);
     struct.radius = 48;
     struct.height = 64;

@@ -250,7 +250,7 @@ snd_heli_missile_shoot(var_0, var_1) {
 
 aud_dog_sequence() {
   self waittill("trigger", var_0);
-  var_0 playSound("scn_ambush_junkyard_dog_atk");
+  var_0 playsound("scn_ambush_junkyard_dog_atk");
   var_0 waittill("death");
   var_0 stopsound("scn_ambush_junkyard_dog_atk");
 }

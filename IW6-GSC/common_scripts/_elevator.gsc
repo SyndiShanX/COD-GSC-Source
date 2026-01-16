@@ -10,9 +10,8 @@ init() {
     return;
   }
   elevator_groups = getEntArray("elevator_group", "targetname");
-  if(!isDefined(elevator_groups)) {
+  if(!isDefined(elevator_groups))
     return;
-  }
   if(!elevator_groups.size) {
     return;
   }
@@ -75,9 +74,8 @@ elevator_think() {
 }
 
 elevator_call() {
-  foreach(callbutton in level.elevator_callbuttons) {
-    callbutton thread monitor_callbutton();
-  }
+  foreach(callbutton in level.elevator_callbuttons)
+  callbutton thread monitor_callbutton();
 }
 
 floor_override(inside_trig) {
@@ -108,20 +106,18 @@ elevator_fsm(state) {
         self thread floor_override(inside_trig);
         self waittill_or_timeout("floor_override", level.elevator_waittime);
 
-        if(self.floor_override && isDefined(self.overrider) && isPlayer(self.overrider)) {
+        if(self.floor_override && isDefined(self.overrider) && isPlayer(self.overrider))
           self get_floor(self.overrider);
-        }
 
         self.eState = "[B]";
         continue;
       }
 
       while(1) {
-        if(self.moveto_floor == self get_curFloor()) {
+        if(self.moveto_floor == self get_curFloor())
           param = inside_trig discrete_waittill("trigger");
-        } else {
+        else
           param = "elevator_called";
-        }
 
         if(isString(param) && (param == "elevator_called") && (self.moveto_floor != self get_curFloor())) {
           self.eState = "[B]";
@@ -235,9 +231,8 @@ monitor_callbutton() {
       }
     }
 
-    if(elevator_called) {
+    if(elevator_called)
       self playSound("elev_bell_ding");
-    }
   }
 }
 
@@ -246,9 +241,8 @@ call_elevator(call_floor) {
 
   inside_trigger = self get_housing_inside_trigger();
   inside_trigger notify("trigger", "elevator_called");
-  if(level.elevator_motion_detection) {
+  if(level.elevator_motion_detection)
     inside_trigger.motion_trigger notify("trigger", "elevator_called");
-  }
 }
 
 get_floor(player) {
@@ -266,9 +260,8 @@ get_floor(player) {
     player waittill("menuresponse", menu, response);
 
     if(menu == "elevator_floor_selector") {
-      if(response != "none") {
+      if(response != "none")
         self.moveto_floor = int(response);
-      }
 
       break;
     }
@@ -308,9 +301,8 @@ elevator_floor_update() {
 elevator_sound_think() {
   musak_model = self get_housing_musak_model();
 
-  if(level.elevator_music && isDefined(musak_model)) {
+  if(level.elevator_music && isDefined(musak_model))
     musak_model playLoopSound("elev_musak_loop");
-  }
 
   self thread listen_for("closing_inner_doors");
   self thread listen_for("opening_inner_doors");
@@ -335,22 +327,19 @@ listen_for(msg) {
     self waittill(msg);
     mainframe = self get_housing_mainframe();
 
-    if(issubstr(msg, "closing_")) {
+    if(issubstr(msg, "closing_"))
       mainframe playSound("elev_door_close");
-    }
 
-    if(issubstr(msg, "opening_")) {
+    if(issubstr(msg, "opening_"))
       mainframe playSound("elev_door_open");
-    }
 
     if(msg == "elevator_moving") {
       mainframe playSound("elev_run_start");
       mainframe playLoopSound("elev_run_loop");
     }
 
-    if(msg == "interrupted") {
+    if(msg == "interrupted")
       mainframe playSound("elev_door_interupt");
-    }
 
     if(msg == "elevator_moved") {
       mainframe stoploopsound("elev_run_loop");
@@ -366,9 +355,8 @@ position_elevators() {
     elevator.moveto_floor = elevator get_curFloor();
 
     foreach(floor_num, outer_doorset in elevator get_outer_doorsets()) {
-      if(elevator get_curFloor() != floor_num) {
+      if(elevator get_curFloor() != floor_num)
         elevator thread close_outer_doors(floor_num);
-      }
     }
   }
 }
@@ -389,11 +377,10 @@ elevator_move(floor_num) {
   foreach(part in self get_housing_children()) {
     moveto_pos = part.origin + delta_vec;
 
-    if(!issubstr(part.classname, "trigger_")) {
+    if(!issubstr(part.classname, "trigger_"))
       part moveTo(moveto_pos, moveTime, moveTime * level.elevator_accel, moveTime * level.elevator_decel);
-    } else {
+    else
       part.origin = moveto_pos;
-    }
   }
 
   self waittill_finish_moving(mainframe, self.e["floor" + floor_num + "_pos"]);
@@ -626,22 +613,19 @@ build_elevators() {
     elevator_bound delete();
     elevator_bound_end delete();
   }
-  foreach(elevator_doorset in elevator_doorsets) {
-    elevator_doorset delete();
-  }
+  foreach(elevator_doorset in elevator_doorsets)
+  elevator_doorset delete();
 
   build_call_buttons();
 
-  if(!level.elevator_motion_detection) {
+  if(!level.elevator_motion_detection)
     setup_hints();
-  }
 
   foreach(elevator in level.elevators) {
     pLights = elevator get_housing_primarylight();
     if(isDefined(pLights) && pLights.size) {
-      foreach(pLight in pLights) {
-        pLight setlightintensity(0.75);
-      }
+      foreach(pLight in pLights)
+      pLight setlightintensity(0.75);
     }
   }
 }
@@ -684,11 +668,12 @@ setup_hints() {
     num_of_floors = floors.size;
 
     use_trig SetCursorHint("HINT_NOICON");
-    if(num_of_floors > 2) {
+    if(num_of_floors > 2)
+
       use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
-    } else {
+    else
+
       use_trig setHintString(&"ELEVATOR_USE_HINT");
-    }
   }
 
   foreach(callbutton in level.elevator_callbuttons) {
@@ -708,11 +693,10 @@ discrete_waittill(msg) {
 
   self enable_trigger();
 
-  if(level.elevator_motion_detection) {
+  if(level.elevator_motion_detection)
     self.motion_trigger waittill(msg, param);
-  } else {
+  else
     self waittill(msg, param);
-  }
 
   self disable_trigger();
   return param;
@@ -723,17 +707,15 @@ enable_trigger() {
     self.enabled = 1;
     self.origin += (0, 0, 10000);
 
-    if(isDefined(self.motion_trigger)) {
+    if(isDefined(self.motion_trigger))
       self.motion_trigger.origin += (0, 0, 10000);
-    }
   }
 }
 
 disable_trigger() {
   self notify("disable_trigger");
-  if(self.enabled) {
+  if(self.enabled)
     self thread disable_trigger_helper();
-  }
 }
 
 disable_trigger_helper() {
@@ -742,9 +724,8 @@ disable_trigger_helper() {
   wait 1.5;
   self.origin += (0, 0, -10000);
 
-  if(isDefined(self.motion_trigger)) {
+  if(isDefined(self.motion_trigger))
     self.motion_trigger.origin += (0, 0, -10000);
-  }
 }
 
 get_outer_doorset(floor_num) {
@@ -789,19 +770,16 @@ get_housing_children() {
   children[children.size] = left_door;
   children[children.size] = right_door;
 
-  if(isDefined(motion_trig)) {
+  if(isDefined(motion_trig))
     children[children.size] = motion_trig;
-  }
 
   script_models = self get_housing_models();
-  foreach(eModel in script_models) {
-    children[children.size] = eModel;
-  }
+  foreach(eModel in script_models)
+  children[children.size] = eModel;
 
   primarylights = get_housing_primarylight();
-  foreach(pLight in primarylights) {
-    children[children.size] = pLight;
-  }
+  foreach(pLight in primarylights)
+  children[children.size] = pLight;
 
   return children;
 }
@@ -825,9 +803,8 @@ get_housing_models() {
   temp_model_array = [];
 
   foreach(part in parts) {
-    if(part.classname == "script_model") {
+    if(part.classname == "script_model")
       temp_model_array[temp_model_array.size] = part;
-    }
   }
   return temp_model_array;
 }
@@ -837,9 +814,8 @@ get_housing_primarylight() {
   temp_primarylights = [];
 
   foreach(part in parts) {
-    if(part.code_classname == "light") {
+    if(part.code_classname == "light")
       temp_primarylights[temp_primarylights.size] = part;
-    }
   }
   return temp_primarylights;
 }
@@ -849,9 +825,8 @@ get_housing_musak_model() {
   musak_model = undefined;
 
   foreach(eModel in models) {
-    if(isDefined(eModel.script_noteworthy) && eModel.script_noteworthy == "play_musak") {
+    if(isDefined(eModel.script_noteworthy) && eModel.script_noteworthy == "play_musak")
       musak_model = eModel;
-    }
   }
 
   return musak_model;
@@ -950,9 +925,9 @@ elevator_get_dvar_int(dvar, def) {
 }
 
 elevator_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "") {
+  if(getdvar(dvar) != "")
     return getdvarfloat(dvar);
-  } else {
+  else {
     setdvar(dvar, def);
     return def;
   }

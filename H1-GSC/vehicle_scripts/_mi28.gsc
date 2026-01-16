@@ -43,8 +43,8 @@ handle_audio() {
   thread monitor_death_stop_sounds();
   self.snd_disable_vehicle_system = self.script_disablevehicleaudio;
 
-  for(;;) {
-    if(!isDefined(self.snd_disable_vehicle_system) || !self.snd_disable_vehicle_system) {
+  for (;;) {
+    if(!isdefined(self.snd_disable_vehicle_system) || !self.snd_disable_vehicle_system) {
       var_2 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_2 > var_1) {
@@ -74,9 +74,8 @@ monitor_death_stop_sounds() {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 2; var_1++) {
-    var_0[var_1] = spawnStruct();
-  }
+  for (var_1 = 0; var_1 < 2; var_1++)
+    var_0[var_1] = spawnstruct();
 
   var_0[0].sittag = "tag_pilot";
   var_0[1].sittag = "tag_gunner";

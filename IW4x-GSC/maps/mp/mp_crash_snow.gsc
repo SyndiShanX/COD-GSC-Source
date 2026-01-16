@@ -20,4 +20,5 @@ main() {
   setdvar("compassmaxrange", "1600");
 
   level.airstrikefx = loadfx("explosions/clusterbomb_christmas");
+
 }

@@ -34,9 +34,9 @@ function teleporter_function(name) {
   str = name + "_top_name";
   fx_top = struct::get(str, "targetname");
   teleport_state = "Waiting for Players";
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isgodmode(players[i])) {
         level.devcheater = 1;
       }
@@ -78,7 +78,7 @@ function teleporter_function(name) {
             }
             target_positions = get_teleporter_target_positions(teleporter, name);
             teleporter_starting(teleporter);
-            for(i = 0; i < players.size; i++) {
+            for (i = 0; i < players.size; i++) {
               teleport_player_to_target(players[i], target_positions);
               players[i] clientfield::increment("beam_fx_audio");
             }
@@ -86,19 +86,19 @@ function teleporter_function(name) {
             teleport_time = gettime() + 5000;
             teleporter notify("stop_exploder");
             if(name == "generator_teleporter") {
-              if(isDefined(level._dte_done) && level._dte_done) {
+              if(isdefined(level._dte_done) && level._dte_done) {
                 exploder::exploder("fxexp_600");
                 exploder::exploder("fxexp_601");
               }
               wait(0.5);
               exploder::exploder("fxexp_502");
-              level util::delay(2, undefined, &function_78f5cb79);
+              level util::delay(2, undefined, & function_78f5cb79);
               level flag::set("teleported_to_nml");
             }
             if(name == "nml_teleporter") {
               level notify("hash_5b75f7cb");
               level flag::clear("teleported_to_nml");
-              if(isDefined(level._dte_done) && level._dte_done) {
+              if(isdefined(level._dte_done) && level._dte_done) {
                 exploder::kill_exploder("fxexp_600");
                 exploder::kill_exploder("fxexp_601");
               }
@@ -137,9 +137,9 @@ function function_78f5cb79() {
 
 function function_6454df1b() {
   var_c35f7190 = getent("t_stream_hint_nml_player", "targetname");
-  while(true) {
+  while (true) {
     var_c35f7190 waittill("trigger", e_player);
-    if(!(isDefined(e_player.var_a31e4590) && e_player.var_a31e4590)) {
+    if(!(isdefined(e_player.var_a31e4590) && e_player.var_a31e4590)) {
       e_player.var_a31e4590 = 1;
       e_player thread function_7305cc9b(var_c35f7190);
     }
@@ -151,7 +151,7 @@ function function_7305cc9b(var_34ef544f) {
   var_f657052b = getent("generator_teleporter", "targetname");
   var_5021a61d = get_teleporter_target_positions(var_f657052b, "generator_teleporter");
   self zm_utility::create_streamer_hint(var_5021a61d[0].origin, var_5021a61d[0].angles, 1);
-  while(self istouching(var_34ef544f)) {
+  while (self istouching(var_34ef544f)) {
     wait(0.05);
   }
   wait(0.05);
@@ -164,7 +164,7 @@ function function_7305cc9b(var_34ef544f) {
 function valid_players_teleport() {
   players = getplayers();
   valid_players = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(is_player_teleport_valid(players[i])) {
       valid_players = valid_players + 1;
     }
@@ -173,7 +173,7 @@ function valid_players_teleport() {
 }
 
 function is_player_teleport_valid(player) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return false;
   }
   if(!isalive(player)) {
@@ -196,14 +196,14 @@ function is_player_teleport_valid(player) {
 
 function get_teleporter_target_positions(teleporter_ent, name) {
   target_positions = [];
-  if(isDefined(teleporter_ent.script_noteworthy) && teleporter_ent.script_noteworthy == "enter_no_mans_land") {
+  if(isdefined(teleporter_ent.script_noteworthy) && teleporter_ent.script_noteworthy == "enter_no_mans_land") {
     player_starts = struct::get_array("packp_respawn_point", "script_label");
-    for(i = 0; i < player_starts.size; i++) {
+    for (i = 0; i < player_starts.size; i++) {
       target_positions[i] = player_starts[i];
     }
   } else {
     dest_name = "nml_to_bridge_teleporter";
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
       str = (dest_name + "_player") + (i + 1) + "_position";
       ent = struct::get(str, "targetname");
       target_positions[i] = ent;
@@ -221,19 +221,19 @@ function get_teleporter_dest_ent_name() {
 function teleport_player_to_target(player, target_positions) {
   player_index = player.characterindex;
   target_ent = undefined;
-  for(i = 0; i < target_positions.size; i++) {
-    if(isDefined(target_positions[i].script_int) && target_positions[i].script_int == (player_index + 1)) {
+  for (i = 0; i < target_positions.size; i++) {
+    if(isdefined(target_positions[i].script_int) && target_positions[i].script_int == (player_index + 1)) {
       target_ent = target_positions[i];
     }
   }
-  if(!isDefined(target_ent)) {
+  if(!isdefined(target_ent)) {
     target_ent = target_positions[player_index];
   }
   if(player getstance() == "prone") {
     player setstance("crouch");
   }
   player setorigin(target_ent.origin + (randomfloat(24), randomfloat(24), 0));
-  if(isDefined(target_ent.angles)) {
+  if(isdefined(target_ent.angles)) {
     player setplayerangles(target_ent.angles);
   }
   if(!level.been_to_moon_before) {
@@ -252,17 +252,17 @@ function turn_override_off() {
 
 function teleporter_starting(teleporter_ent) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player)) {
       player enableinvulnerability();
     }
   }
-  if(isDefined(teleporter_ent.script_noteworthy)) {}
+  if(isdefined(teleporter_ent.script_noteworthy)) {}
 }
 
 function teleporter_check_for_endgame() {
-  if(!isDefined(level.nml_start_time)) {
+  if(!isdefined(level.nml_start_time)) {
     level.nml_start_time = 0;
   }
   level util::waittill_any("end_game", "track_nml_time");
@@ -273,13 +273,13 @@ function teleporter_check_for_endgame() {
   level.nml_pap = 0;
   level.nml_speed = 0;
   level.nml_jugg = 0;
-  if(isDefined(players[0].pap_used) && players[0].pap_used) {
+  if(isdefined(players[0].pap_used) && players[0].pap_used) {
     level.nml_pap = 22;
   }
-  if(isDefined(players[0].speed_used) && players[0].speed_used) {
+  if(isdefined(players[0].speed_used) && players[0].speed_used) {
     level.nml_speed = 33;
   }
-  if(isDefined(players[0].jugg_used) && players[0].jugg_used) {
+  if(isdefined(players[0].jugg_used) && players[0].jugg_used) {
     level.nml_jugg = 44;
   }
 }
@@ -311,14 +311,14 @@ function display_time_survived() {
   level.nml_jugg = 0;
   level.left_nomans_land = 1;
   survived = [];
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].pap_used) && players[i].pap_used) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(players[i].pap_used) && players[i].pap_used) {
       level.nml_pap = 22;
     }
-    if(isDefined(players[i].speed_used) && players[i].speed_used) {
+    if(isdefined(players[i].speed_used) && players[i].speed_used) {
       level.nml_speed = 33;
     }
-    if(isDefined(players[i].jugg_used) && players[i].jugg_used) {
+    if(isdefined(players[i].jugg_used) && players[i].jugg_used) {
       level.nml_jugg = 44;
     }
     survived[i] = newclienthudelem(players[i]);
@@ -342,7 +342,7 @@ function display_time_survived() {
     survived[i].alpha = 1;
   }
   wait(3);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     survived[i] fadeovertime(1);
     survived[i].alpha = 0;
   }
@@ -351,7 +351,7 @@ function display_time_survived() {
 
 function teleporter_ending(teleporter_ent, was_aborted) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player)) {
       if(!isgodmode(player) && getdvarint("zombie_cheat") < 1) {
@@ -361,7 +361,7 @@ function teleporter_ending(teleporter_ent, was_aborted) {
   }
   if(!was_aborted) {
     level flag::set("teleporter_used");
-    if(isDefined(teleporter_ent.script_noteworthy)) {
+    if(isdefined(teleporter_ent.script_noteworthy)) {
       if(teleporter_ent.script_noteworthy == "enter_no_mans_land") {
         level flag::set("enter_nml");
         level.on_the_moon = 0;
@@ -381,7 +381,7 @@ function teleporter_ending(teleporter_ent, was_aborted) {
         level flag::clear("start_supersprint");
         level.on_the_moon = 1;
         level.ignore_distance_tracking = 1;
-        if(!(isDefined(level.intermission) && level.intermission) && isDefined(level.ever_been_on_the_moon) && !level.ever_been_on_the_moon) {
+        if(!(isdefined(level.intermission) && level.intermission) && isdefined(level.ever_been_on_the_moon) && !level.ever_been_on_the_moon) {
           level notify("track_nml_time");
           level thread display_time_survived();
           level.ever_been_on_the_moon = 1;
@@ -391,13 +391,13 @@ function teleporter_ending(teleporter_ent, was_aborted) {
         level.round_number = zm::get_round_number();
         zm_moon_wasteland::resume_moon_rounds(level.round_number);
         level thread zm_moon::zombie_moon_gravity_init();
-        level.round_spawn_func = &zm::round_spawning;
+        level.round_spawn_func = & zm::round_spawning;
         level thread teleporter_to_nml_power_down();
         zombie_utility::set_zombie_var("zombie_intermission_time", 15);
         zombie_utility::set_zombie_var("zombie_between_round_time", 10);
         level flag::set("zombie_drop_powerups");
         level.ignore_distance_tracking = 0;
-        if(!(isDefined(level.first_round) && level.first_round)) {
+        if(!(isdefined(level.first_round) && level.first_round)) {
           players = getplayers();
           players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "teleporter");
         }
@@ -447,8 +447,8 @@ function teleporter_to_nml_gate_move(open_it) {
   ent = level.teleporter_to_nml_gate_ent;
   var_c36da20d = level.var_8243881a;
   ent2 = level.teleporter_to_nml_gate2_ent;
-  ent playSound("amb_teleporter_gate_start");
-  ent playLoopSound("amb_teleporter_gate_loop", 0.5);
+  ent playsound("amb_teleporter_gate_start");
+  ent playloopsound("amb_teleporter_gate_loop", 0.5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
   ent moveto(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
@@ -475,24 +475,24 @@ function init_teleporter_lights() {
 }
 
 function teleporter_lights_red() {
-  for(i = 0; i < level.teleporter_lights.size; i++) {
+  for (i = 0; i < level.teleporter_lights.size; i++) {
     zm_moon_utility::zapper_light_red(level.teleporter_lights[i], "targetname");
   }
 }
 
 function teleporter_lights_green() {
-  for(i = 0; i < level.teleporter_lights.size; i++) {
+  for (i = 0; i < level.teleporter_lights.size; i++) {
     zm_moon_utility::zapper_light_green(level.teleporter_lights[i], "targetname");
   }
 }
 
 function teleporter_to_nml_power_down() {
   teleporter_to_nml_gate_move(0);
-  if(level flag::get("teleporter_used") && (isDefined(level.first_teleporter_use) && level.first_teleporter_use)) {
+  if(level flag::get("teleporter_used") && (isdefined(level.first_teleporter_use) && level.first_teleporter_use)) {
     level waittill("between_round_over");
     util::wait_network_frame();
   }
-  if(!isDefined(level.first_teleporter_use)) {
+  if(!isdefined(level.first_teleporter_use)) {
     level thread zm_audio::sndmusicsystem_playstate("round_start_first");
     level.first_teleporter_use = 1;
   }
@@ -505,7 +505,7 @@ function teleporter_to_nml_power_down() {
   time1 = time + (dt / 2);
   time2 = time + ((3 * dt) / 4);
   time3 = open_door_time - 0.75;
-  while(time < open_door_time) {
+  while (time < open_door_time) {
     time = gettime();
     switch (lights_mode) {
       case 0: {
@@ -549,7 +549,7 @@ function teleporter_to_nml_power_down() {
 function teleporter_exit_nml_think() {
   wait(3);
   level thread teleporter_exit_nml_gate_move(0);
-  while(true) {
+  while (true) {
     level flag::wait_till("enter_nml");
     if(level.on_the_moon == 0) {
       wait(20);
@@ -557,7 +557,7 @@ function teleporter_exit_nml_think() {
       wait(level.teleporter_exit_nml_powerdown_time);
     }
     level thread teleporter_exit_nml_gate_move(1);
-    while(level flag::get("enter_nml")) {
+    while (level flag::get("enter_nml")) {
       wait(1);
     }
     level thread teleporter_exit_nml_gate_move(0);
@@ -578,8 +578,8 @@ function teleporter_exit_nml_gate_move(open_it) {
   time = level.teleporter_gate_move_time;
   accel = time / 6;
   ent = level.teleporter_exit_nml_gate_ent;
-  ent playSound("amb_teleporter_gate_start");
-  ent playLoopSound("amb_teleporter_gate_loop", 0.5);
+  ent playsound("amb_teleporter_gate_start");
+  ent playloopsound("amb_teleporter_gate_loop", 0.5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
   ent2 moveto(pos2, time, accel, accel);
@@ -597,5 +597,5 @@ function teleporter_exit_nml_gate_move(open_it) {
 function play_stopmoving_sounds() {
   self waittill("movedone");
   self stoploopsound(0.5);
-  self playSound("amb_teleporter_gate_stop");
+  self playsound("amb_teleporter_gate_stop");
 }

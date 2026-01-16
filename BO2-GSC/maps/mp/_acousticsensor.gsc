@@ -35,11 +35,10 @@ onspawnacousticsensor(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playLoopSound("fly_acoustic_sensor_lp");
+  self playloopsound("fly_acoustic_sensor_lp");
 
-  if(!self maps\mp\_utility::ishacked()) {
+  if(!self maps\mp\_utility::ishacked())
     player addweaponstat("acoustic_sensor_mp", "used", 1);
-  }
 
   self thread watchshutdown(player, self.origin);
 }
@@ -47,9 +46,8 @@ onspawnacousticsensor(watcher, player) {
 acousticsensordetonate(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
-  if(!from_emp) {
-    playFX(level._equipment_explode_fx, self.origin);
-  }
+  if(!from_emp)
+    playfx(level._equipment_explode_fx, self.origin);
 
   if(isDefined(attacker)) {
     if(self.owner isenemyplayer(attacker)) {
@@ -69,20 +67,18 @@ destroyent() {
 watchshutdown(player, origin) {
   self waittill_any("death", "hacked");
 
-  if(isDefined(player)) {
+  if(isDefined(player))
     player.acousticsensor = undefined;
-  }
 }
 
 watchacousticsensordamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setCanDamage(1);
+  self setcandamage(1);
   damagemax = 100;
 
-  if(!self maps\mp\_utility::ishacked()) {
+  if(!self maps\mp\_utility::ishacked())
     self.damagetaken = 0;
-  }
 
   while(true) {
     self.maxhealth = 100000;
@@ -99,27 +95,23 @@ watchacousticsensordamage(watcher) {
       switch (weaponname) {
         case "concussion_grenade_mp":
         case "flash_grenade_mp":
-          if(watcher.stuntime > 0) {
+          if(watcher.stuntime > 0)
             self thread maps\mp\gametypes\_weaponobjects::stunstart(watcher, watcher.stuntime);
-          }
 
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           }
 
           continue;
         case "emp_grenade_mp":
           damage = damagemax;
         default:
-          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
             attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-          }
 
           break;
       }
@@ -129,11 +121,10 @@ watchacousticsensordamage(watcher) {
     if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
       continue;
     }
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       self.damagetaken = damagemax;
-    } else {
+    else
       self.damagetaken = self.damagetaken + damage;
-    }
 
     if(self.damagetaken >= damagemax) {
       watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0.0, attacker, weaponname);

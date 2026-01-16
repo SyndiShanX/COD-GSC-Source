@@ -14,6 +14,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace ability_player;
 
 autoexec __init__system__() {
@@ -42,12 +43,12 @@ on_player_connect() {
     self.var_aec4af05 = [];
   }
 
-  if(!isDefined(self.pers[# "herogadgetnotified"])) {
-    self.pers[# "herogadgetnotified"] = [];
+  if(!isDefined(self.pers[#"herogadgetnotified"])) {
+    self.pers[#"herogadgetnotified"] = [];
   }
 
   for(slot = 0; slot < 3; slot++) {
-    self.pers[# "herogadgetnotified"][slot] = 0;
+    self.pers[#"herogadgetnotified"][slot] = 0;
   }
 
   self callback::on_death(&function_32e782df);
@@ -85,10 +86,10 @@ on_player_spawned() {
     self.var_36546d49 = 0;
   }
 
-  if(!(isDefined(self.pers[# "changed_class"]) && self.pers[# "changed_class"])) {
-    self.pers[# "held_gadgets_power"] = [];
-    self.pers[# "hash_7a954c017d693f69"] = [];
-    self.pers[# "hash_68cdf8807cfaabff"] = [];
+  if(!(isDefined(self.pers[#"changed_class"]) && self.pers[#"changed_class"])) {
+    self.pers[#"held_gadgets_power"] = [];
+    self.pers[#"hash_7a954c017d693f69"] = [];
+    self.pers[#"hash_68cdf8807cfaabff"] = [];
   }
 
   self.heroabilityactivatetime = undefined;
@@ -136,9 +137,9 @@ gadgets_save_power(game_ended) {
       }
     }
 
-    self.pers[# "held_gadgets_power"][gadgetweapon] = powerleft;
-    self.pers[# "hash_7a954c017d693f69"][gadgetweapon] = var_51ec1787;
-    self.pers[# "hash_68cdf8807cfaabff"][gadgetweapon] = deployed;
+    self.pers[#"held_gadgets_power"][gadgetweapon] = powerleft;
+    self.pers[#"hash_7a954c017d693f69"][gadgetweapon] = var_51ec1787;
+    self.pers[#"hash_68cdf8807cfaabff"][gadgetweapon] = deployed;
   }
 }
 
@@ -166,7 +167,7 @@ function_116ec442() {
       continue;
     }
 
-    if(self._gadgets_player[slot].statname == # "gadget_health_regen") {
+    if(self._gadgets_player[slot].statname == #"gadget_health_regen") {
       continue;
     }
 
@@ -236,7 +237,7 @@ function_95218c27(slot, var_4dd90b81 = 0) {
     return;
   }
 
-  self.pers[# "hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+  self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
   self function_48e08b4(slot, self._gadgets_player[slot], var_4dd90b81);
 }
 
@@ -502,7 +503,7 @@ give_gadget(slot, weapon) {
 
   if(isDefined(self._gadgets_player[slot])) {
     if(self._gadgets_player[slot] != weapon) {
-      self.pers[# "hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+      self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
     }
 
     self take_gadget(slot, self._gadgets_player[slot]);
@@ -596,11 +597,11 @@ turn_gadget_on(slot, weapon) {
   }
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name == # "gadget_health_regen") {
+    if(weapon.name == #"gadget_health_regen") {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, # "hash_2380fc76594e930d", 1);
+        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_2380fc76594e930d", 1);
       }
     } else {
       self function_33644ff2(game.timepassed, weapon.name);
@@ -610,7 +611,7 @@ turn_gadget_on(slot, weapon) {
   }
 
   level notify(#"hero_gadget_activated", {
-    #player: self,
+    #player: self, 
     #weapon: weapon
   });
   self notify(#"hero_gadget_activated", {
@@ -621,16 +622,16 @@ turn_gadget_on(slot, weapon) {
     self thread[[level.cybercom._ability_turn_on]](slot, weapon);
   }
 
-  self.pers[# "herogadgetnotified"][slot] = 0;
+  self.pers[#"herogadgetnotified"][slot] = 0;
   xuid = int(self getxuid(1));
 
   if(sessionmodeismultiplayergame()) {
     mpheropowerevents = {
-      #spawnid: getplayerspawnid(self),
-      #gametime: function_f8d53445(),
-      #name: self._gadgets_player[slot].name,
-      #powerstate: "activated",
-      #playername: self.name,
+      #spawnid: getplayerspawnid(self), 
+      #gametime: function_f8d53445(), 
+      #name: self._gadgets_player[slot].name, 
+      #powerstate: "activated", 
+      #playername: self.name, 
       #xuid: xuid
     };
     function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
@@ -688,7 +689,7 @@ turn_gadget_off(slot, weapon) {
   dead = self.health <= 0;
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name != # "gadget_health_regen") {
+    if(weapon.name != #"gadget_health_regen") {
       self function_79cd8cd6(game.timepassed, weapon.name, dead, self.heavyweaponshots, self.heavyweaponhits);
     }
   } else {
@@ -702,11 +703,11 @@ turn_gadget_off(slot, weapon) {
 
   if(sessionmodeismultiplayergame()) {
     mpheropowerevents = {
-      #spawnid: getplayerspawnid(self),
-      #gametime: function_f8d53445(),
-      #name: self._gadgets_player[slot].name,
-      #powerstate: "expired",
-      #playername: self.name,
+      #spawnid: getplayerspawnid(self), 
+      #gametime: function_f8d53445(), 
+      #name: self._gadgets_player[slot].name, 
+      #powerstate: "expired", 
+      #playername: self.name, 
       #xuid: xuid
     };
     function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
@@ -771,23 +772,23 @@ gadget_checkheroabilitykill(attacker) {
 
   if(isDefined(attacker.heroability)) {
     switch (attacker.heroability.name) {
-      case # "gadget_clone":
-      case # "gadget_heat_wave":
-      case # "gadget_armor":
-      case # "gadget_speed_burst":
+      case #"gadget_clone":
+      case #"gadget_heat_wave":
+      case #"gadget_armor":
+      case #"gadget_speed_burst":
         if(isDefined(attacker.heroabilityactive) || isDefined(attacker.heroabilitydectivatetime) && attacker.heroabilitydectivatetime > gettime() - 100) {
           heroabilitystat = 1;
         }
 
         break;
-      case # "gadget_resurrect":
-      case # "gadget_camo":
+      case #"gadget_resurrect":
+      case #"gadget_camo":
         if(isDefined(attacker.heroabilityactive) || isDefined(attacker.heroabilitydectivatetime) && attacker.heroabilitydectivatetime > gettime() - 6000) {
           heroabilitystat = 1;
         }
 
         break;
-      case # "gadget_vision_pulse":
+      case #"gadget_vision_pulse":
         if(isDefined(attacker.visionpulsespottedenemytime)) {
           timecutoff = gettime();
 
@@ -804,7 +805,7 @@ gadget_checkheroabilitykill(attacker) {
             }
           }
         }
-      case # "gadget_combat_efficiency":
+      case #"gadget_combat_efficiency":
         if(isDefined(attacker._gadget_combat_efficiency) && attacker._gadget_combat_efficiency == 1) {
           heroabilitystat = 1;
           break;
@@ -873,8 +874,8 @@ gadget_ready(slot, weapon) {
   }
 
   if(!isDefined(level.gameended) || !level.gameended) {
-    if(!self.pers[# "herogadgetnotified"][slot]) {
-      self.pers[# "herogadgetnotified"][slot] = 1;
+    if(!self.pers[#"herogadgetnotified"][slot]) {
+      self.pers[#"herogadgetnotified"][slot] = 1;
 
       if(isDefined(level.playgadgetready)) {
         self thread[[level.playgadgetready]](weapon);
@@ -883,11 +884,11 @@ gadget_ready(slot, weapon) {
   }
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name == # "gadget_health_regen") {
+    if(weapon.name == #"gadget_health_regen") {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, # "hash_656f3981134db095", 1);
+        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_656f3981134db095", 1);
       }
     } else {
       self function_ac24127(game.timepassed, weapon.name);
@@ -900,11 +901,11 @@ gadget_ready(slot, weapon) {
 
   if(sessionmodeismultiplayergame()) {
     mpheropowerevents = {
-      #spawnid: getplayerspawnid(self),
-      #gametime: function_f8d53445(),
-      #name: self._gadgets_player[slot].name,
-      #powerstate: "ready",
-      #playername: self.name,
+      #spawnid: getplayerspawnid(self), 
+      #gametime: function_f8d53445(), 
+      #name: self._gadgets_player[slot].name, 
+      #powerstate: "ready", 
+      #playername: self.name, 
       #xuid: xuid
     };
     function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
@@ -942,25 +943,25 @@ tutorial_timer(weapon, var_8be5aa55, var_de825ec6) {
 
   if(isDefined(var_de825ec6)) {
     tutorial_init(weapon);
-    self.pers[# "ability_tutorial"][weapon].(var_8be5aa55) = gettime() + var_de825ec6 * 1000;
+    self.pers[#"ability_tutorial"][weapon].(var_8be5aa55) = gettime() + var_de825ec6 * 1000;
   }
 
-  return isDefined(self.pers[# "ability_tutorial"][weapon].(var_8be5aa55)) && self.pers[# "ability_tutorial"][weapon].(var_8be5aa55) > gettime();
+  return isDefined(self.pers[#"ability_tutorial"][weapon].(var_8be5aa55)) && self.pers[#"ability_tutorial"][weapon].(var_8be5aa55) > gettime();
 }
 
 tutorial_init(weapon) {
-  if(!isDefined(self.pers[# "ability_tutorial"])) {
-    self.pers[# "ability_tutorial"] = [];
+  if(!isDefined(self.pers[#"ability_tutorial"])) {
+    self.pers[#"ability_tutorial"] = [];
   }
 
-  if(!isDefined(self.pers[# "ability_tutorial"][weapon])) {
-    self.pers[# "ability_tutorial"][weapon] = spawnStruct();
+  if(!isDefined(self.pers[#"ability_tutorial"][weapon])) {
+    self.pers[#"ability_tutorial"][weapon] = spawnStruct();
   }
 }
 
 tutorial_hints(slot, weapon, var_8430d11b, var_6c65cb8d, var_eadf8864, var_be7c29a3) {
   self notify("equip_tutorial_text_" + weapon.name);
-  self endon(#"disconnect", # "death", "equip_tutorial_text_" + weapon.name);
+  self endon(#"disconnect", #"death", "equip_tutorial_text_" + weapon.name);
   self tutorial_init(weapon);
 
   while(true) {
@@ -1428,28 +1429,28 @@ abilities_devgui_think() {
     }
 
     switch (cmd) {
-      case # "power_f":
+      case #"power_f":
         abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_fill);
         break;
-      case # "power_t_af":
+      case #"power_t_af":
         abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_toggle_auto_fill);
         break;
-      case # "ability_power_f":
+      case #"ability_power_f":
         abilities_devgui_handle_player_command(cmd, &function_3db3dc4f, arg);
         break;
-      case # "hash_5b8a32e219f9ae64":
+      case #"hash_5b8a32e219f9ae64":
         abilities_devgui_handle_player_command(cmd, &function_626f2cd1, arg);
         break;
-      case # "hash_2d2f6f2bb98a38b3":
+      case #"hash_2d2f6f2bb98a38b3":
         abilities_devgui_handle_player_command(cmd, &function_9a0f80b1, arg);
         break;
-      case # "hash_5ddbad8870b98e93":
+      case #"hash_5ddbad8870b98e93":
         abilities_devgui_handle_player_command(cmd, &function_ce4e80a7, arg);
         break;
-      case # "hash_5515835378aa90c8":
+      case #"hash_5515835378aa90c8":
         abilities_devgui_handle_player_command(cmd, &function_4f50aea3, arg);
         break;
-      case # "hash_67d528f29bfc7c97":
+      case #"hash_67d528f29bfc7c97":
         abilities_devgui_handle_player_command(cmd, &function_b4f43681, arg);
         break;
       case 0:
@@ -1713,7 +1714,7 @@ function_b4f43681(var_a5c8eb94) {
     level.spawnselectenabled = 0;
 
     if(level.numlives) {
-      self.pers[# "lives"]++;
+      self.pers[#"lives"]++;
     }
 
     self suicide("<dev string:x312>");
@@ -1733,3 +1734,4 @@ function_b4f43681(var_a5c8eb94) {
     }
   }
 }
+

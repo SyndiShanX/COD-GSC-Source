@@ -37,7 +37,7 @@ main() {
 
 ice_puzzle_1_init() {
   ice_tiles_randomize();
-  a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
+  a_ceiling_tile_brushes = getentarray("ice_ceiling_tile", "script_noteworthy");
   level.unsolved_tiles = a_ceiling_tile_brushes;
 
   foreach(tile in a_ceiling_tile_brushes) {
@@ -47,7 +47,7 @@ ice_puzzle_1_init() {
     tile thread ceiling_tile_process_damage();
   }
 
-  a_ice_ternary_digit_brushes = getEntArray("ice_chamber_digit", "targetname");
+  a_ice_ternary_digit_brushes = getentarray("ice_chamber_digit", "targetname");
 
   foreach(digit in a_ice_ternary_digit_brushes) {
     digit ghost();
@@ -71,25 +71,23 @@ ice_puzzle_1_init() {
 }
 
 ice_puzzle_1_cleanup() {
-  a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
+  a_ceiling_tile_brushes = getentarray("ice_ceiling_tile", "script_noteworthy");
 
-  foreach(tile in a_ceiling_tile_brushes) {
-    tile thread ceiling_tile_flip(0);
-  }
+  foreach(tile in a_ceiling_tile_brushes)
+  tile thread ceiling_tile_flip(0);
 
-  a_ice_ternary_digit_brushes = getEntArray("ice_chamber_digit", "targetname");
+  a_ice_ternary_digit_brushes = getentarray("ice_chamber_digit", "targetname");
   array_delete(a_ice_ternary_digit_brushes);
 }
 
 ice_tiles_randomize() {
-  a_original_tiles = getEntArray("ice_tile_original", "targetname");
+  a_original_tiles = getentarray("ice_tile_original", "targetname");
   a_original_positions = [];
 
-  foreach(e_tile in a_original_tiles) {
-    a_original_positions[a_original_positions.size] = e_tile.origin;
-  }
+  foreach(e_tile in a_original_tiles)
+  a_original_positions[a_original_positions.size] = e_tile.origin;
 
-  a_unused_tiles = getEntArray("ice_ceiling_tile", "script_noteworthy");
+  a_unused_tiles = getentarray("ice_ceiling_tile", "script_noteworthy");
   n_total_tiles = a_unused_tiles.size;
 
   foreach(v_pos in a_original_positions) {
@@ -104,15 +102,14 @@ ice_tiles_randomize() {
 }
 
 reset_tiles() {
-  a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
+  a_ceiling_tile_brushes = getentarray("ice_ceiling_tile", "script_noteworthy");
 
-  foreach(tile in a_ceiling_tile_brushes) {
-    tile thread ceiling_tile_flip(1);
-  }
+  foreach(tile in a_ceiling_tile_brushes)
+  tile thread ceiling_tile_flip(1);
 }
 
 update_ternary_display() {
-  a_ice_ternary_digit_brushes = getEntArray("ice_chamber_digit", "targetname");
+  a_ice_ternary_digit_brushes = getentarray("ice_chamber_digit", "targetname");
   level endon("ice_puzzle_1_complete");
 
   while(true) {
@@ -126,9 +123,8 @@ update_ternary_display() {
         shown_value = level.ternary_digits[newval][digit_slot];
         digit_value = int(digit.script_string);
 
-        if(shown_value == digit_value) {
+        if(shown_value == digit_value)
           digit show();
-        }
       }
     }
   }
@@ -149,14 +145,13 @@ process_gem_shooting() {
   level endon("ice_puzzle_1_complete");
   ice_gem = getent("ice_chamber_gem", "targetname");
   ice_gem.value = -1;
-  ice_gem setCanDamage(1);
+  ice_gem setcandamage(1);
 
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, mod, tagname, modelname, partname, weaponname);
 
-    if(weaponname == "staff_water_zm") {
+    if(weaponname == "staff_water_zm")
       change_ice_gem_value();
-    }
   }
 }
 
@@ -166,22 +161,20 @@ ice_puzzle_1_run() {
 }
 
 ceiling_tile_flip(b_flip_to_tile_side) {
-  if(!isDefined(b_flip_to_tile_side)) {
+  if(!isDefined(b_flip_to_tile_side))
     b_flip_to_tile_side = !self.showing_tile_side;
-  }
 
   if(b_flip_to_tile_side == self.showing_tile_side) {
     return;
   }
   self.showing_tile_side = !self.showing_tile_side;
   self rotateroll(180, 0.5, 0.1, 0.1);
-  self playSound("zmb_squest_ice_tile_flip");
+  self playsound("zmb_squest_ice_tile_flip");
 
-  if(!self.showing_tile_side) {
+  if(!self.showing_tile_side)
     arrayremovevalue(level.unsolved_tiles, self, 0);
-  } else {
+  else
     level.unsolved_tiles[level.unsolved_tiles.size] = self;
-  }
 
   if(level.unsolved_tiles.size == 0 && !flag("ice_puzzle_1_complete")) {
     self thread maps\mp\zm_tomb_vo::say_puzzle_completion_line(4);
@@ -194,8 +187,8 @@ ceiling_tile_flip(b_flip_to_tile_side) {
 ceiling_tile_process_damage() {
   level endon("ice_puzzle_1_complete");
   ice_gem = getent("ice_chamber_gem", "targetname");
-  self setCanDamage(1);
-  ice_gem setCanDamage(1);
+  self setcandamage(1);
+  ice_gem setcandamage(1);
 
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, mod, tagname, modelname, partname, weaponname);
@@ -223,7 +216,8 @@ ceiling_tile_process_damage() {
   }
 }
 
-ice_puzzle_2_init() {}
+ice_puzzle_2_init() {
+}
 
 ice_puzzle_2_run() {
   a_stone_positions = getstructarray("puzzle_stone_water", "targetname");
@@ -240,10 +234,10 @@ ice_stone_run() {
   v_spawn_pos = self.origin - 64 * v_up;
   self.e_model = spawn("script_model", v_spawn_pos);
   self.e_model.angles = self.angles;
-  self.e_model setModel("p6_zm_tm_note_rock_01_anim");
+  self.e_model setmodel("p6_zm_tm_note_rock_01_anim");
   self.e_model moveto(self.origin, 1.0, 0.5, 0.5);
-  playFX(level._effect["digging"], self.origin);
-  self.e_model setCanDamage(1);
+  playfx(level._effect["digging"], self.origin);
+  self.e_model setcandamage(1);
 
   for(has_tried = 0; !flag("ice_puzzle_2_complete"); has_tried = 1) {
     self.e_model waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
@@ -270,7 +264,7 @@ ice_stone_run() {
   }
 
   self.e_model delete();
-  playFX(level._effect["ice_explode"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  playfx(level._effect["ice_explode"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
   playsoundatposition("zmb_squest_ice_stone_shatter", self.origin);
   level.ice_stones_remaining--;
 
@@ -282,16 +276,14 @@ ice_stone_run() {
     level.weather_snow = 5;
     level.weather_rain = 0;
 
-    foreach(player in getplayers()) {
-      player set_weather_to_player();
-    }
+    foreach(player in getplayers())
+    player set_weather_to_player();
 
     wait 5.0;
     level.weather_snow = 0;
     level.weather_rain = 0;
 
-    foreach(player in getplayers()) {
-      player set_weather_to_player();
-    }
+    foreach(player in getplayers())
+    player set_weather_to_player();
   }
 }

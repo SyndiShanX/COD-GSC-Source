@@ -45,22 +45,19 @@ hitwithincendiary(attacker, inflictor, mod) {
     tagarray[tagarray.size] = "J_Ankle_RI";
     tagarray[tagarray.size] = "J_Ankle_LE";
 
-    if(isplayer(self) && self.health > 0) {
+    if(isplayer(self) && self.health > 0)
       self setburn(3.0);
-    }
   }
 
   if(isDefined(level._effect["character_fire_death_torso"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
   }
 
-  if(isai(self)) {
-    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
-  } else {
-    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
-  }
+  if(isai(self))
+    playfxontag(level._effect["character_fire_death_torso"], self, "J_Spine1");
+  else
+    playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 
   if(!isalive(self)) {
     return;
@@ -109,20 +106,17 @@ hitwithnapalmstrike(attacker, inflictor, mod) {
     tagarray[tagarray.size] = "J_Ankle_RI";
     tagarray[tagarray.size] = "J_Ankle_LE";
 
-    if(isplayer(self)) {
+    if(isplayer(self))
       self setburn(3.0);
-    }
   }
 
   if(isDefined(level._effect["character_fire_death_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
   }
 
-  if(isDefined(level._effect["character_fire_death_torso"])) {
-    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
-  }
+  if(isDefined(level._effect["character_fire_death_torso"]))
+    playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 
   if(!isalive(self)) {
     return;
@@ -164,9 +158,8 @@ walkedthroughflames(attacker, inflictor, weapon) {
   }
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 
   if(!isalive(self)) {
@@ -204,9 +197,8 @@ burnedwithflamethrower(attacker, inflictor, weapon) {
     tagarray[1] = "j_knee_ri";
     tagarray[2] = "j_knee_le";
 
-    if(isplayer(self) && self.health > 0) {
+    if(isplayer(self) && self.health > 0)
       self setburn(3.0);
-    }
   }
 
   if(isplayer(self) && isalive(self)) {
@@ -215,9 +207,8 @@ burnedwithflamethrower(attacker, inflictor, weapon) {
   }
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 }
 
@@ -246,9 +237,8 @@ burnedwithdragonsbreath(attacker, inflictor, weapon) {
     tagarray[2] = "j_knee_ri";
     tagarray[3] = "j_knee_le";
 
-    if(isplayer(self) && self.health > 0) {
+    if(isplayer(self) && self.health > 0)
       self setburn(3.0);
-    }
   }
 
   if(isplayer(self) && isalive(self)) {
@@ -258,9 +248,8 @@ burnedwithdragonsbreath(attacker, inflictor, weapon) {
   }
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 }
 
@@ -278,9 +267,8 @@ watchfordeath() {
   self endon("watching for death while on fire");
   self waittill("death");
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     self _stopburning();
-  }
 
   self.burning = undefined;
 }
@@ -314,9 +302,8 @@ finish_burn() {
   tagarray[4] = "j_knee_le";
 
   if(isDefined(level._effect["fx_fire_player_sm_smk_2sec"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagarray[arrayindex]);
-    }
+    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
+      playfxontag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagarray[arrayindex]);
   }
 
   self.burning = undefined;
@@ -346,9 +333,8 @@ donapalmgrounddamage(attacker, inflictor, mod) {
     return;
   }
   if(level.teambased) {
-    if(attacker != self && attacker.team == self.team) {
+    if(attacker != self && attacker.team == self.team)
       return;
-    }
   }
 
   if(isai(self)) {
@@ -366,11 +352,10 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   self endon("stop burn damage");
 
   if(isDefined(level.groundburntime)) {
-    if(getdvar(#"_id_6EC13261") == "") {
+    if(getdvar(#"_id_6EC13261") == "")
       waittime = level.groundburntime;
-    } else {
+    else
       waittime = getdvarfloat(#"_id_6EC13261");
-    }
   } else
     waittime = 100;
 
@@ -378,18 +363,16 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   self.ingroundnapalm = 1;
 
   if(isDefined(level.napalmgrounddamage)) {
-    if(getdvar(#"_id_3FFA6673") == "") {
+    if(getdvar(#"_id_3FFA6673") == "")
       napalmgrounddamage = level.napalmgrounddamage;
-    } else {
+    else
       napalmgrounddamage = getdvarfloat(#"_id_3FFA6673");
-    }
 
     while(isDefined(self) && isDefined(inflictor) && self depthofplayerinwater() < 1 && waittime > 0) {
       self dodamage(level.napalmgrounddamage, self.origin, attacker, inflictor, "none", mod, 0, "napalm_mp");
 
-      if(isplayer(self)) {
+      if(isplayer(self))
         self setburn(1.1);
-      }
 
       wait 1;
       waittime = waittime - 1;
@@ -434,9 +417,8 @@ doflamedamage(attacker, inflictor, weapon, time) {
     return;
   }
 
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     attacker endon("disconnect");
-  }
 
   self endon("death");
   self endon("disconnect");
@@ -447,9 +429,8 @@ doflamedamage(attacker, inflictor, weapon, time) {
 
   while(isDefined(level.flamedamage) && isDefined(self) && self depthofplayerinwater() < 1 && time > 0) {
     if(isDefined(attacker) && isDefined(inflictor) && isDefined(weapon)) {
-      if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weapon, attacker)) {
+      if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weapon, attacker))
         attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-      }
 
       self dodamage(level.flamedamage, self.origin, attacker, inflictor, "none", "MOD_BURNED", 0, weapon);
     } else
@@ -491,19 +472,17 @@ doburningsound() {
   self endon("death");
   fire_sound_ent = spawn("script_origin", self.origin);
   fire_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  fire_sound_ent playLoopSound("mpl_player_burn_loop");
+  fire_sound_ent playloopsound("mpl_player_burn_loop");
   self thread firesounddeath(fire_sound_ent);
   self waittill("StopBurnSound");
 
-  if(isDefined(fire_sound_ent)) {
+  if(isDefined(fire_sound_ent))
     fire_sound_ent stoploopsound(0.5);
-  }
 
   wait 0.5;
 
-  if(isDefined(fire_sound_ent)) {
+  if(isDefined(fire_sound_ent))
     fire_sound_ent delete();
-  }
 
   println("sound stop burning");
 }
@@ -512,9 +491,8 @@ _stopburning() {
   self endon("disconnect");
   self notify("StopBurnSound");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self stopburning();
-  }
 }
 
 firesounddeath(ent) {

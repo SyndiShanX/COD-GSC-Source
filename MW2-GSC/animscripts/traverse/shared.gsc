@@ -19,7 +19,7 @@ advancedTraverse(traverseAnim, normalHeight) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
 
@@ -42,11 +42,10 @@ advancedTraverse(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animHasNotetrack(traverseAnim, "blend")) {
+    if(!animHasNotetrack(traverseAnim, "blend"))
       wait(gravityToBlendTime);
-    } else {
+    else
       self waittillmatch("traverse", "blend");
-    }
   }
 }
 
@@ -58,7 +57,7 @@ teleportThread(verticalOffset) {
   reps = 5;
   offset = (0, 0, verticalOffset / reps);
 
-  for(i = 0; i < reps; i++) {
+  for (i = 0; i < reps; i++) {
     self forceTeleport(self.origin + offset);
     wait .05;
   }
@@ -69,28 +68,24 @@ teleportThreadEx(verticalOffset, delay, frames, animRate) {
   self notify("endTeleportThread");
   self endon("endTeleportThread");
 
-  if((verticalOffset == 0) || (frames <= 0)) {
+  if((verticalOffset == 0) || (frames <= 0))
     return;
-  }
 
-  if(delay > 0) {
+  if(delay > 0)
     wait delay;
-  }
 
   offset = (0, 0, verticalOffset / frames);
 
-  if(isDefined(animRate) && (animRate < 1.0)) {
+  if(isDefined(animRate) && (animRate < 1.0))
     self setFlaggedAnimKnoball("traverseAnim", self.traverseAnim, self.traverseAnimRoot, 1, .2, animRate);
-  }
 
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     self forceTeleport(self.origin + offset);
     wait .05;
   }
 
-  if(isDefined(animRate) && (animRate < 1.0)) {
+  if(isDefined(animRate) && (animRate < 1.0))
     self setFlaggedAnimKnoball("traverseAnim", self.traverseAnim, self.traverseAnimRoot, 1, .2, 1.0);
-  }
 }
 
 DoTraverse(traverseData) {
@@ -120,7 +115,7 @@ DoTraverse(traverseData) {
 
   self.traverseStartZ = self.origin[2];
   if(!animHasNotetrack(traverseAnim, "traverse_align")) {
-    /# println( "^1Warning: animation ", traverseAnim, " has no traverse_align notetrack" );
+    /# println( "^1Warning: animation ", traverseAnim, " has no traverse_align notetrack" ); #/
     self handleTraverseAlignment();
   }
 
@@ -133,11 +128,11 @@ DoTraverse(traverseData) {
   }
 
   if(toCover) {
-    if(isDefined(traverseData["traverseToCoverSound"])) {
+    if(isdefined(traverseData["traverseToCoverSound"])) {
       self thread play_sound_on_entity(traverseData["traverseToCoverSound"]);
     }
   } else {
-    if(isDefined(traverseData["traverseSound"])) {
+    if(isdefined(traverseData["traverseSound"])) {
       self thread play_sound_on_entity(traverseData["traverseSound"]);
     }
   }
@@ -150,15 +145,14 @@ DoTraverse(traverseData) {
   self animscripts\shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
   self traverseMode("gravity");
 
-  if(self.delayedDeath) {
+  if(self.delayedDeath)
     return;
-  }
 
   self.a.nodeath = false;
   if(toCover && isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
     self.a.movement = "stop";
     self teleport(self.node.origin);
-  } else if(isDefined(traverseData["traverseStopsAtEnd"])) {
+  } else if(IsDefined(traverseData["traverseStopsAtEnd"])) {
     self.a.movement = "stop";
   } else {
     self.a.movement = "run";
@@ -172,17 +166,16 @@ DoTraverse(traverseData) {
 }
 
 handleTraverseNotetracks(note) {
-  if(note == "traverse_death") {
+  if(note == "traverse_death")
     return handleTraverseDeathNotetrack();
-  } else if(note == "traverse_align") {
+  else if(note == "traverse_align")
     return handleTraverseAlignment();
-  } else if(note == "traverse_drop") {
+  else if(note == "traverse_drop")
     return handleTraverseDrop();
-  }
 }
 
 handleTraverseDeathNotetrack() {
-  if(isDefined(self.traverseDeathAnim)) {
+  if(isdefined(self.traverseDeathAnim)) {
     deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
     self.deathAnim = deathAnimArray[randomint(deathAnimArray.size)];
     self.traverseDeathIndex++;
@@ -200,7 +193,7 @@ handleTraverseAlignment() {
 
 handleTraverseDrop() {
   startpos = self.origin + (0, 0, 32);
-  trace = bulletTrace(startpos, self.origin + (0, 0, -512), false, undefined);
+  trace = bullettrace(startpos, self.origin + (0, 0, -512), false, undefined);
   endpos = trace["position"];
   dist = distance(startpos, endpos);
   realDropHeight = dist - 32 - 0.5; // 0.5 makes sure we end up above the ground a bit
@@ -213,16 +206,17 @@ handleTraverseDrop() {
   assertEx(animDropHeight >= 0, animDropHeight);
   dropOffset = animDropHeight - realDropHeight;
 
+  /#
   if(getdvarint("scr_traverse_debug")) {
     thread animscripts\utility::debugLine(startpos, endpos, (1, 1, 1), 2 * 20);
     thread animscripts\utility::drawStringTime("drop offset: " + dropOffset, endpos, (1, 1, 1), 2);
   }
+  # /
 
-  if(animDropHeight < realDropHeight) {
-    animRate = animDropHeight / realDropHeight;
-  } else {
-    animRate = 1;
-  }
+    if(animDropHeight < realDropHeight)
+      animRate = animDropHeight / realDropHeight;
+    else
+      animRate = 1;
 
   teleportLength = (traverseAnimLength - traverseAnimPos) / 3.0; // let's make the teleport take 1/3 of the animation time roughly
   numFrames = ceil(teleportLength * 20); // 0.05 per frame. Maximum number of frames we can use
@@ -235,7 +229,7 @@ finishTraverseDrop(finalz) {
   self endon("killanimscript");
 
   finalz += 4.0;
-  while(1) {
+  while (1) {
     if(self.origin[2] < finalz) {
       self traverseMode("gravity");
       break;
@@ -258,7 +252,7 @@ dog_wall_and_window_hop(traverseName, height) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   realHeight = startnode.traverse_height - startnode.origin[2];
@@ -278,7 +272,7 @@ dog_jump_down(frames, rate) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   height = self getNegotiationStartNode().origin[2] - self getNegotiationEndNode().origin[2];
@@ -303,7 +297,7 @@ dog_jump_up(height, frames) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self thread teleportThreadEx(height - 40.0, 0.2, frames);

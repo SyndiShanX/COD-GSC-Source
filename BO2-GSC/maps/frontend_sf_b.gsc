@@ -32,15 +32,14 @@ scene_pre_briefing() {
   iran_safe = rts_map_completed("so_rts_mp_dockside");
   scene_name = "";
 
-  if(india_safe && iran_safe) {
+  if(india_safe && iran_safe)
     scene_name = "sf_b_both_safe";
-  } else if(india_safe && !iran_safe) {
+  else if(india_safe && !iran_safe)
     scene_name = "sf_b_india_safe";
-  } else if(!india_safe && iran_safe) {
+  else if(!india_safe && iran_safe)
     scene_name = "sf_b_iran_safe";
-  } else {
+  else
     scene_name = "sf_b_neither_safe";
-  }
 
   level thread run_scene(scene_name);
   wait_network_frame();
@@ -94,21 +93,20 @@ scene_afghanistan_models() {
   afghani_models = [];
   base = spawn("script_model", (0, 0, 0));
   base.angles = vectorscale((0, 1, 0), 90.0);
-  base setModel("p6_hologram_af_base_map");
+  base setmodel("p6_hologram_af_base_map");
   afghani_models[afghani_models.size] = base;
   base play_fx("fx_dockside_base", base.origin, base.angles, "stop_geo_fx", 1, "tag_origin");
   cougar = spawn("script_model", (0, 0, 0));
   cougar.angles = (0, 0, 0);
-  cougar setModel("p6_hologram_cougar_combined");
+  cougar setmodel("p6_hologram_cougar_combined");
   afghani_models[afghani_models.size] = cougar;
   arrow = spawn("script_model", (0, 0, 0));
   arrow.angles = (0, 0, 0);
-  arrow setModel("p6_hologram_af_path_arrow");
+  arrow setmodel("p6_hologram_af_path_arrow");
   afghani_models[afghani_models.size] = arrow;
 
-  for(i = 0; i < afghani_models.size; i++) {
+  for(i = 0; i < afghani_models.size; i++)
     afghani_models[i] ignorecheapentityflag(1);
-  }
 
   level waittill("afghan_up");
   holo_table_exploder_switch(115);

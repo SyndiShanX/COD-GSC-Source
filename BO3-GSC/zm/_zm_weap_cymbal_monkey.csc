@@ -9,7 +9,7 @@
 #namespace _zm_weap_cymbal_monkey;
 
 function init() {
-  if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
+  if(isdefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
   } else {
     level.cymbal_monkey_model = "wpn_t7_zmb_monkey_bomb_world";

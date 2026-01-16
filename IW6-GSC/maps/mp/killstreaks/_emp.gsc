@@ -25,9 +25,8 @@ onPlayerSpawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self)) {
+    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self))
       self setEMPJammed(true);
-    }
   }
 }
 
@@ -65,9 +64,8 @@ EMP_JamTeams(ownerTeam) {
     if(player.team == ownerTeam) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
-    }
   }
 
   VisionSetNaked("coup_sunblind", 0.1);
@@ -107,9 +105,8 @@ EMP_JamTeams(ownerTeam) {
     if(player.team == ownerTeam) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
-    }
   }
 
   level notify("emp_update");
@@ -131,9 +128,8 @@ EMP_JamTeam(teamName) {
     if(player.team != teamName) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
-    }
 
     player VisionSetNakedForPlayer("coup_sunblind", 0.1);
   }
@@ -161,9 +157,8 @@ EMP_JamTeam(teamName) {
     if(player.team != teamName) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
-    }
   }
 
   level notify("emp_update");
@@ -181,9 +176,8 @@ EMP_JamPlayers(owner) {
     if(player == owner) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
-    }
   }
 
   VisionSetNaked("coup_sunblind", 0.1);
@@ -211,9 +205,8 @@ EMP_JamPlayers(owner) {
     if(player == owner) {
       continue;
     }
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
-    }
   }
 
   level.empPlayer = undefined;
@@ -274,11 +267,10 @@ EMP_TeamTracker() {
       if(player.team == "spectator") {
         continue;
       }
-      if(!level.teamEMPed[player.team] && !player isEMPed()) {
+      if(!level.teamEMPed[player.team] && !player isEMPed())
         player enableJammedEffect(false);
-      } else {
+      else
         player enableJammedEffect(true);
-      }
     }
   }
 }
@@ -296,9 +288,8 @@ EMP_PlayerTracker() {
       if(isDefined(level.empPlayer) && level.empPlayer != player) {
         player enableJammedEffect(true);
       } else {
-        if(!player isEMPed()) {
+        if(!player isEMPed())
           player enableJammedEffect(false);
-        }
       }
     }
   }
@@ -332,13 +323,11 @@ destroyTargets(attacker, teamEMPed, targetList) {
 
   foreach(target in targetList) {
     if(level.teamBased && isDefined(teamEMPed)) {
-      if(isDefined(target.team) && target.team != teamEMPed) {
+      if(isDefined(target.team) && target.team != teamEMPed)
         continue;
-      }
     } else {
-      if(isDefined(target.owner) && target.owner == attacker) {
+      if(isDefined(target.owner) && target.owner == attacker)
         continue;
-      }
     }
 
     target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
@@ -372,13 +361,11 @@ destroyActiveRockets(attacker, teamEMPed) {
 
   foreach(rocket in level.rockets) {
     if(level.teamBased && isDefined(teamEMPed)) {
-      if(isDefined(rocket.team) && rocket.team != teamEMPed) {
+      if(isDefined(rocket.team) && rocket.team != teamEMPed)
         continue;
-      }
     } else {
-      if(isDefined(rocket.owner) && rocket.owner == attacker) {
+      if(isDefined(rocket.owner) && rocket.owner == attacker)
         continue;
-      }
     }
 
     playFX(level.remotemissile_fx["explode"], rocket.origin);
@@ -389,9 +376,8 @@ destroyActiveRockets(attacker, teamEMPed) {
 
 destroyActiveUAVs(attacker, teamEMPed) {
   uavArray = level.uavModels;
-  if(level.teamBased && isDefined(teamEMPed)) {
+  if(level.teamBased && isDefined(teamEMPed))
     uavArray = level.uavModels[teamEMPed];
-  }
 
   destroyTargets(attacker, teamEMPed, uavArray);
 }
@@ -417,14 +403,12 @@ destroyActiveAC130(attacker, teamEMPed) {
   iDFlags = undefined;
 
   if(level.teamBased && isDefined(teamEMPed)) {
-    if(isDefined(level.ac130player) && isDefined(level.ac130player.team) && level.ac130player.team == teamEMPed) {
+    if(isDefined(level.ac130player) && isDefined(level.ac130player.team) && level.ac130player.team == teamEMPed)
       level.ac130.planeModel notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
-    }
   } else {
     if(isDefined(level.ac130player)) {
-      if(!isDefined(level.ac130.owner) || (isDefined(level.ac130.owner) && level.ac130.owner != attacker)) {
+      if(!isDefined(level.ac130.owner) || (isDefined(level.ac130.owner) && level.ac130.owner != attacker))
         level.ac130.planeModel notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
-      }
     }
   }
 }

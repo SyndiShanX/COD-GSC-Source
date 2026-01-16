@@ -35,8 +35,8 @@
 #namespace zm_moon_sq;
 
 function init() {
-  ss_buttons = getEntArray("sq_ss_button", "targetname");
-  for(i = 0; i < ss_buttons.size; i++) {
+  ss_buttons = getentarray("sq_ss_button", "targetname");
+  for (i = 0; i < ss_buttons.size; i++) {
     ss_buttons[i] usetriggerrequirelookat();
     ss_buttons[i] sethintstring("");
     ss_buttons[i] setcursorhint("HINT_NOICON");
@@ -51,7 +51,7 @@ function init() {
   level flag::init("be2");
   level flag::init("ss1");
   level flag::init("soul_swap_done");
-  zm_sidequests::declare_sidequest("sq", &init_sidequest, &sidequest_logic, &complete_sidequest, &generic_stage_start, &generic_stage_complete);
+  zm_sidequests::declare_sidequest("sq", & init_sidequest, & sidequest_logic, & complete_sidequest, & generic_stage_start, & generic_stage_complete);
   zm_moon_sq_ss::init_1();
   zm_moon_sq_ss::init_2();
   zm_moon_sq_osc::init();
@@ -92,12 +92,12 @@ function init_clientfields() {
 function reward() {
   level notify("moon_sidequest_achieved");
   players = getplayers();
-  array::thread_all(players, &give_perk_reward);
+  array::thread_all(players, & give_perk_reward);
 }
 
 function watch_for_respawn() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("spawned_player");
     waittillframeend();
     foreach(perk in level._sq_perk_array) {
@@ -113,19 +113,19 @@ function watch_for_respawn() {
 }
 
 function give_perk_reward() {
-  if(isDefined(self._retain_perks)) {
+  if(isdefined(self._retain_perks)) {
     return;
   }
-  if(!isDefined(level._sq_perk_array)) {
+  if(!isdefined(level._sq_perk_array)) {
     level._sq_perk_array = [];
-    machines = getEntArray("zombie_vending", "targetname");
-    for(i = 0; i < machines.size; i++) {
+    machines = getentarray("zombie_vending", "targetname");
+    for (i = 0; i < machines.size; i++) {
       level._sq_perk_array[level._sq_perk_array.size] = machines[i].script_noteworthy;
     }
   }
-  for(i = 0; i < level._sq_perk_array.size; i++) {
+  for (i = 0; i < level._sq_perk_array.size; i++) {
     if(!self hasperk(level._sq_perk_array[i])) {
-      self playSound("evt_sq_bag_gain_perks");
+      self playsound("evt_sq_bag_gain_perks");
       self zm_perks::give_perk(level._sq_perk_array[i]);
       wait(0.25);
     }
@@ -144,10 +144,10 @@ function init_sidequest() {
   players = getplayers();
   level._all_previous_done = 0;
   level._zombiemode_sidequest_icon_offset = -32;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     entnum = players[i].characterindex;
     println("" + entnum);
-    if(isDefined(players[i].zm_random_char)) {
+    if(isdefined(players[i].zm_random_char)) {
       entnum = players[i].zm_random_char;
     }
     if(entnum == 2) {
@@ -191,17 +191,17 @@ function rocket_test() {
 }
 
 function rocket_raise(player_num) {
-  rockets = getEntArray("moon_rockets", "script_noteworthy");
-  array::thread_all(rockets, &nml_show_hide);
-  for(i = 3; i > 0; i--) {
+  rockets = getentarray("moon_rockets", "script_noteworthy");
+  array::thread_all(rockets, & nml_show_hide);
+  for (i = 3; i > 0; i--) {
     level waittill("rl");
     level clientfield::increment("raise_rockets");
-    rockets[i - 1] playSound("evt_rocket_move_up");
+    rockets[i - 1] playsound("evt_rocket_move_up");
     str_scene = ("p7_fxanim_zmhd_moon_rocket_launch_0" + i) + "_bundle";
     level thread scene::init(str_scene);
   }
   level waittill("rl");
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     rockets[i] thread launch();
   }
 }
@@ -209,7 +209,7 @@ function rocket_raise(player_num) {
 function nml_show_hide() {
   level endon("intermission");
   self endon("death");
-  while(true) {
+  while (true) {
     level flag::wait_till("enter_nml");
     self ghost();
     level flag::wait_till_clear("enter_nml");
@@ -220,8 +220,8 @@ function nml_show_hide() {
 function launch() {
   level clientfield::increment("rocket_launch");
   wait(randomfloatrange(0.1, 1));
-  self playSound("evt_rocket_launch");
-  if(!isDefined(level._n_rockets)) {
+  self playsound("evt_rocket_launch");
+  if(!isdefined(level._n_rockets)) {
     level._n_rockets = 0;
   }
   level._n_rockets++;
@@ -284,7 +284,7 @@ function do_launch() {
 }
 
 function function_7aca917c() {
-  if(isDefined(level.var_1b3f87f7)) {
+  if(isdefined(level.var_1b3f87f7)) {
     level.var_1b3f87f7 delete();
   }
   level.var_1b3f87f7 = createstreamerhint(level.activeplayers[0].origin, 1, 0);
@@ -297,27 +297,27 @@ function play_end_lines_in_order() {
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 7);
   wait(12);
   player = get_specific_player(0);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player thread zm_audio::create_and_play_dialog("eggs", "quest8", 9);
     wait(5);
   }
   player = get_specific_player(1);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player thread zm_audio::create_and_play_dialog("eggs", "quest8", 9);
     wait(5);
   }
   player = get_specific_player(2);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player thread zm_audio::create_and_play_dialog("eggs", "quest8", 9);
     wait(5);
   }
   player = get_specific_player(3);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player thread zm_audio::create_and_play_dialog("eggs", "quest8", 9);
     wait(5);
   }
   player = get_specific_player(3);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player thread zm_audio::create_and_play_dialog("eggs", "quest8", 10);
   }
   level.skit_vox_override = 0;
@@ -325,9 +325,9 @@ function play_end_lines_in_order() {
 
 function get_specific_player(num) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
-    if(isDefined(players[i].zm_random_char)) {
+    if(isdefined(players[i].zm_random_char)) {
       ent_num = players[i].zm_random_char;
     }
     if(ent_num == num) {
@@ -374,9 +374,9 @@ function cassimir() {
 
 function cheat_complete_stage() {
   level endon("reset_sundial");
-  while(true) {
+  while (true) {
     if(getdvarstring("cheat_sq") != "") {
-      if(isDefined(level._last_stage_started)) {
+      if(isdefined(level._last_stage_started)) {
         setdvar("cheat_sq", "");
         zm_sidequests::stage_completed("sq", level._last_stage_started);
       }
@@ -425,14 +425,14 @@ function get_variant_from_entity_num(player_number = 0) {
 
 function sq_flatcard_logic() {
   nml_set = 0;
-  while(true) {
+  while (true) {
     if(level flag::get("enter_nml") && !nml_set) {
-      if(!isDefined(level._dte_done) || (isDefined(level._dte_done) && level._dte_done)) {
+      if(!isdefined(level._dte_done) || (isdefined(level._dte_done) && level._dte_done)) {
         level clientfield::increment("hide_earth");
       }
       nml_set = 1;
     } else if(!level flag::get("enter_nml") && nml_set) {
-      if(!isDefined(level._dte_done)) {
+      if(!isdefined(level._dte_done)) {
         level clientfield::increment("show_earth");
       }
       nml_set = 0;
@@ -442,7 +442,7 @@ function sq_flatcard_logic() {
 }
 
 function sd_init() {
-  zm_spawner::add_custom_zombie_spawn_logic(&function_69090b83);
+  zm_spawner::add_custom_zombie_spawn_logic( & function_69090b83);
   level flag::init("sd_active");
   level flag::wait_till("start_zombie_round_logic");
   level.var_c920d4c5 = struct::get("sd_bowl", "targetname");
@@ -461,7 +461,7 @@ function sd_init() {
 
 function function_7e76fe45(var_2ad32714) {
   self endon("death");
-  while(true) {
+  while (true) {
     var_2ad32714 waittill("microwaved");
     level flag::set(self.targetname);
     var_6be16785 = struct::get(self.targetname + "_final", "targetname");
@@ -477,7 +477,7 @@ function function_4ee03f50() {
   var_5e8fec3f = struct::get_array("sd_start", "script_noteworthy");
   a_flags = [];
   foreach(s_start in var_5e8fec3f) {
-    if(!isDefined(a_flags)) {
+    if(!isdefined(a_flags)) {
       a_flags = [];
     } else if(!isarray(a_flags)) {
       a_flags = array(a_flags);
@@ -492,8 +492,8 @@ function function_4ee03f50() {
   var_8c15cb32.radius = 65;
   var_8c15cb32.height = 72;
   var_8c15cb32.script_float = 7;
-  var_8c15cb32.custom_string = &"ZM_MOON_HACK_SILENT";
-  zm_equip_hacker::register_pooled_hackable_struct(var_8c15cb32, &function_9391498d);
+  var_8c15cb32.custom_string = & "ZM_MOON_HACK_SILENT";
+  zm_equip_hacker::register_pooled_hackable_struct(var_8c15cb32, & function_9391498d);
 }
 
 function function_9391498d(hacker) {
@@ -510,7 +510,7 @@ function function_948d4e7d() {
   var_51aa97ed setscale(var_9f30ae72.script_float);
   var_c1b1cd1c = 2.3 / 30;
   var_fa77a9e7 = 0;
-  while(true) {
+  while (true) {
     level waittill("hash_9b391ed5");
     if(var_fa77a9e7 < 30) {
       var_fa77a9e7++;
@@ -533,7 +533,7 @@ function function_66951281() {
   var_51aa97ed setscale(var_e7c6777b.script_float);
   var_c1b1cd1c = 2 / 15;
   var_fa77a9e7 = 0;
-  while(true) {
+  while (true) {
     level waittill("hash_d7362b52");
     if(var_fa77a9e7 < 15) {
       var_fa77a9e7++;
@@ -554,7 +554,7 @@ function function_69090b83() {
   if(!isplayer(attacker)) {
     return;
   }
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(level flag::get("sd_active")) {
@@ -589,7 +589,7 @@ function function_93878170() {
   var_653beee4 = array("p7_fxanim_zmhd_moon_spacedog_path1_sec1_bundle", "p7_fxanim_zmhd_moon_spacedog_path1_sec2_bundle", "p7_fxanim_zmhd_moon_spacedog_path2_bundle");
   var_efac5d38 = array("p7_fxanim_zmhd_moon_spacedog_path1_sec2_bundle", "p7_fxanim_zmhd_moon_spacedog_path2_bundle");
   wait(1);
-  while(true) {
+  while (true) {
     if(level flag::get("start_hangar_digger") || level flag::get("start_teleporter_digger")) {
       str_scene = array::random(var_efac5d38);
     } else {

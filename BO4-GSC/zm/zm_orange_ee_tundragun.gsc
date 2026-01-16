@@ -11,6 +11,7 @@
 #include scripts\zm\zm_orange_util;
 #include scripts\zm_common\zm_sq;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_orange_ee_tundragun;
 
 init() {
@@ -43,15 +44,16 @@ main() {
     level.var_97da986d.var_5fbb6b48.e_model = e_model;
   }
 
-  zm_sq::register(#"ee_tundragun", # "step_1", # "ee_tundragun_step1", &ee_tundragun_step1_setup, &ee_tundragun_step1_cleanup);
-  zm_sq::register(#"ee_tundragun", # "step_2", # "ee_tundragun_step2", &ee_tundragun_step2_setup, &ee_tundragun_step2_cleanup);
+  zm_sq::register(#"ee_tundragun", #"step_1", #"ee_tundragun_step1", &ee_tundragun_step1_setup, &ee_tundragun_step1_cleanup);
+  zm_sq::register(#"ee_tundragun", #"step_2", #"ee_tundragun_step2", &ee_tundragun_step2_setup, &ee_tundragun_step2_cleanup);
   zm_sq::start(#"ee_tundragun", !zm_utility::is_standard());
 }
 
 ee_tundragun_step1_setup(var_5ea5c94d) {
+
   iprintlnbold("<dev string:x38>");
 
-  level.var_97da986d.a_s_targets = struct::get_array("ee_tundragun_target");
+    level.var_97da986d.a_s_targets = struct::get_array("ee_tundragun_target");
 
   foreach(s_target in level.var_97da986d.a_s_targets) {
     if(isDefined(s_target.model)) {
@@ -69,16 +71,17 @@ ee_tundragun_step1_setup(var_5ea5c94d) {
 }
 
 ee_tundragun_step1_cleanup(var_5ea5c94d, ended_early) {
+
   iprintlnbold("<dev string:x55>");
 
-  if(var_5ea5c94d || ended_early) {
-    level flag::set(#"hash_478e70a97b556206");
-  }
+    if(var_5ea5c94d || ended_early) {
+      level flag::set(#"hash_478e70a97b556206");
+    }
 }
 
 private function_f16c0259() {
   self endon(#"death");
-  level endon(#"end_game", # "hash_478e70a97b556206");
+  level endon(#"end_game", #"hash_478e70a97b556206");
 
   while(true) {
     s_notify = self waittill(#"damage");
@@ -101,12 +104,13 @@ private function_f16c0259() {
 
         iprintlnbold("<dev string:x74>" + self.script_int + 1 + "<dev string:x8c>" + n_time_remaining + "<dev string:xaf>");
 
-        level.var_97da986d.var_6f9b20c6++;
+          level.var_97da986d.var_6f9b20c6++;
 
         if(level.var_97da986d.var_6f9b20c6 === level.var_97da986d.a_s_targets.size) {
+
           iprintlnbold("<dev string:xbb>");
 
-          level notify(#"hash_3dcff814c31d2298");
+            level notify(#"hash_3dcff814c31d2298");
           level flag::set(#"hash_478e70a97b556206");
         }
 
@@ -115,17 +119,17 @@ private function_f16c0259() {
 
       iprintlnbold("<dev string:xed>");
 
-      function_c19f52ea();
+        function_c19f52ea();
     }
   }
 }
 
 private function_213f1c48() {
-  level endon(#"end_game", # "hash_3dcff814c31d2298");
+  level endon(#"end_game", #"hash_3dcff814c31d2298");
 
   iprintlnbold("<dev string:x12c>" + 1.75 + "<dev string:xaf>");
 
-  level flag::clear(#"hash_6a417acc02a28c9d");
+    level flag::clear(#"hash_6a417acc02a28c9d");
   level.var_97da986d.n_start_time = gettime();
 
   while(gettime() < level.var_97da986d.n_start_time + level.var_97da986d.var_7d4c9076) {
@@ -134,7 +138,7 @@ private function_213f1c48() {
 
   iprintlnbold("<dev string:x156>");
 
-  level flag::set(#"hash_6a417acc02a28c9d");
+    level flag::set(#"hash_6a417acc02a28c9d");
   function_c19f52ea();
 }
 
@@ -148,11 +152,12 @@ private function_c19f52ea() {
 }
 
 ee_tundragun_step2_setup(var_5ea5c94d) {
+
   iprintlnbold("<dev string:x195>");
 
   iprintlnbold("<dev string:x1b3>");
 
-  s_weapon_pickup = struct::get("ee_tundragun_weapon");
+    s_weapon_pickup = struct::get("ee_tundragun_weapon");
   level.var_97da986d.s_weapon_pickup = s_weapon_pickup;
   e_weapon = util::spawn_model(s_weapon_pickup.model, s_weapon_pickup.origin, s_weapon_pickup.angles);
   level.var_97da986d.s_weapon_pickup.e_weapon = e_weapon;
@@ -177,11 +182,12 @@ ee_tundragun_step2_setup(var_5ea5c94d) {
 }
 
 ee_tundragun_step2_cleanup(var_5ea5c94d, ended_early) {
+
   iprintlnbold("<dev string:x1de>");
 
-  if(var_5ea5c94d || ended_early) {
-    level flag::set(#"hash_6b5e9a7b23ad25a5");
-  }
+    if(var_5ea5c94d || ended_early) {
+      level flag::set(#"hash_6b5e9a7b23ad25a5");
+    }
 }
 
 private function_37d390f8(e_player, b_get_weapon) {

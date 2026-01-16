@@ -6,6 +6,7 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
+
 #namespace singlelockap_guidance;
 
 autoexec __init__system__() {
@@ -74,8 +75,8 @@ event_handler[missile_fire] function_dc710809(eventstruct) {
     foreach(target in self.multilocklist) {
       if(isDefined(target.aptarget) && target.aplockfinalized) {
         target.aptarget notify(#"stinger_fired_at_me", {
-          #projectile: missile,
-          #weapon: weapon,
+          #projectile: missile, 
+          #weapon: weapon, 
           #attacker: self
         });
       }
@@ -84,7 +85,7 @@ event_handler[missile_fire] function_dc710809(eventstruct) {
 }
 
 aptoggleloop() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 
   for(;;) {
     waitresult = self waittill(#"weapon_change");
@@ -119,7 +120,7 @@ aptoggleloop() {
 }
 
 aplockloop(weapon) {
-  self endon(#"disconnect", # "death", # "ap_off");
+  self endon(#"disconnect", #"death", #"ap_off");
   locklength = self getlockonspeed();
   self.multilocklist = [];
 
@@ -170,7 +171,7 @@ aplockloop(weapon) {
           self weaponlockfinalize(target.aptarget, i);
           self thread seekersound(weapon.lockonseekerlockedsound, weapon.lockonseekerlockedsoundloops, target.apsoundid);
           target.aptarget notify(#"missile_lock", {
-            #attacker: self,
+            #attacker: self, 
             #weapon: weapon
           });
         }
@@ -339,7 +340,7 @@ isstillvalidtarget(weapon, ent) {
 
 seekersound(alias, looping, id) {
   self notify("stop_sound" + id);
-  self endon("stop_sound" + id, # "disconnect", # "death");
+  self endon("stop_sound" + id, #"disconnect", #"death");
 
   if(isDefined(alias)) {
     self playrumbleonentity("stinger_lock_rumble");

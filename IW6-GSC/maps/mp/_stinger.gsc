@@ -16,9 +16,8 @@ InitStingerUsage() {
 }
 
 ResetStingerLocking() {
-  if(!isDefined(self.stingerUseEntered)) {
+  if(!isDefined(self.stingerUseEntered))
     return;
-  }
   self.stingerUseEntered = undefined;
 
   self notify("stop_javelin_locking_feedback");
@@ -43,16 +42,13 @@ ResetStingerLockingOnDeath() {
 StillValidStingerLock(ent) {
   assert(isDefined(self));
 
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
-  if(!(self WorldPointInReticle_Circle(ent.origin, 65, 85))) {
+  if(!(self WorldPointInReticle_Circle(ent.origin, 65, 85)))
     return false;
-  }
 
-  if(self.stingerTarget == level.ac130.planeModel && !isDefined(level.ac130player)) {
+  if(self.stingerTarget == level.ac130.planeModel && !isDefined(level.ac130player))
     return false;
-  }
 
   return true;
 }
@@ -61,13 +57,11 @@ LoopStingerLockingFeedback() {
   self endon("stop_javelin_locking_feedback");
 
   for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingerTarget) && self.stingerTarget == level.chopper.gunner) {
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingerTarget) && self.stingerTarget == level.chopper.gunner)
       level.chopper.gunner playLocalSound("missile_locking");
-    }
 
-    if(isDefined(level.ac130player) && isDefined(self.stingerTarget) && self.stingerTarget == level.ac130.planeModel) {
+    if(isDefined(level.ac130player) && isDefined(self.stingerTarget) && self.stingerTarget == level.ac130.planeModel)
       level.ac130player playLocalSound("missile_locking");
-    }
 
     self playLocalSound("stinger_locking");
     self PlayRumbleOnEntity("ac130_25mm_fire");
@@ -80,13 +74,11 @@ LoopStingerLockedFeedback() {
   self endon("stop_javelin_locked_feedback");
 
   for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingerTarget) && self.stingerTarget == level.chopper.gunner) {
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingerTarget) && self.stingerTarget == level.chopper.gunner)
       level.chopper.gunner playLocalSound("missile_locking");
-    }
 
-    if(isDefined(level.ac130player) && isDefined(self.stingerTarget) && self.stingerTarget == level.ac130.planeModel) {
+    if(isDefined(level.ac130player) && isDefined(self.stingerTarget) && self.stingerTarget == level.ac130.planeModel)
       level.ac130player playLocalSound("missile_locking");
-    }
 
     self playLocalSound("stinger_locked");
     self PlayRumbleOnEntity("ac130_25mm_fire");
@@ -104,34 +96,29 @@ DrawStar(point) {
 LockSightTest(target) {
   eyePos = self getEye();
 
-  if(!isDefined(target)) {
+  if(!isDefined(target))
     return false;
-  }
 
   passed = SightTracePassed(eyePos, target.origin, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   front = target GetPointInBounds(1, 0, 0);
   passed = SightTracePassed(eyePos, front, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   back = target GetPointInBounds(-1, 0, 0);
   passed = SightTracePassed(eyePos, back, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   return false;
 }
 
 StingerDebugDraw(target) {
-  if(GetDVar("missileDebugDraw") != "1") {
+  if(GetDVar("missileDebugDraw") != "1")
     return;
-  }
   if(!isDefined(target)) {
     return;
   }
@@ -151,9 +138,8 @@ SoftSightTest() {
     return true;
   }
 
-  if(self.stingerLostSightlineTime == 0) {
+  if(self.stingerLostSightlineTime == 0)
     self.stingerLostSightlineTime = getTime();
-  }
 
   timePassed = GetTime() - self.stingerLostSightlineTime;
 
@@ -194,9 +180,8 @@ StingerUsageLoop() {
 
     self.stingerUseEntered = true;
 
-    if(!isDefined(self.stingerStage)) {
+    if(!isDefined(self.stingerStage))
       self.stingerStage = 0;
-    }
 
     StingerDebugDraw(self.stingerTarget);
 
@@ -212,9 +197,8 @@ StingerUsageLoop() {
         }
         insideReticle = self WorldPointInReticle_Circle(target.origin, 65, 75);
 
-        if(insideReticle) {
+        if(insideReticle)
           targetsInReticle[targetsInReticle.size] = target;
-        }
       }
       if(targetsInReticle.size == 0) {
         continue;
@@ -243,25 +227,22 @@ StingerUsageLoop() {
       timePassed = getTime() - self.stingerLockStartTime;
 
       if(self _hasPerk("specialty_fasterlockon")) {
-        if(timePassed < (LOCK_LENGTH * 0.5)) {
+        if(timePassed < (LOCK_LENGTH * 0.5))
           continue;
-        }
       } else {
-        if(timePassed < LOCK_LENGTH) {
+        if(timePassed < LOCK_LENGTH)
           continue;
-        }
       }
 
       self notify("stop_javelin_locking_feedback");
       thread LoopStingerLockedFeedback();
 
-      if(checkVehicleModelForLock(self.stingerTarget.model)) {
+      if(checkVehicleModelForLock(self.stingerTarget.model))
         self WeaponLockFinalize(self.stingerTarget);
-      } else if(isPlayer(self.stingerTarget)) {
+      else if(isPlayer(self.stingerTarget))
         self WeaponLockFinalize(self.stingerTarget, (100, 0, 64));
-      } else {
+      else
         self WeaponLockFinalize(self.stingerTarget, (100, 0, -32));
-      }
 
       self.stingerStage = 2;
     }
@@ -286,9 +267,8 @@ checkVehicleModelForLock(model) {
     case "vehicle_ugv_talon_mp":
       return true;
     default:
-      if(model == level.littlebird_model) {
+      if(model == level.littlebird_model)
         return true;
-      }
   };
 
   return false;

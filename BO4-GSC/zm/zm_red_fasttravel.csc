@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_fasttravel;
+
 #namespace zm_red_fasttravel;
 
 init() {
@@ -16,13 +17,13 @@ init() {
   clientfield::register("toplayer", "fountain_to_column", 16000, 2, "int", &function_ec7e76a8, 0, 0);
   clientfield::register("toplayer", "park_to_column", 16000, 2, "int", &function_ec7e76a8, 0, 0);
   clientfield::register("toplayer", "park_to_fountain", 16000, 2, "int", &function_ec7e76a8, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_52693a3ba1bbc7ea", 16000, 1, "counter", &override_fasttravel_end_fx, 0, 0);
-  clientfield::register("world", "" + # "hash_761511e09cb8324e", 16000, 1, "int", &function_e968fd4f, 0, 0);
-  clientfield::register("scriptmover", "" + # "forcestream_crafted_item", 16000, 1, "int", &forcestream_crafted_item, 0, 0);
-  level._effect[# "hash_7844498a1d0272cf"] = # "hash_36a8758df9221bce";
-  level._effect[# "hash_1485000e3492adb9"] = # "hash_240783e54de51f0";
-  level._effect[# "hash_359655df3976b4e0"] = # "hash_4df6f1dbc41bc9c3";
-  level._effect[# "override_fasttravel_end_fx"] = # "hash_50655ac7dc942305";
+  clientfield::register("allplayers", "" + #"hash_52693a3ba1bbc7ea", 16000, 1, "counter", &override_fasttravel_end_fx, 0, 0);
+  clientfield::register("world", "" + #"hash_761511e09cb8324e", 16000, 1, "int", &function_e968fd4f, 0, 0);
+  clientfield::register("scriptmover", "" + #"forcestream_crafted_item", 16000, 1, "int", &forcestream_crafted_item, 0, 0);
+  level._effect[#"hash_7844498a1d0272cf"] = #"hash_36a8758df9221bce";
+  level._effect[#"hash_1485000e3492adb9"] = #"hash_240783e54de51f0";
+  level._effect[#"hash_359655df3976b4e0"] = #"hash_4df6f1dbc41bc9c3";
+  level._effect[#"override_fasttravel_end_fx"] = #"hash_50655ac7dc942305";
 }
 
 main() {
@@ -82,17 +83,17 @@ function_ec7e76a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 0:
-      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_359655df3976b4e0"], var_1b5be828, "tag_origin");
+      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"hash_359655df3976b4e0"], var_1b5be828, "tag_origin");
       break;
     case 1:
-      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_7844498a1d0272cf"], var_1b5be828, "tag_origin");
+      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"hash_7844498a1d0272cf"], var_1b5be828, "tag_origin");
       var_1b5be828.var_b3673abf = var_1b5be828 playLoopSound(#"hash_67c353461c5e3f2c");
-      var_1b5be828 playSound(localclientnum, # "hash_2cc8c6c1b8e764b9");
+      var_1b5be828 playSound(localclientnum, #"hash_2cc8c6c1b8e764b9");
       break;
     case 2:
-      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_1485000e3492adb9"], var_1b5be828, "tag_origin");
+      var_1b5be828.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"hash_1485000e3492adb9"], var_1b5be828, "tag_origin");
       var_1b5be828.var_b3673abf = var_1b5be828 playLoopSound(#"hash_27fed7313de44e58");
-      var_1b5be828 playSound(localclientnum, # "hash_3cf81bf9f70bc77d");
+      var_1b5be828 playSound(localclientnum, #"hash_3cf81bf9f70bc77d");
       break;
   }
 }

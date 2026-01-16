@@ -17,14 +17,14 @@ init() {
 
   level thread onPlayerConnect();
 
-  for(;;) {
+  for (;;) {
     updateFriendIconSettings();
     wait 5;
   }
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -35,7 +35,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     self thread showFriendIcon();
@@ -45,7 +45,7 @@ onPlayerSpawned() {
 onPlayerKilled() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self.headicon = "";
   }
@@ -74,7 +74,7 @@ updateFriendIconSettings() {
 updateFriendIcons() {
   // for all living players, show the appropriate headicon
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
 
     if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
@@ -88,12 +88,11 @@ updateFriendIcons() {
         }
       } else {
         players = level.players;
-        for(i = 0; i < players.size; i++) {
+        for (i = 0; i < players.size; i++) {
           player = players[i];
 
-          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
+          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing")
             player.headicon = "";
-          }
         }
       }
     }

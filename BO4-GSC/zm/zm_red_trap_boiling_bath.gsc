@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
+
 #namespace zm_red_trap_boiling_bath;
 
 init() {
@@ -68,16 +69,16 @@ trap_damage(t_trap) {
   level thread trap_damage_cooldown(self);
 
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       n_percent = 35;
       break;
-    case # "catalyst":
+    case #"catalyst":
       n_percent = 35;
       break;
-    case # "gegenees":
+    case #"gegenees":
       n_percent = 5;
       break;
-    case # "blight_father":
+    case #"blight_father":
       n_percent = 5;
       break;
     default:
@@ -94,11 +95,11 @@ trap_damage(t_trap) {
 
   if(n_damage >= self.health) {
     level notify(#"trap_kill", {
-      #e_victim: self,
+      #e_victim: self, 
       #e_trap: t_trap
     });
 
-    if(self.archetype === # "zombie") {
+    if(self.archetype === #"zombie") {
       level.var_c33299e2++;
       level function_922c05f();
       self clientfield::set("boiling_trap_death_fx", 1);
@@ -172,7 +173,7 @@ function_922c05f() {
 function_3a067395(str_exploder) {
   self notify("5a3476fe6548df85");
   self endon("5a3476fe6548df85");
-  level endon(#"end_game", # "hash_e2465be027280d7");
+  level endon(#"end_game", #"hash_e2465be027280d7");
   level waittill(#"hash_36bc97f51bb2bc8");
 
   if(str_exploder == "fxexp_trap_bath_bloody_lvl1") {

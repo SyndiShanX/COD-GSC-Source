@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_weapons;
+
 #namespace lightning_chain;
 
 autoexec __init__system__() {
@@ -44,7 +45,7 @@ lc_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
         self.var_b3a6c3f7 = self playLoopSound(#"hash_536f193a75e9cec9", 1);
       }
 
-      self playSound(0, # "hash_63d588d1f28ecdc1");
+      self playSound(0, #"hash_63d588d1f28ecdc1");
     }
 
     return;
@@ -70,7 +71,7 @@ lc_play_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     str_tag = "J_Spine1";
   }
 
-  if(!(self.archetype === # "zombie")) {
+  if(!(self.archetype === #"zombie")) {
     tag = "tag_origin";
   }
 

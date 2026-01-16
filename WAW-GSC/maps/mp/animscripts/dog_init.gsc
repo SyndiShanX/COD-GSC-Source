@@ -41,9 +41,8 @@ main() {
   self setTalkToSpecies("dog");
   level.lastDogMeleePlayerTime = 0;
   level.dogMeleePlayerCounter = 0;
-  if(!isDefined(level.dog_hits_before_kill)) {
+  if(!isDefined(level.dog_hits_before_kill))
     level.dog_hits_before_kill = 1;
-  }
 }
 
 firstInit() {
@@ -57,7 +56,7 @@ set_anim_playback_rate() {
 
 setMeleeAttackDist() {
   self endon("death");
-  while(1) {
+  while (1) {
     if(isDefined(self.enemy)) {
       if(isplayer(self.enemy)) {
         stance = self.enemy getStance();

@@ -30,12 +30,11 @@ main() {
 
 setMeleeAttackDist() {
   self endon("death");
-  while(1) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+  while (1) {
+    if(isDefined(self.enemy) && isplayer(self.enemy))
       self.meleeAttackDist = anim.dogAttackPlayerDist;
-    } else {
+    else
       self.meleeAttackDist = anim.dogAttackAIDist;
-    }
     self waittill("enemy");
   }
 }
@@ -81,7 +80,7 @@ initDogAnimations() {
   level._effect["deathfx_bloodpool"] = loadfx("impacts/fx_deathfx_dogbite");
   slices = 5;
   array = [];
-  for(i = 0; i <= slices; i++) {
+  for (i = 0; i <= slices; i++) {
     array[array.size] = i / slices;
   }
   level.dog_melee_index = 0;

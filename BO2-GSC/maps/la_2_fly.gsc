@@ -57,9 +57,8 @@ f35_dogfights() {
   level thread queue_checkpoint_save();
   level.f35 notify("update_plane_damage_state");
 
-  if(level.skipto_point != "f35_dogfights") {
+  if(level.skipto_point != "f35_dogfights")
     trigger_wait("trig_dogfights_start", "targetname");
-  }
 
   level notify("end_ambient_drones");
   playsoundatposition("evt_pack_flyby", (-2213, 5513, 2346));
@@ -67,7 +66,7 @@ f35_dogfights() {
   setculldist(0);
   level clientnotify("set_jet_fog_banks");
   level.player setclientdvar("cg_tracerSpeed", 25000);
-  level.player playSound("evt_air_to_air");
+  level.player playsound("evt_air_to_air");
   setmusicstate("LA_2_DOGFIGHT");
   level thread maps\la_2_anim::vo_ground_air_transition();
   level thread dogfight_event_logic();
@@ -135,7 +134,7 @@ _blast_off_sequence(n_time) {
 mark_targetted_enemies_as_targets() {
   while(!flag("dogfight_done")) {
     a_closest_drones = get_array_of_closest(level.player.origin, level.aerial_vehicles.axis, undefined, 10, 35000);
-    forward = anglesToForward(level.player getplayerangles());
+    forward = anglestoforward(level.player getplayerangles());
     bestdot = -999;
     chosenindex = -1;
     fov = getdvarfloat(#"cg_fov");
@@ -178,9 +177,8 @@ dogfights_monitor_warning_distance() {
     touching = 0;
 
     foreach(trigger in a_warning_triggers) {
-      if(level.player istouching(trigger)) {
+      if(level.player istouching(trigger))
         touching = 1;
-      }
     }
 
     if(touching) {
@@ -207,19 +205,16 @@ _dogfights_warning_distance_check() {
     e_triggered.dogfight_warning = 1;
     n_time = gettime();
 
-    if(!isDefined(e_triggered.dogfight_warning_time_last)) {
+    if(!isDefined(e_triggered.dogfight_warning_time_last))
       e_triggered.dogfight_warning_time_last = 0;
-    }
 
     b_should_warn = 0;
 
-    if(n_time - e_triggered.dogfight_warning_time_last > n_warning_frequency_ms) {
+    if(n_time - e_triggered.dogfight_warning_time_last > n_warning_frequency_ms)
       b_should_warn = 1;
-    }
 
-    if(b_should_warn) {
+    if(b_should_warn)
       e_triggered.dogfight_warning_time_last = n_time;
-    }
 
     n_wait_time = randomfloatrange(0.8, 1.5);
     wait(n_wait_time);
@@ -242,7 +237,7 @@ _dogfights_failure_distance_check() {
     if(isplayer(e_triggered) && !isgodmode(e_triggered)) {
       level notify("player_failed");
       screen_message_delete();
-      setdvar("ui_deadquote", &"LA_SHARED_LEFT_COMBAT");
+      setdvar("ui_deadquote", & "LA_SHARED_LEFT_COMBAT");
       missionfailed();
     }
   }
@@ -394,7 +389,7 @@ spawn_eject_friendly_follow_plane() {
   level thread spawn_convoy_f35_allies("start_flyby_for_eject", 1, 4, undefined, 1, 0);
   level thread spawn_convoy_strafing_wave("start_flyby_for_eject", 4, 4);
   wait 1;
-  a_enemy_planes = getEntArray("convoy_strafing_plane", "targetname");
+  a_enemy_planes = getentarray("convoy_strafing_plane", "targetname");
 
   foreach(vh_plane in a_enemy_planes) {
     vh_plane veh_magic_bullet_shield(1);
@@ -448,7 +443,7 @@ reinforce_wave() {
 spawn_end_helis() {
   trigger_use("trig_end_helis");
   wait 0.15;
-  helis = getEntArray("end_heli", "targetname");
+  helis = getentarray("end_heli", "targetname");
 }
 
 wait_until_convoy_can_move(str_structs_name) {
@@ -460,9 +455,8 @@ wait_until_convoy_can_move(str_structs_name) {
     can_see_convoy = level.player is_player_looking_at(a_vehicles[0].origin, 0.7, 0);
     can_see_moveto = level.player is_player_looking_at(a_moveto_structs[0].origin, 0.7, 0);
 
-    if(!can_see_convoy && !can_see_moveto) {
+    if(!can_see_convoy && !can_see_moveto)
       can_move = 1;
-    }
 
     wait 0.25;
   }
@@ -478,16 +472,16 @@ dogfights_manage_wave_count() {
   }
 }
 
-pip_dogfights_1() {}
+pip_dogfights_1() {
+}
 
 _setup_deathblossom_offsets(str_temp_planes, str_veh_pathnode) {
   level.a_death_blossom_offsets = [];
-  a_planes = getEntArray(str_temp_planes, "targetname");
+  a_planes = getentarray(str_temp_planes, "targetname");
   veh_node = getvehiclenode(str_veh_pathnode, "targetname");
 
-  foreach(e_plane in a_planes) {
-    level.a_death_blossom_offsets[level.a_death_blossom_offsets.size] = e_plane.origin - veh_node.origin;
-  }
+  foreach(e_plane in a_planes)
+  level.a_death_blossom_offsets[level.a_death_blossom_offsets.size] = e_plane.origin - veh_node.origin;
 
   array_delete(a_planes);
 }
@@ -546,7 +540,7 @@ play_specialized_shot_audio() {
   level.player waittill("missile_fire", missile);
   clientnotify("gnses");
   setmusicstate("LA_2_END");
-  level.player playSound("wpn_f35_rocket_fire_green");
+  level.player playsound("wpn_f35_rocket_fire_green");
 }
 
 waitfor_leadplane_death(plane, array) {
@@ -563,11 +557,10 @@ waitfor_leadplane_death(plane, array) {
 spawn_player_strafing_wave(n_scripted_count) {
   level endon("dogfight_done");
 
-  if(isDefined(n_scripted_count)) {
+  if(isDefined(n_scripted_count))
     n_flyby_count = n_scripted_count;
-  } else {
+  else
     n_flyby_count = 2;
-  }
 
   flag_clear("force_flybys_available");
   flag_set("strafing_run_active");
@@ -587,17 +580,15 @@ spawn_player_strafing_wave(n_scripted_count) {
     vh_plane thread dogfight_countermeasures_think();
     vh_plane thread _dogfight_speed_monitor("player", i - 1);
 
-    while(!vh_plane dogfight_player_strafe(vh_lead_plane, i - 1)) {
+    while(!vh_plane dogfight_player_strafe(vh_lead_plane, i - 1))
       wait 0.05;
-    }
 
     vh_plane thread _dogfight_fire_on_command("player");
     vh_plane _setup_plane_firing_by_type();
     vh_plane thread _set_strafing_run_objective_on_plane(i);
 
-    if(!isDefined(vh_lead_plane)) {
+    if(!isDefined(vh_lead_plane))
       vh_lead_plane = vh_plane;
-    }
 
     a_planes[a_planes.size] = vh_plane;
     wait 0.25;
@@ -618,9 +609,8 @@ _pulse_hud_circle() {
     luinotifyevent(&"hud_missile_incoming_dist", 2, int(n_current / 12), int(1000 / 12));
     n_current = n_current - 40;
 
-    if(n_current <= 100) {
+    if(n_current <= 100)
       n_current = 1000;
-    }
 
     wait 0.05;
   }
@@ -629,20 +619,18 @@ _pulse_hud_circle() {
 spawn_convoy_strafing_wave(initial_path, n_count, n_wave_num) {
   level endon("dogfight_done");
 
-  if(!isDefined(n_count)) {
+  if(!isDefined(n_count))
     n_flyby_count = 2;
-  } else {
+  else
     n_flyby_count = n_count;
-  }
 
   flag_clear("force_flybys_available");
   flag_set("strafing_run_active");
 
-  if(!isDefined(level.a_convoy_planes)) {
+  if(!isDefined(level.a_convoy_planes))
     level.a_convoy_planes = [];
-  } else {
+  else
     arrayremovevalue(level.a_convoy_planes, undefined);
-  }
 
   vh_lead_plane = undefined;
   level thread convoy_strafing_exploders(n_wave_num);
@@ -664,27 +652,23 @@ spawn_convoy_strafing_wave(initial_path, n_count, n_wave_num) {
     vh_plane thread f35_target_death_watcher();
     vh_plane.is_convoy_plane = 1;
 
-    if(n_wave_num == 2 || n_wave_num == 3) {
+    if(n_wave_num == 2 || n_wave_num == 3)
       vh_plane thread dogfight_drones_weapons_think();
-    }
 
-    if(!isDefined(vh_lead_plane)) {
+    if(!isDefined(vh_lead_plane))
       vh_lead_plane = vh_plane;
-    }
 
     if(n_wave_num == 3) {
-      if(i == 0 || i == 2 || i == 4 || i == 6) {
+      if(i == 0 || i == 2 || i == 4 || i == 6)
         vh_plane.wave_3_split = 1;
-      }
     }
 
     level.a_convoy_planes[level.a_convoy_planes.size] = vh_plane;
     wait 0.25;
   }
 
-  if(n_wave_num == 3) {
+  if(n_wave_num == 3)
     level thread last_wave_vo();
-  }
 
   level notify("drone_spawn_done");
   level thread wave_speed_monitor(level.a_convoy_planes);
@@ -699,11 +683,10 @@ last_wave_vo() {
     array_wait_any(a_drones, "death");
     a_drones = remove_dead_from_array(a_drones);
 
-    if(a_drones.size == 4) {
+    if(a_drones.size == 4)
       level.player thread queue_dialog("f38c_warning_structural_2");
-    } else if(a_drones.size == 1) {
+    else if(a_drones.size == 1)
       level.player thread queue_dialog("sect_she_s_coming_apart_0");
-    }
   }
 }
 
@@ -711,13 +694,12 @@ convoy_strafing_exploders(n_wave) {
   level endon("drone_wave_complete");
   level endon("dogfights_done");
 
-  if(n_wave == 1) {
+  if(n_wave == 1)
     n_exploder = 510;
-  } else if(n_wave == 2) {
+  else if(n_wave == 2)
     n_exploder = 520;
-  } else if(n_wave == 3) {
+  else if(n_wave == 3)
     n_exploder = 530;
-  }
 
   while(true) {
     level waittill("missile_fired_at_convoy");
@@ -733,15 +715,13 @@ convoy_strafing_fail_watcher() {
   n_random_spoken = 0;
   n_convoy_health = level.convoy.vehicles.size * 2;
 
-  if(n_convoy_health > 5) {
+  if(n_convoy_health > 5)
     n_convoy_health = 5;
-  }
 
-  if(flag("harper_dead")) {
+  if(flag("harper_dead"))
     str_dialog_array = array("samu_we_re_taking_damage_0", "samu_dammit_we_re_under_0", "samu_keep_them_off_us_0", "samu_we_need_you_with_the_0");
-  } else {
+  else
     str_dialog_array = array("harp_section_those_dron_0", "take_the_heat_off_009", "the_drones_are_tar_051", "harp_where_are_you_secti_0", "keep_them_off_us_015");
-  }
 
   str_dialog_array = array_randomize(str_dialog_array);
 
@@ -752,9 +732,8 @@ convoy_strafing_fail_watcher() {
     if(level.n_safe_strafes) {
       level.n_safe_strafes--;
 
-      if(str_dialog_array.size <= n_random_spoken) {
+      if(str_dialog_array.size <= n_random_spoken)
         n_random_spoken = 0;
-      }
 
       vh_van say_dialog(str_dialog_array[n_random_spoken]);
       n_random_spoken++;
@@ -796,7 +775,7 @@ convoy_strafing_fail_watcher() {
 
 convoy_strafing_kill_cougar() {
   vh_leader = convoy_get_leader();
-  e_attacker = getEntArray("convoy_strafing_plane", "targetname")[0];
+  e_attacker = getentarray("convoy_strafing_plane", "targetname")[0];
   vh_leader.takedamage = 1;
   vh_leader.overridevehicledamage = undefined;
   vh_leader do_vehicle_damage(vh_leader.armor, e_attacker);
@@ -810,32 +789,29 @@ convoy_strafe_pip(str_pip, str_vo) {
 }
 
 spawn_convoy_f35_allies(initial_path, n_count, n_wave_num, b_blah, b_follow_obj, b_remove_in_proximity) {
-  if(!isDefined(b_follow_obj)) {
+  if(!isDefined(b_follow_obj))
     b_follow_obj = 1;
-  }
 
-  if(!isDefined(b_remove_in_proximity)) {
+  if(!isDefined(b_remove_in_proximity))
     b_remove_in_proximity = 1;
-  }
 
-  if(!isDefined(b_blah)) {
+  if(!isDefined(b_blah))
     level waittill("drone_spawn_done");
-  } else if(!isDefined(level.drone_targets)) {
+  else if(!isDefined(level.drone_targets)) {
     level.drone_targets = [];
     level.drone_targets[0] = level.player;
   }
 
   f35_allies = [];
 
-  if(!isDefined(level.a_air_to_air_offsets)) {
+  if(!isDefined(level.a_air_to_air_offsets))
     define_air_to_air_offsets();
-  }
 
   nd_best_start = getvehiclenode(initial_path, "targetname");
 
   for(i = 0; i < n_count; i++) {
     vh_plane = plane_spawn("f35_fast_la2");
-    vh_plane setModel("veh_t6_air_fa38_x2");
+    vh_plane setmodel("veh_t6_air_fa38_x2");
     vh_plane.targetname = "convoy_f35_ally_" + n_wave_num;
     vh_plane.script_noteworthy = "friendly_f35";
     vh_plane.n_wave_num = n_wave_num;
@@ -846,13 +822,11 @@ spawn_convoy_f35_allies(initial_path, n_count, n_wave_num, b_blah, b_follow_obj,
     vh_plane thread _dogfight_ally_speed_monitor();
     vh_plane.is_convoy_plane = 1;
 
-    if(b_follow_obj) {
+    if(b_follow_obj)
       vh_plane thread _dogfight_follow_ally(b_remove_in_proximity);
-    }
 
-    if(!isDefined(b_blah)) {
+    if(!isDefined(b_blah))
       vh_plane thread dogfight_allies_weapons_think();
-    }
 
     vh_plane.transfer_route = 1;
     vh_plane thread _plane_drive_highway_internal();
@@ -866,9 +840,8 @@ spawn_convoy_f35_allies(initial_path, n_count, n_wave_num, b_blah, b_follow_obj,
     }
 
     if(n_wave_num == 3) {
-      if(i == 1 || i == 3) {
+      if(i == 1 || i == 3)
         vh_plane.wave_3_split = 1;
-      }
     }
 
     wait 0.25;
@@ -892,9 +865,8 @@ spawn_attack_drones_manager() {
   while(true) {
     level.convoy.vh_van thread say_dialog("harp_dammit_section_the_0");
 
-    for(i = 0; i < 1; i++) {
+    for(i = 0; i < 1; i++)
       drones[drones.size] = spawn_attacking_drone(i);
-    }
 
     array_wait(drones, "death");
     wait 25;
@@ -924,9 +896,8 @@ attacking_drone_think(id) {
     ang_vel_pct = abs(player_ang_vel[1]) / 60;
     ang_vel_scale = ang_vel_pct * 3;
 
-    if(level.f35.boosting) {
+    if(level.f35.boosting)
       ang_vel_scale = ang_vel_scale * 3;
-    }
 
     attack_time = attack_time + 0.05 * ang_vel_scale;
     attack_dist = -3000;
@@ -938,7 +909,7 @@ attacking_drone_think(id) {
       level.f35.dot_active = 0;
     }
 
-    self setvehgoalpos(level.f35.origin + anglesToForward(level.f35.angles) * attack_dist + anglestoright(level.f35.angles) * level.attack_drone_offsets[id][1]);
+    self setvehgoalpos(level.f35.origin + anglestoforward(level.f35.angles) * attack_dist + anglestoright(level.f35.angles) * level.attack_drone_offsets[id][1]);
     wait 0.05;
   }
 }
@@ -977,9 +948,9 @@ attack_drone_fake_dot() {
   while(true) {
     fire_time = fire_time + dt;
 
-    if(fire_time < 2) {
+    if(fire_time < 2)
       level.f35 dodamage(5, self.origin, self);
-    } else {
+    else {
       wait 2;
       fire_time = 0;
     }
@@ -991,22 +962,19 @@ attack_drone_fake_dot() {
 f38_delete_offscreen() {
   self endon("death");
 
-  while(level.player is_player_looking_at(self.origin, 0.7, 0)) {
+  while(level.player is_player_looking_at(self.origin, 0.7, 0))
     wait 0.05;
-  }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 _dogfight_follow_ally(b_remove_in_proximity) {
-  if(!isDefined(b_remove_in_proximity)) {
+  if(!isDefined(b_remove_in_proximity))
     b_remove_in_proximity = 1;
-  }
 
   maps\_objectives::set_objective(level.obj_follow, self, "follow");
   n_remove_follow_dist = 100000000;
@@ -1018,9 +986,8 @@ _dogfight_follow_ally(b_remove_in_proximity) {
     while(isalive(self) && isDefined(self) && !is_player_near) {
       n_dist = distancesquared(self.origin, level.f35.origin);
 
-      if(n_dist < n_remove_follow_dist) {
+      if(n_dist < n_remove_follow_dist)
         is_player_near = 1;
-      }
 
       wait 0.05;
     }
@@ -1045,9 +1012,8 @@ f35_target_death_watcher() {
 _plane_drive_highway_internal(initial_path) {
   self endon("death");
 
-  if(isDefined(initial_path)) {
+  if(isDefined(initial_path))
     self thread go_path(initial_path);
-  }
 
   self thread _plane_respect_path_width();
 
@@ -1060,18 +1026,16 @@ _plane_drive_highway_internal(initial_path) {
       switch_node_name = level.highway_routes[loop_id][self.transfer_route];
       self.transfer_route++;
 
-      if(self.transfer_route >= level.highway_routes[loop_id].size) {
+      if(self.transfer_route >= level.highway_routes[loop_id].size)
         self.transfer_route = 0;
-      }
     } else if(switch_node_name == "attack_path") {
       if(self.n_wave_num == 3) {
         continue;
       }
       switch_node_name = "wave_" + self.n_wave_num + "_attack_path";
     } else if(switch_node_name == "wave_3_split_path") {
-      if(!isDefined(self.wave_3_split)) {
+      if(!isDefined(self.wave_3_split))
         continue;
-      }
     }
 
     self.switchnode = getvehiclenode(switch_node_name, "targetname");
@@ -1122,11 +1086,10 @@ _plane_respect_path_width() {
         delta = clamp(delta, -1000, 1000);
         new_offset_y = new_offset_y + delta * 0.05;
 
-        if(self.default_path_fixed_offset[1] < 0 && new_offset_y < self.default_path_fixed_offset[1]) {
+        if(self.default_path_fixed_offset[1] < 0 && new_offset_y < self.default_path_fixed_offset[1])
           new_offset_y = self.default_path_fixed_offset[1];
-        } else if(self.default_path_fixed_offset[1] > 0 && new_offset_y > self.default_path_fixed_offset[1]) {
+        else if(self.default_path_fixed_offset[1] > 0 && new_offset_y > self.default_path_fixed_offset[1])
           new_offset_y = self.default_path_fixed_offset[1];
-        }
 
         new_offset_y = clamp(new_offset_y, self.pathwidth * -1, self.pathwidth);
         self pathfixedoffset((fixed_offset[0], new_offset_y, fixed_offset[2]));
@@ -1143,9 +1106,8 @@ plane_drive_highway(initial_path, vh_lead_plane, n_follower) {
     return;
   }
 
-  if(isDefined(initial_path)) {
+  if(isDefined(initial_path))
     nd_best_start = getvehiclenode(initial_path, "targetname");
-  }
 
   self.default_path_variable_offset = vectorscale((1, 1, 1), 2000.0);
   self pathvariableoffset(self.default_path_variable_offset, randomfloatrange(3, 5));
@@ -1216,7 +1178,7 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
     return false;
   }
 
-  v_forward = anglesToForward((0, level.f35.angles[1], level.f35.angles[2]));
+  v_forward = anglestoforward((0, level.f35.angles[1], level.f35.angles[2]));
   nd_start_path = getvehiclenode("start_flyover_player_spline", "targetname");
   nd_start_path.origin = level.f35.origin + vectorscale((0, 0, 1), 360.0);
   nd_next_path = getvehiclenode(nd_start_path.target, "targetname");
@@ -1226,32 +1188,28 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
   a_dogfight_valid_nodes = [];
 
   foreach(node in a_dogfight_nodes) {
-    if(vectordot(node.script_dir, v_forward) > 0.6) {
+    if(vectordot(node.script_dir, v_forward) > 0.6)
       a_dogfight_valid_nodes[a_dogfight_valid_nodes.size] = node;
-    }
   }
 
   a_dogfight_nodes_player_can_see = [];
 
   foreach(node in a_dogfight_valid_nodes) {
-    if(level.player is_looking_at(node.origin, 0.7, 1)) {
+    if(level.player is_looking_at(node.origin, 0.7, 1))
       a_dogfight_nodes_player_can_see[a_dogfight_nodes_player_can_see.size] = node;
-    }
   }
 
   a_dogfight_valid_nodes = a_dogfight_nodes_player_can_see;
   a_nodes_too_close = get_array_of_closest(front_ref_point.origin, a_dogfight_valid_nodes, undefined, undefined, 12000);
 
-  for(i = 0; i < a_nodes_too_close.size; i++) {
+  for(i = 0; i < a_nodes_too_close.size; i++)
     arrayremovevalue(a_dogfight_valid_nodes, a_nodes_too_close[i]);
-  }
 
   if(a_dogfight_valid_nodes.size == 0) {
     wait 1.0;
 
-    if(1) {
+    if(1)
       return false;
-    }
 
     trig_dogfight = getent("trig_dogfight_spawn_control", "targetname");
 
@@ -1268,17 +1226,15 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
     v_forward = v_forward * -1;
 
     foreach(node in a_dogfight_nodes) {
-      if(vectordot(node.script_dir, v_forward) > 0.7) {
+      if(vectordot(node.script_dir, v_forward) > 0.7)
         a_dogfight_valid_nodes[a_dogfight_valid_nodes.size] = node;
-      }
     }
 
     backwards = 1;
     a_nodes_too_close = get_array_of_closest(level.f35.origin, a_dogfight_valid_nodes, undefined, undefined, 12000);
 
-    for(i = 0; i < a_nodes_too_close.size; i++) {
+    for(i = 0; i < a_nodes_too_close.size; i++)
       arrayremovevalue(a_dogfight_valid_nodes, a_nodes_too_close[i]);
-    }
   } else
     backwards = 0;
 
@@ -1319,7 +1275,7 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
   self pathvariableoffset(vectorscale((1, 1, 1), 500.0), 1);
   self thread go_path(nd_start_path);
   self setswitchnode(nd_next, nd_join_path);
-  self playSound("evt_flyby_avenger_apex_spawn");
+  self playsound("evt_flyby_avenger_apex_spawn");
   return true;
 }
 
@@ -1329,18 +1285,18 @@ dogfight_convoy_strafe(initial_path, vh_lead_plane, n_follower) {
     return;
   }
 
-  if(isDefined(initial_path)) {
+  if(isDefined(initial_path))
     nd_best_start = getvehiclenode(initial_path, "targetname");
-  } else {
+  else {
     a_last_strafed_nodes = [];
     a_convoy_strafe_nodes = getvehiclenodearray("convoy_start_strafe_nodes", "script_noteworthy");
     a_convoy_strafe_nodes = array_randomize(a_convoy_strafe_nodes);
 
     while(!isDefined(nd_best_start)) {
       for(i = 0; i < a_convoy_strafe_nodes.size; i++) {
-        if(level.player is_looking_at(a_convoy_strafe_nodes[i].origin, 0.1, 1)) {
+        if(level.player is_looking_at(a_convoy_strafe_nodes[i].origin, 0.1, 1))
           continue;
-        } else {
+        else {
           nd_best_start = a_convoy_strafe_nodes[i];
           break;
         }
@@ -1368,11 +1324,10 @@ dogfight_convoy_strafe_follow(nd_start_path, num_offset) {
 dogfight_player_strafe_follow(vh_leader, num_offset, vec_variation) {
   self endon("death");
   self thread go_path(vh_leader.chosen_path);
-  self playSound("evt_flyby_avenger_apex_spawn");
+  self playsound("evt_flyby_avenger_apex_spawn");
 
-  if(num_offset < level.a_air_to_air_offsets["player"].size) {
+  if(num_offset < level.a_air_to_air_offsets["player"].size)
     self pathfixedoffset(level.a_air_to_air_offsets["player"][num_offset]);
-  }
 
   self setswitchnode(vh_leader.switch_nodes[0], vh_leader.switch_nodes[1]);
 }
@@ -1393,7 +1348,7 @@ _set_objective_on_plane() {
   if(!isDefined(level.dogfights_objective_marker_active)) {
     level.dogfights_objective_marker_active = 1;
     objective_add(level.obj_dogfights, "current");
-    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_targets_total);
+    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_targets_total);
     dogfights_objective_setup();
     objective_set3d(level.obj_dogfights, 1, "default");
   }
@@ -1416,27 +1371,25 @@ dogfights_objective_update_counter() {
   if(1) {
     return;
   }
-  if(n_killed == n_halfway) {
+  if(n_killed == n_halfway)
     level thread _autosave_after_bink();
-  }
 
   if(n_remaining <= 0) {
     if(!flag("dogfight_done")) {
       flag_set("dogfight_done");
-      objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", 0);
+      objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", 0);
       objective_state(level.obj_dogfights, "done");
     }
   } else
-    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_remaining);
+    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_remaining);
 }
 
 dogfights_objective_setup() {
   level.aerial_vehicles.dogfights.objective_positions = [];
   n_max_objectives = 8;
 
-  for(i = 0; i < n_max_objectives; i++) {
+  for(i = 0; i < n_max_objectives; i++)
     level.aerial_vehicles.dogfights.objective_positions[level.aerial_vehicles.dogfights.objective_positions.size] = 0;
-  }
 }
 
 dogfights_objective_get_available_position() {
@@ -1462,11 +1415,10 @@ dogfights_objective_release_position(n_index) {
 _dogfight_spawner_determine_type() {
   n_index = randomint(2);
 
-  if(n_index == 0) {
+  if(n_index == 0)
     str_type = "avenger";
-  } else {
+  else
     str_type = "pegasus";
-  }
 
   return str_type;
 }
@@ -1480,13 +1432,11 @@ dogfight_enemy_counter() {
 }
 
 wave_speed_monitor(a_planes, n_ideal_dist, n_too_close) {
-  if(!isDefined(n_ideal_dist)) {
+  if(!isDefined(n_ideal_dist))
     n_ideal_dist = 8000;
-  }
 
-  if(!isDefined(n_too_close)) {
+  if(!isDefined(n_too_close))
     n_too_close = 6000;
-  }
 
   level endon("drone_wave_complete");
   level endon("midair_collision_started");
@@ -1502,18 +1452,17 @@ wave_speed_monitor(a_planes, n_ideal_dist, n_too_close) {
       if(isDefined(level.f35)) {
         n_distance_sq = distance2dsquared(e_plane.origin, level.f35.origin);
 
-        if(n_distance_sq < n_dist_too_close) {
+        if(n_distance_sq < n_dist_too_close)
           should_speed_up = 1;
-        } else if(n_distance_sq < n_ideal_dist_sq) {
+        else if(n_distance_sq < n_ideal_dist_sq) {
           is_player_close = 1;
           v_plane_to_player = vectornormalize(level.f35.origin - e_plane.origin);
-          v_plane_forward = vectornormalize(anglesToForward(e_plane.angles));
-          v_player_forward = vectornormalize(anglesToForward(level.f35.angles));
+          v_plane_forward = vectornormalize(anglestoforward(e_plane.angles));
+          v_player_forward = vectornormalize(anglestoforward(level.f35.angles));
 
           if(vectordot(v_plane_to_player, v_plane_forward) > 0.7) {
-            if(vectordot(v_plane_forward, v_player_forward) > 0.7) {
+            if(vectordot(v_plane_forward, v_player_forward) > 0.7)
               should_speed_up = 1;
-            }
           }
         }
 
@@ -1534,21 +1483,18 @@ _dogfight_speed_monitor(str_path, n_path_index, ideal_dist, tolerance, dampening
   n_speed_min = level.f35.speed_drone_min;
   n_speed_max = level.f35.speed_drone_max;
 
-  if(!isDefined(ideal_dist)) {
+  if(!isDefined(ideal_dist))
     ideal_dist = 8000;
-  }
 
   n_distance_ideal_sq = ideal_dist * ideal_dist;
 
-  if(!isDefined(tolerance)) {
+  if(!isDefined(tolerance))
     tolerance = 600;
-  }
 
   n_tolerance_sq = tolerance * tolerance;
 
-  if(!isDefined(dampening)) {
+  if(!isDefined(dampening))
     dampening = 0.7;
-  }
 
   is_slow = 0;
 
@@ -1557,9 +1503,9 @@ _dogfight_speed_monitor(str_path, n_path_index, ideal_dist, tolerance, dampening
       n_speed_new = level.f35 getspeedmph();
       n_speed_max = level.f35 getmaxspeed() / 17.6;
 
-      if(level.b_should_exceed_speed) {
+      if(level.b_should_exceed_speed)
         self setspeed(n_speed_max * 1.2);
-      } else if(!level.b_should_match_speed) {
+      else if(!level.b_should_match_speed) {
         is_slow = 1;
         n_speed_new = int(n_speed_max * dampening);
         n_speed_new = clamp(n_speed_new, n_speed_min, n_speed_max);
@@ -1596,15 +1542,14 @@ _dogfight_ally_speed_monitor() {
 
       v_player_to_enemy = vectornormalize(e_target.origin - level.f35.origin);
       v_self_to_enemy = vectornormalize(e_target.origin - self.origin);
-      v_self_forward = vectornormalize(anglesToForward(self.angles));
+      v_self_forward = vectornormalize(anglestoforward(self.angles));
       n_speed = e_target getspeedmph();
       n_dot = vectordot(v_self_forward, v_self_to_enemy);
 
-      if(n_dist < n_dist_too_close) {
+      if(n_dist < n_dist_too_close)
         n_speed = n_speed * 0.8;
-      } else if(n_dist > n_distance_ideal) {
+      else if(n_dist > n_distance_ideal)
         n_speed = n_speed * 3.0;
-      }
 
       self setspeed(n_speed, 250);
     }
@@ -1627,11 +1572,10 @@ _dogfight_fire_on_command(e_target) {
   while(!flag("dogfight_done")) {
     self waittill("drone_update_target");
 
-    if(e_target == "convoy") {
+    if(e_target == "convoy")
       e_my_target = get_array_of_closest(self.origin, level.convoy.vehicles)[0];
-    } else if(e_target == "player") {
+    else if(e_target == "player")
       e_my_target = level.f35;
-    }
 
     for(i = 0; i < self.weapon_indicies.size; i++) {
       n_index = self.weapon_indicies[i];
@@ -1675,9 +1619,8 @@ dogfight_countermeasures_think() {
     n_dist = distance2d(self.origin, e_missile.origin);
     n_percent = n_dist * 0.003;
 
-    if(randomint(100) < n_percent) {
+    if(randomint(100) < n_percent)
       b_fired_chaff = try_to_use_chaff(e_missile);
-    }
   }
 }
 
@@ -1689,9 +1632,8 @@ dogfight_switch_node_test() {
 }
 
 init_chaff() {
-  if(!isDefined(self.chaff_count)) {
+  if(!isDefined(self.chaff_count))
     self.chaff_count = 1;
-  }
 }
 
 try_to_use_chaff(e_missile) {
@@ -1715,9 +1657,9 @@ use_chaff(e_missile) {
     self.chaff_count--;
     n_chaff_scale = 200;
     n_chaff_time = 6;
-    playFXOnTag(level._effect["chaff"], self, "tag_origin");
-    self playSound("evt_drone_chaff_use");
-    v_forward = anglesToForward(self.angles);
+    playfxontag(level._effect["chaff"], self, "tag_origin");
+    self playsound("evt_drone_chaff_use");
+    v_forward = anglestoforward(self.angles);
     v_right = anglestoright(self.angles);
     v_down = anglestoup(self.angles) * -1;
     v_chaff_pos = self.origin + v_down * n_chaff_scale;
@@ -1729,7 +1671,7 @@ use_chaff(e_missile) {
     v_velocity = vectorscale(v_chaff_dir, randomintrange(400, 600));
     v_velocity = (v_velocity[0], v_velocity[1], v_velocity[2] - randomintrange(10, 100));
     e_chaff = spawn("script_model", v_chaff_pos);
-    e_chaff setModel("tag_origin");
+    e_chaff setmodel("tag_origin");
     e_chaff movegravity(v_velocity, n_chaff_time);
     e_missile missile_settarget(e_chaff);
     e_missile thread _detonate_missile_near_chaff(e_chaff);
@@ -1766,17 +1708,15 @@ plane_spawn(str_targetname, func_behavior, param_1, param_2, param_3, param_4, p
   vh_plane = maps\_vehicle::spawn_vehicle_from_targetname(str_targetname);
   vh_plane thread maps\la_2_drones_ambient::plane_counter();
 
-  if(isDefined(func_behavior)) {
+  if(isDefined(func_behavior))
     single_thread(vh_plane, func_behavior, param_1, param_2, param_3, param_4, param_5);
-  }
 
   return vh_plane;
 }
 
 uav_target_convoy_leader() {
-  while(!isDefined(level.convoy.leader)) {
+  while(!isDefined(level.convoy.leader))
     wait 0.05;
-  }
 
   vh_leader = level.convoy.leader;
   return vh_leader;
@@ -1786,9 +1726,8 @@ delay_weapon_firing(n_firing_wait, e_target, n_time, v_offset, n_index) {
   self endon("death");
   wait(n_firing_wait);
 
-  if(isDefined(e_target)) {
+  if(isDefined(e_target))
     self thread maps\_turret::shoot_turret_at_target(e_target, n_time, v_offset, n_index);
-  }
 }
 
 _setup_plane_firing_by_type() {
@@ -1800,11 +1739,10 @@ _setup_plane_firing_by_type() {
     n_wait_min = 4;
     n_wait_max = 8;
 
-    if(isDefined(self.is_dogfight_plane) && self.is_dogfight_plane) {
+    if(isDefined(self.is_dogfight_plane) && self.is_dogfight_plane)
       a_indicies[a_indicies.size] = 0;
-    } else {
+    else
       a_indicies[a_indicies.size] = 1;
-    }
   } else if(self.vehicletype == "drone_avenger_fast_la2" || self.vehicletype == "drone_avenger_fast_la2_2x" || self.vehicletype == "drone_avenger") {
     n_fire_min = 2;
     n_fire_max = 4.5;
@@ -1818,9 +1756,9 @@ _setup_plane_firing_by_type() {
     n_wait_max = 4;
     n_weapon_select = randomint(2);
 
-    if(n_weapon_select == 0) {
+    if(n_weapon_select == 0)
       a_indicies[a_indicies.size] = 0;
-    } else {
+    else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1831,9 +1769,9 @@ _setup_plane_firing_by_type() {
     n_wait_max = 4;
     n_weapon_select = randomint(2);
 
-    if(n_weapon_select == 0) {
+    if(n_weapon_select == 0)
       a_indicies[a_indicies.size] = 0;
-    } else {
+    else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1844,9 +1782,9 @@ _setup_plane_firing_by_type() {
     n_wait_max = 4;
     n_weapon_select = randomint(2);
 
-    if(n_weapon_select == 0) {
+    if(n_weapon_select == 0)
       a_indicies[a_indicies.size] = 0;
-    } else {
+    else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1869,9 +1807,8 @@ _plane_move_to_point(s_position) {
   assert(isDefined(s_position), "s_position is a required parameter for _plane_move_to_point");
   self.origin = s_position.origin;
 
-  if(isDefined(s_position.angles)) {
+  if(isDefined(s_position.angles))
     self.angles = s_position.angles;
-  }
 }
 
 getbestmissileturrettarget_f38_deathblossom() {
@@ -1879,21 +1816,19 @@ getbestmissileturrettarget_f38_deathblossom() {
   targetsvalid = [];
 
   for(idx = 0; idx < targetsall.size; idx++) {
-    if(self insidemissileturretreticlenolock(targetsall[idx]) && (isDefined(targetsall[idx].db_target) && targetsall[idx].db_target)) {
+    if(self insidemissileturretreticlenolock(targetsall[idx]) && (isDefined(targetsall[idx].db_target) && targetsall[idx].db_target))
       targetsvalid[targetsvalid.size] = targetsall[idx];
-    }
   }
 
-  if(targetsvalid.size == 0) {
+  if(targetsvalid.size == 0)
     return undefined;
-  }
 
   chosenent = targetsvalid[0];
   bestdot = -999;
   chosenindex = -1;
 
   if(targetsvalid.size > 1) {
-    forward = anglesToForward(self getplayerangles());
+    forward = anglestoforward(self getplayerangles());
 
     for(i = 0; i < targetsvalid.size; i++) {
       vec_to_target = vectornormalize(targetsvalid[i].origin - self get_eye());
@@ -1906,22 +1841,20 @@ getbestmissileturrettarget_f38_deathblossom() {
     }
   }
 
-  if(chosenindex > -1) {
+  if(chosenindex > -1)
     chosenent = targetsvalid[chosenindex];
-  }
 
   return chosenent;
 }
 
 player_strafe_burst_firing() {
-  v_f35_forward = anglesToForward(level.f35.angles);
+  v_f35_forward = anglestoforward(level.f35.angles);
   level notify("player_being_fired_on");
 
-  if(cointoss()) {
-    level.player playSound("evt_strafe_burst_front_00");
-  } else {
-    level.player playSound("evt_strafe_burst_front_01");
-  }
+  if(cointoss())
+    level.player playsound("evt_strafe_burst_front_00");
+  else
+    level.player playsound("evt_strafe_burst_front_01");
 
   for(i = 0; i < 10; i++) {
     v_start = level.f35.origin + vectorscale((0, 0, 1), 120.0);
@@ -1935,9 +1868,8 @@ _dogfight_track_kills_for_vo() {
   level endon("dogfight_done");
 
   while(true) {
-    while(!isDefined(level.player.missileturrettarget)) {
+    while(!isDefined(level.player.missileturrettarget))
       wait 0.05;
-    }
 
     level thread _notify_target_died(level.player.missileturrettarget);
     level thread _notify_target_lost(level.player.missileturrettarget);
@@ -1963,26 +1895,23 @@ _notify_target_died(e_target) {
   level endon("snd_target_gone");
   e_target waittill("death");
 
-  if(isDefined(e_target.locked_on) && e_target.locked_on) {
+  if(isDefined(e_target.locked_on) && e_target.locked_on)
     level notify("snd_target_gone", "death_f38");
-  } else {
+  else
     level notify("snd_target_gone", "death_player");
-  }
 }
 
 _notify_target_lost(e_target) {
   level endon("snd_target_gone");
 
   while(true) {
-    while(isDefined(level.player.missileturrettarget) && level.player.missileturrettarget == e_target) {
+    while(isDefined(level.player.missileturrettarget) && level.player.missileturrettarget == e_target)
       wait 0.05;
-    }
 
     wait 0.1;
 
-    if(!isDefined(level.player.missileturrettarget) || level.player.missileturrettarget != e_target) {
+    if(!isDefined(level.player.missileturrettarget) || level.player.missileturrettarget != e_target)
       level notify("snd_target_gone", "lost");
-    }
   }
 }
 
@@ -1997,11 +1926,10 @@ change_dogfights_fog_based_on_height() {
     b_should_change_fog_setting = b_using_low_fog && !b_in_low_range || !b_using_low_fog && b_in_low_range;
 
     if(b_should_change_fog_setting) {
-      if(b_using_low_fog) {
+      if(b_using_low_fog)
         maps\createart\la_2_art::art_jet_mode_settings(n_fog_transition_time);
-      } else {
+      else
         maps\createart\la_2_art::art_vtol_mode_settings(n_fog_transition_time);
-      }
 
       wait(n_fog_transition_time);
       b_using_low_fog = !b_using_low_fog;
@@ -2025,17 +1953,15 @@ dogfight_ambient_building_explosions() {
       n_dist = distance2dsquared(level.f35.origin, s_explode_struct.origin);
 
       if(n_dist < n_max_dist && n_dist > n_min_dist && n_dist < n_current_dist) {
-        if(level.player is_player_looking_at(s_explode_struct.origin, 0.7, 0)) {
+        if(level.player is_player_looking_at(s_explode_struct.origin, 0.7, 0))
           n_current_dist = n_dist;
-        }
 
         s_current_struct = s_explode_struct;
       }
     }
 
-    if(isDefined(s_current_struct)) {
-      playFX(level._effect["explosion_side_large"], s_current_struct.origin, anglesToForward(s_current_struct.angles));
-    }
+    if(isDefined(s_current_struct))
+      playfx(level._effect["explosion_side_large"], s_current_struct.origin, anglestoforward(s_current_struct.angles));
 
     wait 1;
   }
@@ -2052,15 +1978,15 @@ dogfight_ally_avoid_player() {
     delta = self.origin - level.f35.origin;
     angles = level.f35.angles;
     angles = (angles[0], angles[1], 0);
-    fwd = anglesToForward(angles);
+    fwd = anglestoforward(angles);
     right = anglestoright(angles);
     dist = length(delta);
     dist_fwd = vectordot(delta, fwd);
     dist_right = vectordot(delta, right);
 
-    if(dist_right < 1000 && dist_fwd < 2000) {
+    if(dist_right < 1000 && dist_fwd < 2000)
       self.player_avoid_offset = (self.player_avoid_offset[0], self.player_avoid_offset[1] + 25.0, self.player_avoid_offset[2]);
-    } else {
+    else {
       y = difftrack(0, self.player_avoid_offset[1], 1, 0.05);
       self.player_avoid_offset = (self.player_avoid_offset[0], y, self.player_avoid_offset[2]);
     }
@@ -2082,7 +2008,7 @@ dogfight_save_restore() {
   foreach(vehicle in vehicles) {
     if(isDefined(vehicle.is_convoy_plane) && vehicle.is_convoy_plane) {
       avg_pos = avg_pos + vehicle.origin;
-      avg_fwd = avg_fwd + anglesToForward(vehicle.angles);
+      avg_fwd = avg_fwd + anglestoforward(vehicle.angles);
       count++;
     }
   }

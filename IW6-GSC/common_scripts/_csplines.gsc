@@ -172,15 +172,13 @@ csplineSeg_calcTopSpeedByDeriving(csplineSeg, segLength) {
     cubicRoots = maps\interactive_models\_interactive_utility::rootsOfQuadratic(b, c, d);
     if(isDefined(cubicRoots[0]) && cubicRoots[0] > 0 && cubicRoots[0] < 1) {
       slope = (2 * b * cubicRoots[0]) + c;
-      if(slope < 0) {
+      if(slope < 0)
         values[values.size] = cubicRoots[0];
-      }
     }
     if(isDefined(cubicRoots[1]) && cubicRoots[1] > 0 && cubicRoots[1] < 1) {
       slope = (2 * b * cubicRoots[0]) + c;
-      if(slope < 0) {
+      if(slope < 0)
         values[values.size] = cubicRoots[1];
-      }
     }
   } else {
     quadRoots = maps\interactive_models\_interactive_utility::rootsOfQuadratic(3 * a, 2 * b, c);
@@ -213,9 +211,8 @@ csplineSeg_calcTopSpeedByDeriving(csplineSeg, segLength) {
   maxSpeedSq = 0;
   foreach(x in values) {
     speedSq = (a * x * x * x * x) + (b * x * x * X) + (c * x * x) + (d * x) + e;
-    if(speedSq > maxSpeedSq) {
+    if(speedSq > maxSpeedSq)
       maxSpeedSq = speedSq;
-    }
 
   }
 
@@ -313,9 +310,8 @@ cspline_makePathToPoint(startOrg, endOrg, startVel, endVel, forceCreateIntermedi
     endSpeed = 20;
   }
   if((startSpeed / endSpeed > 1.2) || (endSpeed / startSpeed > 1.2) || (forceCreateIntermediateNodes)) {
-    if(!isDefined(dirs[0])) {
+    if(!isDefined(dirs[0]))
       dirs[0] = (0, 0, 0);
-    }
     if(!isDefined(dirs[1])) {
       dirs[1] = (0, 0, 0);
     }
@@ -373,9 +369,8 @@ cspline_makePathToPoint(startOrg, endOrg, startVel, endVel, forceCreateIntermedi
 
   if(GetDvarInt("interactives_debug")) {
     thread draw_line_for_time(startOrg, endOrg, 0, .7, .7, 1);
-    for(n = 1; n < nodes.size; n++) {
+    for(n = 1; n < nodes.size; n++)
       thread draw_line_for_time(nodes[n - 1].origin, nodes[n].origin, 0, .7, .7, 1);
-    }
   }
 
   return cspline_makePath(nodes, true, dirs[0], dirs[1]);
@@ -450,9 +445,8 @@ cspline_makePath(nodes, useNodeSpeeds, startVel, endVel, capSpeed) {
     pathTime = 0;
     prevEndAt = 0;
     for(i = 0; i < csPath.Segments.size; i++) {
-      if(!isDefined(nodes[i + 1].speed)) {
+      if(!isDefined(nodes[i + 1].speed))
         nodes[i + 1].speed = nodes[i].speed;
-      }
       thisSegLength = csPath.Segments[i].endAt - prevEndAt;
       segTime = 2 * thisSegLength / ((nodes[i].speed + nodes[i + 1].speed) / 20);
       pathTime += segTime;
@@ -498,11 +492,10 @@ cspline_getPointAtDistance(csPath, distance, speedIsImportant) {
     posVel = csplineSeg_getPoint(csPath.Segments[0], 0, segLength, csPath.Segments[0].speedStart);
     return posVel;
   } else if(distance >= csPath.Segments[csPath.Segments.size - 1].endAt) {
-    if(csPath.Segments.size > 1) {
+    if(csPath.Segments.size > 1)
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt - csPath.Segments[csPath.Segments.size - 2].endAt;
-    } else {
+    else
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt;
-    }
     posVel = csplineSeg_getPoint(csPath.Segments[csPath.Segments.size - 1], 1, segLength, csPath.Segments[csPath.Segments.size - 1].speedEnd);
     return posVel;
   } else {
@@ -518,9 +511,8 @@ cspline_getPointAtDistance(csPath, distance, speedIsImportant) {
     segLength = csPath.Segments[segNum].endAt - startAt;
     normalized = (distance - startAt) / segLength;
     speed = undefined;
-    if(isDefined(speedIsImportant) && speedIsImportant) {
+    if(isDefined(speedIsImportant) && speedIsImportant)
       speed = cspline_speedFromDistance(csPath.Segments[segNum].speedStart, csPath.Segments[segNum].speedEnd, normalized);
-    }
     posVel = csplineSeg_getPoint(csPath.Segments[segNum], normalized, segLength, speed);
     return posVel;
   }
@@ -532,11 +524,10 @@ cspline_getPointAtTime(csPath, time) {
     posVel = csplineSeg_getPoint(csPath.Segments[0], 0, segLength, csPath.Segments[0].speedStart);
     return posVel;
   } else if(time >= csPath.Segments[csPath.Segments.size - 1].endTime) {
-    if(csPath.Segments.size > 1) {
+    if(csPath.Segments.size > 1)
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt - csPath.Segments[csPath.Segments.size - 2].endAt;
-    } else {
+    else
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt;
-    }
     posVel = csplineSeg_getPoint(csPath.Segments[csPath.Segments.size - 1], 1, segLength, csPath.Segments[csPath.Segments.size - 1].speedEnd);
     return posVel;
   } else {
@@ -673,11 +664,10 @@ cspline_test(csPath, timeSecs) {
       posVel = cspline_getPointAtTime(csPath, 0);
       for(time = 0; time <= cspline_time(csPath); time += arrowSpacing) {
         prevPos = posVel["pos"];
-        if(isDefined(csPath.Segments[0].speedEnd)) {
+        if(isDefined(csPath.Segments[0].speedEnd))
           posVel = cspline_getPointAtTime(csPath, time);
-        } else {
+        else
           posVel = cspline_getPointAtDistance(csPath, time);
-        }
         thread draw_arrow_time(prevPos, posVel["pos"], (0, 1, 0), 1);
       }
       hsArray = cspline_getNodes(csPath);
@@ -706,9 +696,8 @@ cspline_testNodes(nodes, timeSecs) {
   size = 20;
   prevNode = undefined;
   foreach(node in nodes) {
-    if(isDefined(prevNode)) {
+    if(isDefined(prevNode))
       thread draw_arrow_time(prevNode.origin, node.origin, (0, 1, 0), timeSecs);
-    }
     prevNode = node;
   }
   foreach(node in nodes) {

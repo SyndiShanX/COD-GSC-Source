@@ -9,7 +9,7 @@
 #namespace spawn_manager;
 
 function spawn_manager_debug() {
-  for(;;) {
+  for (;;) {
     if(getdvarstring("") != "") {
       wait(0.1);
       continue;
@@ -18,11 +18,11 @@ function spawn_manager_debug() {
     manageractivecount = 0;
     managerpotentialspawncount = 0;
     level.debugactivemanagers = [];
-    for(i = 0; i < managers.size; i++) {
-      if(isDefined(managers[i]) && isDefined(managers[i].enable)) {
-        if(managers[i].enable || (!managers[i].enable && isDefined(managers[i].spawners))) {
+    for (i = 0; i < managers.size; i++) {
+      if(isdefined(managers[i]) && isdefined(managers[i].enable)) {
+        if(managers[i].enable || (!managers[i].enable && isdefined(managers[i].spawners))) {
           if(managers[i].count < 0 || managers[i].count > managers[i].spawncount) {
-            if(managers[i].enable && isDefined(managers[i].sm_active_count)) {
+            if(managers[i].enable && isdefined(managers[i].sm_active_count)) {
               manageractivecount = manageractivecount + 1;
               managerpotentialspawncount = managerpotentialspawncount + managers[i].sm_active_count;
             }
@@ -38,7 +38,7 @@ function spawn_manager_debug() {
 
 function spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_managers, potential_ai) {
   if(getdvarstring("") == "") {
-    if(!isDefined(level.spawn_manager_debug_hud_title)) {
+    if(!isdefined(level.spawn_manager_debug_hud_title)) {
       level.spawn_manager_debug_hud_title = newhudelem();
       level.spawn_manager_debug_hud_title.alignx = "";
       level.spawn_manager_debug_hud_title.x = 2;
@@ -46,19 +46,19 @@ function spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_mana
       level.spawn_manager_debug_hud_title.fontscale = 1.5;
       level.spawn_manager_debug_hud_title.color = (1, 1, 1);
     }
-    if(!isDefined(level.spawn_manager_debug_hud)) {
+    if(!isdefined(level.spawn_manager_debug_hud)) {
       level.spawn_manager_debug_hud = [];
     }
     level.spawn_manager_debug_hud_title settext((((((((("" + spawn_ai) + "") + active_ai) + "") + potential_ai) + "") + max_ai) + "") + active_managers);
-    for(i = 0; i < level.debugactivemanagers.size; i++) {
-      if(!isDefined(level.spawn_manager_debug_hud[i])) {
+    for (i = 0; i < level.debugactivemanagers.size; i++) {
+      if(!isdefined(level.spawn_manager_debug_hud[i])) {
         level.spawn_manager_debug_hud[i] = newhudelem();
         level.spawn_manager_debug_hud[i].alignx = "";
         level.spawn_manager_debug_hud[i].x = 0;
         level.spawn_manager_debug_hud[i].fontscale = 1;
         level.spawn_manager_debug_hud[i].y = level.spawn_manager_debug_hud_title.y + ((i + 1) * 15);
       }
-      if(isDefined(level.current_debug_spawn_manager) && level.debugactivemanagers[i] == level.current_debug_spawn_manager) {
+      if(isdefined(level.current_debug_spawn_manager) && level.debugactivemanagers[i] == level.current_debug_spawn_manager) {
         if(!level.debugactivemanagers[i].enable) {
           level.spawn_manager_debug_hud[i].color = vectorscale((0, 1, 0), 0.4);
         } else {
@@ -75,26 +75,26 @@ function spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_mana
       text = text + ("" + level.debugactivemanagers[i].spawncount);
       text = text + (((((("" + level.debugactivemanagers[i].activeai.size) + "") + level.debugactivemanagers[i].sm_active_count_min) + "") + level.debugactivemanagers[i].sm_active_count_max) + "");
       text = text + ("" + level.debugactivemanagers[i].allspawners.size);
-      if(isDefined(level.debugactivemanagers[i].sm_group_size)) {
+      if(isdefined(level.debugactivemanagers[i].sm_group_size)) {
         text = text + (((((("" + level.debugactivemanagers[i].sm_group_size) + "") + level.debugactivemanagers[i].sm_group_size_min) + "") + level.debugactivemanagers[i].sm_group_size_max) + "");
       }
       level.spawn_manager_debug_hud[i] settext(text);
     }
     if(level.debugactivemanagers.size < level.spawn_manager_debug_hud.size) {
-      for(i = level.debugactivemanagers.size; i < level.spawn_manager_debug_hud.size; i++) {
-        if(isDefined(level.spawn_manager_debug_hud[i])) {
+      for (i = level.debugactivemanagers.size; i < level.spawn_manager_debug_hud.size; i++) {
+        if(isdefined(level.spawn_manager_debug_hud[i])) {
           level.spawn_manager_debug_hud[i] destroy();
         }
       }
     }
   }
   if(getdvarstring("") != "") {
-    if(isDefined(level.spawn_manager_debug_hud_title)) {
+    if(isdefined(level.spawn_manager_debug_hud_title)) {
       level.spawn_manager_debug_hud_title destroy();
     }
-    if(isDefined(level.spawn_manager_debug_hud)) {
-      for(i = 0; i < level.spawn_manager_debug_hud.size; i++) {
-        if(isDefined(level.spawn_manager_debug_hud) && isDefined(level.spawn_manager_debug_hud[i])) {
+    if(isdefined(level.spawn_manager_debug_hud)) {
+      for (i = 0; i < level.spawn_manager_debug_hud.size; i++) {
+        if(isdefined(level.spawn_manager_debug_hud) && isdefined(level.spawn_manager_debug_hud[i])) {
           level.spawn_manager_debug_hud[i] destroy();
         }
       }
@@ -115,13 +115,13 @@ function spawn_manager_debug_spawn_manager() {
   level.test_player = getplayers()[0];
   current_spawn_manager_index = -1;
   old_spawn_manager_index = undefined;
-  while(true) {
+  while (true) {
     if(getdvarstring("") != "") {
       destroy_tweak_hud_elements();
       wait(0.05);
       continue;
     }
-    if(isDefined(level.debugactivemanagers) && level.debugactivemanagers.size > 0) {
+    if(isdefined(level.debugactivemanagers) && level.debugactivemanagers.size > 0) {
       if(current_spawn_manager_index == -1) {
         current_spawn_manager_index = 0;
         old_spawn_manager_index = 0;
@@ -141,11 +141,11 @@ function spawn_manager_debug_spawn_manager() {
           }
         }
       }
-      if(isDefined(current_spawn_manager_index) && current_spawn_manager_index != -1) {
-        if(isDefined(level.current_debug_spawn_manager) && isDefined(level.debugactivemanagers[current_spawn_manager_index])) {
-          if(isDefined(old_spawn_manager_index) && old_spawn_manager_index == current_spawn_manager_index) {
+      if(isdefined(current_spawn_manager_index) && current_spawn_manager_index != -1) {
+        if(isdefined(level.current_debug_spawn_manager) && isdefined(level.debugactivemanagers[current_spawn_manager_index])) {
+          if(isdefined(old_spawn_manager_index) && old_spawn_manager_index == current_spawn_manager_index) {
             if(level.debugactivemanagers[current_spawn_manager_index].targetname != level.current_debug_spawn_manager_targetname) {
-              for(i = 0; i < level.debugactivemanagers.size; i++) {
+              for (i = 0; i < level.debugactivemanagers.size; i++) {
                 if(level.debugactivemanagers[i].targetname == level.current_debug_spawn_manager_targetname) {
                   current_spawn_manager_index = i;
                   old_spawn_manager_index = i;
@@ -154,12 +154,12 @@ function spawn_manager_debug_spawn_manager() {
             }
           }
         }
-        if(isDefined(level.debugactivemanagers[current_spawn_manager_index])) {
+        if(isdefined(level.debugactivemanagers[current_spawn_manager_index])) {
           level.current_debug_spawn_manager = level.debugactivemanagers[current_spawn_manager_index];
           level.current_debug_spawn_manager_targetname = level.debugactivemanagers[current_spawn_manager_index].targetname;
         }
       }
-      if(isDefined(level.current_debug_spawn_manager)) {
+      if(isdefined(level.current_debug_spawn_manager)) {
         level.current_debug_spawn_manager spawn_manager_debug_spawn_manager_values_dpad();
       }
     } else {
@@ -170,17 +170,17 @@ function spawn_manager_debug_spawn_manager() {
 }
 
 function spawn_manager_debug_spawner_values() {
-  while(true) {
+  while (true) {
     if(getdvarstring("") != "") {
       wait(0.1);
       continue;
     }
-    if(isDefined(level.current_debug_spawn_manager)) {
+    if(isdefined(level.current_debug_spawn_manager)) {
       spawn_manager = level.current_debug_spawn_manager;
-      if(isDefined(spawn_manager.spawners)) {
-        for(i = 0; i < spawn_manager.spawners.size; i++) {
+      if(isdefined(spawn_manager.spawners)) {
+        for (i = 0; i < spawn_manager.spawners.size; i++) {
           current_spawner = spawn_manager.spawners[i];
-          if(isDefined(current_spawner) && current_spawner.count > 0) {
+          if(isdefined(current_spawner) && current_spawner.count > 0) {
             spawnerfree = current_spawner.sm_active_count - current_spawner.activeai.size;
             print3d(current_spawner.origin + vectorscale((0, 0, 1), 65), "" + current_spawner.count, (0, 1, 0), 1, 1.25, 2);
             print3d(current_spawner.origin + vectorscale((0, 0, 1), 85), (((("" + current_spawner.activeai.size) + "") + spawnerfree) + "") + current_spawner.sm_active_count, (0, 1, 0), 1, 1.25, 2);
@@ -195,17 +195,17 @@ function spawn_manager_debug_spawner_values() {
 
 function ent_print(text) {
   self endon("death");
-  while(true) {
+  while (true) {
     print3d(self.origin + vectorscale((0, 0, 1), 65), text, (0.48, 9.4, 0.76), 1, 1);
     wait(0.05);
   }
 }
 
 function spawn_manager_debug_spawn_manager_values_dpad() {
-  if(!isDefined(level.current_debug_index)) {
+  if(!isdefined(level.current_debug_index)) {
     level.current_debug_index = 0;
   }
-  if(!isDefined(level.spawn_manager_debug_hud2)) {
+  if(!isdefined(level.spawn_manager_debug_hud2)) {
     level.spawn_manager_debug_hud2 = newhudelem();
     level.spawn_manager_debug_hud2.alignx = "";
     level.spawn_manager_debug_hud2.x = 10;
@@ -213,56 +213,56 @@ function spawn_manager_debug_spawn_manager_values_dpad() {
     level.spawn_manager_debug_hud2.fontscale = 1.25;
     level.spawn_manager_debug_hud2.color = (1, 0, 0);
   }
-  if(!isDefined(level.sm_active_count_title)) {
+  if(!isdefined(level.sm_active_count_title)) {
     level.sm_active_count_title = newhudelem();
     level.sm_active_count_title.alignx = "";
     level.sm_active_count_title.x = 10;
     level.sm_active_count_title.y = 165;
     level.sm_active_count_title.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_active_count_min_hud)) {
+  if(!isdefined(level.sm_active_count_min_hud)) {
     level.sm_active_count_min_hud = newhudelem();
     level.sm_active_count_min_hud.alignx = "";
     level.sm_active_count_min_hud.x = 10;
     level.sm_active_count_min_hud.y = 180;
     level.sm_active_count_min_hud.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_active_count_max_hud)) {
+  if(!isdefined(level.sm_active_count_max_hud)) {
     level.sm_active_count_max_hud = newhudelem();
     level.sm_active_count_max_hud.alignx = "";
     level.sm_active_count_max_hud.x = 10;
     level.sm_active_count_max_hud.y = 195;
     level.sm_active_count_max_hud.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_group_size_min_hud)) {
+  if(!isdefined(level.sm_group_size_min_hud)) {
     level.sm_group_size_min_hud = newhudelem();
     level.sm_group_size_min_hud.alignx = "";
     level.sm_group_size_min_hud.x = 10;
     level.sm_group_size_min_hud.y = 210;
     level.sm_group_size_min_hud.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_group_size_max_hud)) {
+  if(!isdefined(level.sm_group_size_max_hud)) {
     level.sm_group_size_max_hud = newhudelem();
     level.sm_group_size_max_hud.alignx = "";
     level.sm_group_size_max_hud.x = 10;
     level.sm_group_size_max_hud.y = 225;
     level.sm_group_size_max_hud.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_spawner_count_title)) {
+  if(!isdefined(level.sm_spawner_count_title)) {
     level.sm_spawner_count_title = newhudelem();
     level.sm_spawner_count_title.alignx = "";
     level.sm_spawner_count_title.x = 10;
     level.sm_spawner_count_title.y = 240;
     level.sm_spawner_count_title.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_spawner_count_min_hud)) {
+  if(!isdefined(level.sm_spawner_count_min_hud)) {
     level.sm_spawner_count_min_hud = newhudelem();
     level.sm_spawner_count_min_hud.alignx = "";
     level.sm_spawner_count_min_hud.x = 10;
     level.sm_spawner_count_min_hud.y = 255;
     level.sm_spawner_count_min_hud.color = (1, 1, 1);
   }
-  if(!isDefined(level.sm_spawner_count_max_hud)) {
+  if(!isdefined(level.sm_spawner_count_max_hud)) {
     level.sm_spawner_count_max_hud = newhudelem();
     level.sm_spawner_count_max_hud.alignx = "";
     level.sm_spawner_count_max_hud.x = 10;
@@ -403,12 +403,12 @@ function spawn_manager_debug_spawn_manager_values_dpad() {
   if(should_run_set_up) {
     level.current_debug_spawn_manager spawn_manager_debug_setup();
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     level.sm_active_count_min_hud settext("" + self.sm_active_count_min);
     level.sm_active_count_max_hud settext("" + self.sm_active_count_max);
     level.sm_group_size_min_hud settext("" + self.sm_group_size_min);
     level.sm_group_size_max_hud settext("" + self.sm_group_size_max);
-    if(isDefined(self.sm_spawner_count)) {
+    if(isdefined(self.sm_spawner_count)) {
       level.sm_spawner_count_title settext("" + self.sm_spawner_count);
       level.sm_spawner_count_min_hud settext("" + self.sm_spawner_count_min);
       level.sm_spawner_count_max_hud settext("" + self.sm_spawner_count_max);
@@ -510,10 +510,10 @@ function set_debug_hud_colors() {
 }
 
 function spawn_manager_debug_setup() {
-  if(isDefined(level.current_debug_index) && level.current_debug_index != 5) {
+  if(isdefined(level.current_debug_index) && level.current_debug_index != 5) {
     self.sm_spawner_count = randomintrange(self.sm_spawner_count_min, self.sm_spawner_count_max + 1);
   }
-  if(isDefined(level.current_debug_index) && level.current_debug_index != 0) {
+  if(isdefined(level.current_debug_index) && level.current_debug_index != 0) {
     self.sm_active_count = randomintrange(self.sm_active_count_min, self.sm_active_count_max + 1);
   }
   self.spawners = self spawn_manager_get_spawners();
@@ -539,28 +539,28 @@ function moniter_debug_hud2() {
 }
 
 function destroy_tweak_hud_elements() {
-  if(isDefined(level.sm_active_count_title)) {
+  if(isdefined(level.sm_active_count_title)) {
     level.sm_active_count_title destroy();
   }
-  if(isDefined(level.sm_active_count_min_hud)) {
+  if(isdefined(level.sm_active_count_min_hud)) {
     level.sm_active_count_min_hud destroy();
   }
-  if(isDefined(level.sm_active_count_max_hud)) {
+  if(isdefined(level.sm_active_count_max_hud)) {
     level.sm_active_count_max_hud destroy();
   }
-  if(isDefined(level.sm_group_size_min_hud)) {
+  if(isdefined(level.sm_group_size_min_hud)) {
     level.sm_group_size_min_hud destroy();
   }
-  if(isDefined(level.sm_group_size_max_hud)) {
+  if(isdefined(level.sm_group_size_max_hud)) {
     level.sm_group_size_max_hud destroy();
   }
-  if(isDefined(level.sm_spawner_count_title)) {
+  if(isdefined(level.sm_spawner_count_title)) {
     level.sm_spawner_count_title destroy();
   }
-  if(isDefined(level.sm_spawner_count_min_hud)) {
+  if(isdefined(level.sm_spawner_count_min_hud)) {
     level.sm_spawner_count_min_hud destroy();
   }
-  if(isDefined(level.sm_spawner_count_max_hud)) {
+  if(isdefined(level.sm_spawner_count_max_hud)) {
     level.sm_spawner_count_max_hud destroy();
   }
 }

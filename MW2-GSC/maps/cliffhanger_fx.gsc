@@ -24,14 +24,15 @@ main() {
 }
 
 playerEffect() {
-  player = getEntArray("player", "classname")[0];
-  for(;;) {
-    playFX(level._effect["snow_spray_detail_runner400x400"], player.origin + (0, 0, 0), player.origin + (0, 100, 100));
+  player = getentarray("player", "classname")[0];
+  for (;;) {
+    playfx(level._effect["snow_spray_detail_runner400x400"], player.origin + (0, 0, 0), player.origin + (0, 100, 100));
     wait(.3);
   }
 }
 
 precacheFX() {
+
   //Regular footstep fx
   animscripts\utility::setFootstepEffect("snow", loadfx("impacts/footstep_snow"));
   animscripts\utility::setFootstepEffect("ice", loadfx("impacts/footstep_ice"));
@@ -73,6 +74,8 @@ precacheFX() {
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "ice", loadfx("impacts/footstep_snow"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "slush", loadfx("impacts/footstep_snow"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "mud", loadfx("impacts/footstep_snow"));
+
+
 
   //Player Footstep fx
   level._effect["footstep_snow_small"] = loadfx("impacts/footstep_snow_small");
@@ -163,7 +166,7 @@ test_transition() {
   //	blizzard_level_transition_med( time );
   //	blizzard_level_transition_hard( time );
 
-  while(1) {
+  while (1) {
     wait 10;
 
     blizzard_level_transition_none(1);
@@ -177,6 +180,7 @@ test_transition() {
 }
 
 treadfx_override() {
+
   //it's frik'n snow'n, so everything is snow fx
   tread_effects = "treadfx/tread_snow_slush";
   flying_tread_fx = "treadfx/heli_snow_default";
@@ -414,4 +418,5 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("snowmobile_player_coop", "snow", "treadfx/tread_snow_default_with_decals");
   maps\_treadfx::setvehiclefx("snowmobile_player_coop", "ice", "treadfx/tread_ice_default_with_decals");
   maps\_treadfx::setvehiclefx("snowmobile_player_coop", "slush", "treadfx/tread_snow_default_with_decals");
+
 }

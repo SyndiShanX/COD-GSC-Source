@@ -120,9 +120,8 @@ WaitForSharpTurn() {
 
   shouldMoveStraightAhead = !(self should_do_sharp_turn());
 
-  if(shouldMoveStraightAhead) {
+  if(shouldMoveStraightAhead)
     angleIndex = 0;
-  }
 
   animState = "run_turn";
   turnAnim = self GetAnimEntry(animState, angleIndex);
@@ -138,9 +137,8 @@ WaitForSharpTurn() {
   self.bLockGoalPos = true;
   self.enableStop = false;
 
-  if(shouldMoveStraightAhead) {
+  if(shouldMoveStraightAhead)
     self maps\mp\agents\alien\_alien_anim_utils::turnTowardsVector(self GetLookaheadDir());
-  }
 
   self ScrAgentSetAnimMode("anim deltas");
   self ScrAgentSetOrientMode("face angle abs", self.angles);
@@ -216,9 +214,8 @@ WaitForStop() {
   self PlayAnimNUntilNotetrack(animState, animIndex, animState, "end");
   self ScrAgentSetAnimScale(1.0, 1.0);
 
-  if(self should_move_straight_ahead()) {
+  if(self should_move_straight_ahead())
     self maps\mp\agents\alien\_alien_anim_utils::turnTowardsVector(self GetLookaheadDir());
-  }
 
   goalPos = self GetPathGoalPos();
   if(DistanceSquared(self.origin, goalPos) < ALLOW_SLIDE_DIST_SQR) {
@@ -232,9 +229,8 @@ WaitForStop() {
 }
 
 getStopEndFaceDir(goalPos) {
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return (self.enemy.origin - goalPos);
-  }
 
   return (goalPos - self.origin);
 }
@@ -325,11 +321,10 @@ WaitForJumpSoon() {
   self ScrAgentSetAnimScale(1.0, 1.0);
 
   startNode = self GetNegotiationStartNode();
-  if(isDefined(startNode) && distanceSquared(self.origin, startNode.origin) < ALLOW_SLIDE_DIST_SQR || self.oriented) {
+  if(isDefined(startNode) && distanceSquared(self.origin, startNode.origin) < ALLOW_SLIDE_DIST_SQR || self.oriented)
     self ScrAgentSetAnimMode("code_move_slide");
-  } else {
+  else
     self ContinueMovement();
-  }
 }
 
 SetMoveAnim(moveMode) {
@@ -356,12 +351,10 @@ CancelAllBut(doNotCancel, doNotCancel2) {
   bCheckDoNotCancel2 = isDefined(doNotCancel2);
 
   foreach(cleanup in cleanups) {
-    if(bCheckDoNotCancel && cleanup == doNotCancel) {
+    if(bCheckDoNotCancel && cleanup == doNotCancel)
       continue;
-    }
-    if(bCheckDoNotCancel2 && cleanup == doNotCancel2) {
+    if(bCheckDoNotCancel2 && cleanup == doNotCancel2)
       continue;
-    }
     self notify("alienmove_endwait_" + cleanup);
   }
 }
@@ -401,15 +394,15 @@ onFlashbanged() {
 
 onDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   if(isDefined(level.dlc_can_do_pain_override_func)) {
-    painAllowed = [[level.dlc_can_do_pain_override_func]]("move");
-    if(!painAllowed) {
+    painAllowed = [
+      [level.dlc_can_do_pain_override_func]
+    ]("move");
+    if(!painAllowed)
       return;
-    }
   }
 
-  if(maps\mp\alien\_utility::is_pain_available(eAttacker, sMeansOfDeath)) {
+  if(maps\mp\alien\_utility::is_pain_available(eAttacker, sMeansOfDeath))
     self DoStumble(iDFlags, vDir, sHitLoc, iDamage, sMeansOfDeath, eAttacker);
-  }
 }
 
 DoStumble(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath, eAttacker) {
@@ -422,7 +415,7 @@ DoStumble(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath, eAttack
   self.stateLocked = true;
   self.playing_pain_animation = true;
 
-  is_stun = (iDFlags &level.iDFLAGS_STUN);
+  is_stun = (iDFlags & level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";
@@ -445,9 +438,8 @@ DoStumble(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath, eAttack
   self.playing_pain_animation = false;
   self.stateLocked = false;
 
-  if(shouldStartMove()) {
+  if(shouldStartMove())
     self StartMove();
-  }
 
   self ContinueMovement();
 }
@@ -540,13 +532,11 @@ DoDodge(endwait) {
   primary_dodge_anim_state = get_primary_dodge_anim_state();
 
   if(cointoss()) {
-    if(!TryDodge(primary_dodge_anim_state + "_left", endwait)) {
+    if(!TryDodge(primary_dodge_anim_state + "_left", endwait))
       TryDodge(primary_dodge_anim_state + "_right", endwait);
-    }
   } else {
-    if(!TryDodge(primary_dodge_anim_state + "_right", endwait)) {
+    if(!TryDodge(primary_dodge_anim_state + "_right", endwait))
       TryDodge(primary_dodge_anim_state + "_left", endwait);
-    }
   }
 }
 
@@ -568,9 +558,8 @@ TryDodge(dodgeState, endwait) {
   moveScale = GetSafeAnimMoveDeltaPercentage(dodgeAnim);
   moveScale = min(moveScale, self.xyanimscale);
 
-  if(moveScale < MIN_DODGE_SCALE) {
+  if(moveScale < MIN_DODGE_SCALE)
     return false;
-  }
 
   self.last_dodge_time = GetTime();
 
@@ -597,9 +586,8 @@ WaitForStuck() {
   while(true) {
     currentTime = GetTime();
     LastDistance = Length(self.origin - lastPos);
-    if(LastDistance > STUCK_TOLERANCE) {
+    if(LastDistance > STUCK_TOLERANCE)
       nextStuckTime = currentTime + STUCK_DURATION;
-    }
 
     if(nextStuckTime <= currentTime) {
       stuckLerp();
@@ -656,11 +644,10 @@ doWalkStart() {
 
 doRunStart() {
   negStartNode = self GetNegotiationStartNode();
-  if(isDefined(negStartNode)) {
+  if(isDefined(negStartNode))
     goalPos = negStartNode.origin;
-  } else {
+  else
     goalPos = self GetPathGoalPos();
-  }
 
   if(!isDefined(goalPos)) {
     return;
@@ -675,9 +662,8 @@ doRunStart() {
     myUp = AnglesToUp(self.angles);
     if(VectorDot(myUp, (0, 0, 1)) < 0.707) {
       angleCos = VectorDot(myUp, lookaheadDir);
-      if(angleCos > 0.707 || angleCos < -0.707) {
+      if(angleCos > 0.707 || angleCos < -0.707)
         return;
-      }
     }
   }
 
@@ -763,15 +749,14 @@ shouldDoStopAnim() {
 }
 
 shouldDoLeapArrivalAnim(startNode, angleIndex) {
-  if(startNode.type == "Jump" || startNode.type == "Jump Attack") {
+  if(startNode.type == "Jump" || startNode.type == "Jump Attack")
     return true;
-  } else if(traversalStartFromIdle(startNode.animscript)) {
+  else if(traversalStartFromIdle(startNode.animscript))
     return true;
-  } else if(incomingAngleStraightAhead(self maps\mp\alien\_utility::get_alien_type(), angleIndex)) {
+  else if(incomingAngleStraightAhead(self maps\mp\alien\_utility::get_alien_type(), angleIndex))
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 incomingAngleStraightAhead(alienType, angleIndex) {
@@ -804,9 +789,8 @@ CanDoTurnAnim(turnAnim) {
   RADIUS_OFFSET = 10;
   HEIGHT_OFFSET_COOR = (0, 0, 16);
 
-  if(!isDefined(self GetPathGoalPos())) {
+  if(!isDefined(self GetPathGoalPos()))
     return false;
-  }
 
   assert(isDefined(turnAnim));
 
@@ -819,16 +803,14 @@ CanDoTurnAnim(turnAnim) {
   moveDelta = GetMoveDelta(turnAnim, 0, codeMoveTime);
   codeMovePoint = self LocalToWorldCoords(moveDelta);
   codeMovePoint = GetGroundPosition(codeMovePoint, self.radius);
-  if(!isDefined(codeMovePoint)) {
+  if(!isDefined(codeMovePoint))
     return false;
-  }
 
   trace_passed = self AIPhysicsTracePassed(self.origin + HEIGHT_OFFSET_COOR, codeMovePoint + HEIGHT_OFFSET_COOR, self.radius - RADIUS_OFFSET, self.height - HEIGHT_OFFSET);
-  if(trace_passed) {
+  if(trace_passed)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 shouldStartMove() {

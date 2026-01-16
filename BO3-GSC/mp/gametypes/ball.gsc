@@ -38,7 +38,7 @@
 #namespace ball;
 
 function autoexec __init__sytem__() {
-  system::register("ball", &__init__, undefined, undefined);
+  system::register("ball", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -78,19 +78,19 @@ function main() {
   level.overrideteamscore = 1;
   level.clampscorelimit = 0;
   level.doubleovertime = 1;
-  level.onprecachegametype = &onprecachegametype;
-  level.onstartgametype = &onstartgametype;
-  level.onspawnplayer = &onspawnplayer;
-  level.onplayerkilled = &onplayerkilled;
-  level.onroundswitch = &onroundswitch;
-  level.onroundscorelimit = &onroundscorelimit;
-  level.onendgame = &onendgame;
-  level.onroundendgame = &onroundendgame;
-  level.getteamkillpenalty = &ball_getteamkillpenalty;
-  level.getteamkillscore = &ball_getteamkillscore;
-  level.setmatchscorehudelemforteam = &setmatchscorehudelemforteam;
-  level.shouldplayovertimeround = &shouldplayovertimeround;
-  level.ontimelimit = &ball_ontimelimit;
+  level.onprecachegametype = & onprecachegametype;
+  level.onstartgametype = & onstartgametype;
+  level.onspawnplayer = & onspawnplayer;
+  level.onplayerkilled = & onplayerkilled;
+  level.onroundswitch = & onroundswitch;
+  level.onroundscorelimit = & onroundscorelimit;
+  level.onendgame = & onendgame;
+  level.onroundendgame = & onroundendgame;
+  level.getteamkillpenalty = & ball_getteamkillpenalty;
+  level.getteamkillscore = & ball_getteamkillscore;
+  level.setmatchscorehudelemforteam = & setmatchscorehudelemforteam;
+  level.shouldplayovertimeround = & shouldplayovertimeround;
+  level.ontimelimit = & ball_ontimelimit;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startUplink", "hcStartUplink", "uplOrders", "uplOrders");
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
@@ -101,33 +101,33 @@ function main() {
 }
 
 function onprecachegametype() {
-  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
 }
 
 function onstartgametype() {
   level.usestartspawns = 1;
   level.ballworldweapon = getweapon("ball_world");
   level.passingballweapon = getweapon("ball_world_pass");
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   setclientnamemode("auto_change");
   if(level.scoreroundwinbased) {
     globallogic_score::resetteamscores();
   }
-  util::setobjectivetext("allies", &"OBJECTIVES_BALL");
-  util::setobjectivetext("axis", &"OBJECTIVES_BALL");
+  util::setobjectivetext("allies", & "OBJECTIVES_BALL");
+  util::setobjectivetext("axis", & "OBJECTIVES_BALL");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", &"OBJECTIVES_BALL");
-    util::setobjectivescoretext("axis", &"OBJECTIVES_BALL");
+    util::setobjectivescoretext("allies", & "OBJECTIVES_BALL");
+    util::setobjectivescoretext("axis", & "OBJECTIVES_BALL");
   } else {
-    util::setobjectivescoretext("allies", &"OBJECTIVES_BALL_SCORE");
-    util::setobjectivescoretext("axis", &"OBJECTIVES_BALL_SCORE");
+    util::setobjectivescoretext("allies", & "OBJECTIVES_BALL_SCORE");
+    util::setobjectivescoretext("axis", & "OBJECTIVES_BALL_SCORE");
   }
-  util::setobjectivehinttext("allies", &"OBJECTIVES_BALL_HINT");
-  util::setobjectivehinttext("axis", &"OBJECTIVES_BALL_HINT");
-  if(isDefined(game["overtime_round"])) {
-    if(!isDefined(game["ball_game_score"])) {
+  util::setobjectivehinttext("allies", & "OBJECTIVES_BALL_HINT");
+  util::setobjectivehinttext("axis", & "OBJECTIVES_BALL_HINT");
+  if(isdefined(game["overtime_round"])) {
+    if(!isdefined(game["ball_game_score"])) {
       game["ball_game_score"] = [];
       game["ball_game_score"]["allies"] = [
         [level._getteamscore]
@@ -136,34 +136,38 @@ function onstartgametype() {
         [level._getteamscore]
       ]("axis");
     }
-    [[level._setteamscore]]("allies", 0);
-    [[level._setteamscore]]("axis", 0);
-    if(isDefined(game["ball_overtime_score_to_beat"])) {
+    [
+      [level._setteamscore]
+    ]("allies", 0);
+    [
+      [level._setteamscore]
+    ]("axis", 0);
+    if(isdefined(game["ball_overtime_score_to_beat"])) {
       util::registerscorelimit(game["ball_overtime_score_to_beat"], game["ball_overtime_score_to_beat"]);
     } else {
       util::registerscorelimit(1, 1);
     }
-    if(isDefined(game["ball_overtime_time_to_beat"])) {
+    if(isdefined(game["ball_overtime_time_to_beat"])) {
       util::registertimelimit(game["ball_overtime_time_to_beat"] / 60000, game["ball_overtime_time_to_beat"] / 60000);
     } else {
       util::registertimelimit(0, 1440);
     }
     if(game["overtime_round"] == 1) {
-      util::setobjectivehinttext("allies", &"MP_BALL_OVERTIME_ROUND_1");
-      util::setobjectivehinttext("axis", &"MP_BALL_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("allies", & "MP_BALL_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("axis", & "MP_BALL_OVERTIME_ROUND_1");
     } else {
-      if(isDefined(game["ball_overtime_first_winner"])) {
-        level.ontimelimit = &ballovertimeround2_ontimelimit;
+      if(isdefined(game["ball_overtime_first_winner"])) {
+        level.ontimelimit = & ballovertimeround2_ontimelimit;
         game["teamSuddenDeath"][game["ball_overtime_first_winner"]] = 1;
-        util::setobjectivehinttext(game["ball_overtime_first_winner"], &"MP_BALL_OVERTIME_ROUND_2_WINNER");
-        util::setobjectivehinttext(util::getotherteam(game["ball_overtime_first_winner"]), &"MP_BALL_OVERTIME_ROUND_2_LOSER");
+        util::setobjectivehinttext(game["ball_overtime_first_winner"], & "MP_BALL_OVERTIME_ROUND_2_WINNER");
+        util::setobjectivehinttext(util::getotherteam(game["ball_overtime_first_winner"]), & "MP_BALL_OVERTIME_ROUND_2_LOSER");
       } else {
-        level.ontimelimit = &ballovertimeround2_ontimelimit;
-        util::setobjectivehinttext("allies", &"MP_BALL_OVERTIME_ROUND_2_TIE");
-        util::setobjectivehinttext("axis", &"MP_BALL_OVERTIME_ROUND_2_TIE");
+        level.ontimelimit = & ballovertimeround2_ontimelimit;
+        util::setobjectivehinttext("allies", & "MP_BALL_OVERTIME_ROUND_2_TIE");
+        util::setobjectivehinttext("axis", & "MP_BALL_OVERTIME_ROUND_2_TIE");
       }
     }
-  } else if(isDefined(game["round_time_to_beat"])) {
+  } else if(isdefined(game["round_time_to_beat"])) {
     util::registertimelimit(game["round_time_to_beat"] / 60000, game["round_time_to_beat"] / 60000);
   }
   spawning::create_map_placed_influencers();
@@ -192,10 +196,10 @@ function onstartgametype() {
 
 function anyballsintheair() {
   foreach(ball in level.balls) {
-    if(isDefined(ball.carrier)) {
+    if(isdefined(ball.carrier)) {
       continue;
     }
-    if(isDefined(ball.projectile)) {
+    if(isdefined(ball.projectile)) {
       if(!ball.projectile isonground()) {
         return ball;
       }
@@ -206,14 +210,14 @@ function anyballsintheair() {
 function waitforballtocometorest() {
   self endon("reset");
   self endon("pickup_object");
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     if(self.projectile isonground()) {
       return;
     }
     self.projectile endon("death");
     self.projectile endon("stationary");
     self.projectile endon("grenade_bounce");
-    while(true) {
+    while (true) {
       wait(1);
     }
   }
@@ -232,8 +236,8 @@ function freezeplayersforroundend() {
 
 function waitforallballstocometorest() {
   ball = anyballsintheair();
-  if(isDefined(ball)) {
-    level.ontimelimit = &ball_ontimelimit_donothing;
+  if(isdefined(ball)) {
+    level.ontimelimit = & ball_ontimelimit_donothing;
     ball waitforballtocometorest();
   }
 }
@@ -255,13 +259,13 @@ function ballovertimeround2_ontimelimit() {
         break;
       }
     }
-    if(!isDefined(winner)) {
+    if(!isdefined(winner)) {
       winner = globallogic::determineteamwinnerbygamestat("teamScores");
     }
     globallogic_utils::logteamwinstring("time limit", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -284,10 +288,10 @@ function ballconsistencyswitchthread() {
   self endon("delete");
   player = self;
   ball = getweapon("ball");
-  while(true) {
-    if(isDefined(ball) && player hasweapon(ball)) {
+  while (true) {
+    if(isdefined(ball) && player hasweapon(ball)) {
       curweapon = player getcurrentweapon();
-      if(isDefined(curweapon) && curweapon != ball && !player isswitchingweapons()) {
+      if(isdefined(curweapon) && curweapon != ball && !player isswitchingweapons()) {
         if(curweapon.isheroweapon) {
           slot = self gadgetgetslot(curweapon);
           if(!self ability_player::gadget_is_in_use(slot)) {
@@ -306,10 +310,10 @@ function ballconsistencyswitchthread() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(self.carryobject)) {
+  if(isdefined(self.carryobject)) {
     otherteam = util::getotherteam(self.team);
     self recordgameevent("return");
-    if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+    if(isdefined(attacker) && isplayer(attacker) && attacker != self) {
       attacker recordgameevent("kill_carrier");
       if(attacker.team != self.team) {
         scoreevents::processscoreevent("kill_ball_carrier", attacker, undefined, weapon);
@@ -322,19 +326,19 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       level thread popups::displayteammessagetoteam(&"MP_BALL_DROPPED", self, self.team);
       level thread popups::displayteammessagetoteam(&"MP_BALL_DROPPED", self, otherteam);
     }
-  } else if(isDefined(attacker.carryobject) && attacker.team != self.team) {
+  } else if(isdefined(attacker.carryobject) && attacker.team != self.team) {
     scoreevents::processscoreevent("kill_enemy_while_carrying_ball", attacker, undefined, weapon);
   }
   foreach(ball in level.balls) {
     ballcarrier = ball.carrier;
-    if(isDefined(ballcarrier)) {
+    if(isdefined(ballcarrier)) {
       ballorigin = ball.carrier.origin;
       iscarried = 1;
     } else {
       ballorigin = ball.curorigin;
       iscarried = 0;
     }
-    if(iscarried && isDefined(attacker) && isDefined(attacker.team) && attacker != self && ballcarrier != attacker) {
+    if(iscarried && isdefined(attacker) && isdefined(attacker.team) && attacker != self && ballcarrier != attacker) {
       if(attacker.team == ball.carrier.team) {
         dist = distance2dsquared(self.origin, ballorigin);
         if(dist < level.defaultoffenseradiussq) {
@@ -346,7 +350,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   }
   victim = self;
   foreach(ball_goal in level.ball_goals) {
-    if(isDefined(attacker) && isDefined(attacker.team) && attacker != victim && isDefined(victim.team) && isplayer(attacker)) {
+    if(isdefined(attacker) && isdefined(attacker.team) && attacker != victim && isdefined(victim.team) && isplayer(attacker)) {
       dist_to_goal = distance2dsquared(attacker.origin, ball_goal.origin);
       victim_dist_to_goal = distance2dsquared(victim.origin, ball_goal.origin);
       if(dist_to_goal < level.defaultoffenseradiussq || victim_dist_to_goal < level.defaultoffenseradiussq) {
@@ -361,7 +365,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function onroundswitch() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   level.halftimetype = "halftime";
@@ -369,7 +373,7 @@ function onroundswitch() {
 }
 
 function onroundscorelimit() {
-  if(!isDefined(game["overtime_round"])) {
+  if(!isdefined(game["overtime_round"])) {
     timelimit = getgametypesetting("timeLimit") * 60000;
     timetobeat = globallogic_utils::gettimepassed();
     if(timelimit > 0 && timetobeat < timelimit) {
@@ -380,10 +384,10 @@ function onroundscorelimit() {
 }
 
 function onendgame(winningteam) {
-  if(!isDefined(winningteam) || winningteam == "tie") {
+  if(!isdefined(winningteam) || winningteam == "tie") {
     return;
   }
-  if(isDefined(game["overtime_round"])) {
+  if(isdefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1) {
       game["ball_overtime_first_winner"] = winningteam;
       game["ball_overtime_score_to_beat"] = getteamscore(winningteam);
@@ -407,20 +411,20 @@ function updateteamscorebyroundswon() {
 }
 
 function onroundendgame(winningteam) {
-  if(isDefined(game["overtime_round"])) {
-    if(isDefined(game["ball_overtime_first_winner"])) {
+  if(isdefined(game["overtime_round"])) {
+    if(isdefined(game["ball_overtime_first_winner"])) {
       losing_team_score = 0;
-      if(!isDefined(winningteam) || winningteam == "tie") {
+      if(!isdefined(winningteam) || winningteam == "tie") {
         winningteam = game["ball_overtime_first_winner"];
       }
       if(game["ball_overtime_first_winner"] == winningteam) {
-        level.endvictoryreasontext = &"MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = &"MPUI_BALL_OVERTIME_DEFEAT_TIMELIMIT";
+        level.endvictoryreasontext = & "MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = & "MPUI_BALL_OVERTIME_DEFEAT_TIMELIMIT";
       } else {
-        level.endvictoryreasontext = &"MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = &"MPUI_BALL_OVERTIME_DEFEAT_DID_NOT_DEFEND";
+        level.endvictoryreasontext = & "MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = & "MPUI_BALL_OVERTIME_DEFEAT_DID_NOT_DEFEND";
       }
-    } else if(!isDefined(winningteam) || winningteam == "tie") {
+    } else if(!isdefined(winningteam) || winningteam == "tie") {
       updateteamscorebyroundswon();
       return "tie";
     }
@@ -430,10 +434,12 @@ function onroundendgame(winningteam) {
         if(team === winningteam) {
           score++;
         }
-        [[level._setteamscore]](team, score);
+        [
+          [level._setteamscore]
+        ](team, score);
       }
     } else {
-      if(isDefined(game["ball_overtime_score_to_beat"]) && game["ball_overtime_score_to_beat"] > game["ball_overtime_best_score"]) {
+      if(isdefined(game["ball_overtime_score_to_beat"]) && game["ball_overtime_score_to_beat"] > game["ball_overtime_best_score"]) {
         added_score = game["ball_overtime_score_to_beat"];
       } else {
         added_score = game["ball_overtime_best_score"];
@@ -443,7 +449,9 @@ function onroundendgame(winningteam) {
         if(team === winningteam) {
           score = score + added_score;
         }
-        [[level._setteamscore]](team, score);
+        [
+          [level._setteamscore]
+        ](team, score);
       }
     }
     return winningteam;
@@ -462,7 +470,7 @@ function setmatchscorehudelemforteam() {
 }
 
 function shouldplayovertimeround() {
-  if(isDefined(game["overtime_round"])) {
+  if(isdefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1 || !level.gameended) {
       return true;
     }
@@ -487,7 +495,7 @@ function shouldplayovertimeround() {
 
 function ball_getteamkillpenalty(einflictor, attacker, smeansofdeath, weapon) {
   teamkill_penalty = globallogic_defaults::default_getteamkillpenalty(einflictor, attacker, smeansofdeath, weapon);
-  if(isDefined(self.isballcarrier) && self.isballcarrier) {
+  if(isdefined(self.isballcarrier) && self.isballcarrier) {
     teamkill_penalty = teamkill_penalty * level.teamkillpenaltymultiplier;
   }
   return teamkill_penalty;
@@ -495,7 +503,7 @@ function ball_getteamkillpenalty(einflictor, attacker, smeansofdeath, weapon) {
 
 function ball_getteamkillscore(einflictor, attacker, smeansofdeath, weapon) {
   teamkill_score = rank::getscoreinfovalue("kill");
-  if(isDefined(self.isballcarrier) && self.isballcarrier) {
+  if(isdefined(self.isballcarrier) && self.isballcarrier) {
     teamkill_score = teamkill_score * level.teamkillscoremultiplier;
   }
   return int(teamkill_score);
@@ -515,7 +523,7 @@ function setup_objectives() {
   level.ball_goals = [];
   level.ball_starts = [];
   level.balls = [];
-  level.ball_starts = getEntArray("ball_start", "targetname");
+  level.ball_starts = getentarray("ball_start", "targetname");
   foreach(ball_start in level.ball_starts) {
     level.balls[level.balls.size] = spawn_ball(ball_start);
   }
@@ -523,7 +531,7 @@ function setup_objectives() {
     width = 48;
     height = 48;
     count = level.ballcount - level.ball_starts.size;
-    for(index = 0; index < count; index++) {
+    for (index = 0; index < count; index++) {
       position = get_real_ball_location(level.ball_starts[0].origin, level.ball_starts[0].angles, index, count, width, 0);
       trigger = spawn("trigger_radius", position, 0, width, height);
       level.ball_starts[level.ball_starts.size] = trigger;
@@ -549,8 +557,8 @@ function setup_goal(trigger, team) {
   foreach(ball in level.balls) {
     useobj gameobjects::set_key_object(ball);
   }
-  useobj.canuseobj = &can_use_goal;
-  useobj.onuse = &on_use_goal;
+  useobj.canuseobj = & can_use_goal;
+  useobj.onuse = & on_use_goal;
   useobj.ball_in_goal = 0;
   useobj.radiussq = trigger.radius * trigger.radius;
   useobj.center = trigger.origin + (0, 0, trigger.height * 0.5);
@@ -562,10 +570,10 @@ function can_use_goal(player) {
 }
 
 function on_use_goal(player) {
-  if(!isDefined(player) || !isDefined(player.carryobject)) {
+  if(!isdefined(player) || !isdefined(player.carryobject)) {
     return;
   }
-  if(isDefined(player.carryobject.scorefrozenuntil) && player.carryobject.scorefrozenuntil > gettime()) {
+  if(isdefined(player.carryobject.scorefrozenuntil) && player.carryobject.scorefrozenuntil > gettime()) {
     return;
   }
   self play_goal_score_fx();
@@ -580,7 +588,7 @@ function on_use_goal(player) {
   globallogic_audio::play_2d_on_team("mpl_ballcapture_sting_enemy", team);
   level thread popups::displayteammessagetoteam(&"MP_BALL_CAPTURE", player, team);
   level thread popups::displayteammessagetoteam(&"MP_BALL_CAPTURE", player, otherteam);
-  if(isDefined(player.shoot_charge_bar)) {
+  if(isdefined(player.shoot_charge_bar)) {
     player.shoot_charge_bar.inuse = 0;
   }
   ball = player.carryobject;
@@ -588,7 +596,7 @@ function on_use_goal(player) {
   player gameobjects::take_carry_weapon(ball.carryweapon);
   ball ball_set_dropped(1);
   ball thread upload_ball(self);
-  if(isDefined(player.pers["carries"])) {
+  if(isdefined(player.pers["carries"])) {
     player.pers["carries"]++;
     player.carries = player.pers["carries"];
   }
@@ -604,7 +612,7 @@ function on_use_goal(player) {
 function spawn_ball(trigger) {
   visuals = [];
   visuals[0] = spawn("script_model", trigger.origin);
-  visuals[0] setModel("wpn_t7_uplink_ball_world");
+  visuals[0] setmodel("wpn_t7_uplink_ball_world");
   visuals[0] notsolid();
   trigger enablelinkto();
   trigger linkto(visuals[0]);
@@ -621,12 +629,12 @@ function spawn_ball(trigger) {
   ballobj.disallowremotecontrol = 1;
   ballobj.disallowplaceablepickup = 1;
   ballobj gameobjects::update_objective();
-  ballobj.canuseobject = &can_use_ball;
-  ballobj.onpickup = &on_pickup_ball;
-  ballobj.setdropped = &ball_set_dropped;
-  ballobj.onreset = &on_reset_ball;
-  ballobj.pickuptimeoutoverride = &ball_physics_timeout;
-  ballobj.carryweaponthink = &carry_think_ball;
+  ballobj.canuseobject = & can_use_ball;
+  ballobj.onpickup = & on_pickup_ball;
+  ballobj.setdropped = & ball_set_dropped;
+  ballobj.onreset = & on_reset_ball;
+  ballobj.pickuptimeoutoverride = & ball_physics_timeout;
+  ballobj.carryweaponthink = & carry_think_ball;
   ballobj.in_goal = 0;
   ballobj.lastcarrierscored = 0;
   ballobj.lastcarrierteam = "neutral";
@@ -638,34 +646,34 @@ function spawn_ball(trigger) {
   } else {
     ballobj.autoresettime = undefined;
   }
-  playFXOnTag("ui/fx_uplink_ball_trail", ballobj.visuals[0], "tag_origin");
+  playfxontag("ui/fx_uplink_ball_trail", ballobj.visuals[0], "tag_origin");
   return ballobj;
 }
 
 function can_use_ball(player) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return false;
   }
   if(!self gameobjects::can_interact_with(player)) {
     return false;
   }
-  if(isDefined(self.droptime) && self.droptime >= gettime()) {
+  if(isdefined(self.droptime) && self.droptime >= gettime()) {
     return false;
   }
-  if(isDefined(player.resurrect_weapon) && player getcurrentweapon() == player.resurrect_weapon) {
+  if(isdefined(player.resurrect_weapon) && player getcurrentweapon() == player.resurrect_weapon) {
     return false;
   }
   if(player iscarryingturret()) {
     return false;
   }
   currentweapon = player getcurrentweapon();
-  if(isDefined(currentweapon)) {
+  if(isdefined(currentweapon)) {
     if(!valid_ball_pickup_weapon(currentweapon)) {
       return false;
     }
   }
   nextweapon = player.changingweapon;
-  if(isDefined(nextweapon) && player isswitchingweapons()) {
+  if(isdefined(nextweapon) && player isswitchingweapons()) {
     if(!valid_ball_pickup_weapon(nextweapon)) {
       return false;
     }
@@ -679,20 +687,20 @@ function can_use_ball(player) {
   if(dist2 < (thresh * thresh)) {
     return true;
   }
-  start = player getEye();
+  start = player geteye();
   end = (self.curorigin[0], self.curorigin[1], self.curorigin[2] + 5);
-  if(isDefined(ball)) {
+  if(isdefined(ball)) {
     end = (ball.origin[0], ball.origin[1], ball.origin[2] + 5);
   }
-  if(isDefined(self.carrier) && isplayer(self.carrier)) {
-    end = self.carrier getEye();
+  if(isdefined(self.carrier) && isplayer(self.carrier)) {
+    end = self.carrier geteye();
   }
   first_skip_ent = ball;
   second_skip_ent = ball;
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     first_skip_ent = self.projectile;
   }
-  if(isDefined(self.lastprojectile)) {
+  if(isdefined(self.lastprojectile)) {
     second_skip_ent = self.lastprojectile;
   }
   if(!bullettracepassed(end, start, 0, first_skip_ent, second_skip_ent, 0, 0)) {
@@ -708,7 +716,7 @@ function chief_mammal_reset() {
   self.isresetting = 1;
   self notify("reset");
   origin = self.curorigin;
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     origin = self.projectile.origin;
   }
   foreach(visual in self.visuals) {
@@ -717,7 +725,7 @@ function chief_mammal_reset() {
     visual dontinterpolate();
     visual show();
   }
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     self.projectile delete();
     self.lastprojectile = undefined;
   }
@@ -739,13 +747,13 @@ function on_pickup_ball(player) {
   level.usestartspawns = 0;
   level clientfield::set("ball_away", 1);
   linkedparent = self.visuals[0] getlinkedent();
-  if(isDefined(linkedparent)) {
+  if(isdefined(linkedparent)) {
     self.visuals[0] unlink();
   }
   player resetflashback();
   pass = 0;
   ball_velocity = 0;
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     pass = 1;
     ball_velocity = self.projectile getvelocity();
     self.projectile delete();
@@ -791,7 +799,7 @@ function on_pickup_ball(player) {
 
 function ball_carrier_cleanup() {
   self gameobjects::set_owner_team("neutral");
-  if(isDefined(self.carrier)) {
+  if(isdefined(self.carrier)) {
     self.carrier clientfield::set("ballcarrier", 0);
     self.carrier.balldropdelay = undefined;
     self.carrier.nopickuptime = gettime() + 500;
@@ -814,17 +822,17 @@ function ball_set_dropped(skip_physics = 0) {
   self notify("dropped");
   dropangles = (0, 0, 0);
   carrier = self.carrier;
-  if(isDefined(carrier) && carrier.team != "spectator") {
+  if(isdefined(carrier) && carrier.team != "spectator") {
     droporigin = carrier.origin;
     dropangles = carrier.angles;
   } else {
     droporigin = self.origin;
   }
-  if(!isDefined(droporigin)) {
+  if(!isdefined(droporigin)) {
     droporigin = self.safeorigin;
   }
   droporigin = droporigin + vectorscale((0, 0, 1), 40);
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     self.projectile delete();
   }
   self ball_carrier_cleanup();
@@ -835,7 +843,7 @@ function ball_set_dropped(skip_physics = 0) {
   self.isresetting = 0;
   if(!skip_physics) {
     angles = (0, dropangles[1], 0);
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     velocity = (forward * 200) + vectorscale((0, 0, 1), 80);
     ball_physics_launch(velocity);
   }
@@ -843,24 +851,24 @@ function ball_set_dropped(skip_physics = 0) {
 }
 
 function on_reset_ball(prev_origin) {
-  if(isDefined(level.gameended) && level.gameended) {
+  if(isdefined(level.gameended) && level.gameended) {
     return;
   }
   visual = self.visuals[0];
   linkedparent = visual getlinkedent();
-  if(isDefined(linkedparent)) {
+  if(isdefined(linkedparent)) {
     visual unlink();
   }
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     self.projectile delete();
   }
   if(!self gameobjects::get_flags(1)) {
-    playFX("ui/fx_uplink_ball_vanish", prev_origin);
+    playfx("ui/fx_uplink_ball_vanish", prev_origin);
     self play_return_vo();
   }
   self.lastcarrierteam = "none";
   self thread download_ball();
-  if(isDefined(self.killcament) && isentity(self.killcament)) {
+  if(isdefined(self.killcament) && isentity(self.killcament)) {
     self.killcament recordgameeventnonplayer("ball_reset");
   }
 }
@@ -873,7 +881,7 @@ function upload_ball(goal) {
   self notify("score_event");
   self.in_goal = 1;
   goal.ball_in_goal = 1;
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     self.projectile delete();
   }
   self gameobjects::allow_carry("none");
@@ -915,7 +923,7 @@ function download_ball() {
   wait(fall_time);
   self gameobjects::set_flags(0);
   level clientfield::set("ball_away", 0);
-  playFXOnTag("ui/fx_uplink_ball_trail", visual, "tag_origin");
+  playfxontag("ui/fx_uplink_ball_trail", visual, "tag_origin");
   self thread ball_download_fx(visual, fall_time);
   self.in_goal = 0;
 }
@@ -932,30 +940,30 @@ function ball_pass_watch() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  while(true) {
+  while (true) {
     self waittill("ball_pass", weapon);
-    if(!isDefined(self.pass_target)) {
+    if(!isdefined(self.pass_target)) {
       playerangles = self getplayerangles();
       playerangles = (math::clamp(playerangles[0], -85, 85), playerangles[1], playerangles[2]);
-      dir = anglesToForward(playerangles);
+      dir = anglestoforward(playerangles);
       force = 90;
       self.carryobject thread ball_physics_launch_drop(dir * force, self);
       return;
     }
     break;
   }
-  if(isDefined(self.carryobject)) {
+  if(isdefined(self.carryobject)) {
     self thread ball_pass_or_throw_active();
     pass_target = self.pass_target;
     last_target_origin = self.pass_target.origin;
     wait(0.15);
-    if(isDefined(self.pass_target)) {
+    if(isdefined(self.pass_target)) {
       pass_target = self.pass_target;
       self.carryobject thread ball_pass_projectile(self, pass_target, last_target_origin);
     } else {
       playerangles = self getplayerangles();
       playerangles = (math::clamp(playerangles[0], -85, 85), playerangles[1], playerangles[2]);
-      dir = anglesToForward(playerangles);
+      dir = anglestoforward(playerangles);
       force = 90;
       self.carryobject thread ball_physics_launch_drop(dir * force, self);
     }
@@ -969,18 +977,18 @@ function ball_shoot_watch() {
   self endon("drop_object");
   extra_pitch = getdvarfloat("scr_ball_shoot_extra_pitch", 0);
   force = getdvarfloat("scr_ball_shoot_force", 900);
-  while(true) {
+  while (true) {
     self waittill("weapon_fired", weapon);
     if(weapon != getweapon("ball")) {
       continue;
     }
     break;
   }
-  if(isDefined(self.carryobject)) {
+  if(isdefined(self.carryobject)) {
     playerangles = self getplayerangles();
     playerangles = playerangles + (extra_pitch, 0, 0);
     playerangles = (math::clamp(playerangles[0], -85, 85), playerangles[1], playerangles[2]);
-    dir = anglesToForward(playerangles);
+    dir = anglestoforward(playerangles);
     self thread ball_pass_or_throw_active();
     self thread ball_check_pass_kill_pickup(self.carryobject);
     self.carryobject ball_create_killcam_ent();
@@ -994,15 +1002,15 @@ function ball_weapon_change_watch() {
   self endon("death");
   self endon("drop_object");
   ballweapon = getweapon("ball");
-  while(true) {
+  while (true) {
     if(ballweapon == self getcurrentweapon()) {
       break;
     }
     self waittill("weapon_change");
   }
-  while(true) {
+  while (true) {
     self waittill("weapon_change", weapon, lastweapon);
-    if(isDefined(weapon) && weapon.gadget_type == 14) {
+    if(isdefined(weapon) && weapon.gadget_type == 14) {
       break;
     }
     if(weapon === level.weaponnone && lastweapon === ballweapon) {
@@ -1011,7 +1019,7 @@ function ball_weapon_change_watch() {
   }
   playerangles = self getplayerangles();
   playerangles = (math::clamp(playerangles[0], -85, 85), absangleclamp360(playerangles[1] + 20), playerangles[2]);
-  dir = anglesToForward(playerangles);
+  dir = anglestoforward(playerangles);
   force = 90;
   self.carryobject thread ball_physics_launch_drop(dir * force, self);
 }
@@ -1030,16 +1038,16 @@ function valid_ball_pickup_weapon(weapon) {
 }
 
 function player_no_pickup_time() {
-  return isDefined(self.nopickuptime) && self.nopickuptime > gettime();
+  return isdefined(self.nopickuptime) && self.nopickuptime > gettime();
 }
 
 function watchunderwater(trigger) {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     if(self isplayerunderwater()) {
       foreach(ball in level.balls) {
-        if(isDefined(ball.carrier) && ball.carrier == self) {
+        if(isdefined(ball.carrier) && ball.carrier == self) {
           ball gameobjects::set_dropped();
           return;
         }
@@ -1053,7 +1061,7 @@ function watchunderwater(trigger) {
 function ball_physics_launch_drop(force, droppingplayer, switchweapon) {
   ball_set_dropped(1);
   ball_physics_launch(force, droppingplayer);
-  if(isDefined(switchweapon) && switchweapon) {
+  if(isdefined(switchweapon) && switchweapon) {
     droppingplayer killstreaks::switch_to_last_non_killstreak_weapon(undefined, 1);
   }
 }
@@ -1062,19 +1070,19 @@ function ball_check_pass_kill_pickup(carryobj) {
   self endon("death");
   self endon("disconnect");
   carryobj endon("reset");
-  timer = spawnStruct();
+  timer = spawnstruct();
   timer endon("timer_done");
   timer thread timer_run(1.5);
   carryobj waittill("pickup_object");
   timer timer_cancel();
-  if(!isDefined(carryobj.carrier) || carryobj.carrier.team == self.team) {
+  if(!isdefined(carryobj.carrier) || carryobj.carrier.team == self.team) {
     return;
   }
   carryobj.carrier endon("disconnect");
   timer thread timer_run(5);
   carryobj.carrier waittill("death", attacker);
   timer timer_cancel();
-  if(!isDefined(attacker) || attacker != self) {
+  if(!isdefined(attacker) || attacker != self) {
     return;
   }
   timer thread timer_run(2);
@@ -1096,7 +1104,7 @@ function adjust_for_stance(ball) {
   target = self;
   target endon("pass_end");
   offs = 0;
-  while(isDefined(target) && isDefined(ball)) {
+  while (isdefined(target) && isdefined(ball)) {
     newoffs = 50;
     switch (target getstance()) {
       case "crouch": {
@@ -1118,7 +1126,7 @@ function adjust_for_stance(ball) {
 
 function ball_pass_projectile(passer, target, last_target_origin) {
   ball_set_dropped(1);
-  if(isDefined(target)) {
+  if(isdefined(target)) {
     last_target_origin = target.origin;
   }
   offset = vectorscale((0, 0, 1), 60);
@@ -1129,7 +1137,7 @@ function ball_pass_projectile(passer, target, last_target_origin) {
   }
   playerangles = passer getplayerangles();
   playerangles = (0, playerangles[1], 0);
-  dir = anglesToForward(playerangles);
+  dir = anglestoforward(playerangles);
   delta = dir * 50;
   origin = self.visuals[0].origin + delta;
   size = 5;
@@ -1158,7 +1166,7 @@ function ball_pass_projectile(passer, target, last_target_origin) {
 function ball_on_projectile_death() {
   self.projectile waittill("death");
   ball = self.visuals[0];
-  if(!isDefined(self.carrier) && !self.in_goal) {
+  if(!isdefined(self.carrier) && !self.in_goal) {
     if(ball.origin != (ball.baseorigin + vectorscale((0, 0, 1), 4000))) {
       self ball_physics_launch(vectorscale((0, 0, 1), 10));
     }
@@ -1168,7 +1176,7 @@ function ball_on_projectile_death() {
 }
 
 function ball_restore_contents() {
-  if(isDefined(self.visuals[0].old_contents)) {
+  if(isdefined(self.visuals[0].old_contents)) {
     self.visuals[0] setcontents(self.visuals[0].old_contents);
     self.visuals[0].old_contents = undefined;
   }
@@ -1179,7 +1187,7 @@ function ball_on_projectile_hit_client(passer) {
   self.projectile waittill("projectile_impact_player", player);
   self.trigger notify("trigger", player);
   self.projectile notify("kill_ball_on_projectile_death");
-  if(isDefined(passer)) {
+  if(isdefined(passer)) {
     passer recordgameevent("pass");
   }
 }
@@ -1189,7 +1197,7 @@ function ball_clear_contents() {
 }
 
 function ball_create_killcam_ent() {
-  if(isDefined(self.killcament)) {
+  if(isdefined(self.killcament)) {
     self.killcament delete();
   }
   self.killcament = spawn("script_model", self.visuals[0].origin);
@@ -1202,7 +1210,7 @@ function ball_pass_or_throw_active() {
   self endon("disconnect");
   self.pass_or_throw_active = 1;
   self allowmelee(0);
-  while(getweapon("ball") == self getcurrentweapon()) {
+  while (getweapon("ball") == self getcurrentweapon()) {
     wait(0.05);
   }
   self allowmelee(1);
@@ -1223,7 +1231,7 @@ function ball_assign_random_start() {
     new_start = start;
     break;
   }
-  if(!isDefined(new_start)) {
+  if(!isdefined(new_start)) {
     return;
   }
   ball_assign_start(new_start);
@@ -1243,7 +1251,7 @@ function ball_physics_launch(force, droppingplayer) {
   visuals.origin_prev = undefined;
   origin = visuals.origin;
   owner = visuals;
-  if(isDefined(droppingplayer)) {
+  if(isdefined(droppingplayer)) {
     owner = droppingplayer;
     origin = droppingplayer getweaponmuzzlepoint();
     right = anglestoright(force);
@@ -1275,8 +1283,8 @@ function ball_check_oob() {
   self endon("reset");
   self endon("pickup_object");
   visual = self.visuals[0];
-  while(true) {
-    skip_oob_check = isDefined(self.in_goal) && self.in_goal || (isDefined(self.isresetting) && self.isresetting);
+  while (true) {
+    skip_oob_check = isdefined(self.in_goal) && self.in_goal || (isdefined(self.isresetting) && self.isresetting);
     if(!skip_oob_check) {
       if(visual oob::istouchinganyoobtrigger() || visual is_touching_any_ball_return_trigger() || self gameobjects::should_be_reset(visual.origin[2], visual.origin[2] + 10, 1)) {
         self reset_ball();
@@ -1292,9 +1300,9 @@ function ball_physics_touch_cant_pickup_player(droppingplayer) {
   self endon("pickup_object");
   ball = self.visuals[0];
   trigger = self.trigger;
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
-    if(isDefined(droppingplayer) && droppingplayer == player && player player_no_pickup_time()) {
+    if(isdefined(droppingplayer) && droppingplayer == player && player player_no_pickup_time()) {
       continue;
     }
     if(self.droptime >= gettime()) {
@@ -1317,7 +1325,7 @@ function ball_watch_touch_enemy_goal() {
   self endon("reset");
   self endon("pickup_object");
   enemygoal = level.ball_goals[util::getotherteam(self.lastcarrierteam)];
-  while(true) {
+  while (true) {
     if(!enemygoal can_use_goal()) {
       wait(0.05);
       continue;
@@ -1328,7 +1336,7 @@ function ball_watch_touch_enemy_goal() {
       self thread ball_touched_goal(enemygoal);
       return;
     }
-    if(isDefined(ballvisual.origin_prev)) {
+    if(isdefined(ballvisual.origin_prev)) {
       result = line_intersect_sphere(ballvisual.origin_prev, ballvisual.origin, enemygoal.center, enemygoal.trigger.radius);
       if(result) {
         self thread ball_touched_goal(enemygoal);
@@ -1350,10 +1358,10 @@ function line_intersect_sphere(line_start, line_end, sphere_center, sphere_radiu
 }
 
 function ball_touched_goal(goal) {
-  if(isDefined(self.claimplayer)) {
+  if(isdefined(self.claimplayer)) {
     return;
   }
-  if(isDefined(self.scorefrozenuntil) && self.scorefrozenuntil > gettime()) {
+  if(isdefined(self.scorefrozenuntil) && self.scorefrozenuntil > gettime()) {
     return;
   }
   self gameobjects::allow_carry("none");
@@ -1366,10 +1374,10 @@ function ball_touched_goal(goal) {
   globallogic_audio::leader_dialog("uplTheyUplinkRemote", team);
   globallogic_audio::play_2d_on_team("mpl_ballcapture_sting_friend", otherteam);
   globallogic_audio::play_2d_on_team("mpl_ballcapture_sting_enemy", team);
-  if(isDefined(self.lastcarrier)) {
+  if(isdefined(self.lastcarrier)) {
     level thread popups::displayteammessagetoteam(&"MP_BALL_CAPTURE", self.lastcarrier, team);
     level thread popups::displayteammessagetoteam(&"MP_BALL_CAPTURE", self.lastcarrier, otherteam);
-    if(isDefined(self.lastcarrier.pers["throws"])) {
+    if(isdefined(self.lastcarrier.pers["throws"])) {
       self.lastcarrier.pers["throws"]++;
       self.lastcarrier.throws = self.lastcarrier.pers["throws"];
     }
@@ -1382,7 +1390,7 @@ function ball_touched_goal(goal) {
     self.lastcarrier challenges::capturedobjective(gettime(), self.trigger);
     self.lastcarrier addplayerstatwithgametype("CAPTURES", 1);
   }
-  if(isDefined(self.killcament)) {
+  if(isdefined(self.killcament)) {
     self.killcament unlink();
   }
   self thread upload_ball(goal);
@@ -1391,7 +1399,7 @@ function ball_touched_goal(goal) {
 
 function ball_give_score(team, score) {
   level globallogic_score::giveteamscoreforobjective(team, score);
-  if(isDefined(game["overtime_round"])) {
+  if(isdefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1) {} else {
       if(game["ball_overtime_first_winner"] === team) {
         thread globallogic::endgame(team, game["strings"]["score_limit_reached"]);
@@ -1413,7 +1421,7 @@ function should_record_final_score_cam(team, score_to_add) {
 }
 
 function ball_check_assist(player, wasdunk) {
-  if(!isDefined(player.passtime) || !isDefined(player.passplayer)) {
+  if(!isdefined(player.passtime) || !isdefined(player.passplayer)) {
     return;
   }
   if((player.passtime + 3000) < gettime()) {
@@ -1425,7 +1433,7 @@ function ball_check_assist(player, wasdunk) {
 function function_6746e980(projectile, timeout) {
   projectile endon("stationary");
   ret = self util::waittill_any_timeout(timeout, "reset", "pickup_object", "score_event");
-  if(ret != "timeout" && isDefined(projectile)) {
+  if(ret != "timeout" && isdefined(projectile)) {
     projectile notify("abort_ball_physics");
   }
 }
@@ -1434,20 +1442,20 @@ function ball_physics_timeout() {
   self endon("reset");
   self endon("pickup_object");
   self endon("score_event");
-  if(isDefined(self.autoresettime) && self.autoresettime > 15) {
+  if(isdefined(self.autoresettime) && self.autoresettime > 15) {
     physicstime = self.autoresettime;
   } else {
     physicstime = 15;
   }
-  if(isDefined(self.projectile)) {
+  if(isdefined(self.projectile)) {
     self.projectile endon("abort_ball_physics");
     self thread function_6746e980(self.projectile, physicstime);
     timeoutreason = self.projectile util::waittill_any_timeout(physicstime, "stationary", "abort_ball_physics");
-    if(!isDefined(timeoutreason)) {
+    if(!isdefined(timeoutreason)) {
       return;
     }
     if(timeoutreason == "stationary") {
-      if(isDefined(self.autoresettime)) {
+      if(isdefined(self.autoresettime)) {
         wait(self.autoresettime);
       }
     }
@@ -1469,11 +1477,11 @@ function player_update_pass_target(ballobj) {
   self endon("disconnect");
   self endon("cancel_update_pass_target");
   test_dot = 0.8;
-  while(true) {
+  while (true) {
     new_target = undefined;
     if(!self isonladder()) {
-      playerdir = anglesToForward(self getplayerangles());
-      playereye = self getEye();
+      playerdir = anglestoforward(self getplayerangles());
+      playereye = self geteye();
       possible_pass_targets = [];
       foreach(target in level.players) {
         if(self == target) {
@@ -1488,7 +1496,7 @@ function player_update_pass_target(ballobj) {
         if(!ballobj can_use_ball(target)) {
           continue;
         }
-        targeteye = target getEye();
+        targeteye = target geteye();
         distsq = distancesquared(targeteye, playereye);
         if(distsq > 1000000) {
           continue;
@@ -1501,7 +1509,7 @@ function player_update_pass_target(ballobj) {
           possible_pass_targets[possible_pass_targets.size] = target;
         }
       }
-      possible_pass_targets = array::quicksort(possible_pass_targets, &compare_player_pass_dot);
+      possible_pass_targets = array::quicksort(possible_pass_targets, & compare_player_pass_dot);
       foreach(target in possible_pass_targets) {
         if(sighttracepassed(playereye, target.pass_origin, 0, target)) {
           new_target = target;
@@ -1526,14 +1534,14 @@ function compare_player_pass_dot(left, right) {
 }
 
 function player_set_pass_target(new_target) {
-  if(isDefined(self.pass_target) && isDefined(new_target) && self.pass_target == new_target) {
+  if(isdefined(self.pass_target) && isdefined(new_target) && self.pass_target == new_target) {
     return;
   }
-  if(!isDefined(self.pass_target) && !isDefined(new_target)) {
+  if(!isdefined(self.pass_target) && !isdefined(new_target)) {
     return;
   }
   self player_clear_pass_target();
-  if(isDefined(new_target)) {
+  if(isdefined(new_target)) {
     offset = vectorscale((0, 0, 1), 80);
     new_target clientfield::set("passoption", 1);
     self.pass_target = new_target;
@@ -1548,7 +1556,7 @@ function player_set_pass_target(new_target) {
 }
 
 function player_clear_pass_target() {
-  if(isDefined(self.pass_icon)) {
+  if(isdefined(self.pass_icon)) {
     self.pass_icon destroy();
   }
   team_players = [];
@@ -1557,7 +1565,7 @@ function player_clear_pass_target() {
       team_players[team_players.size] = player;
     }
   }
-  if(isDefined(self.pass_target)) {
+  if(isdefined(self.pass_target)) {
     self.pass_target clientfield::set("passoption", 0);
   }
   self.pass_target = undefined;
@@ -1565,7 +1573,7 @@ function player_clear_pass_target() {
 }
 
 function ball_create_start(minstartingballs) {
-  ball_starts = getEntArray("ball_start", "targetname");
+  ball_starts = getentarray("ball_start", "targetname");
   ball_starts = array::randomize(ball_starts);
   foreach(new_start in ball_starts) {
     balladdstart(new_start.origin);
@@ -1573,7 +1581,7 @@ function ball_create_start(minstartingballs) {
   default_ball_height = 30;
   if(ball_starts.size == 0) {
     origin = level.default_ball_origin;
-    if(!isDefined(origin)) {
+    if(!isdefined(origin)) {
       origin = (0, 0, 0);
     }
     balladdstart(origin);
@@ -1585,14 +1593,14 @@ function ball_create_start(minstartingballs) {
   default_start = level.ball_starts[0].origin;
   near_nodes = getnodesinradius(default_start, 200, 20, 50);
   near_nodes = array::randomize(near_nodes);
-  for(i = 0; i < add_num && i < near_nodes.size; i++) {
+  for (i = 0; i < add_num && i < near_nodes.size; i++) {
     balladdstart(near_nodes[i].origin);
   }
 }
 
 function balladdstart(origin) {
   ball_spawn_height = 30;
-  new_start = spawnStruct();
+  new_start = spawnstruct();
   new_start.origin = origin;
   new_start ballfindground();
   new_start.origin = new_start.ground_origin + (0, 0, ball_spawn_height);
@@ -1603,7 +1611,7 @@ function balladdstart(origin) {
 function ballfindground(z_offset) {
   tracestart = self.origin + vectorscale((0, 0, 1), 32);
   traceend = self.origin + (vectorscale((0, 0, -1), 1000));
-  trace = bulletTrace(tracestart, traceend, 0, undefined);
+  trace = bullettrace(tracestart, traceend, 0, undefined);
   self.ground_origin = trace["position"];
   return trace["fraction"] != 0 && trace["fraction"] != 1;
 }
@@ -1614,14 +1622,14 @@ function play_goal_score_fx() {
 }
 
 function is_touching_any_ball_return_trigger() {
-  if(!isDefined(level.ball_return_trigger)) {
+  if(!isdefined(level.ball_return_trigger)) {
     return 0;
   }
   triggers_to_remove = [];
   result = 0;
   foreach(trigger in level.ball_return_trigger) {
-    if(!isDefined(trigger)) {
-      if(!isDefined(triggers_to_remove)) {
+    if(!isdefined(trigger)) {
+      if(!isdefined(triggers_to_remove)) {
         triggers_to_remove = [];
       } else if(!isarray(triggers_to_remove)) {
         triggers_to_remove = array(triggers_to_remove);

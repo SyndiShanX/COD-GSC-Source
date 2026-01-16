@@ -238,7 +238,7 @@ deleteAtLimit() {
 
 HandleDogSoundNoteTracks(note) {
   if(note == "sound_dogstep_run_default") {
-    self playSound("fly_dog_step_run_default");
+    self PlaySound("fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -574,9 +574,9 @@ noteTrackBodyFall(note, flagName) {
     groundType = "dirt";
   }
   if(isSubStr(note, "large")) {
-    self playSound("fly_bodyfall_large_" + groundType);
+    self PlaySound("fly_bodyfall_large_" + groundType);
   } else if(isSubStr(note, "small")) {
-    self playSound("fly_bodyfall_small_" + groundType);
+    self PlaySound("fly_bodyfall_small_" + groundType);
   }
 }
 
@@ -587,7 +587,7 @@ noteTrackFootStep(note, flagName) {
     playFootStep("J_BALL_RI");
   }
   if(!level.clientScripts) {
-    self playSound("fly_gear_run");
+    self PlaySound("fly_gear_run");
   }
 }
 
@@ -597,7 +597,7 @@ noteTrackFootScrape(note, flagName) {
   } else {
     groundType = "dirt";
   }
-  self playSound("fly_step_scrape_" + groundType);
+  self PlaySound("fly_step_scrape_" + groundType);
 }
 
 noteTrackLand(note, flagName) {
@@ -607,9 +607,9 @@ noteTrackLand(note, flagName) {
     groundType = "dirt";
   }
   if(IsPlayer(self)) {
-    self playSound("fly_land_plr_" + groundType);
+    self PlaySound("fly_land_plr_" + groundType);
   } else {
-    self playSound("fly_land_npc_" + groundType);
+    self PlaySound("fly_land_npc_" + groundType);
   }
 }
 
@@ -621,7 +621,9 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
   }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
-    return [[notetrackFunc]](note, flagName);
+    return [
+      [notetrackFunc]
+    ](note, flagName);
   }
   switch (note) {
     case "end":
@@ -708,7 +710,9 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
     if(!isDefined(note)) {
       note = "undefined";
     }
-    intercepted = [[interceptFunction]](note);
+    intercepted = [
+      [interceptFunction]
+    ](note);
     if(isDefined(intercepted) && intercepted) {
       continue;
     }
@@ -727,7 +731,9 @@ DoNoteTracksPostCallback(flagName, postFunction) {
       note = "undefined";
     }
     val = self HandleNoteTrack(note, flagName);
-    [[postFunction]](note);
+    [
+      [postFunction]
+    ](note);
     if(isDefined(val)) {
       return val;
     }
@@ -752,7 +758,9 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
   }
   for(;;) {
     time = GetTime();
-    returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
+    returnedNote = [
+      [notetracksFunc]
+    ](flagName, customFunction, debugIdentifier);
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
@@ -769,13 +777,13 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
 }
 
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, debugIdentifier, ent);
 }
 
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, time, flagName, interceptFunction, debugIdentifier, ent);
 }
@@ -793,7 +801,7 @@ doNoteTracksForTimeEndNotify(time) {
 playFootStep(foot) {
   if(!level.clientScripts) {
     if(!isAI(self)) {
-      self playSound("fly_step_run_dirt");
+      self PlaySound("fly_step_run_dirt");
       return;
     }
   }
@@ -801,7 +809,7 @@ playFootStep(foot) {
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastGroundtype)) {
       if(!level.clientScripts) {
-        self playSound("fly_step_run_dirt");
+        self PlaySound("fly_step_run_dirt");
       }
       return;
     }
@@ -811,7 +819,7 @@ playFootStep(foot) {
     self.lastGroundtype = self.groundType;
   }
   if(!level.clientScripts) {
-    self playSound("fly_step_run_" + groundType);
+    self PlaySound("fly_step_run_" + groundType);
   }
   [[anim.optionalStepEffectFunction]](foot, groundType);
 }
@@ -828,7 +836,7 @@ playFootStepEffect(foot, groundType) {
       continue;
     }
     org = self gettagorigin(foot);
-    playFX(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
+    playfx(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
     return;
   }
 }
@@ -855,7 +863,7 @@ fire_straight() {
     return;
   }
   weaporig = self gettagorigin("tag_weapon");
-  dir = anglesToForward(self GetTagAngles("tag_weapon"));
+  dir = AnglesToForward(self GetTagAngles("tag_weapon"));
   pos = weaporig + vector_scale(dir, 1000);
   self.a.lastShootTime = GetTime();
   self shoot(1, pos);
@@ -867,10 +875,10 @@ noteTrackFireSpray(note, flagName) {
     return;
   }
   weaporig = self gettagorigin("tag_weapon");
-  dir = anglesToForward(self GetTagAngles("tag_weapon"));
+  dir = AnglesToForward(self GetTagAngles("tag_weapon"));
   hitenemy = false;
   if(IsSentient(self.enemy) && IsAlive(self.enemy) && self canShoot(self.enemy GetShootAtPos())) {
-    enemydir = VectorNormalize(self.enemy getEye() - weaporig);
+    enemydir = VectorNormalize(self.enemy geteye() - weaporig);
     if(vectordot(dir, enemydir) > cos(10)) {
       hitenemy = true;
     }
@@ -1050,7 +1058,7 @@ trackLoop() {
       shootPos = self.shootEnt GetShootAtPos(self, self, self);
     }
     if(!isDefined(shootPos) && self call_overloaded_func("animscripts\cqb", "shouldCQB")) {
-      selfForward = anglesToForward(self.angles);
+      selfForward = AnglesToForward(self.angles);
       if(isDefined(self.cqb_target)) {
         shootPos = self.cqb_target GetShootAtPos(self);
         dir = shootPos - shootFromPos;
@@ -1127,13 +1135,11 @@ trackLoop() {
       adjustedMaxYawDeltaChange = maxYawDeltaChange + abs(shootFromYawDelta);
       adjustedMaxPitchDeltaChange = maxPitchDeltaChange + abs(shootFromPitchDelta);
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange) {
+      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange)
         yawDelta = prevYawDelta + adjustedMaxYawDeltaChange * sign(yawDeltaChange);
-      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange) {
+      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange)
         pitchDelta = prevPitchDelta + adjustedMaxPitchDeltaChange * sign(pitchDeltaChange);
-      }
     }
     prevshootFromYawAngle = shootFromYawAngle;
     prevshootFromPitchAngle = shootFromPitchAngle;
@@ -1190,9 +1196,8 @@ setAnimAimWeight(goalweight, goaltime) {
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = 0;
   } else {
-    if(!isDefined(self.a.aimweight)) {
+    if(!isDefined(self.a.aimweight))
       self.a.aimweight = 0;
-    }
     self.a.aimweight_start = self.a.aimweight;
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = int(goaltime * 20);
@@ -1262,7 +1267,7 @@ handleDropClip(flagName) {
     if(isDefined(clipModel)) {
       self hidepart("tag_clip");
       assert(isDefined(anim._effect[clipModel]));
-      playFXOnTag(anim._effect[clipModel], self, "tag_clip");
+      playFxOnTag(anim._effect[clipModel], self, "tag_clip");
       self.weaponInfo[self.weapon].hasClip = false;
       self thread resetClipOnAbort(clipModel);
     }
@@ -1308,7 +1313,7 @@ resetClipOnAbort(clipModel, currentTag) {
     self.weaponInfo[self.weapon].hasClip = true;
   } else {
     if(isDefined(currentTag) && isDefined(anim._effect[clipModel])) {
-      playFXOnTag(anim._effect[clipModel], self, currentTag);
+      playFxOnTag(anim._effect[clipModel], self, currentTag);
     }
   }
 }
@@ -1340,7 +1345,9 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
   }
   for(i = 0; i < lookTime * 10; i++) {
     if(IsAlive(self.enemy)) {
-      if(self canSeeEnemy() && [[canStopCallback]]()) {
+      if(self canSeeEnemy() && [
+          [canStopCallback]
+        ]()) {
         return;
       }
     }

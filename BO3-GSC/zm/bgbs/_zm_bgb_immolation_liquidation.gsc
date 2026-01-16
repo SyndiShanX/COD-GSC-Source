@@ -12,14 +12,14 @@
 #namespace zm_bgb_immolation_liquidation;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_immolation_liquidation", &__init__, undefined, "bgb");
+  system::register("zm_bgb_immolation_liquidation", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_immolation_liquidation", "activated", 3, undefined, undefined, &function_3d1f600e, &activation);
+  bgb::register("zm_bgb_immolation_liquidation", "activated", 3, undefined, undefined, & function_3d1f600e, & activation);
 }
 
 function activation() {
@@ -27,7 +27,7 @@ function activation() {
 }
 
 function function_3d1f600e() {
-  if(level.zombie_vars["zombie_powerup_fire_sale_on"] === 1 || (isDefined(level.disable_firesale_drop) && level.disable_firesale_drop)) {
+  if(level.zombie_vars["zombie_powerup_fire_sale_on"] === 1 || (isdefined(level.disable_firesale_drop) && level.disable_firesale_drop)) {
     return false;
   }
   return true;

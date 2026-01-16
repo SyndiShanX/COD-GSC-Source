@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
+
 #namespace namespace_5c493a54;
 
 autoexec __init__system__() {
@@ -51,7 +52,7 @@ is_active() {
 }
 
 private point_watcher(var_1532dab3 = 1, var_94d24883 = 0.9) {
-  level endon(#"hash_2669c6e7b1eb2e4b", # "end_game", # "hash_7646638df88a3656");
+  level endon(#"hash_2669c6e7b1eb2e4b", #"end_game", #"hash_7646638df88a3656");
   self endon(#"disconnect");
   wait 15;
 

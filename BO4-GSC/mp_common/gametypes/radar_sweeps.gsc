@@ -5,6 +5,7 @@
 
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace radar_sweeps;
 
 radarsweeps() {
@@ -58,7 +59,7 @@ private doradarsweep(var_bc40925b) {
   }
 
   foreach(player in level.players) {
-    player.pers[# "hasradar"] = 1;
+    player.pers[#"hasradar"] = 1;
     player.hasspyplane = 1;
     level.activeuavs[player getentitynumber()] = 1;
   }
@@ -67,7 +68,7 @@ private doradarsweep(var_bc40925b) {
   wait 5;
 
   foreach(player in level.players) {
-    player.pers[# "hasradar"] = 0;
+    player.pers[#"hasradar"] = 0;
     player.hasspyplane = 0;
     level.activeuavs[player getentitynumber()] = 0;
   }

@@ -305,7 +305,7 @@ jet_wing_helmet_futz_off() {
   while(true) {
     level waittill("hmtx");
     wait 14;
-    playSound(0, "evt_jetwing_helmet_off", (0, 0, 0));
+    playsound(0, "evt_jetwing_helmet_off", (0, 0, 0));
     setglobalfutz("no_gfutz", 0.0);
     deactivateambientroom(0, "haiti_wingsuit", 100);
     setsoundcontext("grass", "no_grass");
@@ -318,7 +318,7 @@ jet_wing_radio_chatter() {
 
   while(true) {
     level endon("hmtx");
-    playSound(0, "evt_jetwing_chatter", (0, 0, 0));
+    playsound(0, "evt_jetwing_chatter", (0, 0, 0));
     wait(randomintrange(4, 8));
   }
 }
@@ -328,7 +328,7 @@ jet_wing_breathing() {
 
   for(i = 0; i < 6; i++) {
     if(i > 0) {
-      playSound(0, "evt_jetwing_breaths_normal");
+      playsound(0, "evt_jetwing_breaths_normal");
       wait 3;
     }
   }
@@ -337,13 +337,13 @@ jet_wing_breathing() {
 
   while(true) {
     level endon("hmtx");
-    playSound(0, "evt_jetwing_breaths", (0, 0, 0));
+    playsound(0, "evt_jetwing_breaths", (0, 0, 0));
     wait(randomintrange(2, 4));
   }
 
   for(i = 0; i < 5; i++) {
     if(i > 0) {
-      playSound(0, "evt_jetwing_breaths");
+      playsound(0, "evt_jetwing_breaths");
       wait 2;
     }
   }
@@ -362,7 +362,7 @@ sndducklookyloo() {
 jetpack_wind() {
   level waittill("jet_wind");
   jetpack_snd = spawn(0, (0, 0, 0), "script_origin");
-  jetpack_snd playLoopSound("evt_jetpack_wind_fnt", 2);
+  jetpack_snd playloopsound("evt_jetpack_wind_fnt", 2);
   level waittill("stop_jetpack");
   wait 8;
   jetpack_snd stoploopsound(6);
@@ -433,7 +433,7 @@ sndlevelendambience() {
 play_fake_random(origin, alias, waitmin, waitmax) {
   while(true) {
     wait(randomintrange(waitmin, waitmax));
-    playSound(0, alias, origin);
+    playsound(0, alias, origin);
   }
 }
 

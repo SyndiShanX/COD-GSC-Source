@@ -35,7 +35,7 @@ main() {
 onPlayerConnect() {
   self notify("onPlayerConnect");
   self endon("onPlayerConnect");
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player.entity_num = player GetEntityNumber();
     player thread onPlayerSpawned();
@@ -54,7 +54,7 @@ onPlayerDisconnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     wait 1;
     self SetDepthOfField(0, 0, 512, 4000, 4, 0);
@@ -98,7 +98,7 @@ onPlayerSpawned() {
       self.initialized = true;
       playtag = "player" + (self.entity_num + 1) + "_light";
       self.light_playFX = playtag;
-      playFXOnTag(level._effect[playtag], self, "tag_origin");
+      PlayFxOnTag(level._effect[playtag], self, "tag_origin");
       self thread breadcrumb_point_thread(30, 0.5);
     }
   }
@@ -310,7 +310,9 @@ init_standard_zombie_anims() {
   level._zombie_run_melee["zombie"][1] = % ai_zombie_run_attack_v2;
   level._zombie_run_melee["zombie"][2] = % ai_zombie_run_attack_v3;
   if(isDefined(level.zombie_anim_override)) {
-    [[level.zombie_anim_override]]();
+    [
+      [level.zombie_anim_override]
+    ]();
   }
   level._zombie_walk_melee["zombie"][0] = % ai_zombie_walk_attack_v1;
   level._zombie_walk_melee["zombie"][1] = % ai_zombie_walk_attack_v2;
@@ -381,7 +383,7 @@ force_game_controller_bindings() {
   level.dogshit++;
   level.dogshit = level.dogshit & 7;
   players = GetPlayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setclientflagasval(level.dogshit);
   }
 }

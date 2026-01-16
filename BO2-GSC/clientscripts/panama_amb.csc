@@ -141,7 +141,7 @@ base_footstep_return() {
 
 song_player() {
   wait 2;
-  playSound(0, "amb_song", (24019, -19919, 89));
+  playsound(0, "amb_song", (24019, -19919, 89));
 }
 
 grill_fire() {

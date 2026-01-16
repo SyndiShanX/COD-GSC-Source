@@ -20,14 +20,13 @@ init() {
   precacheshader("compass_train_carriage");
   precachestring(&"traincar");
   precachestring(&"trainengine");
-  gates = getEntArray("train_gate_rail", "targetname");
-  brushes = getEntArray("train_gate_rail_brush", "targetname");
-  triggers = getEntArray("train_gate_kill_trigger", "targetname");
-  traintriggers = getEntArray("train_kill_trigger", "targetname");
+  gates = getentarray("train_gate_rail", "targetname");
+  brushes = getentarray("train_gate_rail_brush", "targetname");
+  triggers = getentarray("train_gate_kill_trigger", "targetname");
+  traintriggers = getentarray("train_kill_trigger", "targetname");
 
-  foreach(brush in brushes) {
-    brush disconnectpaths();
-  }
+  foreach(brush in brushes)
+  brush disconnectpaths();
 
   waittime = 0.05;
 
@@ -46,7 +45,7 @@ init() {
   }
 
   start = getvehiclenode("train_start", "targetname");
-  endgates = getEntArray("train_gate_rail_end", "targetname");
+  endgates = getentarray("train_gate_rail_end", "targetname");
   entrygate = getclosest(start.origin, endgates);
 
   for(i = 0; i < endgates.size; i++) {
@@ -75,13 +74,13 @@ init() {
 
   for(i = 1; i < 20; i++) {
     cars[i] = spawn("script_model", start.origin);
-    cars[i] setModel("p6_bullet_train_car_phys");
+    cars[i] setmodel("p6_bullet_train_car_phys");
     cars[i] ghost();
     cars[i] setcheapflag(1);
   }
 
   cars[20] = spawn("script_model", start.origin);
-  cars[20] setModel("p6_bullet_train_engine_rev");
+  cars[20] setmodel("p6_bullet_train_engine_rev");
   cars[20] ghost();
   cars[20] setcheapflag(1);
   waittillframeend;
@@ -114,30 +113,28 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     array_func(gates, ::gate_move, -172);
 
     foreach(gate in gates) {
-      gate playLoopSound("amb_train_incomming_beep");
-      gate playSound("amb_gate_move");
+      gate playloopsound("amb_train_incomming_beep");
+      gate playsound("amb_gate_move");
     }
 
     gatedownwait = getdvarintdefault("scr_express_gateDownWait", 2);
     wait(gatedownwait);
 
-    foreach(gate in gates) {
-      gate stoploopsound(2);
-    }
+    foreach(gate in gates)
+    gate stoploopsound(2);
 
     wait 2;
     cars[0] attachpath(start);
     cars[0].killcament = undefined;
 
-    if(isDefined(cars[0].trainkilltrigger)) {
+    if(isDefined(cars[0].trainkilltrigger))
       cars[0] thread train_move_think(cars[0].trainkilltrigger);
-    }
 
     cars[0] startpath();
     cars[0] showaftertime(0.2);
     cars[0] thread record_positions();
     cars[0] thread watch_end();
-    cars[0] playLoopSound("amb_train_lp");
+    cars[0] playloopsound("amb_train_lp");
     cars[0] setclientfield("train_moving", 1);
     cars[0] thread watch_player_touch();
     killcam.starttime = gettime();
@@ -145,14 +142,13 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     next = "_b";
 
     for(i = 1; i < cars.size; i++) {
-      if(i == 1) {
+      if(i == 1)
         wait 0.4;
-      } else {
+      else
         wait 0.35;
-      }
 
       if(i >= 3 && i % 3 == 0) {
-        cars[i] playLoopSound("amb_train_lp" + next);
+        cars[i] playloopsound("amb_train_lp" + next);
 
         switch (next) {
           case "_b":
@@ -187,9 +183,8 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     exitgate gate_move();
     array_func(gates, ::gate_move);
 
-    foreach(gate in gates) {
-      gate playSound("amb_gate_move");
-    }
+    foreach(gate in gates)
+    gate playsound("amb_gate_move");
 
     wait 6;
   }
@@ -225,9 +220,8 @@ watch_player_touch() {
   for(;;) {
     self waittill("touch", entity);
 
-    if(isplayer(entity)) {
+    if(isplayer(entity))
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-    }
   }
 }
 
@@ -236,7 +230,7 @@ watch_end() {
   self ghost();
   self setclientfield("train_moving", 0);
   self stoploopsound(0.2);
-  self playSound("amb_train_end");
+  self playsound("amb_train_end");
 }
 
 car_move() {
@@ -247,16 +241,15 @@ car_move() {
     self.angles = level.train_angles[i];
     wait 0.05;
 
-    if(i == 4) {
+    if(i == 4)
       self show();
-    }
   }
 
   self notify("end_of_track");
   self ghost();
   self setclientfield("train_moving", 0);
   self stoploopsound(0.2);
-  self playSound("amb_train_end");
+  self playsound("amb_train_end");
 }
 
 gate_rotate(yaw) {
@@ -264,13 +257,12 @@ gate_rotate(yaw) {
 }
 
 gate_move(z_dist) {
-  if(isDefined(self.kill_trigger)) {
+  if(isDefined(self.kill_trigger))
     self thread gate_move_think(isDefined(z_dist));
-  }
 
-  if(!isDefined(z_dist)) {
+  if(!isDefined(z_dist))
     self moveto(self.og_origin, 5);
-  } else {
+  else {
     self.og_origin = self.origin;
     self movez(z_dist, 5);
   }
@@ -351,9 +343,8 @@ train_move_think(kill_trigger) {
         if(isDefined(entity.carried) && entity.carried == 1) {
           continue;
         }
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-        }
 
         continue;
       }
@@ -365,14 +356,12 @@ train_move_think(kill_trigger) {
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger)) {
+        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger))
           flag maps\mp\gametypes\ctf::returnflag();
-        }
       }
     } else if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(kill_trigger)) {
+      if(level.sdbomb.visuals[0] istouching(kill_trigger))
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
-      }
     }
 
     pixendevent();
@@ -384,9 +373,8 @@ gate_move_think(ignoreplayers) {
   self.disablefinalkillcam = 1;
   corpse_delay = 0;
 
-  if(isDefined(self.waittime)) {
+  if(isDefined(self.waittime))
     wait(self.waittime);
-  }
 
   for(;;) {
     wait 0.4;
@@ -456,9 +444,8 @@ gate_move_think(ignoreplayers) {
         if(isDefined(entity.carried) && entity.carried == 1) {
           continue;
         }
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-        }
 
         continue;
       }
@@ -468,20 +455,17 @@ gate_move_think(ignoreplayers) {
 
     self destroy_supply_crates();
 
-    if(gettime() > corpse_delay) {
+    if(gettime() > corpse_delay)
       self destroy_corpses();
-    }
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.visuals[0] istouching(self.kill_trigger)) {
+        if(flag.visuals[0] istouching(self.kill_trigger))
           flag maps\mp\gametypes\ctf::returnflag();
-        }
       }
     } else if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(self.kill_trigger)) {
+      if(level.sdbomb.visuals[0] istouching(self.kill_trigger))
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
-      }
     }
 
     pixendevent();
@@ -489,13 +473,11 @@ gate_move_think(ignoreplayers) {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -508,12 +490,12 @@ getwatcherforweapon(weapname) {
 }
 
 destroy_supply_crates() {
-  crates = getEntArray("care_package", "script_noteworthy");
+  crates = getentarray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 10000) {
       if(crate istouching(self)) {
-        playFX(level._supply_drop_explosion_fx, crate.origin);
+        playfx(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
@@ -526,8 +508,7 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distancesquared(corpses[i].origin, self.origin) < 10000) {
+    if(distancesquared(corpses[i].origin, self.origin) < 10000)
       corpses[i] delete();
-    }
   }
 }

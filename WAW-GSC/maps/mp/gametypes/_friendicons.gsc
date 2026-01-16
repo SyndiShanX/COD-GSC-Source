@@ -4,9 +4,8 @@
 *****************************************************/
 
 init() {
-  if(getdvar("scr_drawfriend") == "") {
+  if(getdvar("scr_drawfriend") == "")
     setdvar("scr_drawfriend", "0");
-  }
   level.drawfriend = getdvarInt("scr_drawfriend");
   switch (game["allies"]) {
     case "marines":
@@ -33,14 +32,14 @@ init() {
   precacheHeadIcon(game["headicon_allies"]);
   precacheHeadIcon(game["headicon_axis"]);
   level thread onPlayerConnect();
-  for(;;) {
+  for (;;) {
     updateFriendIconSettings();
     wait 5;
   }
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onPlayerKilled();
@@ -49,7 +48,7 @@ onPlayerConnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread showFriendIcon();
   }
@@ -57,7 +56,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self.headicon = "";
   }
@@ -85,7 +84,7 @@ updateFriendIconSettings() {
 
 updateFriendIcons() {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
       if(level.drawfriend) {
@@ -98,11 +97,10 @@ updateFriendIcons() {
         }
       } else {
         players = level.players;
-        for(i = 0; i < players.size; i++) {
+        for (i = 0; i < players.size; i++) {
           player = players[i];
-          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
+          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing")
             player.headicon = "";
-          }
         }
       }
     }

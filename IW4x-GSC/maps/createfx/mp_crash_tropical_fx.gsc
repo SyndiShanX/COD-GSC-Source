@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_crash_tropical_fx.gsc
 **************************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 95
   ent = createLoopSound();
   ent.v["origin"] = (1822.87, -219.063, 199.714);
   ent.v["angles"] = (270, 0, 0);
@@ -503,4 +505,5 @@ main() {
   ent.v["angles"] = (0, 90, 0);
   ent.v["fxid"] = "hallway_smoke_light";
   ent.v["delay"] = -15;
+
 }

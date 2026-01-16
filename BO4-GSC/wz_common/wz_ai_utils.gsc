@@ -18,6 +18,7 @@
 #include scripts\wz_common\wz_ai_vehicle;
 #include scripts\wz_common\wz_ai_zombie;
 #include scripts\wz_common\wz_ai_zonemgr;
+
 #namespace wz_ai_utils;
 
 autoexec __init__system__() {
@@ -25,7 +26,7 @@ autoexec __init__system__() {
 }
 
 private __init__() {
-  level.var_91a15ec0 = # "world";
+  level.var_91a15ec0 = #"world";
   level.zombie_team = level.var_91a15ec0;
   level.attackables = [];
   level.var_7fc48a1a = [];
@@ -33,7 +34,7 @@ private __init__() {
   level.var_80bea5a6 = 0;
   level thread function_b4f41a02();
 
-  level.var_8a3036cc = 0;
+    level.var_8a3036cc = 0;
   level.var_57a77bb = 0;
   level.var_d5cd88c2 = 0;
   level.var_2510617f = 0;
@@ -43,21 +44,21 @@ private __init__() {
 
   if(isDefined(getgametypesetting(#"hash_3109a8794543000f")) && getgametypesetting(#"hash_3109a8794543000f")) {
     if(isDefined(getgametypesetting(#"wzzombiesspawnammo")) && getgametypesetting(#"wzzombiesspawnammo")) {
-      level.zombie_itemlist = # "zombie_itemlist_ammo_close_quarters";
+      level.zombie_itemlist = #"zombie_itemlist_ammo_close_quarters";
     } else {
-      level.zombie_itemlist = # "zombie_itemlist_close_quarters";
+      level.zombie_itemlist = #"zombie_itemlist_close_quarters";
     }
   } else if(isDefined(getgametypesetting(#"wzzombiesspawnammo")) && getgametypesetting(#"wzzombiesspawnammo")) {
-    level.zombie_itemlist = # "zombie_itemlist_ammo";
+    level.zombie_itemlist = #"zombie_itemlist_ammo";
   } else {
-    level.zombie_itemlist = # "zombie_itemlist";
+    level.zombie_itemlist = #"zombie_itemlist";
   }
 
-  level.var_db43cbd7 = # "zombie_raygun_itemlist";
-  level.var_1b7acd6d = # "cu12_list";
-  level.var_72151997 = # "cu13_list";
-  level.var_14364e26 = # "cu30_list";
-  level.var_7d2bc89 = # "cu31_list";
+  level.var_db43cbd7 = #"zombie_raygun_itemlist";
+  level.var_1b7acd6d = #"cu12_list";
+  level.var_72151997 = #"cu13_list";
+  level.var_14364e26 = #"cu30_list";
+  level.var_7d2bc89 = #"cu31_list";
   clientfield::register("scriptmover", "aizoneflag", -1, 2, "int");
   clientfield::register("scriptmover", "aizoneflag_tu14", 14000, 3, "int");
   clientfield::register("scriptmover", "magicboxflag", 1, 3, "int");
@@ -67,7 +68,7 @@ private __init__() {
 
 function_b4f41a02() {
   level endon(#"game_ended");
-  aitypes = array(#"spawner_boct_zombie_wz", # "spawner_boct_zombie_mob_wz", # "spawner_wz_blight_father", # "spawner_boct_zombie_dog_wz", # "spawner_boct_brutus_special_wz", # "spawner_boct_brutus_wz", # "spawner_boct_avogadro");
+  aitypes = array(#"spawner_boct_zombie_wz", #"spawner_boct_zombie_mob_wz", #"spawner_wz_blight_father", #"spawner_boct_zombie_dog_wz", #"spawner_boct_brutus_special_wz", #"spawner_boct_brutus_wz", #"spawner_boct_avogadro");
   setdvar(#"hash_209287456d55fca1", "<dev string:x38>");
 
   foreach(type in aitypes) {
@@ -90,15 +91,15 @@ function_b4f41a02() {
     cmd_tokens = strtok(cmd, "<dev string:xea>");
 
     switch (cmd_tokens[0]) {
-      case # "hash_c0b89e8d4a71cff":
+      case #"hash_c0b89e8d4a71cff":
         player = level.players[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward(direction);
         eye = player getEye();
         direction_vec = (direction_vec[0] * 8000, direction_vec[1] * 8000, direction_vec[2] * 8000);
         trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-        ai = spawnactor(cmd_tokens[1], trace[# "position"], (0, 0, 0), undefined, 1);
-        closest_zone = arraygetclosest(trace[# "position"], level.var_5b357434);
+        ai = spawnactor(cmd_tokens[1], trace[#"position"], (0, 0, 0), undefined, 1);
+        closest_zone = arraygetclosest(trace[#"position"], level.var_5b357434);
         ai thread function_7adc1e46(closest_zone, 0);
         break;
     }
@@ -261,20 +262,20 @@ debug_ai() {
   }
 }
 
-function hide_pop(var_16dd87ad) {
-  self endon(#"death");
-  self ghost();
-  wait isDefined(var_16dd87ad) ? var_16dd87ad : 0.5;
-
-  if(isDefined(self)) {
-    self show();
-    util::wait_network_frame();
+  function hide_pop(var_16dd87ad) {
+    self endon(#"death");
+    self ghost();
+    wait isDefined(var_16dd87ad) ? var_16dd87ad : 0.5;
 
     if(isDefined(self)) {
-      self.create_eyes = 1;
+      self show();
+      util::wait_network_frame();
+
+      if(isDefined(self)) {
+        self.create_eyes = 1;
+      }
     }
   }
-}
 
 function_55625f76(spot_origin, spot_angles, anim_name, var_16dd87ad) {
   self endon(#"death");
@@ -329,7 +330,7 @@ function_c9a1a3bd(spot_origin, spot_angles, anim_name, var_c2a69066) {
   self animscripted("dig_anim", self.origin, self.angles, anim_name, "normal");
   self waittillmatch({
     #notetrack: "end"
-  }, # "dig_anim");
+  }, #"dig_anim");
   self ghost();
   self notsolid();
   self clientfield::set("zombie_riser_fx", 0);
@@ -420,7 +421,7 @@ function_7adc1e46(ai_zone, is_special) {
     self.ai_zone.var_80bea5a6 = level.var_80bea5a6;
   }
 
-  var_80bea5a6 = 1;
+    var_80bea5a6 = 1;
 
   if(isDefined(self.ai_zone) && isDefined(self.ai_zone.var_80bea5a6)) {
     var_80bea5a6 = self.ai_zone.var_80bea5a6;
@@ -443,7 +444,7 @@ function_a679f9b(params) {
     wz_ai_zonemgr::function_37411c68(self.ai_zone, self);
 
     if(isDefined(params.eattacker) && isplayer(params.eattacker)) {
-      if(self.archetype == # "zombie") {
+      if(self.archetype == #"zombie") {
         self.ai_zone.var_58ba2ab7++;
         return;
       }
@@ -532,7 +533,7 @@ ai_wz_can_see() {
     return undefined;
   }
 
-  players_in_zone = [];
+    players_in_zone = [];
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
@@ -659,7 +660,7 @@ function_7a1e21a9(attacker, v_origin, min_radius = 50, max_radius = 70, var_4dd1
   n_power = 100;
   time = self fake_physicslaunch(dest_origin, n_power);
 
-  if(self.item.name == # "ray_gun") {
+  if(self.item.name == #"ray_gun") {
     self playSound(#"mus_raygun_stinger");
   } else {
     self playSound(#"zmb_spawn_powerup");
@@ -749,8 +750,8 @@ function_e1cd5954(v_origin, min_radius, max_radius) {
 
   trace = bulletTrace(var_9bd6c1ae + (0, 0, 40), var_9bd6c1ae + (0, 0, -150), 0, undefined);
 
-  if(trace[# "fraction"] < 1) {
-    var_9bd6c1ae = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    var_9bd6c1ae = trace[#"position"];
   }
 
   return var_9bd6c1ae + (0, 0, 3);
@@ -910,7 +911,7 @@ function_9758722(speed) {
 
 get_pathnode_path(pathnode) {
   path_struct = {
-    #path: array(pathnode),
+    #path: array(pathnode), 
     #loops: 0
   };
   var_592eaf7 = pathnode;
@@ -1059,7 +1060,7 @@ get_attackable_slot(entity) {
     if(isDefined(var_acdc8d71)) {
       strteleportst.entity = entity;
       entity.var_b238ef38 = {
-        #slot: strteleportst,
+        #slot: strteleportst, 
         #position: var_acdc8d71
       };
       return true;
@@ -1067,7 +1068,7 @@ get_attackable_slot(entity) {
   } else {
     strteleportst.entity = entity;
     entity.var_b238ef38 = {
-      #slot: strteleportst,
+      #slot: strteleportst, 
       #position: strteleportst.origin
     };
     return true;
@@ -1112,53 +1113,54 @@ function_bdb2b85b(entity, origin, angles, radius, num_spots, var_7a2632b5) {
 
   record3dtext("<dev string:x1d4>", origin, (0, 0, 1));
 
-  for(i = 0; i < num_spots; i++) {
-    t = mapfloat(0, num_spots, 0, 360, i);
-    x = radius * cos(t + angles[1]);
-    y = radius * sin(t + angles[1]);
-    pos = (x, y, 0) + origin;
+    for(i = 0; i < num_spots; i++) {
+      t = mapfloat(0, num_spots, 0, 360, i);
+      x = radius * cos(t + angles[1]);
+      y = radius * sin(t + angles[1]);
+      pos = (x, y, 0) + origin;
 
-    if(!bullettracepassed(origin + (0, 0, 5), pos + (0, 0, 5), 0, entity)) {
+      if(!bullettracepassed(origin + (0, 0, 5), pos + (0, 0, 5), 0, entity)) {
+        if(i % 2 == 1) {
+          waitframe(1);
+        }
+
+        continue;
+      }
+
+      var_e07c7e8 = physicstrace(pos + (0, 0, 10), pos + (0, 0, -10), mins, maxs, self, 1);
+      var_c060661b = var_e07c7e8[#"position"];
+      var_3e98a413 = getclosestpointonnavmesh(var_c060661b, 64, 15);
+
+      if(isDefined(var_3e98a413)) {
+
+        recordstar(var_3e98a413, (0, 1, 0));
+
+          slots[slots.size] = {
+            #origin: var_3e98a413, 
+            #on_navmesh: 1
+          };
+      } else if(isDefined(var_c060661b)) {
+        if(isDefined(var_7a2632b5)) {
+          var_acdc8d71 = getclosestpointonnavmesh(var_c060661b, var_7a2632b5, 15);
+        }
+
+        if(isDefined(var_acdc8d71)) {
+          recordstar(var_acdc8d71, (1, 0, 1));
+        }
+
+        recordstar(var_c060661b, (1, 0.5, 0));
+
+          slots[slots.size] = {
+            #origin: var_c060661b, 
+            #on_navmesh: 0, 
+            #var_acdc8d71: var_acdc8d71
+          };
+      }
+
       if(i % 2 == 1) {
         waitframe(1);
       }
-
-      continue;
     }
-
-    var_e07c7e8 = physicstrace(pos + (0, 0, 10), pos + (0, 0, -10), mins, maxs, self, 1);
-    var_c060661b = var_e07c7e8[# "position"];
-    var_3e98a413 = getclosestpointonnavmesh(var_c060661b, 64, 15);
-
-    if(isDefined(var_3e98a413)) {
-      recordstar(var_3e98a413, (0, 1, 0));
-
-      slots[slots.size] = {
-        #origin: var_3e98a413,
-        #on_navmesh: 1
-      };
-    } else if(isDefined(var_c060661b)) {
-      if(isDefined(var_7a2632b5)) {
-        var_acdc8d71 = getclosestpointonnavmesh(var_c060661b, var_7a2632b5, 15);
-      }
-
-      if(isDefined(var_acdc8d71)) {
-        recordstar(var_acdc8d71, (1, 0, 1));
-      }
-
-      recordstar(var_c060661b, (1, 0.5, 0));
-
-      slots[slots.size] = {
-        #origin: var_c060661b,
-        #on_navmesh: 0,
-        #var_acdc8d71: var_acdc8d71
-      };
-    }
-
-    if(i % 2 == 1) {
-      waitframe(1);
-    }
-  }
 
   return slots;
 }
@@ -1255,7 +1257,7 @@ function_71578099() {
   nodes = getallnodes();
 
   foreach(node in nodes) {
-    if(node.type != # "begin") {
+    if(node.type != #"begin") {
       continue;
     }
 
@@ -1266,7 +1268,7 @@ function_71578099() {
         var_a6131e58 = 0;
 
         foreach(dynent in dynentarray) {
-          if(dynent.var_15d44120 === # "p8_fxanim_wz_rollup_door_medium_mod") {
+          if(dynent.var_15d44120 === #"p8_fxanim_wz_rollup_door_medium_mod") {
             var_a6131e58 = 1;
             break;
           }
@@ -1316,7 +1318,7 @@ function_9caf8627() {
   nodes = getallnodes();
 
   foreach(node in nodes) {
-    if(node.type != # "begin" && node.type != # "end") {
+    if(node.type != #"begin" && node.type != #"end") {
       continue;
     }
 

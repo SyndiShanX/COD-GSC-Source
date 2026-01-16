@@ -310,7 +310,7 @@ setup_random_sun() {
 setup_flashlights() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    playFXOnTag(level._effect["flashlight"], players[i], "tag_flash");
+    PlayFxOnTag(level._effect["flashlight"], players[i], "tag_flash");
   }
 }
 

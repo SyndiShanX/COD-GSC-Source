@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\fx_shared;
+
 #namespace zombie_death;
 
 on_fire_timeout() {
@@ -36,9 +37,9 @@ flame_death_fx() {
   self.is_on_fire = 1;
   self thread on_fire_timeout();
 
-  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
     fire_tag = "j_spinelower";
-    fire_death_torso_fx = level._effect[# "character_fire_death_torso"];
+    fire_death_torso_fx = level._effect[#"character_fire_death_torso"];
 
     if(isDefined(self.weapon_specific_fire_death_torso_fx)) {
       fire_death_torso_fx = self.weapon_specific_fire_death_torso_fx;
@@ -57,9 +58,9 @@ flame_death_fx() {
     println("<dev string:x38>");
   }
 
-  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_sm"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_sm"])) {
     if(!isvehicle(self) && self.archetype !== "raps" && self.archetype !== "spider") {
-      fire_death_sm_fx = level._effect[# "character_fire_death_sm"];
+      fire_death_sm_fx = level._effect[#"character_fire_death_sm"];
 
       if(isDefined(self.weapon_specific_fire_death_sm_fx)) {
         fire_death_sm_fx = self.weapon_specific_fire_death_sm_fx;
@@ -132,17 +133,17 @@ get_gib_ref(direction) {
     refs = [];
 
     switch (direction) {
-      case # "right":
+      case #"right":
         refs[refs.size] = "left_arm";
         refs[refs.size] = "left_leg";
         gib_ref = get_random(refs);
         break;
-      case # "left":
+      case #"left":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "right_leg";
         gib_ref = get_random(refs);
         break;
-      case # "forward":
+      case #"forward":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "left_arm";
         refs[refs.size] = "right_leg";
@@ -151,7 +152,7 @@ get_gib_ref(direction) {
         refs[refs.size] = "no_legs";
         gib_ref = get_random(refs);
         break;
-      case # "back":
+      case #"back":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "left_arm";
         refs[refs.size] = "right_leg";
@@ -191,25 +192,25 @@ do_gib() {
   }
 
   switch (self.a.gib_ref) {
-    case # "right_arm":
+    case #"right_arm":
       gibserverutils::gibrightarm(self);
       break;
-    case # "left_arm":
+    case #"left_arm":
       gibserverutils::gibleftarm(self);
       break;
-    case # "right_leg":
+    case #"right_leg":
       gibserverutils::gibrightleg(self);
       break;
-    case # "left_leg":
+    case #"left_leg":
       gibserverutils::gibleftleg(self);
       break;
-    case # "no_legs":
+    case #"no_legs":
       gibserverutils::giblegs(self);
       break;
-    case # "head":
+    case #"head":
       gibserverutils::gibhead(self);
       break;
-    case # "guts":
+    case #"guts":
       break;
     default:
       assertmsg("<dev string:x174>" + self.a.gib_ref + "<dev string:x188>");

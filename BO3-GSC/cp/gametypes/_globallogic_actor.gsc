@@ -36,7 +36,7 @@ function callback_actorspawned(spawner) {
 
 function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, surfacenormal) {
   self endon("death");
-  params = spawnStruct();
+  params = spawnstruct();
   params.einflictor = einflictor;
   params.eattacker = eattacker;
   params.idamage = idamage;
@@ -51,13 +51,13 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   self.idflags = idflags;
   self.idflagstime = gettime();
   eattacker = globallogic_player::figureoutattacker(eattacker);
-  if(self.health == self.maxhealth || !isDefined(self.attackers)) {
+  if(self.health == self.maxhealth || !isdefined(self.attackers)) {
     self.attackers = [];
     self.attackerdata = [];
     self.attackerdamage = [];
   }
-  if(isDefined(level.friendlyfiredisabled) && !level.friendlyfiredisabled) {
-    if(isDefined(level.friendlyfiredamagepercentage)) {
+  if(isdefined(level.friendlyfiredisabled) && !level.friendlyfiredisabled) {
+    if(isdefined(level.friendlyfiredamagepercentage)) {
       if(isplayer(eattacker) && self.team == eattacker.team) {
         idamage = int(idamage * level.friendlyfiredamagepercentage);
         if(idamage < 1) {
@@ -66,32 +66,32 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
       }
     }
   }
-  if(isDefined(self.overrideactordamage)) {
+  if(isdefined(self.overrideactordamage)) {
     idamage = self[[self.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
-  } else if(isDefined(level.overrideactordamage)) {
+  } else if(isdefined(level.overrideactordamage)) {
     idamage = self[[level.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
   }
-  if(isDefined(level.cybercom) && isDefined(isDefined(level.cybercom.overrideactordamage))) {
+  if(isdefined(level.cybercom) && isdefined(isdefined(level.cybercom.overrideactordamage))) {
     idamage = self[[level.cybercom.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
   }
-  if(isDefined(self.aioverridedamage)) {
-    for(index = 0; index < self.aioverridedamage.size; index++) {
+  if(isdefined(self.aioverridedamage)) {
+    for (index = 0; index < self.aioverridedamage.size; index++) {
       damagecallback = self.aioverridedamage[index];
       idamage = self[[damagecallback]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
     }
   }
-  assert(isDefined(idamage), "");
-  if(!isDefined(vdir)) {
+  assert(isdefined(idamage), "");
+  if(!isdefined(vdir)) {
     idflags = idflags | 4;
   }
-  if(isDefined(eattacker)) {
+  if(isdefined(eattacker)) {
     if(isplayer(eattacker)) {
       level thread friendlyfire::friendly_fire_callback(self, idamage, eattacker, smeansofdeath);
-      if(isDefined(self.playercausedactordamage)) {
+      if(isdefined(self.playercausedactordamage)) {
         self thread[[self.playercausedactordamage]]();
       }
       self thread challenges::actordamaged(eattacker, eattacker, idamage, weapon, shitloc);
-      if(isDefined(einflictor) && (eattacker === einflictor || !isvehicle(einflictor)) && (!isDefined(smeansofdeath) || smeansofdeath != "MOD_MELEE_WEAPON_BUTT")) {
+      if(isdefined(einflictor) && (eattacker === einflictor || !isvehicle(einflictor)) && (!isdefined(smeansofdeath) || smeansofdeath != "MOD_MELEE_WEAPON_BUTT")) {
         eattacker.hits++;
       }
     } else if(isai(eattacker)) {
@@ -105,7 +105,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   actorkilled = 0;
   self thread globallogic_player::trackattackerdamage(eattacker, idamage, smeansofdeath, weapon);
   if(self.health > 0 && (self.health - idamage) <= 0) {
-    if(isDefined(eattacker) && isplayer(eattacker.driver)) {
+    if(isdefined(eattacker) && isplayer(eattacker.driver)) {
       eattacker = eattacker.driver;
     }
     if(isplayer(eattacker)) {
@@ -119,7 +119,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     actorkilled = 1;
   }
   if(weapon_utils::isflashorstundamage(weapon, smeansofdeath)) {
-    if(isDefined(self.type)) {
+    if(isdefined(self.type)) {
       if(weapon.isflash && self.type == "human") {
         self.lastflashedtime = self.idflagstime;
       } else if(weapon.isstun && self.type == "human") {
@@ -129,7 +129,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     self.laststunnedby = eattacker;
     self.laststunnedtime = self.idflagstime;
   }
-  if(weapon.isemp && isDefined(self.type) && self.type == "robot") {
+  if(weapon.isemp && isdefined(self.type) && self.type == "robot") {
     if(weapon.name == "emp_grenade") {
       self.var_4d6fef21 = self.idflagstime;
     } else if(weapon.name == "ravage_core_emp_grenade" || weapon.name == "ravage_core_emp_grenade_upg") {
@@ -137,7 +137,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(!idflags & 2048) {
-    if(level.teambased && isDefined(eattacker) && eattacker != self && self.team == eattacker.team && !isplayer(eattacker)) {
+    if(level.teambased && isdefined(eattacker) && eattacker != self && self.team == eattacker.team && !isplayer(eattacker)) {
       if(level.friendlyfire == 0) {
         return;
       }
@@ -159,8 +159,8 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
         }
       }
     }
-    if(isDefined(eattacker) && eattacker != self) {
-      if(!isDefined(einflictor) || !isai(einflictor) || (isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker)) {
+    if(isdefined(eattacker) && eattacker != self) {
+      if(!isdefined(einflictor) || !isai(einflictor) || (isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker)) {
         if(idamage > 0 && self.team != eattacker.team && self.team != "neutral" && shitloc !== "riotshield") {
           eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon);
         }
@@ -173,7 +173,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
 }
 
 function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  params = spawnStruct();
+  params = spawnstruct();
   params.einflictor = einflictor;
   params.eattacker = eattacker;
   params.idamage = idamage;
@@ -189,7 +189,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
   if(globallogic_utils::isheadshot(weapon, shitloc, smeansofdeath, einflictor)) {
     smeansofdeath = "MOD_HEAD_SHOT";
   }
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isdefined(eattacker) && isplayer(eattacker)) {
     eattacker notify("killed_ai", self, smeansofdeath, weapon);
     globallogic_score::inctotalkills(eattacker.team);
     eattacker thread globallogic_score::givekillstats(smeansofdeath, weapon, self);
@@ -197,33 +197,33 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
       eattacker.meleekills++;
     }
   }
-  if(isai(eattacker) && isDefined(eattacker.script_owner)) {
+  if(isai(eattacker) && isdefined(eattacker.script_owner)) {
     if(eattacker.script_owner.team != self.team) {
       eattacker = eattacker.script_owner;
     }
   }
-  if(isDefined(eattacker) && isDefined(eattacker.onkill)) {
+  if(isdefined(eattacker) && isdefined(eattacker.onkill)) {
     eattacker[[eattacker.onkill]](self);
   }
-  if(isDefined(einflictor)) {
+  if(isdefined(einflictor)) {
     self.damageinflictor = einflictor;
   }
   self callback::callback("hash_fc2ec5ff", params);
   self callback::callback("hash_8c38c12e", params);
-  if(isDefined(self.aioverridekilled)) {
-    for(index = 0; index < self.aioverridekilled.size; index++) {
+  if(isdefined(self.aioverridekilled)) {
+    for (index = 0; index < self.aioverridekilled.size; index++) {
       killedcallback = self.aioverridekilled[index];
       self[[killedcallback]](einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime);
     }
   }
-  if(isplayer(eattacker) && (isDefined(level.overrideammodropallies) && level.overrideammodropallies && self.team == "allies" || (isDefined(level.overrideammodropteam3) && level.overrideammodropteam3 && self.team == "team3") || self.team == "axis")) {
+  if(isplayer(eattacker) && (isdefined(level.overrideammodropallies) && level.overrideammodropallies && self.team == "allies" || (isdefined(level.overrideammodropteam3) && level.overrideammodropteam3 && self.team == "team3") || self.team == "axis")) {
     self thread ammo::dropaiammo();
   }
   player = eattacker;
-  if(eattacker.classname == "script_vehicle" && isDefined(eattacker.owner)) {
+  if(eattacker.classname == "script_vehicle" && isdefined(eattacker.owner)) {
     player = eattacker.owner;
   }
-  if(isDefined(player) && isplayer(player) && (!(isDefined(self.disable_score_events) && self.disable_score_events))) {
+  if(isdefined(player) && isplayer(player) && (!(isdefined(self.disable_score_events) && self.disable_score_events))) {
     if(!level.teambased || self.team != player.pers["team"]) {
       if(smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE") {
         scoreevents::processscoreevent("melee_kill" + self.scoretype, player, self, weapon);
@@ -243,10 +243,10 @@ function callback_actorcloned(original) {
 
 function actorkilled_awardassists(einflictor, eattacker, weapon, lpattackteam) {
   pixbeginevent("ActorKilled assists");
-  if(isDefined(self.attackers)) {
-    for(j = 0; j < self.attackers.size; j++) {
+  if(isdefined(self.attackers)) {
+    for (j = 0; j < self.attackers.size; j++) {
       player = self.attackers[j];
-      if(!isDefined(player)) {
+      if(!isdefined(player)) {
         continue;
       }
       if(player == eattacker) {

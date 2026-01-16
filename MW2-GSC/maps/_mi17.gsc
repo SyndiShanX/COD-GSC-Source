@@ -9,9 +9,8 @@
 main(model, type, no_death) {
   //SNDFILE=vehicle_mi17
   vehicle_type = "mi17";
-  if(isDefined(type) && type == "mi17_bulletdamage") {
+  if(isdefined(type) && type == "mi17_bulletdamage")
     vehicle_type = "mi17_bulletdamage";
-  }
 
   maps\_mi17_noai::main(model, vehicle_type, no_death); // set the stuff in _noai
 
@@ -28,8 +27,9 @@ main(model, type, no_death) {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_attach_models(::set_attached_models);
   build_unload_groups(::Unload_Groups);
-  // Other settings in _mi17_noai.gsc
+  // Other settings in _mi17_noai.gsc 
   build_compassicon("helicopter", false);
+
 }
 
 init_local() {
@@ -44,9 +44,8 @@ init_local() {
 set_vehicle_anims(positions) {
   //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
 
-  for(i = 0; i < positions.size; i++) {
+  for (i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % mi17_heli_idle;
-  }
 
   return positions;
 }
@@ -59,9 +58,8 @@ setplayer_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 10; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 10; i++)
+    positions[i] = spawnstruct();
 
   //	positions[ 0 ].idle = %mi17_pilot_idle;
 
@@ -181,6 +179,7 @@ setanims() {
   return setplayer_anims(positions);
 }
 
+
 unload_groups() {
   unload_groups = [];
   unload_groups["back"] = [];
@@ -209,17 +208,18 @@ unload_groups() {
   unload_groups["default"] = unload_groups["both"];
 
   return unload_groups;
+
 }
 
 set_attached_models() {
   array = [];
-  array["TAG_FastRope_LE"] = spawnStruct();
+  array["TAG_FastRope_LE"] = spawnstruct();
   array["TAG_FastRope_LE"].model = "rope_test";
   array["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   array["TAG_FastRope_LE"].idleanim = % mi17_rope_idle_le;
   array["TAG_FastRope_LE"].dropanim = % mi17_rope_drop_le;
 
-  array["TAG_FastRope_RI"] = spawnStruct();
+  array["TAG_FastRope_RI"] = spawnstruct();
   array["TAG_FastRope_RI"].model = "rope_test_ri";
   array["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   array["TAG_FastRope_RI"].idleanim = % mi17_rope_idle_ri;
@@ -227,9 +227,8 @@ set_attached_models() {
 
   strings = getarraykeys(array);
 
-  for(i = 0; i < strings.size; i++) {
+  for (i = 0; i < strings.size; i++)
     precachemodel(array[strings[i]].model);
-  }
 
   return array;
 }

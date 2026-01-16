@@ -15,7 +15,8 @@ main() {
   maps\mp\createart\mp_village_art::main();
 }
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_light_dust_motes_md"] = loadfx("maps/mp_maps/fx_mp_light_dust_motes_md");

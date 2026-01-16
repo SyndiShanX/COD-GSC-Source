@@ -13,20 +13,20 @@
 #namespace cache;
 
 function autoexec __init__sytem__() {
-  system::register("cache", &__init__, undefined, undefined);
+  system::register("cache", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  a_ammo_crates = getEntArray("sys_ammo_cache", "targetname");
-  array::thread_all(a_ammo_crates, &_setup_ammo_cache);
-  a_weapon_crates = getEntArray("sys_weapon_cache", "targetname");
-  array::thread_all(a_weapon_crates, &_setup_weapon_cache);
+  a_ammo_crates = getentarray("sys_ammo_cache", "targetname");
+  array::thread_all(a_ammo_crates, & _setup_ammo_cache);
+  a_weapon_crates = getentarray("sys_weapon_cache", "targetname");
+  array::thread_all(a_weapon_crates, & _setup_weapon_cache);
 }
 
 function _setup_ammo_cache() {
   util::waittill_asset_loaded("xmodel", self.model);
   self thread _ammo_refill_think();
-  if(isDefined(level._ammo_refill_think_alt)) {
+  if(isdefined(level._ammo_refill_think_alt)) {
     self thread[[level._ammo_refill_think_alt]]();
   }
 }
@@ -41,19 +41,19 @@ function _setup_weapon_cache() {
 function _ammo_refill_think() {
   self endon("disable_ammo_cache");
   t_ammo_cache = self _get_closest_ammo_trigger();
-  if(isDefined(t_ammo_cache.script_string) && t_ammo_cache.script_string == "no_grenade") {
+  if(isdefined(t_ammo_cache.script_string) && t_ammo_cache.script_string == "no_grenade") {
     t_ammo_cache.no_grenade = 1;
   }
   t_ammo_cache sethintstring(&"SCRIPT_AMMO_REFILL");
   t_ammo_cache setcursorhint("HINT_NOICON");
-  while(true) {
+  while (true) {
     t_ammo_cache waittill("trigger", e_player);
     e_player disableweapons();
-    e_player playSound("fly_ammo_crate_refill");
+    e_player playsound("fly_ammo_crate_refill");
     wait(2);
     a_weapons = e_player getweaponslist();
     foreach(weapon in a_weapons) {
-      if(isDefined(t_ammo_cache.no_grenade) && t_ammo_cache.no_grenade && weapons::is_grenade(weapon)) {
+      if(isdefined(t_ammo_cache.no_grenade) && t_ammo_cache.no_grenade && weapons::is_grenade(weapon)) {
         continue;
         continue;
       }
@@ -66,7 +66,7 @@ function _ammo_refill_think() {
 }
 
 function _get_closest_ammo_trigger() {
-  a_ammo_cache = getEntArray("trigger_ammo_cache", "targetname");
+  a_ammo_cache = getentarray("trigger_ammo_cache", "targetname");
   t_ammo_cache = arraygetclosest(self.origin, a_ammo_cache);
   return t_ammo_cache;
 }
@@ -116,9 +116,9 @@ function _place_player_loadout() {
 }
 
 function _check_extra_slots() {
-  if(isDefined(self.ac_slot1)) {
+  if(isdefined(self.ac_slot1)) {
     auxilary_weapon_pos = self gettagorigin("auxilary_A");
-    assert(isDefined(auxilary_weapon_pos), "");
+    assert(isdefined(auxilary_weapon_pos), "");
     switch (self.model) {
       default: {
         tmp_offset = anglestoright(self gettagangles("auxilary_A")) * 5;
@@ -129,10 +129,10 @@ function _check_extra_slots() {
     m_weapon_script_model.angles = self gettagangles("auxilary_A") + (vectorscale((0, -1, 0), 90));
     m_weapon_script_model itemweaponsetammo(9999, 9999);
   }
-  if(isDefined(self.ac_slot2)) {
+  if(isdefined(self.ac_slot2)) {
     auxilary_weapon_pos = self gettagorigin("secondary_A");
-    assert(isDefined(auxilary_weapon_pos), "");
-    tmp_offset = anglesToForward(self gettagangles("secondary_A")) * 10;
+    assert(isdefined(auxilary_weapon_pos), "");
+    tmp_offset = anglestoforward(self gettagangles("secondary_A")) * 10;
     m_weapon_script_model = spawn(("weapon_" + self.ac_slot2) + level.game_mode_suffix, auxilary_weapon_pos + (tmp_offset + vectorscale((0, 0, 1), 10)), 8);
     m_weapon_script_model.angles = self gettagangles("secondary_A");
     m_weapon_script_model itemweaponsetammo(9999, 9999);
@@ -155,8 +155,8 @@ function _debug_tags() {
 }
 
 function _loop_text(tag) {
-  while(true) {
-    if(isDefined(self gettagorigin(tag))) {
+  while (true) {
+    if(isdefined(self gettagorigin(tag))) {
       print3d(self gettagorigin(tag), tag, (1, 1, 1), 1, 0.15);
     }
     wait(0.05);
@@ -164,8 +164,8 @@ function _loop_text(tag) {
 }
 
 function disable_ammo_cache(str_ammo_cache_id) {
-  a_ammo_cache = getEntArray(str_ammo_cache_id, "script_noteworthy");
-  assert(isDefined(a_ammo_cache), ("" + str_ammo_cache_id) + "");
+  a_ammo_cache = getentarray(str_ammo_cache_id, "script_noteworthy");
+  assert(isdefined(a_ammo_cache), ("" + str_ammo_cache_id) + "");
   if(a_ammo_cache.size > 1) {
     assertmsg(("" + str_ammo_cache_id) + "");
   }
@@ -178,10 +178,10 @@ function activate_extra_slot(n_slot_number, w_weapon) {
   if(n_slot_number < 1 || n_slot_number > 2) {
     assertmsg("");
   }
-  assert(isDefined(w_weapon), "");
+  assert(isdefined(w_weapon), "");
   if(n_slot_number == 1) {
     auxilary_weapon_pos = self gettagorigin("auxilary_A");
-    assert(isDefined(auxilary_weapon_pos), "");
+    assert(isdefined(auxilary_weapon_pos), "");
     tmp_offset = anglestoright(self gettagangles("auxilary_A")) * 5;
     m_weapon_script_model = spawn(("weapon_" + w_weapon.name) + level.game_mode_suffix, auxilary_weapon_pos + (tmp_offset + vectorscale((0, 0, 1), 10)), 8);
     m_weapon_script_model.angles = self gettagangles("auxilary_A") + (vectorscale((0, -1, 0), 90));
@@ -189,8 +189,8 @@ function activate_extra_slot(n_slot_number, w_weapon) {
   }
   if(n_slot_number == 2) {
     auxilary_weapon_pos = self gettagorigin("secondary_A");
-    assert(isDefined(auxilary_weapon_pos), "");
-    tmp_offset = anglesToForward(self gettagangles("secondary_A")) * 7;
+    assert(isdefined(auxilary_weapon_pos), "");
+    tmp_offset = anglestoforward(self gettagangles("secondary_A")) * 7;
     m_weapon_script_model = spawn(("weapon_" + w_weapon.name) + level.game_mode_suffix, auxilary_weapon_pos + (tmp_offset + vectorscale((0, 0, 1), 10)), 8);
     m_weapon_script_model.angles = self gettagangles("secondary_A");
     m_weapon_script_model itemweaponsetammo(9999, 9999);
@@ -207,15 +207,15 @@ function cleanup_cache() {
       }
     }
     n_weapon_counter = 2;
-    if(isDefined(self.ac_slot1)) {
+    if(isdefined(self.ac_slot1)) {
       n_weapon_counter++;
     }
-    if(isDefined(self.ac_slot2)) {
+    if(isdefined(self.ac_slot2)) {
       n_weapon_counter++;
     }
-    for(x = 0; x < n_weapon_counter; x++) {
+    for (x = 0; x < n_weapon_counter; x++) {
       e_closest_weapon = arraygetclosest(self.origin, a_weapons_list, 50);
-      if(isDefined(e_closest_weapon)) {
+      if(isdefined(e_closest_weapon)) {
         e_closest_weapon delete();
       }
     }
@@ -223,7 +223,7 @@ function cleanup_cache() {
   } else {
     self notify("disable_ammo_cache");
     t_ammo_trigger = _get_closest_ammo_trigger();
-    if(isDefined(t_ammo_trigger)) {
+    if(isdefined(t_ammo_trigger)) {
       t_ammo_trigger delete();
     }
     self delete();

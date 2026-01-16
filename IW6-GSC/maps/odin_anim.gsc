@@ -558,15 +558,13 @@ decomp_explosion_anim_props(var_0, var_1) {
   wait 1.75;
   var_4 = getEntArray("decomp_explode_wall", "targetname");
 
-  foreach(var_6 in var_4) {
-    var_6 delete();
-  }
+  foreach(var_6 in var_4)
+  var_6 delete();
 
   var_8 = getEntArray("spin_decomp_delete", "script_noteworthy");
 
-  foreach(var_6 in var_8) {
-    var_6 delete();
-  }
+  foreach(var_6 in var_8)
+  var_6 delete();
 }
 
 decomp_explosion_anim_player(var_0) {
@@ -736,9 +734,8 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
   var_1 = var_1 + 14.15;
   wait(var_1);
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   var_8 = self;
   wait 0.1;
@@ -754,22 +751,19 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
 
   var_9 moveto(var_9.origin + var_0, var_2, var_2 * var_3, 0);
 
-  if(isDefined(var_7)) {
+  if(isDefined(var_7))
     playFXOnTag(level._effect["spc_fire_puff_bigger_light"], var_9, "tag_origin");
-  }
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_9 maps\_anim::anim_single_solo(var_8, var_4, "tag_origin");
-  } else {
-    if(distance(var_9.origin + var_0, var_9.origin) / var_2 < 70) {
+  else {
+    if(distance(var_9.origin + var_0, var_9.origin) / var_2 < 70)
       var_9 rotateto((randomfloatrange(-180, 180), randomfloatrange(-180, 180), randomfloatrange(-180, 180)), var_2);
-    } else {
+    else
       var_9 rotatepitch(6000, var_2);
-    }
 
-    if(isDefined(var_5)) {
+    if(isDefined(var_5))
       var_9 thread maps\_anim::anim_loop_solo(var_8, var_5, "stop_spin_deadguy_loops");
-    }
 
     var_8 waittill("movedone");
   }

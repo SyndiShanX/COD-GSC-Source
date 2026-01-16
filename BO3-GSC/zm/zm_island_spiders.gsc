@@ -29,7 +29,7 @@
 
 function function_8e89793a() {
   level.var_ab7eb3d4 = 0;
-  level.var_c102a998 = &function_c102a998;
+  level.var_c102a998 = & function_c102a998;
   level thread function_419bf2ad();
 }
 
@@ -39,7 +39,7 @@ function function_c102a998() {
   foreach(player in level.players) {
     if(player isplayerunderwater()) {
       var_f97c401 = player zm_utility::get_current_zone();
-      if(isDefined(var_f97c401)) {
+      if(isdefined(var_f97c401)) {
         if(var_f97c401 == "zone_start_water" || var_f97c401 == "zone_meteor_site" || var_f97c401 == "zone_meteor_site_2") {
           player clientfield::set_to_player("set_world_fog", 1);
         } else {
@@ -90,7 +90,7 @@ function function_33aa4940() {
       var_901f5ace = [];
       foreach(s_spawner in var_a5f01313) {
         if(s_spawner.script_noteworthy == "spider_location") {
-          if(!isDefined(var_901f5ace)) {
+          if(!isdefined(var_901f5ace)) {
             var_901f5ace = [];
           } else if(!isarray(var_901f5ace)) {
             var_901f5ace = array(var_901f5ace);
@@ -110,7 +110,7 @@ function function_33aa4940() {
 
 function function_419bf2ad() {
   level endon("end_game");
-  while(true) {
+  while (true) {
     level waittill("between_round_over");
     level.var_ab7eb3d4 = 0;
   }

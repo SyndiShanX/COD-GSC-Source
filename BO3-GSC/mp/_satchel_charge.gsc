@@ -11,7 +11,7 @@
 #namespace satchel_charge;
 
 function autoexec __init__sytem__() {
-  system::register("satchel_charge", &__init__, undefined, undefined);
+  system::register("satchel_charge", & __init__, undefined, undefined);
 }
 
 function __init__() {

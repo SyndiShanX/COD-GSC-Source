@@ -17,41 +17,34 @@ stealth_event_enemy_main() {
 }
 
 /************************************************************************************************************/
-
 /*													LOGIC													*/
 /************************************************************************************************************/
-
 enemy_event_Loop() {
   self endon("death");
   self endon("pain_death");
 
-  while(1) {
+  while (1) {
     self waittill("event_awareness", type);
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
-    if(self stealth_group_spotted_flag()) {
+    if(self stealth_group_spotted_flag())
       continue;
-    }
 
-    //put this in the loop so that it can check for the function
+    //put this in the loop so that it can check for the function 
     //every time...that way we can change the functions on the fly
     func = self._stealth.behavior.ai_functions["event"];
 
-    if(!isDefined(func[type])) {
+    if(!isdefined(func[type]))
       continue;
-    }
     self thread enemy_event_reaction_wrapper(type);
   }
 }
 
 /************************************************************************************************************/
-
 /*											EVENT REACTIONS													*/
 /************************************************************************************************************/
-
 enemy_event_reaction_wrapper(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
 
@@ -94,13 +87,12 @@ enemy_event_reaction_flashbang(type) {
   }
 
   wait 0.05;
-  if(self.script == "flashed") {
+  if(self.script == "flashed")
     self waittill("stop_flashbang_effect");
-  }
 
   node = self enemy_find_free_pathnode_near(origin, 300, 40); // 2
 
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     self thread enemy_announce_wtf();
     self thread enemy_announce_spotted_bring_group(origin);
   }
@@ -125,7 +117,7 @@ enemy_event_reaction_nothing(type) {
 }
 
 enemy_investigate_position(node, position) {
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     wait randomfloat(1);
 
     self thread enemy_runto_and_lookaround(node, position);
@@ -140,10 +132,8 @@ enemy_investigate_position(node, position) {
 }
 
 /************************************************************************************************************/
-
 /*													SETUP													*/
 /************************************************************************************************************/
-
 stealth_event_mod_all() {
   self stealth_event_mod("heard_scream");
   self stealth_event_mod("doFlashBanged");
@@ -154,29 +144,25 @@ stealth_event_mod(type, behavior_function, animation_function, event_listener) {
   behavior = stealth_event_defaults();
   animation = self stealth_event_anim_defaults();
 
-  if(!isDefined(behavior_function)) {
+  if(!isdefined(behavior_function))
     behavior_function = behavior[type];
-  }
-  if(!isDefined(animation_function)) {
+  if(!isdefined(animation_function))
     animation_function = animation[type];
-  }
-  if(!isDefined(event_listener)) {
+  if(!isdefined(event_listener))
     event_listener = stealth_event_listener_defaults(type); // SET TO FALSE IF NO DEFAULT EXISTS
-  }
 
-  assertex(isDefined(behavior_function), "tried to set a stealth event of " + type + " to which there is no default behavior for");
-  assertex(isDefined(animation_function), "tried to set a stealth event of " + type + " to which there is no default animation for");
+  assertex(isdefined(behavior_function), "tried to set a stealth event of " + type + " to which there is no default behavior for");
+  assertex(isdefined(animation_function), "tried to set a stealth event of " + type + " to which there is no default animation for");
 
   //SET THE PARAMETERS
   self ai_create_behavior_function("event", type, behavior_function);
   self ai_create_behavior_function("animation", type, animation_function);
-  //MAKES SURE WE GET THE NOTIFY
+  //MAKES SURE WE GET THE NOTIFY 
   self thread maps\_stealth_visibility_enemy::enemy_event_awareness(type);
 
   //IS THIS A CODE DRIVEN EVENT THAT NEEDS TO BE LISTENED FOR
-  if(event_listener) {
+  if(event_listener)
     self addAIEventListener(type);
-  }
 
   //special case settings
   switch (type) {
@@ -185,7 +171,9 @@ stealth_event_mod(type, behavior_function, animation_function, event_listener) {
       break;
   }
 
+  /#
   self thread enemy_event_debug_print(type);
+  # /
 }
 
 stealth_event_defaults() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\spawner_shared;
+
 #namespace archetypenovacrawler;
 
 autoexec init() {
@@ -40,3 +41,4 @@ private function_3d50e4d0(message) {
     println("<dev string:x38>" + message);
   }
 }
+

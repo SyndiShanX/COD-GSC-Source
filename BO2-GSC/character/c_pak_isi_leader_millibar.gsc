@@ -4,7 +4,7 @@
 ***************************************************/
 
 main() {
-  self setModel("c_pak_isi_body_m");
+  self setmodel("c_pak_isi_body_m");
   self.headmodel = "c_pak_isi_head1_m";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_pak_isi_gear1_m";

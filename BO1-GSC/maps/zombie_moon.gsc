@@ -168,15 +168,15 @@ no_mans_land_power() {
 }
 
 turn_area51_perks_on() {
-  machine = getEntArray("vending_sleight", "targetname");
+  machine = getentarray("vending_sleight", "targetname");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_sleight_on");
   }
   level notify("specialty_fastreload_power_on");
-  machine2 = getEntArray("vending_jugg", "targetname");
+  machine2 = getentarray("vending_jugg", "targetname");
   for(i = 0; i < machine2.size; i++) {
     machine2[i] setModel("zombie_vending_jugg_on");
-    machine2[i] playSound("zmb_perks_power_on");
+    machine2[i] playsound("zmb_perks_power_on");
   }
   level notify("specialty_armorvest_power_on");
 }
@@ -345,7 +345,7 @@ pack_gate_activate() {
   time = 1;
   self NotSolid();
   if(isDefined(self.script_vector)) {
-    self playSound("amb_teleporter_gate_start");
+    self playsound("amb_teleporter_gate_start");
     self moveTo(self.startpos + self.script_vector, time);
     self thread pack_gate_closed();
     flag_wait("packapunch_hacked");
@@ -353,7 +353,7 @@ pack_gate_activate() {
     if(self.classname == "script_brushmodel") {
       self ConnectPaths();
     }
-    self playSound("amb_teleporter_gate_start");
+    self playsound("amb_teleporter_gate_start");
     self moveTo(self.startpos, time);
     self thread maps\_zombiemode_blockers::door_solid_thread();
   }
@@ -511,9 +511,8 @@ vision_set_init() {
 moon_round_think_func() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500) {
+    if(maxreward > 500)
       maxreward = 500;
-    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.pro_tips_start_time = GetTime();
     level.zombie_last_run_time = GetTime();
@@ -541,7 +540,9 @@ moon_round_think_func() {
         level.zombie_total = level.prev_round_zombies;
       }
     }
-    [[level.round_wait_func]]();
+    [
+      [level.round_wait_func]
+    ]();
     level.first_round = false;
     level notify("end_of_round");
     flag_set("between_rounds");
@@ -931,7 +932,7 @@ wait_for_power() {
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
-  master_switch playSound("zmb_switch_flip");
+  master_switch playsound("zmb_switch_flip");
   level notify("revive_on");
   wait_network_frame();
   level notify("doubletap_on");
@@ -947,14 +948,14 @@ wait_for_power() {
   level notify("electric_door");
   clientnotify("ZPO");
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-  master_switch playSound("zmb_turn_on");
+  playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  master_switch playsound("zmb_turn_on");
 }
 
 moon_devgui(cmd) {}
 custom_add_weapons() {
-  maps\_zombiemode_weapons::add_zombie_weapon("microwavegundw_zm", "microwavegundw_upgraded_zm", &"ZOMBIE_WEAPON_MICROWAVEGUN_DW", 10, "microwave", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_quantum_bomb", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "quantum", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("microwavegundw_zm", "microwavegundw_upgraded_zm", & "ZOMBIE_WEAPON_MICROWAVEGUN_DW", 10, "microwave", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_quantum_bomb", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "quantum", "", undefined);
 }
 
 moon_zombie_death_response() {
@@ -1169,7 +1170,7 @@ blackhole_bomb_area_check() {
     final_structs = black_hole_teleport_structs;
     discarded_zones = [];
     all_players = get_players();
-    all_zones = getEntArray("player_volume", "script_noteworthy");
+    all_zones = getentarray("player_volume", "script_noteworthy");
     players_touching = 0;
     for(x = 0; x < all_zones.size; x++) {
       switch (all_zones[x].targetname) {
@@ -1223,7 +1224,7 @@ blackhole_bomb_area_check() {
 }
 
 get_blackholebomb_destination_point(black_hole_teleport_structs, ent_player) {
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   valid_struct = undefined;
   scr_org = undefined;
   for(x = 0; x < black_hole_teleport_structs.size; x++) {

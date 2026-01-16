@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_escape_elevators;
 
 autoexec __init__system__() {
@@ -144,7 +145,7 @@ is_equipment(entity) {
   if(isDefined(entity.weapon)) {
     weapon = entity.weapon;
 
-    if(weapon.name === # "ability_smart_cover" || weapon.name === # "eq_tripwire" || weapon.name === # "trophy_system" || weapon.name === # "eq_concertina_wire" || weapon.name === # "eq_sensor" || weapon.name === # "cymbal_monkey" || weapon.name === # "gadget_supplypod" || weapon.name === # "homunculus") {
+    if(weapon.name === #"ability_smart_cover" || weapon.name === #"eq_tripwire" || weapon.name === #"trophy_system" || weapon.name === #"eq_concertina_wire" || weapon.name === #"eq_sensor" || weapon.name === #"cymbal_monkey" || weapon.name === #"gadget_supplypod" || weapon.name === #"homunculus") {
       return true;
     }
   }
@@ -166,25 +167,25 @@ function_777e012d(t_damage) {
     if(isDefined(device) && device istouching(t_damage)) {
       if(is_equipment(device)) {
         switch (device.weapon.name) {
-          case # "eq_tripwire":
+          case #"eq_tripwire":
             device[[level.var_2e06b76a]]();
             break;
-          case # "trophy_system":
+          case #"trophy_system":
             device[[level.var_4f3822f4]]();
             break;
-          case # "cymbal_monkey":
+          case #"cymbal_monkey":
             device[[level.var_7c5c96dc]]();
             break;
-          case # "homunculus":
+          case #"homunculus":
             device[[level.var_cc310d06]]();
             break;
-          case # "eq_sensor":
+          case #"eq_sensor":
             device[[level.var_9911d36f]]();
             break;
-          case # "eq_concertina_wire":
+          case #"eq_concertina_wire":
             device[[level.var_94029383]]();
             break;
-          case # "gadget_supplypod":
+          case #"gadget_supplypod":
             device notify(#"death");
             break;
           default:
@@ -249,7 +250,7 @@ function_26ab1b5e(t_damage) {
       var_8fa58819 = var_38ae32ff[2];
       var_8fa58819 *= var_8fa58819;
 
-      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === # "helicopter_light") {
+      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === #"helicopter_light") {
         a_players = e_vehicle getvehoccupants();
         e_vehicle.takedamage = 1;
         e_vehicle.allowdeath = 1;
@@ -409,7 +410,7 @@ function_d7b6ee00(activator, laststate, state) {
 
     line(start, end, (1, 1, 1), 1, 1, 300);
 
-    results = bullettracepassed(start, end, 0, activator);
+      results = bullettracepassed(start, end, 0, activator);
 
     if(!results) {
       if(state == 1) {

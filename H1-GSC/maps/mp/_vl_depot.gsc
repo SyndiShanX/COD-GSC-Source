@@ -46,19 +46,19 @@ init_depot() {
   level.inventoryitemrarity["Legendary"] = 4;
   level.inventoryitemrarity["Epic"] = 5;
   level.raritycardfx = [];
-  level.raritycardfx[level.inventoryitemrarity["Common"]] = spawnStruct();
+  level.raritycardfx[level.inventoryitemrarity["Common"]] = spawnstruct();
   level.raritycardfx[level.inventoryitemrarity["Common"]].fx = "loot_card_trail_common";
   level.raritycardfx[level.inventoryitemrarity["Common"]].rumble = "loot_crate_open_common";
   level.raritycardfx[level.inventoryitemrarity["Common"]].exploder = 106;
-  level.raritycardfx[level.inventoryitemrarity["Rare"]] = spawnStruct();
+  level.raritycardfx[level.inventoryitemrarity["Rare"]] = spawnstruct();
   level.raritycardfx[level.inventoryitemrarity["Rare"]].fx = "loot_card_trail_rare";
   level.raritycardfx[level.inventoryitemrarity["Rare"]].rumble = "loot_crate_open_rare";
   level.raritycardfx[level.inventoryitemrarity["Rare"]].exploder = 109;
-  level.raritycardfx[level.inventoryitemrarity["Legendary"]] = spawnStruct();
+  level.raritycardfx[level.inventoryitemrarity["Legendary"]] = spawnstruct();
   level.raritycardfx[level.inventoryitemrarity["Legendary"]].fx = "loot_card_trail_legendary";
   level.raritycardfx[level.inventoryitemrarity["Legendary"]].rumble = "loot_crate_open_legendary";
   level.raritycardfx[level.inventoryitemrarity["Legendary"]].exploder = 112;
-  level.raritycardfx[level.inventoryitemrarity["Epic"]] = spawnStruct();
+  level.raritycardfx[level.inventoryitemrarity["Epic"]] = spawnstruct();
   level.raritycardfx[level.inventoryitemrarity["Epic"]].fx = "loot_card_trail_epic";
   level.raritycardfx[level.inventoryitemrarity["Epic"]].rumble = "loot_crate_open_epic";
   level.raritycardfx[level.inventoryitemrarity["Epic"]].exploder = 115;
@@ -66,9 +66,8 @@ init_depot() {
 }
 
 depotaddstate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(level.depotstates[var_0])) {
-    level.depotstates[var_0] = spawnStruct();
-  }
+  if(!isdefined(level.depotstates[var_0]))
+    level.depotstates[var_0] = spawnstruct();
 
   level.depotstates[var_0].animname = var_1;
   level.depotstates[var_0].animlabel = var_2;
@@ -108,16 +107,15 @@ hasabunduntcurrency() {
 }
 
 playerdepotprocesslui(var_0, var_1) {
-  if(var_0 == "depot") {
+  if(var_0 == "depot")
     thread playerenterdepot(var_1);
-  } else if(var_0 == "leave_depot") {
+  else if(var_0 == "leave_depot")
     thread playerleavedepot(var_1);
-  } else if(var_0 == "depot_return") {
+  else if(var_0 == "depot_return")
     thread playerreturntodepot(var_1);
-  } else if(var_0 == "depot_state") {
-    if(var_1 == "broke") {
+  else if(var_0 == "depot_state") {
+    if(var_1 == "broke")
       level.depotbrokeattempts = level.depotbrokeattempts + 1;
-    }
 
     setdepotstate(var_1);
   } else if(var_0 == "depot_loot_rarities")
@@ -140,12 +138,11 @@ setdepotstate(var_0) {
 depothandlestickerfx(var_0) {
   var_1 = getstickerfx(var_0);
 
-  if(isDefined(level.depotcrate.laststickerfx) && level.depotcrate.laststickerfx != var_1) {
-    stopFXOnTag(level._effect[level.depotcrate.laststickerfx], level.depotcrate, "TAG_FX_STICKER");
-  }
+  if(isdefined(level.depotcrate.laststickerfx) && level.depotcrate.laststickerfx != var_1)
+    stopfxontag(level._effect[level.depotcrate.laststickerfx], level.depotcrate, "TAG_FX_STICKER");
 
   level.depotcrate.laststickerfx = var_1;
-  playFXOnTag(level._effect[level.depotcrate.laststickerfx], level.depotcrate, "TAG_FX_STICKER");
+  playfxontag(level._effect[level.depotcrate.laststickerfx], level.depotcrate, "TAG_FX_STICKER");
 }
 
 getstickerfx(var_0) {
@@ -156,32 +153,28 @@ getstickerfx(var_0) {
     var_3 = var_1[1];
 
     if(var_2 == "aw") {
-      if(var_3 == "basic") {
+      if(var_3 == "basic")
         return "loot_sticker_wolf";
-      } else {
+      else
         return "loot_sticker_wolf_rare";
-      }
     } else if(var_2 == "ls") {
-      if(var_3 == "basic") {
+      if(var_3 == "basic")
         return "loot_sticker_lion";
-      } else {
+      else
         return "loot_sticker_lion_rare";
-      }
     } else if(var_2 == "ch") {
-      if(var_3 == "basic") {
+      if(var_3 == "basic")
         return "loot_sticker_copperhead";
-      } else {
+      else
         return "loot_sticker_copperhead_rare";
-      }
     } else if(var_2 == "ex" && var_3 == "promo") {
       if(var_1.size >= 3) {
         var_4 = var_1[2];
 
-        if(var_4 == "6" || var_4 == "8") {
+        if(var_4 == "6" || var_4 == "8")
           return "loot_sticker_wolf_rare";
-        } else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
+        else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12")
           return "loot_sticker_copperhead_rare";
-        }
       }
 
       return "loot_sticker_lion_rare";
@@ -193,7 +186,7 @@ getstickerfx(var_0) {
 
 depothandlecratemodel(var_0) {
   var_1 = getcratemodel(var_0);
-  level.depotcrate setModel(var_1);
+  level.depotcrate setmodel(var_1);
 }
 
 getcratemodel(var_0) {
@@ -203,29 +196,26 @@ getcratemodel(var_0) {
     var_2 = var_1[0];
     var_3 = var_1[1];
 
-    if(var_2 == "aw") {
+    if(var_2 == "aw")
       return "h1_supply_drop_crate_a_anim";
-    } else if(var_2 == "ls") {
-      if(var_3 == "promo") {
+    else if(var_2 == "ls") {
+      if(var_3 == "promo")
         return "h1_supply_drop_crate_shamrock";
-      }
 
       return "h1_supply_drop_crate_lion_strike";
     } else if(var_2 == "ch") {
-      if(var_3 == "promo") {
+      if(var_3 == "promo")
         return "h1_supply_drop_crate_days_of_summer";
-      }
 
       return "h1_supply_drop_crate_copperhead";
     } else if(var_2 == "ex" && var_3 == "promo") {
       if(var_1.size >= 3) {
         var_4 = var_1[2];
 
-        if(var_4 == "6" || var_4 == "8") {
+        if(var_4 == "6" || var_4 == "8")
           return "h1_supply_drop_crate_a_anim";
-        } else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
+        else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12")
           return "h1_supply_drop_crate_copperhead";
-        }
       }
 
       return "h1_supply_drop_crate_lion_strike";
@@ -240,7 +230,7 @@ playerdepot_dof() {
   var_0 = 3.3;
   var_1 = 80.0;
 
-  if(isDefined(level.depotscene)) {
+  if(isdefined(level.depotscene)) {
     switch (level.depotscene) {
       case "knife":
         var_0 = 3.3;
@@ -273,9 +263,8 @@ playerenterdepot(var_0) {
   setdvar("vlDepotEnabled", 1);
 
   if(!maps\mp\_utility::is_true(level.in_depot)) {
-    while(!getdvarint("vlDepotLoaded", 0) || !getdvarint("virtualLobbyPresentable")) {
+    while (!getdvarint("vlDepotLoaded", 0) || !getdvarint("virtualLobbyPresentable"))
       wait 0.05;
-    }
 
     level.depotcontroller = var_0;
     var_1 = maps\mp\_vl_base::getfocusfromcontroller(var_0);
@@ -291,9 +280,8 @@ playerenterdepot(var_0) {
     }
 
     foreach(var_4 in level.depotstates) {
-      if(isDefined(var_4.stateinitfunc)) {
+      if(isdefined(var_4.stateinitfunc))
         self[[var_4.stateinitfunc]]();
-      }
     }
 
     var_6 = level.camparams.camera;
@@ -311,13 +299,11 @@ playerenterdepot(var_0) {
       setdepotstate("greetingfirst");
     }
 
-    foreach(var_8 in level.depotagent.props) {
-      var_8 show();
-    }
+    foreach(var_8 in level.depotagent.props)
+    var_8 show();
 
-    foreach(var_11 in level.depothiddensceneprops[level.depotscene]) {
-      var_11 hide();
-    }
+    foreach(var_11 in level.depothiddensceneprops[level.depotscene])
+    var_11 hide();
 
     depotscenelightson(level.depotscene);
     maps\mp\_vl_base::playerchangecameramode("depot", 1);
@@ -326,9 +312,8 @@ playerenterdepot(var_0) {
     level.in_depot = 1;
     thread depotanimstatemachine();
 
-    if(level.depotscene != "lackey") {
+    if(level.depotscene != "lackey")
       thread depotlackeyfidgets();
-    }
 
     thread playbobbleanim();
   }
@@ -340,9 +325,8 @@ playerleavedepot(var_0) {
   setdvar("vlDepotEnabled", 0);
 
   if(!maps\mp\_utility::is_true(level.in_depot)) {
-    if(!maps\mp\_utility::is_true(level.depotinitialized)) {
+    if(!maps\mp\_utility::is_true(level.depotinitialized))
       thread maps\mp\_vl_base::playerreloadallavatarmodels();
-    }
 
     return;
   }
@@ -354,9 +338,8 @@ playerleavedepot(var_0) {
 
   foreach(var_2 in level.depotspecialanimprops) {
     if(isarray(var_2)) {
-      foreach(var_4 in var_2) {
-        var_4 scriptmodelclearanim();
-      }
+      foreach(var_4 in var_2)
+      var_4 scriptmodelclearanim();
 
       continue;
     }
@@ -376,11 +359,10 @@ playerreturntodepot(var_0) {
   maps\mp\_vl_base::playersetfovscale(1.0);
 
   if(getdvar("vlDepotState") == "pause") {
-    if(level.camparams.camera.depotpos == "crate") {
+    if(level.camparams.camera.depotpos == "crate")
       setdepotstate("purchaseidle");
-    } else {
+    else
       setdepotstate("idle");
-    }
   }
 }
 
@@ -388,16 +370,15 @@ depotnotifylootrarities(var_0) {
   var_1 = strtok(var_0, ",");
   level.depotlootrarities = [];
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     level.depotlootrarities[var_2] = int(var_1[var_2]);
-  }
 
   level notify("depot_loot_rarities");
 }
 
 spawndepotpropent(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_1);
-  var_5 setModel(var_0);
+  var_5 setmodel(var_0);
   setupdepotpropent(var_5, var_2, var_3, var_4);
   return var_5;
 }
@@ -405,13 +386,11 @@ spawndepotpropent(var_0, var_1, var_2, var_3, var_4) {
 setupdepotpropent(var_0, var_1, var_2, var_3) {
   var_0 linktosynchronizedparent(var_1, var_2, (0, 0, 0), (0, 0, 0));
 
-  if(maps\mp\_utility::is_true(var_3)) {
+  if(maps\mp\_utility::is_true(var_3))
     var_0 hide();
-  }
 
-  if(!isDefined(level.depotpropents)) {
+  if(!isdefined(level.depotpropents))
     level.depotpropents = [];
-  }
 
   level.depotpropents[var_0.model] = var_0;
 }
@@ -419,9 +398,8 @@ setupdepotpropent(var_0, var_1, var_2, var_3) {
 depotinithiddensceneprops() {
   level.depothiddensceneprops = [];
 
-  foreach(var_1 in level.depotscenes) {
-    level.depothiddensceneprops[var_1] = [];
-  }
+  foreach(var_1 in level.depotscenes)
+  level.depothiddensceneprops[var_1] = [];
 
   level.depothiddensceneprops["knife"][level.depothiddensceneprops["knife"].size] = level.depotagent.props["ashtray"];
   level.depothiddensceneprops["knife"][level.depothiddensceneprops["knife"].size] = level.depotlackey.props["cards"];
@@ -511,20 +489,19 @@ depotinitsounds() {
 spawnandinitdepotents() {
   var_0 = level.camparams.camera;
 
-  if(isDefined(var_0.depotsceneent)) {
+  if(isdefined(var_0.depotsceneent)) {
     return;
   }
-  while(!isDefined(common_scripts\utility::getstruct("characterBM", "targetname"))) {
+  while (!isdefined(common_scripts\utility::getstruct("characterBM", "targetname")))
     wait 0.05;
-  }
 
   var_1 = common_scripts\utility::getstruct("characterBM", "targetname");
   var_0.depotsceneent = spawn("script_model", var_1.origin);
-  var_0.depotsceneent setModel("genericprop");
+  var_0.depotsceneent setmodel("genericprop");
   var_0.depotsceneent.scriptednode = var_1;
   level.depotagent = playerspawndepotcharacter(self.class, "vldepot_dealer_animclass", "body_graves_mp", "head_graves_lob");
   level.depotagent.depotsceneent = spawn("script_model", var_1.origin);
-  level.depotagent.depotsceneent setModel("genericprop_x10");
+  level.depotagent.depotsceneent setmodel("genericprop_x10");
   level.depotagent.depotsceneent.scriptednode = var_1;
   level.depotagent linktosynchronizedparent(level.depotagent.depotsceneent, "j_prop_1", (0, 0, 0), (0, 0, 0));
   level.depotagent.props = [];
@@ -541,15 +518,14 @@ spawnandinitdepotents() {
   var_2 = "head_graves_lackey";
   var_3 = "body_graves_lackey";
 
-  if(level.inventory_contentpromo == 1) {
+  if(level.inventory_contentpromo == 1)
     var_2 = "head_graves_lackey_irish";
-  } else if(level.inventory_contentpromo == 2) {
+  else if(level.inventory_contentpromo == 2)
     var_3 = "body_graves_lackey_summertime";
-  }
 
   level.depotlackey = playerspawndepotcharacter(self.class, "vldepot_lackey_animclass", var_3, var_2);
   level.depotlackey.sceneent = spawn("script_model", var_1.origin);
-  level.depotlackey.sceneent setModel("genericprop_x10");
+  level.depotlackey.sceneent setmodel("genericprop_x10");
   level.depotlackey.sceneent.scriptednode = var_1;
   level.depotlackey linktosynchronizedparent(level.depotlackey.sceneent, "j_prop_10", (0, 0, 0), (0, 0, 0));
   level.depotlackey.props = [];
@@ -562,7 +538,7 @@ spawnandinitdepotents() {
   level.depotlackey.props["plasticcase"] = spawndepotpropent("com_plasticcase_beige_big", var_1.origin, level.depotlackey.sceneent, "j_prop_7", 1);
   level.depotlackey.props["clipboard"] = spawndepotpropent("com_clipboard_wpaper", var_1.origin, level.depotlackey.sceneent, "j_prop_8", 1);
   level.depotlackey.props["cards"] = spawn("script_model", (0, 0, 0));
-  level.depotlackey.props["cards"] setModel("h1_props_vl_depot_playcards");
+  level.depotlackey.props["cards"] setmodel("h1_props_vl_depot_playcards");
   level.depotlackey.props["cards"].animstatesuffix = "cards";
   level.depotlackey.props["cards"].animscenenode = level.depotlackey.sceneent.scriptednode;
   level.depotprop = playerspawndepotcharacter(self.class, "vldepot_props_animclass", "body_graves_lackey", "head_graves_lackey", 0);
@@ -577,17 +553,17 @@ spawnandinitdepotents() {
   var_4 = common_scripts\utility::getstruct("drop_crate", "targetname");
   level.depotcrate = spawn("script_model", var_4.origin);
   level.depotcrate.angles = var_4.angles;
-  level.depotcrate setModel("h1_supply_drop_crate_a_anim");
+  level.depotcrate setmodel("h1_supply_drop_crate_a_anim");
   level.depotcrate.originalorigin = level.depotcrate.origin;
   level.depotcrate.originalangles = level.depotcrate.angles;
   level.depotlootprop = spawn("script_model", level.depotcrate.origin);
   level.depotlootprop.angles = level.depotcrate.angles;
-  level.depotlootprop setModel("genericprop_x3");
+  level.depotlootprop setmodel("genericprop_x3");
   level.depotlootcards = [];
 
-  for(var_5 = 0; var_5 < 3; var_5++) {
+  for (var_5 = 0; var_5 < 3; var_5++) {
     level.depotlootcards[var_5] = spawn("script_model", (0, 0, 0));
-    level.depotlootcards[var_5] setModel("h1_props_vl_depot_playcards_single_crate");
+    level.depotlootcards[var_5] setmodel("h1_props_vl_depot_playcards_single_crate");
     level.depotlootcards[var_5] linktosynchronizedparent(level.depotlootprop, "j_prop_" + (var_5 + 1), (0, 0, 0), (0, 0, 0));
     level.depotlootcards[var_5] ghost();
   }
@@ -597,9 +573,8 @@ spawnandinitdepotents() {
 }
 
 playerspawndepotcharacter(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4)) {
+  if(!isdefined(var_4))
     var_4 = 1;
-  }
 
   var_5 = maps\mp\gametypes\_class::getloadout(self.pers["team"], var_0);
   var_6 = common_scripts\utility::getstruct("characterBM", "targetname");
@@ -667,9 +642,8 @@ depoteasteregginit() {
 }
 
 depotpurchaseinit() {
-  if(isDefined(level.depotstates["purchase"].animname)) {
+  if(isdefined(level.depotstates["purchase"].animname))
     level.depotstates["purchase"].origanimname = level.depotstates["purchase"].animname;
-  }
 }
 
 depotcanswitchtopause(var_0) {
@@ -685,9 +659,8 @@ depotcanswitchtogreetingfirst(var_0) {
 }
 
 depotcanswitchtogreeting(var_0) {
-  if(var_0 == "") {
+  if(var_0 == "")
     return 1;
-  }
 
   return 0;
 }
@@ -702,17 +675,15 @@ depotcanswitchtoidle(var_0) {
 }
 
 depotcanswitchtofidget(var_0) {
-  if(var_0 == "idle") {
+  if(var_0 == "idle")
     return 1;
-  }
 
   return 0;
 }
 
 depotcanswitchtonag(var_0) {
-  if(var_0 == "idle" && isDefined(level.depotidlestarttime) && gettime() - level.depotidlestarttime > level.depotstates["nag"].minidletime && gettime() - level.depotstates["nag"].laststatetime > randomfloatrange(level.depotstates["nag"].statemintime, level.depotstates["nag"].statemaxtime)) {
+  if(var_0 == "idle" && isdefined(level.depotidlestarttime) && gettime() - level.depotidlestarttime > level.depotstates["nag"].minidletime && gettime() - level.depotstates["nag"].laststatetime > randomfloatrange(level.depotstates["nag"].statemintime, level.depotstates["nag"].statemaxtime))
     return 1;
-  }
 
   return 0;
 }
@@ -720,9 +691,8 @@ depotcanswitchtonag(var_0) {
 depotcanswitchtoxover(var_0) {
   return 0;
 
-  if(var_0 == "idle" && gettime() - level.depotstates["xover"].laststatetime > randomfloatrange(level.depotstates["xover"].statemintime, level.depotstates["xover"].statemaxtime)) {
+  if(var_0 == "idle" && gettime() - level.depotstates["xover"].laststatetime > randomfloatrange(level.depotstates["xover"].statemintime, level.depotstates["xover"].statemaxtime))
     return 1;
-  }
 
   return 0;
 }
@@ -733,33 +703,29 @@ depotcanswitchtobroke(var_0) {
     return 0;
   }
 
-  if(var_0 == "idle" && gettime() - level.depotstates["broke"].laststatetime > randomfloatrange(level.depotstates["broke"].statemintime, level.depotstates["broke"].statemaxtime)) {
+  if(var_0 == "idle" && gettime() - level.depotstates["broke"].laststatetime > randomfloatrange(level.depotstates["broke"].statemintime, level.depotstates["broke"].statemaxtime))
     return 1;
-  }
 
   return 0;
 }
 
 depotcanswitchtocreditreminder(var_0) {
-  if(var_0 == "idle" && gettime() - level.depotstates["creditreminder"].laststatetime > randomfloatrange(level.depotstates["creditreminder"].statemintime, level.depotstates["creditreminder"].statemaxtime) && hasabunduntcurrency()) {
+  if(var_0 == "idle" && gettime() - level.depotstates["creditreminder"].laststatetime > randomfloatrange(level.depotstates["creditreminder"].statemintime, level.depotstates["creditreminder"].statemaxtime) && hasabunduntcurrency())
     return 1;
-  }
 
   return 0;
 }
 
 depotcanswitchtonewproduct(var_0) {
-  if(var_0 == "greeting" && hasnewproduct()) {
+  if(var_0 == "greeting" && hasnewproduct())
     return 1;
-  }
 
   return 0;
 }
 
 depotcanswitchtoeasteregg(var_0) {
-  if(var_0 == "idle" && gettime() - level.depotstates["easteregg"].laststatetime > randomfloatrange(level.depotstates["easteregg"].statemintime, level.depotstates["easteregg"].statemaxtime)) {
+  if(var_0 == "idle" && gettime() - level.depotstates["easteregg"].laststatetime > randomfloatrange(level.depotstates["easteregg"].statemintime, level.depotstates["easteregg"].statemaxtime))
     return 1;
-  }
 
   return 0;
 }
@@ -794,18 +760,16 @@ depotswitchingtogreetingidle(var_0) {}
 depotswitchingtogreetingfirst(var_0) {
   sethasvisiteddepot();
 
-  if(level.camparams.camera.depotpos != "dealer") {
+  if(level.camparams.camera.depotpos != "dealer")
     thread playertransitiontodealer();
-  }
 }
 
 depotswitchingtogreeting(var_0) {
   var_1 = level.depotstates["greeting"].animname;
   level.depotstates["greeting"].animname = "greeting";
 
-  if(hascrossoverloot() && level.depotagent hasanimstate("armory_" + level.depotscene + "_greeting_xover")) {
+  if(hascrossoverloot() && level.depotagent hasanimstate("armory_" + level.depotscene + "_greeting_xover"))
     level.depotstates["greeting"].animname = "greeting_xover";
-  }
 }
 
 depotswitchingtoidle(var_0) {
@@ -814,9 +778,8 @@ depotswitchingtoidle(var_0) {
     thread playbobbleanim();
   }
 
-  if(isDefined(level.depotstates[var_0]) && !maps\mp\_utility::is_true(level.depotstates[var_0].idletype)) {
+  if(isdefined(level.depotstates[var_0]) && !maps\mp\_utility::is_true(level.depotstates[var_0].idletype))
     level.depotidlestarttime = gettime();
-  }
 }
 
 depotswitchingtofidget(var_0) {}
@@ -838,15 +801,13 @@ depotswitchingtoeasteregg(var_0) {
 depotswitchingtopurchase(var_0) {
   thread depotopenlootcrate();
 
-  if(level.camparams.camera.depotpos != "crate") {
+  if(level.camparams.camera.depotpos != "crate")
     thread playertransitiontocrate();
-  }
 
   level.depotstates["purchase"].animname = level.depotstates["purchase"].origanimname;
 
-  if(var_0 != "idle") {
+  if(var_0 != "idle")
     level.depotstates["purchase"].animname = undefined;
-  }
 }
 
 depotswitchingtopurchasewait(var_0) {}
@@ -863,27 +824,24 @@ depotswitchingtopurchaseidle(var_0) {}
 
 depotpauseended() {
   foreach(var_1 in level.depotstates) {
-    if(isDefined(var_1.stateinitfunc)) {
+    if(isdefined(var_1.stateinitfunc))
       self[[var_1.stateinitfunc]]();
-    }
   }
 }
 
 depotgreetingidleended() {}
 
 depotgreetingfirstended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 }
 
 depotgreetingended() {
   if(canswitchstates()) {
-    if(hasnewproduct()) {
+    if(hasnewproduct())
       setdepotstate("newproduct");
-    } else {
+    else
       setdepotstate("idle");
-    }
   }
 }
 
@@ -902,8 +860,10 @@ depotidleended() {
     var_1[var_1.size] = "nag";
     var_1[var_1.size] = "fidget";
 
-    for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      if([[level.depotstates[var_1[var_2]].canswitchtostatefunc]]("idle")) {
+    for (var_2 = 0; var_2 < var_1.size; var_2++) {
+      if([
+          [level.depotstates[var_1[var_2]].canswitchtostatefunc]
+        ]("idle")) {
         level.depotstates[var_1[var_2]].nochecknecessary = 1;
         setdepotstate(var_1[var_2]);
         level.depotstates["idle"].laststatetime = gettime();
@@ -914,41 +874,36 @@ depotidleended() {
 }
 
 depotfidgetended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["fidget"].laststatetime = gettime();
 }
 
 depotnagended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["nag"].laststatetime = gettime();
 }
 
 depotxoverended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["xover"].laststatetime = gettime();
 }
 
 depotbrokeended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["broke"].laststatetime = gettime();
 }
 
 depotcreditreminderended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["creditreminder"].laststatetime = gettime();
 }
@@ -956,15 +911,13 @@ depotcreditreminderended() {
 depotnewproductended() {
   sethasnewproduct();
 
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 }
 
 depoteastereggended() {
-  if(canswitchstates()) {
+  if(canswitchstates())
     setdepotstate("idle");
-  }
 
   level.depotstates["easteregg"].laststatetime = gettime();
 }
@@ -987,12 +940,12 @@ depotanimstatemachine() {
   var_2 = "";
   maps\mp\_utility::waittillplayersnextsnapshot(self);
 
-  for(;;) {
+  for (;;) {
     var_3 = getdvar("vlDepotState");
     var_4 = 0;
 
     if(var_3 != var_0 || level.depotstatefinished && var_3 != "pause" || var_4) {
-      if(!isDefined(level.depotstates[var_3])) {
+      if(!isdefined(level.depotstates[var_3])) {
         var_3 = var_0;
         setdepotstate(var_3);
         continue;
@@ -1022,9 +975,8 @@ depotanimstatemachine() {
 
 depotshowlackeyprops() {
   if(!maps\mp\_utility::is_true(level.showinglackeyprops)) {
-    foreach(var_1 in level.depotlackey.props) {
-      var_1 show();
-    }
+    foreach(var_1 in level.depotlackey.props)
+    var_1 show();
 
     level.showinglackeyprops = 1;
   }
@@ -1037,7 +989,7 @@ depotlackeyfidgets() {
   var_2 = gettime();
   maps\mp\_vl_avatar::hide_avatar(level.depotlackey);
 
-  for(;;) {
+  for (;;) {
     if(gettime() - var_2 > randomfloatrange(var_0, var_1)) {
       maps\mp\_vl_avatar::show_avatar(level.depotlackey, 0);
       depotshowlackeyprops();
@@ -1056,7 +1008,7 @@ depotlackeyfidgets() {
 depotplayscene(var_0, var_1, var_2) {
   var_3 = -1;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     var_4 = "armory_" + level.depotscene + "_" + var_0;
 
     if(level.depotagent hasanimstate(var_4)) {
@@ -1075,31 +1027,28 @@ depotplayscene(var_0, var_1, var_2) {
         }
       }
 
-      if(level.depotprop hasanimstate(var_4 + "_prop")) {
+      if(level.depotprop hasanimstate(var_4 + "_prop"))
         sceneplayanim(level.depotagent.depotsceneent, level.depotagent.depotsceneent.scriptednode, level.depotprop getanimentryname(var_4 + "_prop", var_3), 0, 1);
-      }
 
-      if(isDefined(level.depotspecialanimprops[level.depotscene])) {
+      if(isdefined(level.depotspecialanimprops[level.depotscene])) {
         var_5 = [];
 
-        if(isarray(level.depotspecialanimprops[level.depotscene])) {
+        if(isarray(level.depotspecialanimprops[level.depotscene]))
           var_5 = level.depotspecialanimprops[level.depotscene];
-        } else {
+        else
           var_5[0] = level.depotspecialanimprops[level.depotscene];
-        }
 
         foreach(var_7 in var_5) {
           var_7 scriptmodelclearanim();
           var_8 = level.depotscene;
 
-          if(isDefined(var_7.animstatesuffix)) {
+          if(isdefined(var_7.animstatesuffix))
             var_8 = var_7.animstatesuffix;
-          }
 
           if(level.depotprop hasanimstate(var_4 + "_prop_" + var_8) && level.depotprop getanimentrycount(var_4 + "_prop_" + var_8) > var_3) {
             var_7 show();
 
-            if(isDefined(var_7.animscenenode)) {
+            if(isdefined(var_7.animscenenode)) {
               var_7 scriptmodelplayanimdeltamotionfrompos(level.depotprop getanimentryname(var_4 + "_prop_" + var_8, var_3), var_7.animscenenode.origin, var_7.animscenenode.angles);
               continue;
             }
@@ -1115,18 +1064,16 @@ depotplayscene(var_0, var_1, var_2) {
 }
 
 agentplaydepotsound(var_0, var_1, var_2) {
-  if(isDefined(var_0.sounds) && isDefined(var_0.sounds[level.depotscene]) && isDefined(var_0.sounds[level.depotscene][var_1])) {
-    if(!isarray(var_0.sounds[level.depotscene][var_1])) {
+  if(isdefined(var_0.sounds) && isdefined(var_0.sounds[level.depotscene]) && isdefined(var_0.sounds[level.depotscene][var_1])) {
+    if(!isarray(var_0.sounds[level.depotscene][var_1]))
       var_0 playsoundonmovingent(var_0.sounds[level.depotscene][var_1]);
-    } else if(isDefined(var_0.sounds[level.depotscene][var_1][var_2])) {
+    else if(isdefined(var_0.sounds[level.depotscene][var_1][var_2]))
       var_0 playsoundonmovingent(var_0.sounds[level.depotscene][var_1][var_2]);
-    }
   }
 
-  if(isDefined(var_0.propsounds) && isDefined(var_0.propsounds[level.depotscene]) && isDefined(var_0.propsounds[level.depotscene][var_1])) {
-    foreach(var_5, var_4 in var_0.propsounds[level.depotscene][var_1]) {
-      var_0.props[var_5] playsoundonmovingent(var_4);
-    }
+  if(isdefined(var_0.propsounds) && isdefined(var_0.propsounds[level.depotscene]) && isdefined(var_0.propsounds[level.depotscene][var_1])) {
+    foreach(var_5, var_4 in var_0.propsounds[level.depotscene][var_1])
+    var_0.props[var_5] playsoundonmovingent(var_4);
   }
 }
 
@@ -1134,9 +1081,8 @@ agentplaydepotanim(var_0, var_1, var_2, var_3) {
   var_4 = var_0 setanimstate(var_1, var_2, 1.0, 0.0);
   thread agentplaydepotsound(var_0, var_3, var_4);
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     thread agentupdatestateonanimend(var_1, var_4, var_3);
-  }
 
   return var_4;
 }
@@ -1151,13 +1097,12 @@ playertransitiontocrate() {
   var_0 = level.camparams.camera;
   var_0.depotpos = "crate";
   self setphysicaldepthoffield(2.2, 72.5);
-  self playSound("h1_ui_loot_cam_whoosh");
+  self playsound("h1_ui_loot_cam_whoosh");
   sceneplayanim(var_0.depotsceneent, var_0.depotsceneent.scriptednode, "h1_vlobby_armory_scene1_cam_zoomin", 1);
   level.depotagent common_scripts\utility::delaycall(1, ::stopsounds);
 
-  if(var_0.depotpos == "crate") {
+  if(var_0.depotpos == "crate")
     sceneplayanim(var_0.depotsceneent, var_0.depotsceneent.scriptednode, "h1_vlobby_armory_scene1_cam_loot_idle");
-  }
 }
 
 playertransitiontodealer() {
@@ -1166,16 +1111,14 @@ playertransitiontodealer() {
   thread playerdepot_dof();
   sceneplayanim(var_0.depotsceneent, var_0.depotsceneent.scriptednode, "h1_vlobby_armory_scene1_cam_zoomout", 1);
 
-  if(var_0.depotpos == "dealer") {
+  if(var_0.depotpos == "dealer")
     sceneplayanim(var_0.depotsceneent, var_0.depotsceneent.scriptednode, "h1_vlobby_armory_scene1_cam_idle");
-  }
 }
 
 sceneplayanim(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_2)) {
-    if(!isDefined(var_4)) {
+  if(isdefined(var_2)) {
+    if(!isdefined(var_4))
       var_4 = 0;
-    }
 
     if(!var_4) {
       var_0 dontinterpolate();
@@ -1185,9 +1128,8 @@ sceneplayanim(var_0, var_1, var_2, var_3, var_4) {
     var_0 scriptmodelplayanimdeltamotionfrompos(var_2, var_1.origin, var_1.angles, "scene_node_anim", var_4);
     var_0 thread scenedepotpropnotetracks();
 
-    if(maps\mp\_utility::is_true(var_3)) {
+    if(maps\mp\_utility::is_true(var_3))
       var_0 waittillmatch("scene_node_anim", "end");
-    }
   }
 }
 
@@ -1195,13 +1137,12 @@ depotopenlootcrate() {
   level notify("openLootCrate");
   level endon("openLootCrate");
 
-  if(level.camparams.camera.depotpos != "crate") {
+  if(level.camparams.camera.depotpos != "crate")
     level.camparams.camera.depotsceneent waittillmatch("scene_node_anim", "crack_crate");
-  }
 
   level.depotcrate scriptmodelclearanim();
   level.depotcrate scriptmodelplayanimdeltamotionfrompos("h1_vlobby_armory_lootcrate_crack_open", level.depotcrate.originalorigin, level.depotcrate.originalangles, "crate_anim");
-  level.depotcrate playSound("h1_ui_loot_box_latch");
+  level.depotcrate playsound("h1_ui_loot_box_latch");
   level.depotcrate waittillmatch("crate_anim", "end");
   var_0 = getdvar("vlDepotState");
 
@@ -1214,57 +1155,53 @@ depotopenlootcrate() {
     if(var_0 == "purchasewait") {
       level.depotcrate scriptmodelclearanim();
       level.depotcrate scriptmodelplayanimdeltamotionfrompos("h1_vlobby_armory_lootcrate_crack_idle", level.depotcrate.originalorigin, level.depotcrate.originalangles);
-      level.depotcrate playLoopSound("h1_ui_lootbox_rattle");
+      level.depotcrate playloopsound("h1_ui_lootbox_rattle");
 
-      while(getdvar("vlDepotState") == "purchasewait") {
+      while (getdvar("vlDepotState") == "purchasewait")
         waitframe();
-      }
     }
 
     level.depotcrate stoploopsound();
     var_0 = getdvar("vlDepotState");
 
     if(var_0 == "purchaseconfirm") {
-      if(!isDefined(level.depotlootrarities)) {
+      if(!isdefined(level.depotlootrarities))
         level waittill("depot_loot_rarities");
-      }
 
       luinotifyevent(&"supply_drop_play_purchase_vo", 0);
       var_1 = int(level.inventoryitemrarity["Common"]);
 
-      for(var_2 = 0; var_2 < level.depotlootrarities.size && var_2 < level.depotlootcards.size; var_2++) {
+      for (var_2 = 0; var_2 < level.depotlootrarities.size && var_2 < level.depotlootcards.size; var_2++) {
         level.depotlootcards[var_2].rarity_fx = level._effect[level.raritycardfx[level.inventoryitemrarity["Common"]].fx];
-        playFXOnTag(level.depotlootcards[var_2].rarity_fx, level.depotlootcards[var_2], "tag_card");
+        playfxontag(level.depotlootcards[var_2].rarity_fx, level.depotlootcards[var_2], "tag_card");
         var_1 = int(max(var_1, level.depotlootrarities[var_2]));
       }
 
       level.depotlootprop scriptmodelplayanim("h1_vlobby_armory_loot_flyout", "card_anim");
 
-      foreach(var_4 in level.depotlootcards) {
-        var_4 show();
-      }
+      foreach(var_4 in level.depotlootcards)
+      var_4 show();
 
       level.depotcrate scriptmodelclearanim();
       level.depotcrate scriptmodelplayanimdeltamotionfrompos("h1_vlobby_armory_lootcrate_full_open", level.depotcrate.originalorigin, level.depotcrate.originalangles, "crate_anim");
-      level.depotcrate playSound("h1_ui_loot_box_open");
+      level.depotcrate playsound("h1_ui_loot_box_open");
       level.depotcrate waittillmatch("crate_anim", "play_fx");
       thread common_scripts\_exploder::exploder(level.raritycardfx[var_1].exploder);
 
-      if(isDefined(level.raritycardfx[var_1].rumble)) {
+      if(isdefined(level.raritycardfx[var_1].rumble))
         playrumbleonposition(level.raritycardfx[var_1].rumble, self.origin);
-      }
 
       level.depotlootprop waittillmatch("card_anim", "cards_off_screen");
       luinotifyevent(&"supply_drop_ui", 0);
       level.depotlootrarities = undefined;
       level.depotcrate waittillmatch("crate_anim", "crate_shut");
-      level.depotcrate playSound("h1_ui_loot_box_close");
+      level.depotcrate playsound("h1_ui_loot_box_close");
       thread common_scripts\_exploder::exploder(201);
       level.depotcrate waittillmatch("crate_anim", "end");
 
       foreach(var_4 in level.depotlootcards) {
         var_4 ghost();
-        stopFXOnTag(var_4.rarity_fx, var_4, "tag_card");
+        stopfxontag(var_4.rarity_fx, var_4, "tag_card");
       }
 
       luinotifyevent(&"supply_drop_allow_skip", 0);
@@ -1279,10 +1216,10 @@ scenedepotpropnotetracks() {
   self notify("depotPropNotetracks");
   self endon("depotPropNotetracks");
 
-  if(!isDefined(level.depotpropnotetrackfx)) {
+  if(!isdefined(level.depotpropnotetrackfx)) {
     return;
   }
-  for(;;) {
+  for (;;) {
     self waittill("scene_node_anim", var_0);
 
     foreach(var_2 in level.depotpropnotetrackfx) {
@@ -1292,39 +1229,36 @@ scenedepotpropnotetracks() {
       }
     }
 
-    if(var_0 == "end") {
+    if(var_0 == "end")
       return;
-    }
   }
 }
 
 scenerundepotpropeffect(var_0) {
   var_1 = level.depotpropents[var_0.model];
-  playFXOnTag(common_scripts\utility::getfx(var_0.fxref), var_1, var_0.tagname);
+  playfxontag(common_scripts\utility::getfx(var_0.fxref), var_1, var_0.tagname);
 
   if(maps\mp\_utility::is_true(var_0.islooping)) {
     waittilldepotpropfxdone(var_1, var_0.stopnotetrack);
-    stopFXOnTag(common_scripts\utility::getfx(var_0.fxref), var_1, var_0.tagname);
+    stopfxontag(common_scripts\utility::getfx(var_0.fxref), var_1, var_0.tagname);
   }
 }
 
 waittilldepotpropfxdone(var_0, var_1) {
   level endon("leave_depot");
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = "forever";
-  }
 
   self waittillmatch("depot_notetrack", var_1);
 }
 
 depotaddpropnotetrackfx(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.depotpropnotetrackfx)) {
+  if(!isdefined(level.depotpropnotetrackfx))
     level.depotpropnotetrackfx = [];
-  }
 
   var_6 = level.depotpropnotetrackfx.size;
-  level.depotpropnotetrackfx[var_6] = spawnStruct();
+  level.depotpropnotetrackfx[var_6] = spawnstruct();
   level.depotpropnotetrackfx[var_6].model = var_0;
   level.depotpropnotetrackfx[var_6].startnotetrack = var_1;
   level.depotpropnotetrackfx[var_6].stopnotetrack = var_5;
@@ -1336,7 +1270,7 @@ depotaddpropnotetrackfx(var_0, var_1, var_2, var_3, var_4, var_5) {
 depotscenelightsoff() {
   foreach(var_1 in level.depotscenes) {
     var_2 = "light_" + var_1;
-    var_3 = getEntArray(var_2, "targetname");
+    var_3 = getentarray(var_2, "targetname");
 
     if(var_3.size == 0) {
       continue;
@@ -1347,9 +1281,8 @@ depotscenelightsoff() {
       continue;
     }
     foreach(var_6 in var_3) {
-      if(!isDefined(var_6.baseintensity)) {
+      if(!isdefined(var_6.baseintensity))
         var_6.baseintensity = var_6 getlightintensity();
-      }
 
       var_6 setlightintensity(0);
     }
@@ -1358,40 +1291,37 @@ depotscenelightsoff() {
 
 depotscenelightson(var_0) {
   var_1 = "light_" + var_0;
-  var_2 = getEntArray(var_1, "targetname");
+  var_2 = getentarray(var_1, "targetname");
 
-  foreach(var_4 in var_2) {
-    var_4 setlightintensity(var_4.baseintensity);
-  }
+  foreach(var_4 in var_2)
+  var_4 setlightintensity(var_4.baseintensity);
 }
 
 getcurrencybalance(var_0, var_1) {
-  if(var_1 != 2) {
+  if(var_1 != 2)
     return _func_305(var_0, var_1);
-  } else {
+  else
     return _func_305(var_0, var_1) * 0.0037037;
-  }
 }
 
 depotsetupseasonal() {
   var_0 = getdvarint("inventory_contentPromo", 0);
 
-  if(isDefined(level.inventory_contentpromo)) {
+  if(isdefined(level.inventory_contentpromo)) {
     if(level.inventory_contentpromo == var_0) {
       return;
     }
     foreach(var_2 in level.seasonalents) {
-      if(isDefined(var_2)) {
+      if(isdefined(var_2))
         var_2 delete();
-      }
     }
 
     var_4 = "head_graves_lackey";
     var_5 = "body_graves_lackey";
 
-    if(isDefined(level.depotlackey) && (level.depotlackey.head != var_4 || level.depotlackey.bodymodel != var_5)) {
+    if(isdefined(level.depotlackey) && (level.depotlackey.head != var_4 || level.depotlackey.bodymodel != var_5)) {
       level.depotlackey detach(level.depotlackey.head);
-      level.depotlackey setModel(var_5);
+      level.depotlackey setmodel(var_5);
       level.depotlackey attach(var_4);
       level.depotlackey.head = var_4;
       level.depotlackey.bodymodel = var_5;
@@ -1404,14 +1334,14 @@ depotsetupseasonal() {
   if(level.inventory_contentpromo == 1) {
     var_2 = spawn("script_model", (13856.5, 1578, -670));
     var_2.angles = (0, 55.686, 0);
-    var_2 setModel("h1_props_depot_gold_coin_pile_lod0");
+    var_2 setmodel("h1_props_depot_gold_coin_pile_lod0");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13865.5, 1566, -669.5));
     var_2.angles = (0, 211.496, 0);
-    var_2 setModel("h1_props_vl_depot_bobblehead");
+    var_2 setmodel("h1_props_vl_depot_bobblehead");
     var_6[var_6.size] = var_2;
 
-    if(isDefined(level.depotlackey)) {
+    if(isdefined(level.depotlackey)) {
       var_7 = "head_graves_lackey_irish";
       level.depotlackey detach(level.depotlackey.head);
       level.depotlackey attach(var_7);
@@ -1422,40 +1352,40 @@ depotsetupseasonal() {
   if(level.inventory_contentpromo == 2) {
     var_2 = spawn("script_model", (13919.7, 1285.6, -703.5));
     var_2.angles = (71.7996, 61.809, 179.07);
-    var_2 setModel("h1_mp_bog_summer_surfboard_01_blue");
+    var_2 setmodel("h1_mp_bog_summer_surfboard_01_blue");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13831.5, 1331.5, -689));
     var_2.angles = (358.324, 214.285, 78.4818);
-    var_2 setModel("h1_mp_bog_summer_bodyboard_orange");
+    var_2 setmodel("h1_mp_bog_summer_bodyboard_orange");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13790.7, 1463.1, -660));
     var_2.angles = (1.99531, 319.334, 1.83047);
-    var_2 setModel("h1_mp_bog_summer_floatie_duck");
+    var_2 setmodel("h1_mp_bog_summer_floatie_duck");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13860.7, 1318.6, -690.5));
     var_2.angles = (45.0986, 125.457, -9.40193);
-    var_2 setModel("h1_mp_bog_summer_life_preserver_01");
+    var_2 setmodel("h1_mp_bog_summer_life_preserver_01");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13861.5, 1559.5, -670));
     var_2.angles = (0, 203, 0);
-    var_2 setModel("h1_mp_bog_summer_margarita_glass_full_depot");
+    var_2 setmodel("h1_mp_bog_summer_margarita_glass_full_depot");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13901.2, 1263.6, -652.5));
     var_2.angles = (0, 180, 0);
-    var_2 setModel("h1_mp_bog_summer_pool_ball_01");
+    var_2 setmodel("h1_mp_bog_summer_pool_ball_01");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13846.5, 1300.5, -664.5));
     var_2.angles = (0, 180, 0);
-    var_2 setModel("home_towels_01b");
+    var_2 setmodel("home_towels_01b");
     var_6[var_6.size] = var_2;
     var_2 = spawn("script_model", (13782.2, 1429.1, -661.5));
     var_2.angles = (0, 180, 0);
-    var_2 setModel("h1_mp_bog_summer_umbrella_closed_02_red");
+    var_2 setmodel("h1_mp_bog_summer_umbrella_closed_02_red");
     var_6[var_6.size] = var_2;
 
-    if(isDefined(level.depotlackey)) {
+    if(isdefined(level.depotlackey)) {
       var_8 = "body_graves_lackey_summertime";
-      level.depotlackey setModel(var_8);
+      level.depotlackey setmodel(var_8);
       level.depotlackey.bodymodel = var_8;
     }
   }
@@ -1464,7 +1394,7 @@ depotsetupseasonal() {
 }
 
 playbobbleanim() {
-  if(isDefined(level.bobble)) {
+  if(isdefined(level.bobble)) {
     level.bobble scriptmodelclearanim();
     wait 0.5;
     level.bobble scriptmodelplayanim("h1_vlobby_armory_saa_bobblehead_enter", "bobble_notify");

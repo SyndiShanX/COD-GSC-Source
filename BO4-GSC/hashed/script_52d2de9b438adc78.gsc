@@ -10,6 +10,7 @@
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_util;
+
 #namespace ir_strobe;
 
 init_shared() {
@@ -40,7 +41,7 @@ function_c5d20b5c(owner, context, position) {
 
 function_f625256f(killstreak_id, context) {
   player = self;
-  self endon(#"disconnect", # "spawned_player");
+  self endon(#"disconnect", #"spawned_player");
   var_9eb4725b = level.weaponnone;
   currentweapon = self getcurrentweapon();
   prevweapon = currentweapon;
@@ -60,7 +61,7 @@ function_f625256f(killstreak_id, context) {
 
   while(true) {
     player allowmelee(0);
-    notifystring = self waittill(#"weapon_change", trigger_event, # "disconnect", # "spawned_player");
+    notifystring = self waittill(#"weapon_change", trigger_event, #"disconnect", #"spawned_player");
     player allowmelee(1);
 
     if(trigger_event != "none") {
@@ -109,7 +110,7 @@ cleanup(context, player) {
 
 markercleanupthread(context) {
   player = self;
-  player waittill(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "cleanup_marker", # "changed_specialist");
+  player waittill(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"cleanup_marker", #"changed_specialist");
 
   if(player flagsys::get(#"marking_done")) {
     return;
@@ -120,7 +121,7 @@ markercleanupthread(context) {
 
 markerupdatethread(context) {
   player = self;
-  player endon(#"hash_27be2db04a0908d5", # "spawned_player", # "disconnect", # "weapon_change", # "death");
+  player endon(#"hash_27be2db04a0908d5", #"spawned_player", #"disconnect", #"weapon_change", #"death");
   markermodel = spawn("script_model", (0, 0, 0));
   context.marker = markermodel;
 
@@ -160,8 +161,8 @@ markerupdatethread(context) {
       forwardvector = vectorscale(anglesToForward(angles), 300);
       results = bulletTrace(eyepos, eyepos + forwardvector, 0, player, 1);
 
-      if(results[# "fraction"] >= 1) {
-        results = bulletTrace(results[# "position"], results[# "position"] + (0, 0, -1000), 0, player, 1);
+      if(results[#"fraction"] >= 1) {
+        results = bulletTrace(results[#"position"], results[#"position"] + (0, 0, -1000), 0, player, 1);
       }
     } else {
       weapon = getweapon("ir_strobe");
@@ -169,7 +170,7 @@ markerupdatethread(context) {
       results = projectiletrace(weapon, eye, angles, player);
     }
 
-    markermodel.origin = results[# "position"] + (0, 0, 6);
+    markermodel.origin = results[#"position"] + (0, 0, 6);
     node = helicopter::getvalidrandomstartnode(markermodel.origin);
     var_6aa266d6 = undefined;
 
@@ -219,7 +220,7 @@ markerupdatethread(context) {
 function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
   player = self;
   self notify(#"hash_27be2db04a0908d5");
-  self endon(#"hash_27be2db04a0908d5", # "spawned_player", # "disconnect", # "weapon_change");
+  self endon(#"hash_27be2db04a0908d5", #"spawned_player", #"disconnect", #"weapon_change");
   team = self.team;
 
   if(isDefined(killstreak_id) && killstreak_id == -1) {
@@ -250,13 +251,17 @@ function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
 
     if(isDefined(weapon_instance)) {
       if(isDefined(level.var_14151f16)) {
-        [[level.var_14151f16]](weapon_instance, 0);
+        [
+          [level.var_14151f16]
+        ](weapon_instance, 0);
       }
     }
 
     if(isDefined(weapon_instance)) {
       if(isDefined(level.var_48c30195)) {
-        [[level.var_48c30195]](weapon_instance, 0);
+        [
+          [level.var_48c30195]
+        ](weapon_instance, 0);
       }
     }
 
@@ -268,7 +273,9 @@ function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
 
     if(isDefined(self) && issupplydropweapon) {
       if(isDefined(context)) {
-        var_9fdd755d = !isDefined(player.markerposition) || !(isDefined(context.islocationgood) && [[context.islocationgood]](player.markerposition, context));
+        var_9fdd755d = !isDefined(player.markerposition) || !(isDefined(context.islocationgood) && [
+          [context.islocationgood]
+        ](player.markerposition, context));
 
         if(!getdvarint(#"hash_7ccc40e85206e0a5", 1)) {
           if(var_9fdd755d) {
@@ -324,13 +331,13 @@ function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
 
 cleanupwatcherondeath(killstreak_id, var_b57ab85c) {
   player = self;
-  self endon(#"disconnect", # "supplydropwatcher", # "trigger_weapon_shutdown", # "spawned_player", # "weapon_change");
-  self waittill(#"death", # "joined_team", # "joined_spectators", # "changed_specialist");
+  self endon(#"disconnect", #"supplydropwatcher", #"trigger_weapon_shutdown", #"spawned_player", #"weapon_change");
+  self waittill(#"death", #"joined_team", #"joined_spectators", #"changed_specialist");
   self notify(#"cleanup_marker");
 }
 
 checkforemp() {
-  self endon(#"supplydropwatcher", # "spawned_player", # "disconnect", # "weapon_change", # "death", # "trigger_weapon_shutdown");
+  self endon(#"supplydropwatcher", #"spawned_player", #"disconnect", #"weapon_change", #"death", #"trigger_weapon_shutdown");
   self waittill(#"emp_jammed");
   self killstreaks::switch_to_last_non_killstreak_weapon();
 }
@@ -382,7 +389,7 @@ function_d5ca3f62(player) {
   }
 
   self function_2cbae477();
-  player waittilltimeout(90, # "strobe_marked", # "payload_delivered", # "payload_fail", # "disconnect");
+  player waittilltimeout(90, #"strobe_marked", #"payload_delivered", #"payload_fail", #"disconnect");
 
   if(!isDefined(self)) {
     return;
@@ -392,7 +399,7 @@ function_d5ca3f62(player) {
   self delete();
 }
 
-private function_2cbae477(var_babebdbc = # "weapon/fx8_equip_swat_smk_signal", var_76361c1a = "tag_flash") {
+private function_2cbae477(var_babebdbc = #"weapon/fx8_equip_swat_smk_signal", var_76361c1a = "tag_flash") {
   playFXOnTag(var_babebdbc, self, var_76361c1a);
   self playSound(#"hash_6c91edfde8408dad");
   self.sndent = spawn("script_origin", self.origin);
@@ -410,9 +417,9 @@ function_284b1d4c(origin, model, timeout = undefined, var_babebdbc = undefined, 
 
 private function_f61c0c1(timeout) {
   if(isDefined(timeout)) {
-    self waittilltimeout(timeout, # "death", # "strobe_stop");
+    self waittilltimeout(timeout, #"death", #"strobe_stop");
   } else {
-    self waittill(#"death", # "strobe_stop");
+    self waittill(#"death", #"strobe_stop");
   }
 
   if(!isDefined(self)) {

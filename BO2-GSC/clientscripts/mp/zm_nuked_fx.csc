@@ -7,7 +7,8 @@
 #include clientscripts\mp\createfx\zm_nuked_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -121,9 +122,9 @@ precache_fxanim_props() {
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_dustdevils = getEntArray(localclientnum, "fxanim_mp_dustdevil", "targetname");
+  fxanim_dustdevils = getentarray(localclientnum, "fxanim_mp_dustdevil", "targetname");
   array_thread(fxanim_dustdevils, ::fxanim_think, localclientnum);
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think, localclientnum);
 }
 
@@ -141,7 +142,7 @@ fxanim_think(localclientnum) {
     wait_time = randomfloatrange(15, 30);
     wait(wait_time);
     self setanimrestart(level.nuked_fxanims["fxanim_mp_dustdevil_anim"], 1.0, 0.0, 1.0);
-    sound_id = ent playSound(0, "amb_fire_tornado");
+    sound_id = ent playsound(0, "amb_fire_tornado");
     effect_to_use = undefined;
 
     switch (randomint(2)) {
@@ -155,7 +156,7 @@ fxanim_think(localclientnum) {
         effect_to_use = level._effect["fire_devil_lg"];
     }
 
-    dust = playFXOnTag(localclientnum, effect_to_use, self, "dervish_jnt");
+    dust = playfxontag(localclientnum, effect_to_use, self, "dervish_jnt");
     wait 12;
     stopsound(sound_id);
     stopfx(localclientnum, dust);
@@ -170,23 +171,21 @@ fxanim_props_think(localclientnum) {
   self endon("delete");
   wait 3;
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.fxanim_scene_1) && self.fxanim_scene_1 == "porch") {
     wait(randomintrange(5, 10) * 1000);
-    playSound(0, "zmb_porch_collapse", self.origin);
+    playsound(0, "zmb_porch_collapse", self.origin);
   }
 
   self useanimtree(#animtree);
 
   if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
-    if(issubstr(self.fxanim_scene_1, "wire")) {
+    if(issubstr(self.fxanim_scene_1, "wire"))
       self thread fxanim_wire_think(localclientnum);
-    } else {
+    else
       self setflaggedanim("nuketown_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
-    }
   }
 }
 
@@ -203,13 +202,12 @@ fxanim_wire_think(localclientnum) {
     wait(randomintrange(4, 5));
 
     if(self.fxanim_scene_1 == "wirespark_long") {
-      playFXOnTag(localclientnum, level._effect["wire_spark"], self, "long_spark_06_jnt");
+      playfxontag(localclientnum, level._effect["wire_spark"], self, "long_spark_06_jnt");
       continue;
     }
 
-    if(self.fxanim_scene_1 == "wirespark_med") {
-      playFXOnTag(localclientnum, level._effect["wire_spark"], self, "med_spark_06_jnt");
-    }
+    if(self.fxanim_scene_1 == "wirespark_med")
+      playfxontag(localclientnum, level._effect["wire_spark"], self, "med_spark_06_jnt");
   }
 }
 
@@ -221,14 +219,12 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   waitforclient(0);
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     play_fx_prop_anims(i);
-  }
 }

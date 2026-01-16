@@ -4,9 +4,11 @@
 ************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace cp_skip_scene_menu;
 
 class ccp_skip_scene_menu: cluielem {
+
   function set_sceneskipendtime(localclientnum, value) {
     set_data(localclientnum, "sceneSkipEndTime", value);
   }
@@ -24,7 +26,7 @@ class ccp_skip_scene_menu: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "cp_skip_scene_menu");
+    cluielem::open(localclientnum, #"cp_skip_scene_menu");
   }
 
   function function_fa582112(localclientnum) {

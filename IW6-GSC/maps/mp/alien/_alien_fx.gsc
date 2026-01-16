@@ -54,29 +54,25 @@ fx_stun_damage() {
   self endon("death");
   self SetScriptablePartState("body", "shocked");
   wait 0.5;
-  if(IsAlive(self)) {
+  if(IsAlive(self))
     self SetScriptablePartState("body", "normal");
-  }
 }
 
 alien_cloak_fx_on() {
-  if(!isDefined(self.is_cloaking)) {
+  if(!isDefined(self.is_cloaking))
     self.is_cloaking = 0;
-  }
 
   self playSound("alien_teleport");
   self.is_cloaking++;
 
-  if(self.is_cloaking == 1) {
+  if(self.is_cloaking == 1)
     self SetScriptablePartState("body", "normal");
-  }
 }
 
 alien_cloak_fx_off() {
   self.is_cloaking--;
-  if(self.is_cloaking > 0) {
+  if(self.is_cloaking > 0)
     return;
-  }
   self playSound("alien_teleport_appear");
 
   self.is_cloaking = undefined;

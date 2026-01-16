@@ -23,9 +23,8 @@ crawler_condition() {
       if(dist < 32400) {
         self.crawler = zombie;
 
-        if(isDefined(level.sloth.custom_crawler_pickup_func)) {
+        if(isDefined(level.sloth.custom_crawler_pickup_func))
           self.crawler thread[[level.sloth.custom_crawler_pickup_func]]();
-        }
 
         return true;
       }
@@ -53,15 +52,15 @@ crawler_action() {
       continue;
     }
 
-    vec_forward = vectornormalize(anglesToForward(self.crawler.angles));
+    vec_forward = vectornormalize(anglestoforward(self.crawler.angles));
     start_pos = self.crawler.origin - vec_forward * sloth_offset;
     raised_start_pos = (start_pos[0], start_pos[1], start_pos[2] + sloth_offset);
     ground_pos = groundpos(raised_start_pos);
     height_check = abs(self.crawler.origin[2] - ground_pos[2]);
 
-    if(height_check > 8) {
+    if(height_check > 8)
       self setanimstatefromasd("zm_player_idle");
-    } else {
+    else {
       self maps\mp\animscripts\zm_run::needsupdate();
       self setgoalpos(start_pos);
     }
@@ -139,9 +138,8 @@ crawler_action() {
         if(dist < 1024) {
           roam_index++;
 
-          if(roam_index >= roam.size) {
+          if(roam_index >= roam.size)
             roam_index = 0;
-          }
         }
 
         self maps\mp\zombies\_zm_ai_sloth::sloth_check_turn(roam[roam_index].origin);
@@ -150,9 +148,8 @@ crawler_action() {
         if(is_true(self.check_turn)) {
           self.check_turn = 0;
 
-          if(self sloth_is_same_zone(self.candy_player)) {
+          if(self sloth_is_same_zone(self.candy_player))
             self maps\mp\zombies\_zm_ai_sloth::sloth_check_turn(self.candy_player.origin, -0.965);
-          }
         }
 
         self setgoalpos(self.candy_player.origin);
@@ -182,7 +179,7 @@ crawler_action() {
 
   if(isDefined(self.crawler)) {
     self.crawler dodamage(self.crawler.health * 10, self.crawler.origin);
-    self.crawler playSound("zmb_ai_sloth_attack_impact");
+    self.crawler playsound("zmb_ai_sloth_attack_impact");
   }
 
   self.sloth_damage_func = undefined;
@@ -208,13 +205,11 @@ watch_sloth_on_exit_side() {
         room = level.ghost_rooms[name];
 
         if(is_true(room.to_maze)) {
-          if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
+          if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion())
             self.on_exit_side = 1;
-          }
         } else if(is_true(room.from_maze)) {
-          if(!self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
+          if(!self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion())
             self.on_exit_side = 1;
-          }
         }
       }
     }
@@ -235,9 +230,8 @@ watch_sloth_on_same_side() {
 
     if(isDefined(player)) {
       if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
-        if(player maps\mp\zombies\_zm_ai_sloth::behind_mansion_zone()) {
+        if(player maps\mp\zombies\_zm_ai_sloth::behind_mansion_zone())
           self.on_same_side = 1;
-        }
       } else if(!player maps\mp\zombies\_zm_ai_sloth::behind_mansion_zone())
         self.on_same_side = 1;
     }
@@ -250,25 +244,22 @@ sloth_move_to_same_side() {
   self endon("death");
 
   if(isDefined(self.teleport_time)) {
-    if(gettime() - self.teleport_time < 1000) {
+    if(gettime() - self.teleport_time < 1000)
       return false;
-    }
   }
 
   player = self.candy_player;
 
   if(is_true(player.is_in_ghost_zone)) {
-    if(is_true(self.on_exit_side)) {
+    if(is_true(self.on_exit_side))
       return false;
-    }
   } else if(is_true(self.on_same_side))
     return false;
 
-  if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
+  if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion())
     self maps\mp\zombies\_zm_ai_sloth::action_navigate_mansion(level.courtyard_depart, level.courtyard_arrive);
-  } else {
+  else
     self maps\mp\zombies\_zm_ai_sloth::action_navigate_mansion(level.maze_depart, level.maze_arrive);
-  }
 
   return true;
 }
@@ -277,21 +268,18 @@ sloth_is_same_zone(player) {
   zone_sloth = self get_current_zone();
   zone_player = player get_current_zone();
 
-  if(!isDefined(zone_sloth) || !isDefined(zone_player)) {
+  if(!isDefined(zone_sloth) || !isDefined(zone_player))
     return false;
-  }
 
-  if(zone_sloth == zone_player) {
+  if(zone_sloth == zone_player)
     return true;
-  }
 
   return false;
 }
 
 append_hunched(asd_name) {
-  if(self.is_inside) {
+  if(self.is_inside)
     return asd_name + "_hunched";
-  }
 
   return asd_name;
 }
@@ -317,9 +305,8 @@ crawler_watch_death() {
 
   sloth_print("crawler died");
 
-  if(isDefined(self.crawler)) {
+  if(isDefined(self.crawler))
     self.crawler unlink();
-  }
 
   self.setanimstatefromspeed = undefined;
   self.sloth_damage_func = undefined;
@@ -366,9 +353,8 @@ crawler_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swea
 }
 
 is_crawler_alive() {
-  if(isDefined(self.crawler) && self.crawler.health > 0) {
+  if(isDefined(self.crawler) && self.crawler.health > 0)
     return true;
-  }
 
   return false;
 }
@@ -377,9 +363,8 @@ slothanimstatefromspeed(animstate, substate) {
   if(isDefined(self.crawler)) {
     crawler_walk = "zm_crawler_crawlerhold_walk";
 
-    if(self.is_inside) {
+    if(self.is_inside)
       crawler_walk = crawler_walk + "_hunched";
-    }
 
     self.crawler setanimstatefromasd(crawler_walk);
   }

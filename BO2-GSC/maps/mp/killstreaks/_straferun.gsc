@@ -49,7 +49,7 @@ init() {
   precacheitem(level.straferunrocketweapon);
   precacheshellshock(level.straferunshellshock);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("straferun_mp", "straferun_mp", "killstreak_straferun", "straferun_used", ::usekillstreakstraferun, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("straferun_mp", &"MP_EARNED_STRAFERUN", &"KILLSTREAK_STRAFERUN_NOT_AVAILABLE", &"MP_WAR_STRAFERUN_INBOUND", &"MP_WAR_STRAFERUN_INBOUND_NEAR_YOUR_POSITION");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("straferun_mp", & "MP_EARNED_STRAFERUN", & "KILLSTREAK_STRAFERUN_NOT_AVAILABLE", & "MP_WAR_STRAFERUN_INBOUND", & "MP_WAR_STRAFERUN_INBOUND_NEAR_YOUR_POSITION");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("straferun_mp", "mpl_killstreak_straferun", "kls_straferun_used", "", "kls_straferun_enemy", "", "kls_straferun_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("straferun_mp", "scr_givestraferun");
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("straferun_mp", level.straferungunweapon);
@@ -63,9 +63,8 @@ playpilotdialog(dialog) {
 
   if(isDefined(self.owner)) {
     if(self.owner.pilotisspeaking) {
-      while(self.owner.pilotisspeaking) {
+      while(self.owner.pilotisspeaking)
         wait 0.2;
-      }
     }
   }
 
@@ -75,9 +74,8 @@ playpilotdialog(dialog) {
     self.owner thread waitplaybacktime(soundalias);
     self.owner waittill_any(soundalias, "death", "disconnect");
 
-    if(isDefined(self.owner)) {
+    if(isDefined(self.owner))
       self.owner.pilotisspeaking = 0;
-    }
   }
 }
 
@@ -92,9 +90,8 @@ usekillstreakstraferun(hardpointtype) {
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart("straferun_mp", self.team, 0, 1);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return false;
-  }
 
   plane = spawnvehicle(level.straferunmodel, "straferun", level.straferunvehicle, startnode.origin, (0, 0, 0));
   plane.attackers = [];
@@ -121,9 +118,8 @@ usekillstreakstraferun(hardpointtype) {
   self.pilotisspeaking = 0;
   plane.pilotvoicenumber = self.bcvoicenumber + 1;
 
-  if(plane.pilotvoicenumber > 3) {
+  if(plane.pilotvoicenumber > 3)
     plane.pilotvoicenumber = 0;
-  }
 
   self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog("straferun_mp", self.pers["team"]);
   level.globalkillstreakscalled++;
@@ -148,8 +144,8 @@ usekillstreakstraferun(hardpointtype) {
 playcontrail() {
   self endon("death");
   wait 0.1;
-  playFXOnTag(level.straferuncontrailfx, self, "tag_origin");
-  self playLoopSound("veh_a10_engine_loop", 1);
+  playfxontag(level.straferuncontrailfx, self, "tag_origin");
+  self playloopsound("veh_a10_engine_loop", 1);
 }
 
 cleanupondeath() {
@@ -179,9 +175,8 @@ watchdamage() {
     }
     self.damage_debug = damage + " (" + weapon + ")";
 
-    if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
+    if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE")
       damage = damage + 1000;
-    }
 
     self.attacker = attacker;
     damage_taken = damage_taken + damage;
@@ -192,7 +187,8 @@ watchdamage() {
       if(self.owner isenemyplayer(attacker)) {
         maps\mp\_scoreevents::processscoreevent("destroyed_strafe_run", attacker, self.owner, weapon);
         attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-      } else {}
+      } else {
+      }
 
       return;
     }
@@ -218,9 +214,8 @@ watchforotherkillstreaks() {
         return;
       }
     } else if(hardpointtype == "missile_swarm_mp") {
-      if(self.owner isenemyplayer(attacker)) {
+      if(self.owner isenemyplayer(attacker))
         self.leavenexttime = 1;
-      }
     }
   }
 }
@@ -231,9 +226,8 @@ watchforkills() {
   for(;;) {
     self waittill("killed", player);
 
-    if(isplayer(player)) {
+    if(isplayer(player))
       continue;
-    }
   }
 }
 
@@ -244,9 +238,8 @@ watchforownerexit(owner) {
 }
 
 addstraferunkill() {
-  if(!isDefined(self.straferunkills)) {
+  if(!isDefined(self.straferunkills))
     self.straferunkills = 0;
-  }
 
   self.straferunkills++;
 }
@@ -267,22 +260,18 @@ dostraferuns() {
       self.straferungunoffset = getdvarintdefault(#"_id_6E34324D", level.straferungunoffset);
 
       if(isDefined(noteworthynode)) {
-        if(isDefined(noteworthynode.script_parameters)) {
+        if(isDefined(noteworthynode.script_parameters))
           self.straferungunlookahead = float(noteworthynode.script_parameters);
-        }
 
-        if(isDefined(noteworthynode.script_radius)) {
+        if(isDefined(noteworthynode.script_radius))
           self.straferungunradius = float(noteworthynode.script_radius);
-        }
 
-        if(isDefined(noteworthynode.script_float)) {
+        if(isDefined(noteworthynode.script_float))
           self.straferungunoffset = float(noteworthynode.script_float);
-        }
       }
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self thread startstrafe();
-      }
 
       continue;
     }
@@ -312,11 +301,11 @@ fireflares() {
   for(;;) {
     chaff_fx = spawn("script_model", self.origin);
     chaff_fx.angles = vectorscale((0, 1, 0), 180.0);
-    chaff_fx setModel("tag_origin");
+    chaff_fx setmodel("tag_origin");
     chaff_fx linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     wait 0.1;
-    playFXOnTag(level.straferunchafffx, chaff_fx, "tag_origin");
-    chaff_fx playSound("wpn_a10_drop_chaff");
+    playfxontag(level.straferunchafffx, chaff_fx, "tag_origin");
+    chaff_fx playsound("wpn_a10_drop_chaff");
     chaff_fx thread deleteaftertimethread(level.straferunflaredelay);
     wait(level.straferunflaredelay);
   }
@@ -334,9 +323,8 @@ startstrafe() {
   self.strafing = 1;
   self thread pilotdialogwait("kls_hit", 3.5);
 
-  if(self.numstrafes == 0) {
+  if(self.numstrafes == 0)
     self firststrafe();
-  }
 
   self thread firerockets();
   self thread startstrafekillcams();
@@ -346,15 +334,15 @@ startstrafe() {
   for(;;) {
     gunorigin = self gettagorigin("tag_flash");
     gunorigin = gunorigin + (0, 0, self.straferungunoffset);
-    forward = anglesToForward(self.angles);
+    forward = anglestoforward(self.angles);
     forwardnoz = vectornormalize((forward[0], forward[1], 0));
     right = vectorcross(forwardnoz, (0, 0, 1));
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
-    trace = bulletTrace(attackstartvector, (attackstartvector[0], attackstartvector[1], -500), 0, self, 0, 1);
+    trace = bullettrace(attackstartvector, (attackstartvector[0], attackstartvector[1], -500), 0, self, 0, 1);
     self setturrettargetvec(trace["position"]);
     self fireweapon("tag_flash");
-    self.gunsoundentity playLoopSound(level.straferungunsound);
+    self.gunsoundentity playloopsound(level.straferungunsound);
     self shellshockplayers(trace["position"]);
 
     if(getdvarintdefault(#"_id_B575F615", 0)) {
@@ -362,7 +350,7 @@ startstrafe() {
       debug_line(attackstartvector, trace["position"] - vectorscale((0, 0, 1), 20.0), (1, 0, 0), time, 0);
 
       if(count % 30 == 0) {
-        trace = bulletTrace(perfectattackstartvector, (perfectattackstartvector[0], perfectattackstartvector[1], -100000), 0, self, 0, 1);
+        trace = bullettrace(perfectattackstartvector, (perfectattackstartvector[0], perfectattackstartvector[1], -100000), 0, self, 0, 1);
         debug_line(trace["position"] + vectorscale((0, 0, 1), 20.0), trace["position"] - vectorscale((0, 0, 1), 20.0), (0, 0, 1), time, 0);
       }
     }
@@ -372,7 +360,8 @@ startstrafe() {
   }
 }
 
-firststrafe() {}
+firststrafe() {
+}
 
 firerockets() {
   self notify("firing_rockets");
@@ -380,7 +369,7 @@ firerockets() {
   self endon("strafe_stop");
   self endon("firing_rockets");
   self.owner endon("disconnect");
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   self.firedrockettargets = [];
 
   for(rocketindex = 0; rocketindex < level.straferunnumrockets; rocketindex++) {
@@ -417,16 +406,14 @@ firerockets() {
     rocketorigin = self gettagorigin(rockettag);
     rocket = magicbullet(level.straferunrocketweapon, rocketorigin, rocketorigin + forward, self.owner);
 
-    if(isDefined(selectedtarget)) {
+    if(isDefined(selectedtarget))
       rocket missile_settarget(selectedtarget, (0, 0, 0));
-    }
 
     rocket.soundmod = "straferun";
     rocket attachkillcamtorocket(level.straferunkillcams.rockets[rocketindex], selectedtarget, targetorigin);
 
-    if(getdvarintdefault(#"_id_9191CAAA", 0)) {
+    if(getdvarintdefault(#"_id_9191CAAA", 0))
       rocket thread debug_draw_bomb_path(undefined, vectorscale((0, 1, 0), 0.5), 400);
-    }
 
     wait(level.straferunrocketdelay);
   }
@@ -439,167 +426,140 @@ stopstrafe() {
   self clearturrettarget();
   owner = self.owner;
 
-  if(owner.straferunbda == 0) {
+  if(owner.straferunbda == 0)
     bdadialog = "kls_killn";
-  }
 
-  if(owner.straferunbda == 1) {
+  if(owner.straferunbda == 1)
     bdadialog = "kls_kill1";
-  }
 
-  if(owner.straferunbda == 2) {
+  if(owner.straferunbda == 2)
     bdadialog = "kls_kill2";
-  }
 
-  if(owner.straferunbda == 3) {
+  if(owner.straferunbda == 3)
     bdadialog = "kls_kill3";
-  }
 
-  if(owner.straferunbda > 3) {
+  if(owner.straferunbda > 3)
     bdadialog = "kls_killm";
-  }
 
-  if(isDefined(bdadialog)) {
+  if(isDefined(bdadialog))
     self thread pilotdialogwait(bdadialog, 3.5);
-  }
 
   owner.straferunbda = 0;
   self.gunsoundentity stoploopsound();
-  self.gunsoundentity playSound("wpn_a10_shot_decay_npc");
+  self.gunsoundentity playsound("wpn_a10_shot_decay_npc");
   self.numstrafes++;
 }
 
 pilotdialogwait(dialog, time) {
   self endon("death");
 
-  if(isDefined(time)) {
+  if(isDefined(time))
     wait(time);
-  }
 
   playpilotdialog(dialog);
 }
 
 shouldleavemap() {
-  if(isDefined(self.leavenexttime) && self.leavenexttime) {
+  if(isDefined(self.leavenexttime) && self.leavenexttime)
     return true;
-  }
 
-  if(self.numstrafes >= level.straferunmaxstrafes) {
+  if(self.numstrafes >= level.straferunmaxstrafes)
     return true;
-  }
 
-  if(self.owner.straferunkills >= level.straferunkillsbeforeexit) {
+  if(self.owner.straferunkills >= level.straferunkillsbeforeexit)
     return true;
-  }
 
   return false;
 }
 
 leavemap() {
   self unlinkkillcams();
-  exitorigin = self.origin + vectorscale(anglesToForward(self.angles), level.straferunexitunits);
+  exitorigin = self.origin + vectorscale(anglestoforward(self.angles), level.straferunexitunits);
   self setyawspeed(5, 999, 999);
   self setvehgoalpos(exitorigin, 1);
   wait 5;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 explode() {
   self endon("delete");
   forward = self.origin + vectorscale((0, 0, 1), 100.0) - self.origin;
-  playFX(level.straferunexplodefx, self.origin, forward);
-  self playSound(level.straferunexplodesound);
+  playfx(level.straferunexplodefx, self.origin, forward);
+  self playsound(level.straferunexplodesound);
   wait 0.1;
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 cantargetentity(entity) {
   heli_centroid = self.origin + vectorscale((0, 0, -1), 160.0);
-  heli_forward_norm = anglesToForward(self.angles);
+  heli_forward_norm = anglestoforward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   visible_amount = entity sightconetrace(heli_turret_point, self);
 
-  if(visible_amount < level.heli_target_recognition) {
+  if(visible_amount < level.heli_target_recognition)
     return false;
-  }
 
   return true;
 }
 
 cantargetplayer(player) {
-  if(!isalive(player) || player.sessionstate != "playing") {
+  if(!isalive(player) || player.sessionstate != "playing")
     return 0;
-  }
 
-  if(player == self.owner) {
+  if(player == self.owner)
     return 0;
-  }
 
-  if(player cantargetplayerwithspecialty() == 0) {
+  if(player cantargetplayerwithspecialty() == 0)
     return 0;
-  }
 
-  if(!isDefined(player.team)) {
+  if(!isDefined(player.team))
     return 0;
-  }
 
-  if(level.teambased && player.team == self.team) {
+  if(level.teambased && player.team == self.team)
     return 0;
-  }
 
-  if(player.team == "spectator") {
+  if(player.team == "spectator")
     return 0;
-  }
 
-  if(isDefined(player.spawntime) && (gettime() - player.spawntime) / 1000 <= level.heli_target_spawnprotection) {
+  if(isDefined(player.spawntime) && (gettime() - player.spawntime) / 1000 <= level.heli_target_spawnprotection)
     return 0;
-  }
 
-  if(!targetinfrontofplane(player)) {
+  if(!targetinfrontofplane(player))
     return 0;
-  }
 
-  if(player isinmovemode("noclip")) {
+  if(player isinmovemode("noclip"))
     return 0;
-  }
 
   return cantargetentity(player);
 }
 
 cantargetactor(actor) {
-  if(!isDefined(actor)) {
+  if(!isDefined(actor))
     return 0;
-  }
 
-  if(level.teambased && actor.aiteam == self.team) {
+  if(level.teambased && actor.aiteam == self.team)
     return 0;
-  }
 
-  if(isDefined(actor.script_owner) && self.owner == actor.script_owner) {
+  if(isDefined(actor.script_owner) && self.owner == actor.script_owner)
     return 0;
-  }
 
-  if(!targetinfrontofplane(actor)) {
+  if(!targetinfrontofplane(actor))
     return 0;
-  }
 
   return cantargetentity(actor);
 }
 
 targetinfrontofplane(target) {
-  forward_dir = anglesToForward(self.angles);
+  forward_dir = anglestoforward(self.angles);
   target_delta = vectornormalize(target.origin - self.origin);
   dot = vectordot(forward_dir, target_delta);
 
-  if(dot < 0.5) {
+  if(dot < 0.5)
     return true;
-  }
 
   return true;
 }
@@ -609,26 +569,23 @@ getvalidtargets() {
 
   foreach(player in level.players) {
     if(self cantargetplayer(player)) {
-      if(isDefined(player)) {
+      if(isDefined(player))
         targets[targets.size] = player;
-      }
     }
   }
 
   dogs = maps\mp\killstreaks\_dogs::dog_manager_get_dogs();
 
   foreach(dog in dogs) {
-    if(self cantargetactor(dog)) {
+    if(self cantargetactor(dog))
       targets[targets.size] = dog;
-    }
   }
 
-  tanks = getEntArray("talon", "targetname");
+  tanks = getentarray("talon", "targetname");
 
   foreach(tank in tanks) {
-    if(self cantargetactor(tank)) {
+    if(self cantargetactor(tank))
       targets[targets.size] = tank;
-    }
   }
 
   return targets;
@@ -657,9 +614,8 @@ shellshockplayers(origin) {
     if(level.teambased && player.team == self.team) {
       continue;
     }
-    if(distancesquared(player.origin, origin) <= level.straferunshellshockradius * level.straferunshellshockradius) {
+    if(distancesquared(player.origin, origin) <= level.straferunshellshockradius * level.straferunshellshockradius)
       player thread straferunshellshock();
-    }
   }
 }
 
@@ -677,21 +633,19 @@ straferunshellshock() {
 
 createkillcams(numkillcams, numrockets) {
   if(!isDefined(level.straferunkillcams)) {
-    level.straferunkillcams = spawnStruct();
+    level.straferunkillcams = spawnstruct();
     level.straferunkillcams.rockets = [];
 
-    for(i = 0; i < numrockets; i++) {
+    for(i = 0; i < numrockets; i++)
       level.straferunkillcams.rockets[level.straferunkillcams.rockets.size] = createkillcament();
-    }
 
     level.straferunkillcams.strafes = [];
 
     for(i = 0; i < numkillcams; i++) {
       level.straferunkillcams.strafes[level.straferunkillcams.strafes.size] = createkillcament();
 
-      if(getdvarintdefault(#"_id_9191CAAA", 0)) {
+      if(getdvarintdefault(#"_id_9191CAAA", 0))
         level.straferunkillcams.strafes[i] thread debug_draw_bomb_path(undefined, vectorscale((0, 0, 1), 0.5), 200);
-      }
 
     }
   }
@@ -700,27 +654,22 @@ createkillcams(numkillcams, numrockets) {
 resetkillcams(time) {
   self endon("death");
 
-  if(isDefined(time)) {
+  if(isDefined(time))
     wait(time);
-  }
 
-  for(i = 0; i < level.straferunkillcams.rockets.size; i++) {
+  for(i = 0; i < level.straferunkillcams.rockets.size; i++)
     level.straferunkillcams.rockets[i] resetrocketkillcament(self, i);
-  }
 
-  for(i = 0; i < level.straferunkillcams.strafes.size; i++) {
+  for(i = 0; i < level.straferunkillcams.strafes.size; i++)
     level.straferunkillcams.strafes[i] resetkillcament(self);
-  }
 }
 
 unlinkkillcams() {
-  for(i = 0; i < level.straferunkillcams.rockets.size; i++) {
+  for(i = 0; i < level.straferunkillcams.rockets.size; i++)
     level.straferunkillcams.rockets[i] unlink();
-  }
 
-  for(i = 0; i < level.straferunkillcams.strafes.size; i++) {
+  for(i = 0; i < level.straferunkillcams.strafes.size; i++)
     level.straferunkillcams.strafes[i] unlink();
-  }
 }
 
 createkillcament() {
@@ -767,7 +716,7 @@ attachkillcamtorocket(killcament, selectedtarget, targetorigin) {
   offset_y = getdvarintdefault(#"_id_218B2531", 0);
   offset_z = getdvarintdefault(#"_id_218B2532", 110);
   self.killcament = killcament;
-  forward = vectorscale(anglesToForward(self.angles), offset_x);
+  forward = vectorscale(anglestoforward(self.angles), offset_x);
   right = vectorscale(anglestoright(self.angles), offset_y);
   up = vectorscale(anglestoup(self.angles), offset_z);
   killcament unlink();
@@ -823,7 +772,7 @@ strafekillcam(parent, node, distance) {
   node = start_origin_struct.node;
   previous_origin = self.origin;
   start_origin = getlookaheadorigin(previous_origin, start_origin, parent.straferungunlookahead + 1000);
-  trace = bulletTrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
+  trace = bullettrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
   pathheight = trace["position"][2];
   self killcammoveto(trace["position"], speed, accel_time, pathheight);
   speed = 500;
@@ -832,7 +781,7 @@ strafekillcam(parent, node, distance) {
     previous_origin = node.origin;
     node = getvehiclenode(node.target, "targetname");
     start_origin = getlookaheadorigin(previous_origin, node.origin, parent.straferungunlookahead + 1000);
-    trace = bulletTrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
+    trace = bullettrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
     self killcammoveto(trace["position"], speed, 0, pathheight);
   }
 }
@@ -844,9 +793,8 @@ killcammoveto(goal, speed, accel, pathheight) {
   dist = distance(origin, self.origin);
   time = dist / speed;
 
-  if(accel > time) {
+  if(accel > time)
     accel = time;
-  }
 
   self moveto(origin, time, accel, 0);
   self waittill("movedone");
@@ -879,7 +827,7 @@ getstrafedistance(node) {
 }
 
 getoriginalongstrafepath(node, start_origin, distance_along) {
-  origin_node = spawnStruct();
+  origin_node = spawnstruct();
   seg_dist = distance((start_origin[0], start_origin[1], 0), (node.origin[0], node.origin[1], 0));
   dist = 0;
 

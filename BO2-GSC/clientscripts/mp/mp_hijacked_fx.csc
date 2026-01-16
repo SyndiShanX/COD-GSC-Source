@@ -7,7 +7,8 @@
 #include clientscripts\mp\createfx\mp_hijacked_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_fire_candle"] = loadfx("fire/fx_fire_candle");
@@ -46,7 +47,6 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

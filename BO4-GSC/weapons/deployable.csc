@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace deployable;
 
 autoexec __init__system__() {
@@ -58,8 +59,8 @@ function_35d1c69f(localclientnum, player, weapon) {
   } else {
     var_7ed1816f = 1;
     var_10c45189 = {
-      #isvalid: 1,
-      #origin: player.origin,
+      #isvalid: 1, 
+      #origin: player.origin, 
       #angles: player.angles
     };
   }

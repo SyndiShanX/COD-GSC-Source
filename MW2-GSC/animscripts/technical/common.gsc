@@ -9,41 +9,37 @@
 main(turret) {
   self endon("killanimscript"); // code
 
-  assert(isDefined(turret));
+  assert(isdefined(turret));
 
   animscripts\utility::initialize("technical");
 
   // when we ran our postscriptfunc we may have decided to stop using our turret,
   // in which case it's gone now
-  if(!isDefined(turret)) {
+  if(!IsDefined(turret)) {
     return;
   }
 
   self.a.special = "technical";
 
-  if(isDefined(turret.script_delay_min)) {
+  if(isDefined(turret.script_delay_min))
     turret_delay = turret.script_delay_min;
-  } else {
+  else
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
-  }
 
-  if(isDefined(turret.script_delay_max)) {
+  if(isDefined(turret.script_delay_max))
     turret_delay_range = turret.script_delay_max - turret_delay;
-  } else {
+  else
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
-  }
 
-  if(isDefined(turret.script_burst_min)) {
+  if(isDefined(turret.script_burst_min))
     turret_burst = turret.script_burst_min;
-  } else {
+  else
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
-  }
 
-  if(isDefined(turret.script_burst_max)) {
+  if(isDefined(turret.script_burst_max))
     turret_burst_range = turret.script_burst_max - turret_burst;
-  } else {
+  else
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
-  }
 
   pauseUntilTime = getTime();
   turretState = "start";
@@ -68,7 +64,7 @@ main(turret) {
   //turret setAnimKnobLimitedRestart( turret.additiveTurretFire );
 
   turret endon("death");
-  for(;;) {
+  for (;;) {
     if(turret.doFiring) {
       thread DoShoot(turret);
 
@@ -96,8 +92,8 @@ fireController(turret) {
 
   fovdot = cos(15);
 
-  for(;;) {
-    while(isDefined(self.enemy)) {
+  for (;;) {
+    while (IsDefined(self.enemy)) {
       if(self turret_should_shoot(turret, fovdot)) {
         if(!turret.doFiring) {
           turret.doFiring = true;
@@ -121,7 +117,7 @@ fireController(turret) {
 }
 
 turret_should_shoot(turret, fovdot) {
-  ASSERT(isDefined(self.enemy));
+  ASSERT(IsDefined(self.enemy));
 
   enemypos = self.enemy.origin;
   turretAimPos = turret getTagAngles("tag_aim");
@@ -138,14 +134,14 @@ turret_should_shoot(turret, fovdot) {
 turret_would_hit_friend(turret, friendlyTeam) {
   tag = "tag_flash";
   start = turret GetTagOrigin(tag);
-  vec = anglesToForward(turret GetTagAngles(tag));
+  vec = AnglesToForward(turret GetTagAngles(tag));
   end = vector_multiply(vec, 10000);
 
-  trace = bulletTrace(start, end, true, undefined);
+  trace = BulletTrace(start, end, true, undefined);
   ent = trace["entity"];
 
-  if(isDefined(ent)) {
-    if((isDefined(ent.team) && ent.team == self.team) || (isDefined(ent.script_team) && ent.script_team == self.team)) {
+  if(IsDefined(ent)) {
+    if((IsDefined(ent.team) && ent.team == self.team) || (IsDefined(ent.script_team) && ent.script_team == self.team)) {
       return true;
     }
   }
@@ -154,9 +150,8 @@ turret_would_hit_friend(turret, friendlyTeam) {
 }
 
 turretTimer(duration, turret) {
-  if(duration <= 0) {
+  if(duration <= 0)
     return;
-  }
 
   self endon("killanimscript"); // code
   turret endon("turretstatechange"); // code
@@ -167,7 +162,7 @@ turretTimer(duration, turret) {
 
 postScriptFunc(animscript) {
   if(animscript == "pain") {
-    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 64 * 64) {
+    if(isdefined(self.node) && distancesquared(self.origin, self.node.origin) < 64 * 64) {
       self.a.usingTurret hide();
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
       self.a.postScriptFunc = ::postPainFunc;
@@ -181,7 +176,7 @@ postScriptFunc(animscript) {
 
   if(animscript == "saw") {
     turret = self GetTurret();
-    assert(isDefined(turret) && turret == self.a.usingTurret);
+    assert(IsDefined(turret) && turret == self.a.usingTurret);
     return;
   }
 
@@ -195,14 +190,14 @@ postPainFunc(animscript) {
   assert(isDefined(self.a.usingTurret));
   assert(self.a.usingTurret.aiOwner == self);
 
-  if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
+  if(!isdefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
     self stopUseTurret();
 
     self.a.usingTurret delete();
     self.a.usingTurret = undefined;
 
     // we may have gone into long death, in which case our weapon is gone
-    if(isDefined(self.weapon) && self.weapon != "none") {
+    if(isdefined(self.weapon) && self.weapon != "none") {
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
     }
   } else if(animscript != "saw") {
@@ -242,7 +237,7 @@ TurretDoShoot(turret) {
   turret endon("turretstatechange"); // code or script
   turret endon("death"); // code or script
 
-  for(;;) {
+  for (;;) {
     turret ShootTurret();
     wait(0.15);
   }
@@ -269,33 +264,25 @@ animscripts\utility::initialize( "technical" );
 
 	self.a.special = "technical";
 
-	if( isDefined( turret.script_delay_min ) ) {
+	if( isDefined( turret.script_delay_min ) )
 		turret_delay = turret.script_delay_min;
-	}
-	else {
+	else
 		turret_delay = maps\_mgturret::burst_fire_settings( "delay" );
-	}
 
-	if( isDefined( turret.script_delay_max ) ) {
+	if( isDefined( turret.script_delay_max ) )
 		turret_delay_range = turret.script_delay_max - turret_delay;
-	}
-	else {
+	else
 		turret_delay_range = maps\_mgturret::burst_fire_settings( "delay_range" );
-	}
 
-	if( isDefined( turret.script_burst_min ) ) {
+	if( isDefined( turret.script_burst_min ) )
 		turret_burst = turret.script_burst_min;
-	}
-	else {
+	else
 		turret_burst = maps\_mgturret::burst_fire_settings( "burst" );
-	}
 
-	if( isDefined( turret.script_burst_max ) ) {
+	if( isDefined( turret.script_burst_max ) )
 		turret_burst_range = turret.script_burst_max - turret_burst;
-	}
-	else {
+	else
 		turret_burst_range = maps\_mgturret::burst_fire_settings( "burst_range" );
-	}
 
 	pauseUntilTime = getTime();
 	turretState = "start";
@@ -303,7 +290,7 @@ animscripts\utility::initialize( "technical" );
 	self animscripts\shared::placeWeaponOn( self.weapon, "none" );
 	self.a.postScriptFunc = ::preplacedPostScriptFunc;
 
-	for( ;; )
+	for ( ;; )
 	{
 		duration = ( pauseUntilTime - getTime() ) * 0.001;
 		if( turret isFiringTurret() && ( duration <= 0 ) )
@@ -317,6 +304,7 @@ animscripts\utility::initialize( "technical" );
 			duration = turret_burst + randomFloat( turret_burst_range );
 
 			thread turretTimer( duration, turret );
+
 
 			turret waittill( "turretstatechange" );// code or script
 
@@ -347,9 +335,8 @@ animscripts\utility::initialize( "technical" );
 
 turretTimer( duration, turret )
 {
-	if( duration <= 0 ) {
+	if( duration <= 0 )
 		return;
-	}
 
 	self endon( "killanimscript" );// code
 	turret endon( "turretstatechange" );// code

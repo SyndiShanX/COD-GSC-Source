@@ -55,9 +55,8 @@ getIntervalSoundDelayMaxDefault() {
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
-  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -67,9 +66,8 @@ createLoopSound() {
   ent.v["angles"] = (0, 0, 0);
   ent.v["origin"] = (0, 0, 0);
   ent.v["server_culled"] = 1;
-  if(getdvar("serverCulledSounds") != "1") {
+  if(getdvar("serverCulledSounds") != "1")
     ent.v["server_culled"] = 0;
-  }
   ent.drawn = true;
   return ent;
 }
@@ -84,9 +82,8 @@ createIntervalSound() {
 
 createNewExploder() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
-  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -252,13 +249,11 @@ createFxLogic() {
     SetDevDvar("fx", "nil");
     SetDevDvar("select_by_substring", "");
 
-    if(GetDvar("createfx_use_f4") == "") {
+    if(GetDvar("createfx_use_f4") == "")
       SetDevDvar("createfx_use_f4", "0");
-    }
 
-    if(GetDvar("createfx_no_autosave") == "") {
+    if(GetDvar("createfx_no_autosave") == "")
       SetDevDvar("createfx_no_autosave", "0");
-    }
 
     level.createfx_draw_enabled = true;
     level.last_displayed_ent = undefined;
@@ -328,9 +323,8 @@ createFxLogic() {
         scale = GetDvarFloat("createfx_scaleid");
 
         if(isDefined(highlightedEnt) && ent == highlightedEnt) {
-          if(!entities_are_selected()) {
+          if(!entities_are_selected())
             display_fx_info(ent);
-          }
 
           if(leftClick) {
             entWasSelected = index_is_selected(i);
@@ -338,21 +332,18 @@ createFxLogic() {
             if(!ctrlHeld) {
               selectedSize = level._createfx.selected_fx_ents.size;
               clear_entity_selection();
-              if(entWasSelected && selectedSize == 1) {
+              if(entWasSelected && selectedSize == 1)
                 select_entity(i, ent);
-              }
             }
             toggle_entity_selection(i, ent);
           } else
           if(leftHeld) {
             if(ctrlHeld) {
-              if(level.createfx_selecting) {
+              if(level.createfx_selecting)
                 select_entity(i, ent);
-              }
 
-              if(!level.createfx_selecting) {
+              if(!level.createfx_selecting)
                 deselect_entity(i, ent);
-              }
             }
           }
 
@@ -361,9 +352,8 @@ createFxLogic() {
           colorIndex = "default";
         }
 
-        if(index_is_selected(i)) {
+        if(index_is_selected(i))
           colorIndex = "selected";
-        }
 
         ent createfx_print3d(colorIndex, scale, right);
       }
@@ -376,9 +366,8 @@ createFxLogic() {
         printRight = (right * (text.size * -2.93));
         color = level._createfx.colors[self.v["type"]][colorIndex];
 
-        if(isDefined(self.is_playing)) {
+        if(isDefined(self.is_playing))
           color = (1, 0.5, 0);
-        }
 
         print3d(self.v["origin"] + printRight + (0, 0, 15), text, color, self.textalpha, scale);
 
@@ -420,21 +409,17 @@ createFxLogic() {
           set_tool_hudelem("Mode:", "rotate");
 
           thread[[level.func_process_fx_rotater]]();
-          if(button_is_clicked("enter", "p")) {
+          if(button_is_clicked("enter", "p"))
             reset_axis_of_selected_ents();
-          }
 
-          if(button_is_clicked("v")) {
+          if(button_is_clicked("v"))
             copy_angles_of_selected_ents();
-          }
 
-          for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
+          for(i = 0; i < level._createfx.selected_fx_ents.size; i++)
             level._createfx.selected_fx_ents[i] draw_axis();
-          }
 
-          if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0 || level.selectedRotate_roll != 0) {
+          if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0 || level.selectedRotate_roll != 0)
             changedSelectedEnts = true;
-          }
 
         } else {
           set_tool_hudelem("Mode:", "move");
@@ -448,9 +433,8 @@ createFxLogic() {
             ent.v["origin"] = ent.v["origin"] + selectedMove_vector;
           }
 
-          if(distance((0, 0, 0), selectedMove_vector) > 0) {
+          if(distance((0, 0, 0), selectedMove_vector) > 0)
             changedSelectedEnts = true;
-          }
         }
       } else {
         clear_tool_hud();
@@ -554,9 +538,8 @@ createFxLogic() {
 
     last_selected_entity_has_changed(lastSelectEntity) {
       if(isDefined(lastSelectEntity)) {
-        if(!entities_are_selected()) {
+        if(!entities_are_selected())
           return true;
-        }
       } else
         return entities_are_selected();
 
@@ -576,15 +559,13 @@ createFxLogic() {
       exploders = [];
       for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
         ent = level._createfx.selected_fx_ents[i];
-        if(isDefined(ent.v["exploder"])) {
+        if(isDefined(ent.v["exploder"]))
           exploders[ent.v["exploder"]] = true;
-        }
       }
 
       keys = getarraykeys(exploders);
-      for(i = 0; i < keys.size; i++) {
+      for(i = 0; i < keys.size; i++)
         exploder(keys[i]);
-      }
     }
 
     draw_distance() {
@@ -632,15 +613,13 @@ createFxLogic() {
       level endon("new_ent_selection");
       timer = 0.1;
       for(p = 0; p < timer * 20; p++) {
-        if(level.selectedRotate_pitch != 0) {
+        if(level.selectedRotate_pitch != 0)
           org AddPitch(level.selectedRotate_pitch);
-        } else {
-          if(level.selectedRotate_yaw != 0)
-        }
-        org AddYaw(level.selectedRotate_yaw);
-        else {
+        else
+        if(level.selectedRotate_yaw != 0)
+          org AddYaw(level.selectedRotate_yaw);
+        else
           org AddRoll(level.selectedRotate_roll);
-        }
 
         wait(0.05);
         org draw_axis();
@@ -693,9 +672,8 @@ createFxLogic() {
       for(i = 0; i < level.createFXent.size; i++) {
         ent = level.createFXent[i];
         if(ent_is_selected(ent)) {
-          if(isDefined(ent.looper)) {
+          if(isDefined(ent.looper))
             ent.looper delete();
-          }
 
           ent notify("stop_loop");
         } else
@@ -749,12 +727,10 @@ createFxLogic() {
 
       foreach(value, _ in selected_exploders) {
         foreach(index, ent in level.createFXent) {
-          if(index_is_selected(index)) {
+          if(index_is_selected(index))
             continue;
-          }
-          if(!isDefined(ent.v[key])) {
+          if(!isDefined(ent.v[key]))
             continue;
-          }
           if(ent.v[key] != value) {
             continue;
           }
@@ -793,9 +769,8 @@ createFxLogic() {
       }
       clear_entity_selection();
 
-      for(i = 0; i < level.stored_ents.size; i++) {
+      for(i = 0; i < level.stored_ents.size; i++)
         add_and_select_entity(level.stored_ents[i]);
-      }
 
       move_selection_to_cursor();
       update_selected_entities();
@@ -810,9 +785,8 @@ createFxLogic() {
 
     get_center_of_array(array) {
       center = (0, 0, 0);
-      for(i = 0; i < array.size; i++) {
+      for(i = 0; i < array.size; i++)
         center = (center[0] + array[i].v["origin"][0], center[1] + array[i].v["origin"][1], center[2] + array[i].v["origin"][2]);
-      }
 
       return (center[0] / array.size, center[1] / array.size, center[2] / array.size);
     }
@@ -826,12 +800,10 @@ createFxLogic() {
     }
 
     rotation_is_occuring() {
-      if(level.selectedRotate_roll != 0) {
+      if(level.selectedRotate_roll != 0)
         return true;
-      }
-      if(level.selectedRotate_pitch != 0) {
+      if(level.selectedRotate_pitch != 0)
         return true;
-      }
       return level.selectedRotate_yaw != 0;
     }
 
@@ -839,24 +811,21 @@ createFxLogic() {
       for(i = 0; i < level._createfx.options.size; i++) {
         option = level._createfx.options[i];
         optionName = option["name"];
-        if(!isDefined(ent.v[optionName])) {
+        if(!isDefined(ent.v[optionName]))
           continue;
-        }
         if(!mask(option["mask"], ent.v["type"])) {
           continue;
         }
         if(!level.mp_createfx) {
-          if(mask("fx", ent.v["type"]) && optionName == "fxid") {
+          if(mask("fx", ent.v["type"]) && optionName == "fxid")
             continue;
-          }
           if(ent.v["type"] == "exploder" && optionName == "exploder") {
             continue;
           }
           key = ent.v["type"] + "/" + optionName;
 
-          if(isDefined(level._createfx.defaults[key]) && (level._createfx.defaults[key] == ent.v[optionName])) {
+          if(isDefined(level._createfx.defaults[key]) && (level._createfx.defaults[key] == ent.v[optionName]))
             continue;
-          }
         }
 
         if(option["type"] == "string") {
@@ -913,23 +882,20 @@ createFxLogic() {
     }
 
     reset_fx_hud_colors() {
-      for(i = 0; i < level._createfx.hudelem_count; i++) {
+      for(i = 0; i < level._createfx.hudelem_count; i++)
         level._createfx.hudelems[i][0].color = (1, 1, 1);
-      }
     }
 
     toggle_entity_selection(index, ent) {
-      if(isDefined(level._createfx.selected_fx[index])) {
+      if(isDefined(level._createfx.selected_fx[index]))
         deselect_entity(index, ent);
-      } else {
+      else
         select_entity(index, ent);
-      }
     }
 
     select_entity(index, ent) {
-      if(isDefined(level._createfx.selected_fx[index])) {
+      if(isDefined(level._createfx.selected_fx[index]))
         return;
-      }
       clear_settable_fx();
       level notify("new_ent_selection");
 
@@ -940,9 +906,8 @@ createFxLogic() {
     }
 
     ent_is_highlighted(ent) {
-      if(!isDefined(level.fx_highLightedEnt)) {
+      if(!isDefined(level.fx_highLightedEnt))
         return false;
-      }
       return ent == level.fx_highLightedEnt;
     }
 
@@ -955,15 +920,13 @@ createFxLogic() {
 
       level._createfx.selected_fx[index] = undefined;
 
-      if(!ent_is_highlighted(ent)) {
+      if(!ent_is_highlighted(ent))
         ent thread entity_highlight_disable();
-      }
 
       newArray = [];
       for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
-        if(level._createfx.selected_fx_ents[i] != ent) {
+        if(level._createfx.selected_fx_ents[i] != ent)
           newArray[newArray.size] = level._createfx.selected_fx_ents[i];
-        }
       }
       level._createfx.selected_fx_ents = newArray;
     }
@@ -974,18 +937,16 @@ createFxLogic() {
 
     ent_is_selected(ent) {
       for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
-        if(level._createfx.selected_fx_ents[i] == ent) {
+        if(level._createfx.selected_fx_ents[i] == ent)
           return true;
-        }
       }
       return false;
     }
 
     clear_entity_selection() {
       for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
-        if(!ent_is_highlighted(level._createfx.selected_fx_ents[i])) {
+        if(!ent_is_highlighted(level._createfx.selected_fx_ents[i]))
           level._createfx.selected_fx_ents[i] thread entity_highlight_disable();
-        }
       }
       level._createfx.selected_fx = [];
       level._createfx.selected_fx_ents = [];
@@ -1025,13 +986,11 @@ createFxLogic() {
     createfx_centerprint_thread(text) {
       level notify("new_createfx_centerprint");
       level endon("new_createfx_centerprint");
-      for(p = 0; p < 5; p++) {
+      for(p = 0; p < 5; p++)
         level.createFX_centerPrint[p] setDevText(text);
-      }
       wait(4.5);
-      for(p = 0; p < 5; p++) {
+      for(p = 0; p < 5; p++)
         level.createFX_centerPrint[p] setDevText("");
-      }
     }
 
     get_selected_move_vector() {
@@ -1045,46 +1004,40 @@ createFxLogic() {
       rate = level._createfx.rate;
 
       if(buttonDown("kp_uparrow", "DPAD_UP")) {
-        if(level.selectedMove_forward < 0) {
+        if(level.selectedMove_forward < 0)
           level.selectedMove_forward = 0;
-        }
 
         level.selectedMove_forward = level.selectedMove_forward + rate;
       } else
       if(buttonDown("kp_downarrow", "DPAD_DOWN")) {
-        if(level.selectedMove_forward > 0) {
+        if(level.selectedMove_forward > 0)
           level.selectedMove_forward = 0;
-        }
         level.selectedMove_forward = level.selectedMove_forward - rate;
       } else
         level.selectedMove_forward = 0;
 
       if(buttonDown("kp_rightarrow", "DPAD_RIGHT")) {
-        if(level.selectedMove_right < 0) {
+        if(level.selectedMove_right < 0)
           level.selectedMove_right = 0;
-        }
 
         level.selectedMove_right = level.selectedMove_right + rate;
       } else
       if(buttonDown("kp_leftarrow", "DPAD_LEFT")) {
-        if(level.selectedMove_right > 0) {
+        if(level.selectedMove_right > 0)
           level.selectedMove_right = 0;
-        }
         level.selectedMove_right = level.selectedMove_right - rate;
       } else
         level.selectedMove_right = 0;
 
       if(buttonDown("BUTTON_Y")) {
-        if(level.selectedMove_up < 0) {
+        if(level.selectedMove_up < 0)
           level.selectedMove_up = 0;
-        }
 
         level.selectedMove_up = level.selectedMove_up + rate;
       } else
       if(buttonDown("BUTTON_B")) {
-        if(level.selectedMove_up > 0) {
+        if(level.selectedMove_up > 0)
           level.selectedMove_up = 0;
-        }
         level.selectedMove_up = level.selectedMove_up - rate;
       } else
         level.selectedMove_up = 0;
@@ -1101,46 +1054,40 @@ createFxLogic() {
       rate = level._createfx.rate;
 
       if(buttonDown("kp_uparrow", "DPAD_UP")) {
-        if(level.selectedRotate_pitch < 0) {
+        if(level.selectedRotate_pitch < 0)
           level.selectedRotate_pitch = 0;
-        }
 
         level.selectedRotate_pitch = level.selectedRotate_pitch + rate;
       } else
       if(buttonDown("kp_downarrow", "DPAD_DOWN")) {
-        if(level.selectedRotate_pitch > 0) {
+        if(level.selectedRotate_pitch > 0)
           level.selectedRotate_pitch = 0;
-        }
         level.selectedRotate_pitch = level.selectedRotate_pitch - rate;
       } else
         level.selectedRotate_pitch = 0;
 
       if(buttonDown("kp_leftarrow", "DPAD_LEFT")) {
-        if(level.selectedRotate_yaw < 0) {
+        if(level.selectedRotate_yaw < 0)
           level.selectedRotate_yaw = 0;
-        }
 
         level.selectedRotate_yaw = level.selectedRotate_yaw + rate;
       } else
       if(buttonDown("kp_rightarrow", "DPAD_RIGHT")) {
-        if(level.selectedRotate_yaw > 0) {
+        if(level.selectedRotate_yaw > 0)
           level.selectedRotate_yaw = 0;
-        }
         level.selectedRotate_yaw = level.selectedRotate_yaw - rate;
       } else
         level.selectedRotate_yaw = 0;
 
       if(buttonDown("BUTTON_Y")) {
-        if(level.selectedRotate_roll < 0) {
+        if(level.selectedRotate_roll < 0)
           level.selectedRotate_roll = 0;
-        }
 
         level.selectedRotate_roll = level.selectedRotate_roll + rate;
       } else
       if(buttonDown("BUTTON_B")) {
-        if(level.selectedRotate_roll > 0) {
+        if(level.selectedRotate_roll > 0)
           level.selectedRotate_roll = 0;
-        }
         level.selectedRotate_roll = level.selectedRotate_roll - rate;
       } else
         level.selectedRotate_roll = 0;
@@ -1149,22 +1096,19 @@ createFxLogic() {
     update_selected_entities() {
       has_reactive_ents = false;
       foreach(ent in level._createfx.selected_fx_ents) {
-        if(ent.v["type"] == "reactive_fx") {
+        if(ent.v["type"] == "reactive_fx")
           has_reactive_ents = true;
-        }
 
         ent[[level.func_updatefx]]();
       }
 
-      if(has_reactive_ents) {
+      if(has_reactive_ents)
         refresh_reactive_fx_ents();
-      }
     }
 
     hack_start(painter_spmp) {
-      if(!isDefined(painter_spmp)) {
+      if(!isDefined(painter_spmp))
         painter_spmp = "painter_mp";
-      }
       precachemenu(painter_spmp);
       wait .05;
       if(painter_spmp == "painter_mp") {
@@ -1175,9 +1119,8 @@ createFxLogic() {
     }
 
     stop_fx_looper() {
-      if(isDefined(self.looper)) {
+      if(isDefined(self.looper))
         self.looper delete();
-      }
       self stop_loopsound();
     }
 
@@ -1260,22 +1203,19 @@ createFxLogic() {
 
         org delete();
 
-        for(i = 0; i < rotater.size; i++) {
+        for(i = 0; i < rotater.size; i++)
           rotater[i] delete();
-        }
       } else if(level._createfx.selected_fx_ents.size == 1) {
         ent = level._createfx.selected_fx_ents[0];
         rotater = spawn("script_origin", (0, 0, 0));
         rotater.angles = ent.v["angles"];
-        if(level.selectedRotate_pitch != 0) {
+        if(level.selectedRotate_pitch != 0)
           rotater AddPitch(level.selectedRotate_pitch);
-        } else {
-          if(level.selectedRotate_yaw != 0)
-        }
-        rotater AddYaw(level.selectedRotate_yaw);
-        else {
+        else
+        if(level.selectedRotate_yaw != 0)
+          rotater AddYaw(level.selectedRotate_yaw);
+        else
           rotater AddRoll(level.selectedRotate_roll);
-        }
         ent.v["angles"] = rotater.angles;
         rotater delete();
         wait(0.05);
@@ -1380,9 +1320,8 @@ createFxLogic() {
                 assertEX(isDefined(e.v["type"]), "effect at origin " + e.v["origin"] + " has no type");
 
                 if(GetDvarInt("scr_map_exploder_dump")) {
-                  if(!isDefined(e.model)) {
+                  if(!isDefined(e.model))
                     continue;
-                  }
                 } else if(isDefined(e.model)) {
                   continue;
                 }
@@ -1631,9 +1570,8 @@ createFxLogic() {
             }
 
             locked(name) {
-              if(isDefined(level._createfx.lockedList[name])) {
+              if(isDefined(level._createfx.lockedList[name]))
                 return false;
-              }
 
               return kb_locked(name);
             }
@@ -1669,31 +1607,27 @@ createFxLogic() {
             }
 
             buttonPressed_internal(button) {
-              if(!isDefined(button)) {
+              if(!isDefined(button))
                 return false;
-              }
 
-              if(kb_locked(button)) {
+              if(kb_locked(button))
                 return false;
-              }
 
               return level.player buttonPressed(button);
             }
 
             button_is_held(name, name2) {
               if(isDefined(name2)) {
-                if(isDefined(level.buttonIsHeld[name2])) {
+                if(isDefined(level.buttonIsHeld[name2]))
                   return true;
-                }
               }
               return isDefined(level.buttonIsHeld[name]);
             }
 
             button_is_clicked(name, name2) {
               if(isDefined(name2)) {
-                if(isDefined(level.buttonClick[name2])) {
+                if(isDefined(level.buttonClick[name2]))
                   return true;
-                }
               }
               return isDefined(level.buttonClick[name]);
             }
@@ -1781,18 +1715,16 @@ createFxLogic() {
               level.clearTextMarker ClearAllTextAfterHudElem();
 
               for(i = 0; i < level._createfx.hudelem_count; i++) {
-                for(p = 0; p < 1; p++) {
+                for(p = 0; p < 1; p++)
                   level._createfx.hudelems[i][p] setDevText("");
-                }
               }
 
               level.fxHudElements = 0;
             }
 
             set_fx_hudElement(text) {
-              for(p = 0; p < 1; p++) {
+              for(p = 0; p < 1; p++)
                 level._createfx.hudelems[level.fxHudElements][p] setDevText(text);
-              }
 
               level.fxHudElements++;
               assert(level.fxHudElements < level._createfx.hudelem_count);

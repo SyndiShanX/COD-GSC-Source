@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace wz_revive_prompt;
 
 class cwz_revive_prompt: cluielem {

@@ -35,12 +35,11 @@ increment_hit(var_0) {
 }
 
 register_death(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     var_0 = getweaponbasename(var_0);
 
-    if(!cause_is_explosive(var_1)) {
+    if(!cause_is_explosive(var_1))
       set_weapon_data(var_0, "deaths_total");
-    }
   }
 
   var_2 = getspmatchdata("checkpoints", "deaths_total") + 1;
@@ -48,9 +47,8 @@ register_death(var_0, var_1) {
   maps\_utility::save_time_played();
   var_3 = level.player getplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "deaths_total");
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     level.player setplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "deaths_total", var_3 + 1);
-  }
 }
 
 register_boost_jump() {
@@ -66,7 +64,7 @@ register_boost_slam() {
 register_boost_dodge() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("exo_dodge");
     var_0 = getspmatchdata("checkpoints", "dodges_total") + 1;
     setspmatchdata("checkpoints", "boosted_total", var_0);
@@ -76,7 +74,7 @@ register_boost_dodge() {
 register_sp_perks() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("give_perk", var_0);
     setspmatchdata("perks", var_0, 1);
   }
@@ -99,7 +97,7 @@ does_weapon_exist(var_0) {
 }
 
 set_weapon_data(var_0, var_1) {
-  if(isDefined(var_0) && does_weapon_exist(var_0)) {
+  if(isdefined(var_0) && does_weapon_exist(var_0)) {
     var_2 = int(getspmatchdata("weapon_stats", var_0, var_1)) + 1;
     setspmatchdata("weapon_stats", var_0, var_1, var_2);
   } else {

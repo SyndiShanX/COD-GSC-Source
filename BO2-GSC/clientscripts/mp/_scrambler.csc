@@ -58,7 +58,7 @@ spawned(localclientnum, set, islocalized) {
   scramblerhandle = level.scramblerhandle;
   level.scramblerhandle++;
   size = level.scramblers.size;
-  level.scramblers[size] = spawnStruct();
+  level.scramblers[size] = spawnstruct();
   level.scramblers[size].scramblerhandle = scramblerhandle;
   level.scramblers[size].cent = self;
   level.scramblers[size].team = self.team;
@@ -91,29 +91,25 @@ spawnedperclient(localclientnum, islocalized, scramblerhandle) {
   }
   if(!isenemy) {
     if(islocalized) {
-      if(owner == player && !isspectating(localclientnum, 0)) {
+      if(owner == player && !isspectating(localclientnum, 0))
         player addfriendlyscrambler(self.origin[0], self.origin[1], scramblerhandle);
-      }
 
       if(isDefined(level.scramblers[scramblerindex].sndent)) {
-        level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playLoopSound(level.scramblesoundalert);
-        playSound(0, level.scramblesoundburst, level.scramblers[scramblerindex].sndent.origin);
+        level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playloopsound(level.scramblesoundalert);
+        playsound(0, level.scramblesoundburst, level.scramblers[scramblerindex].sndent.origin);
       }
 
-      if(isDefined(level.scramblers[scramblerindex].sndpingent)) {
-        level.scramblers[scramblerindex].sndpingid = level.scramblers[scramblerindex].sndpingent playLoopSound(level.scramblesoundping);
-      }
+      if(isDefined(level.scramblers[scramblerindex].sndpingent))
+        level.scramblers[scramblerindex].sndpingid = level.scramblers[scramblerindex].sndpingent playloopsound(level.scramblesoundping);
     }
   } else {
     scramblesound = level.scramblesound;
 
-    if(islocalized == 0) {
+    if(islocalized == 0)
       scramblesound = level.globalscramblesound;
-    }
 
-    if(isDefined(level.scramblers[scramblerindex].sndent)) {
-      level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playLoopSound(scramblesound);
-    }
+    if(isDefined(level.scramblers[scramblerindex].sndent))
+      level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playloopsound(scramblesound);
   }
 
   self thread clientscripts\mp\_fx::blinky_light(localclientnum, "tag_light", level._effect["scrambler_friendly_light"], level._effect["scrambler_enemy_light"]);
@@ -133,7 +129,7 @@ scramblerupdate(localclientnum) {
         continue;
       }
       if(!isDefined(level.playerpersistent[localclientnum])) {
-        level.playerpersistent[localclientnum] = spawnStruct();
+        level.playerpersistent[localclientnum] = spawnstruct();
         level.playerpersistent[localclientnum].previousteam = player.team;
         player removeallfriendlyscramblers();
       }
@@ -165,13 +161,11 @@ scramblerupdate(localclientnum) {
           level.scramblers[i].cent.reenable = 0;
         }
 
-        if(level.scramblers[i].islocalized) {
+        if(level.scramblers[i].islocalized)
           disttoscrambler = distancesquared(player.origin, level.scramblers[i].cent.origin);
-        }
 
-        if(!level.scramblers[i].islocalized && level.scramblers[i].cent isenemyscrambler(localclientnum)) {
+        if(!level.scramblers[i].islocalized && level.scramblers[i].cent isenemyscrambler(localclientnum))
           isglobalscrambler = 1;
-        }
 
         isenemy = level.scramblers[i].cent isenemyscrambler(localclientnum);
 
@@ -181,9 +175,8 @@ scramblerupdate(localclientnum) {
         } else
           scramblerteamchanged = 0;
 
-        if(teamchanged || scramblerteamchanged) {
+        if(teamchanged || scramblerteamchanged)
           level.scramblers[i] restartsound(isenemy);
-        }
 
         if(isenemy) {
           if(nearestenemy > disttoscrambler) {
@@ -191,61 +184,52 @@ scramblerupdate(localclientnum) {
             nearestenemy = disttoscrambler;
           }
 
-          if(level.scramblers[i].islocalized && (teamchanged || scramblerteamchanged)) {
+          if(level.scramblers[i].islocalized && (teamchanged || scramblerteamchanged))
             player removefriendlyscrambler(level.scramblers[i].scramblerhandle);
-          }
 
           continue;
         }
 
         if(level.scramblers[i].islocalized) {
-          if(nearestfriendly > disttoscrambler) {
+          if(nearestfriendly > disttoscrambler)
             nearestfriendly = disttoscrambler;
-          }
 
           owner = level.scramblers[i].cent getowner(localclientnum);
 
           if(owner == player && !isspectating(localclientnum, 0)) {
-            if(teamchanged || scramblerteamchanged) {
+            if(teamchanged || scramblerteamchanged)
               player addfriendlyscrambler(level.scramblers[i].cent.origin[0], level.scramblers[i].cent.origin[1], level.scramblers[i].scramblerhandle);
-            }
           }
         }
       }
 
-      if(nearestenemy < level.scramblervoouterradius) {
+      if(nearestenemy < level.scramblervoouterradius)
         enemyvoscrambleramount = 1 - (nearestenemy - level.scramblerinnerradius) / (level.scramblervoouterradius - level.scramblerinnerradius);
-      } else {
+      else
         enemyvoscrambleramount = 0;
-      }
 
-      if(nearestfriendly < level.scramblerinnerradius) {
+      if(nearestfriendly < level.scramblerinnerradius)
         friendlyscrambleramount = 1.0;
-      } else if(nearestfriendly < level.scramblervoouterradius) {
+      else if(nearestfriendly < level.scramblervoouterradius)
         friendlyscrambleramount = 1 - (nearestfriendly - level.scramblerinnerradius) / (level.scramblervoouterradius - level.scramblerinnerradius);
-      }
 
       player setfriendlyscrambleramount(friendlyscrambleramount);
 
-      if(level.scramblers.size > 0 && isDefined(nearestenemyscramblercent)) {
+      if(level.scramblers.size > 0 && isDefined(nearestenemyscramblercent))
         player setnearestenemyscrambler(nearestenemyscramblercent);
-      } else {
+      else
         player clearnearestenemyscrambler();
-      }
 
-      if(isglobalscrambler && player hasperk(localclientnum, "specialty_immunecounteruav") == 0) {
+      if(isglobalscrambler && player hasperk(localclientnum, "specialty_immunecounteruav") == 0)
         player setenemyglobalscrambler(1);
-      } else {
+      else
         player setenemyglobalscrambler(0);
-      }
 
-      if(enemyvoscrambleramount > 1) {
+      if(enemyvoscrambleramount > 1)
         enemyvoscrambleramount = 1;
-      }
 
-      if(getdvarfloat(#"snd_futz") != enemyvoscrambleramount) {
+      if(getdvarfloat(#"snd_futz") != enemyvoscrambleramount)
         setdvarfloat("snd_futz", enemyvoscrambleramount);
-      }
     }
 
     wait 0.25;
@@ -261,7 +245,7 @@ cleanupscramblerondelete(scramblerent, scramblerhandle, islocalized, localclient
     size = level.scramblers.size;
 
     if(scramblerhandle == level.scramblers[j].scramblerhandle) {
-      playSound(0, level.scramblesoundburst, level.scramblers[j].sndent.origin);
+      playsound(0, level.scramblesoundburst, level.scramblers[j].sndent.origin);
       level.scramblers[j].sndent delete();
       level.scramblers[j].sndent = self.scramblers[size - 1].sndent;
       level.scramblers[j].sndpingent delete();
@@ -276,16 +260,14 @@ cleanupscramblerondelete(scramblerent, scramblerhandle, islocalized, localclient
   }
 
   if(islocalized) {
-    for(i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++)
       players[i] removefriendlyscrambler(scramblerhandle);
-    }
   }
 }
 
 isenemyscrambler(localclientnum) {
-  if(getdvarintdefault("scr_forceEnemyScrambler", 0)) {
+  if(getdvarintdefault("scr_forceEnemyScrambler", 0))
     return 1;
-  }
 
   enemy = !friendnotfoe(localclientnum);
   return enemy;
@@ -316,17 +298,15 @@ restartsound(isenemy) {
   }
 
   if(!isenemy) {
-    if(self.islocalized) {
-      self.sndid = self.sndent playLoopSound(level.scramblesoundalert);
-    }
+    if(self.islocalized)
+      self.sndid = self.sndent playloopsound(level.scramblesoundalert);
   } else {
     islocalized = self.islocalized;
     scramblesound = level.scramblesound;
 
-    if(islocalized == 0) {
+    if(islocalized == 0)
       scramblesound = level.globalscramblesound;
-    }
 
-    self.sndid = self.sndent playLoopSound(scramblesound);
+    self.sndid = self.sndent playloopsound(scramblesound);
   }
 }

@@ -18,7 +18,7 @@ spiderhole() {
   spider_lid = undefined;
   target_node = undefined;
   ASSERTex(isDefined(self.target), " Spiderhole Spawner @ " + self.origin + " does NOT target anything!");
-  ents = getEntArray(self.target, "targetname");
+  ents = getentarray(self.target, "targetname");
   anim_org = GetStruct(self.target, "targetname");
   for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_noteworthy) && ents[i].script_noteworthy == "spiderhole_lid") {
@@ -48,7 +48,7 @@ spiderhole() {
   }
   if(isDefined(spider_lid)) {
     if(isDefined(spider_lid.script_fxid)) {
-      playFX(level._effect[spider_lid.script_fxid], spider_lid.origin);
+      playfx(level._effect[spider_lid.script_fxid], spider_lid.origin);
     }
   }
   chance = 0;
@@ -94,7 +94,7 @@ spiderhole_charge_internal() {
     guy = players[randomInt(players.size)];
   }
   self thread set_goal_to_guy(guy);
-  self playSound("jpn_charge");
+  self playsound("jpn_charge");
   self thread spiderhole_charge_think();
 }
 

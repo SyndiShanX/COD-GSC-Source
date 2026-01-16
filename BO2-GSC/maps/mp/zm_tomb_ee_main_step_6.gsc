@@ -32,7 +32,8 @@ stage_logic() {
   stage_completed("little_girl_lost", level._cur_stage_name);
 }
 
-exit_stage(success) {}
+exit_stage(success) {
+}
 
 ruins_fist_glow_monitor() {
   if(flag("ee_all_players_upgraded_punch")) {
@@ -57,9 +58,8 @@ ruins_fist_glow_monitor() {
         playsoundatposition("zmb_squest_punchtime_punched", self.origin);
         inflictor.n_ee_punch_souls++;
 
-        if(inflictor.n_ee_punch_souls == 20) {
+        if(inflictor.n_ee_punch_souls == 20)
           level thread spawn_punch_upgrade_tablet(self.origin, inflictor);
-        }
       }
     }
   }
@@ -67,25 +67,24 @@ ruins_fist_glow_monitor() {
 
 spawn_punch_upgrade_tablet(v_origin, e_player) {
   m_tablet = spawn("script_model", v_origin + vectorscale((0, 0, 1), 50.0));
-  m_tablet setModel("p6_zm_tm_tablet");
+  m_tablet setmodel("p6_zm_tm_tablet");
   m_fx = spawn("script_model", m_tablet.origin);
-  m_fx setModel("tag_origin");
+  m_fx setmodel("tag_origin");
   m_fx setinvisibletoall();
   m_fx setvisibletoplayer(e_player);
   m_tablet linkto(m_fx);
-  playFXOnTag(level._effect["special_glow"], m_fx, "tag_origin");
+  playfxontag(level._effect["special_glow"], m_fx, "tag_origin");
   m_fx thread rotate_punch_upgrade_tablet();
-  m_tablet playLoopSound("zmb_squest_punchtime_tablet_loop", 0.5);
+  m_tablet playloopsound("zmb_squest_punchtime_tablet_loop", 0.5);
   m_tablet setinvisibletoall();
   m_tablet setvisibletoplayer(e_player);
 
-  while(isDefined(e_player) && !e_player istouching(m_tablet)) {
+  while(isDefined(e_player) && !e_player istouching(m_tablet))
     wait 0.05;
-  }
 
   m_tablet delete();
   m_fx delete();
-  e_player playSound("zmb_squest_punchtime_tablet_pickup");
+  e_player playsound("zmb_squest_punchtime_tablet_pickup");
 
   if(isDefined(e_player)) {
     e_player thread fadetoblackforxsec(0, 0.3, 0.5, 0.5, "white");
@@ -101,25 +100,23 @@ spawn_punch_upgrade_tablet(v_origin, e_player) {
     wait 1;
     e_player.b_punch_upgraded = 1;
 
-    if(e_player hasweapon("staff_fire_upgraded_zm")) {
+    if(e_player hasweapon("staff_fire_upgraded_zm"))
       e_player.str_punch_element = "fire";
-    } else if(e_player hasweapon("staff_air_upgraded_zm")) {
+    else if(e_player hasweapon("staff_air_upgraded_zm"))
       e_player.str_punch_element = "air";
-    } else if(e_player hasweapon("staff_lightning_upgraded_zm")) {
+    else if(e_player hasweapon("staff_lightning_upgraded_zm"))
       e_player.str_punch_element = "lightning";
-    } else if(e_player hasweapon("staff_water_upgraded_zm")) {
+    else if(e_player hasweapon("staff_water_upgraded_zm"))
       e_player.str_punch_element = "ice";
-    } else {
+    else
       e_player.str_punch_element = "upgraded";
-    }
 
     e_player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
     a_players = getplayers();
 
     foreach(player in a_players) {
-      if(!isDefined(player.b_punch_upgraded) || !player.b_punch_upgraded) {
+      if(!isDefined(player.b_punch_upgraded) || !player.b_punch_upgraded)
         return;
-      }
     }
 
     flag_set("ee_all_players_upgraded_punch");

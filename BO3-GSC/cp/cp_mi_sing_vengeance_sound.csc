@@ -9,7 +9,7 @@
 #namespace cp_mi_sing_vengeance_sound;
 
 function main() {
-  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", &function_41d671f5, 0, 0);
+  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", & function_41d671f5, 0, 0);
   level thread function_dcd7454a();
   level thread function_38ba2136();
   level thread function_4035bef1();
@@ -56,13 +56,13 @@ function function_38ba2136() {
 
 function function_4035bef1() {
   trigger = getent(0, "siren", "targetname");
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return;
   }
-  while(true) {
+  while (true) {
     trigger waittill("trigger", who);
     if(who isplayer()) {
-      playSound(0, "amb_police_siren", (23974, 2768, 631));
+      playsound(0, "amb_police_siren", (23974, 2768, 631));
       break;
     }
   }
@@ -93,23 +93,23 @@ function sndramperthink(player, target_origin, alias1, min_vol1, max_vol1, min_d
   level endon("disconnect");
   player endon("death");
   player endon("disconnect");
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return;
   }
   volume1 = undefined;
   volume2 = undefined;
-  if(isDefined(alias1)) {
+  if(isdefined(alias1)) {
     sndloop1_ent = spawn(0, (0, 0, 0), "script_origin");
-    sndloop1_id = sndloop1_ent playLoopSound(alias1, 3);
+    sndloop1_id = sndloop1_ent playloopsound(alias1, 3);
     sndloop1_min_volume = min_vol1;
     sndloop1_max_volume = max_vol1;
     sndloop1_min_distance = min_dist1;
     sndloop1_max_distance = max_dist1;
     volume1 = 0;
   }
-  if(isDefined(alias2)) {
+  if(isdefined(alias2)) {
     sndloop2_ent = spawn(0, (0, 0, 0), "script_origin");
-    sndloop2_id = sndloop2_ent playLoopSound(alias2, 3);
+    sndloop2_id = sndloop2_ent playloopsound(alias2, 3);
     sndloop2_min_volume = min_vol2;
     sndloop2_max_volume = max_vol2;
     sndloop2_min_distance = min_dist2;
@@ -117,17 +117,17 @@ function sndramperthink(player, target_origin, alias1, min_vol1, max_vol1, min_d
     volume2 = 0;
   }
   level thread function_860d167b(sndloop1_ent, sndloop2_ent, sndloop1_id, sndloop2_id);
-  while(isDefined(level.tensionactive) && level.tensionactive) {
-    if(!isDefined(player)) {
+  while (isdefined(level.tensionactive) && level.tensionactive) {
+    if(!isdefined(player)) {
       return;
     }
     distance = distance(target_origin, player.origin);
-    if(isDefined(volume1)) {
+    if(isdefined(volume1)) {
       volume1 = audio::scale_speed(sndloop1_min_distance, sndloop1_max_distance, sndloop1_min_volume, sndloop1_max_volume, distance);
       volume1 = abs(1 - volume1);
       setsoundvolume(sndloop1_id, volume1);
     }
-    if(isDefined(volume2)) {
+    if(isdefined(volume2)) {
       volume2 = audio::scale_speed(sndloop2_min_distance, sndloop2_max_distance, sndloop2_min_volume, sndloop2_max_volume, distance);
       volume2 = abs(1 - volume2);
       setsoundvolume(sndloop2_id, volume2);
@@ -135,10 +135,10 @@ function sndramperthink(player, target_origin, alias1, min_vol1, max_vol1, min_d
     wait(0.1);
   }
   level notify("hash_61477803");
-  if(isDefined(sndloop1_ent)) {
+  if(isdefined(sndloop1_ent)) {
     sndloop1_ent delete();
   }
-  if(isDefined(sndloop2_ent)) {
+  if(isdefined(sndloop2_ent)) {
     sndloop2_ent delete();
   }
 }
@@ -153,7 +153,7 @@ function function_860d167b(ent1, ent2, var_105ef70b, id2) {
   target_origin = (21636, -1368, 228);
   wait(2);
   player = getlocalplayer(0);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     level thread sndramperthink(player, target_origin, "mus_assassination_layer_1", 0, 1, 250, 1300, "mus_assassination_layer_2", 0, 1, 50, 700, "mus_assassination_stinger");
   }
 }

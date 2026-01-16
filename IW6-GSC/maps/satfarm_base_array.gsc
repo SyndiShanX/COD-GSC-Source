@@ -5,7 +5,7 @@
 
 base_array_init() {
   level.start_point = "base_array";
-  objective_add(maps\_utility::obj("rendesvouz"), "current", &"SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "current", & "SATFARM_OBJ_RENDESVOUZ");
   thread maps\satfarm_code::follow_icon_manager();
   thread base_array_ambient_dogfight_1();
   thread base_array_ambient_dogfight_2();
@@ -27,7 +27,7 @@ base_array_main() {
   level.herotanks[0] thread maps\satfarm_code::tank_relative_speed("air_strip_relative_speed", "base_array_end", 200, 15, 2);
   level.herotanks[1] thread maps\satfarm_code::tank_relative_speed("air_strip_relative_speed", "base_array_end", 250, 13.5, 1.5);
   objective_onentity(maps\_utility::obj("rendesvouz"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), &"SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), & "SATFARM_FOLLOW");
   thread base_array_begin();
   common_scripts\utility::flag_wait("base_array_end");
   maps\_spawner::killspawner(30);
@@ -83,9 +83,8 @@ base_array_allies_setup() {
       continue;
     }
 
-    if(isDefined(var_2.script_friendname) && var_2.script_friendname == "Bronco") {
+    if(isDefined(var_2.script_friendname) && var_2.script_friendname == "Bronco")
       var_2 thread maps\satfarm_code::tank_relative_speed("air_strip_relative_speed", "base_array_end", 50, 1, 1.75);
-    }
   }
 }
 
@@ -100,9 +99,8 @@ base_array_enemies_setup() {
   common_scripts\utility::flag_wait_either("sat_array_initial_enemies_dead", "spawn_base_array_choppers");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && var_2.classname != "script_vehicle_corpse") {
+    if(isDefined(var_2) && var_2.classname != "script_vehicle_corpse")
       var_2 thread maps\satfarm_code::random_wait_and_kill(1.0, 3.0);
-    }
   }
 }
 
@@ -138,9 +136,8 @@ base_array_choppers() {
       var_2 kill();
       wait 0.1;
 
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         var_2 delete();
-      }
     }
   }
 }
@@ -210,14 +207,14 @@ satfarm_transient_unload() {
 base_array_hints() {
   common_scripts\utility::flag_wait("base_array_ridge_reached");
   maps\_utility::objective_complete(maps\_utility::obj("rendesvouz"));
-  objective_add(maps\_utility::obj("reach_air_strip"), "current", &"SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "current", & "SATFARM_OBJ_REACH_AIR_STRIP");
   objective_onentity(maps\_utility::obj("reach_air_strip"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), &"SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), & "SATFARM_FOLLOW");
 
   if(!common_scripts\utility::flag("PLAYER_ZOOMED_ONCE")) {
-    if(level.player usinggamepad()) {
+    if(level.player usinggamepad())
       level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_SPEED_THROW", 8.0);
-    } else {
+    else {
       var_0 = 1;
       var_1 = 0;
       var_2 = getkeybinding("+speed_throw");
@@ -226,16 +223,14 @@ base_array_hints() {
         var_0 = 0;
         var_2 = getkeybinding("+toggleads_throw");
 
-        if(isDefined(var_2) && var_2["count"] > 0) {
+        if(isDefined(var_2) && var_2["count"] > 0)
           var_1 = 1;
-        }
       }
 
-      if(var_0) {
+      if(var_0)
         level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_SPEED_THROW", 8.0);
-      } else {
+      else
         level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_TOGGLEADS_THROW", 8.0);
-      }
     }
   }
 
@@ -289,9 +284,8 @@ base_array_mortar_strikes() {
       var_6 = anglestoright(var_4);
       var_7 = level.playertank vehicle_getspeed() * var_1;
 
-      if(var_7 < var_0) {
+      if(var_7 < var_0)
         var_7 = var_0 - (var_0 - var_7) * 0.25;
-      }
 
       var_8 = var_3 + var_7 * 1.0 * var_5;
       var_9 = randomfloatrange(-500, 500);
@@ -317,9 +311,8 @@ base_array_mortar_strikes() {
   var_1 = 17.6;
 
   for(var_2 = 0; var_2 < 4; var_2++) {
-    if(var_2 == 3) {
+    if(var_2 == 3)
       thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_wereclearwereclear");
-    }
 
     var_3 = level.player getEye();
     var_4 = level.player getplayerangles();
@@ -327,9 +320,8 @@ base_array_mortar_strikes() {
     var_6 = anglestoright(var_4);
     var_7 = level.playertank vehicle_getspeed() * var_1;
 
-    if(var_7 < var_0) {
+    if(var_7 < var_0)
       var_7 = var_0 - (var_0 - var_7) * 0.25;
-    }
 
     var_8 = var_3 + var_7 * 1.0 * var_5;
     var_9 = randomfloatrange(-500, 500);
@@ -354,15 +346,13 @@ base_array_ai_cleanup_spawn_function() {
   self endon("death");
   thread maps\satfarm_code::detectkill();
 
-  if(issubstr(tolower(self.classname), "rpg")) {
+  if(issubstr(tolower(self.classname), "rpg"))
     thread maps\satfarm_code::enemy_rpg_unlimited_ammo();
-  }
 
   common_scripts\utility::flag_wait("start_base_array_mortar_strike");
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self kill();
-  }
 }
 
 base_array_ambient_dogfight_1() {
@@ -373,17 +363,15 @@ base_array_ambient_dogfight_1() {
     level.base_array_ambient_a10_gun_dive_1 = undefined;
     level.base_array_ambient_a10_gun_dive_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_1");
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_1_buddy");
-    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1");
     var_1 thread maps\satfarm_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1_buddy");
-    }
 
     wait(randomfloatrange(5.0, 10.0));
   }
@@ -395,9 +383,8 @@ base_array_trucks_static_setup() {
   common_scripts\utility::flag_wait("base_array_end");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && var_2.classname != "script_vehicle_corpse") {
+    if(isDefined(var_2) && var_2.classname != "script_vehicle_corpse")
       var_2 delete();
-    }
   }
 }
 
@@ -409,17 +396,15 @@ base_array_ambient_dogfight_2() {
     level.base_array_ambient_a10_gun_dive_2 = undefined;
     level.base_array_ambient_a10_gun_dive_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_2");
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_2_buddy");
-    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_2");
     var_1 thread maps\satfarm_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_2_buddy");
-    }
 
     wait(randomfloatrange(5.0, 10.0));
   }
@@ -433,17 +418,15 @@ base_array_ambient_dogfight_3() {
     level.base_array_ambient_a10_gun_dive_3 = undefined;
     level.base_array_ambient_a10_gun_dive_3 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_3");
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_3_buddy");
-    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3");
     var_1 thread maps\satfarm_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3_buddy");
-    }
 
     wait(randomfloatrange(5.0, 10.0));
   }

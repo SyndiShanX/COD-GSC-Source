@@ -17,7 +17,7 @@ init() {
 }
 
 getabovebuildingslocation(location) {
-  trace = bulletTrace(location + vectorscale((0, 0, 1), 10000.0), location, 0, undefined);
+  trace = bullettrace(location + vectorscale((0, 0, 1), 10000.0), location, 0, undefined);
   startorigin = trace["position"] + vectorscale((0, 0, -1), 514.0);
   zpos = 0;
   maxxpos = 13;
@@ -26,7 +26,7 @@ getabovebuildingslocation(location) {
   for(xpos = 0; xpos < maxxpos; xpos++) {
     for(ypos = 0; ypos < maxypos; ypos++) {
       thisstartorigin = startorigin + ((xpos / (maxxpos - 1) - 0.5) * 1024, (ypos / (maxypos - 1) - 0.5) * 1024, 0);
-      thisorigin = bulletTrace(thisstartorigin, thisstartorigin + vectorscale((0, 0, -1), 10000.0), 0, undefined);
+      thisorigin = bullettrace(thisstartorigin, thisstartorigin + vectorscale((0, 0, -1), 10000.0), 0, undefined);
       zpos = zpos + thisorigin["position"][2];
     }
   }
@@ -39,11 +39,10 @@ getabovebuildingslocation(location) {
 vectorangle(v1, v2) {
   dot = vectordot(v1, v2);
 
-  if(dot >= 1) {
+  if(dot >= 1)
     return 0;
-  } else if(dot <= -1) {
+  else if(dot <= -1)
     return 180;
-  }
 
   return acos(dot);
 }
@@ -51,9 +50,8 @@ vectorangle(v1, v2) {
 vectortowardsothervector(v1, v2, angle) {
   dot = vectordot(v1, v2);
 
-  if(dot <= -1) {
+  if(dot <= -1)
     return v1;
-  }
 
   v3 = vectornormalize(v2 - vectorscale(v1, dot));
   return vectorscale(v1, cos(angle)) + vectorscale(v3, sin(angle));
@@ -71,8 +69,8 @@ createcopter(location, team, damagetrig) {
   copter.angles = vectortoangles((0, 1, 0));
   copter linkto(scriptorigin);
   scriptorigin.copter = copter;
-  copter setModel(level.coptermodel);
-  copter playLoopSound("mp_copter_ambience");
+  copter setmodel(level.coptermodel);
+  copter playloopsound("mp_copter_ambience");
   damagetrig.origin = scriptorigin.origin;
   damagetrig thread mylinkto(scriptorigin);
   scriptorigin.damagetrig = damagetrig;
@@ -85,9 +83,8 @@ createcopter(location, team, damagetrig) {
   scriptorigin.dontascend = 0;
   scriptorigin.health = 2000;
 
-  if(getdvar(#"_id_A8262D2E") != "") {
+  if(getdvar(#"_id_A8262D2E") != "")
     scriptorigin.health = getdvarfloat(#"_id_A8262D2E");
-  }
 
   scriptorigin.team = team;
   scriptorigin thread copterai();
@@ -125,13 +122,11 @@ setcopterdefensearea(areaent) {
   self.areaent = areaent;
   self.areadescentpoints = [];
 
-  if(isDefined(areaent.target)) {
-    self.areadescentpoints = getEntArray(areaent.target, "targetname");
-  }
+  if(isDefined(areaent.target))
+    self.areadescentpoints = getentarray(areaent.target, "targetname");
 
-  for(i = 0; i < self.areadescentpoints.size; i++) {
+  for(i = 0; i < self.areadescentpoints.size; i++)
     self.areadescentpoints[i].targetent = getent(self.areadescentpoints[i].target, "targetname");
-  }
 }
 
 copterai() {
@@ -159,22 +154,21 @@ copterai() {
           playerorigin = players[i].origin;
           playerorigin = (playerorigin[0], playerorigin[1], self.areaent.origin[2]);
 
-          if(distance(playerorigin, self.areaent.origin) < self.areaent.radius) {
+          if(distance(playerorigin, self.areaent.origin) < self.areaent.radius)
             enemytargets[enemytargets.size] = players[i];
-          }
         }
       }
     }
 
     insidetargets = [];
     outsidetargets = [];
-    skyheight = bulletTrace(self.origin, self.origin + vectorscale((0, 0, 1), 10000.0), 0, undefined)["position"][2] - 10;
+    skyheight = bullettrace(self.origin, self.origin + vectorscale((0, 0, 1), 10000.0), 0, undefined)["position"][2] - 10;
     besttarget = undefined;
     bestweight = 0;
 
     for(i = 0; i < enemytargets.size; i++) {
       inside = 0;
-      trace = bulletTrace(enemytargets[i].origin + vectorscale((0, 0, 1), 10.0), enemytargets[i].origin + vectorscale((0, 0, 1), 10000.0), 0, undefined);
+      trace = bullettrace(enemytargets[i].origin + vectorscale((0, 0, 1), 10.0), enemytargets[i].origin + vectorscale((0, 0, 1), 10000.0), 0, undefined);
 
       if(trace["position"][2] >= skyheight) {
         outsidetargets[outsidetargets.size] = enemytargets[i];
@@ -194,35 +188,32 @@ copterai() {
         result = determinebestent(insidetargets, self.areadescentpoints, self.origin);
         descendingent = result["descendEnt"];
 
-        if(isDefined(descendingent)) {
+        if(isDefined(descendingent))
           gotopos = result["position"];
-        } else {
+        else
           flying = 1;
-        }
       }
     } else {
       olddescendingent = descendingent;
 
-      if(insidetargets.size == 0) {
+      if(insidetargets.size == 0)
         flying = 1;
-      } else {
+      else {
         if(outsidetargets.size > 0) {
-          if(!isDefined(descendingent)) {
+          if(!isDefined(descendingent))
             flying = 1;
-          } else {
+          else {
             calcedgotopos = 1;
             gotopos = determinebestpos(insidetargets, descendingent, self.origin);
 
-            if(!isDefined(gotopos)) {
+            if(!isDefined(gotopos))
               flying = 1;
-            }
           }
         }
 
         if(isDefined(descendingent)) {
-          if(!calcedgotopos) {
+          if(!calcedgotopos)
             gotopos = determinebestpos(insidetargets, descendingent, self.origin);
-          }
         }
 
         if(!isDefined(gotopos)) {
@@ -233,18 +224,16 @@ copterai() {
             gotopos = result["position"];
             reacheddescendingent = 0;
           } else if(isDefined(descendingent)) {
-            if(isDefined(self.finaldest)) {
+            if(isDefined(self.finaldest))
               gotopos = self.finaldest;
-            } else {
+            else
               gotopos = descendingent.origin;
-            }
           } else
             gotopos = undefined;
         }
 
-        if(!isDefined(gotopos)) {
+        if(!isDefined(gotopos))
           flying = 1;
-        }
       }
     }
 
@@ -252,11 +241,10 @@ copterai() {
       desireddist = 2560.0;
       disttoarea = distance((self.origin[0], self.origin[1], self.areaent.origin[2]), self.areaent.origin);
 
-      if(outsidetargets.size == 0 && disttoarea > self.areaent.radius + desireddist * 0.25) {
+      if(outsidetargets.size == 0 && disttoarea > self.areaent.radius + desireddist * 0.25)
         returningtoarea = 1;
-      } else if(disttoarea < self.areaent.radius * 0.5) {
+      else if(disttoarea < self.areaent.radius * 0.5)
         returningtoarea = 0;
-      }
 
       if(outsidetargets.size == 0 && !returningtoarea) {
         if(self.team != "neutral") {
@@ -265,9 +253,8 @@ copterai() {
               playerorigin = players[i].origin;
               playerorigin = (playerorigin[0], playerorigin[1], self.areaent.origin[2]);
 
-              if(distance(players[i].origin, self.areaent.origin) > self.areaent.radius) {
+              if(distance(players[i].origin, self.areaent.origin) > self.areaent.radius)
                 outsidetargets[outsidetargets.size] = players[i];
-              }
             }
           }
         }
@@ -301,9 +288,8 @@ copterai() {
         wait 1;
       }
     } else {
-      if(distance(self.origin, descendingent.origin) < descendingent.radius) {
+      if(distance(self.origin, descendingent.origin) < descendingent.radius)
         reacheddescendingent = 1;
-      }
 
       godirectly = isDefined(olddescendingent) && olddescendingent == descendingent;
       godirectly = godirectly && reacheddescendingent;
@@ -407,23 +393,23 @@ determinebestattackpos(targetpos, curpos, desireddist) {
 
   gotopos = undefined;
 
-  if(isDefined(bestpos)) {
+  if(isDefined(bestpos))
     gotopos = bestpos;
-  } else {
+  else {
     dist = distance(targetposcopterheight, curpos);
 
-    if(dist > desireddist) {
+    if(dist > desireddist)
       gotopos = self.origin + vectorscale(vectornormalize(attackdirx), 0 - (dist - desireddist));
-    } else {
+    else
       gotopos = self.origin;
-    }
   }
 
   return gotopos;
 }
 
 getrandompos(origin, radius) {
-  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {}
+  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {
+  }
 
   return pos;
 }
@@ -437,24 +423,23 @@ coptershoot() {
     if(isDefined(self.desireddirentity) && isDefined(self.desireddirentity.origin)) {
       mypos = self.origin + level.coptercenteroffset;
       enemypos = self.desireddirentity.origin + self.desireddirentityoffset;
-      curdir = anglesToForward(self.angles);
+      curdir = anglestoforward(self.angles);
       enemydirraw = enemypos - mypos;
       enemydir = vectornormalize(enemydirraw);
 
       if(vectordot(curdir, enemydir) > costhreshold) {
         canseetarget = bullettracepassed(mypos, enemypos, 0, undefined);
 
-        if(!canseetarget && isplayer(self.desireddirentity) && isalive(self.desireddirentity)) {
-          canseetarget = bullettracepassed(mypos, self.desireddirentity getEye(), 0, undefined);
-        }
+        if(!canseetarget && isplayer(self.desireddirentity) && isalive(self.desireddirentity))
+          canseetarget = bullettracepassed(mypos, self.desireddirentity geteye(), 0, undefined);
 
         if(canseetarget) {
-          self playSound("mp_copter_shoot");
+          self playsound("mp_copter_shoot");
           numshots = 20;
 
           for(i = 0; i < numshots; i++) {
             mypos = self.origin + level.coptercenteroffset;
-            dir = anglesToForward(self.angles);
+            dir = anglestoforward(self.angles);
             dir = dir + ((randomfloat(2) - 1) * 0.015, (randomfloat(2) - 1) * 0.015, (randomfloat(2) - 1) * 0.015);
             dir = vectornormalize(dir);
             self mymagicbullet(mypos, dir);
@@ -473,32 +458,28 @@ coptershoot() {
 mymagicbullet(pos, dir) {
   damage = 20;
 
-  if(getdvar(#"_id_9E8F8CB7") != "") {
+  if(getdvar(#"_id_9E8F8CB7") != "")
     damage = getdvarint(#"_id_9E8F8CB7");
-  }
 
-  trace = bulletTrace(pos, pos + vectorscale(dir, 10000), 1, undefined);
+  trace = bullettrace(pos, pos + vectorscale(dir, 10000), 1, undefined);
 
-  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
+  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"]))
     trace["entity"] thread[[level.callbackplayerdamage]](self, self, damage, 0, "MOD_RIFLE_BULLET", "copter", self.origin, dir, "none", 0, 0);
-  }
 }
 
 setcopterdest(newlocation, descend, dontascend) {
   self.finaldest = getabovebuildingslocation(newlocation);
 
-  if(isDefined(descend) && descend) {
+  if(isDefined(descend) && descend)
     self.finalzdest = newlocation[2];
-  } else {
+  else
     self.finalzdest = self.finaldest[2];
-  }
 
   self.intransit = 1;
   self.dontascend = 0;
 
-  if(isDefined(dontascend)) {
+  if(isDefined(dontascend))
     self.dontascend = dontascend;
-  }
 }
 
 notifyarrived() {
@@ -527,9 +508,9 @@ coptermove() {
     movinghorizontally = 1;
     movingvertically = 0;
 
-    if(self.dontascend) {
+    if(self.dontascend)
       movingvertically = 1;
-    } else if(!neardest) {
+    else if(!neardest) {
       desiredz = getabovebuildingslocation(self.origin)[2];
       movinghorizontally = abs(self.origin[2] - desiredz) <= 256;
       movingvertically = !movinghorizontally;
@@ -537,11 +518,10 @@ coptermove() {
       movingvertically = 1;
 
     if(movinghorizontally) {
-      if(movingvertically) {
+      if(movingvertically)
         thisdest = (self.finaldest[0], self.finaldest[1], self.finalzdest);
-      } else {
+      else
         thisdest = self.finaldest;
-      }
     } else {
       assert(movingvertically);
       thisdest = (self.origin[0], self.origin[1], desiredz);
@@ -551,51 +531,47 @@ coptermove() {
     idealaccel = vectorscale(thisdest - (self.origin + vectorscale(self.vel, level.copter_accellookahead)), interval);
     vlen = veclength(idealaccel);
 
-    if(vlen > level.copter_maxaccel) {
+    if(vlen > level.copter_maxaccel)
       idealaccel = vectorscale(idealaccel, level.copter_maxaccel / vlen);
-    }
 
     self.vel = self.vel + idealaccel;
     vlen = veclength(self.vel);
 
-    if(vlen > level.copter_maxvel) {
+    if(vlen > level.copter_maxvel)
       self.vel = vectorscale(self.vel, level.copter_maxvel / vlen);
-    }
 
     thisdest = self.origin + vectorscale(self.vel, interval);
     self moveto(thisdest, interval * 0.999);
     speed = veclength(self.vel);
 
-    if(isDefined(self.desireddirentity) && isDefined(self.desireddirentity.origin)) {
+    if(isDefined(self.desireddirentity) && isDefined(self.desireddirentity.origin))
       self.destdir = vectornormalize(self.desireddirentity.origin + self.desireddirentityoffset - (self.origin + level.coptercenteroffset));
-    } else if(isDefined(self.desireddir)) {
+    else if(isDefined(self.desireddir))
       self.destdir = self.desireddir;
-    } else if(movingvertically) {
-      self.destdir = anglesToForward(self.angles);
+    else if(movingvertically) {
+      self.destdir = anglestoforward(self.angles);
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], 0));
     } else {
       tiltamnt = speed / level.copter_maxvel;
       tiltamnt = (tiltamnt - 0.1) / 0.9;
 
-      if(tiltamnt < 0) {
+      if(tiltamnt < 0)
         tiltamnt = 0;
-      }
 
       self.destdir = movevec;
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], 0));
-      tiltamnt = tiltamnt * (1 - vectorangle(anglesToForward(self.angles), self.destdir) / 180);
+      tiltamnt = tiltamnt * (1 - vectorangle(anglestoforward(self.angles), self.destdir) / 180);
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], tiltamnt * -0.4));
     }
 
     newdir = self.destdir;
 
-    if(newdir[2] < -0.4) {
+    if(newdir[2] < -0.4)
       newdir = vectornormalize((newdir[0], newdir[1], -0.4));
-    }
 
     copterangles = self.angles;
     copterangles = combineangles(copterangles, vectorscale((0, 1, 0), 90.0));
-    olddir = anglesToForward(copterangles);
+    olddir = anglestoforward(copterangles);
     thisrotspeed = level.copter_rotspeed;
     olddir2d = vectornormalize((olddir[0], olddir[1], 0));
     newdir2d = vectornormalize((newdir[0], newdir[1], 0));
@@ -605,9 +581,8 @@ coptermove() {
     if(angle > 0.001 && thisrotspeed > 0.001) {
       thisangle = thisrotspeed * interval;
 
-      if(thisangle > angle) {
+      if(thisangle > angle)
         thisangle = angle;
-      }
 
       newdir2d = vectortowardsothervector(olddir2d, newdir2d, thisangle);
       oldz = olddir[2] / veclength((olddir[0], olddir[1], 0));
@@ -620,9 +595,8 @@ coptermove() {
     } else if(angle3d > 0.001 && thisrotspeed > 0.001) {
       thisangle = thisrotspeed * interval;
 
-      if(thisangle > angle3d) {
+      if(thisangle > angle3d)
         thisangle = angle3d;
-      }
 
       newdir = vectortowardsothervector(olddir, newdir, thisangle);
       newdir = vectornormalize(newdir);
@@ -677,9 +651,9 @@ copterdie() {
     wait(interval);
   }
 
-  playFX(level.copterfinalexplosion, self.origin);
+  playfx(level.copterfinalexplosion, self.origin);
   fakeself = spawn("script_origin", self.origin);
-  fakeself playSound("mp_copter_explosion");
+  fakeself playsound("mp_copter_explosion");
   self notify("finaldeath");
   deletecopter();
   wait 2;
@@ -700,8 +674,8 @@ copterexplodefx() {
   self endon("finaldeath");
 
   while(true) {
-    playFX(level.copterexplosion, self.origin);
-    self playSound("mp_copter_explosion");
+    playfx(level.copterexplosion, self.origin);
+    self playsound("mp_copter_explosion");
     wait(0.5 + randomfloat(1));
   }
 }

@@ -10,9 +10,8 @@
 setup_juggernaut_anim_array() {
   self animscripts\anims::clearanimcache();
 
-  if(!isDefined(self.anim_array)) {
+  if(!isDefined(self.anim_array))
     self.anim_array = [];
-  }
 
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["combat_run_f"] = % juggernaut_walkf;
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["sprint"] = % juggernaut_sprint;

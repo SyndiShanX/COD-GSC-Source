@@ -20,7 +20,7 @@ function enable_hacking(killstreakname, prehackfunction, posthackfunction) {
   killstreak = self;
   level.challenge_scorestreaksenabled = 1;
   killstreak.challenge_isscorestreak = 1;
-  killstreak.killstreak_hackedcallback = &_hacked_callback;
+  killstreak.killstreak_hackedcallback = & _hacked_callback;
   killstreak.killstreakprehackfunction = prehackfunction;
   killstreak.killstreakposthackfunction = posthackfunction;
   killstreak.hackertoolinnertimems = killstreak killstreak_bundles::get_hack_tool_inner_time();
@@ -43,40 +43,40 @@ function disable_hacking() {
 
 function hackerfx() {
   killstreak = self;
-  if(isDefined(killstreak.killstreakhackfx) && killstreak.killstreakhackfx != "") {
-    playFXOnTag(killstreak.killstreakhackfx, killstreak, "tag_origin");
+  if(isdefined(killstreak.killstreakhackfx) && killstreak.killstreakhackfx != "") {
+    playfxontag(killstreak.killstreakhackfx, killstreak, "tag_origin");
   }
 }
 
 function hackerloopfx() {
   killstreak = self;
-  if(isDefined(killstreak.killstreakloophackfx) && killstreak.killstreakloophackfx != "") {
-    playFXOnTag(killstreak.killstreakloophackfx, killstreak, "tag_origin");
+  if(isdefined(killstreak.killstreakloophackfx) && killstreak.killstreakloophackfx != "") {
+    playfxontag(killstreak.killstreakloophackfx, killstreak, "tag_origin");
   }
 }
 
 function private _hacked_callback(hacker) {
   killstreak = self;
   originalowner = killstreak.owner;
-  if(isDefined(killstreak.killstreakhackscoreevent)) {
+  if(isdefined(killstreak.killstreakhackscoreevent)) {
     scoreevents::processscoreevent(killstreak.killstreakhackscoreevent, hacker, originalowner, level.weaponhackertool);
   }
-  if(isDefined(killstreak.killstreakprehackfunction)) {
+  if(isdefined(killstreak.killstreakprehackfunction)) {
     killstreak thread[[killstreak.killstreakprehackfunction]](hacker);
   }
   killstreak killstreaks::configure_team_internal(hacker, 1);
   killstreak clientfield::set("enemyvehicle", 2);
-  if(isDefined(killstreak.killstreakhackfx)) {
+  if(isdefined(killstreak.killstreakhackfx)) {
     killstreak thread hackerfx();
   }
-  if(isDefined(killstreak.killstreakhackloopfx)) {
+  if(isdefined(killstreak.killstreakhackloopfx)) {
     killstreak thread hackerloopfx();
   }
-  if(isDefined(killstreak.killstreakposthackfunction)) {
+  if(isdefined(killstreak.killstreakposthackfunction)) {
     killstreak thread[[killstreak.killstreakposthackfunction]](hacker);
   }
   killstreaktype = killstreak.killstreaktype;
-  if(isDefined(killstreak.hackedkillstreakref)) {
+  if(isdefined(killstreak.hackedkillstreakref)) {
     killstreaktype = killstreak.hackedkillstreakref;
   }
   level thread popups::displaykillstreakhackedteammessagetoall(killstreaktype, hacker);
@@ -91,8 +91,8 @@ function override_hacked_killstreak_reference(killstreakref) {
 function get_hacked_timeout_duration_ms() {
   killstreak = self;
   timeout = killstreak killstreak_bundles::get_hack_timeout();
-  if(!isDefined(timeout) || timeout <= 0) {
-    /
+  if(!isdefined(timeout) || timeout <= 0) {
+    /# /
     #
     assertmsg(("" + killstreak.killstreaktype) + "");
     return;
@@ -109,12 +109,12 @@ function set_vehicle_drivable_time_starting_now(killstreak, duration_ms = -1) {
 
 function _update_health(hacker) {
   killstreak = self;
-  if(isDefined(killstreak.hackedhealthupdatecallback)) {
+  if(isdefined(killstreak.hackedhealthupdatecallback)) {
     killstreak[[killstreak.hackedhealthupdatecallback]](hacker);
   } else {
     if(issentient(killstreak)) {
       hackedhealth = killstreak_bundles::get_hacked_health(killstreak.killstreaktype);
-      assert(isDefined(hackedhealth));
+      assert(isdefined(hackedhealth));
       if(self.health > hackedhealth) {
         self.health = hackedhealth;
       }
@@ -135,23 +135,27 @@ function killstreak_switch_team(owner) {
   killstreakentity endon("killstreak_switch_team_singleton");
   killstreakentity endon("death");
   setdvar("", "");
-  while(true) {
+  while (true) {
     wait(0.5);
     devgui_int = getdvarint("");
     if(devgui_int != 0) {
       team = "";
-      if(isDefined(level.getenemyteam) && isDefined(owner) && isDefined(owner.team)) {
-        team = [[level.getenemyteam]](owner.team);
+      if(isdefined(level.getenemyteam) && isdefined(owner) && isdefined(owner.team)) {
+        team = [
+          [level.getenemyteam]
+        ](owner.team);
       }
-      if(isDefined(level.devongetormakebot)) {
-        player = [[level.devongetormakebot]](team);
+      if(isdefined(level.devongetormakebot)) {
+        player = [
+          [level.devongetormakebot]
+        ](team);
       }
-      if(!isDefined(player)) {
+      if(!isdefined(player)) {
         println("");
         wait(1);
         continue;
       }
-      if(!isDefined(killstreakentity.killstreak_hackedcallback)) {
+      if(!isdefined(killstreakentity.killstreak_hackedcallback)) {
         iprintlnbold("");
         return;
       }

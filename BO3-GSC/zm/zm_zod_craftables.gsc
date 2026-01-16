@@ -30,9 +30,9 @@ function include_craftables() {
   shared_pieces = getnumexpectedplayers() == 1;
   var_16b36a95 = 1;
   craftable_name = "police_box";
-  var_c157a58b = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_01", 32, 64, 0, undefined, &function_27ef9857, undefined, &function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_01", 1, undefined, undefined, &"ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
-  var_4f503650 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_02", 32, 64, 0, undefined, &function_27ef9857, undefined, &function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_02", 1, undefined, undefined, &"ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
-  var_7552b0b9 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_03", 32, 64, 0, undefined, &function_27ef9857, undefined, &function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_03", 1, undefined, undefined, &"ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
+  var_c157a58b = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_01", 32, 64, 0, undefined, & function_27ef9857, undefined, & function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_01", 1, undefined, undefined, & "ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
+  var_4f503650 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_02", 32, 64, 0, undefined, & function_27ef9857, undefined, & function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_02", 1, undefined, undefined, & "ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
+  var_7552b0b9 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "fuse_03", 32, 64, 0, undefined, & function_27ef9857, undefined, & function_6c41d7f2, undefined, undefined, undefined, ("police_box" + "_") + "fuse_03", 1, undefined, undefined, & "ZM_ZOD_POLICE_BOX_PICKUP_FUSE", 4);
   if(shared_pieces) {
     var_c157a58b.is_shared = 1;
     var_4f503650.is_shared = 1;
@@ -41,12 +41,12 @@ function include_craftables() {
     var_4f503650.client_field_state = undefined;
     var_7552b0b9.client_field_state = undefined;
   }
-  police_box = spawnStruct();
+  police_box = spawnstruct();
   police_box.name = craftable_name;
   police_box zm_craftables::add_craftable_piece(var_c157a58b, "j_fuse_01");
   police_box zm_craftables::add_craftable_piece(var_4f503650, "j_fuse_02");
   police_box zm_craftables::add_craftable_piece(var_7552b0b9, "j_fuse_03");
-  police_box.triggerthink = &function_141a8c6e;
+  police_box.triggerthink = & function_141a8c6e;
   police_box.no_challenge_stat = 1;
   level flag::init("fuse_01" + "_found");
   level flag::init("fuse_02" + "_found");
@@ -54,97 +54,97 @@ function include_craftables() {
   level flag::init("police_box_fuse_place");
   zm_craftables::include_zombie_craftable(police_box);
   craftable_name = "idgun";
-  idgun_part_heart = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_heart", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_heart", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_HEART", 2);
-  idgun_part_skeleton = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_skeleton", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_skeleton", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_SKELETON", 2);
-  idgun_part_xenomatter = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_xenomatter", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_xenomatter", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_XENOMATTER", 2);
+  idgun_part_heart = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_heart", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_heart", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_HEART", 2);
+  idgun_part_skeleton = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_skeleton", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_skeleton", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_SKELETON", 2);
+  idgun_part_xenomatter = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_xenomatter", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("idgun" + "_") + "part_xenomatter", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_XENOMATTER", 2);
   idgun_part_heart.client_field_state = undefined;
   idgun_part_skeleton.client_field_state = undefined;
   idgun_part_xenomatter.client_field_state = undefined;
-  idgun = spawnStruct();
+  idgun = spawnstruct();
   idgun.name = craftable_name;
   idgun zm_craftables::add_craftable_piece(idgun_part_heart);
   idgun zm_craftables::add_craftable_piece(idgun_part_skeleton);
   idgun zm_craftables::add_craftable_piece(idgun_part_xenomatter);
-  idgun.onbuyweapon = &function_57f30dec;
-  idgun.triggerthink = &idgun_craftable;
+  idgun.onbuyweapon = & function_57f30dec;
+  idgun.triggerthink = & idgun_craftable;
   zm_craftables::include_zombie_craftable(idgun);
   level flag::init("part_heart" + "_found");
   level flag::init("part_skeleton" + "_found");
   level flag::init("part_xenomatter" + "_found");
   craftable_name = "second_idgun";
-  var_62ffc1ec = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_heart", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_heart", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_HEART", 3);
-  var_50a8320d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_skeleton", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_skeleton", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_SKELETON", 3);
-  var_fa9ad3bb = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_xenomatter", 32, 64, 0, undefined, &onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_xenomatter", 1, undefined, undefined, &"ZM_ZOD_IDGUN_PART_XENOMATTER", 3);
+  var_62ffc1ec = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_heart", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_heart", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_HEART", 3);
+  var_50a8320d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_skeleton", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_skeleton", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_SKELETON", 3);
+  var_fa9ad3bb = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_xenomatter", 32, 64, 0, undefined, & onpickup_idgun_piece, undefined, undefined, undefined, undefined, undefined, ("second_idgun" + "_") + "part_xenomatter", 1, undefined, undefined, & "ZM_ZOD_IDGUN_PART_XENOMATTER", 3);
   var_62ffc1ec.client_field_state = undefined;
   var_50a8320d.client_field_state = undefined;
   var_fa9ad3bb.client_field_state = undefined;
-  second_idgun = spawnStruct();
+  second_idgun = spawnstruct();
   second_idgun.name = craftable_name;
   second_idgun zm_craftables::add_craftable_piece(var_62ffc1ec);
   second_idgun zm_craftables::add_craftable_piece(var_50a8320d);
   second_idgun zm_craftables::add_craftable_piece(var_fa9ad3bb);
-  second_idgun.triggerthink = &function_ee72d458;
+  second_idgun.triggerthink = & function_ee72d458;
   zm_craftables::include_zombie_craftable(second_idgun);
   level flag::init("part_heart" + "_found");
   level flag::init("part_skeleton" + "_found");
   level flag::init("part_xenomatter" + "_found");
   craftable_name = "ritual_boxer";
-  ritual_boxer_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_boxer", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 1, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_BOXER", 0);
+  ritual_boxer_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_boxer", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 1, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_BOXER", 0);
   if(var_16b36a95) {
     ritual_boxer_memento.is_shared = 1;
     ritual_boxer_memento.client_field_state = undefined;
   }
-  ritual_boxer = spawnStruct();
+  ritual_boxer = spawnstruct();
   ritual_boxer.name = craftable_name;
   ritual_boxer zm_craftables::add_craftable_piece(ritual_boxer_memento);
-  ritual_boxer.triggerthink = &ritual_boxer_craftable;
+  ritual_boxer.triggerthink = & ritual_boxer_craftable;
   ritual_boxer.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(ritual_boxer);
   level flag::init("memento_boxer" + "_found");
   craftable_name = "ritual_detective";
-  ritual_detective_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_detective", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 2, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_DETECTIVE", 0);
+  ritual_detective_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_detective", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 2, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_DETECTIVE", 0);
   if(var_16b36a95) {
     ritual_detective_memento.is_shared = 1;
     ritual_detective_memento.client_field_state = undefined;
   }
-  ritual_detective = spawnStruct();
+  ritual_detective = spawnstruct();
   ritual_detective.name = craftable_name;
   ritual_detective zm_craftables::add_craftable_piece(ritual_detective_memento);
-  ritual_detective.triggerthink = &ritual_detective_craftable;
+  ritual_detective.triggerthink = & ritual_detective_craftable;
   ritual_detective.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(ritual_detective);
   level flag::init("memento_detective" + "_found");
   craftable_name = "ritual_femme";
-  ritual_femme_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_femme", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 3, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_FEMME", 0);
+  ritual_femme_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_femme", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 3, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_FEMME", 0);
   if(var_16b36a95) {
     ritual_femme_memento.is_shared = 1;
     ritual_femme_memento.client_field_state = undefined;
   }
-  ritual_femme = spawnStruct();
+  ritual_femme = spawnstruct();
   ritual_femme.name = craftable_name;
   ritual_femme zm_craftables::add_craftable_piece(ritual_femme_memento);
-  ritual_femme.triggerthink = &ritual_femme_craftable;
+  ritual_femme.triggerthink = & ritual_femme_craftable;
   ritual_femme.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(ritual_femme);
   level flag::init("memento_femme" + "_found");
   craftable_name = "ritual_magician";
-  ritual_magician_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_magician", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 4, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_MAGICIAN", 0);
+  ritual_magician_memento = zm_craftables::generate_zombie_craftable_piece(craftable_name, "memento_magician", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 4, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_ITEM_MAGICIAN", 0);
   if(var_16b36a95) {
     ritual_magician_memento.is_shared = 1;
     ritual_magician_memento.client_field_state = undefined;
   }
-  ritual_magician = spawnStruct();
+  ritual_magician = spawnstruct();
   ritual_magician.name = craftable_name;
   ritual_magician zm_craftables::add_craftable_piece(ritual_magician_memento);
-  ritual_magician.triggerthink = &ritual_magician_craftable;
+  ritual_magician.triggerthink = & ritual_magician_craftable;
   ritual_magician.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(ritual_magician);
   level flag::init("memento_magician" + "_found");
   craftable_name = "ritual_pap";
-  relic_boxer = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_boxer", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 1, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
-  relic_detective = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_detective", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 2, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
-  relic_femme = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_femme", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 3, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
-  relic_magician = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_magician", 32, 64, 0, undefined, &onpickup_ritual_piece, undefined, &oncrafted_ritual_piece, undefined, undefined, undefined, 4, undefined, undefined, undefined, &"ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
+  relic_boxer = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_boxer", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 1, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
+  relic_detective = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_detective", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 2, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
+  relic_femme = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_femme", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 3, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
+  relic_magician = zm_craftables::generate_zombie_craftable_piece(craftable_name, "relic_magician", 32, 64, 0, undefined, & onpickup_ritual_piece, undefined, & oncrafted_ritual_piece, undefined, undefined, undefined, 4, undefined, undefined, undefined, & "ZM_ZOD_QUEST_RITUAL_PICKUP_RELIC", 1);
   if(var_16b36a95) {
     relic_boxer.is_shared = 1;
     relic_detective.is_shared = 1;
@@ -155,13 +155,13 @@ function include_craftables() {
     relic_femme.client_field_state = undefined;
     relic_magician.client_field_state = undefined;
   }
-  ritual_pap = spawnStruct();
+  ritual_pap = spawnstruct();
   ritual_pap.name = craftable_name;
   ritual_pap zm_craftables::add_craftable_piece(relic_boxer);
   ritual_pap zm_craftables::add_craftable_piece(relic_detective);
   ritual_pap zm_craftables::add_craftable_piece(relic_femme);
   ritual_pap zm_craftables::add_craftable_piece(relic_magician);
-  ritual_pap.triggerthink = &ritual_pap_craftable;
+  ritual_pap.triggerthink = & ritual_pap_craftable;
   ritual_pap.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(ritual_pap);
   level flag::init("relic_boxer" + "_found");
@@ -171,18 +171,18 @@ function include_craftables() {
 }
 
 function init_craftables() {
-  level.custom_craftable_validation = &zod_player_can_craft;
+  level.custom_craftable_validation = & zod_player_can_craft;
   register_clientfields();
-  zm_craftables::add_zombie_craftable("police_box", &"ZM_ZOD_POLICE_BOX_PLACE_FUSE", &"ZM_ZOD_POLICE_BOX_PLACE_FUSE", &"ZM_ZOD_POLICE_BOX_POWER_ON", &function_c6c55eb6);
-  zm_craftables::add_zombie_craftable("idgun", &"ZM_ZOD_CRAFT_IDGUN", "", &"ZM_ZOD_PICKUP_IDGUN", &onfullycrafted_idgun, 1);
+  zm_craftables::add_zombie_craftable("police_box", & "ZM_ZOD_POLICE_BOX_PLACE_FUSE", & "ZM_ZOD_POLICE_BOX_PLACE_FUSE", & "ZM_ZOD_POLICE_BOX_POWER_ON", & function_c6c55eb6);
+  zm_craftables::add_zombie_craftable("idgun", & "ZM_ZOD_CRAFT_IDGUN", "", & "ZM_ZOD_PICKUP_IDGUN", & onfullycrafted_idgun, 1);
   zm_craftables::make_zombie_craftable_open("idgun", "", vectorscale((0, -1, 0), 90), (0, 0, 0));
-  zm_craftables::add_zombie_craftable("second_idgun", &"ZM_ZOD_CRAFT_IDGUN", "", &"ZM_ZOD_PICKUP_IDGUN", &function_d80876ac, 1);
+  zm_craftables::add_zombie_craftable("second_idgun", & "ZM_ZOD_CRAFT_IDGUN", "", & "ZM_ZOD_PICKUP_IDGUN", & function_d80876ac, 1);
   zm_craftables::make_zombie_craftable_open("second_idgun", "", vectorscale((0, -1, 0), 90), (0, 0, 0));
-  zm_craftables::add_zombie_craftable("ritual_boxer", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_BOXER", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_BOXER", &"ZM_ZOD_QUEST_RITUAL_INITIATE", &onfullycrafted_ritual);
-  zm_craftables::add_zombie_craftable("ritual_detective", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_DETECTIVE", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_DETECTIVE", &"ZM_ZOD_QUEST_RITUAL_INITIATE", &onfullycrafted_ritual);
-  zm_craftables::add_zombie_craftable("ritual_femme", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_FEMME", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_FEMME", &"ZM_ZOD_QUEST_RITUAL_INITIATE", &onfullycrafted_ritual);
-  zm_craftables::add_zombie_craftable("ritual_magician", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_MAGICIAN", &"ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_MAGICIAN", &"ZM_ZOD_QUEST_RITUAL_INITIATE", &onfullycrafted_ritual);
-  zm_craftables::add_zombie_craftable("ritual_pap", &"ZM_ZOD_QUEST_RITUAL_PLACE_RELIC", &"ZM_ZOD_QUEST_RITUAL_PLACE_RELIC", &"ZM_ZOD_QUEST_RITUAL_INITIATE", &onfullycrafted_ritual);
+  zm_craftables::add_zombie_craftable("ritual_boxer", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_BOXER", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_BOXER", & "ZM_ZOD_QUEST_RITUAL_INITIATE", & onfullycrafted_ritual);
+  zm_craftables::add_zombie_craftable("ritual_detective", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_DETECTIVE", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_DETECTIVE", & "ZM_ZOD_QUEST_RITUAL_INITIATE", & onfullycrafted_ritual);
+  zm_craftables::add_zombie_craftable("ritual_femme", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_FEMME", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_FEMME", & "ZM_ZOD_QUEST_RITUAL_INITIATE", & onfullycrafted_ritual);
+  zm_craftables::add_zombie_craftable("ritual_magician", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_MAGICIAN", & "ZM_ZOD_QUEST_RITUAL_PLACE_ITEM_MAGICIAN", & "ZM_ZOD_QUEST_RITUAL_INITIATE", & onfullycrafted_ritual);
+  zm_craftables::add_zombie_craftable("ritual_pap", & "ZM_ZOD_QUEST_RITUAL_PLACE_RELIC", & "ZM_ZOD_QUEST_RITUAL_PLACE_RELIC", & "ZM_ZOD_QUEST_RITUAL_INITIATE", & onfullycrafted_ritual);
   zm_craftables::set_build_time("police_box", 0);
   zm_craftables::set_build_time("ritual_boxer", 0);
   zm_craftables::set_build_time("ritual_detective", 0);
@@ -232,7 +232,7 @@ function craftable_add_glow_fx() {
 }
 
 function craftable_waittill_spawned() {
-  while(!isDefined(self.piecespawn)) {
+  while (!isdefined(self.piecespawn)) {
     util::wait_network_frame();
   }
 }
@@ -278,8 +278,8 @@ function function_27ef9857(player) {
 
 function function_6c41d7f2(player) {
   var_6f73bd35 = getent("police_box", "targetname");
-  if(isDefined(var_6f73bd35)) {
-    var_6f73bd35 playSound("zmb_zod_fuse_place");
+  if(isdefined(var_6f73bd35)) {
+    var_6f73bd35 playsound("zmb_zod_fuse_place");
   }
   foreach(e_player in level.players) {
     e_player thread zm_craftables::player_show_craftable_parts_ui("zmInventory.player_crafted_fusebox", "zmInventory.widget_fuses", 0);
@@ -309,12 +309,12 @@ function ondrop_ritual_piece(player) {
 
 function onpickup_ritual_piece(player) {
   println("");
-  if(!isDefined(level.mementos_picked_up)) {
+  if(!isdefined(level.mementos_picked_up)) {
     level.mementos_picked_up = 0;
     level.relics_picked_up = 0;
     level.sndritualmementos = 1;
   }
-  if(!(isDefined(self.var_34db6ce0) && self.var_34db6ce0)) {
+  if(!(isdefined(self.var_34db6ce0) && self.var_34db6ce0)) {
     self.var_34db6ce0 = 1;
     self.start_origin = self.model.origin;
     self.start_angles = self.model.angles;
@@ -450,7 +450,7 @@ function function_9708cb71(piecename) {
       break;
     }
   }
-  self playSound(var_983a0e9b);
+  self playsound(var_983a0e9b);
 }
 
 function function_c6c55eb6(e_player) {
@@ -480,11 +480,15 @@ function onfullycrafted_ritual(player) {
   if(self.equipname != "ritual_pap") {
     str_character_name = get_character_name_from_value(self.equipname);
     onfullycrafted_ritual_internal(str_character_name);
-    [[level.a_o_defend_areas[str_character_name]]] - > start();
+    [
+      [level.a_o_defend_areas[str_character_name]]
+    ] - > start();
   } else {
     level flag::set("ritual_pap_ready");
     level clientfield::set("ritual_state_pap", 1);
-    [[level.a_o_defend_areas["pap"]]] - > start();
+    [
+      [level.a_o_defend_areas["pap"]]
+    ] - > start();
   }
   return true;
 }
@@ -496,7 +500,7 @@ function onfullycrafted_ritual_internal(name) {
 }
 
 function onfullycrafted_idgun(player) {
-  if(!(isDefined(self.var_5449dda7) && self.var_5449dda7)) {
+  if(!(isdefined(self.var_5449dda7) && self.var_5449dda7)) {
     self.var_5449dda7 = 1;
     players = level.players;
     foreach(e_player in players) {
@@ -507,7 +511,7 @@ function onfullycrafted_idgun(player) {
     }
     self.model.origin = self.origin;
     self.model.angles = self.angles + (vectorscale((0, -1, 0), 90));
-    self.model setModel("wpn_t7_zmb_zod_idg_world");
+    self.model setmodel("wpn_t7_zmb_zod_idg_world");
     self.n_gun_index = level.idgun[0].n_gun_index;
     self.weaponname = getweapon(level.idgun[self.n_gun_index].str_wpnname);
   }
@@ -537,7 +541,7 @@ function function_a0e4fb00(v_origin, v_angles, n_gun_index) {
   width = 128;
   height = 128;
   length = 128;
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = v_origin;
   unitrigger_stub.angles = v_angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -548,21 +552,21 @@ function function_a0e4fb00(v_origin, v_angles, n_gun_index) {
   unitrigger_stub.require_look_at = 0;
   unitrigger_stub.n_gun_index = n_gun_index;
   unitrigger_stub.var_193180cc = spawn("script_model", v_origin);
-  unitrigger_stub.var_193180cc setModel("wpn_t7_zmb_zod_idg_world");
-  unitrigger_stub.prompt_and_visibility_func = &function_e983d2a0;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_bae02fd4);
+  unitrigger_stub.var_193180cc setmodel("wpn_t7_zmb_zod_idg_world");
+  unitrigger_stub.prompt_and_visibility_func = & function_e983d2a0;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_bae02fd4);
 }
 
 function function_e983d2a0(player) {
   n_gun_index = self.stub.n_gun_index;
   self sethintstring(&"ZM_ZOD_PICKUP_IDGUN");
-  b_is_invis = isDefined(player.beastmode) && player.beastmode;
+  b_is_invis = isdefined(player.beastmode) && player.beastmode;
   self setinvisibletoplayer(player, b_is_invis);
   return !b_is_invis;
 }
 
 function function_bae02fd4() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -590,24 +594,24 @@ function function_3071ed77(trig_stub, player) {
 
 function init_craftable_choke() {
   level.craftables_spawned_this_frame = 0;
-  while(true) {
+  while (true) {
     util::wait_network_frame();
     level.craftables_spawned_this_frame = 0;
   }
 }
 
 function craftable_wait_your_turn() {
-  if(!isDefined(level.craftables_spawned_this_frame)) {
+  if(!isdefined(level.craftables_spawned_this_frame)) {
     level thread init_craftable_choke();
   }
-  while(level.craftables_spawned_this_frame >= 2) {
+  while (level.craftables_spawned_this_frame >= 2) {
     util::wait_network_frame();
   }
   level.craftables_spawned_this_frame++;
 }
 
 function zod_player_can_craft(player) {
-  if(isDefined(player.beastmode) && player.beastmode) {
+  if(isdefined(player.beastmode) && player.beastmode) {
     return false;
   }
   return true;
@@ -645,7 +649,7 @@ function ritual_pap_craftable() {
 
 function idgun_craftable() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("idgun_zm_craftable_trigger", "idgun", "idgun", &"ZM_ZOD_PICKUP_IDGUN", 1, 2);
+  zm_craftables::craftable_trigger_think("idgun_zm_craftable_trigger", "idgun", "idgun", & "ZM_ZOD_PICKUP_IDGUN", 1, 2);
 }
 
 function function_ee72d458() {

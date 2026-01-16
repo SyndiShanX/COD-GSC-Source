@@ -10,7 +10,8 @@
 #include maps\la_plaza;
 #include maps\createfx\la_1b_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["flesh_hit"] = loadfx("impacts/fx_flesh_hit");
@@ -205,7 +206,7 @@ main() {
 
 createfx_setup() {
   m_cougar_crawl = spawn("script_model", (0, 0, 0));
-  m_cougar_crawl setModel("veh_t6_mil_cougar_destroyed");
+  m_cougar_crawl setmodel("veh_t6_mil_cougar_destroyed");
   animation = % v_la_03_01_cougarcrawl_cougar;
   s_align = get_struct("align_cougar_crawl");
   m_cougar_crawl.origin = getstartorigin(s_align.origin, (0, 0, 0), animation);

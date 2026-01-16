@@ -149,7 +149,7 @@ do_attract() {
       ent = button.terminal_model;
       model = get_console_model(button.script_int);
       ent setModel(model);
-      ent playSound(color_sound_selector(button.script_int));
+      ent playsound(color_sound_selector(button.script_int));
       wait(0.6);
       ent setModel("p_zom_moon_magic_box_com");
     }
@@ -166,7 +166,7 @@ do_attract() {
       ent = button.terminal_model;
       model = get_console_model(button.script_int);
       ent setModel(model);
-      ent playSound(color_sound_selector(button.script_int));
+      ent playsound(color_sound_selector(button.script_int));
       wait(0.6);
       ent setModel("p_zom_moon_magic_box_com");
     }
@@ -193,7 +193,7 @@ sq_ss_button_thread(dud) {
         }
       }
       model = get_console_model(self.script_int);
-      targ_model playSound(color_sound_selector(self.script_int));
+      targ_model playsound(color_sound_selector(self.script_int));
       targ_model setModel(model);
     }
     wait(0.3);
@@ -400,15 +400,14 @@ do_ss_start_vox(stage) {
   if(stage == 1) {
     player = is_player_close_enough(playon);
     if(isDefined(player)) {
-      playon playSound("vox_mcomp_quest_step1_0", "mcomp_done0");
+      playon playsound("vox_mcomp_quest_step1_0", "mcomp_done0");
       playon waittill("mcomp_done0");
-      if(isDefined(player)) {
+      if(isDefined(player))
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 0);
-      }
     }
   } else {
     if(level.ss_comp_vox_count == 0) {
-      playon playSound("vox_mcomp_quest_step7_0", "mcomp_done1");
+      playon playsound("vox_mcomp_quest_step7_0", "mcomp_done1");
     }
   }
 }
@@ -418,11 +417,10 @@ do_ss_failure_vox(stage) {
   if(stage == 1) {
     player = is_player_close_enough(playon);
     if(isDefined(player)) {
-      playon playSound("vox_mcomp_quest_step1_1", "mcomp_done2");
+      playon playsound("vox_mcomp_quest_step1_1", "mcomp_done2");
       playon waittill("mcomp_done2");
-      if(isDefined(player)) {
+      if(isDefined(player))
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 1);
-      }
     }
   } else {
     player = is_player_close_enough(playon);
@@ -447,27 +445,26 @@ do_ss_success_vox(stage) {
   if(stage == 1) {
     player = is_player_close_enough(playon);
     if(isDefined(player)) {
-      playon playSound("vox_mcomp_quest_step1_2", "mcomp_done3");
+      playon playsound("vox_mcomp_quest_step1_2", "mcomp_done3");
       playon waittill("mcomp_done3");
-      if(isDefined(player)) {
+      if(isDefined(player))
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 2);
-      }
     }
   } else {
     switch (level.ss_comp_vox_count) {
       case 0:
-        playon playSound("vox_mcomp_quest_step7_2", "mcomp_done4");
+        playon playsound("vox_mcomp_quest_step7_2", "mcomp_done4");
         level.ss_comp_vox_count++;
         break;
       case 1:
-        playon playSound("vox_mcomp_hack_success", "mcomp_done5");
+        playon playsound("vox_mcomp_hack_success", "mcomp_done5");
         level.ss_comp_vox_count++;
         break;
       case 2:
-        playon playSound("vox_mcomp_quest_step7_4", "mcomp_done6");
+        playon playsound("vox_mcomp_quest_step7_4", "mcomp_done6");
         playon waittill("mcomp_done6");
         if(!flag("be2")) {
-          playon playSound("vox_xcomp_quest_step7_5", "xcomp_done7");
+          playon playsound("vox_xcomp_quest_step7_5", "xcomp_done7");
         }
         break;
     }

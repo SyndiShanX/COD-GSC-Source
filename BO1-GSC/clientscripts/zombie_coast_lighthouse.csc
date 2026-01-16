@@ -26,7 +26,7 @@ lighthouse_light(index) {
   self.light_start_point = getstruct("pack_light", "targetname");
   self.lighthouse_fx_model = spawn(index, self.light_start_point.origin, "script_model");
   self.lighthouse_fx_model setModel("tag_origin");
-  playFXOnTag(index, level._effect["fx_zmb_coast_spotlight_main"], self.lighthouse_fx_model, "tag_origin");
+  playfxontag(index, level._effect["fx_zmb_coast_spotlight_main"], self.lighthouse_fx_model, "tag_origin");
   if(index == 0) {
     level.packapunch_active = false;
   }

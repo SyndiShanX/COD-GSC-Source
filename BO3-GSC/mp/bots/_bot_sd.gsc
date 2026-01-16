@@ -16,13 +16,13 @@
 #namespace bot_sd;
 
 function init() {
-  level.botidle = &bot_idle;
+  level.botidle = & bot_idle;
 }
 
 function bot_idle() {
   if(!level.bombplanted && !level.multibomb && self.team == game["attackers"]) {
     carrier = level.sdbomb gameobjects::get_carrier();
-    if(!isDefined(carrier)) {
+    if(!isdefined(carrier)) {
       self botsetgoal(level.sdbomb.trigger.origin);
       self bot::sprint_to_goal();
       return;
@@ -30,7 +30,7 @@ function bot_idle() {
   }
   approachradiussq = 562500;
   foreach(zone in level.bombzones) {
-    if(isDefined(level.bombplanted) && level.bombplanted && (!(isDefined(zone.isplanted) && zone.isplanted))) {
+    if(isdefined(level.bombplanted) && level.bombplanted && (!(isdefined(zone.isplanted) && zone.isplanted))) {
       continue;
     }
     zonetrigger = self get_zone_trigger(zone);
@@ -50,7 +50,7 @@ function bot_idle() {
   }
   zones = array::randomize(level.bombzones);
   foreach(zone in zones) {
-    if(isDefined(level.bombplanted) && level.bombplanted && (!(isDefined(zone.isplanted) && zone.isplanted))) {
+    if(isdefined(level.bombplanted) && level.bombplanted && (!(isdefined(zone.isplanted) && zone.isplanted))) {
       continue;
     }
     if(self can_defuse(zone)) {
@@ -60,7 +60,7 @@ function bot_idle() {
     }
   }
   foreach(zone in zones) {
-    if(isDefined(level.bombplanted) && level.bombplanted && (!(isDefined(zone.isplanted) && zone.isplanted))) {
+    if(isdefined(level.bombplanted) && level.bombplanted && (!(isdefined(zone.isplanted) && zone.isplanted))) {
       continue;
     }
     if(distancesquared(self.origin, zone.trigger.origin) < approachradiussq && randomint(100) < 70) {
@@ -82,12 +82,12 @@ function get_zone_trigger(zone) {
 
 function can_plant(zone) {
   if(level.multibomb) {
-    return !(isDefined(zone.isplanted) && zone.isplanted) && self.team != zone gameobjects::get_owner_team();
+    return !(isdefined(zone.isplanted) && zone.isplanted) && self.team != zone gameobjects::get_owner_team();
   }
   carrier = level.sdbomb gameobjects::get_carrier();
-  return isDefined(carrier) && self == carrier;
+  return isdefined(carrier) && self == carrier;
 }
 
 function can_defuse(zone) {
-  return isDefined(zone.isplanted) && zone.isplanted && self.team == zone gameobjects::get_owner_team();
+  return isdefined(zone.isplanted) && zone.isplanted && self.team == zone gameobjects::get_owner_team();
 }

@@ -33,12 +33,12 @@
 #namespace bgb;
 
 function autoexec __init__sytem__() {
-  system::register("bgb", &__init__, &__main__, undefined);
+  system::register("bgb", & __init__, & __main__, undefined);
 }
 
 function private __init__() {
-  callback::on_spawned(&on_player_spawned);
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  callback::on_spawned( & on_player_spawned);
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   level.weaponbgbgrab = getweapon("zombie_bgb_grab");
@@ -51,11 +51,11 @@ function private __init__() {
   clientfield::register("clientuimodel", "bgb_invalid_use", 1, 1, "counter");
   clientfield::register("clientuimodel", "bgb_one_shot_use", 1, 1, "counter");
   clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter");
-  zm::register_vehicle_damage_callback(&vehicle_damage_override);
+  zm::register_vehicle_damage_callback( & vehicle_damage_override);
 }
 
 function private __main__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   bgb_finalize();
@@ -65,7 +65,7 @@ function private __main__() {
 
 function private on_player_spawned() {
   self.bgb = "none";
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   self function_52dbea8c();
@@ -73,7 +73,7 @@ function private on_player_spawned() {
 }
 
 function private function_52dbea8c() {
-  if(!(isDefined(self.var_c2d95bad) && self.var_c2d95bad)) {
+  if(!(isdefined(self.var_c2d95bad) && self.var_c2d95bad)) {
     self.var_c2d95bad = 1;
     self globallogic_score::initpersstat("bgb_tokens_gained_this_game", 0);
     self.bgb_tokens_gained_this_game = 0;
@@ -81,7 +81,7 @@ function private function_52dbea8c() {
 }
 
 function private bgb_player_init() {
-  if(isDefined(self.bgb_pack)) {
+  if(isdefined(self.bgb_pack)) {
     return;
   }
   self.bgb_pack = self getbubblegumpack();
@@ -91,10 +91,10 @@ function private bgb_player_init() {
     if(bgb == "weapon_null") {
       continue;
     }
-    if(!(isDefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable)) {
+    if(!(isdefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable)) {
       continue;
     }
-    self.bgb_stats[bgb] = spawnStruct();
+    self.bgb_stats[bgb] = spawnstruct();
     self.bgb_stats[bgb].var_e0b06b47 = self getbgbremaining(bgb);
     self.bgb_stats[bgb].bgb_used_this_game = 0;
   }
@@ -116,7 +116,7 @@ function private bgb_end_game() {
   self __protected__reportnotedloot();
   self zm_stats::set_global_stat("bgb_tokens_gained_this_game", self.bgb_tokens_gained_this_game);
   foreach(bgb in self.bgb_pack) {
-    if(!isDefined(self.bgb_stats[bgb]) || !self.bgb_stats[bgb].bgb_used_this_game) {
+    if(!isdefined(self.bgb_stats[bgb]) || !self.bgb_stats[bgb].bgb_used_this_game) {
       continue;
     }
     level flag::set("consumables_reported");
@@ -129,7 +129,7 @@ function private bgb_end_game() {
 function private bgb_finalize() {
   statstablename = util::getstatstablename();
   keys = getarraykeys(level.bgb);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     level.bgb[keys[i]].item_index = getitemindexfromref(keys[i]);
     level.bgb[keys[i]].rarity = int(tablelookup(statstablename, 0, level.bgb[keys[i]].item_index, 16));
     if(0 == level.bgb[keys[i]].rarity || 4 == level.bgb[keys[i]].rarity) {
@@ -149,10 +149,10 @@ function private bgb_finalize() {
 
 function private bgb_player_monitor() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     str_return = level util::waittill_any_return("between_round_over", "restart_round");
-    if(isDefined(level.var_4824bb2d)) {
-      if(!(isDefined(self[[level.var_4824bb2d]]()) && self[[level.var_4824bb2d]]())) {
+    if(isdefined(level.var_4824bb2d)) {
+      if(!(isdefined(self[[level.var_4824bb2d]]()) && self[[level.var_4824bb2d]]())) {
         continue;
       }
     }
@@ -176,7 +176,7 @@ function private setup_devgui() {
   }
   adddebugcommand(((((bgb_devgui_base + "") + "") + "") + "") + "");
   adddebugcommand(((((bgb_devgui_base + "") + "") + "") + "") + "");
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     playernum = i + 1;
     adddebugcommand(((((((bgb_devgui_base + "") + playernum) + "") + "") + "") + i) + "");
   }
@@ -184,7 +184,7 @@ function private setup_devgui() {
 }
 
 function private bgb_devgui_think() {
-  for(;;) {
+  for (;;) {
     var_fe9a7d67 = getdvarstring("");
     if(var_fe9a7d67 != "") {
       bgb_devgui_acquire(var_fe9a7d67);
@@ -197,7 +197,7 @@ function private bgb_devgui_think() {
 function private bgb_devgui_acquire(bgb_name) {
   playerid = getdvarint("");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(playerid != -1 && playerid != i) {
       continue;
     }
@@ -229,10 +229,10 @@ function private bgb_debug_text_display_init() {
 }
 
 function private bgb_set_debug_text(name, activations_remaining) {
-  if(!isDefined(self.bgb_debug_text)) {
+  if(!isdefined(self.bgb_debug_text)) {
     return;
   }
-  if(isDefined(activations_remaining)) {
+  if(isdefined(activations_remaining)) {
     self clientfield::set_player_uimodel("", 1);
   } else {
     self clientfield::set_player_uimodel("", 0);
@@ -247,7 +247,7 @@ function private bgb_set_debug_text(name, activations_remaining) {
   if(issubstr(name, prefix)) {
     short_name = getsubstr(name, prefix.size);
   }
-  if(isDefined(activations_remaining)) {
+  if(isdefined(activations_remaining)) {
     self.bgb_debug_text settext(((("" + short_name) + "") + activations_remaining) + "");
   } else {
     self.bgb_debug_text settext("" + short_name);
@@ -267,7 +267,7 @@ function bgb_print_stats(bgb) {
 }
 
 function private has_consumable_bgb(bgb) {
-  if(!isDefined(self.bgb_stats[bgb]) || (!(isDefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable))) {
+  if(!isdefined(self.bgb_stats[bgb]) || (!(isdefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable))) {
     return false;
   }
   return true;
@@ -277,7 +277,9 @@ function sub_consumable_bgb(bgb) {
   if(!has_consumable_bgb(bgb)) {
     return;
   }
-  if(isDefined(level.bgb[bgb].var_35e23ba2) && ![[level.bgb[bgb].var_35e23ba2]]()) {
+  if(isdefined(level.bgb[bgb].var_35e23ba2) && ![
+      [level.bgb[bgb].var_35e23ba2]
+    ]()) {
     return;
   }
   self.bgb_stats[bgb].bgb_used_this_game++;
@@ -291,7 +293,7 @@ function sub_consumable_bgb(bgb) {
 }
 
 function get_bgb_available(bgb) {
-  if(!isDefined(self.bgb_stats[bgb])) {
+  if(!isdefined(self.bgb_stats[bgb])) {
     return 1;
   }
   var_3232aae6 = self.bgb_stats[bgb].var_e0b06b47;
@@ -301,12 +303,12 @@ function get_bgb_available(bgb) {
 }
 
 function private function_c3e0b2ba(bgb, activating) {
-  if(!(isDefined(level.bgb[bgb].var_7ca0e2a7) && level.bgb[bgb].var_7ca0e2a7)) {
+  if(!(isdefined(level.bgb[bgb].var_7ca0e2a7) && level.bgb[bgb].var_7ca0e2a7)) {
     return;
   }
   was_invulnerable = self enableinvulnerability();
   self util::waittill_any_timeout(2, "bgb_bubble_blow_complete");
-  if(isDefined(self) && (!(isDefined(was_invulnerable) && was_invulnerable))) {
+  if(isdefined(self) && (!(isdefined(was_invulnerable) && was_invulnerable))) {
     self disableinvulnerability();
   }
 }
@@ -319,7 +321,7 @@ function bgb_gumball_anim(bgb, activating) {
     self thread function_c3e0b2ba(bgb);
     self thread zm_audio::create_and_play_dialog("bgb", "eat");
   }
-  while(self isswitchingweapons()) {
+  while (self isswitchingweapons()) {
     self waittill("weapon_change_complete");
   }
   gun = self bgb_play_gumball_anim_begin(bgb, activating);
@@ -328,7 +330,7 @@ function bgb_gumball_anim(bgb, activating) {
   if(evt == "weapon_change_complete") {
     succeeded = 1;
     if(activating) {
-      if(isDefined(level.bgb[bgb].var_7ea552f4) && level.bgb[bgb].var_7ea552f4 || self function_b616fe7a(1)) {
+      if(isdefined(level.bgb[bgb].var_7ea552f4) && level.bgb[bgb].var_7ea552f4 || self function_b616fe7a(1)) {
         self notify("hash_83da9d01", bgb);
         self activation_start();
         self thread run_activation_func(bgb);
@@ -336,7 +338,7 @@ function bgb_gumball_anim(bgb, activating) {
         succeeded = 0;
       }
     } else {
-      if(!(isDefined(unlocked) && unlocked)) {
+      if(!(isdefined(unlocked) && unlocked)) {
         return 0;
       }
       self notify("bgb_gumball_anim_give", bgb);
@@ -346,7 +348,7 @@ function bgb_gumball_anim(bgb, activating) {
       self zm_stats::increment_challenge_stat("GUM_GOBBLER_CONSUME");
       self adddstat("ItemStats", level.bgb[bgb].item_index, "stats", "used", "statValue", 1);
       health = 0;
-      if(isDefined(self.health)) {
+      if(isdefined(self.health)) {
         health = self.health;
       }
       self recordmapevent(4, gettime(), self.origin, level.round_number, level.bgb[bgb].item_index, health);
@@ -385,7 +387,7 @@ function private bgb_play_gumball_anim_begin(bgb, activating) {
   self giveweapon(weapon, self calcweaponoptions(level.bgb[bgb].camo_index, 0, 0));
   self switchtoweapon(weapon);
   if(weapon == level.weaponbgbgrab) {
-    self playSound("zmb_bgb_powerup_default");
+    self playsound("zmb_bgb_powerup_default");
   }
   if(weapon == level.weaponbgbuse) {
     self clientfield::increment_to_player("bgb_blow_bubble");
@@ -398,7 +400,7 @@ function private bgb_play_gumball_anim_end(w_original, bgb, activating) {
   assert(w_original != level.weaponrevivetool);
   self zm_utility::enable_player_move_states();
   weapon = bgb_get_gumball_anim_weapon(bgb, activating);
-  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission)) {
+  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission)) {
     self takeweapon(weapon);
     return;
   }
@@ -417,7 +419,7 @@ function private bgb_play_gumball_anim_end(w_original, bgb, activating) {
     self zm_weapons::switch_back_primary_weapon();
   }
   self util::waittill_any_timeout(1, "weapon_change_complete");
-  if(!self laststand::player_is_in_laststand() && (!(isDefined(self.intermission) && self.intermission))) {
+  if(!self laststand::player_is_in_laststand() && (!(isdefined(self.intermission) && self.intermission))) {
     self zm_utility::decrement_is_drinking();
   }
 }
@@ -440,7 +442,7 @@ function private bgb_limit_monitor() {
   switch (level.bgb[self.bgb].limit_type) {
     case "activated": {
       self thread bgb_activation_monitor();
-      for(i = level.bgb[self.bgb].limit; i > 0; i--) {
+      for (i = level.bgb[self.bgb].limit; i > 0; i--) {
         level.bgb[self.bgb].var_32fa3cb7 = i;
         if(level.bgb[self.bgb].var_336ffc4e) {
           function_497386b0();
@@ -450,7 +452,7 @@ function private bgb_limit_monitor() {
         self clientfield::set_player_uimodel("bgb_activations_remaining", i);
         self thread bgb_set_debug_text(self.bgb, i);
         self waittill("bgb_activation");
-        while(isDefined(self get_active()) && self get_active()) {
+        while (isdefined(self get_active()) && self get_active()) {
           wait(0.05);
         }
         self playsoundtoplayer("zmb_bgb_power_decrement", self);
@@ -458,7 +460,7 @@ function private bgb_limit_monitor() {
       level.bgb[self.bgb].var_32fa3cb7 = 0;
       self playsoundtoplayer("zmb_bgb_power_done_delayed", self);
       self set_timer(0, level.bgb[self.bgb].limit);
-      while(isDefined(self.bgb_activation_in_progress) && self.bgb_activation_in_progress) {
+      while (isdefined(self.bgb_activation_in_progress) && self.bgb_activation_in_progress) {
         wait(0.05);
       }
       break;
@@ -473,7 +475,7 @@ function private bgb_limit_monitor() {
     case "rounds": {
       self thread bgb_set_debug_text(self.bgb);
       count = level.bgb[self.bgb].limit + 1;
-      for(i = 0; i < count; i++) {
+      for (i = 0; i < count; i++) {
         self set_timer(count - i, count);
         level waittill("end_of_round");
         self playsoundtoplayer("zmb_bgb_power_decrement", self);
@@ -513,7 +515,7 @@ function private bgb_activation_monitor() {
   if("activated" != level.bgb[self.bgb].limit_type) {
     return;
   }
-  for(;;) {
+  for (;;) {
     self waittill("bgb_activation_request");
     if(!self function_b616fe7a(0)) {
       continue;
@@ -525,9 +527,9 @@ function private bgb_activation_monitor() {
 }
 
 function private function_b616fe7a(var_5827b083 = 0) {
-  var_bb1d9487 = isDefined(level.bgb[self.bgb].validation_func) && !self[[level.bgb[self.bgb].validation_func]]();
-  var_847ec8da = isDefined(level.var_9cef605e) && !self[[level.var_9cef605e]]();
-  if(!var_5827b083 && (isDefined(self.is_drinking) && self.is_drinking) || (isDefined(self.bgb_activation_in_progress) && self.bgb_activation_in_progress) || self laststand::player_is_in_laststand() || var_bb1d9487 || var_847ec8da) {
+  var_bb1d9487 = isdefined(level.bgb[self.bgb].validation_func) && !self[[level.bgb[self.bgb].validation_func]]();
+  var_847ec8da = isdefined(level.var_9cef605e) && !self[[level.var_9cef605e]]();
+  if(!var_5827b083 && (isdefined(self.is_drinking) && self.is_drinking) || (isdefined(self.bgb_activation_in_progress) && self.bgb_activation_in_progress) || self laststand::player_is_in_laststand() || var_bb1d9487 || var_847ec8da) {
     self clientfield::increment_uimodel("bgb_invalid_use");
     self playlocalsound("zmb_bgb_deny_plr");
     return false;
@@ -539,7 +541,7 @@ function private function_5fc6d844(bgb) {
   self endon("disconnect");
   self endon("bled_out");
   self endon("bgb_update");
-  if(isDefined(level.bgb[bgb].var_50fe45f6) && level.bgb[bgb].var_50fe45f6) {
+  if(isdefined(level.bgb[bgb].var_50fe45f6) && level.bgb[bgb].var_50fe45f6) {
     function_650ca64(6);
   } else {
     return;
@@ -582,14 +584,14 @@ function private set_active(b_is_active) {
 }
 
 function get_active() {
-  return isDefined(self.bgb_active) && self.bgb_active;
+  return isdefined(self.bgb_active) && self.bgb_active;
 }
 
 function is_active(name) {
-  if(!isDefined(self.bgb)) {
+  if(!isdefined(self.bgb)) {
     return 0;
   }
-  return self.bgb == name && (isDefined(self.bgb_active) && self.bgb_active);
+  return self.bgb == name && (isdefined(self.bgb_active) && self.bgb_active);
 }
 
 function is_team_active(name) {
@@ -602,7 +604,7 @@ function is_team_active(name) {
 }
 
 function increment_ref_count(name) {
-  if(!isDefined(level.bgb[name])) {
+  if(!isdefined(level.bgb[name])) {
     return 0;
   }
   var_ad8303b0 = level.bgb[name].ref_count;
@@ -611,7 +613,7 @@ function increment_ref_count(name) {
 }
 
 function decrement_ref_count(name) {
-  if(!isDefined(level.bgb[name])) {
+  if(!isdefined(level.bgb[name])) {
     return 0;
   }
   level.bgb[name].ref_count--;
@@ -633,7 +635,7 @@ function private function_f9fad8b3(var_eeab9300, percent) {
   start_time = gettime();
   end_time = start_time + 1000;
   var_6d8b0ec7 = var_eeab9300;
-  while(var_6d8b0ec7 > percent) {
+  while (var_6d8b0ec7 > percent) {
     var_6d8b0ec7 = lerpfloat(percent, var_eeab9300, calc_remaining_duration_lerp(start_time, end_time));
     self clientfield::set_player_uimodel("bgb_timer", var_6d8b0ec7);
     wait(0.05);
@@ -663,7 +665,7 @@ function run_timer(max) {
   self notify("bgb_run_timer");
   self endon("bgb_run_timer");
   current = max;
-  while(current > 0) {
+  while (current > 0) {
     self set_timer(current, max);
     wait(0.05);
     current = current - 0.05;
@@ -677,17 +679,17 @@ function clear_timer() {
 }
 
 function register(name, limit_type, limit, enable_func, disable_func, validation_func, activation_func) {
-  assert(isDefined(name), "");
+  assert(isdefined(name), "");
   assert("" != name, ("" + "") + "");
-  assert(!isDefined(level.bgb[name]), ("" + name) + "");
-  assert(isDefined(limit_type), ("" + name) + "");
-  assert(isDefined(limit), ("" + name) + "");
-  assert(!isDefined(enable_func) || isfunctionptr(enable_func), ("" + name) + "");
-  assert(!isDefined(disable_func) || isfunctionptr(disable_func), ("" + name) + "");
+  assert(!isdefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(limit_type), ("" + name) + "");
+  assert(isdefined(limit), ("" + name) + "");
+  assert(!isdefined(enable_func) || isfunctionptr(enable_func), ("" + name) + "");
+  assert(!isdefined(disable_func) || isfunctionptr(disable_func), ("" + name) + "");
   switch (limit_type) {
     case "activated": {
-      assert(!isDefined(validation_func) || isfunctionptr(validation_func), ((("" + name) + "") + limit_type) + "");
-      assert(isDefined(activation_func), ((("" + name) + "") + limit_type) + "");
+      assert(!isdefined(validation_func) || isfunctionptr(validation_func), ((("" + name) + "") + limit_type) + "");
+      assert(isdefined(activation_func), ((("" + name) + "") + limit_type) + "");
       assert(isfunctionptr(activation_func), ((("" + name) + "") + limit_type) + "");
     }
     case "rounds":
@@ -703,7 +705,7 @@ function register(name, limit_type, limit, enable_func, disable_func, validation
       assert(0, ((("" + name) + "") + limit_type) + "");
     }
   }
-  level.bgb[name] = spawnStruct();
+  level.bgb[name] = spawnstruct();
   level.bgb[name].name = name;
   level.bgb[name].limit_type = limit_type;
   level.bgb[name].limit = limit;
@@ -718,49 +720,49 @@ function register(name, limit_type, limit, enable_func, disable_func, validation
 }
 
 function register_actor_damage_override(name, actor_damage_override_func) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].actor_damage_override_func = actor_damage_override_func;
 }
 
 function register_vehicle_damage_override(name, vehicle_damage_override_func) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].vehicle_damage_override_func = vehicle_damage_override_func;
 }
 
 function register_actor_death_override(name, actor_death_override_func) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].actor_death_override_func = actor_death_override_func;
 }
 
 function register_lost_perk_override(name, lost_perk_override_func, lost_perk_override_func_always_run) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].lost_perk_override_func = lost_perk_override_func;
   level.bgb[name].lost_perk_override_func_always_run = lost_perk_override_func_always_run;
 }
 
 function function_ff4b2998(name, add_to_player_score_override_func, add_to_player_score_override_func_always_run) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].add_to_player_score_override_func = add_to_player_score_override_func;
   level.bgb[name].add_to_player_score_override_func_always_run = add_to_player_score_override_func_always_run;
 }
 
 function function_4cda71bf(name, var_7ca0e2a7) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].var_7ca0e2a7 = var_7ca0e2a7;
 }
 
 function function_93da425(name, var_35e23ba2) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].var_35e23ba2 = var_35e23ba2;
 }
 
 function function_2060b89(name) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].var_50fe45f6 = 1;
 }
 
 function function_f132da9c(name) {
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   level.bgb[name].var_7ea552f4 = 1;
 }
 
@@ -776,16 +778,16 @@ function give(name) {
   if("none" == name) {
     return;
   }
-  assert(isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isdefined(level.bgb[name]), ("" + name) + "");
   self notify("bgb_update", name, self.bgb);
   self notify("bgb_update_give_" + name);
   self.bgb = name;
   self clientfield::set_player_uimodel("bgb_current", level.bgb[name].item_index);
   self luinotifyevent(&"zombie_bgb_notification", 1, level.bgb[name].item_index);
-  if(isDefined(level.bgb[name].enable_func)) {
+  if(isdefined(level.bgb[name].enable_func)) {
     self thread[[level.bgb[name].enable_func]]();
   }
-  if(isDefined("activated" == level.bgb[name].limit_type)) {
+  if(isdefined("activated" == level.bgb[name].limit_type)) {
     self setactionslot(1, "bgb");
   }
   self thread bgb_limit_monitor();
@@ -798,7 +800,7 @@ function take() {
   }
   self setactionslot(1, "");
   self thread bgb_set_debug_text("none");
-  if(isDefined(level.bgb[self.bgb].disable_func)) {
+  if(isdefined(level.bgb[self.bgb].disable_func)) {
     self thread[[level.bgb[self.bgb].disable_func]]();
   }
   self bgb_clear_monitors_and_clientfields();
@@ -812,18 +814,18 @@ function get_enabled() {
 }
 
 function is_enabled(name) {
-  assert(isDefined(self.bgb));
+  assert(isdefined(self.bgb));
   return self.bgb == name;
 }
 
 function any_enabled() {
-  assert(isDefined(self.bgb));
+  assert(isdefined(self.bgb));
   return self.bgb !== "none";
 }
 
 function is_team_enabled(str_name) {
   foreach(player in level.players) {
-    assert(isDefined(player.bgb));
+    assert(isdefined(player.bgb));
     if(player.bgb == str_name) {
       return true;
     }
@@ -832,7 +834,7 @@ function is_team_enabled(str_name) {
 }
 
 function get_player_dropped_powerup_origin() {
-  powerup_origin = (self.origin + vectorscale(anglesToForward((0, self getplayerangles()[1], 0)), 60)) + vectorscale((0, 0, 1), 5);
+  powerup_origin = (self.origin + vectorscale(anglestoforward((0, self getplayerangles()[1], 0)), 60)) + vectorscale((0, 0, 1), 5);
   self zm_stats::increment_challenge_stat("GUM_GOBBLER_POWERUPS");
   return powerup_origin;
 }
@@ -840,13 +842,13 @@ function get_player_dropped_powerup_origin() {
 function function_dea74fb0(str_powerup, v_origin = self get_player_dropped_powerup_origin()) {
   var_93eb638b = zm_powerups::specific_powerup_drop(str_powerup, v_origin);
   wait(1);
-  if(isDefined(var_93eb638b) && (!var_93eb638b zm::in_enabled_playable_area() && !var_93eb638b zm::in_life_brush())) {
+  if(isdefined(var_93eb638b) && (!var_93eb638b zm::in_enabled_playable_area() && !var_93eb638b zm::in_life_brush())) {
     level thread function_434235f9(var_93eb638b);
   }
 }
 
 function function_434235f9(var_93eb638b) {
-  if(!isDefined(var_93eb638b)) {
+  if(!isdefined(var_93eb638b)) {
     return;
   }
   var_93eb638b ghost();
@@ -859,25 +861,25 @@ function function_434235f9(var_93eb638b) {
   } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
-  if(!(isDefined(var_93eb638b.sndnosamlaugh) && var_93eb638b.sndnosamlaugh)) {
+  if(!(isdefined(var_93eb638b.sndnosamlaugh) && var_93eb638b.sndnosamlaugh)) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isalive(players[i])) {
         players[i] playlocalsound(level.zmb_laugh_alias);
       }
     }
   }
-  playFXOnTag(level._effect["samantha_steal"], var_93eb638b, "tag_origin");
+  playfxontag(level._effect["samantha_steal"], var_93eb638b, "tag_origin");
   var_93eb638b.clone_model unlink();
   var_93eb638b.clone_model movez(60, 1, 0.25, 0.25);
   var_93eb638b.clone_model vibrate(direction, 1.5, 2.5, 1);
   var_93eb638b.clone_model waittill("movedone");
-  if(isDefined(self.damagearea)) {
+  if(isdefined(self.damagearea)) {
     self.damagearea delete();
   }
   var_93eb638b.clone_model delete();
-  if(isDefined(var_93eb638b)) {
-    if(isDefined(var_93eb638b.damagearea)) {
+  if(isdefined(var_93eb638b)) {
+    if(isdefined(var_93eb638b.damagearea)) {
       var_93eb638b.damagearea delete();
     }
     var_93eb638b zm_powerups::powerup_delete();
@@ -885,12 +887,12 @@ function function_434235f9(var_93eb638b) {
 }
 
 function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return damage;
   }
   if(isplayer(attacker)) {
     name = attacker get_enabled();
-    if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
+    if(name !== "none" && isdefined(level.bgb[name]) && isdefined(level.bgb[name].actor_damage_override_func)) {
       damage = [
         [level.bgb[name].actor_damage_override_func]
       ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
@@ -900,12 +902,12 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
 }
 
 function vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return idamage;
   }
   if(isplayer(eattacker)) {
     name = eattacker get_enabled();
-    if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
+    if(name !== "none" && isdefined(level.bgb[name]) && isdefined(level.bgb[name].vehicle_damage_override_func)) {
       idamage = [
         [level.bgb[name].vehicle_damage_override_func]
       ](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
@@ -915,12 +917,12 @@ function vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeans
 }
 
 function actor_death_override(attacker) {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return 0;
   }
   if(isplayer(attacker)) {
     name = attacker get_enabled();
-    if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
+    if(name !== "none" && isdefined(level.bgb[name]) && isdefined(level.bgb[name].actor_death_override_func)) {
       damage = [
         [level.bgb[name].actor_death_override_func]
       ](attacker);
@@ -931,16 +933,16 @@ function actor_death_override(attacker) {
 
 function lost_perk_override(perk) {
   b_result = 0;
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return b_result;
   }
-  if(!(isDefined(self.laststand) && self.laststand)) {
+  if(!(isdefined(self.laststand) && self.laststand)) {
     return b_result;
   }
   keys = getarraykeys(level.bgb);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     name = keys[i];
-    if(isDefined(level.bgb[name].lost_perk_override_func_always_run) && level.bgb[name].lost_perk_override_func_always_run && isDefined(level.bgb[name].lost_perk_override_func)) {
+    if(isdefined(level.bgb[name].lost_perk_override_func_always_run) && level.bgb[name].lost_perk_override_func_always_run && isdefined(level.bgb[name].lost_perk_override_func)) {
       b_result = [
         [level.bgb[name].lost_perk_override_func]
       ](perk, self, undefined);
@@ -951,7 +953,7 @@ function lost_perk_override(perk) {
   }
   foreach(player in level.activeplayers) {
     name = player get_enabled();
-    if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
+    if(name !== "none" && isdefined(level.bgb[name]) && isdefined(level.bgb[name].lost_perk_override_func)) {
       b_result = [
         [level.bgb[name].lost_perk_override_func]
       ](perk, self, player);
@@ -964,31 +966,33 @@ function lost_perk_override(perk) {
 }
 
 function add_to_player_score_override(n_points, str_awarded_by) {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return n_points;
   }
   str_enabled = self get_enabled();
   keys = getarraykeys(level.bgb);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     str_bgb = keys[i];
     if(str_bgb === str_enabled) {
       continue;
     }
-    if(isDefined(level.bgb[str_bgb].add_to_player_score_override_func_always_run) && level.bgb[str_bgb].add_to_player_score_override_func_always_run && isDefined(level.bgb[str_bgb].add_to_player_score_override_func)) {
+    if(isdefined(level.bgb[str_bgb].add_to_player_score_override_func_always_run) && level.bgb[str_bgb].add_to_player_score_override_func_always_run && isdefined(level.bgb[str_bgb].add_to_player_score_override_func)) {
       n_points = [
         [level.bgb[str_bgb].add_to_player_score_override_func]
       ](n_points, str_awarded_by, 0);
     }
   }
-  if(str_enabled !== "none" && isDefined(level.bgb[str_enabled]) && isDefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
-    n_points = [[level.bgb[str_enabled].add_to_player_score_override_func]](n_points, str_awarded_by, 1);
+  if(str_enabled !== "none" && isdefined(level.bgb[str_enabled]) && isdefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
+    n_points = [
+      [level.bgb[str_enabled].add_to_player_score_override_func]
+    ](n_points, str_awarded_by, 1);
   }
   return n_points;
 }
 
 function function_d51db887() {
   keys = array::randomize(getarraykeys(level.bgb));
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level.bgb[keys[i]].rarity != 1) {
       continue;
     }
@@ -1004,7 +1008,7 @@ function function_4ed517b9(n_max_distance, var_98a3e738, var_287a7adb) {
   self endon("bled_out");
   self endon("bgb_update");
   self.var_6638f10b = [];
-  while(true) {
+  while (true) {
     foreach(e_player in level.players) {
       if(e_player == self) {
         continue;
@@ -1014,14 +1018,14 @@ function function_4ed517b9(n_max_distance, var_98a3e738, var_287a7adb) {
       var_50fd5a04 = zm_utility::is_player_valid(e_player, 0, 1) && function_2469cfe8(n_max_distance, self, e_player);
       if(!var_368e2240 && var_50fd5a04) {
         array::add(self.var_6638f10b, e_player, 0);
-        if(isDefined(var_98a3e738)) {
+        if(isdefined(var_98a3e738)) {
           self thread[[var_98a3e738]](e_player);
         }
         continue;
       }
       if(var_368e2240 && !var_50fd5a04) {
         arrayremovevalue(self.var_6638f10b, e_player);
-        if(isDefined(var_287a7adb)) {
+        if(isdefined(var_287a7adb)) {
           self thread[[var_287a7adb]](e_player);
         }
       }
@@ -1072,13 +1076,13 @@ function revive_and_return_perk_on_bgb_activation(perk) {
     var_376ad33c = self getweaponammoclip(self.current_lethal_grenade);
   }
   self waittill("player_revived", e_reviver);
-  if(isDefined(self.var_df0decf1) && self.var_df0decf1 || (isDefined(e_reviver) && (isDefined(self.bgb) && self is_enabled("zm_bgb_near_death_experience")) || (isDefined(e_reviver.bgb) && e_reviver is_enabled("zm_bgb_near_death_experience")))) {
+  if(isdefined(self.var_df0decf1) && self.var_df0decf1 || (isdefined(e_reviver) && (isdefined(self.bgb) && self is_enabled("zm_bgb_near_death_experience")) || (isdefined(e_reviver.bgb) && e_reviver is_enabled("zm_bgb_near_death_experience")))) {
     if(zm_perks::use_solo_revive() && perk == "specialty_quickrevive") {
       level.solo_game_free_player_quickrevive = 1;
     }
     wait(0.05);
     self thread zm_perks::give_perk(perk, 0);
-    if(perk == "specialty_widowswine" && isDefined(var_376ad33c)) {
+    if(perk == "specialty_widowswine" && isdefined(var_376ad33c)) {
       self setweaponammoclip(self.current_lethal_grenade, var_376ad33c);
     }
   }
@@ -1090,7 +1094,7 @@ function bgb_revive_watcher() {
   self.var_df0decf1 = 1;
   self waittill("player_revived", e_reviver);
   wait(0.05);
-  if(isDefined(self.var_df0decf1) && self.var_df0decf1) {
+  if(isdefined(self.var_df0decf1) && self.var_df0decf1) {
     self notify("bgb_revive");
     self.var_df0decf1 = undefined;
   }

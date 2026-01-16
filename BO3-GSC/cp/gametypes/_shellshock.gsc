@@ -11,12 +11,12 @@
 #namespace shellshock;
 
 function autoexec __init__sytem__() {
-  system::register("shellshock", &__init__, undefined, undefined);
+  system::register("shellshock", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  level.shellshockonplayerdamage = &on_damage;
+  callback::on_start_gametype( & init);
+  level.shellshockonplayerdamage = & on_damage;
 }
 
 function init() {}

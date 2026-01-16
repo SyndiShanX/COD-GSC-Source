@@ -69,7 +69,7 @@ play_minigun_loop() {
     ent = spawn(0, (0, 0, 0), "script_origin");
     ent playLoopSound("zmb_insta_kill_loop");
     level waittill("minie");
-    playSound(0, "zmb_insta_kill", (0, 0, 0));
+    PlaySound(0, "zmb_insta_kill", (0, 0, 0));
     ent stopLoopSound(.5);
     wait(.5);
     ent Delete();
@@ -93,7 +93,7 @@ alarm_b_timer() {
 play_alarm_a() {
   level endon("alarm_a_Off");
   while(1) {
-    playSound(0, "evt_alarm_a", self.origin);
+    playsound(0, "evt_alarm_a", self.origin);
     wait(1.1);
   }
 }
@@ -102,7 +102,7 @@ play_alarm_b() {
   alarm_bell = spawn(0, self.origin, "script.origin");
   alarm_bell playLoopSound("evt_alarm_b_loop", 0.8);
   wait(8.8);
-  playSound(0, "evt_alarm_b_end", self.origin);
+  playsound(0, "evt_alarm_b_end", self.origin);
   wait(0.1);
   alarm_bell stopLoopSound(0.6);
   wait(3);
@@ -119,7 +119,7 @@ alarm_b() {
 
 play_pa_vox() {
   wait(2);
-  playSound(0, "amb_vox_rus_PA", self.origin);
+  playsound(0, "amb_vox_rus_PA", self.origin);
 }
 
 samantha_is_angry_setup() {

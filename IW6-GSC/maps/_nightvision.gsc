@@ -4,9 +4,8 @@
 *****************************************************/
 
 main(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = level.players;
-  }
 
   thread init_and_run(var_0, var_1);
 }
@@ -52,9 +51,8 @@ nightvision_toggle() {
 }
 
 nightvision_check(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = level.player;
-  }
 
   return isDefined(var_0.nightvision_enabled);
 }
@@ -67,9 +65,8 @@ nightvision_on() {
   var_0 = getaiarray("allies");
   common_scripts\utility::array_thread(var_0, ::enable_ir_beacon);
 
-  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon)) {
+  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon))
     maps\_utility::add_global_spawn_function("allies", ::enable_ir_beacon);
-  }
 }
 
 enable_ir_beacon() {
@@ -107,9 +104,8 @@ nightvision_off() {
   wait 0.4;
   level notify("night_vision_off");
 
-  if(isDefined(level.nightvision_dlight)) {
+  if(isDefined(level.nightvision_dlight))
     level.nightvision_dlight delete();
-  }
 
   self notify("nightvision_shellshock_off");
   maps\_utility::ent_flag_clear("nightvision_on");
@@ -117,14 +113,12 @@ nightvision_off() {
   var_0 = 0;
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
-    if(nightvision_check(level.players[var_1])) {
+    if(nightvision_check(level.players[var_1]))
       var_0 = 1;
-    }
   }
 
-  if(!var_0) {
+  if(!var_0)
     maps\_utility::remove_global_spawn_function("allies", ::enable_ir_beacon);
-  }
 
   thread nightvision_effectsoff();
 }

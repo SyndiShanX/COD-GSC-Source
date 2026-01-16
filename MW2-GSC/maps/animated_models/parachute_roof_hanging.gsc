@@ -6,9 +6,8 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.anim_prop_models)) {
+  if(!isdefined(level.anim_prop_models))
     level.anim_prop_models = [];
-  }
 
   model = "parachute_roof_hanging_animated";
   level.anim_prop_models[model]["operate"] = "parachute_roof_hanging_anim";

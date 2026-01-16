@@ -95,10 +95,10 @@ jet_transistion_watcher() {
     player = getlocalplayers()[0];
     level waittill("snd_jet_start");
     level.sndvtolmode = 0;
-    player playSound(0, "veh_vtol_engage_c");
+    player playsound(0, "veh_vtol_engage_c");
     level waittill("snd_vtol_start");
     level.sndvtolmode = 1;
-    player playSound(0, "veh_vtol_disengage_c");
+    player playsound(0, "veh_vtol_disengage_c");
   }
 }
 
@@ -109,9 +109,9 @@ jet_boost_watcher() {
   while(true) {
     player = getlocalplayers()[0];
     level waittill("snd_boost_start");
-    player playSound(0, "veh_f35_boost");
-    boost_ent playLoopSound("veh_f35_boost_lp", 1);
-    boost_lfe playLoopSound("veh_f35_boost_lp_lfe", 1);
+    player playsound(0, "veh_f35_boost");
+    boost_ent playloopsound("veh_f35_boost_lp", 1);
+    boost_lfe playloopsound("veh_f35_boost_lp_lfe", 1);
     level waittill("snd_boost_end");
     boost_ent stoploopsound(0.5);
     boost_lfe stoploopsound(0.5);
@@ -131,7 +131,7 @@ radio_chatter() {
 
   while(true) {
     wait(randomintrange(5, 15));
-    self playSound(0, "blk_f35_radio_chatter");
+    self playsound(0, "blk_f35_radio_chatter");
   }
 }
 
@@ -176,17 +176,15 @@ cleanup_ground_emitters() {
   ground_battles = getstructarray("amb_fadeup_disaster_sirens", "targetname");
 
   if(isDefined(ground_battles)) {
-    for(i = 0; i < ground_battles.size; i++) {
+    for(i = 0; i < ground_battles.size; i++)
       soundstoploopemitter(ground_battles[i].script_sound, ground_battles[i].origin);
-    }
   }
 
   amb_ground_battle_loopers = getstructarray("amb_fadeup_battle", "targetname");
 
   if(isDefined(amb_ground_battle_loopers)) {
-    for(i = 0; i < amb_ground_battle_loopers.size; i++) {
+    for(i = 0; i < amb_ground_battle_loopers.size; i++)
       soundstoploopemitter(amb_ground_battle_loopers[i].script_sound, amb_ground_battle_loopers[i].origin);
-    }
   }
 }
 

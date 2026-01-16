@@ -23,11 +23,10 @@ shellshockOnDamage(cause, damage) {
     cause == "MOD_PROJECTILE" ||
     cause == "MOD_PROJECTILE_SPLASH") {
     if(damage > 10) {
-      if(isDefined(self.shellShockReduction) && self.shellShockReduction) {
+      if(isDefined(self.shellShockReduction) && self.shellShockReduction)
         self shellshock("frag_grenade_mp", self.shellShockReduction);
-      } else {
+      else
         self shellshock("frag_grenade_mp", 0.5);
-      }
     }
   }
 }
@@ -55,9 +54,8 @@ grenade_earthQuake() {
     if(DistanceSquared(position, player.origin) > 600 * 600) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }
@@ -118,9 +116,8 @@ bloodEffect(position) {
   if(fDot > 0 && fDot > 0.5) {} else if(abs(fDot) < 0.866) {
     fx = level._effect["hit_left"];
 
-    if(rDot > 0) {
+    if(rDot > 0)
       fx = level._effect["hit_right"];
-    }
 
     string_array = ["death", "damage"];
     self thread play_fx_with_entity(fx, string_array, 7.0);
@@ -162,9 +159,8 @@ c4_earthQuake() {
     if(distance(position, player.origin) > 512) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }
@@ -182,9 +178,8 @@ barrel_earthQuake() {
     if(distance(position, player.origin) > 512) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }
@@ -202,9 +197,8 @@ artillery_earthQuake() {
     if(distance(position, player.origin) > 600) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }
@@ -221,9 +215,8 @@ stealthAirstrike_earthQuake(position) {
     if(distance(position, player.origin) > 1000) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }
@@ -240,9 +233,8 @@ airstrike_earthQuake(position) {
     if(distance(position, player.origin) > 900) {
       continue;
     }
-    if(player DamageConeTrace(position)) {
+    if(player DamageConeTrace(position))
       player thread dirtEffect(position);
-    }
 
     player SetClientOmnvar("ui_hud_shake", true);
   }

@@ -13,6 +13,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\voice\voice;
+
 #namespace animation;
 
 autoexec __init__system__() {
@@ -47,7 +48,7 @@ last_frame(animation, v_origin_or_ent, v_angles_or_tag) {
 
 play_siege(str_anim, n_rate = 1) {
   self notify(#"stop_siege_anim");
-  self endon(#"death", # "scene_stop", # "stop_siege_anim");
+  self endon(#"death", #"scene_stop", #"stop_siege_anim");
   b_loop = function_35c3fa74(str_anim);
   self function_cf6be307(str_anim, "default", n_rate, b_loop);
 
@@ -65,7 +66,7 @@ play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2, 
     return;
   }
 
-  self endon(#"death", # "entering_last_stand");
+  self endon(#"death", #"entering_last_stand");
   self thread _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp, n_start_time, b_show_player_firstperson_weapon, b_unlink_after_completed, var_f4b34dc1, paused);
 
   if(n_rate > 0) {
@@ -107,7 +108,7 @@ debug_print(str_animation, str_msg) {
 
 _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp, n_start_time, b_show_player_firstperson_weapon, b_unlink_after_completed, var_f4b34dc1, paused) {
   self notify(#"new_scripted_anim");
-  self endoncallback(&function_2adc2518, # "death", # "entering_last_stand", # "new_scripted_anim");
+  self endoncallback(&function_2adc2518, #"death", #"entering_last_stand", #"new_scripted_anim");
 
   debug_print(animation, "<dev string:x4a>");
 
@@ -188,9 +189,9 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
 
   self.var_80c69db6 = "<dev string:xa7>";
   self.var_6c4bb19 = {
-    #animation: animation,
-    #v_origin_or_ent: v_origin_or_ent,
-    #v_angles_or_tag: v_angles_or_tag,
+    #animation: animation, 
+    #v_origin_or_ent: v_origin_or_ent, 
+    #v_angles_or_tag: v_angles_or_tag, 
     #var_f4b34dc1: var_f4b34dc1
   };
   level flagsys::clear("<dev string:xb0>");
@@ -238,7 +239,7 @@ function_2adc2518(str_notify) {
 }
 
 _blend_out(animation, n_blend, n_rate, n_start_time) {
-  self endon(#"death", # "end", # "scriptedanim", # "new_scripted_anim");
+  self endon(#"death", #"end", #"scriptedanim", #"new_scripted_anim");
   n_server_length = floor(getanimlength(animation) / float(function_60d95f53()) / 1000) * float(function_60d95f53()) / 1000;
 
   while(true) {
@@ -342,7 +343,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
       self.stopanimdistsq = 0.0001;
     }
 
-    if(isDefined(self.archetype) && self.archetype == # "robot") {
+    if(isDefined(self.archetype) && self.archetype == #"robot") {
       ai::set_behavior_attribute("rogue_control_force_goal", goal);
     } else if(ai::has_behavior_attribute("vignette_mode") && !(isDefined(self.ignorevignettemodeforanimreach) && self.ignorevignettemodeforanimreach)) {
       ai::set_behavior_attribute("vignette_mode", "fast");
@@ -352,7 +353,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
 
     self thread debug_anim_reach();
 
-    self waittill(#"goal", # "new_anim_reach", # "new_scripted_anim", # "stop_scripted_anim");
+    self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim");
 
     if(ai::has_behavior_attribute("disablearrivals")) {
       ai::set_behavior_attribute("disablearrivals", 0);
@@ -362,7 +363,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
     waittillframeend();
   }
 
-  if(!(isDefined(self.archetype) && self.archetype == # "robot") && ai::has_behavior_attribute("vignette_mode")) {
+  if(!(isDefined(self.archetype) && self.archetype == #"robot") && ai::has_behavior_attribute("vignette_mode")) {
     ai::set_behavior_attribute("vignette_mode", "off");
   }
 
@@ -372,7 +373,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
 }
 
 debug_anim_reach() {
-  self endon(#"death", # "goal", # "new_anim_reach", # "new_scripted_anim", # "stop_scripted_anim");
+  self endon(#"death", #"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim");
 
   while(true) {
     level flagsys::wait_till("<dev string:xb0>");
@@ -477,7 +478,7 @@ setup_notetracks() {
 }
 
 handle_notetracks(animation) {
-  self endon(#"death", # "new_scripted_anim");
+  self endon(#"death", #"new_scripted_anim");
 
   while(true) {
     waitresult = self waittill(animation);
@@ -496,16 +497,16 @@ handle_notetracks(animation) {
 
 cracks_on(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       clientfield::set("cracks_on", 1);
       break;
-    case # "green":
+    case #"green":
       clientfield::set("cracks_on", 3);
       break;
-    case # "blue":
+    case #"blue":
       clientfield::set("cracks_on", 2);
       break;
-    case # "all":
+    case #"all":
       clientfield::set("cracks_on", 4);
       break;
   }
@@ -513,16 +514,16 @@ cracks_on(str_type) {
 
 cracks_off(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       clientfield::set("cracks_off", 1);
       break;
-    case # "green":
+    case #"green":
       clientfield::set("cracks_off", 3);
       break;
-    case # "blue":
+    case #"blue":
       clientfield::set("cracks_off", 2);
       break;
-    case # "all":
+    case #"all":
       clientfield::set("cracks_off", 4);
       break;
   }

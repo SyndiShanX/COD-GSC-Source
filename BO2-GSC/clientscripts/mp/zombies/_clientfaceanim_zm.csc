@@ -22,9 +22,8 @@ actor_flag_change_handler(localclientnum, flag, set, newent) {
 init_clientfaceanim() {
   level._client_flag_callbacks["actor"] = clientscripts\mp\zombies\_clientfaceanim_zm::actor_flag_change_handler;
 
-  if(level.isdemoplaying || sessionmodeiszombiesgame()) {
+  if(level.isdemoplaying || sessionmodeiszombiesgame())
     level._faceanimcbfunc = clientscripts\mp\zombies\_clientfaceanim_zm::doface;
-  }
 
   buildface_player();
 }
@@ -36,9 +35,8 @@ doface(localclientnum) {
         self thread processfaceevents(localclientnum);
         self waittill("respawn");
 
-        while(!isDefined(self)) {
+        while(!isDefined(self))
           wait 0.05;
-        }
 
         self.face_death = 0;
         self.face_disable = 0;
@@ -52,7 +50,9 @@ doface(localclientnum) {
 
 buildface_player() {
   if(isDefined(level.face_override_func)) {
-    [[level.face_override_func]]();
+    [
+      [level.face_override_func]
+    ]();
     return;
   }
 

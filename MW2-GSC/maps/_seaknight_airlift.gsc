@@ -30,6 +30,7 @@ main(model, type) {
   build_light(model, "wingtip_red2", "tag_light_R_wing2", "misc/aircraft_light_wingtip_red", "running", 0.0);
 
   build_compassicon("helicopter", false);
+
 }
 
 init_local() {
@@ -54,11 +55,18 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 0; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 0; i++)
+    positions[i] = spawnstruct();
   //copy from _blackhawk when anims are rigged.
   return positions;
+
 }
 
-set_attached_models() {}
+
+unload_groups() {
+
+}
+
+set_attached_models() {
+
+}

@@ -25,44 +25,44 @@
 #namespace zm_powerup_demonic_rune;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_demonic_rune", &__init__, undefined, undefined);
+  system::register("zm_powerup_demonic_rune", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("scriptmover", "demonic_rune_fx", 5000, 1, "int");
-  zm_powerups::register_powerup("demonic_rune_lor", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_lor", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_lor", "p7_zm_ctl_demon_gate_power_up_icons_lor", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_lor", "p7_zm_ctl_demon_gate_power_up_icons_lor", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_lor");
     zm_powerups::powerup_set_player_specific("demonic_rune_lor", 1);
   }
-  zm_powerups::register_powerup("demonic_rune_ulla", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_ulla", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_ulla", "p7_zm_ctl_demon_gate_power_up_icons_door", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_ulla", "p7_zm_ctl_demon_gate_power_up_icons_door", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_ulla");
     zm_powerups::powerup_set_player_specific("demonic_rune_ulla", 1);
   }
-  zm_powerups::register_powerup("demonic_rune_oth", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_oth", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_oth", "p7_zm_ctl_demon_gate_power_up_icons_oth", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_oth", "p7_zm_ctl_demon_gate_power_up_icons_oth", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_oth");
     zm_powerups::powerup_set_player_specific("demonic_rune_oth", 1);
   }
-  zm_powerups::register_powerup("demonic_rune_zor", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_zor", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_zor", "p7_zm_ctl_demon_gate_power_up_icons_zor", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_zor", "p7_zm_ctl_demon_gate_power_up_icons_zor", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_zor");
     zm_powerups::powerup_set_player_specific("demonic_rune_zor", 1);
   }
-  zm_powerups::register_powerup("demonic_rune_mar", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_mar", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_mar", "p7_zm_ctl_demon_gate_power_up_icons_stag", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_mar", "p7_zm_ctl_demon_gate_power_up_icons_stag", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_mar");
     zm_powerups::powerup_set_player_specific("demonic_rune_mar", 1);
   }
-  zm_powerups::register_powerup("demonic_rune_uja", &function_b11a0932);
+  zm_powerups::register_powerup("demonic_rune_uja", & function_b11a0932);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("demonic_rune_uja", "p7_zm_ctl_demon_gate_power_up_icons_uja", &"", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("demonic_rune_uja", "p7_zm_ctl_demon_gate_power_up_icons_uja", & "", & zm_powerups::func_should_never_drop, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("demonic_rune_uja");
     zm_powerups::powerup_set_player_specific("demonic_rune_uja", 1);
   }
@@ -82,15 +82,17 @@ function function_5b767c2() {
   self endon("powerup_reset");
   self zm_powerups::powerup_show(1);
   wait_time = 1;
-  if(isDefined(level._powerup_timeout_custom_time)) {
-    time = [[level._powerup_timeout_custom_time]](self);
+  if(isdefined(level._powerup_timeout_custom_time)) {
+    time = [
+      [level._powerup_timeout_custom_time]
+    ](self);
     if(time == 0) {
       return;
     }
     wait_time = time;
   }
   wait(wait_time);
-  for(i = 20; i > 0; i--) {
+  for (i = 20; i > 0; i--) {
     if(i % 2) {
       self zm_powerups::powerup_show(0);
     } else {
@@ -119,7 +121,7 @@ function function_5b767c2() {
 function function_15732f56() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback(&function_a4207c70);
+  zm_devgui::add_custom_devgui_callback( & function_a4207c70);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -129,7 +131,7 @@ function function_15732f56() {
 }
 
 function detect_reentry() {
-  if(isDefined(self.var_1688944a)) {
+  if(isdefined(self.var_1688944a)) {
     if(self.var_1688944a == gettime()) {
       return true;
     }
@@ -139,7 +141,7 @@ function detect_reentry() {
 }
 
 function function_a4207c70(cmd) {
-  if(!isDefined(level.var_6e68c0d8) || !level flag::get("") || level flag::get("")) {
+  if(!isdefined(level.var_6e68c0d8) || !level flag::get("") || level flag::get("")) {
     return;
   }
   retval = 0;

@@ -37,36 +37,36 @@ function main() {
   level flag::init("flag_init_challenge_pillars");
   level thread init_challenge_pillars();
   if(getdvarint("splitscreen_playerCount") > 2) {
-    array::run_all(getEntArray("t_lookat_challenge_1", "targetname"), &delete);
-    array::run_all(getEntArray("t_lookat_challenge_2", "targetname"), &delete);
-    array::run_all(getEntArray("t_lookat_challenge_3", "targetname"), &delete);
-    array::thread_all(struct::get_array("s_challenge_trigger"), &struct::delete);
+    array::run_all(getentarray("t_lookat_challenge_1", "targetname"), & delete);
+    array::run_all(getentarray("t_lookat_challenge_2", "targetname"), & delete);
+    array::run_all(getentarray("t_lookat_challenge_3", "targetname"), & delete);
+    array::thread_all(struct::get_array("s_challenge_trigger"), & struct::delete);
     struct::get("s_challenge_altar") struct::delete();
   } else {
-    level._challenges = spawnStruct();
+    level._challenges = spawnstruct();
     level._challenges.challenge_1 = [];
     level._challenges.challenge_2 = [];
     level._challenges.challenge_3 = [];
-    array::add(level._challenges.challenge_1, init_challenges(1, &"ZM_ISLAND_CHALLENGE_1_1", 1, "update_challenge_1_1", undefined));
-    array::add(level._challenges.challenge_1, init_challenges(1, &"ZM_ISLAND_CHALLENGE_1_2", 1, "update_challenge_1_2", undefined));
-    array::add(level._challenges.challenge_1, init_challenges(1, &"ZM_ISLAND_CHALLENGE_1_3", 5, "update_challenge_1_3", undefined));
-    array::add(level._challenges.challenge_1, init_challenges(1, &"ZM_ISLAND_CHALLENGE_1_4", 5, "update_challenge_1_4", undefined));
-    array::add(level._challenges.challenge_1, init_challenges(1, &"ZM_ISLAND_CHALLENGE_1_5", 5, "update_challenge_1_5", &function_2dbc7cd3));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_1", 1, "update_challenge_2_1", undefined));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_2", 1, "update_challenge_2_2", &function_25c1bab7));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_3", 15, "update_challenge_2_3", undefined));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_4", 10, "update_challenge_2_4", undefined));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_5", 20, "update_challenge_2_5", undefined));
-    array::add(level._challenges.challenge_2, init_challenges(2, &"ZM_ISLAND_CHALLENGE_2_6", 20, "update_challenge_2_6", undefined));
-    array::add(level._challenges.challenge_3, init_challenges(3, &"ZM_ISLAND_CHALLENGE_3_1", 8, "update_challenge_3_1", undefined));
-    array::add(level._challenges.challenge_3, init_challenges(3, &"ZM_ISLAND_CHALLENGE_3_2", 3, "update_challenge_3_2", undefined));
-    array::add(level._challenges.challenge_3, init_challenges(3, &"ZM_ISLAND_CHALLENGE_3_3", 1, "update_challenge_3_3", &function_5a96677a));
-    array::add(level._challenges.challenge_3, init_challenges(3, &"ZM_ISLAND_CHALLENGE_3_4", 30, "update_challenge_3_4", undefined));
-    array::add(level._challenges.challenge_3, init_challenges(3, &"ZM_ISLAND_CHALLENGE_3_5", 5, "update_challenge_3_5", &function_26c58398));
-    zm_spawner::register_zombie_death_event_callback(&function_905d9544);
-    zm_spawner::register_zombie_death_event_callback(&function_682e6fc4);
-    zm_spawner::register_zombie_death_event_callback(&function_5a2a9ef9);
-    zm_spawner::register_zombie_death_event_callback(&function_fe94c179);
+    array::add(level._challenges.challenge_1, init_challenges(1, & "ZM_ISLAND_CHALLENGE_1_1", 1, "update_challenge_1_1", undefined));
+    array::add(level._challenges.challenge_1, init_challenges(1, & "ZM_ISLAND_CHALLENGE_1_2", 1, "update_challenge_1_2", undefined));
+    array::add(level._challenges.challenge_1, init_challenges(1, & "ZM_ISLAND_CHALLENGE_1_3", 5, "update_challenge_1_3", undefined));
+    array::add(level._challenges.challenge_1, init_challenges(1, & "ZM_ISLAND_CHALLENGE_1_4", 5, "update_challenge_1_4", undefined));
+    array::add(level._challenges.challenge_1, init_challenges(1, & "ZM_ISLAND_CHALLENGE_1_5", 5, "update_challenge_1_5", & function_2dbc7cd3));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_1", 1, "update_challenge_2_1", undefined));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_2", 1, "update_challenge_2_2", & function_25c1bab7));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_3", 15, "update_challenge_2_3", undefined));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_4", 10, "update_challenge_2_4", undefined));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_5", 20, "update_challenge_2_5", undefined));
+    array::add(level._challenges.challenge_2, init_challenges(2, & "ZM_ISLAND_CHALLENGE_2_6", 20, "update_challenge_2_6", undefined));
+    array::add(level._challenges.challenge_3, init_challenges(3, & "ZM_ISLAND_CHALLENGE_3_1", 8, "update_challenge_3_1", undefined));
+    array::add(level._challenges.challenge_3, init_challenges(3, & "ZM_ISLAND_CHALLENGE_3_2", 3, "update_challenge_3_2", undefined));
+    array::add(level._challenges.challenge_3, init_challenges(3, & "ZM_ISLAND_CHALLENGE_3_3", 1, "update_challenge_3_3", & function_5a96677a));
+    array::add(level._challenges.challenge_3, init_challenges(3, & "ZM_ISLAND_CHALLENGE_3_4", 30, "update_challenge_3_4", undefined));
+    array::add(level._challenges.challenge_3, init_challenges(3, & "ZM_ISLAND_CHALLENGE_3_5", 5, "update_challenge_3_5", & function_26c58398));
+    zm_spawner::register_zombie_death_event_callback( & function_905d9544);
+    zm_spawner::register_zombie_death_event_callback( & function_682e6fc4);
+    zm_spawner::register_zombie_death_event_callback( & function_5a2a9ef9);
+    zm_spawner::register_zombie_death_event_callback( & function_fe94c179);
     level thread all_challenges_completed();
     level flag::set("flag_init_player_challenges");
     function_b9b4ce34();
@@ -74,7 +74,7 @@ function main() {
 }
 
 function init_challenges(n_challenge_index, str_challenge_info, var_80792f67, str_challenge_notify, var_d675d6d8) {
-  s_challenge = spawnStruct();
+  s_challenge = spawnstruct();
   s_challenge.n_index = n_challenge_index;
   s_challenge.str_info = str_challenge_info;
   s_challenge.n_count = var_80792f67;
@@ -89,7 +89,7 @@ function on_player_connect() {
   self.var_8575e180 = 0;
   self.var_26f3bd30 = 0;
   self.var_301c71e9 = 0;
-  self._challenges = spawnStruct();
+  self._challenges = spawnstruct();
   self._challenges.challenge_1 = [];
   self._challenges.challenge_2 = [];
   self._challenges.challenge_3 = [];
@@ -104,7 +104,7 @@ function on_player_connect() {
 
 function init_challenge_pillars() {
   level flag::wait_till("start_zombie_round_logic");
-  for(i = 1; i < 4; i++) {
+  for (i = 1; i < 4; i++) {
     level clientfield::set("pillar_challenge_0_" + i, 1);
     level clientfield::set("pillar_challenge_1_" + i, 1);
     level clientfield::set("pillar_challenge_2_" + i, 1);
@@ -117,7 +117,7 @@ function init_challenge_pillars() {
 function on_player_disconnect() {
   level flag::wait_till("flag_init_player_challenges");
   var_a879fa43 = self getentitynumber();
-  for(i = 1; i < 4; i++) {
+  for (i = 1; i < 4; i++) {
     level clientfield::set((("pillar_challenge_" + var_a879fa43) + "_") + i, 1);
   }
   array::add(level._challenges.challenge_1, self._challenges.challenge_1);
@@ -142,8 +142,8 @@ function function_b7156b15(var_a879fa43) {
   self thread function_974d5f1d();
   var_8e2d9e6f = [];
   var_e01fcddc = [];
-  for(i = 1; i < 4; i++) {
-    foreach(t_lookat in getEntArray("t_lookat_challenge_" + i, "targetname")) {
+  for (i = 1; i < 4; i++) {
+    foreach(t_lookat in getentarray("t_lookat_challenge_" + i, "targetname")) {
       if(t_lookat.script_special == var_a879fa43) {
         var_e01fcddc[i] = t_lookat;
       }
@@ -160,7 +160,7 @@ function function_b7156b15(var_a879fa43) {
 }
 
 function function_72a5d5e5(var_a879fa43, var_8e2d9e6f, var_e01fcddc) {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
   unitrigger_stub.angles = self.angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -172,8 +172,8 @@ function function_72a5d5e5(var_a879fa43, var_8e2d9e6f, var_e01fcddc) {
   unitrigger_stub.var_8e2d9e6f = var_8e2d9e6f;
   unitrigger_stub.var_e01fcddc = var_e01fcddc;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = &function_3ae0d6d5;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_a00e23d0);
+  unitrigger_stub.prompt_and_visibility_func = & function_3ae0d6d5;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_a00e23d0);
 }
 
 function function_fbbc8608(n_challenge_index, var_d4adfa57) {
@@ -189,7 +189,7 @@ function function_fbbc8608(n_challenge_index, var_d4adfa57) {
       var_d6b47fd3 = self._challenges.challenge_3.str_info;
     }
   }
-  self luinotifyevent(&"trial_complete", 2, &"ZM_ISLAND_TRIAL_COMPLETE", var_d6b47fd3);
+  self luinotifyevent(&"trial_complete", 2, & "ZM_ISLAND_TRIAL_COMPLETE", var_d6b47fd3);
 }
 
 function function_e8547a5b(var_cc0f18cc) {
@@ -214,12 +214,12 @@ function function_27f6c3cd(player, n_challenge_index) {
 function function_23c9ffd3(player) {
   self notify("hash_23c9ffd3");
   self endon("hash_23c9ffd3");
-  while(true) {
+  while (true) {
     wait(0.5);
-    if(!isDefined(player)) {
+    if(!isdefined(player)) {
       break;
     }
-    if(!isDefined(self) || distance(player.origin, self.stub.origin) > 500) {
+    if(!isdefined(self) || distance(player.origin, self.stub.origin) > 500) {
       player clientfield::set_player_uimodel("trialWidget.visible", 0);
       break;
     }
@@ -229,7 +229,7 @@ function function_23c9ffd3(player) {
 function function_3ae0d6d5(player) {
   if(player getentitynumber() == self.stub.var_a879fa43) {
     var_a51a0ba6 = 0;
-    for(i = 1; i < 4; i++) {
+    for (i = 1; i < 4; i++) {
       if(player function_3f67a723(self.stub.var_e01fcddc[i].origin, 20, 0) && distance(player.origin, self.stub.origin) < 500) {
         self function_27f6c3cd(player, i);
         player clientfield::set_player_uimodel("trialWidget.visible", 1);
@@ -241,13 +241,13 @@ function function_3ae0d6d5(player) {
           return true;
         }
         if(!player flag::get("flag_player_collected_reward_" + self.stub.var_8e2d9e6f[i]) && !level flag::get("flag_player_initialized_reward")) {
-          self sethintstringforplayer(player, &"ZM_ISLAND_CHALLENGE_REWARD");
+          self sethintstringforplayer(player, & "ZM_ISLAND_CHALLENGE_REWARD");
           var_a51a0ba6 = 1;
           self thread function_23c9ffd3(player);
           return true;
         }
         if(!player flag::get("flag_player_collected_reward_" + self.stub.var_8e2d9e6f[i]) && level flag::get("flag_player_initialized_reward")) {
-          self sethintstringforplayer(player, &"ZM_ISLAND_CHALLENGE_ALTAR_IN_USE");
+          self sethintstringforplayer(player, & "ZM_ISLAND_CHALLENGE_ALTAR_IN_USE");
           var_a51a0ba6 = 1;
           self thread function_23c9ffd3(player);
           return true;
@@ -281,10 +281,10 @@ function function_3f67a723(origin, arc_angle_degrees = 90, do_trace, e_ignore) {
 
 function function_a00e23d0() {
   self endon("kill_trigger");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(e_who getentitynumber() == self.stub.var_a879fa43) {
-      for(i = 1; i < 4; i++) {
+      for (i = 1; i < 4; i++) {
         if(e_who function_3f67a723(self.stub.var_e01fcddc[i].origin, 20, 0) && distance(e_who.origin, self.stub.origin) < 500) {
           if(e_who flag::get("flag_player_completed_challenge_" + self.stub.var_8e2d9e6f[i]) && !e_who flag::get("flag_player_collected_reward_" + self.stub.var_8e2d9e6f[i]) && !level flag::get("flag_player_initialized_reward")) {
             e_who thread function_8675d6ed(self.stub.var_8e2d9e6f[i]);
@@ -375,11 +375,11 @@ function function_8675d6ed(n_challenge) {
     self playsoundtoplayer("zmb_trial_unlock_reward", self);
     var_30ff0d6c.trigger notify("reward_grabbed");
     self player_give_reward(n_challenge, s_altar, var_c9d33fc4);
-    if(isDefined(var_30ff0d6c.trigger)) {
+    if(isdefined(var_30ff0d6c.trigger)) {
       zm_unitrigger::unregister_unitrigger(var_30ff0d6c.trigger);
       var_30ff0d6c.trigger = undefined;
     }
-    if(isDefined(var_30ff0d6c)) {
+    if(isdefined(var_30ff0d6c)) {
       var_30ff0d6c delete();
     }
   }
@@ -397,11 +397,11 @@ function timer_til_despawn(player, n_challenge, v_float, n_dist) {
   self waittill("movedone");
   self notify("hash_59e0fa55");
   level flag::clear("flag_player_initialized_reward");
-  if(isDefined(self.trigger)) {
+  if(isdefined(self.trigger)) {
     zm_unitrigger::unregister_unitrigger(self.trigger);
     self.trigger = undefined;
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
@@ -438,7 +438,7 @@ function player_give_reward(n_challenge, s_altar, var_c9d33fc4) {
 }
 
 function function_be89930d(var_a879fa43, n_challenge) {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
   unitrigger_stub.angles = self.angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -448,8 +448,8 @@ function function_be89930d(var_a879fa43, n_challenge) {
   unitrigger_stub.var_a879fa43 = var_a879fa43;
   unitrigger_stub.n_challenge = n_challenge;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = &function_6d42affc;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_1e314338);
+  unitrigger_stub.prompt_and_visibility_func = & function_6d42affc;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_1e314338);
   return unitrigger_stub;
 }
 
@@ -460,7 +460,7 @@ function function_6d42affc(player) {
     return false;
   }
   if(player getentitynumber() == self.stub.var_a879fa43) {
-    self sethintstringforplayer(player, &"ZM_ISLAND_CHALLENGE_REWARD");
+    self sethintstringforplayer(player, & "ZM_ISLAND_CHALLENGE_REWARD");
     return true;
   }
   self sethintstringforplayer(player, "");
@@ -469,7 +469,7 @@ function function_6d42affc(player) {
 
 function function_1e314338() {
   self endon("kill_trigger");
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     w_current = player getcurrentweapon();
     if(zm_utility::is_placeable_mine(w_current) || zm_equipment::is_equipment(w_current) || w_current == level.weaponnone || w_current.isheroweapon == 1 && self.stub.n_challenge == 2) {
@@ -486,14 +486,14 @@ function function_d655a4ce(var_a6a1ecf9) {
   self endon("hash_994b4784");
   level.var_2371bbc = self;
   var_a6a1ecf9 setignorepauseworld(1);
-  var_a6a1ecf9 playSound("zmb_challenge_altar_open");
+  var_a6a1ecf9 playsound("zmb_challenge_altar_open");
   var_a6a1ecf9 scene::play("p7_fxanim_zm_island_altar_skull_lid_rise_bundle", var_a6a1ecf9);
   var_a6a1ecf9 thread scene::play("p7_fxanim_zm_island_altar_skull_lid_idle_bundle", var_a6a1ecf9);
 }
 
 function function_994b4784(var_a6a1ecf9) {
   self waittill("hash_994b4784");
-  var_a6a1ecf9 playSound("zmb_challenge_altar_close");
+  var_a6a1ecf9 playsound("zmb_challenge_altar_close");
   var_a6a1ecf9 scene::play("p7_fxanim_zm_island_altar_skull_lid_fall_bundle", var_a6a1ecf9);
   level.var_2371bbc = undefined;
 }
@@ -512,28 +512,28 @@ function function_6168d051(var_30ff0d6c) {
 
 function function_2dbc7cd3() {
   self endon("disconnect");
-  while(!self flag::get("flag_player_completed_challenge_1")) {
+  while (!self flag::get("flag_player_completed_challenge_1")) {
     self waittill("hash_7ae66b0a");
     self notify("update_challenge_1_5");
   }
 }
 
 function function_fe94c179(e_attacker) {
-  if(isplayer(e_attacker) && (isDefined(self.var_61f7b3a0) && self.var_61f7b3a0) && (!(isDefined(self.thrasherhasturnedberserk) && self.thrasherhasturnedberserk))) {
+  if(isplayer(e_attacker) && (isdefined(self.var_61f7b3a0) && self.var_61f7b3a0) && (!(isdefined(self.thrasherhasturnedberserk) && self.thrasherhasturnedberserk))) {
     e_attacker notify("update_challenge_2_1");
   }
 }
 
 function function_25c1bab7() {
   self endon("disconnect");
-  while(!self flag::get("flag_player_completed_challenge_2")) {
+  while (!self flag::get("flag_player_completed_challenge_2")) {
     self waittill("hash_61bbe625");
     self notify("update_challenge_2_2");
   }
 }
 
 function function_5a2a9ef9(e_attacker) {
-  if(isplayer(e_attacker) && self.archetype === "zombie" && isDefined(self.attackable)) {
+  if(isplayer(e_attacker) && self.archetype === "zombie" && isdefined(self.attackable)) {
     if(self.attackable.scriptbundlename == "zm_island_trap_plant_attackable" || self.attackable.scriptbundlename == "zm_island_trap_plant_upgraded_attackable") {
       e_attacker notify("update_challenge_2_3");
     }
@@ -541,14 +541,14 @@ function function_5a2a9ef9(e_attacker) {
 }
 
 function function_682e6fc4(e_attacker) {
-  if(isplayer(e_attacker) && self.archetype === "zombie" && (isDefined(self.var_34d00e7) && self.var_34d00e7)) {
+  if(isplayer(e_attacker) && self.archetype === "zombie" && (isdefined(self.var_34d00e7) && self.var_34d00e7)) {
     e_attacker notify("update_challenge_3_2");
   }
 }
 
 function function_5a96677a() {
   self endon("disconnect");
-  while(!self flag::get("flag_player_completed_challenge_3")) {
+  while (!self flag::get("flag_player_completed_challenge_3")) {
     self waittill("hash_3e1e1a8");
     self notify("update_challenge_3_3");
   }
@@ -556,8 +556,8 @@ function function_5a96677a() {
 
 function function_905d9544(e_attacker) {
   if(isplayer(e_attacker)) {
-    if(!e_attacker flag::get("flag_player_completed_challenge_2") && self.archetype === "zombie" && (isDefined(self.var_d07c64b6) && self.var_d07c64b6)) {
-      if(isDefined(self.damagelocation) && self.damagelocation == "head" || self.damagelocation == "helmet") {
+    if(!e_attacker flag::get("flag_player_completed_challenge_2") && self.archetype === "zombie" && (isdefined(self.var_d07c64b6) && self.var_d07c64b6)) {
+      if(isdefined(self.damagelocation) && self.damagelocation == "head" || self.damagelocation == "helmet") {
         e_attacker notify("update_challenge_2_4");
       }
     }
@@ -569,7 +569,7 @@ function function_905d9544(e_attacker) {
 
 function function_26c58398() {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("destroyed_thrasher_head");
     self notify("update_challenge_3_5");
   }
@@ -578,15 +578,15 @@ function function_26c58398() {
 function function_2ce855f3(n_challenge_index, var_d675d6d8, var_80792f67, str_challenge_notify) {
   self endon("disconnect");
   self endon("hash_1e547c60");
-  if(isDefined(var_d675d6d8)) {
+  if(isdefined(var_d675d6d8)) {
     self thread[[var_d675d6d8]]();
   }
-  if(!isDefined(self.var_873a3e27)) {
+  if(!isdefined(self.var_873a3e27)) {
     self.var_873a3e27 = [];
   }
   self.var_873a3e27[n_challenge_index] = 0;
   var_ea184c3d = var_80792f67;
-  while(var_80792f67 > 0) {
+  while (var_80792f67 > 0) {
     self waittill(str_challenge_notify);
     var_80792f67--;
     self.var_873a3e27[n_challenge_index] = 1 - (var_80792f67 / var_ea184c3d);
@@ -603,8 +603,8 @@ function function_974d5f1d() {
 
 function all_challenges_completed() {
   level.var_c28313cd = 0;
-  callback::on_disconnect(&function_b1cd865a);
-  while(true) {
+  callback::on_disconnect( & function_b1cd865a);
+  while (true) {
     level waittill("hash_41370469");
     level.var_c28313cd++;
     if(level.var_c28313cd >= level.players.size) {
@@ -628,7 +628,7 @@ function function_397b26ee() {
   array::add(var_45a970ad, "fxexp_822");
   array::add(var_45a970ad, "fxexp_823");
   wait(1.5);
-  while(var_45a970ad.size > 0) {
+  while (var_45a970ad.size > 0) {
     var_c490d0cd = array::random(var_45a970ad);
     exploder::exploder(var_c490d0cd);
     arrayremovevalue(var_45a970ad, var_c490d0cd);
@@ -643,7 +643,7 @@ function function_397b26ee() {
 }
 
 function function_b9b4ce34() {
-  zm_devgui::add_custom_devgui_callback(&challenges_devgui_callback);
+  zm_devgui::add_custom_devgui_callback( & challenges_devgui_callback);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

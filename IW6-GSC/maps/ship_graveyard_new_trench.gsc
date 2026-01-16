@@ -245,13 +245,11 @@ wait_for_x_input() {
   level.player endon("death");
   level endon("drown_rebreather_plugin");
 
-  while(use_pressed()) {
+  while(use_pressed())
     wait 0.05;
-  }
 
-  while(!use_pressed()) {
+  while(!use_pressed())
     wait 0.05;
-  }
 
   level notify("player_hit_x");
   thread fade_in_to_alpha(0.1, level.drown_max_alpha);
@@ -274,13 +272,11 @@ fade_in_x_hint(var_0) {
   if(maps\ship_graveyard_util::greenlight_check()) {
     return;
   }
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1.5;
-  }
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   foreach(var_2 in level.x_hint) {
     var_2 fadeovertime(var_0);
@@ -310,9 +306,8 @@ x_hint_blinks() {
   level notify("fade_out_x_hint");
   level endon("fade_out_x_hint");
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   var_0 = 0.6;
   var_1 = 0.2;
@@ -331,22 +326,20 @@ x_hint_blinks() {
     var_5.alpha = 0.95;
     var_5 changefontscaleovertime(0.01);
 
-    if(!level.console && !level.player usinggamepad()) {
+    if(!level.console && !level.player usinggamepad())
       var_5.fontscale = 2;
-    } else {
+    else
       var_5.fontscale = 2 * var_6;
-    }
 
     wait 0.18;
     var_5 fadeovertime(var_0);
     var_5.alpha = 0.0;
     var_5 changefontscaleovertime(var_0);
 
-    if(!level.console && !level.player usinggamepad()) {
+    if(!level.console && !level.player usinggamepad())
       var_5.fontscale = 0.25;
-    } else {
+    else
       var_5.fontscale = 0.25 * var_6;
-    }
 
     wait(var_1);
     var_7 = 4;
@@ -356,9 +349,8 @@ x_hint_blinks() {
         break;
       }
 
-      foreach(var_3 in level.x_hint) {
-        var_3.alpha = 0;
-      }
+      foreach(var_3 in level.x_hint)
+      var_3.alpha = 0;
 
       var_0 = 0.3;
       var_1 = 0.1;
@@ -370,13 +362,11 @@ x_hint_blinks() {
 fade_out_x_hint(var_0) {
   level notify("fade_out_x_hint");
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1.5;
-  }
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   foreach(var_2 in level.x_hint) {
     var_2 fadeovertime(var_0);
@@ -463,13 +453,11 @@ lcs_back_damage() {
   self waittill("stop_damage");
   var_0 = common_scripts\utility::get_target_ent("lcs_back_crash_vol");
 
-  if(var_0 != self) {
+  if(var_0 != self)
     var_0 notify("stop_damage");
-  }
 
-  if(level.player istouching(self)) {
+  if(level.player istouching(self))
     player_smash_death();
-  }
 }
 
 rebreather_plug_in() {
@@ -558,9 +546,8 @@ unlink_player(var_0, var_1, var_2, var_3) {
 unlink_on_stick() {
   level endon("drown_unlink_player");
 
-  while(distance(level.player getnormalizedmovement(), (0, 0, 0)) < 0.3) {
+  while(distance(level.player getnormalizedmovement(), (0, 0, 0)) < 0.3)
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("drown_player_triggered_unlink");
 }
@@ -671,9 +658,8 @@ trench_sprint_hint() {
   wait 0.75;
   var_0 = getdvarint("shpg_trench_times_died", 0);
 
-  if(var_0 > 1 || level.gameskill == 0) {
+  if(var_0 > 1 || level.gameskill == 0)
     thread maps\_utility::display_hint("hint_sprint");
-  }
 }
 
 trench_run_dialogue() {
@@ -804,9 +790,8 @@ crash_model_go(var_0) {
   var_6 = 0;
   var_7 = [];
 
-  if(isDefined(var_1.script_soundalias)) {
+  if(isDefined(var_1.script_soundalias))
     var_1 thread maps\_utility::play_sound_on_entity(var_1.script_soundalias);
-  }
 
   var_8 = undefined;
   var_9 = undefined;
@@ -835,51 +820,42 @@ crash_model_go(var_0) {
     var_10 = 1;
   }
 
-  if(var_10) {
+  if(var_10)
     playFXOnTag(common_scripts\utility::getfx(var_8), var_1.fxorg, var_9);
-  }
 
   while(isDefined(var_5)) {
-    if(isDefined(var_5.speed)) {
+    if(isDefined(var_5.speed))
       var_2 = var_5.speed;
-    }
 
-    if(isDefined(var_5.script_accel)) {
+    if(isDefined(var_5.script_accel))
       var_3 = var_5.script_accel;
-    }
 
-    if(isDefined(var_5.script_decel)) {
+    if(isDefined(var_5.script_decel))
       var_4 = var_5.script_decel;
-    }
 
     if(isDefined(var_5.script_fxid)) {
-      if(var_5.script_fxid == "boat_fall_impact_wreck") {
+      if(var_5.script_fxid == "boat_fall_impact_wreck")
         var_5 thread play_boat_crash_fx_early(var_7, var_1);
-      }
     }
 
     var_1 maps\ship_graveyard_util::moveto_rotateto_speed(var_5, var_2, var_3, var_4);
     var_13 = distance(level.player.origin, var_1.origin);
 
-    if(isDefined(var_5.script_flag_set)) {
+    if(isDefined(var_5.script_flag_set))
       common_scripts\utility::flag_set(var_5.script_flag_set);
-    }
 
-    if(isDefined(var_5.script_earthquake)) {
+    if(isDefined(var_5.script_earthquake))
       thread common_scripts\utility::do_earthquake(var_5.script_earthquake, var_1.origin);
-    }
 
-    if(isDefined(var_5.script_soundalias)) {
+    if(isDefined(var_5.script_soundalias))
       var_1 thread maps\_utility::play_sound_on_entity(var_5.script_soundalias);
-    }
 
     if(isDefined(var_5.script_fxid)) {
       if(var_5.script_fxid != "boat_fall_impact_wreck") {
         var_14 = -1 * anglestoup(var_1.angles);
 
-        if(vectordot((0, 0, -1), var_14) < 0.2) {
+        if(vectordot((0, 0, -1), var_14) < 0.2)
           var_14 = (0, 0, -1);
-        }
 
         var_15 = bulletTrace(var_1.origin, var_1.origin + var_14 * 500, 0, var_1);
         var_16 = common_scripts\utility::spawn_tag_origin();
@@ -896,13 +872,12 @@ crash_model_go(var_0) {
         var_6 = 1;
         var_14 = -1 * anglestoup(var_1.angles);
 
-        if(vectordot((0, 0, -1), var_14) < 0.2) {
+        if(vectordot((0, 0, -1), var_14) < 0.2)
           var_14 = (0, 0, -1);
-        }
 
-        if(isDefined(var_1.fxorg) && var_1.fxorg != var_1) {
+        if(isDefined(var_1.fxorg) && var_1.fxorg != var_1)
           var_1.sliding_fx_org = var_1.fxorg;
-        } else {
+        else {
           var_1.sliding_fx_org = common_scripts\utility::spawn_tag_origin();
           var_1.sliding_fx_org.origin = var_1.origin;
           var_1.sliding_fx_org.angles = var_1.angles;
@@ -910,18 +885,16 @@ crash_model_go(var_0) {
           var_7[var_7.size] = var_1.sliding_fx_org;
         }
 
-        if(!var_12) {
+        if(!var_12)
           playFXOnTag(common_scripts\utility::getfx("boat_fall_slide"), var_1.sliding_fx_org, "tag_origin");
-        }
 
         var_1 thread sliding_earthquake(var_5.script_earthquake);
         var_1 playrumblelooponentity("littoral_ship_rumble");
       }
 
       if(var_13 < 300) {
-        if(isDefined(var_5.script_earthquake) && var_5.script_earthquake != "small") {
+        if(isDefined(var_5.script_earthquake) && var_5.script_earthquake != "small")
           thread player_shake(var_13);
-        }
 
         thread maps\ship_graveyard_util::thrash_player(300, 0.1, var_1.origin);
       }
@@ -948,19 +921,16 @@ crash_model_go(var_0) {
     }
   }
 
-  if(var_10) {
+  if(var_10)
     stopFXOnTag(common_scripts\utility::getfx(var_8), var_1.fxorg, var_9);
-  }
 
-  if(isDefined(var_1.fxorg) && var_1.fxorg != var_1) {
+  if(isDefined(var_1.fxorg) && var_1.fxorg != var_1)
     var_1.fxorg delete();
-  }
 
   common_scripts\utility::array_thread(var_0, maps\_utility::send_notify, "stop_damage");
 
-  foreach(var_18 in var_7) {
-    var_18 delete();
-  }
+  foreach(var_18 in var_7)
+  var_18 delete();
 
   if(var_1.model == "vehicle_mi24p_hind_plaza_body_destroy_animated") {
     wait 8;
@@ -973,9 +943,8 @@ play_boat_crash_fx_early(var_0, var_1) {
   wait 3.2;
   var_2 = -1 * anglestoup(var_1.angles);
 
-  if(vectordot((0, 0, -1), var_2) < 0.2) {
+  if(vectordot((0, 0, -1), var_2) < 0.2)
     var_2 = (0, 0, -1);
-  }
 
   var_3 = bulletTrace(var_1.origin, var_1.origin + var_2 * 500 - (0, 650, 0), 0, var_1);
   var_4 = common_scripts\utility::spawn_tag_origin();
@@ -1031,11 +1000,10 @@ crash_model_damage(var_0) {
   }
   self endon("stop_damage");
 
-  if(isDefined(self.damage)) {
+  if(isDefined(self.damage))
     var_1 = self.damage;
-  } else {
+  else
     var_1 = 60;
-  }
 
   for(;;) {
     if(level.player istouching(self)) {
@@ -1075,11 +1043,10 @@ generate_cheap_falling_object(var_0, var_1) {
   var_4 = spawn("script_origin", var_2["position"] - (0, 0, 30));
   var_4.targetname = "randomobject" + level.ro_index;
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_4.speed = randomfloatrange(200, 260);
-  } else {
+  else
     var_4.speed = var_0;
-  }
 
   var_4.script_earthquake = "small";
   var_4.script_soundalias = "scn_shipg_box_fall_generic";
@@ -1088,11 +1055,10 @@ generate_cheap_falling_object(var_0, var_1) {
   var_4.angles = (0, 0, 0);
   var_4.script_decel = 0.1;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_4.script_exploder = var_1;
-  } else {
+  else
     var_4.script_fxid = "boat_fall_impact_small";
-  }
 
   level.ro_index = level.ro_index + 1;
   var_5 = spawn("script_origin", var_4.origin - (0, 0, 80));
@@ -1106,17 +1072,15 @@ generate_cheap_falling_object(var_0, var_1) {
   var_4 delete();
   var_5 delete();
 
-  while(distance2d(var_3.origin, level.player.origin) < 800 && level.player maps\_utility::player_looking_at(var_3.origin, 0.6, 1)) {
+  while(distance2d(var_3.origin, level.player.origin) < 800 && level.player maps\_utility::player_looking_at(var_3.origin, 0.6, 1))
     wait 0.1;
-  }
 
   var_3 delete();
 }
 
 trigger_enablelinkto() {
-  if(self.classname == "trigger_multiple") {
+  if(self.classname == "trigger_multiple")
     self enablelinkto();
-  }
 }
 
 trench_smash_death() {
@@ -1134,9 +1098,8 @@ trench_stay_close_1() {
       trench_death_warning();
       wait 6;
 
-      if(distance(level.player.origin, level.baker.origin) > 750) {
+      if(distance(level.player.origin, level.baker.origin) > 750)
         player_smash_death();
-      }
     }
 
     wait 0.1;
@@ -1184,9 +1147,8 @@ start_canyon_combat() {
   common_scripts\utility::flag_wait("new_canyon_combat_start");
   maps\_utility::autosave_by_name("new_canyon");
 
-  if(!maps\ship_graveyard_util::greenlight_check()) {
+  if(!maps\ship_graveyard_util::greenlight_check())
     level.baker maps\_utility::set_force_color("r");
-  }
 
   maps\ship_graveyard_util::baker_glint_off();
   maps\_utility::array_spawn_targetname("nc_enemies_1");

@@ -4,9 +4,11 @@
 ******************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace revive_hud;
 
 class crevive_hud: cluielem {
+
   function set_fadetime(localclientnum, value) {
     set_data(localclientnum, "fadeTime", value);
   }
@@ -20,12 +22,12 @@ class crevive_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "revive_hud");
+    cluielem::open(localclientnum, #"revive_hud");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "text", # "");
+    set_data(localclientnum, "text", #"");
     set_data(localclientnum, "clientNum", 0);
     set_data(localclientnum, "fadeTime", 0);
   }

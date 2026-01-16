@@ -13,13 +13,11 @@ main() {
     println("File: _animatedmodels.gsc. Function: main() - START WAIT waittillframeend\n");
   }
   waittillframeend;
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _animatedmodels.gsc. Function: main() - STOP WAIT waittillframeend\n");
-  }
-  if(getdvar("animated_trees_enabled") == "") {
+  if(getdvar("animated_trees_enabled") == "")
     setdvar("animated_trees_enabled", "1");
-  }
-  level.wind = spawnStruct();
+  level.wind = spawnstruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
@@ -29,7 +27,7 @@ main() {
     level.anim_prop_models = [];
   }
   level.init_animatedmodels = [];
-  animated_models = getEntArray("animated_model", "targetname");
+  animated_models = getentarray("animated_model", "targetname");
   if(getdvar("animated_trees_enabled") == "1") {
     array_thread(animated_models, ::model_init);
   } else {
@@ -51,14 +49,14 @@ main() {
 
     println("animated_model_setup()");
     println("{");
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       print_modellist_bykey(keys[i]);
     }
     println("}");
     println("");
     println("make sure these are in your <level>.csv");
     println("");
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       print_modelcsv_bykey(keys[i]);
     }
     println("");
@@ -68,9 +66,8 @@ main() {
   }
   array_thread(animated_models, ::animated_model);
   level.init_animatedmodels = undefined;
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _animatedmodels.gsc. Function: main() - COMPLETE\n");
-  }
 }
 
 print_modellist_bykey(key) {
@@ -85,12 +82,10 @@ print_modellist_bykey(key) {
 
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
-  if(isDefined(anima["still"])) {
+  if(isDefined(anima["still"]))
     println("xanim," + anima["still"]);
-  }
-  if(isDefined(anima["strong"])) {
+  if(isDefined(anima["strong"]))
     println("xanim," + anima["strong"]);
-  }
 }
 
 model_init() {
@@ -148,9 +143,8 @@ model_init() {
       break;
   }
   level.init_animatedmodels[self.model] = anima;
-  if(!isDefined(level.anim_prop_models[self.model])) {
+  if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
-  }
 }
 
 model_disable() {
@@ -200,7 +194,7 @@ model_disable() {
 animated_model() {
   self UseAnimTree(#animtree);
   wind = "strong";
-  while(1) {
+  while (1) {
     thread tree_animates(wind);
     level waittill("windchange", wind);
   }

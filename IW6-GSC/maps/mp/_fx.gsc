@@ -16,23 +16,19 @@ script_print_fx() {
     return;
   }
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     org = getent(self.target).origin;
-  } else {
+  else
     org = "undefined";
-  }
 
-  if(self.script_fxcommand == "OneShotfx") {
+  if(self.script_fxcommand == "OneShotfx")
     println("maps\mp\_fx::OneShotfx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
-  }
 
-  if(self.script_fxcommand == "loopfx") {
+  if(self.script_fxcommand == "loopfx")
     println("maps\mp\_fx::LoopFx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
-  }
 
-  if(self.script_fxcommand == "loopsound") {
+  if(self.script_fxcommand == "loopsound")
     println("maps\mp\_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
-  }
 }
 
 GrenadeExplosionfx(pos) {
@@ -44,9 +40,8 @@ soundfx(fxId, fxPos, endonNotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
   org playLoopSound(fxId);
-  if(isDefined(endonNotify)) {
+  if(isDefined(endonNotify))
     org thread soundfxDelete(endonNotify);
-  }
 }
 
 soundfxDelete(endonNotify) {
@@ -74,12 +69,10 @@ func_glass_handler() {
   current_index = 0;
   while(funcglass_alive_count != 0) {
     max_index = current_index + max_iterations - 1;
-    if(max_index > funcglass_count) {
+    if(max_index > funcglass_count)
       max_index = funcglass_count;
-    }
-    if(current_index == funcglass_count) {
+    if(current_index == funcglass_count)
       current_index = 0;
-    }
     for(; current_index < max_index; current_index++) {
       glass_index = funcglass_indexies[current_index];
       decal = funcglass_decals[glass_index];

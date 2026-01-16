@@ -24,24 +24,24 @@
 #namespace zm_altbody_beast;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody_beast", &__init__, undefined, undefined);
+  system::register("zm_altbody_beast", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!isDefined(level.bminteract)) {
+  if(!isdefined(level.bminteract)) {
     level.bminteract = [];
   }
-  clientfield::register("missile", "bminteract", 1, 2, "int", &bminteract_changed, 0, 0);
-  clientfield::register("scriptmover", "bminteract", 1, 2, "int", &bminteract_changed, 0, 0);
-  clientfield::register("actor", "bm_zombie_melee_kill", 1, 1, "int", &bm_zombie_melee_kill, 0, 0);
-  clientfield::register("actor", "bm_zombie_grapple_kill", 1, 1, "int", &bm_zombie_grapple_kill, 0, 0);
-  clientfield::register("toplayer", "beast_blood_on_player", 1, 1, "counter", &function_70f7f4d2, 0, 0);
+  clientfield::register("missile", "bminteract", 1, 2, "int", & bminteract_changed, 0, 0);
+  clientfield::register("scriptmover", "bminteract", 1, 2, "int", & bminteract_changed, 0, 0);
+  clientfield::register("actor", "bm_zombie_melee_kill", 1, 1, "int", & bm_zombie_melee_kill, 0, 0);
+  clientfield::register("actor", "bm_zombie_grapple_kill", 1, 1, "int", & bm_zombie_grapple_kill, 0, 0);
+  clientfield::register("toplayer", "beast_blood_on_player", 1, 1, "counter", & function_70f7f4d2, 0, 0);
   clientfield::register("world", "bm_superbeast", 1, 1, "int", undefined, 0, 0);
   function_10dcd1d5("beast_mode_kiosk");
   duplicate_render::set_dr_filter_offscreen("bmint", 35, "bminteract,bmplayer", undefined, 2, "mc/hud_keyline_beastmode", 0);
-  zm_altbody::init("beast_mode", "beast_mode_kiosk", &"ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, &player_enter_beastmode, &player_exit_beastmode, &function_df3032fc, &function_da014198);
-  callback::on_localclient_connect(&player_on_connect);
-  callback::on_spawned(&player_on_spawned);
+  zm_altbody::init("beast_mode", "beast_mode_kiosk", & "ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, & player_enter_beastmode, & player_exit_beastmode, & function_df3032fc, & function_da014198);
+  callback::on_localclient_connect( & player_on_connect);
+  callback::on_spawned( & player_on_spawned);
   level._effect["beast_kiosk_fx_reset"] = "zombie/fx_bmode_kiosk_fire_reset_zod_zmb";
   level._effect["beast_kiosk_fx_enabled"] = "zombie/fx_bmode_kiosk_fire_zod_zmb";
   level._effect["beast_kiosk_fx_disabled"] = "zombie/fx_bmode_kiosk_idle_zod_zmb";
@@ -58,13 +58,13 @@ function __init__() {
 }
 
 function player_on_connect(localclientnum) {
-  if(!isDefined(level.bminteract[localclientnum])) {
+  if(!isdefined(level.bminteract[localclientnum])) {
     level.bminteract[localclientnum] = [];
   }
 }
 
 function player_on_spawned(localclientnum) {
-  if(!self islocalplayer() || !isDefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
+  if(!self islocalplayer() || !isdefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
     return;
   }
   setbeastmodeiconmaterial(localclientnum, 1, "t7_hud_zm_beastmode_meleeattack");
@@ -100,18 +100,18 @@ function player_enter_beastmode(localclientnum) {
     self.beast_1p_light = playfxoncamera(localclientnum, level._effect["beast_1p_light"]);
   }
   if(getdvarint("") > 0) {
-    self.beast_3p_trail = playFXOnTag(localclientnum, level._effect[""], self, "");
+    self.beast_3p_trail = playfxontag(localclientnum, level._effect[""], self, "");
   }
 }
 
 function watch_scr_beast_no_visionset(localclientnum) {
   self endon("beast_mode_exit");
   was_scr_beast_no_visionset = getdvarint("scr_beast_no_visionset") > 0;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     scr_beast_no_visionset = getdvarint("scr_beast_no_visionset") > 0;
     if(scr_beast_no_visionset != was_scr_beast_no_visionset) {
       if(scr_beast_no_visionset) {
-        if(isDefined(self.beast_1p_light)) {
+        if(isdefined(self.beast_1p_light)) {
           stopfx(localclientnum, self.beast_1p_light);
           self.beast_1p_light = undefined;
         }
@@ -138,11 +138,11 @@ function function_cb236f81(localclientnum) {
     return;
   }
   var_af2f137b = function_faf41e73(localclientnum);
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     var_26495de5 = function_faf41e73(localclientnum);
     if(var_26495de5 != var_af2f137b) {
       if(var_26495de5) {
-        if(isDefined(self.beast_1p_light)) {
+        if(isdefined(self.beast_1p_light)) {
           stopfx(localclientnum, self.beast_1p_light);
           self.beast_1p_light = undefined;
         }
@@ -166,11 +166,11 @@ function function_56c9cf9d(localclientnum) {
 
 function player_exit_beastmode(localclientnum) {
   self notify("beast_mode_exit");
-  if(isDefined(self.beast_3p_trail)) {
+  if(isdefined(self.beast_3p_trail)) {
     stopfx(localclientnum, self.beast_3p_trail);
     self.beast_3p_trail = undefined;
   }
-  if(isDefined(self.beast_1p_light)) {
+  if(isdefined(self.beast_1p_light)) {
     stopfx(localclientnum, self.beast_1p_light);
     self.beast_1p_light = undefined;
   }
@@ -191,23 +191,23 @@ function function_ea06d888(localclientnum) {
 }
 
 function function_df3032fc(localclientnum) {
-  self.beast_3p_trail = playFXOnTag(localclientnum, level._effect["beast_3p_trail"], self, "j_spinelower");
+  self.beast_3p_trail = playfxontag(localclientnum, level._effect["beast_3p_trail"], self, "j_spinelower");
   self thread grapple_watch(1, "J_Tent_Main_14_RI", 0.05);
 }
 
 function function_da014198(localclientnum) {
   self thread grapple_watch(0);
-  if(isDefined(self.beast_3p_trail)) {
+  if(isdefined(self.beast_3p_trail)) {
     stopfx(localclientnum, self.beast_3p_trail);
     self.beast_3p_trail = undefined;
   }
 }
 
 function get_script_noteworthy_array(localclientnum, val, key) {
-  all = getEntArray(localclientnum);
+  all = getentarray(localclientnum);
   ret = [];
   foreach(ent in all) {
-    if(isDefined(ent.script_noteworthy)) {
+    if(isdefined(ent.script_noteworthy)) {
       if(ent.script_noteworthy === val) {
         ret[ret.size] = ent;
       }
@@ -225,11 +225,11 @@ function function_70f7f4d2(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_4685bc0f(localclientnum, var_2646032, var_72af98b3) {
   self endon("entityshutdown");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     filter::enable_filter_blood_spatter(self, 5);
     self thread function_ef4c8536(localclientnum, var_2646032, var_72af98b3);
     self util::waittill_any_timeout(var_2646032 + var_72af98b3, "beast_mode_exit", "entityshutdown");
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       filter::disable_filter_blood_spatter(self, 5);
     }
   }
@@ -241,12 +241,12 @@ function function_ef4c8536(localclientnum, var_2646032, var_72af98b3) {
   self endon("death");
   self endon("disconnect");
   self endon("entityshutdown");
-  if(!isDefined(self.var_90b6339d)) {
+  if(!isdefined(self.var_90b6339d)) {
     self.var_90b6339d = 0;
   }
   filter::set_filter_blood_spatter_reveal(self, 5, 0, 0);
   t = 0;
-  while(t <= var_2646032 && isDefined(self)) {
+  while (t <= var_2646032 && isdefined(self)) {
     self.var_90b6339d = max(self.var_90b6339d, t / var_2646032);
     filter::set_filter_blood_spatter_reveal(self, 5, self.var_90b6339d, 0);
     wait(0.05);
@@ -255,7 +255,7 @@ function function_ef4c8536(localclientnum, var_2646032, var_72af98b3) {
   self.var_90b6339d = 1;
   filter::set_filter_blood_spatter_reveal(self, 5, self.var_90b6339d, 0);
   t = 0;
-  while(t <= var_72af98b3 && isDefined(self)) {
+  while (t <= var_72af98b3 && isdefined(self)) {
     self.var_90b6339d = min(self.var_90b6339d, 1 - (t / var_72af98b3));
     filter::set_filter_blood_spatter_reveal(self, 5, self.var_90b6339d, 0);
     wait(0.05);
@@ -283,30 +283,30 @@ function function_cce7ef03(localclientnum, onoff) {
 
 function player_update_beast_mode_objects(localclientnum, onoff) {
   bmo = get_script_noteworthy_array(localclientnum, "beast_mode", "script_noteworthy");
-  array::run_all(bmo, &entity_set_visible, localclientnum, self, onoff);
+  array::run_all(bmo, & entity_set_visible, localclientnum, self, onoff);
   bmho = get_script_noteworthy_array(localclientnum, "not_beast_mode", "script_noteworthy");
-  array::run_all(bmho, &entity_set_visible, localclientnum, self, !onoff);
+  array::run_all(bmho, & entity_set_visible, localclientnum, self, !onoff);
   wait(0.016);
   clean_deleted(level.bminteract[localclientnum]);
-  array::run_all(level.bminteract[localclientnum], &entity_set_bmplayer, localclientnum, onoff);
+  array::run_all(level.bminteract[localclientnum], & entity_set_bmplayer, localclientnum, onoff);
 }
 
 function entity_set_bmplayer(localclientnum, onoff) {
-  if(!isDefined(self.var_2a7bb7b3)) {
+  if(!isdefined(self.var_2a7bb7b3)) {
     self.var_2a7bb7b3 = [];
   }
-  if(isDefined(self.var_2a7bb7b3[localclientnum])) {
+  if(isdefined(self.var_2a7bb7b3[localclientnum])) {
     stopfx(localclientnum, self.var_2a7bb7b3[localclientnum]);
     self.var_2a7bb7b3[localclientnum] = undefined;
   }
-  if(isDefined(self.model)) {
+  if(isdefined(self.model)) {
     if(onoff) {
       fx = function_d9f5b74d(self.model);
     } else {
       fx = function_f74ecbae(self.model);
     }
-    if(isDefined(fx)) {
-      self.var_2a7bb7b3[localclientnum] = playFXOnTag(localclientnum, fx, self, "tag_origin");
+    if(isdefined(fx)) {
+      self.var_2a7bb7b3[localclientnum] = playfxontag(localclientnum, fx, self, "tag_origin");
     }
   }
   if(!issplitscreen() && !isdemoplaying()) {
@@ -356,7 +356,7 @@ function entity_set_visible(localclientnum, player, onoff) {
   }
 }
 
-function add_remove_list(&a = [], on_off) {
+function add_remove_list( & a = [], on_off) {
   if(on_off) {
     if(!isinarray(a, self)) {
       arrayinsert(a, self, a.size);
@@ -366,12 +366,12 @@ function add_remove_list(&a = [], on_off) {
   }
 }
 
-function clean_deleted(&array) {
+function clean_deleted( & array) {
   done = 0;
-  while(!done && array.size > 0) {
+  while (!done && array.size > 0) {
     done = 1;
     foreach(key, val in array) {
-      if(!isDefined(val)) {
+      if(!isdefined(val)) {
         arrayremoveindex(array, key, 0);
         done = 0;
         break;
@@ -383,7 +383,7 @@ function clean_deleted(&array) {
 function function_7d675424(type) {
   if(type == 2) {
     up = anglestoup(self.angles);
-    forward = anglesToForward(self.angles);
+    forward = anglestoforward(self.angles);
     location = self.origin + (12 * forward);
     return location;
   }
@@ -393,27 +393,27 @@ function function_7d675424(type) {
 function bminteract_changed(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   onoff = newval != 0;
   location = self function_7d675424(newval);
-  if(isDefined(location)) {
+  if(isdefined(location)) {
     self setentbeastmodeicontype(newval, location);
   } else {
     self setentbeastmodeicontype(newval);
   }
   self add_remove_list(level.bminteract[local_client_num], onoff);
   if(!issplitscreen()) {
-    self duplicate_render::set_dr_flag("bmplayer", isDefined(getlocalplayer(local_client_num).beast_mode) && getlocalplayer(local_client_num).beast_mode);
+    self duplicate_render::set_dr_flag("bmplayer", isdefined(getlocalplayer(local_client_num).beast_mode) && getlocalplayer(local_client_num).beast_mode);
   }
   if(onoff) {
     self duplicate_render::set_dr_flag("bminteract", onoff);
     self duplicate_render::update_dr_filters(local_client_num);
   } else {
-    if(!isDefined(self.var_2a7bb7b3)) {
+    if(!isdefined(self.var_2a7bb7b3)) {
       self.var_2a7bb7b3 = [];
     }
-    if(isDefined(self.var_2a7bb7b3[local_client_num])) {
+    if(isdefined(self.var_2a7bb7b3[local_client_num])) {
       stopfx(local_client_num, self.var_2a7bb7b3[local_client_num]);
       self.var_2a7bb7b3[local_client_num] = undefined;
     }
-    if(isDefined(self.currentdrfilter)) {
+    if(isdefined(self.currentdrfilter)) {
       self duplicate_render::set_dr_flag("bminteract", onoff);
       self duplicate_render::update_dr_filters(local_client_num);
     }
@@ -425,31 +425,31 @@ function function_10dcd1d5(kiosk_name) {
   level.var_dc56ce87 = [];
   level.var_104eabe = [];
   foreach(kiosk in level.beast_kiosks) {
-    if(!isDefined(kiosk.state)) {
+    if(!isdefined(kiosk.state)) {
       kiosk.state = [];
     }
-    if(!isDefined(kiosk.fake_ent)) {
+    if(!isdefined(kiosk.fake_ent)) {
       kiosk.fake_ent = [];
     }
     kiosk.var_80eeb471 = (kiosk_name + "_plr_") + kiosk.origin;
     kiosk.var_39a60f4a = (kiosk_name + "_crs_") + kiosk.origin;
     level.var_dc56ce87[kiosk.var_80eeb471] = kiosk;
     level.var_104eabe[kiosk.var_39a60f4a] = kiosk;
-    clientfield::register("world", kiosk.var_80eeb471, 1, 4, "int", &function_fa828651, 0, 0);
+    clientfield::register("world", kiosk.var_80eeb471, 1, 4, "int", & function_fa828651, 0, 0);
   }
 }
 
 function function_62095f03(localclientnum) {
   foreach(kiosk in level.beast_kiosks) {
-    if(!isDefined(kiosk.state)) {
+    if(!isdefined(kiosk.state)) {
       kiosk.state = [];
     }
-    if(!isDefined(kiosk.fake_ent)) {
+    if(!isdefined(kiosk.fake_ent)) {
       kiosk.fake_ent = [];
     }
-    if(!isDefined(kiosk.fake_ent[localclientnum])) {
+    if(!isdefined(kiosk.fake_ent[localclientnum])) {
       kiosk.fake_ent[localclientnum] = util::spawn_model(localclientnum, "tag_origin", kiosk.origin, kiosk.angles);
-      if(isDefined(kiosk.state[localclientnum])) {
+      if(isdefined(kiosk.state[localclientnum])) {
         kiosk.fake_ent[localclientnum] update_kiosk_state(localclientnum, kiosk.state[localclientnum], kiosk.state[localclientnum], 1, 0, kiosk.var_80eeb471, 0);
       }
     }
@@ -458,15 +458,15 @@ function function_62095f03(localclientnum) {
 
 function function_fa828651(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   kiosk = level.var_dc56ce87[fieldname];
-  if(isDefined(kiosk)) {
-    if(!isDefined(kiosk.state)) {
+  if(isdefined(kiosk)) {
+    if(!isdefined(kiosk.state)) {
       kiosk.state = [];
     }
-    if(!isDefined(kiosk.fake_ent)) {
+    if(!isdefined(kiosk.fake_ent)) {
       kiosk.fake_ent = [];
     }
     kiosk.state[localclientnum] = newval;
-    if(isDefined(kiosk.fake_ent[localclientnum])) {
+    if(isdefined(kiosk.fake_ent[localclientnum])) {
       kiosk.fake_ent[localclientnum] update_kiosk_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
     }
   }
@@ -475,57 +475,57 @@ function function_fa828651(localclientnum, oldval, newval, bnewent, binitialsnap
 function update_kiosk_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = getlocalplayer(localclientnum);
   n_entnum = player getentitynumber();
-  if(!isDefined(self.beast_kiosk_fx)) {
+  if(!isdefined(self.beast_kiosk_fx)) {
     self.beast_kiosk_fx = [];
   }
-  if(!isDefined(self.beast_kiosk_fx[localclientnum])) {
+  if(!isdefined(self.beast_kiosk_fx[localclientnum])) {
     self.beast_kiosk_fx[localclientnum] = [];
   }
-  if(newval &(1 << n_entnum)) {
-    if(isDefined(self.beast_kiosk_fx[localclientnum]["disabled"])) {
+  if(newval & (1 << n_entnum)) {
+    if(isdefined(self.beast_kiosk_fx[localclientnum]["disabled"])) {
       stopfx(localclientnum, self.beast_kiosk_fx[localclientnum]["disabled"]);
       self.beast_kiosk_fx[localclientnum]["disabled"] = undefined;
     }
-    if(!isDefined(self.beast_kiosk_fx[localclientnum]["enabled"])) {
-      playFXOnTag(localclientnum, level._effect["beast_kiosk_fx_reset"], self, "tag_origin");
-      playSound(0, "evt_beastmode_torch_ignite", self.origin);
+    if(!isdefined(self.beast_kiosk_fx[localclientnum]["enabled"])) {
+      playfxontag(localclientnum, level._effect["beast_kiosk_fx_reset"], self, "tag_origin");
+      playsound(0, "evt_beastmode_torch_ignite", self.origin);
       if(level clientfield::get("bm_superbeast")) {
-        self.beast_kiosk_fx[localclientnum]["enabled"] = playFXOnTag(localclientnum, level._effect["beast_kiosk_fx_super"], self, "tag_origin");
+        self.beast_kiosk_fx[localclientnum]["enabled"] = playfxontag(localclientnum, level._effect["beast_kiosk_fx_super"], self, "tag_origin");
       } else {
-        self.beast_kiosk_fx[localclientnum]["enabled"] = playFXOnTag(localclientnum, level._effect["beast_kiosk_fx_enabled"], self, "tag_origin");
+        self.beast_kiosk_fx[localclientnum]["enabled"] = playfxontag(localclientnum, level._effect["beast_kiosk_fx_enabled"], self, "tag_origin");
       }
     }
   } else {
-    if(isDefined(self.beast_kiosk_fx[localclientnum]["enabled"])) {
+    if(isdefined(self.beast_kiosk_fx[localclientnum]["enabled"])) {
       stopfx(localclientnum, self.beast_kiosk_fx[localclientnum]["enabled"]);
       self.beast_kiosk_fx[localclientnum]["enabled"] = undefined;
     }
-    if(!isDefined(self.beast_kiosk_fx[localclientnum]["disabled"])) {
-      self.beast_kiosk_fx[localclientnum]["disabled"] = playFXOnTag(localclientnum, level._effect["beast_kiosk_fx_disabled"], self, "tag_origin");
+    if(!isdefined(self.beast_kiosk_fx[localclientnum]["disabled"])) {
+      self.beast_kiosk_fx[localclientnum]["disabled"] = playfxontag(localclientnum, level._effect["beast_kiosk_fx_disabled"], self, "tag_origin");
     }
   }
 }
 
 function function_5e873a4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   kiosk = level.var_104eabe[fieldname];
-  if(isDefined(kiosk)) {
+  if(isdefined(kiosk)) {
     kiosk.fake_ent function_e97fecd7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
   }
 }
 
 function function_e97fecd7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = getlocalplayer(localclientnum);
-  if(!isDefined(self.beast_kiosk_fx)) {
+  if(!isdefined(self.beast_kiosk_fx)) {
     self.beast_kiosk_fx = [];
   }
-  if(!isDefined(self.beast_kiosk_fx[localclientnum])) {
+  if(!isdefined(self.beast_kiosk_fx[localclientnum])) {
     self.beast_kiosk_fx[localclientnum] = [];
   }
   if(newval) {
-    if(!isDefined(self.beast_kiosk_fx[localclientnum]["denied"])) {
-      self.beast_kiosk_fx[localclientnum]["denied"] = playFXOnTag(localclientnum, level._effect["beast_kiosk_fx_cursed"], self, "tag_origin");
+    if(!isdefined(self.beast_kiosk_fx[localclientnum]["denied"])) {
+      self.beast_kiosk_fx[localclientnum]["denied"] = playfxontag(localclientnum, level._effect["beast_kiosk_fx_cursed"], self, "tag_origin");
     }
-  } else if(isDefined(self.beast_kiosk_fx[localclientnum]["denied"])) {
+  } else if(isdefined(self.beast_kiosk_fx[localclientnum]["denied"])) {
     stopfx(localclientnum, self.beast_kiosk_fx[localclientnum]["denied"]);
   }
 }
@@ -543,16 +543,16 @@ function sndbeastmode(activate) {
 function sndbeastmode_manastart() {
   level endon("sndmanastop");
   self endon("entityshutdown");
-  if(!isDefined(level.sndbeastmodeent)) {
+  if(!isdefined(level.sndbeastmodeent)) {
     level.sndbeastmodeent = spawn(0, (0, 0, 0), "script_origin");
-    soundid = level.sndbeastmodeent playLoopSound("zmb_beastmode_mana_looper", 2);
+    soundid = level.sndbeastmodeent playloopsound("zmb_beastmode_mana_looper", 2);
     setsoundvolume(soundid, 0);
   }
-  while(true) {
-    if(isDefined(self.mana)) {
+  while (true) {
+    if(isdefined(self.mana)) {
       if(self.mana <= 0.5) {
         volume = 0.51 - self.mana;
-        if(isDefined(soundid)) {
+        if(isdefined(soundid)) {
           setsoundvolume(soundid, volume);
         }
       }
@@ -563,14 +563,14 @@ function sndbeastmode_manastart() {
 
 function sndbeastmode_manastop() {
   level notify("sndmanastop");
-  if(isDefined(level.sndbeastmodeent)) {
+  if(isdefined(level.sndbeastmodeent)) {
     level.sndbeastmodeent delete();
     level.sndbeastmodeent = undefined;
   }
 }
 
 function function_14637ad2(localclientnum) {
-  if(isDefined(self.var_a4e22c06)) {
+  if(isdefined(self.var_a4e22c06)) {
     stopfx(localclientnum, self.var_a4e22c06);
     self.var_a4e22c06 = undefined;
   }
@@ -581,7 +581,7 @@ function function_2a7bb7b3(localclientnum, on_off) {
   self endon("hash_2a7bb7b3");
   function_14637ad2(localclientnum);
   if(on_off) {
-    while(isDefined(self)) {
+    while (isdefined(self)) {
       level waittill("notetrack", lcn, note);
       if(note == "shock_loop") {
         function_14637ad2(localclientnum);
@@ -638,10 +638,10 @@ function function_892cc334(localclientnum, time, var_c6eef0d, var_49d2fa23, char
   self notify("hash_892cc334");
   self endon("hash_892cc334");
   self endon("beast_mode_exit");
-  if(!isDefined(self.var_652e98)) {
+  if(!isdefined(self.var_652e98)) {
     self.var_652e98 = 0;
   }
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self.var_652e98 = self.var_652e98 + 0.016;
     if(self.var_652e98 > time) {
       self.var_652e98 = self.var_652e98 - time;
@@ -658,10 +658,10 @@ function function_892cc334(localclientnum, time, var_c6eef0d, var_49d2fa23, char
 function function_ac7706bc() {
   self notify("hash_ac7706bc");
   self endon("hash_ac7706bc");
-  if(!isDefined(self.var_652e98)) {
+  if(!isdefined(self.var_652e98)) {
     self.var_652e98 = 0;
   }
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     if(getdvarint("") > 0) {
       self notify("hash_892cc334");
       time = getdvarfloat("");
@@ -717,13 +717,13 @@ function grapple_watch(onoff, tag = "tag_flash", delay = 0.15) {
   self notify("grapple_watch");
   self endon("grapple_watch");
   if(onoff) {
-    while(isDefined(self)) {
+    while (isdefined(self)) {
       self waittill("grapple_beam_on", pivot);
       var_1e66ebb1 = tag;
       if(getdvarint("") > 0) {
         var_1e66ebb1 = "";
       }
-      if(isDefined(pivot) && !pivot isplayer()) {
+      if(isdefined(pivot) && !pivot isplayer()) {
         thread function_55af4b5b(self, var_1e66ebb1, pivot, delay);
       }
       evt = self util::waittill_any_ex(7.5, "grapple_pulled", "grapple_landed", "grapple_cancel", "grapple_beam_off", "grapple_watch", "disconnect");
@@ -761,7 +761,7 @@ function function_89d6f49a(localclientnum, onoff) {
   cycle_time = var_d7805253;
   old_color = function_4778b020(var_781fc232, var_27745be8);
   new_color = old_color;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     if(cycle_time >= var_d7805253) {
       old_color = new_color;
       new_color = function_4778b020(var_781fc232, var_27745be8);
@@ -777,12 +777,12 @@ function function_89d6f49a(localclientnum, onoff) {
 
 function bm_zombie_melee_kill(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(util::is_mature() && !util::is_gib_restricted_build()) {
-    playFXOnTag(localclientnum, level._effect["beast_melee_kill"], self, "j_spineupper");
+    playfxontag(localclientnum, level._effect["beast_melee_kill"], self, "j_spineupper");
   }
 }
 
 function bm_zombie_grapple_kill(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(util::is_mature() && !util::is_gib_restricted_build()) {
-    playFXOnTag(localclientnum, level._effect["beast_grapple_kill"], self, "j_spineupper");
+    playfxontag(localclientnum, level._effect["beast_grapple_kill"], self, "j_spineupper");
   }
 }

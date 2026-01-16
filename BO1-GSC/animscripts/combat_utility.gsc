@@ -154,11 +154,10 @@ shootUntilShootBehaviorChange() {
       wait(RandomFloat(2.0));
     }
   }
-  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > 400 * 400) {
+  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > 400 * 400)
     burstCount = RandomIntRange(1, 5);
-  } else {
+  else
     burstCount = 10;
-  }
   while(1) {
     burstDelay();
     animPrefix = getShootAnimPrefix();
@@ -378,7 +377,7 @@ shotgunPumpSound(animName) {
   self endon("shotgun_pump_sound_end");
   self thread stopShotgunPumpAfterTime(2.0);
   self waittillmatch(animName, "rechamber");
-  self playSound("wpn_shotgun_pump");
+  self PlaySound("wpn_shotgun_pump");
   self notify("shotgun_pump_sound_end");
 }
 
@@ -835,7 +834,7 @@ watchGrenadeTowardsPlayer(nextGrenadeTimeToUse) {
 
 watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   activeGrenadeTimer = self.activeGrenadeTimer;
-  timeoutObj = spawnStruct();
+  timeoutObj = SpawnStruct();
   timeoutObj thread watchGrenadeTowardsPlayerTimeout(5);
   timeoutObj endon("watchGrenadeTowardsPlayerTimeout");
   type = self.grenadeWeapon;
@@ -910,7 +909,7 @@ detachGrenadeOnScriptChange(model, tag) {
 }
 
 offsetToOrigin(start) {
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   right = AnglesToRight(self.angles);
   up = anglestoup(self.angles);
   forward = vector_scale(forward, start[0]);

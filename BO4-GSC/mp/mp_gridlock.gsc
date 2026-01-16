@@ -12,6 +12,7 @@
 #include scripts\mp\mp_gridlock_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
+
 #namespace mp_gridlock;
 
 event_handler[level_init] main(eventstruct) {
@@ -46,3 +47,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x48>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x89>");
 }
+

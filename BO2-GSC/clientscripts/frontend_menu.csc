@@ -11,9 +11,8 @@ frontend_menu_init() {
   clients = getmaxlocalclients();
 
   for(i = 0; i < clients; i++) {
-    if(localclientactive(i)) {
+    if(localclientactive(i))
       forcegamemodemappings(i, "default");
-    }
   }
 
   luiload("T6.main");
@@ -29,7 +28,8 @@ setup_ui3d() {
   ui3dsetwindow(5, 0, 0, 0, 0);
 }
 
-menu_video_mapping() {}
+menu_video_mapping() {
+}
 
 menu_auto_start() {
   localclientnum = 0;
@@ -45,11 +45,10 @@ onsuimessage(localclientnum, param1, param2) {
     case "BACKSPACE":
     case "BUTTON_RTRIG":
       if(param2 == "down") {
-        if(!isluienabled(localclientnum)) {
+        if(!isluienabled(localclientnum))
           luienable(localclientnum, "main");
-        } else {
+        else
           luidisable(localclientnum);
-        }
       }
 
       break;

@@ -35,11 +35,11 @@
 #namespace siegebot_nikolai;
 
 function autoexec __init__sytem__() {
-  system::register("zm_siegebot_nikolai", &__init__, undefined, undefined);
+  system::register("zm_siegebot_nikolai", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("siegebot_nikolai", &siegebot_initialize);
+  vehicle::add_main_callback("siegebot_nikolai", & siegebot_initialize);
   clientfield::register("vehicle", "nikolai_destroyed_r_arm", 12000, 1, "int");
   clientfield::register("vehicle", "nikolai_destroyed_l_arm", 12000, 1, "int");
   clientfield::register("vehicle", "nikolai_destroyed_r_chest", 12000, 1, "int");
@@ -64,7 +64,7 @@ function __init__() {
 
 function siegebot_initialize() {
   self flag::init("halt_thread_gun");
-  level.raps_spawners = getEntArray("zombie_raps_spawner", "targetname");
+  level.raps_spawners = getentarray("zombie_raps_spawner", "targetname");
   self useanimtree($generic);
   blackboard::createblackboardforentity(self);
   self blackboard::registervehicleblackboardattributes();
@@ -86,19 +86,19 @@ function siegebot_initialize() {
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
   self.maxsightdistsqrd = 10000 * 10000;
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self.goalradius = 9999999;
   self.goalheight = 5000;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = &function_b9b039e0;
+  self.overridevehicledamage = & function_b9b039e0;
   self pain_toggle(1);
   self initjumpstruct();
   self setgunnerturretontargetrange(0, self.settings.gunner_turret_on_target_range);
   self locomotion_start();
   self.damagelevel = 0;
   self.newdamagelevel = self.damagelevel;
-  if(!isDefined(self.height)) {
+  if(!isdefined(self.height)) {
     self.height = self.radius;
   }
   self.bgbignorefearinheadlights = 1;
@@ -119,14 +119,14 @@ function init_clientfields() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role();
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_groundcombat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_groundcombat_exit;
-  self vehicle_ai::get_state_callbacks("pain").enter_func = &pain_enter;
-  self vehicle_ai::get_state_callbacks("pain").update_func = &pain_update;
-  self vehicle_ai::get_state_callbacks("pain").exit_func = &pain_exit;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_groundcombat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_groundcombat_exit;
+  self vehicle_ai::get_state_callbacks("pain").enter_func = & pain_enter;
+  self vehicle_ai::get_state_callbacks("pain").update_func = & pain_update;
+  self vehicle_ai::get_state_callbacks("pain").exit_func = & pain_exit;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
   self vehicle_ai::add_state("special_attack", undefined, undefined, undefined);
-  self vehicle_ai::add_state("jump", &state_jump_enter, &state_jump_update, &state_jump_exit);
+  self vehicle_ai::add_state("jump", & state_jump_enter, & state_jump_update, & state_jump_exit);
   vehicle_ai::add_utility_connection("jump", "combat");
   vehicle_ai::startinitialstate("combat");
 }
@@ -140,7 +140,7 @@ function function_f7035c2f(nikolai_driver) {
   nikolai_driver.angles = self gettagangles("tag_driver");
   nikolai_driver.targetname = "nikolai_driver";
   nikolai_driver linkto(self, "tag_driver");
-  while(true) {
+  while (true) {
     nikolai_driver scene::play("cin_zm_stalingrad_nikolai_cockpit_drink");
     nikolai_driver thread scene::play("cin_zm_stalingrad_nikolai_cockpit_idle");
     wait(10 + randomfloat(10));
@@ -166,12 +166,12 @@ function state_death_update(params) {
   self vehicle_death::death_fx();
   wait(10);
   self vehicle_death::set_death_model(self.deathmodel, self.modelswapdelay);
-  self playSound("veh_quadtank_sparks");
+  self playsound("veh_quadtank_sparks");
   self vehicle_death::freewhensafe(150);
 }
 
 function clean_up_spawned() {
-  if(isDefined(self.jump)) {
+  if(isdefined(self.jump)) {
     self.jump.linkent delete();
   }
 }
@@ -182,7 +182,7 @@ function pain_toggle(enabled) {
 
 function pain_canenter() {
   state = vehicle_ai::get_current_state();
-  return isDefined(state) && state != "pain" && self._enablepain;
+  return isdefined(state) && state != "pain" && self._enablepain;
 }
 
 function pain_enter(params) {
@@ -216,11 +216,11 @@ function jump_to(target) {
   }
   if(isvec(target)) {
     self.jump.var_e8ce546f = target;
-  } else if(isDefined(target.origin) && isvec(target.origin)) {
+  } else if(isdefined(target.origin) && isvec(target.origin)) {
     self.jump.var_e8ce546f = target.origin;
   }
   distsqr = distance2dsquared(self.origin, self.jump.var_e8ce546f);
-  if(isDefined(self.jump.var_e8ce546f) && (600 * 600) < distsqr && distsqr < (1800 * 1800)) {
+  if(isdefined(self.jump.var_e8ce546f) && (600 * 600) < distsqr && distsqr < (1800 * 1800)) {
     self vehicle_ai::set_state("jump");
     return true;
   }
@@ -228,16 +228,16 @@ function jump_to(target) {
 }
 
 function initjumpstruct() {
-  if(isDefined(self.jump)) {
+  if(isdefined(self.jump)) {
     self unlink();
     self.jump.linkent delete();
     self.jump delete();
   }
-  self.jump = spawnStruct();
+  self.jump = spawnstruct();
   self.jump.linkent = spawn("script_origin", self.origin);
   self.jump.in_air = 0;
   self.arena_center = struct::get("boss_arena_center").origin;
-  assert(isDefined(self.arena_center));
+  assert(isdefined(self.arena_center));
 }
 
 function state_jump_enter(params) {
@@ -285,7 +285,7 @@ function state_jump_update(params) {
   self vehicle::impact_fx(self.settings.takeofffx1);
   params.coptermodel = "land@jump";
   jumpstart = gettime();
-  while(true) {
+  while (true) {
     distancetogoal = distance2d(self.jump.linkent.origin, goal);
     antigravityscaleup = mapfloat(0, 0.5, 0.6, 0, abs(0.5 - (distancetogoal / totaldistance)));
     antigravityscale = mapfloat(self.radius * 1, self.radius * 3, 0, 1, distancetogoal);
@@ -306,8 +306,8 @@ function state_jump_update(params) {
     self.jump.linkent.origin = self.jump.linkent.origin + velocity;
     if(self.jump.linkent.origin[2] < heightthreshold && (oldheight > heightthreshold || (oldverticlespeed > 0 && velocity[2] < 0))) {
       self notify("start_landing");
-      if(isDefined(self.enemy)) {
-        forward = anglesToForward(self.angles);
+      if(isdefined(self.enemy)) {
+        forward = anglestoforward(self.angles);
         dir = vectornormalize(self.enemy.origin - self.origin);
         dot = vectordot(dir, forward);
         if(dot < -0.7) {
@@ -390,7 +390,7 @@ function state_groundcombat_update(params) {
   self thread movement_thread();
   self thread footstep_left_monitor();
   self thread footstep_right_monitor();
-  while(true) {
+  while (true) {
     self vehicle_ai::evaluate_connections();
     wait(1);
   }
@@ -406,7 +406,7 @@ function footstep_left_monitor() {
   self endon("change_state");
   self notify("stop_left_footstep_damage");
   self endon("stop_left_footstep_damage");
-  while(true) {
+  while (true) {
     self waittill("footstep_left_large_theia");
     footstep_damage("tag_leg_left_foot_animate");
   }
@@ -417,7 +417,7 @@ function footstep_right_monitor() {
   self endon("change_state");
   self notify("stop_right_footstep_damage");
   self endon("stop_right_footstep_damage");
-  while(true) {
+  while (true) {
     self waittill("footstep_right_large_theia");
     footstep_damage("tag_leg_right_foot_animate");
   }
@@ -429,15 +429,15 @@ function movement_thread() {
   self notify("end_movement_thread");
   self endon("end_movement_thread");
   self.current_pathto_pos = self.origin;
-  while(true) {
+  while (true) {
     self setspeed(self.settings.defaultmovespeed);
     e_enemy = self.enemy;
-    if(isDefined(self.goalpos) && distancesquared(self.current_pathto_pos, self.goalpos) > (self.radius * 0.8) * (self.radius * 0.8)) {
+    if(isdefined(self.goalpos) && distancesquared(self.current_pathto_pos, self.goalpos) > (self.radius * 0.8) * (self.radius * 0.8)) {
       self.current_pathto_pos = self.goalpos;
       self setvehgoalpos(self.current_pathto_pos, 0, 1);
       foundpath = self vehicle_ai::waittill_pathresult();
       if(foundpath) {
-        if(isDefined(e_enemy)) {
+        if(isdefined(e_enemy)) {
           self setlookatent(e_enemy);
         }
         self setbrake(0);
@@ -464,9 +464,9 @@ function attack_thread_gun() {
   self endon("end_attack_thread");
   self notify("end_attack_thread_gun");
   self endon("end_attack_thread_gun");
-  while(true) {
+  while (true) {
     e_enemy = self.enemy;
-    if(!isDefined(e_enemy) || self.var_a7cd606 === 1) {
+    if(!isdefined(e_enemy) || self.var_a7cd606 === 1) {
       self setturrettargetrelativeangles((0, 0, 0));
       wait(0.4);
       continue;
@@ -474,19 +474,19 @@ function attack_thread_gun() {
     self vehicle_ai::setturrettarget(e_enemy, 0);
     self vehicle_ai::setturrettarget(e_enemy, 1);
     var_eb3cc6f2 = gettime();
-    while(isDefined(e_enemy) && !self.gunner1ontarget && vehicle_ai::timesince(var_eb3cc6f2) < 2) {
+    while (isdefined(e_enemy) && !self.gunner1ontarget && vehicle_ai::timesince(var_eb3cc6f2) < 2) {
       wait(0.4);
     }
-    if(!isDefined(e_enemy)) {
+    if(!isdefined(e_enemy)) {
       continue;
     }
     var_9e93cc65 = gettime();
-    while(isDefined(e_enemy) && e_enemy === self.enemy && self vehseenrecently(e_enemy, 1) && vehicle_ai::timesince(var_9e93cc65) < 5) {
+    while (isdefined(e_enemy) && e_enemy === self.enemy && self vehseenrecently(e_enemy, 1) && vehicle_ai::timesince(var_9e93cc65) < 5) {
       if(self flag::get("halt_thread_gun")) {
         break;
       }
       self vehicle_ai::fire_for_time(1 + randomfloat(0.4), 1);
-      if(isDefined(e_enemy) && isplayer(e_enemy)) {
+      if(isdefined(e_enemy) && isplayer(e_enemy)) {
         wait(0.6 + randomfloat(0.2));
       }
       wait(0.1);
@@ -534,7 +534,7 @@ function face_target(position, targetanglediff = 30, var_a39fa3d8 = 1) {
   }
   self locomotion_start();
   angleadjustingstart = gettime();
-  while(anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 4) {
+  while (anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 4) {
     anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
     wait(0.05);
   }
@@ -557,7 +557,7 @@ function function_75775e52(point, range) {
 
 function function_86cc3c11() {
   count = 0;
-  for(i = 1; i < 5; i++) {
+  for (i = 1; i < 5; i++) {
     if(self.var_65850094[i] <= 0) {
       count++;
     }
@@ -575,7 +575,7 @@ function function_b9b039e0(einflictor, eattacker, idamage, idflags, smeansofdeat
   if(smeansofdeath === "MOD_MELEE") {
     return false;
   }
-  if(isDefined(weapon)) {
+  if(isdefined(weapon)) {
     var_cf9744cb = strtok(weapon.name, "_");
     if(var_cf9744cb[0] === "shotgun") {
       idamage = int(float(idamage) / float(weapon.shotcount));
@@ -652,7 +652,7 @@ function function_b9b039e0(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function show_hit_marker() {
-  if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
+  if(isdefined(self) && isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);
@@ -719,7 +719,7 @@ function function_a3258c2a(var_f8b7c9a1) {
   }
   self locomotion_start();
   self clientfield::set("nikolai_gatling_tell", 1);
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy)) {
     self vehicle_ai::setturrettarget(self.enemy, 0);
     self vehicle_ai::setturrettarget(self.enemy, 1);
   }
@@ -730,10 +730,10 @@ function function_a3258c2a(var_f8b7c9a1) {
   weapon = self seatgetweapon(1);
   fireinterval = weapon.firetime * 0.5;
   var_9e93cc65 = gettime();
-  while(isDefined(self.enemy) && vehicle_ai::timesince(var_9e93cc65) < var_f8b7c9a1) {
+  while (isdefined(self.enemy) && vehicle_ai::timesince(var_9e93cc65) < var_f8b7c9a1) {
     self setlookatent(self.enemy);
     self vehicle_ai::setturrettarget(self.enemy, 0);
-    angleoffset = (anglesToForward((0, randomint(100) * var_a3f49a09, 0))) * 100;
+    angleoffset = (anglestoforward((0, randomint(100) * var_a3f49a09, 0))) * 100;
     var_8a7bdf21 = self.enemy getvelocity() * -0.3;
     targetposition = (self.enemy.origin + angleoffset) + var_8a7bdf21;
     self vehicle_ai::setturrettarget(targetposition, 1);
@@ -770,12 +770,12 @@ function function_59fe8c9c(targetposition) {
   }
   self asmrequestsubstate("javelin@stationary");
   var_a3f49a09 = 137.5;
-  for(i = 0; i < 6; i++) {
+  for (i = 0; i < 6; i++) {
     if((i % 2) == 0) {
       self util::waittill_notify_or_timeout("fire_raps", 0.5);
     }
     ai_raps = undefined;
-    while(!isDefined(ai_raps)) {
+    while (!isdefined(ai_raps)) {
       if(level flag::get("world_is_paused")) {
         level flag::wait_till_clear("world_is_paused");
       }
@@ -783,14 +783,14 @@ function function_59fe8c9c(targetposition) {
       tagangles = self gettagangles("tag_flash");
       var_5d7a8c53 = anglestoup(tagangles);
       ai_raps = spawnvehicle("spawner_zm_dlc3_vehicle_raps_nikolai", spawntag, self.angles);
-      if(!isDefined(ai_raps)) {
+      if(!isdefined(ai_raps)) {
         wait(0.1);
       }
     }
     ai_raps.exclude_cleanup_adding_to_total = 1;
     ai_raps.b_ignore_cleanup = 1;
     ai_raps.no_eye_glow = 1;
-    playFXOnTag("dlc3/stalingrad/fx_mech_wpn_raps_launcher_muz", self, "tag_flash");
+    playfxontag("dlc3/stalingrad/fx_mech_wpn_raps_launcher_muz", self, "tag_flash");
     ai_raps hide();
     ai_raps.takedamage = 0;
     wait(0.05);
@@ -798,7 +798,7 @@ function function_59fe8c9c(targetposition) {
     wait(0.05);
     ai_raps show();
     wait(0.05);
-    if(!isDefined(level.var_c3c3ffc5)) {
+    if(!isdefined(level.var_c3c3ffc5)) {
       level.var_c3c3ffc5 = [];
     } else if(!isarray(level.var_c3c3ffc5)) {
       level.var_c3c3ffc5 = array(level.var_c3c3ffc5);
@@ -809,7 +809,7 @@ function function_59fe8c9c(targetposition) {
     ai_raps thread function_6deb3e8d();
     ai_raps.takedamage = 1;
     ai_raps thread function_3b145bbb();
-    offset = anglesToForward((0, i * var_a3f49a09, 0));
+    offset = anglestoforward((0, i * var_a3f49a09, 0));
     launchforce = (var_5d7a8c53 * 300) + (offset * 40);
     ai_raps thread function_853d3b2b(targetposition + (offset * 60), launchforce);
     wait(0.1);
@@ -838,7 +838,7 @@ function function_853d3b2b(var_ff72f147, launchforce) {
   wait(0.5);
   self applyballistictarget(var_ff72f147);
   self show();
-  while(!isDefined(getclosestpointonnavmesh(self.origin, 200)) && vehicle_ai::timesince(var_87f1eda4) < 4) {
+  while (!isdefined(getclosestpointonnavmesh(self.origin, 200)) && vehicle_ai::timesince(var_87f1eda4) < 4) {
     wait(0.1);
   }
   self clientfield::set("play_raps_trail_fx", 0);
@@ -852,17 +852,17 @@ function function_853d3b2b(var_ff72f147, launchforce) {
 
 function function_902a2c47() {
   wait(10);
-  while(level flag::get("world_is_paused")) {
+  while (level flag::get("world_is_paused")) {
     wait(1);
   }
-  if(isDefined(self) && (!(isDefined(self zm_zonemgr::entity_in_zone("boss_arena_zone", 0)) && self zm_zonemgr::entity_in_zone("boss_arena_zone", 0)))) {
+  if(isdefined(self) && (!(isdefined(self zm_zonemgr::entity_in_zone("boss_arena_zone", 0)) && self zm_zonemgr::entity_in_zone("boss_arena_zone", 0)))) {
     self kill();
   }
 }
 
 function function_6deb3e8d() {
   self endon("death");
-  while(isalive(self)) {
+  while (isalive(self)) {
     self waittill("veh_predictedcollision", otherent);
     if(isalive(otherent) && otherent.archetype === "zombie" && otherent.knockdown !== 1) {
       otherent zombie_utility::setup_zombie_knockdown(self);
@@ -882,12 +882,12 @@ function pin_spike_to_ground(spike, targetorigin) {
   spike endon("death");
   targetdist = distance2d(spike.origin, targetorigin) - (400 + randomfloat(60));
   startorigin = spike.origin;
-  while(distance2dsquared(spike.origin, startorigin) < (targetdist * 0.4) * (targetdist * 0.4)) {
+  while (distance2dsquared(spike.origin, startorigin) < (targetdist * 0.4) * (targetdist * 0.4)) {
     wait(0.05);
   }
   var_5f13f183 = 1;
   maxpitch = 10;
-  while(distance2dsquared(spike.origin, startorigin) < (max(targetdist * targetdist, 150 * 150))) {
+  while (distance2dsquared(spike.origin, startorigin) < (max(targetdist * targetdist, 150 * 150))) {
     pitch = angleclamp180(spike.angles[0]);
     if(pitch < maxpitch) {
       pitch = pitch + (min(var_5f13f183, maxpitch - pitch));
@@ -897,7 +897,7 @@ function pin_spike_to_ground(spike, targetorigin) {
   }
   var_5f13f183 = 16;
   maxpitch = 76;
-  while(spike.angles[0] < maxpitch) {
+  while (spike.angles[0] < maxpitch) {
     pitch = angleclamp180(spike.angles[0]);
     pitch = pitch + var_5f13f183;
     if(pitch > maxpitch) {
@@ -912,7 +912,7 @@ function function_db9ecada() {
   self notify("hash_f7204730");
   self endon("hash_f7204730");
   self endon("change_state");
-  while(true) {
+  while (true) {
     self waittill("grenade_stuck", var_8e857deb, origin, normal);
     var_8e857deb thread function_d7ef4d80();
     self function_75775e52(var_8e857deb.origin, 120);
@@ -922,11 +922,11 @@ function function_db9ecada() {
 
 function function_d7ef4d80() {
   self endon("death");
-  while(true) {
+  while (true) {
     a_ai_zombies = getaiarchetypearray("zombie");
     a_ai_zombies = arraysortclosest(a_ai_zombies, self.origin, undefined, undefined, 200);
     foreach(ai_zombie in a_ai_zombies) {
-      if(!isDefined(ai_zombie.is_elemental_zombie)) {
+      if(!isdefined(ai_zombie.is_elemental_zombie)) {
         ai_zombie.var_bb98125f = 1;
         ai_zombie thread zm_elemental_zombie::function_1b1bb1b();
       }
@@ -961,11 +961,11 @@ function function_dfc5ede1(targetent) {
   }
   self asmrequestsubstate("arm_rocket@stationary");
   self thread function_db9ecada();
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     self waittill("fire_harpoon");
     spike = self fireweapon(2);
     self clearturrettarget();
-    if(isDefined(spike)) {
+    if(isdefined(spike)) {
       self thread pin_spike_to_ground(spike, target);
     }
   }
@@ -981,7 +981,7 @@ function function_dfc5ede1(targetent) {
 }
 
 function is_valid_target(target) {
-  if(isDefined(target.ignoreme) && target.ignoreme || target.health <= 0) {
+  if(isdefined(target.ignoreme) && target.ignoreme || target.health <= 0) {
     return false;
   }
   if(isplayer(target) && target laststand::player_is_in_laststand()) {

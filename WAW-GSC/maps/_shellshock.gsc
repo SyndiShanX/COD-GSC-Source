@@ -26,7 +26,7 @@ main(origin, duration, shock_range, nMaxDamageBase, nRanDamageBase, nMinDamageBa
     customShellShock = "default";
   }
   players = maps\_utility::get_players();
-  for(q = 0; q < players.size; q++) {
+  for (q = 0; q < players.size; q++) {
     if(Distancesquared(players[q].origin, origin) < shock_range * shock_range) {
       players[q] thread shellshock_thread(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed, customShellShock, stanceLockDuration);
     }
@@ -42,7 +42,7 @@ shellshock_thread(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExp
     maxdamage = nMaxDamageBase;
   }
   mindamage = nMinDamageBase;
-  self playSound("weapons_rocket_explosion");
+  self PlaySound("weapons_rocket_explosion");
   wait(0.25);
   RadiusDamage(origin, range, maxdamage, mindamage);
   Earthquake(0.75, 2, origin, 2250);

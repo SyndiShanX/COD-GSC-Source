@@ -18,7 +18,7 @@ play_sam_ambience() {
   level.player waittill("missileTurret_on");
   clientnotify("mTon");
   temp_ent = spawn("script_origin", level.player.origin);
-  temp_ent playLoopSound("wpn_sam_interface_loop", 1);
+  temp_ent playloopsound("wpn_sam_interface_loop", 1);
   level.player thread end_looping_sound(temp_ent);
   level.player thread play_sam_radio();
   level.player thread play_sam_creaking_sounds();
@@ -37,7 +37,7 @@ play_sam_radio() {
   level.player endon("missileTurret_off");
 
   while(true) {
-    level.player playSound("amb_sam_radio_chatter");
+    level.player playsound("amb_sam_radio_chatter");
     wait(randomintrange(5, 10));
   }
 }
@@ -48,27 +48,25 @@ play_sam_creaking_sounds() {
   wait_max = undefined;
 
   while(true) {
-    if(!isDefined(level.num_planes_shot)) {
+    if(!isDefined(level.num_planes_shot))
       wait_max = 15;
-    } else {
+    else
       wait_max = get_wait_max();
-    }
 
-    level.player playSound("evt_cougar_creak");
+    level.player playsound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
   }
 }
 
 get_wait_max() {
-  if(level.num_planes_shot < 2) {
+  if(level.num_planes_shot < 2)
     return 12;
-  } else if(level.num_planes_shot < 6) {
+  else if(level.num_planes_shot < 6)
     return 8;
-  } else if(level.num_planes_shot < 9) {
+  else if(level.num_planes_shot < 9)
     return 6;
-  } else {
+  else
     return 4;
-  }
 }
 
 play_post_cougar_blend() {

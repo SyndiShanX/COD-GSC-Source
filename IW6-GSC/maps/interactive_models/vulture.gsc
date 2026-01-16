@@ -32,9 +32,8 @@ main() {
   var_0.savetostructfn = ::vulture_savetostruct;
   var_0.loadfromstructfn = ::vulture_loadfromstruct;
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive[var_0.interactive_type] = var_0;
   thread vultures();
@@ -47,15 +46,13 @@ vultures() {
     level._interactive["vultures_setup"] = 1;
     var_0 = getEntArray("interactive_vulture", "targetname");
 
-    foreach(var_2 in var_0) {
-      var_2 thread vulture_waitforstart();
-    }
+    foreach(var_2 in var_0)
+    var_2 thread vulture_waitforstart();
 
     var_0 = getEntArray("interactive_vulture_circling", "targetname");
 
-    foreach(var_2 in var_0) {
-      var_2 thread vulture_waitforstart();
-    }
+    foreach(var_2 in var_0)
+    var_2 thread vulture_waitforstart();
   }
 }
 
@@ -66,9 +63,8 @@ vulture_waitforstart() {
     var_0 vulture_loadfromstruct();
   } else if(self.targetname == "interactive_vulture")
     thread vulture();
-  else if(self.targetname == "interactive_vulture_circling") {
+  else if(self.targetname == "interactive_vulture_circling")
     thread vulture_circle(1);
-  }
 }
 
 vulture() {
@@ -77,9 +73,8 @@ vulture() {
   var_0 = level._interactive["vulture"];
   var_1 = undefined;
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     var_1 = getent(self.target, "targetname");
-  }
 
   if(isDefined(var_1)) {
     var_1 useanimtree(#animtree);
@@ -95,9 +90,8 @@ vulture() {
   thread maps\interactive_models\_interactive_utility::detect_people(var_0.fly_distance, "damage", ["death", "damage"]);
   thread vulture_detect_damage(var_0.health, var_0.damage_effect, var_0.death_effect, var_1, var_0.anims["idle_body_pose"]);
 
-  if(isDefined(self.script_triggername)) {
+  if(isDefined(self.script_triggername))
     thread vulture_waitfortriggerstop();
-  }
 
   var_4 = 1;
   self.interrupted = 0;
@@ -118,9 +112,8 @@ vulture() {
 
   self animscripted("fly_anim", var_2, var_3, var_0.anims["fly_away"]);
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 setanimknobrestart(var_0.anims["idle_body_pose"], 1, 0.2);
-  }
 
   self waittillmatch("fly_anim", "end");
   thread vulture_circle();
@@ -129,18 +122,17 @@ vulture() {
 vulture_circle(var_0) {
   self endon("death");
 
-  if(isDefined(self.script_triggername)) {
+  if(isDefined(self.script_triggername))
     thread vulture_waitfortriggerstop();
-  }
 
   self useanimtree(#animtree);
   var_1 = level._interactive["vulture"];
   thread vulture_detect_damage(var_1.health, var_1.damage_effect, var_1.death_effect);
   self.angles = (0, self.angles[1], self.angles[2]);
 
-  if(isDefined(var_0) && var_0) {
+  if(isDefined(var_0) && var_0)
     var_2 = self.origin;
-  } else {
+  else {
     var_3 = anglestoright(self.angles);
     var_2 = self.origin - var_3 * var_1.circle_radius;
   }
@@ -169,9 +161,8 @@ vulture_circle(var_0) {
 }
 
 vulture_detect_damage(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(self.health) || self.health == 0) {
+  if(!isDefined(self.health) || self.health == 0)
     self.health = var_0;
-  }
 
   self setCanDamage(1);
 
@@ -180,15 +171,13 @@ vulture_detect_damage(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(self)) {
       if(self.health > 0) {
-        if(isDefined(var_1)) {
+        if(isDefined(var_1))
           playFX(var_1, self.origin + (0, 0, 15));
-        }
       } else {
         playFX(var_2, self.origin + (0, 0, 15));
 
-        if(isDefined(var_3)) {
+        if(isDefined(var_3))
           var_3 setanimknobrestart(var_4, 1, 0.2);
-        }
 
         self delete();
       }
@@ -207,9 +196,8 @@ vulture_idle(var_0, var_1, var_2, var_3) {
   for(;;) {
     self animscripted("idle_anim", var_2, var_3, var_1["idle"]);
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_0 setanimknobrestart(var_1["idle_body"], 1);
-    }
 
     self waittillmatch("idle_anim", "end");
   }
@@ -220,9 +208,8 @@ vulture_react(var_0, var_1, var_2, var_3) {
   self endon("stop_idle");
   self animscripted("react_anim", var_2, var_3, var_1["react"]);
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 setanimknobrestart(var_1["idle_body_pose"], 1, 0.2);
-  }
 
   self waittillmatch("react_anim", "end");
   self notify("finished_react");
@@ -244,9 +231,8 @@ vulture_deletewithbody() {
   if(isDefined(self.target)) {
     var_0 = getent(self.target, "targetname");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_0 delete();
-    }
   }
 
   self delete();
@@ -300,9 +286,8 @@ vulture_loadfromstruct() {
   var_0.script_triggername = self.script_triggername;
   var_0.script_radius = self.script_radius;
 
-  if(var_0.targetname == "interactive_vulture") {
+  if(var_0.targetname == "interactive_vulture")
     var_0 thread vulture();
-  } else if(var_0.targetname == "interactive_vulture_circling") {
+  else if(var_0.targetname == "interactive_vulture_circling")
     var_0 thread vulture_circle(1);
-  }
 }

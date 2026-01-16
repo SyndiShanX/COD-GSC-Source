@@ -62,7 +62,7 @@
 #namespace killstreaks;
 
 function autoexec __init__sytem__() {
-  system::register("killstreaks", &__init__, undefined, undefined);
+  system::register("killstreaks", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -71,7 +71,7 @@ function __init__() {
   level.droplocations = [];
   level.zoffsetcounter = 0;
   clientfield::register("vehicle", "timeout_beep", 1, 2, "int");
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
@@ -83,14 +83,14 @@ function init() {
   level.menureferenceforkillstreak = [];
   level.numkillstreakreservedobjectives = 0;
   level.killstreakcounter = 0;
-  level.play_killstreak_firewall_being_hacked_dialog = &play_killstreak_firewall_being_hacked_dialog;
-  level.play_killstreak_firewall_hacked_dialog = &play_killstreak_firewall_hacked_dialog;
-  level.play_killstreak_being_hacked_dialog = &play_killstreak_being_hacked_dialog;
-  level.play_killstreak_hacked_dialog = &play_killstreak_hacked_dialog;
-  if(!isDefined(level.roundstartkillstreakdelay)) {
+  level.play_killstreak_firewall_being_hacked_dialog = & play_killstreak_firewall_being_hacked_dialog;
+  level.play_killstreak_firewall_hacked_dialog = & play_killstreak_firewall_hacked_dialog;
+  level.play_killstreak_being_hacked_dialog = & play_killstreak_being_hacked_dialog;
+  level.play_killstreak_hacked_dialog = & play_killstreak_hacked_dialog;
+  if(!isdefined(level.roundstartkillstreakdelay)) {
     level.roundstartkillstreakdelay = 0;
   }
-  level.iskillstreakweapon = &is_killstreak_weapon;
+  level.iskillstreakweapon = & is_killstreak_weapon;
   level.killstreakcorebundle = struct::get_script_bundle("killstreak", "killstreak_core");
   remote_weapons::init();
   ai_tank::init();
@@ -118,8 +118,8 @@ function init() {
   level.killstreak_init_end_time = getmillisecondsraw();
   elapsed_time = level.killstreak_init_end_time - level.killstreak_init_start_time;
   println(("" + elapsed_time) + "");
-  callback::on_spawned(&on_player_spawned);
-  callback::on_joined_team(&on_joined_team);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_joined_team( & on_joined_team);
   level thread killstreak_debug_think();
   if(getdvarint("teamOpsEnabled") == 1) {
     level teamops::main();
@@ -127,10 +127,10 @@ function init() {
 }
 
 function register(killstreaktype, killstreakweaponname, killstreakmenuname, killstreakusagekey, killstreakusefunction, killstreakdelaystreak, weaponholdallowed = 0, killstreakstatsname = undefined, registerdvars = 1, registerinventory = 1) {
-  assert(isDefined(killstreaktype), "");
-  assert(!isDefined(level.killstreaks[killstreaktype]), ("" + killstreaktype) + "");
-  assert(isDefined(killstreakusefunction), "" + killstreaktype);
-  level.killstreaks[killstreaktype] = spawnStruct();
+  assert(isdefined(killstreaktype), "");
+  assert(!isdefined(level.killstreaks[killstreaktype]), ("" + killstreaktype) + "");
+  assert(isdefined(killstreakusefunction), "" + killstreaktype);
+  level.killstreaks[killstreaktype] = spawnstruct();
   statstablename = util::getstatstablename();
   level.killstreaks[killstreaktype].killstreaklevel = int(tablelookup(statstablename, 4, killstreakmenuname, 5));
   level.killstreaks[killstreaktype].momentumcost = int(tablelookup(statstablename, 4, killstreakmenuname, 16));
@@ -147,23 +147,23 @@ function register(killstreaktype, killstreakweaponname, killstreakmenuname, kill
   if(level.killstreaks[killstreaktype].uiname == "") {
     level.killstreaks[killstreaktype].uiname = killstreakmenuname;
   }
-  if(isDefined(killstreakweaponname)) {
+  if(isdefined(killstreakweaponname)) {
     killstreakweapon = getweapon(killstreakweaponname);
     assert(killstreakweapon != level.weaponnone);
-    assert(!isDefined(level.killstreakweapons[killstreakweapon]), "");
+    assert(!isdefined(level.killstreakweapons[killstreakweapon]), "");
     level.killstreaks[killstreaktype].weapon = killstreakweapon;
     level.killstreakweapons[killstreakweapon] = killstreaktype;
   }
-  if(isDefined(killstreakstatsname)) {
+  if(isdefined(killstreakstatsname)) {
     level.killstreaks[killstreaktype].killstreakstatsname = killstreakstatsname;
   }
   level.killstreaks[killstreaktype].weaponholdallowed = weaponholdallowed;
-  if(isDefined(registerinventory) && registerinventory) {
+  if(isdefined(registerinventory) && registerinventory) {
     level.menureferenceforkillstreak[killstreakmenuname] = killstreaktype;
     killstreak_bundles::register_killstreak_bundle(killstreaktype);
   }
-  if(isDefined(registerinventory) && registerinventory) {
-    if(isDefined(registerdvars) && registerdvars) {
+  if(isdefined(registerinventory) && registerinventory) {
+    if(isdefined(registerdvars) && registerdvars) {
       register_dev_dvars(killstreaktype);
     }
     register("inventory_" + killstreaktype, "inventory_" + killstreakweaponname, killstreakmenuname, killstreakusagekey, killstreakusefunction, killstreakdelaystreak, weaponholdallowed, killstreakstatsname, registerdvars, 0);
@@ -171,26 +171,26 @@ function register(killstreaktype, killstreakweaponname, killstreakmenuname, kill
 }
 
 function is_registered(killstreaktype) {
-  return isDefined(level.killstreaks[killstreaktype]);
+  return isdefined(level.killstreaks[killstreaktype]);
 }
 
 function register_strings(killstreaktype, receivedtext, notusabletext, inboundtext, inboundnearplayertext, hackedtext, utilizesairspace = 1, isinventory = 0) {
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   level.killstreaks[killstreaktype].receivedtext = receivedtext;
   level.killstreaks[killstreaktype].notavailabletext = notusabletext;
   level.killstreaks[killstreaktype].inboundtext = inboundtext;
   level.killstreaks[killstreaktype].inboundnearplayertext = inboundnearplayertext;
   level.killstreaks[killstreaktype].hackedtext = hackedtext;
   level.killstreaks[killstreaktype].utilizesairspace = utilizesairspace;
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     register_strings("inventory_" + killstreaktype, receivedtext, notusabletext, inboundtext, inboundnearplayertext, hackedtext, utilizesairspace, 1);
   }
 }
 
 function register_dialog(killstreaktype, informdialog, taacomdialogbundlekey, pilotdialogarraykey, startdialogkey, enemystartdialogkey, enemystartmultipledialogkey, hackeddialogkey, hackedstartdialogkey, requestdialogkey, threatdialogkey, isinventory) {
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   level.killstreaks[killstreaktype].informdialog = informdialog;
   level.killstreaks[killstreaktype].taacomdialogbundlekey = taacomdialogbundlekey;
   level.killstreaks[killstreaktype].startdialogkey = startdialogkey;
@@ -200,17 +200,17 @@ function register_dialog(killstreaktype, informdialog, taacomdialogbundlekey, pi
   level.killstreaks[killstreaktype].hackedstartdialogkey = hackedstartdialogkey;
   level.killstreaks[killstreaktype].requestdialogkey = requestdialogkey;
   level.killstreaks[killstreaktype].threatdialogkey = threatdialogkey;
-  if(isDefined(pilotdialogarraykey)) {
+  if(isdefined(pilotdialogarraykey)) {
     taacombundles = struct::get_script_bundles("mpdialog_taacom");
     foreach(bundle in taacombundles) {
-      if(!isDefined(bundle.pilotbundles)) {
+      if(!isdefined(bundle.pilotbundles)) {
         bundle.pilotbundles = [];
       }
       bundle.pilotbundles[killstreaktype] = [];
       i = 0;
       field = pilotdialogarraykey + i;
       fieldvalue = getstructfield(bundle, field);
-      while(isDefined(fieldvalue)) {
+      while (isdefined(fieldvalue)) {
         bundle.pilotbundles[killstreaktype][i] = fieldvalue;
         i++;
         field = pilotdialogarraykey + i;
@@ -218,14 +218,14 @@ function register_dialog(killstreaktype, informdialog, taacomdialogbundlekey, pi
       }
     }
   }
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     register_dialog("inventory_" + killstreaktype, informdialog, taacomdialogbundlekey, pilotdialogarraykey, startdialogkey, enemystartdialogkey, enemystartmultipledialogkey, hackeddialogkey, hackedstartdialogkey, requestdialogkey, threatdialogkey, 1);
   }
 }
 
 function register_alt_weapon(killstreaktype, weaponname, isinventory) {
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   weapon = getweapon(weaponname);
   if(weapon == level.weaponnone) {
     return;
@@ -233,40 +233,40 @@ function register_alt_weapon(killstreaktype, weaponname, isinventory) {
   if(level.killstreaks[killstreaktype].weapon == weapon) {
     return;
   }
-  if(!isDefined(level.killstreaks[killstreaktype].altweapons)) {
+  if(!isdefined(level.killstreaks[killstreaktype].altweapons)) {
     level.killstreaks[killstreaktype].altweapons = [];
   }
-  if(!isDefined(level.killstreakweapons[weapon])) {
+  if(!isdefined(level.killstreakweapons[weapon])) {
     level.killstreakweapons[weapon] = killstreaktype;
   }
   level.killstreaks[killstreaktype].altweapons[level.killstreaks[killstreaktype].altweapons.size] = weapon;
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     register_alt_weapon("inventory_" + killstreaktype, weaponname, 1);
   }
 }
 
 function register_remote_override_weapon(killstreaktype, weaponname, isinventory) {
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   weapon = getweapon(weaponname);
   if(level.killstreaks[killstreaktype].weapon == weapon) {
     return;
   }
-  if(!isDefined(level.killstreaks[killstreaktype].remoteoverrideweapons)) {
+  if(!isdefined(level.killstreaks[killstreaktype].remoteoverrideweapons)) {
     level.killstreaks[killstreaktype].remoteoverrideweapons = [];
   }
-  if(!isDefined(level.killstreakweapons[weapon])) {
+  if(!isdefined(level.killstreakweapons[weapon])) {
     level.killstreakweapons[weapon] = killstreaktype;
   }
   level.killstreaks[killstreaktype].remoteoverrideweapons[level.killstreaks[killstreaktype].remoteoverrideweapons.size] = weapon;
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     register_remote_override_weapon("inventory_" + killstreaktype, weaponname, 1);
   }
 }
 
 function is_remote_override_weapon(killstreaktype, weapon) {
-  if(isDefined(level.killstreaks[killstreaktype].remoteoverrideweapons)) {
-    for(i = 0; i < level.killstreaks[killstreaktype].remoteoverrideweapons.size; i++) {
+  if(isdefined(level.killstreaks[killstreaktype].remoteoverrideweapons)) {
+    for (i = 0; i < level.killstreaks[killstreaktype].remoteoverrideweapons.size; i++) {
       if(level.killstreaks[killstreaktype].remoteoverrideweapons[i] == weapon) {
         return true;
       }
@@ -276,10 +276,10 @@ function is_remote_override_weapon(killstreaktype, weapon) {
 }
 
 function register_dev_dvars(killstreaktype) {
-  /
+  /# /
   #
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   level.killstreaks[killstreaktype].devdvar = ("" + killstreaktype) + "";
   level.killstreaks[killstreaktype].devenemydvar = ("" + killstreaktype) + "";
   level.killstreaks[killstreaktype].devtimeoutdvar = ("" + killstreaktype) + "";
@@ -288,10 +288,10 @@ function register_dev_dvars(killstreaktype) {
 }
 
 function register_dev_debug_dvar(killstreaktype) {
-  /
+  /# /
   #
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   level.killstreaks[killstreaktype].devdebugdvar = ("" + killstreaktype) + "";
   devgui_scorestreak_command_debugdvar(killstreaktype, level.killstreaks[killstreaktype].devdebugdvar);
 }
@@ -301,13 +301,13 @@ function register_devgui(killstreaktype) {
   wait(randomintrange(2, 20) * 0.05);
   give_type_all = "";
   give_type_enemy = "";
-  if(isDefined(level.killstreaks[killstreaktype].devdvar)) {
+  if(isdefined(level.killstreaks[killstreaktype].devdvar)) {
     devgui_scorestreak_command_givedvar(killstreaktype, give_type_all, level.killstreaks[killstreaktype].devdvar);
   }
-  if(isDefined(level.killstreaks[killstreaktype].devenemydvar)) {
+  if(isdefined(level.killstreaks[killstreaktype].devenemydvar)) {
     devgui_scorestreak_command_givedvar(killstreaktype, give_type_enemy, level.killstreaks[killstreaktype].devenemydvar);
   }
-  if(isDefined(level.killstreaks[killstreaktype].devtimeoutdvar)) {
+  if(isdefined(level.killstreaks[killstreaktype].devtimeoutdvar)) {
     devgui_scorestreak_command_timeoutdvar(killstreaktype, level.killstreaks[killstreaktype].devtimeoutdvar);
   }
 }
@@ -330,20 +330,20 @@ function devgui_scorestreak_dvar_toggle(killstreaktype, title, dvar) {
 }
 
 function devgui_scorestreak_command(killstreaktype, title, command) {
-  /
+  /# /
   #
-  assert(isDefined(killstreaktype), "");
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(killstreaktype), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   root = "";
   user_name = makelocalizedstring(level.killstreaks[killstreaktype].uiname);
   adddebugcommand((((((((root + user_name) + "") + killstreaktype) + "") + title) + "") + command) + "");
 }
 
 function should_draw_debug(killstreak) {
-  /
+  /# /
   #
-  assert(isDefined(killstreak), "");
-  if(isDefined(level.killstreaks[killstreak]) && isDefined(level.killstreaks[killstreak].devdebugdvar)) {
+  assert(isdefined(killstreak), "");
+  if(isdefined(level.killstreaks[killstreak]) && isdefined(level.killstreaks[killstreak].devdebugdvar)) {
     return getdvarint(level.killstreaks[killstreak].devdebugdvar);
   }
   return 0;
@@ -359,20 +359,20 @@ function allow_assists(killstreaktype, allow) {
 
 function set_team_kill_penalty_scale(killstreaktype, scale, isinventory) {
   level.killstreaks[killstreaktype].teamkillpenaltyscale = scale;
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     set_team_kill_penalty_scale("inventory_" + killstreaktype, scale, 1);
   }
 }
 
 function override_entity_camera_in_demo(killstreaktype, value, isinventory) {
   level.killstreaks[killstreaktype].overrideentitycameraindemo = value;
-  if(!(isDefined(isinventory) && isinventory)) {
+  if(!(isdefined(isinventory) && isinventory)) {
     override_entity_camera_in_demo("inventory_" + killstreaktype, value, 1);
   }
 }
 
 function is_available(killstreak) {
-  if(isDefined(level.menureferenceforkillstreak[killstreak])) {
+  if(isdefined(level.menureferenceforkillstreak[killstreak])) {
     return true;
   }
   return false;
@@ -383,14 +383,14 @@ function get_by_menu_name(killstreak) {
 }
 
 function get_menu_name(killstreaktype) {
-  assert(isDefined(level.killstreaks[killstreaktype]));
+  assert(isdefined(level.killstreaks[killstreaktype]));
   return level.killstreaks[killstreaktype].menuname;
 }
 
 function get_level(index, killstreak) {
   killstreaklevel = level.killstreaks[get_by_menu_name(killstreak)].killstreaklevel;
   if(getdvarint("custom_killstreak_mode") == 2) {
-    if(isDefined(self.killstreak[index]) && killstreak == self.killstreak[index]) {
+    if(isdefined(self.killstreak[index]) && killstreak == self.killstreak[index]) {
       killsrequired = getdvarint((("custom_killstreak_" + index) + 1) + "_kills");
       if(killsrequired) {
         killstreaklevel = getdvarint((("custom_killstreak_" + index) + 1) + "_kills");
@@ -402,10 +402,10 @@ function get_level(index, killstreak) {
 
 function give_if_streak_count_matches(index, killstreak, streakcount) {
   pixbeginevent("giveKillstreakIfStreakCountMatches");
-  if(!isDefined(killstreak)) {
+  if(!isdefined(killstreak)) {
     println("");
   }
-  if(isDefined(killstreak)) {
+  if(isdefined(killstreak)) {
     println(("" + killstreak) + "");
   }
   if(!is_available(killstreak)) {
@@ -416,7 +416,7 @@ function give_if_streak_count_matches(index, killstreak, streakcount) {
   } else {
     hasalreadyearnedkillstreak = 0;
   }
-  if(isDefined(killstreak) && is_available(killstreak) && !hasalreadyearnedkillstreak) {
+  if(isdefined(killstreak) && is_available(killstreak) && !hasalreadyearnedkillstreak) {
     killstreaklevel = get_level(index, killstreak);
     if(self hasperk("specialty_killstreak")) {
       reduction = getdvarint("perk_killstreakReduction");
@@ -440,18 +440,18 @@ function give_for_streak() {
   if(!util::iskillstreaksenabled()) {
     return;
   }
-  if(!isDefined(self.pers["totalKillstreakCount"])) {
+  if(!isdefined(self.pers["totalKillstreakCount"])) {
     self.pers["totalKillstreakCount"] = 0;
   }
   given = 0;
-  for(i = 0; i < self.killstreak.size; i++) {
+  for (i = 0; i < self.killstreak.size; i++) {
     given = given | give_if_streak_count_matches(i, self.killstreak[i], self.pers["cur_kill_streak"]);
   }
 }
 
 function is_an_a_killstreak() {
   onkillstreak = 0;
-  if(!isDefined(self.pers["kill_streak_before_death"])) {
+  if(!isdefined(self.pers["kill_streak_before_death"])) {
     self.pers["kill_streak_before_death"] = 0;
   }
   streakplusone = self.pers["kill_streak_before_death"] + 1;
@@ -467,7 +467,7 @@ function give(killstreaktype, streak, suppressnotification, noxp, tobottom) {
   level endon("game_ended");
   had_to_delay = 0;
   killstreakgiven = 0;
-  if(isDefined(noxp)) {
+  if(isdefined(noxp)) {
     if(self give_internal(killstreaktype, undefined, noxp, tobottom)) {
       killstreakgiven = 1;
       if(self.just_given_new_inventory_killstreak === 1) {
@@ -500,7 +500,7 @@ function take(killstreak) {
 }
 
 function remove_oldest() {
-  if(isDefined(self.pers["killstreaks"][0])) {
+  if(isdefined(self.pers["killstreaks"][0])) {
     currentweapon = self getcurrentweapon();
     if(currentweapon == get_killstreak_weapon(self.pers["killstreaks"][0])) {
       primaries = self getweaponslistprimaries();
@@ -521,29 +521,29 @@ function give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom
   if(!util::iskillstreaksenabled()) {
     return false;
   }
-  if(!isDefined(level.killstreaks[killstreaktype])) {
+  if(!isdefined(level.killstreaks[killstreaktype])) {
     return false;
   }
-  if(!isDefined(self.pers["killstreaks"])) {
+  if(!isdefined(self.pers["killstreaks"])) {
     self.pers["killstreaks"] = [];
   }
-  if(!isDefined(self.pers["killstreak_has_been_used"])) {
+  if(!isdefined(self.pers["killstreak_has_been_used"])) {
     self.pers["killstreak_has_been_used"] = [];
   }
-  if(!isDefined(self.pers["killstreak_unique_id"])) {
+  if(!isdefined(self.pers["killstreak_unique_id"])) {
     self.pers["killstreak_unique_id"] = [];
   }
-  if(!isDefined(self.pers["killstreak_ammo_count"])) {
+  if(!isdefined(self.pers["killstreak_ammo_count"])) {
     self.pers["killstreak_ammo_count"] = [];
   }
   just_max_stack_removed_inventory_killstreak = undefined;
-  if(isDefined(tobottom) && tobottom) {
+  if(isdefined(tobottom) && tobottom) {
     size = self.pers["killstreaks"].size;
     if(self.pers["killstreaks"].size >= level.maxinventoryscorestreaks) {
       self remove_oldest();
       just_max_stack_removed_inventory_killstreak = self.just_removed_used_killstreak;
     }
-    for(i = size; i > 0; i--) {
+    for (i = size; i > 0; i--) {
       self.pers["killstreaks"][i] = self.pers["killstreaks"][i - 1];
       self.pers["killstreak_has_been_used"][i] = self.pers["killstreak_has_been_used"][i - 1];
       self.pers["killstreak_unique_id"][i] = self.pers["killstreak_unique_id"][i - 1];
@@ -552,7 +552,7 @@ function give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom
     self.pers["killstreaks"][0] = killstreaktype;
     self.pers["killstreak_unique_id"][0] = level.killstreakcounter;
     level.killstreakcounter++;
-    if(isDefined(noxp)) {
+    if(isdefined(noxp)) {
       self.pers["killstreak_has_been_used"][0] = noxp;
     } else {
       self.pers["killstreak_has_been_used"][0] = 0;
@@ -570,7 +570,7 @@ function give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom
       self remove_oldest();
       just_max_stack_removed_inventory_killstreak = self.just_removed_used_killstreak;
     }
-    if(isDefined(noxp)) {
+    if(isdefined(noxp)) {
       self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = noxp;
     } else {
       self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = 0;
@@ -585,10 +585,10 @@ function give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom
 
 function add_to_notification_queue(menuname, streakcount, hardpointtype, nonotify) {
   killstreaktablenumber = level.killstreakindices[menuname];
-  if(!isDefined(killstreaktablenumber)) {
+  if(!isdefined(killstreaktablenumber)) {
     return;
   }
-  if(isDefined(nonotify) && nonotify) {
+  if(isdefined(nonotify) && nonotify) {
     return;
   }
   informdialog = get_killstreak_inform_dialog(hardpointtype);
@@ -603,7 +603,7 @@ function add_to_notification_queue(menuname, streakcount, hardpointtype, nonotif
 function has_equipped() {
   currentweapon = self getcurrentweapon();
   keys = getarraykeys(level.killstreaks);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level.killstreaks[keys[i]].weapon == currentweapon) {
       return true;
     }
@@ -618,14 +618,14 @@ function _get_from_weapon(weapon) {
     if(killstreak.weapon == weapon) {
       return key;
     }
-    if(isDefined(killstreak.altweapons)) {
+    if(isdefined(killstreak.altweapons)) {
       foreach(altweapon in killstreak.altweapons) {
         if(altweapon == weapon) {
           return key;
         }
       }
     }
-    if(isDefined(killstreak.remoteoverrideweapons)) {
+    if(isdefined(killstreak.remoteoverrideweapons)) {
       foreach(remoteoverrideweapon in killstreak.remoteoverrideweapons) {
         if(remoteoverrideweapon == weapon) {
           return key;
@@ -641,7 +641,7 @@ function get_from_weapon(weapon) {
     return undefined;
   }
   res = _get_from_weapon(weapon);
-  if(!isDefined(res)) {
+  if(!isdefined(res)) {
     return _get_from_weapon(weapon.rootweapon);
   }
   return res;
@@ -649,9 +649,9 @@ function get_from_weapon(weapon) {
 
 function give_weapon(weapon, isinventory, usestoredammo) {
   currentweapon = self getcurrentweapon();
-  if(currentweapon != level.weaponnone && (!(isDefined(level.usingmomentum) && level.usingmomentum))) {
+  if(currentweapon != level.weaponnone && (!(isdefined(level.usingmomentum) && level.usingmomentum))) {
     weaponslist = self getweaponslist();
-    for(idx = 0; idx < weaponslist.size; idx++) {
+    for (idx = 0; idx < weaponslist.size; idx++) {
       carriedweapon = weaponslist[idx];
       if(currentweapon == carriedweapon) {
         continue;
@@ -671,31 +671,31 @@ function give_weapon(weapon, isinventory, usestoredammo) {
     self takeweapon(weapon);
     self giveweapon(weapon);
   }
-  if(isDefined(level.usingmomentum) && level.usingmomentum) {
+  if(isdefined(level.usingmomentum) && level.usingmomentum) {
     self setinventoryweapon(weapon);
     if(weapon.iscarriedkillstreak) {
-      if(!isDefined(self.pers["held_killstreak_ammo_count"][weapon])) {
+      if(!isdefined(self.pers["held_killstreak_ammo_count"][weapon])) {
         self.pers["held_killstreak_ammo_count"][weapon] = 0;
       }
-      if(!isDefined(self.pers["held_killstreak_clip_count"][weapon])) {
+      if(!isdefined(self.pers["held_killstreak_clip_count"][weapon])) {
         self.pers["held_killstreak_clip_count"][weapon] = weapon.clipsize;
       }
-      if(!isDefined(self.pers["killstreak_quantity"][weapon])) {
+      if(!isdefined(self.pers["killstreak_quantity"][weapon])) {
         self.pers["killstreak_quantity"][weapon] = 0;
       }
       if(currentweapon == weapon && !isheldinventorykillstreakweapon(weapon)) {
         return weapon.maxammo;
       }
-      if(isDefined(usestoredammo) && usestoredammo && (self.pers["killstreak_ammo_count"][self.pers["killstreak_ammo_count"].size - 1]) > 0) {
+      if(isdefined(usestoredammo) && usestoredammo && (self.pers["killstreak_ammo_count"][self.pers["killstreak_ammo_count"].size - 1]) > 0) {
         switch (weapon.name) {
           case "inventory_minigun": {
-            if(isDefined(self.minigunactive) && self.minigunactive) {
+            if(isdefined(self.minigunactive) && self.minigunactive) {
               return self.pers["held_killstreak_ammo_count"][weapon];
             }
             break;
           }
           case "inventory_m32": {
-            if(isDefined(self.m32active) && self.m32active) {
+            if(isdefined(self.m32active) && self.m32active) {
               return self.pers["held_killstreak_ammo_count"][weapon];
             }
             break;
@@ -743,16 +743,16 @@ function activate_next(do_not_update_death_count) {
   if(level.gameended) {
     return false;
   }
-  if(isDefined(level.usingmomentum) && level.usingmomentum) {
+  if(isdefined(level.usingmomentum) && level.usingmomentum) {
     self setinventoryweapon(level.weaponnone);
   } else {
     self setactionslot(4, "");
   }
-  if(!isDefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0) {
+  if(!isdefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0) {
     return false;
   }
   killstreaktype = self.pers["killstreaks"][self.pers["killstreaks"].size - 1];
-  if(!isDefined(level.killstreaks[killstreaktype])) {
+  if(!isdefined(level.killstreaks[killstreaktype])) {
     return false;
   }
   weapon = level.killstreaks[killstreaktype].weapon;
@@ -762,14 +762,14 @@ function activate_next(do_not_update_death_count) {
     self setweaponammoclip(weapon, self.pers["held_killstreak_clip_count"][weapon]);
     self setweaponammostock(weapon, ammocount - self.pers["held_killstreak_clip_count"][weapon]);
   }
-  if(!isDefined(do_not_update_death_count) || do_not_update_death_count != 0) {
+  if(!isdefined(do_not_update_death_count) || do_not_update_death_count != 0) {
     self.pers["killstreakItemDeathCount" + killstreaktype] = self.deathcount;
   }
   return true;
 }
 
 function give_owned() {
-  if(isDefined(self.pers["killstreaks"]) && self.pers["killstreaks"].size > 0) {
+  if(isdefined(self.pers["killstreaks"]) && self.pers["killstreaks"].size > 0) {
     self activate_next(0);
   }
 }
@@ -806,10 +806,10 @@ function has_killstreak_in_class(killstreakmenuname) {
 
 function has_killstreak(killstreak) {
   player = self;
-  if(!isDefined(killstreak) || !isDefined(player.pers["killstreaks"])) {
+  if(!isdefined(killstreak) || !isdefined(player.pers["killstreaks"])) {
     return false;
   }
-  for(i = 0; i < self.pers["killstreaks"].size; i++) {
+  for (i = 0; i < self.pers["killstreaks"].size; i++) {
     if(player.pers["killstreaks"][i] == killstreak) {
       return true;
     }
@@ -819,13 +819,13 @@ function has_killstreak(killstreak) {
 
 function recordkillstreakbegindirect(recordstreakindex) {
   player = self;
-  if(!isplayer(player) || !isDefined(recordstreakindex)) {
+  if(!isplayer(player) || !isdefined(recordstreakindex)) {
     return;
   }
-  if(!isDefined(self.killstreakevents)) {
+  if(!isdefined(self.killstreakevents)) {
     player.killstreakevents = associativearray();
   }
-  if(isDefined(self.killstreakevents[recordstreakindex])) {
+  if(isdefined(self.killstreakevents[recordstreakindex])) {
     kills = player.killstreakevents[recordstreakindex];
     eventindex = player recordkillstreakevent(recordstreakindex);
     player killstreakrules::recordkillstreakenddirect(eventindex, recordstreakindex, kills);
@@ -839,7 +839,7 @@ function recordkillstreakbegindirect(recordstreakindex) {
 function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
   self endon("disconnect");
   continue_wait = 1;
-  while(continue_wait) {
+  while (continue_wait) {
     self waittill("killstreak_done", successful, killstreaktype);
     if(killstreaktype == killstreak) {
       continue_wait = 0;
@@ -849,12 +849,12 @@ function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
     print("" + get_menu_name(killstreak));
     killstreak_weapon = get_killstreak_weapon(killstreak);
     recordstreakindex = undefined;
-    if(isDefined(level.killstreaks[killstreak].menuname)) {
+    if(isdefined(level.killstreaks[killstreak].menuname)) {
       recordstreakindex = level.killstreakindices[level.killstreaks[killstreak].menuname];
       self recordkillstreakbegindirect(recordstreakindex);
     }
-    if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
-      if(isDefined(isfrominventory) && isfrominventory) {
+    if(isdefined(level.usingscorestreaks) && level.usingscorestreaks) {
+      if(isdefined(isfrominventory) && isfrominventory) {
         remove_used_killstreak(killstreak);
         if(self getinventoryweapon() == killstreak_weapon) {
           self setinventoryweapon(level.weaponnone);
@@ -863,8 +863,8 @@ function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
         self change_killstreak_quantity(killstreak_weapon, -1);
       }
     } else {
-      if(isDefined(level.usingmomentum) && level.usingmomentum) {
-        if(isDefined(isfrominventory) && isfrominventory && self getinventoryweapon() == killstreak_weapon) {
+      if(isdefined(level.usingmomentum) && level.usingmomentum) {
+        if(isdefined(isfrominventory) && isfrominventory && self getinventoryweapon() == killstreak_weapon) {
           remove_used_killstreak(killstreak);
           self setinventoryweapon(level.weaponnone);
         } else {
@@ -874,7 +874,7 @@ function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
         remove_used_killstreak(killstreak);
       }
     }
-    if(!(isDefined(level.usingmomentum) && level.usingmomentum)) {
+    if(!(isdefined(level.usingmomentum) && level.usingmomentum)) {
       self setactionslot(4, "");
     }
     success = 1;
@@ -886,23 +886,23 @@ function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
   if(currentweapon == killstreak_weapon && killstreak_weapon.iscarriedkillstreak) {
     return;
   }
-  if(successful && (!self has_killstreak_in_class(get_menu_name(killstreak)) || (isDefined(isfrominventory) && isfrominventory))) {
+  if(successful && (!self has_killstreak_in_class(get_menu_name(killstreak)) || (isdefined(isfrominventory) && isfrominventory))) {
     switch_to_last_non_killstreak_weapon();
   } else {
     killstreakforcurrentweapon = get_from_weapon(currentweapon);
     if(currentweapon.isgameplayweapon) {
-      if(isDefined(self.isplanting) && self.isplanting || (isDefined(self.isdefusing) && self.isdefusing)) {
+      if(isdefined(self.isplanting) && self.isplanting || (isdefined(self.isdefusing) && self.isdefusing)) {
         return;
       }
     }
-    if(!isDefined(killstreakforcurrentweapon) && currentweapon.isheroweapon) {
+    if(!isdefined(killstreakforcurrentweapon) && currentweapon.isheroweapon) {
       return;
     }
-    if(successful || !isDefined(killstreakforcurrentweapon) || killstreakforcurrentweapon == killstreak) {
+    if(successful || !isdefined(killstreakforcurrentweapon) || killstreakforcurrentweapon == killstreak) {
       switch_to_last_non_killstreak_weapon();
     }
   }
-  if(!(isDefined(level.usingmomentum) && level.usingmomentum) || (isDefined(isfrominventory) && isfrominventory)) {
+  if(!(isdefined(level.usingmomentum) && level.usingmomentum) || (isdefined(isfrominventory) && isfrominventory)) {
     if(successful) {
       activate_next();
     }
@@ -911,7 +911,7 @@ function remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
 
 function usekillstreak(killstreak, isfrominventory) {
   haskillstreakbeenused = get_if_top_killstreak_has_been_used();
-  if(isDefined(self.selectinglocation)) {
+  if(isdefined(self.selectinglocation)) {
     return;
   }
   self thread remove_when_done(killstreak, haskillstreakbeenused, isfrominventory);
@@ -920,20 +920,20 @@ function usekillstreak(killstreak, isfrominventory) {
 
 function remove_used_killstreak(killstreak, killstreakid, take_weapon_after_use = 1) {
   self.just_removed_used_killstreak = undefined;
-  if(!isDefined(self.pers["killstreaks"])) {
+  if(!isdefined(self.pers["killstreaks"])) {
     return;
   }
   killstreakindex = undefined;
-  for(i = self.pers["killstreaks"].size - 1; i >= 0; i--) {
+  for (i = self.pers["killstreaks"].size - 1; i >= 0; i--) {
     if(self.pers["killstreaks"][i] == killstreak) {
-      if(isDefined(killstreakid) && self.pers["killstreak_unique_id"][i] != killstreakid) {
+      if(isdefined(killstreakid) && self.pers["killstreak_unique_id"][i] != killstreakid) {
         continue;
       }
       killstreakindex = i;
       break;
     }
   }
-  if(!isDefined(killstreakindex)) {
+  if(!isdefined(killstreakindex)) {
     return false;
   }
   self.just_removed_used_killstreak = killstreak;
@@ -941,7 +941,7 @@ function remove_used_killstreak(killstreak, killstreakid, take_weapon_after_use 
     self thread take_weapon_after_use(get_killstreak_weapon(killstreak));
   }
   arraysize = self.pers["killstreaks"].size;
-  for(i = killstreakindex; i < (arraysize - 1); i++) {
+  for (i = killstreakindex; i < (arraysize - 1); i++) {
     self.pers["killstreaks"][i] = self.pers["killstreaks"][i + 1];
     self.pers["killstreak_has_been_used"][i] = self.pers["killstreak_has_been_used"][i + 1];
     self.pers["killstreak_unique_id"][i] = self.pers["killstreak_unique_id"][i + 1];
@@ -974,7 +974,7 @@ function get_top_killstreak() {
 }
 
 function get_if_top_killstreak_has_been_used() {
-  if(!(isDefined(level.usingmomentum) && level.usingmomentum)) {
+  if(!(isdefined(level.usingmomentum) && level.usingmomentum)) {
     if(self.pers["killstreak_has_been_used"].size == 0) {
       return undefined;
     }
@@ -990,7 +990,7 @@ function get_top_killstreak_unique_id() {
 }
 
 function get_killstreak_index_by_id(killstreakid) {
-  for(index = self.pers["killstreak_unique_id"].size - 1; index >= 0; index--) {
+  for (index = self.pers["killstreak_unique_id"].size - 1; index >= 0; index--) {
     if(self.pers["killstreak_unique_id"][index] == killstreakid) {
       return index;
     }
@@ -999,18 +999,18 @@ function get_killstreak_index_by_id(killstreakid) {
 }
 
 function get_killstreak_momentum_cost(killstreak) {
-  if(!(isDefined(level.usingmomentum) && level.usingmomentum)) {
+  if(!(isdefined(level.usingmomentum) && level.usingmomentum)) {
     return 0;
   }
-  if(!isDefined(killstreak)) {
+  if(!isdefined(killstreak)) {
     return 0;
   }
-  assert(isDefined(level.killstreaks[killstreak]));
+  assert(isdefined(level.killstreaks[killstreak]));
   return level.killstreaks[killstreak].momentumcost;
 }
 
 function get_killstreak_for_weapon(weapon) {
-  if(isDefined(level.killstreakweapons[weapon])) {
+  if(isdefined(level.killstreakweapons[weapon])) {
     return level.killstreakweapons[weapon];
   }
   return level.killstreakweapons[weapon.rootweapon];
@@ -1019,7 +1019,7 @@ function get_killstreak_for_weapon(weapon) {
 function get_killstreak_for_weapon_for_stats(weapon) {
   prefix = "inventory_";
   killstreak = get_killstreak_for_weapon(weapon);
-  if(isDefined(killstreak)) {
+  if(isdefined(killstreak)) {
     if(strstartswith(killstreak, prefix)) {
       killstreak = getsubstr(killstreak, prefix.size);
     }
@@ -1029,7 +1029,7 @@ function get_killstreak_for_weapon_for_stats(weapon) {
 
 function is_killstreak_weapon_assist_allowed(weapon) {
   killstreak = get_killstreak_for_weapon(weapon);
-  if(!isDefined(killstreak)) {
+  if(!isdefined(killstreak)) {
     return false;
   }
   if(level.killstreaks[killstreak].allowassists) {
@@ -1040,7 +1040,7 @@ function is_killstreak_weapon_assist_allowed(weapon) {
 
 function get_killstreak_team_kill_penalty_scale(weapon) {
   killstreak = get_killstreak_for_weapon(weapon);
-  if(!isDefined(killstreak)) {
+  if(!isdefined(killstreak)) {
     return 1;
   }
   return level.killstreaks[killstreak].teamkillpenaltyscale;
@@ -1048,13 +1048,13 @@ function get_killstreak_team_kill_penalty_scale(weapon) {
 
 function should_override_entity_camera_in_demo(player, weapon) {
   killstreak = get_killstreak_for_weapon(weapon);
-  if(!isDefined(killstreak)) {
+  if(!isdefined(killstreak)) {
     return false;
   }
   if(level.killstreaks[killstreak].overrideentitycameraindemo) {
     return true;
   }
-  if(isDefined(player.remoteweapon) && (isDefined(player.remoteweapon.controlled) && player.remoteweapon.controlled)) {
+  if(isdefined(player.remoteweapon) && (isdefined(player.remoteweapon.controlled) && player.remoteweapon.controlled)) {
     return true;
   }
   return false;
@@ -1065,7 +1065,7 @@ function wait_till_hero_weapon_is_fully_on(weapon) {
   self endon("disconnect");
   self endon("weapon_change");
   slot = self gadgetgetslot(weapon);
-  while(true) {
+  while (true) {
     if(self ability_player::gadget_is_in_use(slot)) {
       self.lastnonkillstreakweapon = weapon;
       return;
@@ -1088,7 +1088,7 @@ function track_weapon_usage() {
     }
   }
   assert(self.lastnonkillstreakweapon != level.weaponnone);
-  for(;;) {
+  for (;;) {
     currentweapon = self getcurrentweapon();
     self waittill("weapon_change", weapon);
     if(weapons::is_primary_weapon(weapon)) {
@@ -1100,11 +1100,11 @@ function track_weapon_usage() {
     if(weapon.isgameplayweapon) {
       continue;
     }
-    if(isDefined(self.resurrect_weapon) && weapon == self.resurrect_weapon) {
+    if(isdefined(self.resurrect_weapon) && weapon == self.resurrect_weapon) {
       continue;
     }
     name = get_killstreak_for_weapon(weapon);
-    if(isDefined(name) && !weapon.iscarriedkillstreak) {
+    if(isdefined(name) && !weapon.iscarriedkillstreak) {
       killstreak = level.killstreaks[name];
       continue;
     }
@@ -1132,13 +1132,13 @@ function killstreak_waiter() {
   level endon("game_ended");
   self thread track_weapon_usage();
   self give_owned();
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change", weapon);
     if(!is_killstreak_weapon(weapon)) {
       continue;
     }
     killstreak = get_killstreak_for_weapon(weapon);
-    if(!(isDefined(level.usingmomentum) && level.usingmomentum)) {
+    if(!(isdefined(level.usingmomentum) && level.usingmomentum)) {
       killstreak = get_top_killstreak();
       if(weapon != get_killstreak_weapon(killstreak)) {
         continue;
@@ -1147,20 +1147,20 @@ function killstreak_waiter() {
     if(is_remote_override_weapon(killstreak, weapon)) {
       continue;
     }
-    inventorybuttonpressed = self inventorybuttonpressed() || isDefined(self.pers["isBot"]);
+    inventorybuttonpressed = self inventorybuttonpressed() || isdefined(self.pers["isBot"]);
     waittillframeend();
-    if(isDefined(self.usingkillstreakheldweapon) && self.usingkillstreakheldweapon && weapon.iscarriedkillstreak) {
+    if(isdefined(self.usingkillstreakheldweapon) && self.usingkillstreakheldweapon && weapon.iscarriedkillstreak) {
       continue;
     }
     isfrominventory = undefined;
-    if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
+    if(isdefined(level.usingscorestreaks) && level.usingscorestreaks) {
       if(weapon == self getinventoryweapon()) {
         isfrominventory = 1;
       } else if(self getammocount(weapon) <= 0 && weapon.name != "killstreak_ai_tank") {
         self switch_to_last_non_killstreak_weapon();
         continue;
       }
-    } else if(isDefined(level.usingmomentum) && level.usingmomentum) {
+    } else if(isdefined(level.usingmomentum) && level.usingmomentum) {
       if(weapon == self getinventoryweapon() && inventorybuttonpressed) {
         isfrominventory = 1;
       } else if(self.momentum < level.killstreaks[killstreak].momentumcost) {
@@ -1168,7 +1168,7 @@ function killstreak_waiter() {
         continue;
       }
     }
-    if(!isDefined(level.starttime) && level.roundstartkillstreakdelay > 0) {
+    if(!isdefined(level.starttime) && level.roundstartkillstreakdelay > 0) {
       display_unavailable_time();
       continue;
     }
@@ -1177,7 +1177,7 @@ function killstreak_waiter() {
 }
 
 function should_delay_killstreak(killstreaktype) {
-  if(!isDefined(level.starttime)) {
+  if(!isdefined(level.starttime)) {
     return false;
   }
   if(level.roundstartkillstreakdelay < (((gettime() - level.starttime) - level.discardtime) / 1000)) {
@@ -1197,7 +1197,7 @@ function should_delay_killstreak(killstreaktype) {
 }
 
 function is_delayable_killstreak(killstreaktype) {
-  if(isDefined(level.killstreaks[killstreaktype]) && (isDefined(level.killstreaks[killstreaktype].delaystreak) && level.killstreaks[killstreaktype].delaystreak)) {
+  if(isdefined(level.killstreaks[killstreaktype]) && (isdefined(level.killstreaks[killstreaktype].delaystreak) && level.killstreaks[killstreaktype].delaystreak)) {
     return true;
   }
   return false;
@@ -1251,20 +1251,22 @@ function display_unavailable_time() {
   if(timeleft <= 0) {
     timeleft = 1;
   }
-  self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
+  self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
 }
 
 function trigger_killstreak(killstreaktype, isfrominventory) {
-  assert(isDefined(level.killstreaks[killstreaktype].usefunction), "" + killstreaktype);
+  assert(isdefined(level.killstreaks[killstreaktype].usefunction), "" + killstreaktype);
   self.usingkillstreakfrominventory = isfrominventory;
   if(level.infinalkillcam) {
     return false;
   }
   if(should_delay_killstreak(killstreaktype)) {
     display_unavailable_time();
-  } else if([[level.killstreaks[killstreaktype].usefunction]](killstreaktype)) {
-    if(isDefined(self)) {
-      if(!isDefined(self.pers[level.killstreaks[killstreaktype].usagekey])) {
+  } else if([
+      [level.killstreaks[killstreaktype].usefunction]
+    ](killstreaktype)) {
+    if(isdefined(self)) {
+      if(!isdefined(self.pers[level.killstreaks[killstreaktype].usagekey])) {
         self.pers[level.killstreaks[killstreaktype].usagekey] = 0;
       }
       self.pers[level.killstreaks[killstreaktype].usagekey]++;
@@ -1275,24 +1277,24 @@ function trigger_killstreak(killstreaktype, isfrominventory) {
     return true;
   }
   self.usingkillstreakfrominventory = undefined;
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("killstreak_done", 0, killstreaktype);
   }
   return false;
 }
 
 function add_to_killstreak_count(weapon) {
-  if(!isDefined(self.pers["totalKillstreakCount"])) {
+  if(!isdefined(self.pers["totalKillstreakCount"])) {
     self.pers["totalKillstreakCount"] = 0;
   }
   self.pers["totalKillstreakCount"]++;
 }
 
 function get_first_valid_killstreak_alt_weapon(killstreaktype) {
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
-  if(isDefined(level.killstreaks[killstreaktype].altweapons)) {
-    for(i = 0; i < level.killstreaks[killstreaktype].altweapons.size; i++) {
-      if(isDefined(level.killstreaks[killstreaktype].altweapons[i])) {
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
+  if(isdefined(level.killstreaks[killstreaktype].altweapons)) {
+    for (i = 0; i < level.killstreaks[killstreaktype].altweapons.size; i++) {
+      if(isdefined(level.killstreaks[killstreaktype].altweapons[i])) {
         return level.killstreaks[killstreaktype].altweapons[i];
       }
     }
@@ -1318,32 +1320,32 @@ function point_is_in_danger_area(point, targetpos, radius) {
 }
 
 function print_killstreak_start_text(killstreaktype, owner, team, targetpos, dangerradius) {
-  if(!isDefined(level.killstreaks[killstreaktype])) {
+  if(!isdefined(level.killstreaks[killstreaktype])) {
     return;
   }
   if(level.teambased) {
     players = level.players;
-    if(!level.hardcoremode && isDefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
-      for(i = 0; i < players.size; i++) {
-        if(isalive(players[i]) && isDefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
+    if(!level.hardcoremode && isdefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
+      for (i = 0; i < players.size; i++) {
+        if(isalive(players[i]) && isdefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
           if(point_is_in_danger_area(players[i].origin, targetpos, dangerradius)) {
             players[i] iprintlnbold(level.killstreaks[killstreaktype].inboundnearplayertext);
           }
         }
       }
     }
-    if(isDefined(level.killstreaks[killstreaktype])) {
-      for(i = 0; i < level.players.size; i++) {
+    if(isdefined(level.killstreaks[killstreaktype])) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isDefined(playerteam)) {
+        if(isdefined(playerteam)) {
           if(playerteam == team) {
             player iprintln(level.killstreaks[killstreaktype].inboundtext, owner);
           }
         }
       }
     }
-  } else if(!level.hardcoremode && isDefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
+  } else if(!level.hardcoremode && isdefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
     if(point_is_in_danger_area(owner.origin, targetpos, dangerradius)) {
       owner iprintlnbold(level.killstreaks[killstreaktype].inboundnearplayertext);
     }
@@ -1386,13 +1388,13 @@ function play_killstreak_hacked_dialog(killstreaktype, killstreakid, hacker) {
 }
 
 function play_killstreak_start_dialog(killstreaktype, team, killstreakid) {
-  if(!isDefined(killstreaktype) || !isDefined(killstreakid)) {
+  if(!isdefined(killstreaktype) || !isdefined(killstreakid)) {
     return;
   }
   self notify("killstreak_start_" + killstreaktype);
   self notify("killstreak_start_inventory_" + killstreaktype);
   dialogkey = level.killstreaks[killstreaktype].requestdialogkey;
-  if(!isDefined(self.currentkillstreakdialog) && isDefined(dialogkey) && isDefined(level.heroplaydialog)) {
+  if(!isdefined(self.currentkillstreakdialog) && isdefined(dialogkey) && isdefined(level.heroplaydialog)) {
     self thread[[level.heroplaydialog]](dialogkey);
   }
   excludeself = [];
@@ -1406,9 +1408,9 @@ function play_killstreak_start_dialog(killstreaktype, team, killstreakid) {
 }
 
 function play_killstreak_ready_sfx(killstreaktype) {
-  if(!isDefined(level.gameended) || !level.gameended) {
+  if(!isdefined(level.gameended) || !level.gameended) {
     ready_sfx_alias = "mpl_killstreak_" + killstreaktype;
-    if(isDefined(ready_sfx_alias)) {
+    if(isdefined(ready_sfx_alias)) {
       self playsoundtoplayer(ready_sfx_alias, self);
     }
   }
@@ -1420,20 +1422,20 @@ function play_killstreak_ready_dialog(killstreaktype, taacomwaittime) {
   self endon("killstreak_start_" + killstreaktype);
   self endon("killstreak_ready_" + killstreaktype);
   level endon("game_ended");
-  if(isDefined(level.gameended) && level.gameended) {
+  if(isdefined(level.gameended) && level.gameended) {
     return;
   }
   if(globallogic_audio::killstreak_dialog_queued("ready", killstreaktype)) {
     return;
   }
-  if(isDefined(taacomwaittime)) {
+  if(isdefined(taacomwaittime)) {
     wait(taacomwaittime);
   }
   self globallogic_audio::play_taacom_dialog("ready", killstreaktype);
 }
 
 function play_destroyed_dialog_on_owner(killstreaktype, killstreakid) {
-  if(!isDefined(self.owner) || !isDefined(self.team) || self.team != self.owner.team) {
+  if(!isdefined(self.owner) || !isdefined(self.team) || self.team != self.owner.team) {
     return;
   }
   self.owner globallogic_audio::flush_killstreak_dialog_on_player(killstreakid);
@@ -1441,50 +1443,50 @@ function play_destroyed_dialog_on_owner(killstreaktype, killstreakid) {
 }
 
 function play_taacom_dialog_on_owner(dialogkey, killstreaktype, killstreakid) {
-  if(!isDefined(self.owner) || !isDefined(self.team) || self.team != self.owner.team) {
+  if(!isdefined(self.owner) || !isdefined(self.team) || self.team != self.owner.team) {
     return;
   }
   self.owner globallogic_audio::play_taacom_dialog(dialogkey, killstreaktype, killstreakid);
 }
 
 function play_pilot_dialog_on_owner(dialogkey, killstreaktype, killstreakid) {
-  if(!isDefined(self.owner) || !isDefined(self.owner.team) || !isDefined(self.team) || self.team != self.owner.team) {
+  if(!isdefined(self.owner) || !isdefined(self.owner.team) || !isdefined(self.team) || self.team != self.owner.team) {
     return;
   }
   self.owner play_pilot_dialog(dialogkey, killstreaktype, killstreakid, self.pilotindex);
 }
 
 function play_pilot_dialog(dialogkey, killstreaktype, killstreakid, pilotindex) {
-  if(!isDefined(killstreaktype) || !isDefined(pilotindex)) {
+  if(!isdefined(killstreaktype) || !isdefined(pilotindex)) {
     return;
   }
   self globallogic_audio::killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pilotindex);
 }
 
 function play_taacom_dialog_response_on_owner(dialogkey, killstreaktype, killstreakid) {
-  assert(isDefined(dialogkey));
-  assert(isDefined(killstreaktype));
-  if(!isDefined(self.owner) || !isDefined(self.team) || self.team != self.owner.team) {
+  assert(isdefined(dialogkey));
+  assert(isdefined(killstreaktype));
+  if(!isdefined(self.owner) || !isdefined(self.team) || self.team != self.owner.team) {
     return;
   }
   self.owner play_taacom_dialog_response(dialogkey, killstreaktype, killstreakid, self.pilotindex);
 }
 
 function play_taacom_dialog_response(dialogkey, killstreaktype, killstreakid, pilotindex) {
-  assert(isDefined(dialogkey));
-  assert(isDefined(killstreaktype));
-  if(!isDefined(pilotindex)) {
+  assert(isdefined(dialogkey));
+  assert(isdefined(killstreaktype));
+  if(!isdefined(pilotindex)) {
     return;
   }
   self globallogic_audio::play_taacom_dialog(dialogkey + pilotindex, killstreaktype, killstreakid);
 }
 
 function get_random_pilot_index(killstreaktype) {
-  if(!isDefined(killstreaktype)) {
+  if(!isdefined(killstreaktype)) {
     return undefined;
   }
   taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers["mptaacom"]);
-  if(!isDefined(taacombundle.pilotbundles[killstreaktype])) {
+  if(!isdefined(taacombundle.pilotbundles[killstreaktype])) {
     return undefined;
   }
   numpilots = taacombundle.pilotbundles[killstreaktype].size;
@@ -1495,13 +1497,13 @@ function get_random_pilot_index(killstreaktype) {
 }
 
 function player_killstreak_threat_tracking(killstreaktype) {
-  assert(isDefined(killstreaktype));
+  assert(isdefined(killstreaktype));
   self endon("death");
   self endon("delete");
   self endon("leaving");
   level endon("game_ended");
-  while(true) {
-    if(!isDefined(self.owner)) {
+  while (true) {
+    if(!isdefined(self.owner)) {
       return;
     }
     players = self.owner battlechatter::get_enemy_players();
@@ -1514,14 +1516,14 @@ function player_killstreak_threat_tracking(killstreaktype) {
       if(lookangles[0] < 270 || lookangles[0] > 330) {
         continue;
       }
-      lookdir = anglesToForward(lookangles);
-      eyepoint = player getEye();
+      lookdir = anglestoforward(lookangles);
+      eyepoint = player geteye();
       streakdir = vectornormalize(self.origin - eyepoint);
       dot = vectordot(streakdir, lookdir);
       if(dot < 0.94) {
         continue;
       }
-      traceresult = bulletTrace(eyepoint, self.origin, 1, player);
+      traceresult = bullettrace(eyepoint, self.origin, 1, player);
       if(traceresult["fraction"] >= 1 || traceresult["entity"] === self) {
         if(battlechatter::dialog_chance("killstreakSpotChance")) {
           player battlechatter::play_killstreak_threat(killstreaktype);
@@ -1535,19 +1537,19 @@ function player_killstreak_threat_tracking(killstreaktype) {
 }
 
 function get_killstreak_inform_dialog(killstreaktype) {
-  if(isDefined(level.killstreaks[killstreaktype].informdialog)) {
+  if(isdefined(level.killstreaks[killstreaktype].informdialog)) {
     return level.killstreaks[killstreaktype].informdialog;
   }
   return "";
 }
 
 function get_killstreak_usage_by_killstreak(killstreaktype) {
-  assert(isDefined(level.killstreaks[killstreaktype]), "");
+  assert(isdefined(level.killstreaks[killstreaktype]), "");
   return get_killstreak_usage(level.killstreaks[killstreaktype].usagekey);
 }
 
 function get_killstreak_usage(usagekey) {
-  if(!isDefined(self.pers[usagekey])) {
+  if(!isdefined(self.pers[usagekey])) {
     return 0;
   }
   return self.pers[usagekey];
@@ -1557,16 +1559,16 @@ function on_player_spawned() {
   self endon("disconnect");
   pixbeginevent("_killstreaks.gsc/onPlayerSpawned");
   give_owned();
-  if(!isDefined(self.pers["killstreaks"])) {
+  if(!isdefined(self.pers["killstreaks"])) {
     self.pers["killstreaks"] = [];
   }
-  if(!isDefined(self.pers["killstreak_has_been_used"])) {
+  if(!isdefined(self.pers["killstreak_has_been_used"])) {
     self.pers["killstreak_has_been_used"] = [];
   }
-  if(!isDefined(self.pers["killstreak_unique_id"])) {
+  if(!isdefined(self.pers["killstreak_unique_id"])) {
     self.pers["killstreak_unique_id"] = [];
   }
-  if(!isDefined(self.pers["killstreak_ammo_count"])) {
+  if(!isdefined(self.pers["killstreak_ammo_count"])) {
     self.pers["killstreak_ammo_count"] = [];
   }
   size = self.pers["killstreaks"].size;
@@ -1588,7 +1590,7 @@ function on_joined_team() {
   self.pers["killstreak_has_been_used"] = [];
   self.pers["killstreak_unique_id"] = [];
   self.pers["killstreak_ammo_count"] = [];
-  if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
+  if(isdefined(level.usingscorestreaks) && level.usingscorestreaks) {
     self.pers["killstreak_quantity"] = [];
     self.pers["held_killstreak_ammo_count"] = [];
     self.pers["held_killstreak_clip_count"] = [];
@@ -1598,7 +1600,7 @@ function on_joined_team() {
 function init_ride_killstreak(streak, always_allow = 0) {
   self disableusability();
   result = self init_ride_killstreak_internal(streak, always_allow);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self enableusability();
   }
   return result;
@@ -1606,7 +1608,7 @@ function init_ride_killstreak(streak, always_allow = 0) {
 
 function watch_for_remove_remote_weapon() {
   self endon("endwatchforremoveremoteweapon");
-  for(;;) {
+  for (;;) {
     self waittill("remove_remote_weapon");
     self switch_to_last_non_killstreak_weapon();
     self enableusability();
@@ -1614,7 +1616,7 @@ function watch_for_remove_remote_weapon() {
 }
 
 function init_ride_killstreak_internal(streak, always_allow) {
-  if(isDefined(streak) && (streak == "qrdrone" || streak == "dart" || streak == "killstreak_remote_turret" || streak == "killstreak_ai_tank" || streak == "qrdrone" || streak == "sentinel")) {
+  if(isdefined(streak) && (streak == "qrdrone" || streak == "dart" || streak == "killstreak_remote_turret" || streak == "killstreak_ai_tank" || streak == "qrdrone" || streak == "sentinel")) {
     laptopwait = "timeout";
   } else {
     laptopwait = self util::waittill_any_timeout(0.6, "disconnect", "death", "weapon_switch_started");
@@ -1635,7 +1637,7 @@ function init_ride_killstreak_internal(streak, always_allow) {
     }
     return "success";
   }
-  if(self isempjammed() && (!(isDefined(self.ignoreempjammed) && self.ignoreempjammed))) {
+  if(self isempjammed() && (!(isdefined(self.ignoreempjammed) && self.ignoreempjammed))) {
     return "fail";
   }
   if(self is_interacting_with_object()) {
@@ -1664,10 +1666,10 @@ function init_ride_killstreak_internal(streak, always_allow) {
   if(!isalive(self)) {
     return "fail";
   }
-  if(self isempjammed() && (!(isDefined(self.ignoreempjammed) && self.ignoreempjammed))) {
+  if(self isempjammed() && (!(isdefined(self.ignoreempjammed) && self.ignoreempjammed))) {
     return "fail";
   }
-  if(isDefined(self.laststand) && self.laststand) {
+  if(isdefined(self.laststand) && self.laststand) {
     return "fail";
   }
   if(self is_interacting_with_object()) {
@@ -1681,7 +1683,7 @@ function init_ride_killstreak_internal(streak, always_allow) {
 
 function clear_ride_intro(delay) {
   self endon("disconnect");
-  if(isDefined(delay)) {
+  if(isdefined(delay)) {
     wait(delay);
   }
   self thread hud::screen_fade_in(0);
@@ -1689,7 +1691,7 @@ function clear_ride_intro(delay) {
 
 function killstreak_debug_think() {
   setdvar("", "");
-  for(;;) {
+  for (;;) {
     cmd = getdvarstring("");
     switch (cmd) {
       case "": {
@@ -1709,35 +1711,35 @@ function killstreak_data_dump() {
   println("");
   println("");
   keys = getarraykeys(level.killstreaks);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     data = level.killstreaks[keys[i]];
     type_data = level.killstreaktype[keys[i]];
     print(keys[i] + "");
     print(data.killstreaklevel + "");
     print(data.weapon.name + "");
     alt = 0;
-    if(isDefined(data.altweapons)) {
+    if(isdefined(data.altweapons)) {
       assert(data.altweapons.size <= 4);
-      for(alt = 0; alt < data.altweapons.size; alt++) {
+      for (alt = 0; alt < data.altweapons.size; alt++) {
         print(data.altweapons[alt].name + "");
       }
     }
-    while(alt < 4) {
+    while (alt < 4) {
       print("");
       alt++;
     }
     type = 0;
-    if(isDefined(type_data)) {
+    if(isdefined(type_data)) {
       assert(type_data.size < 4);
       type_keys = getarraykeys(type_data);
-      while(type < type_keys.size) {
+      while (type < type_keys.size) {
         if(type_data[type_keys[type]] == 1) {
           print(type_keys[type] + "");
         }
         type++;
       }
     }
-    while(type < 4) {
+    while (type < 4) {
       print("");
       type++;
     }
@@ -1750,23 +1752,23 @@ function is_interacting_with_object() {
   if(self iscarryingturret()) {
     return true;
   }
-  if(isDefined(self.isplanting) && self.isplanting) {
+  if(isdefined(self.isplanting) && self.isplanting) {
     return true;
   }
-  if(isDefined(self.isdefusing) && self.isdefusing) {
+  if(isdefined(self.isdefusing) && self.isdefusing) {
     return true;
   }
   return false;
 }
 
 function clear_using_remote(immediate, skipnotify) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self.dofutz = 0;
   self.no_fade2black = 0;
   self clientfield::set_to_player("static_postfx", 0);
-  if(isDefined(self.carryicon)) {
+  if(isdefined(self.carryicon)) {
     self.carryicon.alpha = 1;
   }
   self.usingremote = undefined;
@@ -1780,7 +1782,7 @@ function clear_using_remote(immediate, skipnotify) {
   if(!level.gameended) {
     self util::freeze_player_controls(0);
   }
-  if(!(isDefined(skipnotify) && skipnotify)) {
+  if(!(isdefined(skipnotify) && skipnotify)) {
     self notify("stopped_using_remote");
   }
   thread hide_tablet();
@@ -1811,17 +1813,17 @@ function unhide_compass() {
 function setup_health(killstreak_ref, max_health, low_health) {
   self.maxhealth = max_health;
   self.lowhealth = low_health;
-  self.hackedhealthupdatecallback = &defaulthackedhealthupdatecallback;
+  self.hackedhealthupdatecallback = & defaulthackedhealthupdatecallback;
   tablemaxhealth = killstreak_bundles::get_max_health(killstreak_ref);
-  if(isDefined(tablemaxhealth)) {
+  if(isdefined(tablemaxhealth)) {
     self.maxhealth = tablemaxhealth;
   }
   tablelowhealth = killstreak_bundles::get_low_health(killstreak_ref);
-  if(isDefined(tablelowhealth)) {
+  if(isdefined(tablelowhealth)) {
     self.lowhealth = tablelowhealth;
   }
   tablehackedhealth = killstreak_bundles::get_hacked_health(killstreak_ref);
-  if(isDefined(tablehackedhealth)) {
+  if(isdefined(tablehackedhealth)) {
     self.hackedhealth = tablehackedhealth;
   } else {
     self.hackedhealth = self.maxhealth;
@@ -1835,30 +1837,30 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
   self.damagetaken = 0;
   self setup_health(killstreak_ref, max_health, low_health);
   assert(!isvehicle(self) || !issentient(self), "");
-  while(true) {
+  while (true) {
     weapon_damage = undefined;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
-    if(isDefined(self.invulnerable) && self.invulnerable) {
+    if(isdefined(self.invulnerable) && self.invulnerable) {
       continue;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isdefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     friendlyfire = weaponobjects::friendlyfirecheck(self.owner, attacker);
     if(!friendlyfire) {
       continue;
     }
-    if(isDefined(self.owner) && attacker == self.owner) {
+    if(isdefined(self.owner) && attacker == self.owner) {
       continue;
     }
     isvalidattacker = 1;
     if(level.teambased) {
-      isvalidattacker = isDefined(attacker.team) && attacker.team != self.team;
+      isvalidattacker = isdefined(attacker.team) && attacker.team != self.team;
     }
     if(!isvalidattacker) {
       continue;
     }
-    if(isDefined(self.killstreakdamagemodifier)) {
+    if(isdefined(self.killstreakdamagemodifier)) {
       damage = [
         [self.killstreakdamagemodifier]
       ](damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
@@ -1868,20 +1870,20 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
     }
     if(weapon.isemp && type == "MOD_GRENADE_SPLASH") {
       emp_damage_to_apply = killstreak_bundles::get_emp_grenade_damage(killstreak_ref, self.maxhealth);
-      if(!isDefined(emp_damage_to_apply)) {
-        emp_damage_to_apply = (isDefined(emp_damage) ? emp_damage : 1);
+      if(!isdefined(emp_damage_to_apply)) {
+        emp_damage_to_apply = (isdefined(emp_damage) ? emp_damage : 1);
       }
-      if(isDefined(emp_callback) && emp_damage_to_apply > 0) {
+      if(isdefined(emp_callback) && emp_damage_to_apply > 0) {
         self[[emp_callback]](attacker);
       }
       weapon_damage = emp_damage_to_apply;
     }
-    if(isDefined(self.selfdestruct) && self.selfdestruct) {
+    if(isdefined(self.selfdestruct) && self.selfdestruct) {
       weapon_damage = self.maxhealth + 1;
     }
-    if(!isDefined(weapon_damage)) {
+    if(!isdefined(weapon_damage)) {
       weapon_damage = killstreak_bundles::get_weapon_damage(killstreak_ref, self.maxhealth, attacker, weapon, type, damage, flags, chargelevel);
-      if(!isDefined(weapon_damage)) {
+      if(!isdefined(weapon_damage)) {
         weapon_damage = get_old_damage(attacker, weapon, type, damage, allow_bullet_damage);
       }
     }
@@ -1907,20 +1909,20 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
       }
       level.globalkillstreaksdestroyed++;
       attacker addweaponstat(getweapon(killstreak_ref), "destroyed", 1);
-      if(isDefined(destroyed_callback)) {
+      if(isdefined(destroyed_callback)) {
         self thread[[destroyed_callback]](attacker, weapon);
       }
       return;
     }
     remaining_health = max_health - self.damagetaken;
     if(remaining_health < low_health && weapon_damage > 0) {
-      if(isDefined(low_health_callback) && (!isDefined(self.currentstate) || self.currentstate != "damaged")) {
+      if(isdefined(low_health_callback) && (!isdefined(self.currentstate) || self.currentstate != "damaged")) {
         self[[low_health_callback]](attacker, weapon);
       }
       self.currentstate = "damaged";
     }
-    if(isDefined(self.extra_low_health) && remaining_health < self.extra_low_health && weapon_damage > 0) {
-      if(isDefined(self.extra_low_health_callback) && !isDefined(self.extra_low_damage_notified)) {
+    if(isdefined(self.extra_low_health) && remaining_health < self.extra_low_health && weapon_damage > 0) {
+      if(isdefined(self.extra_low_health_callback) && !isdefined(self.extra_low_damage_notified)) {
         self[[self.extra_low_health_callback]](attacker, weapon);
         self.extra_low_damage_notified = 1;
       }
@@ -1930,9 +1932,9 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
 
 function defaulthackedhealthupdatecallback(hacker) {
   killstreak = self;
-  assert(isDefined(self.maxhealth));
-  assert(isDefined(self.hackedhealth));
-  assert(isDefined(self.damagetaken));
+  assert(isdefined(self.maxhealth));
+  assert(isdefined(self.hackedhealth));
+  assert(isdefined(self.damagetaken));
   damageafterhacking = self.maxhealth - self.hackedhealth;
   if(self.damagetaken < damageafterhacking) {
     self.damagetaken = damageafterhacking;
@@ -1943,17 +1945,17 @@ function ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon
   self.maxhealth = max_health;
   self.lowhealth = low_health;
   tablehealth = killstreak_bundles::get_max_health(killstreak_ref);
-  if(isDefined(tablehealth)) {
+  if(isdefined(tablehealth)) {
     self.maxhealth = tablehealth;
   }
   tablehealth = killstreak_bundles::get_low_health(killstreak_ref);
-  if(isDefined(tablehealth)) {
+  if(isdefined(tablehealth)) {
     self.lowhealth = tablehealth;
   }
-  if(isDefined(self.invulnerable) && self.invulnerable) {
+  if(isdefined(self.invulnerable) && self.invulnerable) {
     return 0;
   }
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isdefined(attacker) || !isplayer(attacker)) {
     return get_old_damage(attacker, weapon, type, damage, allow_bullet_damage);
   }
   friendlyfire = weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1962,23 +1964,23 @@ function ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon
   }
   isvalidattacker = 1;
   if(level.teambased) {
-    isvalidattacker = isDefined(attacker.team) && attacker.team != self.team;
+    isvalidattacker = isdefined(attacker.team) && attacker.team != self.team;
   }
   if(!isvalidattacker) {
     return 0;
   }
   if(weapon.isemp && type == "MOD_GRENADE_SPLASH") {
     emp_damage_to_apply = killstreak_bundles::get_emp_grenade_damage(killstreak_ref, self.maxhealth);
-    if(!isDefined(emp_damage_to_apply)) {
-      emp_damage_to_apply = (isDefined(emp_damage) ? emp_damage : 1);
+    if(!isdefined(emp_damage_to_apply)) {
+      emp_damage_to_apply = (isdefined(emp_damage) ? emp_damage : 1);
     }
-    if(isDefined(emp_callback) && emp_damage_to_apply > 0) {
+    if(isdefined(emp_callback) && emp_damage_to_apply > 0) {
       self[[emp_callback]](attacker, weapon);
     }
     return emp_damage_to_apply;
   }
   weapon_damage = killstreak_bundles::get_weapon_damage(killstreak_ref, self.maxhealth, attacker, weapon, type, damage, flags, chargelevel);
-  if(!isDefined(weapon_damage)) {
+  if(!isdefined(weapon_damage)) {
     weapon_damage = get_old_damage(attacker, weapon, type, damage, allow_bullet_damage);
   }
   if(weapon_damage <= 0) {
@@ -1986,7 +1988,7 @@ function ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon
   }
   idamage = int(weapon_damage);
   if(idamage > self.health) {
-    if(isDefined(destroyed_callback)) {
+    if(isdefined(destroyed_callback)) {
       self thread[[destroyed_callback]](attacker, weapon);
     }
   }
@@ -2001,10 +2003,10 @@ function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage) {
         damage = 0;
         break;
       }
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isdefined(attacker) && isplayer(attacker)) {
         hasfmj = attacker hasperk("specialty_armorpiercing");
       }
-      if(isDefined(hasfmj) && hasfmj) {
+      if(isdefined(hasfmj) && hasfmj) {
         damage = int(damage * level.cac_armorpiercing_data);
       }
       break;
@@ -2015,9 +2017,9 @@ function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage) {
       if(weapon.statindex == level.weaponpistolenergy.statindex || weapon.statindex != level.weaponshotgunenergy.statindex || weapon.statindex == level.weaponspecialcrossbow.statindex) {
         break;
       }
-      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == "remote_missile_missile") {
+      if(isdefined(self.remotemissiledamage) && isdefined(weapon) && weapon.name == "remote_missile_missile") {
         damage = self.remotemissiledamage;
-      } else if(isDefined(self.rocketdamage)) {
+      } else if(isdefined(self.rocketdamage)) {
         damage = self.rocketdamage;
       }
       break;
@@ -2041,7 +2043,7 @@ function configure_team(killstreaktype, killstreakid, owner, influencertype, con
 function trackactivekillstreak(killstreak) {
   self endon("disconnect");
   killstreakindex = killstreak.killstreakid;
-  if(isDefined(killstreakindex)) {
+  if(isdefined(killstreakindex)) {
     self.pers["activeKillstreaks"][killstreakindex] = killstreak;
     killstreak util::waittill_any("killstreak_hacked", "death");
     self.pers["activeKillstreaks"][killstreakindex] = undefined;
@@ -2061,10 +2063,10 @@ function configure_team_internal(owner, ishacked) {
   } else {
     assert(killstreak.killstreakteamconfigured, "");
   }
-  if(isDefined(killstreak.killstreakconfigureteamprefunction)) {
+  if(isdefined(killstreak.killstreakconfigureteamprefunction)) {
     killstreak thread[[killstreak.killstreakconfigureteamprefunction]](owner, ishacked);
   }
-  if(isDefined(killstreak.killstreakinfluencertype)) {
+  if(isdefined(killstreak.killstreakinfluencertype)) {
     killstreak spawning::remove_influencers();
   }
   killstreak setteam(owner.team);
@@ -2075,10 +2077,10 @@ function configure_team_internal(owner, ishacked) {
   killstreak.owner = owner;
   killstreak.ownerentnum = owner.entnum;
   killstreak.pilotindex = killstreak.owner get_random_pilot_index(killstreak.killstreaktype);
-  if(isDefined(killstreak.killstreakinfluencertype)) {
+  if(isdefined(killstreak.killstreakinfluencertype)) {
     killstreak spawning::create_entity_enemy_influencer(killstreak.killstreakinfluencertype, owner.team);
   }
-  if(isDefined(killstreak.killstreakconfigureteampostfunction)) {
+  if(isdefined(killstreak.killstreakconfigureteampostfunction)) {
     killstreak thread[[killstreak.killstreakconfigureteampostfunction]](owner, ishacked);
   }
 }
@@ -2102,11 +2104,11 @@ function watchteamchange(teamchangenotify) {
 }
 
 function should_not_timeout(killstreak) {
-  /
+  /# /
   #
-  assert(isDefined(killstreak), "");
-  assert(isDefined(level.killstreaks[killstreak]), "");
-  if(isDefined(level.killstreaks[killstreak].devtimeoutdvar)) {
+  assert(isdefined(killstreak), "");
+  assert(isdefined(level.killstreaks[killstreak]), "");
+  if(isdefined(level.killstreaks[killstreak].devtimeoutdvar)) {
     return getdvarint(level.killstreaks[killstreak].devtimeoutdvar);
   }
   return 0;
@@ -2117,19 +2119,19 @@ function waitfortimeout(killstreak, duration, callback, endcondition1, endcondit
     return;
   }
   self endon("killstreak_hacked");
-  if(isDefined(endcondition1)) {
+  if(isdefined(endcondition1)) {
     self endon(endcondition1);
   }
-  if(isDefined(endcondition2)) {
+  if(isdefined(endcondition2)) {
     self endon(endcondition2);
   }
-  if(isDefined(endcondition3)) {
+  if(isdefined(endcondition3)) {
     self endon(endcondition3);
   }
   self thread waitfortimeouthacked(killstreak, callback, endcondition1, endcondition2, endcondition3);
   killstreakbundle = level.killstreakbundle[self.killstreaktype];
   self.killstreakendtime = gettime() + duration;
-  if(isDefined(killstreakbundle) && isDefined(killstreakbundle.kstimeoutbeepduration)) {
+  if(isdefined(killstreakbundle) && isdefined(killstreakbundle.kstimeoutbeepduration)) {
     self waitfortimeoutbeep(killstreakbundle, duration);
   } else {
     hostmigration::migrationawarewait(duration);
@@ -2148,7 +2150,7 @@ function waitfortimeoutbeep(killstreakbundle, duration) {
   if(isvehicle(self)) {
     self clientfield::set("timeout_beep", 1);
   }
-  if(isDefined(killstreakbundle.kstimeoutfastbeepduration)) {
+  if(isdefined(killstreakbundle.kstimeoutfastbeepduration)) {
     fastbeepduration = killstreakbundle.kstimeoutfastbeepduration * 1000;
     hostmigration::migrationawarewait(max(beepduration - fastbeepduration, 0));
     if(isvehicle(self)) {
@@ -2163,13 +2165,13 @@ function waitfortimeoutbeep(killstreakbundle, duration) {
 
 function waitfortimeouthacked(killstreak, callback, endcondition1, endcondition2, endcondition3) {
   self endon("kill_waitfortimeouthacked_thread");
-  if(isDefined(endcondition1)) {
+  if(isdefined(endcondition1)) {
     self endon(endcondition1);
   }
-  if(isDefined(endcondition2)) {
+  if(isdefined(endcondition2)) {
     self endon(endcondition2);
   }
-  if(isDefined(endcondition3)) {
+  if(isdefined(endcondition3)) {
     self endon(endcondition3);
   }
   self waittill("killstreak_hacked");
@@ -2186,13 +2188,13 @@ function update_player_threat(player) {
   player.threatlevel = 0;
   dist = distance(player.origin, heli.origin);
   player.threatlevel = player.threatlevel + (((level.heli_visual_range - dist) / level.heli_visual_range) * 100);
-  if(isDefined(heli.attacker) && player == heli.attacker) {
+  if(isdefined(heli.attacker) && player == heli.attacker) {
     player.threatlevel = player.threatlevel + 100;
   }
-  if(isDefined(player.carryobject)) {
+  if(isdefined(player.carryobject)) {
     player.threatlevel = player.threatlevel + 200;
   }
-  if(isDefined(player.score)) {
+  if(isdefined(player.score)) {
     player.threatlevel = player.threatlevel + (player.score * 2);
   }
   if(player weapons::has_launcher()) {
@@ -2208,7 +2210,7 @@ function update_player_threat(player) {
   if(player weapons::has_lmg()) {
     player.threatlevel = player.threatlevel + 200;
   }
-  if(isDefined(player.antithreat)) {
+  if(isdefined(player.antithreat)) {
     player.threatlevel = player.threatlevel - player.antithreat;
   }
   if(player.threatlevel <= 0) {
@@ -2231,17 +2233,17 @@ function update_actor_threat(actor) {
   actor.threatlevel = 0;
   dist = distance(actor.origin, heli.origin);
   actor.threatlevel = actor.threatlevel + (((level.heli_visual_range - dist) / level.heli_visual_range) * 100);
-  if(isDefined(actor.owner)) {
-    if(isDefined(heli.attacker) && actor.owner == heli.attacker) {
+  if(isdefined(actor.owner)) {
+    if(isdefined(heli.attacker) && actor.owner == heli.attacker) {
       actor.threatlevel = actor.threatlevel + 100;
     }
-    if(isDefined(actor.owner.carryobject)) {
+    if(isdefined(actor.owner.carryobject)) {
       actor.threatlevel = actor.threatlevel + 200;
     }
-    if(isDefined(actor.owner.score)) {
+    if(isdefined(actor.owner.score)) {
       actor.threatlevel = actor.threatlevel + (actor.owner.score * 4);
     }
-    if(isDefined(actor.owner.antithreat)) {
+    if(isdefined(actor.owner.antithreat)) {
       actor.threatlevel = actor.threatlevel - actor.owner.antithreat;
     }
   }
@@ -2259,7 +2261,7 @@ function update_dog_threat(dog) {
 
 function missile_valid_target_check(missiletarget) {
   heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
-  heli2forward = anglesToForward(self.angles);
+  heli2forward = anglestoforward(self.angles);
   heli2forward_normal = vectornormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
   if(heli_dot_target >= level.heli_valid_target_cone) {
@@ -2276,11 +2278,11 @@ function update_missile_player_threat(player) {
     player.missilethreatlevel = 1;
     return;
   }
-  if(isDefined(self.attacker) && player == self.attacker) {
+  if(isdefined(self.attacker) && player == self.attacker) {
     player.missilethreatlevel = player.missilethreatlevel + 100;
   }
   player.missilethreatlevel = player.missilethreatlevel + (player.score * 4);
-  if(isDefined(player.antithreat)) {
+  if(isdefined(player.antithreat)) {
     player.missilethreatlevel = player.missilethreatlevel - player.antithreat;
   }
   if(player.missilethreatlevel <= 0) {
@@ -2302,43 +2304,43 @@ function add_ricochet_protection(killstreak_id, owner, origin, ricochet_distance
   if(!level.hardcoremode && !testing) {
     return;
   }
-  if(!isDefined(ricochet_distance) || ricochet_distance == 0) {
+  if(!isdefined(ricochet_distance) || ricochet_distance == 0) {
     return;
   }
-  if(!isDefined(owner.ricochet_protection)) {
+  if(!isdefined(owner.ricochet_protection)) {
     owner.ricochet_protection = [];
   }
-  owner.ricochet_protection[killstreak_id] = spawnStruct();
+  owner.ricochet_protection[killstreak_id] = spawnstruct();
   owner.ricochet_protection[killstreak_id].origin = origin;
   owner.ricochet_protection[killstreak_id].distancesq = ricochet_distance * ricochet_distance;
 }
 
 function set_ricochet_protection_endtime(killstreak_id, owner, endtime) {
-  if(!isDefined(owner) || !isDefined(owner.ricochet_protection) || !isDefined(killstreak_id)) {
+  if(!isdefined(owner) || !isdefined(owner.ricochet_protection) || !isdefined(killstreak_id)) {
     return;
   }
-  if(!isDefined(owner.ricochet_protection[killstreak_id])) {
+  if(!isdefined(owner.ricochet_protection[killstreak_id])) {
     return;
   }
   owner.ricochet_protection[killstreak_id].endtime = endtime;
 }
 
 function remove_ricochet_protection(killstreak_id, owner) {
-  if(!isDefined(owner) || !isDefined(owner.ricochet_protection) || !isDefined(killstreak_id)) {
+  if(!isdefined(owner) || !isdefined(owner.ricochet_protection) || !isdefined(killstreak_id)) {
     return;
   }
   owner.ricochet_protection[killstreak_id] = undefined;
 }
 
 function is_ricochet_protected(player) {
-  if(!isDefined(player) || !isDefined(player.ricochet_protection)) {
+  if(!isdefined(player) || !isdefined(player.ricochet_protection)) {
     return false;
   }
   foreach(protection in player.ricochet_protection) {
-    if(!isDefined(protection)) {
+    if(!isdefined(protection)) {
       continue;
     }
-    if(isDefined(protection.endtime) && protection.endtime < gettime()) {
+    if(isdefined(protection.endtime) && protection.endtime < gettime()) {
       continue;
     }
     if(distancesquared(protection.origin, player.origin) < protection.distancesq) {
@@ -2349,30 +2351,30 @@ function is_ricochet_protected(player) {
 }
 
 function is_killstreak_start_blocked() {
-  return isDefined(self.dart_thrown_time) && (gettime() - self.dart_thrown_time) < 1500;
+  return isdefined(self.dart_thrown_time) && (gettime() - self.dart_thrown_time) < 1500;
 }
 
 function debug_ricochet_protection() {
   debug_wait = 0.5;
   debug_frames = (int(debug_wait / 0.05)) + 1;
-  while(true) {
+  while (true) {
     if(getdvarint("", 0) == 0) {
       wait(2);
       continue;
     }
     wait(debug_wait);
     foreach(player in level.players) {
-      if(!isDefined(player)) {
+      if(!isdefined(player)) {
         continue;
       }
-      if(!isDefined(player.ricochet_protection)) {
+      if(!isdefined(player.ricochet_protection)) {
         continue;
       }
       foreach(protection in player.ricochet_protection) {
-        if(!isDefined(protection)) {
+        if(!isdefined(protection)) {
           continue;
         }
-        if(isDefined(protection.endtime) && protection.endtime < gettime()) {
+        if(isdefined(protection.endtime) && protection.endtime < gettime()) {
           continue;
         }
         radius = sqrt(protection.distancesq);

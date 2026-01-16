@@ -13,9 +13,8 @@ setup_self_elite_anim_array() {
   assert(self.subclass == "elite");
   self animscripts\anims::clearanimcache();
 
-  if(!isDefined(self.anim_array)) {
+  if(!isDefined(self.anim_array))
     self.anim_array = [];
-  }
 
   self.anim_array[self.animtype]["stop"]["stand"]["rifle"]["idle_trans_in"] = % ai_elite_casual_stand_idle_trans_in;
   self.anim_array[self.animtype]["stop"]["stand"]["rifle"]["idle"] = array(array( % ai_elite_casual_stand_idle, % ai_elite_casual_stand_idle_twitch, % ai_elite_casual_stand_idle_twitchb));
@@ -99,9 +98,8 @@ setup_elite_anim_array(subclasstype, array) {
     setup_self_elite_anim_array();
   }
 
-  if(!isDefined(subclasstype)) {
+  if(!isDefined(subclasstype))
     subclasstype = "elite";
-  }
 
   if(isDefined(array[subclasstype])) {
     return;
@@ -300,9 +298,8 @@ setup_elite_anim_array(subclasstype, array) {
   array[subclasstype]["pain"]["crouch"]["rifle"]["cover_pillar_right_B"] = % ai_elite_pillar_crouch_right_b_pain;
   animscripts\anims_table::setup_delta_arrays(array, anim);
 
-  if(isai(self)) {
+  if(isai(self))
     anim.anim_array = array;
-  }
 
   return array;
 }
@@ -311,7 +308,6 @@ reset_self_elite_anim_array() {
   assert(isDefined(self.elite) && self.elite);
   self animscripts\anims::clearanimcache();
 
-  if(isDefined(self.anim_array) && isDefined(self.anim_array[self.animtype])) {
+  if(isDefined(self.anim_array) && isDefined(self.anim_array[self.animtype]))
     self.anim_array[self.animtype] = undefined;
-  }
 }

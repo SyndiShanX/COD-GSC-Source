@@ -412,7 +412,7 @@ set_action_slot(num, option1, option2) {
   if(!isDefined(level.player_actionslots)) {
     level.player_actionslots = [];
   }
-  action_slot = spawnStruct();
+  action_slot = SpawnStruct();
   action_slot.num = num;
   action_slot.option1 = option1;
   if(isDefined(option2)) {

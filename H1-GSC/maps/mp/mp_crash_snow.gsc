@@ -29,9 +29,9 @@ main() {
 }
 
 airstrikeplanefx(var_0) {
-  playFXOnTag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_right");
-  playFXOnTag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_left");
-  playFXOnTag(common_scripts\utility::getfx("sleigh_rudolph_nose"), self, "tag_light_nose");
+  playfxontag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_right");
+  playfxontag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_left");
+  playfxontag(common_scripts\utility::getfx("sleigh_rudolph_nose"), self, "tag_light_nose");
 }
 
 light_delete() {
@@ -41,33 +41,31 @@ light_delete() {
 }
 
 light_geo_delete() {
-  var_0 = getEntArray("script_brushmodel", "classname");
+  var_0 = getentarray("script_brushmodel", "classname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isDefined(var_0[var_1].script_noteworthy)) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isdefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
-    if(var_0[var_1].script_noteworthy == "tube_light_geo") {
+    if(var_0[var_1].script_noteworthy == "tube_light_geo")
       var_0[var_1] delete();
-    }
   }
 }
 
 light_model_delete() {
-  var_0 = getEntArray("script_model", "classname");
+  var_0 = getentarray("script_model", "classname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isDefined(var_0[var_1].script_noteworthy)) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isdefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
-    if(var_0[var_1].script_noteworthy == "tube_light_geo") {
+    if(var_0[var_1].script_noteworthy == "tube_light_geo")
       var_0[var_1] delete();
-    }
   }
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0.prekilledfunc = ::playerprekilled;
   }
@@ -82,11 +80,10 @@ playerplaysnowfx() {
   var_0 = (0, 0, 30);
   var_1 = self getstance();
 
-  if(var_1 == "crouch") {
+  if(var_1 == "crouch")
     var_0 = (0, 0, 20);
-  } else if(var_1 == "prone") {
+  else if(var_1 == "prone")
     var_0 = (0, 0, 10);
-  }
 
-  playFX(common_scripts\utility::getfx("deathfx_xmas_snow"), self.origin + var_0);
+  playfx(common_scripts\utility::getfx("deathfx_xmas_snow"), self.origin + var_0);
 }

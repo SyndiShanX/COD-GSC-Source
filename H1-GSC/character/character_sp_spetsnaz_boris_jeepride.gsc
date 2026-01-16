@@ -5,7 +5,7 @@
 **************************************************************/
 
 main() {
-  self setModel("body_spetsnaz_assault_boris_jeepride");
+  self setmodel("body_spetsnaz_assault_boris_jeepride");
   self attach("head_spetsnaz_assault_boris_jeepride", "", 1);
   self.headmodel = "head_spetsnaz_assault_boris_jeepride";
   self.voice = "russian";

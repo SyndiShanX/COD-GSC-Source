@@ -11,38 +11,32 @@ main() {
   level thread play_intro_radio();
   level thread force_reverb_for_intro();
   level thread play_sam_ambience();
-  array_thread(getEntArray("advertisement", "targetname"), ::advertisements);
+  array_thread(getentarray("advertisement", "targetname"), ::advertisements);
 }
 
 advertisements() {
-  if(self.script_noteworthy == "talent") {
-    self playLoopSound("vox_ads_1_01_001a_pa");
-  }
+  if(self.script_noteworthy == "talent")
+    self playloopsound("vox_ads_1_01_001a_pa");
 
-  if(self.script_noteworthy == "tiny") {
-    self playLoopSound("vox_ads_1_01_002a_pa");
-  }
+  if(self.script_noteworthy == "tiny")
+    self playloopsound("vox_ads_1_01_002a_pa");
 
-  if(self.script_noteworthy == "bala") {
-    self playLoopSound("vox_ads_1_01_004a_pa");
-  }
+  if(self.script_noteworthy == "bala")
+    self playloopsound("vox_ads_1_01_004a_pa");
 
-  if(self.script_noteworthy == "passion") {
-    self playLoopSound("vox_ads_1_01_007a_pa");
-  }
+  if(self.script_noteworthy == "passion")
+    self playloopsound("vox_ads_1_01_007a_pa");
 
-  if(self.script_noteworthy == "cola") {
-    self playLoopSound("vox_ads_1_01_008a_pa");
-  }
+  if(self.script_noteworthy == "cola")
+    self playloopsound("vox_ads_1_01_008a_pa");
 
-  if(self.script_noteworthy == "cinema") {
-    self playLoopSound("vox_ads_1_01_009a_pa");
-  }
+  if(self.script_noteworthy == "cinema")
+    self playloopsound("vox_ads_1_01_009a_pa");
 
   self waittill("damage");
-  self playSound("dst_glass_pane");
+  self playsound("dst_glass_pane");
   self stoploopsound();
-  self playLoopSound("amb_" + self.script_noteworthy + "_damaged_ad");
+  self playloopsound("amb_" + self.script_noteworthy + "_damaged_ad");
 }
 
 force_snapshot_wait() {
@@ -63,7 +57,7 @@ play_sam_ambience() {
   level.player waittill("missileTurret_on");
   clientnotify("mTon");
   temp_ent = spawn("script_origin", level.player.origin);
-  temp_ent playLoopSound("wpn_sam_interface_loop", 1);
+  temp_ent playloopsound("wpn_sam_interface_loop", 1);
   level.player thread end_looping_sound(temp_ent);
   level.player thread play_sam_radio();
 }
@@ -81,7 +75,7 @@ play_sam_radio() {
   level.player endon("missileTurret_off");
 
   while(true) {
-    level.player playSound("amb_sam_radio_chatter");
+    level.player playsound("amb_sam_radio_chatter");
     wait(randomintrange(5, 10));
   }
 }
@@ -92,33 +86,31 @@ play_sam_creaking_sounds() {
   wait_max = undefined;
 
   while(true) {
-    if(!isDefined(level.num_planes_shot)) {
+    if(!isDefined(level.num_planes_shot))
       wait_max = 15;
-    } else {
+    else
       wait_max = get_wait_max();
-    }
 
-    level.player playSound("evt_cougar_creak");
+    level.player playsound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
   }
 }
 
 get_wait_max() {
-  if(level.num_planes_shot < 2) {
+  if(level.num_planes_shot < 2)
     return 12;
-  } else if(level.num_planes_shot < 6) {
+  else if(level.num_planes_shot < 6)
     return 8;
-  } else if(level.num_planes_shot < 9) {
+  else if(level.num_planes_shot < 9)
     return 6;
-  } else {
+  else
     return 4;
-  }
 }
 
 play_post_cougar_blend() {
   level waittill("cougar_blend_go");
   radioent = spawn("script_origin", (0, 0, 0));
-  radioent playLoopSound("vox_blend_post_la");
+  radioent playloopsound("vox_blend_post_la");
   level waittill("player_on_turret");
   radioent stoploopsound(0.5);
   radioent delete();
@@ -137,11 +129,10 @@ play_intro_radio() {
 }
 
 la_drone_control_tones(activate) {
-  if(activate) {
+  if(activate)
     level thread play_drone_control_tones();
-  } else {
+  else
     level notify("stop_drone_control_tones");
-  }
 }
 
 play_drone_control_tones() {
@@ -160,11 +151,10 @@ waitfor_enough_drones() {
   while(true) {
     drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
-    if(!isDefined(drones) || drones.size <= 2) {
+    if(!isDefined(drones) || drones.size <= 2)
       wait 1;
-    } else {
+    else
       break;
-    }
 
     wait 0.1;
   }
@@ -177,13 +167,12 @@ play_drone_control_tones_single() {
     return;
   }
   drone = drones[randomintrange(0, drones.size)];
-  drone playSound("veh_qr_tones_activate");
+  drone playsound("veh_qr_tones_activate");
   wait 4;
   drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
-  if(isDefined(drone)) {
+  if(isDefined(drone))
     arrayremovevalue(drones, drone);
-  }
 
   array_thread(drones, ::play_drone_reply);
 }
@@ -191,7 +180,6 @@ play_drone_control_tones_single() {
 play_drone_reply() {
   wait(randomfloatrange(0.1, 0.85));
 
-  if(isDefined(self)) {
-    self playSound("veh_qr_tones_activate_reply");
-  }
+  if(isDefined(self))
+    self playsound("veh_qr_tones_activate_reply");
 }

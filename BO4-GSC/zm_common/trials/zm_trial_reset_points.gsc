@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_reset_points;
 
 autoexec __init__system__() {
@@ -45,7 +46,7 @@ private reset_points(var_899c6d17) {
   }
 
   self.score = var_899c6d17;
-  self.pers[# "score"] = var_899c6d17;
+  self.pers[#"score"] = var_899c6d17;
 }
 
 private on_end(round_reset) {}

@@ -10,9 +10,8 @@
 
 advance_then_retreat_one_path(startPath, retreatPathName, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent)) {
+  if(!isDefined(damage_percent))
     damage_percent = 0.0;
-  }
   self advance_then_stop(startPath, speed, accel);
   self thread check_for_damage_notify(damage_percent);
   if(isDefined(retreatNotify)) {
@@ -55,7 +54,7 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
   self attachPath(goalnodes[0]);
   self.attachedpath = goalnodes[0];
   self thread goPath(self);
-  while(1) {
+  while (1) {
     wait(0.05);
     self setswitchnode(goalnodes[currNode], goalnodes[nextNode]);
     self setWaitNode(goalnodes[nextNode]);
@@ -69,9 +68,8 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
 
 patrol_loop_then_retreat(path1start, path1end, path2start, path2end, startretreatnode, retreatpathnode, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent)) {
+  if(!isDefined(damage_percent))
     damage_percent = 0.0;
-  }
   reachNode = GetVehicleNode(startretreatnode, "targetname");
   switchNode = GetVehicleNode(retreatpathnode, "targetname");
   self thread patrol_loop(path1start, path1end, path2start, path2end, speed, accel);
@@ -88,7 +86,7 @@ switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
   self endon("death");
   distanceSq = 25.0 * 25.0;
   goal_pos = reachNode.origin;
-  while(1) {
+  while (1) {
     if(distanceSquared(self.origin, goal_pos) < distanceSq) {
       self setSpeed(speed, accel);
       self SetVehGoalPos(goal_pos);
@@ -104,7 +102,7 @@ switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
 
 check_for_damage_notify(damage_percent) {
   self endon("death");
-  while(1) {
+  while (1) {
     if((self.health / self.maxhealth) <= damage_percent) {
       self notify("damage reached");
       return;

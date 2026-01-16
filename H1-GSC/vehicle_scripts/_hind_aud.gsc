@@ -9,18 +9,18 @@ snd_init_hind() {
 }
 
 snd_start_hind() {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     wait 1.0;
     snd_stop_hind(1.0);
   }
 
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_0.preset_name = "hind";
   soundscripts\_snd::snd_message("snd_start_vehicle", var_0);
 }
 
 snd_stop_hind(var_0) {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     soundscripts\_snd::snd_message("snd_stop_vehicle", var_0);
     self notify("snd_stop_vehicle");
   }
@@ -100,30 +100,37 @@ snd_hind_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_engine_far_vel2vol", [[0, 1.0],
     [10, 1.0],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_engine_close_vel2vol", [[0, 0.5],
     [20, 0.8],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_engine_far_vel2pch", [[0, 0.8],
     [10, 1.0],
-    [20, 1.1]]);
+    [20, 1.1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_start_rev_duck", [[0.0, 1.0],
     [0.25, 1.0],
     [0.3, 0.7],
     [0.7, 1.0],
-    [1.0, 1.0]]);
+    [1.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_start_rev_vel2vol", [[0.0, 0.0],
     [3.0, 0.3],
     [5.0, 0.7],
     [8.0, 0.8],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_pass_by_duck_envelope", [[0.0, 1.0],
     [0.15, 1.0],
     [0.3, 0.5],
     [0.5, 0.55],
-    [0.6, 1.0]]);
+    [0.6, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("hind_doppler2pch", [[0.0, 0.0],
-    [2.0, 2.0]]);
+    [2.0, 2.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 
@@ -146,12 +153,11 @@ hind_condition_callback_to_flyby(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = var_0["speed"];
 
-  if(isDefined(level.disablepassby) && level.disablepassby) {
+  if(isdefined(level.disablepassby) && level.disablepassby)
     return 0;
-  }
 
-  if(!isDefined(var_1.flyby)) {
-    var_1.flyby = spawnStruct();
+  if(!isdefined(var_1.flyby)) {
+    var_1.flyby = spawnstruct();
     var_1.flyby.prev_dist = var_3;
   } else {
     var_5 = var_3 - var_1.flyby.prev_dist;

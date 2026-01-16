@@ -13,9 +13,8 @@ bot_combat_think(damage, attacker, direction) {
   self pressads(0);
 
   for(;;) {
-    if(self atgoal("enemy_patrol")) {
+    if(self atgoal("enemy_patrol"))
       self cancelgoal("enemy_patrol");
-    }
 
     self maps\mp\bots\_bot::bot_update_failsafe();
     self maps\mp\bots\_bot::bot_update_crouch();
@@ -28,9 +27,8 @@ bot_combat_think(damage, attacker, direction) {
 
     if(bot_has_enemy()) {
       if(getdvarint(#"bot_IgnoreHumans")) {
-        if(isplayer(self.bot.threat.entity) && !self.bot.threat.entity is_bot()) {
+        if(isplayer(self.bot.threat.entity) && !self.bot.threat.entity is_bot())
           self bot_combat_idle();
-        }
       }
     }
 
@@ -107,9 +105,8 @@ bot_combat_think(damage, attacker, direction) {
 }
 
 bot_can_do_combat() {
-  if(self ismantling() || self isonladder()) {
+  if(self ismantling() || self isonladder())
     return false;
-  }
 
   return true;
 }
@@ -118,11 +115,10 @@ threat_dead() {
   if(bot_has_enemy()) {
     ent = self.bot.threat.entity;
 
-    if(threat_is_turret()) {
+    if(threat_is_turret())
       return isDefined(ent.dead) && ent.dead;
-    } else if(threat_is_qrdrone()) {
+    else if(threat_is_qrdrone())
       return isDefined(ent.crash_accel) && ent.crash_accel;
-    }
 
     return !isalive(ent);
   }
@@ -133,17 +129,14 @@ threat_dead() {
 bot_can_reload() {
   weapon = self getcurrentweapon();
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return false;
-  }
 
-  if(!self getweaponammostock(weapon)) {
+  if(!self getweaponammostock(weapon))
     return false;
-  }
 
-  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade()) {
+  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade())
     return false;
-  }
 
   return true;
 }
@@ -158,15 +151,13 @@ bot_combat_idle(damage, attacker, direction) {
   if(bot_can_reload()) {
     frac = 0.5;
 
-    if(bot_has_lmg()) {
+    if(bot_has_lmg())
       frac = 0.25;
-    }
 
     frac = frac + randomfloatrange(-0.1, 0.1);
 
-    if(bot_weapon_ammo_frac() < frac) {
+    if(bot_weapon_ammo_frac() < frac)
       self pressusebutton(0.1);
-    }
   }
 
   if(isDefined(damage)) {
@@ -219,9 +210,8 @@ bot_combat_main() {
   currentammo = self getweaponammoclip(weapon) + self getweaponammostock(weapon);
 
   if(!currentammo || bot_has_melee_weapon()) {
-    if(threat_is_player() || threat_is_dog()) {
+    if(threat_is_player() || threat_is_dog())
       bot_combat_melee(weapon);
-    }
 
     return;
   }
@@ -230,11 +220,10 @@ bot_combat_main() {
   ads = !bot_should_hip_fire() && self.bot.threat.dot > 0.96;
   difficulty = maps\mp\bots\_bot::bot_get_difficulty();
 
-  if(ads) {
+  if(ads)
     self pressads(1);
-  } else {
+  else
     self pressads(0);
-  }
 
   if(ads && self playerads() < 1) {
     ratio = int(floor(bot_get_converge_time() / bot_get_converge_rate()));
@@ -253,9 +242,8 @@ bot_combat_main() {
     if(distancesquared(self.bot.threat.entity.origin, self.bot.threat.position) > 225) {
       self.bot.threat.time_aim_correct = time;
 
-      if(time > self.bot.threat.time_first_sight) {
+      if(time > self.bot.threat.time_first_sight)
         self.bot.threat.time_first_sight = time - 100;
-      }
     }
   }
 
@@ -264,9 +252,8 @@ bot_combat_main() {
     frac = (time - self.bot.threat.time_first_sight) / bot_get_converge_time();
     frac = clamp(frac, 0, 1);
 
-    if(!threat_is_player()) {
+    if(!threat_is_player())
       frac = 1;
-    }
 
     self.bot.threat.aim_target = bot_update_aim(frames);
     self.bot.threat.position = self.bot.threat.entity.origin;
@@ -274,23 +261,20 @@ bot_combat_main() {
   }
 
   if(difficulty == "hard" || difficulty == "fu") {
-    if(bot_on_target(self.bot.threat.entity.origin, 30)) {
+    if(bot_on_target(self.bot.threat.entity.origin, 30))
       self allowattack(1);
-    } else {
+    else
       self allowattack(0);
-    }
   } else if(bot_on_target(self.bot.threat.aim_target, 45))
     self allowattack(1);
-  else {
+  else
     self allowattack(0);
-  }
 
   if(threat_is_equipment()) {
-    if(bot_on_target(self.bot.threat.entity.origin, 3)) {
+    if(bot_on_target(self.bot.threat.entity.origin, 3))
       self allowattack(1);
-    } else {
+    else
       self allowattack(0);
-    }
   }
 
   if(isDefined(self.stingerlockstarted) && self.stingerlockstarted) {
@@ -299,9 +283,8 @@ bot_combat_main() {
   }
 
   if(threat_is_player()) {
-    if(self iscarryingturret() && self.bot.threat.dot > 0) {
+    if(self iscarryingturret() && self.bot.threat.dot > 0)
       self pressattackbutton();
-    }
 
     if(self.bot.threat.dot > 0 && distance2dsquared(self.origin, self.bot.threat.entity.origin) < bot_get_melee_range_sq()) {
       self addgoal(self.bot.threat.entity.origin, 24, 4, "enemy_patrol");
@@ -309,11 +292,10 @@ bot_combat_main() {
     }
   }
 
-  if(threat_using_riotshield()) {
+  if(threat_using_riotshield())
     self bot_riotshield_think(self.bot.threat.entity);
-  } else if(bot_has_shotgun()) {
+  else if(bot_has_shotgun())
     self bot_shotgun_think();
-  }
 }
 
 bot_combat_melee(weapon) {
@@ -358,9 +340,8 @@ bot_combat_melee(weapon) {
     dot = bot_dot_product(self.bot.threat.entity.origin);
 
     if(dot > 0 && distsq < bot_get_melee_range_sq()) {
-      if(self.bot.threat.entity getstance() == "prone") {
+      if(self.bot.threat.entity getstance() == "prone")
         self setstance("crouch");
-      }
 
       if(weapon == "knife_held_mp") {
         self pressattackbutton();
@@ -399,9 +380,8 @@ bot_get_fov() {
   weapon = self getcurrentweapon();
   reduction = 1;
 
-  if(weapon != "none" && isweaponscopeoverlay(weapon) && self playerads() >= 1) {
+  if(weapon != "none" && isweaponscopeoverlay(weapon) && self playerads() >= 1)
     reduction = 0.25;
-  }
 
   return self.bot.fov * reduction;
 }
@@ -495,16 +475,14 @@ bot_update_lookat(origin, frac) {
   right = anglestoright(angles);
   error = bot_get_aim_error() * (1 - frac);
 
-  if(cointoss()) {
+  if(cointoss())
     error = error * -1;
-  }
 
   height = origin[2] - self.bot.threat.entity.origin[2];
   height = height * (1 - frac);
 
-  if(cointoss()) {
+  if(cointoss())
     height = height * -1;
-  }
 
   end = origin + right * error;
   end = end + (0, 0, height);
@@ -515,21 +493,20 @@ bot_update_lookat(origin, frac) {
 
 bot_on_target(aim_target, radius) {
   angles = self getplayerangles();
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   origin = self getplayercamerapos();
   len = distance(aim_target, origin);
   end = origin + forward * len;
 
-  if(distance2dsquared(aim_target, end) < radius * radius) {
+  if(distance2dsquared(aim_target, end) < radius * radius)
     return true;
-  }
 
   return false;
 }
 
 bot_dot_product(origin) {
   angles = self getplayerangles();
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   delta = origin - self getplayercamerapos();
   delta = vectornormalize(delta);
   dot = vectordot(forward, delta);
@@ -561,9 +538,8 @@ threat_is_ai_tank() {
 }
 
 threat_is_qrdrone(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     ent = self.bot.threat.entity;
-  }
 
   return isDefined(ent) && isDefined(ent.helitype) && ent.helitype == "qrdrone";
 }
@@ -580,17 +556,14 @@ threat_using_riotshield() {
 threat_is_equipment() {
   ent = self.bot.threat.entity;
 
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
 
-  if(threat_is_player()) {
+  if(threat_is_player())
     return false;
-  }
 
-  if(isDefined(ent.model) && ent.model == "t6_wpn_tac_insert_world") {
+  if(isDefined(ent.model) && ent.model == "t6_wpn_tac_insert_world")
     return true;
-  }
 
   return isDefined(ent.name) && isweaponequipment(ent.name);
 }
@@ -626,18 +599,16 @@ bot_best_enemy() {
     }
     if(!isplayer(enemy) && enemy.classname != "grenade") {
       if(level.gametype == "hack") {
-        if(enemy.classname == "script_vehicle") {
+        if(enemy.classname == "script_vehicle")
           continue;
-        }
       }
 
       if(enemy.classname == "auto_turret") {
         if(isDefined(enemy.dead) && enemy.dead || isDefined(enemy.carried) && enemy.carried) {
           continue;
         }
-        if(!(isDefined(enemy.turret_active) && enemy.turret_active)) {
+        if(!(isDefined(enemy.turret_active) && enemy.turret_active))
           continue;
-        }
       }
 
       if(threat_requires_rocket(enemy)) {
@@ -668,37 +639,31 @@ bot_best_enemy() {
 }
 
 threat_requires_rocket(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy)) {
+  if(!isDefined(enemy) || isplayer(enemy))
     return false;
-  }
 
-  if(isDefined(enemy.helitype) && enemy.helitype == "qrdrone") {
+  if(isDefined(enemy.helitype) && enemy.helitype == "qrdrone")
     return false;
-  }
 
   if(isDefined(enemy.targetname)) {
-    if(enemy.targetname == "remote_mortar") {
+    if(enemy.targetname == "remote_mortar")
       return true;
-    } else if(enemy.targetname == "uav" || enemy.targetname == "counteruav") {
+    else if(enemy.targetname == "uav" || enemy.targetname == "counteruav")
       return true;
-    }
   }
 
-  if(enemy.classname == "script_vehicle" && enemy.vehicleclass == "helicopter") {
+  if(enemy.classname == "script_vehicle" && enemy.vehicleclass == "helicopter")
     return true;
-  }
 
   return false;
 }
 
 threat_is_warthog(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy)) {
+  if(!isDefined(enemy) || isplayer(enemy))
     return false;
-  }
 
-  if(enemy.classname == "script_vehicle" && enemy.vehicleclass == "plane") {
+  if(enemy.classname == "script_vehicle" && enemy.vehicleclass == "plane")
     return true;
-  }
 
   return false;
 }
@@ -707,9 +672,8 @@ threat_should_ignore(entity) {
   ignore_time = self.bot.ignore_entity[entity getentitynumber()];
 
   if(isDefined(ignore_time)) {
-    if(gettime() < ignore_time) {
+    if(gettime() < ignore_time)
       return true;
-    }
   }
 
   return false;
@@ -723,9 +687,8 @@ bot_update_aim(frames) {
   ent = self.bot.threat.entity;
   prediction = self predictposition(ent, frames);
 
-  if(bot_using_launcher() && !threat_requires_rocket(ent)) {
+  if(bot_using_launcher() && !threat_requires_rocket(ent))
     return prediction - (0, 0, randomintrange(0, 10));
-  }
 
   if(!threat_is_player()) {
     height = ent getcentroid()[2] - prediction[2];
@@ -737,9 +700,8 @@ bot_update_aim(frames) {
   if(threat_using_riotshield()) {
     dot = ent bot_dot_product(self.origin);
 
-    if(dot > 0.8 && ent getstance() == "stand") {
+    if(dot > 0.8 && ent getstance() == "stand")
       return prediction + vectorscale((0, 0, 1), 5.0);
-    }
   }
 
   torso = prediction + (0, 0, height / 1.6);
@@ -788,9 +750,8 @@ bot_update_cover() {
   health_frac = bot_health_frac();
   cover_score = dot - ammo_frac - health_frac;
 
-  if(bot_should_hip_fire() && !bot_has_shotgun()) {
+  if(bot_should_hip_fire() && !bot_has_shotgun())
     cover_score = cover_score + 1;
-  }
 
   if(cover_score > 0.25) {
     nodes = getnodesinradiussorted(self.origin, 1024, 256, 512, "Path", 8);
@@ -812,9 +773,8 @@ bot_update_cover() {
     }
     nodes = getnodesinradiussorted(self.origin, 512, 0, 256, "Cover");
 
-    if(!nodes.size) {
+    if(!nodes.size)
       nodes = getnodesinradiussorted(self.origin, 256, 0, 256, "Path", 8);
-    }
 
     nearest = bot_nearest_node(enemy.origin);
 
@@ -862,9 +822,8 @@ bot_update_attack(enemy, dot_from, dot_to, sight, aim_target) {
   }
   radius = 50;
 
-  if(dot_to > 0.9) {
+  if(dot_to > 0.9)
     self pressads(1);
-  }
 
   ads = 1;
 
@@ -875,36 +834,30 @@ bot_update_attack(enemy, dot_from, dot_to, sight, aim_target) {
   }
 
   if(isweaponscopeoverlay(weapon) && ads) {
-    if(self playerads() < 1) {
+    if(self playerads() < 1)
       self.bot.time_ads = gettime();
-    }
 
-    if(gettime() < self.bot.time_ads + 1000) {
+    if(gettime() < self.bot.time_ads + 1000)
       return;
-    }
   }
 
-  if(!ads || self playerads() >= 1) {
+  if(!ads || self playerads() >= 1)
     self allowattack(1);
-  }
 }
 
 bot_weapon_ammo_frac() {
-  if(self isreloading() || self isswitchingweapons()) {
+  if(self isreloading() || self isswitchingweapons())
     return 0;
-  }
 
   weapon = self getcurrentweapon();
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return 1;
-  }
 
   total = weaponclipsize(weapon);
 
-  if(total <= 0) {
+  if(total <= 0)
     return 1;
-  }
 
   current = self getweaponammoclip(weapon);
   return current / total;
@@ -958,9 +911,8 @@ bot_select_weapon() {
 
   if(!clip) {
     if(stock) {
-      if(weaponhasattachment(weapon, "fastreload")) {
+      if(weaponhasattachment(weapon, "fastreload"))
         return;
-      }
     }
 
     foreach(primary in primaries) {
@@ -988,13 +940,11 @@ bot_select_weapon() {
 bot_has_shotgun() {
   weapon = self getcurrentweapon();
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return false;
-  }
 
-  if(weaponisdualwield(weapon)) {
+  if(weaponisdualwield(weapon))
     return true;
-  }
 
   return bot_has_weapon_class("spread") || bot_has_weapon_class("pistol spread");
 }
@@ -1005,13 +955,11 @@ bot_has_crossbow() {
 }
 
 bot_has_launcher() {
-  if(self getweaponammoclip("smaw_mp") > 0 || self getweaponammostock("smaw_mp") > 0) {
+  if(self getweaponammoclip("smaw_mp") > 0 || self getweaponammostock("smaw_mp") > 0)
     return true;
-  }
 
-  if(self getweaponammoclip("fhj18_mp") > 0 || self getweaponammostock("fhj18_mp") > 0) {
+  if(self getweaponammoclip("fhj18_mp") > 0 || self getweaponammostock("fhj18_mp") > 0)
     return true;
-  }
 
   return false;
 }
@@ -1020,9 +968,8 @@ bot_has_melee_weapon() {
   weapon = self getcurrentweapon();
 
   if(weapon == "fhj18_mp") {
-    if(isDefined(self.bot.threat.entity) && !target_istarget(self.bot.threat.entity)) {
+    if(isDefined(self.bot.threat.entity) && !target_istarget(self.bot.threat.entity))
       return true;
-    }
   }
 
   return weapon == "riotshield_mp" || weapon == "knife_held_mp";
@@ -1051,15 +998,13 @@ bot_has_minigun() {
 }
 
 bot_has_weapon_class(class) {
-  if(self isreloading()) {
+  if(self isreloading())
     return false;
-  }
 
   weapon = self getcurrentweapon();
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return false;
-  }
 
   return weaponclass(weapon) == class;
 }
@@ -1072,19 +1017,16 @@ bot_should_hip_fire() {
   enemy = self.bot.threat.entity;
   weapon = self getcurrentweapon();
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return false;
-  }
 
-  if(weaponisdualwield(weapon)) {
+  if(weaponisdualwield(weapon))
     return true;
-  }
 
   class = weaponclass(weapon);
 
-  if(isplayer(enemy) && class == "spread") {
+  if(isplayer(enemy) && class == "spread")
     return true;
-  }
 
   distsq = distancesquared(self.origin, enemy.origin);
   distcheck = 0;
@@ -1111,9 +1053,8 @@ bot_should_hip_fire() {
       break;
   }
 
-  if(isweaponscopeoverlay(weapon)) {
+  if(isweaponscopeoverlay(weapon))
     distcheck = 500;
-  }
 
   return distsq < distcheck * distcheck;
 }
@@ -1125,55 +1066,48 @@ bot_patrol_near_enemy(damage, attacker, direction) {
   if(threat_requires_rocket(attacker) && !self bot_has_launcher()) {
     return;
   }
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     self bot_lookat_entity(attacker);
-  }
 
   if(maps\mp\bots\_bot::bot_get_difficulty() == "easy") {
     return;
   }
-  if(!isDefined(attacker)) {
+  if(!isDefined(attacker))
     attacker = self maps\mp\bots\_bot::bot_get_closest_enemy(self.origin, 1);
-  }
 
   if(!isDefined(attacker)) {
     return;
   }
-  if(attacker.classname == "auto_turret") {
+  if(attacker.classname == "auto_turret")
     self bot_turret_set_dangerous(attacker);
-  }
 
   node = bot_nearest_node(attacker.origin);
 
   if(!isDefined(node)) {
     nodes = getnodesinradiussorted(attacker.origin, 1024, 0, 512, "Path", 8);
 
-    if(nodes.size) {
+    if(nodes.size)
       node = nodes[0];
-    }
   }
 
   if(isDefined(node)) {
-    if(isDefined(damage)) {
+    if(isDefined(damage))
       self addgoal(node, 24, 4, "enemy_patrol");
-    } else {
+    else
       self addgoal(node, 24, 2, "enemy_patrol");
-    }
   }
 }
 
 bot_nearest_node(origin) {
   node = getnearestnode(origin);
 
-  if(isDefined(node)) {
+  if(isDefined(node))
     return node;
-  }
 
   nodes = getnodesinradiussorted(origin, 256, 0, 256);
 
-  if(nodes.size) {
+  if(nodes.size)
     return nodes[0];
-  }
 
   return undefined;
 }
@@ -1189,33 +1123,29 @@ bot_lookat_entity(entity) {
 
   offset = target_getoffset(entity);
 
-  if(isDefined(offset)) {
+  if(isDefined(offset))
     self lookat(entity.origin + offset);
-  } else {
+  else
     self lookat(entity getcentroid());
-  }
 }
 
 bot_combat_throw_lethal(origin) {
   weapons = self getweaponslist();
   radius = 256;
 
-  if(self hasperk("specialty_flakjacket")) {
+  if(self hasperk("specialty_flakjacket"))
     radius = radius * 0.25;
-  }
 
-  if(distancesquared(self.origin, origin) < radius * radius) {
+  if(distancesquared(self.origin, origin) < radius * radius)
     return false;
-  }
 
   foreach(weapon in weapons) {
     if(self getweaponammostock(weapon) <= 0) {
       continue;
     }
     if(weapon == "frag_grenade_mp" || weapon == "sticky_grenade_mp") {
-      if(self throwgrenade(weapon, origin)) {
+      if(self throwgrenade(weapon, origin))
         return true;
-      }
     }
   }
 
@@ -1226,9 +1156,8 @@ bot_combat_throw_tactical(origin) {
   weapons = self getweaponslist();
 
   if(!self hasperk("specialty_flashprotection")) {
-    if(distancesquared(self.origin, origin) < 422500) {
+    if(distancesquared(self.origin, origin) < 422500)
       return false;
-    }
   }
 
   foreach(weapon in weapons) {
@@ -1236,9 +1165,8 @@ bot_combat_throw_tactical(origin) {
       continue;
     }
     if(weapon == "flash_grenade_mp" || weapon == "concussion_grenade_mp") {
-      if(self throwgrenade(weapon, origin)) {
+      if(self throwgrenade(weapon, origin))
         return true;
-      }
     }
   }
 
@@ -1246,9 +1174,8 @@ bot_combat_throw_tactical(origin) {
 }
 
 bot_combat_throw_smoke(origin) {
-  if(self getweaponammostock("willy_pete_mp") <= 0) {
+  if(self getweaponammostock("willy_pete_mp") <= 0)
     return 0;
-  }
 
   time = gettime();
 
@@ -1259,27 +1186,24 @@ bot_combat_throw_smoke(origin) {
     if(time - player.smokegrenadetime > 12000) {
       continue;
     }
-    if(distancesquared(origin, player.smokegrenadeposition) < 65536) {
+    if(distancesquared(origin, player.smokegrenadeposition) < 65536)
       return 0;
-    }
   }
 
   return self throwgrenade("willy_pete_mp", origin);
 }
 
 bot_combat_throw_emp(origin) {
-  if(self getweaponammostock("emp_mp") <= 0) {
+  if(self getweaponammostock("emp_mp") <= 0)
     return 0;
-  }
 
   return self throwgrenade("emp_mp", origin);
 }
 
 bot_combat_throw_proximity(origin) {
   foreach(missile in level.missileentities) {
-    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536) {
+    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536)
       return 0;
-    }
   }
 
   return self throwgrenade("proximity_grenade_mp", origin);
@@ -1287,27 +1211,23 @@ bot_combat_throw_proximity(origin) {
 
 bot_combat_tactical_insertion(origin) {
   foreach(missile in level.missileentities) {
-    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536) {
+    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536)
       return 0;
-    }
   }
 
   return self throwgrenade("tactical_insertion_mp", origin);
 }
 
 bot_combat_toss_flash(origin) {
-  if(maps\mp\bots\_bot::bot_get_difficulty() == "easy") {
+  if(maps\mp\bots\_bot::bot_get_difficulty() == "easy")
     return false;
-  }
 
-  if(self getweaponammostock("sensor_grenade_mp") <= 0 && self getweaponammostock("proximity_grenade_mp") <= 0 && self getweaponammostock("trophy_system_mp") <= 0) {
+  if(self getweaponammostock("sensor_grenade_mp") <= 0 && self getweaponammostock("proximity_grenade_mp") <= 0 && self getweaponammostock("trophy_system_mp") <= 0)
     return false;
-  }
 
   foreach(missile in level.missileentities) {
-    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536) {
+    if(isDefined(missile) && distancesquared(missile.origin, origin) < 65536)
       return false;
-    }
   }
 
   self pressattackbutton(2);
@@ -1315,18 +1235,15 @@ bot_combat_toss_flash(origin) {
 }
 
 bot_combat_toss_frag(origin) {
-  if(maps\mp\bots\_bot::bot_get_difficulty() == "easy") {
+  if(maps\mp\bots\_bot::bot_get_difficulty() == "easy")
     return false;
-  }
 
-  if(self getweaponammostock("bouncingbetty_mp") <= 0 && self getweaponammostock("claymore_mp") <= 0 && self getweaponammostock("satchel_charge_mp") <= 0) {
+  if(self getweaponammostock("bouncingbetty_mp") <= 0 && self getweaponammostock("claymore_mp") <= 0 && self getweaponammostock("satchel_charge_mp") <= 0)
     return false;
-  }
 
   foreach(missile in level.missileentities) {
-    if(isDefined(missile) && distancesquared(missile.origin, origin) < 16384) {
+    if(isDefined(missile) && distancesquared(missile.origin, origin) < 16384)
       return false;
-    }
   }
 
   self pressattackbutton(1);
@@ -1350,9 +1267,8 @@ bot_shotgun_think() {
       self addgoal(goal, 24, 4, "cover");
     }
 
-    if(weapon != "none" && !weaponisdualwield(weapon) && distsq < 65536) {
+    if(weapon != "none" && !weaponisdualwield(weapon) && distsq < 65536)
       self pressads(1);
-    }
   } else if(self getweaponammoclip(weapon) && distsq < 90000) {
     self cancelgoal("enemy_patrol");
     self addgoal(self.origin, 24, 4, "cover");
@@ -1371,9 +1287,8 @@ bot_shotgun_think() {
   if(self threat_is_player()) {
     dot = enemy bot_dot_product(self.origin);
 
-    if(dot < 0.9) {
+    if(dot < 0.9)
       return;
-    }
   } else
     return;
 
@@ -1395,9 +1310,8 @@ bot_shotgun_think() {
     if(class == "spread" || class == "pistol spread" || class == "melee" || class == "item") {
       continue;
     }
-    if(self switchtoweapon(primary)) {
+    if(self switchtoweapon(primary))
       return;
-    }
   }
 
   if(self getweaponammostock("willy_pete_mp") > 0) {
@@ -1424,7 +1338,7 @@ bot_turret_set_dangerous(turret) {
   if(!isDefined(nearest)) {
     return;
   }
-  forward = anglesToForward(turret.angles);
+  forward = anglestoforward(turret.angles);
 
   if(turret.turrettype == "sentry") {
     nodes = getvisiblenodes(nearest);
@@ -1433,9 +1347,8 @@ bot_turret_set_dangerous(turret) {
       dir = vectornormalize(node.origin - turret.origin);
       dot = vectordot(forward, dir);
 
-      if(dot >= 0.5) {
+      if(dot >= 0.5)
         turret turret_mark_node_dangerous(node);
-      }
     }
   } else if(turret.turrettype == "microwave") {
     nodes = getnodesinradius(turret.origin, level.microwave_radius, 0);
@@ -1447,29 +1360,26 @@ bot_turret_set_dangerous(turret) {
       dir = vectornormalize(node.origin - turret.origin);
       dot = vectordot(forward, dir);
 
-      if(dot >= level.microwave_turret_cone_dot) {
+      if(dot >= level.microwave_turret_cone_dot)
         turret turret_mark_node_dangerous(node);
-      }
     }
   }
 }
 
 bot_turret_nearest_node(turret) {
   nodes = getnodesinradiussorted(turret.origin, 256, 0);
-  forward = anglesToForward(turret.angles);
+  forward = anglestoforward(turret.angles);
 
   foreach(node in nodes) {
     dir = vectornormalize(node.origin - turret.origin);
     dot = vectordot(forward, dir);
 
-    if(dot > 0.5) {
+    if(dot > 0.5)
       return node;
-    }
   }
 
-  if(nodes.size) {
+  if(nodes.size)
     return nodes[0];
-  }
 
   return undefined;
 }
@@ -1488,12 +1398,11 @@ turret_mark_node_dangerous(node) {
 turret_get_attack_node() {
   nearest = bot_nearest_node(self.origin);
 
-  if(!isDefined(nearest)) {
+  if(!isDefined(nearest))
     return undefined;
-  }
 
   nodes = getnodesinradiussorted(self.origin, 512, 64);
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
 
   foreach(node in nodes) {
     if(!nodesvisible(node, nearest)) {
@@ -1502,9 +1411,8 @@ turret_get_attack_node() {
     dir = vectornormalize(node.origin - self.origin);
     dot = vectordot(forward, dir);
 
-    if(dot < 0.5) {
+    if(dot < 0.5)
       return node;
-    }
   }
 
   return undefined;
@@ -1514,12 +1422,11 @@ bot_riotshield_think(enemy) {
   dot = enemy bot_dot_product(self.origin);
 
   if(!bot_has_crossbow() && !bot_using_launcher() && enemy getstance() != "stand") {
-    if(dot > 0.8) {
+    if(dot > 0.8)
       self allowattack(0);
-    }
   }
 
-  forward = anglesToForward(enemy.angles);
+  forward = anglestoforward(enemy.angles);
   origin = enemy.origin + forward * randomintrange(256, 512);
 
   if(self bot_combat_throw_lethal(origin)) {
@@ -1531,9 +1438,8 @@ bot_riotshield_think(enemy) {
   if(self throwgrenade("proximity_grenade_mp", origin)) {
     return;
   }
-  if(self atgoal("cover")) {
+  if(self atgoal("cover"))
     self.bot.threat.update_riotshield = 0;
-  }
 
   if(gettime() > self.bot.threat.update_riotshield) {
     self thread bot_riotshield_dangerous_think(enemy);
@@ -1557,7 +1463,7 @@ bot_riotshield_dangerous_think(enemy, goal) {
   }
 
   nodes = array_randomize(nodes);
-  forward = anglesToForward(enemy.angles);
+  forward = anglestoforward(enemy.angles);
 
   foreach(node in nodes) {
     if(!nodesvisible(node, nearest)) {
@@ -1567,11 +1473,10 @@ bot_riotshield_dangerous_think(enemy, goal) {
     dot = vectordot(forward, dir);
 
     if(dot < 0) {
-      if(distancesquared(self.origin, enemy.origin) < 262144) {
+      if(distancesquared(self.origin, enemy.origin) < 262144)
         self addgoal(node, 24, 4, "cover");
-      } else {
+      else
         self addgoal(node, 24, 3, "cover");
-      }
 
       break;
     }
@@ -1586,14 +1491,12 @@ bot_riotshield_dangerous_think(enemy, goal) {
     dir = vectornormalize(node.origin - enemy.origin);
     dot = vectordot(forward, dir);
 
-    if(dot >= 0.5) {
+    if(dot >= 0.5)
       node setdangerous(self.team, 1);
-    }
   }
 
   enemy wait_endon(5, "death");
 
-  foreach(node in nodes) {
-    node setdangerous(self.team, 0);
-  }
+  foreach(node in nodes)
+  node setdangerous(self.team, 0);
 }

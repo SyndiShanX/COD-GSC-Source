@@ -20,9 +20,9 @@ delete_and_sink_fx() {
     self.weapon_last_damage = "hind_rockets";
   }
   if(self.weapon_last_damage == "hind_rockets") {
-    playFX(level._effect["explo_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
+    PlayFX(level._effect["explo_fx" + self.vehicletype], self.origin, AnglesToForward(self.angles));
   } else if(self.weapon_last_damage == "hind_minigun_pilot") {
-    playFX(level._effect["sink_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
+    PlayFX(level._effect["sink_fx" + self.vehicletype], self.origin, AnglesToForward(self.angles));
   }
   self Delete();
 }

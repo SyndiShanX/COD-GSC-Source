@@ -72,11 +72,10 @@ zone_handler(var_0, var_1) {
   var_2 = "";
   var_3 = "";
 
-  if(getsubstr(var_0, 0, 6) == "enter_") {
+  if(getsubstr(var_0, 0, 6) == "enter_")
     var_2 = var_1;
-  } else if(getsubstr(var_0, 0, 5) == "exit_") {
+  else if(getsubstr(var_0, 0, 5) == "exit_")
     var_3 = var_1;
-  }
 }
 
 music_handler(var_0, var_1) {}
@@ -221,7 +220,7 @@ start_get_to_lz_mix() {
 }
 
 aud_open_door_meeting() {
-  if(isDefined(level.aud.javelin_barn_door_open_trigger)) {
+  if(isdefined(level.aud.javelin_barn_door_open_trigger)) {
     wait 1.5;
     common_scripts\utility::array_thread(level.aud.javelin_barn_door_open_trigger, common_scripts\utility::trigger_on);
   }
@@ -238,6 +237,6 @@ external_ambiance_update() {
 }
 
 disable_azm_trigger_before_javelin_barn_door_open() {
-  level.aud.javelin_barn_door_open_trigger = getEntArray("flag_before_javelin_barn_door_open", "script_noteworthy");
+  level.aud.javelin_barn_door_open_trigger = getentarray("flag_before_javelin_barn_door_open", "script_noteworthy");
   common_scripts\utility::array_thread(level.aud.javelin_barn_door_open_trigger, common_scripts\utility::trigger_off);
 }

@@ -30,7 +30,7 @@ function main() {
   level flag::init("masher_on");
   level flag::init("masher_unlocked");
   level flag::init("masher_cooldown");
-  scene::add_scene_func("p7_fxanim_zm_castle_gate_smash_lift_bundle", &function_ef9ad3c0, "init");
+  scene::add_scene_func("p7_fxanim_zm_castle_gate_smash_lift_bundle", & function_ef9ad3c0, "init");
   level thread function_6a74bee8();
   level thread function_a61df505();
   level.var_6ac4e9cb = getent("masher_gate", "script_noteworthy");
@@ -43,7 +43,7 @@ function register_clientfields() {}
 
 function function_a61df505() {
   var_fb9e67a8 = getent("masher_buy_door", "script_noteworthy");
-  if(isDefined(var_fb9e67a8)) {
+  if(isdefined(var_fb9e67a8)) {
     var_fb9e67a8 waittill("door_opened");
   }
   level flag::set("masher_unlocked");
@@ -51,11 +51,11 @@ function function_a61df505() {
 
 function function_6a74bee8() {
   var_4aa9fb47 = struct::get_array("s_masher_button", "targetname");
-  array::thread_all(var_4aa9fb47, &function_a5062ebd);
+  array::thread_all(var_4aa9fb47, & function_a5062ebd);
 }
 
 function function_a5062ebd() {
-  s_unitrigger_stub = spawnStruct();
+  s_unitrigger_stub = spawnstruct();
   s_unitrigger_stub.origin = self.origin;
   s_unitrigger_stub.angles = self.angles;
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -64,13 +64,13 @@ function function_a5062ebd() {
   s_unitrigger_stub.radius = 64;
   s_unitrigger_stub.require_look_at = 0;
   s_unitrigger_stub.var_42d723eb = self;
-  s_unitrigger_stub.prompt_and_visibility_func = &function_d7e7dcf9;
-  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_b776b443);
+  s_unitrigger_stub.prompt_and_visibility_func = & function_d7e7dcf9;
+  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_b776b443);
   s_unitrigger_stub._trap_lights = [];
   s_unitrigger_stub._trap_switches = [];
-  var_a22f946c = getEntArray(self.target, "targetname");
-  for(i = 0; i < var_a22f946c.size; i++) {
-    if(isDefined(var_a22f946c[i].script_noteworthy)) {
+  var_a22f946c = getentarray(self.target, "targetname");
+  for (i = 0; i < var_a22f946c.size; i++) {
+    if(isdefined(var_a22f946c[i].script_noteworthy)) {
       switch (var_a22f946c[i].script_noteworthy) {
         case "switch": {
           s_unitrigger_stub._trap_switches[s_unitrigger_stub._trap_switches.size] = var_a22f946c[i];
@@ -85,8 +85,8 @@ function function_a5062ebd() {
       }
     }
   }
-  var_8fcfe322 = getEntArray("zombie_trap", "targetname");
-  array::thread_all(var_8fcfe322, &function_5054a970);
+  var_8fcfe322 = getentarray("zombie_trap", "targetname");
+  array::thread_all(var_8fcfe322, & function_5054a970);
   foreach(var_60532813 in var_8fcfe322) {
     if(var_60532813.target === "trap_b") {
       var_60532813 thread function_aaf2ece7();
@@ -96,26 +96,26 @@ function function_a5062ebd() {
 
 function function_ef9ad3c0(a_ents) {
   level.var_995bb84e = a_ents["castle_gate_door_smash_lift"];
-  if(isDefined(level.var_995bb84e)) {
-    level.var_995bb84e.var_beb932f1 = getEntArray("masher_gate_trig_1", "targetname");
-    array::thread_all(level.var_995bb84e.var_beb932f1, &function_1a554e00, level.var_995bb84e, "gate_jnt");
+  if(isdefined(level.var_995bb84e)) {
+    level.var_995bb84e.var_beb932f1 = getentarray("masher_gate_trig_1", "targetname");
+    array::thread_all(level.var_995bb84e.var_beb932f1, & function_1a554e00, level.var_995bb84e, "gate_jnt");
   }
 }
 
 function function_df78b782() {
   self thread function_994bb49e();
-  while(level flag::get("masher_on")) {
+  while (level flag::get("masher_on")) {
     level scene::play("p7_fxanim_zm_castle_gate_smash_lift_bundle");
     level function_1ff56fb0("p7_fxanim_zm_castle_gate_smash_lift_bundle");
   }
 }
 
 function function_994bb49e() {
-  while(level flag::get("masher_on")) {
+  while (level flag::get("masher_on")) {
     level waittill("hash_d1d080bc");
-    array::run_all(self.var_beb932f1, &setvisibletoall);
+    array::run_all(self.var_beb932f1, & setvisibletoall);
     level waittill("hash_e30b0e08");
-    array::run_all(self.var_beb932f1, &setinvisibletoall);
+    array::run_all(self.var_beb932f1, & setinvisibletoall);
   }
 }
 
@@ -125,9 +125,9 @@ function function_1ff56fb0(str_scene) {
 }
 
 function function_aaf2ece7() {
-  while(true) {
+  while (true) {
     self waittill("trap_activate");
-    if(isDefined(self.activated_by_player)) {
+    if(isdefined(self.activated_by_player)) {
       self.activated_by_player playrumbleonentity("zm_castle_interact_rumble");
     }
     exploder::exploder("fxexp_116");
@@ -144,7 +144,7 @@ function function_81b05f08() {
 
 function function_5054a970() {
   level waittill("power_on");
-  for(i = 0; i < self._trap_lights.size; i++) {
+  for (i = 0; i < self._trap_lights.size; i++) {
     self function_81b05f08();
   }
 }
@@ -175,7 +175,7 @@ function function_d7e7dcf9(player) {
 }
 
 function function_b776b443() {
-  while(true) {
+  while (true) {
     if(level flag::get("masher_cooldown")) {
       level flag::wait_till_clear("masher_cooldown");
     }
@@ -197,14 +197,14 @@ function function_aaf7f74d() {
   self function_13fd863b(self._trap_light_model_red);
   exploder::stop_exploder("masher_trap_green");
   exploder::exploder("masher_trap_red");
-  for(i = 0; i < self._trap_switches.size; i++) {
+  for (i = 0; i < self._trap_switches.size; i++) {
     self._trap_switches[i] rotatepitch(180, 0.5);
-    self._trap_switches[i] playSound("evt_switch_flip_trap");
+    self._trap_switches[i] playsound("evt_switch_flip_trap");
   }
   level flag::wait_till_all(array("power_on", "masher_unlocked"));
-  while(true) {
+  while (true) {
     level flag::wait_till_clear("masher_cooldown");
-    for(i = 0; i < self._trap_switches.size; i++) {
+    for (i = 0; i < self._trap_switches.size; i++) {
       self._trap_switches[i] rotatepitch(-180, 0.5);
     }
     self._trap_switches[0] waittill("rotatedone");
@@ -215,18 +215,18 @@ function function_aaf7f74d() {
     self function_13fd863b(self._trap_light_model_red);
     exploder::stop_exploder("masher_trap_green");
     exploder::exploder("masher_trap_red");
-    for(i = 0; i < self._trap_switches.size; i++) {
+    for (i = 0; i < self._trap_switches.size; i++) {
       self._trap_switches[i] rotatepitch(180, 0.5);
-      self._trap_switches[i] playSound("evt_switch_flip_trap");
+      self._trap_switches[i] playsound("evt_switch_flip_trap");
     }
     level flag::wait_till("masher_cooldown");
   }
 }
 
 function function_13fd863b(str_model) {
-  for(i = 0; i < self._trap_lights.size; i++) {
+  for (i = 0; i < self._trap_lights.size; i++) {
     var_b079127 = self._trap_lights[i];
-    var_b079127 setModel(str_model);
+    var_b079127 setmodel(str_model);
   }
 }
 
@@ -246,33 +246,33 @@ function function_d12a18d7(e_player) {
 }
 
 function function_8123d15a() {
-  array::run_all(self.var_beb932f1, &show);
+  array::run_all(self.var_beb932f1, & show);
   n_start_time = gettime();
   n_total_time = 0;
-  while(20 > n_total_time && level flag::get("masher_on")) {
+  while (20 > n_total_time && level flag::get("masher_on")) {
     self movez(-116, 0.25);
-    self playSound("zmb_mashertrap_descend");
+    self playsound("zmb_mashertrap_descend");
     self waittill("movedone");
     playrumbleonposition("zm_castle_gate_mash", self.origin);
-    array::run_all(self.var_beb932f1, &hide);
+    array::run_all(self.var_beb932f1, & hide);
     self movez(116, 0.25);
     self waittill("movedone");
     wait(0.25);
-    array::run_all(self.var_beb932f1, &show);
+    array::run_all(self.var_beb932f1, & show);
     n_total_time = (gettime() - n_start_time) / 1000;
   }
-  array::run_all(self.var_beb932f1, &hide);
+  array::run_all(self.var_beb932f1, & hide);
 }
 
 function function_faccc214() {
-  self.var_beb932f1 = getEntArray(self.target, "targetname");
-  array::thread_all(self.var_beb932f1, &function_1a554e00, self);
+  self.var_beb932f1 = getentarray(self.target, "targetname");
+  array::thread_all(self.var_beb932f1, & function_1a554e00, self);
 }
 
 function function_1a554e00(var_6ac4e9cb, var_8f915eab) {
   self._trap_type = "masher";
   self enablelinkto();
-  if(isDefined(var_8f915eab)) {
+  if(isdefined(var_8f915eab)) {
     self linkto(var_6ac4e9cb, var_8f915eab);
   } else {
     self linkto(var_6ac4e9cb);
@@ -282,16 +282,16 @@ function function_1a554e00(var_6ac4e9cb, var_8f915eab) {
 }
 
 function trigger_damage(var_6ac4e9cb) {
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     self.activated_by_player = var_6ac4e9cb.activated_by_player;
     if(level flag::get("masher_on")) {
-      if(e_who.archetype === "zombie" && (!(isDefined(e_who.var_bd3a4420) && e_who.var_bd3a4420))) {
+      if(e_who.archetype === "zombie" && (!(isdefined(e_who.var_bd3a4420) && e_who.var_bd3a4420))) {
         e_who thread function_e80df8bf(var_6ac4e9cb.activated_by_player, self);
       } else {
         if(e_who.archetype === "mechz") {
           level flag::clear("masher_on");
-        } else if(isDefined(e_who)) {
+        } else if(isdefined(e_who)) {
           e_who dodamage(e_who.health, e_who.origin, self, undefined, "none", "MOD_IMPACT");
         }
       }
@@ -308,7 +308,7 @@ function function_e80df8bf(var_ecf98bb6, var_60532813) {
     self.var_bd3a4420 = 1;
     self thread zombie_utility::makezombiecrawler();
     wait(4);
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       self.var_bd3a4420 = undefined;
     }
   } else {
@@ -331,7 +331,7 @@ function function_9087381a() {
   wait(0.05);
   setdvar("", 0);
   adddebugcommand("");
-  while(true) {
+  while (true) {
     if(getdvarint("")) {
       setdvar("", 0);
       level thread function_d12a18d7(1);

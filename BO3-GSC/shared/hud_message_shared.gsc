@@ -13,16 +13,16 @@
 #namespace hud_message;
 
 function autoexec __init__sytem__() {
-  system::register("hud_message", &__init__, undefined, undefined);
+  system::register("hud_message", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
-  callback::on_connect(&on_player_connect);
-  callback::on_disconnect(&on_player_disconnect);
+  callback::on_connect( & on_player_connect);
+  callback::on_disconnect( & on_player_disconnect);
 }
 
 function on_player_connect() {
@@ -33,10 +33,10 @@ function on_player_connect() {
 }
 
 function on_player_disconnect() {
-  if(isDefined(self.customgametypeheader)) {
+  if(isdefined(self.customgametypeheader)) {
     self.customgametypeheader destroy();
   }
-  if(isDefined(self.customgametypesubheader)) {
+  if(isdefined(self.customgametypesubheader)) {
     self.customgametypesubheader destroy();
   }
 }
@@ -63,17 +63,17 @@ function initcustomgametypeheader() {
 }
 
 function hintmessage(hinttext, duration) {
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.notifytext = hinttext;
   notifydata.duration = duration;
   notifymessage(notifydata);
 }
 
 function hintmessageplayers(players, hinttext, duration) {
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.notifytext = hinttext;
   notifydata.duration = duration;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] notifymessage(notifydata);
   }
 }
@@ -159,7 +159,7 @@ function oldnotifymessage(titletext, notifytext, iconname, glowcolor, sound, dur
   if(level.wagermatch && !level.teambased) {
     return;
   }
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.titletext = titletext;
   notifydata.notifytext = notifytext;
   notifydata.iconname = iconname;
@@ -172,7 +172,7 @@ function oldnotifymessage(titletext, notifytext, iconname, glowcolor, sound, dur
 function notifymessage(notifydata) {
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(self.messagenotifyqueue)) {
+  if(!isdefined(self.messagenotifyqueue)) {
     self.messagenotifyqueue = [];
   }
   self.messagenotifyqueue[self.messagenotifyqueue.size] = notifydata;
@@ -181,7 +181,7 @@ function notifymessage(notifydata) {
 
 function playnotifyloop(duration) {
   playnotifyloop = spawn("script_origin", (0, 0, 0));
-  playnotifyloop playLoopSound("uin_notify_data_loop");
+  playnotifyloop playloopsound("uin_notify_data_loop");
   duration = duration - 4;
   if(duration < 1) {
     duration = 1;
@@ -196,35 +196,35 @@ function shownotifymessage(notifydata, duration) {
   waitrequirevisibility(0);
   self notify("notifymessagebegin", duration);
   self thread resetoncancel();
-  if(isDefined(notifydata.sound)) {
+  if(isdefined(notifydata.sound)) {
     self playlocalsound(notifydata.sound);
   }
-  if(isDefined(notifydata.musicstate)) {
+  if(isdefined(notifydata.musicstate)) {
     self music::setmusicstate(notifydata.music);
   }
-  if(isDefined(notifydata.leadersound)) {
-    if(isDefined(level.globallogic_audio_dialog_on_player_override)) {
+  if(isdefined(notifydata.leadersound)) {
+    if(isdefined(level.globallogic_audio_dialog_on_player_override)) {
       self[[level.globallogic_audio_dialog_on_player_override]](notifydata.leadersound);
     }
   }
-  if(isDefined(notifydata.glowcolor)) {
+  if(isdefined(notifydata.glowcolor)) {
     glowcolor = notifydata.glowcolor;
   } else {
     glowcolor = (0, 0, 0);
   }
-  if(isDefined(notifydata.color)) {
+  if(isdefined(notifydata.color)) {
     color = notifydata.color;
   } else {
     color = (1, 1, 1);
   }
   anchorelem = self.notifytitle;
-  if(isDefined(notifydata.titletext)) {
-    if(isDefined(notifydata.titlelabel)) {
+  if(isdefined(notifydata.titletext)) {
+    if(isdefined(notifydata.titlelabel)) {
       self.notifytitle.label = notifydata.titlelabel;
     } else {
-      self.notifytitle.label = &"";
+      self.notifytitle.label = & "";
     }
-    if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring)) {
+    if(isdefined(notifydata.titlelabel) && !isdefined(notifydata.titleisstring)) {
       self.notifytitle setvalue(notifydata.titletext);
     } else {
       self.notifytitle settext(notifydata.titletext);
@@ -234,13 +234,13 @@ function shownotifymessage(notifydata, duration) {
     self.notifytitle.color = color;
     self.notifytitle.alpha = 1;
   }
-  if(isDefined(notifydata.notifytext)) {
-    if(isDefined(notifydata.textlabel)) {
+  if(isdefined(notifydata.notifytext)) {
+    if(isdefined(notifydata.textlabel)) {
       self.notifytext.label = notifydata.textlabel;
     } else {
-      self.notifytext.label = &"";
+      self.notifytext.label = & "";
     }
-    if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring)) {
+    if(isdefined(notifydata.textlabel) && !isdefined(notifydata.textisstring)) {
       self.notifytext setvalue(notifydata.notifytext);
     } else {
       self.notifytext settext(notifydata.notifytext);
@@ -251,19 +251,19 @@ function shownotifymessage(notifydata, duration) {
     self.notifytext.alpha = 1;
     anchorelem = self.notifytext;
   }
-  if(isDefined(notifydata.notifytext2)) {
+  if(isdefined(notifydata.notifytext2)) {
     if(self issplitscreen()) {
-      if(isDefined(notifydata.text2label)) {
+      if(isdefined(notifydata.text2label)) {
         self iprintlnbold(notifydata.text2label, notifydata.notifytext2);
       } else {
         self iprintlnbold(notifydata.notifytext2);
       }
     } else {
       self.notifytext2 hud::setparent(anchorelem);
-      if(isDefined(notifydata.text2label)) {
+      if(isdefined(notifydata.text2label)) {
         self.notifytext2.label = notifydata.text2label;
       } else {
-        self.notifytext2.label = &"";
+        self.notifytext2.label = & "";
       }
       self.notifytext2 settext(notifydata.notifytext2);
       self.notifytext2 setpulsefx(100, int(duration * 1000), 1000);
@@ -273,13 +273,13 @@ function shownotifymessage(notifydata, duration) {
       anchorelem = self.notifytext2;
     }
   }
-  if(isDefined(notifydata.iconname)) {
+  if(isdefined(notifydata.iconname)) {
     iconwidth = 60;
     iconheight = 60;
-    if(isDefined(notifydata.iconwidth)) {
+    if(isdefined(notifydata.iconwidth)) {
       iconwidth = notifydata.iconwidth;
     }
-    if(isDefined(notifydata.iconheight)) {
+    if(isdefined(notifydata.iconheight)) {
       iconheight = notifydata.iconheight;
     }
     self.notifyicon hud::setparent(anchorelem);
@@ -299,10 +299,10 @@ function shownotifymessage(notifydata, duration) {
 
 function waitrequirevisibility(waittime) {
   interval = 0.05;
-  while(!self canreadtext()) {
+  while (!self canreadtext()) {
     wait(interval);
   }
-  while(waittime > 0) {
+  while (waittime > 0) {
     wait(interval);
     if(self canreadtext()) {
       waittime = waittime - interval;
@@ -344,9 +344,9 @@ function resetnotify() {
 
 function hintmessagedeaththink() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("death");
-    if(isDefined(self.hintmessage)) {
+    if(isdefined(self.hintmessage)) {
       self.hintmessage hud::destroyelem();
     }
   }
@@ -382,8 +382,8 @@ function setmatchscorehudelemforteam(team) {
 }
 
 function isintop(players, topn) {
-  for(i = 0; i < topn; i++) {
-    if(isDefined(players[i]) && self == players[i]) {
+  for (i = 0; i < topn; i++) {
+    if(isdefined(players[i]) && self == players[i]) {
       return true;
     }
   }
@@ -391,13 +391,13 @@ function isintop(players, topn) {
 }
 
 function destroyhudelem(hudelem) {
-  if(isDefined(hudelem)) {
+  if(isdefined(hudelem)) {
     hudelem hud::destroyelem();
   }
 }
 
 function setshoutcasterwaitingmessage() {
-  if(!isDefined(self.waitingforplayerstext)) {
+  if(!isdefined(self.waitingforplayerstext)) {
     self.waitingforplayerstext = hud::createfontstring("objective", 2.5);
     self.waitingforplayerstext hud::setpoint("CENTER", "CENTER", 0, -80);
     self.waitingforplayerstext.sort = 1001;
@@ -408,7 +408,7 @@ function setshoutcasterwaitingmessage() {
 }
 
 function clearshoutcasterwaitingmessage() {
-  if(isDefined(self.waitingforplayerstext)) {
+  if(isdefined(self.waitingforplayerstext)) {
     destroyhudelem(self.waitingforplayerstext);
     self.waitingforplayerstext = undefined;
   }
@@ -417,11 +417,11 @@ function clearshoutcasterwaitingmessage() {
 function waittillnotifiesdone() {
   pendingnotifies = 1;
   timewaited = 0;
-  while(pendingnotifies && timewaited < 12) {
+  while (pendingnotifies && timewaited < 12) {
     pendingnotifies = 0;
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
-      if(isDefined(players[i].notifyqueue) && players[i].notifyqueue.size > 0) {
+    for (i = 0; i < players.size; i++) {
+      if(isdefined(players[i].notifyqueue) && players[i].notifyqueue.size > 0) {
         pendingnotifies = 1;
       }
     }

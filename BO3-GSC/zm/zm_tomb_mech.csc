@@ -19,7 +19,7 @@
 #namespace zm_tomb_mech;
 
 function init() {
-  clientfield::register("actor", "tomb_mech_eye", 21000, 1, "int", &function_8c8b6484, 0, 0);
+  clientfield::register("actor", "tomb_mech_eye", 21000, 1, "int", & function_8c8b6484, 0, 0);
 }
 
 function function_8c8b6484(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

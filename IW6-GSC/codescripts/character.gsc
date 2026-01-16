@@ -8,9 +8,8 @@ setModelFromArray(a) {
 }
 
 precacheModelArray(a) {
-  for(i = 0; i < a.size; i++) {
+  for(i = 0; i < a.size; i++)
     precacheModel(a[i]);
-  }
 }
 
 attachHead(headAlias, headArray) {
@@ -22,13 +21,11 @@ attachHead(headAlias, headArray) {
     }
   }
 
-  if(!isDefined(level.character_head_index)) {
+  if(!isDefined(level.character_head_index))
     level.character_head_index = [];
-  }
 
-  if(!isDefined(level.character_head_index[headAlias])) {
+  if(!isDefined(level.character_head_index[headAlias]))
     level.character_head_index[headAlias] = randomint(headArray.size);
-  }
 
   assert(level.character_head_index[headAlias] < headArray.size);
 
@@ -45,13 +42,11 @@ attachHead(headAlias, headArray) {
 }
 
 attachHat(hatAlias, hatArray) {
-  if(!isDefined(level.character_hat_index)) {
+  if(!isDefined(level.character_hat_index))
     level.character_hat_index = [];
-  }
 
-  if(!isDefined(level.character_hat_index[hatAlias])) {
+  if(!isDefined(level.character_hat_index[hatAlias]))
     level.character_hat_index[hatAlias] = randomint(hatArray.size);
-  }
 
   assert(level.character_hat_index[hatAlias] < hatArray.size);
 
@@ -66,9 +61,8 @@ attachHat(hatAlias, hatArray) {
 new() {
   self detachAll();
   oldGunHand = self.anim_gunHand;
-  if(!isDefined(oldGunHand)) {
+  if(!isDefined(oldGunHand))
     return;
-  }
   self.anim_gunHand = "none";
   self[[anim.PutGunInHand]](oldGunHand);
 }
@@ -106,33 +100,29 @@ load(info) {
 
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++)
     self attach(attachInfo[i]["model"], attachInfo[i]["tag"]);
-  }
 }
 
 precache(info) {
-  if(isDefined(info["name"])) {
+  if(isDefined(info["name"]))
     println("Precache: Guy has name ", info["name"]);
-  } else {
+  else
     println("Precache: Guy had no name!");
-  }
 
   precacheModel(info["model"]);
 
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++)
     precacheModel(attachInfo[i]["model"]);
-  }
 }
 
 get_random_character(amount) {
   self_info = strtok(self.classname, "_");
   if(!common_scripts\utility::isSP()) {
-    if(isDefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < amount) {
+    if(isDefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < amount)
       return self.pers["modelIndex"];
-    }
 
     index = randomInt(amount);
     self.pers["modelIndex"] = index;

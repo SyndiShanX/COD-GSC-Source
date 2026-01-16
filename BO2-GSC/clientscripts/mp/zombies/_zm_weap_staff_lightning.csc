@@ -23,18 +23,18 @@ init() {
 
 lightning_impact_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playFXOnTag(localclientnum, level._effect["lightning_impact"], self, "J_SpineUpper");
-    self playSound(0, "wpn_imp_lightningstaff");
+    playfxontag(localclientnum, level._effect["lightning_impact"], self, "J_SpineUpper");
+    self playsound(0, "wpn_imp_lightningstaff");
   }
 }
 
 lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playFXOnTag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
+    playfxontag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
     level.lightning_ball_fx[localclientnum] = self;
     ent = spawn(0, self.origin, "script_origin");
     ent linkto(self);
-    ent playLoopSound("wpn_lightningstaff_ball", 1);
+    ent playloopsound("wpn_lightningstaff_ball", 1);
     self thread watch_ball_fx_killed(localclientnum, ent);
     level notify("lightning_ball_created");
   }
@@ -43,7 +43,7 @@ lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 watch_ball_fx_killed(localclientnum, ent) {
   self waittill("entityshutdown");
   ent stoploopsound(1);
-  playSound(0, "wpn_lightningstaff_ball_explo", ent.origin);
+  playsound(0, "wpn_lightningstaff_ball_explo", ent.origin);
   ent delete();
   level.lightning_ball_fx[localclientnum] = undefined;
 }
@@ -52,16 +52,15 @@ lightning_arc_play_fx_thread(localclientnum) {
   self endon("entityshutdown");
   self endon("stop_arc_fx");
 
-  if(!isDefined(level.lightning_ball_fx[localclientnum])) {
+  if(!isDefined(level.lightning_ball_fx[localclientnum]))
     level waittill("lightning_ball_created");
-  }
 
   e_ball = level.lightning_ball_fx[localclientnum];
   e_ball endon("entityshutdown");
   serverwait(localclientnum, randomfloatrange(0.1, 0.5));
   self.e_fx = spawn(localclientnum, e_ball.origin, "script_model");
-  self.e_fx setModel("tag_origin");
-  self.fx_arc = playFXOnTag(localclientnum, level._effect["lightning_arc"], self.e_fx, "tag_origin");
+  self.e_fx setmodel("tag_origin");
+  self.fx_arc = playfxontag(localclientnum, level._effect["lightning_arc"], self.e_fx, "tag_origin");
 
   while(true) {
     v_spine = self gettagorigin("J_SpineUpper");
@@ -73,9 +72,9 @@ lightning_arc_play_fx_thread(localclientnum) {
 }
 
 lightning_arc_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
+  if(newval)
     self thread lightning_arc_play_fx_thread(localclientnum);
-  } else {
+  else {
     self notify("stop_arc_fx");
 
     if(isDefined(self.fx_arc)) {

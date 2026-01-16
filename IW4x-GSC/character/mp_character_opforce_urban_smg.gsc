@@ -3,8 +3,11 @@
  * Script: character\mp_character_opforce_urban_smg.gsc
 ********************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_russian_military_smg_a");
+  self setmodel("mp_body_russian_military_smg_a");
   self attach("head_russian_military_f", "", 1);
   self.headmodel = "head_russian_military_f";
   self setviewmodel("viewhands_russian_a");

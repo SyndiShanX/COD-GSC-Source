@@ -38,4 +38,5 @@ main() {
   ent.v["angles"] = (310, 37.9995, 0);
   ent.v["fxid"] = "snow_blower";
   ent.v["delay"] = -15;
+
 }

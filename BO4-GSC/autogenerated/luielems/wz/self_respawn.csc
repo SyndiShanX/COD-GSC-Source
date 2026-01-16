@@ -4,15 +4,17 @@
 ******************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace self_respawn;
 
 class cself_respawn: cluielem {
+
   function set_percent(localclientnum, value) {
     set_data(localclientnum, "percent", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "self_respawn");
+    cluielem::open(localclientnum, #"self_respawn");
   }
 
   function function_fa582112(localclientnum) {

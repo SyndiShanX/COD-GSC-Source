@@ -7,7 +7,7 @@
 #include xmodelalias\c_pan_pdf_gear_panama_char_als;
 
 main() {
-  self setModel("c_pan_pdf_body1_panama_char");
+  self setmodel("c_pan_pdf_body1_panama_char");
   self.headmodel = "c_pan_pdf_head1_char";
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_pan_pdf_gear_panama_char_als::main());

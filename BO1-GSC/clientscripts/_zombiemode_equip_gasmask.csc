@@ -7,9 +7,8 @@
 #include clientscripts\_fx;
 
 init_filter_indices() {
-  if(isDefined(level.genericfilterinitialized)) {
+  if(isDefined(level.genericfilterinitialized))
     return;
-  }
   level.genericfilterinitialized = true;
   level.filter_matcount = 4;
   level.targetid_none = 0;
@@ -108,7 +107,7 @@ playsounds_gasmask(on) {
       level thread[[level._audio_zombie_gasmask_func]](on);
     }
   } else {
-    playSound(0, "evt_gasmask_off", (0, 0, 0));
+    playsound(0, "evt_gasmask_off", (0, 0, 0));
     self.gasmask_audio_ent stopLoopSound(.5);
     self.gasmask_audio_ent delete();
     self.gasmask_audio_ent = undefined;

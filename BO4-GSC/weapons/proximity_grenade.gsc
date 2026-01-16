@@ -12,15 +12,16 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace proximity_grenade;
 
 init_shared() {
-  level._effect[# "prox_grenade_friendly_default"] = # "weapon/fx_prox_grenade_scan_blue";
-  level._effect[# "prox_grenade_friendly_warning"] = # "weapon/fx_prox_grenade_wrn_grn";
-  level._effect[# "prox_grenade_enemy_default"] = # "weapon/fx_prox_grenade_scan_orng";
-  level._effect[# "prox_grenade_enemy_warning"] = # "weapon/fx_prox_grenade_wrn_red";
-  level._effect[# "prox_grenade_player_shock"] = # "weapon/fx_prox_grenade_impact_player_spwner";
-  level._effect[# "prox_grenade_chain_bolt"] = # "weapon/fx_prox_grenade_elec_jump";
+  level._effect[#"prox_grenade_friendly_default"] = #"weapon/fx_prox_grenade_scan_blue";
+  level._effect[#"prox_grenade_friendly_warning"] = #"weapon/fx_prox_grenade_wrn_grn";
+  level._effect[#"prox_grenade_enemy_default"] = #"weapon/fx_prox_grenade_scan_orng";
+  level._effect[#"prox_grenade_enemy_warning"] = #"weapon/fx_prox_grenade_wrn_red";
+  level._effect[#"prox_grenade_player_shock"] = #"weapon/fx_prox_grenade_impact_player_spwner";
+  level._effect[#"prox_grenade_chain_bolt"] = #"weapon/fx_prox_grenade_elec_jump";
   level.proximitygrenadedetectionradius = getdvarint(#"scr_proximitygrenadedetectionradius", 180);
   level.proximitygrenadeduration = getdvarfloat(#"scr_proximitygrenadeduration", 1.2);
   level.proximitygrenadegraceperiod = getdvarfloat(#"scr_proximitygrenadegraceperiod", 0.05);
@@ -40,6 +41,7 @@ init_shared() {
   weaponobjects::function_e6400478(#"gadget_sticky_proximity", &creategadgetproximitygrenadewatcher, 0);
 
   level thread updatedvars();
+
 }
 
 updatedvars() {
@@ -60,9 +62,9 @@ updatedvars() {
   }
 }
 
-function register() {
-  clientfield::register("toplayer", "tazered", 1, 1, "int");
-}
+  function register() {
+    clientfield::register("toplayer", "tazered", 1, 1, "int");
+  }
 
 createproximitygrenadewatcher(watcher) {
   watcher.watchforfire = 1;
@@ -79,7 +81,7 @@ createproximitygrenadewatcher(watcher) {
   watcher.stuntime = 1;
   watcher.ondetonatecallback = &proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
   watcher.onspawn = &onspawnproximitygrenadeweaponobject;
 }
@@ -99,7 +101,7 @@ creategadgetproximitygrenadewatcher(watcher) {
   watcher.stuntime = 1;
   watcher.ondetonatecallback = &proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.onspawn = &onspawnproximitygrenadeweaponobject;
 }
 
@@ -107,7 +109,7 @@ onspawnproximitygrenadeweaponobject(watcher, owner) {
   self thread setupkillcament();
 
   if(isplayer(owner)) {
-    owner stats::function_e24eec31(self.weapon, # "used", 1);
+    owner stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   if(isDefined(self.weapon) && self.weapon.proximitydetonation > 0) {
@@ -235,7 +237,7 @@ addplayertochain(player) {
 }
 
 proximitygrenadechain(eattacker, einflictor, killcament, weapon, meansofdeath, damage, proximitychain, delay) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   eattacker endon(#"disconnect");
 
   if(!isDefined(proximitychain)) {
@@ -328,6 +330,7 @@ chainplayer(eattacker, killcament, weapon, meansofdeath, damage, proximitychain,
   waitframe(1);
 
   if(level.proximitychaindebug) {
+
     color = (1, 1, 1);
     alpha = 1;
     depth = 0;
@@ -357,7 +360,7 @@ tesla_play_arc_fx(target, waittime) {
 
   fxorg = spawn("script_model", origin);
   fxorg setModel(#"tag_origin");
-  fx = playFXOnTag(level._effect[# "prox_grenade_chain_bolt"], fxorg, "tag_origin");
+  fx = playFXOnTag(level._effect[#"prox_grenade_chain_bolt"], fxorg, "tag_origin");
   playsoundatposition(#"wpn_tesla_bounce", fxorg.origin);
   fxorg moveto(target_origin, waittime);
   fxorg waittill(#"movedone");
@@ -368,26 +371,26 @@ debugchainsphere() {
   util::debug_sphere(self.origin + (0, 0, 50), 20, (1, 1, 1), 1, 0);
 }
 
-function watchproximitygrenadehitplayer(owner) {
-  self endon(#"death");
-  self setowner(owner);
-  self setteam(owner.team);
+  function watchproximitygrenadehitplayer(owner) {
+    self endon(#"death");
+    self setowner(owner);
+    self setteam(owner.team);
 
-  while(true) {
-    waitresult = self waittill(#"grenade_bounce");
-    ent = waitresult.entity;
-    surface = waitresult.stype;
+    while(true) {
+      waitresult = self waittill(#"grenade_bounce");
+      ent = waitresult.entity;
+      surface = waitresult.stype;
 
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
-      if(level.teambased && !util::function_fbce7263(ent.team, self.owner.team)) {
-        continue;
+      if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+        if(level.teambased && !util::function_fbce7263(ent.team, self.owner.team)) {
+          continue;
+        }
+
+        self proximitydetonate(self.owner, self.weapon);
+        return;
       }
-
-      self proximitydetonate(self.owner, self.weapon);
-      return;
     }
   }
-}
 
 performhudeffects(position, distancetogrenade) {
   forwardvec = vectornormalize(anglesToForward(self.angles));
@@ -401,9 +404,9 @@ performhudeffects(position, distancetogrenade) {
 
 damageplayerinradius(position, eattacker, killcament) {
   self notify(#"proximitygrenadedamagestart");
-  self endon(#"proximitygrenadedamagestart", # "disconnect", # "death");
+  self endon(#"proximitygrenadedamagestart", #"disconnect", #"death");
   eattacker endon(#"disconnect");
-  playFXOnTag(level._effect[# "prox_grenade_player_shock"], self, "J_SpineUpper");
+  playFXOnTag(level._effect[#"prox_grenade_player_shock"], self, "J_SpineUpper");
   g_time = gettime();
 
   if(self util::mayapplyscreeneffect()) {

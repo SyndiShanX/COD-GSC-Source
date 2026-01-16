@@ -7,9 +7,8 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.windStrength)) {
+  if(!isdefined(level.windStrength))
     level.windStrength = 0.2;
-  }
 
   //WIND SETTINGS
   //-------------
@@ -18,12 +17,10 @@ main() {
   level.animWeightMin = (level.windStrength - 0.5);
   level.animWeightMax = (level.windStrength + 0.2);
   //clamp values
-  if(level.animWeightMin < 0.1) {
+  if(level.animWeightMin < 0.1)
     level.animWeightMin = 0.1;
-  }
-  if(level.animWeightMax > 1.0) {
+  if(level.animWeightMax > 1.0)
     level.animWeightMax = 1.0;
-  }
   //-------------
   //-------------
 
@@ -33,32 +30,31 @@ main() {
 
   thread new_style_shutters();
 
-  array_levelthread(getEntArray("wire", "targetname"), ::wireWander);
-  array_levelthread(getEntArray("awning", "targetname"), ::awningWander);
-  array_levelthread(getEntArray("palm", "targetname"), ::palmTrees);
+  array_levelthread(GetEntArray("wire", "targetname"), ::wireWander);
+  array_levelthread(GetEntArray("awning", "targetname"), ::awningWander);
+  array_levelthread(GetEntArray("palm", "targetname"), ::palmTrees);
 
   leftShutters = [];
-  array = getEntArray("shutter_left", "targetname");
+  array = GetEntArray("shutter_left", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  array = getEntArray("shutter_right_open", "targetname");
+  array = GetEntArray("shutter_right_open", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  array = getEntArray("shutter_left_closed", "targetname");
+  array = GetEntArray("shutter_left_closed", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  foreach(shutter in leftShutters) {
-    shutter AddYaw(180);
-  }
+  foreach(shutter in leftShutters)
+  shutter AddYaw(180);
 
   rightShutters = [];
-  array = getEntArray("shutter_right", "targetname");
+  array = GetEntArray("shutter_right", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
-  array = getEntArray("shutter_left_open", "targetname");
+  array = GetEntArray("shutter_left_open", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
-  array = getEntArray("shutter_right_closed", "targetname");
+  array = GetEntArray("shutter_right_closed", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
   wait(0.05);
@@ -71,7 +67,7 @@ main() {
   array = undefined;
 
   windDirection = "left";
-  for(;;) {
+  for (;;) {
     array_levelthread(leftShutters, ::shutterWanderLeft, windDirection);
     array_levelthread(rightShutters, ::shutterWanderRight, windDirection);
     level waittill("wind blows", windDirection);
@@ -79,18 +75,17 @@ main() {
 }
 
 windController() {
-  for(;;) {
+  for (;;) {
     windDirection = "left";
-    if(RandomInt(100) > 50) {
+    if(RandomInt(100) > 50)
       windDirection = "right";
-    }
     level notify("wind blows", windDirection);
     wait(2 + RandomFloat(10));
   }
 }
 
 new_style_shutters() {
-  shutters = getEntArray("shutter", "targetname");
+  shutters = getentarray("shutter", "targetname");
 
   foreach(shutter in shutters) {
     // all shutters target an ent that tells them what direction they're facing
@@ -109,7 +104,7 @@ new_style_shutters() {
   }
 
   windDirection = "left";
-  for(;;) {
+  for (;;) {
     array_levelthread(shutters, ::shutterWander, windDirection);
     level waittill("wind blows", windDirection);
   }
@@ -129,22 +124,19 @@ shutterWander(shutter, windDirection) {
 
   next_swap = randomint(3) + 1;
   modifier = 1;
-  if(coinToss()) {
+  if(coinToss())
     modifier *= -1;
-  }
 
   max_right_angle = 80;
   max_left_angle = 80;
 
-  if(isDefined(shutter.script_max_left_angle)) {
+  if(isdefined(shutter.script_max_left_angle))
     max_left_angle = shutter.script_max_left_angle;
-  }
 
-  if(isDefined(shutter.script_max_right_angle)) {
+  if(isdefined(shutter.script_max_right_angle))
     max_right_angle = shutter.script_max_right_angle;
-  }
 
-  for(;;) {
+  for (;;) {
     shutter notify("shutterSound");
     rot = RandomIntRange(50, 80);
 
@@ -157,13 +149,11 @@ shutterWander(shutter, windDirection) {
     rot *= modifier;
 
     if(modifier > 0) {
-      if(rot > max_right_angle) {
+      if(rot > max_right_angle)
         rot = max_right_angle;
-      }
     } else {
-      if(rot > max_left_angle) {
+      if(rot > max_left_angle)
         rot = max_left_angle;
-      }
     }
 
     dest_yaw = pivot.startYaw + rot;
@@ -171,9 +161,8 @@ shutterWander(shutter, windDirection) {
     dif = abs(pivot.angles[1] - dest_yaw);
 
     newTime = dif * 0.05 + RandomFloat(1) + 0.25;
-    if(newTime < 0.25) {
+    if(newTime < 0.25)
       newTime = 0.25;
-    }
 
     pivot RotateTo((0, dest_yaw, 0), newTime, newTime * 0.5, newTime * 0.5);
     //Print3d( pivot.origin, newtime, (1,1,1), 1, 1, int( newTime * 20 ) );
@@ -191,20 +180,18 @@ shutterWanderLeft(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left") {
+  if(windDirection == "left")
     newYaw += 179.9;
-  }
 
   newTime = 0.2;
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for(;;) {
+  for (;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
-    if(coinToss()) {
+    if(coinToss())
       rot *= -1;
-    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -215,9 +202,8 @@ shutterWanderLeft(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + RandomFloat(2);
-    if(newTime < 0.3) {
+    if(newTime < 0.3)
       newTime = 0.3;
-    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -238,20 +224,18 @@ shutterWanderRight(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left") {
+  if(windDirection == "left")
     newYaw += 179.9;
-  }
 
   newTime = 0.2;
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for(;;) {
+  for (;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
-    if(RandomInt(100) > 50) {
+    if(RandomInt(100) > 50)
       rot *= -1;
-    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -262,9 +246,8 @@ shutterWanderRight(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + RandomFloat(2);
-    if(newTime < 0.3) {
+    if(newTime < 0.3)
       newTime = 0.3;
-    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -276,21 +259,21 @@ shutterWanderRight(shutter, windDirection) {
 }
 
 shutterSound() {
-  for(;;) {
+  for (;;) {
     self waittill("shutterSound");
-    //self playSound( "shutter_move", "sounddone" );
+    //self PlaySound( "shutter_move", "sounddone" );
     self waittill("sounddone");
     wait(RandomFloat(2));
   }
 }
 
 wireWander(wire) {
-  origins = getEntArray(wire.target, "targetname");
+  origins = GetEntArray(wire.target, "targetname");
   org1 = origins[0].origin;
   org2 = origins[1].origin;
 
   angles = VectorToAngles(org1 - org2);
-  ent = spawn("script_model", (0, 0, 0));
+  ent = Spawn("script_model", (0, 0, 0));
   ent.origin = vector_multiply(org1, 0.5) + vector_multiply(org2, 0.5);
   //	ent setmodel ("temp");
   ent.angles = angles;
@@ -300,7 +283,7 @@ wireWander(wire) {
   dist = 4 + RandomFloat(2);
   ent RotateRoll(dist * 0.5, 0.2);
   wait(0.2);
-  for(;;) {
+  for (;;) {
     rottime = rottimer + RandomFloat(rotRange) - (rotRange * 0.5);
     ent RotateRoll(dist, rottime, rottime * 0.5, rottime * 0.5);
     wait(rottime);
@@ -355,13 +338,12 @@ awningWander(ent) {
   			break;
   	}
   	
-  	if(!isdefined (ent.animname)) {
+  	if(!isdefined (ent.animname))
   		return;
-  	}
   	
   	wait RandomFloat(2);
   	
-  	for(;;)
+  	for (;;)
   	{
   		fWeight = (level.animWeightMin + RandomFloat((level.animWeightMax - level.animWeightMin)) );
   		fLength = 4;
@@ -405,13 +387,14 @@ palmTrees(ent) {
       break;
   }
 
-  if(!isDefined(ent.animname)) {
+
+
+  if(!isdefined(ent.animname))
     return;
-  }
 
   wait RandomFloat(2);
 
-  for(;;) {
+  for (;;) {
     fWeight = (level.animWeightMin + RandomFloat((level.animWeightMax - level.animWeightMin)));
     fLength = 4;
 

@@ -22,9 +22,8 @@ init() {
   level.soul_catcher_clip["rune_2"] = getent("wolf_clip_docks", "targetname");
   level.soul_catcher_clip["rune_3"] = getent("wolf_clip_infirmary", "targetname");
 
-  foreach(e_clip in level.soul_catcher_clip) {
-    e_clip setinvisibletoall();
-  }
+  foreach(e_clip in level.soul_catcher_clip)
+  e_clip setinvisibletoall();
 
   level thread create_anim_references_on_server();
   registerclientfield("actor", "make_client_clone", 9000, 4, "int");
@@ -44,11 +43,10 @@ init() {
     level.soul_catchers[i].is_eating = 0;
     level.soul_catchers[i] thread soul_catcher_check();
 
-    if(is_classic()) {
+    if(is_classic())
       level.soul_catchers[i] thread soul_catcher_state_manager();
-    } else {
+    else
       level.soul_catchers[i] thread grief_soul_catcher_state_manager();
-    }
 
     level.soul_catchers[i] thread wolf_head_removal("tomahawk_door_sign_" + (i + 1));
     level.soul_catchers_vol[i] = getent(level.soul_catchers[i].target, "targetname");
@@ -107,9 +105,8 @@ soul_catcher_state_manager() {
     trigger show();
   }
 
-  if(isDefined(level.soul_catcher_clip[self.script_noteworthy])) {
+  if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
     level.soul_catcher_clip[self.script_noteworthy] setvisibletoall();
-  }
 
   level setclientfield(self.script_parameters, 1);
   anim_length = getanimlength( % o_zombie_dreamcatcher_intro);
@@ -124,9 +121,8 @@ soul_catcher_state_manager() {
   anim_length = getanimlength( % o_zombie_dreamcatcher_outtro);
   wait(anim_length);
 
-  if(isDefined(level.soul_catcher_clip[self.script_noteworthy])) {
+  if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
     level.soul_catcher_clip[self.script_noteworthy] delete();
-  }
 
   if(self.script_noteworthy == "rune_3") {
     trigger = getent("wolf_hurt_trigger", "targetname");
@@ -146,9 +142,8 @@ grief_soul_catcher_state_manager() {
     level setclientfield(self.script_parameters, 0);
     self waittill("first_zombie_killed_in_zone");
 
-    if(isDefined(level.soul_catcher_clip[self.script_noteworthy])) {
+    if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
       level.soul_catcher_clip[self.script_noteworthy] setvisibletoall();
-    }
 
     level setclientfield(self.script_parameters, 1);
     anim_length = getanimlength( % o_zombie_dreamcatcher_intro);
@@ -163,9 +158,8 @@ grief_soul_catcher_state_manager() {
     anim_length = getanimlength( % o_zombie_dreamcatcher_outtro);
     wait(anim_length);
 
-    if(isDefined(level.soul_catcher_clip[self.script_noteworthy])) {
+    if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
       level.soul_catcher_clip[self.script_noteworthy] delete();
-    }
 
     self.souls_received = 0;
     level thread wolf_spit_out_powerup();
@@ -204,9 +198,8 @@ wolf_spit_out_powerup() {
   spawn_infinite_powerup_drop(power_origin_struct.origin, level.zombie_powerup_array[level.zombie_powerup_index]);
   power_ups = get_array_of_closest(power_origin_struct.origin, level.active_powerups, undefined, undefined, 100);
 
-  if(isDefined(power_ups[0])) {
+  if(isDefined(power_ups[0]))
     power_ups[0] movez(120, 4);
-  }
 }
 
 zombie_spawn_func() {
@@ -232,9 +225,8 @@ zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vd
 check_for_zombie_in_wolf_area() {
   for(i = 0; i < level.soul_catchers.size; i++) {
     if(self istouching(level.soul_catchers_vol[i])) {
-      if(!level.soul_catchers[i].is_charged && !level.soul_catchers[i].is_eating) {
+      if(!level.soul_catchers[i].is_charged && !level.soul_catchers[i].is_eating)
         return true;
-      }
     }
   }
 
@@ -244,19 +236,16 @@ check_for_zombie_in_wolf_area() {
 zombie_soul_catcher_death() {
   self thread maps\mp\zombies\_zm_spawner::zombie_death_animscript();
 
-  if(isDefined(self._race_team)) {
+  if(isDefined(self._race_team))
     team = self._race_team;
-  }
 
   level maps\mp\zombies\_zm_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self, team);
 
-  if(self.my_soul_catcher.is_eating) {
+  if(self.my_soul_catcher.is_eating)
     return false;
-  }
 
-  if(self.my_soul_catcher.souls_received >= 6) {
+  if(self.my_soul_catcher.souls_received >= 6)
     return false;
-  }
 
   self.my_soul_catcher.is_eating = 1;
 
@@ -270,21 +259,19 @@ zombie_soul_catcher_death() {
   self setanimstatefromasd("zm_portal_death");
   self maps\mp\animscripts\shared::donotetracks("portal_death");
 
-  if(self.my_soul_catcher.souls_received == 0) {
+  if(self.my_soul_catcher.souls_received == 0)
     self waittill("wolf_intro_anim_complete");
-  }
 
   n_eating_anim = self which_eating_anim();
   self ghost();
   level setclientfield(self.my_soul_catcher.script_parameters, n_eating_anim);
 
-  if(n_eating_anim == 3) {
+  if(n_eating_anim == 3)
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_f);
-  } else if(n_eating_anim == 4) {
+  else if(n_eating_anim == 4)
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_r);
-  } else {
+  else
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_l);
-  }
 
   wait(total_wait_time - 0.5);
   self.my_soul_catcher.souls_received++;
@@ -298,25 +285,20 @@ zombie_soul_catcher_death() {
 get_correct_model_array() {
   mod = 0;
 
-  if(self.model == "c_zom_guard_body" && isDefined(self.hatmodel) && self.hatmodel == "c_zom_guard_hat") {
+  if(self.model == "c_zom_guard_body" && isDefined(self.hatmodel) && self.hatmodel == "c_zom_guard_hat")
     mod = 4;
-  }
 
-  if(self.headmodel == "c_zom_zombie_barbwire_head") {
+  if(self.headmodel == "c_zom_zombie_barbwire_head")
     return 1 + mod;
-  }
 
-  if(self.headmodel == "c_zom_zombie_hellcatraz_head") {
+  if(self.headmodel == "c_zom_zombie_hellcatraz_head")
     return 2 + mod;
-  }
 
-  if(self.headmodel == "c_zom_zombie_mask_head") {
+  if(self.headmodel == "c_zom_zombie_mask_head")
     return 3 + mod;
-  }
 
-  if(self.headmodel == "c_zom_zombie_slackjaw_head") {
+  if(self.headmodel == "c_zom_zombie_slackjaw_head")
     return 4 + mod;
-  }
 
   return 5;
 }
@@ -329,18 +311,17 @@ notify_wolf_intro_anim_complete() {
 
 which_eating_anim() {
   soul_catcher = self.my_soul_catcher;
-  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglestoforward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
 
-  if(forward_dot > 0.85) {
+  if(forward_dot > 0.85)
     return 3;
-  } else {
+  else {
     right_dot = vectordot(anglestoright(soul_catcher.angles), self.origin - soul_catcher.origin);
 
-    if(right_dot > 0) {
+    if(right_dot > 0)
       return 4;
-    } else {
+    else
       return 5;
-    }
   }
 }
 
@@ -359,18 +340,17 @@ soul_catcher_check() {
     wait 0.05;
   }
 
-  if(level.soul_catchers_charged == 1) {
+  if(level.soul_catchers_charged == 1)
     self thread first_wolf_complete_vo();
-  } else if(level.soul_catchers_charged >= level.soul_catchers.size) {
+  else if(level.soul_catchers_charged >= level.soul_catchers.size)
     self thread final_wolf_complete_vo();
-  }
 }
 
 wolf_head_removal(wolf_head_model_string) {
   wolf_head_model = getent(wolf_head_model_string, "targetname");
-  wolf_head_model setModel("p6_zm_al_dream_catcher_off");
+  wolf_head_model setmodel("p6_zm_al_dream_catcher_off");
   self waittill("fully_charged");
-  wolf_head_model setModel("p6_zm_al_dream_catcher");
+  wolf_head_model setmodel("p6_zm_al_dream_catcher");
 }
 
 soul_catchers_charged() {
@@ -453,9 +433,8 @@ tomahawk_upgrade_quest() {
   e_org waittill("easteregg_scream_complete");
   e_org delete();
 
-  while(level.round_number < 10) {
+  while(level.round_number < 10)
     wait 0.5;
-  }
 
   self ent_flag_init("gg_round_done");
 
@@ -486,9 +465,9 @@ tomahawk_upgrade_quest() {
   self notify("hellhole_time");
   self waittill("tomahawk_in_hellhole");
 
-  if(isDefined(self.retriever_trigger)) {
+  if(isDefined(self.retriever_trigger))
     self.retriever_trigger setinvisibletoplayer(self);
-  } else {
+  else {
     trigger = getent("retriever_pickup_trigger", "script_noteworthy");
     self.retriever_trigger = trigger;
     self.retriever_trigger setinvisibletoplayer(self);
@@ -541,9 +520,8 @@ hellhole_projectile_watch() {
   while(true) {
     self waittill("grenade_fire", grenade, weapname);
 
-    if(weapname == "frag_grenade_zm") {
+    if(weapname == "frag_grenade_zm")
       self thread hellhole_grenades(grenade);
-    }
   }
 }
 
@@ -554,9 +532,8 @@ hellhole_tomahawk_watch() {
   while(true) {
     self waittill("grenade_fire", grenade, weapname);
 
-    if(weapname == "bouncing_tomahawk_zm") {
+    if(weapname == "bouncing_tomahawk_zm")
       self thread hellhole_tomahawk(grenade);
-    }
   }
 }
 
@@ -564,12 +541,11 @@ hellhole_grenades(grenade) {
   grenade endon("death");
   trig_hellhole = getent("trig_cellblock_hellhole", "targetname");
 
-  while(!grenade istouching(trig_hellhole)) {
+  while(!grenade istouching(trig_hellhole))
     wait 0.05;
-  }
 
   self maps\mp\zombies\_zm_score::add_to_player_score(20);
-  playFX(level._effect["tomahawk_hellhole"], grenade.origin);
+  playfx(level._effect["tomahawk_hellhole"], grenade.origin);
   playsoundatposition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }
@@ -578,21 +554,19 @@ hellhole_tomahawk(grenade) {
   grenade endon("death");
   trig_hellhole = getent("trig_cellblock_hellhole", "targetname");
 
-  while(!grenade istouching(trig_hellhole)) {
+  while(!grenade istouching(trig_hellhole))
     wait 0.05;
-  }
 
   self notify("tomahawk_in_hellhole");
   grenade notify("in_hellhole");
-  playFX(level._effect["tomahawk_hellhole"], grenade.origin);
+  playfx(level._effect["tomahawk_hellhole"], grenade.origin);
   playsoundatposition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }
 
 spawn_infinite_powerup_drop(v_origin, str_type) {
-  if(isDefined(str_type)) {
+  if(isDefined(str_type))
     intro_powerup = maps\mp\zombies\_zm_powerups::specific_powerup_drop(str_type, v_origin);
-  } else {
+  else
     intro_powerup = maps\mp\zombies\_zm_powerups::powerup_drop(v_origin);
-  }
 }

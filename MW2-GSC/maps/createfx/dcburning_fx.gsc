@@ -1227,4 +1227,5 @@ main() {
   ent.v["fxid"] = "nuke_flash";
   ent.v["delay"] = 0;
   ent.v["exploder"] = "emp_flash";
+
 }

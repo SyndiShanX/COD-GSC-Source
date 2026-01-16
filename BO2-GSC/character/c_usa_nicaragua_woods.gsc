@@ -4,7 +4,7 @@
 ***********************************************/
 
 main() {
-  self setModel("c_usa_nicaragua_woods_fb");
+  self setmodel("c_usa_nicaragua_woods_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

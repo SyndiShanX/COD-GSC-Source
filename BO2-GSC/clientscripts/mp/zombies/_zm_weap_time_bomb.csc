@@ -25,17 +25,15 @@ init_time_bomb() {
 
 sndtimebombloop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    if(!isDefined(self.sndtimebombloopent)) {
+    if(!isDefined(self.sndtimebombloopent))
       self.sndtimebombloopent = spawn(0, self.origin, "script_origin");
-    }
 
-    self.sndtimebombloopent playLoopSound("zmb_timebomb_hold_loop", 0.25);
+    self.sndtimebombloopent playloopsound("zmb_timebomb_hold_loop", 0.25);
   } else if(newval == 2) {
-    if(!isDefined(self.sndtimebombloopent)) {
+    if(!isDefined(self.sndtimebombloopent))
       self.sndtimebombloopent = spawn(0, self.origin, "script_origin");
-    }
 
-    self.sndtimebombloopent playLoopSound("zmb_timebomb_detonator_hold_loop", 0.25);
+    self.sndtimebombloopent playloopsound("zmb_timebomb_detonator_hold_loop", 0.25);
   } else if(isDefined(self.sndtimebombloopent)) {
     self.sndtimebombloopent delete();
     self.sndtimebombloopent = undefined;

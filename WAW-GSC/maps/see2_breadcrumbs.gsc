@@ -34,7 +34,7 @@ add_new_breadcrumb_ent(ent, max_lag, max_start_dev, max_dev) {
     level.breadcrumb_curr_index_array = array_add(level.breadcrumb_curr_index_array, 0);
     level.breadcrumb_delta_array = array_add(level.breadcrumb_delta_array, max_lag / level.max_breadcrumb_points);
   } else {
-    for(i = 0; i < level.breadcrumb_ent_array.size; i++) {
+    for (i = 0; i < level.breadcrumb_ent_array.size; i++) {
       if(!isDefined(level.breadcrumb_ent_array[i]) || level.breadcrumb_ent_array[i] == ent) {
         index = i;
         level.breadcrumb_array[index] = [];
@@ -48,7 +48,7 @@ add_new_breadcrumb_ent(ent, max_lag, max_start_dev, max_dev) {
     iprintlnbold("Trying to make a new breadcrumb ent when limit of " + level.max_breadcrumb_ents + " has already been reached. Remove a breadcrumb entity if you wish to add entity " + ent.classname);
     return undefined;
   }
-  for(i = 0; i < level.max_breadcrumb_points; i++) {
+  for (i = 0; i < level.max_breadcrumb_points; i++) {
     if(max_start_dev != 0) {
       randx = randomintrange(0 - max_start_dev, max_start_dev);
       randy = randomintrange(0 - max_start_dev, max_start_dev);
@@ -95,10 +95,10 @@ debug_breadcrumb_trail(index) {
       color = (0, 0, 0);
       break;
   }
-  while(1) {
+  while (1) {
     if((level.debug_breadcrumb_level == index) || level.debug_breadcrumb_level >= level.max_breadcrumb_ents) {
       temp_index = level.breadcrumb_curr_index_array[index] + 1;
-      for(i = 0; i < level.max_breadcrumb_points; i++) {
+      for (i = 0; i < level.max_breadcrumb_points; i++) {
         if(temp_index >= level.max_breadcrumb_points) {
           temp_index = 0;
         }
@@ -111,7 +111,7 @@ debug_breadcrumb_trail(index) {
 }
 
 remove_breadcrumb_ent(ent) {
-  for(i = 0; i < level.breadcrumb_ent_array.size; i++) {
+  for (i = 0; i < level.breadcrumb_ent_array.size; i++) {
     if(level.breadcrumb_ent_array[i] == ent) {
       ent notify("stop breadcrumbs for " + i);
       level.breadcrumb_array[i] = [];
@@ -126,7 +126,7 @@ update_breadcrumb_trail(index, max_dev) {
   self endon("death");
   self endon("disconnect");
   self endon("stop breadcrumbs for " + index);
-  while(1) {
+  while (1) {
     wait(level.breadcrumb_delta_array[index]);
     if(max_dev != 0) {
       randx = randomintrange(0 - max_dev, max_dev);
@@ -145,7 +145,7 @@ update_breadcrumb_trail(index, max_dev) {
 }
 
 get_delayed_position(ent, delay) {
-  for(i = 0; i < level.breadcrumb_ent_array.size; i++) {
+  for (i = 0; i < level.breadcrumb_ent_array.size; i++) {
     if(level.breadcrumb_ent_array[i] == ent) {
       if(delay > (level.max_breadcrumb_points * level.breadcrumb_delta_array[i])) {
         iprintlnbold("entity " + ent.classname + " tried to get a delayed point outside of the delay range " + level.breadcrumb_delta_array[i] + " specified for it in add_breadcrumb_entity");

@@ -6,6 +6,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace weaponobjects;
 
 function_b455d5d8() {
@@ -112,7 +113,7 @@ watchspikelauncheritemcountchanged(watcher) {
   while(true) {
     waitresult = self waittill(#"weapon_change");
 
-    for(weapon = waitresult.weapon; weapon.name == # "spike_launcher"; weapon = self getcurrentweapon()) {
+    for(weapon = waitresult.weapon; weapon.name == #"spike_launcher"; weapon = self getcurrentweapon()) {
       currentitemcount = getspikelauncheractivespikecount(watcher);
 
       if(currentitemcount !== lastitemcount) {
@@ -136,7 +137,7 @@ spikesdetonating(watcher) {
 }
 
 createspikelauncherwatcher(watcher) {
-  watcher.altname = # "spike_charge";
+  watcher.altname = #"spike_charge";
   watcher.altweapon = getweapon(#"spike_charge");
   watcher.altdetonate = 0;
   watcher.watchforfire = 1;
@@ -149,7 +150,7 @@ createspikelauncherwatcher(watcher) {
   watcher.ownergetsassist = 1;
   watcher.detonatestationary = 0;
   watcher.detonationdelay = 0;
-  watcher.detonationsound = # "wpn_claymore_alert";
+  watcher.detonationsound = #"wpn_claymore_alert";
   watcher.ondetonationhandle = &spikesdetonating;
 }
 
@@ -171,11 +172,11 @@ function_f0e307a2(watcher, player) {
   self endon(#"death");
 
   if(isDefined(player)) {
-    player stats::function_e24eec31(self.weapon, # "used", 1);
+    player stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   self playLoopSound(#"uin_c4_air_alarm_loop");
-  self waittilltimeout(10, # "stationary");
+  self waittilltimeout(10, #"stationary");
   function_b70eb3a9(watcher, player);
 }
 

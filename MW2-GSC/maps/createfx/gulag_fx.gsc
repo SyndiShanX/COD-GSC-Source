@@ -6475,4 +6475,5 @@ main() {
   ent.v["exploder"] = "end_scene_rock";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "nil";
+
 }

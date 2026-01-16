@@ -10,10 +10,11 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_recon;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_recon", &__init__, undefined, # "character_unlock_recon_fixup");
+  system::register(#"character_unlock_recon", &__init__, undefined, #"character_unlock_recon_fixup");
 }
 
 __init__() {
@@ -27,20 +28,20 @@ function_2613aeec(enabled) {
     callback::add_callback(#"on_team_eliminated", &function_4ac25840);
 
     if(isDefined(getgametypesetting(#"hash_17f17e92c2654659")) && getgametypesetting(#"hash_17f17e92c2654659")) {
-      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", # "supply_stash_cu04", 1);
+      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", #"supply_stash_cu04", 1);
       return;
     }
 
-    item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", # "supply_stash_cu04", 6);
+    item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", #"supply_stash_cu04", 6);
   }
 }
 
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu04_item") {
+  if(itementry.name === #"cu04_item") {
     if(self character_unlock::function_f0406288(#"recon_unlock")) {
-      self character_unlock::function_c8beca5e(#"recon_unlock", # "hash_91d5ea7b26a8aca", 1);
+      self character_unlock::function_c8beca5e(#"recon_unlock", #"hash_91d5ea7b26a8aca", 1);
       var_f63b894c = 0;
 
       foreach(team in level.teams) {
@@ -52,7 +53,7 @@ function_1c4b5097(item) {
       var_c503939b = globallogic::function_e9e52d05();
 
       if(var_f63b894c > 0 && var_c503939b <= function_c816ea5b()) {
-        self character_unlock::function_c8beca5e(#"recon_unlock", # "hash_91d5da7b26a8917", 1);
+        self character_unlock::function_c8beca5e(#"recon_unlock", #"hash_91d5da7b26a8917", 1);
       }
     }
   }
@@ -80,7 +81,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"recon_unlock")) {
-            player character_unlock::function_c8beca5e(#"recon_unlock", # "hash_91d5da7b26a8917", 1);
+            player character_unlock::function_c8beca5e(#"recon_unlock", #"hash_91d5da7b26a8917", 1);
           }
         }
       }
@@ -92,7 +93,7 @@ function_4ac25840(dead_team) {
 
 on_player_damage(params) {
   if(params.smeansofdeath == "MOD_DEATH_CIRCLE" && self character_unlock::function_c70bcc7a(#"recon_unlock")) {
-    self character_unlock::function_c8beca5e(#"recon_unlock", # "hash_91d5ea7b26a8aca", 2);
+    self character_unlock::function_c8beca5e(#"recon_unlock", #"hash_91d5ea7b26a8aca", 2);
   }
 }
 

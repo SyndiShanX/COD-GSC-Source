@@ -18,6 +18,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace scene;
 
 class cscene: cscriptbundlebase {
@@ -50,7 +51,9 @@ class cscene: cscriptbundlebase {
     a_obj = [];
 
     foreach(obj in _a_objects) {
-      if(obj._is_valid && ![[obj]] - > in_a_different_scene()) {
+      if(obj._is_valid && ![
+          [obj]
+        ] - > in_a_different_scene()) {
         if(!isDefined(a_obj)) {
           a_obj = [];
         } else if(!isarray(a_obj)) {
@@ -188,7 +191,9 @@ class cscene: cscriptbundlebase {
     b_has_init_state = 0;
 
     foreach(o_scene_object in _a_objects) {
-      if([[o_scene_object]] - > has_init_state(_str_name)) {
+      if([
+          [o_scene_object]
+        ] - > has_init_state(_str_name)) {
         b_has_init_state = 1;
         break;
       }
@@ -206,7 +211,9 @@ class cscene: cscriptbundlebase {
     scene_stopped = 1;
 
     foreach(o_obj in _a_objects) {
-      if(isDefined(o_obj) && ![[o_obj]] - > in_a_different_scene()) {
+      if(isDefined(o_obj) && ![
+          [o_obj]
+        ] - > in_a_different_scene()) {
         thread[[o_obj]] - > finish(b_clear, b_finished);
       }
     }
@@ -340,7 +347,7 @@ class cscene: cscriptbundlebase {
 
     if(isDefined(var_1a15e649)) {
       switch (_s.scenetype) {
-        case # "scene":
+        case #"scene":
           thread play(var_1a15e649, _testing, _str_mode);
           break;
         default:
@@ -361,7 +368,7 @@ class cscene: cscriptbundlebase {
   function play(str_shot = "play", b_testing = 0, str_mode = "", b_looping = undefined) {
     level endon(#"demo_jump");
     self notify(str_shot + "start");
-    self endoncallback(&play_endon, str_shot + "start", # "new_state");
+    self endoncallback(&play_endon, str_shot + "start", #"new_state");
 
     if(issubstr(str_mode, "play_from_time")) {
       args = strtok(str_mode, ":");
@@ -444,7 +451,7 @@ class cscene: cscriptbundlebase {
         self waittill(#"new_state");
       } else {
         n_cam_time = getcamanimtime(_s.cameraswitcher);
-        self waittilltimeout(float(n_cam_time) / 1000, # "new_state");
+        self waittilltimeout(float(n_cam_time) / 1000, #"new_state");
       }
 
       a_players = getlocalplayers();
@@ -561,7 +568,9 @@ class cscene: cscriptbundlebase {
       }
 
       foreach(s_obj in a_objs) {
-        cscriptbundlebase::add_object([[new_object(s_obj.type)]] - > first_init(s_obj, self, array::pop(a_ents), _e_root.localclientnum));
+        cscriptbundlebase::add_object([
+          [new_object(s_obj.type)]
+        ] - > first_init(s_obj, self, array::pop(a_ents), _e_root.localclientnum));
       }
 
       self thread initialize();
@@ -570,25 +579,25 @@ class cscene: cscriptbundlebase {
 
   function new_object(str_type) {
     switch (str_type) {
-      case # "prop":
+      case #"prop":
         return new csceneobject();
-      case # "model":
+      case #"model":
         return new csceneobject();
-      case # "vehicle":
+      case #"vehicle":
         return new csceneobject();
-      case # "actor":
+      case #"actor":
         return new csceneobject();
-      case # "fakeActor":
+      case #"fakeActor":
         return new csceneobject();
-      case # "player":
+      case #"player":
         return new csceneplayer();
-      case # "sharedplayer":
+      case #"sharedplayer":
         return new csceneplayer();
-      case # "fakeplayer":
+      case #"fakeplayer":
         return new csceneobject();
-      case # "companion":
+      case #"companion":
         return new csceneplayer();
-      case # "sharedcompanion":
+      case #"sharedcompanion":
         return new csceneplayer();
       default:
         cscriptbundlebase::error(0, "Unsupported object type '" + str_type + "'.");
@@ -612,7 +621,7 @@ class csceneplayer: cscriptbundleobjectbase, csceneobject {
       self waittill(#"new_state");
     } else {
       n_cam_time = getcamanimtime(animation) - var_57949b2d;
-      self waittilltimeout(float(n_cam_time) / 1000, # "new_state");
+      self waittilltimeout(float(n_cam_time) / 1000, #"new_state");
     }
 
     flagsys::clear(#"camera_playing");
@@ -775,7 +784,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
 
       m_align = {
-        #origin: v_pos,
+        #origin: v_pos, 
         #angles: v_ang
       };
       return;
@@ -785,7 +794,7 @@ class csceneobject: cscriptbundleobjectbase {
       v_pos = m_align.origin;
       v_ang = _e_array[clientnum].angles;
       m_align = {
-        #origin: v_pos,
+        #origin: v_pos, 
         #angles: v_ang
       };
     }
@@ -1145,13 +1154,13 @@ class csceneobject: cscriptbundleobjectbase {
 
         if(isDefined(entry)) {
           switch (str_entry_type) {
-            case # "cameraswitcher":
+            case #"cameraswitcher":
               thread _play_camera_anim(clientnum, entry, n_start_time);
               break;
-            case # "anim":
+            case #"anim":
               _play_anim(clientnum, entry, 1, _n_blend, _s.mainshot, b_looping, n_start_time);
               break;
-            case # "blend":
+            case #"blend":
               _n_blend = entry;
               break;
             default:
@@ -1460,7 +1469,7 @@ in_igc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastim
   n_entnum = player getentitynumber();
   b_igc_active = 0;
 
-  if(newval & 1 << n_entnum) {
+  if(newval&1 << n_entnum) {
     b_igc_active = 1;
   }
 
@@ -1918,12 +1927,12 @@ __main__() {
     assert(isDefined(s_scenedef), "<dev string:x114>" + s_instance.origin + "<dev string:x126>" + s_instance.scriptbundlename + "<dev string:x13d>");
 
     if(s_scenedef.vmtype === "client") {
-      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags & 2) == 2) {
+      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&2) == 2) {
         s_instance thread play();
         continue;
       }
 
-      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags & 1) == 1) {
+      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&1) == 1) {
         s_instance thread init();
       }
     }

@@ -43,9 +43,8 @@ main() {
   thread delayedexception();
   animscripts\utility::initialize("stop");
 
-  if(isDefined(self.specialidleanim)) {
+  if(isDefined(self.specialidleanim))
     specialidleloop();
-  }
 
   animscripts\utility::randomizeidleset();
   thread setlaststoppedtime();
@@ -53,11 +52,10 @@ main() {
   var_0 = isDefined(self.customidleanimset);
 
   if(!var_0) {
-    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
+    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none")
       var_0 = 1;
-    } else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
+    else if(angleclamp180(self getmuzzleangle()[0]) > 20)
       var_0 = 1;
-    }
   }
 
   if(self.swimmer && !isDefined(self.enemy)) {
@@ -107,15 +105,14 @@ turntoangle(var_0) {
 
   var_3 = animscripts\swim::getswimanim("idle_turn");
 
-  if(var_2 < -80) {
+  if(var_2 < -80)
     var_4 = var_3[2];
-  } else if(var_2 < -20) {
+  else if(var_2 < -20)
     var_4 = var_3[3];
-  } else if(var_2 < 80) {
+  else if(var_2 < 80)
     var_4 = var_3[5];
-  } else {
+  else
     var_4 = var_3[6];
-  }
 
   var_5 = getanimlength(var_4);
   var_6 = abs(var_2) / self.turnrate;
@@ -130,9 +127,8 @@ turntoangle(var_0) {
 rotatetoangle(var_0, var_1) {
   self orientmode("face angle", var_0);
 
-  while(angleclamp(var_0 - self.angles[1]) > var_1) {
+  while(angleclamp(var_0 - self.angles[1]) > var_1)
     wait 0.1;
-  }
 }
 
 setlaststoppedtime() {
@@ -168,21 +164,19 @@ getdesiredidlepose() {
   animscripts\face::setidleface(anim.alertface);
   var_3 = animscripts\utility::choosepose();
 
-  if(var_2 == "Cover Stand" || var_2 == "Conceal Stand") {
+  if(var_2 == "Cover Stand" || var_2 == "Conceal Stand")
     var_3 = animscripts\utility::choosepose("stand");
-  } else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
+  else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch")
     var_3 = animscripts\utility::choosepose("crouch");
-  } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
+  else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone")
     var_3 = animscripts\utility::choosepose("prone");
-  }
 
   return var_3;
 }
 
 transitiontoidle(var_0, var_1) {
-  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand") {
+  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand")
     var_0 = "stand_cqb";
-  }
 
   var_2 = animscripts\utility::lookupanimarray("idle_transitions");
 
@@ -194,22 +188,20 @@ transitiontoidle(var_0, var_1) {
 }
 
 playidle(var_0, var_1) {
-  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand") {
+  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand")
     var_0 = "stand_cqb";
-  }
 
   var_2 = undefined;
 
   if(isDefined(self.customidleanimset) && isDefined(self.customidleanimset[var_0])) {
-    if(isarray(self.customidleanimset[var_0])) {
+    if(isarray(self.customidleanimset[var_0]))
       var_3 = animscripts\utility::anim_array(self.customidleanimset[var_0], self.customidleanimweights[var_0]);
-    } else {
+    else {
       var_3 = self.customidleanimset[var_0];
       var_4 = var_0 + "_add";
 
-      if(isDefined(self.customidleanimset[var_4])) {
+      if(isDefined(self.customidleanimset[var_4]))
         var_2 = self.customidleanimset[var_4];
-      }
     }
   } else if(isDefined(anim.readyanimarray) && (var_0 == "stand" || var_0 == "stand_cqb") && isDefined(self.busereadyidle) && self.busereadyidle == 1)
     var_3 = animscripts\utility::anim_array(anim.readyanimarray["stand"][0], anim.readyanimweights["stand"][0]);
@@ -222,9 +214,8 @@ playidle(var_0, var_1) {
 
   var_7 = 0.2;
 
-  if(gettime() == self.a.scriptstarttime) {
+  if(gettime() == self.a.scriptstarttime)
     var_7 = 0.5;
-  }
 
   if(isDefined(var_2)) {
     self setanimknoball(var_3, % body, 1, var_7, 1);

@@ -42,7 +42,8 @@ main() {
   thread snd_play_loopers();
 }
 
-snd_play_loopers() {}
+snd_play_loopers() {
+}
 
 snd_start_autofx_audio() {
   snd_play_auto_fx("fx_insects_swarm_lg_light", "amb_flies_sml", 0, 0, 0, 0);

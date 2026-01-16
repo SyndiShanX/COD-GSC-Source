@@ -14,14 +14,14 @@
 #namespace wasp;
 
 function autoexec __init__sytem__() {
-  system::register("wasp", &__init__, undefined, undefined);
+  system::register("wasp", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "rocket_wasp_hijacked", 1, 1, "int", &handle_lod_display_for_driver, 0, 0);
+  clientfield::register("vehicle", "rocket_wasp_hijacked", 1, 1, "int", & handle_lod_display_for_driver, 0, 0);
   level.sentinelbundle = struct::get_script_bundle("killstreak", "killstreak_sentinel");
-  if(isDefined(level.sentinelbundle)) {
-    vehicle::add_vehicletype_callback(level.sentinelbundle.ksvehicle, &spawned);
+  if(isdefined(level.sentinelbundle)) {
+    vehicle::add_vehicletype_callback(level.sentinelbundle.ksvehicle, & spawned);
   }
 }
 
@@ -31,7 +31,7 @@ function spawned(localclientnum) {
 
 function handle_lod_display_for_driver(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     if(self islocalclientdriver(localclientnum)) {
       self sethighdetail(1);
       wait(0.05);

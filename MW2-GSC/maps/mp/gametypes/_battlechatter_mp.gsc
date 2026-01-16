@@ -29,7 +29,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -39,13 +39,12 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     // help players be stealthy in splitscreen by not announcing their intentions
-    if(level.splitscreen) {
+    if(level.splitscreen)
       continue;
-    }
 
     self thread claymoreTracking();
     self thread reloadTracking();
@@ -57,12 +56,11 @@ claymoreTracking() {
   self endon("death");
   self endon("disconnect");
 
-  while(1) {
+  while (1) {
     self waittill("begin_firing");
     weaponName = self getCurrentWeapon();
-    if(weaponName == "claymore_mp") {
+    if(weaponName == "claymore_mp")
       level thread sayLocalSound(self, "claymore_plant");
-    }
   }
 }
 
@@ -70,7 +68,7 @@ reloadTracking() {
   self endon("death");
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("reload_start");
     level thread sayLocalSound(self, "reload");
   }
@@ -80,20 +78,19 @@ grenadeTracking() {
   self endon("death");
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weaponName);
 
-    if(weaponName == "frag_grenade_mp") {
+    if(weaponName == "frag_grenade_mp")
       level thread sayLocalSound(self, "frag_out");
-    } else if(weaponName == "flash_grenade_mp") {
+    else if(weaponName == "flash_grenade_mp")
       level thread sayLocalSound(self, "flash_out");
-    } else if(weaponName == "concussion_grenade_mp") {
+    else if(weaponName == "concussion_grenade_mp")
       level thread sayLocalSound(self, "conc_out");
-    } else if(weaponName == "smoke_grenade_mp") {
+    else if(weaponName == "smoke_grenade_mp")
       level thread sayLocalSound(self, "smoke_out");
-    } else if(weaponName == "c4_mp") {
+    else if(weaponName == "c4_mp")
       level thread sayLocalSound(self, "c4_plant");
-    }
   }
 }
 
@@ -110,9 +107,8 @@ sayLocalSound(player, soundType) {
   player endon("death");
   player endon("disconnect");
 
-  if(isSpeakerInRange(player)) {
+  if(isSpeakerInRange(player))
     return;
-  }
 
   if(player.team != "spectator") {
     prefix = maps\mp\gametypes\_teams::getTeamVoicePrefix(player.team) + "1_";
@@ -145,16 +141,14 @@ isSpeakerInRange(player) {
   distSq = 1000 * 1000;
 
   // to prevent player switch to spectator after throwing a granade causing damage to someone and result in attacker.pers["team"] = "spectator"
-  if(isDefined(player) && isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
-    for(index = 0; index < level.speakers[player.pers["team"]].size; index++) {
+  if(isdefined(player) && isdefined(player.pers["team"]) && player.pers["team"] != "spectator") {
+    for (index = 0; index < level.speakers[player.pers["team"]].size; index++) {
       teammate = level.speakers[player.pers["team"]][index];
-      if(teammate == player) {
+      if(teammate == player)
         return true;
-      }
 
-      if(distancesquared(teammate.origin, player.origin) < distSq) {
+      if(distancesquared(teammate.origin, player.origin) < distSq)
         return true;
-      }
     }
   }
 
@@ -168,10 +162,9 @@ addSpeaker(player, team) {
 // this is lazy... fix up later by tracking ID's and doing array slot swapping
 removeSpeaker(player, team) {
   newSpeakers = [];
-  for(index = 0; index < level.speakers[team].size; index++) {
-    if(level.speakers[team][index] == player) {
+  for (index = 0; index < level.speakers[team].size; index++) {
+    if(level.speakers[team][index] == player)
       continue;
-    }
 
     newSpeakers[newSpeakers.size] = level.speakers[team][index];
   }

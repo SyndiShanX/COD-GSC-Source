@@ -20,10 +20,10 @@
 function init() {}
 
 function main() {
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_multicore", 7);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_multicore", &multicoregive, &multicoretake);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_multicore", & multicoregive, & multicoretake);
 }
 
 function on_player_connect() {}

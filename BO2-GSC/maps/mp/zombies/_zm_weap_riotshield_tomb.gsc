@@ -39,8 +39,8 @@ init() {
   level.transferriotshield = ::transferriotshield;
   level.cantransferriotshield = ::cantransferriotshield;
   maps\mp\zombies\_zm_spawner::register_zombie_damage_callback(::riotshield_zombie_damage_response);
-  maps\mp\zombies\_zm_equipment::register_equipment("tomb_shield_zm", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", "riotshield_zm_icon", "riotshield", ::riotshield_activation_watcher_thread, undefined, ::dropshield, ::pickupshield);
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("riotshield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING");
+  maps\mp\zombies\_zm_equipment::register_equipment("tomb_shield_zm", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", "riotshield_zm_icon", "riotshield", ::riotshield_activation_watcher_thread, undefined, ::dropshield, ::pickupshield);
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("riotshield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING");
   onplayerconnect_callback(::onplayerconnect);
 }
 
@@ -78,9 +78,8 @@ watchtoofriendly(player) {
   wait 1;
 
   if(isDefined(self) && isDefined(player) && distance2dsquared(self.origin, player.origin) < 36) {
-    if(isalive(player)) {
+    if(isalive(player))
       player playlocalsound(level.zmb_laugh_alias);
-    }
 
     player maps\mp\zombies\_zm_stats::increment_client_stat("cheat_total", 0);
     self deployed_damage_shield(2000);
@@ -113,33 +112,26 @@ placeshield(origin, angles) {
 }
 
 cantransferriotshield(fromplayer, toplayer) {
-  if(isDefined(toplayer.screecher_weapon)) {
+  if(isDefined(toplayer.screecher_weapon))
     return false;
-  }
 
-  if(isDefined(toplayer.is_drinking) && toplayer.is_drinking > 0) {
+  if(isDefined(toplayer.is_drinking) && toplayer.is_drinking > 0)
     return false;
-  }
 
-  if(toplayer maps\mp\zombies\_zm_laststand::player_is_in_laststand() || toplayer in_revive_trigger()) {
+  if(toplayer maps\mp\zombies\_zm_laststand::player_is_in_laststand() || toplayer in_revive_trigger())
     return false;
-  }
 
-  if(toplayer isthrowinggrenade()) {
+  if(toplayer isthrowinggrenade())
     return false;
-  }
 
-  if(fromplayer == toplayer) {
+  if(fromplayer == toplayer)
     return true;
-  }
 
-  if(toplayer is_player_equipment(level.riotshield_name) && toplayer.shield_placement != 3) {
+  if(toplayer is_player_equipment(level.riotshield_name) && toplayer.shield_placement != 3)
     return false;
-  }
 
-  if(fromplayer.session_team != toplayer.session_team) {
+  if(fromplayer.session_team != toplayer.session_team)
     return false;
-  }
 
   return true;
 }
@@ -183,7 +175,7 @@ player_take_riotshield() {
     }
 
     self switchtoweaponimmediate(new_primary);
-    self playSound("wpn_riotshield_zm_destroy");
+    self playsound("wpn_riotshield_zm_destroy");
     self waittill("weapon_change");
   }
 
@@ -225,13 +217,12 @@ player_init_shield_location() {
 player_set_shield_health(damage, max_damage) {
   shieldhealth = int(100 * (max_damage - damage) / max_damage);
 
-  if(shieldhealth >= 50) {
+  if(shieldhealth >= 50)
     self.shield_damage_level = 0;
-  } else if(shieldhealth >= 25) {
+  else if(shieldhealth >= 25)
     self.shield_damage_level = 2;
-  } else {
+  else
     self.shield_damage_level = 3;
-  }
 
   self maps\mp\zombies\_zm_riotshield_tomb::updateriotshieldmodel();
 }
@@ -239,13 +230,12 @@ player_set_shield_health(damage, max_damage) {
 deployed_set_shield_health(damage, max_damage) {
   shieldhealth = int(100 * (max_damage - damage) / max_damage);
 
-  if(shieldhealth >= 50) {
+  if(shieldhealth >= 50)
     self.shield_damage_level = 0;
-  } else if(shieldhealth >= 25) {
+  else if(shieldhealth >= 25)
     self.shield_damage_level = 2;
-  } else {
+  else
     self.shield_damage_level = 3;
-  }
 
   self maps\mp\zombies\_zm_riotshield_tomb::updatestandaloneriotshieldmodel();
 }
@@ -253,9 +243,8 @@ deployed_set_shield_health(damage, max_damage) {
 player_damage_shield(idamage, bheld) {
   damagemax = level.zombie_vars["riotshield_hit_points"];
 
-  if(!isDefined(self.shielddamagetaken)) {
+  if(!isDefined(self.shielddamagetaken))
     self.shielddamagetaken = 0;
-  }
 
   self.shielddamagetaken = self.shielddamagetaken + idamage;
 
@@ -282,29 +271,26 @@ player_damage_shield(idamage, bheld) {
     }
 
     self player_set_shield_health(self.shielddamagetaken, damagemax);
-    self playSound("fly_riotshield_zm_impact_zombies");
+    self playsound("fly_riotshield_zm_impact_zombies");
   }
 }
 
 deployed_damage_shield(idamage) {
   damagemax = level.zombie_vars["riotshield_hit_points"];
 
-  if(!isDefined(self.shielddamagetaken)) {
+  if(!isDefined(self.shielddamagetaken))
     self.shielddamagetaken = 0;
-  }
 
   self.shielddamagetaken = self.shielddamagetaken + idamage;
 
   if(self.shielddamagetaken >= damagemax) {
     shield_origin = self.origin;
 
-    if(isDefined(self.stub)) {
+    if(isDefined(self.stub))
       thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.stub);
-    }
 
-    if(isDefined(self.original_owner)) {
+    if(isDefined(self.original_owner))
       self.original_owner maps\mp\zombies\_zm_equipment::equipment_take("tomb_shield_zm");
-    }
 
     maps\mp\zombies\_zm_equipment::equipment_disappear_fx(shield_origin, level._riotshield_dissapear_fx);
     playsoundatposition("wpn_riotshield_zm_destroy", shield_origin);
@@ -318,9 +304,8 @@ riotshield_activation_watcher_thread() {
   self endon("disconnect");
   self endon("tomb_shield_zm_taken");
 
-  while(true) {
+  while(true)
     self waittill_either("tomb_shield_zm_activate", "tomb_shield_zm_deactivate");
-  }
 }
 
 watchriotshielduse() {
@@ -342,21 +327,20 @@ watchriotshieldmelee() {
   for(;;) {
     self waittill("weapon_melee", weapon);
 
-    if(weapon == level.riotshield_name) {
+    if(weapon == level.riotshield_name)
       self riotshield_melee();
-    }
   }
 }
 
 is_riotshield_damage(mod, player, amount) {
-  if(mod == "MOD_MELEE" && player hasweapon(level.riotshield_name) && amount < 10) {
+  if(mod == "MOD_MELEE" && player hasweapon(level.riotshield_name) && amount < 10)
     return true;
-  }
 
   return false;
 }
 
-riotshield_damage(amount) {}
+riotshield_damage(amount) {
+}
 
 riotshield_fling_zombie(player, fling_vec, index) {
   if(!isDefined(self) || !isalive(self)) {
@@ -389,9 +373,9 @@ riotshield_fling_zombie(player, fling_vec, index) {
 zombie_knockdown(player, gib) {
   damage = level.zombie_vars["riotshield_knockdown_damage"];
 
-  if(isDefined(level.override_riotshield_damage_func)) {
+  if(isDefined(level.override_riotshield_damage_func))
     self[[level.override_riotshield_damage_func]](player, gib);
-  } else {
+  else {
     if(gib) {
       self.a.gib_ref = random(level.riotshield_gib_refs);
       self thread maps\mp\animscripts\zm_death::do_gib();
@@ -409,18 +393,17 @@ riotshield_knockdown_zombie(player, gib) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.riotshield_knockdown_func)) {
+  if(isDefined(self.riotshield_knockdown_func))
     self[[self.riotshield_knockdown_func]](player, gib);
-  } else {
+  else
     self zombie_knockdown(player, gib);
-  }
 
   self dodamage(level.zombie_vars["riotshield_knockdown_damage"], player.origin, player);
-  self playSound("fly_riotshield_forcehit");
+  self playsound("fly_riotshield_forcehit");
 }
 
 riotshield_get_enemies_in_range() {
-  view_pos = self getEye();
+  view_pos = self geteye();
   zombies = get_array_of_closest(view_pos, get_round_enemy_array_wrapper(), undefined, undefined, 2 * level.zombie_vars["riotshield_knockdown_range"]);
 
   if(!isDefined(zombies)) {
@@ -477,9 +460,8 @@ riotshield_get_enemies_in_range() {
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
       fling_vec = vectornormalize(test_origin - view_pos);
 
-      if(5000 < test_range_squared) {
+      if(5000 < test_range_squared)
         fling_vec = fling_vec + vectornormalize(test_origin - radial_origin);
-      }
 
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 100 + 100 * dist_mult);
@@ -536,9 +518,8 @@ riotshield_melee() {
   level.riotshield_fling_enemies = [];
   level.riotshield_fling_vecs = [];
 
-  if(shield_damage) {
+  if(shield_damage)
     self player_damage_shield(shield_damage, 0);
-  }
 }
 
 trackstuckzombies() {
@@ -548,9 +529,8 @@ trackstuckzombies() {
   for(;;) {
     self waittill("deployed_riotshield");
 
-    if(isDefined(self.riotshieldentity)) {
+    if(isDefined(self.riotshieldentity))
       self thread watchstuckzombies();
-    }
   }
 }
 
@@ -561,15 +541,13 @@ attack_shield(shield) {
   shield.owner endon("start_riotshield_deploy");
   shield.owner endon("destroy_riotshield");
 
-  if(isDefined(self.doing_shield_attack) && self.doing_shield_attack) {
+  if(isDefined(self.doing_shield_attack) && self.doing_shield_attack)
     return false;
-  }
 
   self.old_origin = self.origin;
 
-  if(getdvar(#"_id_B253DFE7") == "") {
+  if(getdvar(#"_id_B253DFE7") == "")
     setdvar("zombie_shield_attack_freq", "15");
-  }
 
   freq = getdvarint(#"_id_B253DFE7");
   self.doing_shield_attack = 1;
@@ -579,18 +557,16 @@ attack_shield(shield) {
   self thread maps\mp\zombies\_zm_audio::do_zombies_playvocals("attack", self.animname);
   attackanim = "zm_riotshield_melee";
 
-  if(!self.has_legs) {
+  if(!self.has_legs)
     attackanim = attackanim + "_crawl";
-  }
 
   self orientmode("face point", shield.origin);
   self animscripted(self.origin, flat_angle(vectortoangles(shield.origin - self.origin)), attackanim);
 
-  if(isDefined(shield.owner.player_shield_apply_damage)) {
+  if(isDefined(shield.owner.player_shield_apply_damage))
     shield.owner[[shield.owner.player_shield_apply_damage]](100, 0);
-  } else {
+  else
     shield.owner player_damage_shield(100, 0);
-  }
 
   self thread attack_shield_stop(shield);
   wait(randomint(100) / 100.0);
@@ -608,9 +584,8 @@ attack_shield_stop(shield) {
   if(isDefined(self.doing_shield_attack) && self.doing_shield_attack) {
     breachanim = "zm_riotshield_breakthrough";
 
-    if(!self.has_legs) {
+    if(!self.has_legs)
       breachanim = breachanim + "_crawl";
-    }
 
     self animscripted(self.origin, flat_angle(self.angles), breachanim);
   }
@@ -625,9 +600,8 @@ window_notetracks(msg, player) {
     if(notetrack == "end") {
       return;
     }
-    if(notetrack == "fire") {
+    if(notetrack == "fire")
       player player_damage_shield(100, 0);
-    }
   }
 }
 
@@ -649,14 +623,14 @@ riotshield_debug_print(msg, color) {
   if(!getdvarint(#"_id_BF480CE9")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (1, 1, 1);
-  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }
 
-shield_zombie_attract_func(poi) {}
+shield_zombie_attract_func(poi) {
+}
 
 shield_zombie_arrive_func(poi) {
   self endon("death");
@@ -667,9 +641,8 @@ shield_zombie_arrive_func(poi) {
   if(isDefined(poi.owner)) {
     poi.owner player_damage_shield(100, 0);
 
-    if(isDefined(poi.owner.player_shield_apply_damage)) {
+    if(isDefined(poi.owner.player_shield_apply_damage))
       poi.owner[[poi.owner.player_shield_apply_damage]](100, 0);
-    }
   }
 }
 

@@ -25,9 +25,8 @@ main() {
 }
 
 handlebigdogdeathfunction() {
-  if(isDefined(self.deathfunction)) {
+  if(isDefined(self.deathfunction))
     self[[self.deathfunction]]();
-  }
 }
 
 death() {
@@ -46,15 +45,14 @@ normal_death() {
 get_death_anim() {
   deathanim = undefined;
 
-  if(self.damageyaw > 135 || self.damageyaw <= -135) {
+  if(self.damageyaw > 135 || self.damageyaw <= -135)
     deathanim = animarray("death_b");
-  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  else if(self.damageyaw > 45 && self.damageyaw < 135)
     deathanim = animarray("death_l");
-  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  else if(self.damageyaw > -135 && self.damageyaw < -45)
     deathanim = animarray("death_r");
-  } else {
+  else
     deathanim = animarray("death_f");
-  }
 
   return deathanim;
 }
@@ -65,18 +63,16 @@ self_destruct() {
   self notify("stop_bigdog_scripted_fx_threads");
   wait 0.05;
 
-  if(isDefined(self.turret)) {
+  if(isDefined(self.turret))
     self.turret delete();
-  }
 
   badplace_delete(self.a.badplacename + "1");
 
-  if(isDefined(self.bigdogusebiggerbadplace) && self.bigdogusebiggerbadplace) {
+  if(isDefined(self.bigdogusebiggerbadplace) && self.bigdogusebiggerbadplace)
     badplace_delete(self.a.badplacename + "2");
-  }
 
   radiusdamage(fxorigin, 256, 200, 50, level.player);
-  playFX(anim._effect["bigdog_explosion"], fxorigin);
+  playfx(anim._effect["bigdog_explosion"], fxorigin);
   playsoundatposition("wpn_bigdog_explode", fxorigin);
   self notsolid();
   self hide();

@@ -29,14 +29,14 @@
 #namespace zm_island_side_ee_spore_hallucinations;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_spore_hallucinations", &__init__, undefined, undefined);
+  system::register("zm_island_side_ee_spore_hallucinations", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int");
   clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int");
-  callback::on_spawned(&on_player_spawned);
-  callback::on_connect(&on_player_connected);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_connect( & on_player_connected);
   level.var_40e8eaa5 = [];
   level.var_40e8eaa5["bloody_walls"] = getent("vol_hallucinate_bloody_walls", "targetname");
   level.var_40e8eaa5["corpses"] = getent("vol_hallucinate_corpses", "targetname");
@@ -59,7 +59,7 @@ function on_player_spawned() {
 function function_e58be395() {
   self endon("death");
   self thread function_b200c473();
-  while(true) {
+  while (true) {
     self waittill("hash_ece519d9");
     self.var_5f5af9f0++;
     if(self.var_5f5af9f0 > 5) {
@@ -73,7 +73,7 @@ function function_e58be395() {
 
 function function_b200c473() {
   self endon("death");
-  while(true) {
+  while (true) {
     wait(300);
     if(self.var_5f5af9f0 > 0) {
       self.var_5f5af9f0--;
@@ -85,7 +85,7 @@ function function_51d3efd() {
   self endon("death");
   if(!self flag::get("hallucination_spookysounds_on")) {
     self flag::set("hallucination_spookysounds_on");
-    while(self.var_5f5af9f0 >= 5) {
+    while (self.var_5f5af9f0 >= 5) {
       var_2499b02a = self zm_island_util::function_1867f3e8(800);
       if(var_2499b02a <= 3 && !self laststand::player_is_in_laststand()) {
         self function_5d3a5f36();
@@ -103,7 +103,7 @@ function function_5d6bcf98() {
     self flag::set("hallucination_bloodywalls_on");
     var_558d1e01 = getent("vol_hallucinate_bloody_walls", "targetname");
     var_58077680 = array("zone_jungle_lab_upper", "zone_swamp_lab_inside", "zone_operating_rooms");
-    while(self.var_5f5af9f0 >= 15) {
+    while (self.var_5f5af9f0 >= 15) {
       if(self zm_island_util::function_f2a55b5f(var_58077680) && self istouching(var_558d1e01)) {
         self function_f0e36b57();
         wait(randomintrange(360, 480));
@@ -137,7 +137,7 @@ function hallucinate_spooky_sounds(b_on = 1) {
 }
 
 function function_c6d55b0d() {
-  zm_devgui::add_custom_devgui_callback(&function_4c6daca1);
+  zm_devgui::add_custom_devgui_callback( & function_4c6daca1);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

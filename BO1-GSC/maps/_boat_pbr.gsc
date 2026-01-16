@@ -31,7 +31,7 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  positions[0] = spawnStruct();
+  positions[0] = spawnstruct();
   positions[0].sittag = "tag_gunner_turret1";
   positions[0].vehiclegunner = 1;
   positions[0].idle = % ai_boat_pbr_gunner_aim;

@@ -11,6 +11,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_inventory_util;
+
 #namespace wz_spectre;
 
 autoexec __init__system__() {
@@ -45,7 +46,7 @@ private function_4467066e(params) {
     foreach(item in self.inventory.items) {
       itementry = item.itementry;
 
-      if(isDefined(item.itementry) && item.itementry.name == # "sig_blade_wz_item") {
+      if(isDefined(item.itementry) && item.itementry.name == #"sig_blade_wz_item") {
         var_ec8e239d = 1;
         break;
       }
@@ -57,7 +58,7 @@ private function_4467066e(params) {
 
 private function_f82142f8(isspectre) {
   self notify(#"hash_2e4cc87f4b3a6396");
-  self endon(#"death", # "hash_2e4cc87f4b3a6396");
+  self endon(#"death", #"hash_2e4cc87f4b3a6396");
   level endon(#"game_playing");
   self function_1edd6e9e(isspectre);
 
@@ -116,7 +117,7 @@ private function_ef53914c() {
   attacker = params.attacker;
   weapon = params.sweapon;
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
     return;
   }
 
@@ -148,7 +149,7 @@ private give_max_ammo(weaponslot) {
 
   self setweaponammoclip(weapon, weapon.clipsize);
 
-  foreach(ammo in array(#"ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_12ga_item", # "ammo_type_rocket_item")) {
+  foreach(ammo in array(#"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_12ga_item", #"ammo_type_rocket_item")) {
     ammoitem = getscriptbundle(ammo);
 
     if(!isDefined(ammoitem.weapon) || ammoitem.weapon.ammoindex !== weapon.ammoindex) {
@@ -179,7 +180,7 @@ private function_de83cc91(params) {
     weapon = params.laststandparams.sweapon;
   }
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
     return;
   }
 }

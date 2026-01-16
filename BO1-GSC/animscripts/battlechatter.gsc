@@ -450,7 +450,7 @@ addAlias(name) {
 }
 
 createChatPhrase() {
-  chatPhrase = spawnStruct();
+  chatPhrase = SpawnStruct();
   chatPhrase.owner = self;
   chatPhrase.soundAliases = [];
   chatPhrase.master = false;
@@ -458,12 +458,12 @@ createChatPhrase() {
 }
 
 canSeePoint(origin) {
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   return (vectordot(forward, origin - self.origin) > 0.766);
 }
 
 pointInFov(origin) {
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   return (vectordot(forward, origin - self.origin) > 0.766);
 }
 
@@ -671,7 +671,9 @@ filter(potentialThreats, isThreat) {
   for(i = 0; i < potentialThreats.size; i++) {
     players = GetPlayers();
     for(p = 0; p < players.size; p++) {
-      if(potentialThreats[i][[isThreat]](players[p])) {
+      if(potentialThreats[i][
+          [isThreat]
+        ](players[p])) {
         threats[threats.size] = potentialThreats[i];
         break;
       }
@@ -870,7 +872,7 @@ isInfantry(player) {
 
 getAllTurrets(team) {
   t = [];
-  turrets = array_combine(getEntArray("misc_mg42", "classname"), getEntArray("misc_turret", "classname"));
+  turrets = array_combine(getentarray("misc_mg42", "classname"), getentarray("misc_turret", "classname"));
   for(i = 0; i < turrets.size; i++) {
     dude = turrets[i] getturretowner();
     if(isDefined(dude) && dude.team == team) {
@@ -1086,7 +1088,7 @@ bccycle(team, otherteam) {
   if(!bcsEnabled()) {
     return false;
   }
-  if(tryThreat(GetAIArray(team), getEntArray("grenade", "classname"), 300, 1, ::isGrenade, "inform", "incoming", "grenade", true)) {
+  if(tryThreat(GetAIArray(team), getentarray("grenade", "classname"), 300, 1, ::isGrenade, "inform", "incoming", "grenade", true)) {
     return true;
   }
   if(team == "allies" && tryThreat(GetAIArray(team), GetAIArray(otherteam), 1000, 3, ::isBanzai, "threat", "banzai", undefined, false)) {

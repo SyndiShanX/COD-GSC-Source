@@ -65,33 +65,29 @@ sat_camera_feedback(var_0) {
   var_1 = 0.15;
 
   for(;;) {
-    while(self.binoculars_active == 0) {
+    while(self.binoculars_active == 0)
       wait 0.1;
-    }
 
-    if(self.cam_offsetforward <= -0.5) {
+    if(self.cam_offsetforward <= -0.5)
       sat_give_feedback(level.sat_feedback_behind);
-    } else if(self.cam_offsetright >= var_1) {
-      if(self.cam_offsetup <= -1 * var_1) {
+    else if(self.cam_offsetright >= var_1) {
+      if(self.cam_offsetup <= -1 * var_1)
         sat_give_feedback(level.sat_feedback_right_down);
-      } else if(self.cam_offsetup >= var_1) {
+      else if(self.cam_offsetup >= var_1)
         sat_give_feedback(level.sat_feedback_right_up);
-      } else {
+      else
         sat_give_feedback(level.sat_feedback_right);
-      }
     } else if(self.cam_offsetright <= -1 * var_1) {
-      if(self.cam_offsetup <= -1 * var_1) {
+      if(self.cam_offsetup <= -1 * var_1)
         sat_give_feedback(level.sat_feedback_left_down);
-      } else if(self.cam_offsetup >= var_1) {
+      else if(self.cam_offsetup >= var_1)
         sat_give_feedback(level.sat_feedback_left_up);
-      } else {
+      else
         sat_give_feedback(level.sat_feedback_left);
-      }
     } else if(self.cam_offsetup <= -1 * var_1)
       sat_give_feedback(level.sat_feedback_down);
-    else if(self.cam_offsetup >= var_1) {
+    else if(self.cam_offsetup >= var_1)
       sat_give_feedback(level.sat_feedback_up);
-    }
 
     wait(randomfloatrange(2.5, 4.0));
   }
@@ -110,9 +106,8 @@ sat_give_feedback(var_0) {
 
 sat_camera_found_target(var_0) {
   for(;;) {
-    while(self.binoculars_active == 0) {
+    while(self.binoculars_active == 0)
       wait 0.1;
-    }
 
     var_1 = anglesToForward(self getplayerangles());
     self.binoculars_trace = bulletTrace(self getEye(), self getEye() + var_1 * 50000, 1, self, 1);
@@ -121,9 +116,8 @@ sat_camera_found_target(var_0) {
       thread maps\factory_audio::aud_binoculars_on_target();
       wait 0.75;
 
-      if(!common_scripts\utility::flag("cam_B_confirmed")) {
+      if(!common_scripts\utility::flag("cam_B_confirmed"))
         thread maps\_utility::smart_radio_dialogue_interrupt("factory_hqr_righttherethatsit");
-      }
 
       level notify("found_sat_target");
       level.camera_feedback_active = 0;
@@ -137,9 +131,8 @@ sat_camera_found_target(var_0) {
 camera_activate_hint(var_0, var_1, var_2) {
   level endon("camera_used");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     common_scripts\utility::flag_wait(var_2);
-  }
 
   wait(var_0);
   level.player thread maps\_utility::display_hint(var_1);
@@ -153,24 +146,21 @@ camera_activate_hint(var_0, var_1, var_2) {
 intro_binoculars_hint(var_0, var_1, var_2, var_3) {
   level endon(var_3);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     common_scripts\utility::flag_wait(var_2);
-  }
 
   wait(var_0);
 
-  while(level.player.binoculars_active == 0) {
+  while(level.player.binoculars_active == 0)
     common_scripts\utility::waitframe();
-  }
 
   level.player thread maps\_utility::display_hint(var_1);
 
   for(;;) {
     wait 7.0;
 
-    while(level.player.binoculars_active == 0) {
+    while(level.player.binoculars_active == 0)
       common_scripts\utility::waitframe();
-    }
 
     level.player thread maps\_utility::display_hint(var_1);
   }
@@ -219,14 +209,13 @@ binoculars_init(var_0) {
   level.default_visionset = var_0;
   precachestring(&"FACTORY_CAMERA_USE_HINT");
   precachestring(&"FACTORY_CAMERA_REMOVE_HINT");
-  maps\_utility::add_hint_string("camera_use", &"FACTORY_CAMERA_USE_HINT", ::hint_camera_use_should_break);
-  maps\_utility::add_hint_string("camera_deactivate", &"FACTORY_CAMERA_REMOVE_HINT");
+  maps\_utility::add_hint_string("camera_use", & "FACTORY_CAMERA_USE_HINT", ::hint_camera_use_should_break);
+  maps\_utility::add_hint_string("camera_deactivate", & "FACTORY_CAMERA_REMOVE_HINT");
 }
 
 hint_camera_use_should_break() {
-  if(common_scripts\utility::flag("player_using_camera")) {
+  if(common_scripts\utility::flag("player_using_camera"))
     return 1;
-  }
 
   return 0;
 }
@@ -248,9 +237,8 @@ take_binoculars() {
   self notify("stop_using_binoculars");
   self notify("take_binoculars");
 
-  if(isDefined(self.binoculars_active) && self.binoculars_active) {
+  if(isDefined(self.binoculars_active) && self.binoculars_active)
     binoculars_clear_hud();
-  }
 
   self.has_binoculars = 0;
   common_scripts\utility::flag_clear("player_using_camera");
@@ -271,9 +259,8 @@ binoculars_set_default_zoom_level(var_0) {
 binoculars_set_vision_set(var_0) {
   self.binoculars_vision_set = var_0;
 
-  if(isDefined(self.binoculars_active) && self.binoculars_active) {
+  if(isDefined(self.binoculars_active) && self.binoculars_active)
     self visionsetnightforplayer(self.binoculars_vision_set, 5.0);
-  }
 }
 
 binoculars_enable_zoom(var_0) {
@@ -606,9 +593,8 @@ binoculars_calculate_range() {
   for(;;) {
     var_0 = anglesToForward(self getplayerangles());
 
-    if(self islinked() && isDefined(self.linked_world_space_forward)) {
+    if(self islinked() && isDefined(self.linked_world_space_forward))
       var_0 = self.linked_world_space_forward;
-    }
 
     for(self.binoculars_trace = bulletTrace(self getEye(), self getEye() + var_0 * 50000, 1, self, 1); isDefined(self.binoculars_trace["surfacetype"]) && self.binoculars_trace["surfacetype"] == "glass"; self.binoculars_trace = bulletTrace(self.binoculars_trace["position"] + var_0 * 20, self.binoculars_trace["position"] + var_0 * 50000, 1, self)) {}
 
@@ -631,9 +617,8 @@ binoculars_lock_to_target(var_0) {
     self.player_view_controller_model.origin = self.origin;
     self.player_view_controller_model.angles = self getplayerangles();
 
-    if(!isDefined(self.player_view_controller)) {
+    if(!isDefined(self.player_view_controller))
       self.player_view_controller = maps\_utility::get_player_view_controller(self.player_view_controller_model, "tag_origin", (0, 0, 0), "player_view_controller_binoculars");
-    }
 
     if(!isDefined(self.turret_look_at_ent)) {
       self.turret_look_at_ent = spawn("script_model", self.origin);
@@ -806,9 +791,8 @@ binocular_face_scanning_data() {
     if(var_1) {
       var_0 = var_0 + 1;
 
-      if(var_0 > 3) {
+      if(var_0 > 3)
         var_0 = 1;
-      }
 
       switch (var_0) {
         case 1:
@@ -835,9 +819,8 @@ binocular_face_scanning_data() {
       var_4 = maps\_utility::array_remove_index(var_4, 0);
     }
 
-    foreach(var_6 in var_4) {
-      var_6 settext(var_6.defaulttext + int(randomfloatrange(0.0, 10000) * 100000) / 100000);
-    }
+    foreach(var_6 in var_4)
+    var_6 settext(var_6.defaulttext + int(randomfloatrange(0.0, 10000) * 100000) / 100000);
 
     wait 0.05;
     var_3 = var_3 + 0.05;
@@ -958,9 +941,8 @@ binoculars_monitor_scanning() {
         self.camera_hud_item["id_confirmed"] settext("Payload Confirmed");
         self notify("stop_binocular_flash");
 
-        while(self attackbuttonpressed()) {
+        while(self attackbuttonpressed())
           wait 0.05;
-        }
 
         if(isDefined(self.camera_hud_item["id_confirmed"])) {
           self.camera_hud_item["id_confirmed"] destroy();
@@ -1063,25 +1045,21 @@ monitor_binoculars_variable_zoom() {
       } else
         thread maps\factory_audio::aud_binoculars_zoom_in();
 
-      foreach(var_1 in self.binocular_reticle_pieces) {
-        var_1.alpha = 1.0;
-      }
+      foreach(var_1 in self.binocular_reticle_pieces)
+      var_1.alpha = 1.0;
 
       wait 0.15;
       binoculars_zoom();
 
-      if(self.current_binocular_zoom_level < 3) {
+      if(self.current_binocular_zoom_level < 3)
         thread zoom_lerp_dof();
-      }
 
       if(isDefined(self.binoculars_trace["entity"]) && isai(self.binoculars_trace["entity"]) && self.binoculars_trace["entity"] isbadguy()) {
-        foreach(var_1 in self.binocular_reticle_pieces) {
-          var_1.alpha = 1.0;
-        }
+        foreach(var_1 in self.binocular_reticle_pieces)
+        var_1.alpha = 1.0;
       } else {
-        foreach(var_1 in self.binocular_reticle_pieces) {
-          var_1.alpha = 0.0;
-        }
+        foreach(var_1 in self.binocular_reticle_pieces)
+        var_1.alpha = 0.0;
       }
 
       wait 0.1;
@@ -1106,13 +1084,12 @@ binoculars_zoom() {
       break;
   }
 
-  if(self.current_binocular_zoom_level == 0) {
+  if(self.current_binocular_zoom_level == 0)
     setsaveddvar("cg_fov", 65);
-  } else if(self.current_binocular_zoom_level == 1) {
+  else if(self.current_binocular_zoom_level == 1)
     setsaveddvar("cg_fov", 43);
-  } else if(self.current_binocular_zoom_level == 2) {
+  else if(self.current_binocular_zoom_level == 2)
     setsaveddvar("cg_fov", 27);
-  }
 }
 
 zoom_lerp_dof() {
@@ -1151,35 +1128,32 @@ binoculars_angles_display() {
     var_3 = (var_2 - int(var_2)) * 60.0;
     var_4 = "" + int(var_2);
 
-    if(var_2 < 10) {
+    if(var_2 < 10)
       var_4 = "0" + int(var_2);
-    }
 
     var_5 = "" + int(var_3);
 
-    if(var_3 < 10) {
+    if(var_3 < 10)
       var_5 = "0" + int(var_3);
-    }
 
     self.camera_hud_item["angles"] settext(int(var_1) + "" + var_4 + "' " + var_5 + "\"");
 
-    if(var_1 > 337.5 || var_1 < 22.5) {
+    if(var_1 > 337.5 || var_1 < 22.5)
       self.camera_hud_item["heading"] settext("N");
-    } else if(var_1 < 67.5) {
+    else if(var_1 < 67.5)
       self.camera_hud_item["heading"] settext("NE");
-    } else if(var_1 < 112.5) {
+    else if(var_1 < 112.5)
       self.camera_hud_item["heading"] settext("E");
-    } else if(var_1 < 157.5) {
+    else if(var_1 < 157.5)
       self.camera_hud_item["heading"] settext("SE");
-    } else if(var_1 < 202.5) {
+    else if(var_1 < 202.5)
       self.camera_hud_item["heading"] settext("S");
-    } else if(var_1 < 247.5) {
+    else if(var_1 < 247.5)
       self.camera_hud_item["heading"] settext("SW");
-    } else if(var_1 < 292.5) {
+    else if(var_1 < 292.5)
       self.camera_hud_item["heading"] settext("W");
-    } else {
+    else
       self.camera_hud_item["heading"] settext("NW");
-    }
 
     wait 0.05;
   }
@@ -1192,11 +1166,10 @@ sat_camera_reticule() {
 
   while(!common_scripts\utility::flag("cam_B_confirmed")) {
     if(isDefined(level.sat_current_target)) {
-      if(isDefined(self.binoculars_trace["entity"]) && isDefined(self.binoculars_trace["entity"].targetname) && self.binoculars_trace["entity"].targetname == level.sat_current_target.target) {
+      if(isDefined(self.binoculars_trace["entity"]) && isDefined(self.binoculars_trace["entity"].targetname) && self.binoculars_trace["entity"].targetname == level.sat_current_target.target)
         var_0 = 1;
-      } else {
+      else
         var_0 = 0;
-      }
     } else
       var_0 = 0;
 
@@ -1239,9 +1212,8 @@ remove_tagged_entities() {
 
   if(isDefined(level.tag_nodes) && level.tag_nodes.size != 0) {
     foreach(var_1 in level.tag_nodes) {
-      if(target_istarget(var_1)) {
+      if(target_istarget(var_1))
         target_remove(var_1);
-      }
     }
   }
 }
@@ -1259,21 +1231,17 @@ set_default_hud_parameters() {
 }
 
 game_is_pc() {
-  if(level.xenon) {
+  if(level.xenon)
     return 0;
-  }
 
-  if(level.ps3) {
+  if(level.ps3)
     return 0;
-  }
 
-  if(level.ps4) {
+  if(level.ps4)
     return 0;
-  }
 
-  if(level.xb3) {
+  if(level.xb3)
     return 0;
-  }
 
   return 1;
 }

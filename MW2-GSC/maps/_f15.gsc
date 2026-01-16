@@ -33,6 +33,7 @@ main(model, type) {
   build_light(model, "tail_red", "TAG_RIGHT_TAIL", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
   build_light(model, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_white_blink", "running", randomStartDelay);
   build_light(model, "landing_light01", "TAG_LIGHT_LANDING01", "misc/light_mig29_landing", "landing", 0.0);
+
 }
 
 init_local() {
@@ -54,13 +55,13 @@ landing_gear_up() {
   self setanim( % mig_landing_gear_up);
 }
 
+
 #using_animtree("generic_human");
 
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 1; i++)
+    positions[i] = spawnstruct();
 
   return positions;
 }
@@ -73,18 +74,18 @@ playEngineEffects() {
   self ent_flag_set("engineeffects");
   engineeffects = getfx("engineeffect");
 
-  for(;;) {
+  for (;;) {
     self ent_flag_wait("engineeffects");
-    playFXOnTag(engineeffects, self, "tag_engine_right");
-    playFXOnTag(engineeffects, self, "tag_engine_left");
+    playfxontag(engineeffects, self, "tag_engine_right");
+    playfxontag(engineeffects, self, "tag_engine_left");
     self ent_flag_waitopen("engineeffects");
-    stopFXOnTag(engineeffects, self, "tag_engine_left");
-    stopFXOnTag(engineeffects, self, "tag_engine_right");
+    StopFXOnTag(engineeffects, self, "tag_engine_left");
+    StopFXOnTag(engineeffects, self, "tag_engine_right");
   }
 }
 
 playAfterBurner() {
-  //After Burners are pretty much like turbo boost. They don't use them all the time except when
+  //After Burners are pretty much like turbo boost. They don't use them all the time except when 
   //bursts of speed are needed. Needs a cool sound when they're triggered. Currently, they are set
   //to be on all the time, but it would be cool to see them engauge as they fly away.
   self endon("death");
@@ -94,19 +95,20 @@ playAfterBurner() {
   self ent_flag_set("afterburners");
   afterburners = getfx("afterburner");
 
-  for(;;) {
+  for (;;) {
     self ent_flag_wait("afterburners");
-    playFXOnTag(afterburners, self, "tag_engine_right");
-    playFXOnTag(afterburners, self, "tag_engine_left");
+    playfxontag(afterburners, self, "tag_engine_right");
+    playfxontag(afterburners, self, "tag_engine_left");
     self ent_flag_waitopen("afterburners");
-    stopFXOnTag(afterburners, self, "tag_engine_left");
-    stopFXOnTag(afterburners, self, "tag_engine_right");
+    StopFXOnTag(afterburners, self, "tag_engine_left");
+    StopFXOnTag(afterburners, self, "tag_engine_right");
   }
 }
 
 playConTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
+
+  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as 
+  //one effect. It can't be played in a wait loop like other effects because a geo trail is one 
   //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
   tag1 = add_contrail("tag_engine_right", 1);
   tag2 = add_contrail("tag_engine_left", -1);
@@ -116,17 +118,17 @@ playConTrail() {
 
   ent_flag_init("contrails");
   ent_flag_set("contrails");
-  for(;;) {
+  for (;;) {
     ent_flag_wait("contrails");
-    playFXOnTag(contrail, tag1, "tag_origin");
-    playFXOnTag(contrail, tag2, "tag_origin");
+    playfxontag(contrail, tag1, "tag_origin");
+    playfxontag(contrail, tag2, "tag_origin");
     ent_flag_waitopen("contrails");
-    stopFXOnTag(contrail, tag1, "tag_origin");
-    stopFXOnTag(contrail, tag2, "tag_origin");
+    stopfxontag(contrail, tag1, "tag_origin");
+    stopfxontag(contrail, tag2, "tag_origin");
   }
 
-  //	playFXOnTag( level._effect[ "contrail" ], self, "tag_engine_right" );
-  //	playFXOnTag( level._effect[ "contrail" ], self, "tag_engine_left" );
+  //	playfxontag( level._effect[ "contrail" ], self, "tag_engine_right" );
+  //	playfxontag( level._effect[ "contrail" ], self, "tag_engine_left" );
 }
 
 add_contrail(fx_tag_name, offset) {
@@ -134,7 +136,7 @@ add_contrail(fx_tag_name, offset) {
   fx_tag = spawn_tag_origin();
   fx_tag.origin = self getTagOrigin(fx_tag_name);
   fx_tag.angles = self getTagAngles(fx_tag_name);
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.entity = fx_tag;
   ent.forward = -156;
   ent.up = 0;
@@ -148,31 +150,28 @@ add_contrail(fx_tag_name, offset) {
 
 playerisclose(other) {
   infront = playerisinfront(other);
-  if(infront) {
+  if(infront)
     dir = 1;
-  } else {
+  else
     dir = -1;
-  }
   a = flat_origin(other.origin);
-  b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_multiply(anglestoforward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, level.player.origin);
   dist = distance(a, point);
-  if(dist < 3000) {
+  if(dist < 3000)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 playerisinfront(other) {
-  forwardvec = anglesToForward(flat_angle(other.angles));
+  forwardvec = anglestoforward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(level.player.origin) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0) {
+  if(dot > 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 plane_sound_node() {
@@ -180,9 +179,8 @@ plane_sound_node() {
   other endon("death");
   self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
   other thread play_loop_sound_on_entity("veh_f15_dist_loop");
-  while(playerisinfront(other)) {
+  while (playerisinfront(other))
     wait .05;
-  }
   wait .5; // little delay for the boom
   other thread play_sound_in_space("veh_f15_sonic_boom");
   other waittill("reached_end_node");
@@ -198,8 +196,8 @@ plane_bomb_node() {
   self thread plane_bomb_node(); // spawn new thread for next plane that passes through this pathnode
 
   // get array of targets
-  aBomb_targets = getEntArray(self.script_linkTo, "script_linkname");
-  assertEx(isDefined(aBomb_targets), "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
+  aBomb_targets = getentarray(self.script_linkTo, "script_linkname");
+  assertEx(isdefined(aBomb_targets), "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
   assertEx(aBomb_targets.size > 1, "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
 
   //sort array of targets from nearest to furthest to determine order of bombing
@@ -207,14 +205,13 @@ plane_bomb_node() {
   iExplosionNumber = 0;
 
   wait randomfloatrange(.3, .8);
-  for(i = 0; i < aBomb_targets.size; i++) {
+  for (i = 0; i < aBomb_targets.size; i++) {
     iExplosionNumber++;
-    if(iExplosionNumber == 3) {
+    if(iExplosionNumber == 3)
       iExplosionNumber = 1;
-    }
     aBomb_targets[i] thread play_sound_on_entity("airstrike_explosion");
     //aBomb_targets[i] thread play_sound_on_entity( "rocket_explode_sand" );
-    playFX(level._effect["plane_bomb_explosion" + iExplosionNumber], aBomb_targets[i].origin);
+    playfx(level._effect["plane_bomb_explosion" + iExplosionNumber], aBomb_targets[i].origin);
     wait randomfloatrange(.3, 1.2);
   }
 }
@@ -238,12 +235,11 @@ plane_bomb_cluster() {
   /*-----------------------
   LAUNCH FROM PLANE UNTIL CLOSE TO GROUND
   -------------------------*/
-  vecForward = vector_multiply(anglesToForward(plane.angles), 2);
+  vecForward = vector_multiply(anglestoforward(plane.angles), 2);
   vecUp = vector_multiply(anglestoup(plane.angles), -0.2); // invert the up angles
   vec = [];
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++)
     vec[i] = (vecForward[i] + vecUp[i]) / 2;
-  }
   vec = (vec[0], vec[1], vec[2]);
   vec = vector_multiply(vec, 7000);
   bomb moveGravity(vec, 2.0);
@@ -263,7 +259,7 @@ plane_bomb_cluster() {
   -------------------------*/
   bombOrigin = bomb.origin;
   bombAngles = bomb.angles;
-  playFXOnTag(level.airstrikefx, bomb, "tag_origin");
+  playfxontag(level.airstrikefx, bomb, "tag_origin");
 
   wait 1.6;
   repeat = 12;
@@ -271,7 +267,7 @@ plane_bomb_cluster() {
   maxAngles = 55;
   angleDiff = (maxAngles - minAngles) / repeat;
 
-  for(i = 0; i < repeat; i++) {
+  for (i = 0; i < repeat; i++) {
     traceDir = anglesToForward(bombAngles + (maxAngles - (angleDiff * i), randomInt(10) - 5, 0));
     traceEnd = bombOrigin + vector_multiply(traceDir, 10000);
     trace = bulletTrace(bombOrigin, traceEnd, false, undefined);
@@ -290,6 +286,7 @@ plane_bomb_cluster() {
   }
   wait(1.0);
   bomb delete();
+
 }
 
 stop_sound(alias) {

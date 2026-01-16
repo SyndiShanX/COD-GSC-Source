@@ -23,19 +23,17 @@ main() {
   self animmode("zonly_physics");
   self clearanim( % body, 0.2);
 
-  if(self.prevscript == "dog_stop") {
+  if(self.prevscript == "dog_stop")
     var_0 = "idle_pain";
-  } else {
+  else
     var_0 = "run_pain";
-  }
 
   self setflaggedanimrestart("dog_pain_anim", getdogpainanim(var_0), 1, 0.2, 1);
 
-  if(self isdogbeingdriven()) {
+  if(self isdogbeingdriven())
     self playSound("bullet_large_flesh");
-  } else {
+  else
     self playSound("bullet_large_flesh_npc");
-  }
 
   animscripts\shared::donotetracks("dog_pain_anim");
 }
@@ -43,9 +41,8 @@ main() {
 getdogpainanim(var_0) {
   var_1 = animscripts\utility::lookupdoganim("reaction", var_0);
 
-  if(isarray(var_1)) {
+  if(isarray(var_1))
     return var_1[randomint(var_1.size)];
-  }
 
   return var_1;
 }

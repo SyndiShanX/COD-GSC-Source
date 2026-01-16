@@ -11,7 +11,7 @@ function main() {
   precache_createfx_fx();
   precache_creek_fx();
   disablefx = getdvarint("disable_fx");
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isdefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
 }

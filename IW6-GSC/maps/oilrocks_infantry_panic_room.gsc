@@ -42,15 +42,13 @@ main() {
 main2() {
   rorke_take_down();
 
-  if(!isalive(level.rorke)) {
+  if(!isalive(level.rorke))
     level waittill("forever_cause_rork_is_dead_and_mission_fails");
-  }
 
-  if(!isDefined(level.panic_room_startpoint)) {
+  if(!isDefined(level.panic_room_startpoint))
     maps\_utility::nextmission();
-  } else {
+  else
     iprintlnbold("started at panic room, skipping nextmission!");
-  }
 }
 
 dudes_in_place_cover() {
@@ -95,9 +93,8 @@ announce_past_those_doors() {
   common_scripts\utility::flag_wait("FLAG_enemies_at_breach_vacated");
   var_0 = common_scripts\utility::getstruct("door_kick_node", "targetname");
 
-  while(distance(self.origin, var_0.origin) > 500) {
+  while(distance(self.origin, var_0.origin) > 500)
     wait 0.05;
-  }
 
   maps\_utility::smart_dialogue("oilrocks_mrk_hesjustpastthose");
 }
@@ -106,9 +103,8 @@ blackhawk_into_position() {
   var_0 = common_scripts\utility::getstruct("blackhawk_panic_room_entrance", "targetname");
   var_1 = maps\oilrocks_apache_code::get_blackhawk_ally();
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = maps\oilrocks_apache_code::spawn_blackhawk_ally("blackhawk_panic_room_entrance", undefined, undefined, 0);
-  }
 
   var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_1 vehicle_teleport(var_0.origin, vectortoangles(var_2.origin - var_0.origin));
@@ -150,9 +146,8 @@ choppers_fly_in() {
   var_0 = common_scripts\utility::getstruct("blackhawk_panic_room_entrance", "targetname");
   var_1 = maps\oilrocks_apache_code::get_blackhawk_ally();
 
-  if(!isDefined(level.testingapache_animations)) {
+  if(!isDefined(level.testingapache_animations))
     var_1 maps\_utility::delaythread(3, maps\_vehicle::vehicle_paths, var_0);
-  }
 
   var_1 vehicle_turnengineon();
   var_2 = maps\oilrocks_apache_code::get_apache_ally(1);
@@ -247,9 +242,8 @@ rorke_take_down() {
     var_2.ignoreme = 1;
   }
 
-  if(maps\_utility::obj_exists("find_rorke")) {
+  if(maps\_utility::obj_exists("find_rorke"))
     maps\_utility::objective_complete(maps\_utility::obj("find_rorke"));
-  }
 
   common_scripts\utility::flag_wait("FLAG_dude_kicked_the_door");
 
@@ -280,9 +274,8 @@ rorke_take_down() {
 
 anim_reach_failsafe_hideprint(var_0, var_1) {
   if(isarray(var_0)) {
-    foreach(var_3 in var_0) {
-      thread maps\_anim::anim_reach_failsafe(var_3, var_1);
-    }
+    foreach(var_3 in var_0)
+    thread maps\_anim::anim_reach_failsafe(var_3, var_1);
 
     return;
   }
@@ -313,9 +306,8 @@ modify_moveplaybackrate_together_local(var_0) {
       var_5.goalradius = 32;
       var_6 = var_5.goalpos;
 
-      if(isDefined(var_5.reach_goal_pos)) {
+      if(isDefined(var_5.reach_goal_pos))
         var_6 = var_5.reach_goal_pos;
-      }
 
       var_7 = distance2d(var_5.origin, var_6);
       var_2[var_5.unique_id] = var_7;
@@ -338,11 +330,10 @@ modify_moveplaybackrate_together_local(var_0) {
       var_10 = var_2[var_5.unique_id] - var_3;
       var_11 = var_10 * 0.003;
 
-      if(var_11 > var_1) {
+      if(var_11 > var_1)
         var_11 = var_1;
-      } else if(var_11 < var_1 * -1) {
+      else if(var_11 < var_1 * -1)
         var_11 = var_1 * -1;
-      }
 
       var_5.moveplaybackrate = 1 + var_11;
     }
@@ -351,9 +342,8 @@ modify_moveplaybackrate_together_local(var_0) {
   }
 
   foreach(var_5 in var_0) {
-    if(isalive(var_5)) {
+    if(isalive(var_5))
       var_5.moveplaybackrate = 1;
-    }
   }
 }
 
@@ -391,9 +381,8 @@ window_crash() {
   var_0 = getglassarray("rorke_glass");
   var_1 = getglassorigin(var_0[0]);
 
-  foreach(var_3 in var_0) {
-    destroyglass(var_3, anglesToForward(level.rorke.angles));
-  }
+  foreach(var_3 in var_0)
+  destroyglass(var_3, anglesToForward(level.rorke.angles));
 }
 
 dialogue() {

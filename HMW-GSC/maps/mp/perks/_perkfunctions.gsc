@@ -14,9 +14,8 @@ h2_unsetTacticalInsertion() {
 clearPreviousTISpawnpoint() {
   self common_scripts\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self.setSpawnpoint)) {
+  if(isDefined(self.setSpawnpoint))
     self deleteTI(self.setSpawnpoint);
-  }
 }
 
 updateTISpawnPosition() {
@@ -25,21 +24,19 @@ updateTISpawnPosition() {
   level endon("game_ended");
   self endon("end_monitorTIUse");
 
-  while(maps\mp\_utility::isReallyAlive(self)) {
-    if(self isValidTISpawnPosition()) {
+  while (maps\mp\_utility::isReallyAlive(self)) {
+    if(self isValidTISpawnPosition())
       self.TISpawnPosition = self.origin;
-    }
 
     wait(0.05);
   }
 }
 
 isValidTISpawnPosition() {
-  if(Canspawn(self.origin) && self IsOnGround()) {
+  if(CanSpawn(self.origin) && self IsOnGround())
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 monitorTIUse() {
@@ -51,7 +48,7 @@ monitorTIUse() {
   self thread updateTISpawnPosition();
   self thread clearPreviousTISpawnpoint();
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", lightstick, weapName);
 
     if(weapName != "flare_mp") {
@@ -59,9 +56,8 @@ monitorTIUse() {
     }
     lightstick delete();
 
-    if(isDefined(self.setSpawnPoint)) {
+    if(isDefined(self.setSpawnPoint))
       self deleteTI(self.setSpawnPoint);
-    }
 
     if(!isDefined(self.TISpawnPosition)) {
       continue;
@@ -101,11 +97,10 @@ tactical_respawn() {
 
 GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  } else {
+  else
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
-  }
 
   self thread GlowStickDamageListener(owner);
   self thread GlowStickEnemyUseListener(owner);
@@ -126,6 +121,7 @@ GlowStickSetupAndWaitForDeath(owner) {
   dummyGlowStick delete();
 }
 
+
 GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   self endon("death");
   level endon("game_ended");
@@ -133,19 +129,18 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   // PlayFXOnTag fails if run on the same frame the parent entity was created
   wait(0.05);
 
-  //playFXOnTag( showEffect, self, "TAG_FX" );
+  //PlayFXOnTag( showEffect, self, "TAG_FX" );
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
 
-  if(showEffect == level.spawnGlow["friendly"]) {
+  if(showEffect == level.spawnGlow["friendly"])
     self thread h2_glowstick_fx(fxEnt);
-  } else {
+  else
     TriggerFx(fxEnt);
-  }
 
   self thread deleteOnDeath(fxEnt);
 
-  for(;;) {
+  for (;;) {
     self hide();
     fxEnt hide();
     foreach(player in level.players) {
@@ -169,7 +164,7 @@ h2_glowstick_fx(fxEnt) {
   self endon("death");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     TriggerFX(fxEnt);
     wait 10;
   }
@@ -177,9 +172,8 @@ h2_glowstick_fx(fxEnt) {
 
 deleteOnDeath(ent) {
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isdefined(ent))
     ent delete();
-  }
 }
 
 GlowStickDamageListener(owner) {
@@ -190,7 +184,7 @@ GlowStickDamageListener(owner) {
   // use large health to work around teamkilling issue
   self.health = 5000;
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker);
 
     if(level.teambased && isDefined(owner) && attacker != owner && (isDefined(attacker.team) && attacker.team == self.team)) {
@@ -217,11 +211,11 @@ GlowStickUseListener(owner) {
   owner endon("disconnect");
 
   self setCursorHint("HINT_NOICON");
-  self setHintString(&"MP_PICKUP_TI");
+  self setHintString( & "MP_PICKUP_TI");
 
   self thread updateEnemyUse(owner);
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
 
     player playSound("chemlight_pu");
@@ -234,7 +228,7 @@ updateEnemyUse(owner) {
   self endon("death");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self maps\mp\_utility::setSelfUsable(owner);
     level common_scripts\utility::waittill_either("joined_team", "player_spawned");
   }
@@ -243,9 +237,8 @@ updateEnemyUse(owner) {
 deleteTI(TI) {
   self notify("cancel_tactical_respawn");
 
-  if(isDefined(TI.enemyTrigger)) {
+  if(isDefined(TI.enemyTrigger))
     TI.enemyTrigger Delete();
-  }
 
   spot = TI.origin;
   spotAngles = TI.angles;
@@ -271,10 +264,10 @@ GlowStickEnemyUseListener(owner) {
   owner endon("disconnect");
 
   self.enemyTrigger setCursorHint("HINT_NOICON");
-  self.enemyTrigger setHintString(&"LUA_SMASH_FLARE");
+  self.enemyTrigger setHintString( & "LUA_SMASH_FLARE");
   self.enemyTrigger maps\mp\_utility::makeEnemyUsable(owner);
 
-  for(;;) {
+  for (;;) {
     self.enemyTrigger waittill("trigger", player);
 
     player notify("destroyed_insertion", owner);
@@ -282,9 +275,8 @@ GlowStickEnemyUseListener(owner) {
 
     //playFX( level.spawnGlowSplat, self.origin);		
 
-    if(isDefined(owner) && player != owner) {
+    if(isDefined(owner) && player != owner)
       owner thread maps\mp\_utility::leaderDialogOnPlayer("ti_destroyed");
-    }
 
     player thread deleteTI(self);
   }
@@ -391,7 +383,7 @@ crouchstatelistener() {
   self notifyonplayercommand("adjustedStance", "+stance");
   self notifyonplayercommand("adjustedStance", "+goStand");
 
-  for(;;) {
+  for (;;) {
     common_scripts\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
     wait 0.5;
     crouchmovementsetspeed();
@@ -416,27 +408,35 @@ radarmover(var_0) {
   self endon("personal_uav_remove");
   self endon("personal_uav_removed");
 
-  for(;;) {
+  for (;;) {
     var_0 moveto(self.origin, 0.05);
     wait 0.05;
   }
 }
 
 unsetpersonaluav() {
-  if(isDefined(self.personalradar)) {
+  if(isdefined(self.personalradar)) {
     self notify("personal_uav_removed");
     level maps\mp\gametypes\_portable_radar::deleteportableradar(self.personalradar);
     self.personalradar = undefined;
   }
 }
 
-setoverkillpro() {}
+setoverkillpro() {
 
-unsetoverkillpro() {}
+}
 
-setempimmune() {}
+unsetoverkillpro() {
 
-unsetempimmune() {}
+}
+
+setempimmune() {
+
+}
+
+unsetempimmune() {
+
+}
 
 setautospot() {
   autospotadswatcher();
@@ -463,7 +463,7 @@ autospotadswatcher() {
   level endon("game_ended");
   var_0 = 0;
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(self isusingturret()) {
@@ -488,9 +488,13 @@ autospotadswatcher() {
   }
 }
 
-setregenspeed() {}
+setregenspeed() {
 
-unsetregenspeed() {}
+}
+
+unsetregenspeed() {
+
+}
 
 setsharpfocus() {
   self setviewkickscale(0.5);
@@ -506,7 +510,7 @@ setdoubleload() {
   self endon("endDoubleLoad");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("reload");
     var_0 = self getweaponslist("primary");
 
@@ -545,11 +549,10 @@ setmarksman(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 10;
-  } else {
+  else
     var_0 = int(var_0) * 2;
-  }
 
   maps\mp\_utility::setrecoilscale(var_0);
   self.recoilscale = var_0;
@@ -565,11 +568,10 @@ setstunresistance(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     self.stunscaler = 0.5;
-  } else {
+  else
     self.stunscaler = int(var_0) / 10;
-  }
 }
 
 unsetstunresistance() {
@@ -594,14 +596,16 @@ perkusedeathtracker() {
   self._useperkenabled = undefined;
 }
 
-setrearview() {}
+setrearview() {
+
+}
 
 unsetrearview() {
   self notify("end_perkUseTracker");
 }
 
 setendgame() {
-  if(isDefined(self.endgame)) {
+  if(isdefined(self.endgame)) {
     return;
   }
   self.maxhealth = maps\mp\gametypes\_tweakables::gettweakablevalue("player", "maxhealth") * 4;
@@ -618,7 +622,7 @@ unsetendgame() {
   self.endgame = undefined;
   maps\mp\_utility::revertvisionsetforplayer();
 
-  if(!isDefined(self.endgametimer)) {
+  if(!isdefined(self.endgametimer)) {
     return;
   }
   self.endgametimer maps\mp\gametypes\_hud_util::destroyelem();
@@ -677,14 +681,17 @@ unsetsteelnerves() {
   maps\mp\_utility::_unsetperk("specialty_holdbreath");
 }
 
-setdelaymine() {}
+setdelaymine() {
 
-unsetdelaymine() {}
+}
+
+unsetdelaymine() {
+
+}
 
 setlocaljammer() {
-  if(!maps\mp\_utility::isemped()) {
+  if(!maps\mp\_utility::isemped())
     self MakeScrambler();
-  }
 }
 
 unsetlocaljammer() {
@@ -717,14 +724,13 @@ onemanarmyweaponchangetracker() {
     maps\mp\_utility::gameFlagWait("prematch_done");
 
     last_weapon = self getcurrentweapon();
-    if(last_weapon == "onemanarmy_mp") {
+    if(last_weapon == "onemanarmy_mp")
       thread selectonemanarmyclass();
-    }
   } else {
     last_weapon = "";
   }
 
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change", var_0);
 
     if(var_0 != "onemanarmy_mp") {
@@ -852,7 +858,7 @@ giveonemanarmyclass(var_0) {
   maps\mp\gametypes\_class::setclass(classIndex);
   maps\mp\gametypes\_class::giveloadout(self.pers["team"], classIndex, undefined, 0);
 
-  if(!isDefined(self.spawnplayergivingloadout)) {
+  if(!isdefined(self.spawnplayergivingloadout)) {
     maps\mp\gametypes\_class::applyloadout();
     maps\mp\gametypes\_hardpoints::giveownedhardpointitem(true);
   }
@@ -860,9 +866,8 @@ giveonemanarmyclass(var_0) {
   self setweaponammoclip(weaponaltweaponname(self.primaryweapon), 0);
   self setweaponammostock(weaponaltweaponname(self.primaryweapon), 0);
 
-  if(isDefined(self.carryflag)) {
+  if(isdefined(self.carryflag))
     self attach(self.carryflag, "J_spine4", 1);
-  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -872,12 +877,11 @@ omausebar(duration) {
   self endon("disconnect");
   var_1 = maps\mp\gametypes\_hud_util::createprimaryprogressbar(0, -25);
   var_2 = maps\mp\gametypes\_hud_util::createprimaryprogressbartext(0, -25);
-  var_2 settext(&"MPUI_CHANGING_KIT");
+  var_2 settext( & "MPUI_CHANGING_KIT");
   var_1 maps\mp\gametypes\_hud_util::updatebar(0, 1 / duration);
 
-  for(var_3 = 0; var_3 < duration && isalive(self) && !level.gameended; var_3 += 0.05) {
+  for (var_3 = 0; var_3 < duration && isalive(self) && !level.gameended; var_3 += 0.05)
     wait 0.05;
-  }
 
   var_1 maps\mp\gametypes\_hud_util::destroyelem();
   var_2 maps\mp\gametypes\_hud_util::destroyelem();
@@ -903,7 +907,7 @@ blastshieldusetracker() {
   self endon("end_perkUseTracker");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("empty_offhand");
 
     if(!common_scripts\utility::isoffhandweaponenabled()) {
@@ -949,13 +953,17 @@ blastshield_overlay() {
   overlay destroy();
 }
 
-setfreefall() {}
+setfreefall() {
 
-unsetfreefall() {}
+}
+
+unsetfreefall() {
+
+}
 
 setpainted(var_0) {
   if(isplayer(self)) {
-    if(isDefined(var_0.specialty_paint_time) && !maps\mp\_utility::_hasperk("specialty_coldblooded")) {
+    if(isdefined(var_0.specialty_paint_time) && !maps\mp\_utility::_hasperk("specialty_coldblooded")) {
       self.painted = 1;
       self setperk("specialty_radararrow", 1, 0);
       thread unsetpainted(var_0.specialty_paint_time);
@@ -985,17 +993,15 @@ unsetpainted(var_0) {
 }
 
 ispainted() {
-  return isDefined(self.painted) && self.painted;
+  return isdefined(self.painted) && self.painted;
 }
 
 setrefillgrenades() {
-  if(isDefined(self.primarygrenade)) {
+  if(isdefined(self.primarygrenade))
     self givemaxammo(self.primarygrenade);
-  }
 
-  if(isDefined(self.secondarygrenade)) {
+  if(isdefined(self.secondarygrenade))
     self givemaxammo(self.secondarygrenade);
-  }
 }
 
 setfinalstand() {
@@ -1006,9 +1012,13 @@ unsetfinalstand() {
   maps\mp\_utility::_unsetperk("specialty_pistoldeath");
 }
 
-setuav() {}
+setuav() {
 
-unsetuav() {}
+}
+
+unsetuav() {
+
+}
 
 setstoppingpower() {}
 
@@ -1024,9 +1034,8 @@ setjuiced(var_0, var_1, var_2) {
   level endon("end_game");
   self.isjuiced = 1;
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 1.25;
-  }
 
   if(level.splitscreen) {
     var_3 = 56;
@@ -1036,11 +1045,10 @@ setjuiced(var_0, var_1, var_2) {
     var_4 = 32;
   }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 7;
-  }
 
-  if(!isDefined(var_2) || var_2 == 1) {
+  if(!isdefined(var_2) || var_2 == 1) {
     self.juicedtimer = maps\mp\gametypes\_hud_util::createtimer("hudsmall", 1.0);
     self.juicedtimer maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, var_3);
     self.juicedtimer settimer(var_1);
@@ -1062,12 +1070,12 @@ setjuiced(var_0, var_1, var_2) {
   thread unsetjuicedonride();
   wait(var_1 - 2);
 
-  if(isDefined(self.juicedicon)) {
+  if(isdefined(self.juicedicon)) {
     self.juicedicon fadeovertime(2.0);
     self.juicedicon.alpha = 0.0;
   }
 
-  if(isDefined(self.juicedtimer)) {
+  if(isdefined(self.juicedtimer)) {
     self.juicedtimer fadeovertime(2.0);
     self.juicedtimer.alpha = 0.0;
   }
@@ -1077,13 +1085,11 @@ setjuiced(var_0, var_1, var_2) {
 }
 
 unsetjuiced() {
-  if(isDefined(self.juicedicon)) {
+  if(isdefined(self.juicedicon))
     self.juicedicon destroy();
-  }
 
-  if(isDefined(self.juicedtimer)) {
+  if(isdefined(self.juicedtimer))
     self.juicedtimer destroy();
-  }
 
   self.isjuiced = undefined;
   self notify("unset_juiced");
@@ -1094,7 +1100,7 @@ unsetjuicedonride() {
   self endon("unset_juiced");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(maps\mp\_utility::isusingremote()) {
@@ -1112,10 +1118,10 @@ unsetjuicedondeath() {
 }
 
 setlightarmorhp(var_0) {
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     self.lightarmorhp = var_0;
 
-    if(isplayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
+    if(isplayer(self) && isdefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
       var_1 = clamp(self.lightarmorhp / self.maxlightarmorhp, 0, 1);
       self setclientomnvar("ui_light_armor_percent", var_1);
     }
@@ -1129,18 +1135,16 @@ setlightarmorhp(var_0) {
 setlightarmor(var_0) {
   self notify("give_light_armor");
 
-  if(isDefined(self.lightarmorhp)) {
+  if(isdefined(self.lightarmorhp))
     unsetlightarmor();
-  }
 
   thread removelightarmorondeath();
   thread removelightarmoronmatchend();
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     self.maxlightarmorhp = var_0;
-  } else {
+  else
     self.maxlightarmorhp = 150;
-  }
 
   setlightarmorhp(self.maxlightarmorhp);
 }
@@ -1166,5 +1170,5 @@ removelightarmoronmatchend() {
 }
 
 haslightarmor() {
-  return isDefined(self.lightarmorhp) && self.lightarmorhp > 0;
+  return isdefined(self.lightarmorhp) && self.lightarmorhp > 0;
 }

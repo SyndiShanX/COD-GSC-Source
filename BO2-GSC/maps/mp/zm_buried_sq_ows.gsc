@@ -17,11 +17,10 @@ init() {
 }
 
 init_stage() {
-  if(flag("sq_is_max_tower_built")) {
+  if(flag("sq_is_max_tower_built"))
     level thread stage_vo_max();
-  } else {
+  else
     level thread stage_vo_ric();
-  }
 
   level._cur_stage_name = "ows";
   clientnotify("ows");
@@ -51,7 +50,8 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {}
+exit_stage(success) {
+}
 
 ows_fountain_wait() {
   level endon("sq_ows_start");
@@ -62,7 +62,7 @@ ows_fountain_wait() {
   t_fountain triggerignoreteam();
   t_fountain usetriggerrequirelookat();
   t_fountain waittill("trigger");
-  t_fountain playSound("zmb_sq_coin_toss");
+  t_fountain playsound("zmb_sq_coin_toss");
   t_fountain delete();
   flag_set("sq_ows_start");
 }
@@ -76,9 +76,8 @@ ows_targets_start() {
   while(n_cur_second < 40) {
     a_spawn_spots = ows_targets_get_cur_spots(n_cur_second);
 
-    if(isDefined(a_spawn_spots) && a_spawn_spots.size > 0) {
+    if(isDefined(a_spawn_spots) && a_spawn_spots.size > 0)
       ows_targets_spawn(a_spawn_spots);
-    }
 
     wait 1;
     n_cur_second++;
@@ -102,9 +101,8 @@ ows_targets_get_cur_spots(n_time) {
     if(isDefined(s_spot.script_string)) {
       a_spawn_times = strtok(s_spot.script_string, " ");
 
-      if(isinarray(a_spawn_times, str_time)) {
+      if(isinarray(a_spawn_times, str_time))
         a_to_spawn[a_to_spawn.size] = s_spot;
-      }
     }
   }
 
@@ -115,16 +113,15 @@ ows_targets_spawn(a_spawn_spots) {
   foreach(s_spot in a_spawn_spots) {
     m_target = spawn("script_model", s_spot.origin);
     m_target.angles = s_spot.angles;
-    m_target setModel("p6_zm_bu_target");
+    m_target setmodel("p6_zm_bu_target");
     m_target ghost();
     wait_network_frame();
     m_target show();
-    playFXOnTag(level._effect["sq_spawn"], m_target, "tag_origin");
-    m_target playSound("zmb_sq_target_spawn");
+    playfxontag(level._effect["sq_spawn"], m_target, "tag_origin");
+    m_target playsound("zmb_sq_target_spawn");
 
-    if(isDefined(s_spot.target)) {
+    if(isDefined(s_spot.target))
       m_target thread ows_target_move(s_spot.target);
-    }
 
     m_target thread ows_target_think();
     m_target thread sndhit();
@@ -133,7 +130,7 @@ ows_targets_spawn(a_spawn_spots) {
 }
 
 ows_target_think() {
-  self setCanDamage(1);
+  self setcandamage(1);
   self thread ows_target_delete_timer();
   self waittill_either("ows_target_timeout", "damage");
 
@@ -165,14 +162,13 @@ ows_target_delete_timer() {
 }
 
 sndsidequestowsmusic() {
-  while(is_true(level.music_override)) {
+  while(is_true(level.music_override))
     wait 0.1;
-  }
 
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playLoopSound("mus_sidequest_ows");
+  ent playloopsound("mus_sidequest_ows");
   level waittill("sndEndOWSMusic");
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;
@@ -180,7 +176,7 @@ sndsidequestowsmusic() {
 
   if(!flag("sq_ows_success")) {
     wait 0.5;
-    ent playSound("mus_sidequest_0");
+    ent playsound("mus_sidequest_0");
   }
 
   wait 3.5;
@@ -190,11 +186,11 @@ sndsidequestowsmusic() {
 sndhit() {
   self endon("ows_target_timeout");
   self waittill("damage");
-  self playSound("zmb_sq_target_hit");
+  self playsound("zmb_sq_target_hit");
 }
 
 sndtime() {
   self endon("zmb_sq_target_hit");
   self waittill("ows_target_timeout");
-  self playSound("zmb_sq_target_flip");
+  self playsound("zmb_sq_target_flip");
 }

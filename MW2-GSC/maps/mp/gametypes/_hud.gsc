@@ -84,7 +84,7 @@ init() {
   precacheShader("progress_bar_fg");
   precacheShader("progress_bar_fill");
 
-  level.uiParent = spawnStruct();
+  level.uiParent = spawnstruct();
   level.uiParent.horzAlign = "left";
   level.uiParent.vertAlign = "top";
   level.uiParent.alignX = "left";
@@ -97,8 +97,8 @@ init() {
 
   level.fontHeight = 12;
 
-  level.hud["allies"] = spawnStruct();
-  level.hud["axis"] = spawnStruct();
+  level.hud["allies"] = spawnstruct();
+  level.hud["axis"] = spawnstruct();
 
   // we can, of course, separate out the following constants for splitscreen.	
   // primary progress bars are for things like capturing flags or planting bombs - big, important things that happen as you play a gametype
@@ -129,11 +129,10 @@ init() {
 
 fontPulseInit(maxFontScale) {
   self.baseFontScale = self.fontScale;
-  if(isDefined(maxFontScale)) {
+  if(isDefined(maxFontScale))
     self.maxFontScale = min(maxFontScale, 6.3);
-  } else {
+  else
     self.maxFontScale = min(self.fontScale * 2, 6.3);
-  }
   self.inFrames = 2;
   self.outFrames = 4;
 }

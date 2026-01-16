@@ -22,9 +22,8 @@ chase_dog() {
   level.baker thread maps\nml_util::slide_sounds(var_0.animation);
   var_0 maps\_anim::anim_generic(level.baker, var_0.animation);
 
-  if(!common_scripts\utility::flag("wolf_start_wolfpack")) {
+  if(!common_scripts\utility::flag("wolf_start_wolfpack"))
     level.baker setgoalpos(level.baker.origin);
-  }
 }
 
 chase_dog_dialogue() {
@@ -186,9 +185,8 @@ ghost_town_end() {
   level.merrick thread maps\_utility::smart_dialogue("nml_mrk_moveuptopof");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0) {
-    var_2.ignoreme = 0;
-  }
+  foreach(var_2 in var_0)
+  var_2.ignoreme = 0;
 }
 
 ghost_town_end_dialogue() {
@@ -225,9 +223,9 @@ stadium_pa() {
 ghost_town_sneak_end() {
   common_scripts\utility::flag_wait("ghosttown_end_patrol");
 
-  if(!common_scripts\utility::flag("merrick_done_talking")) {
+  if(!common_scripts\utility::flag("merrick_done_talking"))
     maps\_utility::smart_radio_dialogue_interrupt("nml_mrk_weaponsfree");
-  } else {
+  else {
     var_0 = getaiarray("axis");
 
     if(var_0.size > 0) {
@@ -415,9 +413,8 @@ wolf_setup() {
   maps\_utility::set_generic_run_anim("wolf_walk");
   maps\_utility::set_generic_idle_anim("dog_alert");
 
-  if(isDefined(self.script_moveplaybackrate)) {
+  if(isDefined(self.script_moveplaybackrate))
     self.moveplaybackrate = self.script_moveplaybackrate;
-  }
 
   wait(randomfloatrange(0, 1));
   maps\_utility::disable_arrivals();
@@ -436,9 +433,8 @@ wolf_growl() {
 #using_animtree("dog");
 
 wolf_face() {
-  if(getdvarint("black_wolf", 0)) {
+  if(getdvarint("black_wolf", 0))
     self setModel("fullbody_wolf_b");
-  }
 
   self setanimknobrestart( % nml_wolf_aggressive_face, 1, 0, 1);
 }
@@ -477,9 +473,8 @@ wolf_start_pos() {
   maps\_utility::disable_exits();
   maps\_utility::set_generic_run_anim("wolf_walk");
 
-  if(isDefined(self.script_moveplaybackrate)) {
+  if(isDefined(self.script_moveplaybackrate))
     maps\nml_util::set_move_rate(self.script_moveplaybackrate);
-  }
 
   level waittill("wolf_advance");
   wait(randomfloatrange(2.5, 4));
@@ -537,9 +532,8 @@ wolfpack_circle() {
 wolfpack_pack() {
   var_0 = getEntArray("wolf_2", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2.script_wait = 0.1;
-  }
+  foreach(var_2 in var_0)
+  var_2.script_wait = 0.1;
 
   thread maps\_spawner::flood_spawner_scripted(var_0);
   common_scripts\utility::flag_wait("wolfpack_pack");
@@ -650,17 +644,15 @@ wolf_event() {
   level.player stopsounds();
   level.player notify("stop soundfoot_slide_plr_loop");
 
-  if(isDefined(level.player.slidemodel)) {
+  if(isDefined(level.player.slidemodel))
     level.player.slidemodel delete();
-  }
 
   maps\_spawner::killspawner(100);
   var_4 = getaispeciesarray("axis");
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6) && isalive(var_6) && var_6 != level.main_wolf) {
+    if(isDefined(var_6) && isalive(var_6) && var_6 != level.main_wolf)
       var_6 thread maps\_utility_dogs::kill_dog_fur_effect_and_delete();
-    }
   }
 
   var_0 thread maps\_anim::anim_first_frame_solo(level.dog, "wolf_struggle_end");
@@ -668,9 +660,8 @@ wolf_event() {
   level.player common_scripts\utility::delaycall(1.3, ::playrumbleonentity, "grenade_rumble");
   level.player common_scripts\utility::delaycall(2.1, ::playrumbleonentity, "grenade_rumble");
 
-  if(!level.player isthrowinggrenade()) {
+  if(!level.player isthrowinggrenade())
     thread maps\_utility::autosave_now_silent();
-  }
 
   thread mash_to_survive();
   setsaveddvar("r_znear", 0.001);
@@ -753,9 +744,8 @@ wolf_dog_save(var_0, var_1, var_2) {
   maps\_utility::music_stop(0.25);
   level.player lerpviewangleclamp(2, 0, 0, 25, 5, 15, 15);
 
-  if(level.player getweaponammoclip("p226_scripted_nml") > 0) {
+  if(level.player getweaponammoclip("p226_scripted_nml") > 0)
     level.player setweaponammoclip("p226_scripted_nml", 2);
-  }
 
   var_2 delete();
   level.dog setgoalpos(level.dog.origin);
@@ -778,9 +768,8 @@ player_gets_pistol(var_0) {
   level.player.prevweapon = level.player getcurrentweapon();
   level.player.prevweapons = level.player getweaponslist("primary");
 
-  foreach(var_2 in level.player.prevweapons) {
-    level.player takeweapon(var_2);
-  }
+  foreach(var_2 in level.player.prevweapons)
+  level.player takeweapon(var_2);
 
   level.player disableoffhandweapons();
   level.player giveweapon("p226_scripted_nml");
@@ -883,9 +872,8 @@ merrick_scene(var_0) {
   maps\_utility::delaythread(1, common_scripts\utility::array_thread, var_11, maps\_utility::walkdist_reset);
 
   if(maps\_utility::is_gen4()) {
-    if(!isDefined(level.old_mb)) {
+    if(!isDefined(level.old_mb))
       level.old_mb = 0;
-    }
 
     setsaveddvar("r_mbEnable", level.old_mb);
   }
@@ -981,9 +969,8 @@ merrick_scene_player_unlink(var_0) {
   level.player allowprone(1);
   var_0 delete();
 
-  if(isDefined(level.player_rig)) {
+  if(isDefined(level.player_rig))
     level.player_rig delete();
-  }
 }
 
 merrick_scene_dialogue2() {
@@ -1001,9 +988,8 @@ set_bark_cairo() {
   level endon("wolfpack_pack");
   level endon("death");
 
-  for(;;) {
+  for(;;)
     level.dog maps\_utility::play_sound_on_entity("anml_dog_growl");
-  }
 }
 
 clear_bark_cairo() {}
@@ -1050,11 +1036,10 @@ faster_baker() {
     var_1 = anglesToForward(level.baker.angles);
     var_2 = vectordot(var_1, var_0);
 
-    if(var_2 > 0) {
+    if(var_2 > 0)
       level.baker maps\nml_util::set_move_rate(1.15);
-    } else {
+    else
       level.baker maps\nml_util::set_move_rate(1.0);
-    }
   }
 }
 
@@ -1132,9 +1117,8 @@ wait_until_enemies_in_volume(var_0, var_1) {
 
     if(var_4 - var_1 < 3) {
       foreach(var_6 in var_3) {
-        if(var_6 maps\_utility::doinglongdeath() || var_6.delayeddeath) {
+        if(var_6 maps\_utility::doinglongdeath() || var_6.delayeddeath)
           var_4--;
-        }
       }
     }
   }
@@ -1159,13 +1143,11 @@ set_default_team_move_speed() {
   level.dog maps\nml_util::set_move_rate(0.7);
   level.player setmovespeedscale(1.0);
 
-  if(isDefined(level.merrick)) {
+  if(isDefined(level.merrick))
     level.merrick maps\nml_util::set_move_rate(1.0);
-  }
 
-  if(isDefined(level.keegan)) {
+  if(isDefined(level.keegan))
     level.keegan maps\nml_util::set_move_rate(1.0);
-  }
 }
 
 set_ignore_states() {
@@ -1216,47 +1198,40 @@ set_team_colors() {
   level.baker maps\_utility::set_force_color("r");
   level.dog maps\_utility::set_force_color("o");
 
-  if(isDefined(level.merrick)) {
+  if(isDefined(level.merrick))
     level.merrick maps\_utility::set_force_color("p");
-  }
 
-  if(isDefined(level.keegan)) {
+  if(isDefined(level.keegan))
     level.keegan maps\_utility::set_force_color("b");
-  }
 }
 
 enable_team_color() {
   level.baker maps\_utility::enable_ai_color();
   level.dog maps\_utility::enable_ai_color();
 
-  if(isDefined(level.merrick)) {
+  if(isDefined(level.merrick))
     level.merrick maps\_utility::enable_ai_color();
-  }
 
-  if(isDefined(level.keegan)) {
+  if(isDefined(level.keegan))
     level.keegan maps\_utility::enable_ai_color();
-  }
 }
 
 disable_team_color() {
   level.baker maps\_utility::disable_ai_color();
   level.dog maps\_utility::disable_ai_color();
 
-  if(isDefined(level.merrick)) {
+  if(isDefined(level.merrick))
     level.merrick maps\_utility::disable_ai_color();
-  }
 
-  if(isDefined(level.keegan)) {
+  if(isDefined(level.keegan))
     level.keegan maps\_utility::disable_ai_color();
-  }
 }
 
 trigger_activate_targetname_safe(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 notify("trigger");
-  }
 }
 
 select_and_move(var_0, var_1) {
@@ -1281,9 +1256,8 @@ select_and_targetplayer(var_0) {
   var_3 = maps\_utility::remove_dead_from_array(var_1);
 
   foreach(var_5 in var_3) {
-    if(var_5 istouching(var_2) && isDefined(var_5)) {
+    if(var_5 istouching(var_2) && isDefined(var_5))
       var_5.favoriteenemy = level.player;
-    }
   }
 }
 
@@ -1331,9 +1305,8 @@ increase_difficulty() {
   thread lerp_maxalpha_overtime(45, 3);
   wait 3;
 
-  if(level.gameskill > 1) {
+  if(level.gameskill > 1)
     level.fade_out_death_time = 0.3;
-  }
 }
 
 lerp_maxalpha_overtime(var_0, var_1) {
@@ -1379,13 +1352,11 @@ wait_for_x_input() {
   level.player endon("death");
   level endon("wolf_scene_end");
 
-  while(use_pressed()) {
+  while(use_pressed())
     wait 0.05;
-  }
 
-  while(!use_pressed()) {
+  while(!use_pressed())
     wait 0.05;
-  }
 
   level notify("player_hit_x");
   var_0 = getdvarint("cg_fov", level.drown_max_alpha);
@@ -1405,13 +1376,11 @@ fade_in_to_alpha(var_0, var_1) {
 }
 
 fade_in_x_hint(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1.5;
-  }
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   foreach(var_2 in level.x_hint) {
     var_2 fadeovertime(var_0);
@@ -1429,11 +1398,10 @@ draw_x_hint() {
   var_2.alignx = "right";
   var_2 set_default_hud_stuff();
 
-  if(!level.console && !level.player usinggamepad()) {
+  if(!level.console && !level.player usinggamepad())
     var_2 settext(&"NML_HINT_X_KB");
-  } else {
+  else
     var_2 settext(&"NML_HINT_X");
-  }
 
   var_3 = [];
   var_3["text"] = var_2;
@@ -1444,9 +1412,8 @@ x_hint_blinks() {
   level notify("fade_out_x_hint");
   level endon("fade_out_x_hint");
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   var_0 = 0.2;
   var_1 = 0.1;
@@ -1465,22 +1432,20 @@ x_hint_blinks() {
     var_5.alpha = 0.95;
     var_5 changefontscaleovertime(0.01);
 
-    if(!level.console && !level.player usinggamepad()) {
+    if(!level.console && !level.player usinggamepad())
       var_5.fontscale = 2;
-    } else {
+    else
       var_5.fontscale = 2 * var_6;
-    }
 
     wait 0.1;
     var_5 fadeovertime(var_0);
     var_5.alpha = 0.0;
     var_5 changefontscaleovertime(var_0);
 
-    if(!level.console && !level.player usinggamepad()) {
+    if(!level.console && !level.player usinggamepad())
       var_5.fontscale = 0.25;
-    } else {
+    else
       var_5.fontscale = 0.25 * var_6;
-    }
 
     wait(var_1);
     var_7 = 4;
@@ -1490,9 +1455,8 @@ x_hint_blinks() {
         break;
       }
 
-      foreach(var_3 in level.x_hint) {
-        var_3.alpha = 0;
-      }
+      foreach(var_3 in level.x_hint)
+      var_3.alpha = 0;
 
       var_0 = 0.1;
       var_1 = 0.1;
@@ -1504,13 +1468,11 @@ x_hint_blinks() {
 fade_out_x_hint(var_0) {
   level notify("fade_out_x_hint");
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1.5;
-  }
 
-  if(!isDefined(level.x_hint)) {
+  if(!isDefined(level.x_hint))
     draw_x_hint();
-  }
 
   foreach(var_2 in level.x_hint) {
     var_2 fadeovertime(var_0);
@@ -1531,11 +1493,10 @@ set_default_hud_stuff() {
 }
 
 use_pressed() {
-  if(!level.console && !level.player usinggamepad()) {
+  if(!level.console && !level.player usinggamepad())
     return level.player attackbuttonpressed();
-  } else {
+  else
     return level.player usebuttonpressed();
-  }
 }
 
 wolf_scene_end() {
@@ -1600,9 +1561,8 @@ keegan_snipes(var_0) {
         var_5 = bullettracepassed(level.keegan gettagorigin("tag_flash"), var_4 getEye(), 0, level.keegan);
 
         if(var_5) {
-          if(isDefined(var_0) && common_scripts\utility::cointoss()) {
+          if(isDefined(var_0) && common_scripts\utility::cointoss())
             maps\_utility::smart_radio_dialogue("nml_kgn_exposed_acquired");
-          }
 
           if(!isalive(var_4)) {
             continue;
@@ -1611,15 +1571,13 @@ keegan_snipes(var_0) {
           level.keegan thread maps\_utility::play_sound_on_tag("weap_l115a3_fire_npc", "tag_flash");
           var_6 = var_4.origin;
 
-          if(distance2d(level.player.origin, level.keegan.origin) < 300) {
+          if(distance2d(level.player.origin, level.keegan.origin) < 300)
             level.keegan maps\nml_stealth::magic_stealth_shot(var_4);
-          } else {
+          else
             level.keegan maps\nml_stealth::magic_stealth_shot(var_4, 2);
-          }
 
-          if(!common_scripts\utility::flag("ghosttown_end_patrol")) {
+          if(!common_scripts\utility::flag("ghosttown_end_patrol"))
             thread teammates_react(var_6);
-          }
 
           wait 0.5;
           maps\_utility::smart_radio_dialogue("nml_kgn_inform_killfirm_generic");
@@ -1639,18 +1597,16 @@ teammates_react(var_0) {
   foreach(var_3 in var_1) {
     var_4 = distance2d(var_3.origin, var_0);
 
-    if(isalive(var_3) && var_4 < 400) {
+    if(isalive(var_3) && var_4 < 400)
       var_3 maps\_utility::delaythread(randomfloat(0.3), ::guy_react, var_4 < 300);
-    }
   }
 }
 
 guy_react(var_0) {
-  if(var_0) {
+  if(var_0)
     var_1 = ["exposed_dive_grenade_B", "exposed_dive_grenade_F"];
-  } else {
+  else
     var_1 = ["_stealth_behavior_generic1", "_stealth_behavior_generic2"];
-  }
 
   var_2 = common_scripts\utility::random(var_1);
   self notify("end_patrol");

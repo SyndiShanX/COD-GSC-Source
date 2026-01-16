@@ -82,9 +82,8 @@ ending() {
 move_to_breach() {
   var_0 = getent("garage_ally_move480", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 
   maps\_utility::activate_trigger_with_targetname("ending_color_order_start");
 }
@@ -92,9 +91,8 @@ move_to_breach() {
 ending_set_stacked_flag(var_0) {
   var_1 = getnode("ending_ally_" + var_0 + "_node", "targetname");
 
-  while(distance(self.origin, var_1.origin) > 32) {
+  while(distance(self.origin, var_1.origin) > 32)
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("ending_ally_" + var_0 + "_breach_ready");
 }
@@ -107,17 +105,15 @@ door_open(var_0, var_1) {
   foreach(var_6 in var_2) {
     var_6 rotateyaw(130, var_4, 0, 0.2);
 
-    if(var_6.classname == "script_brushmodel") {
+    if(var_6.classname == "script_brushmodel")
       var_6 connectpaths();
-    }
   }
 
   foreach(var_6 in var_3) {
     var_6 rotateyaw(-130, var_4, 0, 0.2);
 
-    if(var_6.classname == "script_brushmodel") {
+    if(var_6.classname == "script_brushmodel")
       var_6 connectpaths();
-    }
   }
 
   wait(var_4);
@@ -132,17 +128,14 @@ door_close_behind() {
   var_3 = "";
 
   foreach(var_5 in var_0) {
-    if(var_5 == level.allies[0]) {
+    if(var_5 == level.allies[0])
       var_3 = "ending_door_teleport_0";
-    }
 
-    if(var_5 == level.allies[1]) {
+    if(var_5 == level.allies[1])
       var_3 = "ending_door_teleport_1";
-    }
 
-    if(var_5 == level.allies[2]) {
+    if(var_5 == level.allies[2])
       var_3 = "ending_door_teleport_2";
-    }
 
     var_6 = common_scripts\utility::getstruct(var_3, "targetname");
     var_5 forceteleport(var_6.origin, var_6.angles);
@@ -159,17 +152,15 @@ door_close_behind() {
     foreach(var_12 in var_8) {
       var_12 rotateyaw(-130, var_10, 0, 0.2);
 
-      if(var_12.classname == "script_brushmodel") {
+      if(var_12.classname == "script_brushmodel")
         var_12 disconnectpaths();
-      }
     }
 
     foreach(var_12 in var_9) {
       var_12 rotateyaw(130, var_10, 0, 0.2);
 
-      if(var_12.classname == "script_brushmodel") {
+      if(var_12.classname == "script_brushmodel")
         var_12 disconnectpaths();
-      }
     }
   }
 }
@@ -186,7 +177,7 @@ final_sequence_fail_condition() {
   level endon("missionfailed");
   level endon("vignette_ending_player_jumped_flag");
   wait 6.0;
-  setdvar("ui_deadquote", &"FLOOD_ENDING_JUMP_FAIL");
+  setdvar("ui_deadquote", & "FLOOD_ENDING_JUMP_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -212,9 +203,8 @@ ending_player_reach_final_sequence() {
   self endon("weapon_fired");
   self endon("grenade_fire");
 
-  while(72 < distance(level.player.origin, level.ending_heli gettagorigin("doorHinge_BB_mid"))) {
+  while(72 < distance(level.player.origin, level.ending_heli gettagorigin("doorHinge_BB_mid")))
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("vignette_ending_player_jumped_flag");
   level.ending_opfor_0 thread maps\_utility::magic_bullet_shield();
@@ -316,13 +306,11 @@ ending_player_qte_0_logic() {
   self waittill("qte_0_start");
   level thread ending_qte_0_prompt_logic();
 
-  while(level.player attackbuttonpressed()) {
+  while(level.player attackbuttonpressed())
     wait 0.05;
-  }
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackbuttonpressed())
     wait 0.05;
-  }
 
   self playrumbleonentity("heavygun_fire");
   playFXOnTag(level._effect["vfx_muz_pis_w"], level.ending_gun, "tag_flash");
@@ -365,9 +353,8 @@ ending_player_pickup_logic() {
   ending_fade_qte_prompt(0.05, 0.0);
   ending_destroy_qte_prompt();
 
-  if(level.can_still_save_price) {
+  if(level.can_still_save_price)
     common_scripts\utility::flag_set("vignette_ending_qte_pickup_gun");
-  }
 }
 
 ending_player_qte_shoot_logic() {
@@ -434,7 +421,7 @@ ending_player_qte_failure_logic() {
 
   if(var_1 == level.player && !common_scripts\utility::flag("already_failing")) {
     common_scripts\utility::flag_set("already_failing");
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
     level thread maps\_utility::missionfailedwrapper();
   }
 }
@@ -465,9 +452,8 @@ ending_player_fov_change() {
     wait 1.0;
     var_1 = var_1 - 2;
 
-    if(!common_scripts\utility::flag("smash_rate_bad")) {
+    if(!common_scripts\utility::flag("smash_rate_bad"))
       self lerpfov(var_1, 1.0);
-    }
   }
 
   self lerpfov(var_0, 2.5);
@@ -477,15 +463,13 @@ ending_player_qte_button_smash_logic() {
   self.button_smash_count = 0;
 
   while(!common_scripts\utility::flag("vignette_ending_qte_grabbed")) {
-    while(!level.player usebuttonpressed()) {
+    while(!level.player usebuttonpressed())
       wait 0.05;
-    }
 
     self.button_smash_count++;
 
-    while(level.player usebuttonpressed()) {
+    while(level.player usebuttonpressed())
       wait 0.05;
-    }
   }
 }
 
@@ -503,23 +487,20 @@ ending_player_qte_show_and_blink_logic() {
 ending_player_let_go_interaction(var_0) {
   level endon("ending_player_failed");
 
-  if(isDefined(level.console) && level.console) {
+  if(isDefined(level.console) && level.console)
     ending_create_qte_prompt(&"FLOOD_ENDING_QTE_4B_PROMPT_TEXT");
-  } else {
+  else
     ending_create_qte_prompt(&"FLOOD_ENDING_QTE_4_PROMPT_TEXT");
-  }
 
   level thread ending_fade_qte_prompt(0.2, 1.0);
   common_scripts\utility::flag_wait("qte_prompt_solid");
 
   if(isDefined(level.console) && level.console) {
-    while(!level.player buttonpressed("BUTTON_B")) {
+    while(!level.player buttonpressed("BUTTON_B"))
       common_scripts\utility::waitframe();
-    }
   } else {
-    while(!level.player meleebuttonpressed()) {
+    while(!level.player meleebuttonpressed())
       common_scripts\utility::waitframe();
-    }
   }
 
   level thread ending_fade_qte_prompt(0.2, 0.0);
@@ -548,9 +529,8 @@ ending_let_go_scene_player_experience() {
 }
 
 ending_create_qte_prompt(var_0, var_1) {
-  if(!isDefined(var_0)) {
-    var_0 = &"FLOOD_ENDING_QTE_0_PROMPT";
-  }
+  if(!isDefined(var_0))
+    var_0 = & "FLOOD_ENDING_QTE_0_PROMPT";
 
   var_2 = 90;
   var_3 = 35;
@@ -559,13 +539,13 @@ ending_create_qte_prompt(var_0, var_1) {
   var_6 = 90;
   var_7 = [];
 
-  if(var_0 == &"FLOOD_ENDING_QTE_1_PROMPT") {
+  if(var_0 == & "FLOOD_ENDING_QTE_1_PROMPT") {
     var_3 = -3;
     var_2 = 70;
     var_4 = 1.5;
     var_5 = 3;
     var_6 = 95;
-  } else if(var_0 == &"FLOOD_ENDING_QTE_3_PROMPT" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_PC" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLE" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW")
+  } else if(var_0 == & "FLOOD_ENDING_QTE_3_PROMPT" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_PC" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLE" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW")
     var_2 = getdvarfloat("foo");
 
   var_8 = level.player maps\_hud_util::createclientfontstring("default", var_4);
@@ -601,7 +581,7 @@ ending_create_qte_prompt(var_0, var_1) {
     var_7["icon"] = var_9;
   }
 
-  if(var_0 == &"FLOOD_ENDING_QTE_2_PROMPT") {
+  if(var_0 == & "FLOOD_ENDING_QTE_2_PROMPT") {
     var_8 = level.player maps\_hud_util::createclientfontstring("default", var_4);
     var_8.x = var_3 * -1 + 24;
     var_8.y = var_2 - 2;
@@ -627,9 +607,8 @@ ending_destroy_qte_prompt() {
 
   level notify("stop_blink");
 
-  foreach(var_1 in level.ending_qte_prompt) {
-    var_1 destroy();
-  }
+  foreach(var_1 in level.ending_qte_prompt)
+  var_1 destroy();
 
   level.ending_qte_prompt = undefined;
 }
@@ -638,9 +617,8 @@ ending_fade_qte_prompt(var_0, var_1) {
   if(!isDefined(level.ending_qte_prompt)) {
     return;
   }
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1.5;
-  }
 
   foreach(var_3 in level.ending_qte_prompt) {
     var_3 fadeovertime(var_0);
@@ -704,9 +682,8 @@ ending_player_camera_logic() {
 ending_player_weapon_logic() {
   var_0 = self getweaponslistall();
 
-  foreach(var_2 in var_0) {
-    self takeweapon(var_2);
-  }
+  foreach(var_2 in var_0)
+  self takeweapon(var_2);
 
   self giveweapon("p226_flood_ending");
   self switchtoweapon("p226_flood_ending");
@@ -730,20 +707,19 @@ ending_qte_catch(var_0) {
   common_scripts\utility::flag_wait("ending_qte_catch_active");
   wait 0.05;
 
-  while(!self adsbuttonpressed() || !self attackbuttonpressed()) {
+  while(!self adsbuttonpressed() || !self attackbuttonpressed())
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("vignette_ending_qte_success");
 }
 
 ending_qte_catch_prompt(var_0) {
-  var_1 = &"FLOOD_ENDING_QTE_3_PROMPT";
+  var_1 = & "FLOOD_ENDING_QTE_3_PROMPT";
 
   if(maps\flood_util::game_is_pc()) {
-    maps\flood_util::registeractionbinding("ADS", "+speed_throw", &"FLOOD_ENDING_QTE_3_PROMPT_PC");
-    maps\flood_util::registeractionbinding("ADS", "+toggleads", &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLE");
-    maps\flood_util::registeractionbinding("ADS", "+toggleads_throw", &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW");
+    maps\flood_util::registeractionbinding("ADS", "+speed_throw", & "FLOOD_ENDING_QTE_3_PROMPT_PC");
+    maps\flood_util::registeractionbinding("ADS", "+toggleads", & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLE");
+    maps\flood_util::registeractionbinding("ADS", "+toggleads_throw", & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW");
     var_2 = maps\flood_util::getactionbind("ADS");
     var_1 = var_2.hint;
   }
@@ -829,9 +805,8 @@ ending_transition() {
     }
 
     if(3 > var_1.size && !var_0) {
-      foreach(var_3 in var_1) {
-        var_3.attackeraccuracy = 25;
-      }
+      foreach(var_3 in var_1)
+      var_3.attackeraccuracy = 25;
 
       maps\_utility::activate_trigger_with_targetname("ending_heli_path");
       var_0 = 1;
@@ -873,9 +848,8 @@ ending_vo_main() {
   common_scripts\utility::flag_clear("rooftops_vo_push_forward_hassle");
   common_scripts\utility::flag_wait("ending_vo_1");
 
-  if(!common_scripts\utility::flag("garage_done")) {
+  if(!common_scripts\utility::flag("garage_done"))
     level.allies[0] thread maps\_utility::smart_dialogue("flood_pri_wegottoget");
-  }
 
   if(!common_scripts\utility::flag("rooftops_vo_push_forward_hassle")) {
     level.allies[0] thread maps\flood_util::nag_end_on_notify(maps\_utility::make_array("flood_pri_eliasgetthedoor", "flood_pri_openthedoorwell", "flood_pri_weregonnalosegarcia"), "flag_set", 1);
@@ -933,9 +907,8 @@ ending_heli_callout_vo() {
   level.ending_vo_heli_time = gettime();
   common_scripts\utility::flag_wait("player_entering_final_area");
 
-  if(isDefined(level.ending_heli_path)) {
+  if(isDefined(level.ending_heli_path))
     level.ending_heli_path delete();
-  }
 }
 
 ending_open_doors() {
@@ -950,15 +923,13 @@ ending_swing_doors_open() {
   var_2 = 0.3;
 
   foreach(var_4 in var_0) {
-    if(var_4.classname == "script_brushmodel") {
+    if(var_4.classname == "script_brushmodel")
       var_4 connectpaths();
-    }
   }
 
   foreach(var_4 in var_1) {
-    if(var_4.classname == "script_brushmodel") {
+    if(var_4.classname == "script_brushmodel")
       var_4 connectpaths();
-    }
   }
 
   getnode("ending_trouble_node", "targetname") disconnectnode();

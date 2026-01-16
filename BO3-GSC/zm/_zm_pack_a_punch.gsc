@@ -30,7 +30,7 @@
 #namespace _zm_pack_a_punch;
 
 function autoexec __init__sytem__() {
-  system::register("zm_pack_a_punch", &__init__, &__main__, undefined);
+  system::register("zm_pack_a_punch", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -39,34 +39,34 @@ function __init__() {
 }
 
 function __main__() {
-  if(!isDefined(level.pap_zbarrier_state_func)) {
-    level.pap_zbarrier_state_func = &process_pap_zbarrier_state;
+  if(!isdefined(level.pap_zbarrier_state_func)) {
+    level.pap_zbarrier_state_func = & process_pap_zbarrier_state;
   }
   spawn_init();
   vending_weapon_upgrade_trigger = zm_pap_util::get_triggers();
   if(vending_weapon_upgrade_trigger.size >= 1) {
-    array::thread_all(vending_weapon_upgrade_trigger, &vending_weapon_upgrade);
+    array::thread_all(vending_weapon_upgrade_trigger, & vending_weapon_upgrade);
   }
-  old_packs = getEntArray("zombie_vending_upgrade", "targetname");
-  for(i = 0; i < old_packs.size; i++) {
+  old_packs = getentarray("zombie_vending_upgrade", "targetname");
+  for (i = 0; i < old_packs.size; i++) {
     vending_weapon_upgrade_trigger[vending_weapon_upgrade_trigger.size] = old_packs[i];
   }
   level flag::init("pack_machine_in_use");
 }
 
 function private spawn_init() {
-  zbarriers = getEntArray("zm_pack_a_punch", "targetname");
-  for(i = 0; i < zbarriers.size; i++) {
+  zbarriers = getentarray("zm_pack_a_punch", "targetname");
+  for (i = 0; i < zbarriers.size; i++) {
     if(!zbarriers[i] iszbarrier()) {
       continue;
     }
-    if(!isDefined(level.pack_a_punch.interaction_height)) {
+    if(!isdefined(level.pack_a_punch.interaction_height)) {
       level.pack_a_punch.interaction_height = 35;
     }
-    if(!isDefined(level.pack_a_punch.interaction_trigger_radius)) {
+    if(!isdefined(level.pack_a_punch.interaction_trigger_radius)) {
       level.pack_a_punch.interaction_trigger_radius = 40;
     }
-    if(!isDefined(level.pack_a_punch.interaction_trigger_height)) {
+    if(!isdefined(level.pack_a_punch.interaction_trigger_height)) {
       level.pack_a_punch.interaction_trigger_height = 70;
     }
     use_trigger = spawn("trigger_radius_use", zbarriers[i].origin + (0, 0, level.pack_a_punch.interaction_height), 0, level.pack_a_punch.interaction_trigger_radius, level.pack_a_punch.interaction_trigger_height);
@@ -76,7 +76,7 @@ function private spawn_init() {
     use_trigger flag::init("pap_offering_gun");
     collision = spawn("script_model", zbarriers[i].origin, 1);
     collision.angles = zbarriers[i].angles;
-    collision setModel("zm_collision_perks1");
+    collision setmodel("zm_collision_perks1");
     collision.script_noteworthy = "clip";
     collision disconnectpaths();
     use_trigger.clip = collision;
@@ -87,13 +87,13 @@ function private spawn_init() {
     use_trigger.target = "vending_packapunch";
     use_trigger.zbarrier.targetname = "vending_packapunch";
     powered_on = get_start_state();
-    use_trigger.powered = zm_power::add_powered_item(&turn_on, &turn_off, &get_range, &cost_func, 0, powered_on, use_trigger);
-    if(isDefined(level.pack_a_punch.custom_power_think)) {
+    use_trigger.powered = zm_power::add_powered_item( & turn_on, & turn_off, & get_range, & cost_func, 0, powered_on, use_trigger);
+    if(isdefined(level.pack_a_punch.custom_power_think)) {
       use_trigger thread[[level.pack_a_punch.custom_power_think]](powered_on);
     } else {
       use_trigger thread toggle_think(powered_on);
     }
-    if(!isDefined(level.pack_a_punch.triggers)) {
+    if(!isdefined(level.pack_a_punch.triggers)) {
       level.pack_a_punch.triggers = [];
     } else if(!isarray(level.pack_a_punch.triggers)) {
       level.pack_a_punch.triggers = array(level.pack_a_punch.triggers);
@@ -106,7 +106,7 @@ function private pap_trigger_hintstring_monitor() {
   level endon("pack_a_punch_off");
   level waittill("pack_a_punch_on");
   self thread pap_trigger_hintstring_monitor_reset();
-  while(true) {
+  while (true) {
     foreach(e_player in level.players) {
       if(e_player istouching(self)) {
         self zm_pap_util::update_hint_string(e_player);
@@ -142,7 +142,7 @@ function private third_person_weapon_upgrade(current_weapon, upgrade_weapon, pac
   angles_offset = (0, 0, 0);
   origin_base = self.origin;
   angles_base = self.angles;
-  if(isDefined(rel_entity)) {
+  if(isdefined(rel_entity)) {
     origin_offset = (0, 0, level.pack_a_punch.interaction_height);
     angles_offset = vectorscale((0, 1, 0), 90);
     origin_base = rel_entity.origin;
@@ -150,19 +150,19 @@ function private third_person_weapon_upgrade(current_weapon, upgrade_weapon, pac
   } else {
     rel_entity = self;
   }
-  forward = anglesToForward(angles_base + angles_offset);
+  forward = anglestoforward(angles_base + angles_offset);
   interact_offset = origin_offset + (forward * -25);
   offsetdw = vectorscale((1, 1, 1), 3);
   pap_machine[[level.pack_a_punch.move_in_func]](self, trigger, origin_offset, angles_offset);
-  self playSound("zmb_perks_packa_upgrade");
+  self playsound("zmb_perks_packa_upgrade");
   wait(0.35);
   wait(3);
   trigger.zbarrier setweapon(upgrade_weapon);
   trigger.zbarrier setweaponoptions(trigger.upgrade_weapon_options);
   trigger.zbarrier setattachmentcosmeticvariantindexes(trigger.upgrade_weapon_acvi);
   trigger.zbarrier set_pap_zbarrier_state("eject_gun");
-  if(isDefined(self)) {
-    self playSound("zmb_perks_packa_ready");
+  if(isdefined(self)) {
+    self playsound("zmb_perks_packa_ready");
   } else {
     return;
   }
@@ -176,7 +176,7 @@ function private can_pack_weapon(weapon) {
   if(level flag::get("pack_machine_in_use")) {
     return true;
   }
-  if(!(isDefined(level.b_allow_idgun_pap) && level.b_allow_idgun_pap) && isDefined(level.idgun_weapons)) {
+  if(!(isdefined(level.b_allow_idgun_pap) && level.b_allow_idgun_pap) && isdefined(level.idgun_weapons)) {
     if(isinarray(level.idgun_weapons, weapon)) {
       return false;
     }
@@ -192,7 +192,7 @@ function private can_pack_weapon(weapon) {
 }
 
 function private player_use_can_pack_now() {
-  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission) || self isthrowinggrenade()) {
+  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission) || self isthrowinggrenade()) {
     return false;
   }
   if(!self zm_magicbox::can_buy_weapon() || self bgb::is_enabled("zm_bgb_disorderly_combat")) {
@@ -213,10 +213,10 @@ function private pack_a_punch_machine_trigger_think() {
   self endon("pack_a_punch_off");
   self notify("pack_a_punch_trigger_think");
   self endon("pack_a_punch_trigger_think");
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
-      if(isDefined(self.pack_player) && self.pack_player != players[i] || !players[i] player_use_can_pack_now() || players[i] bgb::is_active("zm_bgb_ephemeral_enhancement")) {
+    for (i = 0; i < players.size; i++) {
+      if(isdefined(self.pack_player) && self.pack_player != players[i] || !players[i] player_use_can_pack_now() || players[i] bgb::is_active("zm_bgb_ephemeral_enhancement")) {
         self setinvisibletoplayer(players[i], 1);
         continue;
       }
@@ -230,7 +230,7 @@ function private vending_weapon_upgrade() {
   level endon("pack_a_punch_off");
   pap_machine = getent(self.target, "targetname");
   self.pap_machine = pap_machine;
-  pap_machine_sound = getEntArray("perksacola", "targetname");
+  pap_machine_sound = getentarray("perksacola", "targetname");
   packa_rollers = spawn("script_origin", self.origin);
   packa_timer = spawn("script_origin", self.origin);
   packa_rollers linkto(self);
@@ -245,29 +245,29 @@ function private vending_weapon_upgrade() {
     level waittill("pack_a_punch_on");
   }
   self triggerenable(1);
-  if(isDefined(level.pack_a_punch.power_on_callback)) {
+  if(isdefined(level.pack_a_punch.power_on_callback)) {
     pap_machine thread[[level.pack_a_punch.power_on_callback]]();
   }
   self thread pack_a_punch_machine_trigger_think();
-  pap_machine playLoopSound("zmb_perks_packa_loop");
+  pap_machine playloopsound("zmb_perks_packa_loop");
   self thread shutoffpapsounds(pap_machine, packa_rollers, packa_timer);
   self thread vending_weapon_upgrade_cost();
-  for(;;) {
+  for (;;) {
     self.pack_player = undefined;
     self waittill("trigger", player);
-    if(isDefined(pap_machine.state) && pap_machine.state == "leaving") {
+    if(isdefined(pap_machine.state) && pap_machine.state == "leaving") {
       continue;
     }
     index = zm_utility::get_player_index(player);
     current_weapon = player getcurrentweapon();
     current_weapon = player zm_weapons::switch_from_alt_weapon(current_weapon);
-    if(isDefined(level.pack_a_punch.custom_validation)) {
+    if(isdefined(level.pack_a_punch.custom_validation)) {
       valid = self[[level.pack_a_punch.custom_validation]](player);
       if(!valid) {
         continue;
       }
     }
-    if(!player zm_magicbox::can_buy_weapon() || player laststand::player_is_in_laststand() || (isDefined(player.intermission) && player.intermission) || player isthrowinggrenade() || (!player zm_weapons::can_upgrade_weapon(current_weapon) && !zm_weapons::weapon_supports_aat(current_weapon))) {
+    if(!player zm_magicbox::can_buy_weapon() || player laststand::player_is_in_laststand() || (isdefined(player.intermission) && player.intermission) || player isthrowinggrenade() || (!player zm_weapons::can_upgrade_weapon(current_weapon) && !zm_weapons::weapon_supports_aat(current_weapon))) {
       wait(0.1);
       continue;
     }
@@ -292,7 +292,7 @@ function private vending_weapon_upgrade() {
     if(b_weapon_supports_aat) {
       current_cost = self.aat_cost;
       currentaat = player aat::getaatonweapon(current_weapon);
-      if(isDefined(currentaat)) {
+      if(isdefined(currentaat)) {
         currentaathashid = currentaat.var_2c8ee667;
       }
       player.restore_ammo = 1;
@@ -306,8 +306,8 @@ function private vending_weapon_upgrade() {
       current_cost = player zm_pers_upgrades_functions::pers_upgrade_double_points_cost(current_cost);
     }
     if(!player zm_score::can_player_purchase(current_cost)) {
-      self playSound("zmb_perks_packa_deny");
-      if(isDefined(level.pack_a_punch.custom_deny_func)) {
+      self playsound("zmb_perks_packa_deny");
+      if(isdefined(level.pack_a_punch.custom_deny_func)) {
         player[[level.pack_a_punch.custom_deny_func]]();
       } else {
         player zm_audio::create_and_play_dialog("general", "outofmoney", 0);
@@ -320,10 +320,10 @@ function private vending_weapon_upgrade() {
     player zm_stats::increment_client_stat("use_pap");
     player zm_stats::increment_player_stat("use_pap");
     weaponidx = undefined;
-    if(isDefined(current_weapon)) {
+    if(isdefined(current_weapon)) {
       weaponidx = matchrecordgetweaponindex(current_weapon);
     }
-    if(isDefined(weaponidx)) {
+    if(isdefined(weaponidx)) {
       if(!isrepack) {
         player recordmapevent(19, gettime(), player.origin, level.round_number, weaponidx, current_cost);
         player zm_stats::increment_challenge_stat("ZM_DAILY_PACK_5_WEAPONS");
@@ -345,7 +345,7 @@ function private vending_weapon_upgrade() {
     self triggerenable(1);
     self setcursorhint("HINT_WEAPON", upgrade_weapon);
     self flag::set("pap_offering_gun");
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       self setinvisibletoall();
       self setvisibletoplayer(player);
       self thread wait_for_player_to_take(player, current_weapon, packa_timer, b_weapon_supports_aat, isrepack);
@@ -365,7 +365,7 @@ function private vending_weapon_upgrade() {
 }
 
 function private shutoffpapsounds(ent1, ent2, ent3) {
-  while(true) {
+  while (true) {
     level waittill("pack_a_punch_off");
     level thread turnonpapsounds(ent1);
     ent1 stoploopsound(0.1);
@@ -376,12 +376,12 @@ function private shutoffpapsounds(ent1, ent2, ent3) {
 
 function private turnonpapsounds(ent) {
   level waittill("pack_a_punch_on");
-  ent playLoopSound("zmb_perks_packa_loop");
+  ent playloopsound("zmb_perks_packa_loop");
 }
 
 function private vending_weapon_upgrade_cost() {
   level endon("pack_a_punch_off");
-  while(true) {
+  while (true) {
     self.cost = 5000;
     self.aat_cost = 2500;
     level waittill("hash_ab83a4db");
@@ -394,12 +394,12 @@ function private vending_weapon_upgrade_cost() {
 function private wait_for_player_to_take(player, weapon, packa_timer, b_weapon_supports_aat, isrepack) {
   current_weapon = self.current_weapon;
   upgrade_weapon = self.upgrade_weapon;
-  assert(isDefined(current_weapon), "");
-  assert(isDefined(upgrade_weapon), "");
+  assert(isdefined(current_weapon), "");
+  assert(isdefined(upgrade_weapon), "");
   self endon("pap_timeout");
   level endon("pack_a_punch_off");
-  while(isDefined(player)) {
-    packa_timer playLoopSound("zmb_perks_packa_ticktock");
+  while (isdefined(player)) {
+    packa_timer playloopsound("zmb_perks_packa_ticktock");
     self waittill("trigger", trigger_player);
     if(level.pack_a_punch.grabbable_by_anyone) {
       player = trigger_player;
@@ -420,7 +420,7 @@ function private wait_for_player_to_take(player, weapon, packa_timer, b_weapon_s
         weapon_limit = zm_utility::get_player_weapon_limit(player);
         player zm_weapons::take_fallback_weapon();
         primaries = player getweaponslistprimaries();
-        if(isDefined(primaries) && primaries.size >= weapon_limit) {
+        if(isdefined(primaries) && primaries.size >= weapon_limit) {
           upgrade_weapon = player zm_weapons::weapon_give(upgrade_weapon);
         } else {
           upgrade_weapon = player zm_weapons::give_build_kit_weapon(upgrade_weapon);
@@ -428,20 +428,20 @@ function private wait_for_player_to_take(player, weapon, packa_timer, b_weapon_s
         }
         player notify("weapon_give", upgrade_weapon);
         aatid = -1;
-        if(isDefined(b_weapon_supports_aat) && b_weapon_supports_aat) {
+        if(isdefined(b_weapon_supports_aat) && b_weapon_supports_aat) {
           player thread aat::acquire(upgrade_weapon);
           aatobj = player aat::getaatonweapon(upgrade_weapon);
-          if(isDefined(aatobj)) {
+          if(isdefined(aatobj)) {
             aatid = aatobj.var_2c8ee667;
           }
         } else {
           player thread aat::remove(upgrade_weapon);
         }
         weaponidx = undefined;
-        if(isDefined(weapon)) {
+        if(isdefined(weapon)) {
           weaponidx = matchrecordgetweaponindex(weapon);
         }
-        if(isDefined(weaponidx)) {
+        if(isdefined(weaponidx)) {
           if(!isrepack) {
             player recordmapevent(27, gettime(), player.origin, level.round_number, weaponidx, aatid);
           } else {
@@ -449,7 +449,7 @@ function private wait_for_player_to_take(player, weapon, packa_timer, b_weapon_s
           }
         }
         player switchtoweapon(upgrade_weapon);
-        if(isDefined(player.restore_ammo) && player.restore_ammo) {
+        if(isdefined(player.restore_ammo) && player.restore_ammo) {
           new_clip = player.restore_clip + (upgrade_weapon.clipsize - player.restore_clip_size);
           new_stock = player.restore_stock + (upgrade_weapon.maxammo - player.restore_max);
           player setweaponammostock(upgrade_weapon, new_stock);
@@ -475,21 +475,21 @@ function private wait_for_timeout(weapon, packa_timer, player, isrepack) {
   wait(level.pack_a_punch.timeout);
   self notify("pap_timeout");
   packa_timer stoploopsound(0.05);
-  packa_timer playSound("zmb_perks_packa_deny");
-  if(isDefined(player)) {
+  packa_timer playsound("zmb_perks_packa_deny");
+  if(isdefined(player)) {
     player zm_stats::increment_client_stat("pap_weapon_not_grabbed");
     player zm_stats::increment_player_stat("pap_weapon_not_grabbed");
     weaponidx = undefined;
-    if(isDefined(weapon)) {
+    if(isdefined(weapon)) {
       weaponidx = matchrecordgetweaponindex(weapon);
     }
-    if(isDefined(weaponidx)) {
+    if(isdefined(weaponidx)) {
       if(!isrepack) {
         player recordmapevent(20, gettime(), player.origin, level.round_number, weaponidx);
       } else {
         aatonweapon = player aat::getaatonweapon(weapon);
         aathash = -1;
-        if(isDefined(aatonweapon)) {
+        if(isdefined(aatonweapon)) {
           aathash = aatonweapon.var_2c8ee667;
         }
         player recordmapevent(26, gettime(), player.origin, level.round_number, weaponidx, aathash);
@@ -501,7 +501,7 @@ function private wait_for_timeout(weapon, packa_timer, player, isrepack) {
 function private wait_for_disconnect(player) {
   self endon("pap_taken");
   self endon("pap_timeout");
-  while(isDefined(player)) {
+  while (isdefined(player)) {
     wait(0.1);
   }
   println("");
@@ -545,7 +545,7 @@ function private upgrade_knuckle_crack_begin() {
 function private upgrade_knuckle_crack_end() {
   self zm_utility::enable_player_move_states();
   weapon = getweapon("zombie_knuckle_crack");
-  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission)) {
+  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission)) {
     self takeweapon(weapon);
     return;
   }
@@ -559,11 +559,11 @@ function private upgrade_knuckle_crack_end() {
 }
 
 function private get_range(delta, origin, radius) {
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     paporigin = self.target.origin;
-    if(isDefined(self.target.trigger_off) && self.target.trigger_off) {
+    if(isdefined(self.target.trigger_off) && self.target.trigger_off) {
       paporigin = self.target.realorigin;
-    } else if(isDefined(self.target.disabled) && self.target.disabled) {
+    } else if(isdefined(self.target.disabled) && self.target.disabled) {
       paporigin = paporigin + vectorscale((0, 0, 1), 10000);
     }
     if(distancesquared(paporigin, origin) < (radius * radius)) {
@@ -586,29 +586,29 @@ function private turn_off(origin, radius) {
 }
 
 function private is_on() {
-  if(isDefined(self.powered)) {
+  if(isdefined(self.powered)) {
     return self.powered.power;
   }
   return 0;
 }
 
 function private get_start_state() {
-  if(isDefined(level.vending_machines_powered_on_at_start) && level.vending_machines_powered_on_at_start) {
+  if(isdefined(level.vending_machines_powered_on_at_start) && level.vending_machines_powered_on_at_start) {
     return true;
   }
   return false;
 }
 
 function private cost_func() {
-  if(isDefined(self.one_time_cost)) {
+  if(isdefined(self.one_time_cost)) {
     cost = self.one_time_cost;
     self.one_time_cost = undefined;
     return cost;
   }
-  if(isDefined(level._power_global) && level._power_global) {
+  if(isdefined(level._power_global) && level._power_global) {
     return 0;
   }
-  if(isDefined(self.self_powered) && self.self_powered) {
+  if(isdefined(self.self_powered) && self.self_powered) {
     return 0;
   }
   return 1;
@@ -619,7 +619,7 @@ function private toggle_think(powered_on) {
     self.zbarrier set_pap_zbarrier_state("initial");
     level waittill("pack_a_punch_on");
   }
-  for(;;) {
+  for (;;) {
     self.zbarrier set_pap_zbarrier_state("power_on");
     level waittill("pack_a_punch_off");
     self.zbarrier set_pap_zbarrier_state("power_off");
@@ -639,10 +639,10 @@ function private pap_power_off() {
 function private pap_power_on() {
   self endon("zbarrier_state_change");
   self setzbarrierpiecestate(0, "opening");
-  while(self getzbarrierpiecestate(0) == "opening") {
+  while (self getzbarrierpiecestate(0) == "opening") {
     wait(0.05);
   }
-  self playSound("zmb_perks_power_on");
+  self playsound("zmb_perks_power_on");
   self thread set_pap_zbarrier_state("powered");
 }
 
@@ -652,7 +652,7 @@ function private pap_powered() {
   if(self.classname === "zbarrier_zm_castle_packapunch" || self.classname === "zbarrier_zm_tomb_packapunch") {
     self clientfield::set("pap_working_FX", 0);
   }
-  while(true) {
+  while (true) {
     wait(randomfloatrange(180, 1800));
     self setzbarrierpiecestate(4, "opening");
     wait(randomfloatrange(180, 1800));
@@ -681,7 +681,7 @@ function private pap_leaving() {
   do {
     wait(0.05);
   }
-  while(self getzbarrierpiecestate(5) == "closing");
+  while (self getzbarrierpiecestate(5) == "closing");
   self setzbarrierpiecestate(5, "closed");
   self notify("leave_anim_done");
 }
@@ -689,10 +689,10 @@ function private pap_leaving() {
 function private pap_arriving() {
   self endon("zbarrier_state_change");
   self setzbarrierpiecestate(0, "opening");
-  while(self getzbarrierpiecestate(0) == "opening") {
+  while (self getzbarrierpiecestate(0) == "opening") {
     wait(0.05);
   }
-  self playSound("zmb_perks_power_on");
+  self playsound("zmb_perks_power_on");
   self thread set_pap_zbarrier_state("powered");
 }
 
@@ -701,7 +701,7 @@ function private get_pap_zbarrier_state() {
 }
 
 function private set_pap_zbarrier_state(state) {
-  for(i = 0; i < self getnumzbarrierpieces(); i++) {
+  for (i = 0; i < self getnumzbarrierpieces(); i++) {
     self hidezbarrierpiece(i);
   }
   self notify("zbarrier_state_change");
@@ -767,7 +767,7 @@ function private process_pap_zbarrier_state(state) {
       break;
     }
     default: {
-      if(isDefined(level.custom_pap_state_handler)) {
+      if(isdefined(level.custom_pap_state_handler)) {
         self[[level.custom_pap_state_handler]](state);
       }
       break;

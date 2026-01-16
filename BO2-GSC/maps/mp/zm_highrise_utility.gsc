@@ -30,148 +30,145 @@ spawned_collision_fix() {
 
   if(!is_true(level.optimise_for_splitscreen)) {
     collision1 = spawn("script_model", (2992, 536, 497));
-    collision1 setModel("collision_geo_512x512x512_standard");
+    collision1 setmodel("collision_geo_512x512x512_standard");
     collision1.angles = vectorscale((0, 1, 0), 330.0);
     collision1 ghost();
     collision2 = spawn("script_model", (2824, 632, 497));
-    collision2 setModel("collision_geo_512x512x512_standard");
+    collision2 setmodel("collision_geo_512x512x512_standard");
     collision2.angles = vectorscale((0, 1, 0), 330.0);
     collision2 ghost();
     collision3 = spawn("script_model", (2992, 536, -15));
-    collision3 setModel("collision_geo_512x512x512_standard");
+    collision3 setmodel("collision_geo_512x512x512_standard");
     collision3.angles = vectorscale((0, 1, 0), 330.0);
     collision3 ghost();
     collision4 = spawn("script_model", (2824, 632, -15));
-    collision4 setModel("collision_geo_512x512x512_standard");
+    collision4 setmodel("collision_geo_512x512x512_standard");
     collision4.angles = vectorscale((0, 1, 0), 330.0);
     collision4 ghost();
     collision5 = spawn("script_model", (2992, 536, -527));
-    collision5 setModel("collision_geo_512x512x512_standard");
+    collision5 setmodel("collision_geo_512x512x512_standard");
     collision5.angles = vectorscale((0, 1, 0), 330.0);
     collision5 ghost();
     collision6 = spawn("script_model", (2824, 632, -527));
-    collision6 setModel("collision_geo_512x512x512_standard");
+    collision6 setmodel("collision_geo_512x512x512_standard");
     collision6.angles = vectorscale((0, 1, 0), 330.0);
     collision6 ghost();
     collision7 = spawn("script_model", (2992, 536, -1039));
-    collision7 setModel("collision_geo_512x512x512_standard");
+    collision7 setmodel("collision_geo_512x512x512_standard");
     collision7.angles = vectorscale((0, 1, 0), 330.0);
     collision7 ghost();
     collision8 = spawn("script_model", (2824, 632, -1039));
-    collision8 setModel("collision_geo_512x512x512_standard");
+    collision8 setmodel("collision_geo_512x512x512_standard");
     collision8.angles = vectorscale((0, 1, 0), 330.0);
     collision8 ghost();
     collision9 = spawn("script_model", (2992, 536, -1551));
-    collision9 setModel("collision_geo_512x512x512_standard");
+    collision9 setmodel("collision_geo_512x512x512_standard");
     collision9.angles = vectorscale((0, 1, 0), 330.0);
     collision9 ghost();
     collision10 = spawn("script_model", (2824, 632, -1551));
-    collision10 setModel("collision_geo_512x512x512_standard");
+    collision10 setmodel("collision_geo_512x512x512_standard");
     collision10.angles = vectorscale((0, 1, 0), 330.0);
     collision10 ghost();
     collision11 = spawn("script_model", (2992, 536, -2063));
-    collision11 setModel("collision_geo_512x512x512_standard");
+    collision11 setmodel("collision_geo_512x512x512_standard");
     collision11.angles = vectorscale((0, 1, 0), 330.0);
     collision11 ghost();
     collision12 = spawn("script_model", (2824, 632, -2063));
-    collision12 setModel("collision_geo_512x512x512_standard");
+    collision12 setmodel("collision_geo_512x512x512_standard");
     collision12.angles = vectorscale((0, 1, 0), 330.0);
     collision12 ghost();
     collisione1 = spawn("script_model", (1649, 2164, 2843));
-    collisione1 setModel("collision_wall_256x256x10_standard");
+    collisione1 setmodel("collision_wall_256x256x10_standard");
     collisione1.angles = (0, 0, 0);
     collisione1 ghost();
     collisione2 = spawn("script_model", (1649, 2164, 2587));
-    collisione2 setModel("collision_wall_256x256x10_standard");
+    collisione2 setmodel("collision_wall_256x256x10_standard");
     collisione2.angles = (0, 0, 0);
     collisione2 ghost();
     collisione3 = spawn("script_model", (1478, 1216, 2843));
-    collisione3 setModel("collision_wall_256x256x10_standard");
+    collisione3 setmodel("collision_wall_256x256x10_standard");
     collisione3.angles = vectorscale((0, 1, 0), 270.0);
     collisione3 ghost();
     collisione4 = spawn("script_model", (1478, 1216, 2587));
-    collisione4 setModel("collision_wall_256x256x10_standard");
+    collisione4 setmodel("collision_wall_256x256x10_standard");
     collisione4.angles = vectorscale((0, 1, 0), 270.0);
     collisione4 ghost();
     collisione5 = spawn("script_model", (1478, 1216, 2331));
-    collisione5 setModel("collision_wall_256x256x10_standard");
+    collisione5 setmodel("collision_wall_256x256x10_standard");
     collisione5.angles = vectorscale((0, 1, 0), 270.0);
     collisione5 ghost();
     collisione6 = spawn("script_model", (1478, 1216, 2242));
-    collisione6 setModel("collision_wall_256x256x10_standard");
+    collisione6 setmodel("collision_wall_256x256x10_standard");
     collisione6.angles = vectorscale((0, 1, 0), 270.0);
     collisione6 ghost();
     collision13 = spawn("script_model", (2251, 2687, 3095));
-    collision13 setModel("collision_wall_128x128x10_standard");
+    collision13 setmodel("collision_wall_128x128x10_standard");
     collision13.angles = vectorscale((0, 1, 0), 270.0);
     collision13 ghost();
     collision14 = spawn("script_model", (2046, 1270, 2758));
-    collision14 setModel("collision_geo_512x512x512_standard");
+    collision14 setmodel("collision_geo_512x512x512_standard");
     collision14.angles = vectorscale((0, 0, -1), 6.20013);
     collision14 ghost();
     collision15 = spawn("script_model", (2518, 597, 3191));
-    collision15 setModel("collision_wall_128x128x10_standard");
+    collision15 setmodel("collision_wall_128x128x10_standard");
     collision15.angles = (0, 240.4, -3.00014);
     collision15 ghost();
     collision16 = spawn("script_model", (2613, -721, 1184));
-    collision16 setModel("collision_wall_128x128x10_standard");
+    collision16 setmodel("collision_wall_128x128x10_standard");
     collision16.angles = (0, 60, -2.60003);
     collision16 ghost();
     collision17 = spawn("script_model", (2721, -533, 1184));
-    collision17 setModel("collision_wall_128x128x10_standard");
+    collision17 setmodel("collision_wall_128x128x10_standard");
     collision17.angles = (0, 60, -2.60003);
     collision17 ghost();
     collision18 = spawn("script_model", (2940, 1512, 3004));
-    collision18 setModel("collision_geo_64x64x256_standard");
+    collision18 setmodel("collision_geo_64x64x256_standard");
     collision18.angles = vectorscale((1, 0, 0), 350.0);
     collision18 ghost();
     collision19 = spawn("script_model", (1631, -235, 2943));
-    collision19 setModel("collision_geo_32x32x128_standard");
+    collision19 setmodel("collision_geo_32x32x128_standard");
     collision19.angles = vectorscale((0, 1, 0), 330.0);
     collision19 ghost();
     collision20 = spawn("script_model", (2232, -579, 1354));
-    collision20 setModel("collision_wall_128x128x10_standard");
+    collision20 setmodel("collision_wall_128x128x10_standard");
     collision20.angles = vectorscale((0, 1, 0), 330.0);
     collision20 ghost();
     collision21 = spawn("script_model", (2349, 805, 1346));
-    collision21 setModel("collision_geo_32x32x128_standard");
+    collision21 setmodel("collision_geo_32x32x128_standard");
     collision21.angles = vectorscale((0, 1, 0), 8.6);
     collision21 ghost();
     collision22 = spawn("script_model", (2791, 1093, 1272));
-    collision22 setModel("collision_geo_32x32x128_standard");
+    collision22 setmodel("collision_geo_32x32x128_standard");
     collision22.angles = vectorscale((1, 0, 0), 3.2);
     collision22 ghost();
     collision23 = spawn("script_model", (2222, 1488, 3280));
-    collision23 setModel("collision_geo_32x32x128_standard");
+    collision23 setmodel("collision_geo_32x32x128_standard");
     collision23.angles = (0, 0, 0);
     collision23 ghost();
     collision24 = spawn("script_model", (2222, 1488, 3312));
-    collision24 setModel("collision_geo_32x32x128_standard");
+    collision24 setmodel("collision_geo_32x32x128_standard");
     collision24.angles = (0, 0, 0);
     collision24 ghost();
   }
 }
 
 connect_zones_for_ffotd(zone_name_a, zone_name_b, one_way) {
-  if(!isDefined(one_way)) {
+  if(!isDefined(one_way))
     one_way = 0;
-  }
 
   zone_init(zone_name_a);
   zone_init(zone_name_b);
   enable_zone(zone_name_a);
   enable_zone(zone_name_b);
 
-  if(!isDefined(level.zones[zone_name_a].adjacent_zones[zone_name_b])) {
-    level.zones[zone_name_a].adjacent_zones[zone_name_b] = spawnStruct();
-  }
+  if(!isDefined(level.zones[zone_name_a].adjacent_zones[zone_name_b]))
+    level.zones[zone_name_a].adjacent_zones[zone_name_b] = spawnstruct();
 
   level.zones[zone_name_a].adjacent_zones[zone_name_b].is_connected = 1;
 
   if(!one_way) {
-    if(!isDefined(level.zones[zone_name_b].adjacent_zones[zone_name_a])) {
-      level.zones[zone_name_b].adjacent_zones[zone_name_a] = spawnStruct();
-    }
+    if(!isDefined(level.zones[zone_name_b].adjacent_zones[zone_name_a]))
+      level.zones[zone_name_b].adjacent_zones[zone_name_a] = spawnstruct();
 
     level.zones[zone_name_b].adjacent_zones[zone_name_a].is_connected = 1;
   }

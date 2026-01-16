@@ -9,11 +9,11 @@
 #namespace friendicons;
 
 function autoexec __init__sytem__() {
-  system::register("friendicons", &__init__, undefined, undefined);
+  system::register("friendicons", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
@@ -24,9 +24,9 @@ function init() {
     setdvar("scr_drawfriend", "0");
   }
   level.drawfriend = getdvarint("scr_drawfriend");
-  callback::on_spawned(&on_player_spawned);
-  callback::on_player_killed(&on_player_killed);
-  for(;;) {
+  callback::on_spawned( & on_player_spawned);
+  callback::on_player_killed( & on_player_killed);
+  for (;;) {
     updatefriendiconsettings();
     wait(5);
   }
@@ -60,9 +60,9 @@ function updatefriendiconsettings() {
 
 function updatefriendicons() {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
+    if(isdefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
       if(level.drawfriend) {
         team = self.pers["team"];
         self.headicon = game["headicon_" + team];
@@ -70,9 +70,9 @@ function updatefriendicons() {
         continue;
       }
       players = level.players;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         player = players[i];
-        if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
+        if(isdefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
           player.headicon = "";
         }
       }

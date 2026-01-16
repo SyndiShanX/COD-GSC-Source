@@ -7,12 +7,12 @@
 
 function_e9b061a8(state, start, update_goal, end, update_enemy, var_edc20efd, attack_origin, update_debug) {
   level.extra_screen_electricity_.functions[state] = {
-    #start: start,
-    #update_goal: update_goal,
-    #end: end,
-    #update_enemy: update_enemy,
-    #var_edc20efd: var_edc20efd,
-    #attack_origin: attack_origin,
+    #start: start, 
+    #update_goal: update_goal, 
+    #end: end, 
+    #update_enemy: update_enemy, 
+    #var_edc20efd: var_edc20efd, 
+    #attack_origin: attack_origin, 
     #update_debug: update_debug
   };
 }
@@ -98,3 +98,4 @@ function_3a57bb58() {
     waitframe(1);
   }
 }
+

@@ -8,7 +8,7 @@
 
 main() {
   //level._effect["firelp_vhc_lrg_pm_farview"]		= loadfx ("fire/firelp_vhc_lrg_pm_farview");
-  //level._effect["lighthaze"]						= loadfx ("misc/lighthaze");
+  //level._effect["lighthaze"]						= loadfx ("misc/lighthaze"); 
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -65,12 +65,10 @@ main() {
 
   // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
   /*
-  	if( getdvarint( "sm_enable" ) && getdvar( "r_zfeather" ) != "0" ) {
+  	if( getdvarint( "sm_enable" ) && getdvar( "r_zfeather" ) != "0" )
   		level._effect[ "spotlight" ]						 = loadfx( "misc/hunted_spotlight_model" );
-  	}
-  	else {
+  	else
   		level._effect[ "spotlight" ]						 = loadfx( "misc/spotlight_large" );
-  	}
 
   	level.flare_fx[ "mi17" ] 							 = loadfx( "misc/flares_cobra" );
 
@@ -249,6 +247,7 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("mi17", "painted metal", "treadfx/heli_dust_hunted");
   maps\_treadfx::setvehiclefx("mi17", "default", "treadfx/heli_dust_hunted");
   maps\_treadfx::setvehiclefx("mi17", "none", "treadfx/heli_dust_hunted");
+
 }
 
 fuel_explosion() {
@@ -268,10 +267,10 @@ fuel_explosion() {
 
 //Temporarly added to make fx placement easier
 ac130_gas_station() {
-  gas_station = getEntArray("gas_station", "targetname");
-  gas_station_d = getEntArray("gas_station_d", "targetname");
-  big_explosion = getEntArray("big_explosion", "targetname");
-  small_explosion = getEntArray("small_explosion", "targetname");
+  gas_station = getentarray("gas_station", "targetname");
+  gas_station_d = getentarray("gas_station_d", "targetname");
+  big_explosion = getentarray("big_explosion", "targetname");
+  small_explosion = getentarray("small_explosion", "targetname");
 
   array_thread(gas_station, ::hide_ent);
   array_thread(gas_station_d, ::swap_ent, (7680, 0, 0));

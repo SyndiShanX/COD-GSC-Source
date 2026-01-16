@@ -25,7 +25,7 @@ player_init() {
   level.tesla_play_fx = [];
   level.tesla_play_rail = true;
   players = GetLocalPlayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     level.tesla_play_fx[i] = false;
     players[i] thread tesla_fx_rail(i);
     players[i] thread tesla_fx_tube(i);
@@ -34,7 +34,7 @@ player_init() {
 
 tesla_fx_rail(localclientnum) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     realwait(RandomFloatRange(8, 12));
     if(!level.tesla_play_fx[localclientnum]) {
       continue;
@@ -52,13 +52,13 @@ tesla_fx_rail(localclientnum) {
       continue;
     }
     PlayViewmodelFx(localclientnum, level._effect["tesla_viewmodel_rail"], "tag_flash");
-    playSound(localclientnum, "tesla_effects", (0, 0, 0));
+    playsound(localclientnum, "tesla_effects", (0, 0, 0));
   }
 }
 
 tesla_fx_tube(localclientnum) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     realwait(0.1);
     if(!level.tesla_play_fx[localclientnum]) {
       continue;
@@ -84,7 +84,7 @@ tesla_fx_tube(localclientnum) {
 }
 
 tesla_notetrack_think() {
-  for(;;) {
+  for (;;) {
     level waittill("notetrack", localclientnum, note);
     switch (note) {
       case "tesla_switch_flip_off":
@@ -101,10 +101,10 @@ tesla_notetrack_think() {
 }
 
 tesla_happy() {
-  for(;;) {
+  for (;;) {
     level waittill("TGH");
     if(GetCurrentWeapon(0) == "tesla_gun") {
-      playSound(0, "tesla_happy", (0, 0, 0));
+      playsound(0, "tesla_happy", (0, 0, 0));
       level.tesla_play_rail = false;
       realwait(2);
       level.tesla_play_rail = true;

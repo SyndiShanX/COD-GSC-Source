@@ -38,7 +38,7 @@ function function_66df416f() {
   level thread function_3be7776b();
   level thread function_5335c37e();
   level thread function_a07abde9();
-  callback::on_spawned(&function_d5c2bb53);
+  callback::on_spawned( & function_d5c2bb53);
   level flag::wait_till("all_players_spawned");
   switch (level.current_skipto) {
     case "post_intro": {
@@ -68,7 +68,7 @@ function function_d5c2bb53() {
 }
 
 function function_b5ffeeac() {
-  callback::on_ai_killed(&function_6b1e8f3c);
+  callback::on_ai_killed( & function_6b1e8f3c);
   foreach(player in level.activeplayers) {
     player.var_f329477a = undefined;
   }
@@ -80,8 +80,8 @@ function function_b67d38c4() {
 
 function function_6b1e8f3c(params) {
   if(isplayer(params.eattacker)) {
-    if(isDefined(params.weapon) && (params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET")) {
-      if(isDefined(params.eattacker.var_f329477a)) {
+    if(isdefined(params.weapon) && (params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET")) {
+      if(isdefined(params.eattacker.var_f329477a)) {
         if(params.eattacker.var_f329477a == params.eattacker._bbdata["shots"]) {
           params.eattacker notify("hash_450a5f27");
         }
@@ -95,16 +95,16 @@ function function_3fafea6d() {
   foreach(player in level.activeplayers) {
     player.var_370e0a49 = 0;
   }
-  callback::on_ai_killed(&function_ed6cec59);
+  callback::on_ai_killed( & function_ed6cec59);
 }
 
 function function_ed6cec59(s_params) {
   if(self.archetype === "robot" && s_params.weapon.name == "gadget_immolation") {
-    if(!isDefined(s_params.eattacker.var_6749af1d)) {
+    if(!isdefined(s_params.eattacker.var_6749af1d)) {
       s_params.eattacker.var_6749af1d = [];
     }
     n_time_current = gettime();
-    if(!isDefined(s_params.eattacker.var_6749af1d)) {
+    if(!isdefined(s_params.eattacker.var_6749af1d)) {
       s_params.eattacker.var_6749af1d = [];
     } else if(!isarray(s_params.eattacker.var_6749af1d)) {
       s_params.eattacker.var_6749af1d = array(s_params.eattacker.var_6749af1d);
@@ -114,7 +114,7 @@ function function_ed6cec59(s_params) {
       var_10db1e52 = s_params.eattacker.var_6749af1d.size - 4;
       var_97e374a8 = n_time_current - 1500;
       var_84abbef6 = 0;
-      for(i = var_10db1e52; i < s_params.eattacker.var_6749af1d.size; i++) {
+      for (i = var_10db1e52; i < s_params.eattacker.var_6749af1d.size; i++) {
         if(s_params.eattacker.var_6749af1d[i] >= var_97e374a8) {
           var_84abbef6++;
         }
@@ -127,7 +127,7 @@ function function_ed6cec59(s_params) {
 }
 
 function function_3bf99ff5() {
-  callback::on_ai_killed(&function_25a5bc35);
+  callback::on_ai_killed( & function_25a5bc35);
 }
 
 function function_25a5bc35(params) {
@@ -160,8 +160,8 @@ function function_3be7776b() {
   foreach(player in level.activeplayers) {
     player function_c05b6c67();
   }
-  callback::on_spawned(&function_c05b6c67);
-  callback::on_ai_damage(&function_d77515b3);
+  callback::on_spawned( & function_c05b6c67);
+  callback::on_ai_damage( & function_d77515b3);
 }
 
 function function_c05b6c67() {
@@ -195,7 +195,7 @@ function function_d77515b3(params) {
 }
 
 function function_6a1ab5fc() {
-  callback::on_ai_killed(&function_94847029);
+  callback::on_ai_killed( & function_94847029);
 }
 
 function function_94847029(params) {
@@ -207,11 +207,11 @@ function function_94847029(params) {
 }
 
 function function_45afef12() {
-  callback::remove_on_ai_killed(&function_94847029);
+  callback::remove_on_ai_killed( & function_94847029);
 }
 
 function function_b2309b8() {
-  callback::on_ai_killed(&function_52b96b46);
+  callback::on_ai_killed( & function_52b96b46);
 }
 
 function function_52b96b46(params) {
@@ -225,11 +225,11 @@ function function_52b96b46(params) {
 }
 
 function function_59fa6593() {
-  callback::remove_on_ai_killed(&function_52b96b46);
+  callback::remove_on_ai_killed( & function_52b96b46);
 }
 
 function function_6a2780bc() {
-  callback::on_ai_killed(&function_707a731a);
+  callback::on_ai_killed( & function_707a731a);
 }
 
 function function_707a731a(params) {
@@ -243,17 +243,17 @@ function function_707a731a(params) {
 }
 
 function function_6d2fd9d2() {
-  callback::remove_on_ai_killed(&function_707a731a);
+  callback::remove_on_ai_killed( & function_707a731a);
 }
 
 function function_5335c37e() {
-  callback::on_ai_killed(&function_e7cebc20);
+  callback::on_ai_killed( & function_e7cebc20);
 }
 
 function function_e7cebc20(params) {
   if(isplayer(params.eattacker)) {
     if(params.smeansofdeath == "MOD_ELECTROCUTED") {
-      if(isDefined(params.eattacker.var_e6cc8b44)) {
+      if(isdefined(params.eattacker.var_e6cc8b44)) {
         if(params.eattacker.var_e6cc8b44 == params.einflictor) {
           params.eattacker.var_60d52155++;
           if(params.eattacker.var_60d52155 == 2) {
@@ -297,7 +297,7 @@ function function_f3915502() {
   foreach(player in level.activeplayers) {
     player function_79aac6ce();
   }
-  callback::on_spawned(&function_79aac6ce);
+  callback::on_spawned( & function_79aac6ce);
 }
 
 function function_79aac6ce() {
@@ -308,9 +308,9 @@ function function_79aac6ce() {
 function function_962154a7() {
   self endon("death");
   level endon("hash_1e73602d");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker);
-    if(isDefined(attacker.scoretype)) {
+    if(isdefined(attacker.scoretype)) {
       if(attacker.scoretype == "_depth_charge") {
         self.var_bae308b3 = 1;
       }
@@ -331,7 +331,7 @@ function function_e85e2afd(e_attacker) {
 }
 
 function function_a07abde9() {
-  callback::on_ai_killed(&function_89c51083);
+  callback::on_ai_killed( & function_89c51083);
   foreach(player in level.activeplayers) {
     player.var_9dbb738f = undefined;
   }
@@ -345,7 +345,7 @@ function function_89c51083(params) {
   if(isplayer(params.eattacker)) {
     if(!params.eattacker isonground()) {
       if(params.weapon.weapclass == "rocketlauncher") {
-        if(isDefined(params.eattacker.var_9dbb738f)) {
+        if(isdefined(params.eattacker.var_9dbb738f)) {
           if(params.eattacker.var_9dbb738f == params.eattacker._bbdata["shots"]) {
             params.eattacker notify("hash_ed8b1690");
           }

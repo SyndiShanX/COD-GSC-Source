@@ -13,13 +13,17 @@ main() {
 
   level._effect["javelin_muzzle"] = loadfx("muzzleflashes/javelin_flash_wv");
 
+  //Hangar Welder
   level._effect["welding_runner"] = loadfx("misc/welding_runner");
 
+  //humvees at end
   level._effect["humvee_radiator_steam"] = loadfx("smoke/steam_vent_large_wind");
 
+  //basketball effects
   level._effect["ball_bounce_dust_runner"] = loadfx("impacts/ball_bounce_dust_runner");
   level._effect["footstep_dust"] = loadfx("impacts/footstep_dust");
 
+  //ambient fx
   level._effect["sand_storm_distant_oriented"] = LoadFX("weather/sand_storm_distant_oriented_training");
   level._effect["sand_storm_distant"] = LoadFX("weather/sand_storm_distant_training");
 
@@ -37,4 +41,5 @@ main() {
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
 
   maps\createfx\trainer_fx::main();
+
 }

@@ -42,15 +42,14 @@ init_riotshield_AI_anims() {
   riotshieldTransTypes[0] = "riotshield";
   riotshieldTransTypes[1] = "riotshield_crouch";
 
-  for(j = 0; j < riotshieldTransTypes.size; j++) {
+  for (j = 0; j < riotshieldTransTypes.size; j++) {
     trans = riotshieldTransTypes[j];
 
-    for(i = 1; i <= 9; i++) {
-      if(i == 5) {
+    for (i = 1; i <= 9; i++) {
+      if(i == 5)
         continue;
-      }
 
-      if(isDefined(anim.coverTrans[trans][i])) {
+      if(isdefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
       }
     }
@@ -80,15 +79,13 @@ noteTrackDetachShield(note, flagName) {
   self animscripts\shared::DropAIWeapon(self.secondaryWeapon);
   self.secondaryWeapon = "none";
 
-  if(isAlive(self)) {
+  if(isAlive(self))
     riotshield_turn_into_regular_ai();
-  }
 }
 
 riotshield_approach_type() {
-  if(self.a.pose == "crouch") {
+  if(self.a.pose == "crouch")
     return "riotshield_crouch";
-  }
 
   return "riotshield";
 }
@@ -128,11 +125,10 @@ init_riotshield_AI() {
   self.useMuzzleSideOffset = true;
 
   // fall over after getting hit this many times on the shield all within 0.3 seconds of each other
-  if(level.gameSkill < 1) {
+  if(level.gameSkill < 1)
     self.shieldBulletBlockLimit = randomintrange(4, 8);
-  } else {
+  else
     self.shieldBulletBlockLimit = randomintrange(8, 12);
-  }
 
   self.shieldBulletBlockCount = 0;
   self.shieldBulletBlockTime = 0;
@@ -157,42 +153,38 @@ init_riotshield_AI() {
 
   init_riotshield_animsets();
 
-  if(level.gameSkill < 1) {
+  if(level.gameSkill < 1)
     self.bullet_resistance = 30;
-  } else {
+  else
     self.bullet_resistance = 40;
-  }
 
   self add_damage_function(maps\_spawner::bullet_resistance);
   self add_damage_function(animscripts\pain::additive_pain);
 }
 
 riotshield_charge() {
-  if(!Melee_Standard_UpdateAndValidateTarget()) {
+  if(!Melee_Standard_UpdateAndValidateTarget())
     return false;
-  }
 
   // get from animation
   delta = getMoveDelta( % riotshield_bashA_attack, 0, 1);
   rangeSq = lengthSquared(delta);
 
-  if(distanceSquared(self.origin, self.melee.target.origin) < rangeSq) {
+  if(distanceSquared(self.origin, self.melee.target.origin) < rangeSq)
     return true;
-  }
 
   self animscripts\melee::Melee_PlayChargeSound();
 
   sampleTime = 0.1;
   firstTry = true;
 
-  while(1) {
-    assert(isDefined(self.melee.target));
+  while (1) {
+    assert(isdefined(self.melee.target));
 
     // now that we moved a bit, see if our target moved before we check for valid melee
     // it's possible something happened in the meantime that makes meleeing impossible.
-    if(!Melee_Standard_UpdateAndValidateTarget()) {
+    if(!Melee_Standard_UpdateAndValidateTarget())
       return false;
-    }
 
     if(firstTry) {
       self.a.pose = "stand";
@@ -206,14 +198,12 @@ riotshield_charge() {
     enemyDistanceSq = distanceSquared(self.origin, self.melee.target.origin);
 
     // if we're done raising our gun, and starting a melee now will hit the guy, our preparation is finished
-    if(enemyDistanceSq < rangeSq) {
+    if(enemyDistanceSq < rangeSq)
       break;
-    }
 
     // don't keep charging if we've been doing this for too long.
-    if(gettime() >= self.melee.giveUpTime) {
+    if(gettime() >= self.melee.giveUpTime)
       return false;
-    }
   }
 
   return true;
@@ -224,7 +214,7 @@ riotshield_melee_standard() {
 
   animscripts\melee::Melee_Standard_ResetGiveUpTime();
 
-  while(true) {
+  while (true) {
     if(!riotshield_charge()) {
       // if we couldn't get in place to melee, don't try to charge for a little while and abort
       self.nextMeleeChargeTime = getTime() + 1500;
@@ -243,7 +233,7 @@ riotshield_melee_standard() {
 
     // If the attack loop returns false, we need to stop this melee
     if(!animscripts\melee::Melee_Standard_PlayAttackLoop()) {
-      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again.
+      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again. 
       animscripts\melee::Melee_Standard_DelayStandardCharge(self.melee.target);
       break;
     }
@@ -303,19 +293,17 @@ riotshield_melee_AIvsAI() {
 }
 
 riotshield_startMoveTransition() {
-  if(isDefined(self.disableExits)) {
+  if(isdefined(self.disableExits))
     return;
-  }
 
   self orientmode("face angle", self.angles[1]);
   self animmode("zonly_physics", false);
 
   if(self.a.pose == "crouch") {
-    if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
+    if(isdefined(self.sprint) || isdefined(self.fastwalk))
       transAnim = % riotshield_crouch2stand;
-    } else {
+    else
       transAnim = % riotshield_crouch2walk;
-    }
 
     rate = randomfloatrange(0.9, 1.1);
     self setFlaggedAnimKnobAllRestart("startmove", transAnim, % body, 1, .1, rate);
@@ -323,7 +311,7 @@ riotshield_startMoveTransition() {
     self clearanim( % riotshield_crouch2walk, 0.5);
   }
 
-  if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
+  if(isdefined(self.sprint) || isdefined(self.fastwalk)) {
     self allowedStances("stand", "crouch");
     self.a.pose = "stand";
   }
@@ -358,26 +346,23 @@ riotshield_startCombat() {
 riotshield_bullet_hit_shield() {
   self endon("killanimscript");
 
-  while(1) {
+  while (1) {
     self waittill("bullet_hitshield");
 
     time = gettime();
-    if(time - self.shieldBulletBlockTime > 500) {
+    if(time - self.shieldBulletBlockTime > 500)
       self.shieldBulletBlockCount = 0;
-    } else {
+    else
       self.shieldBulletBlockCount++;
-    }
 
     self.shieldBulletBlockTime = time;
-    if(self.shieldBulletBlockCount > self.shieldBulletBlockLimit) {
+    if(self.shieldBulletBlockCount > self.shieldBulletBlockLimit)
       self doDamage(1, (0, 0, 0)); // do minimal damage to fall down
-    }
 
-    if(cointoss()) {
+    if(cointoss())
       reactAnim = % riotshield_reactA;
-    } else {
+    else
       reactAnim = % riotshield_reactB;
-    }
 
     self notify("new_hit_react");
     self setFlaggedAnimRestart("hitreact", reactAnim, 1, 0.1, 1);
@@ -400,32 +385,28 @@ riotshield_grenadeCower() {
     self animscripts\shared::DoNoteTracks("trans");
   }
 
-  if(isDefined(self.grenade)) {
+  if(isdefined(self.grenade)) {
     faceGrenade = true;
     dirToGrenade = self.grenade.origin - self.origin;
 
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       dirToEnemy = self.enemy.origin - self.origin;
-      if(vectorDot(dirToGrenade, dirToEnemy) < 0) {
+      if(vectorDot(dirToGrenade, dirToEnemy) < 0)
         faceGrenade = false;
-      }
     }
 
     if(faceGrenade) {
       relYaw = AngleClamp180(self.angles[1] - vectorToYaw(dirToGrenade));
 
-      if(!isDefined(self.turnThreshold)) {
+      if(!isdefined(self.turnThreshold))
         self.turnThreshold = 55;
-      }
 
-      while(abs(relYaw) > self.turnThreshold) {
-        if(!isDefined(self.a.array)) {
+      while (abs(relYaw) > self.turnThreshold) {
+        if(!isdefined(self.a.array))
           animscripts\combat::setup_anim_array();
-        }
 
-        if(!self animscripts\combat::TurnToFaceRelativeYaw(relYaw)) {
+        if(!self animscripts\combat::TurnToFaceRelativeYaw(relYaw))
           break;
-        }
 
         relYaw = AngleClamp180(self.angles[1] - vectorToYaw(dirToGrenade));
       }
@@ -440,7 +421,7 @@ riotshield_grenadeCower() {
 riotshield_flashbang() {
   self notify("flashed");
 
-  if(!isDefined(self.a.onback)) {
+  if(!isdefined(self.a.onback)) {
     rate = randomfloatrange(0.9, 1.1);
     self.frontShieldAngleCos = 1;
 
@@ -464,11 +445,10 @@ riotshield_pain() {
   // all the pain animations are in crouch
   self.a.pose = "crouch";
 
-  if(usingSideArm()) {
+  if(usingSideArm())
     forceUseWeapon(self.primaryweapon, "primary");
-  }
 
-  if(!isDefined(self.a.onback)) {
+  if(!isdefined(self.a.onback)) {
     rate = randomfloatrange(0.8, 1.15);
     self.frontShieldAngleCos = 1;
     if((self.damageYaw < -120 || self.damageYaw > 120) && isExplosiveDamageMOD(self.damageMOD)) {
@@ -491,7 +471,7 @@ riotshield_pain() {
 }
 
 riotshield_death() {
-  if(isDefined(self.a.onback) && self.a.pose == "crouch") {
+  if(isdefined(self.a.onback) && self.a.pose == "crouch") {
     deathArray = [];
     deathArray[0] = % dying_back_death_v2;
     deathArray[1] = % dying_back_death_v3;
@@ -502,18 +482,16 @@ riotshield_death() {
     return true;
   }
 
-  if(self.prevScript == "pain" || self.prevScript == "flashed") {
+  if(self.prevScript == "pain" || self.prevScript == "flashed")
     doShieldDeath = randomInt(2) == 0;
-  } else {
+  else
     doShieldDeath = true;
-  }
 
   if(doShieldDeath) {
-    if(cointoss()) {
+    if(cointoss())
       deathAnim = % riotshield_crouch_death;
-    } else {
+    else
       deathAnim = % riotshield_crouch_death_fallback;
-    }
 
     self animscripts\death::playDeathAnim(deathAnim);
     return true;
@@ -614,9 +592,8 @@ init_riotshield_animsets() {
 }
 
 riotshield_choose_pose(preferredPose) {
-  if(isDefined(self.grenade)) {
+  if(isdefined(self.grenade))
     return "stand";
-  }
 
   return self animscripts\utility::choosePose(preferredPose);
 }
@@ -661,9 +638,8 @@ null_func() {}
 
 riotshield_init_flee() {
   // hack to restart move script
-  if(self.script == "move") {
+  if(self.script == "move")
     self animcustom(::null_func);
-  }
 
   self.customMoveTransition = ::riotshield_flee_and_drop_shield;
 }
@@ -675,11 +651,10 @@ riotshield_flee_and_drop_shield() {
   self animmode("zonly_physics", false);
   self orientmode("face current");
 
-  if(!isDefined(self.dropShieldInPlace) && isDefined(self.enemy) && vectordot(self.lookaheadDir, anglesToForward(self.angles)) < 0) {
+  if(!isdefined(self.dropShieldInPlace) && isdefined(self.enemy) && vectordot(self.lookaheadDir, anglesToForward(self.angles)) < 0)
     fleeAnim = % riotshield_crouch2walk_2flee;
-  } else {
+  else
     fleeAnim = % riotshield_crouch2stand_shield_drop;
-  }
 
   rate = randomFloatRange(0.85, 1.1);
   self SetFlaggedAnimKnobAll("fleeanim", fleeAnim, % root, 1, .1, rate);

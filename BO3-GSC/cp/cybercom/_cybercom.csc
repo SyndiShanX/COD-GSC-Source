@@ -17,7 +17,7 @@
 #namespace cybercom;
 
 function autoexec __init__sytem__() {
-  system::register("cybercom", &__init__, undefined, undefined);
+  system::register("cybercom", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,39 +25,39 @@ function __init__() {
   level.cybercom_status = 0;
   init_clientfields();
   function_15b9d1ea();
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   cybercom_firefly::init();
   cybercom_security_breach::init();
   cybercom_misdirection::init();
 }
 
 function init_clientfields() {
-  clientfield::register("world", "cybercom_disabled", 1, 1, "int", &cybercomdisabledall, 0, 0);
-  clientfield::register("toplayer", "cybercom_disabled", 1, 1, "int", &cybercomdisabled, 0, 0);
-  clientfield::register("vehicle", "cybercom_setiffname", 1, 3, "int", &setiffname, 0, 0);
-  clientfield::register("actor", "cybercom_setiffname", 1, 3, "int", &setiffname, 0, 0);
-  clientfield::register("actor", "cybercom_immolate", 1, 2, "int", &function_87475da2, 0, 0);
-  clientfield::register("vehicle", "cybercom_immolate", 1, 1, "int", &function_a7363f41, 0, 0);
-  clientfield::register("actor", "cybercom_sysoverload", 1, 2, "int", &function_572c7315, 0, 0);
-  clientfield::register("vehicle", "cybercom_sysoverload", 1, 1, "int", &function_38510c4a, 0, 0);
-  clientfield::register("actor", "cybercom_surge", 1, 2, "int", &function_2d61bf2e, 0, 0);
-  clientfield::register("vehicle", "cybercom_surge", 1, 2, "int", &function_50dfd00b, 0, 0);
-  clientfield::register("scriptmover", "cybercom_surge", 1, 1, "int", &function_38cc3f2e, 0, 0);
-  clientfield::register("actor", "cybercom_shortout", 1, 2, "int", &function_82d4e6fe, 0, 0);
-  clientfield::register("vehicle", "cybercom_shortout", 1, 2, "int", &function_6f88468d, 0, 0);
-  clientfield::register("allplayers", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
-  clientfield::register("actor", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
-  clientfield::register("scriptmover", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
-  clientfield::register("actor", "sensory_overload", 1, 2, "int", &cybercom_sensoryoverload, 0, 0);
-  clientfield::register("actor", "forced_malfunction", 1, 1, "int", &cybercom_forcedmalfunction, 0, 0);
-  clientfield::register("toplayer", "hacking_progress", 1, 12, "int", &function_9439eecf, 0, 0);
-  clientfield::register("toplayer", "resetAbilityWheel", 1, 1, "int", &function_806d1a61, 0, 0);
+  clientfield::register("world", "cybercom_disabled", 1, 1, "int", & cybercomdisabledall, 0, 0);
+  clientfield::register("toplayer", "cybercom_disabled", 1, 1, "int", & cybercomdisabled, 0, 0);
+  clientfield::register("vehicle", "cybercom_setiffname", 1, 3, "int", & setiffname, 0, 0);
+  clientfield::register("actor", "cybercom_setiffname", 1, 3, "int", & setiffname, 0, 0);
+  clientfield::register("actor", "cybercom_immolate", 1, 2, "int", & function_87475da2, 0, 0);
+  clientfield::register("vehicle", "cybercom_immolate", 1, 1, "int", & function_a7363f41, 0, 0);
+  clientfield::register("actor", "cybercom_sysoverload", 1, 2, "int", & function_572c7315, 0, 0);
+  clientfield::register("vehicle", "cybercom_sysoverload", 1, 1, "int", & function_38510c4a, 0, 0);
+  clientfield::register("actor", "cybercom_surge", 1, 2, "int", & function_2d61bf2e, 0, 0);
+  clientfield::register("vehicle", "cybercom_surge", 1, 2, "int", & function_50dfd00b, 0, 0);
+  clientfield::register("scriptmover", "cybercom_surge", 1, 1, "int", & function_38cc3f2e, 0, 0);
+  clientfield::register("actor", "cybercom_shortout", 1, 2, "int", & function_82d4e6fe, 0, 0);
+  clientfield::register("vehicle", "cybercom_shortout", 1, 2, "int", & function_6f88468d, 0, 0);
+  clientfield::register("allplayers", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
+  clientfield::register("actor", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
+  clientfield::register("scriptmover", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
+  clientfield::register("actor", "sensory_overload", 1, 2, "int", & cybercom_sensoryoverload, 0, 0);
+  clientfield::register("actor", "forced_malfunction", 1, 1, "int", & cybercom_forcedmalfunction, 0, 0);
+  clientfield::register("toplayer", "hacking_progress", 1, 12, "int", & function_9439eecf, 0, 0);
+  clientfield::register("toplayer", "resetAbilityWheel", 1, 1, "int", & function_806d1a61, 0, 0);
   level._effect["sensory_disable_human"] = "electric/fx_ability_elec_sensory_ol_human";
   level._effect["forced_malfunction"] = "electric/fx_ability_elec_sensory_ol_weapon";
 }
 
 function function_15b9d1ea() {
-  level.var_6d1233cd = spawnStruct();
+  level.var_6d1233cd = spawnstruct();
   level.var_6d1233cd.var_f9151455 = [];
   level.var_6d1233cd.var_f9151455[0] = 1;
   level.var_6d1233cd.var_f9151455[1] = 2;
@@ -83,7 +83,7 @@ function function_d3ef9004(var_b41337db) {
 }
 
 function function_850a0f8d(var_80c5df, start_index) {
-  for(index = 1; index < 6; index++) {
+  for (index = 1; index < 6; index++) {
     var_93a57fde = (start_index + index) % 6;
     abilityindex = function_d3ef9004(var_93a57fde);
     if(self iscybercomindexenabled(var_80c5df, abilityindex)) {
@@ -96,11 +96,11 @@ function function_850a0f8d(var_80c5df, start_index) {
 function function_5eccc9a4(localclientnum) {
   var_28b99141 = self getcybercomtype();
   var_1d8356fd = function_371a93b4(localclientnum, var_28b99141);
-  if(!isDefined(var_1d8356fd)) {
+  if(!isdefined(var_1d8356fd)) {
     return;
   }
   var_f0285882 = self function_850a0f8d(var_28b99141, var_1d8356fd);
-  if(!isDefined(var_f0285882)) {
+  if(!isdefined(var_f0285882)) {
     return;
   }
   var_b536f3a3 = function_d3ef9004(var_f0285882);
@@ -115,7 +115,7 @@ function on_player_spawned(localclientnum) {
 }
 
 function opentacmenu(localclientnum) {
-  if(!isDefined(self.tacticalmenu) && !isigcactive(localclientnum)) {
+  if(!isdefined(self.tacticalmenu) && !isigcactive(localclientnum)) {
     self.tacticalmenu = createluimenu(localclientnum, self.cybercom.menu);
     openluimenu(localclientnum, self.tacticalmenu);
     self setintacticalhud(1);
@@ -133,22 +133,22 @@ function freetacmenuhandle(localclientnum, menu) {
   audio::stoploopat("gdt_tac_menu_snapshot_loop", (0, 0, 0));
   wait(0.25);
   closeluimenu(localclientnum, menu);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self.tacticalmenu = undefined;
   self setintacticalhud(0);
-  if(isDefined(self.var_316fa5e6) && self.var_316fa5e6) {
+  if(isdefined(self.var_316fa5e6) && self.var_316fa5e6) {
     self opentacmenu(localclientnum);
     self.var_316fa5e6 = undefined;
   }
 }
 
 function closetacmenu(localclientnum) {
-  if(isDefined(self.tacticalmenu)) {
+  if(isdefined(self.tacticalmenu)) {
     setluimenudata(localclientnum, self.tacticalmenu, "close_current_menu", 1);
     self thread freetacmenuhandle(localclientnum, self.tacticalmenu);
-  } else if(isDefined(self.var_5208f863) && (isDefined(self.var_5208f863) && self.var_5208f863) && getdvarint("cybercom_fastswitch_enabled") == 1) {
+  } else if(isdefined(self.var_5208f863) && (isdefined(self.var_5208f863) && self.var_5208f863) && getdvarint("cybercom_fastswitch_enabled") == 1) {
     self function_5eccc9a4(localclientnum);
   }
   self.var_316fa5e6 = undefined;
@@ -159,7 +159,7 @@ function watchmenuclose(localclientnum) {
   self endon("disconnect");
   self notify("watchmenuclosestart");
   self endon("watchmenuclosestart");
-  for(;;) {
+  for (;;) {
     self util::waittill_any("tactical_menu_close", "death");
     self closetacmenu(localclientnum);
   }
@@ -178,9 +178,9 @@ function function_524667f7(localclientnum) {
 function watchmenuopen(localclientnum) {
   self notify("watchmenuopenstart");
   self endon("watchmenuopenstart");
-  for(;;) {
+  for (;;) {
     self waittill("tactical_menu_open");
-    if(level.cybercom_status == 0 && (!(isDefined(self.cybercomdisabled) && self.cybercomdisabled)) && !isigcactive(localclientnum)) {
+    if(level.cybercom_status == 0 && (!(isdefined(self.cybercomdisabled) && self.cybercomdisabled)) && !isigcactive(localclientnum)) {
       self thread function_524667f7(localclientnum);
     }
   }
@@ -189,13 +189,13 @@ function watchmenuopen(localclientnum) {
 function function_820cd75b(localclientnum) {
   self notify("hash_820cd75b");
   self endon("hash_820cd75b");
-  for(;;) {
+  for (;;) {
     self waittill("tactical_menu_toggle");
-    if(isDefined(self.tacticalmenu)) {
+    if(isdefined(self.tacticalmenu)) {
       self closetacmenu(localclientnum);
       continue;
     }
-    if(level.cybercom_status == 0 && (!(isDefined(self.cybercomdisabled) && self.cybercomdisabled)) && !isigcactive(localclientnum)) {
+    if(level.cybercom_status == 0 && (!(isdefined(self.cybercomdisabled) && self.cybercomdisabled)) && !isigcactive(localclientnum)) {
       self opentacmenu(localclientnum);
     }
   }
@@ -236,11 +236,11 @@ function cybercomdisabledall(localclientnum, oldval, newval, bnewent, binitialsn
 
 function emergencyreserve(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = getlocalplayer(localclientnum);
-  assert(isDefined(player));
-  if(isDefined(player.emergencyreserve) && player.emergencyreserve && !newval) {
+  assert(isdefined(player));
+  if(isdefined(player.emergencyreserve) && player.emergencyreserve && !newval) {
     player.emergencyreserve = undefined;
     visionsetnaked(localclientnum, getdvarstring("mapname"), 0);
-  } else if(!(isDefined(player.emergencyreserve) && player.emergencyreserve) && newval) {
+  } else if(!(isdefined(player.emergencyreserve) && player.emergencyreserve) && newval) {
     player.emergencyreserve = 1;
     visionsetnaked(localclientnum, "cheat_bw", 0.5);
   }
@@ -248,11 +248,11 @@ function emergencyreserve(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function repulsorarmorrecharging(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = getlocalplayer(localclientnum);
-  assert(isDefined(player));
-  if(isDefined(player.repulsorrecharging) && player.repulsorrecharging && !newval) {
+  assert(isdefined(player));
+  if(isdefined(player.repulsorrecharging) && player.repulsorrecharging && !newval) {
     player.repulsorrecharging = undefined;
     visionsetnaked(localclientnum, getdvarstring("mapname"), 0);
-  } else if(!(isDefined(player.repulsorrecharging) && player.repulsorrecharging) && newval) {
+  } else if(!(isdefined(player.repulsorrecharging) && player.repulsorrecharging) && newval) {
     player.repulsorrecharging = 1;
     visionsetnaked(localclientnum, "cheat_bw", 0.5);
   }
@@ -264,7 +264,7 @@ function castinganimationwatcher(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
   self.cybercom.lastcastat = 0;
-  while(true) {
+  while (true) {
     self waittill("gadget_casting_anim");
     curtime = gettime();
     if((self.cybercom.lastcastat + 1000) < curtime) {
@@ -275,8 +275,8 @@ function castinganimationwatcher(localclientnum) {
 }
 
 function initcybercom(localclientnum) {
-  if(!isDefined(self.cybercom)) {
-    self.cybercom = spawnStruct();
+  if(!isdefined(self.cybercom)) {
+    self.cybercom = spawnstruct();
     self.cybercom.menu = "AbilityWheel";
     self.tacticalmenu = undefined;
   }
@@ -285,27 +285,27 @@ function initcybercom(localclientnum) {
 
 function function_38510c4a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    playFX(localclientnum, "electric/fx_elec_sparks_burst_lg_os", self.origin);
-    if(isDefined(self.archetype)) {
+    playfx(localclientnum, "electric/fx_elec_sparks_burst_lg_os", self.origin);
+    if(isdefined(self.archetype)) {
       switch (self.archetype) {
         case "turret": {
-          playSound(0, "gdt_cybercore_turret_shutdown", self.origin);
+          playsound(0, "gdt_cybercore_turret_shutdown", self.origin);
           break;
         }
         case "amws": {
-          playSound(0, "gdt_cybercore_amws_shutdown", self.origin);
+          playsound(0, "gdt_cybercore_amws_shutdown", self.origin);
           break;
         }
         case "pamws": {
-          playSound(0, "gdt_cybercore_amws_shutdown", self.origin);
+          playsound(0, "gdt_cybercore_amws_shutdown", self.origin);
           break;
         }
         case "raps": {
-          playSound(0, "veh_raps_skid", self.origin);
+          playsound(0, "veh_raps_skid", self.origin);
           break;
         }
         case "wasp": {
-          playSound(0, "gdt_cybercore_wasp_shutdown", self.origin);
+          playsound(0, "gdt_cybercore_wasp_shutdown", self.origin);
           break;
         }
       }
@@ -315,56 +315,56 @@ function function_38510c4a(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_572c7315(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    playFXOnTag(localclientnum, "electric/fx_elec_sparks_burst_lg_os", self, "j_neck");
-    self playSound(0, "fly_bot_disable");
+    playfxontag(localclientnum, "electric/fx_elec_sparks_burst_lg_os", self, "j_neck");
+    self playsound(0, "fly_bot_disable");
   } else if(newval == 2) {
-    playFXOnTag(localclientnum, "electric/fx_ability_elec_startup_robot", self, "j_spine4");
-    self playSound(0, "fly_bot_reboot");
+    playfxontag(localclientnum, "electric/fx_ability_elec_startup_robot", self, "j_spine4");
+    self playsound(0, "fly_bot_reboot");
   }
 }
 
 function function_38cc3f2e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_trail", self, "tag_origin");
-    self playSound(0, "gdt_surge_bounce");
+    playfxontag(localclientnum, "electric/fx_ability_elec_surge_trail", self, "tag_origin");
+    self playsound(0, "gdt_surge_bounce");
   }
 }
 
 function function_2d61bf2e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_robot", self, "j_spine4");
-    self playSound(0, "gdt_surge_impact");
+    playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_robot", self, "j_spine4");
+    self playsound(0, "gdt_surge_impact");
   } else if(newval == 2) {
-    playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_robot", self, "j_spine4");
-    self playSound(0, "gdt_surge_chase");
+    playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_robot", self, "j_spine4");
+    self playsound(0, "gdt_surge_chase");
   }
 }
 
 function function_50dfd00b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.var_3949887b)) {
+  if(isdefined(self.var_3949887b)) {
     stopfx(localclientnum, self.var_3949887b);
   }
   if(newval == 1) {
-    self playSound(0, "gdt_surge_impact");
+    self playsound(0, "gdt_surge_impact");
     switch (self.archetype) {
       case "turret": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_turret", self, "tag_fx");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_turret", self, "tag_fx");
         break;
       }
       case "amws": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_amws", self, "tag_head_slide_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_amws", self, "tag_head_slide_animate");
         break;
       }
       case "pamws": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_pamws", self, "tag_head_slide_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_pamws", self, "tag_head_slide_animate");
         break;
       }
       case "raps": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_raps", self, "tag_wheel_front_right_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_raps", self, "tag_wheel_front_right_animate");
         break;
       }
       case "wasp": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_wasp", self, "tag_body");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_wasp", self, "tag_body");
         break;
       }
       default: {
@@ -375,23 +375,23 @@ function function_50dfd00b(localclientnum, oldval, newval, bnewent, binitialsnap
   } else if(newval == 2) {
     switch (self.archetype) {
       case "turret": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_turret", self, "tag_fx");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_turret", self, "tag_fx");
         break;
       }
       case "amws": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_amws", self, "tag_head_slide_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_amws", self, "tag_head_slide_animate");
         break;
       }
       case "pamws": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_pamws", self, "tag_head_slide_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_pamws", self, "tag_head_slide_animate");
         break;
       }
       case "raps": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_raps", self, "tag_wheel_front_right_animate");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_raps", self, "tag_wheel_front_right_animate");
         break;
       }
       case "wasp": {
-        self.var_3949887b = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_wasp", self, "tag_body");
+        self.var_3949887b = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_wasp", self, "tag_body");
         break;
       }
       default: {
@@ -404,40 +404,40 @@ function function_50dfd00b(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_82d4e6fe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(0, "gdt_servo_robot_die");
-    playFXOnTag(localclientnum, "electric/fx_ability_servo_shortout_robot", self, "j_spine4");
+    self playsound(0, "gdt_servo_robot_die");
+    playfxontag(localclientnum, "electric/fx_ability_servo_shortout_robot", self, "j_spine4");
   }
   if(newval == 2) {
-    playFXOnTag(localclientnum, "destruct/fx_dest_robot_limb_sparks_right", self, "j_knee_ri");
-    playFXOnTag(localclientnum, "destruct/fx_dest_robot_limb_sparks_left", self, "j_knee_le");
+    playfxontag(localclientnum, "destruct/fx_dest_robot_limb_sparks_right", self, "j_knee_ri");
+    playfxontag(localclientnum, "destruct/fx_dest_robot_limb_sparks_left", self, "j_knee_le");
   }
 }
 
 function function_6f88468d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.var_3e759796)) {
+  if(isdefined(self.var_3e759796)) {
     stopfx(localclientnum, self.var_3e759796);
   }
   if(newval == 1) {
-    self playSound(0, "gdt_servo_robot_die");
+    self playsound(0, "gdt_servo_robot_die");
     switch (self.archetype) {
       case "turret": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_turret", self, "tag_fx");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_turret", self, "tag_fx");
         break;
       }
       case "amws": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_amws", self, "tag_head_slide_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_amws", self, "tag_head_slide_animate");
         break;
       }
       case "pamws": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_pamws", self, "tag_head_slide_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_pamws", self, "tag_head_slide_animate");
         break;
       }
       case "raps": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_raps", self, "tag_wheel_front_right_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_raps", self, "tag_wheel_front_right_animate");
         break;
       }
       case "wasp": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_wasp", self, "tag_body");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_wasp", self, "tag_body");
         break;
       }
       default: {
@@ -448,23 +448,23 @@ function function_6f88468d(localclientnum, oldval, newval, bnewent, binitialsnap
   } else if(newval == 2) {
     switch (self.archetype) {
       case "turret": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_turret", self, "tag_fx");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_turret", self, "tag_fx");
         break;
       }
       case "amws": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_amws", self, "tag_head_slide_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_amws", self, "tag_head_slide_animate");
         break;
       }
       case "pamws": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_pamws", self, "tag_head_slide_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_pamws", self, "tag_head_slide_animate");
         break;
       }
       case "raps": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_raps", self, "tag_wheel_front_right_animate");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_raps", self, "tag_wheel_front_right_animate");
         break;
       }
       case "wasp": {
-        self.var_3e759796 = playFXOnTag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_wasp", self, "tag_body");
+        self.var_3e759796 = playfxontag(localclientnum, "electric/fx_ability_elec_surge_short_upgrade_wasp", self, "tag_body");
         break;
       }
       default: {
@@ -478,25 +478,25 @@ function function_6f88468d(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_87475da2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self.archetype == "robot") {
     if(newval == 1) {
-      self playSound(0, "gdt_immolation_robot_countdown");
+      self playsound(0, "gdt_immolation_robot_countdown");
     } else if(newval == 2) {
       player = getlocalplayers()[0];
       player earthquake(0.5, 0.5, self.origin, 500);
       playrumbleonposition(localclientnum, "grenade_rumble", self.origin);
-      playSound(0, "wpn_incendiary_explode", self.origin);
-      playFXOnTag(localclientnum, "explosions/fx_ability_exp_immolation", self, "j_spinelower");
+      playsound(0, "wpn_incendiary_explode", self.origin);
+      playfxontag(localclientnum, "explosions/fx_ability_exp_immolation", self, "j_spinelower");
       physicsexplosionsphere(localclientnum, self.origin, 200, 32, 2, 10, 1, 1, 1);
     }
   } else if(self.archetype == "human" || self.archetype == "human_riotshield") {
     if(newval == 1) {
-      self playSound(0, "gdt_immolation_human_countdown");
+      self playsound(0, "gdt_immolation_human_countdown");
     }
   }
 }
 
 function function_a7363f41(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self playSound(0, "gdt_immolation_robot_countdown");
+    self playsound(0, "gdt_immolation_robot_countdown");
   }
 }
 
@@ -512,13 +512,13 @@ function setiffname(localclientnum, oldval, newval, bnewent, binitialsnap, field
       text = makelocalizedstring("WEAPON_LINK_INPROGRESS");
       self.var_2b998b77 = text;
       self setdrawname(self.var_2b998b77, 1);
-      self playSound(0, "gdt_iff_activate");
+      self playsound(0, "gdt_iff_activate");
       break;
     }
     case 2: {
       self.var_2b998b77 = function_a4cd6b9a();
       self setdrawname(self.var_2b998b77);
-      self callback::on_shutdown(&function_d48fcfa6);
+      self callback::on_shutdown( & function_d48fcfa6);
       break;
     }
     case 3: {
@@ -531,7 +531,7 @@ function setiffname(localclientnum, oldval, newval, bnewent, binitialsnap, field
       text = makelocalizedstring("WEAPON_LINK_TERMINATED");
       self.var_2b998b77 = text;
       self setdrawname(self.var_2b998b77, 1);
-      self playSound(0, "gdt_iff_deactivate");
+      self playsound(0, "gdt_iff_deactivate");
       break;
     }
   }
@@ -541,7 +541,7 @@ function private function_13f09a6b() {
   self endon("entityshutdown");
   self notify("hash_e0f9c098");
   self endon("hash_e0f9c098");
-  while(true) {
+  while (true) {
     wait(2);
     self setdrawname(self.var_2b998b77, 2);
     wait(2);
@@ -624,7 +624,7 @@ function function_38e32940() {
   var_266a1a59 = 690;
   var_b608e411 = var_191c13e8;
   total_time = var_266a1a59;
-  while(time_counter < total_time) {
+  while (time_counter < total_time) {
     current_time = time_counter;
     switch (var_f13af102) {
       case 0: {
@@ -666,30 +666,30 @@ function function_38e32940() {
 }
 
 function cybercom_forcedmalfunction(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval == 0 && isDefined(self.var_dea2a612)) {
+  if(newval == 0 && isdefined(self.var_dea2a612)) {
     deletefx(localclientnum, self.var_dea2a612);
   }
   if(newval == 1) {
-    if(isDefined(self.var_dea2a612)) {
+    if(isdefined(self.var_dea2a612)) {
       deletefx(localclientnum, self.var_dea2a612);
     }
     tagorigin = self gettagorigin("tag_brass");
-    if(isDefined(tagorigin)) {
-      self.var_dea2a612 = playFXOnTag(localclientnum, level._effect["forced_malfunction"], self, "tag_brass");
+    if(isdefined(tagorigin)) {
+      self.var_dea2a612 = playfxontag(localclientnum, level._effect["forced_malfunction"], self, "tag_brass");
     }
   }
 }
 
 function cybercom_sensoryoverload(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval == 0 && isDefined(self.var_ac70f183)) {
+  if(newval == 0 && isdefined(self.var_ac70f183)) {
     deletefx(localclientnum, self.var_ac70f183);
   }
   if(newval == 2) {} else {}
   if(newval != 0) {
-    if(isDefined(self.var_ac70f183)) {
+    if(isdefined(self.var_ac70f183)) {
       deletefx(localclientnum, self.var_ac70f183);
     }
-    self.var_ac70f183 = playFXOnTag(localclientnum, level._effect["sensory_disable_human"], self, "j_neck");
+    self.var_ac70f183 = playfxontag(localclientnum, level._effect["sensory_disable_human"], self, "j_neck");
   }
 }
 
@@ -699,7 +699,7 @@ function function_2aa9d708(model, range, start) {
   self endon("hash_14a1bc97");
   starttime = getrealtime();
   val = start / range;
-  while(val <= 1) {
+  while (val <= 1) {
     setuimodelvalue(model, val);
     totaltime = ((getrealtime() - starttime) / 1000) + start;
     val = math::clamp(totaltime / range, 0, 1);
@@ -710,7 +710,7 @@ function function_2aa9d708(model, range, start) {
 
 function function_9439eecf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   model = getuimodel(getuimodelforcontroller(localclientnum), "WorldSpaceIndicators.hackingPercent");
-  if(!isDefined(model)) {
+  if(!isdefined(model)) {
     return;
   }
   setuimodelvalue(model, 0);
@@ -727,17 +727,17 @@ function function_806d1a61(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval == 1) {
     controllermodel = getuimodelforcontroller(localclientnum);
     var_3d954e27 = getuimodel(controllermodel, "AbilityWheel.Selected1");
-    if(!isDefined(var_3d954e27)) {
+    if(!isdefined(var_3d954e27)) {
       createuimodel(controllermodel, "AbilityWheel.Selected1");
       var_3d954e27 = getuimodel(controllermodel, "AbilityWheel.Selected1");
     }
     var_cb8ddeec = getuimodel(controllermodel, "AbilityWheel.Selected2");
-    if(!isDefined(var_cb8ddeec)) {
+    if(!isdefined(var_cb8ddeec)) {
       createuimodel(controllermodel, "AbilityWheel.Selected2");
       var_cb8ddeec = getuimodel(controllermodel, "AbilityWheel.Selected2");
     }
     var_f1905955 = getuimodel(controllermodel, "AbilityWheel.Selected3");
-    if(!isDefined(var_f1905955)) {
+    if(!isdefined(var_f1905955)) {
       createuimodel(controllermodel, "AbilityWheel.Selected3");
       var_f1905955 = getuimodel(controllermodel, "AbilityWheel.Selected3");
     }
@@ -767,11 +767,11 @@ function function_371a93b4(localclientnum, var_c5f458e4) {
       var_29ad5b90 = getuimodel(controllermodel, "AbilityWheel.Selected3");
     }
   }
-  if(!isDefined(var_29ad5b90)) {
+  if(!isdefined(var_29ad5b90)) {
     return undefined;
   }
   var_191d8f6d = getuimodelvalue(var_29ad5b90);
-  if(!isDefined(var_191d8f6d)) {
+  if(!isdefined(var_191d8f6d)) {
     return undefined;
   }
   return var_191d8f6d - 1;

@@ -16,19 +16,16 @@
 init() {
   onplayerconnect_callback(::onplayerconnect_bank_deposit_box);
 
-  if(!isDefined(level.ta_vaultfee)) {
+  if(!isDefined(level.ta_vaultfee))
     level.ta_vaultfee = 100;
-  }
 
-  if(!isDefined(level.ta_tellerfee)) {
+  if(!isDefined(level.ta_tellerfee))
     level.ta_tellerfee = 100;
-  }
 }
 
 main() {
-  if(!isDefined(level.banking_map)) {
+  if(!isDefined(level.banking_map))
     level.banking_map = level.script;
-  }
 
   level thread bank_teller_init();
   level thread bank_deposit_box();
@@ -104,11 +101,10 @@ delete_bank_teller() {
 onplayerconnect_bank_deposit_box() {
   online_game = sessionmodeisonlinegame();
 
-  if(!online_game) {
+  if(!online_game)
     self.account_value = 0;
-  } else {
+  else
     self.account_value = self maps\mp\zombies\_zm_stats::get_map_stat("depositBox", level.banking_map);
-  }
 }
 
 bank_deposit_box() {
@@ -131,52 +127,47 @@ bank_withdraw_unitrigger() {
 }
 
 bank_unitrigger(name, prompt_fn, think_fn, override_length, override_width, override_height, override_radius) {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
 
-  if(isDefined(self.script_angles)) {
+  if(isDefined(self.script_angles))
     unitrigger_stub.angles = self.script_angles;
-  } else {
+  else
     unitrigger_stub.angles = self.angles;
-  }
 
   unitrigger_stub.script_angles = unitrigger_stub.angles;
 
-  if(isDefined(override_length)) {
+  if(isDefined(override_length))
     unitrigger_stub.script_length = override_length;
-  } else if(isDefined(self.script_length)) {
+  else if(isDefined(self.script_length))
     unitrigger_stub.script_length = self.script_length;
-  } else {
+  else
     unitrigger_stub.script_length = 32;
-  }
 
-  if(isDefined(override_width)) {
+  if(isDefined(override_width))
     unitrigger_stub.script_width = override_width;
-  } else if(isDefined(self.script_width)) {
+  else if(isDefined(self.script_width))
     unitrigger_stub.script_width = self.script_width;
-  } else {
+  else
     unitrigger_stub.script_width = 32;
-  }
 
-  if(isDefined(override_height)) {
+  if(isDefined(override_height))
     unitrigger_stub.script_height = override_height;
-  } else if(isDefined(self.script_height)) {
+  else if(isDefined(self.script_height))
     unitrigger_stub.script_height = self.script_height;
-  } else {
+  else
     unitrigger_stub.script_height = 64;
-  }
 
-  if(isDefined(override_radius)) {
+  if(isDefined(override_radius))
     unitrigger_stub.script_radius = override_radius;
-  } else if(isDefined(self.radius)) {
+  else if(isDefined(self.radius))
     unitrigger_stub.radius = self.radius;
-  } else {
+  else
     unitrigger_stub.radius = 32;
-  }
 
-  if(isDefined(self.script_unitrigger_type)) {
+  if(isDefined(self.script_unitrigger_type))
     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
-  } else {
+  else {
     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);
   }
@@ -214,13 +205,11 @@ trigger_deposit_think() {
       player.account_value = player.account_value + level.bank_account_increment;
       player maps\mp\zombies\_zm_stats::set_map_stat("depositBox", player.account_value, level.banking_map);
 
-      if(isDefined(level.custom_bank_deposit_vo)) {
+      if(isDefined(level.custom_bank_deposit_vo))
         player thread[[level.custom_bank_deposit_vo]]();
-      }
 
-      if(player.account_value >= level.bank_account_max) {
+      if(player.account_value >= level.bank_account_max)
         self sethintstring("");
-      }
     } else
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);
 
@@ -255,17 +244,15 @@ trigger_withdraw_think() {
       player.account_value = player.account_value - level.bank_account_increment;
       player maps\mp\zombies\_zm_stats::set_map_stat("depositBox", player.account_value, level.banking_map);
 
-      if(isDefined(level.custom_bank_withdrawl_vo)) {
+      if(isDefined(level.custom_bank_withdrawl_vo))
         player thread[[level.custom_bank_withdrawl_vo]]();
-      } else {
+      else
         player thread do_player_general_vox("general", "exert_laugh", 10, 50);
-      }
 
       player thread player_withdraw_fee();
 
-      if(player.account_value < level.bank_account_increment) {
+      if(player.account_value < level.bank_account_increment)
         self sethintstring("");
-      }
     } else
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);
 

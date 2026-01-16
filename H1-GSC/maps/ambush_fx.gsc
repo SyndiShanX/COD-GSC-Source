@@ -225,7 +225,7 @@ play_nighttime_fx(var_0, var_1, var_2) {
   var_3.origin = var_1;
   var_3.angles = var_2;
   var_4 = loadfx(var_0);
-  playFXOnTag(var_4, var_3, "tag_origin");
+  playfxontag(var_4, var_3, "tag_origin");
   common_scripts\utility::flag_wait("takeover_fade_clear");
-  stopFXOnTag(var_4, var_3, "tag_origin");
+  stopfxontag(var_4, var_3, "tag_origin");
 }

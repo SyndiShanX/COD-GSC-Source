@@ -13,12 +13,12 @@
 #namespace archetypedirewolf;
 
 function autoexec __init__sytem__() {
-  system::register("direwolf", &__init__, undefined, undefined);
+  system::register("direwolf", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("direwolf", &zombiedogbehavior::archetypezombiedogblackboardinit);
-  spawner::add_archetype_spawn_function("direwolf", &direwolfspawnsetup);
+  spawner::add_archetype_spawn_function("direwolf", & zombiedogbehavior::archetypezombiedogblackboardinit);
+  spawner::add_archetype_spawn_function("direwolf", & direwolfspawnsetup);
   ai::registermatchedinterface("direwolf", "sprint", 0, array(1, 0));
   ai::registermatchedinterface("direwolf", "howl_chance", 0.3);
   ai::registermatchedinterface("direwolf", "can_initiateaivsaimelee", 1, array(1, 0));

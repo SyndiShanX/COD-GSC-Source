@@ -7,6 +7,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace spike_charge_siegebot;
 
 autoexec __init__system__() {
@@ -14,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "spike_charge_siegebot_light"] = # "light/fx_light_red_spike_charge_os";
+  level._effect[#"spike_charge_siegebot_light"] = #"light/fx_light_red_spike_charge_os";
   callback::add_weapon_type(#"spike_charge_siegebot", &spawned);
   callback::add_weapon_type(#"spike_charge_siegebot_theia", &spawned);
   callback::add_weapon_type(#"siegebot_launcher_turret", &spawned);
@@ -35,14 +36,14 @@ fx_think(localclientnum) {
   for(interval = 0.3;; interval = math::clamp(interval / 1.2, 0.08, 0.3)) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
-    self playSound(localclientnum, # "wpn_semtex_alert");
+    self playSound(localclientnum, #"wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
     self util::waittill_dobj(localclientnum);
   }
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "spike_charge_siegebot_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"spike_charge_siegebot_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

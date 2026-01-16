@@ -9,15 +9,15 @@
 #namespace hud;
 
 function setparent(element) {
-  if(isDefined(self.parent) && self.parent == element) {
+  if(isdefined(self.parent) && self.parent == element) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isdefined(self.parent)) {
     self.parent removechild(self);
   }
   self.parent = element;
   self.parent addchild(self);
-  if(isDefined(self.point)) {
+  if(isdefined(self.point)) {
     self setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   } else {
     self setpoint("TOP");
@@ -48,11 +48,11 @@ function setpoint(point, relativepoint, xoffset, yoffset, movetime = 0) {
   if(movetime) {
     self moveovertime(movetime);
   }
-  if(!isDefined(xoffset)) {
+  if(!isdefined(xoffset)) {
     xoffset = 0;
   }
   self.xoffset = xoffset;
-  if(!isDefined(yoffset)) {
+  if(!isdefined(yoffset)) {
     yoffset = 0;
   }
   self.yoffset = yoffset;
@@ -113,7 +113,7 @@ function setpoint(point, relativepoint, xoffset, yoffset, movetime = 0) {
       break;
     }
   }
-  if(!isDefined(relativepoint)) {
+  if(!isdefined(relativepoint)) {
     relativepoint = point;
   }
   self.relativepoint = relativepoint;
@@ -272,7 +272,7 @@ function updatebarscale(barfrac, rateofchange) {
   self.bar.frac = barfrac;
   self.bar setshader(self.bar.shader, barwidth, self.height);
   assert(barwidth <= self.width, (((("" + barwidth) + "") + self.width) + "") + barfrac);
-  if(isDefined(rateofchange) && barwidth < self.width) {
+  if(isdefined(rateofchange) && barwidth < self.width) {
     if(rateofchange > 0) {
       assert(((1 - barfrac) / rateofchange) > 0, (("" + barfrac) + "") + rateofchange);
       self.bar scaleovertime((1 - barfrac) / rateofchange, self.width, self.height);
@@ -303,7 +303,7 @@ function createfontstring(font, fontscale) {
 }
 
 function createserverfontstring(font, fontscale, team) {
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     fontelem = newteamhudelem(team);
   } else {
     fontelem = newhudelem();
@@ -324,7 +324,7 @@ function createserverfontstring(font, fontscale, team) {
 }
 
 function createservertimer(font, fontscale, team) {
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     timerelem = newteamhudelem(team);
   } else {
     timerelem = newhudelem();
@@ -373,14 +373,14 @@ function createicon(shader, width, height) {
   iconelem.children = [];
   iconelem setparent(level.uiparent);
   iconelem.hidden = 0;
-  if(isDefined(shader)) {
+  if(isdefined(shader)) {
     iconelem setshader(shader, width, height);
   }
   return iconelem;
 }
 
 function createservericon(shader, width, height, team) {
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     iconelem = newteamhudelem(team);
   } else {
     iconelem = newhudelem();
@@ -395,14 +395,14 @@ function createservericon(shader, width, height, team) {
   iconelem.children = [];
   iconelem setparent(level.uiparent);
   iconelem.hidden = 0;
-  if(isDefined(shader)) {
+  if(isdefined(shader)) {
     iconelem setshader(shader, width, height);
   }
   return iconelem;
 }
 
 function createserverbar(color, width, height, flashfrac, team, selected) {
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     barelem = newteamhudelem(team);
   } else {
     barelem = newhudelem();
@@ -415,10 +415,10 @@ function createserverbar(color, width, height, flashfrac, team, selected) {
   barelem.shader = "progress_bar_fill";
   barelem setshader("progress_bar_fill", width, height);
   barelem.hidden = 0;
-  if(isDefined(flashfrac)) {
+  if(isdefined(flashfrac)) {
     barelem.flashfrac = flashfrac;
   }
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     barelemframe = newteamhudelem(team);
   } else {
     barelemframe = newhudelem();
@@ -436,13 +436,13 @@ function createserverbar(color, width, height, flashfrac, team, selected) {
   barelemframe.sort = -1;
   barelemframe.color = (1, 1, 1);
   barelemframe setparent(level.uiparent);
-  if(isDefined(selected)) {
+  if(isdefined(selected)) {
     barelemframe setshader("progress_bar_fg_sel", width, height);
   } else {
     barelemframe setshader("progress_bar_fg", width, height);
   }
   barelemframe.hidden = 0;
-  if(isDefined(team)) {
+  if(isdefined(team)) {
     barelembg = newteamhudelem(team);
   } else {
     barelembg = newhudelem();
@@ -476,7 +476,7 @@ function createbar(color, width, height, flashfrac) {
   barelem.shader = "progress_bar_fill";
   barelem setshader("progress_bar_fill", width, height);
   barelem.hidden = 0;
-  if(isDefined(flashfrac)) {
+  if(isdefined(flashfrac)) {
     barelem.flashfrac = flashfrac;
   }
   barelemframe = newclienthudelem(self);
@@ -522,7 +522,7 @@ function createbar(color, width, height, flashfrac) {
 
 function getcurrentfraction() {
   frac = self.bar.frac;
-  if(isDefined(self.bar.rateofchange)) {
+  if(isdefined(self.bar.rateofchange)) {
     frac = frac + ((gettime() - self.bar.lastupdatetime) * self.bar.rateofchange);
     if(frac > 1) {
       frac = 1;
@@ -644,7 +644,7 @@ function flashthread() {
   if(!self.hidden) {
     self.alpha = 1;
   }
-  while(true) {
+  while (true) {
     if(self.frac >= self.flashfrac) {
       if(!self.hidden) {
         self fadeovertime(0.3);
@@ -665,12 +665,12 @@ function flashthread() {
 
 function destroyelem() {
   tempchildren = [];
-  for(index = 0; index < self.children.size; index++) {
-    if(isDefined(self.children[index])) {
+  for (index = 0; index < self.children.size; index++) {
+    if(isdefined(self.children[index])) {
       tempchildren[tempchildren.size] = self.children[index];
     }
   }
-  for(index = 0; index < tempchildren.size; index++) {
+  for (index = 0; index < tempchildren.size; index++) {
     tempchildren[index] setparent(self getparent());
   }
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
@@ -698,7 +698,7 @@ function setsize(width, height) {
 }
 
 function updatechildren() {
-  for(index = 0; index < self.children.size; index++) {
+  for (index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setpoint(child.point, child.relativepoint, child.xoffset, child.yoffset);
   }
@@ -756,7 +756,7 @@ function showloadoutattribute(iconelem, icon, alpha, textelem, text) {
   if(alpha) {
     iconelem setshader(icon, iconsize, iconsize);
   }
-  if(isDefined(textelem)) {
+  if(isdefined(textelem)) {
     textelem.alpha = alpha;
     if(alpha) {
       textelem settext(text);
@@ -765,18 +765,18 @@ function showloadoutattribute(iconelem, icon, alpha, textelem, text) {
 }
 
 function hideloadoutattribute(iconelem, fadetime, textelem, hidetextonly) {
-  if(isDefined(fadetime)) {
-    if(!isDefined(hidetextonly) || !hidetextonly) {
+  if(isdefined(fadetime)) {
+    if(!isdefined(hidetextonly) || !hidetextonly) {
       iconelem fadeovertime(fadetime);
     }
-    if(isDefined(textelem)) {
+    if(isdefined(textelem)) {
       textelem fadeovertime(fadetime);
     }
   }
-  if(!isDefined(hidetextonly) || !hidetextonly) {
+  if(!isdefined(hidetextonly) || !hidetextonly) {
     iconelem.alpha = 0;
   }
-  if(isDefined(textelem)) {
+  if(isdefined(textelem)) {
     textelem.alpha = 0;
   }
 }
@@ -787,12 +787,12 @@ function showperks() {
 
 function showperk(index, perk, ypos) {
   assert(game[""] != "");
-  if(!isDefined(self.perkicon)) {
+  if(!isdefined(self.perkicon)) {
     self.perkicon = [];
     self.perkname = [];
   }
-  if(!isDefined(self.perkicon[index])) {
-    assert(!isDefined(self.perkname[index]));
+  if(!isdefined(self.perkicon[index])) {
+    assert(!isdefined(self.perkname[index]));
     self.perkicon[index] = createloadouticon(self, index, 0, 200, ypos);
     self.perkname[index] = createloadouttext(self.perkicon[index], 160);
   } else {
@@ -802,7 +802,7 @@ function showperk(index, perk, ypos) {
   if(perk == "perk_null" || perk == "weapon_null" || perk == "specialty_null") {
     alpha = 0;
   } else {
-    assert(isDefined(level.perknames[perk]), perk);
+    assert(isdefined(level.perknames[perk]), perk);
     alpha = 1;
   }
   showloadoutattribute(self.perkicon[index], perk, alpha, self.perkname[index], level.perknames[perk]);
@@ -817,15 +817,15 @@ function showperk(index, perk, ypos) {
 function hideperk(index, fadetime = 0.05, hidetextonly) {
   if(level.perksenabled == 1) {
     if(game["state"] == "postgame") {
-      if(isDefined(self.perkicon)) {
-        assert(!isDefined(self.perkicon[index]));
-        assert(!isDefined(self.perkname[index]));
+      if(isdefined(self.perkicon)) {
+        assert(!isdefined(self.perkicon[index]));
+        assert(!isdefined(self.perkname[index]));
       }
       return;
     }
-    assert(isDefined(self.perkicon[index]));
-    assert(isDefined(self.perkname[index]));
-    if(isDefined(self.perkicon) && isDefined(self.perkicon[index]) && isDefined(self.perkname) && isDefined(self.perkname[index])) {
+    assert(isdefined(self.perkicon[index]));
+    assert(isdefined(self.perkname[index]));
+    if(isdefined(self.perkicon) && isdefined(self.perkicon[index]) && isdefined(self.perkname) && isdefined(self.perkname[index])) {
       hideloadoutattribute(self.perkicon[index], fadetime, self.perkname[index], hidetextonly);
     }
   }
@@ -833,16 +833,16 @@ function hideperk(index, fadetime = 0.05, hidetextonly) {
 
 function showkillstreak(index, killstreak, xpos, ypos) {
   assert(game[""] != "");
-  if(!isDefined(self.killstreakicon)) {
+  if(!isdefined(self.killstreakicon)) {
     self.killstreakicon = [];
   }
-  if(!isDefined(self.killstreakicon[index])) {
+  if(!isdefined(self.killstreakicon[index])) {
     self.killstreakicon[index] = createloadouticon(self, 3, (self.killstreak.size - 1) - index, xpos, ypos);
   }
   if(killstreak == "killstreak_null" || killstreak == "weapon_null") {
     alpha = 0;
   } else {
-    assert(isDefined(level.killstreakicons[killstreak]), killstreak);
+    assert(isdefined(level.killstreakicons[killstreak]), killstreak);
     alpha = 1;
   }
   showloadoutattribute(self.killstreakicon[index], level.killstreakicons[killstreak], alpha);
@@ -851,10 +851,10 @@ function showkillstreak(index, killstreak, xpos, ypos) {
 function hidekillstreak(index, fadetime) {
   if(util::is_killstreaks_enabled()) {
     if(game["state"] == "postgame") {
-      assert(!isDefined(self.killstreakicon[index]));
+      assert(!isdefined(self.killstreakicon[index]));
       return;
     }
-    assert(isDefined(self.killstreakicon[index]));
+    assert(isdefined(self.killstreakicon[index]));
     hideloadoutattribute(self.killstreakicon[index], fadetime);
   }
 }

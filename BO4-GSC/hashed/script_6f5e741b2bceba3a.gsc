@@ -8,6 +8,7 @@
 #include scripts\zm\zm_white_toast;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace namespace_d9987f47;
 
 autoexec __init__system__() {
@@ -82,7 +83,7 @@ is_active() {
 }
 
 private wallbuy_watcher() {
-  level endon(#"hash_31c14df051f6c165", # "game_ended");
+  level endon(#"hash_31c14df051f6c165", #"game_ended");
 
   while(true) {
     s_notify = level waittill(#"weapon_bought");

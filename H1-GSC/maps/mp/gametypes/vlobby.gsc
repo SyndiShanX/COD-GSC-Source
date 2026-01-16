@@ -40,16 +40,15 @@ menuclass(var_0) {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = 0;
-  }
 
-  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_WAR");
   init_spawns();
   var_0[0] = level.gametype;
   maps\mp\gametypes\_gameobjects::main(var_0);
@@ -69,10 +68,10 @@ init_spawns() {
 }
 
 getspawnpoint(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     var_0 = 0;
 
-    for(var_1 = 0; var_1 < level.players.size; var_1++) {
+    for (var_1 = 0; var_1 < level.players.size; var_1++) {
       if(level.players[var_1] == self) {
         var_0 = var_1;
         break;
@@ -80,7 +79,7 @@ getspawnpoint(var_0) {
     }
   }
 
-  var_2 = getEntArray("player_pos", "targetname");
+  var_2 = getentarray("player_pos", "targetname");
   var_3 = undefined;
 
   foreach(var_3 in var_2) {
@@ -89,16 +88,14 @@ getspawnpoint(var_0) {
     }
   }
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = var_2[0];
-  }
 
   self.avatar_spawnpoint = var_3;
   return var_3;
 }
 
 onspawnplayer() {
-  if(isDefined(level.vl_onspawnplayer)) {
+  if(isdefined(level.vl_onspawnplayer))
     self[[level.vl_onspawnplayer]]();
-  }
 }

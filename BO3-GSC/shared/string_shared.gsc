@@ -7,7 +7,7 @@
 #namespace string;
 
 function rfill(str_input, n_length, str_fill_char) {
-  if(!isDefined(str_fill_char)) {
+  if(!isdefined(str_fill_char)) {
     str_fill_char = "";
   }
   if(str_fill_char == "") {
@@ -18,7 +18,7 @@ function rfill(str_input, n_length, str_fill_char) {
   n_fill_count = n_length - str_input.size;
   str_fill = "";
   if(n_fill_count > 0) {
-    for(i = 0; i < n_fill_count; i++) {
+    for (i = 0; i < n_fill_count; i++) {
       str_fill = str_fill + str_fill_char;
     }
   }

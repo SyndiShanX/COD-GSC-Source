@@ -9,9 +9,8 @@
 #include common_scripts\utility;
 #using_animtree("vehicles");
 main(model, type) {
-  if(!isDefined(level._effect)) {
+  if(!isdefined(level._effect))
     level._effect = [];
-  }
   level._effect["flare_runner_intro"] = loadfx("misc/flare_start");
   level._effect["flare_runner"] = loadfx("misc/flare");
   level._effect["flare_runner_fizzout"] = loadfx("misc/flare_end");
@@ -21,6 +20,7 @@ main(model, type) {
 
   //health, optional_min, optional_max
   build_life(9999);
+
 }
 
 init_local() {}
@@ -31,11 +31,11 @@ merge_suncolor(delay, timer, rgb1, rgb2) {
   timer = timer * 20;
   suncolor = [];
 
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     c = [];
-    for(p = 0; p < 3; p++) {
+    for (p = 0; p < 3; p++) {
       c[p] = rgb2[p] * dif + rgb1[p] * (1 - dif);
     }
 
@@ -57,7 +57,7 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   0	i
   1	timer*20
   */
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -67,13 +67,14 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   }
 
   setsaveddvar(dvar, l2);
+
 }
 
 merge_sunbrightness(delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -87,12 +88,11 @@ merge_sunbrightness(delay, timer, l1, l2) {
 combine_sunlight_and_brightness() {
   level endon("stop_combining_sunlight_and_brightness");
   wait(0.05); // wait for the direction to start lerping
-  for(;;) {
+  for (;;) {
     brightness = level.sun_brightness;
     // add some flicker
-    if(brightness > 1) {
+    if(brightness > 1)
       brightness += randomfloat(0.2);
-    }
 
     rgb = vector_Multiply(level.sun_color, brightness);
     setSunLight(rgb[0], rgb[1], rgb[2]);
@@ -111,14 +111,14 @@ flare_initial_fx() {
   model = spawn("script_model", (0, 0, 0));
   model setModel("tag_origin");
   model linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner_intro"], model, "tag_origin");
+  playfxontag(level._effect["flare_runner_intro"], model, "tag_origin");
   self waittillmatch("noteworthy", "flare_intro_node");
   model delete();
 }
 
 flare_explodes() {
   flag_set("flare_start_setting_sundir");
-  // flare explodes
+  // flare explodes 
   // the amount of time for the ent to traverse the arc
   level.sun_brightness = 1;
   // merge our various sun values over time
@@ -135,7 +135,7 @@ flare_explodes() {
   model2 = spawn("script_model", (0, 0, 0));
   model2 setModel("tag_origin");
   model2 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner"], model2, "tag_origin");
+  playfxontag(level._effect["flare_runner"], model2, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
 
   //	wait( 1 );
@@ -147,7 +147,7 @@ flare_burns_out() {
   model3 = spawn("script_model", (0, 0, 0));
   model3 setModel("tag_origin");
   model3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
+  playfxontag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
   //wait( 0.3 );
 
   // brightness goes down then up
@@ -177,13 +177,14 @@ flare_fx() {
 }
 
 flag_flare(msg) {
-  if(!isDefined(level.flag[msg])) {
+  if(!isdefined(level.flag[msg])) {
     flag_init(msg);
     return;
   }
 }
 
 flare_from_targetname(targetname) {
+
   flare = spawn_vehicle_from_targetname(targetname);
 
   flag_flare("flare_in_use");
@@ -209,14 +210,13 @@ flare_from_targetname(targetname) {
   sunPointsTo = getent(flare.script_linkto, "script_linkname").origin;
 
   angles = vectortoangles(flare.origin - sunPointsTo);
-  oldForward = anglesToForward(angles);
-  for(;;) {
+  oldForward = anglestoforward(angles);
+  for (;;) {
     wait(0.05);
-    if(flag("flare_stop_setting_sundir")) {
+    if(flag("flare_stop_setting_sundir"))
       break;
-    }
     angles = vectortoangles(flare.origin - sunPointsTo);
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     lerpSunDirection(oldForward, forward, 0.05);
     oldForward = forward;
   }

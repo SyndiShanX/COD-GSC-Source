@@ -27,19 +27,19 @@ prepare_chalk_weapon_list() {
   level.buildable_wallbuy_weapons[4] = "tazer_knuckles_zm";
   level.buildable_wallbuy_weapons[5] = "870mcs_zm";
   level.buildable_wallbuy_weapon_hints = [];
-  level.buildable_wallbuy_weapon_hints["ak74u_zm"] = &"ZM_BURIED_WB_AK74U";
-  level.buildable_wallbuy_weapon_hints["an94_zm"] = &"ZM_BURIED_WB_AN94";
-  level.buildable_wallbuy_weapon_hints["pdw57_zm"] = &"ZM_BURIED_WB_PDW57";
-  level.buildable_wallbuy_weapon_hints["svu_zm"] = &"ZM_BURIED_WB_SVU";
-  level.buildable_wallbuy_weapon_hints["tazer_knuckles_zm"] = &"ZM_BURIED_WB_TAZER";
-  level.buildable_wallbuy_weapon_hints["870mcs_zm"] = &"ZM_BURIED_WB_870MCS";
+  level.buildable_wallbuy_weapon_hints["ak74u_zm"] = & "ZM_BURIED_WB_AK74U";
+  level.buildable_wallbuy_weapon_hints["an94_zm"] = & "ZM_BURIED_WB_AN94";
+  level.buildable_wallbuy_weapon_hints["pdw57_zm"] = & "ZM_BURIED_WB_PDW57";
+  level.buildable_wallbuy_weapon_hints["svu_zm"] = & "ZM_BURIED_WB_SVU";
+  level.buildable_wallbuy_weapon_hints["tazer_knuckles_zm"] = & "ZM_BURIED_WB_TAZER";
+  level.buildable_wallbuy_weapon_hints["870mcs_zm"] = & "ZM_BURIED_WB_870MCS";
   level.buildable_wallbuy_pickup_hints = [];
-  level.buildable_wallbuy_pickup_hints["ak74u_zm"] = &"ZM_BURIED_PU_AK74U";
-  level.buildable_wallbuy_pickup_hints["an94_zm"] = &"ZM_BURIED_PU_AN94";
-  level.buildable_wallbuy_pickup_hints["pdw57_zm"] = &"ZM_BURIED_PU_PDW57";
-  level.buildable_wallbuy_pickup_hints["svu_zm"] = &"ZM_BURIED_PU_SVU";
-  level.buildable_wallbuy_pickup_hints["tazer_knuckles_zm"] = &"ZM_BURIED_PU_TAZER";
-  level.buildable_wallbuy_pickup_hints["870mcs_zm"] = &"ZM_BURIED_PU_870MCS";
+  level.buildable_wallbuy_pickup_hints["ak74u_zm"] = & "ZM_BURIED_PU_AK74U";
+  level.buildable_wallbuy_pickup_hints["an94_zm"] = & "ZM_BURIED_PU_AN94";
+  level.buildable_wallbuy_pickup_hints["pdw57_zm"] = & "ZM_BURIED_PU_PDW57";
+  level.buildable_wallbuy_pickup_hints["svu_zm"] = & "ZM_BURIED_PU_SVU";
+  level.buildable_wallbuy_pickup_hints["tazer_knuckles_zm"] = & "ZM_BURIED_PU_TAZER";
+  level.buildable_wallbuy_pickup_hints["870mcs_zm"] = & "ZM_BURIED_PU_870MCS";
   level.buildable_wallbuy_weapon_models = [];
   level.buildable_wallbuy_weapon_models["ak74u_zm"] = undefined;
   level.buildable_wallbuy_weapon_models["an94_zm"] = undefined;
@@ -56,9 +56,8 @@ prepare_chalk_weapon_list() {
   level.buildable_wallbuy_weapon_angles["870mcs_zm"] = undefined;
 
   foreach(model in level.buildable_wallbuy_weapon_models) {
-    if(isDefined(model)) {
+    if(isDefined(model))
       precachemodel(model);
-    }
   }
 }
 
@@ -68,10 +67,10 @@ init_buildables(buildablesenabledlist) {
   precacheitem("no_hands_zm");
   level._effect["wallbuy_replace"] = loadfx("maps/zombie_buried/fx_buried_booze_candy_spawn");
   level._effect["wallbuy_drawing"] = loadfx("maps/zombie/fx_zmb_wall_dyn_chalk_drawing");
-  level.str_buildables_build = &"ZOMBIE_BUILD_SQ_COMMON";
-  level.str_buildables_building = &"ZOMBIE_BUILDING_SQ_COMMON";
-  level.str_buildables_grab_part = &"ZOMBIE_BUILD_PIECE_GRAB";
-  level.str_buildables_swap_part = &"ZOMBIE_BUILD_PIECE_SWITCH";
+  level.str_buildables_build = & "ZOMBIE_BUILD_SQ_COMMON";
+  level.str_buildables_building = & "ZOMBIE_BUILDING_SQ_COMMON";
+  level.str_buildables_grab_part = & "ZOMBIE_BUILD_PIECE_GRAB";
+  level.str_buildables_swap_part = & "ZOMBIE_BUILD_PIECE_SWITCH";
   level.safe_place_for_buildable_piece = ::safe_place_for_buildable_piece;
   level.buildable_slot_count = max(1, 2) + 1;
   level.buildable_clientfields = [];
@@ -86,71 +85,64 @@ init_buildables(buildablesenabledlist) {
     level.buildable_piece_counts[2] = 13;
   }
 
-  if(isinarray(buildablesenabledlist, "sq_common")) {
+  if(isinarray(buildablesenabledlist, "sq_common"))
     add_zombie_buildable("sq_common", level.str_buildables_build, level.str_buildables_building);
-  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_tpo_switch")) {
+  if(isinarray(buildablesenabledlist, "buried_sq_tpo_switch"))
     add_zombie_buildable("buried_sq_tpo_switch", level.str_buildables_build, level.str_buildables_building);
-  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_ghost_lamp")) {
+  if(isinarray(buildablesenabledlist, "buried_sq_ghost_lamp"))
     add_zombie_buildable("buried_sq_ghost_lamp", level.str_buildables_build, level.str_buildables_building);
-  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_bt_m_tower")) {
+  if(isinarray(buildablesenabledlist, "buried_sq_bt_m_tower"))
     add_zombie_buildable("buried_sq_bt_m_tower", level.str_buildables_build, level.str_buildables_building);
-  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_bt_r_tower")) {
+  if(isinarray(buildablesenabledlist, "buried_sq_bt_r_tower"))
     add_zombie_buildable("buried_sq_bt_r_tower", level.str_buildables_build, level.str_buildables_building);
-  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_oillamp")) {
-    add_zombie_buildable("buried_sq_oillamp", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
-  }
+  if(isinarray(buildablesenabledlist, "buried_sq_oillamp"))
+    add_zombie_buildable("buried_sq_oillamp", level.str_buildables_build, level.str_buildables_building, & "NULL_EMPTY");
 
   if(isinarray(buildablesenabledlist, "turbine")) {
-    add_zombie_buildable("turbine", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("turbine", level.str_buildables_build, level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_vox_category("turbine", "trb");
   }
 
   if(isinarray(buildablesenabledlist, "springpad_zm")) {
-    add_zombie_buildable("springpad_zm", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("springpad_zm", level.str_buildables_build, level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_vox_category("springpad_zm", "stm");
   }
 
   if(isinarray(buildablesenabledlist, "subwoofer_zm")) {
-    add_zombie_buildable("subwoofer_zm", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("subwoofer_zm", level.str_buildables_build, level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_vox_category("subwoofer_zm", "sw");
   }
 
   if(isinarray(buildablesenabledlist, "headchopper_zm")) {
-    add_zombie_buildable("headchopper_zm", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("headchopper_zm", level.str_buildables_build, level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_vox_category("headchopper_zm", "hc");
   }
 
   if(isinarray(buildablesenabledlist, "booze")) {
-    add_zombie_buildable("booze", &"ZM_BURIED_LEAVE_BOOZE", level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("booze", & "ZM_BURIED_LEAVE_BOOZE", level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_piece_vox_category("booze", "booze");
   }
 
   if(isinarray(buildablesenabledlist, "candy")) {
-    add_zombie_buildable("candy", &"ZM_BURIED_LEAVE_CANDY", level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("candy", & "ZM_BURIED_LEAVE_CANDY", level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_piece_vox_category("candy", "candy");
   }
 
   if(isinarray(buildablesenabledlist, "chalk")) {
-    add_zombie_buildable("chalk", &"NULL_EMPTY", level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("chalk", & "NULL_EMPTY", level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_piece_vox_category("chalk", "gunshop_chalk", 300);
   }
 
-  if(isinarray(buildablesenabledlist, "sloth")) {
-    add_zombie_buildable("sloth", &"ZM_BURIED_BOOZE_GV", level.str_buildables_building, &"NULL_EMPTY");
-  }
+  if(isinarray(buildablesenabledlist, "sloth"))
+    add_zombie_buildable("sloth", & "ZM_BURIED_BOOZE_GV", level.str_buildables_building, & "NULL_EMPTY");
 
   if(isinarray(buildablesenabledlist, "keys_zm")) {
-    add_zombie_buildable("keys_zm", &"ZM_BURIED_KEYS_BL", level.str_buildables_building, &"NULL_EMPTY");
+    add_zombie_buildable("keys_zm", & "ZM_BURIED_KEYS_BL", level.str_buildables_building, & "NULL_EMPTY");
     add_zombie_buildable_piece_vox_category("keys_zm", "key");
   }
 
@@ -190,7 +182,7 @@ include_buildables(buildablesenabledlist) {
   key_chain = generate_zombie_buildable_piece("keys_zm", "p6_zm_bu_sloth_key", 32, 64, 9, "zom_hud_icon_buildable_sloth_key", ::onpickup_keys, ::ondrop_keys, undefined, undefined, 0, 3, 1);
 
   if(isinarray(buildablesenabledlist, "turbine")) {
-    turbine = spawnStruct();
+    turbine = spawnstruct();
     turbine.name = "turbine";
     turbine add_buildable_piece(turbine_fan);
     turbine add_buildable_piece(turbine_panel);
@@ -202,7 +194,7 @@ include_buildables(buildablesenabledlist) {
   }
 
   if(isinarray(buildablesenabledlist, "springpad_zm")) {
-    springpad = spawnStruct();
+    springpad = spawnstruct();
     springpad.name = "springpad_zm";
     springpad add_buildable_piece(springpad_door);
     springpad add_buildable_piece(springpad_flag);
@@ -214,7 +206,7 @@ include_buildables(buildablesenabledlist) {
 
   if(isinarray(buildablesenabledlist, "sq_common")) {
     if(is_sidequest_allowed("zclassic")) {
-      sqcommon = spawnStruct();
+      sqcommon = spawnstruct();
       sqcommon.name = "sq_common";
       sqcommon add_buildable_piece(sq_common_electricbox);
       sqcommon add_buildable_piece(sq_common_meteor);
@@ -228,7 +220,7 @@ include_buildables(buildablesenabledlist) {
 
   if(isinarray(buildablesenabledlist, "buried_sq_oillamp")) {
     if(is_sidequest_allowed("zclassic")) {
-      sq_oillamp = spawnStruct();
+      sq_oillamp = spawnstruct();
       sq_oillamp.name = "buried_sq_oillamp";
       sq_oillamp add_buildable_piece(sq_lamp_piece);
       sq_oillamp.triggerthink = ::sqoillampbuildable;
@@ -238,7 +230,7 @@ include_buildables(buildablesenabledlist) {
 
   if(isinarray(buildablesenabledlist, "buried_sq_bt_m_tower")) {
     if(is_sidequest_allowed("zclassic")) {
-      sq_m_tower = spawnStruct();
+      sq_m_tower = spawnstruct();
       sq_m_tower.name = "buried_sq_bt_m_tower";
       sq_m_tower add_buildable_piece(sq_m_tower_vacuum_tube);
       sq_m_tower add_buildable_piece(sq_m_tower_battery);
@@ -253,7 +245,7 @@ include_buildables(buildablesenabledlist) {
 
   if(isinarray(buildablesenabledlist, "buried_sq_bt_r_tower")) {
     if(is_sidequest_allowed("zclassic")) {
-      sq_r_tower = spawnStruct();
+      sq_r_tower = spawnstruct();
       sq_r_tower.name = "buried_sq_bt_r_tower";
       sq_r_tower add_buildable_piece(sq_r_tower_crystal);
       sq_r_tower add_buildable_piece(sq_r_tower_satellite);
@@ -267,7 +259,7 @@ include_buildables(buildablesenabledlist) {
   }
 
   if(isinarray(buildablesenabledlist, "subwoofer_zm")) {
-    subwoofer = spawnStruct();
+    subwoofer = spawnstruct();
     subwoofer.name = "subwoofer_zm";
     subwoofer add_buildable_piece(subwoofer_speaker);
     subwoofer add_buildable_piece(subwoofer_motor);
@@ -279,8 +271,8 @@ include_buildables(buildablesenabledlist) {
 
   if(isinarray(buildablesenabledlist, "headchopper_zm")) {
     ent = getent("buildable_headchopper", "targetname");
-    ent setModel("t6_wpn_zmb_chopper");
-    headchopper = spawnStruct();
+    ent setmodel("t6_wpn_zmb_chopper");
+    headchopper = spawnstruct();
     headchopper.name = "headchopper_zm";
     headchopper add_buildable_piece(headchopper_blade);
     headchopper add_buildable_piece(headchopper_crank);
@@ -293,17 +285,17 @@ include_buildables(buildablesenabledlist) {
   if(isinarray(buildablesenabledlist, "booze")) {
     level.booze_model = "p6_zm_bu_sloth_booze_jug";
     precachemodel(level.booze_model);
-    bottle.hint_grab = &"ZM_BURIED_BOOZE_G";
-    bottle.hint_swap = &"ZM_BURIED_BOOZE_G";
+    bottle.hint_grab = & "ZM_BURIED_BOOZE_G";
+    bottle.hint_swap = & "ZM_BURIED_BOOZE_G";
     bottle manage_multiple_pieces(2);
     bottle.onspawn = ::piece_spawn_booze;
     bottle.onunspawn = ::piece_unspawn_booze;
     bottle.ondestroy = ::piece_destroy_booze;
     level.booze_piece = bottle;
-    booze = spawnStruct();
+    booze = spawnstruct();
     booze.name = "booze";
-    booze.hint_more = &"ZM_BURIED_I_NEED_BOOZE";
-    booze.hint_wrong = &"ZM_BURIED_I_SAID_BOOZE";
+    booze.hint_more = & "ZM_BURIED_I_NEED_BOOZE";
+    booze.hint_wrong = & "ZM_BURIED_I_SAID_BOOZE";
     booze add_buildable_piece(bottle);
     booze.triggerthink = ::boozebuildable;
     booze.onuseplantobject = ::onuseplantobject_booze_and_candy;
@@ -313,17 +305,17 @@ include_buildables(buildablesenabledlist) {
   if(isinarray(buildablesenabledlist, "candy")) {
     level.candy_model = "p6_zm_bu_sloth_candy_bowl";
     precachemodel(level.candy_model);
-    cane.hint_grab = &"ZM_BURIED_CANDY_G";
-    cane.hint_swap = &"ZM_BURIED_CANDY_G";
+    cane.hint_grab = & "ZM_BURIED_CANDY_G";
+    cane.hint_swap = & "ZM_BURIED_CANDY_G";
     cane manage_multiple_pieces(1);
     cane.onspawn = ::piece_spawn_candy;
     cane.onunspawn = ::piece_unspawn_candy;
     cane.ondestroy = ::piece_destroy_candy;
     level.candy_piece = cane;
-    candy = spawnStruct();
+    candy = spawnstruct();
     candy.name = "candy";
-    candy.hint_more = &"ZM_BURIED_I_WANT_CANDY";
-    candy.hint_wrong = &"ZM_BURIED_THATS_NOT_CANDY";
+    candy.hint_more = & "ZM_BURIED_I_WANT_CANDY";
+    candy.hint_wrong = & "ZM_BURIED_THATS_NOT_CANDY";
     candy add_buildable_piece(cane);
     candy.triggerthink = ::candybuildable;
     candy.onuseplantobject = ::onuseplantobject_booze_and_candy;
@@ -331,10 +323,10 @@ include_buildables(buildablesenabledlist) {
   }
 
   if(isinarray(buildablesenabledlist, "sloth")) {
-    sloth_buildable = spawnStruct();
+    sloth_buildable = spawnstruct();
     sloth_buildable.name = "sloth";
-    sloth_buildable.hint_more = &"NULL_EMPTY";
-    sloth_buildable.hint_wrong = &"NULL_EMPTY";
+    sloth_buildable.hint_more = & "NULL_EMPTY";
+    sloth_buildable.hint_wrong = & "NULL_EMPTY";
     sloth_buildable add_buildable_piece(bottle);
     sloth_buildable add_buildable_piece(cane);
     sloth_buildable.triggerthink = ::slothbuildable;
@@ -349,17 +341,16 @@ include_buildables(buildablesenabledlist) {
     pencil.onspawn = ::piece_spawn_chalk;
     pencil.ondestroy = ::piece_destroy_chalk;
     pencil manage_multiple_pieces(6, 6);
-    chalk = spawnStruct();
+    chalk = spawnstruct();
     chalk.name = "chalk";
-    chalk.hint_more = &"NULL_EMPTY";
-    chalk.hint_wrong = &"NULL_EMPTY";
+    chalk.hint_more = & "NULL_EMPTY";
+    chalk.hint_wrong = & "NULL_EMPTY";
     chalk add_buildable_piece(pencil);
     chalk.triggerthink = ::chalkbuildable;
     chalk.onuseplantobject = ::onuseplantobject_chalk;
 
-    if(isDefined(level.buy_random_wallbuys) && level.buy_random_wallbuys) {
+    if(isDefined(level.buy_random_wallbuys) && level.buy_random_wallbuys)
       chalk.oncantuse = ::oncantuse_chalk;
-    }
 
     chalk.onbeginuse = ::onbeginuse_chalk;
     chalk.onenduse = ::onenduse_chalk;
@@ -369,14 +360,14 @@ include_buildables(buildablesenabledlist) {
   if(isinarray(buildablesenabledlist, "keys_zm")) {
     key_chain.onspawn = ::onspawn_keys;
     key_chain manage_multiple_pieces(2);
-    key_chain.hint_grab = &"ZM_BURIED_KEY_G";
-    key_chain.hint_swap = &"ZM_BURIED_KEY_G";
-    key = spawnStruct();
+    key_chain.hint_grab = & "ZM_BURIED_KEY_G";
+    key_chain.hint_swap = & "ZM_BURIED_KEY_G";
+    key = spawnstruct();
     key.name = "keys_zm";
     key add_buildable_piece(key_chain);
     key.triggerthink = ::keysbuildable;
     key.onuseplantobject = ::onuseplantobject_key;
-    key.hint_wrong = &"NULL_EMPTY";
+    key.hint_wrong = & "NULL_EMPTY";
     include_buildable(key);
   }
 
@@ -387,9 +378,8 @@ include_buildables(buildablesenabledlist) {
 sqcommonbuildable() {
   level.sq_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("sq_common_buildable_trigger", "sq_common", "sq_common", "", 1, 0);
 
-  if(isDefined(level.sq_buildable)) {
+  if(isDefined(level.sq_buildable))
     level.sq_buildable.ignore_open_sesame = 1;
-  }
 }
 
 sqmtowerbuildable() {
@@ -398,11 +388,10 @@ sqmtowerbuildable() {
 }
 
 remove_all_ents(named) {
-  ents = getEntArray(named, "targetname");
+  ents = getentarray(named, "targetname");
 
-  foreach(ent in ents) {
-    ent delete();
-  }
+  foreach(ent in ents)
+  ent delete();
 }
 
 remove_maxis_tower() {
@@ -421,27 +410,27 @@ remove_ricky_tower() {
 }
 
 turbinebuildable() {
-  level.turbine_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("turbine_buildable_trigger", "turbine", "equip_turbine_zm", &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", 1, 1);
+  level.turbine_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("turbine_buildable_trigger", "turbine", "equip_turbine_zm", & "ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", 1, 1);
   maps\mp\zombies\_zm_buildables_pooled::add_buildable_to_pool(level.turbine_buildable, "buried");
 }
 
 springpadbuildable() {
-  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", &"ZM_BURIED_EQ_SP_PHS", 1, 1);
+  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", & "ZM_BURIED_EQ_SP_PHS", 1, 1);
   maps\mp\zombies\_zm_buildables_pooled::add_buildable_to_pool(stub, "buried");
 }
 
 subwooferbuildable() {
-  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("subwoofer_zm_buildable_trigger", "subwoofer_zm", "equip_subwoofer_zm", &"ZM_BURIED_EQ_SW_PHS", 1, 1);
+  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("subwoofer_zm_buildable_trigger", "subwoofer_zm", "equip_subwoofer_zm", & "ZM_BURIED_EQ_SW_PHS", 1, 1);
   maps\mp\zombies\_zm_buildables_pooled::add_buildable_to_pool(stub, "buried");
 }
 
 headchopperbuildable() {
-  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("headchopper_buildable_trigger", "headchopper_zm", "equip_headchopper_zm", &"ZM_BURIED_EQ_HC_PHS", 1, 1);
+  stub = maps\mp\zombies\_zm_buildables::buildable_trigger_think("headchopper_buildable_trigger", "headchopper_zm", "equip_headchopper_zm", & "ZM_BURIED_EQ_HC_PHS", 1, 1);
   maps\mp\zombies\_zm_buildables_pooled::add_buildable_to_pool(stub, "buried");
 }
 
 boozebuildable() {
-  booze_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("booze_buildable_trigger", "booze", "booze", &"ZM_BURIED_BOOZE_G", 1, 0);
+  booze_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("booze_buildable_trigger", "booze", "booze", & "ZM_BURIED_BOOZE_G", 1, 0);
 
   foreach(stub in booze_builds) {
     stub.ignore_open_sesame = 1;
@@ -451,7 +440,7 @@ boozebuildable() {
 }
 
 candybuildable() {
-  candy_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("candy_buildable_trigger", "candy", "candy", &"ZM_BURIED_CANDY_G", 1, 0);
+  candy_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("candy_buildable_trigger", "candy", "candy", & "ZM_BURIED_CANDY_G", 1, 0);
 
   foreach(stub in candy_builds) {
     stub.ignore_open_sesame = 1;
@@ -464,7 +453,8 @@ sloth_in_armory_near_bench() {
   return true;
 }
 
-slothbuildable() {}
+slothbuildable() {
+}
 
 chalkbuildable() {
   level.chalk_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("chalk_buildable_trigger", "chalk", "chalk", level.str_buildables_grab_part, 1, 0);
@@ -474,16 +464,15 @@ chalkbuildable() {
     stub.script_length = 16;
     stub.ignore_open_sesame = 1;
     stub.build_weapon = "chalk_draw_zm";
-    stub.building_prompt = &"ZM_BURIED_DRAW";
+    stub.building_prompt = & "ZM_BURIED_DRAW";
 
     if(isDefined(stub.target)) {
       wallbuy = getstruct(stub.target, "targetname");
       stub.origin = wallbuy.origin;
       stub.angles = wallbuy.angles;
 
-      if(isDefined(wallbuy.script_location)) {
+      if(isDefined(wallbuy.script_location))
         stub.location = wallbuy.script_location;
-      }
     }
   }
 }
@@ -497,19 +486,17 @@ keysbuildable() {
     door.script_unitrigger_type = "unitrigger_radius_use";
     door.radius = 32;
     door.test_radius_sq = (door.radius + 15.0) * (door.radius + 15.0);
-    door.building_prompt = &"ZM_BURIED_UNLOCKING";
+    door.building_prompt = & "ZM_BURIED_UNLOCKING";
     thread watch_cell_open_close(door);
   }
 }
 
 safe_place_for_buildable_piece(piece) {
-  if(self is_jumping()) {
+  if(self is_jumping())
     return false;
-  }
 
-  if(piece.buildablename == "booze") {
+  if(piece.buildablename == "booze")
     return false;
-  }
 
   return true;
 }
@@ -563,7 +550,7 @@ onuseplantobject_rtower(player) {
 sq_tower_spawn_attachment(str_model, str_tag) {
   m_part = spawn("script_model", self gettagorigin(str_tag));
   m_part.angles = self gettagangles(str_tag);
-  m_part setModel(str_model);
+  m_part setmodel(str_model);
 }
 
 sqoillampbuildable() {
@@ -576,9 +563,8 @@ sqoillampbuildable() {
 }
 
 sq_generator_buildablestub_reject_func(player) {
-  if(!flag("ftl_lantern_charged")) {
+  if(!flag("ftl_lantern_charged"))
     return true;
-  }
 
   return false;
 }
@@ -597,19 +583,16 @@ onpickup_common(player) {
   if(isDefined(self.buildablename)) {
     sound = "zmb_buildable_pickup";
 
-    if(self.buildablename == "candy") {
+    if(self.buildablename == "candy")
       sound = "zmb_candy_pickup";
-    }
 
-    if(self.buildablename == "booze") {
+    if(self.buildablename == "booze")
       sound = "zmb_booze_pickup";
-    }
 
-    if(self.buildablename == "chalk") {
+    if(self.buildablename == "chalk")
       sound = "zmb_chalk_grab";
-    }
 
-    player playSound(sound);
+    player playsound(sound);
   }
 }
 
@@ -643,19 +626,16 @@ check_for_buildable_turbine_vox(stub, start_build_counter) {
   build_counter = start_build_counter;
 
   for(i = 0; i < buildable.pieces.size; i++) {
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner)) {
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner))
       piece_counter++;
-    }
 
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built) {
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)
       build_counter++;
-    }
   }
 
   if(build_counter >= 2 && piece_counter == 3) {
-    if(!flag("power_on")) {
+    if(!flag("power_on"))
       level.maxis_turbine_vox_played = 1;
-    }
   }
 }
 
@@ -681,16 +661,15 @@ wait_respawn_candy_booze(piece, name) {
 wait_respawn_booze_at_start(piece) {
   wait 4;
 
-  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
+  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down)
     level thread wait_respawn_candy_booze(piece, "booze");
-  } else {
+  else
     piece piece_spawn_at(piece.start_origin, piece.start_angles);
-  }
 }
 
 piece_spawn_booze() {
-  self.model setModel(level.booze_model);
-  playFXOnTag(level._effect["booze_candy_spawn"], self.model, "tag_origin");
+  self.model setmodel(level.booze_model);
+  playfxontag(level._effect["booze_candy_spawn"], self.model, "tag_origin");
   self.model setclientfield("buildable_glint_fx", 1);
 }
 
@@ -703,11 +682,10 @@ piece_unspawn_booze() {
 }
 
 piece_destroy_booze() {
-  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
+  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down)
     level thread wait_respawn_candy_booze(self, "booze");
-  } else {
+  else
     level thread wait_respawn_booze_at_start(self);
-  }
 }
 
 onpickup_booze(player) {
@@ -723,8 +701,8 @@ onpickup_booze(player) {
 }
 
 piece_spawn_candy() {
-  self.model setModel(level.candy_model);
-  playFXOnTag(level._effect["booze_candy_spawn"], self.model, "tag_origin");
+  self.model setmodel(level.candy_model);
+  playfxontag(level._effect["booze_candy_spawn"], self.model, "tag_origin");
   self.model setclientfield("buildable_glint_fx", 1);
 }
 
@@ -752,15 +730,13 @@ ondrop_booze(player) {
   player notify("sloth_drop", "booze");
   piece = player player_get_buildable_piece(1);
 
-  if(isDefined(piece)) {
+  if(isDefined(piece))
     piece.model setclientfield("buildable_glint_fx", 1);
-  }
 
   ondrop_common(player);
 
-  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down)) {
+  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down))
     thread wait_put_piece_back_in_jail(piece, level.booze_start_origin, level.booze_start_angles);
-  }
 }
 
 wait_put_piece_back_in_jail(piece, origin, angles) {
@@ -777,9 +753,8 @@ ondrop_candy(player) {
   player notify("sloth_drop", "candy");
   piece = player player_get_buildable_piece(1);
 
-  if(isDefined(piece)) {
+  if(isDefined(piece))
     piece.model setclientfield("buildable_glint_fx", 1);
-  }
 
   ondrop_common(player);
 }
@@ -799,7 +774,8 @@ candy_bench(stub) {
   level notify("candy_bench", self);
 }
 
-onuseplantobject_sloth(player) {}
+onuseplantobject_sloth(player) {
+}
 
 piece_spawn_chalk() {
   if(!isDefined(self.first_origin)) {
@@ -826,13 +802,11 @@ chalk_host_migration() {
         weapon = chalk.script_noteworthy;
         fx = level._effect["m14_zm_fx"];
 
-        if(isDefined(level._effect[weapon + "_chalk_fx"])) {
+        if(isDefined(level._effect[weapon + "_chalk_fx"]))
           fx = level._effect[weapon + "_chalk_fx"];
-        }
 
-        if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide)) {
-          playFXOnTag(fx, chalk.model, "tag_origin");
-        }
+        if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide))
+          playfxontag(fx, chalk.model, "tag_origin");
       }
 
       wait_network_frame();
@@ -844,33 +818,30 @@ piece_spawn_chalk_internal() {
   weapon = self.script_noteworthy;
 
   if(isDefined(weapon)) {
-    if(!isDefined(level.chalk_pieces)) {
+    if(!isDefined(level.chalk_pieces))
       level.chalk_pieces = [];
-    }
 
     level.chalk_pieces = add_to_array(level.chalk_pieces, self, 0);
-    self.model setModel("tag_origin");
+    self.model setmodel("tag_origin");
     wait 0.05;
     fx = level._effect["m14_zm_fx"];
 
-    if(isDefined(level._effect[weapon + "_chalk_fx"])) {
+    if(isDefined(level._effect[weapon + "_chalk_fx"]))
       fx = level._effect[weapon + "_chalk_fx"];
-    }
 
-    if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide)) {
-      playFXOnTag(fx, self.model, "tag_origin");
-    } else {
+    if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide))
+      playfxontag(fx, self.model, "tag_origin");
+    else
       self.model.origin = self.model.origin + vectorscale((0, 0, -1), 1000.0);
-    }
 
     if(isDefined(level.monolingustic_prompt_format) && level.monolingustic_prompt_format) {
-      self.hint_grab = &"ZM_BURIED_WB";
+      self.hint_grab = & "ZM_BURIED_WB";
       self.hint_grab_parm1 = get_weapon_display_name(weapon);
     } else if(isDefined(level.buildable_wallbuy_pickup_hints[weapon])) {
       self.hint_grab = level.buildable_wallbuy_pickup_hints[weapon];
       self.hint_grab_parm1 = undefined;
     } else {
-      self.hint_grab = &"ZM_BURIED_WALLBUILD";
+      self.hint_grab = & "ZM_BURIED_WALLBUILD";
       self.hint_grab_parm1 = undefined;
     }
 
@@ -902,9 +873,8 @@ pick_up(thing) {
   candidate_list = [];
 
   foreach(zone in level.zones) {
-    if(isDefined(zone.unitrigger_stubs)) {
+    if(isDefined(zone.unitrigger_stubs))
       candidate_list = arraycombine(candidate_list, zone.unitrigger_stubs, 1, 0);
-    }
   }
 
   candidate_list = array_randomize(candidate_list);
@@ -925,7 +895,7 @@ chalk_prompt(player) {
       if(!isDefined(player player_get_buildable_piece(1)) || !self.stub.buildablezone buildable_has_piece(player player_get_buildable_piece(1))) {
         self.stub.cost = 1500;
         self.stub.hint_parm1 = 1500;
-        self.stub.hint_string = &"ZM_BURIED_RANDOM_WALLBUY";
+        self.stub.hint_string = & "ZM_BURIED_RANDOM_WALLBUY";
         self sethintstring(self.stub.hint_string, self.stub.cost);
         return 1;
       }
@@ -971,9 +941,8 @@ buy_random_wallbuy(player, cost) {
   if(player.score >= cost) {
     temp_piece = player pick_up("chalk");
 
-    if(!isDefined(temp_piece)) {
+    if(!isDefined(temp_piece))
       return temp_piece;
-    }
 
     player maps\mp\zombies\_zm_score::minus_to_player_score(cost);
     bbprint("zombie_uses", "playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type %s", player.name, player.score, level.round_number, cost, self.zombie_weapon_upgrade, self.origin, "weapon");
@@ -997,10 +966,10 @@ player_draw_chalk(stub) {
   self notify("end_chalk_dust");
   self endon("end_chalk_dust");
   origin = stub.origin;
-  forward = anglesToForward(stub.angles);
+  forward = anglestoforward(stub.angles);
 
   while(isalive(self)) {
-    playFX(level._effect["wallbuy_drawing"], origin, forward);
+    playfx(level._effect["wallbuy_drawing"], origin, forward);
     wait 0.1;
   }
 }
@@ -1026,15 +995,14 @@ oncantuse_chalk(player) {
       origin = self.origin;
       angles = self.angles;
 
-      if(isDefined(level._effect["wallbuy_replace"])) {
-        playFX(level._effect["wallbuy_replace"], origin, anglesToForward(angles));
-      }
+      if(isDefined(level._effect["wallbuy_replace"]))
+        playfx(level._effect["wallbuy_replace"], origin, anglestoforward(angles));
 
       add_dynamic_wallbuy(weapon, self.target, 0);
 
-      if(is_melee_weapon(weapon)) {
+      if(is_melee_weapon(weapon))
         player maps\mp\zombies\_zm_melee_weapon::give_melee_weapon_by_name(weapon);
-      } else {
+      else {
         if(is_lethal_grenade(weapon)) {
           player takeweapon(player get_player_lethal_grenade());
           player set_player_lethal_grenade(weapon);
@@ -1044,15 +1012,13 @@ oncantuse_chalk(player) {
         player weapon_give(weapon);
       }
 
-      if(!isDefined(level.built_wallbuys)) {
+      if(!isDefined(level.built_wallbuys))
         level.built_wallbuys = 0;
-      }
 
       level.built_wallbuys++;
 
-      if(level.built_wallbuys >= 6) {
+      if(level.built_wallbuys >= 6)
         level.built_wallbuys = -100;
-      }
     }
 
     self buildablestub_finish_build(player);
@@ -1071,15 +1037,13 @@ onuseplantobject_chalk(entity) {
       origin = self.origin;
       angles = self.angles;
 
-      if(isDefined(level._effect["wallbuy_replace"])) {
-        playFX(level._effect["wallbuy_replace"], origin, anglesToForward(angles));
-      }
+      if(isDefined(level._effect["wallbuy_replace"]))
+        playfx(level._effect["wallbuy_replace"], origin, anglestoforward(angles));
 
       add_dynamic_wallbuy(weapon, self.target, 1);
 
-      if(!isDefined(level.built_wallbuys)) {
+      if(!isDefined(level.built_wallbuys))
         level.built_wallbuys = 0;
-      }
 
       level.built_wallbuys++;
 
@@ -1091,9 +1055,8 @@ onuseplantobject_chalk(entity) {
       }
 
       if(level.built_wallbuys >= 6) {
-        if(isplayer(entity)) {
+        if(isplayer(entity))
           entity maps\mp\zombies\_zm_score::player_add_points("build_wallbuy", 2000);
-        }
 
         level.built_wallbuys = -100;
       } else if(isplayer(entity))
@@ -1124,9 +1087,8 @@ ondrop_keys(player) {
   piece = player player_get_buildable_piece(1);
   ondrop_common(player);
 
-  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down)) {
+  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down))
     thread wait_put_piece_back_in_jail(piece, level.key_start_origin, level.key_start_angles);
-  }
 }
 
 cell_door_key_prompt(player) {
@@ -1182,16 +1144,15 @@ destroyglintfx() {
   wait_network_frame();
   wait_network_frame();
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 generate_piece_makers() {
   level.piece_makers = [];
   level.piece_maker_prompts = [];
-  level.piece_maker_prompts["booze"] = &"ZM_BURIED_BOOZE_B";
-  level.piece_maker_prompts["candy"] = &"ZM_BURIED_CANDY_B";
+  level.piece_maker_prompts["booze"] = & "ZM_BURIED_BOOZE_B";
+  level.piece_maker_prompts["candy"] = & "ZM_BURIED_CANDY_B";
   piece_maker_structs = getstructarray("piece_purchase", "targetname");
 
   foreach(pm in piece_maker_structs) {
@@ -1208,58 +1169,52 @@ generate_piece_makers() {
         continue;
       }
 
-      level.piece_makers[piecename].buy_prompt = &"ZM_BURIED_BUY_UNKNOWN_STUFF";
+      level.piece_makers[piecename].buy_prompt = & "ZM_BURIED_BUY_UNKNOWN_STUFF";
     }
   }
 }
 
 allow_players_purchase(name, allow_purchase) {
-  if(isDefined(level.piece_makers[name])) {
+  if(isDefined(level.piece_makers[name]))
     level.piece_makers[name].allow_purchase = allow_purchase;
-  }
 }
 
 piece_maker_unitrigger(name, prompt_fn, think_fn) {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
 
-  if(isDefined(self.script_angles)) {
+  if(isDefined(self.script_angles))
     unitrigger_stub.angles = self.script_angles;
-  } else if(isDefined(self.angles)) {
+  else if(isDefined(self.angles))
     unitrigger_stub.angles = self.angles;
-  } else {
+  else
     unitrigger_stub.angles = (0, 0, 0);
-  }
 
   unitrigger_stub.script_angles = unitrigger_stub.angles;
 
-  if(isDefined(self.script_length)) {
+  if(isDefined(self.script_length))
     unitrigger_stub.script_length = self.script_length;
-  } else {
+  else
     unitrigger_stub.script_length = 32;
-  }
 
-  if(isDefined(self.script_width)) {
+  if(isDefined(self.script_width))
     unitrigger_stub.script_width = self.script_width;
-  } else {
+  else
     unitrigger_stub.script_width = 32;
-  }
 
-  if(isDefined(self.script_height)) {
+  if(isDefined(self.script_height))
     unitrigger_stub.script_height = self.script_height;
-  } else {
+  else
     unitrigger_stub.script_height = 64;
-  }
 
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     unitrigger_stub.radius = self.radius;
-  } else {
+  else
     unitrigger_stub.radius = 32;
-  }
 
-  if(isDefined(self.script_unitrigger_type)) {
+  if(isDefined(self.script_unitrigger_type))
     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
-  } else {
+  else {
     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);
   }
@@ -1304,7 +1259,7 @@ piece_maker_think() {
       level notify(self.stub.notify_name, player);
       self sethintstring("");
     } else {
-      self playSound("evt_perk_deny");
+      self playsound("evt_perk_deny");
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);
     }
   }

@@ -31,10 +31,11 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zombie_brutus_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_brutus_util", &__init__, &__main__, # "zm_ai_brutus");
+  system::register(#"zombie_brutus_util", &__init__, &__main__, #"zm_ai_brutus");
 }
 
 __init__() {
@@ -48,7 +49,7 @@ __init__() {
 
   thread function_60f8374c();
 
-  level flag::init("brutus_setup_complete");
+    level flag::init("brutus_setup_complete");
 }
 
 __main__() {
@@ -152,7 +153,7 @@ brutus_spawning_logic() {
 }
 
 private function_f332f2b7(n_spawn, str_zone_name, var_dde9ff11, var_68ffecfb) {
-  level endon(#"end_of_round", # "end_game");
+  level endon(#"end_of_round", #"end_game");
   var_33882d9b = 0;
 
   while(var_33882d9b < n_spawn) {
@@ -453,16 +454,17 @@ brutus_round_spawn_failsafe_respawn() {
 
 attempt_brutus_spawn(var_d8206b1d, str_zone_name, var_dde9ff11 = 0, var_68ffecfb = 0) {
   if(level.brutus_count + var_d8206b1d > level.brutus_max_count && !(isDefined(level.var_a2831281) && level.var_a2831281) || isDefined(level.var_153e9058) && level.var_153e9058) {
+
     iprintln("<dev string:x82>");
 
-    level thread function_5e4d2f31();
+      level thread function_5e4d2f31();
     return false;
   }
 
   level notify(#"spawn_brutus", {
-    #n_spawn: var_d8206b1d,
-    #str_zone_name: str_zone_name,
-    #var_dde9ff11: var_dde9ff11,
+    #n_spawn: var_d8206b1d, 
+    #str_zone_name: str_zone_name, 
+    #var_dde9ff11: var_dde9ff11, 
     #var_68ffecfb: var_68ffecfb
   });
   return true;
@@ -514,7 +516,7 @@ brutus_death() {
     }
   }
 
-  if(isDefined(level.crafting_components[# "zitem_spectral_shield_part_3"]) && !(isDefined(var_1982af82) && var_1982af82)) {
+  if(isDefined(level.crafting_components[#"zitem_spectral_shield_part_3"]) && !(isDefined(var_1982af82) && var_1982af82)) {
     w_component = zm_crafting::get_component(#"zitem_spectral_shield_part_3");
 
     if(!zm_items::player_has(level.players[0], w_component) && !(isDefined(self.var_eebea220) && self.var_eebea220) && !level flag::get("round_reset")) {
@@ -525,11 +527,11 @@ brutus_death() {
 
   if(!(isDefined(self.var_db8b3627) && self.var_db8b3627)) {
     if(!(isDefined(level.var_7fd2edf6) && level.var_7fd2edf6)) {
-      if(level.powerup_drop_count >= level.zombie_vars[# "zombie_powerup_drop_max_per_round"]) {
-        level.powerup_drop_count = level.zombie_vars[# "zombie_powerup_drop_max_per_round"] - 1;
+      if(level.powerup_drop_count >= level.zombie_vars[#"zombie_powerup_drop_max_per_round"]) {
+        level.powerup_drop_count = level.zombie_vars[#"zombie_powerup_drop_max_per_round"] - 1;
       }
 
-      var_1f8ae158 = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+      var_1f8ae158 = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
       level thread zm_powerups::powerup_drop(var_1f8ae158, undefined, 0);
     }
   }
@@ -562,7 +564,7 @@ brutus_death() {
         });
       }
 
-      player.pers[# "score"] = player.score;
+      player.pers[#"score"] = player.score;
       player zm_stats::increment_client_stat("prison_brutus_killed", 0);
     }
   }
@@ -571,7 +573,7 @@ brutus_death() {
 }
 
 function_4621cb04(w_component) {
-  var_70f6878b = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+  var_70f6878b = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
   mdl_key = util::spawn_model(w_component.worldmodel, var_70f6878b + (0, 0, 36), self.angles);
   mdl_key endon(#"death");
   w_item = zm_items::spawn_item(w_component, var_70f6878b + (0, 0, 12), self.angles);
@@ -652,8 +654,8 @@ brutus_cleanup() {
 }
 
 brutus_cleanup_at_end_of_grief_round() {
-  self endon(#"death", # "brutus_cleanup");
-  level waittill(#"keep_griefing", # "game_module_ended");
+  self endon(#"death", #"brutus_cleanup");
+  level waittill(#"keep_griefing", #"game_module_ended");
   self notify(#"brutus_cleanup");
   self delete();
 }
@@ -740,7 +742,7 @@ check_craftable_table_valid(player) {
 }
 
 brutus_check_zone() {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
   self.var_8d6b1f59 = 0;
 
   while(true) {
@@ -766,7 +768,7 @@ brutus_check_zone() {
 }
 
 brutus_watch_enemy() {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
   level endon(#"end_game");
 
   while(true) {
@@ -808,7 +810,7 @@ private function_9a78baba(var_1cc3df76) {
 }
 
 brutus_lockdown_client_effects(delay) {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
 
   if(isDefined(delay)) {
     wait delay;
@@ -827,8 +829,8 @@ brutus_lockdown_client_effects(delay) {
 private function_61263ebc() {
   trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(trace[# "entity"])) {
-    entity = trace[# "entity"];
+  if(isDefined(trace[#"entity"])) {
+    entity = trace[#"entity"];
 
     if(entity ismovingplatform()) {
       return true;
@@ -839,7 +841,7 @@ private function_61263ebc() {
 }
 
 function_b02aec83() {
-  self endon(#"death", # "brutus_cleanup", # "ignore_cleanup");
+  self endon(#"death", #"brutus_cleanup", #"ignore_cleanup");
 
   while(true) {
     if(isDefined(self.favoriteenemy)) {
@@ -866,9 +868,9 @@ function_ba497d2d(e_brutus) {
 
   if(isDefined(e_brutus) && isalive(e_brutus)) {
     var_1a8c05ae = {
-      #n_health: e_brutus.health,
-      #var_37d3fab9: e_brutus.has_helmet,
-      #var_1e1ce722: e_brutus.var_21b0fc34,
+      #n_health: e_brutus.health, 
+      #var_37d3fab9: e_brutus.has_helmet, 
+      #var_1e1ce722: e_brutus.var_21b0fc34, 
       #var_72275733: e_brutus.var_7f2b0069
     };
 
@@ -919,7 +921,7 @@ function_60f8374c() {
 
 function_2e0d129b(cmd) {
   switch (cmd) {
-    case # "hash_4d20b9f9a8da7a33":
+    case #"hash_4d20b9f9a8da7a33":
       level.var_cab8d080 = 1;
 
       if(isDefined(level.var_33be9958)) {
@@ -929,3 +931,4 @@ function_2e0d129b(cmd) {
       break;
   }
 }
+

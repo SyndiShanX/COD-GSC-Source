@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_weap_wraith_fire;
 
 autoexec __init__system__() {
@@ -14,8 +15,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "hash_682f9312e30af478", 1, 1, "int", &function_87bfd935, 0, 0);
-  clientfield::register("actor", "" + # "hash_7fcff4f8340f11f7", 1, 1, "int", &function_f144789c, 0, 0);
+  clientfield::register("actor", "" + #"hash_682f9312e30af478", 1, 1, "int", &function_87bfd935, 0, 0);
+  clientfield::register("actor", "" + #"hash_7fcff4f8340f11f7", 1, 1, "int", &function_f144789c, 0, 0);
 }
 
 function_87bfd935(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -32,7 +33,7 @@ function_87bfd935(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     self.var_cd4ce49e = util::playFXOnTag(localclientnum, "zm_weapons/fx8_equip_mltv_fire_human_torso_loop_zm", self, str_tag);
     self thread function_8847b8aa(localclientnum);
-    self.var_2be01485 = level._effect[# "hash_5dfe974bf370a5f4"];
+    self.var_2be01485 = level._effect[#"hash_5dfe974bf370a5f4"];
     return;
   }
 
@@ -81,7 +82,7 @@ function_f144789c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 private function_8847b8aa(localclientnum) {
-  self endon(#"death", # "hash_395dfda1274cd506");
+  self endon(#"death", #"hash_395dfda1274cd506");
   wait 1;
   a_str_tags = [];
   a_str_tags[0] = "j_elbow_le";

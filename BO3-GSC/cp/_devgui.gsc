@@ -23,7 +23,7 @@
 #namespace devgui;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -41,9 +41,9 @@ function __init__() {
   thread devgui_test_chart_think();
   thread init_debug_center_screen();
   level thread dev::body_customization_devgui(2);
-  callback::on_start_gametype(&devgui_player_commands);
-  callback::on_connect(&devgui_player_connect);
-  callback::on_disconnect(&devgui_player_disconnect);
+  callback::on_start_gametype( & devgui_player_commands);
+  callback::on_connect( & devgui_player_connect);
+  callback::on_disconnect( & devgui_player_disconnect);
 }
 
 function devgui_player_commands() {
@@ -59,18 +59,18 @@ function devgui_player_commands() {
   level.player_devgui_base = "";
   devgui_add_player_commands(level.player_devgui_base, "", 0);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ip1 = i + 1;
     devgui_add_player_commands(level.player_devgui_base, players[i].playername, ip1);
   }
 }
 
 function devgui_player_connect() {
-  if(!isDefined(level.player_devgui_base)) {
+  if(!isdefined(level.player_devgui_base)) {
     return;
   }
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] != self) {
       continue;
     }
@@ -79,7 +79,7 @@ function devgui_player_connect() {
 }
 
 function devgui_player_disconnect() {
-  if(!isDefined(level.player_devgui_base)) {
+  if(!isdefined(level.player_devgui_base)) {
     return;
   }
   rootclear = ("" + self.playername) + "";
@@ -132,8 +132,8 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
   pid = getdvarint("");
   if(pid > 0) {
     player = getplayers()[pid - 1];
-    if(isDefined(player)) {
-      if(isDefined(pcb_param)) {
+    if(isdefined(player)) {
+      if(isdefined(pcb_param)) {
         player thread[[playercallback]](pcb_param);
       } else {
         player thread[[playercallback]]();
@@ -146,7 +146,7 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
 }
 
 function devgui_think() {
-  for(;;) {
+  for (;;) {
     cmd = getdvarstring("");
     if(cmd == "") {
       wait(0.05);
@@ -154,143 +154,143 @@ function devgui_think() {
     }
     switch (cmd) {
       case "": {
-        devgui_handle_player_command(cmd, &devgui_give_health);
+        devgui_handle_player_command(cmd, & devgui_give_health);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_toggle_ammo);
+        devgui_handle_player_command(cmd, & devgui_toggle_ammo);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_toggle_ignore);
+        devgui_handle_player_command(cmd, & devgui_toggle_ignore);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_invulnerable, 1);
+        devgui_handle_player_command(cmd, & devgui_invulnerable, 1);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_invulnerable, 0);
+        devgui_handle_player_command(cmd, & devgui_invulnerable, 0);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_kill);
+        devgui_handle_player_command(cmd, & devgui_kill);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_revive);
+        devgui_handle_player_command(cmd, & devgui_revive);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &devgui_toggle_infinitesolo);
+        devgui_handle_player_command(cmd, & devgui_toggle_infinitesolo);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_cac73614, 100);
+        devgui_handle_player_command(cmd, & function_cac73614, 100);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_cac73614, 1000);
+        devgui_handle_player_command(cmd, & function_cac73614, 1000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_9f78d70e, 100);
+        devgui_handle_player_command(cmd, & function_9f78d70e, 100);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_9f78d70e, 1000);
+        devgui_handle_player_command(cmd, & function_9f78d70e, 1000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_d7b26538);
+        devgui_handle_player_command(cmd, & function_d7b26538);
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_fcd3cf3f);
+        devgui_handle_player_command(cmd, & function_fcd3cf3f);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_192ef5eb);
+        devgui_handle_player_command(cmd, & function_192ef5eb);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 0);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 0);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 1);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 1);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 2);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 2);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 3);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 3);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 4);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 4);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 5);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 5);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 6);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 6);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 7);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 7);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 8);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 8);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 9);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 9);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_b79fb0fe, 10);
+        devgui_handle_player_command(cmd, & function_b79fb0fe, 10);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_f61fdbaf);
+        devgui_handle_player_command(cmd, & function_f61fdbaf);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_408729cd);
+        devgui_handle_player_command(cmd, & function_408729cd);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_4edb34ed);
+        devgui_handle_player_command(cmd, & function_4edb34ed);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_4533d882);
+        devgui_handle_player_command(cmd, & function_4533d882);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_cac73614, 1000000);
+        devgui_handle_player_command(cmd, & function_cac73614, 1000000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_e2643869);
+        devgui_handle_player_command(cmd, & function_e2643869);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, &function_9c35ef50, "");
+        devgui_handle_player_command(cmd, & function_9c35ef50, "");
       }
       case "": {
         break;
       }
       default: {
-        if(isDefined(level.custom_devgui)) {
+        if(isdefined(level.custom_devgui)) {
           if(isarray(level.custom_devgui)) {
             foreach(devgui in level.custom_devgui) {
-              if(isDefined([
+              if(isdefined([
                   [devgui]
                 ](cmd)) && [
                   [devgui]
@@ -324,19 +324,19 @@ function function_e2643869() {
 }
 
 function function_4533d882() {
-  for(itemindex = 1; itemindex < 76; itemindex++) {
+  for (itemindex = 1; itemindex < 76; itemindex++) {
     self setdstat("", itemindex, "", "", "", 999);
   }
 }
 
 function function_4edb34ed() {
-  for(itemindex = 1; itemindex < 76; itemindex++) {
+  for (itemindex = 1; itemindex < 76; itemindex++) {
     self setdstat("", itemindex, "", 1000000);
   }
 }
 
 function function_408729cd() {
-  if(!isDefined(getrootmapname())) {
+  if(!isdefined(getrootmapname())) {
     return;
   }
   foreach(mission in skipto::function_23eda99c()) {
@@ -345,12 +345,12 @@ function function_408729cd() {
 }
 
 function function_192ef5eb() {
-  if(isDefined(self.var_f0080358) && self.var_f0080358) {
+  if(isdefined(self.var_f0080358) && self.var_f0080358) {
     self closeluimenu(self.var_f0080358);
   }
   self.var_f0080358 = self openluimenu("");
   self waittill("menuresponse", menu, response);
-  while(response != "") {
+  while (response != "") {
     self waittill("menuresponse", menu, response);
   }
   self closeluimenu(self.var_f0080358);
@@ -372,7 +372,7 @@ function function_f61fdbaf() {
 function function_d7b26538() {
   var_c02de660 = skipto::function_23eda99c();
   foreach(mission in var_c02de660) {
-    for(i = 0; i < 10; i++) {
+    for (i = 0; i < 10; i++) {
       self setdstat("", mission, "", i, 1);
     }
   }
@@ -386,17 +386,17 @@ function function_fcd3cf3f() {
 }
 
 function function_cac73614(var_735c65d7) {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   self addrankxpvalue("", var_735c65d7);
 }
 
 function function_9f78d70e(var_735c65d7) {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   weaponnum = int(tablelookup("", 3, self.currentweapon.rootweapon.displayname, 0));
   var_b51b0d94 = self getdstat("", weaponnum, "");
@@ -412,9 +412,9 @@ function devgui_invulnerable(onoff) {
 }
 
 function devgui_kill() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   if(isalive(self)) {
     self disableinvulnerability();
@@ -424,20 +424,20 @@ function devgui_kill() {
 }
 
 function devgui_toggle_ammo() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self notify("devgui_toggle_ammo");
   self endon("devgui_toggle_ammo");
-  self.ammo4evah = !(isDefined(self.ammo4evah) && self.ammo4evah);
-  while(isDefined(self) && self.ammo4evah) {
+  self.ammo4evah = !(isdefined(self.ammo4evah) && self.ammo4evah);
+  while (isdefined(self) && self.ammo4evah) {
     weapon = self getcurrentweapon();
     if(weapon != level.weaponnone) {
       self setweaponoverheating(0, 0);
       max = weapon.maxammo;
-      if(isDefined(max)) {
+      if(isdefined(max)) {
         self setweaponammostock(weapon, max);
       }
     }
@@ -446,31 +446,31 @@ function devgui_toggle_ammo() {
 }
 
 function devgui_toggle_ignore() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self.ignoreme = !self.ignoreme;
 }
 
 function devgui_toggle_infinitesolo() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self.infinite_solo_revives = !self.infinite_solo_revives;
 }
 
 function devgui_revive() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self reviveplayer();
-  if(isDefined(self.revivetrigger)) {
+  if(isdefined(self.revivetrigger)) {
     self.revivetrigger delete();
     self.revivetrigger = undefined;
   }
@@ -486,7 +486,7 @@ function devgui_revive() {
 function maintain_maxhealth(maxhealth) {
   self endon("disconnect");
   self endon("devgui_give_health");
-  while(true) {
+  while (true) {
     wait(1);
     if(self.maxhealth != maxhealth) {
       self.maxhealth = maxhealth;
@@ -496,13 +496,13 @@ function maintain_maxhealth(maxhealth) {
 }
 
 function devgui_give_health() {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self notify("devgui_give_health");
-  if(self.maxhealth >= 2000 && isDefined(self.orgmaxhealth)) {
+  if(self.maxhealth >= 2000 && isdefined(self.orgmaxhealth)) {
     self.maxhealth = self.orgmaxhealth;
   } else {
     self.orgmaxhealth = self.maxhealth;
@@ -513,7 +513,7 @@ function devgui_give_health() {
 }
 
 function devgui_player_weapons() {
-  if(isDefined(game[""]) && game[""]) {
+  if(isdefined(game[""]) && game[""]) {
     return;
   }
   level flag::wait_till("");
@@ -522,7 +522,7 @@ function devgui_player_weapons() {
   a_weapons_cp = [];
   a_grenades_cp = [];
   a_misc_cp = [];
-  for(i = 0; i < a_weapons.size; i++) {
+  for (i = 0; i < a_weapons.size; i++) {
     if(weapons::is_primary_weapon(a_weapons[i]) || weapons::is_side_arm(a_weapons[i])) {
       arrayinsert(a_weapons_cp, a_weapons[i], 0);
       continue;
@@ -542,7 +542,7 @@ function devgui_player_weapons() {
   devgui_add_player_weapons(player_devgui_base_cp, "", 0, a_misc_cp, "");
   devgui_add_player_gun_attachments(player_devgui_base_cp, "", 0, a_weapons_cp, "");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ip1 = i + 1;
     adddebugcommand((((player_devgui_base_cp + players[i].playername) + "") + "") + "");
     adddebugcommand((((player_devgui_base_cp + players[i].playername) + "") + "") + "");
@@ -572,8 +572,8 @@ function devgui_add_player_gun_attachments(root, pname, index, a_weapons, weapon
 function devgui_add_player_weapons(root, pname, index, a_weapons, weapon_type) {
   player_devgui_root = ((((root + pname) + "") + "") + weapon_type) + "";
   pid = "" + index;
-  if(isDefined(a_weapons)) {
-    for(i = 0; i < a_weapons.size; i++) {
+  if(isdefined(a_weapons)) {
+    for (i = 0; i < a_weapons.size; i++) {
       if(weapon_type == "") {
         attachments = [];
       } else {
@@ -604,15 +604,15 @@ function devgui_add_player_attachment_command(root, pid, attachment_name, cmdind
 }
 
 function devgui_weapon_think() {
-  for(;;) {
+  for (;;) {
     weapon_name = getdvarstring("");
     if(weapon_name != "") {
-      devgui_handle_player_command(weapon_name, &devgui_give_weapon, weapon_name);
+      devgui_handle_player_command(weapon_name, & devgui_give_weapon, weapon_name);
       setdvar("", "");
     }
     attachmentname = getdvarstring("");
     if(attachmentname != "") {
-      devgui_handle_player_command(attachmentname, &devgui_give_attachment, attachmentname);
+      devgui_handle_player_command(attachmentname, & devgui_give_attachment, attachmentname);
       setdvar("", "");
     }
     wait(0.5);
@@ -631,7 +631,7 @@ function devgui_weapon_asset_name_display_think() {
   colors[colors.size] = (1, 1, 0);
   colors[colors.size] = (1, 0, 1);
   colors[colors.size] = (0, 1, 1);
-  for(;;) {
+  for (;;) {
     wait(update_time);
     display = getdvarint("");
     if(!display) {
@@ -645,10 +645,10 @@ function devgui_weapon_asset_name_display_think() {
       printlnbold_counter = 0;
     }
     color_index = 0;
-    for(i = 1; i < level.players.size; i++) {
+    for (i = 1; i < level.players.size; i++) {
       player = level.players[i];
       weapon = player getcurrentweapon();
-      if(!isDefined(weapon) || level.weaponnone == weapon) {
+      if(!isdefined(weapon) || level.weaponnone == weapon) {
         continue;
       }
       print3d(player gettagorigin(""), weapon.name, colors[color_index], 1, 0.15, print_duration);
@@ -659,14 +659,14 @@ function devgui_weapon_asset_name_display_think() {
     }
     color_index = 0;
     ai_list = getaiarray();
-    for(i = 0; i < ai_list.size; i++) {
+    for (i = 0; i < ai_list.size; i++) {
       ai = ai_list[i];
       if(isvehicle(ai)) {
         weapon = ai.turretweapon;
       } else {
         weapon = ai.weapon;
       }
-      if(!isDefined(weapon) || level.weaponnone == weapon) {
+      if(!isdefined(weapon) || level.weaponnone == weapon) {
         continue;
       }
       print3d(ai gettagorigin(""), weapon.name, colors[color_index], 1, 0.15, print_duration);
@@ -681,21 +681,21 @@ function devgui_weapon_asset_name_display_think() {
 function devgui_test_chart_think() {
   wait(0.05);
   old_val = getdvarint("");
-  for(;;) {
+  for (;;) {
     val = getdvarint("");
     if(old_val != val) {
-      if(isDefined(level.test_chart_model)) {
+      if(isdefined(level.test_chart_model)) {
         level.test_chart_model delete();
         level.test_chart_model = undefined;
       }
       if(val) {
         player = getplayers()[0];
         direction = player getplayerangles();
-        direction_vec = anglesToForward((0, direction[1], 0));
+        direction_vec = anglestoforward((0, direction[1], 0));
         scale = 120;
         direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-        level.test_chart_model = spawn("", player getEye() + direction_vec);
-        level.test_chart_model setModel("");
+        level.test_chart_model = spawn("", player geteye() + direction_vec);
+        level.test_chart_model setmodel("");
         level.test_chart_model.angles = (0, direction[1], 0) + vectorscale((0, 1, 0), 90);
       }
     }
@@ -705,9 +705,9 @@ function devgui_test_chart_think() {
 }
 
 function devgui_give_weapon(weapon_name) {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self notify("devgui_give_ammo");
@@ -754,9 +754,9 @@ function devgui_give_weapon(weapon_name) {
 }
 
 function devgui_give_attachment(attachment_name) {
-  /
+  /# /
   #
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self notify("devgui_give_attachment");
@@ -788,7 +788,7 @@ function devgui_give_attachment(attachment_name) {
     }
   }
   split[split.size] = attachment_name;
-  for(index = split.size; index < 9; index++) {
+  for (index = split.size; index < 9; index++) {
     split[index] = "";
   }
   self takeweapon(currentweapon);
@@ -799,12 +799,12 @@ function devgui_give_attachment(attachment_name) {
 
 function init_debug_center_screen() {
   zero_idle_movement = "";
-  for(;;) {
+  for (;;) {
     if(getdvarint("")) {
-      if(!isDefined(level.center_screen_debug_hudelem_active) || level.center_screen_debug_hudelem_active == 0) {
+      if(!isdefined(level.center_screen_debug_hudelem_active) || level.center_screen_debug_hudelem_active == 0) {
         thread debug_center_screen();
         zero_idle_movement = getdvarstring("");
-        if(isDefined(zero_idle_movement) && zero_idle_movement == "") {
+        if(isdefined(zero_idle_movement) && zero_idle_movement == "") {
           setdvar("", "");
           zero_idle_movement = "";
         }

@@ -20,14 +20,14 @@
 #namespace zm_aat_turned;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_turned", &__init__, undefined, "aat");
+  system::register("zm_aat_turned", & __init__, undefined, "aat");
 }
 
 function __init__() {
-  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
+  if(!(isdefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_turned", 0.15, 0, 15, 8, 0, &result, "t7_hud_zm_aat_turned", "wpn_aat_turned_plr", &turned_zombie_validation);
+  aat::register("zm_aat_turned", 0.15, 0, 15, 8, 0, & result, "t7_hud_zm_aat_turned", "wpn_aat_turned_plr", & turned_zombie_validation);
   clientfield::register("actor", "zm_aat_turned", 1, 1, "int");
 }
 
@@ -54,7 +54,7 @@ function result(death, attacker, mod, weapon) {
       self.variant_type = 8;
     }
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isdefined(attacker) && isplayer(attacker)) {
     attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_TURNED");
   }
   self thread turned_local_blast(attacker);
@@ -64,16 +64,16 @@ function result(death, attacker, mod, weapon) {
 function turned_local_blast(attacker) {
   v_turned_blast_pos = self.origin;
   a_ai_zombies = array::get_all_closest(v_turned_blast_pos, getaiteamarray("axis"), undefined, undefined, 90);
-  if(!isDefined(a_ai_zombies)) {
+  if(!isdefined(a_ai_zombies)) {
     return;
   }
   f_turned_range_sq = 8100;
   n_flung_zombies = 0;
-  for(i = 0; i < a_ai_zombies.size; i++) {
-    if(!isDefined(a_ai_zombies[i]) || !isalive(a_ai_zombies[i])) {
+  for (i = 0; i < a_ai_zombies.size; i++) {
+    if(!isdefined(a_ai_zombies[i]) || !isalive(a_ai_zombies[i])) {
       continue;
     }
-    if(isDefined(level.aat["zm_aat_turned"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat["zm_aat_turned"].immune_result_indirect[a_ai_zombies[i].archetype]) {
+    if(isdefined(level.aat["zm_aat_turned"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat["zm_aat_turned"].immune_result_indirect[a_ai_zombies[i].archetype]) {
       continue;
     }
     if(a_ai_zombies[i] == self) {
@@ -96,22 +96,22 @@ function turned_local_blast(attacker) {
 }
 
 function turned_zombie_validation() {
-  if(isDefined(level.aat["zm_aat_turned"].immune_result_direct[self.archetype]) && level.aat["zm_aat_turned"].immune_result_direct[self.archetype]) {
+  if(isdefined(level.aat["zm_aat_turned"].immune_result_direct[self.archetype]) && level.aat["zm_aat_turned"].immune_result_direct[self.archetype]) {
     return false;
   }
-  if(isDefined(self.barricade_enter) && self.barricade_enter) {
+  if(isdefined(self.barricade_enter) && self.barricade_enter) {
     return false;
   }
-  if(isDefined(self.is_traversing) && self.is_traversing) {
+  if(isdefined(self.is_traversing) && self.is_traversing) {
     return false;
   }
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
+  if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
     return false;
   }
-  if(isDefined(self.is_leaping) && self.is_leaping) {
+  if(isdefined(self.is_leaping) && self.is_leaping) {
     return false;
   }
-  if(isDefined(level.zm_aat_turned_validation_override) && !self[[level.zm_aat_turned_validation_override]]()) {
+  if(isdefined(level.zm_aat_turned_validation_override) && !self[[level.zm_aat_turned_validation_override]]()) {
     return false;
   }
   return true;
@@ -129,7 +129,7 @@ function zombie_death_time_limit(e_attacker) {
 function zombie_kill_tracker(e_attacker) {
   self endon("death");
   self endon("entityshutdown");
-  while(self.n_aat_turned_zombie_kills < 12) {
+  while (self.n_aat_turned_zombie_kills < 12) {
     wait(0.05);
   }
   wait(0.5);

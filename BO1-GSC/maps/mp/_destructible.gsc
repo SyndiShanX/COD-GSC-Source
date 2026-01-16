@@ -8,13 +8,13 @@
 #using_animtree("mp_vehicles");
 init() {
   level.destructible_callbacks = [];
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = GetEntArray("destructible", "targetname");
   if(destructibles.size <= 0) {
     return;
   }
   precacheItem("destructible_car_mp");
   precacheItem("explodable_barrel_mp");
-  for(i = 0; i < destructibles.size; i++) {
+  for (i = 0; i < destructibles.size; i++) {
     if(GetSubStr(destructibles[i].destructibledef, 0, 4) == "veh_") {
       destructibles[i] thread destructible_car_death_think();
     } else if(IsSubStr(destructibles[i].destructibledef, "barrel")) {
@@ -86,7 +86,7 @@ simple_timed_explosion(destructible_event, attacker) {
   wait_times = [];
   str = GetSubStr(destructible_event, 23);
   tokens = StrTok(str, "_");
-  for(i = 0; i < tokens.size; i++) {
+  for (i = 0; i < tokens.size; i++) {
     wait_times[wait_times.size] = Int(tokens[i]);
   }
   if(wait_times.size <= 0) {
@@ -120,7 +120,7 @@ destructible_car_explosion(attacker, physics_explosion) {
     physics_explosion = true;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     body = players[i].body;
     if(!isDefined(body)) {
       continue;
@@ -142,9 +142,8 @@ destructible_car_explosion(attacker, physics_explosion) {
   if(physics_explosion) {
     PhysicsExplosionSphere(self.origin, 255, 254, 0.3, 400, 25);
   }
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     attacker thread maps\mp\_challenges::destroyed_car();
-  }
   level.globalCarsDestroyed++;
   if(isDefined(attacker)) {
     self DoDamage(self.health + 10000, self.origin + (0, 0, 1), attacker);
@@ -167,7 +166,7 @@ destructible_car_explosion_animate() {
   self.origin = (self.origin[0], self.origin[1], self.origin[2] + 16);
   wait(0.3);
   items = GetDroppedWeapons();
-  for(i = 0; i < items.size; i++) {
+  for (i = 0; i < items.size; i++) {
     if(DistanceSquared(end_origin, items[i].origin) < 128 * 128) {
       if(items[i].origin[2] - (end_origin[2] + 32) > 0) {
         items[i] delete();

@@ -12,6 +12,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
+
 #namespace gadget_vision_pulse;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ __init__() {
 
 function_aad9199e(pulsedenemy) {
   pulsedenemy notify(#"hash_7dc65ec6fe251daf");
-  pulsedenemy endon(#"hash_7dc65ec6fe251daf", # "death", # "disconnect");
+  pulsedenemy endon(#"hash_7dc65ec6fe251daf", #"death", #"disconnect");
   wait float(level.weaponvisionpulse.var_9d776ba6) / 1000;
 
   if(isDefined(pulsedenemy)) {
@@ -43,7 +44,7 @@ function_fc3478b7(pulsedenemy) {
 }
 
 function_c0520f6f(victim, waittime) {
-  self endon(#"disconnect", # "death", # "emp_vp_jammed");
+  self endon(#"disconnect", #"death", #"emp_vp_jammed");
   wait float(waittime) / 1000;
 
   if(isalive(victim)) {
@@ -52,7 +53,7 @@ function_c0520f6f(victim, waittime) {
 }
 
 awardscore() {
-  self endon(#"disconnect", # "death", # "emp_vp_jammed");
+  self endon(#"disconnect", #"death", #"emp_vp_jammed");
   waittime = level.weaponvisionpulse.gadget_pulse_duration / 3;
   radius = level.weaponvisionpulse.gadget_pulse_max_range;
 

@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -15,7 +16,8 @@ main() {
   level._effect["paper_falling"] = loadfx("misc/paper_falling_dlc");
 
   /#		
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_strike_fx::main();
-  }
+  # /
+
 }

@@ -60,7 +60,7 @@ wait_for_thundergun_fired() {
       self thread freezegun_fired(currentweapon == "freezegun_upgraded_zm");
       view_pos = self GetTagOrigin("tag_flash") - self GetPlayerViewHeight();
       view_angles = self GetTagAngles("tag_flash");
-      playFX(level._effect["freezegun_smoke_cloud"], view_pos, anglesToForward(view_angles), AnglesToUp(view_angles));
+      playfx(level._effect["freezegun_smoke_cloud"], view_pos, AnglesToForward(view_angles), AnglesToUp(view_angles));
     }
   }
 }
@@ -319,7 +319,7 @@ freezegun_death(hit_location, hit_origin, player) {
   self.freezegun_death = true;
   self.skip_death_notetracks = true;
   self.nodeathragdoll = true;
-  self playSound("wpn_freezegun_impact_zombie");
+  self PlaySound("wpn_freezegun_impact_zombie");
   if(RandomIntRange(0, 101) >= 88) {
     player maps\_zombiemode_audio::create_and_play_dialog("kill", "freeze");
   }

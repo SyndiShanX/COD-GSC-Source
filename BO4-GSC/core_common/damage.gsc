@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace damage;
 
 friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
@@ -34,21 +35,21 @@ friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
     ownerteam = owner.team;
 
     if(!isDefined(ownerteam) && isDefined(owner.pers)) {
-      ownerteam = owner.pers[# "team"];
+      ownerteam = owner.pers[#"team"];
     }
 
-    if(isDefined(attacker.pers) && !isDefined(attacker.pers[# "team"])) {
+    if(isDefined(attacker.pers) && !isDefined(attacker.pers[#"team"])) {
       return true;
     }
 
-    if(isDefined(attacker.pers) && util::function_fbce7263(attacker.pers[# "team"], ownerteam)) {
+    if(isDefined(attacker.pers) && util::function_fbce7263(attacker.pers[#"team"], ownerteam)) {
       return true;
     }
   } else if(isactor(attacker)) {
     ownerteam = owner.team;
 
     if(!isDefined(ownerteam) && isDefined(owner.pers)) {
-      ownerteam = owner.pers[# "team"];
+      ownerteam = owner.pers[#"team"];
     }
 
     if(util::function_fbce7263(attacker.team, ownerteam)) {
@@ -59,17 +60,17 @@ friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
       ownerteam = owner.team;
 
       if(!isDefined(ownerteam) && isDefined(owner.pers)) {
-        ownerteam = owner.pers[# "team"];
+        ownerteam = owner.pers[#"team"];
       }
 
-      if(util::function_fbce7263(attacker.owner.pers[# "team"], ownerteam)) {
+      if(util::function_fbce7263(attacker.owner.pers[#"team"], ownerteam)) {
         return true;
       }
     } else {
       occupant_team = attacker vehicle::vehicle_get_occupant_team();
 
       if(isplayer(owner)) {
-        if(util::function_fbce7263(occupant_team, owner.pers[# "team"]) && occupant_team != # "spectator") {
+        if(util::function_fbce7263(occupant_team, owner.pers[#"team"]) && occupant_team != #"spectator") {
           return true;
         }
       } else if(util::function_fbce7263(owner.team, occupant_team)) {

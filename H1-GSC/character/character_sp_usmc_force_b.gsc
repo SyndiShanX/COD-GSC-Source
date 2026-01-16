@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setModel("body_force_b_woodland");
+  self setmodel("body_force_b_woodland");
   self attach("head_force_chad", "", 1);
   self.headmodel = "head_force_chad";
   self.voice = "british";

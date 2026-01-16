@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_firingrange_fx.gsc
 ***********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 126
   ent = createLoopSound();
   ent.v["origin"] = (-872.39, 315.968, -52.003);
   ent.v["angles"] = (270, 0, 0);
@@ -686,4 +688,5 @@ main() {
   ent.v["origin"] = (1945.44, 2279.22, 86);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_metal_rattle_loop";
+
 }

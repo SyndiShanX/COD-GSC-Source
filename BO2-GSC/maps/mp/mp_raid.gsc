@@ -61,30 +61,27 @@ levelspawndvars(reset_dvars) {
 }
 
 water_trigger_init() {
-  triggers = getEntArray("water_killbrush", "targetname");
+  triggers = getentarray("water_killbrush", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger thread player_splash_think();
-  }
+  foreach(trigger in triggers)
+  trigger thread player_splash_think();
 }
 
 player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity)) {
+    if(isplayer(entity) && isalive(entity))
       self thread trigger_thread(entity, ::player_water_fx);
-    }
   }
 }
 
 player_water_fx(player, endon_condition) {
   maxs = self.origin + self getmaxs();
 
-  if(maxs[2] < 0) {
+  if(maxs[2] < 0)
     maxs = maxs + vectorscale((0, 0, 1), 5.0);
-  }
 
   origin = (player.origin[0], player.origin[1], maxs[2]);
-  playFX(level._effect["water_splash_sm"], origin);
+  playfx(level._effect["water_splash_sm"], origin);
 }

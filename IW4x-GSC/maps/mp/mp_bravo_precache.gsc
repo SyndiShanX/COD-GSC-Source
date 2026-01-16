@@ -3,6 +3,9 @@
  * Script: maps\mp\mp_bravo_precache.gsc
 *****************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   common_scripts\_destructible_types_anim_wallfan::main();
   maps\animated_models\foliage_cod5_tree_jungle_03::main();

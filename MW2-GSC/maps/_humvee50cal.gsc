@@ -9,9 +9,8 @@
 main(model, type) {
   //SNDFILE=vehicle_hummer
 
-  if(!isDefined(type)) {
+  if(!isdefined(type))
     type = "humvee50cal";
-  }
   maps\_humvee::main(model, type);
   level.vehicle_aianims[type] = setanims(type);
   build_turret("humvee_50cal_mg", "tag_turret", "vehicle_humvee_camo_50cal_mg", undefined, undefined, 2.9);
@@ -20,7 +19,7 @@ main(model, type) {
 #using_animtree("generic_human");
 setanims(type) {
   positions = level.vehicle_aianims[type];
-  positions[4] = spawnStruct();
+  positions[4] = spawnstruct();
 
   positions[4].sittag = "tag_guy_turret";
   //	positions[ 4 ].idle = %humvee_turret_idle;

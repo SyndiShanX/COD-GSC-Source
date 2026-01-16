@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_farm_fx.gsc
 ****************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 114
   ent = createOneshotEffect("rain_heavy_mist");
   ent.v["origin"] = (27.2079, -1156.02, 583.278);
   ent.v["angles"] = (270, 0, 0);
@@ -351,4 +353,5 @@ main() {
   ent.v["origin"] = (720.044, -1501.75, 323.241);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_metal_rattle_squeak";
+
 }

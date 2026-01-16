@@ -25,27 +25,27 @@ function waterslide_main() {
   level flag::init("waterslide_open");
   zombie_cave_slide_init();
   messagetrigger = getent("waterslide_message_trigger", "targetname");
-  if(isDefined(messagetrigger)) {
+  if(isdefined(messagetrigger)) {
     messagetrigger setcursorhint("HINT_NOICON");
   }
   cheat = 0;
   cheat = getdvarint("") > 0;
   if(!cheat) {
-    if(isDefined(messagetrigger)) {
+    if(isdefined(messagetrigger)) {
       messagetrigger sethintstring(&"ZOMBIE_NEED_POWER");
     }
     level flag::wait_till("power_on");
-    if(isDefined(messagetrigger)) {
+    if(isdefined(messagetrigger)) {
       messagetrigger sethintstring(&"ZM_TEMPLE_DESTINATION_NOT_OPEN");
     }
     level flag::wait_till_any(array("cave01_to_cave02", "pressure_to_cave01"));
   }
   level flag::set("waterslide_open");
-  if(isDefined(messagetrigger)) {
+  if(isdefined(messagetrigger)) {
     messagetrigger sethintstring("");
   }
-  var_144a9b89 = getEntArray("water_slide_blocker", "targetname");
-  if(isDefined(var_144a9b89) && var_144a9b89.size > 0) {
+  var_144a9b89 = getentarray("water_slide_blocker", "targetname");
+  if(isdefined(var_144a9b89) && var_144a9b89.size > 0) {
     foreach(e_blocker in var_144a9b89) {
       e_blocker connectpaths();
       e_blocker movez(128, 1);
@@ -59,8 +59,8 @@ function zombie_cave_slide_init() {
   level.zombies_slide_anim_change = [];
   level thread slide_anim_change_throttle();
   level flag::set("slide_anim_change_allowed");
-  slide_trigs = getEntArray("zombie_cave_slide", "targetname");
-  array::thread_all(slide_trigs, &slide_trig_watch);
+  slide_trigs = getentarray("zombie_cave_slide", "targetname");
+  array::thread_all(slide_trigs, & slide_trig_watch);
   level thread slide_player_enter_watch();
   level thread slide_player_exit_watch();
   level thread zombie_caveslide_anim_failsafe();
@@ -68,10 +68,10 @@ function zombie_cave_slide_init() {
 
 function zombie_caveslide_anim_failsafe() {
   trig = getent("zombie_cave_slide_failsafe", "targetname");
-  if(isDefined(trig)) {
-    while(true) {
+  if(isdefined(trig)) {
+    while (true) {
       trig waittill("trigger", who);
-      if(isDefined(who.sliding) && who.sliding) {
+      if(isdefined(who.sliding) && who.sliding) {
         who.sliding = 0;
         who thread reset_zombie_anim();
       }
@@ -81,21 +81,21 @@ function zombie_caveslide_anim_failsafe() {
 
 function slide_trig_watch() {
   slide_node = getnode(self.target, "targetname");
-  if(!isDefined(slide_node)) {
+  if(!isdefined(slide_node)) {
     return;
   }
   self triggerenable(0);
   level waittill("slide_open");
   self triggerenable(1);
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
     if(who.animname == "zombie" || who.animname == "sonic_zombie" || who.animname == "napalm_zombie") {
-      if(isDefined(who.sliding) && who.sliding == 1) {
+      if(isdefined(who.sliding) && who.sliding == 1) {
         continue;
       } else {
         who thread zombie_sliding(slide_node);
       }
-    } else if(isDefined(who.zombie_sliding)) {
+    } else if(isdefined(who.zombie_sliding)) {
       who thread[[who.zombie_sliding]](slide_node);
     }
   }
@@ -104,7 +104,7 @@ function slide_trig_watch() {
 function zombie_sliding(slide_node) {
   self endon("death");
   level endon("intermission");
-  if(!isDefined(self.cave_slide_flag_init)) {
+  if(!isdefined(self.cave_slide_flag_init)) {
     self flag::init("slide_anim_change");
     self.cave_slide_flag_init = 1;
   }
@@ -121,16 +121,16 @@ function zombie_sliding(slide_node) {
   self notify("zombie_acquire_enemy");
   self.var_9c5ae704 = self.zombie_move_speed;
   self thread set_zombie_slide_anim();
-  if(!(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(!(isdefined(self.missinglegs) && self.missinglegs)) {
     self setphysparams(15, 0, 24);
   }
   self setgoalnode(slide_node);
   check_dist_squared = 3600;
-  while(distancesquared(self.origin, slide_node.origin) > check_dist_squared) {
+  while (distancesquared(self.origin, slide_node.origin) > check_dist_squared) {
     wait(0.01);
   }
   self thread reset_zombie_anim();
-  if(!(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(!(isdefined(self.missinglegs) && self.missinglegs)) {
     self setphysparams(15, 0, 72);
   }
   self notify("water_slide_exit");
@@ -146,7 +146,7 @@ function zombie_sliding(slide_node) {
 function play_zombie_slide_looper() {
   self endon("death");
   level endon("intermission");
-  self playLoopSound("fly_dtp_slide_loop_npc_snow", 0.5);
+  self playloopsound("fly_dtp_slide_loop_npc_snow", 0.5);
   self util::waittill_any("zombie_end_traverse", "death");
   self stoploopsound(0.5);
 }
@@ -156,7 +156,7 @@ function set_zombie_slide_anim() {
 }
 
 function reset_zombie_anim() {
-  if(isDefined(self.var_9c5ae704)) {
+  if(isdefined(self.var_9c5ae704)) {
     self.zombie_move_speed = self.var_9c5ae704;
   }
 }
@@ -182,7 +182,7 @@ function gibbed_while_sliding() {
   if(self.missinglegs) {
     return;
   }
-  while(self.sliding) {
+  while (self.sliding) {
     if(self.missinglegs && self._had_legs == 1) {
       self thread set_zombie_slide_anim();
       return;
@@ -192,19 +192,19 @@ function gibbed_while_sliding() {
 }
 
 function slide_anim_change_throttle() {
-  if(!isDefined(level.zombies_slide_anim_change)) {
+  if(!isdefined(level.zombies_slide_anim_change)) {
     level.zombies_slide_anim_change = [];
   }
   int_max_num_zombies_per_frame = 7;
   array_zombies_allowed_to_switch = [];
-  while(isDefined(level.zombies_slide_anim_change)) {
+  while (isdefined(level.zombies_slide_anim_change)) {
     if(level.zombies_slide_anim_change.size == 0) {
       wait(0.1);
       continue;
     }
     array_zombies_allowed_to_switch = level.zombies_slide_anim_change;
-    for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
-      if(isDefined(array_zombies_allowed_to_switch[i]) && isalive(array_zombies_allowed_to_switch[i])) {
+    for (i = 0; i < array_zombies_allowed_to_switch.size; i++) {
+      if(isdefined(array_zombies_allowed_to_switch[i]) && isalive(array_zombies_allowed_to_switch[i])) {
         array_zombies_allowed_to_switch[i] flag::set("slide_anim_change");
       }
       if(i >= int_max_num_zombies_per_frame) {
@@ -212,7 +212,7 @@ function slide_anim_change_throttle() {
       }
     }
     level flag::clear("slide_anim_change_allowed");
-    for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
+    for (i = 0; i < array_zombies_allowed_to_switch.size; i++) {
       if(array_zombies_allowed_to_switch[i] flag::get("slide_anim_change")) {
         level.zombies_slide_anim_change = arrayremovevalue(level.zombies_slide_anim_change, array_zombies_allowed_to_switch[i]);
       }
@@ -225,13 +225,13 @@ function slide_anim_change_throttle() {
 }
 
 function array_remove(array, object) {
-  if(!isDefined(array) && !isDefined(object)) {
+  if(!isdefined(array) && !isdefined(object)) {
     return;
   }
   new_array = [];
   foreach(item in array) {
     if(item != object) {
-      if(!isDefined(new_array)) {
+      if(!isdefined(new_array)) {
         new_array = [];
       } else if(!isarray(new_array)) {
         new_array = array(new_array);
@@ -245,9 +245,9 @@ function array_remove(array, object) {
 function slide_player_enter_watch() {
   level endon("fake_death");
   trig = getent("cave_slide_force_crouch", "targetname");
-  while(true) {
+  while (true) {
     trig waittill("trigger", who);
-    if(isDefined(who) && isplayer(who) && who.sessionstate != "spectator" && (!(isDefined(who.on_slide) && who.on_slide))) {
+    if(isdefined(who) && isplayer(who) && who.sessionstate != "spectator" && (!(isdefined(who.on_slide) && who.on_slide))) {
       who.on_slide = 1;
       who thread player_slide_watch();
       who thread zm_audio::create_and_play_dialog("general", "slide");
@@ -257,9 +257,9 @@ function slide_player_enter_watch() {
 
 function slide_player_exit_watch() {
   trig = getent("cave_slide_force_stand", "targetname");
-  while(true) {
+  while (true) {
     trig waittill("trigger", who);
-    if(isDefined(who) && isplayer(who) && who.sessionstate != "spectator" && (isDefined(who.on_slide) && who.on_slide)) {
+    if(isdefined(who) && isplayer(who) && who.sessionstate != "spectator" && (isdefined(who.on_slide) && who.on_slide)) {
       who.on_slide = 0;
       who notify("water_slide_exit");
     }
@@ -270,7 +270,7 @@ function player_slide_watch() {
   self thread on_player_enter_slide();
   self thread player_slide_fake_death_watch();
   self util::waittill_any("water_slide_exit", "death", "disconnect");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self thread on_player_exit_slide();
   }
 }
@@ -288,14 +288,14 @@ function on_player_enter_slide() {
   self endon("death");
   self endon("disconnect");
   self endon("water_slide_exit");
-  self playLoopSound("evt_slideloop");
+  self playloopsound("evt_slideloop");
   if(self laststand::player_is_in_laststand()) {
     self.bleedout_time = 0;
     self playlocalsound(level.zmb_laugh_alias);
     self.on_slide = 0;
     return;
   }
-  while(isDefined(self.divetoprone) && self.divetoprone) {
+  while (isdefined(self.divetoprone) && self.divetoprone) {
     wait(0.1);
   }
   self allowstand(0);
@@ -321,7 +321,7 @@ function zombie_slide_watch() {
 }
 
 function on_zombie_enter_slide() {
-  self playLoopSound("evt_slideloop");
+  self playloopsound("evt_slideloop");
 }
 
 function on_zombie_exit_slide() {

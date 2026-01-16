@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  self setModel("c_usa_gov_presstaff_fb");
+  self setmodel("c_usa_gov_presstaff_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

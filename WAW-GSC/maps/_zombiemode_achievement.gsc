@@ -10,7 +10,7 @@
 init() {
   level thread init_achievement_variable();
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].trapped_used = [];
     players[i].trapped_used["north_east_tgt"] = -1;
     players[i].trapped_used["north_west_tgt"] = -1;
@@ -42,7 +42,7 @@ init_achievement_variable() {
 track_trap_killed() {
   zombie_killed_with_trap = 0;
   wait(10);
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(level.round_number == self.trapped_used["north_east_tgt"]) {
       zombie_killed_with_trap += 1;
     }
@@ -70,7 +70,7 @@ track_trap_killed() {
 }
 
 track_total_zombie_killed() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(isDefined(self.kill_tracker)) {
       if(self.kill_tracker >= level.zombie_vars["Achievement_Crypt_Keeper"]) {
         self iprintln("'Fertilizer Man' Achievement Earned");
@@ -84,7 +84,7 @@ track_total_zombie_killed() {
 }
 
 track_headshot_count() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(isDefined(self.headshots)) {
       if(self.headshots >= level.zombie_vars["Achievement_Headshot_count"]) {
         self iprintln("'Deadhead' Achievement Earned");
@@ -101,8 +101,8 @@ track_instant_melee_kills() {
   instant_melee_kill = 0;
   self.last_kill_method = "none";
   self endon("brawler_achievement_unlocked");
-  while(isDefined(self)) {
-    while(level.zombie_vars["zombie_insta_kill"] == 1) {
+  while (isDefined(self)) {
+    while (level.zombie_vars["zombie_insta_kill"] == 1) {
       self waittill_either("zombie_killed", "insta_kill_over");
       if(self.last_kill_method == "MOD_MELEE" && level.zombie_vars["zombie_insta_kill"] == 1) {
         instant_melee_kill += 1;
@@ -125,7 +125,7 @@ track_instant_melee_kills() {
 survive_rounds_without_revive() {
   self endon("I_am_down");
   Achievement_unlock = false;
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(isDefined(level.round_number) && level.round_number == level.zombie_vars["Achievement_Survivor_1"] && Achievement_unlock == false) {
       self iprintln("'Soul Survivor' Achievement Earned");
       self play_achievement_dialog();
@@ -138,7 +138,7 @@ survive_rounds_without_revive() {
 }
 
 track_perk_a_holic() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(isDefined(self.perk_hud) && self.perk_hud.size == 4) {
       self iprintln("'Perk-a-Holic' Achievement Earned");
       self play_achievement_dialog();
@@ -151,7 +151,7 @@ track_perk_a_holic() {
 
 track_general_contractor() {
   self.board_repair = 0;
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(self.board_repair >= level.zombie_vars["Achievement_General_Contractor"]) {
       self iprintln("'Hammer Time' Achievement Earned");
       self play_achievement_dialog();
@@ -163,7 +163,7 @@ track_general_contractor() {
 }
 
 track_WMD_achievement() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("nuke_triggered");
     wait(2);
     if(isDefined(self.zombie_nuked) && self.zombie_nuked.size == 1) {
@@ -176,7 +176,7 @@ track_WMD_achievement() {
 }
 
 tracks_highroller_achievement() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(self.score_total >= level.zombie_vars["Achievement_HighRoller"]) {
       self iprintln("'Big Baller' Achievement Earned");
       self play_achievement_dialog();
@@ -193,7 +193,7 @@ play_achievement_dialog() {
   if(!isDefined(self.vox_achievment)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_achievment");
     self.vox_achievment = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_achievment[self.vox_achievment.size] = "vox_achievment_" + i;
     }
     self.vox_achievment_available = self.vox_achievment;

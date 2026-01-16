@@ -91,13 +91,11 @@ init_stub() {
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "boost";
 
-  if(!isDefined(game["dialog"]["offense_obj"])) {
+  if(!isdefined(game["dialog"]["offense_obj"]))
     game["dialog"]["offense_obj"] = "boost";
-  }
 
-  if(!isDefined(game["dialog"]["defense_obj"])) {
+  if(!isdefined(game["dialog"]["defense_obj"]))
     game["dialog"]["defense_obj"] = "boost";
-  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["highspeed"] = "highspeed";
@@ -229,32 +227,28 @@ music_onplayerspawned_stub() {
   wait 0.05;
 
   if(getdvar("virtuallobbyactive") == "0") {
-    if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
-      if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
+    if(!level.splitscreen || level.splitscreen && !isdefined(level.playedstartingmusic)) {
+      if(!maps\mp\_utility::issecondarysplitscreenplayer())
         self playlocalsound(game["music"]["spawn_" + self.team]);
-      }
 
-      if(level.splitscreen) {
+      if(level.splitscreen)
         level.playedstartingmusic = 1;
-      }
     }
 
-    if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
+    if(isdefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
+      if(isdefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
+      else if(isdefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      } else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
+      else if(!maps\mp\_utility::issecondarysplitscreenplayer())
         maps\mp\_utility::leaderdialogonplayer("gametype");
-      }
     }
 
     maps\mp\_utility::gameflagwait("prematch_done");
 
     if(self.team == game["attackers"]) {
-      if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
+      if(!maps\mp\_utility::issecondarysplitscreenplayer())
         maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
-      }
     } else if(!maps\mp\_utility::issecondarysplitscreenplayer())
       maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
   }
@@ -356,7 +350,7 @@ onplayerspawned_stub() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     if(maps\mp\_utility::is_true(level.virtuallobbyactive)) {
@@ -364,22 +358,20 @@ onplayerspawned_stub() {
     }
     self.bcinfo = [];
     var_0 = getteamvoiceprefix(self.team);
-    if(!isDefined(self.pers["voiceIndex"])) {
+    if(!isdefined(self.pers["voiceIndex"])) {
       var_1 = 4;
       var_2 = 4;
       var_3 = "m";
 
-      if(!isagent(self) && self hasfemalecustomizationmodel()) {
+      if(!isagent(self) && self hasfemalecustomizationmodel())
         var_3 = "fe";
-      }
 
       self.pers["voiceNum"] = level.voice_count[self.team][var_3] + 1;
 
-      if(var_3 == "fe") {
+      if(var_3 == "fe")
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_2;
-      } else {
+      else
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_1;
-      }
 
       self.pers["voicePrefix"] = var_0 + "1_";
     }
@@ -394,16 +386,15 @@ onplayerspawned_stub() {
 }
 
 updatedamagefeedback_stub(var_0, var_1) {
-  if(!isplayer(self) || !isDefined(var_0)) {
+  if(!isplayer(self) || !isdefined(var_0)) {
     return;
   }
   switch (var_0) {
     case "scavenger":
       self playlocalsound("scavenger_pack_pickup");
 
-      if(!level.hardcoremode) {
+      if(!level.hardcoremode)
         self setclientomnvar("damage_feedback", var_0);
-      }
 
       break;
     case "hitpainkiller":
@@ -421,11 +412,10 @@ updatedamagefeedback_stub(var_0, var_1) {
       self playlocalsound("mp_hit_default");
       break;
     case "laser":
-      if(isDefined(level.sentrygun)) {
-        if(!isDefined(self.shouldloopdamagefeedback)) {
-          if(isDefined(level.mapkillstreakdamagefeedbacksound)) {
+      if(isdefined(level.sentrygun)) {
+        if(!isdefined(self.shouldloopdamagefeedback)) {
+          if(isdefined(level.mapkillstreakdamagefeedbacksound))
             self thread[[level.mapkillstreakdamagefeedbacksound]](level.sentrygun);
-          }
         }
       }
 
@@ -456,7 +446,7 @@ updatedamagefeedback_stub(var_0, var_1) {
 }
 
 set_hud_feedback(icon) {
-  if(!isDefined(self.hud_damagefeedback)) {
+  if(!isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback = newclienthudelem(self);
     self.hud_damagefeedback.horzAlign = "center";
     self.hud_damagefeedback.vertAlign = "middle";
@@ -484,11 +474,10 @@ set_hud_feedback(icon) {
   x = -21;
   y = -20;
 
-  if(getDvarInt("camera_thirdPerson")) {
+  if(getDvarInt("camera_thirdPerson"))
     yOffset = self GetThirdPersonCrosshairOffset() * 240;
-  } else {
+  else
     yOffset = getdvarfloat("cg_crosshairVerticalOffset") * 240;
-  }
 
   self.hud_damagefeedback setShader(hitmark, hitmark_weight, hitmark_height);
   self.hud_damagefeedback.alpha = 1;
@@ -496,25 +485,22 @@ set_hud_feedback(icon) {
   self.hud_damagefeedback.alpha = 0;
 
   // only update hudelem positioning when necessary
-  if(self.hud_damagefeedback.x != x) {
+  if(self.hud_damagefeedback.x != x)
     self.hud_damagefeedback.x = x;
-  }
 
   y = (y - int(yOffset));
-  if(self.hud_damagefeedback.y != y) {
+  if(self.hud_damagefeedback.y != y)
     self.hud_damagefeedback.y = y;
-  }
 
-  if(isDefined(icon)) {
+  if(isdefined(icon)) {
     self.hud_damagefeedbackText setShader(icon, icon_weight, icon_height);
     self.hud_damagefeedbackText.alpha = 1;
     self.hud_damagefeedbackText fadeOverTime(fadeoutTime);
     self.hud_damagefeedbackText.alpha = 0;
 
     y = (12 - int(yOffset));
-    if(self.hud_damagefeedbackText.y != y) {
+    if(self.hud_damagefeedbackText.y != y)
       self.hud_damagefeedbackText.y = y;
-    }
   }
 }
 
@@ -534,8 +520,8 @@ xppointspopup_stub(event, amount) {
 
   if(getdvarint("scr_lua_score") == 1) {
     if(event_id >= 0) {
-      self luinotifyevent(&"score_event", 2, event_id, amount);
-      self _meth_8579(&"score_event", 2, event_id, amount);
+      self luinotifyevent( & "score_event", 2, event_id, amount);
+      self _meth_8579( & "score_event", 2, event_id, amount);
     }
 
     return;
@@ -543,9 +529,8 @@ xppointspopup_stub(event, amount) {
 
   self.xpupdatetotal += amount;
   self setclientomnvar("ui_points_popup", self.xpupdatetotal);
-  if(isDefined(event_id) && event_id != -1) {
+  if(isdefined(event_id) && event_id != -1)
     self setclientomnvar("ui_points_popup_event", event_id);
-  }
 
   wait 1.1; // update stack timer to match iw4
 
@@ -559,9 +544,8 @@ updaterecentkills_stub(killId, weapon) {
   self notify("updateRecentKills");
   self endon("updateRecentKills");
 
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon))
     weapon = "";
-  }
 
   self.recentkillcount++;
 
@@ -569,9 +553,8 @@ updaterecentkills_stub(killId, weapon) {
 
   wait 1.1; // update stack timer to match iw4
 
-  if(self.recentkillcount > 1) {
+  if(self.recentkillcount > 1)
     self maps\mp\_events::multikillevent(killId, self.recentkillcount, weapon, was_aiming);
-  }
 
   self.recentkillcount = 0;
 }
@@ -581,39 +564,37 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   self endon("spawned");
   level endon("game_ended");
 
-  if(var_1 < 0 || !isDefined(var_13)) {
+  if(var_1 < 0 || !isdefined(var_13)) {
     return;
   }
   level.numplayerswaitingtoenterkillcam++;
   var_19 = level.numplayerswaitingtoenterkillcam * 0.05;
 
-  if(level.numplayerswaitingtoenterkillcam > 1) {
+  if(level.numplayerswaitingtoenterkillcam > 1)
     wait(0.05 * (level.numplayerswaitingtoenterkillcam - 1));
-  }
 
   wait 0.05;
   level.numplayerswaitingtoenterkillcam--;
   var_20 = maps\mp\gametypes\_killcam::killcamtime(var_3, var_4, var_8, var_11, var_12, var_18, level.showingfinalkillcam);
 
-  if(getdvar("scr_killcam_posttime") == "") {
+  if(getdvar("scr_killcam_posttime") == "")
     var_21 = 2;
-  } else {
+  else {
     var_21 = getdvarfloat("scr_killcam_posttime");
 
-    if(var_21 < 0.05) {
+    if(var_21 < 0.05)
       var_21 = 0.05;
-    }
   }
 
   var_22 = var_20 + var_21;
 
-  if(isDefined(var_12) && var_22 > var_12) {
+  if(isdefined(var_12) && var_22 > var_12) {
     if(var_12 < 2) {
       return;
     }
-    if(var_12 - var_20 >= 1) {
+    if(var_12 - var_20 >= 1)
       var_21 = var_12 - var_20;
-    } else {
+    else {
       var_21 = 1;
       var_20 = var_12 - 1;
     }
@@ -623,20 +604,18 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   self setclientomnvar("ui_killcam_end_milliseconds", 0);
 
-  if(isagent(var_13) && !isDefined(var_13.isactive)) {
+  if(isagent(var_13) && !isdefined(var_13.isactive)) {
     return;
   }
-  if(isplayer(var_14)) {
+  if(isplayer(var_14))
     self setclientomnvar("ui_killcam_victim_id", var_14 getentitynumber());
-  } else {
+  else
     self setclientomnvar("ui_killcam_victim_id", -1);
-  }
 
-  if(isplayer(var_13)) {
+  if(isplayer(var_13))
     self setclientomnvar("ui_killcam_killedby_id", var_13 getentitynumber());
-  } else if(isagent(var_13)) {
+  else if(isagent(var_13))
     self setclientomnvar("ui_killcam_killedby_id", -1);
-  }
 
   if(isDefined(level.killstreakwieldweapons[var_4])) {
     self setclientomnvar("ui_killcam_killedby_killstreak", maps\mp\_utility::getkillstreakrownum(level.killstreakwieldweapons[var_4]));
@@ -648,10 +627,10 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     var_24 = [];
     var_25 = getweaponbasename(var_4);
 
-    if(isDefined(var_25)) {
-      if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4)) {
+    if(isdefined(var_25)) {
+      if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4))
         var_25 = "iw5_combatknife";
-      } else {
+      else {
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_lefthand");
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_mp");
       }
@@ -661,9 +640,8 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
       self setclientomnvar("ui_killcam_killedby_weapon_alt", var_7);
       self setclientomnvar("ui_killcam_killedby_killstreak", -1);
 
-      if(var_25 != "iw5_combatknife") {
+      if(var_25 != "iw5_combatknife")
         var_24 = getweaponattachments(var_4);
-      }
 
       if(!level.showingfinalkillcam &&
         (isplayer(var_13) && !isbot(self) && !isagent(self)) &&
@@ -681,19 +659,17 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     }
   }
 
-  if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2) {
+  if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2)
     self setclientomnvar("ui_killcam_killedby_nemesis", 1);
-  } else {
+  else
     self setclientomnvar("ui_killcam_killedby_nemesis", 0);
-  }
 
-  if(!var_11 && !level.gameended) {
+  if(!var_11 && !level.gameended)
     self setclientomnvar("ui_killcam_text", "skip");
-  } else if(!level.gameended) {
+  else if(!level.gameended)
     self setclientomnvar("ui_killcam_text", "respawn");
-  } else {
+  else
     self setclientomnvar("ui_killcam_text", "none");
-  }
 
   switch (var_16) {
     case "score":
@@ -709,31 +685,27 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!isagent(var_13) && isDefined(var_13) && isplayer(var_14)) {
+  if(!isagent(var_13) && isdefined(var_13) && isplayer(var_14))
     var_13 visionsyncwithplayer(var_14);
-  }
 
   maps\mp\_utility::updatesessionstate("spectator");
   self.spectatekillcam = 1;
 
-  if(isagent(var_13)) {
+  if(isagent(var_13))
     var_1 = var_14 getentitynumber();
-  }
 
   self onlystreamactiveweapon(0);
   self.forcespectatorclient = var_1;
   self.killcamentity = -1;
   var_28 = maps\mp\gametypes\_killcam::setkillcamerastyle(var_0, var_1, var_2, var_4, var_14, var_20);
 
-  if(!var_28) {
+  if(!var_28)
     thread maps\mp\gametypes\_killcam::setkillcamentity(var_2, var_26, var_3);
-  }
 
   var_17 = maps\mp\gametypes\_killcam::killcamadjustalivetime(var_17, var_1, var_2);
 
-  if(var_26 > var_17) {
+  if(var_26 > var_17)
     var_26 = var_17;
-  }
 
   self.archivetime = var_26;
   self.killcamlength = var_22;
@@ -744,19 +716,17 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   self allowspectateteam("none", 1);
 
   if(level.multiteambased) {
-    foreach(var_30 in level.teamnamelist) {
-      self allowspectateteam(var_30, 1);
-    }
-  }
-
-  foreach(var_30 in level.teamnamelist) {
+    foreach(var_30 in level.teamnamelist)
     self allowspectateteam(var_30, 1);
   }
+
+  foreach(var_30 in level.teamnamelist)
+  self allowspectateteam(var_30, 1);
 
   thread maps\mp\gametypes\_killcam::endedkillcamcleanup();
   wait 0.05;
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   var_20 = self.archivetime - 0.05 - var_8;
@@ -772,28 +742,25 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   self setclientomnvar("ui_killcam_end_milliseconds", int(var_22 * 1000) + gettime());
 
-  if(level.showingfinalkillcam) {
+  if(level.showingfinalkillcam)
     thread maps\mp\gametypes\_killcam::dofinalkillcamfx(var_20, var_2);
-  }
 
   self.killcam = 1;
   thread maps\mp\gametypes\_killcam::spawnedkillcamcleanup();
   self.skippedkillcam = 0;
   self.killcamstartedtimedeciseconds = maps\mp\_utility::gettimepasseddecisecondsincludingrounds();
 
-  if(!level.showingfinalkillcam) {
+  if(!level.showingfinalkillcam)
     thread maps\mp\gametypes\_killcam::waitskipkillcambutton(var_10);
-  } else {
+  else
     self notify("showing_final_killcam");
-  }
 
   thread maps\mp\gametypes\_killcam::endkillcamifnothingtoshow();
   maps\mp\gametypes\_killcam::waittillkillcamover();
 
   if(level.showingfinalkillcam) {
-    if(self == var_13) {
+    if(self == var_13)
       var_13 maps\mp\gametypes\_missions::processchallenge("ch_moviestar");
-    }
 
     thread maps\mp\gametypes\_playerlogic::spawnendofgame();
     return;
@@ -825,48 +792,42 @@ callback_playerconnect_stub() {
   level notify("connected", self);
   self.connected = 1;
 
-  if(self ishost()) {
+  if(self ishost())
     level.player = self;
-  }
 
   self.usingonlinedataoffline = self isusingonlinedataoffline();
   initclientdvars();
   initplayerstats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getdvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
-  }
 
   self.guid = self getguid();
   self.xuid = self getxuid();
   self.totallifetime = 0;
   var_1 = 0;
 
-  if(!isDefined(self.pers["clientid"])) {
-    if(game["clientid"] >= 30) {
+  if(!isdefined(self.pers["clientid"])) {
+    if(game["clientid"] >= 30)
       self.pers["clientid"] = getlowestavailableclientid();
-    } else {
+    else
       self.pers["clientid"] = game["clientid"];
-    }
 
-    if(game["clientid"] < 30) {
+    if(game["clientid"] < 30)
       game["clientid"]++;
-    }
 
     var_1 = 1;
   }
 
-  if(var_1) {
+  if(var_1)
     streamprimaryweapons();
-  }
 
   self.clientid = self.pers["clientid"];
   self.pers["teamKillPunish"] = 0;
   self.pers["suicideSpawnDelay"] = 0;
 
-  if(var_1) {
+  if(var_1)
     reconevent("script_mp_playerjoin: player_name %s, player %d, gameTime %d", self.name, self.clientid, gettime());
-  }
 
   logprint("J;" + self.guid + ";" + self getentitynumber() + ";" + sanitise_name(self.name) + "\n");
 
@@ -874,9 +835,8 @@ callback_playerconnect_stub() {
     var_2 = 0;
     var_3 = 0;
 
-    if(!isai(self) && maps\mp\_utility::matchmakinggame()) {
+    if(!isai(self) && maps\mp\_utility::matchmakinggame())
       self registerparty(self.clientid);
-    }
 
     setmatchdata("playerCount", game["clientid"]);
     setmatchdata("players", self.clientid, "playerID", "xuid", self getxuid());
@@ -899,40 +859,33 @@ callback_playerconnect_stub() {
     setmatchdata("players", self.clientid, "isSplitscreen", issplitscreen());
     logplayerconsoleidandonwifiinmatchdata();
 
-    if(self ishost()) {
+    if(self ishost())
       setmatchdata("players", self.clientid, "wasAHost", 1);
-    }
 
-    if(maps\mp\_utility::rankingenabled()) {
+    if(maps\mp\_utility::rankingenabled())
       maps\mp\_matchdata::loginitialstats();
-    }
 
-    if(istestclient(self) || isai(self)) {
+    if(istestclient(self) || isai(self))
       var_6 = 1;
-    } else {
+    else
       var_6 = 0;
-    }
 
-    if(maps\mp\_utility::matchmakinggame() && maps\mp\_utility::allowteamchoice() && !var_6) {
+    if(maps\mp\_utility::matchmakinggame() && maps\mp\_utility::allowteamchoice() && !var_6)
       setmatchdata("players", self.clientid, "team", self.sessionteam);
-    }
 
     if(maps\mp\_utility::isaiteamparticipant(self)) {
-      if(!isDefined(level.matchdata)) {
+      if(!isdefined(level.matchdata))
         level.matchdata = [];
-      }
 
-      if(!isDefined(level.matchdata["botJoinCount"])) {
+      if(!isdefined(level.matchdata["botJoinCount"]))
         level.matchdata["botJoinCount"] = 1;
-      } else {
+      else
         level.matchdata["botJoinCount"]++;
-      }
     }
   }
 
-  if(!level.teambased) {
+  if(!level.teambased)
     game["roundsWon"][self.guid] = 0;
-  }
 
   self.leaderdialogqueue = [];
   self.leaderdialoglocqueue = [];
@@ -940,23 +893,20 @@ callback_playerconnect_stub() {
   self.leaderdialoggroups = [];
   self.leaderdialoggroup = "";
 
-  if(!isDefined(self.pers["cur_kill_streak"])) {
+  if(!isdefined(self.pers["cur_kill_streak"])) {
     self.pers["cur_kill_streak"] = 0;
     self.killstreakcount = 0;
     self setclientomnvar("ks_count1", 0);
   }
 
-  if(!isDefined(self.pers["cur_death_streak"])) {
+  if(!isdefined(self.pers["cur_death_streak"]))
     self.pers["cur_death_streak"] = 0;
-  }
 
-  if(!isDefined(self.pers["cur_kill_streak_for_nuke"])) {
+  if(!isdefined(self.pers["cur_kill_streak_for_nuke"]))
     self.pers["cur_kill_streak_for_nuke"] = 0;
-  }
 
-  if(maps\mp\_utility::rankingenabled()) {
+  if(maps\mp\_utility::rankingenabled())
     self.kill_streak = maps\mp\gametypes\_persistence::statget("killStreak");
-  }
 
   self.lastgrenadesuicidetime = -1;
   self.teamkillsthisround = 0;
@@ -979,50 +929,42 @@ callback_playerconnect_stub() {
   maps\mp\gametypes\_spawnlogic::addtoparticipantsarray();
   maps\mp\gametypes\_spawnlogic::addtocharactersarray();
 
-  if(level.teambased) {
+  if(level.teambased)
     self updatescores();
-  }
 
-  if(!isDefined(self.pers["absoluteJoinTime"])) {
+  if(!isdefined(self.pers["absoluteJoinTime"]))
     self.pers["absoluteJoinTime"] = getsystemtime();
-  }
 
   if(game["state"] == "postgame") {
     self.connectedpostgame = 1;
     spawnintermission();
   } else {
-    if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"])) {
+    if(isai(self) && isdefined(level.bot_funcs) && isdefined(level.bot_funcs["think"]))
       self thread[[level.bot_funcs["think"]]]();
-    }
 
     level endon("game_ended");
 
-    if(isDefined(level.hostmigrationtimer)) {
-      if(!isDefined(self.hostmigrationcontrolsfrozen) || self.hostmigrationcontrolsfrozen == 0) {
+    if(isdefined(level.hostmigrationtimer)) {
+      if(!isdefined(self.hostmigrationcontrolsfrozen) || self.hostmigrationcontrolsfrozen == 0) {
         self.hostmigrationcontrolsfrozen = 0;
         thread maps\mp\gametypes\_hostmigration::hostmigrationtimerthink();
       }
     }
 
-    if(isDefined(level.onplayerconnectaudioinit)) {
-      [
-        [level.onplayerconnectaudioinit]
-      ]();
-    }
+    if(isdefined(level.onplayerconnectaudioinit))
+      [[level.onplayerconnectaudioinit]]();
 
-    if(!isDefined(self.pers["team"])) {
+    if(!isdefined(self.pers["team"])) {
       if(maps\mp\_utility::matchmakinggame() && self.sessionteam != "none") {
         thread spawnspectator();
 
-        if(isDefined(level.waitingforplayers) && level.waitingforplayers) {
+        if(isdefined(level.waitingforplayers) && level.waitingforplayers)
           maps\mp\_utility::freezecontrolswrapper(1);
-        }
 
         thread maps\mp\gametypes\_menus::setteam(self.sessionteam);
 
-        if(maps\mp\_utility::allowclasschoice()) {
+        if(maps\mp\_utility::allowclasschoice())
           thread setuioptionsmenu(2);
-        }
 
         thread kickifdontspawn();
         return;
@@ -1030,20 +972,17 @@ callback_playerconnect_stub() {
         maps\mp\gametypes\_menus::menuspectator();
         thread setuioptionsmenu(1);
 
-        if(self ismlgspectator()) {
+        if(self ismlgspectator())
           maps\mp\_utility::freezecontrolswrapper(1);
-        }
       } else {
         thread spawnspectator();
         self[[level.autoassign]]();
 
-        if(maps\mp\_utility::allowclasschoice()) {
+        if(maps\mp\_utility::allowclasschoice())
           thread setuioptionsmenu(2);
-        }
 
-        if(maps\mp\_utility::matchmakinggame()) {
+        if(maps\mp\_utility::matchmakinggame())
           thread kickifdontspawn();
-        }
 
         return;
       }
@@ -1074,24 +1013,21 @@ callback_playerconnect_stub() {
 }
 
 callback_playerdisconnect_stub(var_0) {
-  if(!isDefined(self.connected)) {
+  if(!isdefined(self.connected)) {
     return;
   }
   maps\mp\gametypes\_damage::handlelaststanddisconnect();
   setmatchdata("players", self.clientid, "disconnectTimeUTC", getsystemtime());
   setmatchdata("players", self.clientid, "disconnectReason", var_0);
 
-  if(maps\mp\_utility::rankingenabled()) {
+  if(maps\mp\_utility::rankingenabled())
     maps\mp\_matchdata::logfinalstats();
-  }
 
-  if(isDefined(self.pers["confirmed"])) {
+  if(isdefined(self.pers["confirmed"]))
     maps\mp\_matchdata::logkillsconfirmed();
-  }
 
-  if(isDefined(self.pers["denied"])) {
+  if(isdefined(self.pers["denied"]))
     maps\mp\_matchdata::logkillsdenied();
-  }
 
   logplayerstats();
 
@@ -1099,7 +1035,7 @@ callback_playerdisconnect_stub(var_0) {
     var_1 = game["roundsPlayed"] + 1;
     setmatchdata("players", self.clientid, "playerQuitRoundNumber", var_1);
 
-    if(isDefined(self.team) && (self.team == "allies" || self.team == "axis")) {
+    if(isdefined(self.team) && (self.team == "allies" || self.team == "axis")) {
       if(self.team == "allies") {
         setmatchdata("players", self.clientid, "playerQuitTeamScore", game["roundsWon"]["allies"]);
         setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["roundsWon"]["axis"]);
@@ -1108,7 +1044,7 @@ callback_playerdisconnect_stub(var_0) {
         setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["roundsWon"]["allies"]);
       }
     }
-  } else if(isDefined(self.team) && (self.team == "allies" || self.team == "axis") && level.teambased) {
+  } else if(isdefined(self.team) && (self.team == "allies" || self.team == "axis") && level.teambased) {
     if(self.team == "allies") {
       setmatchdata("players", self.clientid, "playerQuitTeamScore", game["teamScores"]["allies"]);
       setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["teamScores"]["axis"]);
@@ -1124,20 +1060,17 @@ callback_playerdisconnect_stub(var_0) {
   maps\mp\gametypes\_spawnlogic::removefromcharactersarray();
   var_2 = self getentitynumber();
 
-  if(!level.teambased) {
+  if(!level.teambased)
     game["roundsWon"][self.guid] = undefined;
-  }
 
-  if(!level.gameended) {
+  if(!level.gameended)
     maps\mp\_utility::logxpgains();
-  }
 
   if(level.splitscreen) {
     var_3 = level.players;
 
-    if(var_3.size <= 1) {
+    if(var_3.size <= 1)
       level thread maps\mp\gametypes\_gamelogic::forceend();
-    }
   }
 
   maps\mp\gametypes\_gamelogic::setplayerrank(self);
@@ -1147,17 +1080,14 @@ callback_playerdisconnect_stub(var_0) {
   logprint("Q;" + var_5 + ";" + var_4 + ";" + sanitise_name(self.name) + "\n");
   thread maps\mp\_events::disconnected();
 
-  if(level.gameended) {
+  if(level.gameended)
     maps\mp\gametypes\_gamescore::removedisconnectedplayerfromplacement();
-  }
 
-  if(isDefined(self.team)) {
+  if(isdefined(self.team))
     removefromteamcount();
-  }
 
-  if(self.sessionstate == "playing" && !(isDefined(self.fauxdead) && self.fauxdead)) {
+  if(self.sessionstate == "playing" && !(isdefined(self.fauxdead) && self.fauxdead))
     removefromalivecount(1);
-  } else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
+  else if(self.sessionstate == "spectator" || self.sessionstate == "dead")
     level thread maps\mp\gametypes\_gamelogic::updategameevents();
-  }
 }

@@ -20,9 +20,8 @@ pronerangecombat(changereason) {
   timer = gettime();
   self waittill("kill ProneRangeCombat");
 
-  if(gettime() == timer) {
+  if(gettime() == timer)
     wait 0.05;
-  }
 
   self thread animscripts\combat::main();
 }
@@ -41,14 +40,13 @@ proneturningthread(threadtospawn, killmestring) {
   self endon(killmestring);
   self.a.usingproneleftandright = 0;
 
-  if(isDefined(threadtospawn)) {
+  if(isDefined(threadtospawn))
     self thread[[threadtospawn]]("kill ProneTurningThread children");
-  }
 
   for(;;) {
-    if(self.a.pose != "prone") {
+    if(self.a.pose != "prone")
       self orientmode("face default");
-    } else {
+    else {
       self orientmode("face enemy");
       attackyaw = self.angles[1];
 
@@ -60,19 +58,17 @@ proneturningthread(threadtospawn, killmestring) {
       yawdelta = self.angles[1] - attackyaw;
       yawdelta = int(yawdelta + 360) % 360;
 
-      if(yawdelta > 180) {
+      if(yawdelta > 180)
         yawdelta = yawdelta - 360;
-      }
 
       if(yawdelta > 0) {
         if(self.a.usingproneleftandright) {
           amount = yawdelta / 45.0;
 
-          if(amount < 0.01) {
+          if(amount < 0.01)
             amount = 0.01;
-          } else if(amount > 0.99) {
+          else if(amount > 0.99)
             amount = 0.99;
-          }
 
           self setanimknob( % prone_straight, 1.0 - amount, 0.1, 1);
           self setanim( % prone_right45, amount, 0.1, 1);
@@ -85,19 +81,17 @@ proneturningthread(threadtospawn, killmestring) {
           self animscripts\shared::donotetracks("turn anim");
           self updateprone( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
 
-          if(isDefined(threadtospawn)) {
+          if(isDefined(threadtospawn))
             self thread[[threadtospawn]]("kill ProneTurningThread children");
-          }
         }
       } else {
         if(self.a.usingproneleftandright) {
           amount = yawdelta / -45;
 
-          if(amount < 0.01) {
+          if(amount < 0.01)
             amount = 0.01;
-          } else if(amount > 0.99) {
+          else if(amount > 0.99)
             amount = 0.99;
-          }
 
           self setanimknob( % prone_straight, 1.0 - amount, 0.1, 1);
           self setanim( % prone_left45, amount, 0.1, 1);
@@ -110,9 +104,8 @@ proneturningthread(threadtospawn, killmestring) {
           self animscripts\shared::donotetracks("turn anim");
           self updateprone( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
 
-          if(isDefined(threadtospawn)) {
+          if(isDefined(threadtospawn))
             self thread[[threadtospawn]]("kill ProneTurningThread children");
-          }
         }
       }
     }
@@ -181,23 +174,19 @@ waitfortime(time, notifystring, killmestring) {
 }
 
 candopronecombat(origin, yaw) {
-  if(!self isstanceallowedwrapper("prone")) {
+  if(!self isstanceallowedwrapper("prone"))
     return 0;
-  }
 
-  if(weaponanims() == "pistol") {
+  if(weaponanims() == "pistol")
     return 0;
-  }
 
-  if(mygetenemysqdist() < anim.pronerangesq) {
+  if(mygetenemysqdist() < anim.pronerangesq)
     return 0;
-  }
 
   canshootprone = animscripts\utility::canshootenemyfrompose("prone");
 
-  if(!canshootprone) {
+  if(!canshootprone)
     return 0;
-  }
 
   return cangopronehere(origin, yaw);
 }
@@ -251,9 +240,8 @@ proneshootvolley() {
       quicktime = animscripts\weaponlist::waitaftershot();
       wait(quicktime);
 
-      if(i < rand - 1 && shoottime > quicktime) {
+      if(i < rand - 1 && shoottime > quicktime)
         wait(shoottime - quicktime);
-      }
     }
   }
 

@@ -69,21 +69,18 @@ setup_deck_transition() {
   var_3 maps\_utility::show_entity();
   var_4 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_orange_allies", 1);
 
-  foreach(var_6 in var_4) {
-    var_6 thread maps\_utility::replace_on_death();
-  }
+  foreach(var_6 in var_4)
+  var_6 thread maps\_utility::replace_on_death();
 
   var_8 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_red_allies", 1);
 
-  foreach(var_6 in var_8) {
-    var_6 thread maps\_utility::replace_on_death();
-  }
+  foreach(var_6 in var_8)
+  var_6 thread maps\_utility::replace_on_death();
 
   var_11 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_purple_allies", 1);
 
-  foreach(var_6 in var_11) {
-    var_6 thread maps\_utility::replace_on_death();
-  }
+  foreach(var_6 in var_11)
+  var_6 thread maps\_utility::replace_on_death();
 
   maps\_utility::activate_trigger_with_targetname("ally_transition_pos_move");
 }
@@ -113,9 +110,8 @@ begin_deck_transition() {
   var_0 = common_scripts\utility::array_combine(maps\_utility::get_force_color_guys("allies", "r"), maps\_utility::get_force_color_guys("allies", "p"));
   common_scripts\utility::array_add(maps\_utility::get_force_color_guys("allies", "o"), var_0);
 
-  foreach(var_2 in var_0) {
-    var_2 maps\_utility::set_ignoreall(1);
-  }
+  foreach(var_2 in var_0)
+  var_2 maps\_utility::set_ignoreall(1);
 
   common_scripts\utility::flag_set("obj_regroup_with_hesh_complete");
 }
@@ -205,15 +201,13 @@ deck_combat_cleanup() {
   maps\_utility::array_delete(var_11);
 
   foreach(var_13 in getEntArray("deck_combat_ally", "script_noteworthy")) {
-    if(isspawner(var_13)) {
+    if(isspawner(var_13))
       var_13 delete();
-    }
   }
 
   foreach(var_13 in getEntArray("deck_combat_ally", "script_noteworthy")) {
-    if(isspawner(var_13)) {
+    if(isspawner(var_13))
       var_13 delete();
-    }
   }
 
   getent("low_flyby_ally", "targetname") delete();
@@ -231,9 +225,8 @@ deck_transition_cleanup() {
   maps\_utility::array_delete(getEntArray("fast_flyby_jets", "targetname"));
   var_0 = ["flyby_missile_attack1", "flyby_missile_attack2", "trans_gun_run_heli1", "trans_attack_heli1", "trans_attack_heli2", "trans_attack_heli3"];
 
-  foreach(var_2 in var_0) {
-    getent(var_2, "targetname") delete();
-  }
+  foreach(var_2 in var_0)
+  getent(var_2, "targetname") delete();
 
   maps\_utility::array_delete(getEntArray("trans_attack_heli_riders", "script_noteworthy"));
 }
@@ -249,9 +242,8 @@ hesh_regroup_nag_vo() {
     level.hesh maps\_utility::smart_dialogue(var_0[var_1]);
     var_1++;
 
-    if(var_1 >= var_0.size) {
+    if(var_1 >= var_0.size)
       var_1 = 0;
-    }
 
     wait(randomfloatrange(6, 10));
   }
@@ -271,9 +263,8 @@ bring_up_osprey() {
     wait 0.5;
   }
 
-  if(level.start_point != "deck_transition") {
+  if(level.start_point != "deck_transition")
     thread maps\carrier_code::raise_rear_elevator();
-  }
 
   common_scripts\utility::flag_wait("rear_elevator_raised");
   level.elevator_osprey_clip disconnectpaths();
@@ -282,9 +273,8 @@ bring_up_osprey() {
 
   if(level.start_point != "deck_transition") {
     foreach(var_1 in level.elevator_guys) {
-      if(isalive(var_1) && isDefined(var_1.magic_bullet_shield)) {
+      if(isalive(var_1) && isDefined(var_1.magic_bullet_shield))
         var_1 thread maps\_utility::stop_magic_bullet_shield();
-      }
     }
   }
 }
@@ -297,9 +287,8 @@ setup_taxing_osprey() {
   var_1 maps\_anim::setanimtree();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "taxing_osprey_move_start");
 
-  if(level.rear_elevator.lowered) {
+  if(level.rear_elevator.lowered)
     var_1.origin = (var_1.origin[0], var_1.origin[1], var_1.origin[2] - level.rear_elevator.height);
-  }
 
   common_scripts\utility::waitframe();
   common_scripts\utility::waitframe();
@@ -323,9 +312,8 @@ taxing_osprey() {
   thread jet_attack();
   badplace_delete("badplace_rear_elevator");
 
-  if(!common_scripts\utility::flag("hesh_talk_kick")) {
+  if(!common_scripts\utility::flag("hesh_talk_kick"))
     var_0 thread maps\_anim::anim_loop_solo(var_1, "taxing_osprey_move_loop");
-  }
 
   common_scripts\utility::flag_wait("hesh_talk_kick");
   common_scripts\utility::flag_set("taxing_osprey_move_start");
@@ -408,11 +396,10 @@ osprey_control_pad() {
   var_1 = getent("osprey_pad_player_trigger", "targetname");
   var_1 setcursorhint("HINT_NOICON");
 
-  if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
+  if(level.player common_scripts\utility::is_player_gamepad_enabled())
     var_1 sethintstring(&"CARRIER_TAKE_DATAPAD_CONSOLE");
-  } else {
+  else
     var_1 sethintstring(&"CARRIER_TAKE_DATAPAD");
-  }
 
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_1, var_0, cos(25), 0, 1);
   thread maps\carrier_defend_zodiac::run_jet_takeoff();
@@ -434,9 +421,8 @@ opsrey_control_nag_vo() {
     level.hesh maps\_utility::smart_dialogue(var_0[var_1]);
     var_1++;
 
-    if(var_1 >= var_0.size) {
+    if(var_1 >= var_0.size)
       var_1 = 0;
-    }
 
     wait(randomfloatrange(5, 8));
   }
@@ -457,9 +443,8 @@ run_osprey_takeoff() {
 
   common_scripts\utility::waitframe();
 
-  if(isDefined(level.heli_elevator)) {
+  if(isDefined(level.heli_elevator))
     thread maps\_vehicle::gopath(level.heli_elevator);
-  }
 
   var_1 = getent("taxing_depth_charge_barrels", "targetname");
   var_2 = getent("taxing_depth_charge_barrels_clip", "targetname");
@@ -467,9 +452,8 @@ run_osprey_takeoff() {
   var_2 delete();
   common_scripts\utility::flag_set("aud_osprey_takeoff");
 
-  if(isDefined(level.heli_elevator)) {
+  if(isDefined(level.heli_elevator))
     level.heli_elevator show();
-  }
 
   var_0 delete();
   wait 0.5;
@@ -487,9 +471,8 @@ osprey_delete_watcher() {
   common_scripts\utility::flag_wait("dt_osprey_can_delete");
 
   for(;;) {
-    if(!level.player maps\_utility::player_looking_at(self.origin, undefined, 1)) {
+    if(!level.player maps\_utility::player_looking_at(self.origin, undefined, 1))
       self delete();
-    }
 
     wait 0.05;
   }
@@ -590,9 +573,8 @@ hesh_dialogue_pacing() {
   thread osprey_control_pad();
   common_scripts\utility::flag_set("control_pad_objective");
 
-  if(!common_scripts\utility::flag("picked_up_control_pad")) {
+  if(!common_scripts\utility::flag("picked_up_control_pad"))
     thread opsrey_control_nag_vo();
-  }
 
   common_scripts\utility::flag_wait("picked_up_control_pad");
   common_scripts\utility::flag_wait("hesh_talking_finished");
@@ -657,9 +639,8 @@ cart_runner_behavior() {
 
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
 
-  if(isalive(self)) {
+  if(isalive(self))
     self delete();
-  }
 }
 
 carrier_grape() {
@@ -683,9 +664,8 @@ carrier_grape() {
   var_0 maps\_anim::anim_generic(var_1, "carrier_guy");
   common_scripts\utility::flag_wait("trans_boom");
 
-  if(isalive(var_1)) {
+  if(isalive(var_1))
     var_1 kill();
-  }
 }
 
 carried_grape() {
@@ -705,9 +685,8 @@ carried_grape() {
   common_scripts\utility::flag_wait("trans_boom");
   var_3.damageshield = 0;
 
-  if(isalive(var_3)) {
+  if(isalive(var_3))
     var_3 kill();
-  }
 }
 
 ally_color_node_movement() {
@@ -742,9 +721,8 @@ ally_color_node_movement() {
   var_10 = maps\_utility::get_force_color_guys("allies", "b");
 
   foreach(var_2 in var_10) {
-    if(isalive(var_2)) {
+    if(isalive(var_2))
       var_2 maps\_utility::ignoreallenemies(1);
-    }
   }
 
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
@@ -752,17 +730,15 @@ ally_color_node_movement() {
   wait 5;
 
   foreach(var_2 in var_7) {
-    if(isalive(var_2)) {
+    if(isalive(var_2))
       var_2 thread maps\carrier_code::safe_delete_drone(500);
-    }
   }
 
   var_10 = getEntArray("ambient_trans_drones", "script_noteworthy");
 
   foreach(var_2 in var_10) {
-    if(isalive(var_2)) {
+    if(isalive(var_2))
       var_2 thread maps\carrier_code::safe_delete_drone(500);
-    }
   }
 }
 
@@ -779,11 +755,10 @@ ally_jog_guys_logic() {
   self endon("deleted");
   self.animname = "generic";
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     var_0 = "run_gun_up";
-  } else {
+  else
     var_0 = "patrol_jog";
-  }
 
   self.runanim = maps\_utility::getgenericanim(var_0);
 }
@@ -792,11 +767,10 @@ color_ally_jog_guys_logic() {
   self endon("deleted");
   self.animname = "generic";
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     var_0 = "run_gun_up";
-  } else {
+  else
     var_0 = "patrol_jog";
-  }
 
   maps\_utility::set_run_anim(var_0);
 }
@@ -805,9 +779,8 @@ run_allies_rear_ship() {
   var_0 = getEntArray("ambient_trans_drones", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2)) {
+    if(isalive(var_2))
       var_2 maps\_utility::set_force_color("b");
-    }
   }
 
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
@@ -825,9 +798,8 @@ heli_attack1() {
   thread enemy_heli_respawner();
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 
   var_1 = getEntArray("attack_heli1", "targetname");
   maps\_utility::array_delete(var_1);
@@ -869,9 +841,8 @@ jet_fast_flyby() {
 
 kill_heli_engine_sounds() {
   foreach(var_1 in self) {
-    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "kill_engine_sound") {
+    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "kill_engine_sound")
       var_1 vehicle_turnengineoff();
-    }
   }
 }
 

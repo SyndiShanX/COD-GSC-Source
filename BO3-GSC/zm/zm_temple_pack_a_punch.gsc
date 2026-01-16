@@ -20,7 +20,7 @@ function init_pack_a_punch() {
   level flag::init("pap_open");
   level flag::init("pap_enabled");
   level.pack_a_punch_round_time = 30;
-  level.pack_a_punch_stone_timer = getEntArray("pack_a_punch_timer", "targetname");
+  level.pack_a_punch_stone_timer = getentarray("pack_a_punch_timer", "targetname");
   level.pack_a_punch_stone_timer_dist = 176;
   util::registerclientsys("pap_indicator_spinners");
   level.pap_active_time = 60;
@@ -38,9 +38,9 @@ function _setup_pap_blocker() {
   var_45648617 = getent("pap_stairs_mesh", "targetname");
   var_45648617 delete();
   level.pap_stairs = [];
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     stair = getent("pap_stairs" + (i + 1), "targetname");
-    if(!isDefined(stair.script_vector)) {
+    if(!isdefined(stair.script_vector)) {
       stair.script_vector = vectorscale((0, 0, 1), 72);
     }
     stair.movetime = 3;
@@ -57,16 +57,16 @@ function _setup_pap_blocker() {
     level.pap_stairs[i] = stair;
   }
   level.pap_stairs_clip = getent("pap_stairs_clip", "targetname");
-  if(isDefined(level.pap_stairs_clip)) {
+  if(isdefined(level.pap_stairs_clip)) {
     level.pap_stairs_clip.zmove = 72;
   }
-  level.pap_playerclip = getEntArray("pap_playerclip", "targetname");
-  for(i = 0; i < level.pap_playerclip.size; i++) {
+  level.pap_playerclip = getentarray("pap_playerclip", "targetname");
+  for (i = 0; i < level.pap_playerclip.size; i++) {
     level.pap_playerclip[i].saved_origin = level.pap_playerclip[i].origin;
   }
   level.pap_ramp = getent("pap_ramp", "targetname");
   level.brush_pap_traversal = getent("brush_pap_traversal", "targetname");
-  if(isDefined(level.brush_pap_traversal)) {
+  if(isdefined(level.brush_pap_traversal)) {
     level.brush_pap_traversal solid();
     level.brush_pap_traversal disconnectpaths();
     a_nodes = getnodearray("node_pap_jump_bottom", "targetname");
@@ -75,19 +75,19 @@ function _setup_pap_blocker() {
     }
   }
   level.brush_pap_side_l = getent("brush_pap_side_l", "targetname");
-  if(isDefined(level.brush_pap_side_l)) {
+  if(isdefined(level.brush_pap_side_l)) {
     level.brush_pap_side_l _pap_brush_disconnect_paths();
   }
   level.brush_pap_side_r = getent("brush_pap_side_r", "targetname");
-  if(isDefined(level.brush_pap_side_r)) {
+  if(isdefined(level.brush_pap_side_r)) {
     level.brush_pap_side_r _pap_brush_disconnect_paths();
   }
   brush_pap_pathing_ramp_r = getent("brush_pap_pathing_ramp_r", "targetname");
-  if(isDefined(brush_pap_pathing_ramp_r)) {
+  if(isdefined(brush_pap_pathing_ramp_r)) {
     brush_pap_pathing_ramp_r delete();
   }
   brush_pap_pathing_ramp_l = getent("brush_pap_pathing_ramp_l", "targetname");
-  if(isDefined(brush_pap_pathing_ramp_l)) {
+  if(isdefined(brush_pap_pathing_ramp_l)) {
     brush_pap_pathing_ramp_l delete();
   }
 }
@@ -96,11 +96,11 @@ function _watch_for_fall() {
   wait(0.1);
   self setcontents(0);
   self startragdoll();
-  self.base setCanDamage(1);
+  self.base setcandamage(1);
   self.base.health = 1;
   self.base waittill("damage");
   mover = getent(self.base.target, "targetname");
-  geyserfx = isDefined(self.base.script_string) && self.base.script_string == "geyser";
+  geyserfx = isdefined(self.base.script_string) && self.base.script_string == "geyser";
   self.base delete();
   self.base = undefined;
   wait(0.5);
@@ -131,21 +131,21 @@ function power(base, exp) {
 }
 
 function _setup_simultaneous_pap_triggers() {
-  spots = getEntArray("hanging_base", "targetname");
-  for(i = 0; i < spots.size; i++) {
+  spots = getentarray("hanging_base", "targetname");
+  for (i = 0; i < spots.size; i++) {
     spots[i] delete();
   }
   level flag::wait_till("power_on");
   triggers = [];
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     triggers[i] = getent("pap_blocker_trigger" + (i + 1), "targetname");
   }
   _randomize_pressure_plates(triggers);
-  array::thread_all(triggers, &_pap_pressure_plate_move);
+  array::thread_all(triggers, & _pap_pressure_plate_move);
   wait(1);
   last_num_plates_active = -1;
   last_plate_state = -1;
-  while(true) {
+  while (true) {
     players = getplayers();
     num_plates_needed = players.size;
     if(getdvarint("") == 2) {
@@ -153,7 +153,7 @@ function _setup_simultaneous_pap_triggers() {
     }
     num_plates_active = 0;
     plate_state = 0;
-    for(i = 0; i < triggers.size; i++) {
+    for (i = 0; i < triggers.size; i++) {
       if(triggers[i].plate.active) {
         num_plates_active++;
       }
@@ -168,13 +168,13 @@ function _setup_simultaneous_pap_triggers() {
     }
     _update_stairs(triggers);
     if(num_plates_active >= num_plates_needed) {
-      for(i = 0; i < triggers.size; i++) {
+      for (i = 0; i < triggers.size; i++) {
         triggers[i] notify("pap_active");
         triggers[i].plate _plate_move_down();
       }
       _pap_think();
       _randomize_pressure_plates(triggers);
-      array::thread_all(triggers, &_pap_pressure_plate_move);
+      array::thread_all(triggers, & _pap_pressure_plate_move);
       _set_num_plates_active(4, 15);
       wait(1);
     }
@@ -185,22 +185,22 @@ function _setup_simultaneous_pap_triggers() {
 function _randomize_pressure_plates(triggers) {
   rand_nums = array(1, 2, 3, 4);
   rand_nums = array::randomize(rand_nums);
-  for(i = 0; i < triggers.size; i++) {
+  for (i = 0; i < triggers.size; i++) {
     triggers[i].requiredplayers = rand_nums[i];
   }
 }
 
 function _update_stairs(triggers) {
   numtouched = 0;
-  for(i = 0; i < triggers.size; i++) {
-    if(isDefined(triggers[i].touched) && triggers[i].touched) {
+  for (i = 0; i < triggers.size; i++) {
+    if(isdefined(triggers[i].touched) && triggers[i].touched) {
       numtouched++;
     }
   }
-  for(i = 0; i < numtouched; i++) {
+  for (i = 0; i < numtouched; i++) {
     level.pap_stairs[i] _stairs_move_up();
   }
-  for(i = numtouched; i < level.pap_stairs.size; i++) {
+  for (i = numtouched; i < level.pap_stairs.size; i++) {
     level.pap_stairs[i] _stairs_move_down();
   }
 }
@@ -224,8 +224,8 @@ function _pap_pressure_plate_move() {
   plate.origin = plate.down_origin;
   plate.state = "down";
   movespeed = 10;
-  while(true) {
-    while(!self _pap_pressure_plate_move_enabled()) {
+  while (true) {
+    while (!self _pap_pressure_plate_move_enabled()) {
       plate.active = 0;
       self.touched = 0;
       plate thread _plate_move_down();
@@ -235,13 +235,13 @@ function _pap_pressure_plate_move() {
     self.touched = 0;
     plate _plate_move_up();
     plate waittill("state_set");
-    while(self _pap_pressure_plate_move_enabled()) {
+    while (self _pap_pressure_plate_move_enabled()) {
       players = getplayers();
       touching = 0;
       if(!self _pap_pressure_plate_move_enabled()) {
         break;
       }
-      for(i = 0; i < players.size && !touching; i++) {
+      for (i = 0; i < players.size && !touching; i++) {
         if(players[i].sessionstate != "spectator") {
           touching = players[i] istouching(self);
         }
@@ -260,7 +260,7 @@ function _pap_pressure_plate_move() {
 
 function _stairs_playmovesound() {
   self _stairs_stopmovesound();
-  self playLoopSound("zmb_staircase_loop");
+  self playloopsound("zmb_staircase_loop");
 }
 
 function _stairs_stopmovesound() {
@@ -268,12 +268,12 @@ function _stairs_stopmovesound() {
 }
 
 function _stairs_playlockedsound() {
-  self playSound("zmb_staircase_lock");
+  self playsound("zmb_staircase_lock");
 }
 
 function _plate_playmovesound() {
   self _plate_stopmovesound();
-  self playLoopSound("zmb_pressure_plate_loop");
+  self playloopsound("zmb_pressure_plate_loop");
 }
 
 function _plate_stopmovesound() {
@@ -281,7 +281,7 @@ function _plate_stopmovesound() {
 }
 
 function _plate_playlockedsound() {
-  self playSound("zmb_pressure_plate_lock");
+  self playsound("zmb_pressure_plate_lock");
 }
 
 function _mover_get_origin(state) {
@@ -302,12 +302,12 @@ function _move_pap_mover_wait(state, onmovefunc, onstopfunc) {
   movetime = movetime * timescale;
   self.state = "moving_" + state;
   if(movetime > 0) {
-    if(isDefined(onmovefunc)) {
+    if(isdefined(onmovefunc)) {
       self thread[[onmovefunc]]();
     }
     self moveto(goalorigin, movetime);
     self waittill("movedone");
-    if(isDefined(onstopfunc)) {
+    if(isdefined(onstopfunc)) {
       self thread[[onstopfunc]]();
     }
   }
@@ -332,14 +332,14 @@ function _move_up(onmovefunc, onstopfunc) {
 }
 
 function _plate_move_up() {
-  onmovefunc = &_plate_onmove;
-  onstopfunc = &_plate_onstop;
+  onmovefunc = & _plate_onmove;
+  onstopfunc = & _plate_onstop;
   self thread _move_up(onmovefunc, onstopfunc);
 }
 
 function _plate_move_down() {
-  onmovefunc = &_plate_onmove;
-  onstopfunc = &_plate_onstop;
+  onmovefunc = & _plate_onmove;
+  onstopfunc = & _plate_onstop;
   self thread _move_down(onmovefunc, onstopfunc);
 }
 
@@ -353,26 +353,26 @@ function _plate_onstop() {
 }
 
 function _move_all_stairs_down() {
-  for(i = 0; i < level.pap_stairs.size; i++) {
+  for (i = 0; i < level.pap_stairs.size; i++) {
     level.pap_stairs[i] thread _stairs_move_down();
   }
 }
 
 function _move_all_stairs_up() {
-  for(i = 0; i < level.pap_stairs.size; i++) {
+  for (i = 0; i < level.pap_stairs.size; i++) {
     level.pap_stairs[i] thread _stairs_move_up();
   }
 }
 
 function _stairs_move_up() {
-  onmovefunc = &_stairs_onmove;
-  onstopfunc = &_stairs_onstop;
+  onmovefunc = & _stairs_onmove;
+  onstopfunc = & _stairs_onstop;
   self _move_up(onmovefunc, onstopfunc);
 }
 
 function _stairs_move_down() {
-  onmovefunc = &_stairs_onmove;
-  onstopfunc = &_stairs_onstop;
+  onmovefunc = & _stairs_onmove;
+  onstopfunc = & _stairs_onstop;
   self _move_down(onmovefunc, onstopfunc);
 }
 
@@ -386,9 +386,9 @@ function _stairs_onstop() {
 }
 
 function _wait_for_all_stairs(state) {
-  for(i = 0; i < level.pap_stairs.size; i++) {
+  for (i = 0; i < level.pap_stairs.size; i++) {
     stair = level.pap_stairs[i];
-    while(true) {
+    while (true) {
       if(stair.state == state) {
         break;
       }
@@ -399,7 +399,7 @@ function _wait_for_all_stairs(state) {
 
 function _wait_for_all_stairs_up() {
   _wait_for_all_stairs("up");
-  if(isDefined(level.brush_pap_traversal)) {
+  if(isdefined(level.brush_pap_traversal)) {
     a_nodes = getnodearray("node_pap_jump_bottom", "targetname");
     foreach(node in a_nodes) {
       unlinktraversal(node);
@@ -407,17 +407,17 @@ function _wait_for_all_stairs_up() {
     level.brush_pap_traversal notsolid();
     level.brush_pap_traversal connectpaths();
   }
-  if(isDefined(level.brush_pap_side_l)) {
+  if(isdefined(level.brush_pap_side_l)) {
     level.brush_pap_side_l _pap_brush_connect_paths();
   }
-  if(isDefined(level.brush_pap_side_r)) {
+  if(isdefined(level.brush_pap_side_r)) {
     level.brush_pap_side_r _pap_brush_connect_paths();
   }
 }
 
 function _wait_for_all_stairs_down() {
   _wait_for_all_stairs("down");
-  if(isDefined(level.brush_pap_traversal)) {
+  if(isdefined(level.brush_pap_traversal)) {
     a_nodes = getnodearray("node_pap_jump_bottom", "targetname");
     foreach(node in a_nodes) {
       linktraversal(node);
@@ -425,10 +425,10 @@ function _wait_for_all_stairs_down() {
     level.brush_pap_traversal solid();
     level.brush_pap_traversal disconnectpaths();
   }
-  if(isDefined(level.brush_pap_side_l)) {
+  if(isdefined(level.brush_pap_side_l)) {
     level.brush_pap_side_l _pap_brush_disconnect_paths();
   }
-  if(isDefined(level.brush_pap_side_r)) {
+  if(isdefined(level.brush_pap_side_r)) {
     level.brush_pap_side_r _pap_brush_disconnect_paths();
   }
 }
@@ -437,19 +437,19 @@ function _pap_think() {
   player_blocker = getent("pap_stairs_player_clip", "targetname");
   level flag::set("pap_active");
   level thread _pap_clean_up_corpses();
-  if(isDefined(level.pap_stairs_clip)) {
+  if(isdefined(level.pap_stairs_clip)) {
     level.pap_stairs_clip movez(level.pap_stairs_clip.zmove, 2, 0.5, 0.5);
   }
   _move_all_stairs_up();
   _wait_for_all_stairs_up();
-  if(isDefined(player_blocker)) {
+  if(isdefined(player_blocker)) {
     player_blocker notsolid();
   }
   level stop_pap_fx();
   level thread _wait_for_pap_reset();
   level waittill("flush_done");
   level flag::clear("pap_active");
-  if(isDefined(level.pap_stairs_clip)) {
+  if(isdefined(level.pap_stairs_clip)) {
     level.pap_stairs_clip movez(-1 * level.pap_stairs_clip.zmove, 2, 0.5, 0.5);
   }
   level thread _pap_ramp();
@@ -461,8 +461,8 @@ function _pap_clean_up_corpses() {
   corpse_trig = getent("pap_target_finder", "targetname");
   stairs_trig = getent("pap_target_finder2", "targetname");
   corpses = getcorpsearray();
-  if(isDefined(corpses)) {
-    for(i = 0; i < corpses.size; i++) {
+  if(isdefined(corpses)) {
+    for (i = 0; i < corpses.size; i++) {
       if(corpses[i] istouching(corpse_trig) || corpses[i] istouching(stairs_trig)) {
         corpses[i] thread _pap_remove_corpse();
       }
@@ -471,14 +471,14 @@ function _pap_clean_up_corpses() {
 }
 
 function _pap_remove_corpse() {
-  playFX(level._effect["corpse_gib"], self.origin);
+  playfx(level._effect["corpse_gib"], self.origin);
   self delete();
 }
 
 function _pap_ramp() {
-  if(isDefined(level.pap_ramp)) {
+  if(isdefined(level.pap_ramp)) {
     level thread playerclip_restore();
-    if(!isDefined(level.pap_ramp.original_origin)) {
+    if(!isdefined(level.pap_ramp.original_origin)) {
       level.pap_ramp.original_origin = level.pap_ramp.origin;
     }
     level.pap_ramp rotateroll(45, 0.5);
@@ -495,10 +495,10 @@ function _pap_ramp() {
 
 function playerclip_restore() {
   volume = getent("pap_target_finder", "targetname");
-  while(true) {
+  while (true) {
     touching = 0;
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] istouching(volume) || players[i] istouching(level.pap_player_flush_temp_trig)) {
         touching = 1;
       }
@@ -509,18 +509,18 @@ function playerclip_restore() {
     wait(0.05);
   }
   player_clip = getent("pap_stairs_player_clip", "targetname");
-  if(isDefined(player_clip)) {
+  if(isdefined(player_clip)) {
     player_clip solid();
   }
-  if(isDefined(level.pap_player_flush_temp_trig)) {
+  if(isdefined(level.pap_player_flush_temp_trig)) {
     level.pap_player_flush_temp_trig delete();
   }
 }
 
 function _wait_for_pap_reset() {
   level endon("fake_death");
-  array::thread_all(level.pap_timers, &_move_visual_timer);
-  array::thread_all(level.pap_timers, &_pack_a_punch_timer_sounds);
+  array::thread_all(level.pap_timers, & _move_visual_timer);
+  array::thread_all(level.pap_timers, & _pack_a_punch_timer_sounds);
   level thread _pack_a_punch_warning_fx(level.pap_active_time);
   fx_time_offset = 0.5;
   wait(level.pap_active_time - fx_time_offset);
@@ -542,13 +542,13 @@ function _pack_a_punch_warning_fx(pap_time) {
 
 function _pack_a_punch_timer_sounds() {
   pap_timer_length = 8.5;
-  self playSound("evt_pap_timer_start");
-  self playLoopSound("evt_pap_timer_loop");
+  self playsound("evt_pap_timer_start");
+  self playloopsound("evt_pap_timer_loop");
   wait(level.pap_active_time - pap_timer_length);
-  self playSound("evt_pap_timer_countdown");
+  self playsound("evt_pap_timer_countdown");
   wait(pap_timer_length);
   self stoploopsound();
-  self playSound("evt_pap_timer_stop");
+  self playsound("evt_pap_timer_stop");
 }
 
 function _find_ents_to_flush() {
@@ -562,7 +562,7 @@ function _find_ents_to_flush() {
   level.pap_player_flush_temp_trig = spawn("trigger_radius", (-8, 560, 288), 0, 768, 256);
   players = getplayers();
   touching_players = [];
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     touching = players[i] istouching(volume) || players[i] istouching(level.pap_player_flush_temp_trig);
     if(touching) {
       touching_players[touching_players.size] = players[i];
@@ -572,7 +572,7 @@ function _find_ents_to_flush() {
   bottom_stairs_vol = getent("pap_target_finder2", "targetname");
   zombies_to_flush = [];
   zombies = getaispeciesarray("axis", "all");
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(zombies[i] istouching(volume) || zombies[i] istouching(bottom_stairs_vol)) {
       zombies_to_flush[zombies_to_flush.size] = zombies[i];
     }
@@ -581,7 +581,7 @@ function _find_ents_to_flush() {
     level thread do_zombie_flush(zombies_to_flush);
   }
   level notify("flush_done");
-  while(level.ents_being_flushed > 0) {
+  while (level.ents_being_flushed > 0) {
     util::wait_network_frame();
   }
   level notify("pap_reset_complete");
@@ -598,7 +598,7 @@ function _player_flushed_out(volume) {
   scale_dist = dist / max_dist;
   time = time * scale_dist;
   wait(time);
-  while(true) {
+  while (true) {
     if(!self istouching(volume)) {
       break;
     }
@@ -608,7 +608,7 @@ function _player_flushed_out(volume) {
 
 function _play_flush_sounds() {
   snd_struct = struct::get("pap_water", "targetname");
-  if(isDefined(snd_struct)) {
+  if(isdefined(snd_struct)) {
     level thread sound::play_in_space("evt_pap_water", snd_struct.origin);
   }
 }
@@ -636,9 +636,9 @@ function _player_flush(index) {
   flushspeed = level.flushspeed - (30 * index);
   wait(index * 0.1);
   nexttarget = self _ent_getnextflushtarget();
-  while(isDefined(nexttarget)) {
+  while (isdefined(nexttarget)) {
     movetarget = (self.origin[0], nexttarget.origin[1], nexttarget.origin[2]);
-    if(!isDefined(nexttarget.next)) {
+    if(!isdefined(nexttarget.next)) {
       movetarget = (movetarget[0], self.origin[1] + ((movetarget[1] - self.origin[1]) * level.flushscale), movetarget[2]);
       level.flushscale = level.flushscale - 0.25;
       if(level.flushscale <= 0) {
@@ -653,7 +653,7 @@ function _player_flush(index) {
       useaccel = 0;
       accel = min(0.2, time);
     }
-    if(!isDefined(nexttarget.target)) {
+    if(!isdefined(nexttarget.target)) {
       accel = 0;
       decel = time;
       time = time + 0.5;
@@ -677,15 +677,15 @@ function _player_flush(index) {
 
 function pap_flush_screen_shake(activetime) {
   self endon("pap_flush_done");
-  while(true) {
+  while (true) {
     earthquake(randomfloatrange(0.2, 0.4), randomfloatrange(1, 2), self.origin, 100, self);
     wait(randomfloatrange(0.1, 0.3));
   }
 }
 
 function do_zombie_flush(zombies_to_flush) {
-  for(i = 0; i < zombies_to_flush.size; i++) {
-    if(isDefined(zombies_to_flush[i]) && isalive(zombies_to_flush[i])) {
+  for (i = 0; i < zombies_to_flush.size; i++) {
+    if(isdefined(zombies_to_flush[i]) && isalive(zombies_to_flush[i])) {
       zombies_to_flush[i] thread _zombie_flush();
     }
   }
@@ -714,7 +714,7 @@ function _zombie_flush() {
 
 function _ent_getnextflushtarget() {
   current_node = level.flush_path;
-  while(true) {
+  while (true) {
     if(self.origin[1] >= current_node.origin[1]) {
       break;
     }
@@ -730,14 +730,14 @@ function _set_num_plates_active(num, state) {
 }
 
 function _setup_pap_timer() {
-  level.pap_timers = getEntArray("pap_timer", "targetname");
-  for(i = 0; i < level.pap_timers.size; i++) {
+  level.pap_timers = getentarray("pap_timer", "targetname");
+  for (i = 0; i < level.pap_timers.size; i++) {
     timer = level.pap_timers[i];
     timer.path = [];
     targetname = timer.target;
-    while(isDefined(targetname)) {
+    while (isdefined(targetname)) {
       s = struct::get(targetname, "targetname");
-      if(!isDefined(s)) {
+      if(!isdefined(s)) {
         break;
       }
       timer.path[timer.path.size] = s;
@@ -745,13 +745,13 @@ function _setup_pap_timer() {
     }
     timer.origin = timer.path[0].origin;
     pathlength = 0;
-    for(p = 1; p < timer.path.size; p++) {
+    for (p = 1; p < timer.path.size; p++) {
       length = distance(timer.path[p - 1].origin, timer.path[p].origin);
       timer.path[p].pathlength = length;
       pathlength = pathlength + length;
     }
     timer.pathlength = pathlength;
-    for(p = timer.path.size - 2; p >= 0; p--) {
+    for (p = timer.path.size - 2; p >= 0; p--) {
       length = distance(timer.path[p + 1].origin, timer.path[p].origin);
       timer.path[p].pathlengthreverse = length;
     }
@@ -769,7 +769,7 @@ function _move_visual_timer() {
 }
 
 function _travel_path(speed, reversespin) {
-  for(i = 1; i < self.path.size; i++) {
+  for (i = 1; i < self.path.size; i++) {
     length = self.path[i].pathlength;
     time = length / speed;
     acceltime = 0;
@@ -790,7 +790,7 @@ function _travel_path(speed, reversespin) {
 }
 
 function _travel_path_reverse(speed, reversespin) {
-  for(i = self.path.size - 2; i >= 0; i--) {
+  for (i = self.path.size - 2; i >= 0; i--) {
     length = self.path[i].pathlengthreverse;
     time = length / speed;
     acceltime = 0;
@@ -807,16 +807,16 @@ function _travel_path_reverse(speed, reversespin) {
     }
     self rotatevelocity((0, 0, rotatespeed), time);
     self waittill("movedone");
-    self playSound("evt_pap_timer_stop");
-    self playSound("evt_pap_timer_start");
+    self playsound("evt_pap_timer_stop");
+    self playsound("evt_pap_timer_start");
   }
 }
 
 function _setup_pap_path() {
   level.flush_path = struct::get("pap_flush_path", "targetname");
   current_node = level.flush_path;
-  while(true) {
-    if(!isDefined(current_node.target)) {
+  while (true) {
+    if(!isdefined(current_node.target)) {
       break;
     }
     next_node = struct::get(current_node.target, "targetname");

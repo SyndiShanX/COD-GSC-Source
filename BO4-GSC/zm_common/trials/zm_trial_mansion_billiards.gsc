@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_bgb_pack;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_mansion_billiards;
 
 autoexec __init__system__() {
@@ -39,7 +40,7 @@ private on_end(round_reset) {
 }
 
 private function_b7bc0616() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   zm_trial_util::function_7d32b7d0(0);
   function_f5ad51bd();
   level flag::wait_till(#"hash_4207012c64662b4d");

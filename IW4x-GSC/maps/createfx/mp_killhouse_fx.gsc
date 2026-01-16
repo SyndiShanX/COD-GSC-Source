@@ -3,10 +3,13 @@
  * Script: maps\createfx\mp_killhouse_fx.gsc
 *********************************************/
 
+//_createfx generated. Do not touch!!
+
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 15
   ent = createOneshotEffect("amb_dust_hangar");
   ent.v["origin"] = (634.754, 919.889, 248.125);
   ent.v["angles"] = (270, 0, 0);
@@ -48,4 +51,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "ground_smoke_launch_a";
   ent.v["delay"] = -15;
+
 }

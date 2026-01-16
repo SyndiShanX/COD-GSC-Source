@@ -7,10 +7,11 @@
 #include scripts\zm_common\bgbs\zm_bgb_extra_credit;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_customgame;
+
 #namespace zm_bgb_reign_drops;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_reign_drops", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_reign_drops", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -30,7 +31,7 @@ validation() {
 }
 
 activation() {
-  self endon(#"disconnect", # "bled_out");
+  self endon(#"disconnect", #"bled_out");
 
   if(zm_custom::function_3ac936c6("zm_bgb_power_keg")) {
     level thread bgb::function_c6cd71d5("hero_weapon_power", self function_dfc73f65(1), 96);

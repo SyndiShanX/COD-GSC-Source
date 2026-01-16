@@ -136,9 +136,8 @@ sendhitspecialeventatframeend(hitent) {
     value = value * 2;
   }
 
-  if(enemyshit) {
+  if(enemyshit)
     self directionalhitindicator(entbitarray0, entbitarray1);
-  }
 
   self.directionalhitarray = undefined;
   entbitarray0 = 0;

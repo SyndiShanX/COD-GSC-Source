@@ -11,18 +11,18 @@
 
 function autoexec init() {
   level.laststands = [];
-  for(i = 0; i < 4; i++) {
-    level.laststands[i] = spawnStruct();
+  for (i = 0; i < 4; i++) {
+    level.laststands[i] = spawnstruct();
     level.laststands[i].bleedouttime = 0;
     level.laststands[i].laststand_update_clientfields = "laststand_update" + i;
     level.laststands[i].lastbleedouttime = 0;
-    clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "counter", &update_bleedout_timer, 0, 0);
+    clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "counter", & update_bleedout_timer, 0, 0);
   }
   level thread wait_and_set_revive_shader_constant();
 }
 
 function wait_and_set_revive_shader_constant() {
-  while(true) {
+  while (true) {
     level waittill("notetrack", localclientnum, note);
     if(note == "revive_shader_constant") {
       player = getlocalplayer(localclientnum);
@@ -38,7 +38,7 @@ function animation_update(model, oldvalue, newvalue) {
   if(oldvalue == newvalue) {
     newvalue = oldvalue - 1;
   }
-  while(timesincelastupdate <= 1) {
+  while (timesincelastupdate <= 1) {
     timesincelastupdate = (getrealtime() - starttime) / 1000;
     lerpvalue = lerpfloat(oldvalue, newvalue, timesincelastupdate) / 30;
     setuimodelvalue(model, lerpvalue);
@@ -55,7 +55,7 @@ function update_bleedout_timer(localclientnum, oldval, newval, bnewent, binitial
     level.laststands[playernum].lastbleedouttime = level.laststands[playernum].bleedouttime;
   }
   model = getuimodel(getuimodelforcontroller(localclientnum), ("WorldSpaceIndicators.bleedOutModel" + playernum) + ".bleedOutPercent");
-  if(isDefined(model)) {
+  if(isdefined(model)) {
     if(newval == 30) {
       level.laststands[playernum].bleedouttime = 0;
       level.laststands[playernum].lastbleedouttime = 0;

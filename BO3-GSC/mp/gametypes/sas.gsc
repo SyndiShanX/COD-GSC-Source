@@ -33,10 +33,10 @@ function main() {
   util::registerroundlimit(0, 10);
   util::registerroundwinlimit(0, 10);
   util::registernumlives(0, 100);
-  level.onstartgametype = &onstartgametype;
-  level.onplayerdamage = &onplayerdamage;
-  level.onplayerkilled = &onplayerkilled;
-  level.onplayerscore = &onplayerscore;
+  level.onstartgametype = & onstartgametype;
+  level.onplayerdamage = & onplayerdamage;
+  level.onplayerkilled = & onplayerkilled;
+  level.onplayerscore = & onplayerscore;
   level.pointsperprimarykill = getgametypesetting("pointsPerPrimaryKill");
   level.pointspersecondarykill = getgametypesetting("pointsPerSecondaryKill");
   level.pointsperprimarygrenadekill = getgametypesetting("pointsPerPrimaryGrenadeKill");
@@ -68,21 +68,21 @@ function main() {
   game["dialog"]["wm_humiliation"] = "mpl_wager_bankrupt";
   game["dialog"]["wm_humiliated"] = "sns_hum";
   gameobjects::register_allowed_gameobject(level.gametype);
-  level.givecustomloadout = &givecustomloadout;
+  level.givecustomloadout = & givecustomloadout;
   var_e9a58782 = [];
-  if(!isDefined(var_e9a58782)) {
+  if(!isdefined(var_e9a58782)) {
     var_e9a58782 = [];
   } else if(!isarray(var_e9a58782)) {
     var_e9a58782 = array(var_e9a58782);
   }
   var_e9a58782[var_e9a58782.size] = "specialty_fastweaponswitch";
-  if(!isDefined(var_e9a58782)) {
+  if(!isdefined(var_e9a58782)) {
     var_e9a58782 = [];
   } else if(!isarray(var_e9a58782)) {
     var_e9a58782 = array(var_e9a58782);
   }
   var_e9a58782[var_e9a58782.size] = "specialty_jetcharger";
-  if(!isDefined(var_e9a58782)) {
+  if(!isdefined(var_e9a58782)) {
     var_e9a58782 = [];
   } else if(!isarray(var_e9a58782)) {
     var_e9a58782 = array(var_e9a58782);
@@ -90,13 +90,13 @@ function main() {
   var_e9a58782[var_e9a58782.size] = "specialty_tracker";
   level.var_e9a58782 = var_e9a58782;
   var_f32ba892 = [];
-  if(!isDefined(var_f32ba892)) {
+  if(!isdefined(var_f32ba892)) {
     var_f32ba892 = [];
   } else if(!isarray(var_f32ba892)) {
     var_f32ba892 = array(var_f32ba892);
   }
   var_f32ba892[var_f32ba892.size] = "gadget_camo";
-  if(!isDefined(var_f32ba892)) {
+  if(!isdefined(var_f32ba892)) {
     var_f32ba892 = [];
   } else if(!isarray(var_f32ba892)) {
     var_f32ba892 = array(var_f32ba892);
@@ -147,7 +147,7 @@ function givecustomloadout() {
 function function_9b921991() {
   specialoffhand = self.var_8ed41d1a;
   var_a664ae9a = 0;
-  if(!isDefined(specialoffhand)) {
+  if(!isdefined(specialoffhand)) {
     specialoffhand = getweapon(level.var_772fe844);
     var_a664ae9a = 1;
   }
@@ -157,7 +157,7 @@ function function_9b921991() {
   self switchtooffhand(specialoffhand);
   self.grenadetypespecial = specialoffhand;
   self.grenadetypespecialcount = specialoffhandcount;
-  if(isDefined(var_a664ae9a) && var_a664ae9a) {
+  if(isdefined(var_a664ae9a) && var_a664ae9a) {
     slot = self gadgetgetslot(specialoffhand);
     self gadgetpowerset(slot, 0);
   }
@@ -172,8 +172,8 @@ function giveperks() {
 
 function onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(weapon == level.weapon_sas_primary_weapon && smeansofdeath == "MOD_IMPACT") {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
-      if(!isDefined(eattacker.pers["sticks"])) {
+    if(isdefined(eattacker) && isplayer(eattacker)) {
+      if(!isdefined(eattacker.pers["sticks"])) {
         eattacker.pers["sticks"] = 1;
       } else {
         eattacker.pers["sticks"]++;
@@ -195,7 +195,7 @@ function onplayerscore(event, player, victim) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isdefined(attacker) && isplayer(attacker) && attacker != self) {
     if(weapon_utils::ismeleemod(smeansofdeath)) {
       attacker globallogic_score::givepointstowin(level.pointspermeleekill);
       onplayerscore(undefined, attacker, undefined);
@@ -223,7 +223,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         }
       }
     }
-    if(isDefined(level.setbackweapon) && weapon == level.setbackweapon) {
+    if(isdefined(level.setbackweapon) && weapon == level.setbackweapon) {
       self.pers["humiliated"]++;
       self.humiliated = self.pers["humiliated"];
       if(level.setbacks == 0) {
@@ -259,7 +259,7 @@ function function_238fd5eb() {
   self playlocalsound("mpl_assassination_sting");
   var_a40af05c = self hud::createfontstring("default", 2.5);
   var_a40af05c hud::setpoint("CENTER", undefined, 0, -100);
-  var_a40af05c.label = &"MP_HUMILIATED";
+  var_a40af05c.label = & "MP_HUMILIATED";
   var_a40af05c.x = 0;
   var_a40af05c.archived = 1;
   var_a40af05c.alpha = 1;
@@ -284,19 +284,19 @@ function function_238fd5eb() {
 function function_71a0cd6d(var_a40af05c) {
   self endon("hash_c8d75045");
   self util::waittill_any("disconnect", "death");
-  if(isDefined(var_a40af05c)) {
+  if(isdefined(var_a40af05c)) {
     var_a40af05c destroy();
   }
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, &"OBJECTIVES_SAS");
+  util::setobjectivetext(team, & "OBJECTIVES_SAS");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, &"OBJECTIVES_SAS");
+    util::setobjectivescoretext(team, & "OBJECTIVES_SAS");
   } else {
-    util::setobjectivescoretext(team, &"OBJECTIVES_SAS_SCORE");
+    util::setobjectivescoretext(team, & "OBJECTIVES_SAS_SCORE");
   }
-  util::setobjectivehinttext(team, &"OBJECTIVES_SAS_HINT");
+  util::setobjectivehinttext(team, & "OBJECTIVES_SAS_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
   level.spawn_start = spawnlogic::get_spawnpoint_array("mp_dm_spawn_start");
@@ -318,7 +318,7 @@ function onstartgametype() {
   setdemointermissionpoint(spawnpoint.origin, spawnpoint.angles);
   level.usestartspawns = 0;
   level.displayroundendtext = 0;
-  if(isDefined(game["roundsplayed"]) && game["roundsplayed"] > 0) {
+  if(isdefined(game["roundsplayed"]) && game["roundsplayed"] > 0) {
     game["dialog"]["gametype"] = undefined;
     game["dialog"]["offense_obj"] = undefined;
     game["dialog"]["defense_obj"] = undefined;
@@ -327,17 +327,17 @@ function onstartgametype() {
 
 function onwagerawards() {
   tomahawks = self globallogic_score::getpersstat("tomahawks");
-  if(!isDefined(tomahawks)) {
+  if(!isdefined(tomahawks)) {
     tomahawks = 0;
   }
   self persistence::set_after_action_report_stat("wagerAwards", tomahawks, 0);
   sticks = self globallogic_score::getpersstat("sticks");
-  if(!isDefined(sticks)) {
+  if(!isdefined(sticks)) {
     sticks = 0;
   }
   self persistence::set_after_action_report_stat("wagerAwards", sticks, 1);
   bestkillstreak = self globallogic_score::getpersstat("best_kill_streak");
-  if(!isDefined(bestkillstreak)) {
+  if(!isdefined(bestkillstreak)) {
     bestkillstreak = 0;
   }
   self persistence::set_after_action_report_stat("wagerAwards", bestkillstreak, 2);

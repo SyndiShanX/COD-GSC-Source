@@ -61,9 +61,8 @@ watch_for_grenade_throw() {
 emp_detonate(grenade) {
   grenade_owner = undefined;
 
-  if(isDefined(grenade.owner)) {
+  if(isDefined(grenade.owner))
     grenade_owner = grenade.owner;
-  }
 
   grenade waittill("explode", grenade_origin);
   emp_radius = level.zombie_vars["emp_perk_off_range"];
@@ -76,13 +75,11 @@ emp_detonate(grenade) {
   level notify("emp_detonate", origin, emp_radius);
   self thread emp_detonate_zombies(grenade_origin, grenade_owner);
 
-  if(isDefined(level.custom_emp_detonate)) {
+  if(isDefined(level.custom_emp_detonate))
     thread[[level.custom_emp_detonate]](grenade_origin);
-  }
 
-  if(isDefined(grenade_owner)) {
+  if(isDefined(grenade_owner))
     grenade_owner thread destroyequipment(origin, emp_radius);
-  }
 
   players_emped = emp_players(origin, emp_radius);
   disabled_list = maps\mp\zombies\_zm_power::change_power_in_radius(-1, origin, emp_radius);
@@ -115,9 +112,8 @@ emp_detonate_zombies(grenade_origin, grenade_owner) {
     wait 0.05;
   }
 
-  if(stunned >= 10 && isDefined(grenade_owner)) {
+  if(stunned >= 10 && isDefined(grenade_owner))
     grenade_owner notify("the_lights_of_their_eyes");
-  }
 }
 
 stun_zombie() {
@@ -155,9 +151,8 @@ emp_players(origin, radius) {
 }
 
 unemp_players(players_emped) {
-  foreach(player in players_emped) {
-    player player_emp_off();
-  }
+  foreach(player in players_emped)
+  player player_emp_off();
 }
 
 player_emp_on() {
@@ -175,13 +170,11 @@ player_emp_off() {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -194,7 +187,7 @@ getwatcherforweapon(weapname) {
 }
 
 destroyequipment(origin, radius) {
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
   rsquared = radius * radius;
 
   for(i = 0; i < grenades.size; i++) {
@@ -236,9 +229,8 @@ destroyequipment(origin, radius) {
 }
 
 isempweapon(weaponname) {
-  if(isDefined(weaponname) && (weaponname == "emp_mp" || weaponname == "emp_grenade_mp" || weaponname == "emp_grenade_zm")) {
+  if(isDefined(weaponname) && (weaponname == "emp_mp" || weaponname == "emp_grenade_mp" || weaponname == "emp_grenade_zm"))
     return true;
-  }
 
   return false;
 }
@@ -251,16 +243,14 @@ waitanddetonate(object, delay, attacker, weaponname) {
   if(from_emp) {
     object.stun_fx = 1;
 
-    if(isDefined(level._equipment_emp_destroy_fx)) {
-      playFX(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
-    }
+    if(isDefined(level._equipment_emp_destroy_fx))
+      playfx(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
     delay = 1.1;
   }
 
-  if(delay) {
+  if(delay)
     wait(delay);
-  }
 
   if(isDefined(object.detonated) && object.detonated == 1) {
     return;
@@ -270,9 +260,8 @@ waitanddetonate(object, delay, attacker, weaponname) {
   }
   if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
     if(level.teambased) {
-      if(attacker.pers["team"] != object.owner.pers["team"]) {
+      if(attacker.pers["team"] != object.owner.pers["team"])
         attacker notify("destroyed_explosive");
-      }
     } else if(attacker != object.owner)
       attacker notify("destroyed_explosive");
   }
@@ -286,15 +275,13 @@ waitanddamage(object, damage) {
   object endon("hacked");
   object.stun_fx = 1;
 
-  if(isDefined(level._equipment_emp_destroy_fx)) {
-    playFX(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
-  }
+  if(isDefined(level._equipment_emp_destroy_fx))
+    playfx(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
   delay = 1.1;
 
-  if(delay) {
+  if(delay)
     wait(delay);
-  }
 
   object maps\mp\zombies\_zm_equipment::item_damage(damage);
 }

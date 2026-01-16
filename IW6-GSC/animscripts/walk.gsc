@@ -6,9 +6,8 @@
 movewalk() {
   var_0 = undefined;
 
-  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096) {
+  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096)
     var_0 = "stand";
-  }
 
   var_1 = [[self.chooseposefunc]](var_0);
 
@@ -48,11 +47,10 @@ dowalkanimoverride(var_0) {
   self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
-    if(isDefined(self.walk_override_weights)) {
+    if(isDefined(self.walk_override_weights))
       var_1 = common_scripts\utility::choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    } else {
+    else
       var_1 = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
-    }
   } else
     var_1 = self.walk_overrideanim;
 
@@ -61,17 +59,15 @@ dowalkanimoverride(var_0) {
 }
 
 getwalkanim(var_0) {
-  if(self.stairsstate == "up") {
+  if(self.stairsstate == "up")
     return animscripts\utility::getmoveanim("stairs_up");
-  } else if(self.stairsstate == "down") {
+  else if(self.stairsstate == "down")
     return animscripts\utility::getmoveanim("stairs_down");
-  }
 
   var_1 = animscripts\utility::getmoveanim(var_0);
 
-  if(isarray(var_1)) {
+  if(isarray(var_1))
     var_1 = var_1[randomint(var_1.size)];
-  }
 
   return var_1;
 }
@@ -80,9 +76,8 @@ dowalkanim(var_0) {
   self endon("movemode");
   var_1 = self.moveplaybackrate;
 
-  if(self.stairsstate != "none") {
+  if(self.stairsstate != "none")
     var_1 = var_1 * 0.6;
-  }
 
   if(self.a.pose == "stand") {
     if(isDefined(self.enemy)) {

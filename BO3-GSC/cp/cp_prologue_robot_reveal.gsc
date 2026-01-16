@@ -38,8 +38,8 @@
 function robot_horde_start() {
   level robot_horde_precache();
   level robot_horde_heros_init();
-  spawner::add_spawn_function_group("sp_initial_robots", "targetname", &robot_horde);
-  spawner::add_spawn_function_group("robot_aigroup", "script_aigroup", &robot_horde);
+  spawner::add_spawn_function_group("sp_initial_robots", "targetname", & robot_horde);
+  spawner::add_spawn_function_group("robot_aigroup", "script_aigroup", & robot_horde);
   level thread robot_horde_main();
 }
 
@@ -107,7 +107,7 @@ function robot_horde_main() {
   level thread function_90882a34();
   level thread function_59071a25();
   level thread function_f7a7c69a();
-  util::delay(0.5, undefined, &exploder::exploder, "fx_exploder_fog_light_horde");
+  util::delay(0.5, undefined, & exploder::exploder, "fx_exploder_fog_light_horde");
   savegame::checkpoint_save();
   level flag::wait_till("robot_contact");
   level.ai_theia ai::set_ignoreall(0);
@@ -125,14 +125,14 @@ function robot_horde_main() {
   }
   level apc::function_50d6bf35("vehicle_apc_hijack_node", 0);
   level thread function_d105c430();
-  callback::on_spawned(&function_51a9314a);
+  callback::on_spawned( & function_51a9314a);
   level thread function_51280ee5();
   level flag::wait_till("garage_open");
   objectives::complete("cp_level_prologue_defend_theia", level.ai_prometheus);
   level.garage_door = struct::get("garage_door", "targetname");
   objectives::set("cp_waypoint_breadcrumb", level.garage_door);
   trigger::use("triggercolor_allies_garage");
-  scene::add_scene_func("cin_pro_15_01_opendoor_vign_getinside_khalil_minister_hendricks", &function_21350de5, "play");
+  scene::add_scene_func("cin_pro_15_01_opendoor_vign_getinside_khalil_minister_hendricks", & function_21350de5, "play");
   level thread scene::play("cin_pro_15_01_opendoor_vign_getinside_khalil_minister_hendricks");
   level waittill("hash_e41afc83");
   level.ai_hendricks setgoal(level.ai_hendricks.origin, 1);
@@ -142,13 +142,13 @@ function robot_horde_main() {
   objectives::set("cp_level_prologue_goto_exfil");
   level flag::wait_till("garage_closed");
   level flag::wait_till("minister_apc_done");
-  callback::remove_on_spawned(&function_51a9314a);
+  callback::remove_on_spawned( & function_51a9314a);
   skipto::objective_completed("skipto_robot_horde");
 }
 
 function function_96157f5d() {
   var_9a246ea8 = getent("t_robot_horde_oob", "targetname");
-  if(isDefined(var_9a246ea8)) {
+  if(isdefined(var_9a246ea8)) {
     level flag::wait_till("vo_robot");
     wait(1.9);
     var_9a246ea8 triggerenable(1);
@@ -199,7 +199,7 @@ function function_f7a7c69a() {
   var_ede59fe8 = getent("player_inside_garage", "targetname");
   a_ai_allies = cp_prologue_util::get_ai_allies();
   foreach(ai_ally in a_ai_allies) {
-    while(isalive(ai_ally) && !ai_ally istouching(var_ede59fe8)) {
+    while (isalive(ai_ally) && !ai_ally istouching(var_ede59fe8)) {
       wait(0.1);
     }
   }
@@ -208,7 +208,7 @@ function function_f7a7c69a() {
 
 function function_90882a34() {
   level flag::wait_till("spawn_robot_horde");
-  if(isDefined(level.bzm_prologuedialogue5_3callback)) {
+  if(isdefined(level.bzm_prologuedialogue5_3callback)) {
     level thread[[level.bzm_prologuedialogue5_3callback]]();
   }
   spawn_manager::enable("sm_initial_robots");
@@ -229,14 +229,14 @@ function function_9fb290a5() {
   struct = struct::get("sndRobotRattle", "targetname");
   struct2 = struct::get(struct.target, "targetname");
   ent = spawn("script_model", struct.origin);
-  while(!flag::get("players_in_garage")) {
-    ent playSound("evt_robot_reveal_step");
+  while (!flag::get("players_in_garage")) {
+    ent playsound("evt_robot_reveal_step");
     wait(0.3);
     ent clientfield::set("sndRattle", 1);
     wait(0.8);
     ent clientfield::set("sndRattle", 0);
   }
-  ent playLoopSound("evt_robot_fake_battle_lp", 5);
+  ent playloopsound("evt_robot_fake_battle_lp", 5);
 }
 
 function function_51280ee5() {
@@ -286,7 +286,7 @@ function function_51a9314a() {
 function function_10302408() {
   level endon("prometheus_at_apc");
   self endon("death");
-  while(self.attackeraccuracy < 1) {
+  while (self.attackeraccuracy < 1) {
     wait(1);
     self.attackeraccuracy = self.attackeraccuracy + 0.1;
   }
@@ -366,7 +366,7 @@ function cybersoldier_handler() {
   level thread function_c091ae43();
   level thread function_82869bf4();
   level thread function_f4e0744a();
-  level thread scene::add_scene_func("cin_pro_14_01_robothorde_vign_directing", &function_7ad76fc0, "play");
+  level thread scene::add_scene_func("cin_pro_14_01_robothorde_vign_directing", & function_7ad76fc0, "play");
   if(!level flag::get("prom_point")) {
     level thread scene::play("cin_pro_14_01_robothorde_vign_directing");
     level flag::wait_till("taylor_direct");
@@ -440,7 +440,7 @@ function function_38c8ec92() {
 }
 
 function function_e3231637(var_8a4b0c9) {
-  if(isDefined(level.var_681ad194)) {
+  if(isdefined(level.var_681ad194)) {
     foreach(e_soldier in level.var_681ad194) {
       e_soldier ai::set_pacifist(var_8a4b0c9);
       if(var_8a4b0c9) {
@@ -473,7 +473,7 @@ function set_cyber_soliders_goal(ent) {
 
 function remove_clips() {
   level flag::wait_till("cyber_soldiers_kill_robots");
-  clips = getEntArray("robot_clip", "targetname");
+  clips = getentarray("robot_clip", "targetname");
   foreach(clip in clips) {
     clip delete();
   }

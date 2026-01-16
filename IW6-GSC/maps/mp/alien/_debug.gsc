@@ -56,7 +56,9 @@ debug_nuke() {
 
     if(common_scripts\utility::flag_exist("cortex_started") && common_scripts\utility::flag("cortex_started")) {
       if(isDefined(level.add_cortex_charge_func)) {
-        [[level.add_cortex_charge_func]](amount);
+        [
+          [level.add_cortex_charge_func]
+        ](amount);
       }
     }
 
@@ -68,7 +70,9 @@ debug_nuke() {
   }
 
   if(isDefined(level.dlc_get_non_agent_enemies)) {
-    alive_non_agents = [[level.dlc_get_non_agent_enemies]]();
+    alive_non_agents = [
+      [level.dlc_get_non_agent_enemies]
+    ]();
     foreach(alive_enemy in alive_non_agents) {
       alive_enemy notify("death");
     }
@@ -230,17 +234,15 @@ parse_loadout(loadout_string) {
 }
 
 adjust_drill_loc(drop_loc) {
-  if(isDefined(level.debug_drill_loc)) {
+  if(isDefined(level.debug_drill_loc))
     return level.debug_drill_loc;
-  } else {
+  else
     return drop_loc;
-  }
 }
 
 startPointEnabled() {
-  if(getDvar("alien_start_point") == "") {
+  if(getDvar("alien_start_point") == "")
     return false;
-  }
 
   return true;
 }
@@ -390,13 +392,11 @@ create_dps_hud() {
 }
 
 shouldSelfRevive() {
-  if(maps\mp\alien\_utility::alien_mode_has("nogame")) {
+  if(maps\mp\alien\_utility::alien_mode_has("nogame"))
     return true;
-  }
 
-  if(self_revive_activated()) {
+  if(self_revive_activated())
     return true;
-  }
 
   return false;
 }
@@ -432,16 +432,14 @@ debug_print_encounter_performance(player) {
   println("------ Team -------");
   foreach(key, score_component in level.encounter_score_components) {
     if(isDefined(score_component.team_encounter_performance)) {
-      foreach(performance_item, value in score_component.team_encounter_performance) {
-        println(performance_item + ": " + value);
-      }
+      foreach(performance_item, value in score_component.team_encounter_performance)
+      println(performance_item + ": " + value);
     }
   }
 
   println("---- Personal ----");
-  foreach(key, value in player.encounter_performance) {
-    println(key + ": " + value);
-  }
+  foreach(key, value in player.encounter_performance)
+  println(key + ": " + value);
 
   println("==============================================================================");
 }
@@ -482,30 +480,26 @@ debug_score_enabled() {
 
 debug_print_achievement_unlocked(unlock_id, progress) {
   if(getDvarInt("debug_alien_achievement", 0) == 1) {
-    if(isDefined(progress)) {
+    if(isDefined(progress))
       println("(DEBUG) Achievement unlock: " + unlock_id + "(" + progress + ")");
-    } else {
+    else
       println("(DEBUG) Achievement unlock: " + unlock_id);
-    }
   }
 }
 
 debug_print_item_unlocked(item_reference, item_type) {
-  if(getDvarInt("debug_alien_item_unlock", 0) == 1) {
+  if(getDvarInt("debug_alien_item_unlock", 0) == 1)
     println("(DEBUG) Item unlock: " + item_reference + " for type: " + item_type);
-  }
 }
 
 debug_print_weapon_hits(weapon_ref, sMeansOfDeath) {
-  if(getDvarInt("debug_alien_weapon_stats", 0) == 1) {
+  if(getDvarInt("debug_alien_weapon_stats", 0) == 1)
     println("(DEBUG) Weapon hit: " + weapon_ref + " sMeansOfDeath: " + sMeansOfDeath);
-  }
 }
 
 debug_print_weapon_shots(weapon_ref) {
-  if(getDvarInt("debug_alien_weapon_stats", 0) == 1) {
+  if(getDvarInt("debug_alien_weapon_stats", 0) == 1)
     println("(DEBUG) Weapon fired: " + weapon_ref);
-  }
 }
 
 devgui_SetPrestigeNerf() {
@@ -517,17 +511,14 @@ devgui_SetPrestigeNerf() {
 
     nerf_reference = getdvar("scr_setprestigenerf");
 
-    foreach(player in level.players) {
-      player maps\mp\alien\_prestige::activate_nerf(nerf_reference);
-    }
+    foreach(player in level.players)
+    player maps\mp\alien\_prestige::activate_nerf(nerf_reference);
 
-    if(nerf_reference == "nerf_smaller_wallet") {
+    if(nerf_reference == "nerf_smaller_wallet")
       set_playerWalletToSmallerSize();
-    }
 
-    if(nerf_reference == "nerf_higher_threatbias") {
+    if(nerf_reference == "nerf_higher_threatbias")
       set_playerToHigherThreatbias();
-    }
 
     SetDevDvar("scr_setprestigenerf", "");
 
@@ -544,9 +535,8 @@ set_playerWalletToSmallerSize() {
 }
 
 set_playerToHigherThreatbias() {
-  foreach(player in level.players) {
-    player.threatbias = player maps\mp\alien\_prestige::prestige_getThreatbiasScalar();
-  }
+  foreach(player in level.players)
+  player.threatbias = player maps\mp\alien\_prestige::prestige_getThreatbiasScalar();
 }
 
 runAliens() {
@@ -594,29 +584,25 @@ debug_LB_enabled() {
 }
 
 print_hive_XP_earned(xp_earned) {
-  if(getDvarInt("debug_hive_xp", 0) == 1) {
+  if(getDvarInt("debug_hive_xp", 0) == 1)
     println("(DEBUG) Hive XP earned: " + xp_earned);
-  }
 }
 
 processStartPoint_input(input_string) {
   token_array = StrTok(input_string, " ");
 
-  if(isDefined(token_array[1])) {
+  if(isDefined(token_array[1]))
     level.debug_starting_currency = int(token_array[1]);
-  }
 
-  if(isDefined(token_array[2])) {
+  if(isDefined(token_array[2]))
     level.debug_starting_skill_point = int(token_array[2]);
-  }
 }
 
 jumpTo_registerPlayerSpawnPos(player_spawn_pos_list) {
   level.debug_startPointLocations = [];
 
-  foreach(pos in player_spawn_pos_list) {
-    level.debug_startPointLocations[level.debug_startPointLocations.size] = drop_to_ground(pos, 100, -250);
-  }
+  foreach(pos in player_spawn_pos_list)
+  level.debug_startPointLocations[level.debug_startPointLocations.size] = drop_to_ground(pos, 100, -250);
 }
 
 jumpTo_registerDrillSpawnPos(drill_spawn_pos) {
@@ -648,9 +634,8 @@ delete_already_removed_hives(hives_name_list) {
   new_list = [];
   foreach(hive_name in hives_name_list) {
     location_ent = getent(hive_name, "target");
-    if(isDefined(location_ent)) {
+    if(isDefined(location_ent))
       new_list[new_list.size] = hive_name;
-    }
   }
   return new_list;
 }
@@ -826,23 +811,20 @@ player_spawn_test() {
     level.spawngoalposition = level.players[0].origin;
     level thread show_all_nearby_spawn_nodes(spawn_node, 5, show_test);
     level thread draw_debug_box_on(spawn_node, CONST_RED_COLOR, 5);
-    if(isDefined(spawn_node.script_noteworthy)) {
+    if(isDefined(spawn_node.script_noteworthy))
       print3d(spawn_node.origin + (0, 0, 12), spawn_node.script_noteworthy, (0, 1, 0), 1, 1, 20);
-    }
     if(level.players[0] UseButtonPressed()) {
       alien = maps\mp\alien\_spawn_director::process_spawn(alien_type, spawn_node, intro_vignette_anim);
-      while(level.players[0] UseButtonPressed()) {
+      while(level.players[0] UseButtonPressed())
         wait 0.05;
-      }
     }
     wait 0.05;
   }
 }
 
 GetActualAlienSpawnType(spawn_node) {
-  if(!isDefined(spawn_node)) {
+  if(!isDefined(spawn_node))
     return random(["goon", "spitter", "locust", "brute", "elite", "mammoth"]);
-  }
 
   switch (spawn_node) {
     case "chen_test":
@@ -942,9 +924,8 @@ GetNodeClosestToPlayer() {
 
   for(nodeIndex = 0; nodeIndex < level.cycle_data.spawner_list.size; nodeIndex++) {
     newdist = DistanceSquared(level.players[0].origin, level.cycle_data.spawner_list[nodeIndex]["location"].origin);
-    if(newdist >= maxdist) {
+    if(newdist >= maxdist)
       continue;
-    }
     maxdist = newdist;
     node = level.cycle_data.spawner_list[nodeIndex]["location"];
   }
@@ -959,9 +940,8 @@ GetNodeClosestToTarget() {
 
   for(nodeIndex = 0; nodeIndex < level.cycle_data.spawner_list.size; nodeIndex++) {
     newdist = DistanceSquared(level.spawngoalposition, level.cycle_data.spawner_list[nodeIndex]["location"].origin);
-    if(newdist >= maxdist) {
+    if(newdist >= maxdist)
       continue;
-    }
     maxdist = newdist;
     node = level.cycle_data.spawner_list[nodeIndex]["location"];
   }
@@ -970,28 +950,24 @@ GetNodeClosestToTarget() {
 }
 
 show_all_nearby_spawn_nodes(selected_spawn_node, time, dist) {
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 60;
-  }
 
   DISTANCE_SQAD_SHOW_SPAWN_NODES = 1000000;
-  if(isDefined(dist)) {
+  if(isDefined(dist))
     DISTANCE_SQAD_SHOW_SPAWN_NODES = dist;
-  }
 
   for(nodeIndex = 0; nodeIndex < level.cycle_data.spawner_list.size; nodeIndex++) {
-    if(DistanceSquared(level.spawngoalposition, level.cycle_data.spawner_list[nodeIndex]["location"].origin) < DISTANCE_SQAD_SHOW_SPAWN_NODES && level.cycle_data.spawner_list[nodeIndex]["location"] != selected_spawn_node) {
+    if(DistanceSquared(level.spawngoalposition, level.cycle_data.spawner_list[nodeIndex]["location"].origin) < DISTANCE_SQAD_SHOW_SPAWN_NODES && level.cycle_data.spawner_list[nodeIndex]["location"] != selected_spawn_node)
       draw_debug_box_on(level.cycle_data.spawner_list[nodeIndex]["location"], CONST_RED_BLUE, time);
-    }
   }
 }
 
 draw_debug_box_on(spawn_node, color, time) {
-  if(isDefined(spawn_node.angles)) {
+  if(isDefined(spawn_node.angles))
     angles = spawn_node.angles;
-  } else {
+  else
     angles = (0, 0, 0);
-  }
 
   yaw = vectorToYaw(angles);
   box(spawn_node.origin, yaw, color, false, time);

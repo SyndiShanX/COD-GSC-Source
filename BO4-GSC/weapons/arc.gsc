@@ -9,14 +9,16 @@
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
+
 #namespace arc;
 
 init_arc(weapon, var_26b2b1bb) {
+
   level thread update_dvars();
 
-  if(!setup_arc(weapon, var_26b2b1bb)) {
-    return;
-  }
+    if(!setup_arc(weapon, var_26b2b1bb)) {
+      return;
+    }
 
   var_26b2b1bb = level.var_8a74f7fc[weapon];
 
@@ -34,25 +36,25 @@ update_dvars() {
   }
 }
 
-function setup_arc(weapon, var_26b2b1bb) {
-  assert(isDefined(weapon));
+  function setup_arc(weapon, var_26b2b1bb) {
+    assert(isDefined(weapon));
 
-  if(!isDefined(level.var_8a74f7fc)) {
-    level.var_8a74f7fc = [];
+    if(!isDefined(level.var_8a74f7fc)) {
+      level.var_8a74f7fc = [];
+    }
+
+    if(!isDefined(var_26b2b1bb)) {
+      var_26b2b1bb = spawnStruct();
+    }
+
+    if(isDefined(level.var_8a74f7fc[weapon])) {
+      return false;
+    }
+
+    level.var_8a74f7fc[weapon] = var_26b2b1bb;
+    var_26b2b1bb.weapon = weapon;
+    return true;
   }
-
-  if(!isDefined(var_26b2b1bb)) {
-    var_26b2b1bb = spawnStruct();
-  }
-
-  if(isDefined(level.var_8a74f7fc[weapon])) {
-    return false;
-  }
-
-  level.var_8a74f7fc[weapon] = var_26b2b1bb;
-  var_26b2b1bb.weapon = weapon;
-  return true;
-}
 
 function_8d134256(var_26b2b1bb) {
   var_26b2b1bb.range_sqr = var_26b2b1bb.range * var_26b2b1bb.range;
@@ -92,21 +94,21 @@ function_7a0599d(var_955a2e18, range, depth, var_94a1d56d) {
   circle(var_955a2e18, range, (0, 1 - var_227ac3be, var_227ac3be), 0, 1, 500);
 }
 
-function distancecheck(var_26b2b1bb, target, arc_source_pos, arc_source_origin) {
-  distancesq = distancesquared(target.origin, arc_source_pos);
+  function distancecheck(var_26b2b1bb, target, arc_source_pos, arc_source_origin) {
+    distancesq = distancesquared(target.origin, arc_source_pos);
 
-  if(distancesq > var_26b2b1bb.range_sqr) {
-    return false;
+    if(distancesq > var_26b2b1bb.range_sqr) {
+      return false;
+    }
+
+    distancesq = distancesquared(target.origin, arc_source_origin);
+
+    if(distancesq > var_26b2b1bb.var_1c1be14) {
+      return false;
+    }
+
+    return true;
   }
-
-  distancesq = distancesquared(target.origin, arc_source_origin);
-
-  if(distancesq > var_26b2b1bb.var_1c1be14) {
-    return false;
-  }
-
-  return true;
-}
 
 function_33d5b9a6(var_26b2b1bb, eattacker, arc_source, arc_source_origin, depth, target, var_4d3cc1a7 = 1) {
   if(target player::is_spawn_protected()) {
@@ -146,9 +148,10 @@ function_33d5b9a6(var_26b2b1bb, eattacker, arc_source, arc_source_origin, depth,
   }
 
   if(var_4d3cc1a7 && !distancecheck(var_26b2b1bb, target, self.origin, arc_source_origin)) {
+
     record3dtext("<dev string:x38>", self.origin - (0, 0, 20), (1, 0, 0), "<dev string:x47>", undefined, 0.4);
 
-    return false;
+      return false;
   }
 
   if(!damage::friendlyfirecheck(eattacker, target)) {
@@ -167,12 +170,13 @@ function_33d5b9a6(var_26b2b1bb, eattacker, arc_source, arc_source_origin, depth,
 }
 
 find_arc_targets(var_26b2b1bb, eattacker, arc_source, arc_source_origin, depth, var_4d3cc1a7 = 1) {
+
   if(level.var_6d3af47) {
     function_bf7d5b02(arc_source_origin, var_26b2b1bb.max_range);
     function_7a0599d(self.origin, var_26b2b1bb.range, depth, var_26b2b1bb.depth);
   }
 
-  delay = var_26b2b1bb.delay;
+    delay = var_26b2b1bb.delay;
 
   if(!isDefined(delay)) {
     delay = 0;

@@ -16,64 +16,64 @@
 #namespace bot;
 
 function autoexec __init__sytem__() {
-  system::register("bot", &__init__, undefined, undefined);
+  system::register("bot", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
-  callback::on_player_killed(&on_player_killed);
-  if(!isDefined(level.getbotsettings)) {
-    level.getbotsettings = &get_bot_default_settings;
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_player_killed( & on_player_killed);
+  if(!isdefined(level.getbotsettings)) {
+    level.getbotsettings = & get_bot_default_settings;
   }
-  if(!isDefined(level.onbotremove)) {
-    level.onbotremove = &bot_void;
+  if(!isdefined(level.onbotremove)) {
+    level.onbotremove = & bot_void;
   }
-  if(!isDefined(level.onbotconnect)) {
-    level.onbotconnect = &bot_void;
+  if(!isdefined(level.onbotconnect)) {
+    level.onbotconnect = & bot_void;
   }
-  if(!isDefined(level.onbotspawned)) {
-    level.onbotspawned = &bot_void;
+  if(!isdefined(level.onbotspawned)) {
+    level.onbotspawned = & bot_void;
   }
-  if(!isDefined(level.onbotkilled)) {
-    level.onbotkilled = &bot_void;
+  if(!isdefined(level.onbotkilled)) {
+    level.onbotkilled = & bot_void;
   }
-  if(!isDefined(level.onbotdamage)) {
-    level.onbotdamage = &bot_void;
+  if(!isdefined(level.onbotdamage)) {
+    level.onbotdamage = & bot_void;
   }
-  if(!isDefined(level.botupdate)) {
-    level.botupdate = &bot_update;
+  if(!isdefined(level.botupdate)) {
+    level.botupdate = & bot_update;
   }
-  if(!isDefined(level.botprecombat)) {
-    level.botprecombat = &bot_void;
+  if(!isdefined(level.botprecombat)) {
+    level.botprecombat = & bot_void;
   }
-  if(!isDefined(level.botcombat)) {
-    level.botcombat = &bot_combat::combat_think;
+  if(!isdefined(level.botcombat)) {
+    level.botcombat = & bot_combat::combat_think;
   }
-  if(!isDefined(level.botpostcombat)) {
-    level.botpostcombat = &bot_void;
+  if(!isdefined(level.botpostcombat)) {
+    level.botpostcombat = & bot_void;
   }
-  if(!isDefined(level.botidle)) {
-    level.botidle = &bot_void;
+  if(!isdefined(level.botidle)) {
+    level.botidle = & bot_void;
   }
-  if(!isDefined(level.botthreatdead)) {
-    level.botthreatdead = &bot_combat::clear_threat;
+  if(!isdefined(level.botthreatdead)) {
+    level.botthreatdead = & bot_combat::clear_threat;
   }
-  if(!isDefined(level.botthreatengage)) {
-    level.botthreatengage = &bot_combat::engage_threat;
+  if(!isdefined(level.botthreatengage)) {
+    level.botthreatengage = & bot_combat::engage_threat;
   }
-  if(!isDefined(level.botupdatethreatgoal)) {
-    level.botupdatethreatgoal = &bot_combat::update_threat_goal;
+  if(!isdefined(level.botupdatethreatgoal)) {
+    level.botupdatethreatgoal = & bot_combat::update_threat_goal;
   }
-  if(!isDefined(level.botthreatlost)) {
-    level.botthreatlost = &bot_combat::clear_threat;
+  if(!isdefined(level.botthreatlost)) {
+    level.botthreatlost = & bot_combat::clear_threat;
   }
-  if(!isDefined(level.botgetthreats)) {
-    level.botgetthreats = &bot_combat::get_bot_threats;
+  if(!isdefined(level.botgetthreats)) {
+    level.botgetthreats = & bot_combat::get_bot_threats;
   }
-  if(!isDefined(level.botignorethreat)) {
-    level.botignorethreat = &bot_combat::ignore_non_sentient;
+  if(!isdefined(level.botignorethreat)) {
+    level.botignorethreat = & bot_combat::ignore_non_sentient;
   }
   setdvar("bot_maxMantleHeight", 200);
   level thread bot_devgui_think();
@@ -94,18 +94,18 @@ function bot_unhandled() {
 }
 
 function add_bots(count, team) {
-  for(i = 0; i < count; i++) {
+  for (i = 0; i < count; i++) {
     add_bot(team);
   }
 }
 
 function add_bot(team) {
   botent = addtestclient();
-  if(!isDefined(botent)) {
+  if(!isdefined(botent)) {
     return undefined;
   }
   botent botsetrandomcharactercustomization();
-  if(isDefined(level.disableclassselection) && level.disableclassselection) {
+  if(isdefined(level.disableclassselection) && level.disableclassselection) {
     botent.pers["class"] = level.defaultclass;
     botent.curclass = level.defaultclass;
   }
@@ -121,11 +121,11 @@ function remove_bots(count, team) {
     if(!player istestclient()) {
       continue;
     }
-    if(isDefined(team) && player.team != team) {
+    if(isdefined(team) && player.team != team) {
       continue;
     }
     remove_bot(player);
-    if(isDefined(count)) {
+    if(isdefined(count)) {
       count--;
       if(count <= 0) {
         break;
@@ -157,9 +157,9 @@ function on_player_connect() {
     return;
   }
   self endon("disconnect");
-  self.bot = spawnStruct();
-  self.bot.threat = spawnStruct();
-  self.bot.damage = spawnStruct();
+  self.bot = spawnstruct();
+  self.bot.threat = spawnstruct();
+  self.bot.damage = spawnstruct();
   self.pers["isBot"] = 1;
   if(level.teambased) {
     self notify("menuresponse", game["menu_team"], self.team);
@@ -196,7 +196,7 @@ function on_player_killed() {
 function bot_think_loop() {
   self endon("death");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self bot_think();
     wait(level.botsettings.thinkinterval);
   }
@@ -227,7 +227,7 @@ function update_swim() {
     return;
   }
   if(self isplayerunderwater()) {
-    if(!isDefined(self.bot.resurfacetime)) {
+    if(!isdefined(self.bot.resurfacetime)) {
       self.bot.resurfacetime = gettime() + level.botsettings.swimtime;
     }
   } else {
@@ -241,7 +241,7 @@ function update_swim() {
     self press_swim_down();
     return;
   }
-  if(isDefined(self.bot.resurfacetime) && self.bot.resurfacetime <= gettime()) {
+  if(isdefined(self.bot.resurfacetime) && self.bot.resurfacetime <= gettime()) {
     press_swim_up();
     return;
   }
@@ -254,7 +254,7 @@ function update_swim() {
     self press_swim_down();
     vertdist = swimheight - 45;
   }
-  if(isDefined(vertdist)) {
+  if(isdefined(vertdist)) {
     intervaldist = level.botsettings.swimverticalspeed * level.botsettings.thinkinterval;
     if(intervaldist > vertdist) {
       self wait_release_swim_buttons((level.botsettings.thinkinterval * vertdist) / intervaldist);
@@ -272,34 +272,34 @@ function wait_release_swim_buttons(waittime) {
 
 function init_bot_settings() {
   level.botsettings = [[level.getbotsettings]]();
-  setdvar("bot_AllowMelee", (isDefined(level.botsettings.allowmelee) ? level.botsettings.allowmelee : 0));
-  setdvar("bot_AllowGrenades", (isDefined(level.botsettings.allowgrenades) ? level.botsettings.allowgrenades : 0));
-  setdvar("bot_AllowKillstreaks", (isDefined(level.botsettings.allowkillstreaks) ? level.botsettings.allowkillstreaks : 0));
-  setdvar("bot_AllowHeroGadgets", (isDefined(level.botsettings.allowherogadgets) ? level.botsettings.allowherogadgets : 0));
-  setdvar("bot_Fov", (isDefined(level.botsettings.fov) ? level.botsettings.fov : 0));
-  setdvar("bot_FovAds", (isDefined(level.botsettings.fovads) ? level.botsettings.fovads : 0));
+  setdvar("bot_AllowMelee", (isdefined(level.botsettings.allowmelee) ? level.botsettings.allowmelee : 0));
+  setdvar("bot_AllowGrenades", (isdefined(level.botsettings.allowgrenades) ? level.botsettings.allowgrenades : 0));
+  setdvar("bot_AllowKillstreaks", (isdefined(level.botsettings.allowkillstreaks) ? level.botsettings.allowkillstreaks : 0));
+  setdvar("bot_AllowHeroGadgets", (isdefined(level.botsettings.allowherogadgets) ? level.botsettings.allowherogadgets : 0));
+  setdvar("bot_Fov", (isdefined(level.botsettings.fov) ? level.botsettings.fov : 0));
+  setdvar("bot_FovAds", (isdefined(level.botsettings.fovads) ? level.botsettings.fovads : 0));
   setdvar("bot_PitchSensitivity", level.botsettings.pitchsensitivity);
   setdvar("bot_YawSensitivity", level.botsettings.yawsensitivity);
-  setdvar("bot_PitchSpeed", (isDefined(level.botsettings.pitchspeed) ? level.botsettings.pitchspeed : 0));
-  setdvar("bot_PitchSpeedAds", (isDefined(level.botsettings.pitchspeedads) ? level.botsettings.pitchspeedads : 0));
-  setdvar("bot_YawSpeed", (isDefined(level.botsettings.yawspeed) ? level.botsettings.yawspeed : 0));
-  setdvar("bot_YawSpeedAds", (isDefined(level.botsettings.yawspeedads) ? level.botsettings.yawspeedads : 0));
-  setdvar("pitchAccelerationTime", (isDefined(level.botsettings.pitchaccelerationtime) ? level.botsettings.pitchaccelerationtime : 0));
-  setdvar("yawAccelerationTime", (isDefined(level.botsettings.yawaccelerationtime) ? level.botsettings.yawaccelerationtime : 0));
-  setdvar("pitchDecelerationThreshold", (isDefined(level.botsettings.pitchdecelerationthreshold) ? level.botsettings.pitchdecelerationthreshold : 0));
-  setdvar("yawDecelerationThreshold", (isDefined(level.botsettings.yawdecelerationthreshold) ? level.botsettings.yawdecelerationthreshold : 0));
-  meleerange = getdvarint("player_meleeRangeDefault") * (isDefined(level.botsettings.meleerangemultiplier) ? level.botsettings.meleerangemultiplier : 0);
+  setdvar("bot_PitchSpeed", (isdefined(level.botsettings.pitchspeed) ? level.botsettings.pitchspeed : 0));
+  setdvar("bot_PitchSpeedAds", (isdefined(level.botsettings.pitchspeedads) ? level.botsettings.pitchspeedads : 0));
+  setdvar("bot_YawSpeed", (isdefined(level.botsettings.yawspeed) ? level.botsettings.yawspeed : 0));
+  setdvar("bot_YawSpeedAds", (isdefined(level.botsettings.yawspeedads) ? level.botsettings.yawspeedads : 0));
+  setdvar("pitchAccelerationTime", (isdefined(level.botsettings.pitchaccelerationtime) ? level.botsettings.pitchaccelerationtime : 0));
+  setdvar("yawAccelerationTime", (isdefined(level.botsettings.yawaccelerationtime) ? level.botsettings.yawaccelerationtime : 0));
+  setdvar("pitchDecelerationThreshold", (isdefined(level.botsettings.pitchdecelerationthreshold) ? level.botsettings.pitchdecelerationthreshold : 0));
+  setdvar("yawDecelerationThreshold", (isdefined(level.botsettings.yawdecelerationthreshold) ? level.botsettings.yawdecelerationthreshold : 0));
+  meleerange = getdvarint("player_meleeRangeDefault") * (isdefined(level.botsettings.meleerangemultiplier) ? level.botsettings.meleerangemultiplier : 0);
   level.botsettings.meleerange = int(meleerange);
   level.botsettings.meleerangesq = meleerange * meleerange;
   level.botsettings.threatradiusminsq = level.botsettings.threatradiusmin * level.botsettings.threatradiusmin;
   level.botsettings.threatradiusmaxsq = level.botsettings.threatradiusmax * level.botsettings.threatradiusmax;
-  lethaldistancemin = (isDefined(level.botsettings.lethaldistancemin) ? level.botsettings.lethaldistancemin : 0);
+  lethaldistancemin = (isdefined(level.botsettings.lethaldistancemin) ? level.botsettings.lethaldistancemin : 0);
   level.botsettings.lethaldistanceminsq = lethaldistancemin * lethaldistancemin;
-  lethaldistancemax = (isDefined(level.botsettings.lethaldistancemax) ? level.botsettings.lethaldistancemax : 1024);
+  lethaldistancemax = (isdefined(level.botsettings.lethaldistancemax) ? level.botsettings.lethaldistancemax : 1024);
   level.botsettings.lethaldistancemaxsq = lethaldistancemax * lethaldistancemax;
-  tacticaldistancemin = (isDefined(level.botsettings.tacticaldistancemin) ? level.botsettings.tacticaldistancemin : 0);
+  tacticaldistancemin = (isdefined(level.botsettings.tacticaldistancemin) ? level.botsettings.tacticaldistancemin : 0);
   level.botsettings.tacticaldistanceminsq = tacticaldistancemin * tacticaldistancemin;
-  tacticaldistancemax = (isDefined(level.botsettings.tacticaldistancemax) ? level.botsettings.tacticaldistancemax : 1024);
+  tacticaldistancemax = (isdefined(level.botsettings.tacticaldistancemax) ? level.botsettings.tacticaldistancemax : 1024);
   level.botsettings.tacticaldistancemaxsq = tacticaldistancemax * tacticaldistancemax;
   level.botsettings.swimverticalspeed = getdvarfloat("player_swimVerticalSpeedMax");
   level.botsettings.swimtime = getdvarfloat("player_swimTime", 5) * 1000;
@@ -318,7 +318,7 @@ function end_sprint_to_goal() {
 }
 
 function sprint_think() {
-  if(isDefined(self.bot.sprinttogoal) && self.bot.sprinttogoal) {
+  if(isdefined(self.bot.sprinttogoal) && self.bot.sprinttogoal) {
     if(self botgoalreached()) {
       self end_sprint_to_goal();
       return;
@@ -341,15 +341,15 @@ function point_in_goal(point) {
 
 function path_to_trigger(trigger, radius) {
   if(trigger.classname == "trigger_use" || trigger.classname == "trigger_use_touch") {
-    if(!isDefined(radius)) {
+    if(!isdefined(radius)) {
       radius = get_trigger_radius(trigger);
     }
     randomangle = (0, randomint(360), 0);
-    randomvec = anglesToForward(randomangle);
+    randomvec = anglestoforward(randomangle);
     point = trigger.origin + (randomvec * radius);
     self botsetgoal(point);
   }
-  if(!isDefined(radius)) {
+  if(!isdefined(radius)) {
     radius = 0;
   }
   self botsetgoal(trigger.origin, int(radius));
@@ -373,11 +373,11 @@ function path_to_point_in_trigger(trigger) {
   best_point = undefined;
   foreach(point in queryresult.data) {
     point.score = randomfloatrange(0, 100);
-    if(!isDefined(best_point) || point.score > best_point.score) {
+    if(!isdefined(best_point) || point.score > best_point.score) {
       best_point = point;
     }
   }
-  if(isDefined(best_point)) {
+  if(isdefined(best_point)) {
     self botsetgoal(best_point.origin, 24);
     return;
   }
@@ -409,7 +409,7 @@ function check_stuck() {
   }
   velocity = self getvelocity();
   if(velocity[0] == 0 && velocity[1] == 0 && (velocity[2] == 0 || self isplayerswimming())) {
-    if(!isDefined(self.bot.stuckcycles)) {
+    if(!isdefined(self.bot.stuckcycles)) {
       self.bot.stuckcycles = 0;
     }
     self.bot.stuckcycles++;
@@ -439,11 +439,11 @@ function check_stuck_position() {
     return;
   }
   maxdistsq = undefined;
-  for(i = 0; i < self.bot.positionhistory.size; i++) {
+  for (i = 0; i < self.bot.positionhistory.size; i++) {
     if(getdvarint("", 0)) {
       line(self.bot.positionhistory[i], self.bot.positionhistory[i] + vectorscale((0, 0, 1), 72), (0, 1, 0), 1, 0, 10);
     }
-    for(j = i + 1; j < self.bot.positionhistory.size; j++) {
+    for (j = i + 1; j < self.bot.positionhistory.size; j++) {
       distsq = distancesquared(self.bot.positionhistory[i], self.bot.positionhistory[j]);
       if(distsq > 16384) {
         return;
@@ -463,7 +463,7 @@ function stuck_resolution() {
   self clear_stuck();
   self bottakemanualcontrol();
   escapeangle = (self getangles()[1] + 180) + (randomintrange(-60, 60));
-  escapedir = anglesToForward((0, escapeangle, 0));
+  escapedir = anglestoforward((0, escapeangle, 0));
   self botsetmoveangle(escapedir);
   self botsetmovemagnitude(1);
   wait(1.5);
@@ -485,7 +485,7 @@ function camp() {
 function wait_bot_path_failed_loop() {
   self endon("death");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("bot_path_failed", reason);
     if(getdvarint("", 0)) {
       goalposition = self botgetgoalposition();
@@ -501,7 +501,7 @@ function wait_bot_path_failed_loop() {
 function wait_bot_goal_reached_loop() {
   self endon("death");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("bot_goal_reached", reason);
     self clear_stuck();
   }
@@ -512,7 +512,7 @@ function stow_gun_gadget() {
   if(self getweaponammoclip(currentweapon) || !currentweapon.isheroweapon) {
     return;
   }
-  if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
+  if(isdefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
     self switchtoweapon(self.lastdroppableweapon);
   }
 }
@@ -545,14 +545,14 @@ function get_ready_gun_gadget() {
 }
 
 function is_gun_gadget(weapon) {
-  if(!isDefined(weapon) || weapon == level.weaponnone || !weapon.isheroweapon) {
+  if(!isdefined(weapon) || weapon == level.weaponnone || !weapon.isheroweapon) {
     return 0;
   }
   return weapon.isbulletweapon || weapon.isprojectileweapon || weapon.islauncher || weapon.isgasweapon;
 }
 
 function activate_hero_gadget(weapon) {
-  if(!isDefined(weapon) || weapon == level.weaponnone || !weapon.isgadget) {
+  if(!isdefined(weapon) || weapon == level.weaponnone || !weapon.isgadget) {
     return;
   }
   if(is_gun_gadget(weapon)) {
@@ -605,8 +605,8 @@ function follow_coop_players() {
   } else {
     player = host;
   }
-  if(isDefined(player)) {
-    fwd = anglesToForward(player.angles);
+  if(isdefined(player)) {
+    fwd = anglestoforward(player.angles);
     botdir = self.origin - player.origin;
     if(vectordot(botdir, fwd) < 0) {
       self thread lead_player(player, 150);
@@ -620,7 +620,7 @@ function lead_player(player, followmin) {
   dotmin = 0.85;
   dotmax = 0.92;
   queryresult = positionquery_source_navigation(player.origin, radiusmin, radiusmax, 150, 32, self);
-  fwd = anglesToForward(player.angles);
+  fwd = anglestoforward(player.angles);
   point = player.origin + (fwd * 72);
   self botsetgoal(point, 42);
   self sprint_to_goal();
@@ -634,18 +634,18 @@ function follow_entity(entity, radiusmin = 24, radiusmax = radiusmin + 1) {
   }
 }
 
-function navmesh_wander(fwd, radiusmin = (isDefined(level.botsettings.wandermin) ? level.botsettings.wandermin : 0), radiusmax, spacing, fwddot) {
-  if(!isDefined(radiusmax)) {
-    radiusmax = (isDefined(level.botsettings.wandermax) ? level.botsettings.wandermax : 0);
+function navmesh_wander(fwd, radiusmin = (isdefined(level.botsettings.wandermin) ? level.botsettings.wandermin : 0), radiusmax, spacing, fwddot) {
+  if(!isdefined(radiusmax)) {
+    radiusmax = (isdefined(level.botsettings.wandermax) ? level.botsettings.wandermax : 0);
   }
-  if(!isDefined(spacing)) {
-    spacing = (isDefined(level.botsettings.wanderspacing) ? level.botsettings.wanderspacing : 0);
+  if(!isdefined(spacing)) {
+    spacing = (isdefined(level.botsettings.wanderspacing) ? level.botsettings.wanderspacing : 0);
   }
-  if(!isDefined(fwddot)) {
-    fwddot = (isDefined(level.botsettings.wanderfwddot) ? level.botsettings.wanderfwddot : 0);
+  if(!isdefined(fwddot)) {
+    fwddot = (isdefined(level.botsettings.wanderfwddot) ? level.botsettings.wanderfwddot : 0);
   }
-  if(!isDefined(fwd)) {
-    fwd = anglesToForward(self.angles);
+  if(!isdefined(fwd)) {
+    fwd = anglestoforward(self.angles);
   }
   fwd = vectornormalize((fwd[0], fwd[1], 0));
   queryresult = positionquery_source_navigation(self.origin, radiusmin, radiusmax, 150, spacing, self);
@@ -665,11 +665,11 @@ function navmesh_wander(fwd, radiusmin = (isDefined(level.botsettings.wandermin)
         point.score = point.score + randomfloatrange(0, 15);
       }
     }
-    if(!isDefined(best_point) || point.score > best_point.score) {
+    if(!isdefined(best_point) || point.score > best_point.score) {
       best_point = point;
     }
   }
-  if(isDefined(best_point)) {
+  if(isdefined(best_point)) {
     self botsetgoal(best_point.origin, radiusmin);
   } else {
     circle(self.origin, radiusmin, (1, 0, 0), 0, 1, 1200);
@@ -698,7 +698,7 @@ function approach_point(point, radiusmin = 0, radiusmax = 1500, spacing = 128) {
     return;
   }
   queryresult = positionquery_source_navigation(point, radiusmin, radiusmax, 150, spacing, self);
-  fwd = anglesToForward(self.angles);
+  fwd = anglestoforward(self.angles);
   fwd = (fwd[0], fwd[1], 0);
   origin = (self.origin[0], self.origin[1], 0);
   best_point = undefined;
@@ -712,11 +712,11 @@ function approach_point(point, radiusmin = 0, radiusmax = 1500, spacing = 128) {
     } else {
       point.score = point.score + randomfloatrange(0, 15);
     }
-    if(!isDefined(best_point) || point.score > best_point.score) {
+    if(!isdefined(best_point) || point.score > best_point.score) {
       best_point = point;
     }
   }
-  if(isDefined(best_point)) {
+  if(isdefined(best_point)) {
     self botsetgoal(best_point.origin, 24);
   }
 }
@@ -757,15 +757,15 @@ function watch_bot_corner(startcornerdist, cornerdist) {
   self endon("death");
   self endon("bot_combat_target");
   level endon("game_ended");
-  if(!isDefined(startcornerdist)) {
+  if(!isdefined(startcornerdist)) {
     startcornerdist = 64;
   }
-  if(!isDefined(cornerdist)) {
+  if(!isdefined(cornerdist)) {
     cornerdist = 128;
   }
   startcornerdistsq = cornerdist * cornerdist;
   cornerdistsq = cornerdist * cornerdist;
-  while(true) {
+  while (true) {
     self waittill("bot_corner", centerpoint, enterpoint, leavepoint, angle, nextenterpoint);
     if(self bot_combat::has_threat()) {
       continue;
@@ -783,7 +783,7 @@ function wait_corner_radius(startcornerdistsq, centerpoint, enterpoint, leavepoi
   self endon("bot_goal_reached");
   self endon("bot_combat_target");
   level endon("game_ended");
-  while(distance2dsquared(self.origin, enterpoint) > startcornerdistsq) {
+  while (distance2dsquared(self.origin, enterpoint) > startcornerdistsq) {
     if(self bot_combat::has_threat()) {
       return;
     }
@@ -813,8 +813,8 @@ function get_host_player() {
 
 function fwd_dot(point) {
   angles = self getplayerangles();
-  fwd = anglesToForward(angles);
-  delta = point - self getEye();
+  fwd = anglestoforward(angles);
+  delta = point - self geteye();
   delta = vectornormalize(delta);
   dot = vectordot(fwd, delta);
   return dot;
@@ -849,7 +849,7 @@ function add_bot_at_eye_trace(team) {
   direction = vectortoangles(direction_vec);
   yaw = direction[1];
   bot = add_bot(team);
-  if(isDefined(bot)) {
+  if(isdefined(bot)) {
     bot waittill("spawned_player");
     bot setorigin(trace[""]);
     bot setplayerangles((bot.angles[0], yaw, bot.angles[2]));
@@ -859,17 +859,17 @@ function add_bot_at_eye_trace(team) {
 
 function eye_trace() {
   direction = self getplayerangles();
-  direction_vec = anglesToForward(direction);
-  eye = self getEye();
+  direction_vec = anglestoforward(direction);
+  eye = self geteye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  return bulletTrace(eye, eye + direction_vec, 0, undefined);
+  return bullettrace(eye, eye + direction_vec, 0, undefined);
 }
 
 function devgui_debug_route() {
   iprintln("");
   points = self get_nav_points();
-  if(!isDefined(points) || points.size == 0) {
+  if(!isdefined(points) || points.size == 0) {
     iprintln("");
     return;
   }
@@ -888,17 +888,17 @@ function get_nav_points() {
   iprintln("");
   iprintln("");
   points = [];
-  while(true) {
+  while (true) {
     wait(0.05);
     point = self eye_trace()[""];
-    if(isDefined(point)) {
+    if(isdefined(point)) {
       point = getclosestpointonnavmesh(point, 128);
-      if(isDefined(point)) {
+      if(isdefined(point)) {
         sphere(point, 16, (0, 0, 1), 0.25, 0, 16, 1);
       }
     }
     if(self buttonpressed("")) {
-      if(isDefined(point) && (points.size == 0 || (distance2d(point, points[points.size - 1])) > 16)) {
+      if(isdefined(point) && (points.size == 0 || (distance2d(point, points[points.size - 1])) > 16)) {
         points[points.size] = point;
       }
     } else {
@@ -909,7 +909,7 @@ function get_nav_points() {
         return undefined;
       }
     }
-    for(i = 0; i < points.size; i++) {
+    for (i = 0; i < points.size; i++) {
       sphere(points[i], 16, (0, 1, 0), 0.25, 0, 16, 1);
     }
   }
@@ -920,7 +920,7 @@ function debug_patrol(points) {
   self endon("death");
   self endon("debug_patrol");
   i = 0;
-  while(true) {
+  while (true) {
     self botsetgoal(points[i], 24);
     self sprint_to_goal();
     self waittill("bot_goal_reached");
@@ -929,10 +929,10 @@ function debug_patrol(points) {
 }
 
 function bot_devgui_think() {
-  while(true) {
+  while (true) {
     wait(0.25);
     cmd = getdvarstring("", "");
-    if(!isDefined(level.botdevguicmd) || ![
+    if(!isdefined(level.botdevguicmd) || ![
         [level.botdevguicmd]
       ](cmd)) {
       host = util::gethostplayer();
@@ -983,10 +983,10 @@ function coop_bot_devgui_cmd(cmd) {
 }
 
 function debug_star(origin, seconds, color) {
-  if(!isDefined(seconds)) {
+  if(!isdefined(seconds)) {
     seconds = 1;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 0, 0);
   }
   frames = int(20 * seconds);

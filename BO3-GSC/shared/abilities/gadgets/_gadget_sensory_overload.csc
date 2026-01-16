@@ -15,7 +15,7 @@
 #namespace _gadget_sensory_overload;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_sensory_overload", &__init__, undefined, undefined);
+  system::register("gadget_sensory_overload", & __init__, undefined, undefined);
 }
 
 function __init__() {}

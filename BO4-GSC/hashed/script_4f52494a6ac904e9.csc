@@ -8,6 +8,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace namespace_1d05befd;
 
 autoexec __init__system__() {
@@ -24,7 +25,7 @@ __init__() {
 }
 
 private function_65089f84(localclientnum) {
-  if(isDefined(self.subarchetype) && self.subarchetype == # "zombie_electric") {}
+  if(isDefined(self.subarchetype) && self.subarchetype == #"zombie_electric") {}
 }
 
 private zombie_electric_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

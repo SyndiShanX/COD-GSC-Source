@@ -41,4 +41,5 @@ main() {
 
   level._effect["pistol_muzzleflash"] = loadfx("muzzleflashes/pistolflash");
   level._effect["m79_muzzleflash"] = loadfx("muzzleflashes/m203_flshview");
+
 }

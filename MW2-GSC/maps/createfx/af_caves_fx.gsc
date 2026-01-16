@@ -6055,4 +6055,5 @@ main() {
   ent.v["exploder"] = "100";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "fire_metal_medium";
+
 }

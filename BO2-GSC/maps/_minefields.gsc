@@ -6,24 +6,21 @@
 #include maps\_utility;
 
 main() {
-  minefields = getEntArray("minefield", "targetname");
+  minefields = getentarray("minefield", "targetname");
 
-  if(minefields.size > 0) {
+  if(minefields.size > 0)
     level._effect["mine_explosion"] = loadfx("explosions/fx_grenadeExp_dirt");
-  }
 
-  for(i = 0; i < minefields.size; i++) {
+  for(i = 0; i < minefields.size; i++)
     minefields[i] thread minefield_think();
-  }
 }
 
 minefield_think() {
   while(true) {
     self waittill("trigger", other);
 
-    if(issentient(other)) {
+    if(issentient(other))
       other thread minefield_kill(self);
-    }
   }
 }
 
@@ -32,7 +29,7 @@ minefield_kill(trigger) {
     return;
   }
   self.minefield = 1;
-  self playSound("minefield_click");
+  self playsound("minefield_click");
   wait 0.5;
   wait(randomfloat(0.2));
 
@@ -42,12 +39,12 @@ minefield_kill(trigger) {
   if(self istouching(trigger)) {
     if(isplayer(self)) {
       level notify("mine death");
-      self playSound("explo_mine");
+      self playsound("explo_mine");
     } else
       level thread maps\_utility::play_sound_in_space("explo_mine", self.origin);
 
     origin = self getorigin();
-    playFX(level._effect["mine_explosion"], origin);
+    playfx(level._effect["mine_explosion"], origin);
     playsoundatposition("mortar_dirt", origin);
     self enablehealthshield(0);
     radiusdamage(origin, 300, 2000, 50);

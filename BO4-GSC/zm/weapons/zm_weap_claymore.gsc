@@ -24,6 +24,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_claymore;
 
 autoexec __init__system__() {
@@ -33,8 +34,8 @@ autoexec __init__system__() {
 __init__() {
   weaponobjects::function_e6400478(#"claymore", &createclaymorewatcher, 0);
   weaponobjects::function_e6400478(#"claymore_extra", &createclaymorewatcher, 0);
-  deployable::register_deployable(getweapon(#"claymore"), &function_4ed6fbd5, undefined, undefined, # "hash_1f65f161716fb57b");
-  deployable::register_deployable(getweapon(#"claymore_extra"), &function_4ed6fbd5, undefined, undefined, # "hash_1f65f161716fb57b");
+  deployable::register_deployable(getweapon(#"claymore"), &function_4ed6fbd5, undefined, undefined, #"hash_1f65f161716fb57b");
+  deployable::register_deployable(getweapon(#"claymore_extra"), &function_4ed6fbd5, undefined, undefined, #"hash_1f65f161716fb57b");
   zm::function_84d343d(#"claymore", &function_84072422);
   zm::function_84d343d(#"claymore_extra", &function_84072422);
   level.var_817314af = 0;
@@ -56,7 +57,7 @@ function_84072422(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 createclaymorewatcher(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -163,7 +164,7 @@ claymore_detonation(e_planter) {
       continue;
     }
 
-    if(isDefined(ent.pers) && isDefined(ent.pers[# "team"]) && ent.pers[# "team"] == self.team) {
+    if(isDefined(ent.pers) && isDefined(ent.pers[#"team"]) && ent.pers[#"team"] == self.team) {
       continue;
     }
 
@@ -221,7 +222,7 @@ private delete_mines_on_death(player, ent) {
 }
 
 function_cbb2f05b(watcher) {
-  self endon(#"death", # "hacked", # "detonating");
+  self endon(#"death", #"hacked", #"detonating");
   self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
@@ -265,7 +266,7 @@ function_cbb2f05b(watcher) {
     self.waschained = 1;
   }
 
-  if(isDefined(idflags) && idflags & 8) {
+  if(isDefined(idflags) && idflags&8) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 

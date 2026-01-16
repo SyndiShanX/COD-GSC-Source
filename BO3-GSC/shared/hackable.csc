@@ -12,11 +12,11 @@
 #namespace hackable;
 
 function autoexec __init__sytem__() {
-  system::register("hackable", &init, undefined, undefined);
+  system::register("hackable", & init, undefined, undefined);
 }
 
 function init() {
-  callback::on_localclient_connect(&on_player_connect);
+  callback::on_localclient_connect( & on_player_connect);
 }
 
 function on_player_connect(localclientnum) {
@@ -25,11 +25,11 @@ function on_player_connect(localclientnum) {
 
 function set_hacked_ent(local_client_num, ent) {
   if(!ent === self.hacked_ent) {
-    if(isDefined(self.hacked_ent)) {
+    if(isdefined(self.hacked_ent)) {
       self.hacked_ent duplicate_render::change_dr_flags(local_client_num, undefined, "being_hacked");
     }
     self.hacked_ent = ent;
-    if(isDefined(self.hacked_ent)) {
+    if(isdefined(self.hacked_ent)) {
       self.hacked_ent duplicate_render::change_dr_flags(local_client_num, "being_hacked", undefined);
     }
   }

@@ -49,9 +49,8 @@ main() {
   var_0.sounds = [];
   var_0.sounds["takeoff"] = "anml_bird_startle_flyaway";
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive[var_0.interactive_type] = var_0;
   thread maps\interactive_models\_birds::birds();

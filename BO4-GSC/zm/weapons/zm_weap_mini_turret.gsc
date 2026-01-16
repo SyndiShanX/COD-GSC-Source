@@ -24,10 +24,11 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_equipment;
 #include scripts\zm_common\zm_utility;
+
 #namespace mini_turret;
 
 autoexec __init__system__() {
-  system::register(#"mini_turret", &__init__, undefined, # "zm_weapons");
+  system::register(#"mini_turret", &__init__, undefined, #"zm_weapons");
 }
 
 __init__() {
@@ -35,7 +36,7 @@ __init__() {
   vehicle::add_main_callback("veh_mini_turret_zm", &initturret);
   weaponobjects::function_e6400478(#"mini_turret", &function_c41ea657, undefined);
   callback::on_revived(&on_player_revived);
-  deployable::register_deployable(getweapon(#"mini_turret"), &function_2994c93, undefined, undefined, # "hash_2afe1c9235ce67ab");
+  deployable::register_deployable(getweapon(#"mini_turret"), &function_2994c93, undefined, undefined, #"hash_2afe1c9235ce67ab");
   zm::function_84d343d(#"mini_turret", &function_58c4db23);
   zm::function_84d343d(#"gun_mini_turret", &function_58c4db23);
 }
@@ -89,7 +90,7 @@ function_c41ea657(watcher) {
 }
 
 function_3be2d17f(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self endon(#"death");
   slot = player gadgetgetslot(self.weapon);
@@ -110,7 +111,7 @@ function_3be2d17f(watcher, player) {
   }
 
   self waittill(#"stationary");
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self deployable::function_dd266e08(player);
   self.origin += (0, 0, 2);
   player onplaceturret(self);
@@ -163,7 +164,7 @@ function_24910d60() {
 function_7f9eb7f() {
   owner = self.owner;
   owner endon(#"disconnect");
-  waitresult = self waittill(#"death", # "death_started");
+  waitresult = self waittill(#"death", #"death_started");
 
   if(!isDefined(self)) {
     arrayremovevalue(owner.mini_turrets, undefined);
@@ -215,7 +216,7 @@ onplaceturret(turret) {
       turret.vehicle makesentient();
     }
 
-    player stats::function_e24eec31(getweapon(#"mini_turret"), # "used", 1);
+    player stats::function_e24eec31(getweapon(#"mini_turret"), #"used", 1);
   }
 
   turret.vehicle playLoopSound(#"hash_69240c6db92da5bf", 0.25);
@@ -294,7 +295,7 @@ ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, ps
   if(isDefined(turretvehicle)) {
     turretvehicle ghost();
     turretvehicle notsolid();
-    turretvehicle waittilltimeout(2, # "remote_weapon_end", # "death");
+    turretvehicle waittilltimeout(2, #"remote_weapon_end", #"death");
   }
 
   if(isDefined(turretvehicle)) {
@@ -323,8 +324,8 @@ onshutdown(turret) {
 
 turret_watch_owner_events() {
   self notify(#"turret_watch_owner_events_singleton");
-  self endon(#"death", # "turret_watch_owner_events_singleton");
-  self.owner waittill(#"joined_team", # "disconnect", # "joined_spectators", # "changed_specialist");
+  self endon(#"death", #"turret_watch_owner_events_singleton");
+  self.owner waittill(#"joined_team", #"disconnect", #"joined_spectators", #"changed_specialist");
   self makevehicleusable();
   self.controlled = 0;
 
@@ -376,13 +377,13 @@ target_death_watch(turretvehicle) {
   target = self;
   target endon(#"abort_death_watch");
   turretvehicle endon(#"death");
-  target waittill(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  target waittill(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   turretvehicle clearenemy();
 }
 
 turretscanning() {
   veh = self;
-  veh endon(#"death", # "death_started", # "end_turret_scanning");
+  veh endon(#"death", #"death_started", #"end_turret_scanning");
   veh.turret_target = undefined;
   veh.do_not_clear_targets_during_think = 1;
   wait 0.8;
@@ -421,7 +422,7 @@ turretscanning() {
 
           if(0.34 > 0 && !var_afae28e0) {
             pause_time = 0.34 > 0.34 ? 0.34 : randomfloatrange(0.34, 0.34);
-            waitresult = veh.turret_target waittilltimeout(pause_time, # "death", # "disconnect");
+            waitresult = veh.turret_target waittilltimeout(pause_time, #"death", #"disconnect");
             var_afae28e0 = waitresult._notify === "death";
           }
         } else {
@@ -480,7 +481,7 @@ turretscanning() {
       veh.scanpos = "left";
     }
 
-    veh waittilltimeout(3.5, # "enemy");
+    veh waittilltimeout(3.5, #"enemy");
   }
 }
 
@@ -530,8 +531,8 @@ function_31477582() {
 
     trace = physicstrace(self.origin + (0, 0, 0), self.origin + (0, 0, -10), (-3, -3, -1), (3, 3, 1), self.turret, 1 | 16);
 
-    if(trace[# "fraction"] > 0) {
-      new_origin = trace[# "position"];
+    if(trace[#"fraction"] > 0) {
+      new_origin = trace[#"position"];
       self.origin = (new_origin[0], new_origin[1], self.origin[2] - min(max_delta, self.origin[2] - new_origin[2]));
       max_delta += var_463c449d;
       waitframe(1);

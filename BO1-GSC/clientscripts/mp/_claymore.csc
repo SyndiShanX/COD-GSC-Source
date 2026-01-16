@@ -12,12 +12,12 @@ init(localClientNum) {
 spawned(localClientNum) {
   self endon("entityshutdown");
   self waittill_dobj(localClientNum);
-  while(true) {
+  while (true) {
     if(isDefined(self.stunned) && self.stunned) {
       wait(0.1);
       continue;
     }
-    self.claymoreLaserFXId = playFXOnTag(localClientNum, level._effect["fx_claymore_laser"], self, "tag_fx");
+    self.claymoreLaserFXId = PlayFXOnTag(localClientNum, level._effect["fx_claymore_laser"], self, "tag_fx");
     self waittill("stunned");
     stopfx(localClientNum, self.claymoreLaserFXId);
   }

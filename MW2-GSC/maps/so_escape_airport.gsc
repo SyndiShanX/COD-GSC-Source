@@ -11,9 +11,9 @@
 
 /*------------------- tweakables -------------------*/
 
-CONST_regular_obj = &"SO_ESCAPE_AIRPORT_OBJ_REGULAR";
-CONST_hardened_obj = &"SO_ESCAPE_AIRPORT_OBJ_HARDENED";
-CONST_veteran_obj = &"SO_ESCAPE_AIRPORT_OBJ_VETERAN";
+CONST_regular_obj = & "SO_ESCAPE_AIRPORT_OBJ_REGULAR";
+CONST_hardened_obj = & "SO_ESCAPE_AIRPORT_OBJ_HARDENED";
+CONST_veteran_obj = & "SO_ESCAPE_AIRPORT_OBJ_VETERAN";
 
 /*------------------- tweakables -------------------*/
 
@@ -59,13 +59,13 @@ disable_elevators() {
   right_door ConnectPaths();
 
   // Just remove the triggers in the elevator
-  housings = getEntArray("elevator_housing", "targetname");
+  housings = GetEntArray("elevator_housing", "targetname");
 
   foreach(housing in housings) {
     housing disable_elevator_internal();
   }
 
-  buttons = getEntArray("elevator_call", "targetname");
+  buttons = GetEntArray("elevator_call", "targetname");
   foreach(button in buttons) {
     button.origin = (0, 0, -50000);
   }
@@ -75,8 +75,8 @@ disable_elevators() {
 disable_elevator_internal() {
   ent = self;
   num = 0;
-  while(1) {
-    if(!isDefined(ent.target)) {
+  while (1) {
+    if(!IsDefined(ent.target)) {
       return;
     }
 
@@ -94,9 +94,8 @@ disable_elevator_internal() {
 start_so_escape() {
   so_escape_airport_init();
 
-  foreach(enemy_group, delete_num in level.enemy_remove_trigs) {
-    thread past_enemy_remove(enemy_group, delete_num);
-  }
+  foreach(enemy_group, delete_num in level.enemy_remove_trigs)
+  thread past_enemy_remove(enemy_group, delete_num);
 
   music_loop("so_escape_airport_music", 148);
 
@@ -131,7 +130,7 @@ so_escape_airport_init() {
   thread spawn_smoke("smoke_escalators_first", "enemy_waiting_area_above_movein_trig");
   thread spawn_smoke("smoke_escalators_ending", "enemy_security_area_final_movein_trig", 0.0);
   thread crash_elevator();
-  array_thread(getEntArray("glass_delete", "targetname"), ::delete_glass);
+  array_thread(GetEntArray("glass_delete", "targetname"), ::delete_glass);
 
   // enemy_move_to_struct( move trigger, seek_goalradius, stay, duration of stay before seeking )
 
@@ -162,7 +161,7 @@ so_escape_airport_init() {
 
   hide_destroyed_parts();
 
-  assert(isDefined(level.gameskill));
+  assert(isdefined(level.gameskill));
   switch (level.gameSkill) {
     case 0: // Easy
     case 1:

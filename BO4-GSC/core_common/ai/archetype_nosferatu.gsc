@@ -22,6 +22,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace archetypenosferatu;
 
 class class_1546f28e {
@@ -125,7 +126,7 @@ private function_b75dd595(entity) {
     return false;
   }
 
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 
@@ -209,8 +210,8 @@ private function_2ad18645(notifyhash) {
 }
 
 private function_fb3fdf43(entity, latch_enemy) {
-  entity endoncallback(&function_2ad18645, # "death");
-  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
+  entity endoncallback(&function_2ad18645, #"death");
+  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
 
   if(isDefined(self) && isDefined(entity) && isDefined(latch_enemy)) {
     self scene::play(#"aib_vign_cust_mnsn_nfrtu_attack_latch_01", array(entity, latch_enemy));
@@ -227,9 +228,9 @@ private function_fb3fdf43(entity, latch_enemy) {
 }
 
 private function_20a76c21(entity) {
-  entity endoncallback(&function_2ad18645, # "death");
+  entity endoncallback(&function_2ad18645, #"death");
   latch_enemy = entity.enemy;
-  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
+  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
 
   if(isDefined(latch_enemy)) {
     latch_enemy thread function_db62d88a();
@@ -239,7 +240,7 @@ private function_20a76c21(entity) {
   alignnode.origin = entity.enemy.origin;
   alignnode.angles = entity.enemy.angles;
   alignnode thread function_fb3fdf43(entity, latch_enemy);
-  alignnode waittilltimeout(7, # "hash_7a32b2af2eef5415");
+  alignnode waittilltimeout(7, #"hash_7a32b2af2eef5415");
 
   if(isDefined(alignnode)) {
     alignnode struct::delete();
@@ -261,7 +262,7 @@ private function_20a76c21(entity) {
 }
 
 private function_db62d88a() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self val::set(#"nosferatu_latch", "ignoreme", 1);
   w_current = self getcurrentweapon();
 
@@ -354,7 +355,7 @@ private function_b5047448(entity) {
 }
 
 private function_e9819a23(entity) {
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 
@@ -687,16 +688,16 @@ function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     var_65cbfb52 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos);
     var_201660e6 = tracepassedonnavmesh(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos, entity getpathfindingradius());
     traceresult = bulletTrace(entity.origin, entity.meleeinfo.adjustedendpos + (0, 0, 30), 0, entity, 0, 0, entity.enemy);
-    isvisible = traceresult[# "fraction"] == 1;
+    isvisible = traceresult[#"fraction"] == 1;
     var_535d098c = 0;
 
-    if(isDefined(traceresult[# "hitloc"]) && traceresult[# "hitloc"] == "riotshield") {
+    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
       var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
       entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }
 
-    if(traceresult[# "fraction"] < 0.9) {
+    if(traceresult[#"fraction"] < 0.9) {
       record3dtext("<dev string:x5f>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x53>");
 
       entity.meleeinfo.var_425c4c8b = 0;

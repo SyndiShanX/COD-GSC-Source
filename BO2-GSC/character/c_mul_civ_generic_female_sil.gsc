@@ -4,7 +4,7 @@
 *******************************************************/
 
 main() {
-  self setModel("c_mul_jinan_gogo_body");
+  self setmodel("c_mul_jinan_gogo_body");
   self.headmodel = "c_mul_jinan_gogo_head1";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

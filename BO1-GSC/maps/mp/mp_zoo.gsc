@@ -20,26 +20,26 @@ main() {
   }
   maps\mp\gametypes\_teamset_urbanspecops::level_init();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_MAPNAME_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAPNAME_E";
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
-  gate1 = spawn("script_model", (1040, 1495, 56));
+  gate1 = Spawn("script_model", (1040, 1495, 56));
   if(isDefined(gate1)) {
     gate1.angles = (0, 270, 0);
-    gate1 setModel("p_zoo_bend_gate_mid");
+    gate1 SetModel("p_zoo_bend_gate_mid");
   }
-  gate2 = spawn("script_model", (1104, 1495, 56));
+  gate2 = Spawn("script_model", (1104, 1495, 56));
   if(isDefined(gate2)) {
     gate2.angles = (0, 270, 0);
-    gate2 setModel("p_zoo_bend_gate_mid");
+    gate2 SetModel("p_zoo_bend_gate_mid");
   }
   spawncollision("collision_wall_256x256x10", "collider", (876, 2034, 169), (0, 90, 0));
   spawncollision("collision_geo_32x32x128", "collider", (49, 832, 66), (0, 0, 0));

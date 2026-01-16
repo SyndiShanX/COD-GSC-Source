@@ -82,7 +82,7 @@ function init() {
   level.teamindex["neutral"] = 0;
   level.teamindex["allies"] = 1;
   level.teamindex["axis"] = 2;
-  for(teamindex = 3; teamindex <= teamcount; teamindex++) {
+  for (teamindex = 3; teamindex <= teamcount; teamindex++) {
     level.teams["team" + teamindex] = "team" + teamindex;
     level.teamindex["team" + teamindex] = teamindex;
   }
@@ -97,7 +97,7 @@ function init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = &"MP_SWITCHING_SIDES_CAPS";
+  level.halftimesubcaption = & "MP_SWITCHING_SIDES_CAPS";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -122,16 +122,16 @@ function init() {
     setdvar("player_clipSizeMultiplier", 2);
   }
   precache_mp_leaderboards();
-  if(!isDefined(game["tiebreaker"])) {
+  if(!isdefined(game["tiebreaker"])) {
     game["tiebreaker"] = 0;
   }
   globallogic_audio::registerdialoggroup("item_destroyed", 1);
   globallogic_audio::registerdialoggroup("introboost", 1);
   globallogic_audio::registerdialoggroup("status", 1);
   level.playersdrivingvehiclesbecomeinvulnerable = 1;
-  level.figure_out_attacker = &globallogic_player::figureoutattacker;
-  level.figure_out_friendly_fire = &globallogic_player::figureoutfriendlyfire;
-  level.get_base_weapon_param = &weapon_utils::getbaseweaponparam;
+  level.figure_out_attacker = & globallogic_player::figureoutattacker;
+  level.figure_out_friendly_fire = & globallogic_player::figureoutfriendlyfire;
+  level.get_base_weapon_param = & weapon_utils::getbaseweaponparam;
 }
 
 function registerdvars() {
@@ -157,54 +157,54 @@ function registerdvars() {
 function blank(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {}
 
 function setupcallbacks() {
-  level.spawnplayer = &globallogic_spawn::spawnplayer;
-  level.spawnplayerprediction = &globallogic_spawn::spawnplayerprediction;
-  level.spawnclient = &globallogic_spawn::spawnclient;
-  level.spawnspectator = &globallogic_spawn::spawnspectator;
-  level.spawnintermission = &globallogic_spawn::spawnintermission;
-  level.scoreongiveplayerscore = &globallogic_score::giveplayerscore;
-  level.onplayerscore = &globallogic_score::default_onplayerscore;
-  level.onteamscore = &globallogic_score::default_onteamscore;
-  level.wavespawntimer = &wavespawntimer;
-  level.spawnmessage = &globallogic_spawn::default_spawnmessage;
-  level.onspawnplayer = &blank;
-  level.onspawnplayerunified = &blank;
-  level.onspawnspectator = &globallogic_defaults::default_onspawnspectator;
-  level.onspawnintermission = &globallogic_defaults::default_onspawnintermission;
-  level.onrespawndelay = &blank;
-  level.onforfeit = &globallogic_defaults::default_onforfeit;
-  level.ontimelimit = &globallogic_defaults::default_ontimelimit;
-  level.onscorelimit = &globallogic_defaults::default_onscorelimit;
-  level.onalivecountchange = &globallogic_defaults::default_onalivecountchange;
-  level.ondeadevent = &globallogic_defaults::default_ondeadevent;
-  level.ononeleftevent = &globallogic_defaults::default_ononeleftevent;
-  level.giveteamscore = &globallogic_score::giveteamscore;
+  level.spawnplayer = & globallogic_spawn::spawnplayer;
+  level.spawnplayerprediction = & globallogic_spawn::spawnplayerprediction;
+  level.spawnclient = & globallogic_spawn::spawnclient;
+  level.spawnspectator = & globallogic_spawn::spawnspectator;
+  level.spawnintermission = & globallogic_spawn::spawnintermission;
+  level.scoreongiveplayerscore = & globallogic_score::giveplayerscore;
+  level.onplayerscore = & globallogic_score::default_onplayerscore;
+  level.onteamscore = & globallogic_score::default_onteamscore;
+  level.wavespawntimer = & wavespawntimer;
+  level.spawnmessage = & globallogic_spawn::default_spawnmessage;
+  level.onspawnplayer = & blank;
+  level.onspawnplayerunified = & blank;
+  level.onspawnspectator = & globallogic_defaults::default_onspawnspectator;
+  level.onspawnintermission = & globallogic_defaults::default_onspawnintermission;
+  level.onrespawndelay = & blank;
+  level.onforfeit = & globallogic_defaults::default_onforfeit;
+  level.ontimelimit = & globallogic_defaults::default_ontimelimit;
+  level.onscorelimit = & globallogic_defaults::default_onscorelimit;
+  level.onalivecountchange = & globallogic_defaults::default_onalivecountchange;
+  level.ondeadevent = & globallogic_defaults::default_ondeadevent;
+  level.ononeleftevent = & globallogic_defaults::default_ononeleftevent;
+  level.giveteamscore = & globallogic_score::giveteamscore;
   level.onlastteamaliveevent = undefined;
-  level.gettimepassed = &globallogic_utils::gettimepassed;
-  level.gettimelimit = &globallogic_defaults::default_gettimelimit;
-  level.getteamkillpenalty = &blank;
-  level.getteamkillscore = &blank;
-  level.iskillboosting = &globallogic_score::default_iskillboosting;
-  level._setteamscore = &globallogic_score::_setteamscore;
-  level._setplayerscore = &globallogic_score::_setplayerscore;
-  level._getteamscore = &globallogic_score::_getteamscore;
-  level._getplayerscore = &globallogic_score::_getplayerscore;
-  level.onprecachegametype = &blank;
-  level.onstartgametype = &blank;
-  level.onplayerconnect = &blank;
-  level.onplayerdisconnect = &blank;
-  level.onplayerdamage = &blank;
-  level.onplayerkilled = &blank;
+  level.gettimepassed = & globallogic_utils::gettimepassed;
+  level.gettimelimit = & globallogic_defaults::default_gettimelimit;
+  level.getteamkillpenalty = & blank;
+  level.getteamkillscore = & blank;
+  level.iskillboosting = & globallogic_score::default_iskillboosting;
+  level._setteamscore = & globallogic_score::_setteamscore;
+  level._setplayerscore = & globallogic_score::_setplayerscore;
+  level._getteamscore = & globallogic_score::_getteamscore;
+  level._getplayerscore = & globallogic_score::_getplayerscore;
+  level.onprecachegametype = & blank;
+  level.onstartgametype = & blank;
+  level.onplayerconnect = & blank;
+  level.onplayerdisconnect = & blank;
+  level.onplayerdamage = & blank;
+  level.onplayerkilled = & blank;
   level.onplayerkilledextraunthreadedcbs = [];
-  level.onteamoutcomenotify = &hud_message::teamoutcomenotify;
-  level.onoutcomenotify = &hud_message::outcomenotify;
-  level.onteamwageroutcomenotify = &hud_message::teamwageroutcomenotify;
-  level.onwageroutcomenotify = &hud_message::wageroutcomenotify;
-  level.setmatchscorehudelemforteam = &hud_message::setmatchscorehudelemforteam;
-  level.onendgame = &blank;
-  level.onroundendgame = &globallogic_defaults::default_onroundendgame;
-  level.onmedalawarded = &blank;
-  level.dogmanagerongetdogs = &blank;
+  level.onteamoutcomenotify = & hud_message::teamoutcomenotify;
+  level.onoutcomenotify = & hud_message::outcomenotify;
+  level.onteamwageroutcomenotify = & hud_message::teamwageroutcomenotify;
+  level.onwageroutcomenotify = & hud_message::wageroutcomenotify;
+  level.setmatchscorehudelemforteam = & hud_message::setmatchscorehudelemforteam;
+  level.onendgame = & blank;
+  level.onroundendgame = & globallogic_defaults::default_onroundendgame;
+  level.onmedalawarded = & blank;
+  level.dogmanagerongetdogs = & blank;
   globallogic_ui::setupcallbacks();
 }
 
@@ -250,7 +250,7 @@ function determineteamwinnerbygamestat(gamestat) {
   teamkeys = getarraykeys(level.teams);
   winner = teamkeys[0];
   previous_winner_score = game[gamestat][winner];
-  for(teamindex = 1; teamindex < teamkeys.size; teamindex++) {
+  for (teamindex = 1; teamindex < teamkeys.size; teamindex++) {
     winner = compareteambygamestat(gamestat, winner, teamkeys[teamindex], previous_winner_score);
     if(winner != "tie") {
       previous_winner_score = game[gamestat][winner];
@@ -286,7 +286,7 @@ function determineteamwinnerbyteamscore() {
   teamkeys = getarraykeys(level.teams);
   winner = teamkeys[0];
   previous_winner_score = [[level._getteamscore]](winner);
-  for(teamindex = 1; teamindex < teamkeys.size; teamindex++) {
+  for (teamindex = 1; teamindex < teamkeys.size; teamindex++) {
     winner = compareteambyteamscore(winner, teamkeys[teamindex], previous_winner_score);
     if(winner != "tie") {
       previous_winner_score = [
@@ -307,7 +307,7 @@ function forceend(hostsucks = 0) {
     globallogic_utils::logteamwinstring("host ended game", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -316,12 +316,12 @@ function forceend(hostsucks = 0) {
   level.forcedend = 1;
   level.hostforcedend = 1;
   if(hostsucks) {
-    endstring = &"MP_HOST_SUCKS";
+    endstring = & "MP_HOST_SUCKS";
   } else {
     if(level.splitscreen) {
-      endstring = &"MP_ENDED_GAME";
+      endstring = & "MP_ENDED_GAME";
     } else {
-      endstring = &"MP_HOST_ENDED_GAME";
+      endstring = & "MP_HOST_ENDED_GAME";
     }
   }
   setmatchflag("disableIngameMenu", 1);
@@ -339,7 +339,7 @@ function killserverpc() {
     globallogic_utils::logteamwinstring("host ended game", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -348,7 +348,7 @@ function killserverpc() {
   level.forcedend = 1;
   level.hostforcedend = 1;
   level.killserver = 1;
-  endstring = &"MP_HOST_ENDED_GAME";
+  endstring = & "MP_HOST_ENDED_GAME";
   println("");
   thread endgame(winner, endstring);
 }
@@ -423,7 +423,7 @@ function dodeadeventupdates() {
       ]("all");
       return true;
     }
-    if(isDefined(level.onlastteamaliveevent)) {
+    if(isdefined(level.onlastteamaliveevent)) {
       if(alldeadteamcount() == (level.teams.size - 1)) {
         foreach(team in level.teams) {
           if(!isteamalldead(team)) {
@@ -445,7 +445,9 @@ function dodeadeventupdates() {
       }
     }
   } else if(totalalivecount() == 0 && totalplayerlives() == 0 && level.maxplayercount > 1) {
-    [[level.ondeadevent]]("all");
+    [
+      [level.ondeadevent]
+    ]("all");
     return true;
   }
   return false;
@@ -459,12 +461,16 @@ function doonelefteventupdates() {
   if(level.teambased) {
     foreach(team in level.teams) {
       if(isonlyoneleftaliveonteam(team)) {
-        [[level.ononeleftevent]](team);
+        [
+          [level.ononeleftevent]
+        ](team);
         return true;
       }
     }
   } else if(totalalivecount() == 1 && totalplayerlives() == 1 && level.maxplayercount > 1) {
-    [[level.ononeleftevent]]("all");
+    [
+      [level.ononeleftevent]
+    ]("all");
     return true;
   }
   return false;
@@ -530,7 +536,7 @@ function matchstarttimer() {
   matchstarttimer.hidewheninmenu = 1;
   counttime = int(level.prematchperiod);
   if(counttime >= 2) {
-    while(counttime > 0 && !level.gameended) {
+    while (counttime > 0 && !level.gameended) {
       matchstarttimer setvalue(counttime);
       if(counttime == 2) {
         visionsetnaked(getdvarstring("mapname"), 3);
@@ -559,7 +565,7 @@ function notifyteamwavespawn(team, time) {
 
 function wavespawntimer() {
   level endon("game_ended");
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     time = gettime();
     foreach(team in level.teams) {
       notifyteamwavespawn(team, time);
@@ -573,7 +579,7 @@ function hostidledout() {
   if(getdvarint("") == 1 || getdvarint("") == 1) {
     return false;
   }
-  if(isDefined(hostplayer) && !hostplayer.hasspawned && !isDefined(hostplayer.selectedclass)) {
+  if(isdefined(hostplayer) && !hostplayer.hasspawned && !isdefined(hostplayer.selectedclass)) {
     return true;
   }
   return false;
@@ -596,9 +602,9 @@ function displayroundend(winner, endreasontext) {
     }
     setmatchflag("cg_drawSpectatorMessages", 0);
     players = level.players;
-    for(index = 0; index < players.size; index++) {
+    for (index = 0; index < players.size; index++) {
       player = players[index];
-      if(!isDefined(player.pers["team"])) {
+      if(!isdefined(player.pers["team"])) {
         player[[level.spawnintermission]](1);
         player closeingamemenu();
         continue;
@@ -633,7 +639,7 @@ function displayroundend(winner, endreasontext) {
 function displayroundswitch(winner, endreasontext) {
   switchtype = level.halftimetype;
   if(switchtype == "halftime") {
-    if(isDefined(level.nextroundisovertime) && level.nextroundisovertime) {
+    if(isdefined(level.nextroundisovertime) && level.nextroundisovertime) {
       switchtype = "overtime";
     } else {
       if(level.roundlimit) {
@@ -658,9 +664,9 @@ function displayroundswitch(winner, endreasontext) {
   leaderdialog = globallogic_audio::getroundswitchdialog(switchtype);
   setmatchtalkflag("EveryoneHearsEveryone", 1);
   players = level.players;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
-    if(!isDefined(player.pers["team"])) {
+    if(!isdefined(player.pers["team"])) {
       player[[level.spawnintermission]](1);
       player closeingamemenu();
       continue;
@@ -686,9 +692,9 @@ function displaygameend(winner, endreasontext) {
     demo::gameresultbookmark("game_result", level.teamindex[winner], level.teamindex["neutral"]);
   }
   players = level.players;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
-    if(!isDefined(player.pers["team"])) {
+    if(!isdefined(player.pers["team"])) {
       player[[level.spawnintermission]](1);
       player closeingamemenu();
       continue;
@@ -704,7 +710,7 @@ function displaygameend(winner, endreasontext) {
         player thread[[level.onteamoutcomenotify]](winner, 0, endreasontext);
       } else {
         player thread[[level.onoutcomenotify]](winner, 0, endreasontext);
-        if(isDefined(winner) && player == winner) {
+        if(isdefined(winner) && player == winner) {
           player globallogic_audio::set_music_on_player("VICTORY");
         } else if(!level.splitscreen) {
           player globallogic_audio::set_music_on_player("LOSE");
@@ -717,7 +723,7 @@ function displaygameend(winner, endreasontext) {
   if(level.teambased) {
     thread globallogic_audio::announcegamewinner(winner, level.postroundtime / 2);
     players = level.players;
-    for(index = 0; index < players.size; index++) {
+    for (index = 0; index < players.size; index++) {
       player = players[index];
       team = player.pers["team"];
       if(level.splitscreen) {
@@ -756,16 +762,16 @@ function getendreasontext() {
   }
   if(level.forcedend) {
     if(level.hostforcedend) {
-      return &"MP_HOST_ENDED_GAME";
+      return & "MP_HOST_ENDED_GAME";
     }
-    return &"MP_ENDED_GAME";
+    return & "MP_ENDED_GAME";
   }
   return game["strings"]["time_limit_reached"];
 }
 
 function resetoutcomeforallplayers() {
   players = level.players;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
     player notify("reset_outcome");
   }
@@ -779,8 +785,8 @@ function startnextround(winner, endreasontext) {
       if(checkroundswitch()) {
         displayroundswitch(winner, endreasontext);
       }
-      if(isDefined(level.nextroundisovertime) && level.nextroundisovertime) {
-        if(!isDefined(game["overtime_round"])) {
+      if(isdefined(level.nextroundisovertime) && level.nextroundisovertime) {
+        if(!isdefined(game["overtime_round"])) {
           game["overtime_round"] = 1;
         } else {
           game["overtime_round"]++;
@@ -818,10 +824,10 @@ function gamehistoryplayerquit() {
   }
   teamscoreratio = 0;
   self gamehistoryfinishmatch(3, 0, 0, 0, 0, teamscoreratio);
-  if(isDefined(self.pers["matchesPlayedStatsTracked"])) {
+  if(isdefined(self.pers["matchesPlayedStatsTracked"])) {
     gamemode = util::getcurrentgamemode();
     self incrementmatchcompletionstat(gamemode, "played", "quit");
-    if(isDefined(self.pers["matchesHostedStatsTracked"])) {
+    if(isdefined(self.pers["matchesHostedStatsTracked"])) {
       self incrementmatchcompletionstat(gamemode, "hosted", "quit");
       self.pers["matchesHostedStatsTracked"] = undefined;
     }
@@ -833,7 +839,7 @@ function gamehistoryplayerquit() {
 
 function recordzmendgamecomscoreevent(winner) {
   players = level.players;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     globallogic_player::recordzmendgamecomscoreeventforplayer(players[index], winner);
   }
 }
@@ -842,10 +848,12 @@ function endgame(winner, endreasontext) {
   if(game["state"] == "postgame" || level.gameended) {
     return;
   }
-  if(isDefined(level.onendgame)) {
-    [[level.onendgame]](winner);
+  if(isdefined(level.onendgame)) {
+    [
+      [level.onendgame]
+    ](winner);
   }
-  if(!isDefined(level.disableoutrovisionset) || level.disableoutrovisionset == 0) {
+  if(!isdefined(level.disableoutrovisionset) || level.disableoutrovisionset == 0) {
     if(sessionmodeiszombiesgame() && level.forcedend) {
       visionsetnaked("zombie_last_stand", 2);
     } else {
@@ -862,14 +870,14 @@ function endgame(winner, endreasontext) {
   level notify("game_ended");
   level.allowbattlechatter["bc"] = 0;
   globallogic_audio::flushdialog();
-  if(!isDefined(game["overtime_round"]) || util::waslastround()) {
+  if(!isdefined(game["overtime_round"]) || util::waslastround()) {
     game["roundsplayed"]++;
     game["roundwinner"][game["roundsplayed"]] = winner;
     if(level.teambased) {
       game["roundswon"][winner]++;
     }
   }
-  if(isDefined(winner) && isDefined(level.teams[winner])) {
+  if(isdefined(winner) && isdefined(level.teams[winner])) {
     level.finalkillcam_winner = winner;
   } else {
     level.finalkillcam_winner = "none";
@@ -891,14 +899,14 @@ function endgame(winner, endreasontext) {
         recordgameresult(winner);
       }
     } else {
-      if(!isDefined(winner)) {
+      if(!isdefined(winner)) {
         recordgameresult("draw");
       } else {
         recordgameresult(winner.team);
       }
     }
   }
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
     player globallogic_player::freezeplayerforroundend();
     player thread roundenddof(4);
@@ -906,7 +914,7 @@ function endgame(winner, endreasontext) {
     player weapons::updateweapontimings(newtime);
     player bbplayermatchend(gamelength, endreasontext, bbgameover);
     if(level.rankedmatch || level.wagermatch || level.leaguematch && !player issplitscreen()) {
-      if(isDefined(player.setpromotion)) {
+      if(isdefined(player.setpromotion)) {
         player setdstat("AfterActionReportStats", "lobbyPopup", "promotion");
         continue;
       }
@@ -921,7 +929,7 @@ function endgame(winner, endreasontext) {
     return;
   }
   if(!util::isoneround()) {
-    if(isDefined(level.onroundendgame)) {
+    if(isdefined(level.onroundendgame)) {
       winner = [
         [level.onroundendgame]
       ](winner);
@@ -931,7 +939,7 @@ function endgame(winner, endreasontext) {
   skillupdate(winner, level.teambased);
   recordleaguewinner(winner);
   thread challenges::gameend(winner);
-  if(isDefined(winner) && (!isDefined(level.skipgameend) || !level.skipgameend)) {
+  if(isdefined(winner) && (!isdefined(level.skipgameend) || !level.skipgameend)) {
     displaygameend(winner, endreasontext);
   }
   if(util::isoneround()) {
@@ -941,7 +949,7 @@ function endgame(winner, endreasontext) {
   setmatchtalkflag("EveryoneHearsEveryone", 1);
   stopdemorecording();
   players = level.players;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
     recordplayerstats(player, "presentAtEnd", 1);
     player closeingamemenu();
@@ -952,7 +960,7 @@ function endgame(winner, endreasontext) {
   }
   level notify("sfade");
   print("");
-  if(!isDefined(level.skipgameend) || !level.skipgameend) {
+  if(!isdefined(level.skipgameend) || !level.skipgameend) {
     wait(5);
   }
   exitlevel(0);
@@ -961,7 +969,7 @@ function endgame(winner, endreasontext) {
 function bbplayermatchend(gamelength, endreasonstring, gameover) {
   playerrank = getplacementforplayer(self);
   totaltimeplayed = 0;
-  if(isDefined(self.timeplayed) && isDefined(self.timeplayed["total"])) {
+  if(isdefined(self.timeplayed) && isdefined(self.timeplayed["total"])) {
     totaltimeplayed = self.timeplayed["total"];
     if(totaltimeplayed > gamelength) {
       totaltimeplayed = gamelength;
@@ -972,11 +980,11 @@ function bbplayermatchend(gamelength, endreasonstring, gameover) {
 
 function roundendwait(defaultdelay, matchbonus) {
   notifiesdone = 0;
-  while(!notifiesdone) {
+  while (!notifiesdone) {
     players = level.players;
     notifiesdone = 1;
-    for(index = 0; index < players.size; index++) {
-      if(!isDefined(players[index].doingnotify) || !players[index].doingnotify) {
+    for (index = 0; index < players.size; index++) {
+      if(!isdefined(players[index].doingnotify) || !players[index].doingnotify) {
         continue;
       }
       notifiesdone = 0;
@@ -992,11 +1000,11 @@ function roundendwait(defaultdelay, matchbonus) {
   level notify("give_match_bonus");
   wait(defaultdelay / 2);
   notifiesdone = 0;
-  while(!notifiesdone) {
+  while (!notifiesdone) {
     players = level.players;
     notifiesdone = 1;
-    for(index = 0; index < players.size; index++) {
-      if(!isDefined(players[index].doingnotify) || !players[index].doingnotify) {
+    for (index = 0; index < players.size; index++) {
+      if(!isdefined(players[index].doingnotify) || !players[index].doingnotify) {
         continue;
       }
       notifiesdone = 0;
@@ -1011,7 +1019,7 @@ function roundenddof(time) {
 }
 
 function checktimelimit() {
-  if(isDefined(level.timelimitoverride) && level.timelimitoverride) {
+  if(isdefined(level.timelimitoverride) && level.timelimitoverride) {
     return;
   }
   if(game["state"] != "playing") {
@@ -1030,7 +1038,7 @@ function checktimelimit() {
     setgameendtime(0);
     return;
   }
-  if(!isDefined(level.starttime)) {
+  if(!isdefined(level.starttime)) {
     return;
   }
   timeleft = globallogic_utils::gettimeremaining();
@@ -1074,13 +1082,15 @@ function checkscorelimit() {
 
 function updategametypedvars() {
   level endon("game_ended");
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     roundlimit = math::clamp(getgametypesetting("roundLimit"), level.roundlimitmin, level.roundlimitmax);
     if(roundlimit != level.roundlimit) {
       level.roundlimit = roundlimit;
       level notify("update_roundlimit");
     }
-    timelimit = [[level.gettimelimit]]();
+    timelimit = [
+      [level.gettimelimit]
+    ]();
     if(timelimit != level.timelimit) {
       level.timelimit = timelimit;
       setdvar("ui_timelimit", level.timelimit);
@@ -1094,7 +1104,7 @@ function updategametypedvars() {
       level notify("update_scorelimit");
     }
     thread checkscorelimit();
-    if(isDefined(level.starttime)) {
+    if(isdefined(level.starttime)) {
       if(globallogic_utils::gettimeremaining() < 3000) {
         wait(0.1);
         continue;
@@ -1108,7 +1118,7 @@ function removedisconnectedplayerfromplacement() {
   offset = 0;
   numplayers = level.placement["all"].size;
   found = 0;
-  for(i = 0; i < numplayers; i++) {
+  for (i = 0; i < numplayers; i++) {
     if(level.placement["all"][i] == self) {
       found = 1;
     }
@@ -1127,7 +1137,7 @@ function removedisconnectedplayerfromplacement() {
     return;
   }
   numplayers = level.placement["all"].size;
-  for(i = 0; i < numplayers; i++) {
+  for (i = 0; i < numplayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -1139,15 +1149,15 @@ function updateplacement() {
   }
   level.placement["all"] = [];
   foreach(player in level.players) {
-    if(!level.teambased || isDefined(level.teams[player.team])) {
+    if(!level.teambased || isdefined(level.teams[player.team])) {
       level.placement["all"][level.placement["all"].size] = player;
     }
   }
   placementall = level.placement["all"];
-  for(i = 1; i < placementall.size; i++) {
+  for (i = 1; i < placementall.size; i++) {
     player = placementall[i];
     playerscore = player.score;
-    for(j = i - 1; j >= 0 && (playerscore > placementall[j].score || (playerscore == placementall[j].score && player.deaths < placementall[j].deaths)); j--) {
+    for (j = i - 1; j >= 0 && (playerscore > placementall[j].score || (playerscore == placementall[j].score && player.deaths < placementall[j].deaths)); j--) {
       placementall[j + 1] = placementall[j];
     }
     placementall[j + 1] = player;
@@ -1167,9 +1177,9 @@ function updateteamplacement() {
   }
   placementall = level.placement["all"];
   placementallsize = placementall.size;
-  for(i = 0; i < placementallsize; i++) {
+  for (i = 0; i < placementallsize; i++) {
     player = placementall[i];
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       team = player.pers["team"];
       placement[team][placement[team].size] = player;
     }
@@ -1183,7 +1193,7 @@ function getplacementforplayer(player) {
   updateplacement();
   playerrank = -1;
   placement = level.placement["all"];
-  for(placementindex = 0; placementindex < placement.size; placementindex++) {
+  for (placementindex = 0; placementindex < placement.size; placementindex++) {
     if(level.placement["all"][placementindex] == player) {
       playerrank = placementindex + 1;
       break;
@@ -1196,14 +1206,14 @@ function sortdeadplayers(team) {
   if(!level.playerqueuedrespawn) {
     return;
   }
-  for(i = 1; i < level.deadplayers[team].size; i++) {
+  for (i = 1; i < level.deadplayers[team].size; i++) {
     player = level.deadplayers[team][i];
-    for(j = i - 1; j >= 0 && player.deathtime < level.deadplayers[team][j].deathtime; j--) {
+    for (j = i - 1; j >= 0 && player.deathtime < level.deadplayers[team][j].deathtime; j--) {
       level.deadplayers[team][j + 1] = level.deadplayers[team][j];
     }
     level.deadplayers[team][j + 1] = player;
   }
-  for(i = 0; i < level.deadplayers[team].size; i++) {
+  for (i = 0; i < level.deadplayers[team].size; i++) {
     if(level.deadplayers[team][i].spawnqueueindex != i) {
       level.spawnqueuemodified[team] = 1;
     }
@@ -1228,7 +1238,7 @@ function totalplayerlives() {
 }
 
 function initteamvariables(team) {
-  if(!isDefined(level.alivecount)) {
+  if(!isdefined(level.alivecount)) {
     level.alivecount = [];
   }
   level.alivecount[team] = 0;
@@ -1267,15 +1277,15 @@ function updateteamstatus() {
   }
   level.activeplayers = [];
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isDefined(player) && level.splitscreen) {
+    if(!isdefined(player) && level.splitscreen) {
       continue;
     }
     team = player.team;
     if(team != "spectator") {
       level.playercount[team]++;
-      if(isDefined(player.pers["isBot"])) {
+      if(isdefined(player.pers["isBot"])) {
         level.botscount[team]++;
       }
       if(player.sessionstate == "playing") {
@@ -1310,7 +1320,7 @@ function updateteamstatus() {
 }
 
 function checkteamscorelimitsoon(team) {
-  assert(isDefined(team));
+  assert(isdefined(team));
   if(level.scorelimit <= 0) {
     return;
   }
@@ -1376,7 +1386,7 @@ function prematchperiod() {
     wait(0.05);
   }
   level.inprematchperiod = 0;
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     level.players[index] util::freeze_player_controls(0);
     level.players[index] enableweapons();
   }
@@ -1387,8 +1397,10 @@ function prematchperiod() {
 
 function graceperiod() {
   level endon("game_ended");
-  if(isDefined(level.graceperiodfunc)) {
-    [[level.graceperiodfunc]]();
+  if(isdefined(level.graceperiodfunc)) {
+    [
+      [level.graceperiodfunc]
+    ]();
   } else {
     wait(level.graceperiod);
   }
@@ -1400,7 +1412,7 @@ function graceperiod() {
   }
   if(level.numlives) {
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
       if(!player.hasspawned && player.sessionteam != "spectator" && !isalive(player)) {
         player.statusicon = "hud_status_dead";
@@ -1432,55 +1444,57 @@ function callback_startgametype() {
   level.intermission = 0;
   setmatchflag("cg_drawSpectatorMessages", 1);
   setmatchflag("game_ended", 0);
-  if(!isDefined(game["gamestarted"])) {
-    if(!isDefined(game["allies"])) {
+  if(!isdefined(game["gamestarted"])) {
+    if(!isdefined(game["allies"])) {
       game["allies"] = "seals";
     }
-    if(!isDefined(game["axis"])) {
+    if(!isdefined(game["axis"])) {
       game["axis"] = "pmc";
     }
-    if(!isDefined(game["attackers"])) {
+    if(!isdefined(game["attackers"])) {
       game["attackers"] = "allies";
     }
-    if(!isDefined(game["defenders"])) {
+    if(!isdefined(game["defenders"])) {
       game["defenders"] = "axis";
     }
     assert(game[""] != game[""]);
     foreach(team in level.teams) {
-      if(!isDefined(game[team])) {
+      if(!isdefined(game[team])) {
         game[team] = "pmc";
       }
     }
-    if(!isDefined(game["state"])) {
+    if(!isdefined(game["state"])) {
       game["state"] = "playing";
     }
     setdvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
     if(level.teambased) {
-      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_spawn_ss"] = &"MP_WAITING_TO_SPAWN_SS";
-    game["strings"]["you_will_spawn"] = &"MP_YOU_WILL_RESPAWN";
-    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
-    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = &"MP_MATCH_TIE";
-    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
+    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_spawn_ss"] = & "MP_WAITING_TO_SPAWN_SS";
+    game["strings"]["you_will_spawn"] = & "MP_YOU_WILL_RESPAWN";
+    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
+    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = & "MP_MATCH_TIE";
+    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
     assertteamvariables();
-    [[level.onprecachegametype]]();
+    [
+      [level.onprecachegametype]
+    ]();
     game["gamestarted"] = 1;
     game["totalKills"] = 0;
     foreach(team in level.teams) {
@@ -1498,24 +1512,24 @@ function callback_startgametype() {
       game["icons"]["axis"] = "composite_emblem_team_axis";
     }
   }
-  if(!isDefined(game["timepassed"])) {
+  if(!isdefined(game["timepassed"])) {
     game["timepassed"] = 0;
   }
-  if(!isDefined(game["roundsplayed"])) {
+  if(!isdefined(game["roundsplayed"])) {
     game["roundsplayed"] = 0;
   }
   setroundsplayed(game["roundsplayed"]);
-  if(!isDefined(game["roundwinner"])) {
+  if(!isdefined(game["roundwinner"])) {
     game["roundwinner"] = [];
   }
-  if(!isDefined(game["roundswon"])) {
+  if(!isdefined(game["roundswon"])) {
     game["roundswon"] = [];
   }
-  if(!isDefined(game["roundswon"]["tie"])) {
+  if(!isdefined(game["roundswon"]["tie"])) {
     game["roundswon"]["tie"] = 0;
   }
   foreach(team in level.teams) {
-    if(!isDefined(game["roundswon"][team])) {
+    if(!isdefined(game["roundswon"][team])) {
       game["roundswon"][team] = 0;
     }
     level.teamspawnpoints[team] = [];
@@ -1530,7 +1544,7 @@ function callback_startgametype() {
   level.hardcoremode = getgametypesetting("hardcoreMode");
   if(level.hardcoremode) {
     print("");
-    if(!isDefined(level.friendlyfiredelaytime)) {
+    if(!isdefined(level.friendlyfiredelaytime)) {
       level.friendlyfiredelaytime = 0;
     }
   }
@@ -1568,7 +1582,7 @@ function callback_startgametype() {
   level.playerobjectiveheldrespawndelay = getgametypesetting("playerObjectiveHeldRespawnDelay");
   level.waverespawndelay = getgametypesetting("waveRespawnDelay");
   level.spectatetype = getgametypesetting("spectateType");
-  level.voip = spawnStruct();
+  level.voip = spawnstruct();
   level.voip.deadchatwithdead = getgametypesetting("voipDeadChatWithDead");
   level.voip.deadchatwithteam = getgametypesetting("voipDeadChatWithTeam");
   level.voip.deadhearallliving = getgametypesetting("voipDeadHearAllLiving");
@@ -1589,16 +1603,16 @@ function callback_startgametype() {
   level.maxplayercount = 0;
   level.activeplayers = [];
   level.allowannouncer = getgametypesetting("allowAnnouncer");
-  if(!isDefined(level.timelimit)) {
+  if(!isdefined(level.timelimit)) {
     util::registertimelimit(1, 1440);
   }
-  if(!isDefined(level.scorelimit)) {
+  if(!isdefined(level.scorelimit)) {
     util::registerscorelimit(1, 500);
   }
-  if(!isDefined(level.roundlimit)) {
+  if(!isdefined(level.roundlimit)) {
     util::registerroundlimit(0, 10);
   }
-  if(!isDefined(level.roundwinlimit)) {
+  if(!isdefined(level.roundwinlimit)) {
     util::registerroundwinlimit(0, 10);
   }
   wavedelay = level.waverespawndelay;
@@ -1654,7 +1668,7 @@ function callback_startgametype() {
 }
 
 function forcedebughostmigration() {
-  while(true) {
+  while (true) {
     hostmigration::waittillhostmigrationdone();
     wait(60);
     starthostmigration();
@@ -1676,15 +1690,17 @@ function registerfriendlyfiredelay(dvarstring, defaultvalue, minvalue, maxvalue)
 }
 
 function checkroundswitch() {
-  if(!isDefined(level.roundswitch) || !level.roundswitch) {
+  if(!isdefined(level.roundswitch) || !level.roundswitch) {
     return false;
   }
-  if(!isDefined(level.onroundswitch)) {
+  if(!isdefined(level.onroundswitch)) {
     return false;
   }
   assert(game[""] > 0);
   if((game["roundsplayed"] % level.roundswitch) == 0) {
-    [[level.onroundswitch]]();
+    [
+      [level.onroundswitch]
+    ]();
     return true;
   }
   return false;
@@ -1699,13 +1715,13 @@ function listenforgameend() {
 }
 
 function getkillstreaks(player) {
-  for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
+  for (killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
     killstreak[killstreaknum] = "killstreak_null";
   }
-  if(isplayer(player) && !level.oldschool && level.disablecac != 1 && (!isDefined(player.pers["isBot"]) && isDefined(player.killstreak))) {
+  if(isplayer(player) && !level.oldschool && level.disablecac != 1 && (!isdefined(player.pers["isBot"]) && isdefined(player.killstreak))) {
     currentkillstreak = 0;
-    for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
-      if(isDefined(player.killstreak[killstreaknum])) {
+    for (killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
+      if(isdefined(player.killstreak[killstreaknum])) {
         killstreak[currentkillstreak] = player.killstreak[killstreaknum];
         currentkillstreak++;
       }

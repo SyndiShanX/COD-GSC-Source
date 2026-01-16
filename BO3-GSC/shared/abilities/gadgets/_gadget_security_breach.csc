@@ -15,7 +15,7 @@
 #namespace _gadget_security_breach;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_security_breach", &__init__, undefined, undefined);
+  system::register("gadget_security_breach", & __init__, undefined, undefined);
 }
 
 function __init__() {}

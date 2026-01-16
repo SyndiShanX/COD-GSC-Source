@@ -76,13 +76,12 @@ watchrestartfx(localclientnum) {
 }
 
 spawn_solid_fx(localclientnum) {
-  if(self islocalclientdriver(localclientnum)) {
-    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
-  } else if(self friendnotfoe(localclientnum)) {
-    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
-  } else {
-    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
-  }
+  if(self islocalclientdriver(localclientnum))
+    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
+  else if(self friendnotfoe(localclientnum))
+    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
+  else
+    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
 
   self thread cleanupfx(localclientnum, fx_handle);
   return fx_handle;
@@ -97,21 +96,19 @@ blink_fx_and_sound(localclientnum, soundalias) {
   self endon("restart_fx");
   self endon("fx_death");
 
-  if(!isDefined(self.interval)) {
+  if(!isDefined(self.interval))
     self.interval = 1.0;
-  }
 
   while(true) {
-    self playSound(localclientnum, soundalias);
+    self playsound(localclientnum, soundalias);
     self spawn_solid_fx(localclientnum);
     serverwait(localclientnum, self.interval / 2);
     self notify("stopfx");
     serverwait(localclientnum, self.interval / 2);
     self.interval = self.interval / 1.17;
 
-    if(self.interval < 0.1) {
+    if(self.interval < 0.1)
       self.interval = 0.1;
-    }
   }
 }
 
@@ -140,21 +137,19 @@ loop_local_sound(localclientnum, alias, interval, fx) {
   level endon("demo_jump");
   level endon("player_switch");
 
-  if(!isDefined(self.interval)) {
+  if(!isDefined(self.interval))
     self.interval = interval;
-  }
 
   while(true) {
-    self playSound(localclientnum, alias);
+    self playsound(localclientnum, alias);
     self spawn_solid_fx(localclientnum);
     serverwait(localclientnum, self.interval / 2);
     self notify("stopfx");
     serverwait(localclientnum, self.interval / 2);
     self.interval = self.interval / 1.17;
 
-    if(self.interval < 0.1) {
+    if(self.interval < 0.1)
       self.interval = 0.1;
-    }
   }
 }
 
@@ -181,17 +176,15 @@ blink_light(localclientnum) {
   level endon("killcam_begin");
   self waittill("blink");
 
-  if(!isDefined(self.blinkstarttime)) {
+  if(!isDefined(self.blinkstarttime))
     self.blinkstarttime = level.servertime;
-  }
 
-  if(self islocalclientdriver(localclientnum)) {
+  if(self islocalclientdriver(localclientnum))
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_viewmodel_light"]);
-  } else if(self friendnotfoe(localclientnum)) {
+  else if(self friendnotfoe(localclientnum))
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_friendly_light"]);
-  } else {
+  else
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_enemy_light"]);
-  }
 }
 
 collisionhandler(localclientnum) {
@@ -205,11 +198,10 @@ collisionhandler(localclientnum) {
       player = getlocalplayer(driver_local_client);
 
       if(isDefined(player)) {
-        if(hit_intensity > 15) {
+        if(hit_intensity > 15)
           player playrumbleonentity(driver_local_client, "damage_heavy");
-        } else {
+        else
           player playrumbleonentity(driver_local_client, "damage_light");
-        }
       }
     }
   }
@@ -224,23 +216,21 @@ enginestutterhandler(localclientnum) {
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
 
-      if(isDefined(player)) {
+      if(isDefined(player))
         player playrumbleonentity(localclientnum, "rcbomb_engine_stutter");
-      }
     }
   }
 }
 
 getminimumflyheight() {
-  if(!isDefined(level.airsupportheightscale)) {
+  if(!isDefined(level.airsupportheightscale))
     level.airsupportheightscale = 1;
-  }
 
   airsupport_height = getstruct("air_support_height", "targetname");
 
-  if(isDefined(airsupport_height)) {
+  if(isDefined(airsupport_height))
     planeflyheight = airsupport_height.origin[2];
-  } else {
+  else {
     println("WARNING:Missing air_support_height entity in the map.Using default height.");
 
     planeflyheight = 850;
@@ -250,9 +240,8 @@ getminimumflyheight() {
       planeflyheight = planeflyheight * getdvarintdefault("scr_airsupportHeightScale", level.airsupportheightscale);
     }
 
-    if(isDefined(level.forceairsupportmapheight)) {
+    if(isDefined(level.forceairsupportmapheight))
       planeflyheight = planeflyheight + level.forceairsupportmapheight;
-    }
   }
 
   return planeflyheight;
@@ -262,11 +251,10 @@ qrdrone_watch_distance() {
   self endon("entityshutdown");
   qrdrone_height = getstruct("qrdrone_height", "targetname");
 
-  if(isDefined(qrdrone_height)) {
+  if(isDefined(qrdrone_height))
     self.maxheight = qrdrone_height.origin[2];
-  } else {
+  else
     self.maxheight = int(getminimumflyheight());
-  }
 
   self.maxdistance = 12800;
   level.mapcenter = getmapcenter();
@@ -289,7 +277,7 @@ qrdrone_watch_distance() {
           staticalpha = min(1, dist / 200);
         }
 
-        sid = soundent playLoopSound("veh_qrdrone_static_lp", 0.2);
+        sid = soundent playloopsound("veh_qrdrone_static_lp", 0.2);
         self clientscripts\mp\_vehicle::set_static_amount(staticalpha * 2);
         wait 0.05;
       }
@@ -304,9 +292,8 @@ qrdrone_watch_distance() {
 
 qrdrone_in_range() {
   if(self.origin[2] < self.maxheight && self.origin[2] > self.minheight) {
-    if(self isinsideheightlock()) {
+    if(self isinsideheightlock())
       return true;
-    }
   }
 
   return false;

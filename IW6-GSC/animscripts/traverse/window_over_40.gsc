@@ -4,11 +4,10 @@
 ***************************************************/
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     animscripts\traverse\shared::dog_wall_and_window_hop("window_40", 40);
-  } else {
+  else
     jump_through_window_human();
-  }
 }
 
 #using_animtree("generic_human");

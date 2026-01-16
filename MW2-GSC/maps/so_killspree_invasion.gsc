@@ -103,14 +103,12 @@ so_killspree_init() {
   Objective_Add(1, "current", level.challenge_objective);
 
   // Remove unwanted weapons
-  sentries = getEntArray("misc_turret", "classname");
-  foreach(sentry in sentries) {
-    sentry Delete();
-  }
-  stingers = getEntArray("weapon_stinger", "classname");
-  foreach(stinger in stingers) {
-    stinger Delete();
-  }
+  sentries = getentarray("misc_turret", "classname");
+  foreach(sentry in sentries)
+  sentry Delete();
+  stingers = getentarray("weapon_stinger", "classname");
+  foreach(stinger in stingers)
+  stinger Delete();
 
   // Initialize Scoring
   level.points_p1 = 0;
@@ -121,9 +119,8 @@ so_killspree_init() {
   level.points_counter_display = level.points_counter;
   level.points_base_flash = scale_value(10);
   level.points_combo_base = scale_value(0.25);
-  foreach(player in level.players) {
-    player.points_combo_unused = 0;
-  }
+  foreach(player in level.players)
+  player.points_combo_unused = 0;
 
   level.points_max = level.points_counter;
 
@@ -158,14 +155,12 @@ so_killspree_init() {
   ladder_clip Delete();
 
   // Remove ladders entirely
-  ladder_ents = getEntArray("inv_ladders", "script_noteworthy");
-  foreach(ent in ladder_ents) {
-    ent Delete();
-  }
-  ladder_ents = getEntArray("inv_ladders_pathblocker", "script_noteworthy");
-  foreach(ent in ladder_ents) {
-    ent disconnectpaths();
-  }
+  ladder_ents = getentarray("inv_ladders", "script_noteworthy");
+  foreach(ent in ladder_ents)
+  ent Delete();
+  ladder_ents = getentarray("inv_ladders_pathblocker", "script_noteworthy");
+  foreach(ent in ladder_ents)
+  ent disconnectpaths();
 
   // Remove the Predator Control Unit
   ent = GetEnt("predator_drone_control", "targetname");
@@ -182,9 +177,8 @@ so_killspree_init() {
   }
 
   // Hack for SP because we don't track the upwards counting score in SP.
-  if(!is_coop()) {
+  if(!is_coop())
     level.player.total_score = scale_value(level.points_goal);
-  }
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@SO_KILLSPREE_INVASION_DEADQUOTE_HINT1";
@@ -198,18 +192,16 @@ so_killspree_init() {
   // Clear out some flags on enemies being used in the level.
   // Enable when burger_town enemies are brought over, and spawn function updated
   // to send back how many were *actually* spawned so refill can work properly.
-  /*	convert_enemies = getEntArray( "gas_station_enemies", "targetname" );
-  	convert_enemies = array_merge( convert_enemies, getEntArray( "bank_enemies", "targetname" ) );
-  	convert_enemies = array_merge( convert_enemies, getEntArray( "taco_enemies", "targetname" ) );
-  	convert_enemies = array_merge( convert_enemies, getEntArray( "burger_town_enemies", "targetname" ) );
+  /*	convert_enemies = getentarray( "gas_station_enemies", "targetname" );
+  	convert_enemies = array_merge( convert_enemies, getentarray( "bank_enemies", "targetname" ) );
+  	convert_enemies = array_merge( convert_enemies, getentarray( "taco_enemies", "targetname" ) );
+  	convert_enemies = array_merge( convert_enemies, getentarray( "burger_town_enemies", "targetname" ) );
   	foreach ( guy in convert_enemies )
   	{
-  		if( isDefined( guy.script_goalvolume ) ) {
+  		if( isdefined( guy.script_goalvolume ) )
   			guy.script_goalvolume = undefined;
-  		}
-  		if( isDefined( guy.script_forcespawn ) ) {
+  		if( isdefined( guy.script_forcespawn ) )
   			guy.script_forcespawn = undefined;
-  		}
   	}*/
 }
 
@@ -219,17 +211,17 @@ scale_value(value) {
 
 so_killspree_setup_regular() {
   level.points_goal = 300;
-  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_REGULAR";
+  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_REGULAR";
 }
 
 so_killspree_setup_hardened() {
   level.points_goal = 300;
-  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_HARDENED";
+  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_HARDENED";
 }
 
 so_killspree_setup_veteran() {
   level.points_goal = 300;
-  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_VETERAN";
+  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_VETERAN";
 }
 
 so_killspree_setup_radio_dialog() {
@@ -258,9 +250,8 @@ enable_kill_counter_hud() {
   level.pulse_requests = [];
   level.pulse_requests_p1 = [];
   level.pulse_requests_p2 = [];
-  foreach(player in level.players) {
-    player thread hud_splash_destroy();
-  }
+  foreach(player in level.players)
+  player thread hud_splash_destroy();
 
   array_thread(level.players, ::hud_create_kill_counter);
 }

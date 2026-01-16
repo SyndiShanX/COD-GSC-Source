@@ -35,7 +35,7 @@ dogIdleNotetracks(note) {
       self.breath_fx.angles = self GetTagAngles("TAG_MOUTH_FX");
       self.breath_fx setModel("tag_origin");
       self.breath_fx LinkTo(self, "TAG_MOUTH_FX");
-      playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
+      PlayFxOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }
 }
@@ -47,7 +47,7 @@ isFacingEnemy(toleranceCosAngle) {
   if(distToEnemy < 1) {
     return true;
   }
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   return ((forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1])) / distToEnemy > toleranceCosAngle;
 }
 
@@ -203,13 +203,11 @@ trackLoop(look2, look4, look6, look8) {
       firstFrame = false;
     } else {
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > maxYawDeltaChange) {
+      if(abs(yawDeltaChange) > maxYawDeltaChange)
         yawDelta = prevYawDelta + maxYawDeltaChange * sign(yawDeltaChange);
-      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > maxPitchDeltaChange) {
+      if(abs(pitchDeltaChange) > maxPitchDeltaChange)
         pitchDelta = prevPitchDelta + maxPitchDeltaChange * sign(pitchDeltaChange);
-      }
     }
     prevYawDelta = yawDelta;
     prevPitchDelta = pitchDelta;

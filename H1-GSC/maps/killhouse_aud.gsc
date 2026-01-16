@@ -129,7 +129,7 @@ aud_bm21_driveby_snd(var_0) {
   var_4 = aud_vehicle_node_handler("vehicle_near_end_node");
   var_5 = aud_entity_link_on_tag("truck_brakesqueal", var_0, "tag_body");
   var_5 scalevolume(0, 0);
-  var_5 playLoopSound("truck_idle_high");
+  var_5 playloopsound("truck_idle_high");
   var_5 scalevolume(1, 0.2);
   var_1 scalevolume(0, 2);
   var_2 scalevolume(0, 2);
@@ -146,7 +146,7 @@ aud_bm21_driveby_snd(var_0) {
 aud_entity_link_on_tag(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 0));
   var_3 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
-  var_3 playLoopSound(var_0);
+  var_3 playloopsound(var_0);
   return var_3;
 }
 
@@ -157,7 +157,7 @@ aud_vehicle_node_handler(var_0) {
 
 aud_timer_end() {
   var_0 = getent("timerEntity", "targetname");
-  var_0 playSound("scn_timer_end");
+  var_0 playsound("scn_timer_end");
 }
 
 aud_jet_passby() {

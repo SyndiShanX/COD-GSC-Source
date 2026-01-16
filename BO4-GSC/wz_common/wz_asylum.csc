@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_asylum;
 
 autoexec __init__system__() {
@@ -30,13 +31,13 @@ toilet_ee_play(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
       switch (newval) {
         case 1:
-          playSound(localclientnum, # "hash_563cb1fd34cb48ea", s_sound.origin);
+          playSound(localclientnum, #"hash_563cb1fd34cb48ea", s_sound.origin);
           break;
         case 2:
-          playSound(localclientnum, # "hash_30b0e4167d2bd505", s_sound.origin);
+          playSound(localclientnum, #"hash_30b0e4167d2bd505", s_sound.origin);
           break;
         case 3:
-          playSound(localclientnum, # "hash_7672866383ae1956", s_sound.origin);
+          playSound(localclientnum, #"hash_7672866383ae1956", s_sound.origin);
           break;
       }
     }

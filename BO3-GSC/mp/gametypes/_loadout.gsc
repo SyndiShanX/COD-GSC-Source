@@ -30,12 +30,12 @@
 #namespace loadout;
 
 function autoexec __init__sytem__() {
-  system::register("loadout", &__init__, undefined, undefined);
+  system::register("loadout", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_connect);
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_connect);
 }
 
 function on_connect() {}
@@ -94,127 +94,127 @@ function init() {
   level.weaponmeleecrescent = getweapon("melee_crescent");
   level.weaponlauncherex41 = getweapon("launcher_ex41");
   level.meleeweapons = [];
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponknifeloadout;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeknuckles;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleebutterfly;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleewrench;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleesword;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleecrowbar;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleedagger;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleebat;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleebowie;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleemace;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleefireaxe;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeboneglass;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeimprovise;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeshockbaton;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleenunchuks;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeboxing;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleekatana;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeshovel;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleeprosthetic;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
   }
   level.meleeweapons[level.meleeweapons.size] = level.weaponmeleechainsaw;
-  if(!isDefined(level.meleeweapons)) {
+  if(!isdefined(level.meleeweapons)) {
     level.meleeweapons = [];
   } else if(!isarray(level.meleeweapons)) {
     level.meleeweapons = array(level.meleeweapons);
@@ -266,32 +266,32 @@ function init() {
   level.grenade_array = [];
   level.inventory_array = [];
   max_weapon_num = 147;
-  for(i = 0; i < max_weapon_num; i++) {
-    if(!isDefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["group"] == "") {
+  for (i = 0; i < max_weapon_num; i++) {
+    if(!isdefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["group"] == "") {
       continue;
     }
-    if(!isDefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["reference"] == "") {
+    if(!isdefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["reference"] == "") {
       continue;
     }
     weapon_type = level.tbl_weaponids[i]["group"];
     weapon = level.tbl_weaponids[i]["reference"];
     attachment = level.tbl_weaponids[i]["attachment"];
     weapon_class_register(weapon, weapon_type);
-    if(isDefined(attachment) && attachment != "") {
+    if(isdefined(attachment) && attachment != "") {
       attachment_tokens = strtok(attachment, " ");
-      if(isDefined(attachment_tokens)) {
+      if(isdefined(attachment_tokens)) {
         if(attachment_tokens.size == 0) {
           weapon_class_register((weapon + "_") + attachment, weapon_type);
           continue;
         }
-        for(k = 0; k < attachment_tokens.size; k++) {
+        for (k = 0; k < attachment_tokens.size; k++) {
           weapon_class_register((weapon + "_") + attachment_tokens[k], weapon_type);
         }
       }
     }
   }
-  callback::on_connecting(&on_player_connecting);
-  callback::add_weapon_damage(level.weaponspecialdiscgun, &on_damage_special_discgun);
+  callback::on_connecting( & on_player_connecting);
+  callback::add_weapon_damage(level.weaponspecialdiscgun, & on_damage_special_discgun);
 }
 
 function on_damage_special_discgun(eattacker, einflictor, weapon, meansofdeath, damage) {
@@ -304,12 +304,12 @@ function on_damage_special_discgun(eattacker, einflictor, weapon, meansofdeath, 
 function create_class_exclusion_list() {
   currentdvar = 0;
   level.itemexclusions = [];
-  while(getdvarint("item_exclusion_" + currentdvar)) {
+  while (getdvarint("item_exclusion_" + currentdvar)) {
     level.itemexclusions[currentdvar] = getdvarint("item_exclusion_" + currentdvar);
     currentdvar++;
   }
   level.attachmentexclusions = [];
-  for(currentdvar = 0;
+  for (currentdvar = 0;
     (getdvarstring("attachment_exclusion_" + currentdvar)) != ""; currentdvar++) {
     level.attachmentexclusions[currentdvar] = getdvarstring("attachment_exclusion_" + currentdvar);
   }
@@ -317,7 +317,7 @@ function create_class_exclusion_list() {
 
 function is_attachment_excluded(attachment) {
   numexclusions = level.attachmentexclusions.size;
-  for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
+  for (exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
     if(attachment == level.attachmentexclusions[exclusionindex]) {
       return true;
     }
@@ -326,7 +326,7 @@ function is_attachment_excluded(attachment) {
 }
 
 function set_statstable_id() {
-  if(!isDefined(level.statstableid)) {
+  if(!isdefined(level.statstableid)) {
     statstablename = util::getstatstablename();
     level.statstableid = tablelookupfindcoreasset(statstablename);
   }
@@ -388,7 +388,7 @@ function cac_init() {
   level.tbl_weaponids = [];
   level.heroweaponstable = [];
   set_statstable_id();
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -412,7 +412,7 @@ function cac_init() {
   level.perknames = [];
   level.perkicons = [];
   level.perkspecialties = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -433,7 +433,7 @@ function cac_init() {
   level.killstreaknames = [];
   level.killstreakicons = [];
   level.killstreakindices = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -454,7 +454,7 @@ function cac_init() {
 }
 
 function getclasschoice(response) {
-  assert(isDefined(level.classmap[response]));
+  assert(isdefined(level.classmap[response]));
   return level.classmap[response];
 }
 
@@ -469,7 +469,7 @@ function getattachmentstring(weaponnum, attachmentnum) {
 }
 
 function getattachmentsdisabled() {
-  if(!isDefined(level.attachmentsdisabled)) {
+  if(!isdefined(level.attachmentsdisabled)) {
     return 0;
   }
   return level.attachmentsdisabled;
@@ -492,23 +492,23 @@ function givekillstreaks() {
   classnum = self.class_num_for_global_weapons;
   sortedkillstreaks = [];
   currentkillstreak = 0;
-  for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
+  for (killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
     killstreakindex = getkillstreakindex(classnum, killstreaknum);
-    if(isDefined(killstreakindex) && killstreakindex > 0) {
-      assert(isDefined(level.tbl_killstreakdata[killstreakindex]), ("" + killstreakindex) + "");
-      if(isDefined(level.tbl_killstreakdata[killstreakindex])) {
+    if(isdefined(killstreakindex) && killstreakindex > 0) {
+      assert(isdefined(level.tbl_killstreakdata[killstreakindex]), ("" + killstreakindex) + "");
+      if(isdefined(level.tbl_killstreakdata[killstreakindex])) {
         self.killstreak[currentkillstreak] = level.tbl_killstreakdata[killstreakindex];
-        if(isDefined(level.usingmomentum) && level.usingmomentum) {
+        if(isdefined(level.usingmomentum) && level.usingmomentum) {
           killstreaktype = killstreaks::get_by_menu_name(self.killstreak[currentkillstreak]);
-          if(isDefined(killstreaktype)) {
+          if(isdefined(killstreaktype)) {
             weapon = killstreaks::get_killstreak_weapon(killstreaktype);
             self giveweapon(weapon);
-            if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
+            if(isdefined(level.usingscorestreaks) && level.usingscorestreaks) {
               if(weapon.iscarriedkillstreak) {
-                if(!isDefined(self.pers["held_killstreak_ammo_count"][weapon])) {
+                if(!isdefined(self.pers["held_killstreak_ammo_count"][weapon])) {
                   self.pers["held_killstreak_ammo_count"][weapon] = 0;
                 }
-                if(!isDefined(self.pers["held_killstreak_clip_count"][weapon])) {
+                if(!isdefined(self.pers["held_killstreak_clip_count"][weapon])) {
                   self.pers["held_killstreak_clip_count"][weapon] = 0;
                 }
                 if(self.pers["held_killstreak_ammo_count"][weapon] > 0) {
@@ -519,22 +519,22 @@ function givekillstreaks() {
                 }
               } else {
                 quantity = self.pers["killstreak_quantity"][weapon];
-                if(!isDefined(quantity)) {
+                if(!isdefined(quantity)) {
                   quantity = 0;
                 }
                 self setweaponammoclip(weapon, quantity);
               }
             }
-            sortdata = spawnStruct();
+            sortdata = spawnstruct();
             sortdata.cost = level.killstreaks[killstreaktype].momentumcost;
             sortdata.weapon = weapon;
             sortindex = 0;
-            for(sortindex = 0; sortindex < sortedkillstreaks.size; sortindex++) {
+            for (sortindex = 0; sortindex < sortedkillstreaks.size; sortindex++) {
               if(sortedkillstreaks[sortindex].cost > sortdata.cost) {
                 break;
               }
             }
-            for(i = sortedkillstreaks.size; i > sortindex; i--) {
+            for (i = sortedkillstreaks.size; i > sortindex; i--) {
               sortedkillstreaks[i] = sortedkillstreaks[i - 1];
             }
             sortedkillstreaks[sortindex] = sortdata;
@@ -548,8 +548,8 @@ function givekillstreaks() {
   actionslotorder[0] = 4;
   actionslotorder[1] = 2;
   actionslotorder[2] = 1;
-  if(isDefined(level.usingmomentum) && level.usingmomentum) {
-    for(sortindex = 0; sortindex < sortedkillstreaks.size && sortindex < actionslotorder.size; sortindex++) {
+  if(isdefined(level.usingmomentum) && level.usingmomentum) {
+    for (sortindex = 0; sortindex < sortedkillstreaks.size && sortindex < actionslotorder.size; sortindex++) {
       if(sortedkillstreaks[sortindex].weapon != level.weaponnone) {
         self setactionslot(actionslotorder[sortindex], "weapon", sortedkillstreaks[sortindex].weapon);
       }
@@ -558,7 +558,7 @@ function givekillstreaks() {
 }
 
 function isperkgroup(perkname) {
-  return isDefined(perkname) && isstring(perkname);
+  return isdefined(perkname) && isstring(perkname);
 }
 
 function reset_specialty_slots(class_num) {
@@ -585,10 +585,10 @@ function isleagueitemrestricted(item) {
 
 function giveloadoutlevelspecific(team, weaponclass) {
   pixbeginevent("giveLoadoutLevelSpecific");
-  if(isDefined(level.givecustomcharacters)) {
+  if(isdefined(level.givecustomcharacters)) {
     self[[level.givecustomcharacters]]();
   }
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     self[[level.givecustomloadout]]();
   }
   pixendevent();
@@ -615,7 +615,7 @@ function giveperks() {
   self setplayerstateloadoutbonuscards(self.class_num);
   self setplayerstateloadoutweapons(self.class_num);
   if(level.leaguematch) {
-    for(i = 0; i < self.specialty.size; i++) {
+    for (i = 0; i < self.specialty.size; i++) {
       if(isleagueitemrestricted(self.specialty[i])) {
         arrayremoveindex(self.specialty, i);
         i--;
@@ -624,7 +624,7 @@ function giveperks() {
   }
   self register_perks();
   anteup_bonus = getdvarint("perk_killstreakAnteUpResetValue");
-  momentum_at_spawn_or_game_end = (isDefined(self.pers["momentum_at_spawn_or_game_end"]) ? self.pers["momentum_at_spawn_or_game_end"] : 0);
+  momentum_at_spawn_or_game_end = (isdefined(self.pers["momentum_at_spawn_or_game_end"]) ? self.pers["momentum_at_spawn_or_game_end"] : 0);
   hasnotdonecombat = !self.hasdonecombat === 1;
   if(level.inprematchperiod || (level.ingraceperiod && hasnotdonecombat) && momentum_at_spawn_or_game_end < anteup_bonus) {
     new_momentum = (self hasperk("specialty_anteup") ? anteup_bonus : momentum_at_spawn_or_game_end);
@@ -647,7 +647,7 @@ function setclassnum(weaponclass) {
     pixendevent();
   } else {
     pixbeginevent("default class");
-    assert(isDefined(self.pers[""]), "");
+    assert(isdefined(self.pers[""]), "");
     self.class_num = level.classtoclassnum[weaponclass];
     self.class_num_for_global_weapons = 0;
     self setplayerrenderoptions(0);
@@ -661,7 +661,7 @@ function givebaseweapon() {
   knifeweaponoptions = self calcweaponoptions(self.class_num, 2);
   self giveweapon(level.weaponbasemeleeheld, knifeweaponoptions);
   self.pers["spawnWeapon"] = self.spawnweapon;
-  switchimmediate = isDefined(self.alreadysetspawnweapononce);
+  switchimmediate = isdefined(self.alreadysetspawnweapononce);
   self setspawnweapon(self.spawnweapon, switchimmediate);
   self.alreadysetspawnweapononce = 1;
 }
@@ -670,7 +670,7 @@ function giveweapons() {
   pixbeginevent("giveWeapons");
   spawnweapon = level.weaponnull;
   initialweaponcount = 0;
-  if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != level.weaponnone && !self.pers["weapon"].iscarriedkillstreak) {
+  if(isdefined(self.pers["weapon"]) && self.pers["weapon"] != level.weaponnone && !self.pers["weapon"].iscarriedkillstreak) {
     primaryweapon = self.pers["weapon"];
   } else {
     primaryweapon = self getloadoutweapon(self.class_num, "primary");
@@ -724,17 +724,17 @@ function giveweapons() {
       spawnweapon = level.weaponbasemeleeheld;
     }
   }
-  if(!isDefined(self.spawnweapon) && isDefined(self.pers["spawnWeapon"])) {
+  if(!isdefined(self.spawnweapon) && isdefined(self.pers["spawnWeapon"])) {
     self.spawnweapon = self.pers["spawnWeapon"];
   }
-  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"]) {
+  if(isdefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"]) {
     spawnweapon = self.spawnweapon;
   }
   self thread initweaponattachments(spawnweapon);
   self.pers["changed_class"] = 0;
   self.spawnweapon = spawnweapon;
   self.pers["spawnWeapon"] = self.spawnweapon;
-  switchimmediate = isDefined(self.alreadysetspawnweapononce);
+  switchimmediate = isdefined(self.alreadysetspawnweapononce);
   self setspawnweapon(spawnweapon, switchimmediate);
   self.alreadysetspawnweapononce = 1;
   self initstaticweaponstime();
@@ -831,7 +831,7 @@ function givespecialoffhand() {
       specialoffhand = getweapon(herogagdetname);
     }
   }
-  if(isDefined(self.pers[# "hash_65987563"])) {
+  if(isdefined(self.pers[# "hash_65987563"])) {
     assert(specialoffhand.name == "");
     specialoffhand = self.pers[# "hash_65987563"];
     roulette::gadget_roulette_give_earned_specialist(specialoffhand, 0);
@@ -869,7 +869,7 @@ function giveheroweapon() {
   if(heroweaponname != "" && heroweaponname != "weapon_null") {
     if(heroweaponname == "hero_minigun") {
       model = self getcharacterbodymodel();
-      if(isDefined(model) && issubstr(model, "body3")) {
+      if(isdefined(model) && issubstr(model, "body3")) {
         heroweaponname = "hero_minigun_body3";
       }
     }
@@ -885,9 +885,9 @@ function giveheroweapon() {
 
 function giveloadout(team, weaponclass) {
   pixbeginevent("giveLoadout");
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     spawnweapon = self[[level.givecustomloadout]]();
-    if(isDefined(spawnweapon)) {
+    if(isdefined(spawnweapon)) {
       self thread initweaponattachments(spawnweapon);
     }
     self.spawnweapon = spawnweapon;
@@ -913,7 +913,7 @@ function giveloadout(team, weaponclass) {
     givekillstreaks();
   }
   self teams::set_player_model(undefined, undefined);
-  if(isDefined(self.movementspeedmodifier)) {
+  if(isdefined(self.movementspeedmodifier)) {
     self setmovespeedscale(self.movementspeedmodifier * self getmovespeedscale());
   }
   self cac_selector();
@@ -922,8 +922,8 @@ function giveloadout(team, weaponclass) {
 }
 
 function giveloadout_finalize(spawnweapon, primaryweapon) {
-  if(!isDefined(self.firstspawn)) {
-    if(isDefined(spawnweapon)) {
+  if(!isdefined(self.firstspawn)) {
+    if(isdefined(spawnweapon)) {
       self initialweaponraise(spawnweapon);
     } else {
       self initialweaponraise(primaryweapon);
@@ -948,7 +948,7 @@ function setweaponammooverall(weapon, amount) {
 }
 
 function on_player_connecting() {
-  if(!isDefined(self.pers["class"])) {
+  if(!isdefined(self.pers["class"])) {
     self.pers["class"] = "";
   }
   self.curclass = self.pers["class"];
@@ -981,9 +981,9 @@ function initperkdvars() {
 
 function cac_selector() {
   self.detectexplosives = 0;
-  if(isDefined(self.specialty)) {
+  if(isdefined(self.specialty)) {
     perks = self.specialty;
-    for(i = 0; i < perks.size; i++) {
+    for (i = 0; i < perks.size; i++) {
       perk = perks[i];
       if(perk == "specialty_detectexplosive") {
         self.detectexplosives = 1;
@@ -995,7 +995,7 @@ function cac_selector() {
 function register_perks() {
   perks = self.specialty;
   self clearperks();
-  for(i = 0; i < perks.size; i++) {
+  for (i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_null" || issubstr(perk, "specialty_weapon_") || perk == "weapon_null") {
       continue;
@@ -1009,10 +1009,10 @@ function register_perks() {
 }
 
 function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isdefined(victim) || !isdefined(attacker) || !isplayer(attacker)) {
     return damage;
   }
-  if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon)) {
+  if(!isdefined(damage) || !isdefined(meansofdeath) || !isdefined(weapon)) {
     return damage;
   }
   old_damage = damage;
@@ -1032,8 +1032,8 @@ function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, wea
 }
 
 function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
-  assert(isDefined(victim));
-  assert(isDefined(attacker));
+  assert(isdefined(victim));
+  assert(isdefined(attacker));
   assert(isplayer(victim));
   attacker_is_player = isplayer(attacker);
   if(damage <= 0) {
@@ -1042,7 +1042,7 @@ function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, h
   debug = 0;
   if(getdvarint("")) {
     debug = 1;
-    if(!isDefined(attacker.name)) {
+    if(!isdefined(attacker.name)) {
       attacker.name = "";
     }
   }
@@ -1130,7 +1130,7 @@ function isbulletdamage(meansofdeath) {
 }
 
 function isfmjdamage(sweapon, smeansofdeath, attacker) {
-  return isDefined(attacker) && isplayer(attacker) && attacker hasperk("specialty_armorpiercing") && isDefined(smeansofdeath) && isbulletdamage(smeansofdeath);
+  return isdefined(attacker) && isplayer(attacker) && attacker hasperk("specialty_armorpiercing") && isdefined(smeansofdeath) && isbulletdamage(smeansofdeath);
 }
 
 function isfiredamage(weapon, meansofdeath) {
@@ -1145,5 +1145,5 @@ function isheaddamage(hitloc) {
 }
 
 function grenadestuck(inflictor) {
-  return isDefined(inflictor) && isDefined(inflictor.stucktoplayer) && inflictor.stucktoplayer == self;
+  return isdefined(inflictor) && isdefined(inflictor.stucktoplayer) && inflictor.stucktoplayer == self;
 }

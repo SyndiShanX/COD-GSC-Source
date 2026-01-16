@@ -88,14 +88,12 @@ main(model, type) {
   build_light(model, "red_blink2", "TAG_LIGHT_TAIL2", "misc/aircraft_light_red_blink", "running", randomStartDelay);
 
   mapname = getdvar("mapname");
-  if(!isDefined(level.script)) {
+  if(!isdefined(level.script))
     level.script = tolower(mapname);
-  }
 
   turret = "minigun_littlebird_spinnup";
-  if(use_old_turret()) {
+  if(use_old_turret())
     turret = "minigun_littlebird";
-  }
 
   build_turret(turret, "TAG_MINIGUN_ATTACH_LEFT", "vehicle_little_bird_minigun_left");
   build_turret(turret, "TAG_MINIGUN_ATTACH_RIGHT", "vehicle_little_bird_minigun_right");
@@ -124,9 +122,8 @@ init_local() {
     }
   }
 
-  if(armed(self.model)) {
+  if(armed(self.model))
     return;
-  }
 
   self mgOff();
   foreach(turret in self.mgturret) {
@@ -144,9 +141,8 @@ setanims() {
   level.scr_anim["generic"]["stage_littlebird_left"] = % little_bird_premount_guy3;
 
   positions = [];
-  for(i = 0; i < 8; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 8; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_pilot1";
   positions[1].sittag = "tag_pilot2";
@@ -272,6 +268,7 @@ setanims() {
   positions[1].bHasGunWhileRiding = false;
 
   return positions;
+
 }
 
 unload_groups() {

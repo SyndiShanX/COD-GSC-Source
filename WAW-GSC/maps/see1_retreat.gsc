@@ -11,7 +11,7 @@ retreat_groups_init() {
 }
 
 create_retreat_group(group_name, retreat_nodes_noteworthy, group_to_merge_into, num_to_kill) {
-  new_group = spawnStruct();
+  new_group = spawnstruct();
   new_group.retreat_nodes_noteworthy = retreat_nodes_noteworthy;
   new_group.spawner_noteworthies = [];
   new_group.merge_to = group_to_merge_into;
@@ -30,9 +30,9 @@ add_to_retreat_group(group_name, spawner_noteworthy) {
 
 spawn_func_assign_retreat_group() {
   keys = getarraykeys(level.retreat_groups);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     noteworthies = level.retreat_groups[keys[i]].spawner_noteworthies;
-    for(j = 0; j < noteworthies.size; j++) {
+    for (j = 0; j < noteworthies.size; j++) {
       if(noteworthies[j] == self.script_noteworthy) {
         self.retreat_group = keys[i];
         level thread retreat_group_track_death(self);
@@ -63,7 +63,7 @@ retreat_group_notify_detection(group_name) {
 retreat_group_kills_detection(group_name, num_to_kill) {
   end_msg = group_name + "_retreated";
   level endon(end_msg);
-  while(level.retreat_groups[group_name].num_killed < num_to_kill) {
+  while (level.retreat_groups[group_name].num_killed < num_to_kill) {
     wait(0.05);
   }
   retreat_group(group_name);
@@ -85,7 +85,7 @@ retreat_group(group_name) {
     if(isDefined(level.retreat_groups[group_name].retreat_nodes_noteworthy)) {
       enemies = getaiarray("axis");
       destination_nodes = getnodearray(level.retreat_groups[group_name].retreat_nodes_noteworthy, "script_noteworthy");
-      for(i = 0; i < enemies.size; i++) {
+      for (i = 0; i < enemies.size; i++) {
         if(isDefined(enemies[i].retreat_group) && enemies[i].retreat_group == group_name) {
           node_index = i;
           if(destination_nodes.size < enemies.size) {

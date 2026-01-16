@@ -11,7 +11,7 @@
 humvee_turret_init(turret, turretType) {
   self endon("killanimscript"); // code
 
-  Assert(isDefined(turret));
+  Assert(IsDefined(turret));
 
   animscripts\utility::initialize(turretType);
 
@@ -25,7 +25,7 @@ humvee_turret_init(turret, turretType) {
   self SetTurretAnim(self.primaryTurretAnim);
   self SetAnimKnobRestart(self.primaryTurretAnim, 1, 0.2, 1);
 
-  if(isDefined(self.weapon)) {
+  if(IsDefined(self.weapon)) {
     self animscripts\shared::placeWeaponOn(self.weapon, "none");
   }
 
@@ -82,7 +82,7 @@ handle_gunner_pain(gunner, turret) {
   gunner endon("dismount");
   gunner endon("jumping_out");
 
-  while(1) {
+  while (1) {
     flashedNotify = "flashbang";
 
     //gunner waittill( "damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags );
@@ -126,10 +126,10 @@ handle_gunner_death(gunner, turret) {
 
 // for when _vehicle_aianim wants to unload the gunner, it doesn't know as much as this script yet
 turret_cleanup_on_unload() {
-  Assert(isDefined(self.ridingVehicle));
+  Assert(IsDefined(self.ridingVehicle));
 
   turret = self.ridingVehicle.mgturret[0];
-  Assert(isDefined(turret));
+  Assert(IsDefined(turret));
 
   // clean up AI - moved it here since it's only needed for unloading.
   if(IsAlive(self)) {
@@ -150,7 +150,7 @@ turret_cleanup_on_unload() {
 
     self StopUseTurret();
 
-    if(isDefined(self.weapon)) {
+    if(IsDefined(self.weapon)) {
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
     }
   }
@@ -159,7 +159,7 @@ turret_cleanup_on_unload() {
 }
 
 turret_cleanup(gunner, turret) {
-  if(!isDefined(turret)) {
+  if(!IsDefined(turret)) {
     return;
   }
 
@@ -170,7 +170,7 @@ turret_cleanup(gunner, turret) {
 
   turret SetDefaultDropPitch(turret.default_drop_pitch);
 
-  if(isDefined(gunner)) {
+  if(IsDefined(gunner)) {
     gunner ClearAnim(gunner.additiveUsegunRoot, 0);
     gunner ClearAnim(gunner.additiveRotateRoot, 0);
     gunner ClearAnim(gunner.turretSpecialAnimsRoot, 0);
@@ -185,7 +185,7 @@ turret_cleanup(gunner, turret) {
   turret.aiOwner = undefined;
   turret.fireTime = undefined;
 
-  if(isDefined(turret.specialCleanupFunc)) {
+  if(IsDefined(turret.specialCleanupFunc)) {
     level[[turret.specialCleanupFunc]](gunner, turret);
   }
 }
@@ -202,13 +202,13 @@ turret_track_rotatedirection(gunner) {
 
   self turret_update_rotatedirection("none");
 
-  while(1) {
+  while (1) {
     currentAngles = self GetTagAngles(tag);
 
     // the vectordot of the old right angles and the current forward angles is going to tell us whether
     //the turret is rotating left, right, or not at all
     oldRight = AnglesToRight(lastAngles);
-    currentForward = anglesToForward(currentAngles);
+    currentForward = AnglesToForward(currentAngles);
 
     dot = VectorDot(oldRight, currentForward);
 
@@ -227,7 +227,7 @@ turret_track_rotatedirection(gunner) {
 }
 
 turret_update_rotatedirection(direction) {
-  if(!isDefined(self.rotateDirection) || self.rotateDirection != direction) {
+  if(!IsDefined(self.rotateDirection) || self.rotateDirection != direction) {
     self.rotateDirection = direction;
 
     //println( "spin direction change: " + self.rotateDirection );
@@ -243,11 +243,11 @@ gunner_turning_anims(turret) {
   blendInTime = 0.3;
   blendOutTime = 0.3;
 
-  while(1) {
+  while (1) {
     turret waittill("new_fireTarget");
     wait(0.05); // give him a chance to start rotating to the new target so the direction updates
 
-    if(!isDefined(turret.fireTarget) || self.isCustomAnimating) {
+    if(!IsDefined(turret.fireTarget) || self.isCustomAnimating) {
       continue;
     }
 
@@ -262,14 +262,14 @@ gunner_turning_anims(turret) {
         //println( "gunner anim LEFT" );
       }
 
-      if(isDefined(anime)) {
+      if(IsDefined(anime)) {
         // dial the parent branch up
         self SetAnimLimited(self.additiveRotateRoot, 1, blendInTime, 1);
         // also tell it which leaf anim to use
         // (this is inheriting its parent's blend in time so we can set the time to 0)
         self SetAnimKnobLimited(anime, 1, 0, 1);
 
-        while(isDefined(turret.fireTarget) && !turret turret_aiming_near_target(turret.fireTarget, turret.closeEnoughAimDegrees)) {
+        while (IsDefined(turret.fireTarget) && !turret turret_aiming_near_target(turret.fireTarget, turret.closeEnoughAimDegrees)) {
           if(self.isCustomAnimating) {
             break;
           }
@@ -309,9 +309,8 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
 
   self.no_ai = true;
   animation = % humvee_passenger_2_turret;
-  if(!isDefined(animation)) {
+  if(!isdefined(animation))
     animation = self.passenger_2_turret_anim;
-  }
 
   // get the origin/angles of the vehicle tag where this guy is riding
   animpos = maps\_vehicle_aianim::anim_pos(vehicle, pos);
@@ -333,7 +332,7 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
 }
 
 turret_animate(anime) {
-  if(isDefined(self.idleAnim)) {
+  if(IsDefined(self.idleAnim)) {
     self ClearAnim(self.idleAnim, 0);
     self.idleAnim = undefined;
   }
@@ -364,12 +363,12 @@ fireDirector(turret) {
 
   target = undefined;
 
-  while(1) {
+  while (1) {
     // get a target
     target = turret.fireTarget;
 
     // wait for the right time to start shooting
-    while(turret target_confirm(target)) {
+    while (turret target_confirm(target)) {
       // tried a CanSee check here too, didn't seem necessary after testing
       if(turret turret_aiming_near_target(target, turret.closeEnoughAimDegrees)) {
         break;
@@ -383,7 +382,7 @@ fireDirector(turret) {
     }
 
     // wait for his death, or for the code/script to pick/designate a new target
-    while(turret target_confirm(target) && !self.ignoreall && !self.isCustomAnimating) {
+    while (turret target_confirm(target) && !self.ignoreall && !self.isCustomAnimating) {
       wait(0.05);
     }
 
@@ -398,13 +397,13 @@ fireDirector(turret) {
 
 // makes sure the target that the fireDirector is thinking about is still synced with turret_target_updater
 target_confirm(target) {
-  if(isDefined(self.dontshoot)) {
+  if(IsDefined(self.dontshoot)) {
     AssertEx(self.dontshoot, ".dontshoot must be true or undefined.");
     return false;
   }
 
   // maybe the turret can't see the target anymore
-  if(!isDefined(self.fireTarget)) {
+  if(!IsDefined(self.fireTarget)) {
     return false;
   }
 
@@ -433,24 +432,24 @@ turret_target_updater(gunner) {
   target = undefined;
   lastTarget = undefined;
 
-  while(1) {
+  while (1) {
     target = self GetTurretTarget(false);
 
     doUpdate = false;
 
     // target can come back undefined if the turret loses sight of its target
-    if(turret_target_validate(target) || !isDefined(target)) {
+    if(turret_target_validate(target) || !IsDefined(target)) {
       // if the old target was defined and the new target is undefined
       //(e.g., the turret lost its target) we want to update
-      if(!isDefined(target) && isDefined(lastTarget)) {
+      if(!IsDefined(target) && IsDefined(lastTarget)) {
         doUpdate = true;
       }
       // or, if the new target is defined and the old one isn't, do the update
-      else if(isDefined(target) && !isDefined(lastTarget)) {
+      else if(IsDefined(target) && !IsDefined(lastTarget)) {
         doUpdate = true;
       }
       // or, if the new target is defined and different from before, do the update
-      else if(isDefined(target) && target != lastTarget) {
+      else if(IsDefined(target) && target != lastTarget) {
         doUpdate = true;
       }
 
@@ -466,11 +465,11 @@ turret_target_updater(gunner) {
 }
 
 turret_target_validate(target) {
-  if(!isDefined(target)) {
+  if(!IsDefined(target)) {
     return false;
   }
 
-  if(isDefined(target.ignoreme) && target.ignoreme) {
+  if(IsDefined(target.ignoreme) && target.ignoreme) {
     return false;
   }
 
@@ -487,7 +486,7 @@ turret_target_validate(target) {
 // - fireTime_max (optional): if set, function will pick a random time between min and max
 // - fireTime_message (optional): will fire until the turret is notified the message. will ignore min and max time.
 set_manual_target(target, fireTime_min, fireTime_max, fireTime_message) {
-  AssertEx(isDefined(target), "undefined target passed to set_manual_target().");
+  AssertEx(IsDefined(target), "undefined target passed to set_manual_target().");
 
   self endon("turret_cleanup");
 
@@ -496,7 +495,7 @@ set_manual_target(target, fireTime_min, fireTime_max, fireTime_message) {
     self SetMode("manual");
   }
 
-  if(!isDefined(fireTime_min) && !isDefined(fireTime_max)) {
+  if(!IsDefined(fireTime_min) && !IsDefined(fireTime_max)) {
     fireTime_min = 1.5;
     fireTime_max = 3;
   }
@@ -508,9 +507,9 @@ set_manual_target(target, fireTime_min, fireTime_max, fireTime_message) {
   self waittill("turret_on_target");
   //println( "turret on target" );
 
-  if(isDefined(fireTime_message)) {
+  if(IsDefined(fireTime_message)) {
     self waittill(fireTime_message);
-  } else if(isDefined(fireTime_max)) {
+  } else if(IsDefined(fireTime_max)) {
     wait(RandomFloatRange(fireTime_min, fireTime_max));
   } else {
     wait(fireTime_min);
@@ -519,7 +518,7 @@ set_manual_target(target, fireTime_min, fireTime_max, fireTime_message) {
   self custom_anim_wait();
   self ClearTargetEntity(target);
 
-  if(isDefined(oldMode)) {
+  if(IsDefined(oldMode)) {
     self SetMode(oldMode);
   }
 }
@@ -542,7 +541,7 @@ fire(gunner) {
   self endon("stopfiring");
   self endon("custom_anim");
 
-  while(1) {
+  while (1) {
     self ShootTurret();
     wait(self.fireInterval);
   }
@@ -564,16 +563,16 @@ DoAim_idle_think(turret) {
   self endon("death");
 
   turret endon("death");
-  assertex(isDefined(turret), "The turret is gone!");
+  assertex(isdefined(turret), "The turret is gone!");
   assertex(isalive(self), "No, I can't die!");
 
-  Assert(isDefined(turret.ownervehicle));
+  Assert(IsDefined(turret.ownervehicle));
   vehicle = turret.ownervehicle;
-  assertex(isDefined(vehicle), "There is no vehicle!");
+  assertex(isdefined(vehicle), "There is no vehicle!");
 
   idle = -1;
 
-  for(;;) {
+  for (;;) {
     if(vehicle Vehicle_GetSpeed() < 1 && idle) {
       self SetAnimLimited(self.additiveUsegunRoot, 1, 0.1);
       self SetAnimKnobLimited(self.additiveTurretIdle, 1, 0.1);
@@ -612,7 +611,7 @@ turret_gunner_custom_anim(turret, animStr, centerTurretFirst) {
   self endon("jumping_out");
 
   anime = self.turretSpecialAnims[animStr];
-  Assert(isDefined(anime));
+  Assert(IsDefined(anime));
 
   self custom_anim_wait();
 
@@ -627,7 +626,7 @@ turret_gunner_custom_anim(turret, animStr, centerTurretFirst) {
 
 reload_disable_safe() {
   disabledReload = false;
-  if(!isDefined(self.disableReload) || !self.disableReload) {
+  if(!IsDefined(self.disableReload) || !self.disableReload) {
     disabledReload = true;
     self.disableReload = true;
   }
@@ -640,7 +639,7 @@ reload_enable() {
 }
 
 DoReload(turret) {
-  if(isDefined(turret.disableReload)) {
+  if(IsDefined(turret.disableReload)) {
     return;
   }
 
@@ -662,14 +661,14 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
 
   /*
   // these endons are dupes
-  	
+	
   self endon( "death" );
   turret endon( "death" );
   self endon( "dismount" );
   self endon( "jumping_out" );
   */
 
-  Assert(isDefined(anime));
+  Assert(IsDefined(anime));
 
   self.isCustomAnimating = true;
   self.customAnim = anime;
@@ -684,7 +683,7 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
   turret notify("kill_fireController");
   self notify("custom_anim");
 
-  if(isDefined(centerTurretFirst) && centerTurretFirst) {
+  if(IsDefined(centerTurretFirst) && centerTurretFirst) {
     turret turret_aim_straight();
   }
 
@@ -693,12 +692,11 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
   self SetAnimKnobLimitedRestart(self.turretSpecialAnimsRoot, 1, 0.2);
   self SetFlaggedAnimKnobRestart("special_anim", anime, 1, 0, 1);
 
-  for(;;) {
+  for (;;) {
     // broke into a loop so I can debug the notetracks
     self waittill("special_anim", notetrack);
-    if(notetrack == "end") {
+    if(notetrack == "end")
       break;
-    }
   }
 
   // turn the ROOT down, not the anim under the root
@@ -707,7 +705,7 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
   self SetAnimLimited(self.primaryTurretAnim, 1); // 0.2 blend time is the default
   self SetAnimLimited(self.additiveUsegunRoot, 1);
 
-  if(isDefined(centerTurretFirst) && centerTurretFirst) {
+  if(IsDefined(centerTurretFirst) && centerTurretFirst) {
     turret turret_aim_restore();
   }
 
@@ -724,17 +722,17 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
 custom_anim_wait() {
   self endon("death");
 
-  if(!isDefined(self.isCustomAnimating)) {
+  if(!IsDefined(self.isCustomAnimating)) {
     return;
   }
 
-  while(self.isCustomAnimating) {
+  while (self.isCustomAnimating) {
     wait(0.05);
   }
 }
 
 turret_aim_straight(straightAngles) {
-  if(!isDefined(straightAngles)) {
+  if(!IsDefined(straightAngles)) {
     currentAngles = self GetTagAngles("tag_flash");
     straightAngles = (0, currentAngles[1], currentAngles[2]); // just keep the yaw
   }
@@ -743,10 +741,10 @@ turret_aim_straight(straightAngles) {
   self SetMode("manual");
 
   // use a temp target to make the gun point straight forward
-  forward = anglesToForward(straightAngles);
+  forward = AnglesToForward(straightAngles);
   scalevec = vector_multiply(forward, 96);
   targetOrigin = self GetTagOrigin("tag_aim") + scalevec;
-  self.tempTarget = spawn("script_origin", targetOrigin);
+  self.tempTarget = Spawn("script_origin", targetOrigin);
   self.tempTarget.ignoreme = true;
 
   self.tempTarget LinkTo(self.ownerVehicle); // if the vehicle is moving we have to link the target to the gun so the gun doesn't rotate around as the vehicle angles change
@@ -760,12 +758,12 @@ turret_aim_straight(straightAngles) {
 turret_aim_restore() {
   self ClearTargetEntity();
 
-  if(isDefined(self.tempTarget)) {
+  if(IsDefined(self.tempTarget)) {
     self.tempTarget Unlink();
     self.tempTarget Delete();
   }
 
-  if(isDefined(self.oldMode)) {
+  if(IsDefined(self.oldMode)) {
     self SetMode(self.oldMode);
     self.oldMode = undefined;
   }

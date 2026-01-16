@@ -8,6 +8,7 @@
 #include common_scripts\_fx;
 
 main() {
+
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -18,9 +19,8 @@ main() {
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   level._effect["snow_light"] = loadfx("weather/snow_light_mp_crash");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_crash_snow_fx::main();
-  }
 
   thread swapAirstrikeFX();
 }
@@ -31,4 +31,5 @@ swapAirstrikeFX() {
   wait .05;
 
   level.airstrikefx = level.newairstrike;
+
 }

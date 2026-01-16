@@ -19,7 +19,7 @@ function main_start() {
   level.added_initial_streamer_blackscreen = 2;
   level thread spawned_collision_ffotd();
   level thread function_3fd88dcb();
-  level.var_361ee139 = &function_acf1c4da;
+  level.var_361ee139 = & function_acf1c4da;
 }
 
 function main_end() {
@@ -42,7 +42,7 @@ function main_end() {
 function function_3fd88dcb() {
   level flagsys::wait_till("start_zombie_round_logic");
   level flag::wait_till("activate_zone_farm");
-  if(isDefined(level.var_144b78ee)) {
+  if(isdefined(level.var_144b78ee)) {
     level.var_144b78ee delete();
   }
 }
@@ -52,7 +52,7 @@ function spawned_collision_ffotd() {
 }
 
 function function_acf1c4da(machine) {
-  if(isDefined(level.bgb[machine.selected_bgb]) && level.bgb[machine.selected_bgb].limit_type == "activated") {
+  if(isdefined(level.bgb[machine.selected_bgb]) && level.bgb[machine.selected_bgb].limit_type == "activated") {
     if(self.characterindex == 0) {
       self zm_audio::create_and_play_dialog("bgb", "buy", self function_af29034());
       return;
@@ -64,7 +64,7 @@ function function_acf1c4da(machine) {
 }
 
 function function_af29034() {
-  if(!isDefined(self.var_52b965ea) || self.var_52b965ea.size <= 0) {
+  if(!isdefined(self.var_52b965ea) || self.var_52b965ea.size <= 0) {
     self.var_52b965ea = array(0, 1, 2, 3);
     self.var_52b965ea = array::randomize(self.var_52b965ea);
   }

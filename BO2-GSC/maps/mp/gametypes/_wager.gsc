@@ -84,16 +84,14 @@ deductplayerante() {
   codpoints = self maps\mp\gametypes\_rank::getcodpointsstat();
   wagerbet = getdvarint(#"scr_wagerBet");
 
-  if(wagerbet > codpoints) {
+  if(wagerbet > codpoints)
     wagerbet = codpoints;
-  }
 
   codpoints = codpoints - wagerbet;
   self maps\mp\gametypes\_rank::setcodpointsstat(codpoints);
 
-  if(!self islocaltohost()) {
+  if(!self islocaltohost())
     self incrementescrowforplayer(wagerbet);
-  }
 
   game["wager_pot"] = game["wager_pot"] + wagerbet;
   game["wager_initial_pot"] = game["wager_initial_pot"] + wagerbet;
@@ -101,9 +99,8 @@ deductplayerante() {
   self addplayerstat("LIFETIME_BUYIN", wagerbet);
   self addrecentearningstostat(0 - wagerbet);
 
-  if(isDefined(level.onwagerplayerante)) {
+  if(isDefined(level.onwagerplayerante))
     [[level.onwagerplayerante]](self, wagerbet);
-  }
 
   self thread maps\mp\gametypes\_persistence::uploadstatssoon();
 }
@@ -112,16 +109,15 @@ incrementescrowforplayer(amount) {
   if(!isDefined(self) || !isplayer(self)) {
     return;
   }
-  if(!isDefined(game["escrows"])) {
+  if(!isDefined(game["escrows"]))
     game["escrows"] = [];
-  }
 
   playerxuid = self getxuid();
 
   if(!isDefined(playerxuid)) {
     return;
   }
-  escrowstruct = spawnStruct();
+  escrowstruct = spawnstruct();
   escrowstruct.xuid = playerxuid;
   escrowstruct.amount = amount;
   game["escrows"][game["escrows"].size] = escrowstruct;
@@ -134,9 +130,8 @@ clearescrows() {
   escrows = game["escrows"];
   numescrows = escrows.size;
 
-  for(i = 0; i < numescrows; i++) {
+  for(i = 0; i < numescrows; i++)
     escrowstruct = escrows[i];
-  }
 
   game["escrows"] = [];
 }
@@ -147,9 +142,8 @@ addrecentearningstostat(recentearnings) {
 }
 
 prematchperiod() {
-  if(!level.wagermatch) {
+  if(!level.wagermatch)
     return;
-  }
 }
 
 finalizewagerround() {
@@ -158,9 +152,8 @@ finalizewagerround() {
   }
   determinewagerwinnings();
 
-  if(isDefined(level.onwagerfinalizeround)) {
+  if(isDefined(level.onwagerfinalizeround))
     [[level.onwagerfinalizeround]]();
-  }
 }
 
 determinewagerwinnings() {
@@ -169,22 +162,20 @@ determinewagerwinnings() {
   if(!shouldcalculatewinnings) {
     return;
   }
-  if(!level.teambased) {
+  if(!level.teambased)
     calculatefreeforallpayouts();
-  } else {
+  else
     calculateteampayouts();
-  }
 }
 
 calculatefreeforallpayouts() {
   playerrankings = level.placement["all"];
   payoutpercentages = array(0.5, 0.3, 0.2);
 
-  if(playerrankings.size == 2) {
+  if(playerrankings.size == 2)
     payoutpercentages = array(0.7, 0.3);
-  } else if(playerrankings.size == 1) {
+  else if(playerrankings.size == 1)
     payoutpercentages = array(1.0);
-  }
 
   setwagerwinningsonplayers(level.players, 0);
 
@@ -192,9 +183,8 @@ calculatefreeforallpayouts() {
     wagerbet = getdvarint(#"scr_wagerBet");
 
     for(i = 0; i < playerrankings.size; i++) {
-      if(!playerrankings[i] islocaltohost()) {
+      if(!playerrankings[i] islocaltohost())
         playerrankings[i].wagerwinnings = wagerbet;
-      }
     }
   } else if(level.players.size == 1) {
     game["escrows"] = undefined;
@@ -215,9 +205,8 @@ calculatefreeforallpayouts() {
       playergroup[playergroup.size] = playerrankings[i];
       currentpayoutpercentage++;
 
-      if(isDefined(payoutpercentages[currentpayoutpercentage])) {
+      if(isDefined(payoutpercentages[currentpayoutpercentage]))
         cumulativepayoutpercentage = cumulativepayoutpercentage + payoutpercentages[currentpayoutpercentage];
-      }
     }
 
     setwagerwinningsonplayers(playergroup, int(game["wager_pot"] * cumulativepayoutpercentage / playergroup.size));
@@ -261,9 +250,8 @@ calculateteampayouts() {
     player = level.players[index];
     player.wagerwinnings = 0;
 
-    if(player.pers["team"] == winner) {
+    if(player.pers["team"] == winner)
       playersonwinningteam[playersonwinningteam.size] = player;
-    }
   }
 
   if(playersonwinningteam.size == 0) {
@@ -276,9 +264,8 @@ calculateteampayouts() {
 }
 
 setwagerwinningsonplayers(players, amount) {
-  for(index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++)
     players[index].wagerwinnings = amount;
-  }
 }
 
 finalizewagergame() {
@@ -296,15 +283,13 @@ finalizewagergame() {
   for(index = 0; index < players.size; index++) {
     player = players[index];
 
-    if(isDefined(player.pers["wager_sideBetWinnings"])) {
+    if(isDefined(player.pers["wager_sideBetWinnings"]))
       payoutwagerwinnings(player, player.wagerwinnings + player.pers["wager_sideBetWinnings"]);
-    } else {
+    else
       payoutwagerwinnings(player, player.wagerwinnings);
-    }
 
-    if(player.wagerwinnings > 0) {
+    if(player.wagerwinnings > 0)
       maps\mp\gametypes\_globallogic_score::updatewinstats(player);
-    }
   }
 
   clearescrows();
@@ -327,9 +312,8 @@ determinetopearners() {
   for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
 
-    if(!isDefined(player.wagerwinnings)) {
+    if(!isDefined(player.wagerwinnings))
       player.wagerwinnings = 0;
-    }
 
     if(player.wagerwinnings > topwinnings[0]) {
       topwinnings[2] = topwinnings[1];
@@ -367,16 +351,14 @@ sidebettimer() {
   level endon("side_bet_end");
   secondstowait = (level.sidebetendtime - gettime()) / 1000.0;
 
-  if(secondstowait < 0) {
+  if(secondstowait < 0)
     secondstowait = 0;
-  }
 
   wait(secondstowait);
 
   for(playerindex = 0; playerindex < level.players.size; playerindex++) {
-    if(isDefined(level.players[playerindex])) {
+    if(isDefined(level.players[playerindex]))
       level.players[playerindex] closemenu();
-    }
   }
 
   level notify("side_bet_end");
@@ -392,9 +374,8 @@ sidebetallbetsplaced() {
   wait 3;
 
   for(playerindex = 0; playerindex < level.players.size; playerindex++) {
-    if(isDefined(level.players[playerindex])) {
+    if(isDefined(level.players[playerindex]))
       level.players[playerindex] closemenu();
-    }
   }
 
   level notify("side_bet_end");
@@ -416,29 +397,27 @@ setupblankrandomplayer(takeweapons, chooserandombody, weapon) {
   self.pers["killstreak_has_been_used"] = [];
   self.pers["killstreak_unique_id"] = [];
 
-  if(!isDefined(takeweapons) || takeweapons) {
+  if(!isDefined(takeweapons) || takeweapons)
     self takeallweapons();
-  }
 
-  if(isDefined(self.pers["hasRadar"]) && self.pers["hasRadar"]) {
+  if(isDefined(self.pers["hasRadar"]) && self.pers["hasRadar"])
     self.hasspyplane = 1;
-  }
 
   if(isDefined(self.powerups) && isDefined(self.powerups.size)) {
-    for(i = 0; i < self.powerups.size; i++) {
+    for(i = 0; i < self.powerups.size; i++)
       self applypowerup(self.powerups[i]);
-    }
   }
 
   self setradarvisibility();
 }
 
-assignrandombody() {}
+assignrandombody() {
+}
 
 queuewagerpopup(message, points, submessage, announcement) {
   self endon("disconnect");
   size = self.wagernotifyqueue.size;
-  self.wagernotifyqueue[size] = spawnStruct();
+  self.wagernotifyqueue[size] = spawnstruct();
   self.wagernotifyqueue[size].message = message;
   self.wagernotifyqueue[size].points = points;
   self.wagernotifyqueue[size].submessage = submessage;
@@ -460,14 +439,13 @@ helpgameend() {
     playersleft = 0;
 
     for(i = 0; i < players.size; i++) {
-      if(isDefined(players[i].pers["lives"]) && players[i].pers["lives"] > 0) {
+      if(isDefined(players[i].pers["lives"]) && players[i].pers["lives"] > 0)
         playersleft++;
-      }
     }
 
     if(playersleft == 2) {
       for(i = 0; i < players.size; i++) {
-        players[i] queuewagerpopup(&"MP_HEADS_UP", 0, &"MP_U2_ONLINE", "wm_u2_online");
+        players[i] queuewagerpopup(&"MP_HEADS_UP", 0, & "MP_U2_ONLINE", "wm_u2_online");
         players[i].pers["hasRadar"] = 1;
         players[i].hasspyplane = 1;
         level.activeuavs[players[i] getentitynumber()]++;
@@ -479,22 +457,19 @@ helpgameend() {
 setradarvisibility() {
   prevscoreplace = self.prevscoreplace;
 
-  if(!isDefined(prevscoreplace)) {
+  if(!isDefined(prevscoreplace))
     prevscoreplace = 1;
-  }
 
   if(isDefined(level.inthemoneyonradar) && level.inthemoneyonradar) {
-    if(prevscoreplace <= 3 && isDefined(self.score) && self.score > 0) {
+    if(prevscoreplace <= 3 && isDefined(self.score) && self.score > 0)
       self unsetperk("specialty_gpsjammer");
-    } else {
+    else
       self setperk("specialty_gpsjammer");
-    }
   } else if(isDefined(level.firstplaceonradar) && level.firstplaceonradar) {
-    if(prevscoreplace == 1 && isDefined(self.score) && self.score > 0) {
+    if(prevscoreplace == 1 && isDefined(self.score) && self.score > 0)
       self unsetperk("specialty_gpsjammer");
-    } else {
+    else
       self setperk("specialty_gpsjammer");
-    }
   }
 }
 
@@ -507,26 +482,23 @@ playerscored() {
   for(i = 0; i < level.placement["all"].size; i++) {
     prevscoreplace = level.placement["all"][i].prevscoreplace;
 
-    if(!isDefined(prevscoreplace)) {
+    if(!isDefined(prevscoreplace))
       prevscoreplace = 1;
-    }
 
     currentscoreplace = i + 1;
 
     for(j = i - 1; j >= 0; j--) {
-      if(level.placement["all"][i].score == level.placement["all"][j].score) {
+      if(level.placement["all"][i].score == level.placement["all"][j].score)
         currentscoreplace--;
-      }
     }
 
     wasinthemoney = prevscoreplace <= 3;
     isinthemoney = currentscoreplace <= 3;
 
-    if(!wasinthemoney && isinthemoney) {
+    if(!wasinthemoney && isinthemoney)
       level.placement["all"][i] wagerannouncer("wm_in_the_money");
-    } else if(wasinthemoney && !isinthemoney) {
+    else if(wasinthemoney && !isinthemoney)
       level.placement["all"][i] wagerannouncer("wm_oot_money");
-    }
 
     level.placement["all"][i].prevscoreplace = currentscoreplace;
     level.placement["all"][i] setradarvisibility();
@@ -538,7 +510,7 @@ wagerannouncer(dialog, group) {
 }
 
 createpowerup(name, type, displayname, iconmaterial) {
-  powerup = spawnStruct();
+  powerup = spawnstruct();
   powerup.name = [];
   powerup.name[0] = name;
   powerup.type = type;
@@ -548,9 +520,8 @@ createpowerup(name, type, displayname, iconmaterial) {
 }
 
 addpowerup(name, type, displayname, iconmaterial) {
-  if(!isDefined(level.poweruplist)) {
+  if(!isDefined(level.poweruplist))
     level.poweruplist = [];
-  }
 
   for(i = 0; i < level.poweruplist.size; i++) {
     if(level.poweruplist[i].displayname == displayname) {
@@ -592,9 +563,8 @@ applypowerup(powerup) {
       self setweaponammoclip(powerup.name[0], 2);
       break;
     case "perk":
-      for(i = 0; i < powerup.name.size; i++) {
+      for(i = 0; i < powerup.name.size; i++)
         self setperk(powerup.name[i]);
-      }
 
       break;
     case "killstreak":
@@ -607,16 +577,14 @@ applypowerup(powerup) {
 }
 
 givepowerup(powerup, doanimation) {
-  if(!isDefined(self.powerups)) {
+  if(!isDefined(self.powerups))
     self.powerups = [];
-  }
 
   powerupindex = self.powerups.size;
   self.powerups[powerupindex] = copypowerup(powerup);
 
-  for(i = 0; i < powerup.name.size; i++) {
+  for(i = 0; i < powerup.name.size; i++)
     self.powerups[powerupindex].name[self.powerups[powerupindex].name.size] = powerup.name[i];
-  }
 
   self applypowerup(self.powerups[powerupindex]);
   self thread showpowerupmessage(powerupindex, doanimation);
@@ -660,9 +628,8 @@ showpowerupmessage(powerupindex, doanimation) {
   self endon("delete");
   self endon("clearing_powerups");
 
-  if(!isDefined(doanimation)) {
+  if(!isDefined(doanimation))
     doanimation = 1;
-  }
 
   wasinprematch = level.inprematchperiod;
   powerupstarty = 320;
@@ -673,9 +640,8 @@ showpowerupmessage(powerupindex, doanimation) {
     powerupspacing = 35;
   }
 
-  if(isDefined(self.powerups[powerupindex].hud_elem)) {
+  if(isDefined(self.powerups[powerupindex].hud_elem))
     self.powerups[powerupindex].hud_elem destroy();
-  }
 
   self.powerups[powerupindex].hud_elem = newclienthudelem(self);
   self.powerups[powerupindex].hud_elem.fontscale = 1.5;
@@ -696,9 +662,8 @@ showpowerupmessage(powerupindex, doanimation) {
   bigiconsize = 40;
   iconsize = 32;
 
-  if(isDefined(self.powerups[powerupindex].hud_elem_icon)) {
+  if(isDefined(self.powerups[powerupindex].hud_elem_icon))
     self.powerups[powerupindex].hud_elem_icon destroy();
-  }
 
   if(doanimation) {
     self.powerups[powerupindex].hud_elem_icon = self createicon(self.powerups[powerupindex].iconmaterial, bigiconsize, bigiconsize);
@@ -718,9 +683,8 @@ showpowerupmessage(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem_icon.archived = 0;
   self.powerups[powerupindex].hud_elem_icon.alpha = 1.0;
 
-  if(!wasinprematch && doanimation) {
-    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
-  }
+  if(!wasinprematch && doanimation)
+    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
 
   pulsetime = 0.5;
 
@@ -736,19 +700,16 @@ showpowerupmessage(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem_icon.x = self.powerups[powerupindex].hud_elem.x - 5 - iconsize;
   self.powerups[powerupindex].hud_elem_icon.y = powerupstarty - powerupspacing * powerupindex - iconsize / 2;
 
-  if(doanimation) {
+  if(doanimation)
     wait(pulsetime);
-  }
 
-  if(level.inprematchperiod) {
+  if(level.inprematchperiod)
     level waittill("prematch_over");
-  } else if(doanimation) {
+  else if(doanimation)
     wait(pulsetime);
-  }
 
-  if(wasinprematch && doanimation) {
-    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
-  }
+  if(wasinprematch && doanimation)
+    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
 
   wait 1.5;
 
@@ -773,13 +734,11 @@ clearpowerups() {
 
   if(isDefined(self.powerups) && isDefined(self.powerups.size)) {
     for(i = 0; i < self.powerups.size; i++) {
-      if(isDefined(self.powerups[i].hud_elem)) {
+      if(isDefined(self.powerups[i].hud_elem))
         self.powerups[i].hud_elem destroy();
-      }
 
-      if(isDefined(self.powerups[i].hud_elem_icon)) {
+      if(isDefined(self.powerups[i].hud_elem_icon))
         self.powerups[i].hud_elem_icon destroy();
-      }
     }
   }
 
@@ -787,25 +746,21 @@ clearpowerups() {
 }
 
 trackwagerweaponusage(name, incvalue, statname) {
-  if(!isDefined(self.wagerweaponusage)) {
+  if(!isDefined(self.wagerweaponusage))
     self.wagerweaponusage = [];
-  }
 
-  if(!isDefined(self.wagerweaponusage[name])) {
+  if(!isDefined(self.wagerweaponusage[name]))
     self.wagerweaponusage[name] = [];
-  }
 
-  if(!isDefined(self.wagerweaponusage[name][statname])) {
+  if(!isDefined(self.wagerweaponusage[name][statname]))
     self.wagerweaponusage[name][statname] = 0;
-  }
 
   self.wagerweaponusage[name][statname] = self.wagerweaponusage[name][statname] + incvalue;
 }
 
 gethighestwagerweaponusage(statname) {
-  if(!isDefined(self.wagerweaponusage)) {
+  if(!isDefined(self.wagerweaponusage))
     return undefined;
-  }
 
   bestweapon = undefined;
   highestvalue = 0;
@@ -814,9 +769,9 @@ gethighestwagerweaponusage(statname) {
   for(i = 0; i < wagerweaponsused.size; i++) {
     weaponstats = self.wagerweaponusage[wagerweaponsused[i]];
 
-    if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex(wagerweaponsused[i])) {
+    if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex(wagerweaponsused[i]))
       continue;
-    } else if(!isDefined(bestweapon) || weaponstats[statname] > highestvalue) {
+    else if(!isDefined(bestweapon) || weaponstats[statname] > highestvalue) {
       bestweapon = wagerweaponsused[i];
       highestvalue = weaponstats[statname];
     }
@@ -829,24 +784,21 @@ setwagerafteractionreportstats() {
   topweapon = self gethighestwagerweaponusage("kills");
   topkills = 0;
 
-  if(isDefined(topweapon)) {
+  if(isDefined(topweapon))
     topkills = self.wagerweaponusage[topweapon]["kills"];
-  } else {
+  else
     topweapon = self gethighestwagerweaponusage("timeUsed");
-  }
 
-  if(!isDefined(topweapon)) {
+  if(!isDefined(topweapon))
     topweapon = "";
-  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("topWeaponItemIndex", getbaseweaponitemindex(topweapon));
   self maps\mp\gametypes\_persistence::setafteractionreportstat("topWeaponKills", topkills);
 
-  if(isDefined(level.onwagerawards)) {
+  if(isDefined(level.onwagerawards))
     self[[level.onwagerawards]]();
-  } else {
-    for(i = 0; i < 3; i++) {
+  else {
+    for(i = 0; i < 3; i++)
       self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", 0, i);
-    }
   }
 }

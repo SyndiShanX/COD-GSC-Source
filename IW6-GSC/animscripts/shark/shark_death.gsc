@@ -30,9 +30,8 @@ main() {
   playFXOnTag(level._effect["swim_ai_death_blood"], var_0, "j_spineupper");
   var_5 = ["j_tail1", "j_spineupper", "j_tail2", "j_fin_le", "j_fin_ri", "j_head", "j_jaw"];
 
-  foreach(var_7 in var_5) {
-    playFXOnTag(level._effect["water_bubbles_wide_sm_lp"], var_0, var_7);
-  }
+  foreach(var_7 in var_5)
+  playFXOnTag(level._effect["water_bubbles_wide_sm_lp"], var_0, var_7);
 
   var_9 = 1;
   var_0 moveto(var_0.origin - (0, 0, 1000), 100, 0, 100);
@@ -41,9 +40,8 @@ main() {
     var_10 = bullettracepassed(var_0.origin, var_0.origin - (0, 0, 10), 1, self);
     var_11 = bullettracepassed(var_0.origin, var_0.origin - (0, 0, 10), 1, level.player);
 
-    if(!var_10 && !var_11) {
+    if(!var_10 && !var_11)
       var_9 = 0;
-    }
 
     wait 0.05;
   }
@@ -75,9 +73,8 @@ find_available_collision_model() {
       level.shark_collsions[var_0] linkto(self);
       self.shark_collision_model = level.shark_collsions[var_0];
 
-      foreach(var_2 in level.players) {
-        var_2 thread track_collision_with_player(level.shark_collsions[var_0]);
-      }
+      foreach(var_2 in level.players)
+      var_2 thread track_collision_with_player(level.shark_collsions[var_0]);
 
       break;
     }

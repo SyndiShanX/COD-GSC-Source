@@ -16,21 +16,19 @@ setupcqbpointsofinterest() {
   level.cqbpointsofinterest = [];
   level.cqbsetupcomplete = 0;
 
-  while(!isDefined(level.struct_class_names)) {
+  while(!isDefined(level.struct_class_names))
     wait 0.05;
-  }
 
   level.cqbsetupcomplete = 1;
-  pointents = getEntArray("cqb_point_of_interest", "targetname");
+  pointents = getentarray("cqb_point_of_interest", "targetname");
   pointstructs = getstructarray("cqb_point_of_interest", "targetname");
   points = arraycombine(pointents, pointstructs, 1, 0);
 
   for(i = 0; i < points.size; i++) {
     level.cqbpointsofinterest[i] = points[i].origin;
 
-    if(isDefined(points[i].classname) && (points[i].classname == "script_origin" || points[i].classname == "script_model")) {
+    if(isDefined(points[i].classname) && (points[i].classname == "script_origin" || points[i].classname == "script_model"))
       points[i] delete();
-    }
   }
 }
 
@@ -40,9 +38,8 @@ findcqbpointsofinterest() {
   }
   anim.findingcqbpointsofinterest = 1;
 
-  while(!isDefined(level.cqbsetupcomplete) || !level.cqbsetupcomplete) {
+  while(!isDefined(level.cqbsetupcomplete) || !level.cqbsetupcomplete)
     wait 0.05;
-  }
 
   if(!level.cqbpointsofinterest.size) {
     return;
@@ -59,10 +56,10 @@ findcqbpointsofinterest() {
         moving = ai[i].a.movement != "stop";
         shootatpos = ai[i] getshootatpos();
         lookaheadpoint = shootatpos;
-        forward = anglesToForward(ai[i].angles);
+        forward = anglestoforward(ai[i].angles);
 
         if(moving) {
-          trace = bulletTrace(lookaheadpoint, lookaheadpoint + forward * 128, 0, undefined);
+          trace = bullettrace(lookaheadpoint, lookaheadpoint + forward * 128, 0, undefined);
           lookaheadpoint = trace["position"];
         }
 
@@ -80,9 +77,8 @@ findcqbpointsofinterest() {
               }
               dot = vectordot(vectornormalize(point - shootatpos), forward);
 
-              if(dot < 0.643 || dot > 0.966) {
+              if(dot < 0.643 || dot > 0.966)
                 continue;
-              }
             } else if(dist < 2500) {
               continue;
             }
@@ -94,20 +90,18 @@ findcqbpointsofinterest() {
           }
         }
 
-        if(best < 0) {
+        if(best < 0)
           ai[i].cqb_point_of_interest = undefined;
-        } else {
+        else
           ai[i].cqb_point_of_interest = level.cqbpointsofinterest[best];
-        }
 
         wait 0.05;
         waited = 1;
       }
     }
 
-    if(!waited) {
+    if(!waited)
       wait 0.25;
-    }
   }
 }
 
@@ -116,9 +110,8 @@ cqbdebug() {
   self endon("end_cqb_debug");
   self endon("death");
 
-  if(getdvar(#"_id_3380B629") == "") {
+  if(getdvar(#"_id_3380B629") == "")
     setdvar("scr_cqbdebug", "off");
-  }
 
   level thread cqbdebugglobal();
 
@@ -134,7 +127,7 @@ cqbdebug() {
         record3dtext("cqb_target", self.cqb_target.origin + vectorscale((0, 0, 1), 70.0), (0.5, 1, 0.5), "Animscript");
       } else {
         moving = self.a.movement != "stop";
-        forward = anglesToForward(self.angles);
+        forward = anglestoforward(self.angles);
         shootatpos = self getshootatpos();
         lookaheadpoint = shootatpos;
 
@@ -178,9 +171,8 @@ cqbdebugglobal() {
       continue;
     }
 
-    for(i = 0; i < level.cqbpointsofinterest.size; i++) {
+    for(i = 0; i < level.cqbpointsofinterest.size; i++)
       print3d(level.cqbpointsofinterest[i], ".", (0.7, 0.7, 1), 0.7, 3);
-    }
 
     wait 0.05;
   }

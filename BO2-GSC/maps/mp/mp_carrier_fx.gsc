@@ -7,7 +7,8 @@
 #include maps\mp\createfx\mp_carrier_fx;
 #include maps\mp\createart\mp_carrier_art;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["water_splash"] = loadfx("bio/player/fx_player_water_splash_mp");

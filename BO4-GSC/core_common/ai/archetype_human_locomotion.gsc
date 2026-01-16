@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\ai_shared;
+
 #namespace archetype_human_locomotion;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -433,7 +434,7 @@ private shouldtacticalarrivecondition(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.type == # "cover left")) {
+  if(!(behaviortreeentity.node.type == #"cover left")) {
     return false;
   }
 
@@ -521,7 +522,7 @@ private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
     }
 
     if(isDefined(arrivalanim)) {
-      isright = behaviortreeentity.node.type == # "cover right";
+      isright = behaviortreeentity.node.type == #"cover right";
       splittime = getarrivalsplittime(arrivalanim, isright);
       issplitarrival = splittime < 1;
       nodeapproachyaw = behaviortreeentity getnodeoffsetangles(behaviortreeentity.node)[1];
@@ -592,14 +593,14 @@ private checkcoverarrivalconditions(coverenterpos, coverpos) {
 
   trace = groundtrace(coverenterpos + (0, 0, 72), coverenterpos + (0, 0, -72), 0, 0, 0);
 
-  if(isDefined(trace[# "position"]) && abs(trace[# "position"][2] - coverpos[2]) > 30) {
+  if(isDefined(trace[#"position"]) && abs(trace[#"position"][2] - coverpos[2]) > 30) {
     if(getdvarint(#"ai_debugarrivals", 0)) {
       recordcircle(coverenterpos, 1, (1, 0, 0), "<dev string:x38>");
       record3dtext("<dev string:x4e>", coverenterpos, (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      recordcircle(trace[# "position"], 1, (1, 0, 0), "<dev string:x38>");
-      record3dtext("<dev string:x67>" + int(abs(trace[# "position"][2] - coverpos[2])), trace[# "position"] + (0, 0, 5), (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      record3dtext("<dev string:x7e>" + 30, trace[# "position"], (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      recordline(coverenterpos, trace[# "position"], (1, 0, 0), "<dev string:x38>");
+      recordcircle(trace[#"position"], 1, (1, 0, 0), "<dev string:x38>");
+      record3dtext("<dev string:x67>" + int(abs(trace[#"position"][2] - coverpos[2])), trace[#"position"] + (0, 0, 5), (1, 0, 0), "<dev string:x38>", undefined, 0.4);
+      record3dtext("<dev string:x7e>" + 30, trace[#"position"], (1, 0, 0), "<dev string:x38>", undefined, 0.4);
+      recordline(coverenterpos, trace[#"position"], (1, 0, 0), "<dev string:x38>");
     }
 
     return false;

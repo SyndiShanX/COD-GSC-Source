@@ -37,11 +37,10 @@ main() {
     return;
   }
 
-  if(bTestCanMove) {
+  if(bTestCanMove)
     bCanMoveToAttackPos = self CanMovePointToPoint(self.origin, attackPos);
-  } else {
+  else
     bCanMoveToAttackPos = true;
-  }
 
   animEntry = undefined;
   if(!bCanMoveToAttackPos) {
@@ -71,26 +70,21 @@ GetMeleeAnimState() {
 }
 
 ShouldDoExtendedKill(victim) {
-  if(!self.enableExtendedKill) {
+  if(!self.enableExtendedKill)
     return undefined;
-  }
 
   cMaxHeightDiff = 4;
 
-  if(!IsGameParticipant(victim)) {
+  if(!IsGameParticipant(victim))
     return undefined;
-  }
-  if(self IsProtectedByRiotshield(victim)) {
+  if(self IsProtectedByRiotshield(victim))
     return undefined;
-  }
-  if(victim IsJuggernaut()) {
+  if(victim IsJuggernaut())
     return undefined;
-  }
 
   victimToMe = self.origin - victim.origin;
-  if(abs(victimToMe[2]) > cMaxHeightDiff) {
+  if(abs(victimToMe[2]) > cMaxHeightDiff)
     return undefined;
-  }
 
   victimToMe2D = VectorNormalize((victimToMe[0], victimToMe[1], 0));
   victimFacing = anglesToForward(victim.angles);
@@ -113,25 +107,21 @@ ShouldDoExtendedKill(victim) {
     }
   }
 
-  if(animEntry == 1) {
+  if(animEntry == 1)
     cClearanceRequired = 128;
-  } else {
+  else
     cClearanceRequired = 96;
-  }
   landPos = victim.origin - cClearanceRequired * snappedVictimToMe;
 
   landPosDropped = self DropPosToGround(landPos);
-  if(!isDefined(landPosDropped)) {
+  if(!isDefined(landPosDropped))
     return undefined;
-  }
 
-  if(abs(landPosDropped[2] - landPos[2]) > cMaxHeightDiff) {
+  if(abs(landPosDropped[2] - landPos[2]) > cMaxHeightDiff)
     return undefined;
-  }
 
-  if(!self AIPhysicsTracePassed(victim.origin + (0, 0, 4), landPosDropped + (0, 0, 4), self.radius, self.height)) {
+  if(!self AIPhysicsTracePassed(victim.origin + (0, 0, 4), landPosDropped + (0, 0, 4), self.radius, self.height))
     return undefined;
-  }
 
   return animEntry;
 }
@@ -144,11 +134,10 @@ DoExtendedKill(animEntry) {
   attackAnim = self GetAnimEntry(meleeAnimState, animEntry);
   self thread ExtendedKill_StickToVictim(attackAnim, self.curMeleeTarget.origin, self.curMeleeTarget.angles);
 
-  if(animEntry == 1) {
+  if(animEntry == 1)
     self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "mp_wolf_attack_quick_back_npc", "mp_dog_attack_quick_back_npc"));
-  } else {
+  else
     self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "mp_wolf_attack_short_npc", "mp_dog_attack_short_npc"));
-  }
 
   self PlayAnimNUntilNotetrack(meleeAnimState, animEntry, "attack", "end");
 
@@ -204,11 +193,10 @@ DoStandardKill(attackPos, bCanMoveToAttackPos) {
   attackAnim = self GetAnimEntry(meleeAnimState, 0);
   animLength = GetAnimLength(attackAnim);
   meleeNotetracks = GetNotetrackTimes(attackAnim, "dog_melee");
-  if(meleeNotetracks.size > 0) {
+  if(meleeNotetracks.size > 0)
     lerpTime = meleeNotetracks[0] * animLength;
-  } else {
+  else
     lerpTime = animLength;
-  }
 
   self ScrAgentDoAnimLerp(self.origin, attackPos, lerpTime);
 
@@ -219,24 +207,20 @@ DoStandardKill(attackPos, bCanMoveToAttackPos) {
   self notify("cancel_updatelerppos");
 
   damageDealt = 0;
-  if(isDefined(self.curMeleeTarget)) {
+  if(isDefined(self.curMeleeTarget))
     damageDealt = self.curMeleeTarget.health;
-  }
-  if(isDefined(self.meleeDamage)) {
+  if(isDefined(self.meleeDamage))
     damageDealt = self.meleeDamage;
-  }
 
-  if(isDefined(self.curMeleeTarget)) {
+  if(isDefined(self.curMeleeTarget))
     self DoMeleeDamage(self.curMeleeTarget, damageDealt, "MOD_IMPACT");
-  }
 
   self.curMeleeTarget = undefined;
 
-  if(bLerp) {
+  if(bLerp)
     self ScrAgentSetAnimScale(0, 1);
-  } else {
+  else
     self ScrAgentSetAnimScale(1, 1);
-  }
 
   self ScrAgentSetPhysicsMode("gravity");
   self ScrAgentSetAnimMode("anim deltas");
@@ -283,11 +267,10 @@ GetUpdatedAttackPos(enemy, bCanMove) {
     } else {
       meToTarget = meToTarget / distMeToTarget;
       attackPos = enemy.origin - meToTarget * self.attackOffset;
-      if(self CanMovePointToPoint(self.origin, attackPos)) {
+      if(self CanMovePointToPoint(self.origin, attackPos))
         return attackPos;
-      } else {
+      else
         return undefined;
-      }
     }
   }
 }
@@ -301,13 +284,11 @@ IsProtectedByRiotshield(enemy) {
     angleToMe = VectorDot(enemyFacing, enemyToMe);
 
     if(enemy.hasRiotShieldEquipped) {
-      if(angleToMe > 0.766) {
+      if(angleToMe > 0.766)
         return true;
-      }
     } else {
-      if(angleToMe < -0.766) {
+      if(angleToMe < -0.766)
         return true;
-      }
     }
   }
 

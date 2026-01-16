@@ -16,6 +16,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\ai\zm_ai_dog_interface;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_dog;
 
 autoexec __init__system__() {
@@ -73,9 +74,9 @@ bb_getshouldrunstatus() {
     return "<dev string:x38>";
   }
 
-  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint")) {
-    return "run";
-  }
+    if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint")) {
+      return "run";
+    }
 
   return "walk";
 }
@@ -168,7 +169,7 @@ is_target_valid(dog, target) {
     return 0;
   }
 
-  if(!(dog.team == # "allies")) {
+  if(!(dog.team == #"allies")) {
     if(!isplayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -219,7 +220,7 @@ private get_favorite_enemy(dog) {
   dog_targets = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       dog_targets = getaiteamarray(level.zombie_team);
     } else {
       dog_targets = getplayers();
@@ -312,9 +313,9 @@ zombiedogtargetservice(behaviortreeentity) {
     return;
   }
 
-  if(behaviortreeentity ai::has_behavior_attribute("patrol") && behaviortreeentity ai::get_behavior_attribute("patrol")) {
-    return;
-  }
+    if(behaviortreeentity ai::has_behavior_attribute("patrol") && behaviortreeentity ai::get_behavior_attribute("patrol")) {
+      return;
+    }
 
   if(!is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     if(isDefined(behaviortreeentity.favoriteenemy)) {
@@ -328,7 +329,9 @@ zombiedogtargetservice(behaviortreeentity) {
   if(behaviortreeentity.ignoreall || behaviortreeentity.pacifist || !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     if(is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
       if(isDefined(level.var_d22435d9)) {
-        [[level.var_d22435d9]](behaviortreeentity);
+        [
+          [level.var_d22435d9]
+        ](behaviortreeentity);
       }
     } else {
       if(isDefined(behaviortreeentity function_4794d6a3().overridegoalpos)) {
@@ -336,7 +339,9 @@ zombiedogtargetservice(behaviortreeentity) {
       }
 
       if(isDefined(level.no_target_override)) {
-        [[level.no_target_override]](behaviortreeentity);
+        [
+          [level.no_target_override]
+        ](behaviortreeentity);
         return;
       }
 

@@ -490,9 +490,8 @@ set_silenthawk_override_anims() {
   level.scr_anim["generic"]["stage_littlebird_left"] = % little_bird_premount_guy3;
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 8; var_1++) {
+  for(var_1 = 0; var_1 < 8; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_pilot1";
   var_0[1].sittag = "tag_pilot2";
@@ -589,9 +588,8 @@ set_silenthawk_override_anims() {
 set_zodiac_override_anims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++) {
+  for(var_1 = 0; var_1 < 4; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_body";
   var_0[1].sittag = "tag_body";

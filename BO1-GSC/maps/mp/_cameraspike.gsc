@@ -37,11 +37,11 @@ onSpawnCameraSpike(watcher, player) {
   self SetTeam(player.team);
   self.prevOwner = player;
   playerAngles = player GetPlayerAngles();
-  forward = anglesToForward(playerAngles);
-  eye = player getEye();
-  trace = bulletTrace(eye + vector_scale(forward, 10), eye + vector_scale(forward, 10000), false, player, false, true);
-  self.cameraHead = spawn("script_model", self GetTagOrigin("tag_leg_2"));
-  self.cameraHead setModel("t5_weapon_camera_head_world");
+  forward = AnglesToForward(playerAngles);
+  eye = player GetEye();
+  trace = BulletTrace(eye + vector_scale(forward, 10), eye + vector_scale(forward, 10000), false, player, false, true);
+  self.cameraHead = Spawn("script_model", self GetTagOrigin("tag_leg_2"));
+  self.cameraHead SetModel("t5_weapon_camera_head_world");
   self.cameraHead.angles = self.angles;
   self.cameraHead linkto(self);
   self.cameraHead maps\mp\gametypes\_weaponobjects::attachReconModel("t5_weapon_camera_head_world_detect", player);
@@ -59,16 +59,14 @@ adjustPosition(viewTargetPos) {
   self endon("death");
   self waitTillNotMoving();
   if(isDefined(self.owner)) {
-    if(self.owner IsOnGround()) {
+    if(self.owner IsOnGround())
       self.origin = self.owner.origin;
-    }
     self thread adjustCameraDirection(viewTargetPos);
   }
 }
 changeOwner(lastOwner, newOwner) {
-  if(newOwner == lastOwner) {
+  if(newOwner == lastOwner)
     return;
-  }
   self notify("owner_changed");
   lastOwner.cameraSpike = undefined;
   lastOwner.cameraSpikeToggle = false;
@@ -85,7 +83,7 @@ changeOwner(lastOwner, newOwner) {
   self SetTeam(newOwner.team);
 }
 cameraSpikeDetonate(attacker) {
-  playFX(level._equipment_explode_fx, self.origin);
+  PlayFX(level._equipment_explode_fx, self.origin);
   PlaySoundAtPosition("dst_equipment_destroy", self.origin);
   self destroyEnt();
 }
@@ -105,7 +103,7 @@ adjustCameraDirection(point) {
 watchStun() {
   self endon("death");
   self.cameraHead endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("stunned");
     if(isDefined(self.cameraHead)) {
       self.cameraHead.stunned = true;
@@ -121,9 +119,8 @@ watchStun() {
 watchShutdown(player) {
   cameraHead = self.cameraHead;
   self waittill("death");
-  if(isDefined(cameraHead)) {
+  if(isDefined(cameraHead))
     cameraHead delete();
-  }
   if(isDefined(player) && (!isDefined(player.cameraSpike) || player.cameraSpike == self)) {
     player.cameraSpikeToggle = false;
     player.cameraSpike = undefined;
@@ -134,13 +131,12 @@ watchToggle(player) {
   self endon("death");
   self endon("owner_changed");
   player endon("disconnect");
-  while(true) {
+  while (true) {
     if(player ActionSlotOneButtonPressed() && !player IsRemoteControlling()) {
       player.cameraSpikeToggle = !player.cameraSpikeToggle;
       player toggleCameraSpike(player.cameraSpikeToggle);
-      while(player ActionSlotOneButtonPressed()) {
+      while (player ActionSlotOneButtonPressed())
         wait 0.05;
-      }
     }
     wait 0.05;
   }
@@ -148,21 +144,19 @@ watchToggle(player) {
 watchCameraSpikeDamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setCanDamage(true);
+  self SetCanDamage(true);
   damageMax = 100;
   if(!self maps\mp\gametypes\_weaponobjects::isHacked()) {
     self.damageTaken = 0;
   }
-  while(true) {
+  while (true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker))
       continue;
-    }
-    if(level.teamBased && attacker.team == self.owner.team && attacker != self.owner) {
+    if(level.teamBased && attacker.team == self.owner.team && attacker != self.owner)
       continue;
-    }
     if(isDefined(weaponName)) {
       switch (weaponName) {
         case "concussion_grenade_mp":
@@ -171,25 +165,21 @@ watchCameraSpikeDamage(watcher) {
             self thread maps\mp\gametypes\_weaponobjects::stunStart(watcher, watcher.stunTime);
           }
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-            }
           }
           continue;
         default:
-          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
             attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-          }
           break;
       }
     }
-    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
+    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner)
       continue;
-    }
     if((type == "MOD_MELEE")) {
       self.damageTaken = damageMax;
     } else {
@@ -204,8 +194,8 @@ watchCameraSpikeDamage(watcher) {
 watch_camera_head_damage(watcher, body) {
   self endon("death");
   body endon("death");
-  self setCanDamage(true);
-  while(true) {
+  self SetCanDamage(true);
+  while (true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weapon, iDFlags);

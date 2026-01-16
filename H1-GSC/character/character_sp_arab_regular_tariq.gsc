@@ -5,7 +5,7 @@
 *********************************************************/
 
 main() {
-  self setModel("body_sp_arab_regular_tariq");
+  self setmodel("body_sp_arab_regular_tariq");
   self attach("head_sp_arab_regular_tariq", "", 1);
   self.headmodel = "head_sp_arab_regular_tariq";
   self.hatmodel = "helmet_sp_arab_regular_tariq";

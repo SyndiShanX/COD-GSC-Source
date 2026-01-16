@@ -32,7 +32,7 @@ oafc_switch() {
   }
   level._player_who_pressed_the_switch = entity_num;
   self.trigger trigger_off();
-  self playSound("evt_sq_gen_button");
+  self playsound("evt_sq_gen_button");
   self moveTo(self.off_pos, 0.25);
   self waittill("movedone");
   flag_set("oafc_switch_pressed");
@@ -235,7 +235,7 @@ oafc_trigger_thread(tiles, set) {
             PrintLn("trig thread has new tile " + i);
           }
           tile setModel(tile.tile);
-          tile playSound("evt_sq_oafc_glyph_activate");
+          tile playsound("evt_sq_oafc_glyph_activate");
           matched = false;
           if(set == 1) {
             level._picked_tile1 = tile;
@@ -247,8 +247,8 @@ oafc_trigger_thread(tiles, set) {
             if(set == 1) {
               if(isDefined(level._picked_tile1) && isDefined(level._picked_tile2)) {
                 if(level._picked_tile1.tile == level._picked_tile2.tile) {
-                  level._picked_tile1 playSound("evt_sq_oafc_glyph_correct");
-                  level._picked_tile2 playSound("evt_sq_oafc_glyph_correct");
+                  level._picked_tile1 playsound("evt_sq_oafc_glyph_correct");
+                  level._picked_tile2 playsound("evt_sq_oafc_glyph_correct");
                   matched = true;
                   level._picked_tile1.matched = true;
                   level._picked_tile2.matched = true;
@@ -284,8 +284,8 @@ oafc_trigger_thread(tiles, set) {
                   PrintLn("breaking out of match");
                   break;
                 } else {
-                  level._picked_tile1 playSound("evt_sq_oafc_glyph_wrong");
-                  level._picked_tile2 playSound("evt_sq_oafc_glyph_wrong");
+                  level._picked_tile1 playsound("evt_sq_oafc_glyph_wrong");
+                  level._picked_tile2 playsound("evt_sq_oafc_glyph_wrong");
                   rand = randomintrange(0, 2);
                   if(isDefined(touched_player) && rand == 0) {
                     touched_player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, randomintrange(2, 5));
@@ -303,7 +303,7 @@ oafc_trigger_thread(tiles, set) {
             }
             wait(0.05);
           }
-          tile playSound("evt_sq_oafc_glyph_clear");
+          tile playsound("evt_sq_oafc_glyph_clear");
           if(set == 1) {
             level._picked_tile1 = undefined;
           } else {
@@ -396,37 +396,37 @@ oafc_story_vox() {
     return;
   }
   level._oafc_sound_ent = spawn("script_origin", struct.origin);
-  level._oafc_sound_ent playSound("vox_egg_story_1_0", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_0", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
   players = get_players();
   if(isDefined(players[level._player_who_pressed_the_switch])) {
     level.skit_vox_override = true;
-    players[level._player_who_pressed_the_switch] playSound("vox_egg_story_1_1" + maps\zombie_temple_sq::get_variant_from_entity_num(level._player_who_pressed_the_switch), "vox_egg_sounddone");
+    players[level._player_who_pressed_the_switch] playsound("vox_egg_story_1_1" + maps\zombie_temple_sq::get_variant_from_entity_num(level._player_who_pressed_the_switch), "vox_egg_sounddone");
     players[level._player_who_pressed_the_switch] waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
-  level._oafc_sound_ent playSound("vox_egg_story_1_2", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_2", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
   while(level._num_matched_tiles < 1) {
     wait(.1);
   }
-  level._oafc_sound_ent playSound("vox_egg_story_1_3", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_3", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
   while(level._num_matched_tiles != level._num_tiles_to_match) {
     wait(.1);
   }
-  level._oafc_sound_ent playSound("vox_egg_story_1_4", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_4", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
   players = get_players();
   if(isDefined(players[level._player_who_pressed_the_switch])) {
     level.skit_vox_override = true;
-    players[level._player_who_pressed_the_switch] playSound("vox_egg_story_1_5" + maps\zombie_temple_sq::get_variant_from_entity_num(level._player_who_pressed_the_switch), "vox_egg_sounddone");
+    players[level._player_who_pressed_the_switch] playsound("vox_egg_story_1_5" + maps\zombie_temple_sq::get_variant_from_entity_num(level._player_who_pressed_the_switch), "vox_egg_sounddone");
     players[level._player_who_pressed_the_switch] waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
-  level._oafc_sound_ent playSound("vox_egg_story_1_6", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_6", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
-  level._oafc_sound_ent playSound("vox_egg_story_1_7", "sounddone");
+  level._oafc_sound_ent playsound("vox_egg_story_1_7", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
   flag_set("oafc_plot_vo_done");
   level._oafc_sound_ent delete();

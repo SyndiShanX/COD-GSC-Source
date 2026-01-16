@@ -37,19 +37,17 @@ skipto_village() {
   setmusicstate("ANGOLA_VILLAGE_APPROACH");
   flag_set("fxanim_grass_spawn");
   flag_init("player_failing_stealth");
-  triggers = getEntArray("player_escaping_village_trigger", "targetname");
+  triggers = getentarray("player_escaping_village_trigger", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger trigger_off();
-  }
+  foreach(trigger in triggers)
+  trigger trigger_off();
 }
 
 clean_up_beartrap_test() {
-  a_enemies = getEntArray("beartrap_enemy_test_ai", "targetname");
+  a_enemies = getentarray("beartrap_enemy_test_ai", "targetname");
 
-  foreach(ai_enemy in a_enemies) {
-    ai_enemy delete();
-  }
+  foreach(ai_enemy in a_enemies)
+  ai_enemy delete();
 }
 
 init_flags() {
@@ -88,7 +86,7 @@ main() {
 }
 
 village_spawn_funcs() {
-  sp_fail_reinforcement = getEntArray("enemy_fail_village", "targetname");
+  sp_fail_reinforcement = getentarray("enemy_fail_village", "targetname");
   array_thread(sp_fail_reinforcement, ::add_spawn_function, ::chase_after_target, level.player);
 }
 
@@ -115,13 +113,12 @@ playguardwalla() {
   ent = spawn("script_origin", (-19214, -2232, 698));
 
   while(true) {
-    ent playSound("amb_guard_walla_" + i, "sounddone");
+    ent playsound("amb_guard_walla_" + i, "sounddone");
     ent waittill("sounddone");
     wait(randomfloatrange(1.5, 4));
 
-    if(i > 5) {
+    if(i > 5)
       i = 1;
-    }
   }
 }
 
@@ -135,11 +132,10 @@ village_stealth_hint() {
   level endon("stop_village_ambient");
   trigger_wait("trig_hut_patroller");
 
-  if(!level.console && !level.player gamepadusedlast()) {
+  if(!level.console && !level.player gamepadusedlast())
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 3);
-  } else {
+  else
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 3);
-  }
 }
 
 fake_stealth() {
@@ -153,24 +149,20 @@ fake_stealth() {
     str_stance = level.player getstance();
 
     if(str_stance == "stand" && !flag("hut_patroller_passed_window")) {
-      if(n_dist < 512) {
+      if(n_dist < 512)
         flag_set("fake_stealth_spotted");
-      }
     } else if(level.player istouching(e_foliage)) {
       if(str_stance == "prone") {
-        if(n_dist < 64) {
+        if(n_dist < 64)
           flag_set("fake_stealth_spotted");
-        }
       } else if(n_dist < 128)
         flag_set("fake_stealth_spotted");
     } else if(str_stance == "prone") {
-      if(n_dist < 128) {
+      if(n_dist < 128)
         flag_set("fake_stealth_spotted");
-      }
     } else if(n_dist < 256) {
-      if(self is_looking_at(level.player)) {
+      if(self is_looking_at(level.player))
         flag_set("fake_stealth_spotted");
-      }
     }
 
     wait 0.05;
@@ -193,11 +185,10 @@ village_runner_logic() {
     self setgoalnode(nd_next);
     wait 2.2;
 
-    if(isDefined(nd_next.target)) {
+    if(isDefined(nd_next.target))
       nd_next = getnode(nd_next.target, "targetname");
-    } else {
+    else
       at_last_node = 1;
-    }
 
     wait 0.05;
   }
@@ -224,9 +215,8 @@ clear_fail_by_hut_patroller() {
   self endon("death");
   t_fail = getent("trig_fail_by_hut_patroller", "targetname");
 
-  while(isDefined(t_fail) && self istouching(t_fail)) {
+  while(isDefined(t_fail) && self istouching(t_fail))
     wait 0.05;
-  }
 
   flag_set("hut_patroller_passed_window");
   t_fail delete();
@@ -238,9 +228,8 @@ fail_by_hut_patroller() {
   trigger_wait("trig_fail_by_hut_patroller");
   t_enter_hut = getent("objective_player_enter_hut_trigger", "targetname");
 
-  if(isDefined(t_enter_hut)) {
+  if(isDefined(t_enter_hut))
     t_enter_hut delete();
-  }
 
   flag_set("fake_stealth_spotted");
 }
@@ -273,7 +262,7 @@ village_guard_idle_logic(n_index) {
 
 radio_loop() {
   radio_loop_sound = spawn("script_origin", (-18601, -3066, 673));
-  radio_loop_sound playLoopSound("amb_angola_radio_lp");
+  radio_loop_sound playloopsound("amb_angola_radio_lp");
 }
 
 village_objectives() {
@@ -305,7 +294,7 @@ meatshield_event() {
   wait 0.5;
   model = get_model_or_models_from_scene("menendez_radio_room_idle", "menendez");
   model.team = "allies";
-  model setlookattext("", &"");
+  model setlookattext("", & "");
   player_enter_the_hut();
   level thread clean_up_village_guards();
   level thread clean_up_beartrap_test();
@@ -334,9 +323,8 @@ meatshield_event() {
 player_enter_the_hut() {
   flag_wait("mason_ready_to_enter_hud_window");
 
-  while(isDefined(level.player.planting_beartrap_mortar) && level.player.planting_beartrap_mortar) {
+  while(isDefined(level.player.planting_beartrap_mortar) && level.player.planting_beartrap_mortar)
     wait 0.05;
-  }
 
   setmusicstate("ANGOLA_MEATSHIELD_APPROACH");
   level thread maps\_audio::switch_music_wait("ANGOLA_GUN_HEAD", 29);
@@ -415,17 +403,15 @@ enemy_enter_meatshield_room(str_scene_enemy_attack) {
   if(!isDefined(level.meatshield_random_attacker_index)) {
     rval = randomint(999);
 
-    if(rval < 500) {
+    if(rval < 500)
       level.meatshield_random_attacker_index = 0;
-    } else {
+    else
       level.meatshield_random_attacker_index = 1;
-    }
   } else {
     level.meatshield_random_attacker_index++;
 
-    if(level.meatshield_random_attacker_index > 1) {
+    if(level.meatshield_random_attacker_index > 1)
       level.meatshield_random_attacker_index = 0;
-    }
   }
 
   level thread run_scene(str_scene_enemy_attack);
@@ -451,7 +437,7 @@ player_grabs_menendez_in_meatshield_hold() {
   str_scene_name = "player_grabs_menendez";
   level thread run_scene(str_scene_name);
   wait 0.1;
-  a_rigs = getEntArray("player_body", "targetname");
+  a_rigs = getentarray("player_body", "targetname");
   m_player_rig = a_rigs[0];
   level.m_player_rig = m_player_rig;
   level.mason_meatshield_weapon = spawn_model("t6_wpn_pistol_browninghp_prop_view", level.m_player_rig gettagorigin("tag_weapon1"), level.m_player_rig gettagangles("tag_weapon1"));
@@ -514,15 +500,14 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
       v_start = (level.m_player_rig.origin[0], level.m_player_rig.origin[1], 0);
       v_norm_vec = vectornormalize(v_end - v_start);
       v_norm_vec = v_norm_vec * -1;
-      v_angles = anglesToForward(level.m_player_rig.angles);
+      v_angles = anglestoforward(level.m_player_rig.angles);
       v_angles = vectornormalize(v_angles);
       n_dot = vectordot(v_norm_vec, v_angles);
       n_facing_diff = acos(n_dot);
       v_cross = vectorcross(v_norm_vec, v_angles);
 
-      if(v_cross[2] > 0) {
+      if(v_cross[2] > 0)
         n_facing_diff = n_facing_diff * -1;
-      }
 
       if(abs(level.meatshield_rot) > rotate_threshold) {
         if(level.meatshield_rot < 0.0) {
@@ -604,9 +589,8 @@ meatshield_check_for_player_rotation(rot_scale) {
     dead_zone = 0.02;
     left_right = v_rstick[1];
 
-    if(left_right < dead_zone && left_right > dead_zone * -1) {
+    if(left_right < dead_zone && left_right > dead_zone * -1)
       left_right = 0.0;
-    }
 
     level.meatshield_rot = left_right * rot_scale;
     level.meatshield_rot = level.meatshield_rot * -1.0;
@@ -659,7 +643,7 @@ meatshield_screen_message(display_time) {
 grenade_explosion_effect() {
   level waittill("meatshield_grenade_explosion");
   e_grenade = getent("nada", "targetname");
-  playFX(level._effect["def_explosion"], e_grenade.origin);
+  playfx(level._effect["def_explosion"], e_grenade.origin);
   clientnotify("grn_dgs");
 }
 
@@ -674,9 +658,8 @@ meatshield_ai_attacker(str_enemy_scene, str_enemy_ai_name) {
   ai_enemy.ignoreme = 1;
   ai_enemy.dontmelee = 1;
 
-  while(!isDefined(ai_enemy.meatshield_threat)) {
+  while(!isDefined(ai_enemy.meatshield_threat))
     wait 0.01;
-  }
 
   shoot_thread = 0;
 
@@ -715,7 +698,7 @@ meatshild_ai_try_and_shoot_target(str_enemy_scene, e_target, attack_time, player
 
     if(dt >= player_initial_prep_time) {
       v_dir = vectornormalize(self.origin - e_target.origin);
-      v_forward = anglesToForward(e_target.angles);
+      v_forward = anglestoforward(e_target.angles);
       dot = vectordot(v_dir, v_forward);
 
       if(dot < min_dot) {
@@ -780,11 +763,10 @@ spinning_fan() {
 clean_up_village_guards() {
   t_sm_village_fail = getent("sm_fail_village", "targetname");
   t_sm_village_fail delete();
-  a_enemies = getEntArray("village_guards", "script_noteworthy");
+  a_enemies = getentarray("village_guards", "script_noteworthy");
 
-  foreach(e_enemy in a_enemies) {
-    e_enemy delete();
-  }
+  foreach(e_enemy in a_enemies)
+  e_enemy delete();
 
   flag_set("stop_village_ambient");
 }
@@ -816,7 +798,7 @@ village_fail_general_logic() {
   end_scene("idle_bug");
   end_scene("idle_smoke");
   end_scene("idle_stretch");
-  a_enemies = getEntArray("village_guards", "script_noteworthy");
+  a_enemies = getentarray("village_guards", "script_noteworthy");
 
   foreach(e_enemy in a_enemies) {
     if(isalive(e_enemy)) {
@@ -837,11 +819,10 @@ fail_by_firing() {
   while(true) {
     self waittill("weapon_fired", weapon);
 
-    if(isDefined(weapon) && issubstr(weapon, "bear")) {
+    if(isDefined(weapon) && issubstr(weapon, "bear"))
       continue;
-    } else {
+    else
       break;
-    }
   }
 
   level thread village_fail_general_logic();
@@ -853,11 +834,10 @@ fail_by_grenade_throw() {
   while(true) {
     self waittill("grenade_fire", grenade, grenade_name);
 
-    if(isDefined(grenade_name) && issubstr(grenade_name, "bear")) {
+    if(isDefined(grenade_name) && issubstr(grenade_name, "bear"))
       continue;
-    } else {
+    else
       break;
-    }
   }
 
   level thread village_fail_general_logic();

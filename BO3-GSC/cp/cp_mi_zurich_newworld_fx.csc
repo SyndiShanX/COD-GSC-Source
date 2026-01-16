@@ -9,7 +9,7 @@
 #namespace cp_mi_zurich_newworld_fx;
 
 function main() {
-  clientfield::register("world", "set_fog_bank", 1, 2, "int", &function_c49f36a3, 0, 0);
+  clientfield::register("world", "set_fog_bank", 1, 2, "int", & function_c49f36a3, 0, 0);
 }
 
 function function_c49f36a3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -22,7 +22,7 @@ function function_c49f36a3(localclientnum, oldval, newval, bnewent, binitialsnap
       var_3a456a21 = 3;
     }
   }
-  for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+  for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
     setworldfogactivebank(localclientnum, var_3a456a21);
     if(var_3a456a21 == 3) {
       setexposureactivebank(localclientnum, var_3a456a21);

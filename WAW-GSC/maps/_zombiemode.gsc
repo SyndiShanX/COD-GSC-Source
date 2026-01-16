@@ -66,7 +66,7 @@ main() {
   level thread track_players_ammo_count();
   DisableGrenadeSuicide();
   level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
-  SaveGame("zombie_start", &"AUTOSAVE_LEVELSTART", "", true);
+  SaveGame("zombie_start", & "AUTOSAVE_LEVELSTART", "", true);
   if(!isDefined(level.eggs)) {
     level.eggs = 0;
   }
@@ -81,9 +81,9 @@ track_players_ammo_count() {
   if(!isDefined(level.player_ammo_out)) {
     level.player_ammo_out = 0;
   }
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       weap = players[i] getcurrentweapon();
       if(!isDefined(weap) || weap == "none" || weap == "zombie_perk_bottle_doubletap" || weap == "zombie_perk_bottle_jugg" || weap == "zombie_perk_bottle_revive" || weap == "zombie_perk_bottle_sleight" || weap == "mine_bouncing_betty" || weap == "syrette") {
         continue;
@@ -119,7 +119,7 @@ track_players_ammo_count() {
 
 ammo_dialog_timer() {
   level endon("ammo_out");
-  while(1) {
+  while (1) {
     wait(20);
     level notify("send_dialog_reminder");
   }
@@ -131,7 +131,7 @@ add_low_ammo_dialog() {
   if(!isDefined(self.vox_ammo_low)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_ammo_low");
     self.vox_ammo_low = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_ammo_low[self.vox_ammo_low.size] = "vox_ammo_low_" + i;
     }
     self.vox_ammo_low_available = self.vox_ammo_low;
@@ -150,7 +150,7 @@ add_no_ammo_dialog() {
   if(!isDefined(self.vox_ammo_out)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_ammo_out");
     self.vox_ammo_out = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_ammo_out[self.vox_ammo_out.size] = "vox_ammo_out_" + i;
     }
     self.vox_ammo_out_available = self.vox_ammo_out;
@@ -175,7 +175,7 @@ spawn_vo() {
 
 spawn_vo_player(index, num) {
   sound = "plr_" + index + "_vox_" + num + "play";
-  self playSound(sound, "sound_done");
+  self playsound(sound, "sound_done");
   self waittill("sound_done");
 }
 
@@ -184,7 +184,7 @@ testing_spawner_bug() {
   level.round_number = 7;
   spawners = [];
   spawners[0] = GetEnt("testy", "targetname");
-  while(1) {
+  while (1) {
     wait(1);
     level.enemy_spawns = spawners;
   }
@@ -216,48 +216,48 @@ init_strings() {
   PrecacheString(&"ZOMBIE_GAME_OVER");
   PrecacheString(&"ZOMBIE_SURVIVED_ROUND");
   PrecacheString(&"ZOMBIE_SURVIVED_ROUNDS");
-  add_zombie_hint("undefined", &"ZOMBIE_UNDEFINED");
-  add_zombie_hint("default_treasure_chest_950", &"ZOMBIE_RANDOM_WEAPON_950");
-  add_zombie_hint("default_buy_barrier_piece_10", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
-  add_zombie_hint("default_buy_barrier_piece_20", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
-  add_zombie_hint("default_buy_barrier_piece_50", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
-  add_zombie_hint("default_buy_barrier_piece_100", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
-  add_zombie_hint("default_reward_barrier_piece", &"ZOMBIE_BUTTON_REWARD_BARRIER");
-  add_zombie_hint("default_reward_barrier_piece_10", &"ZOMBIE_BUTTON_REWARD_BARRIER_10");
-  add_zombie_hint("default_reward_barrier_piece_20", &"ZOMBIE_BUTTON_REWARD_BARRIER_20");
-  add_zombie_hint("default_reward_barrier_piece_30", &"ZOMBIE_BUTTON_REWARD_BARRIER_30");
-  add_zombie_hint("default_reward_barrier_piece_40", &"ZOMBIE_BUTTON_REWARD_BARRIER_40");
-  add_zombie_hint("default_reward_barrier_piece_50", &"ZOMBIE_BUTTON_REWARD_BARRIER_50");
-  add_zombie_hint("default_buy_debris_100", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_100");
-  add_zombie_hint("default_buy_debris_200", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_200");
-  add_zombie_hint("default_buy_debris_250", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_250");
-  add_zombie_hint("default_buy_debris_500", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_500");
-  add_zombie_hint("default_buy_debris_750", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_750");
-  add_zombie_hint("default_buy_debris_1000", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1000");
-  add_zombie_hint("default_buy_debris_1250", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1250");
-  add_zombie_hint("default_buy_debris_1500", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1500");
-  add_zombie_hint("default_buy_debris_1750", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1750");
-  add_zombie_hint("default_buy_debris_2000", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_2000");
-  add_zombie_hint("default_buy_door_100", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_100");
-  add_zombie_hint("default_buy_door_200", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_200");
-  add_zombie_hint("default_buy_door_250", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_250");
-  add_zombie_hint("default_buy_door_500", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_500");
-  add_zombie_hint("default_buy_door_750", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_750");
-  add_zombie_hint("default_buy_door_1000", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1000");
-  add_zombie_hint("default_buy_door_1250", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1250");
-  add_zombie_hint("default_buy_door_1500", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1500");
-  add_zombie_hint("default_buy_door_1750", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_1750");
-  add_zombie_hint("default_buy_door_2000", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_2000");
-  add_zombie_hint("default_buy_area_100", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_100");
-  add_zombie_hint("default_buy_area_200", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_200");
-  add_zombie_hint("default_buy_area_250", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_250");
-  add_zombie_hint("default_buy_area_500", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_500");
-  add_zombie_hint("default_buy_area_750", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_750");
-  add_zombie_hint("default_buy_area_1000", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1000");
-  add_zombie_hint("default_buy_area_1250", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1250");
-  add_zombie_hint("default_buy_area_1500", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1500");
-  add_zombie_hint("default_buy_area_1750", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_1750");
-  add_zombie_hint("default_buy_area_2000", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_2000");
+  add_zombie_hint("undefined", & "ZOMBIE_UNDEFINED");
+  add_zombie_hint("default_treasure_chest_950", & "ZOMBIE_RANDOM_WEAPON_950");
+  add_zombie_hint("default_buy_barrier_piece_10", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
+  add_zombie_hint("default_buy_barrier_piece_20", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
+  add_zombie_hint("default_buy_barrier_piece_50", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
+  add_zombie_hint("default_buy_barrier_piece_100", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
+  add_zombie_hint("default_reward_barrier_piece", & "ZOMBIE_BUTTON_REWARD_BARRIER");
+  add_zombie_hint("default_reward_barrier_piece_10", & "ZOMBIE_BUTTON_REWARD_BARRIER_10");
+  add_zombie_hint("default_reward_barrier_piece_20", & "ZOMBIE_BUTTON_REWARD_BARRIER_20");
+  add_zombie_hint("default_reward_barrier_piece_30", & "ZOMBIE_BUTTON_REWARD_BARRIER_30");
+  add_zombie_hint("default_reward_barrier_piece_40", & "ZOMBIE_BUTTON_REWARD_BARRIER_40");
+  add_zombie_hint("default_reward_barrier_piece_50", & "ZOMBIE_BUTTON_REWARD_BARRIER_50");
+  add_zombie_hint("default_buy_debris_100", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_100");
+  add_zombie_hint("default_buy_debris_200", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_200");
+  add_zombie_hint("default_buy_debris_250", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_250");
+  add_zombie_hint("default_buy_debris_500", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_500");
+  add_zombie_hint("default_buy_debris_750", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_750");
+  add_zombie_hint("default_buy_debris_1000", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1000");
+  add_zombie_hint("default_buy_debris_1250", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1250");
+  add_zombie_hint("default_buy_debris_1500", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1500");
+  add_zombie_hint("default_buy_debris_1750", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_1750");
+  add_zombie_hint("default_buy_debris_2000", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_2000");
+  add_zombie_hint("default_buy_door_100", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_100");
+  add_zombie_hint("default_buy_door_200", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_200");
+  add_zombie_hint("default_buy_door_250", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_250");
+  add_zombie_hint("default_buy_door_500", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_500");
+  add_zombie_hint("default_buy_door_750", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_750");
+  add_zombie_hint("default_buy_door_1000", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1000");
+  add_zombie_hint("default_buy_door_1250", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1250");
+  add_zombie_hint("default_buy_door_1500", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1500");
+  add_zombie_hint("default_buy_door_1750", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_1750");
+  add_zombie_hint("default_buy_door_2000", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_2000");
+  add_zombie_hint("default_buy_area_100", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_100");
+  add_zombie_hint("default_buy_area_200", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_200");
+  add_zombie_hint("default_buy_area_250", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_250");
+  add_zombie_hint("default_buy_area_500", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_500");
+  add_zombie_hint("default_buy_area_750", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_750");
+  add_zombie_hint("default_buy_area_1000", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1000");
+  add_zombie_hint("default_buy_area_1250", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1250");
+  add_zombie_hint("default_buy_area_1500", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1500");
+  add_zombie_hint("default_buy_area_1750", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_1750");
+  add_zombie_hint("default_buy_area_2000", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_2000");
 }
 
 init_sounds() {
@@ -524,7 +524,7 @@ players_playing() {
 watchGrenadeThrow() {
   self endon("disconnect");
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", grenade);
     if(isDefined(grenade)) {
       if(self maps\_laststand::player_is_in_laststand()) {
@@ -535,7 +535,7 @@ watchGrenadeThrow() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player.entity_num = player GetEntityNumber();
     player thread onPlayerSpawned();
@@ -574,7 +574,7 @@ onPlayerDisconnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self SetClientDvars("cg_thirdPerson", "0",
       "cg_fov", "65",
@@ -642,7 +642,7 @@ spawnSpectator() {
   self detachAll();
   self setSpectatePermissions(true);
   self thread spectator_thread();
-  self spawn(self.origin, self.angles);
+  self Spawn(self.origin, self.angles);
   self notify("spawned_spectator");
 }
 
@@ -659,7 +659,7 @@ spectator_thread() {
   if(IsSplitScreen()) {
     last_alive = undefined;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!players[i].is_zombie) {
         last_alive = players[i];
       }
@@ -699,11 +699,13 @@ spectators_respawn() {
   if(!isDefined(level.custom_spawnPlayer)) {
     level.custom_spawnPlayer = ::spectator_respawn;
   }
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "spectator") {
-        players[i][[level.spawnPlayer]]();
+        players[i][
+          [level.spawnPlayer]
+        ]();
         if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && level.round_number > 6 && players[i].score < 1500) {
           players[i].old_score = players[i].score;
           players[i].score = 1500;
@@ -724,14 +726,14 @@ spectator_respawn() {
   new_origin = undefined;
   new_origin = check_for_valid_spawn_near_team(self);
   if(isDefined(new_origin)) {
-    self spawn(new_origin, angles);
+    self Spawn(new_origin, angles);
   } else {
-    self spawn(origin, angles);
+    self Spawn(origin, angles);
   }
   if(IsSplitScreen()) {
     last_alive = undefined;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!players[i].is_zombie) {
         last_alive = players[i];
       }
@@ -753,15 +755,14 @@ spectator_respawn() {
 check_for_valid_spawn_near_team(revivee) {
   players = get_players();
   spawn_points = getstructarray("player_respawn_point", "targetname");
-  if(spawn_points.size == 0) {
+  if(spawn_points.size == 0)
     return undefined;
-  }
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
-      for(j = 0; j < spawn_points.size; j++) {
+      for (j = 0; j < spawn_points.size; j++) {
         if(DistanceSquared(players[i].origin, spawn_points[j].origin) < (1000 * 1000)) {
           spawn_array = getstructarray(spawn_points[j].target, "targetname");
-          for(k = 0; k < spawn_array.size; k++) {
+          for (k = 0; k < spawn_array.size; k++) {
             if(spawn_array[k].script_int == (revivee.entity_num + 1)) {
               return spawn_array[k].origin;
             }
@@ -777,7 +778,7 @@ check_for_valid_spawn_near_team(revivee) {
 get_players_on_team(exclude) {
   teammates = [];
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].spawn_side == self.spawn_side && !isDefined(players[i].revivetrigger) && players[i] != exclude) {
       teammates[teammates.size] = players[i];
     }
@@ -789,15 +790,15 @@ get_safe_breadcrumb_pos(player) {
   players = get_players();
   valid_players = [];
   min_dist = 150 * 150;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!is_player_valid(players[i])) {
       continue;
     }
     valid_players[valid_players.size] = players[i];
   }
-  for(i = 0; i < valid_players.size; i++) {
+  for (i = 0; i < valid_players.size; i++) {
     count = 0;
-    for(q = 1; q < player.zombie_breadcrumbs.size; q++) {
+    for (q = 1; q < player.zombie_breadcrumbs.size; q++) {
       if(DistanceSquared(player.zombie_breadcrumbs[q], valid_players[i].origin) < min_dist) {
         continue;
       }
@@ -826,7 +827,7 @@ round_spawning() {
   ai_calculate_health();
   count = 0;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].zombification_time = 0;
   }
   max = level.zombie_vars["zombie_max_ai"];
@@ -854,9 +855,9 @@ round_spawning() {
     max = int(max * 0.8);
   }
   level.zombie_total = max;
-  while(count < max) {
+  while (count < max) {
     spawn_point = level.enemy_spawns[RandomInt(level.enemy_spawns.size)];
-    while(get_enemy_count() > 31) {
+    while (get_enemy_count() > 31) {
       wait(0.05);
     }
     ai = spawn_zombie(spawn_point);
@@ -870,7 +871,7 @@ round_spawning() {
   }
   if(level.round_number > 3) {
     zombies = getaiarray("axis");
-    while(zombies.size > 0) {
+    while (zombies.size > 0) {
       if(zombies.size == 1 && zombies[0].has_legs == true) {
         var = randomintrange(1, 4);
         zombies[0] set_run_anim("sprint" +
@@ -886,7 +887,7 @@ round_spawning() {
 }
 
 round_spawning_test() {
-  while(true) {
+  while (true) {
     spawn_point = level.enemy_spawns[RandomInt(level.enemy_spawns.size)];
     ai = spawn_zombie(spawn_point);
     ai waittill("death");
@@ -935,7 +936,7 @@ round_start() {
   level.round_number = 1;
   level.first_round = true;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] giveweapon("stielhandgranate");
     players[i] setweaponammoclip("stielhandgranate", 0);
   }
@@ -967,7 +968,7 @@ create_chalk_hud(x) {
 play_intro_VO() {
   wait(3);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     index = maps\_zombiemode_weapons::get_player_index(players[i]);
     player_index = "plr_" + index + "_";
     sound_to_play = "vox_name_int_0";
@@ -1072,7 +1073,7 @@ chalk_round_hint() {
     huds[huds.size] = level.chalk_hud2;
   }
   time = level.zombie_vars["zombie_between_round_time"];
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     huds[i] FadeOverTime(time * 0.25);
     huds[i].color = (1, 1, 1);
   }
@@ -1086,8 +1087,8 @@ chalk_round_hint() {
   }
   fade_time = 0.5;
   steps = (time * 0.5) / fade_time;
-  for(q = 0; q < steps; q++) {
-    for(i = 0; i < huds.size; i++) {
+  for (q = 0; q < steps; q++) {
+    for (i = 0; i < huds.size; i++) {
       if(!isDefined(huds[i])) {
         continue;
       }
@@ -1095,7 +1096,7 @@ chalk_round_hint() {
       huds[i].alpha = 0;
     }
     wait(fade_time);
-    for(i = 0; i < huds.size; i++) {
+    for (i = 0; i < huds.size; i++) {
       if(!isDefined(huds[i])) {
         continue;
       }
@@ -1104,7 +1105,7 @@ chalk_round_hint() {
     }
     wait(fade_time);
   }
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     if(!isDefined(huds[i])) {
       continue;
     }
@@ -1115,11 +1116,10 @@ chalk_round_hint() {
 }
 
 round_think() {
-  for(;;) {
+  for (;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500) {
+    if(maxreward > 500)
       maxreward = 500;
-    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.round_timer = level.zombie_vars["zombie_round_time"];
     add_later_round_spawners();
@@ -1148,7 +1148,7 @@ round_think() {
 
 award_grenades_for_survivors() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!players[i].is_zombie) {
       if(!players[i] HasWeapon("stielhandgranate")) {
         players[i] GiveWeapon("stielhandgranate");
@@ -1178,15 +1178,14 @@ ai_calculate_health() {
 round_spawn_failsafe() {
   self endon("death");
   prevorigin = self.origin;
-  while(1) {
+  while (1) {
     if(!level.zombie_vars["zombie_use_failsafe"]) {
       return;
     }
     wait(30);
     if(isDefined(self.lastchunk_destroy_time)) {
-      if((getTime() - self.lastchunk_destroy_time) < 5000) {
+      if((getTime() - self.lastchunk_destroy_time) < 5000)
         continue;
-      }
     }
     if(self.origin[2] < level.zombie_vars["below_world_check"]) {
       self dodamage(self.health + 100, (0, 0, 0));
@@ -1210,11 +1209,11 @@ round_wait() {
   wait(1);
   if(flag("dog_round")) {
     wait(7);
-    while(level.dog_intermission) {
+    while (level.dog_intermission) {
       wait(0.5);
     }
   } else {
-    while(get_enemy_count() > 0 || level.zombie_total > 0 || level.intermission) {
+    while (get_enemy_count() > 0 || level.zombie_total > 0 || level.intermission) {
       wait(0.5);
     }
   }
@@ -1256,7 +1255,7 @@ playerzombie_player_damage() {
   self endon("disconnect");
   self thread playerzombie_infinite_health();
   self.zombiehealth = level.zombie_health;
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker, directionVec, point, type);
     if(!isDefined(attacker) || !IsPlayer(attacker)) {
       wait(0.05);
@@ -1284,7 +1283,7 @@ playerzombie_downed_state() {
   self AllowStand(false);
   self AllowCrouch(false);
   self AllowProne(true);
-  while(GetTime() < endTime) {
+  while (GetTime() < endTime) {
     wait(0.05);
   }
   self.playerzombie_soundboard_disable = false;
@@ -1325,7 +1324,7 @@ playerzombie_infinite_health() {
   self endon("death");
   self endon("disconnect");
   bighealth = 100000;
-  while(1) {
+  while (1) {
     if(self.health < bighealth) {
       self.health = bighealth;
     }
@@ -1350,7 +1349,7 @@ playerzombie_soundboard() {
   self.adsSound_nextTime = GetTime();
   adsSound = "playerzombie_adsbutton_sound";
   self.inputSound_nextTime = GetTime();
-  while(1) {
+  while (1) {
     if(self.playerzombie_soundboard_disable) {
       wait(0.05);
       continue;
@@ -1420,19 +1419,19 @@ playerzombie_waitfor_buttonrelease(inputType) {
   self endon(notifyString);
   if(inputType == "use") {
     self.buttonpressed_use = true;
-    while(self UseButtonPressed()) {
+    while (self UseButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_use = false;
   } else if(inputType == "attack") {
     self.buttonpressed_attack = true;
-    while(self AttackButtonPressed()) {
+    while (self AttackButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_attack = false;
   } else if(inputType == "ads") {
     self.buttonpressed_ads = true;
-    while(self AdsButtonPressed()) {
+    while (self AdsButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_ads = false;
@@ -1451,7 +1450,7 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   }
   players = get_players();
   count = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] == self || players[i].is_zombie || players[i] maps\_laststand::player_is_in_laststand() || players[i].sessionstate == "spectator") {
       count++;
     }
@@ -1555,7 +1554,7 @@ player_killed_override() {
 }
 
 injured_walk() {
-  self.ground_ref_ent = spawn("script_model", (0, 0, 0));
+  self.ground_ref_ent = Spawn("script_model", (0, 0, 0));
   self.player_speed = 50;
   self AllowSprint(false);
   self AllowProne(false);
@@ -1571,7 +1570,7 @@ limp() {
   level endon("death");
   stumble = 0;
   alt = 0;
-  while(1) {
+  while (1) {
     velocity = self GetVelocity();
     player_speed = abs(velocity[0]) + abs(velocity[1]);
     if(player_speed < 10) {
@@ -1615,7 +1614,7 @@ adjust_angles_to_player(stumble_angles) {
   pa = stumble_angles[0];
   ra = stumble_angles[2];
   rv = AnglesToRight(self.angles);
-  fv = anglesToForward(self.angles);
+  fv = AnglesToForward(self.angles);
   rva = (rv[0], 0, rv[1] * -1);
   fva = (fv[0], 0, fv[1] * -1);
   angles = vector_multiply(rva, pa);
@@ -1630,7 +1629,7 @@ coop_player_spawn_placement() {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setorigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
@@ -1648,7 +1647,7 @@ player_zombie_breadcrumb() {
   self store_crumb(self.origin);
   last_crumb = self.origin;
   self thread debug_breadcrumbs();
-  while(1) {
+  while (1) {
     wait_time = 0.1;
     if(self isnotarget()) {
       wait(wait_time);
@@ -1686,7 +1685,7 @@ store_crumb(origin) {
   offsets = [];
   height_offset = 32;
   index = 0;
-  for(j = 1; j <= self.zombie_breadcrumb_area_num; j++) {
+  for (j = 1; j <= self.zombie_breadcrumb_area_num; j++) {
     offset = (j * self.zombie_breadcrumb_area_distance);
     offsets[0] = (origin[0] - offset, origin[1], origin[2]);
     offsets[1] = (origin[0] + offset, origin[1], origin[2]);
@@ -1696,7 +1695,7 @@ store_crumb(origin) {
     offsets[5] = (origin[0] + offset, origin[1], origin[2] + height_offset);
     offsets[6] = (origin[0], origin[1] - offset, origin[2] + height_offset);
     offsets[7] = (origin[0], origin[1] + offset, origin[2] + height_offset);
-    for(i = 0; i < offsets.size; i++) {
+    for (i = 0; i < offsets.size; i++) {
       self.zombie_breadcrumbs[index] = offsets[i];
       index++;
     }
@@ -1705,19 +1704,18 @@ store_crumb(origin) {
 
 nazizombies_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1) {
+  if(level.players_playing == 1)
     playersRank = 4;
-  } else if(level.players_playing == 2) {
+  else if(level.players_playing == 2)
     playersRank = 3;
-  } else if(level.players_playing == 3) {
+  else if(level.players_playing == 3)
     playersRank = 2;
-  }
   map_name = GetDvar("mapname");
   if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
     pre_time_in_wave = players[i] playerZombieStatGet(map_name, "timeinwave");
     new_highest_wave = level.round_number + "" + playersRank;
@@ -1746,26 +1744,22 @@ nazizombies_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map]))
     return 0;
-  }
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     return 0;
-  }
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
-  }
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
     assertMsg("Unknown stat variable " + variable + " for map " + map);
-  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
 
@@ -1782,7 +1776,7 @@ playerZombieStatSet(map, variable, value) {
 
 nazizombies_set_new_zombie_stats() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     total_kills = players[i] zombieStatGet("zombie_kills") + players[i].stats["kills"];
     total_points = players[i] zombieStatGet("zombie_points") + players[i].stats["score"];
     total_rounds = players[i] zombieStatGet("zombie_rounds") + (level.round_number - 1);
@@ -1803,19 +1797,17 @@ nazizombies_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400) {
+  if(time > 86400)
     time = 86400;
-  }
   padding = "";
-  if(10 > time) {
+  if(10 > time)
     padding += "0000";
-  } else if(100 > time) {
+  else if(100 > time)
     padding += "000";
-  } else if(1000 > time) {
+  else if(1000 > time)
     padding += "00";
-  } else if(10000 > time) {
+  else if(10000 > time)
     padding += "0";
-  }
   rank = wave + "" + players + padding + time;
   return rank;
 }
@@ -1838,7 +1830,7 @@ intermission() {
   level.intermission = true;
   level notify("intermission");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     setclientsysstate("levelNotify", "zi", players[i]);
     players[i] SetClientDvars("cg_thirdPerson", "0",
       "cg_fov", "65");
@@ -1847,7 +1839,7 @@ intermission() {
   }
   wait(0.25);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     setClientSysState("lsm", "1", players[i]);
   }
   visionset = "zombie";
@@ -1860,13 +1852,13 @@ intermission() {
 
 zombie_game_over_death() {
   zombies = GetAiArray("axis");
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(!IsAlive(zombies[i])) {
       continue;
     }
     zombies[i] SetGoalPos(zombies[i].origin);
   }
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(!IsAlive(zombies[i])) {
       continue;
     }
@@ -1889,7 +1881,7 @@ player_intermission() {
   self.friendlydamage = undefined;
   points = getstructarray("intermission", "targetname");
   if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+    points = getentarray("info_intermission", "classname");
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
       return;
@@ -1901,16 +1893,16 @@ player_intermission() {
   self.game_over_bg SetShader("black", 640, 480);
   self.game_over_bg.alpha = 1;
   org = undefined;
-  while(1) {
+  while (1) {
     points = array_randomize(points);
-    for(i = 0; i < points.size; i++) {
+    for (i = 0; i < points.size; i++) {
       point = points[i];
       if(!isDefined(org)) {
-        self spawn(point.origin, point.angles);
+        self Spawn(point.origin, point.angles);
       }
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
-          org = spawn("script_origin", self.origin + (0, 0, -60));
+          org = Spawn("script_origin", self.origin + (0, 0, -60));
         }
         self LinkTo(org, "", (0, 0, -60), (0, 0, 0));
         self SetPlayerAngles(points[i].angles);
@@ -1946,10 +1938,10 @@ player_intermission() {
 }
 
 prevent_near_origin() {
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
-      for(q = 0; q < players.size; q++) {
+    for (i = 0; i < players.size; i++) {
+      for (q = 0; q < players.size; q++) {
         if(players[i] != players[q]) {
           if(check_to_kill_near_origin(players[i], players[q])) {
             p1_org = players[i].origin;
@@ -1987,9 +1979,9 @@ check_to_kill_near_origin(player1, player2) {
 }
 
 check_for_jugg_perk() {
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] hasperk("specialty_armorvest") && !isDefined(players[i].is_burning) && !is_magic_bullet_shield_enabled(players[i])) {
         if(!flag("dog_round")) {
           players[i].health += 40;

@@ -24,6 +24,7 @@
 #include scripts\zm_common\zm_net;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_minigun;
 
 autoexec __init__system__() {
@@ -35,15 +36,15 @@ __init__() {
   clientfield::register("allplayers", "minigun_launcher_muzzle_fx", 1, 1, "counter");
   clientfield::register("missile", "minigun_nuke_rob", 1, 1, "int");
   clientfield::register("toplayer", "minigun_nuke_rumble", 1, 1, "counter");
-  level.hero_weapon[# "minigun"][0] = getweapon(#"hero_minigun_t8_lv1");
-  level.hero_weapon[# "minigun"][1] = getweapon(#"hero_minigun_t8_lv2");
-  level.hero_weapon[# "minigun"][2] = getweapon(#"hero_minigun_t8_lv3");
+  level.hero_weapon[#"minigun"][0] = getweapon(#"hero_minigun_t8_lv1");
+  level.hero_weapon[#"minigun"][1] = getweapon(#"hero_minigun_t8_lv2");
+  level.hero_weapon[#"minigun"][2] = getweapon(#"hero_minigun_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv3");
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_492e530f9862f6cc"));
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_628d99860c78650f"));
-  level._effect[# "launcher_flash"] = # "hash_65b54823a8e8631e";
+  level._effect[#"launcher_flash"] = #"hash_65b54823a8e8631e";
 
   if(!isDefined(level.var_90e0e2a0)) {
     level.var_90e0e2a0 = new throttle();
@@ -59,15 +60,15 @@ __init__() {
 }
 
 function_83c8b26e(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[# "minigun"][2]) {
+  if(weapon == level.hero_weapon[#"minigun"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "minigun"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"minigun"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "minigun"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"minigun"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -83,32 +84,32 @@ private function_9592c5c1() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "minigun"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"minigun"], wpn_cur)) {
       self clientfield::increment_to_player("hero_minigun_vigor_postfx");
       self function_768a7fab(1);
       self thread function_335a27d1();
       self thread function_6fa9af0e(wpn_cur);
-    } else if(isinarray(level.hero_weapon[# "minigun"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"minigun"], wpn_prev)) {
       self thread function_5ef1fdde(wpn_prev);
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_6933501bf415a72c");
+    if(wpn_cur == level.hero_weapon[#"minigun"][0]) {
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_6933501bf415a72c");
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_30df02915fdc6a67");
+    if(wpn_cur == level.hero_weapon[#"minigun"][1]) {
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_30df02915fdc6a67");
       self thread function_ebaedcdd(wpn_cur);
       self thread function_478a4910(wpn_cur);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][2]) {
+    if(wpn_cur == level.hero_weapon[#"minigun"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_53f4514d440c7816");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_53f4514d440c7816");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_407cc98232081886");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_407cc98232081886");
       }
 
       self thread function_ebaedcdd(wpn_cur);
@@ -149,11 +150,11 @@ function_34a75fed(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   }
 
   switch (weapon.name) {
-    case # "hash_492e530f9862f6cc":
+    case #"hash_492e530f9862f6cc":
       if(isalive(self)) {
         switch (self.zm_ai_category) {
-          case # "basic":
-          case # "enhanced":
+          case #"basic":
+          case #"enhanced":
             if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {
               self.no_gib = 1;
             }
@@ -163,39 +164,39 @@ function_34a75fed(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
             }
 
             return self.health;
-          case # "popcorn":
+          case #"popcorn":
             return self.health;
         }
       }
 
       break;
-    case # "hash_628d99860c78650f":
+    case #"hash_628d99860c78650f":
       if(isalive(self)) {
         switch (self.zm_ai_category) {
-          case # "popcorn":
-          case # "basic":
-          case # "enhanced":
+          case #"popcorn":
+          case #"basic":
+          case #"enhanced":
             return 0;
         }
       }
 
       break;
-    case # "hero_minigun_t8_lv1":
-    case # "hero_minigun_t8_lv3":
-    case # "hero_minigun_t8_lv2":
+    case #"hero_minigun_t8_lv1":
+    case #"hero_minigun_t8_lv3":
+    case #"hero_minigun_t8_lv2":
       if(meansofdeath === "MOD_RIFLE_BULLET") {
         if(isDefined(level.headshots_only) && level.headshots_only && !(isDefined(self zm_utility::is_headshot(weapon, shitloc, meansofdeath)) && self zm_utility::is_headshot(weapon, shitloc, meansofdeath))) {
           return 0;
         }
       }
 
-      if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+      if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
         n_damage = self function_bce04a11(weapon);
 
         if(n_damage > damage) {
           return n_damage;
         }
-      } else if(self.zm_ai_category == # "popcorn") {
+      } else if(self.zm_ai_category == #"popcorn") {
         return self.health;
       }
 
@@ -248,7 +249,7 @@ private function_335a27d1() {
 }
 
 function_6fa9af0e(w_minigun) {
-  self endon(#"bled_out", # "death", # "hero_minigun_expired");
+  self endon(#"bled_out", #"death", #"hero_minigun_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -259,10 +260,10 @@ function_6fa9af0e(w_minigun) {
 
 function_bce04a11(w_minigun) {
   switch (w_minigun.name) {
-    case # "hero_minigun_t8_lv2":
+    case #"hero_minigun_t8_lv2":
       var_c4d00e65 = 0.12;
       break;
-    case # "hero_minigun_t8_lv3":
+    case #"hero_minigun_t8_lv3":
       var_c4d00e65 = 0.15;
       break;
     default:
@@ -279,7 +280,7 @@ function_bce04a11(w_minigun) {
 }
 
 function_ebaedcdd(w_minigun) {
-  self endon(#"bled_out", # "death", # "hero_minigun_expired");
+  self endon(#"bled_out", #"death", #"hero_minigun_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_power_left");
@@ -302,7 +303,7 @@ function_ebaedcdd(w_minigun) {
 }
 
 function_9d166ae8(w_minigun) {
-  self endon(#"bled_out", # "death", # "hero_minigun_expired");
+  self endon(#"bled_out", #"death", #"hero_minigun_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -322,11 +323,11 @@ function_9d166ae8(w_minigun) {
       e_grenade = self magicgrenadetype(getweapon(#"hash_628d99860c78650f"), var_79db2feb, var_a460aa94, 2);
 
       while(isDefined(e_grenade)) {
-        s_result = e_grenade waittilltimeout(4, # "stationary", # "death");
+        s_result = e_grenade waittilltimeout(4, #"stationary", #"death");
 
         if(isDefined(e_grenade)) {
           if(s_result._notify == "stationary") {
-            v_ground_pos = groundtrace(e_grenade.origin + (0, 0, 50), e_grenade.origin + (0, 0, -500), 0, e_grenade, 0, 0)[# "position"];
+            v_ground_pos = groundtrace(e_grenade.origin + (0, 0, 50), e_grenade.origin + (0, 0, -500), 0, e_grenade, 0, 0)[#"position"];
 
             if(isDefined(v_ground_pos)) {
               v_end_pos = getclosestpointonnavmesh(v_ground_pos, 128, 24);
@@ -387,7 +388,7 @@ function_13409329(v_end_pos, w_minigun) {
       continue;
     }
 
-    if(a_ai_zombies[i].zm_ai_category == # "basic" || a_ai_zombies[i].zm_ai_category == # "popcorn" || a_ai_zombies[i].zm_ai_category == # "enhanced") {
+    if(a_ai_zombies[i].zm_ai_category == #"basic" || a_ai_zombies[i].zm_ai_category == #"popcorn" || a_ai_zombies[i].zm_ai_category == #"enhanced") {
       if(isDefined(a_ai_zombies[i].var_f256a4d9)) {
         var_1ae49e8d += a_ai_zombies[i].var_f256a4d9;
         a_ai_zombies[i].var_f256a4d9 = 0;
@@ -424,12 +425,12 @@ function_13409329(v_end_pos, w_minigun) {
       continue;
     }
 
-    if(var_367c14cc[i].zm_ai_category == # "basic" || var_367c14cc[i].zm_ai_category == # "enhanced" || var_367c14cc[i].zm_ai_category == # "popcorn") {
+    if(var_367c14cc[i].zm_ai_category == #"basic" || var_367c14cc[i].zm_ai_category == #"enhanced" || var_367c14cc[i].zm_ai_category == #"popcorn") {
       var_367c14cc[i] thread function_292bb3d7(self, w_minigun, v_end_pos);
       continue;
     }
 
-    if(var_367c14cc[i].zm_ai_category == # "miniboss" || var_367c14cc[i].zm_ai_category == # "boss") {
+    if(var_367c14cc[i].zm_ai_category == #"miniboss" || var_367c14cc[i].zm_ai_category == #"boss") {
       if(isDefined(self.maxhealth)) {
         var_4fbc5aad = var_367c14cc[i].maxhealth * 0.25;
       } else {
@@ -459,7 +460,7 @@ private function_292bb3d7(e_player, w_minigun, v_pos) {
   self endon(#"death");
   [[level.var_90e0e2a0]] - > waitinqueue(self);
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     str_hit_loc = "none";
   } else {
     str_hit_loc = "torso_lower";
@@ -478,19 +479,19 @@ function_768a7fab(var_9b5f3241) {
 }
 
 function_478a4910(w_minigun) {
-  self endon(#"bled_out", # "death", # "hero_minigun_expired");
+  self endon(#"bled_out", #"death", #"hero_minigun_expired");
   s_result = self waittill(#"weapon_melee_power_left");
 
   if(s_result.weapon == w_minigun) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_2", # "minigun");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_2", #"minigun");
   }
 }
 
 function_68ff89f7(w_minigun) {
-  self endon(#"bled_out", # "death", # "hero_minigun_expired");
+  self endon(#"bled_out", #"death", #"hero_minigun_expired");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon === w_minigun && s_result._notify == "weapon_melee") {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "minigun");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"minigun");
   }
 }

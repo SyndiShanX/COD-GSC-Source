@@ -11,9 +11,8 @@ error(message) {
 }
 
 getstruct(name, type) {
-  if(!isDefined(level.struct_class_names)) {
+  if(!isDefined(level.struct_class_names))
     return undefined;
-  }
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
     println("**** Getstruct returns undefined on " + name + " : " + " type.");
@@ -37,7 +36,7 @@ getstructarray(name, type) {
 }
 
 play_sound_in_space(localClientNum, alias, origin) {
-  playSound(localClientNum, alias, origin);
+  PlaySound(localClientNum, alias, origin);
 }
 
 vectorScale(vector, scale) {
@@ -53,26 +52,22 @@ vector_multiply(vec, dif) {
 array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
   if(isDefined(var3)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2, var3);
-    }
     return;
   }
   if(isDefined(var2)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2);
-    }
     return;
   }
   if(isDefined(var1)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1);
-    }
     return;
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]]();
-  }
 }
 
 registerSystem(sSysName, cbFunc) {
@@ -87,7 +82,7 @@ registerSystem(sSysName, cbFunc) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._systemStates[sSysName] = spawnStruct();
+    level._systemStates[sSysName] = spawnstruct();
     level._systemStates[sSysName].callback = cbFunc;
   }
 }
@@ -104,11 +99,11 @@ loop_fx_sound(clientNum, alias, origin, ender) {
     self endon(ender);
   }
   setfakeentorg(clientNum, entId, origin);
-  playLoopSound(clientNum, entId, alias);
+  playloopsound(clientNum, entId, alias);
 }
 
 waitforclient(client) {
-  while(!clienthassnapshot(client)) {
+  while (!clienthassnapshot(client)) {
     wait(0.01);
   }
   syncsystemstates(client);
@@ -116,29 +111,26 @@ waitforclient(client) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = AnglesToForward(start_angles);
   dot = VectorDot(forward, normal);
   return dot >= fov;
 }
 
 add_to_array(array, ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return array;
-  }
-  if(!isDefined(array)) {
+  if(!isDefined(array))
     array[0] = ent;
-  } else {
+  else
     array[array.size] = ent;
-  }
   return array;
 }
 
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the " + name + " effect.");
-  if(!isDefined(level._optionalStepEffects)) {
+  if(!isDefined(level._optionalStepEffects))
     level._optionalStepEffects = [];
-  }
   level._optionalStepEffects[level._optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }

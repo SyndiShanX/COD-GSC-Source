@@ -7,19 +7,19 @@
 #namespace statemachine;
 
 function create(name, owner, change_notify = "change_state") {
-  state_machine = spawnStruct();
+  state_machine = spawnstruct();
   state_machine.name = name;
   state_machine.states = [];
   state_machine.previous_state = undefined;
   state_machine.current_state = undefined;
   state_machine.next_state = undefined;
   state_machine.change_note = change_notify;
-  if(isDefined(owner)) {
+  if(isdefined(owner)) {
     state_machine.owner = owner;
   } else {
     state_machine.owner = level;
   }
-  if(!isDefined(state_machine.owner.state_machines)) {
+  if(!isdefined(state_machine.owner.state_machines)) {
     state_machine.owner.state_machines = [];
   }
   state_machine.owner.state_machines[state_machine.name] = state_machine;
@@ -27,7 +27,7 @@ function create(name, owner, change_notify = "change_state") {
 }
 
 function clear() {
-  if(isDefined(self.states) && isarray(self.states)) {
+  if(isdefined(self.states) && isarray(self.states)) {
     foreach(state in self.states) {
       state.connections_notify = undefined;
       state.connections_utility = undefined;
@@ -42,8 +42,8 @@ function clear() {
 }
 
 function add_state(name, enter_func, update_func, exit_func, reenter_func) {
-  if(!isDefined(self.states[name])) {
-    self.states[name] = spawnStruct();
+  if(!isdefined(self.states[name])) {
+    self.states[name] = spawnstruct();
   }
   self.states[name].name = name;
   self.states[name].enter_func = enter_func;
@@ -63,7 +63,7 @@ function get_state(name) {
 function add_interrupt_connection(from_state_name, to_state_name, on_notify, checkfunc) {
   from_state = get_state(from_state_name);
   to_state = get_state(to_state_name);
-  connection = spawnStruct();
+  connection = spawnstruct();
   connection.to_state = to_state;
   connection.type = 0;
   connection.on_notify = on_notify;
@@ -75,15 +75,15 @@ function add_interrupt_connection(from_state_name, to_state_name, on_notify, che
 function add_utility_connection(from_state_name, to_state_name, checkfunc, defaultscore) {
   from_state = get_state(from_state_name);
   to_state = get_state(to_state_name);
-  connection = spawnStruct();
+  connection = spawnstruct();
   connection.to_state = to_state;
   connection.type = 1;
   connection.checkfunc = checkfunc;
   connection.score = defaultscore;
-  if(!isDefined(connection.score)) {
+  if(!isdefined(connection.score)) {
     connection.score = 100;
   }
-  if(!isDefined(from_state.connections_utility)) {
+  if(!isdefined(from_state.connections_utility)) {
     from_state.connections_utility = [];
   } else if(!isarray(from_state.connections_utility)) {
     from_state.connections_utility = array(from_state.connections_utility);
@@ -94,23 +94,23 @@ function add_utility_connection(from_state_name, to_state_name, checkfunc, defau
 
 function set_state(name, state_params) {
   state = self.states[name];
-  if(!isDefined(self.owner)) {
+  if(!isdefined(self.owner)) {
     return false;
   }
-  if(!isDefined(state)) {
+  if(!isdefined(state)) {
     assertmsg((("" + name) + "") + self.name);
     return false;
   }
   reenter = self.current_state === state;
-  if(isDefined(state.reenter_func) && reenter) {
+  if(isdefined(state.reenter_func) && reenter) {
     shouldreenter = self.owner[[state.reenter_func]](state.state_params);
   }
   if(reenter && shouldreenter !== 1) {
     return false;
   }
-  if(isDefined(self.current_state)) {
+  if(isdefined(self.current_state)) {
     self.next_state = state;
-    if(isDefined(self.current_state.exit_func)) {
+    if(isdefined(self.current_state.exit_func)) {
       self.owner[[self.current_state.exit_func]](self.current_state.state_params);
     }
     if(!reenter) {
@@ -118,17 +118,17 @@ function set_state(name, state_params) {
     }
     self.current_state.state_params = undefined;
   }
-  if(!isDefined(state_params)) {
-    state_params = spawnStruct();
+  if(!isdefined(state_params)) {
+    state_params = spawnstruct();
   }
   state.state_params = state_params;
   self.owner notify(self.change_note);
   self.current_state = state;
   self threadnotifyconnections(self.current_state);
-  if(isDefined(self.current_state.enter_func)) {
+  if(isdefined(self.current_state.enter_func)) {
     self.owner[[self.current_state.enter_func]](self.current_state.state_params);
   }
-  if(isDefined(self.current_state.update_func)) {
+  if(isdefined(self.current_state.update_func)) {
     self.owner thread[[self.current_state.update_func]](self.current_state.state_params);
   }
   return true;
@@ -145,108 +145,108 @@ function threadnotifyconnections(state) {
 function connection_on_notify(state_machine, notify_name, connection) {
   self endon(state_machine.change_note);
   state_machine endon("_cancel_connections");
-  while(true) {
+  while (true) {
     self waittill(notify_name, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
-    params = spawnStruct();
+    params = spawnstruct();
     params.notify_param = [];
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param0;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param1;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param2;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param3;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param4;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param5;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param6;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param7;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param8;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param9;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param10;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param11;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param12;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param13;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param14;
-    if(!isDefined(params.notify_param)) {
+    if(!isdefined(params.notify_param)) {
       params.notify_param = [];
     } else if(!isarray(params.notify_param)) {
       params.notify_param = array(params.notify_param);
     }
     params.notify_param[params.notify_param.size] = param15;
     connectionvalid = 1;
-    if(isDefined(connection.checkfunc)) {
+    if(isdefined(connection.checkfunc)) {
       connectionvalid = self[[connection.checkfunc]](self.current_state, connection.to_state.name, connection, params);
     }
     if(connectionvalid) {
@@ -256,7 +256,7 @@ function connection_on_notify(state_machine, notify_name, connection) {
 }
 
 function evaluate_connections(eval_func, params) {
-  assert(isDefined(self.current_state));
+  assert(isdefined(self.current_state));
   connectionarray = [];
   scorearray = [];
   best_connection = undefined;
@@ -264,17 +264,17 @@ function evaluate_connections(eval_func, params) {
   foreach(connection in self.current_state.connections_utility) {
     assert(connection.type == 1);
     score = connection.score;
-    if(isDefined(connection.checkfunc)) {
+    if(isdefined(connection.checkfunc)) {
       score = self.owner[[connection.checkfunc]](self.current_state.name, connection.to_state.name, connection);
     }
     if(score > 0) {
-      if(!isDefined(connectionarray)) {
+      if(!isdefined(connectionarray)) {
         connectionarray = [];
       } else if(!isarray(connectionarray)) {
         connectionarray = array(connectionarray);
       }
       connectionarray[connectionarray.size] = connection;
-      if(!isDefined(scorearray)) {
+      if(!isdefined(scorearray)) {
         scorearray = [];
       } else if(!isarray(scorearray)) {
         scorearray = array(scorearray);
@@ -286,10 +286,10 @@ function evaluate_connections(eval_func, params) {
       }
     }
   }
-  if(isDefined(eval_func) && connectionarray.size > 0) {
+  if(isdefined(eval_func) && connectionarray.size > 0) {
     best_connection = self.owner[[eval_func]](connectionarray, scorearray, self.current_state);
   }
-  if(isDefined(best_connection)) {
+  if(isdefined(best_connection)) {
     self thread set_state(best_connection.to_state.name, params);
   }
 }

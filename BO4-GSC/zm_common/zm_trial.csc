@@ -10,6 +10,7 @@
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial;
 
 autoexec __init__system__() {
@@ -54,8 +55,8 @@ register_challenge(name, var_c5dd8620, var_bbcdbff5) {
 
   assert(!isDefined(level.var_75e93a54[name]));
   info = {
-    #name: name,
-    #var_c5dd8620: var_c5dd8620,
+    #name: name, 
+    #var_c5dd8620: var_c5dd8620, 
     #var_bbcdbff5: var_bbcdbff5
   };
   level.var_75e93a54[name] = info;
@@ -90,8 +91,8 @@ private function_4dbf2663() {
     var_189d26ca = tablelookupcolumnforrow(table, row, 1);
     assert(!isDefined(function_d02ffd(var_189d26ca)));
     var_6d87ac05 = {
-      #name: var_189d26ca,
-      #rounds: [],
+      #name: var_189d26ca, 
+      #rounds: [], 
       #index: level.var_c556bb2e.size
     };
     level.var_c556bb2e[level.var_c556bb2e.size] = var_6d87ac05;
@@ -118,15 +119,15 @@ private function_4dbf2663() {
         challenge_name = tablelookupcolumnforrow(table, row, 5);
         var_10a28798 = [];
         array::add(round_info.challenges, {
-          #name: challenge_name,
-          #row: row,
+          #name: challenge_name, 
+          #row: row, 
           #params: var_10a28798
         });
 
         for(i = 0; i < 8; i++) {
           param = tablelookupcolumnforrow(table, row, 6 + i);
 
-          if(isDefined(param) && param != # "") {
+          if(isDefined(param) && param != #"") {
             var_10a28798[var_10a28798.size] = param;
           }
         }

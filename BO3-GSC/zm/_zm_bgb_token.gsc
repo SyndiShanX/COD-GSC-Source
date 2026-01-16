@@ -17,49 +17,49 @@
 #namespace bgb_token;
 
 function autoexec __init__sytem__() {
-  system::register("bgb_token", &__init__, &__main__, undefined);
+  system::register("bgb_token", & __init__, & __main__, undefined);
 }
 
 function private __init__() {
   if(!is_bgb_token_in_use()) {
     return;
   }
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function private __main__() {
   if(!is_bgb_token_in_use()) {
     return;
   }
-  if(!isDefined(level.bgb_token_max_per_game)) {
+  if(!isdefined(level.bgb_token_max_per_game)) {
     level.bgb_token_max_per_game = -1;
   }
-  if(!isDefined(level.var_baa8fd09)) {
+  if(!isdefined(level.var_baa8fd09)) {
     level.var_baa8fd09 = 3600;
   }
-  if(!isDefined(level.var_342aa5b2)) {
+  if(!isdefined(level.var_342aa5b2)) {
     level.var_342aa5b2 = 0.33;
   }
-  if(!isDefined(level.var_4d1d42c7)) {
+  if(!isdefined(level.var_4d1d42c7)) {
     level.var_4d1d42c7 = 5;
   }
-  if(!isDefined(level.var_5f0752c5)) {
+  if(!isdefined(level.var_5f0752c5)) {
     level.var_5f0752c5 = 1000;
   }
-  if(!isDefined(level.var_af87760a)) {
+  if(!isdefined(level.var_af87760a)) {
     level.var_af87760a = 0.33;
   }
-  if(!isDefined(level.var_bc978de9)) {
+  if(!isdefined(level.var_bc978de9)) {
     level.var_bc978de9 = 8;
   }
-  if(!isDefined(level.var_c50e9bdb)) {
+  if(!isdefined(level.var_c50e9bdb)) {
     level.var_c50e9bdb = 9;
   }
   level thread setup_devgui();
 }
 
 function private on_player_spawned() {
-  if(!isDefined(self.bgb_token_last_given_time)) {
+  if(!isdefined(self.bgb_token_last_given_time)) {
     self.bgb_token_last_given_time = self zm_stats::get_global_stat("BGB_TOKEN_LAST_GIVEN_TIME");
     self.bgb_tokens_gained_this_game = 0;
     self.var_bc978de9 = (level.var_bc978de9 + level.round_number) - 1;
@@ -67,7 +67,7 @@ function private on_player_spawned() {
 }
 
 function private is_bgb_token_in_use() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use) || !level.onlinegame || !getdvarint("loot_enabled")) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use) || !level.onlinegame || !getdvarint("loot_enabled")) {
     return false;
   }
   if(isusingmods()) {
@@ -81,7 +81,7 @@ function function_c2f81136(increment) {
     return;
   }
   foreach(player in level.players) {
-    if(isDefined(player.var_bc978de9)) {
+    if(isdefined(player.var_bc978de9)) {
       player.var_bc978de9 = player.var_bc978de9 + increment;
     }
   }
@@ -96,7 +96,7 @@ function private setup_devgui() {
 }
 
 function private bgb_token_devgui_think() {
-  for(;;) {
+  for (;;) {
     bgb_award_token_dvar = getdvarstring("");
     if(bgb_award_token_dvar != "") {
       level.players[0] bgb_token_give_to_player();
@@ -108,7 +108,7 @@ function private bgb_token_devgui_think() {
 
 function private bgb_token_give_to_player() {
   var_90491adb = int(self getvialsscale());
-  for(count = 0; count < var_90491adb; count++) {
+  for (count = 0; count < var_90491adb; count++) {
     self incrementbgbtokensgained();
   }
   self.bgb_tokens_gained_this_game = self.bgb_tokens_gained_this_game + var_90491adb;

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace dynent_world;
 
 autoexec __init__system__() {
@@ -99,7 +100,7 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
         dynent.fx = undefined;
       }
 
-      if(newstate.statefx !== # "hash_633319dd8957ddbb") {
+      if(newstate.statefx !== #"hash_633319dd8957ddbb") {
         dynent.fx = playfxondynent(newstate.statefx, dynent);
       }
     }

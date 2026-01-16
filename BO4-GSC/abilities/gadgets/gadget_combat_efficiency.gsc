@@ -11,6 +11,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
+
 #namespace gadget_combat_efficiency;
 
 autoexec __init__system__() {
@@ -109,8 +110,8 @@ gadget_combat_efficiency_on_off(slot, weapon) {
   self._gadget_combat_efficiency = 0;
   self.combatefficiencylastontime = gettime();
   self function_f53ac86e();
-  self stats::function_e24eec31(self.heroability, # "scorestreaks_earned_2", int(self.scorestreaksearnedperuse / 2));
-  self stats::function_e24eec31(self.heroability, # "scorestreaks_earned_3", int(self.scorestreaksearnedperuse / 3));
+  self stats::function_e24eec31(self.heroability, #"scorestreaks_earned_2", int(self.scorestreaksearnedperuse / 2));
+  self stats::function_e24eec31(self.heroability, #"scorestreaks_earned_3", int(self.scorestreaksearnedperuse / 3));
 
   if(isalive(self) && isDefined(level.playgadgetsuccess)) {
     self[[level.playgadgetsuccess]](weapon);
@@ -124,7 +125,7 @@ function_6a9d7105(slot, weapon) {
 
   self notify("1da58f971e958838");
   self endon("1da58f971e958838");
-  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   var_122b9df7 = weapon.gadget_power_usage_rate * 0.5 * float(function_60d95f53()) / 1000;
 
   do {

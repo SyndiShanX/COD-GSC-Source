@@ -3,8 +3,11 @@
  * Script: character\mp_character_opforce_hench_assault_d.gsc
 **************************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_henchmen_assault_d");
+  self setmodel("mp_body_henchmen_assault_d");
   codescripts\character::attachhead("alias_henchmen_heads_mp", xmodelalias\alias_henchmen_heads_mp::main());
   self setviewmodel("viewhands_henchmen");
   self.voice = "russian";

@@ -17,6 +17,7 @@
 #include scripts\killstreaks\airsupport;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\mp_common\item_inventory;
+
 #namespace hawk_wz;
 
 autoexec __init__system__() {
@@ -39,9 +40,9 @@ function_3675de8b() {
 }
 
 private on_item_use(params) {
-  self endon(#"death", # "disconnect", # "begin_grenade_tracking", # "grenade_throw_cancelled");
+  self endon(#"death", #"disconnect", #"begin_grenade_tracking", #"grenade_throw_cancelled");
 
-  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != # "eq_hawk") {
+  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != #"eq_hawk") {
     return;
   }
 
@@ -60,7 +61,7 @@ private function_900bb4f5(params) {
 }
 
 spawn_hawk(itemid) {
-  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
+  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
 
   if(isDefined(self.hawk) && isDefined(self.hawk.vehicle)) {
     self.hawk.vehicle hawk::hawk_destroy(1);
@@ -76,22 +77,22 @@ spawn_hawk(itemid) {
   spawnpos = self.origin + (0, 0, 90) + forward;
   trace = self function_6ada73f(spawnpos);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75);
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45);
   }
 
@@ -169,7 +170,7 @@ function_b162cdbd(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 hawk_update(vehicle) {
-  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
+  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
   vehicle endon(#"death");
   playerorigin = self.origin;
 
@@ -294,7 +295,7 @@ private function_1eddba48() {
 }
 
 function_1e7eecd7(vehicle, var_44e9a475) {
-  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
+  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
   vehicle endon(#"death");
 
   if(var_44e9a475) {
@@ -360,7 +361,7 @@ function_1e7eecd7(vehicle, var_44e9a475) {
 }
 
 function_1b057db2() {
-  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
+  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
   self notify("6954b7d60005c9f0");
   self endon("6954b7d60005c9f0");
   var_10a85d23 = self gestures::function_c77349d4("gestable_drone_hawk_pda");
@@ -379,7 +380,7 @@ function_1b057db2() {
   while(!var_37ea2019 && isalive(self) && self.hawk.controlling) {
     if(self gestures::play_gesture(var_10a85d23, undefined, 0)) {
       var_37ea2019 = 1;
-      self waittill(#"exit_vehicle", # "death");
+      self waittill(#"exit_vehicle", #"death");
       self.var_f97921ea = gettime();
       self stopgestureviewmodel(var_10a85d23, 0, 0);
     }
@@ -396,7 +397,7 @@ function_c4770b46(vehicle) {
   self notify("7ebee304d299c8bb");
   self endon("7ebee304d299c8bb");
   vehicle endon(#"death");
-  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death", # "exit_vehicle");
+  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death", #"exit_vehicle");
 
   while(self function_9096c10()) {
     waitframe(1);
@@ -416,7 +417,7 @@ function_c4770b46(vehicle) {
 
 watch_team_change(hawk) {
   hawk endon(#"death");
-  waitresult = self waittill(#"disconnect", # "joined_team", # "joined_spectator", # "changed_specialist", # "changed_specialist_death");
+  waitresult = self waittill(#"disconnect", #"joined_team", #"joined_spectator", #"changed_specialist", #"changed_specialist_death");
 
   if(!isDefined(hawk)) {
     return;

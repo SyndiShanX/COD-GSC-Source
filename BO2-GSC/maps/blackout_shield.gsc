@@ -27,11 +27,10 @@ shield_raise_or_lower_gun() {
   state = level.meatshield_state;
   level.meatshield_state = "nil";
 
-  if(state == "standing") {
+  if(state == "standing")
     shield_anim_stand();
-  } else {
+  else
     shield_anim_move();
-  }
 }
 
 shield_anim_stand() {
@@ -55,22 +54,21 @@ shield_anim_move() {
 }
 
 shield_add_enemy(ai_enemy) {
-  if(!isDefined(level.m_shield.enemies)) {
+  if(!isDefined(level.m_shield.enemies))
     level.m_shield.enemies = [];
-  }
 
   arrayinsert(level.m_shield.enemies, ai_enemy, 0);
 }
 
 shield_run(e_victim, str_volume, str_scene_name) {
   level thread run_scene_and_delete(str_scene_name);
-  level.m_shield = spawnStruct();
+  level.m_shield = spawnstruct();
   wait 0.1;
-  a_rigs = getEntArray("player_body", "targetname");
+  a_rigs = getentarray("player_body", "targetname");
   m_player_rig = a_rigs[0];
   end_pos = getstruct("meat_shield_end_struct", "targetname");
   max_turn_dot = cos(40);
-  turning_center_vec = anglesToForward(end_pos.angles);
+  turning_center_vec = anglestoforward(end_pos.angles);
   level.m_shield.player_rig = m_player_rig;
   level.m_shield.victim = e_victim;
   level.m_shield.weapon = getent("shield_gun", "targetname");
@@ -92,27 +90,26 @@ shield_run(e_victim, str_volume, str_scene_name) {
   level.player hideviewmodel();
   level.player disableweapons();
   level.player playerlinktodelta(level.m_shield.player_rig, "tag_player", 1, 0, 0, 30, 0, 0);
-  valid_spaces = getEntArray(str_volume, "targetname");
+  valid_spaces = getentarray(str_volume, "targetname");
 
   while(!flag("meat_shield_done")) {
     invalid_space_fwd = 0;
 
     if(0) {
       pos_player = align_ent.origin;
-      fvec_player = anglesToForward(align_ent.angles);
+      fvec_player = anglestoforward(align_ent.angles);
       pos_victim = e_victim gettagorigin("tag_origin");
-      fvec_victim = anglesToForward(e_victim gettagangles("tag_origin"));
+      fvec_victim = anglestoforward(e_victim gettagangles("tag_origin"));
       draw_arrow_time(pos_player, pos_player + fvec_player * 64, (0, 1, 0), 0.1);
       draw_arrow_time(pos_victim, pos_victim + fvec_victim * 64, (1, 0, 0), 0.1);
     }
 
     if(level.m_shield.turn != 0.0) {
-      new_vec = anglesToForward((0, align_ent.angles[1] + level.m_shield.turn, 0));
+      new_vec = anglestoforward((0, align_ent.angles[1] + level.m_shield.turn, 0));
       new_vec_dot = vectordot(new_vec, turning_center_vec);
 
-      if(new_vec_dot > max_turn_dot) {
+      if(new_vec_dot > max_turn_dot)
         align_ent rotateyaw(level.m_shield.turn, 0.05);
-      }
     }
 
     if(level.m_shield.fwd != 0.0) {
@@ -134,20 +131,17 @@ shield_run(e_victim, str_volume, str_scene_name) {
 
       v_newpos = align_ent.origin;
 
-      if(!invalid_space_fwd) {
+      if(!invalid_space_fwd)
         v_newpos = v_newpos + level.m_shield.fwd * fvec;
-      }
 
-      if(!invalid_space_fwd) {
+      if(!invalid_space_fwd)
         align_ent moveto(v_newpos, 0.05);
-      }
     }
 
-    if(level.m_shield.fwd == 0 || invalid_space_fwd) {
+    if(level.m_shield.fwd == 0 || invalid_space_fwd)
       shield_anim_stand();
-    } else {
+    else
       shield_anim_move();
-    }
 
     wait 0.01;
   }
@@ -156,9 +150,8 @@ shield_run(e_victim, str_volume, str_scene_name) {
   level.m_shield.weapon unlink();
   level.m_shield.player_rig unlink();
 
-  if(isDefined(level.m_shield.align)) {
+  if(isDefined(level.m_shield.align))
     level.m_shield.align delete();
-  }
 
   level.m_shield = undefined;
 }
@@ -171,9 +164,8 @@ meatshield_process_proximity_speed_scalar() {
       foreach(ai in level.m_shield.enemies) {
         dist = distance2d(level.m_shield.player_rig.origin, ai.origin);
 
-        if(dist < dist_closest) {
+        if(dist < dist_closest)
           dist_closest = dist;
-        }
       }
 
       level.m_shield.proximity_speed_scalar = dist_closest / 128;
@@ -192,16 +184,14 @@ meatshield_input(move_scale, turn_scale) {
     v_rstick = level.player getnormalizedcameramovement();
     fwd_back = v_lstick[0];
 
-    if(fwd_back < 0.02) {
+    if(fwd_back < 0.02)
       fwd_back = 0.0;
-    }
 
     level.m_shield.fwd = fwd_back * move_scale * level.m_shield.proximity_speed_scalar;
     turn_val = v_rstick[1];
 
-    if(turn_val < 0.02 && turn_val > 0.02 * -1) {
+    if(turn_val < 0.02 && turn_val > 0.02 * -1)
       turn_val = 0.0;
-    }
 
     level.m_shield.turn = turn_val * -1 * turn_scale;
     wait_network_frame();

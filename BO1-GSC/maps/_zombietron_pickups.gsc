@@ -787,7 +787,7 @@ spinning_blockers_damage_trigger(player) {
   while(1) {
     self waittill("trigger", guy);
     if(!isDefined(guy.boss) || guy.boss == false) {
-      guy playSound("zmb_pwup_barrel_impact");
+      guy PlaySound("zmb_pwup_barrel_impact");
       guy DoDamage(guy.health + 1, player.origin, player, undefined, "MOD_CRUSH");
       guy StartRagdoll(1);
       player playRumbleOnEntity("slide_rumble");
@@ -807,7 +807,7 @@ spinning_blockers_timeout(org) {
     time -= 0.05;
   }
   self stopLoopSound(.5);
-  self playSound("zmb_pwup_barrel_end");
+  self PlaySound("zmb_pwup_barrel_end");
   self notify("new_spinners_pickup");
 }
 
@@ -824,8 +824,8 @@ spinning_blockers_cleanup(org) {
   vel = org.barrel2.origin - self.origin;
   vel *= 10;
   org.barrel2 PhysicsLaunch(org.barrel2.origin, vel);
-  org.barrel1 playSound("zmb_pwup_barrel_fall_0");
-  org.barrel2 playSound("zmb_pwup_barrel_fall_1");
+  org.barrel1 PlaySound("zmb_pwup_barrel_fall_0");
+  org.barrel2 PlaySound("zmb_pwup_barrel_fall_1");
   wait 5;
   org.barrel1 Delete();
   org.barrel2 Delete();
@@ -878,7 +878,7 @@ tesla_blockers_damage_trigger(player) {
         continue;
       } else {
         guy.damagedby = "tesla";
-        playFXOnTag(level._effect["tesla_contact"], guy, "j_head");
+        PlayFxOnTag(level._effect["tesla_contact"], guy, "j_head");
         guy DoDamage(1, player.origin, player, undefined, "MOD_UNKNOWN");
         self.triggered = true;
         break;
@@ -899,7 +899,7 @@ tesla_blockers_timeout(org) {
     wait 0.05;
   }
   self stopLoopSound(.5);
-  self playSound("zmb_pwup_coco_end");
+  self PlaySound("zmb_pwup_coco_end");
   self notify("new_tesla_pickup");
 }
 
@@ -952,7 +952,7 @@ tesla_blockers_fx(org) {
   self endon("disconnect");
   for(i = 0; i < org.objects.size; i++) {
     if(isDefined(org.objects[i])) {
-      playFXOnTag(level._effect["coconut"], org.objects[i], "tag_origin");
+      PlayFxOnTag(level._effect["coconut"], org.objects[i], "tag_origin");
     }
   }
 }
@@ -1019,8 +1019,8 @@ stun_blockers_damage_trigger(player) {
   while(1) {
     self waittill("trigger", guy);
     if(!isDefined(guy.stunned) && !isDefined(guy.boss)) {
-      guy playSound("zmb_pwup_bear_stun");
-      playFXOnTag(level._effect["stun_bear_explode"], guy, "j_hip_le");
+      guy PlaySound("zmb_pwup_bear_stun");
+      PlayFxOnTag(level._effect["stun_bear_explode"], guy, "j_hip_le");
       player playRumbleOnEntity("slide_rumble");
       guy thread stunned_guy_think();
     }
@@ -1039,14 +1039,14 @@ stun_blockers_timeout(org) {
     wait_network_frame();
   }
   self stopLoopSound(.5);
-  self playSound("zmb_pwup_bear_end");
+  self PlaySound("zmb_pwup_bear_end");
   self notify("new_stun_pickup");
 }
 
 stun_blockers_cleanup(org) {
   self waittill_any("new_stun_pickup", "disconnect", "player_died");
   self notify("new_stun_pickup");
-  playFXOnTag(level._effect["stun_bear_fade"], self, "tag_origin");
+  PlayFxOnTag(level._effect["stun_bear_fade"], self, "tag_origin");
   wait 0.5;
   org.trigger Delete();
   org Delete();
@@ -1066,7 +1066,7 @@ stun_blockers_update() {
   trigger LinkTo(org);
   trigger thread stun_blockers_damage_trigger(self);
   org.trigger = trigger;
-  playFXOnTag(level._effect["stun_bear"], org, "tag_origin");
+  PlayFxOnTag(level._effect["stun_bear"], org, "tag_origin");
   self thread stun_blockers_timeout(org);
   self thread stun_blockers_cleanup(org);
 }
@@ -1144,13 +1144,13 @@ double_shot_disconnect_watch(orb, is_chicken) {
     }
     spinOutTime -= rotate180Time;
   }
-  orb playSound("zmb_dblshot_end");
+  orb PlaySound("zmb_dblshot_end");
   forward = (orb.origin + (0, 0, 1)) - orb.origin;
-  playFX(level._effect["chicken_done"], orb.origin, forward);
+  playfx(level._effect["chicken_done"], orb.origin, forward);
   forward = (orb.origin + (0, 1, 0)) - orb.origin;
-  playFX(level._effect["chicken_done"], orb.origin, forward);
+  playfx(level._effect["chicken_done"], orb.origin, forward);
   forward = (orb.origin + (1, 0, 0)) - orb.origin;
-  playFX(level._effect["chicken_done"], orb.origin, forward);
+  playfx(level._effect["chicken_done"], orb.origin, forward);
   wait_network_frame();
   orb Delete();
 }
@@ -1250,7 +1250,7 @@ fated_double_shot_update(model) {
   }
   orb.follow_points = [];
   num_follow_points = 5;
-  orb playSound("zmb_dblshot_spawn");
+  orb PlaySound("zmb_dblshot_spawn");
   for(i = 0; i < num_follow_points; i++) {
     orb.follow_points[i] = self.origin;
   }
@@ -1295,7 +1295,7 @@ heli_rocket_loop(mini_heli) {
       fire_tag = fire_tags[fire_index];
       origin = mini_heli GetTagOrigin(fire_tag);
       angles = mini_heli GetTagAngles("tag_flash_gunner1");
-      endpt = origin + anglesToForward(angles) * 500;
+      endpt = origin + AnglesToForward(angles) * 500;
       MagicBullet(weapon, origin, endpt, driver);
       fire_time = WeaponFireTime(weapon);
       wait fire_time;
@@ -1347,7 +1347,7 @@ heli_zombie_poi(player) {
   poi thread destroy_me_on_player_notify(player, "veh_done");
   level.active_heli[index] = poi;
   while(isDefined(poi)) {
-    trace = bulletTrace(self.origin, self.origin + (0, 0, -500), false, undefined);
+    trace = bullettrace(self.origin, self.origin + (0, 0, -500), false, undefined);
     poi.origin = (self.origin[0], self.origin[1], trace["position"][2]);
     wait 1;
   }
@@ -1420,7 +1420,7 @@ heli_pickup_update(pickup) {
     heli UseBy(self);
   }
   heli Delete();
-  playFX(level._effect["respawn"], self.origin, anglesToForward(self.angles));
+  PlayFx(level._effect["respawn"], self.origin, AnglesToForward(self.angles));
   self RadiusDamage(self.origin, 200, 10000, 10000, self);
   self DisableInvulnerability();
   self turn_shield_on(true);
@@ -1462,7 +1462,7 @@ tank_pickup_update(pickup) {
   self.tank = tank;
   tank.player = self;
   tank maps\_vehicle::turret_attack_think();
-  playFXOnTag(level._effect[self.light_playFX], tank, "tag_origin");
+  PlayFxOnTag(level._effect[self.light_playFX], tank, "tag_origin");
   time_left = level.zombie_vars["tank_alive_time"];
   if(isDefined(self.fate_fortune)) {
     time_left *= level.zombie_vars["fate_fortune_drop_mod"];
@@ -1486,7 +1486,7 @@ tank_pickup_update(pickup) {
     hitp = PlayerPhysicsTrace(above, below);
     self SetOrigin(hitp);
   }
-  playFX(level._effect["respawn"], self.origin, anglesToForward(self.angles));
+  PlayFx(level._effect["respawn"], self.origin, AnglesToForward(self.angles));
   self RadiusDamage(self.origin, 200, 10000, 10000, self);
   self DisableInvulnerability();
   self turn_shield_on(true);
@@ -1496,7 +1496,7 @@ speed_pickup_cleanup() {
   self waittill_any("new_speed_pickup", "disconnect", "player_died");
   self SetMoveSpeedScale(self.default_movespeed);
   self stopLoopSound(.5);
-  self playSound("zmb_pwup_speed_end");
+  self PlaySound("zmb_pwup_speed_end");
 }
 
 speed_pickup_update() {
@@ -1507,14 +1507,14 @@ speed_pickup_update() {
   wait 0.05;
   self playLoopSound("zmb_pwup_speed_loop");
   self SetMoveSpeedScale(level.zombie_vars["player_speed"]);
-  playFXOnTag(level._effect["character_fire_death_sm"], self, "tag_origin");
+  PlayFxOnTag(level._effect["character_fire_death_sm"], self, "tag_origin");
   time_left = level.zombie_vars["player_speed_time"];
   if(isDefined(self.fate_fortune)) {
     time_left *= level.zombie_vars["fate_fortune_drop_mod"];
   }
   wait(time_left);
   self stopLoopSound(.5);
-  self playSound("zmb_pwup_speed_end");
+  self PlaySound("zmb_pwup_speed_end");
   self SetMoveSpeedScale(self.default_movespeed);
 }
 
@@ -1537,7 +1537,7 @@ powerup_wobble(trigger) {
 powerup_rotate(trigger) {
   trigger endon("trigger");
   if(isDefined(self)) {
-    playFXOnTag(level._effect["powerup_on_red"], self, "tag_origin");
+    playfxontag(level._effect["powerup_on_red"], self, "tag_origin");
   }
   dir = 180;
   if(randomInt(100) > 50) {
@@ -1602,10 +1602,10 @@ wait_for_mine_pickup(trigger) {
     trigger waittill("trigger", guy);
     if(isDefined(guy) && isDefined(self.active) && self.active) {
       if(!(isDefined(guy.tank) || isDefined(guy.boss))) {
-        guy playSound("zmb_hazard_hit");
+        guy PlaySound("zmb_hazard_hit");
         guy DoDamage(guy.health + 500, self.origin);
       }
-      playFXOnTag(level._effect["tesla_contact"], guy, "j_head");
+      PlayFxOnTag(level._effect["tesla_contact"], guy, "j_head");
       wait .05;
     }
   }
@@ -1712,21 +1712,16 @@ shield_trigger_think(player) {
   self endon("disconnect");
   while(1) {
     self waittill("trigger", guy);
-    if(!isDefined(guy)) {
+    if(!isDefined(guy))
       continue;
-    }
-    if(IsPlayer(guy)) {
+    if(IsPlayer(guy))
       continue;
-    }
-    if(isDefined(guy.launched)) {
+    if(isDefined(guy.launched))
       continue;
-    }
-    if(isDefined(guy.boss)) {
+    if(isDefined(guy.boss))
       continue;
-    }
-    if(!IsSentient(guy)) {
+    if(!IsSentient(guy))
       continue;
-    }
     if(isDefined(player.rhino_deaths)) {
       player.rhino_deaths++;
     }
@@ -1735,17 +1730,16 @@ shield_trigger_think(player) {
     guy StartRagdoll(1);
     guy LaunchRagdoll((0, 0, 220));
     guy.launched = true;
-    guy playSound("zmb_ragdoll_launched");
+    guy PlaySound("zmb_ragdoll_launched");
     player playRumbleOnEntity("slide_rumble");
   }
 }
 
 shield_flag_on(onOff) {
-  if(onOff) {
+  if(onOff)
     self.shield_is_on = 1;
-  } else {
+  else
     self.shield_is_on = undefined;
-  }
 }
 
 turn_shield_on(short_shield) {
@@ -1758,24 +1752,24 @@ turn_shield_on(short_shield) {
   trigger thread shield_trigger_think(self);
   if(!isDefined(short_shield) || !short_shield) {
     if(!isDefined(self.tank) && !isDefined(self.heli)) {
-      trigger playSound("zmb_player_shield_full");
-      playFXOnTag(level._effect["shield"], self, "tag_origin");
+      trigger PlaySound("zmb_player_shield_full");
+      PlayFxOnTag(level._effect["shield"], self, "tag_origin");
     }
     wait 2.9;
     if(!isDefined(self.tank) && !isDefined(self.heli)) {
-      playFXOnTag(level._effect["shield"], self, "tag_origin");
+      PlayFxOnTag(level._effect["shield"], self, "tag_origin");
     }
     wait 2.7;
   }
   if(!isDefined(self.tank) && !isDefined(self.heli)) {
-    trigger playSound("zmb_player_shield_half");
-    playFXOnTag(level._effect["shield_gone"], self, "tag_origin");
+    trigger PlaySound("zmb_player_shield_half");
+    PlayFxOnTag(level._effect["shield_gone"], self, "tag_origin");
   }
   wait 3;
   trigger Delete();
   shield_flag_on(0);
   if(!isDefined(self.tank) && !isDefined(self.heli)) {
-    self playSound("zmb_player_shield_end");
+    self PlaySound("zmb_player_shield_end");
     self DisableInvulnerability();
   }
 }
@@ -1788,7 +1782,7 @@ update_drop_booster() {
     if(IsAlive(self) && !level.in_intermission && !isDefined(self.tank) && !isDefined(self.heli) && self jumpButtonPressed()) {
       if(isDefined(self.boosters) && self.boosters > 0) {
         self.rhino_deaths = 0;
-        self playSound("zmb_speed_boost_activate");
+        self PlaySound("zmb_speed_boost_activate");
         self.boosters--;
         self maps\_zombietron_score::update_hud();
         self EnableInvulnerability();
@@ -1944,7 +1938,7 @@ turret_pickup_update(player) {
   mini_turret.deployed = true;
   dropTarget = player.origin + (0, 0, 800);
   mini_turret.org.origin = dropTarget;
-  mini_turret playSound("evt_turret_incoming");
+  mini_turret PlaySound("evt_turret_incoming");
   target = player.origin;
   if(isDefined(player.heli) || isDefined(player.tank)) {
     hitp = PlayerPhysicsTrace(player.origin + (0, 0, 72), player.origin + (0, 0, -500));
@@ -1953,8 +1947,8 @@ turret_pickup_update(player) {
   wait 0.1;
   mini_turret.org moveTo(target, 0.5, 0, 0);
   wait 0.65;
-  playFXOnTag(level._effect["betty_explode"], mini_turret, "tag_origin");
-  mini_turret playSound("evt_turret_land");
+  PlayFxOnTag(level._effect["betty_explode"], mini_turret, "tag_origin");
+  mini_turret PlaySound("evt_turret_land");
   physicsExplosionSphere(mini_turret.org.origin, 512, 128, 2);
   player playRumbleOnEntity("artillery_rumble");
   if(GetPlayers().size > 1) {
@@ -1974,8 +1968,8 @@ turret_pickup_update(player) {
   mini_turret notify("turret_deactivated");
   mini_turret SetMode("auto_ai");
   mini_turret notify("stop_burst_fire_unmanned");
-  mini_turret playSound("evt_turret_takeoff");
-  playFXOnTag(level._effect["mini_turret_takeoff"], mini_turret, "tag_origin");
+  mini_turret PlaySound("evt_turret_takeoff");
+  PlayFxOnTag(level._effect["mini_turret_takeoff"], mini_turret, "tag_origin");
   mini_turret.org moveTo(dropTarget, 1, 0, 0);
   wait 1;
   mini_turret.org moveTo(mini_turret.original_location, 1, 0, 0);
@@ -1992,7 +1986,7 @@ monkey_update(player, origin) {
   monkey UseAnimTree(#animtree);
   monkey SetAnim( % o_monkey_bomb);
   monkey.angles = (0, randomInt(360), 0);
-  playFXOnTag(level._effect["monkey_glow"], monkey, "origin_animate_jnt");
+  PlayFxOnTag(level._effect["monkey_glow"], monkey, "origin_animate_jnt");
   level.active_monkeys[level.active_monkeys.size] = monkey;
   fx = undefined;
   if(GetPlayers().size > 1) {
@@ -2006,8 +2000,8 @@ monkey_update(player, origin) {
     fx Delete();
   }
   level.active_monkeys = array_remove(level.active_monkeys, monkey);
-  monkey playSound("zmb_monkey_explo");
-  playFX(level._effect["monkey_explode"], mark, (1, 0, 0));
+  monkey PlaySound("zmb_monkey_explo");
+  PlayFx(level._effect["monkey_explode"], mark, (1, 0, 0));
   player RadiusDamage(monkey.origin, level.zombie_vars["monkey_attract_dist"], 15000, 15000, player, "MOD_EXPLOSIVE");
   PhysicsExplosionSphere(monkey.origin, level.zombie_vars["monkey_attract_dist"], level.zombie_vars["monkey_attract_dist"], 1);
   earthquake(0.3, 1.0, monkey.origin, 100);
@@ -2022,7 +2016,7 @@ chicken_idle() {
   self UseAnimTree(#animtree);
   curAnim = % a_chicken_react_up_down;
   lastAnim = % a_chicken_idle_peck;
-  playFXOnTag(level._effect["powerup_on_red"], self, "tag_origin");
+  playfxontag(level._effect["powerup_on_red"], self, "tag_origin");
   while(isDefined(self)) {
     if(curAnim == lastAnim) {
       self ClearAnim(lastAnim, 0.2);
@@ -2086,7 +2080,7 @@ double_shot_wait_for_pickup_audio() {
   self endon("picked_up");
   self endon("death");
   while(isDefined(self)) {
-    self playSound("zmb_dblshot_squawk", "sounddone");
+    self PlaySound("zmb_dblshot_squawk", "sounddone");
     self waittill("sounddone");
     wait(RandomFloatRange(2, 5));
   }
@@ -2098,10 +2092,10 @@ double_shot_audio_loop(orb) {
   while(isDefined(orb)) {
     rand = RandomIntRange(0, 100);
     if(rand > 30) {
-      orb playSound("zmb_dblshot_wingflap");
+      orb PlaySound("zmb_dblshot_wingflap");
     }
     if(rand > 70) {
-      orb playSound("zmb_dblshot_squawk");
+      orb PlaySound("zmb_dblshot_squawk");
     }
     wait(RandomFloatRange(1, 3));
   }
@@ -2112,8 +2106,8 @@ double_shot_audio_death(orb) {
   orb endon("death");
   orb waittill("spinning_out");
   while(isDefined(orb)) {
-    orb playSound("zmb_dblshot_death");
-    orb playSound("zmb_dblshot_wingflap");
+    orb PlaySound("zmb_dblshot_death");
+    orb PlaySound("zmb_dblshot_wingflap");
     wait(RandomFloatRange(.5, 1));
   }
 }
@@ -2147,11 +2141,10 @@ spawn_armory() {
     spawn_specific_pickup("booster");
     wait 0.2;
   }
-  if(numplayers > 1) {
+  if(numplayers > 1)
     numChickens = 1;
-  } else {
+  else
     numChickens = 4;
-  }
   while(numChickens) {
     numChickens--;
     spawn_specific_pickup("double_shot");

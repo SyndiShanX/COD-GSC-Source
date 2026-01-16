@@ -84,9 +84,8 @@ guy_snipe(var_0, var_1) {
   var_0 endon("death");
   self notify("ropeidleend");
 
-  if(var_1 == 2) {
+  if(var_1 == 2)
     maps\_vehicle_aianim::animontag(var_0, var_2.sittag, % armada_blackhawk_sniper_idle);
-  }
 
   thread maps\_vehicle_aianim::guy_idle(var_0, var_1);
 }
@@ -130,10 +129,10 @@ player_heli_ropeanimoverride() {
   var_3 = % armada_blackhawk_sniper_idle_loop_fastrope80;
   var_4 = % armada_blackhawk_sniper_drop_fastrope80;
   var_5 = [];
-  var_5["TAG_FastRope_RI"] = spawnStruct();
+  var_5["TAG_FastRope_RI"] = spawnstruct();
   self.attach_model_override = var_5;
   var_6 = spawn("script_model", level.player.origin);
-  var_6 setModel(var_1);
+  var_6 setmodel(var_1);
   var_6 linkto(self, var_0, (0, 0, 0), (0, 0, 0));
   var_6 useanimtree(#animtree);
   thread player_heli_ropeanimoverride_idle(var_6, var_0, var_3);
@@ -149,9 +148,8 @@ player_heli_ropeanimoverride() {
 player_heli_ropeanimoverride_idle(var_0, var_1, var_2) {
   self endon("unloading");
 
-  for(;;) {
+  for (;;)
     maps\_vehicle_aianim::animontag(var_0, var_1, var_2);
-  }
 }
 
 #using_animtree("animated_props");

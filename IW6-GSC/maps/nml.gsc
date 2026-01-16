@@ -15,7 +15,7 @@ main() {
   maps\createart\nml_art::main();
   maps\nml_fx::main();
   maps\nml_precache::main();
-  maps\_utility::intro_screen_create(&"NML_INTROSCREEN_LINE_1", &"NML_INTROSCREEN_LINE_2", &"NML_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"NML_INTROSCREEN_LINE_1", & "NML_INTROSCREEN_LINE_2", & "NML_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   precacheitem("remote_chopper_gunner");
   precacheitem("remote_chopper_gunner_nopullout");
@@ -91,16 +91,16 @@ main() {
   maps\_utility_dogs::init_dog_pc("a");
   maps\_utility_dogs::init_dog_pc("a_cam_obj");
   maps\_utility_dogs::init_wolf_pc();
-  maps\_utility::add_hint_string("hint_dog_sprintzoom", &"NML_HINT_DOG_SPRINTZOOM", maps\nml_util::check_dog_sprinting);
-  maps\_utility::add_hint_string("hint_dog_sprint", &"NML_HINT_DOG_SPRINT", maps\nml_util::check_dog_sprinting);
-  maps\_utility::add_hint_string("hint_dog_attack_cam", &"NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_really_attacking);
-  maps\_utility::add_hint_string("hint_dog_attack", &"NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_attacking);
-  maps\_utility::add_hint_string("hint_dog_attack_3p", &"NML_HINT_DOG_ATTACK_2", maps\nml_util::is_dog_attacking);
-  maps\_utility::add_hint_string("hint_dog_approach", &"NML_HINT_DOG_APPROACH", maps\nml_util::check_dog_ready_to_attack);
-  maps\_utility::add_hint_string("hint_bark_kb", &"NML_HINT_DOG_BARK_KB", maps\nml_util::check_player_bark);
-  maps\_utility::add_hint_string("hint_bark", &"NML_HINT_DOG_BARK", maps\nml_util::check_player_bark);
-  maps\_utility::add_hint_string("hint_zoom", &"NML_HINT_ZOOM", maps\nml_util::check_player_zoom);
-  maps\_utility::add_hint_string("hint_stealthkill", &"NML_HINT_STEALTHKILL", undefined);
+  maps\_utility::add_hint_string("hint_dog_sprintzoom", & "NML_HINT_DOG_SPRINTZOOM", maps\nml_util::check_dog_sprinting);
+  maps\_utility::add_hint_string("hint_dog_sprint", & "NML_HINT_DOG_SPRINT", maps\nml_util::check_dog_sprinting);
+  maps\_utility::add_hint_string("hint_dog_attack_cam", & "NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_really_attacking);
+  maps\_utility::add_hint_string("hint_dog_attack", & "NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_attacking);
+  maps\_utility::add_hint_string("hint_dog_attack_3p", & "NML_HINT_DOG_ATTACK_2", maps\nml_util::is_dog_attacking);
+  maps\_utility::add_hint_string("hint_dog_approach", & "NML_HINT_DOG_APPROACH", maps\nml_util::check_dog_ready_to_attack);
+  maps\_utility::add_hint_string("hint_bark_kb", & "NML_HINT_DOG_BARK_KB", maps\nml_util::check_player_bark);
+  maps\_utility::add_hint_string("hint_bark", & "NML_HINT_DOG_BARK", maps\nml_util::check_player_bark);
+  maps\_utility::add_hint_string("hint_zoom", & "NML_HINT_ZOOM", maps\nml_util::check_player_zoom);
+  maps\_utility::add_hint_string("hint_stealthkill", & "NML_HINT_STEALTHKILL", undefined);
   maps\_utility::add_start("e3", ::setup_e3, undefined, undefined, "nml_trans_intro_tr");
   maps\_utility::add_start("intro", ::setup_intro, undefined, ::start_intro, "nml_trans_intro_tr");
   maps\_utility::add_start("cave", ::setup_cave, undefined, ::start_cave, "nml_trans_intro_tr");
@@ -136,13 +136,11 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 6);
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
-  }
 
-  if(!maps\_utility::is_gen4()) {
+  if(!maps\_utility::is_gen4())
     setsaveddvar("sm_sunshadowscale", 0.65);
-  }
 
   if(maps\_utility::is_gen4()) {}
 
@@ -222,9 +220,8 @@ main() {
   if(isDefined(var_0)) {
     for(var_1 = var_0; isDefined(var_1.target); var_1 = var_1 common_scripts\utility::get_target_ent()) {}
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1.origin = (4028.6, -170.6, -191.7);
-    }
   }
 
   setdvar("jimmy", 0);
@@ -250,9 +247,8 @@ main() {
   animscripts\utility::setnotetrackeffect(var_2, var_3, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
   var_6 = ["brick", "carpet", "foliage", "grass", "gravel", "ice", "metal", "painted metal", "mud", "plaster", "sand", "snow", "slush", "water", "wood", "ceramic"];
 
-  foreach(var_8 in var_6) {
-    animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
-  }
+  foreach(var_8 in var_6)
+  animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
 
   var_2 = "dog bodyfall small";
   var_3 = "J_Spine4";
@@ -263,9 +259,8 @@ main() {
   animscripts\utility::setnotetrackeffect(var_2, var_3, "asphalt", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
   animscripts\utility::setnotetrackeffect(var_2, var_3, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
 
-  foreach(var_8 in var_6) {
-    animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
-  }
+  foreach(var_8 in var_6)
+  animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
 
   thread track_riley_kills();
 }
@@ -273,16 +268,16 @@ main() {
 objectives() {
   common_scripts\utility::flag_wait("intro_clear");
   wait 3;
-  objective_add(maps\_utility::obj("1"), "current", &"NML_OBJ_1");
+  objective_add(maps\_utility::obj("1"), "current", & "NML_OBJ_1");
   wait 2;
-  objective_add(maps\_utility::obj("2"), "active", &"NML_OBJ_2");
+  objective_add(maps\_utility::obj("2"), "active", & "NML_OBJ_2");
   common_scripts\utility::flag_wait("wolf_start_chase_dog");
   objective_state(maps\_utility::obj("1"), "done");
   objective_current(maps\_utility::obj("2"));
   common_scripts\utility::flag_wait("merrick_scene_done");
   objective_state(maps\_utility::obj("2"), "done");
   wait 3;
-  objective_add(maps\_utility::obj("3"), "current", &"NML_OBJ_3");
+  objective_add(maps\_utility::obj("3"), "current", & "NML_OBJ_3");
   common_scripts\utility::flag_wait("the_end");
   objective_state(maps\_utility::obj("3"), "done");
 }
@@ -517,9 +512,8 @@ dog_hunt2_delete() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(distance(var_2.origin, level.dog.origin) < 300) {
+    if(distance(var_2.origin, level.dog.origin) < 300)
       var_2 delete();
-    }
   }
 
   level.dog.ignoreme = 0;

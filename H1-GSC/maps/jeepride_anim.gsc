@@ -174,7 +174,7 @@ drop_pistol(var_0) {
   var_2 = var_0 gettagorigin(var_1);
   wait 0.2;
   var_3 = spawn("script_model", var_0 gettagorigin(var_1));
-  var_3 setModel("weapon_colt1911_white");
+  var_3 setmodel("weapon_colt1911_white");
   var_3.angles = var_0 gettagorigin(var_1);
   var_3 physicslaunchclient(var_3.origin + (0, 0, 0), maps\_utility::vector_multiply(var_3.origin - var_2, 25));
 }
@@ -184,11 +184,10 @@ play_griggs_brain_splatter_sfx(var_0) {
 }
 
 play_griggs_custom_fire_sfx(var_0) {
-  if(isDefined(var_0.scriptedweapon) && var_0.scriptedweapon == "wpn_h1_pst_m1911_vm") {
+  if(isdefined(var_0.scriptedweapon) && var_0.scriptedweapon == "wpn_h1_pst_m1911_vm")
     var_0.scriptedweaponmodel thread maps\_utility::play_sound_on_tag("scn_griggs_drag_colt_shot", "TAG_FLASH");
-  } else {
+  else
     var_0 thread maps\_utility::play_sound_on_tag("scn_griggs_drag_saw_shot", "TAG_FLASH");
-  }
 }
 
 play_griggs_custom_fire_empty_sfx(var_0) {
@@ -269,14 +268,13 @@ vehicle_anims() {
 }
 
 precache_crash_models() {
-  if(!isDefined(level.jeepride_crash_model)) {
+  if(!isdefined(level.jeepride_crash_model)) {
     return;
   }
   var_0 = getarraykeys(level.jeepride_crash_model);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++)
     precachemodel(level.jeepride_crash_model[var_0[var_1]]);
-  }
 }
 
 #using_animtree("generic_human");
@@ -339,7 +337,7 @@ override_roto_anim() {
   self endon("death");
   var_0 = getanimlength( % mi28_rotors_add);
 
-  for(;;) {
+  for (;;) {
     self setanim( % mi28_rotors_add, 1, 0.2, 1);
     wait(var_0);
   }
@@ -376,43 +374,36 @@ bridge_animation() {
   maps\_anim::addnotetrack_customfunction("bridge_collapse", "vfx_vehicle_build_up", maps\jeepride::play_bridge_vehicle_collapse_vfx, "bridge_collapsing");
   maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_vehicle_explosion", "bridge_collapsing", "bridge_small_exp_cin", "tag_fx_wagon_explosion_1");
 
-  for(var_0 = 1; var_0 <= 4; var_0++) {
+  for (var_0 = 1; var_0 <= 4; var_0++) {
     maps\_anim::addnotetrack_customfunction("bridge_collapse", "vfx_wagon_spark_on_" + var_0, maps\jeepride::play_bridge_wagon_spark_vfx, "bridge_collapsing", var_0);
     maps\_anim::addnotetrack_customfunction("bridge_collapse", "vfx_wagon_spark_off_" + var_0, maps\jeepride::stop_bridge_wagon_spark_vfx, "bridge_collapsing", var_0);
   }
 
-  for(var_0 = 1; var_0 <= 5; var_0++) {
+  for (var_0 = 1; var_0 <= 5; var_0++) {
     maps\_anim::addnotetrack_customfunction("bridge_collapse", "vfx_uaz_spark_on_" + var_0, maps\jeepride::play_bridge_uaz_spark_vfx, "bridge_collapsing", var_0);
     maps\_anim::addnotetrack_customfunction("bridge_collapse", "vfx_uaz_spark_off_" + var_0, maps\jeepride::stop_bridge_uaz_spark_vfx, "bridge_collapsing", var_0);
   }
 
-  for(var_0 = 1; var_0 <= 14; var_0++) {
+  for (var_0 = 1; var_0 <= 14; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_falling_dust_" + var_0, "bridge_collapsing", "bridge_collapse_dust", "tag_fx_falling_dust_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 17; var_0++) {
+  for (var_0 = 1; var_0 <= 17; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_falling_dust_os_" + var_0, "bridge_collapsing", "bridge_collapse_dust_os", "tag_fx_falling_dust_os_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 14; var_0++) {
+  for (var_0 = 1; var_0 <= 14; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_stone_impact_" + var_0, "bridge_collapsing", "bridge_collapse_stone_impact", "tag_fx_stone_impact_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 3; var_0++) {
+  for (var_0 = 1; var_0 <= 3; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_stone_detach_" + var_0, "bridge_collapsing", "bridge_collapse_stone_detach", "tag_fx_stone_detach_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 2; var_0++) {
+  for (var_0 = 1; var_0 <= 2; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_frame_spark_" + var_0, "bridge_collapsing", "bridge_collapse_spark", "tag_fx_frame_spark_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 2; var_0++) {
+  for (var_0 = 1; var_0 <= 2; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_frame_impact_" + var_0, "bridge_collapsing", "bridge_collapse_frame_hit", "tag_fx_frame_impact_" + var_0);
-  }
 
-  for(var_0 = 1; var_0 <= 7; var_0++) {
+  for (var_0 = 1; var_0 <= 7; var_0++)
     maps\_anim::addnotetrack_startfxontag("bridge_collapse", "vfx_dust_ambient_" + var_0, "bridge_collapsing", "bridge_leftovers_2", "tag_fx_dust_ambient_" + var_0);
-  }
 
   level.scr_animtree["rpgfromgriggs"] = #animtree;
   level.scr_anim["rpgfromgriggs"]["rpgfromgriggs_rpg"] = % h1_jeepride_rpgfromgriggs_rpg;

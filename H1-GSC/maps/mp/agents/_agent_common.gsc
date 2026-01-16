@@ -8,9 +8,8 @@ codecallback_agentadded() {
   maps\mp\agents\_agent_utility::initagentscriptvariables();
   var_0 = "axis";
 
-  if(level.numagents % 2 == 0) {
+  if(level.numagents % 2 == 0)
     var_0 = "allies";
-  }
 
   level.numagents++;
   maps\mp\agents\_agent_utility::set_agent_team(var_0);
@@ -35,22 +34,19 @@ init() {
 connectnewagent(var_0, var_1, var_2) {
   var_3 = maps\mp\agents\_agent_utility::getfreeagent(var_0);
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3)) {
     var_3.connecttime = gettime();
 
-    if(isDefined(var_1)) {
+    if(isdefined(var_1))
       var_3 maps\mp\agents\_agent_utility::set_agent_team(var_1);
-    } else {
+    else
       var_3 maps\mp\agents\_agent_utility::set_agent_team(var_3.team);
-    }
 
-    if(isDefined(var_2)) {
+    if(isdefined(var_2))
       var_3.class_override = var_2;
-    }
 
-    if(isDefined(level.agent_funcs[var_0]["onAIConnect"])) {
+    if(isdefined(level.agent_funcs[var_0]["onAIConnect"]))
       var_3[[var_3 maps\mp\agents\_agent_utility::agentfunc("onAIConnect")]]();
-    }
 
     var_3 maps\mp\gametypes\_spawnlogic::addtocharactersarray();
   }
@@ -68,10 +64,10 @@ add_agents_to_game() {
   level waittill("connected", var_0);
   var_1 = getmaxagents();
 
-  while(level.agentarray.size < var_1) {
+  while (level.agentarray.size < var_1) {
     var_2 = addagent();
 
-    if(!isDefined(var_2)) {
+    if(!isdefined(var_2)) {
       waitframe();
       continue;
     }

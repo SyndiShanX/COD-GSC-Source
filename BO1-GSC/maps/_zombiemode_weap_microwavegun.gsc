@@ -326,7 +326,7 @@ microwavegun_zap_death_fx(weapon) {
     tag = "J_Spine1";
   }
   network_safe_play_fx_on_tag("microwavegun_zap_death_fx", 2, microwavegun_zap_get_shock_fx(weapon), self, tag);
-  self playSound("wpn_imp_tesla");
+  self playsound("wpn_imp_tesla");
   if(is_true(self.head_gibbed)) {
     return;
   }

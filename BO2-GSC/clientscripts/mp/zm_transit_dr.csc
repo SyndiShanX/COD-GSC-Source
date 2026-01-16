@@ -55,9 +55,8 @@ main() {
   level thread init_fog_vol_to_visionset();
 
   if(level.scr_zm_ui_gametype == "zclassic") {
-    if(isDefined(level.createfxexploders)) {
+    if(isDefined(level.createfxexploders))
       clientscripts\mp\_fx::activate_exploder(1966);
-    }
   }
 
   level thread fakedgameoversnapshot();
@@ -72,11 +71,10 @@ fakedgameoversnapshot() {
 infog_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("infog_clientfield_cb called on local client" + localclientnum);
 
-  if(newval == 1) {
+  if(newval == 1)
     self thread lerp_infog_alpha(0);
-  } else {
+  else
     self thread lerp_infog_alpha(1);
-  }
 }
 
 lerp_infog_alpha(up) {
@@ -98,12 +96,15 @@ lerp_infog_alpha(up) {
 }
 
 register_client_fields() {
-  if(level.scr_zm_ui_gametype == "zclassic") {}
+  if(level.scr_zm_ui_gametype == "zclassic") {
+  }
 }
 
-register_client_flags() {}
+register_client_flags() {
+}
 
-register_clientflag_callbacks() {}
+register_clientflag_callbacks() {
+}
 
 start_zombie_stuff() {
   level._uses_crossbow = 1;
@@ -190,9 +191,8 @@ include_powerups() {
   include_powerup("double_points");
   include_powerup("full_ammo");
 
-  if(gametype != "zgrief") {
+  if(gametype != "zgrief")
     include_powerup("carpenter");
-  }
 
   include_powerup("teller_withdrawl");
 }
@@ -237,28 +237,24 @@ transit_vision_change(ent_player) {
     local_clientnum = who getlocalclientnumber();
     visionset = "zm_transit_base";
 
-    if(isDefined(self.script_string)) {
+    if(isDefined(self.script_string))
       visionset = self.script_string;
-    }
 
     if(isDefined(who._previous_vision) && visionset == who._previous_vision) {
       continue;
     }
-    if(isDefined(self.script_float)) {
+    if(isDefined(self.script_float))
       trans_time = self.script_float;
-    } else {
+    else
       trans_time = 2;
-    }
 
-    if(!isDefined(who._previous_vision)) {
+    if(!isDefined(who._previous_vision))
       who._previous_vision = visionset;
-    } else {
+    else
       who clientscripts\mp\zombies\_zm::zombie_vision_set_remove(who._previous_vision, trans_time, local_clientnum);
-    }
 
-    if(isDefined(self.script_string)) {
+    if(isDefined(self.script_string))
       println("*** Client : Changing vision set " + self.script_string);
-    }
 
     who clientscripts\mp\zombies\_zm::zombie_vision_set_apply(visionset, 1, trans_time, local_clientnum);
     who._previous_vision = visionset;

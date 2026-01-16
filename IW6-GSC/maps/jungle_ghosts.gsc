@@ -21,7 +21,7 @@ main() {
   init_radio_dialogue();
   init_dialogue();
   setup_fire_damage();
-  maps\_utility::intro_screen_create(&"JUNGLE_GHOSTS_INTROSCREEN_LINE_1", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_2", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_5", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_3");
+  maps\_utility::intro_screen_create(&"JUNGLE_GHOSTS_INTROSCREEN_LINE_1", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_2", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_5", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_3");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_load::main();
 
@@ -36,13 +36,11 @@ main() {
 
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 6);
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
-  }
 
-  if(!maps\_utility::is_gen4()) {
+  if(!maps\_utility::is_gen4())
     setsaveddvar("sm_sunshadowscale", 0.55);
-  }
 
   level.rain_skybox = getent("jungle_overcast_sky", "targetname");
   level.rain_skybox hide();
@@ -50,13 +48,12 @@ main() {
   maps\jungle_ghosts_audio::main();
   maps\_stealth::main();
   common_scripts\utility::array_thread(level.players, maps\_stealth_utility::stealth_default);
-  maps\_utility::add_hint_string("hint_silencer_toggle", &"JUNGLE_GHOSTS_SILENCER_TOGGLE", ::should_toggle_silencer);
+  maps\_utility::add_hint_string("hint_silencer_toggle", & "JUNGLE_GHOSTS_SILENCER_TOGGLE", ::should_toggle_silencer);
 
-  if(maps\jungle_ghosts_util::game_is_pc()) {
-    maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG", ::player_pushing_forward);
-  } else {
-    maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG_NORMAL", ::player_pushing_forward);
-  }
+  if(maps\jungle_ghosts_util::game_is_pc())
+    maps\_utility::add_hint_string("hint_drag", & "JUNGLE_GHOSTS_HINT_PLANE_DRAG", ::player_pushing_forward);
+  else
+    maps\_utility::add_hint_string("hint_drag", & "JUNGLE_GHOSTS_HINT_PLANE_DRAG_NORMAL", ::player_pushing_forward);
 
   level.doing_hand_signal = 0;
   var_0 = ["to_grassy_field", "field_entrance"];
@@ -110,32 +107,30 @@ distant_tree_card_hider() {
 }
 
 ai_total_count() {
-  for(;;) {
+  for(;;)
     common_scripts\utility::waitframe();
-  }
 }
 
 setup_bind_detection() {
   level.actionbinds = [];
-  registeractionbinding("player_takedown", "+activate", &"JUNGLE_GHOSTS_HINT_TAKEDOWN");
-  registeractionbinding("player_takedown", "+usereload", &"JUNGLE_GHOSTS_HINT_TAKEDOWN_RELOAD");
-  registeractionbinding("pickup_rpg", "+activate", &"JUNGLE_GHOSTS_RPG_PICKUP");
-  registeractionbinding("pickup_rpg", "+usereload", &"JUNGLE_GHOSTS_RPG_PICKUP_RELOAD");
-  registeractionbinding("player_helpup", "+activate", &"JUNGLE_GHOSTS_HINT_HELPUP");
-  registeractionbinding("player_helpup", "+usereload", &"JUNGLE_GHOSTS_HINT_HELPUP_RELOAD");
-  registeractionbinding("ads_360", "+speed_throw", &"JUNGLE_GHOSTS_HINT_ADS_THROW_360");
-  registeractionbinding("ads_360", "+speed", &"JUNGLE_GHOSTS_HINT_ADS_360");
-  registeractionbinding("ads", "+speed_throw", &"JUNGLE_GHOSTS_HINT_ADS_THROW");
-  registeractionbinding("ads", "+speed", &"JUNGLE_GHOSTS_HINT_ADS");
-  registeractionbinding("ads", "+toggleads_throw", &"JUNGLE_GHOSTS_HINT_ADS_TOGGLE_THROW");
-  registeractionbinding("ads", "toggleads", &"JUNGLE_GHOSTS_HINT_ADS_TOGGLE");
-  registeractionbinding("equip_soflam", "+actionslot 4", &"JUNGLE_GHOSTS_HINT_WEAPON_SOFLAM");
+  registeractionbinding("player_takedown", "+activate", & "JUNGLE_GHOSTS_HINT_TAKEDOWN");
+  registeractionbinding("player_takedown", "+usereload", & "JUNGLE_GHOSTS_HINT_TAKEDOWN_RELOAD");
+  registeractionbinding("pickup_rpg", "+activate", & "JUNGLE_GHOSTS_RPG_PICKUP");
+  registeractionbinding("pickup_rpg", "+usereload", & "JUNGLE_GHOSTS_RPG_PICKUP_RELOAD");
+  registeractionbinding("player_helpup", "+activate", & "JUNGLE_GHOSTS_HINT_HELPUP");
+  registeractionbinding("player_helpup", "+usereload", & "JUNGLE_GHOSTS_HINT_HELPUP_RELOAD");
+  registeractionbinding("ads_360", "+speed_throw", & "JUNGLE_GHOSTS_HINT_ADS_THROW_360");
+  registeractionbinding("ads_360", "+speed", & "JUNGLE_GHOSTS_HINT_ADS_360");
+  registeractionbinding("ads", "+speed_throw", & "JUNGLE_GHOSTS_HINT_ADS_THROW");
+  registeractionbinding("ads", "+speed", & "JUNGLE_GHOSTS_HINT_ADS");
+  registeractionbinding("ads", "+toggleads_throw", & "JUNGLE_GHOSTS_HINT_ADS_TOGGLE_THROW");
+  registeractionbinding("ads", "toggleads", & "JUNGLE_GHOSTS_HINT_ADS_TOGGLE");
+  registeractionbinding("equip_soflam", "+actionslot 4", & "JUNGLE_GHOSTS_HINT_WEAPON_SOFLAM");
 }
 
 registeractionbinding(var_0, var_1, var_2) {
-  if(!isDefined(level.actionbinds[var_0])) {
+  if(!isDefined(level.actionbinds[var_0]))
     level.actionbinds[var_0] = [];
-  }
 
   var_3 = spawnStruct();
   var_3.binding = var_1;
@@ -175,9 +170,8 @@ keyhint(var_0, var_1, var_2, var_3) {
       notifyoncommand(var_5, var_4.binding);
     }
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       level.player thread notifyontimeout(var_5, var_1);
-    }
 
     level.player waittill(var_5);
     level.hintelem fadeovertime(0.5);
@@ -190,9 +184,8 @@ keyhint(var_0, var_1, var_2, var_3) {
 create_custom_hint() {
   var_0 = 2;
 
-  if(isDefined(level.hint_fontscale)) {
+  if(isDefined(level.hint_fontscale))
     var_0 = level.hint_fontscale;
-  }
 
   var_1 = maps\_hud_util::createfontstring("default", var_0);
   var_1.hidewheninmenu = 1;
@@ -211,25 +204,20 @@ create_custom_hint() {
 }
 
 clear_hints() {
-  if(isDefined(level.hintelem)) {
+  if(isDefined(level.hintelem))
     level.hintelem maps\_hud_util::destroyelem();
-  }
 
-  if(isDefined(level.iconelem)) {
+  if(isDefined(level.iconelem))
     level.iconelem maps\_hud_util::destroyelem();
-  }
 
-  if(isDefined(level.iconelem2)) {
+  if(isDefined(level.iconelem2))
     level.iconelem2 maps\_hud_util::destroyelem();
-  }
 
-  if(isDefined(level.iconelem3)) {
+  if(isDefined(level.iconelem3))
     level.iconelem3 maps\_hud_util::destroyelem();
-  }
 
-  if(isDefined(level.hintbackground)) {
+  if(isDefined(level.hintbackground))
     level.hintbackground maps\_hud_util::destroyelem();
-  }
 
   level notify("clearing_hints");
 }
@@ -482,9 +470,8 @@ init_level_flags() {
   var_0[var_0.size] = "retreat_to_tall_grass";
   var_0[var_0.size] = "jump_vo_trig";
 
-  foreach(var_2 in var_0) {
-    init_flag_and_set_on_targetname_trigger(var_2);
-  }
+  foreach(var_2 in var_0)
+  init_flag_and_set_on_targetname_trigger(var_2);
 }
 
 init_flag_and_set_on_targetname_trigger(var_0) {
@@ -550,26 +537,23 @@ should_toggle_silencer() {
   var_1 = strtok(var_0, "_");
 
   if(isDefined(var_1.size)) {
-    if(var_1[0] == "alt") {
+    if(var_1[0] == "alt")
       return 1;
-    } else {
+    else
       return 0;
-    }
   }
 }
 
 should_switchto_soflam() {
-  if(level.player getcurrentweapon() == "soflam") {
+  if(level.player getcurrentweapon() == "soflam")
     return 1;
-  }
 
   return 0;
 }
 
 should_use_soflam() {
-  if(level.player getcurrentweapon() == "soflam" && level.player playerads() >= 0.25) {
+  if(level.player getcurrentweapon() == "soflam" && level.player playerads() >= 0.25)
     return 1;
-  }
 
   return 0;
 }
@@ -615,9 +599,8 @@ jungle_corridor_start() {
   common_scripts\utility::flag_wait("crash_arrive");
   var_1 = common_scripts\utility::getstructarray("jungle_corridor_ai", "targetname");
 
-  while(!isDefined(level.alpha)) {
+  while(!isDefined(level.alpha))
     wait 0.1;
-  }
 
   foreach(var_4, var_3 in var_1) {
     level.alpha[var_4] forceteleport(var_3.origin, var_3.angles);
@@ -757,9 +740,8 @@ stream_start() {
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
   var_3 = getaiarray("allies");
 
-  foreach(var_6, var_5 in var_2) {
-    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
-  }
+  foreach(var_6, var_5 in var_2)
+  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
 
   setup_squad_stealth();
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -793,9 +775,8 @@ stream_waterfall_start() {
   var_1 = common_scripts\utility::getstructarray("stream_waterfall_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   setup_squad_stealth();
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -828,9 +809,8 @@ stream_backend_start() {
   common_scripts\utility::array_thread(level.squad, maps\_utility::ent_flag_init, "stealth_kill");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   setup_squad_stealth();
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -865,9 +845,8 @@ tall_grass_start() {
   var_2 = common_scripts\utility::getstructarray("tall_grass_ai", "targetname");
   var_3 = getaiarray("allies");
 
-  foreach(var_6, var_5 in var_2) {
-    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
-  }
+  foreach(var_6, var_5 in var_2)
+  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
 
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
   common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
@@ -911,9 +890,8 @@ tall_grass_start_cold() {
   var_2 = common_scripts\utility::getstructarray("tall_grass_ai", "targetname");
   var_3 = getaiarray("allies");
 
-  foreach(var_6, var_5 in var_2) {
-    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
-  }
+  foreach(var_6, var_5 in var_2)
+  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
 
   var_7 = getent("stream_backend_moveup", "targetname");
   var_7 delete();
@@ -953,9 +931,8 @@ tall_grass_chopper_start() {
   var_1 = common_scripts\utility::getstructarray("tall_grass_chopper_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -1000,9 +977,8 @@ runway_start() {
   var_1 = common_scripts\utility::getstructarray("runway_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
   common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
@@ -1038,9 +1014,8 @@ escape_runway_start() {
   var_1 = common_scripts\utility::getstructarray("escape_runway_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -1077,9 +1052,8 @@ escape_jungle_start() {
   var_1 = common_scripts\utility::getstructarray("escape_jungle_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -1123,9 +1097,8 @@ escape_river_start() {
   var_1 = common_scripts\utility::getstructarray("escape_river_ai", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -1161,9 +1134,8 @@ escape_waterfall_start() {
   var_1 = common_scripts\utility::getstructarray("waterfall_ai_land", "targetname");
   var_2 = getaiarray("allies");
 
-  foreach(var_5, var_4 in var_1) {
-    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
-  }
+  foreach(var_5, var_4 in var_1)
+  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
   common_scripts\utility::array_thread(level.bravo, maps\_utility::set_force_color, "b");
@@ -1179,9 +1151,8 @@ escape_waterfall_start() {
 escape_setup_swimming() {
   level thread maps\jungle_ghosts_util::player_swim_think();
 
-  foreach(var_1 in level.squad) {
-    var_1 thread maps\jungle_ghosts_util::enable_ai_swim();
-  }
+  foreach(var_1 in level.squad)
+  var_1 thread maps\jungle_ghosts_util::enable_ai_swim();
 }
 
 stream_friendly_setup() {
@@ -1210,9 +1181,8 @@ swap_to_overcast_sky() {
   thread maps\_utility::sun_light_fade(var_0, var_1, 0.1);
   common_scripts\utility::flag_set("skybox_changed");
 
-  if(isDefined(level.rain_skybox)) {
+  if(isDefined(level.rain_skybox))
     level.rain_skybox show();
-  }
 }
 
 assign_alpha() {
@@ -1261,11 +1231,11 @@ objectives(var_0) {
       wait 1;
     case "jungle_hill":
     case "waterfall":
-      objective_add(maps\_utility::obj("waterfall"), "current", &"JUNGLE_GHOSTS_OBJ_REGROUP_AT_WATERFALL");
+      objective_add(maps\_utility::obj("waterfall"), "current", & "JUNGLE_GHOSTS_OBJ_REGROUP_AT_WATERFALL");
       common_scripts\utility::flag_wait("waterfall_see_friendlies");
       maps\_utility::objective_complete(maps\_utility::obj("waterfall"));
       common_scripts\utility::flag_wait_any("player_at_execution", "obj_save_team");
-      objective_add(maps\_utility::obj("rescue"), "current", &"JUNGLE_GHOSTS_OBJ_SAVE_TEAM");
+      objective_add(maps\_utility::obj("rescue"), "current", & "JUNGLE_GHOSTS_OBJ_SAVE_TEAM");
       common_scripts\utility::flag_wait("player_rescued_hostage");
       maps\_utility::objective_complete(maps\_utility::obj("rescue"));
       common_scripts\utility::flag_wait("obj_get_to_river");
@@ -1273,7 +1243,7 @@ objectives(var_0) {
     case "runway":
     case "tall_grass":
     case "stream":
-      objective_add(maps\_utility::obj("escape"), "current", &"JUNGLE_GHOSTS_OBJ_ESC_TO_RIVER");
+      objective_add(maps\_utility::obj("escape"), "current", & "JUNGLE_GHOSTS_OBJ_ESC_TO_RIVER");
       common_scripts\utility::flag_wait("obj_all_done");
       maps\_utility::objective_complete(maps\_utility::obj("escape"));
   }
@@ -1345,11 +1315,10 @@ setup_fire_damage() {
 world_fire_damage(var_0) {
   var_1 = 10;
 
-  if(var_0 == "m") {
+  if(var_0 == "m")
     var_1 = 25;
-  } else if(var_0 == "l") {
+  else if(var_0 == "l")
     var_1 = 50;
-  }
 
   for(;;) {
     self waittill("trigger");
@@ -1359,9 +1328,8 @@ world_fire_damage(var_0) {
 }
 
 player_pushing_forward() {
-  if(common_scripts\utility::flag("vargas_at_edge")) {
+  if(common_scripts\utility::flag("vargas_at_edge"))
     return 1;
-  }
 
   var_0 = level.player getnormalizedmovement();
   return var_0[0] > 0.1;

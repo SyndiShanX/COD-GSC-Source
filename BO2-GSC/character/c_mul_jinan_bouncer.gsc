@@ -7,7 +7,7 @@
 #include xmodelalias\c_mul_jinan_bouncer_head_als;
 
 main() {
-  self setModel("c_mul_jinan_bouncer_body");
+  self setmodel("c_mul_jinan_bouncer_body");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_mul_jinan_bouncer_head_als::main());
   self attach(self.headmodel, "", 1);
   self.voice = "american";

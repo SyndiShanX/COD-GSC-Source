@@ -381,11 +381,10 @@ flood_amb_fx() {
 }
 
 fx_set_alpha_threshold() {
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     setsaveddvar("fx_alphathreshold", 2);
-  } else {
+  else
     setsaveddvar("fx_alphathreshold", 9);
-  }
 }
 
 freon_leak_fx_turn_off_damage() {
@@ -760,9 +759,8 @@ attach_fx_anim_model_mall_debris(var_0, var_1, var_2, var_3, var_4) {
       break;
     }
 
-    if(var_9 == var_4 && isDefined(var_8)) {
+    if(var_9 == var_4 && isDefined(var_8))
       var_8 delete();
-    }
 
     wait 1;
   }
@@ -953,9 +951,8 @@ alley_flood_far_vfx_attachments() {
       if(randomfloat(1.0) > 0.5) {
         var_3 = "j_far_" + (var_2 - 1);
 
-        if(randomfloat(1.0) > 0.4) {
+        if(randomfloat(1.0) > 0.4)
           attach_fx_anim_model_alley_flood(self, var_0[randomint(var_0.size)], var_3, 12.0);
-        }
       }
     }
 
@@ -1171,9 +1168,8 @@ angry_flood_big_wave_water() {
     var_4[var_4.size] = playfxontagspecial(var_3, var_1, "j_bigwave_41");
   }
 
-  if(level.playangryfloodvfx) {
+  if(level.playangryfloodvfx)
     thread big_wave_addl_effects();
-  }
 
   var_0 thread maps\_anim::anim_single(var_2, "flood_angry_flood_bigwave0");
   wait 6.3;
@@ -1680,49 +1676,43 @@ destroy_fx_warehouse_floating_debris() {
 
   if(isDefined(level.wh_debris_01_vfx)) {
     foreach(var_3 in level.wh_debris_01_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
   if(isDefined(level.wh_debris_02_vfx)) {
     foreach(var_3 in level.wh_debris_02_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
   if(isDefined(level.wh_debris_03_vfx)) {
     foreach(var_3 in level.wh_debris_03_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
   if(isDefined(level.wh_debris_01_top_vfx)) {
     foreach(var_3 in level.wh_debris_01_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
   if(isDefined(level.wh_debris_02_top_vfx)) {
     foreach(var_3 in level.wh_debris_02_top_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
   if(isDefined(level.wh_debris_03_top_vfx)) {
     foreach(var_3 in level.wh_debris_03_top_vfx) {
-      if(isDefined(var_3[0])) {
+      if(isDefined(var_3[0]))
         var_3[0] delete();
-      }
     }
   }
 
@@ -1755,11 +1745,10 @@ fx_warehouse_floating_debris() {
   }
 
   for(var_4 = 1; var_4 <= 10; var_4++) {
-    if(var_4 < 10) {
+    if(var_4 < 10)
       var_5 = "tag_fx_debri_2_00" + var_4;
-    } else {
+    else
       var_5 = "tag_fx_debri_2_0" + var_4;
-    }
 
     level.wh_debris_02_vfx[level.wh_debris_02_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_02"), var_0, var_5);
     level.wh_debris_02_top_vfx[level.wh_debris_02_top_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_02_top"), var_0, var_5);
@@ -1789,11 +1778,10 @@ fx_warehouse_floating_debris() {
     var_13 = "tag_fx_debri_1_00" + var_12;
     playFXOnTag(common_scripts\utility::getfx("flood_warehouse_floating_debri_01"), var_1, var_13);
 
-    if(var_4 != 3) {
+    if(var_4 != 3)
       level.wh_debris_02_vfx[level.wh_debris_02_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_02"), var_1, var_13);
-    } else {
+    else
       level.wh_debris_03_vfx[level.wh_debris_03_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_03"), var_1, var_13);
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -1802,9 +1790,8 @@ fx_warehouse_floating_debris() {
 }
 
 fx_warehouse_floating_debris_int() {
-  if(!isDefined(self.already_spawned) || isDefined(self.already_spawned) && !self.already_spawned) {
+  if(!isDefined(self.already_spawned) || isDefined(self.already_spawned) && !self.already_spawned)
     thread fx_warehouse_floating_debris();
-  }
 }
 
 fx_warehouse_door_breach() {
@@ -1849,9 +1836,8 @@ trigger_debris_bridge_water() {
   var_1 = getEntArray("swept_water_swim", "targetname");
   var_0 show();
 
-  foreach(var_3 in var_1) {
-    var_3 hide();
-  }
+  foreach(var_3 in var_1)
+  var_3 hide();
 }
 
 exit_stealth_misc_fx() {
@@ -1874,9 +1860,8 @@ fx_rooftops_water_hide() {
 fx_swept_water_hide() {
   var_0 = getEntArray("swept_water_swim", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 }
 
 fx_mall_roof_water_hide() {
@@ -1910,9 +1895,8 @@ fx_retarget_warehouse_waters_lighting() {
   var_3 retargetscriptmodellighting(var_0);
   var_4 retargetscriptmodellighting(var_0);
 
-  if(isDefined(var_5) && isDefined(var_1)) {
+  if(isDefined(var_5) && isDefined(var_1))
     var_5 retargetscriptmodellighting(var_1);
-  }
 }
 
 fx_retarget_rooftop_water_lighting() {
@@ -1922,9 +1906,8 @@ fx_retarget_rooftop_water_lighting() {
   var_3 = getEntArray("swept_water_swim", "targetname");
   var_4 = getent("rooftop2_water", "script_noteworthy");
 
-  foreach(var_6 in var_3) {
-    var_6 retargetscriptmodellighting(var_0);
-  }
+  foreach(var_6 in var_3)
+  var_6 retargetscriptmodellighting(var_0);
 
   var_1 retargetscriptmodellighting(var_0);
   var_2 retargetscriptmodellighting(var_0);
@@ -2162,13 +2145,11 @@ gamestart_light_fix() {
   var_1 retargetscriptmodellighting(var_5);
   var_2 retargetscriptmodellighting(var_5);
 
-  foreach(var_7 in var_3) {
-    var_7 retargetscriptmodellighting(var_4);
-  }
+  foreach(var_7 in var_3)
+  var_7 retargetscriptmodellighting(var_4);
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 setlightradius(13);
-  }
 }
 
 set_enter_flood_road() {
@@ -2179,9 +2160,8 @@ set_enter_flood_road() {
     maps\_utility::vision_set_changes("flood_road", 3);
     maps\_utility::lerp_saveddvar("sm_sunSampleSizeNear", 0.45, 1);
 
-    while(common_scripts\utility::flag("flood_road_trigger")) {
+    while(common_scripts\utility::flag("flood_road_trigger"))
       common_scripts\utility::waitframe();
-    }
 
     maps\_utility::vision_set_fog_changes("", 0);
   }
@@ -2194,9 +2174,8 @@ set_enter_garage_mall_vf() {
     common_scripts\utility::flag_wait("vs_garage1_trigger");
     setsaveddvar("sm_sunSampleSizeNear", 0.15);
 
-    while(common_scripts\utility::flag("vs_garage1_trigger")) {
+    while(common_scripts\utility::flag("vs_garage1_trigger"))
       common_scripts\utility::waitframe();
-    }
 
     maps\_utility::vision_set_fog_changes("flood", 2);
     thread garage_malllight_off();
@@ -2206,9 +2185,8 @@ set_enter_garage_mall_vf() {
 garage_malllight_off() {
   var_0 = getEntArray("garage_mall_light", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 setlightradius(13);
-  }
+  foreach(var_2 in var_0)
+  var_2 setlightradius(13);
 }
 
 set_mall_lights_off() {
@@ -2228,9 +2206,8 @@ set_warelights_off() {
 warelights_off() {
   var_0 = getEntArray("mall_light", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 setlightradius(13);
-  }
+  foreach(var_2 in var_0)
+  var_2 setlightradius(13);
 }
 
 set_enter_canope_vf() {
@@ -2241,9 +2218,8 @@ set_enter_canope_vf() {
     visionsetnaked("flood", 4);
     level.cw_vision_above = "flood";
 
-    while(common_scripts\utility::flag("vs_canope_trigger")) {
+    while(common_scripts\utility::flag("vs_canope_trigger"))
       common_scripts\utility::waitframe();
-    }
 
     visionsetnaked("flood", 2.5);
     level.cw_vision_above = "flood";
@@ -2272,9 +2248,8 @@ set_enter_stairwell() {
   var_0 = getEntArray("lgt_off", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_2 hide();
-    }
   }
 
   var_4 = getent("enter_stairwell", "targetname");
@@ -2302,9 +2277,8 @@ mall_light_cleanup() {
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
   setsaveddvar("sm_sunshadowscale", 1);
 
-  foreach(var_5 in var_0) {
-    var_5 delete();
-  }
+  foreach(var_5 in var_0)
+  var_5 delete();
 
   foreach(var_5 in var_1) {
     var_5 setlightintensity(0.15);
@@ -2319,9 +2293,8 @@ mall_light_cleanup() {
     var_2 setlightradius(13);
   }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 setlightintensity(0.4);
-  }
 
   if(maps\_utility::is_gen4()) {
     var_5 = maps\_utility::create_sunflare_setting("default");
@@ -2334,13 +2307,11 @@ light_flicker(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   if(maps\_utility::is_gen4()) {
-    foreach(var_3 in var_1) {
-      var_3 thread flicker();
-    }
+    foreach(var_3 in var_1)
+    var_3 thread flicker();
   } else {
-    foreach(var_3 in var_1) {
-      var_3 thread flicker_cg();
-    }
+    foreach(var_3 in var_1)
+    var_3 thread flicker_cg();
   }
 }
 
@@ -2397,22 +2368,19 @@ flicker_cg() {
 }
 
 change_light(var_0) {
-  if(self.classname == "light_spot" || self.classname == "light_omni") {
+  if(self.classname == "light_spot" || self.classname == "light_omni")
     self setlightintensity(var_0);
-  }
 
   if(self.classname == "script_model") {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lgt_on") {
-      if(var_0 > 0) {
+      if(var_0 > 0)
         self show();
-      } else {
+      else
         self hide();
-      }
     } else if(var_0 > 0)
       self hide();
-    else {
+    else
       self show();
-    }
   }
 }
 
@@ -2461,9 +2429,8 @@ set_enter_stealth_vf() {
     level.player maps\flood_util::set_water_fog("flood_underwater_stealth");
     level.player visionsetwaterforplayer("flood_underwater_stealth", 0);
 
-    while(common_scripts\utility::flag("stealth_vs_trigger")) {
+    while(common_scripts\utility::flag("stealth_vs_trigger"))
       common_scripts\utility::waitframe();
-    }
 
     setsaveddvar("sm_sunSampleSizeNear", 0.65);
     maps\_utility::vision_set_fog_changes("flood_two", 3);
@@ -2506,9 +2473,8 @@ set_enter_garage2_vf() {
       level.player visionsetwaterforplayer("flood_underwater_dark", 0);
     }
 
-    while(common_scripts\utility::flag("garage2_vs_trigger") || common_scripts\utility::flag("cw_player_underwater")) {
+    while(common_scripts\utility::flag("garage2_vs_trigger") || common_scripts\utility::flag("cw_player_underwater"))
       common_scripts\utility::waitframe();
-    }
 
     maps\_utility::set_vision_set("flood_two");
     maps\_utility::vision_set_fog_changes("flood_two", 3);
@@ -2527,9 +2493,8 @@ set_enter_skybridge_room_vf() {
     enableforcedsunshadows();
     var_0 = getent("skybridge_room_light", "targetname");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_0 setlightradius(800);
-    }
 
     if(maps\_utility::is_gen4()) {
       var_1 = maps\_utility::create_sunflare_setting("default");
@@ -2539,9 +2504,8 @@ set_enter_skybridge_room_vf() {
 
     setsaveddvar("sm_sunSampleSizeNear", 0.25);
 
-    while(common_scripts\utility::flag("vs_skybridge_room_trigger")) {
+    while(common_scripts\utility::flag("vs_skybridge_room_trigger"))
       common_scripts\utility::waitframe();
-    }
 
     visionsetnaked("flood_two", 3);
     maps\_utility::fog_set_changes("flood_two", 3);
@@ -2568,9 +2532,8 @@ set_vf_end2() {
 }
 
 fx_create_bokehdots_source() {
-  if(!isDefined(level.player.flood_bokehdot)) {
+  if(!isDefined(level.player.flood_bokehdot))
     level.player.flood_bokehdot = 0;
-  }
 
   if(!isDefined(level.flood_source_bokehdots)) {
     level.flood_source_bokehdots = spawn("script_model", (0, 0, 0));
@@ -2615,65 +2578,57 @@ fx_bokehdots_close() {
 fx_turn_on_bokehdots_16_player() {
   fx_create_bokehdots_source();
 
-  if(!common_scripts\utility::flag("cw_player_underwater")) {
+  if(!common_scripts\utility::flag("cw_player_underwater"))
     playFXOnTag(common_scripts\utility::getfx("bokehdots_16"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_turn_on_bokehdots_16_player_kill() {
   fx_create_bokehdots_source();
 
-  if(common_scripts\utility::flag("cw_player_underwater")) {
+  if(common_scripts\utility::flag("cw_player_underwater"))
     killfxontag(common_scripts\utility::getfx("bokehdots_16"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_turn_on_bokehdots_32_player() {
   fx_create_bokehdots_source();
 
-  if(!common_scripts\utility::flag("cw_player_underwater")) {
+  if(!common_scripts\utility::flag("cw_player_underwater"))
     playFXOnTag(common_scripts\utility::getfx("bokehdots_32"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_turn_on_bokehdots_64_player() {
   fx_create_bokehdots_source();
 
-  if(!common_scripts\utility::flag("cw_player_underwater")) {
+  if(!common_scripts\utility::flag("cw_player_underwater"))
     playFXOnTag(common_scripts\utility::getfx("bokehdots_64"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_waterdrops_3() {
   fx_create_bokehdots_source();
 
-  if(!common_scripts\utility::flag("cw_player_underwater")) {
+  if(!common_scripts\utility::flag("cw_player_underwater"))
     playFXOnTag(common_scripts\utility::getfx("waterdrops_3"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_waterdrops_20_inst() {
   fx_create_bokehdots_source();
 
-  if(!common_scripts\utility::flag("cw_player_underwater")) {
+  if(!common_scripts\utility::flag("cw_player_underwater"))
     playFXOnTag(common_scripts\utility::getfx("waterdrops_20_inst"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_waterdrops_20_inst_kill() {
   fx_create_bokehdots_source();
 
-  if(common_scripts\utility::flag("cw_player_underwater")) {
+  if(common_scripts\utility::flag("cw_player_underwater"))
     killfxontag(common_scripts\utility::getfx("waterdrops_20_inst"), level.flood_source_bokehdots, "tag_origin");
-  }
 }
 
 fx_bokehdots_and_waterdrops_heavy(var_0) {
   fx_create_bokehdots_source();
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 5;
-  }
 
   if(!common_scripts\utility::flag("cw_player_underwater") && level.player.flood_bokehdot <= 5) {
     level.player.flood_bokehdot++;
@@ -2709,9 +2664,8 @@ bokehdots_audition_test() {
 fx_angry_flood_nearmiss(var_0) {
   self waittill("trigger");
 
-  if(!isDefined(level.flood_near_miss)) {
+  if(!isDefined(level.flood_near_miss))
     level.flood_near_miss = 0;
-  }
 
   if(!level.flood_near_miss) {
     level.flood_near_miss = 1;
@@ -2824,11 +2778,10 @@ ally1_emerge_splash(var_0) {
 
 allie1_tussbubbs(var_0) {
   for(var_1 = 0; var_1 < 100; var_1++) {
-    if(common_scripts\utility::flag("cw_player_underwater")) {
+    if(common_scripts\utility::flag("cw_player_underwater"))
       playFXOnTag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_RI");
-    } else if(common_scripts\utility::flag("cw_player_abovewater")) {
+    else if(common_scripts\utility::flag("cw_player_abovewater"))
       killfxontag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_RI");
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -2838,11 +2791,10 @@ allie1_tussbubbs(var_0) {
 
 opfor3_tussbubbs(var_0) {
   for(var_1 = 0; var_1 < 100; var_1++) {
-    if(common_scripts\utility::flag("cw_player_underwater")) {
+    if(common_scripts\utility::flag("cw_player_underwater"))
       playFXOnTag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_LE");
-    } else if(common_scripts\utility::flag("cw_player_abovewater")) {
+    else if(common_scripts\utility::flag("cw_player_abovewater"))
       killfxontag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_LE");
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -3308,13 +3260,11 @@ treadfx_override() {
 }
 
 character_make_wet(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 1;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   var_2 = [];
   var_2[0] = "J_Elbow_LE";
@@ -3324,9 +3274,8 @@ character_make_wet(var_0, var_1) {
   var_2[4] = "TAG_STOWED_BACK";
   var_2[5] = "J_Neck";
 
-  if(var_1) {
+  if(var_1)
     playFXOnTag(common_scripts\utility::getfx("water_emerge_weapon"), self, "TAG_FLASH");
-  }
 
   var_3 = gettime() + var_0 * 1000;
   var_4 = gettime();
@@ -3355,9 +3304,8 @@ fx_drip_switcher() {
     }
   }
 
-  if(common_scripts\utility::flag("moving_to_mall")) {
+  if(common_scripts\utility::flag("moving_to_mall"))
     level._effect["character_drips"] = loadfx("vfx/moments/flood/flood_character_drips");
-  }
 }
 
 debris_bridge_ally_waterfx(var_0) {
@@ -3369,25 +3317,22 @@ debris_bridge_ally_waterfx(var_0) {
     if(distance(self.velocity, (0, 0, 0)) > var_1) {
       playFXOnTag(level._effect["flood_db_foam_allie_emit_fast"], self, "tag_origin");
 
-      while(distance(self.velocity, (0, 0, 0)) > var_1) {
+      while(distance(self.velocity, (0, 0, 0)) > var_1)
         common_scripts\utility::waitframe();
-      }
 
       stopFXOnTag(level._effect["flood_db_foam_allie_emit_fast"], self, "tag_origin");
     } else if(distance(self.velocity, (0, 0, 0)) > var_2) {
       playFXOnTag(level._effect["flood_db_foam_allie_emit_med"], self, "tag_origin");
 
-      while(distance(self.velocity, (0, 0, 0)) > var_2) {
+      while(distance(self.velocity, (0, 0, 0)) > var_2)
         common_scripts\utility::waitframe();
-      }
 
       stopFXOnTag(level._effect["flood_db_foam_allie_emit_med"], self, "tag_origin");
     } else {
       playFXOnTag(level._effect["flood_db_foam_allie_emit"], self, "tag_origin");
 
-      while(distance(self.velocity, (0, 0, 0)) < var_2) {
+      while(distance(self.velocity, (0, 0, 0)) < var_2)
         common_scripts\utility::waitframe();
-      }
 
       stopFXOnTag(level._effect["flood_db_foam_allie_emit"], self, "tag_origin");
     }
@@ -3495,17 +3440,15 @@ screen_shock(var_0) {
 ending_white_fade(var_0, var_1, var_2) {
   var_3 = maps\_hud_util::create_client_overlay("white", 0, level.player);
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     var_3 fadeovertime(var_0);
-  }
 
   var_3.alpha = 0.75;
   wait(var_0);
   wait(var_1);
 
-  if(var_2 > 0) {
+  if(var_2 > 0)
     var_3 fadeovertime(var_2);
-  }
 
   var_3.alpha = 0;
   wait(var_2);

@@ -16,7 +16,7 @@ turret_guy_in_near_humvee() {
   vehicle = self.ridingVehicle;
   angles = vehicle.angles;
   angles = (0, angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
 
   ent = spawn_tag_origin();
   ent.origin = vehicle.origin + forward * 250 + (0, 0, 120);
@@ -28,7 +28,7 @@ turret_guy_in_near_humvee() {
   turret SetTargetEntity(ent);
 
   /*
-  for( ;; )
+  for ( ;; )
   {
   	Line( ent.origin, self.origin );
   	wait( 0.05 );
@@ -37,33 +37,29 @@ turret_guy_in_near_humvee() {
 }
 
 player_fails_if_he_kills_me(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isalive(attacker)) {
+  if(!isalive(attacker))
     return;
-  }
-  if(attacker != level.player) {
+  if(attacker != level.player)
     return;
-  }
 
   vehicle = self.ridingVehicle;
-  if(isDefined(vehicle)) {
-    if(vehicle ent_flag("can_shoot_the_baddies")) {
+  if(isdefined(vehicle)) {
+    if(vehicle ent_flag("can_shoot_the_baddies"))
       return;
-    }
   }
 
   wait(1);
   // Friendly fire will not be tolerated!
-  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+  SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
   maps\_utility::missionFailedWrapper();
 }
 
 aim_ahead_until_you_get_enemy() {
   self endon("death");
 
-  for(;;) {
-    if(isDefined(self.ridingVehicle)) {
+  for (;;) {
+    if(IsDefined(self.ridingVehicle))
       break;
-    }
     wait(0.05);
   }
 
@@ -71,27 +67,24 @@ aim_ahead_until_you_get_enemy() {
   add_damage_function(::player_fails_if_he_kills_me);
 
   // this guy aims at other targets
-  if(vehicle.script_index == 0) {
+  if(vehicle.script_index == 0)
     vehicle.target_override = "turret_aim_target_first";
-  }
 
   angles = vehicle.angles;
   angles = (0, angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
 
   ent = spawn_tag_origin();
   ent.origin = vehicle.origin + forward * 250 + (0, 0, 120);
   ent LinkTo(vehicle);
 
   turret = undefined;
-  for(;;) {
+  for (;;) {
     turret = self GetTurret();
-    if(isDefined(turret)) {
+    if(IsDefined(turret))
       break;
-    }
-    if(!isDefined(self.ridingVehicle)) {
+    if(!isdefined(self.ridingVehicle))
       return;
-    }
     wait(0.05);
   }
 
@@ -134,20 +127,18 @@ gunner_aims_at_targets(default_target, vehicle) {
   self endon("death");
 
   targetname = "turret_aim_target";
-  if(isDefined(vehicle.target_override)) {
+  if(IsDefined(vehicle.target_override))
     targetname = vehicle.target_override;
-  }
 
-  targets = getEntArray(targetname, "targetname");
+  targets = GetEntArray(targetname, "targetname");
   foreach(target in targets) {
-    if(!isDefined(target.script_noteworthy)) {
+    if(!isdefined(target.script_noteworthy))
       target.script_noteworthy = "";
-    }
   }
 
   level.toffset++;
 
-  for(;;) {
+  for (;;) {
     ents = get_array_of_closest(self.origin, targets, undefined, 5, 2000, 500);
 
     next_target = default_target;
@@ -166,10 +157,10 @@ gunner_aims_at_targets(default_target, vehicle) {
       }
     }
 
-    if(isDefined(priority_target)) {
+    if(IsDefined(priority_target)) {
       next_target = priority_target;
     } else {
-      for(i = 0; i < ents.size; i++) {
+      for (i = 0; i < ents.size; i++) {
         ent = ents[i];
         dot = get_dot(self.origin, angles, ent.origin);
         //Print3d( ent.origin + (0,0,level.toffset*16), dot, (1,1,1), 1, 1.2, 100 );
@@ -182,9 +173,8 @@ gunner_aims_at_targets(default_target, vehicle) {
 
     if(vehicle == level.crazy_ride_convoy["detour"]) {
       // detour guy does custom aiming once the shot rings out
-      if(flag("shot_rings_out")) {
+      if(flag("shot_rings_out"))
         return;
-      }
     }
 
     //thread linder( next_target );
@@ -192,12 +182,11 @@ gunner_aims_at_targets(default_target, vehicle) {
     if(next_target == default_target) {
       wait(0.15);
     } else {
-      for(;;) {
+      for (;;) {
         angles = vehicle.angles;
         dot = get_dot(self.origin, angles, next_target.origin);
-        if(dot < 0) {
+        if(dot < 0)
           break;
-        }
         wait(0.1);
       }
     }
@@ -207,7 +196,7 @@ gunner_aims_at_targets(default_target, vehicle) {
 linder(ent) {
   self notify("stop");
   self endon("stop");
-  for(;;) {
+  for (;;) {
     Line(self.origin, ent.origin);
     wait(0.05);
   }
@@ -219,16 +208,15 @@ hargrove_spawner() {
 }
 
 protect_player_while_scene_is_active() {
-  timeoutEnt = spawnStruct();
+  timeoutEnt = SpawnStruct();
   timeout_time = 10;
-  if(getdvarint("newintro")) {
+  if(getdvarint("newintro"))
     timeout_time = 18;
-  }
 
   timeoutEnt thread notify_delay("timeout", timeout_time);
   timeoutEnt endon("timeout");
 
-  for(;;) {
+  for (;;) {
     flag_wait("player_hangs_with_commanders");
     set_player_attacker_accuracy(0);
     level.player.IgnoreRandomBulletDamage = true;
@@ -260,10 +248,9 @@ roadkill_foley_shepherd_intro() {
   struct thread anim_loop_solo( level.shepherd, "intro_idle" );
   //flag_wait( "player_enters_riverbank" );
   wait( 1 );
-  if( !is_default_start() ) {
+  if( !is_default_start() )
   	return;
-  }
-  	
+	
   struct notify( "stop_loop" );
   */
 
@@ -284,6 +271,7 @@ roadkill_foley_shepherd_intro() {
   //start_time = offset_start / anim_time;
   //level.shepherd SetAnimTime( animation, start_time );
 
+
   //node = GetNode( "shepherd_walk_node", "targetname" );
   //level.shepherd.a.movement = "run";
   //level.shepherd SetGoalNode( node );
@@ -297,11 +285,10 @@ roadkill_foley_shepherd_intro() {
   level.foley.goalradius = 16;
   level.foley add_to_allied_riverbank_ai(); // makes him move out with convoy
 
-  for(;;) {
+  for (;;) {
     time = level.foley GetAnimTime(animation);
-    if(time >= 0.975) {
+    if(time >= 0.975)
       break;
-    }
     wait(0.05);
   }
 
@@ -309,17 +296,16 @@ roadkill_foley_shepherd_intro() {
 }
 
 ent_flag_set_trigger() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!first_touch(other)) {
+    if(!first_touch(other))
       continue;
-    }
     other ent_flag_set(self.script_flag);
   }
 }
 
 foley_spawner() {
-  AssertEx(!isDefined(level.foley), "Multiple Foleys!");
+  AssertEx(!isdefined(level.foley), "Multiple Foleys!");
   level.foley = self;
   self.animname = "foley";
   self make_hero();
@@ -333,25 +319,23 @@ foley_spawner() {
 }
 
 safe_delete() {
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
   self Delete();
 }
 
 dunn_spawner() {
-  AssertEx(!isDefined(level.dunn), "Multiple Dunns!");
+  AssertEx(!isdefined(level.dunn), "Multiple Dunns!");
   level.dunn = self;
   self.animname = "dunn";
   //	self gun_remove();
 }
 
 shepherd_spawner() {
-  AssertEx(!isDefined(level.shepherd), "Multiple Shepherds!");
+  AssertEx(!isdefined(level.shepherd), "Multiple Shepherds!");
   level.shepherd = self;
   self.animname = "shepherd";
   self make_hero();
@@ -380,16 +364,16 @@ player_humvee() {
   }
 
   /*
-  	level.player PlayerLinkTo( self, "tag_player", 0 );
-  	turret = self.mgturret[ 0 ];
-  	turret MakeUsable();
-  	turret SetMode( "manual" );
-  	turret UseBy( level.player );
-  	turret MakeUnusable();
-  	
-  //	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
-  	level.player DisableTurretDismount();
-  	*/
+	level.player PlayerLinkTo( self, "tag_player", 0 );
+	turret = self.mgturret[ 0 ];
+	turret MakeUsable();
+	turret SetMode( "manual" );
+	turret UseBy( level.player );
+	turret MakeUnusable();
+	
+//	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
+	level.player DisableTurretDismount();
+	*/
 }
 
 player_turret_humvee() {
@@ -409,7 +393,7 @@ player_gets_on_turret() {
   //level.player PlayerLinkTo( self, "tag_player", 0 );
   level.player PlayerLinkToDelta(self, "tag_player", 0.35, 360, 360, 45, 30, true);
   turret = self.mgturret[0];
-  turret setModel("weapon_suburban_minigun_viewmodel");
+  turret SetModel("weapon_suburban_minigun_viewmodel");
   turret MakeUsable();
   turret SetMode("manual");
   turret UseBy(level.player);
@@ -475,7 +459,7 @@ rear_vehicle() {
   if(is_first_start()) {
     flag_wait("player_humvee_stops_for_officers");
     // the vehicles behind you slow down
-    for(;;) {
+    for (;;) {
       speed = level.player_humvee.veh_speed;
       accel = speed;
       if(accel <= 5) {
@@ -483,9 +467,8 @@ rear_vehicle() {
       }
 
       self Vehicle_SetSpeed(speed, accel, accel);
-      if(flag("slam_hood")) {
+      if(flag("slam_hood"))
         break;
-      }
       wait(0.05);
     }
   }
@@ -521,9 +504,8 @@ intro_rundown_friendly_spawner() {
 }
 
 before_bridge_start() {
-  if(level.start_point == "intro") {
+  if(level.start_point == "intro")
     return true;
-  }
   return level.start_point == "riverbank";
 }
 
@@ -585,10 +567,9 @@ bridge_layer_think() {
     //47
 
     bridge_animation = bridge_model getanim("bridge_lower");
-    for(;;) {
-      if(bridge_model GetAnimTime(bridge_animation) >= 0.47) {
+    for (;;) {
+      if(bridge_model GetAnimTime(bridge_animation) >= 0.47)
         break;
-      }
       wait(0.05);
     }
 
@@ -613,11 +594,11 @@ bridge_layer_think() {
     // get the arm going full speed again
     self SetFlaggedAnim("single anim", arm_animation, 1, 0, 1);
 
+
     bridge_animation = bridge_model getanim("bridge_lower");
-    for(;;) {
-      if(bridge_model GetAnimTime(bridge_animation) >= 0.68) {
+    for (;;) {
+      if(bridge_model GetAnimTime(bridge_animation) >= 0.68)
         break;
-      }
       wait(0.05);
     }
 
@@ -629,10 +610,9 @@ bridge_layer_think() {
 
     level notify("tanks_stop_firing");
 
-    for(;;) {
-      if(bridge_model GetAnimTime(bridge_animation) >= 0.98) {
+    for (;;) {
+      if(bridge_model GetAnimTime(bridge_animation) >= 0.98)
         break;
-      }
       wait(0.05);
     }
 
@@ -680,6 +660,7 @@ bridge_layer_think() {
   //	self vehicleDriveTo( node.origin, 30 );
 
   //	org anim_single_solo( self, "bridge_cross" );
+
 }
 
 slow_down_bridge() {
@@ -689,12 +670,10 @@ slow_down_bridge() {
 }
 
 enemy_bridge_spawner_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isalive(attacker)) {
+  if(!isalive(attacker))
     return;
-  }
-  if(attacker != level.player) {
+  if(attacker != level.player)
     return;
-  }
 
   flag_set("player_attacked_bridge_enemy");
 }
@@ -730,15 +709,16 @@ enemy_bridge_vehicle_spawner() {
 }
 
 wait_until_player_ads_on_truck() {
+  /#
   flag_assert("bridge_baddies_retreat");
+  # /
 
-  level endon("bridge_baddies_retreat");
+    level endon("bridge_baddies_retreat");
 
-  for(;;) {
-    dot = get_dot(level.player getEye(), level.player GetPlayerAngles(), self.origin);
-    if(dot > 0.998 && level.player PlayerAds() >= 1.0) {
+  for (;;) {
+    dot = get_dot(level.player GetEye(), level.player GetPlayerAngles(), self.origin);
+    if(dot > 0.998 && level.player PlayerAds() >= 1.0)
       break;
-    }
     wait(0.05);
   }
 
@@ -746,20 +726,18 @@ wait_until_player_ads_on_truck() {
 }
 
 bridge_layer_is_threatened_by_baddies(bridge_model) {
-  if(!is_default_start()) {
+  if(!is_default_start())
     return;
-  }
 
   flag_wait("bridge_layer_attacked_by_bridge_baddies");
 
   /*
   animation = bridge_model getanim( "bridge_lower" );
-  for( ;; )
+  for ( ;; )
   {
   	animtime = bridge_model GetAnimTime( animation );
-  	if( animtime > 0.43 ) {
+  	if( animtime > 0.43 )
   		break;
-  	}
   	wait( 0.05 );
   }
   */
@@ -774,6 +752,7 @@ bridge_layer_is_threatened_by_baddies(bridge_model) {
   array_spawn_targetname("enemy_bridge_spawner");
 
   wait(2);
+
 
   thread bridge_attack_warning_dialogue();
 
@@ -809,9 +788,8 @@ bridge_attack_warning_dialogue() {
   // Up on the bridge, far side!!	
   dunn_line("roadkill_cpd_farside");
 
-  if(flag("player_attacked_bridge_enemy")) {
+  if(flag("player_attacked_bridge_enemy"))
     return;
-  }
   level endon("player_attacked_bridge_enemy");
 
   wait(2.2);
@@ -826,13 +804,14 @@ bridge_attack_warning_dialogue() {
   wait(1.8);
   // Up there on the bridge!!!				
   foley_line("roadkill_fly_onthebridge");
+
+
 }
 
 fail_if_player_doesnt_defend_bridge() {
   level endon("player_attacked_bridge_enemy");
-  if(flag("player_attacked_bridge_enemy")) {
+  if(flag("player_attacked_bridge_enemy"))
     return;
-  }
 
   wait(20);
   thread bridge_layer_explodes();
@@ -840,17 +819,17 @@ fail_if_player_doesnt_defend_bridge() {
 
 bridge_layer_explodes() {
   // The bridge layer was destroyed.
-  SetDvar("ui_deadquote", &"ROADKILL_BRIDGELAYER_DESTROYED");
+  SetDvar("ui_deadquote", & "ROADKILL_BRIDGELAYER_DESTROYED");
   delayThread(3, ::missionFailedWrapper);
 
   explosion_fx = getfx("bmp_explosion");
-  for(;;) {
+  for (;;) {
     vector = randomvector(200);
     z = vector[2];
     z *= 0.5;
     z = abs(z);
     vector = set_z(vector, z);
-    playFX(explosion_fx, level.bridge_layer.origin + vector);
+    PlayFX(explosion_fx, level.bridge_layer.origin + vector);
     timer = RandomFloatRange(0.4, 0.8);
     wait(timer);
   }
@@ -866,17 +845,16 @@ bridge_defender_spawner() {
 
 bridge_almost_done(bridge_model) {
   animation = bridge_model getanim("bridge_lower");
-  for(;;) {
+  for (;;) {
     animtime = bridge_model GetAnimTime(animation);
-    if(animtime > 0.75) {
+    if(animtime > 0.75)
       break;
-    }
     wait(0.05);
   }
 }
 
 fluorescentFlicker() {
-  for(;;) {
+  for (;;) {
     self SetLightIntensity(.8);
     wait(RandomFloatRange(0.1, 1.5));
 
@@ -886,22 +864,20 @@ fluorescentFlicker() {
 }
 
 lights() {
-  lights = getEntArray("flickerlight1", "targetname");
-  foreach(light in lights) {
-    light thread fluorescentFlicker();
-  }
+  lights = GetEntArray("flickerlight1", "targetname");
+  foreach(light in lights)
+  light thread fluorescentFlicker();
 }
 
 get_orgs_from_ents(ents, dontDelete) {
   orgs = [];
   foreach(ent in ents) {
-    struct = spawnStruct();
+    struct = SpawnStruct();
     struct.origin = ent.origin;
     struct.radius = ent.radius;
     orgs[orgs.size] = struct;
-    if(!isDefined(dontDelete)) {
+    if(!isdefined(dontDelete))
       ent Delete();
-    }
   }
   return orgs;
 }
@@ -910,14 +886,13 @@ riverbank_tank() {
   self endon("death");
   level endon("tanks_stop_firing");
 
-  if(!is_default_start()) {
+  if(!is_default_start())
     return;
-  }
 
   ents = get_linked_ents();
   orgs = get_orgs_from_ents(ents);
 
-  ent = spawn("script_origin", (0, 0, 0));
+  ent = Spawn("script_origin", (0, 0, 0));
   ent.origin = orgs[0].origin;
   self SetTurretTargetEnt(ent);
   self.target_ent = ent;
@@ -938,11 +913,11 @@ riverbank_tank() {
 tank_fires_never(orgs) {
   ent = self.target_ent;
 
-  for(;;) {
+  for (;;) {
     orgs = array_randomize(orgs);
     foreach(org in orgs) {
       ent.origin = org.origin;
-      if(isDefined(org.radius)) {
+      if(IsDefined(org.radius)) {
         ent.origin += randomvector(org.radius);
       }
 
@@ -960,7 +935,7 @@ set_target_org_close(ent) {
   // make the target position be close to where we are but on the same line
   my_org = self.origin + (0, 0, 60);
   angles = VectorToAngles(ent.origin - my_org);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   ent.origin = my_org + forward * 400;
 }
 
@@ -968,11 +943,11 @@ tank_fires_rarely(orgs) {
   ent = self.target_ent;
   wait(RandomFloat(10));
 
-  for(;;) {
+  for (;;) {
     orgs = array_randomize(orgs);
     foreach(org in orgs) {
       ent.origin = org.origin;
-      if(isDefined(org.radius)) {
+      if(IsDefined(org.radius)) {
         ent.origin += randomvector(org.radius);
       }
 
@@ -984,7 +959,7 @@ tank_fires_rarely(orgs) {
 
         // 0, 0, 1, or 2 shots
         shots = RandomInt(4) - 1;
-        for(i = 0; i < shots; i++) {
+        for (i = 0; i < shots; i++) {
           self FireWeapon();
           //Line( self.origin, ent.origin, (1,0,0), 1, 0, 500 );
           wait(RandomFloatRange(5, 8));
@@ -1027,10 +1002,9 @@ stryker_blows_up_riverside_bmp() {
 
   // 0, 0, 1, or 2 shots
   shots = RandomInt(4) - 1;
-  for(;;) {
-    if(!isalive(level.riverside_bmp)) {
+  for (;;) {
+    if(!isalive(level.riverside_bmp))
       break;
-    }
     self FireWeapon();
     wait(RandomFloatRange(1, 1.5));
   }
@@ -1040,11 +1014,11 @@ tank_fires_often(orgs) {
   self endon("stop_tank_fire");
   ent = self.target_ent;
 
-  for(;;) {
+  for (;;) {
     orgs = array_randomize(orgs);
     foreach(org in orgs) {
       ent.origin = org.origin;
-      if(isDefined(org.radius)) {
+      if(IsDefined(org.radius)) {
         ent.origin += randomvector(org.radius);
       }
 
@@ -1056,7 +1030,7 @@ tank_fires_often(orgs) {
 
         // 0, 0, 1, or 2 shots
         shots = RandomInt(4) - 1;
-        for(i = 0; i < shots; i++) {
+        for (i = 0; i < shots; i++) {
           self FireWeapon();
           //Line( self.origin, ent.origin, (1,0,0), 1, 0, 500 );
           wait(RandomFloatRange(1, 3));
@@ -1089,6 +1063,7 @@ roadkill_officers_walk_up() {
 
     // start walking with proper separation
     foreach(guy in guys) {
+
       target = getstruct(guy.target, "targetname");
       guy thread maps\_spawner::go_to_node(target, "struct");
     }
@@ -1103,9 +1078,8 @@ roadkill_officers_walk_up() {
 }
 
 detach_binocs() {
-  if(isDefined(self.binoc)) {
+  if(IsDefined(self.binoc))
     self Detach("weapon_binocular", "tag_inhand");
-  }
   self.binoc = undefined;
 }
 
@@ -1118,7 +1092,7 @@ binoc_scene() {
 }
 
 do_binoc_scene() {
-  binoc_scene_spawners = getEntArray(self.target, "targetname");
+  binoc_scene_spawners = GetEntArray(self.target, "targetname");
   guys = array_spawn(binoc_scene_spawners);
   guy = guys[0];
 
@@ -1150,7 +1124,7 @@ play_binoc_scene(guy) {
 
 candy_bar_scene() {
   flag_wait("time_to_go");
-  spawners = getEntArray(self.target, "targetname");
+  spawners = GetEntArray(self.target, "targetname");
   guys = array_spawn(spawners);
   guys[0].animname = "cover_radio3";
   candyMan = guys[0];
@@ -1163,22 +1137,20 @@ candy_bar_scene() {
 
   self thread anim_loop(guys, "idle");
   flag_wait("player_gets_in");
-  if(IsAlive(candyMan)) {
+  if(IsAlive(candyMan))
     candyMan Delete();
-  }
 }
 
 cover_scene() {
-  spawners = getEntArray(self.target, "targetname");
+  spawners = GetEntArray(self.target, "targetname");
   guys = array_spawn(spawners);
   waittillframeend; // for auto spawn logic
 
   // remove the ai from the array, only shepherd is an AI
   newguys = [];
   foreach(guy in guys) {
-    if(IsSentient(guy)) {
+    if(IsSentient(guy))
       continue;
-    }
     newguys[newguys.size] = guy;
     //guy NotSolid();
     guy magic_bullet_shield();
@@ -1189,9 +1161,8 @@ cover_scene() {
   guys[0].animname = "cover_attack2";
   guys[1].animname = "cover_attack3";
 
-  if(isDefined(guys[2])) {
+  if(IsDefined(guys[2]))
     guys[2].animname = "cover_attack1";
-  }
 
   /*
   foreach ( guy in guys )
@@ -1222,14 +1193,14 @@ cover_scene() {
 shoot_from_notetrack() {
   self endon("death");
   self.weaponsound = "drone_m4carbine_fire_npc";
-  for(;;) {
+  for (;;) {
     self waittill("fire");
     thread maps\_drone::drone_shoot_fx();
   }
 }
 
 player_line() {
-  for(;;) {
+  for (;;) {
     Line(self.origin, level.player.origin);
     wait(0.05);
   }
@@ -1280,9 +1251,8 @@ radio_scene() {
   }
 
   foreach(guy in non_candy) {
-    if(isDefined(guy.magic_bullet_shield)) {
+    if(IsDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
-    }
 
     guy Delete();
   }
@@ -1307,7 +1277,7 @@ guys_film_explosion() {
   model = level.scr_model[guy.animname];
   guy Attach(model, "tag_inhand");
 
-  if(isDefined(guy.script_delay)) {
+  if(IsDefined(guy.script_delay)) {
     self anim_first_frame_solo(guy, "video_film_start");
     guy script_delay();
   }
@@ -1333,18 +1303,14 @@ guys_film_explosion() {
 
   start_time = GetTime();
   cheer_time = 6.4; // RandomFloatRange( 5.75, 6.75 );
-  if(guy.animname == "film4") {
+  if(guy.animname == "film4")
     cheer_time = 8.5; // thumb guy can cheer longer
-  }
-  if(guy.animname == "film3") {
+  if(guy.animname == "film3")
     cheer_time = 6.2; // thumb guy can cheer longer
-  }
-  if(guy.animname == "film2") {
+  if(guy.animname == "film2")
     cheer_time = 6.9; // thumb guy can cheer longer
-  }
-  if(guy.animname == "film1") {
+  if(guy.animname == "film1")
     cheer_time = 6.4; // thumb guy can cheer longer
-  }
 
   guy.noTeleport = true;
 
@@ -1367,9 +1333,8 @@ guys_film_explosion() {
   guy StopAnimScripted();
   guy notify("killanimscript");
 
-  if(isDefined(guy.magic_bullet_shield)) {
+  if(IsDefined(guy.magic_bullet_shield))
     guy stop_magic_bullet_shield();
-  }
 
   guy.fixednode = false;
   node = GetNode("bridge_delete_node", "targetname");
@@ -1381,10 +1346,10 @@ guys_film_explosion() {
 
 enemy_riverbank_rpg_spawner() {
   self endon("death");
-  bridge_targets = getEntArray("bridge_target", "targetname");
+  bridge_targets = GetEntArray("bridge_target", "targetname");
   //thread rpgguy();
 
-  for(;;) {
+  for (;;) {
     target = random(bridge_targets);
     target.health = 1;
     self SetEntityTarget(target);
@@ -1396,22 +1361,21 @@ enemy_riverbank_rpg_spawner() {
 rpgguy() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     Print3d(self.origin + (0, 0, 64), "RPG");
     wait(0.05);
   }
 }
 
 riverside_house_manager(spawners) {
-  if(flag("riverbank_baddies_retreat")) {
+  if(flag("riverbank_baddies_retreat"))
     return;
-  }
   level endon("riverbank_baddies_retreat");
 
-  for(;;) {
+  for (;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
-      for(;;) {
+      for (;;) {
         axis = GetAIArray("axis");
         if(axis.size < 6) {
           spawner.count = 1;
@@ -1426,15 +1390,14 @@ riverside_house_manager(spawners) {
 }
 
 riverside_flood_manager(spawners) {
-  if(flag("riverbank_baddies_retreat")) {
+  if(flag("riverbank_baddies_retreat"))
     return;
-  }
   level endon("riverbank_baddies_retreat");
 
-  for(;;) {
+  for (;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
-      for(;;) {
+      for (;;) {
         ai = GetAIArray();
         if(ai.size < 31) {
           spawner.count = 1;
@@ -1449,15 +1412,14 @@ riverside_flood_manager(spawners) {
 }
 
 riverside_flood_think(delay_min, delay_max) {
-  if(flag("riverbank_baddies_retreat")) {
+  if(flag("riverbank_baddies_retreat"))
     return;
-  }
   level endon("riverbank_baddies_retreat");
 
   self endon("death");
   wait(RandomFloat(1));
 
-  for(;;) {
+  for (;;) {
     self.count = 1;
     guy = self spawn_ai();
     if(!isalive(guy)) {
@@ -1500,20 +1462,18 @@ riverbank_spawner_retreat_think() {
 }
 
 disable_all_vehicle_mgs() {
-  vehicles = getEntArray("script_vehicle", "code_classname");
+  vehicles = GetEntArray("script_vehicle", "code_classname");
 
   foreach(vehicle in vehicles) {
-    if(IsSubStr(vehicle.classname, "technical")) {
+    if(IsSubStr(vehicle.classname, "technical"))
       continue;
-    }
     vehicle mgoff();
   }
 }
 
 guy_gets_in_player_humvee() {
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield))
     self magic_bullet_shield();
-  }
   //self disable_arrivals();
 
   flag_wait("convoy_moment");
@@ -1537,9 +1497,8 @@ guy_gets_in_player_humvee() {
   //flag_wait( "player_humvee_stops" );
 
   thread guy_runtovehicle_load(self, level.player_humvee);
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
 
   wait(0.4);
   PrintLn("goalpos " + self.goalpos);
@@ -1573,9 +1532,8 @@ humvee_rider_waver() {
 
   flag_wait("player_gets_in");
   wait(3);
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
 
   self Delete();
 }
@@ -1586,13 +1544,13 @@ player_ride_vehicle() {
   chairModel = "vehicle_hummer_seat_rb_obj";
   self HidePart("tag_seat_rb_hide");
 
-  chair = spawn("script_model", (0, 0, 0));
+  chair = Spawn("script_model", (0, 0, 0));
   level.chair = chair;
-  chair setModel(chairModel);
+  chair SetModel(chairModel);
   chair LinkTo(self, "tag_seat_rb_attach", (0, 0, 0), (0, 0, 0));
   chair MakeUsable();
-  // Press and hold^3 && 1 ^7to board.
-  //chair SetHintString(&"ROADKILL_HOLD_TO_BOARD" );
+  // Press and hold^3 &&1 ^7to board.
+  //chair SetHintString( &"ROADKILL_HOLD_TO_BOARD" );
 
   flag_wait("convoy_moment");
   self thread gopath();
@@ -1613,10 +1571,10 @@ player_ride_vehicle() {
    Use model => ( vehicle_hummer_seat_rb_obj ) as glowing seat.
    I didn't set any glowing attributes for it yet, you'll have to set that
   up.
-  	
+	
   To hide regular seat:
    Use ( tag_seat_rb_hide ).
-  	
+	
   To attach glowing seat to regular:
    Attach ( tag_seat_rb , from vehicle_hummer_seat_rb_obj) to (
   tag_seat_rb_attach )
@@ -1638,15 +1596,13 @@ player_ride_vehicle() {
 
   thread player_fov_zooms_in_for_turret();
   /*
-  for( ;; )
+  for ( ;; )
   {
   	self waittill( "touch", other );
-  	if( !isalive( other ) ) {
+  	if( !isalive( other ) )
   		continue;
-  	}
-  	if( other == level.player ) {
+  	if( other == level.player )
   		break;
-  	}
   }
   */
 
@@ -1688,28 +1644,26 @@ player_ride_vehicle() {
   SetSavedDvar("cg_fov", 65);
 
   /*
-  	turret = self.mgturret[ 0 ];
-  	turret MakeUsable();
-  	turret SetMode( "manual" );
-  	turret UseBy( level.player );
-  	turret MakeUnusable();
-  	
-  //	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
-  	level.player DisableTurretDismount();
-  	*/
+	turret = self.mgturret[ 0 ];
+	turret MakeUsable();
+	turret SetMode( "manual" );
+	turret UseBy( level.player );
+	turret MakeUnusable();
+	
+//	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
+	level.player DisableTurretDismount();
+	*/
 }
 
 chair_waits_for_close() {
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
 
   level endon("player_gets_in");
   self endon("death");
-  for(;;) {
-    if(Distance(self.origin, level.player.origin) < 80) {
+  for (;;) {
+    if(Distance(self.origin, level.player.origin) < 80)
       self notify("trigger");
-    }
     wait(0.05);
   }
 }
@@ -1737,9 +1691,8 @@ common_ride_vehicle_init() {
 }
 
 ride_parameters_check() {
-  if(!isDefined(self.script_parameters)) {
+  if(!isdefined(self.script_parameters))
     return;
-  }
 
   switch (self.script_parameters) {
     case "picks_up_riders":
@@ -1749,9 +1702,8 @@ ride_parameters_check() {
 }
 
 get_vehicle_from_spawner() {
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target))
     return;
-  }
 
   // get the vehicle spawner so we'll know the vehicle after it spawns
   node = GetNode(self.target, "targetname");
@@ -1764,24 +1716,22 @@ get_vehicle_from_spawner() {
 best_friendly_to_run(array) {
   // player sees the scope glint if the dot is within a certain range
   player_angles = level.player GetPlayerAngles();
-  player_forward = anglesToForward(player_angles);
-  end = level.player getEye();
+  player_forward = AnglesToForward(player_angles);
+  end = level.player GetEye();
 
   foreach(guy in array) {
-    start = guy getEye();
+    start = guy GetEye();
     angles = VectorToAngles(start - end);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
 
     dot = VectorDot(forward, player_forward);
-    if(dot < 0.75) {
+    if(dot < 0.75)
       continue;
-    }
 
-    animating_guy = isDefined(guy._animActive) && guy._animActive;
+    animating_guy = IsDefined(guy._animActive) && guy._animActive;
 
-    if(animating_guy && dot >= 0.85) {
+    if(animating_guy && dot >= 0.85)
       continue;
-    }
 
     return guy;
   }
@@ -1789,9 +1739,8 @@ best_friendly_to_run(array) {
 }
 
 allies_leave_riverbank() {
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
   level endon("player_gets_in");
 
   array = [];
@@ -1799,11 +1748,10 @@ allies_leave_riverbank() {
     array[guy.unique_id] = guy;
   }
 
-  for(;;) {
+  for (;;) {
     foreach(guy in array) {
-      if(!isalive(guy)) {
+      if(!isalive(guy))
         array[guy.unique_id] = undefined;
-      }
     }
 
     //guy = get_closest_to_player_view( array, level.player, true, 0.85 );
@@ -1814,16 +1762,14 @@ allies_leave_riverbank() {
 
       guy thread run_to_convoy();
 
-      if(level.runnings_to_convoy_count >= level.guy_gets_in_vehicle_targets.size) {
+      if(level.runnings_to_convoy_count >= level.guy_gets_in_vehicle_targets.size)
         return;
-      }
 
       wait(4);
     }
 
-    if(!array.size) {
+    if(!array.size)
       break;
-    }
     wait(0.15);
   }
 
@@ -1835,14 +1781,12 @@ allies_leave_riverbank() {
 
   count = 0;
   got_in = 0;
-  for( i = array.size - 1; ; i-- )
+  for ( i = array.size - 1; ; i-- )
   {
-  	if( got_in >= level.guy_gets_in_vehicle_targets.size ) {
+  	if( got_in >= level.guy_gets_in_vehicle_targets.size )
   		break;
-  	}
-  	if( i < 0 ) {
+  	if( i < 0 )
   		break;
-  	}
 
   	guy = array[ i ];
   	AssertEx( IsAlive( guy ), "Dead, but how?" );
@@ -1851,7 +1795,7 @@ allies_leave_riverbank() {
   	wait( 0.75 );
   	count++;
   	got_in++;
-  	while( count >= 3 )
+  	while ( count >= 3 )
   	{
   		count -= 3;
   		wait( 0.5 );
@@ -1885,27 +1829,26 @@ allied_riverbank_spawner() {
   //self.ignoreall = false;
 
   /*
-  while( index >= 3 )
+  while ( index >= 3 )
   {
   	index -= 3;
   	wait( 2.0 );
   }
-  	
+	
   wait( index * 0.15 );
   */
   /*
   flag_wait( "time_to_go" );
-  if( self.script_index >= 7 ) {
+  if( self.script_index >= 7 )
   	run_to_convoy();
-  }
   */
 }
 
 run_to_convoy() {
   level.runnings_to_convoy_count++;
   /*
-  AssertEx( isDefined( self.script_index ), "Guy with export " + self.export + " had no script_index" );
-  	
+  AssertEx( IsDefined( self.script_index ), "Guy with export " + self.export + " had no script_index" );
+	
   wait_table = [];
   wait_table[ 0 ] = 0.05; // 2 guys to the front right
   wait_table[ 1 ] = 0.25; // 2 guys to the front right
@@ -1917,9 +1860,9 @@ run_to_convoy() {
   wait_table[ 7 ] = 0.4; // 2 doing binoc scene
   wait_table[ 8 ] = 1.5; // guy in the hut
   wait_table[ 9 ] = 0.5; // guy on the truck
-  	
+	
   timer = 0;
-  for( i = 0; i <= self.script_index; i++ )
+  for ( i = 0; i <= self.script_index; i++ )
   {
   	timer += wait_table[ i ];
   }
@@ -1927,11 +1870,11 @@ run_to_convoy() {
   */
 
   self anim_stopanimscripted();
-  if(isDefined(self.doing_looping_anim)) {
+  if(IsDefined(self.doing_looping_anim)) {
     self.remove_from_animloop = true;
   }
 
-  if(isDefined(self.convoy_func)) {
+  if(IsDefined(self.convoy_func)) {
     // a one time cleanup func a few guys runself.convoy_func = GetEnt( "self.convoy_func", "targetname" );
     self thread[[self.convoy_func]]();
     self.convoy_func = undefined;
@@ -1958,14 +1901,15 @@ trigger_guy_gets_in_vehicle() {
     node thread get_vehicle_from_spawner();
   }
 
+  /#
   used = [];
   foreach(node in level.guy_gets_in_vehicle_targets) {
-    AssertEx(isDefined(node.script_index), "Node at " + node.origin + " has no script_index");
-    AssertEx(!isDefined(used[node.script_index]), "Reused script_index " + node.script_index + " at " + node.origin);
+    AssertEx(IsDefined(node.script_index), "Node at " + node.origin + " has no script_index");
+    AssertEx(!isdefined(used[node.script_index]), "Reused script_index " + node.script_index + " at " + node.origin);
     used[node.script_index] = true;
   }
-
-  level.guy_gets_in_vehicle_targets = array_index_by_script_index(level.guy_gets_in_vehicle_targets);
+  # /
+    level.guy_gets_in_vehicle_targets = array_index_by_script_index(level.guy_gets_in_vehicle_targets);
   self.index = 0;
 
   trigger_handles_guys_running_up_stairs_to_get_in_vehicles();
@@ -1976,15 +1920,13 @@ trigger_guy_gets_in_vehicle() {
   foreach(guy in level.allied_riverbank_ai) {
     guy thread goalspam();
 
-    if(isDefined(guy.gets_in_vehicle)) {
+    if(IsDefined(guy.gets_in_vehicle))
       continue;
-    }
 
     // delete extra guys
     if(self.index >= level.guy_gets_in_vehicle_targets.size) {
-      if(isDefined(guy.magic_bullet_shield)) {
+      if(IsDefined(guy.magic_bullet_shield))
         guy stop_magic_bullet_shield();
-      }
       guy Delete();
       continue;
     }
@@ -1997,28 +1939,25 @@ trigger_guy_gets_in_vehicle() {
 
 goalspam() {
   self endon("death");
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     self notify("goal");
     wait(0.05);
   }
 }
 
 trigger_handles_guys_running_up_stairs_to_get_in_vehicles() {
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
   level endon("player_gets_in");
 
   touched = [];
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
 
-    if(isDefined(touched[other.unique_id])) {
+    if(IsDefined(touched[other.unique_id]))
       continue;
-    }
 
     touched[other.unique_id] = true;
     struct = level.guy_gets_in_vehicle_targets[self.index];
@@ -2030,9 +1969,8 @@ trigger_handles_guys_running_up_stairs_to_get_in_vehicles() {
     /*
     foreach ( vehicle in level.npc_ride_vehicles )
     {
-    	if( vehicle.riders.size >= 3 ) {
+    	if( vehicle.riders.size >= 3 )
     		continue;
-    	}
     	thread guy_runtovehicle_load( other, vehicle );
     		
     	break;
@@ -2046,26 +1984,23 @@ guy_gets_in_convoy(mynode) {
   mynode = undefined;
   foreach ( struct in level.guy_gets_in_vehicle_targets )
   {
-  	if( isDefined( struct.taken ) ) {
+  	if( IsDefined( struct.taken ) )
   		continue;
-  	}
   	mynode = struct;
   	mynode.taken = true;
   	level.ride_nodes_taken++;
   	break;
   }
 
-  if( !isDefined( mynode ) ) {
+  if( !isdefined( mynode ) )
   	return;
-  }
   */
 
   self.fixednode = true;
   self.gets_in_vehicle = true;
   self.attackeraccuracy = 0;
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield))
     self magic_bullet_shield();
-  }
   self SetGoalNode(mynode);
   self.goalradius = 16;
 
@@ -2084,7 +2019,7 @@ guy_gets_in_convoy(mynode) {
     wait_for_index(mynode.script_index);
   }
 
-  if(!isDefined(mynode.target)) {
+  if(!isdefined(mynode.target)) {
     flag_wait("player_gets_in");
     self safe_delete();
     return;
@@ -2104,17 +2039,15 @@ guy_gets_in_convoy(mynode) {
 
   self waittill("boarding_vehicle");
   self ent_flag_set("got_in_vehicle");
-  if(self.script_startingposition == 4) {
+  if(self.script_startingposition == 4)
     self thread convoy_gunner_think();
-  }
 
   //			thread guy_runtovehicle_load( other, vehicle );
 }
 
 wait_for_index(index) {
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
   level endon("player_gets_in");
 
   wait(index * 0.35);
@@ -2123,9 +2056,8 @@ wait_for_index(index) {
 /*
 airstrike_spawner()
 {
-	if( !isDefined( self.magic_bullet_shield ) ) {
+	if( !isdefined( self.magic_bullet_shield ) )
 		self magic_bullet_shield();
-	}
 	self.dontavoidplayer = true;
 	self.interval = 0;
 	self.disableexits = true;
@@ -2133,9 +2065,8 @@ airstrike_spawner()
 	ent = getstruct( self.target, "targetname" );
 	self maps\_spawner::go_to_node( ent, "struct" );
 
-	if( !isDefined( self.script_noteworthy ) ) {
+	if( !isdefined( self.script_noteworthy ) )
 		return;
-	}
 
 	switch( self.script_noteworthy )
 	{
@@ -2159,12 +2090,10 @@ friendly_open_humvee() {
   house_node = GetNode("house_node", "targetname");
 
   foreach(guy in self.riders) {
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
-    if(!isai(guy)) {
+    if(!isai(guy))
       continue;
-    }
 
     guy SetGoalPos(house_node.origin);
   }
@@ -2173,21 +2102,18 @@ friendly_open_humvee() {
 vehicle_break() {
   touched = [];
   brake_time = self.script_timer;
-  if(!isDefined(brake_time)) {
+  if(!isdefined(brake_time))
     brake_time = 0.3;
-  }
 
   brake_amount = self.script_brake;
-  if(!isDefined(brake_amount)) {
+  if(!isdefined(brake_amount))
     brake_amount = 0.3;
-  }
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
 
-    if(isDefined(touched[other.unique_id])) {
+    if(IsDefined(touched[other.unique_id]))
       continue;
-    }
 
     touched[other.unique_id] = true;
     other thread break_awhile(brake_time, brake_amount);
@@ -2213,12 +2139,13 @@ vehicle_spark_trigger() {
   /*
   // move it forward to compensate for high speed	
   angles = VectorToAngles( targ_targ.origin - targ.origin );
-  forward = anglesToForward( angles );
+  forward = AnglesToForward( angles );
   vec = forward * -250;
   self.origin += vec;
   targ.origin += vec;
   targ_targ.origin += vec;
   */
+
 
   org1 = targ.origin;
   org2 = targ_targ.origin;
@@ -2229,7 +2156,7 @@ vehicle_spark_trigger() {
   touched = [];
 
   technical_only = false;
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy)) {
     switch (self.script_noteworthy) {
       case "technical_only":
         technical_only = true;
@@ -2238,22 +2165,20 @@ vehicle_spark_trigger() {
   }
 
   preset = undefined;
-  if(isDefined(self.script_parameters)) {
+  if(IsDefined(self.script_parameters)) {
     preset = level.spark_presets[self.script_parameters];
   }
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
 
-    if(isDefined(touched[other.unique_id])) {
+    if(IsDefined(touched[other.unique_id]))
       continue;
-    }
 
     if(technical_only) {
-      if(isDefined(level.traffic_jam_truck)) {
-        if(other != level.traffic_jam_truck) {
+      if(IsDefined(level.traffic_jam_truck)) {
+        if(other != level.traffic_jam_truck)
           continue;
-        }
       } else
         continue;
     }
@@ -2267,44 +2192,42 @@ vehicle_sparks(org1, org2, preset) {
   fx = getfx("vehicle_scrape_sparks");
   no_spark_frame = RandomInt(4);
 
-  technical = isDefined(level.traffic_jam_truck) && self == level.traffic_jam_truck;
+  technical = IsDefined(level.traffic_jam_truck) && self == level.traffic_jam_truck;
   angles = preset;
 
-  for(;;) {
+  for (;;) {
     my_org = self.origin;
-    if(isDefined(self.spark_offset)) {
+    if(IsDefined(self.spark_offset)) {
       my_org += self.spark_offset;
     }
     spark_org = PointOnSegmentNearestToPoint(org1, org2, my_org);
-    if(spark_org == org2) {
+    if(spark_org == org2)
       return;
-    }
 
     no_spark_frame--;
 
     if(no_spark_frame && spark_org != org1) {
       angle_range = RandomFloatRange(-85, -55);
 
-      if(!isDefined(preset)) {
+      if(!isdefined(preset)) {
         angles = VectorToAngles(spark_org - self.origin);
         angles = (angle_range, angles[1], 0);
       }
 
       //Line( spark_org, self.origin, (1,0,0), 1, 1, 500 );
       up = AnglesToUp(angles);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
 
       fast_enough = technical || self.veh_speed > 2;
 
       if(fast_enough) {
         //Line( spark_org, spark_org + forward * 100, (1,0,0), 1, 1, 500 );
-        playFX(fx, spark_org, forward, up);
+        PlayFX(fx, spark_org, forward, up);
       }
     }
 
-    if(!no_spark_frame) {
+    if(!no_spark_frame)
       no_spark_frame = get_next_no_spark_frame();
-    }
 
     wait(0.05);
   }
@@ -2335,9 +2258,8 @@ humvee_gunner_idle_until_player_gets_in(owner, turret) {
     wait(2);
     level.anime = anime;
     owner turret_gunner_custom_anim(turret, anime);
-    if(flag("shot_rings_out")) {
+    if(flag("shot_rings_out"))
       return;
-    }
   }
 }
 
@@ -2346,18 +2268,17 @@ detour_vehicle_driver_animates() {
   turret = undefined;
 
   turret = self.mgturret[0];
-  for(;;) {
+  for (;;) {
     owner = turret GetTurretOwner();
-    if(IsAlive(owner)) {
+    if(IsAlive(owner))
       break;
-    }
     wait(0.05);
   }
 
   owner endon("death");
   level.detour_gunner = owner;
 
-  if(!isDefined(owner.magic_bullet_shield)) {
+  if(!isdefined(owner.magic_bullet_shield)) {
     owner magic_bullet_shield();
   }
 
@@ -2378,14 +2299,14 @@ detour_vehicle_driver_animates() {
   flag_wait("shot_rings_out");
 
   struct = getstruct("frantic_look_target_struct", "targetname");
-  ent = spawn("script_origin", struct.origin);
+  ent = Spawn("script_origin", struct.origin);
   turret SetTargetEntity(ent);
-
-  if(GetDebugDvarInt("showline")) {
+  /#
+  if(GetDebugDvarInt("showline"))
     turret thread entline(ent);
-  }
+  # /
 
-  count = 0;
+    count = 0;
   /*
   times = [];
   times[ 0 ] = 0.5;
@@ -2398,7 +2319,7 @@ detour_vehicle_driver_animates() {
   times[ 7 ] = 1.75;
   */
 
-  for(;;) {
+  for (;;) {
     owner notify("special_anim", "end");
     //self notify( "do_custom_anim" );
     struct = getstruct(struct.target, "targetname");
@@ -2413,9 +2334,8 @@ detour_vehicle_driver_animates() {
     //		wait( times[ count ] );
     //		count++;
 
-    if(!isDefined(struct.target)) {
+    if(!isdefined(struct.target))
       break;
-    }
 
     level waittill_notify_or_timeout("shot_rings_out", 1.5);
     wait_for_buffer_time_to_pass(movetime, 2);
@@ -2428,7 +2348,7 @@ detour_vehicle_driver_animates() {
 
 entline(ent) {
   ent endon("death");
-  for(;;) {
+  for (;;) {
     Line(ent.origin, self.origin);
     wait(0.05);
   }
@@ -2451,9 +2371,8 @@ turret_gunner_cycles_custom_anims(owner, turret) {
     wait(2);
     level.anime = anime;
     owner turret_gunner_custom_anim(turret, anime);
-    if(flag("shot_rings_out")) {
+    if(flag("shot_rings_out"))
       return;
-    }
   }
 }
 
@@ -2527,27 +2446,27 @@ player_personal_convoy() {
 
   self ResumeSpeed(5);
 
+
   flag_wait("ambush_auto_adjust_speed");
 
   self ResumeSpeed(5);
 
-  if(self != level.crazy_ride_convoy["rear"]) {
+  if(self != level.crazy_ride_convoy["rear"])
     return;
-  }
 
   in_front_index = self.script_index - 1;
   near_car = level.crazy_ride_convoy[in_front_index];
   vehicles_maintain_distance_until_traffic(near_car);
 
   /*
-  for( ;; )
+  for ( ;; )
   {
   	if( Distance( near_car.origin, self.origin ) < 280 )
   	{
   		self.veh_brake = 0.5;
   		break;
   	}
-  	
+	
   	wait( 0.05 );
   }	
   */
@@ -2556,7 +2475,7 @@ player_personal_convoy() {
 vehicles_maintain_distance_until_traffic(near_car) {
   following = false;
   //	level endon( "traffic_jam" );
-  for(;;) {
+  for (;;) {
     /*
     if( flag( "lead_vehicle_speeds_up" ) && self == level.crazy_ride_convoy[ "player" ] )
     {
@@ -2565,7 +2484,7 @@ vehicles_maintain_distance_until_traffic(near_car) {
     	self ResumeSpeed( 5 );
     	flag_clear( "lead_vehicle_speeds_up" );
     }
-    	
+	
     */
     if(Distance(near_car.origin, self.origin) < 300) {
       self Vehicle_SetSpeed(near_car.veh_speed, 5, 5);
@@ -2587,16 +2506,14 @@ lead_vehicle_func()
 
 vehicle_ride_think()
 {
-	if( self == level.lead_vehicle ) {
+	if( self == level.lead_vehicle )
 		return;
-	}
-	for( ;; )
+	for ( ;; )
 	{
 		lead_speed = level.lead_vehicle.veh_speed;
 //		if( self.veh_speed > lead_speed )
-		if( Distance( self.origin, level.lead_vehicle.origin ) < 200 ) {
+		if( Distance( self.origin, level.lead_vehicle.origin ) < 200 )
 			self Vehicle_SetSpeed( lead_speed, 5, 5 );
-		}
 		wait( 0.05 );
 	}
 }
@@ -2608,9 +2525,8 @@ convoy_gunner_think() {
 
   self waittill("death");
   wait(1.5);
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
 
   self StartRagdoll();
   self Unlink();
@@ -2621,12 +2537,11 @@ convoy_gunners_pick_targets() {
 }
 
 convoy_gunner_shoot_protection() {
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self endon("death");
-  for(;;) {
+  for (;;) {
     self cant_die_unless_player_sees_me();
     self avoid_shooting_through_player();
     wait(0.05);
@@ -2634,14 +2549,13 @@ convoy_gunner_shoot_protection() {
 }
 
 cant_die_unless_player_sees_me() {
-  in_danger = within_fov_2d(level.player getEye(), level.player GetPlayerAngles(), self.origin, 0.85);
+  in_danger = within_fov_2d(level.player GetEye(), level.player GetPlayerAngles(), self.origin, 0.85);
 
   if(in_danger) {
     self.IgnoreRandomBulletDamage = false;
     self.attackeraccuracy = 1;
-    if(self.health > 100) {
+    if(self.health > 100)
       self.health = 100;
-    }
   } else {
     self.IgnoreRandomBulletDamage = true;
     self.attackeraccuracy = 0;
@@ -2652,13 +2566,11 @@ cant_die_unless_player_sees_me() {
 avoid_shooting_through_player() {
   // adjust the threatbias on the convoy gunners target so he doesn't shoot through the player excessively	
   enemy = self.enemy;
-  if(!isalive(enemy)) {
+  if(!isalive(enemy))
     return;
-  }
 
-  if(enemy.ignoreme) {
+  if(enemy.ignoreme)
     return;
-  }
 
   angles = VectorToAngles(level.player.origin - self.origin);
   if(enemy within_fov_2d(level.player.origin, angles, enemy.origin, 0.85)) {
@@ -2673,7 +2585,7 @@ ent_line(ent1, ent2) {
 
   timer = 5;
   frames = timer * 20;
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     Line(ent1.origin, ent2.origin);
     wait(0.05);
   }
@@ -2681,16 +2593,14 @@ ent_line(ent1, ent2) {
 
 enemy_ai_accuracy_effected_by_player_humvee() {
   level endon("player_knocked_down");
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
     foreach(guy in ai) {
-      if(!isalive(guy)) {
+      if(!isalive(guy))
         continue;
-      }
 
-      if(guy.weapon == "rpg") {
+      if(guy.weapon == "rpg")
         continue;
-      }
 
       if(within_fov_2d(level.player.origin, level.player_humvee.angles, guy.origin, 0.8)) {
         guy.baseaccuracy = 0.2;
@@ -2713,21 +2623,19 @@ traffic_jam_truck() {
 }
 
 setup_ride_path_targets(noteworthy) {
-  spawners = getEntArray("ride_vehicle_spawner", "targetname");
+  spawners = GetEntArray("ride_vehicle_spawner", "targetname");
   foreach(spawner in spawners) {
     nodes = spawner getLinkedVehicleNodes();
     found_node = false;
     foreach(node in nodes) {
-      if(node.script_noteworthy != noteworthy) {
+      if(node.script_noteworthy != noteworthy)
         continue;
-      }
 
       found_node = true;
 
       // remap target to this node so we still spawn our riders
-      if(isDefined(spawner.target)) {
+      if(IsDefined(spawner.target))
         remap_targets(spawner.target, node.targetname);
-      }
       spawner.target = node.targetname;
       break;
     }
@@ -2738,7 +2646,7 @@ setup_ride_path_targets(noteworthy) {
 
 remap_targets(ent_targetname, new_targetname) {
   // remap them so the guys riding in the vehicle come along too
-  ents = getEntArray(ent_targetname, "targetname");
+  ents = GetEntArray(ent_targetname, "targetname");
   foreach(ent in ents) {
     ent.targetname = new_targetname;
   }
@@ -2761,13 +2669,12 @@ ride_killer() {
   /*
   player_vehicle = level.crazy_ride_convoy[ 1 ];
   //eye = spawn_tag_origin();
-  //eye.origin = level.player getEye();
+  //eye.origin = level.player GetEye();
   //eye LinkTo( level.player );
   //self SetEntityTarget( level.player );
   ai = GetAIArray( "allies" );
-  foreach ( guy in ai ) {
+  foreach ( guy in ai )
   	guy.ignoreme = true;
-  }
   */
 
   missile_target = GetEnt("missile_target", "targetname");
@@ -2778,13 +2685,11 @@ ride_killer() {
 
   ai = GetAIArray("axis");
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield)) {
+    if(IsDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
-    }
 
-    if(!isDefined(guy.dont_ride_kill)) {
+    if(!isdefined(guy.dont_ride_kill))
       guy Kill();
-    }
   }
 
 }
@@ -2818,16 +2723,15 @@ friendly_crash_think() {
 
   animation = self getanim("flashed");
   animtime = animtimes[self.animation];
-  if(isDefined(animtime)) {
+  if(IsDefined(animtime)) {
     self SetAnimTime(animation, animtime);
   }
 
   limit = animlimits[self.animation];
-  if(isDefined(limit)) {
-    for(;;) {
-      if(self GetAnimTime(animation) >= limit) {
+  if(IsDefined(limit)) {
+    for (;;) {
+      if(self GetAnimTime(animation) >= limit)
         break;
-      }
       wait(0.05);
     }
     self notify("killanimscript");
@@ -2850,7 +2754,7 @@ friendly_crash_think() {
 }
 
 move_flashed_spawner_and_spawn() {
-  if(isDefined(self.script_linkTo)) {
+  if(IsDefined(self.script_linkTo)) {
     struct = getstruct(self.script_linkto, "script_linkname");
     self.origin = struct.origin;
     self.angles = struct.angles;
@@ -2872,13 +2776,12 @@ blocker_driver() {
 
 roadkill_ride_kill_drones() {
   flag_wait("kill_drones");
-  angry_drones = getEntArray("angry_drone", "script_noteworthy");
+  angry_drones = GetEntArray("angry_drone", "script_noteworthy");
   foreach(drone in angry_drones) {
-    if(IsAlive(drone)) {
+    if(IsAlive(drone))
       drone Kill();
-    } else {
+    else
       drone Delete();
-    }
   }
 
 }
@@ -2896,7 +2799,7 @@ resumeslowly() {
   frames = time * 20;
 
   speed = 1;
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     self Vehicle_SetSpeedImmediate(speed, 2, 2);
     speed += 0.6;
     wait(0.05);
@@ -2920,23 +2823,23 @@ crash_physics_explosion() {
   angles = VectorToAngles(targ.origin - physics_spawner.origin);
   right = AnglesToRight(angles);
 
-  for(i = 0; i < 14; i++) {
+  for (i = 0; i < 14; i++) {
+
     org = targ.origin + randomvector(200);
     angles = VectorToAngles(org - physics_spawner.origin);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
 
     force = forward * RandomFloatRange(4000, 8500);
     //		force = randomvector( 160000 );
 
     model = models[index];
     index++;
-    if(index >= models.size) {
+    if(index >= models.size)
       index = 0;
-    }
 
-    ent = spawn("script_model", physics_spawner.origin);
+    ent = Spawn("script_model", physics_spawner.origin);
     ent.origin += right * RandomFloatRange(-40, 40);;
-    ent setModel(model);
+    ent SetModel(model);
     ent PhysicsLaunchClient(ent.origin, force);
   }
 
@@ -2948,9 +2851,8 @@ goes_to_hell(vehicle_hell) {
   wait(0.1);
   self godoff();
   foreach(rider in self.riders) {
-    if(!IsAlive(rider)) {
+    if(!IsAlive(rider))
       continue;
-    }
 
     rider safe_delete();
   }
@@ -2971,24 +2873,22 @@ run_away_die() {
 
 player_doesnt_die_in_red_flashing() {
   level endon("ride_ends");
-  for(;;) {
+  for (;;) {
     // a reasonable amount of spammity-spam, it's for a good cause.
-    if(level.player ent_flag("player_has_red_flashing_overlay")) {
+    if(level.player ent_flag("player_has_red_flashing_overlay"))
       level.player.attackeraccuracy = 0;
-    }
     wait(0.05);
   }
 }
 
 school_guy_targets_school() {
-  if(flag("shepherd_moves_out")) {
+  if(flag("shepherd_moves_out"))
     return;
-  }
   level endon("shepherd_moves_out");
 
-  targets = getEntArray("school_target", "targetname");
+  targets = GetEntArray("school_target", "targetname");
 
-  for(;;) {
+  for (;;) {
     targets = array_randomize(targets);
     foreach(target in targets) {
       self SetEntityTarget(target);
@@ -3016,9 +2916,8 @@ ambush_ally_spawner_think() {
   guy_runtovehicle_load(self, vehicle);
   self stop_magic_bullet_shield();
   level.ambush_allies_outside_vehicle--;
-  if(!level.ambush_allies_outside_vehicle) {
+  if(!level.ambush_allies_outside_vehicle)
     flag_set("shepherd_vehicles_leave");
-  }
 
   flag_wait("the_end");
   safe_delete();
@@ -3028,7 +2927,7 @@ ambush_ally_spawner_think() {
 
 join_school_threatbias_group_and_damage_func() {
   unreachable = false;
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy)) {
     unreachable = self.script_noteworthy == "school_unreachable_spawner";
   }
 
@@ -3041,12 +2940,10 @@ join_school_threatbias_group_and_damage_func() {
 }
 
 remove_player_from_threatbias_group(amt, attacker, force, b, c, d, e) {
-  if(!isalive(attacker)) {
+  if(!isalive(attacker))
     return;
-  }
-  if(attacker != level.player) {
+  if(attacker != level.player)
     return;
-  }
 
   wait(3);
 
@@ -3059,8 +2956,8 @@ ambush_house_spawner_think() {
 }
 
 friendlies_traverse_school() {
-  for(i = 1; i <= 20; i++) {
-    // "roadkill_school_1", "roadkill_school_2", "roadkill_school_3",
+  for (i = 1; i <= 20; i++) {
+    // "roadkill_school_1", "roadkill_school_2", "roadkill_school_3", 
     // "roadkill_school_4", "roadkill_school_5", "roadkill_school_6"
     msg = "roadkill_school_" + i;
     trigger = GetEnt(msg, "targetname");
@@ -3073,9 +2970,8 @@ friendlies_traverse_school() {
       }
 
       volume = trigger get_color_volume_from_trigger();
-      if(isDefined(volume)) {
+      if(IsDefined(volume))
         volume waittill_volume_dead_or_dying();
-      }
 
       trigger activate_trigger();
     }
@@ -3100,9 +2996,8 @@ dunn_says_clear_on_room_clear() {
 
   touchers = 0;
   foreach(guy in guys) {
-    if(guy istouching(volume)) {
+    if(guy istouching(volume))
       touchers++;
-    }
   }
 
   if(touchers == 2) {
@@ -3128,10 +3023,9 @@ hidden_room_spawner() {
 
 can_see_player() {
   self endon("death");
-  for(;;) {
-    if(self CanSee(level.player)) {
+  for (;;) {
+    if(self CanSee(level.player))
       return;
-    }
     wait(0.05);
   }
 }
@@ -3139,11 +3033,10 @@ can_see_player() {
 cutting_history_class_dialogue() {
   flag_wait("cutting_through_history");
 
-  for(;;) {
+  for (;;) {
     waittillframeend;
-    if(!level.dialogue_function_stack_struct.function_stack.size) {
+    if(!level.dialogue_function_stack_struct.function_stack.size)
       break;
-    }
 
     wait 0.05;
   }
@@ -3184,7 +3077,7 @@ force_player_vehicle_speed(speed) {
   level endon("new_force_player_speed");
   player_vehicle = level.crazy_ride_convoy[1];
   level endon("stop_updating_player_vehicle_speed");
-  for(;;) {
+  for (;;) {
     player_vehicle Vehicle_SetSpeedImmediate(speed, 2, 2);
     wait(0.05);
   }
@@ -3196,8 +3089,8 @@ radius_damage_in_front() {
   level.traffic_jam_truck godoff();
 
   damage = 60;
-  for(;;) {
-    //		forward = anglesToForward( self.angles );
+  for (;;) {
+    //		forward = AnglesToForward( self.angles );
     //		org = self.origin + forward * 140 + (0,0,40);
     //		Print3d( level.traffic_jam_truck.origin, "x", (1,0,0), 1, 2 );
     RadiusDamage(level.traffic_jam_truck.origin, 25, damage, damage, level.player);
@@ -3220,14 +3113,12 @@ player_pushes_truck_down_alley() {
   rear_vehicle = level.crazy_ride_convoy[2];
   lead_vehicle = level.crazy_ride_convoy[0];
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isDefined(level.traffic_jam_truck)) {
+    if(!isdefined(level.traffic_jam_truck))
       continue;
-    }
-    if(other == level.traffic_jam_truck) {
+    if(other == level.traffic_jam_truck)
       break;
-    }
   }
 
   flag_set("we're cut off");
@@ -3276,12 +3167,11 @@ player_pushes_truck_down_alley() {
   timer = 3;
   frames = timer * 20;
 
-  for(;;) {
+  for (;;) {
     level.traffic_jam_truck Vehicle_SetSpeedImmediate(6, 1, 1);
     frames -= 1;
-    if(frames <= 0) {
+    if(frames <= 0)
       break;
-    }
     wait(0.05);
   }
 
@@ -3301,7 +3191,7 @@ lead_vehicle_starts_driving_again() {
 
 dump_vehicle_bones() {
   start_time = GetTime();
-  for(;;) {
+  for (;;) {
     tag_origin_pos = self GetTagOrigin("tag_origin");
     tag_origin_ang = self GetTagAngles("tag_origin");
 
@@ -3318,16 +3208,15 @@ dump_vehicle_bones() {
 axis_flee_riverbank()
 {
 	flag_set( "riverbank_baddies_retreat" ); // controls the guys in the windows
-	volumes = getEntArray( "riverbank_building_volume", "script_noteworthy" );
+	volumes = GetEntArray( "riverbank_building_volume", "script_noteworthy" );
 	nodes = GetNodeArray( "enemy_riverbank_flee_node", "targetname" );
 	index = 0;
 	
 	ai = GetAIArray( "axis" );
 	foreach ( guy in ai )
 	{
-		if( !isalive( guy ) ) {
+		if( !isalive( guy ) )
 			continue;
-		}
 		
 		touching_house = false;
 		foreach ( vol in volumes )
@@ -3372,10 +3261,9 @@ player_learned_javelin() {
 }
 
 detect_player_switched_to_javelin() {
-  for(;;) {
-    if(level.player GetCurrentWeapon() == "javelin") {
+  for (;;) {
+    if(level.player GetCurrentWeapon() == "javelin")
       break;
-    }
     wait(0.05);
   }
 
@@ -3390,13 +3278,12 @@ remind_player_to_switch_to_javelin() {
   lines[1] = "roadkill_fly_takeoutarmor";
 
   index = 0;
-  for(;;) {
+  for (;;) {
     timer = 9 + RandomIntRange(2, 5);
     frames = timer * 20;
-    for(i = 0; i < frames; i++) {
-      if(level.player GetCurrentWeapon() == "javelin") {
+    for (i = 0; i < frames; i++) {
+      if(level.player GetCurrentWeapon() == "javelin")
         return;
-      }
       wait(0.05);
     }
 
@@ -3405,13 +3292,11 @@ remind_player_to_switch_to_javelin() {
     index %= lines.size;
 
     // wait until everybody stops talking		
-    while(level.dialogue_function_stack_struct.function_stack.size) {
+    while (level.dialogue_function_stack_struct.function_stack.size)
       wait(0.05);
-    }
 
-    if(level.player GetCurrentWeapon() == "javelin") {
+    if(level.player GetCurrentWeapon() == "javelin")
       return;
-    }
     foley_line(theLine);
   }
 }
@@ -3433,24 +3318,22 @@ detect_player_missile_fire()
 	
 	count = 0;
 	
-	for( ;; )
+	for ( ;; )
 	{
 		level.player waittill( "missile_fire" );
 		count++;
 		// missile_fire_1 missile_fire_2 missile_fire_3
 		flag_set( "missile_fire_" + count );
 		level.last_missile_fire_time = GetTime();	
-		if( count >= 3 ) {
+		if( count >= 3 )
 			return;
-		}
 	}
 }
 
 remind_player_to_shoot_targets()
 {
-	if( flag( "bmps_destroyed" ) ) {
+	if( flag( "bmps_destroyed" ) )
 		return;
-	}
 	level endon( "bmps_destroyed" );
 
 	level.last_missile_fire_time = GetTime() - 5000; // bias the time he starts complaining if you dont shoot
@@ -3464,7 +3347,7 @@ remind_player_to_shoot_targets()
 	lines[ 2 ] = "roadkill_fly_takeoutarmor";
 	
 	index = 0;
-	for( ;; )
+	for ( ;; )
 	{
 		// wait until everybody stops talking		
 		if( foley_should_talk() )
@@ -3482,9 +3365,8 @@ remind_player_to_shoot_targets()
 */
 
 foley_should_talk() {
-  if(GetTime() <= level.last_missile_fire_time + 19000) {
+  if(GetTime() <= level.last_missile_fire_time + 19000)
     return false;
-  }
 
   return !level.dialogue_function_stack_struct.function_stack.size;
 }
@@ -3507,15 +3389,14 @@ introlines_delay() {
 }
 
 airstrike_call_in_dialogue() {
-  if(!is_default_start()) {
+  if(!is_default_start())
     return;
-  }
 
   wait(0.74);
-  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white,
+  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white, 
   // twelve story apartment building occupied by hostile forces, over!
 
-  //	Warlord, Warlord, this is
+  //	Warlord, Warlord, this is 
   //
   shepherd_line("roadkill_cpd_airstrike");
 
@@ -3524,7 +3405,7 @@ airstrike_call_in_dialogue() {
 
   wait(0.9);
 
-  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes,
+  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes, 
   // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
   radio_line("roadkill_fp1_devil11");
 
@@ -3534,12 +3415,13 @@ airstrike_call_in_dialogue() {
   // Standing by.	
   radio_line("roadkill_fp1_standingby");
 
-  // Devil 1-1, target is a white, twelve story apartment building at grid 2-5-2, 1-7-1. I need you to
+  // Devil 1-1, target is a white, twelve story apartment building at grid 2-5-2, 1-7-1. I need you to 
   // level that building, how copy over?	
   shepherd_line("roadkill_cpd_levelbuilding");
 
   // Solid copy Hunter 2-1. Rolling in now... Target acquired.	
   radio_line("roadkill_fp1_targetacquired");
+
 }
 
 ambushed_hummer() {
@@ -3559,26 +3441,22 @@ put_noteworthy_in_magic_chatter() {
 }
 
 get_convoy_dialogue_guy(name) {
-  if(IsAlive(level.convoy_dialogue_guy[name])) {
+  if(IsAlive(level.convoy_dialogue_guy[name]))
     return level.convoy_dialogue_guy[name];
-  }
 
   index = 0;
   ai = GetAIArray("allies");
   guys = [];
 
   foreach(guy in ai) {
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
 
-    if(guy is_hero()) {
+    if(guy is_hero())
       continue;
-    }
 
-    if(isDefined(guy.convoy_guy)) {
+    if(IsDefined(guy.convoy_guy))
       continue;
-    }
 
     guy.convoy_guy = true;
     level.convoy_dialogue_guy[name] = guy;
@@ -3598,8 +3476,8 @@ magic_dialogue_queue(msg, name) {
 
 printer() {
   frames = Int(2.5 * 20);
-  for(i = 0; i < frames; i++) {
-    Print3d(self getEye(), "*");
+  for (i = 0; i < frames; i++) {
+    Print3d(self GetEye(), "*");
     wait(0.05);
   }
 }
@@ -3610,9 +3488,8 @@ south(dist) {
 
 charpos(guy) {
   org = level.player.origin;
-  if(flag("100ton_bomb_goes_off")) {
+  if(flag("100ton_bomb_goes_off"))
     org = level.locked_player_position;
-  }
 
   unit = 128;
   switch (guy) {
@@ -3707,6 +3584,7 @@ airstrike_completion_dialogue_and_exploder() {
   	time += 1.5;
   */
 
+
   /*
   // What's goin' on.	
   // What's the hold up?	
@@ -3720,32 +3598,32 @@ airstrike_completion_dialogue_and_exploder() {
   */
 
   /*
-  	// Hey isn't this danger close for the task force?	
-  	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_dangerclose", "ar3" );
-  	level.scr_sound[ "generic" ][ "roadkill_ar3_dangerclose" ] = "roadkill_ar3_dangerclose";
-  	
-  	// Since when does Shepherd care about danger close?	
-  	level.scr_sound[ "generic" ][ "roadkill_cpd_sincewhen" ] = "roadkill_cpd_sincewhen";
+	// Hey isn't this danger close for the task force?	
+	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_dangerclose", "ar3" );
+	level.scr_sound[ "generic" ][ "roadkill_ar3_dangerclose" ] = "roadkill_ar3_dangerclose";
+	
+	// Since when does Shepherd care about danger close?	
+	level.scr_sound[ "generic" ][ "roadkill_cpd_sincewhen" ] = "roadkill_cpd_sincewhen";
 
-  	
-  	
+	
+	
 
-  	// Cleared hot!	
-  //	delayThread( time + 2, ::dunn_line, "roadkill_cpd_clearedhot" );
-  	
-  	// Devil 1-1 off safe. Bombs away bombs away.	
-  	delayThread( time + 5.5, ::radio_line, "roadkill_fp1_offsafe" );
+	// Cleared hot!	
+//	delayThread( time + 2, ::dunn_line, "roadkill_cpd_clearedhot" );
+	
+	// Devil 1-1 off safe. Bombs away bombs away.	
+	delayThread( time + 5.5, ::radio_line, "roadkill_fp1_offsafe" );
 
-  	time += 2;
-  	
-  	// What's the hold up?	
-  	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_holup", "ar3" );
-  	time += 1.5;
-  	
-  	// Shepherd called in a major fire mission!	
-  	delayThread( time, ::magic_dialogue_queue, "roadkill_cpd_majorfiremission", "cpd" );
-  	time += 2.5;
-  	*/
+	time += 2;
+	
+	// What's the hold up?	
+	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_holup", "ar3" );
+	time += 1.5;
+	
+	// Shepherd called in a major fire mission!	
+	delayThread( time, ::magic_dialogue_queue, "roadkill_cpd_majorfiremission", "cpd" );
+	time += 2.5;
+	*/
   delayThread(time, ::spawn_vehicle_from_targetname_and_drive, "bomber_spawner");
   time += 0.7;
 
@@ -3781,21 +3659,21 @@ airstrike_completion_dialogue_and_exploder() {
   delayThread(8.85, ::play_sound_in_space, "roadkill_cpd_looklook", charpos("cpd"));
 
   /*
-  	// Huah!! Get some!	
-  	delayThread( 0.9, ::magic_dialogue_queue, "roadkill_cpd_getsome", "cpd" );
+	// Huah!! Get some!	
+	delayThread( 0.9, ::magic_dialogue_queue, "roadkill_cpd_getsome", "cpd" );
 
-  	// Huah! Hell yea!	
-  	delayThread( 0.95, ::magic_dialogue_queue, "roadkill_ar1_huahyeah", "ar1" );
-  	
-  	// Yeah! 	
-  	delayThread( 1.0, ::magic_dialogue_queue, "roadkill_ar1_yeah", "ar3" );
-  	
-  	// Woo! Yeah!	
-  //	delayThread( 1.25, ::magic_dialogue_queue, "roadkill_ar2_wooyeah", "ar2" );
-  	
-  	// Whoa!	
-  	delayThread( 1.8, ::magic_dialogue_queue, "roadkill_ar1_whoa", "dunn" );
-  	*/
+	// Huah! Hell yea!	
+	delayThread( 0.95, ::magic_dialogue_queue, "roadkill_ar1_huahyeah", "ar1" );
+	
+	// Yeah! 	
+	delayThread( 1.0, ::magic_dialogue_queue, "roadkill_ar1_yeah", "ar3" );
+	
+	// Woo! Yeah!	
+//	delayThread( 1.25, ::magic_dialogue_queue, "roadkill_ar2_wooyeah", "ar2" );
+	
+	// Whoa!	
+	delayThread( 1.8, ::magic_dialogue_queue, "roadkill_ar1_whoa", "dunn" );
+	*/
 
   time = 1.3;
   // BOOM!	
@@ -3860,8 +3738,11 @@ airstrike_completion_dialogue_and_exploder() {
   // No man, seriously, that was extreme!	
   delayThread(time, ::play_sound_in_space, "roadkill_cpd_extreme", charpos("left_back"));
 
+
   //	// Look! Look! The building's goin' down! (ad lib)	
   //	level.scr_sound[ "generic" ][ "roadkill_cpd_looklook" ] = "roadkill_cpd_looklook";
+
+
 
   // Whoa!	
   //	delayThread( 2.4, ::magic_dialogue_queue, "roadkill_ar2_yeahcough", "fly" );
@@ -3872,7 +3753,7 @@ airstrike_completion_dialogue_and_exploder() {
   //	allies = GetAIArray( "allies" );
   //	get_array_of_closest( level.player.origin, allies );
   //	origins = [];
-  //	for( i = 0; i < allies.size; i++ )
+  //	for ( i = 0; i < allies.size; i++ )
   //	{
   //		origins[ i ] = allies[ i ].origin;
   //	}
@@ -3898,19 +3779,18 @@ airstrike_completion_dialogue_and_exploder() {
   /*
   // The networks are gonna pay big for this one!	
   magic_dialogue_queue( "roadkill_cpd_paybig", "network_chatter_spawner1" );
-  	
+	
   // Keep dreamin video boy!	
   magic_dialogue_queue( "roadkill_ar2_keepdreamin", "network_chatter_spawner2" );
-  	
+	
   // No man, seriously, that was extreme!	
   magic_dialogue_queue( "roadkill_cpd_extreme", "network_chatter_spawner1" );
   */
 }
 
 convoy_moves_out_dialogue() {
-  if(!is_default_start()) {
+  if(!is_default_start())
     return;
-  }
 
   // Hunter Two! Bridge complete, we're oscar mike! Move out!!	
   foley_line("roadkill_fly_bridgecomplete");
@@ -3932,7 +3812,7 @@ convoy_moves_out_dialogue() {
   /*
   // Hu-ahh!! What was that, a 1000 pounder?	
   guys[ "chat_ar3" ] generic_dialogue_queue( "roadkill_ar3_whatwasthat" );
-  	
+	
   time = 0.05;
   // I dunno but damn that was kick ass, huah?	
   guys[ "chat_ar4" ] delayThread( time, ::generic_dialogue_queue, "roadkill_ar4_idunno" );
@@ -3953,9 +3833,8 @@ convoy_moves_out_dialogue() {
 
   wait(time);
 
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
   level endon("player_gets_in");
 
   // We're moving out now!	
@@ -3974,16 +3853,14 @@ random_ai_line(msg) {
   ai = GetAIArray("allies");
   ai = get_array_of_closest(level.player.origin, ai, undefined, 5);
   guy = random(ai);
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
   guy generic_dialogue_queue(msg);
 }
 
 warn_if_player_shoots_prematurely() {
-  if(flag("ambush_spawn")) {
+  if(flag("ambush_spawn"))
     return;
-  }
 
   level endon("ambush_spawn");
 
@@ -3998,7 +3875,7 @@ warn_if_player_shoots_prematurely() {
   index = 0;
 
   //thread fail_player_for_excessive_firing();	
-  for(;;) {
+  for (;;) {
     if(player_shoots_at_non_enemy()) {
       wait(1.5);
     }
@@ -4015,59 +3892,55 @@ warn_if_player_shoots_prematurely() {
 }
 
 player_shoots_at_non_enemy() {
-  if(!level.player AttackButtonPressed()) {
+  if(!level.player AttackButtonPressed())
     return false;
-  }
 
   ai = GetAIArray("axis");
   angles = level.player GetPlayerAngles();
-  dotforward = anglesToForward(angles);
-  start = level.player getEye();
+  dotforward = AnglesToForward(angles);
+  start = level.player GetEye();
 
   foreach(guy in ai) {
     angles = VectorToAngles(guy.origin - start);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
 
     dot = VectorDot(dotforward, forward);
-    if(dot > 0.86) {
+    if(dot > 0.86)
       return false;
-    }
   }
 
   return true;
 }
 
 fail_player_for_excessive_firing() {
-  if(flag("ambush_spawn")) {
+  if(flag("ambush_spawn"))
     return;
-  }
 
   level endon("ambush_spawn");
 
   count = 0;
   time = 5;
   sustained_firing_frames = time * 20;
-  for(;;) {
+  for (;;) {
     if(level.player AttackButtonPressed()) {
       count += 1;
     } else {
       // penality wears off slower than it gains so you can't just fire little bursts overand over
       count -= 0.25;
     }
-    if(count <= 0) {
+    if(count <= 0)
       count = 0;
-    }
 
-    if(count > sustained_firing_frames) {
+    if(count > sustained_firing_frames)
       break;
-    }
 
     wait(0.05);
   }
 
   // An unsanctioned discharge will not be tolerated.
-  SetDvar("ui_deadquote", &"ROADKILL_SHOT_TOO_MUCH");
+  SetDvar("ui_deadquote", & "ROADKILL_SHOT_TOO_MUCH");
   missionFailedWrapper();
+
 }
 
 stryker_think() {
@@ -4077,11 +3950,12 @@ stryker_think() {
 }
 
 fence_rattle() {
+
   pivot = GetEnt("animated_bridge_fence_pivot", "targetname");
   //pivot thread maps\_debug::drawOrgForever();
 
   wait(3.25);
-  animated_bridge_fences = getEntArray("animated_bridge_fence", "targetname");
+  animated_bridge_fences = GetEntArray("animated_bridge_fence", "targetname");
 
   foreach(piece in animated_bridge_fences) {
     piece NotSolid();
@@ -4092,17 +3966,15 @@ fence_rattle() {
   start_angles = pivot.angles;
 
   amount = -25;
-  for(;;) {
+  for (;;) {
     time = abs(amount) * 0.0475;
-    if(time < 0.75) {
+    if(time < 0.75)
       time = 0.75;
-    }
     pivot RotateTo((0, 90, amount), time, time * 0.5, time * 0.5);
     amount *= -0.65;
     wait(time);
-    if(abs(amount) <= 2) {
+    if(abs(amount) <= 2)
       break;
-    }
   }
   pivot RotateTo(start_angles, 0.2);
   wait(0.5);
@@ -4110,6 +3982,7 @@ fence_rattle() {
 }
 
 collapse_earthquake() {
+
   wait(1.1);
   level.player PlayRumbleOnEntity("collapsing_building");
   Earthquake(0.3, 2, (-2556.2, -702.2, 1446), 15000);
@@ -4122,7 +3995,7 @@ collapsing_building() {
   wait(7.5);
   time = 10;
 
-  ent = spawn("script_origin", building.origin);
+  ent = Spawn("script_origin", building.origin);
   ent.angles = building.angles;
   ent AddPitch(-30);
   ent AddYaw(60);
@@ -4156,17 +4029,16 @@ roadkill_bomb_physics_explosion() {
 
   force_vec = (-45, -55, 72);
   angles = VectorToAngles(force_vec);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   force_vec = forward * 0.14;
 
   count = 0;
-  for(;;) {
-    if(GetTime() > end_time) {
+  for (;;) {
+    if(GetTime() > end_time)
       break;
-    }
 
     org = start.origin;
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       count++;
       if(count <= 3) {
         PhysicsExplosionCylinder(org, radius, radius, 0.3);
@@ -4219,10 +4091,9 @@ street_walk_guy() {
 
   struct thread anim_generic_gravity(self, "combat_walk");
   animation = self getGenericAnim("combat_walk");
-  for(;;) {
-    if(self GetAnimTime(animation) >= 0.96) {
+  for (;;) {
+    if(self GetAnimTime(animation) >= 0.96)
       break;
-    }
     wait(0.05);
   }
   self notify("killanimscript");
@@ -4237,14 +4108,12 @@ street_walk_guy() {
 }
 
 ps3_hide() {
-  if(!level.console) {
+  if(!level.console)
     return;
-  }
-  if(!level.ps3) {
+  if(!level.ps3)
     return;
-  }
 
-  ents = getEntArray("ps3_hide", "script_noteworthy");
+  ents = getentarray("ps3_hide", "script_noteworthy");
   foreach(ent in ents) {
     ent hide();
   }
@@ -4258,7 +4127,7 @@ ps3_hide() {
 broken_wall() {
   // this wall breaks/slides a bit
 
-  models = getEntArray(self.target, "targetname");
+  models = GetEntArray(self.target, "targetname");
   foreach(model in models) {
     model LinkTo(self);
   }
@@ -4290,7 +4159,7 @@ broken_wall() {
 roadkill_riverbank_objective() {
   thread detect_player_switched_to_javelin();
   /*
-  idle_commanders = getEntArray( "idle_commander", "targetname" );
+  idle_commanders = GetEntArray( "idle_commander", "targetname" );
   commander = idle_commanders[ 0 ];
   origin = commander.origin;
   radio_scene = getstruct( "radio_scene", "targetname" );
@@ -4300,10 +4169,10 @@ roadkill_riverbank_objective() {
   // Protect the bridge layer.
   waittillframeend;
   // Protect the bridge layer.
-  Objective_Add(obj("bridge_layer"), "current", &"ROADKILL_OBJECTIVE_BRIDGELAYER", (0, 0, 0));
+  Objective_Add(obj("bridge_layer"), "current", & "ROADKILL_OBJECTIVE_BRIDGELAYER", (0, 0, 0));
   Objective_Current(obj("bridge_layer"));
   Objective_OnEntity(obj("bridge_layer"), level.foley);
-  Objective_SetPointerTextOverride(obj("bridge_layer"), &"SCRIPT_WAYPOINT_TARGETS");
+  Objective_SetPointerTextOverride(obj("bridge_layer"), & "SCRIPT_WAYPOINT_TARGETS");
 
   //SetSavedDvar( "compass", 1 );
   //	flag_wait( "player_enters_riverbank" );
@@ -4326,13 +4195,12 @@ roadkill_riverbank_objective() {
   origin = (-2488, -3755, 182);
 
   // Get in your Humvee.
-  Objective_Add(obj("convoy"), "current", &"ROADKILL_OBJECTIVE_HUMVEE", origin);
+  Objective_Add(obj("convoy"), "current", & "ROADKILL_OBJECTIVE_HUMVEE", origin);
   Objective_Current(obj("convoy"));
 
-  for(;;) {
-    if(isDefined(level.chair)) {
+  for (;;) {
+    if(IsDefined(level.chair))
       break;
-    }
     wait(0.05);
   }
 
@@ -4341,21 +4209,22 @@ roadkill_riverbank_objective() {
   objective_position(obj("convoy"), (0, 0, 0));
 
   // Standby for airstrike.
-  Objective_String(obj("convoy"), &"ROADKILL_OBJECTIVE_AIRSTRIKE");
+  Objective_String(obj("convoy"), & "ROADKILL_OBJECTIVE_AIRSTRIKE");
   flag_wait("convoy_oscar_mike_after_explosion");
   objective_complete(obj("convoy"));
+
 }
 
 roadkill_ride_objective() {
   // Scan for hostile activity. Do not fire unless fired upon.
-  Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_SCAN", (0, 0, 0));
+  Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_SCAN", (0, 0, 0));
   Objective_Current(obj("ride"));
 
   flag_wait("shot_rings_out");
   wait(4.5);
 
   // Destroy targets of opportunity.
-  Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
+  Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
   Objective_Current(obj("ride"));
 
   flag_wait("player_knocked_down");
@@ -4364,15 +4233,14 @@ roadkill_ride_objective() {
 roadkill_dismount_objective() {
   if(!is_default_start()) {
     // Destroy targets of opportunity.
-    Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
+    Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
   }
 
   wait(0.5);
 
-  for(;;) {
-    if(IsAlive(level.foley)) {
+  for (;;) {
+    if(IsAlive(level.foley))
       break;
-    }
     wait(0.05);
   }
 
@@ -4382,7 +4250,7 @@ roadkill_dismount_objective() {
 
   node = GetNode("dismount_obj_node", "targetname");
   // Get eyes on the school.
-  Objective_String(obj("ride"), &"ROADKILL_OBJECTIVE_DISMOUNT");
+  Objective_String(obj("ride"), & "ROADKILL_OBJECTIVE_DISMOUNT");
   Objective_Position(obj("ride"), node.origin);
 
   flag_wait("friendlies_suppress_school");
@@ -4393,12 +4261,11 @@ roadkill_school_objective() {
   trigger = getEntWithFlag("roadkill_school_14");
 
   // Terminate the enemy presence in the school.
-  Objective_Add(obj("school"), "current", &"ROADKILL_OBJECTIVE_SCHOOL", trigger.origin);
+  Objective_Add(obj("school"), "current", & "ROADKILL_OBJECTIVE_SCHOOL", trigger.origin);
 
-  for(;;) {
-    if(IsAlive(level.foley)) {
+  for (;;) {
+    if(IsAlive(level.foley))
       break;
-    }
     wait(0.05);
   }
 
@@ -4416,7 +4283,7 @@ roadkill_exfil_objective() {
   // Terminate the enemy presence in the school.
   struct = getstruct("roadkill_shepherd_ending_scene", "targetname");
   // Report to General Shepherd at the rally point.
-  Objective_Add(obj("exfil"), "current", &"ROADKILL_OBJECTIVE_REPORT", struct.origin);
+  Objective_Add(obj("exfil"), "current", & "ROADKILL_OBJECTIVE_REPORT", struct.origin);
   Objective_Current(obj("exfil"));
 }
 
@@ -4426,10 +4293,9 @@ roadkill_mortars() {
 
   mortars = [];
   mortars[mortars.size] = mortar;
-  for(;;) {
-    if(!isDefined(mortar.target)) {
+  for (;;) {
+    if(!isdefined(mortar.target))
       break;
-    }
     mortar = getstruct(mortar.target, "targetname");
     mortars[mortars.size] = mortar;
   }
@@ -4446,7 +4312,7 @@ roadkill_mortars() {
   wait(2.85 - 2.5);
 
   foreach(mortar in mortars) {
-    mortar.water = isDefined(mortar.script_noteworthy) && mortar.script_noteworthy == "water";
+    mortar.water = IsDefined(mortar.script_noteworthy) && mortar.script_noteworthy == "water";
   }
 
   mortar_fx = getfx("mortar_large");
@@ -4454,7 +4320,7 @@ roadkill_mortars() {
 
   level.building_mortars = get_exploder_array("building_mortar");
 
-  for(i = 0;; i++) {
+  for (i = 0;; i++) {
     i %= mortars.size;
 
     mortar = mortars[i];
@@ -4483,7 +4349,7 @@ roadkill_mortar_goes_off(mortar) {
   thread play_sound_in_space("artillery_incoming", mortar.origin);
   wait(0.5);
 
-  playFX(mortar.fx, mortar.origin);
+  PlayFX(mortar.fx, mortar.origin);
 
   RadiusDamage(mortar.origin, 200, 300, 50);
   thread play_sound_in_space(mortar.sound, mortar.origin);
@@ -4499,21 +4365,20 @@ player_dies_to_attackers() {
   wait(2);
   level.player endon("death");
   level.player delayCall(3, ::EnableHealthShield, false);
-  eyepos = level.player getEye();
+  eyepos = level.player GetEye();
   org = undefined;
 
-  SetDvar("ui_deadquote", &"ROADKILL_GOT_SNIPED");
+  SetDvar("ui_deadquote", & "ROADKILL_GOT_SNIPED");
 
   // try to find an org that could see the player
   foreach(org in level.player_killer_orgs) {
-    if(BulletTracePassed(eyepos, org, true, undefined)) {
+    if(BulletTracePassed(eyepos, org, true, undefined))
       break;
-    }
   }
 
-  assertex(isDefined(org), "Impossible!");
+  assertex(isdefined(org), "Impossible!");
 
-  for(;;) {
+  for (;;) {
     thread play_sound_in_space("weap_dragunovsniper_fire_npc", org);
 
     level.player DoDamage(45 / level.player.damagemultiplier, org);
@@ -4524,17 +4389,16 @@ player_dies_to_attackers() {
 
 setup_player_killer_orgs() {
   level.player_killer_orgs = [];
-  orgs = getEntArray("attack_point", "script_noteworthy");
+  orgs = GetEntArray("attack_point", "script_noteworthy");
   foreach(org in orgs) {
     level.player_killer_orgs[level.player_killer_orgs.size] = org.origin;
   }
 }
 
 bmp_becomes_javelin_targettable() {
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delayed_targeting") {
-    if(level.start_point != "move_out") {
+  if(IsDefined(self.script_noteworthy) && self.script_noteworthy == "delayed_targeting") {
+    if(level.start_point != "move_out")
       wait(10);
-    }
   }
   wait(1);
   OFFSET = (0, 0, 60);
@@ -4546,7 +4410,7 @@ bmp_becomes_javelin_targettable() {
   self.health = 20000;
   self godon();
   self riverbank_bmp_is_shot_at();
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     Target_Remove(self);
   }
 }
@@ -4581,25 +4445,23 @@ riverbank_bmp() {
 
 riverbank_bmp_is_shot_at() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     if(!isalive(self)) {
       break;
     }
 
     oldHealth = self.health;
     self waittill("damage", dmg, attacker, one, two, weapType);
-    if(isDefined(attacker.classname) && !isplayer(attacker)) {
+    if(IsDefined(attacker.classname) && !isplayer(attacker)) {
       self.health = oldHealth;
       continue;
     }
 
-    if(weapType != "MOD_PROJECTILE") {
+    if(weapType != "MOD_PROJECTILE")
       continue;
-    }
 
-    if(dmg < 800) {
+    if(dmg < 800)
       continue;
-    }
     //		if( !player_has_javelin() )
     //			continue;
 
@@ -4626,7 +4488,7 @@ bmp_destroyed() {
 }
 
 intro_orders() {
-  spawners = getEntArray(self.target, "targetname");
+  spawners = GetEntArray(self.target, "targetname");
   guys = array_spawn(spawners);
 
   guys[0].animname = "hargrove";
@@ -4646,11 +4508,10 @@ intro_orders() {
     guy SetAnim(animation, 1, 0, 1);
   }
 
-  for(;;) {
+  for (;;) {
     animation = guy getanim("roadkill_intro_orders");
-    if(guy GetAnimTime(animation) >= 0.78) {
+    if(guy GetAnimTime(animation) >= 0.78)
       break;
-    }
     wait(0.05);
   }
 
@@ -4660,17 +4521,14 @@ intro_orders() {
 }
 
 ai_invulnerable() {
-  if(isDefined(self.script_drone)) {
+  if(IsDefined(self.script_drone))
     return;
-  }
 
-  if(isDefined(self.script_godmode)) {
+  if(IsDefined(self.script_godmode))
     return;
-  }
 
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield))
     self magic_bullet_shield();
-  }
 
   self.attackeraccuracy = 0;
   self.IgnoreRandomBulletDamage = true;
@@ -4684,7 +4542,7 @@ extra_bmp_blows_up() {
 }
 
 player_fights_bmps() {
-  bridge_targets = getEntArray("bridge_target", "targetname");
+  bridge_targets = GetEntArray("bridge_target", "targetname");
   orgs = get_orgs_from_ents(bridge_targets, true);
 
   //	array_spawn_function_targetname( "extra_bmp", ::bmp_targets_bridge, orgs );
@@ -4716,7 +4574,7 @@ bmp_targets_bridge(orgs) {
 
   self endon("death");
 
-  ent = spawn("script_origin", (0, 0, 0));
+  ent = Spawn("script_origin", (0, 0, 0));
   ent.origin = orgs[0].origin;
   self SetTurretTargetEnt(ent);
   self.target_ent = ent;
@@ -4754,7 +4612,7 @@ foley_line_proc(msg) {
   }
 
   if(!flag("player_enters_ambush_house")) {
-    if(isDefined(level.crazy_ride_convoy["lead"]) && !flag("player_is_dismounted")) {
+    if(IsDefined(level.crazy_ride_convoy["lead"]) && !flag("player_is_dismounted")) {
       level.crazy_ride_convoy["lead"] generic_dialogue_queue(msg);
     } else {
       if(IsAlive(level.foley)) {
@@ -4789,7 +4647,7 @@ play_line_at_offset_on_player_vehicle(alias, offset) {
   player_vehicle_angles = level.crazy_ride_convoy["player"].angles;
   angles = (0, player_vehicle_angles[1], 0);
 
-  ent = spawn("script_origin", (0, 0, 0));
+  ent = Spawn("script_origin", (0, 0, 0));
   ent LinkTo(level.crazy_ride_convoy["player"], "tag_body", offset, (0, 0, 0));
 
   ent play_sound_on_entity(alias);
@@ -4812,7 +4670,7 @@ dunn_line_proc(msg) {
   }
 
   if(!flag("player_enters_ambush_house")) {
-    if(isDefined(level.crazy_ride_convoy["player"]) && !flag("player_is_dismounted")) {
+    if(IsDefined(level.crazy_ride_convoy["player"]) && !flag("player_is_dismounted")) {
       level.crazy_ride_convoy["player"] generic_dialogue_queue(msg);
     } else {
       if(IsAlive(level.dunn)) {
@@ -4835,20 +4693,18 @@ shepherd_line_proc(msg) {
   if(IsAlive(level.shepherd)) {
     level.shepherd generic_dialogue_queue(msg);
   } else {
-    if(!isDefined(level.scr_radio[msg])) {
+    if(!isdefined(level.scr_radio[msg]))
       level.scr_radio[msg] = level.scr_sound["generic"][msg];
-    }
     radio_dialogue(msg);
   }
 }
 
 player_is_safe() {
-  for(;;) {
+  for (;;) {
     axis = GetAIArray("axis");
     guy = getClosest(level.player.origin, axis, 600);
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       break;
-    }
     wait(0.2);
   }
   wait(0.75);
@@ -4863,7 +4719,7 @@ respawn_dead_school_window_guys() {
   }
 
   foreach(spawner in level.school_ambush_spawners) {
-    if(!isDefined(used_exports[spawner.export])) {
+    if(!isdefined(used_exports[spawner.export])) {
       spawner.count = 1;
       spawner spawn_ai();
     }
@@ -4888,10 +4744,9 @@ pistol_killer_spawner() {
   self SetAnim(animation, 1, 0, 1);
   self.a.pose = "crouch";
 
-  for(;;) {
-    if(self GetAnimTime(animation) > 0.90) {
+  for (;;) {
+    if(self GetAnimTime(animation) > 0.90)
       break;
-    }
     wait(0.05);
   }
   self.a.pose = "stand";
@@ -4953,11 +4808,11 @@ shoot_randomly() {
 
 bloody_pain_reverse(damage, attacker, direction_vec, point, type, modelName, tagName) {
   angles = direction_vec + (0, 180, 0);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
 
   fx = getfx("headshot");
-  playFX(fx, point, forward, up);
+  PlayFX(fx, point, forward, up);
   //Line( point, point + forward * 500, (1,0,0), 1, 1, 5000 );
 }
 
@@ -4978,10 +4833,10 @@ fire_bullets_at_guy() {
   waits[7] = 0.25;
 
   count = 12;
-  for(i = 0; i < count; i++) {
+  for (i = 0; i < count; i++) {
     dest_org = targ.origin + randomvector(40);
     MagicBullet("m4m203_eotech", struct.origin, dest_org, level.player);
-    if(isDefined(waits[i])) {
+    if(IsDefined(waits[i])) {
       wait(waits[i]);
     } else {
       wait(0.1);
@@ -4999,9 +4854,8 @@ player_shoot_detection_trigger() {
 }
 
 wait_for_player_to_force_flee() {
-  if(flag("roadkill_school_9")) {
+  if(flag("roadkill_school_9"))
     return;
-  }
   level endon("roadkill_school_9");
 
   add_wait(::flag_wait, "player_forces_enemy_to_flee"); // means player can see down the hall
@@ -5010,14 +4864,12 @@ wait_for_player_to_force_flee() {
 }
 
 player_shoots_at_enemies_in_school() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
-    if(other == level.player) {
+    if(other == level.player)
       break;
-    }
   }
 }
 
@@ -5096,11 +4948,10 @@ fleeing_baddie_spawner() {
 }
 
 stop_sprinting_trigger() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
     if(first_touch(other)) {
       other delayThread(1.4, ::disable_heat_behavior);
     }
@@ -5108,16 +4959,14 @@ stop_sprinting_trigger() {
 }
 
 damage_targ_trigger_think() {
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
-    if(!isalive(attacker)) {
+    if(!isalive(attacker))
       continue;
-    }
     //		if( attacker != level.player )
     //			continue;
-    if(Distance(attacker.origin, self.origin) > 940) {
+    if(Distance(attacker.origin, self.origin) > 940)
       continue;
-    }
 
     targ = getstruct(self.target, "targetname");
     RadiusDamage(targ.origin, 30, 5000, 5000);
@@ -5127,7 +4976,7 @@ damage_targ_trigger_think() {
 }
 
 extra_retreat_spawner() {
-  //	if( !isDefined( self.target ) )
+  //	if( !isdefined( self.target ) )
   //		thread retreat_spawner();
   self.neverEnableCQB = true;
 
@@ -5142,14 +4991,12 @@ extra_retreat_spawner() {
 }
 
 wave_right_trigger() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
-    if(other == level.foley) {
+    if(other == level.foley)
       break;
-    }
   }
 
   // I think I saw one run into that classroom.	
@@ -5168,29 +5015,25 @@ wave_right_trigger() {
   //	other endon( "death" );
   targ = getstruct(self.target, "targetname");
   targ anim_generic_reach(other, "cqb_wave");
-  if(IsAlive(other)) {
+  if(IsAlive(other))
     targ thread anim_generic(other, "cqb_wave");
-  }
   wait(0.9);
   other enable_ai_color();
   flag_set("roadkill_school_11");
 
   // switches tracks so he doesn't go into the room he signaled
   /*
-  if( IsAlive( other ) ) {
+  if( IsAlive( other ) )
   	other set_force_color( "b" );
-  }
-  	
+	
   // turn the green guy to a purple guy
   ai = GetAIArray( "allies" );
   foreach ( guy in ai )
   {
-  	if( !isDefined( guy.script_forcecolor ) ) {
+  	if( !isdefined( guy.script_forcecolor ) )
   		continue;
-  	}
-  	if( guy.script_forcecolor != "g" ) {
+  	if( guy.script_forcecolor != "g" )
   		continue;
-  	}
   	guy set_force_color( "p" );
   	break;
   }
@@ -5206,7 +5049,7 @@ staircase_grenade() {
 
   vector = end.origin - start.origin;
   angles = VectorToAngles(vector);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   velocity = forward * 450;
   MagicGrenadeManual("fraggrenade", start.origin, velocity, 5);
 }
@@ -5227,7 +5070,7 @@ stair_block_guy() {
   self.doing_looping_anim = true;
 
   // electronics_pda
-  if(isDefined(level.scr_model[self.animname])) {
+  if(IsDefined(level.scr_model[self.animname])) {
     self Attach(level.scr_model[self.animname], "tag_inhand");
     self.convoy_func = ::detach_my_scr_model;
   }
@@ -5254,11 +5097,10 @@ rooftop_drone() {
 }
 
 wobbly_fans() {
-  fans = getEntArray("destructible_toy", "targetname");
+  fans = GetEntArray("destructible_toy", "targetname");
   foreach(fan in fans) {
-    if(fan.destructible_type == "toy_ceiling_fan") {
+    if(fan.destructible_type == "toy_ceiling_fan")
       fan thread fan_wobbles();
-    }
   }
 }
 
@@ -5268,7 +5110,7 @@ fan_wobbles() {
   action_v = level.destructible_type[self.destuctableInfo].parts[0][0].v;
   animation = action_v["animation"][0]["anim"];
 
-  for(;;) {
+  for (;;) {
     rate = RandomFloatRange(0.01, 0.04); // go slow for awhile
     self SetAnim(animation, 1, 0, rate);
     timer = RandomFloatRange(1.0, 2.5);
@@ -5287,18 +5129,15 @@ fan_wobbles() {
 }
 
 friendlies_get_on_exit_convoy_trigger() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!isalive(other)) {
+    if(!isalive(other))
       continue;
-    }
-    if(!first_touch(other)) {
+    if(!first_touch(other))
       continue;
-    }
 
-    if(!isDefined(other.running_loader)) {
+    if(!isdefined(other.running_loader))
       continue;
-    }
 
     other thread friendly_gets_on_vehicle();
   }
@@ -5312,9 +5151,8 @@ friendly_gets_on_vehicle() {
   foreach(ending_vehicle in level.ending_vehicles) {
     used_positions = 0;
     foreach(pos in ending_vehicle.usedpositions) {
-      if(!pos) {
+      if(!pos)
         used_positions++;
-      }
     }
 
     if(used_positions) {
@@ -5323,9 +5161,8 @@ friendly_gets_on_vehicle() {
     }
   }
 
-  if(!isDefined(vehicle)) {
+  if(!isdefined(vehicle))
     return;
-  }
 
   thread guy_runtovehicle_load(self, vehicle);
 }
@@ -5371,23 +5208,22 @@ shepherd_ending_spawner() {
   self delaythread(time * 0.332, maps\roadkill_anim::point_start, self);
   //struct anim_single_solo( self, "ending" );
   struct anim_custom_animmode_solo(self, "gravity", scene);
+
 }
 
 player_loses_gun_at_close_range() {
   self endon("death");
   level.player endon("death");
-  for(;;) {
-    if(distance(level.player.origin, self.origin) < 200) {
+  for (;;) {
+    if(distance(level.player.origin, self.origin) < 200)
       break;
-    }
     wait(0.05);
   }
 
-  for(;;) {
-    eyepos = self getEye();
-    if(level.player WorldPointInReticle_Circle(eyepos, 65, 75)) {
+  for (;;) {
+    eyepos = self geteye();
+    if(level.player WorldPointInReticle_Circle(eyepos, 65, 75))
       break;
-    }
     wait(0.05);
   }
 
@@ -5432,11 +5268,10 @@ ignore_and_delete() {
 }
 
 wait_for_empty_queue() {
-  if(!isDefined(self.function_stack)) {
+  if(!isdefined(self.function_stack))
     return;
-  }
 
-  while(self.function_stack.size > 0) {
+  while (self.function_stack.size > 0) {
     wait(0.05);
   }
 }
@@ -5446,18 +5281,16 @@ dunn_credits_player_with_kill(max_time) {
   wait(max_time + 0.1);
   level.dialogue_function_stack_struct wait_for_empty_queue();
 
-  if(!flag("jumper_died")) {
+  if(!flag("jumper_died"))
     return;
-  }
 
   // Nevermind, Allen handled it	
   dunn_line("roadkill_cpd_handledit");
 }
 
 look_forward_nag() {
-  if(flag("ride_looking_forward")) {
+  if(flag("ride_looking_forward"))
     return;
-  }
 
   level endon("ride_looking_forward");
 
@@ -5468,12 +5301,11 @@ look_forward_nag() {
 
 gunner_becomes_invul() {
   turret = self.mgturret[0];
-  for(;;) {
+  for (;;) {
     gunner = turret GetTurretOwner();
     if(IsAlive(gunner)) {
-      if(!isDefined(gunner.magic_bullet_shield)) {
+      if(!isdefined(gunner.magic_bullet_shield))
         gunner magic_bullet_shield();
-      }
       return;
     }
     wait(0.05);
@@ -5482,20 +5314,17 @@ gunner_becomes_invul() {
 
 get_gunner_from_vehicle() {
   foreach(guy in self.riders) {
-    if(!isalive(guy)) {
+    if(!isalive(guy))
       continue;
-    }
-    if(!issentient(guy)) {
+    if(!issentient(guy))
       continue;
-    }
-    if(isDefined(guy GetTurret())) {
+    if(IsDefined(guy GetTurret()))
       return guy;
-    }
   }
 }
 
 structorama() {
-  for(;;) {
+  for (;;) {
     struct = getstruct("mortar_school_chain", "targetname");
     struct delayThread(1, ::struct_mortar);
     struct = getstruct(struct.target, "targetname");
@@ -5510,7 +5339,7 @@ struct_mortar() {
   thread play_sound_in_space("artillery_incoming_loud", self.origin);
   wait(1);
   mortar_fx = getfx("mortar_large");
-  playFX(mortar_fx, self.origin);
+  PlayFX(mortar_fx, self.origin);
   RadiusDamage(self.origin, 100, 500, 500, level.player);
   thread play_sound_in_space("mortar_explosion_dirt", self.origin);
 
@@ -5531,15 +5360,15 @@ smoke_degrades() {
 
 turret_burns_out() {
   //	ent delayThread( 4.5, ::send_notify, "done" );
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent endon("done");
   ent.degrade_time = 0;
   ent thread smoke_degrades();
 
   level endon("kaboom_to_detour_vehicle");
   fx = getfx("minigun_burnout");
-  for(;;) {
-    playFXOnTag(fx, self, "j_spin");
+  for (;;) {
+    PlayFXOnTag(fx, self, "j_spin");
 
     timer = 0;
     if(ent.degrade_time > 0) {
@@ -5551,15 +5380,13 @@ turret_burns_out() {
 }
 
 vehicle_resumespeed_trigger() {
-  if(flag("convoy_slows_down_again")) {
+  if(flag("convoy_slows_down_again"))
     return;
-  }
   level endon("convoy_slows_down_again");
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
-    if(!first_touch(other)) {
+    if(!first_touch(other))
       continue;
-    }
 
     other Vehicle_SetSpeed(8.2, 5, 5);
   }
@@ -5600,6 +5427,7 @@ player_convoy_encounters_baddies() {
   player_vehicle thread vehicle_paths(node);
   player_vehicle StartPath(node);
 
+
   level notify("convoy_continues_to_ambush");
 
   //	flag_wait( "trappers_run" );
@@ -5622,10 +5450,9 @@ player_convoy_encounters_baddies() {
 
   flag_wait("gunner_dies");
   if(IsAlive(gunner)) {
-    if(isDefined(gunner.magic_bullet_shield)) {
+    if(IsDefined(gunner.magic_bullet_shield))
       gunner stop_magic_bullet_shield();
-    }
-    eye = gunner getEye();
+    eye = gunner GetEye();
     MagicBullet("ak47", eye + (0, 0, 35), eye + (0, 0, -35));
   }
 
@@ -5652,15 +5479,16 @@ player_convoy_encounters_baddies() {
   rear_vehicle delayThread(1.5, ::set_brakes, 1);
 
   angles = detour_vehicle.angles;
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   right = AnglesToRight(angles);
 
   struct = getstruct("ambush_impact_vector", "targetname");
   target = getstruct(struct.target, "targetname");
 
   velocity_angles = VectorToAngles(target.origin - struct.origin);
-  velocity_forward = anglesToForward(velocity_angles);
+  velocity_forward = AnglesToForward(velocity_angles);
   velocity = velocity_forward * 1;
+
 
   // LOTS OF EXPLOSIONS
   contact_point = right * -30 + forward * -30 + (0, 0, -10);
@@ -5670,7 +5498,7 @@ player_convoy_encounters_baddies() {
   level notify("kaboom_to_detour_vehicle");
 
   mortar_fx = getfx("mortar_large");
-  playFX(mortar_fx, detour_vehicle.origin + contact_point);
+  PlayFX(mortar_fx, detour_vehicle.origin + contact_point);
   //detour_vehicle Vehicle_SetSpeed( 0, 10, 10 );
   detour_vehicle godoff();
   RadiusDamage(detour_vehicle.origin, 64, 50000, 50000);
@@ -5678,7 +5506,9 @@ player_convoy_encounters_baddies() {
   Earthquake(0.7, 1.2, level.player.origin, 5000);
   level.player PlayRumbleOnEntity("damage_heavy");
 
+
   level.player ShellShock("default", 5);
+
 
   detour_vehicle.veh_brake = 0.15;
 
@@ -5737,6 +5567,7 @@ player_convoy_encounters_baddies() {
   wait(0.8);
   //	rear_vehicle Vehicle_SetSpeed( 24, 5, 5 );
   rear_vehicle.veh_brake = 0;
+
 }
 
 rpg_hits_hydrant() {
@@ -5771,20 +5602,20 @@ rpg_flies_by_view() {
   forcemult[1] = 1;
 
   fx = getfx("rocket_explode");
-  playFX(fx, struct.origin);
+  PlayFX(fx, struct.origin);
   thread play_sound_in_space("rocket_explode_dirt", struct.origin, true);
   PhysicsExplosionSphere(struct.origin, 320, 280, 4);
   RadiusDamage(struct.origin, 320, 50, 50);
 
-  for(i = 0; i < 14; i++) {
+  for (i = 0; i < 14; i++) {
     end = targ.origin + randomvector(128);
     vec = end - struct.origin;
     angles = VectorToAngles(vec);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
 
     index = RandomInt(models.size);
-    ent = spawn("script_model", struct.origin);
-    ent setModel(models[index]);
+    ent = Spawn("script_model", struct.origin);
+    ent SetModel(models[index]);
 
     force = forward;
     force *= 18000;
@@ -5797,6 +5628,7 @@ rpg_flies_by_view() {
 }
 
 vehicle_physics_explosion() {
+
   rpg_physics = GetEnt("rpg_physics", "targetname");
   targ = GetEnt(rpg_physics.target, "targetname");
 
@@ -5814,32 +5646,31 @@ vehicle_physics_explosion() {
 
   vec = targ.origin - rpg_physics.origin;
   angles = VectorToAngles(vec);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   vec = forward * power;
 
   power *= 0.35;
   level.crazy_ride_convoy["detour"] VehPhys_Launch(vec, 1.0);
   /*
-  	
+	
   delayThread( 0.25, ::reverse_force );
-  for( ;; )
+  for ( ;; )
   {	
   	vec = targ.origin - rpg_physics.origin;
   	angles = VectorToAngles( vec );
-  	forward = anglesToForward( angles );
+  	forward = AnglesToForward( angles );
   	vec = forward * power;
   	
   	power *= 0.35;
-  	
+	
   //	PhysicsExplosionSphere( rpg_physics.origin, rpg_physics.radius, rpg_physics.radius, 30 );
   	PhysicsJolt( rpg_physics.origin, rpg_physics.radius, rpg_physics.radius, vec );
   	Line( rpg_physics.origin, targ.origin, (1,0,0), 1, 0, 50 );
   	
   	
   	wait( 0.05 );
-  	if( GetTime() > start_time + time ) {
+  	if( GetTime() > start_time + time )
   		break;
-  	}
   }
   */
   //		PhysicsExplosionCylinder( rpg_physics.origin, rpg_physics.radius, rpg_physics.radius, 30 );
@@ -5853,7 +5684,7 @@ reverse_force() {
   targ = GetEnt(reverse_force.target, "targetname");
   vec = targ.origin - reverse_force.origin;
   angles = VectorToAngles(vec);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   vec = forward * 3.5;
 
   PhysicsJolt(reverse_force.origin, 350, 350, vec);
@@ -5861,12 +5692,12 @@ reverse_force() {
 }
 
 rpg_vehicle() {
-  self setModel("projectile_rpg7");
+  self SetModel("projectile_rpg7");
   fx = getfx("rpg_trail");
-  playFXOnTag(fx, self, "tag_origin");
+  PlayFXOnTag(fx, self, "tag_origin");
 
   fx = getfx("rpg_muzzle");
-  playFXOnTag(fx, self, "tag_origin");
+  PlayFXOnTag(fx, self, "tag_origin");
 
   self waittill("reached_end_node");
   flag_set("rpg_end");
@@ -5887,6 +5718,7 @@ ride_scenes() {
 
   array_spawn_function_noteworthy("flee_if_seen", ::flee_if_seen);
   array_spawn_function_noteworthy("run_and_delete", ::run_and_delete);
+
 }
 
 run_and_delete() {
@@ -5894,7 +5726,7 @@ run_and_delete() {
   self.ignoreall = true;
   self endon("death");
 
-  if(isDefined(self.script_delay)) {
+  if(IsDefined(self.script_delay)) {
     self SetGoalPos(self.origin);
     self.goalradius = 8;
     script_delay();
@@ -5927,10 +5759,9 @@ flee_if_seen() {
 player_looks_at_me() {
   self endon("death");
 
-  for(;;) {
-    if(within_fov_of_players(self.origin, 0.75)) {
+  for (;;) {
+    if(within_fov_of_players(self.origin, 0.75))
       return;
-    }
     wait(0.05);
   }
 }
@@ -5942,9 +5773,9 @@ corner_hider() {
 
 bloody_pain(amount, attacker, dir, point, type, a, b) {
   fx = getfx("headshot");
-  forward = anglesToForward(dir);
+  forward = AnglesToForward(dir);
   up = AnglesToUp(dir);
-  playFX(fx, point, forward, up);
+  PlayFX(fx, point, forward, up);
   //Line( point, point + forward * 500, (1,0,0), 1, 1, 5000 );
 }
 
@@ -5961,16 +5792,14 @@ corner_hider_spawner() {
   turret SetTargetEntity(self);
   turret.dontshoot = true;
   owner = turret GetTurretOwner();
-  if(IsAlive(owner)) {
+  if(IsAlive(owner))
     owner.ignoreall = true;
-  }
 
   trigger = GetEnt("detour_shoots_alley_guy_trigger", "targetname");
-  for(;;) {
+  for (;;) {
     trigger waittill("trigger", other);
-    if(other == level.crazy_ride_convoy["detour"]) {
+    if(other == level.crazy_ride_convoy["detour"])
       break;
-    }
     wait(0.05);
   }
 
@@ -5989,22 +5818,24 @@ corner_hider_spawner() {
   self.a.nodeath = true;
   self Kill();
 
+
+
   /*
 
   node = GetNode( self.script_linkto, "script_linkname" );
-  struct = getstruct( self.target, "targetname" );
-  	
+  struct = getstruct( self.target, "targetname" ); 
+	
   self.ignoreme = true;
   self.ignoreall = true;
   self endon( "death" );
-  	
+	
   self.animname = "flee_alley";
   self.favoriteenemy = level.player;
   self.goalradius = 8;
   self SetGoalNode( node );
   self SetLookAtEntity( level.player );
   self disable_long_death();
-  	
+	
 
   //wait( 2.34 );
   flag_wait( "ambush_guy_attacks" );
@@ -6038,13 +5869,13 @@ jumper_shoots_car_fx() {
 
   count = 0;
 
-  for(;;) {
+  for (;;) {
     self waittillmatch("custom_animmode", "fire_spray"); // whatever
     count++;
 
     link = getstruct(struct.script_linkto, "script_linkname");
     angles = VectorToAngles(link.origin - struct.origin);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
 
     fx = dirt_fx;
     alias = "bullet_large_dirt";
@@ -6057,18 +5888,16 @@ jumper_shoots_car_fx() {
     }
 
     thread play_sound_in_space(alias, struct.origin);
-    playFX(fx, struct.origin, forward);
-    if(!isDefined(struct.target)) {
+    PlayFX(fx, struct.origin, forward);
+    if(!isdefined(struct.target))
       break;
-    }
     struct = getstruct(struct.target, "targetname");
 
-    if(count > 9) {
+    if(count > 9)
       level.player DoDamage(20 / level.player.damageMultiplier, self.origin, self, self);
-    }
   }
 
-  for(;;) {
+  for (;;) {
     level.player DoDamage(20 / level.player.damageMultiplier, self.origin, self, self);
     self waittillmatch("custom_animmode", "fire_spray"); // whatever
   }
@@ -6096,9 +5925,8 @@ alley_runner_spawner_first() {
 }
 
 wall_climber_ragdolls_on_pain(amt, attacker, force, b, c, d, e) {
-  if(attacker != level.player) {
+  if(attacker != level.player)
     return;
-  }
 
   //self.allowdeath = true;
   //self Kill();	
@@ -6155,10 +5983,9 @@ favela_hide_spawner() {
   struct thread anim_custom_animmode_solo(self, "gravity", "round_corner");
 
   animation = self getanim("round_corner");
-  for(;;) {
-    if(self GetAnimTime(animation) > 0.8) {
+  for (;;) {
+    if(self GetAnimTime(animation) > 0.8)
       break;
-    }
 
     wait(0.05);
   }
@@ -6169,6 +5996,7 @@ favela_hide_spawner() {
   wait(1.7);
   struct anim_single_solo(self, "hands_up");
   self safe_delete();
+
 }
 
 window_waver() {
@@ -6237,7 +6065,7 @@ garage_spawner() {
     self.force_civilian_stand_run = true;
   }
 
-  if(isDefined(level.scr_anim["generic"][scene + "_run"])) {
+  if(IsDefined(level.scr_anim["generic"][scene + "_run"])) {
     self set_generic_run_anim(scene + "_run", false);
   }
 
@@ -6285,12 +6113,11 @@ garage_pull_struct() {
   // get the brushes that make up the door
   brushes = [];
   brush = top_struct;
-  for(;;) {
+  for (;;) {
     newbrush = GetEnt(brush.target, "targetname");
     brushes[brushes.size] = newbrush;
-    if(!isDefined(newbrush.target)) {
+    if(!isdefined(newbrush.target))
       break;
-    }
     brush = newbrush;
   }
 
@@ -6301,9 +6128,8 @@ garage_pull_struct() {
     brush.start_origin = brush.origin;
     brush.origin += (0, 0, start_height);
 
-    if(brush.origin[2] > top_struct.origin[2]) {
+    if(brush.origin[2] > top_struct.origin[2])
       brush hide_notsolid();
-    }
   }
 
   flag_wait("pull_garage");
@@ -6335,10 +6161,9 @@ garage_pull_struct() {
 
   thread garage_brushes_move(brushes, lower_struct, origins);
 
-  for(;;) {
-    if(!brushes.size) {
+  for (;;) {
+    if(!brushes.size)
       break;
-    }
 
     foreach(index, brush in brushes) {
       if(brush.origin[2] < top_struct.origin[2]) {
@@ -6351,10 +6176,11 @@ garage_pull_struct() {
 }
 
 garage_brushes_move(brushes, lower_struct, origins) {
+
   level endon("stop_pulling");
   PrintLn("	origins = [];");
   index = 0;
-  for(;;) {
+  for (;;) {
     //hand_org = level.garage_puller GetTagOrigin( "tag_inhand" );
     hand_org = origins[index];
     index++;
@@ -6365,9 +6191,8 @@ garage_brushes_move(brushes, lower_struct, origins) {
       brush MoveTo(brush.start_origin + (0, 0, difference), 0.1, 0, 0);
     }
 
-    if(index >= origins.size) {
+    if(index >= origins.size)
       break;
-    }
     wait(0.05);
   }
 
@@ -6382,9 +6207,8 @@ street_runner_scene() {
   struct = getstruct("street_runner_scene", "targetname");
   spawner = GetEnt(struct.target, "targetname");
   guy = spawner spawn_ai();
-  if(spawn_failed(guy)) {
+  if(spawn_failed(guy))
     return;
-  }
 
   guy.animname = "street_runner";
   animation = guy getanim("scene");
@@ -6399,10 +6223,9 @@ street_runner_scene() {
   guy.allowdeath = true;
   guy add_damage_function(::player_fails_if_he_kills_me);
 
-  for(;;) {
-    if(guy GetAnimTime(animation) > 0.95) {
+  for (;;) {
+    if(guy GetAnimTime(animation) > 0.95)
       break;
-    }
     wait(0.05);
   }
 
@@ -6420,9 +6243,8 @@ roof_backup_scene() {
   struct = getstruct("roof_backup_scene", "targetname");
   spawner = GetEnt(struct.target, "targetname");
   guy = spawner spawn_ai();
-  if(spawn_failed(guy)) {
+  if(spawn_failed(guy))
     return;
-  }
 
   guy.animname = "roof_backup";
   animation = guy getanim("scene");
@@ -6435,10 +6257,9 @@ roof_backup_scene() {
   guy.allowPain = true;
   guy.allowdeath = true;
 
-  for(;;) {
-    if(guy GetAnimTime(animation) > 0.59) {
+  for (;;) {
+    if(guy GetAnimTime(animation) > 0.59)
       break;
-    }
     wait(0.05);
   }
 
@@ -6460,9 +6281,9 @@ civ_balcony() {
   //door NotSolid();
   door RotateYaw(-90, 1, 0.5, 0.5);
   guy = spawner spawn_ai();
-  if(spawn_failed(guy)) {
+  if(spawn_failed(guy))
     return;
-  }
+
 
   node = GetNode(guy.target, "targetname");
   startpos = guy.origin;
@@ -6473,7 +6294,7 @@ civ_balcony() {
   wait(0.35);
 
   // knock the cans off the balcony
-  forward = anglesToForward(struct.angles);
+  forward = AnglesToForward(struct.angles);
   vec = forward * 0.15;
   PhysicsJolt(struct.origin, 32, 32, vec);
 
@@ -6508,11 +6329,10 @@ grenade_barrage_if_you_delay() {
   wait_times[4] = 1.3;
   wait_index = 0;
 
-  for(;;) {
+  for (;;) {
     if(flag("player_inside_ambush_house")) {
-      if(count > frames - 35) {
+      if(count > frames - 35)
         count = frames - 35;
-      }
     } else {
       count++;
     }
@@ -6543,7 +6363,7 @@ throw_grenade() {
 }
 
 modify_dismount_spawner_threatbias() {
-  for(;;) {
+  for (;;) {
     flag_wait("player_inside_ambush_house");
     SetIgnoreMeGroup("axis_dismount_attackers", "ally_with_player");
     SetIgnoreMeGroup("ally_with_player", "axis_dismount_attackers");
@@ -6560,7 +6380,7 @@ handle_player_exposing_himself_in_front_of_school() {
 
   thread player_dies_if_he_goes_too_far();
 
-  for(;;) {
+  for (;;) {
     flag_wait("player_exposes_on_street");
     set_player_attacker_accuracy(1000);
     level.player.noPlayerInvul = true;
@@ -6578,14 +6398,14 @@ handle_player_exposing_himself_in_front_of_school() {
 player_dies_if_he_goes_too_far() {
   flag_clear("player_dies_on_street");
   flag_wait("player_dies_on_street");
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
     guy = random(ai);
     origin = (0, 0, 0);
     attacker = level.player;
 
     if(IsAlive(guy)) {
-      origin = guy getEye();
+      origin = guy GetEye();
       attacker = guy;
     }
 
@@ -6607,11 +6427,10 @@ handle_start_points_for_detour_humvee() {
       return;
   }
 
-  ride_vehicle_spawners = getEntArray("ride_vehicle_spawner", "targetname");
+  ride_vehicle_spawners = GetEntArray("ride_vehicle_spawner", "targetname");
   foreach(spawner in ride_vehicle_spawners) {
-    if(spawner.script_index == 3) {
+    if(spawner.script_index == 3)
       spawner Delete();
-    }
   }
 }
 
@@ -6619,7 +6438,7 @@ player_gets_max_health_for_dismount() {
   level.player endon("death");
   time = 4;
   frames = time * 20;
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     level.player.health = level.player.maxhealth;
     wait(0.05);
   }
@@ -6655,7 +6474,7 @@ player_shepherd_fov() {
 manage_fov() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     setsaveddvar("cg_fov", self.origin[0]);
     wait 0.05;
   }
@@ -6698,6 +6517,7 @@ shepherd_roams_battlefield(target) {
   delayThread(time - 1.6, ::roadkill_mortar_goes_off, mortar_org);
   level.player delayThread(time - 0.2, maps\_gameskill::grenade_dirt_on_screen, "right");
 
+
   arc = 15;
 
   level.player PlayerLinkToDelta(player_rig, "tag_player", 1, arc, arc, arc, arc, 1);
@@ -6729,11 +6549,11 @@ shepherd_roams_battlefield(target) {
 
 shepdamage_bullet_thread() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("bullethit", other);
     if(other == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -6741,16 +6561,15 @@ shepdamage_bullet_thread() {
 
 shepdamage_damage_thread() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("damage", dmg, attacker, one, two, weapType);
 
-    if(!isalive(attacker)) {
+    if(!isalive(attacker))
       continue;
-    }
 
     if(attacker == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -6761,7 +6580,7 @@ shepherd_bridge_scene(shepherd) {
   shepherd = maps\_vehicle_aianim::convert_guy_to_drone(shepherd); //turning him into a drone at this point. not up for fighting with the boatride script
   shepherd.script = "empty_script";
   shepherd.dontdonotetracks = true;
-  shepherd setCanDamage(true);
+  shepherd setcandamage(true);
   shepherd.health = 5000;
   shepherd thread shepdamage_bullet_thread();
   shepherd thread shepdamage_damage_thread();
@@ -6809,11 +6628,10 @@ wait_until_time_to_shepout() {
   level endon("player_starts_stairs");
 
   animation = getanim("angry_wander");
-  for(;;) {
+  for (;;) {
     animtime = self getanimtime(animation);
-    if(animtime > 0.80) {
+    if(animtime > 0.80)
       break;
-    }
     wait 0.05;
   }
 }
@@ -6829,7 +6647,7 @@ stair_wave_spawner() {
   struct anim_first_frame_solo(self, "stair_wave");
   wait 0.05; // for anim to take effect
 
-  eye = self getEye();
+  eye = self geteye();
   //Print3d( eye, "x", (1,0,0), 1, 2, 5000 );
   see_spawn = level.player can_see_origin(eye, false);
 
@@ -6844,10 +6662,9 @@ stair_wave_spawner() {
 
   //	struct anim_single_solo( self, "stair_approach" );
   struct thread anim_loop_solo(self, "stair_idle");
-  for(;;) {
-    if(distance(level.player.origin, self.origin) < 350) {
+  for (;;) {
+    if(distance(level.player.origin, self.origin) < 350)
       break;
-    }
     wait(0.05);
   }
   struct notify("stop_loop");
@@ -6860,19 +6677,17 @@ stair_wave_spawner() {
 }
 
 wander_battlefield_until_time_to_stop(target) {
-  if(flag("bridgelayer_complete")) {
+  if(flag("bridgelayer_complete"))
     return;
-  }
   level endon("bridgelayer_complete");
 
   first_target = target;
-  for(;;) {
-    if(!isDefined(target)) {
+  for (;;) {
+    if(!isdefined(target))
       target = first_target;
-    }
 
     struct = getstruct(target, "targetname");
-    if(isDefined(struct.script_delay)) {
+    if(IsDefined(struct.script_delay)) {
       struct anim_reach_solo(self, "idle_reach");
       struct thread anim_loop_solo(self, "idle");
       wait(struct.script_delay);
@@ -6925,9 +6740,8 @@ ambusher_spawner() {
     self waittill("death");
     // yay ignoreme after death!
     wait(2);
-    if(isDefined(self)) {
+    if(IsDefined(self))
       self.ignoreme = true;
-    }
   }
 }
 
@@ -6948,7 +6762,7 @@ trapper_spawner() {
 
 trapper_killer_trigger() {
   trigger = GetEnt("trapper_killer_trigger", "targetname");
-  for(;;) {
+  for (;;) {
     trigger waittill("trigger", other);
     other Delete();
   }
@@ -6981,9 +6795,8 @@ gaz_balcony_think(struct) {
   self.custom_scene = struct.animation;
   self.price_idle = struct.animation == "killhouse_sas_price_idle";
   self.first_scene = "killhouse_gaz_idleB";
-  if(self.price_idle) {
+  if(self.price_idle)
     self.first_scene = "killhouse_sas_price_idle";
-  }
 
   if(self.custom_scene == "killhouse_gaz_idleB") {
     // offset anim
@@ -7020,10 +6833,9 @@ idle_until_tired_of_idling_or_shot_at(struct) {
 
 player_vehicle_catches_up() {
   flag_wait("start_runner");
-  for(;;) {
-    if(Distance(level.crazy_ride_convoy["player"].origin, level.crazy_ride_convoy["detour"].origin) <= 320) {
+  for (;;) {
+    if(Distance(level.crazy_ride_convoy["player"].origin, level.crazy_ride_convoy["detour"].origin) <= 320)
       break;
-    }
     wait(0.05);
   }
 
@@ -7031,7 +6843,7 @@ player_vehicle_catches_up() {
 }
 
 slow_down_to_speed_when_you_get_dist_from_ent(speed, ent, dist) {
-  for(;;) {
+  for (;;) {
     if(Distance(self.origin, ent.origin) <= dist) {
       self Vehicle_SetSpeed(speed, 5, 5);
       break;
@@ -7046,10 +6858,10 @@ riverbank_mg() {
   /*
   self SetMode( "manual" );
   self SetTargetEntity( level.player );
-  for( ;; )
+  for ( ;; )
   {
   	bursts = RandomIntRange( 4, 7 );
-  	for( i = 0; i < bursts; i++ )
+  	for ( i = 0; i < bursts; i++ )
   	{
   		self StartFiring();
   		burst_time = RandomFloatRange( 0.5, 1 );
@@ -7067,7 +6879,7 @@ riverbank_mg() {
 }
 
 radio_dialogue_generic(alias) {
-  if(!isDefined(level.scr_radio[alias])) {
+  if(!isdefined(level.scr_radio[alias])) {
     level.scr_radio[alias] = level.scr_sound["generic"][alias];
   }
   radio_dialogue(alias);
@@ -7091,7 +6903,7 @@ shot_fired_trigger() {
   start = struct_start.origin;
 
   angles = VectorToAngles(start - end);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   dist = Distance(end, start);
 
   end += forward * -1000;
@@ -7112,7 +6924,7 @@ shot_fired_trigger() {
   //	Line( start, original_end, (0.5,0.5,0), 1, 1, 1000 );
   //MagicBullet( "scripted_silent", start, end );
 
-  trace = bulletTrace(start, end, true, undefined);
+  trace = BulletTrace(start, end, true, undefined);
   pos = trace["position"];
 
   fx = getfx("car_dirt");
@@ -7122,8 +6934,8 @@ shot_fired_trigger() {
     sound = "metal";
   }
 
-  playFX(fx, pos, forward);
-  playFX(fx, pos, forward);
+  PlayFX(fx, pos, forward);
+  PlayFX(fx, pos, forward);
 
   brick_sounds = [];
   brick_sounds[brick_sounds.size] = "ride_bullet_brick_1";
@@ -7140,11 +6952,10 @@ shot_fired_trigger() {
   sounds["concrete"] = brick_sounds;
   sounds["metal"] = metal_sounds;
 
-  if(!isDefined(level.magic_sound_index)) {
+  if(!isdefined(level.magic_sound_index))
     level.magic_sound_index = [];
-  }
 
-  if(!isDefined(level.magic_sound_index[sound])) {
+  if(!isdefined(level.magic_sound_index[sound])) {
     level.magic_sound_index[sound] = 0;
   }
 
@@ -7161,6 +6972,7 @@ shot_fired_trigger() {
 
   //	Line( start, end, (1,0,0), 1, 1, 1000 );
   //	Print3d( trace[ "position" ], "HIT", (1,0,0), 1, 2, 1000 );
+
 }
 
 rpg_ambush_spawner() {
@@ -7168,9 +6980,8 @@ rpg_ambush_spawner() {
   self SetEntityTarget(level.crazy_ride_convoy["detour"]);
   self.interval = 0;
 
-  if(!isDefined(self.script_delay)) {
+  if(!isdefined(self.script_delay))
     return;
-  }
 
   self SetGoalPos(self.origin);
   script_delay();
@@ -7186,7 +6997,7 @@ technical_pushed_animation() {
   technical = level.traffic_jam_truck;
   technical.animname = "technical";
 
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.origin = (0, 0, 0);
   struct.angles = (0, 0, 0);
   struct thread anim_single_solo(technical, "technical_pushed");
@@ -7195,7 +7006,12 @@ technical_pushed_animation() {
   technical SetAnim(animation, 1, 0, 1.07);
 }
 
+
+
+
+
 roadkill_gameskill_ride_settings() {
+
   // RIGHT NOW ONLY .25 AND .75 ARE USED for easy and normal
 
   level.difficultySettings["threatbias"]["easy"] = 0;
@@ -7265,6 +7081,7 @@ roadkill_gameskill_ride_settings() {
   level.difficultySettings["health_regenRate"]["hardened"] = 0.2;
   level.difficultySettings["health_regenRate"]["veteran"] = 0.2;
 
+
   // level.playerDifficultyHealth
   // the amount of health you have in this difficulty
   level.difficultySettings["playerDifficultyHealth"]["easy"] = 20;
@@ -7294,9 +7111,8 @@ trigger_delete_axis_not_in_volume() {
   total = ai.size;
 
   foreach(guy in ai) {
-    if(guy IsTouching(volume)) {
+    if(guy IsTouching(volume))
       continue;
-    }
     guy Delete();
     count++;
   }
@@ -7305,9 +7121,8 @@ trigger_delete_axis_not_in_volume() {
 }
 
 balcony_check() {
-  if(!isDefined(self.script_balcony)) {
+  if(!isdefined(self.script_balcony))
     return;
-  }
 
   self.a.disableLongDeath = true; // no long death on these guys
 
@@ -7318,37 +7133,31 @@ balcony_check() {
 try_balcony_death() {
   // always return false in this function because we want the death
   // animscript to continue after this function no matter what
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return false;
-  }
 
-  if(self.a.pose != "stand") {
+  if(self.a.pose != "stand")
     return false;
-  }
 
-  if(isDefined(self.prevnode)) {
+  if(IsDefined(self.prevnode)) {
     angleAI = self.angles[1];
     angleNode = self.prevnode.angles[1];
     angleDiff = abs(angleAI - angleNode);
-    if(angleDiff > 80) {
+    if(angleDiff > 80)
       return false;
-    }
 
     d = Distance(self.origin, self.prevnode.origin);
-    if(d > 92) {
+    if(d > 92)
       return false;
-    }
   }
 
-  if(!isDefined(level.last_balcony_death)) {
+  if(!isdefined(level.last_balcony_death))
     level.last_balcony_death = GetTime();
-  }
   elapsedTime = GetTime() - level.last_balcony_death;
 
   // if one just happened within 3 seconds dont do it
-  if(elapsedTime < 3 * 1000) {
+  if(elapsedTime < 3 * 1000)
     return false;
-  }
 
   deathAnims = getGenericAnim("balcony_death");
   self.deathanim = deathAnims[RandomInt(deathAnims.size)];
@@ -7398,14 +7207,13 @@ wait_for_chance_to_charge_school() {
 
   num = 1;
 
-  for(;;) {
+  for (;;) {
     ai = GetAIArray("axis");
     count = 0;
     too_many = false;
     foreach(guy in level.enemy_playground_enemies) {
-      if(!isalive(guy)) {
+      if(!isalive(guy))
         continue;
-      }
 
       if(guy IsTouching(volume)) {
         count++;
@@ -7415,9 +7223,8 @@ wait_for_chance_to_charge_school() {
         }
       }
     }
-    if(!too_many) {
+    if(!too_many)
       return;
-    }
     wait(0.05);
   }
 }
@@ -7459,24 +7266,21 @@ fail_for_civ_kill() {
 }
 
 civ_hit(amt, attacker, force, b, c, d, e) {
-  if(!isalive(attacker)) {
+  if(!isalive(attacker))
     return;
-  }
 
-  if(attacker != level.player) {
+  if(attacker != level.player)
     return;
-  }
 
   wait(1.5);
   // You are not authorized to fire on unarmed targets.
-  SetDvar("ui_deadquote", &"ROADKILL_SHOT_UNARMED");
+  SetDvar("ui_deadquote", & "ROADKILL_SHOT_UNARMED");
   missionFailedWrapper();
 }
 
 player_get_in_reminder() {
-  if(flag("player_gets_in")) {
+  if(flag("player_gets_in"))
     return;
-  }
   level endon("player_gets_in");
 
   wait(4);
@@ -7496,7 +7300,7 @@ player_get_in_reminder() {
   lines[lines.size] = "roadkill_fly_moveletsgo";
 
   index = 0;
-  for(;;) {
+  for (;;) {
     timer = RandomFloatRange(5, 9);
     wait(timer);
 
@@ -7545,7 +7349,7 @@ spy_on_convoy() {
 
   nodes = getstructarray("spy_node", "script_noteworthy");
 
-  for(;;) {
+  for (;;) {
     timer = RandomFloat(0.8);
     wait(timer);
     node = random(nodes);
@@ -7583,9 +7387,8 @@ learn_flash() {
 
 player_learned_flash() {
   flash_ammo = level.player GetWeaponAmmoStock("flash_grenade");
-  if(flash_ammo <= 0) {
+  if(flash_ammo <= 0)
     return true;
-  }
 
   return level.player.flash_ammo > flash_ammo;
 }
@@ -7593,10 +7396,9 @@ player_learned_flash() {
 detect_room_was_flashed() {
   volume = GetEnt("dismount_flash_volume", "targetname");
   flash = volume get_flash_touching();
-  for(;;) {
-    if(!isDefined(flash)) {
+  for (;;) {
+    if(!isdefined(flash))
       break;
-    }
     wait(0.05);
   }
 
@@ -7604,8 +7406,8 @@ detect_room_was_flashed() {
 }
 
 get_flash_touching() {
-  for(;;) {
-    grenades = getEntArray("grenade", "classname");
+  for (;;) {
+    grenades = GetEntArray("grenade", "classname");
     flashes = [];
     foreach(grenade in grenades) {
       if(IsSubStr(grenade.model, "flash")) {
@@ -7614,9 +7416,8 @@ get_flash_touching() {
     }
 
     foreach(flash in flashes) {
-      if(flash IsTouching(self)) {
+      if(flash IsTouching(self))
         return flash;
-      }
     }
     wait(0.05);
   }
@@ -7636,9 +7437,8 @@ blend_sm_sunsamplesizenear() {
 }
 
 riverbank_player_learns_m203() {
-  if(flag("leaving_riverbank")) {
+  if(flag("leaving_riverbank"))
     return;
-  }
 
   level endon("leaving_riverbank");
 
@@ -7647,19 +7447,17 @@ riverbank_player_learns_m203() {
   flag_wait("player_enters_riverbank");
   wait(20);
 
-  if(player_learned_m203()) {
+  if(player_learned_m203())
     return;
-  }
 
   // Allen! Switch to your M203!			
   foley_line("roadkill_fly_yourM203");
 
   display_hint("learn_m203");
 
-  for(;;) {
-    if(player_learned_m203()) {
+  for (;;) {
+    if(player_learned_m203())
       break;
-    }
     wait(0.05);
   }
 
@@ -7670,9 +7468,8 @@ riverbank_player_learns_m203() {
 }
 
 player_learned_m203() {
-  if(flag("leaving_riverbank")) {
+  if(flag("leaving_riverbank"))
     return true;
-  }
 
   return level.player getcurrentweapon() == "m203_m4_eotech";
 }
@@ -7685,16 +7482,14 @@ other_two_guys_say_huah() {
 
   ai = getaiarray("allies");
   foreach(guy in ai) {
-    if(guy is_hero()) {
+    if(guy is_hero())
       continue;
-    }
 
     msg = lines[index];
     guy generic_dialogue_queue(msg);
     index++;
-    if(index >= lines.size) {
+    if(index >= lines.size)
       return;
-    }
   }
 
 }
@@ -7713,12 +7508,12 @@ foley_gets_eyes_on_school_dialogue() {
   // Keep it together 2-3! We're on the way! 2-1 out!		
   foley_line("roadkill_fly_keepittogether");
 
-  if(flag("playground_baddies_retreat")) {
+  if(flag("playground_baddies_retreat"))
     return;
-  }
 
   // Taaargeets, front of the school!! Take 'em out!!!	
   dunn_line("roadkill_cpd_frontofschool");
+
 }
 
 school_badguy_cleanup() {
@@ -7754,4 +7549,5 @@ ending_fadeout_nextmission() {
   wait(2);
 
   nextmission();
+
 }

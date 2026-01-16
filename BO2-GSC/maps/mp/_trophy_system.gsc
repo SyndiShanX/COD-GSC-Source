@@ -61,11 +61,10 @@ ontrophysystemspawn(watcher, player) {
   self thread trophyactive(player);
   self thread trophywatchhack();
   self setclientfield("trophy_system_state", 1);
-  self playLoopSound("wpn_trophy_spin", 0.25);
+  self playloopsound("wpn_trophy_spin", 0.25);
 
-  if(isDefined(watcher.reconmodel)) {
+  if(isDefined(watcher.reconmodel))
     self thread setreconmodeldeployed();
-  }
 }
 
 setreconmodeldeployed() {
@@ -89,8 +88,8 @@ trophywatchhack() {
 }
 
 ontrophysystemsmashed(attacker) {
-  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playSound("dst_tac_insert_break");
+  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playsound("dst_tac_insert_break");
   self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("equipment_destroyed", "item_destroyed");
 
   if(isDefined(attacker) && self.owner isenemyplayer(attacker)) {
@@ -139,15 +138,13 @@ trophyactive(owner) {
           continue;
       }
 
-      if(!isDefined(grenade.owner)) {
+      if(!isDefined(grenade.owner))
         grenade.owner = getmissileowner(grenade);
-      }
 
       if(isDefined(grenade.owner)) {
         if(level.teambased) {
-          if(grenade.owner.team == owner.team) {
+          if(grenade.owner.team == owner.team)
             continue;
-          }
         } else if(grenade.owner == owner) {
           continue;
         }
@@ -155,15 +152,14 @@ trophyactive(owner) {
 
         if(grenadedistancesquared < 262144) {
           if(bullettracepassed(grenade.origin, self.origin + vectorscale((0, 0, 1), 29.0), 0, self)) {
-            playFX(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), grenade.origin - self.origin, anglestoup(self.angles));
+            playfx(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), grenade.origin - self.origin, anglestoup(self.angles));
             owner thread projectileexplode(grenade, self);
             index--;
-            self playSound("wpn_trophy_alert");
+            self playsound("wpn_trophy_alert");
             self.ammo--;
 
-            if(self.ammo <= 0) {
+            if(self.ammo <= 0)
               self thread trophysystemdetonate();
-            }
           }
         }
       }
@@ -178,9 +174,8 @@ trophyactive(owner) {
       }
       if(isDefined(tac_insert.owner)) {
         if(level.teambased) {
-          if(tac_insert.owner.team == owner.team) {
+          if(tac_insert.owner.team == owner.team)
             continue;
-          }
         } else if(tac_insert.owner == owner) {
           continue;
         }
@@ -188,15 +183,14 @@ trophyactive(owner) {
 
         if(grenadedistancesquared < 262144) {
           if(bullettracepassed(tac_insert.origin, self.origin + vectorscale((0, 0, 1), 29.0), 0, tac_insert)) {
-            playFX(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), tac_insert.origin - self.origin, anglestoup(self.angles));
+            playfx(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), tac_insert.origin - self.origin, anglestoup(self.angles));
             owner thread trophydestroytacinsert(tac_insert, self);
             index--;
-            self playSound("wpn_trophy_alert");
+            self playsound("wpn_trophy_alert");
             self.ammo--;
 
-            if(self.ammo <= 0) {
+            if(self.ammo <= 0)
               self thread trophysystemdetonate();
-            }
           }
         }
       }
@@ -207,7 +201,7 @@ trophyactive(owner) {
 projectileexplode(projectile, trophy) {
   self endon("death");
   projposition = projectile.origin;
-  playFX(level.trophydetonationfx, projposition);
+  playfx(level.trophydetonationfx, projposition);
   projectile delete();
   trophy radiusdamage(projposition, 128, 105, 10, self);
   maps\mp\_scoreevents::processscoreevent("trophy_defense", self);
@@ -218,7 +212,7 @@ projectileexplode(projectile, trophy) {
 trophydestroytacinsert(tacinsert, trophy) {
   self endon("death");
   tacpos = tacinsert.origin;
-  playFX(level.trophydetonationfx, tacinsert.origin);
+  playfx(level.trophydetonationfx, tacinsert.origin);
   tacinsert thread maps\mp\_tacticalinsertion::tacticalinsertiondestroyedbytrophysystem(self, trophy);
   trophy radiusdamage(tacpos, 128, 105, 10, self);
   maps\mp\_scoreevents::processscoreevent("trophy_defense", self);
@@ -229,9 +223,8 @@ trophydestroytacinsert(tacinsert, trophy) {
 trophysystemdetonate(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
-  if(!from_emp) {
-    playFX(level._equipment_explode_fx_lg, self.origin);
-  }
+  if(!from_emp)
+    playfx(level._equipment_explode_fx_lg, self.origin);
 
   if(isDefined(attacker) && self.owner isenemyplayer(attacker)) {
     attacker maps\mp\_challenges::destroyedequipment(weaponname);
@@ -245,12 +238,11 @@ trophysystemdetonate(attacker, weaponname) {
 watchtrophysystemdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setCanDamage(1);
+  self setcandamage(1);
   damagemax = 20;
 
-  if(!self maps\mp\_utility::ishacked()) {
+  if(!self maps\mp\_utility::ishacked())
     self.damagetaken = 0;
-  }
 
   self.maxhealth = 10000;
   self.health = self.maxhealth;
@@ -264,47 +256,41 @@ watchtrophysystemdamage(watcher) {
       continue;
     }
     if(level.teambased) {
-      if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker) {
+      if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker)
         continue;
-      }
     }
 
     if(isDefined(weaponname)) {
       switch (weaponname) {
         case "concussion_grenade_mp":
         case "flash_grenade_mp":
-          if(watcher.stuntime > 0) {
+          if(watcher.stuntime > 0)
             self thread maps\mp\gametypes\_weaponobjects::stunstart(watcher, watcher.stuntime);
-          }
 
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-            }
           }
 
           continue;
         case "emp_grenade_mp":
           damage = damagemax;
         default:
-          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
             attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
-          }
 
           break;
       }
     } else
       weaponname = "";
 
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       self.damagetaken = damagemax;
-    } else {
+    else
       self.damagetaken = self.damagetaken + damage;
-    }
 
     if(self.damagetaken >= damagemax) {
       watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0.05, attacker, weaponname);

@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\systems\destructible_character;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\struct;
+
 #namespace fx_character;
 
 autoexec main() {
@@ -95,15 +96,15 @@ private _gibhandler(localclientnum, entity, gibflag) {
 private _gibpartnametogibflag(gibpartname) {
   if(isDefined(gibpartname)) {
     switch (gibpartname) {
-      case # "head":
+      case #"head":
         return 8;
-      case # "right arm":
+      case #"right arm":
         return 16;
-      case # "left arm":
+      case #"left arm":
         return 32;
-      case # "right leg":
+      case #"right leg":
         return 128;
-      case # "left leg":
+      case #"left leg":
         return 256;
     }
   }

@@ -20,17 +20,17 @@
 #namespace zm_weap_annihilator;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_annihilator", &__init__, undefined, undefined);
+  system::register("zm_weap_annihilator", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_spawner::register_zombie_death_event_callback(&check_annihilator_death);
+  zm_spawner::register_zombie_death_event_callback( & check_annihilator_death);
   zm_hero_weapon::register_hero_weapon("hero_annihilator");
   level.weaponannihilator = getweapon("hero_annihilator");
 }
 
 function check_annihilator_death(attacker) {
-  if(isDefined(self.damageweapon) && !self.damageweapon === level.weaponnone) {
+  if(isdefined(self.damageweapon) && !self.damageweapon === level.weaponnone) {
     if(self.damageweapon === level.weaponannihilator) {
       self zombie_utility::gib_random_parts();
       gibserverutils::annihilate(self);

@@ -36,7 +36,7 @@
 #namespace zm_weap_glaive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_glaive", &__init__, undefined, undefined);
+  system::register("zm_weap_glaive", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -55,14 +55,14 @@ function __init__() {
   level.glaive_chop_cone_range_sq = level.glaive_chop_cone_range * level.glaive_chop_cone_range;
   level.var_3e0110d = 160;
   level.var_42894cb8 = level.var_3e0110d * level.var_3e0110d;
-  callback::on_connect(&watch_sword_equipped);
-  for(i = 0; i < 4; i++) {
-    zombie_utility::add_zombie_gib_weapon_callback(("glaive_apothicon" + "_") + i, &gib_check, &gib_head_check);
-    zombie_utility::add_zombie_gib_weapon_callback(("glaive_keeper" + "_") + i, &gib_check, &gib_head_check);
+  callback::on_connect( & watch_sword_equipped);
+  for (i = 0; i < 4; i++) {
+    zombie_utility::add_zombie_gib_weapon_callback(("glaive_apothicon" + "_") + i, & gib_check, & gib_head_check);
+    zombie_utility::add_zombie_gib_weapon_callback(("glaive_keeper" + "_") + i, & gib_check, & gib_head_check);
     zm_hero_weapon::register_hero_weapon(("glaive_apothicon" + "_") + i);
     zm_hero_weapon::register_hero_weapon(("glaive_keeper" + "_") + i);
-    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_apothicon" + "_") + i), &function_4a948f8a);
-    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_keeper" + "_") + i), &function_4a948f8a);
+    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_apothicon" + "_") + i), & function_4a948f8a);
+    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_keeper" + "_") + i), & function_4a948f8a);
   }
   level.glaive_damage_locations = array("left_arm_upper", "left_arm_lower", "left_hand", "right_arm_upper", "right_arm_lower", "right_hand");
   level thread function_e97f78f0();
@@ -84,7 +84,7 @@ function get_correct_sword_for_player_character_at_level(n_upgrade_level) {
 
 function function_3f820ba7(var_9fd9c680) {
   self endon("hash_b29853d8");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("weapon_change", wpn_cur, wpn_prev);
     if(wpn_cur != level.weaponnone && wpn_cur != var_9fd9c680) {
       self.usingsword = 0;
@@ -103,9 +103,9 @@ function function_3f820ba7(var_9fd9c680) {
 function function_762ff0b6(wpn_prev) {
   self endon("hash_8a993396");
   oldtime = gettime();
-  while(isDefined(self) && (isDefined(self.autokill_glaive_active) && self.autokill_glaive_active)) {
+  while (isdefined(self) && (isdefined(self.autokill_glaive_active) && self.autokill_glaive_active)) {
     rate = 1.667;
-    if(isDefined(wpn_prev.gadget_power_usage_rate)) {
+    if(isdefined(wpn_prev.gadget_power_usage_rate)) {
       rate = wpn_prev.gadget_power_usage_rate;
     }
     self.sword_power = self.sword_power - (0.0005 * rate);
@@ -126,7 +126,7 @@ function function_5c998ffc(wpn_excalibur, wpn_autokill, wpn_cur, wpn_prev) {
       self disableoffhandweapons();
       self notify("altbody_end");
       self thread function_3f820ba7(wpn_cur);
-      if(!(isDefined(self.usingsword) && self.usingsword)) {
+      if(!(isdefined(self.usingsword) && self.usingsword)) {
         self gadgetpowerset(0, 100);
         self clientfield::set_player_uimodel("zmhud.swordEnergy", 1);
         self clientfield::set_player_uimodel("zmhud.swordState", 2);
@@ -151,7 +151,7 @@ function function_5c998ffc(wpn_excalibur, wpn_autokill, wpn_cur, wpn_prev) {
       self disableoffhandweapons();
       self notify("altbody_end");
       self thread function_3f820ba7(wpn_cur);
-      if(!(isDefined(self.usingsword) && self.usingsword)) {
+      if(!(isdefined(self.usingsword) && self.usingsword)) {
         self gadgetpowerset(0, 100);
         self clientfield::set_player_uimodel("zmhud.swordEnergy", 1);
         self clientfield::set_player_uimodel("zmhud.swordState", 6);
@@ -180,7 +180,7 @@ function private watch_sword_equipped() {
   wpn_autokill = self get_correct_sword_for_player_character_at_level(2);
   self.sword_allowed = 1;
   self.usingsword = 0;
-  while(true) {
+  while (true) {
     self waittill("weapon_change", wpn_cur, wpn_prev);
     self function_5c998ffc(wpn_excalibur, wpn_autokill, wpn_cur, wpn_prev);
   }
@@ -199,7 +199,7 @@ function private gib_head_check(damage_location) {
   if(self.override_damagelocation === "neck") {
     return true;
   }
-  if(!isDefined(damage_location)) {
+  if(!isdefined(damage_location)) {
     return false;
   }
   if(damage_location == "head") {
@@ -218,7 +218,7 @@ function private excalibur_think(wpn_excalibur) {
   self endon("hash_b29853d8");
   self endon("disconnect");
   self endon("bled_out");
-  while(true) {
+  while (true) {
     self waittill("weapon_melee_power_left", weapon);
     if(weapon == wpn_excalibur) {
       self clientfield::increment("slam_fx");
@@ -232,13 +232,13 @@ function private do_excalibur(wpn_excalibur) {
   forward_view_angles = self getweaponforwarddir();
   zombie_list = getaiteamarray(level.zombie_team);
   foreach(ai in zombie_list) {
-    if(!isDefined(ai) || !isalive(ai)) {
+    if(!isdefined(ai) || !isalive(ai)) {
       continue;
     }
     test_origin = ai getcentroid();
     dist_sq = distancesquared(view_pos, test_origin);
     if(dist_sq < level.glaive_excalibur_aoe_range_sq) {
-      if(isDefined(ai.var_a3b60c68)) {
+      if(isdefined(ai.var_a3b60c68)) {
         self thread[[ai.var_a3b60c68]](ai, wpn_excalibur);
       } else {
         self thread electrocute_actor(ai, wpn_excalibur);
@@ -256,7 +256,7 @@ function private do_excalibur(wpn_excalibur) {
     if(0 == ai damageconetrace(view_pos, self)) {
       continue;
     }
-    if(isDefined(ai.var_a3b60c68)) {
+    if(isdefined(ai.var_a3b60c68)) {
       self thread[[ai.var_a3b60c68]](ai, wpn_excalibur);
       continue;
     }
@@ -266,10 +266,10 @@ function private do_excalibur(wpn_excalibur) {
 
 function electrocute_actor(ai, wpn_excalibur) {
   self endon("disconnect");
-  if(!isDefined(ai) || !isalive(ai)) {
+  if(!isdefined(ai) || !isalive(ai)) {
     return;
   }
-  if(!isDefined(self.tesla_enemies_hit)) {
+  if(!isdefined(self.tesla_enemies_hit)) {
     self.tesla_enemies_hit = 1;
   }
   ai notify("bhtn_action_notify", "electrocute");
@@ -296,7 +296,7 @@ function tesla_death(player) {
 
 function arc_damage_init(hit_location, hit_origin, player) {
   player endon("disconnect");
-  if(isDefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
+  if(isdefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
     return;
   }
   self lightning_chain::arc_damage_ent(player, 1, level.var_ba84a05b);
@@ -304,20 +304,24 @@ function arc_damage_init(hit_location, hit_origin, player) {
 
 function chop_actor(ai, upgraded, leftswing, weapon = level.weaponnone) {
   self endon("disconnect");
-  if(!isDefined(ai) || !isalive(ai)) {
+  if(!isdefined(ai) || !isalive(ai)) {
     return;
   }
-  if(isDefined(upgraded) && upgraded) {
+  if(isdefined(upgraded) && upgraded) {
     if(9317 >= ai.health) {
       ai.ignoremelee = 1;
     }
-    [[level.var_b31b9421]] - > waitinqueue(ai);
+    [
+      [level.var_b31b9421]
+    ] - > waitinqueue(ai);
     ai dodamage(9317, self.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
   } else {
     if(3594 >= ai.health) {
       ai.ignoremelee = 1;
     }
-    [[level.var_b31b9421]] - > waitinqueue(ai);
+    [
+      [level.var_b31b9421]
+    ] - > waitinqueue(ai);
     ai dodamage(3594, self.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
   }
   ai blood_death_fx(leftswing, upgraded);
@@ -325,7 +329,7 @@ function chop_actor(ai, upgraded, leftswing, weapon = level.weaponnone) {
 }
 
 function function_862aadab(random_gibs) {
-  if(isDefined(self) && isactor(self)) {
+  if(isdefined(self) && isactor(self)) {
     if(!random_gibs || randomint(100) < 50) {
       gibserverutils::gibhead(self);
     }
@@ -344,13 +348,13 @@ function function_862aadab(random_gibs) {
 function private blood_death_fx(var_d98455ab, var_26ba0d4c) {
   if(self.archetype == "zombie") {
     if(var_d98455ab) {
-      if(isDefined(var_26ba0d4c) && var_26ba0d4c) {
+      if(isdefined(var_26ba0d4c) && var_26ba0d4c) {
         self clientfield::increment("zombie_slice_l", 2);
       } else {
         self clientfield::increment("zombie_slice_l", 1);
       }
     } else {
-      if(isDefined(var_26ba0d4c) && var_26ba0d4c) {
+      if(isdefined(var_26ba0d4c) && var_26ba0d4c) {
         self clientfield::increment("zombie_slice_r", 2);
       } else {
         self clientfield::increment("zombie_slice_r", 1);
@@ -364,12 +368,12 @@ function chop_zombies(first_time, var_10ee11e, leftswing, weapon = level.weaponn
   forward_view_angles = self getweaponforwarddir();
   zombie_list = getaiteamarray(level.zombie_team);
   foreach(ai in zombie_list) {
-    if(!isDefined(ai) || !isalive(ai)) {
+    if(!isdefined(ai) || !isalive(ai)) {
       continue;
     }
     if(first_time) {
       ai.chopped = 0;
-    } else if(isDefined(ai.chopped) && ai.chopped) {
+    } else if(isdefined(ai.chopped) && ai.chopped) {
       continue;
     }
     test_origin = ai getcentroid();
@@ -390,7 +394,7 @@ function chop_zombies(first_time, var_10ee11e, leftswing, weapon = level.weaponn
       continue;
     }
     ai.chopped = 1;
-    if(isDefined(ai.chop_actor_cb)) {
+    if(isdefined(ai.chop_actor_cb)) {
       self thread[[ai.chop_actor_cb]](ai, self, weapon);
       continue;
     }
@@ -415,7 +419,7 @@ function private arc_attack_think(weapon, var_10ee11e) {
   self endon("hash_b29853d8");
   self endon("disconnect");
   self endon("bled_out");
-  while(true) {
+  while (true) {
     self util::waittill_any("weapon_melee_power", "weapon_melee");
     weapon thread swordarc_swipe(self, var_10ee11e);
   }
@@ -425,7 +429,7 @@ function private autokill_think(wpn_autokill) {
   self endon("hash_b29853d8");
   self endon("disconnect");
   self endon("bled_out");
-  while(true) {
+  while (true) {
     self waittill("weapon_melee_power_left", weapon);
     if(weapon == wpn_autokill && self.autokill_glaive_active == 0) {
       self thread send_autokill_sword(wpn_autokill);
@@ -434,7 +438,7 @@ function private autokill_think(wpn_autokill) {
 }
 
 function function_86ee93a8() {
-  if(isDefined(self.var_8f6c69b8) && self.var_8f6c69b8) {
+  if(isdefined(self.var_8f6c69b8) && self.var_8f6c69b8) {
     return;
   }
   self.var_8f6c69b8 = 1;
@@ -451,10 +455,10 @@ function private function_729af361(vh_glaive) {
   vh_glaive endon("disconnect");
   self thread function_86ee93a8();
   self.var_c0d25105._glaive_must_return_to_owner = 0;
-  while(isDefined(self) && self throwbuttonpressed()) {
+  while (isdefined(self) && self throwbuttonpressed()) {
     wait(0.05);
   }
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     if(self throwbuttonpressed()) {
       self.var_c0d25105._glaive_must_return_to_owner = 1;
       return;
@@ -469,10 +473,10 @@ function private send_autokill_sword(wpn_autokill) {
   sp_glaive.count = 1;
   vh_glaive = sp_glaive spawnfromspawner("player_glaive_" + self.characterindex, 1);
   self.var_c0d25105 = vh_glaive;
-  if(isDefined(vh_glaive)) {
+  if(isdefined(vh_glaive)) {
     vh_glaive vehicle::lights_on();
     self clientfield::increment_to_player("throw_fx");
-    vh_glaive.origin = (self.origin + (80 * anglesToForward(self.angles))) + vectorscale((0, 0, 1), 50);
+    vh_glaive.origin = (self.origin + (80 * anglestoforward(self.angles))) + vectorscale((0, 0, 1), 50);
     vh_glaive.angles = self getplayerangles();
     vh_glaive.owner = self;
     vh_glaive.weapon = wpn_autokill;
@@ -487,28 +491,28 @@ function private send_autokill_sword(wpn_autokill) {
     self.autokill_glaive_active = 0;
     self notify("hash_8a993396");
     self.var_c0d25105 = undefined;
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       util::wait_network_frame();
-      self playSound("wpn_sword2_return");
+      self playsound("wpn_sword2_return");
     }
     vh_glaive delete();
   }
 }
 
 function function_e97f78f0() {
-  while(true) {
+  while (true) {
     foreach(player in getplayers()) {
-      if(isDefined(player.sword_power) && !player.sword_allowed) {
+      if(isdefined(player.sword_power) && !player.sword_allowed) {
         player.sword_power = player gadgetpowerget(0) / 100;
         player clientfield::set_player_uimodel("zmhud.swordEnergy", player.sword_power);
         if(player.sword_power >= 1) {
           player.sword_allowed = 1;
-          if(isDefined(player.current_sword) && (!(isDefined(player.usingsword) && player.usingsword)) && (!(isDefined(player.autokill_glaive_active) && player.autokill_glaive_active))) {
+          if(isdefined(player.current_sword) && (!(isdefined(player.usingsword) && player.usingsword)) && (!(isdefined(player.autokill_glaive_active) && player.autokill_glaive_active))) {
             player giveweapon(player.current_sword);
             player.sword_allowed = 1;
             player gadgetpowerset(0, 100);
             player clientfield::set_player_uimodel("zmhud.swordEnergy", 1);
-            if(isDefined(player.var_2ef815cf) && player.var_2ef815cf) {
+            if(isdefined(player.var_2ef815cf) && player.var_2ef815cf) {
               player clientfield::set_player_uimodel("zmhud.swordState", 6);
             } else {
               player clientfield::set_player_uimodel("zmhud.swordState", 2);
@@ -524,12 +528,12 @@ function function_e97f78f0() {
 }
 
 function disabled_sword() {
-  if(isDefined(self.usingsword) && self.usingsword) {
+  if(isdefined(self.usingsword) && self.usingsword) {
     return;
   }
   wpn_excalibur = self get_correct_sword_for_player_character_at_level(1);
   wpn_autokill = self get_correct_sword_for_player_character_at_level(2);
-  if(isDefined(self.swordpreserve) && self.swordpreserve) {
+  if(isdefined(self.swordpreserve) && self.swordpreserve) {
     self.sword_allowed = 1;
     return;
   }
@@ -554,22 +558,22 @@ function disabled_sword() {
 function sword_power_hud(slot) {
   self endon("disconnect");
   self endon("hash_b29853d8");
-  while(isDefined(self) && (isDefined(self.usingsword) && self.usingsword || (isDefined(self.autokill_glaive_active) && self.autokill_glaive_active)) && self.sword_power > 0) {
-    if(isDefined(self.teleporting) && self.teleporting) {
+  while (isdefined(self) && (isdefined(self.usingsword) && self.usingsword || (isdefined(self.autokill_glaive_active) && self.autokill_glaive_active)) && self.sword_power > 0) {
+    if(isdefined(self.teleporting) && self.teleporting) {
       wait(0.05);
       continue;
     }
     self.sword_power = self gadgetpowerget(slot) / 100;
     self clientfield::set_player_uimodel("zmhud.swordEnergy", self.sword_power);
-    if(isDefined(self.var_2ef815cf) && self.var_2ef815cf) {
+    if(isdefined(self.var_2ef815cf) && self.var_2ef815cf) {
       self clientfield::set_player_uimodel("zmhud.swordState", 7);
     } else {
       self clientfield::set_player_uimodel("zmhud.swordState", 3);
     }
-    if(isDefined(self.swordpreserve) && self.swordpreserve) {
+    if(isdefined(self.swordpreserve) && self.swordpreserve) {
       self.sword_power = 1;
       self clientfield::set_player_uimodel("", 1);
-      if(isDefined(self.var_2ef815cf) && self.var_2ef815cf) {
+      if(isdefined(self.var_2ef815cf) && self.var_2ef815cf) {
         self clientfield::set_player_uimodel("", 6);
       } else {
         self clientfield::set_player_uimodel("", 2);
@@ -582,10 +586,10 @@ function sword_power_hud(slot) {
   self.usingsword = 0;
   self.autokill_glaive_active = 0;
   self notify("hash_8a993396");
-  if(isDefined(self.var_c0d25105)) {
+  if(isdefined(self.var_c0d25105)) {
     self.var_c0d25105._glaive_must_return_to_owner = 1;
   }
-  while(self isslamming()) {
+  while (self isslamming()) {
     wait(0.05);
   }
   self disabled_sword();
@@ -596,8 +600,8 @@ function function_4a948f8a(player, enemy) {
   if(player laststand::player_is_in_laststand()) {
     return;
   }
-  if(isDefined(player) && (!(isDefined(player.usingsword) && player.usingsword) && (!(isDefined(player.autokill_glaive_active) && player.autokill_glaive_active))) && isDefined(player.current_sword)) {
-    if(isDefined(enemy.sword_kill_power)) {
+  if(isdefined(player) && (!(isdefined(player.usingsword) && player.usingsword) && (!(isdefined(player.autokill_glaive_active) && player.autokill_glaive_active))) && isdefined(player.current_sword)) {
+    if(isdefined(enemy.sword_kill_power)) {
       perkfactor = 1;
       if(player hasperk("specialty_overcharge")) {
         perkfactor = getdvarfloat("gadgetPowerOverchargePerkScoreFactor");

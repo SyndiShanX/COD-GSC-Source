@@ -71,13 +71,13 @@ run_mason_start() {
   turn_on_intro_cam();
 
   if(isDefined(is_mature()) && !is_mature()) {
-    a_m_blood = getEntArray("intro_blood", "targetname");
+    a_m_blood = getentarray("intro_blood", "targetname");
     array_delete(a_m_blood);
   }
 
   flag_wait("starting final intro screen fadeout");
   clientnotify("snd_commotion");
-  level.player playSound("sce_cctv_intro");
+  level.player playsound("sce_cctv_intro");
   level.player clientnotify("intro_cctv_started");
   level thread interrogation_menendez_bleed();
   level thread set_force_no_cull_on_actors_during_scene("intro_cctv", "enter_interrogation_room_started");
@@ -188,7 +188,7 @@ run_mason_wakeup() {
 
 setup_swinging_light() {
   m_light = get_ent("fxanim_mason_wakeup_light", "targetname");
-  playFXOnTag(level._effect["fx_lf_commandcenter_light4"], m_light, "tag_fx");
+  playfxontag(level._effect["fx_lf_commandcenter_light4"], m_light, "tag_fx");
 }
 
 clean_up_mason_wakeup() {
@@ -204,7 +204,9 @@ clean_up_mason_wakeup() {
 dialog_wakeup() {
   level endon("dialog_wakeup_kill");
 
-  if(level.is_harper_alive) {} else {}
+  if(level.is_harper_alive) {
+  } else {
+  }
 
   wait 4.5;
   level.player say_dialog("maso_what_1");
@@ -366,7 +368,7 @@ place_player_loadout() {
 
 place_loadout_item(str_weapon, str_origin, s_anchor, weaponoptions) {
   if(!issubstr(str_weapon, "null")) {
-    a_weapon_mount = getEntArray(str_origin, "targetname");
+    a_weapon_mount = getentarray(str_origin, "targetname");
 
     for(i = 0; i < a_weapon_mount.size; i++) {
       m_weapon_script_model = spawn("weapon_" + str_weapon, a_weapon_mount[i].origin);
@@ -390,17 +392,15 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
 
   if(a_tokens.size > 2) {
     for(i = 1; i < a_tokens.size; i++) {
-      if(a_tokens[i] != "sp" && !issubstr(a_tokens[i], "+")) {
+      if(a_tokens[i] != "sp" && !issubstr(a_tokens[i], "+"))
         str_weapon = str_weapon + ("_" + a_tokens[i]);
-      }
     }
   }
 
-  if(str_origin == "player_primary_loadout_spot") {
+  if(str_origin == "player_primary_loadout_spot")
     b_left_side = 1;
-  } else {
+  else
     b_left_side = 0;
-  }
 
   b_use_offset = 1;
 
@@ -667,18 +667,16 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
   }
 
   if(b_use_offset) {
-    if(v_origin[0] > 170) {
+    if(v_origin[0] > 170)
       v_origin = (v_origin[0] - 39.5, v_origin[1], v_origin[2]);
-    }
 
     v_offset_origin = v_origin - s_anchor.origin;
     self.origin = self.origin + v_offset_origin;
 
-    if(b_left_side) {
+    if(b_left_side)
       v_debug_color = (1, 0, 0);
-    } else {
+    else
       v_debug_color = (0, 0, 1);
-    }
 
     debugstar(self.origin, 1000, v_debug_color);
 
@@ -734,7 +732,7 @@ run_mason_hallway_friendly() {
   level.salazar set_force_color(str_color);
   flag_wait("obs_hallway_color_back_hit");
   wait 0.05;
-  array_delete(getEntArray("hallway_color_trigger", "script_noteworthy"));
+  array_delete(getentarray("hallway_color_trigger", "script_noteworthy"));
 }
 
 friendlies_focus_fire_on_turret_after_time() {
@@ -745,9 +743,8 @@ friendlies_focus_fire_on_turret_after_time() {
     vh_turret = get_ent("observation_hallway_turret", "targetname");
     vh_turret.health = 10;
 
-    while(is_alive(vh_turret)) {
+    while(is_alive(vh_turret))
       level.salazar shoot_at_target(vh_turret, undefined, 0, 2);
-    }
   }
 }
 
@@ -774,17 +771,15 @@ redshirt_rushes_turret() {
       ai_user clear_force_color();
       ai_user thread force_goal(nd_death);
 
-      if(isDefined(vh_turret)) {
+      if(isDefined(vh_turret))
         vh_turret maps\_turret::set_turret_target(ai_user, (0, 0, 0), 0);
-      }
     }
 
     flag_wait("observation_turret_killed");
     setenablenode(nd_safe_spot, 1);
 
-    if(isalive(ai_user)) {
+    if(isalive(ai_user))
       ai_user set_force_color(str_color);
-    }
   }
 }
 
@@ -792,9 +787,8 @@ hallway_front_rush() {
   a_enemies = get_ai_group_ai("obs_hallway_group_front");
 
   foreach(enemy in a_enemies) {
-    if(isalive(enemy)) {
+    if(isalive(enemy))
       enemy maps\_rusher::rush();
-    }
 
     wait 10;
   }
@@ -814,7 +808,7 @@ run_masons_quarters(str_door_name, str_trigger_name, open_angle, str_open_notify
   t_cigar_box setcursorhint("HINT_NOICON");
   t_cigar_box sethintstring(&"BLACKOUT_USE_PERSONAL_EFFECTS");
   t_cigar_box waittill("trigger");
-  level.player playSound("evt_masonroom_info_pickup");
+  level.player playsound("evt_masonroom_info_pickup");
   level notify("masons_personal_effects_found");
   e_cigar_box = getent("mason_personal_effects", "targetname");
   e_cigar_box delete();
@@ -829,11 +823,10 @@ init_doors() {
   hallway_door = getent("interrogation_hallway_door", "targetname");
   collision = getent(hallway_door.target, "targetname");
   collision linkto(hallway_door, "tag_origin");
-  glass_list = getEntArray("interrogation_mirror_broken", "targetname");
+  glass_list = getentarray("interrogation_mirror_broken", "targetname");
 
-  foreach(glass in glass_list) {
-    glass hide();
-  }
+  foreach(glass in glass_list)
+  glass hide();
 
   level thread run_masons_quarters();
 }
@@ -850,11 +843,10 @@ interrogation_menendez_bleed() {
 }
 
 interrogation_camera() {
-  a_m_camera = getEntArray("security_intro_camera", "targetname");
+  a_m_camera = getentarray("security_intro_camera", "targetname");
 
-  foreach(m_camera in a_m_camera) {
-    play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
-  }
+  foreach(m_camera in a_m_camera)
+  play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
 
   flag_wait("intro_disable_camera");
   level notify("stop_record");
@@ -864,7 +856,7 @@ interrogation_handcuffs() {
   m_handcuffs = getent("intro_handcuffs", "targetname");
   m_handcuffs play_fx("handcuffs_light", m_handcuffs.origin, m_handcuffs.angles, "stop_handcuffs", 1);
   flag_wait("intro_disable_handcuffs");
-  level.player playSound("evt_power_down");
+  level.player playsound("evt_power_down");
   m_handcuffs notify("stop_handcuffs");
 }
 
@@ -907,11 +899,10 @@ notetrack_table_shake(ai_menendez) {
 }
 
 interrogation_break_mirror(ai_salazar) {
-  broken_glass_brushes = getEntArray("interrogation_mirror_broken", "targetname");
+  broken_glass_brushes = getentarray("interrogation_mirror_broken", "targetname");
 
-  foreach(brush in broken_glass_brushes) {
-    brush show();
-  }
+  foreach(brush in broken_glass_brushes)
+  brush show();
 
   exploder(999);
   level.player lerpviewangleclamp(3.0, 0.5, 0.5, 0, 0, 0, 0);
@@ -934,7 +925,7 @@ scene_hallway() {
   run_scene_and_delete("hallway_drag");
   level thread run_scene_and_delete("hallway_surgery");
   trigger_wait("deck_reveal_trigger");
-  array_delete(getEntArray("observation_hallway", "script_noteworthy"));
+  array_delete(getentarray("observation_hallway", "script_noteworthy"));
   end_scene("hallway_dead");
 }
 
@@ -993,9 +984,8 @@ scene_interrogation() {
   ais = get_ais_from_scene("intro_fight");
 
   foreach(ai in ais) {
-    if(issubstr(ai.targetname, "mirror")) {
+    if(issubstr(ai.targetname, "mirror"))
       ai.name = "";
-    }
   }
 
   mirror_menendez = getent("menendez_ai", "targetname");
@@ -1011,7 +1001,7 @@ sal_exit_explosion() {
   level thread maps\blackout_util::light_flicker(duration);
   playrumbleonposition("grenade_rumble", level.player.origin);
   earthquake(0.8, 0.8, level.player.origin, 100);
-  level.player playSound("exp_carrier_impact_room");
+  level.player playsound("exp_carrier_impact_room");
   level clientnotify("cpb");
 }
 
@@ -1021,7 +1011,7 @@ turn_on_intro_cam() {
   s_camera_target = getstruct(s_camera.target, "targetname");
   s_camera.angles = vectortoangles(s_camera_target.origin - s_camera.origin);
   level.e_camera = spawn("script_model", s_camera.origin);
-  level.e_camera setModel("tag_origin");
+  level.e_camera setmodel("tag_origin");
   level.e_camera.angles = s_camera.angles;
   level.e_camera setclientflag(11);
   level.e_camera thread camera_aim_update();
@@ -1046,19 +1036,20 @@ turn_off_intro_cam() {
   flag_clear("intro_camera_on");
 }
 
-turn_off_intro_cam_hud() {}
+turn_off_intro_cam_hud() {
+}
 
 room_cams_init() {
   s_right_mirror = getstruct("mirror_1_dir", "targetname");
   level.e_right_mirror = spawn("script_model", s_right_mirror.origin);
-  level.e_right_mirror setModel("tag_origin");
+  level.e_right_mirror setmodel("tag_origin");
   level.e_right_mirror.angles = s_right_mirror.angles;
   level.e_right_mirror.is_reflected_over_y = 0;
   level.e_right_mirror.s_fake_mirror = s_right_mirror;
   level.e_right_mirror.s_real_mirror = getstruct("mirror_1_real_room", "targetname");
   s_left_mirror = getstruct("mirror_2_dir", "targetname");
   level.e_left_mirror = spawn("script_model", s_left_mirror.origin);
-  level.e_left_mirror setModel("tag_origin");
+  level.e_left_mirror setmodel("tag_origin");
   level.e_left_mirror.angles = s_left_mirror.angles;
   level.e_left_mirror.is_reflected_over_y = 1;
   level.e_left_mirror.s_fake_mirror = s_left_mirror;
@@ -1072,11 +1063,10 @@ get_mirror_cam_offset() {
   v_vake = self.s_fake_mirror.origin;
   v_reflection = v_player - v_mirror;
 
-  if(self.is_reflected_over_y) {
+  if(self.is_reflected_over_y)
     v_reflection = (-1 * v_reflection[0], v_reflection[1], v_reflection[2]);
-  } else {
+  else
     v_reflection = (v_reflection[0], -1 * v_reflection[1], v_reflection[2]);
-  }
 
   return v_reflection;
 }
@@ -1230,8 +1220,8 @@ callback_player_knocked_out(player) {
   wait 0.5;
   level.sndknockedoutent = spawn("script_origin", level.player.origin);
   level.sndknockedoutent2 = spawn("script_origin", level.player.origin);
-  level.sndknockedoutent playLoopSound("evt_mason_knockout1", 3);
-  level.sndknockedoutent2 playLoopSound("evt_mason_knockout_breath", 2);
+  level.sndknockedoutent playloopsound("evt_mason_knockout1", 3);
+  level.sndknockedoutent2 playloopsound("evt_mason_knockout_breath", 2);
   level.player magic_bullet_shield();
   screen_fade_out(1.0);
 }
@@ -1253,7 +1243,7 @@ notetrack_setup_table(m_tag_origin) {
 }
 
 notetrack_menendez_punched_in_the_face(ai_menendez) {
-  playFXOnTag(level._effect["intro_punch_spit"], ai_menendez, "J_Head");
+  playfxontag(level._effect["intro_punch_spit"], ai_menendez, "J_Head");
 }
 
 notetrack_prestige_sailor_shot(ai_sailor) {
@@ -1262,9 +1252,8 @@ notetrack_prestige_sailor_shot(ai_sailor) {
   v_end = ai_sailor gettagorigin("J_Head");
   magicbullet("fiveseven_sp", v_start, v_end);
 
-  if(is_mature()) {
-    playFXOnTag(level._effect["menendez_shoots_guard"], ai_sailor, "J_Head");
-  }
+  if(is_mature())
+    playfxontag(level._effect["menendez_shoots_guard"], ai_sailor, "J_Head");
 
   exploder(439);
   m_player_body = get_model_or_models_from_scene("intro_fight", "player_body");

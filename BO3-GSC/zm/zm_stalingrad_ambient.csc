@@ -10,13 +10,13 @@
 #namespace zm_stalingrad_ambient;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_ambient", &__init__, undefined, undefined);
+  system::register("zm_stalingrad_ambient", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "ambient_mortar_strike", 12000, 2, "int", &ambient_mortar_strike, 0, 0);
-  clientfield::register("scriptmover", "ambient_artillery_strike", 12000, 2, "int", &ambient_artillery_strike, 0, 0);
-  clientfield::register("world", "power_on_level", 12000, 1, "int", &power_on_level, 0, 0);
+  clientfield::register("scriptmover", "ambient_mortar_strike", 12000, 2, "int", & ambient_mortar_strike, 0, 0);
+  clientfield::register("scriptmover", "ambient_artillery_strike", 12000, 2, "int", & ambient_artillery_strike, 0, 0);
+  clientfield::register("world", "power_on_level", 12000, 1, "int", & power_on_level, 0, 0);
   level thread function_866a2751();
   level thread function_a8bcf075();
   level thread function_1eb91e4b();
@@ -68,10 +68,10 @@ function ambient_artillery_strike(localclientnum, oldval, newval, bnewent, binit
 
 function function_a7d3e4ff(localclientnum, var_df2299f9) {
   level endon("demo_jump");
-  playSound(localclientnum, "prj_mortar_incoming", self.origin);
+  playsound(localclientnum, "prj_mortar_incoming", self.origin);
   wait(1);
-  playSound(localclientnum, "exp_mortar", self.origin);
-  playFX(localclientnum, level._effect[var_df2299f9], self.origin);
+  playsound(localclientnum, "exp_mortar", self.origin);
+  playfx(localclientnum, level._effect[var_df2299f9], self.origin);
   playrumbleonposition(localclientnum, "artillery_rumble", self.origin);
 }
 

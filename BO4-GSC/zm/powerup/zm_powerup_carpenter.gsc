@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_carpenter;
 
 autoexec __init__system__() {
@@ -24,7 +25,7 @@ __init__() {
   zm_powerups::register_powerup("carpenter", &grab_carpenter);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("carpenter", "p7_zm_power_up_carpenter", # "zombie/powerup_max_ammo", &func_should_drop_carpenter, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("carpenter", "p7_zm_power_up_carpenter", #"zombie/powerup_max_ammo", &func_should_drop_carpenter, 0, 0, 0);
   }
 }
 

@@ -11,6 +11,7 @@
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_characters;
 #include scripts\zm_common\zm_sq;
+
 #namespace zm_office_ee_schuster;
 
 autoexec __init__system__() {
@@ -31,7 +32,7 @@ __main__() {
   }
 
   level flag::init(#"hash_519e40d088b134");
-  zm_sq::register(#"ee_schuster", # "step_1", # "ee_schuster_step1", &ee_schuster_step1_setup, &ee_schuster_step1_cleanup);
+  zm_sq::register(#"ee_schuster", #"step_1", #"ee_schuster_step1", &ee_schuster_step1_setup, &ee_schuster_step1_cleanup);
   zm_sq::start(#"ee_schuster");
 }
 
@@ -40,7 +41,7 @@ ee_schuster_step1_setup(var_5ea5c94d) {
   a_e_players = getplayers();
 
   foreach(e_player in a_e_players) {
-    if(e_player zm_characters::is_character(array(#"hash_59f3598ad57dadd8", # "hash_2bcebdf1bef33311", # "hash_5a715cb0a6e071ae"))) {
+    if(e_player zm_characters::is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
       foreach(var_9dc0380f in var_66ef9199) {
         if(var_9dc0380f.var_614bfc5c == 0) {
           thread function_84471080(var_9dc0380f, e_player);
@@ -52,7 +53,7 @@ ee_schuster_step1_setup(var_5ea5c94d) {
       continue;
     }
 
-    if(e_player zm_characters::is_character(array(#"hash_1aa57ef704f24fa5", # "hash_36bc80636f0fdac4"))) {
+    if(e_player zm_characters::is_character(array(#"hash_1aa57ef704f24fa5", #"hash_36bc80636f0fdac4"))) {
       foreach(var_9dc0380f in var_66ef9199) {
         if(var_9dc0380f.var_614bfc5c == 1) {
           thread function_84471080(var_9dc0380f, e_player);
@@ -64,7 +65,7 @@ ee_schuster_step1_setup(var_5ea5c94d) {
       continue;
     }
 
-    if(e_player zm_characters::is_character(array(#"hash_305f156156d37e34", # "hash_6df0037e3f390b15"))) {
+    if(e_player zm_characters::is_character(array(#"hash_305f156156d37e34", #"hash_6df0037e3f390b15"))) {
       foreach(var_9dc0380f in var_66ef9199) {
         if(var_9dc0380f.var_614bfc5c == 2) {
           thread function_84471080(var_9dc0380f, e_player);
@@ -76,7 +77,7 @@ ee_schuster_step1_setup(var_5ea5c94d) {
       continue;
     }
 
-    if(e_player zm_characters::is_character(array(#"hash_22e6f7e13c3a99ef", # "hash_46b92e1337b43236"))) {
+    if(e_player zm_characters::is_character(array(#"hash_22e6f7e13c3a99ef", #"hash_46b92e1337b43236"))) {
       foreach(var_9dc0380f in var_66ef9199) {
         if(var_9dc0380f.var_614bfc5c == 3) {
           thread function_84471080(var_9dc0380f, e_player);

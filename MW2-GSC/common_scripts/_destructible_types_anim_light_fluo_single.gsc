@@ -11,4 +11,5 @@ main() {
   level._destructible_preanims["light_fluorescent_single_swing_03"] = % light_fluorescent_single_swing_03;
 
   level._effect["spotlight_fx"] = loadfx("misc/fluorescent_spotlight");
+
 }

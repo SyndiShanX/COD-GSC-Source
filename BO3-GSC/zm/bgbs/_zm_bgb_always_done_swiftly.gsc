@@ -13,14 +13,14 @@
 #namespace zm_bgb_always_done_swiftly;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_always_done_swiftly", &__init__, undefined, "bgb");
+  system::register("zm_bgb_always_done_swiftly", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_always_done_swiftly", "rounds", 3, &enable, &disable, undefined);
+  bgb::register("zm_bgb_always_done_swiftly", "rounds", 3, & enable, & disable, undefined);
 }
 
 function enable() {

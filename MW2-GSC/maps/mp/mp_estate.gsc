@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   maps\mp\mp_estate_precache::main();
   maps\createart\mp_estate_art::main();
   maps\mp\mp_estate_fx::main();
@@ -22,9 +23,8 @@ main() {
   setdvar("r_lightGridIntensity", 1.3);
   setdvar("r_lightGridContrast", 0);
 
-  if(level.ps3) {
+  if(level.ps3)
     setdvar("sm_sunShadowScale", "0.5"); // ps3 optimization
-  } else {
+  else
     setdvar("sm_sunShadowScale", "0.7"); // optimization
-  }
 }

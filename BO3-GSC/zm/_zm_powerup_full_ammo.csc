@@ -9,7 +9,7 @@
 #namespace zm_powerup_full_ammo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_full_ammo", &__init__, undefined, undefined);
+  system::register("zm_powerup_full_ammo", & __init__, undefined, undefined);
 }
 
 function __init__() {

@@ -182,13 +182,17 @@ HintPrint(string, breakfunc) {
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHALOW;
       HintPrintWait(MYFLASHTIME, breakfunc);
-      if([[breakfunc]]()) {
+      if([
+          [breakfunc]
+        ]()) {
         break;
       }
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHAHIGH;
       HintPrintWait(MYFLASHTIME);
-      if([[breakfunc]]()) {
+      if([
+          [breakfunc]
+        ]()) {
         break;
       }
     }
@@ -426,7 +430,7 @@ effect_soundalias() {
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
     for(i = 0; i < self.v["repeat"]; i++) {
-      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       self exploder_delay();
     }
     return;
@@ -498,7 +502,7 @@ fire_effect() {
   if(isDefined(firefxSound)) {
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
   }
-  playFX(level._effect[firefx], self.v["origin"], forward, up);
+  playfx(level._effect[firefx], self.v["origin"], forward, up);
 }
 
 trail_effect() {
@@ -508,12 +512,12 @@ trail_effect() {
   }
   temp_ent = undefined;
   if(self.v["trailfxtag"] == "tag_origin") {
-    playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
+    PlayFxOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
   } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
     temp_ent LinkTo(self.model);
-    playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, self.v["trailfxtag"]);
+    PlayFxOnTag(level._effect[self.v["trailfx"]], temp_ent, self.v["trailfxtag"]);
   }
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent)) {

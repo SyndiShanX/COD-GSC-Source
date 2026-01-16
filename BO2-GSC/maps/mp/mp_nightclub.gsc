@@ -28,11 +28,11 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_nightclub_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_nightclub");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -88,11 +88,10 @@ main() {
   spawncollision("collision_missile_32x32x128", "collider", (-17463.5, 1833, -30.5), (0, 48.7, 90));
   spawncollision("collision_physics_32x32x32", "collider", (-17251.5, 2908.5, 31), (0, 0, 0));
   spawncollision("collision_physics_32x32x32", "collider", (-17250.5, 2981, 31), (0, 0, 0));
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
-  foreach(destructible in destructibles) {
-    destructible thread car_sound_think();
-  }
+  foreach(destructible in destructibles)
+  destructible thread car_sound_think();
 }
 
 levelspawndvars(reset_dvars) {
@@ -102,5 +101,5 @@ levelspawndvars(reset_dvars) {
 
 car_sound_think() {
   self waittill("car_dead");
-  self playSound("exp_barrel");
+  self playsound("exp_barrel");
 }

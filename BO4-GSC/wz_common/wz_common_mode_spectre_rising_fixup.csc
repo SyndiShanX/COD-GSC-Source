@@ -5,6 +5,7 @@
 
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\wz_common_fixup;
+
 #namespace wz_common_mode_spectre_rising_fixup;
 
 autoexec __init__() {
@@ -20,7 +21,7 @@ function_b9962a73() {
     chests = getdynentarray("world_ammo_stash_blackjack");
 
     foreach(dynent in chests) {
-      add_helico(dynent, # "hash_6a582b37e8f152b4");
+      add_helico(dynent, #"hash_6a582b37e8f152b4");
     }
   }
 }
@@ -35,10 +36,10 @@ function_63ad593a() {
   var_edfbccd0 = &item_world_fixup::function_e70fa91c;
 
   if(isDefined(getgametypesetting(#"wzspectrerising")) && getgametypesetting(#"wzspectrerising")) {
-    wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, # "blackjack_ammo_stash_parent_placeholder", # "spectre_rising_stash");
+    wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"blackjack_ammo_stash_parent_placeholder", #"spectre_rising_stash");
 
     if(isDefined(getgametypesetting(#"wzenablespectregrenade")) && getgametypesetting(#"wzenablespectregrenade")) {
-      wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "smoke_grenade_wz_item", # "spectre_grenade_wz_item");
+      wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"smoke_grenade_wz_item", #"spectre_grenade_wz_item");
     }
   }
 }

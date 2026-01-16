@@ -39,7 +39,7 @@ init() {
   level._jolie_greet_array = array(level._osc_flags[4], level._osc_flags[5], level._osc_flags[6], level._osc_flags[7]);
   level._osc_st = getstructarray("struct_osc_st", "targetname");
   for(k = 0; k < level._osc_st.size; k++) {
-    level._osc_st[k].focus = spawnStruct();
+    level._osc_st[k].focus = SpawnStruct();
     level._osc_st[k].focus.origin = level._osc_st[k].origin;
     level._osc_st[k].focus.radius = 48;
     level._osc_st[k].focus.height = 48;
@@ -83,7 +83,7 @@ osc_button_cover_setup() {
     level._osc_rbs[i].cover waittill("rotatedone");
     level._osc_rbs[i].cover_open = level._osc_rbs[i].cover.angles;
     level._osc_rbs[i].cover.angles = level._osc_rbs[i].cover_close;
-    level._osc_rbs[i].jolie = spawnStruct();
+    level._osc_rbs[i].jolie = SpawnStruct();
     level._osc_rbs[i].jolie.origin = level._osc_rbs[i].origin;
     level._osc_rbs[i].jolie.radius = 48;
     level._osc_rbs[i].jolie.height = 48;
@@ -141,8 +141,8 @@ moon_rb_dist_think() {
 
 rb_cover_sound() {
   for(i = 0; i < level._osc_rbs.size; i++) {
-    level._osc_rbs[i].cover playSound("evt_sq_rbs_close");
-    level._osc_rbs[i].cover playSound("vox_mcomp_quest_step3_0", "sounddone");
+    level._osc_rbs[i].cover playsound("evt_sq_rbs_close");
+    level._osc_rbs[i].cover playsound("vox_mcomp_quest_step3_0", "sounddone");
   }
   level._osc_rbs[0].cover waittill("sounddone");
   level thread play_rb_cover_player_vox(self);
@@ -226,8 +226,8 @@ moon_jolie_access(ent_hacker) {
     random_array[j].focus._light = spawn("script_model", random_array[j].focus._light_spot.origin);
     random_array[j].focus._light.angles = random_array[j].focus._light_spot.angles;
     random_array[j].focus._light setModel("zombie_trap_switch_light_on_green");
-    playFXOnTag(level._effect["terminal_ready"], random_array[j].focus._light, "tag_origin");
-    random_array[j].focus._light playSound("evt_sq_rbs_light_on");
+    PlayFXOnTag(level._effect["terminal_ready"], random_array[j].focus._light, "tag_origin");
+    random_array[j].focus._light playsound("evt_sq_rbs_light_on");
     random_array[j].focus._light playLoopSound("evt_sq_rbs_light_loop", 1);
     maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(random_array[j].focus, ::moon_jolie_work);
   }
@@ -239,7 +239,7 @@ moon_jolie_access(ent_hacker) {
 moon_jolie_work(ent_hacker) {
   level._osc_terms++;
   if(isDefined(self._light)) {
-    self._light playSound("evt_sq_rbs_light_off");
+    self._light playsound("evt_sq_rbs_light_off");
     self._light Delete();
   }
   if(level._osc_terms < 4) {
@@ -282,22 +282,22 @@ moon_jolie_timer_vox() {
       return;
     }
     if(i == 50) {
-      playon playSound("vox_mcomp_quest_step3_2");
+      playon playsound("vox_mcomp_quest_step3_2");
     }
     if(i == 40) {
-      playon playSound("vox_mcomp_quest_step3_3");
+      playon playsound("vox_mcomp_quest_step3_3");
     }
     if(i == 30) {
-      playon playSound("vox_mcomp_quest_step3_4");
+      playon playsound("vox_mcomp_quest_step3_4");
     }
     if(i == 20) {
-      playon playSound("vox_mcomp_quest_step3_5");
+      playon playsound("vox_mcomp_quest_step3_5");
     }
     if(i == 10) {
-      playon playSound("vox_mcomp_quest_step3_6");
+      playon playsound("vox_mcomp_quest_step3_6");
     }
     if(i == 5) {
-      playon playSound("vox_mcomp_quest_step3_7");
+      playon playsound("vox_mcomp_quest_step3_7");
     }
     wait(1);
   }
@@ -366,10 +366,10 @@ moon_hit_reaction() {
     }
     if(is_player_valid(who)) {
       flag_set(level._osc_flags[8]);
-      self playSound("evt_sq_rbs_button");
+      self playsound("evt_sq_rbs_button");
       self._active = spawn("script_model", self.origin);
       self._active setModel("tag_origin");
-      playFXOnTag(level._effect["osc_button_glow"], self._active, "tag_origin");
+      PlayFXOnTag(level._effect["osc_button_glow"], self._active, "tag_origin");
       self._hit_already = 1;
       level._osc_release++;
     }
@@ -386,7 +386,7 @@ moon_keyhole() {
 hacker_debug(msg, color) {}
 play_moon_jolie_access_vox(who) {
   for(i = 0; i < level._osc_rbs.size; i++) {
-    level._osc_rbs[i].cover playSound("vox_mcomp_quest_step3_1", "rbs_sounddone");
+    level._osc_rbs[i].cover playsound("vox_mcomp_quest_step3_1", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");
   if(isDefined(who)) {
@@ -397,7 +397,7 @@ play_moon_jolie_access_vox(who) {
 play_moon_pass_vox(who) {
   playsoundatposition("vox_mcomp_quest_step5_26", self.origin);
   for(i = 0; i < level._osc_rbs.size; i++) {
-    level._osc_rbs[i].cover playSound("vox_mcomp_quest_step5_26", "rbs_sounddone");
+    level._osc_rbs[i].cover playsound("vox_mcomp_quest_step5_26", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");
   if(isDefined(who)) {
@@ -407,7 +407,7 @@ play_moon_pass_vox(who) {
 
 comp_fail_vox() {
   for(i = 0; i < level._osc_rbs.size; i++) {
-    level._osc_rbs[i].cover playSound("vox_mcomp_quest_step5_8", "rbs_sounddone");
+    level._osc_rbs[i].cover playsound("vox_mcomp_quest_step5_8", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");
   level._lid_close_sound = 0;

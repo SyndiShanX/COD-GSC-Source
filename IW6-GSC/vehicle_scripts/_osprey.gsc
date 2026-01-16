@@ -15,9 +15,8 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx("fx/explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::build_rocket_deathfx("fx/explosions/aerial_explosion_apache_mp", "tag_deathfx", "apache_helicopter_crash", undefined, undefined, undefined, undefined, 1, undefined, 0, 5);
 
-  if(var_2 == "script_vehicle_osprey_tailgunner") {
+  if(var_2 == "script_vehicle_osprey_tailgunner")
     maps\_vehicle::build_turret("osprey_tailgunner_turret", "tag_player_turret", "weapon_chinese_brave_warrior_turret", undefined, "manual", undefined, 0, 0, (128, 0, 16));
-  }
 
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
@@ -32,11 +31,10 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "white_blink_tail", "tag_light_tail", "fx/misc/aircraft_light_red_blink", "running", var_3);
   thread handle_landing();
 
-  if(var_2 == "script_vehicle_osprey_heli") {
+  if(var_2 == "script_vehicle_osprey_heli")
     maps\_vehicle::build_is_helicopter();
-  } else {
+  else
     maps\_vehicle::build_is_airplane();
-  }
 }
 
 handle_landing() {
@@ -84,9 +82,8 @@ init_local() {
   self notify("stop_kicking_up_dust");
   maps\_vehicle::vehicle_lights_on("running");
 
-  if(self.classname == "script_vehicle_osprey_heli") {
+  if(self.classname == "script_vehicle_osprey_heli")
     thread wings_up();
-  }
 }
 
 wings_up() {
@@ -113,9 +110,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 6; var_1++) {
+  for(var_1 = 0; var_1 < 6; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].idle[0] = % seaknight_pilot_idle;
   var_0[0].idle[1] = % seaknight_pilot_switches;

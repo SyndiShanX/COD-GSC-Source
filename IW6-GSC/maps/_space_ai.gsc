@@ -24,9 +24,8 @@ init_ai_space() {
   if(level.script == "loki") {
     setsaveddvar("ragdoll_max_life", 65000);
 
-    if(level.console) {
+    if(level.console)
       setsaveddvar("ai_corpseCount", 8);
-    }
 
     setsaveddvar("phys_gravity_ragdoll", 0);
     setsaveddvar("phys_gravity", 0);
@@ -68,9 +67,8 @@ enable_space() {
   init_ai_space_animsets();
   thread space_actor_lights();
 
-  if(!isDefined(anim.archetypes["soldier"]["swim"])) {
+  if(!isDefined(anim.archetypes["soldier"]["swim"]))
     init_space_anims();
-  }
 
   animscripts\swim::swim_begin();
   thread force_rotation_update_listener();
@@ -79,9 +77,8 @@ enable_space() {
 printturnrate() {
   self endon("death");
 
-  for(;;) {
+  for(;;)
     wait 0.05;
-  }
 }
 
 disable_space() {
@@ -591,9 +588,8 @@ init_space_anim_deltas(var_0, var_1, var_2) {
   var_4 = var_1 + "_angleDelta";
   var_5 = 1;
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_5 = var_2;
-  }
 
   anim.archetypes[var_0]["swim"][var_3] = [];
 
@@ -613,15 +609,13 @@ init_space_anim_deltas(var_0, var_1, var_2) {
       if(var_5) {
         var_12 = lengthsquared(var_11);
 
-        if(var_12 > var_8) {
+        if(var_12 > var_8)
           var_8 = var_12;
-        }
       }
     }
 
-    if(var_5) {
+    if(var_5)
       anim.archetypes[var_0]["swim"][var_1]["maxDelta"] = sqrt(var_8);
-    }
   }
 }
 
@@ -669,11 +663,10 @@ ai_space_pain() {
     var_0 = 27225;
     var_1 = vectordot(self.lookaheaddir, anglesToForward(self.angles));
 
-    if(distance2dsquared(self.origin, self.goalpos) > var_0 && var_1 > 0.5) {
+    if(distance2dsquared(self.origin, self.goalpos) > var_0 && var_1 > 0.5)
       var_2 = % space_pain_1;
-    } else {
+    else
       var_2 = common_scripts\utility::random([ % space_firing_pain_1, % space_firing_pain_2]);
-    }
 
     self orientmode("face motion");
   } else
@@ -682,18 +675,16 @@ ai_space_pain() {
   var_3 = 1;
   self setflaggedanimknoballrestart("painanim", var_2, % body, 1, 0.1, var_3);
 
-  if(self.a.pose == "prone") {
+  if(self.a.pose == "prone")
     self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
-  }
 
   if(animhasnotetrack(var_2, "start_aim")) {
     thread animscripts\pain::notifystartaim("painanim");
     self endon("start_aim");
   }
 
-  if(animhasnotetrack(var_2, "code_move")) {
+  if(animhasnotetrack(var_2, "code_move"))
     animscripts\shared::donotetracks("painanim");
-  }
 
   animscripts\shared::donotetracks("painanim");
 }
@@ -710,43 +701,39 @@ unlimited_ammo() {
 ai_space_death() {
   playFXOnTag(common_scripts\utility::getfx("bloodpool_zerog"), self, "j_spineupper");
 
-  if(!common_scripts\utility::flag("no_steam_on_death")) {
+  if(!common_scripts\utility::flag("no_steam_on_death"))
     playFXOnTag(common_scripts\utility::getfx("space_death_steam"), self, "J_Neck");
-  }
 
   var_0 = animscripts\pain::wasdamagedbyexplosive();
 
   if(!isDefined(self.deathanim) && var_0 && self.damagelocation == "none") {
-    if(self.damageyaw > 135 || self.damageyaw <= -135) {
+    if(self.damageyaw > 135 || self.damageyaw <= -135)
       self.deathanim = % space_explosion_death_b_1;
-    } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
+    else if(self.damageyaw > 45 && self.damageyaw <= 135)
       self.deathanim = % space_explosion_death_l_1;
-    } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
+    else if(self.damageyaw > -45 && self.damageyaw <= 45)
       self.deathanim = % space_explosion_death_f_1;
-    } else {
+    else
       self.deathanim = % space_explosion_death_r_1;
-    }
   }
 
   if(!isDefined(self.deathanim)) {
-    if(self.damageyaw > -60 && self.damageyaw <= 60) {
+    if(self.damageyaw > -60 && self.damageyaw <= 60)
       self.deathanim = % space_idle_death_behind;
-    } else if(self.a.movement == "run") {
+    else if(self.a.movement == "run")
       self.deathanim = % space_death_1;
-    } else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
+    else if(animscripts\utility::damagelocationisany("left_arm_upper"))
       self.deathanim = % space_firing_death_1;
-    } else if(animscripts\utility::damagelocationisany("head", "helmet")) {
+    else if(animscripts\utility::damagelocationisany("head", "helmet"))
       self.deathanim = % space_firing_death_2;
-    } else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
+    else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
       self.deathanim = % space_firing_death_3;
-    } else {
+    else
       self.deathanim = common_scripts\utility::random([ % space_firing_death_1, % space_firing_death_2, % space_firing_death_3]);
-    }
   }
 
-  if(!isDefined(self.nodeathsound) && !isDefined(self.diequietly)) {
+  if(!isDefined(self.nodeathsound) && !isDefined(self.diequietly))
     animscripts\death::playdeathsound();
-  }
 
   thread sfx_npc_death();
   thread ai_space_headshot_death();
@@ -759,19 +746,17 @@ ai_space_headshot_death() {
       playFXOnTag(common_scripts\utility::getfx("space_headshot"), self, "J_Head");
       self setModel(self.model + "_cracked");
 
-      if(gettimescale() < 0.5) {
+      if(gettimescale() < 0.5)
         self playSound("space_npc_helmet_shatter_slomo");
-      } else {
+      else
         self playSound("space_npc_helmet_shatter");
-      }
     }
   }
 }
 
 sfx_npc_death() {
-  if(level.play_npc_deaths == 1) {
+  if(level.play_npc_deaths == 1)
     self playSound("space_npc_death");
-  }
 }
 
 space_actor_lights() {
@@ -812,22 +797,19 @@ space_actor_lights() {
 space_actor_lights_kill(var_0, var_1) {
   common_scripts\utility::waittill_any("death", "faux_death");
 
-  if(isDefined(self) && maps\_utility::ent_flag("lights_on")) {
+  if(isDefined(self) && maps\_utility::ent_flag("lights_on"))
     killfxontag(var_0, self, var_1);
-  }
 
   var_2 = 0.15;
 
   for(var_3 = 0; var_3 < 5; var_3++) {
-    if(isDefined(self) && maps\_utility::ent_flag("lights_on")) {
+    if(isDefined(self) && maps\_utility::ent_flag("lights_on"))
       playFXOnTag(var_0, self, var_1);
-    }
 
     wait(var_2);
 
-    if(isDefined(self) && maps\_utility::ent_flag("lights_on")) {
+    if(isDefined(self) && maps\_utility::ent_flag("lights_on"))
       killfxontag(var_0, self, var_1);
-    }
 
     wait(var_2);
   }
@@ -841,9 +823,8 @@ space_blood() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(var_4 != "MOD_EXPLOSIVE") {
-      if(var_2 != (0, 0, 0)) {
+      if(var_2 != (0, 0, 0))
         playFX(common_scripts\utility::getfx("blood_impact_space"), var_3, var_2);
-      }
     }
   }
 }
@@ -865,9 +846,8 @@ glint_behavior() {
 
   for(;;) {
     if(self.weapon == self.primaryweapon && animscripts\combat_utility::player_sees_my_scope() && isDefined(self.enemy)) {
-      if(distancesquared(self.origin, self.enemy.origin) > 65536) {
+      if(distancesquared(self.origin, self.enemy.origin) > 65536)
         playFXOnTag(var_0, self, "tag_eye");
-      }
 
       var_1 = randomfloatrange(3, 5);
       wait(var_1);
@@ -881,9 +861,8 @@ doing_in_space_rotation(var_0, var_1, var_2, var_3) {
   self endon("stop_rotation");
   self endon("death");
 
-  if(isDefined(var_3) && var_3 == 1) {
+  if(isDefined(var_3) && var_3 == 1)
     self.turnrate = animscripts\swim::space_getorientturnrate();
-  }
 
   if(isDefined(var_2) && var_2 > 1) {
     for(var_4 = 0; var_4 < var_2; var_4++) {
@@ -900,9 +879,8 @@ doing_in_space_rotation(var_0, var_1, var_2, var_3) {
 
     for(;;) {
       if(gettime() > var_6 + var_7 || angles_within(var_1, 15, 15, 15)) {
-        if(self.turnrate == animscripts\swim::space_getorientturnrate()) {
+        if(self.turnrate == animscripts\swim::space_getorientturnrate())
           self.turnrate = animscripts\swim::space_getdefaultturnrate();
-        }
 
         return;
       }
@@ -927,21 +905,20 @@ force_actor_upright() {
 
 force_actor_space_rotation_update(var_0, var_1, var_2) {
   if(isDefined(var_0) && var_0) {
-    if(!isDefined(self.nextforceorienttime) || gettime() < self.nextforceorienttime) {
+    if(!isDefined(self.nextforceorienttime) || gettime() < self.nextforceorienttime)
       return;
-    }
   }
 
   var_3 = (0, 0, 0);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_3 = var_2;
-  } else if(isDefined(self.node)) {
+  else if(isDefined(self.node)) {
     var_3 = animscripts\utility::gettruenodeangles(self.node);
 
-    if((self.node.type == "Cover Right 3D" || self.node.type == "Cover Left 3D") && isDefined(self.hideyawoffset)) {
+    if((self.node.type == "Cover Right 3D" || self.node.type == "Cover Left 3D") && isDefined(self.hideyawoffset))
       var_3 = combineangles(var_3, (0, self.hideyawoffset, 0));
-    } else if(!isDefined(self.hideyawoffset)) {
+    else if(!isDefined(self.hideyawoffset)) {
       if(self.node.type == "Cover Left 3D") {
         var_4 = anim.archetypes["soldier"]["swim"]["arrival_cover_corner_l_angleDelta"][4][4];
         var_3 = combineangles(var_3, (0, var_4[1], 0));
@@ -953,15 +930,13 @@ force_actor_space_rotation_update(var_0, var_1, var_2) {
   } else
     return;
 
-  if(isDefined(var_1) && var_1) {
+  if(isDefined(var_1) && var_1)
     doing_in_space_rotation(self.angles, var_3, 1);
-  } else {
+  else
     thread doing_in_space_rotation(self.angles, var_3, 1);
-  }
 
-  if(isDefined(self.nextforceorienttime)) {
+  if(isDefined(self.nextforceorienttime))
     self.nextforceorienttime = gettime() + 6500;
-  }
 }
 
 force_rotation_update_listener() {
@@ -982,9 +957,8 @@ force_rotation_update_listener() {
 angles_within(var_0, var_1, var_2, var_3) {
   if(self.angles[0] < var_0[0] + var_1 && self.angles[0] > var_0[0] - var_1) {
     if(self.angles[1] < var_0[1] + var_2 && self.angles[1] > var_0[1] - var_2) {
-      if(self.angles[2] < var_0[2] + var_3 && self.angles[2] > var_0[2] - var_3) {
+      if(self.angles[2] < var_0[2] + var_3 && self.angles[2] > var_0[2] - var_3)
         return 1;
-      }
     }
   }
 

@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weapons;
+
 #namespace pickup_items;
 
 autoexec __init__system__() {
@@ -38,7 +39,7 @@ start_gametype() {
     visuals[0] = get_visual_for_trigger(trigger, pickup_models);
     assert(isDefined(visuals[0]));
     visuals[0] pickup_item_init();
-    pickup_item_object = gameobjects::create_use_object(#"neutral", trigger, visuals, (0, 0, 32), # "pickup_item");
+    pickup_item_object = gameobjects::create_use_object(#"neutral", trigger, visuals, (0, 0, 32), #"pickup_item");
     pickup_item_object gameobjects::allow_use(#"any");
     pickup_item_object gameobjects::set_use_time(0);
     pickup_item_object.onuse = &on_touch;
@@ -119,9 +120,10 @@ get_item_from_string_perk(perks_string) {
   item_struct = spawnStruct();
 
   if(!isDefined(level.perkspecialties[perks_string])) {
+
     util::error("<dev string:x38>" + perks_string + "<dev string:x4d>" + self.origin);
 
-    return;
+      return;
   }
 
   item_struct.name = perks_string;
@@ -145,15 +147,15 @@ get_item_from_string_weapon(weapon_and_attachments_string) {
 
 get_item_from_string(item_string) {
   switch (self.script_noteworthy) {
-    case # "ammo":
+    case #"ammo":
       return self get_item_from_string_ammo(item_string);
-    case # "damage":
+    case #"damage":
       return self get_item_from_string_damage(item_string);
-    case # "health":
+    case #"health":
       return self get_item_from_string_health(item_string);
-    case # "perk":
+    case #"perk":
       return self get_item_from_string_perk(item_string);
-    case # "weapon":
+    case #"weapon":
       return self get_item_from_string_weapon(item_string);
   }
 }
@@ -172,45 +174,45 @@ init_items_for_pickup() {
 
 pickup_item_respawn_time() {
   switch (self.script_noteworthy) {
-    case # "ammo":
+    case #"ammo":
       return 10;
-    case # "damage":
+    case #"damage":
       return 60;
-    case # "health":
+    case #"health":
       return 10;
-    case # "perk":
+    case #"perk":
       return 10;
-    case # "weapon":
+    case #"weapon":
       return 30;
   }
 }
 
 pickup_item_sound_pickup() {
   switch (self.script_noteworthy) {
-    case # "ammo":
+    case #"ammo":
       return "wpn_ammo_pickup_oldschool";
-    case # "damage":
+    case #"damage":
       return "wpn_weap_pickup_oldschool";
-    case # "health":
+    case #"health":
       return "wpn_weap_pickup_oldschool";
-    case # "perk":
+    case #"perk":
       return "wpn_weap_pickup_oldschool";
-    case # "weapon":
+    case #"weapon":
       return "wpn_weap_pickup_oldschool";
   }
 }
 
 pickup_item_sound_respawn() {
   switch (self.script_noteworthy) {
-    case # "ammo":
+    case #"ammo":
       return "wpn_ammo_pickup_oldschool";
-    case # "damage":
+    case #"damage":
       return "wpn_weap_pickup_oldschool";
-    case # "health":
+    case #"health":
       return "wpn_weap_pickup_oldschool";
-    case # "perk":
+    case #"perk":
       return "wpn_weap_pickup_oldschool";
-    case # "weapon":
+    case #"weapon":
       return "wpn_weap_pickup_oldschool";
   }
 }
@@ -231,19 +233,19 @@ on_touch(player) {
   pickup_item = self.visuals[0];
 
   switch (pickup_item.script_noteworthy) {
-    case # "ammo":
+    case #"ammo":
       pickup_item on_touch_ammo(player);
       break;
-    case # "damage":
+    case #"damage":
       pickup_item on_touch_damage(player);
       break;
-    case # "health":
+    case #"health":
       pickup_item on_touch_health(player);
       break;
-    case # "perk":
+    case #"perk":
       pickup_item on_touch_perk(player);
       break;
-    case # "weapon":
+    case #"weapon":
       if(!pickup_item on_touch_weapon(player)) {
         return;
       }

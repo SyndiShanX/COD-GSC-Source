@@ -43,11 +43,10 @@ main() {
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
 
   //MinSpec Spotlight
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
-  } else {
+  else
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");
-  }
 
   level._effect["planecrash_spotlight"] = loadfx("misc/dcemp_planecrash_spotlight_model");
   level._effect["dcemp_nuke_spotlight_fade"] = loadfx("misc/dcemp_nuke_spotlight_fade");
@@ -69,7 +68,7 @@ main() {
   level._effect["helicopter_explosion"] = loadfx("explosions/helicopter_explosion_dcemp");
   level._effect["small_vehicle_explosion"] = loadfx("explosions/small_vehicle_explosion");
 
-  //CRASH SCENE FX
+  //CRASH SCENE FX 
   level._effect["window_fire_large"] = loadfx("fire/window_fire_large");
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
@@ -209,7 +208,7 @@ footstep_fx() {
   animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"concrete",	loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
   animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"asphalt",	loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
   animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"rock",		loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
-  	
+	
   animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"dirt",		loadfx ( "impacts/bodyfall_dust_large_runner" ), "bodyfall_", "_large" );
   animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"concrete",	loadfx ( "impacts/bodyfall_default_large_runner" ), "bodyfall_", "_large" );
   animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"asphalt",	loadfx ( "impacts/bodyfall_default_large_runner" ), "bodyfall_", "_large" );
@@ -237,20 +236,18 @@ footstep_fx() {
 }
 
 parking_lightning(brightness) {
-  if(!flag("spotlight_lightning")) {
+  if(!flag("spotlight_lightning"))
     return;
-  }
-  lights = getEntArray("parking_lighting_primary", "script_noteworthy");
+  lights = getentarray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setLightIntensity, brightness);
 
   thread maps\_utility::set_vision_set("dcemp_parking_lightning", 0);
 }
 
 parking_lightning_reset() {
-  if(!flag("spotlight_lightning")) {
+  if(!flag("spotlight_lightning"))
     return;
-  }
-  lights = getEntArray("parking_lighting_primary", "script_noteworthy");
+  lights = getentarray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setLightIntensity, 0);
 
   thread maps\_utility::set_vision_set("dcemp_parking", .5);
@@ -260,17 +257,15 @@ lightning_flash(dir) {
   level notify("emp_lighting_flash");
   level endon("emp_lighting_flash");
 
-  if(level.createFX_enabled) {
+  if(level.createFX_enabled)
     return;
-  }
 
   num = randomintrange(1, 4);
 
-  if(!isDefined(dir)) {
+  if(!isdefined(dir))
     dir = (-20, 60, 0);
-  }
 
-  for(i = 0; i < num; i++) {
+  for (i = 0; i < num; i++) {
     type = randomint(3);
     switch (type) {
       case 0:

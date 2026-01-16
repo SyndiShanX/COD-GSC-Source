@@ -42,9 +42,9 @@ quad_roof_crumble_fx_play() {
 
 play_quad_first_sounds() {
   location = getstruct(self.target, "targetname");
-  self playSound("zmb_vocals_quad_spawn", "sounddone");
+  self PlaySound("zmb_vocals_quad_spawn", "sounddone");
   self waittill("sounddone");
-  self playSound("zmb_quad_roof_hit");
+  self PlaySound("zmb_quad_roof_hit");
   thread play_wood_land_sound(location.origin);
 }
 
@@ -88,16 +88,15 @@ quad_roof_fx_play() {
 quad_traverse_death_fx() {
   self endon("quad_end_traverse_anim");
   self waittill("death");
-  playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
+  playfx(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
 
 begin_quad_introduction(quad_round_name) {
   if(flag("dog_round")) {
     flag_clear("dog_round");
   }
-  if(level.next_dog_round == (level.round_number + 1)) {
+  if(level.next_dog_round == (level.round_number + 1))
     level.next_dog_round++;
-  }
   level.zombie_total = 0;
   level.quad_round_name = quad_round_name;
 }
@@ -185,9 +184,8 @@ Intro_Quad_spawn() {
     return;
   }
   while(1) {
-    if(isDefined(level.delay_spawners)) {
+    if(isDefined(level.delay_spawners))
       manage_zombie_spawn_delay(timer);
-    }
     level.delay_spawners = true;
     spawn_a_quad_zombie(initial_spawners);
     wait(0.2);

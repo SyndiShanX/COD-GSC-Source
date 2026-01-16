@@ -17,13 +17,14 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_orange_util;
 
 init() {
   level.var_45b0f2f3 = &function_e43bea18;
   level.var_210f9911 = &function_e162fac3;
   level.var_8c164439 = [];
-  level.var_8c164439[# "hash_1242b7914448ebc7"] = # "hash_3708586aed65f7b7";
+  level.var_8c164439[#"hash_1242b7914448ebc7"] = #"hash_3708586aed65f7b7";
   level.var_1c53964e = spawn("script_origin", (0, 0, 0));
   level.var_1c53964e.name = "plr_7";
   level.var_1c53964e.isspeaking = 0;
@@ -60,9 +61,9 @@ function_583cad13(var_2753f06a) {
     e_player = a_players[0];
 
     if(var_2753f06a == 0) {
-      str_suffix = # "vox_solo_game_start_" + var_5316ea7d;
+      str_suffix = #"vox_solo_game_start_" + var_5316ea7d;
     } else {
-      str_suffix = # "vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
+      str_suffix = #"vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
     }
 
     b_played = e_player zm_vo::function_a2bd5a0c(str_suffix, 0, 1);
@@ -130,13 +131,13 @@ private on_connect() {
     self thread function_2e565334();
   }
 
-  self zm_audio::function_6191af93(#"surrounded", # "self", # "oh", # "shit", 100);
-  self zm_audio::function_6191af93(#"general", # "crawl_spawn", # "general", # "crawl_seen", 100);
-  self zm_audio::function_6191af93(#"magicbox", # "homunculus", # "magicbox", # "monkey", 100);
-  self zm_audio::function_6191af93(#"kill", # "homunculus", # "kill", # "monkey", 100);
-  self zm_audio::function_87714659(&function_e08cd7b, # "roundstart", # "special");
+  self zm_audio::function_6191af93(#"surrounded", #"self", #"oh", #"shit", 100);
+  self zm_audio::function_6191af93(#"general", #"crawl_spawn", #"general", #"crawl_seen", 100);
+  self zm_audio::function_6191af93(#"magicbox", #"homunculus", #"magicbox", #"monkey", 100);
+  self zm_audio::function_6191af93(#"kill", #"homunculus", #"kill", #"monkey", 100);
+  self zm_audio::function_87714659(&function_e08cd7b, #"roundstart", #"special");
   level flag::wait_till(#"music_box_first_use");
-  self zm_audio::function_6191af93(#"kill", # "music_box", # "post_kill", # "music_box", 100);
+  self zm_audio::function_6191af93(#"kill", #"music_box", #"post_kill", #"music_box", 100);
 }
 
 function_2e565334() {
@@ -144,7 +145,7 @@ function_2e565334() {
   self endon(#"disconnect");
 
   while(true) {
-    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === # "hash_1242b7914448ebc7") {
+    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === #"hash_1242b7914448ebc7") {
       while(!isDefined(self.var_4377124)) {
         wait 0.1;
       }
@@ -191,7 +192,7 @@ function_51b752a9(str_alias, n_variant = int(-1), b_wait_if_busy = 0, var_a97d4e
   }
 
   level endon(#"game_ended");
-  self endon(#"player_downed", # "death", # "disconnect");
+  self endon(#"player_downed", #"death", #"disconnect");
 
   if(!zm_utility::is_player_valid(self)) {
     return;
@@ -280,8 +281,8 @@ function_fd24e47f(str_alias, n_variant = int(-1), b_wait_if_busy = 0, var_a97d4e
 }
 
 function_865209df(category, flag, delay = 2, var_ba54b77d = -1, n_range = 800, var_618a04 = 0) {
-  subcategory = # "react";
-  self endon(#"death", # "dynamited");
+  subcategory = #"react";
+  self endon(#"death", #"dynamited");
   b_flag = level flag::get(flag);
 
   if(b_flag) {
@@ -344,17 +345,17 @@ function_e43bea18(var_11975e15) {
   str_weapon = undefined;
 
   switch (var_11975e15) {
-    case # "snowball_upgraded":
-    case # "snowball":
-    case # "snowball_yellow_upgraded":
-    case # "snowball_yellow":
-      str_weapon = # "snowball";
+    case #"snowball_upgraded":
+    case #"snowball":
+    case #"snowball_yellow_upgraded":
+    case #"snowball_yellow":
+      str_weapon = #"snowball";
       break;
-    case # "hash_a2556a2905fd952":
-      str_weapon = # "matryoshka";
+    case #"hash_a2556a2905fd952":
+      str_weapon = #"matryoshka";
       break;
-    case # "music_box":
-      str_weapon = # "music_box";
+    case #"music_box":
+      str_weapon = #"music_box";
       break;
   }
 
@@ -363,13 +364,13 @@ function_e43bea18(var_11975e15) {
 
 function_e162fac3(weapon, str_vo_line) {
   if(weapon === getweapon(#"ww_tesla_sniper_t8")) {
-    return # "tempest";
+    return #"tempest";
   } else if(weapon === getweapon(#"thundergun")) {
-    return # "thundergun";
+    return #"thundergun";
   } else if(weapon === getweapon(#"tundragun")) {
-    return # "tundragun";
+    return #"tundragun";
   } else if(weapon === getweapon(#"eq_nesting_doll_grenade")) {
-    return # "matryoshka";
+    return #"matryoshka";
   }
 
   return str_vo_line;
@@ -486,14 +487,14 @@ function_adb657dd(e_player) {
 
   if(isDefined(w_take)) {
     if(function_5cd05b9(w_take, w_give)) {
-      self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", # "hash_39d6b1ad0b94f111"));
+      self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", #"hash_39d6b1ad0b94f111"));
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", # "hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
+      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
     }
-  } else if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
+  } else if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
     return false;
   } else {
-    self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", # "hash_6831cfd35264e1"), w_give.displayname);
+    self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);
   }
 
   return true;
@@ -565,8 +566,8 @@ function_8a4b7d4a(weapon) {
 }
 
 function_afbd7223(oldweapondata, newweapondata) {
-  w_current = oldweapondata[# "weapon"];
-  var_2153c223 = newweapondata[# "weapon"];
+  w_current = oldweapondata[#"weapon"];
+  var_2153c223 = newweapondata[#"weapon"];
 
   if(isinarray(level.var_65b6264d, w_current) && isinarray(level.var_65b6264d, var_2153c223)) {
     weapondata = [];
@@ -574,14 +575,14 @@ function_afbd7223(oldweapondata, newweapondata) {
 
     foreach(w_test in a_w_test) {
       if(w_current == w_test || var_2153c223 == w_test) {
-        weapondata[# "weapon"] = w_test;
+        weapondata[#"weapon"] = w_test;
         break;
       }
     }
 
-    var_a0bd414d = weapondata[# "weapon"];
-    weapondata[# "clip"] = int(min(newweapondata[# "clip"] + oldweapondata[# "clip"], var_a0bd414d.clipsize));
-    weapondata[# "stock"] = int(min(newweapondata[# "stock"] + oldweapondata[# "stock"], var_a0bd414d.maxammo));
+    var_a0bd414d = weapondata[#"weapon"];
+    weapondata[#"clip"] = int(min(newweapondata[#"clip"] + oldweapondata[#"clip"], var_a0bd414d.clipsize));
+    weapondata[#"stock"] = int(min(newweapondata[#"stock"] + oldweapondata[#"stock"], var_a0bd414d.maxammo));
     return weapondata;
   }
 }

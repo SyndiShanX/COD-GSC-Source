@@ -11,9 +11,8 @@ makeType(destructibleType) {
 
   // if it's already been created dont create it again
   infoIndex = getInfoIndex(destructibleType);
-  if(infoIndex >= 0) {
+  if(infoIndex >= 0)
     return infoIndex;
-  }
 
   switch (destructibleType) {
     case "toy_glass120x110":
@@ -461,17 +460,14 @@ makeType(destructibleType) {
 }
 
 getInfoIndex(destructibleType) {
-  if(!isDefined(level.destructible_type)) {
+  if(!isdefined(level.destructible_type))
     return -1;
-  }
-  if(level.destructible_type.size == 0) {
+  if(level.destructible_type.size == 0)
     return -1;
-  }
 
-  for(i = 0; i < level.destructible_type.size; i++) {
-    if(destructibleType == level.destructible_type[i].v["type"]) {
+  for (i = 0; i < level.destructible_type.size; i++) {
+    if(destructibleType == level.destructible_type[i].v["type"])
       return i;
-    }
   }
 
   // didn't find it in the array, must not exist
@@ -538,7 +534,7 @@ toy_tvs_flatscreen(version, mounting) {
 
 toy_transformer_ratnest01(destructibleType) {
   //---------------------------------------------------------------------
-  // Transformer w/ wires for Favela
+  // Transformer w/ wires for Favela 
   //---------------------------------------------------------------------
   destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
@@ -565,7 +561,7 @@ toy_transformer_ratnest01(destructibleType) {
 
 toy_transformer_small01(destructibleType) {
   //---------------------------------------------------------------------
-  // Small hanging Transformer box for Favela
+  // Small hanging Transformer box for Favela 
   //---------------------------------------------------------------------
   destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
@@ -649,7 +645,7 @@ toy_generator_on(destructibleType) {
 
 toy_oxygen_tank(version) {
   //---------------------------------------------------------------------
-  // Oxygen Tanks 01 and 02
+  // Oxygen Tanks 01 and 02 
   //---------------------------------------------------------------------
   destructible_create("toy_oxygen_tank_" + version, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_healthdrain(12, 0.2, 64, "allies");
@@ -678,6 +674,7 @@ toy_electricbox2(destructibleType) {
 
   // door upper
   destructible_part("tag_door_upper", "me_electricbox2_door_upper", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_electricbox4(destructibleType) {
@@ -780,6 +777,7 @@ toy_propane_tank02(destructibleType) {
   destructible_part("tag_valve", "com_propane_tank02_valve");
   // Top Cap
   destructible_part("tag_cap", "com_propane_tank02_cap");
+
 }
 
 toy_propane_tank02_small(destructibleType) {
@@ -817,6 +815,7 @@ toy_propane_tank02_small(destructibleType) {
   destructible_part("tag_valve", "com_propane_tank02_small_valve");
   // Top Cap
   destructible_part("tag_cap", "com_propane_tank02_small_cap");
+
 }
 
 toy_copier(destructibleType) {
@@ -846,6 +845,7 @@ toy_copier(destructibleType) {
   destructible_part("tag_right_shelf", "prop_photocopier_destroyed_right_shelf", 4, undefined, undefined, undefined, 1.0, 1.0);
   // top cover
   destructible_part("tag_top", "prop_photocopier_destroyed_top", 4, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_firehydrant(destructibleType) {
@@ -898,6 +898,7 @@ toy_mailbox(destructibleType) {
   destructible_state("tag_origin", "com_mailbox_dam");
   destructible_part("tag_door", "com_mailbox_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
   destructible_part("tag_flag", "com_mailbox_flag", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_mailbox2(color) {
@@ -947,6 +948,7 @@ toy_newspaper_stand_blue(destructibleType) {
 
   // front door
   destructible_part("tag_door", "com_newspaperbox_blue_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_filecabinet(destructibleType) {
@@ -964,6 +966,7 @@ toy_filecabinet(destructibleType) {
 
   // front door
   destructible_part("tag_drawer_upper", "com_filecabinetblackclosed_drawer", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_trashbin_01(destructibleType) {
@@ -979,6 +982,7 @@ toy_trashbin_01(destructibleType) {
   destructible_state(undefined, "com_trashbin01_dmg", undefined, undefined, undefined, undefined, undefined, false);
 
   destructible_part("tag_fx", "com_trashbin01_lid", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_trashbin_02(destructibleType) {
@@ -994,6 +998,7 @@ toy_trashbin_02(destructibleType) {
   destructible_state(undefined, "com_trashbin02_dmg", undefined, undefined, undefined, undefined, undefined, false);
 
   destructible_part("tag_fx", "com_trashbin02_lid", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_recyclebin_01(destructibleType) {
@@ -1009,6 +1014,7 @@ toy_recyclebin_01(destructibleType) {
   destructible_state(undefined, "com_recyclebin01_dmg", undefined, undefined, undefined, undefined, undefined, false);
 
   destructible_part("tag_fx", "com_recyclebin01_lid", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_trashcan_metal_closed(destructibleType) {
@@ -1051,6 +1057,7 @@ toy_foliage_tree_oak_1(destructibleType) {
   destructible_explode(600, 651, 1, 1, 10, 20); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage
 
   destructible_state(undefined, "foliage_tree_oak_1_destroyed_trunk", undefined, undefined, undefined, undefined, undefined, false);
+
 }
 
 toy_usa_gas_station_trash_bin_01(destructibleType) {
@@ -1065,6 +1072,7 @@ toy_usa_gas_station_trash_bin_01(destructibleType) {
   destructible_state(undefined, "usa_gas_station_trash_bin_01_base", undefined, undefined, undefined, undefined, undefined, false);
 
   destructible_part("tag_fx", "usa_gas_station_trash_bin_01_lid", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_usa_gas_station_trash_bin_02(destructibleType) {
@@ -1079,6 +1087,7 @@ toy_usa_gas_station_trash_bin_02(destructibleType) {
   destructible_state(undefined, "usa_gas_station_trash_bin_02_base", undefined, undefined, undefined, undefined, undefined, false);
 
   destructible_part("tag_fx_high", "usa_gas_station_trash_bin_02_lid", undefined, undefined, undefined, undefined, 1.0, 1.0);
+
 }
 
 toy_light_ceiling_round(destructibleType) {
@@ -1107,13 +1116,14 @@ toy_light_ceiling_fluorescent(destructibleType) {
   destructible_anim(get_precached_anim("light_fluorescent_swing"), #animtree, "setanimknob", undefined, 0, "light_fluorescent_swing");
   destructible_sound("fluorescent_light_fall", undefined, 0);
   destructible_sound("fluorescent_light_bulb", undefined, 0);
-  //destructible_sound( "fluorescent_light_spark", undefined, 0);
+  //destructible_sound( "fluorescent_light_spark", undefined, 0); 
   destructible_anim(get_precached_anim("light_fluorescent_swing_02"), #animtree, "setanimknob", undefined, 1, "light_fluorescent_swing_02");
   destructible_sound("fluorescent_light_fall", undefined, 1);
   destructible_sound("fluorescent_light_bulb", undefined, 1);
-  //destructible_sound( "fluorescent_light_spark", undefined, 1);
+  //destructible_sound( "fluorescent_light_spark", undefined, 1); 
   destructible_anim(get_precached_anim("light_fluorescent_null"), #animtree, "setanimknob", undefined, 2, "light_fluorescent_null");
   destructible_state(undefined, "me_lightfluohang_double_destroyed", undefined, undefined, "no_melee");
+
 }
 
 toy_light_ceiling_fluorescent_spotlight(destructibleType) {
@@ -1132,7 +1142,7 @@ toy_light_ceiling_fluorescent_spotlight(destructibleType) {
   destructible_anim(get_precached_anim("light_fluorescent_swing"), #animtree, "setanimknob", undefined, 0, "light_fluorescent_swing");
   destructible_sound("fluorescent_light_fall", undefined, 0);
   destructible_sound("fluorescent_light_bulb", undefined, 0);
-  //destructible_sound( "fluorescent_light_spark", undefined, 0);
+  //destructible_sound( "fluorescent_light_spark", undefined, 0); 
   destructible_spotlight("tag_swing_r_far");
   destructible_sound("fluorescent_light_fall");
   destructible_state(undefined, "me_lightfluohang_double_destroyed", undefined, undefined, "no_melee");
@@ -1152,15 +1162,15 @@ toy_light_ceiling_fluorescent_single(destructibleType) {
   destructible_anim(get_precached_anim("light_fluorescent_single_swing"), #animtree, "setanimknob", undefined, 0, "light_fluorescent_single_swing");
   destructible_sound("fluorescent_light_fall", undefined, 0);
   destructible_sound("fluorescent_light_bulb", undefined, 0);
-  //destructible_sound( "fluorescent_light_spark", undefined, 0);
+  //destructible_sound( "fluorescent_light_spark", undefined, 0); 
   destructible_anim(get_precached_anim("light_fluorescent_single_swing_02"), #animtree, "setanimknob", undefined, 1, "light_fluorescent_single_swing_02");
   destructible_sound("fluorescent_light_hinge", undefined, 1);
   destructible_sound("fluorescent_light_bulb", undefined, 1);
-  //destructible_sound( "fluorescent_light_spark", undefined, 1);
+  //destructible_sound( "fluorescent_light_spark", undefined, 1); 
   destructible_anim(get_precached_anim("light_fluorescent_single_swing_03"), #animtree, "setanimknob", undefined, 2, "light_fluorescent_single_swing_03");
   destructible_sound("fluorescent_light_fall", undefined, 2);
   destructible_sound("fluorescent_light_bulb", undefined, 2);
-  //destructible_sound( "fluorescent_light_spark", undefined, 2);
+  //destructible_sound( "fluorescent_light_spark", undefined, 2); 
   destructible_anim(get_precached_anim("light_fluorescent_single_null"), #animtree, "setanimknob", undefined, 3, "light_fluorescent_single_null");
   destructible_state(undefined, "me_lightfluohang_single_destroyed", undefined, undefined, "no_melee");
 }
@@ -1174,7 +1184,7 @@ toy_light_ceiling_fluorescent_single_spotlight(destructibleType) {
   destructible_splash_damage_scaler(15);
   destructible_lights_out(16);
   destructible_sound("fluorescent_light_bulb");
-  //destructible_sound( "fluorescent_light_spark" ); //played in effect
+  //destructible_sound( "fluorescent_light_spark" ); //played in effect 
   destructible_fx("tag_fx", "misc/light_fluorescent_single_blowout_runner");
   destructible_fx("tag_swing_center_fx", "misc/light_blowout_swinging_runner");
   destructible_fx("tag_swing_center_fx_far", "misc/light_blowout_swinging_runner");
@@ -1195,7 +1205,7 @@ toy_bookstore_bookstand4_books(destructibleType) {
   //destructible_sound( "copier_exp" );
   destructible_state(undefined, "bookstore_bookstand4", 100, undefined, undefined, "splash");
   destructible_fx("tag_fx", "props/bookshelf4_des", true, "splash");
-  destructible_explode(2000, 3800, 32, 32, 1, 5, undefined, 0); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage, continueDamage, originOffset, earthQuakeScale, earthQuakeRadius
+  destructible_explode(2000, 3800, 32, 32, 1, 5, undefined, 0); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage, continueDamage, originOffset, earthQuakeScale, earthQuakeRadius 
   destructible_state(undefined, "bookstore_bookstand4_null", undefined, undefined, undefined, undefined, undefined, false);
 }
 
@@ -1380,6 +1390,7 @@ vehicle_bus_destructible() {
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
+
 }
 
 vehicle_80s_sedan1(color) {
@@ -2976,6 +2987,7 @@ destructible_gaspump(destructibleType) {
   destructible_sound("exp_gaspump_sparks");
   destructible_fx("tag_panel_back03", "props/electricbox4_explode");
   destructible_physics();
+
 }
 
 destructible_electrical_transformer_large(destructibleType) {
@@ -3038,11 +3050,12 @@ destructible_electrical_transformer_large(destructibleType) {
   destructible_loopsound("electrical_transformer_sparks");
   destructible_fx("tag_door7", "props/electricbox4_explode");
   destructible_physics();
+
 }
 
 get_precached_anim(animname) {
   println(animname);
-  assertEX(isDefined(level._destructible_preanims) && isDefined(level._destructible_preanims[animname]), "Can't find destructible anim: " + animname + " check the Build Precache Scripts and Repackage Zone boxes In launcher when you compile your map. ");
+  assertEX(isdefined(level._destructible_preanims) && isdefined(level._destructible_preanims[animname]), "Can't find destructible anim: " + animname + " check the Build Precache Scripts and Repackage Zone boxes In launcher when you compile your map. ");
   return level._destructible_preanims[animname];
 }
 
@@ -3146,6 +3159,7 @@ vehicle_coupe(color) {
   destructible_physics();
   destructible_part("tag_mirror_right", "vehicle_coupe_" + color + "_mirror_R", 40, undefined, undefined, undefined, undefined, 1.0);
   destructible_physics();
+
 }
 
 vehicle_uaz_winter(destructibleType) {

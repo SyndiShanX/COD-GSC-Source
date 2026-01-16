@@ -13,6 +13,7 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace amws;
 
 autoexec __init__system__() {
@@ -78,7 +79,7 @@ defaultrole() {
   self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
   self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
 
-  if(self.vehicletype != # "archetype_mini_quadtank_mp") {
+  if(self.vehicletype != #"archetype_mini_quadtank_mp") {
     self vehicle_ai::add_state("stationary", &state_stationary_enter, &state_stationary_update, &state_stationary_exit);
     vehicle_ai::add_interrupt_connection("stationary", "scripted", "enter_scripted");
     vehicle_ai::add_interrupt_connection("stationary", "emped", "emped");
@@ -116,7 +117,7 @@ death_suicide_crash(params) {
   self setmaxaccelerationscale(50 / self getdefaultacceleration());
   self setspeed(self.settings.defaultmovespeed);
   self function_a57c34b7(goalpos, 0);
-  self waittilltimeout(3.5, # "near_goal", # "veh_collision");
+  self waittilltimeout(3.5, #"near_goal", #"veh_collision");
   self setmaxspeedscale(0.1);
   self setspeed(0.1);
   self vehicle_ai::clearallmovement();
@@ -125,7 +126,7 @@ death_suicide_crash(params) {
 }
 
 state_driving_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   if(isDefined(self.var_b4c9d62) && self.var_b4c9d62) {
     return;
@@ -185,7 +186,7 @@ cobra_retract() {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   angles = self gettagangles("tag_turret");
   self turretsettargetangles(0, (45, angles[1] - self.angles[1], 0));
   angles = self gettagangles("tag_gunner_turret1");
@@ -200,7 +201,7 @@ state_stationary_enter(params) {
 }
 
 state_stationary_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self notify(#"stop_rocket_firing_thread");
   vehicle_ai::clearalllookingandtargeting();
   vehicle_ai::clearallmovement();
@@ -310,7 +311,7 @@ turretfireupdate() {
     return;
   }
 
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self turretsetontargettolerance(0, 7);
   self turretsetontargettolerance(1, 7);
 
@@ -362,7 +363,7 @@ turretfireupdate() {
 }
 
 state_combat_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   lasttimechangeposition = 0;
   self.shouldgotonewposition = 0;
   self.lasttimetargetinsight = 0;
@@ -510,7 +511,7 @@ function_64609aab(entity, enemy) {
 
 aim_and_fire_rocket_launcher(aim_time) {
   self notify(#"stop_rocket_firing_thread");
-  self endon(#"death", # "change_state", # "stop_rocket_firing_thread");
+  self endon(#"death", #"change_state", #"stop_rocket_firing_thread");
 
   if(!self.turretontarget) {
     wait aim_time;
@@ -545,7 +546,7 @@ waittill_weapon_lock_or_timeout(wait_time) {
       locking_on_notify = "locking on";
     }
 
-    self waittilltimeout(wait_time, # "damage", locking_on_notify, locked_on_notify);
+    self waittilltimeout(wait_time, #"damage", locking_on_notify, locked_on_notify);
     locked_on_to_me_just_changed = previous_locked_on_to_me != self.locked_on && self.locked_on;
     locking_on_to_me_just_changed = previous_locking_on_to_me != self.locking_on && self.locking_on;
     perform_evasion_reaction_wait = reacting_to_locks && locked_on_to_me_just_changed || reacting_to_locking && locking_on_to_me_just_changed;
@@ -562,11 +563,11 @@ wait_evasion_reaction_time() {
 
 firerocketlauncher(enemy) {
   self notify(#"stop_rocket_firing_thread");
-  self endon(#"death", # "change_state", # "stop_rocket_firing_thread");
+  self endon(#"death", #"change_state", #"stop_rocket_firing_thread");
 
   if(isDefined(enemy)) {
     self turretsettarget(0, enemy);
-    self waittilltimeout(1, # "turret_on_target");
+    self waittilltimeout(1, #"turret_on_target");
     self playSound(#"hash_713f03be0cf78d55");
     wait 1.2;
 
@@ -615,19 +616,20 @@ getnextmoveposition_wander() {
 
   self.debug_ai_move_to_points_considered = queryresult.data;
 
-  if(!isDefined(best_point)) {
-    self.debug_ai_movement_type = "<dev string:x38>" + queryresult.data.size + "<dev string:x48>";
+    if(!isDefined(best_point)) {
 
-    self.debug_ai_move_to_point = undefined;
+      self.debug_ai_movement_type = "<dev string:x38>" + queryresult.data.size + "<dev string:x48>";
 
-    return undefined;
-  }
+      self.debug_ai_move_to_point = undefined;
+
+        return undefined;
+    }
 
   self.debug_ai_movement_type = "<dev string:x4d>" + queryresult.data.size;
 
   self.debug_ai_move_to_point = best_point.origin;
 
-  return best_point.origin;
+    return best_point.origin;
 }
 
 getnextmoveposition_evasive(client_flags) {
@@ -639,18 +641,19 @@ getnextmoveposition_evasive(client_flags) {
 
   foreach(point in queryresult.data) {
     if(point.inclaimedlocation) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x59>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x59>";
 
-      point.score += -500;
+        point.score += -500;
     }
   }
 
@@ -663,41 +666,45 @@ getnextmoveposition_evasive(client_flags) {
     if(isDefined(attacker)) {
       client_flag = 1 << attacker getentitynumber();
 
-      if(client_flag &remaining_flags_to_process) {
+      if(client_flag&remaining_flags_to_process) {
         positionquery_filter_directness(queryresult, self.origin, attacker.origin);
 
         foreach(point in queryresult.data) {
           abs_directness = abs(point.directness);
 
           if(abs_directness < 0.2) {
+  
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "evading_directness"])) {
-              point._scoredebug[# "evading_directness"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"evading_directness"])) {
+              point._scoredebug[#"evading_directness"] = spawnStruct();
             }
 
-            point._scoredebug[# "evading_directness"].score = 200;
-            point._scoredebug[# "evading_directness"].scorename = "<dev string:x6d>";
+            point._scoredebug[#"evading_directness"].score = 200;
+            point._scoredebug[#"evading_directness"].scorename = "<dev string:x6d>";
+  
 
-            point.score += 200;
+              point.score += 200;
             continue;
           }
 
           if(abs_directness > (isDefined(self.settings.lock_evade_enemy_line_of_sight_directness) ? self.settings.lock_evade_enemy_line_of_sight_directness : 0.9)) {
+  
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "evading_directness_line_of_sight"])) {
-              point._scoredebug[# "evading_directness_line_of_sight"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"evading_directness_line_of_sight"])) {
+              point._scoredebug[#"evading_directness_line_of_sight"] = spawnStruct();
             }
 
-            point._scoredebug[# "evading_directness_line_of_sight"].score = -101;
-            point._scoredebug[# "evading_directness_line_of_sight"].scorename = "<dev string:x82>";
+            point._scoredebug[#"evading_directness_line_of_sight"].score = -101;
+            point._scoredebug[#"evading_directness_line_of_sight"].scorename = "<dev string:x82>";
+  
 
-            point.score += -101;
+              point.score += -101;
           }
         }
 
@@ -711,18 +718,19 @@ getnextmoveposition_evasive(client_flags) {
 
   foreach(point in queryresult.data) {
     if(point.directness > 0.5) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "hash_3c71f4605004afec"])) {
-        point._scoredebug[# "hash_3c71f4605004afec"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"hash_3c71f4605004afec"])) {
+        point._scoredebug[#"hash_3c71f4605004afec"] = spawnStruct();
       }
 
-      point._scoredebug[# "hash_3c71f4605004afec"].score = 105;
-      point._scoredebug[# "hash_3c71f4605004afec"].scorename = "<dev string:xa5>";
+      point._scoredebug[#"hash_3c71f4605004afec"].score = 105;
+      point._scoredebug[#"hash_3c71f4605004afec"].scorename = "<dev string:xa5>";
 
-      point.score += 105;
+        point.score += 105;
     }
   }
 
@@ -741,19 +749,20 @@ getnextmoveposition_evasive(client_flags) {
 
   self.debug_ai_move_to_points_considered = queryresult.data;
 
-  if(!isDefined(best_point)) {
-    self.debug_ai_movement_type = "<dev string:xbd>" + queryresult.data.size + "<dev string:x48>";
+    if(!isDefined(best_point)) {
 
-    self.debug_ai_move_to_point = undefined;
+      self.debug_ai_movement_type = "<dev string:xbd>" + queryresult.data.size + "<dev string:x48>";
 
-    return undefined;
-  }
+      self.debug_ai_move_to_point = undefined;
+
+        return undefined;
+    }
 
   self.debug_ai_movement_type = "<dev string:xce>" + queryresult.data.size;
 
   self.debug_ai_move_to_point = best_point.origin;
 
-  return best_point.origin;
+    return best_point.origin;
 }
 
 getnextmoveposition_tactical(enemy) {
@@ -807,40 +816,40 @@ getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "directnessraw"])) {
-      point._scoredebug[# "directnessraw"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"directnessraw"])) {
+      point._scoredebug[#"directnessraw"] = spawnStruct();
     }
 
-    point._scoredebug[# "directnessraw"].score = point.directness;
-    point._scoredebug[# "directnessraw"].scorename = "<dev string:xdb>";
+    point._scoredebug[#"directnessraw"].score = point.directness;
+    point._scoredebug[#"directnessraw"].scorename = "<dev string:xdb>";
 
-    point.score += point.directness;
+      point.score += point.directness;
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "directness"])) {
-      point._scoredebug[# "directness"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"directness"])) {
+      point._scoredebug[#"directness"] = spawnStruct();
     }
 
-    point._scoredebug[# "directness"].score = directnessscore;
-    point._scoredebug[# "directness"].scorename = "<dev string:xeb>";
+    point._scoredebug[#"directness"].score = directnessscore;
+    point._scoredebug[#"directness"].scorename = "<dev string:xeb>";
 
-    point.score += directnessscore;
+      point.score += directnessscore;
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-      point._scoredebug[# "disttoorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+      point._scoredebug[#"disttoorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
-    point._scoredebug[# "disttoorigin"].scorename = "<dev string:xf8>";
+    point._scoredebug[#"disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
+    point._scoredebug[#"disttoorigin"].scorename = "<dev string:xf8>";
 
-    point.score += mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
+      point.score += mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
     targetdistscore = 0;
 
     if(point.targetdist < tooclosedist) {
@@ -848,45 +857,46 @@ getnextmoveposition_tactical(enemy) {
     }
 
     if(point.inclaimedlocation) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x59>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x59>";
 
-      point.score += -500;
+        point.score += -500;
     }
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttotarget"])) {
-      point._scoredebug[# "disttotarget"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttotarget"])) {
+      point._scoredebug[#"disttotarget"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttotarget"].score = targetdistscore;
-    point._scoredebug[# "disttotarget"].scorename = "<dev string:x107>";
+    point._scoredebug[#"disttotarget"].score = targetdistscore;
+    point._scoredebug[#"disttotarget"].scorename = "<dev string:x107>";
 
-    point.score += targetdistscore;
+      point.score += targetdistscore;
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = randomfloatrange(0, randomness);
-    point._scoredebug[# "random"].scorename = "<dev string:x116>";
+    point._scoredebug[#"random"].score = randomfloatrange(0, randomness);
+    point._scoredebug[#"random"].scorename = "<dev string:x116>";
 
-    point.score += randomfloatrange(0, randomness);
+      point.score += randomfloatrange(0, randomness);
 
     if(point.score > best_score) {
       best_score = point.score;
@@ -898,13 +908,14 @@ getnextmoveposition_tactical(enemy) {
 
   self.debug_ai_move_to_points_considered = queryresult.data;
 
-  if(!isDefined(best_point)) {
-    self.debug_ai_movement_type = "<dev string:x11f>" + queryresult.data.size + "<dev string:x48>";
+    if(!isDefined(best_point)) {
 
-    self.debug_ai_move_to_point = undefined;
+      self.debug_ai_movement_type = "<dev string:x11f>" + queryresult.data.size + "<dev string:x48>";
 
-    return undefined;
-  }
+      self.debug_ai_move_to_point = undefined;
+
+        return undefined;
+    }
 
   if(isDefined(getdvarint(#"hkai_debugpositionquery", 0)) && getdvarint(#"hkai_debugpositionquery", 0)) {
     recordline(self.origin, best_point.origin, (0.3, 1, 0));
@@ -915,22 +926,23 @@ getnextmoveposition_tactical(enemy) {
 
   self.debug_ai_move_to_point = best_point.origin;
 
-  return best_point.origin;
+    return best_point.origin;
 }
 
 path_update_interrupt_by_attacker() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
-  self waittill(#"locking on", # "missile_lock", # "damage");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
+  self waittill(#"locking on", #"missile_lock", #"damage");
 
   if(self.locked_on || self.locking_on) {
+
     self.debug_ai_move_to_points_considered = [];
 
     self.debug_ai_movement_type = "<dev string:x13f>";
 
     self.debug_ai_move_to_point = undefined;
 
-    self function_d4c687c9();
+      self function_d4c687c9();
     self.lock_evade_now = 1;
   }
 
@@ -939,7 +951,7 @@ path_update_interrupt_by_attacker() {
 
 path_update_interrupt() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
   wait 1;
 
   while(true) {

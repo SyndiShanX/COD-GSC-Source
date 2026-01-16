@@ -31,39 +31,39 @@ server_choke_safe(id) {
 server_choke_action(id, choke_action, arg1, arg2, arg3) {
   assert(isDefined(level.zombie_server_choke_ids_max[id]), "server Choke: " + id + " undefined");
 
-  while(!server_choke_safe(id)) {
+  while(!server_choke_safe(id))
     wait 0.05;
-  }
 
   level.zombie_server_choke_ids_count[id]++;
 
-  if(!isDefined(arg1)) {
-    return [[choke_action]]();
-  }
+  if(!isDefined(arg1))
+    return [
+      [choke_action]
+    ]();
 
-  if(!isDefined(arg2)) {
-    return [[choke_action]](arg1);
-  }
+  if(!isDefined(arg2))
+    return [
+      [choke_action]
+    ](arg1);
 
-  if(!isDefined(arg3)) {
-    return [[choke_action]](arg1, arg2);
-  }
+  if(!isDefined(arg3))
+    return [
+      [choke_action]
+    ](arg1, arg2);
 
   return [[choke_action]](arg1, arg2, arg3);
 }
 
 server_entity_valid(entity) {
-  if(!isDefined(entity)) {
+  if(!isDefined(entity))
     return false;
-  }
 
   return true;
 }
 
 server_safe_init(id, max) {
-  if(!isDefined(level.zombie_server_choke_ids_max) || !isDefined(level.zombie_server_choke_ids_max[id])) {
+  if(!isDefined(level.zombie_server_choke_ids_max) || !isDefined(level.zombie_server_choke_ids_max[id]))
     server_choke_init(id, max);
-  }
 
   assert(max == level.zombie_server_choke_ids_max[id]);
 }

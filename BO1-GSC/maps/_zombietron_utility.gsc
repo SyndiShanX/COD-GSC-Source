@@ -47,9 +47,8 @@ assassinateHudElem(hudelm, note) {
 }
 
 destroyHudElem(hudElem) {
-  if(isDefined(hudElem)) {
+  if(isDefined(hudElem))
     hudElem destroy();
-  }
 }
 
 sort_by_score(array) {
@@ -147,9 +146,8 @@ get_number_of_valid_players() {
   players = get_players();
   num_player_valid = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i])) {
+    if(is_player_valid(players[i]))
       num_player_valid += 1;
-    }
   }
   return num_player_valid;
 }
@@ -268,9 +266,8 @@ ammo() {
   while(1) {
     wait .5;
     weaponsList = self GetWeaponsListPrimaries();
-    for(idx = 0; idx < weaponsList.size; idx++) {
+    for(idx = 0; idx < weaponsList.size; idx++)
       self SetWeaponAmmoClip(weaponsList[idx], 100);
-    }
   }
 }
 
@@ -300,19 +297,17 @@ is_tesla_damage(mod) {
 
 string_to_float(string) {
   floatParts = strTok(string, ".");
-  if(floatParts.size == 1) {
+  if(floatParts.size == 1)
     return int(floatParts[0]);
-  }
   whole = int(floatParts[0]);
   decimal = 0;
   for(i = floatParts[1].size - 1; i >= 0; i--) {
     decimal = decimal / 10 + int(floatParts[1][i]) / 10;
   }
-  if(whole >= 0) {
+  if(whole >= 0)
     return (whole + decimal);
-  } else {
+  else
     return (whole - decimal);
-  }
 }
 
 set_zombie_var(var, value, is_float, column) {
@@ -415,11 +410,10 @@ fade_in(hold_black_time) {
     wait .05;
   }
   level.introblack.alpha = 1;
-  if(isDefined(hold_black_time)) {
+  if(isDefined(hold_black_time))
     wait hold_black_time;
-  } else {
+  else
     wait .2;
-  }
   level.introblack FadeOverTime(1.5);
   level.introblack.alpha = 0;
   wait 1.5;
@@ -446,9 +440,9 @@ plot_circle_fortime(radius, time, color) {
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] getEye());
+    angletoplayer = vectortoangles(self.origin - players[0] geteye());
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+      plotpoints[plotpoints.size] = self.origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -460,7 +454,7 @@ plot_circle_fortime(radius, time, color) {
 get_closest_to(origin, entArray) {
   bestEnt = entArray[0];
   bestSQ = 2048 * 2048;
-  if(isDefined(entArray)) {
+  if(isDefineD(entArray)) {
     for(i = 0; i < entArray.size; i++) {
       if(!isDefined(entArray[i])) {
         continue;
@@ -499,7 +493,7 @@ network_entity_valid(entity) {
 
 _network_safe_play_fx_on_tag(fx, entity, tag) {
   if(network_entity_valid(entity)) {
-    playFXOnTag(fx, entity, tag);
+    PlayFxOnTag(fx, entity, tag);
   }
 }
 
@@ -526,13 +520,19 @@ network_choke_action(id, choke_action, arg1, arg2, arg3) {
   }
   level.zombie_network_choke_ids_count[id]++;
   if(!isDefined(arg1)) {
-    return ([[choke_action]]());
+    return ([
+      [choke_action]
+    ]());
   }
   if(!isDefined(arg2)) {
-    return ([[choke_action]](arg1));
+    return ([
+      [choke_action]
+    ](arg1));
   }
   if(!isDefined(arg3)) {
-    return ([[choke_action]](arg1, arg2));
+    return ([
+      [choke_action]
+    ](arg1, arg2));
   }
   return ([[choke_action]](arg1, arg2, arg3));
 }

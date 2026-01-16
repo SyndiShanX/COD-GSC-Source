@@ -40,6 +40,7 @@ main() {
 
 #using_animtree("generic_human");
 main_guy() {
+
   level.scr_anim["hiding_door_guy"]["close"] = % doorpeek_close;
   level.scr_anim["hiding_door_guy"]["death_1"] = % doorpeek_deathA;
   level.scr_anim["hiding_door_guy"]["death_2"] = % doorpeek_deathB;

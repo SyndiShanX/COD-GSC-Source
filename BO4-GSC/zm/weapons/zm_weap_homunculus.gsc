@@ -25,15 +25,16 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_weap_homunculus;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_homunculus", &__init__, &__main__, # "zm_weapons");
+  system::register(#"zm_weap_homunculus", &__init__, &__main__, #"zm_weapons");
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_2d49d2cf3d339e18", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_32c5838be960cfee", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2d49d2cf3d339e18", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_32c5838be960cfee", 1, 1, "int");
   zm_loadout::register_lethal_grenade_for_level(#"homunculus");
 }
 
@@ -45,7 +46,7 @@ __main__() {
     return;
   }
 
-  level._effect[# "grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"grenade_samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
 
   if(!isDefined(level.var_fe96a4c4)) {
     level.var_fe96a4c4 = [];
@@ -118,7 +119,7 @@ function_7b1ec82e(s_result) {
 }
 
 function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
-  e_grenade endoncallback(&function_5e056d93, # "death");
+  e_grenade endoncallback(&function_5e056d93, #"death");
   e_grenade flag::init(#"hash_5e780b1a8f2d1e3b");
 
   if(self laststand::player_is_in_laststand()) {
@@ -133,9 +134,9 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   var_515e20e6 = e_grenade.weapon == level.w_homunculus_upgraded;
 
   if(e_grenade.weapon == getweapon(#"homunculus_leprechaun")) {
-    var_9ddf478 = # "hash_5e7f95fc402bc5f8";
+    var_9ddf478 = #"hash_5e7f95fc402bc5f8";
   } else {
-    var_9ddf478 = # "c_t8_zmb_homunculus_fb1";
+    var_9ddf478 = #"c_t8_zmb_homunculus_fb1";
   }
 
   e_grenade ghost();
@@ -144,7 +145,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade.mdl_anchor linkto(e_grenade);
   e_grenade.var_53ba8670 = 0;
   level notify(#"homunculus_thrown", {
-    #e_homunculus: e_grenade,
+    #e_homunculus: e_grenade, 
     #e_player: self
   });
 
@@ -158,7 +159,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", e_grenade.mdl_anchor);
   waitresult = e_grenade waittill(#"stationary");
   e_grenade.var_255a121f = 0;
-  e_grenade.mdl_anchor clientfield::set("" + # "hash_32c5838be960cfee", 1);
+  e_grenade.mdl_anchor clientfield::set("" + #"hash_32c5838be960cfee", 1);
   e_grenade resetmissiledetonationtime(30);
   var_3fb36683 = e_grenade is_on_navmesh(self);
 
@@ -208,7 +209,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
 }
 
 function_1dba4a2() {
-  self endon(#"death", # "hash_3e410dbcd9e66000");
+  self endon(#"death", #"hash_3e410dbcd9e66000");
   self.mdl_anchor endon(#"death");
 
   while(true) {
@@ -282,11 +283,12 @@ function_32b5113(ai_zombie) {
   }
 
   if(!isDefined(ai_zombie.zm_ai_category)) {
+
     if(isDefined(ai_zombie.archetype)) {
       println("<dev string:x38>" + ai_zombie.archetype + "<dev string:x5d>");
     }
 
-    return false;
+      return false;
   }
 
   n_dist_sq = distancesquared(self.origin, ai_zombie.origin);
@@ -301,7 +303,7 @@ function_32b5113(ai_zombie) {
 }
 
 function_cc9535d0(var_c4a5788c, var_bbab4f84, var_2f916462) {
-  self endon(#"death", # "explode");
+  self endon(#"death", #"explode");
   b_first_loop = 1;
 
   while(true) {
@@ -370,9 +372,9 @@ function_bfb923d5(ai_zombie) {
 }
 
 function_c6551b38(var_dd74d130) {
-  var_dd74d130[# "homunculus"] endon(#"death");
-  var_dd74d130[# "homunculus"] waittill(#"jumped");
-  var_69e642c7 = var_dd74d130[# "homunculus"] getlinkedent();
+  var_dd74d130[#"homunculus"] endon(#"death");
+  var_dd74d130[#"homunculus"] waittill(#"jumped");
+  var_69e642c7 = var_dd74d130[#"homunculus"] getlinkedent();
   var_69e642c7 movez(40, 0.35);
 }
 
@@ -381,9 +383,9 @@ function_2c022ba8(e_player, e_grenade) {
   var_5d7b4163 = zm_equipment::function_379f6b5d(500, var_b1c1c5cf, 1, 4, 50);
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       self playSound(#"hash_3a99f739009a77fa");
 
       if(math::cointoss() && math::cointoss()) {
@@ -392,13 +394,13 @@ function_2c022ba8(e_player, e_grenade) {
 
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus, undefined, 1);
 
-      if(self.health <= 0 && self.archetype == # "zombie") {
+      if(self.health <= 0 && self.archetype == #"zombie") {
         gibserverutils::gibhead(self);
       }
 
       break;
-    case # "heavy":
-    case # "miniboss":
+    case #"heavy":
+    case #"miniboss":
       self playSound(#"hash_3a99f739009a77fa");
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus);
       self ai::stun(1.5);
@@ -432,13 +434,13 @@ private function_45eb4c80() {
   self.var_8ea10940 = 1;
 
   switch (self.zm_ai_category) {
-    case # "heavy":
+    case #"heavy":
       n_cooldown_time = 3;
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_cooldown_time = 6;
       break;
-    case # "boss":
+    case #"boss":
       n_cooldown_time = 10;
       break;
     default:
@@ -458,9 +460,10 @@ debug_draw_new_attractor_positions() {
       passed = bullettracepassed(attract + (0, 0, 24), self.origin + (0, 0, 24), 0, self);
 
       if(passed) {
+
         debugstar(attract, 6, (0, 1, 0));
 
-        continue;
+          continue;
       }
 
       debugstar(attract, 6, (1, 0, 0));
@@ -473,7 +476,7 @@ debug_draw_new_attractor_positions() {
 
 function_6a1f299b(e_parent) {
   self notify(#"fakelinkto");
-  self endon(#"fakelinkto", # "death");
+  self endon(#"fakelinkto", #"death");
 
   while(true) {
     self.origin = e_parent.origin;
@@ -577,13 +580,13 @@ grenade_stolen_by_sam(e_grenade) {
     }
   }
 
-  playFXOnTag(level._effect[# "grenade_samantha_steal"], e_grenade, "tag_origin");
+  playFXOnTag(level._effect[#"grenade_samantha_steal"], e_grenade, "tag_origin");
   e_grenade scene::stop();
   e_grenade.mdl_anchor scene::stop();
   e_grenade.mdl_anchor unlink();
   e_grenade.mdl_anchor movez(60, 1);
   e_grenade.mdl_anchor vibrate(direction, 1.5, 2.5, 1);
-  e_grenade.mdl_anchor waittilltimeout(5, # "movedone");
+  e_grenade.mdl_anchor waittilltimeout(5, #"movedone");
   e_grenade.mdl_anchor delete();
 
   if(isDefined(e_grenade)) {
@@ -596,15 +599,15 @@ grenade_stolen_by_sam(e_grenade) {
 }
 
 function_e383ca2f() {
-  self endoncallback(&function_5e056d93, # "death");
-  self waittilltimeout(15, # "hash_90cfd38343f41f2");
+  self endoncallback(&function_5e056d93, #"death");
+  self waittilltimeout(15, #"hash_90cfd38343f41f2");
   self function_4d71ac38(#"hash_6e471fde121d0263", 1);
   self notify(#"explode");
   self function_f33bde5c();
   self.var_69e642c7 scene::stop();
   self.var_69e642c7 scene::play(#"aib_t8_zm_zod_homunculus_dth_01", self.mdl_anchor);
   mdl_anchor = self.mdl_anchor;
-  mdl_anchor clientfield::set("" + # "hash_2d49d2cf3d339e18", 1);
+  mdl_anchor clientfield::set("" + #"hash_2d49d2cf3d339e18", 1);
   self flag::set(#"hash_5e780b1a8f2d1e3b");
   wait 0.2;
   mdl_anchor delete();
@@ -621,12 +624,12 @@ function_e383ca2f() {
 }
 
 function_f33bde5c(b_immediate = 0) {
-  self endon(#"death", # "explode");
+  self endon(#"death", #"explode");
   s_trace = groundtrace(self.mdl_anchor.origin + (0, 0, 16), self.mdl_anchor.origin + (0, 0, -1000), 0, self.mdl_anchor);
-  var_a75fe4be = s_trace[# "position"];
+  var_a75fe4be = s_trace[#"position"];
 
-  if(isDefined(s_trace[# "entity"])) {
-    var_a75fe4be = (var_a75fe4be[0], var_a75fe4be[1], s_trace[# "entity"].origin[2]);
+  if(isDefined(s_trace[#"entity"])) {
+    var_a75fe4be = (var_a75fe4be[0], var_a75fe4be[1], s_trace[#"entity"].origin[2]);
   }
 
   if(b_immediate) {

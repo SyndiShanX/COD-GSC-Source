@@ -20,7 +20,7 @@
 
 function main() {
   init_clientfields();
-  util::set_streamer_hint_function(&force_streamer, 11);
+  util::set_streamer_hint_function( & force_streamer, 11);
   cp_mi_cairo_infection_fx::main();
   cp_mi_cairo_infection_sound::main();
   cp_mi_cairo_infection_theia_battle::main();
@@ -32,7 +32,7 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "set_exposure_bank", 1, 2, "int", &function_1e832062, 0, 0);
+  clientfield::register("world", "set_exposure_bank", 1, 2, "int", & function_1e832062, 0, 0);
 }
 
 function force_streamer(n_zone) {

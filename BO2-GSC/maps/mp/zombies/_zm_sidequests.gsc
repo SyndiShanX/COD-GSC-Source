@@ -15,20 +15,17 @@ init_sidequests() {
 }
 
 is_sidequest_allowed(a_gametypes) {
-  if(isDefined(level.gamedifficulty) && level.gamedifficulty == 0) {
+  if(isDefined(level.gamedifficulty) && level.gamedifficulty == 0)
     return 0;
-  }
 
   b_is_gametype_active = 0;
 
-  if(!isarray(a_gametypes)) {
+  if(!isarray(a_gametypes))
     a_gametypes = array(a_gametypes);
-  }
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i]) {
+    if(getdvar(#"g_gametype") == a_gametypes[i])
       b_is_gametype_active = 1;
-    }
   }
 
   return b_is_gametype_active;
@@ -38,9 +35,8 @@ sidequest_debug() {
   if(getdvar(#"_id_A7AC338D") != "1") {
     return;
   }
-  while(true) {
+  while(true)
     wait 1;
-  }
 }
 
 damager_trigger_thread(dam_types, trigger_func) {
@@ -59,9 +55,8 @@ damager_trigger_thread(dam_types, trigger_func) {
     }
   }
 
-  if(isDefined(trigger_func)) {
+  if(isDefined(trigger_func))
     self[[trigger_func]]();
-  }
 
   self notify("triggered");
 }
@@ -101,9 +96,8 @@ create_icon(shader_name, x) {
 }
 
 add_sidequest_icon(sidequest_name, icon_name) {
-  if(!isDefined(self.sidequest_icons)) {
+  if(!isDefined(self.sidequest_icons))
     self.sidequest_icons = [];
-  }
 
   if(isDefined(self.sidequest_icons[icon_name])) {
     return;
@@ -111,9 +105,8 @@ add_sidequest_icon(sidequest_name, icon_name) {
   sq = level._zombie_sidequests[sidequest_name];
   base_x = level._sidequest_icons_base_x;
 
-  if(isDefined(level._zombiemode_sidequest_icon_offset)) {
+  if(isDefined(level._zombiemode_sidequest_icon_offset))
     base_x = base_x + level._zombiemode_sidequest_icon_offset;
-  }
 
   self.sidequest_icons[icon_name] = self create_icon(sq.icons[icon_name], base_x + self.sidequest_icons.size * 34);
 }
@@ -130,9 +123,8 @@ remove_sidequest_icon(sidequest_name, icon_name) {
   keys = getarraykeys(self.sidequest_icons);
 
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] != icon_name) {
+    if(keys[i] != icon_name)
       new_array[keys[i]] = self.sidequest_icons[keys[i]];
-    }
   }
 
   self.sidequest_icons = new_array;
@@ -140,26 +132,23 @@ remove_sidequest_icon(sidequest_name, icon_name) {
   keys = getarraykeys(self.sidequest_icons);
   base_x = level._sidequest_icons_base_x;
 
-  if(isDefined(level._zombiemode_sidequest_icon_offset)) {
+  if(isDefined(level._zombiemode_sidequest_icon_offset))
     base_x = base_x + level._zombiemode_sidequest_icon_offset;
-  }
 
-  for(i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++)
     self.sidequest_icons[keys[i]].x = base_x + i * 34;
-  }
 }
 
 declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_start_func, generic_stage_end_func) {
-  if(!isDefined(level._zombie_sidequests)) {
+  if(!isDefined(level._zombie_sidequests))
     init_sidequests();
-  }
 
   if(isDefined(level._zombie_sidequests[name])) {
     println("*** ERROR: Attempt to re-declare sidequest with name " + name);
     return;
   }
 
-  sq = spawnStruct();
+  sq = spawnstruct();
   sq.name = name;
   sq.stages = [];
   sq.last_completed_stage = -1;
@@ -194,7 +183,7 @@ declare_sidequest_stage(sidequest_name, stage_name, init_func, logic_func, exit_
     return;
   }
 
-  stage = spawnStruct();
+  stage = spawnstruct();
   stage.name = stage_name;
   stage.stage_number = level._zombie_sidequests[sidequest_name].stages.size;
   stage.assets = [];
@@ -251,7 +240,7 @@ declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_
   }
 
   for(i = 0; i < structs.size; i++) {
-    asset = spawnStruct();
+    asset = spawnstruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -280,7 +269,7 @@ declare_stage_title(sidequest_name, stage_name, title) {
 }
 
 declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
-  ents = getEntArray(target_name, "targetname");
+  ents = getentarray(target_name, "targetname");
 
   if(!isDefined(level._zombie_sidequests)) {
     println("*** ERROR:Attempt to declare a side quest asset " + target_name + " before sidequests declared.");
@@ -303,7 +292,7 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
   }
 
   for(i = 0; i < ents.size; i++) {
-    asset = spawnStruct();
+    asset = spawnstruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -313,7 +302,7 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
 }
 
 declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread_func) {
-  ents = getEntArray(target_name, "targetname");
+  ents = getentarray(target_name, "targetname");
 
   if(!isDefined(level._zombie_sidequests)) {
     println("*** ERROR:Attempt to declare a side quest asset " + target_name + " before sidequests declared.");
@@ -331,7 +320,7 @@ declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread
   }
 
   for(i = 0; i < ents.size; i++) {
-    asset = spawnStruct();
+    asset = spawnstruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -361,7 +350,7 @@ declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, tr
   }
 
   for(i = 0; i < structs.size; i++) {
-    asset = spawnStruct();
+    asset = spawnstruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -373,13 +362,11 @@ declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, tr
 build_asset_from_struct(asset, parent_struct) {
   ent = spawn("script_model", asset.origin);
 
-  if(isDefined(asset.model)) {
-    ent setModel(asset.model);
-  }
+  if(isDefined(asset.model))
+    ent setmodel(asset.model);
 
-  if(isDefined(asset.angles)) {
+  if(isDefined(asset.angles))
     ent.angles = asset.angles;
-  }
 
   ent.script_noteworthy = asset.script_noteworthy;
   ent.type = "struct";
@@ -427,9 +414,8 @@ delete_stage_assets() {
   remaining_assets = [];
 
   for(i = 0; i < self.active_assets.size; i++) {
-    if(isDefined(self.active_assets[i])) {
+    if(isDefined(self.active_assets[i]))
       remaining_assets[remaining_assets.size] = self.active_assets[i];
-    }
   }
 
   self.active_assets = remaining_assets;
@@ -467,25 +453,21 @@ build_assets() {
       trigger_radius = 15;
       trigger_height = 72;
 
-      if(isDefined(asset.radius)) {
+      if(isDefined(asset.radius))
         trigger_radius = asset.radius;
-      }
 
-      if(isDefined(asset.height)) {
+      if(isDefined(asset.height))
         trigger_height = asset.height;
-      }
 
       trigger_spawnflags = 0;
 
-      if(isDefined(asset.script_trigger_spawnflags)) {
+      if(isDefined(asset.script_trigger_spawnflags))
         trigger_spawnflags = asset.script_trigger_spawnflags;
-      }
 
       trigger_offset = (0, 0, 0);
 
-      if(isDefined(asset.script_vector)) {
+      if(isDefined(asset.script_vector))
         trigger_offset = asset.script_vector;
-      }
 
       switch (asset.script_noteworthy) {
         case "trigger_radius_use":
@@ -493,64 +475,56 @@ build_assets() {
           use_trigger setcursorhint("HINT_NOICON");
           use_trigger triggerignoreteam();
 
-          if(isDefined(asset.radius)) {
+          if(isDefined(asset.radius))
             use_trigger.radius = asset.radius;
-          }
 
           use_trigger.owner_ent = self.active_assets[self.active_assets.size - 1];
 
-          if(isDefined(asset.trigger_thread_func)) {
+          if(isDefined(asset.trigger_thread_func))
             use_trigger thread[[asset.trigger_thread_func]]();
-          } else {
+          else
             use_trigger thread use_trigger_thread();
-          }
 
           self.active_assets[self.active_assets.size - 1].trigger = use_trigger;
           break;
         case "trigger_radius_damage":
           damage_trigger = spawn("trigger_damage", asset.origin + trigger_offset, trigger_spawnflags, trigger_radius, trigger_height);
 
-          if(isDefined(asset.radius)) {
+          if(isDefined(asset.radius))
             damage_trigger.radius = asset.radius;
-          }
 
           damage_trigger.owner_ent = self.active_assets[self.active_assets.size - 1];
 
-          if(isDefined(asset.trigger_thread_func)) {
+          if(isDefined(asset.trigger_thread_func))
             damage_trigger thread[[asset.trigger_thread_func]]();
-          } else {
+          else
             damage_trigger thread damage_trigger_thread();
-          }
 
           self.active_assets[self.active_assets.size - 1].trigger = damage_trigger;
           break;
         case "trigger_radius":
           radius_trigger = spawn("trigger_radius", asset.origin + trigger_offset, trigger_spawnflags, trigger_radius, trigger_height);
 
-          if(isDefined(asset.radius)) {
+          if(isDefined(asset.radius))
             radius_trigger.radius = asset.radius;
-          }
 
           radius_trigger.owner_ent = self.active_assets[self.active_assets.size - 1];
 
-          if(isDefined(asset.trigger_thread_func)) {
+          if(isDefined(asset.trigger_thread_func))
             radius_trigger thread[[asset.trigger_thread_func]]();
-          } else {
+          else
             radius_trigger thread radius_trigger_thread();
-          }
 
           self.active_assets[self.active_assets.size - 1].trigger = radius_trigger;
           break;
       }
     }
 
-    if(isDefined(self.assets[i].thread_func) && !isDefined(self.active_assets[self.active_assets.size - 1].dont_rethread)) {
+    if(isDefined(self.assets[i].thread_func) && !isDefined(self.active_assets[self.active_assets.size - 1].dont_rethread))
       self.active_assets[self.active_assets.size - 1] thread[[self.assets[i].thread_func]]();
-    }
 
-    if(i % 2 == 0) {
+    if(i % 2 == 0)
       wait_network_frame();
-    }
   }
 }
 
@@ -565,9 +539,8 @@ radius_trigger_thread() {
     }
     self.owner_ent notify("triggered");
 
-    while(player istouching(self)) {
+    while(player istouching(self))
       wait 0.05;
-    }
 
     self.owner_ent notify("untriggered");
   }
@@ -575,9 +548,8 @@ radius_trigger_thread() {
 
 thread_on_assets(target_name, thread_func) {
   for(i = 0; i < self.active_assets.size; i++) {
-    if(self.active_assets[i].targetname == target_name) {
+    if(self.active_assets[i].targetname == target_name)
       self.active_assets[i] thread[[thread_func]]();
-    }
   }
 }
 
@@ -602,47 +574,39 @@ sidequest_start(sidequest_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   sidequest build_assets();
 
-  if(isDefined(sidequest.init_func)) {
+  if(isDefined(sidequest.init_func))
     sidequest[[sidequest.init_func]]();
-  }
 
-  if(isDefined(sidequest.logic_func)) {
+  if(isDefined(sidequest.logic_func))
     sidequest thread[[sidequest.logic_func]]();
-  }
 }
 
 stage_start(sidequest, stage) {
-  if(isstring(sidequest)) {
+  if(isstring(sidequest))
     sidequest = level._zombie_sidequests[sidequest];
-  }
 
-  if(isstring(stage)) {
+  if(isstring(stage))
     stage = sidequest.stages[stage];
-  }
 
   stage build_assets();
   sidequest.active_stage = stage.stage_number;
   level notify(sidequest.name + "_" + stage.name + "_started");
   stage.completed = 0;
 
-  if(isDefined(sidequest.generic_stage_start_func)) {
+  if(isDefined(sidequest.generic_stage_start_func))
     stage[[sidequest.generic_stage_start_func]]();
-  }
 
-  if(isDefined(stage.init_func)) {
+  if(isDefined(stage.init_func))
     stage[[stage.init_func]]();
-  }
 
   level._last_stage_started = stage.name;
   level thread stage_logic_func_wrapper(sidequest, stage);
 
-  if(stage.time_limit > 0) {
+  if(stage.time_limit > 0)
     stage thread time_limited_stage(sidequest);
-  }
 
-  if(isDefined(stage.title)) {
+  if(isDefined(stage.title))
     stage thread display_stage_title(sidequest.uses_teleportation);
-  }
 }
 
 display_stage_title(wait_for_teleport_done_notify) {
@@ -682,11 +646,12 @@ time_limited_stage(sidequest) {
   level endon("end_game");
   time_limit = undefined;
 
-  if(isDefined(self.time_limit_func)) {
-    time_limit = [[self.time_limit_func]]() * 0.25;
-  } else {
+  if(isDefined(self.time_limit_func))
+    time_limit = [
+      [self.time_limit_func]
+    ]() * 0.25;
+  else
     time_limit = self.time_limit * 0.25;
-  }
 
   wait(time_limit);
   level notify("timed_stage_75_percent");
@@ -714,9 +679,8 @@ precache_sidequest_assets() {
     sq = level._zombie_sidequests[sidequest_names[i]];
     icon_keys = getarraykeys(sq.icons);
 
-    for(j = 0; j < icon_keys.size; j++) {
+    for(j = 0; j < icon_keys.size; j++)
       precacheshader(sq.icons[icon_keys[j]]);
-    }
 
     stage_names = getarraykeys(sq.stages);
 
@@ -727,9 +691,8 @@ precache_sidequest_assets() {
         asset = stage.assets[k];
 
         if(isDefined(asset.type) && asset.type == "struct") {
-          if(isDefined(asset.model)) {
+          if(isDefined(asset.model))
             precachemodel(asset.model);
-          }
         }
       }
     }
@@ -804,9 +767,8 @@ stage_completed_internal(sidequest, stage) {
   }
 
   if(all_complete == 1) {
-    if(isDefined(sidequest.complete_func)) {
+    if(isDefined(sidequest.complete_func))
       sidequest thread[[sidequest.complete_func]]();
-    }
 
     level notify("sidequest_" + sidequest.name + "_complete");
     sidequest.sidequest_completed = 1;
@@ -817,13 +779,11 @@ stage_failed_internal(sidequest, stage) {
   level notify(sidequest.name + "_" + stage.name + "_over");
   level notify(sidequest.name + "_" + stage.name + "_failed");
 
-  if(isDefined(sidequest.generic_stage_end_func)) {
+  if(isDefined(sidequest.generic_stage_end_func))
     stage[[sidequest.generic_stage_end_func]]();
-  }
 
-  if(isDefined(stage.exit_func)) {
+  if(isDefined(stage.exit_func))
     stage[[stage.exit_func]](0);
-  }
 
   sidequest.active_stage = -1;
   stage delete_stage_assets();
@@ -832,13 +792,11 @@ stage_failed_internal(sidequest, stage) {
 stage_failed(sidequest, stage) {
   println("*** Stage failed called.");
 
-  if(isstring(sidequest)) {
+  if(isstring(sidequest))
     sidequest = level._zombie_sidequests[sidequest];
-  }
 
-  if(isstring(stage)) {
+  if(isstring(stage))
     stage = sidequest.stages[stage];
-  }
 
   level thread stage_failed_internal(sidequest, stage);
 }
@@ -871,9 +829,8 @@ dam_trigger_thread(damage_types) {
     self waittill("damage", amount, attacker, dir, point, mod);
 
     for(i = 0; i < damage_types.size; i++) {
-      if(mod == damage_types[i]) {
+      if(mod == damage_types[i])
         self notify("triggered");
-      }
     }
   }
 }
@@ -892,11 +849,10 @@ sidequest_stage_active(sidequest_name, stage_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   stage = sidequest.stages[stage_name];
 
-  if(sidequest.active_stage == stage.stage_number) {
+  if(sidequest.active_stage == stage.stage_number)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 sidequest_start_next_stage(sidequest_name) {
@@ -917,11 +873,10 @@ sidequest_start_next_stage(sidequest_name) {
   }
   last_completed = sidequest.last_completed_stage;
 
-  if(last_completed == -1) {
+  if(last_completed == -1)
     last_completed = 0;
-  } else {
+  else
     last_completed++;
-  }
 
   stage = get_sidequest_stage(sidequest, last_completed);
 
@@ -937,7 +892,7 @@ sidequest_start_next_stage(sidequest_name) {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglesToForward(orientation);
+  forwardvec = anglestoforward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -961,11 +916,10 @@ fake_use(notify_string, qualifier_func) {
     for(i = 0; i < players.size; i++) {
       qualifier_passed = 1;
 
-      if(isDefined(qualifier_func)) {
+      if(isDefined(qualifier_func))
         qualifier_passed = players[i][
-          }
           [qualifier_func]
-      ]();
+        ]();
 
       if(qualifier_passed && distancesquared(self.origin, players[i].origin) < 4096) {
         if(players[i] is_facing(self)) {

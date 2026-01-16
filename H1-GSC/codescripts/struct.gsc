@@ -9,7 +9,7 @@ initstructs() {
 }
 
 createstruct() {
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   level.struct[level.struct.size] = var_0;
   return var_0;
 }

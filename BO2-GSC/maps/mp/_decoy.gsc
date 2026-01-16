@@ -68,7 +68,7 @@ movedecoy(owner, count, fire_time, main_dir, max_offset_angle) {
 
   for(i = 0; i < 1; i++) {
     angles = (0, randomintrange(current_main_dir - max_offset_angle, current_main_dir + max_offset_angle), 0);
-    dir = anglesToForward(angles);
+    dir = anglestoforward(angles);
     dir = vectorscale(dir, randomfloatrange(min_speed, max_speed));
     deltatime = (gettime() - start_time) * 0.001;
     up = (0, 0, intial_up - 800 * deltatime);
@@ -130,11 +130,10 @@ simulateweaponfire(owner) {
 }
 
 simulateweaponfiremachinegun(owner, weapon) {
-  if(weaponissemiauto(weapon)) {
+  if(weaponissemiauto(weapon))
     simulateweaponfiremachinegunsemiauto(owner, weapon);
-  } else {
+  else
     simulateweaponfiremachinegunfullauto(owner, weapon);
-  }
 }
 
 simulateweaponfiremachinegunsemiauto(owner, weapon) {
@@ -145,11 +144,10 @@ simulateweaponfiremachinegunsemiauto(owner, weapon) {
   burst_spacing_max = 10;
 
   while(true) {
-    if(clipsize <= 1) {
+    if(clipsize <= 1)
       burst_count = 1;
-    } else {
+    else
       burst_count = randomintrange(1, clipsize);
-    }
 
     self thread movedecoy(owner, burst_count, firetime, self.main_dir, self.max_offset_angle);
     self fireburst(owner, weapon, firetime, burst_count, 1);
@@ -177,9 +175,8 @@ simulateweaponfireshotgun(owner, weapon) {
   clipsize = weaponclipsize(weapon);
   reloadtime = weaponreloadtime(weapon);
 
-  if(clipsize > 2) {
+  if(clipsize > 2)
     clipsize = 2;
-  }
 
   burst_spacing_min = 0.5;
   burst_spacing_max = 4;
@@ -197,9 +194,8 @@ simulateweaponfiremachinegunfullauto(owner, weapon) {
   clipsize = weaponclipsize(weapon);
   reloadtime = weaponreloadtime(weapon);
 
-  if(clipsize > 30) {
+  if(clipsize > 30)
     clipsize = 30;
-  }
 
   burst_spacing_min = 2;
   burst_spacing_max = 6;
@@ -218,9 +214,8 @@ simulateweaponfiresniper(owner, weapon) {
   clipsize = weaponclipsize(weapon);
   reloadtime = weaponreloadtime(weapon);
 
-  if(clipsize > 2) {
+  if(clipsize > 2)
     clipsize = 2;
-  }
 
   burst_spacing_min = 3;
   burst_spacing_max = 5;
@@ -236,9 +231,8 @@ simulateweaponfiresniper(owner, weapon) {
 fireburst(owner, weapon, firetime, count, interrupt) {
   interrupt_shot = count;
 
-  if(interrupt) {
+  if(interrupt)
     interrupt_shot = int(count * randomfloatrange(0.6, 0.8));
-  }
 
   self fakefire(owner, self.origin, weapon, interrupt_shot);
   wait(firetime * interrupt_shot);
@@ -250,19 +244,18 @@ fireburst(owner, weapon, firetime, count, interrupt) {
 }
 
 finishwhileloop(weapon, reloadtime, burst_spacing_min, burst_spacing_max) {
-  if(shouldplayreloadsound()) {
+  if(shouldplayreloadsound())
     playreloadsounds(weapon, reloadtime);
-  } else {
+  else
     wait(randomfloatrange(burst_spacing_min, burst_spacing_max));
-  }
 }
 
 playreloadsounds(weapon, reloadtime) {
   divy_it_up = (reloadtime - 0.1) / 2;
   wait 0.1;
-  self playSound("fly_assault_reload_npc_mag_out");
+  self playsound("fly_assault_reload_npc_mag_out");
   wait(divy_it_up);
-  self playSound("fly_assault_reload_npc_mag_in");
+  self playsound("fly_assault_reload_npc_mag_in");
   wait(divy_it_up);
 }
 
@@ -294,9 +287,8 @@ doexplosion(owner, pos, weapon, count) {
 pickrandomweapon() {
   type = "fullauto";
 
-  if(randomintrange(0, 10) < 3) {
+  if(randomintrange(0, 10) < 3)
     type = "semiauto";
-  }
 
   randomval = randomintrange(0, level.decoyweapons[type].size);
 
@@ -306,9 +298,8 @@ pickrandomweapon() {
 }
 
 shouldplayreloadsound() {
-  if(randomintrange(0, 5) == 1) {
+  if(randomintrange(0, 5) == 1)
     return true;
-  }
 
   return false;
 }
@@ -323,8 +314,7 @@ trackmaindirection() {
     self waittill("grenade_bounce", pos, normal);
     dot = vectordot(normal, up);
 
-    if(dot < 0.5 && dot > -0.5) {
+    if(dot < 0.5 && dot > -0.5)
       self.main_dir = int(vectortoangles((normal[0], normal[1], 0))[1]);
-    }
   }
 }

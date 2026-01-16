@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace oob;
 
 autoexec __init__system__() {
@@ -106,7 +107,7 @@ istouchinganyoobtrigger() {
 
     n_flags = function_27f2ef17(trigger);
 
-    if(trigger.classname == "trigger_out_of_bounds_new" && self.team == # "axis" && !(n_flags & 1) || self.team == # "allies" && !(n_flags & 2)) {
+    if(trigger.classname == "trigger_out_of_bounds_new" && self.team == #"axis" && !(n_flags&1) || self.team == #"allies" && !(n_flags&2)) {
       continue;
     }
 
@@ -416,7 +417,7 @@ watchforleave(entity) {
 }
 
 watchfordeath(entity) {
-  self endon(#"disconnect", # "oob_exit");
+  self endon(#"disconnect", #"oob_exit");
   util::waittill_any_ents_two(self, "death", entity, "death");
   self resetoobtimer();
 }

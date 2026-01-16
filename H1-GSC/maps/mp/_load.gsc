@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(isDefined(level._loadstarted)) {
+  if(isdefined(level._loadstarted)) {
     return;
   }
   level._loadstarted = 1;
@@ -17,10 +17,10 @@ main() {
   maps\mp\_utility::initlevelflags();
   maps\mp\_utility::initglobals();
   level.generic_index = 0;
-  level.flag_struct = spawnStruct();
+  level.flag_struct = spawnstruct();
   level.flag_struct common_scripts\utility::assign_unique_id();
 
-  if(!isDefined(level.flag)) {
+  if(!isdefined(level.flag)) {
     level.flag = [];
     level.flags_lock = [];
   }
@@ -31,9 +31,8 @@ main() {
   level.leaderdialogonplayer_func = maps\mp\_utility::leaderdialogonplayer;
   thread maps\mp\gametypes\_tweakables::init();
 
-  if(!isDefined(level.func)) {
+  if(!isdefined(level.func))
     level.func = [];
-  }
 
   level.func["precacheMpAnim"] = ::precachempanim;
   level.func["scriptModelPlayAnim"] = ::scriptmodelplayanim;
@@ -51,11 +50,10 @@ main() {
   visionsetnight("default_night_mp");
   visionsetthermal(game["thermal_vision"]);
   visionsetpain("near_death_mp", 0);
-  var_0 = getEntArray("lantern_glowFX_origin", "targetname");
+  var_0 = getentarray("lantern_glowFX_origin", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] thread lanterns();
-  }
 
   maps\mp\_audio::init_audio();
   maps\mp\_art::main();
@@ -76,7 +74,7 @@ main() {
 
   thread maps\mp\_global_fx::main();
 
-  for(var_2 = 0; var_2 < 6; var_2++) {
+  for (var_2 = 0; var_2 < 6; var_2++) {
     switch (var_2) {
       case 0:
         var_3 = "trigger_multiple";
@@ -98,24 +96,21 @@ main() {
         break;
     }
 
-    var_4 = getEntArray(var_3, "classname");
+    var_4 = getentarray(var_3, "classname");
 
-    for(var_1 = 0; var_1 < var_4.size; var_1++) {
-      if(isDefined(var_4[var_1].script_prefab_exploder)) {
+    for (var_1 = 0; var_1 < var_4.size; var_1++) {
+      if(isdefined(var_4[var_1].script_prefab_exploder))
         var_4[var_1].script_exploder = var_4[var_1].script_prefab_exploder;
-      }
 
-      if(isDefined(var_4[var_1].script_exploder)) {
+      if(isdefined(var_4[var_1].script_exploder))
         level thread exploder_load(var_4[var_1]);
-      }
     }
   }
 
-  var_5 = getEntArray("trigger_hurt", "classname");
+  var_5 = getentarray("trigger_hurt", "classname");
 
-  foreach(var_7 in var_5) {
-    var_7 thread hurtplayersthink();
-  }
+  foreach(var_7 in var_5)
+  var_7 thread hurtplayersthink();
 
   level.func["damagefeedback"] = maps\mp\gametypes\_damagefeedback::updatedamagefeedback;
   level.func["setTeamHeadIcon"] = maps\mp\_entityheadicons::setteamheadicon;
@@ -136,16 +131,14 @@ main() {
   setdvar("r_blurdstgaussianblurradius", 1);
   setdvar("r_dof_physical_bokehEnable", 0);
 
-  if(level.nextgen) {
+  if(level.nextgen)
     setdvar("sm_polygonOffsetPreset", 0);
-  }
 
   setupdestructiblekillcaments();
   watchfordestructiblevehicles();
 
-  if(level.virtuallobbyactive == 0 && !(isDefined(level.iszombiegame) && level.iszombiegame)) {
+  if(level.virtuallobbyactive == 0 && !(isdefined(level.iszombiegame) && level.iszombiegame))
     precacheitem("bomb_site_mp");
-  }
 
   level.fauxvehiclecount = 0;
   load_costume_indices();
@@ -155,12 +148,11 @@ exploder_load(var_0) {
   level endon("killexplodertridgers" + var_0.script_exploder);
   var_0 waittill("trigger");
 
-  if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
-    if(isDefined(var_0.script_delay)) {
+  if(isdefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
+    if(isdefined(var_0.script_delay))
       wait(var_0.script_delay);
-    } else {
+    else
       wait 4;
-    }
 
     level thread exploder_load(var_0);
     return;
@@ -171,31 +163,29 @@ exploder_load(var_0) {
 }
 
 setupexploders() {
-  var_0 = getEntArray("script_brushmodel", "classname");
-  var_1 = getEntArray("script_model", "classname");
+  var_0 = getentarray("script_brushmodel", "classname");
+  var_1 = getentarray("script_model", "classname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     var_0[var_0.size] = var_1[var_2];
-  }
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isDefined(var_0[var_2].script_prefab_exploder)) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isdefined(var_0[var_2].script_prefab_exploder))
       var_0[var_2].script_exploder = var_0[var_2].script_prefab_exploder;
-    }
 
-    if(isDefined(var_0[var_2].script_exploder)) {
-      if(var_0[var_2].model == "fx" && (!isDefined(var_0[var_2].targetname) || var_0[var_2].targetname != "exploderchunk")) {
+    if(isdefined(var_0[var_2].script_exploder)) {
+      if(var_0[var_2].model == "fx" && (!isdefined(var_0[var_2].targetname) || var_0[var_2].targetname != "exploderchunk")) {
         var_0[var_2] hide();
         continue;
       }
 
-      if(isDefined(var_0[var_2].targetname) && var_0[var_2].targetname == "exploder") {
+      if(isdefined(var_0[var_2].targetname) && var_0[var_2].targetname == "exploder") {
         var_0[var_2] hide();
         var_0[var_2] notsolid();
         continue;
       }
 
-      if(isDefined(var_0[var_2].targetname) && var_0[var_2].targetname == "exploderchunk") {
+      if(isdefined(var_0[var_2].targetname) && var_0[var_2].targetname == "exploderchunk") {
         var_0[var_2] hide();
         var_0[var_2] notsolid();
       }
@@ -203,52 +193,45 @@ setupexploders() {
   }
 
   var_3 = [];
-  var_4 = getEntArray("script_brushmodel", "classname");
+  var_4 = getentarray("script_brushmodel", "classname");
 
-  for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+  for (var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isdefined(var_4[var_2].script_prefab_exploder))
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
-    }
 
-    if(isDefined(var_4[var_2].script_exploder)) {
+    if(isdefined(var_4[var_2].script_exploder))
       var_3[var_3.size] = var_4[var_2];
-    }
   }
 
-  var_4 = getEntArray("script_model", "classname");
+  var_4 = getentarray("script_model", "classname");
 
-  for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+  for (var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isdefined(var_4[var_2].script_prefab_exploder))
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
-    }
 
-    if(isDefined(var_4[var_2].script_exploder)) {
+    if(isdefined(var_4[var_2].script_exploder))
       var_3[var_3.size] = var_4[var_2];
-    }
   }
 
-  var_4 = getEntArray("item_health", "classname");
+  var_4 = getentarray("item_health", "classname");
 
-  for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+  for (var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isdefined(var_4[var_2].script_prefab_exploder))
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
-    }
 
-    if(isDefined(var_4[var_2].script_exploder)) {
+    if(isdefined(var_4[var_2].script_exploder))
       var_3[var_3.size] = var_4[var_2];
-    }
   }
 
-  if(!isDefined(level.createfxent)) {
+  if(!isdefined(level.createfxent))
     level.createfxent = [];
-  }
 
   var_5 = [];
   var_5["exploderchunk visible"] = 1;
   var_5["exploderchunk"] = 1;
   var_5["exploder"] = 1;
 
-  for(var_2 = 0; var_2 < var_3.size; var_2++) {
+  for (var_2 = 0; var_2 < var_3.size; var_2++) {
     var_6 = var_3[var_2];
     var_7 = common_scripts\utility::createexploder(var_6.script_fxid);
     var_7.v = [];
@@ -270,44 +253,41 @@ setupexploders() {
     var_7.v["ender"] = var_6.script_ender;
     var_7.v["type"] = "exploder";
 
-    if(!isDefined(var_6.script_fxid)) {
+    if(!isdefined(var_6.script_fxid))
       var_7.v["fxid"] = "No FX";
-    } else {
+    else
       var_7.v["fxid"] = var_6.script_fxid;
-    }
 
     var_7.v["exploder"] = var_6.script_exploder;
 
-    if(!isDefined(var_7.v["delay"])) {
+    if(!isdefined(var_7.v["delay"]))
       var_7.v["delay"] = 0;
-    }
 
-    if(isDefined(var_6.target)) {
-      var_8 = getEntArray(var_7.v["target"], "targetname")[0];
+    if(isdefined(var_6.target)) {
+      var_8 = getentarray(var_7.v["target"], "targetname")[0];
 
-      if(isDefined(var_8)) {
+      if(isdefined(var_8)) {
         var_9 = var_8.origin;
         var_7.v["angles"] = vectortoangles(var_9 - var_7.v["origin"]);
       } else {
         var_8 = common_scripts\utility::get_target_ent(var_7.v["target"]);
 
-        if(isDefined(var_8)) {
+        if(isdefined(var_8)) {
           var_9 = var_8.origin;
           var_7.v["angles"] = vectortoangles(var_9 - var_7.v["origin"]);
         }
       }
     }
 
-    if(var_6.classname == "script_brushmodel" || isDefined(var_6.model)) {
+    if(var_6.classname == "script_brushmodel" || isdefined(var_6.model)) {
       var_7.model = var_6;
       var_7.model.disconnect_paths = var_6.script_disconnectpaths;
     }
 
-    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
+    if(isdefined(var_6.targetname) && isdefined(var_5[var_6.targetname]))
       var_7.v["exploder_type"] = var_6.targetname;
-    } else {
+    else
       var_7.v["exploder_type"] = "normal";
-    }
 
     var_7 common_scripts\_createfx::post_entity_creation_function();
   }
@@ -321,11 +301,10 @@ hurtplayersthink() {
   level endon("game_ended");
   wait(randomfloat(1.0));
 
-  for(;;) {
+  for (;;) {
     foreach(var_1 in level.players) {
-      if(var_1 istouching(self) && maps\mp\_utility::isreallyalive(var_1)) {
+      if(var_1 istouching(self) && maps\mp\_utility::isreallyalive(var_1))
         var_1 maps\mp\_utility::_suicide();
-      }
     }
 
     wait 0.5;
@@ -333,7 +312,7 @@ hurtplayersthink() {
 }
 
 setupdestructiblekillcaments() {
-  var_0 = getEntArray("destructible_vehicle", "targetname");
+  var_0 = getentarray("destructible_vehicle", "targetname");
 
   foreach(var_2 in var_0) {
     switch (getdvar("mapname")) {
@@ -346,31 +325,31 @@ setupdestructiblekillcaments() {
 
     var_3 = var_2.origin + (0, 0, 5);
     var_4 = var_2.origin + (0, 0, 128);
-    var_5 = bulletTrace(var_3, var_4, 0, var_2);
+    var_5 = bullettrace(var_3, var_4, 0, var_2);
     var_2.killcament = spawn("script_model", var_5["position"]);
     var_2.killcament.targetname = "killCamEnt_destructible_vehicle";
     var_2.killcament setscriptmoverkillcam("explosive");
     var_2 thread deletedestructiblekillcament();
   }
 
-  var_7 = getEntArray("destructible_toy", "targetname");
+  var_7 = getentarray("destructible_toy", "targetname");
 
   foreach(var_2 in var_7) {
     var_3 = var_2.origin + (0, 0, 5);
     var_4 = var_2.origin + (0, 0, 128);
-    var_5 = bulletTrace(var_3, var_4, 0, var_2);
+    var_5 = bullettrace(var_3, var_4, 0, var_2);
     var_2.killcament = spawn("script_model", var_5["position"]);
     var_2.killcament.targetname = "killCamEnt_destructible_toy";
     var_2.killcament setscriptmoverkillcam("explosive");
     var_2 thread deletedestructiblekillcament();
   }
 
-  var_10 = getEntArray("explodable_barrel", "targetname");
+  var_10 = getentarray("explodable_barrel", "targetname");
 
   foreach(var_2 in var_10) {
     var_3 = var_2.origin + (0, 0, 5);
     var_4 = var_2.origin + (0, 0, 128);
-    var_5 = bulletTrace(var_3, var_4, 0, var_2);
+    var_5 = bullettrace(var_3, var_4, 0, var_2);
     var_2.killcament = spawn("script_model", var_5["position"]);
     var_2.killcament.targetname = "killCamEnt_explodable_barrel";
     var_2.killcament setscriptmoverkillcam("explosive");
@@ -385,9 +364,8 @@ deletedestructiblekillcament() {
   self waittill("death");
   wait 10;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_0 delete();
-  }
 }
 
 watchfordestructiblevehicles() {
@@ -396,9 +374,8 @@ watchfordestructiblevehicles() {
   foreach(var_2 in var_0) {
     var_3 = var_2 getscriptabletypeforentity();
 
-    if(issubstr(var_3, "destpv_")) {
+    if(issubstr(var_3, "destpv_"))
       var_2 thread destructiblevehiclewatch();
-    }
   }
 }
 
@@ -406,57 +383,51 @@ destructiblevehiclewatch() {
   self endon("death");
   self waittill("explode", var_0);
 
-  if(isDefined(var_0) && var_0 != self) {
+  if(isdefined(var_0) && var_0 != self)
     var_0 notify("destroyed_car");
-  }
 }
 
 deleteduringreflectionprobegeneration() {
-  var_0 = getEntArray("boost_jump_border", "targetname");
+  var_0 = getentarray("boost_jump_border", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
-  var_0 = getEntArray("mp_recovery_signage", "targetname");
+  var_0 = getentarray("mp_recovery_signage", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
-  var_6 = getEntArray("horde_dome", "targetname");
+  var_6 = getentarray("horde_dome", "targetname");
 
-  foreach(var_8 in var_6) {
-    var_8 delete();
-  }
+  foreach(var_8 in var_6)
+  var_8 delete();
 
-  var_10 = getEntArray("hp_zone_center", "targetname");
+  var_10 = getentarray("hp_zone_center", "targetname");
 
   foreach(var_12 in var_10) {
-    if(isDefined(var_12.target)) {
-      var_0 = getEntArray(var_12.target, "targetname");
+    if(isdefined(var_12.target)) {
+      var_0 = getentarray(var_12.target, "targetname");
 
-      foreach(var_2 in var_0) {
-        var_2 delete();
-      }
+      foreach(var_2 in var_0)
+      var_2 delete();
     }
   }
 
-  var_16 = getEntArray("orbital_bad_spawn_overlay", "targetname");
+  var_16 = getentarray("orbital_bad_spawn_overlay", "targetname");
 
-  foreach(var_18 in var_16) {
-    var_18 delete();
-  }
+  foreach(var_18 in var_16)
+  var_18 delete();
 }
 
 load_costume_indices() {
-  if(isDefined(level.costumecategories)) {
+  if(isdefined(level.costumecategories)) {
     return;
   }
   level.costumecategories = ["gender", "shirt", "head", "gloves"];
   level.costumecat2idx = [];
 
-  for(var_0 = 0; var_0 < level.costumecategories.size; var_0++) {
+  for (var_0 = 0; var_0 < level.costumecategories.size; var_0++) {
     var_1 = level.costumecategories[var_0];
     level.costumecat2idx[var_1] = var_0;
   }

@@ -16,7 +16,7 @@
 #namespace spawn_manager;
 
 function autoexec __init__sytem__() {
-  system::register("spawn_manager", &__init__, undefined, undefined);
+  system::register("spawn_manager", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,21 +25,21 @@ function __init__() {
   level.spawn_manager_active_ai = 0;
   level.spawn_manager_auto_targetname_num = 0;
   level.spawn_managers = [];
-  level.spawn_managers = getEntArray("spawn_manager", "classname");
-  array::thread_all(level.spawn_managers, &spawn_manager_think);
+  level.spawn_managers = getentarray("spawn_manager", "classname");
+  array::thread_all(level.spawn_managers, & spawn_manager_think);
   start_triggers();
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
   level thread spawn_manager_debug();
 }
 
 function spawn_manager_setup() {
-  assert(isDefined(self));
-  assert(isDefined(self.target));
+  assert(isdefined(self));
+  assert(isdefined(self.target));
   assert(self.sm_group_size_max >= self.sm_group_size_min, "" + self.sm_id);
-  if(!isDefined(self.sm_spawner_count_min) || self.sm_spawner_count_min > self.allspawners.size) {
+  if(!isdefined(self.sm_spawner_count_min) || self.sm_spawner_count_min > self.allspawners.size) {
     self.sm_spawner_count_min = self.allspawners.size;
   }
-  if(!isDefined(self.sm_spawner_count_max) || self.sm_spawner_count_max > self.allspawners.size) {
+  if(!isdefined(self.sm_spawner_count_max) || self.sm_spawner_count_max > self.allspawners.size) {
     self.sm_spawner_count_max = self.allspawners.size;
   }
   assert(self.sm_spawner_count_max >= self.sm_spawner_count_min, "" + self.sm_id);
@@ -47,7 +47,7 @@ function spawn_manager_setup() {
   self.spawners = self spawn_manager_get_spawners();
   update_for_coop();
   assert(self.sm_group_size_min <= self.sm_active_count_max, "");
-  if(!isDefined(self.script_forcespawn)) {
+  if(!isdefined(self.script_forcespawn)) {
     self.script_forcespawn = 0;
   }
 }
@@ -67,9 +67,9 @@ function spawn_manager_can_spawn(spawngroupsize) {
 function spawn_manager_spawn(maxdelay) {
   self endon("death");
   start = gettime();
-  while(true) {
+  while (true) {
     ai = self spawner::spawn();
-    if(isDefined(ai) || (gettime() - start) > (1000 * maxdelay)) {
+    if(isdefined(ai) || (gettime() - start) > (1000 * maxdelay)) {
       return ai;
     }
     wait(0.5);
@@ -77,21 +77,21 @@ function spawn_manager_spawn(maxdelay) {
 }
 
 function spawn_manager_spawn_group(spawner, spawngroupsize) {
-  for(i = 0; i < spawngroupsize; i++) {
+  for (i = 0; i < spawngroupsize; i++) {
     ai = undefined;
-    if(isDefined(spawner) && isDefined(spawner.targetname)) {
+    if(isdefined(spawner) && isdefined(spawner.targetname)) {
       ai = spawner spawn_manager_spawn(2);
-      if(isDefined(ai)) {
+      if(isdefined(ai)) {
         ai.sm_id = self.sm_id;
       }
     } else {
       continue;
     }
     if(!spawner::spawn_failed(ai)) {
-      if(isDefined(self.script_radius)) {
+      if(isdefined(self.script_radius)) {
         ai.script_radius = self.script_radius;
       }
-      if(isDefined(spawner.script_radius)) {
+      if(isdefined(spawner.script_radius)) {
         ai.script_radius = spawner.script_radius;
       }
       ai thread spawn_accounting(spawner, self);
@@ -112,46 +112,46 @@ function spawn_accounting(spawner, manager) {
   manager.activeai[manager.activeai.size] = self;
   spawner.activeai[spawner.activeai.size] = self;
   self waittill("death");
-  if(isDefined(spawner)) {
+  if(isdefined(spawner)) {
     arrayremovevalue(spawner.activeai, self);
   }
-  if(isDefined(manager)) {
+  if(isdefined(manager)) {
     arrayremovevalue(manager.activeai, self);
   }
   level.spawn_manager_active_ai--;
 }
 
 function set_defaults() {
-  if(isDefined(self.name)) {
+  if(isdefined(self.name)) {
     check_name(self.name);
     self.sm_id = self.name;
   } else {
-    if(isDefined(self.targetname) && !strstartswith(self.targetname, "pf")) {
+    if(isdefined(self.targetname) && !strstartswith(self.targetname, "pf")) {
       check_name(self.targetname);
       self.sm_id = self.targetname;
     } else {
       auto_id();
     }
   }
-  if(!isDefined(self.sm_count_1player)) {
+  if(!isdefined(self.sm_count_1player)) {
     self.sm_count_1player = self.count;
   }
-  if(!isDefined(self.sm_active_count_min_1player)) {
-    self.sm_active_count_min_1player = (isDefined(self.sm_active_count_min) ? self.sm_active_count_min : level.spawn_manager_max_ai);
+  if(!isdefined(self.sm_active_count_min_1player)) {
+    self.sm_active_count_min_1player = (isdefined(self.sm_active_count_min) ? self.sm_active_count_min : level.spawn_manager_max_ai);
   }
-  if(!isDefined(self.sm_active_count_max_1player)) {
-    self.sm_active_count_max_1player = (isDefined(self.sm_active_count_max) ? self.sm_active_count_max : level.spawn_manager_max_ai);
+  if(!isdefined(self.sm_active_count_max_1player)) {
+    self.sm_active_count_max_1player = (isdefined(self.sm_active_count_max) ? self.sm_active_count_max : level.spawn_manager_max_ai);
   }
-  if(!isDefined(self.sm_group_size_min_1player)) {
-    self.sm_group_size_min_1player = (isDefined(self.sm_group_size_min) ? self.sm_group_size_min : 1);
+  if(!isdefined(self.sm_group_size_min_1player)) {
+    self.sm_group_size_min_1player = (isdefined(self.sm_group_size_min) ? self.sm_group_size_min : 1);
   }
-  if(!isDefined(self.sm_group_size_max_1player)) {
-    self.sm_group_size_max_1player = (isDefined(self.sm_group_size_max) ? self.sm_group_size_max : 1);
+  if(!isdefined(self.sm_group_size_max_1player)) {
+    self.sm_group_size_max_1player = (isdefined(self.sm_group_size_max) ? self.sm_group_size_max : 1);
   }
 }
 
 function check_name(str_name) {
-  a_spawn_managers = getEntArray("", "");
+  a_spawn_managers = getentarray("", "");
   foreach(sm in a_spawn_managers) {
     if(sm != self) {
       if(sm.targetname === str_name || sm.name === str_name) {
@@ -162,7 +162,7 @@ function check_name(str_name) {
 }
 
 function auto_id() {
-  if(!isDefined(level.sm_auto_id)) {
+  if(!isdefined(level.sm_auto_id)) {
     level.sm_auto_id = 0;
   }
   self.sm_id = "sm_auto" + level.sm_auto_id;
@@ -170,13 +170,13 @@ function auto_id() {
 }
 
 function update_count_for_coop() {
-  if(level.players.size >= 4 && isDefined(self.sm_count_4player)) {
+  if(level.players.size >= 4 && isdefined(self.sm_count_4player)) {
     n_count = self.sm_count_4player;
   } else {
-    if(level.players.size >= 3 && isDefined(self.sm_count_3player)) {
+    if(level.players.size >= 3 && isdefined(self.sm_count_3player)) {
       n_count = self.sm_count_3player;
     } else {
-      if(level.players.size >= 2 && isDefined(self.sm_count_2player)) {
+      if(level.players.size >= 2 && isdefined(self.sm_count_2player)) {
         n_count = self.sm_count_2player;
       } else {
         n_count = self.sm_count_1player;
@@ -191,13 +191,13 @@ function update_count_for_coop() {
 }
 
 function update_active_count_min_for_coop() {
-  if(level.players.size >= 4 && isDefined(self.sm_active_count_min_4player)) {
+  if(level.players.size >= 4 && isdefined(self.sm_active_count_min_4player)) {
     self.sm_active_count_min = self.sm_active_count_min_4player;
   } else {
-    if(level.players.size >= 3 && isDefined(self.sm_active_count_min_3player)) {
+    if(level.players.size >= 3 && isdefined(self.sm_active_count_min_3player)) {
       self.sm_active_count_min = self.sm_active_count_min_3player;
     } else {
-      if(level.players.size >= 2 && isDefined(self.sm_active_count_min_2player)) {
+      if(level.players.size >= 2 && isdefined(self.sm_active_count_min_2player)) {
         self.sm_active_count_min = self.sm_active_count_min_2player;
       } else {
         self.sm_active_count_min = self.sm_active_count_min_1player;
@@ -207,13 +207,13 @@ function update_active_count_min_for_coop() {
 }
 
 function update_active_count_max_for_coop() {
-  if(level.players.size >= 4 && isDefined(self.sm_active_count_max_4player)) {
+  if(level.players.size >= 4 && isdefined(self.sm_active_count_max_4player)) {
     self.sm_active_count_max = self.sm_active_count_max_4player;
   } else {
-    if(level.players.size >= 3 && isDefined(self.sm_active_count_max_3player)) {
+    if(level.players.size >= 3 && isdefined(self.sm_active_count_max_3player)) {
       self.sm_active_count_max = self.sm_active_count_max_3player;
     } else {
-      if(level.players.size >= 2 && isDefined(self.sm_active_count_max_2player)) {
+      if(level.players.size >= 2 && isdefined(self.sm_active_count_max_2player)) {
         self.sm_active_count_max = self.sm_active_count_max_2player;
       } else {
         self.sm_active_count_max = self.sm_active_count_max_1player;
@@ -223,13 +223,13 @@ function update_active_count_max_for_coop() {
 }
 
 function update_group_size_min_for_coop() {
-  if(level.players.size >= 4 && isDefined(self.sm_group_size_min_4player)) {
+  if(level.players.size >= 4 && isdefined(self.sm_group_size_min_4player)) {
     self.sm_group_size_min = self.sm_group_size_min_4player;
   } else {
-    if(level.players.size >= 3 && isDefined(self.sm_group_size_min_3player)) {
+    if(level.players.size >= 3 && isdefined(self.sm_group_size_min_3player)) {
       self.sm_group_size_min = self.sm_group_size_min_3player;
     } else {
-      if(level.players.size >= 2 && isDefined(self.sm_group_size_min_2player)) {
+      if(level.players.size >= 2 && isdefined(self.sm_group_size_min_2player)) {
         self.sm_group_size_min = self.sm_group_size_min_2player;
       } else {
         self.sm_group_size_min = self.sm_group_size_min_1player;
@@ -239,13 +239,13 @@ function update_group_size_min_for_coop() {
 }
 
 function update_group_size_max_for_coop() {
-  if(level.players.size >= 4 && isDefined(self.sm_group_size_max_4player)) {
+  if(level.players.size >= 4 && isdefined(self.sm_group_size_max_4player)) {
     self.sm_group_size_max = self.sm_group_size_max_4player;
   } else {
-    if(level.players.size >= 3 && isDefined(self.sm_group_size_max_3player)) {
+    if(level.players.size >= 3 && isdefined(self.sm_group_size_max_3player)) {
       self.sm_group_size_max = self.sm_group_size_max_3player;
     } else {
-      if(level.players.size >= 2 && isDefined(self.sm_group_size_max_2player)) {
+      if(level.players.size >= 2 && isdefined(self.sm_group_size_max_2player)) {
         self.sm_group_size_max = self.sm_group_size_max_2player;
       } else {
         self.sm_group_size_max = self.sm_group_size_max_1player;
@@ -268,10 +268,10 @@ function update_for_coop() {
 }
 
 function spawn_manager_wave_wait() {
-  if(!isDefined(self.sm_wave_wait_min)) {
+  if(!isdefined(self.sm_wave_wait_min)) {
     self.sm_wave_wait_min = 0;
   }
-  if(!isDefined(self.sm_wave_wait_max)) {
+  if(!isdefined(self.sm_wave_wait_max)) {
     self.sm_wave_wait_max = 0;
   }
   if(self.sm_wave_wait_max > 0 && self.sm_wave_wait_max > self.sm_wave_wait_min) {
@@ -291,14 +291,14 @@ function spawn_manager_think() {
   self.activeai = [];
   self.spawncount = 0;
   isfirsttime = 1;
-  self.allspawners = getEntArray(self.target, "targetname");
+  self.allspawners = getentarray(self.target, "targetname");
   assert(self.allspawners.size, ("" + self.sm_id) + "");
   level flag::wait_till(("sm_" + self.sm_id) + "_enabled");
   util::script_delay();
   self spawn_manager_setup();
   b_spawn_up = 1;
   self spawn_manager_get_spawn_group_size();
-  while(self.count != 0 && self.spawners.size > 0) {
+  while (self.count != 0 && self.spawners.size > 0) {
     cleanup_spawners();
     n_active = self.activeai.size;
     n_active_budget = self.sm_active_count_max - n_active;
@@ -319,7 +319,7 @@ function spawn_manager_think() {
       }
     }
     spawned = 0;
-    while(!spawned) {
+    while (!spawned) {
       cleanup_spawners();
       if(self.spawners.size <= 0) {
         break;
@@ -328,15 +328,15 @@ function spawn_manager_think() {
         assert(self.sm_group_size > 0);
         potential_spawners = [];
         priority_spawners = [];
-        for(i = 0; i < self.spawners.size; i++) {
+        for (i = 0; i < self.spawners.size; i++) {
           current_spawner = self.spawners[i];
-          if(isDefined(current_spawner)) {
+          if(isdefined(current_spawner)) {
             if(current_spawner.activeai.size > current_spawner.sm_active_count_min) {
               continue;
             }
             spawnerfree = current_spawner.sm_active_count_max - current_spawner.activeai.size;
             if(spawnerfree >= self.sm_group_size) {
-              if(isDefined(current_spawner.spawnflags) && (current_spawner.spawnflags & 32) == 32) {
+              if(isdefined(current_spawner.spawnflags) && (current_spawner.spawnflags & 32) == 32) {
                 priority_spawners[priority_spawners.size] = current_spawner;
                 continue;
               }
@@ -350,7 +350,7 @@ function spawn_manager_think() {
           } else {
             spawner = array::random(potential_spawners);
           }
-          if(!(isDefined(spawner.spawnflags) && (spawner.spawnflags & 64) == 64) && spawner.count < self.sm_group_size) {
+          if(!(isdefined(spawner.spawnflags) && (spawner.spawnflags & 64) == 64) && spawner.count < self.sm_group_size) {
             self.sm_group_size = spawner.count;
           }
           if(!isfirsttime) {
@@ -365,9 +365,9 @@ function spawn_manager_think() {
           spawned = 1;
         } else {
           spawner_max_active_count = 0;
-          for(i = 0; i < self.spawners.size; i++) {
+          for (i = 0; i < self.spawners.size; i++) {
             current_spawner = self.spawners[i];
-            if(isDefined(current_spawner)) {
+            if(isdefined(current_spawner)) {
               if(current_spawner.sm_active_count_max > spawner_max_active_count) {
                 spawner_max_active_count = current_spawner.sm_active_count_max;
               }
@@ -384,20 +384,20 @@ function spawn_manager_think() {
     wait(0.05);
     assert(!level flag::get(("" + self.sm_id) + ""), "");
     assert(!level flag::get(("" + self.sm_id) + ""), "");
-    if(!(isDefined(self.script_forcespawn) && self.script_forcespawn)) {
+    if(!(isdefined(self.script_forcespawn) && self.script_forcespawn)) {
       numplayers = max(getplayers().size, 1);
       wait((laststand::player_num_in_laststand() / numplayers) * 8);
     }
   }
   self spawn_manager_flag_complete();
-  if(isDefined(self.activeai) && self.activeai.size != 0) {
+  if(isdefined(self.activeai) && self.activeai.size != 0) {
     array::wait_till(self.activeai, "death");
   }
   self delete();
 }
 
 function spawn_manager_enable_think() {
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("enable");
     self.enable = 1;
     self spawn_manager_flag_enabled();
@@ -434,7 +434,7 @@ function spawn_manager_kill_think() {
 function start_triggers(trigger_type) {
   triggers = trigger::get_all("trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_damage", "trigger_box");
   foreach(trig in triggers) {
-    if(isDefined(trig.target)) {
+    if(isdefined(trig.target)) {
       targets = get_spawn_manager_array(trig.target);
       foreach(target in targets) {
         trig thread spawn_manager_enable_trigger_think(target);
@@ -444,12 +444,12 @@ function start_triggers(trigger_type) {
 }
 
 function get_spawn_manager_array(targetname) {
-  if(isDefined(targetname)) {
+  if(isdefined(targetname)) {
     spawn_manager_array = [];
-    for(i = 0; i < level.spawn_managers.size; i++) {
-      if(isDefined(level.spawn_managers[i])) {
+    for (i = 0; i < level.spawn_managers.size; i++) {
+      if(isdefined(level.spawn_managers[i])) {
         if(level.spawn_managers[i].targetname === targetname || level.spawn_managers[i].name === targetname) {
-          if(!isDefined(spawn_manager_array)) {
+          if(!isdefined(spawn_manager_array)) {
             spawn_manager_array = [];
           } else if(!isarray(spawn_manager_array)) {
             spawn_manager_array = array(spawn_manager_array);
@@ -466,9 +466,9 @@ function get_spawn_manager_array(targetname) {
 function spawn_manager_get_spawners() {
   arrayremovevalue(self.allspawners, undefined);
   exclude = [];
-  for(i = 0; i < self.allspawners.size; i++) {
-    if(isDefined(level._gamemode_norandomdogs) && self.allspawners[i].classname == "actor_enemy_dog_sp") {
-      if(!isDefined(exclude)) {
+  for (i = 0; i < self.allspawners.size; i++) {
+    if(isdefined(level._gamemode_norandomdogs) && self.allspawners[i].classname == "actor_enemy_dog_sp") {
+      if(!isdefined(exclude)) {
         exclude = [];
       } else if(!isarray(exclude)) {
         exclude = array(exclude);
@@ -479,14 +479,14 @@ function spawn_manager_get_spawners() {
   self.allspawners = array::exclude(self.allspawners, exclude);
   spawner_count_with_max_active = 0;
   foreach(sp in self.allspawners) {
-    if(!isDefined(sp.sm_count_1player)) {
+    if(!isdefined(sp.sm_count_1player)) {
       sp.sm_count_1player = sp.count;
     }
-    if(!isDefined(sp.sm_active_count_max_1player)) {
-      sp.sm_active_count_max_1player = (isDefined(sp.sm_active_count_max) ? sp.sm_active_count_max : level.spawn_manager_max_ai);
+    if(!isdefined(sp.sm_active_count_max_1player)) {
+      sp.sm_active_count_max_1player = (isdefined(sp.sm_active_count_max) ? sp.sm_active_count_max : level.spawn_manager_max_ai);
     }
-    if(!isDefined(sp.sm_active_count_min_1player)) {
-      sp.sm_active_count_min_1player = (isDefined(sp.sm_active_count_min) ? sp.sm_active_count_min : sp.sm_active_count_max_1player);
+    if(!isdefined(sp.sm_active_count_min_1player)) {
+      sp.sm_active_count_min_1player = (isdefined(sp.sm_active_count_min) ? sp.sm_active_count_min : sp.sm_active_count_max_1player);
     }
     sp.activeai = [];
   }
@@ -496,9 +496,9 @@ function spawn_manager_get_spawners() {
     spawner_count = self.allspawners.size;
   }
   spawners = [];
-  while(spawners.size < spawner_count) {
+  while (spawners.size < spawner_count) {
     spawner = array::random(groupspawners);
-    if(!isDefined(spawners)) {
+    if(!isdefined(spawners)) {
       spawners = [];
     } else if(!isarray(spawners)) {
       spawners = array(spawners);
@@ -520,8 +520,8 @@ function spawn_manager_get_spawn_group_size() {
 
 function cleanup_spawners() {
   spawners = [];
-  for(i = 0; i < self.spawners.size; i++) {
-    if(isDefined(self.spawners[i])) {
+  for (i = 0; i < self.spawners.size; i++) {
+    if(isdefined(self.spawners[i])) {
       if(self.spawners[i].count != 0) {
         spawners[spawners.size] = self.spawners[i];
         continue;
@@ -533,12 +533,12 @@ function cleanup_spawners() {
 }
 
 function spawn_manager_wait() {
-  if(isDefined(self.script_wait)) {
+  if(isdefined(self.script_wait)) {
     wait(self.script_wait);
-    if(isDefined(self.script_wait_add)) {
+    if(isdefined(self.script_wait_add)) {
       self.script_wait = self.script_wait + self.script_wait_add;
     }
-  } else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
+  } else if(isdefined(self.script_wait_min) && isdefined(self.script_wait_max)) {
     coop_scalar = 1;
     players = getplayers();
     if(players.size == 2) {
@@ -556,7 +556,7 @@ function spawn_manager_wait() {
     } else {
       wait(self.script_wait_min);
     }
-    if(isDefined(self.script_wait_add)) {
+    if(isdefined(self.script_wait_add)) {
       self.script_wait_min = self.script_wait_min + self.script_wait_add;
       self.script_wait_max = self.script_wait_max + self.script_wait_add;
     }
@@ -601,9 +601,9 @@ function set_global_active_count(cnt) {
 }
 
 function use_trig_when_complete(spawn_manager_targetname, trig_name, trig_key, once_only) {
-  if(isDefined(once_only) && once_only) {
+  if(isdefined(once_only) && once_only) {
     trigger = getent(trig_name, trig_key);
-    assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
+    assert(isdefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
@@ -615,9 +615,9 @@ function use_trig_when_complete(spawn_manager_targetname, trig_name, trig_key, o
 }
 
 function use_trig_when_cleared(spawn_manager_targetname, trig_name, trig_key, once_only) {
-  if(isDefined(once_only) && once_only) {
+  if(isdefined(once_only) && once_only) {
     trigger = getent(trig_name, trig_key);
-    assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
+    assert(isdefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
@@ -629,9 +629,9 @@ function use_trig_when_cleared(spawn_manager_targetname, trig_name, trig_key, on
 }
 
 function use_trig_when_enabled(spawn_manager_targetname, trig_name, trig_key, once_only) {
-  if(isDefined(once_only) && once_only) {
+  if(isdefined(once_only) && once_only) {
     trigger = getent(trig_name, trig_key);
-    assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
+    assert(isdefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
@@ -643,21 +643,21 @@ function use_trig_when_enabled(spawn_manager_targetname, trig_name, trig_key, on
 }
 
 function run_func_when_complete(spawn_manager_targetname, process, ent, var1, var2, var3, var4, var5) {
-  assert(isDefined(process), "");
+  assert(isdefined(process), "");
   assert(level flag::exists(("" + spawn_manager_targetname) + ""), ("" + spawn_manager_targetname) + "");
   wait_till_complete(spawn_manager_targetname);
   util::single_func(ent, process, var1, var2, var3, var4, var5);
 }
 
 function run_func_when_cleared(spawn_manager_targetname, process, ent, var1, var2, var3, var4, var5) {
-  assert(isDefined(process), "");
+  assert(isdefined(process), "");
   assert(level flag::exists(("" + spawn_manager_targetname) + ""), ("" + spawn_manager_targetname) + "");
   wait_till_cleared(spawn_manager_targetname);
   util::single_func(ent, process, var1, var2, var3, var4, var5);
 }
 
 function run_func_when_enabled(spawn_manager_targetname, process, ent, var1, var2, var3, var4, var5) {
-  assert(isDefined(process), "");
+  assert(isdefined(process), "");
   assert(level flag::exists(("" + spawn_manager_targetname) + ""), ("" + spawn_manager_targetname) + "");
   wait_till_enabled(spawn_manager_targetname);
   util::single_func(ent, process, var1, var2, var3, var4, var5);
@@ -666,12 +666,12 @@ function run_func_when_enabled(spawn_manager_targetname, process, ent, var1, var
 function enable(spawn_manager_targetname, no_assert) {
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
     foreach(sm in level.spawn_managers) {
-      if(isDefined(sm) && sm.sm_id == spawn_manager_targetname) {
+      if(isdefined(sm) && sm.sm_id == spawn_manager_targetname) {
         sm notify("enable");
         return;
       }
     }
-  } else if(!(isDefined(no_assert) && no_assert)) {
+  } else if(!(isdefined(no_assert) && no_assert)) {
     assertmsg(("" + spawn_manager_targetname) + "");
   }
 }
@@ -679,12 +679,12 @@ function enable(spawn_manager_targetname, no_assert) {
 function disable(spawn_manager_targetname, no_assert) {
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
     foreach(sm in level.spawn_managers) {
-      if(isDefined(sm) && sm.sm_id == spawn_manager_targetname) {
+      if(isdefined(sm) && sm.sm_id == spawn_manager_targetname) {
         sm notify("disable");
         return;
       }
     }
-  } else if(!(isDefined(no_assert) && no_assert)) {
+  } else if(!(isdefined(no_assert) && no_assert)) {
     assertmsg(("" + spawn_manager_targetname) + "");
   }
 }
@@ -692,13 +692,13 @@ function disable(spawn_manager_targetname, no_assert) {
 function kill(spawn_manager_targetname, no_assert) {
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
     foreach(sm in level.spawn_managers) {
-      if(isDefined(sm) && sm.sm_id == spawn_manager_targetname) {
+      if(isdefined(sm) && sm.sm_id == spawn_manager_targetname) {
         sm delete();
         level.spawn_managers = array::remove_undefined(level.spawn_managers);
         return;
       }
     }
-  } else if(!(isDefined(no_assert) && no_assert)) {
+  } else if(!(isdefined(no_assert) && no_assert)) {
     assertmsg(("" + spawn_manager_targetname) + "");
   }
 }
@@ -752,7 +752,7 @@ function wait_till_cleared(spawn_manager_targetname) {
 }
 
 function wait_till_ai_remaining(spawn_manager_targetname, count_to_reach) {
-  assert(isDefined(count_to_reach), "");
+  assert(isdefined(count_to_reach), "");
   assert(count_to_reach, "");
   if(level flag::exists(("sm_" + spawn_manager_targetname) + "_enabled")) {
     level flag::wait_till(("sm_" + spawn_manager_targetname) + "_complete");
@@ -762,7 +762,7 @@ function wait_till_ai_remaining(spawn_manager_targetname, count_to_reach) {
   if(level flag::get(("sm_" + spawn_manager_targetname) + "_cleared")) {
     return;
   }
-  while(get_ai(spawn_manager_targetname).size > count_to_reach) {
+  while (get_ai(spawn_manager_targetname).size > count_to_reach) {
     wait(0.1);
   }
 }
@@ -792,8 +792,8 @@ function wait_till_spawned_count(spawn_manager_targetname, count) {
   spawn_manager = get_spawn_manager_array(spawn_manager_targetname);
   assert(spawn_manager.size, "");
   assert(spawn_manager.size == 1, "");
-  while(true) {
-    if(isDefined(spawn_manager[0].spawncount) && spawn_manager[0].spawncount < count && !is_killed(spawn_manager_targetname)) {
+  while (true) {
+    if(isdefined(spawn_manager[0].spawncount) && spawn_manager[0].spawncount < count && !is_killed(spawn_manager_targetname)) {
       wait(0.5);
     } else {
       break;

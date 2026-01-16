@@ -19,9 +19,8 @@ main() {
     level.vision_set_transition_ent.time = 0;
   }
 
-  if(!isDefined(level.sunflare_settings)) {
+  if(!isDefined(level.sunflare_settings))
     level.sunflare_settings = [];
-  }
 
   if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
@@ -29,9 +28,8 @@ main() {
     common_scripts\_artcommon::setfogsliders();
   }
 
-  if(!isDefined(level.script)) {
+  if(!isDefined(level.script))
     level.script = tolower(getdvar("mapname"));
-  }
 }
 
 create_default_vision_set_fog(var_0) {
@@ -87,9 +85,8 @@ dof_blend_interior_generic(var_0) {
 }
 
 dof_init() {
-  if(getdvar("scr_dof_enable") == "") {
+  if(getdvar("scr_dof_enable") == "")
     setsaveddvar("scr_dof_enable", "1");
-  }
 
   setdvar("ads_dof_tracedist", 8192);
   setdvar("ads_dof_maxEnemyDist", 10000);
@@ -129,77 +126,68 @@ dof_init() {
   level.dof["results"]["current"] = [];
   dof_set_generic("results", "current", var_0, var_1, var_2, var_3, var_4, var_5, 1.0);
 
-  foreach(var_7 in level.players) {
-    var_7 thread dof_update();
-  }
+  foreach(var_7 in level.players)
+  var_7 thread dof_update();
 }
 
 dof_set_base(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   dof_set_generic("base", "goal", var_0, var_1, var_2, var_3, var_4, var_5, 1.0);
   level.dof["base"]["timeRemaining"] = var_6;
 
-  if(var_6 <= 0.0) {
+  if(var_6 <= 0.0)
     dof_set_generic("base", "current", var_0, var_1, var_2, var_3, var_4, var_5, 1.0);
-  }
 }
 
 dof_enable_script(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   dof_set_generic("script", "goal", var_0, var_1, var_2, var_3, var_4, var_5, 1.0);
   level.dof["script"]["timeRemaining"] = var_6;
 
-  if(var_6 <= 0.0) {
+  if(var_6 <= 0.0)
     dof_set_generic("script", "current", var_0, var_1, var_2, var_3, var_4, var_5, 1.0);
-  } else if(level.dof["script"]["current"]["weight"] <= 0.0) {
+  else if(level.dof["script"]["current"]["weight"] <= 0.0)
     dof_set_generic("script", "current", var_0, var_1, var_2, var_3, var_4, var_5, 0.0);
-  }
 }
 
 dof_disable_script(var_0) {
   level.dof["script"]["goal"]["weight"] = 0.0;
   level.dof["script"]["timeRemaining"] = var_0;
 
-  if(var_0 <= 0.0) {
+  if(var_0 <= 0.0)
     level.dof["script"]["current"]["weight"] = 0.0;
-  }
 }
 
 dof_enable_ads(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   dof_set_generic("ads", "goal", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 
-  if(level.dof["ads"]["current"]["weight"] <= 0.0) {
+  if(level.dof["ads"]["current"]["weight"] <= 0.0)
     dof_set_generic("ads", "current", var_0, var_1, var_2, var_3, var_4, var_5, 0.0);
-  }
 }
 
 dof_blend_interior_ads_element(var_0, var_1, var_2, var_3) {
   if(var_0 > var_1) {
     var_4 = (var_0 - var_1) * var_3;
 
-    if(var_4 > var_2) {
+    if(var_4 > var_2)
       var_4 = var_2;
-    } else if(var_4 < 1) {
+    else if(var_4 < 1)
       var_4 = 1;
-    }
 
-    if(var_0 - var_4 <= var_1) {
+    if(var_0 - var_4 <= var_1)
       return var_1;
-    } else {
+    else
       return var_0 - var_4;
-    }
   } else if(var_0 < var_1) {
     var_4 = (var_1 - var_0) * var_3;
 
-    if(var_4 > var_2) {
+    if(var_4 > var_2)
       var_4 = var_2;
-    } else if(var_4 < 1) {
+    else if(var_4 < 1)
       var_4 = 1;
-    }
 
-    if(var_0 + var_4 >= var_1) {
+    if(var_0 + var_4 >= var_1)
       return var_1;
-    } else {
+    else
       return var_0 + var_4;
-    }
   }
 
   return var_0;
@@ -209,11 +197,10 @@ dof_blend_interior_ads() {
   var_0 = level.dof["ads"]["goal"]["weight"];
 
   if(var_0 < 1.0) {
-    if(self adsbuttonpressed() && self playerads() > 0.0) {
+    if(self adsbuttonpressed() && self playerads() > 0.0)
       var_0 = min(1, var_0 + 0.7);
-    } else {
+    else
       var_0 = 0;
-    }
 
     level.dof["ads"]["current"]["nearStart"] = level.dof["ads"]["goal"]["nearStart"];
     level.dof["ads"]["current"]["nearEnd"] = level.dof["ads"]["goal"]["nearEnd"];
@@ -225,11 +212,10 @@ dof_blend_interior_ads() {
     return;
   }
 
-  if(isDefined(level.dof_blend_interior_ads_scalar)) {
+  if(isDefined(level.dof_blend_interior_ads_scalar))
     var_1 = level.dof_blend_interior_ads_scalar;
-  } else {
+  else
     var_1 = 0.1;
-  }
 
   var_2 = 10;
   var_3 = max(var_2, abs(level.dof["ads"]["current"]["nearStart"] - level.dof["ads"]["goal"]["nearStart"]) * var_1);
@@ -284,9 +270,8 @@ dof_calc_results() {
   var_5 = max(0, var_5);
   var_5 = min(var_2, var_5);
 
-  if(var_5 > 0.0) {
+  if(var_5 > 0.0)
     var_3 = max(var_1, var_3);
-  }
 
   level.dof["results"]["current"]["nearStart"] = var_0;
   level.dof["results"]["current"]["nearEnd"] = var_1;
@@ -305,7 +290,9 @@ dof_process_ads() {
   }
 
   if(isDefined(level.custom_dof_trace)) {
-    [[level.custom_dof_trace]]();
+    [
+      [level.custom_dof_trace]
+    ]();
     return;
   }
 
@@ -321,11 +308,10 @@ dof_process_ads() {
   var_10 = self getEye();
   var_11 = self getplayerangles();
 
-  if(isDefined(self.dof_ref_ent)) {
+  if(isDefined(self.dof_ref_ent))
     var_12 = combineangles(self.dof_ref_ent.angles, var_11);
-  } else {
+  else
     var_12 = var_11;
-  }
 
   var_13 = vectornormalize(anglesToForward(var_12));
   var_14 = bulletTrace(var_10, var_10 + var_13 * var_1, 1, self, 1, 0, 0, 0, 0);
@@ -333,7 +319,9 @@ dof_process_ads() {
   var_16 = self getcurrentweapon();
 
   if(isDefined(level.special_weapon_dof_funcs[var_16])) {
-    [[level.special_weapon_dof_funcs[var_16]]](var_14, var_15, var_10, var_13, var_0);
+    [
+      [level.special_weapon_dof_funcs[var_16]]
+    ](var_14, var_15, var_10, var_13, var_0);
     return;
   }
 
@@ -362,32 +350,26 @@ dof_process_ads() {
     }
     var_25 = distance(var_10, var_20.origin);
 
-    if(var_25 - 30 < var_17) {
+    if(var_25 - 30 < var_17)
       var_17 = var_25 - 30;
-    }
 
     var_26 = min(var_25, var_2);
 
-    if(var_26 + 30 > var_18) {
+    if(var_26 + 30 > var_18)
       var_18 = var_26 + 30;
-    }
   }
 
-  if(var_17 > var_18) {
+  if(var_17 > var_18)
     var_17 = var_18 - 256;
-  }
 
-  if(var_17 > var_1) {
+  if(var_17 > var_1)
     var_17 = var_1 - 30;
-  }
 
-  if(var_17 < 1) {
+  if(var_17 < 1)
     var_17 = 1;
-  }
 
-  if(var_18 < var_1) {
+  if(var_18 < var_1)
     var_18 = var_1;
-  }
 
   var_28 = var_17 * var_4;
   var_29 = var_18 * var_7;
@@ -414,55 +396,45 @@ javelin_dof(var_0, var_1, var_2, var_3, var_4) {
     }
     var_11 = distance(var_2, var_1[var_8].origin);
 
-    if(var_11 < 2500) {
+    if(var_11 < 2500)
       var_11 = 2500;
-    }
 
-    if(var_11 - 30 < var_5) {
+    if(var_11 - 30 < var_5)
       var_5 = var_11 - 30;
-    }
 
-    if(var_11 + 30 > var_6) {
+    if(var_11 + 30 > var_6)
       var_6 = var_11 + 30;
-    }
   }
 
   if(var_5 > var_6) {
     var_5 = 2400;
     var_6 = 3000;
   } else {
-    if(var_5 < 50) {
+    if(var_5 < 50)
       var_5 = 50;
-    }
 
-    if(var_6 > 2500) {
+    if(var_6 > 2500)
       var_6 = 2500;
-    } else if(var_6 < 1000) {
+    else if(var_6 < 1000)
       var_6 = 1000;
-    }
   }
 
   var_12 = distance(var_2, var_0["position"]);
 
-  if(var_12 < 2500) {
+  if(var_12 < 2500)
     var_12 = 2500;
-  }
 
-  if(var_5 > var_12) {
+  if(var_5 > var_12)
     var_5 = var_12 - 30;
-  }
 
-  if(var_5 < 1) {
+  if(var_5 < 1)
     var_5 = 1;
-  }
 
-  if(var_6 < var_12) {
+  if(var_6 < var_12)
     var_6 = var_12;
-  }
 
-  if(var_7 >= var_5) {
+  if(var_7 >= var_5)
     var_7 = var_5 - 1;
-  }
 
   var_13 = var_6 * 4;
   var_14 = 4;
@@ -505,9 +477,8 @@ tess_init() {
   level.tess.cutoff_falloff_goal = level.tess.cutoff_falloff_current;
   level.tess.time_remaining = 0.0;
 
-  foreach(var_2 in level.players) {
-    var_2 thread tess_update();
-  }
+  foreach(var_2 in level.players)
+  var_2 thread tess_update();
 }
 
 tess_set_goal(var_0, var_1, var_2) {
@@ -534,13 +505,11 @@ tess_update() {
       level.tess.cutoff_falloff_current = level.tess.cutoff_falloff_goal;
     }
 
-    if(var_0 != level.tess.cutoff_distance_current) {
+    if(var_0 != level.tess.cutoff_distance_current)
       setsaveddvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
-    }
 
-    if(var_1 != level.tess.cutoff_falloff_current) {
+    if(var_1 != level.tess.cutoff_falloff_current)
       setsaveddvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
-    }
   }
 }
 
@@ -592,13 +561,11 @@ set_fog_progress(var_0) {
   var_9 = self.start_skyfogminangle * var_1 + self.end_skyfogminangle * var_0;
   var_10 = self.start_skyfogmaxangle * var_1 + self.end_skyfogmaxangle * var_0;
 
-  if(!isDefined(var_6)) {
+  if(!isDefined(var_6))
     var_6 = 1;
-  }
 
-  if(!isDefined(var_7)) {
+  if(!isDefined(var_7))
     var_7 = 1;
-  }
 
   var_11 = var_6 * var_1 + var_7 * var_0;
 
@@ -629,9 +596,8 @@ ssao_set_target_over_time_internal(var_0, var_1) {
     var_5 = var_2;
     var_2 = var_2 + var_4 * (var_0 - var_2);
 
-    if(var_5 != var_2) {
+    if(var_5 != var_2)
       setsaveddvar("r_ssaoScriptScale", var_2);
-    }
 
     common_scripts\utility::waitframe();
   }

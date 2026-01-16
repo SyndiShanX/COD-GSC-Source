@@ -39,17 +39,15 @@ pain() {
 }
 
 end_script() {
-  if(isDefined(self.paincausedhunkeringup) && self.paincausedhunkeringup) {
+  if(isDefined(self.paincausedhunkeringup) && self.paincausedhunkeringup)
     self.hunkereddown = 0;
-  }
 
   self.blockingpain = 0;
 }
 
 bigdog_play_pain_anim(painanim, rate) {
-  if(!isDefined(rate)) {
+  if(!isDefined(rate))
     rate = 1.0;
-  }
 
   self.blockingpain = 1;
   time = getanimlength(painanim) / rate;
@@ -65,7 +63,7 @@ bigdog_explosive_body_pain(forceexplosivedamage) {
 
     if(isDefined(painanim)) {
       self.paincausedhunkeringup = 1;
-      self playSound("veh_claw_hit_alert");
+      self playsound("veh_claw_hit_alert");
       bigdog_play_pain_anim(painanim, 0.5);
       self.hunkereddown = 0;
       self.paincausedhunkeringup = 0;
@@ -80,15 +78,14 @@ getstumblepainanim() {
   painanim = undefined;
   animsuffix = animscripts\bigdog\bigdog_utility::animsuffix();
 
-  if(self.damageyaw > 135 || self.damageyaw <= -135) {
+  if(self.damageyaw > 135 || self.damageyaw <= -135)
     painanim = animarray("stun_recover_b" + animsuffix);
-  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  else if(self.damageyaw > 45 && self.damageyaw < 135)
     painanim = animarray("stun_recover_r" + animsuffix);
-  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  else if(self.damageyaw > -135 && self.damageyaw < -45)
     painanim = animarray("stun_recover_l" + animsuffix);
-  } else {
+  else
     painanim = animarray("stun_recover_f" + animsuffix);
-  }
 
   return painanim;
 }
@@ -99,7 +96,7 @@ bigdog_leg_pain() {
     assert(isDefined(painanim));
 
     if(isDefined(painanim)) {
-      self playSound("veh_claw_hit_alert");
+      self playsound("veh_claw_hit_alert");
       bigdog_play_pain_anim(painanim);
       return true;
     }
@@ -111,15 +108,14 @@ bigdog_leg_pain() {
 getlegpainanim() {
   painanim = undefined;
 
-  if(self.damageleg == "FL") {
+  if(self.damageleg == "FL")
     painanim = animarray("leg_pain_fl");
-  } else if(self.damageleg == "FR") {
+  else if(self.damageleg == "FR")
     painanim = animarray("leg_pain_fr");
-  } else if(self.damageleg == "RL") {
+  else if(self.damageleg == "RL")
     painanim = animarray("leg_pain_rl");
-  } else {
+  else
     painanim = animarray("leg_pain_rr");
-  }
 
   return painanim;
 }
@@ -145,15 +141,14 @@ getflinchanim() {
   painanim = undefined;
   animsuffix = "";
 
-  if(self.damageyaw > 135 || self.damageyaw <= -135) {
+  if(self.damageyaw > 135 || self.damageyaw <= -135)
     painanim = animarray("hunker_down_flinch_b" + animsuffix, "pain");
-  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  else if(self.damageyaw > 45 && self.damageyaw < 135)
     painanim = animarray("hunker_down_flinch_r" + animsuffix, "pain");
-  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  else if(self.damageyaw > -135 && self.damageyaw < -45)
     painanim = animarray("hunker_down_flinch_l" + animsuffix, "pain");
-  } else {
+  else
     painanim = animarray("hunker_down_flinch_f" + animsuffix, "pain");
-  }
 
   return painanim;
 }
@@ -176,28 +171,27 @@ bigdog_cant_move_anymore_pain() {
 gethunkerdownpainanim() {
   animsuffix = animscripts\bigdog\bigdog_utility::animsuffix();
 
-  if(animarrayanyexist("stun_fall" + animsuffix, "pain")) {
+  if(animarrayanyexist("stun_fall" + animsuffix, "pain"))
     painanim = animarraypickrandom("stun_fall" + animsuffix, "pain");
-  } else {
+  else
     painanim = animarraypickrandom("stun_fall", "pain");
-  }
 
   return painanim;
 }
 
 bigdog_charged_or_sniper_weapon_pain() {
   if(self.canmove) {
-    if(wasdamagedbyfullychargedsnipershot()) {
+    if(wasdamagedbyfullychargedsnipershot())
       return bigdog_explosive_body_pain(1);
-    } else if(wasdamagedbychargedsnipershot() || wasdamagedbysnipershot()) {
-      if(isDefined(self.damageleg) && self.damageleg != "") {
+    else if(wasdamagedbychargedsnipershot() || wasdamagedbysnipershot()) {
+      if(isDefined(self.damageleg) && self.damageleg != "")
         return bigdog_leg_pain();
-      } else {
+      else {
         painanim = getchargedorsniperweaponbodypainanim();
         assert(isDefined(painanim));
 
         if(isDefined(painanim)) {
-          self playSound("veh_claw_hit_alert");
+          self playsound("veh_claw_hit_alert");
           bigdog_play_pain_anim(painanim);
           self.hunkereddown = 0;
           return 1;
@@ -212,15 +206,14 @@ bigdog_charged_or_sniper_weapon_pain() {
 getchargedorsniperweaponbodypainanim() {
   painanim = undefined;
 
-  if(self.damageyaw > 135 || self.damageyaw <= -135) {
+  if(self.damageyaw > 135 || self.damageyaw <= -135)
     painanim = animarray("body_pain_f");
-  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  else if(self.damageyaw > 45 && self.damageyaw < 135)
     painanim = animarray("body_pain_r");
-  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  else if(self.damageyaw > -135 && self.damageyaw < -45)
     painanim = animarray("body_pain_l");
-  } else {
+  else
     painanim = animarray("body_pain_b");
-  }
 
   return painanim;
 }

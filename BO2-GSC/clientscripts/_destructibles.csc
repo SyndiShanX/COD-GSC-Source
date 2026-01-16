@@ -41,7 +41,7 @@ destructible_thread(client_num) {
 init(client_num) {
   if(issplitscreenhost(client_num)) {
     level._num_lit_destructibles = 0;
-    array_thread(getEntArray(client_num, "destructible", "targetname"), ::destructible_thread, client_num);
+    array_thread(getentarray(client_num, "destructible", "targetname"), ::destructible_thread, client_num);
     waittillframeend;
     println("*** Client : Lit destructibles " + level._num_lit_destructibles);
   }

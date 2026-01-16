@@ -15,9 +15,8 @@ main(var_0) {
 }
 
 minigun_cleanup_func(var_0, var_1) {
-  if(var_1 getbarrelspinrate() > 0) {
+  if(var_1 getbarrelspinrate() > 0)
     var_1 stopbarrelspin();
-  }
 }
 
 firecontroller_minigun(var_0) {
@@ -38,9 +37,8 @@ firecontroller_minigun(var_0) {
   var_7 = 0;
   var_0.secsoffiringbeforereload = 15;
 
-  if(isDefined(var_0.secsoffiringbeforereloaddefault)) {
+  if(isDefined(var_0.secsoffiringbeforereloaddefault))
     var_0.secsoffiringbeforereload = var_0.secsoffiringbeforereloaddefault;
-  }
 
   var_0.firetime = 0;
   animscripts\hummer_turret\common::doaim(var_0);
@@ -59,13 +57,11 @@ firecontroller_minigun(var_0) {
       animscripts\hummer_turret\common::doshoot(var_0);
       wait 0.05;
     } else if(!var_0.dofiring && var_6) {
-      if(!isDefined(var_2)) {
+      if(!isDefined(var_2))
         var_2 = gettime();
-      }
 
-      if(!isDefined(var_3)) {
+      if(!isDefined(var_3))
         var_3 = randomfloatrange(var_0.extrafiretime_min, var_0.extrafiretime_max);
-      }
 
       if(gettime() - var_2 >= var_3) {
         var_6 = 0;
@@ -75,9 +71,8 @@ firecontroller_minigun(var_0) {
         var_3 = undefined;
       }
     } else if(!var_0.dofiring && !var_6 && var_7) {
-      if(!isDefined(var_5)) {
+      if(!isDefined(var_5))
         var_5 = randomfloatrange(var_0.extraspintime_min, var_0.extraspintime_max);
-      }
 
       if(self.iscustomanimating || gettime() - var_4 >= var_5) {
         var_0 stopbarrelspin();
@@ -86,9 +81,8 @@ firecontroller_minigun(var_0) {
       }
     }
 
-    if(var_0.turretstate == "fire") {
+    if(var_0.turretstate == "fire")
       var_0.firetime = var_0.firetime + 0.05;
-    }
 
     if(var_0.firetime > var_0.secsoffiringbeforereload) {
       var_0.dofiring = 0;
@@ -115,7 +109,6 @@ minigun_spinup() {
   }
   self startbarrelspin();
 
-  while(self getbarrelspinrate() < 1) {
+  while(self getbarrelspinrate() < 1)
     wait 0.05;
-  }
 }

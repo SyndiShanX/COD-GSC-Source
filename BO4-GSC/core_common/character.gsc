@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\array_shared;
+
 #namespace character;
 
 setmodelfromarray(a) {
@@ -31,14 +32,14 @@ newcharacter() {
 }
 
 save() {
-  info[# "gunhand"] = self.anim_gunhand;
-  info[# "guninhand"] = self.anim_guninhand;
-  info[# "model"] = self.model;
-  info[# "hatmodel"] = self.hatmodel;
-  info[# "gearmodel"] = self.gearmodel;
+  info[#"gunhand"] = self.anim_gunhand;
+  info[#"guninhand"] = self.anim_guninhand;
+  info[#"model"] = self.model;
+  info[#"hatmodel"] = self.hatmodel;
+  info[#"gearmodel"] = self.gearmodel;
 
   if(isDefined(self.name)) {
-    info[# "name"] = self.name;
+    info[#"name"] = self.name;
     println("<dev string:x38>", self.name);
   } else {
     println("<dev string:x4e>");
@@ -47,8 +48,8 @@ save() {
   attachsize = self getattachsize();
 
   for(i = 0; i < attachsize; i++) {
-    info[# "attach"][i][# "model"] = self getattachmodelname(i);
-    info[# "attach"][i][# "tag"] = self getattachtagname(i);
+    info[#"attach"][i][#"model"] = self getattachmodelname(i);
+    info[#"attach"][i][#"tag"] = self getattachtagname(i);
   }
 
   return info;
@@ -56,24 +57,24 @@ save() {
 
 load(info) {
   self detachall();
-  self.anim_gunhand = info[# "gunhand"];
-  self.anim_guninhand = info[# "guninhand"];
-  self setModel(info[# "model"]);
-  self.hatmodel = info[# "hatmodel"];
-  self.gearmodel = info[# "gearmodel"];
+  self.anim_gunhand = info[#"gunhand"];
+  self.anim_guninhand = info[#"guninhand"];
+  self setModel(info[#"model"]);
+  self.hatmodel = info[#"hatmodel"];
+  self.gearmodel = info[#"gearmodel"];
 
-  if(isDefined(info[# "name"])) {
-    self.name = info[# "name"];
+  if(isDefined(info[#"name"])) {
+    self.name = info[#"name"];
     println("<dev string:x67>", self.name);
   } else {
     println("<dev string:x7d>");
   }
 
-  attachinfo = info[# "attach"];
+  attachinfo = info[#"attach"];
   attachsize = attachinfo.size;
 
   for(i = 0; i < attachsize; i++) {
-    self attach(attachinfo[i][# "model"], attachinfo[i][# "tag"]);
+    self attach(attachinfo[i][#"model"], attachinfo[i][#"tag"]);
   }
 }
 

@@ -42,6 +42,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_escape;
 
 autoexec opt_in() {
@@ -55,41 +56,41 @@ autoexec opt_in() {
 }
 
 event_handler[level_init] main(eventstruct) {
-  clientfield::register("clientuimodel", "" + # "player_lives", 1, 2, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "" + # "rumble_gondola", 1, 1, "int", &rumble_gondola, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_51b0de5e2b184c28", 1, 1, "int", &function_1bccf046, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4be2ce4248d80d22", 1, 1, "int", &function_e6537e9f, 0, 0);
-  clientfield::register("world", "" + # "hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
-  clientfield::register("world", "" + # "hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
-  clientfield::register("world", "" + # "hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
-  clientfield::register("world", "" + # "hash_cd028842e18845e", 1, 1, "counter", &function_a104a4cb, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
-  clientfield::register("toplayer", "" + # "player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
-  clientfield::register("vehicle", "" + # "gondola_light", 1, 1, "int", &gondola_light, 0, 1);
+  clientfield::register("clientuimodel", "" + #"player_lives", 1, 2, "int", undefined, 0, 0);
+  clientfield::register("toplayer", "" + #"rumble_gondola", 1, 1, "int", &rumble_gondola, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_51b0de5e2b184c28", 1, 1, "int", &function_1bccf046, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4be2ce4248d80d22", 1, 1, "int", &function_e6537e9f, 0, 0);
+  clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
+  clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
+  clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
+  clientfield::register("world", "" + #"hash_cd028842e18845e", 1, 1, "counter", &function_a104a4cb, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
+  clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
+  clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int", &gondola_light, 0, 1);
   zm_escape_catwalk_event::init_clientfields();
   namespace_9d58c1cd::init_clientfields();
   zm_escape_util::init_clientfields();
   paschal::init();
   namespace_1063645::init_clientfields();
   namespace_b99141ed::init_clientfields();
-  zm_utility::function_beed5764("rob_zm_eyes_red", # "zm_ai/fx8_zombie_eye_glow_red");
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "hash_4d2e5c87bde94856"] = # "hash_4948d849a833ddd5";
-  level._effect[# "hash_6dcb1f6ae15079d5"] = # "hash_52f9d9bb5648c0f3";
-  level._effect[# "gondola_light"] = # "hash_45dbe6888cf8a19c";
+  zm_utility::function_beed5764("rob_zm_eyes_red", #"zm_ai/fx8_zombie_eye_glow_red");
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"hash_4d2e5c87bde94856"] = #"hash_4948d849a833ddd5";
+  level._effect[#"hash_6dcb1f6ae15079d5"] = #"hash_52f9d9bb5648c0f3";
+  level._effect[#"gondola_light"] = #"hash_45dbe6888cf8a19c";
   zm_escape_catwalk_event::init_fx();
   level._uses_default_wallbuy_fx = 1;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_escape_weapons.csv";
-  level._effect[# "hash_2bba72fdcc5508b5"] = # "hash_2ac7ec38d265c496";
-  level._effect[# "chest_light_closed"] = # "hash_5b118cefec864e37";
-  level._effect[# "hash_9d26763cbe16490"] = # "hash_5a9159bef624d260";
-  level._effect[# "magic_box_leave"] = # "hash_2b008afec3e70add";
-  level._effect[# "switch_sparks"] = # "hash_26f37488feec03c3";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_escape_weapons.csv";
+  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_2ac7ec38d265c496";
+  level._effect[#"chest_light_closed"] = #"hash_5b118cefec864e37";
+  level._effect[#"hash_9d26763cbe16490"] = #"hash_5a9159bef624d260";
+  level._effect[#"magic_box_leave"] = #"hash_2b008afec3e70add";
+  level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
   level.var_5603a802 = "pstfx_zm_hellhole";
   namespace_9d58c1cd::init();
   pap_quest::init();
@@ -204,8 +205,8 @@ function_e6537e9f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "switch_sparks"], self, "tag_origin");
-    playSound(localclientnum, # "hash_3281ee130e7c69e", self.origin);
+    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"switch_sparks"], self, "tag_origin");
+    playSound(localclientnum, #"hash_3281ee130e7c69e", self.origin);
     self.var_b3673abf = self playLoopSound(#"hash_27ae537b191e913d");
   }
 }
@@ -225,7 +226,7 @@ function_5e901c8c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       return;
     }
 
-    self.var_7a27c968 = util::playFXOnTag(localclientnum, level._effect[# "hash_6dcb1f6ae15079d5"], self, "j_head");
+    self.var_7a27c968 = util::playFXOnTag(localclientnum, level._effect[#"hash_6dcb1f6ae15079d5"], self, "j_head");
   }
 }
 
@@ -249,14 +250,14 @@ startzmbspawnersoundloops() {
       println("<dev string:x38>" + loopers.size + "<dev string:x72>");
     }
 
-    for(i = 0; i < loopers.size; i++) {
-      loopers[i] thread soundloopthink();
-      delay += 1;
+      for(i = 0; i < loopers.size; i++) {
+        loopers[i] thread soundloopthink();
+        delay += 1;
 
-      if(delay % 20 == 0) {
-        waitframe(1);
+        if(delay % 20 == 0) {
+          waitframe(1);
+        }
       }
-    }
 
     return;
   }
@@ -310,24 +311,24 @@ soundloopthink() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[5][# "playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
-  level.exert_sounds[6][# "playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
-  level.exert_sounds[7][# "playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
-  level.exert_sounds[8][# "playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
-  level.exert_sounds[5][# "playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
-  level.exert_sounds[6][# "playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
-  level.exert_sounds[7][# "playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
-  level.exert_sounds[8][# "playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
-  level.exert_sounds[5][# "playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
-  level.exert_sounds[6][# "playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
-  level.exert_sounds[7][# "playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
-  level.exert_sounds[8][# "playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
-  level.exert_sounds[5][# "meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
-  level.exert_sounds[6][# "meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
-  level.exert_sounds[7][# "meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
-  level.exert_sounds[8][# "meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
+  level.exert_sounds[5][#"playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
+  level.exert_sounds[6][#"playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
+  level.exert_sounds[7][#"playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
+  level.exert_sounds[8][#"playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
+  level.exert_sounds[5][#"playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
+  level.exert_sounds[6][#"playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
+  level.exert_sounds[7][#"playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
+  level.exert_sounds[8][#"playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
+  level.exert_sounds[5][#"playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
+  level.exert_sounds[6][#"playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
+  level.exert_sounds[7][#"playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
+  level.exert_sounds[8][#"playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
+  level.exert_sounds[5][#"meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
+  level.exert_sounds[6][#"meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
+  level.exert_sounds[7][#"meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
+  level.exert_sounds[8][#"meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
 }
 
 gondola_light(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self.var_c4c53839 = util::playFXOnTag(localclientnum, level._effect[# "gondola_light"], self, "tag_origin");
+  self.var_c4c53839 = util::playFXOnTag(localclientnum, level._effect[#"gondola_light"], self, "tag_origin");
 }

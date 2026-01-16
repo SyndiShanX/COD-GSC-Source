@@ -3,8 +3,11 @@
  * Script: character\mp_character_opforce_woods_assault.gsc
 ************************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_russian_military_assault_a_woodland");
+  self setmodel("mp_body_russian_military_assault_a_woodland");
   self attach("head_russian_military_b", "", 1);
   self.headmodel = "head_russian_military_b";
   self setviewmodel("viewhands_russian_c");

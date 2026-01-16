@@ -4,9 +4,11 @@
 **************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace luielemtext;
 
 class cluielemtext: cluielem {
+
   function set_horizontal_alignment(localclientnum, value) {
     set_data(localclientnum, "horizontal_alignment", value);
   }
@@ -48,7 +50,7 @@ class cluielemtext: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "luielemtext");
+    cluielem::open(localclientnum, #"luielemtext");
   }
 
   function function_fa582112(localclientnum) {
@@ -61,7 +63,7 @@ class cluielemtext: cluielem {
     set_data(localclientnum, "red", 0);
     set_data(localclientnum, "green", 0);
     set_data(localclientnum, "blue", 0);
-    set_data(localclientnum, "text", # "");
+    set_data(localclientnum, "text", #"");
     set_data(localclientnum, "horizontal_alignment", 0);
   }
 

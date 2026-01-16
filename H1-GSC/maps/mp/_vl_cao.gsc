@@ -5,16 +5,16 @@
 ********************************/
 
 init_cao() {
-  level.cao_loc = spawnStruct();
+  level.cao_loc = spawnstruct();
   level.cao_loc.origin = (4065, -950, -69);
   level.cao_loc.angles = (0, 267, 0);
-  level.cao_head = spawnStruct();
+  level.cao_head = spawnstruct();
   level.cao_head.origin = (4065, -970, -75);
   level.cao_head.angles = (0, 267, 0);
-  level.cao_loc_collection = spawnStruct();
+  level.cao_loc_collection = spawnstruct();
   level.cao_loc_collection.origin = (4050, -950, -68);
   level.cao_loc_collection.angles = (0, 267, 0);
-  level.cao_head_collection = spawnStruct();
+  level.cao_head_collection = spawnstruct();
   level.cao_head_collection.origin = (4050, -970, -75);
   level.cao_head_collection.angles = (0, 267, 0);
   level.collections = 0;
@@ -28,30 +28,27 @@ playercaoprocesslui(var_0, var_1) {
   if(maps\mp\_utility::is_true(level.in_depot)) {
     return;
   }
-  if(var_0 == "cao") {
+  if(var_0 == "cao")
     handlecaomodechange(var_1);
-  } else if(var_0 == "lootscreen_weapon_highlighted") {
+  else if(var_0 == "lootscreen_weapon_highlighted")
     handlecaomodechange(-1);
-  } else if(var_0 == "costume_preview") {
-    if(iscollectionsmenuactive()) {
+  else if(var_0 == "costume_preview") {
+    if(iscollectionsmenuactive())
       handlecollectionsmodechange(0, -1);
-    }
 
     handlecostumepreview(var_1);
   } else if(var_0 == "costume_apply")
     handlecostumeapply(var_1);
   else if(var_0 == "camo_preview") {
-    if(iscollectionsmenuactive()) {
+    if(iscollectionsmenuactive())
       handlecollectionsmodechange(0, -1);
-    }
 
     handlecamopreview(var_1);
   } else if(var_0 == "camo_apply")
     handlecamoapply(var_1);
   else if(var_0 == "collections_back") {
-    if(iscollectionsmenuactive()) {
+    if(iscollectionsmenuactive())
       handlebackfromcollections(var_1);
-    }
   }
 }
 
@@ -62,7 +59,7 @@ handlecaomodechange(var_0) {
     self notify("handleRotateAvatar");
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isDefined(var_1)) {
+    if(isdefined(var_1)) {
       var_2 = maps\mp\_vl_cac::getfactionteam();
       var_3 = maps\mp\_vl_cac::getfactionenvironment();
       maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedcostume, var_1.primaryweapon, var_2, var_3);
@@ -95,14 +92,14 @@ handlecaomodechange(var_0) {
   } else if(maps\mp\_utility::is_true(level.cao)) {
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isDefined(var_1)) {
-      if(isDefined(var_1.savedcostume)) {
+    if(isdefined(var_1)) {
+      if(isdefined(var_1.savedcostume)) {
         var_2 = maps\mp\_vl_cac::getfactionteam();
         var_3 = maps\mp\_vl_cac::getfactionenvironment();
         maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedcostume, var_1.primaryweapon, var_2, var_3);
       }
 
-      if(isDefined(var_1.savedcharactercamoindex)) {
+      if(isdefined(var_1.savedcharactercamoindex)) {
         var_1 _meth_857C(var_1.savedcharactercamoindex);
         var_1._id_A7ED = var_1.savedcharactercamoindex;
       }
@@ -131,19 +128,17 @@ handlebackfromcollections(var_0) {
 }
 
 playerteleportavatartocao(var_0) {
-  if(level.collections == 1) {
+  if(level.collections == 1)
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_loc_collection);
-  } else {
+  else
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_loc);
-  }
 }
 
 playerteleportavatartocaohead(var_0) {
-  if(level.collections == 1) {
+  if(level.collections == 1)
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_head_collection);
-  } else {
+  else
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_head);
-  }
 }
 
 buildpreviewcostume(var_0) {
@@ -159,7 +154,7 @@ handlecostumepreview(var_0) {
   var_5 = level.vlavatars[var_4];
   maps\mp\_vl_avatar::showavataronly(var_5, 0);
 
-  if(isDefined(var_5)) {
+  if(isdefined(var_5)) {
     var_5 buildpreviewcostume(var_3);
     var_6 = maps\mp\_vl_cac::getfactionteam();
     var_7 = maps\mp\_vl_cac::getfactionenvironment();
@@ -168,9 +163,8 @@ handlecostumepreview(var_0) {
 
   var_8 = "heads_personalization";
 
-  if(level.collections == 1) {
+  if(level.collections == 1)
     var_8 = "heads_collection";
-  }
 
   maps\mp\_vl_base::weaponroomscenelightsupdate(var_8);
   playerteleportavatartocaohead(var_5);
@@ -192,16 +186,15 @@ handlecamopreview(var_0) {
   var_5 = level.vlavatars[var_4];
   maps\mp\_vl_avatar::showavataronly(var_5, 0);
 
-  if(isDefined(var_5)) {
+  if(isdefined(var_5)) {
     var_5._id_A7ED = var_3;
     var_5 _meth_857C(var_5._id_A7ED);
   }
 
   var_6 = "characters_personalization";
 
-  if(maps\mp\_utility::is_true(level.collections == 1)) {
+  if(maps\mp\_utility::is_true(level.collections == 1))
     var_6 = "characters_collection";
-  }
 
   maps\mp\_vl_base::weaponroomscenelightsupdate(var_6);
   playerteleportavatartocao(var_5);
@@ -218,13 +211,11 @@ handlecollectionsmodechange(var_0, var_1) {
   if(level.collections == 0 && var_0 == 0) {
     return;
   }
-  if(var_0 != 2) {
+  if(var_0 != 2)
     maps\mp\_vl_cac::playerhidecacavatars();
-  }
 
-  if(var_0 != 1) {
+  if(var_0 != 1)
     maps\mp\_vl_avatar::hide_avatars();
-  }
 
   if(var_0 == 2) {
     maps\mp\_vl_base::resetweaponavatar();
@@ -245,18 +236,17 @@ handlecollectionsmodechange(var_0, var_1) {
     var_3 = maps\mp\_vl_avatar::get_ownerid_for_avatar(var_2);
     maps\mp\_vl_base::playerrefreshavatar(var_3);
   } else if(level.collections != 0 && var_0 == 0) {
-    if(maps\mp\_utility::is_true(level.cao)) {
+    if(maps\mp\_utility::is_true(level.cao))
       thread maps\mp\_vl_base::handlerotateplayeravatar();
-    } else if(!maps\mp\_utility::is_true(level.cac_weap)) {
+    else if(!maps\mp\_utility::is_true(level.cac_weap))
       self notify("handleRotateAvatar");
-    }
 
     maps\mp\_vl_base::playerpopcameramode();
     playerresetavatarcollectionscostume();
     playerresetavatarcollectionscamo();
     var_2 = level.vlavatars[level.vl_focus];
 
-    if(isDefined(var_2)) {
+    if(isdefined(var_2)) {
       var_2.savedcollectionscostume = undefined;
       var_2.savedcollectionscharactercamoindex = undefined;
 
@@ -273,7 +263,7 @@ handlecollectionsmodechange(var_0, var_1) {
 playerresetavatarcollectionscostume() {
   var_0 = level.vlavatars[level.vl_focus];
 
-  if(isDefined(var_0) && isDefined(var_0.savedcollectionscostume)) {
+  if(isdefined(var_0) && isdefined(var_0.savedcollectionscostume)) {
     var_1 = maps\mp\_vl_cac::getfactionteam();
     var_2 = maps\mp\_vl_cac::getfactionenvironment();
     maps\mp\_vl_avatar::vl_avatar_costume(self, var_0, var_0.savedcollectionscostume, var_0.primaryweapon, var_1, var_2);
@@ -283,7 +273,7 @@ playerresetavatarcollectionscostume() {
 playerresetavatarcollectionscamo() {
   var_0 = level.vlavatars[level.vl_focus];
 
-  if(isDefined(var_0) && isDefined(var_0.savedcollectionscharactercamoindex)) {
+  if(isdefined(var_0) && isdefined(var_0.savedcollectionscharactercamoindex)) {
     self _meth_857C(var_0.savedcollectionscharactercamoindex);
     var_0 _meth_857C(var_0.savedcollectionscharactercamoindex);
     var_0._id_A7ED = var_0.savedcollectionscharactercamoindex;
@@ -341,9 +331,8 @@ handlearmorymodechange(var_0) {
   if(level.armory == 0 && var_0 == 0) {
     return;
   }
-  if(iscollectionsmenuactive()) {
+  if(iscollectionsmenuactive())
     handlecollectionsmodechange(0, -1);
-  }
 
   if(level.armory == 0 && !iscollectionsmenuactive()) {
     _func_300(level.depotcontroller);
@@ -357,10 +346,10 @@ handlearmorymodechange(var_0) {
     maps\mp\_vl_base::playerpopcameramode();
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isDefined(var_1)) {
+    if(isdefined(var_1)) {
       maps\mp\_vl_avatar::playerteleportavatartocac(var_1);
 
-      if(isDefined(var_1.savedarmorycharactercamoindex)) {
+      if(isdefined(var_1.savedarmorycharactercamoindex)) {
         var_3 = maps\mp\_vl_cac::getfactionteam();
         var_4 = maps\mp\_vl_cac::getfactionenvironment();
         maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedarmorycostume, var_1.primaryweapon, var_3, var_4);
@@ -372,11 +361,10 @@ handlearmorymodechange(var_0) {
     }
   }
 
-  if(var_0 != 2) {
+  if(var_0 != 2)
     maps\mp\_vl_cac::playerhidecacavatars();
-  } else if(var_0 != 1) {
+  else if(var_0 != 1)
     maps\mp\_vl_avatar::hide_avatars();
-  }
 
   if(var_0 == 2) {
     maps\mp\_vl_base::resetweaponavatar();
@@ -403,17 +391,15 @@ playerarmoryprocesslui(var_0, var_1) {
     handlearmorymodechange(1);
     handlecamopreview(var_1);
   } else if(var_0 == "weapon_highlighted") {
-    if(var_1 != "none") {
+    if(var_1 != "none")
       handlearmorymodechange(2);
-    }
 
     maps\mp\_vl_cac::handleweaponhighlighted(var_1);
   } else if(var_0 == "depot_return" || var_0 == "leave_depot")
     handlearmorymodechange(0);
   else if(var_0 == "depot_state" && var_1 == "pause") {
-    if(isarmorymenuactive() && iscollectionsmenuactive()) {
+    if(isarmorymenuactive() && iscollectionsmenuactive())
       handlecollectionsmodechange(0, -1);
-    }
   } else if(var_0 == "costume_apply") {
     if(isarmorymenuactive()) {
       handledepotcostumeapply(var_1);
@@ -457,9 +443,8 @@ handleequipmodechange(var_0) {
     maps\mp\_vl_base::playerpopcameramode();
     var_2 = level.depotcontroller;
 
-    if(!maps\mp\_utility::is_true(level.in_depot)) {
+    if(!maps\mp\_utility::is_true(level.in_depot))
       var_2 = level.caccontroller;
-    }
 
     thread maps\mp\_vl_base::virtual_lobby_set_class(level.vl_focus, var_2, self.class, 1);
   }
@@ -493,11 +478,10 @@ playersupplycrateprocesslui(var_0, var_1) {
   if(!maps\mp\_utility::is_true(level.in_depot) || iscollectionsmenuactive() || isequipmenuactive() || isarmorymenuactive()) {
     return;
   }
-  if(var_0 == "costume_apply") {
+  if(var_0 == "costume_apply")
     handledepotcostumeapply(var_1);
-  } else if(var_0 == "camo_apply") {
+  else if(var_0 == "camo_apply")
     handledepotcamoapply(var_1);
-  }
 }
 
 handledepotcostumeapply(var_0) {
@@ -507,7 +491,7 @@ handledepotcostumeapply(var_0) {
   var_4 = maps\mp\_vl_base::getfocusfromcontroller(var_2);
   var_5 = level.vlavatars[var_4];
 
-  if(isDefined(var_5)) {
+  if(isdefined(var_5)) {
     var_5 buildpreviewcostume(var_3);
     var_6 = maps\mp\_vl_cac::getfactionteam();
     var_7 = maps\mp\_vl_cac::getfactionenvironment();
@@ -522,7 +506,7 @@ handledepotcamoapply(var_0) {
   var_4 = maps\mp\_vl_base::getfocusfromcontroller(var_2);
   var_5 = level.vlavatars[var_4];
 
-  if(isDefined(var_5)) {
+  if(isdefined(var_5)) {
     var_5._id_A7ED = var_3;
     var_5 _meth_857C(var_5._id_A7ED);
     self _meth_857C(var_5._id_A7ED);

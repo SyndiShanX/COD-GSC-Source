@@ -8,6 +8,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace empgrenade;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ on_player_spawned() {
 }
 
 monitorempgrenade() {
-  self endon(#"disconnect", # "death", # "killempmonitor");
+  self endon(#"disconnect", #"death", #"killempmonitor");
   self.empendtime = 0;
 
   while(true) {
@@ -73,7 +74,7 @@ monitorempgrenade() {
 
 applyemp(attacker, explosionpoint) {
   self notify(#"applyemp");
-  self endon(#"applyemp", # "disconnect", # "death");
+  self endon(#"applyemp", #"disconnect", #"death");
   waitframe(1);
 
   if(!(isDefined(self) && isalive(self))) {
@@ -108,8 +109,8 @@ applyemp(attacker, explosionpoint) {
   self.empedby = attacker;
   shutdownemprebootindicatormenu();
   emprebootmenu = self openluimenu("EmpRebootIndicator");
-  self setluimenudata(emprebootmenu, # "endtime", int(self.empendtime));
-  self setluimenudata(emprebootmenu, # "starttime", int(self.empstarttime));
+  self setluimenudata(emprebootmenu, #"endtime", int(self.empendtime));
+  self setluimenudata(emprebootmenu, #"starttime", int(self.empstarttime));
   self thread emprumbleloop(0.75);
   self setempjammed(1);
   self thread empgrenadedeathwaiter();
@@ -126,8 +127,8 @@ applyemp(attacker, explosionpoint) {
 
 empgrenadedeathwaiter() {
   self notify(#"empgrenadedeathwaiter");
-  self endon(#"empgrenadedeathwaiter", # "empgrenadetimedout");
-  self waittill(#"death", # "hash_3ffb993d40af48ca");
+  self endon(#"empgrenadedeathwaiter", #"empgrenadetimedout");
+  self waittill(#"death", #"hash_3ffb993d40af48ca");
 
   if(isDefined(self)) {
     self checktoturnoffemp();
@@ -170,10 +171,10 @@ emprumbleloop(duration) {
 }
 
 watchempexplosion(owner, weapon) {
-  owner endon(#"disconnect", # "team_changed");
+  owner endon(#"disconnect", #"team_changed");
   self endon(#"trophy_destroyed");
-  owner stats::function_e24eec31(weapon, # "used", 1);
-  waitresult = self waittill(#"explode", # "death");
+  owner stats::function_e24eec31(weapon, #"used", 1);
+  waitresult = self waittill(#"explode", #"death");
 
   if(waitresult._notify == "explode") {
     level empexplosiondamageents(owner, weapon, waitresult.position, 425, 1);

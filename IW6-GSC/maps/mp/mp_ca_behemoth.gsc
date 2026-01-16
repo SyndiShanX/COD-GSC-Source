@@ -201,14 +201,13 @@ RotatePoint2D(point, center, angle) {
 }
 
 behemothCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "heli_gunner", BEHEMOTH_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_CA_KILLSTREAKS_HELI_GUNNER_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "heli_gunner", BEHEMOTH_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_CA_KILLSTREAKS_HELI_GUNNER_PICKUP");
   maps\mp\killstreaks\_airdrop::generateMaxWeightedCrateValue();
   level thread watch_for_behemoth_crate();
 }
@@ -263,9 +262,8 @@ tryUseBehemothKillstreak(lifeId, streakName) {
 
 setup_bucketwheels() {
   buckets = getEntArray("bucket_wheel", "targetname");
-  if(buckets.size) {
+  if(buckets.size)
     array_thread(buckets, ::update_bucketwheel);
-  }
 }
 
 update_bucketwheel() {
@@ -316,9 +314,8 @@ update_pipe_fx(fx_loc) {
 play_effects_at_loc_array(loc_array, effect_id, rand_angle) {
   burst_angle = (0, 0, 0);
   foreach(loc in loc_array) {
-    if(rand_angle) {
+    if(rand_angle)
       burst_angle = (RandomFloat(180.0), RandomFloat(180.0), RandomFloat(180.0));
-    }
     playFX(effect_id, loc, burst_angle);
   }
 }
@@ -329,9 +326,8 @@ setup_pipe() {
   level.steam_burst_points[level.steam_burst_points.size] = self.origin;
   level.steam_bokeh_points[level.steam_bokeh_points.size] = self.origin + (0, 0, 30.0);
 
-  foreach(fx_loc in fx_locs) {
-    level.steam_stream_points[level.steam_stream_points.size] = fx_loc.origin;
-  }
+  foreach(fx_loc in fx_locs)
+  level.steam_stream_points[level.steam_stream_points.size] = fx_loc.origin;
 
   self update_pipe();
 }
@@ -344,9 +340,8 @@ bokeh_timer(loc) {
 }
 
 play_bokeh() {
-  foreach(loc in level.steam_bokeh_points) {
-    thread bokeh_timer(loc);
-  }
+  foreach(loc in level.steam_bokeh_points)
+  thread bokeh_timer(loc);
 }
 
 update_pipe() {
@@ -360,9 +355,8 @@ update_pipe() {
 
     array_thread(damage_models, ::burstpipe_damage_watcher, self);
 
-    foreach(loc in fx_locs) {
-      self thread update_pipe_fx(loc);
-    }
+    foreach(loc in fx_locs)
+    self thread update_pipe_fx(loc);
 
     self waittill("burstpipe_damage");
 
@@ -409,9 +403,8 @@ burstpipe_damage_watcher(struct) {
   while(struct.waiting) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
 
-    if(!level.steam_burst_active) {
+    if(!level.steam_burst_active)
       struct notify("burstpipe_damage", direction_vec, point);
-    }
   }
   self setCanDamage(false);
 }
@@ -517,22 +510,19 @@ update_mover() {
   default_speed = 140.0;
   stop_time = 0.0;
   start_time = 0.0;
-  if(isDefined(current_point.script_accel)) {
+  if(isDefined(current_point.script_accel))
     start_time = current_point.script_accel;
-  }
 
   current_point = GetStruct(current_point.target, "targetname");
   while(isDefined(current_point)) {
     stop_time = 0.0;
-    if(isDefined(current_point.script_decel)) {
+    if(isDefined(current_point.script_decel))
       stop_time = current_point.script_decel;
-    }
 
     move_speed = default_speed;
 
-    if(isDefined(current_point.script_physics)) {
+    if(isDefined(current_point.script_physics))
       move_speed *= current_point.script_physics;
-    }
     move_time = Distance(self.origin, current_point.origin) / move_speed;
     move_time = Max(move_time, stop_time + start_time);
 
@@ -543,14 +533,12 @@ update_mover() {
 
     wait move_time - (start_time + stop_time);
 
-    if(isDefined(current_point.script_node_pausetime)) {
+    if(isDefined(current_point.script_node_pausetime))
       wait current_point.script_node_pausetime;
-    }
 
     start_time = 0.0;
-    if(isDefined(current_point.script_accel)) {
+    if(isDefined(current_point.script_accel))
       start_time = current_point.script_accel;
-    }
 
     current_point = GetStruct(current_point.target, "targetname");
   }

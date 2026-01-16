@@ -28,6 +28,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace namespace_4a807bff;
 
 init() {
@@ -39,10 +40,10 @@ init() {
   }
 
   if(zm_custom::function_901b751c(#"zmwonderweaponisenabled")) {
-    zm_sq::register(#"hash_1222a3e832bad772", # "hash_2725edd09b4bb1b6", # "hash_13b316981d67e1ad", &step_1_setup, &step_1_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", # "hash_6cc4f52e0ed36f92", # "hash_13b313981d67dc94", &step_2_setup, &step_2_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", # "hash_575b4d3faca8bf2e", # "hash_13b314981d67de47", &step_3_setup, &step_3_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", # "hash_1d89a5560669ab60", # "hash_13b311981d67d92e", &step_4_setup, &step_4_cleanup);
+    zm_sq::register(#"hash_1222a3e832bad772", #"hash_2725edd09b4bb1b6", #"hash_13b316981d67e1ad", &step_1_setup, &step_1_cleanup);
+    zm_sq::register(#"hash_1222a3e832bad772", #"hash_6cc4f52e0ed36f92", #"hash_13b313981d67dc94", &step_2_setup, &step_2_cleanup);
+    zm_sq::register(#"hash_1222a3e832bad772", #"hash_575b4d3faca8bf2e", #"hash_13b314981d67de47", &step_3_setup, &step_3_cleanup);
+    zm_sq::register(#"hash_1222a3e832bad772", #"hash_1d89a5560669ab60", #"hash_13b311981d67d92e", &step_4_setup, &step_4_cleanup);
     level flag::init(#"hash_1562cc6d96b2bc4");
     level flag::init(#"hash_635fa9d7a8be6607");
     level flag::init(#"hash_2889330d50a4cc38");
@@ -53,8 +54,8 @@ init() {
     zm_weapons::include_zombie_weapon(#"hash_41a492d8cc5893f9", 0);
     zm_weapons::add_zombie_weapon(#"hash_41a492d8cc5893f9", "", 0, 0, undefined, undefined, 0, "", "", 0, undefined, 0);
     level.n_kill_count = 0;
-    level.var_3a67ac0e = array(#"hash_10d96c6e67b7604d", # "p7_compass_vintage", # "p7_world_globe_vintage_01", # "p7_ra2_tool_vintage_pincer_02", # "p7_zm_ori_scope_vintage");
-    level.var_b26f906a = array(#"hash_6750f91495cec97a", # "hash_5cfcc1e6699e46b6", # "hash_6e6d2b3030f3d6c6", # "hash_6382fc1f3035ccb0", # "hash_76274c14299e46ca");
+    level.var_3a67ac0e = array(#"hash_10d96c6e67b7604d", #"p7_compass_vintage", #"p7_world_globe_vintage_01", #"p7_ra2_tool_vintage_pincer_02", #"p7_zm_ori_scope_vintage");
+    level.var_b26f906a = array(#"hash_6750f91495cec97a", #"hash_5cfcc1e6699e46b6", #"hash_6e6d2b3030f3d6c6", #"hash_6382fc1f3035ccb0", #"hash_76274c14299e46ca");
     level.var_e083ecbd = randomint(level.a_s_chests.size);
     level.var_f9f50915 = level.a_s_chests[level.var_e083ecbd];
     level.var_f9f50915 show_chest();
@@ -62,25 +63,25 @@ init() {
     w_blueprint = zm_crafting::function_b18074d0(#"zblueprint_zod_tricannon_upgrade");
 
     if(isDefined(w_blueprint)) {
-      w_blueprint.component01.var_62a98b13 = # "hash_4223e614aaaeb5be";
-      w_blueprint.component02.var_62a98b13 = # "condenser_coil";
-      w_blueprint.component03.var_62a98b13 = # "hash_d2d731e2804301b";
-      w_blueprint.component01.var_25bb96cc = # "hash_604432f9a80a26e3";
-      w_blueprint.component02.var_25bb96cc = # "hash_604432f9a80a26e3";
-      w_blueprint.component03.var_25bb96cc = # "hash_604432f9a80a26e3";
+      w_blueprint.component01.var_62a98b13 = #"hash_4223e614aaaeb5be";
+      w_blueprint.component02.var_62a98b13 = #"condenser_coil";
+      w_blueprint.component03.var_62a98b13 = #"hash_d2d731e2804301b";
+      w_blueprint.component01.var_25bb96cc = #"hash_604432f9a80a26e3";
+      w_blueprint.component02.var_25bb96cc = #"hash_604432f9a80a26e3";
+      w_blueprint.component03.var_25bb96cc = #"hash_604432f9a80a26e3";
     }
 
     util::delay("all_players_spawned", undefined, &function_d159d50e);
   }
 
-  clientfield::register("scriptmover", "" + # "clue_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "despawn_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_1c8f8a5e03b36070", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"clue_fx", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"despawn_fx", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1c8f8a5e03b36070", 1, 1, "int");
 }
 
 function_d159d50e() {
   zm_weapons::function_603af7a8(level.w_tricannon_base);
-  clientfield::set("" + # "hash_16cc25b3f87f06ad", 1);
+  clientfield::set("" + #"hash_16cc25b3f87f06ad", 1);
 }
 
 private chest_init() {
@@ -131,12 +132,12 @@ private step_1_cleanup(var_a276c861, var_19e802fa) {
 }
 
 private function_f7b0a02a() {
-  level endon(#"hash_1562cc6d96b2bc4", # "end_game");
+  level endon(#"hash_1562cc6d96b2bc4", #"end_game");
 
-  if(self.archetype == # "stoker") {
-    waitresult = self waittill(#"hash_4651621237a54fc7", # "death");
+  if(self.archetype == #"stoker") {
+    waitresult = self waittill(#"hash_4651621237a54fc7", #"death");
 
-    if(waitresult._notify == # "hash_4651621237a54fc7") {
+    if(waitresult._notify == #"hash_4651621237a54fc7") {
       if(!isDefined(level.var_86d6efbf)) {
         level.var_86d6efbf = util::spawn_model(#"p8_zm_kraken_chest_key", self.origin + (0, 0, 32), self.angles);
         level.var_86d6efbf playSound(#"hash_1390af6222266716");
@@ -160,13 +161,13 @@ private function_f7b0a02a() {
 }
 
 private function_a20e6e5d() {
-  level endon(#"hash_503e8bfd27a38f08", # "hash_1562cc6d96b2bc4", # "end_game");
+  level endon(#"hash_503e8bfd27a38f08", #"hash_1562cc6d96b2bc4", #"end_game");
   waitresult = level.var_85a8dbba waittill(#"trigger");
   player = waitresult.activator;
 
   if(isDefined(player)) {
     player playSound(#"hash_1560d47a810c72df");
-    player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, # "stoker_key", # "pick_up");
+    player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, #"stoker_key", #"pick_up");
   }
 
   level.var_85a8dbba delete();
@@ -175,7 +176,7 @@ private function_a20e6e5d() {
 }
 
 private function_ca409b53() {
-  level endon(#"hash_1562cc6d96b2bc4", # "hash_1562cc6d96b2bc4", # "end_game");
+  level endon(#"hash_1562cc6d96b2bc4", #"hash_1562cc6d96b2bc4", #"end_game");
   level.var_86d6efbf rotate((0, 360, 0));
   wait 15;
   level.var_86d6efbf zm_powerups::hide_and_show(&ghost, &show);
@@ -196,7 +197,7 @@ private step_2_setup(var_a276c861) {
     }
 
     if(isalive(e_activator)) {
-      e_activator zm_audio::create_and_play_dialog(#"treasure_chest", # "activate_1");
+      e_activator zm_audio::create_and_play_dialog(#"treasure_chest", #"activate_1");
     }
   }
 }
@@ -259,7 +260,7 @@ private step_3_cleanup(var_a276c861, var_19e802fa) {
 
   iprintlnbold("<dev string:x58>");
 
-  var_31998302 = getEntArray("kraken_cleanup", "script_noteworthy");
+    var_31998302 = getEntArray("kraken_cleanup", "script_noteworthy");
   var_24402eb8 = getent(level.var_f3abf34a.target, "targetname");
 
   foreach(ent in var_31998302) {
@@ -314,9 +315,9 @@ private function_32edfed(s_struct, ai_killed) {
 
   if(!(isDefined(level.var_f9f50915.b_vo_played) && level.var_f9f50915.b_vo_played)) {
     if(level.var_e2ce1fe1 == 1) {
-      var_39acfdda = # "activate_2";
+      var_39acfdda = #"activate_2";
     } else if(level.var_e2ce1fe1 == 2) {
-      var_39acfdda = # "activate_3";
+      var_39acfdda = #"activate_3";
     } else {
       return;
     }
@@ -340,7 +341,7 @@ private step_4_setup(var_a276c861) {
   level endon(#"end_game");
 
   if(!var_a276c861) {
-    array::run_all(util::get_active_players(), &forcestreambundle, # "p8_fxanim_zm_zod_tentacle_bundle");
+    array::run_all(util::get_active_players(), &forcestreambundle, #"p8_fxanim_zm_zod_tentacle_bundle");
     trigger::wait_till(level.var_f3abf34a.target);
     getent(level.var_f3abf34a.target, "targetname") delete();
   }
@@ -352,14 +353,14 @@ private step_4_cleanup(var_a276c861, var_19e802fa) {
   level scene::play(level.var_f3abf34a.target, "targetname");
   scene::remove_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &spawn_tricannon);
   level flag::set(#"hash_35ab49975b4cc894");
-  array::run_all(util::get_active_players(), &function_66b6e720, # "p8_fxanim_zm_zod_tentacle_bundle");
+  array::run_all(util::get_active_players(), &function_66b6e720, #"p8_fxanim_zm_zod_tentacle_bundle");
 }
 
 function_d3351bf7(a_ents) {
   wait 5;
 
-  if(isDefined(a_ents[# "kraken_tentacle"])) {
-    a_ents[# "kraken_tentacle"] delete();
+  if(isDefined(a_ents[#"kraken_tentacle"])) {
+    a_ents[#"kraken_tentacle"] delete();
   }
 
   scene::remove_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &function_d3351bf7, "done");
@@ -372,12 +373,12 @@ private function_a8fff4b0() {
   v_offset = anglestoup(self.mdl_chest.angles) * 26;
   var_5792d83f = util::spawn_model(level.var_3a67ac0e[level.var_2e2dab8d], self.mdl_chest.origin + v_offset, self.mdl_chest.angles);
 
-  if(level.var_3a67ac0e[level.var_2e2dab8d] == # "p7_compass_vintage") {
+  if(level.var_3a67ac0e[level.var_2e2dab8d] == #"p7_compass_vintage") {
     var_5792d83f setscale(2);
   }
 
   var_5792d83f rotate((0, 22, 0));
-  var_5792d83f clientfield::set("" + # "clue_fx", 1);
+  var_5792d83f clientfield::set("" + #"clue_fx", 1);
   self.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "open", self.mdl_chest);
   level flag::wait_till(#"hash_2889330d50a4cc38");
   self.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "close", self.mdl_chest);
@@ -389,10 +390,10 @@ private function_a8fff4b0() {
 }
 
 private spawn_tricannon(a_ents) {
-  if(self.targetname !== # "offering_scene") {
+  if(self.targetname !== #"offering_scene") {
     exploder::exploder(level.var_f3abf34a.str_exploder);
-    mdl_tricannon = a_ents[# "kraken_weapon_drop"];
-    mdl_tricannon clientfield::set("" + # "despawn_fx", 1);
+    mdl_tricannon = a_ents[#"kraken_weapon_drop"];
+    mdl_tricannon clientfield::set("" + #"despawn_fx", 1);
     mdl_tricannon waittill(#"kraken_dropped");
     mdl_tricannon playSound(#"hash_70efc268d0becb47");
     mdl_tricannon playLoopSound(#"hash_61486fb02b77eed8", 2);
@@ -406,7 +407,7 @@ private spawn_tricannon(a_ents) {
 }
 
 private function_10d4ff8d(e_player) {
-  level endon(#"hash_2889330d50a4cc38", # "end_game");
+  level endon(#"hash_2889330d50a4cc38", #"end_game");
 
   if(function_e796525(e_player)) {
     self setvisibletoplayer(e_player);
@@ -420,7 +421,7 @@ private function_10d4ff8d(e_player) {
 }
 
 private function_e0fe80db() {
-  level endon(#"end_game", # "hash_2889330d50a4cc38");
+  level endon(#"end_game", #"hash_2889330d50a4cc38");
   self endon(#"kill_trigger");
 
   for(waitresult = self waittill(#"trigger"); !function_557328cc(waitresult); waitresult = self waittill(#"trigger")) {}
@@ -450,7 +451,7 @@ private function_e796525(e_player) {
 }
 
 private function_707a3db7() {
-  level endon(#"end_game", # "hash_477e8ec5d0789334");
+  level endon(#"end_game", #"hash_477e8ec5d0789334");
   self endon(#"disconnect");
 
   for(waitresult = self waittill(#"weapon_change"); waitresult.weapon != level.w_tricannon_base; waitresult = self waittill(#"weapon_change")) {}
@@ -466,7 +467,7 @@ private function_707a3db7() {
 
 function_8498110e(e_player) {
   if(isalive(e_player)) {
-    e_player zm_audio::create_and_play_dialog(#"distillation_kit", # "build");
+    e_player zm_audio::create_and_play_dialog(#"distillation_kit", #"build");
   }
 
   s_table = struct::get(#"hash_6b46b9c1dd7e1bb");
@@ -488,8 +489,8 @@ private registerblinkingshouldshowpain(e_player) {
     n_cost = function_9b8016f1(var_9102824b);
 
     switch (e_player.var_b6ddf07f) {
-      case # "decay":
-        if(var_9102824b.name == # "ww_tricannon_earth_t8" || var_9102824b.name == # "ww_tricannon_earth_t8_upgraded") {
+      case #"decay":
+        if(var_9102824b.name == #"ww_tricannon_earth_t8" || var_9102824b.name == #"ww_tricannon_earth_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_1349c5305046946d");
@@ -514,8 +515,8 @@ private registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "plasma":
-        if(var_9102824b.name == # "ww_tricannon_fire_t8" || var_9102824b.name == # "ww_tricannon_fire_t8_upgraded") {
+      case #"plasma":
+        if(var_9102824b.name == #"ww_tricannon_fire_t8" || var_9102824b.name == #"ww_tricannon_fire_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_641a4f757e565e1");
@@ -540,8 +541,8 @@ private registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "purity":
-        if(var_9102824b.name == # "ww_tricannon_water_t8" || var_9102824b.name == # "ww_tricannon_water_t8_upgraded") {
+      case #"purity":
+        if(var_9102824b.name == #"ww_tricannon_water_t8" || var_9102824b.name == #"ww_tricannon_water_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_6734cd1a9daa86ee");
@@ -566,8 +567,8 @@ private registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "radiance":
-        if(var_9102824b.name == # "ww_tricannon_air_t8" || var_9102824b.name == # "ww_tricannon_air_t8_upgraded") {
+      case #"radiance":
+        if(var_9102824b.name == #"ww_tricannon_air_t8" || var_9102824b.name == #"ww_tricannon_air_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_609587f477ef819e");
@@ -650,25 +651,25 @@ private function_e00eae6(e_player) {
     e_player takeweapon(var_9102824b);
 
     switch (e_player.var_b6ddf07f) {
-      case # "decay":
-        var_be9badbc = # "ww_tricannon_earth_t8";
+      case #"decay":
+        var_be9badbc = #"ww_tricannon_earth_t8";
         var_73d97896 = 2;
         break;
-      case # "plasma":
-        var_be9badbc = # "ww_tricannon_fire_t8";
+      case #"plasma":
+        var_be9badbc = #"ww_tricannon_fire_t8";
         var_73d97896 = 3;
         break;
-      case # "purity":
-        var_be9badbc = # "ww_tricannon_water_t8";
+      case #"purity":
+        var_be9badbc = #"ww_tricannon_water_t8";
         var_73d97896 = 1;
         break;
-      case # "radiance":
-        var_be9badbc = # "ww_tricannon_air_t8";
+      case #"radiance":
+        var_be9badbc = #"ww_tricannon_air_t8";
         var_73d97896 = 4;
         break;
       default:
         assert(0, "<dev string:x78>");
-        var_be9badbc = # "ww_tricannon_t8";
+        var_be9badbc = #"ww_tricannon_t8";
         break;
     }
 
@@ -693,7 +694,7 @@ private function_e00eae6(e_player) {
 private function_f4a7fd49(params) {
   level endon(#"end_game");
 
-  if(self.archetype == # "catalyst") {
+  if(self.archetype == #"catalyst") {
     if(is_tricannon(params.weapon)) {
       if(level.var_ab242e52 < 4 && randomint(100) <= 50) {
         level.var_ab242e52++;
@@ -726,24 +727,24 @@ private function_4facba35(str_drop, v_origin, v_spawn) {
   var_a071ccba setcursorhint("HINT_NOICON");
 
   switch (str_drop) {
-    case # "concentrated_decay":
-      str_prompt = zm_utility::function_d6046228(#"hash_1fe854f6441b337e", # "hash_1b7e2d2bbc1de36a");
+    case #"concentrated_decay":
+      str_prompt = zm_utility::function_d6046228(#"hash_1fe854f6441b337e", #"hash_1b7e2d2bbc1de36a");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_heart");
       v_origin += (0, 0, 5);
       break;
-    case # "concentrated_plasma":
-      str_prompt = zm_utility::function_d6046228(#"hash_1da4ec6fc5b6b9e6", # "hash_2eb14d935f8e39c2");
+    case #"concentrated_plasma":
+      str_prompt = zm_utility::function_d6046228(#"hash_1da4ec6fc5b6b9e6", #"hash_2eb14d935f8e39c2");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_skull");
       break;
-    case # "concentrated_purity":
-      str_prompt = zm_utility::function_d6046228(#"hash_7ee0d1946efa3d21", # "hash_669c0c5deaada19f");
+    case #"concentrated_purity":
+      str_prompt = zm_utility::function_d6046228(#"hash_7ee0d1946efa3d21", #"hash_669c0c5deaada19f");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_foot");
       break;
-    case # "concentrated_radiance":
-      str_prompt = zm_utility::function_d6046228(#"hash_1b1948d30c6b8ec9", # "hash_29b72f36c8ee8557");
+    case #"concentrated_radiance":
+      str_prompt = zm_utility::function_d6046228(#"hash_1b1948d30c6b8ec9", #"hash_29b72f36c8ee8557");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_hand");
       break;
@@ -765,16 +766,16 @@ private function_3ef485b1(t_trig) {
   e_player = waitresult.activator;
 
   switch (t_trig.str_drop) {
-    case # "concentrated_decay":
+    case #"concentrated_decay":
       function_ca37502d(e_player);
       break;
-    case # "concentrated_plasma":
+    case #"concentrated_plasma":
       function_1b182e8c(e_player);
       break;
-    case # "concentrated_purity":
+    case #"concentrated_purity":
       function_b9b7b8c(e_player);
       break;
-    case # "concentrated_radiance":
+    case #"concentrated_radiance":
       function_b3695700(e_player);
       break;
   }
@@ -799,7 +800,7 @@ function_7edbaf3a(v_origin) {
   self endon(#"death");
   self moveto(v_origin + (0, 0, 1), 0.5, 0.4);
   self waittill(#"movedone");
-  self clientfield::set("" + # "hash_1c8f8a5e03b36070", 1);
+  self clientfield::set("" + #"hash_1c8f8a5e03b36070", 1);
   wait randomfloat(2);
 
   for(n_wait = 3; true; n_wait = max(0.25, n_wait - 0.25)) {
@@ -819,26 +820,26 @@ function_7edbaf3a(v_origin) {
 }
 
 function_ca37502d(e_player) {
-  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", # "decay");
-  e_player.var_b6ddf07f = # "decay";
+  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"decay");
+  e_player.var_b6ddf07f = #"decay";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 1, e_player);
 }
 
 function_1b182e8c(e_player) {
-  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", # "plasma");
-  e_player.var_b6ddf07f = # "plasma";
+  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"plasma");
+  e_player.var_b6ddf07f = #"plasma";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 2, e_player);
 }
 
 function_b9b7b8c(e_player) {
-  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", # "purity");
-  e_player.var_b6ddf07f = # "purity";
+  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"purity");
+  e_player.var_b6ddf07f = #"purity";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 4, e_player);
 }
 
 function_b3695700(e_player) {
-  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", # "radiance");
-  e_player.var_b6ddf07f = # "radiance";
+  e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"radiance");
+  e_player.var_b6ddf07f = #"radiance";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 3, e_player);
 }
 
@@ -861,16 +862,16 @@ private has_tricannon() {
 
   foreach(weapon in a_weapons) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return true;
     }
   }
@@ -883,16 +884,16 @@ private function_8f59b576() {
 
   foreach(weapon in a_weapons) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return weapon;
     }
   }
@@ -903,16 +904,16 @@ private function_8f59b576() {
 private is_tricannon(weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return 1;
       default:
         return 0;
@@ -927,11 +928,11 @@ private is_tricannon(weapon) {
 private function_81d8403b(weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
     switch (weapon.name) {
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
         return 1;
       default:
         return 0;

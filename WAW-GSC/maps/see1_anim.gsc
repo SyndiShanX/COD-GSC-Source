@@ -291,15 +291,15 @@ kill_vig_guy_2(guy) {
 }
 
 russian_fire_kill_1(killer) {
-  playFXOnTag(level._effect["rifleflash"], killer, "tag_flash");
+  PlayFxOnTag(level._effect["rifleflash"], killer, "tag_flash");
   wait(0.2);
-  playFXOnTag(level._effect["rifle_shelleject"], killer, "tag_brass");
+  PlayFxOnTag(level._effect["rifle_shelleject"], killer, "tag_brass");
 }
 
 russian_fire_kill_2(killer) {
-  playFXOnTag(level._effect["rifleflash"], killer, "tag_flash");
+  PlayFxOnTag(level._effect["rifleflash"], killer, "tag_flash");
   wait(0.2);
-  playFXOnTag(level._effect["rifle_shelleject"], killer, "tag_brass");
+  PlayFxOnTag(level._effect["rifle_shelleject"], killer, "tag_brass");
 }
 
 #using_animtree("player");
@@ -336,7 +336,7 @@ play_player_anim_intro(index, player, anim_node, lerp_node) {
 play_player_lerp_to_pos(index, lerp_node) {
   level notify("intro_restore_share_screen");
   if(index != 0) {
-    org = spawn("script_origin", self.origin);
+    org = Spawn("script_origin", self.origin);
     org.angles = self.angles;
     self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
     org MoveTo(lerp_node.origin + (0, 0, 5), 3, 0, 1.5);
@@ -383,9 +383,9 @@ play_player_anim_outro(i, player, anim_node) {
 opening_show_hands(hand) {}
 opening_hide_hands(hand) {}
 fire_bullet(guy) {
-  playFXOnTag(level._effect["rifleflash"], guy, "tag_flash");
+  PlayFxOnTag(level._effect["rifleflash"], guy, "tag_flash");
   wait(0.2);
-  playFXOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
+  PlayFxOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
 }
 
 barn_door_kick_spawn() {
@@ -406,9 +406,9 @@ anim_barn_door_kick_setup() {
 }
 
 anim_barn_door_rattle(guy) {
-  playFXOnTag(level._effect["rifleflash"], guy, "tag_flash");
+  PlayFxOnTag(level._effect["rifleflash"], guy, "tag_flash");
   wait(0.2);
-  playFXOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
+  PlayFxOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
   level.barn_door_kick UseAnimTree(#animtree);
   level.barn_door_kick stopanimscripted();
   level.barn_door_kick anim_single_solo(level.barn_door_kick, "shake");
@@ -464,21 +464,21 @@ play_truck_crash_anim(truck) {
   truck_new.animname = "truck";
   truck_new.angles = truck.angles;
   anim_temp_hide(truck_new, truck);
-  playFX(level._effect["tank_blow_up"], truck_new.origin);
-  playFXOnTag(level._effect["truck_fire_med"], truck_new, "tag_driver");
+  playfx(level._effect["tank_blow_up"], truck_new.origin);
+  playfxontag(level._effect["truck_fire_med"], truck_new, "tag_driver");
   truck_new UseAnimTree(#animtree);
   origin anim_single_solo(truck_new, "truck_explosion");
-  playFX(level._effect["truck_explosion_phys"], truck_new gettagorigin("tag_driver"));
-  playFX(level._effect["tank_smoke_column"], truck_new gettagorigin("tag_driver"));
+  playfx(level._effect["truck_explosion_phys"], truck_new gettagorigin("tag_driver"));
+  playfx(level._effect["tank_smoke_column"], truck_new gettagorigin("tag_driver"));
   fire_targets = getstructarray("truck_fall_flame", "targetname");
-  for(i = 0; i < fire_targets.size; i++) {
-    playFX(level._effect["tree_brush_fire"], fire_targets[i].origin);
+  for (i = 0; i < fire_targets.size; i++) {
+    playfx(level._effect["tree_brush_fire"], fire_targets[i].origin);
   }
 }
 
 anim_temp_hide(truck, truck_old) {
   wait(0.1);
-  truck setModel("vehicle_ger_wheeled_opel_blitz");
+  truck SetModel("vehicle_ger_wheeled_opel_blitz");
   truck_old hide();
 }
 

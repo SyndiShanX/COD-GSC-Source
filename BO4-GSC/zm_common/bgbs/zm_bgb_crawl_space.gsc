@@ -6,10 +6,11 @@
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_crawl_space;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_crawl_space", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_crawl_space", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -24,7 +25,7 @@ activation() {
   a_ai = getaiarray();
 
   for(i = 0; i < a_ai.size; i++) {
-    if(isDefined(a_ai[i]) && isalive(a_ai[i]) && a_ai[i].archetype === # "zombie" && isDefined(a_ai[i].gibdef)) {
+    if(isDefined(a_ai[i]) && isalive(a_ai[i]) && a_ai[i].archetype === #"zombie" && isDefined(a_ai[i].gibdef)) {
       var_aa4b65bc = distancesquared(self.origin, a_ai[i].origin);
 
       if(var_aa4b65bc < 360000) {

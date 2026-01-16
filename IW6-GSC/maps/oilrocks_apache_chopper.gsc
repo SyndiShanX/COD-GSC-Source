@@ -9,9 +9,8 @@ start() {
   maps\oilrocks_apache_code::spawn_apache_allies("struct_apache_ally_chopper_0");
   maps\oilrocks_apache_code::spawn_blackhawk_ally("blackhawk_ally_finale");
 
-  foreach(var_1 in ["apache_chase_zpu", "apache_chase_additional_zpu", "apache_main_island_zpu"]) {
-    maps\_utility::array_delete(getEntArray(var_1, "targetname"));
-  }
+  foreach(var_1 in ["apache_chase_zpu", "apache_chase_additional_zpu", "apache_main_island_zpu"])
+  maps\_utility::array_delete(getEntArray(var_1, "targetname"));
 }
 
 main() {
@@ -36,7 +35,7 @@ blackhawk_hides_away() {
 
 objectives() {
   var_0 = maps\_utility::obj("apache_escort");
-  objective_add(var_0, "active", &"OILROCKS_OBJ_APACHE_CHOPPER");
+  objective_add(var_0, "active", & "OILROCKS_OBJ_APACHE_CHOPPER");
   objective_current(var_0);
   common_scripts\utility::flag_wait("FLAG_apache_chopper_finished");
   maps\_utility::objective_complete(var_0);
@@ -46,31 +45,26 @@ apache_chopper_enemies() {
   var_0 = common_scripts\utility::getstructarray("apache_chopper_enemy_hind_path_start", "targetname");
   level.apache_chopper_hinds = [];
 
-  foreach(var_2 in var_0) {
-    apache_chopper_hind_spawn(var_2);
-  }
+  foreach(var_2 in var_0)
+  apache_chopper_hind_spawn(var_2);
 
-  while(level.apache_chopper_hinds.size > 1) {
+  while(level.apache_chopper_hinds.size > 1)
     level common_scripts\utility::waittill_any_timeout(1.0, "apache_chopper_hind_died");
-  }
 
   common_scripts\utility::flag_set("FLAG_apache_chopper_hind_destroyed_two");
   var_0 = common_scripts\utility::getstructarray("apache_chopper_enemy_hind_path_start_part_2", "targetname");
 
-  foreach(var_2 in var_0) {
-    apache_chopper_hind_spawn(var_2);
-  }
+  foreach(var_2 in var_0)
+  apache_chopper_hind_spawn(var_2);
 
   while(level.apache_chopper_hinds.size > 0) {
     level common_scripts\utility::waittill_any_timeout(1.0, "apache_chopper_hind_died");
 
-    if(level.apache_chopper_hinds.size <= 3 && !common_scripts\utility::flag("FLAG_apache_chopper_hind_remaining_three")) {
+    if(level.apache_chopper_hinds.size <= 3 && !common_scripts\utility::flag("FLAG_apache_chopper_hind_remaining_three"))
       common_scripts\utility::flag_set("FLAG_apache_chopper_hind_remaining_three");
-    }
 
-    if(level.apache_chopper_hinds.size <= 1 && !common_scripts\utility::flag("FLAG_apache_chopper_hind_remaining_one")) {
+    if(level.apache_chopper_hinds.size <= 1 && !common_scripts\utility::flag("FLAG_apache_chopper_hind_remaining_one"))
       common_scripts\utility::flag_set("FLAG_apache_chopper_hind_remaining_one");
-    }
   }
 
   level.apache_chopper_hinds = undefined;

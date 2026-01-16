@@ -43,11 +43,10 @@ main() {
 
   self.a.goingToProneAim = true;
   self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
-  if(self.a.pose != "prone") {
+  if(self.a.pose != "prone")
     self prone_transitionTo("prone");
-  } else {
+  else
     self EnterProneWrapper(0);
-  }
 
   self thread aimIdleThread();
 
@@ -61,6 +60,7 @@ main() {
   self proneCombatMainLoop();
 
   self notify("stop_deciding_how_to_shoot");
+
 }
 
 end_script() {
@@ -70,7 +70,7 @@ end_script() {
 idleThread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
-  for(;;) {
+  for (;;) {
     idleAnim = animArrayPickRandom("prone_idle");
     self setflaggedanimlimited("idle", idleAnim);
     self waittillmatch("idle", "end");
@@ -98,7 +98,7 @@ proneCombatMainLoop() {
 
   //prof_begin("prone_combat");
 
-  for(;;) {
+  for (;;) {
     self animscripts\utility::IsInCombat(); // reset our in - combat state
 
     self UpdateProneWrapper(0.05);
@@ -109,17 +109,16 @@ proneCombatMainLoop() {
       continue;
     }
 
-    if(!isDefined(self.shootPos)) {
-      assert(!isDefined(self.shootEnt));
-      if(considerThrowGrenade()) {
+    if(!isdefined(self.shootPos)) {
+      assert(!isdefined(self.shootEnt));
+      if(considerThrowGrenade())
         continue;
-      }
 
       wait(0.05);
       continue;
     }
 
-    assert(isDefined(self.shootPos)); // we can use self.shootPos after this point.
+    assert(isdefined(self.shootPos)); // we can use self.shootPos after this point.
     //		self resetGiveUpOnEnemyTime();
 
     // if we're too close to our enemy, stand up
@@ -137,9 +136,8 @@ proneCombatMainLoop() {
     if(considerThrowGrenade()) // TODO: make considerThrowGrenade work with shootPos rather than only self.enemy
       continue;
 
-    if(self proneReload(0)) {
+    if(self proneReload(0))
       continue;
-    }
 
     if(aimedAtShootEntOrPos()) {
       shootUntilShootBehaviorChange();
@@ -153,6 +151,8 @@ proneCombatMainLoop() {
 
   //prof_end("prone_combat");
 }
+
+
 
 proneReload(threshold) {
   return Reload(threshold, self animArray("reload"));
@@ -207,11 +207,10 @@ setup_cover_prone() {
 
 tryThrowingGrenade(throwAt, safe) {
   theanim = undefined;
-  if(isDefined(safe) && safe) {
+  if(isdefined(safe) && safe)
     theanim = animArrayPickRandom("grenade_safe");
-  } else {
+  else
     theanim = animArrayPickRandom("grenade_exposed");
-  }
 
   self animMode("zonly_physics"); // Unlatch the feet
   self.keepClaimedNodeIfValid = true;
@@ -224,47 +223,40 @@ tryThrowingGrenade(throwAt, safe) {
 }
 
 considerThrowGrenade() {
-  if(isDefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
-    if(tryThrowingGrenade(level.player, 200)) {
+  if(isdefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
+    if(tryThrowingGrenade(level.player, 200))
       return true;
-    }
   }
 
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy))
     return tryThrowingGrenade(self.enemy, 850);
-  }
 
   return false;
 }
 
 shouldFireWhileChangingPose() {
-  if(!isDefined(self.weapon) || !WeaponIsAuto(self.weapon)) {
+  if(!isdefined(self.weapon) || !WeaponIsAuto(self.weapon))
     return false;
-  }
 
-  if(isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
+  if(isdefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16)
     return false; // we're on a node and can't use an animation with a delta
-  }
-  if(isDefined(self.enemy) && self canSee(self.enemy) && !isDefined(self.grenade) && self getAimYawToShootEntOrPos() < 20) {
+  if(isDefined(self.enemy) && self canSee(self.enemy) && !isdefined(self.grenade) && self getAimYawToShootEntOrPos() < 20)
     return animscripts\move::MayShootWhileMoving();
-  }
   return false;
 }
 
 prone_transitionTo(newPose) {
-  if(newPose == self.a.pose) {
+  if(newPose == self.a.pose)
     return;
-  }
 
   self clearanim( % root, .3);
 
   self endFireAndAnimIdleThread();
 
-  if(shouldFireWhileChangingPose()) {
+  if(shouldFireWhileChangingPose())
     transAnim = animArray(self.a.pose + "_2_" + newPose + "_firing");
-  } else {
+  else
     transAnim = animArray(self.a.pose + "_2_" + newPose);
-  }
 
   if(newPose == "prone") {
     // this is crucial. if it doesn't have this notetrack, we won't call enterProneWrapper!
@@ -302,31 +294,26 @@ proneTo(newPose, rate) {
   transAnim = undefined;
 
   if(shouldFireWhileChangingPose()) {
-    if(newPose == "crouch") {
+    if(newPose == "crouch")
       transAnim = % prone_2_crouch_firing;
-    } else if(newPose == "stand") {
+    else if(newPose == "stand")
       transAnim = % prone_2_stand_firing;
-    }
   } else {
-    if(newPose == "crouch") {
+    if(newPose == "crouch")
       transAnim = % prone_2_crouch;
-    } else if(newPose == "stand") {
+    else if(newPose == "stand")
       transAnim = % prone_2_stand_nodelta;
-    }
   }
 
-  if(isDefined(self.prone_anim_override)) {
+  if(isdefined(self.prone_anim_override))
     transAnim = self.prone_anim_override;
-  }
-  if(isDefined(self.prone_rate_override)) {
+  if(isdefined(self.prone_rate_override))
     rate = self.prone_rate_override;
-  }
 
   assert(isDefined(transAnim));
 
-  if(!isDefined(rate)) {
+  if(!isdefined(rate))
     rate = 1;
-  }
 
   self ExitProneWrapper(getAnimLength(transAnim) / 2);
   self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, rate);

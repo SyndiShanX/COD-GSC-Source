@@ -32,7 +32,8 @@ skipto_menendez_sees_noriega() {
   level.player setclientdvar("cg_aggressiveCullRadius", 495);
 }
 
-init_flags() {}
+init_flags() {
+}
 
 mason_intro() {
   convert_mason_models();
@@ -73,7 +74,7 @@ binocular_scene_1() {
   level thread run_scene("mason_intro_switch_to_menendez");
   screen_fade_in(0.5);
   level waittill("fade_to_menendez");
-  level.player playSound("evt_transition_mend_start");
+  level.player playsound("evt_transition_mend_start");
   level clientnotify("stopLevelIntroSnap");
   screen_fade_out(0.5, "white");
   level.player disable_scope_view();
@@ -148,7 +149,7 @@ noriega_arrives_scene() {
 
   if(is_mature()) {
     m_player_body = get_model_or_models_from_scene("noriega_arrives", "player_body");
-    m_player_body setModel("c_mul_menendez_nicaragua_d_viewbody");
+    m_player_body setmodel("c_mul_menendez_nicaragua_d_viewbody");
   }
 
   ai_noriega = getent("noriega_ai", "targetname");
@@ -159,9 +160,8 @@ noriega_arrives_scene() {
   maps\_fxanim::fxanim_reconstruct("fxanim_bridge_drop");
   scene_wait("noriega_arrives");
 
-  if(isalive(ai_noriega)) {
+  if(isalive(ai_noriega))
     ai_noriega detach("p_anim_rus_key", "tag_weapon_left");
-  }
 
   autosave_by_name("noriega_arrives_done");
   level.player.ignoreme = 0;
@@ -205,9 +205,8 @@ menendez_title_card(m_player_body) {
 }
 
 menendez_intro_not_mature_black_screen(m_player_body) {
-  if(!is_mature()) {
+  if(!is_mature())
     screen_fade_out(0.05);
-  }
 }
 
 menendez_intro_part1_rage_notetrack(guy) {
@@ -220,21 +219,20 @@ menendez_intro_part1_rage_notetrack(guy) {
 
 intro_guard_fx(ai_pdf_4) {
   ai_cartel_guard = getent("intro_cartel_guard_ai", "targetname");
-  playFXOnTag(getfx("intro_cartel_blood"), ai_cartel_guard, "j_head");
+  playfxontag(getfx("intro_cartel_blood"), ai_cartel_guard, "j_head");
   exploder(59);
 }
 
 menendez_intro_glass_stab(m_player_body) {
   m_glass_shard = get_model_or_models_from_scene("menendez_intro_part2", "intro_shard");
-  playFXOnTag(getfx("neck_stab_glass"), m_glass_shard, "tag_origin");
+  playfxontag(getfx("neck_stab_glass"), m_glass_shard, "tag_origin");
   ai_intro_pdf_1 = getent("intro_pdf01_ai", "targetname");
-  playFXOnTag(getfx("neck_stab_blood"), ai_intro_pdf_1, "j_neck");
+  playfxontag(getfx("neck_stab_blood"), ai_intro_pdf_1, "j_neck");
 }
 
 menendez_intro_bloody_viewbody(m_player_body) {
-  if(is_mature()) {
-    m_player_body setModel("c_mul_menendez_nicaragua_b_viewbody");
-  }
+  if(is_mature())
+    m_player_body setmodel("c_mul_menendez_nicaragua_b_viewbody");
 }
 
 menendez_intro_blur(m_player_body) {
@@ -243,9 +241,8 @@ menendez_intro_blur(m_player_body) {
 }
 
 menendez_intro_part1_fade_notetrack(guy) {
-  if(is_mature()) {
+  if(is_mature())
     screen_fade_out(0.5);
-  }
 
   level.player reset_dof();
   wait 9;
@@ -279,7 +276,7 @@ give_player_headlook_during_scene(m_player_body) {
 
 noriega_arrives_muddy_viewbody(m_player_body) {
   if(is_mature()) {
-    m_player_body setModel("c_mul_menendez_nicaragua_m_viewbody");
+    m_player_body setmodel("c_mul_menendez_nicaragua_m_viewbody");
     update_player_model("c_mul_menendez_nicaragua_m_viewhands", "c_mul_menendez_nicaragua_m_viewbody");
   }
 }
@@ -306,19 +303,18 @@ noriega_arrives_look_at_mission(m_player_body) {
 }
 
 noriega_arrives_pdf_blood(ai_noriega) {
-  if(!isDefined(ai_noriega.n_pdf_killed)) {
+  if(!isDefined(ai_noriega.n_pdf_killed))
     ai_noriega.n_pdf_killed = 0;
-  }
 
   if(ai_noriega.n_pdf_killed == 0) {
     ai_pdf = get_ais_from_scene("noriega_arrives_pdf_2", "noriega_arrives_pdf_2");
     wait 0.05;
-    playFXOnTag(getfx("flesh_hit_shotgun_chest"), ai_pdf, "j_SpineUpper");
+    playfxontag(getfx("flesh_hit_shotgun_chest"), ai_pdf, "j_SpineUpper");
     ai_noriega.n_pdf_killed++;
   } else {
     ai_pdf = get_ais_from_scene("noriega_arrives_pdf_1", "noriega_arrives_pdf_1");
     wait 0.05;
-    playFXOnTag(getfx("flesh_hit_shotgun_chest"), ai_pdf, "j_SpineUpper");
+    playfxontag(getfx("flesh_hit_shotgun_chest"), ai_pdf, "j_SpineUpper");
     ai_noriega.n_pdf_killed++;
   }
 }

@@ -39,6 +39,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_ai_gegenees;
 
 autoexec __init__system__() {
@@ -57,16 +58,17 @@ __init__() {
   clientfield::register("toplayer", "gegenees_damage_cf", 16000, 1, "counter");
   clientfield::register("scriptmover", "gegenees_spear_miss_cf", 16000, 1, "counter");
   clientfield::register("actor", "gegenees_helmet_explosion_cf", 16000, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"gegenees", 1, 1, 1);
 
   if(isarchetypeloaded(#"gegenees")) {
     level thread function_c03e8d05();
   }
 
   spawner::add_archetype_spawn_function(#"gegenees", &zombie_utility::updateanimationrate);
+
 }
 
 __main__() {
@@ -199,7 +201,7 @@ private function_4b8e0aab(entity) {
   can_see = 0;
   trace = physicstrace(entity.origin + (0, 0, 48), entity.favoriteenemy.origin + (0, 0, 36), (-16, -16, -12), (16, 16, 12), entity);
 
-  if(trace[# "fraction"] == 1 || trace[# "entity"] === entity.favoriteenemy) {
+  if(trace[#"fraction"] == 1 || trace[#"entity"] === entity.favoriteenemy) {
     can_see = 1;
   }
 
@@ -249,8 +251,8 @@ function_7fe60e9e(entity) {
   var_872c6826 = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, 1110, getdvarfloat(#"bg_lowgravity", 0));
 
-  if(isDefined(angles) && angles[# "lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[# "lowangle"], var_872c6826[1], var_872c6826[2]));
+  if(isDefined(angles) && angles[#"lowangle"] > 0) {
+    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
   } else {
     dir = anglesToForward(var_872c6826);
   }
@@ -302,7 +304,7 @@ private function_7e633e59() {
       continue;
     }
 
-    if(zombie.archetype === # "gegenees") {
+    if(zombie.archetype === #"gegenees") {
       continue;
     }
 
@@ -317,7 +319,7 @@ private function_7e633e59() {
 
 private function_7d162bd0(projectile, entity) {
   projectile endon(#"spear_death");
-  result = projectile waittill(#"projectile_impact_player", # "death");
+  result = projectile waittill(#"projectile_impact_player", #"death");
 
   if(result._notify != "projectile_impact_player") {
     var_b12a43cc = function_a1fce938();
@@ -401,11 +403,12 @@ private function_3839537e(entity) {
 }
 
 private function_75db4aba(entity) {
+
   if(isDefined(entity.var_89b5e1e) && entity.var_89b5e1e) {
     return true;
   }
 
-  var_98c55679 = 0;
+    var_98c55679 = 0;
   var_a4017acd = 0.1 * entity.maxhealth;
 
   if(isDefined(entity.shielddamage)) {
@@ -467,7 +470,7 @@ private function_d82de95f(entity) {
 }
 
 private function_60164697() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   time = gettime() + 2000;
 
   while(true) {
@@ -492,7 +495,7 @@ private function_2301c0a7(entity, asmstatename) {
 
   entity.var_89b5e1e = 0;
 
-  animationstatenetworkutility::requeststate(entity, asmstatename);
+    animationstatenetworkutility::requeststate(entity, asmstatename);
   return 5;
 }
 
@@ -553,7 +556,7 @@ private gegeneestargetservice(entity) {
     return false;
   }
 
-  entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
+    entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
   entity zombie_utility::run_ignore_player_handler();
   entity.favoriteenemy = entity.var_93a62fe;
   entity.var_d7e69143 = 0;
@@ -562,7 +565,7 @@ private gegeneestargetservice(entity) {
     var_eee191fa = 1;
 
     if(isDefined(entity.zombie_poi[1].var_8305fd51)) {
-      if(entity.zombie_poi[1].var_8305fd51 == # "thunderstorm" || entity.zombie_poi[1].var_8305fd51 == # "charon_pool") {
+      if(entity.zombie_poi[1].var_8305fd51 == #"thunderstorm" || entity.zombie_poi[1].var_8305fd51 == #"charon_pool") {
         var_eee191fa = 0;
         entity.zombie_poi = undefined;
       }
@@ -580,7 +583,7 @@ private gegeneestargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return zm_utility::function_64259898(wait_locations[0].origin);
@@ -596,7 +599,7 @@ private gegeneestargetservice(entity) {
     return false;
   }
 
-  goalent = entity.favoriteenemy;
+    goalent = entity.favoriteenemy;
 
   if(isplayer(goalent)) {
     goalent = zm_ai_utility::function_a2e8fd7b(entity, entity.favoriteenemy);
@@ -703,10 +706,10 @@ private function_c3c86ec1(entity) {
 
   record3dtext("<dev string:x38>", self.origin, (1, 0, 0), "<dev string:x40>", entity);
 
-  if(isDefined(hitent) && isplayer(hitent)) {
-    entity function_376a5549(hitent);
-    hitent clientfield::increment_to_player("gegenees_damage_cf");
-  }
+    if(isDefined(hitent) && isplayer(hitent)) {
+      entity function_376a5549(hitent);
+      hitent clientfield::increment_to_player("gegenees_damage_cf");
+    }
 
   if(isDefined(entity.var_d7e69143) && entity.var_d7e69143) {
     if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
@@ -824,31 +827,32 @@ private function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, we
         iprintlnbold("<dev string:x49>" + var_dd54fdb1.health);
       }
 
-      if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
-        if(getdvarint(#"scr_weakpoint_debug", 0) > 0) {
-          iprintlnbold("<dev string:x5e>");
-        }
+        if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
 
-        self destructserverutils::handledamage(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
-
-        if(var_dd54fdb1.hitloc === "helmet") {
-          var_465efe42 = namespace_81245006::function_37e3f011(self, "j_head", 2);
-          namespace_81245006::function_6c64ebd3(var_465efe42, 1);
-          self.var_d64b7af0 = 1;
-
-          if(self isattached("c_t8_zmb_dlc2_gegenees_helmet1", "j_head")) {
-            self detach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
+          if(getdvarint(#"scr_weakpoint_debug", 0) > 0) {
+            iprintlnbold("<dev string:x5e>");
           }
 
-          self clientfield::set("gegenees_helmet_explosion_cf", 1);
+            self destructserverutils::handledamage(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
+
+          if(var_dd54fdb1.hitloc === "helmet") {
+            var_465efe42 = namespace_81245006::function_37e3f011(self, "j_head", 2);
+            namespace_81245006::function_6c64ebd3(var_465efe42, 1);
+            self.var_d64b7af0 = 1;
+
+            if(self isattached("c_t8_zmb_dlc2_gegenees_helmet1", "j_head")) {
+              self detach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
+            }
+
+            self clientfield::set("gegenees_helmet_explosion_cf", 1);
+          }
+
+          if(isDefined(var_dd54fdb1.var_641ce20e) && var_dd54fdb1.var_641ce20e) {
+            namespace_81245006::function_6742b846(self, var_dd54fdb1);
+          }
         }
 
-        if(isDefined(var_dd54fdb1.var_641ce20e) && var_dd54fdb1.var_641ce20e) {
-          namespace_81245006::function_6742b846(self, var_dd54fdb1);
-        }
-      }
-
-      if(var_dd54fdb1.type === # "armor") {
+      if(var_dd54fdb1.type === #"armor") {
         attacker util::show_hit_marker(!isalive(self));
 
         if(isDefined(dir)) {
@@ -881,7 +885,7 @@ private function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, we
 }
 
 private function_a231dd3b(s_params) {
-  if(self.archetype != # "gegenees") {
+  if(self.archetype != #"gegenees") {
     return;
   }
 
@@ -915,12 +919,12 @@ private function_a231dd3b(s_params) {
     }
 
     self.var_d0686fde = [];
-    self.var_d0686fde[self.var_d0686fde.size] = # "fire_sale";
-    self.var_d0686fde[self.var_d0686fde.size] = # "nuke";
+    self.var_d0686fde[self.var_d0686fde.size] = #"fire_sale";
+    self.var_d0686fde[self.var_d0686fde.size] = #"nuke";
 
     if(var_67a1b262) {
-      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
-      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
     }
 
     level.var_51c8013a = n_time;
@@ -951,19 +955,19 @@ private function_c03e8d05() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn":
+        case #"spawn":
           zm_devgui::spawn_archetype("<dev string:x1b1>");
           break;
-        case # "kill":
+        case #"kill":
           zm_devgui::kill_archetype(#"gegenees");
           break;
-        case # "shield_attack":
+        case #"shield_attack":
           if(isDefined(gegenees[0])) {
             gegenees[0].var_89b5e1e = 1;
           }
 
           break;
-        case # "stop_move":
+        case #"stop_move":
           if(isDefined(gegenees[0])) {
             if(!isDefined(gegenees[0].devgui_stop_move)) {
               gegenees[0].devgui_stop_move = 1;
@@ -981,3 +985,4 @@ private function_c03e8d05() {
     setdvar(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
   }
 }
+

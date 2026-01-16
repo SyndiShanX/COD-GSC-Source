@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace clientfield;
 
 register(str_pool_name, str_name, n_version, n_bits, str_type) {

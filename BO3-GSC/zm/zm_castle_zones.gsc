@@ -17,7 +17,7 @@
 #namespace zm_castle_zones;
 
 function init() {
-  level.custom_spawner_entry["crawl"] = &function_48cfc7df;
+  level.custom_spawner_entry["crawl"] = & function_48cfc7df;
   level flag::init("always_on");
   level flag::set("always_on");
   level thread function_e9579b3e();
@@ -107,7 +107,7 @@ function function_e9579b3e() {
       e_spawner.is_enabled = 0;
     }
   }
-  while(true) {
+  while (true) {
     level waittill("end_of_round");
     if(level.round_number >= 5) {
       break;
@@ -136,7 +136,7 @@ function function_8ead5cf5() {
 
 function function_affecb53(var_405e4f24) {
   level flag::wait_till("zones_initialized");
-  while(true) {
+  while (true) {
     level flag::wait_till("tesla_coil_on");
     foreach(e_spawner in var_405e4f24) {
       if(e_spawner.script_int === 1) {
@@ -155,12 +155,12 @@ function function_affecb53(var_405e4f24) {
 function function_48cfc7df(spot) {
   self endon("death");
   self.var_2be9fa75 = 1;
-  if(isDefined(self.mdl_anchor)) {
+  if(isdefined(self.mdl_anchor)) {
     self.mdl_anchor delete();
   }
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
   self ghost();
-  if(!isDefined(spot.angles)) {
+  if(!isdefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
   self thread anchor_delete_watcher();
@@ -168,13 +168,13 @@ function function_48cfc7df(spot) {
   self.mdl_anchor rotateto(spot.angles, 0.05);
   self.mdl_anchor waittill("movedone");
   wait(0.05);
-  if(!isDefined(self) || !isDefined(self.mdl_anchor)) {
+  if(!isdefined(self) || !isdefined(self.mdl_anchor)) {
     return;
   }
   self.create_eyes = 1;
   self show();
-  if(isDefined(self.mdl_anchor)) {
-    if(isDefined(spot.scriptbundlename)) {
+  if(isdefined(self.mdl_anchor)) {
+    if(isdefined(spot.scriptbundlename)) {
       self.mdl_anchor scene::play(spot.scriptbundlename, self);
     } else {
       self.mdl_anchor scene::play("cin_zm_dlc1_zombie_undercroft_spawn_1", self);
@@ -188,16 +188,16 @@ function function_48cfc7df(spot) {
 function function_27a6dd5f() {
   self endon("death");
   util::wait_network_frame();
-  if(isDefined(self.mdl_anchor)) {
+  if(isdefined(self.mdl_anchor)) {
     self.mdl_anchor delete();
   }
 }
 
 function anchor_delete_watcher() {
   self waittill("death");
-  if(isDefined(self.mdl_anchor)) {
+  if(isdefined(self.mdl_anchor)) {
     wait(0.05);
-    if(isDefined(self.mdl_anchor)) {
+    if(isdefined(self.mdl_anchor)) {
       self.mdl_anchor delete();
     }
   }

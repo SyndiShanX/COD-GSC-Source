@@ -17,20 +17,20 @@
 #namespace zm_bgb_bullet_boost;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_bullet_boost", &__init__, undefined, "bgb");
+  system::register("zm_bgb_bullet_boost", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_bullet_boost", "activated", 2, undefined, undefined, &validation, &activation);
+  bgb::register("zm_bgb_bullet_boost", "activated", 2, undefined, undefined, & validation, & activation);
   bgb::function_f132da9c("zm_bgb_bullet_boost");
 }
 
 function validation() {
   current_weapon = self getcurrentweapon();
-  if(!self zm_magicbox::can_buy_weapon() || self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission) || self isthrowinggrenade() || (!self zm_weapons::can_upgrade_weapon(current_weapon) && !zm_weapons::weapon_supports_aat(current_weapon))) {
+  if(!self zm_magicbox::can_buy_weapon() || self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission) || self isthrowinggrenade() || (!self zm_weapons::can_upgrade_weapon(current_weapon) && !zm_weapons::weapon_supports_aat(current_weapon))) {
     return false;
   }
   if(self isswitchingweapons()) {
@@ -54,7 +54,7 @@ function activation() {
   current_weapon = self getcurrentweapon();
   current_weapon = self zm_weapons::switch_from_alt_weapon(current_weapon);
   var_3a5329e8 = 0;
-  while(current_weapon === level.weaponnone || !zm_weapons::weapon_supports_aat(current_weapon)) {
+  while (current_weapon === level.weaponnone || !zm_weapons::weapon_supports_aat(current_weapon)) {
     wait(0.05);
     current_weapon = self getcurrentweapon();
     var_3a5329e8++;

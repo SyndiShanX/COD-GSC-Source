@@ -19,10 +19,11 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_hud;
 
 autoexec __init__system__() {
-  system::register(#"zm_hud", &__init__, &__main__, # "zm_crafting");
+  system::register(#"zm_hud", &__init__, &__main__, #"zm_crafting");
 }
 
 __init__() {
@@ -42,7 +43,7 @@ on_player_spawned() {
     level.zm_location zm_location::close(self);
   }
 
-  self.var_b3122c84 = # "";
+  self.var_b3122c84 = #"";
   util::wait_network_frame();
 
   if(isDefined(self)) {

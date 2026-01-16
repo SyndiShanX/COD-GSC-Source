@@ -20,12 +20,13 @@ premain() {
   registerclientfield("toplayer", "meat_stink", 1, 1, "int", ::meat_stink_cb, 0, 1);
 }
 
-onstartgametype() {}
+onstartgametype() {
+}
 
 meat_stink_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
-    self.meatstink_fx = playFXOnTag(localclientnum, level._effect["meat_stink_camera"], self, "J_SpineLower");
-  } else if(isDefined(self.meatstink_fx)) {
+  if(newval)
+    self.meatstink_fx = playfxontag(localclientnum, level._effect["meat_stink_camera"], self, "J_SpineLower");
+  else if(isDefined(self.meatstink_fx)) {
     stopfx(localclientnum, self.meatstink_fx);
     self.meatstink_fx = undefined;
   }

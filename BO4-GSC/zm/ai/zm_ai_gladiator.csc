@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_gladiator;
 
 autoexec __init__system__() {
@@ -21,8 +22,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "fx8_destroyer_axe_trail"] = "zm_ai/fx8_destroyer_axe_trail";
-  level._effect[# "fx8_destroyer_arm_spurt"] = "zm_ai/fx8_destroyer_arm_spurt";
+  level._effect[#"fx8_destroyer_axe_trail"] = "zm_ai/fx8_destroyer_axe_trail";
+  level._effect[#"fx8_destroyer_arm_spurt"] = "zm_ai/fx8_destroyer_arm_spurt";
   footsteps::registeraitypefootstepcb(#"gladiator", &function_918ce680);
   clientfield::register("toplayer", "gladiator_melee_effect", 1, 1, "counter", &function_5dae94f, 0, 0);
   clientfield::register("actor", "gladiator_arm_effect", 1, 2, "int", &function_f5a07d57, 0, 0);
@@ -72,18 +73,18 @@ private function_5dae94f(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
 private function_f5a07d57(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    util::playFXOnTag(localclientnum, level._effect[# "fx8_destroyer_arm_spurt"], self, "j_shouldertwist_le");
+    util::playFXOnTag(localclientnum, level._effect[#"fx8_destroyer_arm_spurt"], self, "j_shouldertwist_le");
     return;
   }
 
   if(newval == 2) {
-    util::playFXOnTag(localclientnum, level._effect[# "fx8_destroyer_arm_spurt"], self, "tag_shoulder_ri_fx");
+    util::playFXOnTag(localclientnum, level._effect[#"fx8_destroyer_arm_spurt"], self, "tag_shoulder_ri_fx");
   }
 }
 
 private function_49fab171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_c047d899 = util::playFXOnTag(localclientnum, level._effect[# "fx8_destroyer_axe_trail"], self, "tag_origin");
+    self.var_c047d899 = util::playFXOnTag(localclientnum, level._effect[#"fx8_destroyer_axe_trail"], self, "tag_origin");
     return;
   }
 

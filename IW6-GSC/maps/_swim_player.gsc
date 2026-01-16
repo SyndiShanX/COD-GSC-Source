@@ -49,9 +49,8 @@ disable_player_swim() {
 moving_water() {
   var_0 = getEntArray("moving_water_flags", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    thread moving_water_flag(var_2);
-  }
+  foreach(var_2 in var_0)
+  thread moving_water_flag(var_2);
 }
 
 moving_water_flag(var_0) {
@@ -86,9 +85,8 @@ flashlight() {
 flashlight_toggle() {
   self.fxtag endon("death");
 
-  if(!maps\_utility::ent_flag_exist("flashlight_on")) {
+  if(!maps\_utility::ent_flag_exist("flashlight_on"))
     maps\_utility::ent_flag_init("flashlight_on");
-  }
 
   thread particle_loop();
   self endon("death");
@@ -96,9 +94,8 @@ flashlight_toggle() {
   for(;;) {
     common_scripts\utility::waittill_either("toggle_flashlight", "toggle_flashlight_on");
 
-    if(level.start_point != "fallon") {
+    if(level.start_point != "fallon")
       self playSound("shipg_plyr_flashlight_on");
-    }
 
     playFXOnTag(common_scripts\utility::getfx("swim_flashlight_plr"), self.fxtag, "tag_origin");
     maps\_utility::ent_flag_set("flashlight_on");
@@ -121,9 +118,8 @@ particle_loop() {
       continue;
     }
 
-    if(isalive(level.player)) {
+    if(isalive(level.player))
       maps\_utility::ent_flag_wait("flashlight_on");
-    }
   }
 }
 
@@ -156,11 +152,10 @@ dynamic_dof(var_0) {
     var_9 = self getEye();
     var_10 = self getplayerangles();
 
-    if(isDefined(self.dof_ref_ent)) {
+    if(isDefined(self.dof_ref_ent))
       var_11 = combineangles(self.dof_ref_ent.angles, var_10);
-    } else {
+    else
       var_11 = var_10;
-    }
 
     var_12 = vectornormalize(anglesToForward(var_11));
     var_13 = bulletTrace(var_9, var_9 + var_12 * var_2, 1, self, 1);
@@ -191,30 +186,24 @@ dynamic_dof(var_0) {
       }
       var_21 = distance(var_9, var_18.origin);
 
-      if(var_21 - 30 < var_15) {
+      if(var_21 - 30 < var_15)
         var_15 = var_21 - 30;
-      }
 
-      if(var_21 + 30 > var_16) {
+      if(var_21 + 30 > var_16)
         var_16 = var_21 + 30;
-      }
     }
 
-    if(var_15 > var_16) {
+    if(var_15 > var_16)
       var_15 = var_16 - 256;
-    }
 
-    if(var_15 > var_2) {
+    if(var_15 > var_2)
       var_15 = var_2 - 30;
-    }
 
-    if(var_15 < 1) {
+    if(var_15 < 1)
       var_15 = 1;
-    }
 
-    if(var_16 < var_2) {
+    if(var_16 < var_2)
       var_16 = var_2;
-    }
 
     var_23 = var_15 * var_3;
     var_24 = var_16 * var_6;

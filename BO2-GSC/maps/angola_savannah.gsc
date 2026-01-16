@@ -30,7 +30,7 @@ skipto_savannah_start() {
   blocker = getent("buffel_start_blocker", "targetname");
   blocker hide();
   blocker notsolid();
-  a_vh = getEntArray("convoy", "script_noteworthy");
+  a_vh = getentarray("convoy", "script_noteworthy");
 
   foreach(vh in a_vh) {
     if(isDefined(vh.targetname) && vh.targetname == "riverbed_convoy_eland") {
@@ -45,9 +45,8 @@ skipto_savannah_start() {
   level thread hide_victory_grass();
   level thread riverbed_fail_watch();
 
-  for(x = 1; x < 4; x++) {
+  for(x = 1; x < 4; x++)
     level thread run_scene("unita_wait_runners" + x);
-  }
 
   level thread run_scene("player_ride_buffel_intro");
   wait 0.5;
@@ -79,7 +78,7 @@ skipto_savannah_hill() {
   blocker = getent("buffel_start_blocker", "targetname");
   blocker hide();
   blocker notsolid();
-  a_vh = getEntArray("convoy", "script_noteworthy");
+  a_vh = getentarray("convoy", "script_noteworthy");
   array_thread(a_vh, ::load_buffel);
 
   foreach(vh in a_vh) {
@@ -118,7 +117,7 @@ skipto_debug_heli_strafe() {
   savannah_drone_setup();
   level.savimbi = init_hero("savimbi", ::savimbi_setup);
   level thread run_scene("savimbi_ride_idle");
-  a_vh = getEntArray("convoy", "script_noteworthy");
+  a_vh = getentarray("convoy", "script_noteworthy");
   array_thread(a_vh, ::load_buffel);
 
   foreach(vh in a_vh) {
@@ -155,9 +154,8 @@ challenge_heli_runs(str_notify) {
   level.num_heli_runs = 0;
   flag_wait("savannah_final_push_success");
 
-  if(level.num_heli_runs < 4) {
+  if(level.num_heli_runs < 4)
     self notify(str_notify);
-  }
 }
 
 challenge_machete_gibs(str_notify) {
@@ -246,11 +244,11 @@ savannah_start() {
   level thread savannah_start_mortars();
   sp_unita = getent("savannah_start_unita", "targetname");
   sp_mpla = getent("savannah_start_mpla", "targetname");
-  brim_ally_initial_spawners = getEntArray("brim_ally_initial", "targetname");
+  brim_ally_initial_spawners = getentarray("brim_ally_initial", "targetname");
   array_thread(brim_ally_initial_spawners, ::add_spawn_function, ::brim_ally_initial_wait);
   trigger_use("sm_brim_initial");
   level thread run_scene("unita_wait");
-  a_veh_buffels = getEntArray("convoy", "script_noteworthy");
+  a_veh_buffels = getentarray("convoy", "script_noteworthy");
   array_thread(a_veh_buffels, ::load_buffel);
   flag_wait_all("clash_runners_ready", "savimbi_reached_savannah");
   level thread maps\createart\angola_art::savannah_start();
@@ -295,22 +293,20 @@ savannah_start() {
   end_scene("unita_wait_runners2");
   end_scene("unita_wait_runners3");
 
-  for(i = 1; i <= 5; i++) {
+  for(i = 1; i <= 5; i++)
     level thread do_melee_scene("initial_charge_" + i);
-  }
 
   level thread savimbi_shoot();
 
-  foreach(ai_enemy in ai_mpla_array) {
-    ai_enemy stop_magic_bullet_shield();
-  }
+  foreach(ai_enemy in ai_mpla_array)
+  ai_enemy stop_magic_bullet_shield();
 
   level thread savannah_brim_fights();
-  a_ai_initial = getEntArray("initial_brim", "script_noteworthy");
+  a_ai_initial = getentarray("initial_brim", "script_noteworthy");
   level thread watch_savannah_short_warn();
   autosave_by_name("savannah_start");
   level thread savannah_start_savimbi_buffel_go();
-  a_vh = getEntArray("convoy", "script_noteworthy");
+  a_vh = getentarray("convoy", "script_noteworthy");
 
   foreach(vh in a_vh) {
     if(vh.targetname != "savimbi_buffel") {
@@ -348,7 +344,7 @@ savannah_start() {
   vh_lead = getent("savimbi_buffel", "targetname");
   vh_lead thread savimbi_buffel();
   level thread mortar_buffel_blocker();
-  a_veh_elands = getEntArray("convoy", "script_noteworthy");
+  a_veh_elands = getentarray("convoy", "script_noteworthy");
   array_thread(a_veh_elands, ::eland_think);
   array_thread(a_veh_elands, ::buffel_gunner_think);
   level thread stop_convoy_hill_fire();
@@ -411,7 +407,7 @@ set_pre_melee_mortars() {
   for(x = 1; x < 6; x++) {
     str_mortar = "start_melee_mortar" + x;
     s_mortar = getstruct(str_mortar, "script_noteworthy");
-    playFX(getfx("mortar_savannah"), s_mortar.origin);
+    playfx(getfx("mortar_savannah"), s_mortar.origin);
     playsoundatposition("exp_mortar", s_mortar.origin);
     wait 1.1;
   }
@@ -421,14 +417,14 @@ set_melee_mortars() {
   melee_pos1 = getent("start_melee_mortar1", "targetname");
   melee_pos2 = getent("start_melee_mortar2", "targetname");
   melee_pos3 = getent("start_melee_mortar3", "targetname");
-  playFX(getfx("mortar_savannah"), melee_pos1.origin);
-  melee_pos1 playSound("exp_mortar");
+  playfx(getfx("mortar_savannah"), melee_pos1.origin);
+  melee_pos1 playsound("exp_mortar");
   wait 0.25;
-  playFX(getfx("mortar_savannah"), melee_pos2.origin);
-  melee_pos2 playSound("exp_mortar");
+  playfx(getfx("mortar_savannah"), melee_pos2.origin);
+  melee_pos2 playsound("exp_mortar");
   wait 0.25;
-  playFX(getfx("mortar_savannah"), melee_pos3.origin);
-  melee_pos3 playSound("exp_mortar");
+  playfx(getfx("mortar_savannah"), melee_pos3.origin);
+  melee_pos3 playsound("exp_mortar");
 }
 
 vo_play_savannah_start() {
@@ -476,13 +472,12 @@ savimbi_riders_rally_prep() {
   wait 0.05;
   savimbi_riders = get_model_or_models_from_scene("savimbi_buffel_shooters_idle");
 
-  foreach(rider in savimbi_riders) {
-    rider attach("t6_wpn_ar_fal_prop_world", "tag_weapon_right");
-  }
+  foreach(rider in savimbi_riders)
+  rider attach("t6_wpn_ar_fal_prop_world", "tag_weapon_right");
 }
 
 cleanup_savannah_start() {
-  ai_sweepers = getEntArray("convoy_trailers", "script_noteworthy");
+  ai_sweepers = getentarray("convoy_trailers", "script_noteworthy");
 
   foreach(sweeper in ai_sweepers) {
     sweeper stop_magic_bullet_shield();
@@ -526,7 +521,7 @@ savannah_start_mortars() {
 mortar_buffel_blocker() {
   flag_wait("fire_eland_mortar");
   vh_buffel_mortar = getent("buffel_mortar", "targetname");
-  playFX(getfx("mortar_savannah"), vh_buffel_mortar.origin);
+  playfx(getfx("mortar_savannah"), vh_buffel_mortar.origin);
   playsoundatposition("exp_mortar", vh_buffel_mortar.origin);
   vh_buffel_mortar thread destroy_buffel();
   vh_buffel_mortar waittill("reached_end_node");
@@ -564,7 +559,7 @@ savimbi_buffel_drop_mgl(savimbi) {
   model_angles = savimbi gettagangles("tag_weapon_left");
   mgl = spawn("script_model", model_origin);
   mgl.angles = model_angles;
-  mgl setModel("t6_wpn_launch_mm1_world");
+  mgl setmodel("t6_wpn_launch_mm1_world");
   savimbi detach("t6_wpn_launch_mm1_world", "tag_weapon_left");
 }
 
@@ -573,7 +568,7 @@ savimbi_buffel_drop_mgl(savimbi) {
 savimbi_buffel_spawn_enemy(savimbi) {
   v_buffel = getent("savimbi_buffel", "targetname");
   v_origin = getstartorigin(v_buffel gettagorigin("tag_rear_door_l"), v_buffel gettagangles("tag_rear_door_l"), % ch_ang_03_01_savimbi_joins_enemy);
-  playFX(getfx("mortar_savannah"), v_origin);
+  playfx(getfx("mortar_savannah"), v_origin);
   playsoundatposition("exp_mortar", v_origin);
   ai_savimbi_enemy = simple_spawn_single("post_heli_enemy", undefined, undefined, undefined, undefined, undefined, undefined, 1);
   ai_savimbi_enemy.animname = "savimbi_enemy";
@@ -604,9 +599,9 @@ savannah_destroy_eland(e_enemy) {
   v_eland = getent("eland_hero", "targetname");
   v_eland veh_magic_bullet_shield(0);
   wait 0.05;
-  v_eland playSound("exp_veh_large");
-  v_eland playSound("exp_mortar");
-  playFX(getfx("mortar_savannah"), v_eland.origin);
+  v_eland playsound("exp_veh_large");
+  v_eland playsound("exp_mortar");
+  playfx(getfx("mortar_savannah"), v_eland.origin);
   v_eland notify("death");
   radiusdamage(v_eland.origin, 100, 20, 10, undefined, "MOD_PROJECTILE_SPLASH");
   run_scene_and_delete("destroy_eland");
@@ -621,9 +616,8 @@ savimbi_shoot() {
     end_scene("savimbi_ride_idle");
     run_scene("savimbi_fire_mgl");
 
-    for(x = 0; x < 2; x++) {
+    for(x = 0; x < 2; x++)
       run_scene("savimbi_ride_idle_hill");
-    }
   }
 }
 
@@ -637,12 +631,11 @@ brim_ally_initial_wait() {
 savannah_brim_fights() {
   wait 1;
   init_fight("brim_fight_start", "brim_ally", "brim_axis");
-  a_ai_initial = getEntArray("brim_ally_initial_ai", "targetname");
+  a_ai_initial = getentarray("brim_ally_initial_ai", "targetname");
 
   foreach(ai in a_ai_initial) {
-    if(isDefined(ai) && isalive(ai)) {
+    if(isDefined(ai) && isalive(ai))
       create_fight(ai, undefined, 1);
-    }
   }
 
   while(!flag("stop_brim_start_fights") && !flag("savannah_brim_reached")) {
@@ -688,34 +681,30 @@ savannah_hill() {
   level.player thread heli_strafing_watch();
   level thread savannah_mortars();
   level thread set_water_dvars_strafe();
-  sp_wave_one_shooters = getEntArray("wave_one_shooter", "targetname");
+  sp_wave_one_shooters = getentarray("wave_one_shooter", "targetname");
 
-  foreach(shooter in sp_wave_one_shooters) {
-    shooter add_spawn_function(::init_hill_shooter);
-  }
+  foreach(shooter in sp_wave_one_shooters)
+  shooter add_spawn_function(::init_hill_shooter);
 
-  sp_hill_shooters = getEntArray("hill_shooter", "targetname");
+  sp_hill_shooters = getentarray("hill_shooter", "targetname");
 
-  foreach(shooter in sp_hill_shooters) {
-    shooter add_spawn_function(::init_hill_shooter, 0.9);
-  }
+  foreach(shooter in sp_hill_shooters)
+  shooter add_spawn_function(::init_hill_shooter, 0.9);
 
-  sp_brim_shooters = getEntArray("brim_shooter", "targetname");
+  sp_brim_shooters = getentarray("brim_shooter", "targetname");
 
-  foreach(shooter in sp_brim_shooters) {
-    shooter add_spawn_function(::init_hill_shooter);
-  }
+  foreach(shooter in sp_brim_shooters)
+  shooter add_spawn_function(::init_hill_shooter);
 
-  sp_hill_machete = getEntArray("hill_machete", "targetname");
+  sp_hill_machete = getentarray("hill_machete", "targetname");
 
-  foreach(machete_guy in sp_hill_machete) {
-    machete_guy add_spawn_function(::init_hill_shooter);
-  }
+  foreach(machete_guy in sp_hill_machete)
+  machete_guy add_spawn_function(::init_hill_shooter);
 
   trigger_use("sm_hill_shooters");
   t_use = getent("trigger_board_buffel", "targetname");
   t_use trigger_off();
-  a_veh_elands = getEntArray("convoy", "script_noteworthy");
+  a_veh_elands = getentarray("convoy", "script_noteworthy");
   array_thread(a_veh_elands, ::eland_think, 1);
   array_thread(a_veh_elands, ::buffel_gunner_think, 1);
   add_spawn_function_veh_by_type("tank_t62_nophysics", ::tank_think);
@@ -729,15 +718,13 @@ savannah_hill() {
   autosave_by_name("savannah_hill");
   level thread cleanup_hill();
 
-  while(level.savannah_first_wave_kills < 4) {
+  while(level.savannah_first_wave_kills < 4)
     wait 1;
-  }
 
   flag_set("wave_one_done");
 
-  while(level.savannah_second_wave_kills < 9) {
+  while(level.savannah_second_wave_kills < 9)
     wait 1;
-  }
 
   flag_set("savannah_final_push");
   spawn_manager_kill("sm_hill_shooters");
@@ -767,9 +754,9 @@ savannah_hill_deform_terrain(n_topper, b_move) {
   str_name = "mortar_top_" + n_topper;
   m_terrain = getent(str_name, "targetname");
 
-  if(isDefined(b_move) && b_move) {
+  if(isDefined(b_move) && b_move)
     m_terrain.origin = m_terrain.origin + vectorscale((0, 0, -1), 50.0);
-  } else {
+  else {
     m_terrain maps\_mortar::explosion_boom("mortar_savannah");
     m_terrain delete();
   }
@@ -845,10 +832,10 @@ savannah_board_buffel() {
   wait 0.5;
   wait 0.1;
   playsoundatposition("exp_mortar", e_mortar2.origin);
-  playFX(getfx("mortar_savannah"), e_mortar2.origin);
+  playfx(getfx("mortar_savannah"), e_mortar2.origin);
   wait 0.35;
   playsoundatposition("exp_mortar", e_mortar3.origin);
-  playFX(getfx("mortar_savannah"), e_mortar3.origin);
+  playfx(getfx("mortar_savannah"), e_mortar3.origin);
 }
 
 run_retreat_scene(n_scene) {
@@ -908,7 +895,7 @@ savannah_finish() {
   level thread prep_victory_shots();
   drones_set_max_ragdolls(0);
   fx_node = getvehiclenode("victory_fx", "targetname");
-  playFX(getfx("fx_ango_smoke_distant_lrg"), fx_node.origin);
+  playfx(getfx("fx_ango_smoke_distant_lrg"), fx_node.origin);
   savimbi_start_node = getvehiclenode("victory_shots_start", "targetname");
   savimbi_buffel = getent("savimbi_buffel", "targetname");
   savimbi_buffel veh_magic_bullet_shield(1);
@@ -974,7 +961,7 @@ savannah_finish() {
 prep_scene_heli() {
   wait 0.1;
   scene_heli = get_model_or_models_from_scene("savannah_ending", "hudson_helicopter_end");
-  level.player playLoopSound("veh_helo_idle_swt", 1);
+  level.player playloopsound("veh_helo_idle_swt", 1);
   scene_heli hidepart("Tag_gunner_barrel2");
   scene_heli hidepart("Tag_gunner_barrel4");
   scene_heli hidepart("Tag_gunner_barrel1");
@@ -997,9 +984,8 @@ place_victory_bodies() {
     dead_drone = create_enemy_model_actor();
     index++;
 
-    if(index > 6) {
+    if(index > 6)
       index = 1;
-    }
 
     str_scene = "deathanim_" + index;
     death_struct thread maps\_anim::anim_loop_aligned(dead_drone, str_scene, undefined, undefined, "generic");
@@ -1055,13 +1041,12 @@ cleanup_hill_ai() {
 
 heli_custom_flyby() {
   wait 2.5;
-  self playSound("veh_hudson_heli_flyby");
+  self playsound("veh_hudson_heli_flyby");
 }
 
 heli_strafing_watch() {
-  if(!flag("skipto_debug_heli_strafe")) {
+  if(!flag("skipto_debug_heli_strafe"))
     flag_wait_or_timeout("savannah_start_hudson", 15);
-  }
 
   veh_hudson_heli = spawn_vehicle_from_targetname("hudson_helicopter");
   veh_hudson_heli setforcenocull();
@@ -1086,9 +1071,8 @@ heli_strafing_watch() {
   level thread mpla_shoot_hudson();
   level thread animate_grass(0);
 
-  if(!flag("skipto_debug_heli_strafe")) {
+  if(!flag("skipto_debug_heli_strafe"))
     wait 25;
-  }
 
   while(!flag("savannah_final_push")) {
     switch (level.num_heli_runs) {
@@ -1141,14 +1125,14 @@ force_heli_turret_forward() {
   level endon("player_in_helicopter");
 
   while(true) {
-    self settargetorigin(anglesToForward(self.angles) * 100);
+    self settargetorigin(anglestoforward(self.angles) * 100);
     wait 0.05;
   }
 }
 
 heli_intro_fire() {
   flag_wait("heli_flyby_shoot");
-  heli_target_array = getEntArray("heli_fire_spots", "script_noteworthy");
+  heli_target_array = getentarray("heli_fire_spots", "script_noteworthy");
 
   for(x = 0; x < 4; x++) {
     self firegunnerweapon(2);
@@ -1159,11 +1143,10 @@ heli_intro_fire() {
 mpla_shoot_hudson() {
   level thread mpla_rpg_hudson();
   flag_wait("savannah_done");
-  ai = getEntArray("chopper_guy_ai", "targetname");
+  ai = getentarray("chopper_guy_ai", "targetname");
 
-  for(i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++)
     ai[i] delete();
-  }
 }
 
 mpla_rpg_hudson() {
@@ -1188,11 +1171,10 @@ heli_strafe_check_fail() {
 
   switch (level.num_heli_runs) {
     case 1:
-      if(1) {
+      if(1)
         level thread kill_off_tanks("wave_one_tank", "targetname");
-      } else {
+      else
         missionfailedwrapper(&"ANGOLA_STRAFE_FAIL");
-      }
 
       break;
     case 2:
@@ -1207,21 +1189,20 @@ heli_strafe_check_fail() {
 }
 
 kill_off_tanks(str_name, str_key) {
-  a_veh_tanks = getEntArray(str_name, str_key);
+  a_veh_tanks = getentarray(str_name, str_key);
 
   foreach(veh_tank in a_veh_tanks) {
     if(isalive(veh_tank)) {
       playsoundatposition("exp_mortar", veh_tank.origin);
-      playFX(getfx("mortar_savannah"), veh_tank.origin);
+      playfx(getfx("mortar_savannah"), veh_tank.origin);
       veh_tank notify("death");
     }
   }
 }
 
 waittill_call_strafe_run(b_fail_watch) {
-  if(!isDefined(b_fail_watch)) {
+  if(!isDefined(b_fail_watch))
     b_fail_watch = 0;
-  }
 
   flag_set("strafe_hint_active");
   wait 0.05;
@@ -1230,20 +1211,18 @@ waittill_call_strafe_run(b_fail_watch) {
   level thread call_strafe_nag();
   level thread stream_hint_radio_model();
 
-  if(b_fail_watch) {
+  if(b_fail_watch)
     level thread watch_strafe_call_fail();
-  }
 
-  while(level.player getcurrentweapon() != "air_support_radio_sp") {
+  while(level.player getcurrentweapon() != "air_support_radio_sp")
     wait 0.05;
-  }
 
-  level.player playSound("evt_switch_button");
+  level.player playsound("evt_switch_button");
   level.player thread say_dialog("maso_take_out_the_tanks_0");
   level.player enableinvulnerability();
   wait 1;
   level notify("strafe_run_called");
-  level.player playSound("evt_to_heli_transition_f");
+  level.player playsound("evt_to_heli_transition_f");
   screen_message_delete();
   flag_clear("strafe_hint_active");
 }
@@ -1283,17 +1262,15 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
   flag_set("player_in_helicopter");
   level clientnotify("heli_int");
 
-  if(level.num_heli_runs == 0) {
+  if(level.num_heli_runs == 0)
     level thread heli_strafe_run_controls();
-  }
 
   level.num_heli_runs++;
   level.drones.death_func = ::drone_helideath;
   rpc("clientscripts/angola", "fade_in_static");
 
-  if(level.player.health > 0) {
+  if(level.player.health > 0)
     level.player.health = 100;
-  }
 
   maps\_gameskill::toggle_health_overlay(0);
   level.player hide_hud();
@@ -1332,7 +1309,7 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
   self setclientdvar("cg_objectiveIndicatorFarFadeDist", 8000);
   veh_hudson_heli thread vo_strafing_run_start();
   veh_hudson_heli waittill("start_fade");
-  level.player playSound("evt_from_heli_transition_f");
+  level.player playsound("evt_from_heli_transition_f");
   self setclientdvar("cg_objectiveIndicatorFarFadeDist", 3000);
   rpc("clientscripts/angola", "fade_out_static");
   wait 0.5;
@@ -1347,15 +1324,13 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
   veh_hudson_heli thread hover_at_end();
   level.friendlyfiredisabled = 0;
 
-  if(isDefined(veh_hudson_heli.target_reticule)) {
+  if(isDefined(veh_hudson_heli.target_reticule))
     veh_hudson_heli.target_reticule delete();
-  }
 
   level.drones.death_func = ::drone_savannahdeath;
 
-  if(!level.console) {
+  if(!level.console)
     level.dont_save_now = 1;
-  }
 
   switch (level.num_heli_runs) {
     case 1:
@@ -1376,9 +1351,8 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
     v_player_angles = s_player_pos.angles;
   }
 
-  if(flag("wave_one_done")) {
+  if(flag("wave_one_done"))
     delay_thread(1, ::prep_wave_two);
-  }
 
   self setorigin(v_player_origin);
   self setplayerangles(v_player_angles);
@@ -1407,15 +1381,15 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
   maps\_gameskill::toggle_health_overlay(1);
   freeze_player_controls(0);
 
-  if(!level.console) {
+  if(!level.console)
     level.dont_save_now = undefined;
-  }
 
   wait 1.2;
   self thread heli_lingering_invincibility();
 }
 
-reset_ai_limit() {}
+reset_ai_limit() {
+}
 
 hover_at_end() {
   self waittill("reached_end_node");
@@ -1489,7 +1463,7 @@ vo_strafing_run_ready() {
 heli_strafe_run_controls() {
   level endon("stop_strafe_quake");
   wait 1;
-  screen_message_create(&"ANGOLA_HELI_MG", &"ANGOLA_HELI_ROCKET");
+  screen_message_create(&"ANGOLA_HELI_MG", & "ANGOLA_HELI_ROCKET");
   level.player waittill_ads_button_pressed();
   screen_message_delete();
 }
@@ -1542,14 +1516,13 @@ heli_aim_update() {
   while(true) {
     angles = self gettagangles("tag_flash");
     angles = (angles[0], angles[1], 0);
-    dir = anglesToForward(angles);
-    start_point = level.player getEye();
+    dir = anglestoforward(angles);
+    start_point = level.player geteye();
     target_point = level.player.origin + dir * 15000;
-    trace = bulletTrace(start_point, target_point, 0, self, 0);
+    trace = bullettrace(start_point, target_point, 0, self, 0);
 
-    if(trace["fraction"] != 1) {
+    if(trace["fraction"] != 1)
       target_point = trace["position"];
-    }
 
     self setgunnertargetvec(target_point, 0);
     self setgunnertargetvec(target_point, 1);
@@ -1586,21 +1559,19 @@ tank_think() {
     if(level.savannah_first_wave_kills < 4) {
       level.savannah_first_wave_kills++;
 
-      if(level.savannah_first_wave_kills == 4) {
+      if(level.savannah_first_wave_kills == 4)
         set_objective(level.obj_destroy_first_wave, undefined, "delete");
-      }
     }
   } else if(isDefined(self.targetname) && self.targetname == "wave_two_tank" || isDefined(self.script_noteworthy) && self.script_noteworthy == "final_push_tank") {
     if(level.savannah_second_wave_kills < 9) {
       level.savannah_second_wave_kills++;
 
-      if(level.savannah_second_wave_kills == 9) {
+      if(level.savannah_second_wave_kills == 9)
         set_objective(level.obj_destroy_second_wave, undefined, "delete");
-      }
     }
   }
 
-  playFXOnTag(getfx("fx_ango_smoke_distant_lrg_2"), self, "tag_origin");
+  playfxontag(getfx("fx_ango_smoke_distant_lrg_2"), self, "tag_origin");
 }
 
 tank_objective_display() {
@@ -1611,14 +1582,14 @@ tank_objective_display() {
     wait 1;
 
     if(self.health > 0) {
-      set_objective(level.obj_destroy_first_wave, self, &"SP_OBJECTIVES_DESTROY", -1);
+      set_objective(level.obj_destroy_first_wave, self, & "SP_OBJECTIVES_DESTROY", -1);
       self waittill("death");
       set_objective(level.obj_destroy_first_wave, self, "remove");
     }
   } else if(isDefined(self.targetname) && self.targetname == "wave_two_tank" || isDefined(self.script_noteworthy) && self.script_noteworthy == "final_push_tank") {
     flag_wait("player_in_helicopter");
     wait 1;
-    set_objective(level.obj_destroy_second_wave, self, &"SP_OBJECTIVES_DESTROY", -1);
+    set_objective(level.obj_destroy_second_wave, self, & "SP_OBJECTIVES_DESTROY", -1);
     self waittill("death");
     set_objective(level.obj_destroy_second_wave, self, "remove");
   }
@@ -1627,10 +1598,10 @@ tank_objective_display() {
 tank_fire() {
   switch (level.num_heli_runs) {
     case 0:
-      a_target_pos = getEntArray("savannah_tank_target", "targetname");
+      a_target_pos = getentarray("savannah_tank_target", "targetname");
       break;
     default:
-      a_target_pos = getEntArray("savannah_tank_target2", "targetname");
+      a_target_pos = getentarray("savannah_tank_target2", "targetname");
       break;
   }
 
@@ -1640,16 +1611,14 @@ tank_fire() {
     wait(randomfloatrange(1.0, 2.0));
 
     if(!flag("pause_fire")) {
-      if(isalive(self) && !flag("pause_fire")) {
+      if(isalive(self) && !flag("pause_fire"))
         self setturrettargetent(e_target);
-      }
 
       e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
       e_target waittill("movedone");
 
-      if(isalive(self) && !flag("pause_fire")) {
+      if(isalive(self) && !flag("pause_fire"))
         self fireweapon();
-      }
     }
   }
 
@@ -1657,42 +1626,36 @@ tank_fire() {
 }
 
 tank_fire_target(e_target, b_scene, n_wait) {
-  if(!isDefined(b_scene)) {
+  if(!isDefined(b_scene))
     b_scene = 0;
-  }
 
   self notify("pause_fire");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self setturrettargetent(e_target);
-  }
 
-  if(isDefined(n_wait) && n_wait) {
+  if(isDefined(n_wait) && n_wait)
     wait(n_wait);
-  } else {
+  else
     wait 1.5;
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self fireweapon();
-  }
 
   flag_clear("pause_fire");
 
-  if(b_scene) {
+  if(b_scene)
     level thread savannah_destroy_eland();
-  }
 }
 
 tank_fire_position(v_target, n_wait) {
   self notify("pause_fire");
   self setturrettargetvec(v_target);
 
-  if(isDefined(n_wait) && n_wait) {
+  if(isDefined(n_wait) && n_wait)
     wait(n_wait);
-  } else {
+  else
     wait 1.5;
-  }
 
   self fireweapon();
   flag_clear("pause_fire");
@@ -1711,9 +1674,8 @@ tank_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpo
     if(sweapon == "alouette_missile_turret" && level.num_heli_runs > 0) {
       level.tank_kill_count++;
 
-      if(level.tank_kill_count == 13) {
+      if(level.tank_kill_count == 13)
         level.player notify(level.tank_notify);
-      }
 
       return 9999;
     } else
@@ -1737,7 +1699,7 @@ drone_helideath() {
   bone[4] = "J_Elbow_LE";
 
   while(isDefined(self)) {
-    self setCanDamage(1);
+    self setcandamage(1);
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
     if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
@@ -1753,7 +1715,7 @@ drone_helideath() {
       n_impacts = 1 + randomint(2);
 
       for(i = 0; i < n_impacts; i++) {
-        playFXOnTag(getfx("drone_impact"), self, bone[randomint(bone.size)]);
+        playfxontag(getfx("drone_impact"), self, bone[randomint(bone.size)]);
         wait 0.05;
       }
 
@@ -1785,16 +1747,15 @@ drone_helideath() {
 }
 
 drone_savannahdeath(instant, flamedeath) {
-  if(!isDefined(instant)) {
+  if(!isDefined(instant))
     instant = 0;
-  }
 
   self endon("delete");
   self endon("drone_death");
 
   while(isDefined(self)) {
     if(!instant) {
-      self setCanDamage(1);
+      self setcandamage(1);
       self waittill("damage", damage, attacker, direction_vec, damage_ori, type, tagname, modelname, partname, weaponname);
 
       if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
@@ -1806,9 +1767,8 @@ drone_savannahdeath(instant, flamedeath) {
         if(attacker == level.player && weaponname == "mortar_shell_dpad_sp") {
           level.mortar_kills++;
 
-          if(level.mortar_kills == 1) {
+          if(level.mortar_kills == 1)
             level thread mortar_kill_timer();
-          }
         }
 
         self.damageweapon = "none";
@@ -1869,9 +1829,8 @@ eland_think(b_reach) {
     self setspeedimmediate(0);
   } else if(self.targetname == "riverbed_convoy_eland")
     return;
-  else {
+  else
     level endon("stop_convoy_fire");
-  }
 
   switch (self.targetname) {
     case "eland_hero":
@@ -1952,17 +1911,16 @@ savannah_buffel_tip() {
   self maps\_vehicle::getoffpath();
   wait 0.1;
   playsoundatposition("exp_mortar", self.origin);
-  playFX(getfx("mortar_savannah"), self.origin);
+  playfx(getfx("mortar_savannah"), self.origin);
 
-  foreach(rider in self.riders) {
-    rider delete();
-  }
+  foreach(rider in self.riders)
+  rider delete();
 
   self.fire_turret = 0;
   self.takedamage = 0;
   fake_buffel = spawn_model("veh_t6_mil_buffelapc", self.origin, self.angles);
   fake_buffel.targetname = "fake_convoy_buffel";
-  playFXOnTag(getfx("fx_ango_buffel_smoke"), fake_buffel, "tag_origin");
+  playfxontag(getfx("fx_ango_buffel_smoke"), fake_buffel, "tag_origin");
   level thread run_scene("buffel_tip");
   level thread run_scene("buffel_tip_guys");
   self delete();
@@ -1974,9 +1932,8 @@ savannah_buffel_tip() {
 }
 
 buffel_gunner_think(b_reach, a_fire_nodes) {
-  if(!isDefined(b_reach)) {
+  if(!isDefined(b_reach))
     b_reach = 0;
-  }
 
   level endon("stop_fire");
   self endon("stop_fire");
@@ -1990,11 +1947,10 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
     self waittill_any("reached_end_node", "begin_firing");
     self setspeedimmediate(0);
   } else if(!isDefined(a_fire_nodes)) {
-    if(self.targetname == "convoy_destroy_1" || self.targetname == "convoy_destroy_2") {
+    if(self.targetname == "convoy_destroy_1" || self.targetname == "convoy_destroy_2")
       return;
-    } else {
+    else
       level endon("stop_convoy_fire");
-    }
   }
 
   n_vehicle_gun_index = 1;
@@ -2005,9 +1961,9 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
   n_fire_time = 6;
   self maps\_turret::enable_turret(n_vehicle_gun_index);
 
-  if(isDefined(a_fire_nodes)) {
+  if(isDefined(a_fire_nodes))
     a_target_pos = a_fire_nodes;
-  } else {
+  else {
     switch (self.targetname) {
       case "convoy_destroy_1":
         a_target_pos = getstructarray("right_side", "script_noteworthy");
@@ -2052,9 +2008,8 @@ fire_buffel_think() {
   while(isalive(self) && !flag("savannah_done") && self.fire_turret) {
     n_time = randomfloatrange(9.0, 15.0);
 
-    if(isalive(self)) {
+    if(isalive(self))
       self maps\_turret::fire_turret_for_time(n_time, 1);
-    }
 
     wait(randomfloatrange(1.0, 2.0));
   }
@@ -2062,7 +2017,7 @@ fire_buffel_think() {
 
 fake_battle_loop() {
   battle_walla_loop = spawn("script_origin", (5783, 1929, 219));
-  battle_walla_loop playLoopSound("amb_sav_battle_line");
+  battle_walla_loop playloopsound("amb_sav_battle_line");
   level waittill("turn_off_walla_loop");
   battle_walla_loop stoploopsound(4);
   wait 10;
@@ -2079,15 +2034,14 @@ stop_heli_fire(guy) {
 }
 
 init_hill_shooter(n_accuracy) {
-  if(!isDefined(n_accuracy)) {
+  if(!isDefined(n_accuracy))
     n_accuracy = 1;
-  }
 
   self.a.disablelongdeath = 1;
 
-  if(issubstr(self.targetname, "machete")) {
+  if(issubstr(self.targetname, "machete"))
     self setthreatbiasgroup("machete_guy");
-  } else {
+  else {
     self set_goalradius(50);
     self setthreatbiasgroup("axis_shooters");
     self.script_accuracy = n_accuracy;
@@ -2095,17 +2049,15 @@ init_hill_shooter(n_accuracy) {
 }
 
 cleanup_riverbed_scenes() {
-  a_soldiers = getEntArray("intro_mpla_shooter", "script_noteworthy");
+  a_soldiers = getentarray("intro_mpla_shooter", "script_noteworthy");
 
-  foreach(soldier in a_soldiers) {
-    soldier bloody_death();
-  }
+  foreach(soldier in a_soldiers)
+  soldier bloody_death();
 
-  a_soldiers = getEntArray("intro_soldier", "script_noteworthy");
+  a_soldiers = getentarray("intro_soldier", "script_noteworthy");
 
-  foreach(soldier in a_soldiers) {
-    soldier bloody_death();
-  }
+  foreach(soldier in a_soldiers)
+  soldier bloody_death();
 
   delete_scene("level_intro_chopper", 1);
   delete_scene("level_intro_savimbi_buffel", 1);
@@ -2145,11 +2097,11 @@ cleanup_riverbed_scenes() {
 cleanup_riverbed() {
   array_delete(getstructarray("mortar_intro", "targetname"), 1);
   array_delete(getstructarray("mortar_riverbed", "targetname"), 1);
-  array_delete(getEntArray("intro_soldier", "targetname"));
-  array_delete(getEntArray("intro_soldier", "script_noteworthy"));
+  array_delete(getentarray("intro_soldier", "targetname"));
+  array_delete(getentarray("intro_soldier", "script_noteworthy"));
   delete_array("burning_man", "targetname");
   delete_array("riverbed_ambience", "targetname");
-  array_delete(getEntArray("intro_mpla_shooter", "script_noteworthy"));
+  array_delete(getentarray("intro_mpla_shooter", "script_noteworthy"));
   delete_array("intro_unita_shooter", "targetname");
   delete_array("intro_mpla_shooter", "targetname");
 }
@@ -2196,13 +2148,11 @@ setup_wave_two_launchers() {
   sp_left = getent("hill_launcher3", "targetname");
   sp_right = getent("hill_launcher4", "targetname");
 
-  for(x = 0; x < 2; x++) {
+  for(x = 0; x < 2; x++)
     tmp_ent = simple_spawn_single(sp_left, ::init_hill_launcher, 2, undefined, undefined, undefined, undefined, 1);
-  }
 
-  for(x = 0; x < 2; x++) {
+  for(x = 0; x < 2; x++)
     tmp_ent = simple_spawn_single(sp_right, ::init_hill_launcher, 2, undefined, undefined, undefined, undefined, 1);
-  }
 
   spawn_manager_kill("sm_hill_shooters");
   trigger_use("sm_wave_one_shooters");
@@ -2235,14 +2185,14 @@ kill_hill_rpgs() {
   target_node2 = getvehiclenode("fire_pos_12", "script_noteworthy");
   fire_nodes = getnodearray("hill_rpg_nodes", "script_noteworthy");
   wait 5;
-  ai_rpgs = getEntArray("hill_launcher1_ai", "targetname");
+  ai_rpgs = getentarray("hill_launcher1_ai", "targetname");
 
   foreach(rpg_guy in ai_rpgs) {
     level thread fire_magic_rpg(rpg_guy.origin);
     rpg_guy delete();
   }
 
-  ai_rpgs = getEntArray("hill_launcher2_ai", "targetname");
+  ai_rpgs = getentarray("hill_launcher2_ai", "targetname");
 
   foreach(rpg_guy in ai_rpgs) {
     level thread fire_magic_rpg(rpg_guy.origin);
@@ -2262,14 +2212,14 @@ kill_wave_one_rpgs() {
   target_node1 = getvehiclenode("fire_pos_21", "script_noteworthy");
   target_node2 = getvehiclenode("fire_pos_22", "script_noteworthy");
   fire_nodes = getnodearray("wave_two_rpg_nodes", "script_noteworthy");
-  ai_rpgs = getEntArray("hill_launcher3_ai", "targetname");
+  ai_rpgs = getentarray("hill_launcher3_ai", "targetname");
 
   foreach(rpg_guy in ai_rpgs) {
     level thread fire_magic_rpg(rpg_guy.origin);
     rpg_guy delete();
   }
 
-  ai_rpgs = getEntArray("hill_launcher4_ai", "targetname");
+  ai_rpgs = getentarray("hill_launcher4_ai", "targetname");
 
   foreach(rpg_guy in ai_rpgs) {
     level thread fire_magic_rpg(rpg_guy.origin);
@@ -2286,38 +2236,32 @@ kill_wave_one_rpgs() {
 }
 
 fire_magic_rpg(v_fire_pos, v_target_pos, b_wait_fire, b_fire_check) {
-  if(!isDefined(b_wait_fire)) {
+  if(!isDefined(b_wait_fire))
     b_wait_fire = 1;
-  }
 
-  if(!isDefined(b_fire_check)) {
+  if(!isDefined(b_fire_check))
     b_fire_check = 0;
-  }
 
   if(b_fire_check) {
-    if(randomint(100) < 50) {
+    if(randomint(100) < 50)
       return;
-    }
   }
 
-  if(b_wait_fire) {
+  if(b_wait_fire)
     wait(randomfloatrange(1.5, 2.5));
-  }
 
-  if(isDefined(v_target_pos)) {
+  if(isDefined(v_target_pos))
     magicbullet("rpg_sp_angola", v_fire_pos, v_target_pos);
-  } else {
+  else
     magicbullet("rpg_sp_angola", v_fire_pos, level.player.origin);
-  }
 }
 
 fire_magic_rpd(v_fire_pos, v_target_pos) {
   for(x = 0; x < 20; x++) {
-    if(isDefined(v_target_pos)) {
+    if(isDefined(v_target_pos))
       magicbullet("rpd_sp", v_fire_pos, v_target_pos);
-    } else {
+    else
       magicbullet("rpd_sp", v_fire_pos, level.player.origin);
-    }
 
     wait 0.01;
   }
@@ -2336,9 +2280,8 @@ wave_one_tank_fire() {
 cleanup_hill() {
   s_mortars = getstructarray("mortar_savannah_start", "targetname");
 
-  foreach(mortar in s_mortars) {
-    mortar structdelete();
-  }
+  foreach(mortar in s_mortars)
+  mortar structdelete();
 
   delete_struct_array("mortar_savannah_start_left", "targetname");
   delete_struct_array("mortar_savannah_start_right", "targetname");
@@ -2451,26 +2394,25 @@ buffel_riders_fight() {
 }
 
 cleanup_riverbed_fail_triggers() {
-  fail_triggers = getEntArray("riverbed_fail", "targetname");
-  warn_triggers = getEntArray("riverbed_warning", "targetname");
+  fail_triggers = getentarray("riverbed_fail", "targetname");
+  warn_triggers = getentarray("riverbed_warning", "targetname");
   all_watch_triggers = arraycombine(fail_triggers, warn_triggers, 0, 0);
 
-  foreach(trig in all_watch_triggers) {
-    trig delete();
-  }
+  foreach(trig in all_watch_triggers)
+  trig delete();
 }
 
 savannah_mortar_team() {
   level.savannah_mortar_team_kills = 0;
   add_spawn_function_group("mortar_unit", "script_noteworthy", ::init_mortar_guy);
-  mortar_team_trig = getEntArray("mortar_team", "targetname");
+  mortar_team_trig = getentarray("mortar_team", "targetname");
 
   foreach(team_trig in mortar_team_trig) {
     team_trig useby(level.player);
     wait(randomfloatrange(0.2, 0.5));
   }
 
-  mortar_team_trig2 = getEntArray("mortar_team", "targetname");
+  mortar_team_trig2 = getentarray("mortar_team", "targetname");
   level thread mortars_nag();
   flag_wait_any("tank_vo_finished", "savannah_start_hudson");
   wait 0.5;
@@ -2484,13 +2426,12 @@ mortars_nag() {
   wait 3;
   level thread unita_say("uni3_we_need_to_stop_thos_0");
   wait 10.0;
-  mortar_guys1 = getEntArray("mortar_team_guy_ai", "targetname");
-  mortar_guys2 = getEntArray("mortar_team_guy2_ai", "targetname");
-  mortar_guys3 = getEntArray("mortar_team_guy3_ai", "targetname");
+  mortar_guys1 = getentarray("mortar_team_guy_ai", "targetname");
+  mortar_guys2 = getentarray("mortar_team_guy2_ai", "targetname");
+  mortar_guys3 = getentarray("mortar_team_guy3_ai", "targetname");
 
-  if(isDefined(mortar_guys1.size) && mortar_guys1.size || isDefined(mortar_guys2.size) && mortar_guys2.size || isDefined(mortar_guys3.size) && mortar_guys3.size) {
+  if(isDefined(mortar_guys1.size) && mortar_guys1.size || isDefined(mortar_guys2.size) && mortar_guys2.size || isDefined(mortar_guys3.size) && mortar_guys3.size)
     level.player say_dialog("savi_they_are_behind_the_0");
-  }
 }
 
 init_mortar_guy() {
@@ -2498,7 +2439,7 @@ init_mortar_guy() {
   self.overrideactordamage = ::mortar_guy_damage;
   flag_wait("savannah_start_hudson");
   self thread stop_magic_bullet_shield();
-  set_objective(level.obj_destroy_mortar_crew, self, &"SP_OBJECTIVES_TARGET", -1);
+  set_objective(level.obj_destroy_mortar_crew, self, & "SP_OBJECTIVES_TARGET", -1);
   self waittill("death");
   level.savannah_mortar_team_kills++;
   set_objective(level.obj_destroy_mortar_crew, self, "remove");
@@ -2514,15 +2455,13 @@ init_mortar_guy() {
 }
 
 mortar_guy_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(str_means_of_death == "MOD_GRENADE_SPLASH" && n_damage == 1) {
+  if(str_means_of_death == "MOD_GRENADE_SPLASH" && n_damage == 1)
     return 0;
-  }
 
-  if(isDefined(e_attacker) && e_attacker == level.player) {
+  if(isDefined(e_attacker) && e_attacker == level.player)
     return n_damage;
-  } else {
+  else
     return 0;
-  }
 }
 
 savannah_attack_mortars() {
@@ -2536,27 +2475,23 @@ savannah_attack_mortars() {
 cleanup_mortar_models() {
   node1 = getnode("mortar_team_node", "targetname");
 
-  if(isDefined(node1.mortar)) {
+  if(isDefined(node1.mortar))
     node1.mortar delete();
-  }
 
   node2 = getnode("mortar_team_node2", "targetname");
 
-  if(isDefined(node2.mortar)) {
+  if(isDefined(node2.mortar))
     node2.mortar delete();
-  }
 
   node3 = getnode("mortar_team_node3", "targetname");
 
-  if(isDefined(node3.mortar)) {
+  if(isDefined(node3.mortar))
     node3.mortar delete();
-  }
 
   node4 = getnode("mortar_team_node4", "targetname");
 
-  if(isDefined(node4.mortar)) {
+  if(isDefined(node4.mortar))
     node4.mortar delete();
-  }
 }
 
 spawn_technicals() {
@@ -2595,7 +2530,7 @@ track_and_shoot_heli() {
 
 init_technical_gunner() {
   self.overrideactordamage = ::mortar_guy_damage;
-  set_objective(level.obj_destroy_technical, self, &"SP_OBJECTIVES_TARGET", -1);
+  set_objective(level.obj_destroy_technical, self, & "SP_OBJECTIVES_TARGET", -1);
   self.dropweapon = 0;
   self waittill("death");
   level.savannah_technical_gunner_kills++;
@@ -2623,9 +2558,8 @@ killer_fail_init() {
 technical_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(eattacker == level.player) {
     if(self.health - idamage <= 0) {
-      if(isDefined(self.riders[0])) {
+      if(isDefined(self.riders[0]))
         self.riders[0] notify("death");
-      }
     }
 
     return idamage;
@@ -2690,9 +2624,8 @@ warp_buffel() {
   vh_eland thread tank_fire_target(vh_truck_push, 0, 0.1);
   wait 0.1;
 
-  if(isDefined(vh_truck_push)) {
+  if(isDefined(vh_truck_push))
     vh_truck_push notify("death");
-  }
 }
 
 delete_swap_vehicles() {
@@ -2749,7 +2682,7 @@ show_static_push_models() {
   warp_tank_array = spawn_vehicles_from_targetname("final_push_model");
 
   foreach(tank in warp_tank_array) {
-    playFXOnTag(getfx("fx_ango_smoke_distant_lrg_2"), tank, "tag_origin");
+    playfxontag(getfx("fx_ango_smoke_distant_lrg_2"), tank, "tag_origin");
     tank notify("death");
     wait 0.05;
   }
@@ -2757,7 +2690,7 @@ show_static_push_models() {
   warp_buffel_array = spawn_vehicles_from_targetname("final_push_buffel");
 
   foreach(buffel in warp_buffel_array) {
-    playFXOnTag(getfx("buffel_explode"), buffel, "tag_body");
+    playfxontag(getfx("buffel_explode"), buffel, "tag_body");
     buffel notify("death");
     wait 0.05;
   }
@@ -2795,26 +2728,23 @@ init_push_gunner() {
 }
 
 init_fighter(n_accuracy) {
-  if(!isDefined(n_accuracy)) {
+  if(!isDefined(n_accuracy))
     n_accuracy = 1;
-  }
 
   self.a.disablelongdeath = 1;
   self set_goalradius(50);
   self.script_accuracy = n_accuracy;
   self.health = 200;
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "fight_player") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "fight_player")
     self setthreatbiasgroup("player_killer");
-  }
 
   delay_thread(randomfloatrange(10, 11), ::kill_fighter);
 }
 
 kill_fighter() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self kill();
-  }
 }
 
 spawn_extra_runners() {
@@ -2880,56 +2810,49 @@ init_victory_enemy() {
 }
 
 show_savannah_rocks() {
-  mortar_rocks = getEntArray("mortar_rocks", "targetname");
+  mortar_rocks = getentarray("mortar_rocks", "targetname");
 
   foreach(rock in mortar_rocks) {
-    if(isDefined(rock.script_float)) {
+    if(isDefined(rock.script_float))
       rock setscale(rock.script_float);
-    }
   }
 
-  technical_rocks = getEntArray("technical_rocks", "targetname");
+  technical_rocks = getentarray("technical_rocks", "targetname");
 
   foreach(rock in technical_rocks) {
-    if(isDefined(rock.script_float)) {
+    if(isDefined(rock.script_float))
       rock setscale(rock.script_float);
-    }
   }
 }
 
 hide_savannah_rocks() {
-  mortar_rocks_clips = getEntArray("mortar_rocks_clip", "targetname");
+  mortar_rocks_clips = getentarray("mortar_rocks_clip", "targetname");
 
-  foreach(clip in mortar_rocks_clips) {
-    clip delete();
-  }
+  foreach(clip in mortar_rocks_clips)
+  clip delete();
 
-  technical_rocks_clips = getEntArray("technical_rocks_clip", "targetname");
+  technical_rocks_clips = getentarray("technical_rocks_clip", "targetname");
 
-  foreach(clip in technical_rocks_clips) {
-    clip delete();
-  }
+  foreach(clip in technical_rocks_clips)
+  clip delete();
 
-  mortar_rocks = getEntArray("mortar_rocks", "targetname");
+  mortar_rocks = getentarray("mortar_rocks", "targetname");
 
-  foreach(rock in mortar_rocks) {
-    rock delete();
-  }
+  foreach(rock in mortar_rocks)
+  rock delete();
 
-  technical_rocks = getEntArray("technical_rocks", "targetname");
+  technical_rocks = getentarray("technical_rocks", "targetname");
 
-  foreach(rock in technical_rocks) {
-    rock delete();
-  }
+  foreach(rock in technical_rocks)
+  rock delete();
 }
 
 victory_shots_warp(m_body) {
   flag_set("victory_start");
   end_scene("savimbi_climb_idle");
 
-  if(isDefined(level.savimbi)) {
+  if(isDefined(level.savimbi))
     level.savimbi delete();
-  }
 
   delete_array("delete_for_victory", "script_noteworthy");
   level thread show_victory_vehicles(1);

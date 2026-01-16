@@ -110,11 +110,10 @@ splash_trig_think_plr() {
     self waittill("trigger", who);
 
     if(who isplayer()) {
-      playSound(0, "fly_player_jump_into_water", who.origin);
+      playsound(0, "fly_player_jump_into_water", who.origin);
 
-      while(who istouching(self)) {
+      while(who istouching(self))
         wait 0.1;
-      }
     }
 
     wait 0.1;
@@ -128,14 +127,13 @@ splash_trig_think_ai() {
   while(true) {
     self waittill("trigger", who);
 
-    if(who isplayer()) {
+    if(who isplayer())
       continue;
-    } else {
-      playSound(0, "fly_npc_jump_into_water", who.origin);
+    else {
+      playsound(0, "fly_npc_jump_into_water", who.origin);
 
-      while(who istouching(self)) {
+      while(who istouching(self))
         wait 0.1;
-      }
     }
 
     wait 0.1;
@@ -145,7 +143,7 @@ splash_trig_think_ai() {
 intro_snapshot() {
   level waittill("isnp");
   snd_set_snapshot("spl_pakistan_1_intro");
-  playSound(0, "evt_claw_boot", (0, 0, 0));
+  playsound(0, "evt_claw_boot", (0, 0, 0));
   level waittill("isnp_f");
   snd_set_snapshot("default");
 }
@@ -232,7 +230,7 @@ bus_loop_audio() {
   level waittill("bus_hit");
   wait 9;
   bus_loop_ent = spawn(0, (2271, 4554, 335), "script_origin");
-  bus_loop_ent playLoopSound("amb_water_bus_hit", 2.5);
+  bus_loop_ent playloopsound("amb_water_bus_hit", 2.5);
 }
 
 into_snd_snapshot() {

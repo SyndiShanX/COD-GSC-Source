@@ -39,9 +39,8 @@ main() {
   game["dialog"]["defense_obj"] = "generic_boost";
   setscoreboardcolumns("score", "kills", "deaths", "kdratio", "assists");
 
-  if(getdvar(#"party_minplayers") == "") {
+  if(getdvar(#"party_minplayers") == "")
     setdvar("party_minplayers", 4);
-  }
 
   level.pregame_minplayers = getdvarint(#"party_minplayers");
   setmatchtalkflag("EveryoneHearsEveryone", 1);
@@ -53,14 +52,13 @@ onstartgametype() {
   level.spawnmaxs = (0, 0, 0);
 
   foreach(team in level.teams) {
-    setobjectivetext(team, &"OBJECTIVES_PREGAME");
-    setobjectivehinttext(team, &"OBJECTIVES_PREGAME_HINT");
+    setobjectivetext(team, & "OBJECTIVES_PREGAME");
+    setobjectivehinttext(team, & "OBJECTIVES_PREGAME_HINT");
 
-    if(level.splitscreen) {
-      setobjectivescoretext(team, &"OBJECTIVES_PREGAME");
-    } else {
-      setobjectivescoretext(team, &"OBJECTIVES_PREGAME_SCORE");
-    }
+    if(level.splitscreen)
+      setobjectivescoretext(team, & "OBJECTIVES_PREGAME");
+    else
+      setobjectivescoretext(team, & "OBJECTIVES_PREGAME_SCORE");
 
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_dm_spawn");
   }
@@ -85,10 +83,10 @@ onstartgametype() {
 }
 
 startpregame() {
-  game["strings"]["waiting_for_players"] = &"MP_WAITING_FOR_X_PLAYERS";
-  game["strings"]["pregame"] = &"MP_PREGAME";
-  game["strings"]["pregameover"] = &"MP_MATCHSTARTING";
-  game["strings"]["pregame_time_limit_reached"] = &"MP_PREGAME_TIME_LIMIT";
+  game["strings"]["waiting_for_players"] = & "MP_WAITING_FOR_X_PLAYERS";
+  game["strings"]["pregame"] = & "MP_PREGAME";
+  game["strings"]["pregameover"] = & "MP_MATCHSTARTING";
+  game["strings"]["pregame_time_limit_reached"] = & "MP_PREGAME_TIME_LIMIT";
   precachestring(game["strings"]["waiting_for_players"]);
   precachestring(game["strings"]["pregame"]);
   precachestring(game["strings"]["pregameover"]);
@@ -104,11 +102,10 @@ onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn) {
+  if(predictedspawn)
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  } else {
+  else
     self spawn(spawnpoint.origin, spawnpoint.angles, "dm");
-  }
 }
 
 onplayerclasschange(response) {
@@ -139,9 +136,8 @@ getplayersneededcount() {
     team = player.team;
     class = player.class;
 
-    if(team != "spectator") {
+    if(team != "spectator")
       count++;
-    }
   }
 
   return int(level.pregame_minplayers - count);
@@ -155,13 +151,11 @@ saveplayerspregameinfo() {
     team = player.team;
     class = player.pregameclassresponse;
 
-    if(isDefined(team) && team != "") {
+    if(isDefined(team) && team != "")
       player setpregameteam(team);
-    }
 
-    if(isDefined(class) && class != "") {
+    if(isDefined(class) && class != "")
       player setpregameclass(class);
-    }
   }
 }
 
@@ -256,11 +250,10 @@ ontimelimit() {
   } else {
     winner = maps\mp\gametypes\_globallogic_score::gethighestscoringplayer();
 
-    if(isDefined(winner)) {
+    if(isDefined(winner))
       logstring("time limit, win: " + winner.name);
-    } else {
+    else
       logstring("time limit, tie");
-    }
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["pregame_time_limit_reached"]);
@@ -271,9 +264,8 @@ ontimelimit() {
 get_pregame_class() {
   pclass = self getpregameclass();
 
-  if(isDefined(pclass) && pclass[0] != "") {
+  if(isDefined(pclass) && pclass[0] != "")
     return pclass;
-  } else {
+  else
     return "smg_mp,0";
-  }
 }

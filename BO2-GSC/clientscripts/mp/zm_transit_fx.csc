@@ -7,7 +7,8 @@
 #include clientscripts\mp\createfx\zm_transit_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -118,7 +119,6 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

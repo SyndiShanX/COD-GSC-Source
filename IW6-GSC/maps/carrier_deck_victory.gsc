@@ -43,9 +43,8 @@ begin_deck_victory() {
   thread victory_ac130();
   common_scripts\utility::flag_set("victory_music");
 
-  if(isDefined(level.ac_130)) {
+  if(isDefined(level.ac_130))
     level.ac_130 notify("victory_start");
-  }
 
   wait 5;
   thread maps\carrier_code::phalanx_gun_offline("crr_phalanx_01");
@@ -177,9 +176,8 @@ destroy_all_enemy_vehicles() {
         continue;
       }
 
-      if(isDefined(var_2.vehicletype) && var_2 maps\_vehicle::isairplane()) {
+      if(isDefined(var_2.vehicletype) && var_2 maps\_vehicle::isairplane())
         var_2 notify("damage", 5000, level.player, (0, 0, 0), (0, 0, 0), "MOD_PROJECTILE");
-      }
     }
   }
 }
@@ -188,8 +186,7 @@ cleanup_vehicles() {
   var_0 = vehicle_getarray();
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_2 delete();
-    }
   }
 }

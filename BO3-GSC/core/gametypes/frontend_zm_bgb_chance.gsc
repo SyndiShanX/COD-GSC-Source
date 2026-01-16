@@ -23,7 +23,7 @@ function zm_frontend_bgb_devgui() {
   setdvar("", "");
   bgb_devgui_base = "";
   a_n_amounts = array(1, 5, 10, 100);
-  for(i = 0; i < a_n_amounts.size; i++) {
+  for (i = 0; i < a_n_amounts.size; i++) {
     n_amount = a_n_amounts[i];
     adddebugcommand((((((bgb_devgui_base + i) + "") + n_amount) + "") + n_amount) + "");
   }
@@ -35,7 +35,7 @@ function zm_frontend_bgb_devgui() {
 function bgb_devgui_think() {
   b_powerboost_toggle = 0;
   b_successfail_toggle = 0;
-  for(;;) {
+  for (;;) {
     n_val_powerboost = getdvarstring("");
     n_val_successfail = getdvarstring("");
     if(n_val_powerboost != "") {

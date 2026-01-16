@@ -27,9 +27,8 @@ apache_ally_path_attack_func(var_0) {
   self notify("apache_ally_path_attack_func");
   self endon("apache_ally_path_attack_func");
 
-  if(isDefined(var_0.script_delay)) {
+  if(isDefined(var_0.script_delay))
     wait(var_0.script_delay * 0.5);
-  }
 
   if(maps\_utility::ent_flag("apache_ally_attack_override")) {
     return;
@@ -55,9 +54,8 @@ apache_ally_path_attack_func(var_0) {
   } else {
     var_7 = 0;
 
-    if(isDefined(var_1.script_parameters) && issubstr(var_1.script_parameters, "ignoretargets")) {
+    if(isDefined(var_1.script_parameters) && issubstr(var_1.script_parameters, "ignoretargets"))
       var_7 = 1;
-    }
 
     childthread apache_ally_path_attack_internal(var_1, 1, 5000, var_7);
   }
@@ -69,18 +67,16 @@ apache_ally_path_attack_internal(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3) || !var_3) {
     var_5 = target_getarray();
 
-    if(var_5.size) {
+    if(var_5.size)
       var_5 = apache_ally_path_attack_filter_targets(var_0.origin, var_5, var_2);
-    }
 
     var_4 = common_scripts\utility::ter_op(var_5.size, var_5[0], var_0);
   }
 
-  if(isai(var_4)) {
+  if(isai(var_4))
     heli_attack_mg(var_4, 6);
-  } else {
+  else
     vehicle_attack_missile(var_4, var_1);
-  }
 }
 
 heli_attack_mg_veh_weapon(var_0, var_1) {
@@ -180,9 +176,8 @@ vehicle_attack_missile(var_0, var_1, var_2) {
       if(isDefined(var_14) && var_0 == var_14) {
         var_13 = (0, 0, -96);
 
-        if(var_1) {
+        if(var_1)
           level notify("homing_hint");
-        }
       } else
         var_13 = (0, 0, -128);
     } else
@@ -198,9 +193,8 @@ vehicle_attack_missile(var_0, var_1, var_2) {
   var_12.missiles_waiting = var_4;
   var_12.missiles_chasing = 0;
 
-  if(!var_9) {
+  if(!var_9)
     self setvehweapon(var_5);
-  }
 
   while(var_4 && isalive(var_0)) {
     if(gettime() > level.missiledialognext) {
@@ -216,9 +210,9 @@ vehicle_attack_missile(var_0, var_1, var_2) {
     var_15 = common_scripts\utility::ter_op((var_4 + var_3) % 2, var_6, var_7);
     var_16 = undefined;
 
-    if(!var_9) {
+    if(!var_9)
       var_16 = self fireweapon(var_15, var_12);
-    } else {
+    else {
       var_17 = self gettagorigin(var_15);
       var_18 = vectornormalize(var_0.origin - var_17);
       var_16 = magicbullet(var_5, var_17 + var_18 * 60, var_17 + var_18 * 120);
@@ -230,14 +224,12 @@ vehicle_attack_missile(var_0, var_1, var_2) {
     var_16 thread vehicle_attack_missile_dummy_delete(var_12);
     var_4--;
 
-    if(var_4 > 0) {
+    if(var_4 > 0)
       wait(var_11 + var_8);
-    }
   }
 
-  if(isDefined(var_10)) {
+  if(isDefined(var_10))
     self setvehweapon(var_10);
-  }
 }
 
 do_random_pilot_chatter(var_0) {
@@ -253,9 +245,8 @@ do_random_pilot_chatter(var_0) {
   if(!isDefined(level.player.riding_heli)) {
     return;
   }
-  if(!self.apache_chatter_queue.size) {
+  if(!self.apache_chatter_queue.size)
     self.apache_chatter_queue = common_scripts\utility::array_randomize(self.apache_chatter[var_0]);
-  }
 
   if(!isDefined(self.function_stack) || self.function_stack.size == 0) {
     var_1 = undefined;
@@ -280,21 +271,19 @@ do_random_pilot_chatter(var_0) {
 }
 
 attack_missile_set_up_and_notify(var_0, var_1, var_2, var_3) {
-  if(var_2) {
+  if(var_2)
     var_0.type_missile = "guided";
-  } else {
+  else
     var_0.type_missile = "straight";
-  }
 
   var_0 thread vehicle_scripts\_chopper_missile_defense_utility::missile_monitormisstarget(var_1, 0, undefined, "LISTEN_missile_missed_target", "LISTEN_missile_attached_to_flare");
   var_0 childthread earthquake_on_death_missile();
   self notify("LISTEN_missile_fire_self", var_0);
 
-  if(isDefined(var_1.heli) && isDefined(var_1.heli.owner) && isplayer(var_1.heli.owner)) {
+  if(isDefined(var_1.heli) && isDefined(var_1.heli.owner) && isplayer(var_1.heli.owner))
     var_1.heli.owner notify("LISTEN_missile_fire", var_0);
-  } else {
+  else
     var_1 notify("LISTEN_missile_fire", var_0);
-  }
 }
 
 ai_attack_missile(var_0, var_1) {
@@ -306,9 +295,8 @@ ai_attack_missile(var_0, var_1) {
 
   if(var_0 maps\_vehicle::isvehicle() && var_0 maps\_vehicle::ishelicopter()) {
     if(var_0 == get_apache_player()) {
-      if(var_1) {
+      if(var_1)
         level notify("homing_hint");
-      }
 
       var_6 = (0, 0, -96);
     } else
@@ -339,9 +327,8 @@ vehicle_attack_missile_dummy_delete(var_0) {
 }
 
 apache_ally_path_attack_filter_targets(var_0, var_1, var_2) {
-  if(!var_1.size) {
+  if(!var_1.size)
     return var_1;
-  }
 
   return common_scripts\utility::get_array_of_closest(var_0, var_1, undefined, undefined, var_2);
 }
@@ -413,9 +400,8 @@ get_apache_players() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(isDefined(var_2.drivingvehicle) && var_2.drivingvehicle maps\_vehicle::ishelicopter()) {
+    if(isDefined(var_2.drivingvehicle) && var_2.drivingvehicle maps\_vehicle::ishelicopter())
       var_0[var_0.size] = var_2.drivingvehicle;
-    }
   }
 
   return var_0;
@@ -449,24 +435,21 @@ friendly_setup_apache_section(var_0) {
 }
 
 spawn_blackhawk_ally(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 1;
-  }
 
   var_4 = undefined;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_4 = common_scripts\utility::getstruct(var_0, "targetname");
-  }
 
   if(isDefined(var_1)) {
     var_4 = spawnStruct();
     var_4.origin = var_1;
   }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_4.angles = var_2;
-  }
 
   var_5 = getent("blackhawk_ally_spawner", "targetname");
   var_5.script_allow_rider_deaths = 0;
@@ -486,9 +469,8 @@ spawn_blackhawk_ally(var_0, var_1, var_2, var_3) {
   }
 
   foreach(var_9 in var_6.riders) {
-    if(!isai(var_9)) {
+    if(!isai(var_9))
       var_9 setCanDamage(0);
-    }
   }
 
   return var_6;
@@ -505,11 +487,10 @@ spawn_infantry_in_blackhawk() {
 }
 
 asign_blackhawk_riders() {
-  if(!isDefined(level.infantry_guys)) {
+  if(!isDefined(level.infantry_guys))
     level.infantry_guys = [];
-  } else {
+  else
     level.infantry_guys = maps\oilrocks_code::array_remove_undefined_dead_or_dying(level.infantry_guys);
-  }
 
   if(isDefined(self.script_friendname) && self.script_friendname == "Logan") {
     self.script_friendname = undefined;
@@ -535,9 +516,8 @@ get_hinds_enemy_active() {
     foreach(var_2 in vehicle_getarray()) {
       if(isalive(var_2)) {
         if(isDefined(var_2.script_team) && var_2.script_team == "axis") {
-          if(!isDefined(var_2.crashing) || !var_2.crashing) {
+          if(!isDefined(var_2.crashing) || !var_2.crashing)
             var_0[var_0.size] = var_2;
-          }
         }
       }
     }
@@ -560,9 +540,8 @@ heli_ai_collision_cylinder_add() {
   var_0 = undefined;
 
   foreach(var_2 in level.heli_collision_ai) {
-    if(!var_2.in_use) {
+    if(!var_2.in_use)
       var_0 = var_2;
-    }
   }
 
   if(isDefined(var_0)) {
@@ -600,17 +579,15 @@ _add_as_apache_target_on_spawn_iternal() {
 }
 
 add_as_apaches_target(var_0) {
-  if(!isDefined(level.apache_target_manager)) {
+  if(!isDefined(level.apache_target_manager))
     level.apache_target_manager = [];
-  }
 
   level.apache_target_manager[level.apache_target_manager.size] = self;
   level.apache_target_manager = maps\oilrocks_code::array_remove_undefined_dead_or_dying(level.apache_target_manager);
   var_1 = get_apache_players();
 
-  foreach(var_3 in var_1) {
-    thread maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
-  }
+  foreach(var_3 in var_1)
+  thread maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
 }
 
 update_targets(var_0) {
@@ -622,24 +599,20 @@ update_targets(var_0) {
   var_1 = get_apache_players();
 
   foreach(var_3 in var_1) {
-    foreach(var_5 in level.apache_target_manager) {
-      var_5 maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
-    }
+    foreach(var_5 in level.apache_target_manager)
+    var_5 maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
   }
 }
 
 ai_waittill_entered_vehicle() {
-  if(!isDefined(self.ridingvehicle)) {
+  if(!isDefined(self.ridingvehicle))
     common_scripts\utility::waittill_any("death", "enteredvehicle");
-  }
 
-  while(isalive(self) && !isDefined(self.ridingvehicle)) {
+  while(isalive(self) && !isDefined(self.ridingvehicle))
     wait 0.05;
-  }
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     return 0;
-  }
 
   return 1;
 }
@@ -666,9 +639,8 @@ ai_rider_invulnerable_until_vehicle_death_or_jumping_out() {
 }
 
 vehicle_spawner_adjust_health_and_damage() {
-  if(!issubstr(self.classname, "_apache_player")) {
+  if(!issubstr(self.classname, "_apache_player"))
     maps\_utility::add_spawn_function(::friendly_fire_enable);
-  }
 
   var_0 = 0;
   var_1 = 1;
@@ -698,13 +670,11 @@ vehicle_spawner_adjust_health_and_damage() {
   } else
     return;
 
-  if(!isDefined(self.script_startinghealth)) {
+  if(!isDefined(self.script_startinghealth))
     self.script_startinghealth = var_3;
-  }
 
-  if(var_0) {
+  if(var_0)
     maps\_utility::add_spawn_function(::enemy_adjust_missile_damage, var_1, var_2);
-  }
 
   maps\_utility::add_spawn_function(::earthquake_on_death);
 }
@@ -750,9 +720,8 @@ enemy_adjust_missile_damage(var_0, var_1) {
 
         self dodamage(var_9, var_10, var_5);
 
-        if(isDefined(var_1)) {
+        if(isDefined(var_1))
           wait(var_1);
-        }
       }
     }
   }
@@ -793,9 +762,8 @@ vehicle_ai_turret_think() {
 
   var_1.disablereload = 1;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_4 thread vehicle_ai_turret_gunner_ignore_all_until_unload();
-  }
 
   var_1 setmode("manual");
 
@@ -806,21 +774,19 @@ vehicle_ai_turret_think() {
       var_9 = var_2;
 
       if(var_2) {
-        if(isDefined(self.vehicle_ai_turret_think_next_missile_time) && gettime() < self.vehicle_ai_turret_think_next_missile_time) {
+        if(isDefined(self.vehicle_ai_turret_think_next_missile_time) && gettime() < self.vehicle_ai_turret_think_next_missile_time)
           var_9 = 0;
-        } else if(isDefined(var_8.veh_missiles_targeting) && var_8.veh_missiles_targeting > 0) {
+        else if(isDefined(var_8.veh_missiles_targeting) && var_8.veh_missiles_targeting > 0)
           var_9 = 0;
-        } else if(!is_apache_player(var_8) && randomfloat(1.0) <= level.apache_difficulty.gunboat_chance_fire_missile_at_ai) {
+        else if(!is_apache_player(var_8) && randomfloat(1.0) <= level.apache_difficulty.gunboat_chance_fire_missile_at_ai)
           var_9 = 0;
-        }
       }
 
       thread vehicle_ai_turret_register_target(var_8, var_9);
 
       if(var_9) {
-        if(is_apache_player(var_8)) {
+        if(is_apache_player(var_8))
           missile_attack_notify_target_of_lock_and_delay(var_8);
-        }
 
         vehicle_attack_missile(var_8, 1);
         self.vehicle_ai_turret_think_next_missile_time = gettime() + level.apache_difficulty.gunboat_time_between_missiles_msec;
@@ -871,15 +837,13 @@ vehicle_ai_turret_get_target() {
   var_3 = [];
 
   foreach(var_5 in var_0) {
-    if(vehicle_ai_turret_can_target(var_5)) {
+    if(vehicle_ai_turret_can_target(var_5))
       var_3[var_3.size] = var_5;
-    }
   }
 
   foreach(var_5 in var_1) {
-    if(vehicle_ai_turret_can_target(var_5)) {
+    if(vehicle_ai_turret_can_target(var_5))
       var_3[var_3.size] = var_5;
-    }
   }
 
   var_9 = [];
@@ -887,9 +851,8 @@ vehicle_ai_turret_get_target() {
   var_10 = undefined;
   var_11 = "none";
 
-  if(!var_3.size) {
+  if(!var_3.size)
     return undefined;
-  }
 
   var_3 = sortbydistance(var_3, self.origin);
   var_3 = common_scripts\utility::array_sort_by_handler(var_3, ::get_vehicle_turrets_targeting);
@@ -899,9 +862,9 @@ vehicle_ai_turret_get_target() {
   foreach(var_5 in var_3) {
     var_15 = var_5 get_vehicle_turrets_targeting();
 
-    if(!isDefined(var_13)) {
+    if(!isDefined(var_13))
       var_13 = var_15;
-    } else if(var_15 > var_13) {
+    else if(var_15 > var_13) {
       break;
     }
 
@@ -911,9 +874,8 @@ vehicle_ai_turret_get_target() {
     }
   }
 
-  if(!isDefined(var_10)) {
+  if(!isDefined(var_10))
     var_10 = var_3[0];
-  }
 
   return var_10;
 }
@@ -921,31 +883,27 @@ vehicle_ai_turret_get_target() {
 vehicle_ai_turret_get_target_type() {
   var_0 = undefined;
 
-  if(maps\_vehicle::isvehicle()) {
+  if(maps\_vehicle::isvehicle())
     var_0 = "vehicle";
-  } else if(isai(self)) {
+  else if(isai(self))
     var_0 = "ai";
-  } else {}
+  else {}
 
   return var_0;
 }
 
 vehicle_ai_turret_can_target(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
-  if(isDefined(var_0.ignoreme) && var_0.ignoreme) {
+  if(isDefined(var_0.ignoreme) && var_0.ignoreme)
     return 0;
-  }
 
-  if(isDefined(var_0.ridingvehicle)) {
+  if(isDefined(var_0.ridingvehicle))
     return 0;
-  }
 
-  if(distancesquared(self.origin, var_0.origin) > level.apache_difficulty.veh_turret_range_squared) {
+  if(distancesquared(self.origin, var_0.origin) > level.apache_difficulty.veh_turret_range_squared)
     return 0;
-  }
 
   return 1;
 }
@@ -955,19 +913,16 @@ get_vehicle_turrets_targeting() {
 }
 
 vehicle_ai_turret_register_target(var_0, var_1) {
-  if(!isDefined(var_0.veh_turrets_targeting)) {
+  if(!isDefined(var_0.veh_turrets_targeting))
     var_0.veh_turrets_targeting = 0;
-  }
 
-  if(!isDefined(var_0.veh_missiles_targeting)) {
+  if(!isDefined(var_0.veh_missiles_targeting))
     var_0.veh_missiles_targeting = 0;
-  }
 
   var_0.veh_turrets_targeting++;
 
-  if(var_1) {
+  if(var_1)
     var_0.veh_missiles_targeting++;
-  }
 
   common_scripts\utility::waittill_either("death", "LISTEN_veh_turret_finished_targeting");
 
@@ -976,44 +931,38 @@ vehicle_ai_turret_register_target(var_0, var_1) {
   }
   var_0.veh_turrets_targeting--;
 
-  if(var_1) {
+  if(var_1)
     var_0.veh_missiles_targeting--;
-  }
 
   if(var_1) {}
 
-  if(isDefined(var_0.veh_turrets_targeting) && var_0.veh_turrets_targeting <= 0) {
+  if(isDefined(var_0.veh_turrets_targeting) && var_0.veh_turrets_targeting <= 0)
     var_0.veh_turrets_targeting = undefined;
-  }
 
-  if(isDefined(var_0.veh_missiles_targeting) && var_0.veh_missiles_targeting <= 0) {
+  if(isDefined(var_0.veh_missiles_targeting) && var_0.veh_missiles_targeting <= 0)
     var_0.veh_missiles_targeting = undefined;
-  }
 }
 
 vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
   self endon("death");
   var_0 endon("death");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 endon("death");
-  }
 
   var_3 = get_apache_player();
   var_4 = 0;
 
-  if(isplayer(var_0) || isDefined(var_3) && var_3 == var_0) {
+  if(isplayer(var_0) || isDefined(var_3) && var_3 == var_0)
     var_4 = 1;
-  }
 
   var_1 settargetentity(var_0);
   var_5 = 0;
 
-  if(var_4) {
+  if(var_4)
     var_5 = 70;
-  } else {
+  else
     var_5 = randomintrange(25, 35);
-  }
 
   var_6 = undefined;
 
@@ -1029,17 +978,15 @@ vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
   if(isDefined(var_6)) {
     var_11 = level.vehicle_mgturret[self.classname][var_6];
 
-    if(isDefined(var_11)) {
+    if(isDefined(var_11))
       var_10 = weaponfiretime(var_11.info);
-    }
   }
 
   var_12 = undefined;
   var_13 = undefined;
 
-  if(!var_4) {
+  if(!var_4)
     var_13 = vehicle_ai_turret_get_fx_shoot_flash();
-  }
 
   if(isDefined(var_13)) {
     var_10 = max(var_10, 0.15);
@@ -1051,9 +998,8 @@ vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
       var_18 = anglesToForward(var_17);
       bullettracer(var_16, var_16 + var_18 * 10000, 1);
 
-      if(var_15 % 2 == 0) {
+      if(var_15 % 2 == 0)
         playFXOnTag(common_scripts\utility::getfx(var_13), var_1, "tag_flash");
-      }
 
       wait(var_10);
     }
@@ -1074,13 +1020,13 @@ vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
 vehicle_ai_turret_get_fx_shoot_flash() {
   var_0 = undefined;
 
-  if(issubstr(self.classname, "_gaz_")) {
+  if(issubstr(self.classname, "_gaz_"))
     var_0 = "FX_oilrocks_turret_flash_gaz";
-  } else if(issubstr(self.classname, "_gunboat")) {
+  else if(issubstr(self.classname, "_gunboat"))
     var_0 = "FX_oilrocks_turret_flash_gunboat";
-  } else if(issubstr(self.classname, "_zpu4")) {
+  else if(issubstr(self.classname, "_zpu4"))
     var_0 = "FX_oilrocks_turret_flash_zpu";
-  } else {}
+  else {}
 
   return var_0;
 }
@@ -1127,18 +1073,16 @@ setup_damageable_exploder_rooftanks() {
 }
 
 damageable_exploder_rooftanks(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(self.accumulated_damage)) {
+  if(!isDefined(self.accumulated_damage))
     self.accumulated_damage = 0;
-  }
 
   self.accumulated_damage = self.accumulated_damage + var_0;
 
   if(self.accumulated_damage > 3330 || var_4 == "MOD_PROJECTILE") {
     self notify("stop_generic_damage_think");
 
-    if(isDefined(self.script_exploder)) {
+    if(isDefined(self.script_exploder))
       common_scripts\utility::exploder(self.script_exploder);
-    }
   }
 }
 
@@ -1153,11 +1097,10 @@ manage_active_hind_forced_targets() {
     if(var_1.size) {
       var_2 = undefined;
 
-      if(var_1.size == 1) {
+      if(var_1.size == 1)
         var_1[0] dot_to_apache_player_facing_2d();
-      } else {
+      else
         var_1 = common_scripts\utility::array_sort_by_handler(var_1, ::dot_to_apache_player_facing_2d_inverse);
-      }
 
       foreach(var_4 in var_1) {
         if(var_4.dot_to_apache_player_facing_2d >= 0.25) {
@@ -1188,9 +1131,8 @@ dot_to_apache_player_facing_2d_inverse() {
   var_0 = 0;
   var_1 = get_apache_player();
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_0 = -1.0 * dot_to_apache_player_facing_2d();
-  }
 
   return var_0;
 }
@@ -1236,29 +1178,24 @@ heli_ai_gather_targets() {
 heli_ai_can_hit_target(var_0, var_1) {
   var_2 = self getpointinbounds(1, 0, 0);
 
-  if(isDefined(self.mgturret) && self.mgturret.size > 0) {
+  if(isDefined(self.mgturret) && self.mgturret.size > 0)
     return maps\_chopperboss_utility::chopper_boss_can_hit_from_mgturret(var_2, var_1);
-  }
 
   return 1;
 }
 
 heli_decides_to_shoot_missile_at_ai(var_0) {
-  if(!isDefined(level.last_heli_decides_to_shoot_missile_at_ai_time)) {
+  if(!isDefined(level.last_heli_decides_to_shoot_missile_at_ai_time))
     level.last_heli_decides_to_shoot_missile_at_ai_time = gettime();
-  }
 
-  if(gettime() - level.last_heli_decides_to_shoot_missile_at_ai_time < 5000) {
+  if(gettime() - level.last_heli_decides_to_shoot_missile_at_ai_time < 5000)
     return 0;
-  }
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     return 0;
-  }
 
-  if(distance2dsquared(level.player.origin, var_0.origin) < 9000000) {
+  if(distance2dsquared(level.player.origin, var_0.origin) < 9000000)
     return 0;
-  }
 
   level.last_heli_decides_to_shoot_missile_at_ai_time = gettime();
   return 1;
@@ -1267,30 +1204,27 @@ heli_decides_to_shoot_missile_at_ai(var_0) {
 heli_ai_shoot_target(var_0) {
   var_1 = 1;
 
-  if(isai(var_0) && !heli_decides_to_shoot_missile_at_ai(var_0)) {
+  if(isai(var_0) && !heli_decides_to_shoot_missile_at_ai(var_0))
     var_1 = 0;
-  } else if(isDefined(self.heli_ai_shoot_missile_time_next) && gettime() < self.heli_ai_shoot_missile_time_next) {
+  else if(isDefined(self.heli_ai_shoot_missile_time_next) && gettime() < self.heli_ai_shoot_missile_time_next)
     var_1 = 0;
-  } else if(common_scripts\utility::distance_2d_squared(self.origin, var_0.origin) <= level.apache_difficulty.heli_vs_heli_mg_range_2d_squared) {
+  else if(common_scripts\utility::distance_2d_squared(self.origin, var_0.origin) <= level.apache_difficulty.heli_vs_heli_mg_range_2d_squared)
     var_1 = 0;
-  }
 
   if(var_1) {
     if(is_apache_player(var_0)) {
       missile_attack_notify_target_of_lock_and_delay(var_0);
 
-      if(!isDefined(var_0)) {
+      if(!isDefined(var_0))
         return 0;
-      }
     }
 
     vehicle_attack_missile(var_0, 1, 1);
     self.heli_ai_shoot_missile_time_next = gettime() + randomfloatrange(level.apache_difficulty.heli_vs_heli_min_shoot_time_msec, level.apache_difficulty.heli_vs_heli_max_shoot_time_msec);
   } else if(isDefined(self.mgturret))
     heli_attack_mg(var_0, 3.0);
-  else {
+  else
     heli_attack_mg_veh_weapon(var_0, 3.0);
-  }
 
   return 1;
 }
@@ -1298,9 +1232,9 @@ heli_ai_shoot_target(var_0) {
 heli_ai_pre_move_func() {
   var_0 = maps\_chopperboss::pause_action();
 
-  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get())) {
+  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get()))
     self setlookatent(maps\_chopperboss_utility::chopper_boss_forced_target_get());
-  } else if(isalive(self.heli_target)) {
+  else if(isalive(self.heli_target)) {
     self setlookatent(self.heli_target);
     self.last_heli_lookat_origin = self.heli_target.origin;
   } else
@@ -1311,16 +1245,14 @@ spawn_hind_enemy(var_0) {
   var_1 = getent("hind_enemy", "targetname");
   var_1 vehicle_spawner_adjust_health_and_damage();
 
-  while(isDefined(var_1.vehicle_spawned_thisframe)) {
+  while(isDefined(var_1.vehicle_spawned_thisframe))
     wait 0.05;
-  }
 
   if(isDefined(var_0)) {
     var_1.origin = var_0.origin;
 
-    if(isDefined(var_0.angles)) {
+    if(isDefined(var_0.angles))
       var_1.angles = var_0.angles;
-    }
   }
 
   var_2 = maps\_vehicle::vehicle_spawn(var_1);
@@ -1388,9 +1320,8 @@ hind_manage_damage_states() {
   for(;;) {
     var_2 = self.health - self.healthbuffer;
 
-    if(var_2 <= var_0 * 0.5) {
+    if(var_2 <= var_0 * 0.5)
       playFXOnTag(common_scripts\utility::getfx("FX_hind_damaged_smoke_heavy"), self, "tag_deathfx");
-    }
 
     wait 0.05;
   }
@@ -1404,9 +1335,8 @@ ai_clean_up(var_0, var_1) {
   var_1 = common_scripts\utility::ter_op(isDefined(var_1), var_1, 1);
   var_2 = 1;
 
-  if(!isDefined(self.ai_pos_start) || !isai(self) || isDefined(self.script_vehicleride) || isDefined(self.ridingvehicle) || common_scripts\utility::distance_2d_squared(self.origin, self.ai_pos_start) > squared(1600)) {
+  if(!isDefined(self.ai_pos_start) || !isai(self) || isDefined(self.script_vehicleride) || isDefined(self.ridingvehicle) || common_scripts\utility::distance_2d_squared(self.origin, self.ai_pos_start) > squared(1600))
     var_2 = 0;
-  }
 
   if(var_2) {
     self notify("stop_going_to_node");
@@ -1417,22 +1347,19 @@ ai_clean_up(var_0, var_1) {
   }
 
   if(var_1) {
-    while(maps\_utility::player_looking_at(self.origin, undefined, 1)) {
+    while(maps\_utility::player_looking_at(self.origin, undefined, 1))
       wait 0.05;
-    }
   }
 
   var_3 = get_apache_player();
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 thread vehicle_scripts\_apache_player::hud_hidetargets([self]);
-  }
 
-  if(var_0) {
+  if(var_0)
     self delete();
-  } else {
+  else
     self kill(self.origin);
-  }
 }
 
 rpg_ai_record_ready() {
@@ -1512,25 +1439,22 @@ earthquake_player(var_0) {
 }
 
 earthquake_valid_entity(var_0, var_1) {
-  if(!isDefined(var_0) || !isDefined(var_0.origin) || !isDefined(var_1)) {
+  if(!isDefined(var_0) || !isDefined(var_0.origin) || !isDefined(var_1))
     return 0;
-  }
 
   var_2 = isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner);
   var_3 = 0;
   var_4 = 0;
 
-  if(isDefined(var_0.destructible_type)) {
+  if(isDefined(var_0.destructible_type))
     var_4 = issubstr(var_0.destructible_type, "tank") || issubstr(var_0.destructible_type, "vehicle_");
-  } else if(isDefined(var_0.classname)) {
+  else if(isDefined(var_0.classname))
     var_4 = issubstr(var_0.classname, "script_vehicle_");
-  } else if(isvalidmissile(var_0)) {
+  else if(isvalidmissile(var_0))
     var_4 = 1;
-  }
 
-  if(!var_2) {
+  if(!var_2)
     var_3 = level.player maps\_utility::player_looking_at(var_0.origin, undefined, 1);
-  }
 
   return var_4 && (var_2 || var_3);
 }
@@ -1541,14 +1465,12 @@ earthquake_on_death() {
   if(maps\_vehicle::isvehicle() && maps\_vehicle::ishelicopter() && !maps\_vehicle_code::vehicle_should_do_rocket_death(self.model, var_0, var_1)) {
     var_3 = common_scripts\utility::waittill_any_timeout(40, "crash_done");
 
-    if(isDefined(var_3) && var_3 == "timeout") {
+    if(isDefined(var_3) && var_3 == "timeout")
       return;
-    }
   }
 
-  if(isDefined(var_0) && isDefined(self) && earthquake_valid_entity(self, var_0)) {
+  if(isDefined(var_0) && isDefined(self) && earthquake_valid_entity(self, var_0))
     earthquake_player(self.origin);
-  }
 
   if(!isDefined(var_0)) {
     return;
@@ -1556,11 +1478,10 @@ earthquake_on_death() {
   if(isplayer(var_0) || isDefined(var_0.owner) && isplayer(var_0.owner)) {
     if(isDefined(var_2)) {
       if(gettime() > level.engagementcomplimentdialognext) {
-        if(issubstr(var_2, "apache_")) {
+        if(issubstr(var_2, "apache_"))
           get_apache_ally(1) do_random_pilot_chatter("missile_confirm");
-        } else {
+        else
           get_apache_ally(1) do_random_pilot_chatter("other_player_kill_confirm");
-        }
 
         level.engagementcomplimentdialognext = gettime() + randomintrange(3000, 5000);
       }
@@ -1574,18 +1495,16 @@ earthquake_player_missile_monitor(var_0) {
   for(;;) {
     level waittill("LISTEN_apache_player_missile_fire", var_1);
 
-    if(isvalidmissile(var_1)) {
+    if(isvalidmissile(var_1))
       var_1 childthread earthquake_on_death_missile();
-    }
   }
 }
 
 earthquake_on_death_missile() {
   self waittill("death");
 
-  if(isDefined(self) && isDefined(self.origin)) {
+  if(isDefined(self) && isDefined(self.origin))
     earthquake_player(self.origin);
-  }
 }
 
 apache_mission_heli_ai_collision() {
@@ -1608,9 +1527,8 @@ manage_all_rpg_ai_attack_player_think() {
       if(isDefined(var_2)) {
         var_3 = rpg_ai_pick_shooter(var_1, var_2);
 
-        if(isDefined(var_3)) {
+        if(isDefined(var_3))
           var_0 = var_3 rpg_ai_attack(var_2, 1);
-        }
       }
     }
 
@@ -1646,31 +1564,26 @@ rpg_ai_attack(var_0, var_1) {
       break;
     }
 
-    if(gettime() >= var_3) {
+    if(gettime() >= var_3)
       return 0;
-    }
 
     wait 0.05;
   }
 
   wait 1.0;
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
-  if(isDefined(self.a.pose) && self.a.pose != "stand") {
+  if(isDefined(self.a.pose) && self.a.pose != "stand")
     return 0;
-  }
 
-  if(is_apache_player(var_0)) {
+  if(is_apache_player(var_0))
     missile_attack_notify_target_of_lock_and_delay(var_0);
-  }
 
   if(!isDefined(var_0) || !self canshoot(var_0.origin)) {
-    if(isDefined(var_0) && is_apache_player(var_0)) {
+    if(isDefined(var_0) && is_apache_player(var_0))
       self notify("LISTEN_missile_lockOnFailed");
-    }
 
     return 0;
   }
@@ -1684,9 +1597,8 @@ rpg_ai_attack_clear_no_shoot(var_0, var_1, var_2) {
   self endon("death");
 
   if(var_0 > 0) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       self endon(var_1);
-    }
 
     wait(var_0);
   }
@@ -1710,16 +1622,14 @@ rpg_ai_pick_shooter(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4.a.pose) && var_4.a.pose == "stand" && var_4 canshoot(var_1.origin)) {
+    if(isDefined(var_4.a.pose) && var_4.a.pose == "stand" && var_4 canshoot(var_1.origin))
       var_2[var_2.size] = var_4;
-    }
   }
 
   var_6 = undefined;
 
-  if(var_2.size) {
+  if(var_2.size)
     var_6 = var_2[randomint(var_2.size)];
-  }
 
   return var_6;
 }
@@ -1733,9 +1643,8 @@ rpg_ai_get_ready_array() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.rpg_ai_in_position) && var_3.rpg_ai_in_position) {
+    if(isDefined(var_3.rpg_ai_in_position) && var_3.rpg_ai_in_position)
       var_1[var_1.size] = var_3;
-    }
   }
 
   return var_1;
@@ -1786,29 +1695,24 @@ post() {
 spawn_pool_copy_function(var_0) {
   self.script_startingposition = undefined;
 
-  if(isDefined(var_0.script_startingposition)) {
+  if(isDefined(var_0.script_startingposition))
     self.script_startingposition = var_0.script_startingposition;
-  }
 }
 
 apache_autosave_check() {
   var_0 = level.player.riding_heli vehicle_scripts\_apache_player::apache_health_pct_get();
 
-  if(var_0 < 0.5) {
+  if(var_0 < 0.5)
     return 0;
-  }
 
-  if(level.player.riding_heli.missile_defense vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome()) {
+  if(level.player.riding_heli.missile_defense vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome())
     return 0;
-  }
 
-  if(level.player.riding_heli.missile_defense vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
+  if(level.player.riding_heli.missile_defense vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme())
     return 0;
-  }
 
-  if(level.missionfailed) {
+  if(level.missionfailed)
     return 0;
-  }
 
   return 1;
 }
@@ -1854,7 +1758,7 @@ objective_protect_start() {
   var_1 = maps\_utility::obj("protect_the_blackhawk");
 
   if(!var_0) {
-    objective_add(var_1, "active", &"OILROCKS_OBJ_PROTECT_THE_BLACKHAWK");
+    objective_add(var_1, "active", & "OILROCKS_OBJ_PROTECT_THE_BLACKHAWK");
     objective_current(var_1);
   } else
     objective_current(var_1);
@@ -1873,9 +1777,8 @@ send_apaches_to_hangout_thread(var_0) {
   maps\_chopperboss_utility::chopper_boss_set_hangout_volume(getent(var_0, "targetname"));
   var_1 = get_apache_allies();
 
-  foreach(var_3 in var_1) {
-    var_3 maps\oilrocks_code::chopper_boss_goto_hangout();
-  }
+  foreach(var_3 in var_1)
+  var_3 maps\oilrocks_code::chopper_boss_goto_hangout();
 }
 
 spawn_vehicles_from_targetname_prunespawning(var_0) {
@@ -1886,9 +1789,8 @@ spawn_vehicles_from_targetname_prunespawning(var_0) {
     if(!isDefined(var_4.code_classname) || var_4.code_classname != "script_vehicle") {
       continue;
     }
-    if(isspawner(var_4) && !isDefined(var_4.vehicle_spawned_thisframe)) {
+    if(isspawner(var_4) && !isDefined(var_4.vehicle_spawned_thisframe))
       var_1[var_1.size] = maps\_vehicle_code::_vehicle_spawn(var_4);
-    }
   }
 
   return var_1;

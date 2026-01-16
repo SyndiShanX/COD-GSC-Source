@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\weapons\proximity_grenade;
 #include scripts\weapons\weaponobjects;
+
 #namespace claymore;
 
 autoexec __init__system__() {
@@ -18,7 +19,7 @@ init_shared() {
 
 createclaymorewatcher(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;

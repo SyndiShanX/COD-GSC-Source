@@ -11,11 +11,13 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnStruct();
+    level._systemStates[system] = spawnstruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [[level._systemStates[system].callback]](clientNum, newState);
+    [
+      [level._systemStates[system].callback]
+    ](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
@@ -47,9 +49,8 @@ playerspawned(localClientNum) {
   self thread clientscripts\mp\_explode::playerspawned(localClientNum);
   self thread clientscripts\mp\_players::dtp_effects();
   self thread clientscripts\mp\_cameraspike::playerSpawned();
-  if(isDefined(level._faceAnimCBFunc)) {
+  if(isDefined(level._faceAnimCBFunc))
     self thread[[level._faceAnimCBFunc]](localClientNum);
-  }
 }
 entityspawned(localClientNum) {
   self endon("entityshutdown");
@@ -110,7 +111,9 @@ entityspawned(localClientNum) {
 }
 entityshutdown_callback(localClientNum, entity) {
   if(isDefined(level._entityShutDownCBFunc)) {
-    [[level._entityShutDownCBFunc]](localClientNum, entity);
+    [
+      [level._entityShutDownCBFunc]
+    ](localClientNum, entity);
   }
 }
 airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittype, time, height) {
@@ -156,7 +159,7 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
       team = "allies";
       break;
   }
-  data = spawnStruct();
+  data = spawnstruct();
   data.team = team;
   data.owner = owner;
   data.bombsite = pos;
@@ -167,8 +170,8 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   if(type == "a") {
     planeHalfDistance = 12000;
     data.planeHalfDistance = planeHalfDistance;
-    data.startPoint = pos + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
-    data.endPoint = pos + vector_scale(anglesToForward(direction), planeHalfDistance);
+    data.startPoint = pos + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
+    data.endPoint = pos + vector_scale(anglestoforward(direction), planeHalfDistance);
     data.planeModel = "t5_veh_air_b52";
     data.flyBySound = "null";
     data.washSound = "veh_b52_flyby_wash";
@@ -181,8 +184,8 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   } else if(type == "n") {
     planeHalfDistance = 24000;
     data.planeHalfDistance = planeHalfDistance;
-    data.startPoint = pos + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
-    data.endPoint = pos + vector_scale(anglesToForward(direction), planeHalfDistance);
+    data.startPoint = pos + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
+    data.endPoint = pos + vector_scale(anglestoforward(direction), planeHalfDistance);
     data.planeModel = clientscripts\mp\_airsupport::getPlaneModel(teamFaction);
     data.flyBySound = "null";
     data.washSound = "evt_us_napalm_wash";
@@ -211,11 +214,10 @@ demo_player_switch(localClientNum) {
 stunned_callback(localClientNum, set) {
   self.stunned = set;
   PrintLn("stunned_callback");
-  if(set) {
+  if(set)
     self notify("stunned");
-  } else {
+  else
     self notify("not_stunned");
-  }
 }
 client_flag_debug(msg) {}
 client_flag_callback(localClientNum, flag, set) {

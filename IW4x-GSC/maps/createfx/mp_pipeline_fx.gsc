@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_pipeline_fx.gsc
 ********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 107
   ent = createOneshotEffect("dust_ceiling_ash_large");
   ent.v["origin"] = (-494.259, 1864.84, 370.932);
   ent.v["angles"] = (270, 0, 0);
@@ -665,4 +667,5 @@ main() {
   ent.v["origin"] = (918.466, 1791.94, 557.907);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_metal_rattle_dull";
+
 }

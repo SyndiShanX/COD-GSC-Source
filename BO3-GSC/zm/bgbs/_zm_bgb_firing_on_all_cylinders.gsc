@@ -13,14 +13,14 @@
 #namespace zm_bgb_firing_on_all_cylinders;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_firing_on_all_cylinders", &__init__, undefined, "bgb");
+  system::register("zm_bgb_firing_on_all_cylinders", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_firing_on_all_cylinders", "rounds", 3, &enable, &disable, undefined);
+  bgb::register("zm_bgb_firing_on_all_cylinders", "rounds", 3, & enable, & disable, undefined);
 }
 
 function enable() {

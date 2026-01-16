@@ -11,18 +11,18 @@
 #namespace ctf;
 
 function main() {
-  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_localclient_connect( & on_localclient_connect);
 }
 
 function on_localclient_connect(localclientnum) {
   objective_ids = [];
-  while(!isDefined(objective_ids["allies_base"])) {
+  while (!isdefined(objective_ids["allies_base"])) {
     objective_ids["allies_base"] = serverobjective_getobjective(localclientnum, "allies_base");
     objective_ids["axis_base"] = serverobjective_getobjective(localclientnum, "axis_base");
     wait(0.05);
   }
   foreach(key, objective in objective_ids) {
-    level.ctfflags[key] = spawnStruct();
+    level.ctfflags[key] = spawnstruct();
     level.ctfflags[key].objectiveid = objective;
     setup_flag(localclientnum, level.ctfflags[key]);
   }
@@ -33,7 +33,7 @@ function setup_flag(localclientnum, flag) {
   flag.origin = serverobjective_getobjectiveorigin(localclientnum, flag.objectiveid);
   flag_entity = serverobjective_getobjectiveentity(localclientnum, flag.objectiveid);
   flag.angles = (0, 0, 0);
-  if(isDefined(flag_entity)) {
+  if(isdefined(flag_entity)) {
     flag.origin = flag_entity.origin;
     flag.angles = flag_entity.angles;
   }
@@ -41,12 +41,12 @@ function setup_flag(localclientnum, flag) {
 }
 
 function setup_flag_fx(localclientnum, flag, effects) {
-  if(isDefined(flag.base_fx)) {
+  if(isdefined(flag.base_fx)) {
     stopfx(localclientnum, flag.base_fx);
   }
   up = anglestoup(flag.angles);
-  forward = anglesToForward(flag.angles);
-  flag.base_fx = playFX(localclientnum, effects[flag.team], flag.origin, up, forward);
+  forward = anglestoforward(flag.angles);
+  flag.base_fx = playfx(localclientnum, effects[flag.team], flag.origin, up, forward);
   setfxteam(localclientnum, flag.base_fx, flag.team);
   thread watch_for_team_change(localclientnum);
 }

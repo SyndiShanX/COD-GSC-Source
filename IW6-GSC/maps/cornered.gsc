@@ -127,7 +127,7 @@ obj_flags() {
 
 obj_confirm_id() {
   var_0 = 1;
-  objective_add(var_0, "active", &"CORNERED_OBJ_CONFIRM_ID");
+  objective_add(var_0, "active", & "CORNERED_OBJ_CONFIRM_ID");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_confirm_id_complete");
   objective_state(var_0, "done");
@@ -135,7 +135,7 @@ obj_confirm_id() {
 
 obj_fire_zipline() {
   var_0 = 2;
-  objective_add(var_0, "active", &"CORNERED_OBJ_FIRE_ZIPLINE");
+  objective_add(var_0, "active", & "CORNERED_OBJ_FIRE_ZIPLINE");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_fire_zipline");
   objective_state(var_0, "done");
@@ -143,7 +143,7 @@ obj_fire_zipline() {
 
 obj_capture_hvt() {
   var_0 = 3;
-  objective_add(var_0, "active", &"CORNERED_OBJ_CAPTURE");
+  objective_add(var_0, "active", & "CORNERED_OBJ_CAPTURE");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_capture_complete");
   objective_state(var_0, "done");
@@ -151,7 +151,7 @@ obj_capture_hvt() {
 
 obj_upload_virus() {
   var_0 = 4;
-  objective_add(var_0, "active", &"CORNERED_OBJ_UPLOAD_VIRUS");
+  objective_add(var_0, "active", & "CORNERED_OBJ_UPLOAD_VIRUS");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_upload_virus_complete");
   objective_state(var_0, "done");
@@ -159,7 +159,7 @@ obj_upload_virus() {
 
 obj_escape() {
   var_0 = 6;
-  objective_add(var_0, "active", &"CORNERED_OBJ_ESCAPE");
+  objective_add(var_0, "active", & "CORNERED_OBJ_ESCAPE");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_escape_complete");
   objective_state(var_0, "done");

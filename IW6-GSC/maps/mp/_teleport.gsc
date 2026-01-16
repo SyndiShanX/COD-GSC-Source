@@ -39,9 +39,8 @@ teleport_init() {
   }
   level.teleport_zones = [];
   foreach(zone in zones) {
-    if(!isDefined(zone.script_noteworthy)) {
+    if(!isDefined(zone.script_noteworthy))
       zone.script_noteworthy = "zone_" + level.teleport_zones.size;
-    }
 
     zone.name = zone.script_noteworthy;
     teleport_parse_zone_targets(zone);
@@ -124,15 +123,13 @@ teleport_onStartGameType() {
       break;
   }
 
-  if(isDefined(pre_onStartGameType_func)) {
+  if(isDefined(pre_onStartGameType_func))
     level[[pre_onStartGameType_func]]();
-  }
 
   level[[level.teleport_onStartGameType]]();
 
-  if(isDefined(post_onStartGameType_func)) {
+  if(isDefined(post_onStartGameType_func))
     level[[post_onStartGameType_func]]();
-  }
 
   flag_set("teleport_setup_complete");
 }
@@ -348,9 +345,8 @@ teleport_HideGrindZone(grindZone) {
   Objective_State(grindZone.objId_axis, "invisible");
   Objective_State(grindZone.objId_allies, "invisible");
 
-  while(!isDefined(grindZone.grind_headIcon_allies) || !isDefined(grindZone.grind_headIcon_axis)) {
+  while(!isDefined(grindZone.grind_headIcon_allies) || !isDefined(grindZone.grind_headIcon_axis))
     waitframe();
-  }
 
   grindZone.grind_headIcon_allies.old_alpha = grindZone.grind_headIcon_allies.alpha;
   grindZone.grind_headIcon_allies.alpha = 0;
@@ -387,13 +383,11 @@ teleport_onStartGameHORDE() {
 }
 
 teleport_change_targetname(ents, append) {
-  if(!IsArray(ents)) {
+  if(!IsArray(ents))
     ents = [ents];
-  }
 
-  if(!isDefined(append)) {
+  if(!isDefined(append))
     append = "hide_from_getEnt";
-  }
 
   foreach(ent in ents) {
     ent.saved_targetname = ent.targetname;
@@ -402,9 +396,8 @@ teleport_change_targetname(ents, append) {
 }
 
 teleport_gamemode_disable_teleport(valid_zones) {
-  if(!isDefined(valid_zones)) {
+  if(!isDefined(valid_zones))
     valid_zones = GetArrayKeys(level.teleport_zones);
-  }
 
   game_zone = game["teleport_zone_dom"];
   if(!isDefined(game_zone)) {
@@ -418,14 +411,12 @@ teleport_gamemode_disable_teleport(valid_zones) {
 }
 
 teleport_restore_targetname(ents) {
-  if(!IsArray(ents)) {
+  if(!IsArray(ents))
     ents = [ents];
-  }
 
   foreach(ent in ents) {
-    if(isDefined(ent.saved_targetname)) {
+    if(isDefined(ent.saved_targetname))
       ent.targetname = ent.saved_targetname;
-    }
   }
 }
 
@@ -492,9 +483,8 @@ teleport_onStartGameDOM() {
 }
 
 teleport_dom_post_bot_cleanup() {
-  while(!isDefined(level.bot_gametype_precaching_done)) {
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
-  }
 
   foreach(zone in level.teleport_zones) {
     foreach(flag in zone.flags) {
@@ -630,9 +620,8 @@ teleport_onTeleportSIEGE(zone_name) {
 
 teleport_get_matching_dom_flag(flag, from_zone) {
   foreach(dom_flag in level.teleport_zones[from_zone].flags) {
-    if(flag.useobj.label == dom_flag.useobj.label) {
+    if(flag.useobj.label == dom_flag.useobj.label)
       return dom_flag;
-    }
   }
   return undefined;
 }
@@ -734,9 +723,8 @@ teleport_parse_zone_targets(zone) {
   }
 
   foreach(struct in structs) {
-    if(!isDefined(struct.script_noteworthy)) {
+    if(!isDefined(struct.script_noteworthy))
       struct.script_noteworthy = "teleport_origin";
-    }
 
     switch (struct.script_noteworthy) {
       case "teleport_origin":
@@ -752,9 +740,8 @@ teleport_parse_zone_targets(zone) {
         struct.origin = trace["position"];
 
       case "telport_origin_nodrop":
-        if(!isDefined(struct.script_parameters)) {
+        if(!isDefined(struct.script_parameters))
           struct.script_parameters = "none,axis,allies";
-        }
 
         toks = strTok(struct.script_parameters, ", ");
         foreach(tok in toks) {
@@ -763,9 +750,8 @@ teleport_parse_zone_targets(zone) {
             continue;
           }
 
-          if(!isDefined(struct.angles)) {
+          if(!isDefined(struct.angles))
             struct.angles = (0, 0, 0);
-          }
 
           size = zone.teleport_origins[tok].size;
           zone.teleport_origins[tok][size] = struct;
@@ -801,9 +787,8 @@ teleport_debug_set_zone() {
 }
 
 teleport_watch_debug_dvar(dvar_name, dvar_default) {
-  if(!isDefined(dvar_default)) {
+  if(!isDefined(dvar_default))
     dvar_default = "";
-  }
 
   SetDvarIfUninitialized(dvar_name, dvar_default);
 
@@ -828,22 +813,18 @@ teleport_set_current_zone(zone) {
 }
 
 teleport_filter_spawn_point(spawnPoints, filter_zone) {
-  if(!isDefined(filter_zone)) {
+  if(!isDefined(filter_zone))
     filter_zone = level.teleport_zone_current;
-  }
 
   valid_spawns = [];
   foreach(spawnPoint in spawnPoints) {
-    if(!isDefined(spawnPoint.index)) {
+    if(!isDefined(spawnPoint.index))
       spawnPoint.index = "ent_" + spawnPoint GetEntityNumber();
-    }
-    if(!isDefined(level.teleport_spawn_info[spawnPoint.index])) {
+    if(!isDefined(level.teleport_spawn_info[spawnPoint.index]))
       teleport_init_spawn_info(spawnPoint);
-    }
 
-    if(level.teleport_spawn_info[spawnPoint.index].zone == filter_zone) {
+    if(level.teleport_spawn_info[spawnPoint.index].zone == filter_zone)
       valid_spawns[valid_spawns.size] = spawnPoint;
-    }
   }
 
   return valid_spawns;
@@ -870,9 +851,8 @@ teleport_init_spawn_info(spawner) {
 
 teleport_is_valid_zone(zone_name) {
   foreach(name, zones in level.teleport_zones) {
-    if(name == zone_name) {
+    if(name == zone_name)
       return true;
-    }
   }
 
   return false;
@@ -882,14 +862,12 @@ teleport_to_zone(zone_name, run_event_funcs) {
   if(!level.teleport_allowed) {
     return;
   }
-  if(!isDefined(run_event_funcs)) {
+  if(!isDefined(run_event_funcs))
     run_event_funcs = true;
-  }
 
   pre_func = level.teleport_pre_funcs[zone_name];
-  if(isDefined(pre_func) && run_event_funcs) {
+  if(isDefined(pre_func) && run_event_funcs)
     [[pre_func]]();
-  }
 
   current = level.teleport_zones[level.teleport_zone_current];
   next = level.teleport_zones[zone_name];
@@ -899,26 +877,22 @@ teleport_to_zone(zone_name, run_event_funcs) {
   }
   teleport_to_zone_players(zone_name);
   teleport_to_zone_agents(zone_name);
-  if(level.teleport_include_killsteaks) {
+  if(level.teleport_include_killsteaks)
     teleport_to_zone_killstreaks(zone_name);
-  }
 
-  if(isDefined(level.teleport_gameMode_func)) {
+  if(isDefined(level.teleport_gameMode_func))
     [[level.teleport_gameMode_func]](zone_name);
-  }
 
   teleport_set_current_zone(zone_name);
 
   level notify("teleport_to_zone", zone_name);
 
   post_func = level.teleport_post_funcs[zone_name];
-  if(isDefined(post_func) && run_event_funcs) {
+  if(isDefined(post_func) && run_event_funcs)
     [[post_func]]();
-  }
 
-  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["post_teleport"])) {
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["post_teleport"]))
     [[level.bot_funcs["post_teleport"]]]();
-  }
 }
 
 teleport_to_zone_agents(zone_name) {
@@ -953,9 +927,8 @@ teleport_to_zone_character(zone_name, character) {
 
   teleport_origin = undefined;
   teleport_angles = character.angles;
-  if(isPlayer(character)) {
+  if(isPlayer(character))
     teleport_angles = character GetPlayerAngles();
-  }
 
   foreach(set_name, origin_set in next_zone.teleport_origins) {
     next_zone.teleport_origins[set_name] = array_randomize(origin_set);
@@ -1022,9 +995,8 @@ teleport_validate_success(player) {
   level waittill("teleport_to_zone");
   if(isDefined(player)) {
     player_zone = teleport_closest_zone(player.origin);
-    if(player_zone.name != level.teleport_zone_current) {
+    if(player_zone.name != level.teleport_zone_current)
       player _suicide();
-    }
   }
 }
 
@@ -1058,14 +1030,12 @@ teleport_to_zone_killstreaks(zone_name) {
   teleport_add_delta(level.heli_pilot_mesh, delta);
 
   array_thread_safe(level.air_start_nodes, ::teleport_self_add_delta, delta);
-  foreach(loc in level.air_start_nodes) {
-    array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
-  }
+  foreach(loc in level.air_start_nodes)
+  array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
 
   array_thread_safe(level.air_node_mesh, ::teleport_self_add_delta, delta);
-  foreach(loc in level.air_node_mesh) {
-    array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
-  }
+  foreach(loc in level.air_node_mesh)
+  array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
 
   array_thread_safe(level.littleBirds, ::teleport_notify_death);
 
@@ -1092,36 +1062,31 @@ teleport_to_zone_killstreaks(zone_name) {
   }
 
   if(isDefined(level.uplinks)) {
-    foreach(uplink in level.uplinks) {
-      uplink notify("death");
-    }
+    foreach(uplink in level.uplinks)
+    uplink notify("death");
   }
 
   remoteMissileSpawnArray = getEntArray("remoteMissileSpawn", "targetname");
   array_thread_safe(remoteMissileSpawnArray, ::teleport_self_add_delta, delta);
   foreach(spawn in remoteMissileSpawnArray) {
-    if(isDefined(spawn.target)) {
+    if(isDefined(spawn.target))
       spawn.targetEnt = getEnt(spawn.target, "targetname");
-    }
-    if(isDefined(spawn.targetEnt)) {
+    if(isDefined(spawn.targetEnt))
       teleport_add_delta(spawn.targetEnt, delta);
-    }
   }
 
   foreach(ims in level.ims) {
     ims notify("death");
     teleport_add_delta(ims, delta);
-    if(!teleport_place_on_ground(ims)) {
+    if(!teleport_place_on_ground(ims))
       ims Delete();
-    }
   }
 
   foreach(turret in level.turrets) {
     turret notify("death");
     teleport_add_delta(turret, delta);
-    if(!teleport_place_on_ground(turret)) {
+    if(!teleport_place_on_ground(turret))
       turret Delete();
-    }
   }
 
   packages = teleport_get_care_packages();
@@ -1159,15 +1124,13 @@ teleport_to_zone_killstreaks(zone_name) {
 }
 
 teleport_notify_death() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self notify("death");
-  }
 }
 
 array_thread_safe(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isDefined(entities)) {
+  if(!isDefined(entities))
     return;
-  }
   array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, var9);
 }
 
@@ -1197,9 +1160,8 @@ teleport_place_on_ground(ent, max_trace) {
   if(!isDefined(ent)) {
     return;
   }
-  if(!isDefined(max_trace)) {
+  if(!isDefined(max_trace))
     max_trace = 300;
-  }
 
   start = ent.origin;
   end = ent.origin - (0, 0, max_trace);

@@ -73,4 +73,5 @@ precache() {
   character\character_civilian_slum_male_ba_wht::precache();
   character\character_civilian_slum_male_bb::precache();
   character\character_civilian_slum_male_bb_wht::precache();
+
 }

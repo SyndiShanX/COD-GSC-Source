@@ -42,9 +42,8 @@ pre_load() {
   if(!alien_mode_has("collectible")) {
     return;
   }
-  if(!isDefined(level.alien_collectibles_table)) {
+  if(!isDefined(level.alien_collectibles_table))
     level.alien_collectibles_table = COLLECTIBLES_TABLE;
-  }
 
   collectibles_model_precache();
 
@@ -72,9 +71,8 @@ pre_load() {
 }
 
 get_localized_hint(item, hint) {
-  if(is_chaos_mode() && item.isWeapon) {
-    return &"ALIEN_CHAOS_WEAPON_PICKUP_HINT";
-  }
+  if(is_chaos_mode() && item.isWeapon)
+    return & "ALIEN_CHAOS_WEAPON_PICKUP_HINT";
 
   return hint;
 }
@@ -122,15 +120,15 @@ collectibles_world_init() {
   items = getstructarray("item", "targetname");
 
   if(isDefined(level.additional_boss_weapon)) {
-    additional_boss_weapon = [[level.additional_boss_weapon]]();
-    if(isDefined(additional_boss_weapon)) {
+    additional_boss_weapon = [
+      [level.additional_boss_weapon]
+    ]();
+    if(isDefined(additional_boss_weapon))
       items = array_add(items, additional_boss_weapon);
-    }
   }
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     items = maps\mp\alien\_chaos::swap_weapon_items(items);
-  }
 
   level.world_items = items;
 
@@ -147,15 +145,13 @@ collectibles_world_init() {
   init_throwableItems();
 
   area_name = get_current_area_name();
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     area_name = get_chaos_area();
-  }
 
   thread spawn_items_in_area(area_name);
 
-  if(isDefined(level.enter_area_func)) {
+  if(isDefined(level.enter_area_func))
     [[level.enter_area_func]](area_name);
-  }
 }
 
 init_throwableItems() {
@@ -163,7 +159,7 @@ init_throwableItems() {
 
   level.throwable_items = [];
 
-  level.throwable_items["alienpropanetank_mp"] = init_throwable(10000, "propane_tank_aliens_iw6", true, &"ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK", ::propaneTankWatchUse);
+  level.throwable_items["alienpropanetank_mp"] = init_throwable(10000, "propane_tank_aliens_iw6", true, & "ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK", ::propaneTankWatchUse);
 }
 
 init_throwable(force, model, canBePickedUp, hintString, pickUpFunc) {
@@ -210,9 +206,8 @@ remove_items_in_area(area) {
 setup_item_data() {
   self.override = spawnStruct();
 
-  if(!isDefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy))
     self.script_noteworthy = self.item_ref;
-  }
 
   self.isLoot = is_collectible_loot(self.item_ref);
   self.isWeapon = is_collectible_weapon(self.item_ref);
@@ -261,12 +256,10 @@ setup_item_data() {
   self.data["cost"] = level.collectibles[self.item_ref].cost;
 
   if(isDefined(self.override)) {
-    if(isDefined(self.override.respawn_max)) {
+    if(isDefined(self.override.respawn_max))
       self.data["respawn_count"] = self.override.respawn_max;
-    }
-    if(isDefined(self.override.unlock)) {
+    if(isDefined(self.override.unlock))
       self.data["unlock"] = self.override.unlock;
-    }
   }
 }
 
@@ -292,9 +285,8 @@ spawn_world_item(dropToGround, needPressXToUse) {
   item_ent = spawn("script_model", get_world_item_spawn_pos(dropToGround));
   item_ent setModel(level.collectibles[item_ref].model);
 
-  if(is_chaos_mode() && is_true(self.isweapon)) {
+  if(is_chaos_mode() && is_true(self.isweapon))
     item_ent.weapon_ref = getsubstr(item_ref, 7);
-  }
 
   if(isDefined(self.angles)) {
     item_ent.angles = self.angles;
@@ -311,16 +303,14 @@ spawn_world_item(dropToGround, needPressXToUse) {
     self.use_ent = spawn("trigger_radius", item_ent.origin, 0, 32, 32);
   }
 
-  if(should_explode_on_damage(item_ref)) {
+  if(should_explode_on_damage(item_ref))
     self.item_ent thread explodeOnDamage(false);
-  }
 
   self notify("spawned");
 
   /#/ / debug
-  if(getdvarint("debug_collectibles") == 1) {
+  if(getdvarint("debug_collectibles") == 1)
     maps\mp\alien\_debug::debug_collectible(self);
-  }
 
   if(alien_mode_has("outline")) {
     if(GetSubStr(item_ref, 0, 6) == "weapon") {
@@ -334,11 +324,10 @@ spawn_world_item(dropToGround, needPressXToUse) {
 get_world_item_spawn_pos(dropToGround) {
   VERTICAL_OFFSET = (0, 0, 16);
 
-  if(dropToGround) {
+  if(dropToGround)
     return (drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_DOWN_DIST) + VERTICAL_OFFSET);
-  } else {
+  else
     return self.origin;
-  }
 }
 
 make_item_ent_useable(item_ent, hintString) {
@@ -449,9 +438,8 @@ loot_pickup_listener(item_owner, touch) {
 
   isLoot = is_collectible_loot(self.item_ref);
 
-  if(!isDefined(touch)) {
+  if(!isDefined(touch))
     touch = false;
-  }
 
   if(!touch) {
     make_item_ent_useable(self.item_ent, get_item_desc(self.item_ref));
@@ -505,9 +493,8 @@ loot_pickup_timeout(owner, loot_timeout) {
 
   if(getdvarint("debug_collectibles") == 1) {
     player_name = "unknown player";
-    if(isDefined(owner) && isplayer(owner) && isDefined(owner.name)) {
+    if(isDefined(owner) && isplayer(owner) && isDefined(owner.name))
       player_name = owner.name;
-    }
 
     iprintln(player_name + "'s loot [" + self.item_ref + "] timed out");
   }
@@ -524,15 +511,13 @@ remove_loot() {
 }
 
 remove_world_item() {
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.item_ent);
-  }
 
   self.item_ent delete();
 
-  if(isDefined(self.use_ent)) {
+  if(isDefined(self.use_ent))
     self.use_ent delete();
-  }
 }
 
 item_min_distance_from_players() {
@@ -574,9 +559,8 @@ collectibles_table_init(index_start, index_end) {
     item.isWeapon = is_collectible_weapon(item.ref);
     item.isItem = is_collectible_item(item.ref);
 
-    if(is_chaos_mode()) {
+    if(is_chaos_mode())
       item.cost = 0;
-    }
 
     level.collectibles[item.ref] = item;
   }
@@ -642,9 +626,8 @@ cangive_default(item) {
 get_func_give(ref) {
   AssertEx(isDefined(ref) && ref != "", "The item ref name must be defined and not empty string.");
 
-  if(item_exist(ref)) {
+  if(item_exist(ref))
     return level.collectibles[ref].func_give;
-  }
 
   func_give = ::give_default;
 
@@ -668,9 +651,8 @@ get_func_give(ref) {
 get_func_cangive(ref) {
   AssertEx(isDefined(ref) && ref != "", "The item ref name must be defined and not empty string.");
 
-  if(item_exist(ref)) {
+  if(item_exist(ref))
     return level.collectibles[ref].func_cangive;
-  }
 
   func_cangive = ::cangive_default;
 
@@ -737,9 +719,8 @@ give_weapon(item, is_locker_weapon) {
           should_take_weapon_test = [
             [level.custom_give_weapon_func]
           ](max_primaries);
-          if(isDefined(should_take_weapon_test)) {
+          if(isDefined(should_take_weapon_test))
             should_take_weapon = should_take_weapon_test;
-          }
         }
 
         if(should_take_weapon) {
@@ -748,35 +729,30 @@ give_weapon(item, is_locker_weapon) {
       }
     }
 
-    if(isDefined(cur_primary_weapon) && getWeaponClass(cur_primary_weapon) != "weapon_pistol" && should_take_weapon == true) {
+    if(isDefined(cur_primary_weapon) && getWeaponClass(cur_primary_weapon) != "weapon_pistol" && should_take_weapon == true)
       current_attachments = GetWeaponAttachments(cur_primary_weapon);
-    }
 
     self take_player_currency(cost, false, "weapon", weapon_ref);
 
-    if(is_chaos_mode()) {
+    if(is_chaos_mode())
       maps\mp\alien\_chaos::update_weapon_pickup(self, weapon_ref);
-    } else if(!is_true(is_locker_weapon) && isDefined(cur_primary_weapon)) {
+    else if(!is_true(is_locker_weapon) && isDefined(cur_primary_weapon))
       weapon_ref = self return_weapon_with_like_attachments(weapon_ref, current_attachments);
-    } else if(is_true(is_locker_weapon)) {
+    else if(is_true(is_locker_weapon))
       weapon_ref = self ark_attachment_transfer_to_locker_weapon(weapon_ref, current_attachments, should_take_weapon);
-    }
 
     self giveweapon(weapon_ref);
     self SwitchToWeapon(weapon_ref);
-    if(!is_true(is_locker_weapon)) {
+    if(!is_true(is_locker_weapon))
       self scale_ammo_based_on_nerf(weapon_ref);
-    }
     self give_pistol_ammo_if_nerf_active();
     level notify("new_weapon_purchased", self);
   } else {
-    if(!self HasWeapon(weapon_ref)) {
+    if(!self HasWeapon(weapon_ref))
       weapon_ref = get_weapon_ref(weapon_ref);
-    }
 
-    if(self has_pistols_only_relic_and_no_deployables()) {
+    if(self has_pistols_only_relic_and_no_deployables())
       weapon_ref = get_current_pistol();
-    }
 
     assert(isDefined(weapon_ref));
 
@@ -786,9 +762,8 @@ give_weapon(item, is_locker_weapon) {
     current_ammo = self GetAmmoCount(weapon_ref);
 
     if(current_ammo < scaled_ammo) {
-      if(has_special_ammo) {
+      if(has_special_ammo)
         return;
-      }
       self GiveMaxAmmo(weapon_ref);
       self SwitchToWeapon(weapon_ref);
       self SetWeaponAmmoStock(weapon_ref, scaled_ammo);
@@ -799,14 +774,14 @@ give_weapon(item, is_locker_weapon) {
         cost = level.pistol_ammo_cost;
       }
       self clearLowerMessage("ammo_warn");
-      self setLowerMessage("ammo_taken", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
+      self setLowerMessage("ammo_taken", & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
 
       self take_player_currency(cost, false, "weapon", weapon_ref);
 
     } else {
       if(!has_special_ammo) {
         self clearLowerMessage("ammo_warn");
-        self setLowerMessage("ammo_taken", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+        self setLowerMessage("ammo_taken", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
       }
     }
   }
@@ -829,9 +804,8 @@ give_pistol_ammo_if_nerf_active() {
         max_stock = WeaponMaxAmmo(weap);
         scaled_ammo = int(max_stock * 0.25);
         cur_ammo = self GetAmmoCount(weap);
-        if(scaled_ammo > cur_ammo) {
+        if(scaled_ammo > cur_ammo)
           self SetWeaponAmmoStock(weap, scaled_ammo);
-        }
       }
     }
   }
@@ -877,9 +851,8 @@ get_replaceable_weapon() {
     } else {
       weapon_list = self GetWeaponsList("primary");
       foreach(weapon in weapon_list) {
-        if(WeaponClass(weapon) != "item" && WeaponClass(weapon) != "pistol" && WeaponType(weapon) != "riotshield") {
+        if(WeaponClass(weapon) != "item" && WeaponClass(weapon) != "pistol" && WeaponType(weapon) != "riotshield")
           return weapon;
-        }
       }
     }
   }
@@ -905,7 +878,7 @@ cangive_weapon(item) {
 
   if(is_chaos_mode()) {
     if(maps\mp\alien\_chaos::is_weapon_recently_picked_up(self, weapon_ref) || self has_special_weapon()) {
-      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       return false;
     } else
       return true;
@@ -923,7 +896,7 @@ cangive_weapon(item) {
 
   if(selfmaps\mp\alien\_prestige::prestige_getPistolsOnly() == 1) {
     if(selfmaps\mp\alien\_prestige::prestige_getNoDeployables() != 1) {
-      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
+      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
       return false;
     }
   }
@@ -933,7 +906,7 @@ cangive_weapon(item) {
   }
 
   if(currentweapon == "none") {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
 
@@ -941,71 +914,70 @@ cangive_weapon(item) {
     if(![
         [level.custom_cangive_weapon_func]
       ](cur_weapons, currentweapon, currentweapon_class, max_primaries)) {
-      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       return false;
     }
   }
 
   if(self has_special_weapon()) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= max_primaries && !self.hasRiotShield && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 1) && self.hasRiotShield && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 1) && self hasweapon("aliensoflam_mp") && !self.hasRiotShield) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 2) && self.hasRiotShield && self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon == "aliensoflam_mp" && cur_weapons.size >= (max_primaries + 1) && !self.hasRiotShieldEquipped) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon == "aliensoflam_mp" && cur_weapons.size >= (max_primaries + 2) && self.hasRiotShieldEquipped) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(self.hasRiotShieldEquipped && cur_weapons.size >= (max_primaries + 1) && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(self.hasRiotShieldEquipped && cur_weapons.size >= (max_primaries + 1) && self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(!self is_holding_deployable()) {
-    if(self has_pistols_only_relic_and_no_deployables()) {
+    if(self has_pistols_only_relic_and_no_deployables())
       has_enough = player_has_enough_currency(level.pistol_ammo_cost);
-    } else {
+    else
       has_enough = player_has_enough_currency(item.data["cost"]);
-    }
 
     if(!has_enough) {
       self clearLowerMessage("ammo_warn");
-      self setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
+      self setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
       return false;
     }
     return true;
   } else {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
 
@@ -1027,7 +999,7 @@ cangive_throwable_weapon(item) {
   weapon_ref = getsubstr(ref, 5);
 
   if(self isChangingWeapon() || self is_holding_deployable() || self has_special_weapon() || self GetCurrentPrimaryWeapon() == "aliensoflam_mp") {
-    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
   if(!self HasWeapon(weapon_ref) && !self is_holding_deployable() && !self has_special_weapon()) {
@@ -1090,9 +1062,8 @@ watchThrowableItemStopped(weapname, itemTeam, playerEye, playerAngles, owner, sp
   waitframe();
 
   force = item_data.force;
-  if(spawnPos["fraction"] < 1) {
+  if(spawnPos["fraction"] < 1)
     force = 5;
-  }
 
   physics_model PhysicsLaunchServer((0, 0, 0), forward_direction * force);
 
@@ -1110,16 +1081,14 @@ watchThrowableItemStopped(weapname, itemTeam, playerEye, playerAngles, owner, sp
   }
   distcheck = 24 * 24;
   foreach(ims in level.placedIMS) {
-    if(DistanceSquared(physics_model.origin, ims.origin) < distcheck) {
+    if(DistanceSquared(physics_model.origin, ims.origin) < distcheck)
       physics_model notify("damage", 100, physics_model.owner);
-    }
   }
 }
 
 add_to_thrown_entity_list(item) {
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(item, 0);
-  }
 
   level.thrown_entities[level.thrown_entities.size] = item;
 }
@@ -1127,9 +1096,8 @@ add_to_thrown_entity_list(item) {
 clean_up_on_death() {
   level endon("game_ended");
   self waittill("death");
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self);
-  }
 
   level.thrown_entities = array_remove(level.thrown_entities, self);
 }
@@ -1150,12 +1118,12 @@ propaneTankWatchUse(weapname) {
       continue;
     }
     if(player is_holding_deployable() || player has_special_weapon()) {
-      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(player isChangingWeapon() || player GetCurrentPrimaryWeapon() == "aliensoflam_mp") {
-      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1175,7 +1143,7 @@ isThrowableItem(weaponName) {
 }
 
 displayThrowMessage() {
-  self setLowerMessage("throw_item", &"ALIEN_COLLECTIBLES_THROW_ITEM", 3);
+  self setLowerMessage("throw_item", & "ALIEN_COLLECTIBLES_THROW_ITEM", 3);
 }
 
 explodeOnDamage(should_explode_on_hive_explode) {
@@ -1203,19 +1171,17 @@ explodeOnDamage(should_explode_on_hive_explode) {
     break;
   }
 
-  if(isDefined(attacker) && isPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker))
     self.owner = attacker;
-  } else if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
+  else if(isDefined(attacker.owner) && isPlayer(attacker.owner))
     self.owner = attacker.owner;
-  }
 
-  if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 4) {
+  if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 4)
     playFX(level._effect["Propane_explosion_cheapest"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
-  } else if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 2) {
+  else if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 2)
     playFX(level._effect["Propane_explosion_cheap"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
-  } else {
+  else
     playFX(level._effect["Propane_explosion"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
-  }
 
   max_damage = 1000 * self.owner perk_GetTrapDamageScalar();
   min_damage = 1000 * self.owner perk_GetTrapDamageScalar();
@@ -1223,11 +1189,10 @@ explodeOnDamage(should_explode_on_hive_explode) {
   damage_origin = self.origin + (0, 0, 22);
   damage_radius = 256;
 
-  if(hive_exploded_propane) {
+  if(hive_exploded_propane)
     RadiusDamage(damage_origin, damage_radius, max_damage, min_damage, attacker, "MOD_EXPLOSIVE", "alienpropanetank_mp");
-  } else {
+  else
     RadiusDamage(damage_origin, damage_radius, max_damage, min_damage, self.owner, "MOD_EXPLOSIVE", "alienpropanetank_mp");
-  }
 
   self playSound("grenade_explode_metal");
 
@@ -1235,17 +1200,15 @@ explodeOnDamage(should_explode_on_hive_explode) {
 
   level thread firecloudsfx(level.fireCloudDuration, self.origin);
 
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self);
-  }
 
   self delete();
 }
 
 is_hive_explosion(attacker, type) {
-  if(!isDefined(attacker) || !isDefined(attacker.classname)) {
+  if(!isDefined(attacker) || !isDefined(attacker.classname))
     return false;
-  }
 
   return (attacker.classname == "scriptable" && type == "MOD_EXPLOSIVE");
 }
@@ -1272,9 +1235,8 @@ fireCloudMonitor(attacker, duration, position) {
   fireCloudPlayerTickDamage = level.fireCloudPlayerTickDamage;
   fireCloudHiveTickDamage = level.fireCloudHiveTickDamage * (attacker full_damage_scaler());
 
-  if(!isDefined(level.recent_propane_explosions)) {
+  if(!isDefined(level.recent_propane_explosions))
     level.recent_propane_explosions = 0;
-  }
 
   level.recent_propane_explosions++;
 
@@ -1307,16 +1269,14 @@ fireCloudMonitor(attacker, duration, position) {
     }
 
     foreach(player in level.players) {
-      if(isalive(player) && player istouching(fireEffectArea) && (!isDefined(player.burning) || !player.burning)) {
+      if(isalive(player) && player istouching(fireEffectArea) && (!isDefined(player.burning) || !player.burning))
         player thread fire_cloud_burn_player(fireCloudPlayerTickDamage);
-      }
     }
 
     if(isDefined(level.thrown_entities)) {
       foreach(item in level.thrown_entities) {
-        if(isDefined(item) && item istouching(fireEffectArea)) {
+        if(isDefined(item) && item istouching(fireEffectArea))
           item DoDamage(fireCloudPlayerTickDamage, position, attacker);
-        }
       }
     }
 
@@ -1369,9 +1329,8 @@ fire_cloud_burn_player(tick_damage) {
   self.burning = true;
   self thread reset_burn_on_death();
 
-  if(!self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4])) {
+  if(!self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]))
     self DoDamage(tick_damage, self.origin);
-  }
   wait 1;
   self.burning = undefined;
 }
@@ -1381,9 +1340,8 @@ fire_cloud_burn_alien(interval_damage, attacker, duration, fire_damage_trigger) 
   self endon("fire_cloud_burning");
   self endon("death");
 
-  if(!isDefined(duration)) {
+  if(!isDefined(duration))
     duration = 6;
-  }
 
   self.burning = true;
   self thread reset_burn_on_death();
@@ -1394,11 +1352,10 @@ fire_cloud_burn_alien(interval_damage, attacker, duration, fire_damage_trigger) 
   while(elapsed_time < duration) {
     attacker.burning_victim = true;
 
-    if(isDefined(fire_damage_trigger)) {
+    if(isDefined(fire_damage_trigger))
       self DoDamage(interval_damage, self.origin, attacker, fire_damage_trigger);
-    } else {
+    else
       self DoDamage(interval_damage, self.origin, attacker);
-    }
 
     elapsed_time += 1;
     wait 1;
@@ -1418,16 +1375,14 @@ advance_to_next_area() {
   current_area = get_current_area_name();
   remove_items_in_area(current_area);
   remove_thrown_entity_in_area(current_area);
-  if(isDefined(level.leave_area_func)) {
+  if(isDefined(level.leave_area_func))
     [[level.leave_area_func]](current_area);
-  }
 
   inc_current_area_index();
   next_area = get_current_area_name();
   spawn_items_in_area(next_area);
-  if(isDefined(level.enter_area_func)) {
+  if(isDefined(level.enter_area_func))
     [[level.enter_area_func]](next_area);
-  }
 }
 
 remove_thrown_entity_in_area(area) {
@@ -1436,9 +1391,8 @@ remove_thrown_entity_in_area(area) {
 
     if(array_contains(entity_in_areas, area)) {
       level.thrown_entities = array_remove(level.thrown_entities, thrown_entity);
-      if(alien_mode_has("outline")) {
+      if(alien_mode_has("outline"))
         maps\mp\alien\_outline_proto::remove_from_outline_watch_list(thrown_entity);
-      }
 
       thrown_entity delete();
     }
@@ -1449,13 +1403,11 @@ isGrenade(weapName) {
   weapClass = weaponClass(weapName);
   weapType = weaponInventoryType(weapName);
 
-  if(weapClass != "grenade") {
+  if(weapClass != "grenade")
     return false;
-  }
 
-  if(weapType != "offhand") {
+  if(weapType != "offhand")
     return false;
-  }
 
   return true;
 }
@@ -1497,9 +1449,8 @@ check_for_player_near_weapon() {
 
     foreach(index, item in level.outline_weapon_watch_list) {
       if(isDefined(item) && distancesquared(item.origin, self.origin) < check_distance) {
-        if(!isDefined(item.targetname)) {
-          self setLowerMessage("ammo_warn", &"ALIENS_PRESTIGE_PISTOLS_ONLY_AMMO_DIST", undefined, 10);
-        }
+        if(!isDefined(item.targetname))
+          self setLowerMessage("ammo_warn", & "ALIENS_PRESTIGE_PISTOLS_ONLY_AMMO_DIST", undefined, 10);
         while(self player_should_see_ammo_message(item, check_distance, false)) {
           wait(.25);
         }
@@ -1511,23 +1462,19 @@ check_for_player_near_weapon() {
 }
 
 player_should_see_ammo_message(item, check_distance, ignore_carrying_check) {
-  if(distancesquared(item.origin, self.origin) > check_distance) {
+  if(distancesquared(item.origin, self.origin) > check_distance)
     return false;
-  }
 
-  if(self.inlaststand) {
+  if(self.inlaststand)
     return false;
-  }
 
-  if(isDefined(self.usingRemote)) {
+  if(isDefined(self.usingRemote))
     return false;
-  }
 
-  if(is_true(ignore_carrying_check)) {
+  if(is_true(ignore_carrying_check))
     return true;
-  } else if(is_true(self.isCarrying)) {
+  else if(is_true(self.isCarrying))
     return false;
-  }
 
   return true;
 }

@@ -6,17 +6,21 @@
 #include common_scripts\utility;
 
 main() {
+  //!!!!! This is not actually called anywhere, but it needs to load immediately otherwise I get a precache error (?)
   level._effect["_attack_heli_spotlight_ending"] = LoadFX("misc/hunted_spotlight_model_dim");
+  //!!!!! This is not actually called anywhere, but it needs to load immediately otherwise I get a precache error (?)
 
   level._effect["vehicle_explosion_slamraam"] = LoadFX("explosions/vehicle_explosion_slamraam");
 
   level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large_dcburning");
 
+  //columns
   level._effect["large_column"] = loadfx("props/dcburning_pillars");
 
   level._effect["turret_overheat_haze"] = loadfx("distortion/abrams_exhaust");
   level._effect["turret_overheat_smoke"] = loadfx("distortion/armored_car_overheat");
 
+  //Magic Bullet Muzzleflashes
   level._effect["javelin_muzzle"] = loadfx("muzzleflashes/javelin_flash_wv");
 
   level._effect["light_glow_white_bulb"] = loadfx("misc/light_glow_white_bulb");
@@ -46,13 +50,13 @@ main() {
   level._effect["chopper_smoke_trail"] = loadfx("fire/fire_smoke_trail_L");
   level._effect["chopper_explosion"] = loadfx("explosions/aerial_explosion");
 
-  level._effect["headshot"] = loadfx("impacts/flesh_hit_head_fatal_exit");
-  level._effect["headshot2"] = loadfx("impacts/flesh_hit_splat_large");
-  level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit");
-  level._effect["headshot4"] = loadfx("impacts/sniper_escape_blood");
+  level._effect["headshot"] = loadfx("impacts/flesh_hit_head_fatal_exit"); // sprays on wall
+  level._effect["headshot2"] = loadfx("impacts/flesh_hit_splat_large"); // chunks
+  level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit"); // big spray
+  level._effect["headshot4"] = loadfx("impacts/sniper_escape_blood"); // big spray
   level._effect["bodyshot"] = loadfx("impacts/flesh_hit");
 
-  level._effect["thermal_body_gib"] = loadfx("impacts/thermal_body_gib");
+  level._effect["thermal_body_gib"] = loadfx("impacts/thermal_body_gib"); // splatter
 
   level._effect["flare_ambient"] = loadfx("misc/flare_ambient");
 
@@ -64,6 +68,8 @@ main() {
   level._effect["flare_runner_fizzout"] = loadfx("misc/flare_end");
 
   level.airstrikefx = loadfx("explosions/clusterbomb");
+  //level.airstrikefx 	 = loadfx( "explosions/tanker_explosion" );
+  //level.scr_sound[ "airstrike" ][ "explosion" ]				 = "mortar_incoming";
 
   level._effect["powerline_runner"] = loadfx("explosions/powerline_runner");
 
@@ -87,7 +93,9 @@ main() {
   level._effect["cgo_ship_puddle_small"] = loadfx("distortion/cgo_ship_puddle_small");
   level._effect["rock_falling_small_runner"] = loadfx("misc/rock_falling_small_runner");
 
+  //Exploders
   level._effect["ceiling_dust_default"] = loadfx("dust/ceiling_dust_default");
   level._effect["commerce_window_shatter"] = loadfx("props/car_glass_large");
   maps\createfx\dcburning_fx::main();
+
 }

@@ -4,9 +4,8 @@
 ******************************************/
 
 setup_spotlight_heli(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 1;
-  }
 
   var_3 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_1);
   level.spotlight_heli = var_3;
@@ -58,9 +57,8 @@ heli_target_dialogue() {
       if(!isDefined(var_0) || var_0 != self.spottarget) {
         var_0 = self.spottarget;
 
-        if(isDefined(var_0) && isplayer(var_0)) {
+        if(isDefined(var_0) && isplayer(var_0))
           return;
-        }
       }
     }
 
@@ -89,32 +87,28 @@ spotlight_heli_trigger_death() {
 spotlight_heli_set_threatbias(var_0) {
   var_1 = level.allies["ally1"];
 
-  if(isDefined(level.spotlight_heli) && level.spotlight_heli.focus_ally == 1) {
+  if(isDefined(level.spotlight_heli) && level.spotlight_heli.focus_ally == 1)
     var_0 = "none";
-  }
 
   switch (var_0) {
     case "player":
       level.player.threatbias = 1000;
 
-      if(isDefined(var_1)) {
+      if(isDefined(var_1))
         var_1.threatbias = 0;
-      }
 
       break;
     case "ally":
-      if(isDefined(var_1)) {
+      if(isDefined(var_1))
         var_1.threatbias = 1000;
-      }
 
       level.player.threatbias = 0;
       break;
     case "none":
       level.player.threatbias = level.default_player_threatbias;
 
-      if(isDefined(var_1)) {
+      if(isDefined(var_1))
         var_1.threatbias = 200;
-      }
 
       break;
     default:
@@ -197,18 +191,16 @@ spotlight_heli_searching_state() {
   if(var_1 && var_2) {
     var_5 = randomint(3);
 
-    if(var_5 == 2) {
+    if(var_5 == 2)
       var_4 = 1;
-    } else {
+    else
       var_3 = 1;
-    }
   } else if(var_1)
     var_3 = 1;
-  else if(var_2) {
+  else if(var_2)
     var_4 = 1;
-  } else {
+  else
     spotlight_heli_default_targeting();
-  }
 
   if(var_3) {
     self.spottarget = level.player;
@@ -263,11 +255,10 @@ spotlight_heli_targeting_state() {
     self.spottarget.angles = level.player.angles;
     self.reacquire_player_time = gettime() + 3000;
 
-    if(self.focus_ally == 0) {
+    if(self.focus_ally == 0)
       self.reacquire_ally_time = gettime() + 10000;
-    } else {
+    else
       self.reacquire_ally_time = gettime() + 2500;
-    }
 
     vehicle_scripts\_attack_heli::heli_spotlight_destroy_default_targets();
     vehicle_scripts\_attack_heli::heli_spotlight_create_default_targets(self.spottarget);

@@ -17,9 +17,8 @@ init_traverse() {
   } else {
     point = getstruct(self.target, "targetname");
 
-    if(isDefined(point)) {
+    if(isDefined(point))
       self.traverse_height = point.origin[2];
-    }
   }
 }
 
@@ -47,11 +46,10 @@ teleportthreadex(verticaloffset, delay, frames) {
   wait(delay);
   amount = verticaloffset / frames;
 
-  if(amount > 10.0) {
+  if(amount > 10.0)
     amount = 10.0;
-  } else if(amount < -10.0) {
+  else if(amount < -10.0)
     amount = -10.0;
-  }
 
   offset = (0, 0, amount);
 
@@ -86,9 +84,8 @@ dog_jump_down(height, frames, time) {
   self endon("killanimscript");
   self traversemode("noclip");
 
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 0.3;
-  }
 
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
@@ -112,9 +109,8 @@ dog_jump_down_far(height, frames, time) {
   self endon("killanimscript");
   self traversemode("noclip");
 
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 0.3;
-  }
 
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));

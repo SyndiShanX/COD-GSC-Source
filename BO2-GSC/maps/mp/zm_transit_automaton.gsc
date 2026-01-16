@@ -110,9 +110,9 @@ automatonsetup() {
 }
 
 automatondamagecallback() {
-  self setCanDamage(1);
+  self setcandamage(1);
   self.health = 100000;
-  triggers = getEntArray("bus_door_trigger", "targetname");
+  triggers = getentarray("bus_door_trigger", "targetname");
 
   while(true) {
     self waittill("damage", amount, attacker, directionvec, point, type);
@@ -134,45 +134,42 @@ automatondamagecallback() {
 
       if(!isDefined(self.dmgfxorigin)) {
         self.dmgfxorigin = spawn("script_model", point);
-        self.dmgfxorigin setModel("tag_origin");
+        self.dmgfxorigin setmodel("tag_origin");
 
-        if(isDefined(type) && type == "MOD_GRENADE_SPLASH") {
+        if(isDefined(type) && type == "MOD_GRENADE_SPLASH")
           self.dmgfxorigin.origin = self gettagorigin("tag_origin") + vectorscale((0, 0, 1), 40.0);
-        }
 
         self.dmgfxorigin linkto(self, "J_neck");
       }
 
       wait 0.5;
-      playFXOnTag(level._effect["switch_sparks"], self.dmgfxorigin, "tag_origin");
+      playfxontag(level._effect["switch_sparks"], self.dmgfxorigin, "tag_origin");
 
-      foreach(trigger in triggers) {
-        trigger setinvisibletoall();
-      }
+      foreach(trigger in triggers)
+      trigger setinvisibletoall();
 
       level.the_bus.force_lock_doors = 1;
 
       if(randomint(100) > 50) {
-        if(!(isDefined(level.the_bus.skip_next_destination) && level.the_bus.skip_next_destination)) {
+        if(!(isDefined(level.the_bus.skip_next_destination) && level.the_bus.skip_next_destination))
           level thread bus_skip_destination();
-        }
 
         level thread automatonspeak("inform", "player_pissed", undefined, 0);
       } else
         level thread automatonspeak("inform", "player_pissed", undefined, 1);
 
       if(level.the_bus.doorsclosed) {
-        triggers[0] playSound("zmb_bus_door_open");
+        triggers[0] playsound("zmb_bus_door_open");
         level.the_bus maps\mp\zm_transit_bus::busdoorsopen();
         wait 1.25;
         shove_players_off_bus();
         wait 1.25;
-        triggers[0] playSound("zmb_bus_door_close");
+        triggers[0] playsound("zmb_bus_door_close");
         level.the_bus maps\mp\zm_transit_bus::busdoorsclose();
       } else {
         shove_players_off_bus();
         wait 1.25;
-        triggers[0] playSound("zmb_bus_door_close");
+        triggers[0] playsound("zmb_bus_door_close");
         level.the_bus maps\mp\zm_transit_bus::busdoorsclose();
       }
 
@@ -180,9 +177,8 @@ automatondamagecallback() {
       level thread automatonspeak("inform", "player_pissed", undefined, 2);
       wait 28;
 
-      foreach(trigger in triggers) {
-        trigger setvisibletoall();
-      }
+      foreach(trigger in triggers)
+      trigger setvisibletoall();
 
       level.the_bus.force_lock_doors = 0;
     }
@@ -208,9 +204,8 @@ automatonanimationsspeaking() {
     self waittill("want_to_be_speaking", speakingline);
     self.isplayingspeakinganim = 1;
 
-    while(isDefined(self.isplayingidleanim) && self.isplayingidleanim) {
+    while(isDefined(self.isplayingidleanim) && self.isplayingidleanim)
       wait 0.05;
-    }
 
     self notify("startspeaking");
 
@@ -259,9 +254,8 @@ automatonanimationsspeaking() {
     self setanim(speakinganim);
     self thread sndspeakinganimaudio(speakingnum);
 
-    if(getdvar(#"_id_96F6EBD9") != "") {
+    if(getdvar(#"_id_96F6EBD9") != "")
       iprintlnbold("" + speakinganim);
-    }
 
     wait(getanimlength(speakinganim));
     self.isplayingspeakinganim = 0;
@@ -293,23 +287,20 @@ bus_driver_idle() {
       continue;
     }
 
-    if(isDefined(level.bus_zombie_danger) && level.bus_zombie_danger) {
+    if(isDefined(level.bus_zombie_danger) && level.bus_zombie_danger)
       driveranim = random(danger_anims);
-    } else if(is_true(level.bus_driver_focused)) {
+    else if(is_true(level.bus_driver_focused))
       driveranim = random(focused_anims);
-    } else if(randomint(100) > 90) {
+    else if(randomint(100) > 90)
       driveranim = random(twitch_anims);
-    } else {
+    else
       driveranim = random(idle_anims);
-    }
 
-    if(isDefined(self.previous_anim) && self.previous_anim == driveranim && driveranim != % ai_zombie_bus_driver_idle) {
+    if(isDefined(self.previous_anim) && self.previous_anim == driveranim && driveranim != % ai_zombie_bus_driver_idle)
       driveranim = % ai_zombie_bus_driver_idle;
-    }
 
-    if(getdvar(#"_id_6DF184E8") != "") {
+    if(getdvar(#"_id_6DF184E8") != "")
       iprintlnbold("Idle:" + driveranim);
-    }
 
     self.isplayingidleanim = 1;
     self setanim(driveranim);
@@ -322,9 +313,8 @@ bus_driver_idle() {
 
 automatonemp() {
   while(true) {
-    if(!(isDefined(level.the_bus.disabled_by_emp) && level.the_bus.disabled_by_emp)) {
+    if(!(isDefined(level.the_bus.disabled_by_emp) && level.the_bus.disabled_by_emp))
       level.the_bus waittill("pre_power_off");
-    }
 
     level.automaton.disabled_by_emp = 1;
     level.automaton setanim( % ai_zombie_bus_driver_emp_powerdown);
@@ -333,9 +323,8 @@ automatonemp() {
     wait(getanimlength( % ai_zombie_bus_driver_emp_powerdown));
     level.automaton setanim( % ai_zombie_bus_driver_emp_powerdown_idle);
 
-    if(isDefined(level.the_bus.pre_disabled_by_emp) && level.the_bus.pre_disabled_by_emp || isDefined(level.the_bus.disabled_by_emp) && level.the_bus.disabled_by_emp) {
+    if(isDefined(level.the_bus.pre_disabled_by_emp) && level.the_bus.pre_disabled_by_emp || isDefined(level.the_bus.disabled_by_emp) && level.the_bus.disabled_by_emp)
       level.the_bus waittill("power_on");
-    }
 
     level.automaton setanim( % ai_zombie_bus_driver_emp_powerup);
     self thread sndplaydriveranimsnd( % ai_zombie_bus_driver_emp_powerup);
@@ -354,16 +343,14 @@ say_player_attack_vox() {
   }
   level.playerattackingautomaton = 1;
 
-  if(level.timesplayerattackingautomaton == 0) {
+  if(level.timesplayerattackingautomaton == 0)
     level thread automaton_attack_reset_timer();
-  }
 
   level.timesplayerattackingautomaton++;
   level thread automatonspeak("inform", "player_attack_" + level.timesplayerattackingautomaton);
 
-  if(level.timesplayerattackingautomaton >= 3) {
+  if(level.timesplayerattackingautomaton >= 3)
     level notify("automaton_threshold_reached");
-  }
 
   level thread automaton_attack_choke_timer();
 }
@@ -395,9 +382,8 @@ bus_upgrade_vox() {
 
     foreach(player in players) {
       if(isDefined(player.isonbus) && player.isonbus) {
-        if(distancesquared(player.origin, hatch_trig.origin) < 5184 && !flag("hatch_attached")) {
+        if(distancesquared(player.origin, hatch_trig.origin) < 5184 && !flag("hatch_attached"))
           should_say_upgrade = 2;
-        }
 
         continue;
       }
@@ -407,9 +393,8 @@ bus_upgrade_vox() {
         continue;
       }
 
-      if(distancesquared(player.origin, ladder_trig.origin) < 9216 && !flag("ladder_attached")) {
+      if(distancesquared(player.origin, ladder_trig.origin) < 9216 && !flag("ladder_attached"))
         should_say_upgrade = 0;
-      }
     }
 
     if(should_say_upgrade > -1) {
@@ -422,9 +407,9 @@ bus_upgrade_vox() {
 }
 
 shove_players_off_bus() {
-  playFXOnTag(level._effect["turbine_on"], level.automaton, "J_neck");
+  playfxontag(level._effect["turbine_on"], level.automaton, "J_neck");
   wait 0.25;
-  level.automaton playSound("zmb_powerup_grabbed");
+  level.automaton playsound("zmb_powerup_grabbed");
   players = get_players();
 
   foreach(player in players) {
@@ -442,53 +427,53 @@ sndspeakinganimaudio(num) {
   switch (num) {
     case 0:
       wait 0.4;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 2.4;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 2.25;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 1.1;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 1:
       wait 0.31;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 3.55;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 2:
       wait 0.18;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 4.83;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 3:
       wait 0.23;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 0.77;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 1.4;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 0.15;
-      self playSound("evt_zmb_robot_spin");
+      self playsound("evt_zmb_robot_spin");
       wait 0.53;
-      self playSound("evt_zmb_robot_hat");
+      self playsound("evt_zmb_robot_hat");
       break;
     case 4:
       wait 0.3;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 3.64;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 5:
       wait 0.38;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       wait 3.4;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 6:
       wait 0.3;
-      self playSound("evt_zmb_robot_jerk");
+      self playsound("evt_zmb_robot_jerk");
       break;
     case 7:
       break;
@@ -498,53 +483,53 @@ sndspeakinganimaudio(num) {
 sndplaydriveranimsnd(the_anim) {
   if(the_anim == % ai_zombie_bus_driver_idle_twitch_a) {
     wait 0.55;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 1.2;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
     wait 0.79;
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_spin");
     wait 1.1;
-    self playSound("evt_zmb_robot_hat");
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_spin");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_focused) {
     wait 0.25;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 4.8;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_panicked) {
     wait 0.31;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 0.79;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 1.3;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 0.18;
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_spin");
     wait 0.52;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_b) {
     wait 0.22;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
     wait 1.06;
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_spin");
     wait 1.05;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
     wait 1.07;
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_spin");
     wait 0.59;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_idle_d) {
     wait 0.24;
-    self playSound("evt_zmb_robot_spin");
+    self playsound("evt_zmb_robot_spin");
     wait 1.04;
-    self playSound("evt_zmb_robot_hat");
+    self playsound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_emp_powerdown) {
     wait 0.1;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
     wait 0.9;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
   } else if(the_anim == % ai_zombie_bus_driver_emp_powerup) {
     wait 0.63;
-    self playSound("evt_zmb_robot_jerk");
+    self playsound("evt_zmb_robot_jerk");
   }
 }

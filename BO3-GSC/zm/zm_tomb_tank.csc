@@ -12,9 +12,9 @@
 #namespace zm_tomb_tank;
 
 function init() {
-  clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int", &function_66e53adf, 0, 0);
-  clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int", &function_de8b2ce1, 0, 0);
-  clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int", &function_5bc757af, 0, 0);
+  clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int", & function_66e53adf, 0, 0);
+  clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int", & function_de8b2ce1, 0, 0);
+  clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int", & function_5bc757af, 0, 0);
 }
 
 function function_66e53adf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -35,18 +35,18 @@ function function_fec9fe59(localclientnum, str_tag) {
   sndorigin = self gettagorigin(str_tag);
   sndent = spawn(0, sndorigin, "script_origin");
   sndent linkto(self, str_tag);
-  sndent playSound(0, "zmb_tank_flame_start");
-  sndent.var_9bdbad77 = sndent playLoopSound("zmb_tank_flame_loop", 0.6);
+  sndent playsound(0, "zmb_tank_flame_start");
+  sndent.var_9bdbad77 = sndent playloopsound("zmb_tank_flame_loop", 0.6);
   self thread function_a7df9920(sndent);
-  while(true) {
-    self.var_f53cfaa3 = playFXOnTag(localclientnum, level._effect["mech_wpn_flamethrower"], self, str_tag);
+  while (true) {
+    self.var_f53cfaa3 = playfxontag(localclientnum, level._effect["mech_wpn_flamethrower"], self, str_tag);
     wait(0.1);
   }
 }
 
 function function_a7df9920(ent) {
   self waittill("hash_53f5220a");
-  ent playSound(0, "zmb_tank_flame_stop");
+  ent playsound(0, "zmb_tank_flame_stop");
   ent stoploopsound(ent.var_9bdbad77, 0.25);
   wait(1);
   ent delete();
@@ -54,7 +54,7 @@ function function_a7df9920(ent) {
 
 function function_de8b2ce1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self notify("hash_53f5220a");
-  if(!isDefined(self.var_1be9b23)) {
+  if(!isdefined(self.var_1be9b23)) {
     self.var_1be9b23 = spawn(0, (0, 0, 0), "script_origin");
   }
   if(newval == 0) {
@@ -90,8 +90,8 @@ function function_a2fe7f71(localclientnum, var_2bc319f0) {
   } else {
     self thread function_64744406();
   }
-  while(true) {
-    playFXOnTag(localclientnum, fx_id, self, "tag_origin");
+  while (true) {
+    playfxontag(localclientnum, fx_id, self, "tag_origin");
     wait(0.1);
   }
 }
@@ -109,8 +109,8 @@ function function_64744406() {
   origin2 = self gettagorigin("tag_exhaust_2");
   ent2 = spawn(0, origin2, "script_origin");
   ent2 linkto(self, "tag_exhaust_2");
-  ent1 playLoopSound("zmb_tank_exhaust_pipe", 1);
-  ent2 playLoopSound("zmb_tank_exhaust_pipe", 1);
+  ent1 playloopsound("zmb_tank_exhaust_pipe", 1);
+  ent2 playloopsound("zmb_tank_exhaust_pipe", 1);
   self waittill("stop_exhaust_fx");
   ent1 delete();
   ent2 delete();
@@ -118,24 +118,24 @@ function function_64744406() {
 
 function function_5bc757af(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self notify("stop_exhaust_fx");
-  if(isDefined(self.var_d168dad5)) {
+  if(isdefined(self.var_d168dad5)) {
     stopfx(localclientnum, self.var_d168dad5);
     self.var_d168dad5 = undefined;
   }
-  if(isDefined(self.var_f76b553e)) {
+  if(isdefined(self.var_f76b553e)) {
     stopfx(localclientnum, self.var_f76b553e);
     self.var_f76b553e = undefined;
   }
   switch (newval) {
     case 1: {
       self thread function_a2fe7f71(localclientnum, 1);
-      self.var_d168dad5 = playFXOnTag(localclientnum, level._effect["tank_light_red"], self, "tag_light_left");
-      self.var_f76b553e = playFXOnTag(localclientnum, level._effect["tank_light_red"], self, "tag_light_right");
+      self.var_d168dad5 = playfxontag(localclientnum, level._effect["tank_light_red"], self, "tag_light_left");
+      self.var_f76b553e = playfxontag(localclientnum, level._effect["tank_light_red"], self, "tag_light_right");
       break;
     }
     case 2: {
-      self.var_d168dad5 = playFXOnTag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_left");
-      self.var_f76b553e = playFXOnTag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_right");
+      self.var_d168dad5 = playfxontag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_left");
+      self.var_f76b553e = playfxontag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_right");
       break;
     }
     case 0: {
@@ -148,9 +148,9 @@ function function_5bc757af(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_b809a3fd(localclientnum) {
   self endon("hash_51963593");
   self thread function_85886bc2();
-  while(true) {
-    self.var_f39aab64 = playFXOnTag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_left");
-    self.var_50198d5b = playFXOnTag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_right");
+  while (true) {
+    self.var_f39aab64 = playfxontag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_left");
+    self.var_50198d5b = playfxontag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_right");
     wait(0.5);
   }
 }
@@ -162,8 +162,8 @@ function function_85886bc2() {
   origin4 = self gettagorigin("tag_wheel_back_right");
   ent4 = spawn(0, origin4, "script_origin");
   ent4 linkto(self, "tag_wheel_back_right");
-  ent3 playLoopSound("zmb_tank_mud_tread", 1);
-  ent4 playLoopSound("zmb_tank_mud_tread", 1);
+  ent3 playloopsound("zmb_tank_mud_tread", 1);
+  ent4 playloopsound("zmb_tank_mud_tread", 1);
   self waittill("hash_51963593");
   ent3 delete();
   ent4 delete();

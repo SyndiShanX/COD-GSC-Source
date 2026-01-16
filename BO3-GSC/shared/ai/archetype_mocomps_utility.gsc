@@ -11,9 +11,9 @@
 #namespace archetype_mocomps_utility;
 
 function autoexec registerdefaultanimationmocomps() {
-  animationstatenetwork::registeranimationmocomp("adjust_to_cover", &mocompadjusttocoverinit, &mocompadjusttocoverupdate, &mocompadjusttocoverterminate);
-  animationstatenetwork::registeranimationmocomp("locomotion_explosion_death", &mocomplocoexplosioninit, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_flank_stand", &mocompflankstandinit, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("adjust_to_cover", & mocompadjusttocoverinit, & mocompadjusttocoverupdate, & mocompadjusttocoverterminate);
+  animationstatenetwork::registeranimationmocomp("locomotion_explosion_death", & mocomplocoexplosioninit, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_flank_stand", & mocompflankstandinit, undefined, undefined);
 }
 
 function autoexec initadjusttocoverparams() {
@@ -30,13 +30,13 @@ function autoexec initadjusttocoverparams() {
 }
 
 function private _addadjusttocover(archetype, node, stance, rot2, rot32, rot3, rot36, rot6, rot69, rot9, rot98, rot8, rot87, rot7, rot47, rot4, rot14, rot1, rot21) {
-  if(!isDefined(level.adjusttocover)) {
+  if(!isdefined(level.adjusttocover)) {
     level.adjusttocover = [];
   }
-  if(!isDefined(level.adjusttocover[archetype])) {
+  if(!isdefined(level.adjusttocover[archetype])) {
     level.adjusttocover[archetype] = [];
   }
-  if(!isDefined(level.adjusttocover[archetype][node])) {
+  if(!isdefined(level.adjusttocover[archetype][node])) {
     level.adjusttocover[archetype][node] = [];
   }
   directions = [];
@@ -61,11 +61,11 @@ function private _addadjusttocover(archetype, node, stance, rot2, rot32, rot3, r
 
 function private _getadjusttocoverrotation(archetype, node, stance, angletonode) {
   assert(isarray(level.adjusttocover[archetype]));
-  if(!isDefined(level.adjusttocover[archetype][node])) {
+  if(!isdefined(level.adjusttocover[archetype][node])) {
     node = "cover_any";
   }
   assert(isarray(level.adjusttocover[archetype][node]));
-  if(!isDefined(level.adjusttocover[archetype][node][stance])) {
+  if(!isdefined(level.adjusttocover[archetype][node][stance])) {
     stance = "stance_any";
   }
   assert(isarray(level.adjusttocover[archetype][node][stance]));
@@ -136,9 +136,9 @@ function private _getadjusttocoverrotation(archetype, node, stance, angletonode)
       }
     }
   }
-  assert(isDefined(level.adjusttocover[archetype][node][stance][direction]));
+  assert(isdefined(level.adjusttocover[archetype][node][stance][direction]));
   adjusttime = level.adjusttocover[archetype][node][stance][direction];
-  if(isDefined(adjusttime)) {
+  if(isdefined(adjusttime)) {
     return adjusttime;
   }
   return 0.8;
@@ -147,10 +147,10 @@ function private _getadjusttocoverrotation(archetype, node, stance, angletonode)
 function private debuglocoexplosion(entity) {
   entity endon("death");
   startorigin = entity.origin;
-  startyawforward = anglesToForward((0, entity.angles[1], 0));
-  damageyawforward = anglesToForward((0, entity.damageyaw - entity.angles[1], 0));
+  startyawforward = anglestoforward((0, entity.angles[1], 0));
+  damageyawforward = anglestoforward((0, entity.damageyaw - entity.angles[1], 0));
   starttime = gettime();
-  while((gettime() - starttime) < 10000) {
+  while ((gettime() - starttime) < 10000) {
     recordsphere(startorigin, 5, (1, 0, 0), "", entity);
     recordline(startorigin, startorigin + (startyawforward * 100), (0, 0, 1), "", entity);
     recordline(startorigin, startorigin + (damageyawforward * 100), (1, 0, 0), "", entity);
@@ -162,7 +162,7 @@ function private mocompflankstandinit(entity, mocompanim, mocompanimblendouttime
   entity animmode("nogravity", 0);
   entity orientmode("face angle", entity.angles[1]);
   entity pathmode("move delayed", 0, randomfloatrange(0.5, 1));
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     entity getperfectinfo(entity.enemy);
     entity.newenemyreaction = 0;
   }
@@ -180,15 +180,15 @@ function private mocompadjusttocoverinit(entity, mocompanim, mocompanimblendoutt
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("angle deltas", 0);
   entity.blockingpain = 1;
-  if(isDefined(entity.node)) {
+  if(isdefined(entity.node)) {
     entity.adjustnode = entity.node;
     entity.nodeoffsetorigin = entity getnodeoffsetposition(entity.node);
     entity.nodeoffsetangles = entity getnodeoffsetangles(entity.node);
-    entity.nodeoffsetforward = anglesToForward(entity.nodeoffsetangles);
-    entity.nodeforward = anglesToForward(entity.node.angles);
+    entity.nodeoffsetforward = anglestoforward(entity.nodeoffsetangles);
+    entity.nodeforward = anglestoforward(entity.node.angles);
     entity.nodefinalstance = blackboard::getblackboardattribute(entity, "_desired_stance");
     covertype = blackboard::getblackboardattribute(entity, "_cover_type");
-    if(!isDefined(entity.nodefinalstance)) {
+    if(!isdefined(entity.nodefinalstance)) {
       entity.nodefinalstance = aiutility::gethighestnodestance(entity.adjustnode);
     }
     angledifference = floor(absangleclamp360(entity.angles[1] - entity.node.angles[1]));
@@ -197,7 +197,7 @@ function private mocompadjusttocoverinit(entity, mocompanim, mocompanimblendoutt
 }
 
 function private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(!isDefined(entity.adjustnode)) {
+  if(!isdefined(entity.adjustnode)) {
     return;
   }
   movevector = entity.nodeoffsetorigin - entity.origin;
@@ -215,7 +215,7 @@ function private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendou
     hiptagorigin = entity gettagorigin("");
     recordline(entity.nodeoffsetorigin, entity.nodeoffsetorigin + (entity.nodeoffsetforward * 30), (1, 0.5, 0), "", entity);
     recordline(entity.adjustnode.origin, entity.adjustnode.origin + (entity.nodeforward * 20), (0, 1, 0), "", entity);
-    recordline(entity.origin, entity.origin + (anglesToForward(entity.angles) * 10), (1, 0, 0), "", entity);
+    recordline(entity.origin, entity.origin + (anglestoforward(entity.angles) * 10), (1, 0, 0), "", entity);
     recordline(hiptagorigin, (hiptagorigin[0], hiptagorigin[1], entity.origin[2]), (0, 0, 1), "", entity);
   }
 }

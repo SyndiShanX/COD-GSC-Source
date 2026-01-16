@@ -17,6 +17,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_free_perk;
 
 autoexec __init__system__() {
@@ -28,7 +29,7 @@ __init__() {
 
   if(zm_powerups::function_cc33adc8()) {
     str_model = zm_powerups::function_bcfcc27e();
-    zm_powerups::add_zombie_powerup("free_perk", str_model, # "zombie_powerup_free_perk", &zm_powerups::func_should_never_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("free_perk", str_model, #"zombie_powerup_free_perk", &zm_powerups::func_should_never_drop, 0, 0, 0);
   }
 }
 

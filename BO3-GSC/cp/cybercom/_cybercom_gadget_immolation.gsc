@@ -31,15 +31,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(2, 4);
-  level.cybercom.immolation = spawnStruct();
-  level.cybercom.immolation._is_flickering = &_is_flickering;
-  level.cybercom.immolation._on_flicker = &_on_flicker;
-  level.cybercom.immolation._on_give = &_on_give;
-  level.cybercom.immolation._on_take = &_on_take;
-  level.cybercom.immolation._on_connect = &_on_connect;
-  level.cybercom.immolation._on = &_on;
-  level.cybercom.immolation._off = &_off;
-  level.cybercom.immolation._is_primed = &_is_primed;
+  level.cybercom.immolation = spawnstruct();
+  level.cybercom.immolation._is_flickering = & _is_flickering;
+  level.cybercom.immolation._on_flicker = & _on_flicker;
+  level.cybercom.immolation._on_give = & _on_give;
+  level.cybercom.immolation._on_take = & _on_take;
+  level.cybercom.immolation._on_connect = & _on_connect;
+  level.cybercom.immolation._on = & _on;
+  level.cybercom.immolation._off = & _off;
+  level.cybercom.immolation._is_primed = & _is_primed;
   level.cybercom.immolation.grenadelocs = array("j_shoulder_le_rot", "j_elbow_le_rot", "j_shoulder_ri_rot", "j_elbow_ri_rot", "j_hip_le", "j_knee_le", "j_hip_ri", "j_knee_ri", "j_head", "j_mainroot");
   level.cybercom.immolation.grenadetypes = array("frag_grenade_notrail", "emp_grenade");
 }
@@ -53,8 +53,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_immolation") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_immolation_upgraded_count", 1);
   }
-  self.cybercom.targetlockcb = &_get_valid_targets;
-  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.targetlockcb = & _get_valid_targets;
+  self.cybercom.targetlockrequirementcb = & _lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -78,7 +78,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self notify("hash_9cefb9d9");
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
@@ -91,15 +91,15 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isDefined(target.hijacked) && target.hijacked) {
+  if(isdefined(target.hijacked) && target.hijacked) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isDefined(target.is_disabled) && target.is_disabled) {
+  if(isdefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
-  if(!isDefined(target.archetype)) {
+  if(!isdefined(target.archetype)) {
     return false;
   }
   if(isvehicle(target) && !target _validimmolatevehicle()) {
@@ -135,7 +135,7 @@ function private _activate_immolation(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
+    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -158,7 +158,7 @@ function private _activate_immolation(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_immolation");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -166,7 +166,7 @@ function private _activate_immolation(slot, weapon) {
 }
 
 function private _validimmolatevehicle() {
-  if(!isDefined(self.vehicletype)) {
+  if(!isdefined(self.vehicletype)) {
     return false;
   }
   if(issubstr(self.vehicletype, "amws")) {
@@ -195,7 +195,7 @@ function private _immolate(attacker, upgraded, immediate = 0, weapon) {
   self notify("hash_f8c5dd60", weapon, attacker);
   if(self cybercom::function_421746e0()) {
     if(isvehicle(self)) {
-      self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+      self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
       return;
     }
     immediate = 1;
@@ -213,14 +213,14 @@ function private _immolate(attacker, upgraded, immediate = 0, weapon) {
 
 function _immolategrenadedetonationwatch(tag, count, attacker, weapon) {
   msg = self util::waittill_any_timeout(3, "death", "explode", "damage");
-  if(isDefined(self.grenade_prop)) {
+  if(isdefined(self.grenade_prop)) {
     self.grenade_prop delete();
   }
   self stopsound("gdt_immolation_human_countdown");
   attacker thread _detonate_grenades(self, 100, count);
   if(isalive(self)) {
     self stopanimscripted();
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
   }
 }
 
@@ -234,7 +234,7 @@ function _immolatehuman(attacker, upgraded, immediate = 0) {
     self thread _corpsewatcher();
     util::wait_network_frame();
     self thread _immolategrenadedetonationwatch("tag_weapon_chest", undefined, attacker, weapon);
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   wait(randomfloatrange(0.1, 0.75));
@@ -252,17 +252,17 @@ function _immolatehuman(attacker, upgraded, immediate = 0) {
     self thread cybercom::stopanimscriptedonnotify("damage_pain", "immo_anim", 1, attacker, weapon);
     self waittillmatch("immo_anim");
     self.grenade_prop = spawn("script_model", self gettagorigin("tag_inhand"));
-    self.grenade_prop setModel("wpn_t7_grenade_frag_world");
+    self.grenade_prop setmodel("wpn_t7_grenade_frag_world");
     self.grenade_prop enablelinkto();
     self.grenade_prop linkto(self, "tag_inhand");
-    playFXOnTag("light/fx_ability_light_chest_immolation", self.grenade_prop, "tag_origin");
+    playfxontag("light/fx_ability_light_chest_immolation", self.grenade_prop, "tag_origin");
     self waittillmatch("immo_anim");
     self stopsound("gdt_immolation_human_countdown");
     self notify("explode", "explode", "grenade_right");
   } else {
     self notify("bhtn_action_notify", "reactImmolation");
-    self dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
-    playFXOnTag("light/fx_ability_light_chest_immolation", self, "tag_weapon_chest");
+    self dodamage(5, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+    playfxontag("light/fx_ability_light_chest_immolation", self, "tag_weapon_chest");
     self thread function_f8956516();
     self thread _immolategrenadedetonationwatch("tag_weapon_chest", undefined, attacker, weapon);
   }
@@ -285,14 +285,14 @@ function _immolaterobot(attacker, upgraded, immediate = 0) {
     return;
   }
   self.is_disabled = 1;
-  if(isDefined(self.iscrawler) && self.iscrawler || !cybercom::function_76e3026d(self)) {
-    self playSound("wpn_incendiary_explode");
+  if(isdefined(self.iscrawler) && self.iscrawler || !cybercom::function_76e3026d(self)) {
+    self playsound("wpn_incendiary_explode");
     physicsexplosionsphere(self.origin, 200, 32, 2);
     self immolate_nearby(attacker, upgraded);
     origin = self.origin;
-    self dodamage(self.health, self.origin, (isDefined(attacker) ? attacker : undefined), (isDefined(attacker) ? attacker : undefined), "none", "MOD_BURNED", 0, weapon, -1, 1);
+    self dodamage(self.health, self.origin, (isdefined(attacker) ? attacker : undefined), (isdefined(attacker) ? attacker : undefined), "none", "MOD_BURNED", 0, weapon, -1, 1);
     wait(0.1);
-    radiusdamage(origin, getdvarint("scr_immolation_outer_radius", 235), 500, 30, (isDefined(attacker) ? attacker : undefined), "MOD_EXPLOSIVE", weapon);
+    radiusdamage(origin, getdvarint("scr_immolation_outer_radius", 235), 500, 30, (isdefined(attacker) ? attacker : undefined), "MOD_EXPLOSIVE", weapon);
     return;
   }
   self clientfield::set("arch_actor_fire_fx", 1);
@@ -307,8 +307,8 @@ function _immolaterobot(attacker, upgraded, immediate = 0) {
   }
   var_a30bdd5a = getdvarfloat("scr_immolation_death_delay", 0.87) + randomfloatrange(0, 0.2);
   var_ebfa18e1 = gettime() + (var_a30bdd5a * 1000);
-  self dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
-  while(gettime() < var_ebfa18e1) {
+  self dodamage(5, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+  while (gettime() < var_ebfa18e1) {
     wait(0.1);
   }
   self clientfield::set("cybercom_immolate", 2);
@@ -317,8 +317,8 @@ function _immolaterobot(attacker, upgraded, immediate = 0) {
   attacker notify("hash_f90d73d4");
   util::wait_network_frame();
   origin = self.origin;
-  self dodamage(self.health, self.origin, (isDefined(attacker) ? attacker : undefined), (isDefined(attacker) ? attacker : undefined), "none", "MOD_BURNED", 0, weapon, -1, 1);
-  radiusdamage(origin, getdvarint("scr_immolation_outer_radius", 235), 500, 30, (isDefined(attacker) ? attacker : undefined), "MOD_EXPLOSIVE", weapon);
+  self dodamage(self.health, self.origin, (isdefined(attacker) ? attacker : undefined), (isdefined(attacker) ? attacker : undefined), "none", "MOD_BURNED", 0, weapon, -1, 1);
+  radiusdamage(origin, getdvarint("scr_immolation_outer_radius", 235), 500, 30, (isdefined(attacker) ? attacker : undefined), "MOD_EXPLOSIVE", weapon);
 }
 
 function private _corpsewatcher() {
@@ -331,20 +331,20 @@ function private _detonate_grenades(guy, chance = getdvarint("scr_immolation_gch
   self endon("disconnect");
   loc = guy _get_grenade_spawn_loc();
   grenade = self magicgrenadetype(getweapon("frag_grenade_notrail"), loc, (0, 0, 0), 0);
-  while(numextradetonations && isDefined(self) && isDefined(guy)) {
+  while (numextradetonations && isdefined(self) && isdefined(guy)) {
     wait(randomfloatrange(getdvarfloat("scr_immolation_grenade_wait_timeMIN", 0.3), getdvarfloat("scr_immolation_grenade_wait_timeMAX", 0.9)));
     numextradetonations--;
     if(randomint(100) > chance) {
       continue;
     }
     gtype = level.cybercom.immolation.grenadetypes[randomint(level.cybercom.immolation.grenadetypes.size)];
-    if(isDefined(guy)) {
+    if(isdefined(guy)) {
       loc = guy _get_grenade_spawn_loc();
-      if(!isDefined(loc)) {
+      if(!isdefined(loc)) {
         loc = guy.origin + vectorscale((0, 0, 1), 50);
       }
     }
-    if(isDefined(loc)) {
+    if(isdefined(loc)) {
       grenade = self magicgrenadetype(getweapon(gtype), loc, (0, 0, 0), 0.05);
       grenade thread waitforexplode();
     }
@@ -353,7 +353,7 @@ function private _detonate_grenades(guy, chance = getdvarint("scr_immolation_gch
 
 function waitforexplode() {
   self util::waittill_any_timeout(3, "death", "detonated");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
@@ -364,7 +364,7 @@ function private _detonate_grenades_inrange(player, rangemax) {
   closetargets = arraysortclosest(enemies, self.origin, enemies.size, 0, rangemax);
   foreach(guy in closetargets) {
     if(player cybercom::targetisvalid(guy, weapon)) {
-      if(isDefined(guy.grenades_detonated) && guy.grenades_detonated) {
+      if(isdefined(guy.grenades_detonated) && guy.grenades_detonated) {
         continue;
       }
       guy.grenades_detonated = 1;
@@ -382,13 +382,13 @@ function immolate_nearby(attacker, upgraded) {
     if(guy == self) {
       continue;
     }
-    if(isDefined(attacker.var_a691a602)) {
+    if(isdefined(attacker.var_a691a602)) {
       if(attacker.var_a691a602 >= 2) {
         break;
       }
     }
     if(attacker cybercom::targetisvalid(guy, weapon)) {
-      if(!isDefined(attacker.var_a691a602)) {
+      if(!isdefined(attacker.var_a691a602)) {
         attacker thread function_4f174738();
       } else {
         attacker.var_a691a602++;
@@ -402,7 +402,7 @@ function immolate_nearby(attacker, upgraded) {
 }
 
 function private _get_grenade_spawn_loc() {
-  if(isDefined(self.archetype) && self.archetype == "human") {
+  if(isdefined(self.archetype) && self.archetype == "human") {
     return self gettagorigin("tag_weapon_chest");
   }
   tag = level.cybercom.immolation.grenadelocs[randomint(level.cybercom.immolation.grenadelocs.size)];
@@ -410,7 +410,7 @@ function private _get_grenade_spawn_loc() {
 }
 
 function ai_activateimmolate(target, var_9bc2efcb = 1, upgraded) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -430,7 +430,7 @@ function ai_activateimmolate(target, var_9bc2efcb = 1, upgraded) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");

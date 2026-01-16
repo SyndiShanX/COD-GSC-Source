@@ -62,9 +62,8 @@ enemy_death_tracking(var_0) {
   wait 0.5;
 
   if(isDefined(var_1)) {
-    if(var_1.classname == "misc_turret") {
+    if(var_1.classname == "misc_turret")
       var_1 = var_1 getturretowner();
-    }
 
     if(isDefined(var_1) && isDefined(var_1.bc_enabled)) {
       var_2 = createevent("killfirm", "killfirm");
@@ -80,9 +79,8 @@ enemy_damage_tracking(var_0) {
     var_0 waittill("damage", var_1, var_2);
 
     if(isDefined(var_2)) {
-      if(var_2.classname == "misc_turret") {
+      if(var_2.classname == "misc_turret")
         var_2 = var_2 getturretowner();
-      }
 
       if(isDefined(var_2) && isDefined(var_2.bc_enabled)) {
         var_3 = createevent("inform_enemy_hit", "inform_hit");
@@ -101,9 +99,8 @@ enemy_callout_tracking_plr() {
     var_2 = maps\_utility::getvehiclearray();
 
     foreach(var_4 in var_2) {
-      if(var_4.script_team != "allies") {
+      if(var_4.script_team != "allies")
         var_1 = common_scripts\utility::array_add(var_1, var_4);
-      }
     }
 
     var_1 = sortbydistance(var_1, self.origin);
@@ -142,9 +139,8 @@ enemy_callout_tracking_plr() {
       var_11 = createevent("callout_clock", getthreatalias(var_0));
 
       if(play_chatter(var_11)) {
-        if(isDefined(var_0)) {
+        if(isDefined(var_0))
           var_0.lastplayercallouttime = gettime();
-        }
       }
     }
 
@@ -176,27 +172,23 @@ createevent(var_0, var_1) {
 }
 
 getthreatalias(var_0) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self getplayerangles(), self.origin, var_0.origin);
-  } else {
+  else
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self.angles, self.origin, var_0.origin);
-  }
 
   var_2 = "callout_targetclock_" + var_1;
 
   if(common_scripts\utility::cointoss()) {
-    if(isai(var_0)) {
+    if(isai(var_0))
       var_2 = var_2 + "_troops";
-    }
 
     if(var_0 maps\_vehicle::isvehicle()) {
-      if(var_0 maps\_vehicle::ishelicopter()) {
+      if(var_0 maps\_vehicle::ishelicopter())
         var_2 = var_2 + "_bird";
-      }
 
-      if(var_0 istank()) {
+      if(var_0 istank())
         var_2 = var_2 + "_tank";
-      }
     }
   }
 
@@ -204,13 +196,11 @@ getthreatalias(var_0) {
 }
 
 istank() {
-  if(issubstr(self.classname, "t90")) {
+  if(issubstr(self.classname, "t90"))
     return 1;
-  }
 
-  if(issubstr(self.classname, "t72")) {
+  if(issubstr(self.classname, "t72"))
     return 1;
-  }
 
   return 0;
 }
@@ -218,80 +208,67 @@ istank() {
 play_chatter(var_0, var_1) {
   self endon("death");
 
-  if(!can_say_event_type(var_0.eventtype)) {
+  if(!can_say_event_type(var_0.eventtype))
     return 0;
-  }
 
   var_2 = get_team_prefix() + self.voiceid + "_" + var_0.alias;
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     return 0;
-  }
 
-  if(!soundexists(var_2)) {
+  if(!soundexists(var_2))
     return 0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
-  if(var_1 && !can_say_soundalias(var_2)) {
+  if(var_1 && !can_say_soundalias(var_2))
     return 0;
-  }
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     self.bc_isspeaking = 1;
-  } else {
+  else
     anim.tank_bc.bc_isspeaking = 1;
-  }
 
   iprintln("tank bcs: " + var_2);
   self playSound(var_2, "bc_done", 1);
   self waittill("bc_done");
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     self.bc_isspeaking = 0;
-  } else {
+  else
     anim.tank_bc.bc_isspeaking = 0;
-  }
 
   update_event_type(var_0.eventtype, var_0.alias);
   return 1;
 }
 
 can_say_event_type(var_0) {
-  if(!isDefined(level.tank_chatter_enabled) || !level.tank_chatter_enabled) {
+  if(!isDefined(level.tank_chatter_enabled) || !level.tank_chatter_enabled)
     return 0;
-  }
 
-  if(!self.bc_enabled) {
+  if(!self.bc_enabled)
     return 0;
-  }
 
-  if(!isplayer(self) && anim.tank_bc.bc_isspeaking) {
+  if(!isplayer(self) && anim.tank_bc.bc_isspeaking)
     return 0;
-  } else if(isplayer(self) && self.bc_isspeaking) {
+  else if(isplayer(self) && self.bc_isspeaking)
     return 0;
-  }
 
-  if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0])) {
+  if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0]))
     return 1;
-  } else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0])) {
+  else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0]))
     return 1;
-  }
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     var_1 = anim.tank_bc.bc_eventtypelastusedtimeplr[var_0];
-  } else {
+  else
     var_1 = anim.tank_bc.bc_eventtypelastusedtime[var_0];
-  }
 
   var_2 = anim.tank_bc.eventtypeminwait[var_0] * 1000;
 
-  if(gettime() - var_1 >= var_2) {
+  if(gettime() - var_1 >= var_2)
     return 1;
-  }
 
   return 0;
 }
@@ -301,20 +278,18 @@ can_say_soundalias(var_0) {
     var_1 = anim.tank_bc.lastalias["time"];
     var_2 = anim.tank_bc.eventtypeminwait["same_alias"] * 1000;
 
-    if(gettime() - var_1 < var_2) {
+    if(gettime() - var_1 < var_2)
       return 0;
-    }
   }
 
   return 1;
 }
 
 update_event_type(var_0, var_1) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     anim.tank_bc.bc_eventtypelastusedtimeplr[var_0] = gettime();
-  } else {
+  else
     anim.tank_bc.bc_eventtypelastusedtime[var_0] = gettime();
-  }
 
   anim.tank_bc.lastalias["time"] = gettime();
   anim.tank_bc.lastalias["alias"] = var_1;

@@ -38,7 +38,7 @@ autoexec init_drive() {
   add_trigger_function("trigger_lastturn", ::lastturn);
   add_trigger_function("hero_drone_trigger", ::delete_drive_vehicles);
   add_trigger_function("hero_drone_trigger", ::hero_drone);
-  array_thread(getEntArray("fail_trigger", "targetname"), ::fail_trigger);
+  array_thread(getentarray("fail_trigger", "targetname"), ::fail_trigger);
   add_spawn_function_veh("mini_hero_drone", ::mini_hero_drone);
   add_spawn_function_veh("tanker_drone", ::tanker_drone);
   add_spawn_function_veh("cougar_crash_big_rig", ::cougar_crash_big_rig);
@@ -62,9 +62,8 @@ main() {
   level thread collision_sounds();
   delay_thread(10, ::fail_watcher);
 
-  if(level.skipto_point != "skyline") {
+  if(level.skipto_point != "skyline")
     level thread drive_vo();
-  }
 
   flag_wait("player_driving");
   clientnotify("cougar_chatter");
@@ -75,75 +74,66 @@ fail_gate_watcher() {
   flag_wait("player_in_cougar");
   flag_wait_or_timeout("player_driving", 10);
 
-  if(!flag("player_driving")) {
+  if(!flag("player_driving"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_1", "targetname"));
-  }
 
   flag_wait_or_timeout("drive_under_first_overpass", 8);
 
-  if(!flag("drive_under_first_overpass")) {
+  if(!flag("drive_under_first_overpass"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_2", "targetname"));
-  }
 
   flag_wait_or_timeout("freeway_drive_1", 8);
 
-  if(!flag("freeway_drive_1")) {
+  if(!flag("freeway_drive_1"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_3", "targetname"));
-  }
 
   flag_wait_or_timeout("first_curve", 10);
 
-  if(!flag("first_curve")) {
+  if(!flag("first_curve"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_4", "targetname"));
-  }
 
   flag_wait_or_timeout("freeway_collapse", 12);
 
-  if(!flag("freeway_collapse")) {
+  if(!flag("freeway_collapse"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_5", "targetname"));
-  }
 
   flag_wait_or_timeout("drive_under_big_overpass", 20);
 
-  if(!flag("drive_under_big_overpass")) {
+  if(!flag("drive_under_big_overpass"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_6", "targetname"));
-  }
 
   flag_wait_or_timeout("f38_trigger", 12);
 
-  if(!flag("f38_trigger")) {
+  if(!flag("f38_trigger"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_7", "targetname"));
-  }
 
   flag_wait_or_timeout("la_1_vista_swap", 24);
 
-  if(!flag("la_1_vista_swap")) {
+  if(!flag("la_1_vista_swap"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_8", "targetname"));
-  }
 
   flag_wait_or_timeout("skyline", 16);
 
-  if(!flag("skyline")) {
+  if(!flag("skyline"))
     level thread kill_player_driver();
-  } else {
+  else
     level thread monitor_backtrack_fail(getent("backtrack_fail_9", "targetname"));
-  }
 }
 
 monitor_backtrack_fail(t_trigger) {
@@ -164,7 +154,7 @@ kill_player_driver() {
 peel_out_sound() {
   while(true) {
     if(level.player buttonpressed("BUTTON_RTRIG")) {
-      level.player playSound("veh_cougar_peel_f", "sounddone");
+      level.player playsound("veh_cougar_peel_f", "sounddone");
       level waittill("sounddone");
       return;
     } else
@@ -178,15 +168,13 @@ dodge_player() {
   self endon("death");
   flag_wait("player_driving");
 
-  while(distance2dsquared(level.player.origin, self.origin) > 9000000) {
+  while(distance2dsquared(level.player.origin, self.origin) > 9000000)
     wait 0.05;
-  }
 
-  if(cointoss()) {
+  if(cointoss())
     self anim_generic(self, "dodge1");
-  } else {
+  else
     self anim_generic(self, "dodge2");
-  }
 }
 
 drive_vo() {
@@ -233,9 +221,8 @@ offramp_vo() {
   level.player queue_dialog("ande_it_s_bad_section_0");
   level.player queue_dialog("ande_i_don_t_know_how_you_0");
 
-  if(!flag("harper_dead")) {
+  if(!flag("harper_dead"))
     level.player queue_dialog("harp_how_do_we_come_back_0");
-  }
 
   level.player queue_dialog("i_dont_know_yet_003");
   flag_wait("final_dialog_start");
@@ -248,7 +235,7 @@ offramp_vo() {
 }
 
 hide_freeway_collapse() {
-  a_fxanim_ents = getEntArray("fxanim", "script_noteworthy");
+  a_fxanim_ents = getentarray("fxanim", "script_noteworthy");
 
   foreach(ent in a_fxanim_ents) {
     if(!isDefined(ent.model) && !isDefined("fxanim_la_freeway_cars_01_mod") || isDefined(ent.model) && isDefined("fxanim_la_freeway_cars_01_mod") && ent.model == "fxanim_la_freeway_cars_01_mod") {
@@ -310,7 +297,7 @@ hide_freeway_collapse() {
 
 create_freeway_collapse_struct(m_parent, str_child, str_tag) {
   m_child = getent(str_child, "targetname");
-  s_freeway = spawnStruct();
+  s_freeway = spawnstruct();
   s_freeway.m_parent = m_parent;
   s_freeway.str_model = m_child.model;
   s_freeway.str_tag = str_tag;
@@ -332,9 +319,8 @@ create_freeway_collapse() {
 collision_fail() {
   level endon("end_drive");
 
-  while(true) {
+  while(true)
     level.veh_player_cougar waittill("veh_collision", v_hit_loc, v_normal, n_intensity, str_type, e_hit_ent);
-  }
 }
 
 push_vehicles() {
@@ -377,13 +363,12 @@ collision_sounds() {
     level.veh_player_cougar waittill("veh_collision", v_hit_loc, v_normal, n_intensity, str_type, e_hit_ent);
 
     if(isDefined(e_hit_ent)) {
-      if(n_intensity > 20) {
-        level.veh_player_cougar playSound("evt_auto_impact_heavy");
-      } else {
-        level.veh_player_cougar playSound("evt_auto_impact_light");
-      }
+      if(n_intensity > 20)
+        level.veh_player_cougar playsound("evt_auto_impact_heavy");
+      else
+        level.veh_player_cougar playsound("evt_auto_impact_light");
     } else
-      level.veh_player_cougar playSound("evt_auto_impact_heavy");
+      level.veh_player_cougar playsound("evt_auto_impact_heavy");
   }
 }
 
@@ -405,23 +390,22 @@ mini_hero_drone() {
   e_target = getent("first_overpass_target", "targetname");
   self thread maps\_turret::shoot_turret_at_target_once(e_target, undefined, 1);
   clientnotify("fssn1");
-  level.player playSound("evt_flyby1_flyby_front");
+  level.player playsound("evt_flyby1_flyby_front");
   wait 0.3;
   self thread maps\_turret::shoot_turret_at_target_once(e_target, undefined, 2);
   flag_set("first_drone_strike");
-  level.player playSound("evt_billboard_flyby_fnt");
+  level.player playsound("evt_billboard_flyby_fnt");
 }
 
 tanker_drone() {
   self thread maps\_turret::fire_turret_for_time(-1, 0);
-  level.player playSound("evt_flyby2_flyby_front");
+  level.player playsound("evt_flyby2_flyby_front");
   e_target = getent("tanker_drone_target", "targetname");
 
-  if(isDefined(e_target)) {
+  if(isDefined(e_target))
     self maps\_turret::shoot_turret_at_target_once(e_target, vectorscale((-1, 0, 0), 100.0), 1);
-  }
 
-  e_target playSound("evt_tanker_flyby_explosion");
+  e_target playsound("evt_tanker_flyby_explosion");
 }
 
 fail_trigger() {
@@ -483,7 +467,7 @@ offramp() {
 
 offramp_lapd() {
   wait 1;
-  a_veh_lapd_offramp = getEntArray("lapd_offramp_veh", "targetname");
+  a_veh_lapd_offramp = getentarray("lapd_offramp_veh", "targetname");
 
   for(i = 0; i < a_veh_lapd_offramp.size; i++) {
     sound_ent[i] = spawn("script_origin", a_veh_lapd_offramp[i].origin);
@@ -498,7 +482,7 @@ offramp_lapd() {
 
 differing_starts() {
   wait(randomfloatrange(0.1, 2));
-  self playLoopSound("amb_drive_final_siren", 1);
+  self playloopsound("amb_drive_final_siren", 1);
 }
 
 lerp_cougar_speed(n_current_speed, n_goal_speed, n_time, b_set_max_speed) {
@@ -540,7 +524,7 @@ delete_offramp_vehicles() {
 
 skyline_start() {
   level thread run_scene_and_delete("skyline");
-  level.player playSound("evt_dronebattle_front");
+  level.player playsound("evt_dronebattle_front");
   clientnotify("bbvi2");
 }
 
@@ -580,15 +564,14 @@ skyline_crash_start(ent) {
 
 crash(ent) {
   level.player playrumbleonentity("artillery_rumble");
-  playFXOnTag(getfx("cougar_crash"), level.veh_player_cougar, "tag_origin");
+  playfxontag(getfx("cougar_crash"), level.veh_player_cougar, "tag_origin");
   screen_fade_out(0);
   maps\_objectives::set_objective(level.obj_drive, undefined, "done");
   maps\_objectives::set_objective(level.obj_drive, undefined, "delete");
   level.crash_bigrig delete();
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 
   wait 2;
   level clientnotify("fade_out");
@@ -616,9 +599,8 @@ fail_watcher() {
       fail_warning();
       n_speed = veh_player getspeedmph();
 
-      if(n_speed < 40) {
+      if(n_speed < 40)
         level thread missile_fail();
-      }
     } else {
       flag_clear("drive_failing");
       level.player enableinvulnerability();

@@ -13,7 +13,7 @@
 #namespace zm_temple_sq_skits;
 
 function build_skit_entry(character, vo) {
-  entry = spawnStruct();
+  entry = spawnstruct();
   switch (character) {
     case "dempsey": {
       entry.character = 0;
@@ -37,7 +37,7 @@ function build_skit_entry(character, vo) {
 }
 
 function init_skits() {
-  if(!isDefined(level._skit_data)) {
+  if(!isdefined(level._skit_data)) {
     level._skit_data = [];
     level._skit_data["tt1"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_1_0"), build_skit_entry("nikolai", "vox_egg_skit_travel_1_1"), build_skit_entry("takeo", "vox_egg_skit_travel_1_2"), build_skit_entry("richtofen", "vox_egg_skit_travel_1_3"), build_skit_entry("dempsey", "vox_egg_skit_travel_1_4"));
     level._skit_data["tt2"] = array(build_skit_entry("takeo", "vox_egg_skit_travel_2_0"), build_skit_entry("nikolai", "vox_egg_skit_travel_2_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_2_2"), build_skit_entry("dempsey", "vox_egg_skit_travel_2_3"), build_skit_entry("nikolai", "vox_egg_skit_travel_2_4"));
@@ -60,30 +60,30 @@ function init_skits() {
 
 function skit_interupt(fail_pos, group) {
   level endon("start_skit_done");
-  if(!isDefined(level._start_skit_pos)) {
-    buttons = getEntArray("sq_sundial_button", "targetname");
+  if(!isdefined(level._start_skit_pos)) {
+    buttons = getentarray("sq_sundial_button", "targetname");
     pos = (0, 0, 0);
-    for(i = 0; i < buttons.size; i++) {
+    for (i = 0; i < buttons.size; i++) {
       pos = pos + buttons[i].origin;
     }
     pos = pos / buttons.size;
     level._start_skit_pos = pos;
   }
-  if(!isDefined(fail_pos)) {
+  if(!isdefined(fail_pos)) {
     fail_pos = level._start_skit_pos;
   }
-  while(true) {
+  while (true) {
     players = getplayers();
-    if(isDefined(group)) {
+    if(isdefined(group)) {
       players = group;
     }
     max_dist_squared = 0;
     check_pos = level._start_skit_pos;
-    if(isDefined(group)) {
+    if(isdefined(group)) {
       check_pos = (0, 0, 0);
       num_group = 0;
-      for(i = 0; i < group.size; i++) {
-        if(isDefined(group[i])) {
+      for (i = 0; i < group.size; i++) {
+        if(isdefined(group[i])) {
           check_pos = check_pos + group[i].origin;
           num_group++;
         }
@@ -92,12 +92,12 @@ function skit_interupt(fail_pos, group) {
         check_pos = check_pos / num_group;
       }
     }
-    for(i = 0; i < players.size; i++) {
-      if(!isDefined(players[i])) {
+    for (i = 0; i < players.size; i++) {
+      if(!isdefined(players[i])) {
         break;
       }
       dist_squared = distance2dsquared(players[i].origin, check_pos);
-      if(isDefined(dist_squared)) {
+      if(isdefined(dist_squared)) {
         max_dist_squared = max(max_dist_squared, dist_squared);
       }
     }
@@ -108,16 +108,16 @@ function skit_interupt(fail_pos, group) {
   }
   level notify("skit_interupt");
   speaker = getplayers()[0];
-  if(isDefined(level._last_skit_line_speaker)) {
+  if(isdefined(level._last_skit_line_speaker)) {
     speaker = level._last_skit_line_speaker;
   }
-  if(isDefined(speaker.speaking_line) && speaker.speaking_line) {
-    while(isDefined(speaker) && speaker.speaking_line) {
+  if(isdefined(speaker.speaking_line) && speaker.speaking_line) {
+    while (isdefined(speaker) && speaker.speaking_line) {
       wait(0.2);
     }
   }
   character = speaker.characterindex;
-  if(isDefined(speaker) && isDefined(speaker.zm_random_char)) {
+  if(isdefined(speaker) && isdefined(speaker.zm_random_char)) {
     character = speaker.zm_random_char;
   }
   num = 5;
@@ -125,7 +125,7 @@ function skit_interupt(fail_pos, group) {
     num = 8;
   }
   snd = (("vox_plr_" + character) + "_safety_") + randomintrange(0, num);
-  if(!isDefined(speaker)) {
+  if(!isdefined(speaker)) {
     return;
   }
   iprintln((character + "") + snd);
@@ -137,8 +137,8 @@ function skit_interupt(fail_pos, group) {
 function do_skit_line(script_line) {
   players = getplayers();
   speaking_player = players[0];
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].zm_random_char)) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(players[i].zm_random_char)) {
       if(players[i].zm_random_char == script_line.character) {
         speaking_player = players[i];
         break;
@@ -152,7 +152,7 @@ function do_skit_line(script_line) {
   }
   speaking_player.speaking_line = 1;
   level._last_skit_line_speaker = speaking_player;
-  if(!isDefined(speaking_player)) {
+  if(!isdefined(speaking_player)) {
     return;
   }
   iprintln((speaking_player getentitynumber() + "") + script_line.vo);
@@ -167,7 +167,7 @@ function start_skit(skit_name, group) {
   script = level._skit_data[skit_name];
   level.skit_vox_override = 1;
   level thread skit_interupt(undefined, group);
-  for(i = 0; i < script.size; i++) {
+  for (i = 0; i < script.size; i++) {
     if(i == (script.size - 1)) {
       level notify("start_skit_done");
     }
@@ -179,7 +179,7 @@ function start_skit(skit_name, group) {
 
 function fail_skit(first_time) {
   fail_skits = undefined;
-  if(isDefined(first_time) && first_time) {
+  if(isdefined(first_time) && first_time) {
     fail_skits = array(level._skit_data["fail1"]);
   } else {
     fail_skits = array(level._skit_data["fail2"], level._skit_data["fail3"], level._skit_data["fail4"]);
@@ -187,9 +187,9 @@ function fail_skit(first_time) {
   players = getplayers();
   player_index = 0;
   proposed_group = undefined;
-  while(player_index != players.size) {
+  while (player_index != players.size) {
     proposed_group = [];
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(i == player_index) {
         continue;
       }
@@ -206,13 +206,13 @@ function fail_skit(first_time) {
   skit = fail_skits[randomintrange(0, fail_skits.size)];
   if(proposed_group.size > 0) {
     pos = (0, 0, 0);
-    for(i = 0; i < proposed_group.size; i++) {
+    for (i = 0; i < proposed_group.size; i++) {
       pos = pos + proposed_group[i].origin;
     }
     pos = pos / proposed_group.size;
     level endon("skit_interupt");
     level thread skit_interupt(pos, proposed_group);
-    for(i = 0; i < proposed_group.size; i++) {
+    for (i = 0; i < proposed_group.size; i++) {
       level thread do_skit_line(skit[proposed_group[i].characterindex]);
       level waittill("line_spoken");
     }

@@ -16,27 +16,24 @@ pers_register_upgrade(name, upgrade_active_func, stat_name, stat_desired_value, 
     level.pers_upgrades_keys = [];
   }
 
-  if(isDefined(level.pers_upgrades[name])) {
+  if(isDefined(level.pers_upgrades[name]))
     assert(0, "A persistent upgrade is already registered for name: " + name);
-  }
 
   level.pers_upgrades_keys[level.pers_upgrades_keys.size] = name;
-  level.pers_upgrades[name] = spawnStruct();
+  level.pers_upgrades[name] = spawnstruct();
   level.pers_upgrades[name].stat_names = [];
   level.pers_upgrades[name].stat_desired_values = [];
   level.pers_upgrades[name].upgrade_active_func = upgrade_active_func;
   level.pers_upgrades[name].game_end_reset_if_not_achieved = game_end_reset_if_not_achieved;
   add_pers_upgrade_stat(name, stat_name, stat_desired_value);
 
-  if(isDefined(level.devgui_add_ability)) {
+  if(isDefined(level.devgui_add_ability))
     [[level.devgui_add_ability]](name, upgrade_active_func, stat_name, stat_desired_value, game_end_reset_if_not_achieved);
-  }
 }
 
 add_pers_upgrade_stat(name, stat_name, stat_desired_value) {
-  if(!isDefined(level.pers_upgrades[name])) {
+  if(!isDefined(level.pers_upgrades[name]))
     assert(0, name + " - Persistent upgrade is not registered yet.");
-  }
 
   stats_size = level.pers_upgrades[name].stat_names.size;
   level.pers_upgrades[name].stat_names[stats_size] = stat_name;
@@ -79,45 +76,41 @@ pers_upgrades_monitor() {
               if(flag("initial_blackscreen_passed") && !is_true(player.is_hotjoining)) {
                 type = "upgrade";
 
-                if(isDefined(level.snd_pers_upgrade_force_type)) {
+                if(isDefined(level.snd_pers_upgrade_force_type))
                   type = level.snd_pers_upgrade_force_type;
-                }
 
                 player playsoundtoplayer("evt_player_upgrade", player);
 
-                if(isDefined(level.pers_upgrade_vo_spoken) && level.pers_upgrade_vo_spoken) {
+                if(isDefined(level.pers_upgrade_vo_spoken) && level.pers_upgrade_vo_spoken)
                   player delay_thread(1, maps\mp\zombies\_zm_audio::create_and_play_dialog, "general", type, undefined, level.snd_pers_upgrade_force_variant);
-                } else {
+                else
                   player delay_thread(1, ::play_vox_to_player, "general", type, level.snd_pers_upgrade_force_variant);
-                }
 
                 if(isDefined(player.upgrade_fx_origin)) {
                   fx_org = player.upgrade_fx_origin;
                   player.upgrade_fx_origin = undefined;
                 } else {
                   fx_org = player.origin;
-                  v_dir = anglesToForward(player getplayerangles());
+                  v_dir = anglestoforward(player getplayerangles());
                   v_up = anglestoup(player getplayerangles());
                   fx_org = fx_org + v_dir * 30 + v_up * 12;
                 }
 
-                playFX(level._effect["upgrade_aquired"], fx_org);
+                playfx(level._effect["upgrade_aquired"], fx_org);
                 level thread maps\mp\zombies\_zm::disable_end_game_intermission(1.5);
               }
 
               player iprintlnbold("Upgraded!");
 
-              if(isDefined(pers_upgrade.upgrade_active_func)) {
+              if(isDefined(pers_upgrade.upgrade_active_func))
                 player thread[[pers_upgrade.upgrade_active_func]]();
-              }
 
               continue;
             }
 
             if(isDefined(player.pers_upgrades_awarded[level.pers_upgrades_keys[pers_upgrade_index]]) && player.pers_upgrades_awarded[level.pers_upgrades_keys[pers_upgrade_index]]) {
-              if(flag("initial_blackscreen_passed") && !is_true(player.is_hotjoining)) {
+              if(flag("initial_blackscreen_passed") && !is_true(player.is_hotjoining))
                 player playsoundtoplayer("evt_player_downgrade", player);
-              }
 
               player iprintlnbold("Downgraded!");
 
@@ -152,9 +145,8 @@ wait_for_game_end() {
 
       if(isDefined(game_end_reset_if_not_achieved) && game_end_reset_if_not_achieved == 1) {
         if(!(isDefined(player.pers_upgrades_awarded[str_name]) && player.pers_upgrades_awarded[str_name])) {
-          for(stat_index = 0; stat_index < level.pers_upgrades[str_name].stat_names.size; stat_index++) {
+          for(stat_index = 0; stat_index < level.pers_upgrades[str_name].stat_names.size; stat_index++)
             player maps\mp\zombies\_zm_stats::zero_client_stat(level.pers_upgrades[str_name].stat_names[stat_index], 0);
-          }
         }
       }
     }
@@ -177,9 +169,8 @@ check_pers_upgrade(pers_upgrade) {
 }
 
 is_any_pers_upgrade_stat_updated(pers_upgrade) {
-  if(isDefined(self.pers_upgrade_force_test) && self.pers_upgrade_force_test) {
+  if(isDefined(self.pers_upgrade_force_test) && self.pers_upgrade_force_test)
     return 1;
-  }
 
   result = 0;
 
@@ -199,9 +190,8 @@ check_pers_upgrade_stat(stat_name, stat_desired_value) {
   should_award = 1;
   current_stat_value = self maps\mp\zombies\_zm_stats::get_global_stat(stat_name);
 
-  if(current_stat_value < stat_desired_value) {
+  if(current_stat_value < stat_desired_value)
     should_award = 0;
-  }
 
   return should_award;
 }
@@ -213,8 +203,7 @@ round_end() {
   self notify("pers_stats_end_of_round");
 
   if(isDefined(self.pers["pers_max_round_reached"])) {
-    if(level.round_number > self.pers["pers_max_round_reached"]) {
+    if(level.round_number > self.pers["pers_max_round_reached"])
       self maps\mp\zombies\_zm_stats::set_client_stat("pers_max_round_reached", level.round_number, 0);
-    }
   }
 }

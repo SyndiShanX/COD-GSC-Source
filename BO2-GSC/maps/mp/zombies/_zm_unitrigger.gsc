@@ -9,7 +9,7 @@
 #include maps\mp\zombies\_zm_zonemgr;
 
 init() {
-  level._unitriggers = spawnStruct();
+  level._unitriggers = spawnstruct();
   level._unitriggers._deferredinitlist = [];
   level._unitriggers.trigger_pool = [];
   level._unitriggers.trigger_stubs = [];
@@ -19,13 +19,11 @@ init() {
   stubs_keys = array("unitrigger_radius", "unitrigger_radius_use", "unitrigger_box", "unitrigger_box_use");
   stubs = [];
 
-  for(i = 0; i < stubs_keys.size; i++) {
+  for(i = 0; i < stubs_keys.size; i++)
     stubs = arraycombine(stubs, getstructarray(stubs_keys[i], "script_unitrigger_type"), 1, 0);
-  }
 
-  for(i = 0; i < stubs.size; i++) {
+  for(i = 0; i < stubs.size; i++)
     register_unitrigger(stubs[i]);
-  }
 }
 
 register_unitrigger_system_func(system, trigger_func) {
@@ -33,27 +31,24 @@ register_unitrigger_system_func(system, trigger_func) {
 }
 
 unitrigger_force_per_player_triggers(unitrigger_stub, opt_on_off) {
-  if(!isDefined(opt_on_off)) {
+  if(!isDefined(opt_on_off))
     opt_on_off = 1;
-  }
 
   unitrigger_stub.trigger_per_player = opt_on_off;
 }
 
 unitrigger_trigger(player) {
-  if(self.trigger_per_player) {
+  if(self.trigger_per_player)
     return self.playertrigger[player getentitynumber()];
-  } else {
+  else
     return self.trigger;
-  }
 }
 
 unitrigger_origin() {
-  if(isDefined(self.originfunc)) {
+  if(isDefined(self.originfunc))
     origin = self[[self.originfunc]]();
-  } else {
+  else
     origin = self.origin;
-  }
 
   return origin;
 }
@@ -65,44 +60,37 @@ register_unitrigger_internal(unitrigger_stub, trigger_func) {
     return;
   }
 
-  if(isDefined(trigger_func)) {
+  if(isDefined(trigger_func))
     unitrigger_stub.trigger_func = trigger_func;
-  } else if(isDefined(unitrigger_stub.unitrigger_system) && isDefined(level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system])) {
+  else if(isDefined(unitrigger_stub.unitrigger_system) && isDefined(level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system]))
     unitrigger_stub.trigger_func = level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system];
-  }
 
   switch (unitrigger_stub.script_unitrigger_type) {
     case "unitrigger_radius":
     case "unitrigger_radius_use":
-      if(!isDefined(unitrigger_stub.radius)) {
+      if(!isDefined(unitrigger_stub.radius))
         unitrigger_stub.radius = 32;
-      }
 
-      if(!isDefined(unitrigger_stub.script_height)) {
+      if(!isDefined(unitrigger_stub.script_height))
         unitrigger_stub.script_height = 64;
-      }
 
       unitrigger_stub.test_radius_sq = (unitrigger_stub.radius + 15.0) * (unitrigger_stub.radius + 15.0);
       break;
     case "unitrigger_box":
     case "unitrigger_box_use":
-      if(!isDefined(unitrigger_stub.script_width)) {
+      if(!isDefined(unitrigger_stub.script_width))
         unitrigger_stub.script_width = 64;
-      }
 
-      if(!isDefined(unitrigger_stub.script_height)) {
+      if(!isDefined(unitrigger_stub.script_height))
         unitrigger_stub.script_height = 64;
-      }
 
-      if(!isDefined(unitrigger_stub.script_length)) {
+      if(!isDefined(unitrigger_stub.script_length))
         unitrigger_stub.script_length = 64;
-      }
 
       box_radius = length((unitrigger_stub.script_width / 2, unitrigger_stub.script_length / 2, unitrigger_stub.script_height / 2));
 
-      if(!isDefined(unitrigger_stub.radius) || unitrigger_stub.radius < box_radius) {
+      if(!isDefined(unitrigger_stub.radius) || unitrigger_stub.radius < box_radius)
         unitrigger_stub.radius = box_radius;
-      }
 
       unitrigger_stub.test_radius_sq = (box_radius + 15.0) * (box_radius + 15.0);
       break;
@@ -117,9 +105,8 @@ register_unitrigger_internal(unitrigger_stub, trigger_func) {
     level._unitriggers.largest_radius = min(113.0, unitrigger_stub.radius);
 
     if(isDefined(level.fixed_max_player_use_radius)) {
-      if(level.fixed_max_player_use_radius > getdvarfloat(#"player_useRadius_zm")) {
+      if(level.fixed_max_player_use_radius > getdvarfloat(#"player_useRadius_zm"))
         setdvar("player_useRadius_zm", level.fixed_max_player_use_radius);
-      }
     } else if(level._unitriggers.largest_radius > getdvarfloat(#"player_useRadius_zm"))
       setdvar("player_useRadius_zm", level._unitriggers.largest_radius);
   }
@@ -151,9 +138,8 @@ unregister_unitrigger_internal(unitrigger_stub) {
         trigger = unitrigger_stub.playertrigger[key];
         trigger notify("kill_trigger");
 
-        if(isDefined(trigger)) {
+        if(isDefined(trigger))
           trigger delete();
-        }
       }
 
       unitrigger_stub.playertrigger = [];
@@ -215,9 +201,8 @@ register_static_unitrigger(unitrigger_stub, trigger_func, recalculate_zone) {
 
     for(i = 0; i < keys.size; i++) {
       if(level._unitriggers.contact_ent maps\mp\zombies\_zm_zonemgr::entity_in_zone(keys[i], 1)) {
-        if(!isDefined(level.zones[keys[i]].unitrigger_stubs)) {
+        if(!isDefined(level.zones[keys[i]].unitrigger_stubs))
           level.zones[keys[i]].unitrigger_stubs = [];
-        }
 
         level.zones[keys[i]].unitrigger_stubs[level.zones[keys[i]].unitrigger_stubs.size] = unitrigger_stub;
         unitrigger_stub.in_zone = keys[i];
@@ -242,18 +227,16 @@ debug_unitriggers() {
         triggerstub = level._unitriggers.trigger_stubs[i];
         color = vectorscale((1, 0, 0), 0.75);
 
-        if(!isDefined(triggerstub.in_zone)) {
+        if(!isDefined(triggerstub.in_zone))
           color = vectorscale((1, 1, 0), 0.65);
-        } else if(level.zones[triggerstub.in_zone].is_active) {
+        else if(level.zones[triggerstub.in_zone].is_active)
           color = (1, 1, 0);
-        }
 
         if(isDefined(triggerstub.trigger) || isDefined(triggerstub.playertrigger) && triggerstub.playertrigger.size > 0) {
           color = (0, 1, 0);
 
-          if(isDefined(triggerstub.playertrigger) && triggerstub.playertrigger.size > 0) {
+          if(isDefined(triggerstub.playertrigger) && triggerstub.playertrigger.size > 0)
             print3d(triggerstub.origin, triggerstub.playertrigger.size, color, 1, 1, 1);
-          }
         }
 
         origin = triggerstub unitrigger_origin();
@@ -261,13 +244,11 @@ debug_unitriggers() {
         switch (triggerstub.script_unitrigger_type) {
           case "unitrigger_radius":
           case "unitrigger_radius_use":
-            if(triggerstub.radius) {
+            if(triggerstub.radius)
               circle(origin, triggerstub.radius, color, 0, 0, 1);
-            }
 
-            if(triggerstub.script_height) {
+            if(triggerstub.script_height)
               line(origin, origin + (0, 0, triggerstub.script_height), color, 0, 1);
-            }
 
             break;
           case "unitrigger_box":
@@ -287,47 +268,41 @@ debug_unitriggers() {
 cleanup_trigger(trigger, player) {
   trigger notify("kill_trigger");
 
-  if(isDefined(trigger.stub.trigger_per_player) && trigger.stub.trigger_per_player) {
+  if(isDefined(trigger.stub.trigger_per_player) && trigger.stub.trigger_per_player)
     trigger.stub.playertrigger[player getentitynumber()] = undefined;
-  } else {
+  else
     trigger.stub.trigger = undefined;
-  }
 
   trigger delete();
   level._unitriggers.trigger_pool[player getentitynumber()] = undefined;
 }
 
 assess_and_apply_visibility(trigger, stub, player, default_keep) {
-  if(!isDefined(trigger) || !isDefined(stub)) {
+  if(!isDefined(trigger) || !isDefined(stub))
     return 0;
-  }
 
   keep_thread = default_keep;
 
   if(!isDefined(stub.prompt_and_visibility_func) || trigger[[stub.prompt_and_visibility_func]](player)) {
     keep_thread = 1;
 
-    if(!(isDefined(trigger.thread_running) && trigger.thread_running)) {
+    if(!(isDefined(trigger.thread_running) && trigger.thread_running))
       trigger thread trigger_thread(trigger.stub.trigger_func);
-    }
 
     trigger.thread_running = 1;
 
-    if(isDefined(trigger.reassess_time) && trigger.reassess_time <= 0.0) {
+    if(isDefined(trigger.reassess_time) && trigger.reassess_time <= 0.0)
       trigger.reassess_time = undefined;
-    }
   } else {
-    if(isDefined(trigger.thread_running) && trigger.thread_running) {
+    if(isDefined(trigger.thread_running) && trigger.thread_running)
       keep_thread = 0;
-    }
 
     trigger.thread_running = 0;
 
-    if(isDefined(stub.inactive_reasses_time)) {
+    if(isDefined(stub.inactive_reasses_time))
       trigger.reassess_time = stub.inactive_reasses_time;
-    } else {
+    else
       trigger.reassess_time = 1.0;
-    }
   }
 
   return keep_thread;
@@ -337,13 +312,11 @@ main() {
   level thread debug_unitriggers();
 
   if(level._unitriggers._deferredinitlist.size) {
-    for(i = 0; i < level._unitriggers._deferredinitlist.size; i++) {
+    for(i = 0; i < level._unitriggers._deferredinitlist.size; i++)
       register_static_unitrigger(level._unitriggers._deferredinitlist[i], level._unitriggers._deferredinitlist[i].trigger_func);
-    }
 
-    for(i = 0; i < level._unitriggers._deferredinitlist.size; i++) {
+    for(i = 0; i < level._unitriggers._deferredinitlist.size; i++)
       level._unitriggers._deferredinitlist[i] = undefined;
-    }
 
     level._unitriggers._deferredinitlist = undefined;
   }
@@ -351,9 +324,8 @@ main() {
   valid_range = level._unitriggers.largest_radius + 15.0;
   valid_range_sq = valid_range * valid_range;
 
-  while(!isDefined(level.active_zone_names)) {
+  while(!isDefined(level.active_zone_names))
     wait 0.1;
-  }
 
   while(true) {
     waited = 0;
@@ -361,9 +333,8 @@ main() {
     candidate_list = [];
 
     for(j = 0; j < active_zone_names.size; j++) {
-      if(isDefined(level.zones[active_zone_names[j]].unitrigger_stubs)) {
+      if(isDefined(level.zones[active_zone_names[j]].unitrigger_stubs))
         candidate_list = arraycombine(candidate_list, level.zones[active_zone_names[j]].unitrigger_stubs, 1, 0);
-      }
     }
 
     candidate_list = arraycombine(candidate_list, level._unitriggers.dynamic_stubs, 1, 0);
@@ -400,14 +371,12 @@ main() {
         closest = get_closest_unitriggers(player_origin, candidate_list, valid_range);
 
         if(isDefined(trigger) && time_to_ressess && (closest.size < 2 || isDefined(trigger.thread_running) && trigger.thread_running)) {
-          if(assess_and_apply_visibility(trigger, trigger.stub, player, 1)) {
+          if(assess_and_apply_visibility(trigger, trigger.stub, player, 1))
             continue;
-          }
         }
 
-        if(isDefined(trigger)) {
+        if(isDefined(trigger))
           cleanup_trigger(trigger, player);
-        }
       } else
         closest = get_closest_unitriggers(player_origin, candidate_list, valid_range);
 
@@ -433,9 +402,8 @@ main() {
         trigger = undefined;
 
         if(isDefined(closest[index].trigger_per_player) && closest[index].trigger_per_player) {
-          if(!isDefined(closest[index].playertrigger)) {
+          if(!isDefined(closest[index].playertrigger))
             closest[index].playertrigger = [];
-          }
 
           if(!isDefined(closest[index].playertrigger[player getentitynumber()])) {
             trigger = build_trigger_from_unitrigger_stub(closest[index], player);
@@ -462,9 +430,8 @@ main() {
       }
     }
 
-    if(!waited) {
+    if(!waited)
       wait 0.05;
-    }
   }
 }
 
@@ -479,11 +446,10 @@ run_visibility_function_for_all_triggers() {
     players = getplayers();
 
     for(i = 0; i < players.size; i++) {
-      if(isDefined(self.playertrigger[players[i] getentitynumber()])) {
+      if(isDefined(self.playertrigger[players[i] getentitynumber()]))
         self.playertrigger[players[i] getentitynumber()][
-          }
           [self.prompt_and_visibility_func]
-      ](players[i]);
+        ](players[i]);
     }
   } else if(isDefined(self.trigger))
     self.trigger[[self.prompt_and_visibility_func]](getplayers()[0]);
@@ -491,34 +457,29 @@ run_visibility_function_for_all_triggers() {
 
 build_trigger_from_unitrigger_stub(stub, player) {
   if(isDefined(level._zm_build_trigger_from_unitrigger_stub_override)) {
-    if(stub[[level._zm_build_trigger_from_unitrigger_stub_override]](player)) {
+    if(stub[[level._zm_build_trigger_from_unitrigger_stub_override]](player))
       return;
-    }
   }
 
   radius = stub.radius;
 
-  if(!isDefined(radius)) {
+  if(!isDefined(radius))
     radius = 64;
-  }
 
   script_height = stub.script_height;
 
-  if(!isDefined(script_height)) {
+  if(!isDefined(script_height))
     script_height = 64;
-  }
 
   script_width = stub.script_width;
 
-  if(!isDefined(script_width)) {
+  if(!isDefined(script_width))
     script_width = 64;
-  }
 
   script_length = stub.script_length;
 
-  if(!isDefined(script_length)) {
+  if(!isDefined(script_length))
     script_length = 64;
-  }
 
   trigger = undefined;
   origin = stub unitrigger_origin();
@@ -539,38 +500,33 @@ build_trigger_from_unitrigger_stub(stub, player) {
   }
 
   if(isDefined(trigger)) {
-    if(isDefined(stub.angles)) {
+    if(isDefined(stub.angles))
       trigger.angles = stub.angles;
-    }
 
-    if(isDefined(stub.onspawnfunc)) {
+    if(isDefined(stub.onspawnfunc))
       stub[[stub.onspawnfunc]](trigger);
-    }
 
     if(isDefined(stub.cursor_hint)) {
-      if(stub.cursor_hint == "HINT_WEAPON" && isDefined(stub.cursor_hint_weapon)) {
+      if(stub.cursor_hint == "HINT_WEAPON" && isDefined(stub.cursor_hint_weapon))
         trigger setcursorhint(stub.cursor_hint, stub.cursor_hint_weapon);
-      } else {
+      else
         trigger setcursorhint(stub.cursor_hint);
-      }
     }
 
     trigger triggerignoreteam();
 
-    if(isDefined(stub.require_look_at) && stub.require_look_at) {
+    if(isDefined(stub.require_look_at) && stub.require_look_at)
       trigger usetriggerrequirelookat();
-    }
 
     if(isDefined(stub.hint_string)) {
-      if(isDefined(stub.hint_parm2)) {
+      if(isDefined(stub.hint_parm2))
         trigger sethintstring(stub.hint_string, stub.hint_parm1, stub.hint_parm2);
-      } else if(isDefined(stub.hint_parm1)) {
+      else if(isDefined(stub.hint_parm1))
         trigger sethintstring(stub.hint_string, stub.hint_parm1);
-      } else if(isDefined(stub.cost)) {
+      else if(isDefined(stub.cost))
         trigger sethintstring(stub.hint_string, stub.cost);
-      } else {
+      else
         trigger sethintstring(stub.hint_string);
-      }
     }
 
     trigger.stub = stub;
@@ -584,9 +540,8 @@ build_trigger_from_unitrigger_stub(stub, player) {
       trigger setvisibletoplayer(player);
     }
 
-    if(!isDefined(stub.playertrigger)) {
+    if(!isDefined(stub.playertrigger))
       stub.playertrigger = [];
-    }
 
     stub.playertrigger[player getentitynumber()] = trigger;
   } else
@@ -608,15 +563,13 @@ copy_zombie_keys_onto_trigger(trig, stub) {
 trigger_thread(trigger_func) {
   self endon("kill_trigger");
 
-  if(isDefined(trigger_func)) {
+  if(isDefined(trigger_func))
     self[[trigger_func]]();
-  }
 }
 
 get_closest_unitrigger_index(org, array, dist) {
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
 
   distsq = dist * dist;
 
@@ -646,15 +599,13 @@ get_closest_unitrigger_index(org, array, dist) {
 get_closest_unitriggers(org, array, dist) {
   triggers = [];
 
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
 
   distsq = dist * dist;
 
-  if(array.size < 1) {
+  if(array.size < 1)
     return triggers;
-  }
 
   index = undefined;
 
@@ -674,13 +625,13 @@ get_closest_unitriggers(org, array, dist) {
     }
     array[i].dsquared = newdistsq;
 
-    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {}
+    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {
+    }
 
     arrayinsert(triggers, array[i], j);
 
-    if(9 == i % 10) {
+    if(9 == i % 10)
       wait 0.05;
-    }
   }
 
   return triggers;

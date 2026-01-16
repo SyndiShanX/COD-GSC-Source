@@ -9,12 +9,11 @@ updaterankannouncehud_stub() {
   self endon("update_rank");
   var_0 = self.pers["team"];
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
-  if(!maps\mp\_utility::levelflag("game_over")) {
+  if(!maps\mp\_utility::levelflag("game_over"))
     level common_scripts\utility::waittill_notify_or_timeout("game_over", 0.25);
-  }
 
   var_1 = self.pers["rank"];
   var_2 = self.pers["prestige"];
@@ -30,8 +29,7 @@ updaterankannouncehud_stub() {
     var_4 = level.ranktable[var_1][1];
     var_5 = int(var_4[var_4.size - 1]);
 
-    if(var_5 > 1) {
+    if(var_5 > 1)
       return;
-    }
   }
 }

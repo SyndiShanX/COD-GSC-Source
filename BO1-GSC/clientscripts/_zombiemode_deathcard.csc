@@ -17,6 +17,6 @@ death_card_think() {
   }
   while(1) {
     level waittill("dc0");
-    level.dcsound playSound(0, "evt_death_card");
+    level.dcsound playsound(0, "evt_death_card");
   }
 }

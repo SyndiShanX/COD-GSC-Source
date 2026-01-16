@@ -89,9 +89,8 @@ updateFriendIcons() {
         for(i = 0; i < players.size; i++) {
           player = players[i];
 
-          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
+          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing")
             player.headicon = "";
-          }
         }
       }
     }

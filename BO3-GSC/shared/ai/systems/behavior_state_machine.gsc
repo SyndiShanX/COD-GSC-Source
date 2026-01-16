@@ -6,11 +6,11 @@
 #namespace behaviorstatemachine;
 
 function registerbsmscriptapiinternal(functionname, scriptfunction) {
-  if(!isDefined(level._bsmscriptfunctions)) {
+  if(!isdefined(level._bsmscriptfunctions)) {
     level._bsmscriptfunctions = [];
   }
   functionname = tolower(functionname);
-  assert(isDefined(scriptfunction) && isDefined(scriptfunction), "");
-  assert(!isDefined(level._bsmscriptfunctions[functionname]), "");
+  assert(isdefined(scriptfunction) && isdefined(scriptfunction), "");
+  assert(!isdefined(level._bsmscriptfunctions[functionname]), "");
   level._bsmscriptfunctions[functionname] = scriptfunction;
 }

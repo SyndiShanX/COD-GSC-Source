@@ -25,39 +25,37 @@ magicbox_leaving_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
   if(!isDefined(self.fx_obj)) {
     self.fx_obj = spawn(localclientnum, self.origin, "script_model");
     self.fx_obj.angles = self.angles;
-    self.fx_obj setModel("tag_origin");
+    self.fx_obj setmodel("tag_origin");
   }
 
-  if(newval == 1) {
-    self.fx_obj.curr_leaving_fx = playFXOnTag(localclientnum, level._effect["box_is_leaving"], self.fx_obj, "tag_origin");
-  }
+  if(newval == 1)
+    self.fx_obj.curr_leaving_fx = playfxontag(localclientnum, level._effect["box_is_leaving"], self.fx_obj, "tag_origin");
 }
 
 magicbox_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(self.fx_obj)) {
     self.fx_obj = spawn(localclientnum, self.origin, "script_model");
     self.fx_obj.angles = self.angles;
-    self.fx_obj setModel("tag_origin");
+    self.fx_obj setmodel("tag_origin");
   }
 
-  if(newval == 0) {
+  if(newval == 0)
     stopfx(localclientnum, self.fx_obj.curr_open_fx);
-  } else if(newval == 1) {
-    self.fx_obj.curr_open_fx = playFXOnTag(localclientnum, level._effect["box_is_open"], self.fx_obj, "tag_origin");
-  }
+  else if(newval == 1)
+    self.fx_obj.curr_open_fx = playfxontag(localclientnum, level._effect["box_is_open"], self.fx_obj, "tag_origin");
 }
 
 magicbox_initial_closed_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(self.fx_obj)) {
     self.fx_obj = spawn(localclientnum, self.origin, "script_model");
     self.fx_obj.angles = self.angles;
-    self.fx_obj setModel("tag_origin");
+    self.fx_obj setmodel("tag_origin");
   } else
     return;
 
   if(newval == 1) {
-    self.fx_obj.curr_amb_fx = playFXOnTag(localclientnum, level._effect["box_gone_ambient"], self.fx_obj, "tag_origin");
-    self.fx_obj playLoopSound("zmb_hellbox_amb_low");
+    self.fx_obj.curr_amb_fx = playfxontag(localclientnum, level._effect["box_gone_ambient"], self.fx_obj, "tag_origin");
+    self.fx_obj playloopsound("zmb_hellbox_amb_low");
   }
 }
 
@@ -65,23 +63,22 @@ magicbox_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
   if(!isDefined(self.fx_obj)) {
     self.fx_obj = spawn(localclientnum, self.origin, "script_model");
     self.fx_obj.angles = self.angles;
-    self.fx_obj setModel("tag_origin");
+    self.fx_obj setmodel("tag_origin");
   }
 
-  if(isDefined(self.fx_obj.curr_amb_fx)) {
+  if(isDefined(self.fx_obj.curr_amb_fx))
     stopfx(localclientnum, self.fx_obj.curr_amb_fx);
-  }
 
   if(newval == 0) {
-    self.fx_obj.curr_amb_fx = playFXOnTag(localclientnum, level._effect["box_gone_ambient"], self.fx_obj, "tag_origin");
-    self.fx_obj playLoopSound("zmb_hellbox_amb_low");
-    playSound(0, "zmb_hellbox_leave", self.fx_obj.origin);
+    self.fx_obj.curr_amb_fx = playfxontag(localclientnum, level._effect["box_gone_ambient"], self.fx_obj, "tag_origin");
+    self.fx_obj playloopsound("zmb_hellbox_amb_low");
+    playsound(0, "zmb_hellbox_leave", self.fx_obj.origin);
   } else if(newval == 1) {
-    self.fx_obj.curr_amb_fx = playFXOnTag(localclientnum, level._effect["box_here_ambient"], self.fx_obj, "tag_origin");
-    self.fx_obj playLoopSound("zmb_hellbox_amb_high");
-    playSound(0, "zmb_hellbox_arrive", self.fx_obj.origin);
+    self.fx_obj.curr_amb_fx = playfxontag(localclientnum, level._effect["box_here_ambient"], self.fx_obj, "tag_origin");
+    self.fx_obj playloopsound("zmb_hellbox_amb_high");
+    playsound(0, "zmb_hellbox_arrive", self.fx_obj.origin);
   } else if(newval == 2) {
-    self.fx_obj.curr_amb_fx = playFXOnTag(localclientnum, level._effect["box_is_locked"], self.fx_obj, "tag_origin");
-    self.fx_obj playLoopSound("zmb_hellbox_amb_high");
+    self.fx_obj.curr_amb_fx = playfxontag(localclientnum, level._effect["box_is_locked"], self.fx_obj, "tag_origin");
+    self.fx_obj playloopsound("zmb_hellbox_amb_high");
   }
 }

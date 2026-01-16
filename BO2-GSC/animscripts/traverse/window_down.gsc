@@ -28,9 +28,9 @@ main() {
   thread animscripts\shared::donotetracksforever("traverse", "stop_traverse_notetracks");
   wait 1.5;
   angles = (0, startnode.angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   forward = vectorscale(forward, 85);
-  trace = bulletTrace(startnode.origin + forward, startnode.origin + forward + vectorscale((0, 0, -1), 500.0), 0, undefined);
+  trace = bullettrace(startnode.origin + forward, startnode.origin + forward + vectorscale((0, 0, -1), 500.0), 0, undefined);
   endheight = trace["position"][2];
   finaldif = startnode.origin[2] - endheight;
   heightchange = 0;
@@ -59,9 +59,8 @@ main() {
     wait 0.05;
   }
 
-  if(isDefined(self.groundtype)) {
-    self playSound("Land_" + self.groundtype);
-  }
+  if(isDefined(self.groundtype))
+    self playsound("Land_" + self.groundtype);
 
   self notify("stop_traverse_notetracks");
   self setflaggedanimknoballrestart("traverse", landanim, % body, 1, 0.15, 1);

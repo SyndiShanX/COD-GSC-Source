@@ -8,6 +8,7 @@
 #include maps\_vehicle;
 #include maps\_vehicle_aianim;
 #include maps\_anim;
+
 #using_animtree("vehicles");
 main(model, type, no_death) {
   //precachemodel( "fastrope_arms" );
@@ -19,7 +20,7 @@ main(model, type, no_death) {
 
   build_drive( % bh_rotors, undefined, 0);
 
-  if(!isDefined(no_death)) {
+  if(!isdefined(no_death)) {
     blackhawk_death_fx = [];
     blackhawk_death_fx["vehicle_blackhawk_minigun_low"] = "explosions/helicopter_explosion";
     blackhawk_death_fx["vehicle_blackhawk_minigun_hero"] = "explosions/helicopter_explosion";
@@ -54,6 +55,7 @@ main(model, type, no_death) {
   build_light(model, "white_blink_tail", "tag_light_tail", "misc/aircraft_light_white_blink", "running", randomStartDelay);
   build_light(model, "wingtip_green", "tag_light_L_wing", "misc/aircraft_light_wingtip_green", "running", randomStartDelay);
   build_light(model, "wingtip_red", "tag_light_R_wing", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
+
 }
 
 init_local() {
@@ -63,16 +65,15 @@ init_local() {
 
   self.script_badplace = false; // All helicopters dont need to create bad places
   //maps\_vehicle::lights_on( "running" );
-  //maps\_vehicle::lights_on( "interior" );
+  //maps\_vehicle::lights_on( "interior" ); 
 }
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
 
-  for(i = 0; i < positions.size; i++) {
+  for (i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
-  }
 
   return positions;
 }
@@ -130,9 +131,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 8; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 8; i++)
+    positions[i] = spawnstruct();
 
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;
@@ -218,6 +218,7 @@ setanims() {
   //return set_coop_player_anims( positions );
 }
 
+
 //WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
@@ -243,17 +244,18 @@ unload_groups() {
   unload_groups["default"] = unload_groups["both"];
 
   return unload_groups;
+
 }
 
 set_attached_models() {
   array = [];
-  array["TAG_FastRope_LE"] = spawnStruct();
+  array["TAG_FastRope_LE"] = spawnstruct();
   array["TAG_FastRope_LE"].model = "rope_test";
   array["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   array["TAG_FastRope_LE"].idleanim = % bh_rope_idle_le;
   array["TAG_FastRope_LE"].dropanim = % bh_rope_drop_le;
 
-  array["TAG_FastRope_RI"] = spawnStruct();
+  array["TAG_FastRope_RI"] = spawnstruct();
   array["TAG_FastRope_RI"].model = "rope_test_ri";
   array["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   array["TAG_FastRope_RI"].idleanim = % bh_rope_idle_ri;
@@ -261,7 +263,7 @@ set_attached_models() {
 
   strings = getarraykeys(array);
 
-  for(i = 0; i < strings.size; i++) {
+  for (i = 0; i < strings.size; i++) {
     precachemodel(array[strings[i]].model);
   }
 
@@ -280,7 +282,7 @@ set_attached_models() {
 //	FIND THE RIDER THE PLAYER WILL POSESS
 //	-------------------------*/
 //	dummy = undefined;
-//	assertex( isDefined( self.riders ), AssertMessage );
+//	assertex( isdefined( self.riders ), AssertMessage );
 //	foreach ( AI in self.riders )
 //	{
 //		if( AI.vehicle_position == position )
@@ -291,7 +293,7 @@ set_attached_models() {
 //			break;
 //		}
 //	}
-//	assertex( isDefined( dummy ), AssertMessage );
+//	assertex( isdefined( dummy ), AssertMessage );
 //	assertex( !isai( dummy ), AssertMessage );
 //	animpos = maps\_vehicle_aianim::anim_pos( self, position );
 //
@@ -301,7 +303,7 @@ set_attached_models() {
 //	dummy notsolid();
 //	dummy notify( "newanim" );
 //	dummy detachall();
-//	dummy setModel( "fastrope_arms" );
+//	dummy setmodel( "fastrope_arms" );
 //	dummy useanimtree( animpos.player_animtree );
 //	dummy hide();
 //	thread maps\_vehicle_aianim::guy_idle( dummy, position );
@@ -335,20 +337,19 @@ set_attached_models() {
 //}
 
 player_mount_blackhawk_gun(nolerp, player, hide_hud) {
-  if(!isDefined(player)) {
+  if(!IsDefined(player)) {
     player = level.player;
   }
 
   self.minigunUser = player;
 
   //self ==> the vehicle being used by the player
-  if(!isDefined(hide_hud)) {
+  if(!isdefined(hide_hud))
     hide_hud = true;
-  }
   thread hud_hide(hide_hud);
   player allowprone(false);
   player allowcrouch(false);
-  if(!isDefined(nolerp)) {
+  if(!isdefined(nolerp)) {
     player disableWeapons();
     //lerp_player_view_to_tag( player, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc )
     self lerp_player_view_to_tag(player, "tag_player", 1, 1, 30, 30, 30, 30);
@@ -381,6 +382,7 @@ player_dismount_blackhawk_gun() {
   //level.player allowcrouch( true );
   //flag_set( "player_off_minigun" );
 }
+
 
 hud_hide(state) {
   wait 0.05;

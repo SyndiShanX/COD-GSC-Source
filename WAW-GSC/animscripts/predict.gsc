@@ -65,7 +65,7 @@ setFlaggedAnimKnobAllH(entry) {
 
 stumbleWall(maxTime) {
   maxFrames = maxTime / 0.05;
-  for(i = 0; i < maxFrames; i++) {
+  for (i = 0; i < maxFrames; i++) {
     self PredictAnim(false);
     self PredictOriginAndAngles();
     entry["handler"] = ::moveH;
@@ -84,25 +84,23 @@ stumbleWall(maxTime) {
 }
 
 tumbleWall(notifyName) {
-  for(;;) {
-    for(;;) {
+  for (;;) {
+    for (;;) {
       thread getNotetrack(notifyName);
       bPredictMore = self PredictAnim(true);
       self notify(notifyName);
       self waittill("predictGetNotetrack", notetrack);
       if(isDefined(notetrack)) {
-        if(notetrack == "end") {
+        if(notetrack == "end")
           return true;
-        }
       }
       if(!bPredictMore) {
         break;
       }
     }
     self PredictOriginAndAngles();
-    if(self isDeflected()) {
+    if(self isDeflected())
       return false;
-    }
     entry["handler"] = ::moveH;
     entry["origin"] = self.origin;
     entry["angles"] = self.angles;
@@ -125,10 +123,12 @@ moveH(entry) {
 playback() {
   self animMode("nophysics");
   count = self.codePredictCmd.size;
-  for(i = 0; i < count; i++) {
+  for (i = 0; i < count; i++) {
     entry = self.codePredictCmd[i];
     handler = entry["handler"];
-    [[handler]](entry);
+    [
+      [handler]
+    ](entry);
     self.codePredictCmd[i] = undefined;
   }
   self animMode("none");

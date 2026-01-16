@@ -43,11 +43,10 @@ set_level_lighting_values() {
 }
 
 setup_fade_angle_lights() {
-  var_0 = getEntArray("fade_angle_light", "targetname");
+  var_0 = getentarray("fade_angle_light", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread update_fade_angle_lights();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread update_fade_angle_lights();
 }
 
 update_fade_angle_lights() {
@@ -55,29 +54,26 @@ update_fade_angle_lights() {
   var_1 = 135.0;
   var_2 = 10000.0;
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0])) {
+    if(isdefined(var_3[0]))
       var_0 = float(var_3[0]);
-    }
 
-    if(isDefined(var_3[1])) {
+    if(isdefined(var_3[1]))
       var_1 = float(var_3[1]);
-    }
 
-    if(isDefined(var_3[2])) {
+    if(isdefined(var_3[2]))
       var_2 = float(var_3[2]);
-    }
   }
 
   var_4 = var_0 / 180.0;
   var_5 = var_1 / 180.0;
   var_6 = (var_1 - var_0) / 180.0;
-  var_7 = anglesToForward(self.angles);
+  var_7 = anglestoforward(self.angles);
   var_8 = vectornormalize((var_7[0], var_7[1], 0.0));
 
-  for(;;) {
+  for (;;) {
     var_9 = level.player.origin - (self.origin + var_7 * self.radius * 0.75);
     var_9 = vectornormalize((var_9[0], var_9[1], 0.0));
     var_10 = vectordot(var_8, var_9);
@@ -134,7 +130,7 @@ handle_overlook_attack_cinematics() {
 blackout_vision_adjustment() {
   wait 0.05;
 
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_wait("player_in_house");
     thread maps\_utility::set_vision_set("blackout_darkness", 0.5);
     level.player maps\_utility::set_light_set_player("safehouse_interior");
@@ -192,7 +188,7 @@ loop_camera_shake() {
   var_0[1].frequency_roll = 2;
   var_0[1].frequency_yaw = 0;
 
-  for(;;) {
+  for (;;) {
     var_1 = randomintrange(0, var_0.size);
     var_2 = var_0[var_1];
     level.player screenshakeonentity(var_2.pitch_scale, var_2.yaw_scale, var_2.roll_scale, var_2.duration, var_2.duration_fade_up, var_2.duration_fade_down, var_2.radius, var_2.frequency_pitch, var_2.frequency_roll, var_2.frequency_yaw, var_2.exponent);
@@ -202,7 +198,7 @@ loop_camera_shake() {
 
 handle_blackout_spotlights_off() {
   common_scripts\utility::flag_wait("turn_off_blackout_spotlights");
-  var_0 = getEntArray("blackout_spotlight", "targetname");
+  var_0 = getentarray("blackout_spotlight", "targetname");
   common_scripts\utility::array_thread(var_0, maps\blackout_code::record_old_intensity);
   common_scripts\utility::array_thread(var_0, maps\_utility::_setlightintensity, 0);
   maps\_utility::disable_oneshotfx_with_noteworthy("blackout_light_org");

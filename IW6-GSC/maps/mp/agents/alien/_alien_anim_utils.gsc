@@ -44,9 +44,8 @@ calculate_maxMoveDeltaInAnimState(animState) {
     moveDelta = GetMoveDelta(animEntry, 0, 1);
 
     deltaDistSq = LengthSquared(moveDelta);
-    if(deltaDistSq > maxMoveDeltaSq) {
+    if(deltaDistSq > maxMoveDeltaSq)
       maxMoveDeltaSq = deltaDistSq;
-    }
   }
 
   return sqrt(maxMoveDeltaSq);
@@ -540,25 +539,20 @@ registerTraverseData(animState, animIndexArray, endInOriented, flexHeightEndAtTr
   traverseData = [];
   traverseData["animState"] = animState;
 
-  if(isDefined(animIndexArray)) {
+  if(isDefined(animIndexArray))
     traverseData["animIndexArray"] = animIndexArray;
-  }
 
-  if(isDefined(endInOriented)) {
+  if(isDefined(endInOriented))
     traverseData["endInOriented"] = endInOriented;
-  }
 
-  if(isDefined(flexHeightEndAtTraverseEnd)) {
+  if(isDefined(flexHeightEndAtTraverseEnd))
     traverseData["flexHeightEndAtTraverseEnd"] = flexHeightEndAtTraverseEnd;
-  }
 
-  if(isDefined(traverseSound)) {
+  if(isDefined(traverseSound))
     traverseData["traverseSound"] = traverseSound;
-  }
 
-  if(isDefined(traverseAnimScale)) {
+  if(isDefined(traverseAnimScale))
     traverseData["traverseAnimScale"] = traverseAnimScale;
-  }
 
   return traverseData;
 }
@@ -573,17 +567,15 @@ turnTowardsVector(targetVector) {
   self ScrAgentSetOrientMode("face angle abs", self.angles);
   if(turnIndex != 4) {
     self.stateLocked = true;
-    if(self.oriented) {
+    if(self.oriented)
       self ScrAgentSetAnimMode("anim angle delta");
-    } else {
+    else
       self ScrAgentSetAnimMode("anim deltas");
-    }
     animState = getTurnInPlaceAnimState();
     self PlayAnimNUntilNotetrack(animState, turnIndex, "turn_in_place", "code_move");
 
-    if(!self maps\mp\alien\_utility::is_idle_state_locked()) {
+    if(!self maps\mp\alien\_utility::is_idle_state_locked())
       self.stateLocked = false;
-    }
 
     return true;
   }
@@ -592,10 +584,11 @@ turnTowardsVector(targetVector) {
 
 getTurnInPlaceAnimState() {
   if(isDefined(level.dlc_alien_turn_in_place_anim_state_override_func)) {
-    animState = [[level.dlc_alien_turn_in_place_anim_state_override_func]]();
-    if(isDefined(animState)) {
+    animState = [
+      [level.dlc_alien_turn_in_place_anim_state_override_func]
+    ]();
+    if(isDefined(animState))
       return animState;
-    }
   }
 
   return "turn_in_place";
@@ -675,19 +668,17 @@ getDamageDegree(iDamage, is_stun) {
   alienType = self maps\mp\alien\_utility::get_alien_type();
   damageThreshold = level.alien_types[alienType].attributes["heavy_damage_threshold"];
 
-  if(iDamage < damageThreshold && !is_stun) {
+  if(iDamage < damageThreshold && !is_stun)
     return "light";
-  } else {
+  else
     return "heavy";
-  }
 }
 
 getPainAnimIndex(state, damageDirection, hitLoc) {
   damageDirection = pain_getIncomingDirection(damageDirection * -1);
 
-  if(isDefined(hitLoc)) {
+  if(isDefined(hitLoc))
     hitLoc = pain_getCombinedHitLoc(hitLoc);
-  }
 
   return getPainDeathAnimIndex_Internal(state, damageDirection, hitLoc, level.alienAnimData.painAnims);
 }
@@ -710,11 +701,10 @@ getDeathAnimIndex(state, damageDirection, hitLoc) {
 }
 
 getPainDeathAnimIndex_Internal(state, damageDirection, hitLoc, animArray) {
-  if(isDefined(hitLoc)) {
+  if(isDefined(hitLoc))
     availableIndexList = animArray[state][damageDirection][hitLoc];
-  } else {
+  else
     availableIndexList = animArray[state][damageDirection];
-  }
 
   return (availableIndexList[randomInt(availableIndexList.size)]);
 }
@@ -734,9 +724,8 @@ playAnimOnScriptable(scriptableName, endPos, scriptableState) {
   scriptable_obj = GetEnt(scriptableName, "targetname");
   AssertEx(isDefined(scriptable_obj), "Unable to find a scriptable object with targetname: " + scriptableName + " at location " + endPos);
 
-  if(!isDefined(scriptableState)) {
+  if(!isDefined(scriptableState))
     scriptableState = 1;
-  }
 
   scriptable_obj SetScriptablePartState(0, scriptableState);
 

@@ -15,18 +15,18 @@
 #namespace globallogic;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic", &__init__, undefined, "visionset_mgr");
+  system::register("globallogic", & __init__, undefined, "visionset_mgr");
 }
 
 function __init__() {
   visionset_mgr::register_visionset_info("mpintro", 1, 31, undefined, "mpintro");
-  clientfield::register("world", "game_ended", 1, 1, "int", &game_ended, 1, 1);
-  clientfield::register("world", "post_game", 1, 1, "int", &post_game, 1, 1);
-  registerclientfield("playercorpse", "firefly_effect", 1, 2, "int", &firefly_effect_cb, 0);
-  registerclientfield("playercorpse", "annihilate_effect", 1, 1, "int", &annihilate_effect_cb, 0);
-  registerclientfield("playercorpse", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
-  registerclientfield("actor", "annihilate_effect", 1, 1, "int", &annihilate_effect_cb, 0);
-  registerclientfield("actor", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
+  clientfield::register("world", "game_ended", 1, 1, "int", & game_ended, 1, 1);
+  clientfield::register("world", "post_game", 1, 1, "int", & post_game, 1, 1);
+  registerclientfield("playercorpse", "firefly_effect", 1, 2, "int", & firefly_effect_cb, 0);
+  registerclientfield("playercorpse", "annihilate_effect", 1, 1, "int", & annihilate_effect_cb, 0);
+  registerclientfield("playercorpse", "pineapplegun_effect", 1, 1, "int", & pineapplegun_effect_cb, 0);
+  registerclientfield("actor", "annihilate_effect", 1, 1, "int", & annihilate_effect_cb, 0);
+  registerclientfield("actor", "pineapplegun_effect", 1, 1, "int", & pineapplegun_effect_cb, 0);
   level._effect["annihilate_explosion"] = "weapon/fx_hero_annhilatr_death_blood";
   level._effect["pineapplegun_explosion"] = "weapon/fx_hero_pineapple_death_blood";
   level.gameended = 0;
@@ -56,7 +56,7 @@ function firefly_effect_cb(localclientnum, oldval, newval, bnewent, binitialsnap
 function annihilate_effect_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval && !oldval) {
     where = self gettagorigin("J_SpineLower");
-    if(!isDefined(where)) {
+    if(!isdefined(where)) {
       where = self.origin;
     }
     where = where + (vectorscale((0, 0, -1), 40));
@@ -64,9 +64,9 @@ function annihilate_effect_cb(localclientnum, oldval, newval, bnewent, binitials
     fields = getcharacterfields(character_index, currentsessionmode());
     if(fields.fullbodyexplosion != "") {
       if(util::is_mature() && !util::is_gib_restricted_build()) {
-        playFX(localclientnum, fields.fullbodyexplosion, where);
+        playfx(localclientnum, fields.fullbodyexplosion, where);
       }
-      playFX(localclientnum, "explosions/fx_exp_grenade_default", where);
+      playfx(localclientnum, "explosions/fx_exp_grenade_default", where);
     }
   }
 }
@@ -74,18 +74,18 @@ function annihilate_effect_cb(localclientnum, oldval, newval, bnewent, binitials
 function pineapplegun_effect_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval && !oldval) {
     where = self gettagorigin("J_SpineLower");
-    if(!isDefined(where)) {
+    if(!isdefined(where)) {
       where = self.origin;
     }
-    if(isDefined(level._effect["pineapplegun_explosion"])) {
-      playFX(localclientnum, level._effect["pineapplegun_explosion"], where);
+    if(isdefined(level._effect["pineapplegun_explosion"])) {
+      playfx(localclientnum, level._effect["pineapplegun_explosion"], where);
     }
   }
 }
 
 function watch_plant_sound(localclientnum) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("start_plant_sound");
     self thread play_plant_sound(localclientnum);
   }
@@ -100,15 +100,15 @@ function play_plant_sound(localclientnum) {
   plantweapon = getweapon("briefcase_bomb");
   defuseweapon = getweapon("briefcase_bomb_defuse");
   wait(0.25);
-  while(true) {
-    if(!isDefined(player)) {
+  while (true) {
+    if(!isdefined(player)) {
       return;
     }
     if(player.weapon != plantweapon && player.weapon != defuseweapon) {
       return;
     }
     if(player != self || isthirdperson(localclientnum)) {
-      self playSound(localclientnum, "fly_bomb_buttons_npc");
+      self playsound(localclientnum, "fly_bomb_buttons_npc");
     }
     wait(0.15);
   }

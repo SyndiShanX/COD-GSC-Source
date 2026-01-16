@@ -8,9 +8,8 @@
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
-  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = "soundfx";
@@ -23,9 +22,8 @@ createLoopSound() {
 }
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
-  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = type;
@@ -53,10 +51,10 @@ createExploder(fxid) {
 }
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglesToForward(self.v["angles"]);
+  self.v["forward"] = anglestoforward(self.v["angles"]);
 }
 create_triggerfx(clientNum) {
-  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   create_loopsound(clientNum);
 }
 create_looper(clientNum) {
@@ -64,82 +62,68 @@ create_looper(clientNum) {
   create_loopsound(clientNum);
 }
 loopfx(clientNum) {
-  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
-  while(1) {
+  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  while (1) {
     if(isDefined(self.v["delay"])) {
-      if(!serverwait(clientNum, self.v["delay"], 0.25)) {
+      if(!serverwait(clientNum, self.v["delay"], 0.25))
         continue;
-      }
     }
-    while(isfxplaying(clientNum, self.looperFX)) {
+    while (isfxplaying(clientNum, self.looperFX))
       wait 0.25;
-    }
-    self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 loopfxStop(clientNum, timeout) {
   self endon("death");
   wait(timeout);
-  if(isDefined(self.looper)) {
+  if(isDefined(self.looper))
     deletefx(clientNum, self.looper);
-  }
   if(isDefined(self.loopFX)) {
     deletefakeent(clientNum, self.loopFX);
   }
 }
 loopfxthread(clientNum) {
-  if(isDefined(self.fxStart)) {
+  if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
-  }
-  while(1) {
+  while (1) {
     create_looper(clientNum);
-    if(isDefined(self.timeout)) {
+    if(isDefined(self.timeout))
       thread loopfxStop(clientNum, self.timeout);
-    }
-    if(isDefined(self.fxStop)) {
+    if(isDefined(self.fxStop))
       level waittill("stop fx" + self.fxStop);
-    } else {
+    else
       return;
-    }
-    if(isDefined(self.looper)) {
+    if(isDefined(self.looper))
       deletefx(clientNum, self.looper);
-    }
-    if(isDefined(self.fxStart)) {
+    if(isDefined(self.fxStart))
       level waittill("start fx" + self.fxStart);
-    } else {
+    else
       return;
-    }
   }
 }
 oneshotfxthread(clientNum) {
-  if(self.v["delay"] > 0) {
+  if(self.v["delay"] > 0)
     wait self.v["delay"];
-  }
   create_triggerfx(clientNum);
 }
 exploder(clientNum, num) {
   num = int(num);
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent)) {
+    if(!isDefined(ent))
       continue;
-    }
-    if(ent.v["type"] != "exploder") {
+    if(ent.v["type"] != "exploder")
       continue;
-    }
-    if(!isDefined(ent.v["exploder"])) {
+    if(!isDefined(ent.v["exploder"]))
       continue;
-    }
-    if(ent.v["exploder"] != num) {
+    if(ent.v["exploder"] != num)
       continue;
-    }
-    playFX(clientNum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
+    playfx(clientNum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
   }
 }
 create_loopsound(clientNum) {
-  if(clientNum != 0) {
+  if(clientNum != 0)
     return;
-  }
   self notify("stop_loop");
   if(isDefined(self.v["soundalias"]) && (self.v["soundalias"] != "nil")) {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
@@ -156,23 +140,19 @@ fx_init(clientNum) {
     return;
   }
   fxanim_init(clientNum);
-  if(!isDefined(level.createFXent)) {
+  if(!isDefined(level.createFXent))
     return;
-  }
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();
     }
-    if(ent.v["type"] == "loopfx") {
+    if(ent.v["type"] == "loopfx")
       ent thread loopfxthread(clientNum);
-    }
-    if(ent.v["type"] == "oneshotfx") {
+    if(ent.v["type"] == "oneshotfx")
       ent thread oneshotfxthread(clientNum);
-    }
-    if(ent.v["type"] == "soundfx") {
+    if(ent.v["type"] == "soundfx")
       ent thread create_loopsound(clientNum);
-    }
   }
   level._createfxforwardandupset = true;
 }
@@ -191,7 +171,7 @@ fxanim_init(localClientNum) {
   level.fxanims["fxanim_gp_streamer01_anim"] = % fxanim_gp_streamer01_anim;
   level.fxanims["fxanim_gp_streamer02_anim"] = % fxanim_gp_streamer02_anim;
   level.fxanims["fxanim_gp_fence_tarp_01_anim"] = % fxanim_gp_fence_tarp_01_anim;
-  fxanims = getEntArray(localClientNum, "fxanim", "targetname");
+  fxanims = GetEntArray(localClientNum, "fxanim", "targetname");
   array_thread(fxanims, ::fxanim_think);
 }
 fxanim_think() {
@@ -220,24 +200,23 @@ blinky_light(localClientNum, tagName, friendlyfx, enemyfx) {
   self endon("stop_blinky_light");
   self.lightTagName = tagName;
   self waittill_dobj(localClientNum);
-  while(true) {
+  while (true) {
     if(isDefined(self.stunned) && self.stunned) {
       wait(0.1);
       continue;
     }
     if(friendNotFoe(localClientNum)) {
-      self.blinkyLightFx = playFXOnTag(localClientNum, friendlyfx, self, self.lightTagName);
+      self.blinkyLightFx = PlayFXOnTag(localClientNum, friendlyfx, self, self.lightTagName);
     } else {
-      self.blinkyLightFx = playFXOnTag(localClientNum, enemyfx, self, self.lightTagName);
+      self.blinkyLightFx = PlayFXOnTag(localClientNum, enemyfx, self, self.lightTagName);
     }
     serverWait(localClientNum, 0.5, 0.01);
   }
 }
 stop_blinky_light(localClientNum) {
   self notify("stop_blinky_light");
-  if(!isDefined(self.blinkyLightFx)) {
+  if(!isDefined(self.blinkyLightFx))
     return;
-  }
   stopfx(localClientNum, self.blinkyLightFx);
   self.blinkyLightFx = undefined;
 }

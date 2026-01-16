@@ -114,6 +114,6 @@ sndduckmortars() {
 sndendcheerloops() {
   ent1 = spawn(0, (2667, 872, 192), "script_origin");
   ent2 = spawn(0, (2752, 1332, 191), "script_origin");
-  ent1 playLoopSound("amb_cheer_looper1", 5);
-  ent2 playLoopSound("amb_cheer_looper2", 5);
+  ent1 playloopsound("amb_cheer_looper1", 5);
+  ent2 playloopsound("amb_cheer_looper2", 5);
 }

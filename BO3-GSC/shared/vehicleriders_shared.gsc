@@ -22,7 +22,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicleriders", &__init__, undefined, undefined);
+  system::register("vehicleriders", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -51,25 +51,25 @@ function __init__() {
   }
   level.vehiclerider_use_index = [];
   level.vehiclerider_use_index["driver"] = 0;
-  for(i = 1; i <= 4; i++) {
+  for (i = 1; i <= 4; i++) {
     level.vehiclerider_use_index["gunner" + i] = i;
   }
   passengerindex = 1;
-  for(i = 4 + 1; i <= 10; i++) {
+  for (i = 4 + 1; i <= 10; i++) {
     level.vehiclerider_use_index["passenger" + passengerindex] = i;
     passengerindex++;
   }
   foreach(s in struct::get_script_bundles("vehicleriders")) {
-    if(!isDefined(s.lowexitheight)) {
+    if(!isdefined(s.lowexitheight)) {
       s.lowexitheight = 0;
     }
-    if(!isDefined(s.highexitlandheight)) {
+    if(!isdefined(s.highexitlandheight)) {
       s.highexitlandheight = 32;
     }
   }
-  callback::on_vehicle_spawned(&on_vehicle_spawned);
-  callback::on_ai_spawned(&on_ai_spawned);
-  callback::on_vehicle_killed(&on_vehicle_killed);
+  callback::on_vehicle_spawned( & on_vehicle_spawned);
+  callback::on_ai_spawned( & on_ai_spawned);
+  callback::on_vehicle_killed( & on_vehicle_killed);
 }
 
 function seat_position_to_index(str_position) {
@@ -123,11 +123,11 @@ function find_next_open_position(ai) {
 function spawn_riders() {
   self endon("death");
   self.riders = [];
-  if(isDefined(self.script_vehicleride)) {
+  if(isdefined(self.script_vehicleride)) {
     a_spawners = getspawnerarray(self.script_vehicleride, "script_vehicleride");
     foreach(sp in a_spawners) {
       ai_rider = sp spawner::spawn(1);
-      if(isDefined(ai_rider)) {
+      if(isdefined(ai_rider)) {
         ai_rider get_in(self, ai_rider.script_startingposition, 1);
       }
     }
@@ -136,7 +136,7 @@ function spawn_riders() {
 
 function get_bundle_for_ai(ai) {
   vh = self;
-  if(isDefined(ai.archetype) && ai.archetype == "robot") {
+  if(isdefined(ai.archetype) && ai.archetype == "robot") {
     bundle = vh get_robot_bundle();
   } else {
     bundle = vh get_bundle();
@@ -158,11 +158,11 @@ function get_rider_info(vh, str_pos = "driver") {
 function get_in(vh, str_pos = vh find_next_open_position(self), b_teleport = 0) {
   self endon("death");
   vh endon("death");
-  assert(isDefined(str_pos), "");
-  if(!isDefined(str_pos)) {
+  assert(isdefined(str_pos), "");
+  if(!isdefined(str_pos)) {
     return;
   }
-  if(!isDefined(vh.ignore_seat_check) || !vh.ignore_seat_check) {
+  if(!isdefined(vh.ignore_seat_check) || !vh.ignore_seat_check) {
     seat_index = level.vehiclerider_use_index[str_pos];
     if(seat_index <= 4) {
       seat_available = !vh isvehicleseatoccupied(seat_index);
@@ -183,22 +183,22 @@ function get_in(vh, str_pos = vh find_next_open_position(self), b_teleport = 0) 
   if(!b_teleport) {
     self animation::set_death_anim(self.rider_info.enterdeathanim);
     animation::reach(self.rider_info.enteranim, self.vehicle, self.rider_info.aligntag);
-    if(isDefined(self.rider_info.vehicleenteranim)) {
+    if(isdefined(self.rider_info.vehicleenteranim)) {
       vh clientfield::increment(self.rider_info.position + "_enter", 1);
       self setanim(self.rider_info.vehicleenteranim, 1, 0, 1);
     }
     self animation::play(self.rider_info.enteranim, self.vehicle, self.rider_info.aligntag);
   }
-  if(isDefined(self.rider_info) && isDefined(self.rider_info.rideanim)) {
+  if(isdefined(self.rider_info) && isdefined(self.rider_info.rideanim)) {
     self thread animation::play(self.rider_info.rideanim, self.vehicle, self.rider_info.aligntag, 1, 0.2, 0.2, 0, 0, 0, 0);
   } else {
-    if(!isDefined(level.vehiclerider_use_index[str_pos])) {
+    if(!isdefined(level.vehiclerider_use_index[str_pos])) {
       assert("" + str_pos);
     } else {
-      if(isDefined(self.rider_info)) {
+      if(isdefined(self.rider_info)) {
         v_tag_pos = vh gettagorigin(self.rider_info.aligntag);
         v_tag_ang = vh gettagangles(self.rider_info.aligntag);
-        if(isDefined(v_tag_pos)) {
+        if(isdefined(v_tag_pos)) {
           self forceteleport(v_tag_pos, v_tag_ang);
         }
       } else {
@@ -211,8 +211,8 @@ function get_in(vh, str_pos = vh find_next_open_position(self), b_teleport = 0) 
     self.disableammodrop = 1;
     self.dontdropweapon = 1;
   }
-  if(isDefined(level.vehiclerider_use_index[str_pos])) {
-    if(!isDefined(self.vehicle.ignore_seat_check) || !self.vehicle.ignore_seat_check) {
+  if(isdefined(level.vehiclerider_use_index[str_pos])) {
+    if(!isdefined(self.vehicle.ignore_seat_check) || !self.vehicle.ignore_seat_check) {
       seat_index = level.vehiclerider_use_index[str_pos];
       if(seat_index <= 4) {
         if(self.vehicle isvehicleseatoccupied(seat_index)) {
@@ -230,14 +230,14 @@ function get_in(vh, str_pos = vh find_next_open_position(self), b_teleport = 0) 
 function handle_rider_death() {
   self endon("exiting_vehicle");
   self.vehicle endon("death");
-  if(isDefined(self.rider_info.ridedeathanim)) {
+  if(isdefined(self.rider_info.ridedeathanim)) {
     self animation::set_death_anim(self.rider_info.ridedeathanim);
   }
   self waittill("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
-  if(isDefined(self.vehicle) && isDefined(self.rider_info) && isDefined(self.rider_info.vehicleriderdeathanim)) {
+  if(isdefined(self.vehicle) && isdefined(self.rider_info) && isdefined(self.rider_info.vehicleriderdeathanim)) {
     self.vehicle clientfield::increment(self.rider_info.position + "_death", 1);
     self.vehicle setanimknobrestart(self.rider_info.vehicleriderdeathanim, 1, 0, 1);
   }
@@ -245,13 +245,13 @@ function handle_rider_death() {
 
 function delete_rider_asap(entity) {
   wait(0.05);
-  if(isDefined(entity)) {
+  if(isdefined(entity)) {
     entity delete();
   }
 }
 
 function kill_rider(entity) {
-  if(isDefined(entity)) {
+  if(isdefined(entity)) {
     if(isalive(entity) && !gibserverutils::isgibbed(entity, 2)) {
       if(entity isplayinganimscripted()) {
         entity stopanimscripted();
@@ -272,7 +272,7 @@ function kill_rider(entity) {
 }
 
 function on_vehicle_killed(params) {
-  if(isDefined(self.riders)) {
+  if(isdefined(self.riders)) {
     foreach(rider in self.riders) {
       kill_rider(rider);
     }
@@ -314,17 +314,17 @@ function get_out(str_mode) {
   self endon("death");
   self notify("exiting_vehicle");
   assert(isalive(self), "");
-  assert(isDefined(self.vehicle), "");
-  if(isDefined(self.vehicle.vehicleclass) && self.vehicle.vehicleclass == "helicopter" || (isDefined(self.vehicle.vehicleclass) && self.vehicle.vehicleclass == "plane")) {
-    if(!isDefined(str_mode)) {
+  assert(isdefined(self.vehicle), "");
+  if(isdefined(self.vehicle.vehicleclass) && self.vehicle.vehicleclass == "helicopter" || (isdefined(self.vehicle.vehicleclass) && self.vehicle.vehicleclass == "plane")) {
+    if(!isdefined(str_mode)) {
       str_mode = "variable";
     }
-  } else if(!isDefined(str_mode)) {
+  } else if(!isdefined(str_mode)) {
     str_mode = "ground";
   }
   bundle = self.vehicle get_bundle_for_ai(ai);
   n_hover_height = bundle.lowexitheight;
-  if(isDefined(self.rider_info.vehicleexitanim)) {
+  if(isdefined(self.rider_info.vehicleexitanim)) {
     self.vehicle clientfield::increment(self.rider_info.position + "_exit", 1);
     self.vehicle setanim(self.rider_info.vehicleexitanim, 1, 0, 1);
   }
@@ -350,9 +350,9 @@ function get_out(str_mode) {
     self.disableammodrop = 0;
     self.dontdropweapon = 0;
   }
-  if(isDefined(self.vehicle)) {
+  if(isdefined(self.vehicle)) {
     unclaim_position(self.vehicle, self.rider_info.position);
-    if(isDefined(level.vehiclerider_use_index[self.rider_info.position]) && self flagsys::get("in_vehicle")) {
+    if(isdefined(level.vehiclerider_use_index[self.rider_info.position]) && self flagsys::get("in_vehicle")) {
       self.vehicle usevehicle(self, level.vehiclerider_use_index[self.rider_info.position]);
     }
   }
@@ -367,20 +367,20 @@ function get_out(str_mode) {
 function set_goal() {
   if(colors::is_color_ai()) {
     colors::enable();
-  } else if(!isDefined(self.target)) {
+  } else if(!isdefined(self.target)) {
     self setgoal(self.origin);
   }
 }
 
 function unload(str_group = "all", str_mode, remove_rider_before_unloading, remove_riders_wait_time) {
   self notify("unload", str_group);
-  assert(isDefined(level.vehiclerider_groups[str_group]), str_group + "");
+  assert(isdefined(level.vehiclerider_groups[str_group]), str_group + "");
   str_group = level.vehiclerider_groups[str_group];
   a_ai_unloaded = [];
   foreach(ai_rider in self.riders) {
     if(str_group == "all" || issubstr(ai_rider.rider_info.position, str_group)) {
       ai_rider thread get_out(str_mode);
-      if(!isDefined(a_ai_unloaded)) {
+      if(!isdefined(a_ai_unloaded)) {
         a_ai_unloaded = [];
       } else if(!isarray(a_ai_unloaded)) {
         a_ai_unloaded = array(a_ai_unloaded);
@@ -392,14 +392,14 @@ function unload(str_group = "all", str_mode, remove_rider_before_unloading, remo
     if(remove_rider_before_unloading === 1) {
       remove_riders_after_wait(remove_riders_wait_time, a_ai_unloaded);
     }
-    array::flagsys_wait_clear(a_ai_unloaded, "in_vehicle", (isDefined(self.unloadtimeout) ? self.unloadtimeout : 4));
+    array::flagsys_wait_clear(a_ai_unloaded, "in_vehicle", (isdefined(self.unloadtimeout) ? self.unloadtimeout : 4));
     self notify("unload", a_ai_unloaded);
   }
 }
 
 function remove_riders_after_wait(wait_time, a_riders_to_remove) {
   wait(wait_time);
-  if(isDefined(a_riders_to_remove)) {
+  if(isdefined(a_riders_to_remove)) {
     foreach(ai in a_riders_to_remove) {
       arrayremovevalue(self.riders, ai);
     }
@@ -417,7 +417,7 @@ function ragdoll_dead_exit_rider() {
 
 function exit_ground() {
   self animation::set_death_anim(self.rider_info.exitgrounddeathanim);
-  if(!isDefined(self.rider_info.exitgrounddeathanim)) {
+  if(!isdefined(self.rider_info.exitgrounddeathanim)) {
     self thread ragdoll_dead_exit_rider();
   }
   assert(isstring(self.rider_info.exitgroundanim), ("" + self.rider_info.position) + "");
@@ -428,7 +428,7 @@ function exit_ground() {
 
 function exit_low() {
   self animation::set_death_anim(self.rider_info.exitlowdeathanim);
-  assert(isDefined(self.rider_info.exitlowanim), ("" + self.rider_info.position) + "");
+  assert(isdefined(self.rider_info.exitlowanim), ("" + self.rider_info.position) + "");
   animation::play(self.rider_info.exitlowanim, self.vehicle, self.rider_info.aligntag);
 }
 
@@ -447,7 +447,7 @@ function private forward_euler_integration(e_move, v_target_landing, n_initial_s
   position = self.origin;
   velocity = (0, 0, n_initial_speed * -1);
   gravity = vectorscale((0, 0, -1), 385.8);
-  while(!landed) {
+  while (!landed) {
     previousposition = position;
     velocity = velocity + (gravity * integrationstep);
     position = position + (velocity * integrationstep);
@@ -470,21 +470,21 @@ function exit_variable() {
   self notify("exiting_vehicle");
   self thread handle_falling_death();
   self animation::set_death_anim(self.rider_info.exithighdeathanim);
-  assert(isDefined(self.rider_info.exithighanim), ("" + self.rider_info.position) + "");
+  assert(isdefined(self.rider_info.exithighanim), ("" + self.rider_info.position) + "");
   animation::play(self.rider_info.exithighanim, self.vehicle, self.rider_info.aligntag, 1, 0, 0);
   self animation::set_death_anim(self.rider_info.exithighloopdeathanim);
   n_cur_height = get_height(self.vehicle);
   bundle = self.vehicle get_bundle_for_ai(ai);
   n_target_height = bundle.highexitlandheight;
-  if(isDefined(self.rider_info.dropundervehicleorigin) && self.rider_info.dropundervehicleorigin || (isDefined(self.dropundervehicleoriginoverride) && self.dropundervehicleoriginoverride)) {
+  if(isdefined(self.rider_info.dropundervehicleorigin) && self.rider_info.dropundervehicleorigin || (isdefined(self.dropundervehicleoriginoverride) && self.dropundervehicleoriginoverride)) {
     v_target_landing = (self.vehicle.origin[0], self.vehicle.origin[1], (self.origin[2] - n_cur_height) + n_target_height);
   } else {
     v_target_landing = (self.origin[0], self.origin[1], (self.origin[2] - n_cur_height) + n_target_height);
   }
-  if(isDefined(self.overridedropposition)) {
+  if(isdefined(self.overridedropposition)) {
     v_target_landing = (self.overridedropposition[0], self.overridedropposition[1], v_target_landing[2]);
   }
-  if(isDefined(self.targetangles)) {
+  if(isdefined(self.targetangles)) {
     angles = self.targetangles;
   } else {
     angles = self.angles;
@@ -510,7 +510,7 @@ function exit_variable() {
 function exit_high_loop_anim(e_parent) {
   self endon("death");
   self endon("landing");
-  while(true) {
+  while (true) {
     animation::play(self.rider_info.exithighloopanim, e_parent, "tag_origin");
   }
 }
@@ -522,19 +522,19 @@ function get_height(e_ignore = self) {
 }
 
 function get_bundle() {
-  assert(isDefined(self.vehicleridersbundle), "");
+  assert(isdefined(self.vehicleridersbundle), "");
   return struct::get_script_bundle("vehicleriders", self.vehicleridersbundle);
 }
 
 function get_robot_bundle() {
-  assert(isDefined(self.vehicleridersrobotbundle), "");
+  assert(isdefined(self.vehicleridersrobotbundle), "");
   return struct::get_script_bundle("vehicleriders", self.vehicleridersrobotbundle);
 }
 
 function get_rider(str_pos) {
-  if(isDefined(self.riders)) {
+  if(isdefined(self.riders)) {
     foreach(ai in self.riders) {
-      if(isDefined(ai) && ai.rider_info.position == str_pos) {
+      if(isdefined(ai) && ai.rider_info.position == str_pos) {
         return ai;
       }
     }
@@ -542,12 +542,12 @@ function get_rider(str_pos) {
 }
 
 function private _init_rider(vh, str_pos) {
-  assert(isDefined(self.vehicle) || isDefined(vh), "");
-  assert(isDefined(self.rider_info) || isDefined(str_pos), "");
-  if(isDefined(vh)) {
+  assert(isdefined(self.vehicle) || isdefined(vh), "");
+  assert(isdefined(self.rider_info) || isdefined(str_pos), "");
+  if(isdefined(vh)) {
     self.vehicle = vh;
   }
-  if(!isDefined(str_pos)) {
+  if(!isdefined(str_pos)) {
     str_pos = self.rider_info.position;
   }
   self.rider_info = self get_rider_info(self.vehicle, str_pos);

@@ -7,6 +7,7 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_score;
+
 #namespace zm_powerup_bonus_points_team;
 
 autoexec __init__system__() {
@@ -17,7 +18,7 @@ __init__() {
   zm_powerups::register_powerup("bonus_points_team", &grab_bonus_points_team);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("bonus_points_team", "zombie_z_money_icon", # "zombie_powerup_bonus_points", &zm_powerups::func_should_always_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_team", "zombie_z_money_icon", #"zombie_powerup_bonus_points", &zm_powerups::func_should_always_drop, 0, 0, 0);
   }
 }
 

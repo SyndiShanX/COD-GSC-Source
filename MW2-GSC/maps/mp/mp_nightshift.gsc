@@ -36,9 +36,8 @@ main() {
 hallwayPlunger() {
   plunger = getEnt("plunger", "targetname");
 
-  if(!isDefined(plunger)) {
+  if(!isDefined(plunger))
     return;
-  }
 
   plunger waittill("trigger");
 
@@ -51,7 +50,7 @@ hallwayPlunger() {
     explosionEffect = spawnFx(level._effect["explosive_fx"], explosive.origin + (0, 0, 0), (0, 0, 1), (cos(rot), sin(rot), 0));
     triggerFx(explosionEffect);
 
-    //playFX( level._effect["explosive_fx"], explosive.origin, explosive.angles );
+    //playFx( level._effect["explosive_fx"], explosive.origin, explosive.angles );
     radiusDamage(explosive.origin, 384, 200, 30);
     //explosive playSound( "detpack_explo_default" );
     thread playSoundinSpace("exp_suitcase_bomb_main", explosive.origin);

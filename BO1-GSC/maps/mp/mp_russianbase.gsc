@@ -21,20 +21,20 @@ main() {
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
   spawncollision("collision_wall_256x256x10", "collider", (-1731, 960, 288), (0, 270, 0));
   spawncollision("collision_geo_32x32x128", "collider", (-120, 1828, 63), (0, 0, 0));
-  window1 = spawn("script_model", (-2116, 0, 504));
+  window1 = Spawn("script_model", (-2116, 0, 504));
   if(isDefined(window1)) {
     window1.angles = (0, 0, 0);
-    window1 setModel("p_rus_window_dark01");
+    window1 SetModel("p_rus_window_dark01");
   }
-  window2 = spawn("script_model", (-1878, 0, 504));
+  window2 = Spawn("script_model", (-1878, 0, 504));
   if(isDefined(window2)) {
     window2.angles = (0, 0, 0);
-    window2 setModel("p_rus_window_dark01");
+    window2 SetModel("p_rus_window_dark01");
   }
-  pole1 = spawn("script_model", (-114.081, 1821.35, -10));
+  pole1 = Spawn("script_model", (-114.081, 1821.35, -10));
   if(isDefined(pole1)) {
     pole1.angles = (0, 15.2, 0);
-    pole1 setModel("p_rus_electricpole");
+    pole1 SetModel("p_rus_electricpole");
   }
   level thread runTrain();
 }
@@ -48,12 +48,13 @@ runTrain() {
   originalRation = (moveTime / 80);
   maxWaitBetweenTrains = getDvarIntDefault(#"scr_maxWaitBetweenTrains", 200);
   trainTime = (moveTime + (numOfCarts * 4 * originalRation));
-  for(;;) {
+  for (;;) {
     waitBetweenTrains = randomint(maxWaitBetweenTrains);
-    if(waitBetweenTrains > 0) {
+    if(waitBetweenTrains > 0)
       wait(waitBetweenTrains);
-    }
     level clientNotify("play_train");
     wait(trainTime);
   }
 }
+
+

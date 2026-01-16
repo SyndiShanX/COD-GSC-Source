@@ -96,11 +96,10 @@ intruder_perk() {
 }
 
 mason_hill_chicken_setup() {
-  a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
+  a_e_chickens = getentarray("mason_hill_chicken", "script_noteworthy");
 
-  foreach(chicken in a_e_chickens) {
-    chicken thread chicken_anim_loop();
-  }
+  foreach(chicken in a_e_chickens)
+  chicken thread chicken_anim_loop();
 }
 
 mason_hill_setup() {
@@ -112,11 +111,10 @@ mason_hill_setup() {
     add_global_spawn_function("axis", ::make_it_easy);
   }
 
-  a_sp_shotgunners = getEntArray("masonhill_cartel_shotgunners", "script_noteworthy");
+  a_sp_shotgunners = getentarray("masonhill_cartel_shotgunners", "script_noteworthy");
 
-  foreach(spawner in a_sp_shotgunners) {
-    spawner add_spawn_function(::make_ai_aggressive);
-  }
+  foreach(spawner in a_sp_shotgunners)
+  spawner add_spawn_function(::make_ai_aggressive);
 
   e_trigger = getent("mason_river_trigger", "targetname");
   level.mason_hill_river_trigger = e_trigger;
@@ -137,13 +135,11 @@ make_it_easy() {
 }
 
 thin_out_for_recruit() {
-  if(!isDefined(level.__thin_out_for_recruit_kill_count)) {
+  if(!isDefined(level.__thin_out_for_recruit_kill_count))
     level.__thin_out_for_recruit_kill_count = 0;
-  }
 
-  if(!isDefined(level.__thin_out_for_recruit_spawn_count)) {
+  if(!isDefined(level.__thin_out_for_recruit_spawn_count))
     level.__thin_out_for_recruit_spawn_count = 0;
-  }
 
   level.__thin_out_for_recruit_spawn_count++;
 
@@ -190,18 +186,16 @@ river_corpse_manager() {
     a_corpses = getcorpsearray();
 
     foreach(corpse in a_corpses) {
-      if(corpse istouching(level.mason_hill_river_trigger)) {
+      if(corpse istouching(level.mason_hill_river_trigger))
         a_river_corpses[a_river_corpses.size] = corpse;
-      }
     }
 
     if(a_river_corpses.size > 3) {
       n_corpses_to_delete = a_river_corpses.size - 3;
       a_river_corpses = arraysort(a_river_corpses, self.origin, 0);
 
-      for(i = 0; i < n_corpses_to_delete; i++) {
+      for(i = 0; i < n_corpses_to_delete; i++)
         a_river_corpses[i] thread corpse_sink_and_delete(0.9, 0.5);
-      }
     }
 
     wait 1.0;
@@ -213,26 +207,22 @@ delete_river_corpses() {
   a_corpses = getcorpsearray();
 
   foreach(corpse in a_corpses) {
-    if(corpse istouching(level.mason_hill_river_trigger)) {
+    if(corpse istouching(level.mason_hill_river_trigger))
       a_river_corpses[a_river_corpses.size] = corpse;
-    }
   }
 
-  for(i = 0; i < a_river_corpses.size; i++) {
+  for(i = 0; i < a_river_corpses.size; i++)
     a_river_corpses[i] thread corpse_sink_and_delete(0.9, 0.5);
-  }
 }
 
 corpse_sink_and_delete(n_buoyancy, n_time) {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self scalebuoyancy(n_buoyancy);
-  }
 
   wait(n_time);
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 mason_hill_first_wave() {
@@ -280,9 +270,8 @@ kill_mason_intro_pdf() {
   flag_wait("cartel_begin_using_mg");
   a_ai_pdf = get_ai_group_ai("mason_intro_pdf");
 
-  foreach(guy in a_ai_pdf) {
-    guy thread timebomb(5.0, 10.0);
-  }
+  foreach(guy in a_ai_pdf)
+  guy thread timebomb(5.0, 10.0);
 
   e_target = getent("mason_intro_pdf_snipers_target", "targetname");
   add_cleanup_ent("mason_hill_cleanup", e_target);
@@ -380,7 +369,7 @@ setup_mason_hill_initial_mg_gunners() {
   trigger_wait("mason_hill_start_trigger");
   wait 0.1;
   level notify("initial_cartel_spawned");
-  a_ai_initial_cartel = getEntArray("mason_hill_initial_cartel_soldiers_ai", "targetname");
+  a_ai_initial_cartel = getentarray("mason_hill_initial_cartel_soldiers_ai", "targetname");
   a_ai_gunners = [];
 
   foreach(guy in a_ai_initial_cartel) {
@@ -485,11 +474,10 @@ wait_then_kill_civilian_executioner() {
 }
 
 mason_hill_spawn_molotov_toss_guy() {
-  a_t_hurtriggers = getEntArray("mason_hill_firebuilding1_hurttrigger", "targetname");
+  a_t_hurtriggers = getentarray("mason_hill_firebuilding1_hurttrigger", "targetname");
 
-  foreach(trig in a_t_hurtriggers) {
-    trig trigger_off();
-  }
+  foreach(trig in a_t_hurtriggers)
+  trig trigger_off();
 
   ai_molotov_guy = simple_spawn_single("mason_hill_pdf_molotov_guy");
   wait 0.1;
@@ -515,9 +503,8 @@ mason_hill_initial_molotov_toss(a_t_hurtriggers) {
   self reset_movemode();
   level thread mason_hill_initial_building_fire();
 
-  foreach(trig in a_t_hurtriggers) {
-    trig trigger_on();
-  }
+  foreach(trig in a_t_hurtriggers)
+  trig trigger_on();
 
   self set_ignoreall(0);
   self set_ignoreme(0);
@@ -559,13 +546,13 @@ mason_hill_initial_building_fire() {
         continue;
       }
 
-      if(n_firerunners == 0) {
+      if(n_firerunners == 0)
         guy thread mason_hill_wave1_fire_window();
-      } else if(n_firerunners == 1) {
+      else if(n_firerunners == 1)
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner2");
-      } else if(n_firerunners == 2) {
+      else if(n_firerunners == 2)
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner3");
-      } else {
+      else {
         wait(randomfloatrange(1.5, 3));
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner1");
       }
@@ -598,15 +585,13 @@ mason_hill_wave1_fire_window() {
 }
 
 turn_nodes_off_inside_burning_house(a_enemies) {
-  if(isDefined(a_enemies) && a_enemies.size > 0) {
+  if(isDefined(a_enemies) && a_enemies.size > 0)
     waittill_dead(a_enemies);
-  }
 
   a_nd_building = getnodearray("mason_hill_initial_burning_building_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_building) {
-    setenablenode(node, 0);
-  }
+  foreach(node in a_nd_building)
+  setenablenode(node, 0);
 }
 
 mason_hill_wave1_enemy_on_fire(str_node) {
@@ -657,9 +642,8 @@ mason_hill_civilian_executions() {
 }
 
 shoot_at_civilian_group(a_civilians, nd_goal) {
-  if(!isDefined(nd_goal)) {
+  if(!isDefined(nd_goal))
     nd_goal = undefined;
-  }
 
   self endon("death");
   self endon("civ_shoot_at_timeout");
@@ -679,9 +663,9 @@ shoot_at_civilian_group(a_civilians, nd_goal) {
   self thread civ_shoot_at_timeout();
 
   while(a_civilians.size > 0) {
-    if(a_civilians.size == 1) {
+    if(a_civilians.size == 1)
       ai_target = a_civilians[0];
-    } else {
+    else {
       a_ai_sorted = arraysort(a_civilians, self.origin);
       ai_target = a_ai_sorted[0];
     }
@@ -693,9 +677,8 @@ shoot_at_civilian_group(a_civilians, nd_goal) {
 
     self setentitytarget(ai_target);
 
-    if(isalive(ai_target)) {
+    if(isalive(ai_target))
       ai_target waittill("death");
-    }
 
     a_civilians = array_removedead(a_civilians);
   }
@@ -731,9 +714,9 @@ mason_hill_kill_civs_with_magicbullets(a_civilians) {
   a_civilians = array_removedead(a_civilians);
 
   while(a_civilians.size > 0) {
-    if(a_civilians.size == 1) {
+    if(a_civilians.size == 1)
       ai_target = a_civilians[0];
-    } else {
+    else {
       a_ai_sorted = arraysort(a_civilians, self.origin);
       ai_target = a_ai_sorted[0];
     }
@@ -743,11 +726,10 @@ mason_hill_kill_civs_with_magicbullets(a_civilians) {
         break;
       }
 
-      if(cointoss() > 50) {
+      if(cointoss() > 50)
         v_start = self.origin + (36, 0, 64);
-      } else {
+      else
         v_start = self.origin + (-36, 0, 64);
-      }
 
       v_end = ai_target gettagorigin("J_SpineLower");
       magicbullet("saw_bipod_stand", v_start, v_end);
@@ -771,9 +753,8 @@ mason_hill_wave1_start_cleanup() {
   ai_cartel = get_ai_group_ai("mason_hill_cartel_wave1_start");
 
   foreach(guy in ai_cartel) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy bloody_death();
-    }
 
     wait(randomfloatrange(0.1, 0.5));
   }
@@ -801,9 +782,8 @@ mason_hill_wave1_mid_cleanup() {
   ai_cartel = get_ai_group_ai("mason_hill_cartel_wave1_mid");
 
   foreach(guy in ai_cartel) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy bloody_death();
-    }
 
     wait(randomfloatrange(0.1, 0.5));
   }
@@ -835,11 +815,10 @@ mason_hill_second_wave() {
 
 red_barrel_porch() {
   level thread red_barrel_porch_failsafe();
-  a_destructibles = getEntArray("mason_hill_porch_fxanim", "script_noteworthy");
+  a_destructibles = getentarray("mason_hill_porch_fxanim", "script_noteworthy");
 
-  foreach(barrel in a_destructibles) {
-    barrel thread barrel_destroy_think();
-  }
+  foreach(barrel in a_destructibles)
+  barrel thread barrel_destroy_think();
 
   flag_wait("red_barrel_porch_triggered");
   level notify("fxanim_porch_explode_start");
@@ -847,9 +826,8 @@ red_barrel_porch() {
   level.player thread rumble_loop(4, 0.05, "artillery_rumble");
   a_nd_pathnodes = getnodearray("mason_hill_porch_house_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_pathnodes) {
-    setenablenode(node, 0);
-  }
+  foreach(node in a_nd_pathnodes)
+  setenablenode(node, 0);
 
   s_target = getstruct("porch_struct", "targetname");
   a_ai_cartel = getaiarray("axis");
@@ -872,16 +850,14 @@ red_barrel_porch() {
 
   foreach(guy in a_ai_cartel) {
     if(isalive(guy)) {
-      if(isDefined(guy.script_goalvolume) && guy.script_goalvolume == "mason_hill_wave2_porchhouse_goalvolume") {
+      if(isDefined(guy.script_goalvolume) && guy.script_goalvolume == "mason_hill_wave2_porchhouse_goalvolume")
         guy setgoalvolumeauto(e_goalvolume);
-      }
     }
   }
 
   foreach(barrel in a_destructibles) {
-    if(isDefined(barrel)) {
+    if(isDefined(barrel))
       radiusdamage(barrel.origin, 64, 100, 100);
-    }
   }
 }
 
@@ -895,12 +871,11 @@ red_barrel_porch_failsafe() {
   trigger_wait("mason_hill_porch_fxanim_failsafe");
   s_origin = get_struct("masonhill_wave2_redbarrelporch_fx", "targetname");
   s_origin maps\_mortar::explosion_boom("mason_hill_porchhouse_mortar", 0.5, undefined, undefined, 1);
-  a_destructibles = getEntArray("mason_hill_porch_fxanim", "script_noteworthy");
+  a_destructibles = getentarray("mason_hill_porch_fxanim", "script_noteworthy");
 
   foreach(barrel in a_destructibles) {
-    if(isDefined(barrel)) {
+    if(isDefined(barrel))
       radiusdamage(barrel.origin, 64, 100, 100);
-    }
   }
 }
 
@@ -910,9 +885,8 @@ mason_hill_wave2_start() {
   e_goalvolume = getent("mason_hill_wave2_lowerhouse_goalvolume", "targetname");
   a_ai_cartel = get_ai_array("masonhill_wave1_uproad_guys", "script_noteworthy");
 
-  foreach(guy in a_ai_cartel) {
-    guy thread wave1_uproad_cartel_retreat(e_goalvolume);
-  }
+  foreach(guy in a_ai_cartel)
+  guy thread wave1_uproad_cartel_retreat(e_goalvolume);
 
   lower_house_gunner();
   spawn_manager_enable("mason_hill_wave2_start_lower_house_sm");
@@ -985,9 +959,8 @@ move_upper_path_cartel_into_house() {
   e_goalvolume = getent("masonhill_wave2_upperhouse_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy setgoalvolumeauto(e_goalvolume);
-    }
   }
 }
 
@@ -1032,9 +1005,8 @@ kill_upper_house_enemies() {
   a_ai_enemies = getaiarray("axis");
   a_ai_enemies = get_within_range(s_struct.origin, a_ai_enemies, 512);
 
-  foreach(guy in a_ai_enemies) {
-    guy thread timebomb(0.1, 5.0);
-  }
+  foreach(guy in a_ai_enemies)
+  guy thread timebomb(0.1, 5.0);
 }
 
 wave2_rock_guys() {
@@ -1045,18 +1017,16 @@ wave2_rock_guys() {
   a_ai_enemies = get_ai_array("mason_hill_wave2_rock_guys", "script_noteworthy");
 
   if(a_ai_enemies.size > 0) {
-    foreach(guy in a_ai_enemies) {
-      guy.deathfunction = ::wave2_rockguy_dies;
-    }
+    foreach(guy in a_ai_enemies)
+    guy.deathfunction = ::wave2_rockguy_dies;
   }
 
   e_goalvolume = getent("masonhill_wave2_upperhouse_goalvolume", "targetname");
   flag_wait("wave2_rockguy_dead");
 
   foreach(guy in a_ai_enemies) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy setgoalvolumeauto(e_goalvolume);
-    }
   }
 }
 
@@ -1071,17 +1041,15 @@ mason_hill_pdf_reinforcements() {
   level notify("mason_hill_wave2_pdf_reinforcements");
   a_ai_pdf = getmasonallies();
 
-  if(a_ai_pdf.size > 3) {
+  if(a_ai_pdf.size > 3)
     waittill_dead_or_dying(a_ai_pdf, a_ai_pdf.size - 3);
-  }
 
   spawn_manager_enable("mason_hill_wave2_pdf_spawn_manager_GREEN");
   spawn_manager_enable("mason_hill_wave2_pdf_spawn_manager_YELLOW");
   a_ai_pdf = array_removedead(a_ai_pdf);
 
-  foreach(guy in a_ai_pdf) {
-    guy thread timebomb(3.0, 7.5);
-  }
+  foreach(guy in a_ai_pdf)
+  guy thread timebomb(3.0, 7.5);
 }
 
 mason_hill_wave2_early_enemies_dieoff() {
@@ -1089,9 +1057,8 @@ mason_hill_wave2_early_enemies_dieoff() {
   trigger_wait("mason_hill_wave2_early_enemies_dieoff");
   a_ai_cartel = get_ai_group_ai("mason_hill_wave2_lower_house");
 
-  foreach(guy in a_ai_cartel) {
-    guy thread timebomb(1.0, 5.0);
-  }
+  foreach(guy in a_ai_cartel)
+  guy thread timebomb(1.0, 5.0);
 }
 
 player_approaches_porch_house() {
@@ -1134,18 +1101,16 @@ wave2_molotov_instant_trigger() {
   mason_hill_second_building_fire();
   ai_molotov = get_ai("mason_hill_wave2_molotov_guy", "script_noteworthy");
 
-  if(isalive(ai_molotov)) {
+  if(isalive(ai_molotov))
     ai_molotov bloody_death();
-  }
 }
 
 spawn_last_house_enemies() {
   level endon("nicaragua_mason_hill_complete");
   trigger_wait("mason_hill_wave2_lasthill");
 
-  if(!flag("wave2_molotov_house_destroyed")) {
+  if(!flag("wave2_molotov_house_destroyed"))
     simple_spawn("mason_hill_wave2_lasthouse");
-  }
 }
 
 mason_hill_wave2_molotov_toss(s_target) {
@@ -1192,9 +1157,8 @@ check_if_second_building_hit_by_molotov() {
 
       n_ammo = level.player getammocount("molotov_dpad_sp");
 
-      if(n_ammo <= 0) {
+      if(n_ammo <= 0)
         return;
-      }
     }
   }
 }
@@ -1211,9 +1175,8 @@ mason_hill_second_building_fire() {
   level.player thread rumble_loop(4, 0.05, "explosion_generic");
   a_ai_cartel = get_ai_group_ai("mason_hill_wave2_molotov_house_cartel");
 
-  foreach(guy in a_ai_cartel) {
-    guy mason_hill_wave2_enemy_on_fire();
-  }
+  foreach(guy in a_ai_cartel)
+  guy mason_hill_wave2_enemy_on_fire();
 
   s_explosion = get_struct("mason_hill_second_molotov_building_explosion", "targetname");
   physicsexplosioncylinder(s_explosion.origin, 448, 1, 4);
@@ -1269,9 +1232,8 @@ mason_hill_cleanup() {
   a_ai_pdf = get_ai_group_ai("mason_wave2_pdf");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(1.0, 10.0);
-    }
   }
 
   a_ai_enemies = getaiarray("axis");
@@ -1279,11 +1241,10 @@ mason_hill_cleanup() {
   if(a_ai_enemies.size > 0) {
     foreach(guy in a_ai_enemies) {
       if(isalive(guy)) {
-        if(isDefined(guy.script_aigroup) && issubstr(guy.script_aigroup, "mason_truck")) {
+        if(isDefined(guy.script_aigroup) && issubstr(guy.script_aigroup, "mason_truck"))
           continue;
-        } else {
+        else
           guy thread timebomb(0.1, 3.0);
-        }
       }
     }
   }
@@ -1307,17 +1268,15 @@ mason_hill_cleanup() {
   spawn_manager_disable("mason_hill_wave2_player_in_porch_house");
   e_upper_house_spawner = getent("mason_hill_wave2_start_upper_house", "targetname");
 
-  if(isDefined(e_upper_house_spawner) && isDefined(e_upper_house_spawner.script_killspawner)) {
+  if(isDefined(e_upper_house_spawner) && isDefined(e_upper_house_spawner.script_killspawner))
     e_upper_house_spawner.script_killspawner = undefined;
-  }
 
   kill_spawnernum(11);
   cleanup_ents("mason_hill_cleanup");
-  a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
+  a_e_chickens = getentarray("mason_hill_chicken", "script_noteworthy");
 
-  foreach(chicken in a_e_chickens) {
-    chicken chicken_cleanup();
-  }
+  foreach(chicken in a_e_chickens)
+  chicken chicken_cleanup();
 }
 
 mason_hill_stop_exploders() {
@@ -1329,15 +1288,13 @@ mason_hill_stop_exploders() {
 fake_grenade_toss(str_targetname, v_start, v_end) {
   assert(isDefined(str_targetname) || (isDefined(v_start) || isDefined(v_end)), "either str_targetname or v_start and v_end are required for molotov_throw function");
 
-  if(isDefined(str_targetname)) {
+  if(isDefined(str_targetname))
     s_start = get_struct(str_targetname, "targetname", 1);
-  }
 
-  if(!isDefined(v_start) && isDefined(s_start)) {
+  if(!isDefined(v_start) && isDefined(s_start))
     v_start = s_start.origin;
-  } else if(!isDefined(v_start) && !isDefined(s_start)) {
+  else if(!isDefined(v_start) && !isDefined(s_start))
     v_start = self.origin;
-  }
 
   if(!isDefined(v_end)) {
     s_end = get_struct(s_start.target, "targetname", 1);
@@ -1355,11 +1312,11 @@ fake_grenade_toss(str_targetname, v_start, v_end) {
 }
 
 mason_hill_guy_on_fire_fx() {
-  playFXOnTag(getfx("fire_ai_torso"), self, "J_Spine4");
-  playFXOnTag(getfx("fire_ai_leg_left"), self, "J_Hip_LE");
-  playFXOnTag(getfx("fire_ai_leg_right"), self, "J_Hip_RI");
-  playFXOnTag(getfx("fire_ai_arm_left"), self, "J_Elbow_LE");
-  playFXOnTag(getfx("fire_ai_arm_right"), self, "J_Elbow_RI");
+  playfxontag(getfx("fire_ai_torso"), self, "J_Spine4");
+  playfxontag(getfx("fire_ai_leg_left"), self, "J_Hip_LE");
+  playfxontag(getfx("fire_ai_leg_right"), self, "J_Hip_RI");
+  playfxontag(getfx("fire_ai_arm_left"), self, "J_Elbow_LE");
+  playfxontag(getfx("fire_ai_arm_right"), self, "J_Elbow_RI");
 }
 
 mason_intro_mortars() {

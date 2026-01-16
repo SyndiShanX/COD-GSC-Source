@@ -137,9 +137,8 @@ sfx_gas_line_fuel_leak(var_0) {
       }
     }
 
-    if(var_1 == 1) {
+    if(var_1 == 1)
       var_0 playSound("scn_loki_gas_line_fuel_leak");
-    }
 
     wait 0.5;
     common_scripts\utility::flag_clear("fuel_line_bullet_gate");
@@ -171,18 +170,16 @@ sfx_gas_line_fire_lp(var_0, var_1) {
 
         thread sfx_gas_line_stop_fire(var_5);
 
-        if(var_3 == 0) {
+        if(var_3 == 0)
           var_2 = 1;
-        }
       }
     }
 
     if(var_2 == 1) {
       var_0 playLoopSound("scn_loki_gas_line_fire_lp");
 
-      if(var_1) {
+      if(var_1)
         thread sfx_gas_line_cull_fire(var_0);
-      }
     }
   }
 }
@@ -207,9 +204,8 @@ sfx_gas_line_cull_fire(var_0) {
 sfx_gas_line_stop_fire(var_0) {
   wait 0.6;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 stoploopsound("scn_loki_gas_line_fire_lp");
-  }
 }
 
 sfx_gas_line_stop_sfx(var_0) {
@@ -293,9 +289,8 @@ sfx_space_breach_over() {
 }
 
 sfx_laptop_offline_lp() {
-  if(!isDefined(level.sfx_laptop)) {
+  if(!isDefined(level.sfx_laptop))
     level.sfx_laptop = spawn("script_origin", (-31594, -9018, 21801));
-  }
 
   level.sfx_laptop playLoopSound("scn_loki_laptop_offline_lp");
 }
@@ -325,9 +320,8 @@ sfx_laptop_connecting() {
 }
 
 sfx_laptop_static() {
-  if(!isDefined(level.sfx_laptop_static)) {
+  if(!isDefined(level.sfx_laptop_static))
     level.sfx_laptop_static = spawn("script_origin", (-96615, 90824, 92968));
-  }
 
   level.sfx_laptop_static playSound("scn_loki_laptop_static");
 }
@@ -569,9 +563,8 @@ sfx_jet_passby_09() {
 sfx_jet_passby_09b() {
   wait 6.5;
 
-  if(level.jet_passby_09b.destroyed == 0) {
+  if(level.jet_passby_09b.destroyed == 0)
     level.jet_passby_09b playSound("scn_loki_jet_passby_dist_04", "sounddone");
-  }
 
   level.jet_passby_09b waittill("sounddone");
   level.jet_passby_09b delete();
@@ -590,13 +583,11 @@ sfx_jet_passby_10() {
 }
 
 sfx_jet_passby_11() {
-  if(level.jet_passby_11.destroyed == 0) {
+  if(level.jet_passby_11.destroyed == 0)
     level.jet_passby_11 playSound("scn_loki_jet_passby_med_01", "sounddone");
-  }
 
-  if(level.jet_passby_12.destroyed == 0) {
+  if(level.jet_passby_12.destroyed == 0)
     level.jet_passby_12 playSound("scn_loki_jet_passby_med_02", "sounddone");
-  }
 
   wait 1;
   level.jet_passby_11 moveto((31102, 7344, -106177), 2);
@@ -617,9 +608,8 @@ sfx_jet_passby_11() {
   level.jet_passby_15 moveto((27424, 18213, -111537), 3);
   wait 0.5;
 
-  if(level.jet_passby_15.destroyed == 0) {
+  if(level.jet_passby_15.destroyed == 0)
     level.jet_passby_15 playSound("scn_loki_jet_passby_close_04", "sounddone");
-  }
 
   level.jet_passby_11 waittill("sounddone");
   level.jet_passby_11 delete();
@@ -673,9 +663,8 @@ sfx_ending_bink() {
   thread sfx_laptop_static_02();
   wait 0.2;
 
-  if(!isDefined(level.sfx_laptop)) {
+  if(!isDefined(level.sfx_laptop))
     level.sfx_laptop = spawn("script_origin", (-31594, -9018, 21801));
-  }
 
   level.sfx_laptop playSound("scn_loki_laptop_coord");
   wait 2;
@@ -688,21 +677,18 @@ sfx_ending_bink() {
 }
 
 sfx_laptop_static_02() {
-  if(isDefined(level.sfx_laptop_static)) {
+  if(isDefined(level.sfx_laptop_static))
     level.sfx_laptop_static delete();
-  }
 
-  if(!isDefined(level.sfx_laptop_static_02)) {
+  if(!isDefined(level.sfx_laptop_static_02))
     level.sfx_laptop_static_02 = spawn("script_origin", (-31594, -9018, 21800));
-  }
 
   level.sfx_laptop_static_02 playSound("scn_loki_laptop_static_02");
 }
 
 sfx_laptop_ending_fail() {
-  if(!isDefined(level.sfx_laptop_static_02)) {
+  if(!isDefined(level.sfx_laptop_static_02))
     level.sfx_laptop_static_02 = spawn("script_origin", (-31594, -9018, 21800));
-  }
 
   level.sfx_laptop stoploopsound("scn_loki_laptop_target_lp");
   level.sfx_laptop_static_02 playSound("scn_loki_laptop_fail_static", "sounddone");
@@ -784,13 +770,11 @@ play_sound_on_cover_piece(var_0, var_1) {
 play_sound_on_moving_cover_object(var_0, var_1) {
   common_scripts\utility::flag_wait("moving_cover_started");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     wait(var_1);
-  }
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self playSound(var_0);
-  }
 }
 
 sfx_moving_cover_2() {

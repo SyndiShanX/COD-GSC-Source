@@ -52,11 +52,10 @@ init() {
 sq_easy_cleanup() {
   computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
-  sq_buildables = getEntArray("buildable_sq_common", "targetname");
+  sq_buildables = getentarray("buildable_sq_common", "targetname");
 
-  foreach(item in sq_buildables) {
-    item delete();
-  }
+  foreach(item in sq_buildables)
+  item delete();
 }
 
 init_player_sidequest_stats() {
@@ -104,24 +103,21 @@ sidequest_logic() {
   level thread sidequest_main();
   wait_for_buildable("sq_common");
 
-  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned)) {
+  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned))
     update_sidequest_stats("sq_transit_started");
-  }
 
   level thread navcomputer_waitfor_navcard();
 
-  if(flag("power_on")) {
+  if(flag("power_on"))
     level thread richtofensay("vox_zmba_sidequest_jet_terminal_0");
-  }
 
   hint_said = 0;
 
   while(!hint_said) {
     level waittill("maxi_terminal_vox");
 
-    if(flag("power_on")) {
+    if(flag("power_on"))
       hint_said = 1;
-    }
 
     wait 0.05;
   }
@@ -129,7 +125,8 @@ sidequest_logic() {
   maxissay("vox_maxi_turbine_terminal_0", (11360, 8489, -576));
 }
 
-complete_sidequest() {}
+complete_sidequest() {
+}
 
 sidequest_main() {
   sidequest_init_tracker();
@@ -147,9 +144,8 @@ sidequest_main() {
       continue;
     }
 
-    if(lastcompleted == 2) {
+    if(lastcompleted == 2)
       level.maxcompleted = 1;
-    }
   }
 
   if(level.richcompleted) {
@@ -171,9 +167,8 @@ sidequest_main() {
     level thread maxis_sidequest();
     flag_wait("power_on");
 
-    if(!(isDefined(level.maxcompleted) && level.maxcompleted)) {
+    if(!(isDefined(level.maxcompleted) && level.maxcompleted))
       update_sidequest_stats("sq_transit_maxis_reset");
-    }
 
     if(!(isDefined(level.maxis_sq_intro_said) && level.maxis_sq_intro_said) && !(isDefined(level.maxcompleted) && level.maxcompleted)) {
       wait 2;
@@ -184,9 +179,8 @@ sidequest_main() {
     level thread richtofen_sidequest();
     flag_waitopen("power_on");
 
-    if(!(isDefined(level.richcompleted) && level.richcompleted)) {
+    if(!(isDefined(level.richcompleted) && level.richcompleted))
       update_sidequest_stats("sq_transit_rich_reset");
-    }
   }
 }
 
@@ -214,9 +208,8 @@ sidequest_init_tracker() {
   level.sq_progress["rich"]["C_complete"] = 0;
   level.sq_progress["rich"]["FINISHED"] = 0;
 
-  if(getdvarint(#"_id_113D490F") > 0) {
+  if(getdvarint(#"_id_113D490F") > 0)
     level thread sidequest_debug_tracker();
-  }
 }
 
 sidequest_debug_tracker() {
@@ -248,14 +241,13 @@ sidequest_debug_tracker_update(mainkey, subkey) {
     value = level.sq_progress[mainkey][subkey];
     str = mainkey + " -- " + subkey + ": ";
 
-    if(isDefined(value) && !isint(value) && isDefined(value.classname)) {
+    if(isDefined(value) && !isint(value) && isDefined(value.classname))
       self settext(str + "[X]");
-    } else if(isDefined(value)) {
-      if(!isint(value) && !isDefined(value.classname) && isDefined(value.targetname) && value.targetname == "screecher_escape") {
+    else if(isDefined(value)) {
+      if(!isint(value) && !isDefined(value.classname) && isDefined(value.targetname) && value.targetname == "screecher_escape")
         self settext(str + "[X]");
-      } else {
+      else
         self settext(str + value);
-      }
     } else
       self settext(str + "0");
 
@@ -294,9 +286,9 @@ turbine_power_watcher(player) {
   while(isDefined(self)) {
     wait 2;
 
-    if(is_true(player.turbine_power_is_on) && !is_true(player.turbine_emped)) {
+    if(is_true(player.turbine_power_is_on) && !is_true(player.turbine_emped))
       self.powered = 1;
-    } else if(is_true(player.turbine_emped) || !is_true(player.turbine_power_is_on)) {
+    else if(is_true(player.turbine_emped) || !is_true(player.turbine_power_is_on)) {
       wait 2;
       self.powered = 0;
 
@@ -313,9 +305,8 @@ maxis_sidequest_a() {
   level.sq_progress["maxis"]["A_turbine_1"] = undefined;
   level.sq_progress["maxis"]["A_turbine_2"] = undefined;
 
-  if(!(isDefined(level.sq_progress["maxis"]["B_complete"]) && level.sq_progress["maxis"]["B_complete"])) {
+  if(!(isDefined(level.sq_progress["maxis"]["B_complete"]) && level.sq_progress["maxis"]["B_complete"]))
     level.sq_progress["maxis"]["A_complete"] = 0;
-  }
 
   while(true) {
     players = get_players();
@@ -338,16 +329,14 @@ maxis_sidequest_a() {
       }
     }
 
-    if(get_how_many_progressed_from("maxis", "A_turbine_1", "A_turbine_2") == 1) {
+    if(get_how_many_progressed_from("maxis", "A_turbine_1", "A_turbine_2") == 1)
       level thread maxissay("vox_maxi_turbine_1tower_0", (7737, -416, -142));
-    }
 
     if(get_how_many_progressed_from("maxis", "A_turbine_1", "A_turbine_2") == 2) {
-      if(avogadro_at_tower()) {
+      if(avogadro_at_tower())
         level thread maxissay("vox_maxi_turbine_2tower_avo_0", (7737, -416, -142));
-      } else {
+      else
         level thread maxissay("vox_maxi_turbine_2tower_0", (7737, -416, -142));
-      }
 
       update_sidequest_stats("sq_transit_maxis_stage_2");
       level thread maxis_sidequest_complete_check("A_complete");
@@ -355,11 +344,10 @@ maxis_sidequest_a() {
 
     level waittill_either("turbine_deployed", "equip_turbine_zm_cleaned_up");
 
-    if(!level.sq_progress["maxis"]["B_complete"]) {
+    if(!level.sq_progress["maxis"]["B_complete"])
       level.sq_progress["maxis"]["A_complete"] = 0;
-    } else {
+    else
       break;
-    }
   }
 }
 
@@ -400,13 +388,11 @@ maxis_sidequest_c() {
   screech_zones = getstructarray("screecher_escape", "targetname");
 
   while(true) {
-    if(!isDefined(level.sq_progress["maxis"]["C_turbine_1"])) {
+    if(!isDefined(level.sq_progress["maxis"]["C_turbine_1"]))
       level.sq_progress["maxis"]["C_screecher_1"] = undefined;
-    }
 
-    if(!isDefined(level.sq_progress["maxis"]["C_turbine_2"])) {
+    if(!isDefined(level.sq_progress["maxis"]["C_turbine_2"]))
       level.sq_progress["maxis"]["C_screecher_2"] = undefined;
-    }
 
     players = get_players();
 
@@ -441,11 +427,10 @@ maxis_sidequest_c() {
     if(get_how_many_progressed_from("maxis", "C_turbine_1", "C_turbine_2") == 1) {
       zone = undefined;
 
-      if(isDefined(level.sq_progress["maxis"]["C_turbine_1"])) {
+      if(isDefined(level.sq_progress["maxis"]["C_turbine_1"]))
         zone = level.sq_progress["maxis"]["C_screecher_1"];
-      } else {
+      else
         zone = level.sq_progress["maxis"]["C_screecher_2"];
-      }
 
       if(isDefined(zone) && !turbine_1_talked) {
         turbine_1_talked = 1;
@@ -456,11 +441,10 @@ maxis_sidequest_c() {
     if(get_how_many_progressed_from("maxis", "C_turbine_1", "C_turbine_2") == 2) {
       zone = undefined;
 
-      if(isDefined(level.sq_progress["maxis"]["C_turbine_1"])) {
+      if(isDefined(level.sq_progress["maxis"]["C_turbine_1"]))
         zone = level.sq_progress["maxis"]["C_screecher_1"];
-      } else {
+      else
         zone = level.sq_progress["maxis"]["C_screecher_2"];
-      }
 
       if(isDefined(zone)) {
         if(level.sq_progress["maxis"]["B_complete"] && level.sq_progress["maxis"]["A_complete"]) {
@@ -486,22 +470,19 @@ maxis_sidequest_c() {
 maxis_sidequest_complete_check(nowcomplete) {
   level.sq_progress["maxis"][nowcomplete] = 1;
 
-  if(level.sq_progress["maxis"]["A_complete"] && level.sq_progress["maxis"]["B_complete"] && level.sq_progress["maxis"]["C_complete"]) {
+  if(level.sq_progress["maxis"]["A_complete"] && level.sq_progress["maxis"]["B_complete"] && level.sq_progress["maxis"]["C_complete"])
     level maxis_sidequest_complete();
-  }
 }
 
 maxis_sidequest_complete() {
   turbinescriptnoteworthy1 = undefined;
   turbinescriptnoteworthy2 = undefined;
 
-  if(isDefined(level.sq_progress["maxis"]["C_screecher_1"]) && isDefined(level.sq_progress["maxis"]["C_screecher_1"].script_noteworthy)) {
+  if(isDefined(level.sq_progress["maxis"]["C_screecher_1"]) && isDefined(level.sq_progress["maxis"]["C_screecher_1"].script_noteworthy))
     turbinescriptnoteworthy1 = level.sq_progress["maxis"]["C_screecher_1"].script_noteworthy;
-  }
 
-  if(isDefined(level.sq_progress["maxis"]["C_screecher_2"]) && isDefined(level.sq_progress["maxis"]["C_screecher_2"].script_noteworthy)) {
+  if(isDefined(level.sq_progress["maxis"]["C_screecher_2"]) && isDefined(level.sq_progress["maxis"]["C_screecher_2"].script_noteworthy))
     turbinescriptnoteworthy2 = level.sq_progress["maxis"]["C_screecher_2"].script_noteworthy;
-  }
 
   update_sidequest_stats("sq_transit_maxis_complete");
   level sidequest_complete("maxis");
@@ -509,9 +490,8 @@ maxis_sidequest_complete() {
   level.maxcompleted = 1;
   clientnotify("sq_kfx");
 
-  if(isDefined(level.richcompleted) && level.richcompleted) {
+  if(isDefined(level.richcompleted) && level.richcompleted)
     level clientnotify("sq_krt");
-  }
 
   wait 1;
   clientnotify("sqm");
@@ -532,9 +512,8 @@ richtofen_sidequest() {
   if(!flag("power_on") || isDefined(level.richcompleted) && level.richcompleted) {
     return;
   }
-  if(!(isDefined(level.richtofen_sq_intro_said) && level.richtofen_sq_intro_said)) {
+  if(!(isDefined(level.richtofen_sq_intro_said) && level.richtofen_sq_intro_said))
     level thread wait_for_richtoffen_intro();
-  }
 
   update_sidequest_stats("sq_transit_rich_stage_1");
   level thread richtofen_sidequest_a();
@@ -567,9 +546,8 @@ richtofen_sidequest_a() {
   ric_fail_out = undefined;
   ric_fail_heat = undefined;
 
-  if(!(isDefined(level.buildables_built["jetgun_zm"]) && level.buildables_built["jetgun_zm"])) {
+  if(!(isDefined(level.buildables_built["jetgun_zm"]) && level.buildables_built["jetgun_zm"]))
     wait_for_buildable("jetgun_zm");
-  }
 
   level.sq_progress["rich"]["A_jetgun_built"] = 1;
 
@@ -608,9 +586,8 @@ richtofen_sidequest_a() {
 }
 
 left_sq_area_watcher(volume) {
-  while(self istouching(volume)) {
+  while(self istouching(volume))
     wait 0.5;
-  }
 
   self notify("left_sg_area");
 }
@@ -630,7 +607,8 @@ richtofen_sidequest_b() {
 
     level.sq_progress["rich"]["B_zombies_tower"]--;
 
-    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {}
+    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {
+    }
   }
 
   level thread richtofensay("vox_zmba_sidequest_blow_nomag_0");
@@ -650,14 +628,12 @@ lure_zombies_to_tower_hint() {
     counter = 0;
 
     foreach(zombie in zombies) {
-      if(distancesquared(zombie.origin, level.sq_volume.origin) < lure_distance) {
+      if(distancesquared(zombie.origin, level.sq_volume.origin) < lure_distance)
         counter++;
-      }
     }
 
-    if(counter >= 5) {
+    if(counter >= 5)
       zombie_train = 1;
-    }
 
     wait 3;
   }
@@ -688,9 +664,8 @@ richtofen_sidequest_c() {
       break;
     }
 
-    if(!(isDefined(level.checking_for_richtofen_c_failure) && level.checking_for_richtofen_c_failure)) {
+    if(!(isDefined(level.checking_for_richtofen_c_failure) && level.checking_for_richtofen_c_failure))
       level thread check_for_richtofen_c_failure();
-    }
   }
 
   level thread richtofensay("vox_zmba_sidequest_4emp_mag_0");
@@ -719,18 +694,16 @@ screecher_light_on_sq() {
     level waittill("safety_light_power_on", screecher_zone);
     arrayremovevalue(level.sq_richtofen_c_screecher_lights, screecher_zone);
 
-    if(level.sq_progress["rich"]["C_screecher_light"] > 0) {
+    if(level.sq_progress["rich"]["C_screecher_light"] > 0)
       level.sq_progress["rich"]["C_screecher_light"]--;
-    }
   }
 }
 
 richtofen_sidequest_complete_check(nowcomplete) {
   level.sq_progress["rich"][nowcomplete] = 1;
 
-  if(level.sq_progress["rich"]["A_complete"] && level.sq_progress["rich"]["B_complete"] && level.sq_progress["rich"]["C_complete"]) {
+  if(level.sq_progress["rich"]["A_complete"] && level.sq_progress["rich"]["B_complete"] && level.sq_progress["rich"]["C_complete"])
     level thread richtofen_sidequest_complete();
-  }
 }
 
 richtofen_sidequest_complete() {
@@ -740,9 +713,8 @@ richtofen_sidequest_complete() {
   level.richcompleted = 1;
   clientnotify("sq_kfx");
 
-  if(isDefined(level.maxcompleted) && level.maxcompleted) {
+  if(isDefined(level.maxcompleted) && level.maxcompleted)
     level clientnotify("sq_kmt");
-  }
 
   wait 1;
   clientnotify("sqr");
@@ -799,11 +771,10 @@ turbine_watch_cleanup() {
 }
 
 get_how_many_progressed_from(story, a, b) {
-  if(isDefined(level.sq_progress[story][a]) && !isDefined(level.sq_progress[story][b]) || !isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b])) {
+  if(isDefined(level.sq_progress[story][a]) && !isDefined(level.sq_progress[story][b]) || !isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b]))
     return 1;
-  } else if(isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b])) {
+  else if(isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b]))
     return 2;
-  }
 
   return 0;
 }
@@ -812,9 +783,8 @@ sq_zombie_death_event_response() {
   if(distancesquared(self.origin, level.sq_volume.origin) < 176400 && isDefined(self.damagemod)) {
     mod = self.damagemod;
 
-    if(mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_EXPLOSIVE" || mod == "MOD_EXPLOSIVE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH") {
+    if(mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_EXPLOSIVE" || mod == "MOD_EXPLOSIVE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH")
       level notify("zombie_died_in_sq_volume");
-    }
   }
 }
 
@@ -823,18 +793,17 @@ update_sidequest_stats(stat_name) {
   rich_complete = 0;
   started = 0;
 
-  if(stat_name == "sq_transit_maxis_complete") {
+  if(stat_name == "sq_transit_maxis_complete")
     maxis_complete = 1;
-  } else if(stat_name == "sq_transit_rich_complete") {
+  else if(stat_name == "sq_transit_rich_complete")
     rich_complete = 1;
-  }
 
   players = get_players();
 
   foreach(player in players) {
-    if(stat_name == "sq_transit_started") {
+    if(stat_name == "sq_transit_started")
       player.transit_sq_started = 1;
-    } else if(stat_name == "navcard_applied_zm_transit") {
+    else if(stat_name == "navcard_applied_zm_transit") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
     } else if(!(isDefined(player.transit_sq_started) && player.transit_sq_started)) {
@@ -851,9 +820,8 @@ update_sidequest_stats(stat_name) {
     player maps\mp\zombies\_zm_stats::increment_client_stat(stat_name, 0);
   }
 
-  if(rich_complete || maxis_complete) {
+  if(rich_complete || maxis_complete)
     level notify("transit_sidequest_achieved");
-  }
 }
 
 richtofensay(vox_line, intro, ignore_power_state, time) {
@@ -868,13 +836,11 @@ richtofensay(vox_line, intro, ignore_power_state, time) {
   }
   level endon("richtofen_c_complete");
 
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 45;
-  }
 
-  while(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel || !(isDefined(level.richtofen_sq_intro_said) && level.richtofen_sq_intro_said)) {
+  while(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel || !(isDefined(level.richtofen_sq_intro_said) && level.richtofen_sq_intro_said))
     wait 1;
-  }
 
   if(isDefined(level.rich_sq_player) && is_player_valid(level.rich_sq_player)) {
     iprintlnbold("Richtoffen Says: " + vox_line);
@@ -884,9 +850,8 @@ richtofensay(vox_line, intro, ignore_power_state, time) {
     }
     level.rich_sq_player playsoundtoplayer(vox_line, level.rich_sq_player);
 
-    if(!(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel)) {
+    if(!(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel))
       level thread richtofen_talking(time);
-    }
   }
 }
 
@@ -896,9 +861,8 @@ richtofen_talking(time) {
   wait(time);
   level.richtofen_talking_to_samuel = 0;
 
-  if(isDefined(level.rich_sq_player)) {
+  if(isDefined(level.rich_sq_player))
     level.rich_sq_player.dontspeak = 0;
-  }
 }
 
 maxissay(line, org, playonent, playonenttag, ignore_power_state) {
@@ -914,19 +878,17 @@ maxissay(line, org, playonent, playonenttag, ignore_power_state) {
   if((flag("power_on") || flag("switches_on")) && !(isDefined(ignore_power_state) && ignore_power_state)) {
     return;
   }
-  while(isDefined(level.maxis_talking) && level.maxis_talking) {
+  while(isDefined(level.maxis_talking) && level.maxis_talking)
     wait 0.05;
-  }
 
   level.maxis_talking = 1;
 
   iprintlnbold("Maxis Says: " + line);
 
-  if(isDefined(playonent)) {
+  if(isDefined(playonent))
     playonent playsoundontag(line, playonenttag);
-  } else {
+  else
     playsoundatposition(line, org);
-  }
 
   wait 10;
   level.maxis_talking = 0;
@@ -940,14 +902,12 @@ wait_for_richtoffen_intro() {
     inzone = 0;
 
     foreach(zone in level.power_station_zones) {
-      if(isDefined(maps\mp\zombies\_zm_zonemgr::player_in_zone(zone)) && maps\mp\zombies\_zm_zonemgr::player_in_zone(zone)) {
+      if(isDefined(maps\mp\zombies\_zm_zonemgr::player_in_zone(zone)) && maps\mp\zombies\_zm_zonemgr::player_in_zone(zone))
         inzone = 1;
-      }
     }
 
-    if(!inzone) {
+    if(!inzone)
       power_occupied = 0;
-    }
 
     wait 0.1;
   }
@@ -979,9 +939,8 @@ survivor_vox() {
           end_time = start_time + 5000;
 
           while(player usebuttonpressed() && distance2dsquared(player.origin, (8000, -6656, 160)) < 1225 && is_player_valid(player)) {
-            if(gettime() > end_time) {
+            if(gettime() > end_time)
               initiated = 1;
-            }
 
             wait 0.05;
           }
@@ -1004,11 +963,10 @@ survivor_vox() {
       if(distance2dsquared(player.origin, (8000, -6656, 160)) < 1225) {
         if(player usebuttonpressed() && is_player_valid(player)) {
           if(flag("power_on")) {
-            if(i == -1 || i > 4) {
+            if(i == -1 || i > 4)
               playsoundatposition("vox_maxi_tv_distress_0", (8000, -6656, 160));
-            } else if(i < 4) {
+            else if(i < 4)
               playsoundatposition(level.survivor_vox[i], (8000, -6656, 160));
-            }
 
             i++;
           }
@@ -1035,9 +993,8 @@ screecher_light_hint() {
   level endon("power_off");
   level endon("richtofen_c_complete");
 
-  while(!level.sq_progress["rich"]["A_jetgun_tower"]) {
+  while(!level.sq_progress["rich"]["A_jetgun_tower"])
     wait 1;
-  }
 
   screech_zones = getstructarray("screecher_escape", "targetname");
   dist = 122500;
@@ -1049,9 +1006,8 @@ screecher_light_hint() {
     foreach(player in players) {
       foreach(zone in screech_zones) {
         if(distancesquared(player.origin, zone.origin) < dist) {
-          if(player maps\mp\zombies\_zm_weapons::has_weapon_or_upgrade("emp_grenade_zm")) {
+          if(player maps\mp\zombies\_zm_weapons::has_weapon_or_upgrade("emp_grenade_zm"))
             count++;
-          }
         }
       }
     }
@@ -1081,9 +1037,8 @@ maxi_near_corn_hint() {
         continue;
       }
 
-      if(isDefined(player.buildableturbine) && (isDefined(player.isonbus) && player.isonbus)) {
+      if(isDefined(player.buildableturbine) && (isDefined(player.isonbus) && player.isonbus))
         say_hint = 1;
-      }
     }
 
     wait 2;
@@ -1107,9 +1062,8 @@ avogadro_far_from_tower() {
       if(!(isDefined(player.isonbus) && player.isonbus)) {
         continue;
       }
-      if(!avogadro_near_tower() && player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_cornfield")) {
+      if(!avogadro_near_tower() && player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_cornfield"))
         say_hint = 1;
-      }
     }
 
     wait 1;
@@ -1119,9 +1073,8 @@ avogadro_far_from_tower() {
 }
 
 avogadro_near_tower() {
-  if(isDefined(level.avogadro) && level.avogadro maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_cornfield")) {
+  if(isDefined(level.avogadro) && level.avogadro maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_cornfield"))
     return true;
-  }
 
   return false;
 }
@@ -1132,9 +1085,8 @@ avogadro_stab_watch() {
   }
   level waittill("avogadro_stabbed", avogadro);
 
-  if(!flag("power_on")) {
+  if(!flag("power_on"))
     level thread maxissay("vox_maxi_avogadro_stab_0", avogadro.origin);
-  }
 }
 
 avogadro_is_near_tower() {
@@ -1146,9 +1098,8 @@ avogadro_is_near_tower() {
   say_hint = 0;
 
   while(!say_hint) {
-    if(avogadro_near_tower()) {
+    if(avogadro_near_tower())
       say_hint = 1;
-    }
 
     wait 1;
   }
@@ -1157,25 +1108,24 @@ avogadro_is_near_tower() {
 }
 
 avogadro_at_tower() {
-  if(isDefined(level.avogadro) && level.avogadro istouching(level.sq_volume)) {
+  if(isDefined(level.avogadro) && level.avogadro istouching(level.sq_volume))
     return true;
-  }
 
   return false;
 }
 
 droppowerup(story) {
   center_struct = getstruct("sq_common_tower_fx", "targetname");
-  trace = bulletTrace(center_struct.origin, center_struct.origin - vectorscale((0, 0, 1), 999999.0), 0, undefined);
+  trace = bullettrace(center_struct.origin, center_struct.origin - vectorscale((0, 0, 1), 999999.0), 0, undefined);
   poweruporigin = trace["position"] + vectorscale((0, 0, 1), 25.0);
   mintime = 240;
   maxtime = 720;
 
   while(true) {
     trail = spawn("script_model", center_struct.origin);
-    trail setModel("tag_origin");
+    trail setmodel("tag_origin");
     wait 0.5;
-    playFXOnTag(level._effect[story + "_sparks"], trail, "tag_origin");
+    playfxontag(level._effect[story + "_sparks"], trail, "tag_origin");
     trail moveto(poweruporigin, 10);
     trail waittill("movedone");
     level thread droppoweruptemptation(story, poweruporigin);
@@ -1221,9 +1171,8 @@ droppoweruptemptation(story, origin) {
 
     temptation_index++;
 
-    if(temptation_index >= temptation_array.size) {
+    if(temptation_index >= temptation_array.size)
       temptation_index = 0;
-    }
   }
 }
 
@@ -1306,7 +1255,7 @@ navcomputer_waitfor_navcard() {
     if(isplayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
-        who playSound("zmb_sq_navcard_success");
+        who playsound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_transit");
         return;
       } else {
@@ -1343,13 +1292,11 @@ sq_refresh_player_navcard_hud() {
     for(i = 0; i < level.navcards.size; i++) {
       hasit = player maps\mp\zombies\_zm_stats::get_global_stat(level.navcards[i]);
 
-      if(isDefined(player.navcard_grabbed) && player.navcard_grabbed == level.navcards[i]) {
+      if(isDefined(player.navcard_grabbed) && player.navcard_grabbed == level.navcards[i])
         hasit = 1;
-      }
 
-      if(hasit) {
+      if(hasit)
         navcard_bits = navcard_bits + (1 << i);
-      }
     }
 
     wait_network_frame();

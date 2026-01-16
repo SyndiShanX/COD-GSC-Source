@@ -14,7 +14,7 @@
 #namespace zm_stalingrad_ambient;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_ambient", &__init__, &__main__, undefined);
+  system::register("zm_stalingrad_ambient", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -34,10 +34,10 @@ function function_46a16b31() {
   var_10752e7a = struct::get_array("ambient_mortar", "targetname");
   foreach(var_b058183b in var_10752e7a) {
     str_location = var_b058183b.script_string;
-    if(!isDefined(level.var_10752e7a[str_location])) {
+    if(!isdefined(level.var_10752e7a[str_location])) {
       level.var_10752e7a[str_location] = [];
     }
-    if(!isDefined(level.var_10752e7a[str_location])) {
+    if(!isdefined(level.var_10752e7a[str_location])) {
       level.var_10752e7a[str_location] = [];
     } else if(!isarray(level.var_10752e7a[str_location])) {
       level.var_10752e7a[str_location] = array(level.var_10752e7a[str_location]);
@@ -45,7 +45,7 @@ function function_46a16b31() {
     level.var_10752e7a[str_location][level.var_10752e7a[str_location].size] = var_b058183b;
   }
   level.var_2b8ea588 = [];
-  for(i = 0; i < 6; i++) {
+  for (i = 0; i < 6; i++) {
     level.var_2b8ea588[i] = util::spawn_model("tag_origin", (0, 0, 0));
     level.var_2b8ea588[i].b_in_use = 0;
   }
@@ -59,14 +59,14 @@ function function_8c898920() {
   level flag::set("ambient_mortar_fire_on");
   function_46a16b31();
   wait(randomfloatrange(20, 30));
-  while(true) {
+  while (true) {
     if(!level flag::get("ambient_mortar_fire_on")) {
       level flag::wait_till("ambient_mortar_fire_on");
     }
     do {
       var_165e92cc = array::random(level.activeplayers);
       str_zone = var_165e92cc zm_zonemgr::get_player_zone();
-      if(isDefined(str_zone)) {
+      if(isdefined(str_zone)) {
         var_32db8f92 = strtok(str_zone, "_");
         str_zone = var_32db8f92[0];
         if(str_zone == "powered") {
@@ -79,16 +79,16 @@ function function_8c898920() {
       }
       wait(0.05);
     }
-    while(!isDefined(str_zone) || !isDefined(level.var_10752e7a[str_zone]));
+    while (!isdefined(str_zone) || !isdefined(level.var_10752e7a[str_zone]));
     if(str_zone == "pavlovs" || str_zone == "alley") {
       var_e3975fbf = 1;
     } else {
       var_e3975fbf = 0;
     }
     var_89d001a3 = randomintrange(10, 15);
-    for(i = 0; i < var_89d001a3; i++) {
+    for (i = 0; i < var_89d001a3; i++) {
       var_620fe12a = function_7af373ba(str_zone);
-      if(isDefined(var_620fe12a)) {
+      if(isdefined(var_620fe12a)) {
         var_620fe12a thread function_8affee60(var_e3975fbf);
       }
       wait(randomfloatrange(0.5, 1.5));
@@ -102,7 +102,7 @@ function function_8c898920() {
 
 function function_20bdb71() {
   level endon("nikolai_start");
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     level waittill("start_of_round");
   }
 }
@@ -111,9 +111,9 @@ function function_7af373ba(str_zone) {
   var_b8f2d177 = [];
   var_d8f8470c = arraycopy(level.var_10752e7a[str_zone]);
   b_all_points_used = 0;
-  while(!var_b8f2d177.size) {
+  while (!var_b8f2d177.size) {
     foreach(var_b058183b in var_d8f8470c) {
-      if(!isDefined(var_b058183b.b_claimed) || b_all_points_used) {
+      if(!isdefined(var_b058183b.b_claimed) || b_all_points_used) {
         var_b058183b.b_claimed = 0;
       }
       if(!var_b058183b.b_claimed) {
@@ -131,7 +131,7 @@ function function_7af373ba(str_zone) {
 
 function function_8affee60(var_e3975fbf) {
   i = 0;
-  while(level.var_2b8ea588[i].b_in_use == 1) {
+  while (level.var_2b8ea588[i].b_in_use == 1) {
     i++;
     if(i == level.var_2b8ea588.size) {
       i = 0;

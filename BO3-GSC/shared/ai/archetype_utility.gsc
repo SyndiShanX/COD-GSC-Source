@@ -17,86 +17,86 @@
 #namespace aiutility;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("forceRagdoll", &forceragdoll);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAmmo", &hasammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasLowAmmo", &haslowammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasEnemy", &hasenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isSafeFromGrenades", &issafefromgrenades);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("inGrenadeBlastRadius", &ingrenadeblastradius);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("recentlySawEnemy", &recentlysawenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldBeAggressive", &shouldbeaggressive);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOnlyFireAccurately", &shouldonlyfireaccurately);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReactToNewEnemy", &shouldreacttonewenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldReactToNewEnemy", &shouldreacttonewenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasWeaponMalfunctioned", &hasweaponmalfunctioned);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStopMoving", &shouldstopmoving);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldStopMoving", &shouldstopmoving);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBestCoverNodeASAP", &choosebestcovernodeasap);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterCoverService", &choosebettercoverservicecodeversion);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("trackCoverParamsService", &trackcoverparamsservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoIfNeededService", &refillammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryStoppingService", &trystoppingservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isFrustrated", &isfrustrated);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("updatefrustrationLevel", &updatefrustrationlevel);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isLastKnownEnemyPositionApproachable", &islastknownenemypositionapproachable);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryAdvancingOnLastKnownPositionBehavior", &tryadvancingonlastknownpositionbehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryGoingToClosestNodeToEnemyBehavior", &trygoingtoclosestnodetoenemybehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryRunningDirectlyToEnemyBehavior", &tryrunningdirectlytoenemybehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("flagEnemyUnAttackableService", &flagenemyunattackableservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimNode", &keepclaimnode);
-  behaviorstatemachine::registerbsmscriptapiinternal("keepClaimNode", &keepclaimnode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("releaseClaimNode", &releaseclaimnode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("startRagdoll", &scriptstartragdoll);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("notStandingCondition", &notstandingcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("notCrouchingCondition", &notcrouchingcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("explosiveKilled", &explosivekilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("electrifiedKilled", &electrifiedkilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("burnedKilled", &burnedkilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("rapsKilled", &rapskilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeAcquireMutex", &meleeacquiremutex);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeReleaseMutex", &meleereleasemutex);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMutexMelee", &shouldmutexmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForExposedMelee", &prepareforexposedmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupMelee", &cleanupmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldNormalMelee", &shouldnormalmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMelee", &shouldmelee);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldMelee", &shouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemyMelee", &hascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isBalconyDeath", &isbalconydeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("balconyDeath", &balconydeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("useCurrentPosition", &usecurrentposition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isUnarmed", &isunarmed);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChargeMelee", &shouldchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackInChargeMelee", &shouldattackinchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMelee", &cleanupchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMeleeAttack", &cleanupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setupChargeMeleeAttack", &setupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPain", &shouldchoosespecialpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPronePain", &shouldchoosespecialpronepain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialDeath", &shouldchoosespecialdeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialProneDeath", &shouldchoosespecialpronedeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setupExplosionAnimScale", &setupexplosionanimscale);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealth", &shouldstealth);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactCondition", &stealthreactcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldStealth", &locomotionshouldstealth);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealthResume", &shouldstealthresume);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldStealth", &locomotionshouldstealth);
-  behaviorstatemachine::registerbsmscriptapiinternal("stealthReactCondition", &stealthreactcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactStart", &stealthreactstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactTerminate", &stealthreactterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthIdleTerminate", &stealthidleterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanx", &isinphalanx);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanxStance", &isinphalanxstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("togglePhalanxStance", &togglephalanxstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tookFlashbangDamage", &tookflashbangdamage);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtAttackObject", &isatattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackObject", &shouldattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("forceRagdoll", & forceragdoll);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAmmo", & hasammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasLowAmmo", & haslowammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasEnemy", & hasenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isSafeFromGrenades", & issafefromgrenades);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("inGrenadeBlastRadius", & ingrenadeblastradius);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("recentlySawEnemy", & recentlysawenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldBeAggressive", & shouldbeaggressive);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOnlyFireAccurately", & shouldonlyfireaccurately);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReactToNewEnemy", & shouldreacttonewenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldReactToNewEnemy", & shouldreacttonewenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasWeaponMalfunctioned", & hasweaponmalfunctioned);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStopMoving", & shouldstopmoving);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldStopMoving", & shouldstopmoving);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBestCoverNodeASAP", & choosebestcovernodeasap);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterCoverService", & choosebettercoverservicecodeversion);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("trackCoverParamsService", & trackcoverparamsservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoIfNeededService", & refillammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryStoppingService", & trystoppingservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isFrustrated", & isfrustrated);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("updatefrustrationLevel", & updatefrustrationlevel);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isLastKnownEnemyPositionApproachable", & islastknownenemypositionapproachable);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryAdvancingOnLastKnownPositionBehavior", & tryadvancingonlastknownpositionbehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryGoingToClosestNodeToEnemyBehavior", & trygoingtoclosestnodetoenemybehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryRunningDirectlyToEnemyBehavior", & tryrunningdirectlytoenemybehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("flagEnemyUnAttackableService", & flagenemyunattackableservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimNode", & keepclaimnode);
+  behaviorstatemachine::registerbsmscriptapiinternal("keepClaimNode", & keepclaimnode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("releaseClaimNode", & releaseclaimnode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("startRagdoll", & scriptstartragdoll);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("notStandingCondition", & notstandingcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("notCrouchingCondition", & notcrouchingcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("explosiveKilled", & explosivekilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("electrifiedKilled", & electrifiedkilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("burnedKilled", & burnedkilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("rapsKilled", & rapskilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeAcquireMutex", & meleeacquiremutex);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeReleaseMutex", & meleereleasemutex);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMutexMelee", & shouldmutexmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForExposedMelee", & prepareforexposedmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupMelee", & cleanupmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldNormalMelee", & shouldnormalmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMelee", & shouldmelee);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldMelee", & shouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemyMelee", & hascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isBalconyDeath", & isbalconydeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("balconyDeath", & balconydeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("useCurrentPosition", & usecurrentposition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isUnarmed", & isunarmed);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChargeMelee", & shouldchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackInChargeMelee", & shouldattackinchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMelee", & cleanupchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMeleeAttack", & cleanupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setupChargeMeleeAttack", & setupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPain", & shouldchoosespecialpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPronePain", & shouldchoosespecialpronepain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialDeath", & shouldchoosespecialdeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialProneDeath", & shouldchoosespecialpronedeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setupExplosionAnimScale", & setupexplosionanimscale);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealth", & shouldstealth);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactCondition", & stealthreactcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldStealth", & locomotionshouldstealth);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealthResume", & shouldstealthresume);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldStealth", & locomotionshouldstealth);
+  behaviorstatemachine::registerbsmscriptapiinternal("stealthReactCondition", & stealthreactcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactStart", & stealthreactstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactTerminate", & stealthreactterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthIdleTerminate", & stealthidleterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanx", & isinphalanx);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanxStance", & isinphalanxstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("togglePhalanxStance", & togglephalanxstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tookFlashbangDamage", & tookflashbangdamage);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtAttackObject", & isatattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackObject", & shouldattackobject);
   behaviortreenetworkutility::registerbehaviortreeaction("defaultAction", undefined, undefined, undefined);
   archetype_aivsaimelee::registeraivsaimeleebehaviorfunctions();
 }
 
 function registerutilityblackboardattributes() {
-  blackboard::registerblackboardattribute(self, "_arrival_stance", undefined, &bb_getarrivalstance);
+  blackboard::registerblackboardattribute(self, "_arrival_stance", undefined, & bb_getarrivalstance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -108,7 +108,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_cover_concealed", undefined, &bb_getcoverconcealed);
+  blackboard::registerblackboardattribute(self, "_cover_concealed", undefined, & bb_getcoverconcealed);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -120,39 +120,39 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_cover_type", undefined, &bb_getcurrentcovernodetype);
+  blackboard::registerblackboardattribute(self, "_cover_type", undefined, & bb_getcurrentcovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_current_location_cover_type", undefined, &bb_getcurrentlocationcovernodetype);
+  blackboard::registerblackboardattribute(self, "_current_location_cover_type", undefined, & bb_getcurrentlocationcovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_exposed_type", undefined, &bb_getcurrentexposedtype);
+  blackboard::registerblackboardattribute(self, "_exposed_type", undefined, & bb_getcurrentexposedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_direction", undefined, &bb_getdamagedirection);
+  blackboard::registerblackboardattribute(self, "_damage_direction", undefined, & bb_getdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_location", undefined, &bb_actorgetdamagelocation);
+  blackboard::registerblackboardattribute(self, "_damage_location", undefined, & bb_actorgetdamagelocation);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_weapon_class", undefined, &bb_getdamageweaponclass);
+  blackboard::registerblackboardattribute(self, "_damage_weapon_class", undefined, & bb_getdamageweaponclass);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_weapon", undefined, &bb_getdamageweapon);
+  blackboard::registerblackboardattribute(self, "_damage_weapon", undefined, & bb_getdamageweapon);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_mod", undefined, &bb_getdamagemod);
+  blackboard::registerblackboardattribute(self, "_damage_mod", undefined, & bb_getdamagemod);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_taken", undefined, &bb_getdamagetaken);
+  blackboard::registerblackboardattribute(self, "_damage_taken", undefined, & bb_getdamagetaken);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -160,23 +160,23 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_enemy", undefined, &bb_actorhasenemy);
+  blackboard::registerblackboardattribute(self, "_enemy", undefined, & bb_actorhasenemy);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_enemy_yaw", undefined, &bb_actorgetenemyyaw);
+  blackboard::registerblackboardattribute(self, "_enemy_yaw", undefined, & bb_actorgetenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_react_yaw", undefined, &bb_actorgetreactyaw);
+  blackboard::registerblackboardattribute(self, "_react_yaw", undefined, & bb_actorgetreactyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_fatal_damage_location", undefined, &bb_actorgetfataldamagelocation);
+  blackboard::registerblackboardattribute(self, "_fatal_damage_location", undefined, & bb_actorgetfataldamagelocation);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_fire_mode", undefined, &getfiremode);
+  blackboard::registerblackboardattribute(self, "_fire_mode", undefined, & getfiremode);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -192,47 +192,47 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_arrival_distance", undefined, &bb_getlocomotionarrivaldistance);
+  blackboard::registerblackboardattribute(self, "_locomotion_arrival_distance", undefined, & bb_getlocomotionarrivaldistance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_arrival_yaw", undefined, &bb_getlocomotionarrivalyaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_arrival_yaw", undefined, & bb_getlocomotionarrivalyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_exit_yaw", undefined, &bb_getlocomotionexityaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_exit_yaw", undefined, & bb_getlocomotionexityaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant", "locomotion_face_enemy_none", &bb_getlocomotionfaceenemyquadrant);
+  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant", "locomotion_face_enemy_none", & bb_getlocomotionfaceenemyquadrant);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_motion_angle", undefined, &bb_getlocomotionmotionangle);
+  blackboard::registerblackboardattribute(self, "_locomotion_motion_angle", undefined, & bb_getlocomotionmotionangle);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant_previous", "locomotion_face_enemy_none", &bb_getlocomotionfaceenemyquadrantprevious);
+  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant_previous", "locomotion_face_enemy_none", & bb_getlocomotionfaceenemyquadrantprevious);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_pain_type", undefined, &bb_getlocomotionpaintype);
+  blackboard::registerblackboardattribute(self, "_locomotion_pain_type", undefined, & bb_getlocomotionpaintype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_turn_yaw", undefined, &bb_getlocomotionturnyaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_turn_yaw", undefined, & bb_getlocomotionturnyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_lookahead_angle", undefined, &bb_getlookaheadangle);
+  blackboard::registerblackboardattribute(self, "_lookahead_angle", undefined, & bb_getlookaheadangle);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_patrol", undefined, &bb_actorispatroling);
+  blackboard::registerblackboardattribute(self, "_patrol", undefined, & bb_actorispatroling);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_perfect_enemy_yaw", undefined, &bb_actorgetperfectenemyyaw);
+  blackboard::registerblackboardattribute(self, "_perfect_enemy_yaw", undefined, & bb_actorgetperfectenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -244,7 +244,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_previous_cover_type", undefined, &bb_getpreviouscovernodetype);
+  blackboard::registerblackboardattribute(self, "_previous_cover_type", undefined, & bb_getpreviouscovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -260,11 +260,11 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_tracking_turn_yaw", undefined, &bb_actorgettrackingturnyaw);
+  blackboard::registerblackboardattribute(self, "_tracking_turn_yaw", undefined, & bb_actorgettrackingturnyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_weapon_class", "rifle", &bb_getweaponclass);
+  blackboard::registerblackboardattribute(self, "_weapon_class", "rifle", & bb_getweaponclass);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -272,7 +272,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_yaw_to_cover", undefined, &bb_getyawtocovernode);
+  blackboard::registerblackboardattribute(self, "_yaw_to_cover", undefined, & bb_getyawtocovernode);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -280,11 +280,11 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_awareness", "combat", &bb_getawareness);
+  blackboard::registerblackboardattribute(self, "_awareness", "combat", & bb_getawareness);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_awareness_prev", "combat", &bb_getawarenessprevious);
+  blackboard::registerblackboardattribute(self, "_awareness_prev", "combat", & bb_getawarenessprevious);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -312,7 +312,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_staircase_skip_num", undefined, &bb_getstairsnumskipsteps);
+  blackboard::registerblackboardattribute(self, "_staircase_skip_num", undefined, & bb_getstairsnumskipsteps);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -320,7 +320,7 @@ function registerutilityblackboardattributes() {
 }
 
 function private bb_getstairsnumskipsteps() {
-  assert(isDefined(self._stairsstartnode) && isDefined(self._stairsendnode));
+  assert(isdefined(self._stairsstartnode) && isdefined(self._stairsendnode));
   numtotalsteps = blackboard::getblackboardattribute(self, "_staircase_num_total_steps");
   stepssofar = blackboard::getblackboardattribute(self, "_staircase_num_steps");
   direction = blackboard::getblackboardattribute(self, "_staircase_direction");
@@ -339,25 +339,25 @@ function private bb_getstairsnumskipsteps() {
 }
 
 function private bb_getawareness() {
-  if(!isDefined(self.stealth) || !isDefined(self.awarenesslevelcurrent)) {
+  if(!isdefined(self.stealth) || !isdefined(self.awarenesslevelcurrent)) {
     return "combat";
   }
   return self.awarenesslevelcurrent;
 }
 
 function private bb_getawarenessprevious() {
-  if(!isDefined(self.stealth) || !isDefined(self.awarenesslevelprevious)) {
+  if(!isdefined(self.stealth) || !isdefined(self.awarenesslevelprevious)) {
     return "combat";
   }
   return self.awarenesslevelprevious;
 }
 
 function private bb_getyawtocovernode() {
-  if(!isDefined(self.node)) {
+  if(!isdefined(self.node)) {
     return 0;
   }
   disttonodesqr = distance2dsquared(self getnodeoffsetposition(self.node), self.origin);
-  if(isDefined(self.keepclaimednode) && self.keepclaimednode) {
+  if(isdefined(self.keepclaimednode) && self.keepclaimednode) {
     if(disttonodesqr > (64 * 64)) {
       return 0;
     }
@@ -377,7 +377,7 @@ function bb_gethigheststance() {
 }
 
 function bb_getlocomotionfaceenemyquadrantprevious() {
-  if(isDefined(self.prevrelativedir)) {
+  if(isdefined(self.prevrelativedir)) {
     direction = self.prevrelativedir;
     switch (direction) {
       case 0: {
@@ -412,14 +412,14 @@ function bb_getcoverconcealed() {
 }
 
 function bb_getcurrentlocationcovernodetype() {
-  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < (48 * 48)) {
+  if(isdefined(self.node) && distancesquared(self.origin, self.node.origin) < (48 * 48)) {
     return bb_getcurrentcovernodetype();
   }
   return bb_getpreviouscovernodetype();
 }
 
 function bb_getdamagedirection() {
-  if(isDefined(level._debug_damage_direction)) {
+  if(isdefined(level._debug_damage_direction)) {
     return level._debug_damage_direction;
   }
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
@@ -439,7 +439,7 @@ function bb_getdamagedirection() {
 }
 
 function bb_actorgetdamagelocation() {
-  if(isDefined(level._debug_damage_pain_location)) {
+  if(isdefined(level._debug_damage_pain_location)) {
     return level._debug_damage_pain_location;
   }
   shitloc = self.damagelocation;
@@ -465,8 +465,8 @@ function bb_actorgetdamagelocation() {
   if(isinarray(array("right_leg_upper", "left_leg_upper", "right_leg_lower", "left_leg_lower", "right_foot", "left_foot"), shitloc)) {
     possiblehitlocations[possiblehitlocations.size] = "legs";
   }
-  if(isDefined(self.lastdamagetime) && gettime() > self.lastdamagetime && gettime() <= (self.lastdamagetime + 1000)) {
-    if(isDefined(self.lastdamagelocation)) {
+  if(isdefined(self.lastdamagetime) && gettime() > self.lastdamagetime && gettime() <= (self.lastdamagetime + 1000)) {
+    if(isdefined(self.lastdamagelocation)) {
       arrayremovevalue(possiblehitlocations, self.lastdamagelocation);
     }
   }
@@ -483,7 +483,7 @@ function bb_actorgetdamagelocation() {
 }
 
 function bb_getdamageweaponclass() {
-  if(isDefined(self.damagemod)) {
+  if(isdefined(self.damagemod)) {
     if(isinarray(array("mod_rifle_bullet"), tolower(self.damagemod))) {
       return "rifle";
     }
@@ -501,24 +501,24 @@ function bb_getdamageweaponclass() {
 }
 
 function bb_getdamageweapon() {
-  if(isDefined(self.special_weapon) && isDefined(self.special_weapon.name)) {
+  if(isdefined(self.special_weapon) && isdefined(self.special_weapon.name)) {
     return self.special_weapon.name;
   }
-  if(isDefined(self.damageweapon) && isDefined(self.damageweapon.name)) {
+  if(isdefined(self.damageweapon) && isdefined(self.damageweapon.name)) {
     return self.damageweapon.name;
   }
   return "unknown";
 }
 
 function bb_getdamagemod() {
-  if(isDefined(self.damagemod)) {
+  if(isdefined(self.damagemod)) {
     return tolower(self.damagemod);
   }
   return "unknown";
 }
 
 function bb_getdamagetaken() {
-  if(isDefined(level._debug_damage_intensity)) {
+  if(isdefined(level._debug_damage_intensity)) {
     return level._debug_damage_intensity;
   }
   damagetaken = self.damagetaken;
@@ -542,13 +542,13 @@ function bb_getdamagetaken() {
 function addaioverridedamagecallback(entity, callback, addtofront) {
   assert(isentity(entity));
   assert(isfunctionptr(callback));
-  assert(!isDefined(entity.aioverridedamage) || isarray(entity.aioverridedamage));
-  if(!isDefined(entity.aioverridedamage)) {
+  assert(!isdefined(entity.aioverridedamage) || isarray(entity.aioverridedamage));
+  if(!isdefined(entity.aioverridedamage)) {
     entity.aioverridedamage = [];
   } else if(!isarray(entity.aioverridedamage)) {
     entity.aioverridedamage = array(entity.aioverridedamage);
   }
-  if(isDefined(addtofront) && addtofront) {
+  if(isdefined(addtofront) && addtofront) {
     damageoverrides = [];
     damageoverrides[damageoverrides.size] = callback;
     foreach(override in entity.aioverridedamage) {
@@ -556,7 +556,7 @@ function addaioverridedamagecallback(entity, callback, addtofront) {
     }
     entity.aioverridedamage = damageoverrides;
   } else {
-    if(!isDefined(entity.aioverridedamage)) {
+    if(!isdefined(entity.aioverridedamage)) {
       entity.aioverridedamage = [];
     } else if(!isarray(entity.aioverridedamage)) {
       entity.aioverridedamage = array(entity.aioverridedamage);
@@ -585,8 +585,8 @@ function clearaioverridedamagecallbacks(entity) {
 function addaioverridekilledcallback(entity, callback) {
   assert(isentity(entity));
   assert(isfunctionptr(callback));
-  assert(!isDefined(entity.aioverridekilled) || isarray(entity.aioverridekilled));
-  if(!isDefined(entity.aioverridekilled)) {
+  assert(!isdefined(entity.aioverridekilled) || isarray(entity.aioverridekilled));
+  if(!isdefined(entity.aioverridekilled)) {
     entity.aioverridekilled = [];
   } else if(!isarray(entity.aioverridekilled)) {
     entity.aioverridekilled = array(entity.aioverridekilled);
@@ -595,7 +595,7 @@ function addaioverridekilledcallback(entity, callback) {
 }
 
 function actorgetpredictedyawtoenemy(entity, lookaheadtime) {
-  if(isDefined(entity.predictedyawtoenemy) && isDefined(entity.predictedyawtoenemytime) && entity.predictedyawtoenemytime == gettime()) {
+  if(isdefined(entity.predictedyawtoenemy) && isdefined(entity.predictedyawtoenemytime) && entity.predictedyawtoenemytime == gettime()) {
     return entity.predictedyawtoenemy;
   }
   selfpredictedpos = entity.origin;
@@ -618,7 +618,7 @@ function bb_actorispatroling() {
 
 function bb_actorhasenemy() {
   entity = self;
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     return "has_enemy";
   }
   return "no_enemy";
@@ -626,7 +626,7 @@ function bb_actorhasenemy() {
 
 function bb_actorgetenemyyaw() {
   enemy = self.enemy;
-  if(!isDefined(enemy)) {
+  if(!isdefined(enemy)) {
     return 0;
   }
   toenemyyaw = actorgetpredictedyawtoenemy(self, 0.2);
@@ -635,7 +635,7 @@ function bb_actorgetenemyyaw() {
 
 function bb_actorgetperfectenemyyaw() {
   enemy = self.enemy;
-  if(!isDefined(enemy)) {
+  if(!isdefined(enemy)) {
     return 0;
   }
   toenemyyaw = (vectortoangles(enemy.origin - self.origin)[1]) - self.angles[1];
@@ -646,15 +646,15 @@ function bb_actorgetperfectenemyyaw() {
 
 function bb_actorgetreactyaw() {
   result = 0;
-  if(isDefined(self.react_yaw)) {
+  if(isdefined(self.react_yaw)) {
     result = self.react_yaw;
     self.react_yaw = undefined;
   } else {
     v_origin = self geteventpointofinterest();
-    if(isDefined(v_origin)) {
+    if(isdefined(v_origin)) {
       str_typename = self getcurrenteventtypename();
       e_originator = self getcurrenteventoriginator();
-      if(str_typename == "bullet" && isDefined(e_originator)) {
+      if(str_typename == "bullet" && isdefined(e_originator)) {
         v_origin = e_originator.origin;
       }
       deltaorigin = v_origin - self.origin;
@@ -666,11 +666,11 @@ function bb_actorgetreactyaw() {
 }
 
 function bb_actorgetfataldamagelocation() {
-  if(isDefined(level._debug_damage_location)) {
+  if(isdefined(level._debug_damage_location)) {
     return level._debug_damage_location;
   }
   shitloc = self.damagelocation;
-  if(isDefined(shitloc)) {
+  if(isdefined(shitloc)) {
     if(isinarray(array("helmet", "head", "neck"), shitloc)) {
       return "head";
     }
@@ -704,7 +704,7 @@ function getangleusingdirection(direction) {
 }
 
 function wasatcovernode() {
-  if(isDefined(self.prevnode)) {
+  if(isdefined(self.prevnode)) {
     if(self.prevnode.type == "Cover Left" || self.prevnode.type == "Cover Right" || self.prevnode.type == "Cover Pillar" || (self.prevnode.type == "Cover Stand" || self.prevnode.type == "Conceal Stand") || (self.prevnode.type == "Cover Crouch" || self.prevnode.type == "Cover Crouch Window" || self.prevnode.type == "Conceal Crouch")) {
       return true;
     }
@@ -717,7 +717,7 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
   if(self haspath()) {
     predictedlookaheadinfo = self predictexit();
     status = predictedlookaheadinfo["path_prediction_status"];
-    if(!isDefined(self.pathgoalpos)) {
+    if(!isdefined(self.pathgoalpos)) {
       return -1;
     }
     if(distancesquared(self.origin, self.pathgoalpos) <= 4096) {
@@ -762,7 +762,7 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
       }
     }
   }
-  if(isDefined(exityaw)) {
+  if(isdefined(exityaw)) {
     record3dtext("" + int(exityaw), self.origin - vectorscale((0, 0, 1), 5), (1, 0, 0), "", undefined, 0.4);
   }
   return exityaw;
@@ -781,7 +781,7 @@ function bb_getlocomotionfaceenemyquadrant() {
       return "";
     }
   }
-  if(isDefined(self.relativedir)) {
+  if(isdefined(self.relativedir)) {
     direction = self.relativedir;
     switch (direction) {
       case 0: {
@@ -815,7 +815,7 @@ function bb_getlocomotionpaintype() {
       furthestpointtowardsgoalclear = self findpath(startpos, furthestpointalongtowardsgoal, 0, 0) && self maymovetopoint(furthestpointalongtowardsgoal);
     }
     if(furthestpointtowardsgoalclear) {
-      forwarddir = anglesToForward(self.angles);
+      forwarddir = anglestoforward(self.angles);
       possiblepaintypes = [];
       endpos = startpos + vectorscale(forwarddir, 300);
       if(self maymovetopoint(endpos) && self findpath(startpos, endpos, 0, 0)) {
@@ -847,7 +847,7 @@ function bb_getpreviouscovernodetype() {
 
 function bb_actorgettrackingturnyaw() {
   pixbeginevent("BB_ActorGetTrackingTurnYaw");
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy)) {
     predictedpos = undefined;
     if(distance2dsquared(self.enemy.origin, self.origin) < (180 * 180)) {
       predictedpos = self.enemy.origin;
@@ -855,7 +855,7 @@ function bb_actorgettrackingturnyaw() {
     } else if(!issentient(self.enemy) || (self lastknowntime(self.enemy) + 5000) >= gettime()) {
       predictedpos = self lastknownpos(self.enemy);
     }
-    if(isDefined(predictedpos)) {
+    if(isdefined(predictedpos)) {
       turnyaw = absangleclamp360(self.angles[1] - (vectortoangles(predictedpos - self.origin)[1]));
       pixendevent();
       return turnyaw;
@@ -891,7 +891,7 @@ function private prepareforexposedmelee(behaviortreeentity) {
   keepclaimnode(behaviortreeentity);
   meleeacquiremutex(behaviortreeentity);
   currentstance = blackboard::getblackboardattribute(behaviortreeentity, "_stance");
-  if(isDefined(behaviortreeentity.enemy) && isDefined(behaviortreeentity.enemy.vehicletype) && issubstr(behaviortreeentity.enemy.vehicletype, "firefly")) {
+  if(isdefined(behaviortreeentity.enemy) && isdefined(behaviortreeentity.enemy.vehicletype) && issubstr(behaviortreeentity.enemy.vehicletype, "firefly")) {
     blackboard::setblackboardattribute(behaviortreeentity, "_melee_enemy_type", "fireflyswarm");
   }
   if(currentstance == "crouch") {
@@ -900,7 +900,7 @@ function private prepareforexposedmelee(behaviortreeentity) {
 }
 
 function isfrustrated(behaviortreeentity) {
-  return isDefined(behaviortreeentity.frustrationlevel) && behaviortreeentity.frustrationlevel > 0;
+  return isdefined(behaviortreeentity.frustrationlevel) && behaviortreeentity.frustrationlevel > 0;
 }
 
 function clampfrustration(frustrationlevel) {
@@ -917,17 +917,17 @@ function updatefrustrationlevel(entity) {
   if(!entity isbadguy()) {
     return false;
   }
-  if(!isDefined(entity.frustrationlevel)) {
+  if(!isdefined(entity.frustrationlevel)) {
     entity.frustrationlevel = 0;
   }
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     entity.frustrationlevel = 0;
     return false;
   }
   record3dtext("" + entity.frustrationlevel, entity.origin, (1, 0.5, 0), "");
   if(isactor(entity.enemy) || isplayer(entity.enemy)) {
     if(entity.aggressivemode) {
-      if(!isDefined(entity.lastfrustrationboost)) {
+      if(!isdefined(entity.lastfrustrationboost)) {
         entity.lastfrustrationboost = gettime();
       }
       if((entity.lastfrustrationboost + 5000) < gettime()) {
@@ -971,7 +971,7 @@ function flagenemyunattackableservice(behaviortreeentity) {
 }
 
 function islastknownenemypositionapproachable(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     lastknownpositionofenemy = behaviortreeentity lastknownpos(behaviortreeentity.enemy);
     if(behaviortreeentity isingoal(lastknownpositionofenemy) && behaviortreeentity findpath(behaviortreeentity.origin, lastknownpositionofenemy, 1, 0)) {
       return true;
@@ -981,8 +981,8 @@ function islastknownenemypositionapproachable(behaviortreeentity) {
 }
 
 function tryadvancingonlastknownpositionbehavior(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy)) {
-    if(isDefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode) {
+  if(isdefined(behaviortreeentity.enemy)) {
+    if(isdefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode) {
       lastknownpositionofenemy = behaviortreeentity lastknownpos(behaviortreeentity.enemy);
       if(behaviortreeentity isingoal(lastknownpositionofenemy) && behaviortreeentity findpath(behaviortreeentity.origin, lastknownpositionofenemy, 1, 0)) {
         behaviortreeentity useposition(lastknownpositionofenemy, lastknownpositionofenemy);
@@ -995,9 +995,9 @@ function tryadvancingonlastknownpositionbehavior(behaviortreeentity) {
 }
 
 function trygoingtoclosestnodetoenemybehavior(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     closestrandomnode = behaviortreeentity findbestcovernodes(behaviortreeentity.engagemaxdist, behaviortreeentity.enemy.origin)[0];
-    if(isDefined(closestrandomnode) && behaviortreeentity isingoal(closestrandomnode.origin) && behaviortreeentity findpath(behaviortreeentity.origin, closestrandomnode.origin, 1, 0)) {
+    if(isdefined(closestrandomnode) && behaviortreeentity isingoal(closestrandomnode.origin) && behaviortreeentity findpath(behaviortreeentity.origin, closestrandomnode.origin, 1, 0)) {
       usecovernodewrapper(behaviortreeentity, closestrandomnode);
       return true;
     }
@@ -1006,7 +1006,7 @@ function trygoingtoclosestnodetoenemybehavior(behaviortreeentity) {
 }
 
 function tryrunningdirectlytoenemybehavior(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy) && (isDefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode)) {
+  if(isdefined(behaviortreeentity.enemy) && (isdefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode)) {
     origin = behaviortreeentity.enemy.origin;
     if(behaviortreeentity isingoal(origin) && behaviortreeentity findpath(behaviortreeentity.origin, origin, 1, 0)) {
       behaviortreeentity useposition(origin, origin);
@@ -1022,12 +1022,12 @@ function shouldreacttonewenemy(behaviortreeentity) {
 }
 
 function hasweaponmalfunctioned(behaviortreeentity) {
-  return isDefined(behaviortreeentity.malfunctionreaction) && behaviortreeentity.malfunctionreaction;
+  return isdefined(behaviortreeentity.malfunctionreaction) && behaviortreeentity.malfunctionreaction;
 }
 
 function issafefromgrenades(entity) {
-  if(isDefined(entity.grenade) && isDefined(entity.grenade.weapon) && entity.grenade !== entity.knowngrenade && !entity issafefromgrenade()) {
-    if(isDefined(entity.node)) {
+  if(isdefined(entity.grenade) && isdefined(entity.grenade.weapon) && entity.grenade !== entity.knowngrenade && !entity issafefromgrenade()) {
+    if(isdefined(entity.node)) {
       offsetorigin = entity getnodeoffsetposition(entity.node);
       percentradius = distance(entity.grenade.origin, offsetorigin);
       if(entity.grenadeawareness >= percentradius) {
@@ -1050,21 +1050,21 @@ function ingrenadeblastradius(entity) {
 }
 
 function recentlysawenemy(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy) && behaviortreeentity seerecently(behaviortreeentity.enemy, 6)) {
+  if(isdefined(behaviortreeentity.enemy) && behaviortreeentity seerecently(behaviortreeentity.enemy, 6)) {
     return true;
   }
   return false;
 }
 
 function shouldonlyfireaccurately(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
+  if(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
     return true;
   }
   return false;
 }
 
 function shouldbeaggressive(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode) {
+  if(isdefined(behaviortreeentity.aggressivemode) && behaviortreeentity.aggressivemode) {
     return true;
   }
   return false;
@@ -1085,8 +1085,8 @@ function setnextfindbestcovertime(behaviortreeentity, node) {
 }
 
 function trackcoverparamsservice(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.node) && behaviortreeentity isatcovernodestrict() && behaviortreeentity shouldusecovernode()) {
-    if(!isDefined(behaviortreeentity.covernode)) {
+  if(isdefined(behaviortreeentity.node) && behaviortreeentity isatcovernodestrict() && behaviortreeentity shouldusecovernode()) {
+    if(!isdefined(behaviortreeentity.covernode)) {
       behaviortreeentity.covernode = behaviortreeentity.node;
       setnextfindbestcovertime(behaviortreeentity, behaviortreeentity.node);
     }
@@ -1096,11 +1096,11 @@ function trackcoverparamsservice(behaviortreeentity) {
 }
 
 function choosebestcovernodeasap(behaviortreeentity) {
-  if(!isDefined(behaviortreeentity.enemy)) {
+  if(!isdefined(behaviortreeentity.enemy)) {
     return false;
   }
   node = getbestcovernodeifavailable(behaviortreeentity);
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     usecovernodewrapper(behaviortreeentity, node);
   }
 }
@@ -1109,13 +1109,13 @@ function shouldchoosebettercover(behaviortreeentity) {
   if(behaviortreeentity ai::has_behavior_attribute("stealth") && behaviortreeentity ai::get_behavior_attribute("stealth")) {
     return 0;
   }
-  if(isDefined(behaviortreeentity.avoid_cover) && behaviortreeentity.avoid_cover) {
+  if(isdefined(behaviortreeentity.avoid_cover) && behaviortreeentity.avoid_cover) {
     return 0;
   }
   if(behaviortreeentity isinanybadplace()) {
     return 1;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     shouldusecovernoderesult = 0;
     shouldbeboredatcurrentcover = 0;
     abouttoarriveatcover = 0;
@@ -1124,14 +1124,14 @@ function shouldchoosebettercover(behaviortreeentity) {
     if(behaviortreeentity shouldholdgroundagainstenemy()) {
       return 0;
     }
-    if(behaviortreeentity haspath() && isDefined(behaviortreeentity.arrivalfinalpos) && isDefined(behaviortreeentity.pathgoalpos) && self.pathgoalpos == behaviortreeentity.arrivalfinalpos) {
+    if(behaviortreeentity haspath() && isdefined(behaviortreeentity.arrivalfinalpos) && isdefined(behaviortreeentity.pathgoalpos) && self.pathgoalpos == behaviortreeentity.arrivalfinalpos) {
       if(distancesquared(behaviortreeentity.origin, behaviortreeentity.arrivalfinalpos) < 4096) {
         abouttoarriveatcover = 1;
       }
     }
     shouldusecovernoderesult = behaviortreeentity shouldusecovernode();
     if(self isatgoal()) {
-      if(shouldusecovernoderesult && isDefined(behaviortreeentity.node) && self isatgoal()) {
+      if(shouldusecovernoderesult && isdefined(behaviortreeentity.node) && self isatgoal()) {
         lastknownpos = behaviortreeentity lastknownpos(behaviortreeentity.enemy);
         dist = distance2d(behaviortreeentity.origin, lastknownpos);
         if(dist > behaviortreeentity.engageminfalloffdist && dist <= behaviortreeentity.engagemaxfalloffdist) {
@@ -1140,7 +1140,7 @@ function shouldchoosebettercover(behaviortreeentity) {
       }
       shouldbeboredatcurrentcover = !iswithineffectiverangealready && behaviortreeentity isatcovernode() && gettime() > self.nextfindbestcovertime;
       if(!shouldusecovernoderesult) {
-        if(isDefined(behaviortreeentity.frustrationlevel) && behaviortreeentity.frustrationlevel > 0 && behaviortreeentity haspath()) {
+        if(isdefined(behaviortreeentity.frustrationlevel) && behaviortreeentity.frustrationlevel > 0 && behaviortreeentity haspath()) {
           islookingaroundforenemy = 1;
         }
       }
@@ -1159,20 +1159,20 @@ function shouldchoosebettercover(behaviortreeentity) {
 }
 
 function choosebettercoverservicecodeversion(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.stealth) && behaviortreeentity ai::get_behavior_attribute("stealth")) {
+  if(isdefined(behaviortreeentity.stealth) && behaviortreeentity ai::get_behavior_attribute("stealth")) {
     return false;
   }
-  if(isDefined(behaviortreeentity.avoid_cover) && behaviortreeentity.avoid_cover) {
+  if(isdefined(behaviortreeentity.avoid_cover) && behaviortreeentity.avoid_cover) {
     return false;
   }
-  if(isDefined(behaviortreeentity.knowngrenade)) {
+  if(isdefined(behaviortreeentity.knowngrenade)) {
     return false;
   }
   if(!issafefromgrenades(behaviortreeentity)) {
     behaviortreeentity.nextfindbestcovertime = 0;
   }
   newnode = behaviortreeentity choosebettercovernode();
-  if(isDefined(newnode)) {
+  if(isdefined(newnode)) {
     usecovernodewrapper(behaviortreeentity, newnode);
     return true;
   }
@@ -1189,7 +1189,7 @@ function private choosebettercoverservice(behaviortreeentity) {
     isbehaviortreeinrunningstate = behaviortreeentity getbehaviortreestatus() == 5;
     if(!transitionrunning && !substatepending && !transdecrunning && isbehaviortreeinrunningstate) {
       node = getbestcovernodeifavailable(behaviortreeentity);
-      goingtodifferentnode = isDefined(node) && (!isDefined(behaviortreeentity.node) || node != behaviortreeentity.node);
+      goingtodifferentnode = isdefined(node) && (!isdefined(behaviortreeentity.node) || node != behaviortreeentity.node);
       if(goingtodifferentnode) {
         usecovernodewrapper(behaviortreeentity, node);
         return true;
@@ -1221,7 +1221,7 @@ function haslowammo(behaviortreeentity) {
 }
 
 function hasenemy(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return true;
   }
   return false;
@@ -1229,46 +1229,46 @@ function hasenemy(behaviortreeentity) {
 
 function getbestcovernodeifavailable(behaviortreeentity) {
   node = behaviortreeentity findbestcovernode();
-  if(!isDefined(node)) {
+  if(!isdefined(node)) {
     return undefined;
   }
   if(behaviortreeentity nearclaimnode()) {
     currentnode = self.node;
   }
-  if(isDefined(currentnode) && node == currentnode) {
+  if(isdefined(currentnode) && node == currentnode) {
     return undefined;
   }
-  if(isDefined(behaviortreeentity.covernode) && node == behaviortreeentity.covernode) {
+  if(isdefined(behaviortreeentity.covernode) && node == behaviortreeentity.covernode) {
     return undefined;
   }
   return node;
 }
 
 function getsecondbestcovernodeifavailable(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.fixednode) && behaviortreeentity.fixednode) {
+  if(isdefined(behaviortreeentity.fixednode) && behaviortreeentity.fixednode) {
     return undefined;
   }
   nodes = behaviortreeentity findbestcovernodes(behaviortreeentity.goalradius, behaviortreeentity.origin);
   if(nodes.size > 1) {
     node = nodes[1];
   }
-  if(!isDefined(node)) {
+  if(!isdefined(node)) {
     return undefined;
   }
   if(behaviortreeentity nearclaimnode()) {
     currentnode = self.node;
   }
-  if(isDefined(currentnode) && node == currentnode) {
+  if(isdefined(currentnode) && node == currentnode) {
     return undefined;
   }
-  if(isDefined(behaviortreeentity.covernode) && node == behaviortreeentity.covernode) {
+  if(isdefined(behaviortreeentity.covernode) && node == behaviortreeentity.covernode) {
     return undefined;
   }
   return node;
 }
 
 function getcovertype(node) {
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     if(node.type == "Cover Pillar") {
       return "cover_pillar";
     }
@@ -1292,27 +1292,27 @@ function getcovertype(node) {
 }
 
 function iscoverconcealed(node) {
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     return node.type == "Conceal Crouch" || node.type == "Conceal Stand";
   }
   return 0;
 }
 
 function canseeenemywrapper() {
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return 0;
   }
-  if(!isDefined(self.node)) {
+  if(!isdefined(self.node)) {
     return self cansee(self.enemy);
   }
   node = self.node;
-  enemyeye = self.enemy getEye();
+  enemyeye = self.enemy geteye();
   yawtoenemy = angleclamp180(node.angles[1] - (vectortoangles(enemyeye - node.origin)[1]));
   if(node.type == "Cover Left" || node.type == "Cover Right") {
     if(yawtoenemy > 60 || yawtoenemy < -60) {
       return 0;
     }
-    if(isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
+    if(isdefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
       if(node.type == "Cover Left" && yawtoenemy > 10) {
         return 0;
       }
@@ -1323,7 +1323,7 @@ function canseeenemywrapper() {
   }
   nodeoffset = (0, 0, 0);
   if(node.type == "Cover Pillar") {
-    assert(!(isDefined(node.spawnflags) && (node.spawnflags & 2048) == 2048) || (!(isDefined(node.spawnflags) && (node.spawnflags & 1024) == 1024)));
+    assert(!(isdefined(node.spawnflags) && (node.spawnflags & 2048) == 2048) || (!(isdefined(node.spawnflags) && (node.spawnflags & 1024) == 1024)));
     canseefromleft = 1;
     canseefromright = 1;
     nodeoffset = (-32, 3.7, 60);
@@ -1356,19 +1356,19 @@ function canseeenemywrapper() {
 
 function calculatenodeoffsetposition(node, nodeoffset) {
   right = anglestoright(node.angles);
-  forward = anglesToForward(node.angles);
+  forward = anglestoforward(node.angles);
   return (node.origin + vectorscale(right, nodeoffset[0])) + vectorscale(forward, nodeoffset[1]) + (0, 0, nodeoffset[2]);
 }
 
 function gethighestnodestance(node) {
-  assert(isDefined(node));
-  if(isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
+  assert(isdefined(node));
+  if(isdefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
     return "stand";
   }
-  if(isDefined(node.spawnflags) && (node.spawnflags & 8) == 8) {
+  if(isdefined(node.spawnflags) && (node.spawnflags & 8) == 8) {
     return "crouch";
   }
-  if(isDefined(node.spawnflags) && (node.spawnflags & 16) == 16) {
+  if(isdefined(node.spawnflags) && (node.spawnflags & 16) == 16) {
     return "prone";
   }
   errormsg(((node.type + "") + node.origin) + "");
@@ -1379,15 +1379,15 @@ function gethighestnodestance(node) {
 }
 
 function isstanceallowedatnode(stance, node) {
-  assert(isDefined(stance));
-  assert(isDefined(node));
-  if(stance == "stand" && (isDefined(node.spawnflags) && (node.spawnflags & 4) == 4)) {
+  assert(isdefined(stance));
+  assert(isdefined(node));
+  if(stance == "stand" && (isdefined(node.spawnflags) && (node.spawnflags & 4) == 4)) {
     return true;
   }
-  if(stance == "crouch" && (isDefined(node.spawnflags) && (node.spawnflags & 8) == 8)) {
+  if(stance == "crouch" && (isdefined(node.spawnflags) && (node.spawnflags & 8) == 8)) {
     return true;
   }
-  if(stance == "prone" && (isDefined(node.spawnflags) && (node.spawnflags & 16) == 16)) {
+  if(stance == "prone" && (isdefined(node.spawnflags) && (node.spawnflags & 16) == 16)) {
     return true;
   }
   return false;
@@ -1414,7 +1414,7 @@ function setcurrentweapon(weapon) {
   self.weapon = weapon;
   self.weaponclass = weapon.weapclass;
   if(weapon != level.weaponnone) {
-    assert(isDefined(weapon.worldmodel), ("" + weapon.name) + "");
+    assert(isdefined(weapon.worldmodel), ("" + weapon.name) + "");
   }
   self.weaponmodel = weapon.worldmodel;
 }
@@ -1423,7 +1423,7 @@ function setprimaryweapon(weapon) {
   self.primaryweapon = weapon;
   self.primaryweaponclass = weapon.weapclass;
   if(weapon != level.weaponnone) {
-    assert(isDefined(weapon.worldmodel), ("" + weapon.name) + "");
+    assert(isdefined(weapon.worldmodel), ("" + weapon.name) + "");
   }
 }
 
@@ -1431,7 +1431,7 @@ function setsecondaryweapon(weapon) {
   self.secondaryweapon = weapon;
   self.secondaryweaponclass = weapon.weapclass;
   if(weapon != level.weaponnone) {
-    assert(isDefined(weapon.worldmodel), ("" + weapon.name) + "");
+    assert(isdefined(weapon.worldmodel), ("" + weapon.name) + "");
   }
 }
 
@@ -1472,12 +1472,12 @@ function shouldtacticalwalk(behaviortreeentity) {
     }
   }
   goalpos = undefined;
-  if(isDefined(behaviortreeentity.arrivalfinalpos)) {
+  if(isdefined(behaviortreeentity.arrivalfinalpos)) {
     goalpos = behaviortreeentity.arrivalfinalpos;
   } else {
     goalpos = behaviortreeentity.pathgoalpos;
   }
-  if(isDefined(behaviortreeentity.pathstartpos) && isDefined(goalpos)) {
+  if(isdefined(behaviortreeentity.pathstartpos) && isdefined(goalpos)) {
     pathdist = distancesquared(behaviortreeentity.pathstartpos, goalpos);
     if(pathdist < 9216) {
       return true;
@@ -1493,7 +1493,7 @@ function shouldtacticalwalk(behaviortreeentity) {
 }
 
 function shouldstealth(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.stealth)) {
+  if(isdefined(behaviortreeentity.stealth)) {
     now = gettime();
     if(behaviortreeentity isinscriptedstate()) {
       return false;
@@ -1502,7 +1502,7 @@ function shouldstealth(behaviortreeentity) {
       behaviortreeentity.stealth_react_last = now;
       return true;
     }
-    if(isDefined(behaviortreeentity.stealth_reacting) && behaviortreeentity.stealth_reacting || (isDefined(behaviortreeentity.stealth_react_last) && (now - behaviortreeentity.stealth_react_last) < 250)) {
+    if(isdefined(behaviortreeentity.stealth_reacting) && behaviortreeentity.stealth_reacting || (isdefined(behaviortreeentity.stealth_react_last) && (now - behaviortreeentity.stealth_react_last) < 250)) {
       return true;
     }
     if(behaviortreeentity ai::has_behavior_attribute("stealth") && behaviortreeentity ai::get_behavior_attribute("stealth")) {
@@ -1517,14 +1517,14 @@ function locomotionshouldstealth(behaviortreeentity) {
     return false;
   }
   if(behaviortreeentity haspath()) {
-    if(isDefined(behaviortreeentity.arrivalfinalpos) || isDefined(behaviortreeentity.pathgoalpos)) {
-      haswait = isDefined(self.currentgoal) && isDefined(self.currentgoal.script_wait_min) && isDefined(self.currentgoal.script_wait_max);
+    if(isdefined(behaviortreeentity.arrivalfinalpos) || isdefined(behaviortreeentity.pathgoalpos)) {
+      haswait = isdefined(self.currentgoal) && isdefined(self.currentgoal.script_wait_min) && isdefined(self.currentgoal.script_wait_max);
       if(haswait) {
         haswait = self.currentgoal.script_wait_min > 0 || self.currentgoal.script_wait_max > 0;
       }
-      if(haswait || !isDefined(self.currentgoal) || (isDefined(self.currentgoal) && isDefined(self.currentgoal.scriptbundlename))) {
+      if(haswait || !isdefined(self.currentgoal) || (isdefined(self.currentgoal) && isdefined(self.currentgoal.scriptbundlename))) {
         goalpos = undefined;
-        if(isDefined(behaviortreeentity.arrivalfinalpos)) {
+        if(isdefined(behaviortreeentity.arrivalfinalpos)) {
           goalpos = behaviortreeentity.arrivalfinalpos;
         } else {
           goalpos = behaviortreeentity.pathgoalpos;
@@ -1544,7 +1544,7 @@ function shouldstealthresume(behaviortreeentity) {
   if(!shouldstealth(behaviortreeentity)) {
     return false;
   }
-  if(isDefined(behaviortreeentity.stealth_resume) && behaviortreeentity.stealth_resume) {
+  if(isdefined(behaviortreeentity.stealth_resume) && behaviortreeentity.stealth_resume) {
     behaviortreeentity.stealth_resume = undefined;
     return true;
   }
@@ -1552,8 +1552,8 @@ function shouldstealthresume(behaviortreeentity) {
 }
 
 function private stealthreactcondition(entity) {
-  inscene = isDefined(self._o_scene) && isDefined(self._o_scene._str_state) && self._o_scene._str_state == "play";
-  return !(isDefined(entity.stealth_reacting) && entity.stealth_reacting) && entity hasvalidinterrupt("react") && !inscene;
+  inscene = isdefined(self._o_scene) && isdefined(self._o_scene._str_state) && self._o_scene._str_state == "play";
+  return !(isdefined(entity.stealth_reacting) && entity.stealth_reacting) && entity hasvalidinterrupt("react") && !inscene;
 }
 
 function private stealthreactstart(behaviortreeentity) {
@@ -1566,7 +1566,7 @@ function private stealthreactterminate(behaviortreeentity) {
 
 function private stealthidleterminate(behaviortreeentity) {
   behaviortreeentity notify("stealthidleterminate");
-  if(isDefined(behaviortreeentity.stealth_resume_after_idle) && behaviortreeentity.stealth_resume_after_idle) {
+  if(isdefined(behaviortreeentity.stealth_resume_after_idle) && behaviortreeentity.stealth_resume_after_idle) {
     behaviortreeentity.stealth_resume_after_idle = undefined;
     behaviortreeentity.stealth_resume = 1;
   }
@@ -1592,13 +1592,13 @@ function explosivekilled(behaviortreeentity) {
 function private _dropriotshield(riotshieldinfo) {
   entity = self;
   entity shared::throwweapon(riotshieldinfo.weapon, riotshieldinfo.tag, 0);
-  if(isDefined(entity)) {
+  if(isdefined(entity)) {
     entity detach(riotshieldinfo.model, riotshieldinfo.tag);
   }
 }
 
 function attachriotshield(entity, riotshieldweapon, riotshieldmodel, riotshieldtag) {
-  riotshield = spawnStruct();
+  riotshield = spawnstruct();
   riotshield.weapon = riotshieldweapon;
   riotshield.tag = riotshieldtag;
   riotshield.model = riotshieldmodel;
@@ -1607,7 +1607,7 @@ function attachriotshield(entity, riotshieldweapon, riotshieldmodel, riotshieldt
 }
 
 function dropriotshield(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.riotshield)) {
+  if(isdefined(behaviortreeentity.riotshield)) {
     riotshieldinfo = behaviortreeentity.riotshield;
     behaviortreeentity.riotshield = undefined;
     behaviortreeentity thread _dropriotshield(riotshieldinfo);
@@ -1632,18 +1632,18 @@ function burnedkilled(behaviortreeentity) {
 }
 
 function rapskilled(behaviortreeentity) {
-  if(isDefined(self.attacker) && isDefined(self.attacker.archetype) && self.attacker.archetype == "raps") {
+  if(isdefined(self.attacker) && isdefined(self.attacker.archetype) && self.attacker.archetype == "raps") {
     return true;
   }
   return false;
 }
 
 function meleeacquiremutex(behaviortreeentity) {
-  if(isDefined(behaviortreeentity) && isDefined(behaviortreeentity.enemy)) {
-    behaviortreeentity.melee = spawnStruct();
+  if(isdefined(behaviortreeentity) && isdefined(behaviortreeentity.enemy)) {
+    behaviortreeentity.melee = spawnstruct();
     behaviortreeentity.melee.enemy = behaviortreeentity.enemy;
     if(isplayer(behaviortreeentity.melee.enemy)) {
-      if(!isDefined(behaviortreeentity.melee.enemy.meleeattackers)) {
+      if(!isdefined(behaviortreeentity.melee.enemy.meleeattackers)) {
         behaviortreeentity.melee.enemy.meleeattackers = 0;
       }
       behaviortreeentity.melee.enemy.meleeattackers++;
@@ -1652,10 +1652,10 @@ function meleeacquiremutex(behaviortreeentity) {
 }
 
 function meleereleasemutex(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.melee)) {
-    if(isDefined(behaviortreeentity.melee.enemy)) {
+  if(isdefined(behaviortreeentity.melee)) {
+    if(isdefined(behaviortreeentity.melee.enemy)) {
       if(isplayer(behaviortreeentity.melee.enemy)) {
-        if(isDefined(behaviortreeentity.melee.enemy.meleeattackers)) {
+        if(isdefined(behaviortreeentity.melee.enemy.meleeattackers)) {
           behaviortreeentity.melee.enemy.meleeattackers = behaviortreeentity.melee.enemy.meleeattackers - 1;
           if(behaviortreeentity.melee.enemy.meleeattackers <= 0) {
             behaviortreeentity.melee.enemy.meleeattackers = undefined;
@@ -1668,19 +1668,19 @@ function meleereleasemutex(behaviortreeentity) {
 }
 
 function shouldmutexmelee(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.melee)) {
+  if(isdefined(behaviortreeentity.melee)) {
     return 0;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     if(!isplayer(behaviortreeentity.enemy)) {
-      if(isDefined(behaviortreeentity.enemy.melee)) {
+      if(isdefined(behaviortreeentity.enemy.melee)) {
         return 0;
       }
     } else {
       if(!sessionmodeiscampaigngame()) {
         return 1;
       }
-      if(!isDefined(behaviortreeentity.enemy.meleeattackers)) {
+      if(!isdefined(behaviortreeentity.enemy.meleeattackers)) {
         behaviortreeentity.enemy.meleeattackers = 0;
       }
       return behaviortreeentity.enemy.meleeattackers < 1;
@@ -1694,12 +1694,12 @@ function shouldnormalmelee(behaviortreeentity) {
 }
 
 function shouldmelee(entity) {
-  if(isDefined(entity.lastshouldmeleeresult) && !entity.lastshouldmeleeresult && (entity.lastshouldmeleechecktime + 50) >= gettime()) {
+  if(isdefined(entity.lastshouldmeleeresult) && !entity.lastshouldmeleeresult && (entity.lastshouldmeleechecktime + 50) >= gettime()) {
     return false;
   }
   entity.lastshouldmeleechecktime = gettime();
   entity.lastshouldmeleeresult = 0;
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
   if(!entity.enemy.allowdeath) {
@@ -1711,13 +1711,13 @@ function shouldmelee(entity) {
   if(!issentient(entity.enemy)) {
     return false;
   }
-  if(isvehicle(entity.enemy) && (!(isDefined(entity.enemy.good_melee_target) && entity.enemy.good_melee_target))) {
+  if(isvehicle(entity.enemy) && (!(isdefined(entity.enemy.good_melee_target) && entity.enemy.good_melee_target))) {
     return false;
   }
   if(isplayer(entity.enemy) && entity.enemy getstance() == "prone") {
     return false;
   }
-  chargedistsq = (isDefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);
+  chargedistsq = (isdefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);
   if(distancesquared(entity.origin, entity.enemy.origin) > chargedistsq) {
     return false;
   }
@@ -1742,7 +1742,7 @@ function hascloseenemytomelee(entity) {
 }
 
 function hascloseenemytomeleewithrange(entity, melee_range_sq) {
-  assert(isDefined(entity.enemy));
+  assert(isdefined(entity.enemy));
   if(!entity cansee(entity.enemy)) {
     return 0;
   }
@@ -1759,12 +1759,12 @@ function hascloseenemytomeleewithrange(entity, melee_range_sq) {
 }
 
 function shouldchargemelee(entity) {
-  assert(isDefined(entity.enemy));
+  assert(isdefined(entity.enemy));
   currentstance = blackboard::getblackboardattribute(entity, "_stance");
   if(currentstance != "stand") {
     return 0;
   }
-  if(isDefined(entity.nextchargemeleetime)) {
+  if(isdefined(entity.nextchargemeleetime)) {
     if(gettime() < entity.nextchargemeleetime) {
       return 0;
     }
@@ -1774,7 +1774,7 @@ function shouldchargemelee(entity) {
     return 0;
   }
   offset = entity.enemy.origin - ((vectornormalize(entity.enemy.origin - entity.origin)) * 36);
-  chargedistsq = (isDefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);
+  chargedistsq = (isdefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);
   if(enemydistsq < chargedistsq && entity maymovetopoint(offset, 1, 1)) {
     yawtoenemy = angleclamp180(entity.angles[1] - (vectortoangles(entity.enemy.origin - entity.origin)[1]));
     return abs(yawtoenemy) <= 80;
@@ -1783,7 +1783,7 @@ function shouldchargemelee(entity) {
 }
 
 function private shouldattackinchargemelee(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) < (74 * 74)) {
       yawtoenemy = angleclamp180(behaviortreeentity.angles[1] - (vectortoangles(behaviortreeentity.enemy.origin - behaviortreeentity.origin)[1]));
       if(abs(yawtoenemy) > 80) {
@@ -1795,7 +1795,7 @@ function private shouldattackinchargemelee(behaviortreeentity) {
 }
 
 function private setupchargemeleeattack(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy) && isDefined(behaviortreeentity.enemy.vehicletype) && issubstr(behaviortreeentity.enemy.vehicletype, "firefly")) {
+  if(isdefined(behaviortreeentity.enemy) && isdefined(behaviortreeentity.enemy.vehicletype) && issubstr(behaviortreeentity.enemy.vehicletype, "firefly")) {
     blackboard::setblackboardattribute(behaviortreeentity, "_melee_enemy_type", "fireflyswarm");
   }
   meleeacquiremutex(behaviortreeentity);
@@ -1829,14 +1829,14 @@ function private shouldchoosespecialpronepain(behaviortreeentity) {
 }
 
 function private shouldchoosespecialpain(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.damageweapon)) {
-    return behaviortreeentity.damageweapon.specialpain || isDefined(behaviortreeentity.special_weapon);
+  if(isdefined(behaviortreeentity.damageweapon)) {
+    return behaviortreeentity.damageweapon.specialpain || isdefined(behaviortreeentity.special_weapon);
   }
   return 0;
 }
 
 function private shouldchoosespecialdeath(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.damageweapon)) {
+  if(isdefined(behaviortreeentity.damageweapon)) {
     return behaviortreeentity.damageweapon.specialpain;
   }
   return 0;
@@ -1854,7 +1854,7 @@ function private setupexplosionanimscale(entity, asmstatename) {
 }
 
 function isbalconydeath(behaviortreeentity) {
-  if(!isDefined(behaviortreeentity.node)) {
+  if(!isdefined(behaviortreeentity.node)) {
     return false;
   }
   if(!(behaviortreeentity.node.spawnflags & 1024 || behaviortreeentity.node.spawnflags & 2048)) {
@@ -1864,16 +1864,16 @@ function isbalconydeath(behaviortreeentity) {
   if(covermode == "cover_alert" || covermode == "cover_mode_none") {
     return false;
   }
-  if(isDefined(behaviortreeentity.node.script_balconydeathchance) && randomint(100) > (int(100 * behaviortreeentity.node.script_balconydeathchance))) {
+  if(isdefined(behaviortreeentity.node.script_balconydeathchance) && randomint(100) > (int(100 * behaviortreeentity.node.script_balconydeathchance))) {
     return false;
   }
   distsq = distancesquared(behaviortreeentity.origin, behaviortreeentity.node.origin);
   if(distsq > (16 * 16)) {
     return false;
   }
-  if(isDefined(level.players) && level.players.size > 0) {
+  if(isdefined(level.players) && level.players.size > 0) {
     closest_player = util::get_closest_player(behaviortreeentity.origin, level.players[0].team);
-    if(isDefined(closest_player)) {
+    if(isdefined(closest_player)) {
       if((abs(closest_player.origin[2] - behaviortreeentity.origin[2])) < 100) {
         distance2dfromplayersq = distance2dsquared(closest_player.origin, behaviortreeentity.origin);
         if(distance2dfromplayersq < (600 * 600)) {
@@ -1912,23 +1912,23 @@ function forceragdoll(entity) {
 
 function preshootlaserandglinton(ai) {
   self endon("death");
-  if(!isDefined(ai.laserstatus)) {
+  if(!isdefined(ai.laserstatus)) {
     ai.laserstatus = 0;
   }
   sniper_glint = "lensflares/fx_lensflare_sniper_glint";
-  while(true) {
+  while (true) {
     self waittill("about_to_fire");
     if(ai.laserstatus !== 1) {
       ai laseron();
       ai.laserstatus = 1;
       if(ai.team != "allies") {
         tag = ai gettagorigin("tag_glint");
-        if(isDefined(tag)) {
-          playFXOnTag(sniper_glint, ai, "tag_glint");
+        if(isdefined(tag)) {
+          playfxontag(sniper_glint, ai, "tag_glint");
         } else {
-          type = (isDefined(ai.classname) ? "" + ai.classname : "");
+          type = (isdefined(ai.classname) ? "" + ai.classname : "");
           println(("" + type) + "");
-          playFXOnTag(sniper_glint, ai, "tag_eye");
+          playfxontag(sniper_glint, ai, "tag_eye");
         }
       }
     }
@@ -1937,7 +1937,7 @@ function preshootlaserandglinton(ai) {
 
 function postshootlaserandglintoff(ai) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("stopped_firing");
     if(ai.laserstatus === 1) {
       ai laseroff();
@@ -1979,19 +1979,19 @@ function private togglephalanxstance(entity) {
 }
 
 function private tookflashbangdamage(entity) {
-  if(isDefined(entity.damageweapon) && isDefined(entity.damagemod)) {
+  if(isdefined(entity.damageweapon) && isdefined(entity.damagemod)) {
     weapon = entity.damageweapon;
-    return entity.damagemod == "MOD_GRENADE_SPLASH" && isDefined(weapon.rootweapon) && (issubstr(weapon.rootweapon.name, "flash_grenade") || issubstr(weapon.rootweapon.name, "concussion_grenade") || issubstr(weapon.rootweapon.name, "proximity_grenade"));
+    return entity.damagemod == "MOD_GRENADE_SPLASH" && isdefined(weapon.rootweapon) && (issubstr(weapon.rootweapon.name, "flash_grenade") || issubstr(weapon.rootweapon.name, "concussion_grenade") || issubstr(weapon.rootweapon.name, "proximity_grenade"));
   }
   return 0;
 }
 
 function isatattackobject(entity) {
-  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1])) {
+  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1])) {
     return false;
   }
-  if(isDefined(entity.attackable) && (isDefined(entity.attackable.is_active) && entity.attackable.is_active)) {
-    if(!isDefined(entity.attackable_slot)) {
+  if(isdefined(entity.attackable) && (isdefined(entity.attackable.is_active) && entity.attackable.is_active)) {
+    if(!isdefined(entity.attackable_slot)) {
       return false;
     }
     if(entity isatgoal()) {
@@ -2003,11 +2003,11 @@ function isatattackobject(entity) {
 }
 
 function shouldattackobject(entity) {
-  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1])) {
+  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1])) {
     return false;
   }
-  if(isDefined(entity.attackable) && (isDefined(entity.attackable.is_active) && entity.attackable.is_active)) {
-    if(isDefined(entity.is_at_attackable) && entity.is_at_attackable) {
+  if(isdefined(entity.attackable) && (isdefined(entity.attackable.is_active) && entity.attackable.is_active)) {
+    if(isdefined(entity.is_at_attackable) && entity.is_at_attackable) {
       return true;
     }
   }

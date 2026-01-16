@@ -12,17 +12,17 @@
 #namespace deathicons;
 
 function autoexec __init__sytem__() {
-  system::register("deathicons", &__init__, undefined, undefined);
+  system::register("deathicons", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_player_connect);
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_player_connect);
 }
 
 function init() {
-  if(!isDefined(level.ragdoll_override)) {
-    level.ragdoll_override = &ragdoll_override;
+  if(!isdefined(level.ragdoll_override)) {
+    level.ragdoll_override = & ragdoll_override;
   }
   if(!level.teambased) {
     return;
@@ -44,8 +44,8 @@ function add(entity, dyingplayer, team, timeout) {
   dyingplayer endon("disconnect");
   wait(0.05);
   util::waittillslowprocessallowed();
-  assert(isDefined(level.teams[team]));
-  assert(isDefined(level.teamindex[team]));
+  assert(isdefined(level.teams[team]));
+  assert(isdefined(level.teamindex[team]));
   if(getdvarstring("ui_hud_showdeathicons") == "0") {
     return;
   }
@@ -53,7 +53,7 @@ function add(entity, dyingplayer, team, timeout) {
     return;
   }
   deathiconobjid = gameobjects::get_next_obj_id();
-  objective_add(deathiconobjid, "active", iconorg, &"headicon_dead");
+  objective_add(deathiconobjid, "active", iconorg, & "headicon_dead");
   objective_team(deathiconobjid, team);
   level thread destroy_slowly(timeout, deathiconobjid);
 }
@@ -69,7 +69,7 @@ function destroy_slowly(timeout, deathiconobjid) {
 function ragdoll_override(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin, deathanimduration, einflictor, ragdoll_jib, body) {
   if(smeansofdeath == "MOD_FALLING" && self isonground() == 1) {
     body startragdoll();
-    if(!isDefined(self.switching_teams)) {
+    if(!isdefined(self.switching_teams)) {
       thread add(body, self, self.team, 5);
     }
     return true;

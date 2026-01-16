@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_crash_snow_fx.gsc
 **********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 101
   ent = createOneshotEffect("battlefield_smokebank_S");
   ent.v["origin"] = (591.801, 506.885, 143.693);
   ent.v["angles"] = (270, 0, 0);
@@ -512,4 +514,5 @@ main() {
   ent.v["origin"] = (-82.9914, -1031.38, 253.318);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_ac_duct_rattle";
+
 }

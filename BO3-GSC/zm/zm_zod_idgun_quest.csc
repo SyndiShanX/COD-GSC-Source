@@ -13,12 +13,12 @@
 #namespace zm_zod_idgun_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_idgun_quest", &__init__, undefined, undefined);
+  system::register("zm_zod_idgun_quest", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("world", "add_idgun_to_box", 1, 4, "int", &add_idgun_to_box, 0, 0);
-  clientfield::register("world", "remove_idgun_from_box", 1, 4, "int", &remove_idgun_from_box, 0, 0);
+  clientfield::register("world", "add_idgun_to_box", 1, 4, "int", & add_idgun_to_box, 0, 0);
+  clientfield::register("world", "remove_idgun_from_box", 1, 4, "int", & remove_idgun_from_box, 0, 0);
 }
 
 function add_idgun_to_box(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

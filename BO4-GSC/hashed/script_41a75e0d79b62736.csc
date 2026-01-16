@@ -5,10 +5,11 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\postfx_shared;
+
 #namespace namespace_f2050961;
 
 init() {
-  clientfield::register("toplayer", "" + # "hash_686e5c0d7af86361", 16000, 1, "int", &function_be33348b, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_686e5c0d7af86361", 16000, 1, "int", &function_be33348b, 0, 0);
 }
 
 function_be33348b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

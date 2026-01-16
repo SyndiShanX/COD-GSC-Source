@@ -34,7 +34,7 @@ init() {
   }
   precacheshellshock("electrocution");
   level.num_thief_zombies = 0;
-  level.thief_zombie_spawners = getEntArray("thief_zombie_spawner", "targetname");
+  level.thief_zombie_spawners = GetEntArray("thief_zombie_spawner", "targetname");
   array_thread(level.thief_zombie_spawners, ::add_spawn_function, maps\_zombiemode_ai_thief::thief_prespawn);
   if(!isDefined(level.max_thief_zombies)) {
     level.max_thief_zombies = 1;
@@ -134,7 +134,7 @@ thief_prespawn() {
   self.speed_damage = 0;
   self.ignore_solo_last_stand = 1;
   self.light = [];
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     self.light[i] = 0;
   }
   self thread maps\_zombiemode_spawner::play_ambient_zombie_vocals();
@@ -142,7 +142,7 @@ thief_prespawn() {
 }
 thief_health_watch() {
   self endon("death");
-  while(1) {
+  while (1) {
     wait(1);
   }
 }
@@ -254,7 +254,7 @@ thief_round_spawning() {
   max = 1;
   level.zombie_total = max;
   count = 0;
-  while(count < max) {
+  while (count < max) {
     spawner = thief_zombie_pick_best_spawner();
     if(isDefined(spawner)) {
       spawner thief_zombie_spawn();
@@ -268,7 +268,7 @@ thief_round_wait() {
   wait(1);
   if(flag("thief_round")) {
     wait(7);
-    while(level.thief_intermission) {
+    while (level.thief_intermission) {
       wait(0.5);
     }
   }
@@ -288,7 +288,7 @@ thief_round_tracker() {
   level.thief_save_wait_func = level.round_wait_func;
   level.next_thief_round = level.round_number + randomintrange(1, 4);
   level.prev_thief_round = level.next_thief_round;
-  while(1) {
+  while (1) {
     level waittill("between_round_over");
     if(level.round_number >= level.next_thief_round) {
       level.music_round_override = true;
@@ -322,7 +322,7 @@ thief_round_start() {
 }
 thief_round_vision() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     setClientSysState("levelNotify", "vis4", players[i]);
     wait_network_frame();
   }
@@ -338,10 +338,10 @@ thief_round_stop() {
   clientnotify("TLO");
 }
 thief_trap_watcher() {
-  traps = getEntArray("zombie_trap", "targetname");
+  traps = getentarray("zombie_trap", "targetname");
   sh_found = false;
   nh_found = false;
-  for(i = 0; i < traps.size; i++) {
+  for (i = 0; i < traps.size; i++) {
     if(traps[i].target == "trap_elevator" && !sh_found) {
       sh_found = true;
       self thread thief_trap_watch(traps[i]);
@@ -357,7 +357,7 @@ thief_trap_watch(trig) {
   self endon("thief_trap_stop");
   clip = getent(trig.target + "_clip", "targetname");
   clip.dis = false;
-  while(1) {
+  while (1) {
     if(trig._trap_in_use == 1 && trig._trap_cooling_down == 0 && !clip.dis) {
       thief_print("blocking " + trig.target);
       clip.origin = clip.realorigin;
@@ -375,8 +375,10 @@ thief_trap_watch(trig) {
 thief_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
-  for(i = 0; i < level.thief_zombie_spawners.size; i++) {
-    score = [[level.thief_zombie_spawn_heuristic]](level.thief_zombie_spawners[i]);
+  for (i = 0; i < level.thief_zombie_spawners.size; i++) {
+    score = [
+      [level.thief_zombie_spawn_heuristic]
+    ](level.thief_zombie_spawners[i]);
     if(score > best_score) {
       best_spawner = level.thief_zombie_spawners[i];
       best_score = score;
@@ -420,16 +422,16 @@ thief_zombie_think() {
   self.zombie_move_speed = "walk";
   self thief_zombie_setup_victims();
   self.fx_org = spawn("script_model", self.origin);
-  self.fx_org setModel("tag_origin");
+  self.fx_org SetModel("tag_origin");
   self.fx_org.angles = self.angles;
   self.fx_org linkto(self);
-  playFXOnTag(level._effect["tech_trail"], self.fx_org, "tag_origin");
+  PlayFxOnTag(level._effect["tech_trail"], self.fx_org, "tag_origin");
   self thread thief_zombie_hunt();
 }
 thief_zombie_hunt() {
   self endon("death");
   self endon("end_hunt");
-  while(1) {
+  while (1) {
     self thread thief_zombie_victim_disconnect();
     self thief_zombie_set_visibility();
     self thief_portal_to_victim();
@@ -455,14 +457,14 @@ thief_zombie_victim_disconnect() {
 thief_zombie_default_spawn_heuristic(spawner) {
   score = 0;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     score = int(distanceSquared(spawner.origin, players[i].origin));
   }
   return score;
 }
 thief_zombie_choose_run() {
   self endon("death");
-  while(true) {
+  while (true) {
     if(self.thief_speed == "sprint") {
       self.zombie_move_speed = "sprint";
       rand = randomIntRange(1, 4);
@@ -504,7 +506,7 @@ thief_zombie_die() {
     self.worldgun delete();
   }
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] FreezeControls(false);
     players[i] EnableOffhandWeapons();
     players[i] EnableWeaponCycling();
@@ -517,7 +519,7 @@ thief_zombie_die() {
   }
   if(flag("death_in_pre_game")) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isDefined(players[i].thief_damage) && players[i].thief_damage) {
         players[i] giveachievement_wrapper("SP_ZOM_TRAPS");
       }
@@ -528,7 +530,7 @@ thief_zombie_die() {
   } else {
     level thread maps\_zombiemode_powerups::specific_powerup_drop("fire_sale", self.origin);
   }
-  forward = VectorNormalize(anglesToForward(self.angles));
+  forward = VectorNormalize(AnglesToForward(self.angles));
   endPos = self.origin - vector_scale(forward, 32);
   level thread maps\_zombiemode_powerups::specific_powerup_drop("full_ammo", endPos);
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
@@ -581,7 +583,7 @@ thief_take_loot() {
     primaries = player GetWeaponsListPrimaries();
     if(isDefined(primaries)) {
       if(is_laststand && primaries.size > 1) {
-        for(i = 0; i < primaries.size; i++) {
+        for (i = 0; i < primaries.size; i++) {
           if(primaries[i] == weapon) {
             primaries = array_remove(primaries, primaries[i]);
             break;
@@ -622,8 +624,8 @@ thief_take_loot() {
 }
 thief_return_loot() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
-    for(j = 0; j < self.victims.player.size; j++) {
+  for (i = 0; i < players.size; i++) {
+    for (j = 0; j < self.victims.player.size; j++) {
       if(players[i] == self.victims.player[j]) {
         if(isDefined(self.victims.weapon[j])) {
           weapon_limit = 2;
@@ -639,7 +641,7 @@ thief_return_loot() {
             if(players[i] HasWeapon(self.victims.weapon[j])) {
               weapon = self.victims.weapon[j];
             }
-            for(k = 0; k < primaries.size; k++) {
+            for (k = 0; k < primaries.size; k++) {
               if(!maps\_zombiemode_weapons::is_weapon_upgraded(primaries[k])) {
                 weapon_upgraded = level.zombie_weapons[primaries[k]].upgrade_name;
                 if(weapon_upgraded == self.victims.weapon[j]) {
@@ -661,7 +663,7 @@ thief_return_loot() {
   }
 }
 thief_shutdown_lights() {
-  for(i = 0; i < self.light.size; i++) {
+  for (i = 0; i < self.light.size; i++) {
     if(isDefined(self.light[i]) && self.light[i]) {
       light = "por" + i;
       clientnotify(light);
@@ -669,14 +671,14 @@ thief_shutdown_lights() {
   }
 }
 thief_zombie_default_enter_level() {
-  playFX(level._effect["ape_spawn"], self.origin);
+  Playfx(level._effect["ape_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self.entered_level = true;
 }
 thief_is_packing() {
   zone = level.zones["conference_level2"];
-  for(i = 0; i < zone.volumes.size; i++) {
+  for (i = 0; i < zone.volumes.size; i++) {
     if(self isTouching(zone.volumes[i])) {
       return true;
     }
@@ -692,7 +694,7 @@ thief_chasing() {
   self endon("death");
   self.victims.current endon("disconnect");
   player = self.victims.current;
-  while(1) {
+  while (1) {
     if(flag("defcon_active")) {
       packing_self = self thief_is_packing();
       packing_player = player thief_is_packing();
@@ -744,7 +746,7 @@ thief_find_nearest_portal(floor) {
   } else if(floor == 3) {
     portal = level.portal_power;
     max = DistanceSquared(self.origin, level.portal_power.origin);
-    for(i = 0; i < level.portal_bottom.size; i++) {
+    for (i = 0; i < level.portal_bottom.size; i++) {
       distSq = DistanceSquared(self.origin, level.portal_bottom[i].origin);
       if(distSq < max) {
         max = distSq;
@@ -795,7 +797,7 @@ thief_try_steal() {
   STEAL_DIST = 64;
   STEAL_DIST2 = STEAL_DIST * STEAL_DIST;
   player = self.victims.current;
-  while(1) {
+  while (1) {
     if(isDefined(player.teleporting) && player.teleporting) {
       wait_network_frame();
       continue;
@@ -810,12 +812,12 @@ thief_try_steal() {
 }
 thief_zombie_setup_victims() {
   players = get_players();
-  self.victims = spawnStruct();
+  self.victims = spawnstruct();
   self.victims.max = players.size;
   self.victims.player = [];
   self.victims.weapon = [];
   self.victims.seen = false;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].victim = false;
     self.victims.player[i] = players[i];
     self.victims.player[i].thief_damage = false;
@@ -858,7 +860,7 @@ thief_set_state(state) {
 thief_zombie_set_visibility() {
   self SetVisibleToAll();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(i > self.victims.current_idx) {
       self SetInvisibleToPlayer(self.victims.player[i]);
     }
@@ -919,7 +921,7 @@ thief_portal_to_portal(floor) {
 }
 thief_run_to_floor() {
   self endon("death");
-  while(1) {
+  while (1) {
     floor_victim = thief_check_floor(self.victim);
     floor = thief_check_floor(self);
     if(floor_victim != floor) {
@@ -949,7 +951,7 @@ thief_blink(attacker) {
   wait(0.2);
   if(self.state != "exiting") {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(i > self.victims.current_idx) {
         self SetInvisibleToPlayer(self.victims.player[i]);
       }
@@ -994,7 +996,7 @@ thief_init_portals() {
   level.portal_mid = undefined;
   level.portal_bottom = [];
   pos = getstructarray("zombie_pos", "script_noteworthy");
-  for(i = 0; i < pos.size; i++) {
+  for (i = 0; i < pos.size; i++) {
     if(pos[i].script_string == "bottom_floor_5") {
       level.portal_power = pos[i];
     } else if(pos[i].script_string == "top_floor_1") {
@@ -1033,14 +1035,14 @@ thief_take_player() {
   player thief_cooldown_power_room();
   player_pos = getstructarray("player_pos", "script_noteworthy");
   dest = undefined;
-  for(i = 0; i < player_pos.size; i++) {
+  for (i = 0; i < player_pos.size; i++) {
     if(isDefined(player_pos[i].script_string) && player_pos[i].script_string == "thief_player_pos") {
       dest = player_pos[i];
     }
   }
   thief_pos = getstruct("thief_start", "targetname");
-  playFX(level._effect["transporter_start"], self.origin);
-  playFX(level._effect["transporter_start"], player.origin);
+  PlayFX(level._effect["transporter_start"], self.origin);
+  PlayFX(level._effect["transporter_start"], player.origin);
   playsoundatposition("evt_teleporter_out", player.origin);
   if(isDefined(self.worldgun)) {
     self.worldgun unlink();
@@ -1063,9 +1065,9 @@ thief_take_player() {
 }
 thief_cooldown_power_room() {
   trig = undefined;
-  for(i = 0; i < level.portal_trig.size; i++) {
+  for (i = 0; i < level.portal_trig.size; i++) {
     zombie_dest = getstructarray(level.portal_trig[i].target, "targetname");
-    for(j = 0; j < zombie_dest.size; j++) {
+    for (j = 0; j < zombie_dest.size; j++) {
       if(isDefined(zombie_dest[j].script_noteworthy) && zombie_dest[j].script_noteworthy == "zombie_pos") {
         if(zombie_dest[j].script_string == "bottom_floor_5") {
           trig = level.portal_trig[i];
@@ -1127,7 +1129,7 @@ thief_end_game() {
   self endon("death");
   self thief_goto_bottom();
   self SetVisibleToAll();
-  playFXOnTag(level._effect["elec_torso"], self, "J_SpineLower");
+  PlayFxOnTag(level._effect["elec_torso"], self, "J_SpineLower");
   portal_count = level.max_thief_portals - 1;
   portal_current = 0;
   portal_order = [];
@@ -1141,7 +1143,7 @@ thief_end_game() {
   self.state = "exiting";
   self thread thief_watch_speed_damage();
   thief_light(4, 1);
-  while(1) {
+  while (1) {
     idx = portal_order[portal_current];
     portal_start = idx;
     self thief_enter_portal(level.portal_bottom[idx]);
@@ -1212,7 +1214,7 @@ thief_watch_speed_damage() {
   self endon("death");
   self.speed_damage = 0;
   max = GetDvarInt(#"scr_thief_speed_damage");
-  while(1) {
+  while (1) {
     if(self.speed_damage > max) {
       self.speed_damage = 0;
       if(self.thief_speed == "run2") {
@@ -1229,7 +1231,7 @@ thief_watch_speed_damage() {
 thief_check_walk() {
   self endon("death");
   self endon("stop_check_walk");
-  while(1) {
+  while (1) {
     if(isDefined(self.portal_pos)) {
       portal_distance = DistanceSquared(self.origin, self.portal_pos);
       if(portal_distance < 128 * 128) {
@@ -1247,7 +1249,7 @@ thief_check_vision() {
   VISION_DIST2 = VISION_DIST * VISION_DIST;
   VISION_ANGLE = .766;
   time_seen = 0;
-  while(1) {
+  while (1) {
     if(self.state != "stalking") {
       break;
     }
@@ -1261,14 +1263,14 @@ thief_check_vision() {
       wait_network_frame();
       continue;
     }
-    org = self getEye();
-    player_org = player getEye();
+    org = self geteye();
+    player_org = player geteye();
     dist2 = DistanceSquared(org, player_org);
     if(dist2 > VISION_DIST2) {
       wait_network_frame();
       continue;
     }
-    forward = VectorNormalize(anglesToForward(self.angles));
+    forward = VectorNormalize(AnglesToForward(self.angles));
     toPlayer = VectorNormalize(player_org - org);
     cosAngle = VectorDot(forward, toPlayer);
     if(cosAngle < VISION_ANGLE) {
@@ -1337,7 +1339,7 @@ thief_nuke_damage() {
   self endon("death");
   self.bonfire = false;
   self thread animscripts\zombie_death::flame_death_fx();
-  self playSound("evt_nuked");
+  self playsound("evt_nuked");
   self dodamage(self.health + 666, self.origin);
 }
 thief_freeze_countdown(time) {
@@ -1355,9 +1357,9 @@ thief_enter_portal(portal) {
   self.portal_pos = portal.origin;
   self setgoalpos(portal.origin);
   self waittill("goal");
-  playFX(level._effect["transporter_start"], self.origin);
+  PlayFX(level._effect["transporter_start"], self.origin);
   playsoundatposition("evt_teleporter_out", self.origin);
-  for(i = 0; i < level.portal_trig.size; i++) {
+  for (i = 0; i < level.portal_trig.size; i++) {
     if(self IsTouching(level.portal_trig[i])) {
       self.portal_trig_enter = level.portal_trig[i];
       break;
@@ -1374,9 +1376,9 @@ thief_teleport(portal) {
   wait_network_frame();
   self unlink();
   so delete();
-  playFX(level._effect["transporter_beam"], self.origin);
+  PlayFX(level._effect["transporter_beam"], self.origin);
   playsoundatposition("evt_teleporter_go", self.origin);
-  for(i = 0; i < level.portal_trig.size; i++) {
+  for (i = 0; i < level.portal_trig.size; i++) {
     if(self IsTouching(level.portal_trig[i])) {
       self.portal_trig_exit = i;
       self thread thief_override_portal();
@@ -1393,7 +1395,7 @@ thief_override_portal() {
   self.portal_trig_enter.thief_override = undefined;
 }
 thief_clear_portals() {
-  for(i = 0; i < level.portal_trig.size; i++) {
+  for (i = 0; i < level.portal_trig.size; i++) {
     level.portal_trig[i].thief_override = undefined;
   }
 }
@@ -1409,12 +1411,12 @@ play_looping_alarms(wait_time) {
   wait(wait_time);
   structs = getstructarray("defcon_alarms", "targetname");
   sound_ent = [];
-  for(i = 0; i < structs.size; i++) {
-    sound_ent[i] = spawn("script_origin", structs[i].origin);
-    sound_ent[i] playLoopSound("evt_thief_alarm_looper", .25);
+  for (i = 0; i < structs.size; i++) {
+    sound_ent[i] = Spawn("script_origin", structs[i].origin);
+    sound_ent[i] PlayLoopSound("evt_thief_alarm_looper", .25);
   }
   level waittill("stop_thief_alarms");
-  for(i = 0; i < sound_ent.size; i++) {
+  for (i = 0; i < sound_ent.size; i++) {
     sound_ent[i] StopLoopSound(.5);
   }
   wait(1);
@@ -1423,20 +1425,20 @@ play_looping_alarms(wait_time) {
 thief_elevator_watch() {
   self endon("death");
   player = self.victims.current;
-  while(1) {
+  while (1) {
     if(isDefined(player.elevator)) {
       thief_print("player in " + player.elevator_riding);
       break;
     }
     wait_network_frame();
   }
-  epoints = getEntArray(player.elevator_riding, "targetname");
+  epoints = getentarray(player.elevator_riding, "targetname");
   dest = undefined;
   players = getplayers();
   too_close = false;
   index = -1;
-  for(i = 0; i < epoints.size; i++) {
-    for(j = 0; j < players.size; j++) {
+  for (i = 0; i < epoints.size; i++) {
+    for (j = 0; j < players.size; j++) {
       if(Distance2DSquared(epoints.origin, players[i].origin) > 30 * 30) {
         too_close = true;
         break;

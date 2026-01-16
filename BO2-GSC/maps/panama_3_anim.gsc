@@ -462,7 +462,7 @@ menendez_caps_hudsons_right_knee() {
     menendez_gun = get_model_or_models_from_scene("ending_bare_room_1_shotgun", "menendez_gun");
     tag_origin = menendez_gun gettagorigin("TAG_FLASH");
     tag_angles = menendez_gun gettagangles("TAG_FLASH");
-    menendez_gun playSound("wpn_spas_fire_npc");
+    menendez_gun playsound("wpn_spas_fire_npc");
     menendez_gun play_fx("shotgun_flash", tag_origin, tag_angles, undefined, 1, "TAG_FLASH");
     hudson = getent("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Knee_RI");
@@ -478,7 +478,7 @@ menendez_caps_hudsons_left_knee() {
     menendez_gun = get_model_or_models_from_scene("ending_bare_room_1_shotgun", "menendez_gun");
     tag_origin = menendez_gun gettagorigin("TAG_FLASH");
     tag_angles = menendez_gun gettagangles("TAG_FLASH");
-    menendez_gun playSound("wpn_spas_fire_npc");
+    menendez_gun playsound("wpn_spas_fire_npc");
     menendez_gun play_fx("shotgun_flash", tag_origin, tag_angles, undefined, 1, "TAG_FLASH");
     hudson = getent("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Knee_LE");
@@ -514,12 +514,12 @@ kneecap_woods() {
     body = get_model_or_models_from_scene("betrayed_2", "player_body");
 
     if(isDefined(level.woods_kneecapped)) {
-      body setModel("c_usa_woods_panama_lower_dmg2_viewbody");
+      body setmodel("c_usa_woods_panama_lower_dmg2_viewbody");
       tag_origin = body gettagorigin("J_Knee_LE");
       tag_angles = body gettagangles("J_Knee_LE");
       body play_fx("blood_woods_knee", tag_origin, tag_angles, undefined, 1, "J_Knee_LE");
     } else {
-      body setModel("c_usa_woods_panama_lower_dmg1_viewbody");
+      body setmodel("c_usa_woods_panama_lower_dmg1_viewbody");
       tag_origin = body gettagorigin("J_Knee_RI");
       tag_angles = body gettagangles("J_Knee_RI");
       body play_fx("blood_woods_knee", tag_origin, tag_angles, undefined, 1, "J_Knee_RI");
@@ -533,4 +533,5 @@ sndchangetoapachemusicstate(dude) {
   setmusicstate("PANAMA_APACHE");
 }
 
-betrayal_fade_out(guy) {}
+betrayal_fade_out(guy) {
+}

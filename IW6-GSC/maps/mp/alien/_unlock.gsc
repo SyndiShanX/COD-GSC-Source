@@ -24,13 +24,11 @@ init_unlock() {
 init_player_unlock() {
   self.unlock_list = [];
 
-  if(isDefined(level.unlock_registration_func)) {
+  if(isDefined(level.unlock_registration_func))
     [[level.unlock_registration_func]]();
-  }
 
-  if(maps\mp\alien\_utility::is_true(level.include_default_unlocks)) {
+  if(maps\mp\alien\_utility::is_true(level.include_default_unlocks))
     register_default_unlocks();
-  }
 }
 
 register_default_unlocks() {
@@ -104,11 +102,10 @@ update_personal_escape_item_unlock(times_escaped) {
 load_unlock_from_table() {
   level.alien_unlock_data = [];
 
-  if(isDefined(level.alien_unlock_table)) {
+  if(isDefined(level.alien_unlock_table))
     unlock_table = level.alien_unlock_table;
-  } else {
+  else
     unlock_table = ALIEN_UNLOCK_TABLE;
-  }
 
   for(rowIndex = TABLE_STARTING_ROW_INDEX; rowIndex <= TABLE_END_ROW_INDEX; rowIndex++) {
     unlock_item = tableLookup(unlock_table, TABLE_INDEX, rowIndex, COLUMN_UNLOCK_ITEM);

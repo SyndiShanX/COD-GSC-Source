@@ -44,9 +44,8 @@ odin_precache() {
   precachemodel("body_fed_space_assault_a");
   precacheshader("hud_icon_microtar_space");
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     precacheshader("space_helmet_glass_01");
-  }
 }
 
 odin_flag_inits() {
@@ -98,9 +97,8 @@ odin_script_setup() {
     setsaveddvar("r_mbModelVelocityScalar", 0.2);
   }
 
-  if(level.start_point == "start_deer" || level.start_point == "start_after_hunt" || level.start_point == "start_woods" || level.start_point == "start_neighborhood" || level.start_point == "start_mansion_ext" || level.start_point == "start_mansion" || level.start_point == "default") {
+  if(level.start_point == "start_deer" || level.start_point == "start_after_hunt" || level.start_point == "start_woods" || level.start_point == "start_neighborhood" || level.start_point == "start_mansion_ext" || level.start_point == "start_mansion" || level.start_point == "default")
     level.start_point = "odin_intro";
-  }
 
   thread maps\odin_fx::lgt_init();
   level.player.ignoreme = 0;
@@ -240,9 +238,8 @@ mission_objective_logic() {
   waittillframeend;
   var_0 = 0;
 
-  if(level.start_point != "default") {
+  if(level.start_point != "default")
     var_0 = 1;
-  }
 
   if(isDefined(level.prologue) && level.prologue == 1) {}
 
@@ -254,7 +251,7 @@ mission_objective_logic() {
       common_scripts\utility::flag_wait("objective_return_to_station");
       thread add_marker_helper(maps\_utility::obj("OBJ_RETURN"));
       setsaveddvar("compass", "1");
-      objective_add(maps\_utility::obj("OBJ_RETURN"), "active", &"ODIN_OBJ_RETURN");
+      objective_add(maps\_utility::obj("OBJ_RETURN"), "active", & "ODIN_OBJ_RETURN");
       objective_state(maps\_utility::obj("OBJ_RETURN"), "current");
       common_scripts\utility::flag_wait("clear_helper_mark");
       level notify("safe_marker_thread_deletion");
@@ -262,44 +259,44 @@ mission_objective_logic() {
       var_0 = 0;
     case "odin_ally":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", &"ODIN_OBJ_RETURN");
+        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", & "ODIN_OBJ_RETURN");
         var_0 = 0;
       }
 
       common_scripts\utility::flag_wait("objective_shutdown_sat");
-      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", &"ODIN_OBJ_SHUTDOWN");
+      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", & "ODIN_OBJ_SHUTDOWN");
     case "odin_escape":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", &"ODIN_OBJ_RETURN");
-        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", &"ODIN_OBJ_SHUTDOWN");
+        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", & "ODIN_OBJ_RETURN");
+        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", & "ODIN_OBJ_SHUTDOWN");
         var_0 = 0;
       }
 
       common_scripts\utility::flag_wait("objective_escape_sat");
-      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", &"ODIN_OBJ_SHUTDOWN");
+      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", & "ODIN_OBJ_SHUTDOWN");
       wait 1;
-      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", &"ODIN_OBJ_ESCAPE");
+      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", & "ODIN_OBJ_ESCAPE");
     case "odin_spin":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", &"ODIN_OBJ_RETURN");
-        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", &"ODIN_OBJ_ESCAPE");
+        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", & "ODIN_OBJ_RETURN");
+        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "active", & "ODIN_OBJ_ESCAPE");
         var_0 = 0;
       }
 
       common_scripts\utility::flag_wait("objective_destroy_sat");
-      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", &"ODIN_OBJ_ESCAPE");
-      objective_add(maps\_utility::obj("OBJ_DESTROY"), "active", &"ODIN_OBJ_DESTROY");
+      objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", & "ODIN_OBJ_ESCAPE");
+      objective_add(maps\_utility::obj("OBJ_DESTROY"), "active", & "ODIN_OBJ_DESTROY");
     case "odin_satellite":
       if(var_0) {
-        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", &"ODIN_OBJ_RETURN");
-        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", &"ODIN_OBJ_ESCAPE");
-        objective_add(maps\_utility::obj("OBJ_DESTROY"), "active", &"ODIN_OBJ_DESTROY");
+        objective_add(maps\_utility::obj("OBJ_RETURN"), "done", & "ODIN_OBJ_RETURN");
+        objective_add(maps\_utility::obj("OBJ_SHUTDOWN"), "done", & "ODIN_OBJ_ESCAPE");
+        objective_add(maps\_utility::obj("OBJ_DESTROY"), "active", & "ODIN_OBJ_DESTROY");
         var_0 = 0;
       }
 
       common_scripts\utility::flag_wait("satellite_end_anim_started");
       wait 2;
-      objective_add(maps\_utility::obj("OBJ_DESTROY"), "done", &"ODIN_OBJ_DESTROY");
+      objective_add(maps\_utility::obj("OBJ_DESTROY"), "done", & "ODIN_OBJ_DESTROY");
     default:
   }
 }

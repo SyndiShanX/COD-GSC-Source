@@ -15,10 +15,10 @@
 function main() {
   mp_metro_fx::main();
   mp_metro_sound::main();
-  clientfield::register("scriptmover", "mp_metro_train_timer", 1, 1, "int", &traintimerspawned, 1, 0);
+  clientfield::register("scriptmover", "mp_metro_train_timer", 1, 1, "int", & traintimerspawned, 1, 0);
   load::main();
-  level.domflagbasefxoverride = &dom_flag_base_fx_override;
-  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = & dom_flag_base_fx_override;
+  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_metro";
   setdvar("phys_buoyancy", 1);
@@ -38,7 +38,7 @@ function train_countdown(localclientnum) {
   numbermodelones = util::spawn_model(localclientnum, "p7_3d_txt_antiqua_bold_00_brushed_aluminum", onesorigin, angles);
   currentnumber = 1;
   currentnumberlarge = 0;
-  for(;;) {
+  for (;;) {
     currentnumber++;
     if(currentnumber > 9) {
       currentnumber = 0;
@@ -50,9 +50,9 @@ function train_countdown(localclientnum) {
     if(displaynumber < 0 || displaynumber > 360) {
       displaynumber = 0;
     }
-    numbermodelones setModel(("p7_3d_txt_antiqua_bold_0" + (displaynumber % 10)) + "_brushed_aluminum");
-    numbermodeltens setModel(("p7_3d_txt_antiqua_bold_0" + (int((displaynumber % 60) / 10))) + "_brushed_aluminum");
-    numbermodelminutes setModel(("p7_3d_txt_antiqua_bold_0" + (int(displaynumber / 60))) + "_brushed_aluminum");
+    numbermodelones setmodel(("p7_3d_txt_antiqua_bold_0" + (displaynumber % 10)) + "_brushed_aluminum");
+    numbermodeltens setmodel(("p7_3d_txt_antiqua_bold_0" + (int((displaynumber % 60) / 10))) + "_brushed_aluminum");
+    numbermodelminutes setmodel(("p7_3d_txt_antiqua_bold_0" + (int(displaynumber / 60))) + "_brushed_aluminum");
     wait(0.05);
   }
 }

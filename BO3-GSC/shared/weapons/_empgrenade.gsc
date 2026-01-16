@@ -12,13 +12,13 @@
 #namespace empgrenade;
 
 function autoexec __init__sytem__() {
-  system::register("empgrenade", &__init__, undefined, undefined);
+  system::register("empgrenade", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "empd", 1, 1, "int");
   clientfield::register("toplayer", "empd_monitor_distance", 1, 1, "int");
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -32,15 +32,15 @@ function monitorempgrenade() {
   self endon("death");
   self endon("killempmonitor");
   self.empendtime = 0;
-  while(true) {
+  while (true) {
     self waittill("emp_grenaded", attacker, explosionpoint);
     if(!isalive(self) || self hasperk("specialty_immuneemp")) {
       continue;
     }
     hurtvictim = 1;
     hurtattacker = 0;
-    assert(isDefined(self.team));
-    if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
+    assert(isdefined(self.team));
+    if(level.teambased && isdefined(attacker) && isdefined(attacker.team) && attacker.team == self.team && attacker != self) {
       friendlyfire = [
         [level.figure_out_friendly_fire]
       ](self);
@@ -61,10 +61,10 @@ function monitorempgrenade() {
         }
       }
     }
-    if(hurtvictim && isDefined(self)) {
+    if(hurtvictim && isdefined(self)) {
       self thread applyemp(attacker, explosionpoint);
     }
-    if(hurtattacker && isDefined(attacker)) {
+    if(hurtattacker && isdefined(attacker)) {
       attacker thread applyemp(attacker, explosionpoint);
     }
   }
@@ -76,7 +76,7 @@ function applyemp(attacker, explosionpoint) {
   self endon("disconnect");
   self endon("death");
   wait(0.05);
-  if(!(isDefined(self) && isalive(self))) {
+  if(!(isdefined(self) && isalive(self))) {
     return;
   }
   if(self == attacker) {
@@ -86,7 +86,7 @@ function applyemp(attacker, explosionpoint) {
     ratio = 1 - (distancetoexplosion / 425);
     currentempduration = 3 + (3 * ratio);
   }
-  if(isDefined(self.empendtime)) {
+  if(isdefined(self.empendtime)) {
     emp_time_left_ms = self.empendtime - gettime();
     if(emp_time_left_ms > (currentempduration * 1000)) {
       self.empduration = emp_time_left_ms / 1000;
@@ -113,7 +113,7 @@ function applyemp(attacker, explosionpoint) {
   if(self.empduration > 0) {
     wait(self.empduration);
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("empgrenadetimedout");
     self checktoturnoffemp();
   }
@@ -124,7 +124,7 @@ function empgrenadedeathwaiter() {
   self endon("empgrenadedeathwaiter");
   self endon("empgrenadetimedout");
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self checktoturnoffemp();
   }
 }
@@ -134,13 +134,13 @@ function empgrenadecleansewaiter() {
   self endon("empgrenadecleansewaiter");
   self endon("empgrenadetimedout");
   self waittill("gadget_cleanse_on");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self checktoturnoffemp();
   }
 }
 
 function checktoturnoffemp() {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.empgrenaded = 0;
     shutdownemprebootindicatormenu();
     if(self killstreaks::emp_isempd()) {
@@ -153,7 +153,7 @@ function checktoturnoffemp() {
 
 function shutdownemprebootindicatormenu() {
   emprebootmenu = self getluimenu("EmpRebootIndicator");
-  if(isDefined(emprebootmenu)) {
+  if(isdefined(emprebootmenu)) {
     self closeluimenu(emprebootmenu);
   }
 }
@@ -162,7 +162,7 @@ function emprumbleloop(duration) {
   self endon("emp_rumble_loop");
   self notify("emp_rumble_loop");
   goaltime = gettime() + (duration * 1000);
-  while(gettime() < goaltime) {
+  while (gettime() < goaltime) {
     self playrumbleonentity("damage_heavy");
     wait(0.05);
   }
@@ -179,7 +179,7 @@ function watchempexplosion(owner, weapon) {
 
 function empexplosiondamageents(owner, weapon, origin, radius, damageplayers) {
   ents = getdamageableentarray(origin, radius);
-  if(!isDefined(damageplayers)) {
+  if(!isdefined(damageplayers)) {
     damageplayers = 1;
   }
   foreach(ent in ents) {
@@ -195,7 +195,7 @@ function begin_other_grenade_tracking() {
   self endon("disconnect");
   self notify("emptrackingstart");
   self endon("emptrackingstart");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon, cooktime);
     if(grenade util::ishacked()) {
       continue;

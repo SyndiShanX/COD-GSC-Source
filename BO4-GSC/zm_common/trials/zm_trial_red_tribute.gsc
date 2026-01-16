@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_red_tribute;
 
 autoexec __init__system__() {
@@ -89,7 +90,7 @@ private function_29bcf2f8() {
   self notify(#"spew_reward_picked_up");
 
   if(isDefined(self.s_tribute_bowl) && isDefined(self.s_tribute_bowl.var_9d32404)) {
-    self.s_tribute_bowl.var_9d32404 clientfield::set("" + # "hash_21f5fab6a3d22093", 0);
+    self.s_tribute_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
   }
 
   self zm_red_challenges_rewards::set_tribute(0);

@@ -11,7 +11,8 @@
 #include clientscripts\mp\_rotating_object;
 
 on_connect(localclientnum) {
-  if(!sessionmodeiszombiesgame()) {}
+  if(!sessionmodeiszombiesgame()) {
+  }
 
   player = getlocalplayer(localclientnum);
   assert(isDefined(player));
@@ -30,18 +31,15 @@ on_connect(localclientnum) {
     thread clientscripts\mp\_rotating_object::init(localclientnum);
     init_code_filters(player);
 
-    if(isDefined(level.infraredvisionset)) {
+    if(isDefined(level.infraredvisionset))
       player setinfraredvisionset(level.infraredvisionset);
-    }
   }
 
-  if(isDefined(level.onplayerconnect)) {
+  if(isDefined(level.onplayerconnect))
     level thread[[level.onplayerconnect]](localclientnum);
-  }
 
-  if(isDefined(level._customplayerconnectfuncs)) {
+  if(isDefined(level._customplayerconnectfuncs))
     [[level._customplayerconnectfuncs]](player, localclientnum);
-  }
 }
 
 dtp_effects() {
@@ -52,11 +50,10 @@ dtp_effects() {
     localplayer = getlocalplayer(localclientnum);
 
     if(!issplitscreen() && isDefined(localplayer) && localplayer == self) {
-      if(isDefined(level.iswinter) && level.iswinter) {
+      if(isDefined(level.iswinter) && level.iswinter)
         animateui(localclientnum, "fullscreen_snow", "dirt", "in", 0);
-      } else {
+      else
         animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
-      }
     }
   }
 }

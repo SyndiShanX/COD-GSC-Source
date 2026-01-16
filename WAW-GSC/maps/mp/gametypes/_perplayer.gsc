@@ -7,7 +7,7 @@
 
 init(id, playerBeginCallback, playerEndCallback) {
   precacheShader("objpoint_default");
-  handler = spawnStruct();
+  handler = spawnstruct();
   handler.id = id;
   handler.playerBeginCallback = playerBeginCallback;
   handler.playerEndCallback = playerEndCallback;
@@ -19,54 +19,47 @@ init(id, playerBeginCallback, playerEndCallback) {
 }
 
 enable(handler) {
-  if(handler.enabled) {
+  if(handler.enabled)
     return;
-  }
   handler.enabled = true;
   level.handlerGlobalFlagVal++;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++)
     players[i].handlerFlagVal = level.handlerGlobalFlagVal;
-  }
   players = handler.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].handlerFlagVal != level.handlerGlobalFlagVal) {
       continue;
     }
-    if(players[i].handlers[handler.id].ready) {
+    if(players[i].handlers[handler.id].ready)
       players[i] handlePlayer(handler);
-    }
   }
 }
 
 disable(handler) {
-  if(!handler.enabled) {
+  if(!handler.enabled)
     return;
-  }
   handler.enabled = false;
   level.handlerGlobalFlagVal++;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++)
     players[i].handlerFlagVal = level.handlerGlobalFlagVal;
-  }
   players = handler.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].handlerFlagVal != level.handlerGlobalFlagVal) {
       continue;
     }
-    if(players[i].handlers[handler.id].ready) {
+    if(players[i].handlers[handler.id].ready)
       players[i] unHandlePlayer(handler, false, false);
-    }
   }
 }
 
 onPlayerConnect(handler) {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
-    if(!isDefined(player.handlers)) {
+    if(!isDefined(player.handlers))
       player.handlers = [];
-    }
-    player.handlers[handler.id] = spawnStruct();
+    player.handlers[handler.id] = spawnstruct();
     player.handlers[handler.id].ready = false;
     player.handlers[handler.id].handled = false;
     player.handlerFlagVal = -1;
@@ -82,17 +75,16 @@ onPlayerConnect(handler) {
 onPlayerDisconnect(handler) {
   self waittill("disconnect");
   newplayers = [];
-  for(i = 0; i < handler.players.size; i++) {
+  for (i = 0; i < handler.players.size; i++)
     if(handler.players[i] != self)
-  }
-  newplayers[newplayers.size] = handler.players[i];
+      newplayers[newplayers.size] = handler.players[i];
   handler.players = newplayers;
   self thread unHandlePlayer(handler, true, true);
 }
 
 onJoinedTeam(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_team");
     self thread unHandlePlayer(handler, true, false);
   }
@@ -100,7 +92,7 @@ onJoinedTeam(handler) {
 
 onJoinedSpectators(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_spectators");
     self thread unHandlePlayer(handler, true, false);
   }
@@ -108,7 +100,7 @@ onJoinedSpectators(handler) {
 
 onPlayerSpawned(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread handlePlayer(handler);
   }
@@ -116,7 +108,7 @@ onPlayerSpawned(handler) {
 
 onPlayerKilled(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self thread unHandlePlayer(handler, true, false);
   }
@@ -127,22 +119,18 @@ handlePlayer(handler) {
   if(!handler.enabled) {
     return;
   }
-  if(self.handlers[handler.id].handled) {
+  if(self.handlers[handler.id].handled)
     return;
-  }
   self.handlers[handler.id].handled = true;
   self thread[[handler.playerBeginCallback]]();
 }
 
 unHandlePlayer(handler, unsetready, disconnected) {
-  if(!disconnected && unsetready) {
+  if(!disconnected && unsetready)
     self.handlers[handler.id].ready = false;
-  }
-  if(!self.handlers[handler.id].handled) {
+  if(!self.handlers[handler.id].handled)
     return;
-  }
-  if(!disconnected) {
+  if(!disconnected)
     self.handlers[handler.id].handled = false;
-  }
   self thread[[handler.playerEndCallback]](disconnected);
 }

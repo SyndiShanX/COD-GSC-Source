@@ -108,11 +108,10 @@ end_mantle_angle() {
   var_1 = anglesToForward(var_0);
   var_2 = vectornormalize(level.rorke_heli.origin - level.player.origin);
 
-  if(vectordot(var_1, var_2) > 0.75) {
+  if(vectordot(var_1, var_2) > 0.75)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 end_jump_mantle() {
@@ -124,15 +123,13 @@ end_jump_mantle() {
   for(;;) {
     self waittill("trigger");
 
-    if(end_mantle_angle()) {
+    if(end_mantle_angle())
       level.hud_mantle["text"].alpha = 1;
-    }
 
     level.hud_mantle["icon"].alpha = 1;
 
-    while(level.player istouching(self) && end_mantle_angle()) {
+    while(level.player istouching(self) && end_mantle_angle())
       wait 0.05;
-    }
 
     level.hud_mantle["text"].alpha = 0;
     level.hud_mantle["icon"].alpha = 0;
@@ -149,9 +146,8 @@ end_nojump() {
     common_scripts\utility::flag_set("end_no_jump");
     level.player allowjump(0);
 
-    while(level.player istouching(var_0)) {
+    while(level.player istouching(var_0))
       wait 0.05;
-    }
 
     level.player allowjump(1);
   }
@@ -160,6 +156,6 @@ end_nojump() {
 helicopter_fail() {
   level endon("player_jumped");
   level waittill("heli_got_away");
-  setdvar("ui_deadquote", &"FLOOD_HELICOPTER_ESCAPED");
+  setdvar("ui_deadquote", & "FLOOD_HELICOPTER_ESCAPED");
   thread maps\_utility::missionfailedwrapper();
 }

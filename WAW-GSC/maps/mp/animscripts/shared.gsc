@@ -12,9 +12,8 @@ HandleDogSoundNoteTracks(note) {
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound") {
+  if(prefix != "sound")
     return false;
-  }
   return true;
 }
 
@@ -23,13 +22,12 @@ growling() {
 }
 
 HandleNoteTrack(note, flagName, customFunction, var1) {
-  if(getdvarint("debug_dog_notetracks")) {
+  if(getdvarint("debug_dog_notetracks"))
     println("dog notetrack: " + flagName + " " + note + " " + GetTime());
-  }
-  if(isAI(self) && self.type == "dog") {
-    if(HandleDogSoundNoteTracks(note)) {}
-    return;
-  }
+  if(isAI(self) && self.type == "dog")
+    if(HandleDogSoundNoteTracks(note)) {
+      return;
+    }
   switch (note) {
     case "end":
     case "finish":
@@ -52,26 +50,25 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
 }
 
 DoNoteTracks(flagName, customFunction, var1) {
-  for(;;) {
+  for (;;) {
     self waittill(flagName, note);
-    if(!isDefined(note)) {
+    if(!isDefined(note))
       note = "undefined";
-    }
     val = self HandleNoteTrack(note, flagName, customFunction, var1);
-    if(isDefined(val)) {
+    if(isDefined(val))
       return val;
-    }
   }
 }
 
 DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, var1) {
-  if(isDefined(killString)) {
+  if(isDefined(killString))
     self endon(killString);
-  }
   self endon("killanimscript");
-  for(;;) {
+  for (;;) {
     time = GetTime();
-    returnedNote = [[notetracksFunc]](flagName, customFunction, var1);
+    returnedNote = [
+      [notetracksFunc]
+    ](flagName, customFunction, var1);
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
@@ -97,7 +94,7 @@ DoNoteTracksForTimeProc(doNoteTracksForeverFunc, time, flagName, customFunction,
 }
 
 DoNoteTracksForTime(time, flagName, customFunction, var1) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, ent, var1);
 }
@@ -122,23 +119,20 @@ trackLoop() {
     self.shootEnt = self.enemy;
   } else {
     doMaxAngleCheck = true;
-    if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean") {
+    if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean")
       pitchAdd = -1 * anim.coverCrouchLeanPitch;
-    }
-    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean") {
+    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean")
       yawAdd = self.coverNode.angles[1] - self.angles[1];
-    }
   }
   yawDelta = 0;
   pitchDelta = 0;
   firstFrame = true;
-  for(;;) {
+  for (;;) {
     incrAnimAimWeight();
     selfShootAtPos = (self.origin[0], self.origin[1], self getEye()[2]);
     shootPos = undefined;
-    if(isDefined(self.enemy)) {
+    if(isDefined(self.enemy))
       shootPos = self.enemy getShootAtPos();
-    }
     if(!isDefined(shootPos)) {
       yawDelta = 0;
       pitchDelta = 0;
@@ -154,28 +148,24 @@ trackLoop() {
       yawDelta = 0;
       pitchDelta = 0;
     } else {
-      if(yawDelta > self.rightAimLimit) {
+      if(yawDelta > self.rightAimLimit)
         yawDelta = self.rightAimLimit;
-      } else if(yawDelta < self.leftAimLimit) {
+      else if(yawDelta < self.leftAimLimit)
         yawDelta = self.leftAimLimit;
-      }
-      if(pitchDelta > self.upAimLimit) {
+      if(pitchDelta > self.upAimLimit)
         pitchDelta = self.upAimLimit;
-      } else if(pitchDelta < self.downAimLimit) {
+      else if(pitchDelta < self.downAimLimit)
         pitchDelta = self.downAimLimit;
-      }
     }
     if(firstFrame) {
       firstFrame = false;
     } else {
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > maxYawDeltaChange) {
+      if(abs(yawDeltaChange) > maxYawDeltaChange)
         yawDelta = prevYawDelta + maxYawDeltaChange * sign(yawDeltaChange);
-      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > maxPitchDeltaChange) {
+      if(abs(pitchDeltaChange) > maxPitchDeltaChange)
         pitchDelta = prevPitchDelta + maxPitchDeltaChange * sign(pitchDeltaChange);
-      }
     }
     prevYawDelta = yawDelta;
     prevPitchDelta = pitchDelta;

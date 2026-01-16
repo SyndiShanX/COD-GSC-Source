@@ -23,9 +23,9 @@ aud_ignore_timescale() {
 }
 
 aud_check(var_0) {
-  if(var_0 == "slow_intro") {
+  if(var_0 == "slow_intro")
     level.player setclienttriggeraudiozone("intro_part1");
-  } else if(var_0 == "medbay") {
+  else if(var_0 == "medbay") {
     thread slow_intro_alarms();
     thread aud_medbay_alarms();
     thread aud_medbay_pa();
@@ -99,15 +99,14 @@ aud_deck_transition_zone() {
 }
 
 aud_defend_zodiac_zone() {
-  if(!common_scripts\utility::flag("defend_zodiac_finished")) {
+  if(!common_scripts\utility::flag("defend_zodiac_finished"))
     level.player setclienttriggeraudiozone("defend_zodiac", 6);
-  }
 }
 
 aud_defend_zodiac_osprey_zone() {
-  if(level.aud_osprey_run < 2.0) {
+  if(level.aud_osprey_run < 2.0)
     level.player setclienttriggeraudiozone("defend_zodiac", 0.2);
-  } else {
+  else {
     level.player setclienttriggeraudiozone("sparrow_run", 0.2);
     thread aud_gunship_circling_pattern();
   }
@@ -180,9 +179,8 @@ slow_intro_alarms() {
   common_scripts\utility::flag_wait("slow_intro_alarms");
   var_0 = getEntArray("slow_intro_alarm", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread maps\_utility::sound_fade_in("emt_crew_alarm", 2.0, 3.0, 1);
-  }
+  foreach(var_2 in var_0)
+  var_2 thread maps\_utility::sound_fade_in("emt_crew_alarm", 2.0, 3.0, 1);
 
   common_scripts\utility::flag_waitopen("slow_intro_alarms");
   common_scripts\utility::array_thread(var_0, maps\_utility::sound_fade_and_delete, 2);
@@ -541,11 +539,10 @@ aud_sparrow_aiming() {
   while(!common_scripts\utility::flag("defend_sparrow_finished")) {
     var_1 = level.player getplayerangles();
 
-    if(distance(var_0, var_1) > 0.001) {
+    if(distance(var_0, var_1) > 0.001)
       level.aud_sparrow_launcher_loop maps\_utility::sound_fade_in("scn_carr_sparrow_aim", 1, 0.06, 1);
-    } else {
+    else
       level.aud_sparrow_launcher_loop stoploopsound();
-    }
 
     var_0 = var_1;
     common_scripts\utility::waitframe();
@@ -600,11 +597,10 @@ aud_carr_sparrow_105_incoming() {
 }
 
 aud_carr_sparrow_105_hit(var_0) {
-  if(level.aud_in_sparrow == 1) {
+  if(level.aud_in_sparrow == 1)
     thread common_scripts\utility::play_sound_in_space("scn_carr_105_shell_exp_lr", (1707, 6915, 1721));
-  } else {
+  else
     thread common_scripts\utility::play_sound_in_space("scn_carr_sparrow_exp", var_0);
-  }
 }
 
 aud_carr_gunship_killed() {
@@ -937,9 +933,8 @@ aud_play_loop_until_flag(var_0, var_1, var_2) {
 }
 
 ocean_line_emitter_logic(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     self endon(var_2);
-  }
 
   var_3 = spawn("script_origin", (0, 0, 0));
   var_4 = undefined;

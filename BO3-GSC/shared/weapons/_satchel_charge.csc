@@ -13,7 +13,7 @@
 function init_shared(localclientnum) {
   level._effect["satchel_charge_enemy_light"] = "weapon/fx_c4_light_orng";
   level._effect["satchel_charge_friendly_light"] = "weapon/fx_c4_light_blue";
-  callback::add_weapon_type("satchel_charge", &satchel_spawned);
+  callback::add_weapon_type("satchel_charge", & satchel_spawned);
 }
 
 function satchel_spawned(localclientnum) {

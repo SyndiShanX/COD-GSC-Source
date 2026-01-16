@@ -23,7 +23,7 @@ flashRumbleLoop(duration) {
 
   goalTime = getTime() + duration * 1000;
 
-  while(getTime() < goalTime) {
+  while (getTime() < goalTime) {
     self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
@@ -32,41 +32,36 @@ flashRumbleLoop(duration) {
 monitorFlash() {
   self endon("disconnect");
   self.flashEndTime = 0;
-  while(1) {
+  while (1) {
     self waittill("flashbang", origin, amount_distance, amount_angle, attacker);
 
-    if(!isalive(self)) {
+    if(!isalive(self))
       continue;
-    }
 
-    if(isDefined(self.usingRemote)) {
+    if(isDefined(self.usingRemote))
       continue;
-    }
 
     hurtattacker = false;
     hurtvictim = true;
 
-    if(amount_angle < 0.5) {
+    if(amount_angle < 0.5)
       amount_angle = 0.5;
-    } else if(amount_angle > 0.8) {
+    else if(amount_angle > 0.8)
       amount_angle = 1;
-    }
 
     duration = amount_distance * amount_angle * 6;
 
-    if(duration < 0.25) {
+    if(duration < 0.25)
       continue;
-    }
 
     rumbleduration = undefined;
-    if(duration > 2) {
+    if(duration > 2)
       rumbleduration = 0.75;
-    } else {
+    else
       rumbleduration = 0.25;
-    }
 
-    assert(isDefined(self.pers["team"]));
-    if(level.teamBased && isDefined(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"] && attacker != self) {
+    assert(isdefined(self.pers["team"]));
+    if(level.teamBased && isdefined(attacker) && isdefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"] && attacker != self) {
       if(level.friendlyfire == 0) // no FF
       {
         continue;
@@ -87,12 +82,10 @@ monitorFlash() {
       attacker notify("flash_hit");
     }
 
-    if(hurtvictim) {
+    if(hurtvictim)
       self thread applyFlash(duration, rumbleduration);
-    }
-    if(hurtattacker) {
+    if(hurtattacker)
       attacker thread applyFlash(duration, rumbleduration);
-    }
   }
 }
 
@@ -100,20 +93,18 @@ applyFlash(duration, rumbleduration) {
   // wait for the highest flash duration this frame,
   // and apply it in the following frame
 
-  if(!isDefined(self.flashDuration) || duration > self.flashDuration) {
+  if(!isdefined(self.flashDuration) || duration > self.flashDuration)
     self.flashDuration = duration;
-  }
-  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration) {
+  if(!isdefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration)
     self.flashRumbleDuration = rumbleduration;
-  }
 
   wait .05;
 
-  if(isDefined(self.flashDuration)) {
+  if(isdefined(self.flashDuration)) {
     self shellshock("flashbang_mp", self.flashDuration); // TODO: avoid shellshock overlap
     self.flashEndTime = getTime() + (self.flashDuration * 1000);
   }
-  if(isDefined(self.flashRumbleDuration)) {
+  if(isdefined(self.flashRumbleDuration)) {
     self thread flashRumbleLoop(self.flashRumbleDuration); //TODO: Non-hacky rumble.
   }
 

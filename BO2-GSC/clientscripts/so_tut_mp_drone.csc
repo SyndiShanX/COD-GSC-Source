@@ -24,9 +24,8 @@ main() {
   clientscripts\_footsteps::registeraitypefootstepcb("So_Enemy_Bigdog", clientscripts\_footsteps::bigdogfootstepcbfunc);
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   thread waitforclient(0);
   register_clientflag_callback("scriptmover", 6, ::make_fake_blackhawk);

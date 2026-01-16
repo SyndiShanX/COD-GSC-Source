@@ -12,9 +12,9 @@
 #namespace escort;
 
 function main() {
-  clientfield::register("actor", "robot_state", 1, 2, "int", &robot_state_changed, 0, 1);
-  clientfield::register("actor", "escort_robot_burn", 1, 1, "int", &robot_burn, 0, 0);
-  callback::on_localclient_connect(&on_localclient_connect);
+  clientfield::register("actor", "robot_state", 1, 2, "int", & robot_state_changed, 0, 1);
+  clientfield::register("actor", "escort_robot_burn", 1, 1, "int", & robot_burn, 0, 0);
+  callback::on_localclient_connect( & on_localclient_connect);
 }
 
 function onprecachegametype() {}
@@ -22,7 +22,7 @@ function onprecachegametype() {}
 function onstartgametype() {}
 
 function on_localclient_connect(localclientnum) {
-  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "escortGametype.robotStatusText"), &"MPUI_ESCORT_ROBOT_MOVING");
+  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "escortGametype.robotStatusText"), & "MPUI_ESCORT_ROBOT_MOVING");
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "escortGametype.robotStatusVisible"), 0);
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "escortGametype.enemyRobot"), 0);
   level wait_team_changed(localclientnum);
@@ -46,7 +46,7 @@ function watch_fx_shutdown(localclientnum, fxhandles) {
 
 function robot_state_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bnewent) {
-    if(!isDefined(level.escortrobots)) {
+    if(!isdefined(level.escortrobots)) {
       level.escortrobots = [];
     } else if(!isarray(level.escortrobots)) {
       level.escortrobots = array(level.escortrobots);
@@ -62,12 +62,12 @@ function robot_state_changed(localclientnum, oldval, newval, bnewent, binitialsn
 }
 
 function wait_team_changed(localclientnum) {
-  while(true) {
+  while (true) {
     level waittill("team_changed");
-    while(!isDefined(getnonpredictedlocalplayer(localclientnum))) {
+    while (!isdefined(getnonpredictedlocalplayer(localclientnum))) {
       wait(0.05);
     }
-    if(!isDefined(level.escortrobots)) {
+    if(!isdefined(level.escortrobots)) {
       continue;
     }
     foreach(robot in level.escortrobots) {

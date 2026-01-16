@@ -32,13 +32,13 @@
 function autoexec init() {
   function_24ed806f();
   level flag::init("can_spawn_mechz", 1);
-  spawner::add_archetype_spawn_function("mechz", &function_d8d01032);
-  spawner::add_archetype_spawn_function("mechz", &function_b7e11612);
+  spawner::add_archetype_spawn_function("mechz", & function_d8d01032);
+  spawner::add_archetype_spawn_function("mechz", & function_b7e11612);
   level thread function_76e7495b();
-  level.mechz_should_stun_override = &function_f517cdd6;
-  level.var_7f2a926d = &mechz_health_increases;
-  level.mechz_damage_override = &mechz_damage_override;
-  level.var_7d2a391d = &spawn_effect;
+  level.mechz_should_stun_override = & function_f517cdd6;
+  level.var_7f2a926d = & mechz_health_increases;
+  level.mechz_damage_override = & mechz_damage_override;
+  level.var_7d2a391d = & spawn_effect;
   if(ai::shouldregisterclientfieldforarchetype("mechz")) {
     clientfield::register("actor", "death_ray_shock_fx", 15000, 1, "int");
   }
@@ -47,23 +47,23 @@ function autoexec init() {
 }
 
 function private function_24ed806f() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", &function_b25360f);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisVortexService", &function_8746ceea);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzOctobombService", &function_2ffb7337);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", &function_beb13c4b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", &function_fc277828);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", &function_d1cb5cbc);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzShouldOctobombAttack", &function_4e06a982);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", &function_4210ca29);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", &function_910e57ee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzDestoryOctobomb", &function_78198ba2);
-  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", &function_45f397ee, undefined, &function_9da58a6f);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@mechz", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", & function_b25360f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisVortexService", & function_8746ceea);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzOctobombService", & function_2ffb7337);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", & function_beb13c4b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", & function_fc277828);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", & function_d1cb5cbc);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzShouldOctobombAttack", & function_4e06a982);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", & function_4210ca29);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", & function_910e57ee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzDestoryOctobomb", & function_78198ba2);
+  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", & function_45f397ee, undefined, & function_9da58a6f);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@mechz", & teleporttraversalmocompstart, undefined, undefined);
 }
 
 function private function_76e7495b() {
   wait(0.5);
-  var_85129cef = getEntArray("zombie_trap", "targetname");
+  var_85129cef = getentarray("zombie_trap", "targetname");
   foreach(e_trap in var_85129cef) {
     if(e_trap.script_noteworthy == "electric") {
       level.electric_trap = e_trap;
@@ -72,7 +72,7 @@ function private function_76e7495b() {
 }
 
 function private function_b25360f(entity) {
-  if(isDefined(entity.var_d77404f7) && entity.var_d77404f7 || (isDefined(entity.var_72308ff2) && entity.var_72308ff2)) {
+  if(isdefined(entity.var_d77404f7) && entity.var_d77404f7 || (isdefined(entity.var_72308ff2) && entity.var_72308ff2)) {
     return true;
   }
   if(level flag::get("masher_on")) {
@@ -80,8 +80,8 @@ function private function_b25360f(entity) {
       return true;
     }
   }
-  if(isDefined(level.electric_trap)) {
-    if(isDefined(level.electric_trap._trap_in_use) && level.electric_trap._trap_in_use && (!(isDefined(level.electric_trap._trap_cooling_down) && level.electric_trap._trap_cooling_down))) {
+  if(isdefined(level.electric_trap)) {
+    if(isdefined(level.electric_trap._trap_in_use) && level.electric_trap._trap_in_use && (!(isdefined(level.electric_trap._trap_cooling_down) && level.electric_trap._trap_cooling_down))) {
       if(entity function_d8f5da34("elec_trap_switch")) {
         return true;
       }
@@ -91,7 +91,7 @@ function private function_b25360f(entity) {
 }
 
 function private function_604404(entity) {
-  if(isDefined(self.react)) {
+  if(isdefined(self.react)) {
     foreach(react in self.react) {
       if(react == entity) {
         return true;
@@ -102,7 +102,7 @@ function private function_604404(entity) {
 }
 
 function private function_e92d3bb1(entity) {
-  if(!isDefined(self.react)) {
+  if(!isdefined(self.react)) {
     self.react = [];
   }
   self.react[self.react.size] = entity;
@@ -112,14 +112,14 @@ function private function_8746ceea(entity) {
   if(!entity zm_ai_mechz::function_58655f2a()) {
     return false;
   }
-  if(isDefined(level.vortex_manager) && isDefined(level.vortex_manager.a_active_vorticies)) {
+  if(isdefined(level.vortex_manager) && isdefined(level.vortex_manager.a_active_vorticies)) {
     foreach(vortex in level.vortex_manager.a_active_vorticies) {
       if(!vortex function_604404(entity)) {
         dist_sq = distancesquared(vortex.origin, self.origin);
         if(dist_sq < 9216) {
           entity.stun = 1;
           entity.vortex = vortex;
-          if(isDefined(vortex.weapon) && idgun::function_9b7ac6a9(vortex.weapon)) {
+          if(isdefined(vortex.weapon) && idgun::function_9b7ac6a9(vortex.weapon)) {
             blackboard::setblackboardattribute(entity, "_zombie_damageweapon_type", "packed");
           }
           vortex function_e92d3bb1(entity);
@@ -132,13 +132,13 @@ function private function_8746ceea(entity) {
 }
 
 function private function_2ffb7337(entity) {
-  if(isDefined(entity.destroy_octobomb)) {
+  if(isdefined(entity.destroy_octobomb)) {
     entity setgoal(entity.destroy_octobomb.origin);
     return true;
   }
-  if(isDefined(level.octobombs)) {
+  if(isdefined(level.octobombs)) {
     foreach(octobomb in level.octobombs) {
-      if(isDefined(octobomb)) {
+      if(isdefined(octobomb)) {
         dist_sq = distancesquared(octobomb.origin, self.origin);
         if(dist_sq < 360000) {
           entity.destroy_octobomb = octobomb;
@@ -162,7 +162,7 @@ function private function_d8f5da34(var_2dba2212) {
       self.s_trap = s_trap;
     }
   }
-  if(isDefined(self.s_trap)) {
+  if(isdefined(self.s_trap)) {
     self.var_d77404f7 = 1;
     self.ignoreall = 1;
     self setgoal(self.s_trap.origin);
@@ -175,7 +175,7 @@ function private function_d8f5da34(var_2dba2212) {
 function function_957c9419() {
   self endon("death");
   wait(60);
-  if(isDefined(self.var_d77404f7) && self.var_d77404f7 || (isDefined(self.var_72308ff2) && self.var_72308ff2) || (isDefined(self.ignoreall) && self.ignoreall)) {
+  if(isdefined(self.var_d77404f7) && self.var_d77404f7 || (isdefined(self.var_72308ff2) && self.var_72308ff2) || (isdefined(self.ignoreall) && self.ignoreall)) {
     self.var_d77404f7 = 0;
     self.var_72308ff2 = 0;
     self.ignoreall = 0;
@@ -184,7 +184,7 @@ function function_957c9419() {
 }
 
 function function_beb13c4b(entity) {
-  if(isDefined(entity.var_d77404f7) && entity.var_d77404f7) {
+  if(isdefined(entity.var_d77404f7) && entity.var_d77404f7) {
     return true;
   }
   return false;
@@ -198,14 +198,14 @@ function function_fc277828(entity) {
 }
 
 function function_d1cb5cbc(entity) {
-  if(isDefined(entity.var_72308ff2) && entity.var_72308ff2) {
+  if(isdefined(entity.var_72308ff2) && entity.var_72308ff2) {
     return true;
   }
   return false;
 }
 
 function private function_4e06a982(entity) {
-  if(!isDefined(entity.destroy_octobomb)) {
+  if(!isdefined(entity.destroy_octobomb)) {
     return false;
   }
   if(distancesquared(entity.origin, entity.destroy_octobomb.origin) > 16384) {
@@ -226,7 +226,7 @@ function function_4210ca29(entity) {
 function function_910e57ee(entity) {
   entity.var_72308ff2 = 0;
   entity.ignoreall = 0;
-  if(isDefined(entity.s_trap)) {
+  if(isdefined(entity.s_trap)) {
     if(entity.s_trap.script_noteworthy == "masher_trap_switch") {
       level flag::clear("masher_on");
     } else {
@@ -237,7 +237,7 @@ function function_910e57ee(entity) {
 }
 
 function function_78198ba2(entity) {
-  if(isDefined(entity.destroy_octobomb)) {
+  if(isdefined(entity.destroy_octobomb)) {
     entity.destroy_octobomb detonate();
     entity.destroy_octobomb = undefined;
   }
@@ -254,7 +254,7 @@ function function_9da58a6f(entity, mocompanim, mocompanimblendouttime, mocompani
 }
 
 function mechz_health_increases() {
-  if(!isDefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
+  if(!isdefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
     a_players = getplayers();
     n_player_modifier = 1;
     switch (a_players.size) {
@@ -299,16 +299,16 @@ function function_26beb37e(n_value, n_limit, n_player_modifier) {
 }
 
 function function_d8d01032() {
-  self.idgun_damage_cb = &function_5f2149bb;
-  self.var_c732138b = &function_1df1ec14;
-  self.traversalspeedboost = &function_40ef38f8;
+  self.idgun_damage_cb = & function_5f2149bb;
+  self.var_c732138b = & function_1df1ec14;
+  self.traversalspeedboost = & function_40ef38f8;
   self thread function_a2a11991();
   self thread function_b2a1b297();
   self thread function_2a26e636();
   self thread zm::update_zone_name();
   self waittill("death");
   self thread function_2a2bfc25();
-  if(isDefined(self.var_9b31a70d) && self.var_9b31a70d) {
+  if(isdefined(self.var_9b31a70d) && self.var_9b31a70d) {
     level.var_638dde56--;
   }
   level notify("hash_8f65ad3d");
@@ -330,15 +330,15 @@ function function_b7e11612() {
 function function_b2a1b297() {
   self waittill("actor_corpse", mechz);
   wait(60);
-  if(isDefined(mechz)) {
+  if(isdefined(mechz)) {
     mechz delete();
   }
 }
 
 function function_2a26e636() {
   self endon("death");
-  while(true) {
-    if(!isDefined(self.zone_name)) {
+  while (true) {
+    if(!isdefined(self.zone_name)) {
       wait(0.1);
       continue;
     }
@@ -346,19 +346,19 @@ function function_2a26e636() {
     var_e01c8f74 = 1;
     players = getplayers();
     foreach(player in players) {
-      if(isDefined(player.var_5aef0317) && player.var_5aef0317 || (isDefined(player.var_a393601c) && player.var_a393601c)) {
+      if(isdefined(player.var_5aef0317) && player.var_5aef0317 || (isdefined(player.var_a393601c) && player.var_a393601c)) {
         var_225b5e15 = 0;
         var_e01c8f74 = 0;
         break;
         continue;
       }
-      if(isDefined(player.am_i_valid) && player.am_i_valid) {
-        if(!isDefined(player.zone_name)) {
+      if(isdefined(player.am_i_valid) && player.am_i_valid) {
+        if(!isdefined(player.zone_name)) {
           var_225b5e15 = 0;
           var_e01c8f74 = 0;
           break;
         }
-        if(isDefined(player.zone_name)) {
+        if(isdefined(player.zone_name)) {
           if(player.zone_name == "apothicon_interior_zone") {
             var_e01c8f74 = 0;
             continue;
@@ -381,7 +381,7 @@ function function_2a26e636() {
 
 function function_17da3db2() {
   wait(0.05);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
   wait(1.1);
@@ -390,15 +390,15 @@ function function_17da3db2() {
 
 function function_a2a11991() {
   self endon("death");
-  while(!isDefined(self.zombie_lift_override)) {
+  while (!isdefined(self.zombie_lift_override)) {
     wait(0.05);
   }
-  self.zombie_lift_override = &function_2d571578;
+  self.zombie_lift_override = & function_2d571578;
 }
 
 function function_2a2bfc25() {
   self waittill("hash_46c1e51d");
-  if(level flag::get("zombie_drop_powerups") && (!(isDefined(self.no_powerups) && self.no_powerups))) {
+  if(level flag::get("zombie_drop_powerups") && (!(isdefined(self.no_powerups) && self.no_powerups))) {
     a_bonus_types = array("double_points", "insta_kill", "full_ammo", "nuke");
     str_type = array::random(a_bonus_types);
     zm_powerups::specific_powerup_drop(str_type, self.origin);
@@ -411,7 +411,7 @@ function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime
   entity.is_teleporting = 1;
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("normal");
-  if(isDefined(entity.traversestartnode)) {
+  if(isdefined(entity.traversestartnode)) {
     portal_trig = entity.traversestartnode.portal_trig;
     portal_trig thread zm_genesis_portals::portal_teleport_ai(entity);
   }
@@ -419,8 +419,8 @@ function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime
 
 function function_2d571578(e_player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, n_lift_speed) {
   self endon("death");
-  if(isDefined(self.in_gravity_trap) && self.in_gravity_trap && e_player.gravityspikes_state === 3) {
-    if(isDefined(self.var_1f5fe943) && self.var_1f5fe943) {
+  if(isdefined(self.in_gravity_trap) && self.in_gravity_trap && e_player.gravityspikes_state === 3) {
+    if(isdefined(self.var_1f5fe943) && self.var_1f5fe943) {
       return;
     }
     self.var_bcecff1d = 1;
@@ -430,10 +430,10 @@ function function_2d571578(e_player, v_attack_source, n_push_away, n_lift_height
     self thread scene::play("cin_zm_dlc1_mechz_dth_deathray_01", self);
     self clientfield::set("sparky_beam_fx", 1);
     self clientfield::set("death_ray_shock_fx", 1);
-    self playSound("zmb_talon_electrocute");
+    self playsound("zmb_talon_electrocute");
     n_start_time = gettime();
     n_total_time = 0;
-    while(10 > n_total_time && e_player.gravityspikes_state === 3) {
+    while (10 > n_total_time && e_player.gravityspikes_state === 3) {
       util::wait_network_frame();
       n_total_time = (gettime() - n_start_time) / 1000;
     }
@@ -442,14 +442,14 @@ function function_2d571578(e_player, v_attack_source, n_push_away, n_lift_height
     self clientfield::set("sparky_beam_fx", 0);
     self clientfield::set("death_ray_shock_fx", 0);
     self.var_bcecff1d = undefined;
-    while(e_player.gravityspikes_state === 3) {
+    while (e_player.gravityspikes_state === 3) {
       util::wait_network_frame();
     }
     self.var_1f5fe943 = undefined;
     self.in_gravity_trap = undefined;
   } else {
     self dodamage(10, self.origin);
-    if(!(isDefined(self.stun) && self.stun)) {
+    if(!(isdefined(self.stun) && self.stun)) {
       self.stun = 1;
     }
   }
@@ -457,16 +457,16 @@ function function_2d571578(e_player, v_attack_source, n_push_away, n_lift_height
 
 function function_a0b6d6b9(mechz) {
   mechz endon("death");
-  if(isDefined(mechz)) {
+  if(isdefined(mechz)) {
     mechz scene::play("cin_zm_dlc1_mechz_dth_deathray_02", mechz);
   }
-  if(isDefined(mechz) && isalive(mechz) && isDefined(mechz.var_ab0efcf6)) {
+  if(isdefined(mechz) && isalive(mechz) && isdefined(mechz.var_ab0efcf6)) {
     v_eye_pos = mechz gettagorigin("tag_eye");
     recordline(mechz.origin, v_eye_pos, vectorscale((0, 1, 0), 255), "", mechz);
-    trace = bulletTrace(v_eye_pos, mechz.origin, 0, mechz);
+    trace = bullettrace(v_eye_pos, mechz.origin, 0, mechz);
     if(trace["position"] !== mechz.origin) {
       point = getclosestpointonnavmesh(trace["position"], 64, 30);
-      if(!isDefined(point)) {
+      if(!isdefined(point)) {
         point = mechz.var_ab0efcf6;
       }
       mechz forceteleport(point);
@@ -504,7 +504,7 @@ function private function_40ef38f8() {
 }
 
 function mechz_damage_override(attacker, damage) {
-  if(isDefined(attacker.var_bbd3efb8)) {
+  if(isdefined(attacker.var_bbd3efb8)) {
     damage = damage * attacker.var_bbd3efb8;
   }
   return damage;
@@ -533,7 +533,7 @@ function function_78e44cda() {
   wait(0.05);
   setdvar("", 0);
   adddebugcommand("");
-  while(true) {
+  while (true) {
     if(getdvarint("")) {
       setdvar("", 0);
       level thread function_eac1444a();

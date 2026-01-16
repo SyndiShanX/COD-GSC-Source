@@ -204,9 +204,8 @@ main() {
   if(!getdvarint("r_reflectionProbeGenerate")) {
     maps\createfx\cornered_fx::main();
 
-    if(getdvar("createfx") == "") {
+    if(getdvar("createfx") == "")
       grab_firework_effects();
-    }
 
     maps\createfx\cornered_sound::main();
   }
@@ -343,28 +342,24 @@ activate_fireworks_exploder(var_0) {
     var_1 = 1;
   }
 
-  if(!var_1) {
+  if(!var_1)
     common_scripts\utility::exploder(var_0);
-  }
 }
 
 activate_individual_fireworks_exploder() {
-  if(isDefined(self.delay)) {
+  if(isDefined(self.delay))
     wait(self.delay);
-  }
 
-  if(isDefined(self.fxent)) {
+  if(isDefined(self.fxent))
     self.fxent delete();
-  }
 
   var_0 = anglesToForward(self.angles);
   var_1 = anglestoup(self.angles);
   self.fxent = spawnfx(common_scripts\utility::getfx(self.fxid), self.origin, var_0, var_1);
   triggerfx(self.fxent);
 
-  if(isDefined(self.soundalias)) {
+  if(isDefined(self.soundalias))
     common_scripts\utility::play_sound_in_space(self.soundalias, self.origin);
-  }
 }
 
 grab_firework_effects() {
@@ -411,13 +406,11 @@ convert_to_fireworks_effect(var_0) {
   var_1.angles = var_0.v["angles"];
   var_1.exploder = var_0.v["exploder"];
 
-  if(isDefined(var_0.v["soundalias"])) {
+  if(isDefined(var_0.v["soundalias"]))
     var_1.soundalias = var_0.v["soundalias"];
-  }
 
-  if(isDefined(var_0.v["delay"])) {
+  if(isDefined(var_0.v["delay"]))
     var_1.delay = var_0.v["delay"];
-  }
 
   return var_1;
 }
@@ -453,28 +446,25 @@ fx_screen_raindrops() {
     if(!common_scripts\utility::flag("fx_screen_raindrops")) {
       level waittill("fx_screen_raindrops");
 
-      if(!common_scripts\utility::flag("fx_screen_raindrops")) {
+      if(!common_scripts\utility::flag("fx_screen_raindrops"))
         continue;
-      }
     }
 
     var_1 = level.player getplayerangles();
     var_0 = var_0 + 1;
 
-    if(var_0 > 4) {
+    if(var_0 > 4)
       var_0 = 0;
-    }
 
     if(common_scripts\utility::flag("player_is_ziplining")) {
-      if(var_1[0] < -40) {
+      if(var_1[0] < -40)
         playFXOnTag(level._effect["raindrops_screen_20_" + var_0], level.screenrain, "tag_origin");
-      } else if(var_1[0] < -25) {
+      else if(var_1[0] < -25)
         playFXOnTag(level._effect["raindrops_screen_10_" + var_0], level.screenrain, "tag_origin");
-      } else if(var_1[0] < 25) {
+      else if(var_1[0] < 25)
         playFXOnTag(level._effect["raindrops_screen_5_" + var_0], level.screenrain, "tag_origin");
-      } else if(var_1[0] < 40) {
+      else if(var_1[0] < 40)
         playFXOnTag(level._effect["raindrops_screen_3_" + var_0], level.screenrain, "tag_origin");
-      }
     }
 
     wait(getdvarfloat("screen_rain_zipline_repeat_seconds", 0.1));
@@ -482,9 +472,8 @@ fx_screen_raindrops() {
 }
 
 fx_screen_water_sheeting(var_0, var_1) {
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level endon(var_1);
-  }
 
   var_2 = getent(var_0, "targetname");
 

@@ -46,20 +46,20 @@ weapons_get_dvar(dvar, def) {
   }
 }
 setUpRetrievableHintStrings() {
-  createRetrievableHint("hatchet", &"MP_HATCHET_PICKUP");
-  createRetrievableHint("claymore", &"MP_CLAYMORE_PICKUP");
-  createRetrievableHint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_PICKUP");
-  createRetrievableHint("camera_spike", &"MP_CAMERA_SPIKE_PICKUP");
-  createRetrievableHint("satchel_charge", &"MP_SATCHEL_CHARGE_PICKUP");
-  createRetrievableHint("scrambler", &"MP_SCRAMBLER_PICKUP");
-  createHackerHint("claymore_mp", &"MP_CLAYMORE_HACKING");
-  createHackerHint("acoustic_sensor_mp", &"MP_ACOUSTIC_SENSOR_HACKING");
-  createHackerHint("camera_spike_mp", &"MP_CAMERA_SPIKE_HACKING");
-  createHackerHint("satchel_charge_mp", &"MP_SATCHEL_CHARGE_HACKING");
-  createHackerHint("scrambler_mp", &"MP_SCRAMBLER_HACKING");
+  createRetrievableHint("hatchet", & "MP_HATCHET_PICKUP");
+  createRetrievableHint("claymore", & "MP_CLAYMORE_PICKUP");
+  createRetrievableHint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_PICKUP");
+  createRetrievableHint("camera_spike", & "MP_CAMERA_SPIKE_PICKUP");
+  createRetrievableHint("satchel_charge", & "MP_SATCHEL_CHARGE_PICKUP");
+  createRetrievableHint("scrambler", & "MP_SCRAMBLER_PICKUP");
+  createHackerHint("claymore_mp", & "MP_CLAYMORE_HACKING");
+  createHackerHint("acoustic_sensor_mp", & "MP_ACOUSTIC_SENSOR_HACKING");
+  createHackerHint("camera_spike_mp", & "MP_CAMERA_SPIKE_HACKING");
+  createHackerHint("satchel_charge_mp", & "MP_SATCHEL_CHARGE_HACKING");
+  createHackerHint("scrambler_mp", & "MP_SCRAMBLER_HACKING");
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player.usedWeapons = false;
     player.hits = 0;
@@ -68,7 +68,7 @@ onPlayerConnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     pixbeginevent("onPlayerSpawned");
     self createBaseWatchers();
@@ -89,24 +89,22 @@ onPlayerSpawned() {
   }
 }
 createBaseWatchers() {
-  for(i = 0; i < level.watcherWeaponNames.size; i++) {
+  for (i = 0; i < level.watcherWeaponNames.size; i++) {
     watcherName = getSubStr(level.watcherWeaponNames[i], 0, level.watcherWeaponNames[i].size - 3);
     self createWeaponObjectWatcher(watcherName, level.watcherWeaponNames[i], self.team);
   }
-  for(i = 0; i < level.retrievableWeapons.size; i++) {
+  for (i = 0; i < level.retrievableWeapons.size; i++) {
     watcherName = getSubStr(level.retrievableWeapons[i], 0, level.retrievableWeapons[i].size - 3);
     self createWeaponObjectWatcher(watcherName, level.retrievableWeapons[i], self.team);
   }
 }
 setupRetrievableWatcher() {
-  for(i = 0; i < level.retrievableWeapons.size; i++) {
+  for (i = 0; i < level.retrievableWeapons.size; i++) {
     watcher = getWeaponObjectWatcherByWeapon(level.retrievableWeapons[i]);
-    if(!isDefined(watcher.onSpawnRetrieveTriggers)) {
+    if(!isDefined(watcher.onSpawnRetrieveTriggers))
       watcher.onSpawnRetrieveTriggers = ::onSpawnRetrievableWeaponObject;
-    }
-    if(!isDefined(watcher.pickUp)) {
+    if(!isDefined(watcher.pickUp))
       watcher.pickUp = ::pickUp;
-    }
   }
 }
 createBallisticKnifeWatcher() {
@@ -159,7 +157,7 @@ createClaymoreWatcher() {
 }
 waittillNotMoving_and_notStunned() {
   prevorigin = self.origin;
-  while(1) {
+  while (1) {
     wait .15;
     if(self.origin == prevorigin && !(self isstunned())) {
       break;
@@ -167,7 +165,7 @@ waittillNotMoving_and_notStunned() {
     prevorigin = self.origin;
   }
 }
-voidOnspawn(unused0, unused1) {}
+voidOnSpawn(unused0, unused1) {}
 deleteEnt(attacker) {
   self delete();
 }
@@ -178,10 +176,9 @@ clearFXOnDeath(fx) {
 }
 deleteWeaponObjectArray() {
   if(isDefined(self.objectArray)) {
-    for(i = 0; i < self.objectArray.size; i++) {
-      if(isDefined(self.objectArray[i])) {
+    for (i = 0; i < self.objectArray.size; i++) {
+      if(isDefined(self.objectArray[i]))
         self.objectArray[i] delete();
-      }
     }
   }
   self.objectArray = [];
@@ -198,15 +195,12 @@ weaponDetonate(attacker) {
 waitAndDetonate(object, delay, attacker) {
   object endon("death");
   object endon("hacked");
-  if(delay) {
+  if(delay)
     wait(delay);
-  }
-  if(isDefined(object.detonated) && object.detonated == true) {
+  if(isDefined(object.detonated) && object.detonated == true)
     return;
-  }
-  if(!isDefined(self.detonate)) {
+  if(!isDefined(self.detonate))
     return;
-  }
   if(isDefined(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
     if(level.teambased) {
       if(attacker.pers["team"] != object.owner.pers["team"]) {
@@ -224,12 +218,11 @@ waitAndDetonate(object, delay, attacker) {
   object[[self.detonate]](attacker);
 }
 detonateWeaponObjectArray(forceDetonation, weapon) {
-  if(isDefined(self.disableDetonation) && self.disableDetonation) {
+  if(isDefined(self.disableDetonation) && self.disableDetonation)
     return;
-  }
   undetonated = [];
   if(isDefined(self.objectArray)) {
-    for(i = 0; i < self.objectArray.size; i++) {
+    for (i = 0; i < self.objectArray.size; i++) {
       if(isDefined(self.objectArray[i])) {
         if(self.objectArray[i] isstunned() && forceDetonation == false) {
           undetonated[undetonated.size] = self.objectArray[i];
@@ -256,9 +249,8 @@ addWeaponObjectToWatcher(watcherName, weapon) {
   self addWeaponObject(watcher, weapon);
 }
 addWeaponObject(watcher, weapon) {
-  if(!isDefined(watcher.storeDifferentObject)) {
+  if(!isDefined(watcher.storeDifferentObject))
     watcher.objectArray[watcher.objectArray.size] = weapon;
-  }
   weapon.owner = self;
   weapon.detonated = false;
   weapon.name = watcher.weapon;
@@ -268,36 +260,28 @@ addWeaponObject(watcher, weapon) {
     weapon thread weaponObjectDamage(watcher);
   }
   weapon.ownerGetsAssist = watcher.ownerGetsAssist;
-  if(isDefined(watcher.onSpawn)) {
+  if(isDefined(watcher.onSpawn))
     weapon thread[[watcher.onSpawn]](watcher, self);
-  }
-  if(isDefined(watcher.onSpawnFX)) {
+  if(isDefined(watcher.onSpawnFX))
     weapon thread[[watcher.onSpawnFX]]();
-  }
-  if(isDefined(watcher.reconModel)) {
+  if(isDefined(watcher.reconModel))
     weapon thread attachReconModel(watcher.reconModel, self);
-  }
-  if(isDefined(watcher.onSpawnRetrieveTriggers)) {
+  if(isDefined(watcher.onSpawnRetrieveTriggers))
     weapon thread[[watcher.onSpawnRetrieveTriggers]](watcher, self);
-  }
-  if(isDefined(watcher.deploySound) && !weapon isHacked()) {
+  if(isDefined(watcher.deploySound) && !weapon isHacked())
     self playSound(watcher.deploySound);
-  } else if(isDefined(watcher.deploySoundPlayer) && !weapon isHacked()) {
+  else if(isDefined(watcher.deploySoundPlayer) && !weapon isHacked())
     self playLocalSound(watcher.deploySoundPlayer);
-  }
-  if(watcher.hackable) {
+  if(watcher.hackable)
     weapon thread hackerInit(watcher);
-  }
-  if(isDefined(watcher.stun)) {
+  if(isDefined(watcher.stun))
     weapon thread watchScramble(watcher);
-  }
   if(watcher.playDestroyedDialog) {
     weapon thread playDialogOnDeath(self);
     weapon thread watchObjectDamage(self);
   }
-  if(watcher.deleteOnKillbrush) {
+  if(watcher.deleteOnKillbrush)
     weapon thread deleteOnKillbrush(self);
-  }
 }
 watchScramble(watcher) {
   self endon("death");
@@ -308,7 +292,7 @@ watchScramble(watcher) {
   } else {
     self stunStop();
   }
-  for(;;) {
+  for (;;) {
     level waittill_any("scrambler_spawn", "scrambler_death", "hacked");
     if(self maps\mp\_scrambler::checkScramblerStun()) {
       self thread stunStart(watcher);
@@ -321,7 +305,7 @@ deleteWeaponObject(watcher, weapon_ent) {
   temp_objectArray = watcher.objectArray;
   watcher.objectArray = [];
   j = 0;
-  for(i = 0; i < temp_objectArray.size; i++) {
+  for (i = 0; i < temp_objectArray.size; i++) {
     if(!isDefined(temp_objectArray[i]) || temp_objectArray[i] == weapon_ent) {
       continue;
     }
@@ -333,11 +317,11 @@ deleteWeaponObject(watcher, weapon_ent) {
 weaponObjectDamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setCanDamage(true);
+  self setcandamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
-  while(1) {
+  while (1) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, weaponName, iDFlags);
     if(!IsPlayer(attacker)) {
       continue;
@@ -350,13 +334,11 @@ weaponObjectDamage(watcher) {
             self thread stunStart(watcher, watcher.stunTime);
           }
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-            }
           }
           continue;
         case "willy_pete_mp":
@@ -370,29 +352,24 @@ weaponObjectDamage(watcher) {
         continue;
       }
     }
-    if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
+    if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
-    }
-    if(!isvehicle(self) && !friendlyFireCheck(self.owner, attacker)) {
+    if(!isvehicle(self) && !friendlyFireCheck(self.owner, attacker))
       continue;
-    }
     break;
   }
-  if(level.weaponobjectexplodethisframe) {
+  if(level.weaponobjectexplodethisframe)
     wait .1 + randomfloat(.4);
-  } else {
+  else
     wait .05;
-  }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   level.weaponobjectexplodethisframe = true;
   thread resetWeaponObjectExplodeThisFrame();
   self maps\mp\_entityheadicons::setEntityHeadIcon("none");
-  if(isDefined(type) && (isSubStr(type, "MOD_GRENADE_SPLASH") || isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE"))) {
+  if(isDefined(type) && (isSubStr(type, "MOD_GRENADE_SPLASH") || isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
-  }
-  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION)) {
     self.wasDamagedFromBulletPenetration = true;
     attacker maps\mp\_properks::shotEquipment(self.owner, iDFlags);
   }
@@ -405,16 +382,15 @@ playDialogOnDeath(owner) {
   owner endon("disconnect");
   self endon("hacked");
   self waittill("death");
-  if(isDefined(self.playDialog) && self.playDialog) {
+  if(isDefined(self.playDialog) && self.playDialog)
     owner maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("equipment_destroyed", "item_destroyed");
-  }
 }
 watchObjectDamage(owner) {
   owner endon("death");
   owner endon("disconnect");
   self endon("hacked");
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("damage", damage, attacker);
     if(isDefined(attacker) && isPlayer(attacker) && attacker != owner) {
       self.playDialog = true;
@@ -428,13 +404,11 @@ stunStart(watcher, time) {
   if(self isStunned()) {
     return;
   }
-  if(isDefined(self.cameraHead)) {
+  if(isDefined(self.cameraHead))
     self.cameraHead SetClientFlag(level.const_flag_stunned);
-  }
   self SetClientFlag(level.const_flag_stunned);
-  if(isDefined(watcher.stun)) {
+  if(isDefined(watcher.stun))
     self thread[[watcher.stun]]();
-  }
   if(isDefined(time)) {
     wait(time);
   } else {
@@ -444,9 +418,8 @@ stunStart(watcher, time) {
 }
 stunStop() {
   self notify("not_stunned");
-  if(isDefined(self.cameraHead)) {
+  if(isDefined(self.cameraHead))
     self.cameraHead ClearClientFlag(level.const_flag_stunned);
-  }
   self ClearClientFlag(level.const_flag_stunned);
 }
 weaponStun() {
@@ -456,12 +429,12 @@ weaponStun() {
   if(!isDefined(origin)) {
     origin = self.origin + (0, 0, 10);
   }
-  self.stun_fx = spawn("script_model", origin);
-  self.stun_fx setModel("tag_origin");
+  self.stun_fx = Spawn("script_model", origin);
+  self.stun_fx SetModel("tag_origin");
   self thread stunFxThink(self.stun_fx);
   wait(0.1);
-  playFXOnTag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
-  self.stun_fx playSound("dst_disable_spark");
+  PlayFXOnTag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
+  self.stun_fx PlaySound("dst_disable_spark");
 }
 stunFxThink(fx) {
   fx endon("death");
@@ -479,7 +452,7 @@ getWeaponObjectWatcher(name) {
   if(!isDefined(self.weaponObjectWatcherArray)) {
     return undefined;
   }
-  for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
+  for (watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
     if(self.weaponObjectWatcherArray[watcher].name == name) {
       return self.weaponObjectWatcherArray[watcher];
     }
@@ -490,7 +463,7 @@ getWeaponObjectWatcherByWeapon(weapon) {
   if(!isDefined(self.weaponObjectWatcherArray)) {
     return undefined;
   }
-  for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
+  for (watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
     if(isDefined(self.weaponObjectWatcherArray[watcher].weapon) && self.weaponObjectWatcherArray[watcher].weapon == weapon) {
       return self.weaponObjectWatcherArray[watcher];
     }
@@ -506,19 +479,17 @@ createWeaponObjectWatcher(name, weapon, ownerTeam) {
   }
   weaponObjectWatcher = getWeaponObjectWatcher(name);
   if(!isDefined(weaponObjectWatcher)) {
-    weaponObjectWatcher = spawnStruct();
+    weaponObjectWatcher = SpawnStruct();
     self.weaponObjectWatcherArray[self.weaponObjectWatcherArray.size] = weaponObjectWatcher;
   }
-  if(GetDvar(#"scr_deleteexplosivesonspawn") == "") {
+  if(GetDvar(#"scr_deleteexplosivesonspawn") == "")
     setdvar("scr_deleteexplosivesonspawn", "1");
-  }
   if(GetDvarInt(#"scr_deleteexplosivesonspawn") == 1) {
     self notify("weapon_object_destroyed");
     weaponObjectWatcher deleteWeaponObjectArray();
   }
-  if(!isDefined(weaponObjectWatcher.objectArray)) {
+  if(!isDefined(weaponObjectWatcher.objectArray))
     weaponObjectWatcher.objectArray = [];
-  }
   weaponObjectWatcher.name = name;
   weaponObjectWatcher.ownerTeam = ownerTeam;
   weaponObjectWatcher.type = "use";
@@ -567,11 +538,10 @@ createProximityWeaponObjectWatcher(name, weapon, ownerTeam) {
 }
 commonOnSpawnUseWeaponObject(watcher, owner) {
   if(watcher.detectable) {
-    if(isDefined(watcher.isMovable) && watcher.isMovable) {
+    if(isDefined(watcher.isMovable) && watcher.isMovable)
       self thread weaponObjectDetectionMovable(owner.pers["team"]);
-    } else {
+    else
       self thread weaponObjectDetectionTrigger_wait(owner.pers["team"]);
-    }
     if(watcher.headIcon && level.teamBased) {
       self waitTillNotMoving();
       if(!isDefined(watcher.isMovable) || watcher.isMovable == false) {
@@ -603,17 +573,17 @@ watchWeaponObjectUsage() {
   if(!isDefined(self.weaponObjectWatcherArray)) {
     self.weaponObjectWatcherArray = [];
   }
-  self thread watchWeaponObjectspawn();
-  self thread watchWeaponProjectileObjectspawn();
+  self thread watchWeaponObjectSpawn();
+  self thread watchWeaponProjectileObjectSpawn();
   self thread watchWeaponObjectDetonation();
   self thread watchWeaponObjectAltDetonation();
   self thread watchWeaponObjectAltDetonate();
   self thread deleteWeaponObjectsOnDisconnect();
 }
-watchWeaponObjectspawn() {
+watchWeaponObjectSpawn() {
   self endon("disconnect");
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", weapon, weapname);
     switch (weapname) {
       case "claymore_mp":
@@ -622,7 +592,7 @@ watchWeaponObjectspawn() {
       case "acoustic_sensor_mp":
       case "scrambler_mp":
         weapon.name = weapname;
-        for(i = 0; i < self.weaponObjectWatcherArray.size; i++) {
+        for (i = 0; i < self.weaponObjectWatcherArray.size; i++) {
           if(isDefined(self.weaponObjectWatcherArray[i].Detonate) && self.weaponObjectWatcherArray[i].deleteOnDifferentObjectSpawn) {
             self.weaponObjectWatcherArray[i] detonateWeaponObjectArray(true, weapon);
           }
@@ -630,12 +600,11 @@ watchWeaponObjectspawn() {
         break;
       case "satchel_charge_mp":
       case "hatchet_mp":
-        for(i = 0; i < self.weaponObjectWatcherArray.size; i++) {
-          if(self.weaponObjectWatcherArray[i].weapon != weapname) {
+        for (i = 0; i < self.weaponObjectWatcherArray.size; i++) {
+          if(self.weaponObjectWatcherArray[i].weapon != weapname)
             continue;
-          }
           objectArray_size = self.weaponObjectWatcherArray[i].objectarray.size;
-          for(j = 0; j < objectArray_size; j++) {
+          for (j = 0; j < objectArray_size; j++) {
             if(!isDefined(self.weaponObjectWatcherArray[i].objectarray[j])) {
               self.weaponObjectWatcherArray[i].objectarray = deleteWeaponObject(self.weaponObjectWatcherArray[i], weapon);
             }
@@ -649,9 +618,8 @@ watchWeaponObjectspawn() {
         break;
     }
     if(!self isHacked()) {
-      if(weapname == "claymore_mp" || weapname == "satchel_charge_mp") {
+      if(weapname == "claymore_mp" || weapname == "satchel_charge_mp")
         self maps\mp\gametypes\_globallogic_score::setWeaponStat(weapname, 1, "used");
-      }
     }
     watcher = getWeaponObjectWatcherByWeapon(weapname);
     if(isDefined(watcher)) {
@@ -659,16 +627,16 @@ watchWeaponObjectspawn() {
     }
   }
 }
-watchWeaponProjectileObjectspawn() {
+watchWeaponProjectileObjectSpawn() {
   self endon("disconnect");
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("missile_fire", weapon, weapname);
     watcher = getWeaponObjectWatcherByWeapon(weapname);
     if(isDefined(watcher)) {
       self addWeaponObject(watcher, weapon);
       objectArray_size = watcher.objectarray.size;
-      for(j = 0; j < objectArray_size; j++) {
+      for (j = 0; j < objectArray_size; j++) {
         if(!isDefined(watcher.objectarray[j])) {
           watcher.objectarray = deleteWeaponObject(watcher, weapon);
         }
@@ -684,22 +652,19 @@ weaponObjectDetectionMovable(ownerTeam) {
   level endon("game_ended");
   self endon("death");
   self endon("hacked");
-  if(level.oldschool) {
+  if(level.oldschool)
     return;
-  }
-  if(!level.teambased) {
+  if(!level.teambased)
     return;
-  }
   detectTeam = level.otherTeam[ownerTeam];
   self.detectId = "rcBomb" + getTime() + randomInt(1000000);
-  while(!level.gameEnded) {
+  while (!level.gameEnded) {
     wait(1);
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
-      if(isai(player)) {
+      if(isai(player))
         continue;
-      }
       if(level.players[i] HasPerk("specialty_detectexplosive") && isDefined(self.model_name)) {
         switch (self.model_name) {
           case "weapon_claymore_detect":
@@ -711,12 +676,10 @@ weaponObjectDetectionMovable(ownerTeam) {
       } else {
         continue;
       }
-      if(player.team != detectTeam) {
+      if(player.team != detectTeam)
         continue;
-      }
-      if(isDefined(player.bombSquadIds[self.detectId])) {
+      if(isDefined(player.bombSquadIds[self.detectId]))
         continue;
-      }
       player thread showBombIcon(self);
     }
   }
@@ -724,30 +687,26 @@ weaponObjectDetectionMovable(ownerTeam) {
 showBombIcon(rcBomb) {
   rcBombDetectId = rcBomb.detectId;
   useId = -1;
-  for(index = 0; index < 4; index++) {
+  for (index = 0; index < 4; index++) {
     detectId = self.bombSquadIcons[index].detectId;
-    if(detectId == rcBombDetectId) {
+    if(detectId == rcBombDetectId)
       return;
-    }
-    if(detectId == "") {
+    if(detectId == "")
       useId = index;
-    }
   }
-  if(useId < 0) {
+  if(useId < 0)
     return;
-  }
   self.bombSquadIds[rcBombDetectId] = true;
   setIconPos(rcBomb, self.bombSquadIcons[useId], 32);
   self.bombSquadIcons[useId] fadeOverTime(0.25);
   self.bombSquadIcons[useId].alpha = 1;
   self.bombSquadIcons[useId].detectId = rcBomb.detectId;
-  while(isAlive(self) && isDefined(rcBomb)) {
+  while (isAlive(self) && isDefined(rcBomb)) {
     setIconPos(rcBomb, self.bombSquadIcons[useId], 32);
     wait(0.05);
   }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self.bombSquadIcons[useId].detectId = "";
   self.bombSquadIcons[useId] fadeOverTime(0.25);
   self.bombSquadIcons[useId].alpha = 0;
@@ -762,9 +721,8 @@ weaponObjectDetectionTrigger_wait(ownerTeam) {
   self endon("death");
   self endon("hacked");
   waitTillNotMoving();
-  if(level.oldschool) {
+  if(level.oldschool)
     return;
-  }
   self thread weaponObjectDetectionTrigger(ownerTeam);
 }
 weaponObjectDetectionTrigger(ownerTeam) {
@@ -774,9 +732,8 @@ weaponObjectDetectionTrigger(ownerTeam) {
   trigger thread detectIconWaiter(level.otherTeam[ownerTeam], self);
   self waittill_any("death", "hacked");
   trigger notify("end_detection");
-  if(isDefined(trigger.bombSquadIcon)) {
+  if(isDefined(trigger.bombSquadIcon))
     trigger.bombSquadIcon destroy();
-  }
   trigger delete();
 }
 hackerTriggerSetVisibility(owner) {
@@ -790,7 +747,7 @@ hackerTriggerSetVisibility(owner) {
     self SetTeamForTrigger("none");
   }
   self SetInvisibleToPlayer(owner);
-  for(;;) {
+  for (;;) {
     level waittill_any("player_spawned", "joined_team");
     if(level.teamBased) {
       self SetVisibleToTeam(GetOtherTeam(owner.pers["team"]));
@@ -817,7 +774,7 @@ hackerInit(watcher) {
   if(isDefined(self.name) && self.name == "satchel_charge_mp") {
     triggerOrigin = self GetTagOrigin("tag_fx");
   }
-  self.hackerTrigger = spawn("trigger_radius_use", triggerOrigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
+  self.hackerTrigger = Spawn("trigger_radius_use", triggerOrigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
   self.hackerTrigger SetHintLowPriority(true);
   self.hackerTrigger SetCursorHint("HINT_NOICON", watcher.weapon);
   self.hackerTrigger SetIgnoreEntForTrigger(self);
@@ -834,7 +791,7 @@ hackerInit(watcher) {
 }
 hackerThink(trigger, watcher) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     trigger waittill("trigger", player);
     if(!trigger hackerResult(player, self.owner)) {
       continue;
@@ -888,7 +845,7 @@ hackerResult(player, owner) {
     return false;
   }
   self thread hackerUnfreezePlayer(player);
-  while(time + (hackTime * 1000) > GetTime()) {
+  while (time + (hackTime * 1000) > GetTime()) {
     if(!canHack(player, owner, false)) {
       success = false;
       break;
@@ -929,81 +886,60 @@ hackerResult(player, owner) {
   return success;
 }
 canHack(player, owner, weapon_check) {
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return false;
-  }
-  if(!IsPlayer(player)) {
+  if(!IsPlayer(player))
     return false;
-  }
-  if(!IsAlive(player)) {
+  if(!IsAlive(player))
     return false;
-  }
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return false;
-  }
-  if(owner == player) {
+  if(owner == player)
     return false;
-  }
-  if(level.teambased && player.team == owner.team) {
+  if(level.teambased && player.team == owner.team)
     return false;
-  }
-  if((isDefined(player.isDefusing) && player.isDefusing)) {
+  if((isDefined(player.isDefusing) && player.isDefusing))
     return false;
-  }
-  if((isDefined(player.isPlanting) && player.isPlanting)) {
+  if((isDefined(player.isPlanting) && player.isPlanting))
     return false;
-  }
-  if(isDefined(player.proxBar) && !player.proxBar.hidden) {
+  if(isDefined(player.proxBar) && !player.proxBar.hidden)
     return false;
-  }
-  if(isDefined(player.revivingTeammate) && player.revivingTeammate == true) {
+  if(isDefined(player.revivingTeammate) && player.revivingTeammate == true)
     return false;
-  }
-  if(!player IsOnGround()) {
+  if(!player IsOnGround())
     return false;
-  }
-  if(player IsInVehicle()) {
+  if(player IsInVehicle())
     return false;
-  }
-  if(!player HasPerk("specialty_disarmexplosive")) {
+  if(!player HasPerk("specialty_disarmexplosive"))
     return false;
-  }
-  if(isDefined(player.laststand) && player.laststand) {
+  if(isDefined(player.laststand) && player.laststand)
     return false;
-  }
   if(weapon_check) {
-    if(player IsThrowingGrenade()) {
+    if(player IsThrowingGrenade())
       return false;
-    }
-    if(player IsSwitchingWeapons()) {
+    if(player IsSwitchingWeapons())
       return false;
-    }
-    if(player IsMeleeing()) {
+    if(player IsMeleeing())
       return false;
-    }
     weapon = player GetCurrentWeapon();
-    if(!isDefined(weapon)) {
+    if(!isDefined(weapon))
       return false;
-    }
-    if(weapon == "none") {
+    if(weapon == "none")
       return false;
-    }
-    if(IsWeaponEquipment(weapon) && player IsFiring()) {
+    if(IsWeaponEquipment(weapon) && player IsFiring())
       return false;
-    }
-    if(IsWeaponSpecificUse(weapon)) {
+    if(IsWeaponSpecificUse(weapon))
       return false;
-    }
   }
   return true;
 }
 hackerRemoveWeapon(weapon) {
-  for(i = 0; i < self.weaponObjectWatcherArray.size; i++) {
+  for (i = 0; i < self.weaponObjectWatcherArray.size; i++) {
     if(self.weaponObjectWatcherArray[i].weapon != weapon.name) {
       continue;
     }
     objectArray_size = self.weaponObjectWatcherArray[i].objectarray.size;
-    for(j = 0; j < objectArray_size; j++) {
+    for (j = 0; j < objectArray_size; j++) {
       self.weaponObjectWatcherArray[i].objectarray = deleteWeaponObject(self.weaponObjectWatcherArray[i], weapon);
     }
     return;
@@ -1017,37 +953,30 @@ proximityWeaponObjectDetonation(watcher) {
   damagearea EnableLinkTo();
   damagearea LinkTo(self);
   self thread deleteOnDeath(damagearea);
-  while(1) {
+  while (1) {
     damagearea waittill("trigger", ent);
     if(GetDvarInt(#"scr_weaponobject_debug") != 1) {
-      if(isDefined(self.owner) && ent == self.owner) {
+      if(isDefined(self.owner) && ent == self.owner)
         continue;
-      }
-      if(isDefined(self.owner) && IsVehicle(ent) && isDefined(ent.owner) && (self.owner == ent.owner)) {
+      if(isDefined(self.owner) && IsVehicle(ent) && isDefined(ent.owner) && (self.owner == ent.owner))
         continue;
-      }
-      if(!friendlyFireCheck(self.owner, ent, 0)) {
+      if(!friendlyFireCheck(self.owner, ent, 0))
         continue;
-      }
     }
-    if(lengthsquared(ent getVelocity()) < 10) {
+    if(lengthsquared(ent getVelocity()) < 10)
       continue;
-    }
-    if(!ent shouldAffectWeaponObject(self, watcher)) {
+    if(!ent shouldAffectWeaponObject(self, watcher))
       continue;
-    }
-    if(self isstunned()) {
+    if(self isstunned())
       continue;
-    }
-    if(IsPlayer(ent) && !IsAlive(ent)) {
+    if(IsPlayer(ent) && !IsAlive(ent))
       continue;
-    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       break;
     }
   }
   if(isDefined(watcher.activateSound)) {
-    self playSound(watcher.activateSound);
+    self playsound(watcher.activateSound);
   }
   ent thread deathDodger(watcher.detectionGracePeriod);
   wait watcher.detectionGracePeriod;
@@ -1066,9 +995,8 @@ shouldAffectWeaponObject(object, watcher) {
   dirToPos = pos - object.origin;
   objectForward = anglesToForward(object.angles);
   dist = vectorDot(dirToPos, objectForward);
-  if(dist < watcher.detectionMinDist) {
+  if(dist < watcher.detectionMinDist)
     return false;
-  }
   dirToPos = vectornormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > watcher.detectionDot);
@@ -1082,24 +1010,22 @@ deathDodger(graceperiod) {
 deleteOnDeath(ent) {
   self waittill_any("death", "hacked");
   wait .05;
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 deleteOnKillbrush(player) {
   player endon("disconnect");
   self endon("death");
   self endon("stationary");
-  killbrushes = getEntArray("trigger_hurt", "classname");
-  while(1) {
-    for(i = 0; i < killbrushes.size; i++) {
+  killbrushes = GetEntArray("trigger_hurt", "classname");
+  while (1) {
+    for (i = 0; i < killbrushes.size; i++) {
       if(self istouching(killbrushes[i])) {
         if(self.origin[2] > player.origin[2]) {
           break;
         }
-        if(isDefined(self)) {
+        if(isDefined(self))
           self delete();
-        }
         return;
       }
     }
@@ -1109,9 +1035,9 @@ deleteOnKillbrush(player) {
 watchWeaponObjectAltDetonation() {
   self endon("death");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     self waittill("alt_detonate");
-    for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
+    for (watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
       if(self.weaponObjectWatcherArray[watcher].altDetonate) {
         self.weaponObjectWatcherArray[watcher] detonateWeaponObjectArray(false);
       }
@@ -1124,7 +1050,7 @@ watchWeaponObjectAltDetonate() {
   self endon("detonated");
   level endon("game_ended");
   buttonTime = 0;
-  for(;;) {
+  for (;;) {
     self waittill("doubletap_detonate");
     self notify("alt_detonate");
     wait(0.05);
@@ -1133,7 +1059,7 @@ watchWeaponObjectAltDetonate() {
 watchWeaponObjectDetonation() {
   self endon("death");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     self waittill("detonate");
     weap = self getCurrentWeapon();
     watcher = getWeaponObjectWatcherByWeapon(weap);
@@ -1145,12 +1071,11 @@ watchWeaponObjectDetonation() {
 deleteWeaponObjectsOnDisconnect() {
   self endon("spawned_player");
   self waittill("disconnect");
-  if(!isDefined(self.weaponObjectWatcherArray)) {
+  if(!isDefined(self.weaponObjectWatcherArray))
     return;
-  }
   watchers = [];
-  for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
-    weaponObjectWatcher = spawnStruct();
+  for (watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
+    weaponObjectWatcher = SpawnStruct();
     watchers[watchers.size] = weaponObjectWatcher;
     weaponObjectWatcher.objectArray = [];
     if(isDefined(self.weaponObjectWatcherArray[watcher].objectArray)) {
@@ -1158,12 +1083,12 @@ deleteWeaponObjectsOnDisconnect() {
     }
   }
   wait .05;
-  for(watcher = 0; watcher < watchers.size; watcher++) {
+  for (watcher = 0; watcher < watchers.size; watcher++) {
     watchers[watcher] deleteWeaponObjectArray();
   }
 }
 saydamaged(orig, amount) {
-  for(i = 0; i < 60; i++) {
+  for (i = 0; i < 60; i++) {
     print3d(orig, "damaged! " + amount);
     wait .05;
   }
@@ -1171,14 +1096,12 @@ saydamaged(orig, amount) {
 detectIconWaiter(detectTeam, ent) {
   self endon("end_detection");
   level endon("game_ended");
-  if(!level.teambased) {
+  if(!level.teambased)
     return;
-  }
-  while(!level.gameEnded) {
+  while (!level.gameEnded) {
     self waittill("trigger", player);
-    if(isai(player)) {
+    if(isai(player))
       continue;
-    }
     if(player HasPerk("specialty_detectexplosive") && isDefined(ent.model_name)) {
       switch (ent.model_name) {
         case "weapon_claymore_detect":
@@ -1190,19 +1113,17 @@ detectIconWaiter(detectTeam, ent) {
     } else {
       continue;
     }
-    if(player.team != detectTeam) {
+    if(player.team != detectTeam)
       continue;
-    }
-    if(isDefined(player.bombSquadIds[self.detectId])) {
+    if(isDefined(player.bombSquadIds[self.detectId]))
       continue;
-    }
     player thread showHeadIcon(self);
   }
 }
 setupBombSquad() {
   self.bombSquadIds = [];
   if(self.detectExplosives && !self.bombSquadIcons.size) {
-    for(index = 0; index < 4; index++) {
+    for (index = 0; index < 4; index++) {
       self.bombSquadIcons[index] = newClientHudElem(self);
       self.bombSquadIcons[index].x = 0;
       self.bombSquadIcons[index].y = 0;
@@ -1214,27 +1135,23 @@ setupBombSquad() {
       self.bombSquadIcons[index].detectId = "";
     }
   } else if(!self.detectExplosives) {
-    for(index = 0; index < self.bombSquadIcons.size; index++) {
+    for (index = 0; index < self.bombSquadIcons.size; index++)
       self.bombSquadIcons[index] destroy();
-    }
     self.bombSquadIcons = [];
   }
 }
 showHeadIcon(trigger) {
   triggerDetectId = trigger.detectId;
   useId = -1;
-  for(index = 0; index < 4; index++) {
+  for (index = 0; index < 4; index++) {
     detectId = self.bombSquadIcons[index].detectId;
-    if(detectId == triggerDetectId) {
+    if(detectId == triggerDetectId)
       return;
-    }
-    if(detectId == "") {
+    if(detectId == "")
       useId = index;
-    }
   }
-  if(useId < 0) {
+  if(useId < 0)
     return;
-  }
   self.bombSquadIds[triggerDetectId] = true;
   self.bombSquadIcons[useId].x = trigger.origin[0];
   self.bombSquadIcons[useId].y = trigger.origin[1];
@@ -1242,55 +1159,43 @@ showHeadIcon(trigger) {
   self.bombSquadIcons[useId] fadeOverTime(0.25);
   self.bombSquadIcons[useId].alpha = 1;
   self.bombSquadIcons[useId].detectId = trigger.detectId;
-  while(isAlive(self) && isDefined(trigger) && self isTouching(trigger)) {
+  while (isAlive(self) && isDefined(trigger) && self isTouching(trigger))
     wait(0.05);
-  }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self.bombSquadIcons[useId].detectId = "";
   self.bombSquadIcons[useId] fadeOverTime(0.25);
   self.bombSquadIcons[useId].alpha = 0;
   self.bombSquadIds[triggerDetectId] = undefined;
 }
 friendlyFireCheck(owner, attacker, forcedFriendlyFireRule) {
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return true;
-  }
-  if(!level.teamBased) {
+  if(!level.teamBased)
     return true;
-  }
   friendlyFireRule = level.friendlyfire;
-  if(isDefined(forcedFriendlyFireRule)) {
+  if(isDefined(forcedFriendlyFireRule))
     friendlyFireRule = forcedFriendlyFireRule;
-  }
-  if(friendlyFireRule != 0) {
+  if(friendlyFireRule != 0)
     return true;
-  }
-  if(attacker == owner) {
+  if(attacker == owner)
     return true;
-  }
   if(isplayer(attacker)) {
-    if(!isDefined(attacker.pers["team"])) {
+    if(!isDefined(attacker.pers["team"]))
       return true;
-    }
-    if(attacker.pers["team"] != owner.pers["team"]) {
+    if(attacker.pers["team"] != owner.pers["team"])
       return true;
-    }
   } else if(isai(attacker)) {
-    if(attacker.aiteam != owner.pers["team"]) {
+    if(attacker.aiteam != owner.pers["team"])
       return true;
-    }
   } else if(isvehicle(attacker)) {
     if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
-      if(attacker.owner.pers["team"] != owner.pers["team"]) {
+      if(attacker.owner.pers["team"] != owner.pers["team"])
         return true;
-      }
     } else {
       occupant_team = attacker maps\mp\_vehicles::vehicle_get_occupant_team();
-      if(occupant_team != owner.pers["team"]) {
+      if(occupant_team != owner.pers["team"])
         return true;
-      }
     }
   }
   return false;
@@ -1329,10 +1234,9 @@ onSpawnRetrievableWeaponObject(watcher, player) {
       triggerParentEnt = self.stuckToPlayer.body;
     }
   }
-  if(isDefined(triggerParentEnt)) {
+  if(isDefined(triggerParentEnt))
     triggerOrigin = triggerParentEnt.origin + (0, 0, 10);
-  }
-  self.pickUpTrigger = spawn("trigger_radius_use", triggerOrigin);
+  self.pickUpTrigger = Spawn("trigger_radius_use", triggerOrigin);
   self.pickUpTrigger SetHintLowPriority(true);
   self.pickUpTrigger SetCursorHint("HINT_NOICON", watcher.weapon);
   self.pickUpTrigger EnableLinkTo();
@@ -1352,7 +1256,7 @@ onSpawnRetrievableWeaponObject(watcher, player) {
   }
   self thread watchUseTrigger(self.pickUpTrigger, watcher.pickUp, watcher.pickUpSoundPlayer, watcher.pickUpSound);
   if(self.name == "hatchet_mp") {
-    self.hatchetPickUpTrigger = spawn("trigger_radius_use", triggerOrigin);
+    self.hatchetPickUpTrigger = Spawn("trigger_radius_use", triggerOrigin);
     self.hatchetPickUpTrigger SetHintLowPriority(true);
     self.hatchetPickUpTrigger SetCursorHint("HINT_NOICON", self.name);
     self.hatchetPickUpTrigger EnableLinkTo();
@@ -1386,9 +1290,9 @@ watch_trigger_visibility(triggers, weap_name) {
   max_ammo = WeaponMaxAmmo(weap_name);
   start_ammo = WeaponStartAmmo(weap_name);
   ammo_to_check = 0;
-  while(true) {
+  while (true) {
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] HasWeapon(weap_name)) {
         if(!(players[i] HasPerk("specialty_twogrenades")) && weap_name == "hatchet_mp") {
           ammo_to_check = start_ammo;
@@ -1450,9 +1354,8 @@ watchShutdown(player) {
   pickUpTrigger = self.pickUpTrigger;
   hackerTrigger = self.hackerTrigger;
   hatchetPickUpTrigger = self.hatchetPickUpTrigger;
-  if(isDefined(pickUpTrigger)) {
+  if(isDefined(pickUpTrigger))
     pickUpTrigger delete();
-  }
   if(isDefined(hackerTrigger)) {
     if(isDefined(hackerTrigger.progressBar)) {
       hackerTrigger.progressBar destroyElem();
@@ -1460,39 +1363,32 @@ watchShutdown(player) {
     }
     hackerTrigger delete();
   }
-  if(isDefined(hatchetPickUpTrigger)) {
+  if(isDefined(hatchetPickUpTrigger))
     hatchetPickUpTrigger delete();
-  }
 }
 watchUseTrigger(trigger, callback, playerSoundOnUse, npcSoundOnUse) {
   self endon("delete");
   self endon("hacked");
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       continue;
-    }
-    if(!player isOnGround()) {
+    if(!player isOnGround())
       continue;
-    }
-    if(isDefined(trigger.triggerTeam) && (player.pers["team"] != trigger.triggerTeam)) {
+    if(isDefined(trigger.triggerTeam) && (player.pers["team"] != trigger.triggerTeam))
       continue;
-    }
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
       continue;
-    }
     grenade = player.throwingGrenade;
     isEquipment = IsWeaponEquipment(player GetCurrentWeapon());
     if(isDefined(isEquipment) && isEquipment) {
       grenade = false;
     }
     if(player useButtonPressed() && !grenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse)) {
+      if(isDefined(playerSoundOnUse))
         player playLocalSound(playerSoundOnUse);
-      }
-      if(isDefined(npcSoundOnUse)) {
+      if(isDefined(npcSoundOnUse))
         player playSound(npcSoundOnUse);
-      }
       self thread[[callback]](player);
     }
   }
@@ -1510,12 +1406,11 @@ createHackerHint(name, hint) {
   level.hackerHints[name] = hackerHint;
 }
 attachReconModel(modelName, owner) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   reconModel = spawn("script_model", self.origin);
   reconModel.angles = self.angles;
-  reconModel setModel(modelName);
+  reconModel SetModel(modelName);
   reconModel.model_name = modelName;
   reconModel linkto(self);
   reconModel SetContents(0);
@@ -1525,15 +1420,13 @@ attachReconModel(modelName, owner) {
   reconModel thread resetReconModelOnEvent("player_spawned", owner);
 }
 resetReconModelVisibility(owner) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self SetInvisibleToAll();
   self SetForceNoCull();
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return;
-  }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     if(!(level.players[i] HasPerk("specialty_detectexplosive")) &&
       !(level.players[i] HasPerk("specialty_showenemyequipment"))) {
       continue;
@@ -1562,18 +1455,15 @@ resetReconModelVisibility(owner) {
           break;
       }
     }
-    if(!hasReconModel) {
+    if(!hasReconModel)
       continue;
-    }
     isEnemy = true;
     if(level.teamBased) {
-      if(level.players[i].team == owner.team) {
+      if(level.players[i].team == owner.team)
         isEnemy = false;
-      }
     } else {
-      if(level.players[i] == owner) {
+      if(level.players[i] == owner)
         isEnemy = false;
-      }
     }
     if(isEnemy) {
       self SetVisibleToPlayer(level.players[i]);
@@ -1587,7 +1477,7 @@ watchReconModelForDeath(parentEnt) {
 }
 resetReconModelOnEvent(eventName, owner) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     level waittill(eventName, newOwner);
     if(isDefined(newOwner)) {
       owner = newOwner;
@@ -1595,3 +1485,4 @@ resetReconModelOnEvent(eventName, owner) {
     self resetReconModelVisibility(owner);
   }
 }
+

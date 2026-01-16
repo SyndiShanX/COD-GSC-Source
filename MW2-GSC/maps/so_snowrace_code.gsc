@@ -50,15 +50,14 @@ init_snow_race(skipDialog) {
   players_on_snowmobiles();
   init_slope_trees();
 
-  array_thread(getEntArray("player_reset_trigger", "targetname"), ::player_reset_position_tracking);
+  array_thread(getentarray("player_reset_trigger", "targetname"), ::player_reset_position_tracking);
 
   thread fade_challenge_in();
   thread fade_challenge_out("so_snowrace_complete", skipDialog);
 
   if(is_coop()) {
-    foreach(player in level.players) {
-      player thread maps\_coop::createFriendlyHudIcon_Normal();
-    }
+    foreach(player in level.players)
+    player thread maps\_coop::createFriendlyHudIcon_Normal();
   }
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
@@ -66,18 +65,18 @@ init_snow_race(skipDialog) {
   playFX(getfx("extraction_smoke"), finish_line_smoke.origin);
 
   finish_line_origin = getent("finish_line_origin", "targetname");
-  assert(isDefined(level.objective_desc));
+  assert(isdefined(level.objective_desc));
   objective_add(1, "current", level.objective_desc, finish_line_origin.origin);
-  objective_setpointertextoverride(1, &"SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
+  objective_setpointertextoverride(1, & "SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
   //Objective_OnEntity( 1, finish_line_origin );
   thread objective_location_update(finish_line_origin);
-  array_thread(getEntArray("move_objective", "targetname"), ::move_objective, finish_line_origin);
+  array_thread(getentarray("move_objective", "targetname"), ::move_objective, finish_line_origin);
 }
 
 move_objective(finish_line_origin) {
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   originEnt = getent(self.target, "targetname");
-  assert(isDefined(originEnt));
+  assert(isdefined(originEnt));
 
   self waittill("trigger");
 
@@ -88,7 +87,7 @@ move_objective(finish_line_origin) {
 }
 
 objective_location_update(finish_line_origin) {
-  for(;;) {
+  for (;;) {
     objective_position(1, finish_line_origin.origin);
     wait 0.05;
   }
@@ -158,15 +157,14 @@ players_on_snowmobiles() {
 }
 
 spawn_new_snowmobile_and_drive(optionalTeleportOrg, optionalTeleportAng) {
-  assert(isDefined(self.snowmobile_spawner));
+  assert(isdefined(self.snowmobile_spawner));
 
   self.snowmobile_spawner.count = 1;
   snowmobile = self.snowmobile_spawner spawn_vehicle();
-  assert(isDefined(snowmobile));
+  assert(isdefined(snowmobile));
 
-  if(isDefined(optionalTeleportOrg) && isDefined(optionalTeleportOrg)) {
+  if(isdefined(optionalTeleportOrg) && isdefined(optionalTeleportOrg))
     snowmobile vehicle_Teleport(optionalTeleportOrg, optionalTeleportAng);
-  }
 
   snowmobile thread maps\_snowmobile_drive::drive_vehicle();
   self player_mount_vehicle(snowmobile);
@@ -181,12 +179,11 @@ spawn_new_snowmobile_and_drive(optionalTeleportOrg, optionalTeleportAng) {
 
 slow_player_on_damage() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker);
 
-    if(!isplayer(attacker)) {
+    if(!isplayer(attacker))
       continue;
-    }
 
     self.snowmobile thread slow_down_vehicle();
   }
@@ -195,22 +192,19 @@ slow_player_on_damage() {
 slow_down_vehicle() {
   // slow vehicle by a percentage, and cap it so we don't crawl to a stop
   self.damage_slowdown += VEH_SLOWDOWN_AMOUNT;
-  if(self.damage_slowdown > VEH_SLOWDOWN_AMOUNT_MIN) {
+  if(self.damage_slowdown > VEH_SLOWDOWN_AMOUNT_MIN)
     self.damage_slowdown = VEH_SLOWDOWN_AMOUNT_MIN;
-  }
 
   wait 1.5;
 
   self.damage_slowdown -= VEH_SLOWDOWN_AMOUNT;
-  if(self.damage_slowdown < 0) {
+  if(self.damage_slowdown < 0)
     self.damage_slowdown = 0;
-  }
 }
 
 start_race() {
-  foreach(player in level.players) {
-    player freezeControls(true);
-  }
+  foreach(player in level.players)
+  player freezeControls(true);
 
   wait 1;
 
@@ -223,18 +217,18 @@ start_race() {
   wait 2;
   text set_hud_red();
   text settext(&"SO_SNOWRACE1_CLIFFHANGER_RACE_3");
-  level.player playSound("so_starttimer_beep");
+  level.player PlaySound("so_starttimer_beep");
   wait 1;
   text settext(&"SO_SNOWRACE1_CLIFFHANGER_RACE_2");
-  level.player playSound("so_starttimer_beep");
+  level.player PlaySound("so_starttimer_beep");
   wait 1;
   text set_hud_yellow();
   text settext(&"SO_SNOWRACE1_CLIFFHANGER_RACE_1");
-  level.player playSound("so_starttimer_beep");
+  level.player PlaySound("so_starttimer_beep");
   wait 0.8;
   text set_hud_green();
   text settext(&"SO_SNOWRACE1_CLIFFHANGER_RACE_GO");
-  level.player playSound("so_starttimer_go");
+  level.player PlaySound("so_starttimer_go");
 
   foreach(player in level.players) {
     player freezeControls(false);
@@ -258,21 +252,19 @@ start_race_boost() {
   wait 0.2;
 
   // gassed it too soon
-  if(self.vehicle.veh_throttle > 0) {
+  if(self.vehicle.veh_throttle > 0)
     return;
-  }
 
   // window of opportunity
-  while(self.vehicle.veh_throttle == 0) {
+  while (self.vehicle.veh_throttle == 0) {
     wait 0.05;
     BOOST_WINDOW -= 0.05;
-    if(BOOST_WINDOW <= 0) {
+    if(BOOST_WINDOW <= 0)
       return;
-    }
   }
 
   // player gets a boost
-  assert(isDefined(self.vehicle));
+  assert(isdefined(self.vehicle));
   self.vehicle thread give_vehicle_boost(50);
 
   text = self createClientFontString("default", 3.0);
@@ -287,65 +279,57 @@ start_race_boost() {
 
 give_vehicle_boost(boostToSpeed) {
   speed = int(self vehicle_GetSpeed());
-  if(speed >= boostToSpeed) {
+  if(speed >= boostToSpeed)
     return;
-  }
 
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     speed += 5;
-    if(speed > boostToSpeed) {
+    if(speed > boostToSpeed)
       break;
-    }
 
     self VehPhys_SetSpeed(speed);
     wait 0.05;
   }
-  if(isDefined(self)) {
+  if(isdefined(self))
     self VehPhys_SetSpeed(boostToSpeed);
-  }
 }
 
 end_race_cleanup() {
-  if(!is_coop()) {
+  if(!is_coop())
     return;
-  }
 
-  foreach(player in level.players) {
-    array_thread(player.snowmobile.riders, ::stop_magic_bullet_shield_if_shielded);
-  }
+  foreach(player in level.players)
+  array_thread(player.snowmobile.riders, ::stop_magic_bullet_shield_if_shielded);
 }
 
 stop_magic_bullet_shield_if_shielded() {
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isdefined(self.magic_bullet_shield))
     self thread stop_magic_bullet_shield();
-  }
 }
 
 speed_balance() {
   // no speed balancing for only one player
-  if(!is_coop()) {
+  if(!is_coop())
     return;
-  }
 
   // assuming only 2 players ever
-  assert(isDefined(level.player));
-  assert(isDefined(level.player.snowmobile));
-  assert(isDefined(level.player2));
-  assert(isDefined(level.player2.snowmobile));
+  assert(isdefined(level.player));
+  assert(isdefined(level.player.snowmobile));
+  assert(isdefined(level.player2));
+  assert(isdefined(level.player2.snowmobile));
 
   level.speed_balance_location = getent("speed_balance_origin", "targetname");
-  assert(isDefined(level.speed_balance_location));
+  assert(isdefined(level.speed_balance_location));
   level.speed_balance_location = level.speed_balance_location.origin;
 
-  array_thread(getEntArray("speed_balance_trigger", "targetname"), ::speed_balance_trigger);
+  array_thread(getentarray("speed_balance_trigger", "targetname"), ::speed_balance_trigger);
 
   flag_wait("race_started");
 
-  for(;;) {
+  for (;;) {
     player1_dist = distance(level.player.snowmobile.origin, level.speed_balance_location);
     player2_dist = distance(level.player2.snowmobile.origin, level.speed_balance_location);
 
@@ -379,9 +363,9 @@ speed_balance() {
 }
 
 speed_balance_trigger() {
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   org = getent(self.target, "targetname");
-  assert(isDefined(org));
+  assert(isdefined(org));
 
   self waittill("trigger");
 
@@ -389,7 +373,7 @@ speed_balance_trigger() {
 }
 
 race_music() {
-  for(;;) {
+  for (;;) {
     if(!flag("snowmobile_fog_clears")) {
       music_loop(level.script + "_music", 152);
       flag_wait("snowmobile_fog_clears");
@@ -414,9 +398,8 @@ race_music() {
 
 player_snowmobile_downed(vehicle) {
   if(self ent_flag_exist("finish_line")) {
-    if(self ent_flag("finish_line")) {
+    if(self ent_flag("finish_line"))
       return;
-    }
   }
 
   self.ignoreRandomBulletDamage = true;
@@ -437,9 +420,9 @@ player_snowmobile_downed(vehicle) {
 
 put_player_back_on_snowmobile(vehicle) {
   assert(isplayer(self));
-  assert(isDefined(vehicle));
-  assert(isDefined(vehicle.resetPos));
-  assert(isDefined(vehicle.resetAng));
+  assert(isdefined(vehicle));
+  assert(isdefined(vehicle.resetPos));
+  assert(isdefined(vehicle.resetAng));
 
   array_thread(vehicle.riders, ::stop_magic_bullet_shield_if_shielded);
   vehicle delete();
@@ -447,38 +430,34 @@ put_player_back_on_snowmobile(vehicle) {
   self endSliding();
   self.snowmobile = self spawn_new_snowmobile_and_drive(vehicle.resetPos, vehicle.resetAng);
 
-  if(isDefined(level.track_player_positions)) {
+  if(isdefined(level.track_player_positions))
     self thread track_player_progress(self.snowmobile.origin);
-  }
 
   //self thread maps\_snowmobile_drive::drive_crash_detection( vehicle );
   //self player_mount_vehicle( vehicle );
 }
 
 player_reset_position_tracking() {
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   ent = getent(self.target, "targetname");
-  assert(isDefined(ent));
+  assert(isdefined(ent));
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", vehicle);
 
-    if(!isDefined(vehicle)) {
+    if(!isdefined(vehicle))
       continue;
-    }
 
     // enemy AI vehicles can also hit this trigger so make sure it's not one of them
-    if(!isDefined(vehicle.player)) {
+    if(!isdefined(vehicle.player))
       continue;
-    }
 
     vehicle.resetPos = ent.origin;
     vehicle.resetAng = ent.angles;
 
     // offset player 2 so if both players die they don't respawn inside each other
-    if(vehicle.player == level.player) {
+    if(vehicle.player == level.player)
       continue;
-    }
 
     right = AnglesToRight(vehicle.resetAng) * 80;
     vehicle.resetPos += right;
@@ -486,7 +465,7 @@ player_reset_position_tracking() {
 }
 
 init_slope_trees() {
-  slope_trees = getEntArray("slope_tree", "targetname");
+  slope_trees = GetEntArray("slope_tree", "targetname");
   top_of_hill = getstruct("top_of_hill", "targetname");
 
   slope_trees = get_array_of_closest(top_of_hill.origin, slope_trees);
@@ -498,9 +477,9 @@ init_slope_trees() {
     slope_trees = array_delete_evenly(slope_trees, 1, 2);
   }
 
-  slope_tree_clip = getEntArray("slope_tree_clip", "targetname");
+  slope_tree_clip = GetEntArray("slope_tree_clip", "targetname");
   foreach(index, slope_tree in slope_trees) {
-    AssertEx(isDefined(slope_tree_clip[index]), "Not enough slope_tree_clip placed in the map");
+    AssertEx(IsDefined(slope_tree_clip[index]), "Not enough slope_tree_clip placed in the map");
     slope_tree.clip = slope_tree_clip[index];
     slope_tree_clip[index] = undefined;
   }
@@ -522,7 +501,7 @@ slope_tree_think() {
 
   //Line( self.origin, self.origin + ( offset, 0, 0 ), (1,0,0), 1, 0, 5000 );
   self.origin += (offset, 0, 0);
-  trace = bulletTrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), false, undefined);
+  trace = BulletTrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), false, undefined);
   self.origin = trace["position"] + (0, 0, -8);
   // self hide();
   self.clip hide();
@@ -541,49 +520,43 @@ get_current_stars(starsThisPlaythrough) {
 
   stars = int((self GetLocalPlayerProfileData("missionSOHighestDifficulty"))[levelIndex]);
   stars = max(0, stars - 1);
-  if(stars == 0) {
+  if(stars == 0)
     stars = starsThisPlaythrough;
-  }
 
   return stars;
 }
 
 custom_eog_summary() {
   foreach(player in level.players) {
-    if(!isDefined(player)) {
+    if(!isdefined(player))
       continue;
-    }
 
     // Replace "Mission Success" with race winner if it applies
-    if(is_coop() && isDefined(level.raceWinner)) {
-      if(player == level.raceWinner) {
+    if(is_coop() && isdefined(level.raceWinner)) {
+      if(player == level.raceWinner)
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
-      } else {
+      else
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
-      }
     } else {
-      if(isDefined(player.ran_out_of_time)) {
+      if(isdefined(player.ran_out_of_time))
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
-      }
     }
 
     // Replace time for individual times. If player didn't finish print DNF
-    finishedRace = isDefined(player.finish_time);
-    if(isDefined(player.dnf)) {
+    finishedRace = isdefined(player.finish_time);
+    if(isdefined(player.dnf))
       finishedRace = false;
-    }
 
     starsThisPlaythrough = 0;
     if(finishedRace) {
       finish_time_in_seconds = (player.finish_time - player.start_time) * 0.001;
-      if(isDefined(level.show_time_to_beat)) {
-        if(finish_time_in_seconds <= level.race_times["veteran"]) {
+      if(isdefined(level.show_time_to_beat)) {
+        if(finish_time_in_seconds <= level.race_times["veteran"])
           starsThisPlaythrough = 3;
-        } else if(finish_time_in_seconds <= level.race_times["hard"]) {
+        else if(finish_time_in_seconds <= level.race_times["hard"])
           starsThisPlaythrough = 2;
-        } else {
+        else
           starsThisPlaythrough = 1;
-        }
       }
 
       time = convert_to_time_string(finish_time_in_seconds, true);
@@ -592,40 +565,36 @@ custom_eog_summary() {
       player add_custom_eog_summary_line("@SPECIAL_OPS_UI_TIME", "@SO_SNOWRACE1_CLIFFHANGER_DNF");
     }
 
-    if(isDefined(player.gates_hit)) {
+    if(isdefined(player.gates_hit)) {
       player add_custom_eog_summary_line("@SO_SNOWRACE1_CLIFFHANGER_GATES", player.gates_hit);
     }
 
     show_time_to_beat = false;
-    if(isDefined(level.timeToBeatString)) {
+    if(isdefined(level.timeToBeatString))
       show_time_to_beat = true;
-    }
     earned_stars = player get_current_stars(starsThisPlaythrough);
-    assert(isDefined(earned_stars) && earned_stars < 4 && earned_stars >= 0);
-    if(earned_stars >= 3) {
+    assert(isdefined(earned_stars) && earned_stars < 4 && earned_stars >= 0);
+    if(earned_stars >= 3)
       show_time_to_beat = false;
-    }
 
     if(show_time_to_beat) {
-      assert(isDefined(level.race_times["normal"]));
-      assert(isDefined(level.race_times["hard"]));
-      assert(isDefined(level.race_times["veteran"]));
+      assert(isdefined(level.race_times["normal"]));
+      assert(isdefined(level.race_times["hard"]));
+      assert(isdefined(level.race_times["veteran"]));
 
       time_to_beat = convert_to_time_string(level.race_times["veteran"]);
-      if(earned_stars < 1) {
+      if(earned_stars < 1)
         time_to_beat = convert_to_time_string(level.race_times["normal"]);
-      } else if(earned_stars < 2) {
+      else if(earned_stars < 2)
         time_to_beat = convert_to_time_string(level.race_times["hard"]);
-      }
 
       player add_custom_eog_summary_line(level.timeToBeatString, time_to_beat);
     }
 
     if(level.script == "so_snowrace1_cliffhanger") {
       player maps\_endmission::use_custom_eog_default_kills();
-      if(is_coop_online()) {
+      if(is_coop_online())
         player maps\_endmission::use_custom_eog_default_kills(get_other_player(player));
-      }
     }
   }
 }

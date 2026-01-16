@@ -75,9 +75,9 @@ function main() {
   cp_mi_sing_biodomes_cloudmountain::main();
   cp_mi_sing_biodomes_fighttothedome::main();
   setup_skiptos();
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
-  spawner::add_global_spawn_function("axis", &on_actor_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
+  spawner::add_global_spawn_function("axis", & on_actor_spawned);
   if(sessionmodeiscampaignzombiesgame()) {
     level scene::init("server_room_access_start", "targetname");
   }
@@ -87,20 +87,20 @@ function main() {
 }
 
 function setup_skiptos() {
-  skipto::add("objective_igc", &objective_igc, undefined, &objective_igc_done);
-  skipto::function_d68e678e("objective_markets_start", &cp_mi_sing_biodomes_markets::objective_markets_start_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets_start_done);
-  skipto::function_d68e678e("objective_markets_rpg", &cp_mi_sing_biodomes_markets::objective_markets_rpg_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets_rpg_done);
-  skipto::function_d68e678e("objective_markets2_start", &cp_mi_sing_biodomes_markets::objective_markets2_start_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets2_start_done);
-  skipto::function_d68e678e("objective_warehouse", &cp_mi_sing_biodomes_warehouse::objective_warehouse_init, undefined, &cp_mi_sing_biodomes_warehouse::objective_warehouse_done);
-  skipto::function_d68e678e("objective_cloudmountain", &cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_done);
-  skipto::function_d68e678e("objective_cloudmountain_level_2", &cp_mi_sing_biodomes_cloudmountain::function_8ce887a2, undefined, &cp_mi_sing_biodomes_cloudmountain::function_2013f39c);
-  skipto::function_d68e678e("objective_turret_hallway", &cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_done);
-  skipto::function_d68e678e("objective_xiulan_vignette", &cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_done);
-  skipto::add("objective_server_room_defend", &cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_done);
-  skipto::function_d68e678e("objective_fighttothedome", &cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_init, undefined, &cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_done);
-  skipto::add_dev("", &dev_bullet_scene_init);
-  skipto::add_dev("", &cp_mi_sing_biodomes_warehouse::dev_warehouse_door_init);
-  skipto::add_dev("", &cp_mi_sing_biodomes_warehouse::dev_warehouse_door_without_robots_init);
+  skipto::add("objective_igc", & objective_igc, undefined, & objective_igc_done);
+  skipto::function_d68e678e("objective_markets_start", & cp_mi_sing_biodomes_markets::objective_markets_start_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets_start_done);
+  skipto::function_d68e678e("objective_markets_rpg", & cp_mi_sing_biodomes_markets::objective_markets_rpg_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets_rpg_done);
+  skipto::function_d68e678e("objective_markets2_start", & cp_mi_sing_biodomes_markets::objective_markets2_start_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets2_start_done);
+  skipto::function_d68e678e("objective_warehouse", & cp_mi_sing_biodomes_warehouse::objective_warehouse_init, undefined, & cp_mi_sing_biodomes_warehouse::objective_warehouse_done);
+  skipto::function_d68e678e("objective_cloudmountain", & cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_done);
+  skipto::function_d68e678e("objective_cloudmountain_level_2", & cp_mi_sing_biodomes_cloudmountain::function_8ce887a2, undefined, & cp_mi_sing_biodomes_cloudmountain::function_2013f39c);
+  skipto::function_d68e678e("objective_turret_hallway", & cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_done);
+  skipto::function_d68e678e("objective_xiulan_vignette", & cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_done);
+  skipto::add("objective_server_room_defend", & cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_done);
+  skipto::function_d68e678e("objective_fighttothedome", & cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_init, undefined, & cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_done);
+  skipto::add_dev("", & dev_bullet_scene_init);
+  skipto::add_dev("", & cp_mi_sing_biodomes_warehouse::dev_warehouse_door_init);
+  skipto::add_dev("", & cp_mi_sing_biodomes_warehouse::dev_warehouse_door_without_robots_init);
 }
 
 function precache() {
@@ -186,17 +186,17 @@ function level_init() {
   createthreatbiasgroup("heroes");
   level.override_robot_damage = 1;
   getent("back_door_look_trigger", "script_noteworthy") triggerenable(0);
-  a_hide_ents = getEntArray("start_hidden", "script_noteworthy");
+  a_hide_ents = getentarray("start_hidden", "script_noteworthy");
   foreach(ent in a_hide_ents) {
     ent hide();
   }
-  a_destroyed_props = getEntArray("partyroom_destroyed", "targetname");
+  a_destroyed_props = getentarray("partyroom_destroyed", "targetname");
   foreach(prop in a_destroyed_props) {
     prop hide();
   }
   hidemiscmodels("partyroom_destroyed");
-  a_trig_waterfalls = getEntArray("waterfall_triggers", "script_noteworthy");
-  array::thread_all(a_trig_waterfalls, &trig_waterfall_func);
+  a_trig_waterfalls = getentarray("waterfall_triggers", "script_noteworthy");
+  array::thread_all(a_trig_waterfalls, & trig_waterfall_func);
   level thread add_turret1_action();
 }
 
@@ -238,7 +238,7 @@ function monitor_player_bleed_out() {
 
 function function_cef897cf(str_objective, n_squad = 4) {
   var_85556b78 = [];
-  for(i = 0; i < n_squad; i++) {
+  for (i = 0; i < n_squad; i++) {
     var_85556b78[i] = spawner::simple_spawn_single("friendly_robot_control", undefined, undefined, undefined, undefined, undefined, undefined, 1);
     var_85556b78[i].health = int(var_85556b78[i].health * 0.75);
     var_85556b78[i].start_health = var_85556b78[i].health;
@@ -249,7 +249,7 @@ function function_cef897cf(str_objective, n_squad = 4) {
 
 function trig_waterfall_func() {
   self endon("death");
-  while(true) {
+  while (true) {
     self trigger::wait_till();
     self.who thread play_waterfall(self);
   }
@@ -259,7 +259,7 @@ function play_waterfall(t_waterfall) {
   self endon("death");
   t_waterfall setinvisibletoplayer(self);
   self clientfield::set_to_player("player_waterfall_pstfx", 1);
-  while(self istouching(t_waterfall)) {
+  while (self istouching(t_waterfall)) {
     n_delay = randomfloatrange(0, 1);
     wait(n_delay);
   }
@@ -269,9 +269,9 @@ function play_waterfall(t_waterfall) {
 
 function igc_party(var_f45807af = 0) {
   load::function_73adcefc();
-  level thread scene::add_scene_func("cin_bio_02_04_gunplay_vign_stab_both", &party_over, "done");
-  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", &function_df65aec6, "play");
-  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", &function_b361ad8b, "skip_started");
+  level thread scene::add_scene_func("cin_bio_02_04_gunplay_vign_stab_both", & party_over, "done");
+  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", & function_df65aec6, "play");
+  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", & function_b361ad8b, "skip_started");
   level thread scene::init("cin_bio_03_01_market_vign_engage");
   level thread scene::init("cin_bio_03_01_market_aie_weapons");
   level thread scene::init("cin_gen_aie_table_react");
@@ -291,14 +291,14 @@ function igc_party(var_f45807af = 0) {
     level scene::init("cin_bio_01_01_party_1st_drinks_part2");
     util::set_lighting_state(1);
     load::function_c32ba481();
-    util::do_chyron_text(&"CP_MI_SING_BIODOMES_INTRO_LINE_1_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_1_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_2_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_2_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_3_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_3_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_4_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_4_SHORT", "", "", 9);
+    util::do_chyron_text(&"CP_MI_SING_BIODOMES_INTRO_LINE_1_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_1_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_2_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_2_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_3_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_3_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_4_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_4_SHORT", "", "", 9);
   }
   level thread namespace_f1b4cbbc::function_f936f64e();
   function_484bc3aa(1);
   if(var_f45807af) {
     level thread scene::skipto_end("cin_bio_02_04_gunplay_vign_stab_both", undefined, undefined, 0.59, 1);
   } else {
-    if(isDefined(level.bzm_biodialogue1callback)) {
+    if(isdefined(level.bzm_biodialogue1callback)) {
       level thread[[level.bzm_biodialogue1callback]]();
     }
     level thread function_8013ff12();
@@ -308,12 +308,12 @@ function igc_party(var_f45807af = 0) {
   foreach(player in level.players) {
     player.ignoreme = 1;
   }
-  if(isDefined(level.bzm_biodialogue2callback)) {
+  if(isdefined(level.bzm_biodialogue2callback)) {
     level thread[[level.bzm_biodialogue2callback]]();
   }
   level flag::set("bullet_start");
   level flag::set("bullet_over");
-  a_destroyed_props = getEntArray("partyroom_destroyed", "targetname");
+  a_destroyed_props = getentarray("partyroom_destroyed", "targetname");
   foreach(prop in a_destroyed_props) {
     prop show();
   }
@@ -330,7 +330,7 @@ function igc_party(var_f45807af = 0) {
     player allowcrouch(1);
     player allowprone(1);
   }
-  while(!scene::is_active("cin_bio_02_04_gunplay_vign_stab_both")) {
+  while (!scene::is_active("cin_bio_02_04_gunplay_vign_stab_both")) {
     wait(0.05);
   }
   level notify("player_regain_control");
@@ -349,7 +349,7 @@ function function_8013ff12() {
 
 function function_b361ad8b(a_ents) {
   level flag::set("party_scene_skipped");
-  level thread scene::add_scene_func("cin_gen_aie_table_react", &cp_mi_sing_biodomes_markets::function_c7cb9a93, "done");
+  level thread scene::add_scene_func("cin_gen_aie_table_react", & cp_mi_sing_biodomes_markets::function_c7cb9a93, "done");
   level thread scene::play("cin_gen_aie_table_react");
   level thread scene::play("cin_bio_03_01_market_vign_engage");
   level thread scene::play("cin_bio_03_01_market_aie_weapons");
@@ -380,10 +380,10 @@ function function_5cb44f79(var_d83ebd04, var_42c1bd32, var_ae7d184a) {
   var_56af50be = [];
   ai_robot = spawner::simple_spawn_single("markets1_robot_vign");
   ai_robot squad_control::function_eb13b9c0();
-  if(isDefined(var_42c1bd32)) {
+  if(isdefined(var_42c1bd32)) {
     var_56af50be[var_42c1bd32] = ai_robot;
   } else {
-    if(!isDefined(var_56af50be)) {
+    if(!isdefined(var_56af50be)) {
       var_56af50be = [];
     } else if(!isarray(var_56af50be)) {
       var_56af50be = array(var_56af50be);
@@ -391,10 +391,10 @@ function function_5cb44f79(var_d83ebd04, var_42c1bd32, var_ae7d184a) {
     var_56af50be[var_56af50be.size] = ai_robot;
   }
   ai_enemy = spawner::simple_spawn_single("markets1_enemy_vign");
-  if(isDefined(var_ae7d184a)) {
+  if(isdefined(var_ae7d184a)) {
     var_56af50be[var_ae7d184a] = ai_enemy;
   } else {
-    if(!isDefined(var_56af50be)) {
+    if(!isdefined(var_56af50be)) {
       var_56af50be = [];
     } else if(!isarray(var_56af50be)) {
       var_56af50be = array(var_56af50be);
@@ -439,11 +439,11 @@ function function_c506a743(str_objective, n_squad = 4) {
   a_robot_spots = struct::get_array("markets_combat_robot_squad_spawn");
   a_ai_party_robots = [];
   a_ai_robots = [];
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     a_ai_party_robots[i] = getent("robot0" + (i + 1), "animname");
   }
   if(n_squad > 4) {
-    for(i = 0; i < n_squad; i++) {
+    for (i = 0; i < n_squad; i++) {
       a_ai_robots[i] = spawner::simple_spawn_single("friendly_robot_control");
     }
   }
@@ -465,7 +465,7 @@ function add_turret1_action() {
 
 function remove_turret_task_ondeath() {
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     if(isinarray(level.a_robot_tasks, self)) {
       arrayremovevalue(level.a_robot_tasks, self);
     }
@@ -487,7 +487,7 @@ function objective_igc_done(str_objective, b_starting, b_direct, player) {
 
 function shoot_igc_guards() {
   a_source_spots = struct::get_array("igc_extra_bullets");
-  for(i = 1; i <= 5; i++) {
+  for (i = 1; i <= 5; i++) {
     e_guard = getent("guard0" + i, "animname", 1);
     if(isalive(e_guard)) {
       v_source = array::random(a_source_spots).origin;
@@ -500,7 +500,7 @@ function kill_igc_guards(e_guard, v_source) {
   var_f78ad07e = getweapon("lmg_cqb");
   v_dest = e_guard.origin + vectorscale((0, 0, 1), 48);
   i = 0;
-  while(i <= 3.5) {
+  while (i <= 3.5) {
     var_de810370 = randomintrange(-2, 2);
     var_4837dd9 = randomintrange(-2, 2);
     var_2a85f842 = randomintrange(-20, 20);

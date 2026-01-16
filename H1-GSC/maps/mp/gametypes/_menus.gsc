@@ -5,12 +5,11 @@
 ****************************************/
 
 init() {
-  if(!isDefined(game["gamestarted"])) {
+  if(!isdefined(game["gamestarted"])) {
     game["menu_team"] = "team_marinesopfor";
 
-    if(level.multiteambased) {
+    if(level.multiteambased)
       game["menu_team"] = "team_mt_options";
-    }
 
     game["menu_class"] = "class";
     game["menu_class_allies"] = "class_marines";
@@ -19,7 +18,7 @@ init() {
     game["menu_changeclass_axis"] = "changeclass_opfor";
 
     if(level.multiteambased) {
-      for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+      for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
         var_1 = "menu_class_" + level.teamnamelist[var_0];
         var_2 = "menu_changeclass_" + level.teamnamelist[var_0];
         game[var_1] = game["menu_class_allies"];
@@ -34,7 +33,7 @@ init() {
 
       if(level.splitscreen) {
         if(level.multiteambased) {
-          for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+          for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
             var_1 = "menu_class_" + level.teamnamelist[var_0];
             var_2 = "menu_changeclass_" + level.teamnamelist[var_0];
             game[var_1] = game[var_1] + "_splitscreen";
@@ -61,7 +60,7 @@ init() {
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread watchforclasschange();
     var_0 thread watchforopenteamselectmenu();
@@ -75,9 +74,9 @@ onplayerconnect() {
 connectedmenus() {}
 
 getclasschoice(var_0) {
-  if(var_0 <= 100) {
+  if(var_0 <= 100)
     var_0 = "custom" + var_0;
-  } else if(var_0 <= 200) {
+  else if(var_0 <= 200) {
     var_0 = var_0 - 101;
     var_0 = "class" + var_0;
   } else if(var_0 <= 206) {
@@ -95,7 +94,7 @@ watchforclasschange() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 != "class_select") {
@@ -107,12 +106,11 @@ watchforclasschange() {
     }
 
     if(!istestclient(self) && !isai(self)) {
-      if("" + var_1 != "callback") {
+      if("" + var_1 != "callback")
         self setclientomnvar("ui_loadout_selected", var_1);
-      }
     }
 
-    if(isDefined(self.waitingtoselectclass) && self.waitingtoselectclass) {
+    if(isdefined(self.waitingtoselectclass) && self.waitingtoselectclass) {
       continue;
     }
     if(!maps\mp\_utility::allowclasschoice()) {
@@ -129,7 +127,7 @@ watchforclasschange() {
         var_2 = var_1 + 1;
         var_2 = getclasschoice(var_2);
 
-        if(!isDefined(self.pers["class"]) || var_2 == self.pers["class"]) {
+        if(!isdefined(self.pers["class"]) || var_2 == self.pers["class"]) {
           continue;
         }
         self.pers["class"] = var_2;
@@ -151,7 +149,7 @@ watchforleavegame() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 != "end_game") {
@@ -169,7 +167,7 @@ watchforopenteamselectmenu() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("luinotifyserver", var_0);
 
     if(var_0 != "open_team_select_menu") {
@@ -177,9 +175,8 @@ watchforopenteamselectmenu() {
     }
     var_1 = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "spectatetype");
 
-    if(var_1 > 0) {
+    if(var_1 > 0)
       maps\mp\_utility::streamnextspectatorweaponsifnecessary(0);
-    }
   }
 }
 
@@ -187,7 +184,7 @@ watchforteamchange() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 != "team_select") {
@@ -196,9 +193,8 @@ watchforteamchange() {
     if(maps\mp\_utility::matchmakinggame() && !getdvarint("force_ranking") && !self _meth_8586()) {
       continue;
     }
-    if(var_1 != 3 && !teamchangeisfactionchange() && maps\mp\_utility::allowclasschoice()) {
+    if(var_1 != 3 && !teamchangeisfactionchange() && maps\mp\_utility::allowclasschoice())
       thread showloadoutmenu();
-    }
 
     if(var_1 == 3) {
       self setclientomnvar("ui_options_menu", 0);
@@ -212,9 +208,8 @@ watchforteamchange() {
         thread maps\mp\gametypes\_spectating::setspectatepermissions();
       }
 
-      if(teamchangeisfactionchange() && isDefined(self.addtoteam)) {
+      if(teamchangeisfactionchange() && isdefined(self.addtoteam))
         self.addtoteam = undefined;
-      }
     } else {
       self setclientomnvar("ui_spectator_selected", -1);
       self.spectating_actively = 0;
@@ -224,33 +219,29 @@ watchforteamchange() {
         self setclientomnvar("ui_use_mlg_hud", 0);
       }
 
-      if(teamchangeisfactionchange() || !maps\mp\_utility::allowclasschoice()) {
+      if(teamchangeisfactionchange() || !maps\mp\_utility::allowclasschoice())
         thread maps\mp\gametypes\_playerlogic::setuioptionsmenu(-1);
-      }
     }
 
-    if(var_1 == 0) {
+    if(var_1 == 0)
       var_1 = "axis";
-    } else if(var_1 == 1) {
+    else if(var_1 == 1)
       var_1 = "allies";
-    } else if(var_1 == 2) {
+    else if(var_1 == 2)
       var_1 = "random";
-    } else {
+    else
       var_1 = "spectator";
-    }
 
-    if(isDefined(self.pers["team"]) && var_1 == self.pers["team"]) {
-      if(teamchangeisfactionchange() && isDefined(self.addtoteam)) {
+    if(isdefined(self.pers["team"]) && var_1 == self.pers["team"]) {
+      if(teamchangeisfactionchange() && isdefined(self.addtoteam))
         self.addtoteam = undefined;
-      }
 
       self notify("selected_same_team");
       continue;
     }
 
-    if(getdvarint("scr_lua_splashes")) {
+    if(getdvarint("scr_lua_splashes"))
       self luinotifyevent(&"clear_notification_queue", 0);
-    }
 
     self setclientomnvar("ui_loadout_selected", -1);
 
@@ -269,9 +260,8 @@ watchforteamchange() {
       continue;
     }
 
-    if(var_1 == "spectator") {
+    if(var_1 == "spectator")
       thread setspectator();
-    }
   }
 }
 
@@ -293,8 +283,8 @@ autoassign() {
   } else if(self ismlgspectator() && !maps\mp\_utility::invirtuallobby())
     thread setspectator();
   else {
-    var_0 = isDefined(self.team) && self.team == "axis";
-    var_1 = isDefined(self.team) && self.team == "allies";
+    var_0 = isdefined(self.team) && self.team == "axis";
+    var_1 = isdefined(self.team) && self.team == "allies";
 
     if(level.teamcount["axis"] < level.teamcount["allies"] && !var_0) {
       thread setteam("axis");
@@ -311,13 +301,12 @@ autoassign() {
         var_2 = getteamscore("allies");
         var_3 = getteamscore("axis");
 
-        if(var_2 > var_3 && !var_0) {
+        if(var_2 > var_3 && !var_0)
           thread setteam("axis");
-        } else if(var_3 > var_2 && !var_1) {
+        else if(var_3 > var_2 && !var_1)
           thread setteam("allies");
-        } else {
+        else
           thread setteam(common_scripts\utility::random(["allies", "axis"]));
-        }
       }
     }
   }
@@ -340,9 +329,8 @@ setteam(var_0) {
 
     thread menugiveclass(1);
   } else {
-    if(var_1) {
+    if(var_1)
       self.hasspawned = 0;
-    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
@@ -353,9 +341,8 @@ setteam(var_0) {
     addtoteam(var_0);
     maps\mp\gametypes\_class::cac_setlastteam(var_0);
 
-    if(self.sessionstate == "playing") {
+    if(self.sessionstate == "playing")
       self suicide();
-    }
 
     waitforclassselect();
     endrespawnnotify();
@@ -366,7 +353,7 @@ setteam(var_0) {
       return;
     }
     if(game["state"] == "playing" && !maps\mp\_utility::isinkillcam()) {
-      if(isDefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
+      if(isdefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
         return;
       }
       maps\mp\gametypes\_playerlogic::spawnclient();
@@ -377,7 +364,7 @@ setteam(var_0) {
 }
 
 setspectator() {
-  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
+  if(isdefined(self.pers["team"]) && self.pers["team"] == "spectator") {
     return;
   }
   if(isalive(self)) {
@@ -400,7 +387,7 @@ waitforclassselect() {
   self.waitingtoselectclass = 1;
 
   if(maps\mp\_utility::allowclasschoice()) {
-    for(;;) {
+    for (;;) {
       self waittill("luinotifyserver", var_0, var_1);
 
       if(var_0 == "class_select") {
@@ -435,7 +422,7 @@ waitforclassselect() {
     if(!isai(self) && maps\mp\_utility::showgenericmenuonmatchstart() && (self getclientomnvar("ui_options_menu") == 0 || maps\mp\_utility::ishodgepodgeph())) {
       thread maps\mp\gametypes\_playerlogic::setuioptionsmenu(3);
 
-      for(;;) {
+      for (;;) {
         self waittill("luinotifyserver", var_0, var_1);
 
         if(var_0 == "class_select") {
@@ -456,9 +443,8 @@ beginclasschoice(var_0) {
   if(maps\mp\_utility::allowclasschoice()) {
     thread maps\mp\gametypes\_playerlogic::setuioptionsmenu(2);
 
-    if(!self ismlgspectator() || maps\mp\_utility::invirtuallobby()) {
+    if(!self ismlgspectator() || maps\mp\_utility::invirtuallobby())
       waitforclassselect();
-    }
 
     endrespawnnotify();
 
@@ -467,7 +453,7 @@ beginclasschoice(var_0) {
         return;
       }
       if(game["state"] == "playing" && !maps\mp\_utility::isinkillcam()) {
-        if(isDefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
+        if(isdefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
           return;
         }
         thread maps\mp\gametypes\_playerlogic::spawnclient();
@@ -485,7 +471,7 @@ beginclasschoice(var_0) {
         return;
       }
       if(game["state"] == "playing" && !maps\mp\_utility::isinkillcam()) {
-        if(isDefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
+        if(isdefined(self.waitingtospawnamortize) && self.waitingtospawnamortize) {
           return;
         }
         thread maps\mp\gametypes\_playerlogic::spawnclient();
@@ -501,9 +487,8 @@ bypassclasschoice() {
   self.selectedclass = 1;
   self.class = "class0";
 
-  if(isDefined(level.bypassclasschoicefunc)) {
+  if(isdefined(level.bypassclasschoicefunc))
     self[[level.bypassclasschoicefunc]]();
-  }
 }
 
 beginteamchoice() {
@@ -516,7 +501,7 @@ showmainmenuforteam() {
 }
 
 menuspectator() {
-  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
+  if(isdefined(self.pers["team"]) && self.pers["team"] == "spectator") {
     return;
   }
   if(isalive(self)) {
@@ -542,19 +527,17 @@ watchhasdonecombat(var_0) {
     self waittill("hasDoneCombat");
     self notify("endStreamClass");
 
-    if(var_0) {
+    if(var_0)
       self iprintlnbold(game["strings"]["change_team_cancel"]);
-    } else {
+    else
       self iprintlnbold(game["strings"]["change_class_cancel"]);
-    }
 
     wait 2.0;
 
-    if(var_0) {
+    if(var_0)
       self iprintlnbold(game["strings"]["change_team"]);
-    } else {
+    else
       self iprintlnbold(game["strings"]["change_class"]);
-    }
   }
 }
 
@@ -569,11 +552,10 @@ menugiveclass(var_0) {
       self endon("endStreamClass");
       thread watchhasdonecombat(var_0);
 
-      if(var_0) {
+      if(var_0)
         self iprintlnbold(game["strings"]["change_team_wait"]);
-      } else {
+      else
         self iprintlnbold(game["strings"]["change_class_wait"]);
-      }
 
       self waittill("streamClassComplete");
       self iprintlnbold("");
@@ -585,26 +567,24 @@ menugiveclass(var_0) {
     self.tag_stowed_hip = undefined;
     maps\mp\gametypes\_class::giveloadout(self.pers["team"], self.pers["class"]);
 
-    if(!isDefined(self.spawnplayergivingloadout)) {
+    if(!isdefined(self.spawnplayergivingloadout)) {
       maps\mp\gametypes\_class::applyloadout();
       maps\mp\gametypes\_hardpoints::giveownedhardpointitem();
     }
 
-    if(maps\mp\_utility::_hasperk("specialty_moreminimap")) {
+    if(maps\mp\_utility::_hasperk("specialty_moreminimap"))
       setomnvar("ui_minimap_extend_grace_period", 1);
-    } else {
+    else
       setomnvar("ui_minimap_extend_grace_period", 0);
-    }
 
     self setclientomnvar("ui_class_changed_grace_period", 1);
   } else {
     maps\mp\gametypes\_playerlogic::streamclass();
 
-    if(var_0) {
+    if(var_0)
       self iprintlnbold(game["strings"]["change_team"]);
-    } else {
+    else
       self iprintlnbold(game["strings"]["change_class"]);
-    }
   }
 }
 
@@ -618,14 +598,14 @@ menuclass(var_0) {
     return;
   }
 
-  if(isDefined(self.pers["class"]) && self.pers["class"] == var_2 && (isDefined(self.pers["primary"]) && self.pers["primary"] == var_3)) {
+  if(isdefined(self.pers["class"]) && self.pers["class"] == var_2 && (isdefined(self.pers["primary"]) && self.pers["primary"] == var_3)) {
     return;
   }
   if(maps\mp\_utility::ishodgepodgeph() && game["roundsPlayed"] > 0) {
     return;
   }
   if(self.sessionstate == "playing") {
-    if(isDefined(self.pers["lastClass"]) && isDefined(self.pers["class"])) {
+    if(isdefined(self.pers["lastClass"]) && isdefined(self.pers["class"])) {
       self.pers["lastClass"] = self.pers["class"];
       self.lastclass = self.pers["lastClass"];
     }
@@ -640,7 +620,7 @@ menuclass(var_0) {
     }
     thread menugiveclass(0);
   } else {
-    if(isDefined(self.pers["lastClass"]) && isDefined(self.pers["class"])) {
+    if(isdefined(self.pers["lastClass"]) && isdefined(self.pers["class"])) {
       self.pers["lastClass"] = self.pers["class"];
       self.lastclass = self.pers["lastClass"];
     }
@@ -653,29 +633,26 @@ menuclass(var_0) {
     if(game["state"] == "postgame") {
       return;
     }
-    if(game["state"] == "playing" && !maps\mp\_utility::isinkillcam()) {
+    if(game["state"] == "playing" && !maps\mp\_utility::isinkillcam())
       thread maps\mp\gametypes\_playerlogic::spawnclient();
-    }
   }
 
   thread maps\mp\gametypes\_spectating::setspectatepermissions();
 }
 
 getuiteamindex(var_0) {
-  if(var_0 == "allies") {
+  if(var_0 == "allies")
     return 2;
-  } else if(var_0 == "axis") {
+  else if(var_0 == "axis")
     return 1;
-  }
 }
 
 addtoteam(var_0, var_1, var_2) {
-  if(isDefined(self.team)) {
+  if(isdefined(self.team)) {
     maps\mp\gametypes\_playerlogic::removefromteamcount();
 
-    if(isDefined(var_2) && var_2) {
+    if(isdefined(var_2) && var_2)
       maps\mp\gametypes\_playerlogic::decrementalivecount(self.team);
-    }
   }
 
   self.pers["team"] = var_0;
@@ -690,28 +667,25 @@ addtoteam(var_0, var_1, var_2) {
   }
 
   if(!getdvarint("party_playersCoop", 0) && (!maps\mp\_utility::matchmakinggame() || (isbot(self) || istestclient(self)) || !maps\mp\_utility::allowteamchoice() || getdvarint("force_ranking"))) {
-    if(level.teambased) {
+    if(level.teambased)
       self.sessionteam = var_0;
-    } else if(var_0 == "spectator") {
+    else if(var_0 == "spectator")
       self.sessionteam = "spectator";
-    } else {
+    else
       self.sessionteam = "none";
-    }
   }
 
   if(game["state"] != "postgame") {
     maps\mp\gametypes\_playerlogic::addtoteamcount();
 
-    if(isDefined(var_2) && var_2) {
+    if(isdefined(var_2) && var_2)
       maps\mp\gametypes\_playerlogic::incrementalivecount(self.team);
-    }
   }
 
   maps\mp\_utility::updateobjectivetext();
 
-  if(isDefined(var_1) && var_1) {
+  if(isdefined(var_1) && var_1)
     waittillframeend;
-  }
 
   maps\mp\_utility::updatemainmenu();
 

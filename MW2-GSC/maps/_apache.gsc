@@ -43,6 +43,7 @@ main(model, type) {
   build_treadfx();
 
   build_team("allies");
+
 }
 
 init_local() {
@@ -51,20 +52,21 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
+
   return positions;
 }
 
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 11; i++)
+    positions[i] = spawnstruct();
 
   positions[0].getout_delete = true;
 
   return positions;
 }
+
 
 /*QUAKED script_vehicle_apache (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

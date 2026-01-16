@@ -21,7 +21,7 @@ dialogue(dialoguename, look_target) {
 
 watersheet_on_trigger(targetname) {
   trig = getent(targetname, "targetname");
-  while(true) {
+  while (true) {
     trig waittill("trigger", who);
     if(isDefined(who)) {
       who setwatersheeting(true, 3);
@@ -40,7 +40,7 @@ hud_satchel_hint() {
   wait(5);
   self.hintelem settext("");
   self endon("restarting_satchel_hint");
-  while(self GetCurrentWeapon() != "satchel_charge_new") {
+  while (self GetCurrentWeapon() != "satchel_charge_new") {
     wait(0.25);
   }
   self.hintelem setText(&"OKI2_SATCHEL_HINT2");
@@ -89,7 +89,7 @@ guy_follow_target_entity(target, goalradius) {
   }
   self.disableArrivals = true;
   self.disableExits = true;
-  while(true) {
+  while (true) {
     self setGoalPos(target.origin);
     self waittill("goal");
   }
@@ -138,7 +138,7 @@ fade_cleanup() {
     level.fadetoblack Destroy();
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "1");
     player SetClientDvar("compass", "1");
@@ -179,19 +179,19 @@ hud_fade_in(time) {
 simple_spawn(name, spawn_func, delay) {
   spawners = getEntArray(name, "targetname");
   if(isDefined(spawn_func)) {
-    for(i = 0; i < spawners.size; i++) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func);
     }
   }
   ai_array = [];
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     if(i % 2) {
       wait_network_frame();
     }
     if(isDefined(spawners[i].script_forcespawn)) {
-      ai = spawners[i] Stalingradspawn();
+      ai = spawners[i] StalingradSpawn();
     } else {
-      ai = spawners[i] Dospawn();
+      ai = spawners[i] DoSpawn();
     }
     okiPrint("Spawning " + spawners[i].targetname);
     spawn_failed(ai);
@@ -210,11 +210,11 @@ simple_floodspawn(name, spawn_func) {
   spawners = getEntArray(name, "targetname");
   assertex(spawners.size, "no spawners with targetname " + name + " found!");
   if(isDefined(spawn_func)) {
-    for(i = 0; i < spawners.size; i++) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func);
     }
   }
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     if(i % 2) {
       wait_network_frame();
     }
@@ -233,7 +233,7 @@ do_dialogue(dialogue, aname) {
 trim_dialogue(dialogue, aname) {
   strng = level.scr_sound[aname][dialogue];
   newstr = "";
-  for(x = strng.size - 1; x > 5; x--) {
+  for (x = strng.size - 1; x > 5; x--) {
     newstr = strng[x] + newstr;
   }
   return (newstr);
@@ -241,21 +241,21 @@ trim_dialogue(dialogue, aname) {
 
 disable_friendly_color() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] disable_ai_color();
   }
 }
 
 enable_friendly_color() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] enable_ai_color();
   }
 }
 
 enable_friendly_color_gradual(delay) {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] enable_ai_color();
     wait(delay);
   }
@@ -263,14 +263,14 @@ enable_friendly_color_gradual(delay) {
 
 players_enable_rain() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setwaterdrops(25);
   }
 }
 
 players_disable_rain() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setwaterdrops(0);
   }
 }
@@ -281,7 +281,7 @@ trigger_noteworthy_if_player0(trigger, end_notify) {
   if(isDefined(trigger)) {
     okiPrint("trigger_noteworthy_if_player0 found trigger: " + trigger.targetname);
   }
-  while(isDefined(trigger)) {
+  while (isDefined(trigger)) {
     if(isDefined(trigger.script_noteworthy)) {
       target = getent(trigger.script_noteworthy, "targetname");
       if(isDefined(target)) {
@@ -307,7 +307,7 @@ trigger_noteworthy_if_player0(trigger, end_notify) {
 move_players(spots) {
   players = get_players();
   points = getstructarray(spots, "targetname");
-  for(x = 0; x < players.size; x++) {
+  for (x = 0; x < players.size; x++) {
     players[x] setorigin(points[x].origin);
     players[x] setplayerangles(points[x].angles);
   }
@@ -315,10 +315,10 @@ move_players(spots) {
 
 spawn_array_once(targetname, fieldname) {
   guys = [];
-  spawners = getEntArray(targetname, fieldname);
+  spawners = getentarray(targetname, fieldname);
   if(isDefined(spawners)) {
-    for(i = 0; i < spawners.size; i++) {
-      guy = spawners[i] Stalingradspawn();
+    for (i = 0; i < spawners.size; i++) {
+      guy = spawners[i] StalingradSpawn();
       if(isDefined(guy)) {
         okiPrint("Spawning " + targetname + " #" + i);
         guys[guys.size] = guy;
@@ -336,7 +336,7 @@ maintain_mg_guy(endmsg, spawntargetname, guytargetname, threatbiasgroup) {
   spawner = getent(spawntargetname, "targetname");
   okiPrint("maintain_mg_guy found " + spawner.targetname);
   spawner add_spawn_function(::guy_to_goal_blind);
-  while(isDefined(spawner)) {
+  while (isDefined(spawner)) {
     guy = spawner stalingradspawn();
     if(isDefined(guy)) {
       guy.targetname = guytargetname;
@@ -353,7 +353,7 @@ maintain_mg_guy(endmsg, spawntargetname, guytargetname, threatbiasgroup) {
 
 set_friendly_stances(a, b, c) {
   friends = get_ai_group_ai("dasquad");
-  for(i = 0; i < friends.size; i++) {
+  for (i = 0; i < friends.size; i++) {
     if(isDefined(a)) {
       if(isDefined(b)) {
         if(isDefined(c)) {
@@ -371,7 +371,7 @@ set_friendly_stances(a, b, c) {
 seek_players() {
   self endon("death");
   wait(randomfloatrange(1, 10));
-  while(issentient(self)) {
+  while (issentient(self)) {
     self SetGoalEntity(get_closest_player(self.origin));
     if(self.goalradius > 200) {
       self.goalradius -= 200;
@@ -382,7 +382,7 @@ seek_players() {
 
 get_free_ai() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(ai[i] != level.sarge && ai[i] != level.guy1) {
       return ai[i];
     }
@@ -410,7 +410,7 @@ bloody_death(die, delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     random = RandomIntRange(0, tags.size);
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
@@ -424,7 +424,7 @@ bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
-  playFXOnTag(fxName, self, tag);
+  PlayFxOnTag(fxName, self, tag);
 }
 
 is_active_ai(suspect) {
@@ -444,9 +444,9 @@ random_death(time) {
 
 org_trigger(org, radius, notification) {
   trig = false;
-  while(!trig) {
+  while (!trig) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, org) < radius * radius) {
         trig = true;
       }
@@ -461,7 +461,7 @@ org_trigger(org, radius, notification) {
 move_ai(spots) {
   ai = get_ai_group_ai("dasquad");
   points = getstructarray(spots, "targetname");
-  for(x = 0; x < ai.size; x++) {
+  for (x = 0; x < ai.size; x++) {
     okiPrint("move_ai: Moving AI to " + points[x].origin);
     ai[x].anchor = spawn("script_origin", ai[x].origin);
     ai[x] linkto(ai[x].anchor);
@@ -511,20 +511,19 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
     maps\_utility::error("SQUAD MANAGER:Could not find spawners for squad " + strSquadName);
     return;
   }
-  if(!isDefined(spawntime)) {
+  if(!isDefined(spawntime))
     spawntime = 0.05;
-  }
-  while(1) {
+  while (1) {
     aSquad = alive_array(strSquadName);
     okiPrint("Squad " + strSquadName + " population is " + aSquad.size);
     if(aSquad.size < mincount) {
       level notify(strSquadName + " min threshold reached");
-      while(aSquad.size < maxcount) {
+      while (aSquad.size < maxcount) {
         if(isDefined(squad_spawn[spawn_index].script_forcespawn) &&
           squad_spawn[spawn_index].script_forcespawn) {
-          spawned = squad_spawn[spawn_index] stalingradspawn();
+          spawned = squad_spawn[spawn_index] stalingradSpawn();
         } else {
-          spawned = squad_spawn[spawn_index] dospawn();
+          spawned = squad_spawn[spawn_index] doSpawn();
         }
         if(isDefined(spawned)) {
           wait(0.02);
@@ -534,9 +533,8 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
           }
         }
         spawn_index = spawn_index + 1;
-        if(spawn_index >= squad_spawn.size) {
+        if(spawn_index >= squad_spawn.size)
           spawn_index = 0;
-        }
         wait(spawntime);
       }
     }
@@ -556,7 +554,7 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
 alive_array(strSquadName) {
   aSquad = [];
   aRoster = getaiarray();
-  for(i = 0; i < aRoster.size; i++) {
+  for (i = 0; i < aRoster.size; i++) {
     if(isDefined(aRoster[i].script_squadname)) {
       if(aRoster[i].script_squadname == strSquadName) {
         aSquad[aSquad.size] = aRoster[i];
@@ -569,7 +567,7 @@ alive_array(strSquadName) {
 spawn_array(strSquadName) {
   squad_spawn = [];
   aSpawner = getspawnerarray();
-  for(i = 0; i < aSpawner.size; i++) {
+  for (i = 0; i < aSpawner.size; i++) {
     if(isDefined(aSpawner[i].script_squadname)) {
       if(aSpawner[i].script_squadname == strSquadName) {
         squad_spawn[squad_spawn.size] = aSpawner[i];
@@ -593,7 +591,7 @@ cleanup_trigger_enable(triggername) {
   guys = getaiarray("axis");
   if(isDefined(guys)) {
     okiPrint("cleanup_trigger_enable found " + guys.size + " guys");
-    for(i = 0; i < guys.size; i++) {
+    for (i = 0; i < guys.size; i++) {
       if(guys[i] isTouching(trig)) {
         to_delete[numdelete] = guys[i];
         numdelete++;
@@ -601,18 +599,18 @@ cleanup_trigger_enable(triggername) {
     }
     okiPrint("cleanup_trigger_enable found " + to_delete.size + " axis touching trigger");
     players_touching = true;
-    while(players_touching == true) {
+    while (players_touching == true) {
       wait(1.5);
       players = get_players();
       players_touching = false;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i] isTouching(trig)) {
           players_touching = true;
         }
       }
     }
     okiPrint("cleanup_trigger_enable detected no players touching " + triggername);
-    for(i = 0; i < guys.size; i++) {
+    for (i = 0; i < guys.size; i++) {
       if(isDefined(guys[i])) {
         if(guys[i] isTouching(trig)) {
           guys[i] thread random_death();

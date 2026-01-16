@@ -9,12 +9,12 @@ main() {
   self notify("killanimscript");
   self._tag_entity endon(self._anime);
 
-  if(isDefined(self._custom_anim_thread)) {
+  if(isdefined(self._custom_anim_thread)) {
     self thread[[self._custom_anim_thread]]();
     self._custom_anim_thread = undefined;
   }
 
-  loop = isDefined(self._custom_anim_loop) && self._custom_anim_loop;
+  loop = isdefined(self._custom_anim_loop) && self._custom_anim_loop;
   if(loop) {
     self endon("stop_loop");
     self._custom_anim_loop = undefined;
@@ -37,22 +37,20 @@ main() {
   angles = getstartAngles(self._tag_entity.origin, self._tag_entity.angles, animationName);
 
   newOrigin = self getDropToFloorPosition(origin);
-  if(isDefined(newOrigin)) {
+  if(isdefined(newOrigin))
     origin = newOrigin;
-  } else {
+  else
     println("Custom animation may be playing in solid for entity '" + self getentnum() + "'\n");
-  }
 
-  if(!isDefined(self.noTeleport)) {
+  if(!isdefined(self.noTeleport))
     self teleport(origin, angles);
-  }
 
   self.pushable = 0;
 
   clear_time = 0.3;
   blend_time = 0.2;
 
-  if(isDefined(self.anim_blend_time_override)) {
+  if(isdefined(self.anim_blend_time_override)) {
     clear_time = self.anim_blend_time_override;
     blend_time = self.anim_blend_time_override;
   }
@@ -79,21 +77,20 @@ main() {
   endMarker = "end";
 
   if(!loop) {
-    if(animHasNoteTrack(animationName, "finish")) {
+    if(animHasNoteTrack(animationName, "finish"))
       endMarker = "finish";
-    } else if(animHasNoteTrack(animationName, "stop anim")) {
+    else if(animHasNoteTrack(animationName, "stop anim"))
       endMarker = "stop anim";
-    }
   }
 
-  while(1) {
+  while (1) {
     self waittillmatch(anim_string, endMarker);
 
     if(loop) {
       animationName = level.scr_anim[self._animname][anime][randomint(arraySize)];
       self SetFlaggedAnimKnobLimitedRestart(anim_string, animationName, 1, 0.2, 1);
 
-      if(isDefined(tag_entity)) {
+      if(isdefined(tag_entity)) {
         tag_entity thread maps\_anim::start_notetrack_wait(self, anim_string, anime, self._animname);
         tag_entity thread maps\_anim::animscriptDoNoteTracksThread(self, anim_string, anime);
       }
@@ -102,9 +99,8 @@ main() {
     }
   }
 
-  if(endMarker != "end") {
+  if(endMarker != "end")
     self OrientMode("face motion");
-  }
 
   self notify("finished_custom_animmode" + anime);
 }

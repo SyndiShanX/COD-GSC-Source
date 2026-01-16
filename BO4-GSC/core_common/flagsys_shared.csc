@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace flagsys;
 
 set(str_flag) {

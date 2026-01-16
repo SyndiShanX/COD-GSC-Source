@@ -12,9 +12,9 @@ weapon_box_callback(localclientnum, set, newent) {
   if(localclientnum != 0) {
     return;
   }
-  if(set) {
+  if(set)
     self thread weapon_floats_up();
-  } else {
+  else {
     self notify("end_float");
     cleanup_weapon_models();
   }
@@ -74,15 +74,14 @@ weapon_floats_up() {
   }
 
   for(i = 0; i < number_cycles; i++) {
-    if(i < 20) {
+    if(i < 20)
       serverwait(0, 0.05, 0.01);
-    } else if(i < 30) {
+    else if(i < 30)
       serverwait(0, 0.1, 0.01);
-    } else if(i < 35) {
+    else if(i < 35)
       serverwait(0, 0.2, 0.01);
-    } else if(i < 38) {
+    else if(i < 38)
       serverwait(0, 0.3, 0.01);
-    }
 
     rand = treasure_chest_chooserandomweapon();
     modelname = getweaponmodel(rand);
@@ -90,11 +89,11 @@ weapon_floats_up() {
 
     for(index = 0; index < players.size; index++) {
       if(isDefined(self.weapon_models[index])) {
-        self.weapon_models[index] setModel(modelname);
+        self.weapon_models[index] setmodel(modelname);
         self.weapon_models[index] useweaponhidetags(rand);
 
         if(weapon_is_dual_wield(rand)) {
-          self.weapon_models[index].dw setModel(modelname);
+          self.weapon_models[index].dw setmodel(modelname);
           self.weapon_models[index].dw useweaponhidetags(rand);
           self.weapon_models[index].dw show();
           continue;
@@ -109,33 +108,28 @@ weapon_floats_up() {
 }
 
 is_weapon_included(weapon_name) {
-  if(!isDefined(level._included_weapons)) {
+  if(!isDefined(level._included_weapons))
     return false;
-  }
 
   for(i = 0; i < level._included_weapons.size; i++) {
-    if(weapon_name == level._included_weapons[i]) {
+    if(weapon_name == level._included_weapons[i])
       return true;
-    }
   }
 
   return false;
 }
 
 include_weapon(weapon, display_in_box, func) {
-  if(!isDefined(level._included_weapons)) {
+  if(!isDefined(level._included_weapons))
     level._included_weapons = [];
-  }
 
   level._included_weapons[level._included_weapons.size] = weapon;
 
-  if(!isDefined(level._display_box_weapons)) {
+  if(!isDefined(level._display_box_weapons))
     level._display_box_weapons = [];
-  }
 
-  if(!isDefined(display_in_box)) {
+  if(!isDefined(display_in_box))
     display_in_box = 1;
-  }
 
   if(!display_in_box) {
     return;
@@ -150,9 +144,8 @@ include_weapon(weapon, display_in_box, func) {
 }
 
 treasure_chest_chooserandomweapon() {
-  if(!isDefined(level._display_box_weapons)) {
+  if(!isDefined(level._display_box_weapons))
     level._display_box_weapons = array("python_zm", "g11_lps_zm", "famas_zm");
-  }
 
   return level._display_box_weapons[randomint(level._display_box_weapons.size)];
 }
@@ -165,15 +158,13 @@ init() {
   spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("tazer_upgrade", "targetname"), 1, 0);
   spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("buildable_wallbuy", "targetname"), 1, 0);
 
-  if(!level.headshots_only) {
+  if(!level.headshots_only)
     spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("claymore_purchase", "targetname"), 1, 0);
-  }
 
   location = level.scr_zm_map_start_location;
 
-  if((location == "default" || location == "") && isDefined(level.default_start_location)) {
+  if((location == "default" || location == "") && isDefined(level.default_start_location))
     location = level.default_start_location;
-  }
 
   match_string = level.scr_zm_ui_gametype + "_" + location;
   match_string_plus_space = " " + match_string;
@@ -192,9 +183,8 @@ init() {
     matches = strtok(spawnable_weapon.script_noteworthy, ",");
 
     for(j = 0; j < matches.size; j++) {
-      if(matches[j] == match_string || matches[j] == match_string_plus_space) {
+      if(matches[j] == match_string || matches[j] == match_string_plus_space)
         spawn_list[spawn_list.size] = spawnable_weapon;
-      }
     }
   }
 
@@ -205,9 +195,8 @@ init() {
     level._active_wallbuys[spawn_list[i].script_label] = spawn_list[i];
     numbits = 2;
 
-    if(isDefined(level._wallbuy_override_num_bits)) {
+    if(isDefined(level._wallbuy_override_num_bits))
       numbits = level._wallbuy_override_num_bits;
-    }
 
     registerclientfield("world", spawn_list[i].script_label, 1, numbits, "int", ::wallbuy_callback, 0);
     target_struct = getstruct(spawn_list[i].target, "targetname");
@@ -215,9 +204,8 @@ init() {
     if(spawn_list[i].targetname == "buildable_wallbuy") {
       bits = 4;
 
-      if(isDefined(level.buildable_wallbuy_weapons)) {
+      if(isDefined(level.buildable_wallbuy_weapons))
         bits = getminbitcountfornum(level.buildable_wallbuy_weapons.size + 1);
-      }
 
       registerclientfield("world", spawn_list[i].script_label + "_idx", 12000, bits, "int", ::wallbuy_callback_idx, 0);
     }
@@ -238,13 +226,12 @@ wallbuy_player_connect(localclientnum) {
     wallbuy = level._active_wallbuys[keys[i]];
     fx = level._effect["m14_zm_fx"];
 
-    if(wallbuy.targetname == "buildable_wallbuy") {
+    if(wallbuy.targetname == "buildable_wallbuy")
       fx = level._effect["dynamic_wallbuy_fx"];
-    } else if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
+    else if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"]))
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
-    }
 
-    wallbuy.fx[localclientnum] = playFX(localclientnum, fx, wallbuy.origin, anglesToForward(wallbuy.angles), anglestoup(wallbuy.angles), 0.1);
+    wallbuy.fx[localclientnum] = playfx(localclientnum, fx, wallbuy.origin, anglestoforward(wallbuy.angles), anglestoup(wallbuy.angles), 0.1);
     target_struct = getstruct(wallbuy.target, "targetname");
 
     if(wallbuy.targetname == "buildable_wallbuy") {
@@ -259,9 +246,8 @@ wallbuy_player_connect(localclientnum) {
 
 wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(binitialsnap) {
-    while(!isDefined(level._active_wallbuys) || !isDefined(level._active_wallbuys[fieldname])) {
+    while(!isDefined(level._active_wallbuys) || !isDefined(level._active_wallbuys[fieldname]))
       wait 0.05;
-    }
   }
 
   struct = level._active_wallbuys[fieldname];
@@ -277,13 +263,11 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     case 1:
       if(binitialsnap) {
         if(!isDefined(struct.models)) {
-          while(!isDefined(struct.models)) {
+          while(!isDefined(struct.models))
             wait 0.05;
-          }
 
-          while(!isDefined(struct.models[localclientnum])) {
+          while(!isDefined(struct.models[localclientnum]))
             wait 0.05;
-          }
         }
 
         struct.models[localclientnum] show();
@@ -291,15 +275,13 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       } else {
         wait 0.05;
 
-        if(localclientnum == 0) {
-          playSound(0, "zmb_weap_wall", struct.origin);
-        }
+        if(localclientnum == 0)
+          playsound(0, "zmb_weap_wall", struct.origin);
 
         vec_offset = (0, 0, 0);
 
-        if(isDefined(struct.models[localclientnum].parent_struct.script_vector)) {
+        if(isDefined(struct.models[localclientnum].parent_struct.script_vector))
           vec_offset = struct.models[localclientnum].parent_struct.script_vector;
-        }
 
         struct.models[localclientnum].origin = struct.models[localclientnum].parent_struct.origin + anglestoright(struct.models[localclientnum].angles + vec_offset) * 8;
         struct.models[localclientnum] show();
@@ -308,11 +290,10 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
       break;
     case 2:
-      if(isDefined(level.wallbuy_callback_hack_override)) {
+      if(isDefined(level.wallbuy_callback_hack_override))
         struct.models[localclientnum][
-          }
           [level.wallbuy_callback_hack_override]
-      ]();
+        ]();
 
       break;
   }
@@ -323,23 +304,20 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   struct = level._active_wallbuys[basefield];
 
   if(newval == 0) {
-    if(isDefined(struct.models[localclientnum])) {
+    if(isDefined(struct.models[localclientnum]))
       struct.models[localclientnum] hide();
-    }
   } else if(newval > 0) {
     weaponname = level.buildable_wallbuy_weapons[newval - 1];
 
-    if(!isDefined(struct.models)) {
+    if(!isDefined(struct.models))
       struct.models = [];
-    }
 
     if(!isDefined(struct.models[localclientnum])) {
       target_struct = getstruct(struct.target, "targetname");
       model = undefined;
 
-      if(isDefined(level.buildable_wallbuy_weapon_models[weaponname])) {
+      if(isDefined(level.buildable_wallbuy_weapon_models[weaponname]))
         model = level.buildable_wallbuy_weapon_models[weaponname];
-      }
 
       angles = target_struct.angles;
 
@@ -349,7 +327,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
             angles = vectortoangles(anglestoright(angles));
             break;
           case 180:
-            angles = vectortoangles(anglesToForward(angles) * -1);
+            angles = vectortoangles(anglestoforward(angles) * -1);
             break;
           case 270:
             angles = vectortoangles(anglestoright(angles) * -1);
@@ -369,11 +347,10 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
       fx = level._effect["m14_zm_fx"];
 
-      if(isDefined(level._effect[weaponname + "_fx"])) {
+      if(isDefined(level._effect[weaponname + "_fx"]))
         fx = level._effect[weaponname + "_fx"];
-      }
 
-      struct.fx[localclientnum] = playFX(localclientnum, fx, struct.origin, anglesToForward(struct.angles), anglestoup(struct.angles), 0.1);
+      struct.fx[localclientnum] = playfx(localclientnum, fx, struct.origin, anglestoforward(struct.angles), anglestoup(struct.angles), 0.1);
       level notify("wallbuy_updated");
     }
   }

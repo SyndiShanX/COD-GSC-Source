@@ -15,9 +15,8 @@ shellshockondamage(var_0, var_1) {
   }
   if(var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH") {
     if(var_1 > 10) {
-      if(!maps\mp\_utility::_hasperk("specialty_hard_shell")) {
+      if(!maps\mp\_utility::_hasperk("specialty_hard_shell"))
         self shellshock("frag_grenade_mp", 0.5);
-      }
     }
   }
 }
@@ -42,9 +41,8 @@ grenade_earthquake() {
     if(distancesquared(var_0, var_2.origin) > 360000) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }
@@ -58,21 +56,20 @@ dirteffect(var_0) {
   if(!maps\mp\_utility::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectornormalize(anglestoforward(self.angles));
   var_2 = vectornormalize(anglestoright(self.angles));
   var_3 = vectornormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
 
-  if(var_4 > 0 && var_4 > 0.5) {
+  if(var_4 > 0 && var_4 > 0.5)
     common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
-  } else if(abs(var_4) < 0.866) {
-    if(var_5 > 0) {
+  else if(abs(var_4) < 0.866) {
+    if(var_5 > 0)
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
-    } else {
+    else
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
-    }
   }
 }
 
@@ -84,21 +81,20 @@ bloodeffect(var_0) {
   if(!maps\mp\_utility::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectornormalize(anglestoforward(self.angles));
   var_2 = vectornormalize(anglestoright(self.angles));
   var_3 = vectornormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
 
-  if(var_4 > 0 && var_4 > 0.5) {
+  if(var_4 > 0 && var_4 > 0.5)
     common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
-  } else if(abs(var_4) < 0.866) {
-    if(var_5 > 0) {
+  else if(abs(var_4) < 0.866) {
+    if(var_5 > 0)
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
-    } else {
+    else
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
-    }
   }
 }
 
@@ -106,9 +102,8 @@ bloodmeleeeffect() {
   self endon("disconnect");
   wait 0.5;
 
-  if(isalive(self)) {
+  if(isalive(self))
     common_scripts\utility::waittill_notify_or_timeout("death", 1.5);
-  }
 }
 
 c4_earthquake() {
@@ -125,9 +120,8 @@ c4_earthquake() {
     if(distance(var_0, var_2.origin) > 512) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }
@@ -145,9 +139,8 @@ barrel_earthquake() {
     if(distance(var_0, var_2.origin) > 512) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }
@@ -165,9 +158,8 @@ artillery_earthquake() {
     if(distance(var_0, var_2.origin) > 600) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }
@@ -184,9 +176,8 @@ stealthairstrike_earthquake(var_0) {
     if(distance(var_0, var_2.origin) > 1000) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }
@@ -203,9 +194,8 @@ airstrike_earthquake(var_0) {
     if(distance(var_0, var_2.origin) > 900) {
       continue;
     }
-    if(var_2 damageconetrace(var_0)) {
+    if(var_2 damageconetrace(var_0))
       var_2 thread dirteffect(var_0);
-    }
 
     var_2 setclientomnvar("ui_hud_shake", 1);
   }

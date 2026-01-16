@@ -102,7 +102,7 @@ onPlayerSpawned() {
       self.initialized = true;
       playtag = "player" + (self.entity_num + 1) + "_light";
       self.light_playFX = playtag;
-      playFXOnTag(level._effect[playtag], self, "tag_origin");
+      PlayFxOnTag(level._effect[playtag], self, "tag_origin");
       self thread breadcrumb_point_thread(30, 0.5);
     }
   }
@@ -322,7 +322,9 @@ init_standard_zombie_anims() {
   level._zombie_run_melee["zombie"][1] = % ai_zombie_run_attack_v2;
   level._zombie_run_melee["zombie"][2] = % ai_zombie_run_attack_v3;
   if(isDefined(level.zombie_anim_override)) {
-    [[level.zombie_anim_override]]();
+    [
+      [level.zombie_anim_override]
+    ]();
   }
   level._zombie_walk_melee["zombie"][0] = % ai_zombie_walk_attack_v1;
   level._zombie_walk_melee["zombie"][1] = % ai_zombie_walk_attack_v2;

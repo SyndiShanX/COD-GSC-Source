@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_cleanup_mgr;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_round_logic;
+
 #namespace namespace_76ccb07a;
 
 init() {
@@ -62,7 +63,7 @@ function_4074a9e2() {
 
   iprintlnbold("<dev string:x38>" + level.var_baf33f0e + "<dev string:x4e>");
 
-  level thread function_88b87834();
+    level thread function_88b87834();
 }
 
 function_1cae4e0a(s_params) {
@@ -77,15 +78,15 @@ function_1cae4e0a(s_params) {
 
 function_b741acea() {
   level.var_bdc8b034 = [];
-  level.var_bdc8b034[# "zombie"] = zm_round_logic::get_zombie_count_for_round(level.var_37769559, level.activeplayers.size);
+  level.var_bdc8b034[#"zombie"] = zm_round_logic::get_zombie_count_for_round(level.var_37769559, level.activeplayers.size);
   var_d90bc041 = min((level.var_37769559 - 10) / 40, 1);
   var_82981c27 = lerpfloat(0.1, 0.3, var_d90bc041);
   var_2f8a58bb = lerpfloat(0.2, 0.4, var_d90bc041);
   var_8c110732 = randomfloatrange(var_82981c27, var_2f8a58bb);
-  var_778b517c = int(var_8c110732 * level.var_bdc8b034[# "zombie"]);
-  level.var_bdc8b034[# "zombie"] -= var_778b517c;
-  level.var_bdc8b034[# "zombie_dog"] = int(randomfloatrange(0.2, 0.4) * var_778b517c);
-  level.var_bdc8b034[# "nova_crawler"] = var_778b517c - level.var_bdc8b034[# "zombie_dog"];
+  var_778b517c = int(var_8c110732 * level.var_bdc8b034[#"zombie"]);
+  level.var_bdc8b034[#"zombie"] -= var_778b517c;
+  level.var_bdc8b034[#"zombie_dog"] = int(randomfloatrange(0.2, 0.4) * var_778b517c);
+  level.var_bdc8b034[#"nova_crawler"] = var_778b517c - level.var_bdc8b034[#"zombie_dog"];
   arrayremovevalue(level.var_bdc8b034, 0, 1);
 }
 
@@ -154,14 +155,14 @@ get_archetype() {
 
 spawn_archetype(str_archetype) {
   switch (str_archetype) {
-    case # "zombie":
+    case #"zombie":
       spawner = array::random(level.zombie_spawners);
       ai = zombie_utility::spawn_zombie(spawner);
       break;
-    case # "zombie_dog":
+    case #"zombie_dog":
       ai = zombie_dog_util::function_62db7b1c();
       break;
-    case # "nova_crawler":
+    case #"nova_crawler":
       ai = namespace_df88241c::spawn_nova_crawler();
       break;
     default:

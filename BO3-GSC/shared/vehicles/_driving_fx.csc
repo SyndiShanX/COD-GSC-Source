@@ -9,12 +9,15 @@ class groundfx {
   var handle;
   var id;
 
+
   constructor() {
     id = undefined;
     handle = -1;
   }
 
+
   destructor() {}
+
 
   function stop(localclientnum) {
     if(handle > 0) {
@@ -24,8 +27,9 @@ class groundfx {
     handle = -1;
   }
 
+
   function play(localclientnum, vehicle, fx_id, fx_tag) {
-    if(!isDefined(fx_id)) {
+    if(!isdefined(fx_id)) {
       if(handle > 0) {
         stopfx(localclientnum, handle);
       }
@@ -33,15 +37,15 @@ class groundfx {
       handle = -1;
       return;
     }
-    if(!isDefined(id)) {
+    if(!isdefined(id)) {
       id = fx_id;
-      handle = playFXOnTag(localclientnum, id, vehicle, fx_tag);
-    } else if(!isDefined(id) || id != fx_id) {
+      handle = playfxontag(localclientnum, id, vehicle, fx_tag);
+    } else if(!isdefined(id) || id != fx_id) {
       if(handle > 0) {
         stopfx(localclientnum, handle);
       }
       id = fx_id;
-      handle = playFXOnTag(localclientnum, id, vehicle, fx_tag);
+      handle = playfxontag(localclientnum, id, vehicle, fx_tag);
     }
   }
 
@@ -52,29 +56,40 @@ class vehiclewheelfx {
   var name;
   var tag_name;
 
+
   constructor() {
     name = "";
     tag_name = "";
   }
 
+
   destructor() {}
+
 
   function update(localclientnum, vehicle, speed_fraction) {
     if(vehicle.vehicleclass === "boat") {
       peelingout = 0;
       sliding = 0;
-      trace = bulletTrace(vehicle.origin + vectorscale((0, 0, 1), 60), vehicle.origin - vectorscale((0, 0, 1), 200), 0, vehicle);
+      trace = bullettrace(vehicle.origin + vectorscale((0, 0, 1), 60), vehicle.origin - vectorscale((0, 0, 1), 200), 0, vehicle);
       if(trace["fraction"] < 1) {
         surface = trace["surfacetype"];
       } else {
-        [[ground_fx["skid"]]] - > stop(localclientnum);
-        [[ground_fx["tread"]]] - > stop(localclientnum);
+        [
+          [ground_fx["skid"]]
+        ] - > stop(localclientnum);
+        [
+          [ground_fx["tread"]]
+        ] - > stop(localclientnum);
         return;
       }
     } else {
       if(!vehicle iswheelcolliding(name)) {
-        [[ground_fx["skid"]]] - > stop(localclientnum);
-        [[ground_fx["tread"]]] - > stop(localclientnum);
+        [
+          [ground_fx["skid"]]
+        ] - > stop(localclientnum);
+        [
+          [ground_fx["tread"]]
+        ] - > stop(localclientnum);
         return;
       }
       peelingout = vehicle iswheelpeelingout(name);
@@ -83,13 +98,13 @@ class vehiclewheelfx {
     }
     origin = vehicle gettagorigin(tag_name) + (0, 0, 1);
     angles = vehicle gettagangles(tag_name);
-    fwd = anglesToForward(angles);
+    fwd = anglestoforward(angles);
     right = anglestoright(angles);
     rumble = 0;
     if(peelingout) {
       peel_fx = vehicle driving_fx::get_wheel_fx("peel", surface);
-      if(isDefined(peel_fx)) {
-        playFX(localclientnum, peel_fx, origin, fwd * -1);
+      if(isdefined(peel_fx)) {
+        playfx(localclientnum, peel_fx, origin, fwd * -1);
         rumble = 1;
       }
     }
@@ -123,6 +138,7 @@ class vehiclewheelfx {
     }
   }
 
+
   function init(_name, _tag_name) {
     name = _name;
     tag_name = _tag_name;
@@ -142,6 +158,7 @@ class vehicle_camera_fx {
   var quake_time_min;
   var rumble_name;
 
+
   constructor() {
     quake_time_min = 0.5;
     quake_time_max = 1;
@@ -150,7 +167,9 @@ class vehicle_camera_fx {
     rumble_name = "";
   }
 
+
   destructor() {}
+
 
   function update(localclientnum, vehicle, speed_fraction) {
     if(vehicle islocalclientdriver(localclientnum)) {
@@ -168,6 +187,7 @@ class vehicle_camera_fx {
     }
   }
 
+
   function init(t_min, t_max, s_min, s_max, rumble = "") {
     quake_time_min = t_min;
     quake_time_max = t_max;
@@ -182,9 +202,9 @@ class vehicle_camera_fx {
 
 function vehicle_enter(localclientnum) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("enter_vehicle", user);
-    if(isDefined(user) && user isplayer()) {
+    if(isdefined(user) && user isplayer()) {
       self thread collision_thread(localclientnum);
       self thread jump_landing_thread(localclientnum);
     }
@@ -194,7 +214,7 @@ function vehicle_enter(localclientnum) {
 function speed_fx(localclientnum) {
   self endon("entityshutdown");
   self endon("exit_vehicle");
-  while(true) {
+  while (true) {
     curspeed = self getspeed();
     curspeed = 0.0005 * curspeed;
     curspeed = abs(curspeed);
@@ -214,10 +234,10 @@ function play_driving_fx(localclientnum) {
   if(self.surfacefxdeftype == "") {
     return;
   }
-  if(!isDefined(self.wheel_fx)) {
+  if(!isdefined(self.wheel_fx)) {
     wheel_names = array("front_left", "front_right", "back_left", "back_right");
     wheel_tag_names = array("tag_wheel_front_left", "tag_wheel_front_right", "tag_wheel_back_left", "tag_wheel_back_right");
-    if(isDefined(self.scriptvehicletype) && self.scriptvehicletype == "raps") {
+    if(isdefined(self.scriptvehicletype) && self.scriptvehicletype == "raps") {
       wheel_names = array("front_left");
       wheel_tag_names = array("tag_origin");
     } else if(self.vehicleclass == "boat") {
@@ -225,7 +245,7 @@ function play_driving_fx(localclientnum) {
       wheel_tag_names = array("tag_origin");
     }
     self.wheel_fx = [];
-    for(i = 0; i < wheel_names.size; i++) {
+    for (i = 0; i < wheel_names.size; i++) {
       self.wheel_fx[i] = new vehiclewheelfx();
       [
         [self.wheel_fx[i]]
@@ -233,19 +253,23 @@ function play_driving_fx(localclientnum) {
     }
     self.camera_fx = [];
     self.camera_fx["speed"] = new vehicle_camera_fx();
-    [[self.camera_fx["speed"]]] - > init(0.5, 1, 0.1, 0.115, "reload_small");
+    [
+      [self.camera_fx["speed"]]
+    ] - > init(0.5, 1, 0.1, 0.115, "reload_small");
     self.camera_fx["skid"] = new vehicle_camera_fx();
-    [[self.camera_fx["skid"]]] - > init(0.25, 0.35, 0.1, 0.115);
+    [
+      [self.camera_fx["skid"]]
+    ] - > init(0.25, 0.35, 0.1, 0.115);
   }
   self.last_screen_dirt = 0;
   self.screen_dirt_delay = 0;
   speed_fraction = 0;
-  while(true) {
+  while (true) {
     speed = length(self getvelocity());
     max_speed = (speed < 0 ? self getmaxreversespeed() : self getmaxspeed());
     speed_fraction = (max_speed > 0 ? abs(speed) / max_speed : 0);
     self.skidding = 0;
-    for(i = 0; i < self.wheel_fx.size; i++) {
+    for (i = 0; i < self.wheel_fx.size; i++) {
       [
         [self.wheel_fx[i]]
       ] - > update(localclientnum, self, speed_fraction);
@@ -265,7 +289,7 @@ function get_wheel_fx(type, surface) {
       fxarray = self.skidfxnamearray;
     }
   }
-  if(isDefined(fxarray)) {
+  if(isdefined(fxarray)) {
     return fxarray[surface];
   }
   return undefined;
@@ -297,33 +321,33 @@ function play_driving_fx_firstperson(localclientnum, speed, speed_fraction) {
 function collision_thread(localclientnum) {
   self endon("entityshutdown");
   self endon("exit_vehicle");
-  while(true) {
+  while (true) {
     self waittill("veh_collision", hip, hitn, hit_intensity);
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
-      if(isDefined(self.driving_fx_collision_override)) {
+      if(isdefined(self.driving_fx_collision_override)) {
         self[[self.driving_fx_collision_override]](localclientnum, player, hip, hitn, hit_intensity);
-      } else if(isDefined(player) && isDefined(hit_intensity)) {
+      } else if(isdefined(player) && isdefined(hit_intensity)) {
         if(hit_intensity > self.heavycollisionspeed) {
           volume = get_impact_vol_from_speed();
-          if(isDefined(self.sounddef)) {
+          if(isdefined(self.sounddef)) {
             alias = self.sounddef + "_suspension_lg_hd";
           } else {
             alias = "veh_default_suspension_lg_hd";
           }
-          id = playSound(0, alias, self.origin, volume);
-          if(isDefined(self.heavycollisionrumble)) {
+          id = playsound(0, alias, self.origin, volume);
+          if(isdefined(self.heavycollisionrumble)) {
             player playrumbleonentity(localclientnum, self.heavycollisionrumble);
           }
         } else if(hit_intensity > self.lightcollisionspeed) {
           volume = get_impact_vol_from_speed();
-          if(isDefined(self.sounddef)) {
+          if(isdefined(self.sounddef)) {
             alias = self.sounddef + "_suspension_lg_lt";
           } else {
             alias = "veh_default_suspension_lg_lt";
           }
-          id = playSound(0, alias, self.origin, volume);
-          if(isDefined(self.lightcollisionrumble)) {
+          id = playsound(0, alias, self.origin, volume);
+          if(isdefined(self.lightcollisionrumble)) {
             player playrumbleonentity(localclientnum, self.lightcollisionrumble);
           }
         }
@@ -335,22 +359,22 @@ function collision_thread(localclientnum) {
 function jump_landing_thread(localclientnum) {
   self endon("entityshutdown");
   self endon("exit_vehicle");
-  while(true) {
+  while (true) {
     self waittill("veh_landed");
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
-      if(isDefined(player)) {
-        if(isDefined(self.driving_fx_jump_landing_override)) {
+      if(isdefined(player)) {
+        if(isdefined(self.driving_fx_jump_landing_override)) {
           self[[self.driving_fx_jump_landing_override]](localclientnum, player);
         } else {
           volume = get_impact_vol_from_speed();
-          if(isDefined(self.sounddef)) {
+          if(isdefined(self.sounddef)) {
             alias = self.sounddef + "_suspension_lg_hd";
           } else {
             alias = "veh_default_suspension_lg_hd";
           }
-          id = playSound(0, alias, self.origin, volume);
-          if(isDefined(self.jumplandingrumble)) {
+          id = playsound(0, alias, self.origin, volume);
+          if(isdefined(self.jumplandingrumble)) {
             player playrumbleonentity(localclientnum, self.jumplandingrumble);
           }
         }
@@ -362,18 +386,18 @@ function jump_landing_thread(localclientnum) {
 function suspension_thread(localclientnum) {
   self endon("entityshutdown");
   self endon("exit_vehicle");
-  while(true) {
+  while (true) {
     self waittill("veh_suspension_limit_activated");
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
-      if(isDefined(player)) {
+      if(isdefined(player)) {
         volume = get_impact_vol_from_speed();
-        if(isDefined(self.sounddef)) {
+        if(isdefined(self.sounddef)) {
           alias = self.sounddef + "_suspension_lg_lt";
         } else {
           alias = "veh_default_suspension_lg_lt";
         }
-        id = playSound(0, alias, self.origin, volume);
+        id = playsound(0, alias, self.origin, volume);
         player playrumbleonentity(localclientnum, "damage_light");
       }
     }

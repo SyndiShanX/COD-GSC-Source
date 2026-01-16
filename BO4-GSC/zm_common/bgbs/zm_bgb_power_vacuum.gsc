@@ -5,10 +5,11 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_power_vacuum;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_power_vacuum", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_power_vacuum", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -20,7 +21,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   level.powerup_drop_count = 0;
 
   while(true) {

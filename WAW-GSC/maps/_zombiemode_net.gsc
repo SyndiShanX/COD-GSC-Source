@@ -12,11 +12,11 @@ init() {
 }
 
 network_safe_spawn(classname, origin) {
-  while(!network_ok_to_spawn()) {
+  while (!network_ok_to_spawn()) {
     wait(0.05);
   }
   level.zombie_network_num_spawns++;
-  return spawn(classname, origin);
+  return Spawn(classname, origin);
 }
 
 network_ok_to_spawn() {
@@ -24,7 +24,7 @@ network_ok_to_spawn() {
 }
 
 network_spawn_monitor() {
-  while(1) {
+  while (1) {
     wait_network_frame();
     wait_network_frame();
     level.zombie_network_num_spawns = 0;

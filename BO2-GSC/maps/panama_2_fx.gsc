@@ -177,12 +177,11 @@ footsteps() {
 
 veh_destructible_headlights() {
   wait 1;
-  a_destructibles = getEntArray("destructible", "targetname");
+  a_destructibles = getentarray("destructible", "targetname");
 
   foreach(e_destructible in a_destructibles) {
-    if(e_destructible.destructibledef == "veh_t6_smallhatch_destructible_white") {
+    if(e_destructible.destructibledef == "veh_t6_smallhatch_destructible_white")
       e_destructible thread small_hatch_headlights();
-    }
   }
 }
 
@@ -197,9 +196,9 @@ play_ambulence_light_fx() {
   for(i = 0; i < ambulence_light_struct.size; i++) {
     ambulence_fx = spawn("script_model", ambulence_light_struct[i].origin);
     ambulence_fx.angles = (0, 0, 0);
-    ambulence_fx setModel("tag_origin");
+    ambulence_fx setmodel("tag_origin");
     ambulence_fx.targetname = "ambulence_fx";
-    playFXOnTag(level._effect["ambulence_light_fx"], ambulence_fx, "tag_origin");
+    playfxontag(level._effect["ambulence_light_fx"], ambulence_fx, "tag_origin");
     ambulence_fx thread spinning(i);
   }
 }

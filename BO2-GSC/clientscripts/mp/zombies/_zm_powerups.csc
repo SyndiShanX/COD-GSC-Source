@@ -32,26 +32,23 @@ init() {
     level._effect["powerup_on_caution"] = loadfx("misc/fx_zombie_powerup_caution_on");
   }
 
-  if(is_true(level.using_zombie_powerups)) {
+  if(is_true(level.using_zombie_powerups))
     level._effect["powerup_on_red"] = loadfx("misc/fx_zombie_powerup_on_red");
-  }
 
   registerclientfield("scriptmover", "powerup_fx", 1000, 3, "int", ::powerup_fx_callback);
 }
 
 add_zombie_powerup(powerup_name, client_field_name, clientfield_version) {
-  if(!isDefined(clientfield_version)) {
+  if(!isDefined(clientfield_version))
     clientfield_version = 1;
-  }
 
   if(isDefined(level.zombie_include_powerups) && !isDefined(level.zombie_include_powerups[powerup_name])) {
     return;
   }
-  struct = spawnStruct();
+  struct = spawnstruct();
 
-  if(!isDefined(level.zombie_powerups)) {
+  if(!isDefined(level.zombie_powerups))
     level.zombie_powerups = [];
-  }
 
   struct.powerup_name = powerup_name;
   level.zombie_powerups[powerup_name] = struct;
@@ -74,17 +71,15 @@ set_clientfield_code_callbacks() {
     for(powerup_key_index = 0; powerup_key_index < powerup_keys.size; powerup_key_index++) {
       powerup_clientfield_name = level.zombie_powerups[powerup_keys[powerup_key_index]].client_field_name;
 
-      if(isDefined(powerup_clientfield_name)) {
+      if(isDefined(powerup_clientfield_name))
         setupclientfieldcodecallbacks("toplayer", 1, powerup_clientfield_name);
-      }
     }
   }
 }
 
 include_zombie_powerup(powerup_name) {
-  if(!isDefined(level.zombie_include_powerups)) {
+  if(!isDefined(level.zombie_include_powerups))
     level.zombie_include_powerups = [];
-  }
 
   level.zombie_include_powerups[powerup_name] = 1;
 }
@@ -107,5 +102,5 @@ powerup_fx_callback(localclientnum, oldval, newval, bnewent, binitialsnap, field
       return;
   }
 
-  playFXOnTag(localclientnum, fx, self, "tag_origin");
+  playfxontag(localclientnum, fx, self, "tag_origin");
 }

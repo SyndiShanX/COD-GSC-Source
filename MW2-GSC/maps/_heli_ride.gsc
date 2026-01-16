@@ -29,6 +29,7 @@ default:"model" "prefabs\script_gags\heli_ride_in_blackhawk.map"
 
 */
 
+
 /*DISABLED gags_heli-ride-in_blackhawk_us (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
 STEPS TO GET GAGS_HELI_RIDE_IN_BLACKHAWK IN GAME:
@@ -56,16 +57,14 @@ ride_setup(startnode, players_array) {
   //spawn the rope
   getout_rigspawn(getanimatemodel(), 3);
 
-  if(!isDefined(players_array)) {
+  if(!isdefined(players_array))
     players_array = level.players;
-  }
 
-  foreach(player in players_array) {
-    thread attach_player(player, 3);
-  }
+  foreach(player in players_array)
+  thread attach_player(player, 3);
 
   speed = 95;
-  if(isDefined(startnode.speed)) {
+  if(isdefined(startnode.speed)) {
     speed = startnode.speed;
   }
   // ADD THIS to overgrown thread heli_behavior();
@@ -80,19 +79,17 @@ ride_setup(startnode, players_array) {
 attach_player(player, position, animfudgetime) {
   player thread player_in_heli(self);
 
-  if(getdvar("fastrope_arms") == "") {
+  if(getdvar("fastrope_arms") == "")
     setdvar("fastrope_arms", "0");
-  }
-  if(!isDefined(animfudgetime)) {
+  if(!isdefined(animfudgetime))
     animfudgetime = 0;
-  }
 
-  assert(isDefined(self.riders));
+  assert(isdefined(self.riders));
 
   assert(self.riders.size);
 
   guy = undefined;
-  for(i = 0; i < self.riders.size; i++) {
+  for (i = 0; i < self.riders.size; i++) {
     if(self.riders[i].vehicle_position == position) {
       guy = self.riders[i];
       guy.drone_delete_on_unload = true;
@@ -103,7 +100,7 @@ attach_player(player, position, animfudgetime) {
 
   //level.piggyback_guy = guy;//temp debug thing -z
   assertex(!isai(guy), "guy in position of player needs to have script_drone set, use script_startingposition ans script drone in your map");
-  assert(isDefined(guy));
+  assert(isdefined(guy));
 
   animpos = maps\_vehicle_aianim::anim_pos(self, position);
 
@@ -111,19 +108,18 @@ attach_player(player, position, animfudgetime) {
   // 	guy stopuseanimtree();
   guy notify("newanim");
   guy detachall();
-  // 	guy setModel( "" );
-  guy setModel("fastrope_arms");
+  // 	guy setmodel( "" );
+  guy setmodel("fastrope_arms");
   guy useanimtree(animpos.player_animtree);
   thread maps\_vehicle_aianim::guy_idle(guy, position);
   wait .1;
 
   //player playerlinktoabsolute( guy, "tag_player" );
 
-  if(isDefined(level.little_bird)) {
+  if(isdefined(level.little_bird))
     player playerlinkto(guy, "tag_player", 0.35, 120, 28, 30, 30, false);
-  } else {
+  else
     player playerlinkto(guy, "tag_player", 0.35, 60, 28, 30, 30, false);
-  }
 
   //player playerlinktodelta( guy, "tag_player", 0.35, 60, 28, 30, 30, false );
   //guy thread maps\_debug::drawtagforever( "tag_player", (1,0,0) );
@@ -135,9 +131,8 @@ attach_player(player, position, animfudgetime) {
   animtime -= animfudgetime;
   self waittill("unloading");
 
-  if(getdvar("fastrope_arms") != "0") {
+  if(getdvar("fastrope_arms") != "0")
     guy show();
-  }
   player disableweapons();
   // 	guy waittill( "jumpedout" );
 
@@ -149,10 +144,12 @@ attach_player(player, position, animfudgetime) {
   player enableweapons();
   setSavedDvar("hud_drawhud", "1");
   level notify("stop_draw_hud_on_death");
+
 }
 
 // player control during helicopter ride in
 player_in_heli(heli) {
+
   // This could get ugly with two players doing the same thing.
   setsavedDvar("g_friendlyNameDist", 0);
   setsavedDvar("g_friendlyfireDist", 0);
@@ -190,7 +187,7 @@ player_in_heli(heli) {
   // TODO REMOVE THIS When we get anims for each player.
   self show_player_model();
   if(self == level.player) {
-    for(i = 0; i < 24; i++) {
+    for (i = 0; i < 24; i++) {
       self setOrigin(self.origin + (2, 0, 0));
       wait 0.05;
     }
@@ -203,32 +200,30 @@ player_in_heli(heli) {
 
 player_heli_ropeanimoverride_idle(guy, tag, animation) {
   self endon("unloading");
-  while(1) {
+  while (1)
     maps\_vehicle_aianim::animontag(guy, tag, animation);
-  }
 }
 
 ride_start(optional_players_array, optional_max_riders) {
   targetname = "heli_ride_in";
-  pathstart = getEntArray(targetname, "targetname");
+  pathstart = getentarray(targetname, "targetname");
   assertEx(pathstart.size <= 1, "too many script_origins with targetname \"" + targetname + "\" ");
   if(!pathstart.size) {
     pathstart = getstructarray("heli_ride_in", "targetname");
     assertEx(pathstart.size <= 1, "too many script_structs with targetname \"heli_ride_in\" ");
-    if(!pathstart.size) {
+    if(!pathstart.size)
       assertMSG("no helicopter paths with \"heli_ride_in\", can't start ride");
-    }
   }
 
   pathstart = pathstart[0];
-  assertex(isDefined(level.gag_heliride_spawner), "can't find heliride spawner. sure you placed the prefab?");
+  assertex(isdefined(level.gag_heliride_spawner), "can't find heliride spawner. sure you placed the prefab?");
 
   //strip away those non riders.
-  if(isDefined(optional_max_riders)) {
+  if(isdefined(optional_max_riders))
     vehicle_spawn_group_limit_riders(level.gag_heliride_spawner.script_vehicleride, optional_max_riders);
-  }
 
   vehicle = vehicle_spawn(level.gag_heliride_spawner);
   vehicle thread ride_setup(pathstart, optional_players_array);
   return vehicle;
+
 }

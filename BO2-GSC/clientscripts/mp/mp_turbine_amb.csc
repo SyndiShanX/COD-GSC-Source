@@ -80,20 +80,19 @@ snd_start_autofx_audio() {
 wmill_sfx_setup() {
   wait 0.5;
   location = [];
-  location[0] = spawnStruct();
+  location[0] = spawnstruct();
   location[0].origin = (-2579, 3014, 385);
   location[0].alias = "amb_wmill_whoosh";
-  location[1] = spawnStruct();
+  location[1] = spawnstruct();
   location[1].origin = (-1644, -636, 563);
   location[1].alias = "amb_wmill_whoosh";
-  location[2] = spawnStruct();
+  location[2] = spawnstruct();
   location[2].origin = (-1073, 1351, 1941);
   location[2].alias = "amb_wmill_whoosh";
 
   while(true) {
-    for(i = 0; i < location.size; i++) {
-      playSound(0, location[i].alias, location[i].origin);
-    }
+    for(i = 0; i < location.size; i++)
+      playsound(0, location[i].alias, location[i].origin);
 
     wait 1.35;
   }
@@ -104,47 +103,43 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area) {
     if(level.createfxent[i].v["fxid"] == fxid) {
       level.createfxent[i].soundent = spawnfakeent(0);
 
-      if(isDefined(area)) {
+      if(isDefined(area))
         level.createfxent[i].soundentarea = area;
-      }
 
       origin = level.createfxent[i].v["origin"];
 
-      if(isDefined(offsetx) && offsetx > 0) {
+      if(isDefined(offsetx) && offsetx > 0)
         origin = origin + (offsetx, 0, 0);
-      }
 
-      if(isDefined(offsety) && offsetx > 0) {
+      if(isDefined(offsety) && offsetx > 0)
         origin = origin + (0, offsety, 0);
-      }
 
-      if(isDefined(offsetz) && offsetx > 0) {
+      if(isDefined(offsetz) && offsetx > 0)
         origin = origin + (0, 0, offsetz);
-      }
 
       if(isDefined(onground) && onground) {
         trace = undefined;
         d = undefined;
         fxorigin = origin;
-        trace = bulletTrace(fxorigin, fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
+        trace = bullettrace(fxorigin, fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
         d = distance(fxorigin, trace["position"]);
         origin = trace["position"];
       }
 
       setfakeentorg(0, level.createfxent[i].soundent, origin);
-      playLoopSound(0, level.createfxent[i].soundent, alias, 0.5);
+      playloopsound(0, level.createfxent[i].soundent, alias, 0.5);
     }
   }
 }
 
 snd_play_auto_fturbine_area_emmiters() {
   for(i = 0; i < level.createfxent.size; i++) {
-    if(level.createfxent[i].soundentarea > 1) {}
+    if(level.createfxent[i].soundentarea > 1) {
+    }
   }
 }
 
 snd_print_fturbine_id(fxid, type, ent) {
-  if(getdvarint(#"_id_0AEB127D") > 0) {
+  if(getdvarint(#"_id_0AEB127D") > 0)
     println("^5******* fxid; " + fxid + "^5 type; " + type);
-  }
 }

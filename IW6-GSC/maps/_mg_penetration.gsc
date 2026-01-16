@@ -22,9 +22,8 @@ gunner_think(var_0) {
   thread target_ent_cleanup(var_2);
   var_2.origin = var_0.origin + var_1 * 500;
 
-  if(isDefined(self.last_enemy_sighting_position)) {
+  if(isDefined(self.last_enemy_sighting_position))
     var_2.origin = self.last_enemy_sighting_position;
-  }
 
   var_0 settargetentity(var_2);
   var_3 = undefined;
@@ -82,9 +81,8 @@ shoot_enemy_until_he_hides_then_shoot_wall(var_0) {
     var_6 = var_0.origin + var_2 * 180;
     var_7 = get_suppress_point(self getEye(), var_0.origin, var_6);
 
-    if(!isDefined(var_7)) {
+    if(!isDefined(var_7))
       var_7 = var_0.origin;
-    }
 
     var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
@@ -99,9 +97,8 @@ set_firing(var_0) {
   if(var_0) {
     self.can_fire_turret = 1;
 
-    if(self.wants_to_fire) {
+    if(self.wants_to_fire)
       self.turret notify("startfiring");
-    }
   } else {
     self.can_fire_turret = 0;
     self.turret notify("stopfiring");
@@ -116,9 +113,8 @@ stop_firing() {
 start_firing() {
   self.wants_to_fire = 1;
 
-  if(self.can_fire_turret) {
+  if(self.can_fire_turret)
     self.turret notify("startfiring");
-  }
 }
 
 create_mg_team() {
@@ -172,9 +168,8 @@ solo_firing(var_0) {
     break;
   }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     return;
-  }
 }
 
 solo_fires() {
@@ -189,21 +184,18 @@ solo_fires() {
 }
 
 dual_firing(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] endon("death");
-  }
 
   var_2 = 0;
   var_3 = 1;
 
   for(;;) {
-    if(isalive(var_0[var_2])) {
+    if(isalive(var_0[var_2]))
       var_0[var_2] set_firing(1);
-    }
 
-    if(isalive(var_0[var_3])) {
+    if(isalive(var_0[var_3]))
       var_0[var_3] set_firing(0);
-    }
 
     var_4 = var_2;
     var_2 = var_3;
@@ -242,13 +234,11 @@ spotted_an_enemy(var_0, var_1) {
 get_suppress_point(var_0, var_1, var_2) {
   var_3 = distance(var_1, var_2) * 0.05;
 
-  if(var_3 < 5) {
+  if(var_3 < 5)
     var_3 = 5;
-  }
 
-  if(var_3 > 20) {
+  if(var_3 > 20)
     var_3 = 20;
-  }
 
   var_4 = var_2 - var_1;
   var_4 = (var_4[0] / var_3, var_4[1] / var_3, var_4[2] / var_3);

@@ -7,7 +7,8 @@
 #include maps\mp\createfx\mp_la_fx;
 #include maps\mp\createart\mp_la_art;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["fx_light_police_car"] = loadfx("maps/mp_maps/fx_mp_light_police_car");

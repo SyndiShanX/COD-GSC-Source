@@ -7,7 +7,8 @@
 #include clientscripts\createfx\haiti_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_haiti_smk_closet_exp"] = loadfx("smoke/fx_haiti_smk_closet_exp");
@@ -92,7 +93,6 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

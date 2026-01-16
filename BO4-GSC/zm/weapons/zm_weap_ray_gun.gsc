@@ -7,6 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace zm_weap_ray_gun;
 
 autoexec __init__system__() {
@@ -15,9 +16,9 @@ autoexec __init__system__() {
 
 __init__() {
   level.var_b21bed72 = [];
-  level.var_b21bed72[# "hash_5a4246956faa187e"] = getweapon(#"hash_5a4246956faa187e");
-  level.var_b21bed72[# "hash_43989578a576ae26"] = getweapon(#"hash_43989578a576ae26");
-  level.var_b21bed72[# "hash_43b39078a58d6d5f"] = getweapon(#"hash_43b39078a58d6d5f");
+  level.var_b21bed72[#"hash_5a4246956faa187e"] = getweapon(#"hash_5a4246956faa187e");
+  level.var_b21bed72[#"hash_43989578a576ae26"] = getweapon(#"hash_43989578a576ae26");
+  level.var_b21bed72[#"hash_43b39078a58d6d5f"] = getweapon(#"hash_43b39078a58d6d5f");
   arrayremovevalue(level.var_b21bed72, getweapon(#"none"), 1);
   zombie_utility::add_zombie_gib_weapon_callback(#"hash_5a4246956faa187e", &function_215146f5, &function_215146f5);
   zombie_utility::add_zombie_gib_weapon_callback(#"hash_43989578a576ae26", &function_215146f5, &function_215146f5);

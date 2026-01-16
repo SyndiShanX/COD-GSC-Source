@@ -16,7 +16,7 @@
 ////////////////////////////////////////////
 
 init_anim_sets() {
-  anim.animsets = spawnStruct();
+  anim.animsets = spawnstruct();
   anim.animsets.move = [];
 
   // combat stand
@@ -65,17 +65,17 @@ init_animset_run_move() {
   anim.initAnimSet["stairs_up"] = % traverse_stair_run_01;
   anim.initAnimSet["stairs_down"] = % traverse_stair_run_down;
 
-  assert(!isDefined(anim.animsets.move["run"]));
+  assert(!isdefined(anim.animsets.move["run"]));
   anim.animsets.move["run"] = anim.initAnimSet;
 }
 
 init_animset_heat_run_move() {
-  assert(isDefined(anim.animsets.move["run"]));
+  assert(isdefined(anim.animsets.move["run"]));
   anim.initAnimSet = anim.animsets.move["run"];
 
   anim.initAnimSet["straight"] = % heat_run_loop;
 
-  assert(!isDefined(anim.animsets.move["heat_run"]));
+  assert(!isdefined(anim.animsets.move["heat_run"]));
   anim.animsets.move["heat_run"] = anim.initAnimSet;
 }
 
@@ -100,7 +100,7 @@ init_animset_walk_move() {
   anim.initAnimSet["stairs_up"] = % traverse_stair_run;
   anim.initAnimSet["stairs_down"] = % traverse_stair_run_down_01;
 
-  assert(!isDefined(anim.animsets.move["walk"]));
+  assert(!isdefined(anim.animsets.move["walk"]));
   anim.animsets.move["walk"] = anim.initAnimSet;
 }
 
@@ -118,7 +118,7 @@ init_animset_cqb_move() {
   anim.initAnimSet["stairs_up"] = % traverse_stair_run;
   anim.initAnimSet["stairs_down"] = % traverse_stair_run_down_01;
 
-  assert(!isDefined(anim.animsets.move["cqb"]));
+  assert(!isdefined(anim.animsets.move["cqb"]));
   anim.animsets.move["cqb"] = anim.initAnimSet;
 }
 
@@ -145,7 +145,7 @@ init_animset_pistol_stand() {
   anim.initAnimSet["add_turn_aim_left"] = % pistol_stand_aim_4_alt;
   anim.initAnimSet["add_turn_aim_right"] = % pistol_stand_aim_6_alt;
 
-  assert(!isDefined(anim.animsets.pistolStand));
+  assert(!isdefined(anim.animsets.pistolStand));
   anim.animsets.pistolStand = anim.initAnimSet;
 }
 
@@ -169,7 +169,7 @@ init_animset_rpg_stand() {
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
 
-  assert(!isDefined(anim.animsets.rpgStand));
+  assert(!isdefined(anim.animsets.rpgStand));
   anim.animsets.rpgStand = anim.initAnimSet;
 }
 
@@ -194,7 +194,7 @@ init_animset_shotgun_stand() {
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
 
-  assert(!isDefined(anim.animsets.shotgunStand));
+  assert(!isdefined(anim.animsets.shotgunStand));
   anim.animsets.shotgunStand = anim.initAnimSet;
 }
 
@@ -220,7 +220,7 @@ init_animset_cqb_stand() {
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
 
-  assert(!isDefined(anim.animsets.cqbStand));
+  assert(!isdefined(anim.animsets.cqbStand));
   anim.animsets.cqbStand = anim.initAnimSet;
 }
 
@@ -257,7 +257,7 @@ init_animset_heat_stand() {
 
   set_animarray_add_turn_aims_stand();
 
-  assert(!isDefined(anim.animsets.heatStand));
+  assert(!isdefined(anim.animsets.heatStand));
   anim.animsets.heatStand = anim.initAnimSet;
 }
 
@@ -284,7 +284,7 @@ init_animset_default_stand() {
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
 
-  assert(!isDefined(anim.animsets.defaultStand));
+  assert(!isdefined(anim.animsets.defaultStand));
   anim.animsets.defaultStand = anim.initAnimSet;
 }
 
@@ -308,7 +308,7 @@ init_animset_default_crouch() {
   set_animarray_crouching_turns();
   set_animarray_add_turn_aims_crouch();
 
-  assert(!isDefined(anim.animsets.defaultCrouch));
+  assert(!isdefined(anim.animsets.defaultCrouch));
   anim.animsets.defaultCrouch = anim.initAnimSet;
 }
 
@@ -331,7 +331,7 @@ init_animset_rpg_crouch() {
   set_animarray_crouching_turns();
   set_animarray_add_turn_aims_crouch();
 
-  assert(!isDefined(anim.animsets.rpgCrouch));
+  assert(!isdefined(anim.animsets.rpgCrouch));
   anim.animsets.rpgCrouch = anim.initAnimSet;
 }
 
@@ -354,7 +354,7 @@ init_animset_shotgun_crouch() {
   set_animarray_crouching_turns();
   set_animarray_add_turn_aims_crouch();
 
-  assert(!isDefined(anim.animsets.shotgunCrouch));
+  assert(!isdefined(anim.animsets.shotgunCrouch));
   anim.animsets.shotgunCrouch = anim.initAnimSet;
 }
 
@@ -386,7 +386,7 @@ init_animset_default_prone() {
 
   set_animarray_stance_change();
 
-  assert(!isDefined(anim.animsets.defaultProne));
+  assert(!isdefined(anim.animsets.defaultProne));
   anim.animsets.defaultProne = anim.initAnimSet;
 }
 
@@ -395,25 +395,23 @@ init_animset_complete_custom_stand(completeSet) {
 }
 
 init_animset_custom_stand(fireAnim, aimStraight, idleAnim, reloadAnim) {
-  assert(isDefined(anim.animsets) && isDefined(anim.animsets.defaultStand));
+  assert(isdefined(anim.animsets) && isdefined(anim.animsets.defaultStand));
 
   anim.initAnimSet = anim.animsets.defaultStand;
 
-  if(isDefined(aimStraight)) {
+  if(isdefined(aimStraight))
     anim.initAnimSet["straight_level"] = aimStraight;
-  }
 
-  if(isDefined(fireAnim)) {
+  if(isdefined(fireAnim)) {
     anim.initAnimSet["fire"] = fireAnim;
     anim.initAnimSet["single"] = array(fireAnim);
     set_animarray_custom_burst_and_semi_fire_stand(fireAnim);
   }
 
-  if(isDefined(idleAnim)) {
+  if(isdefined(idleAnim))
     anim.initAnimSet["exposed_idle"] = array(idleAnim);
-  }
 
-  if(isDefined(reloadAnim)) {
+  if(isdefined(reloadAnim)) {
     anim.initAnimSet["reload"] = array(reloadAnim);
     anim.initAnimSet["reload_crouchhide"] = array(reloadAnim);
   }
@@ -426,23 +424,21 @@ init_animset_complete_custom_crouch(completeSet) {
 }
 
 init_animset_custom_crouch(fireAnim, idleAnim, reloadAnim) {
-  assert(isDefined(anim.animsets) && isDefined(anim.animsets.defaultCrouch));
+  assert(isdefined(anim.animsets) && isdefined(anim.animsets.defaultCrouch));
 
   anim.initAnimSet = anim.animsets.defaultCrouch;
 
-  if(isDefined(fireAnim)) {
+  if(isdefined(fireAnim)) {
     anim.initAnimSet["fire"] = fireAnim;
     anim.initAnimSet["single"] = array(fireAnim);
     set_animarray_custom_burst_and_semi_fire_crouch(fireAnim);
   }
 
-  if(isDefined(idleAnim)) {
+  if(isdefined(idleAnim))
     anim.initAnimSet["exposed_idle"] = array(idleAnim);
-  }
 
-  if(isDefined(reloadAnim)) {
+  if(isdefined(reloadAnim))
     anim.initAnimSet["reload"] = array(reloadAnim);
-  }
 
   self.combatCrouchAnims = anim.initAnimSet;
 }
@@ -574,14 +570,14 @@ set_animarray_add_turn_aims_crouch() {
 set_animarray_standing() {
   if(usingSidearm()) {
     self.a.array = anim.animsets.pistolStand;
-  } else if(isDefined(self.combatStandAnims)) {
+  } else if(isdefined(self.combatStandAnims)) {
     assert(isArray(self.combatStandAnims));
     self.a.array = self.combatStandAnims;
-  } else if(isDefined(self.heat)) {
+  } else if(isdefined(self.heat)) {
     self.a.array = anim.animsets.heatStand;
   } else if(usingRocketLauncher()) {
     self.a.array = anim.animsets.rpgStand;
-  } else if(isDefined(self.weapon) && weapon_pump_action_shotgun()) {
+  } else if(isdefined(self.weapon) && weapon_pump_action_shotgun()) {
     self.a.array = anim.animsets.shotgunStand;
   } else if(self isCQBWalking()) {
     self.a.array = anim.animsets.cqbStand;
@@ -595,30 +591,29 @@ set_animarray_standing() {
 ////////////////////////////////////////////
 
 set_animarray_crouching() {
-  if(usingSidearm()) {
+  if(usingSidearm())
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
-  }
 
-  if(isDefined(self.combatCrouchAnims)) {
+  if(isdefined(self.combatCrouchAnims)) {
     assert(isArray(self.combatCrouchAnims));
     self.a.array = self.combatCrouchAnims;
   } else if(usingRocketLauncher()) {
     self.a.array = anim.animsets.rpgCrouch;
-  } else if(isDefined(self.weapon) && weapon_pump_action_shotgun()) {
+  } else if(isdefined(self.weapon) && weapon_pump_action_shotgun()) {
     self.a.array = anim.animsets.shotgunCrouch;
   } else {
     self.a.array = anim.animsets.defaultCrouch;
   }
 }
 
+
 ////////////////////////////////////////////
 // Prone
 ////////////////////////////////////////////
 
 set_animarray_prone() {
-  if(usingSidearm()) {
+  if(usingSidearm())
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
-  }
 
   self.a.array = anim.animsets.defaultProne;
 }
@@ -665,7 +660,7 @@ set_animset_run_n_gun() {
 }
 
 set_ambush_sidestep_anims() {
-  assert(isDefined(self.a.moveAnimSet));
+  assert(isdefined(self.a.moveAnimSet));
 
   self.a.moveAnimSet["move_l"] = % combatwalk_L;
   self.a.moveAnimSet["move_r"] = % combatwalk_R;
@@ -673,20 +668,18 @@ set_ambush_sidestep_anims() {
 }
 
 heat_reload_anim() {
-  if(self.weapon != self.primaryweapon) {
+  if(self.weapon != self.primaryweapon)
     return animArrayPickRandom("reload");
-  }
 
-  if(isDefined(self.node)) {
+  if(isdefined(self.node)) {
     if(self nearClaimNodeAndAngle()) {
       coverReloadAnim = undefined;
-      if(self.node.type == "Cover Left") {
+      if(self.node.type == "Cover Left")
         coverReloadAnim = % heat_cover_reload_R;
-      } else if(self.node.type == "Cover Right") {
+      else if(self.node.type == "Cover Right")
         coverReloadAnim = % heat_cover_reload_L;
-      }
 
-      if(isDefined(coverReloadAnim)) {
+      if(isdefined(coverReloadAnim)) {
         //self mayMoveToPoint( reloadAnimPos );
         return coverReloadAnim;
       }

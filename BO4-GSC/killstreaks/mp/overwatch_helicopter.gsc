@@ -35,10 +35,11 @@
 #include scripts\mp_common\util;
 #include scripts\weapons\hacker_tool;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace overwatch_helicopter;
 
 autoexec __init__system__() {
-  system::register(#"overwatch_helicopter", &__init__, undefined, # "killstreaks");
+  system::register(#"overwatch_helicopter", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -47,7 +48,7 @@ __init__() {
   killstreaks::set_team_kill_penalty_scale("overwatch_helicopter", level.teamkillreducedpenalty);
   callback::on_player_killed_with_params(&on_player_killed);
   level.var_24de8afe = &function_24de8afe;
-  level.killstreaks[# "overwatch_helicopter"].threatonkill = 1;
+  level.killstreaks[#"overwatch_helicopter"].threatonkill = 1;
   level.var_93215f31 = getdvarint(#"hash_1300f6ba32e8d68c", 2500);
   level.var_bf127508 = getdvarint(#"hash_163c95340307e3aa", 1800);
   level.var_5f6d1a12 = getdvarint(#"hash_16579f34031ebc60", 2000);
@@ -57,14 +58,14 @@ __init__() {
 
   if(!isDefined(level.var_3c5cbd62)) {
     level.var_3c5cbd62 = [];
-    level.var_3c5cbd62[# "allies"] = [];
-    level.var_3c5cbd62[# "allies"][0] = "spawner_mp_swat_gunner_team1_male";
-    level.var_3c5cbd62[# "allies"][1] = "spawner_mp_swat_gunner_team1_female";
-    level.var_3c5cbd62[# "allies"][2] = "spawner_mp_swat_gunner_team1_male";
-    level.var_3c5cbd62[# "axis"] = [];
-    level.var_3c5cbd62[# "axis"][0] = "spawner_mp_swat_gunner_team2_male";
-    level.var_3c5cbd62[# "axis"][1] = "spawner_mp_swat_gunner_team2_female";
-    level.var_3c5cbd62[# "axis"][2] = "spawner_mp_swat_gunner_team2_male";
+    level.var_3c5cbd62[#"allies"] = [];
+    level.var_3c5cbd62[#"allies"][0] = "spawner_mp_swat_gunner_team1_male";
+    level.var_3c5cbd62[#"allies"][1] = "spawner_mp_swat_gunner_team1_female";
+    level.var_3c5cbd62[#"allies"][2] = "spawner_mp_swat_gunner_team1_male";
+    level.var_3c5cbd62[#"axis"] = [];
+    level.var_3c5cbd62[#"axis"][0] = "spawner_mp_swat_gunner_team2_male";
+    level.var_3c5cbd62[#"axis"][1] = "spawner_mp_swat_gunner_team2_female";
+    level.var_3c5cbd62[#"axis"][2] = "spawner_mp_swat_gunner_team2_male";
   }
 
   callback::on_finalize_initialization(&function_1c601b99);
@@ -174,12 +175,12 @@ function_ca6698c6() {
   player notify(#"hash_7b84cc3c326479a6", {
     #chopper: helicopter
   });
-  player addweaponstat(settings.ksweapon, # "used", 1);
+  player addweaponstat(settings.ksweapon, #"used", 1);
   player thread function_a9fc0ef6(helicopter);
   player thread watchplayerteamchangethread(helicopter);
   function_ab667e1c(player, helicopter);
   helicopter thread function_5c15f6d6();
-  util::function_5a68c330(21, player.team, player getentitynumber(), # "hash_76bc8a74d60388e4");
+  util::function_5a68c330(21, player.team, player getentitynumber(), #"hash_76bc8a74d60388e4");
   return true;
 }
 
@@ -260,11 +261,11 @@ function_a0068ca0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       }
 
       helicopter killstreaks::function_73566ec7(eattacker, weapon, helicopter.owner);
-      luinotifyevent(#"player_callout", 2, # "hash_3440c27a76738802", eattacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"hash_3440c27a76738802", eattacker.entnum);
       eattacker battlechatter::function_dd6a6012("overwatch_helicopter", weapon);
       challenges::destroyedhelicopter(eattacker, weapon, smeansofdeath, 0);
       eattacker challenges::addflyswatterstat(weapon, self);
-      eattacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+      eattacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
     }
 
     helicopter thread performleavehelicopterfromdamage();
@@ -296,13 +297,13 @@ performleavehelicopterfromdamage() {
 
   self.leave_by_damage_initiated = 1;
   failsafe_timeout = 5;
-  helicopter waittilltimeout(failsafe_timeout, # "static_fx_done");
+  helicopter waittilltimeout(failsafe_timeout, #"static_fx_done");
   function_f6442ecd(helicopter, helicopter.owner, 1);
 }
 
 function_49dca506(helicopter, attacker) {
   if(isDefined(attacker)) {
-    luinotifyevent(#"player_callout", 2, # "hash_20aa28bee9cfdd61", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_20aa28bee9cfdd61", attacker.entnum);
   }
 
   if(target_istarget(helicopter)) {
@@ -342,11 +343,11 @@ function_a9fc0ef6(helicopter) {
 
 watchplayerteamchangethread(helicopter) {
   helicopter notify(#"hash_73c07c54a285eb73");
-  helicopter endon(#"hash_73c07c54a285eb73", # "overwatch_hacked");
+  helicopter endon(#"hash_73c07c54a285eb73", #"overwatch_hacked");
   assert(isplayer(self));
   player = self;
   player endon(#"overwatch_left");
-  player waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  player waittill(#"joined_team", #"disconnect", #"joined_spectators");
   ownerleft = !isDefined(player) || isDefined(helicopter) && helicopter.ownerentnum == player.entnum;
   player thread function_f6442ecd(helicopter, player, ownerleft);
 
@@ -356,7 +357,7 @@ watchplayerteamchangethread(helicopter) {
 }
 
 function_82fb79e3(startnode, protectdest, hardpointtype, heli_team) {
-  self endon(#"death", # "abandoned");
+  self endon(#"death", #"abandoned");
   self.protectdest = protectdest;
   self.var_6c63b409 = protectdest;
   radius = 10000;
@@ -386,7 +387,7 @@ function_82fb79e3(startnode, protectdest, hardpointtype, heli_team) {
 }
 
 function_5c15f6d6() {
-  self endon(#"death", # "crashing", # "leaving");
+  self endon(#"death", #"crashing", #"leaving");
 
   for(;;) {
     if(isDefined(self.protectdest) && isDefined(self.heligoalpos)) {
@@ -425,7 +426,7 @@ function_5c15f6d6() {
 }
 
 function_c4b00a04(startnode, protectdest, hardpointtype, heli_team) {
-  self endon(#"death", # "abandoned");
+  self endon(#"death", #"abandoned");
   helicopter::heli_reset();
   self.reached_dest = 0;
   self.goalradius = 30;
@@ -446,7 +447,7 @@ function_c4b00a04(startnode, protectdest, hardpointtype, heli_team) {
     }
 
     var_520e3459 = randomintrange(level.var_739f9c79, level.var_b6d2e275);
-    waitresult = self waittilltimeout(var_520e3459, # "locking on", # "locking on hacking", # "damage state");
+    waitresult = self waittilltimeout(var_520e3459, #"locking on", #"locking on hacking", #"damage state");
     newdest = heli_get_protect_spot(protectdest, undefined, heli_team);
     self.protectdest = protectdest;
 
@@ -491,7 +492,7 @@ heli_get_protect_spot(protectdest, overrideradius, heli_team) {
   heightmin = level.var_bf127508;
   heightmax = level.var_5f6d1a12;
 
-  if(heli_team == # "axis") {
+  if(heli_team == #"axis") {
     assert(isDefined(level.var_fb59767));
     heightmin += level.var_fb59767;
     heightmax += level.var_fb59767;
@@ -544,10 +545,10 @@ function_ab667e1c(owner, helicopter) {
   assert(isDefined(helicopter));
   owner.var_e60e2941 = [];
   helicopter.var_e60e2941 = [];
-  aitypes = level.var_3c5cbd62[# "axis"];
+  aitypes = level.var_3c5cbd62[#"axis"];
 
-  if(isDefined(owner.team) && owner.team == # "allies") {
-    aitypes = level.var_3c5cbd62[# "allies"];
+  if(isDefined(owner.team) && owner.team == #"allies") {
+    aitypes = level.var_3c5cbd62[#"allies"];
   }
 
   for(i = 0; i < 3; i++) {
@@ -603,7 +604,7 @@ function_ab667e1c(owner, helicopter) {
 
 function_64b435c4(ai) {
   self endon(#"death");
-  sniper_glint = # "hash_3db1ecb54b192a49";
+  sniper_glint = #"hash_3db1ecb54b192a49";
 
   while(true) {
     self waittill(#"sniper_glint");
@@ -655,7 +656,7 @@ function_b8047055(swat_gunner, helicopter) {
     self.script_owner globallogic_audio::flush_leader_dialog_key_on_player("secondaryTargetLost");
 
     switch (event) {
-      case # "found_new_enemy":
+      case #"found_new_enemy":
         if(self.voxid == 0) {
           self.script_owner globallogic_audio::play_taacom_dialog("targetAquired", "overwatch_helicopter_snipers");
         } else {
@@ -663,7 +664,7 @@ function_b8047055(swat_gunner, helicopter) {
         }
 
         break;
-      case # "lost_enemy":
+      case #"lost_enemy":
         if(self.voxid == 0) {
           self.script_owner globallogic_audio::play_taacom_dialog("targetLost", "overwatch_helicopter_snipers");
         } else {
@@ -683,7 +684,7 @@ private on_player_killed(params) {
   self notify("105d6541393f1fd");
   self endon("105d6541393f1fd");
 
-  if(!isDefined(params) || !isDefined(self) || !isDefined(params.einflictor) || !isDefined(params.einflictor.script_owner) || !isDefined(params.einflictor.voxid) || !isDefined(params.einflictor.ai) || !(isDefined(params.einflictor.ai.swat_gunner) && params.einflictor.ai.swat_gunner) || params.einflictor.weapon.name != # "hash_6c1be4b025206124" || self == params.einflictor.script_owner || level.teambased && self.team == params.einflictor.script_owner.team) {
+  if(!isDefined(params) || !isDefined(self) || !isDefined(params.einflictor) || !isDefined(params.einflictor.script_owner) || !isDefined(params.einflictor.voxid) || !isDefined(params.einflictor.ai) || !(isDefined(params.einflictor.ai.swat_gunner) && params.einflictor.ai.swat_gunner) || params.einflictor.weapon.name != #"hash_6c1be4b025206124" || self == params.einflictor.script_owner || level.teambased && self.team == params.einflictor.script_owner.team) {
     return;
   }
 

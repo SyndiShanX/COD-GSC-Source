@@ -8,10 +8,11 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_undead_man_walking;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_undead_man_walking", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_undead_man_walking", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -23,7 +24,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   self thread function_da70ffac();
 
   if(bgb::increment_ref_count(#"zm_bgb_undead_man_walking")) {
@@ -35,7 +36,7 @@ enable() {
 }
 
 function_da70ffac() {
-  self waittill(#"disconnect", # "bled_out", # "bgb_update");
+  self waittill(#"disconnect", #"bled_out", #"bgb_update");
 
   if(bgb::decrement_ref_count(#"zm_bgb_undead_man_walking")) {
     return;
@@ -55,7 +56,7 @@ function_8b96ace8(b_walk = 1) {
       var_5d66253 = [
         [level.var_2f67e192]
       ](a_ai[i]);
-    } else if(isalive(a_ai[i]) && (a_ai[i].zm_ai_category === # "basic" || a_ai[i].zm_ai_category === # "enhanced") && a_ai[i].team === level.zombie_team) {
+    } else if(isalive(a_ai[i]) && (a_ai[i].zm_ai_category === #"basic" || a_ai[i].zm_ai_category === #"enhanced") && a_ai[i].team === level.zombie_team) {
       var_5d66253 = 1;
     }
 
@@ -78,7 +79,7 @@ function_db1ee563() {
 
   if(isDefined(level.var_2f67e192)) {
     var_5d66253 = [[level.var_2f67e192]](self);
-  } else if(isalive(self) && (self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && self.team === level.zombie_team) {
+  } else if(isalive(self) && (self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") && self.team === level.zombie_team) {
     var_5d66253 = 1;
   }
 

@@ -1043,9 +1043,8 @@ setup_crane_beam() {
   var_1 = [];
   var_1 = getEntArray(var_0.target, "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
-  }
+  foreach(var_3 in var_1)
+  var_3 linkto(var_0);
 
   var_5 = getent("beam_light_01", "script_noteworthy");
 
@@ -1147,9 +1146,8 @@ conveyor_system_link_crates(var_0, var_1) {
       var_7.angles = self gettagangles(var_6);
       var_7 linkto(self, var_6);
 
-      if(isDefined(var_0)) {
+      if(isDefined(var_0))
         var_7.targetname = var_0;
-      }
 
       var_2[var_2.size] = var_7;
       common_scripts\utility::waitframe();
@@ -1158,9 +1156,8 @@ conveyor_system_link_crates(var_0, var_1) {
 
   common_scripts\utility::flag_wait("presat_revolving_door_closed");
 
-  foreach(var_9 in var_2) {
-    var_9 delete();
-  }
+  foreach(var_9 in var_2)
+  var_9 delete();
 }
 
 rogers_hall_kill(var_0, var_1) {
@@ -1374,9 +1371,8 @@ desk_search_chair(var_0, var_1) {
   var_3 delete();
   var_4 = self.origin;
 
-  while(maps\_utility::players_within_distance(64, var_4)) {
+  while(maps\_utility::players_within_distance(64, var_4))
     wait 1.0;
-  }
 
   var_0 unlink();
   var_0 notsolid();
@@ -1424,15 +1420,14 @@ ambush_loop_flashbang_react(var_0, var_1) {
     waittillframeend;
     var_6 = 0;
 
-    if(!isDefined(self.flashendtime)) {
+    if(!isDefined(self.flashendtime))
       continue;
-    } else {
+    else {
       var_7 = self.flashendtime - gettime();
       var_6 = var_7 / 1000 + 0.25;
 
-      if(var_6 < 0.5) {
+      if(var_6 < 0.5)
         continue;
-      }
     }
 
     self stopanimscripted();
@@ -1584,9 +1579,8 @@ player_hit_wall() {
     var_2 = level.player.origin;
     var_3 = distance(var_1, var_2);
 
-    if(var_3 < var_0) {
+    if(var_3 < var_0)
       level notify("player_hit_wall");
-    }
   }
 }
 
@@ -1660,31 +1654,26 @@ ambush_enemies(var_0) {
     }
   }
 
-  if(isDefined(var_2[1])) {
+  if(isDefined(var_2[1]))
     level.squad["ALLY_ALPHA"].favoriteenemy = var_2[1];
-  }
 
-  if(isDefined(var_2[2])) {
+  if(isDefined(var_2[2]))
     level.squad["ALLY_BRAVO"].favoriteenemy = var_2[2];
-  }
 
-  if(isDefined(var_2[3])) {
+  if(isDefined(var_2[3]))
     level.squad["ALLY_CHARLIE"].favoriteenemy = var_2[3];
-  }
 }
 
 debugline(var_0, var_1, var_2, var_3) {
-  for(var_4 = 0; var_4 < var_3 * 20; var_4++) {
+  for(var_4 = 0; var_4 < var_3 * 20; var_4++)
     wait 0.05;
-  }
 }
 
 ambush_props(var_0) {
   var_1 = getEntArray("ambush_window_mantle", "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 movez(100, 0.1);
-  }
+  foreach(var_3 in var_1)
+  var_3 movez(100, 0.1);
 
   var_5 = maps\_utility::spawn_anim_model("factory_ambush_usb_stick");
   var_6["factory_ambush_usb_stick"] = var_5;
@@ -1712,9 +1701,8 @@ ambush_props(var_0) {
   var_13 delete();
   var_14 = getEntArray("ambush_breach_wall_screen", "targetname");
 
-  foreach(var_16 in var_14) {
-    var_16 delete();
-  }
+  foreach(var_16 in var_14)
+  var_16 delete();
 
   level.factory_ambush_props["factory_ambush_monitor01"] setModel("com_pc_monitor_a");
   level.factory_ambush_props["factory_ambush_monitor02"] setModel("com_pc_monitor_a");
@@ -1787,9 +1775,8 @@ ambush_notify_start_slomo(var_0) {
   level notify("ambush_door_breached");
   var_1 = getEntArray("ambush_breach_prop_pre", "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 delete();
-  }
+  foreach(var_3 in var_1)
+  var_3 delete();
 
   var_5 = getent("ambush_breach_physics_push", "targetname");
   physicsexplosionsphere(var_5.origin, 250, 100, 1);
@@ -1817,9 +1804,8 @@ ambush_fastrope_do_anim(var_0, var_1, var_2, var_3) {
   var_7["rope"] = var_6;
   var_5 maps\_anim::anim_single(var_7, "bravo_rappel_drop");
 
-  if(isDefined(var_1) && var_1 == 1) {
+  if(isDefined(var_1) && var_1 == 1)
     var_4 kill();
-  }
 
   var_6 delete();
 }
@@ -1860,9 +1846,8 @@ ambush_ally_throw_smoke(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_10 thread ambush_spent_gas_grenade(var_9.script_noteworthy);
   }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     maps\_utility::smart_dialogue(var_3);
-  }
 
   var_6 waittill(var_2);
   maps\factory_util::enable_awareness();
@@ -1929,9 +1914,8 @@ ambush_enemy_force_smoke_reaction(var_0, var_1, var_2, var_3) {
   var_4 = getent(var_0, "targetname");
 
   if(isDefined(var_4.radius)) {
-    if(maps\_utility::players_within_distance(var_4.radius, var_4.origin)) {
+    if(maps\_utility::players_within_distance(var_4.radius, var_4.origin))
       return;
-    }
   }
 
   var_5 = 3;
@@ -1939,11 +1923,10 @@ ambush_enemy_force_smoke_reaction(var_0, var_1, var_2, var_3) {
   var_7 = undefined;
 
   while(var_5 > 0) {
-    if(var_6.size == 0) {
+    if(var_6.size == 0)
       var_7 = maps\_utility::get_closest_ai(var_4.origin, "axis");
-    } else {
+    else
       var_7 = maps\_utility::get_closest_ai(var_4.origin, "axis", var_6);
-    }
 
     if(isalive(var_7) && !isDefined(var_7.animating)) {
       break;
@@ -1951,9 +1934,8 @@ ambush_enemy_force_smoke_reaction(var_0, var_1, var_2, var_3) {
       var_6[var_6.size] = var_7;
       var_5--;
 
-      if(var_5 <= 0) {
+      if(var_5 <= 0)
         return;
-      }
     }
   }
 
@@ -1969,18 +1951,15 @@ ambush_enemy_force_smoke_reaction(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     wait(var_3);
 
-    if(!isDefined(var_7) || !isalive(var_7)) {
+    if(!isDefined(var_7) || !isalive(var_7))
       return;
-    }
   }
 
-  if(isDefined(var_7) && isalive(var_7)) {
+  if(isDefined(var_7) && isalive(var_7))
     var_4 maps\_anim::anim_single_solo(var_7, var_1);
-  }
 
-  if(isDefined(var_7) && isalive(var_7)) {
+  if(isDefined(var_7) && isalive(var_7))
     var_7.animating = undefined;
-  }
 }
 
 kill_me(var_0) {
@@ -1991,9 +1970,8 @@ kill_no_react() {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self.allowdeath = 1;
   self.a.nodeath = 1;
@@ -2023,9 +2001,8 @@ factory_assembly_line_delete() {
   var_0 = [];
   var_0 = getEntArray("assembly_line_anim_model", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 }
 
 factory_auto_play_front() {
@@ -2077,9 +2054,8 @@ factory_auto_play_front() {
       var_1--;
       wait(var_0 / level.speed_up_multiplier);
 
-      if(var_1 == 0) {
+      if(var_1 == 0)
         common_scripts\utility::flag_set("factory_assembly_line_resume_speed_front");
-      }
 
       continue;
     }
@@ -2111,9 +2087,8 @@ factory_auto_play_back() {
       var_1--;
       wait(var_0 / level.speed_up_multiplier);
 
-      if(var_1 == 0) {
+      if(var_1 == 0)
         common_scripts\utility::flag_set("factory_assembly_line_resume_speed_back");
-      }
 
       continue;
     }
@@ -2136,9 +2111,8 @@ spawn_front_piece() {
     thread factory_anim_resume_speed("factory_assembly_line_resume_speed_front", var_0);
   }
 
-  if(isDefined(level.assembly_anim_node)) {
+  if(isDefined(level.assembly_anim_node))
     level.assembly_anim_node maps\_anim::anim_single_solo(var_0, "automated_assemebly_line", undefined, 0.001);
-  }
 
   var_0 maps\factory_ambush::detach_mover_prefab();
   var_0 delete();
@@ -2156,9 +2130,8 @@ spawn_front_piece_belt() {
     thread factory_anim_resume_speed("factory_assembly_line_resume_speed_front", var_0);
   }
 
-  if(isDefined(level.assembly_anim_node)) {
+  if(isDefined(level.assembly_anim_node))
     level.assembly_anim_node maps\_anim::anim_single_solo(var_0, "automated_assemebly_line", undefined, 0.001);
-  }
 
   var_0 delete();
 }
@@ -2175,9 +2148,8 @@ spawn_back_piece() {
     thread factory_anim_resume_speed("factory_assembly_line_resume_speed_back", var_0);
   }
 
-  if(isDefined(level.assembly_anim_node_back)) {
+  if(isDefined(level.assembly_anim_node_back))
     level.assembly_anim_node_back maps\_anim::anim_single_solo(var_0, "automated_assemebly_line", undefined, 0.001);
-  }
 
   var_0 delete();
 }
@@ -2395,18 +2367,16 @@ factory_anim_resume_speed(var_0, var_1) {
 
   if(isarray(var_1)) {
     foreach(var_3 in var_1) {
-      if(isDefined(var_3)) {
+      if(isDefined(var_3))
         maps\_anim::anim_set_rate_single(var_3, "automated_assemebly_line", 1.0);
-      }
     }
   } else if(isDefined(var_1))
     maps\_anim::anim_set_rate_single(var_1, "automated_assemebly_line", 1.0);
 }
 
 factory_assembly_line_cleanup(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     common_scripts\utility::flag_wait("player_off_roof");
-  }
 
   common_scripts\utility::flag_set("stop_assembly_line");
   wait 0.1;
@@ -2641,9 +2611,8 @@ factory_car_chase_spawn() {
 factory_car_chase(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getEntArray("static_smokestack", "targetname");
 
-  foreach(var_8 in var_6) {
-    var_8 delete();
-  }
+  foreach(var_8 in var_6)
+  var_8 delete();
 
   var_10 = getent("car_chase_intro", "script_noteworthy");
   var_11 = level.factory_car_chase_intro_side_car01;
@@ -2753,9 +2722,8 @@ factory_car_chase(var_0, var_1, var_2, var_3, var_4, var_5) {
 factory_car_chase_delete_early(var_0) {
   maps\factory_chase::chase_wait_for_semi_touch("chase_spawn_skybridge_drones_1");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 }
 
 light_turns_red() {
@@ -2783,9 +2751,8 @@ factory_car_chase_link_boxes(var_0) {
       var_6.angles = self gettagangles(var_5);
       var_6 linkto(self, var_5);
 
-      if(isDefined(var_0)) {
+      if(isDefined(var_0))
         var_6.targetname = var_0;
-      }
 
       var_1[var_1.size] = var_6;
       common_scripts\utility::waitframe();
@@ -2794,9 +2761,8 @@ factory_car_chase_link_boxes(var_0) {
 
   maps\factory_chase::chase_wait_for_semi_touch("chase_delete_warehouse_boxes");
 
-  foreach(var_6 in var_1) {
-    var_6 delete();
-  }
+  foreach(var_6 in var_1)
+  var_6 delete();
 }
 
 factory_car_chase_enemy_vehicle_setup(var_0) {

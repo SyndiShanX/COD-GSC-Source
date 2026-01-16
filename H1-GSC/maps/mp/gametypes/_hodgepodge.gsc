@@ -19,9 +19,8 @@ init() {
   if(level.hodgepodgemode == 0) {
     return;
   }
-  if(level.hodgepodgemode == 2 || level.hodgepodgemode == 6 || level.hodgepodgemode == 7) {
+  if(level.hodgepodgemode == 2 || level.hodgepodgemode == 6 || level.hodgepodgemode == 7)
     level.oldschool = 0;
-  }
 
   if(level.hodgepodgemode == 9) {
     level.oldschool = 0;
@@ -38,11 +37,11 @@ blank() {}
 hodgepodgeonstartgametype() {
   [[level.hodgepodgeonstartgametype]]();
 
-  if(level.hodgepodgemode == 2) {
+  if(level.hodgepodgemode == 2)
     initmmmode();
-  } else if(level.hodgepodgemode == 4) {
+  else if(level.hodgepodgemode == 4)
     initsnipersonly();
-  } else if(level.hodgepodgemode == 6) {
+  else if(level.hodgepodgemode == 6) {
     level.rpgonlyreload = 1;
     initrpgonly();
   } else if(level.hodgepodgemode == 7) {
@@ -53,16 +52,14 @@ hodgepodgeonstartgametype() {
 }
 
 hodgepodgeonconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
 
-    if(level.hodgepodgemode == 9) {
+    if(level.hodgepodgemode == 9)
       var_0 thread maps\mp\gametypes\_hodgepodge_ph::onconnect();
-    }
 
-    if(level.hodgepodgemode == 3) {
+    if(level.hodgepodgemode == 3)
       var_0 thread watchapplyloadout(::giveprimaryonly);
-    }
 
     if(level.hodgepodgemode == 4) {
       var_0 thread watchapplyloadout(::giveprimaryonlynomelee);
@@ -97,7 +94,7 @@ initmmmode() {
   setupdvarsmm();
   setspecialloadouts();
   setclientnamemode("auto_change");
-  var_0 = &"OBJECTIVES_MM";
+  var_0 = & "OBJECTIVES_MM";
   maps\mp\_utility::setobjectivetext("allies", var_0);
   maps\mp\_utility::setobjectivetext("axis", var_0);
 
@@ -109,8 +106,8 @@ initmmmode() {
     maps\mp\_utility::setobjectivescoretext("axis", var_0);
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_INFECT_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_INFECT_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_INFECT_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_INFECT_HINT");
   level thread mmawardxp();
   level thread watchhostmigrationmm();
 }
@@ -126,7 +123,7 @@ setupdvarsmm() {
 watchhostmigrationmm() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill("host_migration_begin");
     setupdvarsmm();
     level waittill("host_migration_end");
@@ -153,7 +150,7 @@ mmawardxp() {
   level.xpeventinfo["kill"]["value"] = 300;
   common_scripts\utility::flag_wait("slasher_chosen");
 
-  for(;;) {
+  for (;;) {
     maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(10);
 
     foreach(var_1 in level.players) {
@@ -171,16 +168,14 @@ mmawardxp() {
 onmmspawnplayer() {
   self allowmelee(0);
 
-  if(isai(self)) {
+  if(isai(self))
     self allowfire(0);
-  }
 
   thread switchtostartweapon(self.team);
   self setplayerdata(common_scripts\utility::getstatsgroup_common(), "hasEverVisitedDepot", 0);
 
-  if(!maps\mp\_utility::is_true(level.mm_choseslasher)) {
+  if(!maps\mp\_utility::is_true(level.mm_choseslasher))
     maps\mp\_utility::giveperk("specialty_radarimmune", 0);
-  }
 
   level.mm_teamscores["allies"]++;
   updateteamscores();
@@ -194,21 +189,18 @@ onmmspawnplayer() {
 
   if(level.mm_choseslasher) {
     if(level.mm_teamscores["axis"] && level.mm_teamscores["allies"]) {
-      if(level.mm_teamscores["allies"] == 1) {
+      if(level.mm_teamscores["allies"] == 1)
         thread onfinalsurvivordelayed();
-      }
     }
   }
 
   var_0 = self getweaponslistoffhands();
 
-  foreach(var_2 in var_0) {
-    self setweaponammoclip(var_2, 0);
-  }
+  foreach(var_2 in var_0)
+  self setweaponammoclip(var_2, 0);
 
-  if(isai(self)) {
+  if(isai(self))
     thread botmmlogic();
-  }
 }
 
 onfinalsurvivordelayed() {
@@ -228,7 +220,7 @@ chooseslasher() {
   setomnvar("ui_match_countdown_title", 4);
   setomnvar("ui_match_countdown_toggle", 1);
 
-  while(var_0 > 0 && !level.gameended) {
+  while (var_0 > 0 && !level.gameended) {
     var_0--;
     setomnvar("ui_match_countdown", var_0 + 1);
     maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(1.0);
@@ -259,9 +251,8 @@ chooseslasher() {
     var_1[var_1.size] = var_4;
   }
 
-  if(!var_1.size && isDefined(var_2)) {
+  if(!var_1.size && isdefined(var_2))
     var_1[var_1.size] = var_2;
-  }
 
   level.slasher = var_1[randomint(var_1.size)];
   level.slasher setasslasher();
@@ -280,23 +271,20 @@ chooseslasher() {
   setnojiptime(1);
   var_9 = getaliveplayersonteam("allies");
 
-  if(var_9.size <= 0) {
+  if(var_9.size <= 0)
     level thread maps\mp\gametypes\_gamelogic::endgame("axis", game["end_reason"]["allies_eliminated"]);
-  }
 
   if(level.mm_teamscores["axis"] && level.mm_teamscores["allies"]) {
-    if(level.mm_teamscores["allies"] == 1) {
+    if(level.mm_teamscores["allies"] == 1)
       thread onfinalsurvivordelayed();
-    }
   }
 }
 
 switchtostartweapon(var_0) {
   var_1 = maps\mp\gametypes\_class::buildweaponname("h1_meleeshovel");
 
-  if(var_0 == "allies") {
+  if(var_0 == "allies")
     var_1 = maps\mp\gametypes\_class::buildweaponname("h1_colt45");
-  }
 
   waittillframeend;
   self takeallweapons();
@@ -333,9 +321,8 @@ slashersettings() {
   thread switchtostartweapon("axis");
   self allowmelee(1);
 
-  if(isai(self)) {
+  if(isai(self))
     self allowfire(1);
-  }
 
   thread slashermovespeedscale();
 }
@@ -351,7 +338,7 @@ slashermovespeedscale() {
   var_1 = 0.25;
   self.slowmovetime = 0;
 
-  for(;;) {
+  for (;;) {
     if(self.slowmovetime > gettime()) {
       self.slashermovespeedscale = var_1;
       self allowsprint(0);
@@ -373,33 +360,29 @@ slasherdouav() {
   level.radarviewtime = 4;
   var_0 = getdvarfloat("scr_game_mmUavTime", 30);
 
-  for(;;) {
+  for (;;) {
     maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_0);
     maps\mp\gametypes\_hardpoints::useradaritem();
   }
 }
 
 prepareforclasschange() {
-  while(!maps\mp\_utility::isreallyalive(self) || maps\mp\_utility::isusingremote()) {
+  while (!maps\mp\_utility::isreallyalive(self) || maps\mp\_utility::isusingremote())
     wait 0.05;
-  }
 
-  if(isDefined(self.iscarrying) && self.iscarrying == 1) {
+  if(isdefined(self.iscarrying) && self.iscarrying == 1) {
     self notify("force_cancel_placement");
     wait 0.05;
   }
 
-  while(self ismeleeing()) {
+  while (self ismeleeing())
     wait 0.05;
-  }
 
-  while(self ismantling()) {
+  while (self ismantling())
     wait 0.05;
-  }
 
-  while(!self isonground() && !self isonladder()) {
+  while (!self isonground() && !self isonladder())
     wait 0.05;
-  }
 
   if(maps\mp\_utility::isjuggernaut()) {
     self notify("lost_juggernaut");
@@ -408,19 +391,17 @@ prepareforclasschange() {
 
   wait 0.05;
 
-  while(!maps\mp\_utility::isreallyalive(self)) {
+  while (!maps\mp\_utility::isreallyalive(self))
     wait 0.05;
-  }
 }
 
 getaliveplayersonteam(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.players) {
-    if(isDefined(var_3) && isalive(var_3) && (!isDefined(var_3.sessionstate) || var_3.sessionstate == "playing")) {
-      if(!isDefined(var_0) || var_3.team == var_0) {
+    if(isdefined(var_3) && isalive(var_3) && (!isdefined(var_3.sessionstate) || var_3.sessionstate == "playing")) {
+      if(!isdefined(var_0) || var_3.team == var_0)
         var_1[var_1.size] = var_3;
-      }
     }
   }
 
@@ -438,23 +419,22 @@ monitordisconnectmm() {
   level.mm_teamscores[var_0] = var_1.size;
   updateteamscores();
 
-  if(isDefined(self.mm_isbeingchosen) || level.mm_choseslasher) {
+  if(isdefined(self.mm_isbeingchosen) || level.mm_choseslasher) {
     if(level.mm_teamscores["axis"] && level.mm_teamscores["allies"]) {
-      if(var_0 == "allies" && level.mm_teamscores["allies"] == 1) {
+      if(var_0 == "allies" && level.mm_teamscores["allies"] == 1)
         onfinalsurvivor();
-      } else if(var_0 == "axis" && level.mm_teamscores["axis"] == 1) {
+      else if(var_0 == "axis" && level.mm_teamscores["axis"] == 1) {
         foreach(var_3 in level.players) {
-          if(var_3 != self && var_3.team == "axis") {
+          if(var_3 != self && var_3.team == "axis")
             var_3 setasslasher();
-          }
         }
       }
     } else if(level.mm_teamscores["allies"] == 0)
       onsurvivorseliminated();
     else if(level.mm_teamscores["axis"] == 0) {
-      if(level.mm_teamscores["allies"] == 1) {
+      if(level.mm_teamscores["allies"] == 1)
         onslashereliminated();
-      } else if(level.mm_teamscores["allies"] > 1) {
+      else if(level.mm_teamscores["allies"] > 1) {
         level.mm_choseslasher = 0;
         level thread chooseslasher();
       }
@@ -478,7 +458,7 @@ onslashereliminated() {
 
 onfinalsurvivor() {
   foreach(var_1 in level.players) {
-    if(!isDefined(var_1)) {
+    if(!isdefined(var_1)) {
       continue;
     }
     if(var_1.team != "allies") {
@@ -509,20 +489,18 @@ slasherreducesprint() {
 
 mmcallbackplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(maps\mp\_utility::is_true(self.isslasher)) {
-    if(isDefined(var_1) && maps\mp\_utility::isbulletdamage(var_4)) {
+    if(isdefined(var_1) && maps\mp\_utility::isbulletdamage(var_4))
       thread onslasherdamage(var_2);
-    }
 
-    if(!isDefined(var_1) || level.mm_teamscores["allies"] > 1) {
+    if(!isdefined(var_1) || level.mm_teamscores["allies"] > 1)
       return;
-    }
   }
 
   maps\mp\gametypes\_damage::callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
 onmmplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
   var_10 = var_1 == self || !isplayer(var_1);
@@ -558,9 +536,9 @@ onmmplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 }
 
 getmmspawnpoint() {
-  if(level.ingraceperiod) {
+  if(level.ingraceperiod)
     var_0 = maps\mp\gametypes\_spawnlogic::getstartspawnffa(self.team);
-  } else {
+  else {
     var_1 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.team);
     var_0 = maps\mp\gametypes\_spawnscoring::getspawnpoint_freeforall(var_1);
   }
@@ -608,12 +586,11 @@ givelastonteamwarning() {
 }
 
 botslasheristargetingme() {
-  if(isDefined(level.slasher)) {
-    if(isai(level.slasher)) {
-      return isDefined(level.slasher.enemy) && level.slasher.enemy == self && level.slasher botcanseeentity(self);
-    } else {
-      return common_scripts\utility::within_fov(level.slasher getEye(), level.slasher getplayerangles(), self getEye(), 0.422618) && sighttracepassed(level.slasher getEye(), self getEye(), 0, self);
-    }
+  if(isdefined(level.slasher)) {
+    if(isai(level.slasher))
+      return isdefined(level.slasher.enemy) && level.slasher.enemy == self && level.slasher botcanseeentity(self);
+    else
+      return common_scripts\utility::within_fov(level.slasher geteye(), level.slasher getplayerangles(), self geteye(), 0.422618) && sighttracepassed(level.slasher geteye(), self geteye(), 0, self);
   }
 
   return 0;
@@ -632,24 +609,22 @@ botmmlogic() {
   var_2 = 1000;
   var_3 = 30000;
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(self.health <= 0) {
       continue;
     }
     if(maps\mp\_utility::is_true(self.isslasher) || level.mm_teamscores["allies"] == 1) {
-      if(self botgetscriptgoaltype() == "critical") {
+      if(self botgetscriptgoaltype() == "critical")
         self botclearscriptgoal();
-      }
 
       continue;
     }
 
     if(botslasheristargetingme()) {
-      if(self bothasscriptgoal()) {
+      if(self bothasscriptgoal())
         self botclearscriptgoal();
-      }
 
       self.ignoreall = 1;
 
@@ -666,16 +641,14 @@ botmmlogic() {
       var_4 = getnodesinradius(self.origin, 900, 0, 300);
       var_5 = self botnodepick(var_4, var_4.size * 0.15, "node_hide_anywhere");
 
-      if(!isDefined(var_5)) {
+      if(!isdefined(var_5))
         var_5 = self getnearestnode();
-      }
 
-      if(isDefined(var_5)) {
+      if(isdefined(var_5)) {
         var_6 = self botsetscriptgoalnode(var_5, "critical");
 
-        if(var_6) {
+        if(var_6)
           self.next_hide_time = gettime() + var_3;
-        }
       }
     }
   }
@@ -684,7 +657,7 @@ botmmlogic() {
 watchapplyloadout(var_0) {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("applyLoadout");
     self thread[[var_0]]();
   }
@@ -693,32 +666,28 @@ watchapplyloadout(var_0) {
 giveprimaryweapon(var_0, var_1, var_2) {
   var_3 = self.primaryweapon;
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_3 = var_2;
-  }
 
   var_4 = self.secondaryweapon;
   var_5 = maps\mp\_utility::is_true(var_1) && maps\mp\_utility::_hasperk("specialty_twoprimaries") && var_4 != "none";
 
-  if(maps\mp\_utility::is_true(var_0)) {
+  if(maps\mp\_utility::is_true(var_0))
     self allowmelee(0);
-  }
 
   self takeallweapons();
   self giveweapon(var_3);
   self setspawnweapon(var_3);
   self switchtoweapon(var_3);
 
-  if(var_5) {
+  if(var_5)
     self giveweapon(var_4);
-  }
 
   if(maps\mp\_utility::_hasperk("specialty_extraammo")) {
     self givemaxammo(var_3);
 
-    if(var_5) {
+    if(var_5)
       self givemaxammo(var_4);
-    }
   }
 }
 
@@ -749,7 +718,7 @@ setupdvarsrpg() {
 watchhostmigrationrpg() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill("host_migration_begin");
     setupdvarsrpg();
     level waittill("host_migration_end");
@@ -788,23 +757,22 @@ refillrpgammo() {
   self endon("refillRPGAmmo");
 
   if(level.rpgonlyreload) {
-    for(;;) {
+    for (;;) {
       self setweaponammostock("h1_rpg_mp", 2);
       self waittill("reload");
     }
   } else {
-    for(;;) {
+    for (;;) {
       self waittill("weapon_fired", var_0);
 
-      if(var_0 == "h1_rpg_mp") {
+      if(var_0 == "h1_rpg_mp")
         self setweaponammoclip("h1_rpg_mp", 1);
-      }
     }
   }
 }
 
 rpgonlymodifyplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_4 == "h1_rpg_mp" && isDefined(var_0)) {
+  if(var_4 == "h1_rpg_mp" && isdefined(var_0)) {
     var_8 = 50;
     var_9 = 200;
     var_10 = 500;
@@ -813,15 +781,14 @@ rpgonlymodifyplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     var_13 = 1.0 - clamp((var_12 - var_8) / (var_9 - var_8), 0.0, 1.0);
     var_14 = (var_10 - var_11) * var_13 + var_11;
 
-    if(var_6[2] < 0.0) {
+    if(var_6[2] < 0.0)
       var_6 = (var_6[0], var_6[1], 0.0);
-    }
 
     var_15 = vectornormalize(var_6);
     var_16 = var_0 getvelocity();
     var_0 setvelocity(var_16 + var_15 * var_14);
 
-    if(isDefined(var_1) && var_1 == var_0) {
+    if(isdefined(var_1) && var_1 == var_0) {
       var_17 = 50;
       var_18 = 300;
       var_19 = 100;
@@ -856,16 +823,16 @@ updatekillindicator(var_0) {
   level endon("game_ended");
   var_1 = var_0;
 
-  if(var_0 >= 150) {
+  if(var_0 >= 150)
     self.killindicator.color = (0, 1, 0);
-  } else {
+  else {
     var_1 = 0.01 * (100 - 0.67 * var_1);
     self.killindicator.color = (var_1, 1, var_1);
   }
 
   self.killindicator setvalue(var_0);
 
-  if(!isDefined(self.maxkillrange) || self.maxkillrange < var_0) {
+  if(!isdefined(self.maxkillrange) || self.maxkillrange < var_0) {
     self.maxkillrange = var_0;
     self.maxkillindicator.color = (var_1, 1, var_1);
     self.maxkillindicator setvalue(self.maxkillrange);
@@ -876,7 +843,7 @@ updatekillindicator(var_0) {
       self.maxkillindicator.glowalpha = 0.5;
     }
 
-    if(!isDefined(level.maxmatchrange) || level.maxmatchrange < var_0) {
+    if(!isdefined(level.maxmatchrange) || level.maxmatchrange < var_0) {
       level.maxmatchrange = var_0;
       level.maxmatchindicator.color = (var_1, 1, var_1);
       level.maxmatchindicator setvalue(level.maxmatchrange);
@@ -895,7 +862,7 @@ updatekillindicator(var_0) {
 hidekillindicator() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     level waittill("game_ended");
     self.killindicator.alpha = 0;
     self.maxkillindicator.alpha = 0;
@@ -905,7 +872,7 @@ hidekillindicator() {
 killrangeindicator() {
   self endon("disconnect");
   self.killindicator = maps\mp\gametypes\_hud_util::createfontstring("objective", 1);
-  self.killindicator.label = &"MP_RANGE_KILL_INDICATOR";
+  self.killindicator.label = & "MP_RANGE_KILL_INDICATOR";
   self.killindicator setvalue(0);
   self.killindicator.x = 0;
   self.killindicator.y = 20;
@@ -925,7 +892,7 @@ killrangeindicator() {
   self.maxkillindicator.aligny = "top";
   self.maxkillindicator.horzalign = "right_adjustable";
   self.maxkillindicator.vertalign = "top_adjustable";
-  self.maxkillindicator.label = &"MP_MAX_KILL_INDICATOR";
+  self.maxkillindicator.label = & "MP_MAX_KILL_INDICATOR";
   self.maxkillindicator setvalue(0);
   self.maxkillindicator.alpha = 0;
   self.maxkillindicator.archived = 0;
@@ -936,7 +903,7 @@ killrangeindicator() {
 onsniperonlyplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10 = self;
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
   var_11 = var_1 == self || !isplayer(var_1);
@@ -944,12 +911,11 @@ onsniperonlyplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   if(var_11) {
     return;
   }
-  if(isDefined(var_1) && isDefined(var_10) && isDefined(var_1.origin) && isDefined(var_10.origin)) {
+  if(isdefined(var_1) && isdefined(var_10) && isdefined(var_1.origin) && isdefined(var_10.origin)) {
     var_12 = int(exp(distance(var_1.origin, var_10.origin) * 0.0254));
 
-    if(var_12 <= 0) {
+    if(var_12 <= 0)
       var_12 = 1;
-    }
   } else
     return;
 
@@ -964,7 +930,7 @@ matchbestkillrangeindicator() {
   level.maxmatchindicator.aligny = "top";
   level.maxmatchindicator.horzalign = "right_adjustable";
   level.maxmatchindicator.vertalign = "top_adjustable";
-  level.maxmatchindicator.label = &"MP_MAX_MATCH_INDICATOR";
+  level.maxmatchindicator.label = & "MP_MAX_MATCH_INDICATOR";
   level.maxmatchindicator setvalue(0);
   level.maxmatchindicator.alpha = 0;
   level.maxmatchindicator.archived = 0;

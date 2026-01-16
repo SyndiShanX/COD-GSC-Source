@@ -119,11 +119,10 @@ useBallDrone(ballDroneType) {
 
   ballDrone = createBallDrone(ballDroneType);
   if(!isDefined(ballDrone)) {
-    if(is_aliens()) {
+    if(is_aliens())
       self.drone_failed = true;
-    } else {
+    else
       self IPrintLnBold(&"KILLSTREAKS_UNAVAILABLE");
-    }
 
     decrementFauxVehicleCount();
 
@@ -202,11 +201,10 @@ createBallDrone(ballDroneType) {
     drone SetThreatBiasGroup("DogsDontAttack");
   }
   if(!is_aliens()) {
-    if(level.teamBased) {
+    if(level.teamBased)
       drone maps\mp\_entityheadicons::setTeamHeadIcon(drone.team, (0, 0, 25));
-    } else {
+    else
       drone maps\mp\_entityheadicons::setPlayerHeadIcon(drone.owner, (0, 0, 25));
-    }
   }
 
   maxPitch = 45;
@@ -252,9 +250,8 @@ createBallDrone(ballDroneType) {
       turret.idleTarget.targetname = "test";
       self thread idleTargetMover(turret.idleTarget);
 
-      if(level.teamBased) {
+      if(level.teamBased)
         turret SetTurretTeam(self.team);
-      }
       turret SetMode(level.ballDroneSettings[ballDroneType].sentryMode);
       turret SetSentryOwner(self);
       turret SetLeftArc(180);
@@ -286,9 +283,8 @@ createBallDrone(ballDroneType) {
 
   drone.attract_strength = 10000;
   drone.attract_range = 150;
-  if(!(is_aliens() && isDefined(level.script) && level.script == "mp_alien_last")) {
+  if(!(is_aliens() && isDefined(level.script) && level.script == "mp_alien_last"))
     drone.attractor = Missile_CreateAttractorEnt(drone, drone.attract_strength, drone.attract_range);
-  }
 
   drone.hasDodged = false;
   drone.stunned = false;
@@ -343,13 +339,11 @@ ballDrone_enemy_lightFX() {
     foreach(player in level.players) {
       if(isDefined(player)) {
         if(level.teamBased) {
-          if(player.team != self.team) {
+          if(player.team != self.team)
             self[[settings.playFXCallback]]("enemy", player);
-          }
         } else {
-          if(player != self.owner) {
+          if(player != self.owner)
             self[[settings.playFXCallback]]("enemy", player);
-          }
         }
       }
     }
@@ -365,13 +359,11 @@ ballDrone_friendly_lightFX() {
   foreach(player in level.players) {
     if(isDefined(player)) {
       if(level.teamBased) {
-        if(player.team == self.team) {
+        if(player.team == self.team)
           self[[settings.playFXCallback]]("friendly", player);
-        }
       } else {
-        if(player == self.owner) {
+        if(player == self.owner)
           self[[settings.playFXCallback]]("friendly", player);
-        }
       }
     }
   }
@@ -407,17 +399,15 @@ watchConnectedplayFX() {
 
     if(isDefined(player)) {
       if(level.teamBased) {
-        if(player.team == self.team) {
+        if(player.team == self.team)
           self[[settings.playFXCallback]]("friendly", player);
-        } else {
+        else
           self[[settings.playFXCallback]]("enemy", player);
-        }
       } else {
-        if(player == self.owner) {
+        if(player == self.owner)
           self[[settings.playFXCallback]]("friendly", player);
-        } else {
+        else
           self[[settings.playFXCallback]]("enemy", player);
-        }
       }
     }
   }
@@ -434,17 +424,15 @@ watchJoinedTeamplayFX() {
 
     if(isDefined(player)) {
       if(level.teamBased) {
-        if(player.team == self.team) {
+        if(player.team == self.team)
           self[[settings.playFXCallback]]("friendly", player);
-        } else {
+        else
           self[[settings.playFXCallback]]("enemy", player);
-        }
       } else {
-        if(player == self.owner) {
+        if(player == self.owner)
           self[[settings.playFXCallback]]("friendly", player);
-        } else {
+        else
           self[[settings.playFXCallback]]("enemy", player);
-        }
       }
     }
   }
@@ -462,11 +450,10 @@ startBallDrone(ballDrone) {
     case "alien_ball_drone_3":
     case "alien_ball_drone_4":
 
-      if(isDefined(ballDrone.turret) && isDefined(ballDrone.turret.idleTarget)) {
+      if(isDefined(ballDrone.turret) && isDefined(ballDrone.turret.idleTarget))
         ballDrone SetLookAtEnt(ballDrone.turret.idleTarget);
-      } else {
+      else
         ballDrone SetLookAtEnt(self);
-      }
       break;
 
     default:
@@ -552,9 +539,8 @@ ballDrone_moveToPlayer() {
       break;
   }
 
-  if(isDefined(self.low_entry)) {
+  if(isDefined(self.low_entry))
     heightOffset = heightOffset * self.low_entry;
-  }
 
   targetOffset = (sideOffset, backOffset, heightOffset);
 
@@ -578,9 +564,8 @@ debugDrawDronePath() {
     nodePath = GetNodesOnPath(self.owner.origin, self.origin);
     if(isDefined(nodePath)) {
       for(i = 0; i < nodePath.size; i++) {
-        if(isDefined(nodePath[i + 1])) {
+        if(isDefined(nodePath[i + 1]))
           Line(nodePath[i].origin + Z_OFFSET, nodePath[i + 1].origin + Z_OFFSET, (1, 0, 0));
-        }
       }
     }
     wait(0.05);
@@ -618,9 +603,8 @@ radarMover() {
       continue;
     }
 
-    if(isDefined(self.radar)) {
+    if(isDefined(self.radar))
       self.radar MoveTo(self.origin, 0.5);
-    }
 
     wait(0.5);
   }
@@ -636,11 +620,10 @@ low_entries_watcher() {
   while(low_entries.size > 0) {
     foreach(trigger in low_entries) {
       while(self IsTouching(trigger) || self.owner IsTouching(trigger)) {
-        if(isDefined(trigger.script_parameters)) {
+        if(isDefined(trigger.script_parameters))
           self.low_entry = float(trigger.script_parameters);
-        } else {
+        else
           self.low_entry = 0.5;
-        }
 
         wait 0.1;
       }
@@ -677,9 +660,8 @@ ballDrone_watchTimeout() {
 
   }
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(timeout);
-  if(isDefined(self.owner) && !is_aliens()) {
+  if(isDefined(self.owner) && !is_aliens())
     self.owner leaderDialogOnPlayer(config.voTimedOut);
-  }
 
   self thread ballDrone_leave();
 }
@@ -704,9 +686,8 @@ ballDrone_watchOwnerDeath() {
   while(true) {
     self.owner waittill("death");
 
-    if(getGametypeNumLives() && self.owner.pers["deaths"] == getGametypeNumLives()) {
+    if(getGametypeNumLives() && self.owner.pers["deaths"] == getGametypeNumLives())
       self thread ballDrone_leave();
-    }
 
   }
 }
@@ -820,9 +801,8 @@ ballDrone_stunned(duration) {
   }
 
   if(self.ballDroneType == "ball_drone_radar") {
-    if(isDefined(self.radar)) {
+    if(isDefined(self.radar))
       self.radar delete();
-    }
   }
 
   if(isDefined(self.turret)) {
@@ -869,27 +849,23 @@ ballDroneExplode() {
 removeBallDrone() {
   decrementFauxVehicleCount();
 
-  if(isDefined(self.radar)) {
+  if(isDefined(self.radar))
     self.radar delete();
-  }
 
   if(isDefined(self.turret)) {
     self.turret SetTurretMinimapVisible(false);
 
-    if(isDefined(self.turret.idleTarget)) {
+    if(isDefined(self.turret.idleTarget))
       self.turret.idleTarget delete();
-    }
 
-    if(isDefined(self.turret.killCamEnt)) {
+    if(isDefined(self.turret.killCamEnt))
       self.turret.killCamEnt delete();
-    }
 
     self.turret delete();
   }
 
-  if(isDefined(self.owner) && isDefined(self.owner.ballDrone)) {
+  if(isDefined(self.owner) && isDefined(self.owner.ballDrone))
     self.owner.ballDrone = undefined;
-  }
 
   self delete();
 }
@@ -907,11 +883,10 @@ removeFromBallDroneListOnDeath() {
 }
 
 exceededMaxBallDrones() {
-  if(level.ballDrones.size >= maxVehiclesAllowed()) {
+  if(level.ballDrones.size >= maxVehiclesAllowed())
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 ballDrone_attackTargets() {
@@ -947,9 +922,8 @@ ballDrone_burstFireStart() {
   minPause = level.ballDroneSettings[vehicle.ballDroneType].pauseMin;
   maxPause = level.ballDroneSettings[vehicle.ballDroneType].pauseMax;
 
-  if(is_aliens() && level.ballDroneSettings[vehicle.ballDroneType].weaponInfo == "alien_ball_drone_gun4_mp") {
+  if(is_aliens() && level.ballDroneSettings[vehicle.ballDroneType].weaponInfo == "alien_ball_drone_gun4_mp")
     self childthread fire_rocket();
-  }
 
   while(true) {
     numShots = RandomIntRange(minShots, maxShots + 1);
@@ -1002,43 +976,35 @@ doLockOn(time) {
 
 ballDrone_burstFireStop() {
   self notify("stop_shooting");
-  if(isDefined(self.idleTarget)) {
+  if(isDefined(self.idleTarget))
     self.vehicle SetLookAtEnt(self.idleTarget);
-  }
 }
 
 canBeTargeted(ent) {
   canTarget = true;
 
   if(IsPlayer(ent)) {
-    if(!isReallyAlive(ent) || ent.sessionstate != "playing") {
+    if(!isReallyAlive(ent) || ent.sessionstate != "playing")
       return false;
-    }
   }
 
-  if(level.teamBased && isDefined(ent.team) && ent.team == self.team) {
+  if(level.teamBased && isDefined(ent.team) && ent.team == self.team)
     return false;
-  }
 
-  if(isDefined(ent.team) && ent.team == "spectator") {
+  if(isDefined(ent.team) && ent.team == "spectator")
     return false;
-  }
 
-  if(IsPlayer(ent) && ent == self.owner) {
+  if(IsPlayer(ent) && ent == self.owner)
     return false;
-  }
 
-  if(IsPlayer(ent) && isDefined(ent.spawntime) && (GetTime() - ent.spawntime) / 1000 <= 5) {
+  if(IsPlayer(ent) && isDefined(ent.spawntime) && (GetTime() - ent.spawntime) / 1000 <= 5)
     return false;
-  }
 
-  if(IsPlayer(ent) && ent _hasPerk("specialty_blindeye")) {
+  if(IsPlayer(ent) && ent _hasPerk("specialty_blindeye"))
     return false;
-  }
 
-  if(DistanceSquared(ent.origin, self.origin) > level.ballDroneSettings[self.vehicle.ballDroneType].visual_range_sq) {
+  if(DistanceSquared(ent.origin, self.origin) > level.ballDroneSettings[self.vehicle.ballDroneType].visual_range_sq)
     return false;
-  }
 
   turret_point = self GetTagOrigin("tag_flash");
 

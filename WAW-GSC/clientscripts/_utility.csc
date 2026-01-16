@@ -12,9 +12,8 @@ error(message) {
 }
 
 getstruct(name, type) {
-  if(!isDefined(level.struct_class_names)) {
+  if(!isDefined(level.struct_class_names))
     return undefined;
-  }
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
     println("**** Getstruct returns undefined on " + name + " : " + " type.");
@@ -38,7 +37,7 @@ getstructarray(name, type) {
 }
 
 play_sound_in_space(localClientNum, alias, origin) {
-  playSound(localClientNum, alias, origin);
+  PlaySound(localClientNum, alias, origin);
 }
 
 vectorScale(vector, scale) {
@@ -54,26 +53,22 @@ vector_multiply(vec, dif) {
 array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
   if(isDefined(var3)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2, var3);
-    }
     return;
   }
   if(isDefined(var2)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2);
-    }
     return;
   }
   if(isDefined(var1)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1);
-    }
     return;
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]]();
-  }
 }
 
 registerSystem(sSysName, cbFunc) {
@@ -88,7 +83,7 @@ registerSystem(sSysName, cbFunc) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._systemStates[sSysName] = spawnStruct();
+    level._systemStates[sSysName] = spawnstruct();
     level._systemStates[sSysName].callback = cbFunc;
   }
 }
@@ -105,11 +100,11 @@ loop_fx_sound(clientNum, alias, origin, ender) {
     self endon(ender);
   }
   setfakeentorg(clientNum, entId, origin);
-  playLoopSound(clientNum, entId, alias);
+  playloopsound(clientNum, entId, alias);
 }
 
 waitforclient(client) {
-  while(!clienthassnapshot(client)) {
+  while (!clienthassnapshot(client)) {
     wait(0.01);
   }
   syncsystemstates(client);
@@ -117,29 +112,26 @@ waitforclient(client) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = AnglesToForward(start_angles);
   dot = VectorDot(forward, normal);
   return dot >= fov;
 }
 
 add_to_array(array, ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return array;
-  }
-  if(!isDefined(array)) {
+  if(!isDefined(array))
     array[0] = ent;
-  } else {
+  else
     array[array.size] = ent;
-  }
   return array;
 }
 
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(level._optionalStepEffects)) {
+  if(!isDefined(level._optionalStepEffects))
     level._optionalStepEffects = [];
-  }
   level._optionalStepEffects[level._optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }
@@ -162,7 +154,7 @@ reportExploderIds() {
   }
   keys = GetArrayKeys(level._exploder_ids);
   println("Client Exploder dictionary : ");
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     println(keys[i] + " : " + level._exploder_ids[keys[i]]);
   }
 }
@@ -174,17 +166,17 @@ init_exploders() {
   println("Client : s_bm " + ents.size);
   smodels = GetStructArray("script_model", "classname");
   println("Client : sm " + smodels.size);
-  for(i = 0; i < smodels.size; i++) {
+  for (i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
   }
-  for(i = 0; i < ents.size; i++) {
+  for (i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
     }
   }
   potentialExploders = GetStructArray("script_brushmodel", "classname");
   println("Client : Potential exploders from script_brushmodel " + potentialExploders.size);
-  for(i = 0; i < potentialExploders.size; i++) {
+  for (i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
@@ -194,7 +186,7 @@ init_exploders() {
   }
   potentialExploders = GetStructArray("script_model", "classname");
   println("Client : Potential exploders from script_model " + potentialExploders.size);
-  for(i = 0; i < potentialExploders.size; i++) {
+  for (i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
@@ -202,7 +194,7 @@ init_exploders() {
       script_exploders[script_exploders.size] = potentialExploders[i];
     }
   }
-  for(i = 0; i < level.struct.size; i++) {
+  for (i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].script_prefab_exploder)) {
       level.struct[i].script_exploder = level.struct[i].script_prefab_exploder;
     }
@@ -218,7 +210,7 @@ init_exploders() {
   acceptableTargetnames["exploderchunk"] = true;
   acceptableTargetnames["exploder"] = true;
   exploder_id = 1;
-  for(i = 0; i < script_exploders.size; i++) {
+  for (i = 0; i < script_exploders.size; i++) {
     exploder = script_exploders[i];
     ent = createExploder(exploder.script_fxid);
     ent.v = [];
@@ -300,7 +292,7 @@ init_exploders() {
       ent.v["exploder_type"] = "normal";
     }
   }
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(ent.v["type"] != "exploder") {
       continue;
@@ -314,23 +306,23 @@ init_exploders() {
 playfx_for_all_local_clients(fx_id, pos, forward_vec, up_vec) {
   localPlayers = getlocalplayers();
   if(isDefined(up_vec)) {
-    for(i = 0; i < localPlayers.size; i++) {
-      playFX(i, fx_id, pos, forward_vec, up_vec);
+    for (i = 0; i < localPlayers.size; i++) {
+      playfx(i, fx_id, pos, forward_vec, up_vec);
     }
   } else if(isDefined(forward_vec)) {
-    for(i = 0; i < localPlayers.size; i++) {
-      playFX(i, fx_id, pos, forward_vec);
+    for (i = 0; i < localPlayers.size; i++) {
+      playfx(i, fx_id, pos, forward_vec);
     }
   } else {
-    for(i = 0; i < localPlayers.size; i++) {
-      playFX(i, fx_id, pos);
+    for (i = 0; i < localPlayers.size; i++) {
+      playfx(i, fx_id, pos);
     }
   }
 }
 
 play_sound_on_client(sound_alias) {
   players = GetLocalPlayers();
-  playSound(0, sound_alias, players[0].origin);
+  PlaySound(0, sound_alias, players[0].origin);
 }
 
 loop_sound_on_client(sound_alias, min_delay, max_delay, end_on) {
@@ -338,7 +330,7 @@ loop_sound_on_client(sound_alias, min_delay, max_delay, end_on) {
   if(isDefined(end_on)) {
     level endon(end_on);
   }
-  for(;;) {
+  for (;;) {
     play_sound_on_client(sound_alias);
     wait(min_delay + RandomFloat(max_delay));
   }
@@ -349,7 +341,7 @@ add_listen_thread(wait_till, func, param1, param2, param3, param4, param5) {
 }
 
 add_listen_thread_internal(wait_till, func, param1, param2, param3, param4, param5) {
-  for(;;) {
+  for (;;) {
     level waittill(wait_till);
     if(isDefined(param5)) {
       level thread[[func]](param1, param2, param3, param4, param5);

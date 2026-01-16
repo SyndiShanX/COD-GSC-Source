@@ -14,12 +14,12 @@
 #namespace zm_island_side_ee_spore_hallucinations;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_spore_hallucinations", &__init__, undefined, undefined);
+  system::register("zm_island_side_ee_spore_hallucinations", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int", &hallucinate_bloody_walls, 0, 0);
-  clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int", &hallucinate_spooky_sounds, 0, 0);
+  clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int", & hallucinate_bloody_walls, 0, 0);
+  clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int", & hallucinate_spooky_sounds, 0, 0);
   var_68003f28 = findvolumedecalindexarray("side_ee_horror_room_lab_a");
   var_da07ae63 = findvolumedecalindexarray("side_ee_horror_room_lab_b");
   var_b40533fa = findvolumedecalindexarray("side_ee_horror_room_operation");
@@ -32,31 +32,31 @@ function __init__() {
 
 function hallucinate_bloody_walls(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self thread lui::screen_fade_in(1, "white");
-  if(isDefined(newval) && newval) {
+  if(isdefined(newval) && newval) {
     foreach(var_78960d69 in level.var_d76c60c4) {
       unhidevolumedecal(var_78960d69);
     }
-    playSound(0, "zmb_spore_hallucinate_bloody_start", (0, 0, 0));
+    playsound(0, "zmb_spore_hallucinate_bloody_start", (0, 0, 0));
     self thread function_13d64112();
   } else {
     foreach(var_78960d69 in level.var_d76c60c4) {
       hidevolumedecal(var_78960d69);
     }
-    playSound(0, "zmb_spore_hallucinate_bloody_end", (0, 0, 0));
+    playsound(0, "zmb_spore_hallucinate_bloody_end", (0, 0, 0));
     level notify("hash_dad9c949");
   }
 }
 
 function hallucinate_spooky_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(newval) && newval) {
-    playSound(0, "zmb_spore_hallucinate_start", (0, 0, 0));
-    if(!isDefined(self.var_dafc6232)) {
-      self.var_dafc6232 = self playLoopSound("zmb_spore_hallucinate_lp_1", 2);
+  if(isdefined(newval) && newval) {
+    playsound(0, "zmb_spore_hallucinate_start", (0, 0, 0));
+    if(!isdefined(self.var_dafc6232)) {
+      self.var_dafc6232 = self playloopsound("zmb_spore_hallucinate_lp_1", 2);
     }
     self thread function_13d64112();
   } else {
-    playSound(0, "zmb_spore_hallucinate_end", (0, 0, 0));
-    if(isDefined(self.var_dafc6232)) {
+    playsound(0, "zmb_spore_hallucinate_end", (0, 0, 0));
+    if(isdefined(self.var_dafc6232)) {
       self stoploopsound(self.var_dafc6232, 2);
       self.var_dafc6232 = undefined;
     }
@@ -69,8 +69,8 @@ function function_13d64112() {
   self endon("hash_dad9c949");
   level endon("hash_dad9c949");
   self endon("disconnect");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     wait(randomintrange(1, 8));
-    self playSound(0, "zmb_spore_hallucinate_whisper");
+    self playsound(0, "zmb_spore_hallucinate_whisper");
   }
 }

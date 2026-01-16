@@ -12,23 +12,19 @@ init_animtree() {
 }
 
 add_fx_element(index, fx_element, tag_name, min_freq, max_freq) {
-  if(!isDefined(level.mechz_clientside_fx)) {
+  if(!isDefined(level.mechz_clientside_fx))
     level.mechz_clientside_fx = [];
-  }
 
-  if(!isDefined(level.mechz_clientside_fx_inst)) {
+  if(!isDefined(level.mechz_clientside_fx_inst))
     level.mechz_clientside_fx_inst = [];
-  }
 
-  if(!isDefined(level.mechz_clientside_fx[index])) {
+  if(!isDefined(level.mechz_clientside_fx[index]))
     level.mechz_clientside_fx[index] = [];
-  }
 
-  if(!isDefined(level.mechz_clientside_fx_inst[index])) {
+  if(!isDefined(level.mechz_clientside_fx_inst[index]))
     level.mechz_clientside_fx_inst[index] = [];
-  }
 
-  new_fx_struct = spawnStruct();
+  new_fx_struct = spawnstruct();
   new_fx_struct.fx_element = loadfx(fx_element);
   new_fx_struct.tag_name = tag_name;
   new_fx_struct.min_freq = min_freq;
@@ -74,13 +70,12 @@ init() {
 setup_fx(localclientnum, index, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!is_true(self.fx_initialized)) {
     self.fx_initialized = 1;
-    self.smoke_fx = playFXOnTag(localclientnum, level._effect["mech_exhaust_smoke"], self, "tag_back_exhaust_FX");
+    self.smoke_fx = playfxontag(localclientnum, level._effect["mech_exhaust_smoke"], self, "tag_back_exhaust_FX");
     self setsoundentcontext("f35", "interior");
   }
 
-  if(index == 10) {
+  if(index == 10)
     self setsoundentcontext("f35", "exterior");
-  }
 
   for(i = 0; i < level.mechz_clientside_fx[index].size; i++) {
     fx_struct = level.mechz_clientside_fx[index][i];
@@ -120,17 +115,15 @@ mechz_handle_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       continue;
     }
 
-    if(!set_in_new && set_in_old) {
+    if(!set_in_new && set_in_old)
       self thread cleanup_fx(localclientnum, i, bnewent, binitialsnap, fieldname, bwasdemojump);
-    }
   }
 
   if(!newval && is_true(self.fx_initialized)) {
     self.fx_initialized = 0;
 
-    if(isDefined(self.smoke_fx)) {
+    if(isDefined(self.smoke_fx))
       deletefx(localclientnum, self.smoke_fx);
-    }
   }
 }
 
@@ -139,26 +132,25 @@ mechz_do_manual_looping_fx(localclientnum, script_id, tag_name, fx_element, min_
   self endon("death");
 
   if(!isDefined(min_wait)) {
-    playFXOnTag(localclientnum, fx_element, self, tag_name);
+    playfxontag(localclientnum, fx_element, self, tag_name);
     return;
   }
 
-  if(!isDefined(max_wait)) {
+  if(!isDefined(max_wait))
     max_wait = min_wait;
-  }
 
   while(true) {
     if(!isDefined(self)) {
       return;
     }
-    playFXOnTag(localclientnum, fx_element, self, tag_name);
+    playfxontag(localclientnum, fx_element, self, tag_name);
     waitrealtime(randomfloatrange(min_wait, max_wait));
   }
 }
 
 mechz_do_auto_looping_fx(localclientnum, index, tag_name, fx_element) {
   curr_size = level.mechz_clientside_fx_inst[index].size;
-  level.mechz_clientside_fx_inst[index][curr_size] = playFXOnTag(localclientnum, fx_element, self, tag_name);
+  level.mechz_clientside_fx_inst[index][curr_size] = playfxontag(localclientnum, fx_element, self, tag_name);
 }
 
 mechz_screen_shake_loop(localclientnum) {
@@ -198,9 +190,8 @@ mechzfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
 
         playerlocalclientnum = players[i] getlocalclientnumber();
 
-        if(isDefined(playerlocalclientnum)) {
+        if(isDefined(playerlocalclientnum))
           playrumbleonposition(playerlocalclientnum, "shotgun_fire", self.origin);
-        }
 
         continue;
       }
@@ -213,18 +204,16 @@ mechzfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
 
         playerlocalclientnum = players[i] getlocalclientnumber();
 
-        if(isDefined(playerlocalclientnum)) {
+        if(isDefined(playerlocalclientnum))
           playrumbleonposition(playerlocalclientnum, "mechz_footsteps", self.origin);
-        }
       }
     }
   }
 
-  if(bone == "j_ball_ri") {
-    playFXOnTag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_RI");
-  } else if(bone == "j_ball_le") {
-    playFXOnTag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_LE");
-  }
+  if(bone == "j_ball_ri")
+    playfxontag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_RI");
+  else if(bone == "j_ball_le")
+    playfxontag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_LE");
 
   footstepdoeverything();
 }
@@ -236,9 +225,8 @@ prevent_camshake_stacking() {
 }
 
 registermechzfootstepcb(aitype, func) {
-  if(!isDefined(level._footstepcbfuncs)) {
+  if(!isDefined(level._footstepcbfuncs))
     level._footstepcbfuncs = [];
-  }
 
   if(isDefined(level._footstepcbfuncs[aitype])) {
     println("Attempting to register footstep callback function for ai type " + aitype + " multiple times.");
@@ -250,9 +238,8 @@ registermechzfootstepcb(aitype, func) {
 }
 
 sndplayfxloops(localclientnum, index, tag_name) {
-  if(index == 6) {
+  if(index == 6)
     self thread sndflamethrower_start(localclientnum, index, tag_name);
-  }
 }
 
 sndflamethrower_start(localclientnum, index, tag_name) {
@@ -260,15 +247,15 @@ sndflamethrower_start(localclientnum, index, tag_name) {
   sndorigin = self gettagorigin(tag_name);
   sndent = spawn(0, sndorigin, "script_origin");
   sndent linkto(self, tag_name);
-  sndent playSound(0, "zmb_ai_mechz_flame_start");
-  sndent playLoopSound("zmb_ai_mechz_flame_loop", 0.6);
+  sndent playsound(0, "zmb_ai_mechz_flame_start");
+  sndent playloopsound("zmb_ai_mechz_flame_loop", 0.6);
   self thread sndflamethrower_stop(sndent, index);
 }
 
 sndflamethrower_stop(ent, index) {
   notify_name = "kill_fx_" + index + "_" + self getentitynumber();
   self waittill(notify_name);
-  ent playSound(0, "zmb_ai_mechz_flame_stop");
+  ent playsound(0, "zmb_ai_mechz_flame_stop");
   ent stoploopsound(0.25);
   wait 1;
   ent delete();

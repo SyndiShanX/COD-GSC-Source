@@ -8,6 +8,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
+
 #namespace archetype_secondary_animations;
 
 autoexec main() {
@@ -56,29 +57,29 @@ private on_entity_shutdown(localclientnum) {
 buildandvalidatefacialanimationlist(localclientnum) {
   assert(!isDefined(level.__facialanimationslist));
   level.__facialanimationslist = [];
-  level.__facialanimationslist[# "human"] = [];
-  level.__facialanimationslist[# "human"][# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", # "ai_t8_face_hero_generic_idle_2", # "ai_t8_face_hero_generic_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", # "ai_t8_face_hero_aim_idle_2", # "ai_t8_face_hero_aim_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", # "ai_t8_face_hero_aim_fire_2", # "ai_t8_face_hero_aim_fire_3");
-  level.__facialanimationslist[# "human"][# "death"] = array(#"ai_t8_face_hero_dth_1", # "ai_t8_face_hero_dth_2", # "ai_t8_face_hero_dth_3");
-  level.__facialanimationslist[# "human"][# "melee"] = array(#"ai_t8_face_hero_melee_1");
-  level.__facialanimationslist[# "human"][# "pain"] = array(#"ai_t8_face_hero_pain_1");
-  level.__facialanimationslist[# "human"][# "animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
-  level.__facialanimationslist[# "zombie"] = [];
-  level.__facialanimationslist[# "zombie"][# "combat"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "combat_aim"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "combat_shoot"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "death"] = array(#"ai_t8_face_zombie_generic_death_01");
-  level.__facialanimationslist[# "zombie"][# "melee"] = array(#"ai_t8_face_zombie_generic_attack_01", # "ai_t8_face_zombie_generic_attack_02");
-  level.__facialanimationslist[# "zombie"][# "pain"] = array(#"ai_t8_face_zombie_generic_pain_01");
-  level.__facialanimationslist[# "zombie"][# "animscripted"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"human"] = [];
+  level.__facialanimationslist[#"human"][#"combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", #"ai_t8_face_hero_aim_idle_2", #"ai_t8_face_hero_aim_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2", #"ai_t8_face_hero_aim_fire_3");
+  level.__facialanimationslist[#"human"][#"death"] = array(#"ai_t8_face_hero_dth_1", #"ai_t8_face_hero_dth_2", #"ai_t8_face_hero_dth_3");
+  level.__facialanimationslist[#"human"][#"melee"] = array(#"ai_t8_face_hero_melee_1");
+  level.__facialanimationslist[#"human"][#"pain"] = array(#"ai_t8_face_hero_pain_1");
+  level.__facialanimationslist[#"human"][#"animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
+  level.__facialanimationslist[#"zombie"] = [];
+  level.__facialanimationslist[#"zombie"][#"combat"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"combat_aim"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"combat_shoot"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"death"] = array(#"ai_t8_face_zombie_generic_death_01");
+  level.__facialanimationslist[#"zombie"][#"melee"] = array(#"ai_t8_face_zombie_generic_attack_01", #"ai_t8_face_zombie_generic_attack_02");
+  level.__facialanimationslist[#"zombie"][#"pain"] = array(#"ai_t8_face_zombie_generic_pain_01");
+  level.__facialanimationslist[#"zombie"][#"animscripted"] = array(#"ai_t8_face_zombie_generic_idle_01");
   deathanims = [];
 
-  foreach(animation in level.__facialanimationslist[# "human"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"human"][#"death"]) {
     array::add(deathanims, animation);
   }
 
-  foreach(animation in level.__facialanimationslist[# "zombie"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"zombie"][#"death"]) {
     array::add(deathanims, animation);
   }
 
@@ -116,7 +117,7 @@ private function_176c97f8(substate) {
     return false;
   }
 
-  return substate == # "pain" || substate == # "inplace_pain" || substate == # "pain_intro" || substate == # "pain_outro" || substate == # "painrecovery" || substate == # "pronepain";
+  return substate == #"pain" || substate == #"inplace_pain" || substate == #"pain_intro" || substate == #"pain_outro" || substate == #"painrecovery" || substate == #"pronepain";
 }
 
 private function_f5dde44(substate) {
@@ -124,11 +125,11 @@ private function_f5dde44(substate) {
     return false;
   }
 
-  return substate == # "melee" || substate == # "charge_melee" || substate == # "hash_48dda7ed88efe32f";
+  return substate == #"melee" || substate == #"charge_melee" || substate == #"hash_48dda7ed88efe32f";
 }
 
 private secondaryfacialanimationthink(localclientnum) {
-  if(!(isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "zombie"))) {
+  if(!(isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"zombie"))) {
     assert(0, "<dev string:x9d>");
     return;
   }
@@ -138,7 +139,7 @@ private secondaryfacialanimationthink(localclientnum) {
   self._currentfacestate = "inactive";
 
   while(isDefined(self.archetype)) {
-    if(self.archetype == # "human" && self clientfield::get("facial_dial")) {
+    if(self.archetype == #"human" && self clientfield::get("facial_dial")) {
       self._currentfacestate = "inactive";
       self clearcurrentfacialanim(localclientnum);
       wait 0.5;
@@ -150,9 +151,9 @@ private secondaryfacialanimationthink(localclientnum) {
     forcenewanim = 0;
 
     switch (asmstatus) {
-      case # "asm_status_terminated":
+      case #"asm_status_terminated":
         return;
-      case # "asm_status_inactive":
+      case #"asm_status_inactive":
         if(isDefined(animoverride)) {
           scriptedanim = self getprimarydeltaanim();
 
@@ -270,8 +271,8 @@ private applydeathanim(localclientnum) {
   }
 
   if(self hasdobj(localclientnum) && self hasanimtree()) {
-    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][# "death"])) {
-      animtoplay = array::random(level.__facialanimationslist[self.archetype][# "death"]);
+    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][#"death"])) {
+      animtoplay = array::random(level.__facialanimationslist[self.archetype][#"death"]);
       animoverride = self getfacialanimoverride(localclientnum);
 
       if(isDefined(animoverride)) {

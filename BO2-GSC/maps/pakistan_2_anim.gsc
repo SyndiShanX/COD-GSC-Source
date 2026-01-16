@@ -425,9 +425,8 @@ stat_vo_check_1(isi_leader) {
     if(level.str_hud_current_state != "recording") {
       wait 1;
 
-      if(level.str_hud_current_state != "recording") {
+      if(level.str_hud_current_state != "recording")
         level notify("stat_vo_check_1_failed");
-      }
     }
 
     wait 0.05;
@@ -445,9 +444,8 @@ stat_vo_check_2a(menendez) {
   wait 0.5;
 
   while(isDefined(menendez.is_talking)) {
-    if(level.str_hud_current_state != "recording") {
+    if(level.str_hud_current_state != "recording")
       level notify("stat_vo_check_2a_failed");
-    }
 
     wait 0.05;
   }
@@ -460,9 +458,8 @@ stat_vo_check_2b(defalco) {
   wait 0.5;
 
   while(isDefined(defalco.is_talking)) {
-    if(level.str_hud_current_state != "recording") {
+    if(level.str_hud_current_state != "recording")
       level notify("stat_vo_check_2b_failed");
-    }
 
     wait 0.05;
   }
@@ -482,9 +479,8 @@ stat_vo_check_3(menendez) {
   wait 0.5;
 
   while(isDefined(menendez.is_talking)) {
-    if(level.str_hud_current_state != "recording") {
+    if(level.str_hud_current_state != "recording")
       level notify("stat_vo_check_3_failed");
-    }
 
     wait 0.05;
   }
@@ -501,12 +497,12 @@ door_shut_rumble(truck) {
 }
 
 rooftop_melee_bloodfx(guard) {
-  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_Head");
+  playfxontag(getfx("melee_knife_blood_player"), guard, "J_Head");
   level.player playrumbleonentity("grenade_rumble");
   wait 1;
-  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_NECK");
+  playfxontag(getfx("melee_knife_blood_player"), guard, "J_NECK");
   level waittill("knife_pullout");
-  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_NECK");
+  playfxontag(getfx("melee_knife_blood_player"), guard, "J_NECK");
 }
 
 rooftop_melee_knifeout(player) {
@@ -515,7 +511,7 @@ rooftop_melee_knifeout(player) {
 }
 
 tower_guard_bloodfx(guard) {
-  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_Head");
+  playfxontag(getfx("melee_knife_blood_player"), guard, "J_Head");
 }
 
 incendiary_grenade_explosion(e_temp) {

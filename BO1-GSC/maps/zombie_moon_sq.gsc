@@ -79,7 +79,7 @@ give_perk_reward() {
   }
   for(i = 0; i < level._sq_perk_array.size; i++) {
     if(!self HasPerk(level._sq_perk_array[i])) {
-      self playSound("evt_sq_bag_gain_perks");
+      self playsound("evt_sq_bag_gain_perks");
       self maps\_zombiemode_perks::give_perk(level._sq_perk_array[i]);
       wait(0.25);
     }
@@ -155,7 +155,7 @@ rocket_raise(player_num) {
   for(i = 0; i < rockets.size; i++) {
     level waittill("rl");
     level clientnotify("R_R");
-    rockets[i] playSound("evt_rocket_move_up");
+    rockets[i] playsound("evt_rocket_move_up");
     s = getstruct(rockets[i].target, "targetname");
     rockets[i] moveTo(s.origin, 4);
     rockets[i] RotateTo((0, 0, 0), 4);
@@ -178,7 +178,7 @@ nml_show_hide() {
 launch() {
   level clientnotify("R_L");
   wait(RandomFloatRange(0.1, 1));
-  self playSound("evt_rocket_launch");
+  self playsound("evt_rocket_launch");
   if(!isDefined(level._n_rockets)) {
     level._n_rockets = 0;
   }
@@ -196,7 +196,7 @@ launch() {
     origin_animate = spawn("script_model", start.origin);
     origin_animate setModel("tag_origin_animate");
     self LinkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-    playFXOnTag(level._effect["rocket_booster"], self, "tag_origin");
+    PlayFXOnTag(level._effect["rocket_booster"], self, "tag_origin");
     vehicle = SpawnVehicle("tag_origin", "rocket_mover", "misc_freefall", start.origin, start.angles);
     origin_animate LinkTo(vehicle);
     vehicle maps\_vehicle::getonpath(start);

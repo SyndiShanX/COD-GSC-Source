@@ -13,11 +13,10 @@
 #include common_scripts\utility;
 
 main(range, freq, wavelength, rotation, origin) {
-  floaters = getEntArray("script_floater", "targetname");
+  floaters = getentarray("script_floater", "targetname");
 
-  if(!floaters.size) {
+  if(!floaters.size)
     return;
-  }
 
   //defaults
   _range = 10;
@@ -27,25 +26,19 @@ main(range, freq, wavelength, rotation, origin) {
   _rotation = 10;
 
   //intended variables
-  if(isDefined(range)) {
+  if(isdefined(range))
     _range = range;
-  }
-  if(isDefined(freq)) {
+  if(isdefined(freq))
     _freq = freq;
-  }
-  if(isDefined(wavelength)) {
+  if(isdefined(wavelength))
     _wavelength = wavelength;
-  }
-  if(isDefined(origin)) {
+  if(isdefined(origin))
     _origin = origin;
-  }
-  if(isDefined(rotation)) {
+  if(isdefined(rotation))
     _rotation = rotation;
-  }
 
-  for(i = 0; i < floaters.size; i++) {
+  for (i = 0; i < floaters.size; i++)
     floaters[i] thread floater_think(_range, _freq, _wavelength, _rotation, _origin);
-  }
 }
 
 floater_think(range, freq, wavelength, rotation, origin) {
@@ -63,9 +56,8 @@ floater_think(range, freq, wavelength, rotation, origin) {
   frac = sin(degrees);
 
   //are we going up or down	
-  if(cos(degrees) < 0) {
+  if(cos(degrees) < 0)
     self.range = -1 * self.range;
-  }
 
   org = spawn("script_origin", center);
   self linkto(org);
@@ -84,7 +76,7 @@ floater_bob(frac, org) {
   self endon("stop_float_script");
   wait(abval(self.time * frac));
 
-  while(1) {
+  while (1) {
     self.rangles = vector_multiply(self.rangles, -1);
     org rotateto(self.rangles, self.time, self.acc, self.acc);
     org waittill("rotatedone");
@@ -97,7 +89,7 @@ floater_move(frac, org) {
   wait(abval(self.time * frac));
   org moveZ(self.range * .5, self.time * .5, self.acc, self.acc);
 
-  while(1) {
+  while (1) {
     org waittill("movedone");
     self.range = -1 * self.range;
     org moveZ(self.range, self.time, self.acc, self.acc);
@@ -105,9 +97,8 @@ floater_move(frac, org) {
 }
 
 abval(num) {
-  if(num < 0) {
+  if(num < 0)
     return (-1 * num);
-  } else {
+  else
     return num;
-  }
 }

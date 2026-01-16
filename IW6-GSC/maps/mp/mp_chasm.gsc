@@ -187,9 +187,8 @@ falling_elevator() {
   if(!isDefined(elevator) || !isDefined(cables)) {
     return;
   }
-  while(!isDefined(elevator.linked_ents)) {
+  while(!isDefined(elevator.linked_ents))
     wait .05;
-  }
 
   elevator.state = 1;
 
@@ -224,9 +223,8 @@ falling_elevator() {
     elevator.state++;
 
     elevator notify("trigger");
-    if(isDefined(cables)) {
+    if(isDefined(cables))
       cables notify("trigger");
-    }
 
     if(elevator.state == 2) {
       elevator PlaySoundOnMovingEnt("scn_elevator_fall_move");
@@ -265,9 +263,8 @@ falling_elevator() {
 }
 
 explosive_damage_watch(ent, note) {
-  if(!isDefined(note)) {
+  if(!isDefined(note))
     note = "explosive_damage";
-  }
 
   ent setCanDamage(true);
   while(1) {
@@ -306,9 +303,8 @@ falling_elevator_cables(cables) {
 }
 
 is_explosive(cause) {
-  if(!isDefined(cause)) {
+  if(!isDefined(cause))
     return false;
-  }
 
   cause = tolower(cause);
   switch (cause) {

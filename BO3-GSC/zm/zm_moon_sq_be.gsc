@@ -27,27 +27,27 @@
 
 function init() {
   level.motivational_struct = struct::get("struct_motivation", "targetname");
-  assert(isDefined(level.motivational_struct.name));
-  if(!isDefined(level.motivational_struct)) {
+  assert(isdefined(level.motivational_struct.name));
+  if(!isdefined(level.motivational_struct)) {
     println("");
     return;
   }
   level._be_start = strtok(level.motivational_struct.script_parameters, ",");
-  for(i = 0; i < level._be_start.size; i++) {
+  for (i = 0; i < level._be_start.size; i++) {
     level flag::init(level._be_start[i]);
   }
   level._be_complete = strtok(level.motivational_struct.script_flag, ",");
-  for(j = 0; j < level._be_complete.size; j++) {
+  for (j = 0; j < level._be_complete.size; j++) {
     if(!level flag::exists(level._be_complete[j])) {
       level flag::init(level._be_complete[j]);
     }
   }
   level.motivational_array = strtok(level.motivational_struct.script_string, ",");
-  level._sliding_doors = getEntArray("zombie_door_airlock", "script_noteworthy");
-  level._sliding_doors = arraycombine(level._sliding_doors, getEntArray("zombie_door", "targetname"), 0, 0);
+  level._sliding_doors = getentarray("zombie_door_airlock", "script_noteworthy");
+  level._sliding_doors = arraycombine(level._sliding_doors, getentarray("zombie_door", "targetname"), 0, 0);
   level._my_speed = 12;
-  zm_sidequests::declare_sidequest_stage("be", "stage_one", &init_stage_1, &stage_logic_1, &exit_stage_1);
-  zm_sidequests::declare_sidequest_stage("be", "stage_two", &init_stage_2, &stage_logic_2, &exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("be", "stage_one", & init_stage_1, & stage_logic_1, & exit_stage_1);
+  zm_sidequests::declare_sidequest_stage("be", "stage_two", & init_stage_2, & stage_logic_2, & exit_stage_2);
 }
 
 function init_stage_2() {}
@@ -56,21 +56,21 @@ function stage_logic_2() {
   org = level._be.origin;
   angles = level._be.angles;
   exploder::exploder("fxexp_405");
-  level._be playSound("evt_be_insert");
+  level._be playsound("evt_be_insert");
   level._be stopanimscripted();
   level._be unlink();
   level._be dontinterpolate();
   level._be.origin = org;
   level._be.angles = angles;
   level._be thread wait_for_close_player();
-  if(isDefined(level._be_vehicle)) {
+  if(isdefined(level._be_vehicle)) {
     level._be_vehicle delete();
   }
-  if(isDefined(level._be_origin_animate)) {
+  if(isdefined(level._be_origin_animate)) {
     level._be_origin_animate stopanimscripted();
     level._be_origin_animate delete();
   }
-  zm_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, &be2_validation);
+  zm_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, & be2_validation);
   level._be_pos = level._be.origin;
   level waittill("be2_validation");
   zm_weap_quantum_bomb::quantum_bomb_deregister_result("be2");
@@ -78,7 +78,7 @@ function stage_logic_2() {
   level._be dontinterpolate();
   level._be.origin = s.origin;
   level.teleport_target_trigger = spawn("trigger_radius", s.origin + (vectorscale((0, 0, -1), 70)), 0, 125, 100);
-  level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
+  level.black_hole_bomb_loc_check_func = & bhb_teleport_loc_check;
   level waittill("be2_tp_done");
   players = getplayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 2);
@@ -92,9 +92,9 @@ function wait_for_close_player() {
   level endon("be2_validation");
   self endon("death");
   wait(25);
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) <= 62500) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest8", 0);
         return;
@@ -105,7 +105,7 @@ function wait_for_close_player() {
 }
 
 function bhb_teleport_loc_check(grenade, model, info) {
-  if(isDefined(level.teleport_target_trigger) && grenade istouching(level.teleport_target_trigger)) {
+  if(isdefined(level.teleport_target_trigger) && grenade istouching(level.teleport_target_trigger)) {
     level._be clientfield::set("toggle_black_hole_deployed", 1);
     level thread teleport_target(grenade, level._be);
     return true;
@@ -126,10 +126,10 @@ function teleport_target(grenade, model) {
   wait(0.5);
   model stoploopsound(1);
   wait(0.5);
-  for(i = 0; i < teleport_targets.size; i++) {
-    playFX(level._effect["black_hole_bomb_event_horizon"], teleport_targets[i].origin + vectorscale((0, 0, 1), 2500));
+  for (i = 0; i < teleport_targets.size; i++) {
+    playfx(level._effect["black_hole_bomb_event_horizon"], teleport_targets[i].origin + vectorscale((0, 0, 1), 2500));
   }
-  model playSound("zmb_gersh_teleporter_go");
+  model playsound("zmb_gersh_teleporter_go");
   wait(2);
   level notify("be2_tp_done");
 }
@@ -151,7 +151,7 @@ function init_stage_1() {
 
 function stage_logic_1() {
   level flag::wait_till("complete_be_1");
-  level._be playSound("evt_be_insert");
+  level._be playsound("evt_be_insert");
   exploder::exploder("fxexp_405");
   level thread play_vox_on_closest_player(6);
   zm_sidequests::stage_completed("be", "stage_one");
@@ -161,7 +161,7 @@ function exit_stage_1(success) {}
 
 function moon_be_start_capture() {
   level endon("end_game");
-  while(!level flag::get(level._be_complete[0])) {
+  while (!level flag::get(level._be_complete[0])) {
     if(level flag::get("teleporter_breached") && !level flag::get("teleporter_blocked")) {
       level flag::set(level._be_complete[0]);
     }
@@ -174,7 +174,7 @@ function moon_be_activate() {
   start = struct::get("struct_be_start", "targetname");
   road_start = getvehiclenode("vs_stage_1a", "targetname");
   level.var_e9ab794e = 0;
-  if(!isDefined(road_start)) {
+  if(!isdefined(road_start)) {
     println("");
     wait(1);
     return;
@@ -183,7 +183,7 @@ function moon_be_activate() {
   level._be notsolid();
   level._be useanimtree($generic);
   level._be.animname = "_be_";
-  level._be playLoopSound("evt_sq_blackegg_loop", 1);
+  level._be playloopsound("evt_sq_blackegg_loop", 1);
   level._be.stopped = 0;
   level._be thread waittill_player_is_close();
   origin_animate = util::spawn_model("tag_origin_animate", level._be.origin);
@@ -196,11 +196,11 @@ function moon_be_activate() {
   level._be_vehicle attachpath(road_start);
   d_trig = spawn("trigger_damage", level._be_vehicle.origin, 0, 32, 72);
   start = 0;
-  while(!start) {
+  while (!start) {
     d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isplayer(attacker) && moon_be_move(road_start.script_string)) {
       if(moon_be_move(dmg_type)) {
-        level._be playSound("evt_sq_blackegg_activate");
+        level._be playsound("evt_sq_blackegg_activate");
         attacker thread play_be_hit_vox(1);
         start = 1;
       }
@@ -218,26 +218,26 @@ function moon_be_think() {
   self endon("be_stage_one_over");
   vox_num = 2;
   vox_dude = undefined;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("reached_node", node);
     if(level.var_e9ab794e) {
       nd_end = getvehiclenode(node.target, "targetname");
       node = nd_end;
     }
-    if(isDefined(node.script_sound)) {
-      level._be playSound(node.script_sound);
+    if(isdefined(node.script_sound)) {
+      level._be playsound(node.script_sound);
     }
-    if(isDefined(node.script_flag)) {
+    if(isdefined(node.script_flag)) {
       level flag::set(node.script_flag);
     }
-    if(isDefined(node.script_string)) {
+    if(isdefined(node.script_string)) {
       self setspeedimmediate(0);
-      level._be playSound("evt_sq_blackegg_stop");
+      level._be playsound("evt_sq_blackegg_stop");
       self thread moon_be_stop_anim();
       d_trig = spawn("trigger_damage", self.origin, 0, 32, 72);
       motivation = 0;
-      while(!motivation) {
-        if(isDefined(node.script_string) && node.script_string == "zap") {
+      while (!motivation) {
+        if(isdefined(node.script_string) && node.script_string == "zap") {
           zm_weap_microwavegun::add_microwaveable_object(d_trig);
           d_trig waittill("microwaved", vox_dude);
           zm_weap_microwavegun::remove_microwaveable_object(d_trig);
@@ -252,51 +252,51 @@ function moon_be_think() {
         self solid();
         wait(0.05);
       }
-      if(isDefined(vox_dude)) {
+      if(isdefined(vox_dude)) {
         vox_dude thread play_be_hit_vox(vox_num);
         vox_num++;
       }
-      level._be playSound("evt_sq_blackegg_activate");
+      level._be playsound("evt_sq_blackegg_activate");
       d_trig delete();
       self notsolid();
       self setspeed(level._my_speed);
       self thread moon_be_resume_anim();
     }
-    if(isDefined(node.script_waittill) && node.script_waittill == "sliding_door") {
+    if(isdefined(node.script_waittill) && node.script_waittill == "sliding_door") {
       self setspeedimmediate(0);
       self thread moon_be_stop_anim();
       door_index = get_closest_index_2d(self.origin, level._sliding_doors);
-      if(!isDefined(door_index)) {
+      if(!isdefined(door_index)) {
         println("");
         wait(1);
         continue;
       }
-      if(!isDefined(level._sliding_doors[door_index]._door_open)) {
+      if(!isdefined(level._sliding_doors[door_index]._door_open)) {
         println("");
         wait(1);
         continue;
       }
       if(!level._sliding_doors[door_index]._door_open) {
         level thread play_vox_on_closest_player(5);
-        level._be playSound("evt_sq_blackegg_wait");
+        level._be playsound("evt_sq_blackegg_wait");
         level._be.stopped = 1;
       }
-      while(!level._sliding_doors[door_index]._door_open) {
+      while (!level._sliding_doors[door_index]._door_open) {
         wait(0.05);
       }
-      if(isDefined(level._be.stopped) && level._be.stopped) {
-        level._be playSound("evt_sq_blackegg_accel");
+      if(isdefined(level._be.stopped) && level._be.stopped) {
+        level._be playsound("evt_sq_blackegg_accel");
         level._be.stopped = 0;
       }
       self setspeed(level._my_speed);
       self thread moon_be_resume_anim();
     }
-    if(isDefined(node.script_noteworthy)) {
+    if(isdefined(node.script_noteworthy)) {
       switch (node.script_noteworthy) {
         case "flag_wait_for_osc": {
           self setspeedimmediate(0);
           self thread moon_be_stop_anim();
-          if(!isDefined(level.flag["flag_wait_for_osc"])) {
+          if(!isdefined(level.flag["flag_wait_for_osc"])) {
             level flag::init("flag_wait_for_osc");
           }
           level flag::wait_till("flag_wait_for_osc");
@@ -318,22 +318,22 @@ function moon_be_think() {
         }
       }
     }
-    if(isDefined(node.script_parameters)) {
+    if(isdefined(node.script_parameters)) {
       next_chain_start = getvehiclenode(node.script_parameters, "targetname");
-      if(!isDefined(next_chain_start)) {
+      if(!isdefined(next_chain_start)) {
         println("");
         wait(1);
         continue;
       }
       self setspeedimmediate(0);
-      level._be playSound("evt_sq_blackegg_stop");
+      level._be playsound("evt_sq_blackegg_stop");
       self thread moon_be_stop_anim();
       self attachpath(next_chain_start);
-      if(isDefined(next_chain_start.script_string)) {
+      if(isdefined(next_chain_start.script_string)) {
         d_trig = spawn("trigger_damage", self.origin, 0, 32, 72);
         motivation = 0;
-        while(!motivation) {
-          if(isDefined(next_chain_start.script_string) && next_chain_start.script_string == "zap") {
+        while (!motivation) {
+          if(isdefined(next_chain_start.script_string) && next_chain_start.script_string == "zap") {
             zm_weap_microwavegun::add_microwaveable_object(d_trig);
             d_trig waittill("microwaved", vox_dude);
             zm_weap_microwavegun::remove_microwaveable_object(d_trig);
@@ -349,27 +349,27 @@ function moon_be_think() {
         }
         d_trig delete();
       }
-      if(isDefined(vox_dude)) {
+      if(isdefined(vox_dude)) {
         vox_dude thread play_be_hit_vox(vox_num);
         vox_num++;
       }
-      level._be playSound("evt_sq_blackegg_activate");
+      level._be playsound("evt_sq_blackegg_activate");
       self setspeed(level._my_speed);
       self startpath();
       self thread moon_be_resume_anim();
       level.var_e9ab794e = 0;
     }
-    if(isDefined(node.script_int)) {
+    if(isdefined(node.script_int)) {
       self setspeedimmediate(node.script_int);
     }
-    if(isDefined(node.script_index)) {
+    if(isdefined(node.script_index)) {
       self thread moon_be_anim_swap(node.script_index);
     }
   }
 }
 
 function moon_be_move(motivation_array) {
-  if(!isDefined(motivation_array)) {
+  if(!isdefined(motivation_array)) {
     return false;
   }
   if(!isstring(motivation_array)) {
@@ -378,8 +378,8 @@ function moon_be_move(motivation_array) {
   }
   motivational_array = strtok(motivation_array, ",");
   match = 0;
-  for(i = 0; i < motivational_array.size; i++) {
-    for(j = 0; j < level.motivational_array.size; j++) {
+  for (i = 0; i < motivational_array.size; i++) {
+    for (j = 0; j < level.motivational_array.size; j++) {
       if(motivational_array[i] == level.motivational_array[j]) {
         match = 1;
         return true;
@@ -388,7 +388,7 @@ function moon_be_move(motivation_array) {
   }
   if(!match) {
     println("");
-    if(isDefined(motivational_array[0])) {
+    if(isdefined(motivational_array[0])) {
       println(("" + motivational_array[0]) + "");
     } else {
       println("");
@@ -402,7 +402,7 @@ function get_closest_index_2d(org, array, dist = 9999999) {
     return;
   }
   index = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance2d(array[i].origin, org);
     if(newdist >= dist) {
       continue;
@@ -440,9 +440,9 @@ function moon_be_resume_anim() {
 }
 
 function waittill_player_is_close() {
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) <= 62500) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest2", 0);
         return;

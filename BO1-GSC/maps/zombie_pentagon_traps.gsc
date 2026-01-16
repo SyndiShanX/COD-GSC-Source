@@ -48,7 +48,7 @@ pickup_trap_piece() {
       } else {
         self trigger_off();
         if(isDefined(trap_piece)) {
-          playFXOnTag(level._effect["switch_sparks"], trap_piece, "tag_origin");
+          PlayFXOnTag(level._effect["switch_sparks"], trap_piece, "tag_origin");
           trap_piece thread play_sound_on_entity("zmb_battery_pickup");
           user thread pentagon_have_battery_hud();
           user thread trap_piece_deliver_clean_up(self);
@@ -108,7 +108,7 @@ pentagon_fix_electric_trap() {
         play_sound_at_pos("no_purchase", self.origin);
       } else if(isDefined(who._trap_piece) && who._trap_piece == 1) {
         who._trap_piece = 0;
-        self playSound("zmb_battery_insert");
+        self PlaySound("zmb_battery_insert");
         who thread pentagon_show_piece_triggers();
         flag_set(self.script_flag_wait);
         who notify("trap_piece_returned");
@@ -164,7 +164,7 @@ pentagon_trap_cover_remove(ent_cover, str_flag) {
   ent_cover MoveZ(48, 1.0, 0.4, 0);
   ent_cover waittill("movedone");
   ent_cover RotateRoll((360 * RandomIntRange(4, 10)), 1.2, 0.6, 0);
-  playFXOnTag(level._effect["poltergeist"], ent_cover.fx, "tag_origin");
+  PlayFXOnTag(level._effect["poltergeist"], ent_cover.fx, "tag_origin");
   ent_cover waittill("rotatedone");
   ent_cover hide();
   ent_cover.fx hide();
@@ -213,6 +213,6 @@ quad_first_drop_fx(ent_trigger) {
   }
   exploder_id = ent_trigger.script_int;
   ent_trigger waittill("trigger");
-  ent_trigger playSound("evt_pentagon_quad_spawn");
+  ent_trigger PlaySound("evt_pentagon_quad_spawn");
   exploder(exploder_id);
 }

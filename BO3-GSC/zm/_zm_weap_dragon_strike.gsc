@@ -25,7 +25,7 @@
 #namespace dragon_strike;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_strike", &__init__, &__main__, undefined);
+  system::register("zm_weap_dragon_strike", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -42,22 +42,22 @@ function __init__() {
   clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int");
   clientfield::register("clientuimodel", "dragon_strike_invalid_use", 12000, 1, "counter");
   clientfield::register("clientuimodel", "hudItems.showDpadRight_DragonStrike", 12000, 1, "int");
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
-  level.func_custom_placeable_mine_round_replenish = &function_ff07e778;
-  zm::register_player_damage_callback(&function_43b5419a);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
+  level.func_custom_placeable_mine_round_replenish = & function_ff07e778;
+  zm::register_player_damage_callback( & function_43b5419a);
 }
 
 function __main__() {
   zm_placeable_mine::add_mine_type("launcher_dragon_strike");
   zm_placeable_mine::add_mine_type("launcher_dragon_strike_upgraded");
-  if(isDefined(level.retrievehints["launcher_dragon_strike"])) {
+  if(isdefined(level.retrievehints["launcher_dragon_strike"])) {
     arrayremoveindex(level.retrievehints, "launcher_dragon_strike", 1);
   }
-  if(isDefined(level.retrievehints["launcher_dragon_strike_upgraded"])) {
+  if(isdefined(level.retrievehints["launcher_dragon_strike_upgraded"])) {
     arrayremoveindex(level.retrievehints, "launcher_dragon_strike_upgraded", 1);
   }
-  zm_spawner::register_zombie_death_event_callback(&function_22664e38);
+  zm_spawner::register_zombie_death_event_callback( & function_22664e38);
 }
 
 function on_player_connect() {
@@ -81,7 +81,7 @@ function function_1939853d() {
   self endon("disconnect");
   self notify("hash_1939853d");
   self endon("hash_1939853d");
-  for(;;) {
+  for (;;) {
     self waittill("zmb_max_ammo");
     wait(0.05);
     self function_ab4fad2f();
@@ -109,7 +109,7 @@ function function_ab4fad2f() {
 
 function function_ff07e778() {
   a_players = getplayers();
-  for(i = 0; i < a_players.size; i++) {
+  for (i = 0; i < a_players.size; i++) {
     foreach(var_3ef7692 in level.placeable_mines) {
       if(a_players[i] zm_utility::is_player_placeable_mine(var_3ef7692)) {
         if(var_3ef7692 == getweapon("launcher_dragon_strike") || var_3ef7692 == getweapon("launcher_dragon_strike_upgraded")) {
@@ -129,7 +129,7 @@ function function_ff07e778() {
 
 function on_player_disconnect() {
   self waittill("disconnect");
-  if(isDefined(self.mdl_target) && !self flag::get("dragon_strike_active")) {
+  if(isdefined(self.mdl_target) && !self flag::get("dragon_strike_active")) {
     mdl_target = self.mdl_target;
     mdl_target clientfield::set("dragon_strike_marker_on", 0);
     wait(0.3);
@@ -138,7 +138,7 @@ function on_player_disconnect() {
 }
 
 function function_43b5419a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(isDefined(einflictor) && isDefined(einflictor.item) && (einflictor.item == getweapon("launcher_dragon_fire") || einflictor.item == getweapon("launcher_dragon_fire_upgraded"))) {
+  if(isdefined(einflictor) && isdefined(einflictor.item) && (einflictor.item == getweapon("launcher_dragon_fire") || einflictor.item == getweapon("launcher_dragon_fire_upgraded"))) {
     return 0;
   }
   return -1;
@@ -146,7 +146,7 @@ function function_43b5419a(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_2d8749cd() {
   self endon("disconnect");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("weapon_change", weapon);
     if(weapon == getweapon("launcher_dragon_strike")) {
       break;
@@ -157,7 +157,7 @@ function function_2d8749cd() {
 
 function function_d5acc054() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("weapon_change", weapon, previous_weapon);
     if(function_9e0c324b(weapon)) {
       if(self.var_8660deae === 0) {
@@ -177,7 +177,7 @@ function function_d5acc054() {
 
 function function_3e8c94e3() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("specify_weapon_request", weapon);
     if(function_9e0c324b(weapon) && (self getammocount(weapon) == 0 || self.var_8660deae === 0)) {
       self clientfield::increment_uimodel("dragon_strike_invalid_use");
@@ -208,7 +208,7 @@ function function_8ad253d8(previous_weapon) {
     self flag::set("dragon_strike_active");
     self playsoundtoplayer("fly_dragon_strike_ui_activate", self);
     self zm_audio::create_and_play_dialog("dragon_strike", "call_in");
-    self util::delay(0.5, "death", &function_6c8dfca2, previous_weapon);
+    self util::delay(0.5, "death", & function_6c8dfca2, previous_weapon);
     self thread function_a3b69ec0(self.var_5d020ece);
     self thread function_2864e2c1();
     return;
@@ -219,7 +219,7 @@ function function_8ad253d8(previous_weapon) {
 }
 
 function function_f80cd2c9() {
-  if(isDefined(self.var_be00572f)) {
+  if(isdefined(self.var_be00572f)) {
     return true;
   }
   return false;
@@ -230,7 +230,7 @@ function function_2864e2c1() {
   self.var_8660deae = 0;
   self flag::wait_till_clear("dragon_strike_active");
   self.var_8660deae = 1;
-  if(isDefined(level.var_d4286019) && level.var_d4286019) {
+  if(isdefined(level.var_d4286019) && level.var_d4286019) {
     var_5a0c399b = self zm_utility::get_player_placeable_mine();
     self function_ab4fad2f();
   }
@@ -267,11 +267,11 @@ function function_a3b69ec0(var_5d020ece) {
 function function_9af893e8(e_player, var_5d020ece, b_upgraded, var_35ab0c48, var_6646a04b) {
   var_2fcea154 = util::spawn_anim_model("c_zom_dlc3_dragon_body_airstrike", var_5d020ece.var_53d81d57, var_5d020ece.angles + vectorscale((1, 0, 0), 25));
   var_2fcea154 function_42ab5fbb(var_5d020ece);
-  if(isDefined(e_player)) {
+  if(isdefined(e_player)) {
     var_2fcea154.player = e_player;
     e_player.var_8e17738c = 0;
   }
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     var_2fcea154 waittill("fireball");
     var_2fcea154.var_201fdf35 = var_2fcea154 gettagorigin("tag_throat_fx");
     var_c606eb7 = 6;
@@ -279,19 +279,19 @@ function function_9af893e8(e_player, var_5d020ece, b_upgraded, var_35ab0c48, var
       var_2410d5ad = var_5d020ece.v_loc + function_adac83c4();
       var_c606eb7--;
     }
-    while(bullettracepassed(var_2fcea154.var_201fdf35, var_2410d5ad, 0, var_2fcea154) && var_c606eb7 > 0);
+    while (bullettracepassed(var_2fcea154.var_201fdf35, var_2410d5ad, 0, var_2fcea154) && var_c606eb7 > 0);
     var_aa911866 = magicbullet(var_6646a04b, var_2fcea154.var_201fdf35, var_2410d5ad, var_2fcea154);
     level thread function_a6d19957(b_upgraded, var_aa911866, var_5d020ece.v_loc, var_35ab0c48);
   }
   var_2fcea154 thread function_604af93b();
-  while(isDefined(var_aa911866)) {
+  while (isdefined(var_aa911866)) {
     wait(0.05);
   }
   level notify("hash_d67e330d");
 }
 
 function function_a6d19957(b_upgraded, var_aa911866, v_hitloc, n_range) {
-  while(isDefined(var_aa911866)) {
+  while (isdefined(var_aa911866)) {
     wait(0.05);
   }
   a_ai_zombies = array::get_all_closest(v_hitloc, getaiarchetypearray("zombie"), undefined, undefined, n_range);
@@ -301,7 +301,7 @@ function function_a6d19957(b_upgraded, var_aa911866, v_hitloc, n_range) {
     n_clientfield = 1;
   }
   foreach(ai_zombie in a_ai_zombies) {
-    if(isDefined(ai_zombie) && (!(isDefined(ai_zombie.var_4cfc625d) && ai_zombie.var_4cfc625d))) {
+    if(isdefined(ai_zombie) && (!(isdefined(ai_zombie.var_4cfc625d) && ai_zombie.var_4cfc625d))) {
       ai_zombie clientfield::set("dragon_strike_zombie_fire", n_clientfield);
       wait(randomfloat(0.1));
     }
@@ -321,7 +321,7 @@ function function_6efadb82(var_825b87b9, var_5a0c399b) {
   var_1e43571f = util::spawn_model("tag_origin", var_dc5fde65);
   var_1e43571f zm_utility::create_zombie_point_of_interest(var_825b87b9, 64, 10000);
   level waittill("hash_d67e330d");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("dragon_strike_flare_fx", 0);
     if(var_5a0c399b == getweapon("launcher_dragon_strike_upgraded")) {
       self clientfield::increment("dragon_strike_marker_upgraded_fx_fadeout");
@@ -331,18 +331,18 @@ function function_6efadb82(var_825b87b9, var_5a0c399b) {
   }
   var_1e43571f delete();
   wait(3.5);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("dragon_strike_marker_on", 0);
   }
   wait(0.3);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
 
 function function_22664e38(e_attacker) {
-  if(isDefined(self) && (self.damageweapon === getweapon("launcher_dragon_fire") || self.damageweapon === getweapon("launcher_dragon_fire_upgraded"))) {
-    if(isDefined(e_attacker) && isDefined(e_attacker.player)) {
+  if(isdefined(self) && (self.damageweapon === getweapon("launcher_dragon_fire") || self.damageweapon === getweapon("launcher_dragon_fire_upgraded"))) {
+    if(isdefined(e_attacker) && isdefined(e_attacker.player)) {
       e_attacker.player.var_8e17738c++;
     }
   }
@@ -359,7 +359,7 @@ function function_7fcb14a8() {
   self endon("hash_26b100ad");
   self endon("disconnect");
   var_b912cdaf = vectorscale((0, 0, 1), 8);
-  if(!isDefined(self.mdl_target)) {
+  if(!isdefined(self.mdl_target)) {
     self.mdl_target = util::spawn_model("tag_origin", self.origin);
   }
   util::wait_network_frame();
@@ -372,17 +372,17 @@ function function_7fcb14a8() {
     var_78f8828b = "dragon_strike_marker_fx";
     var_854898eb = "dragon_strike_marker_invalid_fx";
   }
-  while(self flag::get("show_dragon_strike_reticule")) {
-    v_start = self getEye();
+  while (self flag::get("show_dragon_strike_reticule")) {
+    v_start = self geteye();
     v_forward = self getweaponforwarddir();
     v_end = v_start + (v_forward * 2500);
-    a_trace = bulletTrace(v_start, v_end, 0, self.mdl_target, 1, 0, self.var_1e43571f);
+    a_trace = bullettrace(v_start, v_end, 0, self.mdl_target, 1, 0, self.var_1e43571f);
     self.var_be00572f = a_trace["position"];
-    if(isDefined(self.var_5d020ece)) {
+    if(isdefined(self.var_5d020ece)) {
       self.var_5d020ece struct::delete();
     }
     self.var_5d020ece = self function_c7832a90(self.var_be00572f);
-    if(!isDefined(self.var_5d020ece)) {
+    if(!isdefined(self.var_5d020ece)) {
       self function_5a9be7d8(var_854898eb);
       wait(0.1);
       continue;
@@ -404,11 +404,11 @@ function function_c7832a90(v_loc) {
   v_forward = v_loc - self.origin;
   v_angles = vectortoangles(v_forward);
   v_angles = (v_angles[0], v_angles[1], 0);
-  var_1ccc854e = anglesToForward(v_angles);
+  var_1ccc854e = anglestoforward(v_angles);
   var_53d81d57 = (v_loc[0] + (var_1ccc854e[0] * 1000), v_loc[1] + (var_1ccc854e[1] * 1000), v_loc[2] + 2000);
-  while(var_feed8b5b < 360) {
+  while (var_feed8b5b < 360) {
     if(bullettracepassed(var_53d81d57, v_loc + (0, 0, 96), 0, self.mdl_target)) {
-      var_1914c03e = spawnStruct();
+      var_1914c03e = spawnstruct();
       var_1914c03e.origin = (v_loc[0] + (var_1ccc854e[0] * 20000), v_loc[1] + (var_1ccc854e[1] * 20000), v_loc[2] + 8000);
       var_1914c03e.angles = anglestoup(vectortoangles(v_loc - var_1914c03e.origin));
       var_1914c03e.v_loc = v_loc;
@@ -418,7 +418,7 @@ function function_c7832a90(v_loc) {
     var_feed8b5b = var_feed8b5b + 90;
     var_d9f4bdfd = (v_angles[0], v_angles[1] + 90, 0);
     v_angles = var_d9f4bdfd;
-    var_1ccc854e = anglesToForward(var_d9f4bdfd);
+    var_1ccc854e = anglestoforward(var_d9f4bdfd);
     var_53d81d57 = (v_loc[0] + (var_1ccc854e[0] * 1000), v_loc[1] + (var_1ccc854e[1] * 1000), v_loc[2] + 2000);
   }
   return undefined;
@@ -431,11 +431,11 @@ function function_5a9be7d8(var_854898eb) {
 }
 
 function function_6c8dfca2(w_weapon) {
-  if(!isDefined(w_weapon) || zm_utility::is_hero_weapon(w_weapon)) {
-    if(isDefined(self.prev_weapon_before_equipment_change)) {
+  if(!isdefined(w_weapon) || zm_utility::is_hero_weapon(w_weapon)) {
+    if(isdefined(self.prev_weapon_before_equipment_change)) {
       w_weapon = self.prev_weapon_before_equipment_change;
     } else {
-      if(isDefined(self.weapon_stowed)) {
+      if(isdefined(self.weapon_stowed)) {
         w_weapon = self.weapon_stowed;
       } else {
         var_e30cfc3e = self getweaponslistprimaries();

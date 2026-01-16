@@ -60,9 +60,8 @@ fire_trap_init() {
   if(!isDefined(barrels) || barrels.size == 0) {
     return;
   }
-  while(!isDefined(level.players) || level.players.size < 1) {
+  while(!isDefined(level.players) || level.players.size < 1)
     wait 0.05;
-  }
 
   level.fire_traps = [];
   foreach(barrel in barrels) {
@@ -143,9 +142,8 @@ fire_trap_setup(barrel) {
   fire_trap.barrel SetHintString(fire_trap.hintString);
   fire_trap.barrel MakeUsable();
 
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(barrel, fire_trap.cost);
-  }
 
   return fire_trap;
 }
@@ -159,12 +157,10 @@ fire_trap_setup_sizes() {
 
   size_index = 1;
   if(isDefined(self.barrel.script_noteworthy)) {
-    if(self.barrel.script_noteworthy == "small") {
+    if(self.barrel.script_noteworthy == "small")
       size_index = 0;
-    }
-    if(self.barrel.script_noteworthy == "large") {
+    if(self.barrel.script_noteworthy == "large")
       size_index = 2;
-    }
 
     if(IsSubStr(self.barrel.script_noteworthy, "custom")) {
       tokens = strtok(self.barrel.script_noteworthy, " ");
@@ -186,24 +182,23 @@ fire_trap_setup_sizes() {
     }
   }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     size_index = int(max(0, size_index - 1));
-  }
 
   if(sizes[size_index] == "small") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_SMALL;
     self.cost = CONST_FIRE_TRAP_COST_SMALL;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_SMALL";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_MED;
     self.cost = CONST_FIRE_TRAP_COST_MED;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_MED";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_MED";
   }
   if(sizes[size_index] == "large") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_LARGE;
     self.cost = CONST_FIRE_TRAP_COST_LARGE;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_LARGE";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -220,9 +215,8 @@ trap_BBprint(trap_type, owner, loc) {
   trapz = loc[2];
   traptype = trap_type;
   ownername = "";
-  if(isDefined(owner.name)) {
+  if(isDefined(owner.name))
     ownername = owner.name;
-  }
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     IPrintLnBold("^8bbprint: alientrap \n" +
@@ -272,15 +266,14 @@ fire_trap_think() {
         break;
       } else {
         wait 0.05;
-        owner setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        owner setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
         continue;
       }
     }
 
-    if(alien_mode_has("outline")) {
+    if(alien_mode_has("outline"))
       maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.barrel);
-    }
 
     self waittill("fire_trap_exhausted");
 
@@ -291,9 +284,8 @@ fire_trap_think() {
     self.barrel SetHintString(self.hintString);
     self.barrel MakeUsable();
 
-    if(alien_mode_has("outline")) {
+    if(alien_mode_has("outline"))
       maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.barrel, self.cost);
-    }
 
   }
 }
@@ -391,9 +383,8 @@ do_damage_over_time(victim) {
 
   should_use_fire_fx = victim is_alien_agent();
 
-  if(should_use_fire_fx) {
+  if(should_use_fire_fx)
     victim maps\mp\alien\_alien_fx::alien_fire_on();
-  }
 
   interval_time = 1;
   damage_per_interval = DoT / (duration / interval_time);
@@ -412,11 +403,10 @@ do_damage_until_timeout(damage, duration, interval, attacker) {
   while(elapsed_time < duration && isDefined(attacker.owner)) {
     attacker.owner.burning_victim = true;
 
-    if(isplayer(self)) {
+    if(isplayer(self))
       self DoDamage(damage, self.origin, undefined, attacker.burn_trig);
-    } else if(isDefined(attacker) && isDefined(attacker.owner)) {
+    else if(isDefined(attacker) && isDefined(attacker.owner))
       self DoDamage(damage, self.origin, attacker.owner, attacker.burn_trig);
-    }
 
     elapsed_time += 1.0;
     wait interval;
@@ -435,9 +425,8 @@ monitor_fire_trap_exhausted(fire_start_loc) {
   wait self.duration;
 
   self notify("fire_trap_exhausted");
-  if(isDefined(self.fire_fx_array)) {
+  if(isDefined(self.fire_fx_array))
     self kill_fire(self.fire_fx_array);
-  }
 }
 
 sort_vectors_by_distance(array, vec) {
@@ -479,15 +468,13 @@ play_fire(fire_fx_locs, fx_interval) {
 }
 
 kill_fire(fire_fx_array) {
-  if(isDefined(self.sound_flames)) {
+  if(isDefined(self.sound_flames))
     self thread sounds_kill_flames();
-  }
 
   if(isDefined(fire_fx_array)) {
     foreach(gasFire in fire_fx_array) {
-      if(isDefined(gasFire)) {
+      if(isDefined(gasFire))
         gasFire delete();
-      }
     }
   }
 }
@@ -529,9 +516,8 @@ trap_shock(victim, damage_override, use_capacity) {
   self eletric_trap_asserts();
 
   shock_damage = self.shock_damage * level.alien_health_per_player_scalar[level.players.size] * (self.owner perk_GetTrapDamageScalar());
-  if(isDefined(damage_override)) {
+  if(isDefined(damage_override))
     shock_damage = damage_override;
-  }
 
   victim.shocked = true;
   if(!isalive(victim)) {
@@ -546,9 +532,8 @@ trap_shock(victim, damage_override, use_capacity) {
   wait 0.05;
 
   owner = self.owner;
-  if(isplayer(victim)) {
+  if(isplayer(victim))
     owner = self.generator;
-  }
 
   if(isDefined(use_capacity) && use_capacity) {
     self.capacity--;
@@ -588,15 +573,13 @@ wait_for_ragdoll_pos() {
 
 ragdoll_timeout(time) {
   wait time;
-  if(isDefined(self)) {
+  if(isDefined(self))
     self notify("ragdoll_timed_out");
-  }
 }
 
 debug_electric_trap_print(pos, string, color, alpha, scale, time) {
-  if(GetDvarInt("debug_trap") == 1) {
+  if(GetDvarInt("debug_trap") == 1)
     thread debug_electric_trap_print_raw(pos, string, color, alpha, scale, time);
-  }
 }
 
 debug_electric_trap_print_raw(pos, string, color, alpha, scale, time) {
@@ -614,9 +597,8 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
 
   self eletric_trap_asserts();
 
-  if(isDefined(play_ambient_shocks)) {
+  if(isDefined(play_ambient_shocks))
     self thread[[play_ambient_shocks]]();
-  }
 
   while(isDefined(self)) {
     while(!self.running) {
@@ -630,9 +612,8 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
         self.owner = owner;
         owner thread stop_electric_trap_on_disconnect(self);
 
-        if(isDefined(play_trap_on_fx)) {
+        if(isDefined(play_trap_on_fx))
           self thread[[play_trap_on_fx]]();
-        }
 
         self.shock_trig playLoopSound("alien_fence_hum_lp");
 
@@ -647,15 +628,14 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
         break;
       } else {
         wait 0.05;
-        owner setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        owner setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
         continue;
       }
     }
 
-    if(alien_mode_has("outline")) {
+    if(alien_mode_has("outline"))
       maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.generator);
-    }
 
     self thread run_generator();
 
@@ -675,34 +655,29 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
         break;
       }
 
-      if(isAgent(victim) && isalive(victim) && !(isDefined(victim.shocked) && victim.shocked)) {
+      if(isAgent(victim) && isalive(victim) && !(isDefined(victim.shocked) && victim.shocked))
         self thread trap_shock(victim, undefined, true);
-      }
 
-      if(isDefined(self.player_damage) && isPlayer(victim) && isAlive(victim) && !(isDefined(victim.shocked) && victim.shocked)) {
+      if(isDefined(self.player_damage) && isPlayer(victim) && isAlive(victim) && !(isDefined(victim.shocked) && victim.shocked))
         self thread trap_shock(victim, self.player_damage, false);
-      }
     }
 
-    if(alien_mode_has("outline")) {
+    if(alien_mode_has("outline"))
       maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.generator, self.cost);
-    }
 
     self notify("electric_trap_turned_off");
 
     if(isDefined(self.owner) && isALive(self.owner)) {
-      if(self.trap_type == "traps_fence") {
-        self.owner setLowerMessage("electric_fence_offline", &"ALIEN_COLLECTIBLES_ELECTRIC_FENCE_OFFLINE", 3);
-      } else {
-        self.owner setLowerMessage("electric_fence_offline", &"ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
-      }
+      if(self.trap_type == "traps_fence")
+        self.owner setLowerMessage("electric_fence_offline", & "ALIEN_COLLECTIBLES_ELECTRIC_FENCE_OFFLINE", 3);
+      else
+        self.owner setLowerMessage("electric_fence_offline", & "ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
     }
 
     wait 0.5;
 
-    if(isDefined(play_trap_off_fx)) {
+    if(isDefined(play_trap_off_fx))
       self thread[[play_trap_off_fx]]();
-    }
 
     self.owner = undefined;
     self.running = false;
@@ -787,9 +762,8 @@ electric_puddle_init() {
   if(!isDefined(generators) || generators.size == 0) {
     return;
   }
-  while(!isDefined(level.players) || level.players.size < 1) {
+  while(!isDefined(level.players) || level.players.size < 1)
     wait 0.05;
-  }
 
   level.electric_puddles = [];
   foreach(generator in generators) {
@@ -833,9 +807,8 @@ setup_electric_puddle(generator) {
   puddle.generator SetHintString(puddle.hintString);
   puddle.generator MakeUsable();
 
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(generator, puddle.cost);
-  }
 
   return puddle;
 }
@@ -849,12 +822,10 @@ puddle_trap_setup_sizes() {
 
   size_index = 1;
   if(isDefined(self.generator.script_noteworthy)) {
-    if(self.generator.script_noteworthy == "small") {
+    if(self.generator.script_noteworthy == "small")
       size_index = 0;
-    }
-    if(self.generator.script_noteworthy == "large") {
+    if(self.generator.script_noteworthy == "large")
       size_index = 2;
-    }
 
     if(IsSubStr(self.generator.script_noteworthy, "custom")) {
       tokens = strtok(self.generator.script_noteworthy, " ");
@@ -876,9 +847,8 @@ puddle_trap_setup_sizes() {
     }
   }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     size_index = int(max(0, size_index - 1));
-  }
 
   self.shock_damage = CONST_PUDDLE_SHOCK_DAMAGE;
   self.shock_interval = CONST_SHOCK_INTERVAL;
@@ -886,17 +856,17 @@ puddle_trap_setup_sizes() {
   if(sizes[size_index] == "small") {
     self.cost = CONST_PUDDLE_COST_SMALL;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_SMALL;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.cost = CONST_PUDDLE_COST_MED;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_MED;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
   }
   if(sizes[size_index] == "large") {
     self.cost = CONST_PUDDLE_COST_LARGE;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_LARGE;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -927,9 +897,8 @@ ambient_puddle_shocks() {
   shock = SpawnFx(self.shock_fx["sparks"], self.contact_points[0].origin);
 
   sparks = [];
-  foreach(contact_point in self.contact_points) {
-    sparks[sparks.size] = SpawnFx(self.shock_fx["sparks"], contact_point.origin);
-  }
+  foreach(contact_point in self.contact_points)
+  sparks[sparks.size] = SpawnFx(self.shock_fx["sparks"], contact_point.origin);
 
   ambient_on = false;
 
@@ -939,9 +908,8 @@ ambient_puddle_shocks() {
       self waittill("electric_trap_turned_on");
     }
 
-    if(!ambient_on) {
+    if(!ambient_on)
       ambient_on = true;
-    }
 
     triggerFx(shock);
     wait 0.25;
@@ -953,14 +921,12 @@ ambient_puddle_shocks() {
         continue;
       }
 
-      if(cointoss()) {
+      if(cointoss())
         triggerFx(spark);
-      }
     }
 
-    if(!is_true(level.skip_radius_damage_on_puddles)) {
+    if(!is_true(level.skip_radius_damage_on_puddles))
       RadiusDamage(self.contact_points[0].origin, 80, 20, 5);
-    }
     waittill_any_timeout(RandomIntRange(3, 5), "electric_trap_turned_off");
   }
 }
@@ -984,9 +950,8 @@ electric_fence_init() {
   if(!isDefined(generators) || generators.size == 0) {
     return;
   }
-  while(!isDefined(level.players) || level.players.size < 1) {
+  while(!isDefined(level.players) || level.players.size < 1)
     wait 0.05;
-  }
 
   level.electric_fences = [];
   foreach(generator in generators) {
@@ -1008,13 +973,11 @@ setup_electric_fence(generator) {
   fence_sparks = [];
   top_left = generator_targets[0];
   foreach(generator_target in generator_targets) {
-    if(isDefined(generator_target.script_noteworthy) && generator_target.script_noteworthy == "fence_sparks") {
+    if(isDefined(generator_target.script_noteworthy) && generator_target.script_noteworthy == "fence_sparks")
       fence_sparks[fence_sparks.size] = generator_target;
-    }
 
-    if(isDefined(generator_target.script_noteworthy) && generator_target.script_noteworthy == "fence_area") {
+    if(isDefined(generator_target.script_noteworthy) && generator_target.script_noteworthy == "fence_area")
       top_left = generator_target;
-    }
   }
   bottom_left = getstruct(top_left.target, "targetname");
   bottom_right = getstruct(bottom_left.target, "targetname");
@@ -1053,9 +1016,8 @@ setup_electric_fence(generator) {
   fence.generator SetHintString(fence.hintString);
   fence.generator MakeUsable();
 
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(generator, fence.cost);
-  }
 
   return fence;
 }
@@ -1069,12 +1031,10 @@ fence_trap_setup_sizes() {
 
   size_index = 1;
   if(isDefined(self.generator.script_noteworthy)) {
-    if(self.generator.script_noteworthy == "small") {
+    if(self.generator.script_noteworthy == "small")
       size_index = 0;
-    }
-    if(self.generator.script_noteworthy == "large") {
+    if(self.generator.script_noteworthy == "large")
       size_index = 2;
-    }
 
     if(IsSubStr(self.generator.script_noteworthy, "custom")) {
       tokens = strtok(self.generator.script_noteworthy, " ");
@@ -1096,9 +1056,8 @@ fence_trap_setup_sizes() {
     }
   }
 
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     size_index = int(max(0, size_index - 1));
-  }
 
   self.shock_damage = int(min(800, CONST_FENCE_SHOCK_DAMAGE * max(1, (self.optimal_height / self.fence_height))));
   self.shock_interval = CONST_SHOCK_INTERVAL;
@@ -1106,29 +1065,26 @@ fence_trap_setup_sizes() {
   if(sizes[size_index] == "small") {
     self.cost = CONST_FENCE_COST_SMALL;
     self.life_span = CONST_FENCE_LIFE_SPAN_SMALL;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_SMALL";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_SMALL";
 
-    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]()) {
-      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
-    }
+    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
+      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.cost = CONST_FENCE_COST_MED;
     self.life_span = CONST_FENCE_LIFE_SPAN_MED;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_MED";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_MED";
 
-    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]()) {
-      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
-    }
+    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
+      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
   }
   if(sizes[size_index] == "large") {
     self.cost = CONST_FENCE_COST_LARGE;
     self.life_span = CONST_FENCE_LIFE_SPAN_LARGE;
-    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_LARGE";
+    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_LARGE";
 
-    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]()) {
-      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
-    }
+    if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
+      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -1221,9 +1177,8 @@ turret_monitorUse() {
   self MakeUsable();
 
   wait 0.05;
-  if(alien_mode_has("outline")) {
+  if(alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(self, CONST_TURRET_COST);
-  }
 
   disable_turret();
 
@@ -1234,7 +1189,7 @@ turret_monitorUse() {
       continue;
     }
     if(player is_holding_deployable()) {
-      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1247,7 +1202,7 @@ turret_monitorUse() {
         level thread maps\mp\alien\_music_and_dialog::playVOForSentry(player, "minigun");
         self thread monitor_player_use();
       } else {
-        player setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        player setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
       }
     } else {
@@ -1286,9 +1241,8 @@ watch_bullet_fired() {
     }
     self.owner set_turret_ammocount(self.turret_ammo);
   }
-  if(isDefined(self.owner) && isAlive(self.owner)) {
+  if(isDefined(self.owner) && isAlive(self.owner))
     self.owner thread wait_for_player_to_dismount_turret();
-  }
 
   self notify("disable_turret");
 }
@@ -1324,7 +1278,7 @@ monitor_player_use() {
       continue;
     }
     if(user is_holding_deployable()) {
-      user setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      user setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1333,9 +1287,8 @@ monitor_player_use() {
       while(!isDefined(self.turret_ammo)) {
         wait(0.05);
       }
-      if(!is_chaos_mode()) {
+      if(!is_chaos_mode())
         user disable_special_ammo();
-      }
       user show_turret_icon(2);
       user set_turret_ammocount(self.turret_ammo);
       user SetClientOmnvar("ui_alien_turret_overheat", 0);
@@ -1343,12 +1296,11 @@ monitor_player_use() {
       self thread turret_cooldown_monitor();
       self thread clear_turret_ammo_counter_on_dismount(user);
       self thread clear_turret_ammo_counter_on_death(user);
-      user setLowerMessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
+      user setLowerMessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
     } else {
       user hide_turret_icon();
-      if(!is_chaos_mode()) {
+      if(!is_chaos_mode())
         user enable_special_ammo();
-      }
       self.owner = undefined;
       user SetClientOmnvar("ui_alien_turret_overheat", -1);
       user clearLowerMessage("disengage_turret");
@@ -1396,11 +1348,10 @@ turret_overheat_monitor(player) {
       break;
     }
 
-    if(self.heatLevel >= CONST_TURRET_OVERHEAT_TIME) {
+    if(self.heatLevel >= CONST_TURRET_OVERHEAT_TIME)
       barFrac = 1;
-    } else {
+    else
       barFrac = self.heatLevel / CONST_TURRET_OVERHEAT_TIME;
-    }
 
     throttle = 5;
     new_value = int(barFrac * 100);
@@ -1490,11 +1441,10 @@ monitor_flare_use() {
     glowstick setModel("mil_emergency_flare_mp");
     glowStick.angles = self.angles;
     glowStick.owner = self;
-    if(self maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade")) {
+    if(self maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade"))
       glowStick thread create_flare(level.spawnGlow["enemy"], self);
-    } else {
+    else
       glowStick thread create_flare(level.spawnGlow["friendly"], self);
-    }
     self TakeWeapon("alienflare_mp");
 
   }
@@ -1579,11 +1529,10 @@ sfx_flare_lp(player) {
 
   beep_interval = 0.163;
 
-  if(player maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade")) {
+  if(player maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade"))
     FlareEndTime = GetTime() + ((CONST_UPGRADED_FLARE_TIME) - 1.4) * 1000;
-  } else {
+  else
     FlareEndTime = GetTime() + ((CONST_FLARE_TIME) - 1.4) * 1000;
-  }
 
   wait 0.2;
 
@@ -1605,17 +1554,15 @@ flare_attract_aliens(flare_time, owner) {
   while(GetTime() < attractEndTime && isDefined(self)) {
     currentAffectedAliens = [];
     foreach(alien in affectedAliens) {
-      if(isDefined(alien) && IsAlive(alien)) {
+      if(isDefined(alien) && IsAlive(alien))
         currentAffectedAliens[currentAffectedAliens.size] = alien;
-      }
     }
 
     affectedAliens = currentAffectedAliens;
-    if(isDefined(owner)) {
+    if(isDefined(owner))
       focal_point = owner.origin;
-    } else {
+    else
       focal_point = self.origin;
-    }
 
     possibleFlareVictims = self get_possible_flare_victims(focal_point);
 
@@ -1635,9 +1582,8 @@ flare_attract_aliens(flare_time, owner) {
     wait 0.2;
   }
 
-  foreach(alien in affectedAliens) {
-    alien maps\mp\agents\alien\_alien_think::handle_attractor_flare(self, false);
-  }
+  foreach(alien in affectedAliens)
+  alien maps\mp\agents\alien\_alien_think::handle_attractor_flare(self, false);
 }
 
 get_possible_flare_victims(focal_point) {
@@ -1654,11 +1600,10 @@ get_possible_flare_victims(focal_point) {
       continue;
     }
     distanceToOwner = DistanceSquared(focal_point, victim.origin);
-    if(distanceToOwner <= maxOwnerVictimsPriorityRangeSq) {
+    if(distanceToOwner <= maxOwnerVictimsPriorityRangeSq)
       possibleVictims[possibleVictims.size] = victim;
-    } else {
+    else
       break;
-    }
   }
 
   flareRangeIndex = 0;
@@ -1684,11 +1629,10 @@ get_possible_flare_victims(focal_point) {
       }
 
       flareDistance = DistanceSquared(self.origin, flareVictim.origin);
-      if(!isDefined(ownerDistance) || flareDistance < ownerDistance) {
+      if(!isDefined(ownerDistance) || flareDistance < ownerDistance)
         possibleVictims[possibleVictims.size] = flareVictim;
-      } else {
+      else
         break;
-      }
 
       flareRangeIndex++;
     }
@@ -1703,9 +1647,8 @@ get_possible_flare_victims(focal_point) {
 }
 
 should_attract_alien() {
-  if(is_true(self.stuck_by_flare)) {
+  if(is_true(self.stuck_by_flare))
     return false;
-  }
 
   switch (self maps\mp\alien\_utility::get_alien_type()) {
     case "elite":
@@ -1720,9 +1663,8 @@ should_attract_alien() {
 deleteOnDeath(ent) {
   self waittill("death");
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 CONST_EASTER_EGG_LODGE_SIGN_ACTIVE_TIME = 120;
@@ -1769,19 +1711,16 @@ easter_egg_lodge_sign() {
 }
 
 is_letter_valid_hit(attacker, type) {
-  if(!isDefined(attacker) || !isPlayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker))
     return false;
-  }
 
   attacker_weapon = attacker GetCurrentWeapon();
-  if(!isDefined(attacker_weapon) || attacker_weapon != CONST_EASTER_EGG_LODGE_SIGN_ACTIVATOR_WEAPON) {
+  if(!isDefined(attacker_weapon) || attacker_weapon != CONST_EASTER_EGG_LODGE_SIGN_ACTIVATOR_WEAPON)
     return false;
-  }
 
   type = ToLower(type);
-  if(!isDefined(type) || type != "mod_rifle_bullet") {
+  if(!isDefined(type) || type != "mod_rifle_bullet")
     return false;
-  }
 
   return true;
 }

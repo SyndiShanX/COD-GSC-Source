@@ -10,46 +10,40 @@ main() {
   //	thread windController();
   level.inc = 0;
 
-  array_levelthread(getEntArray("wire", "targetname"), ::wireWander);
+  array_levelthread(getentarray("wire", "targetname"), ::wireWander);
 
-  leftShutters = getEntArray("shutter_left", "targetname");
-  addShutters = getEntArray("shutter_right_open", "targetname");
-  for(i = 0; i < addShutters.size; i++) {
+  leftShutters = getentarray("shutter_left", "targetname");
+  addShutters = getentarray("shutter_right_open", "targetname");
+  for (i = 0; i < addShutters.size; i++)
     leftShutters[leftShutters.size] = addShutters[i];
-  }
-  addShutters = getEntArray("shutter_left_closed", "targetname");
-  for(i = 0; i < addShutters.size; i++) {
+  addShutters = getentarray("shutter_left_closed", "targetname");
+  for (i = 0; i < addShutters.size; i++)
     leftShutters[leftShutters.size] = addShutters[i];
-  }
 
-  for(i = 0; i < leftShutters.size; i++) {
+  for (i = 0; i < leftShutters.size; i++) {
     shutter = leftShutters[i];
     shutter rotateto((shutter.angles[0], shutter.angles[1] + 180, shutter.angles[2]), 0.1);
   }
   wait(0.2);
 
-  for(i = 0; i < leftShutters.size; i++) {
+  for (i = 0; i < leftShutters.size; i++)
     leftShutters[i].startYaw = leftShutters[i].angles[1];
-  }
 
-  rightShutters = getEntArray("shutter_right", "targetname");
-  addShutters = getEntArray("shutter_left_open", "targetname");
-  for(i = 0; i < addShutters.size; i++) {
+  rightShutters = getentarray("shutter_right", "targetname");
+  addShutters = getentarray("shutter_left_open", "targetname");
+  for (i = 0; i < addShutters.size; i++)
     rightShutters[rightShutters.size] = addShutters[i];
-  }
-  addShutters = getEntArray("shutter_right_closed", "targetname");
-  for(i = 0; i < addShutters.size; i++) {
+  addShutters = getentarray("shutter_right_closed", "targetname");
+  for (i = 0; i < addShutters.size; i++)
     rightShutters[rightShutters.size] = addShutters[i];
-  }
 
-  for(i = 0; i < rightShutters.size; i++) {
+  for (i = 0; i < rightShutters.size; i++)
     rightShutters[i].startYaw = rightShutters[i].angles[1];
-  }
 
   addShutters = undefined;
 
   windDirection = "left";
-  for(;;) {
+  for (;;) {
     array_levelthread(leftShutters, ::shutterWanderLeft, windDirection);
     array_levelthread(rightShutters, ::shutterWanderRight, windDirection);
     level waittill("wind blows", windDirection);
@@ -57,11 +51,10 @@ main() {
 }
 
 windController() {
-  for(;;) {
+  for (;;) {
     windDirection = "left";
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       windDirection = "right";
-    }
     level notify("wind blows", windDirection);
     wait(2 + randomfloat(10));
   }
@@ -77,19 +70,17 @@ shutterWanderLeft(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left") {
+  if(windDirection == "left")
     newYaw += 179.9;
-  }
 
   newTime = 0.2;
   shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for(;;) {
+  for (;;) {
     rot = randomint(80);
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       rot *= -1;
-    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -100,9 +91,8 @@ shutterWanderLeft(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + randomfloat(2);
-    if(newTime < 0.3) {
+    if(newTime < 0.3)
       newTime = 0.3;
-    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -123,19 +113,17 @@ shutterWanderRight(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left") {
+  if(windDirection == "left")
     newYaw += 179.9;
-  }
 
   newTime = 0.2;
   shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for(;;) {
+  for (;;) {
     rot = randomint(80);
-    if(randomint(100) > 50) {
+    if(randomint(100) > 50)
       rot *= -1;
-    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -146,9 +134,8 @@ shutterWanderRight(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + randomfloat(2);
-    if(newTime < 0.3) {
+    if(newTime < 0.3)
       newTime = 0.3;
-    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -160,7 +147,7 @@ shutterWanderRight(shutter, windDirection) {
 }
 
 wireWander(wire) {
-  origins = getEntArray(wire.target, "targetname");
+  origins = getentarray(wire.target, "targetname");
   org1 = origins[0].origin;
   org2 = origins[1].origin;
 
@@ -175,7 +162,7 @@ wireWander(wire) {
   dist = 4 + randomfloat(2);
   ent rotateroll(dist * 0.5, 0.2);
   wait(0.2);
-  for(;;) {
+  for (;;) {
     rottime = rottimer + randomfloat(rotRange) - (rotRange * 0.5);
     ent rotateroll(dist, rottime, rottime * 0.5, rottime * 0.5);
     wait(rottime);

@@ -12,7 +12,7 @@ zombie_monitor(clientNum) {
   self endon("zombie_off");
   while(1) {
     if(isDefined(self.zombifyFX)) {
-      playFX(clientNum, level._effect["zombie_grain"], self.origin);
+      playfx(clientNum, level._effect["zombie_grain"], self.origin);
     }
     realwait(0.1);
   }
@@ -96,8 +96,7 @@ include_weapons() {
 swamp_german_safe() {
   if(is_german_build()) {
     dead_guy = GetDynEnt("hanging_dead_guy");
-    if(isDefined(dead_guy)) {
+    if(isDefined(dead_guy))
       dead_guy hide();
-    }
   }
 }

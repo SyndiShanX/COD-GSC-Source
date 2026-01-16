@@ -68,9 +68,8 @@ main() {
   level.player disableweapons();
   level.player allowfire(1);
 
-  if(common_scripts\utility::flag("flag_player_drowned")) {
+  if(common_scripts\utility::flag("flag_player_drowned"))
     wait 100;
-  }
 
   wait 1.0;
   maps\_art::dof_disable_script(2);
@@ -103,13 +102,11 @@ choking_logic() {
     thread drown_heartbeat(level.drown_death_timer);
     level.player_fx_org setanimlimited(level.scr_anim["sw_swim_view_fx"]["swim_drown_overlay"], var_5, var_3);
 
-    if(var_5 > level.drown_death_timer) {
+    if(var_5 > level.drown_death_timer)
       level.drown_death_timer = var_5;
-    }
 
-    if(var_5 == 1) {
+    if(var_5 == 1)
       thread maps\skyway_audio::sfx_swim_logic(5);
-    }
 
     wait(var_3);
   }
@@ -123,22 +120,19 @@ drown_heartbeat(var_0) {
   level endon("flag_player_drowned");
 
   if(var_0 > 0.75) {
-    if(level.exfil_swim_intensity < 5) {
+    if(level.exfil_swim_intensity < 5)
       thread maps\skyway_audio::sfx_swim_logic(4);
-    }
 
     if(!common_scripts\utility::flag("flag_end_swim_choke_3")) {
       thread drown_choke(1);
       common_scripts\utility::flag_set("flag_end_swim_choke_3");
     }
   } else if(var_0 > 0.5) {
-    if(level.exfil_swim_intensity < 5) {
+    if(level.exfil_swim_intensity < 5)
       thread maps\skyway_audio::sfx_swim_logic(3);
-    }
   } else if(var_0 > 0.25) {
-    if(level.exfil_swim_intensity < 5) {
+    if(level.exfil_swim_intensity < 5)
       thread maps\skyway_audio::sfx_swim_logic(2);
-    }
 
     if(!common_scripts\utility::flag("flag_end_swim_choke_1")) {
       thread drown_choke();
@@ -147,17 +141,16 @@ drown_heartbeat(var_0) {
   } else if(level.exfil_swim_intensity < 5)
     thread maps\skyway_audio::sfx_swim_logic(1);
 
-  if(var_0 > 0.77) {
+  if(var_0 > 0.77)
     level.hrtbeat = 5;
-  } else if(var_0 > 0.6) {
+  else if(var_0 > 0.6)
     level.hrtbeat = 4;
-  } else if(var_0 > 0.4) {
+  else if(var_0 > 0.4)
     level.hrtbeat = 3;
-  } else if(var_0 > 0.24) {
+  else if(var_0 > 0.24)
     level.hrtbeat = 2;
-  } else {
+  else
     level.hrtbeat = 1;
-  }
 
   level.swim_rumble_mag = maps\skyway_util::factor_value_min_max(0.16, 0.9, var_0);
   level.swim_blur_mag = maps\skyway_util::factor_value_min_max(0.6, 4.7, var_0);
@@ -180,9 +173,8 @@ heartfx_solo() {
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, level.swim_rumble_mag, 0.0, 0.05, 0.1, 0.3);
   thread drown_blur(level.swim_blur_mag, 0.2, 0.5);
 
-  if(isDefined(level.player_fx_org)) {
+  if(isDefined(level.player_fx_org))
     playFXOnTag(common_scripts\utility::getfx("swim_drowning_tunnel"), level.player_fx_org, "tag_helo");
-  }
 
   earthquake(level.swim_quake_mag, level.swim_quake_fade, level.player.origin, 3000);
 }
@@ -201,9 +193,8 @@ drown_choke(var_0) {
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_grunt");
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_bubbles_long");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     level.player thread maps\_utility::play_sound_on_entity("sw_underwater_choke");
-  }
 }
 
 drown_die() {
@@ -222,7 +213,7 @@ drown_die() {
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_grunt");
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_bubbles_long");
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_choke");
-  setdvar("ui_deadquote", &"SKYWAY_DROWN");
+  setdvar("ui_deadquote", & "SKYWAY_DROWN");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -290,13 +281,12 @@ ally_setup() {}
 enemy_setup() {
   var_0 = getEntArray("loco_breach_enemy", "targetname");
 
-  if(!isDefined(level.end_enemies)) {
+  if(!isDefined(level.end_enemies))
     level.end_enemies = [];
-  } else {
+  else {
     foreach(var_2 in level.end_enemies) {
-      if(isalive(var_2)) {
+      if(isalive(var_2))
         var_2 delete();
-      }
     }
 
     level.end_enemies = maps\_utility::remove_dead_from_array(level.end_enemies);
@@ -328,9 +318,8 @@ prepare_enemy_for_swimout() {
 
 enemy_logic() {
   foreach(var_1 in level.end_enemies) {
-    if(isalive(var_1)) {
+    if(isalive(var_1))
       var_1 show();
-    }
   }
 
   level.end_swim_anim_node maps\_anim::anim_single(level.end_enemies, "swimout");
@@ -341,7 +330,6 @@ retarget_engines() {
   var_0 = getent("lighttarget_engines", "targetname");
   var_1 = getEntArray("loco_engines", "script_noteworthy");
 
-  foreach(var_3 in var_1) {
-    var_3 retargetscriptmodellighting(var_0);
-  }
+  foreach(var_3 in var_1)
+  var_3 retargetscriptmodellighting(var_0);
 }

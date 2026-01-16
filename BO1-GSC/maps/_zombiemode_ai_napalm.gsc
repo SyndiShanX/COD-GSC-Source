@@ -236,10 +236,10 @@ napalm_zombie_spawn(animname_set) {
   anchor Delete();
   self thread maps\_zombiemode_spawner::hide_pop();
   level thread napalm_fire_trigger(self, 80, 6, true);
-  self playSound("zmb_ignite");
-  self playSound("evt_napalm_zombie_spawn");
-  fwd = anglesToForward(self.angles);
-  playFX(level._effect["napalm_spawn"], old_origin, fwd, (0, 0, 1));
+  self PlaySound("zmb_ignite");
+  self playsound("evt_napalm_zombie_spawn");
+  fwd = anglestoforward(self.angles);
+  playfx(level._effect["napalm_spawn"], old_origin, fwd, (0, 0, 1));
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("general", "napalm_spawn");
   speed = "run";
@@ -251,7 +251,7 @@ napalm_zombie_spawn(animname_set) {
   self stop_magic_bullet_shield();
   self.a.disablepain = true;
   self BloodImpact("hero");
-  self playSound(level.zmb_vox["napalm_zombie"]["ambient"]);
+  self PlaySound(level.zmb_vox["napalm_zombie"]["ambient"]);
 }
 
 napalm_zombie_client_flag() {
@@ -354,7 +354,7 @@ _zombie_ExplodeNearPlayers() {
       if(isDefined(level._CF_ACTOR_NAPALM_ZOMBIE_EXPLODE)) {
         self SetClientFlag(level._CF_ACTOR_NAPALM_ZOMBIE_EXPLODE);
       }
-      self playSound("evt_napalm_zombie_charge");
+      self playsound("evt_napalm_zombie_charge");
       explode_wind_up = % ai_zombie_napalm_attack_01;
       time = getanimlength(explode_wind_up);
       animScale = 2.0;
@@ -373,9 +373,9 @@ napalm_zombie_death() {
   dogs = get_array_of_closest(self.origin, GetAiSpeciesArray("allies", "zombie_dog"), undefined, undefined, level.napalmZombieDamageRadius);
   zombies = array_combine(zombies_axis, dogs);
   if(isDefined(level._effect["napalm_explosion"])) {
-    playFXOnTag(level._effect["napalm_explosion"], self, "J_SpineLower");
+    PlayFxOnTag(level._effect["napalm_explosion"], self, "J_SpineLower");
   }
-  self playSound("evt_napalm_zombie_explo");
+  self playsound("evt_napalm_zombie_explo");
   if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker thread maps\_zombiemode_audio::create_and_play_dialog("kill", "napalm");
   }
@@ -408,7 +408,7 @@ napalm_delay_delete() {
 }
 
 _napalm_damage_zombies(zombies) {
-  eyeOrigin = self getEye();
+  eyeOrigin = self GetEye();
   if(!isDefined(zombies)) {
     return;
   }
@@ -421,7 +421,7 @@ _napalm_damage_zombies(zombies) {
     if(is_magic_bullet_shield_enabled(zombies[i])) {
       continue;
     }
-    test_origin = zombies[i] getEye();
+    test_origin = zombies[i] GetEye();
     if(!BulletTracePassed(eyeOrigin, test_origin, false, undefined)) {
       continue;
     }
@@ -448,7 +448,7 @@ _napalm_damage_zombies(zombies) {
 }
 
 _napalm_damage_players() {
-  eyeOrigin = self getEye();
+  eyeOrigin = self GetEye();
   footOrigin = self.origin + (0, 0, 8);
   midOrigin = (footOrigin[0], footOrigin[1], (footOrigin[2] + eyeOrigin[2]) / 2);
   players_damaged_by_explosion = false;
@@ -457,7 +457,7 @@ _napalm_damage_players() {
     if(!is_player_valid(players[i])) {
       continue;
     }
-    test_origin = players[i] getEye();
+    test_origin = players[i] GetEye();
     damageRadius = level.napalmExplodeDamageRadius;
     if(is_true(self.wet)) {
       damageRadius = level.napalmExplodeDamageRadiusWet;
@@ -476,7 +476,7 @@ _napalm_damage_players() {
     }
     players_damaged_by_explosion = true;
     if(isDefined(level._effect["player_fire_death_napalm"])) {
-      playFXOnTag(level._effect["player_fire_death_napalm"], players[i], "J_SpineLower");
+      PlayFxOnTag(level._effect["player_fire_death_napalm"], players[i], "J_SpineLower");
     }
     dist = distance(eyeOrigin, test_origin);
     killPlayerDamage = 100;
@@ -532,7 +532,7 @@ napalm_fire_trigger(ai, radius, time, spawnFire) {
     if(!spawnFire && isDefined(level._effect["napalm_fire_trigger"])) {
       sound_ent = spawn("script_origin", ai.origin);
       sound_ent playLoopSound("evt_napalm_fire", 1);
-      playFX(level._effect["napalm_fire_trigger"], ai.origin);
+      PlayFX(level._effect["napalm_fire_trigger"], ai.origin);
     }
   } else {
     trigger.napalm_fire_damage = 10;
@@ -583,7 +583,7 @@ kill_with_fire(damageType) {
     if((level.burning_zombies.size < 6)) {
       level.burning_zombies[level.burning_zombies.size] = self;
       self thread zombie_flame_watch();
-      self playSound("evt_zombie_ignite");
+      self playsound("evt_zombie_ignite");
       self thread animscripts\zombie_death::flame_death_fx();
       wait(randomfloat(1.25));
     }
@@ -613,7 +613,7 @@ _zombie_SetupFXOnJoint(jointName, fxName, offset) {
     offset = (0, 0, 0);
   }
   effectEnt LinkTo(self, jointName, offset);
-  playFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
+  PlayFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
 

@@ -11,6 +11,7 @@
 #include scripts\mp_common\gametypes\ct_vo;
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\round;
+
 #namespace ct_ui;
 
 function_6889bb61(var_74d544ba) {

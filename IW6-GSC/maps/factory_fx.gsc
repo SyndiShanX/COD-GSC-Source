@@ -286,9 +286,8 @@ fx_assembly_setup() {
   common_scripts\utility::exploder("assembly_ambient_off_in_smoke");
   var_0 = getEntArray("factory_welding_base_01", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    playFXOnTag(level._effect["glow_green_light_30_nolight"], var_2, "tag_light_green");
-  }
+  foreach(var_2 in var_0)
+  playFXOnTag(level._effect["glow_green_light_30_nolight"], var_2, "tag_light_green");
 }
 
 lgt_intro_train_light() {}
@@ -308,37 +307,31 @@ lgt_ambush_begin() {
   var_1 = getEntArray("ambush_tv", "targetname");
   var_2 = getEntArray("ambush_assembly_lights", "script_noteworthy");
 
-  foreach(var_4 in var_0) {
-    var_4 setlightintensity(1.75);
-  }
+  foreach(var_4 in var_0)
+  var_4 setlightintensity(1.75);
 
-  foreach(var_4 in var_1) {
-    var_4 setlightintensity(3.0);
-  }
+  foreach(var_4 in var_1)
+  var_4 setlightintensity(3.0);
 
   var_8 = getEntArray("ambush_console", "targetname");
 
-  foreach(var_4 in var_8) {
-    var_4 = playFX(level._effect["lights_console_blue"], var_4.origin);
-  }
+  foreach(var_4 in var_8)
+  var_4 = playFX(level._effect["lights_console_blue"], var_4.origin);
 
   level waittill("ambush_triggered");
   wait 16.75;
 
-  foreach(var_4 in var_0) {
-    var_4 setlightintensity(0.01);
-  }
+  foreach(var_4 in var_0)
+  var_4 setlightintensity(0.01);
 
-  foreach(var_4 in var_1) {
-    var_4 setlightintensity(0.01);
-  }
+  foreach(var_4 in var_1)
+  var_4 setlightintensity(0.01);
 
   wait 0.75;
 
   foreach(var_4 in var_2) {
-    if(maps\_lights::is_light_entity(var_4)) {
+    if(maps\_lights::is_light_entity(var_4))
       thread lgt_assembly_flicker_anim(var_4);
-    }
   }
 
   common_scripts\utility::flag_set("lgt_factory_ambush_breach");
@@ -360,27 +353,24 @@ lgt_vision_fog_init() {
 }
 
 trigger_vf_sunsamplesize() {
-  if(level.ps3 == 1) {
+  if(level.ps3 == 1)
     setsaveddvar("sm_sunsamplesizenear", 0.1);
-  } else {
+  else
     setsaveddvar("sm_sunsamplesizenear", 0.25);
-  }
 
   common_scripts\utility::flag_wait("lgt_factory_reveal");
 
-  if(level.ps3 == 1) {
+  if(level.ps3 == 1)
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.1, 2);
-  } else {
+  else
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.65, 2);
-  }
 
   common_scripts\utility::flag_wait("lgt_factory_ingress");
 
-  if(level.ps3 == 1) {
+  if(level.ps3 == 1)
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.3, 1);
-  } else {
+  else
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.65, 2);
-  }
 }
 
 trigger_vf_intro() {
@@ -418,39 +408,34 @@ trigger_vf_factory_reveal() {
 trigger_vf_powerstealth() {
   var_0 = getEntArray("lgt_powerstealth_racks", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 setlightradius(20);
-  }
+  foreach(var_2 in var_0)
+  var_2 setlightradius(20);
 
   common_scripts\utility::flag_wait_any("entered_factory_1", "card_swiped");
 
-  foreach(var_2 in var_0) {
-    var_2 setlightradius(700);
-  }
+  foreach(var_2 in var_0)
+  var_2 setlightradius(700);
 
   var_6 = 0;
   common_scripts\utility::flag_wait("lgt_flag_powerstealth");
   wait 0.1;
   var_7 = 20;
 
-  if(var_6 == 1) {
+  if(var_6 == 1)
     var_7 = 800;
-  }
 
   var_6 = !var_6;
 
-  foreach(var_2 in var_0) {
-    var_2 setlightradius(var_7);
-  }
+  foreach(var_2 in var_0)
+  var_2 setlightradius(var_7);
 }
 
 trigger_vf_presat() {
   common_scripts\utility::flag_wait("presat_entrance");
   var_0 = getent("lgt_presat_revolving_door", "script_noteworthy");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 setlightintensity(2.5);
-  }
 
   var_1 = getent("lgt_presat_warning", "script_noteworthy");
 
@@ -458,18 +443,16 @@ trigger_vf_presat() {
     var_2 = randomintrange(5, 7) * 8;
     var_1 setlightintensity(1.25);
 
-    for(var_3 = 0; var_3 < var_2; var_3++) {
+    for(var_3 = 0; var_3 < var_2; var_3++)
       var_1 rotateyaw(45, 1);
-    }
 
     var_1 setlightintensity(0.1);
   }
 }
 
 alphabetizeentarray(var_0) {
-  if(var_0.size <= 1) {
+  if(var_0.size <= 1)
     return var_0;
-  }
 
   var_1 = [var_0.size];
 
@@ -528,9 +511,9 @@ changelightintensityovertime(var_0, var_1) {
 trigger_vf_weapon_reveal() {
   setsaveddvar("r_fastModelPrimaryLightCheck", "1");
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     lgt_weapon_reveal_sequence_ng();
-  } else {
+  else {
     var_0 = getent("satellite_room_vert_pieces", "targetname");
     var_1 = getent("satellite_ROG_01", "targetname");
     var_2 = getent("satellite_ROG_02", "targetname");
@@ -556,19 +539,16 @@ trigger_vf_weapon_reveal() {
 }
 
 lgt_weapon_rim_dim(var_0, var_1) {
-  foreach(var_3 in var_0) {
-    var_3 thread changelightintensityovertime(0.2, 2.0);
-  }
+  foreach(var_3 in var_0)
+  var_3 thread changelightintensityovertime(0.2, 2.0);
 
-  foreach(var_3 in var_1) {
-    var_3 thread changelightintensityovertime(0.1, 2.0);
-  }
+  foreach(var_3 in var_1)
+  var_3 thread changelightintensityovertime(0.1, 2.0);
 
   wait 2.0;
 
-  foreach(var_3 in var_0) {
-    var_3 setlightradius(13);
-  }
+  foreach(var_3 in var_0)
+  var_3 setlightradius(13);
 }
 
 lgt_weapon_reveal_sequence() {
@@ -576,20 +556,17 @@ lgt_weapon_reveal_sequence() {
   var_1 = getEntArray("lgt_sat_room_rim", "script_noteworthy");
   var_2 = getEntArray("lgt_sat_room_rim_keep", "script_noteworthy");
 
-  foreach(var_4 in var_1) {
-    var_4 setlightintensity(0.3);
-  }
+  foreach(var_4 in var_1)
+  var_4 setlightintensity(0.3);
 
-  foreach(var_4 in var_2) {
-    var_4 setlightintensity(0.3);
-  }
+  foreach(var_4 in var_2)
+  var_4 setlightintensity(0.3);
 
   common_scripts\utility::flag_wait("lgt_weapon_room_jump");
   wait 4.5;
 
-  foreach(var_4 in var_0) {
-    var_4 thread changelightintensityovertime(1, 0.75);
-  }
+  foreach(var_4 in var_0)
+  var_4 thread changelightintensityovertime(1, 0.75);
 
   common_scripts\utility::flag_wait("lgt_weapon_sequencing");
   wait 1;
@@ -626,20 +603,17 @@ lgt_weapon_reveal_sequence_ng() {
   var_1 = getEntArray("lgt_sat_room_rim", "script_noteworthy");
   var_2 = getEntArray("lgt_sat_room_rim_keep", "script_noteworthy");
 
-  foreach(var_4 in var_1) {
-    var_4 setlightintensity(0.85);
-  }
+  foreach(var_4 in var_1)
+  var_4 setlightintensity(0.85);
 
-  foreach(var_4 in var_2) {
-    var_4 setlightintensity(0.85);
-  }
+  foreach(var_4 in var_2)
+  var_4 setlightintensity(0.85);
 
   common_scripts\utility::flag_wait("lgt_weapon_room_jump");
   wait 4.5;
 
-  foreach(var_4 in var_0) {
-    var_4 thread changelightintensityovertime(1.0, 0.75);
-  }
+  foreach(var_4 in var_0)
+  var_4 thread changelightintensityovertime(1.0, 0.75);
 
   common_scripts\utility::flag_wait("lgt_weapon_sequencing");
   wait 1;
@@ -656,17 +630,15 @@ lgt_weapon_reveal_sequence_ng() {
   level.player thread maps\factory_audio::sfx_sat_room_lights("scn_factory_satroom_lights_02");
   var_10 = getEntArray("lgt_weapon_room_03", "script_noteworthy");
 
-  foreach(var_4 in var_10) {
-    var_4 thread changelightintensityovertime(3.25, 0.1);
-  }
+  foreach(var_4 in var_10)
+  var_4 thread changelightintensityovertime(3.25, 0.1);
 
   wait 1;
   level.player thread maps\factory_audio::sfx_sat_room_lights("scn_factory_satroom_lights_03");
   var_10 = getEntArray("lgt_weapon_room_04", "script_noteworthy");
 
-  foreach(var_4 in var_10) {
-    var_4 setlightintensity(3);
-  }
+  foreach(var_4 in var_10)
+  var_4 setlightintensity(3);
 }
 
 trigger_vf_ambush() {
@@ -697,9 +669,8 @@ fx_track_thermal() {
     } else if(var_0) {
       var_0 = 0;
 
-      if(isDefined(level.smokevolume) && level.player istouching(level.smokevolume)) {
+      if(isDefined(level.smokevolume) && level.player istouching(level.smokevolume))
         setexpfog(0, 110, 0.4, 0.4, 0.4, level.smokeintensity, 0);
-      }
 
       setsaveddvar("r_cc_mode", "off");
       common_scripts\utility::exploder("assembly_ambient_off_in_thermal");
@@ -745,11 +716,10 @@ fx_thermal_glitch_flashbang_spotlight() {
     var_3 = level.player common_scripts\utility::waittill_any_return("flashed", "spotlight_blind");
 
     if(level.player.thermal && isalive(level.player)) {
-      if(var_3 == "flashed") {
+      if(var_3 == "flashed")
         var_2 = var_0;
-      } else if(var_3 == "spotlight_blind") {
+      else if(var_3 == "spotlight_blind")
         var_2 = var_1;
-      }
 
       if(level.player.thermal_blind_status != "blind") {
         common_scripts\utility::flag_set("fx_thermal_glitch");
@@ -783,9 +753,8 @@ fx_thermal_glitch_timer(var_0) {
 fx_ambush_spawn_assembly_smoke() {
   var_0 = getEntArray("gas_node", "targetname");
 
-  foreach(var_2 in var_0) {
-    playFX(level._effect["factory_ambush_smoke_grenade"], var_2.origin, (0, 0, 1), (1, 0, 0));
-  }
+  foreach(var_2 in var_0)
+  playFX(level._effect["factory_ambush_smoke_grenade"], var_2.origin, (0, 0, 1), (1, 0, 0));
 
   common_scripts\utility::waitframe();
   level.assemblysmoke = spawn("script_model", level.player.origin);
@@ -828,9 +797,8 @@ fx_ambush_smoke_killer() {
     while(level.smokeintensity >= 0.05) {
       level.smokeintensity = level.smokeintensity - 0.05;
 
-      if(!level.player.thermal) {
+      if(!level.player.thermal)
         setexpfog(0, 110, 0.4, 0.4, 0.4, level.smokeintensity, 0.1);
-      }
 
       wait 0.1;
     }
@@ -842,9 +810,8 @@ fx_ambush_smoke_killer() {
 }
 
 fx_ambush_welding_start(var_0) {
-  if(!isDefined(level.flag[var_0.animname])) {
+  if(!isDefined(level.flag[var_0.animname]))
     common_scripts\utility::flag_init(var_0.animname);
-  }
 
   if(!common_scripts\utility::flag("factory_assembly_line_resume_speed_front") && !common_scripts\utility::flag("factory_assembly_line_resume_speed_back")) {
     return;
@@ -853,16 +820,14 @@ fx_ambush_welding_start(var_0) {
   var_1 = 0;
 
   while(isDefined(var_0) && !common_scripts\utility::flag(var_0.animname)) {
-    if(common_scripts\utility::flag("factory_assembly_line_resume_speed_front") && common_scripts\utility::flag("factory_assembly_line_resume_speed_back") && common_scripts\utility::flag("fx_moving_pieces")) {
+    if(common_scripts\utility::flag("factory_assembly_line_resume_speed_front") && common_scripts\utility::flag("factory_assembly_line_resume_speed_back") && common_scripts\utility::flag("fx_moving_pieces"))
       playFXOnTag(level._effect["welding_sparks_funner"], var_0, "tag_fx_01");
-    }
 
     wait 0.5;
   }
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     killfxontag(level._effect["welding_sparks_funner"], var_0, "tag_fx_01");
-  }
 }
 
 fx_ambush_welding_stop(var_0) {
@@ -873,9 +838,8 @@ fx_ambush_welding_stop(var_0) {
 fx_ambush_piece_start(var_0) {
   var_1 = "piece" + var_0.mover_prefab_id;
 
-  if(!isDefined(level.flag[var_1])) {
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
-  }
 
   if(!common_scripts\utility::flag("factory_assembly_line_resume_speed_front") || !common_scripts\utility::flag("factory_assembly_line_resume_speed_back")) {
     return;
@@ -883,9 +847,8 @@ fx_ambush_piece_start(var_0) {
   common_scripts\utility::flag_clear(var_1);
 
   while(!common_scripts\utility::flag(var_1)) {
-    if(common_scripts\utility::flag("fx_moving_pieces")) {
+    if(common_scripts\utility::flag("fx_moving_pieces"))
       playFXOnTag(level._effect["factory_moving_piece_light"], var_0, "j_anim_jnt_main_piston_arm_btm");
-    }
 
     wait 0.5;
   }
@@ -930,13 +893,11 @@ fx_intro_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("intro_ambient");
 
-    if(maps\_utility::is_gen4()) {
+    if(maps\_utility::is_gen4())
       common_scripts\utility::exploder("intro_ambient_ng");
-    }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("intro_ambient");
     maps\_utility::stop_exploder("intro_ambient_ng");
@@ -948,9 +909,8 @@ fx_entrance_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("entrance_ambient");
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("entrance_ambient");
   }
@@ -961,13 +921,11 @@ fx_powerstealth_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("powerstealth_ambient");
 
-    if(maps\_utility::is_gen4()) {
+    if(maps\_utility::is_gen4())
       common_scripts\utility::exploder("powerstealth_ambient_ng");
-    }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("powerstealth_ambient");
     maps\_utility::stop_exploder("powerstealth_ambient_ng");
@@ -979,9 +937,8 @@ fx_presat_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("presat_ambient");
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("presat_ambient");
   }
@@ -992,13 +949,11 @@ fx_sat_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("sat_ambient");
 
-    if(maps\_utility::is_gen4()) {
+    if(maps\_utility::is_gen4())
       common_scripts\utility::exploder("sat_ambient_ng");
-    }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("sat_ambient");
     maps\_utility::stop_exploder("sat_ambient_ng");
@@ -1012,13 +967,11 @@ fx_roof_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("roof_ambient");
 
-    if(maps\_utility::is_gen4()) {
+    if(maps\_utility::is_gen4())
       common_scripts\utility::exploder("roof_ambient_ng");
-    }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("roof_ambient");
     maps\_utility::stop_exploder("roof_ambient_ng");
@@ -1032,9 +985,8 @@ fx_chase_ambient() {
     self waittill("trigger");
     common_scripts\utility::exploder("chase_ambient");
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
 
     maps\_utility::stop_exploder("chase_ambient");
   }
@@ -1046,9 +998,8 @@ fx_outdoor_ambient() {
   for(;;) {
     var_1 = 0;
 
-    foreach(var_3 in level.fx_outdoor_triggers) {
-      var_1 = var_1 || level.player istouching(var_3);
-    }
+    foreach(var_3 in level.fx_outdoor_triggers)
+    var_1 = var_1 || level.player istouching(var_3);
 
     if(var_1 != var_0) {
       if(var_1) {
@@ -1056,9 +1007,8 @@ fx_outdoor_ambient() {
         common_scripts\utility::exploder("outdoor_ambient");
         common_scripts\utility::exploder("smokestacks");
 
-        if(maps\_utility::is_gen4()) {
+        if(maps\_utility::is_gen4())
           common_scripts\utility::exploder("outdoor_ambient_ng");
-        }
       } else {
         maps\_utility::stop_exploder("chase_intro_lamp_on");
         maps\_utility::stop_exploder("outdoor_ambient");
@@ -1095,17 +1045,15 @@ fx_show_hide(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2 = getEntArray(var_0, "targetname");
 
-    foreach(var_4 in var_2) {
-      var_4 show();
-    }
+    foreach(var_4 in var_2)
+    var_4 show();
   }
 
   if(isDefined(var_1)) {
     var_2 = getEntArray(var_1, "targetname");
 
-    foreach(var_4 in var_2) {
-      var_4 hide();
-    }
+    foreach(var_4 in var_2)
+    var_4 hide();
   }
 }
 
@@ -1113,17 +1061,15 @@ fx_show_delete(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2 = getEntArray(var_0, "targetname");
 
-    foreach(var_4 in var_2) {
-      var_4 show();
-    }
+    foreach(var_4 in var_2)
+    var_4 show();
   }
 
   if(isDefined(var_1)) {
     var_2 = getEntArray(var_1, "targetname");
 
-    foreach(var_4 in var_2) {
-      var_4 delete();
-    }
+    foreach(var_4 in var_2)
+    var_4 delete();
   }
 }
 
@@ -1136,20 +1082,17 @@ lightning_flash(var_0, var_1, var_2) {
   }
   var_1 = 1;
 
-  if(!isDefined(level.old_type)) {
+  if(!isDefined(level.old_type))
     level.old_type = 9;
-  }
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = (-20, 60, 0);
-  }
 
   if(!isDefined(var_2)) {
     var_2 = randomint(10);
 
-    if(var_2 == level.old_type) {
+    if(var_2 == level.old_type)
       return;
-    }
   }
 
   level.old_type = var_2;
@@ -1201,9 +1144,8 @@ lightning_flash(var_0, var_1, var_2) {
       case 6:
         var_1 = randomintrange(1, 3);
 
-        for(var_4 = 0; var_4 < var_1; var_4++) {
+        for(var_4 = 0; var_4 < var_1; var_4++)
           lightning_single_flash(0.7 * var_3, 0.7 * var_3, 0.9 * var_3, 1.0, randomfloatrange(2, 9));
-        }
 
         lightning_normal();
         wait(randomfloatrange(0.1, 2));
@@ -1254,9 +1196,8 @@ lightning_flash(var_0, var_1, var_2) {
       case 6:
         var_1 = randomintrange(1, 3);
 
-        for(var_4 = 0; var_4 < var_1; var_4++) {
+        for(var_4 = 0; var_4 < var_1; var_4++)
           lightning_single_flash(0.7, 0.7, 0.9, 1.0, randomfloatrange(2, 12));
-        }
 
         lightning_normal();
         wait(randomfloatrange(0.1, 2));
@@ -1289,9 +1230,8 @@ lightning_flash_primary(var_0, var_1) {
   if(isDefined(var_0)) {
     var_0 setlightintensity(3.2);
 
-    if(!isDefined(var_1)) {
+    if(!isDefined(var_1))
       var_1 = randomintrange(1, 4);
-    }
 
     for(var_2 = 0; var_2 < var_1; var_2++) {
       var_3 = randomint(3);
@@ -1370,9 +1310,8 @@ ambush_screensaver_loop() {
     cinematicingameloopresident("factory_computer_screensaver", 1);
     wait 1;
 
-    while(iscinematicplaying()) {
+    while(iscinematicplaying())
       wait 0.5;
-    }
   }
 }
 
@@ -1496,25 +1435,22 @@ fx_screen_raindrops() {
       }
 
       if(common_scripts\utility::flag("fx_screen_raindrops")) {
-        if(!var_1 && var_2[0] < -55 && randomint(100) < 20) {
+        if(!var_1 && var_2[0] < -55 && randomint(100) < 20)
           level.player setwatersheeting(1, 1.0);
-        }
 
         var_0 = var_0 + 1;
 
-        if(var_0 > 4) {
+        if(var_0 > 4)
           var_0 = 0;
-        }
 
-        if(var_2[0] < -40) {
+        if(var_2[0] < -40)
           playFXOnTag(level._effect["raindrops_screen_20_" + var_0], level.screenrain, "tag_origin");
-        } else if(var_2[0] < -25) {
+        else if(var_2[0] < -25)
           playFXOnTag(level._effect["raindrops_screen_10_" + var_0], level.screenrain, "tag_origin");
-        } else if(var_2[0] < 25) {
+        else if(var_2[0] < 25)
           playFXOnTag(level._effect["raindrops_screen_5_" + var_0], level.screenrain, "tag_origin");
-        } else if(var_2[0] < 40) {
+        else if(var_2[0] < 40)
           playFXOnTag(level._effect["raindrops_screen_3_" + var_0], level.screenrain, "tag_origin");
-        }
       }
     }
 
@@ -1709,9 +1645,8 @@ rain_on_actor(var_0, var_1, var_2, var_3) {
         var_9 = var_0.origin + (6, 6, 6);
       }
 
-      if(isalive(var_0)) {
+      if(isalive(var_0))
         var_7 = var_0.origin;
-      }
 
       wait(var_2);
     }
@@ -1792,15 +1727,13 @@ fx_chase_het_tire_smoke(var_0) {
 
 fx_chase_stack_small_break(var_0) {
   foreach(var_2 in level.createfxent) {
-    if(var_2.v["fxid"] == "fx_stack_small_red_light") {
+    if(var_2.v["fxid"] == "fx_stack_small_red_light")
       var_2 common_scripts\_createfx::stop_fx_looper();
-    }
   }
 
   foreach(var_2 in level.createfxent) {
-    if(var_2.v["fxid"] == "fx_stack_small_smoke") {
+    if(var_2.v["fxid"] == "fx_stack_small_smoke")
       var_2 common_scripts\_createfx::stop_fx_looper();
-    }
   }
 
   playFXOnTag(level._effect["factory_chase_stack_glow_runner"], var_0, "tag_fx_stack_top");
@@ -1879,15 +1812,13 @@ fx_chase_warehouse_explosion(var_0) {
 
 fx_chase_stack_break_01(var_0) {
   foreach(var_2 in level.createfxent) {
-    if(var_2.v["fxid"] == "fx_stack_big_red_light") {
+    if(var_2.v["fxid"] == "fx_stack_big_red_light")
       var_2 common_scripts\_createfx::stop_fx_looper();
-    }
   }
 
   foreach(var_2 in level.createfxent) {
-    if(var_2.v["fxid"] == "fx_stack_big_smoke") {
+    if(var_2.v["fxid"] == "fx_stack_big_smoke")
       var_2 common_scripts\_createfx::stop_fx_looper();
-    }
   }
 
   playFXOnTag(level._effect["factory_chase_stack_glow_runner"], var_0, "tag_fx_stack_top");

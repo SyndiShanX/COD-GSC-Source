@@ -19,11 +19,10 @@ corner_think(var_0, var_1) {
   self.corneraiming = 0;
   animscripts\track::setanimaimweight(0);
   self.havegonetocover = 0;
-  var_2 = spawnStruct();
+  var_2 = spawnstruct();
 
-  if(!self.fixednode) {
+  if(!self.fixednode)
     var_2.movetonearbycover = animscripts\cover_behavior::movetonearbycover;
-  }
 
   var_2.mainloopstart = ::mainloopstart;
   var_2.reload = ::cornerreload;
@@ -43,11 +42,11 @@ end_script_corner() {
 }
 
 set_corner_anim_array() {
-  if(self.a.pose == "crouch") {
+  if(self.a.pose == "crouch")
     set_anim_array("crouch");
-  } else if(self.a.pose == "stand") {
+  else if(self.a.pose == "stand")
     set_anim_array("stand");
-  } else {
+  else {
     animscripts\utility::exitpronewrapper(1);
     self.a.pose = "crouch";
     set_anim_array("crouch");
@@ -55,24 +54,20 @@ set_corner_anim_array() {
 }
 
 shouldchangestanceforfun() {
-  if(!isDefined(self.allowstancechangesforfun)) {
+  if(!isdefined(self.allowstancechangesforfun))
     return 0;
-  }
 
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy))
     return 0;
-  }
 
-  if(!isDefined(self.changestanceforfuntime)) {
+  if(!isdefined(self.changestanceforfuntime))
     self.changestanceforfuntime = gettime() + randomintrange(5000, 20000);
-  }
 
   if(gettime() > self.changestanceforfuntime) {
     self.changestanceforfuntime = gettime() + randomintrange(5000, 20000);
 
-    if(isDefined(self.rambochance) && self.a.pose == "stand") {
+    if(isdefined(self.rambochance) && self.a.pose == "stand")
       return 0;
-    }
 
     self.a.prevattack = undefined;
     return 1;
@@ -88,38 +83,34 @@ mainloopstart() {
   if(self.a.pose == "crouch") {
     var_1 = "crouch";
 
-    if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
-      if(self.script == "cover_right") {
+    if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+      if(self.script == "cover_right")
         var_1 = "crouch_r";
-      } else if(self.script == "cover_left") {
+      else if(self.script == "cover_left")
         var_1 = "crouch_l";
-      }
     }
 
     if(self.covernode doesnodeallowstance("stand")) {
-      if(!self.covernode doesnodeallowstance("crouch") || shouldchangestanceforfun()) {
+      if(!self.covernode doesnodeallowstance("crouch") || shouldchangestanceforfun())
         var_1 = "stand";
-      }
     }
   } else if(self.covernode doesnodeallowstance("crouch")) {
     if(!self.covernode doesnodeallowstance("stand") || shouldchangestanceforfun()) {
       var_1 = "crouch";
 
-      if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
-        if(self.script == "cover_right") {
+      if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+        if(self.script == "cover_right")
           var_1 = "crouch_r";
-        } else if(self.script == "cover_left") {
+        else if(self.script == "cover_left")
           var_1 = "crouch_l";
-        }
       }
     }
   }
 
   if(self.havegonetocover) {
-    if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
-      if(var_1 == "crouch_l" || var_1 == "crouch_r") {
+    if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+      if(var_1 == "crouch_l" || var_1 == "crouch_r")
         var_1 = "crouch";
-      }
     }
 
     transitiontostance(var_1);
@@ -129,9 +120,9 @@ mainloopstart() {
     if(self.a.pose == var_1) {
       var_3 = 0.4;
 
-      if(isDefined(self.cover) && isDefined(self.cover.hidestate) && self.cover.hidestate == "back") {
+      if(isdefined(self.cover) && isdefined(self.cover.hidestate) && self.cover.hidestate == "back")
         var_4 = animscripts\utility::animarray("alert_idle_back");
-      } else if(var_1 == "crouch" && shouldplayalerttransition(self)) {
+      else if(var_1 == "crouch" && shouldplayalerttransition(self)) {
         var_4 = animscripts\utility::animarray("AW_to_MW_alert_trans");
         var_3 = getanimlength(var_4);
       } else if(var_1 == "stand" && shouldplayalerttransition(self)) {
@@ -142,7 +133,7 @@ mainloopstart() {
 
       gotocover(var_4, 0.3, var_3);
     } else {
-      if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+      if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
         if(var_1 == "crouch_l") {
           var_2 = animscripts\utility::lookupanim("combat", "trans_to_crouch_l");
           var_1 = "crouch";
@@ -152,9 +143,8 @@ mainloopstart() {
         }
       }
 
-      if(!isDefined(var_2)) {
+      if(!isdefined(var_2))
         var_2 = animscripts\utility::animarray("stance_change");
-      }
 
       gotocover(var_2, 0.3, getanimlength(var_2));
       set_anim_array(var_1);
@@ -172,40 +162,34 @@ hasonekneeup() {
   var_0 = [ % cornercrr_alert_painc, % cornercrr_alert_paina, % cornercrl_painb, % exposed_crouch_pain_headsnap, % exposed_crouch_pain_flinch, % exposed_crouch_pain_chest, % exposed_crouch_pain_left_arm, % exposed_crouch_pain_right_arm, % exposed_stand_2_crouch, % cornercrl_lean_2_alert, % run_2_crouch_f, % run_2_crouch_90l, % run_2_crouch_90r, % run_2_crouch_180l, % run_2_crouch_idle_1, % run_2_crouch_idle_3, % run_2_crouch_idle_7, % run_2_crouch_idle_9, % cornercrr_lean_2_alert, % cornercrl_reloada, % cornercrr_reload, % cornercrl_cqb_trans_in_1, % cornercrl_cqb_trans_in_2, % cornercrl_cqb_trans_in_3, % cornercrl_cqb_trans_in_4, % cornercrl_cqb_trans_in_6, % cornercrl_cqb_trans_in_7, % cornercrl_cqb_trans_in_8, % grenade_return_cornercrl_1knee_throw, % grenade_return_cornercrr_1knee_throw];
 
   foreach(var_2 in var_0) {
-    if(self getanimweight(var_2) != 0.0) {
+    if(self getanimweight(var_2) != 0.0)
       return 1;
-    }
   }
 
   return 0;
 }
 
 shouldplayalerttransition(var_0) {
-  if(!animscripts\utility::using_improved_transitions()) {
+  if(!animscripts\utility::using_improved_transitions())
     return 0;
-  }
 
   var_1 = [ % cornercrl_trans_a_2_alert, % cornercrr_trans_a_2_alert, % cornercrl_trans_b_2_alert, % cornercrr_trans_b_2_alert, % cornercrouchr_crouchidle_2_alert, % cornercrouchl_crouchidle_2_alert, % h1_cornercrr_alert_paina_2, % h1_cornercrr_alert_painb_2, % h1_cornercrr_alert_painc_2, % h1_cornercrl_painb_2, % h1_cornercrl_trans_2_2knees, % h1_cornercrouch_trans_2_2knee, % h1_cornercrr_alert_paina_2, % h1_cornercrr_alert_painb_2, % h1_cornercrr_alert_painc_2, % cornercrr_reloada, % cornercrr_reloadb, % cornercrl_reloadb];
   var_2 = [ % walk_backward, % walk_left, % walk_right, % walk_forward];
 
   foreach(var_4 in var_1) {
-    if(var_0 getanimweight(var_4) != 0.0) {
+    if(var_0 getanimweight(var_4) != 0.0)
       return 0;
-    }
   }
 
-  if(var_0 hasonekneeup()) {
+  if(var_0 hasonekneeup())
     return 1;
-  }
 
-  if(var_0 getanimweight( % exposed_modern) != 0.0 && var_0 getanimweight( % exposed_aiming) != 0.0) {
+  if(var_0 getanimweight( % exposed_modern) != 0.0 && var_0 getanimweight( % exposed_aiming) != 0.0)
     return 1;
-  }
 
   foreach(var_7 in var_2) {
-    if(var_0 getanimweight(var_7) != 0.0) {
+    if(var_0 getanimweight(var_7) != 0.0)
       return 1;
-    }
   }
 
   return 0;
@@ -214,7 +198,7 @@ shouldplayalerttransition(var_0) {
 printyaws() {
   wait 2;
 
-  for(;;) {
+  for (;;) {
     printyawtoenemy();
     wait 0.05;
   }
@@ -223,72 +207,63 @@ printyaws() {
 canseepointfromexposedatcorner(var_0, var_1) {
   var_2 = var_1 animscripts\utility::getyawtoorigin(var_0);
 
-  if(var_2 > 60 || var_2 < -60) {
+  if(var_2 > 60 || var_2 < -60)
     return 0;
-  }
 
-  if(animscripts\utility::isnodecoverleft(var_1) && var_2 > 14) {
+  if(animscripts\utility::isnodecoverleft(var_1) && var_2 > 14)
     return 0;
-  }
 
-  if(animscripts\utility::isnodecoverright(var_1) && var_2 < -12) {
+  if(animscripts\utility::isnodecoverright(var_1) && var_2 < -12)
     return 0;
-  }
 
   return 1;
 }
 
 shootposoutsidelegalyawrange() {
-  if(!isDefined(self.shootpos)) {
+  if(!isdefined(self.shootpos))
     return 0;
-  }
 
   var_0 = self.covernode animscripts\utility::getyawtoorigin(self.shootpos);
 
-  if(self.a.cornermode == "over") {
+  if(self.a.cornermode == "over")
     return var_0 < self.leftaimlimit || self.rightaimlimit < var_0;
-  }
 
-  if(self.cornerdirection == "up") {
+  if(self.cornerdirection == "up")
     return var_0 < -50 || var_0 > 50;
-  } else if(self.cornerdirection == "left") {
-    if(self.a.cornermode == "B") {
+  else if(self.cornerdirection == "left") {
+    if(self.a.cornermode == "B")
       return var_0 < 0 - self.abanglecutoff || var_0 > 14;
-    } else if(self.a.cornermode == "A") {
+    else if(self.a.cornermode == "A")
       return var_0 > 0 - self.abanglecutoff;
-    } else {
+    else
       return var_0 < -50 || var_0 > 8;
-    }
   } else if(self.a.cornermode == "B")
     return var_0 > self.abanglecutoff || var_0 < -12;
-  else if(self.a.cornermode == "A") {
+  else if(self.a.cornermode == "A")
     return var_0 < self.abanglecutoff;
-  } else {
+  else
     return var_0 > 50 || var_0 < -8;
-  }
 }
 
 getcornermode(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     var_3 = var_0 animscripts\utility::getyawtoorigin(var_1);
-  }
 
   var_4 = [];
 
-  if(isDefined(var_0) && self.a.pose == "crouch" && (var_3 > self.leftaimlimit && self.rightaimlimit > var_3)) {
+  if(isdefined(var_0) && self.a.pose == "crouch" && (var_3 > self.leftaimlimit && self.rightaimlimit > var_3))
     var_4 = var_0 getvalidcoverpeekouts();
-  }
 
   if(self.cornerdirection == "up") {
     if(animscripts\utility::isspaceai()) {
       var_5 = 0;
 
-      if(isDefined(var_1)) {
+      if(isdefined(var_1)) {
         var_6 = anglestoup(self.angles);
-        var_5 = animscripts\combat_utility::getpitchtoorgfromorg(var_1, self getEye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
+        var_5 = animscripts\combat_utility::getpitchtoorgfromorg(var_1, self geteye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
       }
 
       if(canlean(var_5, -5, 80)) {
@@ -297,42 +272,37 @@ getcornermode(var_0, var_1) {
         var_4[var_4.size] = "lean";
       }
 
-      if(!var_2) {
+      if(!var_2)
         var_4[var_4.size] = "A";
-      }
     } else
       var_4[var_4.size] = "A";
   } else if(self.cornerdirection == "left") {
     if(canlean(var_3, -40, 0)) {
       var_2 = shouldlean();
 
-      if(var_2) {
+      if(var_2)
         var_4[var_4.size] = "lean";
-      }
     }
 
     if(!var_2 && var_3 < 14) {
-      if(var_3 < 0 - self.abanglecutoff) {
+      if(var_3 < 0 - self.abanglecutoff)
         var_4[var_4.size] = "A";
-      } else {
+      else
         var_4[var_4.size] = "B";
-      }
     }
   } else {
     if(canlean(var_3, 0, 40)) {
       var_2 = shouldlean();
 
-      if(var_2) {
+      if(var_2)
         var_4[var_4.size] = "lean";
-      }
     }
 
     if(!var_2 && var_3 > -12) {
-      if(var_3 > self.abanglecutoff) {
+      if(var_3 > self.abanglecutoff)
         var_4[var_4.size] = "A";
-      } else {
+      else
         var_4[var_4.size] = "B";
-      }
     }
   }
 
@@ -342,41 +312,35 @@ getcornermode(var_0, var_1) {
 getbeststepoutpos() {
   var_0 = 0;
 
-  if(animscripts\utility::cansuppressenemy()) {
+  if(animscripts\utility::cansuppressenemy())
     var_0 = self.covernode animscripts\utility::getyawtoorigin(animscripts\utility::getenemysightpos());
-  } else if(self.doingambush && isDefined(self.shootpos)) {
+  else if(self.doingambush && isdefined(self.shootpos))
     var_0 = self.covernode animscripts\utility::getyawtoorigin(self.shootpos);
-  }
 
-  if(self.a.cornermode == "lean") {
+  if(self.a.cornermode == "lean")
     return "lean";
-  }
 
-  if(self.a.cornermode == "over") {
+  if(self.a.cornermode == "over")
     return "over";
-  } else if(self.a.cornermode == "B") {
+  else if(self.a.cornermode == "B") {
     if(self.cornerdirection == "left") {
-      if(var_0 < 0 - self.abanglecutoff) {
+      if(var_0 < 0 - self.abanglecutoff)
         return "A";
-      }
     } else if(self.cornerdirection == "right") {
-      if(var_0 > self.abanglecutoff) {
+      if(var_0 > self.abanglecutoff)
         return "A";
-      }
     }
 
     return "B";
   } else if(self.a.cornermode == "A") {
-    if(self.cornerdirection == "up") {
+    if(self.cornerdirection == "up")
       return "A";
-    } else if(self.cornerdirection == "left") {
-      if(var_0 > 0 - self.abanglecutoff) {
+    else if(self.cornerdirection == "left") {
+      if(var_0 > 0 - self.abanglecutoff)
         return "B";
-      }
     } else if(self.cornerdirection == "right") {
-      if(var_0 < self.abanglecutoff) {
+      if(var_0 < self.abanglecutoff)
         return "B";
-      }
     }
 
     return "A";
@@ -387,29 +351,25 @@ changestepoutpos() {
   self endon("killanimscript");
   var_0 = getbeststepoutpos();
 
-  if(var_0 == self.a.cornermode) {
+  if(var_0 == self.a.cornermode)
     return 0;
-  }
 
   self.changingcoverpos = 1;
   self notify("done_changing_cover_pos");
   var_1 = self.a.cornermode + "_to_" + var_0;
   var_2 = animscripts\utility::animarraypickrandom(var_1);
 
-  if(animscripts\utility::isspaceai() && (var_1 == "A_to_B" || var_1 == "B_to_A")) {
+  if(animscripts\utility::isspaceai() && (var_1 == "A_to_B" || var_1 == "B_to_A"))
     return 0;
-  }
 
   var_3 = !self.swimmer;
   var_4 = getpredictedpathmidpoint();
 
-  if(!self maymovetopoint(var_4, var_3)) {
+  if(!self maymovetopoint(var_4, var_3))
     return 0;
-  }
 
-  if(!self maymovefrompointtopoint(var_4, animscripts\utility::getanimendpos(var_2), var_3)) {
+  if(!self maymovefrompointtopoint(var_4, animscripts\utility::getanimendpos(var_2), var_3))
     return 0;
-  }
 
   animscripts\combat_utility::endaimidlethread();
   stopaiming(0.3);
@@ -420,51 +380,44 @@ changestepoutpos() {
   thread donotetrackswithendon("changeStepOutPos");
   var_6 = animhasnotetrack(var_2, "start_aim");
 
-  if(var_6) {
+  if(var_6)
     self waittillmatch("changeStepOutPos", "start_aim");
-  } else {
+  else
     self waittillmatch("changeStepOutPos", "end");
-  }
 
   thread startaiming(undefined, 0, 0.3);
 
-  if(var_6) {
+  if(var_6)
     self waittillmatch("changeStepOutPos", "end");
-  }
 
   self clearanim(var_2, 0.1);
   self.a.cornermode = var_0;
   self.changingcoverpos = 0;
   self.coverposestablishedtime = gettime();
 
-  if(self.a.pose != var_5) {
+  if(self.a.pose != var_5)
     set_anim_array(self.a.pose);
-  }
 
   thread changeaiming(undefined, 1, 0.3);
   return 1;
 }
 
 canlean(var_0, var_1, var_2) {
-  if(self.a.neverlean) {
+  if(self.a.neverlean)
     return 0;
-  }
 
   return var_1 <= var_0 && var_0 <= var_2;
 }
 
 shouldlean() {
-  if(!animscripts\utility::using_improved_transitions() && self.a.pose != "stand") {
+  if(!animscripts\utility::using_improved_transitions() && self.a.pose != "stand")
     return 0;
-  }
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     return 1;
-  }
 
-  if(animscripts\utility::ispartiallysuppressedwrapper()) {
+  if(animscripts\utility::ispartiallysuppressedwrapper())
     return 1;
-  }
 
   return 0;
 }
@@ -477,21 +430,19 @@ donotetrackswithendon(var_0) {
 startaiming(var_0, var_1, var_2) {
   self.corneraiming = 1;
 
-  if(self.a.cornermode == "lean") {
+  if(self.a.cornermode == "lean")
     self.a.leanaim = 1;
-  } else {
+  else
     self.a.leanaim = undefined;
-  }
 
   setaimingparams(var_0, var_1, var_2);
 }
 
 changeaiming(var_0, var_1, var_2) {
-  if(self.a.cornermode == "lean") {
+  if(self.a.cornermode == "lean")
     self.a.leanaim = 1;
-  } else {
+  else
     self.a.leanaim = undefined;
-  }
 
   setaimingparams(var_0, var_1, var_2);
 }
@@ -513,13 +464,12 @@ setaimingparams(var_0, var_1, var_2) {
   corner_playaimfacialanim(undefined);
   var_3 = undefined;
 
-  if(isDefined(self.a.array["lean_aim_straight"])) {
+  if(isdefined(self.a.array["lean_aim_straight"]))
     var_3 = self.a.array["lean_aim_straight"];
-  }
 
   thread animscripts\combat_utility::aimidlethread();
 
-  if(isDefined(self.a.leanaim)) {
+  if(isdefined(self.a.leanaim)) {
     self setanimlimited(var_3, 1, var_2);
     self setanimlimited(animscripts\utility::animarray("straight_level"), 0, 0);
     self setanimknoblimited(animscripts\utility::animarray("lean_aim_left"), 1, var_2);
@@ -529,9 +479,8 @@ setaimingparams(var_0, var_1, var_2) {
   } else if(var_1) {
     self setanimlimited(animscripts\utility::animarray("straight_level"), 1, var_2);
 
-    if(isDefined(var_3)) {
+    if(isdefined(var_3))
       self setanimlimited(var_3, 0, 0);
-    }
 
     self setanimknoblimited(animscripts\utility::animarray("add_aim_up"), 1, var_2);
     self setanimknoblimited(animscripts\utility::animarray("add_aim_down"), 1, var_2);
@@ -540,9 +489,8 @@ setaimingparams(var_0, var_1, var_2) {
   } else {
     self setanimlimited(animscripts\utility::animarray("straight_level"), 0, var_2);
 
-    if(isDefined(var_3)) {
+    if(isdefined(var_3))
       self setanimlimited(var_3, 0, 0);
-    }
 
     self setanimknoblimited(animscripts\utility::animarray("add_turn_aim_up"), 1, var_2);
     self setanimknoblimited(animscripts\utility::animarray("add_turn_aim_down"), 1, var_2);
@@ -552,9 +500,8 @@ setaimingparams(var_0, var_1, var_2) {
 }
 
 stepoutandhidespeed() {
-  if(self.a.cornermode == "over") {
+  if(self.a.cornermode == "over")
     return 1;
-  }
 
   return animscripts\combat_utility::randomfasteranimspeed();
 }
@@ -562,63 +509,54 @@ stepoutandhidespeed() {
 stepout() {
   self.a.cornermode = "alert";
 
-  if(isDefined(self.disablestepout) && self.disablestepout) {
+  if(isdefined(self.disablestepout) && self.disablestepout)
     return 0;
-  }
 
   setdefaultcorneranimmode();
 
-  if(self.a.pose == "stand") {
+  if(self.a.pose == "stand")
     self.abanglecutoff = 38;
-  } else {
+  else
     self.abanglecutoff = 31;
-  }
 
   var_0 = self.a.pose;
   set_anim_array(var_0);
   animscripts\combat::set_default_aim_limits();
   var_1 = "none";
 
-  if(animscripts\utility::hasenemysightpos()) {
+  if(animscripts\utility::hasenemysightpos())
     var_1 = getcornermode(self.covernode, animscripts\utility::getenemysightpos());
-  } else {
+  else
     var_1 = getcornermode(self.covernode);
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return 0;
-  }
 
   var_2 = "alert_to_" + var_1;
 
-  if(!animscripts\utility::animarrayanyexist(var_2)) {
+  if(!animscripts\utility::animarrayanyexist(var_2))
     return 0;
-  }
 
   var_3 = animscripts\utility::animarraypickrandom(var_2);
 
-  if(var_1 == "lean" && !ispeekoutposclear()) {
+  if(var_1 == "lean" && !ispeekoutposclear())
     return 0;
-  }
 
-  if(var_1 != "over" && !ispathclear(var_3, var_1 != "lean")) {
+  if(var_1 != "over" && !ispathclear(var_3, var_1 != "lean"))
     return 0;
-  }
 
   self.a.cornermode = var_1;
   self.a.prevattack = var_1;
 
-  if(self.a.cornermode == "lean") {
+  if(self.a.cornermode == "lean")
     animscripts\combat::set_default_aim_limits(self.covernode);
-  }
 
-  if(var_1 == "A" || var_1 == "B") {
+  if(var_1 == "A" || var_1 == "B")
     self.a.special = "cover_" + self.cornerdirection + "_" + self.a.pose + "_" + var_1;
-  } else if(var_1 == "over") {
+  else if(var_1 == "over")
     self.a.special = "cover_crouch_aim";
-  } else {
+  else
     self.a.special = "none";
-  }
 
   self.keepclaimednodeifvalid = 1;
   var_4 = 0;
@@ -637,9 +575,8 @@ stepout() {
   } else
     self waittillmatch("stepout", "end");
 
-  if(var_1 == "B" && common_scripts\utility::cointoss() && self.cornerdirection == "right") {
+  if(var_1 == "B" && common_scripts\utility::cointoss() && self.cornerdirection == "right")
     self.a.special = "corner_right_martyrdom";
-  }
 
   set_anim_array_aiming(var_0);
   var_6 = var_1 == "over" || animscripts\utility::isspaceai();
@@ -663,27 +600,24 @@ stepout() {
 stepoutandshootenemy() {
   self.keepclaimednodeifvalid = 1;
 
-  if(isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
-    if(rambo()) {
+  if(isdefined(self.rambochance) && randomfloat(1) < self.rambochance) {
+    if(rambo())
       return 1;
-    }
   }
 
-  if(!stepout()) {
+  if(!stepout())
     return 0;
-  }
 
   shootastold();
 
-  if(isDefined(self.shootpos)) {
+  if(isdefined(self.shootpos)) {
     var_0 = lengthsquared(self.origin - self.shootpos);
 
     if(animscripts\utility::usingrocketlauncher() && animscripts\utility::shoulddroprocketlauncher(var_0)) {
-      if(self.a.pose == "stand") {
+      if(self.a.pose == "stand")
         animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_stand"));
-      } else {
+      else
         animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_crouch"));
-      }
 
       thread runcombat();
       return;
@@ -696,48 +630,42 @@ stepoutandshootenemy() {
 }
 
 haventramboedwithintime(var_0) {
-  if(!isDefined(self.lastrambotime)) {
+  if(!isdefined(self.lastrambotime))
     return 1;
-  }
 
   return gettime() - self.lastrambotime > var_0 * 1000;
 }
 
 rambo() {
-  if(!animscripts\utility::hasenemysightpos()) {
+  if(!animscripts\utility::hasenemysightpos())
     return 0;
-  }
 
   var_0 = 0;
   var_1 = 90;
   var_2 = self.covernode animscripts\utility::getyawtoorigin(animscripts\utility::getenemysightpos());
 
-  if(self.cornerdirection == "left") {
+  if(self.cornerdirection == "left")
     var_2 = 0 - var_2;
-  }
 
   if(var_2 > 30) {
     var_1 = 45;
 
-    if(self.cornerdirection == "left") {
+    if(self.cornerdirection == "left")
       var_0 = 45;
-    } else {
+    else
       var_0 = -45;
-    }
   }
 
   var_3 = "rambo" + var_1;
 
-  if(!animscripts\utility::animarrayanyexist(var_3)) {
+  if(!animscripts\utility::animarrayanyexist(var_3))
     return 0;
-  }
 
   var_4 = animscripts\utility::animarraypickrandom(var_3);
   var_5 = getpredictedpathmidpoint(48);
 
-  if(!self maymovetopoint(var_5, !self.swimmer)) {
+  if(!self maymovetopoint(var_5, !self.swimmer))
     return 0;
-  }
 
   self.coverposestablishedtime = gettime();
   setdefaultcorneranimmode();
@@ -761,17 +689,17 @@ rambo() {
 shootastold() {
   maps\_gameskill::didsomethingotherthanshooting();
 
-  for(;;) {
-    for(;;) {
-      if(isDefined(self.shouldreturntocover)) {
+  for (;;) {
+    for (;;) {
+      if(isdefined(self.shouldreturntocover)) {
         break;
       }
 
-      if(!isDefined(self.shootpos)) {
+      if(!isdefined(self.shootpos)) {
         self waittill("do_slow_things");
         waittillframeend;
 
-        if(isDefined(self.shootpos)) {
+        if(isdefined(self.shootpos)) {
           continue;
         }
         break;
@@ -818,9 +746,8 @@ shootuntilshootbehaviorchangefortime(var_0) {
   self notify("stopNotifyStopShootingAfterTime");
   var_2 = (gettime() - var_1) / 1000;
 
-  if(var_2 < var_0) {
+  if(var_2 < var_0)
     wait(var_0 - var_2);
-  }
 }
 
 notifystopshootingaftertime(var_0) {
@@ -833,9 +760,8 @@ notifystopshootingaftertime(var_0) {
 shootuntilshootbehaviorchange_corner(var_0) {
   self endon("return_to_cover");
 
-  if(var_0) {
+  if(var_0)
     thread anglerangethread();
-  }
 
   thread animscripts\combat_utility::aimidlethread();
   animscripts\combat_utility::shootuntilshootbehaviorchange();
@@ -847,7 +773,7 @@ anglerangethread() {
   self endon("newAngleRangeCheck");
   self endon("take_cover_at_corner");
 
-  for(;;) {
+  for (;;) {
     if(shootposoutsidelegalyawrange()) {
       break;
     }
@@ -863,9 +789,8 @@ showstate() {
   self endon("enemy");
   self endon("stopshowstate");
 
-  for(;;) {
+  for (;;)
     wait 0.05;
-  }
 }
 
 canreturntocover(var_0) {
@@ -874,9 +799,8 @@ canreturntocover(var_0) {
   if(var_0) {
     var_2 = getpredictedpathmidpoint();
 
-    if(!self maymovetopoint(var_2, var_1)) {
+    if(!self maymovetopoint(var_2, var_1))
       return 0;
-    }
 
     return self maymovefrompointtopoint(var_2, self.covernode.origin, var_1);
   } else
@@ -901,38 +825,34 @@ returntocover() {
 
   var_4 = stepoutandhidespeed();
 
-  if(animscripts\utility::isspaceai()) {
+  if(animscripts\utility::isspaceai())
     self clearanim( % exposed_modern, 0.2);
-  } else {
+  else
     self clearanim( % body, 0.1);
-  }
 
   self setflaggedanimrestart("hide", var_2, 1, 0.1, var_4);
   corner_playcornerfacialanim(var_2);
   animscripts\shared::donotetracks("hide");
 
-  if(var_3) {
+  if(var_3)
     animscripts\weaponlist::refillclip();
-  }
 
   self.changingcoverpos = 0;
 
-  if(self.cornerdirection == "up") {
+  if(self.cornerdirection == "up")
     self.a.special = "cover_up";
-  } else if(self.cornerdirection == "left") {
+  else if(self.cornerdirection == "left")
     self.a.special = "cover_left";
-  } else {
+  else
     self.a.special = "cover_right";
-  }
 
   self.keepclaimednodeifvalid = 0;
   self clearanim(var_2, 0.2);
 }
 
 blindfire() {
-  if(!animscripts\utility::animarrayanyexist("blind_fire")) {
+  if(!animscripts\utility::animarrayanyexist("blind_fire"))
     return 0;
-  }
 
   behaviorstransitiontocorrectpose();
   setdefaultcorneranimmode();
@@ -946,55 +866,46 @@ blindfire() {
 }
 
 linethread(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = (1, 1, 1);
-  }
 
-  for(var_3 = 0; var_3 < 100; var_3++) {
+  for (var_3 = 0; var_3 < 100; var_3++)
     wait 0.05;
-  }
 }
 
 trythrowinggrenadestayhidden(var_0) {
-  if(self.a.pose == "crouch" && shouldplayalerttransition(self)) {
+  if(self.a.pose == "crouch" && shouldplayalerttransition(self))
     return 0;
-  }
 
   return trythrowinggrenade(var_0, 1);
 }
 
 trythrowinggrenade(var_0, var_1) {
-  if(!self maymovetopoint(getpredictedpathmidpoint())) {
+  if(!self maymovetopoint(getpredictedpathmidpoint()))
     return 0;
-  }
 
-  if(isDefined(self.dontevershoot) || isDefined(var_0.dontattackme)) {
+  if(isdefined(self.dontevershoot) || isdefined(var_0.dontattackme))
     return 0;
-  }
 
-  if(self.a.pose == "crouch" && shouldplayalerttransition(self)) {
+  if(self.a.pose == "crouch" && shouldplayalerttransition(self))
     return 0;
-  }
 
   var_2 = undefined;
 
-  if(isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
-    if(isDefined(self.a.array["grenade_rambo"])) {
+  if(isdefined(self.rambochance) && randomfloat(1) < self.rambochance) {
+    if(isdefined(self.a.array["grenade_rambo"]))
       var_2 = animscripts\utility::animarray("grenade_rambo");
-    }
   }
 
-  if(!isDefined(var_2)) {
-    if(isDefined(var_1) && var_1) {
-      if(!isDefined(self.a.array["grenade_safe"])) {
+  if(!isdefined(var_2)) {
+    if(isdefined(var_1) && var_1) {
+      if(!isdefined(self.a.array["grenade_safe"]))
         return 0;
-      }
 
       var_2 = animscripts\utility::animarray("grenade_safe");
     } else {
-      if(!isDefined(self.a.array["grenade_exposed"])) {
+      if(!isdefined(self.a.array["grenade_exposed"]))
         return 0;
-      }
 
       var_2 = animscripts\utility::animarray("grenade_exposed");
     }
@@ -1010,26 +921,23 @@ trythrowinggrenade(var_0, var_1) {
 printyawtoenemy() {}
 
 lookforenemy(var_0) {
-  if(!isDefined(self.a.array["alert_to_look"])) {
+  if(!isdefined(self.a.array["alert_to_look"]))
     return 0;
-  }
 
   setdefaultcorneranimmode();
   self.keepclaimednodeifvalid = 1;
 
-  if(!peekout()) {
+  if(!peekout())
     return 0;
-  }
 
   behaviorstransitiontocorrectpose();
   animscripts\shared::playlookanimation(animscripts\utility::animarray("look_idle"), var_0, ::canstoppeeking);
   var_1 = undefined;
 
-  if(animscripts\utility::issuppressedwrapper()) {
+  if(animscripts\utility::issuppressedwrapper())
     var_1 = animscripts\utility::animarray("look_to_alert_fast");
-  } else {
+  else
     var_1 = animscripts\utility::animarray("look_to_alert");
-  }
 
   self setflaggedanimknoballrestart("looking_end", var_1, % body, 1, 0.1, 1.0);
   corner_playcornerfacialanim(var_1);
@@ -1042,40 +950,35 @@ lookforenemy(var_0) {
 ispeekoutposclear() {
   var_0 = self.covernode.angles;
 
-  if(animscripts\utility::isspaceai()) {
+  if(animscripts\utility::isspaceai())
     var_0 = animscripts\utility::gettruenodeangles(self.covernode);
-  }
 
-  var_1 = self getEye();
+  var_1 = self geteye();
   var_2 = anglestoright(var_0);
   var_3 = anglestoup(var_0);
 
-  if(self.cornerdirection == "right") {
+  if(self.cornerdirection == "right")
     var_1 = var_1 + var_2 * 30;
-  } else if(self.cornerdirection == "left") {
+  else if(self.cornerdirection == "left")
     var_1 = var_1 - var_2 * 30;
-  } else {
+  else
     var_1 = var_1 + var_3 * 30;
-  }
 
   if(self.team == "allies" && level.player maps\_utility::isads()) {
-    if(maps\_utility::player_looking_at(var_1, 0.95, undefined, level.player)) {
+    if(maps\_utility::player_looking_at(var_1, 0.95, undefined, level.player))
       return 0;
-    }
   }
 
-  var_4 = var_1 + anglesToForward(var_0) * 30;
+  var_4 = var_1 + anglestoforward(var_0) * 30;
   return sighttracepassed(var_1, var_4, 1, self);
 }
 
 peekout() {
-  if(isDefined(self.covernode.script_dontpeek)) {
+  if(isdefined(self.covernode.script_dontpeek))
     return 0;
-  }
 
-  if(isDefined(self.nextpeekoutattempttime) && gettime() < self.nextpeekoutattempttime) {
+  if(isdefined(self.nextpeekoutattempttime) && gettime() < self.nextpeekoutattempttime)
     return 0;
-  }
 
   if(!ispeekoutposclear()) {
     self.nextpeekoutattempttime = gettime() + 3000;
@@ -1105,9 +1008,8 @@ cornerreload() {
 
   var_0 = "reload";
 
-  if(animscripts\utility::isshotgun(self.weapon) && animscripts\utility::animarrayanyexist("shotgun_reload")) {
+  if(animscripts\utility::isshotgun(self.weapon) && animscripts\utility::animarrayanyexist("shotgun_reload"))
     var_0 = "shotgun_reload";
-  }
 
   var_1 = animscripts\utility::animarraypickrandom(var_0);
   self setflaggedanimknobrestart("cornerReload", var_1, 1, 0.2);
@@ -1126,19 +1028,16 @@ ispathclear(var_0, var_1) {
   if(var_1) {
     var_3 = getpredictedpathmidpoint();
 
-    if(!self maymovetopoint(var_3, var_2)) {
+    if(!self maymovetopoint(var_3, var_2))
       return 0;
-    }
 
-    if(self.swimmer) {
+    if(self.swimmer)
       return 1;
-    }
 
     return self maymovefrompointtopoint(var_3, animscripts\utility::getanimendpos(var_0), var_2);
   } else {
-    if(self.swimmer) {
+    if(self.swimmer)
       return 1;
-    }
 
     return self maymovetopoint(animscripts\utility::getanimendpos(var_0), var_2);
   }
@@ -1148,18 +1047,16 @@ getpredictedpathmidpoint(var_0) {
   var_1 = self.covernode.angles;
   var_2 = anglestoright(var_1);
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 36;
-  }
 
   var_3 = self.script;
 
   if(var_3 == "cover_multi") {
-    if(self.cover.state == "right") {
+    if(self.cover.state == "right")
       var_3 = "cover_right";
-    } else if(self.cover.state == "left") {
+    else if(self.cover.state == "left")
       var_3 = "cover_left";
-    }
   }
 
   if(var_3 == "cover_swim_up") {
@@ -1193,35 +1090,32 @@ behaviorstransitiontocorrectpose() {
 idle() {
   self endon("end_idle");
 
-  for(;;) {
+  for (;;) {
     behaviorstransitiontocorrectpose();
-    var_0 = randomint(2) == 0 && isDefined(self.a.array["alert_idle_twitch"]) && animscripts\utility::animarrayanyexist("alert_idle_twitch");
+    var_0 = randomint(2) == 0 && isdefined(self.a.array["alert_idle_twitch"]) && animscripts\utility::animarrayanyexist("alert_idle_twitch");
 
-    if(var_0) {
+    if(var_0)
       var_1 = animscripts\utility::animarraypickrandom("alert_idle_twitch");
-    } else {
+    else
       var_1 = animscripts\utility::animarray("alert_idle");
-    }
 
     playidleanimation(var_1, var_0);
   }
 }
 
 flinch() {
-  if(!animscripts\utility::animarrayanyexist("alert_idle_flinch")) {
+  if(!animscripts\utility::animarrayanyexist("alert_idle_flinch"))
     return 0;
-  }
 
   playidleanimation(animscripts\utility::animarraypickrandom("alert_idle_flinch"), 1);
   return 1;
 }
 
 playidleanimation(var_0, var_1) {
-  if(var_1) {
+  if(var_1)
     self setflaggedanimknoballrestart("idle", var_0, % body, 1, 0.1, 1);
-  } else {
+  else
     self setflaggedanimknoball("idle", var_0, % body, 1, 0.1, 1);
-  }
 
   corner_playcornerfacialanim(var_0);
   animscripts\shared::donotetracks("idle");
@@ -1255,23 +1149,21 @@ gotocover(var_0, var_1, var_2) {
   var_4 = animscripts\utility::getclaimednode();
   var_5 = var_3 + self.hideyawoffset;
 
-  if(animscripts\utility::isspaceai()) {
+  if(animscripts\utility::isspaceai())
     self notify("force_space_rotation_update", 0, 0);
-  } else {
+  else
     self orientmode("face angle", var_5);
-  }
 
   self animmode("normal");
 
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     thread animscripts\shared::movetonodeovertime(var_4, var_1);
-  }
 
   self setflaggedanimknoballrestart("coveranim", var_0, % body, 1, var_1);
   corner_playcornerfacialanim(var_0);
   animscripts\notetracks::donotetracksfortime(var_2, "coveranim");
 
-  while(animscripts\utility::absangleclamp180(self.angles[1] - var_5) > 1) {
+  while (animscripts\utility::absangleclamp180(self.angles[1] - var_5) > 1) {
     animscripts\notetracks::donotetracksfortime(0.1, "coveranim");
     var_3 = animscripts\utility::getnodedirection();
     var_5 = var_3 + self.hideyawoffset;
@@ -1279,30 +1171,28 @@ gotocover(var_0, var_1, var_2) {
 
   setdefaultcorneranimmode();
 
-  if(self.cornerdirection == "left") {
+  if(self.cornerdirection == "left")
     self.a.special = "cover_left";
-  } else if(self.cornerdirection == "right") {
+  else if(self.cornerdirection == "right")
     self.a.special = "cover_right";
-  } else {
+  else
     self.a.special = "cover_up";
-  }
 }
 
 drawoffset() {
   self endon("killanimscript");
 
-  for(;;) {
+  for (;;)
     wait 0.05;
-  }
 }
 
 set_standing_animarray_aiming() {
-  if(self.swimmer && isDefined(self.node)) {
+  if(self.swimmer && isdefined(self.node)) {
     set_swimming_animarray_aiming();
     return;
   }
 
-  if(!isDefined(self.a.array)) {}
+  if(!isdefined(self.a.array)) {}
 
   var_0 = animscripts\utility::lookupanimarray("default_stand");
   self.a.array["add_aim_up"] = var_0["add_aim_up"];
@@ -1336,11 +1226,10 @@ set_standing_animarray_aiming() {
     self.a.array["semi4"] = var_0["semi4"];
     self.a.array["semi5"] = var_0["semi5"];
 
-    if(animscripts\utility::weapon_pump_action_shotgun()) {
+    if(animscripts\utility::weapon_pump_action_shotgun())
       self.a.array["single"] = animscripts\utility::lookupanim("shotgun_stand", "single");
-    } else {
+    else
       self.a.array["single"] = var_0["single"];
-    }
 
     self.a.array["burst2"] = var_0["burst2"];
     self.a.array["burst3"] = var_0["burst3"];
@@ -1353,12 +1242,12 @@ set_standing_animarray_aiming() {
 }
 
 set_crouching_animarray_aiming() {
-  if(self.swimmer && isDefined(self.node)) {
+  if(self.swimmer && isdefined(self.node)) {
     set_swimming_animarray_aiming();
     return;
   }
 
-  if(!isDefined(self.a.array)) {}
+  if(!isdefined(self.a.array)) {}
 
   var_0 = animscripts\utility::lookupanimarray("default_crouch");
   var_1["add_aim_up"] = animscripts\utility::lookupanim("cover_crouch", "add_aim_up");
@@ -1396,11 +1285,10 @@ set_crouching_animarray_aiming() {
     self.a.array["semi4"] = var_0["semi4"];
     self.a.array["semi5"] = var_0["semi5"];
 
-    if(animscripts\utility::weapon_pump_action_shotgun()) {
+    if(animscripts\utility::weapon_pump_action_shotgun())
       self.a.array["single"] = animscripts\utility::lookupanim("shotgun_crouch", "single");
-    } else {
+    else
       self.a.array["single"] = var_0["single"];
-    }
 
     self.a.array["burst2"] = var_0["burst2"];
     self.a.array["burst3"] = var_0["burst3"];
@@ -1422,19 +1310,19 @@ set_crouching_animarray_aiming() {
 }
 
 set_swimming_animarray_aiming() {
-  if(!isDefined(self.a.array)) {}
+  if(!isdefined(self.a.array)) {}
 
   var_0 = [];
 
-  if(self.approachtype == "cover_corner_r") {
+  if(self.approachtype == "cover_corner_r")
     var_0 = animscripts\swim::getswimanim("cover_corner_r");
-  } else if(self.approachtype == "cover_corner_l") {
+  else if(self.approachtype == "cover_corner_l")
     var_0 = animscripts\swim::getswimanim("cover_corner_l");
-  } else if(self.approachtype == "cover_u") {
+  else if(self.approachtype == "cover_u")
     var_0 = animscripts\swim::getswimanim("cover_u");
-  } else if(self.approachtype == "exposed") {
+  else if(self.approachtype == "exposed")
     var_0 = animscripts\swim::getswimanim("exposed");
-  } else {}
+  else {}
 
   self.a.array["add_aim_up"] = var_0["add_aim_up"];
   self.a.array["add_aim_down"] = var_0["add_aim_down"];
@@ -1465,19 +1353,17 @@ runcombat() {
 }
 
 setdefaultcorneranimmode() {
-  if(self.swimmer) {
+  if(self.swimmer)
     self animmode("nogravity");
-  } else {
+  else
     self animmode("zonly_physics");
-  }
 }
 
 corner_playcornerfacialanim(var_0) {
-  if(self.cornerdirection == "left") {
+  if(self.cornerdirection == "left")
     var_1 = "corner_stand_L";
-  } else {
+  else
     var_1 = "corner_stand_R";
-  }
 
   self.facialidx = animscripts\face::playfacialanim(var_0, var_1, self.facialidx);
 }

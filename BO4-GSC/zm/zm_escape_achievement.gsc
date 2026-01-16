@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_escape_achievement;
 
 init() {
@@ -76,8 +77,8 @@ private function_cf262a06() {
 }
 
 private function_e5df009() {
-  self endon(#"disconnect", # "hash_b5d3534da3f4508");
-  level endon(#"end_game", # "activate_catwalk");
+  self endon(#"disconnect", #"hash_b5d3534da3f4508");
+  level endon(#"end_game", #"activate_catwalk");
 
   if(level flag::get("activate_catwalk")) {
     return;
@@ -109,7 +110,7 @@ private function_e5df009() {
 }
 
 private function_4c6d1750() {
-  self endon(#"disconnect", # "hash_1410cda9f15ef1c3");
+  self endon(#"disconnect", #"hash_1410cda9f15ef1c3");
 
   while(true) {
     s_result = self waittill(#"hash_3669499a148a6d6e");
@@ -167,15 +168,15 @@ private function_ce31237b() {
     }
 
     switch (str_zone) {
-      case # "zone_model_industries_upper":
+      case #"zone_model_industries_upper":
         self.var_5b73502a = 1;
         break;
-      case # "zone_gondola_ride":
+      case #"zone_gondola_ride":
         self.var_23d1ca17 = 1;
         break;
-      case # "zone_citadel":
-      case # "zone_citadel_shower":
-      case # "zone_citadel_warden":
+      case #"zone_citadel":
+      case #"zone_citadel_shower":
+      case #"zone_citadel_warden":
         self.var_ba2bd447 = 1;
         break;
     }

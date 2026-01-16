@@ -16,6 +16,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace shroud;
 
 autoexec __init__system__() {
@@ -195,7 +196,7 @@ function_95c69960(player) {
 }
 
 function_f4970a20(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self endon(#"death");
   self weaponobjects::onspawnuseweaponobject(watcher, player);
@@ -215,9 +216,9 @@ function_f4970a20(watcher, player) {
   }
 
   player.shrouds[player.shrouds.size] = self;
-  waitresult = self waittilltimeout(5, # "stationary");
+  waitresult = self waittilltimeout(5, #"stationary");
 
-  if(waitresult._notify == # "timeout") {
+  if(waitresult._notify == #"timeout") {
     function_4db10465();
     return;
   }
@@ -226,7 +227,7 @@ function_f4970a20(watcher, player) {
     #dart: self
   });
   player clientfield::set_player_uimodel("hudItems.shroudCount", player.shrouds.size);
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self util::make_sentient();
   self thread function_aa8bb7be();
   self thread function_6852f0e1();
@@ -252,7 +253,7 @@ function_f4970a20(watcher, player) {
 
 private function_6852f0e1() {
   owner = self.owner;
-  waitresult = self waittill(#"picked_up", # "death");
+  waitresult = self waittill(#"picked_up", #"death");
 
   if(isDefined(owner) && isDefined(owner.shrouds)) {
     arrayremovevalue(owner.shrouds, undefined);
@@ -352,7 +353,7 @@ function_55de888f(watcher) {
     profilestop();
 
     if(level.teambased && !sessionmodeiswarzonegame()) {
-      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }

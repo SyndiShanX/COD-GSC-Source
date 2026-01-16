@@ -7,7 +7,7 @@
 #include xmodelalias\c_zom_prison_inmate_head_als;
 
 main() {
-  self setModel("c_zom_inmate_body1");
+  self setmodel("c_zom_inmate_body1");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_zom_prison_inmate_head_als::main());
   self attach(self.headmodel, "", 1);
   self.voice = "american";

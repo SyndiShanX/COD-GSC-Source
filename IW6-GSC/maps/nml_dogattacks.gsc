@@ -24,11 +24,10 @@ meleestrugglevsai_first_attack(var_0) {
   var_2[1] = % iw6_dog_kill_front_nml;
   var_3 = 1;
 
-  if(isDefined(self.controlling_dog) && self.controlling_dog) {
+  if(isDefined(self.controlling_dog) && self.controlling_dog)
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_intro_plr");
-  } else {
+  else
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
-  }
 
   return domeleevsai(var_2, var_3, var_1);
 }
@@ -46,9 +45,8 @@ meleestrugglevsai_supershort(var_0) {
   self.enemy.diequietly = 1;
   var_1 = 0;
 
-  if(isDefined(self.enemy.use_old_dog_attack)) {
+  if(isDefined(self.enemy.use_old_dog_attack))
     var_1 = 1;
-  }
 
   return meleestrugglevsai_short(var_0, var_1);
 }
@@ -64,9 +62,8 @@ domeleevsdog(var_0, var_1, var_2) {
   }
   self stopsounds();
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     [[var_2]]();
-  }
 
   self orientmode("face angle", var_1);
   self animmode("gravity");
@@ -76,9 +73,8 @@ domeleevsdog(var_0, var_1, var_2) {
   self.a.pose = "stand";
   self.a.special = "none";
 
-  if(animscripts\utility::usingsidearm()) {
+  if(animscripts\utility::usingsidearm())
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
-  }
 
   self.ragdoll_immediate = 1;
   self.meleeseq = 0;
@@ -124,13 +120,11 @@ meleestrugglevsai_traverse(var_0) {
 }
 
 meleestrugglevsai_short(var_0, var_1) {
-  if(meleestruggle_istraverse()) {
+  if(meleestruggle_istraverse())
     return meleestrugglevsai_traverse(var_0);
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   self.safetochangescript = 0;
   self animmode("zonly_physics");
@@ -182,19 +176,17 @@ meleestrugglevsai_short(var_0, var_1) {
         var_4 = 1;
         var_2 = var_2 - (0, 180, 0);
 
-        if(isDefined(self.controlling_dog) && self.controlling_dog) {
+        if(isDefined(self.controlling_dog) && self.controlling_dog)
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_plr");
-        } else {
+        else
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_npc");
-        }
 
         break;
       default:
-        if(isDefined(self.controlling_dog) && self.controlling_dog) {
+        if(isDefined(self.controlling_dog) && self.controlling_dog)
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-        } else {
+        else
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
-        }
     }
   }
 
@@ -208,18 +200,16 @@ domeleevsai(var_0, var_1, var_2, var_3) {
   self animrelative("meleeanim", self.enemy.origin, var_2, var_0[1]);
   self.enemy.fndogmeleevictim = var_3;
 
-  if(!animhasnotetrack(var_0[1], "ai_attack_start")) {
+  if(!animhasnotetrack(var_0[1], "ai_attack_start"))
     handlestartaipart("ai_attack_start");
-  }
 
   animscripts\shared::donotetracks("meleeanim", ::handlestartaipart);
   self setCanDamage(1);
   self animmode("zonly_physics");
 
   for(var_4 = 1; var_4 < var_1; var_4++) {
-    if(isDefined(level._effect["dog_bite"]) && isDefined(level._effect["dog_bite"][var_4]) && isDefined(self.enemy)) {
+    if(isDefined(level._effect["dog_bite"]) && isDefined(level._effect["dog_bite"][var_4]) && isDefined(self.enemy))
       playFXOnTag(level._effect["dog_bite"][var_4], self.enemy, "TAG_EYE");
-    }
 
     self clearanim(var_0[var_4], 0);
 
@@ -227,9 +217,8 @@ domeleevsai(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(!self.meleekilltarget && var_4 + 1 == var_1) {
+    if(!self.meleekilltarget && var_4 + 1 == var_1)
       self.health = 1;
-    }
 
     self setflaggedanimrestart("meleeanim", var_0[var_4 + 1], 1, 0, 1);
     animscripts\shared::donotetracks("meleeanim");
@@ -238,9 +227,8 @@ domeleevsai(var_0, var_1, var_2, var_3) {
   self unlink();
 
   if(!self.meleekilltarget) {
-    if(!isDefined(self.magic_bullet_shield)) {
+    if(!isDefined(self.magic_bullet_shield))
       self kill();
-    }
   } else {
     self.pushable = 1;
     self.safetochangescript = 1;
@@ -257,42 +245,36 @@ handlestartaipart(var_0) {
     return undefined;
   }
 
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return 1;
-  }
 
-  if(self.enemy != self.originaltarget) {
+  if(self.enemy != self.originaltarget)
     return 1;
-  }
 
-  if(isDefined(self.enemy.syncedmeleetarget)) {
+  if(isDefined(self.enemy.syncedmeleetarget))
     return 1;
-  }
 
   self.flashbangimmunity = 1;
   self.enemy.syncedmeleetarget = self;
 
-  if(isDefined(self.enemy.fndogmeleevictim)) {
+  if(isDefined(self.enemy.fndogmeleevictim))
     self.enemy animcustom(self.enemy.fndogmeleevictim);
-  } else {
+  else
     self.enemy animcustom(::meleestrugglevsdog_short);
-  }
 }
 
 handlevxnotetrack(var_0) {
   if(common_scripts\utility::string_starts_with(var_0, "vfx")) {
-    if(isDefined(level._effect[var_0])) {
+    if(isDefined(level._effect[var_0]))
       playFXOnTag(common_scripts\utility::getfx(var_0), self, "TAG_MOUTH_FX");
-    }
   } else if(common_scripts\utility::string_starts_with(var_0, "screen_blood")) {
     if(isDefined(self.controlling_dog)) {
       var_1 = "bottom";
 
-      if(issubstr(var_0, "right")) {
+      if(issubstr(var_0, "right"))
         var_1 = "right";
-      } else if(issubstr(var_0, "left")) {
+      else if(issubstr(var_0, "left"))
         var_1 = "left";
-      }
 
       self notify("screen_blood", var_1);
     }
@@ -335,11 +317,10 @@ meleestrugglevsdog_short() {
         var_0 = vectortoangles(self.syncedmeleetarget.origin - self.origin);
         var_0 = var_0[1] + 90;
 
-        if(isDefined(self.syncedmeleetarget.controlling_dog)) {
+        if(isDefined(self.syncedmeleetarget.controlling_dog))
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        } else {
+        else
           thread animscripts\face::saygenericdialogue("dogdeathshort");
-        }
 
         break;
       case "L":
@@ -350,11 +331,10 @@ meleestrugglevsdog_short() {
         var_0 = vectortoangles(self.syncedmeleetarget.origin - self.origin);
         var_0 = var_0[1] - 90;
 
-        if(isDefined(self.syncedmeleetarget.controlling_dog)) {
+        if(isDefined(self.syncedmeleetarget.controlling_dog))
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        } else {
+        else
           thread animscripts\face::saygenericdialogue("dogdeathshort");
-        }
 
         break;
       case "B":
@@ -365,19 +345,17 @@ meleestrugglevsdog_short() {
         var_0 = vectortoangles(self.syncedmeleetarget.origin - self.origin);
         var_0 = var_0[1] - 180;
 
-        if(isDefined(self.syncedmeleetarget.controlling_dog)) {
+        if(isDefined(self.syncedmeleetarget.controlling_dog))
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        } else {
+        else
           thread animscripts\face::saygenericdialogue("dogdeathshort");
-        }
 
         break;
       default:
-        if(isDefined(self.syncedmeleetarget.controlling_dog)) {
+        if(isDefined(self.syncedmeleetarget.controlling_dog))
           thread animscripts\face::saygenericdialogue("dogdeathlongplr");
-        } else {
+        else
           thread animscripts\face::saygenericdialogue("dogdeathlong");
-        }
     }
   }
 
@@ -389,9 +367,8 @@ meleestrugglevsdog_short() {
   self.a.pose = "stand";
   self.a.special = "none";
 
-  if(animscripts\utility::usingsidearm()) {
+  if(animscripts\utility::usingsidearm())
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
-  }
 
   self.ragdoll_immediate = 1;
   self.meleeseq = 0;
@@ -434,9 +411,8 @@ meleestrugglevsdog_interruptedcheck() {
   var_0[1] = % ai_attacked_german_shepherd_02_getup_a;
   var_0[2] = % ai_attacked_german_shepherd_02_getup_a;
 
-  if(self.syncedmeleetarget.meleekilltarget) {
+  if(self.syncedmeleetarget.meleekilltarget)
     var_0[4] = % ai_attacked_german_shepherd_04_getup_a;
-  }
 
   for(;;) {
     if(!isDefined(self.syncedmeleetarget) || !isalive(self.syncedmeleetarget)) {
@@ -508,8 +484,7 @@ ragdoll_corpses() {
   var_0 = getcorpsearray();
 
   foreach(var_2 in var_0) {
-    if(var_2 isragdoll() == 0) {
+    if(var_2 isragdoll() == 0)
       var_2 startragdoll();
-    }
   }
 }

@@ -15,26 +15,26 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "flinger_flying_postfx", 15000, 1, "int", &flinger_flying_postfx, 0, 0);
-  clientfield::register("toplayer", "flinger_land_smash", 15000, 1, "counter", &flinger_land_smash, 0, 0);
-  clientfield::register("toplayer", "flinger_cooldown_start", 15000, 4, "int", &flinger_cooldown_start, 0, 0);
-  clientfield::register("toplayer", "flinger_cooldown_end", 15000, 4, "int", &flinger_cooldown_end, 0, 0);
-  clientfield::register("scriptmover", "player_visibility", 15000, 1, "int", &function_a0a5829, 0, 0);
-  clientfield::register("scriptmover", "flinger_launch_fx", 15000, 1, "counter", &function_3762396c, 0, 0);
-  clientfield::register("scriptmover", "flinger_pad_active_fx", 15000, 4, "int", &flinger_pad_active_fx, 0, 0);
+  clientfield::register("toplayer", "flinger_flying_postfx", 15000, 1, "int", & flinger_flying_postfx, 0, 0);
+  clientfield::register("toplayer", "flinger_land_smash", 15000, 1, "counter", & flinger_land_smash, 0, 0);
+  clientfield::register("toplayer", "flinger_cooldown_start", 15000, 4, "int", & flinger_cooldown_start, 0, 0);
+  clientfield::register("toplayer", "flinger_cooldown_end", 15000, 4, "int", & flinger_cooldown_end, 0, 0);
+  clientfield::register("scriptmover", "player_visibility", 15000, 1, "int", & function_a0a5829, 0, 0);
+  clientfield::register("scriptmover", "flinger_launch_fx", 15000, 1, "counter", & function_3762396c, 0, 0);
+  clientfield::register("scriptmover", "flinger_pad_active_fx", 15000, 4, "int", & flinger_pad_active_fx, 0, 0);
 }
 
 function flinger_flying_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_6f6f69f0 = playFXOnTag(localclientnum, level._effect["flinger_trail"], self, "tag_origin");
-    self.var_bb0de733 = self playLoopSound("zmb_fling_windwhoosh_2d");
+    self.var_6f6f69f0 = playfxontag(localclientnum, level._effect["flinger_trail"], self, "tag_origin");
+    self.var_bb0de733 = self playloopsound("zmb_fling_windwhoosh_2d");
     self thread postfx::playpostfxbundle("pstfx_zm_screen_warp");
   } else {
-    if(isDefined(self.var_6f6f69f0)) {
+    if(isdefined(self.var_6f6f69f0)) {
       deletefx(localclientnum, self.var_6f6f69f0, 1);
       self.var_6f6f69f0 = undefined;
     }
-    if(isDefined(self.var_bb0de733)) {
+    if(isdefined(self.var_bb0de733)) {
       self stoploopsound(self.var_bb0de733, 0.75);
       self.var_bb0de733 = undefined;
     }
@@ -66,7 +66,7 @@ function flinger_pad_active_fx(localclientnum, oldval, newval, bnewent, binitial
 
 function flinger_land_smash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level notify("hash_92663c14");
-  playFXOnTag(localclientnum, level._effect["flinger_land"], self, "tag_origin");
+  playfxontag(localclientnum, level._effect["flinger_land"], self, "tag_origin");
 }
 
 function flinger_cooldown_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -98,7 +98,7 @@ function flinger_cooldown_end(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function function_3762396c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFXOnTag(localclientnum, level._effect["flinger_launch"], self, "tag_origin");
+  playfxontag(localclientnum, level._effect["flinger_launch"], self, "tag_origin");
 }
 
 function function_4208db02() {
@@ -155,7 +155,7 @@ function function_a0a5829(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function function_7bd5b92f(localclientnum) {
   player = getlocalplayer(localclientnum);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     if(isthirdperson(localclientnum)) {
       self show();
       player hide();

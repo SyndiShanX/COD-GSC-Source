@@ -24,13 +24,13 @@ init() {
   precacheitem("missile_drone_projectile_mp");
   loadfx("weapon/missile/fx_missile_drone_light_red");
   registerkillstreak("inventory_missile_drone_mp", "inventory_missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
-  registerkillstreakstrings("inventory_missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("inventory_missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("inventory_missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   registerkillstreakdevdvar("inventory_missile_drone_mp", "scr_givemissiledrone");
   registerkillstreak("missile_drone_mp", "missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
   registerkillstreakaltweapon("missile_drone_mp", "missile_drone_projectile_mp");
   registerkillstreakaltweapon("inventory_missile_drone_mp", "missile_drone_projectile_mp");
-  registerkillstreakstrings("missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   setkillstreakteamkillpenaltyscale("missile_drone_mp", 0.0);
 }
@@ -41,57 +41,49 @@ missile_drone_killstreak(weaponname) {
   hardpointtype = "missile_drone_mp";
   result = usemissiledrone(hardpointtype);
 
-  if(!isDefined(result) || !result) {
+  if(!isDefined(result) || !result)
     return 0;
-  }
 
   return result;
 }
 
 usemissiledrone(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return false;
-  }
 
   self thread missiledronewatcher(hardpointtype);
   missileweapon = self getcurrentweapon();
   missileweapon = undefined;
   currentweapon = self getcurrentweapon();
 
-  if(ismissiledroneweapon(currentweapon)) {
+  if(ismissiledroneweapon(currentweapon))
     missileweapon = currentweapon;
-  }
 
   assert(isDefined(missileweapon));
   notifystring = self waittill_any_return("weapon_change", "grenade_fire", "death");
 
-  if(notifystring == "weapon_change" || notifystring == "death") {
+  if(notifystring == "weapon_change" || notifystring == "death")
     return false;
-  }
 
   notifystring = self waittill_any_return("weapon_change", "death");
 
-  if(notifystring == "death") {
+  if(notifystring == "death")
     return true;
-  }
 
-  if(!isDefined(missileweapon)) {
+  if(!isDefined(missileweapon))
     return false;
-  }
 
   self takeweapon(missileweapon);
 
-  if(self hasweapon(missileweapon) || self getammocount(missileweapon)) {
+  if(self hasweapon(missileweapon) || self getammocount(missileweapon))
     return false;
-  }
 
   return true;
 }
 
 ismissiledroneweapon(weapon) {
-  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp") {
+  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp")
     return true;
-  }
 
   return false;
 }
@@ -131,7 +123,7 @@ missiledronewatcher(hardpointtype) {
 
 domissiledrone(origin, weapname, killstreak_id, hardpointtype, team) {
   direction = self getplayerangles();
-  forward = anglesToForward(direction);
+  forward = anglestoforward(direction);
   target = origin + vectorscale(forward, 10000);
   debug_line(origin, target, (0.9, 0.1, 0.1));
   projectile = maps\mp\killstreaks\_missile_swarm::projectile_spawn_utility(self, target, origin, "missile_drone_projectile_mp", "drone_missile", 0);
@@ -142,7 +134,7 @@ domissiledrone(origin, weapname, killstreak_id, hardpointtype, team) {
   projectile thread projectile_death_think();
   projectile thread watchdamage();
   projectile.targetname = "remote_drone";
-  projectile playSound("wpn_hunter_ignite");
+  projectile playsound("wpn_hunter_ignite");
   projectile thread killstreak_stop_think(killstreak_id, hardpointtype, team);
   projectile setclientfield("missile_drone_projectile_animate", 1);
 }
@@ -184,17 +176,16 @@ drone_target_search(hardpointtype) {
   searchcounter = 0;
 
   for(;;) {
-    if(!isDefined(self)) {
+    if(!isDefined(self))
       self notify("death");
-    }
 
     target = self projectile_find_target(self.owner, searchdotprodminimums[searchcounter]);
 
-    if(searchcounter < searchdotprodminimums.size - 1) {
+    if(searchcounter < searchdotprodminimums.size - 1)
       searchcounter++;
-    } else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
+    else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
       currentangles = self.angles;
-      direction = vectornormalize(anglesToForward(self.angles));
+      direction = vectornormalize(anglestoforward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (self.origin[0] + direction[0], self.origin[1] + direction[1], level.missile_drone_origin[2]);
 
@@ -202,7 +193,7 @@ drone_target_search(hardpointtype) {
 
     } else {
       currentangles = self.angles;
-      direction = vectornormalize(anglesToForward(self.angles));
+      direction = vectornormalize(anglestoforward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (level.missile_drone_origin[0] + direction[0], level.missile_drone_origin[1] + direction[1], level.missile_drone_origin[2]);
 
@@ -230,11 +221,10 @@ set_drone_target(hardpointtype, target) {
   target["entity"].swarm = self;
   debug_line(self.origin, target["entity"].origin, (0, 0, 0), 5000);
   self missile_settarget(target["entity"], target["offset"]);
-  self playSound("veh_harpy_drone_swarm_incomming");
+  self playsound("veh_harpy_drone_swarm_incomming");
 
-  if(!isDefined(target["entity"].swarmsound) || target["entity"].swarmsound == 0) {
+  if(!isDefined(target["entity"].swarmsound) || target["entity"].swarmsound == 0)
     self thread target_sounds(target["entity"]);
-  }
 
   target["entity"] notify("stinger_fired_at_me", self, hardpointtype, self.owner);
   self setclientfield("missile_drone_projectile_active", 1);
@@ -276,14 +266,13 @@ projectile_find_target(owner, mincos) {
   ks = self projectile_find_target_killstreak(owner, mincos);
   player = self projectile_find_target_player(owner, mincos);
 
-  if(isDefined(ks) && !isDefined(player)) {
+  if(isDefined(ks) && !isDefined(player))
     return ks;
-  } else if(!isDefined(ks) && isDefined(player)) {
+  else if(!isDefined(ks) && isDefined(player))
     return player;
-  } else if(isDefined(ks) && isDefined(player)) {
-    if(player["dotprod"] < ks["dotprod"]) {
+  else if(isDefined(ks) && isDefined(player)) {
+    if(player["dotprod"] < ks["dotprod"])
       return ks;
-    }
 
     return player;
   }
@@ -295,14 +284,13 @@ projectile_find_target_killstreak(owner, mincos) {
   ks = [];
   ks["offset"] = vectorscale((0, 0, -1), 10.0);
   targets = target_getarray();
-  rcbombs = getEntArray("rcbomb", "targetname");
+  rcbombs = getentarray("rcbomb", "targetname");
   dogs = maps\mp\killstreaks\_dogs::dog_manager_get_dogs();
   targets = arraycombine(targets, rcbombs, 1, 0);
   targets = arraycombine(targets, dogs, 1, 0);
 
-  if(targets.size <= 0) {
+  if(targets.size <= 0)
     return undefined;
-  }
 
   targets = get_array_sorted_dot_prod(targets, mincos);
 
@@ -314,15 +302,13 @@ projectile_find_target_killstreak(owner, mincos) {
       continue;
     }
     if(level.teambased && isDefined(target.team)) {
-      if(target.team == self.team) {
+      if(target.team == self.team)
         continue;
-      }
     }
 
     if(level.teambased && isDefined(target.aiteam)) {
-      if(target.aiteam == self.team) {
+      if(target.aiteam == self.team)
         continue;
-      }
     }
 
     if(isDefined(target.vehicletype) && target.vehicletype == "heli_supplydrop_mp") {
@@ -331,11 +317,10 @@ projectile_find_target_killstreak(owner, mincos) {
     if(bullettracepassed(self.origin, target.origin, 0, target)) {
       ks["entity"] = target;
 
-      if(isDefined(target.sorteddotprod)) {
+      if(isDefined(target.sorteddotprod))
         ks["dotprod"] = target.sorteddotprod;
-      } else {
+      else
         ks["dotprod"] = -1;
-      }
 
       return ks;
     }
@@ -375,9 +360,8 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(startorigin, player.origin, 0, player)) {
       debug_line(startorigin, player.origin, (1, 1, 1), 1000);
 
-      if(!isDefined(currentplayeroffset)) {
+      if(!isDefined(currentplayeroffset))
         currentplayeroffset = (0, 0, 0);
-      }
 
       currentplayerrating = currentplayerrating + 4;
     }
@@ -390,9 +374,8 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(startorigin, player.origin + playerheadoffset, 0, player)) {
       debug_line(startorigin, player.origin + playerheadoffset, (1, 0, 0), 1000);
 
-      if(!isDefined(currentplayeroffset)) {
+      if(!isDefined(currentplayeroffset))
         currentplayeroffset = playerheadoffset;
-      }
 
       currentplayerrating = currentplayerrating + 3;
     }
@@ -404,9 +387,8 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(player.origin + playerheadoffset, end, 0, player)) {
       debug_line(player.origin + playerheadoffset, end, (1, 1, 0), 1000);
 
-      if(!isDefined(currentplayeroffset)) {
+      if(!isDefined(currentplayeroffset))
         currentplayeroffset = vectorscale((0, 0, 1), 30.0);
-      }
 
       currentplayerrating = currentplayerrating + 2;
     }
@@ -416,21 +398,18 @@ projectile_find_target_player(owner, mincos) {
       target["entity"] = player;
       target["offset"] = currentplayeroffset;
 
-      if(isDefined(player.sorteddotprod)) {
+      if(isDefined(player.sorteddotprod))
         target["dotprod"] = player.sorteddotprod;
-      } else {
+      else
         target["dotprod"] = -1;
-      }
 
-      if(bestplayerrating >= 9) {
+      if(bestplayerrating >= 9)
         return target;
-      }
     }
   }
 
-  if(bestplayerrating >= 3) {
+  if(bestplayerrating >= 3)
     return target;
-  }
 
   return undefined;
 }
@@ -472,7 +451,7 @@ checkforemp() {
 
 watchdamage() {
   self endon("death");
-  self setCanDamage(1);
+  self setcandamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
 
@@ -488,7 +467,8 @@ watchdamage() {
     if(self.owner isenemyplayer(attacker)) {
       maps\mp\_scoreevents::processscoreevent("destroyed_missile_drone", attacker, self.owner, weaponname);
       attacker maps\mp\_challenges::addflyswatterstat(weaponname, self);
-    } else {}
+    } else {
+    }
 
     self detonate();
   }
@@ -505,7 +485,7 @@ get_array_sorted_dot_prod(array, mincos) {
     angles = self.angles;
   }
 
-  forwardvec = vectornormalize(anglesToForward(angles));
+  forwardvec = vectornormalize(anglestoforward(angles));
   dotprod = [];
   index = [];
 
@@ -548,9 +528,8 @@ get_array_sorted_dot_prod(array, mincos) {
 
   newarray = [];
 
-  for(i = 0; i < dotprod.size; i++) {
+  for(i = 0; i < dotprod.size; i++)
     newarray[i] = array[index[i]];
-  }
 
   return newarray;
 }

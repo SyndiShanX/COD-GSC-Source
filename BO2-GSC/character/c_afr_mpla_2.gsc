@@ -9,7 +9,7 @@
 #include xmodelalias\c_afr_mpla_body2_gear_als;
 
 main() {
-  self setModel("c_afr_mpla_body2");
+  self setmodel("c_afr_mpla_body2");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_afr_mpla_head_als::main());
   self attach(self.headmodel, "", 1);
   self.hatmodel = codescripts\character::randomelement(xmodelalias\c_afr_mpla_headgear_als::main());

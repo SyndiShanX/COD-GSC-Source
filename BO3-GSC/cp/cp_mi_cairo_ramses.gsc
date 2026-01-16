@@ -61,9 +61,9 @@ function main() {
   init_level();
   setup_skiptos();
   util::init_streamer_hints(3);
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
-  vehicle::add_spawn_function("station_fight_turret", &station_turret_spawnfunc);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
+  vehicle::add_spawn_function("station_fight_turret", & station_turret_spawnfunc);
   cp_mi_cairo_ramses_fx::main();
   cp_mi_cairo_ramses_sound::main();
   load::main();
@@ -113,8 +113,8 @@ function init_level() {
   level.b_tactical_mode_enabled = 0;
   level.b_enhanced_vision_enabled = 0;
   battlechatter::function_d9f49fba(0, "bc");
-  var_69e9c588 = getEntArray("mobile_armory", "script_noteworthy");
-  a_ammo_cache = getEntArray("ammo_cache", "script_noteworthy");
+  var_69e9c588 = getentarray("mobile_armory", "script_noteworthy");
+  a_ammo_cache = getentarray("ammo_cache", "script_noteworthy");
   level.var_2b205f01 = arraycombine(var_69e9c588, a_ammo_cache, 0, 0);
 }
 
@@ -123,12 +123,12 @@ function station_turret_spawnfunc() {
 }
 
 function setup_skiptos() {
-  skipto::add("level_start", &skipto_level_start_init, "level_start", &skipto_level_start_done);
-  skipto::add("rs_walk_through", &skipto_rs_walk_through_init, "rs_walk_through", &skipto_rs_walk_through_done);
-  skipto::function_d68e678e("interview_dr_nasser", &skipto_interview_dr_nasser_init, "interview_dr_nasser", &skipto_interview_dr_nasser_done);
-  skipto::function_d68e678e("defend_ramses_station", &station_fight::init, "defend_ramses_station", &station_fight::done);
-  skipto::function_d68e678e("vtol_ride", &vtol_ride::init, "vtol_ride", &vtol_ride::done);
-  skipto::add_dev("dev_defend_station_test", &station_fight::defend_station_test, "Defend Station Test", &station_fight::defend_station_done, "", "");
+  skipto::add("level_start", & skipto_level_start_init, "level_start", & skipto_level_start_done);
+  skipto::add("rs_walk_through", & skipto_rs_walk_through_init, "rs_walk_through", & skipto_rs_walk_through_done);
+  skipto::function_d68e678e("interview_dr_nasser", & skipto_interview_dr_nasser_init, "interview_dr_nasser", & skipto_interview_dr_nasser_done);
+  skipto::function_d68e678e("defend_ramses_station", & station_fight::init, "defend_ramses_station", & station_fight::done);
+  skipto::function_d68e678e("vtol_ride", & vtol_ride::init, "vtol_ride", & vtol_ride::done);
+  skipto::add_dev("dev_defend_station_test", & station_fight::defend_station_test, "Defend Station Test", & station_fight::defend_station_done, "", "");
 }
 
 function on_player_connect() {
@@ -140,7 +140,7 @@ function on_player_spawned() {
 }
 
 function skipto_level_start_init(str_objective, b_starting) {
-  callback::on_spawned(&level_start::setup_players_for_station_walk);
+  callback::on_spawned( & level_start::setup_players_for_station_walk);
   if(b_starting) {
     load::function_73adcefc();
     level_start::init_heroes(str_objective);
@@ -148,7 +148,7 @@ function skipto_level_start_init(str_objective, b_starting) {
   }
   objectives::set("cp_level_ramses_determine_what_salim_knows");
   objectives::set("cp_level_ramses_meet_with_khalil");
-  array::thread_all(level.var_2b205f01, &oed::disable_keyline);
+  array::thread_all(level.var_2b205f01, & oed::disable_keyline);
   level.ai_hendricks setdedicatedshadow(1);
   level.ai_hendricks sethighdetail(1);
   level.ai_rachel sethighdetail(1);
@@ -174,12 +174,12 @@ function skipto_rs_walk_through_init(str_objective, b_starting) {
   level.ai_khalil sethighdetail(1);
   if(b_starting) {
     load::function_73adcefc();
-    callback::on_spawned(&level_start::setup_players_for_station_walk);
+    callback::on_spawned( & level_start::setup_players_for_station_walk);
     cp_mi_cairo_ramses_station_walk::init_heroes(str_objective);
-    array::thread_all(level.var_2b205f01, &oed::disable_keyline);
+    array::thread_all(level.var_2b205f01, & oed::disable_keyline);
     load::function_a2995f22();
     util::screen_fade_out(0, "black", "skipto_fade");
-    util::delay(1, undefined, &util::screen_fade_in, 1, "black", "skipto_fade");
+    util::delay(1, undefined, & util::screen_fade_in, 1, "black", "skipto_fade");
   }
   cp_mi_cairo_ramses_nasser_interview::function_c99967dc(0);
   ramses_util::function_7255e66(0);
@@ -195,8 +195,8 @@ function skipto_interview_dr_nasser_init(str_objective, b_starting) {
   if(b_starting) {
     load::function_73adcefc();
     cp_mi_cairo_ramses_nasser_interview::init_heroes();
-    callback::on_spawned(&cp_mi_cairo_ramses_nasser_interview::function_1bcd464b);
-    array::thread_all(level.var_2b205f01, &oed::disable_keyline);
+    callback::on_spawned( & cp_mi_cairo_ramses_nasser_interview::function_1bcd464b);
+    array::thread_all(level.var_2b205f01, & oed::disable_keyline);
     level.ai_khalil sethighdetail(1);
     level.ai_rachel sethighdetail(1);
     level.ai_hendricks sethighdetail(1);
@@ -208,7 +208,7 @@ function skipto_interview_dr_nasser_init(str_objective, b_starting) {
 
 function skipto_interview_dr_nasser_done(str_objective, b_starting, b_direct, player) {
   if(b_starting) {
-    array::thread_all(getEntArray("mobile_armory", "script_noteworthy"), &oed::enable_keyline, 1);
+    array::thread_all(getentarray("mobile_armory", "script_noteworthy"), & oed::enable_keyline, 1);
     objectives::complete("cp_level_ramses_interrogate_salim");
     objectives::complete("cp_level_ramses_determine_what_salim_knows");
     objectives::set("cp_level_ramses_protect_salim");

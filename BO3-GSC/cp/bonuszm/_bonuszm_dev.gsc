@@ -17,8 +17,8 @@ function function_6f199738() {
 
 function function_17186302() {
   setdvar("", 0);
-  while(true) {
-    if(isDefined(level.var_a9e78bf7) && getdvarstring("") == "") {
+  while (true) {
+    if(isdefined(level.var_a9e78bf7) && getdvarstring("") == "") {
       printtoprightln(("" + "") + level.var_a9e78bf7[""]);
       printtoprightln(("" + "") + level.var_a9e78bf7[""]);
       printtoprightln(("" + "") + level.var_a9e78bf7[""]);
@@ -57,10 +57,10 @@ function function_17186302() {
 
 function function_10489e30() {
   setdvar("", 0);
-  while(true) {
-    if(getdvarstring("") == "" || (isDefined(level.var_5deb2d16) && level.var_5deb2d16)) {
+  while (true) {
+    if(getdvarstring("") == "" || (isdefined(level.var_5deb2d16) && level.var_5deb2d16)) {
       skiptos = getskiptos();
-      if(!isDefined(level.var_c7b985ff)) {
+      if(!isdefined(level.var_c7b985ff)) {
         level.var_c7b985ff = newhudelem();
         level.var_c7b985ff.alignx = "";
         level.var_c7b985ff.aligny = "";
@@ -73,15 +73,15 @@ function function_10489e30() {
         level.var_c7b985ff.font = "";
       }
       prefix = "";
-      if(isDefined(level.var_5deb2d16) && level.var_5deb2d16) {
+      if(isdefined(level.var_5deb2d16) && level.var_5deb2d16) {
         prefix = "";
       }
-      if(isDefined(level.current_skipto)) {
+      if(isdefined(level.current_skipto)) {
         level.var_c7b985ff settext((prefix + "") + level.current_skipto);
       } else {
         level.var_c7b985ff settext((prefix + "") + "");
       }
-    } else if(isDefined(level.var_c7b985ff)) {
+    } else if(isdefined(level.var_c7b985ff)) {
       level.var_c7b985ff destroy();
     }
     wait(0.05);
@@ -91,12 +91,12 @@ function function_10489e30() {
 function function_a2a8d5a6() {
   setdvar("", 0);
   nodes = getallnodes();
-  while(true) {
+  while (true) {
     if(getdvarstring("") == "") {
       level.var_915cfc91 = [];
       foreach(node in nodes) {
         if(node.type == "" || node.type == "") {
-          if(isDefined(node.script_noteworthy) && node.script_noteworthy == "") {
+          if(isdefined(node.script_noteworthy) && node.script_noteworthy == "") {
             if(!isinarray(level.var_915cfc91, node.animscript)) {
               level.var_915cfc91[level.var_915cfc91.size] = node.animscript;
             }

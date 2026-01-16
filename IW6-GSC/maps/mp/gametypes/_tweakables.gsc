@@ -225,65 +225,57 @@ registerTweakable(category, name, dvar, value) {
 
   switch (category) {
     case "rule":
-      if(!isDefined(level.rules[name])) {
+      if(!isDefined(level.rules[name]))
         level.rules[name] = spawnStruct();
-      }
       level.rules[name].value = value;
       level.rules[name].lastValue = value;
       level.rules[name].dVar = dvar;
       break;
     case "game":
-      if(!isDefined(level.gameTweaks[name])) {
+      if(!isDefined(level.gameTweaks[name]))
         level.gameTweaks[name] = spawnStruct();
-      }
       level.gameTweaks[name].value = value;
       level.gameTweaks[name].lastValue = value;
       level.gameTweaks[name].dVar = dvar;
       break;
     case "team":
-      if(!isDefined(level.teamTweaks[name])) {
+      if(!isDefined(level.teamTweaks[name]))
         level.teamTweaks[name] = spawnStruct();
-      }
       level.teamTweaks[name].value = value;
       level.teamTweaks[name].lastValue = value;
       level.teamTweaks[name].dVar = dvar;
       break;
     case "player":
-      if(!isDefined(level.playerTweaks[name])) {
+      if(!isDefined(level.playerTweaks[name]))
         level.playerTweaks[name] = spawnStruct();
-      }
       level.playerTweaks[name].value = value;
       level.playerTweaks[name].lastValue = value;
       level.playerTweaks[name].dVar = dvar;
       break;
     case "class":
-      if(!isDefined(level.classTweaks[name])) {
+      if(!isDefined(level.classTweaks[name]))
         level.classTweaks[name] = spawnStruct();
-      }
       level.classTweaks[name].value = value;
       level.classTweaks[name].lastValue = value;
       level.classTweaks[name].dVar = dvar;
       break;
     case "weapon":
-      if(!isDefined(level.weaponTweaks[name])) {
+      if(!isDefined(level.weaponTweaks[name]))
         level.weaponTweaks[name] = spawnStruct();
-      }
       level.weaponTweaks[name].value = value;
       level.weaponTweaks[name].lastValue = value;
       level.weaponTweaks[name].dVar = dvar;
       break;
     case "hardpoint":
-      if(!isDefined(level.hardpointTweaks[name])) {
+      if(!isDefined(level.hardpointTweaks[name]))
         level.hardpointTweaks[name] = spawnStruct();
-      }
       level.hardpointTweaks[name].value = value;
       level.hardpointTweaks[name].lastValue = value;
       level.hardpointTweaks[name].dVar = dvar;
       break;
     case "hud":
-      if(!isDefined(level.hudTweaks[name])) {
+      if(!isDefined(level.hudTweaks[name]))
         level.hudTweaks[name] = spawnStruct();
-      }
       level.hudTweaks[name].value = value;
       level.hudTweaks[name].lastValue = value;
       level.hudTweaks[name].dVar = dvar;
@@ -305,11 +297,10 @@ init() {
   level.hudTweaks = [];
 
   if(level.console) {
-    if(level.xb3 || level.ps4) {
+    if(level.xb3 || level.ps4)
       registerTweakable("game", "graceperiod", "scr_game_graceperiod", 20);
-    } else {
+    else
       registerTweakable("game", "graceperiod", "scr_game_graceperiod", 15);
-    }
 
     registerTweakable("game", "graceperiod_comp", "scr_game_graceperiod_comp", 60);
   } else {

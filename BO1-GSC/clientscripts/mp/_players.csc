@@ -9,7 +9,7 @@
 pulseSingleBullet(localClientNum) {
   lastPlayer = GetLocalPlayer(localClientNum);
   lastAmmoCount = 0;
-  while(1) {
+  while (1) {
     wait 0.05;
     waitforallclients();
     player = GetLocalPlayer(localClientNum);
@@ -43,24 +43,22 @@ on_connect(localclientnum) {
   init_filter_infrared(player);
   init_filter_scope(player);
   init_filter_tvguided(player);
-  if(isDefined(level.infraredVisionset)) {
+  if(isDefined(level.infraredVisionset))
     player SetInfraredVisionset(level.infraredVisionset);
-  }
   if(isDefined(level.onPlayerConnect)) {
     level thread[[level.onPlayerConnect]](localclientnum);
   }
 }
 dtp_effects() {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     self waittill("dtp_land", localClientNum);
     localPlayer = GetLocalPlayer(localClientNum);
     if(!IsSplitscreen() && isDefined(localPlayer) && localPlayer == self) {
-      if(isDefined(level.isWinter) && level.isWinter) {
+      if(isDefined(level.isWinter) && level.isWinter)
         AnimateUI(localClientNum, "fullscreen_snow", "dirt", "in", 0);
-      } else {
+      else
         AnimateUI(localClientNum, "fullscreen_dirt", "dirt", "in", 0);
-      }
     }
   }
 }

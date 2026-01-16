@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\system_shared;
+
 #namespace archetype_catalyst;
 
 autoexec __init__system__() {

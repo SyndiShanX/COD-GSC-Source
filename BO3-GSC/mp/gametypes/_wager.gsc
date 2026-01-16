@@ -19,17 +19,17 @@
 #namespace wager;
 
 function autoexec __init__sytem__() {
-  system::register("wager", &__init__, undefined, undefined);
+  system::register("wager", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
   if(gamemodeismode(3)) {
     level.wagermatch = 1;
-    if(!isDefined(game["wager_pot"])) {
+    if(!isdefined(game["wager_pot"])) {
       game["wager_pot"] = 0;
       game["wager_initial_pot"] = 0;
     }
@@ -37,8 +37,8 @@ function init() {
     game["dialog"]["wm_in_the_money"] = "boost_gen_06";
     game["dialog"]["wm_oot_money"] = "boost_gen_07";
     level.poweruplist = [];
-    callback::on_disconnect(&on_disconnect);
-    callback::on_spawned(&init_player);
+    callback::on_disconnect( & on_disconnect);
+    callback::on_spawned( & init_player);
     level thread help_game_end();
   } else {
     level.wagermatch = 0;
@@ -48,12 +48,12 @@ function init() {
 
 function init_player() {
   self endon("disconnect");
-  if(!isDefined(self.pers["wager"])) {
+  if(!isdefined(self.pers["wager"])) {
     self.pers["wager"] = 1;
     self.pers["wager_sideBetWinnings"] = 0;
     self.pers["wager_sideBetLosses"] = 0;
   }
-  if(isDefined(level.inthemoneyonradar) && level.inthemoneyonradar || (isDefined(level.firstplaceonradar) && level.firstplaceonradar)) {
+  if(isdefined(level.inthemoneyonradar) && level.inthemoneyonradar || (isdefined(level.firstplaceonradar) && level.firstplaceonradar)) {
     self.pers["hasRadar"] = 1;
     self.hasspyplane = 1;
   } else {
@@ -70,7 +70,7 @@ function on_disconnect() {
 }
 
 function deduct_player_ante() {
-  if(isDefined(self.pers["hasPaidWagerAnte"])) {
+  if(isdefined(self.pers["hasPaidWagerAnte"])) {
     return;
   }
   waittillframeend();
@@ -89,36 +89,38 @@ function deduct_player_ante() {
   self.pers["hasPaidWagerAnte"] = 1;
   self addplayerstat("LIFETIME_BUYIN", wagerbet);
   self add_recent_earnings_to_stat(0 - wagerbet);
-  if(isDefined(level.onwagerplayerante)) {
-    [[level.onwagerplayerante]](self, wagerbet);
+  if(isdefined(level.onwagerplayerante)) {
+    [
+      [level.onwagerplayerante]
+    ](self, wagerbet);
   }
   self thread persistence::upload_stats_soon();
 }
 
 function increment_escrow_for_player(amount) {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isdefined(self) || !isplayer(self)) {
     return;
   }
-  if(!isDefined(game["escrows"])) {
+  if(!isdefined(game["escrows"])) {
     game["escrows"] = [];
   }
   playerxuid = self getxuid();
-  if(!isDefined(playerxuid)) {
+  if(!isdefined(playerxuid)) {
     return;
   }
-  escrowstruct = spawnStruct();
+  escrowstruct = spawnstruct();
   escrowstruct.xuid = playerxuid;
   escrowstruct.amount = amount;
   game["escrows"][game["escrows"].size] = escrowstruct;
 }
 
 function clear_escrows() {
-  if(!isDefined(game["escrows"])) {
+  if(!isdefined(game["escrows"])) {
     return;
   }
   escrows = game["escrows"];
   numescrows = escrows.size;
-  for(i = 0; i < numescrows; i++) {
+  for (i = 0; i < numescrows; i++) {
     escrowstruct = escrows[i];
   }
   game["escrows"] = [];
@@ -140,13 +142,15 @@ function finalize_round() {
     return;
   }
   determine_winnings();
-  if(isDefined(level.onwagerfinalizeround)) {
-    [[level.onwagerfinalizeround]]();
+  if(isdefined(level.onwagerfinalizeround)) {
+    [
+      [level.onwagerfinalizeround]
+    ]();
   }
 }
 
 function determine_winnings() {
-  shouldcalculatewinnings = !isDefined(level.dontcalcwagerwinnings) || !level.dontcalcwagerwinnings;
+  shouldcalculatewinnings = !isdefined(level.dontcalcwagerwinnings) || !level.dontcalcwagerwinnings;
   if(!shouldcalculatewinnings) {
     return;
   }
@@ -166,9 +170,9 @@ function calculate_free_for_all_payouts() {
     payoutpercentages = array(1);
   }
   set_winnings_on_players(level.players, 0);
-  if(isDefined(level.hostforcedend) && level.hostforcedend) {
+  if(isdefined(level.hostforcedend) && level.hostforcedend) {
     wagerbet = getdvarint("scr_wagerBet");
-    for(i = 0; i < playerrankings.size; i++) {
+    for (i = 0; i < playerrankings.size; i++) {
       if(!playerrankings[i] islocaltohost()) {
         playerrankings[i].wagerwinnings = wagerbet;
       }
@@ -182,7 +186,7 @@ function calculate_free_for_all_payouts() {
     cumulativepayoutpercentage = payoutpercentages[0];
     playergroup = [];
     playergroup[playergroup.size] = playerrankings[0];
-    for(i = 1; i < playerrankings.size; i++) {
+    for (i = 1; i < playerrankings.size; i++) {
       if(playerrankings[i].pers["score"] < playergroup[0].pers["score"]) {
         set_winnings_on_players(playergroup, int((game["wager_pot"] * cumulativepayoutpercentage) / playergroup.size));
         playergroup = [];
@@ -190,7 +194,7 @@ function calculate_free_for_all_payouts() {
       }
       playergroup[playergroup.size] = playerrankings[i];
       currentpayoutpercentage++;
-      if(isDefined(payoutpercentages[currentpayoutpercentage])) {
+      if(isdefined(payoutpercentages[currentpayoutpercentage])) {
         cumulativepayoutpercentage = cumulativepayoutpercentage + payoutpercentages[currentpayoutpercentage];
       }
     }
@@ -203,7 +207,7 @@ function calculate_places_based_on_score() {
   playerrankings = level.placement["all"];
   placementscores = array(playerrankings[0].pers["score"], -1, -1);
   currentplace = 0;
-  for(index = 0; index < playerrankings.size && currentplace < placementscores.size; index++) {
+  for (index = 0; index < playerrankings.size && currentplace < placementscores.size; index++) {
     player = playerrankings[index];
     if(player.pers["score"] < placementscores[currentplace]) {
       currentplace++;
@@ -223,7 +227,7 @@ function calculate_team_payouts() {
     return;
   }
   playersonwinningteam = [];
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     player = level.players[index];
     player.wagerwinnings = 0;
     if(player.pers["team"] == winner) {
@@ -239,7 +243,7 @@ function calculate_team_payouts() {
 }
 
 function set_winnings_on_players(players, amount) {
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     players[index].wagerwinnings = amount;
   }
 }
@@ -254,9 +258,9 @@ function finalize_game() {
   players = level.players;
   wait(0.5);
   playerrankings = level.wagertopearners;
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = players[index];
-    if(isDefined(player.pers["wager_sideBetWinnings"])) {
+    if(isdefined(player.pers["wager_sideBetWinnings"])) {
       pay_out_winnings(player, player.wagerwinnings + player.pers["wager_sideBetWinnings"]);
     } else {
       pay_out_winnings(player, player.wagerwinnings);
@@ -281,9 +285,9 @@ function pay_out_winnings(player, winnings) {
 function determine_top_earners() {
   topwinnings = array(-1, -1, -1);
   level.wagertopearners = [];
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(!isDefined(player.wagerwinnings)) {
+    if(!isdefined(player.wagerwinnings)) {
       player.wagerwinnings = 0;
     }
     if(player.wagerwinnings > topwinnings[0]) {
@@ -310,7 +314,7 @@ function determine_top_earners() {
 }
 
 function post_round_side_bet() {
-  if(isDefined(level.sidebet) && level.sidebet) {
+  if(isdefined(level.sidebet) && level.sidebet) {
     level notify("side_bet_begin");
     level waittill("side_bet_end");
   }
@@ -337,8 +341,8 @@ function side_bet_all_bets_placed() {
 }
 
 function setup_blank_random_player(takeweapons, chooserandombody, weapon) {
-  if(!isDefined(chooserandombody) || chooserandombody) {
-    if(!isDefined(self.pers["wagerBodyAssigned"])) {
+  if(!isdefined(chooserandombody) || chooserandombody) {
+    if(!isdefined(self.pers["wagerBodyAssigned"])) {
       self assign_random_body();
       self.pers["wagerBodyAssigned"] = 1;
     }
@@ -349,14 +353,14 @@ function setup_blank_random_player(takeweapons, chooserandombody, weapon) {
   self.pers["killstreaks"] = [];
   self.pers["killstreak_has_been_used"] = [];
   self.pers["killstreak_unique_id"] = [];
-  if(!isDefined(takeweapons) || takeweapons) {
+  if(!isdefined(takeweapons) || takeweapons) {
     self takeallweapons();
   }
-  if(isDefined(self.pers["hasRadar"]) && self.pers["hasRadar"]) {
+  if(isdefined(self.pers["hasRadar"]) && self.pers["hasRadar"]) {
     self.hasspyplane = 1;
   }
-  if(isDefined(self.powerups) && isDefined(self.powerups.size)) {
-    for(i = 0; i < self.powerups.size; i++) {
+  if(isdefined(self.powerups) && isdefined(self.powerups.size)) {
+    for (i = 0; i < self.powerups.size; i++) {
       self apply_powerup(self.powerups[i]);
     }
   }
@@ -368,7 +372,7 @@ function assign_random_body() {}
 function queue_popup(message, points, submessage, announcement) {
   self endon("disconnect");
   size = self.wagernotifyqueue.size;
-  self.wagernotifyqueue[size] = spawnStruct();
+  self.wagernotifyqueue[size] = spawnstruct();
   self.wagernotifyqueue[size].message = message;
   self.wagernotifyqueue[size].points = points;
   self.wagernotifyqueue[size].submessage = submessage;
@@ -378,26 +382,26 @@ function queue_popup(message, points, submessage, announcement) {
 
 function help_game_end() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("player_eliminated");
-    if(!isDefined(level.numlives) || !level.numlives) {
+    if(!isdefined(level.numlives) || !level.numlives) {
       continue;
     }
     wait(0.05);
     players = level.players;
     playersleft = 0;
-    for(i = 0; i < players.size; i++) {
-      if(isDefined(players[i].pers["lives"]) && players[i].pers["lives"] > 0) {
+    for (i = 0; i < players.size; i++) {
+      if(isdefined(players[i].pers["lives"]) && players[i].pers["lives"] > 0) {
         playersleft++;
       }
     }
     if(playersleft == 2) {
-      for(i = 0; i < players.size; i++) {
-        players[i] queue_popup(&"MP_HEADS_UP", 0, &"MP_U2_ONLINE", "wm_u2_online");
+      for (i = 0; i < players.size; i++) {
+        players[i] queue_popup(&"MP_HEADS_UP", 0, & "MP_U2_ONLINE", "wm_u2_online");
         players[i].pers["hasRadar"] = 1;
         players[i].hasspyplane = 1;
         if(level.teambased) {
-          assert(isDefined(players[i].team));
+          assert(isdefined(players[i].team));
           level.activeplayeruavs[players[i].team]++;
         } else {
           level.activeplayeruavs[players[i] getentitynumber()]++;
@@ -410,17 +414,17 @@ function help_game_end() {
 
 function set_radar_visibility() {
   prevscoreplace = self.prevscoreplace;
-  if(!isDefined(prevscoreplace)) {
+  if(!isdefined(prevscoreplace)) {
     prevscoreplace = 1;
   }
-  if(isDefined(level.inthemoneyonradar) && level.inthemoneyonradar) {
-    if(prevscoreplace <= 3 && isDefined(self.score) && self.score > 0) {
+  if(isdefined(level.inthemoneyonradar) && level.inthemoneyonradar) {
+    if(prevscoreplace <= 3 && isdefined(self.score) && self.score > 0) {
       self unsetperk("specialty_gpsjammer");
     } else {
       self setperk("specialty_gpsjammer");
     }
-  } else if(isDefined(level.firstplaceonradar) && level.firstplaceonradar) {
-    if(prevscoreplace == 1 && isDefined(self.score) && self.score > 0) {
+  } else if(isdefined(level.firstplaceonradar) && level.firstplaceonradar) {
+    if(prevscoreplace == 1 && isdefined(self.score) && self.score > 0) {
       self unsetperk("specialty_gpsjammer");
     } else {
       self setperk("specialty_gpsjammer");
@@ -433,13 +437,13 @@ function player_scored() {
   self endon("wager_player_scored");
   wait(0.05);
   globallogic::updateplacement();
-  for(i = 0; i < level.placement["all"].size; i++) {
+  for (i = 0; i < level.placement["all"].size; i++) {
     prevscoreplace = level.placement["all"][i].prevscoreplace;
-    if(!isDefined(prevscoreplace)) {
+    if(!isdefined(prevscoreplace)) {
       prevscoreplace = 1;
     }
     currentscoreplace = i + 1;
-    for(j = i - 1; j >= 0; j--) {
+    for (j = i - 1; j >= 0; j--) {
       if(level.placement["all"][i].score == level.placement["all"][j].score) {
         currentscoreplace--;
       }
@@ -461,7 +465,7 @@ function announcer(dialog, group) {
 }
 
 function create_powerup(name, type, displayname, iconmaterial) {
-  powerup = spawnStruct();
+  powerup = spawnstruct();
   powerup.name = [];
   powerup.name[0] = name;
   powerup.type = type;
@@ -471,10 +475,10 @@ function create_powerup(name, type, displayname, iconmaterial) {
 }
 
 function add_powerup(name, type, displayname, iconmaterial) {
-  if(!isDefined(level.poweruplist)) {
+  if(!isdefined(level.poweruplist)) {
     level.poweruplist = [];
   }
-  for(i = 0; i < level.poweruplist.size; i++) {
+  for (i = 0; i < level.poweruplist.size; i++) {
     if(level.poweruplist[i].displayname == displayname) {
       level.poweruplist[i].name[level.poweruplist[i].name.size] = name;
       return;
@@ -529,7 +533,7 @@ function apply_powerup(powerup) {
       break;
     }
     case "perk": {
-      for(i = 0; i < powerup.name.size; i++) {
+      for (i = 0; i < powerup.name.size; i++) {
         self setperk(powerup.name[i]);
       }
       break;
@@ -546,12 +550,12 @@ function apply_powerup(powerup) {
 }
 
 function give_powerup(powerup, doanimation) {
-  if(!isDefined(self.powerups)) {
+  if(!isdefined(self.powerups)) {
     self.powerups = [];
   }
   powerupindex = self.powerups.size;
   self.powerups[powerupindex] = copy_powerup(powerup);
-  for(i = 0; i < powerup.name.size; i++) {
+  for (i = 0; i < powerup.name.size; i++) {
     self.powerups[powerupindex].name[self.powerups[powerupindex].name.size] = powerup.name[i];
   }
   self apply_powerup(self.powerups[powerupindex]);
@@ -559,7 +563,7 @@ function give_powerup(powerup, doanimation) {
 }
 
 function pulse_powerup_icon(powerupindex) {
-  if(!isDefined(self) || !isDefined(self.powerups) || !isDefined(self.powerups[powerupindex]) || !isDefined(self.powerups[powerupindex].hud_elem_icon)) {
+  if(!isdefined(self) || !isdefined(self.powerups) || !isdefined(self.powerups[powerupindex]) || !isdefined(self.powerups[powerupindex].hud_elem_icon)) {
     return;
   }
   self endon("disconnect");
@@ -568,7 +572,7 @@ function pulse_powerup_icon(powerupindex) {
   pulsepercent = 1.5;
   pulsetime = 0.5;
   hud_elem = self.powerups[powerupindex].hud_elem_icon;
-  if(isDefined(hud_elem.animating) && hud_elem.animating) {
+  if(isdefined(hud_elem.animating) && hud_elem.animating) {
     return;
   }
   origx = hud_elem.x;
@@ -594,7 +598,7 @@ function show_powerup_message(powerupindex, doanimation) {
   self endon("disconnect");
   self endon("delete");
   self endon("clearing_powerups");
-  if(!isDefined(doanimation)) {
+  if(!isdefined(doanimation)) {
     doanimation = 1;
   }
   wasinprematch = level.inprematchperiod;
@@ -604,7 +608,7 @@ function show_powerup_message(powerupindex, doanimation) {
     powerupstarty = 120;
     powerupspacing = 35;
   }
-  if(isDefined(self.powerups[powerupindex].hud_elem)) {
+  if(isdefined(self.powerups[powerupindex].hud_elem)) {
     self.powerups[powerupindex].hud_elem destroy();
   }
   self.powerups[powerupindex].hud_elem = newclienthudelem(self);
@@ -625,7 +629,7 @@ function show_powerup_message(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem settext(self.powerups[powerupindex].displayname);
   bigiconsize = 40;
   iconsize = 32;
-  if(isDefined(self.powerups[powerupindex].hud_elem_icon)) {
+  if(isdefined(self.powerups[powerupindex].hud_elem_icon)) {
     self.powerups[powerupindex].hud_elem_icon destroy();
   }
   if(doanimation) {
@@ -646,7 +650,7 @@ function show_powerup_message(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem_icon.archived = 0;
   self.powerups[powerupindex].hud_elem_icon.alpha = 1;
   if(!wasinprematch && doanimation) {
-    self thread queue_popup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
+    self thread queue_popup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
   }
   pulsetime = 0.5;
   if(doanimation) {
@@ -668,15 +672,15 @@ function show_powerup_message(powerupindex, doanimation) {
     wait(pulsetime);
   }
   if(wasinprematch && doanimation) {
-    self thread queue_popup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
+    self thread queue_popup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
   }
   wait(1.5);
-  for(i = 0; i <= powerupindex; i++) {
+  for (i = 0; i <= powerupindex; i++) {
     self.powerups[i].hud_elem fadeovertime(0.25);
     self.powerups[i].hud_elem.alpha = 0;
   }
   wait(0.25);
-  for(i = 0; i <= powerupindex; i++) {
+  for (i = 0; i <= powerupindex; i++) {
     self.powerups[i].hud_elem_icon moveovertime(0.25);
     self.powerups[i].hud_elem_icon.x = 0 - iconsize;
     self.powerups[i].hud_elem_icon.horzalign = "user_right";
@@ -686,12 +690,12 @@ function show_powerup_message(powerupindex, doanimation) {
 
 function clear_powerups() {
   self notify("clearing_powerups");
-  if(isDefined(self.powerups) && isDefined(self.powerups.size)) {
-    for(i = 0; i < self.powerups.size; i++) {
-      if(isDefined(self.powerups[i].hud_elem)) {
+  if(isdefined(self.powerups) && isdefined(self.powerups.size)) {
+    for (i = 0; i < self.powerups.size; i++) {
+      if(isdefined(self.powerups[i].hud_elem)) {
         self.powerups[i].hud_elem destroy();
       }
-      if(isDefined(self.powerups[i].hud_elem_icon)) {
+      if(isdefined(self.powerups[i].hud_elem_icon)) {
         self.powerups[i].hud_elem_icon destroy();
       }
     }
@@ -700,34 +704,34 @@ function clear_powerups() {
 }
 
 function track_weapon_usage(name, incvalue, statname) {
-  if(!isDefined(self.wagerweaponusage)) {
+  if(!isdefined(self.wagerweaponusage)) {
     self.wagerweaponusage = [];
   }
-  if(!isDefined(self.wagerweaponusage[name])) {
+  if(!isdefined(self.wagerweaponusage[name])) {
     self.wagerweaponusage[name] = [];
   }
-  if(!isDefined(self.wagerweaponusage[name][statname])) {
+  if(!isdefined(self.wagerweaponusage[name][statname])) {
     self.wagerweaponusage[name][statname] = 0;
   }
   self.wagerweaponusage[name][statname] = self.wagerweaponusage[name][statname] + incvalue;
 }
 
 function get_highest_weapon_usage(statname) {
-  if(!isDefined(self.wagerweaponusage)) {
+  if(!isdefined(self.wagerweaponusage)) {
     return undefined;
   }
   bestweapon = undefined;
   highestvalue = 0;
   wagerweaponsused = getarraykeys(self.wagerweaponusage);
-  for(i = 0; i < wagerweaponsused.size; i++) {
+  for (i = 0; i < wagerweaponsused.size; i++) {
     weaponstats = self.wagerweaponusage[wagerweaponsused[i]];
-    if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex([
+    if(!isdefined(weaponstats[statname]) || !getbaseweaponitemindex([
         [level.get_base_weapon_param]
       ](wagerweaponsused[i]))) {
       continue;
       continue;
     }
-    if(!isDefined(bestweapon) || weaponstats[statname] > highestvalue) {
+    if(!isdefined(bestweapon) || weaponstats[statname] > highestvalue) {
       bestweapon = wagerweaponsused[i];
       highestvalue = weaponstats[statname];
     }
@@ -738,20 +742,20 @@ function get_highest_weapon_usage(statname) {
 function set_after_action_report_stats() {
   topweapon = self get_highest_weapon_usage("kills");
   topkills = 0;
-  if(isDefined(topweapon)) {
+  if(isdefined(topweapon)) {
     topkills = self.wagerweaponusage[topweapon]["kills"];
   } else {
     topweapon = self get_highest_weapon_usage("timeUsed");
   }
-  if(!isDefined(topweapon)) {
+  if(!isdefined(topweapon)) {
     topweapon = "";
   }
   self persistence::set_after_action_report_stat("topWeaponItemIndex", getbaseweaponitemindex([[level.get_base_weapon_param]](topweapon)));
   self persistence::set_after_action_report_stat("topWeaponKills", topkills);
-  if(isDefined(level.onwagerawards)) {
+  if(isdefined(level.onwagerawards)) {
     self[[level.onwagerawards]]();
   } else {
-    for(i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
       self persistence::set_after_action_report_stat("wagerAwards", 0, i);
     }
   }

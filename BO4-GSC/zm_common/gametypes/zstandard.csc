@@ -10,6 +10,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\zm_powerups;
+
 #namespace zstandard;
 
 event_handler[gametype_init] main(eventstruct) {

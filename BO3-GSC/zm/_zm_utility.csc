@@ -12,7 +12,7 @@
 function ignore_triggers(timer) {
   self endon("death");
   self.ignoretriggers = 1;
-  if(isDefined(timer)) {
+  if(isdefined(timer)) {
     wait(timer);
   } else {
     wait(0.5);
@@ -49,10 +49,10 @@ function halve_score(n_score) {
 
 function spawn_weapon_model(localclientnum, weapon, model = weapon.worldmodel, origin, angles, options) {
   weapon_model = spawn(localclientnum, origin, "script_model");
-  if(isDefined(angles)) {
+  if(isdefined(angles)) {
     weapon_model.angles = angles;
   }
-  if(isDefined(options)) {
+  if(isdefined(options)) {
     weapon_model useweaponmodel(weapon, model, options);
   } else {
     weapon_model useweaponmodel(weapon, model);
@@ -62,7 +62,7 @@ function spawn_weapon_model(localclientnum, weapon, model = weapon.worldmodel, o
 
 function spawn_buildkit_weapon_model(localclientnum, weapon, camo, origin, angles) {
   weapon_model = spawn(localclientnum, origin, "script_model");
-  if(isDefined(angles)) {
+  if(isdefined(angles)) {
     weapon_model.angles = angles;
   }
   weapon_model usebuildkitweaponmodel(localclientnum, weapon, camo, zm_weapons::is_weapon_upgraded(weapon));
@@ -78,7 +78,7 @@ function is_gametype_active(a_gametypes) {
   if(!isarray(a_gametypes)) {
     a_gametypes = array(a_gametypes);
   }
-  for(i = 0; i < a_gametypes.size; i++) {
+  for (i = 0; i < a_gametypes.size; i++) {
     if(getdvarstring("g_gametype") == a_gametypes[i]) {
       b_is_gametype_active = 1;
     }
@@ -109,7 +109,7 @@ function drawcylinder(pos, rad, height, color) {
   currad = rad;
   curheight = height;
   debugstar(pos, 1, color);
-  for(r = 0; r < 20; r++) {
+  for (r = 0; r < 20; r++) {
     theta = (r / 20) * 360;
     theta2 = ((r + 1) / 20) * 360;
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0), color, 1, 1, 100);
@@ -122,9 +122,9 @@ function umbra_fix_logic(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
   umbra_settometrigger(localclientnum, "");
-  while(true) {
+  while (true) {
     in_fix_area = 0;
-    if(isDefined(level.custom_umbra_hotfix)) {
+    if(isdefined(level.custom_umbra_hotfix)) {
       in_fix_area = self thread[[level.custom_umbra_hotfix]](localclientnum);
     }
     if(in_fix_area == 0) {

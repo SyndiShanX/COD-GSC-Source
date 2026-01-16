@@ -8,7 +8,7 @@
 #include xmodelalias\c_pan_dingbats_gear_als;
 
 main() {
-  self setModel("c_pan_dingbats_body_2");
+  self setmodel("c_pan_dingbats_body_2");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_pan_dingbats_head_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_pan_dingbats_gear_als::main());

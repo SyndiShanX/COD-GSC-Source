@@ -38,9 +38,8 @@ enemy_found_corpse_loop() {
   for(;;) {
     maps\_utility::ent_flag_wait("_stealth_enabled");
 
-    if(maps\_utility::ent_flag_exist("_stealth_behavior_asleep")) {
+    if(maps\_utility::ent_flag_exist("_stealth_behavior_asleep"))
       maps\_utility::ent_flag_waitopen("_stealth_behavior_asleep");
-    }
 
     maps\_stealth_utility::stealth_group_corpse_flag_wait();
 
@@ -89,15 +88,13 @@ enemy_corpse_saw_wrapper() {
 enemy_corpse_found_wrapper() {
   maps\_stealth_shared_utilities::enemy_find_original_goal();
 
-  if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
+  if(!maps\_utility::ent_flag("_stealth_found_corpse"))
     self notify("awareness_corpse", "heard_corpse", (0, 0, 0));
-  }
 
   maps\_stealth_shared_utilities::enemy_reaction_state_alert();
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     maps\_utility::ent_flag_set("_stealth_override_goalpos");
-  }
 
   thread enemy_corpse_reset_wrapper();
   var_0 = self._stealth.behavior.ai_functions["corpse"];
@@ -121,9 +118,9 @@ enemy_corpse_saw_behavior() {
   self.disablearrivals = 0;
   self.disableexits = 0;
 
-  if(self.type != "dog") {
+  if(self.type != "dog")
     maps\_stealth_shared_utilities::stealth_set_run_anim("_stealth_combat_jog");
-  } else {
+  else {
     maps\_utility::clear_run_anim();
     self.script_growl = 1;
     self.script_nobark = 1;
@@ -158,13 +155,11 @@ player_can_see_corpse(var_0) {
   var_1 = maps\_utility::get_closest_player(var_0);
   var_2 = distance(var_1.origin, var_0);
 
-  if(var_2 < 150) {
+  if(var_2 < 150)
     return 1;
-  }
 
-  if(var_2 > level._stealth.logic.corpse.player_distsqrd) {
+  if(var_2 > level._stealth.logic.corpse.player_distsqrd)
     return 0;
-  }
 
   return sighttracepassed(var_0 + (0, 0, 48), var_1 getEye(), 0, var_1);
 }
@@ -175,9 +170,8 @@ enemy_corpse_logic() {
   thread enemy_corpse_found_loop();
 
   for(;;) {
-    if(maps\_utility::ent_flag_exist("_stealth_behavior_asleep")) {
+    if(maps\_utility::ent_flag_exist("_stealth_behavior_asleep"))
       maps\_utility::ent_flag_waitopen("_stealth_behavior_asleep");
-    }
 
     maps\_utility::ent_flag_wait("_stealth_enabled");
 
@@ -195,18 +189,16 @@ enemy_corpse_logic() {
           continue;
         }
         if(!isDefined(level.corpse_behavior_doesnt_require_player_sight)) {
-          if(!player_can_see_corpse(var_2.origin)) {
+          if(!player_can_see_corpse(var_2.origin))
             continue;
-          }
         }
 
         var_6 = distancesquared(self.origin, var_2.origin);
 
-        if(self.type != "dog") {
+        if(self.type != "dog")
           var_3 = level._stealth.logic.corpse.found_distsqrd;
-        } else {
+        else
           var_3 = level._stealth.logic.corpse.found_dog_distsqrd;
-        }
 
         if(var_6 < var_3) {
           var_0 = 1;
@@ -219,9 +211,8 @@ enemy_corpse_logic() {
           }
           var_7 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
 
-          if(var_7 <= var_6) {
+          if(var_7 <= var_6)
             continue;
-          }
         }
 
         if(var_6 > level._stealth.logic.corpse.sight_distsqrd) {
@@ -248,11 +239,10 @@ enemy_corpse_logic() {
       }
 
       if(var_0) {
-        if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
+        if(!maps\_utility::ent_flag("_stealth_found_corpse"))
           maps\_utility::ent_flag_set("_stealth_found_corpse");
-        } else {
+        else
           self notify("_stealth_found_corpse");
-        }
 
         maps\_utility::ent_flag_clear("_stealth_saw_corpse");
         thread enemy_corpse_found(var_2);
@@ -261,11 +251,10 @@ enemy_corpse_logic() {
         self._stealth.logic.corpse.corpse_entity = var_2;
         self._stealth.logic.corpse.origin = var_2.origin;
 
-        if(!maps\_utility::ent_flag("_stealth_saw_corpse")) {
+        if(!maps\_utility::ent_flag("_stealth_saw_corpse"))
           maps\_utility::ent_flag_set("_stealth_saw_corpse");
-        } else {
+        else
           self notify("_stealth_saw_corpse");
-        }
 
         level notify("_stealth_saw_corpse");
         self notify("awareness_corpse", "saw_corpse", var_2);
@@ -294,11 +283,10 @@ remove_corpse_loop_while_stealth_broken() {
       }
       var_4 = distancesquared(self.origin, var_3.origin);
 
-      if(self.type != "dog") {
+      if(self.type != "dog")
         var_5 = level._stealth.logic.corpse.found_distsqrd;
-      } else {
+      else
         var_5 = level._stealth.logic.corpse.found_dog_distsqrd;
-      }
 
       if(var_4 < var_5) {
         var_3 setcorpseremovetimer(10);
@@ -328,18 +316,16 @@ enemy_corpse_found_loop() {
 enemy_corpse_alert_level() {
   var_0 = undefined;
 
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     var_0 = self.enemy;
-  } else {
+  else
     var_0 = common_scripts\utility::random(level.players);
-  }
 
   if(!isDefined(var_0._stealth) && !isplayer(var_0)) {
     return;
   }
-  if(!isDefined(var_0._stealth.logic.spotted_list[self.unique_id])) {
+  if(!isDefined(var_0._stealth.logic.spotted_list[self.unique_id]))
     var_0._stealth.logic.spotted_list[self.unique_id] = 0;
-  }
 
   if(var_0._stealth.logic.spotted_list[self.unique_id] < self._stealth.logic.alert_level.max_warnings) {
     var_0._stealth.logic.spotted_list[self.unique_id]++;
@@ -364,11 +350,10 @@ enemy_corpse_found(var_0) {
   wait 2;
   var_1 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_found_corpse");
 
-  if(!maps\_stealth_utility::stealth_group_corpse_flag()) {
+  if(!maps\_stealth_utility::stealth_group_corpse_flag())
     maps\_stealth_shared_utilities::group_flag_set("_stealth_found_corpse");
-  } else {
+  else
     level notify(var_1);
-  }
 
   thread enemy_corpse_clear();
 }
@@ -413,15 +398,15 @@ enemy_default_corpse_behavior() {
 }
 
 enemy_custom_corpse_behavior(var_0) {
-  foreach(var_3, var_2 in var_0) {
-    maps\_stealth_shared_utilities::ai_create_behavior_function("corpse", var_3, var_2);
-  }
+  foreach(var_3, var_2 in var_0)
+  maps\_stealth_shared_utilities::ai_create_behavior_function("corpse", var_3, var_2);
 }
 
 get_corpse_array() {
-  if(isDefined(level._stealth.logic.corpse.collect_func)) {
-    return [[level._stealth.logic.corpse.collect_func]]();
-  }
+  if(isDefined(level._stealth.logic.corpse.collect_func))
+    return [
+      [level._stealth.logic.corpse.collect_func]
+    ]();
 
   return getcorpsearray();
 }

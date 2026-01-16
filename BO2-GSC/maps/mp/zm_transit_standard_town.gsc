@@ -30,7 +30,7 @@ main() {
   town_treasure_chest_init();
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (1363, 471, 0), 1);
-  collision setModel("zm_collision_transit_town_survival");
+  collision setmodel("zm_collision_transit_town_survival");
   collision disconnectpaths();
   flag_wait("initial_blackscreen_passed");
   level thread maps\mp\zm_transit_utility::solo_tombstone_removal();
@@ -56,9 +56,8 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin)) {
+    if(isDefined(self.reroute_origin))
       location = self.reroute_origin;
-    }
   }
 
   return location;

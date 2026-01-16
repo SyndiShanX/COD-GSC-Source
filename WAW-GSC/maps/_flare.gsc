@@ -43,7 +43,7 @@ main(model, type, color) {
 
 flare_monitor() {
   level._flare_frame = 0;
-  while(1) {
+  while (1) {
     wait_network_frame();
     level._flare_frame = !level._flare_frame;
   }
@@ -62,11 +62,11 @@ merge_suncolor(delay, timer, rgb1, rgb2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     c = [];
-    for(p = 0; p < 3; p++) {
+    for (p = 0; p < 3; p++) {
       c[p] = rgb2[p] * dif + rgb1[p] * (1 - dif);
     }
     level.sun_color = (c[0], c[1], c[2]);
@@ -79,7 +79,7 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -97,7 +97,7 @@ merge_sunbrightness(delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -110,7 +110,7 @@ merge_sunbrightness(delay, timer, l1, l2) {
 combine_sunlight_and_brightness(flicker) {
   level endon("stop_combining_sunlight_and_brightness");
   wait(0.05);
-  for(;;) {
+  for (;;) {
     brightness = level.sun_brightness;
     brightness += randomfloat(flicker);
     rgb = vector_Multiply(level.sun_color, brightness);
@@ -137,8 +137,8 @@ flare_initial_fx() {
   model = spawn("script_model", (0, 0, 0));
   model setModel("tag_origin");
   model linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  model playSound("flare_launch");
-  playFXOnTag(level._effect["flare_runner_intro"], model, "tag_origin");
+  model playsound("flare_launch");
+  playfxontag(level._effect["flare_runner_intro"], model, "tag_origin");
   self waittill("flare_intro_node");
   model delete();
 }
@@ -153,12 +153,12 @@ flare_explodes(starting_brightness, ending_brightness, flicker, color) {
   thread combine_sunlight_and_brightness(flicker);
   thread merge_suncolor(0, 0.25, level.original_sunColor, level.flare_suncolor);
   thread merge_sunbrightness(0, 0.25, starting_brightness, ending_brightness);
-  self playSound("flare_exp");
+  self playsound("flare_exp");
   model2 = spawn("script_model", (0, 0, 0));
   model2 setModel("tag_origin");
   model2 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner"], model2, "tag_origin");
-  model2 playLoopSound("flare_loop");
+  playfxontag(level._effect["flare_runner"], model2, "tag_origin");
+  model2 playloopsound("flare_loop");
   self waittill("flare_fade_node");
   model2 stoploopsound(3);
   wait(3);
@@ -169,7 +169,7 @@ flare_burns_out() {
   model3 = spawn("script_model", (0, 0, 0));
   model3 setModel("tag_origin");
   model3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
+  playfxontag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
   wait(0.3);
   thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.25);
   thread merge_sunbrightness(0, 1, 3, 0);
@@ -226,14 +226,14 @@ flare_from_targetname(targetname, starting_brightness, ending_brightness, flicke
   flag_wait("flare_start_setting_sundir");
   sunPointsTo = getent(flare.script_linkto, "script_linkname").origin;
   angles = vectortoangles(flare.origin - sunPointsTo);
-  oldForward = anglesToForward(angles);
-  for(;;) {
+  oldForward = anglestoforward(angles);
+  for (;;) {
     wait(0.05);
     if(flag("flare_stop_setting_sundir")) {
       break;
     }
     angles = vectortoangles(flare.origin - sunPointsTo);
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     if(NumRemoteClients()) {
       if(is_position_frame()) {
         lerpSunDirection(oldForward, forward, 0.05);

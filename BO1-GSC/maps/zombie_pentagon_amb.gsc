@@ -25,14 +25,14 @@ phone_egg() {
   }
   phone = getEnt(self.target, "targetname");
   if(isDefined(phone)) {
-    blinky = playFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
+    blinky = PlayFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
   }
   self UseTriggerRequireLookAt();
   self SetCursorHint("HINT_NOICON");
   self playLoopSound("zmb_egg_phone_loop");
   self waittill("trigger", player);
   self stopLoopSound(1);
-  player playSound("zmb_egg_phone_activate");
+  player PlaySound("zmb_egg_phone_activate");
   level.phone_counter = level.phone_counter + 1;
   if(level.phone_counter == 3) {
     level pentagon_unlock_doa();
@@ -56,15 +56,13 @@ play_music_easter_egg() {
 }
 
 play_pentagon_announcer_vox(alias, defcon_level) {
-  if(!isDefined(alias)) {
+  if(!isDefined(alias))
     return;
-  }
   if(!isDefined(level.pentann_is_speaking)) {
     level.pentann_is_speaking = 0;
   }
-  if(isDefined(defcon_level)) {
+  if(isDefined(defcon_level))
     alias = alias + "_" + defcon_level;
-  }
   if(level.pentann_is_speaking == 0) {
     level.pentann_is_speaking = 1;
     level play_initial_alarm();

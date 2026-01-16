@@ -209,25 +209,27 @@ btr80_notetrack_fire(guy) {
 
 price_land_fx(price) {
   //iprintlnbold( "land" );
-  //playFXOnTag( getfx( "price_landing" ), price, "J_Ankle_RI");
+  //playfxontag( getfx( "price_landing" ), price, "J_Ankle_RI");
 
   tagPos = price gettagorigin("J_Ankle_RI"); // rough tag to play fx on
   tagPos = PhysicsTrace(tagPos + (0, 0, 64), tagPos + (0, 0, -64));
-  playFX(level._effect["price_landing"], tagPos);
+  playfx(level._effect["price_landing"], tagPos);
+
 }
 
 price_land_settle_fx(price) {
+
   //iprintlnbold( "settle " );
   tagPos = price gettagorigin("J_Ankle_LE"); // rough tag to play fx on
   tagPos = PhysicsTrace(tagPos + (0, 0, 64), tagPos + (0, 0, -64));
-  playFX(level._effect["price_landing"], tagPos);
+  playfx(level._effect["price_landing"], tagPos);
 }
 
 price_slide_fx(price) {
   //iprintlnbold( "slide " );
   self endon("stop_slide_fx");
-  while(true) {
-    playFXOnTag(getfx("price_sliding"), price, "J_Ankle_LE");
+  while (true) {
+    playfxontag(getfx("price_sliding"), price, "J_Ankle_LE");
     wait(.1);
   }
 }
@@ -249,10 +251,12 @@ dialog() {
   //Soap, we need another Predator with Hellfire missiles!	cont_pri_uavsharpish
   //Roger that. The second Predator is almost in position. Make it count, these things don't grow on trees.	cont_cmt_2nduav
 
+
   //Heads up, two trucks, ten plus guys to our north east!	cont_rst_headsup
 
   //Firing an unsuppressed weapon is going to alert a lot of enemies, Roach.	
   level.scr_radio["cont_pri_alertenemies"] = "cont_pri_alertenemies";
+
 
   //Looks like they found a body.	
   level.scr_radio["cont_pri_foundabody"] = "cont_pri_foundabody";
@@ -286,6 +290,8 @@ dialog() {
   //Impressive.	
   level.scr_radio["cont_pri_impressive"] = "cont_pri_impressive";
 
+
+
   //Two of them have stopped for a smoke. Take one and I'll take out the other.	
   level.scr_radio["cont_pri_forasmoke"] = "cont_pri_forasmoke";
 
@@ -295,8 +301,10 @@ dialog() {
   //I'm ready. Lets take them all out at once.	
   level.scr_radio["cont_pri_imready"] = "cont_pri_imready";
 
+
   //Sometimes you can't end a war with a bullet, Soap.	
   level.scr_radio["cont_pri_endawar"] = "cont_pri_endawar";
+
 
   //level.scr_sound[ "price" ][ "cliff_pri_noidea" ]				 = "cliff_pri_noidea";
   //level.scr_radio[ "outrunthem" ] = "cliff_pri_outrunthem";
@@ -467,6 +475,8 @@ dialog() {
   //Take them out or go around.	
   level.scr_radio["cont_pri_outoraround"] = "cont_pri_outoraround";
 
+
+
   //BTR80 moment
   //Incoming! Look out! 	
   level.scr_sound["price"]["cont_pri_incoming"] = "cont_pri_incoming";
@@ -498,6 +508,7 @@ dialog() {
   //Nap time.	
   level.scr_radio["cont_pri_naptime"] = "cont_pri_naptime";
 
+
   //Soap, what's the status of our air support?	
   level.scr_sound["price"]["cont_pri_airsupport"] = "cont_pri_airsupport";
   level.scr_radio["cont_pri_airsupport"] = "cont_pri_airsupport";
@@ -515,6 +526,7 @@ dialog() {
   //Bollocks!	
   level.scr_sound["price"]["cont_pri_bollocks"] = "cont_pri_bollocks";
   level.scr_radio["cont_pri_bollocks"] = "cont_pri_bollocks";
+
 
   //What just happened?	
   level.scr_radio["cont_cmt_whathappened"] = "cont_cmt_whathappened";
@@ -587,6 +599,7 @@ dialog() {
   //Roger that!	
   level.scr_radio["cont_cmt_rogerthat2"] = "cont_cmt_rogerthat2";
 
+
   //enter sub	
   //Roach! Get your mask on!	
   level.scr_sound["price"]["cont_pri_getmaskon"] = "cont_pri_getmaskon";
@@ -634,6 +647,7 @@ dialog() {
   //Sometimes you can't end a war with a bullet, Soap.	
   level.scr_sound["price"]["cont_pri_endawar"] = "cont_pri_endawar";
 
+
   ////////////////////////////////
 
   //Use a Hellfire on that truck!	
@@ -649,6 +663,7 @@ dialog() {
 
   //Take the two on the right.	
   level.scr_radio["cont_pri_twoonright"] = "cont_pri_twoonright";
+
 
   //Looks like they're searching for us.	
   level.scr_radio["cont_pri_searchingforus"] = "cont_pri_searchingforus";
@@ -669,6 +684,7 @@ dialog() {
   //All right, I'm inside the sub! Cover me, I need a few minutes!	
   level.scr_radio["cont_pri_insidesub"] = "cont_pri_insidesub";
 
+
   //defend
   //Incoming! Two trucks to the east!	
   level.scr_sound["rasta"]["cont_gst_twotruckseast"] = "cont_gst_twotruckseast";
@@ -688,6 +704,7 @@ dialog() {
   //Price, do you copy??? The silo doors are open, I repeat, the silo doors are open!!	
   level.scr_sound["rasta"]["cont_gst_doyoucopy"] = "cont_gst_doyoucopy";
 
+
   //Good.	
   level.scr_radio["cont_pri_good2"] = "cont_pri_good2";
 
@@ -699,6 +716,8 @@ dialog() {
 
   //Price what have you done???	
   level.scr_sound["rasta"]["cont_gst_whathaveyoudone"] = "cont_gst_whathaveyoudone";
+
+
 
   //Launch codes verified authentic. Launch codes accepted. 	
   //cont_rsc_launchcodes
@@ -720,6 +739,7 @@ dialog() {
   level.scr_radio["cont_cmt_haveyouback"] = "cont_cmt_haveyouback";
   //Roger that. 	
   level.scr_radio["cont_pri_rogerthat2"] = "cont_pri_rogerthat2";
+
 
   //Direct hit on the enemy helo. Nice shot Roach.	
   level.scr_radio["cont_cmt_directhitshelo"] = "cont_cmt_directhitshelo";
@@ -768,4 +788,5 @@ dialog() {
 
   //Watch for the blinking strobes. That’s us.	
   level.scr_sound["price"]["cont_pri_strobes"] = "cont_pri_strobes";
+
 }

@@ -12,9 +12,9 @@
 #using_animtree("script_model");
 barrett_init() {
   /*
-  	
+	
   ADD TO YOUR CSV:!!!!!!!!!!!!!!
-  	
+	
   xmodel,weapon_m82_MG_Setup
   rawfile,animtrees/script_model.atr
   rawfile,maps/_barrett.gsc
@@ -29,7 +29,7 @@ barrett_init() {
   //precacheitem( "barrett_fake" );
   precacheshellshock("barrett");
   // Press forwards or backwards to adjust zoom.
-  add_hint_string("barrett", &"WEAPON_PRESS_FORWARDS_OR_BACKWARDS", ::should_break_zoom_hint);
+  add_hint_string("barrett", & "WEAPON_PRESS_FORWARDS_OR_BACKWARDS", ::should_break_zoom_hint);
 
   flag_init("player_is_on_turret");
   flag_init("player_on_barret");
@@ -52,9 +52,10 @@ barrett_init() {
   level.barrett_exists = true;
 }
 
+
 exchange_barrett_trigger() {
   barrett_trigger = getent("barrett_trigger", "targetname");
-  // Press and hold^3 && 1 ^7to use the M82 .50 Caliber Sniper Rifle
+  // Press and hold^3 &&1 ^7to use the M82 .50 Caliber Sniper Rifle
   barrett_trigger sethintstring(&"WEAPON_BARRETT_USE");
   turret = getent("turret2", "targetname");
 
@@ -63,7 +64,7 @@ exchange_barrett_trigger() {
   turret hide();
   turret.origin = targ.origin;
 
-  while(1) {
+  while (1) {
     barrett_trigger waittill("trigger");
     level.player.original_org = level.player.origin;
 
@@ -98,10 +99,9 @@ exchange_barrett_trigger() {
     // compensate for intro view in the ground, simulating prone
     player_org = level.player.origin + (0, 0, 60);
 
-    for(;;) {
-      if(!isDefined(turret getturretowner())) {
+    for (;;) {
+      if(!isdefined(turret getturretowner()))
         break;
-      }
       wait(0.05);
     }
     //flag_wait( "player_gets_off_turret" );
@@ -140,7 +140,7 @@ exchange_barrett_trigger() {
 exchange_trace_converter() {
   firetime = -5000;
 
-  for(;;) {
+  for (;;) {
     flag_wait("player_is_on_turret");
     wait_for_buffer_time_to_pass(firetime, 1.0);
 
@@ -153,16 +153,15 @@ exchange_trace_converter() {
     firetime = gettime();
 
     // wait for the player to release the fire, as its a semi auto weapon
-    while(level.player attackbuttonpressed()) {
+    while (level.player attackbuttonpressed()) {
       wait(0.05);
     }
   }
 }
 
 exchange_player_fires() {
-  if(gettime() < level.player_can_fire_turret_time) {
+  if(gettime() < level.player_can_fire_turret_time)
     return;
-  }
 
   //	min_zoom = .5;// was 1.5
   //	max_zoom = 20;
@@ -177,14 +176,14 @@ exchange_player_fires() {
   //	level.fired_barrett = true;
   //
   //	angles = level.player getplayerangles();
-  //	start = level.player getEye();
+  //	start = level.player geteye();
   //
-  //	forward = anglesToForward( angles );
+  //	forward = anglestoforward( angles );
   //	end = start + vector_multiply( forward, 15000 );
 
   //	thread linedraw( eye, end, (1,0,1), 25 );
 
-  //	trace = bulletTrace( start, end, false, undefined );
+  //	trace = BulletTrace( start, end, false, undefined );
   //	level.trace = trace;
 
   //	if( trace[ "surfacetype" ] != "default" )
@@ -211,16 +210,16 @@ exchange_player_fires() {
   //	waittillframeend;
   ////	eye = level.player.origin + ( -3.62, 0, -66 );
   //	turret = getent( "turret2", "targetname" );
-  //	if( !isDefined( turret ) )
+  //	if( !isdefined( turret ) )
   //		return;
   ////	eye = turret.origin + ( getdvarfloat( "ax" ), getdvarfloat( "ay" ), getdvarfloat( "az" ) );
   //	eye = turret.origin + ( -0.1, 0, 15 );
   ////	eye = level.player.origin + ( getdvarfloat( "ax" ), getdvarfloat( "ay" ), getdvarfloat( "az" ) );
   //
   //	bullet = spawn( "script_model", eye );
-  //	bullet setModel( "tag_origin" );
+  //	bullet setmodel( "tag_origin" );
   //
-  //	playFXOnTag( getfx( "bullet_geo" ), bullet, "tag_origin" );
+  //	playfxontag( getfx( "bullet_geo" ), bullet, "tag_origin" );
   ////	println( "start " + start + " firetime " + gettime() );
   //	count_max = 10;
   //	count = 0;
@@ -234,14 +233,14 @@ exchange_player_fires() {
   //	current_step = 0;
   //	drift = ( 0, 0, 0 );
   //
-  //	for( ;; )
+  //	for ( ;; )
   //	{
   //		endpos = pos + move_vec;
   //		drift = vector_multiply( level.wind_vec, skill_drift[ level.gameskill ] );
   //
   ////		thread linedraw( pos, endpos, ( 1, 0.2, 0 ), 5 );
   //
-  //		trace = bulletTrace( pos, endpos, true, undefined );
+  //		trace = bullettrace( pos, endpos, true, undefined );
   //		final_origin = trace[ "position" ];
   //		if( trace[ "fraction" ] < 1 )
   //		{
@@ -276,7 +275,7 @@ exchange_player_fires() {
   //	}
   //
   //	println( "hittime " + gettime() );
-  //	forward = anglesToForward( angles );
+  //	forward = anglestoforward( angles );
   //	// scale it way out for bullet penetration purposes
   //	pop_vec = vector_multiply( forward, 5 );
   //	move_vec = vector_multiply( forward, 15000 );
@@ -284,11 +283,12 @@ exchange_player_fires() {
   //
   //	wait( 0.25 );
   //	bullet delete();
+
 }
 
 //exchange_dof()
 //{
-//	for( ;; )
+//	for ( ;; )
 //	{
 //		flag_wait( "player_is_on_turret" );
 //		exchange_scale_dof_while_on_turret();
@@ -327,7 +327,7 @@ exchange_player_fires() {
 //	blur_out_rate = -0.25;
 //
 //	stable = false;
-//	for( ;; )
+//	for ( ;; )
 //	{
 //		dist = getdvarint( "turretscopezoom" );
 //
@@ -403,23 +403,22 @@ exchange_player_fires() {
 should_break_zoom_hint() {
   assert(isplayer(self));
 
-  if(!flag("player_is_on_turret")) {
+  if(!flag("player_is_on_turret"))
     return true;
-  }
 
   return flag("player_used_zoom");
 }
 
 player_learns_to_zoom() {
+
   flag_clear("player_used_zoom"); //make sure we show hint anytime player gets on the rifle
   movement = level.player GetNormalizedMovement();
 
-  while(true) {
+  while (true) {
     wait(0.05);
     movement = level.player GetNormalizedMovement(); //needs to move stick forward to learn
-    if(movement[0] > 0.2) {
+    if(movement[0] > 0.2)
       break;
-    }
     //iprintlnbold( movement[ 0 ] + " : " + movement[ 1 ] );
   }
   wait(6);

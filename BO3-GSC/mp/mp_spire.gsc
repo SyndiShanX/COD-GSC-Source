@@ -17,7 +17,7 @@
 function main() {
   clientfield::register("world", "mpSpireExteriorBillboard", 1, 2, "int");
   mp_spire_fx::main();
-  level.add_raps_omit_locations = &add_raps_omit_locations;
+  level.add_raps_omit_locations = & add_raps_omit_locations;
   load::main();
   compass::setupminimap("compass_map_mp_spire");
   spawncollision("collision_clip_ramp_64x24", "collider", (4168.34, 708.791, -12.0068), (0, 0, 0));
@@ -60,11 +60,11 @@ function main() {
   }
   mp_spire_amb::main();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -77,7 +77,7 @@ function main() {
 
 function exterior_billboard_exploders() {
   currentexploder = randomint(4);
-  while(true) {
+  while (true) {
     level clientfield::set("mpSpireExteriorBillboard", currentexploder);
     wait(6);
     currentexploder++;
@@ -87,32 +87,32 @@ function exterior_billboard_exploders() {
   }
 }
 
-function add_raps_omit_locations(&omit_locations) {
-  if(!isDefined(omit_locations)) {
+function add_raps_omit_locations( & omit_locations) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (2480, 1269, 67);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (2609, 1440, 67);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (3089, 1437, 69);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (3223, 1224, 69);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
@@ -148,7 +148,7 @@ function spawnkilltrigger() {
 function watchkilltrigger() {
   level endon("game_ended");
   trigger = self;
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
     player dodamage(1000, trigger.origin + (0, 0, 0), trigger, trigger, "none", "MOD_SUICIDE", 0);
   }

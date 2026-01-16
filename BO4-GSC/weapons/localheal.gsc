@@ -16,6 +16,7 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace locaheal;
 
 autoexec __init__system__() {
@@ -35,7 +36,7 @@ init_shared() {
   callback::on_player_killed_with_params(&on_player_killed);
   weapon = getweapon("eq_localheal");
 
-  if(isDefined(weapon) && weapon.name != # "none") {
+  if(isDefined(weapon) && weapon.name != #"none") {
     level.var_c34a20f5 = getscriptbundle(weapon.customsettings);
   } else {
     level.var_c34a20f5 = getscriptbundle("localheal_custom_settings");
@@ -49,7 +50,7 @@ function_d58bf295(params) {
   entity = self;
 
   if(!isDefined(entity.localheal) || (isDefined(entity.localheal.var_21de13e3) ? entity.localheal.var_21de13e3 : 0) == 0) {
-    self.var_894f7879[# "cleanse_buff"] = 0;
+    self.var_894f7879[#"cleanse_buff"] = 0;
     return;
   }
 
@@ -107,7 +108,7 @@ on_player_damaged(params) {
 }
 
 function_c04c8002() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self notify("2c5ea250cf8b9681");
   self endon("2c5ea250cf8b9681");
@@ -127,7 +128,7 @@ on_player_killed(params) {
   }
 
   if(isDefined(player.var_b6672e47) && player.var_b6672e47 && player === player.var_9db94fe3 && util::function_fbce7263(player.team, attacker.team)) {
-    attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+    attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
     scoreevents::processscoreevent(#"tak5_shutdown", attacker, player.var_9db94fe3, weapon);
   }
 }
@@ -207,7 +208,7 @@ function_903b9495(weapon, source_player) {
 
   if(isDefined(self.var_121392a1)) {
     foreach(effect in self.var_121392a1) {
-      if(effect.namehash == # "hacking") {
+      if(effect.namehash == #"hacking") {
         continue;
       }
 
@@ -246,7 +247,7 @@ function_ee175021(array, entnum) {
 gadget_on(slot, weapon) {
   player = self;
   player notify(#"hash_1fc72d26f9bee4eb");
-  player endon(#"hash_1fc72d26f9bee4eb", # "disconnect");
+  player endon(#"hash_1fc72d26f9bee4eb", #"disconnect");
   player function_9fe3d492();
   player.localheal.var_e2e4899c = 0;
   player.localheal.targets = [];

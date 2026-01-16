@@ -15,8 +15,8 @@ function main() {
   mp_havoc_fx::main();
   mp_havoc_sound::main();
   load::main();
-  level.domflagbasefxoverride = &dom_flag_base_fx_override;
-  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = & dom_flag_base_fx_override;
+  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
   setdvar("phys_buoyancy", 1);
   setdvar("phys_ragdoll_buoyancy", 1);
   util::waitforclient(0);

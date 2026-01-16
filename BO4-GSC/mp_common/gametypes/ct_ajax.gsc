@@ -16,6 +16,7 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_ajax;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -37,7 +38,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_e31c5d7a = &ct_bots::function_e31c5d7a;
   callback::on_game_playing(&ct_core::function_1e84c767);
   globallogic_spawn::addsupportedspawnpointtype("ct");
-  ct_utils::function_6046a5e3(#"ar_accurate_t8", array(#"quickdraw", # "fmj", # "extbarrel"));
+  ct_utils::function_6046a5e3(#"ar_accurate_t8", array(#"quickdraw", #"fmj", #"extbarrel"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level flag::init("combat_training_started");
   level flag::init("mission_success");
@@ -57,13 +58,13 @@ function_7c4ef26b(predictedspawn) {
   }
 
   setdvar(#"custom_killstreak_mode", 2);
-  setdvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
-  setdvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
-  setdvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+  setdvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
+  setdvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
+  setdvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self thread function_7f166658();
     nd_node = function_5d9ec9e5();
 
@@ -88,7 +89,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       self thread ct_utils::function_ee4639dd(-5);
     }
@@ -205,7 +206,7 @@ function_7446a885() {
   level.var_cbcb0078 = 0;
   str_name = "s_attack_objective_" + level.var_347db8b6 + 1;
   var_d8e47fe3 = struct::get(str_name, "targetname");
-  attack_waypoint = ct_utils::create_waypoint(#"hash_14f53e0433721169", var_d8e47fe3.origin, var_d8e47fe3.angles, # "any", undefined, 0, undefined);
+  attack_waypoint = ct_utils::create_waypoint(#"hash_14f53e0433721169", var_d8e47fe3.origin, var_d8e47fe3.angles, #"any", undefined, 0, undefined);
   level.var_a8a15809 = var_d8e47fe3.origin;
 
   if(isDefined(level.var_571c3787) && level.var_571c3787) {
@@ -229,7 +230,7 @@ function_7446a885() {
 
   level.var_e6db911d = 1;
   var_e8d6f89 = function_ecef370c();
-  ct_bots::activate_bots(var_e8d6f89, # "axis");
+  ct_bots::activate_bots(var_e8d6f89, #"axis");
 
   while(true) {
     a_bots = ct_bots::function_fbe3dcbb();

@@ -6,19 +6,18 @@
 air_strip_secured_init() {
   level.start_point = "air_strip_secured";
   setdvar("debug_sat_view_pip", "1");
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", & "SATFARM_OBJ_REACH_AIR_STRIP");
   objective_state_nomessage(maps\_utility::obj("reach_air_strip"), "done");
-  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
   objective_state_nomessage(maps\_utility::obj("air_strip_defenses"), "done");
   maps\satfarm_code::kill_spawners_per_checkpoint("air_strip_secured");
 }
 
 air_strip_secured_main() {
-  if(level.start_point == "air_strip_secured") {
+  if(level.start_point == "air_strip_secured")
     maps\satfarm_code::spawn_player_checkpoint("air_strip_secured");
-  }
 
   maps\satfarm_code::kill_spawners_per_checkpoint("air_strip_secured");
   level.start_point = "air_strip_secured";
@@ -36,32 +35,28 @@ air_strip_secured_begin() {
   var_1 = maps\_utility::getvehiclearray();
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.script_team) && var_3.script_team == "axis") {
+    if(isDefined(var_3.script_team) && var_3.script_team == "axis")
       var_3 thread maps\satfarm_code::enemytank_cleanup();
-    }
   }
 
   if(isDefined(level.air_strip_m880s) && level.air_strip_m880s.size > 0) {
     foreach(var_6 in level.air_strip_m880s) {
-      if(isDefined(var_6)) {
+      if(isDefined(var_6))
         var_6 delete();
-      }
     }
   }
 
   if(isDefined(level.air_strip_m880_corpses) && level.air_strip_m880_corpses.size > 0) {
     foreach(var_9 in level.air_strip_m880_corpses) {
-      if(isDefined(var_9)) {
+      if(isDefined(var_9))
         var_9 delete();
-      }
     }
   }
 
   var_11 = getent("hangar_door_breakable", "targetname");
 
-  if(isDefined(var_11)) {
+  if(isDefined(var_11))
     var_11 delete();
-  }
 
   thread air_strip_victory();
   maps\_utility::autosave_by_name("air_strip_secured");
@@ -71,16 +66,14 @@ air_strip_victory() {
   var_0 = common_scripts\utility::getstructarray("green_smoke_structs", "targetname");
 
   foreach(var_2 in var_0) {
-    if(level.start_point != "air_strip_secured") {
+    if(level.start_point != "air_strip_secured")
       wait(randomfloatrange(0.1, 2.0));
-    }
 
     playFX(level._effect["signal_smoke_green"], var_2.origin);
   }
 
-  if(level.start_point != "air_strip_secured") {
+  if(level.start_point != "air_strip_secured")
     wait 1.0;
-  }
 
   wait 1.0;
   level.player thread air_strip_to_chopper();
@@ -93,14 +86,12 @@ victory_choppers_land(var_0) {
   common_scripts\utility::flag_wait("player_landed");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       var_3 delete();
-    }
   }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 ally_chopper_unload() {
@@ -130,17 +121,15 @@ littlebird_hover() {
 air_strip_to_chopper() {
   common_scripts\utility::flag_set("air_strip_secured_begin");
 
-  if(isDefined(level.hintelement)) {
+  if(isDefined(level.hintelement))
     level.hintelement maps\_hud_util::destroyelem();
-  }
 
   setsaveddvar("cg_cinematicFullScreen", "1");
   setsaveddvar("cg_cinematicCanPause", "1");
   cinematicingame("satfarm_transition_ghost");
 
-  while(cinematicgetframe() <= 1) {
+  while(cinematicgetframe() <= 1)
     common_scripts\utility::waitframe();
-  }
 
   level.cinematic_started = 1;
 
@@ -178,9 +167,8 @@ air_strip_to_chopper() {
     level.bink_percentage = level.bink_current_time / 16000;
 
     if(level.bink_percentage >= 0.45) {
-      if(!common_scripts\utility::flag("spawn_sat_view_ally_choppers")) {
+      if(!common_scripts\utility::flag("spawn_sat_view_ally_choppers"))
         common_scripts\utility::flag_set("spawn_sat_view_ally_choppers");
-      }
     }
 
     wait 0.05;
@@ -230,9 +218,8 @@ air_strip_to_chopper() {
   thread player_jump_to_tower();
   common_scripts\utility::flag_wait("player_landed");
 
-  if(isDefined(level.player_littlebird)) {
+  if(isDefined(level.player_littlebird))
     level.player_littlebird delete();
-  }
 
   thread allies_move_up_in_control_room();
   common_scripts\utility::flag_wait("control_room_enemies_dead");
@@ -243,16 +230,15 @@ air_strip_to_chopper() {
 switch_to_ghost_intro_screen() {
   level.introscreen.lines = [];
   level.introscreen.lines[0] = "";
-  level.introscreen.lines[1] = &"SATFARM_INTROSCREEN_GHOST_LINE_2";
-  level.introscreen.lines[2] = &"SATFARM_INTROSCREEN_GHOST_LINE_3";
-  level.introscreen.lines[3] = &"SATFARM_INTROSCREEN_GHOST_LINE_4";
+  level.introscreen.lines[1] = & "SATFARM_INTROSCREEN_GHOST_LINE_2";
+  level.introscreen.lines[2] = & "SATFARM_INTROSCREEN_GHOST_LINE_3";
+  level.introscreen.lines[3] = & "SATFARM_INTROSCREEN_GHOST_LINE_4";
   maps\_introscreen::introscreen(1);
 }
 
 player_chopper_flyin_setup() {
-  if(isDefined(level.ps3)) {
+  if(isDefined(level.ps3))
     setsaveddvar("r_znear", 10);
-  }
 
   level.player playerlinktodelta(level.player_littlebird, "tag_player1", 1, 80, 80, 7, 40, 1);
   var_0 = level.player_littlebird.mgturret[0];
@@ -268,9 +254,8 @@ player_chopper_flyin_setup() {
   var_0.owner = level.player;
   level.player freezecontrols(1);
 
-  while(!isDefined(level.cinematic_over)) {
+  while(!isDefined(level.cinematic_over))
     wait 0.05;
-  }
 
   wait 1;
   level.player freezecontrols(0);
@@ -286,9 +271,8 @@ watch_damage_to_rooftop_destructibles(var_0, var_1, var_2) {
 
   foreach(var_7 in level.air_strip_secured_ambient_enemies_wave_1) {
     if(isalive(var_7)) {
-      if(var_7.target == var_2) {
+      if(var_7.target == var_2)
         var_7 kill();
-      }
     }
   }
 }
@@ -306,9 +290,8 @@ air_strip_secured_ambient_enemies_setup() {
 player_is_ignored() {
   wait 2;
 
-  if(!common_scripts\utility::flag("start_jump")) {
+  if(!common_scripts\utility::flag("start_jump"))
     level.player.ignoreme = 0;
-  }
 }
 
 player_jump_to_tower() {
@@ -326,9 +309,8 @@ player_jump_to_tower() {
   level.player playerlinktoblend(var_0, "tag_player", 0.5);
   wait 0.5;
 
-  if(isDefined(level.ps3)) {
+  if(isDefined(level.ps3))
     setsaveddvar("r_znear", 4);
-  }
 
   level.player enableturretdismount();
   level.player_littlebird.mgturret[0] maketurretinoperable();
@@ -346,9 +328,8 @@ player_jump_to_tower() {
   var_0 waittillmatch("single anim", "glass_break");
   var_2 = getglass("player_window");
 
-  if(!isglassdestroyed(var_2)) {
+  if(!isglassdestroyed(var_2))
     destroyglass(var_2);
-  }
 
   wait 0.5;
   level.player playrumbleonentity("damage_light");
@@ -407,9 +388,8 @@ timer_on_player_jump() {
 allies_move_up_in_control_room() {
   common_scripts\utility::flag_wait_either("player_has_left_control_room_balcony", "control_room_three_left");
 
-  if(common_scripts\utility::flag("control_room_three_left") && !common_scripts\utility::flag("player_landed")) {
+  if(common_scripts\utility::flag("control_room_three_left") && !common_scripts\utility::flag("player_landed"))
     common_scripts\utility::flag_wait("player_has_left_control_room_balcony");
-  }
 
   maps\_utility::activate_trigger_with_targetname("move_allies_to_control_room_2");
 }
@@ -432,7 +412,7 @@ chopper_drive_in_vo() {
   wait 1.5;
   common_scripts\utility::flag_wait("start_control_room_combat");
   maps\_utility::autosave_by_name("chopper_ride_in_2");
-  objective_add(maps\_utility::obj("launch_missile"), "current", &"SATFARM_OBJ_LAUNCH_MISSILE");
+  objective_add(maps\_utility::obj("launch_missile"), "current", & "SATFARM_OBJ_LAUNCH_MISSILE");
   wait 1;
   common_scripts\utility::flag_set("ghost1_start_firing");
   thread maps\_utility::set_team_bcvoice("allies", "taskforce");
@@ -503,9 +483,8 @@ control_room_threatbiasgroup(var_0) {
   level.allies[0] setthreatbiasgroup("ignore_group");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2)) {
+    if(isDefined(var_2) && isalive(var_2))
       var_2 setthreatbiasgroup("control_room");
-    }
   }
 
   setignoremegroup("ignore_group", "control_room");
@@ -591,9 +570,8 @@ control_room_enemy_setup() {
 control_room_enemy_wave_2_setup() {
   self endon("death");
 
-  if(self.target == "control_room_lower_front_volume") {
+  if(self.target == "control_room_lower_front_volume")
     maps\_utility::set_fixednode_false();
-  }
 }
 
 control_room_enemies_upper_setup() {
@@ -633,9 +611,8 @@ remove_ally_tanks() {
   wait 2;
 
   if(isDefined(level.herotanks)) {
-    foreach(var_1 in level.herotanks) {
-      var_1 delete();
-    }
+    foreach(var_1 in level.herotanks)
+    var_1 delete();
   }
 }
 
@@ -655,23 +632,20 @@ sat_view_ally_and_enemy_tanks() {
   var_2 = getEntArray("air_strip_secured_left_side_tanks", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       var_4 delete();
-    }
   }
 
   common_scripts\utility::flag_wait("player_landed");
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       var_4 delete();
-    }
   }
 
   foreach(var_4 in level.sat_view_enemy_tanks) {
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       var_4 delete();
-    }
   }
 }
 
@@ -699,15 +673,13 @@ tower_redshirt_setup() {
   self endon("death");
   self.animname = "merrick";
 
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isDefined(self.magic_bullet_shield))
     maps\_utility::magic_bullet_shield();
-  }
 
   common_scripts\utility::flag_wait("ghost2_littlebird_path_end");
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self delete();
 }
@@ -717,9 +689,8 @@ allies_ride_chopper(var_0, var_1) {
     self linkto(var_0, "tag_detach_left", (0, 0, 0), (0, 0, 0));
     var_0 thread maps\_anim::anim_loop_solo(self, "little_bird_casual_idle_hesh", "stop_loop", "tag_detach_left");
 
-    while(!isDefined(level.cinematic_over)) {
+    while(!isDefined(level.cinematic_over))
       wait 0.05;
-    }
 
     var_0 notify("stop_loop");
     var_0 maps\_anim::anim_single_solo(self, "satfarm_control_tower_intro_hesh_talk", "tag_detach_left");
@@ -735,9 +706,8 @@ allies_ride_chopper(var_0, var_1) {
     self waittillmatch("single anim", "glass_break");
     var_2 = getglass("ghost1_window");
 
-    if(!isglassdestroyed(var_2)) {
+    if(!isglassdestroyed(var_2))
       destroyglass(var_2);
-    }
 
     self waittillmatch("single anim", "end");
     var_3 = getnode("ghost1_control_room_node", "targetname");

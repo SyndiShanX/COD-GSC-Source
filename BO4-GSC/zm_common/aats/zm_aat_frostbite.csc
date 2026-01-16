@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_aat_frostbite;
 
 autoexec __init__system__() {
@@ -19,13 +20,13 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_frostbite", # "hash_5386c3e338c1b314", "t7_icon_zm_aat_thunder_wall");
+  aat::register("zm_aat_frostbite", #"hash_5386c3e338c1b314", "t7_icon_zm_aat_thunder_wall");
   clientfield::register("actor", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &function_bad6b477, 1, 0);
   clientfield::register("vehicle", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &function_bad6b477, 1, 0);
   clientfield::register("actor", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
   clientfield::register("vehicle", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
-  level._effect[# "hash_139ac9f86d1a96cd"] = "zm_weapons/fx8_aat_water_torso";
-  level._effect[# "aat_frostbite_explosion"] = "zm_weapons/fx8_aat_water_exp";
+  level._effect[#"hash_139ac9f86d1a96cd"] = "zm_weapons/fx8_aat_water_torso";
+  level._effect[#"aat_frostbite_explosion"] = "zm_weapons/fx8_aat_water_exp";
 }
 
 function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -36,9 +37,9 @@ function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       str_fx_tag = "tag_origin";
     }
 
-    self.var_c19403bf = util::playFXOnTag(localclientnum, level._effect[# "hash_139ac9f86d1a96cd"], self, str_fx_tag);
+    self.var_c19403bf = util::playFXOnTag(localclientnum, level._effect[#"hash_139ac9f86d1a96cd"], self, str_fx_tag);
 
-    if(self.archetype === # "catalyst" || self.archetype === # "tiger") {
+    if(self.archetype === #"catalyst" || self.archetype === #"tiger") {
       self thread function_b8cda358(localclientnum);
     }
 
@@ -55,7 +56,7 @@ function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d84b013b(localclientnum, b_freeze) {
   self notify(#"end_frosty");
-  self endon(#"death", # "end_frosty");
+  self endon(#"death", #"end_frosty");
   self playrenderoverridebundle("rob_test_character_ice");
 
   if(!isDefined(self.var_82fb67e7)) {
@@ -116,7 +117,7 @@ aat_frostbite_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, f
       v_fx_origin = self.origin;
     }
 
-    playFX(localclientnum, level._effect[# "aat_frostbite_explosion"], v_fx_origin);
-    self playSound(localclientnum, # "hash_7de1026336539baa");
+    playFX(localclientnum, level._effect[#"aat_frostbite_explosion"], v_fx_origin);
+    self playSound(localclientnum, #"hash_7de1026336539baa");
   }
 }

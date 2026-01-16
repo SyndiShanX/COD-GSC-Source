@@ -105,7 +105,7 @@ wire() {
   wire waittill("pickedup_wire", who);
   who thread monitor_wire_disconnect();
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 7, true);
-  who playSound("evt_grab_wire");
+  who playsound("evt_grab_wire");
   who._has_wire = true;
   wire Delete();
   who add_sidequest_icon("sq", "wire");
@@ -114,8 +114,8 @@ wire() {
   wire_struct thread fake_use("placed_wire", ::wire_qualifier);
   wire_struct waittill("placed_wire", who);
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 8, true);
-  who playSound("evt_casimir_charge");
-  who playSound("evt_sq_rbs_light_on");
+  who playsound("evt_casimir_charge");
+  who playsound("evt_sq_rbs_light_on");
   who._has_wire = undefined;
   who remove_sidequest_icon("sq", "wire");
   clientnotify("wp");
@@ -139,7 +139,7 @@ vg() {
   vg_struct waittill("vg_placed", who);
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 9, true);
   level.vg_struct_sound = spawn("script_origin", vg_struct.origin);
-  level.vg_struct_sound playSound("evt_vril_connect");
+  level.vg_struct_sound playsound("evt_vril_connect");
   level.vg_struct_sound playLoopSound("evt_vril_loop_lvl1", 1);
   who remove_sidequest_icon("sq", "generator");
   clientnotify("vg");
@@ -207,20 +207,20 @@ teleport_target(grenade, models) {
   for(i = 0; i < models.size; i++) {
     models[i] Show();
   }
-  playFXOnTag(level._effect["black_hole_bomb_event_horizon"], models[0], "tag_origin");
-  models[0] playSound("zmb_gersh_teleporter_go");
-  models[0] playSound("evt_clank");
+  PlayFXOnTag(level._effect["black_hole_bomb_event_horizon"], models[0], "tag_origin");
+  models[0] PlaySound("zmb_gersh_teleporter_go");
+  models[0] playsound("evt_clank");
   wait(2.0);
   level notify("ctvg_tp_done");
 }
 
 build_exit_stage(success) {}
 build_charge_stage(num_presses, lines) {
-  stage = spawnStruct();
+  stage = SpawnStruct();
   stage.num_presses = num_presses;
   stage.lines = [];
   for(i = 0; i < lines.size; i += 2) {
-    l = spawnStruct();
+    l = SpawnStruct();
     l.who = lines[i];
     l.what = lines[i + 1];
     stage.lines[stage.lines.size] = l;
@@ -258,9 +258,9 @@ speak_charge_lines(lines) {
       level._charge_terminal setModel("p_zom_moon_magic_box_com_red");
     }
     if(is_player_valid(sound_ent) && sound_ent maps\_zombiemode_equipment::is_equipment_active("equip_gasmask_zm")) {
-      sound_ent playSound(l.what + "_f", "line_spoken");
+      sound_ent PlaySound(l.what + "_f", "line_spoken");
     } else {
-      sound_ent playSound(l.what, "line_spoken");
+      sound_ent PlaySound(l.what, "line_spoken");
     }
     sound_ent waittill("line_spoken");
   }
@@ -394,7 +394,7 @@ charge_stage_logic() {
     stage_index++;
   }
   clientnotify("vg");
-  level.vg_struct_sound playSound("evt_extra_charge");
+  level.vg_struct_sound playsound("evt_extra_charge");
   level.vg_struct_sound playLoopSound("evt_vril_loop_lvl2", 1);
   level thread start_player_vox_again();
   vg = getstruct("sq_charge_vg_pos", "targetname");
@@ -403,7 +403,7 @@ charge_stage_logic() {
   vg thread maps\_zombiemode_sidequests::fake_use("collect", ::bucket_qualifier);
   vg waittill("collect", who);
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 27, true);
-  who playSound("evt_vril_remove");
+  who playsound("evt_vril_remove");
   level.vg_struct_sound delete();
   level.vg_struct_sound = undefined;
   clientnotify("vg");

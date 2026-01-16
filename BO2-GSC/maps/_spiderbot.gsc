@@ -53,9 +53,11 @@ build_spiderbot_anims() {
   level.spiderbot_anims[level.jump][2] = % ai_spider_idle;
 }
 
-precache_fx() {}
+precache_fx() {
+}
 
-update_idle_anim() {}
+update_idle_anim() {
+}
 
 spiderbot_animating() {
   self endon("death");
@@ -70,15 +72,16 @@ spiderbot_animating() {
     right = anglestoright(self.angles);
     side_vel = vectordot(right, velocity);
 
-    if(self ent_flag("playing_scripted_anim")) {} else if(self.in_air) {} else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
+    if(self ent_flag("playing_scripted_anim")) {
+    } else if(self.in_air) {
+    } else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
       anim_rate = abs(side_vel) / 15;
       anim_rate = clamp(anim_rate, 0.0, 1.5);
 
-      if(side_vel < speed) {
+      if(side_vel < speed)
         self setanimknoball( % ai_spider_strafe_l, % root, 1, 0.2, anim_rate);
-      } else {
+      else
         self setanimknoball( % ai_spider_strafe_r, % root, 1, 0.2, anim_rate);
-      }
 
       self.current_anim_speed = level.walk;
     } else if(speed < -0.4) {
@@ -89,11 +92,10 @@ spiderbot_animating() {
     } else if(speed < 1 && turning_speed > 0.2) {
       anim_rate = turning_speed / 3;
 
-      if(angular_velocity[2] > 0) {
+      if(angular_velocity[2] > 0)
         self setanimknoball( % ai_spider_idle_turn_l, % root, 1, 0.2, anim_rate);
-      } else {
+      else
         self setanimknoball( % ai_spider_idle_turn_r, % root, 1, 0.2, anim_rate);
-      }
 
       self.current_anim_speed = level.idle;
       self.idle_end_time = 0;
@@ -105,15 +107,13 @@ spiderbot_animating() {
       prev_anim_delta = level.spiderbot_speeds[self.current_anim_speed] - level.spiderbot_speeds[self.current_anim_speed - 1];
       prev_anim_speed = level.spiderbot_speeds[self.current_anim_speed] - prev_anim_delta * 0.6;
 
-      if(speed > next_anim_speed) {
+      if(speed > next_anim_speed)
         self.current_anim_speed++;
-      } else if(speed < prev_anim_speed) {
+      else if(speed < prev_anim_speed)
         self.current_anim_speed--;
-      }
 
-      if(self.current_anim_speed <= level.idle) {
+      if(self.current_anim_speed <= level.idle)
         self.current_anim_speed = level.walk;
-      }
 
       anim_rate = speed / level.spiderbot_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.0, 1.5);
@@ -137,13 +137,13 @@ watch_for_jump() {
     if(self.driver jumpbuttonpressed() && !self.in_air && !self ent_flag("playing_scripted_anim")) {
       self.in_air = 1;
       v_movement = vectornormalize(level.player getnormalizedmovement() + (0, 0, 1));
-      v_forward = anglesToForward(self.angles);
+      v_forward = anglestoforward(self.angles);
       v_right = anglestoright(self.angles);
       v_up = anglestoup(self.angles);
 
-      if(v_up[2] < 0.7071) {
+      if(v_up[2] < 0.7071)
         v_force = v_up * 165;
-      } else {
+      else {
         v_forward = v_forward * v_movement[0];
         v_right = v_right * v_movement[1];
         v_up = v_up * v_movement[2];
@@ -153,7 +153,7 @@ watch_for_jump() {
 
       self.driver setclientdvar("phys_vehicleGravityMultiplier", 0.5);
       self launchvehicle(v_force, (0, 0, 0), 0);
-      self playSound("veh_spiderbot_jump");
+      self playsound("veh_spiderbot_jump");
       self.already_landed = 0;
       anim_rate = 1;
       self setanimknoball(level.spiderbot_anims[level.jump][0], % root, 1, 0.1, anim_rate);
@@ -161,16 +161,14 @@ watch_for_jump() {
       self.driver setclientdvar("phys_vehicleGravityMultiplier", 1.0);
       n_restart_time = gettime() + 0.2;
 
-      while(gettime() < n_restart_time && self.driver jumpbuttonpressed()) {
+      while(gettime() < n_restart_time && self.driver jumpbuttonpressed())
         wait 0.05;
-      }
 
       self.in_air = 0;
     }
 
-    while(self.driver jumpbuttonpressed()) {
+    while(self.driver jumpbuttonpressed())
       wait 0.05;
-    }
 
     wait 0.05;
   }

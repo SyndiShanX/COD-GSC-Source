@@ -612,4 +612,5 @@ main() {
   ent.v["origin"] = (961.769, 583.179, 123.125);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_rain_metal";
+
 }

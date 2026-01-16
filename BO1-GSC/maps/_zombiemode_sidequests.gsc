@@ -111,7 +111,7 @@ declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_star
   if(!isDefined(level._zombie_sidequests)) {
     init_sidequests();
   }
-  sq = spawnStruct();
+  sq = SpawnStruct();
   sq.name = name;
   sq.stages = [];
   sq.last_completed_stage = -1;
@@ -131,7 +131,7 @@ declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_star
 }
 
 declare_sidequest_stage(sidequest_name, stage_name, init_func, logic_func, exit_func) {
-  stage = spawnStruct();
+  stage = SpawnStruct();
   stage.name = stage_name;
   stage.stage_number = level._zombie_sidequests[sidequest_name].stages.size;
   stage.assets = [];
@@ -152,7 +152,7 @@ set_stage_time_limit(sidequest_name, stage_name, time_limit, timer_func) {
 declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
   structs = getstructarray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
-    asset = spawnStruct();
+    asset = SpawnStruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -168,7 +168,7 @@ declare_stage_title(sidequest_name, stage_name, title) {
 declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
   ents = getEntArray(target_name, "targetname");
   for(i = 0; i < ents.size; i++) {
-    asset = spawnStruct();
+    asset = SpawnStruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -180,7 +180,7 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
 declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread_func) {
   ents = getEntArray(target_name, "targetname");
   for(i = 0; i < ents.size; i++) {
-    asset = spawnStruct();
+    asset = SpawnStruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -194,7 +194,7 @@ declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread
 declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, trigger_thread_func) {
   structs = getstructarray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
-    asset = spawnStruct();
+    asset = SpawnStruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -451,7 +451,9 @@ time_limited_stage(sidequest) {
   level endon("end_game");
   time_limit = undefined;
   if(isDefined(self.time_limit_func)) {
-    time_limit = [[self.time_limit_func]]() * 0.25;
+    time_limit = [
+      [self.time_limit_func]
+    ]() * 0.25;
   } else {
     time_limit = self.time_limit * 0.25;
   }
@@ -650,7 +652,9 @@ fake_use(notify_string, qualifier_func) {
     for(i = 0; i < players.size; i++) {
       qualifier_passed = true;
       if(isDefined(qualifier_func)) {
-        qualifier_passed = players[i][[qualifier_func]]();
+        qualifier_passed = players[i][
+          [qualifier_func]
+        ]();
       }
       if(qualifier_passed && (distanceSquared(self.origin, players[i].origin) < 64 * 64)) {
         if(players[i] is_facing(self)) {

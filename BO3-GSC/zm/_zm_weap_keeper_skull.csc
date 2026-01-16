@@ -12,19 +12,19 @@
 #namespace keeper_skull;
 
 function autoexec __init__sytem__() {
-  system::register("keeper_skull", &__init__, undefined, undefined);
+  system::register("keeper_skull", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "zombie_explode", 9000, 1, "int", &zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "death_ray_shock_eye_fx", 9000, 1, "int", &death_ray_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "entranced", 9000, 1, "int", &function_384d8884, 0, 0);
-  clientfield::register("actor", "thrasher_skull_fire", 9000, 1, "int", &thrasher_skull_fire, 0, 0);
-  clientfield::register("toplayer", "skull_beam_fx", 9000, 2, "int", &function_4fb98616, 0, 0);
-  clientfield::register("toplayer", "skull_torch_fx", 9000, 2, "int", &function_2802db6f, 0, 0);
-  clientfield::register("allplayers", "skull_beam_3p_fx", 9000, 2, "int", &function_3f47ba02, 0, 0);
-  clientfield::register("allplayers", "skull_torch_3p_fx", 9000, 2, "int", &function_cea6821, 0, 0);
-  clientfield::register("allplayers", "skull_emissive", 9000, 1, "int", &function_c92fcc97, 0, 0);
+  clientfield::register("actor", "zombie_explode", 9000, 1, "int", & zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "death_ray_shock_eye_fx", 9000, 1, "int", & death_ray_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "entranced", 9000, 1, "int", & function_384d8884, 0, 0);
+  clientfield::register("actor", "thrasher_skull_fire", 9000, 1, "int", & thrasher_skull_fire, 0, 0);
+  clientfield::register("toplayer", "skull_beam_fx", 9000, 2, "int", & function_4fb98616, 0, 0);
+  clientfield::register("toplayer", "skull_torch_fx", 9000, 2, "int", & function_2802db6f, 0, 0);
+  clientfield::register("allplayers", "skull_beam_3p_fx", 9000, 2, "int", & function_3f47ba02, 0, 0);
+  clientfield::register("allplayers", "skull_torch_3p_fx", 9000, 2, "int", & function_cea6821, 0, 0);
+  clientfield::register("allplayers", "skull_emissive", 9000, 1, "int", & function_c92fcc97, 0, 0);
   level._effect["death_ray_shock_eyes"] = "zombie/fx_tesla_shock_eyes_zmb";
   level._effect["glow_eye_white"] = "zombie/fx_glow_eye_white";
   level._effect["zombie_explode"] = "dlc2/island/fx_zombie_torso_explo";
@@ -67,36 +67,36 @@ function function_2802db6f(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   if(newval == 1) {
-    if(isDefined(self gettagorigin("tag_fx_mouth"))) {
+    if(isdefined(self gettagorigin("tag_fx_mouth"))) {
       playviewmodelfx(localclientnum, level._effect["torch_start"], "tag_fx_mouth");
     }
-    if(isDefined(self gettagorigin("tag_fx_left"))) {
+    if(isdefined(self gettagorigin("tag_fx_left"))) {
       playviewmodelfx(localclientnum, level._effect["torch_side_start"], "tag_fx_left");
     }
-    if(isDefined(self gettagorigin("tag_fx_right"))) {
+    if(isdefined(self gettagorigin("tag_fx_right"))) {
       playviewmodelfx(localclientnum, level._effect["torch_side_start"], "tag_fx_right");
     }
   } else {
     if(newval == 2) {
-      if(isDefined(self gettagorigin("tag_fx_mouth"))) {
+      if(isdefined(self gettagorigin("tag_fx_mouth"))) {
         self.var_159d6213 = playviewmodelfx(localclientnum, level._effect["torch_loop"], "tag_fx_mouth");
       }
-      if(isDefined(self gettagorigin("tag_fx_left"))) {
+      if(isdefined(self gettagorigin("tag_fx_left"))) {
         self.var_4030b4a0 = playviewmodelfx(localclientnum, level._effect["torch_side_loop"], "tag_fx_left");
       }
-      if(isDefined(self gettagorigin("tag_fx_right"))) {
+      if(isdefined(self gettagorigin("tag_fx_right"))) {
         self.var_f04b5791 = playviewmodelfx(localclientnum, level._effect["torch_side_loop"], "tag_fx_right");
       }
     } else {
-      if(isDefined(self.var_159d6213)) {
+      if(isdefined(self.var_159d6213)) {
         stopfx(localclientnum, self.var_159d6213);
         self.var_159d6213 = undefined;
       }
-      if(isDefined(self.var_4030b4a0)) {
+      if(isdefined(self.var_4030b4a0)) {
         stopfx(localclientnum, self.var_4030b4a0);
         self.var_4030b4a0 = undefined;
       }
-      if(isDefined(self.var_f04b5791)) {
+      if(isdefined(self.var_f04b5791)) {
         stopfx(localclientnum, self.var_f04b5791);
         self.var_f04b5791 = undefined;
       }
@@ -110,31 +110,31 @@ function function_4fb98616(localclientnum, oldval, newval, bnewent, binitialsnap
   }
   if(newval == 1) {
     playviewmodelfx(localclientnum, level._effect["beam_start"], "tag_flash");
-    if(isDefined(self gettagorigin("tag_fx_right"))) {
+    if(isdefined(self gettagorigin("tag_fx_right"))) {
       playviewmodelfx(localclientnum, level._effect["beam_side_start"], "tag_fx_right");
     }
-    if(isDefined(self gettagorigin("tag_fx_left"))) {
+    if(isdefined(self gettagorigin("tag_fx_left"))) {
       playviewmodelfx(localclientnum, level._effect["beam_side_start"], "tag_fx_left");
     }
   } else {
     if(newval == 2) {
       self.var_1bcaa674 = playviewmodelfx(localclientnum, level._effect["beam_loop"], "tag_flash");
-      if(isDefined(self gettagorigin("tag_fx_left"))) {
+      if(isdefined(self gettagorigin("tag_fx_left"))) {
         self.var_17822f77 = playviewmodelfx(localclientnum, level._effect["beam_side_loop"], "tag_fx_left");
       }
-      if(isDefined(self gettagorigin("tag_fx_right"))) {
+      if(isdefined(self gettagorigin("tag_fx_right"))) {
         self.var_76b0d9e8 = playviewmodelfx(localclientnum, level._effect["beam_side_loop"], "tag_fx_right");
       }
     } else {
-      if(isDefined(self.var_1bcaa674)) {
+      if(isdefined(self.var_1bcaa674)) {
         stopfx(localclientnum, self.var_1bcaa674);
         self.var_1bcaa674 = undefined;
       }
-      if(isDefined(self.var_17822f77)) {
+      if(isdefined(self.var_17822f77)) {
         stopfx(localclientnum, self.var_17822f77);
         self.var_17822f77 = undefined;
       }
-      if(isDefined(self.var_76b0d9e8)) {
+      if(isdefined(self.var_76b0d9e8)) {
         stopfx(localclientnum, self.var_76b0d9e8);
         self.var_76b0d9e8 = undefined;
       }
@@ -143,15 +143,15 @@ function function_4fb98616(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function zombie_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.gibdef)) {
+  if(isdefined(self.gibdef)) {
     gibbundle = struct::get_script_bundle("gibcharacterdef", self.gibdef);
     var_e02aa733 = self.gibdef + "_nofx";
-    if(!isDefined(struct::get_script_bundle("gibcharacterdef", var_e02aa733))) {
-      var_8083daae = spawnStruct();
+    if(!isdefined(struct::get_script_bundle("gibcharacterdef", var_e02aa733))) {
+      var_8083daae = spawnstruct();
       var_8083daae.gibs = [];
       var_8083daae.name = gibbundle.name;
       foreach(gibflag, gib in gibbundle.gibs) {
-        var_8083daae.gibs[gibflag] = spawnStruct();
+        var_8083daae.gibs[gibflag] = spawnstruct();
         var_8083daae.gibs[gibflag].gibmodel = gibbundle.gibs[gibflag].gibmodel;
         var_8083daae.gibs[gibflag].gibtag = gibbundle.gibs[gibflag].gibtag;
         var_8083daae.gibs[gibflag].gibdynentfx = gibbundle.gibs[gibflag].gibdynentfx;
@@ -159,16 +159,16 @@ function zombie_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap
       }
       level.scriptbundles["gibcharacterdef"][var_e02aa733] = var_8083daae;
     }
-    self.gib_data = spawnStruct();
+    self.gib_data = spawnstruct();
     self.gib_data.gibdef = var_e02aa733;
   }
-  playFXOnTag(localclientnum, level._effect["zombie_explode"], self, "j_spine4");
+  playfxontag(localclientnum, level._effect["zombie_explode"], self, "j_spine4");
 }
 
 function death_ray_shock_eye_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(!isDefined(self.var_5f35d5e4)) {
-      self.var_5f35d5e4 = playFXOnTag(localclientnum, level._effect["death_ray_shock_eyes"], self, "J_Eyeball_LE");
+    if(!isdefined(self.var_5f35d5e4)) {
+      self.var_5f35d5e4 = playfxontag(localclientnum, level._effect["death_ray_shock_eyes"], self, "J_Eyeball_LE");
     }
   } else {
     deletefx(localclientnum, self.var_5f35d5e4, 1);
@@ -178,8 +178,8 @@ function death_ray_shock_eye_fx(localclientnum, oldval, newval, bnewent, binitia
 
 function function_384d8884(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(!isDefined(self.var_60a62a48)) {
-      self.var_60a62a48 = playFXOnTag(localclientnum, level._effect["glow_eye_white"], self, "J_Eyeball_LE");
+    if(!isdefined(self.var_60a62a48)) {
+      self.var_60a62a48 = playfxontag(localclientnum, level._effect["glow_eye_white"], self, "J_Eyeball_LE");
     }
   } else {
     deletefx(localclientnum, self.var_60a62a48, 1);
@@ -197,56 +197,56 @@ function thrasher_skull_fire(localclientnum, oldval, newval, bnewent, binitialsn
 
 function function_c16de463(var_1607039a, localclientnum) {
   if(var_1607039a) {
-    if(!isDefined(self.var_9cd89d5f)) {
+    if(!isdefined(self.var_9cd89d5f)) {
       self.var_9cd89d5f = [];
-      if(!isDefined(self.var_9cd89d5f)) {
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_arm_left_loop"], self, "j_shoulder_le");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_arm_left_loop"], self, "j_shoulder_le");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_arm_rgt_loop"], self, "j_shoulder_ri");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_arm_rgt_loop"], self, "j_shoulder_ri");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_leg_left_loop"], self, "j_knee_le");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_leg_left_loop"], self, "j_knee_le");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_leg_rgt_loop"], self, "j_knee_ri");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_leg_rgt_loop"], self, "j_knee_ri");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_hip_left_loop"], self, "j_hip_le");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_hip_left_loop"], self, "j_hip_le");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_hip_rgt_loop"], self, "j_hip_ri");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_hip_rgt_loop"], self, "j_hip_ri");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_torso_loop"], self, "j_spineupper");
-      if(!isDefined(self.var_9cd89d5f)) {
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_torso_loop"], self, "j_spineupper");
+      if(!isdefined(self.var_9cd89d5f)) {
         self.var_9cd89d5f = [];
       } else if(!isarray(self.var_9cd89d5f)) {
         self.var_9cd89d5f = array(self.var_9cd89d5f);
       }
-      self.var_9cd89d5f[self.var_9cd89d5f.size] = playFXOnTag(localclientnum, level._effect["fx_fire_thrash_waist_loop"], self, "j_spinelower");
+      self.var_9cd89d5f[self.var_9cd89d5f.size] = playfxontag(localclientnum, level._effect["fx_fire_thrash_waist_loop"], self, "j_spinelower");
     }
   } else {
     foreach(var_41865f6c in self.var_9cd89d5f) {
@@ -271,15 +271,15 @@ function function_cea6821(localclientnum, oldval, newval, bnewent, binitialsnap,
   player = getlocalplayer(localclientnum);
   if(newval == 1) {
     if(player != self) {
-      playFXOnTag(localclientnum, level._effect["torch_start_3p"], self, "tag_flash");
+      playfxontag(localclientnum, level._effect["torch_start_3p"], self, "tag_flash");
     }
   } else {
     if(newval == 2) {
       if(player != self) {
-        self.var_23a3e944 = playFXOnTag(localclientnum, level._effect["torch_loop_3p"], self, "tag_flash");
+        self.var_23a3e944 = playfxontag(localclientnum, level._effect["torch_loop_3p"], self, "tag_flash");
       }
     } else if(player != self) {
-      if(isDefined(self.var_23a3e944)) {
+      if(isdefined(self.var_23a3e944)) {
         stopfx(localclientnum, self.var_23a3e944);
         self.var_23a3e944 = undefined;
       }
@@ -294,15 +294,15 @@ function function_3f47ba02(localclientnum, oldval, newval, bnewent, binitialsnap
   player = getlocalplayer(localclientnum);
   if(newval == 1) {
     if(player != self) {
-      playFXOnTag(localclientnum, level._effect["beam_start_3p"], self, "tag_flash");
+      playfxontag(localclientnum, level._effect["beam_start_3p"], self, "tag_flash");
     }
   } else {
     if(newval == 2) {
       if(player != self) {
-        self.var_5f48ba4b = playFXOnTag(localclientnum, level._effect["beam_loop_3p"], self, "tag_flash");
+        self.var_5f48ba4b = playfxontag(localclientnum, level._effect["beam_loop_3p"], self, "tag_flash");
       }
     } else if(player != self) {
-      if(isDefined(self.var_5f48ba4b)) {
+      if(isdefined(self.var_5f48ba4b)) {
         stopfx(localclientnum, self.var_5f48ba4b);
         self.var_5f48ba4b = undefined;
       }

@@ -24,6 +24,7 @@
 #include scripts\killstreaks\remote_weapons;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\weapons\deployable;
+
 #namespace killstreak_vehicle;
 
 init() {
@@ -33,7 +34,7 @@ init() {
 init_killstreak(bundle) {
   killstreaks::register_bundle(bundle, &activate_vehicle);
   killstreaks::allow_assists(bundle.kstype, 1);
-  remote_weapons::registerremoteweapon(bundle.ksweapon.name, # "", &function_c9aa9ee5, &function_8cb72281, 0);
+  remote_weapons::registerremoteweapon(bundle.ksweapon.name, #"", &function_c9aa9ee5, &function_8cb72281, 0);
   vehicle::add_main_callback(bundle.ksvehicle, &init_vehicle);
   deployable::register_deployable(bundle.ksweapon, undefined, undefined);
   level.killstreaks[bundle.kstype].var_b6c17aab = 1;
@@ -63,7 +64,7 @@ function_3c6cec8b() {
   remote_controlled = isDefined(self.control_initiated) && self.control_initiated || isDefined(self.controlled) && self.controlled;
 
   if(remote_controlled) {
-    notifystring = self waittill(#"remote_weapon_end", # "shutdown");
+    notifystring = self waittill(#"remote_weapon_end", #"shutdown");
 
     if(notifystring._notify == "remote_weapon_end") {
       self waittill(#"shutdown");
@@ -176,7 +177,7 @@ activate_vehicle(type) {
 
   vehicle killstreak_bundles::spawned(bundle);
   self thread killstreaks::play_killstreak_start_dialog(type, self.team, killstreak_id);
-  self stats::function_e24eec31(bundle.ksweapon, # "used", 1);
+  self stats::function_e24eec31(bundle.ksweapon, #"used", 1);
   remote_weapons::useremoteweapon(vehicle, bundle.ksweapon.name, 1, 0);
 
   if(!isDefined(player) || !isalive(player) || isDefined(player.laststand) && player.laststand || player isempjammed()) {
@@ -254,7 +255,7 @@ function_8cb72281(vehicle, exitrequestedbyowner) {
 
 function_2cee4434() {
   vehicle = self;
-  vehicle endon(#"shutdown", # "death");
+  vehicle endon(#"shutdown", #"death");
 
   while(isDefined(level.var_46f4865d) && level.var_46f4865d) {
     waitframe(1);
@@ -269,7 +270,7 @@ function_2cee4434() {
 
 watch_exit() {
   vehicle = self;
-  vehicle endon(#"shutdown", # "death");
+  vehicle endon(#"shutdown", #"death");
 
   while(true) {
     timeused = 0;
@@ -292,7 +293,7 @@ watch_exit() {
 function_e99d09a3() {
   self endon(#"shutdown");
 
-  for(inwater = 0; !inwater; inwater = trace[# "fraction"] < 1) {
+  for(inwater = 0; !inwater; inwater = trace[#"fraction"] < 1) {
     wait 0.5;
     trace = physicstrace(self.origin + (0, 0, 10), self.origin + (0, 0, 6), (-2, -2, -2), (2, 2, 2), self, 4);
   }
@@ -360,7 +361,7 @@ function_584fb7a3() {
   vehicle endon(#"death");
 
   if(!(isDefined(vehicle.remote_weapon_end) && vehicle.remote_weapon_end)) {
-    vehicle waittill(#"remote_weapon_end", # "hash_59b25025ce93a142");
+    vehicle waittill(#"remote_weapon_end", #"hash_59b25025ce93a142");
   }
 
   attacker = isDefined(vehicle.owner) ? vehicle.owner : undefined;
@@ -405,7 +406,7 @@ on_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint
 on_death(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
   vehicle = self;
   player = vehicle.owner;
-  player endon(#"disconnect", # "joined_team", # "joined_spectators");
+  player endon(#"disconnect", #"joined_team", #"joined_spectators");
   bundle = self.var_22a05c26;
   var_7d4f75e = isDefined(vehicle.var_7d4f75e) ? vehicle.var_7d4f75e : 0;
   var_a9911aeb = bundle.kstype;
@@ -492,8 +493,8 @@ explode(attacker, weapon) {
 
         if(isDefined(weapon) && weapon.isvalid) {
           level.globalkillstreaksdestroyed++;
-          attacker stats::function_e24eec31(bundle.ksweapon, # "destroyed", 1);
-          attacker stats::function_e24eec31(bundle.ksweapon, # "destroyed_controlled_killstreak", 1);
+          attacker stats::function_e24eec31(bundle.ksweapon, #"destroyed", 1);
+          attacker stats::function_e24eec31(bundle.ksweapon, #"destroyed_controlled_killstreak", 1);
         }
 
         if(!var_3906173b) {
@@ -527,10 +528,10 @@ function_e94c2667() {
   startheight = 50;
 
   switch (self getstance()) {
-    case # "crouch":
+    case #"crouch":
       startheight = 30;
       break;
-    case # "prone":
+    case #"prone":
       startheight = 15;
       break;
   }
@@ -565,12 +566,12 @@ function_d75fbe15(origin, angles) {
     mask = 1 | 2;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-    if(isDefined(trace[# "entity"]) && isplayer(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"]) && isplayer(trace[#"entity"])) {
       wheelcounts[i] = 0;
       continue;
     }
 
-    startpoints[i] = trace[# "position"] + (0, 0, heightoffset);
+    startpoints[i] = trace[#"position"] + (0, 0, heightoffset);
     wheelcounts[i] = function_c82e14d2(startpoints[i], startangles[i], heightoffset);
 
     if(positionwouldtelefrag(startpoints[i])) {
@@ -629,7 +630,7 @@ function_c82e14d2(origin, angles, heightoffset) {
     startpoint += (0, 0, height - heightoffset);
     trace = bulletTrace(startpoint, endpoint, 0, self);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       touchcount++;
     }
   }
@@ -654,7 +655,7 @@ function_b4682bd6(origin, angles) {
   mask = 1 | 2 | 4;
   trace = physicstrace(liftedorigin, origin + (0, 0, 1), mins, maxs, self, mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
@@ -664,7 +665,7 @@ function_b4682bd6(origin, angles) {
   maxs = (size, size, height);
   sweeptrace = physicstrace(self.origin + (0, 0, startheight), liftedorigin, mins, maxs, self, mask);
 
-  if(sweeptrace[# "fraction"] < 1) {
+  if(sweeptrace[#"fraction"] < 1) {
     return false;
   }
 

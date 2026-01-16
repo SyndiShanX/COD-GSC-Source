@@ -251,7 +251,7 @@ water_drop_trig_entered(player, endon_string) {
     player.water_drop_ents = [];
   }
   if(isDefined(self.script_sound)) {
-    player playSound(self.script_sound);
+    player playsound(self.script_sound);
   }
   if(self.waterDrops) {
     player.water_drop_ents = array_add(player.water_drop_ents, self);

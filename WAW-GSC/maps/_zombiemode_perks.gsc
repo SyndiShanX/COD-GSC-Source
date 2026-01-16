@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  vending_triggers = getEntArray("zombie_vending", "targetname");
+  vending_triggers = GetEntArray("zombie_vending", "targetname");
   if(vending_triggers.size < 1) {
     return;
   }
@@ -67,13 +67,13 @@ init() {
 turn_sleight_on() {
   machine = getent("vending_sleight", "targetname");
   level waittill("sleight_on");
-  machine setModel("zombie_vending_sleight_on");
+  machine setmodel("zombie_vending_sleight_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_fastreload_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("sleight_light", duration);
     timer += duration;
     duration += 0.1;
@@ -82,19 +82,19 @@ turn_sleight_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["sleight_light"], machine, "tag_origin");
+  playfxontag(level._effect["sleight_light"], machine, "tag_origin");
 }
 
 turn_revive_on() {
   machine = getent("vending_revive", "targetname");
   level waittill("revive_on");
-  machine setModel("zombie_vending_revive_on");
-  machine playSound("perks_power_on");
+  machine setmodel("zombie_vending_revive_on");
+  machine playsound("perks_power_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
   timer = 0;
   duration = 0.05;
   level notify("specialty_quickrevive_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("revive_light", duration);
     timer += duration;
     duration += 0.1;
@@ -103,19 +103,19 @@ turn_revive_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["revive_light"], machine, "tag_origin");
+  playfxontag(level._effect["revive_light"], machine, "tag_origin");
 }
 
 turn_jugger_on() {
   machine = getent("vending_jugg", "targetname");
   level waittill("juggernog_on");
-  machine setModel("zombie_vending_jugg_on");
+  machine setmodel("zombie_vending_jugg_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_armorvest_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("jugger_light", duration);
     timer += duration;
     duration += 0.1;
@@ -124,19 +124,19 @@ turn_jugger_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["jugger_light"], machine, "tag_origin");
+  playfxontag(level._effect["jugger_light"], machine, "tag_origin");
 }
 
 turn_doubletap_on() {
   machine = getent("vending_doubletap", "targetname");
   level waittill("doubletap_on");
-  machine setModel("zombie_vending_doubletap_on");
+  machine setmodel("zombie_vending_doubletap_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_rof_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("doubletap_light", duration);
     timer += duration;
     duration += 0.1;
@@ -145,19 +145,19 @@ turn_doubletap_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["doubletap_light"], machine, "tag_origin");
+  playfxontag(level._effect["doubletap_light"], machine, "tag_origin");
 }
 
 turn_doubletap_sumpf_on() {
   machine = getent("vending_doubletap", "targetname");
   level waittill("doubletap_sumpf_on");
-  machine setModel("zombie_vending_doubletap_price");
+  machine setmodel("zombie_vending_doubletap_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_rof_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("doubletap_light", duration);
     timer += duration;
     duration += 0.1;
@@ -166,19 +166,19 @@ turn_doubletap_sumpf_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["doubletap_light"], machine, "tag_origin");
+  playfxontag(level._effect["doubletap_light"], machine, "tag_origin");
 }
 
 turn_jugger_sumpf_on() {
   machine = getent("vending_jugg", "targetname");
   level waittill("juggernog_sumpf_on");
-  machine setModel("zombie_vending_jugg_on_price");
+  machine setmodel("zombie_vending_jugg_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_armorvest_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("jugger_light", duration);
     timer += duration;
     duration += 0.1;
@@ -187,19 +187,19 @@ turn_jugger_sumpf_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["jugger_light"], machine, "tag_origin");
+  playfxontag(level._effect["jugger_light"], machine, "tag_origin");
 }
 
 turn_revive_sumpf_on() {
   machine = getent("vending_revive", "targetname");
   level waittill("revive_sumpf_on");
-  machine setModel("zombie_vending_revive_on_price");
+  machine setmodel("zombie_vending_revive_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_quickrevive_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("revive_light", duration);
     timer += duration;
     duration += 0.1;
@@ -208,19 +208,19 @@ turn_revive_sumpf_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["revive_light"], machine, "tag_origin");
+  playfxontag(level._effect["revive_light"], machine, "tag_origin");
 }
 
 turn_sleight_sumpf_on() {
   machine = getent("vending_sleight", "targetname");
   level waittill("sleight_sumpf_on");
-  machine setModel("zombie_vending_sleight_on_price");
+  machine setmodel("zombie_vending_sleight_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
-  machine playSound("perks_power_on");
+  machine playsound("perks_power_on");
   timer = 0;
   duration = 0.05;
   level notify("specialty_fastreload_power_on");
-  while(true) {
+  while (true) {
     machine thread vending_machine_flicker_light("sleight_light", duration);
     timer += duration;
     duration += 0.1;
@@ -229,15 +229,15 @@ turn_sleight_sumpf_on() {
     }
     wait(duration);
   }
-  playFXOnTag(level._effect["sleight_light"], machine, "tag_origin");
+  playfxontag(level._effect["sleight_light"], machine, "tag_origin");
 }
 
 vending_machine_flicker_light(fx_light, duration) {
   fxObj = spawn("script_model", self.origin + (0, 0, 0));
-  fxobj setModel("tag_origin");
+  fxobj setmodel("tag_origin");
   fxobj.angles = self.angles;
-  playFXOnTag(level._effect[fx_light], fxObj, "tag_origin");
-  fxObj playLoopSound("elec_current_loop");
+  playfxontag(level._effect[fx_light], fxObj, "tag_origin");
+  fxObj playloopsound("elec_current_loop");
   playsoundatposition("perks_rattle", fxObj.origin);
   wait(duration);
   fxobj stoploopsound();
@@ -248,10 +248,10 @@ electric_perks_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
   timer = 0;
-  while(1) {
+  while (1) {
     wait(0.5);
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
       if(dist > 70 * 70) {
         timer = 0;
@@ -286,7 +286,7 @@ vending_trigger_think() {
   } else {
     self vending_set_hintstring(perk);
   }
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
     index = maps\_zombiemode_weapons::get_player_index(player);
     cost = level.zombie_vars["zombie_perk_cost"];
@@ -316,13 +316,13 @@ vending_trigger_think() {
         cheat = true;
       }
       if(cheat != true) {
-        self playSound("deny");
+        self playsound("deny");
         player thread play_no_money_perk_dialog();
         continue;
       }
     }
     if(player.score < cost) {
-      self playSound("deny");
+      self playsound("deny");
       player thread play_no_money_perk_dialog();
       continue;
     }
@@ -376,7 +376,7 @@ play_no_money_perk_dialog() {
   if(!isDefined(self.vox_nomoney_perk)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_nomoney_perk");
     self.vox_nomoney_perk = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_nomoney_perk[self.vox_nomoney_perk.size] = "vox_nomoney_perk_" + i;
     }
     self.vox_nomoney_perk_available = self.vox_nomoney_perk;
@@ -394,9 +394,9 @@ check_player_has_perk(perk) {
     return;
   }
   dist = 128 * 128;
-  while(true) {
+  while (true) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(DistanceSquared(players[i].origin, self.origin) < dist) {
         if(!players[i] hasperk(perk) && !(players[i] in_revive_trigger())) {
           self setvisibletoplayer(players[i]);
@@ -606,8 +606,8 @@ machine_watcher() {
 
 machine_watcher_sumpf_jugg() {
   level waittill("juggernog_sumpf_on");
-  machine = getEntArray("zombie_vending", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  machine = getentarray("zombie_vending", "targetname");
+  for (i = 0; i < machine.size; i++) {
     if(isDefined(machine[i].script_sound)) {
       if(machine[i].script_sound == "mx_jugger_jingle") {
         machine[i] thread perks_a_cola_jingle();
@@ -618,8 +618,8 @@ machine_watcher_sumpf_jugg() {
 
 machine_watcher_sumpf_speed() {
   level waittill("sleight_sumpf_on");
-  machine = getEntArray("zombie_vending", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  machine = getentarray("zombie_vending", "targetname");
+  for (i = 0; i < machine.size; i++) {
     if(isDefined(machine[i].script_sound)) {
       if(machine[i].script_sound == "mx_speed_jingle") {
         machine[i] thread perks_a_cola_jingle();
@@ -630,8 +630,8 @@ machine_watcher_sumpf_speed() {
 
 machine_watcher_sumpf_revive() {
   level waittill("revive_sumpf_on");
-  machine = getEntArray("zombie_vending", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  machine = getentarray("zombie_vending", "targetname");
+  for (i = 0; i < machine.size; i++) {
     if(isDefined(machine[i].script_sound)) {
       if(machine[i].script_sound == "mx_revive_jingle") {
         machine[i] thread perks_a_cola_jingle();
@@ -642,8 +642,8 @@ machine_watcher_sumpf_revive() {
 
 machine_watcher_sumpf_doubleTap() {
   level waittill("doubletap_sumpf_on");
-  machine = getEntArray("zombie_vending", "targetname");
-  for(i = 0; i < machine.size; i++) {
+  machine = getentarray("zombie_vending", "targetname");
+  for (i = 0; i < machine.size; i++) {
     if(isDefined(machine[i].script_sound)) {
       if(machine[i].script_sound == "mx_doubletap_jingle") {
         machine[i] thread perks_a_cola_jingle();
@@ -672,10 +672,9 @@ machine_watcher_factory(vending_name) {
       break;
   }
   temp_machines = getstructarray("perksacola", "targetname");
-  for(x = 0; x < temp_machines.size; x++) {
-    if(temp_machines[x].script_sound == temp_script_sound) {
+  for (x = 0; x < temp_machines.size; x++) {
+    if(temp_machines[x].script_sound == temp_script_sound)
       temp_machines[x] thread perks_a_cola_jingle();
-    }
   }
 }
 
@@ -699,28 +698,28 @@ play_vendor_stings(sound) {
     if(sound == "mx_speed_sting" && level.speed_jingle == 0) {
       level.speed_jingle = 1;
       temp_org_speed_s = spawn("script_origin", self.origin);
-      temp_org_speed_s playSound(sound, "sound_done");
+      temp_org_speed_s playsound(sound, "sound_done");
       temp_org_speed_s waittill("sound_done");
       level.speed_jingle = 0;
       temp_org_speed_s delete();
     } else if(sound == "mx_revive_sting" && level.revive_jingle == 0) {
       level.revive_jingle = 1;
       temp_org_revive_s = spawn("script_origin", self.origin);
-      temp_org_revive_s playSound(sound, "sound_done");
+      temp_org_revive_s playsound(sound, "sound_done");
       temp_org_revive_s waittill("sound_done");
       level.revive_jingle = 0;
       temp_org_revive_s delete();
     } else if(sound == "mx_doubletap_sting" && level.doubletap_jingle == 0) {
       level.doubletap_jingle = 1;
       temp_org_dp_s = spawn("script_origin", self.origin);
-      temp_org_dp_s playSound(sound, "sound_done");
+      temp_org_dp_s playsound(sound, "sound_done");
       temp_org_dp_s waittill("sound_done");
       level.doubletap_jingle = 0;
       temp_org_dp_s delete();
     } else if(sound == "mx_jugger_sting" && level.jugger_jingle == 0) {
       level.jugger_jingle = 1;
       temp_org_jugs_s = spawn("script_origin", self.origin);
-      temp_org_jugs_s playSound(sound, "sound_done");
+      temp_org_jugs_s playsound(sound, "sound_done");
       temp_org_jugs_s waittill("sound_done");
       level.jugger_jingle = 0;
       temp_org_jugs_s delete();
@@ -730,7 +729,7 @@ play_vendor_stings(sound) {
 
 perks_a_cola_jingle_sumpf(jingle) {
   perk_hum = spawn("script_origin", self.origin);
-  perk_hum playLoopSound("perks_machine_loop");
+  perk_hum playloopsound("perks_machine_loop");
   self thread play_random_broken_sounds();
   if(!isDefined(self.perk_jingle_playing)) {
     self.perk_jingle_playing = 0;
@@ -738,7 +737,7 @@ perks_a_cola_jingle_sumpf(jingle) {
   if(!isDefined(level.eggs)) {
     level.eggs = 0;
   }
-  while(1) {
+  while (1) {
     wait(randomfloatrange(31, 45));
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
@@ -746,7 +745,7 @@ perks_a_cola_jingle_sumpf(jingle) {
       if(self.script_sound == "mx_speed_jingle" && level.speed_jingle == 0) {
         level.speed_jingle = 1;
         temp_org_speed = spawn("script_origin", self.origin);
-        temp_org_speed playSound(self.script_sound, "sound_done");
+        temp_org_speed playsound(self.script_sound, "sound_done");
         temp_org_speed waittill("sound_done");
         level.speed_jingle = 0;
         temp_org_speed delete();
@@ -754,7 +753,7 @@ perks_a_cola_jingle_sumpf(jingle) {
       if(self.script_sound == "mx_revive_jingle" && level.revive_jingle == 0) {
         level.revive_jingle = 1;
         temp_org_revive = spawn("script_origin", self.origin);
-        temp_org_revive playSound(self.script_sound, "sound_done");
+        temp_org_revive playsound(self.script_sound, "sound_done");
         temp_org_revive waittill("sound_done");
         level.revive_jingle = 0;
         temp_org_revive delete();
@@ -762,7 +761,7 @@ perks_a_cola_jingle_sumpf(jingle) {
       if(self.script_sound == "mx_doubletap_jingle" && level.doubletap_jingle == 0) {
         level.doubletap_jingle = 1;
         temp_org_doubletap = spawn("script_origin", self.origin);
-        temp_org_doubletap playSound(self.script_sound, "sound_done");
+        temp_org_doubletap playsound(self.script_sound, "sound_done");
         temp_org_doubletap waittill("sound_done");
         level.doubletap_jingle = 0;
         temp_org_doubletap delete();
@@ -770,7 +769,7 @@ perks_a_cola_jingle_sumpf(jingle) {
       if(self.script_sound == "mx_jugger_jingle" && level.jugger_jingle == 0) {
         level.jugger_jingle = 1;
         temp_org_jugger = spawn("script_origin", self.origin);
-        temp_org_jugger playSound(self.script_sound, "sound_done");
+        temp_org_jugger playsound(self.script_sound, "sound_done");
         temp_org_jugger waittill("sound_done");
         level.jugger_jingle = 0;
         temp_org_jugger delete();
@@ -782,7 +781,7 @@ perks_a_cola_jingle_sumpf(jingle) {
 
 perks_a_cola_jingle() {
   perk_hum = spawn("script_origin", self.origin);
-  perk_hum playLoopSound("perks_machine_loop");
+  perk_hum playloopsound("perks_machine_loop");
   self thread play_random_broken_sounds();
   if(!isDefined(self.perk_jingle_playing)) {
     self.perk_jingle_playing = 0;
@@ -790,7 +789,7 @@ perks_a_cola_jingle() {
   if(!isDefined(level.eggs)) {
     level.eggs = 0;
   }
-  while(1) {
+  while (1) {
     wait(randomfloatrange(31, 45));
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
@@ -799,7 +798,7 @@ perks_a_cola_jingle() {
         level.speed_jingle = 1;
         temp_org_speed = spawn("script_origin", self.origin);
         wait(0.05);
-        temp_org_speed playSound(self.script_sound, "sound_done");
+        temp_org_speed playsound(self.script_sound, "sound_done");
         temp_org_speed waittill("sound_done");
         level.speed_jingle = 0;
         temp_org_speed delete();
@@ -808,7 +807,7 @@ perks_a_cola_jingle() {
         level.revive_jingle = 1;
         temp_org_revive = spawn("script_origin", self.origin);
         wait(0.05);
-        temp_org_revive playSound(self.script_sound, "sound_done");
+        temp_org_revive playsound(self.script_sound, "sound_done");
         temp_org_revive waittill("sound_done");
         level.revive_jingle = 0;
         temp_org_revive delete();
@@ -817,7 +816,7 @@ perks_a_cola_jingle() {
         level.doubletap_jingle = 1;
         temp_org_doubletap = spawn("script_origin", self.origin);
         wait(0.05);
-        temp_org_doubletap playSound(self.script_sound, "sound_done");
+        temp_org_doubletap playsound(self.script_sound, "sound_done");
         temp_org_doubletap waittill("sound_done");
         level.doubletap_jingle = 0;
         temp_org_doubletap delete();
@@ -826,7 +825,7 @@ perks_a_cola_jingle() {
         level.jugger_jingle = 1;
         temp_org_jugger = spawn("script_origin", self.origin);
         wait(0.05);
-        temp_org_jugger playSound(self.script_sound, "sound_done");
+        temp_org_jugger playsound(self.script_sound, "sound_done");
         temp_org_jugger waittill("sound_done");
         level.jugger_jingle = 0;
         temp_org_jugger delete();
@@ -842,13 +841,13 @@ play_random_broken_sounds() {
     self.script_sound = "null";
   }
   if(self.script_sound == "mx_revive_jingle") {
-    while(1) {
+    while (1) {
       wait(randomfloatrange(7, 18));
       playsoundatposition("broken_random_jingle", self.origin);
       playsoundatposition("electrical_surge", self.origin);
     }
   } else {
-    while(1) {
+    while (1) {
       wait(randomfloatrange(7, 18));
       playsoundatposition("electrical_surge", self.origin);
     }

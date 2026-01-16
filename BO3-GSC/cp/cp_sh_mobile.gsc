@@ -22,10 +22,10 @@ function main() {
   load::main();
   level thread set_ambient_state();
   level thread setup_vignettes();
-  level scene::add_scene_func("p_player_enter_readyroom_mobile", &function_1b1968a9, "init");
-  level.var_8ea79b65 = &function_6c5a247e;
-  level.var_58373e3b = &function_3a7a79ca;
-  level.var_f3db725a = &function_9e35a10d;
+  level scene::add_scene_func("p_player_enter_readyroom_mobile", & function_1b1968a9, "init");
+  level.var_8ea79b65 = & function_6c5a247e;
+  level.var_58373e3b = & function_3a7a79ca;
+  level.var_f3db725a = & function_9e35a10d;
 }
 
 function set_ambient_state() {
@@ -64,14 +64,14 @@ function function_1b1968a9(a_ents) {
 
 function rumbles() {
   v_source = (56, 0, 439);
-  while(true) {
+  while (true) {
     if(randomint(100) < 20) {
       wait(randomfloatrange(0.5, 3));
     } else {
       wait(randomfloatrange(5, 10));
     }
     n_rand = randomint(100);
-    if(isDefined(level.var_ac964c36) && level.var_ac964c36) {
+    if(isdefined(level.var_ac964c36) && level.var_ac964c36) {
       if(n_rand < 10) {
         earthquake(0.2, 0.75, v_source, 2000);
       } else {
@@ -88,8 +88,8 @@ function rumbles() {
 
 function function_6d9e2e34() {
   level.var_ea4a62a = util::spawn_model("tag_origin");
-  callback::on_spawned(&function_eb7433ac);
-  while(true) {
+  callback::on_spawned( & function_eb7433ac);
+  while (true) {
     n_degree = randomfloatrange(0.25, 1);
     n_time = randomfloatrange(3, 6);
     level.var_ea4a62a rotateroll(n_degree, n_time, n_time / 2, n_time / 2);
@@ -101,7 +101,7 @@ function function_6d9e2e34() {
 
 function function_eb7433ac() {
   self endon("death");
-  while(true) {
+  while (true) {
     self playersetgroundreferenceent(level.var_ea4a62a);
     self flag::wait_till("in_training_sim");
     self playersetgroundreferenceent(undefined);
@@ -110,7 +110,7 @@ function function_eb7433ac() {
 }
 
 function function_9ca26ba0() {
-  while(true) {
+  while (true) {
     n_degree = randomfloatrange(0.25, 1);
     n_time = randomfloatrange(3, 6);
     self rotateroll(n_degree, n_time, n_time / 2, n_time / 2);
@@ -169,31 +169,31 @@ function function_301c79b5(n_num) {
 
 function setup_vignettes() {
   a_str_scenes = [];
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_bloodmopping_clean";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_balcony_surveying_guy01";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_balcony_surveying_guy02";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_scaffold_inspecting";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
@@ -202,7 +202,7 @@ function setup_vignettes() {
   e_spawner = getent("worker_spawner", "targetname");
   a_str_scenes = array::randomize(a_str_scenes);
   n_vign_total = randomintrange(2, 3);
-  for(n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
+  for (n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
     str_scene = a_str_scenes[n_vign_index];
     level thread scene::play(str_scene, e_spawner);
   }

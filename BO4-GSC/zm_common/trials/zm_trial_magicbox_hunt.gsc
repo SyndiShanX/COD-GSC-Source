@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_magicbox_hunt;
 
 autoexec __init__system__() {
@@ -56,7 +57,7 @@ private on_end(round_reset) {
 }
 
 private function_cfb0f4d() {
-  level endon(#"hash_7646638df88a3656", # "hash_2b35a48172d1e0c2");
+  level endon(#"hash_7646638df88a3656", #"hash_2b35a48172d1e0c2");
 
   while(true) {
     level waittill(#"weapon_fly_away_start");
@@ -78,7 +79,7 @@ private function_a4bcce4e() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb === # "zm_bgb_immolation_liquidation") {
+    if(str_bgb === #"zm_bgb_immolation_liquidation") {
       self.var_abfa1f6a = bgb_pack::function_834d35e(i);
       self bgb_pack::function_b2308cd(i, 3);
     }
@@ -89,7 +90,7 @@ private function_e8f640a5() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb === # "zm_bgb_immolation_liquidation") {
+    if(str_bgb === #"zm_bgb_immolation_liquidation") {
       self bgb_pack::function_b2308cd(i, self.var_abfa1f6a);
       self.var_abfa1f6a = undefined;
     }

@@ -34,11 +34,11 @@ function main() {
   level.killstreaksgivegamescore = getgametypesetting("killstreaksGiveGameScore");
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = &onstartgametype;
-  level.onspawnplayer = &onspawnplayer;
-  level.onroundendgame = &onroundendgame;
-  level.onroundswitch = &onroundswitch;
-  level.onplayerkilled = &onplayerkilled;
+  level.onstartgametype = & onstartgametype;
+  level.onspawnplayer = & onspawnplayer;
+  level.onroundendgame = & onroundendgame;
+  level.onroundswitch = & onroundswitch;
+  level.onplayerkilled = & onplayerkilled;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startTeamDeathmatch", "hcStartTeamDeathmatch", "gameBoost", "gameBoost");
   globallogic::setvisiblescoreboardcolumns("score", "kills", "deaths", "kdratio", "assists");
@@ -46,7 +46,7 @@ function main() {
 
 function onstartgametype() {
   setclientnamemode("auto_change");
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["switchedsides"]) {
@@ -60,12 +60,12 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.teams) {
-    util::setobjectivetext(team, &"OBJECTIVES_TDM");
-    util::setobjectivehinttext(team, &"OBJECTIVES_TDM_HINT");
+    util::setobjectivetext(team, & "OBJECTIVES_TDM");
+    util::setobjectivehinttext(team, & "OBJECTIVES_TDM_HINT");
     if(level.splitscreen) {
-      util::setobjectivescoretext(team, &"OBJECTIVES_TDM");
+      util::setobjectivescoretext(team, & "OBJECTIVES_TDM");
     } else {
-      util::setobjectivescoretext(team, &"OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext(team, & "OBJECTIVES_TDM_SCORE");
     }
     spawnlogic::add_spawn_points(team, "mp_tdm_spawn");
     spawnlogic::place_spawn_points(spawning::gettdmstartspawnname(team));
@@ -86,7 +86,7 @@ function onstartgametype() {
       globallogic_score::resetteamscores();
     }
   }
-  if(isDefined(level.droppedtagrespawn) && level.droppedtagrespawn) {
+  if(isdefined(level.droppedtagrespawn) && level.droppedtagrespawn) {
     level.numlives = 1;
   }
 }
@@ -100,7 +100,7 @@ function onspawnplayer(predictedspawn) {
 }
 
 function onendgame(winningteam) {
-  if(isDefined(winningteam) && isDefined(level.teams[winningteam])) {
+  if(isdefined(winningteam) && isdefined(level.teams[winningteam])) {
     globallogic_score::giveteamscoreforobjective(winningteam, 1);
   }
 }
@@ -129,7 +129,7 @@ function onroundendgame(roundwinner) {
 
 function onscoreclosemusic() {
   teamscores = [];
-  while(!level.gameended) {
+  while (!level.gameended) {
     scorelimit = level.scorelimit;
     scorethreshold = scorelimit * 0.1;
     scorethresholdstart = abs(scorelimit - scorethreshold);
@@ -159,18 +159,18 @@ function onscoreclosemusic() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(level.droppedtagrespawn) && level.droppedtagrespawn) {
+  if(isdefined(level.droppedtagrespawn) && level.droppedtagrespawn) {
     thread dogtags::checkallowspectating();
     should_spawn_tags = self dogtags::should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration);
     should_spawn_tags = should_spawn_tags && !globallogic_spawn::mayspawn();
     if(should_spawn_tags) {
-      level thread dogtags::spawn_dog_tag(self, attacker, &dogtags::onusedogtag, 0);
+      level thread dogtags::spawn_dog_tag(self, attacker, & dogtags::onusedogtag, 0);
     }
   }
   if(isplayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
-  if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
+  if(!isdefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isdefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
     attacker globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);
     self globallogic_score::giveteamscoreforobjective(self.team, level.teamscoreperdeath * -1);
     if(smeansofdeath == "MOD_HEAD_SHOT") {

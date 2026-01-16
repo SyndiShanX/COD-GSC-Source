@@ -146,9 +146,9 @@ handlePlayerUse() {
 }
 
 setFollowerHintString() {
-  hintString = &"MP_HVT_FOLLOW";
+  hintString = & "MP_HVT_FOLLOW";
   if(self.hvtIsFollowing) {
-    hintString = &"MP_HVT_WAIT";
+    hintString = & "MP_HVT_WAIT";
   }
   self.hvtTrigger setHintString(hintString);
 }

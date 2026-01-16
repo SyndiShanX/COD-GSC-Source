@@ -34,7 +34,8 @@ init_flags() {
   flag_init("spiderbot_end");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 spiderbot_teleport(str_location) {
   s_tp_spot = getstruct(str_location, "targetname");
@@ -69,7 +70,7 @@ skipto_gulliver() {
   level.vh_spiderbot thread objective_breadcrumb(level.obj_enter_crc, "breadcrumb_spiderbot");
   maps\karma_anim::spiderbot_anims();
   level.ai_gulliver = simple_spawn_single("gulliver", ::gulliver_think);
-  a_m_fans = getEntArray("spiderbot_fan", "targetname");
+  a_m_fans = getentarray("spiderbot_fan", "targetname");
   array_thread(a_m_fans, ::spin_fan);
   level thread fan_death();
   level thread setup_proximity_scan_and_alarm(getent("trig_bug_zapper", "targetname"), "zapped", "spiderbot_end", 75);
@@ -104,7 +105,7 @@ vents() {
   level.player thread spiderbot_dialog();
   level.ai_gulliver = simple_spawn_single("gulliver", ::gulliver_think);
   level.vh_spiderbot thread objective_breadcrumb(level.obj_enter_crc, "breadcrumb_spiderbot");
-  a_m_fans = getEntArray("spiderbot_fan", "targetname");
+  a_m_fans = getentarray("spiderbot_fan", "targetname");
   array_thread(a_m_fans, ::spin_fan);
   wait 0.1;
   screen_fade_in(0.5);
@@ -170,18 +171,17 @@ gulliver() {
 
   run_scene_and_delete("it_mgr_vent_open");
   clientnotify("drpdn");
-  level.player playSound("evt_spiderbot_jumpdown");
-  level.player playSound("evt_spiderbot_land");
+  level.player playsound("evt_spiderbot_jumpdown");
+  level.player playsound("evt_spiderbot_land");
   level thread maps\_audio::switch_music_wait("KARMA_1_GULLIVER", 2);
   getent("it_mgr_tablet", "targetname") delete();
   level.ai_gulliver thread gulliver_viewmodel_render_flag_set();
   run_scene_and_delete("it_mgr_surprise", 0.5);
 
-  if(flag("it_mgr_disabled")) {
+  if(flag("it_mgr_disabled"))
     level.ai_gulliver gulliver_eye_scan();
-  } else {
-    spiderbot_lost(0, &"KARMA_TAZE_FAIL_HINT");
-  }
+  else
+    spiderbot_lost(0, & "KARMA_TAZE_FAIL_HINT");
 
   level.vh_spiderbot ent_flag_clear("playing_scripted_anim");
   flag_wait("spiderbot_end");
@@ -199,9 +199,8 @@ gulliver_viewmodel_render_flag_set() {
 gulliver_walkin() {
   run_scene_and_delete("it_mgr_walkin2");
 
-  if(!flag("spiderbot_entered_crc")) {
+  if(!flag("spiderbot_entered_crc"))
     level thread run_scene_and_delete("it_mgr_idle2");
-  }
 }
 
 spiderbot_light_trigger_think() {
@@ -238,9 +237,8 @@ display_hints() {
   screen_message(&"KARMA_HINT_SPIDERBOT_JUMP", 3);
   flag_wait("near_power_box");
 
-  if(!flag("bug_zapper_disabled")) {
+  if(!flag("bug_zapper_disabled"))
     screen_message(&"KARMA_HINT_SPIDERBOT_TAZER", 3);
-  }
 }
 
 spin_fan() {
@@ -261,7 +259,7 @@ spin_fan() {
 fan_death() {
   level endon("spiderbot_end");
   trigger_wait("trig_fan_death");
-  spiderbot_lost(0, &"KARMA_FAN_DEATH_HINT");
+  spiderbot_lost(0, & "KARMA_FAN_DEATH_HINT");
 }
 
 suspicious_guys_leaving_pip() {
@@ -278,7 +276,7 @@ zapper_power_box() {
   exploder(445);
   t_zapper_field = getent("trig_bug_zapper", "targetname");
   t_zapper_field thread zap_player();
-  t_zapper_field playLoopSound("amb_spiderbot_trap_looper");
+  t_zapper_field playloopsound("amb_spiderbot_trap_looper");
   audio_player_origin = t_zapper_field.origin;
   trigger_wait("trig_zapper_power");
   level notify("kill_zapper_proximity_warning");
@@ -295,7 +293,7 @@ zapper_power_box() {
 zap_player() {
   level endon("bug_zapper_disabled");
   self waittill("trigger");
-  spiderbot_lost(0, &"KARMA_ELECTRICAL_FIELD_DEATH_HINT", 1, "KARMA_ZAPPER_PROXIMITY_WARNING");
+  spiderbot_lost(0, & "KARMA_ELECTRICAL_FIELD_DEATH_HINT", 1, "KARMA_ZAPPER_PROXIMITY_WARNING");
 }
 
 gulliver_think() {
@@ -329,9 +327,8 @@ gulliver_wait_for_tazer() {
   wait 0.225;
   thread screen_message(&"KARMA_HINT_SPIDERBOT_TAZER", 2);
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackbuttonpressed())
     wait 0.05;
-  }
 
   flag_set("it_mgr_disabled");
   set_objective(level.obj_enter_crc, undefined, "reactivate");
@@ -353,7 +350,7 @@ gulliver_eye_scan() {
 
 play_eye_scan_fx(vh_spiderbot) {
   flag_set("scanning_eye");
-  vh_spiderbot playSound("evt_spiderbot_retinal_scan");
+  vh_spiderbot playsound("evt_spiderbot_retinal_scan");
   luinotifyevent(&"hud_spiderbot_eyescan");
   vh_spiderbot play_fx("spiderbot_scanner", vh_spiderbot gettagorigin("tag_flash"), vh_spiderbot gettagangles("tag_flash"), "scan_done");
   level thread play_bink_on_hud("eye_v5");
@@ -371,13 +368,11 @@ spiderbot_squashed(ai_callback) {
 }
 
 spiderbot_lost(b_continue_mission, str_fail_string, do_remove_string, str_lui_string) {
-  if(!isDefined(b_continue_mission)) {
+  if(!isDefined(b_continue_mission))
     b_continue_mission = 0;
-  }
 
-  if(!isDefined(do_remove_string)) {
+  if(!isDefined(do_remove_string))
     do_remove_string = 0;
-  }
 
   if(do_remove_string) {
     level notify("kill_zapper_proximity_warning");
@@ -407,17 +402,14 @@ spiderbot_cleanup() {
 setup_proximity_scan_and_alarm(danger, danger_ender, level_ender, dist) {
   danger endon("death");
 
-  if(isDefined(danger_ender)) {
+  if(isDefined(danger_ender))
     danger endon(danger_ender);
-  }
 
-  if(isDefined(level_ender)) {
+  if(isDefined(level_ender))
     level endon(level_ender);
-  }
 
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 50;
-  }
 
   spiderbot = level.vh_spiderbot;
   danger._audio_alarm_active = 0;
@@ -434,7 +426,7 @@ setup_proximity_scan_and_alarm(danger, danger_ender, level_ender, dist) {
     } else if(danger._audio_alarm_active) {
       danger._audio_alarm_active = 0;
       spiderbot notify("audio_stop_alarms");
-      spiderbot playSound("veh_spiderbot_safe");
+      spiderbot playsound("veh_spiderbot_safe");
     }
 
     wait 0.1;
@@ -446,19 +438,17 @@ play_scan_and_alarm(danger, danger_ender, level_ender) {
   self endon("death");
   danger endon("death");
 
-  if(isDefined(danger_ender)) {
+  if(isDefined(danger_ender))
     danger endon(danger_ender);
-  }
 
-  if(isDefined(level_ender)) {
+  if(isDefined(level_ender))
     level endon(level_ender);
-  }
 
-  self playSound("veh_spiderbot_scan");
+  self playsound("veh_spiderbot_scan");
   wait 0.9;
 
   while(true) {
-    self playSound("veh_spiderbot_alarm");
+    self playsound("veh_spiderbot_alarm");
     wait 0.4;
   }
 }
@@ -468,13 +458,12 @@ stop_alarms_on_ender(danger, danger_ender, level_ender) {
   self endon("death");
   danger endon("death");
 
-  if(isDefined(level_ender)) {
+  if(isDefined(level_ender))
     level endon(level_ender);
-  }
 
   if(isDefined(danger_ender)) {
     danger waittill(danger_ender);
-    self playSound("veh_spiderbot_safe");
+    self playsound("veh_spiderbot_safe");
   }
 }
 
@@ -491,15 +480,15 @@ spiderbot_scanning_audio() {
   }
 
   self thread playsound_on_zapped(spiderbot);
-  spiderbot playSound("veh_spiderbot_scan");
+  spiderbot playsound("veh_spiderbot_scan");
   wait 0.9;
-  spiderbot playSound("veh_spiderbot_scan_human");
+  spiderbot playsound("veh_spiderbot_scan_human");
 }
 
 playsound_on_zapped(spiderbot) {
   self waittill("tazed");
   wait 0.5;
-  spiderbot playSound("veh_spiderbot_safe");
+  spiderbot playsound("veh_spiderbot_safe");
 }
 
 spiderbot_dialog() {

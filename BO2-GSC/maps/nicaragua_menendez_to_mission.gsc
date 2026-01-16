@@ -54,15 +54,13 @@ balcony_throw() {
   scene_wait("balcony_throw");
   ai_pdf = get_ais_from_scene("balcony_throw", "balcony_throw_pdf");
 
-  if(isalive(ai_pdf)) {
+  if(isalive(ai_pdf))
     ai_pdf setgoalpos(ai_pdf.origin);
-  }
 }
 
 balcony_throw_destruction(s_haycart_dest) {
-  while(isDefined(self)) {
+  while(isDefined(self))
     wait 0.05;
-  }
 
   radiusdamage(s_haycart_dest.origin, 32, 1, 1);
 }
@@ -72,7 +70,8 @@ haycart_anim() {
   run_scene("hay_cart_scene");
 }
 
-init_flags() {}
+init_flags() {
+}
 
 init_spawn_functions() {
   add_spawn_function_veh("cartel_courtyard_truck", ::courtyard_truck_spawn_func);
@@ -108,9 +107,8 @@ nicaragua_to_mission_vo() {
   a_cartels = getaiarray("allies");
   ai_cartel = get_closest_living(level.player.origin, a_cartels);
 
-  if(isalive(ai_cartel)) {
+  if(isalive(ai_cartel))
     ai_cartel say_dialog("crt0_menendez_are_you_0");
-  }
 
   wait 1;
   rage_mode_important_vo("mene_josefina_i_have_0");
@@ -118,9 +116,8 @@ nicaragua_to_mission_vo() {
   a_cartels = getaiarray("allies");
   ai_cartel = get_closest_living(level.player.origin, a_cartels);
 
-  if(isalive(ai_cartel)) {
+  if(isalive(ai_cartel))
     ai_cartel say_dialog("crt0_you_heard_him_push_0");
-  }
 }
 
 stables_exit_anim_setup() {
@@ -133,12 +130,12 @@ stables_exit_anim_setup() {
 
   trigger_wait("stables_exit_trigger");
 
-  foreach(ai_cartel in a_cartels) {
-    ai_cartel stop_magic_bullet_shield();
-  }
+  foreach(ai_cartel in a_cartels)
+  ai_cartel stop_magic_bullet_shield();
 }
 
-stables_exit_anim() {}
+stables_exit_anim() {
+}
 
 func_spawn_stables_exit_door_blocker() {
   self.deathfunction = ::stables_exit_delete_clip;

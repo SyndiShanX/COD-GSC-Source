@@ -133,7 +133,7 @@ knock_on_door() {
   pneumatic_tube = getEnt("trig_deliver", "targetname");
   pneumatic_tube playLoopSound("zmb_whooooosh_loop", 2);
   level.egg_sound_ent = getEnt("ent_loop_door_sounds", "targetname");
-  knock_trig playSound("zmb_haxorz_suxorz");
+  knock_trig PlaySound("zmb_haxorz_suxorz");
   level gargoyle_speaks(knock_trig);
   while(1) {
     knock_trig waittill("damage", i_amt, e_inflictor, vec_direction, vec_point, mod_type);
@@ -299,7 +299,7 @@ gargoyle_speaks(knock_trig) {
       if(chr >= 3) {
         chr = 0;
       }
-      knock_trig playSound("vox_chr_" + chr + "_egg_response_0", "sounddone_introvox");
+      knock_trig PlaySound("vox_chr_" + chr + "_egg_response_0", "sounddone_introvox");
       knock_trig waittill("sounddone_introvox");
       wait(1.0);
       trig.spoken_word++;
@@ -362,7 +362,7 @@ press_the_button(i_direction) {
     self waittill("trigger");
     if(i_direction == 0) {
       wheel RotateRoll(60, 0.2, 0, 0);
-      wheel playSound("zmb_galactic_rose");
+      wheel PlaySound("zmb_galactic_rose");
       wheel waittill("rotatedone");
       wheel.spot = wheel.spot - 1;
       if(wheel.spot < 0) {
@@ -370,7 +370,7 @@ press_the_button(i_direction) {
       }
     } else {
       wheel RotateRoll(-60, 0.2, 0, 0);
-      wheel playSound("zmb_galactic_rose");
+      wheel PlaySound("zmb_galactic_rose");
       wheel waittill("rotatedone");
       wheel.spot = wheel.spot + 1;
       if(wheel.spot > 5) {
@@ -391,12 +391,12 @@ egg_drop_soup() {
     if(lever.spot == 4) {
       lever RotateRoll(-100, 0.2);
       lever.spot = 0;
-      lever playSound("zmb_transatlantic_rose");
+      lever PlaySound("zmb_transatlantic_rose");
       lever waittill("rotatedone");
     } else {
       lever RotateRoll(25, 0.2);
       lever.spot = lever.spot + 1;
-      lever playSound("zmb_transatlantic_rose");
+      lever PlaySound("zmb_transatlantic_rose");
       lever waittill("rotatedone");
     }
   }
@@ -427,8 +427,8 @@ coast_egg_fuse_box_think() {
           fuse_attached = spawn("script_model", spawn_spot);
           fuse_attached.angles = fuse_box GetTagAngles("tag_fuse");
           fuse_attached setModel("p_zom_fuse");
-          fuse_attached playSound("zmb_winepull");
-          level.egg_sound_ent playSound("zmb_craziness_supreme");
+          fuse_attached PlaySound("zmb_winepull");
+          level.egg_sound_ent PlaySound("zmb_craziness_supreme");
           exploder(780);
         }
       }
@@ -489,7 +489,7 @@ coast_egg_fuse_think() {
     self.starter waittill("trigger", who);
     if(isDefined(who) && is_player_valid(who)) {
       who._fuse_acquired = 1;
-      who playSound("zmb_grabit_wontyou");
+      who PlaySound("zmb_grabit_wontyou");
       who maps\_zombiemode_audio::create_and_play_dialog("eggs", "coast_response", undefined, 1);
       who thread coast_eggs_hud("zom_hud_icon_fuse", "ffd");
       who thread coast_egg_clear_fuse_on_death();
@@ -554,7 +554,7 @@ coast_egg_power_source_react(str_flag) {
     field.angles = rtg.angles;
     field setModel("tag_origin");
     field playLoopSound("zmb_wizzybizzy_loop", 1);
-    playFXOnTag(level._effect["rtg_field"], field, "tag_origin");
+    PlayFXOnTag(level._effect["rtg_field"], field, "tag_origin");
   }
   self._source_damaged = false;
   while(!self._source_damaged) {
@@ -563,7 +563,7 @@ coast_egg_power_source_react(str_flag) {
       flag_set(str_flag);
       self._source_damaged = true;
       field stopLoopSound(.1);
-      field playSound("zmb_wizzybizzy_explo");
+      field PlaySound("zmb_wizzybizzy_explo");
     }
   }
   if(isDefined(field)) {
@@ -648,7 +648,7 @@ coast_egg_bottle_think() {
   player_caught = e_bottle coast_egg_bottle_caught(e_catch_trig);
   level notify("stop_egg_debug");
   if(isDefined(player_caught) && is_player_valid(player_caught)) {
-    player_caught playSound("zmb_worf_speed");
+    player_caught PlaySound("zmb_worf_speed");
     player_caught maps\_zombiemode_audio::create_and_play_dialog("eggs", "coast_response", undefined, 7);
     player_caught._bottle_acquired = 1;
     player_caught thread coast_egg_clear_bottle_on_death();
@@ -662,7 +662,7 @@ coast_egg_bottle_think() {
     if(isDefined(e_inflictor)) {
       e_inflictor maps\_zombiemode_audio::create_and_play_dialog("eggs", "coast_response", undefined, 6);
     }
-    e_bottle playSound("zmb_worf_speed_fail");
+    e_bottle PlaySound("zmb_worf_speed_fail");
     e_catch_trig Unlink();
     e_catch_trig Delete();
     e_bottle hide();
@@ -717,7 +717,7 @@ coast_egg_bottle_delivered() {
         device = spawn("script_model", spawn_point);
         device.angles = delivery_tube GetTagAngles("tag_tube");
         device setModel("p_zom_vodka_bottle");
-        device playSound("zmb_whooooosh");
+        device PlaySound("zmb_whooooosh");
         device MoveZ(40, 1.0);
         device waittill("movedone");
         device Delete();
@@ -759,11 +759,11 @@ coast_egg_art_critic_message() {
     self waittill("trigger", dj);
     if(is_player_valid(dj)) {
       if(!flag("ke")) {
-        self playSound("zmb_radio_morse_static");
+        self PlaySound("zmb_radio_morse_static");
         wait(0.1);
       }
       if(flag("ke")) {
-        self playSound(self.script_string);
+        self PlaySound(self.script_string);
         if(!isDefined(level._reach)) {
           level._reach = [];
         }
@@ -823,7 +823,7 @@ metal_horse() {
   horse.angles = horse_struct.angles;
   horse setModel("p_zom_minisub");
   horse NotSolid();
-  horse playSound("zmb_forward_march");
+  horse PlaySound("zmb_forward_march");
   horse MoveZ(325, 5.0);
   horse waittill("movedone");
   flag_set("sr");
@@ -831,7 +831,7 @@ metal_horse() {
     while(!flag("bp")) {
       for(i = 0; i < level.mermaid.size; i++) {
         sound = "zmb_sub_tone_" + level.mermaid[i];
-        horse playSound(sound);
+        horse PlaySound(sound);
         wait(2.0);
       }
       song = coast_egg_fuse_lost("can_not_sing", "bp");
@@ -843,7 +843,7 @@ metal_horse() {
         flag_clear("sr");
         level waittill("between_round_over");
         wait(5.0);
-        horse playSound("zmb_forward_march");
+        horse PlaySound("zmb_forward_march");
         horse MoveZ(325, 10.0);
         horse waittill("movedone");
         flag_set("sr");
@@ -852,7 +852,7 @@ metal_horse() {
   } else {
     for(i = 0; i < level.mermaid.size; i++) {
       sound = "zmb_sub_tone_" + level.mermaid[i];
-      horse playSound(sound);
+      horse PlaySound(sound);
       wait(2.0);
     }
     flag_set("bp");
@@ -882,7 +882,7 @@ coast_egg_musical_chairs_beach_beacon_used() {
     if(is_player_valid(who)) {
       if(flag("power_on")) {
         sound = "zmb_sub_tone_" + self.script_int;
-        self playSound(sound);
+        self PlaySound(sound);
       }
       if(flag("sr")) {
         if(!isDefined(level._serenade)) {
@@ -1053,7 +1053,7 @@ coast_egg_sacrifice_spot_start() {
   if(!isDefined(level._humangun_escape_override)) {
     return;
   }
-  trig_reached_light playSound("zmb_varoooooom");
+  trig_reached_light PlaySound("zmb_varoooooom");
   trig_reached_light playLoopSound("zmb_varoooooom_loop", 3);
   while(!flag("re")) {
     while(!flag("sa")) {
@@ -1095,8 +1095,8 @@ coast_egg_sacrifice_spot_start() {
       light_mover notify("completed");
       fx_spot = spawn("script_model", light_mover.origin + (0, 0, -60));
       fx_spot setModel("tag_origin");
-      fx_spot playSound("zmb_northern_lights");
-      playFXOnTag(level._effect["fx_zmb_coast_sacrifice_flash"], fx_spot, "tag_origin");
+      fx_spot PlaySound("zmb_northern_lights");
+      PlayFXOnTag(level._effect["fx_zmb_coast_sacrifice_flash"], fx_spot, "tag_origin");
       fx_spot thread rotate_while_moving();
     }
     if(isDefined(who)) {
@@ -1129,7 +1129,7 @@ coast_egg_sacrifice_spot_start() {
             light_mover notify("completed");
             fx_spot Delete();
             reward stopLoopSound(.1);
-            reward playSound("zmb_tingling_sensation");
+            reward PlaySound("zmb_tingling_sensation");
             grabber thread coast_eggs_hud("zom_hud_icon_vril", "s_s");
             reward Unlink();
             reward Delete();
@@ -1166,7 +1166,7 @@ device_return_from_death(vec_spot) {
       if(is_player_valid(who)) {
         device notify("completed");
         device stopLoopSound(.1);
-        device playSound("zmb_tingling_sensation");
+        device PlaySound("zmb_tingling_sensation");
         who thread coast_eggs_hud("zom_hud_icon_vril", "s_s");
         device Delete();
         who._has_device = true;
@@ -1249,7 +1249,7 @@ coast_egg_device_delivered() {
         device = spawn("script_model", spawn_point);
         device.angles = delivery_tube GetTagAngles("tag_tube");
         device setModel("p_zom_vril_device");
-        device playSound("zmb_whooooosh");
+        device PlaySound("zmb_whooooosh");
         device MoveZ(40, 1.0);
         device waittill("movedone");
         device Delete();
@@ -1276,8 +1276,8 @@ capricorn() {
   while(!fixed) {
     trig_hit waittill("damage", i_amount, e_inflictor, v_direction, v_point, mod_type);
     if(is_player_valid(e_inflictor) && mod_type == level.trials[2]) {
-      fuse_box playSound("zmb_wizzybizzy_explo");
-      level.egg_sound_ent playSound("zmb_craziness_supreme");
+      fuse_box PlaySound("zmb_wizzybizzy_explo");
+      level.egg_sound_ent PlaySound("zmb_craziness_supreme");
       level notify("stop_spark");
       level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 15, 6, undefined, undefined);
       fixed = true;
@@ -1293,7 +1293,7 @@ coast_egg_broken_spark(fuse_box) {
   level endon("stop_spark");
   while(isDefined(self)) {
     exploder(780);
-    fuse_box playSound("zmb_jumping_jacks");
+    fuse_box PlaySound("zmb_jumping_jacks");
     wait(RandomFloatRange(0.5, 1.2));
   }
 }

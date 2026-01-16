@@ -32,9 +32,9 @@ precacheLevelStuff() {
   precachestring(&"AC130_HUD_WEAPON_40MM");
   // 25 mm
   precachestring(&"AC130_HUD_WEAPON_25MM");
-  // && 1 AGL
+  // &&1 AGL
   precachestring(&"AC130_HUD_AGL");
-  // Friendlies: && 1
+  // Friendlies: &&1
   precachestring(&"AC130_DEBUG_FRIENDLY_COUNT");
   // Too many friendlies have been KIA. Mission failed.
   precachestring(&"AC130_FRIENDLIES_DEAD");
@@ -88,7 +88,7 @@ laser_targeting_device(player) {
   player notifyOnPlayerCommand("use_laser", "+actionslot 4");
   player notifyOnPlayerCommand("fired_laser", "+attack");
 
-  for(;;) {
+  for (;;) {
     player waittill("use_laser");
 
     player ent_flag_set("player_used_laser");
@@ -117,9 +117,9 @@ laser_targeting_device()
 	self.lastUsedWeapon = undefined;
 	self.laserForceOn = false;
 
-	for( ;; )
+	for ( ;; )
 	{
-		while( self getcurrentweapon() != "laser_targeting_device" )
+		while ( self getcurrentweapon() != "laser_targeting_device" )
 		{
 			self.lastUsedWeapon = self GetCurrentWeapon();
 			wait 0.05;
@@ -130,7 +130,7 @@ laser_targeting_device()
 			self laserForceOff();
 			self.laserForceOn = false;
 
-			if( isDefined( self.fake_laser ) )
+			if( isdefined( self.fake_laser ) )
 			{
 				self.fake_laser laserForceOff();
 				self.fake_laser delete();
@@ -147,31 +147,29 @@ laser_targeting_device()
 			{
 				self.fake_laser = spawn( "script_model", self getEye() );
 				self.fake_laser.angles = self getplayerangles();
-				self.fake_laser setModel( "tag_laser" );
+				self.fake_laser setmodel( "tag_laser" );
 				self thread update_laser();
 				//self.fake_laser linkto( self );
 				self.fake_laser laserForceOn();
 				self.fake_laser LaserHideFromClient( level.ground_player );
 				
 				// turn off hint when laser used, if there is a hint
-				if( self ent_flag_exist( "player_used_laser" ) ) {
+				if( self ent_flag_exist( "player_used_laser" ) )
 					self ent_flag_set( "player_used_laser" );
-				}
 			}
 		}
 
 		self giveBackWeapon();
 
-		while( self getcurrentweapon() == "laser_targeting_device" ) {
+		while ( self getcurrentweapon() == "laser_targeting_device" )
 			wait 0.05;
-		}
 	}
 }
 */
 
 update_laser() {
   self endon("laser_off");
-  while(1) {
+  while (1) {
     self.fake_laser.origin = self getEye();
     self.fake_laser.angles = self getplayerangles();
     wait 0.05;
@@ -179,12 +177,11 @@ update_laser() {
 }
 
 giveBackWeapon() {
-  if((isDefined(self.lastUsedWeapon)) && (self HasWeapon(self.lastUsedWeapon))) {
+  if((isdefined(self.lastUsedWeapon)) && (self HasWeapon(self.lastUsedWeapon))) {
     self switchToWeapon(self.lastUsedWeapon);
   } else {
     weaponList = self GetWeaponsListPrimaries();
-    if(isDefined(weaponList[0])) {
+    if(isdefined(weaponList[0]))
       self switchToWeapon(weaponList[0]);
-    }
   }
 }

@@ -41,11 +41,11 @@ function init() {
   level.lander_letters["u"] = getent("letter_u", "targetname");
   level.lander_letters["y"] = getent("letter_y", "targetname");
   keys = getarraykeys(level.lander_letters);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     level.lander_letters[keys[i]] ghost();
   }
   monitor = getent("casimir_monitor", "targetname");
-  monitor setModel("p7_zm_asc_monitor_screen_off");
+  monitor setmodel("p7_zm_asc_monitor_screen_off");
   teleport_target_event();
   reroute_power_event();
   sync_switch_event();
@@ -54,9 +54,9 @@ function init() {
   weapon_combo_event();
   level notify("help_found");
   monitor = getent("casimir_monitor", "targetname");
-  monitor setModel("p7_zm_asc_monitor_screen_off");
+  monitor setmodel("p7_zm_asc_monitor_screen_off");
   monitor stoploopsound(0.1);
-  monitor playSound("zmb_ee_monitor_off");
+  monitor playsound("zmb_ee_monitor_off");
 }
 
 function play_easter_egg_audio(alias, sound_ent, text) {
@@ -70,11 +70,11 @@ function play_easter_egg_audio(alias, sound_ent, text) {
 
 function activate_casimir_light(num) {
   spot = struct::get("casimir_light_" + num, "targetname");
-  if(isDefined(spot)) {
+  if(isdefined(spot)) {
     light = spawn("script_model", spot.origin);
-    light setModel("tag_origin");
+    light setmodel("tag_origin");
     light.angles = spot.angles;
-    fx = playFXOnTag(level._effect["fx_light_ee_progress"], light, "tag_origin");
+    fx = playfxontag(level._effect["fx_light_ee_progress"], light, "tag_origin");
     level.casimir_lights[level.casimir_lights.size] = light;
   }
 }
@@ -84,17 +84,17 @@ function teleport_target_event() {
   teleport_target_spark = struct::get("teleport_target_spark", "targetname");
   var_1dc1d30a = teleport_target_spark.angles;
   level.teleport_target = spawn("script_model", teleport_target_start.origin);
-  level.teleport_target setModel("p7_zm_asc_transformer_electrical");
+  level.teleport_target setmodel("p7_zm_asc_transformer_electrical");
   level.teleport_target.angles = teleport_target_start.angles;
   teleport_target_spark = spawn("script_model", teleport_target_spark.origin);
-  teleport_target_spark setModel("tag_origin");
+  teleport_target_spark setmodel("tag_origin");
   teleport_target_spark.angles = var_1dc1d30a;
-  playFXOnTag(level._effect["generator_ee_sparks"], teleport_target_spark, "tag_origin");
+  playfxontag(level._effect["generator_ee_sparks"], teleport_target_spark, "tag_origin");
   level.teleport_target_trigger = spawn("trigger_radius", teleport_target_start.origin + (vectorscale((0, 0, -1), 70)), 0, 125, 100);
-  if(!isDefined(level.var_74eed1d3) || !level.var_74eed1d3) {
+  if(!isdefined(level.var_74eed1d3) || !level.var_74eed1d3) {
     level.teleport_target thread zm_cosmodrome::function_620401c0(level.teleport_target.origin, "", "", 2);
   }
-  level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
+  level.black_hole_bomb_loc_check_func = & bhb_teleport_loc_check;
   level waittill("hash_2a49912");
   teleport_target_spark delete();
   level flag::wait_till("target_teleported");
@@ -103,7 +103,7 @@ function teleport_target_event() {
 }
 
 function bhb_teleport_loc_check(grenade, model, info) {
-  if(isDefined(level.teleport_target_trigger) && grenade istouching(level.teleport_target_trigger)) {
+  if(isdefined(level.teleport_target_trigger) && grenade istouching(level.teleport_target_trigger)) {
     model clientfield::set("toggle_black_hole_deployed", 1);
     level thread teleport_target(grenade, model);
     return true;
@@ -127,8 +127,8 @@ function teleport_target(grenade, model) {
   level.teleport_target moveto(teleport_target_end.origin, 0.05);
   wait(0.5);
   level.teleport_target show();
-  playFXOnTag(level._effect["black_hole_bomb_event_horizon"], level.teleport_target, "tag_origin");
-  level.teleport_target playSound("zmb_gersh_teleporter_go");
+  playfxontag(level._effect["black_hole_bomb_event_horizon"], level.teleport_target, "tag_origin");
+  level.teleport_target playsound("zmb_gersh_teleporter_go");
   wait(2);
   model delete();
   level flag::set("target_teleported");
@@ -137,32 +137,32 @@ function teleport_target(grenade, model) {
 function reroute_power_event() {
   monitor = getent("casimir_monitor", "targetname");
   location = struct::get("casimir_monitor_struct", "targetname");
-  monitor playSound("zmb_ee_monitor_on");
-  monitor playLoopSound("zmb_ee_monitor_whitenoise", 1);
-  monitor setModel("p7_zm_asc_monitor_screen_on");
+  monitor playsound("zmb_ee_monitor_on");
+  monitor playloopsound("zmb_ee_monitor_whitenoise", 1);
+  monitor setmodel("p7_zm_asc_monitor_screen_on");
   trig = spawn("trigger_radius", location.origin, 0, 32, 60);
-  if(!isDefined(level.var_4058a336) || !level.var_4058a336) {
+  if(!isdefined(level.var_4058a336) || !level.var_4058a336) {
     trig thread zm_cosmodrome::function_620401c0(monitor.origin, "", "");
   }
   trig wait_for_use(monitor);
   trig delete();
   level flag::set("rerouted_power");
-  monitor setModel("p7_zm_asc_monitor_screen_logo");
-  monitor playLoopSound("zmb_ee_monitor_active", 1);
+  monitor setmodel("p7_zm_asc_monitor_screen_logo");
+  monitor playloopsound("zmb_ee_monitor_active", 1);
   level thread play_egg_vox("vox_ann_egg2_success", "vox_gersh_egg2", 2);
   level thread activate_casimir_light(1);
 }
 
 function wait_for_use(monitor) {
-  if(isDefined(level.var_4058a336) && level.var_4058a336) {
+  if(isdefined(level.var_4058a336) && level.var_4058a336) {
     return;
   }
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
-    while(isplayer(who) && who istouching(self)) {
+    while (isplayer(who) && who istouching(self)) {
       if(who usebuttonpressed()) {
         level flag::set("rerouted_power");
-        monitor playSound("zmb_ee_monitor_button");
+        monitor playsound("zmb_ee_monitor_button");
         return;
       }
       wait(0.05);
@@ -178,12 +178,12 @@ function sync_switch_event() {
 }
 
 function function_27c6e567(switches) {
-  if(isDefined(level.var_dc7eef87) && level.var_dc7eef87) {
+  if(isdefined(level.var_dc7eef87) && level.var_dc7eef87) {
     return;
   }
-  while(!level flag::get("switches_synced")) {
+  while (!level flag::get("switches_synced")) {
     level flag::wait_till("monkey_round");
-    array::thread_all(switches, &reveal_switch);
+    array::thread_all(switches, & reveal_switch);
     self thread switch_watcher();
     level util::waittill_either("between_round_over", "switches_synced");
   }
@@ -191,20 +191,20 @@ function function_27c6e567(switches) {
 
 function reveal_switch() {
   button = spawn("script_model", self.origin);
-  button setModel("p7_zm_asc_switch_electric_05");
+  button setmodel("p7_zm_asc_switch_electric_05");
   button.angles = self.angles + vectorscale((0, 1, 0), 90);
-  offset = anglesToForward(self.angles) * 8;
+  offset = anglestoforward(self.angles) * 8;
   time = 1;
   button moveto(button.origin + offset, 1);
   wait(1);
   if(level flag::get("monkey_round")) {
     trig = spawn("trigger_radius", button.origin, 0, 32, 72);
-    if(!isDefined(level.var_dc7eef87) || !level.var_dc7eef87) {
+    if(!isdefined(level.var_dc7eef87) || !level.var_dc7eef87) {
       trig thread zm_cosmodrome::function_620401c0(button.origin, "", "");
     }
     trig thread wait_for_sync_use(self, button);
     level util::waittill_either("between_round_over", "switches_synced");
-    if(!isDefined(level.var_dc7eef87) || !level.var_dc7eef87) {
+    if(!isdefined(level.var_dc7eef87) || !level.var_dc7eef87) {
       trig zm_cosmodrome::function_bb831d("");
     }
     trig delete();
@@ -218,15 +218,15 @@ function wait_for_sync_use(ss, button) {
   level endon("between_round_over");
   level endon("switches_synced");
   ss.pressed = 0;
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
-    while(isplayer(who) && who istouching(self)) {
+    while (isplayer(who) && who istouching(self)) {
       if(who usebuttonpressed()) {
         level notify("sync_button_pressed");
-        button playSound("zmb_ee_syncbutton_button");
+        button playsound("zmb_ee_syncbutton_button");
         ss.pressed = 1;
         iprintlnbold("");
-        while(who usebuttonpressed()) {
+        while (who usebuttonpressed()) {
           wait(0.05);
         }
       }
@@ -239,23 +239,23 @@ function switch_watcher() {
   level endon("between_round_over");
   pressed = 0;
   switches = struct::get_array("sync_switch_start", "targetname");
-  while(true) {
+  while (true) {
     level waittill("sync_button_pressed");
     timeout = gettime() + 500;
-    if(isDefined(level.var_ee92e6f7) && level.var_ee92e6f7) {
+    if(isdefined(level.var_ee92e6f7) && level.var_ee92e6f7) {
       timeout = timeout + 100000;
     }
-    while(gettime() < timeout) {
+    while (gettime() < timeout) {
       pressed = 0;
-      for(i = 0; i < switches.size; i++) {
-        if(isDefined(switches[i].pressed) && switches[i].pressed) {
+      for (i = 0; i < switches.size; i++) {
+        if(isdefined(switches[i].pressed) && switches[i].pressed) {
           pressed++;
         }
       }
       if(pressed == 4) {
         level flag::set("switches_synced");
         level notify("switches_synced");
-        for(i = 0; i < switches.size; i++) {
+        for (i = 0; i < switches.size; i++) {
           playsoundatposition("zmb_ee_syncbutton_success", switches[i].origin);
         }
         return;
@@ -266,13 +266,13 @@ function switch_watcher() {
       case 1:
       case 2:
       case 3: {
-        for(i = 0; i < switches.size; i++) {
+        for (i = 0; i < switches.size; i++) {
           playsoundatposition("zmb_ee_syncbutton_deny", switches[i].origin);
         }
         break;
       }
     }
-    for(i = 0; i < switches.size; i++) {
+    for (i = 0; i < switches.size; i++) {
       switches[i].pressed = 0;
     }
   }
@@ -282,7 +282,7 @@ function pressure_plate_event() {
   area = struct::get("pressure_pad", "targetname");
   trig = spawn("trigger_radius", area.origin, 0, 300, 100);
   n_timer = 120;
-  if(isDefined(level.var_4a2af85f) && level.var_4a2af85f) {
+  if(isdefined(level.var_4a2af85f) && level.var_4a2af85f) {
     n_timer = 30;
   }
   trig area_timer(n_timer);
@@ -294,26 +294,26 @@ function pressure_plate_event() {
 function area_timer(time) {
   clock_loc = struct::get("pressure_timer", "targetname");
   clock = spawn("script_model", clock_loc.origin);
-  clock setModel("p7_zm_tra_wall_clock");
+  clock setmodel("p7_zm_tra_wall_clock");
   clock.angles = clock_loc.angles;
   var_b07ae42e = struct::get("clock_timer_hand", "targetname");
   timer_hand_angles_init = vectorscale((0, 1, 0), 90);
   timer_hand = util::spawn_model("p7_zm_kin_clock_second_hand", var_b07ae42e.origin, timer_hand_angles_init);
-  if(!isDefined(level.var_c28796c3) || !level.var_c28796c3) {
+  if(!isdefined(level.var_c28796c3) || !level.var_c28796c3) {
     self thread zm_cosmodrome::function_620401c0(self.origin, "", "");
-  } else if(isDefined(level.var_c28796c3) && level.var_c28796c3) {
+  } else if(isdefined(level.var_c28796c3) && level.var_c28796c3) {
     self thread function_1129ebfe();
   }
   step = 1;
-  while(!level flag::get("pressure_sustained")) {
+  while (!level flag::get("pressure_sustained")) {
     self waittill("trigger");
     stop_timer = 0;
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!players[i] istouching(self)) {
         wait(step);
         stop_timer = 1;
-        if(isDefined(level.var_c28796c3) && level.var_c28796c3) {
+        if(isdefined(level.var_c28796c3) && level.var_c28796c3) {
           stop_timer = 0;
         }
       }
@@ -321,22 +321,22 @@ function area_timer(time) {
     if(stop_timer) {
       continue;
     }
-    self playSound("zmb_ee_pressure_plate_down");
+    self playsound("zmb_ee_pressure_plate_down");
     time_remaining = time;
     timer_hand rotatepitch(-360, time);
-    if(isDefined(level.var_c28796c3) && level.var_c28796c3) {
+    if(isdefined(level.var_c28796c3) && level.var_c28796c3) {
       time_remaining = 0;
     }
-    while(time_remaining) {
+    while (time_remaining) {
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(!players[i] istouching(self)) {
           wait(step);
           time_remaining = time;
           stop_timer = 1;
-          self playSound("zmb_ee_pressure_plate_up");
+          self playsound("zmb_ee_pressure_plate_up");
           timer_hand rotateto(timer_hand_angles_init, 0.5);
-          timer_hand playSound("zmb_ee_pressure_deny");
+          timer_hand playsound("zmb_ee_pressure_deny");
           wait(0.5);
           break;
         }
@@ -346,26 +346,26 @@ function area_timer(time) {
       }
       wait(step);
       time_remaining = time_remaining - step;
-      timer_hand playSound("zmb_ee_pressure_timer");
+      timer_hand playsound("zmb_ee_pressure_timer");
     }
     if(time_remaining <= 0) {
       level flag::set("pressure_sustained");
       players = getplayers();
       temp_fx = undefined;
-      if(isDefined(players[0].fx)) {
+      if(isdefined(players[0].fx)) {
         temp_fx = players[0].fx;
       }
-      timer_hand playSound("zmb_perks_packa_ready");
+      timer_hand playsound("zmb_perks_packa_ready");
       players[0].fx = level.zombie_powerups["nuke"].fx;
       level thread zm_powerup_nuke::nuke_powerup(players[0], players[0].team);
       clock stoploopsound(1);
       wait(1);
-      if(isDefined(temp_fx)) {
+      if(isdefined(temp_fx)) {
         players[0].fx = temp_fx;
       } else {
         players[0].fx = undefined;
       }
-      if(!isDefined(level.var_c28796c3) || !level.var_c28796c3) {
+      if(!isdefined(level.var_c28796c3) || !level.var_c28796c3) {
         self zm_cosmodrome::function_bb831d("");
       }
       clock delete();
@@ -409,11 +409,11 @@ function lander_passkey_event() {
 
 function lander_monitor() {
   lander = getent("lander", "targetname");
-  if(isDefined(level.var_c0e05145) && level.var_c0e05145) {
+  if(isdefined(level.var_c0e05145) && level.var_c0e05145) {
     return;
   }
   lander thread function_33078896();
-  while(!level flag::get("passkey_confirmed")) {
+  while (!level flag::get("passkey_confirmed")) {
     level waittill("lander_launched");
     if(lander.called) {
       start = lander.depart_station;
@@ -421,9 +421,9 @@ function lander_monitor() {
       letter = level.lander_key[start][dest];
       model = level.lander_letters[letter];
       model show();
-      model playSound("zmb_spawn_powerup");
+      model playsound("zmb_spawn_powerup");
       model thread spin_letter();
-      model playLoopSound("zmb_spawn_powerup_loop", 0.5);
+      model playloopsound("zmb_spawn_powerup_loop", 0.5);
       trig = spawn("trigger_radius", model.origin, 0, 200, 150);
       trig function_362373ab(model);
       trig thread letter_grab(letter, model);
@@ -450,7 +450,7 @@ function function_362373ab(model) {
   if(level flag::get("")) {
     v_player_angles = getplayers()[0] getplayerangles();
     v_player_origin = getplayers()[0] getorigin();
-    var_ab7c1d7f = v_player_origin + (anglesToForward(v_player_angles) * 128);
+    var_ab7c1d7f = v_player_origin + (anglestoforward(v_player_angles) * 128);
     model.origin = level.var_40705128.origin + vectorscale((0, 0, 1), 32);
     self.origin = model.origin;
   }
@@ -465,10 +465,10 @@ function function_874d06b6() {
 }
 
 function function_33078896() {
-  if(!isDefined(level.var_c0e05145) || !level.var_c0e05145) {
+  if(!isdefined(level.var_c0e05145) || !level.var_c0e05145) {
     level endon("hash_eeefde1f");
     var_1fc8b439 = array("", "", "", "", "");
-    for(i = 0; i < var_1fc8b439.size; i++) {
+    for (i = 0; i < var_1fc8b439.size; i++) {
       level.var_40705128 = struct::get(var_1fc8b439[i], "");
       level.var_40705128 thread zm_cosmodrome::function_620401c0(level.var_40705128.origin, "", "", 3);
       self function_e07806c9(level.var_40705128);
@@ -477,7 +477,7 @@ function function_33078896() {
 }
 
 function function_e07806c9(s_station) {
-  while(self.station != s_station.targetname) {
+  while (self.station != s_station.targetname) {
     wait(0.25);
   }
   s_station notify("hash_9465652d");
@@ -487,7 +487,7 @@ function function_e07806c9(s_station) {
 function spin_letter() {
   level endon("lander_grounded");
   level endon("letter_acquired");
-  while(true) {
+  while (true) {
     self rotateyaw(90, 5);
     wait(5);
   }
@@ -530,22 +530,22 @@ function weapon_combo_event() {
   level flag::init("thundergun_hit");
   weapon_combo_spot = struct::get("weapon_combo_spot", "targetname");
   focal_point = spawn("script_model", weapon_combo_spot.origin);
-  focal_point setModel("tag_origin");
-  fx = playFXOnTag(level._effect["gersh_spark"], focal_point, "tag_origin");
+  focal_point setmodel("tag_origin");
+  fx = playfxontag(level._effect["gersh_spark"], focal_point, "tag_origin");
   level.black_hold_bomb_target_trig = spawn("trigger_radius", weapon_combo_spot.origin, 0, 50, 72);
-  level.black_hole_bomb_loc_check_func = &bhb_combo_loc_check;
+  level.black_hole_bomb_loc_check_func = & bhb_combo_loc_check;
   focal_point thread function_a0ad103c(weapon_combo_spot);
   level flag::wait_till("weapons_combined");
   level.black_hold_bomb_target_trig delete();
   level.black_hole_bomb_loc_check_func = undefined;
   focal_point delete();
-  for(i = 0; i < level.casimir_lights.size; i++) {
+  for (i = 0; i < level.casimir_lights.size; i++) {
     level.casimir_lights[i] delete();
   }
 }
 
 function function_a0ad103c(weapon_combo_spot) {
-  if(isDefined(level.var_55336afe) && level.var_55336afe) {
+  if(isdefined(level.var_55336afe) && level.var_55336afe) {
     self thread function_510c4845();
     wait(1);
     self notify("death");
@@ -561,7 +561,7 @@ function function_8172c64e() {
 }
 
 function bhb_combo_loc_check(grenade, model, info) {
-  if(isDefined(level.black_hold_bomb_target_trig) && grenade istouching(level.black_hold_bomb_target_trig)) {
+  if(isdefined(level.black_hold_bomb_target_trig) && grenade istouching(level.black_hold_bomb_target_trig)) {
     grenade function_510c4845();
   }
   return false;
@@ -578,15 +578,15 @@ function wait_for_combo(trig) {
   weapon_combo_spot = struct::get("weapon_combo_spot", "targetname");
   ray_gun_hit = 0;
   doll_hit = 0;
-  if(isDefined(level.var_55336afe) && level.var_55336afe) {
+  if(isdefined(level.var_55336afe) && level.var_55336afe) {
     ray_gun_hit = 1;
     doll_hit = 1;
   }
   players = getplayers();
-  array::thread_all(players, &thundergun_check, self, trig, weapon_combo_spot);
-  while(true) {
+  array::thread_all(players, & thundergun_check, self, trig, weapon_combo_spot);
+  while (true) {
     trig waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weapon);
-    if(isDefined(inflictor)) {
+    if(isdefined(inflictor)) {
       if(type == "MOD_PROJECTILE" && (weapon.name == "ray_gun_upgraded" || weapon.name == "raygun_mark2_upgraded")) {
         ray_gun_hit = 1;
       } else if(weapon.name == "nesting_dolls" || weapon.name == "nesting_dolls_single") {
@@ -602,13 +602,13 @@ function wait_for_combo(trig) {
 }
 
 function thundergun_check(model, trig, weapon_combo_spot) {
-  if(isDefined(level.var_55336afe) && level.var_55336afe) {
+  if(isdefined(level.var_55336afe) && level.var_55336afe) {
     util::wait_network_frame();
     self function_30d8de55(trig);
     return;
   }
   model endon("death");
-  while(true) {
+  while (true) {
     self waittill("weapon_fired");
     var_ca8d49bb = self getcurrentweapon();
     if(var_ca8d49bb.name == "thundergun_upgraded") {
@@ -642,9 +642,9 @@ function kill_trig_on_death(trig) {
 
 function soul_release(model, origin) {
   soul = spawn("script_model", origin);
-  soul setModel("tag_origin");
-  soul playLoopSound("zmb_egg_soul");
-  fx = playFXOnTag(level._effect["gersh_spark"], soul, "tag_origin");
+  soul setmodel("tag_origin");
+  soul playloopsound("zmb_egg_soul");
+  fx = playfxontag(level._effect["gersh_spark"], soul, "tag_origin");
   time = 20;
   model waittill("death");
   level thread play_egg_vox("vox_ann_egg6_success", "vox_gersh_egg6_success", 9);
@@ -659,13 +659,13 @@ function soul_release(model, origin) {
 function wait_for_gersh_vox() {
   wait(12.5);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread reward_wait();
   }
 }
 
 function reward_wait() {
-  while(!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
+  while (!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
     wait(1);
   }
   if(!self bgb::is_enabled("zm_bgb_disorderly_combat")) {
@@ -675,20 +675,20 @@ function reward_wait() {
 }
 
 function play_egg_vox(ann_alias, gersh_alias, plr_num) {
-  if(isDefined(ann_alias)) {
+  if(isdefined(ann_alias)) {
     level zm_cosmodrome_amb::play_cosmo_announcer_vox(ann_alias);
   }
-  if(isDefined(plr_num) && !isDefined(level.var_92ed253c)) {
+  if(isdefined(plr_num) && !isdefined(level.var_92ed253c)) {
     players = getplayers();
     rand = randomintrange(0, players.size);
     players[rand] playsoundwithnotify((("vox_plr_" + players[rand].characterindex) + "_level_start_") + randomintrange(0, 4), "level_start_vox_done");
     players[rand] waittill("level_start_vox_done");
     level.var_92ed253c = 1;
   }
-  if(isDefined(gersh_alias)) {
+  if(isdefined(gersh_alias)) {
     level zm_cosmodrome_amb::play_gersh_vox(gersh_alias);
   }
-  if(isDefined(plr_num)) {
+  if(isdefined(plr_num)) {
     players = getplayers();
     rand = randomintrange(0, players.size);
     players[rand] zm_audio::create_and_play_dialog("eggs", "gersh_response", plr_num);

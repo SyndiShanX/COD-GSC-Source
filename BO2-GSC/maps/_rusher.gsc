@@ -28,9 +28,8 @@ rush(endon_flag, timeout) {
   self.rusher = 1;
   self set_rusher_type();
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
     disable_cqb();
-  }
 
   self.a.neversprintforvariation = 1;
   self.noheatanims = 1;
@@ -61,26 +60,22 @@ rush(endon_flag, timeout) {
   self thread keep_rushing_player();
   self thread rusher_yelling();
 
-  if(isDefined(endon_flag) || isDefined(timeout)) {
+  if(isDefined(endon_flag) || isDefined(timeout))
     self thread rusher_go_back_to_normal(endon_flag, timeout);
-  }
 }
 
 rusher_go_back_to_normal(endon_flag, timeout, b_stop_immediately) {
-  if(!isDefined(b_stop_immediately)) {
+  if(!isDefined(b_stop_immediately))
     b_stop_immediately = 0;
-  }
 
   self endon("death");
 
   if(!b_stop_immediately) {
-    if(isDefined(timeout)) {
+    if(isDefined(timeout))
       self thread notifytimeout(timeout, 0, "stop_rushing_timeout");
-    }
 
-    if(!isDefined(endon_flag)) {
+    if(!isDefined(endon_flag))
       endon_flag = "nothing";
-    }
 
     self waittill_any(endon_flag, "stop_rushing_timeout");
   }
@@ -117,9 +112,8 @@ notifytimeout(timeout, endon_goal, notify_string) {
   self endon("death");
   self endon("stop_rushing");
 
-  if(isDefined(endon_goal) && endon_goal) {
+  if(isDefined(endon_goal) && endon_goal)
     self endon("goal");
-  }
 
   wait(timeout);
   self notify(notify_string);
@@ -134,7 +128,7 @@ rusher_yelling() {
   }
   while(true) {
     wait(randomfloatrange(1, 3));
-    self playSound("chr_npc_charge_viet");
+    self playsound("chr_npc_charge_viet");
   }
 }
 

@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_cymbal_monkey;
 
 autoexec __init__system__() {
@@ -15,7 +16,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_60a7e5b79e8064a5", 1, 1, "int", &monkey_spawns, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_60a7e5b79e8064a5", 1, 1, "int", &monkey_spawns, 0, 0);
 
   if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
@@ -36,7 +37,7 @@ monkey_spawns(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
     if(isDefined(self)) {
       playFX(localclientnum, "maps/zm_white/fx8_monkey_bomb_reveal", self.origin, v_forward, v_up);
-      self playSound(localclientnum, # "hash_21206f1b7fb27f81");
+      self playSound(localclientnum, #"hash_21206f1b7fb27f81");
     }
   }
 }

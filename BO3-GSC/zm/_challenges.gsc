@@ -12,27 +12,27 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", &__init__, undefined, undefined);
+  system::register("challenges", & __init__, undefined, undefined);
 }
 
 function __init__() {}
 
 function init() {
-  if(!isDefined(level.challengescallbacks)) {
+  if(!isdefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
   }
   waittillframeend();
   if(canprocesschallenges()) {
-    registerchallengescallback("playerKilled", &challengekills);
-    registerchallengescallback("actorKilled", &challengeactorkills);
-    registerchallengescallback("gameEnd", &challengegameend);
-    registerchallengescallback("roundEnd", &challengeroundend);
+    registerchallengescallback("playerKilled", & challengekills);
+    registerchallengescallback("actorKilled", & challengeactorkills);
+    registerchallengescallback("gameEnd", & challengegameend);
+    registerchallengescallback("roundEnd", & challengeroundend);
   }
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
   foreach(team in level.teams) {
     initteamchallenges(team);
   }
-  level.challengesoneventreceived = &eventreceived;
+  level.challengesoneventreceived = & eventreceived;
 }
 
 function challengekills(data, time) {
@@ -49,10 +49,10 @@ function challengekills(data, time) {
   wasdefusing = data.wasdefusing;
   lastweaponbeforetoss = data.lastweaponbeforetoss;
   ownerweaponatlaunch = data.ownerweaponatlaunch;
-  if(!isDefined(data.weapon)) {
+  if(!isdefined(data.weapon)) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
   weaponclass = util::getweaponclass(weapon);
@@ -68,8 +68,8 @@ function challengekills(data, time) {
     player addplayerstat("kill_with_remote_control_ai_tank", 1);
   }
   if(weapon.name == "auto_gun_turret") {
-    if(isDefined(inflictor)) {
-      if(!isDefined(inflictor.killcount)) {
+    if(isdefined(inflictor)) {
+      if(!isdefined(inflictor.killcount)) {
         inflictor.killcount = 0;
       }
       inflictor.killcount++;
@@ -92,7 +92,7 @@ function challengekills(data, time) {
   if(data.waslockingon && weapon.name == "chopper_minigun") {
     player addplayerstat("kill_enemy_locking_on_with_chopper_gunner", 1);
   }
-  if(isDefined(level.iskillstreakweapon)) {
+  if(isdefined(level.iskillstreakweapon)) {
     if([
         [level.iskillstreakweapon]
       ](weapon)) {
@@ -100,12 +100,12 @@ function challengekills(data, time) {
     }
   }
   attacker notify("killed_enemy_player", time, weapon);
-  if(isDefined(player.primaryloadoutweapon) && weapon == player.primaryloadoutweapon || (isDefined(player.primaryloadoutaltweapon) && weapon == player.primaryloadoutaltweapon)) {
+  if(isdefined(player.primaryloadoutweapon) && weapon == player.primaryloadoutweapon || (isdefined(player.primaryloadoutaltweapon) && weapon == player.primaryloadoutaltweapon)) {
     if(player isbonuscardactive(0, player.class_num)) {
       player addbonuscardstat(0, "kills", 1, player.class_num);
       player addplayerstat("kill_with_loadout_weapon_with_3_attachments", 1);
     }
-    if(isDefined(player.secondaryweaponkill) && player.secondaryweaponkill == 1) {
+    if(isdefined(player.secondaryweaponkill) && player.secondaryweaponkill == 1) {
       player.primaryweaponkill = 0;
       player.secondaryweaponkill = 0;
       if(player isbonuscardactive(2, player.class_num)) {
@@ -115,11 +115,11 @@ function challengekills(data, time) {
     } else {
       player.primaryweaponkill = 1;
     }
-  } else if(isDefined(player.secondaryloadoutweapon) && weapon == player.secondaryloadoutweapon || (isDefined(player.secondaryloadoutaltweapon) && weapon == player.secondaryloadoutaltweapon)) {
+  } else if(isdefined(player.secondaryloadoutweapon) && weapon == player.secondaryloadoutweapon || (isdefined(player.secondaryloadoutaltweapon) && weapon == player.secondaryloadoutaltweapon)) {
     if(player isbonuscardactive(1, player.class_num)) {
       player addbonuscardstat(1, "kills", 1, player.class_num);
     }
-    if(isDefined(player.primaryweaponkill) && player.primaryweaponkill == 1) {
+    if(isdefined(player.primaryweaponkill) && player.primaryweaponkill == 1) {
       player.primaryweaponkill = 0;
       player.secondaryweaponkill = 0;
       if(player isbonuscardactive(2, player.class_num)) {
@@ -134,7 +134,7 @@ function challengekills(data, time) {
     player addplayerstat("kill_with_2_perks_same_category", 1);
   }
   baseweapon = getweapon(getreffromitemindex(getbaseweaponitemindex(weapon)));
-  if(isDefined(player.weaponkills[baseweapon])) {
+  if(isdefined(player.weaponkills[baseweapon])) {
     player.weaponkills[baseweapon]++;
     if(player.weaponkills[baseweapon] == 5) {
       player addweaponstat(baseweapon, "killstreak_5", 1);
@@ -146,8 +146,8 @@ function challengekills(data, time) {
     player.weaponkills[baseweapon] = 1;
   }
   attachmentname = player getweaponoptic(weapon);
-  if(isDefined(attachmentname) && attachmentname != "") {
-    if(isDefined(player.attachmentkills[attachmentname])) {
+  if(isdefined(attachmentname) && attachmentname != "") {
+    if(isdefined(player.attachmentkills[attachmentname])) {
       player.attachmentkills[attachmentname]++;
       if(player.attachmentkills[attachmentname] == 5) {
         player addweaponstat(weapon, "killstreak_5_attachment", 1);
@@ -156,9 +156,9 @@ function challengekills(data, time) {
       player.attachmentkills[attachmentname] = 1;
     }
   }
-  assert(isDefined(player.activecounteruavs));
-  assert(isDefined(player.activeuavs));
-  assert(isDefined(player.activesatellites));
+  assert(isdefined(player.activecounteruavs));
+  assert(isdefined(player.activeuavs));
+  assert(isdefined(player.activesatellites));
   if(player.activeuavs > 0) {
     player addplayerstat("kill_while_uav_active", 1);
   }
@@ -168,14 +168,14 @@ function challengekills(data, time) {
   if(player.activesatellites > 0) {
     player addplayerstat("kill_while_satellite_active", 1);
   }
-  if(isDefined(attacker.tacticalinsertiontime) && (attacker.tacticalinsertiontime + 5000) > time) {
+  if(isdefined(attacker.tacticalinsertiontime) && (attacker.tacticalinsertiontime + 5000) > time) {
     player addplayerstat("kill_after_tac_insert", 1);
     player addweaponstat(level.weapontacticalinsertion, "CombatRecordStat", 1);
   }
-  if(isDefined(victim.tacticalinsertiontime) && (victim.tacticalinsertiontime + 5000) > time) {
+  if(isdefined(victim.tacticalinsertiontime) && (victim.tacticalinsertiontime + 5000) > time) {
     player addweaponstat(level.weapontacticalinsertion, "headshots", 1);
   }
-  if(isDefined(level.isplayertrackedfunc)) {
+  if(isdefined(level.isplayertrackedfunc)) {
     if(attacker[[level.isplayertrackedfunc]](victim, time)) {
       attacker addplayerstat("kill_enemy_revealed_by_sensor", 1);
       attacker addweaponstat(getweapon("sensor_grenade"), "CombatRecordStat", 1);
@@ -183,20 +183,20 @@ function challengekills(data, time) {
   }
   if(level.teambased) {
     activeempowner = level.empowners[player.team];
-    if(isDefined(activeempowner)) {
+    if(isdefined(activeempowner)) {
       if(activeempowner == player) {
         player addplayerstat("kill_while_emp_active", 1);
       }
     }
-  } else if(isDefined(level.empplayer)) {
+  } else if(isdefined(level.empplayer)) {
     if(level.empplayer == player) {
       player addplayerstat("kill_while_emp_active", 1);
     }
   }
-  if(isDefined(player.flakjacketclaymore[victim.clientid]) && player.flakjacketclaymore[victim.clientid] == 1) {
+  if(isdefined(player.flakjacketclaymore[victim.clientid]) && player.flakjacketclaymore[victim.clientid] == 1) {
     player addplayerstat("survive_claymore_kill_planter_flak_jacket_equipped", 1);
   }
-  if(isDefined(player.dogsactive)) {
+  if(isdefined(player.dogsactive)) {
     if(weapon.name != "dog_bite") {
       player.dogsactivekillstreak++;
       if(player.dogsactivekillstreak > 5) {
@@ -206,25 +206,25 @@ function challengekills(data, time) {
   }
   isstunned = 0;
   if(victim util::isflashbanged()) {
-    if(isDefined(victim.lastflashedby) && victim.lastflashedby == player) {
+    if(isdefined(victim.lastflashedby) && victim.lastflashedby == player) {
       player addplayerstat("kill_flashed_enemy", 1);
       player addweaponstat(getweapon("flash_grenade"), "CombatRecordStat", 1);
     }
     isstunned = 1;
   }
-  if(isDefined(victim.concussionendtime) && victim.concussionendtime > gettime()) {
-    if(isDefined(victim.lastconcussedby) && victim.lastconcussedby == player) {
+  if(isdefined(victim.concussionendtime) && victim.concussionendtime > gettime()) {
+    if(isdefined(victim.lastconcussedby) && victim.lastconcussedby == player) {
       player addplayerstat("kill_concussed_enemy", 1);
       player addweaponstat(getweapon("concussion_grenade"), "CombatRecordStat", 1);
     }
     isstunned = 1;
   }
-  if(isDefined(player.laststunnedby)) {
+  if(isdefined(player.laststunnedby)) {
     if(player.laststunnedby == victim && (player.laststunnedtime + 5000) > time) {
       player addplayerstat("kill_enemy_who_shocked_you", 1);
     }
   }
-  if(isDefined(victim.laststunnedby) && (victim.laststunnedtime + 5000) > time) {
+  if(isdefined(victim.laststunnedby) && (victim.laststunnedtime + 5000) > time) {
     isstunned = 1;
     if(victim.laststunnedby == player) {
       player addplayerstat("kill_shocked_enemy", 1);
@@ -234,7 +234,7 @@ function challengekills(data, time) {
       }
     }
   }
-  if(isDefined(player.tookweaponfrom) && isDefined(player.tookweaponfrom[weapon]) && isDefined(player.tookweaponfrom[weapon].previousowner)) {
+  if(isdefined(player.tookweaponfrom) && isdefined(player.tookweaponfrom[weapon]) && isdefined(player.tookweaponfrom[weapon].previousowner)) {
     if(level.teambased) {
       if(player.tookweaponfrom[weapon].previousowner.team != player.team) {
         player.pickedupweaponkills[weapon]++;
@@ -249,7 +249,7 @@ function challengekills(data, time) {
       player addplayerstat("killstreak_5_picked_up_weapon", 1);
     }
   }
-  if(isDefined(victim.explosiveinfo["originalOwnerKill"]) && victim.explosiveinfo["originalOwnerKill"] == 1) {
+  if(isdefined(victim.explosiveinfo["originalOwnerKill"]) && victim.explosiveinfo["originalOwnerKill"] == 1) {
     if(victim.explosiveinfo["damageExplosiveKill"] == 1) {
       player addplayerstat("kill_enemy_shoot_their_explosive", 1);
     }
@@ -266,7 +266,7 @@ function challengekills(data, time) {
     player genericbulletkill(data, victim, weapon);
   }
   if(level.teambased) {
-    if(!isDefined(player.pers["kill_every_enemy"]) && (level.playercount[victim.pers["team"]] > 3 && player.pers["killed_players"].size >= level.playercount[victim.pers["team"]])) {
+    if(!isdefined(player.pers["kill_every_enemy"]) && (level.playercount[victim.pers["team"]] > 3 && player.pers["killed_players"].size >= level.playercount[victim.pers["team"]])) {
       player addplayerstat("kill_every_enemy", 1);
       player.pers["kill_every_enemy"] = 1;
     }
@@ -297,10 +297,10 @@ function challengekills(data, time) {
       break;
     }
     case "weapon_sniper": {
-      if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+      if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
         player addplayerstat("kill_enemy_one_bullet_sniper", 1);
         player addweaponstat(weapon, "kill_enemy_one_bullet_sniper", 1);
-        if(!isDefined(player.pers["one_shot_sniper_kills"])) {
+        if(!isdefined(player.pers["one_shot_sniper_kills"])) {
           player.pers["one_shot_sniper_kills"] = 0;
         }
         player.pers["one_shot_sniper_kills"]++;
@@ -311,10 +311,10 @@ function challengekills(data, time) {
       break;
     }
     case "weapon_cqb": {
-      if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+      if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
         player addplayerstat("kill_enemy_one_bullet_shotgun", 1);
         player addweaponstat(weapon, "kill_enemy_one_bullet_shotgun", 1);
-        if(!isDefined(player.pers["one_shot_shotgun_kills"])) {
+        if(!isdefined(player.pers["one_shot_shotgun_kills"])) {
           player.pers["one_shot_shotgun_kills"] = 0;
         }
         player.pers["one_shot_shotgun_kills"]++;
@@ -344,14 +344,14 @@ function challengekills(data, time) {
       }
     }
   } else {
-    if(isDefined(ownerweaponatlaunch)) {
+    if(isdefined(ownerweaponatlaunch)) {
       if(weaponhasattachment(ownerweaponatlaunch, "stackfire")) {
         player addplayerstat("KILL_CROSSBOW_STACKFIRE", 1);
       }
     }
     if(weapon == level.weaponballisticknife) {
       player bladekill();
-      if(isDefined(player.retreivedblades) && player.retreivedblades > 0) {
+      if(isdefined(player.retreivedblades) && player.retreivedblades > 0) {
         player.retreivedblades--;
         player addweaponstat(weapon, "kill_retrieved_blade", 1);
       }
@@ -368,7 +368,7 @@ function challengekills(data, time) {
       player bladekill();
       lethalgrenadekill = 1;
       player notify("lethalgrenadekill");
-      if(isDefined(lastweaponbeforetoss)) {
+      if(isdefined(lastweaponbeforetoss)) {
         if(lastweaponbeforetoss.isriotshield) {
           player addweaponstat(lastweaponbeforetoss, "hatchet_kill_with_shield_equiped", 1);
           player addplayerstat("hatchet_kill_with_shield_equiped", 1);
@@ -393,7 +393,7 @@ function challengekills(data, time) {
     }
     case "destructible_car": {
       player addplayerstat("kill_enemy_withcar", 1);
-      if(isDefined(inflictor.destroyingweapon)) {
+      if(isdefined(inflictor.destroyingweapon)) {
         player addweaponstat(inflictor.destroyingweapon, "kills_from_cars", 1);
       }
       break;
@@ -401,7 +401,7 @@ function challengekills(data, time) {
     case "sticky_grenade": {
       lethalgrenadekill = 1;
       player notify("lethalgrenadekill");
-      if(isDefined(victim.explosiveinfo["stuckToPlayer"]) && victim.explosiveinfo["stuckToPlayer"] == victim) {
+      if(isdefined(victim.explosiveinfo["stuckToPlayer"]) && victim.explosiveinfo["stuckToPlayer"] == victim) {
         attacker.pers["stickExplosiveKill"]++;
         if(attacker.pers["stickExplosiveKill"] >= 5) {
           attacker.pers["stickExplosiveKill"] = 0;
@@ -413,10 +413,10 @@ function challengekills(data, time) {
     case "frag_grenade": {
       lethalgrenadekill = 1;
       player notify("lethalgrenadekill");
-      if(isDefined(data.victim.explosiveinfo["cookedKill"]) && data.victim.explosiveinfo["cookedKill"] == 1) {
+      if(isdefined(data.victim.explosiveinfo["cookedKill"]) && data.victim.explosiveinfo["cookedKill"] == 1) {
         player addplayerstat("kill_with_cooked_grenade", 1);
       }
-      if(isDefined(data.victim.explosiveinfo["throwbackKill"]) && data.victim.explosiveinfo["throwbackKill"] == 1) {
+      if(isdefined(data.victim.explosiveinfo["throwbackKill"]) && data.victim.explosiveinfo["throwbackKill"] == 1) {
         player addplayerstat("kill_with_tossed_back_lethal", 1);
       }
       break;
@@ -425,7 +425,7 @@ function challengekills(data, time) {
   if(lethalgrenadekill) {
     if(player isbonuscardactive(6, player.class_num)) {
       player addbonuscardstat(6, "kills", 1, player.class_num);
-      if(!isDefined(player.pers["dangerCloseKills"])) {
+      if(!isdefined(player.pers["dangerCloseKills"])) {
         player.pers["dangerCloseKills"] = 0;
       }
       player.pers["dangerCloseKills"]++;

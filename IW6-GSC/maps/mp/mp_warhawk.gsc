@@ -76,14 +76,13 @@ watch_allow_dynamic_events() {
 
 WARHAWK_MORTARS_WEIGHT = 85;
 warhawkCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "warhawk_mortars", WARHAWK_MORTARS_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_WARHAWK_MORTARS");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "warhawk_mortars", WARHAWK_MORTARS_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_WARHAWK_MORTARS");
   level thread watch_for_warhawk_mortars_crate();
 }
 

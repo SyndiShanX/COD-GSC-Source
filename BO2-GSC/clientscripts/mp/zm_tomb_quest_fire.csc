@@ -17,17 +17,16 @@ barbecue_fx_loop(localclientnum) {
   self endon("entityshutdown");
 
   while(true) {
-    playFXOnTag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
+    playfxontag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
     wait 0.5;
   }
 }
 
 barbecue_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
+  if(newval)
     self thread barbecue_fx_loop(localclientnum);
-  } else {
+  else
     self notify("stop_bbq_fx_loop");
-  }
 }
 
 #using_animtree("zm_tomb_basic");

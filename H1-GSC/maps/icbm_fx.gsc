@@ -95,10 +95,10 @@ main() {
 
 playereffect() {
   level endon("stop_snow");
-  var_0 = getEntArray("player", "classname")[0];
+  var_0 = getentarray("player", "classname")[0];
 
-  for(;;) {
-    playFX(level._effect["snow_light"], var_0.origin + (0, 0, 300), var_0.origin + (0, 0, 350));
+  for (;;) {
+    playfx(level._effect["snow_light"], var_0.origin + (0, 0, 300), var_0.origin + (0, 0, 350));
     wait 0.075;
   }
 }

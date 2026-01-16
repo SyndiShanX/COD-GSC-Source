@@ -8,6 +8,7 @@
 #include scripts\mp\mp_slums2_scripted;
 #include scripts\mp\mp_slums2_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_slums2;
 
 event_handler[level_init] main(eventstruct) {
@@ -23,3 +24,4 @@ event_handler[level_init] main(eventstruct) {
   spawncollision("collision_clip_wall_64x64x10", "collider", (-610, -759, 561.5), (0, 285, -90));
   spawncollision("collision_clip_wall_64x64x10", "collider", (-587.5, -753, 561.5), (0, 285, -90));
 }
+

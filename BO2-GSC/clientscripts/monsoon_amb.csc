@@ -183,9 +183,9 @@ intro_fake_ambience() {
   level waittill("sndFakeAmb");
   snd_set_snapshot("spl_monsoon_fake_ambience_intro");
   ent = spawn(0, (0, 0, 0), "script_origin");
-  ent playLoopSound("amb_monsoon_fake_amb_front", 0.05);
+  ent playloopsound("amb_monsoon_fake_amb_front", 0.05);
   ent2 = spawn(0, (0, 0, 1), "script_origin");
-  ent2 playLoopSound("evt_binocs_hud_lp", 0.05);
+  ent2 playloopsound("evt_binocs_hud_lp", 0.05);
   level waittill("sndFakeAmbEnd");
   snd_set_snapshot("default");
   ent2 stoploopsound(0.2);
@@ -249,7 +249,7 @@ snd_start_autofx_audio() {
 wingsuit() {
   ent1 = spawn(0, (0, 0, 0), "script_origin");
   level waittill("wng_st");
-  ent1 playLoopSound("evt_wingsuit_wind_fnt", 2.5);
+  ent1 playloopsound("evt_wingsuit_wind_fnt", 2.5);
   level waittill("wg_st_dn");
   ent1 stoploopsound(7);
   ent1 delete();
@@ -266,7 +266,8 @@ snd_amb_ruin_off() {
   level notify("snd_amb_off");
 }
 
-snd_pa_start() {}
+snd_pa_start() {
+}
 
 lab_alarms() {
   level waittill("snd_alarm");

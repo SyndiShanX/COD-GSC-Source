@@ -16,6 +16,7 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_seaside;
 
 event_handler[level_init] main(eventstruct) {
@@ -29,18 +30,18 @@ event_handler[level_init] main(eventstruct) {
 
   init_devgui();
 
-  load::main();
+    load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((0, -1016, 711), (1120, 288, 712), (-499, -2437, 776), (-745, -1165, 776), (775, -2820, 725));
   tank_scene = struct::get("spawn_flavor_tanks", "targetname");
 
   if(isDefined(tank_scene) && isDefined(tank_scene.scene_ents)) {
-    tank_scene.scene_ents[# "vehicle 1"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 2"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 3"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 1"] notsolid();
-    tank_scene.scene_ents[# "vehicle 2"] notsolid();
-    tank_scene.scene_ents[# "vehicle 3"] notsolid();
+    tank_scene.scene_ents[#"vehicle 1"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 2"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 3"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 1"] notsolid();
+    tank_scene.scene_ents[#"vehicle 2"] notsolid();
+    tank_scene.scene_ents[#"vehicle 3"] notsolid();
   }
 }
 
@@ -92,3 +93,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x48>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x89>");
 }
+

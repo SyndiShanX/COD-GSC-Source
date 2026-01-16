@@ -10,7 +10,7 @@
 #include maps\_dialog;
 
 main() {
-  level.vo = spawnStruct();
+  level.vo = spawnstruct();
   level.vo.nag_groups = [];
 }
 
@@ -18,25 +18,21 @@ add_dialog(str_dialog_name, str_vox_file) {
   assert(isDefined(str_dialog_name), "Undefined - str_dialog_name, passed to add_dialog()");
   assert(isDefined(str_vox_file), "Undefined - str_vox_file, passed to add_dialog()");
 
-  if(!isDefined(level.scr_sound)) {
+  if(!isDefined(level.scr_sound))
     level.scr_sound = [];
-  }
 
-  if(!isDefined(level.scr_sound["generic"])) {
+  if(!isDefined(level.scr_sound["generic"]))
     level.scr_sound["generic"] = [];
-  }
 
   level.scr_sound["generic"][str_dialog_name] = str_vox_file;
 }
 
 say_dialog(str_vo_line, n_delay, b_fake_ent, b_cleanup) {
-  if(!isDefined(b_fake_ent)) {
+  if(!isDefined(b_fake_ent))
     b_fake_ent = 0;
-  }
 
-  if(!isDefined(b_cleanup)) {
+  if(!isDefined(b_cleanup))
     b_cleanup = 0;
-  }
 
   self endon("death");
   self.is_about_to_talk = 1;
@@ -45,13 +41,11 @@ say_dialog(str_vo_line, n_delay, b_fake_ent, b_cleanup) {
   self endon("kill_pending_dialog");
   _add_to_spoken_dialog(str_vo_line);
 
-  if(isDefined(n_delay) && n_delay > 0) {
+  if(isDefined(n_delay) && n_delay > 0)
     wait(n_delay);
-  }
 
-  if(isDefined(self.classname) && self.classname == "script_origin") {
+  if(isDefined(self.classname) && self.classname == "script_origin")
     b_fake_ent = 1;
-  }
 
   if(!b_fake_ent) {
     if(!isDefined(self.health) || self.health <= 0) {
@@ -60,18 +54,16 @@ say_dialog(str_vo_line, n_delay, b_fake_ent, b_cleanup) {
     }
   }
 
-  if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"])) {
+  if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"]))
     str_vox_file = level.scr_sound["generic"][str_vo_line];
-  }
 
   self.is_talking = 1;
 
   if(isDefined(str_vox_file)) {
-    if(str_vox_file[0] == "v" && str_vox_file[1] == "o" && str_vox_file[2] == "x") {
+    if(str_vox_file[0] == "v" && str_vox_file[1] == "o" && str_vox_file[2] == "x")
       self anim_generic(self, str_vo_line);
-    } else {
+    else
       add_temp_dialog_line_internal("TEMP VO", str_vox_file, 0);
-    }
   } else
     add_temp_dialog_line_internal("MISSING VO", str_vo_line, 0);
 
@@ -80,9 +72,8 @@ say_dialog(str_vo_line, n_delay, b_fake_ent, b_cleanup) {
   waittillframeend;
 
   if(b_cleanup) {
-    if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"]) && isDefined(level.scr_sound["generic"][str_vo_line])) {
+    if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"]) && isDefined(level.scr_sound["generic"][str_vo_line]))
       level.scr_sound["generic"][str_vo_line] = undefined;
-    }
   }
 }
 
@@ -93,9 +84,8 @@ _on_kill_pending_dialog() {
 }
 
 _add_to_spoken_dialog(str_line) {
-  if(!isDefined(level._spoken_dialog)) {
+  if(!isDefined(level._spoken_dialog))
     level._spoken_dialog = [];
-  }
 
   level._spoken_dialog = add_to_array(level._spoken_dialog, str_line);
 }
@@ -115,9 +105,8 @@ say_dialog_flag(fl_flag, str_vo_line, delay_after_flag) {
   level endon("kill_pending_dialog");
   self endon("kill_pending_dialog");
 
-  if(!level flag_exists(fl_flag)) {
+  if(!level flag_exists(fl_flag))
     assert(0, "flag: '" + fl_flag + "' does not exist");
-  }
 
   flag_wait(fl_flag);
   self say_dialog(str_vo_line, delay_after_flag);
@@ -139,11 +128,10 @@ say_dialog_health_lost(percentage_health_lost, e_target_ent, str_vo_line, delay_
   self endon("kill_pending_dialog");
 
   while(true) {
-    if(!isDefined(e_target_ent)) {
+    if(!isDefined(e_target_ent))
       health_lost = 100;
-    } else {
+    else
       health_lost = 100 - e_target_ent.health / e_target_ent.maxhealth * 100;
-    }
 
     if(health_lost >= percentage_health_lost) {
       break;
@@ -174,11 +162,10 @@ say_dialog_func(func_pointer, str_vo_line, delay_after_func) {
 }
 
 kill_all_pending_dialog(e_ent) {
-  if(isDefined(e_ent)) {
+  if(isDefined(e_ent))
     e_ent notify("kill_pending_dialog");
-  } else {
+  else
     level notify("kill_pending_dialog");
-  }
 }
 
 add_vo_to_nag_group(group, character, vo_line) {
@@ -186,7 +173,7 @@ add_vo_to_nag_group(group, character, vo_line) {
   assert(isDefined(vo_line), "Vo Line is missing in FN: add_vo_to_nag_groupg()");
 
   if(!isDefined(level.vo.nag_groups[group])) {
-    level.vo.nag_groups[group] = spawnStruct();
+    level.vo.nag_groups[group] = spawnstruct();
     level.vo.nag_groups[group].e_ent = [];
     level.vo.nag_groups[group].str_vo_line = [];
     level.vo.nag_groups[group].num_nags = 0;
@@ -245,16 +232,14 @@ _start_vo_nag_group(str_group, vo_repeat_delay, start_delay, randomize_order, re
   assert(isDefined(vo_repeat_delay), "Undefined 'vo_repeat_delay' in nag call");
   assert(isDefined(level.vo.nag_groups[str_group]), str_group + " is not a valid VO NAG Group");
 
-  if(isDefined(start_delay)) {
+  if(isDefined(start_delay))
     wait(start_delay);
-  }
 
   s_vo_slot = level.vo.nag_groups[str_group];
   vo_indexes = [];
 
-  for(i = 0; i < s_vo_slot.str_vo_line.size; i++) {
+  for(i = 0; i < s_vo_slot.str_vo_line.size; i++)
     vo_indexes[i] = i;
-  }
 
   while(!flag(end_nag_flag)) {
     if(isDefined(randomize_order) && randomize_order == 1 && s_vo_slot.num_nags > 1) {
@@ -265,9 +250,9 @@ _start_vo_nag_group(str_group, vo_repeat_delay, start_delay, randomize_order, re
       while(!array_randomized) {
         vo_indexes = array_randomize(vo_indexes);
 
-        if(vo_indexes[0] != last_index) {
+        if(vo_indexes[0] != last_index)
           array_randomized = 1;
-        } else {
+        else {
           num_tries++;
 
           if(num_tries >= 20) {
@@ -286,23 +271,19 @@ _start_vo_nag_group(str_group, vo_repeat_delay, start_delay, randomize_order, re
       str_vo_line = s_vo_slot.str_vo_line[index];
       b_play_line = 1;
 
-      if(isDefined(func_filter) && !e_speaker[[func_filter]]()) {
+      if(isDefined(func_filter) && !e_speaker[[func_filter]]())
         b_play_line = 0;
-      }
 
-      if(b_play_line) {
+      if(b_play_line)
         e_speaker say_dialog(str_vo_line);
-      }
 
       next_play_delay = vo_repeat_delay;
 
-      if(isDefined(repeat_multiplier)) {
+      if(isDefined(repeat_multiplier))
         next_play_delay = next_play_delay + randomfloatrange(repeat_multiplier * -1.0, repeat_multiplier);
-      }
 
-      if(next_play_delay > 0) {
+      if(next_play_delay > 0)
         wait(next_play_delay);
-      }
     }
   }
 
@@ -314,13 +295,11 @@ add_temp_dialog_line(name, msg, delay) {
 }
 
 add_temp_dialog_line_internal(name, msg, delay) {
-  if(isDefined(delay)) {
+  if(isDefined(delay))
     wait(delay);
-  }
 
-  if(!isDefined(level.dialog_huds)) {
+  if(!isDefined(level.dialog_huds))
     level.dialog_huds = [];
-  }
 
   index = 0;
 
@@ -371,21 +350,17 @@ autoexec _queue_dialog_init() {
 }
 
 queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priority, str_team, s_func_filter) {
-  if(!isDefined(n_delay)) {
+  if(!isDefined(n_delay))
     n_delay = 0;
-  }
 
-  if(!isDefined(b_only_once)) {
+  if(!isDefined(b_only_once))
     b_only_once = 1;
-  }
 
-  if(!isDefined(b_priority)) {
+  if(!isDefined(b_priority))
     b_priority = 0;
-  }
 
-  if(!isDefined(level._dialog_queue_id)) {
+  if(!isDefined(level._dialog_queue_id))
     level._dialog_queue_id = 0;
-  }
 
   level._dialog_queue_id++;
   n_id = level._dialog_queue_id;
@@ -395,9 +370,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
   }
   e_talker = self;
 
-  if(!isDefined(level.talkers)) {
+  if(!isDefined(level.talkers))
     level.talkers = [];
-  }
 
   if(!isDefined(str_team)) {
     _queue_dialog_add_talker(e_talker);
@@ -406,9 +380,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
   }
 
   if(isDefined(cancel_flags)) {
-    if(!isarray(cancel_flags)) {
+    if(!isarray(cancel_flags))
       cancel_flags = array(cancel_flags);
-    }
 
     foreach(str_flag in cancel_flags) {
       if(flag(str_flag)) {
@@ -424,9 +397,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
   }
 
   if(isDefined(start_flags)) {
-    if(!isarray(start_flags)) {
+    if(!isarray(start_flags))
       start_flags = array(start_flags);
-    }
 
     _log_dialog(str_line, "waiting for flag", start_flags);
 
@@ -444,9 +416,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
 
     if(isDefined(s_func_filter)) {
       for(i = 0; i < a_talkers.size; i++) {
-        if(!a_talkers[i] call_func(s_func_filter)) {
+        if(!a_talkers[i] call_func(s_func_filter))
           excluders[excluders.size] = a_talkers[i];
-        }
       }
     } else
       excluders = level.hero_list;
@@ -462,9 +433,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
       return;
   }
 
-  if(b_priority) {
+  if(b_priority)
     pause_dialog_queue(str_line, b_priority);
-  }
 
   _log_dialog(str_line, "waiting turn");
 
@@ -474,9 +444,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
   if(!b_only_once || !b_already_said) {
     _log_dialog(str_line, "playing with a " + string(n_delay) + " delay");
 
-    if(b_priority) {
+    if(b_priority)
       level._priority_dialog_playing = 1;
-    }
 
     e_talker notify("dialog_started:" + n_id);
     e_talker thread maps\_dialog::say_dialog(str_line, n_delay);
@@ -487,9 +456,8 @@ queue_dialog(str_line, n_delay, start_flags, cancel_flags, b_only_once, b_priori
     e_talker notify("_queue_dialog_on_cancel" + n_id);
     e_talker notify("dialog_canceled:" + n_id);
 
-    if(b_priority) {
+    if(b_priority)
       level thread unpause_dialog_queue(str_line, b_priority);
-    }
   }
 }
 
@@ -501,9 +469,8 @@ _queue_dialog_on_finished(str_line, n_id, b_priority) {
 
   _log_dialog(str_line, "finished");
 
-  if(b_priority) {
+  if(b_priority)
     unpause_dialog_queue(str_line, b_priority);
-  }
 }
 
 _queue_dialog_on_death(str_line, n_id, b_priority) {
@@ -513,9 +480,8 @@ _queue_dialog_on_death(str_line, n_id, b_priority) {
 
   _log_dialog(str_line, "died");
 
-  if(b_priority) {
+  if(b_priority)
     level thread unpause_dialog_queue(str_line, b_priority);
-  }
 }
 
 _queue_dialog_on_cancel(str_line, n_id, cancel_flags, b_priority) {
@@ -537,15 +503,13 @@ _queue_dialog_on_cancel(str_line, n_id, cancel_flags, b_priority) {
   self notify("dialog_canceled:" + n_id);
   self notify("kill_pending_dialog");
 
-  if(b_priority) {
+  if(b_priority)
     unpause_dialog_queue(str_line, b_priority);
-  }
 }
 
 pause_dialog_queue(str_line, b_priority) {
-  if(!isDefined(b_priority)) {
+  if(!isDefined(b_priority))
     b_priority = 1;
-  }
 
   if(!flag("dialog_queue_paused")) {
     _log_dialog(str_line, "PAUSING DIALOG QUEUE");
@@ -557,21 +521,17 @@ pause_dialog_queue(str_line, b_priority) {
 }
 
 dialog_start_convo(start_flags, false_flags) {
-  if(!isDefined(start_flags)) {
+  if(!isDefined(start_flags))
     start_flags = [];
-  }
 
-  if(!isDefined(false_flags)) {
+  if(!isDefined(false_flags))
     false_flags = [];
-  }
 
-  if(!isarray(start_flags)) {
+  if(!isarray(start_flags))
     start_flags = array(start_flags);
-  }
 
-  if(!isarray(false_flags)) {
+  if(!isarray(false_flags))
     false_flags = array(false_flags);
-  }
 
   false_flags[false_flags.size] = "dialog_convo_started";
 
@@ -602,9 +562,8 @@ dialog_start_convo(start_flags, false_flags) {
 
 any_flags_true(a_flags) {
   foreach(str_flag in a_flags) {
-    if(flag(str_flag)) {
+    if(flag(str_flag))
       return true;
-    }
   }
 
   return false;
@@ -612,9 +571,8 @@ any_flags_true(a_flags) {
 
 any_flags_false(a_flags) {
   foreach(str_flag in a_flags) {
-    if(!flag(str_flag)) {
+    if(!flag(str_flag))
       return true;
-    }
   }
 
   return false;
@@ -623,13 +581,11 @@ any_flags_false(a_flags) {
 dialog_end_convo(str_kill_notify) {
   _log_dialog(undefined, "DIALOG END CONVO");
 
-  if(isDefined(str_kill_notify)) {
+  if(isDefined(str_kill_notify))
     level notify(str_kill_notify);
-  }
 
-  if(isDefined(level.talkers)) {
+  if(isDefined(level.talkers))
     waittill_dialog_finished_array(level.talkers);
-  }
 
   flag_clear("dialog_convo_started");
 }
@@ -717,47 +673,40 @@ _queue_dialog_wait_turn(str_line, b_priority) {
 }
 
 _log_dialog(str_line, str_msg, a_flags) {
-  if(isDefined(a_flags) && !isarray(a_flags)) {
+  if(isDefined(a_flags) && !isarray(a_flags))
     a_flags = array(a_flags);
-  }
 
-  if(!isDefined(str_line)) {
+  if(!isDefined(str_line))
     str_line = "";
-  }
 
   str_color = _log_dialog_get_color(str_line);
   str_log_string = "^0DIALOG: '" + str_color + str_line + "^0' " + str_msg;
 
-  if(isDefined(a_flags)) {
+  if(isDefined(a_flags))
     str_log_string = str_log_string + (": " + _dialog_array_to_string(a_flags));
-  }
 
   println(str_log_string);
 }
 
 _log_dialog_get_color(str_line) {
-  if(!isDefined(str_line) || str_line == "") {
+  if(!isDefined(str_line) || str_line == "")
     return "";
-  }
 
-  if(!isDefined(level._log_dialog_colors)) {
+  if(!isDefined(level._log_dialog_colors))
     level._log_dialog_colors = [];
-  }
 
   a_lines = getarraykeys(level._log_dialog_colors);
 
   if(!isinarray(a_lines, str_line)) {
     a_colors = array("^1", "^2", "^3", "^4", "^5", "^6", "^7");
 
-    if(!isDefined(level._log_dialog_get_color)) {
+    if(!isDefined(level._log_dialog_get_color))
       level._log_dialog_get_color = 0;
-    }
 
     level._log_dialog_get_color++;
 
-    if(level._log_dialog_get_color >= a_colors.size) {
+    if(level._log_dialog_get_color >= a_colors.size)
       level._log_dialog_get_color = 0;
-    }
 
     level._log_dialog_colors[str_line] = a_colors[level._log_dialog_get_color];
   }
@@ -769,9 +718,8 @@ _dialog_array_to_string(array) {
   str = "^0[";
 
   for(i = 0; i < array.size; i++) {
-    if(i > 0) {
+    if(i > 0)
       str = str + "^0,";
-    }
 
     str = str + " ^5" + array[i];
   }

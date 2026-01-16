@@ -12,15 +12,15 @@
 #namespace burnplayer;
 
 function autoexec __init__sytem__() {
-  system::register("burnplayer", &__init__, undefined, undefined);
+  system::register("burnplayer", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "burn", 1, 1, "int", &burning_callback, 0, 0);
-  clientfield::register("playercorpse", "burned_effect", 1, 1, "int", &burning_corpse_callback, 0, 1);
+  clientfield::register("allplayers", "burn", 1, 1, "int", & burning_callback, 0, 0);
+  clientfield::register("playercorpse", "burned_effect", 1, 1, "int", & burning_corpse_callback, 0, 1);
   loadeffects();
-  callback::on_localplayer_spawned(&on_localplayer_spawned);
-  callback::on_localclient_connect(&on_local_client_connect);
+  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  callback::on_localclient_connect( & on_local_client_connect);
 }
 
 function loadeffects() {
@@ -108,16 +108,16 @@ function burn_on_postfx() {
 }
 
 function private _burntag(localclientnum, tag, postfix) {
-  if(isDefined(self) && self hasdobj(localclientnum)) {
+  if(isdefined(self) && self hasdobj(localclientnum)) {
     fxname = ("burn_" + tag) + postfix;
-    if(isDefined(level._effect[fxname])) {
-      return playFXOnTag(localclientnum, level._effect[fxname], self, tag);
+    if(isdefined(level._effect[fxname])) {
+      return playfxontag(localclientnum, level._effect[fxname], self, tag);
     }
   }
 }
 
 function private _burntagson(localclientnum, tags) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self endon("entityshutdown");
@@ -125,10 +125,10 @@ function private _burntagson(localclientnum, tags) {
   self notify("burn_tags_on");
   self endon("burn_tags_on");
   activefx = [];
-  for(i = 0; i < tags.size; i++) {
+  for (i = 0; i < tags.size; i++) {
     activefx[activefx.size] = self _burntag(localclientnum, tags[i], "_loop");
   }
-  burnsound = self playLoopSound("chr_burn_loop_overlay", 0.5);
+  burnsound = self playloopsound("chr_burn_loop_overlay", 0.5);
   self thread _burntagswatchend(localclientnum, activefx, burnsound);
   self thread _burntagswatchclear(localclientnum, activefx, burnsound);
 }
@@ -141,10 +141,10 @@ function private _burnbody(localclientnum) {
 function private _burntagswatchend(localclientnum, fxarray, burnsound) {
   self endon("entityshutdown");
   self waittill("burn_off");
-  if(isDefined(burnsound)) {
+  if(isdefined(burnsound)) {
     self stoploopsound(burnsound, 1);
   }
-  if(isDefined(fxarray)) {
+  if(isdefined(fxarray)) {
     foreach(fx in fxarray) {
       stopfx(localclientnum, fx);
     }
@@ -154,10 +154,10 @@ function private _burntagswatchend(localclientnum, fxarray, burnsound) {
 function private _burntagswatchclear(localclientnum, fxarray, burnsound) {
   self endon("burn_off");
   self waittill("entityshutdown");
-  if(isDefined(burnsound)) {
+  if(isdefined(burnsound)) {
     stopsound(burnsound);
   }
-  if(isDefined(fxarray)) {
+  if(isdefined(fxarray)) {
     foreach(fx in fxarray) {
       stopfx(localclientnum, fx);
     }

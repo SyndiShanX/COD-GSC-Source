@@ -11,7 +11,8 @@ main() {
   build_unload_groups(::unload_groups);
 }
 
-precache_submodels() {}
+precache_submodels() {
+}
 
 set_vehicle_anims(positions) {
   return positions;
@@ -22,9 +23,8 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 9; i++) {
-    positions[i] = spawnStruct();
-  }
+  for(i = 0; i < 9; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_gunner1";

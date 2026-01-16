@@ -13,7 +13,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onPlayerKilled();
@@ -25,7 +25,7 @@ onPlayerConnect() {
 
 onJoinedTeam() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_team");
     self notify("end_healthregen");
   }
@@ -33,7 +33,7 @@ onJoinedTeam() {
 
 onJoinedSpectators() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_spectators");
     self notify("end_healthregen");
   }
@@ -41,7 +41,7 @@ onJoinedSpectators() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread playerHealthRegen();
   }
@@ -49,7 +49,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self notify("end_healthregen");
   }
@@ -77,7 +77,7 @@ playerHealthRegen() {
   lastSoundTime_Recover = 0;
   hurtTime = 0;
   newHealth = 0;
-  for(;;) {
+  for (;;) {
     wait(0.05);
     if(player.health == maxhealth) {
       veryHurt = false;
@@ -112,15 +112,13 @@ playerHealthRegen() {
       }
       if(veryHurt) {
         newHealth = ratio;
-        if(gettime() > hurtTime + 3000) {
+        if(gettime() > hurtTime + 3000)
           newHealth += regenRate;
-        }
       } else
         newHealth = 1;
       if(newHealth >= 1.0) {
-        if(veryHurt) {
+        if(veryHurt)
           self maps\mp\gametypes\_missions::healthRegenerated();
-        }
         newHealth = 1.0;
       }
       if(newHealth <= 0) {
@@ -145,14 +143,13 @@ decayPlayerDamages(decay) {
   if(!isDefined(self.attackerDamage)) {
     return;
   }
-  for(i = 0; i < self.attackerDamage.size; i++) {
+  for (i = 0; i < self.attackerDamage.size; i++) {
     if(!isDefined(self.attackerDamage[i])) {
       continue;
     }
     self.attackerDamage[i] -= decay;
-    if(self.attackerDamage[i] < 0) {
+    if(self.attackerDamage[i] < 0)
       self.attackerDamage[i] = 0;
-    }
   }
 }
 
@@ -160,7 +157,7 @@ playerBreathingSound(healthcap) {
   self endon("end_healthregen");
   wait(2);
   player = self;
-  for(;;) {
+  for (;;) {
     wait(0.2);
     if(player.health <= 0) {
       return;

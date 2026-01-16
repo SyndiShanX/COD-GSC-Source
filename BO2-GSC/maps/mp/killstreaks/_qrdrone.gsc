@@ -79,7 +79,7 @@ init() {
   level.qrdrone_dialog["assist"][2] = "ac130_fco_directhit";
   level.qrdrone_dialog["assist"][3] = "ac130_fco_rightontarget";
   level.qrdrone_lastdialogtime = 0;
-  level.qrdrone_nodeployzones = getEntArray("no_vehicles", "targetname");
+  level.qrdrone_nodeployzones = getentarray("no_vehicles", "targetname");
   level._effect["qrdrone_prop"] = loadfx("weapon/qr_drone/fx_qr_wash_3p");
   maps\mp\_treadfx::preloadtreadfx(level.qrdrone_vehicle);
 
@@ -88,7 +88,7 @@ init() {
   shouldtimeout = setdvar("scr_qrdrone_no_timeout", 0);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("qrdrone_mp", "killstreak_qrdrone_mp", "killstreak_qrdrone", "qrdrone_used", ::tryuseqrdrone);
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("qrdrone_mp", "qrdrone_turret_mp");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", &"KILLSTREAK_EARNED_QRDRONE", &"KILLSTREAK_QRDRONE_NOT_AVAILABLE", &"KILLSTREAK_QRDRONE_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", & "KILLSTREAK_EARNED_QRDRONE", & "KILLSTREAK_QRDRONE_NOT_AVAILABLE", & "KILLSTREAK_QRDRONE_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("qrdrone_mp", "mpl_killstreak_qrdrone", "kls_recondrone_used", "", "kls_recondrone_enemy", "", "kls_recondrone_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("qrdrone_mp", "scr_giveqrdrone");
   maps\mp\killstreaks\_killstreaks::overrideentitycameraindemo("qrdrone_mp", 1);
@@ -96,9 +96,8 @@ init() {
 }
 
 tryuseqrdrone(lifeid) {
-  if(self isusingremote() || isDefined(level.nukeincoming)) {
+  if(self isusingremote() || isDefined(level.nukeincoming))
     return 0;
-  }
 
   if(!self isonground()) {
     self iprintlnbold(&"KILLSTREAK_QRDRONE_NOT_PLACEABLE");
@@ -128,7 +127,7 @@ givecarryqrdrone(lifeid, streakname) {
 }
 
 createcarryqrdrone(streakname, owner) {
-  pos = owner.origin + anglesToForward(owner.angles) * 4 + anglestoup(owner.angles) * 50;
+  pos = owner.origin + anglestoforward(owner.angles) * 4 + anglestoup(owner.angles) * 50;
   carryqrdrone = spawnturret("misc_turret", pos, "auto_gun_turret_mp");
   carryqrdrone.turrettype = "sentry";
   carryqrdrone setturrettype(carryqrdrone.turrettype);
@@ -153,7 +152,7 @@ createcarryqrdrone(streakname, owner) {
   carryqrdrone.soundent.angles = carryqrdrone.angles;
   carryqrdrone.soundent.origin = carryqrdrone.origin;
   carryqrdrone.soundent linkto(carryqrdrone);
-  carryqrdrone.soundent playLoopSound("recondrone_idle_high");
+  carryqrdrone.soundent playloopsound("recondrone_idle_high");
   return carryqrdrone;
 }
 
@@ -166,9 +165,8 @@ watchforattack() {
   for(;;) {
     wait 0.05;
 
-    if(self attackbuttonpressed()) {
+    if(self attackbuttonpressed())
       self notify("place_carryQRDrone");
-    }
   }
 }
 
@@ -178,13 +176,11 @@ setcarryingqrdrone(carryqrdrone) {
   carryqrdrone thread carryqrdrone_setcarried(self);
 
   if(!carryqrdrone.canbeplaced) {
-    if(self.team != "spectator") {
+    if(self.team != "spectator")
       self iprintlnbold(&"KILLSTREAK_QRDRONE_NOT_PLACEABLE");
-    }
 
-    if(isDefined(carryqrdrone.soundent)) {
+    if(isDefined(carryqrdrone.soundent))
       carryqrdrone.soundent delete();
-    }
 
     carryqrdrone delete();
     return;
@@ -192,12 +188,12 @@ setcarryingqrdrone(carryqrdrone) {
 
   self.iscarrying = 0;
   carryqrdrone.carriedby = undefined;
-  carryqrdrone playSound("sentry_gun_plant");
+  carryqrdrone playsound("sentry_gun_plant");
   carryqrdrone notify("placed");
 }
 
 carryqrdrone_setcarried(carrier) {
-  self setCanDamage(0);
+  self setcandamage(0);
   self setcontents(0);
   self.carriedby = carrier;
   carrier.iscarrying = 1;
@@ -208,9 +204,8 @@ carryqrdrone_setcarried(carrier) {
 isinremotenodeploy() {
   if(isDefined(level.qrdrone_nodeployzones) && level.qrdrone_nodeployzones.size) {
     foreach(zone in level.qrdrone_nodeployzones) {
-      if(self istouching(zone)) {
+      if(self istouching(zone))
         return true;
-      }
     }
   }
 
@@ -248,10 +243,10 @@ updatecarryqrdroneplacement(carryqrdrone) {
 
     if(carryqrdrone.canbeplaced != lastcanplacecarryqrdrone) {
       if(carryqrdrone.canbeplaced) {
-        if(self attackbuttonpressed()) {
+        if(self attackbuttonpressed())
           self notify("place_carryQRDrone");
-        }
-      } else {}
+      } else {
+      }
     }
 
     lastcanplacecarryqrdrone = carryqrdrone.canbeplaced;
@@ -266,9 +261,8 @@ carryqrdrone_handleexistence() {
   self.owner endon("cancel_carryQRDrone");
   self.owner waittill_any("death", "disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 removeremoteweapon() {
@@ -337,9 +331,8 @@ clearplayerlockfromqrdronelaunch(lockspot) {
 createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id) {
   qrdrone = spawnhelicopter(owner, origin, angles, level.qrdrone_vehicle, "veh_t6_drone_quad_rotor_mp");
 
-  if(!isDefined(qrdrone)) {
+  if(!isDefined(qrdrone))
     return undefined;
-  }
 
   qrdrone.lifeid = lifeid;
   qrdrone.team = owner.team;
@@ -349,7 +342,7 @@ createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id) {
   qrdrone.maxhealth = 250;
   qrdrone.damagetaken = 0;
   qrdrone.destroyed = 0;
-  qrdrone setCanDamage(1);
+  qrdrone setcandamage(1);
   qrdrone enableaimassist();
   qrdrone.smoking = 0;
   qrdrone.inheliproximity = 0;
@@ -373,8 +366,8 @@ createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id) {
   qrdrone thread maps\mp\_heatseekingmissile::missiletarget_lockonmonitor(self, "end_remote");
   qrdrone thread maps\mp\_heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing");
   qrdrone.emp_fx = spawn("script_model", self.origin);
-  qrdrone.emp_fx setModel("tag_origin");
-  qrdrone.emp_fx linkto(self, "tag_origin", vectorscale((0, 0, -1), 20.0) + anglesToForward(self.angles) * 6);
+  qrdrone.emp_fx setmodel("tag_origin");
+  qrdrone.emp_fx linkto(self, "tag_origin", vectorscale((0, 0, -1), 20.0) + anglestoforward(self.angles) * 6);
   qrdrone maps\mp\gametypes\_spawning::create_qrdrone_influencers(qrdrone.team);
   return qrdrone;
 }
@@ -394,9 +387,8 @@ qrdrone_ride(lifeid, qrdrone, streakname) {
   self thread qrdrone_fireguns(qrdrone);
   qrdrone thread play_lockon_sounds(self);
 
-  if(isDefined(level.qrdrone_vision)) {
+  if(isDefined(level.qrdrone_vision))
     self setvisionsetwaiter();
-  }
 }
 
 qrdrone_delaylaunchdialog(qrdrone) {
@@ -417,9 +409,8 @@ qrdrone_unlink(qrdrone) {
     if(isDefined(self.viewlockedentity)) {
       self unlink();
 
-      if(isDefined(level.gameended) && level.gameended) {
+      if(isDefined(level.gameended) && level.gameended)
         self freezecontrolswrapper(1);
-      }
     }
   }
 }
@@ -429,15 +420,13 @@ qrdrone_endride(qrdrone) {
     qrdrone notify("end_remote");
     self clearusingremote();
 
-    if(level.gameended == 0) {
+    if(level.gameended == 0)
       self.killstreak_waitamount = undefined;
-    }
 
     self setplayerangles(self.restoreangles);
 
-    if(isalive(self)) {
+    if(isalive(self))
       self switchtoweapon(self getlastweapon());
-    }
 
     self thread qrdrone_freezebuffer();
   }
@@ -479,17 +468,15 @@ play_lockon_sounds(player) {
 }
 
 enemy_locking() {
-  if(isDefined(self.locking_on) && self.locking_on) {
+  if(isDefined(self.locking_on) && self.locking_on)
     return true;
-  }
 
   return false;
 }
 
 enemy_locked() {
-  if(isDefined(self.locked_on) && self.locked_on) {
+  if(isDefined(self.locked_on) && self.locked_on)
     return true;
-  }
 
   return false;
 }
@@ -540,15 +527,14 @@ deleteonkillbrush(player) {
   player endon("disconnect");
   self endon("death");
   killbrushes = [];
-  hurt = getEntArray("trigger_hurt", "classname");
+  hurt = getentarray("trigger_hurt", "classname");
 
   foreach(trig in hurt) {
-    if(trig.origin[2] <= player.origin[2] && (!isDefined(trig.script_parameters) || trig.script_parameters != "qrdrone_safe")) {
+    if(trig.origin[2] <= player.origin[2] && (!isDefined(trig.script_parameters) || trig.script_parameters != "qrdrone_safe"))
       killbrushes[killbrushes.size] = trig;
-    }
   }
 
-  crate_triggers = getEntArray("crate_kill_trigger", "targetname");
+  crate_triggers = getentarray("crate_kill_trigger", "targetname");
 
   while(true) {
     for(i = 0; i < killbrushes.size; i++) {
@@ -595,9 +581,8 @@ qrdrone_force_destroy() {
 }
 
 qrdrone_get_damage_effect(health_pct) {
-  if(health_pct > 0.5) {
+  if(health_pct > 0.5)
     return level._effect["quadrotor_damage"];
-  }
 
   return undefined;
 }
@@ -610,17 +595,16 @@ qrdrone_play_single_fx_on_tag(effect, tag) {
     self.damage_fx_ent delete();
   }
 
-  playFXOnTag(effect, self, "tag_origin");
+  playfxontag(effect, self, "tag_origin");
 }
 
 qrdrone_update_damage_fx(health_percent) {
   effect = qrdrone_get_damage_effect(health_percent);
 
-  if(isDefined(effect)) {
+  if(isDefined(effect))
     qrdrone_play_single_fx_on_tag(effect, "tag_origin");
-  } else if(isDefined(self.damage_fx_ent)) {
+  else if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
-  }
 }
 
 qrdrone_damagewatcher() {
@@ -643,14 +627,12 @@ qrdrone_damagewatcher() {
 
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
       if(isplayer(attacker)) {
-        if(attacker hasperk("specialty_armorpiercing")) {
+        if(attacker hasperk("specialty_armorpiercing"))
           damage = damage + int(damage * level.cac_armorpiercing_data);
-        }
       }
 
-      if(weaponclass(weapon) == "spread") {
+      if(weaponclass(weapon) == "spread")
         damage = damage * 2;
-      }
     }
 
     if(weapon == "emp_grenade_mp" && mod == "MOD_GRENADE_SPLASH") {
@@ -683,9 +665,8 @@ qrdrone_stun(duration) {
   self notify("stunned");
   self.owner freezecontrolswrapper(1);
 
-  if(isDefined(self.owner.fullscreen_static)) {
+  if(isDefined(self.owner.fullscreen_static))
     self.owner thread maps\mp\killstreaks\_remote_weapons::stunstaticfx(duration);
-  }
 
   wait(duration);
   self.owner freezecontrolswrapper(0);
@@ -693,9 +674,8 @@ qrdrone_stun(duration) {
 }
 
 qrdrone_death(attacker, weapon, dir, damagetype) {
-  if(isDefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
-  }
 
   if(isDefined(attacker) && isplayer(attacker) && attacker != self.owner) {
     level thread maps\mp\_popups::displayteammessagetoall(&"SCORE_DESTROYED_QRDRONE", attacker);
@@ -706,20 +686,19 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
       attacker addweaponstat(weapon, "destroyed_qrdrone", 1);
       attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
       attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-    } else {}
+    } else {
+    }
   }
 
   self thread qrdrone_crash_movement(attacker, dir);
 
-  if(weapon == "emp_grenade_mp") {
-    playFXOnTag(level.ai_tank_stun_fx, self.emp_fx, "tag_origin");
-  }
+  if(weapon == "emp_grenade_mp")
+    playfxontag(level.ai_tank_stun_fx, self.emp_fx, "tag_origin");
 
   self waittill("crash_done");
 
-  if(isDefined(self.emp_fx)) {
+  if(isDefined(self.emp_fx))
     self.emp_fx delete();
-  }
 
   self setclientfield("qrdrone_state", 3);
   watcher = self.owner maps\mp\gametypes\_weaponobjects::getweaponobjectwatcher("qrdrone");
@@ -727,8 +706,8 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
 }
 
 death_fx() {
-  playFXOnTag(self.deathfx, self, self.deathfxtag);
-  self playSound("veh_qrdrone_sparks");
+  playfxontag(self.deathfx, self, self.deathfxtag);
+  self playsound("veh_qrdrone_sparks");
 }
 
 qrdrone_crash_movement(attacker, hitdir) {
@@ -753,13 +732,12 @@ qrdrone_crash_movement(attacker, hitdir) {
   self.crash_accel = randomfloatrange(75, 110);
   self thread qrdrone_crash_accel();
   self thread qrdrone_collision();
-  self playSound("veh_qrdrone_dmg_hit");
+  self playsound("veh_qrdrone_dmg_hit");
   self thread qrdrone_dmg_snd();
   wait 0.1;
 
-  if(randomint(100) < 40) {
+  if(randomint(100) < 40)
     self thread qrdrone_fire_for_time(randomfloatrange(0.7, 2.0));
-  }
 
   wait 2;
   self notify("crash_done");
@@ -768,7 +746,7 @@ qrdrone_crash_movement(attacker, hitdir) {
 qrdrone_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
   dmg_ent linkto(self);
-  dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
+  dmg_ent playloopsound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(0.2);
   wait 2;
@@ -806,14 +784,13 @@ qrdrone_crash_accel() {
 
     if(count % 8 == 0) {
       if(randomint(100) > 40) {
-        if(velocity[2] > 150.0) {
+        if(velocity[2] > 150.0)
           self.crash_accel = self.crash_accel * 0.75;
-        } else if(velocity[2] < 40.0 && count < 60) {
-          if(abs(self.angles[0]) > 30 || abs(self.angles[2]) > 30) {
+        else if(velocity[2] < 40.0 && count < 60) {
+          if(abs(self.angles[0]) > 30 || abs(self.angles[2]) > 30)
             self.crash_accel = randomfloatrange(160, 200);
-          } else {
+          else
             self.crash_accel = randomfloatrange(85, 120);
-          }
         }
       }
     }
@@ -832,10 +809,10 @@ qrdrone_collision() {
 
     if(normal[2] < 0.7) {
       self setvehvelocity(velocity + normal * 70);
-      self playSound("veh_qrdrone_wall");
-      playFX(level._effect["quadrotor_nudge"], self.origin);
+      self playsound("veh_qrdrone_wall");
+      playfx(level._effect["quadrotor_nudge"], self.origin);
     } else {
-      self playSound("veh_qrdrone_explo");
+      self playsound("veh_qrdrone_explo");
       self notify("crash_done");
     }
   }
@@ -846,11 +823,10 @@ qrdrone_watch_distance() {
   self.owner inithud();
   qrdrone_height = getstruct("qrdrone_height", "targetname");
 
-  if(isDefined(qrdrone_height)) {
+  if(isDefined(qrdrone_height))
     self.maxheight = qrdrone_height.origin[2];
-  } else {
+  else
     self.maxheight = int(maps\mp\killstreaks\_airsupport::getminimumflyheight());
-  }
 
   self.maxdistance = 12800;
   self.minheight = level.mapcenter[2] - 800;
@@ -892,9 +868,8 @@ qrdrone_watch_distance() {
 
 qrdrone_in_range() {
   if(self.origin[2] < self.maxheight && self.origin[2] > self.minheight && !self.inheliproximity) {
-    if(self ismissileinsideheightlock()) {
+    if(self ismissileinsideheightlock())
       return true;
-    }
   }
 
   return false;
@@ -920,11 +895,10 @@ qrdrone_rangecountdown() {
   self endon("death");
   self endon("in_range");
 
-  if(isDefined(self.heliinproximity)) {
+  if(isDefined(self.heliinproximity))
     countdown = 6.1;
-  } else {
+  else
     countdown = 6.1;
-  }
 
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(countdown);
   self setclientfield("qrdrone_state", 3);
@@ -1040,46 +1014,40 @@ qrdrone_cleanup() {
     return;
   }
   if(isDefined(self.owner)) {
-    if(self.playerlinked == 1) {
+    if(self.playerlinked == 1)
       self.owner qrdrone_unlink(self);
-    }
 
     self.owner qrdrone_endride(self);
   }
 
-  if(isDefined(self.scrambler)) {
+  if(isDefined(self.scrambler))
     self.scrambler delete();
-  }
 
-  if(isDefined(self) && isDefined(self.centerref)) {
+  if(isDefined(self) && isDefined(self.centerref))
     self.centerref delete();
-  }
 
   target_setturretaquire(self, 0);
 
-  if(isDefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
-  }
 
-  if(isDefined(self.emp_fx)) {
+  if(isDefined(self.emp_fx))
     self.emp_fx delete();
-  }
 
   self delete();
 }
 
 qrdrone_light_fx() {
-  playFXOnTag(level.chopper_fx["light"]["belly"], self, "tag_light_nose");
+  playfxontag(level.chopper_fx["light"]["belly"], self, "tag_light_nose");
   wait 0.05;
-  playFXOnTag(level.chopper_fx["light"]["tail"], self, "tag_light_tail1");
+  playfxontag(level.chopper_fx["light"]["tail"], self, "tag_light_tail1");
 }
 
 qrdrone_dialog(dialoggroup) {
-  if(dialoggroup == "tag") {
+  if(dialoggroup == "tag")
     waittime = 1000;
-  } else {
+  else
     waittime = 5000;
-  }
 
   if(gettime() - level.qrdrone_lastdialogtime < waittime) {
     return;
@@ -1098,9 +1066,9 @@ qrdrone_watchheliproximity() {
   while(true) {
     inheliproximity = 0;
 
-    if(!self.inheliproximity && inheliproximity) {
+    if(!self.inheliproximity && inheliproximity)
       self.inheliproximity = 1;
-    } else if(self.inheliproximity && !inheliproximity) {
+    else if(self.inheliproximity && !inheliproximity) {
       self.inheliproximity = 0;
       self.heliinproximity = undefined;
     }
@@ -1113,15 +1081,13 @@ qrdrone_detonatewaiter() {
   self.owner endon("disconnect");
   self endon("death");
 
-  while(self.owner attackbuttonpressed()) {
+  while(self.owner attackbuttonpressed())
     wait 0.05;
-  }
 
   watcher = self.owner maps\mp\gametypes\_weaponobjects::getweaponobjectwatcher("qrdrone");
 
-  while(!self.owner attackbuttonpressed()) {
+  while(!self.owner attackbuttonpressed())
     wait 0.05;
-  }
 
   self setclientfield("qrdrone_state", 3);
   watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0);
@@ -1154,23 +1120,21 @@ qrdrone_blowup(attacker, weaponname) {
   explosionorigin = self.origin;
   explosionangles = self.angles;
 
-  if(!isDefined(attacker)) {
+  if(!isDefined(attacker))
     attacker = self.owner;
-  }
 
   origin = self.origin + vectorscale((0, 0, 1), 10.0);
   radius = 256;
   min_damage = 10;
   max_damage = 35;
 
-  if(isDefined(attacker)) {
+  if(isDefined(attacker))
     self radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_EXPLOSIVE", "qrdrone_turret_mp");
-  }
 
   physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
   maps\mp\gametypes\_shellshock::rcbomb_earthquake(origin);
   playsoundatposition("veh_qrdrone_explo", self.origin);
-  playFX(level.qrdrone_fx["explode"], explosionorigin, (0, 0, 1));
+  playfx(level.qrdrone_fx["explode"], explosionorigin, (0, 0, 1));
   self hide();
 
   if(isDefined(self.owner)) {
@@ -1203,9 +1167,8 @@ qrdrone_blowup(attacker, weaponname) {
     self.owner qrdrone_unlink(self);
     self.owner freezecontrolswrapper(0);
 
-    if(isDefined(self.neverdelete) && self.neverdelete) {
+    if(isDefined(self.neverdelete) && self.neverdelete)
       return;
-    }
   }
 
   qrdrone_cleanup();
@@ -1241,13 +1204,11 @@ destroyhud() {
     self notify("stop_signal_failure");
     self.flashingsignalfailure = 0;
 
-    if(isDefined(self.leaving_play_area)) {
+    if(isDefined(self.leaving_play_area))
       self.leaving_play_area destroy();
-    }
 
-    if(isDefined(self.fullscreen_static)) {
+    if(isDefined(self.fullscreen_static))
       self.fullscreen_static destroy();
-    }
 
     self maps\mp\killstreaks\_ai_tank::destroy_remote_hud();
     self clientnotify("nofutz");
@@ -1255,9 +1216,8 @@ destroyhud() {
 }
 
 set_static_alpha(alpha, drone) {
-  if(isDefined(self.fullscreen_static)) {
+  if(isDefined(self.fullscreen_static))
     self.fullscreen_static.alpha = alpha;
-  }
 
   if(isDefined(self.leaving_play_area)) {
     if(alpha > 0) {
@@ -1283,19 +1243,17 @@ flash_signal_failure(drone) {
     self.leaving_play_area.alpha = 1;
     drone playsoundtoplayer("uin_alert_lockon", self);
 
-    if(i < 6) {
+    if(i < 6)
       wait 0.4;
-    } else {
+    else
       wait 0.2;
-    }
 
     self.leaving_play_area.alpha = 0;
 
-    if(i < 5) {
+    if(i < 5)
       wait 0.2;
-    } else {
+    else
       wait 0.1;
-    }
 
     i++;
   }

@@ -12,16 +12,16 @@
 #namespace healthoverlay;
 
 function autoexec __init__sytem__() {
-  system::register("healthoverlay", &__init__, undefined, undefined);
+  system::register("healthoverlay", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_joined_team(&end_health_regen);
-  callback::on_joined_spectate(&end_health_regen);
-  callback::on_spawned(&player_health_regen);
-  callback::on_disconnect(&end_health_regen);
-  callback::on_player_killed(&end_health_regen);
+  callback::on_start_gametype( & init);
+  callback::on_joined_team( & end_health_regen);
+  callback::on_joined_spectate( & end_health_regen);
+  callback::on_spawned( & player_health_regen);
+  callback::on_disconnect( & end_health_regen);
+  callback::on_player_killed( & end_health_regen);
 }
 
 function init() {
@@ -41,7 +41,7 @@ function update_regen_delay_progress(duration) {
   remaining = duration;
   self.lastregendelayprogress = 0;
   self setcontrolleruimodelvalue("hudItems.regenDelayProgress", self.lastregendelayprogress);
-  while(remaining > 0) {
+  while (remaining > 0) {
     wait(duration / 5);
     remaining = remaining - (duration / 5);
     self.lastregendelayprogress = (1 - (remaining / duration)) + 0.05;
@@ -71,9 +71,9 @@ function player_health_regen() {
   lastsoundtime_recover = 0;
   hurttime = 0;
   newhealth = 0;
-  for(;;) {
+  for (;;) {
     wait(0.05);
-    if(isDefined(player.regenrate)) {
+    if(isdefined(player.regenrate)) {
       regenrate = player.regenrate;
       usetrueregen = 1;
     }
@@ -85,8 +85,8 @@ function player_health_regen() {
     if(player.health <= 0) {
       return;
     }
-    if(isDefined(player.laststand) && player.laststand) {
-      if(!isDefined(self.waiting_to_revive) || !self.waiting_to_revive) {
+    if(isdefined(player.laststand) && player.laststand) {
+      if(!isdefined(self.waiting_to_revive) || !self.waiting_to_revive) {
         self.lastregendelayprogress = 0;
         self setcontrolleruimodelvalue("hudItems.regenDelayProgress", 0);
       }
@@ -111,7 +111,7 @@ function player_health_regen() {
       }
       regendelayprogress = (gettime() - hurttime) / regentime;
       if(regendelayprogress < 1) {
-        if(!isDefined(self.lastregendelayprogress) || (int(self.lastregendelayprogress * 5)) != (int(regendelayprogress * 5))) {
+        if(!isdefined(self.lastregendelayprogress) || (int(self.lastregendelayprogress * 5)) != (int(regendelayprogress * 5))) {
           self.lastregendelayprogress = regendelayprogress;
           player setcontrolleruimodelvalue("hudItems.regenDelayProgress", regendelayprogress);
         }
@@ -130,7 +130,7 @@ function player_health_regen() {
         regendelayprogress = (gettime() - hurttime) / veryhurttime;
         if(regendelayprogress >= 1) {
           newhealth = newhealth + regenrate;
-        } else if(!isDefined(self.lastregendelayprogress) || (int(self.lastregendelayprogress * 5)) != (int(regendelayprogress * 5))) {
+        } else if(!isdefined(self.lastregendelayprogress) || (int(self.lastregendelayprogress * 5)) != (int(regendelayprogress * 5))) {
           self.lastregendelayprogress = regendelayprogress;
           player setcontrolleruimodelvalue("hudItems.regenDelayProgress", regendelayprogress);
         }
@@ -168,11 +168,11 @@ function player_health_regen() {
 }
 
 function decay_player_damages(decay) {
-  if(!isDefined(self.attackerdamage)) {
+  if(!isdefined(self.attackerdamage)) {
     return;
   }
-  for(i = 0; i < self.attackerdamage.size; i++) {
-    if(!isDefined(self.attackerdamage[i]) || !isDefined(self.attackerdamage[i].damage)) {
+  for (i = 0; i < self.attackerdamage.size; i++) {
+    if(!isdefined(self.attackerdamage[i]) || !isdefined(self.attackerdamage[i].damage)) {
       continue;
     }
     self.attackerdamage[i].damage = self.attackerdamage[i].damage - decay;
@@ -186,7 +186,7 @@ function player_breathing_sound(healthcap) {
   self endon("end_healthregen");
   wait(2);
   player = self;
-  for(;;) {
+  for (;;) {
     wait(0.2);
     if(player.health <= 0) {
       return;
@@ -207,17 +207,17 @@ function sndhealthlow(healthcap) {
   self endon("end_healthregen");
   self endon("removehealthregen");
   self.sndhealthlow = 0;
-  while(true) {
-    if(self.health <= healthcap && (!(isDefined(self laststand::player_is_in_laststand()) && self laststand::player_is_in_laststand()))) {
+  while (true) {
+    if(self.health <= healthcap && (!(isdefined(self laststand::player_is_in_laststand()) && self laststand::player_is_in_laststand()))) {
       self.sndhealthlow = 1;
       self clientfield::set_to_player("sndHealth", 1);
-      while(self.health <= healthcap) {
+      while (self.health <= healthcap) {
         wait(0.1);
       }
     }
     if(self.sndhealthlow) {
       self.sndhealthlow = 0;
-      if(!(isDefined(self laststand::player_is_in_laststand()) && self laststand::player_is_in_laststand())) {
+      if(!(isdefined(self laststand::player_is_in_laststand()) && self laststand::player_is_in_laststand())) {
         self clientfield::set_to_player("sndHealth", 0);
       }
     }

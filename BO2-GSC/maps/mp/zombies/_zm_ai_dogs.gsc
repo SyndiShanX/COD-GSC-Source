@@ -25,17 +25,14 @@ init() {
   precacherumble("explosion_generic");
   precacheshellshock("dog_bite");
 
-  if(getdvar(#"_id_942939D4") == "") {
+  if(getdvar(#"_id_942939D4") == "")
     setdvar("zombie_dog_animset", "zombie");
-  }
 
-  if(getdvar(#"_id_CAA5B74F") == "") {
+  if(getdvar(#"_id_CAA5B74F") == "")
     setdvar("scr_dog_health_walk_multiplier", "4.0");
-  }
 
-  if(getdvar(#"_id_C7E63BA4") == "") {
+  if(getdvar(#"_id_C7E63BA4") == "")
     setdvar("scr_dog_run_distance", "500");
-  }
 
   level.melee_range_sav = getdvar(#"ai_meleeRange");
   level.melee_width_sav = getdvar(#"ai_meleeWidth");
@@ -54,16 +51,15 @@ init() {
 enable_dog_rounds() {
   level.dog_rounds_enabled = 1;
 
-  if(!isDefined(level.dog_round_track_override)) {
+  if(!isDefined(level.dog_round_track_override))
     level.dog_round_track_override = ::dog_round_tracker;
-  }
 
   level thread[[level.dog_round_track_override]]();
 }
 
 dog_spawner_init() {
-  level.dog_spawners = getEntArray("zombie_dog_spawner", "script_noteworthy");
-  later_dogs = getEntArray("later_round_dog_spawners", "script_noteworthy");
+  level.dog_spawners = getentarray("zombie_dog_spawner", "script_noteworthy");
+  later_dogs = getentarray("later_round_dog_spawners", "script_noteworthy");
   level.dog_spawners = arraycombine(level.dog_spawners, later_dogs, 1, 0);
 
   if(level.dog_spawners.size == 0) {
@@ -82,16 +78,15 @@ dog_spawner_init() {
   assert(level.dog_spawners.size > 0);
   level.dog_health = 100;
   array_thread(level.dog_spawners, ::add_spawn_function, ::dog_init);
-  level.enemy_dog_spawns = getEntArray("zombie_spawner_dog_init", "targetname");
+  level.enemy_dog_spawns = getentarray("zombie_spawner_dog_init", "targetname");
 }
 
 dog_round_spawning() {
   level endon("intermission");
   level.dog_targets = getplayers();
 
-  for(i = 0; i < level.dog_targets.size; i++) {
+  for(i = 0; i < level.dog_targets.size; i++)
     level.dog_targets[i].hunted_by = 0;
-  }
 
   level endon("kill_round");
 
@@ -109,24 +104,21 @@ dog_round_spawning() {
   playsoundatposition("vox_zmba_event_dogstart_0", (0, 0, 0));
   wait 6;
 
-  if(level.dog_round_count < 3) {
+  if(level.dog_round_count < 3)
     max = players.size * 6;
-  } else {
+  else
     max = players.size * 8;
-  }
 
-  if(getdvar(#"_id_4077D7E0") != "") {
+  if(getdvar(#"_id_4077D7E0") != "")
     max = getdvarint(#"_id_4077D7E0");
-  }
 
   level.zombie_total = max;
   dog_health_increase();
   count = 0;
 
   while(count < max) {
-    for(num_player_valid = get_number_of_valid_players(); get_current_zombie_count() >= num_player_valid * 2; num_player_valid = get_number_of_valid_players()) {
+    for(num_player_valid = get_number_of_valid_players(); get_current_zombie_count() >= num_player_valid * 2; num_player_valid = get_number_of_valid_players())
       wait 2;
-    }
 
     players = get_players();
     favorite_enemy = get_favorite_enemy();
@@ -163,15 +155,14 @@ dog_round_spawning() {
 waiting_for_next_dog_spawn(count, max) {
   default_wait = 1.5;
 
-  if(level.dog_round_count == 1) {
+  if(level.dog_round_count == 1)
     default_wait = 3;
-  } else if(level.dog_round_count == 2) {
+  else if(level.dog_round_count == 2)
     default_wait = 2.5;
-  } else if(level.dog_round_count == 3) {
+  else if(level.dog_round_count == 3)
     default_wait = 2;
-  } else {
+  else
     default_wait = 1.5;
-  }
 
   default_wait = default_wait - count / max;
   wait(default_wait);
@@ -182,9 +173,8 @@ dog_round_aftermath() {
   level thread maps\mp\zombies\_zm_audio::change_zombie_music("dog_end");
   power_up_origin = level.last_dog_origin;
 
-  if(isDefined(power_up_origin)) {
+  if(isDefined(power_up_origin))
     level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
-  }
 
   wait 2;
   clientnotify("dog_stop");
@@ -195,7 +185,7 @@ dog_round_aftermath() {
 dog_spawn_fx(ai, ent) {
   ai endon("death");
   ai setfreecameralockonallowed(0);
-  playFX(level._effect["lightning_dog_spawn"], ent.origin);
+  playfx(level._effect["lightning_dog_spawn"], ent.origin);
   playsoundatposition("zmb_hellhound_prespawn", ent.origin);
   wait 1.5;
   playsoundatposition("zmb_hellhound_bolt", ent.origin);
@@ -227,9 +217,9 @@ dog_spawn_sumpf_logic(dog_array, favorite_enemy) {
       continue;
     }
     if(distancesquared(dog_array[i].origin, favorite_enemy.origin) > 160000 && distancesquared(dog_array[i].origin, favorite_enemy.origin) < 640000) {
-      if(distancesquared((0, 0, dog_array[i].origin[2]), (0, 0, favorite_enemy.origin[2])) > 10000) {
+      if(distancesquared((0, 0, dog_array[i].origin[2]), (0, 0, favorite_enemy.origin[2])) > 10000)
         continue;
-      } else {
+      else {
         level.old_dog_spawn = dog_array[i];
         return dog_array[i];
       }
@@ -262,20 +252,17 @@ get_favorite_enemy() {
   least_hunted = dog_targets[0];
 
   for(i = 0; i < dog_targets.size; i++) {
-    if(!isDefined(dog_targets[i].hunted_by)) {
+    if(!isDefined(dog_targets[i].hunted_by))
       dog_targets[i].hunted_by = 0;
-    }
 
     if(!is_player_valid(dog_targets[i])) {
       continue;
     }
-    if(!is_player_valid(least_hunted)) {
+    if(!is_player_valid(least_hunted))
       least_hunted = dog_targets[i];
-    }
 
-    if(dog_targets[i].hunted_by < least_hunted.hunted_by) {
+    if(dog_targets[i].hunted_by < least_hunted.hunted_by)
       least_hunted = dog_targets[i];
-    }
   }
 
   least_hunted.hunted_by = least_hunted.hunted_by + 1;
@@ -285,19 +272,17 @@ get_favorite_enemy() {
 dog_health_increase() {
   players = getplayers();
 
-  if(level.dog_round_count == 1) {
+  if(level.dog_round_count == 1)
     level.dog_health = 400;
-  } else if(level.dog_round_count == 2) {
+  else if(level.dog_round_count == 2)
     level.dog_health = 900;
-  } else if(level.dog_round_count == 3) {
+  else if(level.dog_round_count == 3)
     level.dog_health = 1300;
-  } else if(level.dog_round_count == 4) {
+  else if(level.dog_round_count == 4)
     level.dog_health = 1600;
-  }
 
-  if(level.dog_health > 1600) {
+  if(level.dog_health > 1600)
     level.dog_health = 1600;
-  }
 }
 
 dog_round_tracker() {
@@ -309,9 +294,8 @@ dog_round_tracker() {
   while(true) {
     level waittill("between_round_over");
 
-    if(getdvarint(#"_id_4077D7E0") > 0) {
+    if(getdvarint(#"_id_4077D7E0") > 0)
       level.next_dog_round = level.round_number;
-    }
 
     if(level.round_number == level.next_dog_round) {
       level.music_round_override = 1;
@@ -338,28 +322,25 @@ dog_round_start() {
   flag_set("dog_clips");
   level thread maps\mp\zombies\_zm_audio::change_zombie_music("dog_start");
 
-  if(!isDefined(level.doground_nomusic)) {
+  if(!isDefined(level.doground_nomusic))
     level.doground_nomusic = 0;
-  }
 
   level.doground_nomusic = 1;
   level notify("dog_round_starting");
   clientnotify("dog_start");
 
-  if(isDefined(level.dog_melee_range)) {
+  if(isDefined(level.dog_melee_range))
     setdvar("ai_meleeRange", level.dog_melee_range);
-  } else {
+  else
     setdvar("ai_meleeRange", 100);
-  }
 }
 
 dog_round_stop() {
   flag_clear("dog_round");
   flag_clear("dog_clips");
 
-  if(!isDefined(level.doground_nomusic)) {
+  if(!isDefined(level.doground_nomusic))
     level.doground_nomusic = 0;
-  }
 
   level.doground_nomusic = 0;
   level notify("dog_round_ending");
@@ -405,9 +386,8 @@ dog_init() {
   self.team = level.zombie_team;
   health_multiplier = 1.0;
 
-  if(getdvar(#"_id_CAA5B74F") != "") {
+  if(getdvar(#"_id_CAA5B74F") != "")
     health_multiplier = getdvarfloat(#"_id_CAA5B74F");
-  }
 
   self.maxhealth = int(level.dog_health * health_multiplier);
   self.health = int(level.dog_health * health_multiplier);
@@ -432,16 +412,15 @@ dog_init() {
   self.thundergun_knockdown_func = ::dog_thundergun_knockdown;
   self maps\mp\zombies\_zm_spawner::zombie_history("zombie_dog_spawn_init -> Spawned = " + self.origin);
 
-  if(isDefined(level.achievement_monitor_func)) {
+  if(isDefined(level.achievement_monitor_func))
     self[[level.achievement_monitor_func]]();
-  }
 }
 
 dog_fx_eye_glow() {
   self.fx_dog_eye = spawn("script_model", self gettagorigin("J_EyeBall_LE"));
   assert(isDefined(self.fx_dog_eye));
   self.fx_dog_eye.angles = self gettagangles("J_EyeBall_LE");
-  self.fx_dog_eye setModel("tag_origin");
+  self.fx_dog_eye setmodel("tag_origin");
   self.fx_dog_eye linkto(self, "J_EyeBall_LE");
 }
 
@@ -458,7 +437,7 @@ dog_fx_trail() {
   self.fx_dog_trail = spawn("script_model", self gettagorigin("tag_origin"));
   assert(isDefined(self.fx_dog_trail));
   self.fx_dog_trail.angles = self gettagangles("tag_origin");
-  self.fx_dog_trail setModel("tag_origin");
+  self.fx_dog_trail setmodel("tag_origin");
   self.fx_dog_trail linkto(self, "tag_origin");
 }
 
@@ -473,23 +452,20 @@ dog_death() {
   if(isplayer(self.attacker)) {
     event = "death";
 
-    if(issubstr(self.damageweapon, "knife_ballistic_")) {
+    if(issubstr(self.damageweapon, "knife_ballistic_"))
       event = "ballistic_knife_death";
-    }
 
     self.attacker maps\mp\zombies\_zm_score::player_add_points(event, self.damagemod, self.damagelocation, 1);
 
-    if(randomintrange(0, 100) >= 80) {
+    if(randomintrange(0, 100) >= 80)
       self.attacker maps\mp\zombies\_zm_audio::create_and_play_dialog("kill", "hellhound");
-    }
 
     self.attacker maps\mp\zombies\_zm_stats::increment_client_stat("zdogs_killed");
     self.attacker maps\mp\zombies\_zm_stats::increment_player_stat("zdogs_killed");
   }
 
-  if(isDefined(self.attacker) && isai(self.attacker)) {
+  if(isDefined(self.attacker) && isai(self.attacker))
     self.attacker notify("killed", self);
-  }
 
   self stoploopsound();
   assert(isDefined(self.fx_dog_eye));
@@ -501,11 +477,11 @@ dog_death() {
     level thread dog_explode_fx(self.origin);
     self delete();
   } else
-    self playSound("zmb_hellhound_vocals_death");
+    self playsound("zmb_hellhound_vocals_death");
 }
 
 dog_explode_fx(origin) {
-  playFX(level._effect["dog_gib"], origin);
+  playfx(level._effect["dog_gib"], origin);
   playsoundatposition("zmb_hellhound_explode", origin);
 }
 
@@ -528,7 +504,7 @@ dog_behind_audio() {
   self thread stop_dog_sound_on_death();
   self endon("death");
   self waittill_any("dog_running", "dog_combat");
-  self playSound("zmb_hellhound_vocals_close");
+  self playsound("zmb_hellhound_vocals_close");
   wait 3;
 
   while(true) {
@@ -539,7 +515,7 @@ dog_behind_audio() {
 
       if(isalive(players[i]) && !isDefined(players[i].revivetrigger)) {
         if(abs(dogangle) > 90 && distance2d(self.origin, players[i].origin) > 100) {
-          self playSound("zmb_hellhound_vocals_close");
+          self playsound("zmb_hellhound_vocals_close");
           wait 3;
         }
       }
@@ -551,7 +527,7 @@ dog_behind_audio() {
 
 dog_clip_monitor() {
   clips_on = 0;
-  level.dog_clips = getEntArray("dog_clips", "targetname");
+  level.dog_clips = getentarray("dog_clips", "targetname");
 
   while(true) {
     for(i = 0; i < level.dog_clips.size; i++) {
@@ -574,12 +550,11 @@ dog_clip_monitor() {
 
     while(dog_is_alive || flag("dog_round")) {
       dog_is_alive = 0;
-      dogs = getEntArray("zombie_dog", "targetname");
+      dogs = getentarray("zombie_dog", "targetname");
 
       for(i = 0; i < dogs.size; i++) {
-        if(isalive(dogs[i])) {
+        if(isalive(dogs[i]))
           dog_is_alive = 1;
-        }
       }
 
       wait 1;
@@ -593,13 +568,11 @@ dog_clip_monitor() {
 special_dog_spawn(spawners, num_to_spawn) {
   dogs = getaispeciesarray("all", "zombie_dog");
 
-  if(isDefined(dogs) && dogs.size >= 9) {
+  if(isDefined(dogs) && dogs.size >= 9)
     return false;
-  }
 
-  if(!isDefined(num_to_spawn)) {
+  if(!isDefined(num_to_spawn))
     num_to_spawn = 1;
-  }
 
   spawn_point = undefined;
   count = 0;
@@ -661,12 +634,11 @@ dog_run_think() {
   maps\mp\zombies\_zm_net::network_safe_play_fx_on_tag("dog_fx", 2, level._effect["dog_eye_glow"], self.fx_dog_eye, "tag_origin");
   assert(isDefined(self.fx_dog_trail));
   maps\mp\zombies\_zm_net::network_safe_play_fx_on_tag("dog_fx", 2, self.fx_dog_trail_type, self.fx_dog_trail, "tag_origin");
-  self playLoopSound(self.fx_dog_trail_sound);
+  self playloopsound(self.fx_dog_trail_sound);
 
   while(true) {
-    if(!is_player_valid(self.favoriteenemy)) {
+    if(!is_player_valid(self.favoriteenemy))
       self.favoriteenemy = get_favorite_enemy();
-    }
 
     wait 0.2;
   }
@@ -678,7 +650,7 @@ dog_stalk_audio() {
   self endon("dog_combat");
 
   while(true) {
-    self playSound("zmb_hellhound_vocals_amb");
+    self playsound("zmb_hellhound_vocals_amb");
     wait(randomfloatrange(3, 6));
   }
 }

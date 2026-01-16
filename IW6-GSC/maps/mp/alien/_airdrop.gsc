@@ -18,17 +18,14 @@ init_escape() {
     return;
   }
 
-  if(!flag_exist("hives_cleared")) {
+  if(!flag_exist("hives_cleared"))
     flag_init("hives_cleared");
-  }
 
-  if(!flag_exist("nuke_countdown")) {
+  if(!flag_exist("nuke_countdown"))
     flag_init("nuke_countdown");
-  }
 
-  if(!flag_exist("escape_conditions_met")) {
+  if(!flag_exist("escape_conditions_met"))
     flag_init("escape_conditions_met");
-  }
 
   flag_init("nuke_went_off");
 
@@ -92,9 +89,8 @@ escape() {
   level thread maps\mp\alien\_music_and_dialog::playVOForNukeArmed();
 
   escape_ent = getent("escape_zone", "targetname");
-  if(isDefined(level.rescue_waypoint)) {
+  if(isDefined(level.rescue_waypoint))
     level.rescue_waypoint destroy();
-  }
 
   level.rescue_waypoint = NewHudElem();
   level.rescue_waypoint SetShader("waypoint_alien_beacon", 14, 14);
@@ -128,9 +124,8 @@ escape() {
 players_use_nuke_monitor(nuke_trig) {
   level endon("all_players_using_nuke");
 
-  foreach(player in level.players) {
-    player thread watch_for_use_nuke_trigger(nuke_trig);
-  }
+  foreach(player in level.players)
+  player thread watch_for_use_nuke_trigger(nuke_trig);
 
   while(true) {
     level waittill("connected", player);
@@ -150,9 +145,8 @@ rescue_think(escape_start_time) {
 
   thread call_in_rescue_heli(chopper_loc, chopper_angles, 10);
 
-  while(!isDefined(level.rescue_heli)) {
+  while(!isDefined(level.rescue_heli))
     wait 0.05;
-  }
 
   level.rescue_heli delaythread(5, maps\mp\alien\_music_and_dialog::play_pilot_vo, "so_alien_plt_comeon");
 
@@ -232,9 +226,8 @@ watch_player_escape(escape_ent, escape_start_time) {
 
   flag_set("escape_conditions_met");
 
-  if(isDefined(level.rescue_waypoint)) {
+  if(isDefined(level.rescue_waypoint))
     level.rescue_waypoint destroy();
-  }
 
   assertex(isDefined(level.rescue_heli), "Chopper became undefined while waiting to rescue");
   level.rescue_heli notify("extract");
@@ -245,9 +238,8 @@ watch_player_escape(escape_ent, escape_start_time) {
     if(player IsTouching(escape_trig) && isalive(player) && !(isDefined(player.laststand) && player.laststand)) {
       players_escaped[players_escaped.size] = player;
 
-      if(!is_casual_mode()) {
+      if(!is_casual_mode())
         player maps\mp\alien\_persistence::set_player_escaped();
-      }
 
       player.nuke_escaped = true;
     } else {
@@ -257,17 +249,15 @@ watch_player_escape(escape_ent, escape_start_time) {
   }
 
   foreach(player in level.players) {
-    if(true == player.nuke_escaped) {
+    if(true == player.nuke_escaped)
       player maps\mp\alien\_persistence::award_completion_tokens();
-    }
   }
 
   level.num_players_left = level.players.size - players_escaped.size;
   level.num_players_escaped = players_escaped.size;
 
-  foreach(player in players_left) {
-    player IPrintLnBold(&"ALIEN_COLLECTIBLES_YOU_DIDNT_MAKE_IT");
-  }
+  foreach(player in players_left)
+  player IPrintLnBold(&"ALIEN_COLLECTIBLES_YOU_DIDNT_MAKE_IT");
 
   if(players_escaped.size == 0) {
     failed_msg = maps\mp\alien\_hud::get_end_game_string_index("fail_escape");
@@ -281,9 +271,8 @@ watch_player_escape(escape_ent, escape_start_time) {
   teleport_struct = getstruct("player_teleport_loc", "targetname");
   teleport_loc = teleport_struct.origin;
 
-  foreach(player in players_escaped) {
-    player thread player_blend_to_chopper();
-  }
+  foreach(player in players_escaped)
+  player thread player_blend_to_chopper();
 
   wait 1.6;
 
@@ -318,11 +307,10 @@ watch_player_escape(escape_ent, escape_start_time) {
 
   wait 2;
 
-  if(players_escaped.size == level.players.size) {
+  if(players_escaped.size == level.players.size)
     win_msg = maps\mp\alien\_hud::get_end_game_string_index("all_escape");
-  } else {
+  else
     win_msg = maps\mp\alien\_hud::get_end_game_string_index("some_escape");
-  }
 
   level delaythread(10, maps\mp\gametypes\aliens::AlienEndGame, "allies", win_msg);
 }
@@ -394,13 +382,12 @@ force_crouch(force_on) {
   self endon("death");
   self endon("remove_force_crouch");
 
-  if(isDefined(force_on) && force_on == false) {
+  if(isDefined(force_on) && force_on == false)
     self notify("remove_force_crouch");
-  } else {
+  else {
     while(1) {
-      if(self GetStance() != "crouch") {
+      if(self GetStance() != "crouch")
         self setstance("crouch");
-      }
       wait 0.05;
     }
   }
@@ -420,20 +407,18 @@ wait_for_escape_conditions_met(trig) {
       if(!isalive(player) || (isDefined(player.laststand) && player.laststand)) {
         continue;
       }
-      if(player IsTouching(trig)) {
+      if(player IsTouching(trig))
         alive_players_inside[alive_players_inside.size] = player;
-      } else {
+      else
         alive_players_outside[alive_players_outside.size] = player;
-      }
     }
 
     if(alive_players_inside.size == 0) {
       wait 0.05;
       continue;
     } else {
-      if(alive_players_outside.size == 0) {
+      if(alive_players_outside.size == 0)
         return;
-      }
     }
 
     wait 0.05;
@@ -444,14 +429,12 @@ wait_for_all_player_use() {
   level endon("game_ended");
 
   if(maps\mp\alien\_debug::startPointEnabled()) {
-    while(level.players.size == 0) {
+    while(level.players.size == 0)
       wait(0.5);
-    }
   }
 
-  while(!are_all_players_using_nuke()) {
+  while(!are_all_players_using_nuke())
     wait 0.05;
-  }
 
   level notify("all_players_using_nuke");
 }
@@ -459,9 +442,8 @@ wait_for_all_player_use() {
 are_all_players_using_nuke() {
   result = true;
   foreach(player in level.players) {
-    if(!isDefined(player.player_using_nuke) || !player.player_using_nuke) {
+    if(!isDefined(player.player_using_nuke) || !player.player_using_nuke)
       result = false;
-    }
   }
 
   return result;
@@ -603,23 +585,20 @@ infinite_mode_events() {
 wait_for_special_spawn() {
   level endon("force_chaos_event");
 
-  if(level.infinite_event_index == 1) {
+  if(level.infinite_event_index == 1)
     wait 5;
-  } else {
+  else
     wait level.infinite_event_interval;
-  }
 
-  if(GetDvarInt("alien_debug_escape") > 0) {
+  if(GetDvarInt("alien_debug_escape") > 0)
     IPrintLnBold("^0[SPECIALS SPAWNED][^7TIMED^0]");
-  }
 }
 
 setup_special_spawn_trigs() {
   level.special_spawn_trigs = getEntArray("force_special_spawn_trig", "targetname");
 
-  foreach(trig in level.special_spawn_trigs) {
-    trig thread watch_special_spawn_trig();
-  }
+  foreach(trig in level.special_spawn_trigs)
+  trig thread watch_special_spawn_trig();
 }
 
 watch_special_spawn_trig() {
@@ -631,9 +610,8 @@ watch_special_spawn_trig() {
   if(!flag_exist("nuke_countdown")) {
     return;
   }
-  if(!flag("nuke_countdown")) {
+  if(!flag("nuke_countdown"))
     flag_wait("nuke_countdown");
-  }
 
   while(1) {
     self waittill("trigger", player);
@@ -650,22 +628,19 @@ watch_special_spawn_trig() {
     if((gettime() - level.last_special_event_spawn_time) / 1000 > grace_period) {
       level notify("force_chaos_event");
 
-      if(GetDvarInt("alien_debug_escape") > 0) {
+      if(GetDvarInt("alien_debug_escape") > 0)
         IPrintLnBold("^0[SPECIALS SPAWNED][^7TRIGGERED^0]");
-      }
 
     }
   } else {
-    if(GetDvarInt("alien_debug_escape") > 0) {
+    if(GetDvarInt("alien_debug_escape") > 0)
       IPrintLnBold("^0[SPECIALS SPAWNED][^7TRIGGERED^0]");
-    }
 
     level notify("force_chaos_event");
   }
 
-  if(isDefined(level.special_spawn_trigs) && level.special_spawn_trigs.size) {
+  if(isDefined(level.special_spawn_trigs) && level.special_spawn_trigs.size)
     level.special_spawn_trigs = array_remove(level.special_spawn_trigs, self);
-  }
 
   self delete();
 }
@@ -786,9 +761,8 @@ call_in_attack_heli(player_loops, reward_pool) {
   level.attack_heli thread heli_turret_think();
   level.attack_heli thread heli_fx_setup();
 
-  if(isDefined(reward_pool)) {
+  if(isDefined(reward_pool))
     level.attack_heli.reward_pool = reward_pool;
-  }
 
   level.attack_heli heli_fly_to(path_goal_pos, CONST_HELI_FLY_IN_SPEED);
   level.attack_heli maps\mp\alien\_music_and_dialog::playVOforAttackChopperIncoming();
@@ -850,11 +824,10 @@ call_in_hive_heli(primary_target) {
     level.hive_heli thread heli_fx_setup();
   }
 
-  if(level.hive_heli ent_flag_exist("assault_ready")) {
+  if(level.hive_heli ent_flag_exist("assault_ready"))
     level.hive_heli ent_flag_clear("assault_ready");
-  } else {
+  else
     level.hive_heli ent_flag_init("assault_ready");
-  }
 
   level.hive_heli SetHoverParams(60, 30, 20);
   level.hive_heli SetYawSpeed(50, 50);
@@ -947,25 +920,22 @@ hive_heli_assault_loop() {
       counter = 0;
       self heli_loop(1, false, ::get_assault_loop_loc, "blocker_hive_destroyed", 35);
 
-      if(!flag("evade")) {
+      if(!flag("evade"))
         continue;
-      }
     }
 
-    if(!flag("evade")) {
+    if(!flag("evade"))
       self waittill_any_timeout(assault_duration_per_node, "evade");
-    }
 
     if(flag("evade")) {
       SetIgnoreMeGroup("hive_heli", "spitters");
 
       stopFXOnTag(level._effect["alien_heli_spotlight"], level.hive_heli, "tag_flash");
 
-      if(!is_hardcore_mode()) {
+      if(!is_hardcore_mode())
         self heli_loop(4, false, ::get_assault_loop_loc, "blocker_hive_destroyed", 35);
-      } else {
+      else
         self heli_loop(6, false, ::get_assault_loop_loc, "blocker_hive_destroyed", 35);
-      }
 
       flag_clear("evade");
 
@@ -1012,9 +982,8 @@ heli_hp_monitor() {
       self notify("new_flight_path");
     }
 
-    if(flag("evade")) {
+    if(flag("evade"))
       flag_waitopen("evade");
-    }
 
     wait 0.5;
   }
@@ -1048,11 +1017,10 @@ get_assault_loop_loc() {
   loop_struct_name = "assault_loop_" + maps\mp\alien\_hive::get_blocker_hive_index();
   loop_struct = getstruct(loop_struct_name, "targetname");
 
-  if(flag_exist("evade") && flag("evade")) {
+  if(flag_exist("evade") && flag("evade"))
     return loop_struct.origin + (0, 0, 600);
-  } else {
+  else
     return loop_struct.origin;
-  }
 }
 
 spawn_hive_heli_reward(loc) {
@@ -1107,9 +1075,8 @@ heli_exit(exit_loc, no_delete) {
 
   self heli_fly_to(exit_loc, CONST_HELI_FLY_OUT_SPEED);
 
-  if(!isDefined(no_delete) || !no_delete) {
+  if(!isDefined(no_delete) || !no_delete)
     self delete();
-  }
 }
 
 heli_setup(owner, path_start_pos, path_goal_pos) {
@@ -1195,9 +1162,8 @@ heli_turret_think(favorite_target, favorite_target_bias) {
 get_primary_target(favorite_target, favorite_target_bias) {
   targets = [];
   foreach(agent in level.agentArray) {
-    if(!isDefined(agent.allowVehicleDamage)) {
+    if(!isDefined(agent.allowVehicleDamage))
       agent.allowVehicleDamage = true;
-    }
 
     if(agent.team != "axis") {
       continue;
@@ -1224,16 +1190,14 @@ get_primary_target(favorite_target, favorite_target_bias) {
       dist_to_alien = Distance(targets[0].origin, self.origin);
       dist_favorite_target = Distance(favorite_target.origin, self.origin);
 
-      if(dist_to_alien >= dist_favorite_target / favorite_target_bias) {
+      if(dist_to_alien >= dist_favorite_target / favorite_target_bias)
         return favorite_target;
-      }
     }
 
     return targets[0];
   } else {
-    if(isDefined(favorite_target)) {
+    if(isDefined(favorite_target))
       return favorite_target;
-    }
 
     return undefined;
   }
@@ -1244,20 +1208,18 @@ heli_fly_to(path_goal_pos, speed, endon_msg) {
   self endon("new_flight_path");
   self endon("convert_to_hive_heli");
 
-  if(isDefined(endon_msg)) {
+  if(isDefined(endon_msg))
     level endon(endon_msg);
-  }
 
   self Vehicle_SetSpeed(speed, speed * 0.75, speed * 0.75);
   self setVehGoalPos(path_goal_pos, 1);
 
   debug_line(self.origin, path_goal_pos, (0, 0.5, 1), 200);
 
-  if(isDefined(self.near_goal) && self.near_goal) {
+  if(isDefined(self.near_goal) && self.near_goal)
     self waittill("near_goal");
-  } else {
+  else
     self waittill("goal");
-  }
 }
 
 heli_loop(loop_num, counter_clockwise, loop_center_func, self_endon_msg, loop_speed_override) {
@@ -1272,17 +1234,15 @@ heli_loop(loop_num, counter_clockwise, loop_center_func, self_endon_msg, loop_sp
   }
 
   angular_interval = 12;
-  if(isDefined(counter_clockwise) && counter_clockwise) {
+  if(isDefined(counter_clockwise) && counter_clockwise)
     angular_interval *= -1;
-  }
 
   angular_shift = 0;
   radius_vec = (0, level.heli_loop_radius, 0);
 
   loop_speed = CONST_HELI_LOOP_SPEED;
-  if(isDefined(loop_speed_override)) {
+  if(isDefined(loop_speed_override))
     loop_speed = loop_speed_override;
-  }
 
   last_goal = self.origin;
   next_goal_pos = last_goal;
@@ -1360,9 +1320,8 @@ is_weight_a_less_than_b(loc_a, loc_b) {
 }
 
 get_center_of_players(height_offset) {
-  if(!isDefined(height_offset)) {
+  if(!isDefined(height_offset))
     height_offset = 0;
-  }
 
   x = 0;
   y = 0;
@@ -1380,13 +1339,11 @@ get_center_of_players(height_offset) {
 }
 
 register_sub_item(item, upgrade_rank, drop_chance) {
-  if(!isDefined(level.chaos_sub_items)) {
+  if(!isDefined(level.chaos_sub_items))
     level.chaos_sub_items = [];
-  }
 
-  if(!isDefined(drop_chance)) {
+  if(!isDefined(drop_chance))
     drop_chance = 1;
-  }
 
   for(i = 0; i < drop_chance; i++) {
     index = level.chaos_sub_items.size;
@@ -1401,9 +1358,8 @@ get_random_airdrop_sub_item() {
 }
 
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if(!isPlayer(attacker) && isDefined(attacker.owner) && isPlayer(attacker.owner)) {
+  if(!isPlayer(attacker) && isDefined(attacker.owner) && isPlayer(attacker.owner))
     attacker = attacker.owner;
-  }
 
   if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased)) {
     return;
@@ -1444,9 +1400,8 @@ set_chaos_airdrop_icon(loc, delete_delay) {
   level endon("game_ended");
   level endon("new_chaos_airdrop");
 
-  if(isDefined(level.airdrop_icon)) {
+  if(isDefined(level.airdrop_icon))
     level.airdrop_icon destroy();
-  }
 
   level.airdrop_icon = NewHudElem();
 
@@ -1460,9 +1415,8 @@ set_chaos_airdrop_icon(loc, delete_delay) {
 
   wait delete_delay;
 
-  if(isDefined(level.airdrop_icon)) {
+  if(isDefined(level.airdrop_icon))
     level.airdrop_icon destroy();
-  }
 }
 
 get_chaos_airdrop_loc() {
@@ -1475,9 +1429,8 @@ get_chaos_airdrop_loc() {
   airdrop_locs = SortByDistance(airdrop_locs, CoM);
   airdrop_locs_at_range = [];
   foreach(loc in airdrop_locs) {
-    if(distance(loc.origin, CoM) > min_dist) {
+    if(distance(loc.origin, CoM) > min_dist)
       airdrop_locs_at_range[airdrop_locs_at_range.size] = loc;
-    }
   }
 
   assertex(airdrop_locs_at_range.size, "Did not find an airdrop loc at range...");
@@ -1527,9 +1480,8 @@ spawn_random_airdrop_sub_items(array_locs) {
     player = level.players[randomint(level.players.size)];
     player.team_currency_rank = boxUpgrade;
 
-    if(boxType == "deployable_currency") {
+    if(boxType == "deployable_currency")
       loc += (0, 0, 16);
-    }
 
     box = maps\mp\killstreaks\_deployablebox::createBoxForPlayer(boxType, loc, player);
     box.upgrade_rank = boxUpgrade;
@@ -1593,9 +1545,8 @@ init_chaos_airdrop() {
     loc.sub_locs = [];
     loc.sub_locs[0] = loc.origin;
     sub_locs = getstructarray(loc.target, "targetname");
-    foreach(sub_loc in sub_locs) {
-      loc.sub_locs[loc.sub_locs.size] = sub_loc.origin;
-    }
+    foreach(sub_loc in sub_locs)
+    loc.sub_locs[loc.sub_locs.size] = sub_loc.origin;
 
     loc.weight = 0;
   }
@@ -1669,9 +1620,8 @@ show_blocker_hive_hint_text(hint) {
   self endon("death");
   self endon("disconnect");
 
-  while(isDefined(self.useBarText)) {
+  while(isDefined(self.useBarText))
     wait(.1);
-  }
 
   fontsize = 1.5;
   font = "objective";
@@ -1694,9 +1644,8 @@ show_drill_hint() {
   distance_check = 350 * 350;
   while(is_blocker_alive()) {
     if(isDefined(level.current_blocker_hive) && isDefined(level.drill_carrier) && level.drill_carrier == self) {
-      if(DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self) {
-        self setLowerMessage("hive_drill_hint", &"ALIENS_BLOCKER_HIVE_DRILL_HINT");
-      }
+      if(DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)
+        self setLowerMessage("hive_drill_hint", & "ALIENS_BLOCKER_HIVE_DRILL_HINT");
 
       while(is_blocker_alive() &&
         (DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)) {
@@ -1709,9 +1658,8 @@ show_drill_hint() {
 }
 
 is_blocker_alive() {
-  if(!flag_exist("blocker_hive_destroyed")) {
+  if(!flag_exist("blocker_hive_destroyed"))
     return false;
-  }
 
   return (!flag("blocker_hive_destroyed") && isDefined(level.current_blocker_hive));
 }

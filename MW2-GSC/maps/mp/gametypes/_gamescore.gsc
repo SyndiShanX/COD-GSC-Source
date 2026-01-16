@@ -7,14 +7,14 @@
 #include maps\mp\gametypes\_hud_util;
 #include common_scripts\utility;
 
+
 getHighestScoringPlayer() {
   updatePlacement();
 
-  if(!level.placement["all"].size) {
+  if(!level.placement["all"].size)
     return (undefined);
-  } else {
+  else
     return (level.placement["all"][0]);
-  }
 }
 
 getLosingPlayers() {
@@ -24,9 +24,8 @@ getLosingPlayers() {
   losingPlayers = [];
 
   foreach(player in players) {
-    if(player == level.placement["all"][0]) {
+    if(player == level.placement["all"][0])
       continue;
-    }
 
     losingPlayers[losingPlayers.size] = player;
   }
@@ -35,36 +34,31 @@ getLosingPlayers() {
 }
 
 givePlayerScore(event, player, victim) {
-  if(isDefined(level.nukeIncoming)) {
+  if(isDefined(level.nukeIncoming))
     return;
-  }
 
   score = player.pers["score"];
   onPlayerScore(event, player, victim);
 
-  if(score == player.pers["score"]) {
+  if(score == player.pers["score"])
     return;
-  }
 
-  if(!player rankingEnabled() && !level.hardcoreMode) {
+  if(!player rankingEnabled() && !level.hardcoreMode)
     player thread maps\mp\gametypes\_rank::scorePopup((player.pers["score"] - score), false, (0.85, 0.85, 0.85), 0);
-  }
 
   player maps\mp\gametypes\_persistence::statAdd("score", (player.pers["score"] - score));
 
   player.score = player.pers["score"];
   player maps\mp\gametypes\_persistence::statSetChild("round", "score", player.score);
 
-  if(!level.teambased) {
+  if(!level.teambased)
     thread sendUpdatedDMScores();
-  }
 
   player maps\mp\gametypes\_gamelogic::checkPlayerScoreLimitSoon();
   scoreEndedMatch = player maps\mp\gametypes\_gamelogic::checkScoreLimit();
 
-  if(scoreEndedMatch && event == "kill") {
+  if(scoreEndedMatch && event == "kill")
     player.finalKill = true;
-  }
 }
 
 onPlayerScore(event, player, victim) {
@@ -77,9 +71,8 @@ onPlayerScore(event, player, victim) {
 
 // Seems to only be used for reducing a player's score due to suicide
 _setPlayerScore(player, score) {
-  if(score == player.pers["score"]) {
+  if(score == player.pers["score"])
     return;
-  }
 
   player.pers["score"] = score;
   player.score = player.pers["score"];
@@ -92,9 +85,8 @@ _getPlayerScore(player) {
 }
 
 giveTeamScoreForObjective(team, score) {
-  if(isDefined(level.nukeIncoming)) {
+  if(isDefined(level.nukeIncoming))
     return;
-  }
 
   score *= level.objectivePointsMod;
 
@@ -102,60 +94,53 @@ giveTeamScoreForObjective(team, score) {
 
   otherTeam = level.otherTeam[team];
 
-  if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
+  if(game["teamScores"][team] > game["teamScores"][otherTeam])
     level.wasWinning = team;
-  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  else if(game["teamScores"][otherTeam] > game["teamScores"][team])
     level.wasWinning = otherTeam;
-  }
 
   _setTeamScore(team, _getTeamScore(team) + score);
 
   isWinning = "none";
-  if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
+  if(game["teamScores"][team] > game["teamScores"][otherTeam])
     isWinning = team;
-  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  else if(game["teamScores"][otherTeam] > game["teamScores"][team])
     isWinning = otherTeam;
-  }
 
   if(!level.splitScreen && isWinning != "none" && isWinning != level.wasWinning && getTime() - level.lastStatusTime > 5000 && getScoreLimit() != 1) {
     level.lastStatusTime = getTime();
     leaderDialog("lead_taken", isWinning, "status");
-    if(level.wasWinning != "none") {
+    if(level.wasWinning != "none")
       leaderDialog("lead_lost", level.wasWinning, "status");
-    }
   }
 
-  if(isWinning != "none") {
+  if(isWinning != "none")
     level.wasWinning = isWinning;
-  }
 }
 
 getWinningTeam() {
-  if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
+  if(game["teamScores"]["allies"] > game["teamScores"]["axis"])
     return ("allies");
-  } else if(game["teamScores"]["allies"] < game["teamScores"]["axis"]) {
+  else if(game["teamScores"]["allies"] < game["teamScores"]["axis"])
     return ("axis");
-  }
 
   return ("none");
 }
 
 _setTeamScore(team, teamScore) {
-  if(teamScore == game["teamScores"][team]) {
+  if(teamScore == game["teamScores"][team])
     return;
-  }
 
-  if(isDefined(level.nukeIncoming)) {
+  if(isDefined(level.nukeIncoming))
     return;
-  }
 
   game["teamScores"][team] = teamScore;
 
   updateTeamScore(team);
 
-  if(game["status"] == "overtime") {
+  if(game["status"] == "overtime")
     thread maps\mp\gametypes\_gamelogic::onScoreLimit();
-  } else {
+  else {
     thread maps\mp\gametypes\_gamelogic::checkTeamScoreLimitSoon(team);
     thread maps\mp\gametypes\_gamelogic::checkScoreLimit();
   }
@@ -165,11 +150,10 @@ updateTeamScore(team) {
   assert(level.teamBased);
 
   teamScore = 0;
-  if(!isRoundBased() || !isObjectiveBased()) {
+  if(!isRoundBased() || !isObjectiveBased())
     teamScore = _getTeamScore(team);
-  } else {
+  else
     teamScore = game["roundsWon"][team];
-  }
 
   setTeamScore(team, teamScore);
 
@@ -187,9 +171,8 @@ sendUpdatedTeamScores() {
 
   WaitTillSlowProcessAllowed();
 
-  foreach(player in level.players) {
-    player updateScores();
-  }
+  foreach(player in level.players)
+  player updateScores();
 }
 
 sendUpdatedDMScores() {
@@ -199,7 +182,7 @@ sendUpdatedDMScores() {
 
   WaitTillSlowProcessAllowed();
 
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     level.players[i] updateDMScores();
     level.players[i].updatedDMScores = true;
   }
@@ -209,18 +192,15 @@ removeDisconnectedPlayerFromPlacement() {
   offset = 0;
   numPlayers = level.placement["all"].size;
   found = false;
-  for(i = 0; i < numPlayers; i++) {
-    if(level.placement["all"][i] == self) {
+  for (i = 0; i < numPlayers; i++) {
+    if(level.placement["all"][i] == self)
       found = true;
-    }
 
-    if(found) {
+    if(found)
       level.placement["all"][i] = level.placement["all"][i + 1];
-    }
   }
-  if(!found) {
+  if(!found)
     return;
-  }
 
   level.placement["all"][numPlayers - 1] = undefined;
   assert(level.placement["all"].size == numPlayers - 1);
@@ -231,7 +211,7 @@ removeDisconnectedPlayerFromPlacement() {
   }
 
   numPlayers = level.placement["all"].size;
-  for(i = 0; i < numPlayers; i++) {
+  for (i = 0; i < numPlayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -243,56 +223,48 @@ updatePlacement() {
 
   placementAll = [];
   foreach(player in level.players) {
-    if(isDefined(player.connectedPostGame) || (player.pers["team"] != "allies" && player.pers["team"] != "axis")) {
+    if(isDefined(player.connectedPostGame) || (player.pers["team"] != "allies" && player.pers["team"] != "axis"))
       continue;
-    }
 
     placementAll[placementAll.size] = player;
   }
 
-  for(i = 1; i < placementAll.size; i++) {
+  for (i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    //		for( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
-    for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--) {
+    //		for ( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
+    for (j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
       placementAll[j + 1] = placementAll[j];
-    }
     placementAll[j + 1] = player;
   }
 
   level.placement["all"] = placementAll;
 
-  if(level.teamBased) {
+  if(level.teamBased)
     updateTeamPlacement();
-  }
 
   prof_end("updatePlacement");
 }
 
 getBetterPlayer(playerA, playerB) {
-  if(playerA.score > playerB.score) {
+  if(playerA.score > playerB.score)
     return playerA;
-  }
 
-  if(playerB.score > playerA.score) {
+  if(playerB.score > playerA.score)
     return playerB;
-  }
 
-  if(playerA.deaths < playerB.deaths) {
+  if(playerA.deaths < playerB.deaths)
     return playerA;
-  }
 
-  if(playerB.deaths < playerA.deaths) {
+  if(playerB.deaths < playerA.deaths)
     return playerB;
-  }
 
   // TODO: more metrics for getting the better player
 
-  if(cointoss()) {
+  if(cointoss())
     return playerA;
-  } else {
+  else
     return playerB;
-  }
 }
 
 updateTeamPlacement() {
@@ -305,7 +277,7 @@ updateTeamPlacement() {
   placementAll = level.placement["all"];
   placementAllSize = placementAll.size;
 
-  for(i = 0; i < placementAllSize; i++) {
+  for (i = 0; i < placementAllSize; i++) {
     player = placementAll[i];
     team = player.pers["team"];
 
@@ -323,20 +295,18 @@ initialDMScoreUpdate() {
   // the first time someone kills someone else.
   wait .2;
   numSent = 0;
-  while(1) {
+  while (1) {
     didAny = false;
 
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!isDefined(player)) {
+      if(!isdefined(player))
         continue;
-      }
 
-      if(isDefined(player.updatedDMScores)) {
+      if(isdefined(player.updatedDMScores))
         continue;
-      }
 
       player.updatedDMScores = true;
       player updateDMScores();
@@ -345,9 +315,8 @@ initialDMScoreUpdate() {
       wait .5;
     }
 
-    if(!didAny) {
+    if(!didAny)
       wait 3; // let more players connect
-    }
   }
 }
 
@@ -358,13 +327,11 @@ processAssist(killedplayer) {
   wait .05; // don't ever run on the same frame as the playerkilled callback.
   WaitTillSlowProcessAllowed();
 
-  if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
+  if(self.pers["team"] != "axis" && self.pers["team"] != "allies")
     return;
-  }
 
-  if(self.pers["team"] == killedplayer.pers["team"]) {
+  if(self.pers["team"] == killedplayer.pers["team"])
     return;
-  }
 
   self thread[[level.onXPEvent]]("assist");
   self incPersStat("assists", 1);
@@ -384,13 +351,11 @@ processShieldAssist(killedPlayer) {
   wait .05; // don't ever run on the same frame as the playerkilled callback.
   WaitTillSlowProcessAllowed();
 
-  if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
+  if(self.pers["team"] != "axis" && self.pers["team"] != "allies")
     return;
-  }
 
-  if(self.pers["team"] == killedplayer.pers["team"]) {
+  if(self.pers["team"] == killedplayer.pers["team"])
     return;
-  }
 
   self thread[[level.onXPEvent]]("assist");
   self thread[[level.onXPEvent]]("assist");

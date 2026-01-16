@@ -4,11 +4,13 @@
 *********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace wz_wingsuit_hud;
 
 class cwz_wingsuit_hud: cluielem {
+
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "wz_wingsuit_hud");
+    cluielem::open(localclientnum, #"wz_wingsuit_hud");
   }
 
   function function_fa582112(localclientnum) {

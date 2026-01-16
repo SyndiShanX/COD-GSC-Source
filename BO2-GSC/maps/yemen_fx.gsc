@@ -9,7 +9,8 @@
 #include maps\createfx\yemen_fx;
 #include maps\yemen_utility;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["drone_weapon_flash"] = loadfx("weapon/muzzleflashes/fx_muz_ar_flash_3p");
@@ -199,9 +200,8 @@ footsteps() {
 createfx_setup() {
   level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "") {
+  if(level.skipto_point == "")
     level.skipto_point = "speech";
-  }
 
   maps\yemen_utility::load_gumps();
 }

@@ -150,7 +150,7 @@ function main() {
   precache_util_fx();
   precache_createfx_fx();
   disablefx = getdvarint("disable_fx");
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isdefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
   level thread trap_fx_monitor("flame_trap", "str_flame_trap");
@@ -163,13 +163,13 @@ function setup_prop_anims() {
 
 function play_fx_prop_anims() {
   fxanim_props = struct::get_array("fxanim_chamber_rocks", "targetname");
-  array::thread_all(fxanim_props, &function_1c1d65fb);
+  array::thread_all(fxanim_props, & function_1c1d65fb);
 }
 
 function function_1c1d65fb() {
   self endon("delete");
-  scene::add_scene_func(self.scriptbundlename, &function_b9b12551, "done");
-  while(true) {
+  scene::add_scene_func(self.scriptbundlename, & function_b9b12551, "done");
+  while (true) {
     self scene::play(self.scriptbundlename);
     wait(randomfloatrange(10, 30));
   }
@@ -182,10 +182,10 @@ function function_b9b12551(a_ents) {
 }
 
 function trap_fx_monitor(str_name, str_side) {
-  while(true) {
+  while (true) {
     level waittill(str_name);
     var_276d0f92 = struct::get_array(str_name, "targetname");
-    for(i = 0; i < var_276d0f92.size; i++) {
+    for (i = 0; i < var_276d0f92.size; i++) {
       if(str_name == "flame_trap") {
         var_276d0f92[i] thread function_ea3d061(str_name, str_side);
       }
@@ -195,31 +195,31 @@ function trap_fx_monitor(str_name, str_side) {
 
 function function_ea3d061(str_name, str_side) {
   var_498b0d1c = self.angles;
-  vec_forward = anglesToForward(var_498b0d1c);
-  if(isDefined(self.var_6d5392e9)) {
-    for(i = 0; i < self.var_6d5392e9.size; i++) {
+  vec_forward = anglestoforward(var_498b0d1c);
+  if(isdefined(self.var_6d5392e9)) {
+    for (i = 0; i < self.var_6d5392e9.size; i++) {
       stopfx(i, self.var_6d5392e9[i]);
     }
     self.var_6d5392e9 = [];
   }
-  if(!isDefined(self.var_6d5392e9)) {
+  if(!isdefined(self.var_6d5392e9)) {
     self.var_6d5392e9 = [];
   }
   a_players = getlocalplayers();
-  for(i = 0; i < a_players.size; i++) {
-    self.var_6d5392e9[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+  for (i = 0; i < a_players.size; i++) {
+    self.var_6d5392e9[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait(1);
     level.var_d9c7b303 = 1;
     level thread function_b8462abd();
-    while(level.var_d9c7b303) {
-      self.var_6d5392e9[i] = playFX(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
+    while (level.var_d9c7b303) {
+      self.var_6d5392e9[i] = playfx(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
       wait(1);
     }
-    self.var_6d5392e9[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+    self.var_6d5392e9[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait(1);
   }
   level waittill(str_side + "off");
-  for(i = 0; i < self.var_6d5392e9.size; i++) {
+  for (i = 0; i < self.var_6d5392e9.size; i++) {
     stopfx(i, self.var_6d5392e9[i]);
   }
   self.var_6d5392e9 = [];

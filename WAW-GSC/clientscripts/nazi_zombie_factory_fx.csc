@@ -38,10 +38,10 @@ main() {
 }
 
 trap_fx_monitor(name, side) {
-  while(1) {
+  while (1) {
     level waittill(name);
     fire_points = getstructarray(name, "targetname");
-    for(i = 0; i < fire_points.size; i++) {
+    for (i = 0; i < fire_points.size; i++) {
       fire_points[i] thread electric_trap_fx(name, side);
     }
   }
@@ -49,10 +49,10 @@ trap_fx_monitor(name, side) {
 
 electric_trap_fx(name, side) {
   ang = self.angles;
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
-    for(i = 0; i < self.loopFX.size; i++) {
+    for (i = 0; i < self.loopFX.size; i++) {
       self.loopFX[i] delete();
     }
     self.loopFX = [];
@@ -61,12 +61,12 @@ electric_trap_fx(name, side) {
     self.loopFX = [];
   }
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect["zapper"], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
   }
   level waittill(side + "off");
-  for(i = 0; i < self.loopFX.size; i++) {
+  for (i = 0; i < self.loopFX.size; i++) {
     self.loopFX[i] delete();
   }
   self.loopFX = [];
@@ -171,7 +171,7 @@ precache_createfx_fx() {
 perk_wire_fx(notify_wait, init_targetname, done_notify) {
   level waittill(notify_wait);
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread perk_wire_fx_client(i, init_targetname, done_notify);
   }
 }
@@ -182,15 +182,15 @@ perk_wire_fx_client(clientnum, init_targetname, done_notify) {
   if(!isDefined(targ)) {
     return;
   }
-  mover = spawn(clientnum, targ.origin, "script_model");
-  mover setModel("tag_origin");
-  fx = playFXOnTag(clientnum, level._effect["wire_spark"], mover, "tag_origin");
+  mover = Spawn(clientnum, targ.origin, "script_model");
+  mover SetModel("tag_origin");
+  fx = PlayFxOnTag(clientnum, level._effect["wire_spark"], mover, "tag_origin");
   fake_ent = spawnfakeent(0);
   setfakeentorg(0, fake_ent, mover.origin);
-  playSound(0, "tele_spark_hit", mover.origin);
-  playLoopSound(0, fake_ent, "tele_spark_loop");
+  playsound(0, "tele_spark_hit", mover.origin);
+  playloopsound(0, fake_ent, "tele_spark_loop");
   mover thread tele_spark_audio_mover(fake_ent);
-  while(isDefined(targ)) {
+  while (isDefined(targ)) {
     if(isDefined(targ.target)) {
       println("perk_wire_fx_client#" + clientnum + " next target: " + targ.target);
       target = getstruct(targ.target, "targetname");
@@ -209,21 +209,21 @@ perk_wire_fx_client(clientnum, init_targetname, done_notify) {
 
 tele_spark_audio_mover(fake_ent) {
   level endon("spark_done");
-  while(1) {
+  while (1) {
     realwait(0.05);
     setfakeentorg(0, fake_ent, self.origin);
   }
 }
 
 dog_start_monitor() {
-  while(1) {
+  while (1) {
     level waittill("dog_start");
     SetVolFog(229.0, 200.0, 380.0, 200.0, 0.16, 0.204, 0.274, 7);
   }
 }
 
 dog_stop_monitor() {
-  while(1) {
+  while (1) {
     level waittill("dog_stop");
     SetVolFog(404.39, 1543.52, 460.33, -244.014, 0.65, 0.84, 0.79, 6);
   }
@@ -232,10 +232,10 @@ dog_stop_monitor() {
 light_model_swap(name, model) {
   level waittill("pl1");
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, name, "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel(model);
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, name, "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel(model);
     }
   }
 }
@@ -245,7 +245,7 @@ get_guide_struct_angles(ent) {
   if(guide_structs.size > 0) {
     guide = guide_structs[0];
     dist = DistanceSquared(ent.origin, guide.origin);
-    for(i = 1; i < guide_structs.size; i++) {
+    for (i = 1; i < guide_structs.size; i++) {
       new_dist = DistanceSquared(ent.origin, guide_structs[i].origin);
       if(new_dist < dist) {
         guide = guide_structs[i];
@@ -260,31 +260,31 @@ get_guide_struct_angles(ent) {
 teleporter_map_light(light_name, on_msg) {
   level waittill("pl1");
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, light_name, "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel("zombie_zapper_cagelight_red");
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, light_name, "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel("zombie_zapper_cagelight_red");
       if(isDefined(lamps[i].fx)) {
         lamps[i].fx delete();
       }
       angles = lamps[i].angles;
       println(light_name + "- model angles : " + angles[0] + ", " + angles[1] + ", " + angles[2]);
       angles = get_guide_struct_angles(lamps[i]);
-      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, anglesToForward(angles));
+      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, AnglesToForward(angles));
       TriggerFX(lamps[i].fx);
     }
   }
   level waittill(on_msg);
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, light_name, "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel("zombie_zapper_cagelight_green");
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, light_name, "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel("zombie_zapper_cagelight_green");
       if(isDefined(lamps[i].fx)) {
         lamps[i].fx delete();
       }
       angles = get_guide_struct_angles(lamps[i]);
-      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_ready"], lamps[i].origin, 0, anglesToForward(angles));
+      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_ready"], lamps[i].origin, 0, AnglesToForward(angles));
       TriggerFX(lamps[i].fx);
     }
   }
@@ -294,15 +294,15 @@ teleporter_map_light_receiver() {
   level waittill("pl1");
   level thread teleporter_map_light_receiver_flash();
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, "sm_light_tp_r", "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel("zombie_zapper_cagelight_red");
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, "sm_light_tp_r", "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel("zombie_zapper_cagelight_red");
       if(isDefined(lamps[i].fx)) {
         lamps[i].fx delete();
       }
       angles = get_guide_struct_angles(lamps[i]);
-      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, anglesToForward(angles));
+      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, AnglesToForward(angles));
       TriggerFX(lamps[i].fx);
     }
   }
@@ -310,15 +310,15 @@ teleporter_map_light_receiver() {
   wait(1.5);
   level.map_light_receiver_on = true;
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, "sm_light_tp_r", "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel("zombie_zapper_cagelight_green");
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, "sm_light_tp_r", "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel("zombie_zapper_cagelight_green");
       if(isDefined(lamps[i].fx)) {
         lamps[i].fx delete();
       }
       angles = get_guide_struct_angles(lamps[i]);
-      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_ready"], lamps[i].origin, 0, anglesToForward(angles));
+      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_ready"], lamps[i].origin, 0, AnglesToForward(angles));
       TriggerFX(lamps[i].fx);
     }
   }
@@ -329,26 +329,26 @@ teleporter_map_light_receiver_flash() {
   level waittill("TRf");
   level endon("TRs");
   level thread teleporter_map_light_receiver_stop();
-  while(1) {
+  while (1) {
     players = getlocalplayers();
-    for(p = 0; p < players.size; p++) {
-      lamps = getEntArray(p, "sm_light_tp_r", "targetname");
-      for(i = 0; i < lamps.size; i++) {
-        lamps[i] setModel("zombie_zapper_cagelight_red");
+    for (p = 0; p < players.size; p++) {
+      lamps = GetEntArray(p, "sm_light_tp_r", "targetname");
+      for (i = 0; i < lamps.size; i++) {
+        lamps[i] SetModel("zombie_zapper_cagelight_red");
         if(isDefined(lamps[i].fx)) {
           lamps[i].fx delete();
         }
         angles = get_guide_struct_angles(lamps[i]);
-        lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, anglesToForward(angles));
+        lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, AnglesToForward(angles));
         TriggerFX(lamps[i].fx);
       }
     }
     wait(0.5);
     players = getlocalplayers();
-    for(p = 0; p < players.size; p++) {
-      lamps = getEntArray(p, "sm_light_tp_r", "targetname");
-      for(i = 0; i < lamps.size; i++) {
-        lamps[i] setModel("zombie_zapper_cagelight");
+    for (p = 0; p < players.size; p++) {
+      lamps = GetEntArray(p, "sm_light_tp_r", "targetname");
+      for (i = 0; i < lamps.size; i++) {
+        lamps[i] SetModel("zombie_zapper_cagelight");
         if(isDefined(lamps[i].fx)) {
           lamps[i].fx delete();
         }
@@ -362,15 +362,15 @@ teleporter_map_light_receiver_stop() {
   level endon("pap1");
   level waittill("TRs");
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, "sm_light_tp_r", "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel("zombie_zapper_cagelight_red");
+  for (p = 0; p < players.size; p++) {
+    lamps = GetEntArray(p, "sm_light_tp_r", "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] SetModel("zombie_zapper_cagelight_red");
       if(isDefined(lamps[i].fx)) {
         lamps[i].fx delete();
       }
       angles = get_guide_struct_angles(lamps[i]);
-      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, anglesToForward(angles));
+      lamps[i].fx = SpawnFx(p, level._effect["zapper_light_notready"], lamps[i].origin, 0, AnglesToForward(angles));
       TriggerFX(lamps[i].fx);
     }
   }
@@ -382,14 +382,14 @@ flytrap_lev_objects() {
   i = 0;
   hover_spots = [];
   hover_spots[i] = GetStruct("trap_ag_spot0", "targetname");
-  while(isDefined(hover_spots[i].target)) {
+  while (isDefined(hover_spots[i].target)) {
     hover_spots[i + 1] = GetStruct(hover_spots[i].target, "targetname");
     i++;
   }
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    floaters = getEntArray(p, "ee_floaty_stuff", "targetname");
-    for(k = 0; k < floaters.size; k++) {
+  for (p = 0; p < players.size; p++) {
+    floaters = GetEntArray(p, "ee_floaty_stuff", "targetname");
+    for (k = 0; k < floaters.size; k++) {
       floaters[k] thread anti_grav_move(p, hover_spots, k);
     }
   }
@@ -398,10 +398,10 @@ flytrap_lev_objects() {
 anti_grav_move(clientnum, spots, start_index) {
   sound_ent = spawnfakeent(0);
   setfakeentorg(0, sound_ent, self.origin);
-  playLoopSound(0, sound_ent, "flytrap_loop");
+  playloopsound(0, sound_ent, "flytrap_loop");
   self thread flytrap_audio_mover(sound_ent);
-  playFXOnTag(clientnum, level._effect["powerup_on"], self, "tag_origin");
-  playSound(0, "flytrap_spin", self.origin);
+  playfxontag(clientnum, level._effect["powerup_on"], self, "tag_origin");
+  playsound(0, "flytrap_spin", self.origin);
   self MoveTo(spots[start_index].origin, 4);
   wait(4);
   stop_spinning = false;
@@ -409,7 +409,7 @@ anti_grav_move(clientnum, spots, start_index) {
   interval = 0.4;
   z_increment = 0;
   offset = 0;
-  while(!stop_spinning) {
+  while (!stop_spinning) {
     index++;
     if(index >= spots.size) {
       index = 0;
@@ -427,7 +427,7 @@ anti_grav_move(clientnum, spots, start_index) {
   }
   end_spot = GetStruct("trap_flyaway_spot", "targetname");
   self MoveTo(end_spot.origin + (RandomFloatRange(-100, 100), 0, 0), 5);
-  playSound(0, "shoot_off", self.origin);
+  playsound(0, "shoot_off", self.origin);
   wait(4.7);
   level notify("delete_sound_ent");
   deletefakeent(0, sound_ent);
@@ -436,7 +436,7 @@ anti_grav_move(clientnum, spots, start_index) {
 
 flytrap_audio_mover(sound_ent) {
   level endon("delete_sound_ent");
-  while(1) {
+  while (1) {
     realwait(0.05);
     setfakeentorg(0, sound_ent, self.origin);
   }

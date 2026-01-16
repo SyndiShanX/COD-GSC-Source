@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;
+
 #namespace bot_animation;
 
 play_animation(var_f6550bae) {
@@ -13,17 +14,17 @@ play_animation(var_f6550bae) {
 
   astresult = self astsearch(var_f6550bae);
 
-  if(!isDefined(astresult[# "animation"])) {
+  if(!isDefined(astresult[#"animation"])) {
     return;
   }
 
-  animation = self animmappingsearch(astresult[# "animation"]);
-  self animscripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[# "blend_in_time"], undefined, undefined, 1);
-  self thread function_33f98f4(animation, astresult[# "animation_mocomp"], astresult[# "blend_out_time"]);
+  animation = self animmappingsearch(astresult[#"animation"]);
+  self animscripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[#"blend_in_time"], undefined, undefined, 1);
+  self thread function_33f98f4(animation, astresult[#"animation_mocomp"], astresult[#"blend_out_time"]);
 }
 
 private function_33f98f4(animation, mocomp, blendout) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   animinfo = spawnStruct();
   animinfo.name = mocomp;
   animinfo.entity = self;

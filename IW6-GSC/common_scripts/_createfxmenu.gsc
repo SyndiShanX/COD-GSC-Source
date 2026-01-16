@@ -101,7 +101,9 @@ create_fx_menu() {
   }
 
   if(isDefined(level._createfx.menus[level.create_fx_menu])) {
-    [[level._createfx.menus[level.create_fx_menu]]]();
+    [
+      [level._createfx.menus[level.create_fx_menu]]
+    ]();
   }
 }
 
@@ -145,9 +147,8 @@ menu_create() {
 }
 
 menu_none() {
-  if(button_is_clicked("m")) {
+  if(button_is_clicked("m"))
     increment_list_offset();
-  }
 
   menu_change_selected_fx();
 
@@ -217,9 +218,8 @@ menu_fx_creation() {
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     button_to_check = count;
-    if(button_to_check == 10) {
+    if(button_to_check == 10)
       button_to_check = 0;
-    }
     if(button_is_clicked(button_to_check + "")) {
       picked_fx = keys[i];
       break;
@@ -242,12 +242,10 @@ menu_fx_creation() {
   }
 
   ent = undefined;
-  if(menu("create_loopfx")) {
+  if(menu("create_loopfx"))
     ent = createLoopEffect(picked_fx);
-  }
-  if(menu("create_oneshot")) {
+  if(menu("create_oneshot"))
     ent = createOneshotEffect(picked_fx);
-  }
 
   finish_creating_entity(ent);
 }
@@ -278,18 +276,16 @@ menu_change_selected_fx() {
 
   for(i = 0; i < level._createfx.options.size; i++) {
     option = level._createfx.options[i];
-    if(!isDefined(ent.v[option["name"]])) {
+    if(!isDefined(ent.v[option["name"]]))
       continue;
-    }
     count++;
     if(count < level.effect_list_offset) {
       continue;
     }
     drawnCount++;
     button_to_check = drawnCount;
-    if(button_to_check == 10) {
+    if(button_to_check == 10)
       button_to_check = 0;
-    }
 
     if(button_is_clicked(button_to_check + "")) {
       prepare_option_for_change(option, drawnCount);
@@ -329,15 +325,12 @@ menu_fx_option_set() {
   }
   option = get_selected_option();
   setting = undefined;
-  if(option["type"] == "string") {
+  if(option["type"] == "string")
     setting = getdvar("fx");
-  }
-  if(option["type"] == "int") {
+  if(option["type"] == "int")
     setting = getdvarint("fx");
-  }
-  if(option["type"] == "float") {
+  if(option["type"] == "float")
     setting = getdvarfloat("fx");
-  }
 
   apply_option_to_selected_fx(option, setting);
 }
@@ -346,9 +339,8 @@ apply_option_to_selected_fx(option, setting) {
   for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
     ent = level._createfx.selected_fx_ents[i];
 
-    if(mask(option["mask"], ent.v["type"])) {
+    if(mask(option["mask"], ent.v["type"]))
       ent.v[option["name"]] = setting;
-    }
   }
 
   level.last_displayed_ent = undefined;
@@ -391,9 +383,8 @@ addOption(type, name, description, defaultSetting, mask, input_func) {
 
 get_option(name) {
   for(i = 0; i < level._createfx.options.size; i++) {
-    if(level._createfx.options[i]["name"] == name) {
+    if(level._createfx.options[i]["name"] == name)
       return level._createfx.options[i];
-    }
   }
 }
 
@@ -407,11 +398,10 @@ input_reactive_radius(menu_index) {
     }
 
     val = 0;
-    if(level.player ButtonPressed("-")) {
+    if(level.player ButtonPressed("-"))
       val = -10;
-    } else if(level.player ButtonPressed("=")) {
+    else if(level.player ButtonPressed("="))
       val = 10;
-    }
 
     if(val != 0) {
       foreach(ent in level._createfx.selected_fx_ents) {
@@ -442,9 +432,8 @@ display_fx_add_options(ent) {
   drawnCount = 0;
   more = false;
 
-  if(level.effect_list_offset >= level._createfx.options.size) {
+  if(level.effect_list_offset >= level._createfx.options.size)
     level.effect_list_offset = 0;
-  }
 
   for(i = 0; i < level._createfx.options.size; i++) {
     option = level._createfx.options[i];
@@ -455,17 +444,15 @@ display_fx_add_options(ent) {
       continue;
     }
     count++;
-    if(count < level.effect_list_offset) {
+    if(count < level.effect_list_offset)
       continue;
-    }
     if(drawnCount >= level.effect_list_offset_max) {
       continue;
     }
     drawnCount++;
     button_to_check = drawnCount;
-    if(button_to_check == 10) {
+    if(button_to_check == 10)
       button_to_check = 0;
-    }
     if(button_is_clicked(button_to_check + "")) {
       add_option_to_selected_entities(option);
 
@@ -477,9 +464,8 @@ display_fx_add_options(ent) {
     set_fx_hudElement(button_to_check + ". " + option["description"]);
   }
 
-  if(count > level.effect_list_offset_max) {
+  if(count > level.effect_list_offset_max)
     set_fx_hudElement("(->) More >");
-  }
 
   set_fx_hudElement("(x) Exit >");
 }
@@ -489,9 +475,8 @@ add_option_to_selected_entities(option) {
   for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
     ent = level._createfx.selected_fx_ents[i];
 
-    if(mask(option["mask"], ent.v["type"])) {
+    if(mask(option["mask"], ent.v["type"]))
       ent.v[option["name"]] = option["default"];
-    }
   }
 }
 
@@ -517,9 +502,8 @@ display_fx_info(ent) {
     more = false;
     for(i = 0; i < level._createfx.options.size; i++) {
       option = level._createfx.options[i];
-      if(!isDefined(ent.v[option["name"]])) {
+      if(!isDefined(ent.v[option["name"]]))
         continue;
-      }
       count++;
       if(count < level.effect_list_offset) {
         continue;
@@ -531,9 +515,8 @@ display_fx_info(ent) {
         break;
       }
     }
-    if(count > level.effect_list_offset_max) {
+    if(count > level.effect_list_offset_max)
       set_fx_hudElement("(->) More >");
-    }
     set_fx_hudElement("(a) Add >");
     set_fx_hudElement("(x) Exit >");
   } else {
@@ -541,9 +524,8 @@ display_fx_info(ent) {
     more = false;
     for(i = 0; i < level._createfx.options.size; i++) {
       option = level._createfx.options[i];
-      if(!isDefined(ent.v[option["name"]])) {
+      if(!isDefined(ent.v[option["name"]]))
         continue;
-      }
       count++;
       set_fx_hudElement(option["description"] + ": " + ent.v[option["name"]]);
       if(count > level._createfx.hudelem_count) {
@@ -609,9 +591,8 @@ select_by_name() {
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     button_to_check = count;
-    if(button_to_check == 10) {
+    if(button_to_check == 10)
       button_to_check = 0;
-    }
     if(button_is_clicked(button_to_check + "")) {
       picked_fx = keys[i];
       break;

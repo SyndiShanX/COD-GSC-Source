@@ -25,15 +25,15 @@ function autoexec init() {
 }
 
 function private function_66da4eb0() {
-  behaviortreenetworkutility::registerbehaviortreeaction("traverseWallCrawlAction", &traversewallcrawlaction, &function_7d285db1, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallTraverse", &shouldwalltraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallCrawl", &shouldwallcrawl);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallIntro", &traversewallintro);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallJumpOff", &traversewalljumpoff);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("quadCollisionService", &quadcollisionservice);
-  animationstatenetwork::registeranimationmocomp("quad_wall_traversal", &function_dd3e35df, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("quad_wall_jump_off", &function_5d8b540c, undefined, &function_18650281);
-  animationstatenetwork::registeranimationmocomp("quad_move_strict_traversal", &function_9e9b3f8b, undefined, &function_2433815e);
+  behaviortreenetworkutility::registerbehaviortreeaction("traverseWallCrawlAction", & traversewallcrawlaction, & function_7d285db1, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallTraverse", & shouldwalltraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallCrawl", & shouldwallcrawl);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallIntro", & traversewallintro);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallJumpOff", & traversewalljumpoff);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("quadCollisionService", & quadcollisionservice);
+  animationstatenetwork::registeranimationmocomp("quad_wall_traversal", & function_dd3e35df, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("quad_wall_jump_off", & function_5d8b540c, undefined, & function_18650281);
+  animationstatenetwork::registeranimationmocomp("quad_move_strict_traversal", & function_9e9b3f8b, undefined, & function_2433815e);
 }
 
 function traversewallcrawlaction(entity, asmstatename) {
@@ -49,7 +49,7 @@ function function_7d285db1(entity, asmstatename) {
 }
 
 function shouldwalltraverse(entity) {
-  if(isDefined(entity.traversestartnode)) {
+  if(isdefined(entity.traversestartnode)) {
     if(issubstr(entity.traversestartnode.animscript, "zm_wall_crawl_drop")) {
       return true;
     }
@@ -58,7 +58,7 @@ function shouldwalltraverse(entity) {
 }
 
 function shouldwallcrawl(entity) {
-  if(isDefined(self.var_2826ab5d)) {
+  if(isdefined(self.var_2826ab5d)) {
     if(gettime() >= self.var_2826ab5d) {
       return false;
     }
@@ -69,7 +69,7 @@ function shouldwallcrawl(entity) {
 function traversewallintro(entity) {
   entity allowpitchangle(0);
   entity.clamptonavmesh = 0;
-  if(isDefined(entity.traversestartnode)) {
+  if(isdefined(entity.traversestartnode)) {
     entity.var_1bb3c5d0 = entity.traversestartnode;
     entity.var_7531a5e3 = entity.traverseendnode;
     if(entity.traversestartnode.animscript == "zm_wall_crawl_drop") {
@@ -85,7 +85,7 @@ function traversewalljumpoff(entity) {
 }
 
 function quadcollisionservice(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.dontpushtime)) {
+  if(isdefined(behaviortreeentity.dontpushtime)) {
     if(gettime() < behaviortreeentity.dontpushtime) {
       return true;
     }
@@ -95,7 +95,7 @@ function quadcollisionservice(behaviortreeentity) {
     if(zombie == behaviortreeentity) {
       continue;
     }
-    if(isDefined(zombie.missinglegs) && zombie.missinglegs || (isDefined(zombie.knockdown) && zombie.knockdown)) {
+    if(isdefined(zombie.missinglegs) && zombie.missinglegs || (isdefined(zombie.knockdown) && zombie.knockdown)) {
       continue;
     }
     dist_sq = distancesquared(behaviortreeentity.origin, zombie.origin);
@@ -119,7 +119,7 @@ function function_77876867() {
 
 function private function_dd3e35df(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   animdist = abs(getmovedelta(mocompanim, 0, 1)[2]);
-  self.ground_pos = bulletTrace(self.var_7531a5e3.origin, self.var_7531a5e3.origin + (vectorscale((0, 0, -1), 100000)), 0, self)["position"];
+  self.ground_pos = bullettrace(self.var_7531a5e3.origin, self.var_7531a5e3.origin + (vectorscale((0, 0, -1), 100000)), 0, self)["position"];
   physdist = abs((self.origin[2] - self.ground_pos[2]) - 60);
   cycles = physdist / animdist;
   time = cycles * getanimlength(mocompanim);
@@ -136,7 +136,7 @@ function private function_18650281(entity, mocompanim, mocompanimblendouttime, m
 }
 
 function private function_9e9b3f8b(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  assert(isDefined(entity.traversestartnode));
+  assert(isdefined(entity.traversestartnode));
   entity.blockingpain = 1;
   entity.usegoalanimweight = 1;
   entity animmode("noclip", 0);
@@ -160,21 +160,21 @@ function init_roofs() {
 
 function quad_roof_crumble_fx_play(n_index) {
   play_quad_first_sounds();
-  roof_parts = getEntArray(self.target, "targetname");
-  if(isDefined(roof_parts)) {
-    for(i = 0; i < roof_parts.size; i++) {
+  roof_parts = getentarray(self.target, "targetname");
+  if(isdefined(roof_parts)) {
+    for (i = 0; i < roof_parts.size; i++) {
       roof_parts[i] delete();
     }
   }
   fx = struct::get(self.target, "targetname");
-  if(isDefined(fx)) {
+  if(isdefined(fx)) {
     self function_b7b3e976(n_index);
     thread rumble_all_players("damage_heavy");
   }
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     util::clientnotify(self.script_noteworthy);
   }
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     exploder::exploder(self.script_int);
   }
 }
@@ -230,7 +230,7 @@ function function_b7b3e976(n_index) {
       break;
     }
   }
-  if(isDefined(str_exploder_name)) {
+  if(isdefined(str_exploder_name)) {
     exploder::exploder(str_exploder_name);
   }
 }
@@ -239,7 +239,7 @@ function play_quad_first_sounds() {
   location = struct::get(self.target, "targetname");
   self playsoundwithnotify("zmb_vocals_quad_spawn", "sounddone");
   self waittill("sounddone");
-  self playSound("zmb_quad_roof_hit");
+  self playsound("zmb_quad_roof_hit");
   thread play_wood_land_sound(location.origin);
 }
 
@@ -250,8 +250,8 @@ function play_wood_land_sound(origin) {
 
 function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(high_rumble_range) && isdefined(low_rumble_range) && isdefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
@@ -266,7 +266,7 @@ function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, h
 function quad_traverse_death_fx() {
   self endon("traverse_anim");
   self waittill("death");
-  playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
+  playfx(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
 
 function begin_quad_introduction(quad_round_name) {
@@ -291,14 +291,14 @@ function theater_quad_round() {
 
 function spawn_second_wave_quads(second_wave_targetname) {
   second_wave_spawners = [];
-  second_wave_spawners = getEntArray(second_wave_targetname, "targetname");
+  second_wave_spawners = getentarray(second_wave_targetname, "targetname");
   if(second_wave_spawners.size < 1) {
     assertmsg("");
     return;
   }
-  for(i = 0; i < second_wave_spawners.size; i++) {
+  for (i = 0; i < second_wave_spawners.size; i++) {
     ai = zombie_utility::spawn_zombie(second_wave_spawners[i]);
-    if(isDefined(ai)) {
+    if(isdefined(ai)) {
       ai thread zombie_utility::round_spawn_failsafe();
       ai thread quad_traverse_death_fx();
     }
@@ -310,7 +310,7 @@ function spawn_second_wave_quads(second_wave_targetname) {
 function spawn_a_quad_zombie(spawn_array) {
   spawn_point = spawn_array[randomint(spawn_array.size)];
   ai = zombie_utility::spawn_zombie(spawn_point);
-  if(isDefined(ai)) {
+  if(isdefined(ai)) {
     ai thread zombie_utility::round_spawn_failsafe();
     ai thread quad_traverse_death_fx();
   }
@@ -320,9 +320,9 @@ function spawn_a_quad_zombie(spawn_array) {
 
 function kill_all_zombies() {
   zombies = getaispeciesarray("axis", "all");
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(!isDefined(zombies[i])) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(!isdefined(zombies[i])) {
         continue;
       }
       zombies[i] dodamage(zombies[i].health + 666, zombies[i].origin);
@@ -333,7 +333,7 @@ function kill_all_zombies() {
 
 function prevent_round_ending() {
   level endon("quad_round_can_end");
-  while(true) {
+  while (true) {
     if(level.zombie_total < 1) {
       level.zombie_total = 1;
     }
@@ -349,11 +349,11 @@ function intro_quad_spawn() {
   initial_spawners = [];
   switch (level.quad_round_name) {
     case "initial_round": {
-      initial_spawners = getEntArray("initial_first_round_quad_spawner", "targetname");
+      initial_spawners = getentarray("initial_first_round_quad_spawner", "targetname");
       break;
     }
     case "theater_round": {
-      initial_spawners = getEntArray("initial_theater_round_quad_spawner", "targetname");
+      initial_spawners = getentarray("initial_theater_round_quad_spawner", "targetname");
       break;
     }
     default: {
@@ -365,8 +365,8 @@ function intro_quad_spawn() {
     assertmsg("");
     return;
   }
-  while(true) {
-    if(isDefined(level.delay_spawners)) {
+  while (true) {
+    if(isdefined(level.delay_spawners)) {
       manage_zombie_spawn_delay(timer);
     }
     level.delay_spawners = 1;
@@ -381,11 +381,11 @@ function intro_quad_spawn() {
   second_spawners = [];
   switch (level.quad_round_name) {
     case "initial_round": {
-      second_spawners = getEntArray("initial_first_round_quad_spawner_second_wave", "targetname");
+      second_spawners = getentarray("initial_first_round_quad_spawner_second_wave", "targetname");
       break;
     }
     case "theater_round": {
-      second_spawners = getEntArray("theater_round_quad_spawner_second_wave", "targetname");
+      second_spawners = getentarray("theater_round_quad_spawner_second_wave", "targetname");
       break;
     }
     default: {
@@ -397,7 +397,7 @@ function intro_quad_spawn() {
     assertmsg("");
     return;
   }
-  while(true) {
+  while (true) {
     manage_zombie_spawn_delay(timer);
     spawn_a_quad_zombie(second_spawners);
     wait(0.2);
@@ -409,7 +409,7 @@ function intro_quad_spawn() {
   level.zombie_vars["zombie_spawn_delay"] = previous_spawn_delay;
   level.zombie_health = level.zombie_vars["zombie_health_start"];
   level.zombie_total = 0;
-  level.round_spawn_func = &zm::round_spawning;
+  level.round_spawn_func = & zm::round_spawning;
   level thread[[level.round_spawn_func]]();
   wait(2);
   level notify("quad_round_can_end");
@@ -434,7 +434,7 @@ function manage_zombie_spawn_delay(start_timer) {
 
 function quad_lobby_roof_break() {
   zone = level.zones["foyer_zone"];
-  while(true) {
+  while (true) {
     if(zone.is_occupied) {
       flag::set("lobby_occupied");
       break;
@@ -453,7 +453,7 @@ function quad_lobby_roof_break() {
 function quad_dining_roof_break() {
   level endon("hash_e1db2a20");
   zone = level.zones["dining_zone"];
-  while(true) {
+  while (true) {
     if(zone.is_occupied) {
       flag::set("dining_occupied");
       break;
@@ -504,9 +504,9 @@ function function_79dea782() {
   trigger = getent("quad_roof_crumble_fx_origin_10", "target");
   trigger waittill("trigger", who);
   level notify("hash_e1db2a20");
-  roof_parts = getEntArray(trigger.target, "targetname");
-  if(isDefined(roof_parts)) {
-    for(i = 0; i < roof_parts.size; i++) {
+  roof_parts = getentarray(trigger.target, "targetname");
+  if(isdefined(roof_parts)) {
+    for (i = 0; i < roof_parts.size; i++) {
       roof_parts[i] delete();
     }
   }

@@ -7,11 +7,10 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr()) {
+  if(isusinghdr())
     maps\createart\mp_strike_fog_hdr::setupfog();
-  } else {
+  else
     maps\createart\mp_strike_fog::setupfog();
-  }
 
   visionsetnaked("mp_strike", 0);
 }

@@ -25,13 +25,13 @@
 function init() {
   level._active_tanks = [];
   level flag::init("sam_switch_thrown");
-  zm_sidequests::declare_sidequest_stage("sq", "sc", &init_stage, &stage_logic, &exit_stage);
-  zm_sidequests::declare_stage_asset("sq", "sc", "sq_knife_switch", &sq_sc_switch);
+  zm_sidequests::declare_sidequest_stage("sq", "sc", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_stage_asset("sq", "sc", "sq_knife_switch", & sq_sc_switch);
 }
 
 function init_2() {
   level flag::init("cvg_placed");
-  zm_sidequests::declare_sidequest_stage("sq", "sc2", &init_stage_2, &stage_logic_2, &exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("sq", "sc2", & init_stage_2, & stage_logic_2, & exit_stage_2);
 }
 
 function init_stage_2() {
@@ -66,14 +66,14 @@ function stage_logic() {
   level waittill("walls_down");
   wait(1);
   players = getplayers();
-  array::thread_all(players, &room_sweeper);
+  array::thread_all(players, & room_sweeper);
   zm_sidequests::stage_completed("sq", "sc");
 }
 
 function sam_reveal_richtofen_vox() {
   wait(8);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     index = zm_utility::get_player_index(players[i]);
     if(index == 3) {
       players[i] thread zm_audio::create_and_play_dialog("eggs", "quest4", 3);
@@ -82,7 +82,7 @@ function sam_reveal_richtofen_vox() {
 }
 
 function room_sweeper() {
-  while(!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
+  while (!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
     wait(1);
   }
   level thread zm_powerup_weapon_minigun::minigun_weapon_powerup(self, 90);
@@ -93,8 +93,8 @@ function room_sweeper() {
 function dempsey_gersh_vox() {
   wait(5);
   player = zm_moon_sq::get_specific_player(0);
-  if(isDefined(player)) {
-    player playSound("vox_plr_0_stupid_gersh");
+  if(isdefined(player)) {
+    player playsound("vox_plr_0_stupid_gersh");
   }
 }
 
@@ -104,21 +104,21 @@ function sq_sc_switch() {
   level flag::wait_till("first_tanks_charged");
   var_bf58ee19 = getent("use_tank_switch", "targetname");
   var_bf58ee19 waittill("trigger");
-  self playSound("zmb_switch_flip_no2d");
+  self playsound("zmb_switch_flip_no2d");
   self scene::play("p7_fxanim_zmhd_power_switch_bundle", self);
-  playFX(level._effect["switch_sparks"], struct::get("sq_knife_switch_fx", "targetname").origin);
+  playfx(level._effect["switch_sparks"], struct::get("sq_knife_switch_fx", "targetname").origin);
   wait(1);
   level flag::set("sam_switch_thrown");
 }
 
 function do_soul_swap(who) {
   zm_moon_amb::player_4_override();
-  if(isDefined(who)) {
+  if(isdefined(who)) {
     who clientfield::set_to_player("soul_swap", 1);
     who zm_moon_sq::give_perk_reward();
   }
   wait(2);
-  if(isDefined(who)) {
+  if(isdefined(who)) {
     who clientfield::set_to_player("soul_swap", 0);
   }
   level notify("moon_sidequest_swap_achieved");
@@ -126,7 +126,7 @@ function do_soul_swap(who) {
 
 function place_qualifier() {
   ent_num = self.characterindex;
-  if(isDefined(self.zm_random_char)) {
+  if(isdefined(self.zm_random_char)) {
     ent_num = self.zm_random_char;
   }
   if(ent_num == 2) {
@@ -140,9 +140,9 @@ function richtofen_sam_vo() {
   level.skit_vox_override = 1;
   players = getplayers();
   richtofen = undefined;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
-    if(isDefined(players[i].zm_random_char)) {
+    if(isdefined(players[i].zm_random_char)) {
       ent_num = players[i].zm_random_char;
     }
     if(ent_num == 2) {
@@ -150,7 +150,7 @@ function richtofen_sam_vo() {
       break;
     }
   }
-  if(!isDefined(richtofen)) {
+  if(!isdefined(richtofen)) {
     return;
   }
   richtofen playsoundwithnotify("vox_plr_2_quest_step6_7", "line_spoken");
@@ -158,7 +158,7 @@ function richtofen_sam_vo() {
   targ = struct::get("sq_sam", "targetname");
   targ = struct::get(targ.target, "targetname");
   sound::play_in_space("vox_plr_4_quest_step6_10", targ.origin);
-  if(isDefined(richtofen)) {
+  if(isdefined(richtofen)) {
     richtofen playsoundwithnotify("vox_plr_2_quest_step6_8", "line_spoken");
     richtofen waittill("line_spoken");
   }
@@ -169,7 +169,7 @@ function place_cvg() {
   level flag::wait_till("second_tanks_charged");
   level thread richtofen_sam_vo();
   s = struct::get("sq_vg_final", "targetname");
-  s thread zm_sidequests::fake_use("placed_cvg", &place_qualifier);
+  s thread zm_sidequests::fake_use("placed_cvg", & place_qualifier);
   s waittill("placed_cvg", who);
   level flag::set("cvg_placed");
   level clientfield::set("vril_generator", 4);
@@ -186,9 +186,9 @@ function play_sam_then_response_line() {
   wait(1);
   sam = undefined;
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
-    if(isDefined(players[i].zm_random_char)) {
+    if(isdefined(players[i].zm_random_char)) {
       ent_num = players[i].zm_random_char;
     }
     if(ent_num == 2) {
@@ -198,12 +198,12 @@ function play_sam_then_response_line() {
   }
   sam playsoundwithnotify("vox_plr_4_quest_step6_12", "linedone");
   sam waittill("linedone");
-  if(!isDefined(sam)) {
+  if(!isdefined(sam)) {
     return;
   }
   players = getplayers();
   player = [];
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] != sam) {
       player[player.size] = players[i];
     }

@@ -10,4 +10,6 @@ main() {
   ent.sunFogEnabled = 0;
 }
 
-setupfog() {}
+setupfog() {
+
+}

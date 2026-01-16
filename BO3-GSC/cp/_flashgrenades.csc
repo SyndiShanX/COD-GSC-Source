@@ -14,7 +14,7 @@
 #namespace flashgrenades;
 
 function autoexec __init__sytem__() {
-  system::register("flashgrenades", &__init__, undefined, undefined);
+  system::register("flashgrenades", & __init__, undefined, undefined);
 }
 
 function __init__(localclientnum) {

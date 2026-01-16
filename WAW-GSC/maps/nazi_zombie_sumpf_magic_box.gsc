@@ -40,7 +40,7 @@ waitfor_flag_open_chest_location(which) {
         thread maps\nazi_zombie_sumpf::spawn_initial_outside_zombies("northwest_initial_zombies");
       }
       maps\nazi_zombie_sumpf_trap_pendulum::initPendulumTrap();
-      penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
+      penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
       array_thread(penBuyTrigger, maps\nazi_zombie_sumpf_trap_pendulum::penThink);
       maps\nazi_zombie_sumpf_zone_management::add_area_dog_spawners("nw_magic_box_dog_spawners");
       break;

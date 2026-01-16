@@ -32,11 +32,10 @@ tryUseHighValueTarget(lifeId, streakName) {
 }
 
 reached_max_xp_multiplier() {
-  if(level.teamBased) {
+  if(level.teamBased)
     return (level.hvts_active[self.team] >= CONST_MAX_ACTIVE_HVT_PER_GAME);
-  } else if(isDefined(self.hvts_active)) {
+  else if(isDefined(self.hvts_active))
     return (self.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER);
-  }
 
   return false;
 }
@@ -50,9 +49,9 @@ useHighValueTarget(player, lifeId) {
     return false;
   }
 
-  if(reached_max_xp_multiplier() {
-      ||
-    }
+  if(reached_max_xp_multiplier()
+
+    ||
     (isDefined(player.hvts_active) && player.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER)
   ) {
     self iPrintLnBold(&"KILLSTREAKS_HVT_MAX");
@@ -77,17 +76,15 @@ setHighValueTarget() {
 
   waitLongDurationWithHostMigrationPause(CONST_HVT_TIMEOUT);
 
-  if(level.teamBased) {
+  if(level.teamBased)
     leaderDialog("hvt_gone", team);
-  } else {
+  else
     self leaderDialogOnPlayer("hvt_gone");
-  }
 
-  if(level.teamBased) {
+  if(level.teamBased)
     level decreaseXPBoost(team);
-  } else {
+  else
     self decreaseXPBoost();
-  }
 }
 
 increaseXPBoost() {
@@ -97,11 +94,10 @@ increaseXPBoost() {
     hvts_active = level.hvts_active[self.team];
     array_index = self.team;
   } else {
-    if(!isDefined(self.hvts_active)) {
+    if(!isDefined(self.hvts_active))
       self.hvts_active = 1;
-    } else {
+    else
       self.hvts_active++;
-    }
 
     hvts_active = self.hvts_active;
     array_index = self GetEntityNumber();
@@ -114,15 +110,13 @@ increaseXPBoost() {
 decreaseXPBoost(team) {
   hvts_active = 0;
   if(level.teamBased) {
-    if(level.hvts_active[team] > 0) {
+    if(level.hvts_active[team] > 0)
       level.hvts_active[team]--;
-    }
     hvts_active = level.hvts_active[team];
     array_index = team;
   } else {
-    if(self.hvts_active > 0) {
+    if(self.hvts_active > 0)
       self.hvts_active--;
-    }
 
     hvts_active = self.hvts_active;
     array_index = self GetEntityNumber();
@@ -137,9 +131,8 @@ watchHVTOwner(team) {
 
   result = self waittill_any_return("disconnect", "joined_team", "joined_spectators");
 
-  if(level.teamBased) {
+  if(level.teamBased)
     level decreaseXPBoost(team);
-  } else if(isDefined(self) && result != "disconnect") {
+  else if(isDefined(self) && result != "disconnect")
     self decreaseXPBoost();
-  }
 }

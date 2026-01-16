@@ -15,7 +15,8 @@ main() {
   maps\mp\createart\mp_turbine_art::main();
 }
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_sand_blowing_lg"] = loadfx("dirt/fx_sand_blowing_lg");

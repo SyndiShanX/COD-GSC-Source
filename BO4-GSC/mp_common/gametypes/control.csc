@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_tutorial_skirmish;
+
 #namespace control;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -29,18 +30,18 @@ event_handler[gametype_init] main(eventstruct) {
   clientfield::register("worlduimodel", "hudItems.missions.captureMultiplierStatus", 1, 2, "int", undefined, 0, 1);
   clientfield::register("worlduimodel", "hudItems.war.attackingTeam", 1, 2, "int", undefined, 0, 1);
   level.effect_scriptbundles = [];
-  level.effect_scriptbundles[# "zoneedgemarker"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker");
-  level.effect_scriptbundles[# "zoneedgemarkerwndw"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker_window");
-  level._effect[# "zoneedgemarker"] = [];
-  level._effect[# "zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[# "zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[# "zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[# "zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
-  level._effect[# "zoneedgemarkerwndw"] = [];
-  level._effect[# "zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
-  level._effect[# "zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
-  level._effect[# "zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
-  level._effect[# "zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
+  level.effect_scriptbundles[#"zoneedgemarker"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker");
+  level.effect_scriptbundles[#"zoneedgemarkerwndw"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker_window");
+  level._effect[#"zoneedgemarker"] = [];
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarkerwndw"] = [];
+  level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
   level.mission_bundle = getscriptbundle("mission_settings_control");
   callback::on_localclient_connect(&on_localclient_connect);
   callback::on_spawned(&function_6e3affdc);
@@ -56,24 +57,24 @@ on_localclient_connect(localclientnum) {
 
 get_shoutcaster_fx(local_client_num) {
   effects = [];
-  effects[# "zoneedgemarker"] = level._effect[# "zoneedgemarker"];
-  effects[# "zoneedgemarkerwndw"] = level._effect[# "zoneedgemarkerwndw"];
-  effects[# "zoneedgemarker"][2] = # "ui/fx8_infil_marker_shoutcaster_allies";
-  effects[# "zoneedgemarker"][1] = # "ui/fx8_infil_marker_shoutcaster_axis";
-  effects[# "zoneedgemarker"][3] = [];
-  effects[# "zoneedgemarker"][3][2] = # "hash_2d6240bcbe378735";
-  effects[# "zoneedgemarker"][3][1] = # "hash_1485defdfe47975a";
-  effects[# "zoneedgemarkerwndw"][2] = # "ui/fx8_infil_marker_shoutcaster_allies_window";
-  effects[# "zoneedgemarkerwndw"][1] = # "ui/fx8_infil_marker_shoutcaster_axis_window";
-  effects[# "zoneedgemarkerwndw"][3] = [];
-  effects[# "zoneedgemarkerwndw"][3][2] = # "hash_3add4ab2008b6ea2";
-  effects[# "zoneedgemarkerwndw"][3][1] = # "hash_49751fe881244b5f";
+  effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
+  effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
+  effects[#"zoneedgemarker"][2] = #"ui/fx8_infil_marker_shoutcaster_allies";
+  effects[#"zoneedgemarker"][1] = #"ui/fx8_infil_marker_shoutcaster_axis";
+  effects[#"zoneedgemarker"][3] = [];
+  effects[#"zoneedgemarker"][3][2] = #"hash_2d6240bcbe378735";
+  effects[#"zoneedgemarker"][3][1] = #"hash_1485defdfe47975a";
+  effects[#"zoneedgemarkerwndw"][2] = #"ui/fx8_infil_marker_shoutcaster_allies_window";
+  effects[#"zoneedgemarkerwndw"][1] = #"ui/fx8_infil_marker_shoutcaster_axis_window";
+  effects[#"zoneedgemarkerwndw"][3] = [];
+  effects[#"zoneedgemarkerwndw"][3][2] = #"hash_3add4ab2008b6ea2";
+  effects[#"zoneedgemarkerwndw"][3][1] = #"hash_49751fe881244b5f";
   return effects;
 }
 
 get_fx_state(local_client_num, state, attackers, is_shoutcaster) {
   if(is_shoutcaster) {
-    if(attackers == # "allies") {
+    if(attackers == #"allies") {
       return state;
     } else if(state == 1) {
       return 2;
@@ -107,10 +108,10 @@ get_fx(fx_name, fx_state, effects) {
 
 private get_attacking_team() {
   attackers_key = codegetworlduimodelfield("hudItems.war.attackingTeam");
-  attackers = # "allies";
+  attackers = #"allies";
 
   if(attackers_key == 2) {
-    attackers = # "axis";
+    attackers = #"axis";
   }
 
   return attackers;
@@ -128,14 +129,14 @@ function_6e3affdc() {
 
 setup_warzone_fx(local_client_num) {
   for(zi = 0; zi < level.zones.size; zi++) {
-    zonestate = level.current_zone_state_mask[local_client_num] >> zi * 2 & 3;
+    zonestate = level.current_zone_state_mask[local_client_num] >> zi * 2&3;
     effects = [];
 
     if(shoutcaster::is_shoutcaster(local_client_num)) {
       effects = get_shoutcaster_fx(local_client_num);
     } else {
-      effects[# "zoneedgemarker"] = level._effect[# "zoneedgemarker"];
-      effects[# "zoneedgemarkerwndw"] = level._effect[# "zoneedgemarkerwndw"];
+      effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
+      effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
     }
 
     if(isDefined(level.warzonefx[local_client_num][zi])) {
@@ -146,7 +147,7 @@ setup_warzone_fx(local_client_num) {
 
     level.warzonefx[local_client_num][zi] = [];
 
-    if(level.current_zone_mask[local_client_num] & 1 << zi) {
+    if(level.current_zone_mask[local_client_num]&1 << zi) {
       if(isDefined(level.visuals[zi])) {
         attackers = get_attacking_team();
         fx_state = get_fx_state(local_client_num, zonestate, attackers, shoutcaster::is_shoutcaster(local_client_num));
@@ -307,7 +308,7 @@ warzone(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasti
   level.current_zone_mask[localclientnum] = newval;
 
   for(zi = 0; zi < level.zones.size; zi++) {
-    if((oldval & 1 << zi) != (newval & 1 << zi)) {
+    if((oldval&1 << zi) != (newval&1 << zi)) {
       level.current_zone_state_mask[localclientnum] &= ~(3 << zi);
     }
   }

@@ -45,7 +45,7 @@ function main_end() {
   t_killbrush_1.angles = vectorscale((0, 1, 0), 45);
   t_killbrush_1.script_noteworthy = "kill_brush";
   if(level flag::get("solo_game")) {
-    a_t_doors = getEntArray("zombie_door", "targetname");
+    a_t_doors = getentarray("zombie_door", "targetname");
     foreach(t_door in a_t_doors) {
       if(t_door.zombie_cost >= 1000) {
         t_door.zombie_cost = t_door.zombie_cost - 250;

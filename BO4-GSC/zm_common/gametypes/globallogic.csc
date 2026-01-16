@@ -10,10 +10,11 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace globallogic;
 
 autoexec __init__system__() {
-  system::register(#"globallogic", &__init__, undefined, # "visionset_mgr");
+  system::register(#"globallogic", &__init__, undefined, #"visionset_mgr");
 }
 
 __init__() {

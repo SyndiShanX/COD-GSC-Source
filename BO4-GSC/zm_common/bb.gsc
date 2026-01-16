@@ -7,6 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace bb;
 
 autoexec __init__system__() {
@@ -56,8 +57,8 @@ logplayerevent(player, eventname) {
 
 logroundevent(eventname) {
   zmroundevents = {
-    #gametime: function_f8d53445(),
-    #roundnumber: level.round_number,
+    #gametime: function_f8d53445(), 
+    #roundnumber: level.round_number, 
     #eventname: eventname
   };
   function_92d1707f(#"hash_1f42d237e3407165", zmroundevents);

@@ -13,6 +13,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_behavior;
 #include scripts\zm_common\zm_devgui;
+
 #namespace namespace_3b9dec72;
 
 autoexec __init__system__() {
@@ -28,7 +29,7 @@ __init__() {
   adddebugcommand("<dev string:x43>");
   adddebugcommand("<dev string:x73>");
 
-  level thread function_2165e851();
+    level thread function_2165e851();
 }
 
 __main__() {}
@@ -69,6 +70,7 @@ private function_e5ba4473() {
   }
 
   self thread function_b7f08e2d();
+
 }
 
 function_1c989dc4() {
@@ -95,6 +97,7 @@ private function_b7f08e2d() {
       goalinfo = self function_4794d6a3();
 
       if(isDefined(goalinfo.goalpos)) {
+
         sphere(goalinfo.goalpos, 5, (0, 1, 0), 0.5, 0, 8, 1);
 
       }

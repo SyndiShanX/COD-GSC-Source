@@ -17,7 +17,7 @@ init_squadManager() {
 
 createSquad(squadName) {
   assertex(!isDefined(anim.squads[squadName]), "createSquad attempted to create a squad with the same name as an existing squad");
-  anim.squads[squadName] = spawnStruct();
+  anim.squads[squadName] = SpawnStruct();
   squad = anim.squads[squadName];
   squad.squadName = squadName;
   squad.sightTime = 0;
@@ -302,7 +302,7 @@ updateHeading() {
     if(!IsAlive(self.members[i])) {
       continue;
     }
-    newHeading += anglesToForward(self.members[i].angles);
+    newHeading += AnglesToForward(self.members[i].angles);
     numInfluences++;
   }
   if(numInfluences) {
@@ -381,7 +381,7 @@ updateAll() {
 updateSquadList() {
   for(i = 0; i < anim.squadIndex.size; i++) {
     if(!isDefined(self.squadList[anim.squadIndex[i].squadName])) {
-      self.squadList[anim.squadIndex[i].squadName] = spawnStruct();
+      self.squadList[anim.squadIndex[i].squadName] = SpawnStruct();
       self.squadList[anim.squadIndex[i].squadName].isInContact = false;
     }
     for(j = 0; j < self.squadUpdateFuncs.size; j++) {
@@ -498,7 +498,7 @@ aiUpdateSuppressed(timeSlice) {
 }
 
 initState(state, activateRatio) {
-  self.squadStates[state] = spawnStruct();
+  self.squadStates[state] = SpawnStruct();
   self.squadStates[state].activateRatio = activateRatio;
   self.squadStates[state].isActive = false;
   self.squadStates[state].numActive = 0;
@@ -551,7 +551,7 @@ aiUpdateMessages(timeSlice) {
 constructMessage(contents, lifetime, sender) {
   assert(isDefined(contents));
   if(isDefined(contents)) {
-    message = spawnStruct();
+    message = SpawnStruct();
     if(!isDefined(lifetime)) {
       lifetime = 0.05;
     }

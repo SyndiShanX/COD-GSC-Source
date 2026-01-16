@@ -10,9 +10,8 @@
 OneShotfx(fxId, fxPos, waittime, fxPos2) {}
 OneShotfxthread() {
   maps\_spawner::waitframe();
-  if(self.v["delay"] > 0) {
+  if(self.v["delay"] > 0)
     wait self.v["delay"];
-  }
   create_triggerfx();
 }
 

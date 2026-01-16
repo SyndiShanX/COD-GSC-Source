@@ -161,19 +161,17 @@ init_racevox(prefix, location) {
 }
 
 createvox(type, alias, gametype) {
-  if(!isDefined(gametype)) {
+  if(!isDefined(gametype))
     gametype = "";
-  } else {
+  else
     gametype = gametype + "_";
-  }
 
   game["zmbdialog"][type] = gametype + alias;
 }
 
 announceroundwinner(winner, delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   if(!isDefined(winner) || isplayer(winner)) {
     return;
@@ -196,9 +194,8 @@ announceroundwinner(winner, delay) {
 }
 
 announcematchwinner(winner, delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   if(!isDefined(winner) || isplayer(winner)) {
     return;
@@ -221,9 +218,8 @@ announcematchwinner(winner, delay) {
 }
 
 announcegamemoderules() {
-  if(getdvar(#"ui_zm_mapstartlocation") == "town") {
+  if(getdvar(#"ui_zm_mapstartlocation") == "town")
     leaderdialog("rules", undefined, undefined, undefined, 20);
-  }
 }
 
 leaderdialog(dialog, team, group, queue, waittime) {
@@ -235,9 +231,8 @@ leaderdialog(dialog, team, group, queue, waittime) {
   }
 
   if(level.splitscreen) {
-    if(level.players.size) {
+    if(level.players.size)
       level.players[0] leaderdialogonplayer(dialog, group, queue, waittime);
-    }
 
     return;
   }
@@ -245,9 +240,8 @@ leaderdialog(dialog, team, group, queue, waittime) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team)
       player leaderdialogonplayer(dialog, group, queue, waittime);
-    }
   }
 }
 
@@ -255,9 +249,8 @@ leaderdialogbothteams(dialog1, team1, dialog2, team2, group, queue, waittime) {
   assert(isDefined(level.players));
 
   if(level.splitscreen) {
-    if(level.players.size) {
+    if(level.players.size)
       level.players[0] leaderdialogonplayer(dialog1, group, queue, waittime);
-    }
 
     return;
   }
@@ -274,9 +267,8 @@ leaderdialogbothteams(dialog1, team1, dialog2, team2, group, queue, waittime) {
       continue;
     }
 
-    if(team == team2) {
+    if(team == team2)
       player leaderdialogonplayer(dialog2, group, queue, waittime);
-    }
   }
 }
 
@@ -297,16 +289,14 @@ leaderdialogonplayer(dialog, group, queue, waittime) {
     self.zmbdialoggroups[group] = dialog;
     dialog = group;
 
-    if(hadgroupdialog) {
+    if(hadgroupdialog)
       return;
-    }
   }
 
-  if(!self.zmbdialogactive) {
+  if(!self.zmbdialogactive)
     self thread playleaderdialogonplayer(dialog, team, waittime);
-  } else if(isDefined(queue) && queue) {
+  else if(isDefined(queue) && queue)
     self.zmbdialogqueue[self.zmbdialogqueue.size] = dialog;
-  }
 }
 
 playleaderdialogonplayer(dialog, team, waittime) {
@@ -314,9 +304,8 @@ playleaderdialogonplayer(dialog, team, waittime) {
 
   if(level.allowzmbannouncer) {
     if(!isDefined(game["zmbdialog"][dialog])) {
-      if(getdvarint(#"_id_0AEB127D") > 0) {
+      if(getdvarint(#"_id_0AEB127D") > 0)
         println("DIALOG DEBUGGER: No VOX created for - " + dialog);
-      }
 
       return;
     }
@@ -335,20 +324,18 @@ playleaderdialogonplayer(dialog, team, waittime) {
     alias = game["zmbdialog"]["prefix"] + "_" + game["zmbdialog"][dialog];
     variant = self getleaderdialogvariant(alias);
 
-    if(!isDefined(variant)) {
+    if(!isDefined(variant))
       full_alias = alias;
-    } else {
+    else
       full_alias = alias + "_" + variant;
-    }
 
     self playlocalsound(full_alias);
   }
 
-  if(isDefined(waittime)) {
+  if(isDefined(waittime))
     wait(waittime);
-  } else {
+  else
     wait 4.0;
-  }
 
   self.zmbdialogactive = 0;
   self.zmbdialoggroup = "";
@@ -356,9 +343,8 @@ playleaderdialogonplayer(dialog, team, waittime) {
   if(self.zmbdialogqueue.size > 0 && level.allowzmbannouncer) {
     nextdialog = self.zmbdialogqueue[0];
 
-    for(i = 1; i < self.zmbdialogqueue.size; i++) {
+    for(i = 1; i < self.zmbdialogqueue.size; i++)
       self.zmbdialogqueue[i - 1] = self.zmbdialogqueue[i];
-    }
 
     self.zmbdialogqueue[i - 1] = undefined;
     self thread playleaderdialogonplayer(nextdialog, team);
@@ -377,22 +363,19 @@ getleaderdialogvariant(alias) {
   num_variants = maps\mp\zombies\_zm_spawner::get_number_variants(alias);
 
   if(num_variants <= 0) {
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       println("DIALOG DEBUGGER: No variants found for - " + alias);
-    }
 
     return undefined;
   }
 
-  for(i = 0; i < num_variants; i++) {
+  for(i = 0; i < num_variants; i++)
     level.announcer_dialog[alias][i] = i;
-  }
 
   level.announcer_dialog_available[alias] = [];
 
-  if(level.announcer_dialog_available[alias].size <= 0) {
+  if(level.announcer_dialog_available[alias].size <= 0)
     level.announcer_dialog_available[alias] = level.announcer_dialog[alias];
-  }
 
   variation = random(level.announcer_dialog_available[alias]);
   level.announcer_dialog_available[alias] = arrayremovevalue(level.announcer_dialog_available[alias], variation);
@@ -411,9 +394,8 @@ getroundswitchdialog(switchtype) {
 }
 
 getotherteam(team) {
-  if(team == "allies") {
+  if(team == "allies")
     return "axis";
-  } else {
+  else
     return "allies";
-  }
 }

@@ -11,11 +11,11 @@ main() {
   mixthreadcore = backendcore;
   maxaxppcusage = 30;
 
-  if(mapname == "mp_overflow") {}
-
-  if(mapname == "angola") {
-    maxaxppcusage = 15;
+  if(mapname == "mp_overflow") {
   }
+
+  if(mapname == "angola")
+    maxaxppcusage = 15;
 
   setdvarbool("sd_wiiu_mix_thread_enabled", mixthreadenabled);
   setdvarint("sd_wiiu_mix_thread_core", mixthreadcore);

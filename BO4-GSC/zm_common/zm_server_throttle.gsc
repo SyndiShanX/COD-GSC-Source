@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_server_throttle;
 
 server_choke_init(id, max) {

@@ -47,15 +47,13 @@ watchgrenadeusage() {
 begin_smoke_grenade_tracking() {
   self waittill("grenade_fire", grenade, weaponname);
 
-  if(!isDefined(level.smokegrenades)) {
+  if(!isDefined(level.smokegrenades))
     level.smokegrenades = 0;
-  }
 
-  if(level.smokegrenades > 2 && getdvar(#"player_sustainAmmo") != "0") {
+  if(level.smokegrenades > 2 && getdvar(#"player_sustainAmmo") != "0")
     grenade delete();
-  } else {
+  else
     grenade thread smoke_grenade_death();
-  }
 }
 
 begin_mortar_tracking() {
@@ -63,9 +61,8 @@ begin_mortar_tracking() {
   self endon("disconnect");
   self waittill("grenade_fire", mortar, weaponname);
 
-  if(weaponname == "mortar_round") {
+  if(weaponname == "mortar_round")
     mortar thread mortar_death();
-  }
 }
 
 mortar_death() {
@@ -122,22 +119,19 @@ watch_satchel() {
         newarray = [];
 
         for(i = 0; i < self.satchelarray.size; i++) {
-          if(isDefined(self.satchelarray[i])) {
+          if(isDefined(self.satchelarray[i]))
             newarray[newarray.size] = self.satchelarray[i];
-          }
         }
 
         self.satchelarray = newarray;
 
-        for(i = 0; i < self.satchelarray.size - 5 + 1; i++) {
+        for(i = 0; i < self.satchelarray.size - 5 + 1; i++)
           self.satchelarray[i] delete();
-        }
 
         newarray = [];
 
-        for(i = 0; i < 4; i++) {
+        for(i = 0; i < 4; i++)
           newarray[i] = self.satchelarray[self.satchelarray.size - 5 + 1 + i];
-        }
 
         self.satchelarray = newarray;
       }
@@ -176,7 +170,7 @@ tc6_mine_detonation() {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - 25), 23, 25, 100);
   ai_damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - 36), 3, 36, 36 * 2);
   wait 0.5;
-  self playSound("wpn_claymore_alert");
+  self playsound("wpn_claymore_alert");
   wait 0.2;
 
   while(true) {
@@ -188,21 +182,18 @@ tc6_mine_detonation() {
         wait 0.25;
       }
     } else {
-      while(ent istouching(damagearea) && !ent istouching(ai_damagearea)) {
+      while(ent istouching(damagearea) && !ent istouching(ai_damagearea))
         wait 0.05;
-      }
 
-      if(ent istouching(ai_damagearea)) {
+      if(ent istouching(ai_damagearea))
         should_detonate = 1;
-      }
     }
 
     if(should_detonate) {
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self detonate(self.owner);
-      } else {
+      else
         self detonate(undefined);
-      }
 
       damagearea delete();
       ai_damagearea delete();
@@ -225,15 +216,13 @@ claymore_detonation() {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - 192), spawnflag, 192, 192 * 2);
   self thread delete_claymores_on_death(damagearea);
 
-  if(!isDefined(level.claymores)) {
+  if(!isDefined(level.claymores))
     level.claymores = [];
-  }
 
   level.claymores[level.claymores.size] = self;
 
-  if(level.claymores.size > 5) {
+  if(level.claymores.size > 5)
     level.claymores[0] delete();
-  }
 
   while(true) {
     damagearea waittill("trigger", ent);
@@ -248,14 +237,13 @@ claymore_detonation() {
       continue;
     }
     if(ent damageconetrace(self.origin, self) > 0) {
-      self playSound("wpn_claymore_alert");
+      self playsound("wpn_claymore_alert");
       wait 0.4;
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self detonate(self.owner);
-      } else {
+      else
         self detonate(undefined);
-      }
 
       return;
     }
@@ -267,9 +255,8 @@ delete_claymores_on_death(ent) {
   arrayremovevalue(level.claymores, self);
   wait 0.05;
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 watch_satchel_detonation() {
@@ -282,9 +269,8 @@ watch_satchel_detonation() {
     self notify(note);
 
     for(i = 0; i < self.satchelarray.size; i++) {
-      if(isDefined(self.satchelarray[i])) {
+      if(isDefined(self.satchelarray[i]))
         self.satchelarray[i] thread wait_and_detonate(0.1);
-      }
     }
 
     self.satchelarray = [];
@@ -301,7 +287,7 @@ wait_and_detonate(delay) {
 
 satchel_damage() {
   self.health = 100;
-  self setCanDamage(1);
+  self setcandamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
@@ -315,11 +301,10 @@ satchel_damage() {
     break;
   }
 
-  if(level.satchelexplodethisframe) {
+  if(level.satchelexplodethisframe)
     wait(0.1 + randomfloat(0.4));
-  } else {
+  else
     wait 0.05;
-  }
 
   if(!isDefined(self)) {
     return;
@@ -345,19 +330,17 @@ saydamaged(orig, amount) {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
+  playfxontag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 getdamageableents(pos, radius, dolos, startradius) {
   ents = [];
 
-  if(!isDefined(dolos)) {
+  if(!isDefined(dolos))
     dolos = 0;
-  }
 
-  if(!isDefined(startradius)) {
+  if(!isDefined(startradius))
     startradius = 0;
-  }
 
   players = get_players();
 
@@ -369,7 +352,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, playerpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, playerpos, startradius, undefined))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 1;
       newent.isadestructable = 0;
       newent.entity = players[i];
@@ -378,14 +361,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, grenades[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = grenades[i];
@@ -394,14 +377,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructables = getEntArray("destructable", "targetname");
+  destructables = getentarray("destructable", "targetname");
 
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructables[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 1;
       newent.entity = destructables[i];
@@ -417,18 +400,17 @@ weapondamagetracepassed(from, to, startradius, ignore) {
   midpos = undefined;
   diff = to - from;
 
-  if(lengthsquared(diff) < startradius * startradius) {
+  if(lengthsquared(diff) < startradius * startradius)
     midpos = to;
-  }
 
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
-  trace = bulletTrace(midpos, to, 0, ignore);
+  trace = bullettrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"_id_0A1C40B1") != 0) {
-    if(trace["fraction"] == 1) {
+    if(trace["fraction"] == 1)
       thread debugline(midpos, to, (1, 1, 1));
-    } else {
+    else {
       thread debugline(midpos, trace["position"], (1, 0.9, 0.8));
       thread debugline(trace["position"], to, (1, 0.4, 0.3));
     }
@@ -460,9 +442,8 @@ debugline(a, b, color) {
 watch_concussion() {
   self endon("death");
 
-  while(true) {
+  while(true)
     self waittill("grenade_fire", grenade, weapname);
-  }
 }
 
 watch_proximity_grenade() {
@@ -483,7 +464,7 @@ watch_proximity_grenade() {
 proximity_grenade_damage() {
   self endon("death");
   self.health = 100;
-  self setCanDamage(1);
+  self setcandamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
 
@@ -498,7 +479,7 @@ proximity_grenade_damage() {
 proximity_grenade_fx() {
   self endon("death");
   self waittill_not_moving();
-  playFXOnTag(level._effect["prox_grenade_fx"], self, "tag_fx");
+  playfxontag(level._effect["prox_grenade_fx"], self, "tag_fx");
 }
 
 proximity_grenade_detonation() {
@@ -516,15 +497,13 @@ proximity_grenade_detonation() {
   t_damage_area = spawn("trigger_radius", self.origin + vectorscale((0, 0, -1), 192.0), spawnflag, 192, 384);
   self thread proximity_grenade_delete_on_death(t_damage_area);
 
-  if(!isDefined(level.a_proximity_grenades)) {
+  if(!isDefined(level.a_proximity_grenades))
     level.a_proximity_grenades = [];
-  }
 
   level.a_proximity_grenades[level.a_proximity_grenades.size] = self;
 
-  if(level.a_proximity_grenades.size > 5) {
+  if(level.a_proximity_grenades.size > 5)
     level.a_proximity_grenades[0] delete();
-  }
 
   while(true) {
     t_damage_area waittill("trigger", ent);
@@ -540,20 +519,18 @@ proximity_grenade_detonation() {
     }
     level thread proximity_grenade_detonate_think(self.origin);
 
-    if(isDefined(self.owner)) {
+    if(isDefined(self.owner))
       self detonate(self.owner);
-    } else {
+    else
       self detonate(undefined);
-    }
 
     return;
   }
 }
 
 proximity_grenade_detonate_think(v_origin) {
-  if(distance2d(level.player.origin, v_origin) < 300) {
+  if(distance2d(level.player.origin, v_origin) < 300)
     level.player thread proximity_grenade_player_effect(v_origin);
-  }
 }
 
 proximity_grenade_delete_on_death(t_radius) {
@@ -561,9 +538,8 @@ proximity_grenade_delete_on_death(t_radius) {
   arrayremovevalue(level.a_proximity_grenades, self);
   wait 0.05;
 
-  if(isDefined(t_radius)) {
+  if(isDefined(t_radius))
     t_radius delete();
-  }
 }
 
 proximity_grenade_player_effect(v_origin) {
@@ -573,7 +549,7 @@ proximity_grenade_player_effect(v_origin) {
   n_start_time = gettime();
   saved_vision = self getvisionsetnaked();
   toggle = 1;
-  self playSound("wpn_taser_mine_zap");
+  self playsound("wpn_taser_mine_zap");
   self shellshock("death", n_duration + 0.5);
   n_duration_ms = n_duration * 1000;
   wait 0.1;
@@ -602,9 +578,8 @@ watch_combat_axe() {
     self waittill("grenade_fire", grenade, weapname);
 
     if(weapname == "hatchet_sp" || weapname == "hatchet_80s_sp") {
-      if(!isDefined(level.a_combat_axes)) {
+      if(!isDefined(level.a_combat_axes))
         level.a_combat_axes = [];
-      }
 
       level.a_combat_axes[level.a_combat_axes.size] = grenade;
 

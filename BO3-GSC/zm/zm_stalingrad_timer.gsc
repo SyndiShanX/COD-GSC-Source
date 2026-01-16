@@ -22,7 +22,7 @@
 #namespace zm_stalingrad_timer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_timer", &__init__, &__main__, undefined);
+  system::register("zm_stalingrad_timer", & __init__, & __main__, undefined);
 }
 
 function __init__() {}
@@ -34,7 +34,7 @@ function __main__() {
   foreach(s_wallbuy in level._spawned_wallbuys) {
     if(s_wallbuy.zombie_weapon_upgrade == "melee_wrench") {
       level.var_b9f3bf28 = s_wallbuy;
-      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = &function_6ac3689a;
+      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = & function_6ac3689a;
       break;
     }
   }
@@ -173,7 +173,7 @@ function function_86419da() {
       }
     }
     if((var_99870abd % 5) == 0) {
-      if(isDefined(var_ec31aba8) && n_current_time < var_ec31aba8) {
+      if(isdefined(var_ec31aba8) && n_current_time < var_ec31aba8) {
         luinotifyevent(&"zombie_time_attack_notification", 2, zm::get_round_number() - 1, level.players.size);
         playsoundatposition("zmb_stalingrad_time_trial_complete", (0, 0, 0));
         level thread function_cc8ae246(var_99870abd);
@@ -183,7 +183,7 @@ function function_86419da() {
       }
     }
   }
-  while(var_99870abd < 50);
+  while (var_99870abd < 50);
 }
 
 function function_cc8ae246(str_reward) {
@@ -211,7 +211,7 @@ function function_cc8ae246(str_reward) {
     case 50: {
       str_weapon = "melee_daisho";
       var_31fcdfe3 = 5;
-      level.var_b9f3bf28.var_5cf530a8 = &"ZM_STALINGRAD_EE_WONDERWEAPON";
+      level.var_b9f3bf28.var_5cf530a8 = & "ZM_STALINGRAD_EE_WONDERWEAPON";
       break;
     }
   }
@@ -250,8 +250,8 @@ function function_3d5b5002() {
   }
   if(level.var_2801f599 < var_ec31aba8) {
     level.perk_purchase_limit = level._custom_perks.size;
-    callback::on_spawned(&on_player_spawned);
-    array::thread_all(level.players, &function_959f59b8);
+    callback::on_spawned( & on_player_spawned);
+    array::thread_all(level.players, & function_959f59b8);
   }
 }
 
@@ -260,7 +260,7 @@ function on_player_spawned() {
 }
 
 function function_88b9bf27() {
-  if(!isDefined(self.num_perks)) {
+  if(!isdefined(self.num_perks)) {
     wait(0.1);
   }
   self zm_utility::give_player_all_perks();
@@ -268,7 +268,7 @@ function function_88b9bf27() {
 
 function function_959f59b8() {
   self endon("disconnect");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("player_revived");
     b_exclude_quick_revive = level.players.size == 1;
     self zm_utility::give_player_all_perks(b_exclude_quick_revive);

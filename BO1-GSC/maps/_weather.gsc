@@ -267,19 +267,19 @@ thunder(flashType) {
 
 emitter_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", level.thunderSoundEmitter.origin);
-  ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
+  ent thread thunder_playsound(thunderDistant, thunderClose, flashType);
 }
 
 player_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = self.origin + (0, 0, 60);
   ent LinkTo(self);
-  ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
+  ent thread thunder_playsound(thunderDistant, thunderClose, flashType);
 }
 
-thunder_playSound(thunderDistant, thunderClose, flashType) {
+thunder_playsound(thunderDistant, thunderClose, flashType) {
   if(level.rainlevel <= 7) {
-    self playSound(thunderDistant, "sounddone");
+    self PlaySound(thunderDistant, "sounddone");
   } else {
     sound = thunderClose;
     doRumble = true;
@@ -295,7 +295,7 @@ thunder_playSound(thunderDistant, thunderClose, flashType) {
         doRumble = false;
       }
     }
-    self playSound(sound, "sounddone");
+    self PlaySound(sound, "sounddone");
     if(doRumble) {
       array_thread(get_players(), ::thunder_rumble);
     }

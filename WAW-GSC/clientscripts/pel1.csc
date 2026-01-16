@@ -28,8 +28,8 @@ evet1_side_smoke_begin() {
   println("*** Client : SMOKE!");
   struct1 = getstruct("side_smoke1", "targetname");
   struct2 = getstruct("side_smoke2", "targetname");
-  playFX(0, level._effect["side_smoke"], struct1.origin, anglesToForward(struct1.angles));
-  playFX(0, level._effect["side_smoke"], struct2.origin, anglesToForward(struct2.angles));
+  playfx(0, level._effect["side_smoke"], struct1.origin, anglestoforward(struct1.angles));
+  playfx(0, level._effect["side_smoke"], struct2.origin, anglestoforward(struct2.angles));
 }
 
 setup_fake_dest_lvts() {
@@ -40,21 +40,21 @@ event1_fake_dist_lvts() {
   lvts_structs = getstructarray("fake_dist_lvts", "targetname");
   lvts = [];
   players = getlocalplayers();
-  for(i = 0; i < lvts_structs.size; i++) {
-    for(n = 0; n < 1; n++) {
+  for (i = 0; i < lvts_structs.size; i++) {
+    for (n = 0; n < 1; n++) {
       lvts[i] = spawn(n, lvts_structs[i].origin, "script_model");
-      lvts[i] setModel("vehicle_usa_tracked_lvt4");
+      lvts[i] setmodel("vehicle_usa_tracked_lvt4");
       println("set model");
       lvts[i].angles = lvts_structs[i].angles;
     }
   }
   println("set everything");
-  for(i = 0; i < lvts_structs.size; i++) {
+  for (i = 0; i < lvts_structs.size; i++) {
     point = getstruct(lvts_structs[i].target, "targetname");
     println("starting movetos");
   }
   level waittill("rf");
-  for(i = 0; i < lvts.size; i++) {
+  for (i = 0; i < lvts.size; i++) {
     lvts[i] delete();
   }
 }
@@ -91,11 +91,11 @@ event1_ambient_aaa_fx_think(endon_string) {
   if(isDefined(endon_string)) {
     level endon(endon_string);
   }
-  while(1) {
+  while (1) {
     firetime = randomintrange(3, 8);
-    for(i = 0; i < firetime * 5; i++) {
-      playFX(0, level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
-      playSound(0, "pacific_fake_fire", self.origin);
+    for (i = 0; i < firetime * 5; i++) {
+      playfx(0, level._effect["aaa_tracer"], self.origin, anglestoforward(self.angles));
+      playsound(0, "pacific_fake_fire", self.origin);
       wait 0.2;
     }
     wait randomintrange(1, 3);
@@ -104,7 +104,7 @@ event1_ambient_aaa_fx_think(endon_string) {
 
 event1_ambient_aaa_fx_rotate() {
   going_forward = true;
-  while(1) {
+  while (1) {
     self rotateto((312.6, 180, -90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
     self rotateto((307.4, 1.7, 90), randomfloatrange(3.5, 6));
@@ -157,24 +157,24 @@ ambient_fakefire(endonString, delayStart) {
   }
   burst_area = (1250, 8250, 1000);
   traceDist = 10000;
-  orig_target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+  orig_target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
   target_org = spawn(0, orig_target, "script_origin");
-  while(1) {
+  while (1) {
     burst = RandomIntRange(burstMin, burstMax);
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]),
       (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]),
       (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
-    for(i = 0; i < burst; i++) {
+    for (i = 0; i < burst; i++) {
       target = target_org.origin;
       fx_angles = VectorNormalize(target - self.origin);
-      playFX(0, muzzleFlash, self.origin, fx_angles);
+      PlayFX(0, muzzleFlash, self.origin, fx_angles);
       if(self.origin[0] > 1850 && self.origin[0] < 2300) {
         thread whiz_by_sound(self.origin, target);
       }
-      playSound(0, "pacific_fake_fire", self.origin);
+      playsound(0, "pacific_fake_fire", self.origin);
       if(RandomInt(100) <= soundChance) {
-        playSound(0, fireSound, self.origin);
+        playsound(0, fireSound, self.origin);
       }
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
@@ -183,7 +183,7 @@ ambient_fakefire(endonString, delayStart) {
 }
 
 drawlineon_org() {
-  while(1) {
+  while (1) {
     print3d(self.origin, "+", (1.0, 0.8, 0.5), 1, 3);
     wait 0.05;
   }
@@ -203,7 +203,7 @@ whiz_by_sound(start, end) {
   org moveto(end, 4);
   fake_ent = spawnfakeent(0);
   setfakeentorg(0, fake_ent, start);
-  playLoopSound(0, fake_ent, "pel1_beach_whizby");
+  playloopsound(0, fake_ent, "pel1_beach_whizby");
   org thread whiz_by_sound_mover(fake_ent);
   org waittill("movedone");
   deletefakeent(0, fake_ent);
@@ -212,39 +212,39 @@ whiz_by_sound(start, end) {
 
 whiz_by_sound_mover(fake_ent) {
   self endon("movedone");
-  while(1) {
+  while (1) {
     realwait(0.05);
     setfakeentorg(0, fake_ent, self.origin);
   }
 }
 
 aaa_flak() {
-  playFX(0, level._effect["air_flak"], (8000, -4264, 5400));
+  PlayFX(0, level._effect["air_flak"], (8000, -4264, 5400));
   wait 0.5;
-  playFX(0, level._effect["air_flak"], (-8000, -4264, 4900));
+  PlayFX(0, level._effect["air_flak"], (-8000, -4264, 4900));
   wait 0.5;
-  playFX(0, level._effect["air_flak"], (0, -4264, 5400));
+  PlayFX(0, level._effect["air_flak"], (0, -4264, 5400));
   wait 0.5;
-  playFX(0, level._effect["air_flak"], (16000, -4264, 5400));
+  PlayFX(0, level._effect["air_flak"], (16000, -4264, 5400));
   wait 0.5;
-  playFX(0, level._effect["air_flak"], (-16000, -4264, 5400));
+  PlayFX(0, level._effect["air_flak"], (-16000, -4264, 5400));
 }
 
 kill_ambient_trees_right() {
   thread kill_ambient_trees_left();
   level waittill("sfr");
-  trees = getEntArray(0, "right_side_trees", "targetname");
+  trees = getentarray(0, "right_side_trees", "targetname");
   println("TREEAMOUNT: " + trees.size);
-  for(i = 0; i < trees.size; i++) {
+  for (i = 0; i < trees.size; i++) {
     level thread move_tree_and_delete(trees[i]);
   }
 }
 
 kill_ambient_trees_left() {
   level waittill("sfl");
-  trees = getEntArray(0, "left_side_trees", "targetname");
+  trees = getentarray(0, "left_side_trees", "targetname");
   println("TREEAMOUNT: " + trees.size);
-  for(i = 0; i < trees.size; i++) {
+  for (i = 0; i < trees.size; i++) {
     level thread move_tree_and_delete(trees[i]);
   }
 }

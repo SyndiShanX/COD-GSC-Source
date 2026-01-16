@@ -5,9 +5,8 @@
 ********************************/
 
 main(var_0, var_1) {
-  if(!isDefined(level._effect)) {
+  if(!isdefined(level._effect))
     level._effect = [];
-  }
 
   level._effect["flare_runner_intro"] = loadfx("fx\misc\flare_start");
   level._effect["flare_runner"] = loadfx("fx\misc\flare");
@@ -24,14 +23,13 @@ merge_suncolor(var_0, var_1, var_2, var_3) {
   var_1 = var_1 * 20;
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_1; var_5++) {
+  for (var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = var_5 / var_1;
     level.thedif = var_6;
     var_7 = [];
 
-    for(var_8 = 0; var_8 < 3; var_8++) {
+    for (var_8 = 0; var_8 < 3; var_8++)
       var_7[var_8] = var_3[var_8] * var_6 + var_2[var_8] * (1 - var_6);
-    }
 
     level.sun_color = (var_7[0], var_7[1], var_7[2]);
     wait 0.05;
@@ -44,7 +42,7 @@ merge_sunsingledvar(var_0, var_1, var_2, var_3, var_4) {
   var_2 = var_2 * 20;
   var_5 = [];
 
-  for(var_6 = 0; var_6 < var_2; var_6++) {
+  for (var_6 = 0; var_6 < var_2; var_6++) {
     var_7 = var_6 / var_2;
     level.thedif = var_7;
     var_8 = var_4 * var_7 + var_3 * (1 - var_7);
@@ -60,7 +58,7 @@ merge_sunbrightness(var_0, var_1, var_2, var_3) {
   var_1 = var_1 * 20;
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_1; var_5++) {
+  for (var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = var_5 / var_1;
     level.thedif = var_6;
     var_7 = var_3 * var_6 + var_2 * (1 - var_6);
@@ -75,20 +73,17 @@ normalized_color(var_0) {
   var_1 = 1.0;
 
   if(var_0[0] > var_0[1]) {
-    if(var_0[0] > var_0[2]) {
+    if(var_0[0] > var_0[2])
       var_1 = var_0[0];
-    } else {
+    else
       var_1 = var_0[2];
-    }
   } else if(var_0[1] > var_0[2])
     var_1 = var_0[1];
-  else {
+  else
     var_1 = var_0[2];
-  }
 
-  if(var_1 < 0.01) {
+  if(var_1 < 0.01)
     return var_0;
-  }
 
   var_0[0] = var_0[0] / var_1;
   var_0[1] = var_0[1] / var_1;
@@ -100,12 +95,11 @@ combine_sunlight_and_brightness() {
   level endon("stop_combining_sunlight_and_brightness");
   wait 0.05;
 
-  for(;;) {
+  for (;;) {
     var_0 = level.sun_brightness;
 
-    if(var_0 > 0.01) {
+    if(var_0 > 0.01)
       var_0 = var_0 * (0.8 + randomfloat(0.4));
-    }
 
     var_1 = level.sun_color * var_0;
     setsunlight(var_1[0], var_1[1], var_1[2]);
@@ -121,9 +115,9 @@ flare_path() {
 
 flare_initial_fx() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setModel("tag_origin");
+  var_0 setmodel("tag_origin");
   var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner_intro"], var_0, "tag_origin");
+  playfxontag(level._effect["flare_runner_intro"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_intro_node");
   var_0 delete();
 }
@@ -146,31 +140,29 @@ flare_explodes() {
   thread merge_suncolor(0, 1.0, normalized_color(level.original_suncolor), level.red_suncolor);
   thread merge_sunbrightness(0, 1.0, level.original_brightness, level.red_sunbrightness);
 
-  if(isDefined(level.flare_fog)) {
+  if(isdefined(level.flare_fog))
     maps\_utility::vision_set_fog_changes(level.flare_fog, 1.0);
-  }
 
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setModel("tag_origin");
+  var_0 setmodel("tag_origin");
   var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner"], var_0, "tag_origin");
+  playfxontag(level._effect["flare_runner"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
   var_0 delete();
 }
 
 flare_burns_out() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setModel("tag_origin");
+  var_0 setmodel("tag_origin");
   var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playFXOnTag(level._effect["flare_runner_fizzout"], var_0, "tag_origin");
+  playfxontag(level._effect["flare_runner_fizzout"], var_0, "tag_origin");
   var_0 thread maps\_utility::play_sound_on_tag_endon_death("flare_runner_fizzout");
   thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.5);
   thread merge_sunbrightness(0, 1, level.red_sunbrightness, level.original_brightness);
   thread merge_suncolor(0, 0.01, level.red_suncolor, normalized_color(level.original_suncolor));
 
-  if(isDefined(level.flare_fog_return)) {
+  if(isdefined(level.flare_fog_return))
     maps\_utility::vision_set_fog_changes(level.flare_fog_return, 1);
-  }
 
   thread maps\_vehicle::volume_down(1);
   wait 1.0;
@@ -191,7 +183,7 @@ flare_fx() {
 }
 
 flag_flare(var_0) {
-  if(!isDefined(level.flag[var_0])) {
+  if(!isdefined(level.flag[var_0])) {
     common_scripts\utility::flag_init(var_0);
     return;
   }
@@ -215,9 +207,9 @@ flare_from_targetname(var_0) {
   common_scripts\utility::flag_wait("flare_start_setting_sundir");
   var_5 = getent(var_1.script_linkto, "script_linkname").origin;
   var_3 = vectortoangles(var_1.origin - var_5);
-  var_6 = anglesToForward(var_3);
+  var_6 = anglestoforward(var_3);
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(common_scripts\utility::flag("flare_stop_setting_sundir")) {
@@ -225,7 +217,7 @@ flare_from_targetname(var_0) {
     }
 
     var_3 = vectortoangles(var_1.origin - var_5);
-    var_7 = anglesToForward(var_3);
+    var_7 = anglestoforward(var_3);
     lerpsundirection(var_6, var_7, 0.05);
     var_6 = var_7;
   }

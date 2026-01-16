@@ -20,7 +20,7 @@ init_vehicles() {
   setup_targetname_spawners();
   setup_dvars();
   setup_levelvars();
-  array_thread(getEntArray("truckjunk", "targetname"), ::truckjunk);
+  array_thread(getentarray("truckjunk", "targetname"), ::truckjunk);
   setup_ai();
   setup_triggers();
   allvehiclesprespawn = precache_scripts();
@@ -69,7 +69,7 @@ init_level_has_vehicles() {
   if(level.vehicles["neutral"].size > 0) {
     level.levelHasVehicles = true;
   }
-  classname = getEntArray("script_vehicle", "classname");
+  classname = getentarray("script_vehicle", "classname");
   if(classname.size > 0) {
     level.levelHasVehicles = true;
   }
@@ -804,7 +804,7 @@ spawner_setup(vehicles, spawngroup, from) {
     if(!isDefined(vehicle[spawngroup])) {
       vehicle[spawngroup] = [];
     }
-    script_struct = spawnStruct();
+    script_struct = SpawnStruct();
     script_struct setspawnervariables(vehicles[i], from);
     vehicle[spawngroup] = array_add(vehicle[spawngroup], script_struct);
     level.vehicleSpawners[spawngroup][i] = script_struct;
@@ -1309,7 +1309,7 @@ wait_vehiclespawn(targetname) {
 }
 
 spawn_through(vehicle) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct setspawnervariables(vehicle);
   return vehicle_spawn(struct);
 }
@@ -1701,7 +1701,7 @@ helicopter_crash() {
 
 helicopter_explode() {
   fx_origin = self GetTagOrigin(self.kill_fx_struct.tag);
-  playFX(self.kill_fx_struct.effect, fx_origin);
+  PlayFx(self.kill_fx_struct.effect, fx_origin);
   self Delete();
 }
 
@@ -1718,7 +1718,7 @@ get_unused_crash_locations() {
 
 aircraft_crash_move() {
   self endon("death");
-  forward = anglesToForward(self.angles + (45, 0, 0));
+  forward = AnglesToForward(self.angles + (45, 0, 0));
   dest_point = self.origin + vector_scale(forward, 10000);
   dest_point = (dest_point[0], dest_point[1], -700);
   self SetSpeed(300, 30);
@@ -1737,7 +1737,7 @@ helicopter_crash_move(heli) {
   death_heli.angles = death_angles;
   death_heli PhysicsLaunch(death_heli.origin, (200, 0, 0));
   if(isDefined(heli.kill_fx_struct.effect) && isDefined(heli.kill_fx_struct.tag)) {
-    playFXOnTag(heli.kill_fx_struct.effect, death_heli, heli.kill_fx_struct.tag);
+    PlayFxOnTag(heli.kill_fx_struct.effect, death_heli, heli.kill_fx_struct.tag);
   }
   heli Delete();
 }
@@ -1830,17 +1830,17 @@ kill_fx_thread(struct) {
         }
       } else {
         forward = (eModel.origin + (0, 0, 100)) - eModel.origin;
-        playFX(struct.effect, eModel.origin, forward);
+        playfx(struct.effect, eModel.origin, forward);
       }
     } else if(isDefined(struct.tag)) {
       if(isDefined(self.modeldummyon) && self.modeldummyon) {
-        playFXOnTag(struct.effect, deathfx_ent(), struct.tag);
+        playfxontag(struct.effect, deathfx_ent(), struct.tag);
       } else {
-        playFXOnTag(struct.effect, self, struct.tag);
+        playfxontag(struct.effect, self, struct.tag);
       }
     } else {
       forward = (eModel.origin + (0, 0, 100)) - eModel.origin;
-      playFX(struct.effect, eModel.origin, forward);
+      playfx(struct.effect, eModel.origin, forward);
     }
   }
   if((isDefined(struct.sound)) && (!isDefined(self.delete_on_death))) {
@@ -1858,7 +1858,7 @@ loop_fx_on_vehicle_tag(effect, loopTime, tag) {
   assert(isDefined(loopTime));
   self endon("stop_looping_death_fx");
   while(isDefined(self)) {
-    playFXOnTag(effect, deathfx_ent(), tag);
+    playfxontag(effect, deathfx_ent(), tag);
     wait loopTime;
   }
 }
@@ -1873,7 +1873,7 @@ build_death_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDel
   if(!isDefined(delay)) {
     delay = 1;
   }
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.effect = effect;
   struct.tag = tag;
   struct.sound = sound;
@@ -1888,7 +1888,7 @@ build_death_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDel
 
 get_script_modelvehicles() {
   array = [];
-  models = getEntArray("script_model", "classname");
+  models = getentarray("script_model", "classname");
   if(isDefined(level.modelvehicles)) {
     return level.modelvehicles;
   }
@@ -1913,7 +1913,7 @@ get_script_modelvehicles() {
 }
 
 precache_scripts() {
-  vehicles = getEntArray("script_vehicle", "classname");
+  vehicles = getentarray("script_vehicle", "classname");
   vehicles = array_combine(vehicles, get_script_modelvehicles());
   playerdrivablevehicles = [];
   allvehiclesprespawn = [];
@@ -2180,7 +2180,7 @@ node_trigger_process() {
     if(isDefined(get_from_entity(self.targetname))) {
       get_func = ::get_from_entity_target;
     }
-    if(isDefined(get_from_spawnStruct(self.targetname))) {
+    if(isDefined(get_from_spawnstruct(self.targetname))) {
       get_func = ::get_from_spawnstruct_target;
     }
     if(isDefined(get_func)) {
@@ -2227,11 +2227,11 @@ node_trigger_process() {
 setup_triggers() {
   level.vehicle_processtriggers = [];
   triggers = [];
-  triggers = array_combine(getallvehiclenodes(), getEntArray("script_origin", "classname"));
+  triggers = array_combine(getallvehiclenodes(), getentarray("script_origin", "classname"));
   triggers = array_combine(triggers, level.struct);
-  triggers = array_combine(triggers, getEntArray("trigger_radius", "classname"));
-  triggers = array_combine(triggers, getEntArray("trigger_multiple", "classname"));
-  triggers = array_combine(triggers, getEntArray("trigger_lookat", "classname"));
+  triggers = array_combine(triggers, getentarray("trigger_radius", "classname"));
+  triggers = array_combine(triggers, getentarray("trigger_multiple", "classname"));
+  triggers = array_combine(triggers, getentarray("trigger_lookat", "classname"));
   array_thread(triggers, ::node_trigger_process);
 }
 
@@ -2701,7 +2701,7 @@ playLoopedFxontag(effect, durration, tag) {
   self endon("fire_extinguish");
   thread playLoopedFxontag_originupdate(tag, effectorigin);
   while(1) {
-    playFX(effect, effectorigin.origin, effectorigin.upvec);
+    playfx(effect, effectorigin.origin, effectorigin.upvec);
     wait durration;
   }
 }
@@ -2709,13 +2709,13 @@ playLoopedFxontag(effect, durration, tag) {
 playLoopedFxontag_originupdate(tag, effectorigin) {
   effectorigin.angles = self gettagangles(tag);
   effectorigin.origin = self gettagorigin(tag);
-  effectorigin.forwardvec = anglesToForward(effectorigin.angles);
+  effectorigin.forwardvec = anglestoforward(effectorigin.angles);
   effectorigin.upvec = anglestoup(effectorigin.angles);
   while(isDefined(self) && self.classname == "script_vehicle" && self getspeedmph() > 0) {
     eModel = get_dummy();
     effectorigin.angles = eModel gettagangles(tag);
     effectorigin.origin = eModel gettagorigin(tag);
-    effectorigin.forwardvec = anglesToForward(effectorigin.angles);
+    effectorigin.forwardvec = anglestoforward(effectorigin.angles);
     effectorigin.upvec = anglestoup(effectorigin.angles);
     wait .05;
   }
@@ -2741,7 +2741,7 @@ setup_levelvars() {
   level.vehicle_startnodes = [];
   level.vehicle_spawners = [];
   level.vehicle_walkercount = [];
-  level.helicopter_crash_locations = getEntArray("helicopter_crash_location", "targetname");
+  level.helicopter_crash_locations = getentarray("helicopter_crash_location", "targetname");
   level.vclogin_vehicles = 0;
   level.playervehicle = spawn("script_origin", (0, 0, 0));
   level.playervehiclenone = level.playervehicle;
@@ -2915,9 +2915,9 @@ vehicle_badplace() {
       bp_radius = (bp_radius * self.BadPlaceModifier);
     }
     if(hasturret) {
-      bp_direction = anglesToForward(self gettagangles("tag_turret"));
+      bp_direction = anglestoforward(self gettagangles("tag_turret"));
     } else {
-      bp_direction = anglesToForward(self.angles);
+      bp_direction = anglestoforward(self.angles);
     }
     badplace_arc("", bp_duration, self.origin, bp_radius * 1.9, bp_height, bp_direction, bp_angle_left, bp_angle_right, "allies", "axis");
     badplace_cylinder("", bp_duration, self.origin, 200, bp_height, "allies", "axis");
@@ -3275,7 +3275,7 @@ move_riders_here(base) {
 
 setup_targetname_spawners() {
   level.vehicle_targetname_array = [];
-  vehicles = array_combine(getEntArray("script_vehicle", "classname"), get_script_modelvehicles());
+  vehicles = array_combine(getentarray("script_vehicle", "classname"), get_script_modelvehicles());
   highestGroup = 0;
   for(i = 0; i < vehicles.size; i++) {
     vehicle = vehicles[i];
@@ -3363,7 +3363,7 @@ aircraft_dust_kickup(model) {
     doTraceThisFrame--;
     if(doTraceThisFrame <= 0) {
       doTraceThisFrame = numFramesPerTrace;
-      trace = bulletTrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
+      trace = bullettrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
       d = distance(trace_ent.origin, trace["position"]);
       repeatRate = ((d - minHeight) / (maxHeight - minHeight)) * (slowestRepeatWait - fastestRepeatWait) + fastestRepeatWait;
     }
@@ -3389,7 +3389,7 @@ aircraft_dust_kickup(model) {
     assertEx(isDefined(level._vehicle_effect[self.vehicletype]), self.vehicletype + " vehicle script hasn't run _tradfx properly");
     assertEx(isDefined(level._vehicle_effect[self.vehicletype][trace["surfacetype"]]), "UNKNOWN SURFACE TYPE: " + trace["surfacetype"]);
     if(level._vehicle_effect[self.vehicletype][trace["surfacetype"]] != -1) {
-      playFX(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
+      playfx(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
     }
   }
 }
@@ -3499,7 +3499,7 @@ tank_crush_fx_on_tag(tagName, fxName, soundAlias, startDelay) {
   if(isDefined(startDelay)) {
     wait startDelay;
   }
-  playFXOnTag(fxName, self, tagName);
+  playfxontag(fxName, self, tagName);
   if(isDefined(soundAlias)) {
     self thread play_sound_on_tag(soundAlias, tagName);
   }
@@ -3576,7 +3576,7 @@ maingun_FX() {
   self endon("death");
   while(true) {
     self waittill("weapon_fired");
-    playFXOnTag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
+    playfxontag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
     barrel_origin = self gettagorigin("tag_flash");
     ground = physicstrace(barrel_origin, barrel_origin + (0, 0, -128));
     physicsExplosionSphere(ground, 192, 100, 1);
@@ -3654,7 +3654,9 @@ build_drive(forward, reverse, normalspeed, rate) {
 build_aianims(aithread, vehiclethread) {
   level.vehicle_aianims[self.vehicletype] = [[aithread]]();
   if(isDefined(vehiclethread)) {
-    level.vehicle_aianims[self.vehicletype] = [[vehiclethread]](level.vehicle_aianims[self.vehicletype]);
+    level.vehicle_aianims[self.vehicletype] = [
+      [vehiclethread]
+    ](level.vehicle_aianims[self.vehicletype]);
   }
 }
 
@@ -3670,7 +3672,7 @@ build_vehiclewalk(num_walkers) {
   level.vehicle_walkercount[level.vttype] = num_walkers;
 }
 
-get_from_spawnStruct(target) {
+get_from_spawnstruct(target) {
   return getstruct(target, "targetname");
 }
 
@@ -3720,7 +3722,7 @@ attackgroup_think() {
     wait(self.script_vehicleattackgroupwait);
   }
   for(;;) {
-    group = getEntArray("script_vehicle", "classname");
+    group = getentarray("script_vehicle", "classname");
     valid_targets = [];
     for(i = 0; i < group.size; i++) {
       if(!isDefined(group[i].script_vehiclespawngroup)) {
@@ -3841,7 +3843,7 @@ truckjunk() {
 }
 
 ghetto_tag_create(target) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.origin = self.origin - target gettagorigin("tag_body");
   struct.angles = self.angles - target gettagangles("tag_body");
   struct.model = self.model;

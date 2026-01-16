@@ -13,9 +13,10 @@ create_animation_list() {
   var_0[var_0.size] = "sit_load_ak";
   var_0[var_0.size] = "smoke_balcony";
 
-  if(isDefined(level.idle_animation_list_func)) {
-    var_0 = [[level.idle_animation_list_func]](var_0);
-  }
+  if(isDefined(level.idle_animation_list_func))
+    var_0 = [
+      [level.idle_animation_list_func]
+    ](var_0);
 
   return var_0;
 }
@@ -32,21 +33,20 @@ idle() {
   }
   var_0 = undefined;
 
-  if(!isDefined(self.target)) {
+  if(!isDefined(self.target))
     var_0 = self;
-  } else {
+  else {
     var_0 = getnode(self.target, "targetname");
     var_1 = getent(self.target, "targetname");
     var_2 = common_scripts\utility::getstruct(self.target, "targetname");
     var_3 = undefined;
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       var_3 = ::get_node;
-    } else if(isDefined(var_1)) {
+    else if(isDefined(var_1))
       var_3 = ::get_ent;
-    } else if(isDefined(var_2)) {
+    else if(isDefined(var_2))
       var_3 = common_scripts\utility::getstruct;
-    }
 
     for(var_0 = [
         [var_3]
@@ -57,9 +57,8 @@ idle() {
 
   var_4 = var_0.script_animation;
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = "random";
-  }
 
   if(!check_animation(var_4, var_0)) {
     return;
@@ -92,11 +91,10 @@ idle_reach_node(var_0, var_1) {
   maps\_utility::add_func(maps\_utility::send_notify, "stop_idle_proc");
   thread maps\_utility::do_wait_any();
 
-  if(isDefined(self.script_patroller)) {
+  if(isDefined(self.script_patroller))
     self waittill("_patrol_reached_path_end");
-  } else {
+  else
     var_0 maps\_anim::anim_generic_reach(self, var_1);
-  }
 }
 
 idle_proc(var_0, var_1, var_2, var_3) {
@@ -120,13 +118,11 @@ idle_proc(var_0, var_1, var_2, var_3) {
     var_0 thread maps\_anim::anim_first_frame_solo(var_4, "sit_load_ak_react");
   }
 
-  if(var_0.script_animation == "lean_smoke" || var_0.script_animation == "smoke_balcony") {
+  if(var_0.script_animation == "lean_smoke" || var_0.script_animation == "smoke_balcony")
     thread maps\_props::attach_cig_self();
-  }
 
-  if(var_0.script_animation == "smoke_balcony") {
+  if(var_0.script_animation == "smoke_balcony")
     thread special_death_proc(var_0, var_3);
-  }
 
   if(var_0.script_animation == "sleep") {
     var_4 = maps\_utility::spawn_anim_model("chair");
@@ -136,9 +132,8 @@ idle_proc(var_0, var_1, var_2, var_3) {
     thread reaction_sleep();
   }
 
-  if(isDefined(level.idle_proc_func)) {
+  if(isDefined(level.idle_proc_func))
     self[[level.idle_proc_func]](var_0, var_1, var_2, var_3);
-  }
 
   var_0 maps\_utility::script_delay();
   self.deathanim = level.scr_anim["generic"][var_3];
@@ -146,9 +141,8 @@ idle_proc(var_0, var_1, var_2, var_3) {
   if(isDefined(self._stealth)) {
     var_5 = undefined;
 
-    if(var_0.script_animation == "smoke_balcony") {
+    if(var_0.script_animation == "smoke_balcony")
       var_5 = 1;
-    }
 
     var_0 maps\_stealth_utility::stealth_ai_idle_and_react(self, var_1, var_2, undefined, var_5);
     var_0 common_scripts\utility::waittill_either("stop_loop", "stop_idle_proc");
@@ -190,15 +184,13 @@ reaction_sleep_wait_wakeup_dist(var_0, var_1) {
   var_2 = var_1 * var_1;
 
   for(;;) {
-    while(distancesquared(self.origin, var_0.origin) > var_2) {
+    while(distancesquared(self.origin, var_0.origin) > var_2)
       wait 0.1;
-    }
 
     var_0.ignoreall = 0;
 
-    while(distancesquared(self.origin, var_0.origin) <= var_2) {
+    while(distancesquared(self.origin, var_0.origin) <= var_2)
       wait 0.1;
-    }
 
     var_0.ignoreall = 1;
   }
@@ -227,11 +219,10 @@ reaction_proc(var_0, var_1, var_2, var_3) {
   }
 
   if(var_4 != "doFlashBanged") {
-    if(isDefined(var_3) || isDefined(self.has_delta)) {
+    if(isDefined(var_3) || isDefined(self.has_delta))
       var_0 maps\_anim::anim_generic(self, var_2, var_3);
-    } else {
+    else
       var_0 maps\_anim::anim_generic_custom_animmode(self, "gravity", var_2);
-    }
   }
 }
 
@@ -246,9 +237,8 @@ special_death_proc(var_0, var_1) {
   self waittill("damage");
 
   if(isDefined(self.deathanim)) {
-    if(isDefined(self._stealth)) {
+    if(isDefined(self._stealth))
       maps\_stealth_utility::disable_stealth_for_ai();
-    }
 
     var_0 maps\_anim::anim_generic(self, var_1);
     self delete();
@@ -258,17 +248,15 @@ special_death_proc(var_0, var_1) {
 clear_bulletshield_on_alert(var_0) {
   self endon("death");
 
-  if(!isDefined(self._stealth)) {
+  if(!isDefined(self._stealth))
     self waittill("_idle_reaction");
-  } else {
+  else
     var_0 common_scripts\utility::waittill_either("stop_loop", "stop_idle_proc");
-  }
 
   maps\_utility::clear_deathanim();
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
     maps\_utility::stop_magic_bullet_shield();
-  }
 }
 
 animate_props_on_death(var_0, var_1) {
@@ -296,14 +284,12 @@ check_animation(var_0, var_1) {
     var_3 = [];
 
     for(var_4 = 0; var_4 < var_2.size; var_4++) {
-      if(!isDefined(level.scr_anim["generic"][var_2[var_4] + "_react"])) {
+      if(!isDefined(level.scr_anim["generic"][var_2[var_4] + "_react"]))
         var_3[var_3.size] = var_2[var_4];
-      }
     }
 
-    if(!var_3.size) {
+    if(!var_3.size)
       return 1;
-    }
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {}
 
@@ -312,9 +298,8 @@ check_animation(var_0, var_1) {
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     if(var_2[var_4] == var_0) {
-      if(!isDefined(level.scr_anim["generic"][var_0 + "_react"])) {
+      if(!isDefined(level.scr_anim["generic"][var_0 + "_react"]))
         return 0;
-      }
 
       return 1;
     }
@@ -322,9 +307,8 @@ check_animation(var_0, var_1) {
 
   var_5 = "";
 
-  for(var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++)
     var_5 = var_5 + var_2[var_4] + ", ";
-  }
 
   var_5 = var_5 + "and random.";
   return 0;

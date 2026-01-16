@@ -26,9 +26,8 @@ TABLE_IS_UPGRADE = 9;
 TABLE_DPAD_MAX_INDEX = 99;
 
 init_combat_resources() {
-  if(!isDefined(level.alien_combat_resources_table)) {
+  if(!isDefined(level.alien_combat_resources_table))
     level.alien_combat_resources_table = WAVE_TABLE;
-  }
 
   init_combat_resource_callback();
 
@@ -232,9 +231,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -267,9 +266,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_1";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -302,9 +301,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_2";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -337,9 +336,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_3";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -372,9 +371,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_4";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -400,9 +399,8 @@ init_combat_resource_overrides() {
   config.maxHealth = 1000;
   level.imsSettings["alien_ims_4"] = config;
 
-  if(!isDefined(level.ballDroneSettings)) {
+  if(!isDefined(level.ballDroneSettings))
     level.ballDroneSettings = [];
-  }
 
   level.ballDroneSettings["alien_ball_drone"] = spawnStruct();
   level.ballDroneSettings["alien_ball_drone"].timeOut = 35.0;
@@ -564,17 +562,17 @@ init_combat_resource_overrides() {
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["enemy"] = LoadFX("vfx/gameplay/mp/killstreaks/vfx_light_detonator_blink");
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["friendly"] = LoadFX("fx/misc/light_mine_blink_friendly");
 
-  level.boxSettings["deployable_vest"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
-  level.boxSettings["deployable_vest"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
-  level.boxSettings["deployable_vest"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYED_VEST";
+  level.boxSettings["deployable_vest"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
+  level.boxSettings["deployable_vest"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
+  level.boxSettings["deployable_vest"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYED_VEST";
 
-  level.boxSettings["deployable_ammo"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
-  level.boxSettings["deployable_ammo"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  level.boxSettings["deployable_ammo"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  level.boxSettings["deployable_ammo"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
+  level.boxSettings["deployable_ammo"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  level.boxSettings["deployable_ammo"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
 
-  level.boxSettings["deployable_juicebox"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
-  level.boxSettings["deployable_juicebox"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
-  level.boxSettings["deployable_juicebox"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
+  level.boxSettings["deployable_juicebox"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
+  level.boxSettings["deployable_juicebox"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
+  level.boxSettings["deployable_juicebox"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
 
   level.boxSettings["deployable_ammo"].deathDamageMax = undefined;
 
@@ -679,25 +677,21 @@ populate_combat_resource_from_table(start_idx, resource_type) {
 is_resource_set(resource_ref, upgrade_ref) {
   assert(isDefined(resource_ref) && isDefined(upgrade_ref));
 
-  if(resource_ref == upgrade_ref) {
+  if(resource_ref == upgrade_ref)
     return false;
-  }
 
-  if(!issubstr(upgrade_ref, resource_ref)) {
+  if(!issubstr(upgrade_ref, resource_ref))
     return false;
-  }
 
   resource_toks = StrTok(resource_ref, "_");
   upgrade_toks = StrTok(upgrade_ref, "_");
 
-  if(upgrade_toks.size - resource_toks.size != 1) {
+  if(upgrade_toks.size - resource_toks.size != 1)
     return false;
-  }
 
   for(i = 0; i < upgrade_toks.size - 1; i++) {
-    if(upgrade_toks[i] != resource_toks[i]) {
+    if(upgrade_toks[i] != resource_toks[i])
       return false;
-    }
   }
 
   return true;
@@ -786,9 +780,8 @@ track_deployables(ammo) {
     self.active_deployables = [];
   }
 
-  if(isDefined(self.active_deployables[ammo.boxtype])) {
+  if(isDefined(self.active_deployables[ammo.boxtype]))
     self.active_deployables[ammo.boxtype] notify("death");
-  }
 
   self.active_deployables[ammo.boxtype] = ammo;
 }
@@ -910,9 +903,8 @@ Use_dpad_team_explosives(def, rank) {
   self.deployable = false;
 
   level notify("dlc_vo_notify", "inform_explosives", self);
-  if(!isDefined(level.use_dlc_vo)) {
+  if(!isDefined(level.use_dlc_vo))
     level thread maps\mp\alien\_music_and_dialog::playVOForSupportItems(self);
-  }
 }
 
 BOX_TYPE_RANDOMBOX = "deployable_randombox";
@@ -962,7 +954,7 @@ Use_dpad_team_currency(def, rank) {
 
 CanPurchase_dpad_riotshield(def, rank) {
   if(self.hasRiotShield) {
-    self setLowerMessage("riot_shield_equipped", &"ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
+    self setLowerMessage("riot_shield_equipped", & "ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
     return false;
   }
 
@@ -1014,21 +1006,16 @@ Use_dpad_riotshield(def, rank) {
   level notify("dlc_vo_notify", "inform_shield", self);
 }
 CancelUse_dpad_riotshield(def, rank) {
-  if(rank == 0) {
+  if(rank == 0)
     self TakeWeapon("iw5_alienriotshield_mp");
-  }
-  if(rank == 1) {
+  if(rank == 1)
     self TakeWeapon("iw5_alienriotshield1_mp");
-  }
-  if(rank == 2) {
+  if(rank == 2)
     self TakeWeapon("iw5_alienriotshield2_mp");
-  }
-  if(rank == 3) {
+  if(rank == 3)
     self TakeWeapon("iw5_alienriotshield3_mp");
-  }
-  if(rank == 4) {
+  if(rank == 4)
     self TakeWeapon("iw5_alienriotshield4_mp");
-  }
 
   if(!isDefined(level.drill_carrier) || (isDefined(level.drill_carrier) && self != level.drill_carrier)) {
     if(isDefined(self.last_weapon)) {
@@ -1058,15 +1045,16 @@ CanPurchase_dpad_sentry(def, rank) {
 }
 
 TryUse_dpad_sentry(def, rank) {
-  if(is_true(self.isCarrying)) {
+  if(is_true(self.isCarrying))
     return false;
-  }
 
   self.last_weapon = self GetCurrentWeapon();
 
   if(rank == 0) {
     self.last_sentry = "alien_sentry";
-    sentryGunBase = [[level.createsentryforplayer_func]]("alien_sentry", self);
+    sentryGunBase = [
+      [level.createsentryforplayer_func]
+    ]("alien_sentry", self);
     sentryGunBase SetConvergenceTime(1.5, "pitch");
     sentryGunBase SetConvergenceTime(1.5, "yaw");
     self.carriedSentry = sentryGunBase;
@@ -1075,7 +1063,9 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 1) {
     self.last_sentry = "alien_sentry_1";
-    sentryGun1 = [[level.createsentryforplayer_func]]("alien_sentry_1", self);
+    sentryGun1 = [
+      [level.createsentryforplayer_func]
+    ]("alien_sentry_1", self);
     sentryGun1 SetConvergenceTime(1.0, "pitch");
     sentryGun1 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun1;
@@ -1084,7 +1074,9 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 2) {
     self.last_sentry = "alien_sentry_2";
-    sentryGun2 = [[level.createsentryforplayer_func]]("alien_sentry_2", self);
+    sentryGun2 = [
+      [level.createsentryforplayer_func]
+    ]("alien_sentry_2", self);
     sentryGun2 SetConvergenceTime(1.0, "pitch");
     sentryGun2 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun2;
@@ -1093,7 +1085,9 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 3) {
     self.last_sentry = "alien_sentry_3";
-    sentryGun3 = [[level.createsentryforplayer_func]]("alien_sentry_3", self);
+    sentryGun3 = [
+      [level.createsentryforplayer_func]
+    ]("alien_sentry_3", self);
     sentryGun3 SetConvergenceTime(1.0, "pitch");
     sentryGun3 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun3;
@@ -1103,7 +1097,9 @@ TryUse_dpad_sentry(def, rank) {
 
   if(rank == 4) {
     self.last_sentry = "alien_sentry_4";
-    sentryGun4 = [[level.createsentryforplayer_func]]("alien_sentry_4", self);
+    sentryGun4 = [
+      [level.createsentryforplayer_func]
+    ]("alien_sentry_4", self);
     sentryGun4 SetConvergenceTime(1.0, "pitch");
     sentryGun4 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun4;
@@ -1126,17 +1122,15 @@ sentry_placed_listener(rank) {
   self thread manage_sentry_count(rank, "sentry");
 
   if(IsSentient(newSentry)) {
-    if(!is_chaos_mode()) {
+    if(!is_chaos_mode())
       newSentry.threatbias = -1000;
-    } else {
+    else
       newSentry.threatbias = -3500;
-    }
   }
   newSentry.maxHealth = 150;
 
-  if(isDefined(newsentry.owner) && newSentry.owner maps\mp\alien\_persistence::is_upgrade_enabled("sentry_health_upgrade")) {
+  if(isDefined(newsentry.owner) && newSentry.owner maps\mp\alien\_persistence::is_upgrade_enabled("sentry_health_upgrade"))
     newSentry.maxhealth = int(newSentry.maxhealth * SENTRY_HEALTH_UPGRADE_SCALAR);
-  }
 
   ammo = 450;
   switch (rank) {
@@ -1176,20 +1170,17 @@ Use_dpad_sentry(def, rank) {
 
   self.carriedSentry = undefined;
   self.isCarrying = false;
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 
   level thread maps\mp\alien\_music_and_dialog::playVOForSentry(self, "sentry");
 }
 CancelUse_dpad_sentry(def, rank) {
-  if(isDefined(self.carriedSentry)) {
+  if(isDefined(self.carriedSentry))
     self.carriedSentry[[level.sentry_setcancelled_func]]();
-  }
   self EnableWeapons();
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 }
 
 get_valid_sentry_count() {
@@ -1215,28 +1206,36 @@ TryUse_dpad_glsentry(def, rank) {
 
   if(rank == 0) {
     self.last_sentry = "gl_turret";
-    glsentryGunBase = [[level.createsentryforplayer_func]]("gl_turret", self);
+    glsentryGunBase = [
+      [level.createsentryforplayer_func]
+    ]("gl_turret", self);
     self.carriedSentry = glsentryGunBase;
     glsentryGunBase[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 1) {
     self.last_sentry = "gl_turret_1";
-    glsentryGun1 = [[level.createsentryforplayer_func]]("gl_turret_1", self);
+    glsentryGun1 = [
+      [level.createsentryforplayer_func]
+    ]("gl_turret_1", self);
     self.carriedSentry = glsentryGun1;
     glsentryGun1[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 2) {
     self.last_sentry = "gl_turret_2";
-    glsentryGun2 = [[level.createsentryforplayer_func]]("gl_turret_2", self);
+    glsentryGun2 = [
+      [level.createsentryforplayer_func]
+    ]("gl_turret_2", self);
     self.carriedSentry = glsentryGun2;
     glsentryGun2[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 3) {
     self.last_sentry = "gl_turret_3";
-    glsentryGun3 = [[level.createsentryforplayer_func]]("gl_turret_3", self);
+    glsentryGun3 = [
+      [level.createsentryforplayer_func]
+    ]("gl_turret_3", self);
     self.carriedSentry = glsentryGun3;
     glsentryGun3[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1244,7 +1243,9 @@ TryUse_dpad_glsentry(def, rank) {
 
   if(rank == 4) {
     self.last_sentry = "gl_turret_4";
-    glsentryGun4 = [[level.createsentryforplayer_func]]("gl_turret_4", self);
+    glsentryGun4 = [
+      [level.createsentryforplayer_func]
+    ]("gl_turret_4", self);
     self.carriedSentry = glsentryGun4;
     glsentryGun4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1313,21 +1314,18 @@ Use_dpad_glsentry(def, rank) {
 
   self.carriedSentry = undefined;
   self.isCarrying = false;
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 
   level thread maps\mp\alien\_music_and_dialog::playVOForSentry(self, "grenade");
 }
 
 CancelUse_dpad_glsentry(def, rank) {
-  if(isDefined(self.carriedSentry)) {
+  if(isDefined(self.carriedSentry))
     self.carriedSentry[[level.sentry_setcancelled_func]]();
-  }
   self EnableWeapons();
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 }
 
 get_valid_grenade_turret_count() {
@@ -1354,7 +1352,9 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 0) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurretBase = [[level.createsentryforplayer_func]]("minigun_turret", self);
+    minigunTurretBase = [
+      [level.createsentryforplayer_func]
+    ]("minigun_turret", self);
     self.carriedSentry = minigunTurretBase;
     minigunTurretBase[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1362,7 +1362,9 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 1) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret_1";
-    minigunTurret1 = [[level.createsentryforplayer_func]]("minigun_turret_1", self);
+    minigunTurret1 = [
+      [level.createsentryforplayer_func]
+    ]("minigun_turret_1", self);
     self.carriedSentry = minigunTurret1;
     minigunTurret1[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1370,7 +1372,9 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 2) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret2 = [[level.createsentryforplayer_func]]("minigun_turret_2", self);
+    minigunTurret2 = [
+      [level.createsentryforplayer_func]
+    ]("minigun_turret_2", self);
     self.carriedSentry = minigunTurret2;
     minigunTurret2[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1378,7 +1382,9 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 3) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret3 = [[level.createsentryforplayer_func]]("minigun_turret_3", self);
+    minigunTurret3 = [
+      [level.createsentryforplayer_func]
+    ]("minigun_turret_3", self);
     self.carriedSentry = minigunTurret3;
     minigunTurret3[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1387,7 +1393,9 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 4) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret4 = [[level.createsentryforplayer_func]]("minigun_turret_4", self);
+    minigunTurret4 = [
+      [level.createsentryforplayer_func]
+    ]("minigun_turret_4", self);
     self.carriedSentry = minigunTurret4;
     minigunTurret4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1478,9 +1486,8 @@ watch_players_onoff_turret() {
     if(isDefined(self.turret_ammo)) {
       user show_turret_icon(1);
       user set_turret_ammocount(self.turret_ammo);
-      if(!is_chaos_mode()) {
+      if(!is_chaos_mode())
         user disable_special_ammo();
-      }
     }
 
     self thread turret_update_ammocounter(user);
@@ -1505,9 +1512,8 @@ watch_player_disengage(player) {
 
   if(isDefined(player) && isAlive(player)) {
     player hide_turret_icon();
-    if(!is_chaos_mode()) {
+    if(!is_chaos_mode())
       player enable_special_ammo();
-    }
     weapon = player GetCurrentWeapon();
     player notify("weapon_change", weapon);
   }
@@ -1533,21 +1539,18 @@ Use_dpad_minigun_turret(def, rank) {
 
   self.carriedSentry = undefined;
   self.isCarrying = false;
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 
   level thread maps\mp\alien\_music_and_dialog::playVOForSentry(self, "generic");
 }
 
 CancelUse_dpad_minigun_turret(def, rank) {
-  if(isDefined(self.carriedSentry)) {
+  if(isDefined(self.carriedSentry))
     self.carriedSentry[[level.sentry_setcancelled_func]]();
-  }
   self EnableWeapons();
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 }
 
 get_valid_minigun_turret_count() {
@@ -1556,11 +1559,10 @@ get_valid_minigun_turret_count() {
 }
 
 CanPurchase_dpad_ims(def, rank) {
-  if(isDefined(self.imsList)) {
+  if(isDefined(self.imsList))
     valid_ims_count = get_valid_equipment_count(self.imsList);
-  } else {
+  else
     valid_ims_count = 0;
-  }
 
   if(valid_ims_count > 0) {
     self iprintlnBold(&"ALIEN_COLLECTIBLES_MAX_IMS");
@@ -1611,9 +1613,8 @@ Use_dpad_ims(def, rank) {
 
   self.carriedIms = undefined;
   self.isCarrying = false;
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
   self EnableWeaponSwitch();
 
   level thread maps\mp\alien\_music_and_dialog::PlayVOForIMS(self);
@@ -1621,9 +1622,8 @@ Use_dpad_ims(def, rank) {
 
 CancelUse_dpad_ims(def, rank) {
   self EnableWeapons();
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 }
 
 ims_fire_cloud(targetpos, owner) {
@@ -1641,9 +1641,8 @@ ims_fire_cloud(targetpos, owner) {
 }
 
 ims_grace_period_scalar(time, owner) {
-  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("ims_gracetime_upgrade")) {
+  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("ims_gracetime_upgrade"))
     time = time / 2;
-  }
   return time;
 }
 
@@ -1691,36 +1690,31 @@ Use_dpad_backup_buddy(def, rank) {
     self give_player_currency(Ceil(def.upgrades[rank].cost));
   } else {
     level notify("dlc_vo_notify", "online_vulture", self);
-    if(!isDefined(level.use_dlc_vo)) {
+    if(!isDefined(level.use_dlc_vo))
       level thread maps\mp\alien\_music_and_dialog::PlayVOForDrone(self);
-    }
   }
   self TakeWeapon("mortar_detonator_mp");
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
 }
 
 CancelUse_dpad_backup_buddy(def, rank) {
   self TakeWeapon("mortar_detonator_mp");
   self.deployable = false;
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
   return true;
 }
 
 ball_drone_timeout_scalar(timeout, owner) {
-  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("vulture_duration_upgrade")) {
+  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("vulture_duration_upgrade"))
     timeout = timeout * 1.5;
-  }
   return timeout;
 }
 
 ball_drone_fire_rocket_scalar(waittime, owner) {
-  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("vulture_duration_upgrade")) {
+  if(owner maps\mp\alien\_persistence::is_upgrade_enabled("vulture_duration_upgrade"))
     waittime = waittime * 0.6;
-  }
   return waittime;
 }
 
@@ -1733,17 +1727,15 @@ TryUse_dpad_airstrike(def, rank) {
 Use_dpad_airstrike(def, rank) {
   level thread maps\mp\alien\_music_and_dialog::PlayVOForMortarStrike(self);
   self TakeWeapon("mortar_detonator_mp");
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
   doMortar(rank);
 }
 
 CancelUse_dpad_airstrike(def, rank) {
   self TakeWeapon("mortar_detonator_mp");
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
   return true;
 }
 
@@ -1839,9 +1831,8 @@ Use_dpad_team_specialammo_explo(def, rank) {
   self.deployable = false;
 
   level notify("dlc_vo_notify", "ready_explosiverounds", self);
-  if(!isDefined(level.use_dlc_vo)) {
+  if(!isDefined(level.use_dlc_vo))
     level thread maps\mp\alien\_music_and_dialog::PlayVOForSpecialAmmo(self);
-  }
 }
 
 BOX_TYPE_SPECIALAMMO_AP = "deployable_specialammo_ap";
@@ -1859,9 +1850,8 @@ Use_dpad_team_specialammo_in(def, rank) {
   self.deployable = false;
 
   level notify("dlc_vo_notify", "ready_incendiaryrounds", self);
-  if(!isDefined(level.use_dlc_vo)) {
+  if(!isDefined(level.use_dlc_vo))
     level thread maps\mp\alien\_music_and_dialog::PlayVOForSpecialAmmo(self);
-  }
 }
 
 BOX_TYPE_SPECIALAMMO_COMB = "deployable_specialammo_comb";
@@ -1874,9 +1864,8 @@ Use_dpad_team_specialammo_comb(def, rank) {
   self.deployable = false;
 
   level notify("dlc_vo_notify", "ready_explosiverounds", self);
-  if(!isDefined(level.use_dlc_vo)) {
+  if(!isDefined(level.use_dlc_vo))
     level thread maps\mp\alien\_music_and_dialog::PlayVOForSpecialAmmo(self);
-  }
 }
 
 deployable_combinedammo_placed_listener() {
@@ -1963,9 +1952,8 @@ Use_dpad_war_machine(def, rank) {
 
   self notify("dlc_vo_notify", "online_mk32", self);
   self thread watch_ammo(weaponname);
-  if(!isDefined(level.use_dlc_vo)) {
+  if(!isDefined(level.use_dlc_vo))
     level thread maps\mp\alien\_music_and_dialog::PlayVOForWarMachine(self);
-  }
 }
 
 CancelUse_dpad_war_machine(def, rank) {
@@ -2092,9 +2080,8 @@ wait_to_cancel_dpad_weapon() {
   self endon("disconnect");
 
   timeout = gettime() + 1000;
-  while(!self has_special_weapon() || timeout < gettime()) {
+  while(!self has_special_weapon() || timeout < gettime())
     wait(.05);
-  }
 }
 
 watch_ammo(weapName) {
@@ -2125,7 +2112,9 @@ watch_ammo(weapName) {
 
 TryUse_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_try_use)) {
-    [[level.alternate_trinity_weapon_try_use]](def, rank);
+    [
+      [level.alternate_trinity_weapon_try_use]
+    ](def, rank);
 
     return true;
   }
@@ -2137,7 +2126,9 @@ TryUse_dpad_predator(def, rank) {
 
 Use_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_use)) {
-    [[level.alternate_trinity_weapon_use]](def, rank);
+    [
+      [level.alternate_trinity_weapon_use]
+    ](def, rank);
 
     return true;
   }
@@ -2172,24 +2163,24 @@ Use_dpad_predator(def, rank) {
     baby_missile_name = "switchblade_babyfast_mp";
   }
 
-  if(isDefined(level.tryUseDroneHive)) {
+  if(isDefined(level.tryUseDroneHive))
     self[[level.tryUseDroneHive]](rank, num_missiles, missile_name, altitude, baby_missile_name);
-  }
 
   wait 0.1;
 }
 
 CancelUse_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_cancel_use)) {
-    [[level.alternate_trinity_weapon_cancel_use]](def, rank);
+    [
+      [level.alternate_trinity_weapon_cancel_use]
+    ](def, rank);
 
     return true;
   }
   self.turn_off_class_skill_activation = undefined;
   self TakeWeapon("switchblade_laptop_mp");
-  if(isDefined(self.last_weapon)) {
+  if(isDefined(self.last_weapon))
     self SwitchToWeapon(self.last_weapon);
-  }
   return true;
 }
 
@@ -2232,9 +2223,8 @@ common_TryUse_actions() {
 get_valid_equipment_count(equipment_list) {
   valid_count = 0;
   foreach(equipment in equipment_list) {
-    if(equipment is_equipment_valid(self)) {
+    if(equipment is_equipment_valid(self))
       valid_count++;
-    }
   }
   return valid_count;
 }
@@ -2243,9 +2233,8 @@ get_all_my_sentry(streakname) {
   result = [];
 
   foreach(turret in level.turrets) {
-    if(isAlive(turret) && level.sentrySettings[turret.sentrytype].streakname == streakname && ((isDefined(turret.originalowner) && turret.originalowner == self) || turret.owner == self)) {
+    if(isAlive(turret) && level.sentrySettings[turret.sentrytype].streakname == streakname && ((isDefined(turret.originalowner) && turret.originalowner == self) || turret.owner == self))
       result[result.size] = turret;
-    }
   }
 
   return result;
@@ -2254,25 +2243,21 @@ get_all_my_sentry(streakname) {
 is_equipment_valid(owner) {
   VALID_PROXIMITY = 360000;
 
-  if(!isDefined(self) || !isAlive(self) || isDefined(self.deleting)) {
+  if(!isDefined(self) || !isAlive(self) || isDefined(self.deleting))
     return false;
-  }
 
-  if(distanceSquared(self.origin, owner.origin) < VALID_PROXIMITY) {
+  if(distanceSquared(self.origin, owner.origin) < VALID_PROXIMITY)
     return true;
-  }
 
   owner_world_area = owner get_in_world_area();
 
-  if(isDefined(self.in_world_area)) {
+  if(isDefined(self.in_world_area))
     equipment_world_area = self.in_world_area;
-  } else {
+  else
     equipment_world_area = self get_in_world_area();
-  }
 
-  if(equipment_world_area == owner_world_area) {
+  if(equipment_world_area == owner_world_area)
     return true;
-  }
 
   return false;
 }
@@ -2295,9 +2280,8 @@ manage_sentry_count(rank, streakname) {
   }
   quantity_to_remove = my_sentry_list.size - max_sentry_count;
 
-  if(quantity_to_remove > 0) {
+  if(quantity_to_remove > 0)
     remove_extra_equipment(my_sentry_list, quantity_to_remove);
-  }
 }
 
 remove_extra_equipment(item_list, quantity_to_remove) {

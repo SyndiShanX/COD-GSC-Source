@@ -21,20 +21,18 @@ GOLF_COURSE_FAKE_CHOPPER_PAUSE_MIN = 10.0;
 GOLF_COURSE_FAKE_CHOPPER_PAUSE_MAX = 20.0;
 
 movePlayerToStartPoint(sTargetname) {
-  assert(isDefined(sTargetname));
+  assert(isdefined(sTargetname));
   start = getent(sTargetname, "targetname");
   level.player SetOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 }
 
 laser_hint_print() {
-  if(flag("used_laser")) {
+  if(flag("used_laser"))
     return;
-  }
 
-  if(flag("laser_hint_print")) {
+  if(flag("laser_hint_print"))
     return;
-  }
 
   flag_set("laser_hint_print");
   thread display_hint("use_laser");
@@ -45,9 +43,8 @@ laser_golf_hint_print() {
 
   wait 10;
 
-  if(flag("used_laser_golf")) {
+  if(flag("used_laser_golf"))
     return;
-  }
 
   thread display_hint("use_laser_golf");
 }
@@ -66,13 +63,12 @@ stryker_moving_up_dialog() {
   dialog[dialog.size] = "arcadia_str_standclear"; // Be advised, we're movin' up. Stand clear.
   dialog[dialog.size] = "arcadia_str_oscarmike"; // All ground units, stand clear. Badger One is oscar mike.
 
-  for(;;) {
+  for (;;) {
     self waittill("resuming speed");
 
     if(randomint(100) < 25) {
-      if(!flag("disable_stryker_dialog")) {
+      if(!flag("disable_stryker_dialog"))
         thread radio_dialogue(dialog[randomint(dialog.size)]);
-      }
     }
   }
 }
@@ -84,21 +80,19 @@ stryker_holding_position_dialog() {
   dialog = [];
   dialog[dialog.size] = "arcadia_str_holdingposition"; // Badger One holding position.
 
-  for(;;) {
+  for (;;) {
     self waittill("wait for gate");
 
     if(randomint(100) < 25) {
-      if(!flag("disable_stryker_dialog")) {
+      if(!flag("disable_stryker_dialog"))
         thread radio_dialogue(dialog[randomint(dialog.size)]);
-      }
     }
   }
 }
 
 process_ai_script_parameters() {
-  if(!isDefined(self.script_parameters)) {
+  if(!isdefined(self.script_parameters))
     return;
-  }
 
   parms = strtok(self.script_parameters, ":;, ");
 
@@ -125,9 +119,8 @@ process_ai_script_parameters() {
 ignore_until_unload() {
   self waittill("spawned", guy);
 
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
 
   guy endon("death");
 
@@ -137,9 +130,8 @@ ignore_until_unload() {
 }
 
 rpg_enemy_shoot_stryker() {
-  if(!isAlive(level.stryker)) {
+  if(!isAlive(level.stryker))
     return;
-  }
 
   self endon("death");
   self set_ignoreme(true);
@@ -165,9 +157,8 @@ rpg_enemy_shoot_stryker() {
 ai_playerseek() {
   self endon("death");
 
-  if(isDefined(self.target)) {
+  if(isdefined(self.target))
     self waittill("goal");
-  }
 
   self setgoalentity(level.player);
   self.goalradius = 2000;
@@ -178,7 +169,7 @@ drop_plane() {
 
   self ent_flag_wait("start_drop");
 
-  while(self ent_flag("start_drop")) {
+  while (self ent_flag("start_drop")) {
     guy1 = spawn_targetname("paradrop_left");
     guy1 thread paradropper(self, "distant_parachute_left");
 
@@ -202,16 +193,14 @@ paradropper(plane, animName) {
   ents[ents.size] = chute;
 
   anime = "drop1";
-  if(cointoss()) {
+  if(cointoss())
     anime = "drop2";
-  }
 
   plane anim_single(ents, anime);
 
   chute delete();
-  if(isalive(self)) {
+  if(isalive(self))
     self delete();
-  }
 }
 
 sentry_activate_trigger() {
@@ -221,9 +210,8 @@ sentry_activate_trigger() {
 
   self waittill("trigger");
 
-  if(!isalive(sentry)) {
+  if(!isalive(sentry))
     return;
-  }
   sentry common_scripts\_sentry::SentryPowerOn();
 
   sentry endon("death");
@@ -240,20 +228,19 @@ sentry_activate_trigger() {
 }
 
 fake_checkpoint_choppers() {
-  choppers = getEntArray("checkpoint_fake_chopper", "targetname");
+  choppers = getentarray("checkpoint_fake_chopper", "targetname");
   array_call(choppers, ::hide);
 
   flag_wait("checkpoint_fake_choppers");
 
-  if(getdvarint("r_arcadia_culldist") == 1) {
+  if(getdvarint("r_arcadia_culldist") == 1)
     return;
-  }
 
   array_thread(choppers, ::fake_chopper);
 }
 
 fake_creek_choppers() {
-  choppers = getEntArray("fake_creek_chopper", "targetname");
+  choppers = getentarray("fake_creek_chopper", "targetname");
   array_call(choppers, ::hide);
 
   trigger_wait_targetname("fake_creek_choppers_start");
@@ -262,26 +249,24 @@ fake_creek_choppers() {
 }
 
 fake_chopper() {
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   target = getstruct(self.target, "targetname");
-  assert(isDefined(target));
+  assert(isdefined(target));
   destination = target.origin;
 
   d = distance(self.origin, destination);
   moveTime = d / FAKE_CHOPPER_SPEED;
 
-  for(;;) {
+  for (;;) {
     self thread fake_chopper_create_and_move(moveTime, destination);
 
-    if(!isDefined(self.script_count)) {
+    if(!isdefined(self.script_count))
       break;
-    }
 
     self.script_count--;
 
-    if(self.script_count <= 0) {
+    if(self.script_count <= 0)
       break;
-    }
 
     wait randomfloatrange(3.0, 5.0);
   }
@@ -292,9 +277,9 @@ fake_chopper() {
 
 #using_animtree("vehicles");
 fake_chopper_create_and_move(moveTime, destination) {
-  assert(isDefined(moveTime));
+  assert(isdefined(moveTime));
   assert(moveTime > 0);
-  assert(isDefined(destination));
+  assert(isdefined(destination));
 
   chopper = spawn("script_model", self.origin);
 
@@ -311,9 +296,8 @@ fake_chopper_create_and_move(moveTime, destination) {
   chopper setanim( % bh_rotors, 1, .2, 1);
 
   // some play a sound effect
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     chopper playLoopSound("veh_helicopter_loop");
-  }
 
   chopper moveto(destination, moveTime, 0, 0);
   wait moveTime;
@@ -322,9 +306,8 @@ fake_chopper_create_and_move(moveTime, destination) {
 
 delete_fake_chopper_wait() {
   level waittill("delete_all_fake_choppers");
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self notify("delete");
   self delete();
 }
@@ -343,7 +326,7 @@ laser_targeting_device(player) {
     player ent_flag_init("disable_stryker_laser");
   }
 
-  for(;;) {
+  for (;;) {
     player waittill("use_laser");
 
     if(player.laserForceOn) {
@@ -365,13 +348,12 @@ laser_targeting_device(player) {
 
 get_laser_designation_context(viewpoint, entity) {
   // Check for volumes
-  volumes = getEntArray("stryker_target_location", "targetname");
+  volumes = getentarray("stryker_target_location", "targetname");
   dummyEnt = spawn("script_origin", viewpoint);
   foreach(volume in volumes) {
-    assert(isDefined(volume.script_noteworthy));
-    if(!dummyEnt isTouching(volume)) {
+    assert(isdefined(volume.script_noteworthy));
+    if(!dummyEnt isTouching(volume))
       continue;
-    }
 
     dummyEnt delete();
     return volume.script_noteworthy;
@@ -379,18 +361,16 @@ get_laser_designation_context(viewpoint, entity) {
   dummyEnt delete();
 
   // Check target entity
-  if(isDefined(entity)) {
+  if(isdefined(entity)) {
     // target a vehicle?
-    if(isDefined(entity.vehicletype) || isDefined(entity.destuctableinfo)) {
-      if(isDefined(entity.vehicletype) && entity.vehicletype == "mi17") {
+    if(isdefined(entity.vehicletype) || isdefined(entity.destuctableinfo)) {
+      if(isdefined(entity.vehicletype) && entity.vehicletype == "mi17")
         return "chopper";
-      } else {
+      else
         return "vehicle";
-      }
     }
-    if(isAI(entity)) {
+    if(isAI(entity))
       return "ai";
-    }
   }
 
   return "generic";
@@ -402,7 +382,7 @@ laser_designate_dialog(inRange, viewpoint, entity) {
     flag_set("used_laser");
 
     context = get_laser_designation_context(viewpoint, entity);
-    assert(isDefined(context));
+    assert(isdefined(context));
 
     switch (context) {
       case "house":
@@ -457,9 +437,8 @@ laser_designate_dialog(inRange, viewpoint, entity) {
     dialog[dialog.size] = "arcadia_str_outofrange"; // Target is out of range.
   }
 
-  if(flag("disable_stryker_dialog")) {
+  if(flag("disable_stryker_dialog"))
     return;
-  }
 
   thread radio_dialogue(dialog[randomint(dialog.size)]);
 }
@@ -475,17 +454,17 @@ laser_designate_target() {
 
   level notify("laser_coordinates_received");
 
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  /#
+  if(getdvar("arcadia_debug_stryker") == "1")
     thread draw_line_for_time(viewpoint, viewpoint + (0, 0, 100), 1, 0, 0, 20);
-  }
+  # /
 
-  // Check if we are supposed to be targeting for artillery now
-  artilleryTarget = undefined;
-  if(flag("golf_course_mansion")) {
+    // Check if we are supposed to be targeting for artillery now
+    artilleryTarget = undefined;
+  if(flag("golf_course_mansion"))
     artilleryTarget = laser_origin_within_golf_vehicles(viewpoint);
-  }
 
-  if(isDefined(artilleryTarget)) {
+  if(isdefined(artilleryTarget)) {
     thread laser_artillery(artilleryTarget);
   } else {
     if(!flag("disable_stryker_laser") && !self ent_flag("disable_stryker_laser")) {
@@ -494,9 +473,8 @@ laser_designate_target() {
         d = distance(level.stryker.origin, viewpoint);
         inRange = (d >= 200 && d <= 3500);
         thread laser_designate_dialog(inRange, viewpoint, entity);
-        if(inRange) {
+        if(inRange)
           level.stryker thread stryker_setmode_manual(viewpoint);
-        }
       }
     }
   }
@@ -508,36 +486,33 @@ laser_designate_target() {
 }
 
 laser_origin_within_golf_vehicles(viewpoint) {
-  triggers = getEntArray("stealth_laser_zone", "targetname");
+  triggers = getentarray("stealth_laser_zone", "targetname");
   foreach(trigger in triggers) {
-    assert(isDefined(trigger.script_group));
-    assert(isDefined(level.stealth_bombed_target[trigger.script_group]));
-    if(level.stealth_bombed_target[trigger.script_group]) {
+    assert(isdefined(trigger.script_group));
+    assert(isdefined(level.stealth_bombed_target[trigger.script_group]));
+    if(level.stealth_bombed_target[trigger.script_group])
       continue;
-    }
     d = distance(viewpoint, trigger.origin);
-    if(d <= trigger.radius) {
+    if(d <= trigger.radius)
       return trigger.script_group;
-    }
   }
   return undefined;
 }
 
 get_laser_designated_trace() {
-  eye = self getEye();
+  eye = self geteye();
   angles = self getplayerangles();
 
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   end = eye + vector_multiply(forward, 7000);
-  trace = bulletTrace(eye, end, true, self);
+  trace = bullettrace(eye, end, true, self);
 
   //thread draw_line_for_time( eye, end, 1, 1, 1, 10 );
   //thread draw_line_for_time( eye, trace[ "position" ], 1, 0, 0, 10 );
 
   entity = trace["entity"];
-  if(isDefined(entity)) {
+  if(isdefined(entity))
     trace["position"] = entity.origin;
-  }
 
   return trace;
 }
@@ -551,52 +526,47 @@ should_stop_laser_golf_hint() {
 }
 
 get_golf_geo(targetname, groupNum) {
-  ents = getEntArray(targetname, "targetname");
+  ents = getentarray(targetname, "targetname");
   returnedEnts = [];
   foreach(ent in ents) {
-    if(ent.script_group == groupNum) {
+    if(ent.script_group == groupNum)
       returnedEnts[returnedEnts.size] = ent;
-    }
   }
   return returnedEnts;
 }
 
 laser_artillery(groupNum, forced) {
-  if(!isDefined(forced)) {
+  if(!isdefined(forced))
     forced = false;
-  }
 
   flag_set("used_laser_golf");
   flavorbursts_off("allies");
 
-  assert(isDefined(level.stealth_bombed_target[groupNum]));
+  assert(isdefined(level.stealth_bombed_target[groupNum]));
   level.stealth_bombed_target[groupNum] = true;
 
   soundEnt = undefined;
   if(groupNum == 0) {
     flag_set("lazed_targets_0");
     soundEnt = getent("artillery_soundent_0", "targetname");
-    if(!forced) {
+    if(!forced)
       thread radio_dialogue("arcadia_art_missionrec"); // Fire mission received, artillery inbound.
-    }
   }
   if(groupNum == 1) {
     flag_set("lazed_targets_1");
     soundEnt = getent("artillery_soundent_1", "targetname");
-    if(!forced) {
+    if(!forced)
       thread radio_dialogue("arcadia_art_confirmed"); // Coordinates confirmed. Firing!
-    }
   }
-  assert(isDefined(soundEnt));
+  assert(isdefined(soundEnt));
 
-  if(flag("lazed_targets_0") && flag("lazed_targets_1")) {
+  if(flag("lazed_targets_0") && flag("lazed_targets_1"))
     level notify("stop_laze_golf_course_dialog");
-  }
 
   // blow everything up
   delay[0] = 4;
   delay[1] = 4;
-  assert(isDefined(delay[groupNum]));
+  assert(isdefined(delay[groupNum]));
   if(!forced) {
     wait delay[groupNum];
     wait 3;
@@ -644,14 +614,14 @@ golf_course_battle() {
 
   level.player thread waterfx();
 
-  array_thread(getEntArray("golf_course_enemy_spawner", "targetname"), ::golf_course_battle_enemy_think);
+  array_thread(getentarray("golf_course_enemy_spawner", "targetname"), ::golf_course_battle_enemy_think);
 }
 
 laze_golf_course_dialog() {
   level endon("second_bridge");
   level endon("stop_laze_golf_course_dialog");
 
-  while(1) {
+  while (1) {
     // Ramirez, use your laser designator to call in artillery on those vehicles!
     level.foley dialogue_queue("arcadia_fly_laserdes");
 
@@ -673,36 +643,32 @@ golf_course_vehicles() {
     vehicle = spawner spawn_vehicle();
     vehicle.targets = spawner get_linked_ents();
 
-    if(vehicle.vehicleType == "bmp") {
+    if(vehicle.vehicleType == "bmp")
       vehicle thread golf_course_bmp_think();
-    }
 
     vehicle thread golf_course_vehicle_kill_on_artillery();
   }
 
-  array_thread(getEntArray("golf_course_zpu", "targetname"), ::golf_course_zpu);
+  array_thread(getentarray("golf_course_zpu", "targetname"), ::golf_course_zpu);
 }
 
 golf_course_vehicle_kill_on_artillery() {
-  assert(isDefined(self.script_group));
+  assert(isdefined(self.script_group));
 
   killflag = "stealth_bombed_" + self.script_group;
   flag_wait(killflag);
   wait 1;
 
-  if(isalive(self)) {
+  if(isalive(self))
     self kill();
-  }
-  if(isDefined(self)) {
+  if(isdefined(self))
     self notify("death");
-  }
 }
 
 golf_course_fake_choppers() {
-  spawners = getEntArray("fake_golf_course_chopper", "targetname");
-  foreach(spawner in spawners) {
-    spawner hide();
-  }
+  spawners = getentarray("fake_golf_course_chopper", "targetname");
+  foreach(spawner in spawners)
+  spawner hide();
 
   flag_wait("golf_course_vehicles");
   thread golf_course_fake_choppers_stop();
@@ -713,7 +679,7 @@ golf_course_fake_choppers() {
 
   count = 0;
   numBeforePause = randomintrange(GOLF_COURSE_FAKE_CHOPPER_COUNT_MIN, GOLF_COURSE_FAKE_CHOPPER_COUNT_MAX);
-  for(;;) {
+  for (;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
       target = getstruct(spawner.target, "targetname");
@@ -735,21 +701,20 @@ golf_course_fake_choppers_stop() {
 }
 
 golf_course_zpu() {
-  assert(isDefined(self.script_group));
+  assert(isdefined(self.script_group));
   group = self.script_group;
 
   spawner = undefined;
   trigger = undefined;
 
-  targets = getEntArray(self.target, "targetname");
+  targets = getentarray(self.target, "targetname");
   foreach(target in targets) {
-    if(issubstr(target.classname, "actor")) {
+    if(issubstr(target.classname, "actor"))
       spawner = target;
-    } else if(issubstr(target.classname, "trigger")) {
+    else if(issubstr(target.classname, "trigger"))
       trigger = target;
-    }
   }
-  assert(isDefined(spawner));
+  assert(isdefined(spawner));
   assert(isspawner(spawner));
 
   gunner = spawner spawn_ai();
@@ -765,9 +730,8 @@ golf_course_zpu() {
 
   thread zpu_death(zpu, gunner, trigger);
   thread zpu_death_gunner(zpu, gunner, trigger);
-  if(isDefined(trigger)) {
+  if(isdefined(trigger))
     thread zpu_gunner_dismount(zpu, gunner, trigger);
-  }
 
   zpu thread golf_course_vehicle_kill_on_artillery();
 
@@ -777,7 +741,7 @@ golf_course_zpu() {
   zpu endon("stop_shooting");
   gunner endon("stop_shooting");
 
-  for(;;) {
+  for (;;) {
     anime = "fire_a";
     sound = "weap_zpu_fire_anim_a";
     if(cointoss()) {
@@ -797,7 +761,7 @@ zpu_death(zpu, gunner, trigger) {
 
   playFX(getfx("zpu_explode"), zpu.origin);
   thread play_sound_in_space("exp_armor_vehicle", zpu.origin);
-  zpu setModel("vehicle_zpu4_burn");
+  zpu setmodel("vehicle_zpu4_burn");
 }
 
 zpu_death_gunner(zpu, gunner, trigger) {
@@ -838,30 +802,29 @@ zpu_stop_shooting(zpu, gunner) {
 }
 
 zpu_shoot1(gun) {
-  playFXOnTag(getfx("zpu_muzzle"), gun, "tag_flash");
-  playFXOnTag(getfx("zpu_muzzle"), gun, "tag_flash2");
+  playfxontag(getfx("zpu_muzzle"), gun, "tag_flash");
+  playfxontag(getfx("zpu_muzzle"), gun, "tag_flash2");
 }
 
 zpu_shoot2(gun) {
-  playFXOnTag(getfx("zpu_muzzle"), gun, "tag_flash1");
-  playFXOnTag(getfx("zpu_muzzle"), gun, "tag_flash3");
+  playfxontag(getfx("zpu_muzzle"), gun, "tag_flash1");
+  playfxontag(getfx("zpu_muzzle"), gun, "tag_flash3");
 }
 
 golf_course_bmp_think() {
-  if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "bmp")) {
+  if(isdefined(self.script_noteworthy) && (self.script_noteworthy == "bmp"))
     level.bmp = self;
-  }
 
-  assert(isDefined(self.targets));
+  assert(isdefined(self.targets));
 
   self endon("death");
   self endon("attacking_player");
 
-  for(;;) {
+  for (;;) {
     self SetTurretTargetVec(self.targets[randomint(self.targets.size)].origin);
     wait randomfloatrange(0.5, 1.5);
     shots = randomintrange(2, 7);
-    for(i = 0; i < shots; i++) {
+    for (i = 0; i < shots; i++) {
       self FireWeapon();
       wait 0.3;
     }
@@ -875,21 +838,20 @@ golf_course_battle_enemy_think() {
 
   guy endon("death");
 
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   node = getNode(self.target, "targetname");
-  assert(isDefined(node));
+  assert(isdefined(node));
 
   guy setGoalNode(node);
 
   // make AI shoot down range at fake targets
-  targets = getEntArray("golf_enemy_target", "targetname");
+  targets = getentarray("golf_enemy_target", "targetname");
   guy setEntityTarget(targets[randomint(targets.size)]);
 
-  if(!isDefined(node.target)) {
+  if(!isdefined(node.target))
     return;
-  }
   nextNode = getnode(node.target, "targetname");
-  assert(isDefined(nextNode));
+  assert(isdefined(nextNode));
 
   wait randomfloatrange(9.0, 11.0);
 
@@ -898,7 +860,7 @@ golf_course_battle_enemy_think() {
 /*
 golf_course_mortars()
 {
-	mortars = getEntArray( "golf_course_mortar", "targetname" );
+	mortars = getentarray( "golf_course_mortar", "targetname" );
 	
 	for(;;)
 	{
@@ -906,13 +868,13 @@ golf_course_mortars()
 		
 		foreach( mortar in mortars )
 		{	
-			assert( isDefined( mortar.script_noteworthy ) );
+			assert( isdefined( mortar.script_noteworthy ) );
 			surface = mortar.script_noteworthy;
 			mortarID = "mortar_" + surface;
-			assert( isDefined( level._effect[ mortarID ] ) );
+			assert( isdefined( level._effect[ mortarID ] ) );
 			
 			fx = level._effect[ mortarID ];
-			assert( isDefined( level.scr_sound[ mortarID ] ) );
+			assert( isdefined( level.scr_sound[ mortarID ] ) );
 			sound = level.scr_sound[ mortarID ];
 			
 			mortar play_sound_in_space( level.scr_sound[ "mortar_incomming" ], mortar.origin );
@@ -936,7 +898,7 @@ crashing_c130() {
   thread sun_blocker();
 
   thread crashing_c130_secondary_explosions(c130);
-  while(isDefined(c130)) {
+  while (isdefined(c130)) {
     pos = c130.origin;
     playFXOnTag(getfx("jet_engine_crashing"), c130, "tag_prop_l_1");
     playFXOnTag(getfx("jet_engine_crashing"), c130, "tag_prop_r_2");
@@ -946,19 +908,19 @@ crashing_c130() {
 
 crashing_c130_secondary_explosions(vehicle) {
   wait 6.5;
-  if(isDefined(vehicle)) {
+  if(isdefined(vehicle)) {
     playFXOnTag(getfx("c130_engine_secondary_exp"), vehicle, "tag_prop_l_1");
     vehicle thread play_sound_on_entity("scn_arcadia_c130_explosions");
   }
 
   wait 1.5;
-  if(isDefined(vehicle)) {
+  if(isdefined(vehicle)) {
     playFXOnTag(getfx("c130_engine_secondary_exp"), vehicle, "tag_prop_l_1");
     vehicle thread play_sound_on_entity("scn_arcadia_c130_explosions");
   }
 
   wait 2.0;
-  if(isDefined(vehicle)) {
+  if(isdefined(vehicle)) {
     playFXOnTag(getfx("c130_engine_secondary_exp"), vehicle, "tag_prop_l_1");
     vehicle thread play_sound_on_entity("scn_arcadia_c130_explosions");
   }
@@ -971,12 +933,12 @@ sun_blocker() {
 
   wait 4;
 
-  for(;;) {
+  for (;;) {
     // cover the sun
     ent = spawn("script_model", fx_origin);
     ent.angles = fx_angles;
-    ent setModel("tag_origin");
-    playFXOnTag(getfx(fx_id), ent, "tag_origin");
+    ent setmodel("tag_origin");
+    PlayFXOnTag(getfx(fx_id), ent, "tag_origin");
 
     // wait till we are to the side
     flag_wait("remove_sun_blocker");
@@ -1012,9 +974,8 @@ harriers() {
 
 harrier_fire_missiles(num) {
   wait 15;
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self setVehWeapon("harrier_FFAR");
 
@@ -1022,13 +983,12 @@ harrier_fire_missiles(num) {
   tag[1] = "tag_left_alamo_missile";
   nextTag = 0;
 
-  for(i = 0; i < num; i++) {
+  for (i = 0; i < num; i++) {
     self fireWeapon(tag[nextTag], undefined, (0, 0, -250));
 
     nextTag++;
-    if(nextTag >= tag.size) {
+    if(nextTag >= tag.size)
       nextTag = 0;
-    }
 
     wait 0.4;
   }
@@ -1036,32 +996,29 @@ harrier_fire_missiles(num) {
 
 vehicle_path_disconnector() {
   zone = getent(self.target, "targetname");
-  assert(isDefined(zone));
+  assert(isdefined(zone));
   zone notsolid();
   zone.origin -= (0, 0, 1024);
   badplaceName = "vehicle_bad_place_brush_" + zone getEntityNumber();
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", vehicle);
 
-    if(!isalive(level.stryker)) {
+    if(!isalive(level.stryker))
       return;
-    }
 
-    if(!isDefined(vehicle)) {
+    if(!isdefined(vehicle))
       continue;
-    }
 
-    if(vehicle != level.stryker) {
+    if(vehicle != level.stryker)
       continue;
-    }
 
     if(vehicle vehicle_getspeed() == 0) {
       prof_end("vehicle_path_disconnect");
       continue;
     }
 
-    if(!isDefined(zone.pathsDisconnected)) {
+    if(!isdefined(zone.pathsDisconnected)) {
       zone solid();
 
       badplace_brush(badplaceName, 0, zone, "allies", "axis");
@@ -1075,8 +1032,8 @@ vehicle_path_disconnector() {
 }
 
 vehicle_reconnects_paths(zone, badplaceName) {
-  assert(isDefined(zone));
-  assert(isDefined(badplaceName));
+  assert(isdefined(zone));
+  assert(isdefined(badplaceName));
   zone notify("waiting_for_path_reconnection");
   zone endon("waiting_for_path_reconnection");
   wait 0.5;
@@ -1100,16 +1057,15 @@ evac_chopper_1() {
 
   self waittill("damage");
 
-  if(isalive(self)) {
+  if(isalive(self))
     self kill();
-  }
 }
 
 civilian_car() {
   flag_wait("civilian_car");
 
   car = spawn_vehicle_from_targetname_and_drive("civilian_car");
-  assert(isDefined(car));
+  assert(isdefined(car));
   car endon("death");
 
   car thread civilian_car_luggage();
@@ -1133,9 +1089,8 @@ civilian_car_luggage() {
   civilian_car_luggage[4] = getent("civilian_car_luggage_5", "targetname");
   civilian_car_luggage[5] = getent("civilian_car_luggage_6", "targetname");
 
-  foreach(piece in civilian_car_luggage) {
-    piece LinkTo(civilian_car_dummy);
-  }
+  foreach(piece in civilian_car_luggage)
+  piece LinkTo(civilian_car_dummy);
 
   civilian_car_dummy.origin = self.origin;
   civilian_car_dummy.angles = self.angles;
@@ -1170,7 +1125,7 @@ stryker_damage_monitor() {
   self ent_flag_init("smoke2");
   self ent_flag_init("smoke3");
 
-  for(;;) {
+  for (;;) {
     self waittill("damage");
 
     health = self.health - self.healthbuffer;
@@ -1198,7 +1153,7 @@ stryker_damage_smoke(tagName) {
   self endon("death");
 
   fx = getfx("stryker_smoke");
-  for(;;) {
+  for (;;) {
     playFXOnTag(fx, self, tagName);
     wait 0.1;
   }
@@ -1207,22 +1162,20 @@ stryker_damage_smoke(tagName) {
 delete_ai_trigger() {
   self waittill("trigger");
 
-  assert(isDefined(self.target));
+  assert(isdefined(self.target));
   zone = getent(self.target, "targetname");
-  assert(isDefined(zone));
+  assert(isdefined(zone));
 
   enemies = getaiarray("axis");
   enemies_to_kill = [];
   foreach(enemy in enemies) {
-    if(!enemy isTouching(zone)) {
+    if(!enemy isTouching(zone))
       continue;
-    }
     enemies_to_kill[enemies_to_kill.size] = enemy;
   }
 
-  if(enemies_to_kill.size == 0) {
+  if(enemies_to_kill.size == 0)
     return;
-  }
 
   array_thread(enemies_to_kill, ::delete_ai_after_delay);
 }
@@ -1232,16 +1185,15 @@ delete_ai_after_delay() {
 
   wait randomfloatrange(0, 1.0);
 
-  if(isalive(self)) {
+  if(isalive(self))
     self delete();
-  }
 }
 
 opening_rpgs() {
   nextOrg = undefined;
 
   if(issubstr(self.classname, "trigger")) {
-    assert(isDefined(self.target));
+    assert(isdefined(self.target));
     self waittill("trigger");
     nextOrg = getent(self.target, "targetname");
   } else {
@@ -1249,14 +1201,13 @@ opening_rpgs() {
     nextOrg = self;
   }
 
-  for(;;) {
-    assert(isDefined(nextOrg));
+  for (;;) {
+    assert(isdefined(nextOrg));
 
     magicBullet("rpg_straight", nextOrg.origin, level.stryker.origin + (0, 0, 60));
 
-    if(!isDefined(nextOrg.target)) {
+    if(!isdefined(nextOrg.target))
       return;
-    }
     nextOrg = getent(nextOrg.target, "targetname");
 
     wait randomfloatrange(1.0, 2.0);
@@ -1272,26 +1223,23 @@ ai_avoid_stryker() {
   fov = cos(90);
   maxdist = 400 * 400;
 
-  while(1) {
+  while (1) {
     wait 0.2;
 
-    if(!isalive(level.stryker)) {
+    if(!isalive(level.stryker))
       break;
-    }
 
-    if(flag("disable_friendly_move_checks")) {
+    if(flag("disable_friendly_move_checks"))
       break;
-    }
 
     withinDist = (distanceSquared(self.origin, level.stryker.origin) <= maxdist);
     withinFOV = within_fov(self.origin, self.angles, level.stryker.origin, fov);
 
     //self.cqbwalking
-    if(withinDist && withinFOV) {
+    if(withinDist && withinFOV)
       self cqb_walk("on");
-    } else {
+    else
       self cqb_walk("off");
-    }
   }
 
   self cqb_walk("off");
@@ -1300,13 +1248,12 @@ ai_avoid_stryker() {
 pool() {
   trigger = getent("pool", "targetname");
 
-  while(1) {
+  while (1) {
     trigger waittill("trigger", player);
-    if(!isplayer(player)) {
+    if(!isplayer(player))
       continue;
-    }
 
-    while(player isTouching(trigger)) {
+    while (player isTouching(trigger)) {
       player setMoveSpeedScale(0.3);
       player allowStand(true);
       player allowCrouch(false);
@@ -1326,9 +1273,8 @@ all_enemies_low_health() {
   flag_wait("all_enemies_low_health");
   axis = getaiarray("axis");
   foreach(guy in axis) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy.health = 1;
-    }
   }
 }
 
@@ -1345,30 +1291,26 @@ stryker_run_over_player_monitor() {
   fov = cos(35);
   dialogIndex = 0;
 
-  while(isalive(level.stryker)) {
+  while (isalive(level.stryker)) {
     wait 0.1;
 
     // check to see if stryker is moving
     speed = level.stryker vehicle_GetSpeed();
-    if(speed <= 1) {
+    if(speed <= 1)
       continue;
-    }
 
-    if(flag("disable_stryker_dialog")) {
+    if(flag("disable_stryker_dialog"))
       continue;
-    }
 
     // is player nearby?
     d = distance(level.player.origin, level.stryker.origin);
-    if(d > 450) {
+    if(d > 450)
       continue;
-    }
 
     // is player in front of the vehicle and about to get ran over?
     withinFOV = within_fov(level.stryker.origin, level.stryker.angles, level.player.origin, fov);
-    if(!withinFOV) {
+    if(!withinFOV)
       continue;
-    }
 
     if(dialogIndex == 0) {
       dialogIndex = 1;
@@ -1401,20 +1343,19 @@ bmps_kill_player_before_artillery() {
 
   flag_wait("bmp_kills_player");
 
-  if(!isDefined(level.bmp)) {
+  if(!isdefined(level.bmp))
     return;
-  }
 
   // stop shooting random targets
   level.bmp endon("death");
   level.bmp notify("attacking_player");
 
   // shoot at the player
-  for(;;) {
+  for (;;) {
     level.bmp SetTurretTargetEnt(level.player, (0, 0, 20));
     wait randomfloatrange(0.5, 1.5);
     shots = randomintrange(8, 15);
-    for(i = 0; i < shots; i++) {
+    for (i = 0; i < shots; i++) {
       level.bmp FireWeapon();
       wait 0.2;
     }
@@ -1439,9 +1380,8 @@ force_artillery_if_player_bypasses() {
 stryker_threats_eliminated_dialog_1() {
   flag_wait("honey_badger_threats_dead_1");
 
-  if(flag("disable_stryker_dialog")) {
+  if(flag("disable_stryker_dialog"))
     return;
-  }
 
   // Thanks for the assist, Hunter Two-One.
   thread radio_dialogue("arcadia_str_thanks");
@@ -1450,20 +1390,18 @@ stryker_threats_eliminated_dialog_1() {
 stryker_threats_eliminated_dialog_2() {
   flag_wait("honey_badger_threats_dead_2");
 
-  if(flag("disable_stryker_dialog")) {
+  if(flag("disable_stryker_dialog"))
     return;
-  }
 
   // Nice work, Hunter Two-One. Thanks for the assist.
   thread radio_dialogue("arcadia_str_nicework");
 }
 
 set_cull_dist(dist) {
-  assert(isDefined(dist));
+  assert(isdefined(dist));
 
-  if(getdvarint("r_arcadia_culldist") == 0) {
+  if(getdvarint("r_arcadia_culldist") == 0)
     return;
-  }
 
   setCullDist(dist);
 }

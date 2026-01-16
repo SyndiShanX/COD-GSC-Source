@@ -27,9 +27,8 @@ main() {
   var_0.savetostructfn = maps\interactive_models\_fish::single_fish_savetostruct;
   var_0.loadfromstructfn = maps\interactive_models\_fish::single_fish_loadfromstruct;
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive["fish_bannerfish"] = var_0;
   thread maps\interactive_models\_fish::fish();

@@ -3,6 +3,9 @@
  * Script: xmodelalias\alias_russian_military_arctic_heads.gsc
 ***************************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   var_0[0] = "head_russian_military_a";
   var_0[1] = "head_russian_military_aa_arctic";

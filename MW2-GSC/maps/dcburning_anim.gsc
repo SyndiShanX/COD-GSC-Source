@@ -273,9 +273,11 @@ anims() {
 
   //talking on headset:
   level.scr_anim["generic"]["bog_radio_dialogue"] = % bog_radio_dialogue;
+
 }
 
 dialogue() {
+
   /*-----------------------
   BUNKER
   -------------------------*/
@@ -439,7 +441,7 @@ dialogue() {
   level.scr_sound["generic"]["dcburn_mcy_lobby_move_nag_04"] = "dcburn_mcy_moveup2";
 
   /*-----------------------
-  COMMERCE ELEVATOR BOTTOM TO ELEVATOR TOP
+  COMMERCE ELEVATOR BOTTOM TO ELEVATOR TOP 
   -------------------------*/
   //Sgt. Macey	Overlord, this is Hunter Two-One, be advised, we're inside and proceeding to the upper floors.	
   level.scr_radio["dcburn_mcy_upperfloors"] = "dcburn_mcy_upperfloors";
@@ -447,7 +449,7 @@ dialogue() {
   //Overlord HQ Radio Voice	Roger, Overlord copies all.	
   level.scr_radio["dcburn_hqr_copiesall"] = "dcburn_hqr_copiesall";
 
-  //Sgt. Macey: Fire team has been suppressed in Section One-Alpha.
+  //Sgt. Macey: Fire team has been suppressed in Section One-Alpha. 
   level.scr_radio["dcburn_mcy_alldeadcourtyard"] = "dcburn_mcy_fireteamsupp";
 
   //Overlord HQ Radio Voice: Solid copy, Two-One.	
@@ -462,7 +464,7 @@ dialogue() {
   //Overlord HQ Radio Voice: Copy that, Two One, good hunting.
   level.scr_radio["dcburn_hqr_goodhunt"] = "dcburn_hqr_goodhunting";
 
-  //Sgt. Macey: Hostiles suppressed in Section Two-Echo.
+  //Sgt. Macey: Hostiles suppressed in Section Two-Echo. 
   level.scr_radio["dcburn_mcy_alldeadmezzanine"] = "dcburn_mcy_hostsupp";
 
   //Overlord HQ Radio Voice: Roger that, Two-One.	
@@ -662,7 +664,7 @@ dialogue() {
   level.scr_sound["generic"]["rocket_shoot_nag_2"] = "dcburn_mcy_takeoutveh";
 
   /*-----------------------
-  CROWS NEST TO ROOF
+  CROWS NEST TO ROOF 
   -------------------------*/
 
   //Overlord (HQ Radio)	32	7	Atlas Two-Six is now away. All remaining evacuation units, execute level three evacuation protocols. Urgent surgicals only.	
@@ -783,6 +785,7 @@ dialogue() {
   //Ranger 1	32	11	Get your men on that transport now, WE ARE LEAVING!!!	
   level.scr_radio["dcburn_ar1_weareleaving"] = "dcburn_ar1_weareleaving";
 
+
   /*-----------------------
   HELI RIDE
   -------------------------*/
@@ -862,6 +865,7 @@ dialogue() {
   //Little Bird Pilot 1	Overlord, this is Dagger Two-One. We've taken some of the heat off the evac site -	
   level.scr_radio["dcburn_lbp1_takenheatoff"] = "dcburn_lbp1_takenheatoff";
 
+
   //Little Bird Pilot 1	Overlord, Dagger Two-two and Two-three are down. I repeat, Dagger Two-Two and Two-Three are down, over.	
   level.scr_radio["dcburn_lbp1_22and23aredown"] = "dcburn_lbp1_22and23aredown";
 
@@ -876,6 +880,7 @@ dialogue() {
 
   //Little Bird Pilot 1	Brace for impact!	
   level.scr_radio["dcburn_lbp1_braceforimpact"] = "dcburn_lbp1_braceforimpact";
+
 }
 
 #using_animtree("script_model");
@@ -883,6 +888,7 @@ script_model_anims() {
   level.scr_animtree["tarp"] = #animtree;
   level.scr_anim["tarp"]["pulldown"] = % gulag_slamraam_tarp_simulation;
   level.scr_model["tarp"] = "slamraam_tarp";
+
 }
 
 #using_animtree("vehicles");

@@ -187,24 +187,24 @@ crowdswell() {
   crowd_close_ent = spawn(0, (18, 2103, 57), "script_origin");
   crowd_close_ent thread transition_sounds();
   level waittill("snd_swell_start");
-  playSound(0, "evt_door_open_squeak", (18, 2103, 57));
-  playSound(0, "evt_yem_crowd_door", (517, 1480, 73));
+  playsound(0, "evt_door_open_squeak", (18, 2103, 57));
+  playsound(0, "evt_yem_crowd_door", (517, 1480, 73));
   crowd_sounds_ent = spawn(0, (517, 1481, 73), "script_origin");
   crowd_sounds_ent thread speech_end_sound();
   level notify("snd_crowd_chant");
 }
 
 speech_end_sound() {
-  self playLoopSound("evt_yem_crowd_murmer");
+  self playloopsound("evt_yem_crowd_murmer");
   level waittill("speech_done");
   self stoploopsound(1);
-  playSound(0, "evt_yem_panic_2", self.origin);
+  playsound(0, "evt_yem_panic_2", self.origin);
   wait 1;
   self delete();
 }
 
 transition_sounds() {
-  self playLoopSound("amb_crowd_walla_close");
+  self playloopsound("amb_crowd_walla_close");
   level waittill("snd_swell_start");
   wait 3;
   self stoploopsound(2);
@@ -263,11 +263,11 @@ activate_numbers_audio() {
   level notify("updateActiveAmbientRoom");
 
   for(num = 1; 1; num++) {
-    playSound(0, "evt_numbers_heartbeat_loud", (0, 0, 0));
+    playsound(0, "evt_numbers_heartbeat_loud", (0, 0, 0));
 
     if(num == 2) {
       num = 0;
-      playSound(0, "evt_numbers_breath_cold", (0, 0, 0));
+      playsound(0, "evt_numbers_breath_cold", (0, 0, 0));
     }
 
     wait 1.5;
@@ -296,13 +296,13 @@ set_osprey_context_int() {
   level waittill("inside_osprey");
   osp_ent = spawn(0, (0, 0, 0), "script_origin");
   setsoundcontext("f35", "interior");
-  osp_ent playLoopSound("veh_osp_interior", 0.5);
+  osp_ent playloopsound("veh_osp_interior", 0.5);
   level waittill("osprey_done");
   setsoundcontext("f35", "exterior");
   player = getlocalplayers()[0];
   fade_ent = spawn(0, player.origin, "script_origin");
   wait 1;
-  fade_ent playSound(0, "veh_osp_fade");
+  fade_ent playsound(0, "veh_osp_fade");
   wait 1;
   osp_ent stoploopsound(2);
   wait 5;
@@ -354,7 +354,7 @@ farid_shot_duck() {
 farid_shot_room_change() {
   activateambientpackage(0, "farid_ground", 100);
   activateambientroom(0, "farid_ground", 100);
-  playSound(0, "evt_farid_shot_sting", (0, 0, 0));
+  playsound(0, "evt_farid_shot_sting", (0, 0, 0));
   level waittill("shot_notify");
   deactivateambientpackage(0, "farid_ground", 100);
   deactivateambientroom(0, "farid_ground", 100);

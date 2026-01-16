@@ -50,9 +50,8 @@ main() {
     wait 0.05;
   }
 
-  if(isDefined(self.groundtype)) {
+  if(isDefined(self.groundtype))
     self playSound("Land_" + self.groundtype);
-  }
 
   self notify("stop_traverse_notetracks");
   self setflaggedanimknoballrestart("traverse", var_1, % body, 1, 0.15, 1);
@@ -64,22 +63,19 @@ printer(var_0) {
   level notify("print_this_" + var_0);
   level endon("print_this_" + var_0);
 
-  for(;;) {
+  for(;;)
     wait 0.05;
-  }
 }
 
 showline(var_0, var_1) {
-  for(;;) {
+  for(;;)
     wait 0.05;
-  }
 }
 
 printerdebugger(var_0, var_1) {
   level notify("prrint_this_" + var_1);
   level endon("prrint_this_" + var_1);
 
-  for(;;) {
+  for(;;)
     wait 0.05;
-  }
 }

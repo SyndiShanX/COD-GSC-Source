@@ -56,21 +56,21 @@ main() {
 vox_comp_radio() {
   while(true) {
     wait(randomintrange(12, 30));
-    playSound(0, "vox_comp_radio", (2635, 1596, 406));
+    playsound(0, "vox_comp_radio", (2635, 1596, 406));
   }
 }
 
 vox_comp_radio_mainframe() {
   while(true) {
     wait(randomintrange(12, 30));
-    playSound(0, "vox_comp_radio", (2734, -842, 379));
+    playsound(0, "vox_comp_radio", (2734, -842, 379));
   }
 }
 
 snd_random(min, max, position, alias) {
   while(true) {
     wait(randomintrange(min, max));
-    playSound(0, alias, position);
+    playsound(0, alias, position);
   }
 }
 
@@ -106,9 +106,8 @@ snd_dyn_wind() {
 snd_add_exploder_alias(num, alias) {
   for(i = 0; i < level.createfxent.size; i++) {
     if(isDefined(level.createfxent[i].v["exploder"])) {
-      if(level.createfxent[i].v["exploder"] == num) {
+      if(level.createfxent[i].v["exploder"] == num)
         level.createfxent[i].v["soundalias"] = alias;
-      }
     }
   }
 }

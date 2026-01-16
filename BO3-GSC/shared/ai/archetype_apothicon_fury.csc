@@ -11,13 +11,13 @@
 #namespace apothiconfurybehavior;
 
 function autoexec main() {
-  ai::add_archetype_spawn_function("apothicon_fury", &apothiconspawnsetup);
+  ai::add_archetype_spawn_function("apothicon_fury", & apothiconspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
-    clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter", &apothiconfiredamageeffect, 0, 0);
-    clientfield::register("actor", "furious_level", 15000, 1, "int", &apothiconfuriousmodeeffect, 0, 0);
-    clientfield::register("actor", "bamf_land", 15000, 1, "counter", &apothiconbamflandeffect, 0, 0);
-    clientfield::register("actor", "apothicon_fury_death", 15000, 2, "int", &apothiconfurydeath, 0, 0);
-    clientfield::register("actor", "juke_active", 15000, 1, "int", &apothiconjukeactive, 0, 0);
+    clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter", & apothiconfiredamageeffect, 0, 0);
+    clientfield::register("actor", "furious_level", 15000, 1, "int", & apothiconfuriousmodeeffect, 0, 0);
+    clientfield::register("actor", "bamf_land", 15000, 1, "counter", & apothiconbamflandeffect, 0, 0);
+    clientfield::register("actor", "apothicon_fury_death", 15000, 2, "int", & apothiconfurydeath, 0, 0);
+    clientfield::register("actor", "juke_active", 15000, 1, "int", & apothiconjukeactive, 0, 0);
   }
   level._effect["dlc4/genesis/fx_apothicon_fury_impact"] = "dlc4/genesis/fx_apothicon_fury_impact";
   level._effect["dlc4/genesis/fx_apothicon_fury_breath"] = "dlc4/genesis/fx_apothicon_fury_breath";
@@ -34,12 +34,12 @@ function apothiconspawnsetup(localclientnum) {
 
 function apothiconstartloopingeffects(localclientnum) {
   self.loopingeffects = [];
-  self.loopingeffects[0] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_breath"], self, "j_head");
-  self.loopingeffects[1] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_smk_body"], self, "j_spine4");
-  self.loopingeffects[2] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_ball_le");
-  self.loopingeffects[3] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_ball_ri");
-  self.loopingeffects[4] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_wrist_le");
-  self.loopingeffects[5] = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_wrist_ri");
+  self.loopingeffects[0] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_breath"], self, "j_head");
+  self.loopingeffects[1] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_smk_body"], self, "j_spine4");
+  self.loopingeffects[2] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_ball_le");
+  self.loopingeffects[3] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_ball_ri");
+  self.loopingeffects[4] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_wrist_le");
+  self.loopingeffects[5] = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_foot_amb"], self, "j_wrist_ri");
 }
 
 function apothiconstoploopingeffects(localclientnum) {
@@ -51,7 +51,7 @@ function apothiconstoploopingeffects(localclientnum) {
 function apothiconspawnshader(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   s_timer = new_timer(localclientnum);
@@ -62,21 +62,21 @@ function apothiconspawnshader(localclientnum) {
     n_delta_val = lerpfloat(0, 0.01, n_current_time / n_phase_in);
     self mapshaderconstant(localclientnum, 0, "scriptVector2", n_delta_val);
   }
-  while(n_current_time < n_phase_in);
+  while (n_current_time < n_phase_in);
   s_timer notify("timer_done");
 }
 
 function apothiconjukeactive(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(newval) {
-    playSound(0, "zmb_fury_bamf_teleport_in", self.origin);
+    playsound(0, "zmb_fury_bamf_teleport_in", self.origin);
     self apothiconstartloopingeffects(localclientnum);
   } else {
-    playSound(0, "zmb_fury_bamf_teleport_out", self.origin);
+    playsound(0, "zmb_fury_bamf_teleport_out", self.origin);
     self apothiconstoploopingeffects(localclientnum);
   }
 }
@@ -84,7 +84,7 @@ function apothiconjukeactive(localclientnum, oldval, newval, bnewent, binitialsn
 function apothiconfiredamageeffect(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   tag = undefined;
@@ -112,13 +112,13 @@ function apothiconfiredamageeffect(localclientnum, oldval, newval, bnewent, bini
       }
     }
   }
-  fx = playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_impact"], self, tag);
+  fx = playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_impact"], self, tag);
 }
 
 function apothiconfurydeath(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(newval == 1) {
@@ -131,14 +131,14 @@ function apothiconfurydeath(localclientnum, oldval, newval, bnewent, binitialsna
       n_delta_val = lerpfloat(1, 0.1, n_current_time / n_phase_in);
       self mapshaderconstant(localclientnum, 0, "scriptVector2", n_delta_val);
     }
-    while(n_current_time < n_phase_in);
+    while (n_current_time < n_phase_in);
     s_timer notify("timer_done");
     self.removingfireshader = 0;
   } else if(newval == 2) {
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
-    playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_death"], self, "j_spine4");
+    playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_death"], self, "j_spine4");
     self apothiconstoploopingeffects(localclientnum);
     n_phase_in = 0.3;
     s_timer = new_timer(localclientnum);
@@ -149,7 +149,7 @@ function apothiconfurydeath(localclientnum, oldval, newval, bnewent, binitialsna
       n_delta_val = lerpfloat(1, 0, n_current_time / n_phase_in);
       self mapshaderconstant(localclientnum, 0, "scriptVector0", n_delta_val);
     }
-    while(n_current_time < n_phase_in && gettime() <= stoptime);
+    while (n_current_time < n_phase_in && gettime() <= stoptime);
     s_timer notify("timer_done");
     self mapshaderconstant(localclientnum, 0, "scriptVector0", 0);
   }
@@ -158,7 +158,7 @@ function apothiconfurydeath(localclientnum, oldval, newval, bnewent, binitialsna
 function apothiconfuriousmodeeffect(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(newval) {
@@ -170,13 +170,13 @@ function apothiconfuriousmodeeffect(localclientnum, oldval, newval, bnewent, bin
       n_delta_val = lerpfloat(0.1, 1, n_current_time / n_phase_in);
       self mapshaderconstant(localclientnum, 0, "scriptVector2", n_delta_val);
     }
-    while(n_current_time < n_phase_in);
+    while (n_current_time < n_phase_in);
     s_timer notify("timer_done");
   }
 }
 
 function new_timer(localclientnum) {
-  s_timer = spawnStruct();
+  s_timer = spawnstruct();
   s_timer.n_time_current = 0;
   s_timer thread timer_increment_loop(localclientnum, self);
   return s_timer;
@@ -185,7 +185,7 @@ function new_timer(localclientnum) {
 function timer_increment_loop(localclientnum, entity) {
   entity endon("entityshutdown");
   self endon("timer_done");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     util::server_wait(localclientnum, 0.016);
     self.n_time_current = self.n_time_current + 0.016;
   }
@@ -206,11 +206,11 @@ function reset_timer() {
 function apothiconbamflandeffect(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(newval) {
-    playFXOnTag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_teleport_impact"], self, "tag_origin");
+    playfxontag(localclientnum, level._effect["dlc4/genesis/fx_apothicon_fury_teleport_impact"], self, "tag_origin");
   }
   player = getlocalplayer(localclientnum);
   player earthquake(0.5, 1.4, self.origin, 375);

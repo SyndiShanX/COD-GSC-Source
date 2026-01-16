@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_stoker;
 
 autoexec __init__system__() {
@@ -45,7 +46,7 @@ on_entity_shutdown(localclientnum) {
 private crit_spot_reveal(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     self mapshaderconstant(localclientnum, 0, "scriptVector" + newvalue, 0, 1, 0, 0);
-    self playSound(0, # "hash_9cde96bded002d5");
+    self playSound(0, #"hash_9cde96bded002d5");
   }
 }
 
@@ -70,28 +71,28 @@ private stoker_fx_start(localclientnum, oldvalue, newvalue, bnewent, binitialsna
     case 3:
       if(!isDefined(self.currentfx[3])) {
         self.currentfx[3] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_clavicle_le");
-        self playSound(localclientnum, # "hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
       }
 
       break;
     case 4:
       if(!isDefined(self.currentfx[4])) {
         self.currentfx[4] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_clavicle_ri");
-        self playSound(localclientnum, # "hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
       }
 
       break;
     case 5:
       if(!isDefined(self.currentfx[5])) {
         self.currentfx[4] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_head");
-        self playSound(localclientnum, # "hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
       }
 
       break;
     case 6:
       if(!isDefined(self.currentfx[6])) {
         self.currentfx[6] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_wrist_le");
-        self playSound(localclientnum, # "hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
       }
 
       break;
@@ -183,7 +184,7 @@ stoker_death_explosion(localclientnum, oldvalue, newvalue, bnewent, binitialsnap
 
       physicsexplosionsphere(localclientnum, v_origin, 400, 0, 3);
       self thread function_d58cd2d5(localclientnum);
-      playSound(localclientnum, # "hash_5c4876ace1c2aa10", self gettagorigin("j_shoulder_le"));
+      playSound(localclientnum, #"hash_5c4876ace1c2aa10", self gettagorigin("j_shoulder_le"));
       break;
   }
 }
@@ -255,6 +256,6 @@ private function_d58cd2d5(localclientnum) {
 }
 
 private function_a88c80a3(model) {
-  self waittilltimeout(10, # "death", # "unlock_model");
+  self waittilltimeout(10, #"death", #"unlock_model");
   util::unlock_model(model);
 }

@@ -13,6 +13,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace lui;
 
 class cluielem {
@@ -96,11 +97,11 @@ createextracamxcamdata(menu_name, localclientnum, extracam_index, target_name, x
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   extracam_data = {
-    #menu_name: menu_name,
-    #extracam_index: extracam_index,
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
+    #menu_name: menu_name, 
+    #extracam_index: extracam_index, 
+    #target_name: target_name, 
+    #xcam: xcam, 
+    #sub_xcam: sub_xcam, 
     #xcam_frame: xcam_frame
   };
 
@@ -117,7 +118,7 @@ createcustomextracamxcamdata(menu_name, localclientnum, extracam_index, camera_f
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   extracam_data = {
-    #extracam_index: extracam_index,
+    #extracam_index: extracam_index, 
     #camera_function: camera_function
   };
 
@@ -195,15 +196,15 @@ function_e41243c1(var_e953aca6) {
 createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam, xcam_frame = undefined, var_1f199068 = undefined, var_2c679be0 = undefined, lerp_time = 0, lut_index = 0) {
   assert(!isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name] = {
-    #menu_name: menu_name,
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
-    #xcam_frame: xcam_frame,
-    #var_1f199068: function_e41243c1(var_1f199068),
-    #var_2c679be0: function_e41243c1(var_2c679be0),
-    #lerp_time: lerp_time,
-    #lut_index: lut_index,
+    #menu_name: menu_name, 
+    #target_name: target_name, 
+    #xcam: xcam, 
+    #sub_xcam: sub_xcam, 
+    #xcam_frame: xcam_frame, 
+    #var_1f199068: function_e41243c1(var_1f199068), 
+    #var_2c679be0: function_e41243c1(var_2c679be0), 
+    #lerp_time: lerp_time, 
+    #lut_index: lut_index, 
     #var_e57ed98b: []
   };
   return level.client_menus[localclientnum][menu_name];
@@ -212,11 +213,11 @@ createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam, xcam_fr
 function_9d7ab167(menu_name, localclientnum, session_mode, target_name, xcam, sub_xcam, xcam_frame = undefined, lerp_time = 0, lut_index = 0) {
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name].var_e57ed98b[session_mode] = {
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
-    #xcam_frame: xcam_frame,
-    #lerp_time: lerp_time,
+    #target_name: target_name, 
+    #xcam: xcam, 
+    #sub_xcam: sub_xcam, 
+    #xcam_frame: xcam_frame, 
+    #lerp_time: lerp_time, 
     #lut_index: lut_index
   };
 }
@@ -224,11 +225,11 @@ function_9d7ab167(menu_name, localclientnum, session_mode, target_name, xcam, su
 createcustomcameramenu(menu_name, localclientnum, camera_function, has_state, var_1f199068 = undefined, var_2c679be0 = undefined, lut_index = 0) {
   assert(!isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name] = {
-    #menu_name: menu_name,
-    #camera_function: camera_function,
-    #has_state: has_state,
-    #var_1f199068: function_e41243c1(var_1f199068),
-    #var_2c679be0: function_e41243c1(var_2c679be0),
+    #menu_name: menu_name, 
+    #camera_function: camera_function, 
+    #has_state: has_state, 
+    #var_1f199068: function_e41243c1(var_1f199068), 
+    #var_2c679be0: function_e41243c1(var_2c679be0), 
     #lut_index: lut_index
   };
   return level.client_menus[localclientnum][menu_name];
@@ -312,7 +313,9 @@ setup_menu(localclientnum, menu_data, previous_menu) {
 
     if(isDefined(new_menu.var_1f199068)) {
       if(isDefined(menu_data.charactermode) && isDefined(new_menu.custom_character)) {
-        [[new_menu.custom_character]] - > set_character_mode(menu_data.charactermode);
+        [
+          [new_menu.custom_character]
+        ] - > set_character_mode(menu_data.charactermode);
       }
 
       foreach(fn in new_menu.var_1f199068) {
@@ -526,10 +529,10 @@ private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_clo
 
   if(isstring(v_color)) {
     switch (v_color) {
-      case # "black":
+      case #"black":
         v_color = (0, 0, 0);
         break;
-      case # "white":
+      case #"white":
         v_color = (1, 1, 1);
         break;
       default:

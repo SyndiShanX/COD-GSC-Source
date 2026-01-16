@@ -18,6 +18,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\trapd;
 #include scripts\weapons\weaponobjects;
+
 #namespace traps_deployable;
 
 class class_7b5e0861 {
@@ -75,7 +76,7 @@ class class_7b5e0861 {
 }
 
 autoexec __init__system__() {
-  system::register(#"traps_deployable", &__init__, undefined, # "load");
+  system::register(#"traps_deployable", &__init__, undefined, #"load");
 }
 
 __init__() {
@@ -125,10 +126,10 @@ function_5726a711() {
       if(isDefined(var_2d727ba0)) {
         var_a8539bf6 = spawnStruct();
 
-        if(isDefined(var_5e63b00d.script_team) && var_5e63b00d.script_team != # "none") {
+        if(isDefined(var_5e63b00d.script_team) && var_5e63b00d.script_team != #"none") {
           var_a8539bf6.team = var_5e63b00d.script_team;
         } else {
-          var_a8539bf6.team = # "any";
+          var_a8539bf6.team = #"any";
         }
 
         var_a8539bf6.origin = var_5e63b00d.origin;
@@ -182,20 +183,20 @@ register_trap(var_2d727ba0) {
 
   if(isDefined(var_2d727ba0) && isDefined(var_2d727ba0.trap_type)) {
     switch (var_2d727ba0.trap_type) {
-      case # "generic":
+      case #"generic":
         function_2ce21754(var_2d727ba0.trap_type, &lb_color, &function_6ce6a400, &function_2b8baf6d, &function_a879466e, &function_efe68db2, &function_6ef47474, &function_a21e6a22);
         break;
-      case # "fire_bomb":
-      case # "flash_disruptor":
-      case # "mine":
-      case # "claymore":
+      case #"fire_bomb":
+      case #"flash_disruptor":
+      case #"mine":
+      case #"claymore":
         function_2ce21754(var_2d727ba0.trap_type, &function_3c3f30e3, &function_6ce6a400, &function_2b8baf6d, &function_a879466e, &function_4a401677, &function_6ef47474, &function_b501ff0b);
         break;
-      case # "guardian":
-      case # "turret":
+      case #"guardian":
+      case #"turret":
         function_2ce21754(var_2d727ba0.trap_type, &function_a39b7bb6, &function_6ce6a400, &function_69efb3b0, &function_a879466e, &function_612e5ef9, &function_6ef47474, &function_b501ff0b);
         break;
-      case # "vehicle":
+      case #"vehicle":
         function_2ce21754(var_2d727ba0.trap_type, &function_deb3cb22, &function_6ce6a400, &function_51d36222, &function_c66a11d0, &function_5c1d01, &function_6ef47474, &function_b501ff0b);
         break;
       default:
@@ -347,14 +348,14 @@ function_e191d35c(e_player) {
 function_51ca9c38(origin, team) {
   actorteam = team;
 
-  if(actorteam == # "any") {
+  if(actorteam == #"any") {
     actorteam = "all";
   }
 
   owners = getactorteamarray(actorteam);
 
   foreach(player in level.players) {
-    if(player.team == team || team == # "any") {
+    if(player.team == team || team == #"any") {
       if(!isDefined(owners)) {
         owners = [];
       } else if(!isarray(owners)) {
@@ -384,12 +385,12 @@ function_6153484f(team) {
 
 function_69996073(var_3af54106) {
   var_5e63b00d = self;
-  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", # "death");
+  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", #"death");
   var_5e63b00d flag::function_5f02becb();
   teamowner = undefined;
   team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
 
-  if(team == # "any") {
+  if(team == #"any") {
     var_db4c606e = function_51ca9c38(var_5e63b00d.var_a8539bf6.origin, team);
     team = var_db4c606e.team;
   }
@@ -400,7 +401,7 @@ function_69996073(var_3af54106) {
 
 function_8ecf6615(var_3af54106) {
   var_5e63b00d = self;
-  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", # "death");
+  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", #"death");
   waitresult = level waittill(var_5e63b00d.script_waittill);
   teamowner = waitresult.owner;
   team = waitresult.team;
@@ -410,7 +411,7 @@ function_8ecf6615(var_3af54106) {
       team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
     }
 
-    if(team == # "any") {
+    if(team == #"any") {
       var_db4c606e = function_51ca9c38(var_5e63b00d.var_a8539bf6.origin, team);
       team = var_db4c606e.team;
     }
@@ -610,7 +611,7 @@ function_b501ff0b(damagecallback, destroyedcallback, var_1891d3cd, var_2053fdc6)
 }
 
 function_59a79a68(var_3af54106, damage_callback, destroyed_callback, emp_damage, emp_callback) {
-  self endon(#"death", # "delete");
+  self endon(#"death", #"delete");
   assert(!isvehicle(self) || !issentient(self), "<dev string:x282>");
 
   while(true) {
@@ -686,9 +687,9 @@ function_59a79a68(var_3af54106, damage_callback, destroyed_callback, emp_damage,
       weaponstatname = "destroyed";
 
       switch (weapon.name) {
-        case # "tow_turret":
-        case # "tow_turret_drop":
-        case # "auto_tow":
+        case #"tow_turret":
+        case #"tow_turret_drop":
+        case #"auto_tow":
           weaponstatname = "kills";
           break;
       }
@@ -889,7 +890,7 @@ turret_activate(var_3af54106, owner, team, vehicle, origin, angles, parent) {
     }
 
     vehicle.turret_id = string(level.var_c70c6768);
-    badplace_cylinder("turret_bad_place_" + vehicle.turret_id, 0, vehicle.origin, vehicle.settings.var_9493f6dc, vehicle.settings.var_c9c01aa4, # "axis", # "allies", # "neutral");
+    badplace_cylinder("turret_bad_place_" + vehicle.turret_id, 0, vehicle.origin, vehicle.settings.var_9493f6dc, vehicle.settings.var_c9c01aa4, #"axis", #"allies", #"neutral");
     vehicle.has_bad_place = 1;
   }
 
@@ -1206,3 +1207,4 @@ debug_init() {
 
   thread debug_init();
 }
+

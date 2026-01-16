@@ -26,11 +26,12 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_escape_catwalk_event;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_144c7c2895ed95c", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_48f1f50c412d80c7", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_144c7c2895ed95c", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_48f1f50c412d80c7", 1, 1, "counter");
 }
 
 function_4989fd7e() {
@@ -99,10 +100,10 @@ function_84f1c310() {
     t_catwalk_door sethintstring(#"");
     waitresult = var_40762d8a waittill(#"trigger");
     level flag::set(#"catwalk_door_open");
-    level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", # "allies", 0, 0);
+    level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", #"allies", 0, 0);
 
     if(isplayer(waitresult.activator)) {
-      waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", # "open", undefined, 1);
+      waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", #"open", undefined, 1);
     }
 
     var_40762d8a sethintstring(#"");
@@ -112,7 +113,7 @@ function_84f1c310() {
     music::setmusicstate("escape_catwalk");
     s_sparks = struct::get("catwalk_door_spark");
     mdl_sparks = util::spawn_model("tag_origin", s_sparks.origin, s_sparks.angles);
-    mdl_sparks clientfield::set("" + # "hash_144c7c2895ed95c", 1);
+    mdl_sparks clientfield::set("" + #"hash_144c7c2895ed95c", 1);
     mdl_gate = undefined;
 
     foreach(mdl_door in t_catwalk_door.doors) {
@@ -126,7 +127,7 @@ function_84f1c310() {
       level thread function_40312eda(mdl_sparks, mdl_gate);
     }
 
-    level.var_2ea46461 clientfield::increment("" + # "hash_48f1f50c412d80c7");
+    level.var_2ea46461 clientfield::increment("" + #"hash_48f1f50c412d80c7");
     level.var_b2b15659 = 1;
   } else if(zm_custom::function_901b751c("zmPowerState") == 2 || zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
     var_40762d8a sethintstring(#"");
@@ -185,7 +186,7 @@ function_1646f141(var_e8ba54a2 = 0) {
 
 function_dc212e9f() {
   mdl_wire = getent("catwalk_wires", "targetname");
-  bundle = # "p8_fxanim_zm_esc_wires_catwalk_bundle";
+  bundle = #"p8_fxanim_zm_esc_wires_catwalk_bundle";
   mdl_wire thread scene::play(bundle, "LOOP", mdl_wire);
   level flag::wait_till(#"catwalk_door_open");
   mdl_wire thread scene::play(bundle, "SHOCKED", mdl_wire);
@@ -193,7 +194,7 @@ function_dc212e9f() {
 
 function_f184754() {
   while(true) {
-    s_info = self waittill(#"trigger", # "death");
+    s_info = self waittill(#"trigger", #"death");
 
     if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
@@ -208,7 +209,7 @@ function_fd3fa3a3() {
   self endon(#"death");
 
   while(true) {
-    s_info = self waittill(#"trigger", # "death");
+    s_info = self waittill(#"trigger", #"death");
 
     if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
@@ -331,7 +332,7 @@ function_7b6777c5(t_spawner) {
 function_17ccf041() {
   self notify("132dac1db2bd93e0");
   self endon("132dac1db2bd93e0");
-  level endon(#"catwalk_event_completed", # "end_game");
+  level endon(#"catwalk_event_completed", #"end_game");
   level.var_20cff6f0 = 0;
 
   while(true) {
@@ -339,7 +340,7 @@ function_17ccf041() {
     e_leader = function_9ac202b9();
 
     if(isplayer(e_leader)) {
-      s_notify = e_leader waittilltimeout(n_check_time, # "damage", # "death");
+      s_notify = e_leader waittilltimeout(n_check_time, #"damage", #"death");
 
       if(s_notify._notify === "death") {
         waitframe(1);
@@ -464,7 +465,7 @@ function_7ab912f2(s_loc) {
   self setfreecameralockonallowed(0);
   self forceteleport(s_loc.origin, s_loc.angles);
   self hide();
-  playFX(level._effect[# "lightning_dog_spawn"], s_loc.origin);
+  playFX(level._effect[#"lightning_dog_spawn"], s_loc.origin);
   playsoundatposition(#"zmb_hellhound_prespawn", s_loc.origin);
   wait 1.5;
   playsoundatposition(#"zmb_hellhound_bolt", s_loc.origin);
@@ -500,7 +501,7 @@ function_da824de8() {
 }
 
 function_bbc07822(a_ents) {
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
 
   if(level.brutus_count > 0) {
     var_f1404f73 = getaiarchetypearray(#"brutus")[0];
@@ -514,18 +515,18 @@ function_bbc07822(a_ents) {
   e_brutus.ignore_nuke = 1;
   e_brutus.b_ignore_cleanup = 1;
 
-  if(isDefined(a_ents[# "brutus"].var_972a4b46)) {
-    a_ents[# "brutus"].var_972a4b46 delete();
+  if(isDefined(a_ents[#"brutus"].var_972a4b46)) {
+    a_ents[#"brutus"].var_972a4b46 delete();
   }
 
   e_brutus thread function_d0392daf();
 }
 
 function_e7c9f15b(a_ents) {
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_a_bundle", "scriptbundlename");
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
   playsoundatposition(#"hash_66ef8de59c96e8d1", e_brutus gettagorigin("tag_eye"));
   e_brutus waittill(#"start_teleport");
   level thread function_21ccdb36();
@@ -541,9 +542,9 @@ play_brutus_scene_done(a_ents) {
   level.brutus_count = a_enemy.size;
 
   if(isDefined(level.var_43bca751) && level.var_43bca751 && !zm_utility::is_standard()) {
-    if(level.zones[# "zone_catwalk_04"].is_active) {
+    if(level.zones[#"zone_catwalk_04"].is_active) {
       zombie_brutus_util::attempt_brutus_spawn(1, "zone_catwalk_04");
-    } else if(level.zones[# "zone_catwalk_03"].is_active) {
+    } else if(level.zones[#"zone_catwalk_03"].is_active) {
       zombie_brutus_util::attempt_brutus_spawn(1, "zone_catwalk_03");
     } else {
       zombie_brutus_util::attempt_brutus_spawn(1);
@@ -558,7 +559,7 @@ play_brutus_scene_done(a_ents) {
 function_d0392daf() {
   self setCanDamage(1);
   self.health = 10000000;
-  s_result = self waittill(#"damage", # "teleport");
+  s_result = self waittill(#"damage", #"teleport");
 
   if(s_result._notify == "damage") {
     level.var_43bca751 = 1;
@@ -579,7 +580,7 @@ function_e16c819a(a_ents) {
 function_993f4add() {
   self notify(#"hash_2c989e619ebfe50a");
   self endon(#"hash_2c989e619ebfe50a");
-  s_result = self waittill(#"death", # "b_h_stop_damage_watcher");
+  s_result = self waittill(#"death", #"b_h_stop_damage_watcher");
 
   if(s_result._notify == "death") {
     if(isDefined(self)) {
@@ -673,17 +674,17 @@ function_ddadfe7() {
     str_zone = self zm_zonemgr::get_player_zone();
 
     if(isDefined(str_zone) && isinarray(a_str_zones, str_zone) && !(isDefined(self.var_9235ac2d) && self.var_9235ac2d)) {
-      self zm_audio::function_6191af93(#"surrounded", # "self", # "catwalk", # "surrounded");
+      self zm_audio::function_6191af93(#"surrounded", #"self", #"catwalk", #"surrounded");
       self.var_9235ac2d = 1;
     } else if(isDefined(str_zone) && !isinarray(a_str_zones, str_zone) && isDefined(self.var_9235ac2d) && self.var_9235ac2d) {
-      self zm_audio::function_e1666976(#"surrounded", # "self");
+      self zm_audio::function_e1666976(#"surrounded", #"self");
       self.var_9235ac2d = undefined;
     }
 
     wait 1;
   }
 
-  self zm_audio::function_e1666976(#"surrounded", # "self");
+  self zm_audio::function_e1666976(#"surrounded", #"self");
 
   if(isDefined(self.var_9235ac2d) && self.var_9235ac2d) {
     self.var_9235ac2d = undefined;

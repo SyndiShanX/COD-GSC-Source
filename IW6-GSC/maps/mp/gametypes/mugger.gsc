@@ -19,7 +19,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -50,9 +52,8 @@ main() {
 
   level.assists_disabled = true;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   level.mugger_fx["vanish"] = loadFx("impacts/small_snowhit");
 
@@ -111,18 +112,18 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", &"OBJECTIVES_MUGGER");
-  setObjectiveText("axis", &"OBJECTIVES_MUGGER");
+  setObjectiveText("allies", & "OBJECTIVES_MUGGER");
+  setObjectiveText("axis", & "OBJECTIVES_MUGGER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_MUGGER");
-    setObjectiveScoreText("axis", &"OBJECTIVES_MUGGER");
+    setObjectiveScoreText("allies", & "OBJECTIVES_MUGGER");
+    setObjectiveScoreText("axis", & "OBJECTIVES_MUGGER");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_MUGGER_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_MUGGER_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_MUGGER_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_MUGGER_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_MUGGER_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_MUGGER_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_MUGGER_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_MUGGER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -219,9 +220,8 @@ onSpawnPlayer() {
 hideHudElementOnGameEnd(hudElement) {
   level waittill("game_ended");
 
-  if(isDefined(hudElement)) {
+  if(isDefined(hudElement))
     hudElement.alpha = 0;
-  }
 }
 
 getSpawnPoint() {
@@ -242,9 +242,8 @@ onXPEvent(event) {
 onNormalDeath(victim, attacker, lifeId) {
   level thread spawnDogTags(victim, attacker);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
     attacker.finalKill = true;
-  }
 }
 
 mugger_init_tags() {
@@ -294,9 +293,8 @@ spawnDogTags(victim, attacker) {
               playSoundAtPos(victim.origin, "mugger_mugging");
 
               attacker thread maps\mp\gametypes\_hud_message::SplashNotifyUrgent("callout_mugger", num_extra_tags);
-              if(attData.weapon == "throwingknife_mp" || attData.weapon == "throwingknifejugg_mp") {
+              if(attData.weapon == "throwingknife_mp" || attData.weapon == "throwingknifejugg_mp")
                 attacker PlayLocalSound("mugger_you_mugged");
-              }
             }
 
             attacker.muggings[attacker.muggings.size] = GetTime();
@@ -382,9 +380,8 @@ spawnDogTags(victim, attacker) {
 
   level.dogtags[victim.guid].temp_tag = false;
 
-  if(num_extra_tags == 0) {
+  if(num_extra_tags == 0)
     level notify("mugger_jackpot_increment");
-  }
 
   for(i = 0; i < num_extra_tags; i++) {
     dropped_dogtag = mugger_tag_temp_spawn(victim.origin, 40, 160);
@@ -650,9 +647,8 @@ HideFromPlayer(pPlayer) {
   self hide();
 
   foreach(player in level.players) {
-    if(player != pPlayer) {
+    if(player != pPlayer)
       self ShowToPlayer(player);
-    }
   }
 }
 
@@ -686,9 +682,8 @@ onPickup() {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(!isDefined(self.pers)) {
+  while(!isDefined(self.pers))
     wait(0.05);
-  }
 
   self thread mugger_delayed_banking();
 }
@@ -835,9 +830,8 @@ clearOnVictimDisconnect(victim) {
     if(isDefined(level.dogtags[guid])) {
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
-      }
       level.dogtags[guid] notify("deleted");
 
       level.dogtags[guid] = undefined;
@@ -876,9 +870,8 @@ mugger_jackpot_watch() {
       level.mugger_jackpot_num_tags++;
       bar_frac = clamp(float(level.mugger_jackpot_num_tags / level.mugger_jackpot_limit), 0.0, 1.0);
       if(level.mugger_jackpot_num_tags >= level.mugger_jackpot_limit) {
-        if(isDefined(level.mugger_jackpot_text)) {
+        if(isDefined(level.mugger_jackpot_text))
           level.mugger_jackpot_text thread maps\mp\gametypes\_hud::fontPulse(level.players[0]);
-        }
 
         level.mugger_jackpot_num_tags = 15 + RandomIntRange(0, 3) * 5;
         level thread mugger_jackpot_drop();
@@ -981,18 +974,16 @@ mugger_jackpot_fx(jackpot_origin) {
 
   wait(0.1);
   playFXOnTag(level.mugger_fx["smoke"], level.jackpot_zone, "tag_fx");
-  foreach(player in level.players) {
-    player.mugger_fx_playing = true;
-  }
+  foreach(player in level.players)
+  player.mugger_fx_playing = true;
   level.jackpot_zone.mugger_fx_playing = true;
 }
 
 mugger_jackpot_fx_cleanup() {
   stopFXOnTag(level.mugger_fx["smoke"], level.jackpot_zone, "tag_fx");
   level.jackpot_zone hide();
-  if(isDefined(level.jackpot_targetFX)) {
+  if(isDefined(level.jackpot_targetFX))
     level.jackpot_targetFX delete();
-  }
   if(level.jackpot_zone.mugger_fx_playing) {
     level.jackpot_zone.mugger_fx_playing = false;
     stopFXOnTag(level.mugger_fx["smoke"], level.jackpot_zone, "tag_fx");
@@ -1001,9 +992,8 @@ mugger_jackpot_fx_cleanup() {
 }
 
 spawnFxDelay(pos, forward, right, delay) {
-  if(isDefined(level.jackpot_targetFX)) {
+  if(isDefined(level.jackpot_targetFX))
     level.jackpot_targetFX delete();
-  }
   wait delay;
   level.jackpot_targetFX = spawnFx(level.mugger_targetFXID, pos, forward, right);
   triggerFx(level.jackpot_targetFX);

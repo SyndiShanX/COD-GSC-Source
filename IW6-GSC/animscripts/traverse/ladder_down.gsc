@@ -17,9 +17,8 @@ main() {
   self orientmode("face angle", var_2.angles[1]);
   var_3 = 1;
 
-  if(isDefined(self.moveplaybackrate)) {
+  if(isDefined(self.moveplaybackrate))
     var_3 = self.moveplaybackrate;
-  }
 
   self setflaggedanimknoballrestart("climbanim", % ladder_climbon, % body, 1, 0.1, var_3);
   animscripts\shared::donotetracks("climbanim");

@@ -22,9 +22,8 @@ init() {
   trigger linkto(platform);
   part = getent("lift_part", "targetname");
 
-  if(isDefined(part)) {
+  if(isDefined(part))
     part linkto(platform);
-  }
 
   level thread lift_think(trigger, platform);
 }
@@ -49,9 +48,8 @@ lift_think(trigger, platform) {
     platform thread lift_move_think(goal);
     platform waittill("movedone");
 
-    if(location == 1) {
+    if(location == 1)
       trigger thread lift_auto_lower_think();
-    }
 
     wait 10;
   }
@@ -80,7 +78,7 @@ lift_auto_lower_think() {
 }
 
 destroy_equipment() {
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     item = grenades[i];
@@ -115,20 +113,19 @@ destroy_tactical_insertions() {
     if(!isDefined(player.tacticalinsertion)) {
       continue;
     }
-    if(player.tacticalinsertion istouching(self)) {
+    if(player.tacticalinsertion istouching(self))
       player.tacticalinsertion maps\mp\_tacticalinsertion::destroy_tactical_insertion();
-    }
   }
 }
 
 destroy_supply_crates() {
-  crates = getEntArray("care_package", "script_noteworthy");
+  crates = getentarray("care_package", "script_noteworthy");
 
   for(i = 0; i < crates.size; i++) {
     crate = crates[i];
 
     if(crate istouching(self)) {
-      playFX(level._supply_drop_explosion_fx, crate.origin);
+      playfx(level._supply_drop_explosion_fx, crate.origin);
       playsoundatposition("wpn_grenade_explode", crate.origin);
       wait 0.1;
       crate maps\mp\killstreaks\_supplydrop::cratedelete();
@@ -140,34 +137,30 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distance2dsquared(corpses[i].origin, self.origin) < 1048576) {
+    if(distance2dsquared(corpses[i].origin, self.origin) < 1048576)
       corpses[i] delete();
-    }
   }
 }
 
 destroy_stuck_weapons() {
-  weapons = getEntArray("sticky_weapon", "targetname");
+  weapons = getentarray("sticky_weapon", "targetname");
   origin = self getpointinbounds(0.0, 0.0, -0.6);
   z_cutoff = origin[2];
 
   for(i = 0; i < weapons.size; i++) {
     weapon = weapons[i];
 
-    if(weapon istouching(self) && weapon.origin[2] > z_cutoff) {
+    if(weapon istouching(self) && weapon.origin[2] > z_cutoff)
       weapon delete();
-    }
   }
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {

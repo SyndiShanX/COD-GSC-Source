@@ -33,11 +33,11 @@
 #namespace dragon_scale_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragonshield", &__init__, &__main__, undefined);
+  system::register("zm_weap_dragonshield", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  zm_craft_shield::init("craft_shield_zm", "dragonshield", "wpn_t7_zmb_dlc3_dragon_shield_dmg0_world", &"ZOMBIE_DRAGON_SHIELD_CRAFT", &"ZOMBIE_DRAGON_SHIELD_TAKEN", &"ZOMBIE_DRAGON_SHIELD_PICKUP");
+  zm_craft_shield::init("craft_shield_zm", "dragonshield", "wpn_t7_zmb_dlc3_dragon_shield_dmg0_world", & "ZOMBIE_DRAGON_SHIELD_CRAFT", & "ZOMBIE_DRAGON_SHIELD_TAKEN", & "ZOMBIE_DRAGON_SHIELD_PICKUP");
   clientfield::register("allplayers", "ds_ammo", 12000, 1, "int");
   clientfield::register("allplayers", "burninate", 12000, 1, "counter");
   clientfield::register("allplayers", "burninate_upgraded", 12000, 1, "counter");
@@ -46,16 +46,16 @@ function __init__() {
   clientfield::register("actor", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter");
   clientfield::register("vehicle", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter");
   level flag::init("dragon_shield_used");
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   level.weaponriotshield = getweapon("dragonshield");
-  zm_equipment::register("dragonshield", &"ZOMBIE_DRAGON_SHIELD_PICKUP", &"ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
+  zm_equipment::register("dragonshield", & "ZOMBIE_DRAGON_SHIELD_PICKUP", & "ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
   level.weaponriotshieldupgraded = getweapon("dragonshield_upgraded");
-  zm_equipment::register("dragonshield_upgraded", &"ZOMBIE_DRAGON_SHIELD_UPGRADE_PICKUP", &"ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
+  zm_equipment::register("dragonshield_upgraded", & "ZOMBIE_DRAGON_SHIELD_UPGRADE_PICKUP", & "ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
   level.var_7ba638ea = getweapon("dragonshield_projectile");
   level.var_855a12ba = getweapon("dragonshield_projectile_upgraded");
-  level.riotshield_melee_power = &function_71d88f26;
-  level.should_shield_absorb_damage = &should_shield_absorb_damage;
+  level.riotshield_melee_power = & function_71d88f26;
+  level.should_shield_absorb_damage = & should_shield_absorb_damage;
   zombie_utility::set_zombie_var("dragonshield_proximity_fling_radius", 96);
   zombie_utility::set_zombie_var("dragonshield_proximity_knockdown_radius", 128);
   zombie_utility::set_zombie_var("dragonshield_cylinder_radius", 180);
@@ -69,7 +69,7 @@ function __init__() {
   level.var_d73afd29[level.var_d73afd29.size] = "guts";
   level.var_d73afd29[level.var_d73afd29.size] = "right_arm";
   level.var_d73afd29[level.var_d73afd29.size] = "left_arm";
-  level.var_337d1ed2 = &zombie_knockdown;
+  level.var_337d1ed2 = & zombie_knockdown;
 }
 
 function __main__() {
@@ -93,7 +93,7 @@ function on_player_connect() {
 
 function watchfirstuse() {
   self endon("disconnect");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("weapon_change", newweapon);
     if(newweapon.isriotshield) {
       break;
@@ -110,17 +110,17 @@ function on_player_spawned() {
   self thread function_98962bde();
   self thread player_watch_ammo_change();
   self thread player_watch_max_ammo();
-  self.player_shield_apply_damage = &function_247d568b;
-  self.riotshield_damage_absorb_callback = &riotshield_damage_absorb_callback;
+  self.player_shield_apply_damage = & function_247d568b;
+  self.riotshield_damage_absorb_callback = & riotshield_damage_absorb_callback;
 }
 
 function function_98962bde() {
   self notify("hash_34db92fa");
   self endon("hash_34db92fa");
   self endon("disconnect");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     level waittill("start_of_round");
-    if(isDefined(self) && (isDefined(self.hasriotshield) && self.hasriotshield)) {
+    if(isdefined(self) && (isdefined(self.hasriotshield) && self.hasriotshield)) {
       self zm_equipment::change_ammo(self.weaponriotshield, 1);
       self thread check_weapon_ammo(self.weaponriotshield);
     }
@@ -130,7 +130,7 @@ function function_98962bde() {
 function player_watch_ammo_change() {
   self notify("player_watch_ammo_change");
   self endon("player_watch_ammo_change");
-  for(;;) {
+  for (;;) {
     self waittill("equipment_ammo_changed", equipment);
     if(isstring(equipment)) {
       equipment = getweapon(equipment);
@@ -144,10 +144,10 @@ function player_watch_ammo_change() {
 function player_watch_max_ammo() {
   self notify("player_watch_max_ammo");
   self endon("player_watch_max_ammo");
-  for(;;) {
+  for (;;) {
     self waittill("zmb_max_ammo");
     wait(0.05);
-    if(isDefined(self.hasriotshield) && self.hasriotshield) {
+    if(isdefined(self.hasriotshield) && self.hasriotshield) {
       self thread check_weapon_ammo(self.weaponriotshield);
     }
   }
@@ -155,18 +155,18 @@ function player_watch_max_ammo() {
 
 function check_weapon_ammo(weapon) {
   wait(0.05);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     ammo = self getweaponammoclip(weapon);
     self clientfield::set("ds_ammo", ammo);
   }
 }
 
 function should_shield_absorb_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(self.hasriotshield) && self.hasriotshield) {
-    if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped && smeansofdeath == "MOD_EXPLOSIVE" && isDefined(eattacker) && (isDefined(eattacker.is_elemental_zombie) && eattacker.is_elemental_zombie) && eattacker.var_9a02a614 === "napalm") {
+  if(isdefined(self.hasriotshield) && self.hasriotshield) {
+    if(isdefined(self.hasriotshieldequipped) && self.hasriotshieldequipped && smeansofdeath == "MOD_EXPLOSIVE" && isdefined(eattacker) && (isdefined(eattacker.is_elemental_zombie) && eattacker.is_elemental_zombie) && eattacker.var_9a02a614 === "napalm") {
       return 1;
     }
-    if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped && smeansofdeath == "MOD_BURNED") {
+    if(isdefined(self.hasriotshieldequipped) && self.hasriotshieldequipped && smeansofdeath == "MOD_BURNED") {
       return 1;
     }
   }
@@ -183,7 +183,7 @@ function riotshield_damage_absorb_callback(eattacker, idamage, shitloc, smeansof
 
 function function_71d88f26(weapon) {
   ammo = self getammocount(weapon);
-  disabled = isDefined(self.var_a0a9409e) && self.var_a0a9409e;
+  disabled = isdefined(self.var_a0a9409e) && self.var_a0a9409e;
   if(ammo > 0 && !disabled) {
     self zm_equipment::change_ammo(weapon, -1);
     self thread function_f894ad3e();
@@ -213,7 +213,7 @@ function function_f894ad3e() {
 
 function function_c9b3ba45(e_attacker) {
   self.marked_for_death = 1;
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self dodamage(self.health + 666, e_attacker.origin, e_attacker);
   }
 }
@@ -239,7 +239,7 @@ function burninate(w_weapon) {
 }
 
 function function_8b8bd269(n_clientfield) {
-  if(!isDefined(level.var_2f79fc7)) {
+  if(!isdefined(level.var_2f79fc7)) {
     level.var_2f79fc7 = [];
     level.var_490f6a0d = [];
     level.var_e4a96ed9 = [];
@@ -248,14 +248,14 @@ function function_8b8bd269(n_clientfield) {
   self function_459dacdd();
   self.var_3a6322f2 = 0;
   level.var_9e674825 = 0;
-  for(i = 0; i < level.var_e4a96ed9.size; i++) {
+  for (i = 0; i < level.var_e4a96ed9.size; i++) {
     if(level.var_e4a96ed9[i].archetype === "zombie") {
       level.var_e4a96ed9[i] clientfield::set("dragon_strike_zombie_fire", n_clientfield);
     }
     level.var_e4a96ed9[i] thread function_64bd9bf5(self, level.var_1c1b4cce[i], i);
     function_3f5e8a65();
   }
-  for(i = 0; i < level.var_2f79fc7.size; i++) {
+  for (i = 0; i < level.var_2f79fc7.size; i++) {
     if(level.var_2f79fc7[i].archetype === "zombie") {
       level.var_2f79fc7[i] clientfield::set("dragon_strike_zombie_fire", n_clientfield);
     }
@@ -272,7 +272,7 @@ function function_8b8bd269(n_clientfield) {
 function function_459dacdd() {
   view_pos = self getweaponmuzzlepoint();
   zombies = array::get_all_closest(view_pos, getaiteamarray(level.zombie_team), undefined, undefined, level.zombie_vars["dragonshield_knockdown_range"]);
-  if(!isDefined(zombies)) {
+  if(!isdefined(zombies)) {
     return;
   }
   knockdown_range_squared = level.zombie_vars["dragonshield_knockdown_range"] * level.zombie_vars["dragonshield_knockdown_range"];
@@ -289,8 +289,8 @@ function function_459dacdd() {
     line(near_circle_pos, end_pos, (0, 0, 1), 1, 0, 100);
     circle(end_pos, level.zombie_vars[""], (1, 0, 0), 0, 0, 100);
   }
-  for(i = 0; i < zombies.size; i++) {
-    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
+  for (i = 0; i < zombies.size; i++) {
+    if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
@@ -311,7 +311,7 @@ function function_459dacdd() {
       zombies[i] thread function_41f7c503(self, 1, 0, 0);
       continue;
     } else if(test_range_squared < var_26ce68e3 && 0 > dot) {
-      if(!isDefined(zombies[i].var_e1dbd63)) {
+      if(!isdefined(zombies[i].var_e1dbd63)) {
         zombies[i].var_e1dbd63 = level.var_337d1ed2;
       }
       level.var_2f79fc7[level.var_2f79fc7.size] = zombies[i];
@@ -348,7 +348,7 @@ function function_459dacdd() {
       continue;
     }
     if(test_range_squared < gib_range_squared) {
-      if(!isDefined(zombies[i].var_e1dbd63)) {
+      if(!isdefined(zombies[i].var_e1dbd63)) {
         zombies[i].var_e1dbd63 = level.var_337d1ed2;
       }
       level.var_2f79fc7[level.var_2f79fc7.size] = zombies[i];
@@ -356,7 +356,7 @@ function function_459dacdd() {
       zombies[i] thread function_41f7c503(self, 0, 1, 0);
       continue;
     }
-    if(!isDefined(zombies[i].var_e1dbd63)) {
+    if(!isdefined(zombies[i].var_e1dbd63)) {
       zombies[i].var_e1dbd63 = level.var_337d1ed2;
     }
     level.var_2f79fc7[level.var_2f79fc7.size] = zombies[i];
@@ -369,7 +369,7 @@ function function_8e9a1613(msg, color) {
   if(!getdvarint("")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
   print3d(self.origin + vectorscale((0, 0, 1), 60), msg, color, 1, 1, 40);
@@ -377,19 +377,19 @@ function function_8e9a1613(msg, color) {
 
 function function_64bd9bf5(player, fling_vec, index) {
   delay = self.var_d8486721;
-  if(isDefined(delay) && delay > 0.05) {
+  if(isdefined(delay) && delay > 0.05) {
     wait(delay);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.var_23340a5d)) {
+  if(isdefined(self.var_23340a5d)) {
     self[[self.var_23340a5d]](player);
     return;
   }
   self function_c9b3ba45(player);
   if(self.health <= 0) {
-    if(!(isDefined(self.no_damage_points) && self.no_damage_points)) {
+    if(!(isdefined(self.no_damage_points) && self.no_damage_points)) {
       points = 10;
       if(!index) {
         points = zm_score::get_zombie_death_player_points();
@@ -407,29 +407,29 @@ function function_64bd9bf5(player, fling_vec, index) {
 
 function zombie_knockdown(player, gib) {
   delay = self.var_d8486721;
-  if(isDefined(delay) && delay > 0.05) {
+  if(isdefined(delay) && delay > 0.05) {
     wait(delay);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   if(!isvehicle(self)) {
-    if(gib && (!(isDefined(self.gibbed) && self.gibbed))) {
+    if(gib && (!(isdefined(self.gibbed) && self.gibbed))) {
       self.a.gib_ref = array::random(level.var_d73afd29);
       self thread zombie_death::do_gib();
     } else {
       self zombie_utility::setup_zombie_knockdown(player);
     }
   }
-  if(isDefined(level.var_d532d63)) {
+  if(isdefined(level.var_d532d63)) {
     self[[level.var_d532d63]](player, gib);
   } else {
     damage = level.zombie_vars["dragonshield_knockdown_damage"];
     self clientfield::increment("dragonshield_snd_zombie_knockdown");
-    self.var_2a2a6dce = &function_21b74baa;
+    self.var_2a2a6dce = & function_21b74baa;
     self dodamage(damage, player.origin, player);
     if(!isvehicle(self)) {
-      self animcustom(&function_2d1a5562);
+      self animcustom( & function_2d1a5562);
     }
     if(self.health <= 0) {
       player.var_3a6322f2++;
@@ -442,7 +442,7 @@ function function_2d1a5562() {
   self endon("killanimscript");
   self endon("death");
   self endon("hash_21776edb");
-  if(isDefined(self.marked_for_death) && self.marked_for_death) {
+  if(isdefined(self.marked_for_death) && self.marked_for_death) {
     return;
   }
   if(self.damageyaw <= -135 || self.damageyaw >= 135) {
@@ -472,7 +472,7 @@ function function_2d1a5562() {
   }
   self setanimstatefromasd(fallanim);
   self zombie_shared::donotetracks("dragonshield_fall_anim", self.var_2a2a6dce);
-  if(!isDefined(self) || !isalive(self) || self.missinglegs || (isDefined(self.marked_for_death) && self.marked_for_death)) {
+  if(!isdefined(self) || !isalive(self) || self.missinglegs || (isdefined(self.marked_for_death) && self.marked_for_death)) {
     return;
   }
   self setanimstatefromasd(getupanim);
@@ -482,23 +482,23 @@ function function_2d1a5562() {
 function function_c25e3d4b(player, gib) {
   self endon("death");
   self clientfield::increment("dragonshield_snd_projectile_impact");
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.var_e1dbd63)) {
+  if(isdefined(self.var_e1dbd63)) {
     self[[self.var_e1dbd63]](player, gib);
   }
 }
 
 function function_21b74baa(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect["dragonshield_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    playfx(level._effect["dragonshield_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
     self clientfield::increment("dragonshield_snd_zombie_knockdown");
   }
 }
 
 function function_41f7c503(player, fling, gib, knockdown) {
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   if(!fling && (gib || knockdown)) {}
@@ -512,7 +512,7 @@ function function_41f7c503(player, fling, gib, knockdown) {
 function function_a3a9c2dc() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback(&function_6f901616);
+  zm_devgui::add_custom_devgui_callback( & function_6f901616);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -526,22 +526,22 @@ function function_6f901616(cmd) {
   retval = 0;
   switch (cmd) {
     case "": {
-      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, &function_f685a6db);
+      array::thread_all(players, & function_f685a6db);
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, &function_eeac5a22);
+      array::thread_all(players, & function_eeac5a22);
       retval = 1;
       break;
     }
@@ -550,7 +550,7 @@ function function_6f901616(cmd) {
 }
 
 function detect_reentry() {
-  if(isDefined(self.devgui_preserve_time)) {
+  if(isdefined(self.devgui_preserve_time)) {
     if(self.devgui_preserve_time == gettime()) {
       return true;
     }
@@ -566,11 +566,11 @@ function function_f685a6db() {
   self notify("hash_f685a6db");
   self endon("hash_f685a6db");
   level flagsys::wait_till("");
-  self.var_f685a6db = !(isDefined(self.var_f685a6db) && self.var_f685a6db);
+  self.var_f685a6db = !(isdefined(self.var_f685a6db) && self.var_f685a6db);
   if(self.var_f685a6db) {
-    while(isDefined(self)) {
+    while (isdefined(self)) {
       damagemax = level.weaponriotshield.weaponstarthitpoints;
-      if(isDefined(self.weaponriotshield)) {
+      if(isdefined(self.weaponriotshield)) {
         damagemax = self.weaponriotshield.weaponstarthitpoints;
       }
       shieldhealth = self damageriotshield(0);
@@ -591,10 +591,10 @@ function function_eeac5a22() {
   self notify("hash_eeac5a22");
   self endon("hash_eeac5a22");
   level flagsys::wait_till("");
-  self.var_eeac5a22 = !(isDefined(self.var_eeac5a22) && self.var_eeac5a22);
+  self.var_eeac5a22 = !(isdefined(self.var_eeac5a22) && self.var_eeac5a22);
   if(self.var_eeac5a22) {
-    while(isDefined(self)) {
-      if(isDefined(self.hasriotshield) && self.hasriotshield) {
+    while (isdefined(self)) {
+      if(isdefined(self.hasriotshield) && self.hasriotshield) {
         self zm_equipment::change_ammo(self.weaponriotshield, 1);
         self thread check_weapon_ammo(self.weaponriotshield);
       }

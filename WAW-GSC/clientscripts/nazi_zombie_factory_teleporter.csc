@@ -28,12 +28,12 @@ setup_teleport_aftereffects() {
 
 wait_for_black_box() {
   secondClientNum = -1;
-  while(true) {
+  while (true) {
     level waittill("black_box_start", localClientNum);
     assert(isDefined(localClientNum));
     savedVis = GetVisionSetNaked(localClientNum);
     VisionSetNaked(localClientNum, "default", 0);
-    while(secondClientNum != localClientNum) {
+    while (secondClientNum != localClientNum) {
       level waittill("black_box_end", secondClientNum);
     }
     VisionSetNaked(localClientNum, savedVis, 0);
@@ -41,7 +41,7 @@ wait_for_black_box() {
 }
 
 wait_for_teleport_aftereffect() {
-  while(true) {
+  while (true) {
     level waittill("tae", localClientNum);
     if(GetDvar("factoryAftereffectOverride") == "-1") {
       self thread[[level.teleport_ae_funcs[RandomInt(level.teleport_ae_funcs.size)]]](localClientNum);
@@ -64,7 +64,7 @@ teleport_aftereffect_fov(localClientNum) {
   start_fov = 30;
   end_fov = 65;
   duration = 0.5;
-  for(i = 0; i < duration; i += 0.017) {
+  for (i = 0; i < duration; i += 0.017) {
     fov = start_fov + (end_fov - start_fov) * (i / duration);
     SetClientDvar("cg_fov", fov);
     realwait(0.017);

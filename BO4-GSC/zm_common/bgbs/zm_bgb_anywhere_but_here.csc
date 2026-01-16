@@ -5,10 +5,11 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_anywhere_but_here;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_anywhere_but_here", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_anywhere_but_here", &__init__, undefined, #"bgb");
 }
 
 __init__() {

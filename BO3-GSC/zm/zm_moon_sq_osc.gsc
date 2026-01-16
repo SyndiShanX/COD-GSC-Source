@@ -26,32 +26,32 @@
 function init() {
   level._osc_rb_jolie_spots = [];
   level._osc_rbs = struct::get_array("struct_osc_button", "targetname");
-  if(!isDefined(level._osc_rbs)) {
+  if(!isdefined(level._osc_rbs)) {
     println("");
     wait(1);
     return;
   }
   level._osc_struct = struct::get("struct_sq_osc", "targetname");
-  if(!isDefined(level._osc_struct)) {
+  if(!isdefined(level._osc_struct)) {
     println("");
     wait(1);
     return;
   }
   level._osc_flags = strtok(level._osc_struct.script_flag, ",");
-  if(!isDefined(level._osc_flags)) {
+  if(!isdefined(level._osc_flags)) {
     println("");
     wait(1);
     return;
   }
-  for(j = 0; j < level._osc_flags.size; j++) {
-    if(!isDefined(level.flag[level._osc_flags[j]])) {
+  for (j = 0; j < level._osc_flags.size; j++) {
+    if(!isdefined(level.flag[level._osc_flags[j]])) {
       level flag::init(level._osc_flags[j]);
     }
   }
   level._jolie_greet_array = array(level._osc_flags[4], level._osc_flags[5], level._osc_flags[6], level._osc_flags[7]);
   level._osc_st = struct::get_array("struct_osc_st", "targetname");
-  for(k = 0; k < level._osc_st.size; k++) {
-    level._osc_st[k].focus = spawnStruct();
+  for (k = 0; k < level._osc_st.size; k++) {
+    level._osc_st[k].focus = spawnstruct();
     level._osc_st[k].focus.origin = level._osc_st[k].origin;
     level._osc_st[k].focus.radius = 48;
     level._osc_st[k].focus.height = 48;
@@ -68,7 +68,7 @@ function init() {
   if(getdvarint("jolie_greet_debug")) {
     level._osc_trial_time = getdvarint("jolie_greet_time");
   } else {
-    if(!isDefined(level._osc_struct.script_int)) {
+    if(!isdefined(level._osc_struct.script_int)) {
       println("");
       wait(1);
       return;
@@ -79,7 +79,7 @@ function init() {
   level._osc_cap = util::spawn_model("p7_zm_moo_glyph_dial_cap", level._osc_cap_spot.origin, level._osc_cap_spot.angles);
   level._osc_terms = 0;
   level thread osc_button_cover_setup();
-  zm_sidequests::declare_sidequest_stage("sq", "osc", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "osc", & init_stage, & stage_logic, & exit_stage);
 }
 
 function function_f65c74fe() {
@@ -92,17 +92,17 @@ function function_f65c74fe() {
 function osc_button_cover_setup() {
   level flagsys::wait_till("load_main_complete");
   level flag::wait_till("start_zombie_round_logic");
-  for(i = 0; i < level._osc_rbs.size; i++) {
+  for (i = 0; i < level._osc_rbs.size; i++) {
     osc_target = struct::get(level._osc_rbs[i].target, "targetname");
     level._osc_rbs[i].cover = spawn("script_model", osc_target.origin);
     level._osc_rbs[i].cover.angles = osc_target.angles;
-    level._osc_rbs[i].cover setModel("p7_zm_moo_console_button_lid");
+    level._osc_rbs[i].cover setmodel("p7_zm_moo_console_button_lid");
     level._osc_rbs[i].cover_close = level._osc_rbs[i].cover.angles;
     level._osc_rbs[i].cover rotateroll(-90, 0.05);
     level._osc_rbs[i].cover waittill("rotatedone");
     level._osc_rbs[i].cover_open = level._osc_rbs[i].cover.angles;
     level._osc_rbs[i].cover.angles = level._osc_rbs[i].cover_close;
-    level._osc_rbs[i].jolie = spawnStruct();
+    level._osc_rbs[i].jolie = spawnstruct();
     level._osc_rbs[i].jolie.origin = level._osc_rbs[i].origin;
     level._osc_rbs[i].jolie.radius = 48;
     level._osc_rbs[i].jolie.height = 48;
@@ -136,7 +136,7 @@ function moon_rb_dist_think() {
   level._lid_close_sound = 0;
   int_close = 0;
   dist_struct = struct::get("struct_rb_dist_check", "targetname");
-  while(!level flag::get(level._osc_flags[1])) {
+  while (!level flag::get(level._osc_flags[1])) {
     level._osc_check = zm_utility::get_closest_player(dist_struct.origin);
     int_distance = distance2d(level._osc_check.origin, dist_struct.origin);
     if(int_distance > level._osc_max_dist) {
@@ -146,7 +146,7 @@ function moon_rb_dist_think() {
     }
     scale = (int_distance - level._osc_min_dist) / level._osc_rbs_dist_range;
     rotation_offset = level._osc_rbs_totalrot * scale;
-    for(i = 0; i < level._osc_rbs.size; i++) {
+    for (i = 0; i < level._osc_rbs.size; i++) {
       level._osc_rbs[i].cover.angles = level._osc_rbs[i].cover_close - rotation_offset;
       if(level._osc_rbs[i].cover.angles == level._osc_rbs[i].cover_close && level._lid_close_sound == 0) {
         level._lid_close_sound = 1;
@@ -159,8 +159,8 @@ function moon_rb_dist_think() {
 }
 
 function rb_cover_sound() {
-  for(i = 0; i < level._osc_rbs.size; i++) {
-    level._osc_rbs[i].cover playSound("evt_sq_rbs_close");
+  for (i = 0; i < level._osc_rbs.size; i++) {
+    level._osc_rbs[i].cover playsound("evt_sq_rbs_close");
     level._osc_rbs[i].cover playsoundwithnotify("vox_mcomp_quest_step3_0", "sounddone");
   }
   level._osc_rbs[0].cover waittill("sounddone");
@@ -178,16 +178,16 @@ function play_rb_cover_player_vox(ent) {
 }
 
 function moon_jolie_greet() {
-  if(!isDefined(level._osc_rb_jolie_spots) || level._osc_rb_jolie_spots.size == 0) {
+  if(!isdefined(level._osc_rb_jolie_spots) || level._osc_rb_jolie_spots.size == 0) {
     println("");
     wait(1);
     return;
   }
-  while(!level flag::get(level._osc_flags[1])) {
-    for(i = 0; i < level._osc_rb_jolie_spots.size; i++) {
-      zm_equip_hacker::register_pooled_hackable_struct(level._osc_rb_jolie_spots[i], &moon_jolie_access);
+  while (!level flag::get(level._osc_flags[1])) {
+    for (i = 0; i < level._osc_rb_jolie_spots.size; i++) {
+      zm_equip_hacker::register_pooled_hackable_struct(level._osc_rb_jolie_spots[i], & moon_jolie_access);
     }
-    if(!isDefined(level._osc_flags[2]) || !isDefined(level._osc_flags[3])) {
+    if(!isdefined(level._osc_flags[2]) || !isdefined(level._osc_flags[3])) {
       println("");
       wait(1);
       return;
@@ -199,12 +199,12 @@ function moon_jolie_greet() {
       } else if(level flag::get(level._osc_flags[3])) {
         level flag::clear(level._osc_flags[3]);
       }
-      for(j = 0; j < level._osc_st.size; j++) {
+      for (j = 0; j < level._osc_st.size; j++) {
         zm_equip_hacker::deregister_hackable_struct(level._osc_st[j].focus);
-        if(isDefined(level._osc_st[j].focus._light)) {
+        if(isdefined(level._osc_st[j].focus._light)) {
           level._osc_st[j].focus._light delete();
         }
-        if(isDefined(level._osc_st[j].focus.script_flag)) {
+        if(isdefined(level._osc_st[j].focus.script_flag)) {
           level flag::clear(level._osc_st[j].focus.script_flag);
           level._osc_st[j].focus.script_flag = "";
         }
@@ -212,12 +212,12 @@ function moon_jolie_greet() {
     } else if(level flag::get(level._osc_flags[3])) {
       level flag::set(level._osc_flags[1]);
       level notify("stop_dist_think");
-      for(l = 0; l < level._osc_rbs.size; l++) {
+      for (l = 0; l < level._osc_rbs.size; l++) {
         level._osc_rbs[l].cover.angles = level._osc_rbs[l].cover_open;
-        level._osc_rbs[l].cover playSound("evt_sq_rbs_open");
+        level._osc_rbs[l].cover playsound("evt_sq_rbs_open");
       }
-      for(m = 0; m < level._osc_st.size; m++) {
-        if(isDefined(level._osc_st[m].focus._light)) {
+      for (m = 0; m < level._osc_st.size; m++) {
+        if(isdefined(level._osc_st[m].focus._light)) {
           level._osc_st[m].focus._light delete();
         }
         level._osc_st[m].focus.script_flag = "";
@@ -235,25 +235,25 @@ function moon_jolie_greet() {
 function moon_jolie_access(ent_hacker) {
   level thread play_moon_jolie_access_vox(ent_hacker);
   level._lid_close_sound = 1;
-  for(i = 0; i < level._osc_rb_jolie_spots.size; i++) {
+  for (i = 0; i < level._osc_rb_jolie_spots.size; i++) {
     zm_equip_hacker::deregister_hackable_struct(level._osc_rb_jolie_spots[i]);
   }
   level._osc_terms = 0;
   random_array = level._osc_st;
   random_array = array::randomize(random_array);
-  for(j = 0; j < 4; j++) {
+  for (j = 0; j < 4; j++) {
     println("");
     random_array[j].focus._light = spawn("script_model", random_array[j].focus._light_spot.origin);
     random_array[j].focus._light.angles = random_array[j].focus._light_spot.angles;
-    random_array[j].focus._light setModel("tag_origin");
+    random_array[j].focus._light setmodel("tag_origin");
     random_array[j] function_27fd2e20(1);
-    random_array[j].focus._light playSound("evt_sq_rbs_light_on");
-    random_array[j].focus._light playLoopSound("evt_sq_rbs_light_loop", 1);
-    zm_equip_hacker::register_pooled_hackable_struct(random_array[j].focus, &moon_jolie_work);
+    random_array[j].focus._light playsound("evt_sq_rbs_light_on");
+    random_array[j].focus._light playloopsound("evt_sq_rbs_light_loop", 1);
+    zm_equip_hacker::register_pooled_hackable_struct(random_array[j].focus, & moon_jolie_work);
   }
   level thread moon_good_jolie();
   level thread moon_bad_jolie();
-  array::thread_all(random_array, &moon_jolie_timer_vox);
+  array::thread_all(random_array, & moon_jolie_timer_vox);
 }
 
 function function_27fd2e20(var_ad826a0f) {
@@ -268,8 +268,8 @@ function function_27fd2e20(var_ad826a0f) {
 function moon_jolie_work(ent_hacker) {
   level._osc_terms++;
   self._light_spot function_27fd2e20(0);
-  if(isDefined(self._light)) {
-    self._light playSound("evt_sq_rbs_light_off");
+  if(isdefined(self._light)) {
+    self._light playsound("evt_sq_rbs_light_off");
     self._light delete();
   }
   if(level._osc_terms < 4) {
@@ -284,7 +284,7 @@ function moon_good_jolie() {
   level endon("jolie_fail");
   level endon("jolie_pass");
   level endon(level._osc_flags[1]);
-  while(level._osc_terms < 4) {
+  while (level._osc_terms < 4) {
     println("" + level._osc_terms);
     wait(0.1);
   }
@@ -309,28 +309,28 @@ function moon_jolie_timer_vox() {
   level endon("jolie_fail");
   level endon("jolie_pass");
   level endon(level._osc_flags[1]);
-  for(i = level._osc_trial_time; i > 0; i--) {
+  for (i = level._osc_trial_time; i > 0; i--) {
     playon = self.focus._light;
-    if(!isDefined(playon)) {
+    if(!isdefined(playon)) {
       return;
     }
     if(i == 50) {
-      playon playSound("vox_mcomp_quest_step3_2");
+      playon playsound("vox_mcomp_quest_step3_2");
     }
     if(i == 40) {
-      playon playSound("vox_mcomp_quest_step3_3");
+      playon playsound("vox_mcomp_quest_step3_3");
     }
     if(i == 30) {
-      playon playSound("vox_mcomp_quest_step3_4");
+      playon playsound("vox_mcomp_quest_step3_4");
     }
     if(i == 20) {
-      playon playSound("vox_mcomp_quest_step3_5");
+      playon playsound("vox_mcomp_quest_step3_5");
     }
     if(i == 10) {
-      playon playSound("vox_mcomp_quest_step3_6");
+      playon playsound("vox_mcomp_quest_step3_6");
     }
     if(i == 5) {
-      playon playSound("vox_mcomp_quest_step3_7");
+      playon playsound("vox_mcomp_quest_step3_7");
     }
     wait(1);
   }
@@ -339,7 +339,7 @@ function moon_jolie_timer_vox() {
 function moon_open_access() {
   button_triggers = [];
   level flag::wait_till(level._osc_flags[1]);
-  for(i = 0; i < level._osc_rbs.size; i++) {
+  for (i = 0; i < level._osc_rbs.size; i++) {
     trig = spawn("trigger_radius_use", level._osc_rbs[i].origin, 0, 48, 32);
     trig.radius = 48;
     trig setcursorhint("HINT_NOICON");
@@ -350,9 +350,9 @@ function moon_open_access() {
     trig = undefined;
   }
   level thread moon_access_granted(button_triggers.size);
-  while(!level flag::get(level._osc_flags[9])) {
+  while (!level flag::get(level._osc_flags[9])) {
     level flag::wait_till(level._osc_flags[8]);
-    if(!isDefined(level._osc_struct.script_float)) {
+    if(!isdefined(level._osc_struct.script_float)) {
       println("");
       wait(1);
       return;
@@ -364,9 +364,9 @@ function moon_open_access() {
     }
     if(!level flag::get(level._osc_flags[9])) {
       level._osc_release = 0;
-      for(k = 0; k < button_triggers.size; k++) {
+      for (k = 0; k < button_triggers.size; k++) {
         button_triggers[k]._hit_already = 0;
-        if(isDefined(button_triggers[k]._active)) {
+        if(isdefined(button_triggers[k]._active)) {
           button_triggers[k]._active delete();
         }
       }
@@ -378,14 +378,14 @@ function moon_open_access() {
 function moon_access_granted(int_hits) {
   level endon("end_game");
   level flag::wait_till(level._osc_flags[1]);
-  while(!level flag::get(level._osc_flags[9])) {
+  while (!level flag::get(level._osc_flags[9])) {
     if(level._osc_release == int_hits) {
       level flag::set(level._osc_flags[9]);
-      for(l = 0; l < level._osc_rbs.size; l++) {
+      for (l = 0; l < level._osc_rbs.size; l++) {
         level._osc_rbs[l].cover.angles = level._osc_rbs[l].cover_close;
-        level._osc_rbs[l].cover playSound("evt_sq_rbs_close");
+        level._osc_rbs[l].cover playsound("evt_sq_rbs_close");
         if(l == 0) {
-          level._osc_rbs[l].cover playSound("evt_sq_rbs_button_complete");
+          level._osc_rbs[l].cover playsound("evt_sq_rbs_button_complete");
         }
       }
     }
@@ -396,7 +396,7 @@ function moon_access_granted(int_hits) {
 function moon_hit_reaction() {
   level endon("end_game");
   level endon(level._osc_flags[9]);
-  while(!level flag::get(level._osc_flags[9])) {
+  while (!level flag::get(level._osc_flags[9])) {
     self waittill("trigger", who);
     if(self._hit_already) {
       wait(0.1);
@@ -404,10 +404,10 @@ function moon_hit_reaction() {
     }
     if(zombie_utility::is_player_valid(who)) {
       level flag::set(level._osc_flags[8]);
-      self playSound("evt_sq_rbs_button");
+      self playsound("evt_sq_rbs_button");
       self._active = spawn("script_model", self.origin);
-      self._active setModel("tag_origin");
-      playFXOnTag(level._effect["osc_button_glow"], self._active, "tag_origin");
+      self._active setmodel("tag_origin");
+      playfxontag(level._effect["osc_button_glow"], self._active, "tag_origin");
       self._hit_already = 1;
       level._osc_release++;
     }
@@ -417,44 +417,44 @@ function moon_hit_reaction() {
 function moon_keyhole() {
   level flag::wait_till(level._osc_flags[9]);
   level._osc_cap movez(-8, 1);
-  level._osc_cap playSound("evt_sq_rbs_open");
+  level._osc_cap playsound("evt_sq_rbs_open");
   level._osc_cap waittill("movedone");
   level flag::set(level._osc_flags[10]);
 }
 
 function hacker_debug(msg, color) {
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
-  while(true) {
+  while (true) {
     print3d(self.origin, msg, color, 1, 2, 10);
     wait(1);
   }
 }
 
 function play_moon_jolie_access_vox(who) {
-  for(i = 0; i < level._osc_rbs.size; i++) {
+  for (i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playsoundwithnotify("vox_mcomp_quest_step3_1", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");
-  if(isDefined(who)) {
+  if(isdefined(who)) {
     who thread zm_audio::create_and_play_dialog("eggs", "quest3", 9);
   }
 }
 
 function play_moon_pass_vox(who) {
   playsoundatposition("vox_mcomp_quest_step5_26", self.origin);
-  for(i = 0; i < level._osc_rbs.size; i++) {
+  for (i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playsoundwithnotify("vox_mcomp_quest_step5_26", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");
-  if(isDefined(who)) {
+  if(isdefined(who)) {
     who thread zm_audio::create_and_play_dialog("eggs", "quest3", 12);
   }
 }
 
 function comp_fail_vox() {
-  for(i = 0; i < level._osc_rbs.size; i++) {
+  for (i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playsoundwithnotify("vox_mcomp_quest_step5_8", "rbs_sounddone");
   }
   level._osc_rbs[0].cover waittill("rbs_sounddone");

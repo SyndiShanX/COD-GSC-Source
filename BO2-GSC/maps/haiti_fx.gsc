@@ -191,32 +191,28 @@ createfx_setup() {
   maps\haiti_anim::endings_anims();
   level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "") {
+  if(level.skipto_point == "")
     level.skipto_point = "e1_intro";
-  }
 
   maps\haiti::load_gumps();
   level thread createfx_control_room_closet();
 }
 
 createfx_control_room_closet() {
-  a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
+  a_m_destroyed = getentarray("control_room_destroyed", "targetname");
 
-  foreach(m_destroyed in a_m_destroyed) {
-    m_destroyed hide();
-  }
+  foreach(m_destroyed in a_m_destroyed)
+  m_destroyed hide();
 
   m_door = getent("trappedinthecloset", "targetname");
   m_door delete();
   level waittill("bomb_exploded");
 
-  foreach(m_destroyed in a_m_destroyed) {
-    m_destroyed show();
-  }
+  foreach(m_destroyed in a_m_destroyed)
+  m_destroyed show();
 
-  a_m_clean = getEntArray("control_room_clean", "targetname");
+  a_m_clean = getentarray("control_room_clean", "targetname");
 
-  foreach(m_clean in a_m_clean) {
-    m_clean delete();
-  }
+  foreach(m_clean in a_m_clean)
+  m_clean delete();
 }

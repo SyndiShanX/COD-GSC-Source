@@ -17,23 +17,20 @@ MoveCQB() {
   animscripts\run::changeWeaponStandRun();
   if(self.a.pose != "stand") {
     self clearAnim( % root, 0.2);
-    if(self.a.pose == "prone") {
+    if(self.a.pose == "prone")
       self ExitProneWrapper(1);
-    }
     self.a.pose = "stand";
   }
   self.a.movement = self.moveMode;
   self clearanim( % combatrun, 0.2);
   self thread CQBTracking();
   variation = getRandomIntFromSeed(self.a.runLoopCount, 2);
-  if(variation == 0) {
+  if(variation == 0)
     cqbWalkAnim = % run_CQB_F_search_v1;
-  } else {
+  else
     cqbWalkAnim = % run_CQB_F_search_v2;
-  }
-  if(self.movemode == "walk") {
+  if(self.movemode == "walk")
     cqbWalkAnim = % walk_CQB_F;
-  }
   rate = self.moveplaybackrate;
   self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, % walk_and_run_loops, 1, 0.3, rate);
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
@@ -47,9 +44,8 @@ MoveCQB() {
 
 CQBTracking() {
   self notify("want_cqb_tracking");
-  if(isDefined(self.cqb_track_thread)) {
+  if(isDefined(self.cqb_track_thread))
     return;
-  }
   self.cqb_track_thread = true;
   self endon("killanimscript");
   self endon("end_cqb_tracking");
@@ -93,24 +89,23 @@ DontCQBTrackUnlessWeMoveCQBAgain() {
 setupCQBPointsOfInterest() {
   level.cqbPointsOfInterest = [];
   pointents = getEntArray("cqb_point_of_interest", "targetname");
-  for(i = 0; i < pointents.size; i++) {
+  for (i = 0; i < pointents.size; i++) {
     level.cqbPointsOfInterest[i] = pointents[i].origin;
     pointents[i] delete();
   }
 }
 
 findCQBPointsOfInterest() {
-  if(isDefined(anim.findingCQBPointsOfInterest)) {
+  if(isDefined(anim.findingCQBPointsOfInterest))
     return;
-  }
   anim.findingCQBPointsOfInterest = true;
   if(!level.cqbPointsOfInterest.size) {
     return;
   }
-  while(1) {
+  while (1) {
     ai = getaiarray();
     waited = false;
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(isAlive(ai[i]) && ai[i] isCQBWalking()) {
         moving = (ai[i].a.movement != "stop");
         shootAtPos = ai[i] getShootAtPos();
@@ -122,22 +117,19 @@ findCQBPointsOfInterest() {
         }
         best = -1;
         bestdist = 1024 * 1024;
-        for(j = 0; j < level.cqbPointsOfInterest.size; j++) {
+        for (j = 0; j < level.cqbPointsOfInterest.size; j++) {
           point = level.cqbPointsOfInterest[j];
           dist = distanceSquared(point, lookAheadPoint);
           if(dist < bestdist) {
             if(moving) {
-              if(distanceSquared(point, shootAtPos) < 64 * 64) {
+              if(distanceSquared(point, shootAtPos) < 64 * 64)
                 continue;
-              }
               dot = vectorDot(vectorNormalize(point - shootAtPos), forward);
-              if(dot < 0.643 || dot > 0.966) {
+              if(dot < 0.643 || dot > 0.966)
                 continue;
-              }
             } else {
-              if(dist < 50 * 50) {
+              if(dist < 50 * 50)
                 continue;
-              }
             }
             if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
               continue;
@@ -146,18 +138,16 @@ findCQBPointsOfInterest() {
             best = j;
           }
         }
-        if(best < 0) {
+        if(best < 0)
           ai[i].cqb_point_of_interest = undefined;
-        } else {
+        else
           ai[i].cqb_point_of_interest = level.cqbPointsOfInterest[best];
-        }
         wait .05;
         waited = true;
       }
     }
-    if(!waited) {
+    if(!waited)
       wait .25;
-    }
   }
 }
 
@@ -165,11 +155,10 @@ CQBDebug() {
   self notify("end_cqb_debug");
   self endon("end_cqb_debug");
   self endon("death");
-  if(getdvar("scr_cqbdebug") == "") {
+  if(getdvar("scr_cqbdebug") == "")
     setdvar("scr_cqbdebug", "off");
-  }
   level thread CQBDebugGlobal();
-  while(1) {
+  while (1) {
     if(getdebugdvar("scr_cqbdebug") == "on" || getdebugdvarint("scr_cqbdebug") == self getentnum()) {
       if(isDefined(self.shootPos)) {
         line(self getShootAtPos(), self.shootPos, (1, 1, 1));
@@ -204,16 +193,15 @@ CQBDebug() {
 }
 
 CQBDebugGlobal() {
-  if(isDefined(level.cqbdebugglobal)) {
+  if(isDefined(level.cqbdebugglobal))
     return;
-  }
   level.cqbdebugglobal = true;
-  while(1) {
+  while (1) {
     if(getdebugdvar("scr_cqbdebug") != "on") {
       wait 1;
       continue;
     }
-    for(i = 0; i < level.cqbPointsOfInterest.size; i++) {
+    for (i = 0; i < level.cqbPointsOfInterest.size; i++) {
       print3d(level.cqbPointsOfInterest[i], ".", (.7, .7, 1), .7, 3);
     }
     wait .05;

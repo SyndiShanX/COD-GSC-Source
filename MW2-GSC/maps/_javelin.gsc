@@ -8,16 +8,15 @@
 
 PlayerJavelinAds() {
   //self --> the player
-  if(self playerads() < 1.0) {
+  if(self playerads() < 1.0)
     return false;
-  }
 
   weap = self getCurrentWeapon();
-  if(!IsSubStr(weap, "javelin")) {
+  if(!IsSubStr(weap, "javelin"))
     return false;
-  }
 
   return true;
+
 }
 
 InsideJavelinReticleNoLock(target) {
@@ -52,17 +51,15 @@ GetBestJavelinTarget() {
   targetsAll = target_getArray();
   targetsValid = [];
 
-  for(idx = 0; idx < targetsAll.size; idx++) {
-    if(self InsideJavelinReticleNoLock(targetsAll[idx])) {
+  for (idx = 0; idx < targetsAll.size; idx++) {
+    if(self InsideJavelinReticleNoLock(targetsAll[idx]))
       targetsValid[targetsValid.size] = targetsAll[idx];
-    }
 
     target_setOffscreenShader(targetsAll[idx], "javelin_hud_target_offscreen");
   }
 
-  if(targetsValid.size == 0) {
+  if(targetsValid.size == 0)
     return undefined;
-  }
 
   chosenEnt = targetsValid[0];
   if(targetsValid.size > 1) {
@@ -74,15 +71,12 @@ GetBestJavelinTarget() {
 
 IsStillValidTarget(ent) {
   //self --> the player
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
-  if(!target_isTarget(ent)) {
+  if(!target_isTarget(ent))
     return false;
-  }
-  if(!self InsideJavelinReticleLocked(ent)) {
+  if(!self InsideJavelinReticleLocked(ent))
     return false;
-  }
 
   return true;
 }
@@ -91,18 +85,16 @@ SetTargetTooClose(ent) {
   //self --> the player
   MINIMUM_JAV_DISTANCE = 1000;
 
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
   dist = Distance2D(self.origin, ent.origin);
 
   //PrintLn( "Jav Distance: ", dist );
 
-  if(dist < MINIMUM_JAV_DISTANCE) {
+  if(dist < MINIMUM_JAV_DISTANCE)
     self WeaponLockTargetTooClose(true);
-  } else {
+  else
     self WeaponLockTargetTooClose(false);
-  }
 }
 
 SetNoClearance() {
@@ -121,35 +113,32 @@ SetNoClearance() {
   checks[3] = (-40, 0, 40);
   checks[4] = (40, 0, 40);
 
-  if(GetDVar("missileDebugDraw") == "1") {
+  if(GetDVar("missileDebugDraw") == "1")
     debug = true;
-  } else {
+  else
     debug = false;
-  }
 
   playerAngles = self GetPlayerAngles();
-  forward = anglesToForward(playerAngles);
+  forward = AnglesToForward(playerAngles);
   right = AnglesToRight(playerAngles);
   up = AnglesToUp(playerAngles);
 
   origin = self.origin + (0, 0, ORIGINOFFSET_UP) + right * ORIGINOFFSET_RIGHT;
 
   obstructed = false;
-  for(idx = 0; idx < checks.size; idx++) {
+  for (idx = 0; idx < checks.size; idx++) {
     endpoint = origin + forward * DISTANCE + up * checks[idx][2] + right * checks[idx][0];
-    trace = bulletTrace(origin, endpoint, false, undefined);
+    trace = BulletTrace(origin, endpoint, false, undefined);
 
     if(trace["fraction"] < 1) {
       obstructed = true;
-      if(debug) {
+      if(debug)
         line(origin, trace["position"], COLOR_FAILED, 1);
-      } else {
+      else
         break;
-      }
     } else {
-      if(debug) {
+      if(debug)
         line(origin, trace["position"], COLOR_PASSED, 1);
-      }
     }
   }
 
@@ -163,7 +152,7 @@ JavelinCLULoop() {
 
   LOCK_LENGTH = 2000;
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     //-------------------------
@@ -200,11 +189,10 @@ JavelinCLULoop() {
       //print3D( level.javelinTarget.origin, "* locking...!", (.2, 1, .3), 1, 5 );
 
       timePassed = getTime() - level.javelinLockStartTime;
-      if(timePassed < LOCK_LENGTH) {
+      if(timePassed < LOCK_LENGTH)
         continue;
-      }
 
-      assert(isDefined(level.javelinTarget));
+      assert(isdefined(level.javelinTarget));
       self notify("stop_lockon_sound");
       level.javelinLockFinalized = true;
       self WeaponLockFinalize(level.javelinTarget);
@@ -215,9 +203,8 @@ JavelinCLULoop() {
     }
 
     bestTarget = self GetBestJavelinTarget();
-    if(!isDefined(bestTarget)) {
+    if(!isDefined(bestTarget))
       continue;
-    }
 
     level.javelinTarget = bestTarget;
     level.javelinLockStartTime = getTime();
@@ -231,22 +218,20 @@ JavelinToggleLoop() {
   //self --> the player
   self endon("death");
 
-  for(;;) {
-    while(!self PlayerJavelinAds()) {
+  for (;;) {
+    while (!self PlayerJavelinAds())
       wait 0.05;
-    }
     self thread JavelinCLULoop();
 
-    while(self PlayerJavelinAds()) {
+    while (self PlayerJavelinAds())
       wait 0.05;
-    }
     self notify("javelin_clu_off");
     self ClearCLUTarget();
   }
 }
 
 TraceConstantTest() {
-  for(;;) {
+  for (;;) {
     wait 0.05;
     SetNoClearance();
   }
@@ -273,15 +258,14 @@ JavelinFiredNotify()
 {
 	assert( self.classname == "player" );
 	
-	while( true )
+	while ( true )
 	{
 		self waittill( "weapon_fired" );
 
 		weap = self getCurrentWeapon();
 		IPrintLn( weap );
-		if( weap != "javelin" ) {
+		if( weap != "javelin" )
 			continue;
-		}
 	}
 }
 */
@@ -290,7 +274,7 @@ LoopLocalSeekSound(alias, interval) {
   //self --> the player
   self endon("stop_lockon_sound");
 
-  for(;;) {
+  for (;;) {
     self PlayLocalSound(alias);
     wait interval;
   }

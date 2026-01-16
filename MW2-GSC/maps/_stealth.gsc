@@ -19,5 +19,4 @@ main() {
   level.global_callbacks["_spawner_stealth_default"] = ::_spawner_stealth_default;
 
   //*****************************************			STEALTH SYSTEM CALLBACKS		*****************************************/
-
 }

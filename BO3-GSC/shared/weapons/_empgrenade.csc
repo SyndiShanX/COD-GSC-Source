@@ -16,13 +16,13 @@
 #namespace empgrenade;
 
 function autoexec __init__sytem__() {
-  system::register("empgrenade", &__init__, undefined, undefined);
+  system::register("empgrenade", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "empd", 1, 1, "int", &onempchanged, 0, 1);
-  clientfield::register("toplayer", "empd_monitor_distance", 1, 1, "int", &onempmonitordistancechanged, 0, 0);
-  callback::on_spawned(&on_player_spawned);
+  clientfield::register("toplayer", "empd", 1, 1, "int", & onempchanged, 0, 1);
+  clientfield::register("toplayer", "empd_monitor_distance", 1, 1, "int", & onempmonitordistancechanged, 0, 0);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function onempchanged(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -42,7 +42,7 @@ function startempeffects(localplayer, bwastimejump = 0) {
   filter::enable_filter_tactical(localplayer, 2);
   filter::set_filter_tactical_amount(localplayer, 2, 1);
   if(!bwastimejump) {
-    playSound(0, "mpl_plr_emp_activate", (0, 0, 0));
+    playsound(0, "mpl_plr_emp_activate", (0, 0, 0));
   }
   audio::playloopat("mpl_plr_emp_looper", (0, 0, 0));
 }
@@ -51,7 +51,7 @@ function stopempeffects(localplayer, oldval, bwastimejump = 0) {
   filter::init_filter_tactical(localplayer);
   filter::disable_filter_tactical(localplayer, 2);
   if(oldval != 0 && !bwastimejump) {
-    playSound(0, "mpl_plr_emp_deactivate", (0, 0, 0));
+    playsound(0, "mpl_plr_emp_deactivate", (0, 0, 0));
   }
   audio::stoploopat("mpl_plr_emp_looper", (0, 0, 0));
 }
@@ -98,8 +98,8 @@ function monitordistance(localclientnum) {
   min_static_value = getdvarfloat("ks_emp_fullscreen_minStaticValue");
   min_radius_max_static = getdvarfloat("ks_emp_fullscreen_minRadiusMaxStatic");
   max_radius_min_static = getdvarfloat("ks_emp_fullscreen_maxRadiusMinStatic");
-  if(isDefined(distance_to_closest_enemy_emp_ui_model)) {
-    while(true) {
+  if(isdefined(distance_to_closest_enemy_emp_ui_model)) {
+    while (true) {
       max_static_value = getdvarfloat("");
       min_static_value = getdvarfloat("");
       min_radius_max_static = getdvarfloat("");

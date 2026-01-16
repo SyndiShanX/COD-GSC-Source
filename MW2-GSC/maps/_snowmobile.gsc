@@ -21,9 +21,8 @@ main(model, type) {
   build_team("allies");
   build_unload_groups(::Unload_Groups);
 
-  if(!isDefined(anim._effect)) {
+  if(!isDefined(anim._effect))
     anim._effect = [];
-  }
 
   anim._effect["snowmobile_leftground"] = loadfx("treadfx/bigair_snow_snowmobile_emitter");
   anim._effect["snowmobile_bumpbig"] = loadfx("treadfx/bigjump_land_snow_snowmobile");
@@ -31,6 +30,7 @@ main(model, type) {
   //	anim._effect[ "snowmobile_sway_left"	] = loadfx( "treadfx/leftturn_snow_snowmobile" );
   //	anim._effect[ "snowmobile_sway_right"	] = loadfx( "treadfx/rightturn_snow_snowmobile" );
   //	anim._effect[ "snowmobile_collision"	] = loadfx( "explosions/grenadeExp_snow" );
+
 }
 
 init_local() {
@@ -42,9 +42,8 @@ init_local() {
   self.steering = 0;
   self.update_time = -1;
 
-  if(!is_specialop()) {
+  if(!is_specialop())
     self thread do_steering();
-  }
 
   self.bigjump_timedelta = 500;
   self.event_time = -1;
@@ -74,7 +73,7 @@ init_local() {
 
   if(issubstr(self.vehicletype, "player")) {
     glock = spawn("script_model", (0, 0, 0));
-    glock setModel("viewmodel_glock");
+    glock setmodel("viewmodel_glock");
     glock linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     glock hideallparts();
   }
@@ -83,7 +82,7 @@ init_local() {
 watchVelocity() {
   self endon("death");
   vel = self Vehicle_GetVelocity();
-  for(;;) {
+  for (;;) {
     self.prevFrameVelocity = vel;
     vel = self Vehicle_GetVelocity();
     wait .05;
@@ -102,16 +101,15 @@ setRiderShooting() {
 }
 
 snowmobile_fx(fxName) {
-  if(isDefined(anim._effect[fxName])) {
-    playFXOnTag(anim._effect[fxName], self, "tag_deathfx");
-  }
+  if(isDefined(anim._effect[fxName]))
+    playFxOnTag(anim._effect[fxName], self, "tag_deathfx");
   //println( fxName );
 }
 
 listen_leftground() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("veh_leftground");
     self.event_time = gettime();
     self.event["jump"]["driver"] = true;
@@ -124,7 +122,7 @@ listen_leftground() {
 listen_landed() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("veh_landed");
     if(self.event_time + self.bigjump_timedelta < gettime()) {
       self.event["bump_big"]["driver"] = true;
@@ -143,7 +141,7 @@ listen_landed() {
 listen_jolt() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("veh_jolt", jolt);
     if(jolt[1] >= 0) {
       self.event["sway_left"]["driver"] = true;
@@ -162,11 +160,11 @@ listen_jolt() {
 listen_collision() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("veh_collision", collision, start_vel);
 
     foreach(rider in self.riders) {
-      if(isalive(rider) && !isDefined(rider.magic_bullet_shield)) {
+      if(isalive(rider) && !isdefined(rider.magic_bullet_shield)) {
         rider.specialDeathFunc = animscripts\snowmobile::snowmobile_collide_death;
         rider kill();
       }
@@ -183,7 +181,7 @@ do_steering() {
   self setanimknoball( % snowmobile, % root, 1, 0);
   self setanimlimited( % sm_turn, 1, 0);
 
-  for(;;) {
+  for (;;) {
     update_steering(self);
 
     if(self.steering_enable) {
@@ -204,6 +202,7 @@ do_steering() {
 }
 
 init_snowmobile_mount_anims() {
+
   level.snowmobile_mount_anims = [];
   level.snowmobile_mount_anims["snowmobile_passenger"] = [];
   level.snowmobile_mount_anims["snowmobile_driver"] = [];
@@ -220,6 +219,7 @@ init_snowmobile_mount_anims() {
     }
   }
 }
+
 
 set_vehicle_anims(positions) {
   return positions;
@@ -318,9 +318,8 @@ setanims() {
   init_snowmobile_mount_anims();
 
   positions = [];
-  for(i = 0; i < 2; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 2; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -330,6 +329,7 @@ setanims() {
 
   return positions;
 }
+
 
 unload_groups() {
   unload_groups = [];
@@ -342,6 +342,9 @@ unload_groups() {
 
   return unload_groups;
 }
+
+
+
 
 /*QUAKED script_vehicle_snowmobile (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

@@ -84,11 +84,10 @@ unload_bunker_gump() {
   flag_wait("bunker_exit_door_closed");
   clearallcorpses();
   flag_wait("woods_backbreaker_scene_complete");
-  a_e_coke = getEntArray("destructible_cocaine_bundles", "script_noteworthy");
+  a_e_coke = getentarray("destructible_cocaine_bundles", "script_noteworthy");
 
-  foreach(coke_bundle in a_e_coke) {
-    coke_bundle delete();
-  }
+  foreach(coke_bundle in a_e_coke)
+  coke_bundle delete();
 
   wait 1.0;
   load_gump("nicaragua_gump_josefina");
@@ -157,14 +156,13 @@ woods_backbreaker() {
   e_clip = getent("woods_backbreaker_clip", "targetname");
   e_clip linkto(level.woods, "tag_origin", (0, 0, 0), (0, 0, 0));
   level thread run_scene("woods_bunker_exit");
-  level.woods playSound("evt_mtl_door_kick");
+  level.woods playsound("evt_mtl_door_kick");
   level.woods thread woods_backbreaker_idle();
   trigger_wait("woods_backbreaker_player");
   level notify("player_left_bunker");
 
-  if(!is_mature()) {
+  if(!is_mature())
     level.player thread woods_backbreaker_mature_content_filter();
-  }
 
   run_scene("woods_backbreaker_player");
   flag_set("backbreaker_player_anim_complete");
@@ -297,19 +295,17 @@ bunker_exit_vo() {
 }
 
 backbreaker_vo() {
-  if(is_mature()) {
+  if(is_mature())
     level.player queue_dialog("maso_damn_woods_0", 0.5);
-  } else {
+  else
     level.player queue_dialog("maso_temper_woods_0", 0.5);
-  }
 }
 
 final_push_vo() {
-  if(is_mature()) {
+  if(is_mature())
     level.woods queue_dialog("wood_hustle_mason_up_t_0");
-  } else {
+  else
     level.woods queue_dialog("wood_hustle_mason_i_m_0");
-  }
 
   level.player queue_dialog("maso_slow_down_woods_0", 0.5);
   wait 2;
@@ -348,12 +344,11 @@ woods_scream_approach() {
 }
 
 mason_final_push_point_of_no_return_cleanup() {
-  a_t_firetriggers = getEntArray("fire_damage_trigger", "script_noteworthy");
+  a_t_firetriggers = getentarray("fire_damage_trigger", "script_noteworthy");
 
   foreach(trigger in a_t_firetriggers) {
-    if(isDefined(trigger)) {
+    if(isDefined(trigger))
       trigger delete();
-    }
   }
 
   clientnotify("bunker_lightflares_off");

@@ -48,44 +48,38 @@ endgame_vox() {
 }
 
 weapon_type_check_custom(weapon) {
-  if(!isDefined(self.entity_num)) {
+  if(!isDefined(self.entity_num))
     return "crappy";
-  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "m16_zm") {
+      if(weapon == "m16_zm")
         return "favorite";
-      } else if(weapon == "m16_gl_upgraded_zm") {
+      else if(weapon == "m16_gl_upgraded_zm")
         return "favorite_upgrade";
-      }
       break;
     case 1:
-      if(weapon == "fnfal_zm") {
+      if(weapon == "fnfal_zm")
         return "favorite";
-      } else if(weapon == "hk21_upgraded_zm") {
+      else if(weapon == "hk21_upgraded_zm")
         return "favorite_upgrade";
-      }
       break;
     case 2:
-      if(weapon == "ak74u_zm") {
+      if(weapon == "ak74u_zm")
         return "favorite";
-      } else if(weapon == "m14_upgraded_zm") {
+      else if(weapon == "m14_upgraded_zm")
         return "favorite_upgrade";
-      }
       break;
     case 3:
-      if(weapon == "spectre_zm") {
+      if(weapon == "spectre_zm")
         return "favorite";
-      } else if(weapon == "g11_lps_upgraded_zm") {
+      else if(weapon == "g11_lps_upgraded_zm")
         return "favorite_upgrade";
-      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded")) {
+  if(IsSubStr(weapon, "upgraded"))
     return "upgrade";
-  } else {
+  else
     return level.zombie_weapons[weapon].vox;
-  }
 }
 
 setup_music_egg() {
@@ -103,7 +97,7 @@ music_egg() {
   temp_ent playLoopSound("zmb_meteor_loop");
   player = self music_egg_wait();
   temp_ent stopLoopSound(1);
-  player playSound("zmb_meteor_activate");
+  player PlaySound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.meteor_counter = level.meteor_counter + 1;
   if(level.meteor_counter == 3) {
@@ -142,9 +136,8 @@ play_music_egg(player) {
   }
   wait(360);
   level.music_override = false;
-  if(level.music_round_override == false) {
+  if(level.music_round_override == false)
     level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
-  }
 }
 
 intro_vox_or_skit() {

@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_freezegun;
 
 autoexec __init__system__() {
@@ -24,13 +25,13 @@ _init_() {
   callback::on_ai_damage(&function_b65fd5ae);
   zombie_utility::add_zombie_gib_weapon_callback(#"ww_freezegun_t8", &function_3eedf19c, &function_3eedf19c);
   zombie_utility::add_zombie_gib_weapon_callback(#"ww_freezegun_t8_upgraded", &function_3eedf19c, &function_3eedf19c);
-  clientfield::register("actor", "" + # "hash_2f305a0bea20d6ed", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_757f891a37d3db00", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_26d3eeef96a2291e", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_32ec41222f58aa75", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_259cdeffe60fe48f", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_1aa3522b88c2b76f", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_5ad28d5f104a6e3b", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_2f305a0bea20d6ed", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_757f891a37d3db00", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_26d3eeef96a2291e", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_32ec41222f58aa75", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_259cdeffe60fe48f", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_1aa3522b88c2b76f", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_5ad28d5f104a6e3b", 1, 1, "int");
   namespace_9ff9f642::register_slowdown(#"freezegun_slowdown", 0.85, 10);
   namespace_9ff9f642::register_slowdown(#"hash_5a1a7bceb3b8fded", 0.65, 15);
   level.var_58e6238 = &mp_dom_flag_d_captured_byinterfaceattributes;
@@ -74,13 +75,13 @@ function_b65fd5ae(params) {
     self.var_4592c713 = 0;
   }
 
-  var_bdbde2d2 = # "freezegun_slowdown";
+  var_bdbde2d2 = #"freezegun_slowdown";
 
   if(self.var_4592c713 || params.weapon == level.w_freezegun_upgraded) {
-    var_bdbde2d2 = # "hash_5a1a7bceb3b8fded";
+    var_bdbde2d2 = #"hash_5a1a7bceb3b8fded";
   }
 
-  if(self.archetype != # "zombie_dog") {
+  if(self.archetype != #"zombie_dog") {
     self thread namespace_9ff9f642::slowdown(var_bdbde2d2);
     self thread slow_watcher(var_bdbde2d2);
   }
@@ -92,11 +93,11 @@ function_b65fd5ae(params) {
 
 slow_watcher(var_bdbde2d2) {
   self notify(#"hash_7898db449656ed5a");
-  self endon(#"death", # "hash_7898db449656ed5a");
+  self endon(#"death", #"hash_7898db449656ed5a");
   self.var_4592c713 = 1;
   n_wait = 10;
 
-  if(var_bdbde2d2 == # "hash_5a1a7bceb3b8fded") {
+  if(var_bdbde2d2 == #"hash_5a1a7bceb3b8fded") {
     n_wait = 15;
   }
 
@@ -151,42 +152,42 @@ freezegun_get_enemies_in_range(is_upgraded) {
     circle(end_pos, cylinder_radius, (1, 0, 0), 0, 0, 100);
   }
 
-  foreach(ai in a_targets) {
-    if(!isDefined(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "zombie_dog" && ai.archetype !== # "nova_crawler" || ai getteam() !== level.zombie_team || !isalive(ai)) {
-      continue;
+    foreach(ai in a_targets) {
+      if(!isDefined(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"zombie_dog" && ai.archetype !== #"nova_crawler" || ai getteam() !== level.zombie_team || !isalive(ai)) {
+        continue;
+      }
+
+      test_origin = ai getcentroid();
+      test_range_squared = distancesquared(view_pos, test_origin);
+
+      if(test_range_squared > freezegun_outer_range_squared) {
+        ai freezegun_debug_print("range", (1, 0, 0));
+        return;
+      }
+
+      normal = vectornormalize(test_origin - view_pos);
+      dot = vectordot(forward_view_angles, normal);
+
+      if(0 > dot) {
+        ai freezegun_debug_print("dot", (1, 0, 0));
+        continue;
+      }
+
+      radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
+
+      if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
+        ai freezegun_debug_print("cylinder", (1, 0, 0));
+        continue;
+      }
+
+      if(0 == ai damageconetrace(view_pos, self)) {
+        ai freezegun_debug_print("cone", (1, 0, 0));
+        continue;
+      }
+
+      level.freezegun_enemies[level.freezegun_enemies.size] = ai;
+      level.freezegun_enemies_dist_ratio[level.freezegun_enemies_dist_ratio.size] = (freezegun_outer_range_squared - test_range_squared) / (freezegun_outer_range_squared - freezegun_inner_range_squared);
     }
-
-    test_origin = ai getcentroid();
-    test_range_squared = distancesquared(view_pos, test_origin);
-
-    if(test_range_squared > freezegun_outer_range_squared) {
-      ai freezegun_debug_print("range", (1, 0, 0));
-      return;
-    }
-
-    normal = vectornormalize(test_origin - view_pos);
-    dot = vectordot(forward_view_angles, normal);
-
-    if(0 > dot) {
-      ai freezegun_debug_print("dot", (1, 0, 0));
-      continue;
-    }
-
-    radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
-
-    if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
-      ai freezegun_debug_print("cylinder", (1, 0, 0));
-      continue;
-    }
-
-    if(0 == ai damageconetrace(view_pos, self)) {
-      ai freezegun_debug_print("cone", (1, 0, 0));
-      continue;
-    }
-
-    level.freezegun_enemies[level.freezegun_enemies.size] = ai;
-    level.freezegun_enemies_dist_ratio[level.freezegun_enemies_dist_ratio.size] = (freezegun_outer_range_squared - test_range_squared) / (freezegun_outer_range_squared - freezegun_inner_range_squared);
-  }
 }
 
 freezegun_do_damage(is_upgraded, player, dist_ratio) {
@@ -203,8 +204,8 @@ function_4aa98d7d(is_upgraded) {
   end_pos = view_pos + vectorscale(var_6beec13a, var_61101445);
   var_6a748e6b = beamtrace(view_pos, end_pos, 0, self);
 
-  if(isDefined(var_6a748e6b[# "position"])) {
-    glassradiusdamage(var_6a748e6b[# "position"], 40, n_max_damage, n_min_damage);
+  if(isDefined(var_6a748e6b[#"position"])) {
+    glassradiusdamage(var_6a748e6b[#"position"], 40, n_max_damage, n_min_damage);
   }
 }
 
@@ -216,7 +217,7 @@ freezegun_do_shatter(params, shatter_trigger, crumple_trigger) {
   a_targets = getentitiesinradius(centroid, freezegun_get_shatter_range(is_upgraded), 15);
 
   foreach(ai in a_targets) {
-    if(!isDefined(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "zombie_dog" && ai.archetype !== # "nova_crawler" || ai getteam() !== level.zombie_team) {
+    if(!isDefined(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"zombie_dog" && ai.archetype !== #"nova_crawler" || ai getteam() !== level.zombie_team) {
       continue;
     }
 
@@ -240,7 +241,7 @@ freezegun_do_shatter(params, shatter_trigger, crumple_trigger) {
 }
 
 freezegun_wait_for_shatter(params, shatter_trigger, crumple_trigger) {
-  shatter_trigger endon(#"death", # "cleanup_freezegun_triggers");
+  shatter_trigger endon(#"death", #"cleanup_freezegun_triggers");
   self endon(#"death");
   wait 0.1;
   orig_attacker = params.eattacker;
@@ -265,7 +266,7 @@ freezegun_do_crumple(params, shatter_trigger, crumple_trigger) {
 }
 
 freezegun_wait_for_crumple(params, shatter_trigger, crumple_trigger) {
-  crumple_trigger endon(#"death", # "cleanup_freezegun_triggers");
+  crumple_trigger endon(#"death", #"cleanup_freezegun_triggers");
   self endon(#"death");
   wait 0.1;
   crumple_trigger waittill(#"trigger");
@@ -287,7 +288,7 @@ freezegun_run_skipped_death_events() {
 }
 
 freezegun_death(params) {
-  if(self.archetype === # "zombie_dog") {
+  if(self.archetype === #"zombie_dog") {
     self freezegun_run_skipped_death_events();
     return;
   }
@@ -440,6 +441,7 @@ freezegun_get_shatter_outer_damage(is_upgraded) {
 }
 
 freezegun_debug_print(msg, color) {
+
   if(!getdvarint(#"scr_freezegun_debug", 0)) {
     return;
   }
@@ -449,50 +451,51 @@ freezegun_debug_print(msg, color) {
   }
 
   print3d(self.origin + (0, 0, 60), msg, color, 1, 1, 40);
+
 }
 
 function_1cdfba74(is_upgraded) {
   if(is_upgraded) {
-    self clientfield::set("" + # "hash_26d3eeef96a2291e", 1);
+    self clientfield::set("" + #"hash_26d3eeef96a2291e", 1);
     self playSound(#"hash_3bed1320e59a493c");
     return;
   }
 
-  self clientfield::set("" + # "hash_2f305a0bea20d6ed", 1);
+  self clientfield::set("" + #"hash_2f305a0bea20d6ed", 1);
   self playSound(#"hash_3bed1320e59a493c");
 }
 
 function_c61abffb(is_upgraded) {
   if(is_upgraded) {
-    self clientfield::set("" + # "hash_32ec41222f58aa75", 1);
+    self clientfield::set("" + #"hash_32ec41222f58aa75", 1);
     self playSound(#"hash_55070bed4172e08c");
     return;
   }
 
-  self clientfield::set("" + # "hash_757f891a37d3db00", 1);
+  self clientfield::set("" + #"hash_757f891a37d3db00", 1);
   self playSound(#"hash_55070bed4172e08c");
 }
 
 function_cdcf36d9() {
-  self clientfield::set("" + # "hash_1aa3522b88c2b76f", 1);
+  self clientfield::set("" + #"hash_1aa3522b88c2b76f", 1);
 }
 
 function_1e71ac1e() {
-  self clientfield::set("" + # "hash_1aa3522b88c2b76f", 0);
+  self clientfield::set("" + #"hash_1aa3522b88c2b76f", 0);
 }
 
 function_aa09d4c6() {
-  self clientfield::set("" + # "hash_259cdeffe60fe48f", 1);
+  self clientfield::set("" + #"hash_259cdeffe60fe48f", 1);
 }
 
 function_95a1c464() {
-  self clientfield::set("" + # "hash_259cdeffe60fe48f", 0);
+  self clientfield::set("" + #"hash_259cdeffe60fe48f", 0);
 }
 
 function_cd5a6d8() {
-  self clientfield::set("" + # "hash_5ad28d5f104a6e3b", 1);
+  self clientfield::set("" + #"hash_5ad28d5f104a6e3b", 1);
 }
 
 function_7258958d() {
-  self clientfield::set("" + # "hash_5ad28d5f104a6e3b", 0);
+  self clientfield::set("" + #"hash_5ad28d5f104a6e3b", 0);
 }

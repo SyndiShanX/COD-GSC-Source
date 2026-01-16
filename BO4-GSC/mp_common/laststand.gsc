@@ -23,6 +23,7 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace laststand_mp;
 
 autoexec __init__system__() {
@@ -65,12 +66,12 @@ __init__() {
   callback::on_player_killed_with_params(&on_player_killed);
   callback::on_disconnect(&on_player_disconnect);
   level.var_701f2ed4 = [];
-  level.var_701f2ed4[# "axis"] = 0;
-  level.var_701f2ed4[# "allies"] = 0;
+  level.var_701f2ed4[#"axis"] = 0;
+  level.var_701f2ed4[#"allies"] = 0;
 
   level thread force_last_stand();
 
-  setdvar(#"g_revivetime", getgametypesetting(#"laststandrevivetime"));
+    setdvar(#"g_revivetime", getgametypesetting(#"laststandrevivetime"));
 }
 
 function_feb3e91d() {
@@ -87,7 +88,7 @@ function_eb8c0e47(callbackfunc) {
 
 function_414115a0(time, health) {
   tier = {
-    #time: time,
+    #time: time, 
     #health: health
   };
   level.var_e86679bd[level.var_e86679bd.size] = tier;
@@ -107,7 +108,7 @@ on_player_spawned() {
 }
 
 function_9f66e37a() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.enteredvehicle = 0;
 
   while(true) {
@@ -117,7 +118,7 @@ function_9f66e37a() {
 }
 
 function_4e612708() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     self waittill(#"exit_vehicle");
@@ -173,7 +174,7 @@ function_7ff2fc91() {
 }
 
 function_263a2944(prompt, var_a1258c6b) {
-  var_a1258c6b waittill(#"player_revived", # "disconnect", # "bled_out", # "death");
+  var_a1258c6b waittill(#"player_revived", #"disconnect", #"bled_out", #"death");
 
   if(isDefined(self)) {
     [[prompt]] - > close(self);
@@ -182,7 +183,7 @@ function_263a2944(prompt, var_a1258c6b) {
 }
 
 function_c025efba(prompt, var_a1258c6b) {
-  var_a1258c6b endon(#"player_revived", # "disconnect", # "bled_out", # "death");
+  var_a1258c6b endon(#"player_revived", #"disconnect", #"bled_out", #"death");
   self endon(#"disconnect");
 
   while(true) {
@@ -244,7 +245,7 @@ function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.laststandparams.bledout = 0;
   self.laststandparams.var_59b19c1b = 1;
 
-  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === # "planemortar") {
+  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === #"planemortar") {
     self.laststandparams.killcam_entity_info_cached = killcam::get_killcam_entity_info(attacker, einflictor, weapon);
   }
 }
@@ -272,7 +273,7 @@ function_67b38e11(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.laststandparams.vdir = vdir;
   self.laststandparams.shitloc = shitloc;
 
-  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === # "planemortar") {
+  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === #"planemortar") {
     self.laststandparams.killcam_entity_info_cached = killcam::get_killcam_entity_info(attacker, einflictor, weapon);
   }
 }
@@ -282,7 +283,7 @@ function_d5db8d2e(attacker, weapon) {
 }
 
 function_463b3f65() {
-  self endon(#"player_revived", # "death");
+  self endon(#"player_revived", #"death");
 
   while(true) {
     if(getdvarstring(#"scr_last_stand", "<dev string:x38>") == "<dev string:x3b>") {
@@ -307,7 +308,7 @@ force_last_stand() {
       eye = host getEye();
       dir *= 500;
       trace = bulletTrace(eye, eye + dir, 1, host);
-      target = trace[# "entity"];
+      target = trace[#"entity"];
 
       if(!isDefined(target) || !isplayer(target)) {
         target = host;
@@ -321,193 +322,195 @@ force_last_stand() {
   }
 }
 
-function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride) {
-  if(self laststand::player_is_in_laststand()) {
-    return;
-  }
-
-  self.var_60956d6 = self getcurrentweapon();
-  self function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc);
-
-  if(!isDefined(self.laststandcount)) {
-    self.laststandcount = 0;
-  }
-
-  self.laststandcount++;
-  self function_ecdd4b27();
-
-  if(isDefined(level.var_f7b64ada)) {
-    [[level.var_f7b64ada]]();
-  }
-
-  var_2066d96d = 1;
-  friendlies = getplayers(self.team);
-  var_90c1e72d = 0;
-
-  foreach(player in friendlies) {
-    if(player == self) {
-      continue;
+  function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride) {
+    if(self laststand::player_is_in_laststand()) {
+      return;
     }
 
-    if(isalive(player) && !player laststand::player_is_in_laststand()) {
-      var_2066d96d = 0;
-      var_90c1e72d = 1;
-      break;
-    }
-  }
+    self.var_60956d6 = self getcurrentweapon();
+    self function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc);
 
-  if(isDefined(level.skiplaststand) && level.skiplaststand) {
-    var_2066d96d = 1;
-  }
-
-  if(self isplayerswimming() || isDefined(self.enteredvehicle) && self.enteredvehicle) {
-    var_2066d96d = 1;
-  }
-
-  if(level.laststandlives && self.laststandcount > level.laststandlives) {
-    var_2066d96d = 1;
-  }
-
-  if(isDefined(self.last_valid_position) && self.last_valid_position[2] - self.origin[2] > 200) {
-    var_2066d96d = 1;
-  }
-
-  if(attacker === self) {
-    var_2066d96d = 1;
-  }
-
-  if(isDefined(self.usingremote)) {
-    var_2066d96d = 1;
-  }
-
-  if(level.var_8971cf67 && self.team == game.defenders) {
-    var_2066d96d = 1;
-  }
-
-  if(level.var_51e72062 && self.team == game.attackers) {
-    var_2066d96d = 1;
-  }
-
-  if(var_2066d96d) {
-    self undolaststand();
-    self.uselaststandparams = 1;
-    self function_6da86ae();
-    self suicide(smeansofdeath);
-
-    if(isDefined(self.var_d75a6ff5)) {
-      self.var_d75a6ff5.death = 1;
+    if(!isDefined(self.laststandcount)) {
+      self.laststandcount = 0;
     }
 
-    self function_1e8018b0();
+    self.laststandcount++;
+    self function_ecdd4b27();
 
-    if(!var_90c1e72d) {
-      foreach(player in friendlies) {
-        if(player != self && isalive(player) && player laststand::player_is_in_laststand()) {
-          player thread bleed_out();
-        }
+    if(isDefined(level.var_f7b64ada)) {
+      [
+        [level.var_f7b64ada]
+      ]();
+    }
+
+    var_2066d96d = 1;
+    friendlies = getplayers(self.team);
+    var_90c1e72d = 0;
+
+    foreach(player in friendlies) {
+      if(player == self) {
+        continue;
+      }
+
+      if(isalive(player) && !player laststand::player_is_in_laststand()) {
+        var_2066d96d = 0;
+        var_90c1e72d = 1;
+        break;
       }
     }
 
-    return;
-  }
-
-  obituary(self, attacker, level.weaponnone, "MOD_DOWNED");
-
-  if(isDefined(attacker) && isplayer(attacker)) {
-    if(util::function_fbce7263(attacker.team, self.team) && !function_7afe7d1e(attacker, self)) {
-      scoreevents::processscoreevent(#"downed_enemy", attacker, self, weapon);
+    if(isDefined(level.skiplaststand) && level.skiplaststand) {
+      var_2066d96d = 1;
     }
 
-    if(isDefined(level.var_dcc41ae)) {
-      [
-        [level.var_dcc41ae]
-      ](attacker, self, einflictor, weapon, smeansofdeath);
-    }
-  }
-
-  self.reviveprogress = 0;
-  self.var_2d19ce3c = 1;
-  level.var_701f2ed4[self.team]++;
-
-  foreach(player in friendlies) {
-    if(!player laststand::player_is_in_laststand()) {
-      player clientfield::set_player_uimodel("PlayerTeamLastLivesData.numPlayersDowned", level.var_701f2ed4[self.team]);
+    if(self isplayerswimming() || isDefined(self.enteredvehicle) && self.enteredvehicle) {
+      var_2066d96d = 1;
     }
 
-    var_13b99768 = player != self && isalive(player);
-
-    if((var_13b99768 || sessionmodeismultiplayergame()) && !player laststand::player_is_in_laststand()) {
-      player thread function_5de626dc(self);
+    if(level.laststandlives && self.laststandcount > level.laststandlives) {
+      var_2066d96d = 1;
     }
-  }
 
-  enemies = getplayers(util::getotherteam(self.team));
-
-  foreach(player in enemies) {
-    if(!player laststand::player_is_in_laststand()) {
-      player clientfield::set_player_uimodel("EnemyTeamLastLivesData.numPlayersDowned", level.var_701f2ed4[self.team]);
+    if(isDefined(self.last_valid_position) && self.last_valid_position[2] - self.origin[2] > 200) {
+      var_2066d96d = 1;
     }
-  }
 
-  self notify(#"entering_last_stand");
-  self allowjump(0);
-  self disableoffhandweapons();
-
-  self thread function_463b3f65();
-
-  self.health = 5;
-  self.laststand = 1;
-  self.meleeattackers = undefined;
-  callback::callback(#"on_player_laststand");
-  self function_d5db8d2e(attacker, weapon);
-
-  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
-    if(!self oob::isoutofbounds()) {
-      self revive_trigger_spawn();
+    if(attacker === self) {
+      var_2066d96d = 1;
     }
+
+    if(isDefined(self.usingremote)) {
+      var_2066d96d = 1;
+    }
+
+    if(level.var_8971cf67 && self.team == game.defenders) {
+      var_2066d96d = 1;
+    }
+
+    if(level.var_51e72062 && self.team == game.attackers) {
+      var_2066d96d = 1;
+    }
+
+    if(var_2066d96d) {
+      self undolaststand();
+      self.uselaststandparams = 1;
+      self function_6da86ae();
+      self suicide(smeansofdeath);
+
+      if(isDefined(self.var_d75a6ff5)) {
+        self.var_d75a6ff5.death = 1;
+      }
+
+      self function_1e8018b0();
+
+      if(!var_90c1e72d) {
+        foreach(player in friendlies) {
+          if(player != self && isalive(player) && player laststand::player_is_in_laststand()) {
+            player thread bleed_out();
+          }
+        }
+      }
+
+      return;
+    }
+
+    obituary(self, attacker, level.weaponnone, "MOD_DOWNED");
+
+    if(isDefined(attacker) && isplayer(attacker)) {
+      if(util::function_fbce7263(attacker.team, self.team) && !function_7afe7d1e(attacker, self)) {
+        scoreevents::processscoreevent(#"downed_enemy", attacker, self, weapon);
+      }
+
+      if(isDefined(level.var_dcc41ae)) {
+        [
+          [level.var_dcc41ae]
+        ](attacker, self, einflictor, weapon, smeansofdeath);
+      }
+    }
+
+    self.reviveprogress = 0;
+    self.var_2d19ce3c = 1;
+    level.var_701f2ed4[self.team]++;
+
+    foreach(player in friendlies) {
+      if(!player laststand::player_is_in_laststand()) {
+        player clientfield::set_player_uimodel("PlayerTeamLastLivesData.numPlayersDowned", level.var_701f2ed4[self.team]);
+      }
+
+      var_13b99768 = player != self && isalive(player);
+
+      if((var_13b99768 || sessionmodeismultiplayergame()) && !player laststand::player_is_in_laststand()) {
+        player thread function_5de626dc(self);
+      }
+    }
+
+    enemies = getplayers(util::getotherteam(self.team));
+
+    foreach(player in enemies) {
+      if(!player laststand::player_is_in_laststand()) {
+        player clientfield::set_player_uimodel("EnemyTeamLastLivesData.numPlayersDowned", level.var_701f2ed4[self.team]);
+      }
+    }
+
+    self notify(#"entering_last_stand");
+    self allowjump(0);
+    self disableoffhandweapons();
+
+    self thread function_463b3f65();
+
+      self.health = 5;
+    self.laststand = 1;
+    self.meleeattackers = undefined;
+    callback::callback(#"on_player_laststand");
+    self function_d5db8d2e(attacker, weapon);
+
+    if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
+      if(!self oob::isoutofbounds()) {
+        self revive_trigger_spawn();
+      }
+    }
+
+    self thread laststand_disable_player_weapons();
+    bleedout_time = getdvarfloat(#"player_laststandbleedouttime", 0);
+    var_969fabf4 = self.maxhealth;
+    var_b145f8cd = self.laststandcount - 1;
+
+    if(var_b145f8cd >= level.var_e86679bd.size) {
+      var_b145f8cd = level.var_e86679bd.size - 1;
+    }
+
+    var_e86679bd = level.var_e86679bd[var_b145f8cd];
+
+    if(isDefined(var_e86679bd)) {
+      bleedout_time = var_e86679bd.time;
+      var_969fabf4 = var_e86679bd.health;
+    }
+
+    self clientfield::set("laststand_bleed", 1);
+    self thread laststand_bleedout(bleedout_time, var_969fabf4);
+    self thread laststand_invulnerability();
+    demo::bookmark(#"player_downed", gettime(), self);
+    potm::bookmark(#"player_downed", gettime(), self);
+    self thread laststand::function_d4c9e1b5();
+    self thread auto_revive_on_notify();
+    self thread function_5ccd602d();
   }
-
-  self thread laststand_disable_player_weapons();
-  bleedout_time = getdvarfloat(#"player_laststandbleedouttime", 0);
-  var_969fabf4 = self.maxhealth;
-  var_b145f8cd = self.laststandcount - 1;
-
-  if(var_b145f8cd >= level.var_e86679bd.size) {
-    var_b145f8cd = level.var_e86679bd.size - 1;
-  }
-
-  var_e86679bd = level.var_e86679bd[var_b145f8cd];
-
-  if(isDefined(var_e86679bd)) {
-    bleedout_time = var_e86679bd.time;
-    var_969fabf4 = var_e86679bd.health;
-  }
-
-  self clientfield::set("laststand_bleed", 1);
-  self thread laststand_bleedout(bleedout_time, var_969fabf4);
-  self thread laststand_invulnerability();
-  demo::bookmark(#"player_downed", gettime(), self);
-  potm::bookmark(#"player_downed", gettime(), self);
-  self thread laststand::function_d4c9e1b5();
-  self thread auto_revive_on_notify();
-  self thread function_5ccd602d();
-}
 
 function_5ccd602d() {
-  self endon(#"player_revived", # "disconnect");
+  self endon(#"player_revived", #"disconnect");
   self waittill(#"death");
   self function_2907ce7a();
   self undolaststand();
 }
 
 laststand_disable_player_weapons() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self giveweapon(level.laststandweapon);
   self givemaxammo(level.laststandweapon);
   self switchtoweaponimmediate(level.laststandweapon, 1);
   self disableweaponcycling();
   self disableoffhandweapons();
-  self waittilltimeout(1, # "weapon_change_complete");
+  self waittilltimeout(1, #"weapon_change_complete");
   self weapons::detach_all_weapons();
 }
 
@@ -525,9 +528,9 @@ laststand_enable_player_weapons() {
 }
 
 laststand_clean_up_on_interrupt(playerbeingrevived) {
-  self endon(#"do_revive_ended_normally", # "disconnect");
+  self endon(#"do_revive_ended_normally", #"disconnect");
   revivetrigger = playerbeingrevived.revivetrigger;
-  playerbeingrevived waittill(#"disconnect", # "game_ended", # "death");
+  playerbeingrevived waittill(#"disconnect", #"game_ended", #"death");
 
   if(isDefined(playerbeingrevived)) {
     playerbeingrevived clientfield::set_player_uimodel("hudItems.laststand.beingRevived", 0);
@@ -545,7 +548,7 @@ laststand_clean_up_on_interrupt(playerbeingrevived) {
 }
 
 laststand_bleedout_damage() {
-  self endon(#"player_revived", # "disconnect", # "bled_out");
+  self endon(#"player_revived", #"disconnect", #"bled_out");
 
   while(true) {
     waitresult = self waittill(#"laststand_damage");
@@ -565,15 +568,15 @@ laststand_bleedout_damage() {
       self.var_1cc38de0 = 1;
       vattacker = isDefined(waitresult.eattacker) ? waitresult.eattacker : self;
       self.var_a1d415ee = {
-        #einflictor: waitresult.einflictor,
-        #attacker: waitresult.eattacker,
-        #attackerorigin: vattacker.origin,
-        #attackerangles: isplayer(vattacker) ? vattacker getplayerangles() : vattacker.angles,
-        #idamage: waitresult.idamage,
-        #smeansofdeath: waitresult.smeansofdeath,
-        #sweapon: waitresult.weapon,
-        #vdir: waitresult.vdir,
-        #shitloc: waitresult.shitloc,
+        #einflictor: waitresult.einflictor, 
+        #attacker: waitresult.eattacker, 
+        #attackerorigin: vattacker.origin, 
+        #attackerangles: isplayer(vattacker) ? vattacker getplayerangles() : vattacker.angles, 
+        #idamage: waitresult.idamage, 
+        #smeansofdeath: waitresult.smeansofdeath, 
+        #sweapon: waitresult.weapon, 
+        #vdir: waitresult.vdir, 
+        #shitloc: waitresult.shitloc, 
         #matchtime: function_f8d53445()
       };
       self notify(#"update_bleedout");
@@ -588,7 +591,7 @@ laststand_bleedout_damage() {
 }
 
 laststand_bleedout(bleedouttime, var_969fabf4) {
-  self endon(#"player_revived", # "player_bleedout", # "death");
+  self endon(#"player_revived", #"player_bleedout", #"death");
   self.var_84c0402e = bleedouttime;
   self.bleedout_time = bleedouttime;
   self.var_969fabf4 = var_969fabf4;
@@ -608,7 +611,7 @@ laststand_bleedout(bleedouttime, var_969fabf4) {
         var_9da219f5 = time + 1000;
       }
 
-      self waittilltimeout(float(var_9da219f5 - time) / 1000, # "update_bleedout");
+      self waittilltimeout(float(var_9da219f5 - time) / 1000, #"update_bleedout");
     }
 
     while(self.var_969fabf4 > 0 && isDefined(self.revivetrigger) && isDefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived == 1) {
@@ -625,7 +628,7 @@ laststand_bleedout(bleedouttime, var_969fabf4) {
 }
 
 laststand_invulnerability() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self enableinvulnerability();
   wait level.var_5c13c13f;
   self disableinvulnerability();
@@ -638,7 +641,7 @@ function_6da86ae() {
 }
 
 bleed_out() {
-  self endon(#"player_revived", # "death");
+  self endon(#"player_revived", #"death");
   util::wait_network_frame();
   self function_2907ce7a();
 
@@ -691,7 +694,7 @@ bleed_out() {
 }
 
 respawn_player_after_time(n_time_seconds) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   players = getplayers();
 
   if(players.size == 1) {
@@ -702,7 +705,7 @@ respawn_player_after_time(n_time_seconds) {
   level endon(#"objective_changed");
   wait n_time_seconds;
 
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     self thread globallogic_spawn::waitandspawnclient();
   }
 }
@@ -729,7 +732,7 @@ revive_trigger_spawn() {
 }
 
 revive_trigger_think() {
-  self endon(#"death", # "stop_revive_trigger");
+  self endon(#"death", #"stop_revive_trigger");
   level endon(#"game_ended");
 
   while(true) {
@@ -747,7 +750,7 @@ revive_trigger_think() {
       return;
     }
 
-    players = getplayers();
+      players = getplayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i].team != self.team) {
@@ -951,8 +954,8 @@ function_516a3bef(replace) {
 }
 
 function_c82a14d1(finisher) {
-  self endon(#"death", # "disconnect", # "finish_abort");
-  finisher endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect", #"finish_abort");
+  finisher endon(#"death", #"disconnect");
   waitresult = self waittill(#"contact");
   self flagsys::set(#"hash_40e3b09bdbcdac81");
   self notify(#"player_finished");
@@ -1184,7 +1187,7 @@ revive_do_revive(playerbeingrevived) {
 }
 
 auto_revive_on_notify() {
-  self endon(#"death", # "disconnect", # "player_revived");
+  self endon(#"death", #"disconnect", #"player_revived");
   waitresult = self waittill(#"auto_revive");
   auto_revive(waitresult.reviver);
 }
@@ -1361,14 +1364,14 @@ function_ecdd4b27() {
   }
 
   self.var_d75a6ff5 = {
-    #player_xuid: int(self getxuid(1)),
-    #start_time: gettime(),
-    #end_time: 0,
-    #damage: 0,
-    #death: 0,
-    #bleed_out: 0,
-    #var_d10f3b9a: 0,
-    #var_d733f8d7: 0,
+    #player_xuid: int(self getxuid(1)), 
+    #start_time: gettime(), 
+    #end_time: 0, 
+    #damage: 0, 
+    #death: 0, 
+    #bleed_out: 0, 
+    #var_d10f3b9a: 0, 
+    #var_d733f8d7: 0, 
     #var_35b89428: 0
   };
 }

@@ -4,15 +4,17 @@
 ****************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace death_zone;
 
 class cdeath_zone: cluielem {
+
   function set_shutdown_sec(localclientnum, value) {
     set_data(localclientnum, "shutdown_sec", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "death_zone");
+    cluielem::open(localclientnum, #"death_zone");
   }
 
   function function_fa582112(localclientnum) {

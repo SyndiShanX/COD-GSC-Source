@@ -120,7 +120,7 @@ dempsey_gersh_vox() {
   wait(5);
   player = maps\zombie_moon_sq::get_specific_player(0);
   if(isDefined(player)) {
-    player playSound("vox_plr_0_stupid_gersh");
+    player playsound("vox_plr_0_stupid_gersh");
   }
 }
 
@@ -129,9 +129,9 @@ sq_sc_switch() {
   flag_wait("first_tanks_charged");
   self waittill("triggered");
   self rotateroll(-90, .3);
-  self playSound("zmb_switch_flip");
+  self playsound("zmb_switch_flip");
   self waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("sq_knife_switch_fx", "targetname").origin);
+  PlayFX(level._effect["switch_sparks"], getstruct("sq_knife_switch_fx", "targetname").origin);
   wait(1);
   flag_set("sam_switch_thrown");
 }
@@ -178,13 +178,13 @@ richtofen_sam_vo() {
   if(!isDefined(richtofen)) {
     return;
   }
-  richtofen playSound("vox_plr_3_quest_step6_7", "line_spoken");
+  richtofen PlaySound("vox_plr_3_quest_step6_7", "line_spoken");
   richtofen waittill("line_spoken");
   targ = getstruct("sq_sam", "targetname");
   targ = getstruct(targ.target, "targetname");
   play_sound_in_space("vox_plr_4_quest_step6_10", targ.origin);
   if(isDefined(richtofen)) {
-    richtofen playSound("vox_plr_3_quest_step6_8", "line_spoken");
+    richtofen PlaySound("vox_plr_3_quest_step6_8", "line_spoken");
     richtofen waittill("line_spoken");
   }
   level.skit_vox_override = false;
@@ -221,7 +221,7 @@ play_sam_then_response_line() {
       break;
     }
   }
-  sam playSound("vox_plr_4_quest_step6_12", "linedone");
+  sam playsound("vox_plr_4_quest_step6_12", "linedone");
   sam waittill("linedone");
   if(!isDefined(sam)) {
     return;

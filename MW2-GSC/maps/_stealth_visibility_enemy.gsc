@@ -13,36 +13,32 @@ stealth_visibility_enemy_main() {
   self enemy_init();
 
   self thread enemy_threat_logic();
+
 }
 
 /************************************************************************************************************/
-
 /*													ENEMY LOGIC												*/
 /************************************************************************************************************/
-
 MIN_TIME_TO_LOSE_ENEMY = 20 * 1000;
 
 enemy_threat_logic() {
   self endon("death");
   self endon("pain_death");
 
-  while(1) {
+  while (1) {
     self ent_flag_wait("_stealth_enabled");
 
     self waittill("enemy");
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
-    if(!isalive(self.enemy)) {
+    if(!isalive(self.enemy))
       continue;
-    }
 
     if(!self stealth_group_spotted_flag()) {
-      if(!self enemy_alert_level_logic(self.enemy)) {
+      if(!self enemy_alert_level_logic(self.enemy))
         continue;
-      }
     } else {
       // if we hit this line it means we're not the first ones to find the enemy
       self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
@@ -54,7 +50,7 @@ enemy_threat_logic() {
     wait 10;
 
     // must not have gotten any event from enemy for MIN_TIME_TO_LOSE_ENEMY and must be out of maxVisibleDist
-    while(isDefined(self.enemy) && self ent_flag("_stealth_enabled")) {
+    while (isdefined(self.enemy) && self ent_flag("_stealth_enabled")) {
       time_past_last_event = gettime() - self lastKnownTime(self.enemy);
 
       if(MIN_TIME_TO_LOSE_ENEMY > time_past_last_event) {
@@ -62,21 +58,18 @@ enemy_threat_logic() {
         continue;
       }
 
-      if(distance(self.origin, self.enemy.origin) > self.enemy.maxVisibleDist) {
+      if(distance(self.origin, self.enemy.origin) > self.enemy.maxVisibleDist)
         break;
-      }
 
       wait .5;
     }
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
     //if we ever break out - if means everyone actually managed to hide...unbelievable
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy))
       enemy_alert_level_forget(self.enemy, 0);
-    }
 
     self clearenemy();
     self maps\_stealth_threat_enemy::enemy_alert_level_change("reset");
@@ -87,13 +80,13 @@ enemy_alert_level_logic_start_attacking(enemy) {
   //the first check means that a gun shot or something equally bad happened	
   //the second check is to see if you've been spotted already twice before	
   if(self ent_flag("_stealth_bad_event_listener") || enemy._stealth.logic.spotted_list[self.unique_id] > self._stealth.logic.alert_level.max_warnings) {
-    if(self ent_flag("_stealth_bad_event_listener")) {
+    /#
+    if(self ent_flag("_stealth_bad_event_listener"))
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because the reason was a bad_event_listener...ie a gunshot or something equally bad");
-    } else {
+    else
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because " + enemy.unique_id + " had been spotted more than the max_warning amount of " + self._stealth.logic.alert_level.max_warnings);
-    }
-
-    self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
+    # /
+      self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
     return true;
   }
 
@@ -104,21 +97,18 @@ enemy_recheck_time = 500;
 
 enemy_alert_level_logic(enemy) {
   // enemy is not stealthy one bit
-  if(!isDefined(enemy._stealth)) {
+  if(!isdefined(enemy._stealth))
     return true;
-  }
 
   //add this ai to this spotted list
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.unique_id])) {
+  if(!isdefined(enemy._stealth.logic.spotted_list[self.unique_id]))
     enemy._stealth.logic.spotted_list[self.unique_id] = 0;
-  }
 
-  while(1) {
+  while (1) {
     enemy._stealth.logic.spotted_list[self.unique_id]++;
 
-    if(enemy_alert_level_logic_start_attacking(enemy)) {
+    if(enemy_alert_level_logic_start_attacking(enemy))
       return true;
-    }
 
     //this makes the ai look smart by being aware of your presence
     number = enemy._stealth.logic.spotted_list[self.unique_id];
@@ -145,9 +135,8 @@ enemy_threat_set_spotted() {
 
   self[[self._stealth.logic.pre_spotted_func]]();
 
-  if(isDefined(enemy)) {
+  if(isdefined(enemy))
     level._stealth.group.spotted_enemy[self.script_stealthgroup] = enemy;
-  }
 
   self group_flag_set("_stealth_spotted");
 }
@@ -159,9 +148,8 @@ enemy_prespotted_func_default() {
 enemy_alert_level_waittime(enemy) {
   //this makes sure that if someone else spots you...then this quits earler
   //than the givin amount of time for the player to try and hide again
-  if(self stealth_group_corpse_flag() || self ent_flag("_stealth_bad_event_listener")) {
+  if(self stealth_group_corpse_flag() || self ent_flag("_stealth_bad_event_listener"))
     return;
-  }
 
   timefrac = distance(self.origin, enemy.origin) * .0005;
   waittime = level._stealth.logic.min_alert_level_duration + timefrac;
@@ -176,23 +164,19 @@ enemy_alert_level_waittime(enemy) {
 }
 
 /************************************************************************************************************/
-
 /*													EVENTS													*/
 /************************************************************************************************************/
-
 enemy_event_listeners_logic(type) {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self waittill(type, subtype, param); // subtype and param for debugging
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
-    if(self ent_flag_exist("_stealth_behavior_asleep") && self ent_flag("_stealth_behavior_asleep")) {
+    if(self ent_flag_exist("_stealth_behavior_asleep") && self ent_flag("_stealth_behavior_asleep"))
       continue;
-    }
 
     self ent_flag_set("_stealth_bad_event_listener");
   }
@@ -202,13 +186,13 @@ enemy_event_listeners_logic(type) {
 enemy_event_listeners_proc() {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self ent_flag_wait("_stealth_bad_event_listener");
 
     wait .65;
-    //this time is set so high because apparently the ai can take up to .5 seconds to
+    //this time is set so high because apparently the ai can take up to .5 seconds to 
     //detect you as an enemy after they have received an event listener...
-    //EDIT: after testing i've noticed that they still miss the event because they
+    //EDIT: after testing i've noticed that they still miss the event because they 
     //receive an enemy even after .65 seconds of receiving the event...but it's more
     //fun this way actually...to get away with it once in a while.
     self ent_flag_clear("_stealth_bad_event_listener");
@@ -228,12 +212,11 @@ enemy_event_category_awareness(type) {
   self endon("death");
   self endon("pain_death");
 
-  while(1) {
+  while (1) {
     self waittill(type, subtype, param);
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
     //
     // special check for dogs deleted from here, see revision history #15
@@ -244,13 +227,11 @@ enemy_event_category_awareness(type) {
         break;
 
       case "ai_event":
-        if(!isDefined(self._stealth.logic.event.aware_aievents[subtype])) {
+        if(!isdefined(self._stealth.logic.event.aware_aievents[subtype]))
           continue;
-        }
         //this makes sure that magic bullets and friendly bullets that don't cause an enemy notify don't cause guys to break out of animations	
-        if(subtype == "bulletwhizby" && (!isDefined(param.team) || param.team == self.team)) {
+        if(subtype == "bulletwhizby" && (!isdefined(param.team) || param.team == self.team))
           continue;
-        }
         // fall through
 
       default:
@@ -274,12 +255,11 @@ enemy_event_awareness(type) {
   //can reference it and see what awareness options it has
   self._stealth.logic.event.awareness_param[type] = true;
 
-  while(1) {
+  while (1) {
     self waittill(type, param);
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
     group_flag_set("_stealth_event");
     level thread enemy_event_handle_clear(self.script_stealthgroup);
@@ -328,18 +308,15 @@ event_awareness_waitclear_ai_proc() {
   waittillframeend; // make sure these flag's are set;
 
   check1 = false;
-  if(isDefined(self.ent_flag["_stealth_behavior_first_reaction"])) {
+  if(isdefined(self.ent_flag["_stealth_behavior_first_reaction"]))
     check1 = self ent_flag("_stealth_behavior_first_reaction");
-  }
 
   check2 = false;
-  if(isDefined(self.ent_flag["_stealth_behavior_reaction_anim"])) {
+  if(isdefined(self.ent_flag["_stealth_behavior_reaction_anim"]))
     check1 = self ent_flag("_stealth_behavior_reaction_anim");
-  }
 
-  if(!check1 && !check2) {
+  if(!check1 && !check2)
     return;
-  }
 
   self add_wait(::waittill_msg, "death");
   self add_wait(::waittill_msg, "going_back");
@@ -355,9 +332,8 @@ event_awareness_waitclear_ai_proc() {
   if(loop) {
     loop = false;
     foreach(actor in allies) {
-      if(distancesquared(self.origin, actor.origin) < distsquared) {
+      if(distancesquared(self.origin, actor.origin) < distsquared)
         continue;
-      }
       loop = true;
     }
     wait 1;
@@ -368,16 +344,14 @@ enemy_event_declare_to_team(type, name) {
   other = undefined;
   team = self.team;
 
-  while(1) {
-    if(!isalive(self)) {
+  while (1) {
+    if(!isalive(self))
       return;
-    }
 
     self waittill(type, var1, var2);
 
-    if(isalive(self) && !self ent_flag("_stealth_enabled")) {
+    if(isalive(self) && !self ent_flag("_stealth_enabled"))
       continue;
-    }
 
     switch (type) {
       case "death":
@@ -388,16 +362,14 @@ enemy_event_declare_to_team(type, name) {
         break;
     }
 
-    if(!isDefined(other)) {
+    if(!isdefined(other))
       continue;
-    }
 
-    if(isplayer(other) || (isDefined(other.team) && other.team != team)) {
+    if(isplayer(other) || (isdefined(other.team) && other.team != team))
       break;
-    }
   }
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     // in case of deletion
     return;
   }
@@ -406,34 +378,28 @@ enemy_event_declare_to_team(type, name) {
 
   check = int(level._stealth.logic.ai_event[name][level._stealth.logic.detection_level]);
 
-  for(i = 0; i < ai.size; i++) {
-    if(!isalive(ai[i])) {
+  for (i = 0; i < ai.size; i++) {
+    if(!isalive(ai[i]))
       continue;
-    }
-    if(!isDefined(ai[i]._stealth)) {
+    if(!isdefined(ai[i]._stealth))
       continue;
-    }
-    if(distance(ai[i].origin, self.origin) > check) {
+    if(distance(ai[i].origin, self.origin) > check)
       continue;
-    }
-    if(ai[i] ent_flag_exist("_stealth_behavior_asleep") && ai[i] ent_flag("_stealth_behavior_asleep")) {
+    if(ai[i] ent_flag_exist("_stealth_behavior_asleep") && ai[i] ent_flag("_stealth_behavior_asleep"))
       continue;
-    }
     ai[i] ent_flag_set("_stealth_bad_event_listener");
   }
 }
 
 /************************************************************************************************************/
-
 /*													SETUP													*/
 /************************************************************************************************************/
-
 enemy_init() {
-  assertex(!isDefined(self._stealth), "you called maps\_stealth_logic::enemy_init() twice on the same ai");
+  assertex(!isdefined(self._stealth), "you called maps\_stealth_logic::enemy_init() twice on the same ai");
 
   self clearenemy();
-  self._stealth = spawnStruct();
-  self._stealth.logic = spawnStruct();
+  self._stealth = spawnstruct();
+  self._stealth.logic = spawnstruct();
 
   self ent_flag_init("_stealth_enabled");
   self ent_flag_set("_stealth_enabled");
@@ -448,11 +414,10 @@ enemy_init() {
   self group_flag_init("_stealth_found_corpse");
 
   self group_add_to_global_list();
-  if(!isDefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup])) {
+  if(!isdefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup]))
     level._stealth.behavior.sound["spotted"][self.script_stealthgroup] = false;
-  }
 
-  self._stealth.logic.alert_level = spawnStruct();
+  self._stealth.logic.alert_level = spawnstruct();
   self._stealth.logic.alert_level.max_warnings = 0;
   self enemy_alert_level_default_pre_spotted_func();
 
@@ -462,7 +427,7 @@ enemy_init() {
 enemy_event_listeners_init() {
   self ent_flag_init("_stealth_bad_event_listener");
 
-  self._stealth.logic.event = spawnStruct();
+  self._stealth.logic.event = spawnstruct();
 
   self addAIEventListener("grenade danger");
   self addAIEventListener("gunshot");
@@ -480,7 +445,7 @@ enemy_event_listeners_init() {
 
   self._stealth.logic.event.awareness_param = [];
 
-  //a lot of these overlap with event listeners - because even though the event
+  //a lot of these overlap with event listeners - because even though the event 
   //listeners above will cause a spotted state - we still want to know
   //why the ai got an enemy and perhaps do specific animations based on that	
 
@@ -494,10 +459,12 @@ enemy_event_listeners_init() {
   self thread enemy_event_category_awareness("awareness_alert_level"); // this is actually notified in this script
   self thread enemy_event_category_awareness("awareness_corpse"); // this is called from corpse
 
+  /#
   //these are for extra debug prints
   self thread enemy_event_debug_print("awareness_alert_level");
   self thread enemy_event_debug_print("awareness_corpse");
   self thread enemy_event_debug_print("ai_event");
+  # /
 }
 
 enemy_alert_level_set_pre_spotted_func(func) {

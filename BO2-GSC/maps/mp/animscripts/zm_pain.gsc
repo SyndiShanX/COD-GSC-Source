@@ -16,7 +16,6 @@ main() {
     return;
   }
 
-  if(self.a.disablepain) {
+  if(self.a.disablepain)
     return;
-  }
 }

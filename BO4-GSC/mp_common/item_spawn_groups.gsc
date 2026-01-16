@@ -6,6 +6,7 @@
 #include script_cb32d07c95e5628;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
+
 #namespace item_spawn_group;
 
 setup(seedvalue, reset = 1) {

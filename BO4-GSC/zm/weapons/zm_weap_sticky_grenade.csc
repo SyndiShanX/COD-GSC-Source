@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace sticky_grenade;
 
 autoexec __init__system__() {
@@ -14,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __main__() {
-  level._effect[# "grenade_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"grenade_light"] = #"weapon/fx8_equip_light_os";
 }
 
 spawned(localclientnum) {
@@ -35,13 +36,13 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playSound(localclientnum, # "wpn_semtex_alert");
+    self playSound(localclientnum, #"wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
   }
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "grenade_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"grenade_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

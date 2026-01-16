@@ -37,7 +37,7 @@ function tesla_discharge_mechanic() {
   self endon("tesla_discharge_mechanic");
   self notify("tesla_discharge_mechanic");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self.tesla_discharge = 1;
     self waittill("tesla_discharged");
     self.tesla_discharge = 0;
@@ -46,7 +46,7 @@ function tesla_discharge_mechanic() {
 }
 
 function tesla_ok_to_discharge(player) {
-  if(!isDefined(player.tesla_discharge)) {
+  if(!isdefined(player.tesla_discharge)) {
     return true;
   }
   if(player.tesla_discharge == 0) {
@@ -62,7 +62,7 @@ function tesla_damage_init(player) {
   if(!tesla_ok_to_discharge(player)) {
     return;
   }
-  if(isDefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
+  if(isdefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
     return;
   }
   player.tesla_enemies = undefined;
@@ -70,7 +70,7 @@ function tesla_damage_init(player) {
   player.tesla_powerup_dropped = 0;
   player notify("tesla_discharged");
   self thread namespace_eaa992c::function_285a2999("tesla_shock");
-  if(!(isDefined(self.boss) && self.boss)) {
+  if(!(isdefined(self.boss) && self.boss)) {
     self tesla_arc_damage(self, player, 0);
   }
   player.tesla_enemies_hit = 0;
@@ -84,11 +84,11 @@ function tesla_arc_damage(source_enemy, player, arc_num) {
   enemies = tesla_get_enemies_in_area(self gettagorigin("j_head"), level.doa.rules.tesla_radius_start - radius_decay, player);
   tesla_flag_hit(enemies, 1);
   self thread tesla_do_damage(source_enemy, arc_num, player);
-  for(i = 0; i < enemies.size; i++) {
+  for (i = 0; i < enemies.size; i++) {
     if(enemies[i] == self) {
       continue;
     }
-    if(isDefined(enemies[i].boss) && enemies[i].boss == 1) {
+    if(isdefined(enemies[i].boss) && enemies[i].boss == 1) {
       continue;
     }
     if(tesla_end_arc_damage(arc_num + 1, player.tesla_enemies_hit)) {
@@ -117,18 +117,18 @@ function tesla_end_arc_damage(arc_num, enemies_hit_num) {
 function tesla_get_enemies_in_area(origin, distance, player) {
   distance_squared = distance * distance;
   enemies = [];
-  if(!isDefined(player.tesla_enemies)) {
+  if(!isdefined(player.tesla_enemies)) {
     player.tesla_enemies = getaispeciesarray("axis", "all");
     player.tesla_enemies = util::get_array_of_closest(origin, player.tesla_enemies);
   }
   zombies = player.tesla_enemies;
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(!isDefined(zombies[i])) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(!isdefined(zombies[i])) {
         continue;
       }
       test_origin = zombies[i] gettagorigin("j_head");
-      if(isDefined(zombies[i].zombie_tesla_hit) && zombies[i].zombie_tesla_hit == 1) {
+      if(isdefined(zombies[i].zombie_tesla_hit) && zombies[i].zombie_tesla_hit == 1) {
         continue;
       }
       if(distancesquared(origin, test_origin) > distance_squared) {
@@ -144,11 +144,11 @@ function tesla_get_enemies_in_area(origin, distance, player) {
 }
 
 function tesla_flag_hit(enemy, hit) {
-  if(!isDefined(enemy)) {
+  if(!isdefined(enemy)) {
     return;
   }
   if(isarray(enemy)) {
-    for(i = 0; i < enemy.size; i++) {
+    for (i = 0; i < enemy.size; i++) {
       enemy[i].zombie_tesla_hit = hit;
     }
   } else {
@@ -162,19 +162,19 @@ function tesla_do_damage(source_enemy, arc_num, player) {
   if(timetowait > 0) {
     wait(timetowait);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(source_enemy) && source_enemy != self) {
+  if(isdefined(source_enemy) && source_enemy != self) {
     source_enemy tesla_play_arc_fx(self);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   self.tesla_death = 1;
   self thread tesla_play_death_fx(arc_num);
   origin = player.origin;
-  if(isDefined(source_enemy) && source_enemy != self) {
+  if(isdefined(source_enemy) && source_enemy != self) {
     origin = source_enemy.origin;
   }
   if(self.archetype == "zombie") {
@@ -183,7 +183,7 @@ function tesla_do_damage(source_enemy, arc_num, player) {
   if(self.archetype == "robot") {
     self namespace_fba031c8::function_7b3e39cb();
   }
-  if(isDefined(self.tesla_damage_func)) {
+  if(isdefined(self.tesla_damage_func)) {
     self[[self.tesla_damage_func]](origin, player);
     return;
   }
@@ -196,13 +196,15 @@ function tesla_play_death_fx(arc_num) {
   }
   self thread namespace_eaa992c::function_285a2999("tesla_shock");
   self thread namespace_1a381543::function_90118d8c("zmb_pwup_coco_impact");
-  if(isDefined(self.tesla_head_gib_func)) {
-    [[self.tesla_head_gib_func]]();
+  if(isdefined(self.tesla_head_gib_func)) {
+    [
+      [self.tesla_head_gib_func]
+    ]();
   }
 }
 
 function tesla_play_arc_fx(target) {
-  if(!isDefined(self) || !isDefined(target)) {
+  if(!isdefined(self) || !isdefined(target)) {
     wait(getdvarfloat("scr_arc_travel_time", 0.05));
     return;
   }
@@ -224,7 +226,7 @@ function tesla_play_arc_fx(target) {
   }
   fxorg = spawn("script_model", origin);
   fxorg.targetname = "tesla_trail";
-  fxorg setModel("tag_origin");
+  fxorg setmodel("tag_origin");
   fxorg thread namespace_eaa992c::function_285a2999("tesla_trail");
   fxorg thread namespace_1a381543::function_90118d8c("zmb_pwup_coco_bounce");
   fxorg moveto(target_origin, timemove);
@@ -237,23 +239,23 @@ function tesla_debug_arc(origin, distance) {
     return;
   }
   start = gettime();
-  while(gettime() < (start + 3000)) {
+  while (gettime() < (start + 3000)) {
     wait(0.05);
   }
 }
 
 function enemy_killed_by_tesla() {
-  return isDefined(self.tesla_death) && self.tesla_death;
+  return isdefined(self.tesla_death) && self.tesla_death;
 }
 
 function function_395fdfb8(guy, attacker) {
-  if(!isDefined(guy)) {
+  if(!isdefined(guy)) {
     return false;
   }
-  if(isDefined(guy.boss) && guy.boss) {
+  if(isdefined(guy.boss) && guy.boss) {
     return false;
   }
-  if(isDefined(guy.damagedby) && guy.damagedby == "tesla" || (isDefined(guy.tesla_death) && guy.tesla_death)) {
+  if(isdefined(guy.damagedby) && guy.damagedby == "tesla" || (isdefined(guy.tesla_death) && guy.tesla_death)) {
     return false;
   }
   if(tesla_ok_to_discharge(attacker)) {
@@ -267,7 +269,7 @@ function function_395fdfb8(guy, attacker) {
 function tesla_blockers_damage_trigger(player, note) {
   player endon(note);
   player endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("trigger", guy);
     if(level thread function_395fdfb8(guy, player)) {
       self.triggered = 1;
@@ -279,7 +281,7 @@ function tesla_blockers_damage_trigger(player, note) {
 function tesla_blockers_timeout(org, note) {
   self endon(note);
   self endon("disconnect");
-  org playLoopSound("zmb_pwup_coco_loop");
+  org playloopsound("zmb_pwup_coco_loop");
   level doa_utility::function_124b9a08();
   wait(self doa_utility::function_1ded48e6(level.doa.rules.var_37d05402));
   org stopsounds();
@@ -299,34 +301,34 @@ function function_ccf71744(org, vel) {
 function function_89843a06(player) {
   self endon("death");
   player waittill("disconnect");
-  for(i = 0; i < self.triggers.size; i++) {
-    if(isDefined(self.triggers[i])) {
+  for (i = 0; i < self.triggers.size; i++) {
+    if(isdefined(self.triggers[i])) {
       self.triggers[i] delete();
       self.objects[i] unlink();
     }
   }
   wait(2);
-  for(i = 0; i < self.objects.size; i++) {
-    if(isDefined(self.objects[i])) {
+  for (i = 0; i < self.objects.size; i++) {
+    if(isdefined(self.objects[i])) {
       self.objects[i] delete();
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
 
 function tesla_blockers_cleanup(org, note) {
   self util::waittill_any(note, "disconnect", "player_died", "kill_shield", "doa_playerVehiclePickup");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify(note);
   }
-  if(isDefined(org)) {
-    for(i = 0; i < org.triggers.size; i++) {
-      if(isDefined(org.triggers[i])) {
+  if(isdefined(org)) {
+    for (i = 0; i < org.triggers.size; i++) {
+      if(isdefined(org.triggers[i])) {
         org.triggers[i] delete();
         org.objects[i] unlink();
-        if(isDefined(self)) {
+        if(isdefined(self)) {
           vel = org.objects[i].origin - self.origin;
           org.objects[i] thread function_ccf71744(org, vel);
         }
@@ -334,17 +336,17 @@ function tesla_blockers_cleanup(org, note) {
     }
   }
   wait(2);
-  if(isDefined(org)) {
-    for(i = 0; i < org.objects.size; i++) {
-      if(isDefined(org.objects[i])) {
+  if(isdefined(org)) {
+    for (i = 0; i < org.objects.size; i++) {
+      if(isdefined(org.objects[i])) {
         org.objects[i] delete();
       }
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.doa.tesla_blockers = undefined;
   }
-  if(isDefined(org)) {
+  if(isdefined(org)) {
     org delete();
   }
 }
@@ -353,9 +355,9 @@ function tesla_blockers_deletion_monitors(org, note) {
   self endon(note);
   org endon("death");
   count = 0;
-  while(true) {
-    for(i = 0; i < org.objects.size; i++) {
-      if(isDefined(org.triggers[i]) && isDefined(org.triggers[i].triggered)) {
+  while (true) {
+    for (i = 0; i < org.objects.size; i++) {
+      if(isdefined(org.triggers[i]) && isdefined(org.triggers[i].triggered)) {
         org.triggers[i] delete();
         org.objects[i] delete();
         count++;
@@ -371,7 +373,7 @@ function tesla_blockers_deletion_monitors(org, note) {
 function tesla_blockers_move(org, note) {
   self endon(note);
   org endon("death");
-  while(true) {
+  while (true) {
     org rotateto(org.angles + vectorscale((0, 1, 0), 180), 1);
     wait(1);
   }
@@ -380,8 +382,8 @@ function tesla_blockers_move(org, note) {
 function tesla_blockers_fx(org) {
   self endon("death");
   self endon("disconnect");
-  for(i = 0; i < org.objects.size; i++) {
-    if(isDefined(org.objects[i])) {
+  for (i = 0; i < org.objects.size; i++) {
+    if(isdefined(org.objects[i])) {
       org.objects[i] thread namespace_eaa992c::function_285a2999("tesla_trail");
       org.objects[i] thread namespace_eaa992c::function_285a2999("tesla_ball");
     }
@@ -402,12 +404,12 @@ function tesla_blockers_update() {
   org.objects = [];
   def = doa_pickups::function_bac08508(6);
   self.doa.tesla_blockers = org;
-  org setModel("tag_origin");
+  org setmodel("tag_origin");
   org linkto(self, "tag_origin");
   if(mayspawnentity() && mayspawnfakeentity()) {
     tesla = spawn("script_model", self.origin);
     tesla.targetname = "teslaball1";
-    tesla setModel(level.doa.var_f6e22ab8);
+    tesla setmodel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
     tesla linkto(org, "tag_origin", (0, 60, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
@@ -421,7 +423,7 @@ function tesla_blockers_update() {
   if(mayspawnentity() && mayspawnfakeentity()) {
     tesla = spawn("script_model", self.origin);
     tesla.targetname = "teslaball2";
-    tesla setModel(level.doa.var_f6e22ab8);
+    tesla setmodel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
     tesla linkto(org, "tag_origin", (0, -60, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
@@ -435,7 +437,7 @@ function tesla_blockers_update() {
   if(mayspawnentity() && mayspawnfakeentity()) {
     tesla = spawn("script_model", self.origin);
     tesla.targetname = "teslaball3";
-    tesla setModel(level.doa.var_f6e22ab8);
+    tesla setmodel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
     tesla linkto(org, "tag_origin", (60, 0, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
@@ -449,7 +451,7 @@ function tesla_blockers_update() {
   if(mayspawnentity() && mayspawnfakeentity()) {
     tesla = spawn("script_model", self.origin);
     tesla.targetname = "teslaball4";
-    tesla setModel(level.doa.var_f6e22ab8);
+    tesla setmodel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
     tesla linkto(org, "tag_origin", (-60, 0, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);

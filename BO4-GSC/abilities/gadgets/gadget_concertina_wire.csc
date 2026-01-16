@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\deployable;
+
 #namespace concertina_wire;
 
 init_shared(var_4b51853b) {
@@ -92,7 +93,7 @@ function_6873a657(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_1c2930c7(localclientnum) {
   player = function_5c10bd79(localclientnum);
   player notify(#"hash_5c7dbac0591cb11f");
-  player endon(#"hash_5c7dbac0591cb11f", # "game_ended");
+  player endon(#"hash_5c7dbac0591cb11f", #"game_ended");
   level endon(#"game_ended");
   level.var_87226c31.var_aef370a9[localclientnum] = 1;
   var_ccfe777 = 0;

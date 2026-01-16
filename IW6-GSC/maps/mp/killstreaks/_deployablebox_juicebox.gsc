@@ -13,8 +13,8 @@ init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "deployable_vest_marker_mp";
   boxConfig.modelBase = "afr_mortar_ammo_01";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
-  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
+  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
   boxConfig.event = "deployable_juicebox_taken";
   boxConfig.streakName = BOX_TYPE;
   boxConfig.splashName = "used_deployable_juicebox";

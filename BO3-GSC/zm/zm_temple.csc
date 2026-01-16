@@ -87,8 +87,8 @@ function main() {
   load::main();
   _zm_weap_cymbal_monkey::init();
   level thread power_watch();
-  callback::on_localclient_connect(&temple_player_connect);
-  callback::on_localplayer_spawned(&temple_player_spawned);
+  callback::on_localclient_connect( & temple_player_connect);
+  callback::on_localplayer_spawned( & temple_player_spawned);
   level thread temple_light_model_swap_init();
   level thread sq_std_watcher();
   level._in_eclipse = 0;
@@ -107,22 +107,22 @@ function function_6ac83719() {
 }
 
 function function_80cb4231() {
-  clientfield::register("actor", "ragimpactgib", 21000, 1, "int", &ragdoll_impact_watch_start, 0, 0);
-  clientfield::register("scriptmover", "spiketrap", 21000, 1, "int", &spike_trap_move, 0, 0);
-  clientfield::register("scriptmover", "mazewall", 21000, 1, "int", &maze_wall_move, 0, 0);
-  clientfield::register("scriptmover", "weaksauce", 21000, 1, "int", &crystal_weaksauce_start, 0, 0);
-  clientfield::register("scriptmover", "hotsauce", 21000, 1, "int", &crystal_hotsauce_start, 0, 0);
-  clientfield::register("scriptmover", "sauceend", 21000, 1, "int", &crystal_sauce_end, 0, 0);
-  clientfield::register("scriptmover", "watertrail", 21000, 1, "int", &water_trail_monitor, 0, 0);
-  clientfield::register("toplayer", "floorrumble", 21000, 1, "int", &maze_floor_controller_rumble, 0, 0);
-  clientfield::register("toplayer", "minecart_rumble", 21000, 1, "int", &function_425904c0, 0, 0);
-  clientfield::register("world", "papspinners", 21000, 4, "int", &function_9fe44296, 0, 0);
-  clientfield::register("world", "water_wheel_right", 21000, 1, "int", &water_wheel_right, 0, 0);
-  clientfield::register("world", "water_wheel_left", 21000, 1, "int", &water_wheel_left, 0, 0);
-  clientfield::register("world", "waterfall_trap", 21000, 1, "int", &waterfall_watcher, 0, 0);
-  clientfield::register("world", "time_transition", 21000, 1, "int", &timetravel_watcher, 0, 1);
-  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", &player_legs_hide, 0, 0);
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("actor", "ragimpactgib", 21000, 1, "int", & ragdoll_impact_watch_start, 0, 0);
+  clientfield::register("scriptmover", "spiketrap", 21000, 1, "int", & spike_trap_move, 0, 0);
+  clientfield::register("scriptmover", "mazewall", 21000, 1, "int", & maze_wall_move, 0, 0);
+  clientfield::register("scriptmover", "weaksauce", 21000, 1, "int", & crystal_weaksauce_start, 0, 0);
+  clientfield::register("scriptmover", "hotsauce", 21000, 1, "int", & crystal_hotsauce_start, 0, 0);
+  clientfield::register("scriptmover", "sauceend", 21000, 1, "int", & crystal_sauce_end, 0, 0);
+  clientfield::register("scriptmover", "watertrail", 21000, 1, "int", & water_trail_monitor, 0, 0);
+  clientfield::register("toplayer", "floorrumble", 21000, 1, "int", & maze_floor_controller_rumble, 0, 0);
+  clientfield::register("toplayer", "minecart_rumble", 21000, 1, "int", & function_425904c0, 0, 0);
+  clientfield::register("world", "papspinners", 21000, 4, "int", & function_9fe44296, 0, 0);
+  clientfield::register("world", "water_wheel_right", 21000, 1, "int", & water_wheel_right, 0, 0);
+  clientfield::register("world", "water_wheel_left", 21000, 1, "int", & water_wheel_left, 0, 0);
+  clientfield::register("world", "waterfall_trap", 21000, 1, "int", & waterfall_watcher, 0, 0);
+  clientfield::register("world", "time_transition", 21000, 1, "int", & timetravel_watcher, 0, 1);
+  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", & player_legs_hide, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_waterfall_postfx", 21000, 32, "pstfx_waterfall_soft", 3);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_temple_eclipse", 21000, 1, "pstfx_temple_eclipse_in", 3);
 }
@@ -137,7 +137,7 @@ function maze_wall_move(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
 function delete_water_trail() {
   wait(1.2);
-  for(i = 0; i < self.fx_ents.size; i++) {
+  for (i = 0; i < self.fx_ents.size; i++) {
     self.fx_ents[i] delete();
   }
   self.fx_ents = undefined;
@@ -150,13 +150,13 @@ function water_trail_monitor(localclientnum, oldval, newval, bnewent, binitialsn
   if(newval) {
     players = getlocalplayers();
     self.fx_ents = [];
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       self.fx_ents[i] = spawn(i, (0, 0, 0), "script_model");
-      self.fx_ents[i] setModel("tag_origin");
+      self.fx_ents[i] setmodel("tag_origin");
       self.fx_ents[i] linkto(self, "tag_origin");
-      playFXOnTag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
+      playfxontag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
     }
-  } else if(isDefined(self.fx_ents)) {
+  } else if(isdefined(self.fx_ents)) {
     self thread delete_water_trail();
   }
 }
@@ -168,7 +168,7 @@ function crystal_weaksauce_start(localclientnum, oldval, newval, bnewent, biniti
   if(!newval) {
     return;
   }
-  s = spawnStruct();
+  s = spawnstruct();
   s.fx = "fx_weak_sauce_trail";
   s.origin = self.origin + vectorscale((0, 0, 1), 134);
   level._crystal_sauce_start = s;
@@ -181,7 +181,7 @@ function crystal_hotsauce_start(localclientnum, oldval, newval, bnewent, binitia
   if(!newval) {
     return;
   }
-  s = spawnStruct();
+  s = spawnstruct();
   s.fx = "fx_hot_sauce_trail";
   s.origin = self.origin + vectorscale((0, 0, 1), 134);
   level._crystal_sauce_start = s;
@@ -202,8 +202,8 @@ function crystal_sauce_end(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function crystal_trail_runner(localclientnum, fx_name, dest) {
   println((((("" + fx_name) + "") + self.origin) + "") + dest);
-  playFXOnTag(localclientnum, level._effect[fx_name], self, "tag_origin");
-  self playLoopSound("evt_sq_bag_crystal_bounce_loop", 0.05);
+  playfxontag(localclientnum, level._effect[fx_name], self, "tag_origin");
+  self playloopsound("evt_sq_bag_crystal_bounce_loop", 0.05);
   self moveto(dest, 0.5);
   self waittill("movedone");
   self delete();
@@ -211,14 +211,14 @@ function crystal_trail_runner(localclientnum, fx_name, dest) {
 
 function crystal_sauce_monitor() {
   num_players = getlocalplayers().size;
-  while(true) {
+  while (true) {
     wait(0.016);
-    if(!isDefined(level._crystal_sauce_start) || !isDefined(level._crystal_sauce_end)) {
+    if(!isdefined(level._crystal_sauce_start) || !isdefined(level._crystal_sauce_end)) {
       continue;
     }
-    for(i = 0; i < num_players; i++) {
+    for (i = 0; i < num_players; i++) {
       e = spawn(i, level._crystal_sauce_start.origin, "script_model");
-      e setModel("tag_origin");
+      e setmodel("tag_origin");
       e thread crystal_trail_runner(i, level._crystal_sauce_start.fx, level._crystal_sauce_end);
     }
     level._crystal_sauce_start = undefined;
@@ -237,7 +237,7 @@ function timetravel_watcher(localclientnum, oldval, newval, bnewent, binitialsna
   if(newval) {
     level notify("db");
     level thread zm_temple_amb::function_e3a6a660(bnewent, binitialsnap, bwasdemojump);
-    var_4796f90 = isDefined(level._in_eclipse) && level._in_eclipse;
+    var_4796f90 = isdefined(level._in_eclipse) && level._in_eclipse;
     level._in_eclipse = 0;
     visionset_mgr::fog_vol_to_visionset_set_suffix("");
     level notify("time_travel", level._in_eclipse);
@@ -265,7 +265,7 @@ function timetravel_watcher(localclientnum, oldval, newval, bnewent, binitialsna
     setlitfogbank(localclientnum, -1, 1, 1);
     setworldfogactivebank(localclientnum, 2);
   }
-  if(!isDefined(level._sidequest_firsttime)) {
+  if(!isdefined(level._sidequest_firsttime)) {
     level._sidequest_firsttime = 0;
     return;
   }
@@ -275,7 +275,7 @@ function timetravel_watcher(localclientnum, oldval, newval, bnewent, binitialsna
 function function_bf1b3728(n_val, n_time) {
   level notify("hash_47d048e6");
   level endon("hash_47d048e6");
-  if(!isDefined(level.var_3766c3d3)) {
+  if(!isdefined(level.var_3766c3d3)) {
     level.var_3766c3d3 = 0;
   }
   if(level.var_3766c3d3 == n_val) {
@@ -288,7 +288,7 @@ function function_bf1b3728(n_val, n_time) {
     wait(0.5);
   }
   n_change = var_83a6ec14 / (n_time / 0.1);
-  while(level.var_3766c3d3 != n_val) {
+  while (level.var_3766c3d3 != n_val) {
     level.var_3766c3d3 = level.var_3766c3d3 + n_change;
     setdvar("r_skyTransition", level.var_3766c3d3);
     wait(0.1);
@@ -303,19 +303,19 @@ function function_7b0ba395(localclientnum) {
   var_efeac590 = 0;
   n_end_time = 2;
   player playrumblelooponentity(localclientnum, "tank_rumble");
-  while(isDefined(player) && var_efeac590 < n_end_time) {
+  while (isdefined(player) && var_efeac590 < n_end_time) {
     player earthquake(0.3, 0.1, player.origin, 100);
     var_efeac590 = var_efeac590 + 0.1;
     wait(0.1);
   }
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     player stoprumble(localclientnum, "tank_rumble");
   }
 }
 
 function start_generator_movement() {
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ent = getent(i, "power_generator", "targetname");
     ent thread generator_move();
   }
@@ -326,7 +326,7 @@ function generator_move() {
   rottime = 0.1;
   total = 0;
   self rotateroll(0 - offsetangle, rottime);
-  while(true) {
+  while (true) {
     self waittill("rotatedone");
     self rotateroll(offsetangle * 2, rottime);
     self waittill("rotatedone");
@@ -344,7 +344,7 @@ function player_legs_hide(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function water_wheel_right(clientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     wheel = getent(i, "water_wheel_right", "targetname");
     wheel thread rotatewheel(120, 2.2);
   }
@@ -352,7 +352,7 @@ function water_wheel_right(clientnum, oldval, newval, bnewent, binitialsnap, fie
 
 function water_wheel_left(clientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     wheel = getent(i, "water_wheel_left", "targetname");
     wheel thread rotatewheel(120, 1.8);
   }
@@ -362,18 +362,18 @@ function rotatewheel(rotate, time) {
   spinuptime = time - 0.5;
   self rotatepitch(rotate, time, spinuptime, 0.1);
   self waittill("rotatedone");
-  while(true) {
+  while (true) {
     self rotatepitch(rotate, time, 0, 0);
     self waittill("rotatedone");
   }
 }
 
 function disable_deadshot(i_local_client_num) {
-  while(!self hasdobj(i_local_client_num)) {
+  while (!self hasdobj(i_local_client_num)) {
     wait(0.05);
   }
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(self == players[i]) {
       self clearalternateaimparams();
     }
@@ -383,8 +383,8 @@ function disable_deadshot(i_local_client_num) {
 function water_gush_debug() {
   scale = 0.1;
   offset = (0, 0, 0);
-  dir = anglesToForward(self.angles);
-  for(i = 0; i < 5; i++) {
+  dir = anglestoforward(self.angles);
+  for (i = 0; i < 5; i++) {
     print3d(self.origin + offset, "", (60, 60, 255), 1, scale, 10);
     scale = scale * 1.7;
     offset = offset + (dir * 6);
@@ -393,8 +393,8 @@ function water_gush_debug() {
 
 function waterfall_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   targets = struct::get_array("sq_sad", "targetname");
-  for(i = 0; i < targets.size; i++) {
-    if(!isDefined(level._sq_std_status) || !isDefined(level._sq_std_status[i])) {
+  for (i = 0; i < targets.size; i++) {
+    if(!isdefined(level._sq_std_status) || !isdefined(level._sq_std_status[i])) {
       continue;
     }
     if(level._sq_std_status[i] == 0) {
@@ -412,16 +412,16 @@ function sq_std_watcher() {
   println("");
   targets = struct::get_array("sq_sad", "targetname");
   println(("" + targets.size) + "");
-  for(i = 0; i < targets.size; i++) {
+  for (i = 0; i < targets.size; i++) {
     targets[i] thread sq_std_struct_watcher(players.size);
   }
 }
 
 function sq_std_watch_for_restart(num_local_players) {
   level waittill("sr");
-  if(isDefined(level._sq_std_array[self.script_int - 1])) {
-    for(i = 0; i < (level._sq_std_array[self.script_int - 1].size); i++) {
-      if(isDefined(level._sq_std_array[self.script_int - 1][i])) {
+  if(isdefined(level._sq_std_array[self.script_int - 1])) {
+    for (i = 0; i < (level._sq_std_array[self.script_int - 1].size); i++) {
+      if(isdefined(level._sq_std_array[self.script_int - 1][i])) {
         level._sq_std_array[self.script_int - 1][i] delete();
       }
     }
@@ -434,32 +434,32 @@ function sq_std_watch_for_restart(num_local_players) {
 function sq_struct_debug() {
   level endon("sr");
   level endon("ksd");
-  while(true) {
+  while (true) {
     print3d(self.origin, "", vectorscale((1, 0, 0), 255), 1);
     wait(0.1);
   }
 }
 
 function sq_std_struct_watcher(num_local_players) {
-  if(!isDefined(level._sq_std_array)) {
+  if(!isdefined(level._sq_std_array)) {
     level._sq_std_array = [];
     level._sq_std_status = [];
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
       level._sq_std_status[i] = 0;
     }
   }
   level endon("sr");
   self thread sq_std_watch_for_restart(num_local_players);
-  while(true) {
+  while (true) {
     level waittill("S" + self.script_int);
     println("" + self.script_int);
     self thread sq_struct_debug();
     level._sq_std_status[self.script_int - 1] = 1;
     level._sq_std_array[self.script_int - 1] = [];
-    for(i = 0; i < num_local_players; i++) {
+    for (i = 0; i < num_local_players; i++) {
       e = spawn(i, self.origin, "script_model");
       e.angles = self.angles + vectorscale((1, 0, 0), 270);
-      e setModel("wpn_t7_spider_mine_world");
+      e setmodel("wpn_t7_spider_mine_world");
       level._sq_std_array[self.script_int - 1][level._sq_std_array[self.script_int - 1].size] = e;
     }
   }
@@ -469,7 +469,7 @@ function temple_player_spawned(localclientnum) {
   if(self != getlocalplayer(localclientnum)) {
     return;
   }
-  if(isDefined(self.var_1687ae46)) {
+  if(isdefined(self.var_1687ae46)) {
     return;
   }
   self.var_1687ae46 = 1;
@@ -505,25 +505,25 @@ function include_weapons() {
 }
 
 function _init_magic_box() {
-  level._custom_box_monitor = &temple_box_monitor;
+  level._custom_box_monitor = & temple_box_monitor;
   level._box_locations = array("waterfall_upper_chest", "blender_chest", "pressure_chest", "bridge_chest", "caves_water_chest", "power_chest", "caves1_chest", "caves2_chest", "caves3_chest");
-  callback::on_localclient_connect(&_init_indicators);
+  callback::on_localclient_connect( & _init_indicators);
   level.cachedinfo = [];
   level.initialized = [];
 }
 
 function _init_indicators(clientnum) {
   structs = struct::get_array("magic_box_indicator", "targetname");
-  for(i = 0; i < structs.size; i++) {
+  for (i = 0; i < structs.size; i++) {
     s = structs[i];
-    if(!isDefined(s.viewmodels)) {
+    if(!isdefined(s.viewmodels)) {
       s.viewmodels = [];
     }
     s.viewmodels[clientnum] = undefined;
   }
   level.initialized[clientnum] = 1;
   keys = getarraykeys(level.cachedinfo);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
     state = level.cachedinfo[key];
     temple_box_monitor(i, state, "");
@@ -531,7 +531,7 @@ function _init_indicators(clientnum) {
 }
 
 function temple_box_monitor(clientnum, state, oldstate) {
-  if(!isDefined(level.initialized[clientnum])) {
+  if(!isdefined(level.initialized[clientnum])) {
     level.cachedinfo[clientnum] = state;
     return;
   }
@@ -554,11 +554,11 @@ function temple_box_monitor(clientnum, state, oldstate) {
 
 function _delete_location(clientnum, location) {
   structs = struct::get_array(location, "script_noteworthy");
-  array::thread_all(structs, &_setup_view_model, clientnum, undefined);
+  array::thread_all(structs, & _setup_view_model, clientnum, undefined);
 }
 
 function _delete_all_locations(clientnum) {
-  for(i = 0; i < level._box_locations.size; i++) {
+  for (i = 0; i < level._box_locations.size; i++) {
     location = level._box_locations[i];
     _delete_location(clientnum, location);
   }
@@ -566,7 +566,7 @@ function _delete_all_locations(clientnum) {
 
 function _show_location(clientnum, location) {
   structs = struct::get_array(location, "script_noteworthy");
-  array::thread_all(structs, &_setup_view_model, clientnum, "zt_map_knife");
+  array::thread_all(structs, & _setup_view_model, clientnum, "zt_map_knife");
 }
 
 function _setup_location(clientnum, location) {
@@ -575,21 +575,21 @@ function _setup_location(clientnum, location) {
 }
 
 function _setup_view_model(clientnum, viewmodel) {
-  if(isDefined(self.viewmodels[clientnum])) {
+  if(isdefined(self.viewmodels[clientnum])) {
     self.viewmodels[clientnum] delete();
     self.viewmodels[clientnum] = undefined;
   }
-  if(isDefined(viewmodel)) {
+  if(isdefined(viewmodel)) {
     self.viewmodels[clientnum] = spawn(clientnum, self.origin, "script_model");
     self.viewmodels[clientnum].angles = self.angles;
-    self.viewmodels[clientnum] setModel(viewmodel);
+    self.viewmodels[clientnum] setmodel(viewmodel);
   }
 }
 
 function _random_location(clientnum) {
   level endon("location_set" + clientnum);
   index = 0;
-  while(true) {
+  while (true) {
     location = level._box_locations[index];
     _setup_location(clientnum, location);
     index++;
@@ -601,7 +601,7 @@ function _random_location(clientnum) {
 }
 
 function _all_locations(clientnum) {
-  for(i = 0; i < level._box_locations.size; i++) {
+  for (i = 0; i < level._box_locations.size; i++) {
     location = level._box_locations[i];
     _show_location(clientnum, location);
   }
@@ -609,7 +609,7 @@ function _all_locations(clientnum) {
 
 function _init_pap_indicators() {
   local_players = getlocalplayers();
-  for(index = 0; index < local_players.size; index++) {
+  for (index = 0; index < local_players.size; index++) {
     val = clientfield::get("papspinners");
     level _set_num_visible_spinners(index, level.var_e34b793e);
   }
@@ -630,35 +630,35 @@ function power(base, exp) {
 
 function _set_num_visible_spinners(clientnum, num) {
   println((("" + clientnum) + "") + num);
-  if(!isDefined(level.spinners)) {
+  if(!isdefined(level.spinners)) {
     level _init_pap_spinners(clientnum);
-  } else if(!isDefined(level.spinners[clientnum])) {
+  } else if(!isdefined(level.spinners[clientnum])) {
     level _init_pap_spinners(clientnum);
   }
-  for(i = 3; i >= 0; i--) {
+  for (i = 3; i >= 0; i--) {
     println((("" + i) + "") + clientnum);
-    assert(isDefined(level.spinners));
-    assert(isDefined(level.spinners[clientnum]));
-    assert(isDefined(level.spinners[clientnum][i]));
+    assert(isdefined(level.spinners));
+    assert(isdefined(level.spinners[clientnum]));
+    assert(isdefined(level.spinners[clientnum][i]));
     pow = power(2, i);
     if(num >= pow) {
       num = num - pow;
       println((((("" + clientnum) + "") + i) + "") + level.spinners[clientnum][i].size);
-      array::thread_all(level.spinners[clientnum][i], &spin_to_start);
+      array::thread_all(level.spinners[clientnum][i], & spin_to_start);
       continue;
     }
     println((((("" + clientnum) + "") + i) + "") + level.spinners[clientnum][i].size);
-    array::thread_all(level.spinners[clientnum][i], &spin_forever);
+    array::thread_all(level.spinners[clientnum][i], & spin_forever);
   }
 }
 
 function spike_trap_move_spikes(localclientnum, active) {
-  if(!isDefined(self.spears)) {
+  if(!isdefined(self.spears)) {
     self set_trap_spears(localclientnum);
   }
   spears = self.spears;
-  if(isDefined(spears)) {
-    for(i = 0; i < spears.size; i++) {
+  if(isdefined(spears)) {
+    for (i = 0; i < spears.size; i++) {
       playsound = i == 0;
       spears[i] thread spear_init(localclientnum);
       spears[i] thread spear_move(localclientnum, active, playsound);
@@ -667,11 +667,11 @@ function spike_trap_move_spikes(localclientnum, active) {
 }
 
 function set_trap_spears(localclientnum) {
-  allspears = getEntArray(localclientnum, "spear_trap_spear", "targetname");
+  allspears = getentarray(localclientnum, "spear_trap_spear", "targetname");
   self.spears = [];
-  for(i = 0; i < allspears.size; i++) {
+  for (i = 0; i < allspears.size; i++) {
     spear = allspears[i];
-    if(isDefined(spear.assigned) && spear.assigned) {
+    if(isdefined(spear.assigned) && spear.assigned) {
       continue;
     }
     delta = abs(self.origin[0] - spear.origin[0]);
@@ -683,7 +683,7 @@ function set_trap_spears(localclientnum) {
 }
 
 function spear_init(localclientnum) {
-  if(!isDefined(self.init) || !self.init) {
+  if(!isdefined(self.init) || !self.init) {
     self.movedistmin = 90;
     self.movedistmax = 120;
     self.start = self.origin;
@@ -699,13 +699,13 @@ function spear_move(localclientnum, active, playsound) {
     }
     movedist = randomfloatrange(self.movedistmin, self.movedistmax);
     endpos = self.start + (self.movedir * movedist);
-    playFX(localclientnum, level._effect["punji_dust"], endpos);
-    playSound(0, "evt_spiketrap", self.origin);
+    playfx(localclientnum, level._effect["punji_dust"], endpos);
+    playsound(0, "evt_spiketrap", self.origin);
     movetime = randomfloatrange(0.08, 0.22);
     self moveto(endpos, movetime);
   } else {
     if(playsound) {
-      playSound(0, "evt_spiketrap_retract", self.origin);
+      playsound(0, "evt_spiketrap_retract", self.origin);
     }
     movetime = randomfloatrange(0.1, 0.2);
     self moveto(self.start, movetime);
@@ -715,10 +715,10 @@ function spear_move(localclientnum, active, playsound) {
 function floating_boards_init() {
   boards = [];
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
-    boards = arraycombine(boards, getEntArray(i, "plank_water", "targetname"), 1, 0);
+  for (i = 0; i < players.size; i++) {
+    boards = arraycombine(boards, getentarray(i, "plank_water", "targetname"), 1, 0);
   }
-  array::thread_all(boards, &float_board);
+  array::thread_all(boards, & float_board);
 }
 
 function float_board() {
@@ -735,7 +735,7 @@ function board_bob() {
   movetime = randomfloatrange(3.5, 4.5);
   minz = self.start_origin[2] - dist;
   maxz = self.start_origin[2] + dist;
-  while(true) {
+  while (true) {
     toz = minz - self.origin[2];
     self movez(toz, movetime);
     self waittill("movedone");
@@ -746,7 +746,7 @@ function board_bob() {
 }
 
 function board_rotate() {
-  while(true) {
+  while (true) {
     yaw = randomfloatrange(-360, 360);
     self rotateyaw(yaw, randomfloatrange(60, 90));
     self waittill("rotatedone");
@@ -756,9 +756,9 @@ function board_rotate() {
 function board_move() {
   dist = randomfloatrange(20, 30);
   movetime = randomfloatrange(5, 10);
-  while(true) {
+  while (true) {
     yaw = randomfloatrange(0, 360);
-    tovector = anglesToForward((0, yaw, 0));
+    tovector = anglestoforward((0, yaw, 0));
     newloc = self.start_origin + (tovector * dist);
     tox = newloc[0] - self.origin[0];
     self movex(tox, movetime);
@@ -768,17 +768,17 @@ function board_move() {
 }
 
 function _init_pap_spinners(cnum) {
-  if(!isDefined(level.spinners)) {
+  if(!isdefined(level.spinners)) {
     level.spinners = [];
   }
   if(level.spinners.size <= cnum) {
     level.spinners[level.spinners.size] = array([], [], [], []);
   }
   println(("" + cnum) + "");
-  for(i = 0; i < level.spinners[cnum].size; i++) {
-    spinners = getEntArray(cnum, "pap_spinner" + (i + 1), "targetname");
+  for (i = 0; i < level.spinners[cnum].size; i++) {
+    spinners = getentarray(cnum, "pap_spinner" + (i + 1), "targetname");
     println((((("" + cnum) + "") + i) + "") + spinners.size);
-    array::thread_all(spinners, &init_spinner, i + 1);
+    array::thread_all(spinners, & init_spinner, i + 1);
     level.spinners[cnum][i] = spinners;
   }
 }
@@ -795,7 +795,7 @@ function spin_forever() {
   if(!level.power) {
     return;
   }
-  if(isDefined(self.spin_forever) && self.spin_forever) {
+  if(isdefined(self.spin_forever) && self.spin_forever) {
     return;
   }
   self.spin_forever = 1;
@@ -807,7 +807,7 @@ function spin_forever() {
   self start_spinner_sound();
   self rotateyaw(360, spintime, 0.25);
   self waittill("rotatedone");
-  while(true) {
+  while (true) {
     self rotateyaw(360, spintime);
     self waittill("rotatedone");
   }
@@ -831,7 +831,7 @@ function spin_to_start() {
   if(!level.power) {
     return;
   }
-  if(isDefined(self.spin_to_start) && self.spin_to_start) {
+  if(isdefined(self.spin_to_start) && self.spin_to_start) {
     return;
   }
   self.spin_forever = 0;
@@ -842,7 +842,7 @@ function spin_to_start() {
   endyaw = self.startangles[1];
   currentyaw = self.angles[1];
   deltayaw = endyaw - currentyaw;
-  while(deltayaw < 0) {
+  while (deltayaw < 0) {
     deltayaw = deltayaw + 360;
   }
   spintime = self spinner_get_spin_time();
@@ -856,14 +856,14 @@ function spin_to_start() {
 }
 
 function start_spinner_sound() {
-  self.var_3539b4ec = self playLoopSound(self.spin_sound);
+  self.var_3539b4ec = self playloopsound(self.spin_sound);
 }
 
 function stop_spinner_sound() {
-  if(isDefined(self.var_3539b4ec)) {
+  if(isdefined(self.var_3539b4ec)) {
     self stoploopsound(self.var_3539b4ec, 0.1);
   }
-  self playSound(0, self.spin_stop_sound);
+  self playsound(0, self.spin_stop_sound);
 }
 
 function temple_light_model_swap_init() {
@@ -873,20 +873,20 @@ function temple_light_model_swap_init() {
   wait(4.5);
   level notify("pl1");
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
-    light_models = getEntArray(i, "model_lights_on", "targetname");
-    for(x = 0; x < light_models.size; x++) {
+  for (i = 0; i < players.size; i++) {
+    light_models = getentarray(i, "model_lights_on", "targetname");
+    for (x = 0; x < light_models.size; x++) {
       light = light_models[x];
-      if(isDefined(light.script_string)) {
-        light setModel(light.script_string);
+      if(isdefined(light.script_string)) {
+        light setmodel(light.script_string);
         continue;
       }
       if(light.model == "p_ztem_power_hanging_light_off") {
-        light setModel("p_ztem_power_hanging_light");
+        light setmodel("p_ztem_power_hanging_light");
         continue;
       }
       if(light.model == "p_lights_cagelight02_off") {
-        light setModel("p_lights_cagelight02_on");
+        light setmodel("p_lights_cagelight02_on");
       }
     }
   }
@@ -909,7 +909,7 @@ function ragdoll_impact_watch(localclientnum) {
   prevorigin = self.origin;
   waitrealtime(waittime);
   firstloop = 1;
-  while(true) {
+  while (true) {
     vel = self.origin - prevorigin;
     speed = length(vel);
     if(speed < (prevspeed * 0.5) && prevspeed > (gibspeed * waittime)) {
@@ -930,7 +930,7 @@ function ragdoll_impact_watch(localclientnum) {
 
 function gib_ragdoll(localclientnum, hitdir) {
   if(util::is_mature()) {
-    playFX(localclientnum, level._effect["rag_doll_gib_mini"], self.origin, hitdir * -1);
+    playfx(localclientnum, level._effect["rag_doll_gib_mini"], self.origin, hitdir * -1);
   }
 }
 
@@ -949,7 +949,7 @@ function maze_floor_controller_rumble(localclientnum, oldval, newval, bnewent, b
 
 function maze_rumble_while_floor_shakes(int_client_num) {
   self endon("stop_maze_rumble");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self playrumbleonentity(int_client_num, "slide_rumble");
     wait(0.05);
   }

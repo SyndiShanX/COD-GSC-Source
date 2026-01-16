@@ -73,17 +73,17 @@ jeep_intro_setup() {
   s_elevator_light_attach_marker = getstruct("elevator_light_attach_marker", "targetname");
   m_elevator_light_attach_point = spawn_model("tag_origin", s_elevator_light_attach_marker.origin, s_elevator_light_attach_marker.angles);
   m_elevator_light_attach_point linkto(getent("docks_elevator", "targetname"), "tag_origin");
-  playFXOnTag(getfx("elevator_light"), m_elevator_light_attach_point, "tag_origin");
+  playfxontag(getfx("elevator_light"), m_elevator_light_attach_point, "tag_origin");
   level.vh_player_jeep = spawn("script_model", (0, 0, 0));
-  level.vh_player_jeep setModel("veh_iw_hummer_opentop");
+  level.vh_player_jeep setmodel("veh_iw_hummer_opentop");
   level.vh_player_jeep.animname = "player_jeep";
   level.vh_player_jeep.targetname = "player_jeep";
-  playFXOnTag(level._effect["jeep_spot_light"], level.vh_player_jeep, "tag_headlight_left");
-  playFXOnTag(level._effect["jeep_headlight"], level.vh_player_jeep, "tag_headlight_left");
+  playfxontag(level._effect["jeep_spot_light"], level.vh_player_jeep, "tag_headlight_left");
+  playfxontag(level._effect["jeep_headlight"], level.vh_player_jeep, "tag_headlight_left");
 }
 
 docks_magic_rpg_setup() {
-  a_triggers = getEntArray("docks_rpg", "targetname");
+  a_triggers = getentarray("docks_rpg", "targetname");
   array_thread(a_triggers, ::docks_magic_rpg_think);
 }
 
@@ -109,12 +109,12 @@ docks_container_moment() {
     wait 0.2;
   }
 
-  super_fly = getEntArray("super_fly_pdf", "script_noteworthy");
+  super_fly = getentarray("super_fly_pdf", "script_noteworthy");
 
   for(i = 0; i < super_fly.size; i++) {
     if(isai(super_fly[i])) {
       if(isDefined(super_fly[i])) {
-        playFXOnTag(level._effect["pdf_armstrong_fire_Fx"], super_fly[i], "tag_origin");
+        playfxontag(level._effect["pdf_armstrong_fire_Fx"], super_fly[i], "tag_origin");
         super_fly[i] startragdoll();
         super_fly[i] launchragdoll((180, 0, 150));
         break;
@@ -144,7 +144,7 @@ init_docks_container_pdf() {
 }
 
 jeep_crash_moments() {
-  a_foliage_crash_1 = getEntArray("foliage_crash_1", "targetname");
+  a_foliage_crash_1 = getentarray("foliage_crash_1", "targetname");
   flag_wait("jeep_fence_crash");
   level notify("fxanim_fence_break_start");
 }
@@ -167,9 +167,8 @@ jeep_intro_ride() {
   level.noriega.ignoreall = 1;
   enemies = getaiarray("axis");
 
-  for(i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++)
     enemies[i] delete();
-  }
 
   autosave_by_name("finish_driveby");
   colt_victim = simple_spawn("docks_colt_victims");
@@ -248,7 +247,7 @@ give_player_max_ammo() {
 }
 
 red_barrel_detect_damage() {
-  dam_trigger = getEntArray("drive_by_damage_trigger", "targetname");
+  dam_trigger = getentarray("drive_by_damage_trigger", "targetname");
   array_thread(dam_trigger, ::deal_damage_when_shot);
 }
 
@@ -265,9 +264,9 @@ deal_damage_when_shot() {
 
 docks_gate_ambush() {
   add_spawn_function_veh("docks_gate_turret_truck", ::init_docks_gate_turret_truck);
-  a_docks_gate_runners = getEntArray("docks_gate_runners", "targetname");
+  a_docks_gate_runners = getentarray("docks_gate_runners", "targetname");
   array_thread(a_docks_gate_runners, ::add_spawn_function, ::init_docks_frontgate_pdf);
-  a_docks_frontgate_pdf = getEntArray("docks_frontgate_pdf", "targetname");
+  a_docks_frontgate_pdf = getentarray("docks_frontgate_pdf", "targetname");
   array_thread(a_docks_frontgate_pdf, ::add_spawn_function, ::init_docks_frontgate_pdf);
   wait 2;
   simple_spawn("docks_frontgate_pdf");
@@ -350,9 +349,8 @@ challenge_docks_guards_speed_kill(str_notify) {
   flag_wait("docks_cleared");
   n_total_time = n_total_time + (gettime() - n_timer_start);
 
-  if(n_total_time < 15000) {
+  if(n_total_time < 15000)
     self notify(str_notify);
-  }
 }
 
 docks_elevator_wait_vo() {
@@ -388,9 +386,8 @@ elevator_ride() {
   level.player setlowready(1);
   a_end_scene_vehicles = spawn_vehicles_from_targetname("end_scene_vehicles");
 
-  foreach(vh_vehicle in a_end_scene_vehicles) {
-    vh_vehicle godon();
-  }
+  foreach(vh_vehicle in a_end_scene_vehicles)
+  vh_vehicle godon();
 
   setmusicstate("PANAMA_ELEVATOR");
   top_roll_door = getent("dock_top_roll_door", "targetname");
@@ -398,7 +395,7 @@ elevator_ride() {
   e_elevator setmovingplatformenabled(1);
   top_roll_door linkto(e_elevator);
   e_elevator_move_target = getstruct("docks_elevator_move_target", "targetname");
-  level.player playSound("evt_elevator_quad");
+  level.player playsound("evt_elevator_quad");
   e_elevator moveto(e_elevator_move_target.origin, 5.0);
   e_elevator waittill("movedone");
   level thread maps\createart\panama3_art::sniper();
@@ -423,11 +420,11 @@ open_bottom_elevator_door() {
   bottom_door_bottom = getent("dock_elevator_bottom_door_bottom", "targetname");
   bottom_door_top = getent("dock_elevator_bottom_door_top", "targetname");
   bottom_roll = getent("dock_bottom_roll_door", "targetname");
-  bottom_door_top playSound("evt_elevator_middoor");
+  bottom_door_top playsound("evt_elevator_middoor");
   bottom_door_bottom movez(-74, 2);
   bottom_door_top movez(74, 2);
   bottom_door_top waittill("movedone");
-  bottom_roll playSound("evt_elevator_topdoor");
+  bottom_roll playsound("evt_elevator_topdoor");
   bottom_roll movez(130, 4);
   bottom_roll waittill("movedone");
   elevator_door_clip = getent("elevator_player_clip", "targetname");
@@ -441,10 +438,10 @@ close_bottom_door_elevator() {
   elevator_door_clip = getent("elevator_player_clip", "targetname");
   trigger_wait("elevator_trigger_interior");
   elevator_door_clip trigger_on();
-  bottom_door_top playSound("evt_elevator_middoor");
+  bottom_door_top playsound("evt_elevator_middoor");
   bottom_door_bottom movez(74, 2);
   bottom_door_top movez(-74, 2);
-  bottom_roll playSound("evt_elevator_topdoor");
+  bottom_roll playsound("evt_elevator_topdoor");
   bottom_roll = getent("dock_bottom_roll_door", "targetname");
   bottom_roll movez(-130, 4);
   bottom_roll waittill("movedone");
@@ -457,11 +454,11 @@ open_top_elevator_door() {
   top_door_top = getent("dock_elevator_top_door_top", "targetname");
   top_roll = getent("dock_top_roll_door", "targetname");
   top_roll unlink();
-  top_door_top playSound("evt_elevator_middoor");
+  top_door_top playsound("evt_elevator_middoor");
   top_door_bottom movez(-74, 2);
   top_door_top movez(74, 2);
   top_door_bottom waittill("movedone");
-  top_roll playSound("evt_elevator_topdoor");
+  top_roll playsound("evt_elevator_topdoor");
   top_roll movez(130, 4);
   top_roll waittill("movedone");
 }
@@ -552,9 +549,8 @@ mason_damage_events(e_sniper_turret) {
 
   if(self is_fatal_shot()) {
     if(is_mature()) {
-      if(self.damagelocation == "helmet" || self.damagelocation == "neck") {
-        playFXOnTag(getfx("mason_fatal_blood"), self, "j_head");
-      }
+      if(self.damagelocation == "helmet" || self.damagelocation == "neck")
+        playfxontag(getfx("mason_fatal_blood"), self, "j_head");
     }
 
     self detach("c_usa_captured_mason_sack_clean", "j_helmet");
@@ -572,9 +568,8 @@ mason_damage_events(e_sniper_turret) {
 
     if(self is_fatal_shot()) {
       if(is_mature()) {
-        if(self.damagelocation == "helmet" || self.damagelocation == "neck") {
-          playFXOnTag(getfx("mason_fatal_blood"), self, "j_head");
-        }
+        if(self.damagelocation == "helmet" || self.damagelocation == "neck")
+          playfxontag(getfx("mason_fatal_blood"), self, "j_head");
       }
 
       self detach("c_usa_captured_mason_sack_clean", "j_helmet");
@@ -600,9 +595,8 @@ mason_damage_events(e_sniper_turret) {
 
 mason_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(!(str_hit_loc == "helmet" || str_hit_loc == "neck" || str_hit_loc == "torso_upper")) {
-    if(is_mature()) {
+    if(is_mature())
       self play_fx("mason_non_fatal_blood", v_point);
-    }
   }
 
   return n_damage;
@@ -627,9 +621,8 @@ sniper_guard_damage_fail() {
 }
 
 is_fatal_shot() {
-  if(self.damagelocation == "helmet" || self.damagelocation == "neck" || self.damagelocation == "head") {
+  if(self.damagelocation == "helmet" || self.damagelocation == "neck" || self.damagelocation == "head")
     return true;
-  }
 
   return false;
 }
@@ -643,18 +636,16 @@ betrayed_event() {
   wait 2;
   level thread screen_fade_in(0.5);
   end_scene("noriega_idle_woods_snipe");
-  soldier = getEntArray("sniper_guards_ai", "targetname");
+  soldier = getentarray("sniper_guards_ai", "targetname");
 
-  for(i = 0; i < soldier.size; i++) {
+  for(i = 0; i < soldier.size; i++)
     soldier[i] delete();
-  }
 
   level.menendez = init_hero("menendez");
   level thread run_scene_and_delete("betrayed_weapon_1");
 
-  if(is_mature()) {
+  if(is_mature())
     exploder(1001);
-  }
 
   run_scene_and_delete("betrayed");
   level thread run_scene_and_delete("betrayed_weapon_2");
@@ -715,29 +706,28 @@ init_for_menendez_scene() {
 
 swap_player_body_dmg1(e_player_body) {
   magicbullet("m1911_sp", level.noriega_betrayed_weapon gettagorigin("tag_flash"), e_player_body gettagorigin("J_Knee_LE"));
-  playFXOnTag(getfx("player_knee_shot_l"), e_player_body, "J_Knee_LE");
-  e_player_body setModel("c_usa_woods_panama_lower_dmg1_viewbody");
+  playfxontag(getfx("player_knee_shot_l"), e_player_body, "J_Knee_LE");
+  e_player_body setmodel("c_usa_woods_panama_lower_dmg1_viewbody");
   flag_set("docks_mason_dead_reveal");
 }
 
 swap_player_body_dmg2(e_player_body) {
   magicbullet("m1911_sp", level.noriega_betrayed_weapon gettagorigin("tag_flash"), e_player_body gettagorigin("J_Knee_RI"));
-  playFXOnTag(getfx("player_knee_shot_r"), e_player_body, "J_Knee_RI");
-  e_player_body setModel("c_usa_woods_panama_lower_dmg2_viewbody");
+  playfxontag(getfx("player_knee_shot_r"), e_player_body, "J_Knee_RI");
+  e_player_body setmodel("c_usa_woods_panama_lower_dmg2_viewbody");
 }
 
 swap_player_body_dmg3(e_player_body) {
-  a_sniper_guards = getEntArray("sniper_guards_ai", "targetname");
+  a_sniper_guards = getentarray("sniper_guards_ai", "targetname");
 
   foreach(e_guard in a_sniper_guards) {
-    if(e_guard.script_animname == "sniper_guard1_ai") {
+    if(e_guard.script_animname == "sniper_guard1_ai")
       e_sniper_guard = e_guard;
-    }
   }
 
   assert(isDefined(e_sniper_guard), "No 'sniper_guard1_ai' for shot 3.");
   magicbullet("ak47_sp", e_sniper_guard gettagorigin("tag_flash"), e_player_body gettagorigin("J_Wrist_RI"));
-  playFXOnTag(getfx("player_knee_shot_r"), e_player_body, "J_Wrist_RI");
+  playfxontag(getfx("player_knee_shot_r"), e_player_body, "J_Wrist_RI");
 }
 
 dock_vo() {
@@ -762,9 +752,8 @@ sniper_dialog() {
   level.player say_dialog("huds_confirm_visual_0", 0.3);
   set_objective(level.obj_docks_kill_menendez, level.mason, "Kill");
 
-  if(level.player get_story_stat("KRAVCHENKO_INTERROGATED")) {
+  if(level.player get_story_stat("KRAVCHENKO_INTERROGATED"))
     level.player thread say_dialog("krav_he_even_has_people_i_1", 0.5);
-  }
 
   flag_wait("docks_kill_menendez");
   level.player say_dialog("huds_end_this_now_woods_0");
@@ -791,11 +780,10 @@ dock_rumble() {
 
 start_fire_work() {
   rotator = getent("the_great_rotator", "targetname");
-  spawners = getEntArray("firework_spawner", "script_noteworthy");
+  spawners = getentarray("firework_spawner", "script_noteworthy");
 
-  for(i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++)
     spawners[i] linkto(rotator);
-  }
 
   while(true) {
     firework_forward_launch();
@@ -808,8 +796,8 @@ firework_forward_launch() {
     firework = simple_spawn_single("firework_pdf_" + i);
     firework.targetname = "fire_works";
     firework thread delete_in_five();
-    playFXOnTag(level._effect["pdf_armstrong_fire_Fx"], firework, "tag_origin");
-    playFXOnTag(level._effect["jet_contrail"], firework, "tag_origin");
+    playfxontag(level._effect["pdf_armstrong_fire_Fx"], firework, "tag_origin");
+    playfxontag(level._effect["jet_contrail"], firework, "tag_origin");
     firework startragdoll();
     firework launchragdoll((360 - (i - 1) * 72, 0, 750));
     wait 0.2;
@@ -819,8 +807,8 @@ firework_forward_launch() {
     firework = simple_spawn_single("firework_pdf_" + i);
     firework.targetname = "fire_works";
     firework thread delete_in_five();
-    playFXOnTag(level._effect["pdf_armstrong_fire_Fx"], firework, "tag_origin");
-    playFXOnTag(level._effect["jet_contrail"], firework, "tag_origin");
+    playfxontag(level._effect["pdf_armstrong_fire_Fx"], firework, "tag_origin");
+    playfxontag(level._effect["jet_contrail"], firework, "tag_origin");
     firework startragdoll();
     firework launchragdoll((-360 - (i - 10) * 72, 0, 750));
     wait 0.1;

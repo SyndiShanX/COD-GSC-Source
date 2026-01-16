@@ -27,14 +27,14 @@ main() {
   maps\_utility::add_start("a10_bunker", ::start_a10_showcase, undefined, undefined);
   maps\_utility::add_start("a10_trench", ::start_a10_showcase, undefined, undefined);
   maps\_utility::add_start("a10_tower", ::start_a10_showcase, undefined, undefined);
-  maps\_utility::intro_screen_create(&"HOMECOMING_INTROSCREEN_LINE_1", &"HOMECOMING_INTROSCREEN_LINE_2", &"HOMECOMING_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"HOMECOMING_INTROSCREEN_LINE_1", & "HOMECOMING_INTROSCREEN_LINE_2", & "HOMECOMING_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::homecoming_introscreen);
-  maps\_utility::add_hint_string("hind_prone_hint", &"HOMECOMING_HINT_HIND", ::prone_hint_off);
-  maps\_utility::add_hint_string("hind_prone_hint_hold", &"HOMECOMING_HINT_HIND_STANCE", ::prone_hint_off);
-  maps\_utility::add_hint_string("hind_prone_hint_toggle", &"HOMECOMING_HINT_HIND_TOGGLE", ::prone_hint_off);
-  maps\_utility::add_hint_string("prone_hint", &"HOMECOMING_HINT_PRONE", ::prone_hint_off);
-  maps\_utility::add_hint_string("prone_hint_hold", &"HOMECOMING_HINT_PRONE_STANCE", ::prone_hint_off);
-  maps\_utility::add_hint_string("prone_hint_toggle", &"HOMECOMING_HINT_PRONE_TOGGLE", ::prone_hint_off);
+  maps\_utility::add_hint_string("hind_prone_hint", & "HOMECOMING_HINT_HIND", ::prone_hint_off);
+  maps\_utility::add_hint_string("hind_prone_hint_hold", & "HOMECOMING_HINT_HIND_STANCE", ::prone_hint_off);
+  maps\_utility::add_hint_string("hind_prone_hint_toggle", & "HOMECOMING_HINT_HIND_TOGGLE", ::prone_hint_off);
+  maps\_utility::add_hint_string("prone_hint", & "HOMECOMING_HINT_PRONE", ::prone_hint_off);
+  maps\_utility::add_hint_string("prone_hint_hold", & "HOMECOMING_HINT_PRONE_STANCE", ::prone_hint_off);
+  maps\_utility::add_hint_string("prone_hint_toggle", & "HOMECOMING_HINT_PRONE_TOGGLE", ::prone_hint_off);
   init_level_flags();
   maps\_utility::transient_init("homecoming_transient_intro_tr");
   maps\_utility::transient_init("homecoming_transient_beach_tr");
@@ -64,13 +64,11 @@ main() {
   setdvarifuninitialized("balcony_hind_killed_player", 0);
   setdvarifuninitialized("daniel", 0);
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     maps\_art::disable_ssao_over_time(0);
-  }
 
-  if(maps\_utility::game_is_current_gen()) {
+  if(maps\_utility::game_is_current_gen())
     setsaveddvar("fx_alphathreshold", 10);
-  }
 
   level.tower_courtyard_mortars = common_scripts\utility::getstructarray("courtyard_mortar_spots", "script_noteworthy");
   level.mortarexcluders = [];
@@ -325,33 +323,33 @@ homecoming_introscreen() {
 homecoming_objectives() {
   thread objective_start_flags();
   common_scripts\utility::flag_wait_any("TRIGFLAG_player_going_through_tent", "FLAG_nh90_ranger_dialog_done");
-  objective_add(level.objnum, "active", &"HOMECOMING_OBJ_FRONTLINES");
+  objective_add(level.objnum, "active", & "HOMECOMING_OBJ_FRONTLINES");
   objective_state_nomessage(level.objnum, "current");
   common_scripts\utility::flag_wait("TRIGFLAG_player_at_balcony");
   objective_state(level.objnum, "done");
   level.objnum++;
   wait 0.1;
-  objective_add(level.objnum, "active", &"HOMECOMING_OBJ_DEFEND_BEACH");
+  objective_add(level.objnum, "active", & "HOMECOMING_OBJ_DEFEND_BEACH");
   objective_state_nomessage(level.objnum, "current");
   var_0 = level.objnum;
   common_scripts\utility::flag_wait("FLAG_balcony_fall_done");
   objective_state_nomessage(level.objnum, "active");
   level.objnum++;
   common_scripts\utility::flag_wait("FLAG_balcony_getup_done");
-  objective_add(level.objnum, "active", &"HOMECOMING_OBJ_TRENCHES");
+  objective_add(level.objnum, "active", & "HOMECOMING_OBJ_TRENCHES");
   objective_state_nomessage(level.objnum, "current");
   common_scripts\utility::flag_wait("FLAG_tower_explosion_done");
   objective_state(level.objnum, "done");
   level.objnum++;
   wait 0.1;
-  objective_add(level.objnum, "active", &"HOMECOMING_OBJ_RETREAT");
+  objective_add(level.objnum, "active", & "HOMECOMING_OBJ_RETREAT");
   objective_state_nomessage(level.objnum, "current");
   objective_state_nomessage(var_0, "failed");
   common_scripts\utility::flag_wait("FLAG_start_elias_street");
   objective_state(level.objnum, "done");
   level.objnum++;
   wait 0.1;
-  objective_add(level.objnum, "active", &"HOMECOMING_OBJ_ELIAS_HOUSE");
+  objective_add(level.objnum, "active", & "HOMECOMING_OBJ_ELIAS_HOUSE");
   objective_state_nomessage(level.objnum, "current");
   common_scripts\utility::flag_wait("FLAG_start_recruit_scene");
   objective_state_nomessage(level.objnum, "done");
@@ -483,9 +481,8 @@ start_tower_retreat() {
   common_scripts\utility::flag_set("FLAG_trench_respawner_2");
   var_1 = getEntArray("retreat_start_friendlies", "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 maps\_utility::add_spawn_function(maps\homecoming_trench::trench_main_friendlies);
-  }
+  foreach(var_3 in var_1)
+  var_3 maps\_utility::add_spawn_function(maps\homecoming_trench::trench_main_friendlies);
 
   maps\_utility::array_spawn(var_1);
   level.hesh maps\_utility::set_force_color("r");
@@ -574,9 +571,8 @@ start_a10_test() {
   foreach(var_4 in var_2) {
     var_5 = 0;
 
-    if(isDefined(var_4.script_wait)) {
+    if(isDefined(var_4.script_wait))
       var_5 = var_4.script_wait;
-    }
 
     var_4 maps\_utility::delaythread(var_5, maps\homecoming_drones::beach_path_drones);
   }
@@ -597,9 +593,8 @@ start_balcony_fall() {
   maps\homecoming_beach::bunker_balcony_damage_state(level.balcony);
   var_0 = getglassarray("balcony_glass");
 
-  foreach(var_2 in var_0) {
-    deleteglass(var_2);
-  }
+  foreach(var_2 in var_0)
+  deleteglass(var_2);
 
   maps\homecoming_beach::player_fall_off_balcony();
   common_scripts\utility::flag_wait("FLAG_balcony_getup_done");
@@ -716,21 +711,17 @@ set_default_mb_values() {
 }
 
 prone_hint_off() {
-  if(common_scripts\utility::flag("FLAG_player_went_prone")) {
+  if(common_scripts\utility::flag("FLAG_player_went_prone"))
     return 1;
-  }
 
-  if(common_scripts\utility::flag("TRIGFLAG_player_through_beam_blocker")) {
+  if(common_scripts\utility::flag("TRIGFLAG_player_through_beam_blocker"))
     return 1;
-  }
 
-  if(!common_scripts\utility::flag("player_not_doing_strafe")) {
+  if(!common_scripts\utility::flag("player_not_doing_strafe"))
     return 1;
-  }
 
-  if(!common_scripts\utility::flag("FLAG_start_trenches") && !common_scripts\utility::flag("FLAG_hind_is_targeting_player")) {
+  if(!common_scripts\utility::flag("FLAG_start_trenches") && !common_scripts\utility::flag("FLAG_hind_is_targeting_player"))
     return 1;
-  }
 
   var_0 = level.player getstance();
 

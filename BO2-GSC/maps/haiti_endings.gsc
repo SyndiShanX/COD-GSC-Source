@@ -36,7 +36,8 @@ init_flags() {
   flag_init("the_end");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_endings_scenario1() {
   level.is_defalco_alive = 1;
@@ -94,9 +95,8 @@ setup_endscene_characters() {
     level.ai_harper.overrideactordamage = ::harper_shot_callback;
   }
 
-  if(!isDefined(level.ai_menendez)) {
+  if(!isDefined(level.ai_menendez))
     level.ai_menendez = simple_spawn_single("menendez");
-  }
 
   level.ai_menendez.ignoreme = 1;
   level.ai_menendez.animname = "menendez";
@@ -105,7 +105,7 @@ setup_endscene_characters() {
   level.ai_menendez set_ignoreall(1);
   level.ai_menendez set_blend_in_out_times(0.2);
   level.m_fnp45 = spawn("script_model", level.ai_menendez.origin);
-  level.m_fnp45 setModel("t6_wpn_pistol_fnp45_view");
+  level.m_fnp45 setmodel("t6_wpn_pistol_fnp45_view");
   level.m_fnp45 linkto(level.ai_menendez, "tag_weapon_right", (0, 0, 0));
 
   if(level.is_defalco_alive) {
@@ -143,9 +143,8 @@ setup_endscene_characters() {
 }
 
 harper_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(isplayer(eattacker)) {
+  if(isplayer(eattacker))
     missionfailedwrapper_nodeath(&"HAITI_HARPER_KILL");
-  }
 
   return idamage;
 }
@@ -155,9 +154,8 @@ guy1_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweap
   v_end = vpoint + vdir * 1000;
   recordline(v_start, v_end, (1, 0, 0));
 
-  if(isplayer(eattacker)) {
+  if(isplayer(eattacker))
     flag_set("player_shot_guy1");
-  }
 
   return idamage;
 }
@@ -167,9 +165,8 @@ guy2_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweap
   v_end = vpoint + vdir * 1000;
   recordline(v_start, v_end, (1, 0, 0));
 
-  if(isplayer(eattacker)) {
+  if(isplayer(eattacker))
     flag_set("player_shot_guy2");
-  }
 
   return idamage;
 }
@@ -189,9 +186,8 @@ slide_door() {
   level.player takeallweapons();
   luinotifyevent(&"hud_shrink_ammo");
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     level thread run_scene_and_delete("harper_slide_door_fall");
-  }
 
   level thread run_scene_and_delete("player_slide_door_fall");
   scene_wait("player_slide_door_fall");
@@ -202,21 +198,20 @@ player_in_hanger() {
   level endon("ending_outside_capture");
   level endon("ending_outside_killed");
   level.player.body = spawn("script_model", level.player.origin);
-  level.player.body setModel(level.player_interactive_model);
+  level.player.body setmodel(level.player_interactive_model);
   level.player.body.animname = "player_body_model";
   level.player.body set_blend_in_out_times(0.2);
   level.player.body setmovingplatformenabled(1);
   level.player.body hide();
 
-  if(level.is_defalco_alive && level.is_harper_alive) {
+  if(level.is_defalco_alive && level.is_harper_alive)
     run_scene_first_frame("scene_0_v1");
-  } else if(level.is_defalco_alive && !level.is_harper_alive) {
+  else if(level.is_defalco_alive && !level.is_harper_alive)
     run_scene_first_frame("scene_0_v2");
-  } else if(!level.is_defalco_alive && level.is_harper_alive) {
+  else if(!level.is_defalco_alive && level.is_harper_alive)
     run_scene_first_frame("scene_0_v3");
-  } else if(!level.is_defalco_alive && !level.is_harper_alive) {
+  else if(!level.is_defalco_alive && !level.is_harper_alive)
     run_scene_first_frame("scene_0_v4");
-  }
 
   flag_wait("scenarios_begin");
   level.player playerlinktoabsolute(level.player.body, "tag_player");
@@ -350,11 +345,10 @@ success_watcher_damage(scene_name, entity) {
   level endon("ending_outside_capture");
   level endon("ending_outside_killed");
 
-  if(entity.animname == "ending_camo") {
+  if(entity.animname == "ending_camo")
     flag_wait("player_shot_guy1");
-  } else if(entity.animname == "defalco") {
+  else if(entity.animname == "defalco")
     flag_wait("player_shot_guy2");
-  }
 
   level notify(scene_name + "_test_succeeded");
 }
@@ -366,7 +360,7 @@ fail_watcher_notetrack(scene_name, entity, fail_scene, fail_notetrack) {
   flag_wait(fail_notetrack);
   level notify(scene_name + "_test_failed");
   setmusicstate("HAI_DROP_DOWN_FAIL");
-  entity playSound("evt_slide_fail_plr");
+  entity playsound("evt_slide_fail_plr");
   entity shoot();
   level.player dodamage(50, level.player.origin);
   earthquake(0.5, 0.6, level.player.origin, 128);
@@ -385,12 +379,11 @@ moral_choice_scene() {
   level endon("ending_outside_killed");
   level thread maps\_audio::switch_music_wait("HAI_MORALS", 3);
 
-  if(level.is_defalco_alive) {
+  if(level.is_defalco_alive)
     level.player set_story_stat("DEFALCO_DEAD_IN_HAITI", 1);
-  }
 
   level.m_knife = spawn("script_model", level.player.body.origin);
-  level.m_knife setModel("t6_wpn_knife_base_prop");
+  level.m_knife setmodel("t6_wpn_knife_base_prop");
   level.m_knife linkto(level.player.body, "tag_weapon1", (0, 0, 0));
   level thread run_scene_and_delete("moral_choice");
   scene_wait("moral_choice");
@@ -401,7 +394,7 @@ moral_event_start(player) {
   level endon("menendez_capture");
   level endon("ending_outside_capture");
   level endon("ending_outside_killed");
-  screen_message_create(&"HAITI_SHOOT_MENENDEZ", &"HAITI_CAPTURE_MENENDEZ", undefined, 150);
+  screen_message_create(&"HAITI_SHOOT_MENENDEZ", & "HAITI_CAPTURE_MENENDEZ", undefined, 150);
   wait 0.05;
   level.player thread watch_shoot_menendez();
   level.player thread watch_capture_menendez();
@@ -622,9 +615,8 @@ capture_menendez() {
   setup_menendez();
   setup_ending_vtol();
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     level thread run_scene_and_delete("capture_harper_medic");
-  }
 
   level thread civ_vtol();
   level thread wave_spawning();
@@ -646,7 +638,8 @@ capture_menendez() {
   level thread run_scene_and_delete("capture_menendez3_2");
   level thread run_scene_and_delete("capture_menendez3_3");
 
-  if(level.is_sco_supporting) {}
+  if(level.is_sco_supporting) {
+  }
 }
 
 end04_fade_out_black(player) {
@@ -751,9 +744,8 @@ wave_spawning() {
 }
 
 medic_groups(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   level thread run_scene_and_delete("medic_group3_loop");
   level thread run_scene_and_delete("medic_group2_loop");
@@ -762,9 +754,8 @@ medic_groups(delay) {
 }
 
 enemies_capture1(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   level thread scene_and_loop("grp01_guard02");
   give_scene_models_guns("grp01_guard02");
@@ -789,9 +780,8 @@ left_front_prisoners() {
 }
 
 enemies_capture2(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   level thread scene_and_loop("grp02_guard04");
   give_scene_models_guns("grp02_guard04");
@@ -804,9 +794,8 @@ enemies_capture2(delay) {
 }
 
 enemies_capture3(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   level thread scene_and_loop("grp02_guard04_1");
   give_scene_models_guns("grp02_guard04_1");
@@ -819,9 +808,8 @@ enemies_capture3(delay) {
 }
 
 reactions_groups(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   level thread three_scenes("reactions_grp01_1");
   level thread three_scenes("reactions_grp01_2");
@@ -846,9 +834,8 @@ reactions_grp02_3() {
 }
 
 reactions_guy(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   run_scene_and_delete("reactions_grp02_1");
   level thread run_scene_and_delete("reactions_grp02_1_loop");
@@ -869,9 +856,8 @@ scene_and_loop(scene_name) {
 give_scene_models_guns(str_scene_name) {
   a_m_guys = get_model_or_models_from_scene(str_scene_name);
 
-  foreach(m_guy in a_m_guys) {
-    m_guy attach("t6_wpn_lmg_mk48_world", "tag_weapon_right");
-  }
+  foreach(m_guy in a_m_guys)
+  m_guy attach("t6_wpn_lmg_mk48_world", "tag_weapon_right");
 }
 
 ending_cowbell(time) {
@@ -884,15 +870,15 @@ ending_cowbell(time) {
   wait(time);
   vehicles = spawn_vehicles_from_targetname("ending_f35_group_1");
   array_thread(vehicles, ::ending_f35_think, "start_ending_fa38_group_1");
-  vehicles[0] playSound("evt_fake_f35_flyby");
+  vehicles[0] playsound("evt_fake_f35_flyby");
   wait 1;
   vehicles = spawn_vehicles_from_targetname("ending_f35_group_2");
   array_thread(vehicles, ::ending_f35_think, "start_ending_fa38_group_2");
-  vehicles[0] playSound("evt_fake_f35_flyby");
+  vehicles[0] playsound("evt_fake_f35_flyby");
   wait 1;
   vehicles = spawn_vehicles_from_targetname("ending_f35_group_3");
   array_thread(vehicles, ::ending_f35_think, "start_ending_fa38_group_3");
-  vehicles[0] playSound("evt_fake_f35_flyby");
+  vehicles[0] playsound("evt_fake_f35_flyby");
   wait 2.1;
   playsoundatposition("mus_end_hit", (0, 0, 0));
 }
@@ -901,9 +887,9 @@ ending_vtol_think(path_start) {
   self maps\_osprey::main();
 
   if(isDefined(path_start)) {
-    playFXOnTag(level._effect["vtol_exhaust_cheap"], self, "tag_engine_left");
+    playfxontag(level._effect["vtol_exhaust_cheap"], self, "tag_engine_left");
     path = getvehiclenode(path_start, "targetname");
-    path_fwd = anglesToForward(path.angles);
+    path_fwd = anglestoforward(path.angles);
     path_right = anglestoright(path.angles);
     path_up = anglestoup(path.angles);
     delta = self.origin - path.origin;
@@ -915,14 +901,14 @@ ending_vtol_think(path_start) {
     self waittill("reached_end_node");
     self delete();
   } else {
-    fwd = anglesToForward(self.angles);
+    fwd = anglestoforward(self.angles);
     self setvehvelocity(fwd * 30 * 17.6);
   }
 }
 
 ending_f35_think(path_start) {
   path = getvehiclenode(path_start, "targetname");
-  path_fwd = anglesToForward(path.angles);
+  path_fwd = anglestoforward(path.angles);
   path_right = anglestoright(path.angles);
   path_up = anglestoup(path.angles);
   delta = self.origin - path.origin;
@@ -963,7 +949,7 @@ grab_gun(player) {
 scene_0_v1_rebar(harper) {
   ai_harper = get_ais_from_scene("scene_0_v1", "harper");
   m_rebar = spawn("script_model", ai_harper.origin);
-  m_rebar setModel("rebar_anim_haiti");
+  m_rebar setmodel("rebar_anim_haiti");
   m_rebar linkto(ai_harper, "tag_weapon_left", (0, 0, 0));
   exploder(667);
   flag_wait("scene_2_complete");
@@ -974,7 +960,7 @@ scene_0_v1_rebar(harper) {
 scene_0_v3_rebar(harper) {
   ai_harper = get_ais_from_scene("scene_0_v3", "harper");
   m_rebar = spawn("script_model", ai_harper.origin);
-  m_rebar setModel("rebar_anim_haiti");
+  m_rebar setmodel("rebar_anim_haiti");
   m_rebar linkto(ai_harper, "tag_weapon_left", (0, 0, 0));
   exploder(667);
   flag_wait("scene_2_complete");
@@ -983,16 +969,15 @@ scene_0_v3_rebar(harper) {
 }
 
 camo_fail(ai_camo) {
-  if(level.ai_camo ent_flag("camo_suit_on")) {
+  if(level.ai_camo ent_flag("camo_suit_on"))
     level.ai_camo toggle_camo_suit(1, 0);
-  }
 }
 
 gun_fire(defalco) {
   level.ai_defalco shoot();
   level.player dodamage(50, level.player.origin);
-  playFXOnTag(level._effect["player_shot_blood"], level.player.body, "tag_origin");
-  playFXOnTag(level._effect["player_fire_death"], level.player.body, "tag_origin");
+  playfxontag(level._effect["player_shot_blood"], level.player.body, "tag_origin");
+  playfxontag(level._effect["player_fire_death"], level.player.body, "tag_origin");
 }
 
 player_no_headlook(player) {
@@ -1000,26 +985,26 @@ player_no_headlook(player) {
 }
 
 stab_leg(menendez) {
-  playFXOnTag(level._effect["menendez_knife_stab"], level.m_knife, "tag_fx");
-  playFXOnTag(level._effect["menendez_body_decal"], level.ai_menendez, "j_knee_le");
+  playfxontag(level._effect["menendez_knife_stab"], level.m_knife, "tag_fx");
+  playfxontag(level._effect["menendez_body_decal"], level.ai_menendez, "j_knee_le");
 }
 
 stab_shoulder(menendez) {
-  playFXOnTag(level._effect["menendez_knife_stab"], level.m_knife, "tag_fx");
-  playFXOnTag(level._effect["menendez_body_decal"], level.ai_menendez, "j_shoulder_ri");
+  playfxontag(level._effect["menendez_knife_stab"], level.m_knife, "tag_fx");
+  playfxontag(level._effect["menendez_body_decal"], level.ai_menendez, "j_shoulder_ri");
   exploder(666);
 }
 
 menendez_headshot(ai_menendez) {
-  playFXOnTag(level._effect["muzzle_flash"], level.m_fnp45, "TAG_FLASH");
-  playFXOnTag(level._effect["headshot"], level.ai_menendez, "J_Head");
+  playfxontag(level._effect["muzzle_flash"], level.m_fnp45, "TAG_FLASH");
+  playfxontag(level._effect["headshot"], level.ai_menendez, "J_Head");
   exploder(659);
   level.ai_menendez detach("c_mul_menendez_old_seal6_head");
   level.ai_menendez attach("c_mul_menendez_old_seal6_shot_head");
 }
 
 rebar_blood_fx(ai_harper) {
-  playFXOnTag(level._effect["harper_blood_spurt"], level.m_rebar, "tag_origin");
+  playfxontag(level._effect["harper_blood_spurt"], level.m_rebar, "tag_origin");
 }
 
 player_start_slowmo(player) {
@@ -1045,14 +1030,13 @@ player_start_raise_gun(player) {
 
 player_slowmo_audio() {
   rpc("clientscripts/haiti_amb", "timeslow_reverb");
-  level.player playSound("evt_timeslow_start");
-  level.player playLoopSound("evt_timeslow_loop", 1.5);
+  level.player playsound("evt_timeslow_start");
+  level.player playloopsound("evt_timeslow_loop", 1.5);
   level waittill("timeslow_done");
   clientnotify("timeslow_snd_stop");
 
-  if(!flag("event_02_fail") && !flag("event_01_fail")) {
-    level.player playSound("evt_timeslow_end");
-  }
+  if(!flag("event_02_fail") && !flag("event_01_fail"))
+    level.player playsound("evt_timeslow_end");
 
   level.player stoploopsound(1);
 }
@@ -1090,14 +1074,13 @@ explosions_go_off(player) {
   earthquake(0.8, 2, level.player.origin, 500);
   level.player shellshock("default", 1);
   level.player playrumbleonentity("artillery_rumble");
-  playFXOnTag(getfx("camo_transition"), level.ai_camo, "J_SpineLower");
+  playfxontag(getfx("camo_transition"), level.ai_camo, "J_SpineLower");
   exploder(650);
   level thread radial_damage_from_spot("destroy_paper_spot");
-  ending_floor = getEntArray("ending_floor", "targetname");
+  ending_floor = getentarray("ending_floor", "targetname");
 
-  foreach(m_floor in ending_floor) {
-    m_floor delete();
-  }
+  foreach(m_floor in ending_floor)
+  m_floor delete();
 
   setmusicstate("HAITI_END_EXPLOSION");
 }
@@ -1141,9 +1124,8 @@ notetrack_set_blend_times(e_player_body) {
 }
 
 radial_damage_from_spot(str_spot, n_delay) {
-  if(isDefined(n_delay)) {
+  if(isDefined(n_delay))
     wait(n_delay);
-  }
 
   if(isDefined(str_spot)) {
     center = getstruct(str_spot, "targetname");
@@ -1170,4 +1152,5 @@ notetrack_defalco_shoot(m_defalco) {
   level.ai_defalco shoot();
 }
 
-notetrack_pmc_shoot(m_defalco) {}
+notetrack_pmc_shoot(m_defalco) {
+}

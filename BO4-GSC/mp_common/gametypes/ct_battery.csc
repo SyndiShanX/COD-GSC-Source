@@ -6,6 +6,7 @@
 #include scripts\killstreaks\ai_tank_shared;
 #include scripts\killstreaks\helicopter_shared;
 #include scripts\mp_common\gametypes\ct_core;
+
 #namespace ct_battery;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -69,22 +69,22 @@ aiNameAndRankWaiter() {
 removeFromSystem(squadName) {}
 init_aiBattleChatter() {
   self.chatQueue = [];
-  self.chatQueue["threat"] = spawnStruct();
+  self.chatQueue["threat"] = SpawnStruct();
   self.chatQueue["threat"].expireTime = 0;
   self.chatQueue["threat"].priority = 0.0;
-  self.chatQueue["response"] = spawnStruct();
+  self.chatQueue["response"] = SpawnStruct();
   self.chatQueue["response"].expireTime = 0;
   self.chatQueue["response"].priority = 0.0;
-  self.chatQueue["reaction"] = spawnStruct();
+  self.chatQueue["reaction"] = SpawnStruct();
   self.chatQueue["reaction"].expireTime = 0;
   self.chatQueue["reaction"].priority = 0.0;
-  self.chatQueue["inform"] = spawnStruct();
+  self.chatQueue["inform"] = SpawnStruct();
   self.chatQueue["inform"].expireTime = 0;
   self.chatQueue["inform"].priority = 0.0;
-  self.chatQueue["order"] = spawnStruct();
+  self.chatQueue["order"] = SpawnStruct();
   self.chatQueue["order"].expireTime = 0;
   self.chatQueue["order"].priority = 0.0;
-  self.chatQueue["custom"] = spawnStruct();
+  self.chatQueue["custom"] = SpawnStruct();
   self.chatQueue["custom"].expireTime = 0;
   self.chatQueue["custom"].priority = 0.0;
   self.nextSayTime = GetTime() + 50;

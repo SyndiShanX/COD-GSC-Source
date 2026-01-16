@@ -45,7 +45,7 @@ ragdoll_impact_watch(localclientnum) {
     if(speed < prevspeed * 0.5 && prevspeed > gibspeed * waittime) {
       if(isDefined(level._effect["zombie_guts_explosion"]) && is_mature()) {
         where = self gettagorigin("J_SpineLower");
-        playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
+        playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
       }
 
       break;
@@ -93,11 +93,11 @@ whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.is_active = 1;
     original_pos = self.origin;
     level.whirlwind_pos[localclientnum] = self.origin;
-    level.whirlwind_fx = playFXOnTag(localclientnum, level._effect["whirlwind"], self, "tag_origin");
+    level.whirlwind_fx = playfxontag(localclientnum, level._effect["whirlwind"], self, "tag_origin");
 
     if(!isDefined(self.sndent)) {
       self.sndent = spawn(0, self.origin, "script_origin");
-      self.sndent playLoopSound("wpn_airstaff_tornado", 1);
+      self.sndent playloopsound("wpn_airstaff_tornado", 1);
       self.sndent thread clientscripts\mp\zm_tomb::snddemojumpmonitor();
     }
   } else {

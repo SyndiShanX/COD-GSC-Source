@@ -8,7 +8,8 @@
 #include clientscripts\mp\createfx\zm_prison_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("maps/zombie_alcatraz/fx_zombie_eye_single_red");
@@ -102,9 +103,8 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   level thread acid_trap_fx_monitor("acid_trap", "cafeteria");
 }
@@ -114,31 +114,28 @@ acid_trap_fx_monitor(name, side) {
     level waittill(name);
     fire_points = getstructarray(name, "targetname");
 
-    for(i = 0; i < fire_points.size; i++) {
+    for(i = 0; i < fire_points.size; i++)
       fire_points[i] thread acid_trap_fx(name, side);
-    }
   }
 }
 
 acid_trap_fx(name, side) {
   ang = self.angles;
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   up = anglestoup(ang);
 
   if(isDefined(self.loopfx)) {
-    for(i = 0; i < self.loopfx.size; i++) {
+    for(i = 0; i < self.loopfx.size; i++)
       self.loopfx[i] delete();
-    }
 
     self.loopfx = [];
   }
 
-  if(!isDefined(self.loopfx)) {
+  if(!isDefined(self.loopfx))
     self.loopfx = [];
-  }
 
   players = getlocalplayers();
-  playSound(0, "zmb_trap_acid_start", self.origin);
+  playsound(0, "zmb_trap_acid_start", self.origin);
   playloopat("zmb_trap_acid_loop", self.origin);
 
   for(i = 0; i < players.size; i++) {
@@ -147,34 +144,32 @@ acid_trap_fx(name, side) {
   }
 
   level waittill(side + "off");
-  playSound(0, "zmb_trap_acid_end", self.origin);
+  playsound(0, "zmb_trap_acid_end", self.origin);
   stoploopat("zmb_trap_acid_loop", self.origin);
 
-  for(i = 0; i < self.loopfx.size; i++) {
+  for(i = 0; i < self.loopfx.size; i++)
     self.loopfx[i] delete();
-  }
 
   self.loopfx = [];
 }
 
 acid_trap_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.acid_trap_death_fx = playFXOnTag(localclientnum, level._effect["acid_death"], self, "TAG_STOWED_BACK");
-    playSound(0, "zmb_exp_jib_acid_zombie", self.origin);
+    self.acid_trap_death_fx = playfxontag(localclientnum, level._effect["acid_death"], self, "TAG_STOWED_BACK");
+    playsound(0, "zmb_exp_jib_acid_zombie", self.origin);
   } else if(isDefined(self.acid_trap_death_fx))
     stopfx(localclientnum, self.acid_trap_death_fx);
 }
 
 spawn_glowfx_for_shockboxes(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
-    playFXOnTag(localclientnum, level._effect["fx_alcatraz_elec_box_amb"], self, "TAG_ORIGIN");
-  }
+  if(newval == 1)
+    playfxontag(localclientnum, level._effect["fx_alcatraz_elec_box_amb"], self, "TAG_ORIGIN");
 }
 
 fan_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fan_trap_blood_fx = playFXOnTag(localclientnum, level._effect["fan_blood"], self, "J_Neck");
-    playSound(0, "zmb_exp_jib_fan_zombie", self.origin);
+    self.fan_trap_blood_fx = playfxontag(localclientnum, level._effect["fan_blood"], self, "J_Neck");
+    playsound(0, "zmb_exp_jib_fan_zombie", self.origin);
   } else if(isDefined(self.fan_trap_blood_fx))
     stopfx(localclientnum, self.fan_trap_blood_fx);
 }
@@ -184,14 +179,13 @@ sq_bg_reward_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
   if(newval == 1) {
     v_forward = anglestoright(self.angles);
-    v_up = anglesToForward(self.angles);
-    level.sq_bg_portal_fx = playFX(localclientnum, level._effect["hell_portal"], s_reward_fx.origin);
+    v_up = anglestoforward(self.angles);
+    level.sq_bg_portal_fx = playfx(localclientnum, level._effect["hell_portal"], s_reward_fx.origin);
   } else {
-    if(isDefined(level.sq_bg_portal_fx)) {
+    if(isDefined(level.sq_bg_portal_fx))
       stopfx(localclientnum, level.sq_bg_portal_fx);
-    }
 
-    level.sq_bg_portal_fx = playFX(localclientnum, level._effect["hell_portal_close"], s_reward_fx.origin);
+    level.sq_bg_portal_fx = playfx(localclientnum, level._effect["hell_portal_close"], s_reward_fx.origin);
   }
 }
 
@@ -215,50 +209,47 @@ precache_fxanim_props() {
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think, localclientnum);
   play_quest_prop_anims(localclientnum);
 }
 
 play_quest_prop_anims(localclientnum) {
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
   m_dryer = getent(localclientnum, "dryer_model", "targetname");
   m_dryer waittill_dobj(localclientnum);
 
   for(i = 0; i < fxanim_props.size; i++) {
-    if(fxanim_props[i].model == "fxanim_zom_al_industrial_dryer_mod") {
+    if(fxanim_props[i].model == "fxanim_zom_al_industrial_dryer_mod")
       m_dryer linkto(fxanim_props[i], "dryer_jnt");
-    }
   }
 }
 
 fxanim_setup_pulley(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   level endon("host_migration_start");
 
-  if(bwasdemojump) {
+  if(bwasdemojump)
     newval = oldval;
-  }
 
-  if(newval == 1) {
+  if(newval == 1)
     str_master_key_location = "east";
-  } else if(newval == 2) {
+  else if(newval == 2)
     str_master_key_location = "west";
-  }
 
   fx_key_glint = undefined;
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
 
   for(i = 0; i < fxanim_props.size; i++) {
     if(isDefined(fxanim_props[i].fxanim_waittill_1)) {
       if(fxanim_props[i].fxanim_waittill_1 == "fxanim_" + str_master_key_location + "_pulley_down_start") {
         fxanim_props[i] waittill_dobj(localclientnum);
-        fx_key_glint = playFXOnTag(localclientnum, level._effect["key_glint"], fxanim_props[i], "tag_key");
+        fx_key_glint = playfxontag(localclientnum, level._effect["key_glint"], fxanim_props[i], "tag_key");
         origin_tag_key = fxanim_props[i] gettagorigin("tag_key");
         m_master_key_attachment = getent(localclientnum, "master_key_attachment", "targetname");
         m_master_key_attachment waittill_dobj(localclientnum);
         m_master_key_attachment.origin = origin_tag_key;
         m_master_key_attachment linkto(fxanim_props[i], "tag_key");
-        m_master_key_attachment playLoopSound("amb_electrical_fence", 1);
+        m_master_key_attachment playloopsound("amb_electrical_fence", 1);
         break;
       }
     }
@@ -283,13 +274,11 @@ fxanim_props_think(localclientnum) {
 }
 
 fxanim_props_wait_1(localclientnum) {
-  if(isDefined(self.fxanim_waittill_1)) {
+  if(isDefined(self.fxanim_waittill_1))
     level waittill(self.fxanim_waittill_1);
-  }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.fxanim_scene_1)) {
     if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
@@ -300,13 +289,11 @@ fxanim_props_wait_1(localclientnum) {
 }
 
 fxanim_props_wait_2(localclientnum) {
-  if(isDefined(self.fxanim_waittill_2)) {
+  if(isDefined(self.fxanim_waittill_2))
     level waittill(self.fxanim_waittill_2);
-  }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.fxanim_scene_2)) {
     if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_2])) {
@@ -317,13 +304,11 @@ fxanim_props_wait_2(localclientnum) {
 }
 
 fxanim_props_wait_3(localclientnum) {
-  if(isDefined(self.fxanim_waittill_3)) {
+  if(isDefined(self.fxanim_waittill_3))
     level waittill(self.fxanim_waittill_3);
-  }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.fxanim_scene_3)) {
     if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_3])) {
@@ -334,13 +319,11 @@ fxanim_props_wait_3(localclientnum) {
 }
 
 fxanim_props_wait_4(localclientnum) {
-  if(isDefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy))
     level waittill(self.script_noteworthy);
-  }
 
-  if(isDefined(self.fxanim_wait)) {
+  if(isDefined(self.fxanim_wait))
     wait(self.fxanim_wait);
-  }
 
   if(isDefined(self.script_string)) {
     if(isDefined(level.scr_anim["fxanim_props"][self.script_string])) {
@@ -354,9 +337,8 @@ setup_prop_anims() {
   waitforclient(0);
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] thread play_fx_prop_anims(i);
-  }
 }
 
 rumble_electric_chair(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

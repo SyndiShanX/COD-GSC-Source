@@ -13,31 +13,26 @@
 
 should_ignore_candybooze(player) {
   if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_underground_courthouse") || player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_underground_courthouse2")) {
-    if(!maps\mp\zm_buried::is_courthouse_open()) {
+    if(!maps\mp\zm_buried::is_courthouse_open())
       return true;
-    }
   }
 
   if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_tunnels_north2")) {
-    if(!maps\mp\zm_buried::is_courthouse_open()) {
+    if(!maps\mp\zm_buried::is_courthouse_open())
       return true;
-    }
   }
 
   if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_tunnels_center") || player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_tunnels_north") || player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_tunnels_south")) {
-    if(!maps\mp\zm_buried::is_tunnel_open()) {
+    if(!maps\mp\zm_buried::is_tunnel_open())
       return true;
-    }
   }
 
-  if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_start_lower")) {
+  if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_start_lower"))
     return true;
-  }
 
   if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_underground_bar")) {
-    if(!maps\mp\zombies\_zm_ai_sloth::is_bar_open()) {
+    if(!maps\mp\zombies\_zm_ai_sloth::is_bar_open())
       return true;
-    }
   }
 
   return false;
@@ -78,9 +73,9 @@ sloth_is_pain() {
   if(is_true(self.is_pain)) {
     anim_state = self getanimstatefromasd();
 
-    if(anim_state == "zm_pain" || anim_state == "zm_pain_no_restart") {
+    if(anim_state == "zm_pain" || anim_state == "zm_pain_no_restart")
       return true;
-    } else {
+    else {
       self.reset_asd = undefined;
       self animmode("normal");
       self.is_pain = 0;
@@ -99,9 +94,9 @@ sloth_is_traversing() {
   if(is_true(self.is_traversing)) {
     anim_state = self getanimstatefromasd();
 
-    if(anim_state == "zm_traverse" || anim_state == "zm_traverse_no_restart" || anim_state == "zm_traverse_barrier" || anim_state == "zm_traverse_barrier_no_restart" || anim_state == "zm_sling_equipment" || anim_state == "zm_unsling_equipment" || anim_state == "zm_sling_magicbox" || anim_state == "zm_unsling_magicbox" || anim_state == "zm_sloth_crawlerhold_sling" || anim_state == "zm_sloth_crawlerhold_unsling" || anim_state == "zm_sloth_crawlerhold_sling_hunched" || anim_state == "zm_sloth_crawlerhold_unsling_hunched") {
+    if(anim_state == "zm_traverse" || anim_state == "zm_traverse_no_restart" || anim_state == "zm_traverse_barrier" || anim_state == "zm_traverse_barrier_no_restart" || anim_state == "zm_sling_equipment" || anim_state == "zm_unsling_equipment" || anim_state == "zm_sling_magicbox" || anim_state == "zm_unsling_magicbox" || anim_state == "zm_sloth_crawlerhold_sling" || anim_state == "zm_sloth_crawlerhold_unsling" || anim_state == "zm_sloth_crawlerhold_sling_hunched" || anim_state == "zm_sloth_crawlerhold_unsling_hunched")
       return true;
-    } else {
+    else {
       self.is_traversing = 0;
 
       sloth_print("traverse was interrupted");
@@ -113,11 +108,10 @@ sloth_is_traversing() {
 }
 
 sloth_face_object(facee, type, data, dot_limit) {
-  if(type == "angle") {
+  if(type == "angle")
     self orientmode("face angle", data);
-  } else if(type == "point") {
+  else if(type == "point")
     self orientmode("face point", data);
-  }
 
   time_started = gettime();
 
@@ -156,9 +150,8 @@ sloth_print(str) {
     if(isDefined(self.debug_msg)) {
       self.debug_msg[self.debug_msg.size] = str;
 
-      if(self.debug_msg.size > 64) {
+      if(self.debug_msg.size > 64)
         self.debug_msg = [];
-      }
     } else {
       self.debug_msg = [];
       self.debug_msg[self.debug_msg.size] = str;

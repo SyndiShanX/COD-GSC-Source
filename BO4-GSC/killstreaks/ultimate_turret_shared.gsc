@@ -24,6 +24,7 @@
 #include scripts\killstreaks\remote_weapons;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
+
 #namespace ultimate_turret;
 
 init_shared() {
@@ -34,7 +35,7 @@ init_shared() {
     killstreaks::function_b013c2d3("ultimate_turret", getweapon("ultimate_turret_deploy"));
     killstreaks::register_alt_weapon("ultimate_turret", getweapon(#"gun_ultimate_turret"));
     killstreaks::allow_assists("ultimate_turret", 1);
-    level.killstreaks[# "ultimate_turret"].threatonkill = 1;
+    level.killstreaks[#"ultimate_turret"].threatonkill = 1;
     clientfield::register("vehicle", "ultimate_turret_open", 1, 1, "int");
     clientfield::register("vehicle", "ultimate_turret_init", 1, 1, "int");
     clientfield::register("vehicle", "ultimate_turret_close", 1, 1, "int");
@@ -175,15 +176,15 @@ activateturret() {
     return false;
   }
 
-  bundle = level.killstreakbundle[# "ultimate_turret"];
+  bundle = level.killstreakbundle[#"ultimate_turret"];
   var_b6c61913 = 0;
 
   if(var_b6c61913) {
-    turret = player killstreaks::function_8cd96439("ultimate_turret", killstreakid, &onplaceturret, &oncancelplacement, undefined, &onshutdown, undefined, undefined, "tag_origin", "tag_origin", "tag_origin", 1, # "killstreak_sentry_turret_pickup", bundle.ksduration, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
+    turret = player killstreaks::function_8cd96439("ultimate_turret", killstreakid, &onplaceturret, &oncancelplacement, undefined, &onshutdown, undefined, undefined, "tag_origin", "tag_origin", "tag_origin", 1, #"killstreak_sentry_turret_pickup", bundle.ksduration, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
     turret thread watchturretshutdown(player, killstreakid, player.team);
     turret thread util::ghost_wait_show_to_player(player);
     turret.othermodel thread util::ghost_wait_show_to_others(player);
-    event = turret waittill(#"placed", # "cancelled", # "death");
+    event = turret waittill(#"placed", #"cancelled", #"death");
 
     if(event._notify != "placed") {
       return false;
@@ -207,7 +208,7 @@ activateturret() {
     slot = player gadgetgetslot(var_e454da90);
     player gadgetpowerreset(slot);
     player gadgetpowerset(slot, 100);
-    waitresult = player waittilltimeout(0.1, # "death");
+    waitresult = player waittilltimeout(0.1, #"death");
 
     if(!isDefined(waitresult._notify) || waitresult._notify == "death") {
       if(isDefined(player)) {
@@ -221,7 +222,7 @@ activateturret() {
 
     player switchtoweapon(var_e454da90);
     player setoffhandvisible(1);
-    waitresult = player waittill(#"death", # "weapon_change");
+    waitresult = player waittill(#"death", #"weapon_change");
 
     if(!isDefined(waitresult._notify) || waitresult._notify == "death") {
       if(isDefined(player)) {
@@ -236,15 +237,15 @@ activateturret() {
   }
 
   if(isDefined(level.var_ed417bb9)) {
-    waitresult = player waittill(#"ultimate_turret_deployed", # "death", # "weapon_change", # "weapon_fired");
+    waitresult = player waittill(#"ultimate_turret_deployed", #"death", #"weapon_change", #"weapon_fired");
   }
 
-  waitresult = player waittill(#"ultimate_turret_deployed", # "death", # "weapon_change", # "weapon_fired");
+  waitresult = player waittill(#"ultimate_turret_deployed", #"death", #"weapon_change", #"weapon_fired");
 
   if(waitresult._notify === "weapon_change" && waitresult.last_weapon === var_e454da90 && waitresult.weapon === level.weaponnone) {
-    waitresult = player waittilltimeout(2, # "ultimate_turret_deployed", # "death");
+    waitresult = player waittilltimeout(2, #"ultimate_turret_deployed", #"death");
   } else if(waitresult._notify === "weapon_change" && waitresult.weapon === var_e454da90) {
-    waitresult = player waittill(#"ultimate_turret_deployed", # "death", # "weapon_fired");
+    waitresult = player waittill(#"ultimate_turret_deployed", #"death", #"weapon_fired");
   }
 
   if(isDefined(player) && false) {
@@ -252,7 +253,7 @@ activateturret() {
   }
 
   if(waitresult._notify === "weapon_fired") {
-    waitresult = player waittill(#"ultimate_turret_deployed", # "death");
+    waitresult = player waittill(#"ultimate_turret_deployed", #"death");
   }
 
   if(isDefined(player)) {
@@ -283,7 +284,7 @@ function_305bbc35(watcher) {
 }
 
 function_3be2d17f(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self endon(#"death");
   slot = player gadgetgetslot(self.weapon);
@@ -300,7 +301,7 @@ function_3be2d17f(watcher, player) {
   }
 
   self waittill(#"stationary");
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   player notify(#"ultimate_turret_deployed", {
     #turret: self
   });
@@ -363,7 +364,7 @@ function_24910d60() {
 function_7f9eb7f() {
   owner = self.owner;
   owner endon(#"disconnect");
-  waitresult = self waittill(#"death", # "death_started");
+  waitresult = self waittill(#"death", #"death_started");
 
   if(!isDefined(self)) {
     arrayremovevalue(owner.var_85988a58, undefined);
@@ -425,10 +426,10 @@ onplaceturret(turret) {
     turret.vehicle util::make_sentient();
     turret.vehicle function_bc7568f1();
     turret.vehicle.var_aac73d6c = 1;
-    player killstreaks::play_killstreak_start_dialog("ultimate_turret", player.pers[# "team"], turret.killstreakid);
+    player killstreaks::play_killstreak_start_dialog("ultimate_turret", player.pers[#"team"], turret.killstreakid);
     level thread popups::displaykillstreakteammessagetoall("ultimate_turret", player);
-    player stats::function_e24eec31(getweapon("ultimate_turret"), # "used", 1);
-    turret.vehicle.killstreak_duration = level.killstreakbundle[# "ultimate_turret"].ksduration + 5000;
+    player stats::function_e24eec31(getweapon("ultimate_turret"), #"used", 1);
+    turret.vehicle.killstreak_duration = level.killstreakbundle[#"ultimate_turret"].ksduration + 5000;
     turret.vehicle.killstreak_end_time = gettime() + turret.vehicle.killstreak_duration;
     bundle = get_killstreak_bundle();
     turret.vehicle thread killstreaks::waitfortimeout("ultimate_turret", turret.vehicle.killstreak_duration, &function_be04d904, "delete", "death");
@@ -554,13 +555,13 @@ onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
       if(is_valid_target(einflictor, self.team)) {
         self.favoriteenemy = einflictor;
         self.var_c8072bcc = gettime();
-        self.var_7eb3ebd5[einflictor getentitynumber()] = # "damage";
+        self.var_7eb3ebd5[einflictor getentitynumber()] = #"damage";
         self targetting_delay::function_a4d6d6d8(einflictor);
       }
     } else if(isalive(eattacker) && issentient(eattacker) && !(isplayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, self.team)) {
       self.favoriteenemy = eattacker;
       self.var_c8072bcc = gettime();
-      self.var_7eb3ebd5[eattacker getentitynumber()] = # "damage";
+      self.var_7eb3ebd5[eattacker getentitynumber()] = #"damage";
       self targetting_delay::function_a4d6d6d8(eattacker);
     }
   }
@@ -613,7 +614,7 @@ ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, ps
   if(isDefined(eattacker) && isplayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
     eattacker challenges::destroyscorestreak(weapon, turretvehicle.controlled, 1, 0);
     eattacker stats::function_dad108fa(#"destroy_turret", 1);
-    eattacker stats::function_e24eec31(weapon, # "destroy_turret", 1);
+    eattacker stats::function_e24eec31(weapon, #"destroy_turret", 1);
   }
 
   if(isDefined(level.var_d2600afc)) {
@@ -632,7 +633,7 @@ ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, ps
   wait 0.1;
   turretvehicle ghost();
   turretvehicle notsolid();
-  turretvehicle waittilltimeout(2, # "remote_weapon_end");
+  turretvehicle waittilltimeout(2, #"remote_weapon_end");
 
   if(isDefined(turretvehicle)) {
     while(isDefined(turretvehicle) && (turretvehicle.controlled || !isDefined(turretvehicle.owner))) {
@@ -662,7 +663,7 @@ enableturretafterwait(wait_time) {
   self endon(#"death");
 
   if(isDefined(self.owner)) {
-    self.owner endon(#"disconnect", # "joined_team", # "joined_spectators");
+    self.owner endon(#"disconnect", #"joined_team", #"joined_spectators");
   }
 
   wait wait_time;
@@ -677,7 +678,7 @@ createturretinfluencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
   return influencers::create_enemy_influencer(name, turret.origin, turret.team);
 }
 
@@ -696,8 +697,8 @@ function_3a9dddac() {
 
 turret_watch_owner_events() {
   self notify(#"turret_watch_owner_events_singleton");
-  self endon(#"turret_watch_owner_events_singleton", # "death");
-  self.owner waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  self endon(#"turret_watch_owner_events_singleton", #"death");
+  self.owner waittill(#"joined_team", #"disconnect", #"joined_spectators");
   self makevehicleusable();
   self.controlled = 0;
 
@@ -755,12 +756,12 @@ target_death_watch(turretvehicle) {
   target = self;
   target endon(#"abort_death_watch");
   turretvehicle endon(#"death");
-  target waittill(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  target waittill(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   turretvehicle clearenemy();
 }
 
 get_killstreak_bundle() {
-  return level.killstreakbundle[# "ultimate_turret"];
+  return level.killstreakbundle[#"ultimate_turret"];
 }
 
 is_valid_target(potential_target, friendly_team) {
@@ -782,19 +783,20 @@ is_valid_target(potential_target, friendly_team) {
 function_fefefcc4() {
   veh = self;
   turret_index = 0;
-  veh endon(#"death", # "death_started", # "end_turret_scanning");
+  veh endon(#"death", #"death_started", #"end_turret_scanning");
   wait 0.8;
   bundle = get_killstreak_bundle();
   var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
 
   while(true) {
     if(!isDefined(veh.enemy) && !(isDefined(veh.isstunned) && veh.isstunned) && !(isDefined(veh.isjammed) && veh.isjammed)) {
+
       var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
 
-      nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
+        nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
-        if(veh.var_3413afc5 != # "hash_2d94a5f22d36fc73") {
+        if(veh.var_3413afc5 != #"hash_2d94a5f22d36fc73") {
           veh function_c524c4c8();
         } else {
           foreach(nearby_enemy in nearby_enemies) {
@@ -812,16 +814,16 @@ function_fefefcc4() {
 
             veh.favoriteenemy = nearby_enemy;
             veh.var_c8072bcc = gettime();
-            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = # "hash_47697c94ffb4a5bd";
+            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = #"hash_47697c94ffb4a5bd";
             break;
           }
         }
-      } else if(veh.var_3413afc5 != # "standard_sight") {
+      } else if(veh.var_3413afc5 != #"standard_sight") {
         veh function_bc7568f1();
       }
     }
 
-    wait_time = veh.var_3413afc5 == # "standard_sight" ? 0.25 : 0.1;
+    wait_time = veh.var_3413afc5 == #"standard_sight" ? 0.25 : 0.1;
     wait wait_time;
   }
 }
@@ -844,7 +846,7 @@ function_2034705c(bundle) {
   var_351b3c55 = isDefined(self.enemy) ? max(isDefined(self.enemylastseentime) ? self.enemylastseentime : 0, isDefined(self.var_c8072bcc) ? self.var_c8072bcc : 0) : 0;
   var_c112caa0 = int((isDefined(bundle.var_fa38350a) ? bundle.var_fa38350a : 1) * 1000);
 
-  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === # "damage") {
+  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === #"damage") {
     var_c112caa0 = int((isDefined(bundle.var_33561c46) ? bundle.var_33561c46 : 3) * 1000);
   }
 
@@ -868,14 +870,14 @@ function_bc7568f1() {
   self.sightlatency = 100;
   self.fovcosine = 0.5;
   self.fovcosinebusy = 0.5;
-  self.var_3413afc5 = # "standard_sight";
+  self.var_3413afc5 = #"standard_sight";
 }
 
 function_c524c4c8() {
   self.sightlatency = 100;
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
-  self.var_3413afc5 = # "hash_2d94a5f22d36fc73";
+  self.var_3413afc5 = #"hash_2d94a5f22d36fc73";
 }
 
 get_target_offset(target) {
@@ -910,7 +912,7 @@ function_b8952a40(turret_index) {
 
 turretscanning() {
   veh = self;
-  veh endon(#"death", # "death_started", # "end_turret_scanning");
+  veh endon(#"death", #"death_started", #"end_turret_scanning");
   veh.turret_target = undefined;
   veh.do_not_clear_targets_during_think = 1;
   wait 0.8;
@@ -927,15 +929,16 @@ turretscanning() {
   veh.var_38e6355c = (isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 500) * (isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 500);
 
   while(true) {
+
     veh.maxsightdistsqrd = (isDefined(bundle.var_2aeadfa0) ? bundle.var_2aeadfa0 : 3500) * (isDefined(bundle.var_2aeadfa0) ? bundle.var_2aeadfa0 : 3500);
     veh.var_e812cbe7 = (isDefined(bundle.var_f6853f02) ? bundle.var_f6853f02 : 2500) * (isDefined(bundle.var_f6853f02) ? bundle.var_f6853f02 : 2500);
     veh.var_38e6355c = (isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 500) * (isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 500);
 
-    if(isDefined(veh.isstunned) && veh.isstunned || isDefined(veh.isjammed) && veh.isjammed) {
-      veh function_fc58f46f();
-      wait 0.5;
-      continue;
-    }
+      if(isDefined(veh.isstunned) && veh.isstunned || isDefined(veh.isjammed) && veh.isjammed) {
+        veh function_fc58f46f();
+        wait 0.5;
+        continue;
+      }
 
     if(veh.controlled || !veh.turret_enabled) {
       wait 0.5;
@@ -952,7 +955,7 @@ turretscanning() {
 
       var_2aa33bf1 = 0;
 
-      if(distancesquared(veh.enemy.origin, veh.origin) > veh.var_38e6355c && veh.var_7eb3ebd5[veh.enemy getentitynumber()] === # "forwardscan") {
+      if(distancesquared(veh.enemy.origin, veh.origin) > veh.var_38e6355c && veh.var_7eb3ebd5[veh.enemy getentitynumber()] === #"forwardscan") {
         var_2aa33bf1 = 1;
       } else if(veh function_9d86d74c(veh.enemy)) {
         var_2aa33bf1 = 1;
@@ -967,7 +970,7 @@ turretscanning() {
 
       if(!isDefined(veh.var_7eb3ebd5[veh.enemy getentitynumber()]) && veh targetting_delay::function_1c169b3a(veh.enemy)) {
         veh.var_c8072bcc = gettime();
-        veh.var_7eb3ebd5[veh.enemy getentitynumber()] = # "forwardscan";
+        veh.var_7eb3ebd5[veh.enemy getentitynumber()] = #"forwardscan";
       }
     }
 
@@ -995,7 +998,7 @@ turretscanning() {
 
           if(min_pause_time > 0 && !var_afae28e0) {
             pause_time = min_pause_time > max_pause_time ? min_pause_time : randomfloatrange(min_pause_time, max_pause_time);
-            waitresult = veh.turret_target waittilltimeout(pause_time, # "death", # "disconnect");
+            waitresult = veh.turret_target waittilltimeout(pause_time, #"death", #"disconnect");
             var_afae28e0 = waitresult._notify === "death";
           }
         } else {
@@ -1058,9 +1061,9 @@ turretscanning() {
       veh.scanpos = "left";
     }
 
-    waitresult = veh waittilltimeout(3.5, # "enemy");
+    waitresult = veh waittilltimeout(3.5, #"enemy");
 
-    if(waitresult._notify == # "enemy" && isDefined(veh.enemy)) {
+    if(waitresult._notify == #"enemy" && isDefined(veh.enemy)) {
       if(veh.var_aac73d6c && !isDefined(veh.enemylastseentime)) {
         attempts = 0;
         max_tries = 10;
@@ -1095,16 +1098,16 @@ turretshutdown(killstreakid, team) {
 }
 
 watchturretshutdown(player, killstreakid, team) {
-  player endon(#"disconnect", # "joined_team", # "joined_spectators");
+  player endon(#"disconnect", #"joined_team", #"joined_spectators");
   player thread function_d6c5b32b(player, killstreakid, team);
   turret = self;
-  self waittill(#"ultimate_turret_shutdown", # "death");
+  self waittill(#"ultimate_turret_shutdown", #"death");
   turretshutdown(killstreakid, team);
 }
 
 function_d6c5b32b(player, killstreakid, team) {
   turret = self;
-  player waittill(#"disconnect", # "joined_team", # "joined_spectators");
+  player waittill(#"disconnect", #"joined_team", #"joined_spectators");
 
   if(isDefined(turret)) {
     turret turretshutdown(killstreakid, team);
@@ -1160,7 +1163,7 @@ function_59ce22f9(attacker, callback_data) {
   fxpos = isDefined(self gettagorigin("tag_turret")) ? self gettagorigin("tag_turret") : self.origin;
   playFX(level._equipment_explode_fx_lg, fxpos);
   self playSound("mpl_turret_exp");
-  bundle = level.killstreakbundle[# "ultimate_turret"];
+  bundle = level.killstreakbundle[#"ultimate_turret"];
 
   if(isDefined(bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
     playFX(bundle.var_bb6c29b4, self.origin);
@@ -1191,8 +1194,8 @@ function_31477582() {
 
     trace = physicstrace(self.origin + (0, 0, 15), self.origin + (0, 0, -10), (-3, -3, -1), (3, 3, 1), self.turret, 1 | 16);
 
-    if(trace[# "fraction"] > 0) {
-      new_origin = trace[# "position"];
+    if(trace[#"fraction"] > 0) {
+      new_origin = trace[#"position"];
       self.origin = (new_origin[0], new_origin[1], self.origin[2] - min(max_delta, self.origin[2] - new_origin[2]));
       max_delta += var_463c449d;
       waitframe(1);
@@ -1224,11 +1227,11 @@ on_player_killed() {
       continue;
     }
 
-    if(self.var_e78602fc.vehicletype === # "ultimate_turret") {
+    if(self.var_e78602fc.vehicletype === #"ultimate_turret") {
       continue;
     }
 
-    if(var_69501900.vehicletype === # "ultimate_turret") {
+    if(var_69501900.vehicletype === #"ultimate_turret") {
       if(!isDefined(var_f60ab10f)) {
         var_f60ab10f = [];
       } else if(!isarray(var_f60ab10f)) {

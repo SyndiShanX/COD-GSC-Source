@@ -11,7 +11,7 @@
 #namespace hive_gun;
 
 function autoexec __init__sytem__() {
-  system::register("hive_gun", &__init__, undefined, undefined);
+  system::register("hive_gun", & __init__, undefined, undefined);
 }
 
 function __init__() {

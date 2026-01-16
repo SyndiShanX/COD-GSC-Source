@@ -47,14 +47,13 @@ main() {
 FAVELA_KILLSTREAK_WEIGHT = 80;
 
 favelaCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"])) {
+  if(!isDefined(game["player_holding_level_killstrek"]))
     game["player_holding_level_killstrek"] = false;
-  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "ac130", FAVELA_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_FAVELA_IW6_AC130_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "ac130", FAVELA_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_FAVELA_IW6_AC130_PICKUP");
   maps\mp\killstreaks\_airdrop::generateMaxWeightedCrateValue();
   level thread watch_for_favela_crate();
 }
@@ -150,9 +149,8 @@ tvs_set(targetname) {
   while(true) {
     prev_fx = level.tv_fx_num;
     level.tv_fx_num = RandomIntRange(1, num_tv_fx);
-    if(level.tv_fx_num >= prev_fx) {
+    if(level.tv_fx_num >= prev_fx)
       level.tv_fx_num += 1;
-    }
     fx = level._effect[targetname][level.tv_fx_num];
     foreach(tv in tvs) {
       if(tv.isHealthy) {
@@ -308,7 +306,9 @@ debugWatchDvars() {
     foreach(dvar, callback in level.dbgDvarCallback) {
       value = GetDvar(dvar);
       if(value != "") {
-        [[callback]](value);
+        [
+          [callback]
+        ](value);
         SetDvar(dvar, "");
       }
     }

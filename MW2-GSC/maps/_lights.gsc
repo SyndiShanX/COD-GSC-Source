@@ -15,18 +15,17 @@ flickerLight(color0, color1, minDelay, maxDelay) {
   toColor = color0;
   delay = 0.0;
 
-  for(;;) {
+  for (;;) {
     fromColor = toColor;
     toColor = color0 + (color1 - color0) * randomfloat(1.0);
 
-    if(minDelay != maxDelay) {
+    if(minDelay != maxDelay)
       delay += randomfloatrange(minDelay, maxDelay);
-    } else {
+    else
       delay += minDelay;
-    }
 
     colorDeltaPerTime = (fromColor - toColor) * (1 / delay);
-    while(delay > 0) {
+    while (delay > 0) {
       self setLightColor(toColor + colorDeltaPerTime * delay);
       wait 0.05;
       delay -= 0.05;
@@ -49,10 +48,10 @@ generic_pulsing() {
   increment_on = (on - off) / (transition_on / .05);
   increment_off = (on - off) / (transition_off / .05);
 
-  for(;;) {
+  for (;;) {
     //ramp down
     time = 0;
-    while((time < transition_off)) {
+    while ((time < transition_off)) {
       curr -= increment_off;
       curr = clamp(curr, 0, 100);
       self setLightIntensity(curr);
@@ -65,7 +64,7 @@ generic_pulsing() {
 
     //ramp up
     time = 0;
-    while(time < transition_on) {
+    while (time < transition_on) {
       curr += increment_on;
       curr = clamp(curr, 0, 100);
       self setLightIntensity(curr);
@@ -93,9 +92,9 @@ generic_double_strobe() {
   linked_lights = false;
   linked_light_ents = [];
 
-  if(isDefined(self.script_noteworthy)) {
-    linked_things = getEntArray(self.script_noteworthy, "targetname");
-    for(i = 0; i < linked_things.size; i++) {
+  if(isdefined(self.script_noteworthy)) {
+    linked_things = getentarray(self.script_noteworthy, "targetname");
+    for (i = 0; i < linked_things.size; i++) {
       if(is_light_entity(linked_things[i])) {
         linked_lights = true;
         linked_light_ents[linked_light_ents.size] = linked_things[i];
@@ -110,7 +109,7 @@ generic_double_strobe() {
     //	assertmsg( "primary light has lit model but not unlit model ( " + lit_model.origin + " ) " );
   }
 
-  for(;;) {
+  for (;;) {
     //off wait time
     self setLightIntensity(off);
     if(linked_models) {
@@ -147,12 +146,11 @@ generic_double_strobe() {
 
 getclosests_flickering_model(origin) {
   //stuff in prefabs bleh. non of this script_noteworthy or linkto stuff works there. so doing closest thing with the light_flicker_model targetname
-  array = getEntArray("light_flicker_model", "targetname");
+  array = getentarray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
-  if(isDefined(model)) {
+  if(isdefined(model))
     return_array[0] = model;
-  }
   return return_array; // I'm losing my mind
 
 }
@@ -176,15 +174,15 @@ generic_flickering() {
 
   //prefabs need to support targetnames and script_linkTos to so that lights can be set up
   //by simply linking them to a prefab containing the on/off models instead of jumping through hoops (currently bugged)
-  if(isDefined(self.script_LinkTo)) {
+  if(isdefined(self.script_LinkTo)) {
     self.linked_prefab_ents = self get_linked_ents();
     assertex(self.linked_prefab_ents.size == 2, "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab that contains both on and off light models");
     foreach(ent in self.linked_prefab_ents) {
-      if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "on")) {
+      if((isdefined(ent.script_noteworthy)) && (ent.script_noteworthy == "on")) {
         self.lit_model = ent;
         continue;
       }
-      if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "off")) {
+      if((isdefined(ent.script_noteworthy)) && (ent.script_noteworthy == "off")) {
         self.unlit_model = ent;
         continue;
       }
@@ -193,22 +191,20 @@ generic_flickering() {
         self.linked_light_ents[self.linked_light_ents.size] = ent;
       }
     }
-    assertex(isDefined(self.lit_model), "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab contains a script_model light with script_noteworthy of 'on' ");
-    assertex(isDefined(self.unlit_model), "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab contains a script_model light with script_noteworthy of 'on' ");
+    assertex(isdefined(self.lit_model), "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab contains a script_model light with script_noteworthy of 'on' ");
+    assertex(isdefined(self.unlit_model), "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab contains a script_model light with script_noteworthy of 'on' ");
     self.linked_models = true;
   }
 
   //----------old way of getting linked lights and models....still supported--------------//
 
-  if(isDefined(self.script_noteworthy)) {
-    self.linked_things = getEntArray(self.script_noteworthy, "targetname");
-  }
+  if(isdefined(self.script_noteworthy))
+    self.linked_things = getentarray(self.script_noteworthy, "targetname");
 
-  if((!self.linked_things.size) && (!isDefined(self.linked_prefab_ents))) {
+  if((!self.linked_things.size) && (!isdefined(self.linked_prefab_ents)))
     self.linked_things = getclosests_flickering_model(self.origin);
-  }
 
-  for(i = 0; i < self.linked_things.size; i++) {
+  for (i = 0; i < self.linked_things.size; i++) {
     if(is_light_entity(self.linked_things[i])) {
       self.linked_lights = true;
       self.linked_light_ents[self.linked_light_ents.size] = self.linked_things[i];
@@ -240,9 +236,9 @@ generic_flicker() {
   num = 0;
 
   //Make the light flicker
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     num = randomintrange(1, 10);
-    while(num) {
+    while (num) {
       wait(randomfloatrange(.05, .1));
       if(curr > .2) {
         curr = randomfloatrange(0, .3);
@@ -260,18 +256,16 @@ generic_flicker() {
 
       self setLightIntensity(curr);
       if(self.linked_lights) {
-        for(i = 0; i < self.linked_light_ents.size; i++) {
+        for (i = 0; i < self.linked_light_ents.size; i++)
           self.linked_light_ents[i] setLightIntensity(curr);
-        }
       }
       num--;
     }
 
     self setLightIntensity(on);
     if(self.linked_lights) {
-      for(i = 0; i < self.linked_light_ents.size; i++) {
+      for (i = 0; i < self.linked_light_ents.size; i++)
         self.linked_light_ents[i] setLightIntensity(on);
-      }
     }
     if(self.linked_models) {
       self.lit_model show();
@@ -287,15 +281,14 @@ flickerLightIntensity(minDelay, maxDelay) {
   curr = on;
   num = 0;
 
-  for(;;) {
+  for (;;) {
     num = randomintrange(1, 10);
-    while(num) {
+    while (num) {
       wait(randomfloatrange(.05, .1));
-      if(curr > .2) {
+      if(curr > .2)
         curr = randomfloatrange(0, .3);
-      } else {
+      else
         curr = on;
-      }
 
       self setLightIntensity(curr);
       num--;
@@ -311,12 +304,12 @@ burning_trash_fire() {
 
   old_intensity = full;
 
-  for(;;) {
+  for (;;) {
     intensity = randomfloatrange(full * 0.7, full * 1.2);
     timer = randomfloatrange(0.3, 0.6);
     timer *= 20;
 
-    for(i = 0; i < timer; i++) {
+    for (i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
 
       self setLightIntensity(new_intensity);
@@ -332,30 +325,26 @@ strobeLight(intensity0, intensity1, period, kill_flag) {
   frequency = 360 / period;
   time = 0;
 
-  while(1) {
+  while (1) {
     interpolation = sin(time * frequency) * 0.5 + 0.5;
     self setLightIntensity(intensity0 + (intensity1 - intensity0) * interpolation);
     wait 0.05;
     time += 0.05;
-    if(time > period) {
+    if(time > period)
       time -= period;
-    }
-    if(isDefined(kill_flag)) {
-      if(flag(kill_flag)) {
+    if(isdefined(kill_flag)) {
+      if(flag(kill_flag))
         return;
-      }
     }
   }
 }
 
 // This function is non - blocking.It will probably need to be moved to code if scripted lights are needed in multiplayer.
 changeLightColorTo(targetColor, totalTime, accelTime, decelTime) {
-  if(!isDefined(accelTime)) {
+  if(!isdefined(accelTime))
     accelTime = 0;
-  }
-  if(!isDefined(decelTime)) {
+  if(!isdefined(decelTime))
     decelTime = 0;
-  }
   self thread changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime);
 }
 
@@ -386,7 +375,7 @@ changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
   if(time < accelTime) {
     halfRate = timeFactor / accelTime;
 
-    while(time < accelTime) {
+    while (time < accelTime) {
       fraction = halfRate * time * time;
       self setLightColor(vectorlerp(startColor, targetColor, fraction));
       wait 0.05;
@@ -394,7 +383,7 @@ changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
     }
   }
 
-  while(time < totalTime - decelTime) {
+  while (time < totalTime - decelTime) {
     fraction = timeFactor * (2 * time - accelTime);
     self setLightColor(vectorlerp(startColor, targetColor, fraction));
     wait 0.05;
@@ -405,7 +394,7 @@ changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
   if(time > 0) {
     halfRate = timeFactor / decelTime;
 
-    while(time > 0) {
+    while (time > 0) {
       fraction = 1 - halfRate * time * time;
       self setLightColor(vectorlerp(startColor, targetColor, fraction));
       wait 0.05;
@@ -426,12 +415,12 @@ tv_changes_intensity() {
   full = self getLightIntensity();
   old_intensity = full;
 
-  for(;;) {
+  for (;;) {
     intensity = randomfloatrange(full * 0.7, full * 1.2);
     timer = randomfloatrange(0.3, 1.2);
     timer *= 20;
 
-    for(i = 0; i < timer; i++) {
+    for (i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
 
       self setLightIntensity(new_intensity);
@@ -450,13 +439,13 @@ tv_changes_color() {
   rgb = [];
   old_rgb = [];
 
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     rgb[i] = 0;
     old_rgb[i] = 0;
   }
 
-  for(;;) {
-    for(i = 0; i < rgb.size; i++) {
+  for (;;) {
+    for (i = 0; i < rgb.size; i++) {
       old_rgb[i] = rgb[i];
       rgb[i] = randomfloat(range) + base;
     }
@@ -464,9 +453,9 @@ tv_changes_color() {
     timer = randomfloatrange(0.3, 1.2);
     timer *= 20;
 
-    for(i = 0; i < timer; i++) {
+    for (i = 0; i < timer; i++) {
       new_rgb = [];
-      for(p = 0; p < rgb.size; p++) {
+      for (p = 0; p < rgb.size; p++) {
         new_rgb[p] = rgb[p] * (i / timer) + old_rgb[p] * ((timer - i) / timer);
       }
 

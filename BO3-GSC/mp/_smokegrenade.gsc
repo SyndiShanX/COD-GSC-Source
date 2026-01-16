@@ -13,7 +13,7 @@
 #namespace smokegrenade;
 
 function autoexec __init__sytem__() {
-  system::register("smokegrenade", &__init__, undefined, undefined);
+  system::register("smokegrenade", & __init__, undefined, undefined);
 }
 
 function __init__() {

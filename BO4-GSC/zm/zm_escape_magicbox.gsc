@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_escape_magicbox;
 
 autoexec __init__system__() {
@@ -28,7 +29,7 @@ __init__() {
 }
 
 __main__() {
-  level.chest_joker_model = # "hash_4b77dcb67eb0dc91";
+  level.chest_joker_model = #"hash_4b77dcb67eb0dc91";
   level.chest_joker_custom_movement = &custom_joker_movement;
 }
 
@@ -43,7 +44,7 @@ custom_joker_movement() {
   mdl_lock = util::spawn_model(level.chest_joker_model, v_origin, self.angles + (0, 180, 0));
   mdl_lock.targetname = "box_lock";
   mdl_lock setCanDamage(1);
-  level.var_c7626f2a[# "box_lock"] = &pebble::function_bdd1bac8;
+  level.var_c7626f2a[#"box_lock"] = &pebble::function_bdd1bac8;
   level notify(#"hash_219aba01ff2d6de4");
   playsoundatposition(#"hash_7c7d8771a48e8871", mdl_lock.origin);
   wait 0.5;
@@ -62,7 +63,7 @@ custom_joker_movement() {
 }
 
 watch_for_lock() {
-  self endon(#"user_grabbed_weapon", # "chest_accessed");
+  self endon(#"user_grabbed_weapon", #"chest_accessed");
   self waittill(#"box_locked");
   self notify(#"kill_chest_think");
   self.grab_weapon_hint = 0;
@@ -123,12 +124,12 @@ magic_box_unlocks() {
 
 set_locked_magicbox_state(state) {
   switch (state) {
-    case # "locking":
+    case #"locking":
       self showzbarrierpiece(5);
       self thread magic_box_locks();
       self.state = "locking";
       break;
-    case # "unlocking":
+    case #"unlocking":
       self showzbarrierpiece(5);
       self thread magic_box_unlocks();
       self.state = "close";
@@ -155,3 +156,4 @@ function_be66db38() {
     e_box.zbarrier zm_magicbox::set_magic_box_zbarrier_state("<dev string:x5d>");
   }
 }
+

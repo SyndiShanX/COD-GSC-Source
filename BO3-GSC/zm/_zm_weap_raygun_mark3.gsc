@@ -19,7 +19,7 @@
 #namespace _zm_weap_raygun_mark3;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_raygun_mark3", &__init__, &__main__, undefined);
+  system::register("zm_weap_raygun_mark3", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -29,15 +29,15 @@ function __init__() {
   level.w_raygun_mark3lh_upgraded = getweapon("raygun_mark3lh_upgraded");
   zm_utility::register_slowdown("raygun_mark3lh", 0.7, 2);
   zm_utility::register_slowdown("raygun_mark3lh_upgraded", 0.5, 3);
-  zm_spawner::register_zombie_damage_callback(&raygun_mark3_damage_response);
+  zm_spawner::register_zombie_damage_callback( & raygun_mark3_damage_response);
   clientfield::register("scriptmover", "slow_vortex_fx", 12000, 2, "int");
   clientfield::register("actor", "ai_disintegrate", 12000, 1, "int");
   clientfield::register("vehicle", "ai_disintegrate", 12000, 1, "int");
   clientfield::register("actor", "ai_slow_vortex_fx", 12000, 2, "int");
   clientfield::register("vehicle", "ai_slow_vortex_fx", 12000, 2, "int");
-  visionset_mgr::register_info("visionset", "raygun_mark3_vortex_visionset", 12000, 24, 30, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
-  visionset_mgr::register_info("overlay", "raygun_mark3_vortex_blur", 12000, 24, 30, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
-  callback::on_connect(&watch_raygun_impact);
+  visionset_mgr::register_info("visionset", "raygun_mark3_vortex_visionset", 12000, 24, 30, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "raygun_mark3_vortex_blur", 12000, 24, 30, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
+  callback::on_connect( & watch_raygun_impact);
 }
 
 function __main__() {}
@@ -58,7 +58,7 @@ function is_beam_raygun(weapon) {
 
 function raygun_vortex_reposition(v_impact_origin) {
   v_nearest_navmesh_point = getclosestpointonnavmesh(v_impact_origin, 50, 32);
-  if(isDefined(v_nearest_navmesh_point)) {
+  if(isdefined(v_nearest_navmesh_point)) {
     v_vortex_origin = v_nearest_navmesh_point + vectorscale((0, 0, 1), 32);
   } else {
     v_vortex_origin = v_impact_origin;
@@ -68,7 +68,7 @@ function raygun_vortex_reposition(v_impact_origin) {
 
 function watch_raygun_impact() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("projectile_impact", w_weapon, v_pos, n_radius, e_projectile, v_normal);
     v_pos_final = raygun_vortex_reposition(v_pos + (v_normal * 32));
     if(is_slow_raygun(w_weapon)) {
@@ -80,7 +80,7 @@ function watch_raygun_impact() {
 function start_slow_vortex(w_weapon, v_pos, v_pos_final, n_radius, e_attacker, v_normal) {
   self endon("disconnect");
   mdl_vortex = spawn("script_model", v_pos);
-  mdl_vortex setModel("p7_fxanim_zm_stal_ray_gun_ball_mod");
+  mdl_vortex setmodel("p7_fxanim_zm_stal_ray_gun_ball_mod");
   playsoundatposition("wpn_mk3_orb_created", mdl_vortex.origin);
   mdl_vortex.angles = vectorscale((1, 0, 0), 270);
   mdl_vortex clientfield::set("slow_vortex_fx", 1);
@@ -101,7 +101,7 @@ function pulse_damage(e_owner, w_weapon) {
   if(w_weapon == level.w_raygun_mark3lh) {} else {
     playsoundatposition("wpn_mk3_orb_zark_far", self.origin);
   }
-  while(gettime() <= self.n_end_time) {
+  while (gettime() <= self.n_end_time) {
     if(self.n_damage_type == 1) {
       n_radius = 128;
       if(w_weapon == level.w_raygun_mark3lh) {
@@ -121,7 +121,7 @@ function pulse_damage(e_owner, w_weapon) {
     n_radius_squared = n_radius * n_radius;
     a_ai = getaiteamarray("axis");
     foreach(ai in a_ai) {
-      if(isDefined(ai.b_ignore_mark3_pulse_damage) && ai.b_ignore_mark3_pulse_damage) {
+      if(isdefined(ai.b_ignore_mark3_pulse_damage) && ai.b_ignore_mark3_pulse_damage) {
         continue;
       }
       if(distancesquared(self.origin, ai.origin) <= n_radius_squared) {
@@ -136,7 +136,7 @@ function pulse_damage(e_owner, w_weapon) {
       }
     }
     foreach(e_player in level.activeplayers) {
-      if(isDefined(e_player) && (!(isDefined(e_player.raygun_mark3_vision_on) && e_player.raygun_mark3_vision_on))) {
+      if(isdefined(e_player) && (!(isdefined(e_player.raygun_mark3_vision_on) && e_player.raygun_mark3_vision_on))) {
         if(distance(e_player.origin, self.origin) < (float(n_radius / 2))) {
           e_player thread player_vortex_visionset();
         }
@@ -162,13 +162,13 @@ function player_vortex_visionset() {
 
 function wait_for_beam_damage() {
   self endon("death");
-  self playLoopSound("wpn_mk3_orb_loop");
-  while(true) {
+  self playloopsound("wpn_mk3_orb_loop");
+  while (true) {
     self waittill("damage", n_damage, e_attacker, v_direction, v_point, str_means_of_death, str_tag_name, str_model_name, str_part_name, w_weapon);
     if(is_beam_raygun(w_weapon)) {
       self stoploopsound();
-      self setModel("tag_origin");
-      self playLoopSound("wpn_mk3_orb_loop_activated");
+      self setmodel("tag_origin");
+      self playloopsound("wpn_mk3_orb_loop_activated");
       self.takedamage = 0;
       self.n_damage_type = 2;
       self clientfield::set("slow_vortex_fx", self.n_damage_type);
@@ -183,10 +183,12 @@ function wait_for_beam_damage() {
 }
 
 function raygun_mark3_damage_response(str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel) {
-  if(isDefined(w_weapon)) {
+  if(isdefined(w_weapon)) {
     if(w_weapon == level.w_raygun_mark3lh || w_weapon == level.w_raygun_mark3lh_upgraded) {
-      if(isDefined(self.func_raygun_mark3_damage_response)) {
-        return [[self.func_raygun_mark3_damage_response]](str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel);
+      if(isdefined(self.func_raygun_mark3_damage_response)) {
+        return [
+          [self.func_raygun_mark3_damage_response]
+        ](str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel);
       }
       if(w_weapon == level.w_raygun_mark3lh) {
         self thread zm_utility::slowdown_ai("raygun_mark3lh");
@@ -205,9 +207,9 @@ function apply_vortex_fx(n_damage_type, n_time) {
   self notify("apply_vortex_fx");
   self endon("apply_vortex_fx");
   self endon("death");
-  if(!(isDefined(self.b_vortex_fx_applied) && self.b_vortex_fx_applied)) {
+  if(!(isdefined(self.b_vortex_fx_applied) && self.b_vortex_fx_applied)) {
     self.b_vortex_fx_applied = 1;
-    if(isDefined(self.allowpain) && self.allowpain) {
+    if(isdefined(self.allowpain) && self.allowpain) {
       self.b_old_allow_pain = 1;
       self ai::disable_pain();
     }
@@ -218,7 +220,7 @@ function apply_vortex_fx(n_damage_type, n_time) {
     }
   }
   util::waittill_any_timeout(n_time, "death", "apply_vortex_fx");
-  if(isDefined(self.b_old_allow_pain) && self.b_old_allow_pain) {
+  if(isdefined(self.b_old_allow_pain) && self.b_old_allow_pain) {
     self ai::enable_pain();
   }
   self clientfield::set("ai_slow_vortex_fx", 0);
@@ -226,7 +228,7 @@ function apply_vortex_fx(n_damage_type, n_time) {
 
 function disintegrate_zombie(e_inflictor, e_attacker, w_weapon) {
   self endon("death");
-  if(isDefined(self.b_disintegrating) && self.b_disintegrating) {
+  if(isdefined(self.b_disintegrating) && self.b_disintegrating) {
     return;
   }
   self.b_disintegrating = 1;

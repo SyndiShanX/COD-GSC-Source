@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_scepter;
 
 autoexec __init__system__() {
@@ -17,59 +18,59 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee_impact", 1, 1, "counter", &function_abff2ba8, 1, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee", 1, 1, "counter", &function_cde26b0e, 1, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_heal", 1, 1, "counter", &function_3f83a22f, 0, 0);
-  clientfield::register("scriptmover", "" + # "beacon_fx", 1, 1, "int", &beacon_fx, 0, 0);
-  clientfield::register("allplayers", "" + # "skull_turret_beam_fire", 1, 2, "int", &skull_turret_beam_fire, 0, 1);
-  clientfield::register("allplayers", "" + # "scepter_beam_flash", 1, 2, "int", &flash_fx, 0, 0);
-  clientfield::register("toplayer", "" + # "hero_scepter_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_revive", 1, 1, "int", &revive_fx, 0, 0);
-  clientfield::register("actor", "" + # "zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
-  clientfield::register("vehicle", "" + # "zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
-  clientfield::register("toplayer", "" + # "scepter_rumble", 1, 3, "counter", &scepter_rumble, 0, 0);
-  level._effect[# "hash_1c2f974106158a5f"] = # "hash_7c1a6aad09dc0d7a";
-  level._effect[# "hash_1c28ab41060f8dad"] = # "hash_7c145ead09d78d68";
-  level._effect[# "scepter_bubble"] = # "hash_17756eb35aac3766";
-  level._effect[# "hash_4c17911c3aed59ae"] = # "hash_15d8d928da3054a8";
-  level._effect[# "hash_47a7d03689c68789"] = # "hash_7bf95975cc22d9e3";
-  level._effect[# "scepter_revive"] = # "hash_7247f41820f6a4ac";
-  level._effect[# "scepter_heal"] = # "zombie/fx_bgb_near_death_3p";
-  level._effect[# "hash_5a1d977ed6c0bfbc"] = # "hash_7e8ecb7f481f27c1";
-  level._effect[# "hash_5a24a37ed6c6f2ce"] = # "hash_7e95b77f48252473";
-  level._effect[# "hash_1764e15fc9d376eb"] = # "hash_7951bc836b30dd06";
-  level._effect[# "hash_175dd55fc9cd43d9"] = # "hash_794ad0836b2ae054";
-  level._effect[# "hash_3c7dd8fed636096e"] = # "hash_683f232e39602a5f";
-  level._effect[# "hash_3c76ccfed62fd65c"] = # "hash_6838372e395a2dad";
-  level._effect[# "hash_143a6ec5331de8ec"] = # "hash_2dfc8a9a16973a20";
-  level._effect[# "hash_14407ac5332268fe"] = # "hash_2e02969a169bba32";
-  level._effect[# "hash_37498552cad06776"] = # "hash_2bd6cabc06cbf037";
-  level._effect[# "hash_37429952caca6ac4"] = # "hash_2bcfbebc06c5bd25";
-  level._effect[# "turret_zombie_shock"] = "zm_weapons/fx8_scepter_ray_zmb_hit_shock";
-  level._effect[# "turret_zombie_explode"] = "zm_weapons/fx8_scepter_ray_zmb_hit_exp";
-  level._effect[# "skull_turret_shock_eyes"] = "zm_weapons/fx8_scepter_ray_zmb_hit_eye";
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee_impact", 1, 1, "counter", &function_abff2ba8, 1, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee", 1, 1, "counter", &function_cde26b0e, 1, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_heal", 1, 1, "counter", &function_3f83a22f, 0, 0);
+  clientfield::register("scriptmover", "" + #"beacon_fx", 1, 1, "int", &beacon_fx, 0, 0);
+  clientfield::register("allplayers", "" + #"skull_turret_beam_fire", 1, 2, "int", &skull_turret_beam_fire, 0, 1);
+  clientfield::register("allplayers", "" + #"scepter_beam_flash", 1, 2, "int", &flash_fx, 0, 0);
+  clientfield::register("toplayer", "" + #"hero_scepter_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_revive", 1, 1, "int", &revive_fx, 0, 0);
+  clientfield::register("actor", "" + #"zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
+  clientfield::register("vehicle", "" + #"zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
+  clientfield::register("toplayer", "" + #"scepter_rumble", 1, 3, "counter", &scepter_rumble, 0, 0);
+  level._effect[#"hash_1c2f974106158a5f"] = #"hash_7c1a6aad09dc0d7a";
+  level._effect[#"hash_1c28ab41060f8dad"] = #"hash_7c145ead09d78d68";
+  level._effect[#"scepter_bubble"] = #"hash_17756eb35aac3766";
+  level._effect[#"hash_4c17911c3aed59ae"] = #"hash_15d8d928da3054a8";
+  level._effect[#"hash_47a7d03689c68789"] = #"hash_7bf95975cc22d9e3";
+  level._effect[#"scepter_revive"] = #"hash_7247f41820f6a4ac";
+  level._effect[#"scepter_heal"] = #"zombie/fx_bgb_near_death_3p";
+  level._effect[#"hash_5a1d977ed6c0bfbc"] = #"hash_7e8ecb7f481f27c1";
+  level._effect[#"hash_5a24a37ed6c6f2ce"] = #"hash_7e95b77f48252473";
+  level._effect[#"hash_1764e15fc9d376eb"] = #"hash_7951bc836b30dd06";
+  level._effect[#"hash_175dd55fc9cd43d9"] = #"hash_794ad0836b2ae054";
+  level._effect[#"hash_3c7dd8fed636096e"] = #"hash_683f232e39602a5f";
+  level._effect[#"hash_3c76ccfed62fd65c"] = #"hash_6838372e395a2dad";
+  level._effect[#"hash_143a6ec5331de8ec"] = #"hash_2dfc8a9a16973a20";
+  level._effect[#"hash_14407ac5332268fe"] = #"hash_2e02969a169bba32";
+  level._effect[#"hash_37498552cad06776"] = #"hash_2bd6cabc06cbf037";
+  level._effect[#"hash_37429952caca6ac4"] = #"hash_2bcfbebc06c5bd25";
+  level._effect[#"turret_zombie_shock"] = "zm_weapons/fx8_scepter_ray_zmb_hit_shock";
+  level._effect[#"turret_zombie_explode"] = "zm_weapons/fx8_scepter_ray_zmb_hit_exp";
+  level._effect[#"skull_turret_shock_eyes"] = "zm_weapons/fx8_scepter_ray_zmb_hit_eye";
 }
 
 function_abff2ba8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    playviewmodelfx(localclientnum, level._effect[# "hash_143a6ec5331de8ec"], "tag_flash");
+    playviewmodelfx(localclientnum, level._effect[#"hash_143a6ec5331de8ec"], "tag_flash");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "hash_14407ac5332268fe"], self, "tag_flash");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_14407ac5332268fe"], self, "tag_flash");
 }
 
 function_cde26b0e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    playviewmodelfx(localclientnum, level._effect[# "hash_37498552cad06776"], "tag_flash");
+    playviewmodelfx(localclientnum, level._effect[#"hash_37498552cad06776"], "tag_flash");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "hash_37429952caca6ac4"], self, "tag_flash");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_37429952caca6ac4"], self, "tag_flash");
 }
 
 skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self function_69ccb98b(localclientnum);
 
   if(newval > 0) {
@@ -97,7 +98,7 @@ function_69ccb98b(localclientnum) {
   if(isDefined(self.var_4cd8e6cb)) {
     self stoploopsound(self.var_4cd8e6cb);
     self.var_4cd8e6cb = undefined;
-    self playSound(localclientnum, # "hash_3126b098b980b5a3");
+    self playSound(localclientnum, #"hash_3126b098b980b5a3");
   }
 }
 
@@ -106,10 +107,10 @@ function_da5829be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", # "hash_3cbfa1076dfa868b");
+  self endon(#"death", #"hash_3cbfa1076dfa868b");
 
   if(!isDefined(self.var_4cd8e6cb)) {
-    self playSound(localclientnum, # "hash_3765e25049981166");
+    self playSound(localclientnum, #"hash_3765e25049981166");
     self.var_4cd8e6cb = self playLoopSound(#"hash_170aa1970243fc4a");
   }
 
@@ -169,6 +170,7 @@ flash_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwast
 
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug", 0)) {
+
     sphere(origin, 2, color, 0.75, 1, 10, 100);
 
   }
@@ -176,6 +178,7 @@ render_debug_sphere(origin, color) {
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug", 0)) {
+
     line(origin1, origin2, color, 0.75, 1, 100);
 
   }
@@ -185,9 +188,9 @@ function_f11b8d1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     if(!isDefined(self.var_ff2eebc7)) {
       str_tag = self zm_utility::function_467efa7b();
-      self.var_ff2eebc7 = util::playFXOnTag(localclientnum, level._effect[# "hash_47a7d03689c68789"], self, str_tag);
+      self.var_ff2eebc7 = util::playFXOnTag(localclientnum, level._effect[#"hash_47a7d03689c68789"], self, str_tag);
       sndorigin = self gettagorigin(str_tag);
-      playSound(0, # "zmb_vocals_zombie_skull_scream", sndorigin);
+      playSound(0, #"zmb_vocals_zombie_skull_scream", sndorigin);
     }
 
     return;
@@ -219,7 +222,7 @@ beacon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
     }
 
     if(isDefined(self.b_beacon_fx) && self.b_beacon_fx) {
-      self.n_beacon_fx = util::playFXOnTag(localclientnum, level._effect[# "scepter_bubble"], self, "tag_origin");
+      self.n_beacon_fx = util::playFXOnTag(localclientnum, level._effect[#"scepter_bubble"], self, "tag_origin");
     }
 
     return;
@@ -229,7 +232,7 @@ beacon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 
   if(isDefined(self.n_beacon_fx)) {
     deletefx(localclientnum, self.n_beacon_fx, 1);
-    util::playFXOnTag(localclientnum, level._effect[# "hash_4c17911c3aed59ae"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_4c17911c3aed59ae"], self, "tag_origin");
     self.n_beacon_fx = undefined;
   }
 
@@ -259,7 +262,7 @@ function_3f83a22f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(!(isDefined(self.var_5427d523) && self.var_5427d523)) {
         self.var_5427d523 = 1;
-        self.var_aa9e07fe[localclientnum] = util::playFXOnTag(localclientnum, level._effect[# "scepter_heal"], self, "j_spine4");
+        self.var_aa9e07fe[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"scepter_heal"], self, "j_spine4");
         fxhandle = self.var_aa9e07fe[localclientnum];
         wait 0.5;
 
@@ -279,9 +282,9 @@ function_3f83a22f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 revive_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_a776839a)) {
-      self.var_a776839a = util::playFXOnTag(localclientnum, level._effect[# "scepter_revive"], self, "tag_eye");
+      self.var_a776839a = util::playFXOnTag(localclientnum, level._effect[#"scepter_revive"], self, "tag_eye");
       sndorigin = self gettagorigin("J_Eyeball_LE");
-      self playSound(localclientnum, # "hash_29c60da797dd7b3");
+      self playSound(localclientnum, #"hash_29c60da797dd7b3");
     }
 
     return;

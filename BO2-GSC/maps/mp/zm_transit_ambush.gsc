@@ -31,28 +31,28 @@ initambusheffects() {
 }
 
 shouldstartambushround() {
-  if(level.ambushpercentageperstop == 100) {
+  if(level.ambushpercentageperstop == 100)
     return true;
-  }
 
-  if(getdvarint(#"_id_FA81816F") == 2) {
+  if(getdvarint(#"_id_FA81816F") == 2)
     return false;
-  }
 
-  if(level.numbusstopssincelastambushround < 2) {}
+  if(level.numbusstopssincelastambushround < 2) {
+  }
 
   randint = randomintrange(0, 100);
   percentchance = level.numbusstopssincelastambushround * level.ambushpercentageperstop;
 
-  if(randint < percentchance) {}
+  if(randint < percentchance) {
+  }
 
   percentchance = level.numroundssincelastambushround * level.ambushpercentageperround;
 
-  if(randint < percentchance) {}
-
-  if(maps\mp\zm_transit_bus::busgasempty()) {
-    return true;
+  if(randint < percentchance) {
   }
+
+  if(maps\mp\zm_transit_bus::busgasempty())
+    return true;
 
   return false;
 }
@@ -93,18 +93,16 @@ ambushroundspawning() {
 }
 
 limitedambushspawn() {
-  if(level.numambushrounds < 3) {
+  if(level.numambushrounds < 3)
     dogcount = level.dog_targets.size * 6;
-  } else {
+  else
     dogcount = level.dog_targets.size * 8;
-  }
 
   setupdogspawnlocs();
   level thread ambushroundspawnfailsafe(20);
 
-  while(get_current_zombie_count() > 0) {
+  while(get_current_zombie_count() > 0)
     wait 1.0;
-  }
 
   level notify("end_ambushWaitFunction");
 }
@@ -122,7 +120,8 @@ ambushroundthink() {
   ambushendround();
 }
 
-ambushwaitfunction() {}
+ambushwaitfunction() {
+}
 
 ambushpointfailsafe() {
   level.the_bus endon("ambush_point");
@@ -178,9 +177,8 @@ ambushdoghealthincrease() {
 ambushroundaftermath() {
   power_up_origin = level.the_bus gettagorigin("tag_body");
 
-  if(isDefined(power_up_origin)) {
+  if(isDefined(power_up_origin))
     level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
-  }
 }
 
 ambushroundeffects() {
@@ -217,7 +215,7 @@ ambushlightningeffect(tag) {
 setupdogspawnlocs() {
   level.enemy_dog_locations = [];
   currentzone = undefined;
-  ambush_zones = getEntArray("ambush_volume", "script_noteworthy");
+  ambush_zones = getentarray("ambush_volume", "script_noteworthy");
 
   for(i = 0; i < ambush_zones.size; i++) {
     touching = 0;

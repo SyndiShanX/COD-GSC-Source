@@ -3,8 +3,11 @@
  * Script: character\mp_character_opforce_woods_sniper.gsc
 ***********************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_opforce_russian_woodland_sniper");
+  self setmodel("mp_body_opforce_russian_woodland_sniper");
   self attach("head_opforce_russian_woodland_sniper", "", 1);
   self.headmodel = "head_opforce_russian_woodland_sniper";
   self setviewmodel("viewhands_russian_c");

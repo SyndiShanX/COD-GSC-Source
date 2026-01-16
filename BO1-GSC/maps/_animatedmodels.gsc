@@ -8,10 +8,9 @@
 #using_animtree("animated_props");
 main() {
   waittillframeend;
-  if(getDvar(#"animated_trees_enabled") == "") {
+  if(getDvar(#"animated_trees_enabled") == "")
     setdvar("animated_trees_enabled", "1");
-  }
-  level.wind = spawnStruct();
+  level.wind = spawnstruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
@@ -21,7 +20,7 @@ main() {
     level.anim_prop_models = [];
   }
   level.init_animatedmodels = [];
-  animated_models = getEntArray("animated_model", "targetname");
+  animated_models = getentarray("animated_model", "targetname");
   if(getDvar(#"animated_trees_enabled") == "1") {
     array_thread(animated_models, ::model_init);
   } else {
@@ -73,12 +72,10 @@ print_modellist_bykey(key) {
 
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
-  if(isDefined(anima["still"])) {
+  if(isDefined(anima["still"]))
     println("xanim," + anima["still"]);
-  }
-  if(isDefined(anima["strong"])) {
+  if(isDefined(anima["strong"]))
     println("xanim," + anima["strong"]);
-  }
 }
 
 model_init() {
@@ -136,9 +133,8 @@ model_init() {
       break;
   }
   level.init_animatedmodels[self.model] = anima;
-  if(!isDefined(level.anim_prop_models[self.model])) {
+  if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
-  }
 }
 
 model_disable() {

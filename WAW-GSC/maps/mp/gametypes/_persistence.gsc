@@ -12,7 +12,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player setClientDvar("ui_xpText", "1");
     player.enableText = true;
@@ -20,9 +20,8 @@ onPlayerConnect() {
 }
 
 statGet(dataName) {
-  if(!level.onlineGame) {
+  if(!level.onlineGame)
     return 0;
-  }
   return self getStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)));
 }
 

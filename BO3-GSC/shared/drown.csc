@@ -14,12 +14,12 @@
 #namespace drown;
 
 function autoexec __init__sytem__() {
-  system::register("drown", &__init__, undefined, undefined);
+  system::register("drown", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "drown_stage", 1, 3, "int", &drown_stage_callback, 0, 0);
-  callback::on_localplayer_spawned(&player_spawned);
+  clientfield::register("toplayer", "drown_stage", 1, 3, "int", & drown_stage_callback, 0, 0);
+  callback::on_localplayer_spawned( & player_spawned);
   level.playermaxhealth = getgametypesetting("playerMaxHealth");
   level.player_swim_damage_interval = getdvarfloat("player_swimDamagerInterval", 5000) * 1000;
   level.player_swim_damage = getdvarfloat("player_swimDamage", 5000);
@@ -65,7 +65,7 @@ function player_spawned(localclientnum) {
 }
 
 function player_init_drown_values() {
-  if(!isDefined(self.drown_start_time)) {
+  if(!isdefined(self.drown_start_time)) {
     self.drown_start_time = 0;
     self.drown_outerradius = 0;
     self.drown_innerradius = 0;
@@ -103,7 +103,7 @@ function player_drown_fx(localclientnum, stage) {
   if(stage == 1) {
     stageduration = 2000;
   }
-  while(true) {
+  while (true) {
     currenttime = getservertime(localclientnum);
     elapsedtime = currenttime - self.drown_start_time;
     stageratio = math::clamp((currenttime - lastoutwatertimestage) / stageduration, 0, 1);
@@ -126,7 +126,7 @@ function player_fade_out_drown_fx(localclientnum) {
   self player_init_drown_values();
   fadestarttime = getservertime(localclientnum);
   currenttime = getservertime(localclientnum);
-  while((currenttime - fadestarttime) < 250) {
+  while ((currenttime - fadestarttime) < 250) {
     ratio = (currenttime - fadestarttime) / 250;
     outerradius = lerpfloat(self.drown_outerradius, 1.41421, ratio);
     innerradius = lerpfloat(self.drown_innerradius, 1.41421, ratio);

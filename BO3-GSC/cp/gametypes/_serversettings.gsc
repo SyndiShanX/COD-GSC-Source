@@ -9,11 +9,11 @@
 #namespace serversettings;
 
 function autoexec __init__sytem__() {
-  system::register("serversettings", &__init__, undefined, undefined);
+  system::register("serversettings", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
@@ -62,7 +62,7 @@ function init() {
   level.mapsize = getdvarfloat("scr_mapsize");
   constrain_gametype(getdvarstring("g_gametype"));
   constrain_map_size(level.mapsize);
-  for(;;) {
+  for (;;) {
     update();
     wait(5);
   }
@@ -92,41 +92,41 @@ function update() {
 }
 
 function constrain_gametype(gametype) {
-  entities = getEntArray();
-  for(i = 0; i < entities.size; i++) {
+  entities = getentarray();
+  for (i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(gametype == "dm") {
-      if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
+      if(isdefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
         entity delete();
       }
       continue;
     }
     if(gametype == "tdm") {
-      if(isDefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1") {
+      if(isdefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1") {
         entity delete();
       }
       continue;
     }
     if(gametype == "ctf") {
-      if(isDefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1") {
+      if(isdefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1") {
         entity delete();
       }
       continue;
     }
     if(gametype == "hq") {
-      if(isDefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1") {
+      if(isdefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1") {
         entity delete();
       }
       continue;
     }
     if(gametype == "sd") {
-      if(isDefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1") {
+      if(isdefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1") {
         entity delete();
       }
       continue;
     }
     if(gametype == "koth") {
-      if(isDefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1") {
+      if(isdefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1") {
         entity delete();
       }
     }
@@ -134,29 +134,29 @@ function constrain_gametype(gametype) {
 }
 
 function constrain_map_size(mapsize) {
-  entities = getEntArray();
-  for(i = 0; i < entities.size; i++) {
+  entities = getentarray();
+  for (i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(int(mapsize) == 8) {
-      if(isDefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1") {
+      if(isdefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1") {
         entity delete();
       }
       continue;
     }
     if(int(mapsize) == 16) {
-      if(isDefined(entity.script_mapsize_16) && entity.script_mapsize_16 != "1") {
+      if(isdefined(entity.script_mapsize_16) && entity.script_mapsize_16 != "1") {
         entity delete();
       }
       continue;
     }
     if(int(mapsize) == 32) {
-      if(isDefined(entity.script_mapsize_32) && entity.script_mapsize_32 != "1") {
+      if(isdefined(entity.script_mapsize_32) && entity.script_mapsize_32 != "1") {
         entity delete();
       }
       continue;
     }
     if(int(mapsize) == 64) {
-      if(isDefined(entity.script_mapsize_64) && entity.script_mapsize_64 != "1") {
+      if(isdefined(entity.script_mapsize_64) && entity.script_mapsize_64 != "1") {
         entity delete();
       }
     }

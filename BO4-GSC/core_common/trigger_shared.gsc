@@ -12,6 +12,7 @@
 #include scripts\core_common\teleport_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace trigger;
 
 autoexec __init__system__() {
@@ -461,7 +462,7 @@ _trigger_wait_think(s_tracker, e_entity) {
   s_tracker endon(#"trigger");
   e_other = _trigger_wait(e_entity);
   s_tracker notify(#"trigger", {
-    #activator: e_other,
+    #activator: e_other, 
     #trigger: self
   });
 }
@@ -567,11 +568,11 @@ update_based_on_flags() {
 }
 
 is_look_trigger() {
-  return isDefined(self.spawnflags) && (self.spawnflags & 256) == 256 && !is_trigger_of_type("trigger_damage") && !is_trigger_of_type("trigger_damage_new");
+  return isDefined(self.spawnflags) && (self.spawnflags&256) == 256 && !is_trigger_of_type("trigger_damage") && !is_trigger_of_type("trigger_damage_new");
 }
 
 is_trigger_once() {
-  return isDefined(self.spawnflags) && (self.spawnflags & 1024) == 1024 || is_trigger_of_type("trigger_once", "trigger_once_new");
+  return isDefined(self.spawnflags) && (self.spawnflags&1024) == 1024 || is_trigger_of_type("trigger_once", "trigger_once_new");
 }
 
 wait_till_any(...) {

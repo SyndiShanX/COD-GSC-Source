@@ -51,37 +51,31 @@ vehicle_rumble(localClientNum) {
   rumblestruct = level.vehicle_rumble[type];
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
-  if(!isDefined(self.rumbleon)) {
+  if(!isDefined(self.rumbleon))
     self.rumbleon = true;
-  }
-  if(isDefined(rumblestruct.scale)) {
+  if(isDefined(rumblestruct.scale))
     self.rumble_scale = rumblestruct.scale;
-  } else {
+  else
     self.rumble_scale = 0.15;
-  }
-  if(isDefined(rumblestruct.duration)) {
+  if(isDefined(rumblestruct.duration))
     self.rumble_duration = rumblestruct.duration;
-  } else {
+  else
     self.rumble_duration = 4.5;
-  }
-  if(isDefined(rumblestruct.radius)) {
+  if(isDefined(rumblestruct.radius))
     self.rumble_radius = rumblestruct.radius;
-  } else {
+  else
     self.rumble_radius = 600;
-  }
-  if(isDefined(rumblestruct.basetime)) {
+  if(isDefined(rumblestruct.basetime))
     self.rumble_basetime = rumblestruct.basetime;
-  } else {
+  else
     self.rumble_basetime = 1;
-  }
-  if(isDefined(rumblestruct.randomaditionaltime)) {
+  if(isDefined(rumblestruct.randomaditionaltime))
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
-  } else {
+  else
     self.rumble_randomaditionaltime = 1;
-  }
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
-  while(1) {
+  while (1) {
     if((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) > radius_squared) || self getspeed() < 35) {
       wait(0.2);
       continue;
@@ -97,7 +91,7 @@ vehicle_rumble(localClientNum) {
     } else {
       self PlayRumbleLoopOnEntity(localClientNum, level.vehicle_rumble[type].rumble);
     }
-    while((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 5)) {
+    while ((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 5)) {
       wait(self.rumble_basetime + randomfloat(self.rumble_randomaditionaltime));
     }
     self StopRumble(localClientNum, level.vehicle_rumble[type].rumble);
@@ -137,7 +131,7 @@ tread(localClientNum, tagname, side, relativeOffset) {
   if(treadfx == -1) {
     return;
   }
-  for(;;) {
+  for (;;) {
     speed = self getspeed();
     if(speed < 25) {
       wait 0.1;
@@ -145,20 +139,19 @@ tread(localClientNum, tagname, side, relativeOffset) {
     }
     waitTime = (1 / speed);
     waitTime = (waitTime * 35);
-    if(waitTime < 0.1) {
+    if(waitTime < 0.1)
       waitTime = 0.1;
-    } else if(waitTime > 0.3) {
+    else if(waitTime > 0.3)
       waitTime = 0.3;
-    }
     wait waitTime;
     lastfx = treadfx;
     treadfx = treadget(self, side);
     if(treadfx != -1) {
       ang = self getTagAngles(tagname);
-      forwardVec = anglesToForward(ang);
+      forwardVec = anglestoforward(ang);
       effectOrigin = self getTagOrigin(tagname);
       forwardVec = vector_multiply(forwardVec, waitTime);
-      playFX(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
+      playfx(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
     }
   }
 }
@@ -183,9 +176,8 @@ treadget(vehicle, side) {
     return -1;
   }
   treadfx = level._vehicle_effect[vehicle.vehicletype][surface];
-  if(!isDefined(treadfx)) {
+  if(!isDefined(treadfx))
     treadfx = -1;
-  }
   return treadfx;
 }
 
@@ -200,7 +192,7 @@ vehicle_watch_damage(localClientNum) {
   lastLeftTreadHealth = 0;
   lastRightTreadHealth = 0;
   minSparkSpeed = 25;
-  while(self GetVehicleHealth() > 0) {
+  while (self GetVehicleHealth() > 0) {
     vehiclespeed = self getspeed();
     leftTreadHealth = self getlefttreadhealth();
     rightTreadHealth = self getrighttreadhealth();
@@ -214,39 +206,39 @@ vehicle_watch_damage(localClientNum) {
     tag = "tag_treads_left";
     if(leftTreadHealth <= 0.4) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][1])) {
-        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][1], self, tag);
+        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][1], self, tag);
       }
       if(keepWatchingLeftTread && leftTreadHealth <= 0) {
         keepWatchingLeftTread = false;
         if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][2])) {
-          playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][2], self, tag);
+          playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][2], self, tag);
         }
       }
     } else if(leftTreadHealth < 0.7) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][0])) {
-        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][0], self, tag);
+        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][0], self, tag);
       }
       if(isDefined(level.tread_grind_fx[self.vehicletype][0]) && vehiclespeed > minSparkSpeed) {
-        playFXOnTag(localClientNum, level.tread_grind_fx[self.vehicletype][0], self, tag);
+        playfxontag(localClientNum, level.tread_grind_fx[self.vehicletype][0], self, tag);
       }
     }
     tag = "tag_treads_right";
     if(rightTreadHealth <= 0.4) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][1])) {
-        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][1], self, tag);
+        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][1], self, tag);
       }
       if(keepWatchingRightTread && leftTreadHealth <= 0) {
         keepWatchingRightTread = false;
         if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][2])) {
-          playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][2], self, tag);
+          playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][2], self, tag);
         }
       }
     } else if(rightTreadHealth < 0.7) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][0])) {
-        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][0], self, tag);
+        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][0], self, tag);
       }
       if(isDefined(level.tread_grind_fx[self.vehicletype][1]) && vehiclespeed > minSparkSpeed) {
-        playFXOnTag(localClientNum, level.tread_grind_fx[self.vehicletype][1], self, tag);
+        playfxontag(localClientNum, level.tread_grind_fx[self.vehicletype][1], self, tag);
       }
     }
     wait(0.1);
@@ -258,7 +250,7 @@ playTankExhaust(localClientNum) {
   self endon("stop_exhaust_fx");
   level endon("stop_exhaust_fx");
   exhaustDelay = 0.1;
-  for(;;) {
+  for (;;) {
     if(!isDefined(self) || !(self isalive())) {
       return;
     } else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
@@ -268,11 +260,11 @@ playTankExhaust(localClientNum) {
     tag_left_orig = self gettagorigin("tag_engine_left");
     tag_left_angles = self gettagangles("tag_engine_left");
     if(self getspeed() > 0) {
-      playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglesToForward(tag_left_angles));
+      playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglestoforward(tag_left_angles));
       if(!level.vehicle_exhaust[self.model].one_exhaust) {
         tag_right_orig = self gettagorigin("tag_engine_right");
         tag_right_angles = self gettagangles("tag_engine_right");
-        playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglesToForward(tag_right_angles));
+        playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglestoforward(tag_right_angles));
       }
     }
     wait exhaustDelay;
@@ -288,7 +280,7 @@ build_exhaust(model, effect, one_exhaust) {
   if(!isDefined(level.vehicle_exhaust)) {
     level.vehicle_exhaust = [];
   }
-  level.vehicle_exhaust[model] = spawnStruct();
+  level.vehicle_exhaust[model] = spawnstruct();
   level.vehicle_exhaust[model].exhaust_fx = loadfx(effect);
   if(isDefined(one_exhaust) && one_exhaust) {
     level.vehicle_exhaust[model].one_exhaust = true;
@@ -309,24 +301,21 @@ build_gear(vehicletype, model, tag) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
-  if(isDefined(basetime)) {
+  if(isDefined(basetime))
     struct.basetime = basetime;
-  }
-  if(isDefined(randomaditionaltime)) {
+  if(isDefined(randomaditionaltime))
     struct.randomaditionaltime = randomaditionaltime;
-  }
   return struct;
 }
 
 build_rumble(type, rumble, scale, duration, radius, basetime, randomaditionaltime) {
   println("*** Client : Building rumble for " + type);
-  if(!isDefined(level.vehicle_rumble)) {
+  if(!isDefined(level.vehicle_rumble))
     level.vehicle_rumble = [];
-  }
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
   assert(isDefined(rumble));
   struct.rumble = precacherumble(rumble);

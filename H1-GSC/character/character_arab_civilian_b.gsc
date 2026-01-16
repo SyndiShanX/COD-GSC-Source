@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setModel("character_arab_civilian_lowres_b");
+  self setmodel("character_arab_civilian_lowres_b");
   self attach("character_arab_civilian_lowres_b_head", "", 1);
   self.headmodel = "character_arab_civilian_lowres_b_head";
   self.voice = "arab";

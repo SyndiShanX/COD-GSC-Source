@@ -89,16 +89,14 @@ track_camera_mode(localclientnum) {
       player = playerbeingspectated(localclientnum);
 
       if(isspectating(localclientnum, 1)) {
-        if(isDefined(player.afterlife) && player.afterlife) {
+        if(isDefined(player.afterlife) && player.afterlife)
           self.camera_mode = "spectating_3rd_afterlife";
-        } else {
+        else
           self.camera_mode = "normal";
-        }
       } else if(isDefined(player.afterlife) && player.afterlife)
         self.camera_mode = "spectating_1st_afterlife";
-      else {
+      else
         self.camera_mode = "normal";
-      }
     } else
       self.camera_mode = "normal";
 
@@ -150,9 +148,8 @@ set_player_lives(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 assign_corpse_owner(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self.player = newval;
 
-  if(newval > 0) {
-    playFXOnTag(localclientnum, level._effect["afterlife_corpse"], self, "tag_origin");
-  }
+  if(newval > 0)
+    playfxontag(localclientnum, level._effect["afterlife_corpse"], self, "tag_origin");
 }
 
 toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -160,11 +157,10 @@ toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   if(newval == 1) {
-    if(self islocalplayer() && self getlocalclientnumber() == localclientnum) {
+    if(self islocalplayer() && self getlocalclientnumber() == localclientnum)
       self thread player_afterlife_first_fx(localclientnum);
-    } else {
+    else
       self thread player_afterlife_third_fx(localclientnum);
-    }
   } else
     self notify("stop_player_fx");
 }
@@ -196,17 +192,17 @@ player_afterlife_third_fx(localclientnum) {
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
   ent linkto(self, "tag_origin");
-  ent playLoopSound("zmb_afterlife_ghost_loop");
+  ent playloopsound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 
   while(true) {
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_fx"], self, "J_spine4");
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_h_fx"], self, "J_head");
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_ri");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_fx"], self, "J_spine4");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_h_fx"], self, "J_head");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_ri");
     wait 0.1;
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_le");
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_hand_r_fx"], self, "J_wrist_ri");
-    playFXOnTag(localclientnum, level._effect["afterlife_ghost_hand_fx"], self, "J_wrist_le");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_le");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_hand_r_fx"], self, "J_wrist_ri");
+    playfxontag(localclientnum, level._effect["afterlife_ghost_hand_fx"], self, "J_wrist_le");
     wait 0.1;
   }
 }
@@ -218,12 +214,12 @@ player_afterlife_spectator_fx(localclientnum) {
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
   ent linkto(self, "tag_origin");
-  ent playLoopSound("zmb_afterlife_ghost_loop");
+  ent playloopsound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 
   while(true) {
     player = playerbeingspectated(localclientnum);
-    playFX(localclientnum, level._effect["fx_alcatraz_ghost_spectate"], player.origin + vectorscale((0, 0, 1), 40.0));
+    playfx(localclientnum, level._effect["fx_alcatraz_ghost_spectate"], player.origin + vectorscale((0, 0, 1), 40.0));
     wait 0.05;
     serverwait(localclientnum, 0.1);
   }
@@ -235,7 +231,7 @@ afterlife_damage_fx() {
 
   while(true) {
     level waittill("al_d", localclientnum);
-    playSound(0, "zmb_afterlife_impact", (0, 0, 0));
+    playsound(0, "zmb_afterlife_impact", (0, 0, 0));
     playviewmodelfx(localclientnum, level._effect["afterlife_damage"], "tag_weapon");
   }
 }
@@ -253,11 +249,10 @@ toggle_player_refill_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   if(isspectating(localclientnum, 0)) {
     return;
   }
-  if(newval == 1) {
+  if(newval == 1)
     self thread player_afterlife_first_fx(localclientnum);
-  } else {
+  else
     self notify("stop_player_fx");
-  }
 }
 
 toggle_player_afterlife(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -283,7 +278,7 @@ sndafterlifeleak(localclientnum) {
     if(isDefined(self) && self.mana <= 0.5) {
       if(!isDefined(id)) {
         ent = spawn(0, (0, 0, 0), "script_origin");
-        id = ent playLoopSound("zmb_afterlife_leak", 0.5);
+        id = ent playloopsound("zmb_afterlife_leak", 0.5);
         self thread sndafterlifeleakdelete(ent);
         setsoundvolume(id, 0);
         setsoundvolumerate(id, 4);

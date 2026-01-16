@@ -56,7 +56,7 @@ cassert( ARRAY_COUNT( g_he_vertalign ) == VERTICAL_ALIGN_MAX + 1 );
 */
 
 init() {
-  level.uiParent = spawnStruct();
+  level.uiParent = spawnstruct();
   level.uiParent.horzAlign = "left";
   level.uiParent.vertAlign = "top";
   level.uiParent.alignX = "left";
@@ -67,9 +67,8 @@ init() {
   level.uiParent.height = 0;
   level.uiParent.children = [];
 
-  if(level.console) {
+  if(level.console)
     level.fontHeight = 12;
-  } else {
+  else
     level.fontHeight = 12;
-  }
 }

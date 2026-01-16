@@ -11,7 +11,7 @@ function autoexec initanimationmocomps() {
 
 function runanimationmocomp(mocompname, mocompstatus, asmentity, mocompanim, mocompanimblendouttime, mocompduration) {
   assert(mocompstatus >= 0 && mocompstatus <= 2, ("" + mocompstatus) + "");
-  assert(isDefined(level._animationmocomps[mocompname]), ("" + mocompname) + "");
+  assert(isdefined(level._animationmocomps[mocompname]), ("" + mocompname) + "");
   if(mocompstatus == 0) {
     mocompstatus = "asm_mocomp_start";
   } else {
@@ -28,21 +28,21 @@ function runanimationmocomp(mocompname, mocompstatus, asmentity, mocompanim, moc
 function registeranimationmocomp(mocompname, startfuncptr, updatefuncptr, terminatefuncptr) {
   mocompname = tolower(mocompname);
   assert(isstring(mocompname), "");
-  assert(!isDefined(level._animationmocomps[mocompname]), ("" + mocompname) + "");
+  assert(!isdefined(level._animationmocomps[mocompname]), ("" + mocompname) + "");
   level._animationmocomps[mocompname] = array();
-  assert(isDefined(startfuncptr) && isfunctionptr(startfuncptr), "");
+  assert(isdefined(startfuncptr) && isfunctionptr(startfuncptr), "");
   level._animationmocomps[mocompname]["asm_mocomp_start"] = startfuncptr;
-  if(isDefined(updatefuncptr)) {
+  if(isdefined(updatefuncptr)) {
     assert(isfunctionptr(updatefuncptr), "");
     level._animationmocomps[mocompname]["asm_mocomp_update"] = updatefuncptr;
   } else {
-    level._animationmocomps[mocompname]["asm_mocomp_update"] = &animationmocompemptyfunc;
+    level._animationmocomps[mocompname]["asm_mocomp_update"] = & animationmocompemptyfunc;
   }
-  if(isDefined(terminatefuncptr)) {
+  if(isdefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "");
     level._animationmocomps[mocompname]["asm_mocomp_terminate"] = terminatefuncptr;
   } else {
-    level._animationmocomps[mocompname]["asm_mocomp_terminate"] = &animationmocompemptyfunc;
+    level._animationmocomps[mocompname]["asm_mocomp_terminate"] = & animationmocompemptyfunc;
   }
 }
 

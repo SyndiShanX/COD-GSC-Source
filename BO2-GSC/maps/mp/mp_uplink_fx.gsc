@@ -14,7 +14,8 @@ main() {
   maps\mp\createfx\mp_uplink_fx::main();
 }
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_uplink_rain_med_fast_os"] = loadfx("weather/fx_mp_uplink_rain_med_fast_os");

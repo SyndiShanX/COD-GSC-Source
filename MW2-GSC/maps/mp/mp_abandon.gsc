@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   maps\mp\mp_abandon_precache::main();
   maps\createart\mp_abandon_art::main();
   maps\mp\mp_abandon_fx::main();

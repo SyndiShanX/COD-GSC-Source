@@ -25,15 +25,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 1);
-  level.cybercom.smokescreen = spawnStruct();
-  level.cybercom.smokescreen._is_flickering = &_is_flickering;
-  level.cybercom.smokescreen._on_flicker = &_on_flicker;
-  level.cybercom.smokescreen._on_give = &_on_give;
-  level.cybercom.smokescreen._on_take = &_on_take;
-  level.cybercom.smokescreen._on_connect = &_on_connect;
-  level.cybercom.smokescreen._on = &_on;
-  level.cybercom.smokescreen._off = &_off;
-  level.cybercom.smokescreen._is_primed = &_is_primed;
+  level.cybercom.smokescreen = spawnstruct();
+  level.cybercom.smokescreen._is_flickering = & _is_flickering;
+  level.cybercom.smokescreen._on_flicker = & _on_flicker;
+  level.cybercom.smokescreen._on_give = & _on_give;
+  level.cybercom.smokescreen._on_take = & _on_take;
+  level.cybercom.smokescreen._on_connect = & _on_connect;
+  level.cybercom.smokescreen._on = & _on;
+  level.cybercom.smokescreen._off = & _off;
+  level.cybercom.smokescreen._is_primed = & _is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -55,7 +55,7 @@ function _on(slot, weapon) {
   level thread spawn_smokescreen(self, self hascybercomability("cybercom_smokescreen") == 2);
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_smokescreen");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -74,7 +74,7 @@ function rotateforwardxy(vtorotate, fangledegrees) {
 
 function spawn_smokescreen(owner, upgraded = 0) {
   weapon = (upgraded ? getweapon("smoke_cybercom_upgraded") : getweapon("smoke_cybercom"));
-  forward = anglesToForward(owner.angles);
+  forward = anglestoforward(owner.angles);
   center = (40 * forward) + owner.origin;
   frontspot = (140 * forward) + center;
   owner thread _cloudcreate(frontspot, weapon, upgraded);
@@ -124,7 +124,7 @@ function private _cloudcreate(origin, weapon, createionfield) {
     level thread cybercom_dev::function_a0e51d80(cloud.origin, getdvarint("scr_smokescreen_duration", 7), 16, (1, 0, 0));
   }
   cloud endon("death");
-  while(true) {
+  while (true) {
     fxblocksight(cloud, cloud.currentradius);
     wait(timestep);
     cloud.durationleft = cloud.durationleft - timestep;
@@ -136,8 +136,8 @@ function private _cloudcreate(origin, weapon, createionfield) {
 
 function private _ionizedhazard(player, timestep) {
   self endon("death");
-  while(true) {
-    if(isDefined(self.trigger)) {
+  while (true) {
+    if(isdefined(self.trigger)) {
       self.trigger delete();
     }
     self.trigger = spawn("trigger_radius", self.origin, 25, self.currentradius, self.currentradius);
@@ -148,49 +148,49 @@ function private _ionizedhazard(player, timestep) {
 
 function private _ionizedhazardthink(player, cloud) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", guy);
-    if(!isDefined(cloud)) {
+    if(!isdefined(cloud)) {
       return;
     }
-    if(!isDefined(guy)) {
+    if(!isdefined(guy)) {
       continue;
     }
     if(!isalive(guy)) {
       continue;
     }
-    if(isDefined(guy.is_disabled) && guy.is_disabled) {
+    if(isdefined(guy.is_disabled) && guy.is_disabled) {
       return false;
     }
-    if(!(isDefined(guy.takedamage) && guy.takedamage)) {
+    if(!(isdefined(guy.takedamage) && guy.takedamage)) {
       return false;
     }
-    if(isDefined(guy._ai_melee_opponent)) {
+    if(isdefined(guy._ai_melee_opponent)) {
       return false;
     }
-    if(isDefined(guy.is_disabled) && guy.is_disabled) {
+    if(isdefined(guy.is_disabled) && guy.is_disabled) {
       continue;
     }
     if(guy cybercom::cybercom_aicheckoptout("cybercom_smokescreen")) {
       continue;
     }
-    if(isDefined(guy.magic_bullet_shield) && guy.magic_bullet_shield) {
+    if(isdefined(guy.magic_bullet_shield) && guy.magic_bullet_shield) {
       continue;
     }
     if(isactor(guy) && guy isinscriptedstate()) {
       continue;
     }
-    if(isDefined(guy.allowdeath) && !guy.allowdeath) {
+    if(isdefined(guy.allowdeath) && !guy.allowdeath) {
       continue;
     }
     if(isvehicle(guy)) {
-      if(!isDefined(guy.var_5895314d)) {
+      if(!isdefined(guy.var_5895314d)) {
         player thread challenges::function_96ed590f("cybercom_uses_martial");
         guy.var_5895314d = 1;
       }
       guy thread cybercom_gadget_system_overload::system_overload(player, cloud.durationleft * 1000);
     }
-    if(isDefined(guy.archetype)) {
+    if(isdefined(guy.archetype)) {
       switch (guy.archetype) {
         case "robot": {
           player thread challenges::function_96ed590f("cybercom_uses_martial");
@@ -212,7 +212,7 @@ function private _moveindirection(dir, unitstomove, seconds) {
   self endon("death");
   ticks = seconds * 20;
   dxstep = (unitstomove / ticks) * vectornormalize(dir);
-  while(ticks) {
+  while (ticks) {
     ticks--;
     self.origin = self.origin + dxstep;
   }
@@ -228,7 +228,7 @@ function private _createnosightcloud(origin, duration, weapon) {
 function private _deleteaftertime(time) {
   self endon("death");
   wait(time);
-  if(isDefined(self.trigger)) {
+  if(isdefined(self.trigger)) {
     self.trigger delete();
   }
   self delete();
@@ -249,7 +249,7 @@ function private _scaleovertime(time, startscale, maxscale) {
     deltascale = startscale - maxscale;
     deltastep = (deltascale / serverticks) * -1;
   }
-  while(serverticks) {
+  while (serverticks) {
     self.currentscale = self.currentscale + deltastep;
     if(self.currentscale > maxscale) {
       self.currentscale = maxscale;
@@ -266,7 +266,7 @@ function private _scaleovertime(time, startscale, maxscale) {
 function private _debug_cloud(time) {
   self endon("death");
   serverticks = time * 20;
-  while(serverticks) {
+  while (serverticks) {
     serverticks--;
     level thread cybercom::debug_sphere(self.origin, self.currentradius);
     wait(0.05);
@@ -274,7 +274,7 @@ function private _debug_cloud(time) {
 }
 
 function ai_activatesmokescreen(var_9bc2efcb = 1, upgraded = 0) {
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
@@ -287,7 +287,7 @@ function private function_e52895b(origin) {
   self endon("death");
   var_9f9fc36f = 1;
   timeleft = getdvarint("scr_smokescreen_duration", 7);
-  while(timeleft > 0) {
+  while (timeleft > 0) {
     resetvisibilitycachewithinradius(origin, 1000);
     wait(var_9f9fc36f);
     timeleft = timeleft - var_9f9fc36f;

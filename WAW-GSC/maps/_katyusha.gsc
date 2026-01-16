@@ -31,9 +31,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
   positions[2].sittag = "tag_guy1";
@@ -86,28 +85,28 @@ rocket_barrage(rocket_amount, targets, attack_range, dest_z_height) {
   tags[13] = "tag_rocket13";
   tags[14] = "tag_rocket14";
   tags[15] = "tag_rocket15";
-  for(i = 0; i < rocket_amount; i++) {
+  for (i = 0; i < rocket_amount; i++) {
     if(isDefined(targets)) {
       n = i % targets.size;
       dest_point = targets[n].origin;
     } else {
-      forward = anglesToForward(self.angles + (0, 20 - RandomInt(40), 0));
+      forward = AnglesToForward(self.angles + (0, 20 - RandomInt(40), 0));
       range = attack_range + (150 - RandomInt(300));
       dest_point = self.origin + vector_multiply(forward, range);
-      trace = bulletTrace(dest_point + (0, 0, dest_z_height), dest_point + (0, 0, -2000), false, self);
+      trace = BulletTrace(dest_point + (0, 0, dest_z_height), dest_point + (0, 0, -2000), false, self);
       dest_point = trace["position"];
     }
     n = i % tags.size;
-    while(!OkTospawn()) {
+    while (!OkTospawn()) {
       wait(0.1);
     }
-    rocket = spawn("script_model", self GetTagOrigin(tags[n]));
-    rocket setModel("katyusha_rocket");
+    rocket = Spawn("script_model", self GetTagOrigin(tags[n]));
+    rocket SetModel("katyusha_rocket");
     rocket.angles = self GetTagAngles(tags[n]);
-    rocket playSound("katyusha_launch_rocket");
-    playFXOnTag(level._effect["katyusha_rocket_launch"], rocket, "tag_fx");
-    playFXOnTag(level._effect["katyusha_rocket_trail"], rocket, "tag_fx");
-    rocket playLoopSound("katy_rocket_run");
+    rocket PlaySound("katyusha_launch_rocket");
+    PlayFxOnTag(level._effect["katyusha_rocket_launch"], rocket, "tag_fx");
+    PlayFxOnTag(level._effect["katyusha_rocket_trail"], rocket, "tag_fx");
+    rocket playloopsound("katy_rocket_run");
     rocket thread fire_rocket(dest_point);
     wait(RandomFloatRange(0.2, 0.25));
   }
@@ -125,7 +124,7 @@ fire_rocket(target_pos) {
   wait(time);
   self hide();
   self stoploopsound(.1);
-  playFX(level._effect["katyusha_rocket_explosion"], self.origin);
+  PlayFX(level._effect["katyusha_rocket_explosion"], self.origin);
   radiusdamage(self.origin, 128, 300, 35);
   earthquake(0.3, 2, self.origin, 1024);
   wait .2;

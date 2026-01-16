@@ -16,17 +16,17 @@ function magic_box_init() {
   level thread waitfor_flag_open_chest_location("se_magic_box");
   level thread waitfor_flag_open_chest_location("sw_magic_box");
   level thread waitfor_flag_open_chest_location("start_zombie_round_logic");
-  level.pandora_fx_func = &swamp_pandora_fx_func;
+  level.pandora_fx_func = & swamp_pandora_fx_func;
 }
 
 function swamp_pandora_fx_func() {
   self.pandora_light = spawn("script_model", self.origin);
   self.pandora_light.angles = self.angles + (vectorscale((-1, -1, 0), 90));
-  self.pandora_light setModel("tag_origin");
+  self.pandora_light setmodel("tag_origin");
   if(self.script_noteworthy == "start_chest") {
-    playFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
+    playfxontag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
   } else {
-    playFXOnTag(level._effect["lght_marker_old"], self.pandora_light, "tag_origin");
+    playfxontag(level._effect["lght_marker_old"], self.pandora_light, "tag_origin");
   }
 }
 
@@ -58,7 +58,7 @@ function waitfor_flag_open_chest_location(which) {
       return;
     }
   }
-  if(isDefined(level.randomize_perks) && level.randomize_perks == 0) {
+  if(isdefined(level.randomize_perks) && level.randomize_perks == 0) {
     zm_sumpf_perks::randomize_vending_machines();
     level.vending_model_info = [];
     level.vending_model_info[level.vending_model_info.size] = "p7_zm_vending_jugg";
@@ -96,12 +96,12 @@ function waitfor_flag_open_chest_location(which) {
 }
 
 function function_a0db1fb9() {
-  penbuytrigger = getEntArray("pendulum_buy_trigger", "targetname");
+  penbuytrigger = getentarray("pendulum_buy_trigger", "targetname");
   foreach(var_d8a7af6f in penbuytrigger) {
     var_d8a7af6f sethintstring(&"ZOMBIE_CLEAR_DEBRIS");
     var_d8a7af6f setcursorhint("HINT_NOICON");
   }
   level flag::wait_till("nw_magic_box");
   zm_sumpf_trap_pendulum::initpendulumtrap();
-  array::thread_all(penbuytrigger, &zm_sumpf_trap_pendulum::penthink);
+  array::thread_all(penbuytrigger, & zm_sumpf_trap_pendulum::penthink);
 }

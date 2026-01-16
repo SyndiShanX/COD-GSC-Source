@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\gametypes\ztcm;
+
 #namespace ztcm_zod;
 
 event_handler[gametype_init] main(eventstruct) {

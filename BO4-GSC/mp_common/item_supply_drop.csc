@@ -6,10 +6,11 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace item_supply_drop;
 
 autoexec __init__system__() {
-  system::register(#"item_supply_drop", &__init__, undefined, # "item_world");
+  system::register(#"item_supply_drop", &__init__, undefined, #"item_world");
 }
 
 private __init__() {
@@ -45,7 +46,7 @@ supply_drop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     self.fxent = fxent;
     playFX(localclientnum, "killstreaks/fx8_agr_drop_box_wz", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    playSound(localclientnum, # "hash_49b7275f4ddde9b8", self.origin);
+    playSound(localclientnum, #"hash_49b7275f4ddde9b8", self.origin);
     self.var_3a55f5cf = 1;
     return;
   }

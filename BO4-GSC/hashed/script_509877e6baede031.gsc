@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_sq;
+
 #namespace namespace_3417f8d2;
 
 autoexec __init__system__() {
@@ -23,14 +24,14 @@ init() {
   level flag::init(#"hash_7d5f27392b7264ae");
   level flag::init(#"hash_7d5f26392b7262fb");
   level flag::init(#"hash_51ae2a56153f7f83");
-  zm_sq::register(#"hash_22d9cdbaac99885", # "step_1", # "hash_7b16b0c7f4445917", &function_a8fa5ac7, &function_8686db4c);
-  zm_sq::register(#"hash_22d9cdbaac99885", # "step_2", # "hash_7b16b1c7f4445aca", &function_ebc2f134, &function_dc7d5745);
-  zm_sq::register(#"hash_22d9cdbaac99885", # "step_3", # "hash_7b16b2c7f4445c7d", &function_d0d114be, &function_2beb73f6);
+  zm_sq::register(#"hash_22d9cdbaac99885", #"step_1", #"hash_7b16b0c7f4445917", &function_a8fa5ac7, &function_8686db4c);
+  zm_sq::register(#"hash_22d9cdbaac99885", #"step_2", #"hash_7b16b1c7f4445aca", &function_ebc2f134, &function_dc7d5745);
+  zm_sq::register(#"hash_22d9cdbaac99885", #"step_3", #"hash_7b16b2c7f4445c7d", &function_d0d114be, &function_2beb73f6);
   zm_sq::start(#"hash_22d9cdbaac99885");
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_671ee63741834a25", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_671ee63741834a25", 1, 1, "int");
 }
 
 function_a8fa5ac7(var_5ea5c94d) {
@@ -114,9 +115,10 @@ function_a546fd97() {
     add_outtime = s_notify.attacker aat::getaatonweapon(s_notify.weapon);
 
     if(isDefined(add_outtime) && add_outtime.name === "zm_aat_kill_o_watt") {
+
       getplayers()[0] iprintln("<dev string:x38>");
 
-      level.var_2363fbdb += 1;
+        level.var_2363fbdb += 1;
       self.e_phone scene::play("ring");
 
       if(level.var_2363fbdb == 3) {

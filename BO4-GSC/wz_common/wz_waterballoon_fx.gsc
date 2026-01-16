@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace wz_waterballoon_fx;
 
 autoexec __init__system__() {
@@ -20,7 +21,7 @@ __init__() {
 
 function_c9509a9c(params) {
   if(isalive(self) && isplayer(self)) {
-    if(params.weapon.name === # "waterballoon") {
+    if(params.weapon.name === #"waterballoon") {
       var_feafe576 = 0;
       var_cb01806c = 0;
       bleft = 0;
@@ -82,7 +83,7 @@ function_c9509a9c(params) {
 }
 
 function_4df181ef() {
-  self endoncallback(&function_a1805183, # "death", # "game_ended");
+  self endoncallback(&function_a1805183, #"death", #"game_ended");
   self clientfield::set_to_player("player_hit_water_balloon", 1);
   wait 2;
   self clientfield::set_to_player("player_hit_water_balloon", 0);

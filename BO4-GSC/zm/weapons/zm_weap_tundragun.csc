@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_tundragun;
 
 autoexec __init__system__() {
@@ -28,6 +29,7 @@ on_weapon_change(s_params) {
   w_old_weapon = s_params.last_weapon;
 
   if(w_new_weapon == level.w_tundragun || w_new_weapon == level.w_tundragun_upgraded) {
+
     iprintlnbold("<dev string:x38>");
 
   }
@@ -66,5 +68,5 @@ function_4017174b(localclientnum, w_weapon) {
 }
 
 function_ac62a2fd(localclientnum) {
-  playSound(localclientnum, # "wpn_thunder_breath", (0, 0, 0));
+  playSound(localclientnum, #"wpn_thunder_breath", (0, 0, 0));
 }

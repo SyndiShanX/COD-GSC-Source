@@ -34,9 +34,8 @@ skipto_mason_deck() {
   maps\blackout_util::disable_phalanx_cannons("hackable_phalanx_cannon_spot");
   skipto_teleport("player_skipto_mason_deck", get_heroes());
 
-  if(-1) {
+  if(-1)
     level thread setup_claw_bigdog();
-  }
 
   level thread play_pip("blackout_dradis", 0);
 }
@@ -113,20 +112,17 @@ move_wave_1_towards_vtol() {
   for(i = 0; i < i < a_guys.size; i++) {
     wait(randomfloatrange(0.5, 1.5));
 
-    if(isalive(a_guys[i])) {
+    if(isalive(a_guys[i]))
       a_guys[i] setgoalvolumeauto(e_volume_fallback);
-    }
 
-    if(i == n_half_group_count) {
+    if(i == n_half_group_count)
       wait 5;
-    }
   }
 }
 
 player_deck_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(!isai(eattacker) && smeansofdeath != "MOD_TRIGGER_HURT" && smeansofdeath != "MOD_FALLING") {
+  if(!isai(eattacker) && smeansofdeath != "MOD_TRIGGER_HURT" && smeansofdeath != "MOD_FALLING")
     idamage = 1;
-  }
 
   return idamage;
 }
@@ -154,9 +150,8 @@ jetpack_respawners() {
       if(getaicount() < 18) {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_assault_guy", 0, ::func_jetpack_live_to_deck);
 
-        if(flag("vtol_ready_for_liftoff")) {
+        if(flag("vtol_ready_for_liftoff"))
           n_jetpack_far_spawned++;
-        }
       }
 
       wait(randomfloatrange(3.0, 5.0));
@@ -189,16 +184,14 @@ setup_deck_friendly_moveup() {
 
   t_moveup_1 = get_ent("deck_moveup_wave_1_clear", "targetname");
 
-  if(isDefined(t_moveup_1)) {
+  if(isDefined(t_moveup_1))
     t_moveup_1 notify("trigger");
-  }
 
   waittill_ai_group_cleared("deck_wave_2");
   t_moveup_2 = get_ent("deck_moveup_wave_2_clear", "targetname");
 
-  if(isDefined(t_moveup_2)) {
+  if(isDefined(t_moveup_2))
     t_moveup_2 notify("trigger");
-  }
 
   waittill_ai_group_amount_killed("deck_wave_3", 6);
   t_moveup_3 = get_ent("deck_moveup_wave_3_clear", "targetname");
@@ -210,9 +203,8 @@ setup_deck_friendly_moveup() {
 
   t_moveup_final = get_ent("deck_moveup_final", "targetname");
 
-  if(isDefined(t_moveup_final)) {
+  if(isDefined(t_moveup_final))
     t_moveup_final notify("trigger");
-  }
 }
 
 func_ai_make_aggressive() {
@@ -240,13 +232,15 @@ deck_danger_zone() {
   e_kill_zone = getent("deck_kill_zone", "targetname");
 
   while(isalive(self)) {
-    if(self istouching(e_danger_zone)) {} else if(self istouching(e_kill_zone)) {
+    if(self istouching(e_danger_zone)) {
+    } else if(self istouching(e_kill_zone)) {
       level.player.overrideplayerdamage = undefined;
       screen_message_delete();
       magicbullet("avenger_missile_turret_blackout", self.origin + vectorscale((0, 0, 1), 1000.0), self.origin);
       wait 0.3;
       self dodamage(1000, self.origin);
-    } else {}
+    } else {
+    }
 
     wait 0.25;
   }
@@ -254,9 +248,8 @@ deck_danger_zone() {
 
 spawn_seals_from_optional_objective() {
   if(level.num_seals_saved > 0) {
-    for(i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++)
       simple_spawn_single("support_seal", ::magic_bullet_shield);
-    }
   } else
     spawn_manager_enable("sm_mason_deck_allies");
 }
@@ -289,13 +282,11 @@ func_jetpack_run_to_cover() {
 }
 
 deck_event_jetpack_drones(str_struct, str_flag, n_wait_min, n_wait_max) {
-  if(!isDefined(n_wait_min)) {
+  if(!isDefined(n_wait_min))
     n_wait_min = 2;
-  }
 
-  if(!isDefined(n_wait_max)) {
+  if(!isDefined(n_wait_max))
     n_wait_max = 4;
-  }
 
   level endon(str_flag);
   level thread deck_event_jetpack_drones_cleanup(str_struct, str_flag);
@@ -338,9 +329,8 @@ deck_event_menendez_takeoff() {
   level.v_menendez_f38.delete_on_death = 1;
   level.v_menendez_f38 notify("death");
 
-  if(!isalive(level.v_menendez_f38)) {
+  if(!isalive(level.v_menendez_f38))
     level.v_menendez_f38 delete();
-  }
 }
 
 dialog_combat_menendez_takeoff() {
@@ -384,7 +374,7 @@ deck_event_menendez_takeoff_vo() {
 deck_event_menendez_takeoff_sound() {
   sound_ent = spawn("script_origin", self.origin);
   sound_ent linkto(self, "tag_canopy");
-  sound_ent playLoopSound("evt_menendez_takeoff");
+  sound_ent playloopsound("evt_menendez_takeoff");
   wait 27;
   sound_ent delete();
 }
@@ -420,9 +410,8 @@ deck_event_crashed_drone_cover() {
   wait 8.2;
   m_cover trigger_on();
 
-  if(level.player istouching(m_cover)) {
+  if(level.player istouching(m_cover))
     level.player dodamage(1000, level.player.origin, m_cover);
-  }
 
   drone_cover_toggle(1);
 }
@@ -430,9 +419,8 @@ deck_event_crashed_drone_cover() {
 drone_cover_toggle(b_enabled) {
   a_nodes = getnodearray("drone_cover_node", "script_noteworthy");
 
-  foreach(node in a_nodes) {
-    setenablenode(node, b_enabled);
-  }
+  foreach(node in a_nodes)
+  setenablenode(node, b_enabled);
 }
 
 deck_event_f38_crash() {
@@ -495,14 +483,14 @@ run_mason_deck_final() {
   veh_player_vtol thread board_vtol_audio();
   level thread run_scene_and_delete("exit_vtol_crosby_wait");
   m_vtol_elevator movez(576, 15, 3, 3);
-  m_vtol_elevator playSound("evt_elev_start_3d");
-  m_vtol_elevator playLoopSound("evt_elev_loop_3d", 3);
+  m_vtol_elevator playsound("evt_elev_start_3d");
+  m_vtol_elevator playloopsound("evt_elev_loop_3d", 3);
   m_vtol_elevator waittill("movedone");
   flag_set("vtol_ready_for_liftoff");
   level thread fail_condition_all_enemies_dead();
   earthquake(0.3, 0.5, m_vtol_elevator.origin, 1000, level.player);
   m_vtol_elevator stoploopsound(2);
-  m_vtol_elevator playSound("evt_elev_stop_3d");
+  m_vtol_elevator playsound("evt_elev_stop_3d");
   veh_player_vtol unlink();
   run_scene_first_frame("exit_vtol");
   flag_wait("player_boarded_vtol");
@@ -524,9 +512,8 @@ fail_condition_all_enemies_dead() {
   level endon("player_boarded_vtol");
   s_evac = get_struct("vtol_elevator_breadcrumb_struct", "targetname");
 
-  while(getaiarray("axis").size > 0) {
+  while(getaiarray("axis").size > 0)
     wait 5;
-  }
 
   set_objective(level.obj_evac, s_evac.origin, "", undefined, undefined, 30);
   wait 30;
@@ -536,9 +523,8 @@ fail_condition_all_enemies_dead() {
   wait 0.3;
   level.player dodamage(1000, level.player.origin);
 
-  if(!isgodmode(level.player)) {
+  if(!isgodmode(level.player))
     missionfailedwrapper(&"BLACKOUT_VTOL_FAIL");
-  }
 }
 
 outro_launchers_fire() {
@@ -546,7 +532,8 @@ outro_launchers_fire() {
   array_thread(a_launchers, ::outro_launcher_logic);
 }
 
-outro_launcher_logic() {}
+outro_launcher_logic() {
+}
 
 run_mason_deck_final_deck_attackers() {
   s_goalpos = get_struct("outro_pmc_goal", "targetname");
@@ -557,9 +544,8 @@ run_mason_deck_final_deck_attackers() {
   sp_rpg add_spawn_function(::func_outro_enemy_attacker, s_goalpos, e_target);
   a_enemies = getaiarray("axis");
 
-  foreach(guy in a_enemies) {
-    guy thread func_outro_enemy_attacker(s_goalpos, e_target);
-  }
+  foreach(guy in a_enemies)
+  guy thread func_outro_enemy_attacker(s_goalpos, e_target);
 
   n_spawned = 0;
   a_warp_structs = get_struct_array("outro_rail_spawner_warp", "targetname", 1);
@@ -568,11 +554,10 @@ run_mason_deck_final_deck_attackers() {
   while(getaicount() < 18) {
     n_index = n_spawned % n_index_max;
 
-    if(n_index == 4) {
+    if(n_index == 4)
       simple_spawn_single(sp_rpg, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
-    } else {
+    else
       simple_spawn_single(sp_assault, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
-    }
 
     n_spawned++;
     wait 0.2;
@@ -582,12 +567,12 @@ run_mason_deck_final_deck_attackers() {
 get_outro_ai_target() {
   vh_vtol = get_ent("player_vtol");
   v_origin = vh_vtol gettagorigin("tag_barrel");
-  v_angles = anglesToForward(vh_vtol gettagangles("tag_barrel")) * 450;
+  v_angles = anglestoforward(vh_vtol gettagangles("tag_barrel")) * 450;
   v_offset = (0, 0, 0);
   v_fire = v_origin + v_angles + v_offset;
   e_target = spawn("script_origin", v_fire);
   e_target.health = 99999;
-  e_target setCanDamage(1);
+  e_target setcandamage(1);
   e_target linkto(vh_vtol);
   return e_target;
 }
@@ -624,9 +609,9 @@ run_mason_deck_final_player() {
 run_mason_deck_final_fire(player_body) {
   v_start = player_body gettagorigin("tag_fx");
   v_angles = player_body gettagangles("tag_fx");
-  v_end = v_start + anglesToForward(v_angles) * 200;
+  v_end = v_start + anglestoforward(v_angles) * 200;
   magicbullet("fiveseven_sp", v_start, v_end);
-  playFXOnTag(level._effect["crosby_shot_muzzleflash"], player_body, "tag_fx");
+  playfxontag(level._effect["crosby_shot_muzzleflash"], player_body, "tag_fx");
   ai_enemy = get_ent("exit_enemy_ai", "targetname");
   ai_enemy stop_magic_bullet_shield();
 }
@@ -637,14 +622,12 @@ run_mason_deck_final_fadeout(player_body) {
   if(isDefined(level.is_briggs_alive) && level.is_briggs_alive && (isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && level.player get_story_stat("CHINA_IS_ALLY"))) {
     level.player giveachievement_wrapper("SP_STORY_OBAMA_SURVIVES");
 
-    if(isDefined(level.is_karma_alive) && level.is_karma_alive) {
+    if(isDefined(level.is_karma_alive) && level.is_karma_alive)
       level.player giveachievement_wrapper("SP_STORY_CHLOE_LIVES");
-    }
   }
 
-  if(isDefined(level.is_briggs_alive) && !level.is_briggs_alive || isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && !level.player get_story_stat("CHINA_IS_ALLY")) {
+  if(isDefined(level.is_briggs_alive) && !level.is_briggs_alive || isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && !level.player get_story_stat("CHINA_IS_ALLY"))
     level.player set_story_stat("KARMA_DEAD_IN_COMMAND_CENTER", 1);
-  }
 
   level.player notify("mission_finished");
   screen_fade_out(0.25);
@@ -663,15 +646,14 @@ board_vtol_audio() {
   sound_ent_2 = spawn("script_origin", self.origin);
   sound_ent_1 linkto(self, "tag_origin", (-75, 300, 0));
   sound_ent_2 linkto(self, "tag_origin", (75, -300, 0));
-  sound_ent_1 playLoopSound("veh_side_engine");
-  sound_ent_2 playLoopSound("veh_side_engine");
+  sound_ent_1 playloopsound("veh_side_engine");
+  sound_ent_2 playloopsound("veh_side_engine");
 }
 
 vtol_player_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   if(self.health < 50) {
-    if(str_weapon != "avenger_missile_turret_blackout") {
+    if(str_weapon != "avenger_missile_turret_blackout")
       n_damage = 0;
-    }
   }
 
   return n_damage;
@@ -723,7 +705,7 @@ drone_fire_squibs(index) {
   self endon("death");
 
   while(true) {
-    fire_at_target = anglesToForward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
+    fire_at_target = anglestoforward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
     magicbullet("f35_side_minigun", self.origin, self.origin + fire_at_target);
     wait 0.1;
   }
@@ -735,9 +717,8 @@ delete_at_end_node() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 
   level notify("start_ambient");
 }
@@ -762,9 +743,8 @@ play_drone_swarm(b_earthquake) {
     wait 1.5;
   }
 
-  if(!isDefined(b_earthquake) || b_earthquake == 1) {
+  if(!isDefined(b_earthquake) || b_earthquake == 1)
     level thread drone_earthquake();
-  }
 
   level waittill("start_ambient");
   level thread sky_cowbell();
@@ -789,7 +769,7 @@ drone_fake_fire_at_target(s_target) {
   v_start = self gettagorigin("tag_flash");
   v_end = s_target.origin;
   v_to_target = v_end - v_start;
-  playFX(level._effect["drone_swarm_fake_missile"], v_start, v_to_target);
+  playfx(level._effect["drone_swarm_fake_missile"], v_start, v_to_target);
 }
 
 play_drone_swarm_old(b_earthquake) {
@@ -842,9 +822,8 @@ play_drone_swarm_old(b_earthquake) {
   drone thread drone_swarm_fire_squibs(3);
   drone thread delete_at_end_node();
 
-  if(!isDefined(b_earthquake) || b_earthquake == 1) {
+  if(!isDefined(b_earthquake) || b_earthquake == 1)
     level thread drone_earthquake();
-  }
 
   level waittill("start_ambient");
   level thread sky_cowbell();
@@ -871,7 +850,7 @@ drone_earthquake() {
 drone_swarm_fire_missile(index) {
   level waittill("drone_swarm_start_fire_" + index);
   tag_origin = self gettagorigin("TAG_MISSILE_Right");
-  fire_at_target = anglesToForward(self.angles) * 500;
+  fire_at_target = anglestoforward(self.angles) * 500;
   magicbullet("avenger_missile_turret_blackout", tag_origin + fire_at_target, tag_origin + fire_at_target * 10);
 }
 
@@ -881,7 +860,7 @@ drone_swarm_fire_squibs(index) {
 
   while(true) {
     tag_origin = self gettagorigin("tag_gear_nose");
-    fire_at_target = anglesToForward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
+    fire_at_target = anglestoforward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
     magicbullet("f35_side_minigun", tag_origin, tag_origin + fire_at_target);
     wait 0.1;
   }
@@ -892,7 +871,7 @@ sky_cowbell() {
   s_sky_cowbell = get_struct("sky_cowbell", "targetname");
 
   if(isDefined(s_sky_cowbell)) {
-    level.sky_cowbell = spawnStruct();
+    level.sky_cowbell = spawnstruct();
     sky_cowbell_set_max_drones(10);
     sky_cowbell_set_ratio();
     level.sky_cowbell.avenger_count = 0;
@@ -903,7 +882,7 @@ sky_cowbell() {
     a_spawn_points = get_struct_array("sky_cowbell_spawn_point", "targetname", 1);
     a_flight_structs = get_struct_array("sky_cowbell_flight_struct", "targetname", 1);
     a_valid_targets = get_ent_array("sky_cowbell_targets", "targetname", 1);
-    a_valid_targets = arraycombine(a_valid_targets, getEntArray("sky_cowbell_targets", "script_noteworthy"), 1, 0);
+    a_valid_targets = arraycombine(a_valid_targets, getentarray("sky_cowbell_targets", "script_noteworthy"), 1, 0);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_drone_spawn_func, a_flight_structs);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_drone_tracker);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_firing_func, a_valid_targets);
@@ -960,9 +939,8 @@ _get_random_element_player_cant_see(a_elements) {
 
     b_can_player_see_point = e_player is_looking_at(s_element.origin, 0.3, b_do_trace);
 
-    if(!b_can_player_see_point) {
+    if(!b_can_player_see_point)
       b_found_element = 1;
-    }
 
     wait 0.1;
   }
@@ -988,27 +966,24 @@ sky_cowbell_drone_spawn_func(a_flight_structs) {
 }
 
 sky_cowbell_drone_tracker() {
-  if(!isDefined(level.sky_cowbell.drones)) {
+  if(!isDefined(level.sky_cowbell.drones))
     level.sky_cowbell.drones = [];
-  }
 
   level.sky_cowbell.drones[level.sky_cowbell.drones.size] = self;
   b_is_avenger = issubstr(self.vehicletype, "avenger");
 
-  if(b_is_avenger) {
+  if(b_is_avenger)
     level.sky_cowbell.avenger_count++;
-  } else {
+  else
     level.sky_cowbell.pegasus_count++;
-  }
 
   self waittill("death");
   arrayremovevalue(level.sky_cowbell.drones, undefined);
 
-  if(b_is_avenger) {
+  if(b_is_avenger)
     level.sky_cowbell.avenger_count--;
-  } else {
+  else
     level.sky_cowbell.pegasus_count--;
-  }
 }
 
 sky_cowbell_firing_func(a_valid_targets) {
@@ -1044,31 +1019,25 @@ sky_cowbell_firing_func(a_valid_targets) {
 }
 
 sky_cowbell_set_max_drones(n_count) {
-  if(!isDefined(level.sky_cowbell.max_count)) {
+  if(!isDefined(level.sky_cowbell.max_count))
     level.sky_cowbell.max_count = 20;
-  }
 
-  if(isDefined(n_count)) {
+  if(isDefined(n_count))
     level.sky_cowbell.max_count = n_count;
-  }
 }
 
 sky_cowbell_set_ratio(n_ratio_avenger, n_ratio_pegasus) {
-  if(!isDefined(level.sky_cowbell.ratio_avenger)) {
+  if(!isDefined(level.sky_cowbell.ratio_avenger))
     level.sky_cowbell.ratio_avenger = 2;
-  }
 
-  if(!isDefined(level.sky_cowbell.ratio_pegasus)) {
+  if(!isDefined(level.sky_cowbell.ratio_pegasus))
     level.sky_cowbell.ratio_pegasus = 1;
-  }
 
-  if(isDefined(n_ratio_avenger)) {
+  if(isDefined(n_ratio_avenger))
     level.sky_cowbell.ratio_avenger = n_ratio_avenger;
-  }
 
-  if(isDefined(n_ratio_pegasus)) {
+  if(isDefined(n_ratio_pegasus))
     level.sky_cowbell.ratio_pegasus = n_ratio_pegasus;
-  }
 
   n_total = sky_cowbell_get_ratio_total();
   n_pegasus_count = level.sky_cowbell.ratio_pegasus;
@@ -1153,7 +1122,7 @@ drone_barrage() {
 randomly_destroy_drone() {
   while(true) {
     if(randomint(4) == 0) {
-      a_drone_vehicles = getEntArray("drone_turret_targets", "script_noteworthy");
+      a_drone_vehicles = getentarray("drone_turret_targets", "script_noteworthy");
 
       if(a_drone_vehicles.size > 0) {
         index = randomint(a_drone_vehicles.size);
@@ -1169,16 +1138,14 @@ delete_corpse() {
   self endon("delete");
   self waittill("death");
 
-  while(self.origin[2] < -1028) {
+  while(self.origin[2] < -1028)
     wait 0.5;
-  }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 run_missile_firing_drones_around_player() {
@@ -1190,7 +1157,7 @@ run_missile_firing_drones_around_player() {
 
 fire_missile_from_behind_the_player() {
   n_spawn_yaw = absangleclamp360(level.player.angles[1] + randomintrange(90, 270));
-  v_missile_spawn_org = level.player.origin + anglesToForward((0, n_spawn_yaw, 0)) * 3000;
+  v_missile_spawn_org = level.player.origin + anglestoforward((0, n_spawn_yaw, 0)) * 3000;
   v_missile_spawn_org = (v_missile_spawn_org[0], v_missile_spawn_org[1], randomintrange(2000, 3000));
   s_fire_missile_target = find_missile_fire_at_target_the_player_is_looking_at();
   magicbullet("avenger_missile_turret_blackout", v_missile_spawn_org, s_fire_missile_target.origin);
@@ -1217,9 +1184,8 @@ find_missile_fire_at_target_the_player_is_looking_at() {
       continue;
     }
 
-    if(b_can_player_see_point) {
+    if(b_can_player_see_point)
       b_found_element = 1;
-    }
 
     wait 0.1;
   }
@@ -1259,9 +1225,8 @@ run_dev_drones() {
     vh_menendez_f38.delete_on_death = 1;
     vh_menendez_f38 notify("death");
 
-    if(!isalive(vh_menendez_f38)) {
+    if(!isalive(vh_menendez_f38))
       vh_menendez_f38 delete();
-    }
 
     wait_network_frame();
   }
@@ -1283,9 +1248,8 @@ dev_drones_ambience() {
 }
 
 setup_deck_phalanx_cannon_targets(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
   if(isDefined(level.is_briggs_alive) && level.is_briggs_alive) {
     add_global_spawn_function("axis", ::brute_force_kill_jetpacks);
@@ -1308,21 +1272,19 @@ setup_claw_bigdog() {
 }
 
 claw_fire_direction_func() {
-  v_origin = self getEye();
-  v_angles = anglesToForward(self getplayerangles());
+  v_origin = self geteye();
+  v_angles = anglestoforward(self getplayerangles());
   v_aim_pos = v_origin + v_angles * 8000;
-  a_trace = bulletTrace(v_origin, v_aim_pos, 0, self);
+  a_trace = bullettrace(v_origin, v_aim_pos, 0, self);
   v_shoot_pos = a_trace["position"];
   a_shooters = maps\_fire_direction::get_fire_direction_shooters();
   a_enemies = getaiarray("axis");
 
-  foreach(ai_guy in a_enemies) {
-    ai_guy._fire_direction_targeted = undefined;
-  }
+  foreach(ai_guy in a_enemies)
+  ai_guy._fire_direction_targeted = undefined;
 
-  if(a_shooters.size > 0) {
+  if(a_shooters.size > 0)
     array_thread(a_shooters, ::_claw_fire_direction_grenades, v_shoot_pos);
-  }
 }
 
 _claw_fire_direction_grenades(v_position) {
@@ -1356,18 +1318,16 @@ _claw_fire_guns_at_targets_in_range(v_position) {
       wait 6;
       self set_ignoreall(0);
 
-      if(isDefined(level.vh_market_drone)) {
+      if(isDefined(level.vh_market_drone))
         radiusdamage(level.vh_market_drone.origin, 500, 15000, 12000);
-      }
     }
   }
 
   a_enemies = getaiarray("axis");
   a_guys_within_range = get_within_range(v_position, a_enemies, 256);
 
-  foreach(ai_guy in a_guys_within_range) {
-    ai_guy._fire_direction_targeted = 1;
-  }
+  foreach(ai_guy in a_guys_within_range)
+  ai_guy._fire_direction_targeted = 1;
 
   n_time = gettime();
 
@@ -1393,9 +1353,8 @@ _intro_claw_fire_turret(e_target, n_time_to_fire, b_spinup) {
   n_fire_time = weaponfiretime(str_turret);
   self.turret setturretspinning(1);
 
-  if(!isDefined(b_spinup) || b_spinup == 1) {
+  if(!isDefined(b_spinup) || b_spinup == 1)
     wait 1.5;
-  }
 
   n_shots = int(n_time_to_fire / n_fire_time);
 
@@ -1419,7 +1378,7 @@ _can_hit_target_safely(v_position, v_start_pos) {
   assert(isDefined(v_position), "v_position missing for _get_closest_unit_to_fire");
   a_shooters = maps\_fire_direction::get_fire_direction_shooters();
   assert(isDefined(a_shooters.size > 0), "no valid shooters found to use in _get_closest_unit_to_fire. Add these with add_fire_direction_shooter( <ent_that_can_shoot> ) first.");
-  a_trace = bulletTrace(v_start_pos, v_position, 0, self);
+  a_trace = bullettrace(v_start_pos, v_position, 0, self);
   b_can_hit_target = 1;
   b_will_hit_player = distance(a_trace["position"], level.player.origin) < 256;
   b_will_hit_self = distance(a_trace["position"], v_start_pos) < 256;
@@ -1429,9 +1388,8 @@ _can_hit_target_safely(v_position, v_start_pos) {
   for(j = 0; j < a_friendlies.size; j++) {
     b_could_hit_friendly = distance(a_trace["position"], a_friendlies[j].origin) < 256;
 
-    if(b_could_hit_friendly) {
+    if(b_could_hit_friendly)
       b_will_hit_friendly = 1;
-    }
   }
 
   v_to_player = vectornormalize(level.player.origin - v_start_pos);
@@ -1456,7 +1414,7 @@ claw_pathing() {
   while(isDefined(nd_node.target)) {
     while(true) {
       v_player_dir = vectornormalize(level.player.origin - self.origin);
-      v_forward = anglesToForward(self.angles);
+      v_forward = anglestoforward(self.angles);
       dp = vectordot(v_player_dir, v_forward);
 
       if(dp > 0.1) {
@@ -1489,7 +1447,7 @@ notetrack_enemy_fires_at_crosby(ai_enemy) {
 }
 
 notetrack_crosby_gets_shot(ai_crosby) {
-  playFXOnTag(level._effect["crosby_shot"], ai_crosby, "J_Shoulder_LE");
+  playfxontag(level._effect["crosby_shot"], ai_crosby, "J_Shoulder_LE");
 }
 
 notetrack_outro_spawn_deck_enemies(m_player_body) {
@@ -1501,7 +1459,8 @@ notetrack_outro_lookat_ship_1(m_player_body) {
   _fire_outro_magic_bullet_at_bridge();
 }
 
-notetrack_outro_lookat_ship_2(m_player_body) {}
+notetrack_outro_lookat_ship_2(m_player_body) {
+}
 
 notetrack_outro_lookat_ship_3(m_player_body) {
   wait 4.5;

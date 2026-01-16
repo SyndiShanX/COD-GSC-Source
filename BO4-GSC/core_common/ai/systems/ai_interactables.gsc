@@ -8,6 +8,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace aiinteractables;
 
 autoexec __init__system__() {
@@ -43,7 +44,7 @@ private function_2f0f1b62() {
 }
 
 function_64d25a18(entity) {
-  if(entity.archetype !== # "human") {
+  if(entity.archetype !== #"human") {
     return false;
   }
 
@@ -84,7 +85,7 @@ private function_b4bc7751(entity) {
 
     if(isalive(entity)) {
       entity notify(#"hash_4d2293524fe1c94c", {
-        #var_bad0e17c: var_54d06303,
+        #var_bad0e17c: var_54d06303, 
         #var_c17a3b30: entity.node
       });
     }

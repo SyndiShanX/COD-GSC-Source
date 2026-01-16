@@ -128,15 +128,15 @@ ridge_flashes() {
   origs = getstructarray("orig_ridge_flash", "targetname");
   last_rand = 0;
   rand = 0;
-  while(1) {
-    while(rand == last_rand) {
+  while (1) {
+    while (rand == last_rand) {
       rand = randomint(origs.size);
       realwait(0.05);
     }
     last_rand = rand;
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
-      playFX(i, level._effect["fx_artilleryExp_ridge"], origs[rand].origin);
+    for (i = 0; i < players.size; i++) {
+      playfx(i, level._effect["fx_artilleryExp_ridge"], origs[rand].origin);
     }
     realwait(randomfloatrange(0.45, 1.75));
   }
@@ -187,7 +187,7 @@ ambient_25_thread(clientNum) {
   println("*** Clientside AA thread " + num + " going ahead.");
   level endon("save_restore");
   self endon("entityshutdown");
-  while(!level._ambient_aa_started) {
+  while (!level._ambient_aa_started) {
     realwait(0.2);
   }
   println("*** Clientside AA thread " + num + " starts firing.");

@@ -471,7 +471,7 @@ neighborhood_vehicle_damage(var_0) {
     if(level.player istouching(var_0)) {
       level.player dodamage(300, (0, 0, 0));
       level notify("new_quote_string");
-      setdvar("ui_deadquote", &"YOUNGBLOOD_AVOIDCARS");
+      setdvar("ui_deadquote", & "YOUNGBLOOD_AVOIDCARS");
       maps\_utility::missionfailedwrapper();
       return;
     }
@@ -585,9 +585,8 @@ mansion_ext_elias_leaves() {
 }
 
 mansion() {
-  if(!maps\_utility::game_is_current_gen()) {
+  if(!maps\_utility::game_is_current_gen())
     setsaveddvar("r_mbEnable", "0");
-  }
 
   var_0 = common_scripts\utility::get_target_ent("mansion_middle_door_left");
   var_1 = common_scripts\utility::get_target_ent("clip_mansion_mid_door_L");
@@ -736,9 +735,8 @@ mansion() {
   level.player common_scripts\utility::delaycall(4, ::setclienttriggeraudiozone, "youngblood_white_transition", 0.25);
   maps\_utility::delaythread(3.6, common_scripts\utility::play_sound_in_space, "scn_yb_house_transition_to_odin_lr", level.player.origin);
 
-  if(isDefined(level.prologue) && level.prologue == 1) {
+  if(isDefined(level.prologue) && level.prologue == 1)
     common_scripts\utility::noself_delaycall(4.65, ::setslowmotion, 0.2, 1, 5);
-  }
 
   wait 4.4;
   resetsunlight();
@@ -796,11 +794,10 @@ exp14_sounds() {
 }
 
 mansion_exit_door_handler(var_0) {
-  if(common_scripts\utility::flag("hesh_middle_room_in_position")) {
+  if(common_scripts\utility::flag("hesh_middle_room_in_position"))
     var_0 maps\_anim::anim_generic(level.hesh, "youngblood_house_knockdown_friendly");
-  } else {
+  else
     wait 1.2;
-  }
 
   var_0 maps\_anim::anim_generic(level.hesh, "youngblood_house_exit_friendly");
 
@@ -830,23 +827,19 @@ mansion_hesh(var_0) {
 }
 
 chaos_a() {
-  if(!maps\_utility::game_is_current_gen()) {
+  if(!maps\_utility::game_is_current_gen())
     setsaveddvar("r_mbEnable", "0");
-  }
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
-  }
 
-  if(maps\_utility::game_is_current_gen()) {
+  if(maps\_utility::game_is_current_gen())
     setsaveddvar("sm_sunshadowscale", 0.55);
-  }
 
-  if(isDefined(level.prologue) && level.prologue) {
+  if(isDefined(level.prologue) && level.prologue)
     common_scripts\utility::flag_wait("prologue_transient_ground_tr_loaded");
-  } else {
+  else
     maps\_hud_util::fade_out(0, "white");
-  }
 
   common_scripts\utility::trigger_on("start_chaos_a", "targetname");
   maps\_utility::trigger_wait_targetname("start_chaos_a");
@@ -1022,19 +1015,17 @@ chaos_a() {
 }
 
 chaos_cull_think() {
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     thread maps\_art::disable_ssao_over_time(1);
-  }
 
   maps\_utility::vision_set_fog_changes("ygb_chaos_a_lessfog", 0);
   wait 4.5;
   var_0 = 1;
 
-  if(level.xb3) {
+  if(level.xb3)
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_durango", var_0);
-  } else {
+  else
     maps\_utility::vision_set_fog_changes("", var_0);
-  }
 
   wait(var_0);
   common_scripts\utility::waitframe();
@@ -1042,11 +1033,10 @@ chaos_cull_think() {
   if(maps\_utility::is_gen4()) {
     setsaveddvar("r_umbraUseDpvsCullDist", 1);
 
-    if(level.xb3) {
+    if(level.xb3)
       setculldist(3000);
-    } else {
+    else
       setculldist(3000);
-    }
   } else
     setculldist(2500);
 }
@@ -1054,21 +1044,19 @@ chaos_cull_think() {
 chaos_cull_more() {
   var_0 = 2;
 
-  if(level.xb3) {
+  if(level.xb3)
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_nearfog_durango", var_0);
-  } else {
+  else
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_nearfog", var_0);
-  }
 
   wait(var_0);
   common_scripts\utility::waitframe();
 
   if(maps\_utility::is_gen4()) {
-    if(level.xb3) {
+    if(level.xb3)
       setculldist(1500);
-    } else {
+    else
       setculldist(1500);
-    }
   } else
     setculldist(1500);
 }
@@ -1192,9 +1180,8 @@ chaos_a_wait_for_player_jump(var_0) {
   thread chaos_a_hesh_landing(var_0);
   maps\_utility::vision_set_fog_changes("", 2);
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     setsaveddvar("r_umbraUseDpvsCullDist", 0);
-  }
 
   setculldist(0);
   var_0 waittill("youngblood_player_roof_smash");
@@ -1222,9 +1209,8 @@ chaos_house_climb_kill_thread() {
   for(;;) {
     wait 1;
 
-    if(level.player.origin[1] < var_0 && level.player.origin[2] > var_1) {
+    if(level.player.origin[1] < var_0 && level.player.origin[2] > var_1)
       level.player kill();
-    }
   }
 }
 
@@ -1264,9 +1250,8 @@ chaos_a_hesh_run(var_0) {
   level.hesh thread chaos_faster_hesh();
   level.hesh maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("020_jump"), 2000);
 
-  if(distance2d(level.player.origin, level.hesh.origin) < 200) {
+  if(distance2d(level.player.origin, level.hesh.origin) < 200)
     thread maps\youngblood_util::heavy_quake(100, 50);
-  }
 
   level.hesh thread maps\_utility::smart_dialogue("youngblood_hsh_getacrossquick");
   common_scripts\utility::flag_set("hesh_sequence_done");
@@ -1288,11 +1273,10 @@ chaos_b() {
   level.hesh maps\_utility::disable_exits();
   level.hesh thread maps\_utility::smart_dialogue("youngblood_hsh_justkeeprunning");
 
-  if(level.start_point == "start_chaos_b") {
+  if(level.start_point == "start_chaos_b")
     level.hesh maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("chaos_b_run"), 0);
-  } else {
+  else
     level.hesh waittill("path_end_reached");
-  }
 
   var_0 = common_scripts\utility::get_target_ent("anim_tanker_orig");
   thread hesh_truck_run(var_0);
@@ -1319,9 +1303,8 @@ chaos_b() {
   level.player setclienttriggeraudiozone("youngblood_tanker_fire", 3.0);
   var_1 delete();
 
-  foreach(var_3 in level.a_debris) {
-    var_3 show();
-  }
+  foreach(var_3 in level.a_debris)
+  var_3 show();
 }
 
 player_fall_down(var_0, var_1) {
@@ -1449,9 +1432,8 @@ chaos_b_hide_debris() {
   level.a_debris = getEntArray("truck_debris_array", "script_noteworthy");
   level.a_debris = common_scripts\utility::array_combine(level.a_debris, getEntArray("tanker_debris", "targetname"));
 
-  foreach(var_1 in level.a_debris) {
-    var_1 hide();
-  }
+  foreach(var_1 in level.a_debris)
+  var_1 hide();
 }
 
 chaos_b_slow_zone() {
@@ -1528,11 +1510,10 @@ player_chaos_breathing() {
   for(;;) {
     wait(var_0);
 
-    if(!isDefined(level.player.better)) {
+    if(!isDefined(level.player.better))
       level.player maps\_utility::play_sound_on_entity("breathing_hurt");
-    } else {
+    else
       level.player maps\_utility::play_sound_on_entity("breathing_better");
-    }
 
     var_0 = var_0 + 0.15;
   }
@@ -1606,9 +1587,8 @@ n_watchers_think() {
   maps\_utility::follow_path_and_animate(var_0, 0);
   wait 1;
 
-  while(maps\_utility::player_looking_at(self getEye(), 0.6, 1)) {
+  while(maps\_utility::player_looking_at(self getEye(), 0.6, 1))
     wait 0.1;
-  }
 
   self delete();
 }
@@ -1671,9 +1651,8 @@ damage_player_in_fire() {
   for(;;) {
     wait 0.2;
 
-    if(level.player.health == level.player.maxhealth) {
+    if(level.player.health == level.player.maxhealth)
       level.player dodamage(100, (0, 0, 0));
-    }
   }
 }
 
@@ -1735,15 +1714,13 @@ player_wobbles() {
 }
 
 trigger_threads_after_chaos() {
-  if(!maps\_utility::game_is_current_gen()) {
+  if(!maps\_utility::game_is_current_gen())
     common_scripts\utility::array_thread(getEntArray("house_falls_apart", "targetname"), ::play_house_fall_think);
-  }
 
   var_0 = getEntArray("church_pieces", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_4 = common_scripts\utility::get_target_ent("animate_cab");
   var_4 hide();
@@ -2113,9 +2090,8 @@ play_street_crack_1_think() {
     var_4.angles = var_0.angles;
     var_5 = getanimlength(var_4 maps\_utility::getanim("crack"));
 
-    if(var_2 < var_5) {
+    if(var_2 < var_5)
       var_2 = var_5;
-    }
 
     var_4 hide();
   }
@@ -2178,9 +2154,8 @@ play_house_fall_think() {
     var_5 useanimtree(level.scr_animtree["falling_house"]);
     var_6 = getanimlength(var_5 maps\_utility::getanim("fall"));
 
-    if(var_3 < var_6) {
+    if(var_3 < var_6)
       var_3 = var_6;
-    }
 
     var_5 hide();
   }
@@ -2221,9 +2196,8 @@ play_church_fall_think() {
     var_5 useanimtree(level.scr_animtree["church_tanker"]);
     var_6 = getanimlength(var_5 maps\_utility::getanim("collapse"));
 
-    if(var_3 < var_6) {
+    if(var_3 < var_6)
       var_3 = var_6;
-    }
   }
 
   common_scripts\utility::flag_wait("church_fall_go");
@@ -2231,9 +2205,8 @@ play_church_fall_think() {
   var_9 = anglestoup(var_1.angles);
   playFX(common_scripts\utility::getfx("vfx_ygb_church_collapse_debris"), var_1.origin, var_8, var_9);
 
-  if(isDefined(level.fake_church)) {
+  if(isDefined(level.fake_church))
     level.fake_church common_scripts\utility::delaycall(2.5, ::hide);
-  }
 
   foreach(var_5 in var_2) {
     var_5 common_scripts\utility::delaycall(2.45, ::show);
@@ -2266,9 +2239,8 @@ play_street_crack_2_think() {
     var_5 useanimtree(level.scr_animtree["street_crack_2"]);
     var_6 = getanimlength(var_5 maps\_utility::getanim("crack"));
 
-    if(var_3 < var_6) {
+    if(var_3 < var_6)
       var_3 = var_6;
-    }
 
     var_5 hide();
   }
@@ -2300,30 +2272,26 @@ delete_on_crack2_done() {
 chaos_hide_on_start() {
   var_0 = getEntArray("ygb_roadcrack_street_1", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_0 = [];
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("house_pieces", "script_noteworthy"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("house_cliff_pieces", "script_noteworthy"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("house_roof_pieces", "script_noteworthy"));
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_0 = getEntArray("street_crack_2_pieces", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_0 = getEntArray("church_pieces", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_10 = common_scripts\utility::get_target_ent("animate_cab");
   var_10 hide();

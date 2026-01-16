@@ -22,7 +22,6 @@ weap_rearming,,cobra/weap_rearming.wav,0.99,0.99,wpnplyr,,,360,6000,auto,,,,,cob
 #using_animtree("vehicles");
 init() {
   /******************************************************/
-
   /*						DVARS						*/
   /******************************************************/
 
@@ -65,13 +64,14 @@ init() {
   setDvarIfUninitialized("cobrapilot_sounds_enabled", "0");
 
   /******************************************************/
-
+  /******************************************************/
   /******************************************************/
 
-  /******************************************************/
+
+
+
 
   /******************************************************/
-
   /*					SETUP WEAPON TAGS				*/
   /******************************************************/
 
@@ -112,13 +112,12 @@ init() {
   level.cobra_missile_models["cobra_Sidewinder"] = "projectile_sidewinder_missile";
 
   /******************************************************/
-
+  /******************************************************/
   /******************************************************/
 
-  /******************************************************/
+
 
   /******************************************************/
-
   /*					SETUP WEAPONS					*/
   /******************************************************/
 
@@ -126,7 +125,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_20mm";
   // M197 20mm Cannon
-  weapon.v["realWeaponName"] = &"COBRAPILOT_20MM";
+  weapon.v["realWeaponName"] = & "COBRAPILOT_20MM";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 149;
   weapon.v["equipButton"] = "BUTTON_A";
@@ -143,7 +142,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_FFAR";
   // LAU-61C/A Unguided Rockets
-  weapon.v["realWeaponName"] = &"COBRAPILOT_FFAR";
+  weapon.v["realWeaponName"] = & "COBRAPILOT_FFAR";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 167;
   weapon.v["equipButton"] = "BUTTON_B";
@@ -160,7 +159,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_Hellfire";
   // AGM-114 Hellfire Anti-Tank
-  weapon.v["realWeaponName"] = &"COBRAPILOT_HELLFIRE";
+  weapon.v["realWeaponName"] = & "COBRAPILOT_HELLFIRE";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 185;
   weapon.v["equipButton"] = "BUTTON_X";
@@ -181,7 +180,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_Sidewinder";
   // AIM-9 Sidewinder Air-to-Air
-  weapon.v["realWeaponName"] = &"COBRAPILOT_SIDEWINDER";
+  weapon.v["realWeaponName"] = & "COBRAPILOT_SIDEWINDER";
   weapon.v["sound_armed_loop"] = "weap_aim9_growl4";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 203;
@@ -202,9 +201,7 @@ init() {
   weaponsSystems_Add_Weapon(weapon);
 
   /******************************************************/
-
   /******************************************************/
-
   /******************************************************/
 
   // Warning you are leaving the mission area! Turn back!
@@ -282,7 +279,7 @@ init() {
   precacheShader(level.missileHintIndicator_Arrow["back"]);
 
   level.cobrapilot_difficulty = getdvar("cobrapilot_difficulty");
-  assert(isDefined(level.cobraHealth[level.cobrapilot_difficulty]));
+  assert(isdefined(level.cobraHealth[level.cobrapilot_difficulty]));
   level.flyablecobra_starting_health = level.cobraHealth[level.cobrapilot_difficulty];
   level.flyablecobra_healthWarning_value = 1000;
   level.flyablecobra_healthRegenIncrement = int(level.flyablecobra_starting_health / 6);
@@ -291,32 +288,29 @@ init() {
   level.flyablecobra_healthLeakRate = 1.0;
 
   /*
-  if( getdvar( "cobrapilot_edge_of_world_type") == "1" ) {
-  	array_thread( getEntArray( "border_outer", "targetname" ), ::borderwall_method1 );
-  }
-  else if( getdvar( "cobrapilot_edge_of_world_type") == "2" ) {
+  if( getdvar( "cobrapilot_edge_of_world_type") == "1" )
+  	array_thread( getentarray( "border_outer", "targetname" ), ::borderwall_method1 );
+  else if( getdvar( "cobrapilot_edge_of_world_type") == "2" )
   	thread edge_Of_World();
-  }
   */
 
   //thread ammo_Reload_Station();
   //thread incommingMissile_Think();
 
   /*
-  if( getdvar( "cobrapilot_gunner_enabled") == "1" ) {
+  if( getdvar( "cobrapilot_gunner_enabled") == "1" )
   	chopper thread gunner_spawn();
-  }
   */
 
-  array_thread(getEntArray("cobra", "targetname"), ::setup_player_usable_vehicle);
-  array_thread(getEntArray("flyable_heli", "targetname"), ::setup_player_usable_vehicle);
+  array_thread(getentarray("cobra", "targetname"), ::setup_player_usable_vehicle);
+  array_thread(getentarray("flyable_heli", "targetname"), ::setup_player_usable_vehicle);
 }
 
 setup_player_usable_vehicle() {
-  assert(isDefined(self));
-  assert(isDefined(self.target));
+  assert(isdefined(self));
+  assert(isdefined(self.target));
   self.trigger = getent(self.target, "targetname");
-  assert(isDefined(self.trigger));
+  assert(isdefined(self.trigger));
 
   self.script_targetoffset_z = -100;
 
@@ -328,11 +322,10 @@ setup_player_usable_vehicle() {
 }
 
 wait_player_enter() {
-  for(;;) {
+  for (;;) {
     self.trigger waittill("trigger", pilot);
-    if(pilot.classname == "player") {
+    if(pilot.classname == "player")
       break;
-    }
     wait 0.05;
   }
 
@@ -342,7 +335,7 @@ wait_player_enter() {
 player_enter_chopper(chopper, pilot) {
   chopper useby(pilot);
   chopper setjitterparams((3, 3, 3), 0.5, 1.5);
-  chopper.hudelems = spawnStruct();
+  chopper.hudelems = spawnstruct();
 
   pilot.ignoreme = true;
 
@@ -355,13 +348,11 @@ player_enter_chopper(chopper, pilot) {
   chopper thread maps\_vehicle::aircraft_dust_kickup();
 
   chopper.gunner_use_turret = false;
-  if(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"] != level.GunnerWeaponPlayerEquiv) {
+  if(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"] != level.GunnerWeaponPlayerEquiv)
     chopper.gunner_use_turret = true;
-  }
 
-  if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0)) {
+  if((isdefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0))
     chopper setVehWeapon(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"]);
-  }
 
   chopper notify("nodeath_thread");
   chopper notify("no_regen_health");
@@ -383,20 +374,19 @@ player_enter_chopper(chopper, pilot) {
 }
 
 player_becomes_pilot_model(chopper) {
-  if(chopper.vehicletype != "cobra_player") {
+  if(chopper.vehicletype != "cobra_player")
     return;
-  }
 
-  assert(isDefined(chopper.pilot));
+  assert(isdefined(chopper.pilot));
   chopper.pilot hide();
 
   chopper.pilotModel = spawn("script_model", chopper getTagOrigin("tag_pilot"));
   chopper.pilotModel.angles = chopper getTagAngles("tag_pilot");
-  chopper.pilotModel setModel("body_complete_sp_cobra_pilot_desert_zack");
+  chopper.pilotModel setmodel("body_complete_sp_cobra_pilot_desert_zack");
   chopper.pilotModel linkto(chopper, "tag_pilot", (0, 0, -40), (0, 0, 0));
   chopper.pilotModel useAnimTree(#animtree);
 
-  while(isDefined(chopper)) {
+  while (isdefined(chopper)) {
     chopper.pilotModel setFlaggedAnim("pilot_idle_anim", % cobra_copilot_idle);
     chopper.pilotModel waittillmatch("pilot_idle_anim", "end");
   }
@@ -410,7 +400,7 @@ startRotors() {
   rate_inc = 0.2;
   rate_time = 0.2;
 
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self setFlaggedAnim("rotor_anim", % bh_rotors, 1.0, 0.1, rate);
     if(startUp) {
       wait rate_time;
@@ -419,9 +409,8 @@ startRotors() {
         rate = 1.0;
         startUp = false;
         self notify("takeoff");
-        if(self.vehicletype == "cobra_player") {
+        if(self.vehicletype == "cobra_player")
           self setModel("vehicle_cobra_helicopter_fly");
-        }
       }
     } else
       self waittillmatch("rotor_anim", "end");
@@ -429,7 +418,7 @@ startRotors() {
 }
 
 setChopperHealth() {
-  assert(isDefined(self.pilot));
+  assert(isdefined(self.pilot));
 
   self.health = level.flyablecobra_starting_health;
   self.currenthealth = level.flyablecobra_starting_health;
@@ -443,18 +432,15 @@ setChopperHealth() {
 vehicle_Spawn_Callback_Thread(vehicle) {
   vehicle thread globalThink();
 
-  if(!isDefined(vehicle.script_cobratarget)) {
+  if(!isdefined(vehicle.script_cobratarget))
     return;
-  }
 
-  if(vehicle.script_cobratarget != 1) {
+  if(vehicle.script_cobratarget != 1)
     return;
-  }
 
-  assert(isDefined(vehicle.script_targettype));
-  if(!isDefined(vehicle.script_targetoffset_z)) {
+  assert(isdefined(vehicle.script_targettype));
+  if(!isdefined(vehicle.script_targetoffset_z))
     vehicle.script_targetoffset_z = 0;
-  }
   offset = (0, 0, vehicle.script_targetoffset_z);
 
   cobraTarget_Add(level.player, vehicle, vehicle.script_targettype, offset);
@@ -546,31 +532,30 @@ weaponsSystems_Create_Weapon() {
 }
 
 weaponsSystems_Add_Weapon(weapon) {
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     level.cobraWeapon = [];
-  }
 
-  assert(isDefined(level.cobraWeapon));
-  assert(isDefined(weapon.v["weapon"]));
-  assert(isDefined(weapon.v["realWeaponName"]));
-  assert(isDefined(weapon.v["sound_armed"]));
-  assert(isDefined(weapon.v["weaponNameLocationX"]));
-  assert(isDefined(weapon.v["weaponNameLocationY"]));
-  assert(isDefined(weapon.v["equipButton"]));
-  assert(isDefined(weapon.v["equipShader"]));
-  assert(isDefined(weapon.v["singleShot"]));
-  assert(isDefined(weapon.v["targetType"]));
-  assert(isDefined(weapon.v["shader_target"]));
-  assert(isDefined(weapon.v["shader_target_offscreen"]));
-  assert(isDefined(weapon.v["shader_lock"]));
-  assert(isDefined(weapon.v["shader_locking"]));
-  assert(isDefined(weapon.v["shader_invalid"]));
-  assert(isDefined(weapon.v["shader_invalid_offscreen"]));
-  assert(isDefined(weapon.v["maxAmmo"]));
-  assert(isDefined(weapon.v["ammoPickupIncrement"]));
-  assert(isDefined(weapon.v["ammoPickupDelay_Min"]));
-  assert(isDefined(weapon.v["ammoPickupDelay_Max"]));
-  assert(isDefined(weapon.v["tags"]));
+  assert(isdefined(level.cobraWeapon));
+  assert(isdefined(weapon.v["weapon"]));
+  assert(isdefined(weapon.v["realWeaponName"]));
+  assert(isdefined(weapon.v["sound_armed"]));
+  assert(isdefined(weapon.v["weaponNameLocationX"]));
+  assert(isdefined(weapon.v["weaponNameLocationY"]));
+  assert(isdefined(weapon.v["equipButton"]));
+  assert(isdefined(weapon.v["equipShader"]));
+  assert(isdefined(weapon.v["singleShot"]));
+  assert(isdefined(weapon.v["targetType"]));
+  assert(isdefined(weapon.v["shader_target"]));
+  assert(isdefined(weapon.v["shader_target_offscreen"]));
+  assert(isdefined(weapon.v["shader_lock"]));
+  assert(isdefined(weapon.v["shader_locking"]));
+  assert(isdefined(weapon.v["shader_invalid"]));
+  assert(isdefined(weapon.v["shader_invalid_offscreen"]));
+  assert(isdefined(weapon.v["maxAmmo"]));
+  assert(isdefined(weapon.v["ammoPickupIncrement"]));
+  assert(isdefined(weapon.v["ammoPickupDelay_Min"]));
+  assert(isdefined(weapon.v["ammoPickupDelay_Max"]));
+  assert(isdefined(weapon.v["tags"]));
   assert(weapon.v["tags"].size > 0);
 
   index = level.cobraWeapon.size;
@@ -585,9 +570,8 @@ weaponsSystems_Add_Weapon(weapon) {
   precacheItem(level.cobraWeapon[index].v["weapon"]);
 
   //precache the shaders
-  if(isDefined(level.cobraWeapon[index].v["hudShader"])) {
+  if(isdefined(level.cobraWeapon[index].v["hudShader"]))
     precacheShader(level.cobraWeapon[index].v["hudShader"]);
-  }
   precacheShader(level.cobraWeapon[index].v["equipShader"]);
   precacheShader(level.cobraWeapon[index].v["shader_target"]);
   precacheShader(level.cobraWeapon[index].v["shader_target_offscreen"]);
@@ -626,16 +610,14 @@ weaponsSystems_Add_Weapon(weapon) {
 }
 
 weaponsSystems() {
-  assert(isDefined(self));
-  assert(isDefined(self.pilot));
+  assert(isdefined(self));
+  assert(isdefined(self.pilot));
   assert(self.pilot.classname == "player");
 
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     return;
-  }
-  if(level.cobraWeapon.size == 0) {
+  if(level.cobraWeapon.size == 0)
     return;
-  }
 
   level endon("cobra_death");
 
@@ -643,8 +625,8 @@ weaponsSystems() {
   self thread weaponsSystems_Fire_Missile();
   self thread weaponsSystems_zoom();
 
-  for(;;) {
-    for(i = 0; i < level.cobraWeapon.size; i++) {
+  for (;;) {
+    for (i = 0; i < level.cobraWeapon.size; i++) {
       if(self.pilot buttonPressed(level.cobraWeapon[i].v["equipButton"])) {
         // stop the equip loop sound of the old weapon if it was playing one
         weaponSystems_EquipLoopSound_Stop();
@@ -669,10 +651,9 @@ weaponsSystems() {
         level notify("weapon_armed");
 
         // stop any lockon sounds that might have started
-        if((isDefined(level.cobraTarget)) && (level.cobraTarget.size > 0)) {
-          for(i = 0; i < level.cobraTarget.size; i++) {
+        if((isdefined(level.cobraTarget)) && (level.cobraTarget.size > 0)) {
+          for (i = 0; i < level.cobraTarget.size; i++)
             self thread cobraTarget_holdWait_missileLock_Sound_Stop(level.cobraTarget[i]);
-          }
         }
 
         // play weapon equip sound and if the weapon has an armed loop sound play it now
@@ -692,17 +673,14 @@ weaponsSystems() {
 }
 
 weaponSystems_EquipLoopSound_Start() {
-  if(getdvar("cobrapilot_sounds_enabled") != "1") {
+  if(getdvar("cobrapilot_sounds_enabled") != "1")
     return;
-  }
 
-  if(!isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"])) {
+  if(!isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"]))
     return;
-  }
 
-  if(isDefined(level.weaponEquipLoopSoundPlaying)) {
+  if(isdefined(level.weaponEquipLoopSoundPlaying))
     return;
-  }
 
   level.weaponEquipLoopSoundPlaying = true;
 
@@ -710,40 +688,35 @@ weaponSystems_EquipLoopSound_Start() {
 }
 
 weaponSystems_EquipLoopSound_Stop() {
-  if(getdvar("cobrapilot_sounds_enabled") != "1") {
+  if(getdvar("cobrapilot_sounds_enabled") != "1")
     return;
-  }
 
   level.weaponEquipLoopSoundPlaying = undefined;
 
-  if(!isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"])) {
+  if(!isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"]))
     return;
-  }
   self.pilot notify("stop sound" + level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"]);
 }
 
 weaponsSystems_buttonRelease_Wait(button) {
-  assert(isDefined(self));
+  assert(isdefined(self));
   assert(self.classname == "player");
 
   level endon("cobra_death");
 
   prof_begin("cobrapilot_weapons_systems");
-  while(self buttonPressed(button)) {
+  while (self buttonPressed(button))
     wait 0.05;
-  }
   prof_end("cobrapilot_weapons_systems");
 }
 
 weaponsSystems_HUD() {
-  assert(isDefined(self));
+  assert(isdefined(self));
 
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     return;
-  }
-  if(level.cobraWeapon.size == 0) {
+  if(level.cobraWeapon.size == 0)
     return;
-  }
 
   // weapon selection display
   controller_layout_size_x = 300;
@@ -769,18 +742,18 @@ weaponsSystems_HUD() {
   self.hudelems.weapon_hud.alpha = 0;
 
   level endon("cobra_death");
-  for(;;) {
+  for (;;) {
     prof_begin("cobrapilot_weapons_systems");
-    assert(isDefined(self.pilot.currentWeapon));
+    assert(isdefined(self.pilot.currentWeapon));
 
     // weapon selection display
-    assert(isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["equipShader"]));
+    assert(isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["equipShader"]));
     self.hudelems.controller_layout setshader(level.cobraWeapon[self.pilot.currentWeapon].v["equipShader"], controller_layout_size_x, controller_layout_size_y);
 
     // weapon HUD
-    if(isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader"])) {
-      assert(isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_x"]));
-      assert(isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_y"]));
+    if(isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader"])) {
+      assert(isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_x"]));
+      assert(isdefined(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_y"]));
       self.hudelems.weapon_hud setshader(level.cobraWeapon[self.pilot.currentWeapon].v["hudShader"], level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_x"], level.cobraWeapon[self.pilot.currentWeapon].v["hudShader_size_y"]);
       self.hudelems.weapon_hud.alpha = 1;
     } else
@@ -796,7 +769,7 @@ weaponsSystems_Fire_Missile() {
   self endon("death");
   level endon("cobra_death");
 
-  for(;;) {
+  for (;;) {
     // code notify that the trigger was pulled
     self waittill("turret_fire");
 
@@ -812,7 +785,7 @@ weaponsSystems_Fire_Missile() {
     missileTarget = weaponsSystems_Get_Missile_Target();
 
     // check if the weapon requires lockon, and that the player meets the requirements
-    if((level.cobraWeapon[self.pilot.currentWeapon].v["requireLock"] == true) && (!isDefined(missileTarget))) {
+    if((level.cobraWeapon[self.pilot.currentWeapon].v["requireLock"] == true) && (!isdefined(missileTarget))) {
       thread weaponsSystems_noLock_Warning();
       continue;
     }
@@ -820,24 +793,23 @@ weaponsSystems_Fire_Missile() {
     // fire the weapon from the next tag to be used
     // if there are targets that are locked, fire the missile at those targets
     eMissile = undefined;
-    if(isDefined(missileTarget)) {
+    if(isdefined(missileTarget)) {
       eMissile = self fireWeapon(level.cobraWeapon[self.pilot.currentWeapon].v["tags"][level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]], missileTarget.targetEntity);
       missileTarget.targetEntity notify("incomming_missile", eMissile);
-      if(!isDefined(missileTarget.targetEntity.incomming_Missiles)) {
+      if(!isdefined(missileTarget.targetEntity.incomming_Missiles))
         missileTarget.targetEntity.incomming_Missiles = [];
-      }
       missileTarget.targetEntity.incomming_Missiles = array_add(missileTarget.targetEntity.incomming_Missiles, eMissile);
       thread missile_deathWait(eMissile, missileTarget.targetEntity);
     } else
       eMissile = self fireWeapon(level.cobraWeapon[self.pilot.currentWeapon].v["tags"][level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]]);
 
-    assert(isDefined(eMissile));
+    assert(isdefined(eMissile));
 
-    assert(isDefined(level.stats[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]]));
+    assert(isdefined(level.stats[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]]));
     level.stats[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]]++;
 
-    if(isDefined(self.hasAttachedWeapons)) {
-      if((isDefined(level.cobra_missile_models)) && (isDefined(level.cobra_missile_models[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]]))) {
+    if(isdefined(self.hasAttachedWeapons)) {
+      if((isdefined(level.cobra_missile_models)) && (isdefined(level.cobra_missile_models[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]]))) {
         modelname = level.cobra_missile_models[level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]];
         tagname = level.cobraWeapon[self.pilot.currentWeapon].v["tags"][level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]];
         self weaponsSystems_Detach_Weapon(modelname, tagname);
@@ -846,9 +818,8 @@ weaponsSystems_Fire_Missile() {
 
     // update what the next tag should be - some weapons only use one tag so it will remain the same
     level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]++;
-    if(level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] >= level.cobraWeapon[self.pilot.currentWeapon].v["tags"].size) {
+    if(level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] >= level.cobraWeapon[self.pilot.currentWeapon].v["tags"].size)
       level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] = 0;
-    }
 
     // take away ammo and update the ammo counter on the hud
     if(getdvar("cobrapilot_unlimited_ammo") == "0") {
@@ -857,81 +828,71 @@ weaponsSystems_Fire_Missile() {
     }
 
     // some weapons require player to release the fire button before a second shot is fired
-    if(level.cobraWeapon[self.pilot.currentWeapon].v["singleShot"]) {
+    if(level.cobraWeapon[self.pilot.currentWeapon].v["singleShot"])
       self.pilot weaponsSystems_buttonRelease_Wait("BUTTON_RTRIG");
-    }
   }
 }
 
 weaponsSystems_Detach_Weapon(modelname, tagname) {
-  if(getdvar("cobrapilot_unlimited_ammo") == "1") {
+  if(getdvar("cobrapilot_unlimited_ammo") == "1")
     return;
-  }
 
   // build list of all attached models
   attachedModelCount = self getattachsize();
   attachedModels = [];
-  for(i = 0; i < attachedModelCount; i++) {
+  for (i = 0; i < attachedModelCount; i++)
     attachedModels[i] = self getattachmodelname(i);
-  }
 
   // check to see if this model is attached to this model
   // if it is, see if it's on the matching tagname
   qAttached = false;
-  for(i = 0; i < attachedModels.size; i++) {
-    if(attachedModels[i] != modelname) {
+  for (i = 0; i < attachedModels.size; i++) {
+    if(attachedModels[i] != modelname)
       continue;
-    }
 
     sName = self getattachtagname(i);
-    if(tolower(tagname) != tolower(sName)) {
+    if(tolower(tagname) != tolower(sName))
       continue;
-    }
 
     qAttached = true;
     break;
   }
 
-  if(qAttached) {
+  if(qAttached)
     self detach(modelname, tagname);
-  } else {
+  else
     println("FAILED TO DETACH MODEL: " + modelname + " from tag: " + tagname);
-  }
 }
 
 weaponsSystems_Attach_Weapon(weapon) {
-  if(getdvar("cobrapilot_unlimited_ammo") == "1") {
+  if(getdvar("cobrapilot_unlimited_ammo") == "1")
     return;
-  }
 
   // build list of all attached models
   attachedModelCount = self getattachsize();
 
   //attachedModels = [];
-  //for( i = 0 ; i < attachedModelCount ; i++ )
+  //for ( i = 0 ; i < attachedModelCount ; i++ )
   //	attachedModels[ i ] = self getattachmodelname( i );
 
   // find an open tag that this model could get attached to
-  if(!isDefined(level.cobra_missile_models[weapon])) {
+  if(!isdefined(level.cobra_missile_models[weapon]))
     return;
-  }
   missileModel = level.cobra_missile_models[weapon];
   attachToTag = undefined;
-  for(i = 0; i < level.cobra_weapon_tags[weapon].size; i++) {
+  for (i = 0; i < level.cobra_weapon_tags[weapon].size; i++) {
     tag = level.cobra_weapon_tags[weapon][i];
 
     // check if a model is already attached to this tag
-    if(weaponsSystems_Model_Attached_To_Tag(tag)) {
+    if(weaponsSystems_Model_Attached_To_Tag(tag))
       continue;
-    }
 
     attachToTag = tag;
     break;
   }
 
-  if(isDefined(attachToTag)) {
+  if(isdefined(attachToTag))
     self attach(missileModel, attachToTag);
-  }
   //else
   //println( "FAILED TO ATTACH MODEL: " + missileModel );
 }
@@ -939,10 +900,9 @@ weaponsSystems_Attach_Weapon(weapon) {
 weaponsSystems_Model_Attached_To_Tag(tagname) {
   // find if a model is attached to this tag
   attachedModelCount = self getattachsize();
-  for(i = 0; i < attachedModelCount; i++) {
-    if(self getattachtagname(i) == tagname) {
+  for (i = 0; i < attachedModelCount; i++) {
+    if(self getattachtagname(i) == tagname)
       return true;
-    }
   }
   return false;
 }
@@ -952,36 +912,30 @@ weaponsSystems_Get_Missile_Target() {
 
   missileTarget = undefined;
 
-  if(!isDefined(level.cobraTarget)) {
+  if(!isdefined(level.cobraTarget))
     return missileTarget;
-  }
 
-  if(!isDefined(level.cobraTarget.size)) {
+  if(!isdefined(level.cobraTarget.size))
     return missileTarget;
-  }
 
   prof_begin("cobrapilot_weapons_systems");
 
   // find the missile with the lowest .locked time
-  for(i = 0; i < level.cobraTarget.size; i++) {
-    if(!isDefined(level.cobraTarget[i].locked)) {
+  for (i = 0; i < level.cobraTarget.size; i++) {
+    if(!isdefined(level.cobraTarget[i].locked))
       continue;
-    }
 
-    if(!isDefined(missileTarget)) {
+    if(!isdefined(missileTarget))
       missileTarget = level.cobraTarget[i];
-    }
 
-    if(level.cobraTarget[i].locked < missileTarget.locked) {
+    if(level.cobraTarget[i].locked < missileTarget.locked)
       missileTarget = level.cobraTarget[i];
-    }
   }
 
   prof_end("cobrapilot_weapons_systems");
 
-  if(isDefined(missileTarget)) {
+  if(isdefined(missileTarget))
     missileTarget.locked = getTime();
-  }
 
   return missileTarget;
 }
@@ -990,9 +944,8 @@ weaponsSystems_noAmmo_Warning() {
   self notify("noammo_warning");
   self endon("noammo_warning");
 
-  if(isDefined(self.hudelems.noammo_warning)) {
+  if(isdefined(self.hudelems.noammo_warning))
     self.hudelems.noammo_warning destroy();
-  }
 
   self.hudelems.noammo_warning = newClientHudElem(self.pilot);
   self.hudelems.noammo_warning.x = 0;
@@ -1006,9 +959,8 @@ weaponsSystems_noAmmo_Warning() {
   self.hudelems.noammo_warning setText(&"COBRAPILOT_NO_AMMO");
   self.hudelems.noammo_warning.fontscale = 1.5;
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     self.pilot playLocalSound("cobra_no_ammo");
-  }
 
   self.hudelems.noammo_warning.alpha = 1;
   wait 0.5;
@@ -1022,9 +974,8 @@ weaponsSystems_noLock_Warning() {
   self notify("nolock_warning");
   self endon("nolock_warning");
 
-  if(isDefined(self.hudelems.nolock_warning)) {
+  if(isdefined(self.hudelems.nolock_warning))
     self.hudelems.nolock_warning destroy();
-  }
 
   self.hudelems.nolock_warning = newClientHudElem(self.pilot);
   self.hudelems.nolock_warning.x = 0;
@@ -1038,9 +989,8 @@ weaponsSystems_noLock_Warning() {
   self.hudelems.nolock_warning setText(&"COBRAPILOT_NO_LOCK");
   self.hudelems.nolock_warning.fontscale = 1.5;
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     self.pilot playLocalSound("cobra_no_ammo");
-  }
 
   self.hudelems.nolock_warning.alpha = 1;
   wait 0.5;
@@ -1051,8 +1001,8 @@ weaponsSystems_noLock_Warning() {
 }
 
 weaponsSystems_zoom() {
-  assert(isDefined(self));
-  assert(isDefined(self.pilot));
+  assert(isdefined(self));
+  assert(isdefined(self.pilot));
   assert(self.pilot.classname == "player");
 
   level endon("cobra_death");
@@ -1062,15 +1012,13 @@ weaponsSystems_zoom() {
 
   self.pilot reset_fov_for_player();
 
-  for(;;) {
-    while(!self.pilot buttonPressed("BUTTON_LSTICK")) {
+  for (;;) {
+    while (!self.pilot buttonPressed("BUTTON_LSTICK"))
       wait 0.05;
-    }
     self.pilot change_fov_for_player(level.weaponZoomFOV);
 
-    while(self.pilot buttonPressed("BUTTON_LSTICK")) {
+    while (self.pilot buttonPressed("BUTTON_LSTICK"))
       wait 0.05;
-    }
     self.pilot reset_fov_for_player();
   }
 }
@@ -1079,9 +1027,8 @@ change_fov_for_player(targetFOV) {
   targetFOV = int(targetFOV);
 
   fov = int(getdvar("cg_fov"));
-  if(isDefined(fov) && fov > 0) {
+  if(isdefined(fov) && fov > 0)
     level.initialFOV = fov;
-  }
 
   fovFraction = targetFOV / level.initialFOV;
   fovFraction = cap_value(fovFraction, 0.2, 2.0);
@@ -1093,37 +1040,34 @@ reset_fov_for_player() {
 }
 
 change_fov_scale_for_player(scale) {
-  if(self == level.player) {
+  if(self == level.player)
     setsaveddvar("cg_playerFovScale0", scale);
-  } else if(self == level.player2) {
+  else if(self == level.player2)
     setsaveddvar("cg_playerFovScale1", scale);
-  } else {
+  else
     assertMsg("Flyable helicopters currently only supports single player or coop with 2 players. Playing with more than 2 players is not yet supported");
-  }
 }
 
 cobraTarget_Add(player, targetEntity, targetType, targetOffset) {
   // adds a new entity target to the targets array
 
-  assert(isDefined(player));
+  assert(isdefined(player));
   assert(player.classname == "player");
-  assert(isDefined(targetEntity));
-  assert(isDefined(targetType));
+  assert(isdefined(targetEntity));
+  assert(isdefined(targetType));
   assert(targetType == "air" || targetType == "ground" || targetType == "dummy");
 
   prof_begin("cobrapilot_weapons_systems");
 
-  if(!isDefined(targetOffset)) {
+  if(!isdefined(targetOffset))
     targetOffset = (0, 0, 0);
-  }
 
-  if(!isDefined(level.cobraTarget)) {
+  if(!isdefined(level.cobraTarget))
     level.cobraTarget = [];
-  }
 
   index = level.cobraTarget.size;
 
-  level.cobraTarget[index] = spawnStruct();
+  level.cobraTarget[index] = spawnstruct();
   level.cobraTarget[index].targetEntity = targetEntity;
   level.cobraTarget[index].targetType = targetType;
   level.cobraTarget[index].targetOffset = targetOffset;
@@ -1151,9 +1095,8 @@ cobraTarget_Death(targetStruct) {
   cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
 
   // if the sidewinder weapon was targeting this target, clear the target reticle
-  if(isDefined(targetStruct.sideWinder_targeted)) {
+  if(isdefined(targetStruct.sideWinder_targeted))
     cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct);
-  }
 
   level.stats["enemies_killed"]++;
 
@@ -1178,60 +1121,53 @@ cobraTarget_UpdateShaders_All(player) {
   // if air missiles are armed air targets show "target" shader and ground targets show "invalid" shader
   // if dummy missiles are armed all targets show "target" shader
 
-  assert(isDefined(player));
+  assert(isdefined(player));
   assert(player.classname == "player");
 
   // player isn't in a chopper yet
-  if(!isDefined(player.currentWeapon)) {
+  if(!isdefined(player.currentWeapon))
     return;
-  }
 
-  if(!isDefined(level.cobraTarget)) {
+  if(!isdefined(level.cobraTarget))
     return;
-  }
-  if(!isDefined(level.cobraTarget.size)) {
+  if(!isdefined(level.cobraTarget.size))
     return;
-  }
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     return;
-  }
-  if(level.cobraWeapon.size == 0) {
+  if(level.cobraWeapon.size == 0)
     return;
-  }
 
   prof_begin("cobrapilot_weapons_systems");
 
-  for(i = 0; i < level.cobraTarget.size; i++) {
+  for (i = 0; i < level.cobraTarget.size; i++) {
     // if the target type matches the weapon type (ie weapon type is "ground" and target type is also "ground")
     // then make this target have a valid target shader
     // if the weapon type is "dummy" then all targets are valid
     // otherwise give it the invalid target shader
 
-    if(level.cobraTarget[i].playerOwner != player) {
+    if(level.cobraTarget[i].playerOwner != player)
       continue;
-    }
 
-    if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "dummy") {
+    if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "dummy")
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    } else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"]) {
+    else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"])
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    } else {
+    else
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "invalid");
-    }
   }
 
   prof_end("cobrapilot_weapons_systems");
 }
 
 cobraTarget_UpdateShader(player, targetStruct, shader) {
-  assert(isDefined(player));
+  assert(isdefined(player));
   assert(player.classname == "player");
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(shader));
-  //assert( isDefined( targetStruct.hudelem ) );
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(shader));
+  //assert( isdefined( targetStruct.hudelem ) );
 
-  assertEx(isDefined(targetStruct.targetEntity.target_initilized), "Script is trying to do setShader on a target that hasn't run target_set. This is supposed to be impossible");
+  assertEx(isdefined(targetStruct.targetEntity.target_initilized), "Script is trying to do setShader on a target that hasn't run target_set. This is supposed to be impossible");
 
   switch (shader) {
     case "target":
@@ -1261,16 +1197,14 @@ cobraTarget_UpdateShader(player, targetStruct, shader) {
 }
 
 cobraTarget_unlockAllTargets() {
-  if(!isDefined(level.cobraTarget)) {
+  if(!isdefined(level.cobraTarget))
     return;
-  }
-  if(!isDefined(level.cobraTarget.size)) {
+  if(!isdefined(level.cobraTarget.size))
     return;
-  }
 
   prof_begin("cobrapilot_weapons_systems");
 
-  for(i = 0; i < level.cobraTarget.size; i++) {
+  for (i = 0; i < level.cobraTarget.size; i++) {
     cobraTarget_Sidewinder_ReticleLockOn_Stop(level.cobraTarget[i]);
     level.cobraTarget[i].sideWinder_targeted = undefined;
     level.cobraTarget[i].locking = undefined;
@@ -1282,42 +1216,38 @@ cobraTarget_unlockAllTargets() {
 
 cobraTarget_check_missileLock_All(player) {
   wait 0.05;
-  assert(isDefined(player) && (player.classname == "player"));
+  assert(isdefined(player) && (player.classname == "player"));
 
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     return;
-  }
-  if(level.cobraWeapon.size == 0) {
+  if(level.cobraWeapon.size == 0)
     return;
-  }
-  if(!isDefined(player.currentWeapon)) {
+  if(!isdefined(player.currentWeapon))
     return;
-  }
 
   level notify("checking for missile locks");
   level endon("checking for missile locks");
   level endon("cobra_death");
 
-  for(;;) {
+  for (;;) {
     prof_begin("cobrapilot_weapons_systems");
 
-    assert(isDefined(level.cobraTarget));
+    assert(isdefined(level.cobraTarget));
 
-    if(!isDefined(level.cobraTarget.size)) {
+    if(!isdefined(level.cobraTarget.size)) {
       level waittill("targets_updated");
       continue;
     }
 
-    if(!isDefined(level.cobraTarget.size)) {
+    if(!isdefined(level.cobraTarget.size))
       continue;
-    }
 
     if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "ground") {
       boxHalfWidth = (level.cobraWeapon[player.currentWeapon].v["hudShader_size_x"] / 2) - 25;
       boxHalfHeight = (level.cobraWeapon[player.currentWeapon].v["hudShader_size_y"] / 2) - 25;
 
       // logic for hellfire missile lockons
-      for(i = 0; i < level.cobraTarget.size; i++) {
+      for (i = 0; i < level.cobraTarget.size; i++) {
         z_type = level.cobraTarget[i].targetType;
         z_weap = player.currentWeapon;
         z_weaponmode = level.cobraWeapon[player.currentWeapon].v["targetType"];
@@ -1331,7 +1261,7 @@ cobraTarget_check_missileLock_All(player) {
     } else if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "air") {
       circleRadius = (level.cobraWeapon[player.currentWeapon].v["hudShader_size_x"] / 2) - 10;
 
-      for(i = 0; i < level.cobraTarget.size; i++) {
+      for (i = 0; i < level.cobraTarget.size; i++) {
         if(level.cobraTarget[i].targetType != level.cobraWeapon[player.currentWeapon].v["targetType"]) {
           prof_end("cobrapilot_weapons_systems");
           continue;
@@ -1349,16 +1279,14 @@ cobraTarget_check_missileLock_All(player) {
 }
 
 cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight, circleRadius) {
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
 
-  if(isDefined(boxHalfWidth)) {
-    assert(isDefined(boxHalfHeight));
-  }
+  if(isdefined(boxHalfWidth))
+    assert(isdefined(boxHalfHeight));
 
-  if((!isDefined(boxHalfWidth)) && (!isDefined(boxHalfHeight))) {
-    assert(isDefined(circleRadius));
-  }
+  if((!isdefined(boxHalfWidth)) && (!isdefined(boxHalfHeight)))
+    assert(isdefined(circleRadius));
 
   inReticle = false;
   sightTrace = false;
@@ -1366,15 +1294,13 @@ cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight, circleRadius)
   prof_begin("cobrapilot_weapons_systems");
 
   inReticle = target_isinrect(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), boxHalfWidth, boxHalfHeight);
-  if(inReticle) {
+  if(inReticle)
     sightTrace = sighttracepassed(level.player getEye() + (0, 0, 100), targetStruct.targetEntity.origin + targetStruct.targetOffset + (0, 0, 100), false, undefined);
-  }
 
   prof_end("cobrapilot_weapons_systems");
 
-  if(inReticle && sightTrace) {
+  if(inReticle && sightTrace)
     return true;
-  }
 
   return false;
 }
@@ -1382,42 +1308,39 @@ cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight, circleRadius)
 cobraTarget_check_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight) {
   level endon("weapon_armed");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(boxHalfWidth));
-  assert(isDefined(boxHalfHeight));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(boxHalfWidth));
+  assert(isdefined(boxHalfHeight));
 
-  if(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
+  if(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight))
     thread cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight);
-  } else {
+  else
     cobraTarget_UpdateShader(level.player, targetStruct, "target");
-  }
 }
 
 cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight) {
   level endon("weapon_armed");
   level endon("cobra_death");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(boxHalfWidth));
-  assert(isDefined(boxHalfHeight));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(boxHalfWidth));
+  assert(isdefined(boxHalfHeight));
 
   targetStruct.targetEntity endon("death");
 
-  if(isDefined(targetStruct.locking)) {
+  if(isdefined(targetStruct.locking))
     return;
-  }
-  if(isDefined(targetStruct.locked)) {
+  if(isdefined(targetStruct.locked))
     return;
-  }
   targetStruct.locking = getTime();
 
   lockStartTime = getTime();
 
   prof_begin("cobrapilot_weapons_systems");
   thread cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, "weap_hellfire_seeking");
-  while(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
+  while (cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
     cobraTarget_UpdateShader(level.player, targetStruct, "locking");
     wait 0.4;
     cobraTarget_UpdateShader(level.player, targetStruct, "target");
@@ -1442,10 +1365,10 @@ cobraTarget_holdLock_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeigh
   level endon("weapon_armed");
   level endon("cobra_death");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(boxHalfWidth));
-  assert(isDefined(boxHalfHeight));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(boxHalfWidth));
+  assert(isdefined(boxHalfHeight));
 
   targetStruct.targetEntity endon("death");
 
@@ -1457,47 +1380,41 @@ cobraTarget_holdLock_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeigh
   targetStruct.locking = undefined;
 
   thread cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     level.player playLocalSound("weap_hellfire_lock");
-  }
 
-  while(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
+  while (cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight))
     wait 0.05;
-  }
   targetStruct.locked = undefined;
 
   prof_end("cobrapilot_weapons_systems");
 }
 
 cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, alias) {
-  if(getdvar("cobrapilot_sounds_enabled") != "1") {
+  if(getdvar("cobrapilot_sounds_enabled") != "1")
     return;
-  }
 
   level endon("cobra_death");
   level endon("stop_cobra_hellfire_locking_sound");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(alias));
+  assert(isdefined(targetStruct));
+  assert(isdefined(alias));
 
-  if(isDefined(targetStruct.locking_sound_playing)) {
+  if(isdefined(targetStruct.locking_sound_playing))
     return;
-  }
   targetStruct.locking_sound_playing = alias;
 
   targetStruct thread playLoopSoundForSeeking(alias);
 }
 
 cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct) {
-  if(getdvar("cobrapilot_sounds_enabled") != "1") {
+  if(getdvar("cobrapilot_sounds_enabled") != "1")
     return;
-  }
 
-  assert(isDefined(targetStruct));
+  assert(isdefined(targetStruct));
 
-  if(!isDefined(targetStruct.locking_sound_playing)) {
+  if(!isdefined(targetStruct.locking_sound_playing))
     return;
-  }
 
   targetStruct notify("stop sound" + targetStruct.locking_sound_playing);
   targetStruct.locking_sound_playing = undefined;
@@ -1506,13 +1423,12 @@ cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct) {
 cobraTarget_check_missileLock_Air(targetStruct, circleRadius) {
   level endon("weapon_armed");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(circleRadius));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(circleRadius));
 
-  if(cobraTarget_Sidewinder_Has_Target()) {
+  if(cobraTarget_Sidewinder_Has_Target())
     return;
-  }
 
   if(target_isincircle(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), circleRadius)) {
     targetStruct.sideWinder_targeted = true;
@@ -1527,19 +1443,17 @@ cobraTarget_holdWait_missileLock_Air(targetStruct, circleRadius) {
   level endon("weapon_armed");
   level endon("cobra_death");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(targetStruct.sideWinder_targeted));
-  assert(isDefined(circleRadius));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(targetStruct.sideWinder_targeted));
+  assert(isdefined(circleRadius));
 
   targetStruct.targetEntity endon("death");
 
-  if(isDefined(targetStruct.locking)) {
+  if(isdefined(targetStruct.locking))
     return;
-  }
-  if(isDefined(targetStruct.locked)) {
+  if(isdefined(targetStruct.locked))
     return;
-  }
   targetStruct.locking = getTime();
 
   lockStartTime = getTime();
@@ -1548,7 +1462,7 @@ cobraTarget_holdWait_missileLock_Air(targetStruct, circleRadius) {
 
   thread cobraTarget_Sidewinder_ReticleLockOn_Start(targetStruct);
 
-  while(target_isincircle(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), circleRadius)) {
+  while (target_isincircle(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), circleRadius)) {
     cobraTarget_UpdateShader(level.player, targetStruct, "locking");
     wait 0.4;
     cobraTarget_UpdateShader(level.player, targetStruct, "target");
@@ -1573,9 +1487,9 @@ cobraTarget_holdLock_missileLock_Air(targetStruct, circleRadius) {
   level endon("weapon_armed");
   level endon("cobra_death");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
-  assert(isDefined(circleRadius));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
+  assert(isdefined(circleRadius));
 
   targetStruct.targetEntity endon("death");
 
@@ -1591,9 +1505,8 @@ cobraTarget_holdLock_missileLock_Air(targetStruct, circleRadius) {
   thread cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
   thread cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, "weap_aim9_lock");
 
-  while(target_isincircle(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), circleRadius)) {
+  while (target_isincircle(targetStruct.targetEntity, level.player, int(getdvar("cg_fov")), circleRadius))
     wait 0.05;
-  }
 
   cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct);
 
@@ -1603,10 +1516,9 @@ cobraTarget_holdLock_missileLock_Air(targetStruct, circleRadius) {
 }
 
 cobraTarget_Sidewinder_Has_Target() {
-  for(i = 0; i < level.cobraTarget.size; i++) {
-    if(isDefined(level.cobraTarget[i].sideWinder_targeted)) {
+  for (i = 0; i < level.cobraTarget.size; i++) {
+    if(isdefined(level.cobraTarget[i].sideWinder_targeted))
       return true;
-    }
   }
   return false;
 }
@@ -1614,8 +1526,8 @@ cobraTarget_Sidewinder_Has_Target() {
 cobraTarget_Sidewinder_ReticleLockOn_Start(targetStruct) {
   targetStruct endon("Sidewinder_ReticleLockOn_Stop");
 
-  assert(isDefined(targetStruct));
-  assert(isDefined(targetStruct.targetEntity));
+  assert(isdefined(targetStruct));
+  assert(isdefined(targetStruct.targetEntity));
 
   targetStruct.targetEntity endon("death");
 
@@ -1631,22 +1543,21 @@ cobraTarget_Sidewinder_ReticleLockOn_Start(targetStruct) {
   lockonAliasList[1] = "weap_aim9_growl2";
   lockonAliasList[2] = "weap_aim9_growl3";
 
-  for(i = 0; i < lockonAliasList.size; i++) {
+  for (i = 0; i < lockonAliasList.size; i++) {
     thread cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
     thread cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, lockonAliasList[i]);
 
     lastPhaseTime = getTime();
 
-    while((getTime() - lastPhaseTime) < segmentLength) {
+    while ((getTime() - lastPhaseTime) < segmentLength)
       wait 0.05;
-    }
   }
 }
 
 cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct) {
   target_clearreticlelockon();
 
-  assert(isDefined(targetStruct));
+  assert(isdefined(targetStruct));
 
   targetStruct.targetEntity notify("missile_lock_ended", level.playervehicle);
 
@@ -1659,8 +1570,8 @@ cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct) {
 }
 
 health_indicator_create(pilot) {
-  assert(isDefined(self));
-  assert(isDefined(self.pilot));
+  assert(isdefined(self));
+  assert(isdefined(self.pilot));
 
   // red screen overlay
   self.hudelems.cobra_health_overlay = newClientHudElem(self.pilot);
@@ -1689,7 +1600,7 @@ health_indicator_create(pilot) {
 
 health_indicator_damageWait() {
   level endon("cobra_death");
-  for(;;) {
+  for (;;) {
     self waittill("damage");
 
     // flash the red overlay on the screen
@@ -1736,14 +1647,14 @@ health_indicator_getColor() {
 
   if((value > severe) && (value <= moderate)) {
     iPercentage = int(value * (100 / moderate));
-    for(colorIndex = 0; colorIndex < SetValue.size; colorIndex++) {
+    for (colorIndex = 0; colorIndex < SetValue.size; colorIndex++) {
       difference = (color_moderate[colorIndex] - color_severe[colorIndex]);
       increment = (difference / 100);
       SetValue[colorIndex] = color_severe[colorIndex] + (increment * iPercentage);
     }
   } else if((value > moderate) && (value <= repaired)) {
     iPercentage = int((value - moderate) * (100 / (repaired - moderate)));
-    for(colorIndex = 0; colorIndex < SetValue.size; colorIndex++) {
+    for (colorIndex = 0; colorIndex < SetValue.size; colorIndex++) {
       difference = (color_repaired[colorIndex] - color_moderate[colorIndex]);
       increment = (difference / 100);
       SetValue[colorIndex] = color_moderate[colorIndex] + (increment * iPercentage);
@@ -1756,14 +1667,12 @@ health_indicator_getColor() {
 health_warningSound_Start() {
   level endon("cobra_death");
 
-  if(isDefined(level.lowhealth_warning_playing)) {
+  if(isdefined(level.lowhealth_warning_playing))
     return;
-  }
   level.lowhealth_warning_playing = true;
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     self.pilot thread play_loop_sound_on_entity("alarm_cobra_death_imminent");
-  }
 }
 
 health_warningSound_Stop() {
@@ -1775,7 +1684,7 @@ health_leak() {
   level endon("cobra_death");
   self endon("stop_health_leak");
 
-  for(;;) {
+  for (;;) {
     if(self.health - level.flyablecobra_healthLeakIncrement <= 0) {
       self thread cobra_death();
       return;
@@ -1811,18 +1720,16 @@ health_removeHudElems() {
 health_Regen_Station() {
   level endon("cobra_death");
 
-  for(;;) {
+  for (;;) {
     level waittill("health_regen");
 
-    if(self.health >= level.flyablecobra_starting_health) {
+    if(self.health >= level.flyablecobra_starting_health)
       continue;
-    }
 
     // add health
     self.health += level.flyablecobra_healthRegenIncrement;
-    if(self.health > level.flyablecobra_starting_health) {
+    if(self.health > level.flyablecobra_starting_health)
       self.health = level.flyablecobra_starting_health;
-    }
 
     if(self.health > level.flyablecobra_healthWarning_value) {
       self thread health_warningSound_Stop();
@@ -1832,9 +1739,8 @@ health_Regen_Station() {
     newColor = health_indicator_getColor();
     self.hudelems.cobra_health_icon.color = (newColor[0], newColor[1], newColor[2]);
 
-    if(getdvar("cobrapilot_sounds_enabled") == "1") {
+    if(getdvar("cobrapilot_sounds_enabled") == "1")
       self.pilot playLocalSound("cobra_health_pickup");
-    }
 
     wait level.flyablecobra_healthRegenRate;
   }
@@ -1844,7 +1750,7 @@ health_think() {
   self thread health_removeHudElems();
   fatalImpactRate = 1500;
   self thread health_Regen_Station();
-  for(;;) {
+  for (;;) {
     self waittill("veh_collision", velocity, collisionNormal);
 
     prof_begin("cobrapilot_health_system");
@@ -1863,14 +1769,12 @@ health_think() {
     slideVelocity = (slideVelocity / 2);
 
     impactAmount = impactVelocity;
-    if(slideVelocity > impactVelocity) {
+    if(slideVelocity > impactVelocity)
       impactAmount = slideVelocity;
-    }
 
     // cap the impact rate to not exceed fatalImpactRate since it wont mater at that point anyways
-    if(impactAmount > fatalImpactRate) {
+    if(impactAmount > fatalImpactRate)
       impactAmount = fatalImpactRate;
-    }
 
     damage = int(impactAmount * (level.flyablecobra_starting_health / fatalImpactRate));
 
@@ -1887,12 +1791,11 @@ health_think() {
     level.stats["damage_taken"] += damage;
 
     bDeath = false;
-    if((self.health - damage) <= 0) {
+    if((self.health - damage) <= 0)
       bDeath = true;
-    } else {
-      if(getdvar("cobrapilot_sounds_enabled") == "1") {
+    else {
+      if(getdvar("cobrapilot_sounds_enabled") == "1")
         self.pilot playLocalSound("helicopter_collide");
-      }
 
       self.health -= damage;
 
@@ -1920,11 +1823,11 @@ cobra_death() {
   self.crashing = true;
   self thread maps\_vehicle::kill_fx( self.model );
   self thread maps\_vehicle::helicopter_crash_move();
-  	
+	
   self waittill( "crash_done" );
   self notify( "stop_looping_death_fx" );
   self notify( "death_finished" );
-  	
+	
   self useby( self.pilot );
   self.pilot enablehealthshield( false );
   self.pilot kill ( self.pilot.origin );
@@ -1934,9 +1837,8 @@ cobra_death() {
   self delete();
   */
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     self.pilot playLocalSound("helicopter_crash");
-  }
 
   self.health = 1;
 
@@ -1948,7 +1850,7 @@ cobra_death() {
 
   fxOrigin = self.pilot.origin;
 
-  playFX(level.player_death_fx, fxOrigin);
+  playfx(level.player_death_fx, fxOrigin);
   self.pilot kill(self.pilot.origin);
   self.pilot enablehealthshield(true);
 }
@@ -1958,9 +1860,9 @@ incommingMissile_Think() {
 
   thread missileIndicator_MissileFlashNotifies();
 
-  for(;;) {
+  for (;;) {
     level.playervehicle waittill("incomming_missile", eMissile);
-    assert(isDefined(eMissile));
+    assert(isdefined(eMissile));
     thread missileIndicator(eMissile);
     thread incommingMissile_Missile_Death(eMissile);
     thread incommingMissile_Sound_Start();
@@ -1975,55 +1877,47 @@ incommingMissile_Missile_Death(eMissile) {
 }
 
 incommingMissile_Sound_Start() {
-  if(!isDefined(level.missile_launched_warning_playing)) {
+  if(!isdefined(level.missile_launched_warning_playing))
     level.missile_launched_warning_playing = 0;
-  }
 
   level.missile_launched_warning_playing++;
 
-  if(level.missile_launched_warning_playing > 1) {
+  if(level.missile_launched_warning_playing > 1)
     return;
-  }
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     level.player thread play_loop_sound_on_entity("alarm_cobra_enemy_launch");
-  }
 }
 
 incommingMissile_Sound_Stop() {
   level.missile_launched_warning_playing--;
 
-  if(level.missile_launched_warning_playing > 0) {
+  if(level.missile_launched_warning_playing > 0)
     return;
-  }
 
   level.player notify("stop sound" + "alarm_cobra_enemy_launch");
 }
 
 ammo_Reload_Station() {
-  if(!isDefined(level.cobraWeapon)) {
+  if(!isdefined(level.cobraWeapon))
     return;
-  }
-  if(level.cobraWeapon.size == 0) {
+  if(level.cobraWeapon.size == 0)
     return;
-  }
 
   level endon("cobra_death");
 
-  array_thread(getEntArray("ammo_reload", "targetname"), ::ammo_Reload_Station_Notify, "ammo_reload");
+  array_thread(getentarray("ammo_reload", "targetname"), ::ammo_Reload_Station_Notify, "ammo_reload");
 
-  if(getdvar("cobrapilot_unlimited_ammo") == "1") {
+  if(getdvar("cobrapilot_unlimited_ammo") == "1")
     return;
-  }
 
-  for(;;) {
+  for (;;) {
     regenPoint = undefined;
     level waittill("ammo_reload", regenPoint, trigger);
 
     if(getdvar("cobrapilot_farp_mode") == "0") {
-      for(i = 0; i < level.cobraWeapon.size; i++) {
+      for (i = 0; i < level.cobraWeapon.size; i++)
         thread ammo_Reload_Station_Add_Ammo(level.cobraWeapon[i]);
-      }
       wait 0.05;
     } else if(getdvar("cobrapilot_farp_mode") == "1") {
       thread ammo_Reload_Station_AutoLand_HintPrint(regenPoint, trigger);
@@ -2033,7 +1927,7 @@ ammo_Reload_Station() {
 }
 
 ammo_Reload_Station_Cinematic_Reload(regenPoint, trigger) {
-  assert(isDefined(regenPoint));
+  assert(isdefined(regenPoint));
   hoverPoint = regenPoint + (0, 0, 300);
   level.player freezeControls(true);
   level.playervehicle Vehicle_SetSpeed(30, 5);
@@ -2045,7 +1939,7 @@ ammo_Reload_Station_Cinematic_Reload(regenPoint, trigger) {
   level.player takeAllWeapons();
   viewingEnt = undefined;
   viewingEnt = trigger ammo_Reload_Station_Get_Viewing_Ent();
-  assert(isDefined(viewingEnt));
+  assert(isdefined(viewingEnt));
   assert(viewingEnt.classname == "script_model");
   assert(viewingEnt.model == "tag_origin");
   level.player playerlinktodelta(viewingEnt, "tag_origin", 1.0);
@@ -2066,24 +1960,22 @@ ammo_Reload_Station_Cinematic_Reload(regenPoint, trigger) {
 
 ammo_Reload_Station_Get_Viewing_Ent() {
   viewingEnt = undefined;
-  ents = getEntArray("ammo_viewpoint", "targetname");
+  ents = getentarray("ammo_viewpoint", "targetname");
   viewingEnt = getClosest(self.origin, ents);
-  assert(isDefined(viewingEnt));
+  assert(isdefined(viewingEnt));
   return viewingEnt;
 }
 
 ammo_Reload_Station_AutoLand_HintPrint(hoverPoint, trigger) {
-  if(isDefined(level.playervehicle.farp_autoland_print_on)) {
+  if(isdefined(level.playervehicle.farp_autoland_print_on))
     return;
-  }
   level.playervehicle.farp_autoland_print_on = true;
 
   // create print
   //iprintlnbold( "in" );
 
-  while(level.playervehicle isTouching(trigger)) {
+  while (level.playervehicle isTouching(trigger))
     wait 0.05;
-  }
 
   // remove print
   //iprintlnbold( "out" );
@@ -2092,7 +1984,7 @@ ammo_Reload_Station_AutoLand_HintPrint(hoverPoint, trigger) {
 }
 
 ammo_Reload_Station_Notify(notifyString) {
-  assert(isDefined(notifyString));
+  assert(isdefined(notifyString));
   level endon("cobra_death");
 
   farpicon = newHudElem();
@@ -2108,41 +2000,36 @@ ammo_Reload_Station_Notify(notifyString) {
     trig = spawn("trigger_radius", self.origin, 16, 1500, 1000);
   }
 
-  for(;;) {
+  for (;;) {
     vehicle = undefined;
-    if(getdvar("cobrapilot_farp_mode") == "0") {
+    if(getdvar("cobrapilot_farp_mode") == "0")
       self waittill("trigger", vehicle);
-    } else if(getdvar("cobrapilot_farp_mode") == "1") {
-      assert(isDefined(trig));
+    else if(getdvar("cobrapilot_farp_mode") == "1") {
+      assert(isdefined(trig));
       trig waittill("trigger", vehicle);
     }
-    if(!isDefined(vehicle)) {
+    if(!isdefined(vehicle))
       continue;
-    }
 
-    if(vehicle != level.playervehicle) {
+    if(vehicle != level.playervehicle)
       continue;
-    }
 
     regenPoint = self.origin;
-    if(isDefined(self.target)) {
+    if(isdefined(self.target)) {
       ent = getent(self.target, "targetname");
-      if(isDefined(ent)) {
+      if(isdefined(ent))
         regenPoint = ent.origin;
-      }
     }
 
-    if(isDefined(trig)) {
+    if(isdefined(trig))
       level notify(notifyString, regenPoint, trig);
-    } else {
+    else
       level notify(notifyString, regenPoint, self);
-    }
     level notify("health_regen");
 
     if(getdvar("cobrapilot_farp_mode") == "1") {
-      while(vehicle isTouching(trig)) {
+      while (vehicle isTouching(trig))
         wait 0.05;
-      }
     }
   }
 }
@@ -2150,9 +2037,8 @@ ammo_Reload_Station_Notify(notifyString) {
 ammo_Reload_Station_Add_Ammo(weapon) {
   level endon("cobra_death");
 
-  if(isDefined(weapon.reloading)) {
+  if(isdefined(weapon.reloading))
     return;
-  }
 
   weapon.reloading = true;
 
@@ -2165,18 +2051,15 @@ ammo_Reload_Station_Add_Ammo(weapon) {
 
   // add ammo and update the ammo counter on the hud
   weapon.v["currentAmmo"] += weapon.v["ammoPickupIncrement"];
-  if(weapon.v["currentAmmo"] > weapon.v["maxAmmo"]) {
+  if(weapon.v["currentAmmo"] > weapon.v["maxAmmo"])
     weapon.v["currentAmmo"] = weapon.v["maxAmmo"];
-  }
 
   // attach missiles back onto the chopper since they were detached when fired
-  for(i = 0; i < weapon.v["ammoPickupIncrement"]; i++) {
+  for (i = 0; i < weapon.v["ammoPickupIncrement"]; i++)
     level.playervehicle weaponsSystems_Attach_Weapon(weapon.v["weapon"]);
-  }
 
-  if(getdvar("cobrapilot_sounds_enabled") == "1") {
+  if(getdvar("cobrapilot_sounds_enabled") == "1")
     level.player playLocalSound("cobra_ammo_reload");
-  }
 
   weapon.v["ammoCounter"] setValue(weapon.v["currentAmmo"]);
 
@@ -2194,9 +2077,8 @@ borderwall_method1()
 	for(;;)
 	{
 		self waittill ( "trigger", vehicle );
-		if( vehicle != level.playervehicle ) {
+		if( vehicle != level.playervehicle )
 			continue;
-		}
 		
 		normalvec = vectornormalize( target.origin - level.playervehicle.origin );
 		
@@ -2219,10 +2101,10 @@ edge_Of_World()
 	
 	level endon ( "cobra_death" );
 	
-	array_thread( getEntArray( "border_inner", "targetname" ), ::edge_Of_World_Notify, "border_inner" );
-	array_thread( getEntArray( "border_outer", "targetname" ), ::edge_Of_World_Notify, "border_outer" );
+	array_thread( getentarray( "border_inner", "targetname" ), ::edge_Of_World_Notify, "border_inner" );
+	array_thread( getentarray( "border_outer", "targetname" ), ::edge_Of_World_Notify, "border_outer" );
 	
-	for(;;)
+	for (;;)
 	{
 		level waittill( "border_outer" );
 		level notify( "player_out_of_bounds" );
@@ -2230,28 +2112,25 @@ edge_Of_World()
 		
 		level waittill( "border_inner" );
 		level notify( "player_in_bounds" );
-		if( isDefined( level.edge_of_world_warning ) ) {
+		if( isdefined( level.edge_of_world_warning ) )
 			level.edge_of_world_warning destroy();
-		}
-		if( isDefined( level.edge_of_world_timer ) ) {
+		if( isdefined( level.edge_of_world_timer ) )
 			level.edge_of_world_timer destroy();
-		}
 	}
 }
 */
 /*
 edge_Of_World_Notify( notifyString )
 {
-	assert( isDefined( notifyString ) );
+	assert( isdefined( notifyString ) );
 	
 	level endon ( "cobra_death" );
 	
 	for(;;)
 	{
 		self waittill ( "trigger", vehicle );
-		if( vehicle != level.playervehicle ) {
+		if( vehicle != level.playervehicle )
 			continue;
-		}
 		
 		level notify( notifyString );
 	}
@@ -2268,7 +2147,7 @@ edge_Of_World_Warning()
 	// when this time is exceeded the mission is failed
 	outOfBoundsMaxTime = 15;
 	
-	if( !isDefined( level.edge_of_world_warning ) )
+	if( !isdefined( level.edge_of_world_warning ) )
 	{
 		level.edge_of_world_warning = newHudElem();
 		level.edge_of_world_warning.x = 0;
@@ -2278,12 +2157,12 @@ edge_Of_World_Warning()
 		level.edge_of_world_warning.horzAlign = "center";
 		level.edge_of_world_warning.vertAlign = "middle";
 		level.edge_of_world_warning.foreground = true;
-		level.edge_of_world_warning setText(&"COBRAPILOT_EDGE_OF_WORLD_WARNING" );
+		level.edge_of_world_warning setText( &"COBRAPILOT_EDGE_OF_WORLD_WARNING" );
 		level.edge_of_world_warning.fontscale = 2;
 		level.edge_of_world_warning.color = ( 1, 0, 0 );
 	}
 	
-	if( !isDefined( level.edge_of_world_timer ) )
+	if( !isdefined( level.edge_of_world_timer ) )
 	{
 		level.edge_of_world_timer = newHudElem();
 		level.edge_of_world_timer.x = 0;
@@ -2335,7 +2214,7 @@ playLoopSoundForSeeking(alias) {
   org.origin = level.player.origin;
   org.angles = level.player.angles;
   org linkto(level.player);
-  org playLoopSound(alias);
+  org playloopsound(alias);
   self waittill("stop sound" + alias);
   org stoploopsound(alias);
   org delete();
@@ -2358,17 +2237,16 @@ gunner_think(gunner) {
 
   gunner thread gunner_lookAtTarget();
 
-  for(;;) {
+  for (;;) {
     if(self.gunner_use_turret == false) {
-      while(self.gunner_use_turret == false) {
+      while (self.gunner_use_turret == false)
         wait 0.1;
-      }
       wait randomfloatrange(0.5, 1.2);
       continue;
     }
 
     eTarget = level.playervehicle getEnemyTarget(level.GunnerTargetRange, level.GunnerTargetFOV, true, true);
-    if(isDefined(eTarget)) {
+    if(isdefined(eTarget)) {
       gunner thread gunner_lookAtTarget(eTarget);
       level.playervehicle thread shootEnemyTarget_Bullets(eTarget);
     } else if(getdvar("cobrapilot_debug") == "1") {
@@ -2385,16 +2263,14 @@ gunner_lookAtTarget(eTarget) {
 
   self notify("stop_looking_at_target");
   self endon("stop_looking_at_target");
-  if(isDefined(eTarget)) {
+  if(isdefined(eTarget))
     eTarget endon("death");
-  }
 
-  for(;;) {
-    if(isDefined(self.lookingAtTarget) && isDefined(eTarget)) {
+  for (;;) {
+    if(isdefined(self.lookingAtTarget) && isdefined(eTarget))
       blendTime = 0.1;
-    } else {
+    else
       blendTime = 1.0;
-    }
 
     self.lookingAtTarget = true;
 
@@ -2404,7 +2280,7 @@ gunner_lookAtTarget(eTarget) {
     self setanim( % cobra_copilot_idle, blendAmount[1], blendTime);
     self setanim( % cobra_copilot_idle_r, blendAmount[2], blendTime);
 
-    if(!isDefined(eTarget)) {
+    if(!isdefined(eTarget)) {
       self.lookingAtTarget = undefined;
       return;
     }
@@ -2419,9 +2295,8 @@ gunner_getBlendNumber(eTarget) {
   blendAmount[1] = 1.0; // forward
   blendAmount[2] = 0.0; // right
 
-  if(!isDefined(eTarget)) {
+  if(!isdefined(eTarget))
     return blendAmount;
-  }
 
   //prof_begin( "cobrapilot_ai" );
 
@@ -2436,9 +2311,8 @@ gunner_getBlendNumber(eTarget) {
   if(value < 0) {
     // turn head to the left
     value = abs(value);
-    if(value > 1.0) {
+    if(value > 1.0)
       value = 1.0;
-    }
     blendAmount[0] = value; // left
     blendAmount[1] = 1 - value; // forward
     blendAmount[2] = 0.0; // right
@@ -2446,9 +2320,8 @@ gunner_getBlendNumber(eTarget) {
   } else if(value > 0) {
     // turn head to the right
     value = abs(value);
-    if(value > 1.0) {
+    if(value > 1.0)
       value = 1.0;
-    }
     blendAmount[0] = 0.0; // left
     blendAmount[1] = 1 - value; // forward
     blendAmount[2] = value; // right
@@ -2460,7 +2333,7 @@ gunner_getBlendNumber(eTarget) {
 }
 
 missileIndicator(eMissile) {
-  missileIndicator = spawnStruct();
+  missileIndicator = spawnstruct();
 
   missileIndicator.eMissile = eMissile;
   target_set(missileIndicator.eMissile);
@@ -2522,14 +2395,14 @@ missileIndicator(eMissile) {
   eMissile endon("death");
   level.player endon("death");
   level.playervehicle endon("death");
-  for(;;) {
+  for (;;) {
     // uses level.player angles instead of the cobra's angles so that it works when the player is in freelook
 
     level waittill("incomming_missile_blink_on");
 
     prof_begin("cobrapilot_weapons_systems");
 
-    forwardvec = anglesToForward(level.player.angles);
+    forwardvec = anglestoforward(level.player.angles);
     backvec = vector_multiply(forwardvec, -1);
     rightvec = anglestoright(level.player.angles);
     leftvec = vector_multiply(rightVec, -1);
@@ -2538,30 +2411,26 @@ missileIndicator(eMissile) {
     // forward arrow
     missileIndicator.arrowForward.alpha = 0;
     vecdot = vectordot(forwardvec, vecToMissile);
-    if(vecdot > level.cosine["45"]) {
+    if(vecdot > level.cosine["45"])
       missileIndicator.arrowForward.alpha = 1;
-    }
 
     // back arrow
     missileIndicator.arrowBack.alpha = 0;
     vecdot = vectordot(backvec, vecToMissile);
-    if(vecdot > level.cosine["45"]) {
+    if(vecdot > level.cosine["45"])
       missileIndicator.arrowBack.alpha = 1;
-    }
 
     // left arrow
     missileIndicator.arrowLeft.alpha = 0;
     vecdot = vectordot(leftvec, vecToMissile);
-    if(vecdot > level.cosine["45"]) {
+    if(vecdot > level.cosine["45"])
       missileIndicator.arrowLeft.alpha = 1;
-    }
 
     // right arrow
     missileIndicator.arrowRight.alpha = 0;
     vecdot = vectordot(rightvec, vecToMissile);
-    if(vecdot > level.cosine["45"]) {
+    if(vecdot > level.cosine["45"])
       missileIndicator.arrowRight.alpha = 1;
-    }
 
     prof_end("cobrapilot_weapons_systems");
 
@@ -2577,11 +2446,11 @@ missileIndicator(eMissile) {
 missileIndicator_MissileFlash(missileIndicator) {
   level.playervehicle endon("death");
 
-  assert(isDefined(missileIndicator.eMissile));
+  assert(isdefined(missileIndicator.eMissile));
 
   missileIndicator.eMissile endon("death");
 
-  for(;;) {
+  for (;;) {
     level waittill("incomming_missile_blink_off");
     target_setShader(missileIndicator.eMissile, level.missileHintIndicator_Missile_Flash);
     target_setOffscreenShader(missileIndicator.eMissile, level.missileHintIndicator_Missile_Flash);
@@ -2595,29 +2464,25 @@ missileIndicator_MissileFlash(missileIndicator) {
 missileIndicator_MissileDeath(missileIndicator) {
   level.playervehicle endon("death");
 
-  assert(isDefined(missileIndicator.eMissile));
+  assert(isdefined(missileIndicator.eMissile));
 
   missileIndicator.eMissile waittill("death");
 
-  if(isDefined(missileIndicator.arrowLeft)) {
+  if(isdefined(missileIndicator.arrowLeft))
     missileIndicator.arrowLeft destroy();
-  }
-  if(isDefined(missileIndicator.arrowRight)) {
+  if(isdefined(missileIndicator.arrowRight))
     missileIndicator.arrowRight destroy();
-  }
-  if(isDefined(missileIndicator.arrowForward)) {
+  if(isdefined(missileIndicator.arrowForward))
     missileIndicator.arrowForward destroy();
-  }
-  if(isDefined(missileIndicator.arrowBack)) {
+  if(isdefined(missileIndicator.arrowBack))
     missileIndicator.arrowBack destroy();
-  }
 }
 
 missileIndicator_MissileFlashNotifies() {
   level.playervehicle endon("death");
   level.player endon("death");
 
-  for(;;) {
+  for (;;) {
     wait 0.2;
     level notify("incomming_missile_blink_off");
     wait 0.1;

@@ -48,25 +48,21 @@ extra_death_func_to_check_for_splat_death() {
 
   if(self.damagemod == "MOD_GRENADE" || self.damagemod == "MOD_GRENADE_SPLASH") {
     if(self.damageweapon == "blundersplat_explosive_dart_zm") {
-      if(isplayer(self.attacker)) {
+      if(isplayer(self.attacker))
         self notify("killed_by_a_blundersplat", self.attacker);
-      }
     } else if(self.damageweapon == "bouncing_tomahawk_zm") {
-      if(isplayer(self.attacker)) {
+      if(isplayer(self.attacker))
         self.attacker notify("got_a_tomahawk_kill");
-      }
     }
   }
 
   if(isDefined(self.attacker.killed_with_only_tomahawk)) {
-    if(self.damageweapon != "bouncing_tomahawk_zm" && self.damageweapon != "none") {
+    if(self.damageweapon != "bouncing_tomahawk_zm" && self.damageweapon != "none")
       self.attacker.killed_with_only_tomahawk = 0;
-    }
   }
 
-  if(isDefined(self.attacker.killed_something_thq)) {
+  if(isDefined(self.attacker.killed_something_thq))
     self.attacker.killed_something_thq = 1;
-  }
 
   return false;
 }
@@ -78,11 +74,10 @@ zombie_spoon_func() {
   if(flag("charged_spoon") || !level.b_spoon_in_tub) {
     return;
   }
-  if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone("cellblock_shower")) {
+  if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone("cellblock_shower"))
     level.n_spoon_kill_count++;
-  } else {
+  else
     return;
-  }
 
   if(level.n_spoon_kill_count >= 50) {
     iprintlnbold("Spoon Charged");
@@ -96,14 +91,13 @@ wait_for_initial_conditions() {
   m_spoon_pickup ghost();
   m_spoon_pickup ghostindemo();
 
-  while(!isDefined(level.characters_in_nml) || level.characters_in_nml.size == 0) {
+  while(!isDefined(level.characters_in_nml) || level.characters_in_nml.size == 0)
     wait 1;
-  }
 
   flag_wait("soul_catchers_charged");
   m_poster = getent("poster", "targetname");
   m_poster.health = 5000;
-  m_poster setCanDamage(1);
+  m_poster setcandamage(1);
   b_poster_knocked_down = 0;
 
   while(!b_poster_knocked_down) {
@@ -114,9 +108,8 @@ wait_for_initial_conditions() {
       playsoundatposition("zmb_squest_spoon_poster", m_poster.origin);
       m_poster delete();
 
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isplayer(attacker))
         attacker do_player_general_vox("quest", "secret_poster", undefined, 100);
-      }
 
       wait 1.0;
       attacker thread do_player_general_vox("quest", "pick_up_easter_egg");
@@ -130,7 +123,7 @@ wait_for_initial_conditions() {
   m_spoon = getent("zap_spoon", "targetname");
   m_spoon ghostindemo();
   m_spoon.health = 50000;
-  m_spoon setCanDamage(1);
+  m_spoon setcandamage(1);
   b_spoon_shocked = 0;
 
   while(!b_spoon_shocked) {
@@ -140,20 +133,19 @@ wait_for_initial_conditions() {
     if(weaponname == "lightning_hands_zm") {
       b_spoon_shocked = 1;
       m_spoon delete();
-      attacker playSound("zmb_easteregg_laugh");
+      attacker playsound("zmb_easteregg_laugh");
     }
   }
 
   m_spoon_pickup show();
   m_spoon_pickup.health = 10000;
-  m_spoon_pickup setCanDamage(1);
+  m_spoon_pickup setcandamage(1);
   level.a_tomahawk_pickup_funcs[level.a_tomahawk_pickup_funcs.size] = ::tomahawk_the_spoon;
 }
 
 tomahawk_the_spoon(grenade, n_grenade_charge_power) {
-  if(self hasweapon("spoon_zm_alcatraz") || self hasweapon("spork_zm_alcatraz")) {
+  if(self hasweapon("spoon_zm_alcatraz") || self hasweapon("spork_zm_alcatraz"))
     return false;
-  }
 
   m_spoon = getent("pickup_spoon", "targetname");
 
@@ -161,7 +153,7 @@ tomahawk_the_spoon(grenade, n_grenade_charge_power) {
     m_tomahawk = maps\mp\zombies\_zm_weap_tomahawk::tomahawk_spawn(grenade.origin);
     m_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
     m_player_spoon = spawn("script_model", grenade.origin);
-    m_player_spoon setModel("t6_wpn_zmb_spoon_world");
+    m_player_spoon setmodel("t6_wpn_zmb_spoon_world");
     m_player_spoon linkto(m_tomahawk);
     self maps\mp\zombies\_zm_stats::increment_client_stat("prison_ee_spoon_acquired", 0);
     self thread maps\mp\zombies\_zm_weap_tomahawk::tomahawk_return_player(m_tomahawk);
@@ -176,9 +168,8 @@ tomahawk_the_spoon(grenade, n_grenade_charge_power) {
 }
 
 give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon) {
-  while(isDefined(m_tomahawk)) {
+  while(isDefined(m_tomahawk))
     wait 0.05;
-  }
 
   m_player_spoon delete();
 
@@ -189,9 +180,8 @@ give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon) {
     weapons = self getweaponslist();
 
     for(i = 0; i < weapons.size; i++) {
-      if(issubstr(weapons[i], "knife")) {
+      if(issubstr(weapons[i], "knife"))
         self takeweapon(weapons[i]);
-      }
     }
   }
 
@@ -214,9 +204,8 @@ wait_for_bucket_activated(player) {
     while(true) {
       level.t_bathtub waittill("trigger", who);
 
-      if(who == player) {
+      if(who == player)
         return;
-      }
     }
   } else
     level.t_bathtub waittill("trigger", who);
@@ -234,7 +223,7 @@ dip_the_spoon() {
   level.b_spoon_in_tub = 1;
   flag_wait("charged_spoon");
   wait 1.0;
-  level.t_bathtub playSound("zmb_easteregg_laugh");
+  level.t_bathtub playsound("zmb_easteregg_laugh");
   self thread thrust_the_spork();
 }
 

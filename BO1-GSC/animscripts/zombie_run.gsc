@@ -224,15 +224,13 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
     yawDiff = self GetLookaheadAngle();
     animWeights = animscripts\zombie_utility::QuadrantAnimWeights(yawDiff);
     tempYawDiff = yawDiff;
-    if(tempYawDiff < 0) {
+    if(tempYawDiff < 0)
       tempYawDiff *= -1;
-    }
     minYaw = GetDvarFloat(#"ai_slowdownMinYawDiff");
     if(tempYawDiff >= minYaw) {
       maxYaw = GetDvarFloat(#"ai_slowdownMaxYawDiff");
-      if(tempYawDiff > maxYaw) {
+      if(tempYawDiff > maxYaw)
         tempYawDiff = maxYaw;
-      }
       maxYaw -= minYaw;
       tempYawDiff -= minYaw;
       minRate = GetDvarFloat(#"ai_slowdownMinRate");
@@ -284,9 +282,9 @@ MakeRunSounds(notifyString) {
   self endon(notifyString);
   for(;;) {
     wait .5;
-    self playSound("fly_step_run_npc_concrete");
+    self PlaySound("fly_step_run_npc_concrete");
     wait .5;
-    self playSound("fly_step_run_npc_concrete");
+    self PlaySound("fly_step_run_npc_concrete");
   }
 }
 

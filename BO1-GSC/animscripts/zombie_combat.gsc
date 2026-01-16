@@ -280,9 +280,8 @@ TryExposedReacquire() {
     default:
       assert(self.reacquire_state == 6);
       self.reacquire_state = 0;
-      if(!(self canSee(self.enemy))) {
+      if(!(self canSee(self.enemy)))
         self FlagEnemyUnattackable();
-      }
       return;
   }
   self.reacquire_state++;

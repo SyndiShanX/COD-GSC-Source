@@ -4,17 +4,14 @@
 *****************************************************/
 
 prop_notetrack_exist(var_0, var_1) {
-  if(!isDefined(level.prop_notetracks)) {
+  if(!isDefined(level.prop_notetracks))
     level.prop_notetracks = [];
-  }
 
-  if(!isDefined(level.prop_notetracks[var_0])) {
+  if(!isDefined(level.prop_notetracks[var_0]))
     level.prop_notetracks[var_0] = [];
-  }
 
-  if(isDefined(level.prop_notetracks[var_0][var_1])) {
+  if(isDefined(level.prop_notetracks[var_0][var_1]))
     return 1;
-  }
 
   level.prop_notetracks[var_0][var_1] = 1;
   return 0;
@@ -36,9 +33,8 @@ add_smoking_notetracks(var_0) {
 }
 
 detach_idle_clip(var_0) {
-  if(isDefined(var_0.clip)) {
+  if(isDefined(var_0.clip))
     var_0.clip delete();
-  }
 }
 
 add_sit_load_ak_notetracks(var_0) {
@@ -78,9 +74,8 @@ attach_phone(var_0) {
 }
 
 detach_phone(var_0) {
-  if(isDefined(var_0.phone)) {
+  if(isDefined(var_0.phone))
     var_0.phone delete();
-  }
 }
 
 attach_cig(var_0) {
@@ -94,9 +89,8 @@ attach_cig(var_0) {
 }
 
 detach_cig(var_0) {
-  if(isDefined(var_0.cigar)) {
+  if(isDefined(var_0.cigar))
     var_0.cigar thread prop_cig_throw();
-  }
 }
 
 prop_delete(var_0, var_1) {

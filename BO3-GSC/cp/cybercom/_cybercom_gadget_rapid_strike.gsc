@@ -27,15 +27,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 64);
-  callback::on_spawned(&on_player_spawned);
-  level.cybercom.rapid_strike = spawnStruct();
-  level.cybercom.rapid_strike._is_flickering = &_is_flickering;
-  level.cybercom.rapid_strike._on_flicker = &_on_flicker;
-  level.cybercom.rapid_strike._on_give = &_on_give;
-  level.cybercom.rapid_strike._on_take = &_on_take;
-  level.cybercom.rapid_strike._on_connect = &_on_connect;
-  level.cybercom.rapid_strike._on = &_on;
-  level.cybercom.rapid_strike._off = &_off;
+  callback::on_spawned( & on_player_spawned);
+  level.cybercom.rapid_strike = spawnstruct();
+  level.cybercom.rapid_strike._is_flickering = & _is_flickering;
+  level.cybercom.rapid_strike._on_flicker = & _on_flicker;
+  level.cybercom.rapid_strike._on_give = & _on_give;
+  level.cybercom.rapid_strike._on_take = & _on_take;
+  level.cybercom.rapid_strike._on_connect = & _on_connect;
+  level.cybercom.rapid_strike._on = & _on;
+  level.cybercom.rapid_strike._off = & _off;
 }
 
 function on_player_spawned() {}
@@ -63,14 +63,14 @@ function function_677ed44f(weapon) {
   self endon("hash_677ed44f");
   self endon("hash_343d4580");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     level waittill("rapid_strike", target, attacker, damage, weapon, hitorigin);
     self notify(weapon.name + "_fired");
     level notify(weapon.name + "_fired");
     wait(0.05);
     if(isplayer(self)) {
       itemindex = getitemindexfromref("cybercom_rapidstrike");
-      if(isDefined(itemindex)) {
+      if(isdefined(itemindex)) {
         self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", 1);
         self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
       }

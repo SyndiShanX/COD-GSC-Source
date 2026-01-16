@@ -39,9 +39,9 @@ clockwork_defend_pre_load() {
   common_scripts\utility::flag_init("cypher_defend_close_door");
   common_scripts\utility::flag_init("defend_timeout");
   common_scripts\utility::flag_init("ally_died");
-  maps\_utility::add_hint_string("teargas_hint", &"CLOCKWORK_PROMPT_TEARGAS", ::handle_bag_hints);
-  maps\_utility::add_hint_string("shockwave_hint", &"CLOCKWORK_PROMPT_SHOCKWAVE", ::handle_bag_hints);
-  maps\_utility::add_hint_string("mine_hint", &"CLOCKWORK_PROMPT_MINE", ::handle_bag_hints);
+  maps\_utility::add_hint_string("teargas_hint", & "CLOCKWORK_PROMPT_TEARGAS", ::handle_bag_hints);
+  maps\_utility::add_hint_string("shockwave_hint", & "CLOCKWORK_PROMPT_SHOCKWAVE", ::handle_bag_hints);
+  maps\_utility::add_hint_string("mine_hint", & "CLOCKWORK_PROMPT_MINE", ::handle_bag_hints);
 }
 
 setup_defend_blowdoors1() {
@@ -80,9 +80,8 @@ setup_defend_plat(var_0) {
   maps\_utility::delaythread(1, ::defend_platform);
   thread maps\clockwork_audio::checkpoint_defend();
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_defend();
-  }
 }
 
 begin_defend_plat() {
@@ -148,17 +147,14 @@ defend_setup_common() {
   level.allies[2].animname = "cypher";
 
   foreach(var_1 in level.allies) {
-    if(var_1.animname == "keegan") {
+    if(var_1.animname == "keegan")
       var_1 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_1.animname == "baker") {
+    if(var_1.animname == "baker")
       var_1 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_1.animname == "cypher") {
+    if(var_1.animname == "cypher")
       var_1 maps\_utility::forceuseweapon("mts255", "primary");
-    }
   }
 }
 
@@ -193,9 +189,8 @@ begin_defend() {
   level endon("defend_player_fail_leaving");
   level endon("ally_died");
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_defend();
-  }
 
   defend_begin_common();
 
@@ -230,9 +225,8 @@ enable_bag_trigger(var_0) {
 watch_player_wake_scientists() {
   level endon("defend_shoot_air");
 
-  while(!common_scripts\utility::flag("defend_player_fail_leaving")) {
+  while(!common_scripts\utility::flag("defend_player_fail_leaving"))
     wait 0.05;
-  }
 
   level.player waittill("weapon_fired");
   level.player_woke_scientists = 1;
@@ -301,9 +295,8 @@ defend_platform() {
   thread maps\_utility::autosave_by_name("defend_bag_dropoff");
   var_0 = getent("defend_player_drop_bag_trigger", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 common_scripts\utility::trigger_off();
-  }
 
   common_scripts\utility::flag_wait("defend_baker_in_position");
   maps\_utility::stop_exploder(200);
@@ -393,7 +386,7 @@ fail_mission_leave_area() {
   common_scripts\utility::flag_wait_any("def_player_north", "player_on_podium", "def_player_south");
   thread watch_player_leave_area();
   common_scripts\utility::flag_wait("defend_player_fail_leaving");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -415,9 +408,8 @@ watch_player_leave_area() {
         maps\clockwork_code::radio_dialog_add_and_go(var_1[var_2]);
         var_2++;
 
-        if(var_2 >= var_1.size) {
+        if(var_2 >= var_1.size)
           var_2 = 0;
-        }
 
         var_0 = gettime() + 10000;
       }
@@ -478,9 +470,8 @@ player_drop_bag() {
 cleanup_sentry_hud_outline() {
   common_scripts\utility::flag_wait("defend_combat_finished");
 
-  if(isDefined(level.sentry_obj)) {
+  if(isDefined(level.sentry_obj))
     level.sentry_obj setModel("weapon_sentry_smg_collapsed_small_obj");
-  }
 }
 
 handle_ally_bag_vis() {
@@ -489,17 +480,14 @@ handle_ally_bag_vis() {
   var_0 maps\_anim::anim_reach_solo(self, "defend_bagdrop");
   common_scripts\utility::flag_wait("player_on_podium");
 
-  if(self.animname == "keegan") {
+  if(self.animname == "keegan")
     thread maps\clockwork_audio::command_platform_bag_keegan();
-  }
 
-  if(self.animname == "cypher") {
+  if(self.animname == "cypher")
     thread maps\clockwork_audio::command_platform_bag_cypher();
-  }
 
-  if(self.animname == "baker") {
+  if(self.animname == "baker")
     thread maps\clockwork_audio::command_platform_bag_baker();
-  }
 
   var_0 maps\_anim::anim_single_solo(self, "defend_bagdrop");
 
@@ -511,9 +499,8 @@ handle_ally_bag_vis() {
 }
 
 bag_vis_callback(var_0) {
-  if(var_0.animname == "cypher") {
+  if(var_0.animname == "cypher")
     var_0 thread cipher_vo();
-  }
 
   var_1 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
   var_2 = undefined;
@@ -618,7 +605,7 @@ cipher_vo() {
   wait 0.5;
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_defensiveposition");
   var_0 = maps\_utility::obj("defendcypher");
-  objective_add(var_0, "active", &"CLOCKWORK_OBJ_DEFEND");
+  objective_add(var_0, "active", & "CLOCKWORK_OBJ_DEFEND");
   objective_current(var_0);
   wait 1;
   common_scripts\utility::flag_wait("cypher_in_position");
@@ -655,18 +642,16 @@ handle_defend_saves(var_0) {
   for(;;) {
     var_3 = gettime() - var_0;
 
-    if(var_3 < var_2) {
+    if(var_3 < var_2)
       wait((var_2 - var_3) / 1000);
-    } else {
+    else
       wait 1;
-    }
 
     if(level.defend_save_safe && !common_scripts\utility::flag("game_saving")) {
-      if(!isDefined(level.curautosave)) {
+      if(!isDefined(level.curautosave))
         var_4 = 1;
-      } else {
+      else
         var_4 = level.curautosave;
-      }
 
       var_5 = "defend_ongoing" + var_1;
       var_6 = gettime();
@@ -681,9 +666,8 @@ handle_defend_saves(var_0) {
       level notify("stop_watch_abandon_save");
       var_7 = gettime();
 
-      if(level.curautosave > var_4) {
+      if(level.curautosave > var_4)
         var_0 = var_7;
-      }
     }
   }
 }
@@ -696,11 +680,10 @@ handle_defend_waves() {
   maps\_utility::battlechatter_on("axis");
   thread monitor_enemies_in_pods();
 
-  if(!isDefined(level.override_check)) {
+  if(!isDefined(level.override_check))
     thread defend_wave_1();
-  } else {
+  else
     thread handle_backfill();
-  }
 
   thread open_vault_door();
   common_scripts\utility::flag_wait_either("def_wave1_done", "defend_combat_finished");
@@ -780,9 +763,8 @@ setup_ai_for_end() {
   common_scripts\utility::array_call(var_0, ::setgoalvolumeauto, var_1);
   common_scripts\utility::array_thread(var_0, maps\_utility::set_baseaccuracy, 0.01);
 
-  foreach(var_3 in var_0) {
-    var_3.health = 1;
-  }
+  foreach(var_3 in var_0)
+  var_3.health = 1;
 
   common_scripts\utility::array_thread(level.allies, ::handle_accuracy);
   var_5 = getent("defend_upper_area", "targetname");
@@ -791,9 +773,8 @@ setup_ai_for_end() {
   wait 8;
 
   foreach(var_3 in var_6) {
-    if(isDefined(var_3) && isalive(var_3)) {
+    if(isDefined(var_3) && isalive(var_3))
       var_3 maps\_utility::set_ignoreall(0);
-    }
   }
 }
 
@@ -841,7 +822,7 @@ vault_nag() {
 defend_exit_objective() {
   var_0 = maps\_utility::obj("defendexit");
   var_1 = common_scripts\utility::getstruct("defend_exit_obj", "targetname");
-  objective_add(var_0, "active", &"CLOCKWORK_OBJ_DEFEND_ESCAPE");
+  objective_add(var_0, "active", & "CLOCKWORK_OBJ_DEFEND_ESCAPE");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("defend_vault_room");
@@ -894,9 +875,8 @@ defend_do_smoke() {
     if(isDefined(level.ps3) && level.ps3 == 1) {
       var_1++;
 
-      if(var_1 % 2) {
+      if(var_1 % 2)
         continue;
-      }
     }
 
     magicgrenade("smoke_grenade_american", var_3.origin + (0, 0, 50), var_3.origin, randomfloatrange(0.1, 1));
@@ -922,9 +902,8 @@ freshen_smoke(var_0) {
       if(isDefined(level.ps3) && level.ps3 == 1) {
         var_2++;
 
-        if(var_2 % 2) {
+        if(var_2 % 2)
           continue;
-        }
       }
 
       magicgrenade("smoke_grenade_american", var_4.origin + (0, 0, 50), var_4.origin, randomfloatrange(0.1, 1));
@@ -944,9 +923,8 @@ neutralize_turret() {
           var_1 common_scripts\_sentry::sentry_place_mode_reset();
         }
 
-        if(isDefined(var_1.badplace_name)) {
+        if(isDefined(var_1.badplace_name))
           var_1 common_scripts\_sentry::sentry_badplace_delete();
-        }
 
         var_1 setCanDamage(0);
         var_1.ignoreme = 1;
@@ -965,9 +943,8 @@ neutralize_turret() {
 
   var_4 = getEntArray("defend_disable_on_finish", "script_noteworthy");
 
-  foreach(var_6 in var_4) {
-    var_6 common_scripts\utility::trigger_off();
-  }
+  foreach(var_6 in var_4)
+  var_6 common_scripts\utility::trigger_off();
 }
 
 handle_defend_vault() {
@@ -994,13 +971,13 @@ open_vault_door() {
   wait 11;
 
   if(!common_scripts\utility::flag("player_out_of_defend")) {
-    setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_SEPARATED");
+    setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_SEPARATED");
     maps\_utility::missionfailedwrapper();
   } else {
     var_3 = maps\_utility::obj("defendexit");
     maps\_utility::objective_complete(var_3);
     var_4 = maps\_utility::obj("exitfac");
-    objective_add(var_4, "active", &"CLOCKWORK_EXIT");
+    objective_add(var_4, "active", & "CLOCKWORK_EXIT");
     objective_current(var_4);
   }
 
@@ -1011,9 +988,8 @@ open_vault_door() {
 }
 
 watch_ally_throw_end_smoke(var_0, var_1, var_2) {
-  if(isDefined(var_2) && var_2) {
+  if(isDefined(var_2) && var_2)
     var_0 maps\_utility::disable_ai_color();
-  }
 
   if(isDefined(var_2) && var_2) {
     common_scripts\utility::flag_wait_either("ally_throw_smoke", "chaos_moving_to_elevator");
@@ -1039,9 +1015,8 @@ watch_ally_throw_end_smoke(var_0, var_1, var_2) {
 grenade_tossed(var_0) {
   var_1 = 2;
 
-  if(var_0.animname == "cypher") {
+  if(var_0.animname == "cypher")
     var_1 = 0.5;
-  }
 
   var_2 = common_scripts\utility::getstruct(var_0.grenade_roll_end_struct, "targetname");
   var_3 = var_0 magicgrenade(var_0 gettagorigin("tag_weapon_left"), var_2.origin, var_1);
@@ -1049,9 +1024,8 @@ grenade_tossed(var_0) {
   if(!isDefined(var_3)) {
     var_2 = common_scripts\utility::getstruct(var_0.grenade_roll_end_struct + "2", "targetname");
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_3 = var_0 magicgrenade(var_0 gettagorigin("tag_weapon_left"), var_2.origin, var_1);
-    }
   }
 
   var_4 = [];
@@ -1073,9 +1047,8 @@ waittill_allies_exit() {
         var_2.left_defend = 1;
         var_1++;
 
-        if(var_1 == 2) {
+        if(var_1 == 2)
           common_scripts\utility::flag_set("other_allies_post_vault");
-        }
       }
     }
   }
@@ -1192,14 +1165,13 @@ download_timer() {
   var_1 = var_1 + 15;
   var_2 = 0;
 
-  if(var_2 != 0) {
+  if(var_2 != 0)
     var_1 = var_2;
-  } else if(isDefined(level.timer_override_check)) {
-    if(level.timer_override_check == 3) {
+  else if(isDefined(level.timer_override_check)) {
+    if(level.timer_override_check == 3)
       var_1 = 45;
-    } else {
+    else
       var_1 = var_1 - 40 * level.timer_override_check;
-    }
   }
 
   common_scripts\utility::flag_wait("defend_timeto_hide_player_bag");
@@ -1275,38 +1247,33 @@ watch_backfill() {
   for(;;) {
     var_8 = maps\_utility::get_ai_group_sentient_count("defend_backfill");
 
-    if(common_scripts\utility::flag("trickle_spawn_all")) {
+    if(common_scripts\utility::flag("trickle_spawn_all"))
       var_8 = var_8 + maps\_utility::get_ai_group_sentient_count("defend_group");
-    }
 
     if(var_8 < var_4[var_6]) {
       var_9 = randomint(var_7.size);
 
-      if(common_scripts\utility::flag("defend_combat_finished")) {
+      if(common_scripts\utility::flag("defend_combat_finished"))
         var_10 = getent("def_ground_middle_mid", "targetname");
-      } else {
+      else
         var_10 = getent(var_7[var_9].target, "targetname");
-      }
 
       var_11 = undefined;
       var_12 = 4;
 
-      if(isDefined(var_10.script_parameters)) {
+      if(isDefined(var_10.script_parameters))
         var_12 = int(var_10.script_parameters);
-      }
 
       var_13 = var_10 maps\_utility::get_ai_touching_volume("axis");
 
-      if(var_13.size < var_12) {
+      if(var_13.size < var_12)
         var_11 = var_7[var_9] maps\_utility::spawn_ai(1);
-      }
 
       if(isDefined(var_11)) {
-        if(common_scripts\utility::flag("defend_combat_finished")) {
+        if(common_scripts\utility::flag("defend_combat_finished"))
           var_11 maps\_utility::set_baseaccuracy(0.2);
-        } else {
+        else
           var_11 thread monitor_guy_moveup(var_2);
-        }
       }
     }
 
@@ -1318,9 +1285,8 @@ watch_backfill() {
         var_5[var_6] = gettime() + 990000;
       }
 
-      for(var_14 = 0; var_14 < var_2.size; var_14++) {
+      for(var_14 = 0; var_14 < var_2.size; var_14++)
         var_2[var_14] = var_2[var_14] * 0.85;
-      }
 
       if(isDefined(level.override_check)) {
         if(level.override_check >= 2) {
@@ -1344,11 +1310,10 @@ watch_backfill() {
         if(var_15 == "defend_timeout") {
           var_16 = getent("defend_looking_north_trigger", "targetname");
 
-          if(isDefined(var_16)) {
+          if(isDefined(var_16))
             var_15 = "defend_looking_north_doors";
-          } else {
+          else
             var_15 = "defend_looking_south_doors";
-          }
         }
 
         var_17 = "door_blow_north";
@@ -1379,11 +1344,10 @@ watch_backfill() {
         level waittill("fire_blocker_success");
         common_scripts\utility::array_call(var_0, ::connectnode);
 
-        if(level.fire_blocker_blown == 0) {
+        if(level.fire_blocker_blown == 0)
           var_7 = getEntArray("defend_south_pressure", "targetname");
-        } else {
+        else
           var_7 = getEntArray("defend_north_pressure", "targetname");
-        }
       } else
         level.moveup_doublespeed = 1;
     }
@@ -1422,9 +1386,8 @@ blowdoors(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.oldcontents)) {
+    if(isDefined(var_3.oldcontents))
       var_3.oldcontents = undefined;
-    }
 
     var_3 maps\_utility::hide_notsolid();
   }
@@ -1454,9 +1417,8 @@ blowdoors(var_0) {
 trickle_spawn(var_0, var_1, var_2, var_3) {
   level endon("defend_player_left_area");
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 5;
-  }
 
   var_4 = getEntArray(var_1, "targetname");
   var_5 = var_4.size;
@@ -1465,17 +1427,15 @@ trickle_spawn(var_0, var_1, var_2, var_3) {
   var_7 = 0;
 
   for(var_8 = []; var_7 < var_5; var_7++) {
-    if(!common_scripts\utility::flag("trickle_spawn_all")) {
+    if(!common_scripts\utility::flag("trickle_spawn_all"))
       wait(var_6 - randomfloat(var_6) / 2);
-    } else {
+    else
       wait(var_3 - randomfloat(var_3 / 2));
-    }
 
     var_9 = var_4[var_7] maps\_utility::spawn_ai(1);
 
-    if(isDefined(var_9)) {
+    if(isDefined(var_9))
       var_8[var_8.size] = var_9;
-    }
   }
 }
 
@@ -1532,9 +1492,8 @@ set_scientist_sprinting() {
   var_0 = "defend_run_scientist_" + randomintrange(1, 4);
   maps\_utility::set_run_anim(var_0);
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "def_sci_1") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "def_sci_1")
     maps\_utility::set_generic_idle_anim("scientist_idle");
-  }
 }
 
 set_scientist_talking() {
@@ -1556,15 +1515,13 @@ monitor_guy_moveup(var_0) {
     var_3 = getent(var_1.script_noteworthy, "targetname");
     var_4 = var_0[var_2] + randomfloat(5) - 2;
 
-    if(level.moveup_doublespeed) {
+    if(level.moveup_doublespeed)
       var_4 = var_4 / 2;
-    }
 
     var_5 = 4;
 
-    if(isDefined(var_3.script_parameters)) {
+    if(isDefined(var_3.script_parameters))
       var_5 = int(var_3.script_parameters);
-    }
 
     for(;;) {
       wait(var_4);
@@ -1584,9 +1541,8 @@ monitor_guy_moveup(var_0) {
 
     var_2++;
 
-    if(var_2 >= var_0.size) {
+    if(var_2 >= var_0.size)
       var_2 = var_0.size - 1;
-    }
 
     self setgoalvolumeauto(var_3);
     var_1 = var_3;
@@ -1625,17 +1581,15 @@ cypher_defend_self() {
           var_0 notify("stop_hacking");
           waittillframeend;
 
-          if(var_3) {
+          if(var_3)
             var_0 thread maps\_anim::anim_single_solo(self, "defend_shoot_left_cypher");
-          } else {
+          else
             var_0 thread maps\_anim::anim_single_solo(self, "defend_shoot_right_cypher");
-          }
 
           self waittillmatch("single anim", "fire");
 
-          if(isalive(var_4[0])) {
+          if(isalive(var_4[0]))
             magicbullet("m9a1", self gettagorigin("tag_flash"), var_4[0] gettagorigin("j_head"));
-          }
 
           self waittillmatch("single anim", "end");
           var_0 thread maps\_anim::anim_loop_solo(self, "laptop_sit_idle_calm", "stop_hacking");
@@ -1684,9 +1638,8 @@ watch_pod_blocker(var_0, var_1) {
     if(common_scripts\utility::flag("defend_combat_finished")) {
       var_1.allowdeath = 0;
 
-      if(!isDefined(var_1.magic_bullet_shield)) {
+      if(!isDefined(var_1.magic_bullet_shield))
         var_1 maps\_utility::magic_bullet_shield();
-      }
 
       return;
     }
@@ -1698,11 +1651,10 @@ watch_pod_blocker(var_0, var_1) {
     if(gettime() > var_5 + 10000) {
       var_7 = randomintrange(0, var_2.size);
 
-      if(var_3[var_7] == -1) {
+      if(var_3[var_7] == -1)
         maps\clockwork_code::radio_dialog_add_and_go(var_2[var_7]);
-      } else {
+      else
         level.allies[var_3[var_7]] maps\clockwork_code::char_dialog_add_and_go(var_2[var_7]);
-      }
     }
 
     var_8 = gettime();
@@ -1711,7 +1663,7 @@ watch_pod_blocker(var_0, var_1) {
     while(common_scripts\utility::flag(var_0)) {
       if(!isDefined(var_1) || !isalive(var_1)) {
         common_scripts\utility::flag_set("ally_died");
-        var_9 = &"CLOCKWORK_QUOTE_CYPHER_SHOT";
+        var_9 = & "CLOCKWORK_QUOTE_CYPHER_SHOT";
         setdvar("ui_deadquote", var_9);
         maps\_utility::missionfailedwrapper();
         return;
@@ -1721,23 +1673,20 @@ watch_pod_blocker(var_0, var_1) {
         common_scripts\utility::flag_clear("can_save");
         var_1.allowdeath = 1;
 
-        if(isDefined(var_1.magic_bullet_shield)) {
+        if(isDefined(var_1.magic_bullet_shield))
           var_1 maps\_utility::stop_magic_bullet_shield();
-        }
       } else {
         var_1.allowdeath = 0;
 
-        if(!isDefined(var_1.magic_bullet_shield)) {
+        if(!isDefined(var_1.magic_bullet_shield))
           var_1 maps\_utility::magic_bullet_shield();
-        }
       }
 
       if(common_scripts\utility::flag("defend_combat_finished")) {
         var_1.allowdeath = 0;
 
-        if(!isDefined(var_1.magic_bullet_shield)) {
+        if(!isDefined(var_1.magic_bullet_shield))
           var_1 maps\_utility::magic_bullet_shield();
-        }
 
         return;
       }
@@ -1752,9 +1701,8 @@ watch_pod_blocker(var_0, var_1) {
     level.allies[1] setgoalvolumeauto(var_10);
     var_1.allowdeath = 0;
 
-    if(!isDefined(var_1.magic_bullet_shield)) {
+    if(!isDefined(var_1.magic_bullet_shield))
       var_1 maps\_utility::magic_bullet_shield();
-    }
 
     level.defend_save_safe = 1;
     var_5 = var_8;
@@ -1773,11 +1721,10 @@ set_bag_objective_visibility(var_0) {
     var_2.force_off = 0;
 
     for(;;) {
-      if(level.player getstance() == "stand") {
+      if(level.player getstance() == "stand")
         var_2.force_off = 0;
-      } else if(level.player getstance() != "stand") {
+      else if(level.player getstance() != "stand")
         var_2.force_off = 1;
-      }
 
       common_scripts\utility::waitframe();
     }
@@ -1829,13 +1776,11 @@ set_bag_visibility(var_0, var_1) {
     var_5 = var_4 + "_trigger";
     var_6 = getent(var_5, "targetname");
 
-    if(var_2.size == 1) {
+    if(var_2.size == 1)
       common_scripts\utility::flag_wait("defend_player_drop_bag");
-    }
 
-    if(var_0 != "defend_duffle_bag_turret") {
+    if(var_0 != "defend_duffle_bag_turret")
       enable_bag_trigger(var_5);
-    }
 
     if(var_4 == "defend_duffle_bag_proximity") {
       level.bettys = [];
@@ -1886,9 +1831,8 @@ listen_for_use_shockwave_duffle_bag() {
   common_scripts\utility::flag_clear("get_shockwave");
   maps\_utility::display_hint_timeout("shockwave_hint", 2.5);
 
-  if(isDefined(level.shockwaves[var_0])) {
+  if(isDefined(level.shockwaves[var_0]))
     level.shockwaves[var_0] hide();
-  }
 
   var_0 = var_0 + 1;
   thread bag_trigger_off_if_player_has_weapon("defend_duffle_bag_shockwave_trigger", "shockwave");
@@ -1913,9 +1857,8 @@ listen_for_use_shockwave_duffle_bag() {
     common_scripts\utility::flag_clear("get_shockwave");
     maps\_utility::display_hint_timeout("shockwave_hint", 2.5);
 
-    if(isDefined(level.shockwaves[var_0])) {
+    if(isDefined(level.shockwaves[var_0]))
       level.shockwaves[var_0] hide();
-    }
 
     var_0 = var_0 + 1;
 
@@ -1933,9 +1876,8 @@ listen_for_use_shockwave_duffle_bag() {
 
   common_scripts\utility::flag_wait("player_out_of_defend");
 
-  if(level.player getcurrentweapon() == "shockwave") {
+  if(level.player getcurrentweapon() == "shockwave")
     level.player switchtoweaponimmediate(level.player getweaponslistprimaries()[0]);
-  }
 
   level.player takeweapon("shockwave");
   level.player setactionslot(4, "");
@@ -1963,23 +1905,20 @@ shockwavedetonation() {
   self waittill("missile_stuck");
   var_0 = 192;
 
-  if(isDefined(self.detonateradius)) {
+  if(isDefined(self.detonateradius))
     var_0 = self.detonateradius;
-  }
 
   var_1 = spawn("trigger_radius", self.origin + (0, 0, 0 - var_0), 9, var_0, var_0 * 2);
   thread shockwavedeleteondeath(var_1);
   thread shockwave_damage_monitor(var_1);
 
-  if(!isDefined(level.shockwaves)) {
+  if(!isDefined(level.shockwaves))
     level.shockwaves = [];
-  }
 
   level.shockwaves = common_scripts\utility::array_add(level.shockwaves, self);
 
-  if(!maps\_utility::is_specialop() && level.shockwaves.size > 15) {
+  if(!maps\_utility::is_specialop() && level.shockwaves.size > 15)
     level.shockwaves[0] delete();
-  }
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -1991,9 +1930,8 @@ shockwavedetonation() {
       continue;
     }
     if(!isDefined(var_2) || var_2 damageconetrace(self.origin, self) > 0) {
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         wait 0.4;
-      }
 
       var_3 = [];
 
@@ -2006,11 +1944,10 @@ shockwavedetonation() {
 
       self playSound("shock_charge_detonate");
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self detonate(self.owner);
-      } else {
+      else
         self detonate(undefined);
-      }
 
       if(isDefined(self.damage_proxy)) {
         self.damage_proxy delete();
@@ -2019,9 +1956,8 @@ shockwavedetonation() {
 
       wait 15;
 
-      foreach(var_5 in var_3) {
-        var_5 notify("end_shockwave_watch");
-      }
+      foreach(var_5 in var_3)
+      var_5 notify("end_shockwave_watch");
 
       return;
     }
@@ -2070,9 +2006,8 @@ watch_for_shockwave_hit() {
       maps\_anim::anim_generic(self, "shockwave_shock_" + self.shockwave_pain_anim_index);
     }
 
-    if(isDefined(self) && isalive(self)) {
+    if(isDefined(self) && isalive(self))
       self.allowdeath = var_11;
-    }
   }
 }
 
@@ -2087,17 +2022,15 @@ shockwavedeleteondeath(var_0) {
   level.shockwaves = maps\_utility::array_remove_nokeys(level.shockwaves, self);
   wait 0.05;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 }
 
 listen_for_use_multi_turret() {
   level.player notifyonplayercommand("use_multi_turret", "+actionslot 4");
 
-  for(;;) {
+  for(;;)
     level.player waittill("use_multi_turret");
-  }
 }
 
 listen_for_use_turret_duffle_bag() {
@@ -2116,9 +2049,8 @@ listen_for_use_turret_duffle_bag() {
     var_1 = level.player common_scripts\_sentry::spawn_and_place_sentry("sentry_smg", (0, 0, 0), (0, 0, 0), 1);
     var_1 useby(level.player);
 
-    if(!isDefined(level.defend_sentry)) {
+    if(!isDefined(level.defend_sentry))
       level.defend_sentry = [];
-    }
 
     level.defend_sentry[level.defend_sentry.size] = var_1;
     var_0++;
@@ -2168,9 +2100,8 @@ bag_trigger_wait(var_0, var_1, var_2) {
   var_4 = getent(var_1, "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_3, var_4);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     common_scripts\utility::flag_set(var_2);
-  }
 }
 
 bag_trigger_off_if_player_has_weapon(var_0, var_1) {
@@ -2178,11 +2109,10 @@ bag_trigger_off_if_player_has_weapon(var_0, var_1) {
   var_2 = getent(var_0, "targetname");
 
   while(isDefined(var_2)) {
-    if(level.player hasweapon(var_1)) {
+    if(level.player hasweapon(var_1))
       var_2.force_off = 1;
-    } else {
+    else
       var_2.force_off = 0;
-    }
 
     wait 0.05;
   }
@@ -2206,9 +2136,8 @@ listen_for_use_proximity_duffle_bag() {
   common_scripts\utility::waitframe();
   common_scripts\utility::flag_clear("get_proximity_mine");
 
-  if(isDefined(level.bettys[var_0])) {
+  if(isDefined(level.bettys[var_0]))
     level.bettys[var_0] hide();
-  }
 
   var_0 = var_0 + 1;
   thread bag_trigger_off_if_player_has_weapon("defend_duffle_bag_proximity_trigger", "thermobaric_mine");
@@ -2235,9 +2164,8 @@ listen_for_use_proximity_duffle_bag() {
     common_scripts\utility::waitframe();
     common_scripts\utility::flag_clear("get_proximity_mine");
 
-    if(isDefined(level.bettys[var_0])) {
+    if(isDefined(level.bettys[var_0]))
       level.bettys[var_0] hide();
-    }
 
     var_0 = var_0 + 1;
 
@@ -2255,9 +2183,8 @@ listen_for_use_proximity_duffle_bag() {
 
   common_scripts\utility::flag_wait("player_out_of_defend");
 
-  if(level.player getcurrentweapon() == "thermobaric_mine") {
+  if(level.player getcurrentweapon() == "thermobaric_mine")
     level.player switchtoweaponimmediate(level.player getweaponslistprimaries()[0]);
-  }
 
   level.player takeweapon("thermobaric_mine");
   level.player setactionslot(1, "");
@@ -2275,9 +2202,8 @@ player_monitor_mine_friendly_fire() {
   while(level.player hasweapon("thermobaric_mine")) {
     setsaveddvar("g_friendlyfireDist", var_0);
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       level.player waittill("start_attack");
-    }
 
     if(level.player getcurrentweapon() != "thermobaric_mine") {
       continue;
@@ -2363,9 +2289,8 @@ arm_mine() {
   var_3 = var_3 + (90, 0, 0);
   var_4 = spawnmine(var_1, var_3);
 
-  if(!isDefined(level.clockwork_thermobaric_mines)) {
+  if(!isDefined(level.clockwork_thermobaric_mines))
     level.clockwork_thermobaric_mines = [];
-  }
 
   level.clockwork_thermobaric_mines[level.clockwork_thermobaric_mines.size] = var_4;
   self delete();
@@ -2375,9 +2300,8 @@ arm_mine() {
 }
 
 spawnmine(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = (0, randomfloat(360), 0);
-  }
 
   var_2 = "weapon_proximity_mine";
   var_3 = spawn("script_model", var_0);
@@ -2407,9 +2331,8 @@ minedamagemonitor() {
   self notify("mine_destroyed");
 
   foreach(var_11 in getaiarray("axis")) {
-    if(distancesquared(var_11.origin, self.origin) < 19600) {
+    if(distancesquared(var_11.origin, self.origin) < 19600)
       var_11 thread mine_damage_increase();
-    }
   }
 
   playFX(common_scripts\utility::getfx("throwbot_explode"), self.origin);
@@ -2423,23 +2346,19 @@ minedamagemonitor() {
       var_14 notify("mine_destroyed");
       level.clockwork_thermobaric_mines = common_scripts\utility::array_remove(level.clockwork_thermobaric_mines, var_14);
 
-      if(isDefined(var_14.trigger)) {
+      if(isDefined(var_14.trigger))
         var_14.trigger delete();
-      }
 
-      if(isDefined(var_14)) {
+      if(isDefined(var_14))
         var_14 delete();
-      }
     }
   }
 
-  if(isDefined(self.trigger)) {
+  if(isDefined(self.trigger))
     self.trigger delete();
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 listen_for_mine_trigger() {
@@ -2447,9 +2366,8 @@ listen_for_mine_trigger() {
   self.trigger waittill("trigger", var_0);
   self notify("mine_triggered");
 
-  if(isDefined(self.trigger)) {
+  if(isDefined(self.trigger))
     self.trigger delete();
-  }
 
   var_1 = self.origin;
   playFX(common_scripts\utility::getfx("mine_explode"), self.origin + (0, 0, 5));
@@ -2470,34 +2388,29 @@ listen_for_mine_trigger() {
   var_6 = getaiarray("axis");
 
   foreach(var_0 in var_6) {
-    if(distancesquared(var_0.origin, var_1) < 32400) {
+    if(distancesquared(var_0.origin, var_1) < 32400)
       var_0 maps\_utility::flashbangstart(5);
-    }
   }
 
   wait 1;
 
   foreach(var_0 in getaiarray("axis")) {
-    if(distancesquared(var_0.origin, var_1) < 129600) {
+    if(distancesquared(var_0.origin, var_1) < 129600)
       var_0 thread mine_damage_increase();
-    }
   }
 
   playFX(common_scripts\utility::getfx("throwbot_explode"), var_1 + (0, 0, 5));
   radiusdamage(var_1 + (0, 0, 50), 360, 50, 1, undefined, undefined, "thermobaric_mine");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.trigger)) {
+    if(isDefined(var_4.trigger))
       var_4.trigger delete();
-    }
 
-    if(isDefined(var_4)) {
+    if(isDefined(var_4))
       var_4 delete();
-    }
   }
 }
 
@@ -2506,9 +2419,8 @@ mine_damage_increase() {
   self endon("stop_mine_damage_increase");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-  if(isDefined(var_9) && var_9 == "thermobaric_mine") {
+  if(isDefined(var_9) && var_9 == "thermobaric_mine")
     self dodamage(var_0 * 10, var_3, var_1);
-  }
 }
 
 wave1_radio_chatter() {
@@ -2570,9 +2482,8 @@ setup_blockers() {
   }
 
   foreach(var_1 in level.fire_blockers_hurt) {
-    foreach(var_13 in var_1) {
-      var_13 common_scripts\utility::trigger_off();
-    }
+    foreach(var_13 in var_1)
+    var_13 common_scripts\utility::trigger_off();
   }
 
   foreach(var_1 in level.fire_blockers_brush) {
@@ -2601,9 +2512,8 @@ handle_platform_blockers() {
     if(var_3 < gettime() || var_5 == "defend_timeout") {
       var_4 = 1;
 
-      if(var_6) {
+      if(var_6)
         var_4 = 0;
-      }
 
       thread handle_fire_blocker(var_4);
       break;
@@ -2640,28 +2550,24 @@ handle_fire_blocker(var_0) {
   var_1 = 4;
   thread move_allies_from_fire_blocker(var_1);
 
-  foreach(var_3 in level.fire_blockers_hurt[var_0]) {
-    var_3 common_scripts\utility::trigger_on();
-  }
+  foreach(var_3 in level.fire_blockers_hurt[var_0])
+  var_3 common_scripts\utility::trigger_on();
 
   radiusdamage(level.fire_radiusdamage[var_0].origin, 256, 200, 150);
 
-  foreach(var_6 in level.fire_blockers_jet[var_0]) {
-    playFX(common_scripts\utility::getfx("throwbot_explode"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
-  }
+  foreach(var_6 in level.fire_blockers_jet[var_0])
+  playFX(common_scripts\utility::getfx("throwbot_explode"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
 
-  foreach(var_6 in level.fire_blockers_body[var_0]) {
-    playFX(common_scripts\utility::getfx("fx/fire/fire_gaz_clk"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
-  }
+  foreach(var_6 in level.fire_blockers_body[var_0])
+  playFX(common_scripts\utility::getfx("fx/fire/fire_gaz_clk"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
 
   var_6 = level.fire_blockers_jet[var_0][0];
   thread maps\clockwork_audio::defend_fire(var_6.origin);
   waittill_allies_out_of_fire_blocker(var_0);
   badplace_cylinder("", var_1, level.fire_blockers_body[var_0][0].origin - (0, 0, 40), 150, 150, "allies", "axis");
 
-  foreach(var_11 in level.fire_blockers_brush[var_0]) {
-    badplace_brush("", var_1, var_11, "allies", "axis");
-  }
+  foreach(var_11 in level.fire_blockers_brush[var_0])
+  badplace_brush("", var_1, var_11, "allies", "axis");
 
   wait(var_1);
 
@@ -2718,9 +2624,9 @@ ally_move_from_fire_blocker(var_0, var_1) {
   var_3 = 15;
   self.ignoreall = 1;
 
-  if(distance2dsquared(self.origin, var_2.origin) <= var_3) {
+  if(distance2dsquared(self.origin, var_2.origin) <= var_3)
     wait(var_1);
-  } else {
+  else {
     var_4 = self.goalradius;
     self.goalradius = var_3;
     self setgoalnode(var_2);
@@ -2766,19 +2672,17 @@ allies_throw_smoke() {
   wait 0.2;
   watch_ally_throw_end_smoke(level.allies[1], "keegan_smoke_toss");
 
-  if(isDefined(level.allies[0].maxfaceenemydist)) {
+  if(isDefined(level.allies[0].maxfaceenemydist))
     level.allies[0].old_maxfaceenemydist = level.allies[0].maxfaceenemydist;
-  } else {
+  else
     level.allies[0].old_maxfaceenemydist = undefined;
-  }
 
   level.allies[0].maxfaceenemydist = 2048;
 
-  if(isDefined(level.allies[1].maxfaceenemydist)) {
+  if(isDefined(level.allies[1].maxfaceenemydist))
     level.allies[1].old_maxfaceenemydist = level.allies[0].maxfaceenemydist;
-  } else {
+  else
     level.allies[1].old_maxfaceenemydist = undefined;
-  }
 
   level.allies[1].maxfaceenemydist = 2048;
   common_scripts\utility::flag_set("defend_allies_smoke_thrown");
@@ -2877,9 +2781,8 @@ updatesentrypositionclockwork(var_0) {
   var_1 = 0;
   var_2 = getent("no_turret", "targetname");
 
-  if(isDefined(var_2) && !common_scripts\utility::flag("cypher_baker_interaction_done")) {
+  if(isDefined(var_2) && !common_scripts\utility::flag("cypher_baker_interaction_done"))
     var_1 = var_0 istouching(var_2);
-  }
 
   var_3 = self canplayerplacesentry();
   var_0.origin = var_3["origin"];
@@ -2887,9 +2790,8 @@ updatesentrypositionclockwork(var_0) {
   self.canplaceentity = self isonground() && var_3["result"] && !var_1;
   common_scripts\_sentry::sentry_placement_hint_show(self.canplaceentity);
 
-  if(self.canplaceentity) {
+  if(self.canplaceentity)
     var_0 setModel(level.sentry_settings[var_0.sentrytype].placementmodel);
-  } else {
+  else
     var_0 setModel(level.sentry_settings[var_0.sentrytype].placementmodelfail);
-  }
 }

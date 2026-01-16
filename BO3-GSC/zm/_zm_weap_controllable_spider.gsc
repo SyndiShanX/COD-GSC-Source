@@ -22,13 +22,13 @@
 #namespace controllable_spider;
 
 function autoexec __init__sytem__() {
-  system::register("controllable_spider", &__init__, undefined, undefined);
+  system::register("controllable_spider", & __init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  zm_placeable_mine::add_mine_type("controllable_spider", &"");
-  callback::on_spawned(&function_b2a01f79);
+  zm_placeable_mine::add_mine_type("controllable_spider", & "");
+  callback::on_spawned( & function_b2a01f79);
   level.w_controllable_spider = getweapon("controllable_spider");
   level flag::init("controllable_spider_equipped");
   function_be10e0f1();
@@ -51,9 +51,9 @@ function function_468b927() {
 function function_160ff11f() {
   if(!level flag::get("controllable_spider_equipped")) {
     level flag::set("controllable_spider_equipped");
-    level.zone_occupied_func = &function_84313596;
-    level.closest_player_targets_override = &closest_player_targets_override;
-    level.get_closest_valid_player_override = &closest_player_targets_override;
+    level.zone_occupied_func = & function_84313596;
+    level.closest_player_targets_override = & closest_player_targets_override;
+    level.get_closest_valid_player_override = & closest_player_targets_override;
   }
 }
 
@@ -61,10 +61,10 @@ function function_b2a01f79() {
   self endon("disconnect");
   var_97cffdb4 = "zone_bunker_interior_elevator";
   var_be85f81a = "zone_bunker_prison_entrance";
-  while(true) {
+  while (true) {
     self waittill("weapon_change", w_current, w_previous);
     if(w_current === level.w_controllable_spider) {
-      if(!ispointonnavmesh(self.origin) || (isDefined(self.var_b0329be9) && self.var_b0329be9) || !self isonground()) {
+      if(!ispointonnavmesh(self.origin) || (isdefined(self.var_b0329be9) && self.var_b0329be9) || !self isonground()) {
         self switchtoweaponimmediate(w_previous);
         wait(0.05);
       } else {
@@ -144,7 +144,7 @@ function function_5ce6002e(e_player, w_previous) {
   e_player.angles = e_player.old_angles;
   e_player switchtoweaponimmediate(w_previous);
   e_player.ignoreme = 0;
-  while(true) {
+  while (true) {
     e_player waittill("weapon_change", w_current);
     if(w_current == w_previous) {
       break;
@@ -180,7 +180,7 @@ function function_cb196021() {
 function function_a21f0b74() {
   self.var_59bd3c5a endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     if(self util::use_button_held()) {
       self.var_59bd3c5a setteam("axis");
       self.var_59bd3c5a.takedamage = 1;
@@ -207,10 +207,10 @@ function function_84313596(zone_name) {
     return false;
   }
   zone = level.zones[zone_name];
-  for(i = 0; i < zone.volumes.size; i++) {
+  for (i = 0; i < zone.volumes.size; i++) {
     players = getplayers();
-    for(j = 0; j < players.size; j++) {
-      if(isDefined(players[j].var_59bd3c5a)) {
+    for (j = 0; j < players.size; j++) {
+      if(isdefined(players[j].var_59bd3c5a)) {
         if(players[j].var_59bd3c5a istouching(zone.volumes[i]) && !players[j].var_59bd3c5a.sessionstate === "spectator") {
           return true;
         }
@@ -226,8 +226,8 @@ function function_84313596(zone_name) {
 
 function closest_player_targets_override() {
   a_targets = getplayers();
-  for(i = 0; i < a_targets.size; i++) {
-    if(isDefined(a_targets[i].var_59bd3c5a)) {
+  for (i = 0; i < a_targets.size; i++) {
+    if(isdefined(a_targets[i].var_59bd3c5a)) {
       a_targets[i] = a_targets[i].var_59bd3c5a;
     }
   }
@@ -235,7 +235,7 @@ function closest_player_targets_override() {
 }
 
 function function_be10e0f1() {
-  zm_devgui::add_custom_devgui_callback(&function_11949f35);
+  zm_devgui::add_custom_devgui_callback( & function_11949f35);
   adddebugcommand("");
 }
 

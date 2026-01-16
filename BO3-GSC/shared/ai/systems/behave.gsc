@@ -8,7 +8,9 @@
 function main() {}
 
 function end_script() {
-  if(isDefined(self.___archetypeonanimscriptedcallback)) {
-    [[self.___archetypeonanimscriptedcallback]](self);
+  if(isdefined(self.___archetypeonanimscriptedcallback)) {
+    [
+      [self.___archetypeonanimscriptedcallback]
+    ](self);
   }
 }

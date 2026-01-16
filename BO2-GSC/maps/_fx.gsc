@@ -7,14 +7,14 @@
 #include maps\_createfx;
 #include common_scripts\utility;
 
-oneshotfx(fxid, fxpos, waittime, fxpos2) {}
+oneshotfx(fxid, fxpos, waittime, fxpos2) {
+}
 
 oneshotfxthread() {
   wait 0.05;
 
-  if(self.v["delay"] > 0) {
+  if(self.v["delay"] > 0)
     wait(self.v["delay"]);
-  }
 
   create_triggerfx();
 }
@@ -32,9 +32,8 @@ loopfx(fxid, fxpos, waittime, fxpos2, fxstart, fxstop, timeout) {
   ent.v["origin"] = fxpos;
   ent.v["angles"] = (0, 0, 0);
 
-  if(isDefined(fxpos2)) {
+  if(isDefined(fxpos2))
     ent.v["angles"] = vectortoangles(fxpos2 - fxpos);
-  }
 
   ent.v["delay"] = waittime;
 }
@@ -49,16 +48,14 @@ create_loopsound() {
 
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
-      if(isDefined(self.looper)) {
+      if(isDefined(self.looper))
         self.looper thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "death");
-      } else {
+      else
         thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "stop_loop");
-      }
     } else if(isDefined(self.looper))
       self.looper thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"]);
-    else {
+    else
       thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"]);
-    }
   }
 }
 
@@ -69,32 +66,27 @@ stop_loopsound() {
 loopfxthread() {
   wait 0.05;
 
-  if(isDefined(self.fxstart)) {
+  if(isDefined(self.fxstart))
     level waittill("start fx" + self.fxstart);
-  }
 
   while(true) {
     create_looper();
 
-    if(isDefined(self.timeout)) {
+    if(isDefined(self.timeout))
       thread loopfxstop(self.timeout);
-    }
 
-    if(isDefined(self.fxstop)) {
+    if(isDefined(self.fxstop))
       level waittill("stop fx" + self.fxstop);
-    } else {
+    else
       return;
-    }
 
-    if(isDefined(self.looper)) {
+    if(isDefined(self.looper))
       self.looper delete();
-    }
 
-    if(isDefined(self.fxstart)) {
+    if(isDefined(self.fxstart))
       level waittill("start fx" + self.fxstart);
-    } else {
+    else
       return;
-    }
   }
 }
 
@@ -111,7 +103,7 @@ loopsound(sound, pos, waittime) {
 loopsoundthread(sound, pos, waittime) {
   org = spawn("script_origin", pos);
   org.origin = pos;
-  org playLoopSound(sound);
+  org playloopsound(sound);
 }
 
 setup_fx() {
@@ -123,34 +115,28 @@ setup_fx() {
   if(isDefined(self.target)) {
     ent = getent(self.target, "targetname");
 
-    if(isDefined(ent)) {
+    if(isDefined(ent))
       org = ent.origin;
-    }
   }
 
   fxstart = undefined;
 
-  if(isDefined(self.script_fxstart)) {
+  if(isDefined(self.script_fxstart))
     fxstart = self.script_fxstart;
-  }
 
   fxstop = undefined;
 
-  if(isDefined(self.script_fxstop)) {
+  if(isDefined(self.script_fxstop))
     fxstop = self.script_fxstop;
-  }
 
-  if(self.script_fxcommand == "OneShotfx") {
+  if(self.script_fxcommand == "OneShotfx")
     oneshotfx(self.script_fxid, self.origin, self.script_delay, org);
-  }
 
-  if(self.script_fxcommand == "loopfx") {
+  if(self.script_fxcommand == "loopfx")
     loopfx(self.script_fxid, self.origin, self.script_delay, org, fxstart, fxstop);
-  }
 
-  if(self.script_fxcommand == "loopsound") {
+  if(self.script_fxcommand == "loopsound")
     loopsound(self.script_fxid, self.origin, self.script_delay);
-  }
 
   self delete();
 }
@@ -158,11 +144,10 @@ setup_fx() {
 soundfx(fxid, fxpos, endonnotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxpos;
-  org playLoopSound(fxid);
+  org playloopsound(fxid);
 
-  if(isDefined(endonnotify)) {
+  if(isDefined(endonnotify))
     org thread soundfxdelete(endonnotify);
-  }
 }
 
 soundfxdelete(endonnotify) {

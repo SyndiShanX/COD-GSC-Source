@@ -30,9 +30,8 @@ beach_sequence_trenches() {
   var_0 = getEntArray("bunker_trench_drones", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_2 maps\homecoming_util::delete_safe();
-    }
   }
 
   level notify("stop_mortars 0");
@@ -85,19 +84,17 @@ beach_trenches_dialogue() {
   wait 0.5;
   maps\_utility::smart_radio_dialogue("homcom_com_alldefensiveunitsbe");
 
-  if(!common_scripts\utility::flag("player_not_doing_strafe")) {
+  if(!common_scripts\utility::flag("player_not_doing_strafe"))
     common_scripts\utility::flag_wait("player_not_doing_strafe");
-  }
 
   var_0 = getaiarray("allies");
   var_0 = common_scripts\utility::array_remove(var_0, level.hesh);
   var_1 = maps\homecoming_util::getclosest2d(level.player.origin, var_0);
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 maps\_utility::play_sound_on_tag("homcom_us2_sirthosetrenchesare", "j_head");
-  } else {
+  else
     level.hesh maps\_utility::play_sound_on_tag("homcom_us2_sirthosetrenchesare", "j_head");
-  }
 
   level.hesh maps\_utility::dialogue_queue("homcom_hsh_ifthattowergoes");
   common_scripts\utility::flag_wait("FLAG_trenches_hovercraft_spawned");
@@ -108,19 +105,17 @@ beach_trenches_dialogue() {
   var_0 = common_scripts\utility::array_remove(var_0, level.hesh);
   var_1 = maps\homecoming_util::getclosest2d(level.player.origin, var_0);
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 maps\_utility::play_sound_on_tag("homcom_us2_enemytankpullingout", "j_head");
-  } else {
+  else
     level.hesh maps\_utility::play_sound_on_tag("homcom_us2_enemytankpullingout", "j_head");
-  }
 
   level.hesh maps\_utility::dialogue_queue("homcom_hsh_usethea10drones");
   common_scripts\utility::flag_set("FLAG_trench_a10_mechanic");
   common_scripts\utility::flag_wait("FLAG_trench_tank_destroyed");
 
-  if(isDefined(level.player_destroyed_trench_tank)) {
+  if(isDefined(level.player_destroyed_trench_tank))
     level.hesh maps\_utility::dialogue_queue("homcom_hsh_tankdestroyedgoodjob");
-  }
 
   wait 1.5;
   maps\_utility::smart_radio_dialogue("homcom_dcon_raptor21weresurrounded");
@@ -152,9 +147,8 @@ beach_trenches_combat() {
   var_0 = getEntArray("trench_friendly_turret", "script_noteworthy");
   var_1 = getEntArray("trench_entrance_turret_targets", "targetname");
 
-  foreach(var_3 in var_0) {
-    var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
-  }
+  foreach(var_3 in var_0)
+  var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
 
   maps\_utility::activate_trigger("trench_start_friendlies", "targetname");
   level endon("TRIGFLAG_player_entering_nest");
@@ -209,18 +203,16 @@ beach_trenches_combat() {
   common_scripts\utility::flag_set("FLAG_start_trench_hovercraft_tank");
   var_1 = getEntArray("trench_hovercraft_turret_targets", "targetname");
 
-  foreach(var_3 in var_0) {
-    var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
-  }
+  foreach(var_3 in var_0)
+  var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
 
   maps\_utility::activate_trigger("trenches_rightpath_moveup_watcher", "script_noteworthy");
   maps\homecoming_util::waittill_trigger("trenches_moveup_trig3");
   common_scripts\utility::flag_set("FLAG_halfway_through_trenches");
   var_20 = getEntArray("trench_flooders_tank", "targetname");
 
-  if(var_20.size != 0) {
+  if(var_20.size != 0)
     maps\_spawner::flood_spawner_scripted(var_20);
-  }
 }
 
 beach_trenches_combat_part2() {
@@ -279,9 +271,8 @@ beach_tower_runners_on() {
     var_2.randomdeath = [4, 16];
     var_3 = 0;
 
-    if(isDefined(var_2.script_wait)) {
+    if(isDefined(var_2.script_wait))
       var_3 = var_2.script_wait;
-    }
 
     var_2 maps\_utility::delaythread(var_3, maps\homecoming_drones::beach_path_drones);
   }
@@ -315,9 +306,8 @@ trenches_combat_right_path() {
   common_scripts\utility::flag_wait("TRIGFLAG_player_entering_nest");
   var_0 = getent("trenches_moveup_trig3", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 notify("trigger");
-  }
 }
 
 trench_custom_mortars() {
@@ -343,9 +333,8 @@ trench_custom_mortars() {
 
         if(var_13 > squared(var_2) && var_13 < squared(var_3)) {
           if(isDefined(var_12.lastused)) {
-            if(gettime() - var_12.lastused < var_4) {
+            if(gettime() - var_12.lastused < var_4)
               continue;
-            }
           }
 
           var_10 = common_scripts\utility::array_add(var_10, var_12);
@@ -393,11 +382,10 @@ trench_main_friendlies() {
   self waittill("death");
   var_1 = var_0;
 
-  if(common_scripts\utility::flag("FLAG_trench_respawner_2")) {
+  if(common_scripts\utility::flag("FLAG_trench_respawner_2"))
     var_1 = getent("trench_main_friendlies_respawner_2", "targetname");
-  } else if(common_scripts\utility::flag("FLAG_trench_respawner_1")) {
+  else if(common_scripts\utility::flag("FLAG_trench_respawner_1"))
     var_1 = getent("trench_main_friendlies_respawner_1", "targetname");
-  }
 
   for(;;) {
     var_2 = var_1 maps\_utility::spawn_ai();
@@ -434,9 +422,8 @@ trench_hovercraft_side_sand() {
   foreach(var_2 in var_0) {
     var_3 = -70;
 
-    if(var_2 == "tag_fx_water_splash6") {
+    if(var_2 == "tag_fx_water_splash6")
       var_3 = -90;
-    }
 
     thread trench_hovercraft_side_sand_fx(var_2, var_3);
   }
@@ -525,9 +512,8 @@ trench_chargers(var_0, var_1, var_2, var_3) {
       var_6 = var_5 maps\_utility::spawn_ai();
       var_6 thread trench_chargers_think(var_1);
 
-      if(var_5.count == 0) {
+      if(var_5.count == 0)
         var_0 = common_scripts\utility::array_remove(var_0, var_5);
-      }
 
       wait(randomfloatrange(var_2, var_3));
     }
@@ -611,9 +597,8 @@ trench_enemy_nest_ai() {
   var_1 = var_0 common_scripts\utility::get_linked_ents();
 
   while(!common_scripts\utility::flag("TRIGFLAG_player_entering_nest")) {
-    if(self.weapon != "panzerfaust3") {
+    if(self.weapon != "panzerfaust3")
       maps\_utility::forceuseweapon("panzerfaust3", "primary");
-    }
 
     var_2 = var_1[randomint(var_1.size)];
     self setentitytarget(var_2);
@@ -637,9 +622,8 @@ trench_hovercraft_a10() {
   self.deflaterate = 1.5;
   self.delaytankunload = 1;
 
-  while(!isDefined(self.tanks)) {
+  while(!isDefined(self.tanks))
     wait 0.1;
-  }
 
   var_0 = self.tanks[0];
   var_0.turretturntime = 2;
@@ -715,9 +699,8 @@ trench_hovercraft_over_moment() {
   var_8 = ["bottompropellerback1_jnt", "bottompropellermid1_jnt", "bottompropellerfront1_jnt"];
   var_9 = ["trench_hovercraft_fans_back", "trench_hovercraft_fans_middle", "trench_hovercraft_fans_front"];
 
-  foreach(var_12, var_11 in var_8) {
-    thread maps\_utility::play_loop_sound_on_tag(var_9[var_12], var_11);
-  }
+  foreach(var_12, var_11 in var_8)
+  thread maps\_utility::play_loop_sound_on_tag(var_9[var_12], var_11);
 
   common_scripts\utility::flag_wait_any("TRIGFLAG_start_tower_destruction_sequence", "FLAG_over_trench_hovercraft_gone");
 
@@ -736,9 +719,8 @@ trench_hovercraft_over_moment_stumblers() {
   self endon("death");
   var_0 = getent("trench_hovercraft_stumblers_trig", "targetname");
 
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isDefined(self.magic_bullet_shield))
     maps\_utility::magic_bullet_shield();
-  }
 
   while(!common_scripts\utility::flag("FLAG_over_trench_hovercraft_gone")) {
     if(self istouching(var_0)) {
@@ -763,37 +745,32 @@ trench_hovercraft_over_moment_stumblers() {
       maps\_utility::pathrandompercent_reset();
       maps\_utility::walkdist_reset();
 
-      if(self == level.hesh) {
+      if(self == level.hesh)
         self.ignoreall = 0;
-      } else {
+      else
         maps\homecoming_util::clear_ignore_everything();
-      }
     }
 
     wait 0.05;
   }
 
-  if(self != level.hesh) {
+  if(self != level.hesh)
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   maps\_utility::clear_generic_run_anim();
   self pushplayer(0);
   maps\_utility::enable_turnanims();
 
-  if(self == level.hesh) {
+  if(self == level.hesh)
     self.ignoreall = 0;
-  } else {
+  else
     maps\homecoming_util::clear_ignore_everything();
-  }
 
-  if(isDefined(self.old_walkdistfacingmotion)) {
+  if(isDefined(self.old_walkdistfacingmotion))
     maps\_utility::walkdist_reset();
-  }
 
-  if(isDefined(self.old_pathrandompercent)) {
+  if(isDefined(self.old_pathrandompercent))
     maps\_utility::pathrandompercent_reset();
-  }
 }
 
 trench_tower_explosion_scene() {
@@ -815,11 +792,10 @@ trench_tower_explode() {
     playFXOnTag(level._effect["afterburner"], var_4, "tag_engine_left");
     var_1 = 1.55;
 
-    if(isDefined(var_3.script_delay)) {
+    if(isDefined(var_3.script_delay))
       var_1 = var_1 + var_3.script_delay;
-    } else {
+    else
       var_1 = 1.35;
-    }
 
     common_scripts\utility::noself_delaycall(var_1, ::playfxontag, level._effect["mig_ignite"], var_4, "tag_engine_right");
     common_scripts\utility::noself_delaycall(var_1, ::playfxontag, level._effect["mig_ignite"], var_4, "tag_engine_left");
@@ -884,9 +860,8 @@ trench_tower_explode_missiles() {
     var_8 moveto(var_5.origin, var_1);
     var_8 common_scripts\utility::delaycall(var_1, ::delete);
 
-    if(var_2) {
+    if(var_2)
       wait 0.4;
-    }
 
     var_2 = 0;
   }
@@ -1091,17 +1066,15 @@ trench_tower_hind_pathlogic() {
     thread trench_tower_hind_gopath(var_2[var_15], var_15);
 
     if(isDefined(var_10)) {
-      while(!level.player istouching(var_11)) {
+      while(!level.player istouching(var_11))
         wait 0.1;
-      }
     }
 
     self.playerintrench = 0;
 
     for(;;) {
-      while(level.player istouching(var_11)) {
+      while(level.player istouching(var_11))
         wait 0.1;
-      }
 
       wait 1.5;
 
@@ -1190,13 +1163,11 @@ trench_beach_axis_ambient() {
   var_1 thread maps\homecoming_drones::drone_infinite_runners("FLAG_stop_trench_beach_runners", var_3, var_2, undefined, var_4, 10);
   var_5 = common_scripts\utility::getstructarray("trench_beach_ambient_fire", "targetname");
 
-  foreach(var_7 in var_5) {
-    thread maps\homecoming_util::ambient_smallarms_fire(var_7, "beach_ambient_stop");
-  }
+  foreach(var_7 in var_5)
+  thread maps\homecoming_util::ambient_smallarms_fire(var_7, "beach_ambient_stop");
 
-  if(isDefined(level.trench_beach_hovercrafts)) {
+  if(isDefined(level.trench_beach_hovercrafts))
     common_scripts\utility::array_thread(level.trench_beach_hovercrafts, maps\homecoming_util::hovercraft_deploy_smoke);
-  }
 }
 
 trench_beach_axis_ambient_off() {
@@ -1258,13 +1229,11 @@ bottom_tower_enemies() {
   var_0 = getEntArray("tower_bottom_enemies", "targetname");
   var_1 = maps\_utility::array_spawn(var_0);
 
-  for(var_2 = gettime(); !common_scripts\utility::flag("TRIGFLAG_player_entering_tower") && var_1.size > 2; var_1 = maps\_utility::array_removedead_or_dying(var_1)) {
+  for(var_2 = gettime(); !common_scripts\utility::flag("TRIGFLAG_player_entering_tower") && var_1.size > 2; var_1 = maps\_utility::array_removedead_or_dying(var_1))
     wait 0.1;
-  }
 
-  while(gettime() - var_2 < 5000) {
+  while(gettime() - var_2 < 5000)
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("FLAG_hesh_move_through_tower");
   var_3 = getnodearray("tower_top_runner_nodes", "targetname");

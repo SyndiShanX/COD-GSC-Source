@@ -22,9 +22,8 @@ turn_on_claw_vision() {
 }
 
 turn_off_claw_vision() {
-  if(!isDefined(level.vision_set_preclaw)) {
+  if(!isDefined(level.vision_set_preclaw))
     level.vision_set_preclaw = "default";
-  }
 
   level.player visionsetnaked(level.vision_set_preclaw, 0);
 }

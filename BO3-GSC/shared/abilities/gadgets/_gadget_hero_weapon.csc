@@ -17,7 +17,7 @@
 #namespace _gadget_hero_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_hero_weapon", &__init__, undefined, undefined);
+  system::register("gadget_hero_weapon", & __init__, undefined, undefined);
 }
 
 function __init__() {}

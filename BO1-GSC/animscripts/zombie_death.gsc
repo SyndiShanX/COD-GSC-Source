@@ -65,9 +65,9 @@ main() {
     if(self.damageLocation == "helmet" && isDefined(self.hatModel) &&
       ModelHasPhysPreset(self.hatModel) &&
       issubstr(self.hatmodel, "helm")) {
-      self playSound("bullet_impact_headshot_helmet");
+      self PlaySound("bullet_impact_headshot_helmet");
     } else {
-      self playSound("bullet_impact_headshot");
+      self PlaySound("bullet_impact_headshot");
     }
   }
   if(explosiveDamage && play_explosion_death()) {
@@ -137,7 +137,7 @@ waitForRagdoll(time) {
 play_death_anim(deathAnim) {
   self thread death_anim_short_circuit();
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt") && is_mature()) {
-    playFXOnTag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
+    PlayFXOnTag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
   }
   if(isDefined(self.skipDeathAnim) && self.skipDeathAnim) {
     self thread do_gib();
@@ -562,7 +562,7 @@ flame_death_fx() {
   }
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     if(!self.isdog) {
-      playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+      PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
     }
   } else {}
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -573,7 +573,7 @@ flame_death_fx() {
     tagArray[2] = "J_Knee_RI";
     tagArray[3] = "J_Knee_LE";
     tagArray = randomize_array(tagArray);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
     wait 1;
     tagArray[0] = "J_Wrist_RI";
     tagArray[1] = "J_Wrist_LE";
@@ -582,8 +582,8 @@ flame_death_fx() {
       tagArray[3] = "J_Ankle_LE";
     }
     tagArray = randomize_array(tagArray);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[1]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[1]);
   } else {}
 }
 
@@ -786,7 +786,7 @@ get_tag_for_damage_location() {
 bayonet_death_fx(side) {
   tag = self get_tag_for_damage_location();
   if(isDefined(level._effect) && isDefined(level._effect["character_bayonet_blood_in"])) {
-    playFXOnTag(level._effect["character_bayonet_blood_in"], self, tag);
+    PlayFxOnTag(level._effect["character_bayonet_blood_in"], self, tag);
   } else {}
   wait 0.2;
   if(isDefined(level._effect)) {
@@ -801,13 +801,13 @@ bayonet_death_fx(side) {
       println("^3\"impacts/fx_flesh_bayonet_fatal_lf\".");
     } else {
       if(side == "front") {
-        playFXOnTag(level._effect["character_bayonet_blood_front"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_front"], self, "j_spine4");
       } else if(side == "back") {
-        playFXOnTag(level._effect["character_bayonet_blood_back"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_back"], self, "j_spine4");
       } else if(side == "right") {
-        playFXOnTag(level._effect["character_bayonet_blood_right"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_right"], self, "j_spine4");
       } else if(side == "left") {
-        playFXOnTag(level._effect["character_bayonet_blood_left"], self, "j_spine4");
+        PlayFxOnTag(level._effect["character_bayonet_blood_left"], self, "j_spine4");
       }
     }
   } else {}

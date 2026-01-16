@@ -95,17 +95,17 @@ function randomsign() {
 }
 
 function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_use_eye) {
-  assert(isDefined(v_point), "");
-  if(!isDefined(b_ignore_z)) {
+  assert(isdefined(v_point), "");
+  if(!isdefined(b_ignore_z)) {
     b_ignore_z = 0;
   }
-  if(!isDefined(b_normalize)) {
+  if(!isdefined(b_normalize)) {
     b_normalize = 1;
   }
-  if(!isDefined(str_direction)) {
+  if(!isdefined(str_direction)) {
     str_direction = "forward";
   }
-  if(!isDefined(b_use_eye)) {
+  if(!isdefined(b_use_eye)) {
     b_use_eye = 0;
     if(isplayer(self)) {
       b_use_eye = 1;
@@ -129,11 +129,11 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
   }
   switch (str_direction) {
     case "forward": {
-      v_direction = anglesToForward(v_angles);
+      v_direction = anglestoforward(v_angles);
       break;
     }
     case "backward": {
-      v_direction = anglesToForward(v_angles) * -1;
+      v_direction = anglestoforward(v_angles) * -1;
       break;
     }
     case "right": {
@@ -154,7 +154,7 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
     }
     default: {
       assertmsg(str_direction + "");
-      v_direction = anglesToForward(v_angles);
+      v_direction = anglestoforward(v_angles);
       break;
     }
   }
@@ -167,25 +167,25 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
 }
 
 function get_dot_right(v_point, b_ignore_z, b_normalize) {
-  assert(isDefined(v_point), "");
+  assert(isdefined(v_point), "");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, "right");
   return n_dot;
 }
 
 function get_dot_up(v_point, b_ignore_z, b_normalize) {
-  assert(isDefined(v_point), "");
+  assert(isdefined(v_point), "");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, "up");
   return n_dot;
 }
 
 function get_dot_forward(v_point, b_ignore_z, b_normalize) {
-  assert(isDefined(v_point), "");
+  assert(isdefined(v_point), "");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, "forward");
   return n_dot;
 }
 
 function get_dot_from_eye(v_point, b_ignore_z, b_normalize, str_direction) {
-  assert(isDefined(v_point), "");
+  assert(isdefined(v_point), "");
   assert(isplayer(self) || isai(self), ("" + self.classname) + "");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, 1);
   return n_dot;
@@ -195,7 +195,7 @@ function array_average(array) {
   assert(isarray(array));
   assert(array.size > 0);
   total = 0;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     total = total + array[i];
   }
   return total / array.size;
@@ -205,11 +205,11 @@ function array_std_deviation(array, mean) {
   assert(isarray(array));
   assert(array.size > 0);
   tmp = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     tmp[i] = (array[i] - mean) * (array[i] - mean);
   }
   total = 0;
-  for(i = 0; i < tmp.size; i++) {
+  for (i = 0; i < tmp.size; i++) {
     total = total + tmp[i];
   }
   return sqrt(total / array.size);
@@ -220,7 +220,7 @@ function random_normal_distribution(mean, std_deviation, lower_bound, upper_boun
   x2 = 0;
   w = 1;
   y1 = 0;
-  while(w >= 1) {
+  while (w >= 1) {
     x1 = (2 * randomfloatrange(0, 1)) - 1;
     x2 = (2 * randomfloatrange(0, 1)) - 1;
     w = (x1 * x1) + (x2 * x2);
@@ -228,10 +228,10 @@ function random_normal_distribution(mean, std_deviation, lower_bound, upper_boun
   w = sqrt(-2 * log(w) / w);
   y1 = x1 * w;
   number = mean + (y1 * std_deviation);
-  if(isDefined(lower_bound) && number < lower_bound) {
+  if(isdefined(lower_bound) && number < lower_bound) {
     number = lower_bound;
   }
-  if(isDefined(upper_bound) && number > upper_bound) {
+  if(isdefined(upper_bound) && number > upper_bound) {
     number = upper_bound;
   }
   return number;
@@ -279,7 +279,7 @@ function pow(base, exp) {
     return 1;
   }
   result = base;
-  for(i = 0; i < (exp - 1); i++) {
+  for (i = 0; i < (exp - 1); i++) {
     result = result * base;
   }
   return result;

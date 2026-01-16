@@ -29,35 +29,32 @@ init_ai_rappel() {
 start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
   self endon("death");
 
-  if(!isDefined(level.rappel_initialized)) {
+  if(!isDefined(level.rappel_initialized))
     init_ai_rappel();
-  }
 
   assert(isai(self), "start_ai_rappel should only be called on AI.");
   self.a.deathforceragdoll = 1;
 
   if(isDefined(rappel_point_struct)) {
-    if(isstring(rappel_point_struct)) {
+    if(isstring(rappel_point_struct))
       rappel_start = getstruct(rappel_point_struct, "targetname");
-    } else {
+    else
       rappel_start = rappel_point_struct;
-    }
   } else
     rappel_start = getstruct(self.target, "targetname");
 
   assert(isDefined(rappel_start), "No rappel_start struct for rappel is defined.");
 
-  if(!isDefined(rappel_start.angles)) {
+  if(!isDefined(rappel_start.angles))
     rappel_start.angles = (0, 0, 0);
-  }
 
   rappel_face_player = 0;
 
-  if(isDefined(rappel_start.target)) {
+  if(isDefined(rappel_start.target))
     rappel_end = getstruct(rappel_start.target, "targetname");
-  } else {
+  else {
     rappel_end_pos = physicstrace(rappel_start.origin, rappel_start.origin - vectorscale((0, 0, 1), 10000.0));
-    rappel_end = spawnStruct();
+    rappel_end = spawnstruct();
     rappel_end.origin = rappel_end_pos;
     rappel_face_player = 1;
   }
@@ -74,13 +71,11 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
   self forceteleport(rappel_start.origin, rappel_start.angles);
   self thread rappel_handle_ai_death(rappel_start);
 
-  if(is_true(create_rope)) {
+  if(is_true(create_rope))
     rappel_handle_rope_creation(rappel_start, rappel_end);
-  }
 
-  if(is_true(delete_rope)) {
+  if(is_true(delete_rope))
     self thread rappel_handle_rope_deletion(rappel_start);
-  }
 
   self.allowdeath = 1;
 
@@ -89,9 +84,8 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
     dist = distance(self.origin, self.out_point);
     time_to_rappel = dist / length(velocity);
 
-    if(time_to_rappel < level.min_rappel_time) {
+    if(time_to_rappel < level.min_rappel_time)
       time_to_rappel = level.min_rappel_time;
-    }
   }
 
   move_ent = spawn("script_model", self.origin);
@@ -122,11 +116,10 @@ rappel_calulate_animation_points(rappel_start, rappel_end) {
 rappel_move_ai_thread(move_ent, rappel_end, time_to_rappel, rappel_face_player) {
   self endon("death");
 
-  if(rappel_face_player) {
+  if(rappel_face_player)
     self thread rappel_face_player(move_ent, time_to_rappel);
-  } else {
+  else
     move_ent rotateto(rappel_end.angles, randomfloatrange(1, time_to_rappel));
-  }
 
   move_ent moveto(self.out_point, time_to_rappel, 1, 1);
   move_ent waittill("movedone");

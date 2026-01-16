@@ -4,6 +4,7 @@
 ******************************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace flowgraph_entity;
 
 isentitydefinedfunc(e_entity) {

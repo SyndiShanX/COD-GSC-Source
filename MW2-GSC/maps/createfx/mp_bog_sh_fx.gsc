@@ -539,4 +539,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "battlefield_smokebank_S";
   ent.v["delay"] = -15;
+
 }

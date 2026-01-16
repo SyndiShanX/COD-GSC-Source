@@ -15,9 +15,8 @@ cornered_start_rappel(var_0, var_1, var_2) {
 }
 
 cornered_stop_rappel() {
-  if(isDefined(level.rpl)) {
+  if(isDefined(level.rpl))
     common_scripts\utility::flag_set("stop_manage_player_rappel_movement");
-  }
 }
 
 cnd_plyr_rpl_move(var_0, var_1, var_2, var_3) {
@@ -42,15 +41,13 @@ cnd_plyr_rpl_move(var_0, var_1, var_2, var_3) {
 }
 
 cornered_start_random_wind() {
-  if(isDefined(level.rpl)) {
+  if(isDefined(level.rpl))
     level.rpl.wind_random = 1;
-  }
 }
 
 cornered_stop_random_wind() {
-  if(isDefined(level.rpl)) {
+  if(isDefined(level.rpl))
     level.rpl.wind_random = 0;
-  }
 }
 
 cnd_rpl_stealth_ckpt(var_0) {
@@ -78,9 +75,8 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   var_5 = common_scripts\utility::getstruct(var_1, "targetname");
   var_0.rope_origin = var_5 common_scripts\utility::spawn_tag_origin();
 
-  if(var_3.rappel_type == "stealth") {
+  if(var_3.rappel_type == "stealth")
     var_0.rope_origin.origin = var_0.rope_origin.origin + (-16, 0, 0);
-  }
 
   level.rpl_rope_anim_origin = spawn("script_model", var_0.rope_origin.origin);
   level.rpl_rope_anim_origin.angles = var_0.rope_origin.angles + (0, -90, 0);
@@ -95,9 +91,8 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   level.rpl_physical_rope_anim_origin linkto(level.rpl_physical_rope_origin, "tag_origin");
   var_6 = (0, 90, 0);
 
-  if(var_3.lateral_plane == 2) {
+  if(var_3.lateral_plane == 2)
     var_6 = (0, 325, 0);
-  }
 
   level.rpl_jump_anim_origin = var_4 common_scripts\utility::spawn_tag_origin();
   level.rpl_jump_anim_origin.angles = var_6;
@@ -112,9 +107,8 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   level.plyr_rpl_groundref = getent(var_2, "targetname");
   level.plyr_rpl_groundref.origin = var_4.origin;
 
-  if(var_3.rappel_type == "inverted") {
+  if(var_3.rappel_type == "inverted")
     level.plyr_rpl_groundref.angles = (90, 270, 0);
-  }
 
   level.plyr_rpl_groundref setModel("tag_origin");
   level.player playersetgroundreferenceent(level.plyr_rpl_groundref);
@@ -142,11 +136,10 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
 
   wait 0.1;
 
-  if(var_3.rappel_type == "inverted") {
+  if(var_3.rappel_type == "inverted")
     level.player playerlinkto(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 0);
-  } else {
+  else
     level.player playerlinktodelta(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 1);
-  }
 
   level.player playerlinkeduselinkedvelocity(1);
   cnd_rpl_rope_setup(var_0, var_3);
@@ -200,11 +193,10 @@ cnd_rpl_rope_setup(var_0, var_1) {
 
   var_2 = (0, 0, 0);
 
-  if(var_1.rappel_type == "stealth") {
+  if(var_1.rappel_type == "stealth")
     level.cnd_rappel_player_rope linkto(level.cnd_rappel_tele_rope, "J_Tele_50", (0, 0, 0), var_2);
-  } else {
+  else
     thread cnd_delay_rope_link();
-  }
 
   level.cnd_rappel_tele_rope setanim(var_0.player_rope_unwind_anim, 1, 0, 0);
   cnd_plyr_rope_set_idle();
@@ -214,9 +206,9 @@ cnd_rpl_rope_setup(var_0, var_1) {
   level.cnd_rappel_player_rope dontcastshadows();
   level.cnd_rappel_tele_rope dontcastshadows();
 
-  if(var_1.rappel_type == "combat") {
+  if(var_1.rappel_type == "combat")
     level.rpl_physical_rope_origin.angles = level.rpl_physical_rope_origin.angles + (-1.2, 0, 0);
-  } else {}
+  else {}
 }
 
 cnd_delay_rope_link() {
@@ -328,13 +320,12 @@ cnd_plyr_rpl_setup_globals(var_0, var_1, var_2) {
   var_0.player_anim_origin setanim( % rappel_player_look_center, 1.0, 0, 1);
   var_0.player_anim_origin thread watch_footstep_notetrack();
 
-  if(var_2 == "rope_ref_stealth") {
+  if(var_2 == "rope_ref_stealth")
     var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
-  } else if(var_2 == "rope_ref_combat") {
+  else if(var_2 == "rope_ref_combat")
     var_3 = getent("player_rappel_ground_ref_combat", "targetname");
-  } else {
+  else
     var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
-  }
 
   var_0.forward_direction_worldspace = vectornormalize(anglesToForward(var_3.angles * (0, 1, 0)));
   var_0.right_direction_worldspace = vectornormalize(anglestoright(var_3.angles * (0, 1, 0)));
@@ -360,20 +351,18 @@ cnd_plyr_rpl_death(var_0, var_1) {
   level endon("stop_manage_player_rappel_movement");
   level.player waittill("death");
 
-  if(rappel_use_plyr_legs(var_1)) {
+  if(rappel_use_plyr_legs(var_1))
     level.rappel_player_legs hide();
-  }
 }
 
 cnd_plyr_rpl_setup_player(var_0, var_1) {
   level.player allowcrouch(0);
   level.player allowprone(0);
 
-  if(isDefined(var_1.allow_sprint) && var_1.allow_sprint) {
+  if(isDefined(var_1.allow_sprint) && var_1.allow_sprint)
     level.player allowsprint(1);
-  } else {
+  else
     level.player allowsprint(0);
-  }
 
   level.player allowmelee(0);
   level.player enablemousesteer(1);
@@ -391,9 +380,8 @@ cnd_rpl_calc_move(var_0, var_1) {
   var_6 = getdvarint("rappel_use_relative_controls", 0);
 
   if(!var_6) {
-    if(isDefined(var_0.last_player_angles_worldspace) && var_0.player_stick_magnitude > 0) {
+    if(isDefined(var_0.last_player_angles_worldspace) && var_0.player_stick_magnitude > 0)
       var_0.player_angles_worldspace = var_0.last_player_angles_worldspace;
-    }
   }
 
   var_7 = anglesToForward(var_0.player_angles_worldspace);
@@ -428,17 +416,15 @@ cnd_rpl_calc_move(var_0, var_1) {
     var_24 = var_3 + var_18 * (var_2 - var_3);
     var_25 = abs(var_22) > var_24;
 
-    if(var_1.rappel_type == "inverted") {
-      var_25 = var_25 &abs(var_0.right_move_strength) < 0.4;
-    }
+    if(var_1.rappel_type == "inverted")
+      var_25 = var_25 & abs(var_0.right_move_strength) < 0.4;
 
-    if(var_25) {
+    if(var_25)
       var_0.right_move_strength = 0;
-    } else if(abs(var_22) > var_24 - 0.1) {
+    else if(abs(var_22) > var_24 - 0.1)
       var_0.right_move_strength = var_0.right_move_strength * 0.5;
-    } else if(abs(var_22) > var_24 - 0.2) {
+    else if(abs(var_22) > var_24 - 0.2)
       var_0.right_move_strength = var_0.right_move_strength * 0.75;
-    }
   }
 
   cnd_rpl_plyr_too_close_to_allies(var_0);
@@ -454,33 +440,30 @@ cnd_rpl_plyr_too_close_to_allies(var_0) {
   var_7 = var_2;
   var_8 = var_0.lateral_change_this_update;
 
-  if(!isDefined(var_8)) {
+  if(!isDefined(var_8))
     var_8 = 0;
-  }
 
   foreach(var_10 in level.allies) {
-    if(var_10.animname == "rorke") {
+    if(var_10.animname == "rorke")
       var_10.player_moving_toward_me = var_0.right_move_strength != 0 && common_scripts\utility::sign(var_0.right_move_strength) > 0 || var_8 != 0 && common_scripts\utility::sign(var_8) > 0;
-    } else {
+    else
       var_10.player_moving_toward_me = var_0.right_move_strength != 0 && common_scripts\utility::sign(var_0.right_move_strength) < 0 || var_8 != 0 && common_scripts\utility::sign(var_8) < 0;
-    }
 
     if(!isDefined(var_10.move_type)) {
       continue;
     }
     var_11 = var_10 maps\cornered_code_rappel_allies::ally_rappel_distance2dsquared_to_player();
 
-    if(isDefined(var_0.jumping) && var_0.jumping) {
+    if(isDefined(var_0.jumping) && var_0.jumping)
       var_7 = var_6;
-    } else if(var_10.move_type == "idle" || issubstr(var_10.move_type, "move_away")) {
+    else if(var_10.move_type == "idle" || issubstr(var_10.move_type, "move_away"))
       var_7 = var_2;
-    } else if(issubstr(var_10.move_type, "move_back")) {
+    else if(issubstr(var_10.move_type, "move_back"))
       var_7 = var_3;
-    } else if(var_10.move_type == "turn_away") {
+    else if(var_10.move_type == "turn_away")
       var_7 = var_4;
-    } else {
+    else
       var_7 = var_5;
-    }
 
     if(var_10.player_moving_toward_me && var_11 <= var_7) {
       var_1 = 1;
@@ -498,9 +481,9 @@ cnd_rpl_plyr_too_close_to_allies(var_0) {
 }
 
 cnd_rpl_do_vertical_move(var_0, var_1) {
-  if(!common_scripts\utility::flag("player_allow_rappel_down")) {
+  if(!common_scripts\utility::flag("player_allow_rappel_down"))
     common_scripts\utility::flag_clear("player_moving_down");
-  } else {
+  else {
     var_2 = var_0.vertical_change_this_update;
     var_0.vertical_change_this_update = 0;
     var_0.glass_broken_under_player = 0;
@@ -515,20 +498,17 @@ cnd_rpl_do_vertical_move(var_0, var_1) {
       var_9 = int(var_8 / var_0.time_slice);
       var_10 = level.rappel_jump_land_struct.origin[2] - level.player.origin[2];
 
-      if(var_9) {
+      if(var_9)
         var_0.vertical_change_this_update = var_10 / var_9;
-      }
     } else if(var_0.down_move_strength > 0 || var_0.down_move_strength < 0 && !var_0.jumping) {
       if(var_0.down_move_strength > 0) {
         var_0.vertical_change_this_update = -1 * var_0.down_move_strength * rpl_get_max_downward_speed();
 
-        if(var_0.jumping) {
+        if(var_0.jumping)
           var_0.vertical_change_this_update = var_0.vertical_change_this_update * 1.5;
-        }
 
-        if(var_0.glass_broken_under_player) {
+        if(var_0.glass_broken_under_player)
           var_0.vertical_change_this_update = var_0.vertical_change_this_update * 4.2;
-        }
       } else if(isDefined(var_1.allow_walk_up) && var_1.allow_walk_up) {
         var_0.vertical_change_this_update = -1 * var_0.down_move_strength * rpl_get_max_upward_speed();
 
@@ -543,27 +523,23 @@ cnd_rpl_do_vertical_move(var_0, var_1) {
       }
     }
 
-    if(var_0.jumping && !isDefined(level.player.forcing_rappel_jump_to_struct) && var_2 < 0) {
+    if(var_0.jumping && !isDefined(level.player.forcing_rappel_jump_to_struct) && var_2 < 0)
       var_0.vertical_change_this_update = min(var_0.vertical_change_this_update, var_2 * 0.9);
-    }
 
     if(isDefined(level.rappel_lower_limit) && var_0.vertical_change_this_update < 0) {
-      if(var_0.player_at_lower_limit) {
+      if(var_0.player_at_lower_limit)
         var_0.vertical_change_this_update = 0;
-      } else {
+      else
         var_0.vertical_change_this_update = max(var_0.vertical_change_this_update, var_0.dist_player_to_top - level.rappel_lower_limit);
-      }
     } else if(isDefined(level.rappel_upper_limit) && var_0.vertical_change_this_update > 0) {
-      if(var_0.player_at_upper_limit) {
+      if(var_0.player_at_upper_limit)
         var_0.vertical_change_this_update = 0;
-      } else {
+      else
         var_0.vertical_change_this_update = min(var_0.vertical_change_this_update, var_0.dist_player_to_top - level.rappel_upper_limit);
-      }
     }
 
-    if(abs(var_0.vertical_change_this_update) < 0.05) {
+    if(abs(var_0.vertical_change_this_update) < 0.05)
       var_0.vertical_change_this_update = 0;
-    }
 
     if(abs(var_0.vertical_change_this_update) > 0) {
       level.rpl_plyr_anim_origin unlink();
@@ -585,9 +561,8 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
   var_3 = 0.85;
   var_4 = 5;
 
-  if(var_1.rappel_type == "combat") {
+  if(var_1.rappel_type == "combat")
     var_4 = 2;
-  }
 
   var_5 = var_0.rope_origin.angles[2] - var_0.rope_start_rot;
 
@@ -606,9 +581,8 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
     level.new_rope_roll = -1 * asin(var_15 / var_14);
     level.roll_diff = level.new_rope_roll - var_11;
 
-    if(level.anim_length_frames_left > 0) {
+    if(level.anim_length_frames_left > 0)
       var_0.lateral_change_this_update = level.roll_diff / level.anim_length_frames_left;
-    }
   } else {
     if(var_0.jumping) {
       var_16 = 0;
@@ -631,26 +605,23 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
     var_0.on_right_side = var_5 >= 0;
 
-    if(level.player issprinting()) {
+    if(level.player issprinting())
       var_18 = var_18 * 1.5;
-    }
 
     var_22 = abs(var_5) - var_4;
 
     if(var_22 >= 0) {
       var_23 = -1 * common_scripts\utility::sign(var_5);
 
-      if(var_0.on_right_side) {
+      if(var_0.on_right_side)
         var_0.player_percent_toward_max_yaw = var_22 / (var_20 - var_4);
-      } else {
+      else
         var_0.player_percent_toward_max_yaw = var_22 / (abs(var_21) - var_4);
-      }
 
       var_24 = var_23 * var_0.player_percent_toward_max_yaw;
 
-      if(!var_0.jumping) {
+      if(!var_0.jumping)
         var_24 = var_24 * abs(var_16);
-      }
     } else
       var_24 = 0;
 
@@ -663,11 +634,11 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
     var_29 = var_28 && var_0.player_stick_magnitude > 0 && var_0.right_move_strength <= 0;
     var_30 = var_27 && var_0.player_stick_magnitude > 0 && var_0.right_move_strength >= 0;
 
-    if(var_29) {
+    if(var_29)
       var_31 = var_0.rope_start_rot + var_21;
-    } else if(var_30) {
+    else if(var_30)
       var_31 = var_0.rope_start_rot + var_20;
-    } else {
+    else {
       var_31 = var_5 + var_0.move_vel * var_0.time_slice;
       var_31 = min(var_31, var_0.rope_start_rot + var_20);
       var_31 = max(var_31, var_0.rope_start_rot + var_21);
@@ -680,22 +651,20 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
       var_32 = abs(var_0.rope_start_rot + var_20 - var_5);
       var_33 = abs(var_0.rope_start_rot + var_21 - var_5);
 
-      if(var_0.right_move_strength == 0 && var_32 <= var_33) {
+      if(var_0.right_move_strength == 0 && var_32 <= var_33)
         var_34 = var_32;
-      } else if(var_0.right_move_strength == 0) {
+      else if(var_0.right_move_strength == 0)
         var_34 = var_33;
-      } else if(common_scripts\utility::sign(var_0.right_move_strength) == 1) {
+      else if(common_scripts\utility::sign(var_0.right_move_strength) == 1)
         var_34 = var_32;
-      } else {
+      else
         var_34 = var_33;
-      }
 
       var_0.approx_dist_from_edge = sin(abs(var_34)) * var_0.dist_player_to_top;
       var_35 = abs(var_0.lateral_dist_change - var_0.approx_dist_from_edge);
 
-      if(var_0.at_edge) {
+      if(var_0.at_edge)
         var_0.at_edge = common_scripts\utility::sign(var_0.lateral_change_this_update) == var_0.at_edge_sign;
-      }
 
       var_36 = var_0.at_edge || var_35 < 5;
 
@@ -705,19 +674,17 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
           var_0.move_vel = 0;
           var_0.at_edge = 1;
 
-          if(var_0.lateral_change_this_update == 0) {
+          if(var_0.lateral_change_this_update == 0)
             var_0.at_edge_sign = 0;
-          } else {
+          else
             var_0.at_edge_sign = common_scripts\utility::sign(var_0.lateral_change_this_update);
-          }
         }
       }
 
       var_37 = 0.2;
 
-      if(var_1.rappel_type == "inverted") {
+      if(var_1.rappel_type == "inverted")
         var_37 = 0.5;
-      }
 
       if(var_0.lateral_dist_change < var_37) {
         var_0.lateral_change_this_update = 0;
@@ -726,11 +693,10 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
     } else {
       var_38 = 2;
 
-      if(var_0.dist_player_to_top == 0) {
+      if(var_0.dist_player_to_top == 0)
         var_39 = var_38;
-      } else {
+      else
         var_39 = asin(var_38 / var_0.dist_player_to_top);
-      }
 
       var_0.lateral_change_this_update = clamp(var_0.lateral_change_this_update, -1 * var_39, var_39);
     }
@@ -743,18 +709,16 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
     var_40 = getdvarint("rappel_use_relative_controls", 0);
     var_41 = abs(var_0.lateral_change_this_update) > 0.01 || abs(var_0.vertical_change_this_update) > 0;
 
-    if(!var_40 && var_41) {
+    if(!var_40 && var_41)
       var_0.last_player_angles_worldspace = var_0.player_angles_worldspace;
-    } else {
+    else
       var_0.last_player_angles_worldspace = undefined;
-    }
   }
 
   cnd_rpl_handle_jumping_toward_allies(var_0);
 
-  if(abs(var_0.lateral_change_this_update) > 0) {
+  if(abs(var_0.lateral_change_this_update) > 0)
     var_0.rope_origin rotateroll(var_0.lateral_change_this_update, var_0.time_slice, 0, 0);
-  }
 }
 
 cnd_rpl_handle_jumping_toward_allies(var_0) {
@@ -780,17 +744,15 @@ cnd_rpl_do_stop_sway(var_0, var_1) {
   if(var_4 && var_5 && !isDefined(var_0.clearing_sways)) {
     var_6 = % rappel_player_stop_l;
 
-    if(var_3) {
+    if(var_3)
       var_6 = % rappel_player_stop_r;
-    }
 
     var_0.player_anim_origin clearanim(var_6, 0.4);
     var_0.clearing_sways = 1;
   }
 
-  if(isDefined(var_0.clearing_sways) && var_0.clearing_sways && !var_4) {
+  if(isDefined(var_0.clearing_sways) && var_0.clearing_sways && !var_4)
     var_0.clearing_sways = undefined;
-  }
 
   if(!isDefined(var_0.begin_sway)) {
     return;
@@ -798,16 +760,14 @@ cnd_rpl_do_stop_sway(var_0, var_1) {
   if(_rpl_legs_is_horizontal(var_0.stop_anim_direction)) {
     var_6 = % rappel_player_stop_l;
 
-    if(var_0.stop_anim_direction == "right") {
+    if(var_0.stop_anim_direction == "right")
       var_6 = % rappel_player_stop_r;
-    }
 
     var_7 = 0.2;
     var_0.player_anim_origin setanimrestart(var_6, 1.0, var_7, 1.0);
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_wind_push) > 0) {
+    if(var_0.player_anim_origin getanimweight( % rappel_player_wind_push) > 0)
       var_0.player_anim_origin clearanim( % rappel_player_wind_push, var_7);
-    }
 
     var_0.clearing_sways = undefined;
   }
@@ -836,22 +796,20 @@ cnd_rpl_do_wind(var_0, var_1) {
   var_6 = 1.8;
   var_7 = % rappel_player_wind_push;
 
-  if(var_1.rappel_type == "inverted") {
+  if(var_1.rappel_type == "inverted")
     var_7 = % rappel_player_inv_wind_push;
-  }
 
-  if(var_0.wind_state == "strong") {
+  if(var_0.wind_state == "strong")
     var_0.wind_state = "down";
-  } else if(var_0.wind_state == "stop" || var_0.wind_state == "calm") {
+  else if(var_0.wind_state == "stop" || var_0.wind_state == "calm") {
     var_0.wind_state = "up";
     common_scripts\utility::exploder("6111");
   }
 
-  if(var_0.wind_state == "up") {
+  if(var_0.wind_state == "up")
     var_0.wind_strength = var_0.wind_strength + var_4;
-  } else if(var_0.wind_state == "down") {
+  else if(var_0.wind_state == "down")
     var_0.wind_strength = var_0.wind_strength - var_5;
-  }
 
   if(var_0.wind_strength >= 1 && var_0.wind_state == "up") {
     var_0.wind_random_next_time = gettime() + 200.0;
@@ -863,13 +821,11 @@ cnd_rpl_do_wind(var_0, var_1) {
     var_0.player_anim_origin setanimrestart(var_7, 1.0, var_8, 1.0);
     var_0.player_anim_origin playrumbleonentity("light_in_out_2s");
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_l) > 0) {
+    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_l) > 0)
       var_0.player_anim_origin clearanim( % rappel_player_stop_l, var_8);
-    }
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_r) > 0) {
+    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_r) > 0)
       var_0.player_anim_origin clearanim( % rappel_player_stop_r, var_8);
-    }
   } else if(var_0.wind_pushing_player && var_0.wind_strength >= 1 && var_0.wind_state == "steady") {
     var_0.wind_random_next_time = gettime() + var_6 * 1000;
     var_0.wind_strength = 1;
@@ -899,9 +855,8 @@ cnd_rpl_do_rope(var_0, var_1) {
     level.cnd_rappel_tele_rope setanimtime(var_0.player_rope_unwind_anim, var_4);
   }
 
-  if(abs(var_0.lateral_change_this_update) > 0) {
+  if(abs(var_0.lateral_change_this_update) > 0)
     level.rpl_physical_rope_origin rotateroll(var_0.lateral_change_this_update, var_0.time_slice, 0, 0);
-  }
 
   if(var_0.jumping) {
     return;
@@ -924,26 +879,25 @@ cnd_rpl_do_rope(var_0, var_1) {
   var_20 = var_16 || var_17 || var_18 || var_19;
 
   if(var_5) {
-    if(var_0.stop_anim_direction == "left") {
+    if(var_0.stop_anim_direction == "left")
       level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_l_rope_player, 1, 0.2, 1);
-    } else {
+    else
       level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_r_rope_player, 1, 0.2, 1);
-    }
   } else if(var_6)
     level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_shake_rope_player, 1, 0.2, 1);
   else {
     if(var_20) {
       return;
     }
-    if(var_8) {
+    if(var_8)
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
-    } else if(var_7) {
+    else if(var_7)
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
-    } else if(var_10) {
+    else if(var_10)
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_idle_rope_player_add, 1.0, 0.2, 1.0);
-    } else if(var_9) {
+    else if(var_9)
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_11);
-    } else {}
+    else {}
   }
 }
 
@@ -951,11 +905,10 @@ cnd_rpl_do_weapon_bob(var_0, var_1) {
   var_0.down_leg_move_percent = abs(var_0.vertical_change_this_update) / rpl_get_max_downward_speed();
   var_0.up_leg_move_percent = abs(var_0.vertical_change_this_update) / rpl_get_max_upward_speed();
 
-  if(var_0.max_rotation_speed > 0) {
+  if(var_0.max_rotation_speed > 0)
     var_0.horz_leg_move_percent = abs(var_0.lateral_change_this_update) / (var_0.max_rotation_speed * var_0.time_slice);
-  } else {
+  else
     var_0.horz_leg_move_percent = 0;
-  }
 
   var_2 = 22.4;
 
@@ -982,23 +935,20 @@ cnd_rpl_do_weapon_bob(var_0, var_1) {
     var_9 = 1;
     var_10 = 0;
 
-    if(var_1.rappel_type == "inverted") {
+    if(var_1.rappel_type == "inverted")
       var_10 = var_0.down_leg_move_percent;
-    } else {
+    else
       var_9 = var_0.horz_leg_move_percent;
-    }
 
-    if(abs(var_0.vertical_change_this_update) == 0) {
+    if(abs(var_0.vertical_change_this_update) == 0)
       var_9 = 1.0;
-    } else if(abs(var_0.lateral_change_this_update) == 0) {
+    else if(abs(var_0.lateral_change_this_update) == 0)
       var_9 = 0.0;
-    }
 
-    if(var_1.rappel_type == "inverted") {
+    if(var_1.rappel_type == "inverted")
       var_9 = 1 - var_10;
-    } else {
+    else
       var_10 = 1 - var_9;
-    }
 
     var_11 = var_5 * var_10 + var_7 * var_9;
     var_12 = var_6 * var_10 + var_8 * var_9;
@@ -1006,15 +956,13 @@ cnd_rpl_do_weapon_bob(var_0, var_1) {
     var_14 = var_0.g_speed;
     var_15 = var_11 - var_13;
 
-    if(abs(var_15) > var_3) {
+    if(abs(var_15) > var_3)
       var_11 = var_13 + common_scripts\utility::sign(var_15) * var_3;
-    }
 
     var_16 = var_12 - var_14;
 
-    if(abs(var_16) > var_4) {
+    if(abs(var_16) > var_4)
       var_12 = var_14 + common_scripts\utility::sign(var_16) * var_4;
-    }
 
     if(var_0.g_speed != var_12) {
       setsaveddvar("g_speed", var_12);
@@ -1056,31 +1004,27 @@ cnd_rpl_do_move_bob(var_0, var_1) {
 
     var_10 = 0.7;
 
-    if(level.player getstance() == "crouch") {
+    if(level.player getstance() == "crouch")
       var_10 = 0.5;
-    }
 
-    if(var_0.max_rotation_speed > 0) {
+    if(var_0.max_rotation_speed > 0)
       var_11 = abs(var_0.lateral_change_this_update) / (var_0.max_rotation_speed * var_0.time_slice);
-    } else {
+    else
       var_11 = 0;
-    }
 
     var_12 = abs(var_0.vertical_change_this_update) / rpl_get_max_downward_speed() * 0.45;
     var_13 = max(var_11, var_12);
     var_14 = max(0.01, var_10 * var_13);
 
-    if(rpl_get_max_downward_speed() > 10) {
+    if(rpl_get_max_downward_speed() > 10)
       var_14 = 1.0;
-    }
 
     var_15 = var_4 * var_13;
 
-    if(var_15 > 0) {
+    if(var_15 > 0)
       var_0.player_anim_origin setflaggedanim("bobanim", var_8, var_14, 0.15, var_15);
-    } else {
+    else
       var_0.player_anim_origin clearanim(var_8, 0.2);
-    }
 
     var_0.player_anim_origin clearanim(var_9, 0.2);
 
@@ -1102,15 +1046,13 @@ cnd_rpl_legs_notetracks(var_0, var_1, var_2) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(var_3 == var_1) {
+    if(var_3 == var_1)
       var_0.current_foot = "left";
-    } else if(var_3 == var_2) {
+    else if(var_3 == var_2)
       var_0.current_foot = "right";
-    }
 
-    if(var_3 == "ps_step_run_plr_rappel") {
+    if(var_3 == "ps_step_run_plr_rappel")
       thread maps\cornered_audio::aud_rappel("foot");
-    }
   }
 }
 
@@ -1124,65 +1066,57 @@ cnd_rpl_do_legs(var_0, var_1) {
   var_0.last_move_vect_norm = var_0.cur_move_vect_norm;
   var_0.last_move_state = var_0.move_state;
 
-  if(var_0.jumping && var_0.move_state != var_0.move_state_jump) {
+  if(var_0.jumping && var_0.move_state != var_0.move_state_jump)
     var_0.move_state = var_0.move_state_jump;
-  }
 
   if(var_0.move_state == var_0.move_state_idle) {
-    if(var_3 && rpl_legs_is_idle_ready(var_0)) {
+    if(var_3 && rpl_legs_is_idle_ready(var_0))
       var_0.move_state = var_0.move_state_start;
-    }
   } else if(var_0.move_state == var_0.move_state_jump) {
-    if(!var_0.jumping) {
+    if(!var_0.jumping)
       var_0.move_state = var_0.move_state_idle;
-    }
   } else if(var_0.move_state == var_0.move_state_start) {
     var_4 = rpl_legs_is_start_state_complete(var_0, var_3);
 
-    if(var_4 && var_3) {
+    if(var_4 && var_3)
       var_0.move_state = var_0.move_state_loop;
-    } else if(!var_3) {
+    else if(!var_3)
       var_0.move_state = var_0.move_state_idle;
-    }
   } else if(var_0.move_state == var_0.move_state_stop) {
     var_4 = rpl_legs_is_stop_state_complete(var_0);
 
-    if(var_4 && !var_3) {
+    if(var_4 && !var_3)
       var_0.move_state = var_0.move_state_idle;
-    } else if(var_3) {
+    else if(var_3)
       var_0.move_state = var_0.move_state_loop;
-    }
   } else if(var_0.move_state == var_0.move_state_loop_run) {
     var_5 = rpl_legs_is_loop_state_changing_direction(var_0, var_3);
     var_6 = rpl_legs_should_use_run_loop(var_0);
     var_7 = rpl_legs_traveling_horizontal(var_0, var_3);
 
-    if(!var_3) {
+    if(!var_3)
       var_0.move_state = var_0.move_state_stop;
-    } else if(var_5) {
+    else if(var_5)
       var_0.move_state = var_0.move_state_idle;
-    } else if(!var_6 || !var_7) {
+    else if(!var_6 || !var_7)
       var_0.move_state = var_0.move_state_loop;
-    }
   } else {
     var_5 = rpl_legs_is_loop_state_changing_direction(var_0, var_3);
     var_6 = rpl_legs_should_use_run_loop(var_0);
     var_7 = rpl_legs_traveling_horizontal(var_0, var_3);
 
-    if(!var_3) {
+    if(!var_3)
       var_0.move_state = var_0.move_state_stop;
-    } else if(var_5) {
+    else if(var_5)
       var_0.move_state = var_0.move_state_idle;
-    } else if(var_6 && var_7) {
+    else if(var_6 && var_7)
       var_0.move_state = var_0.move_state_loop_run;
-    }
   }
 
   plyr_rappel_legs_set_origin(var_0);
 
-  if(isDefined(var_1.allow_sprint) && var_1.allow_sprint) {
+  if(isDefined(var_1.allow_sprint) && var_1.allow_sprint)
     level.player allowsprint(!var_0.jumping && rpl_legs_traveling_horizontal(var_0, var_3));
-  }
 
   rpl_legs_process_state(var_0);
 }
@@ -1191,9 +1125,8 @@ rpl_legs_is_idle_ready(var_0) {
   var_1 = rpl_legs_get_idle_anim(var_0);
   var_2 = level.rappel_player_legs getanimweight(var_1);
 
-  if(var_2 >= 0.4) {
+  if(var_2 >= 0.4)
     return 1;
-  }
 
   return 0;
 }
@@ -1201,15 +1134,13 @@ rpl_legs_is_idle_ready(var_0) {
 rpl_legs_set_anim_move_strength(var_0) {
   var_0.anim_right_move_strength = var_0.right_move_strength;
 
-  if(abs(var_0.lateral_change_this_update) < 0.01) {
+  if(abs(var_0.lateral_change_this_update) < 0.01)
     var_0.anim_right_move_strength = 0;
-  }
 
   var_0.anim_down_move_strength = var_0.down_move_strength;
 
-  if(abs(var_0.vertical_change_this_update) < 0.01) {
+  if(abs(var_0.vertical_change_this_update) < 0.01)
     var_0.anim_down_move_strength = 0;
-  }
 }
 
 rpl_legs_process_state(var_0) {
@@ -1246,9 +1177,9 @@ rpl_legs_process_state(var_0) {
         var_0.was_running = undefined;
     }
 
-    if(var_0.move_state == var_0.move_state_stop) {
+    if(var_0.move_state == var_0.move_state_stop)
       var_4 = var_0.stop_anim_direction;
-    } else {
+    else {
       var_4 = rpl_legs_get_start_move_direction(var_0);
       var_0.last_start_anim_direction = var_4;
       var_0.stop_anim_direction = var_4;
@@ -1289,13 +1220,11 @@ rpl_legs_process_state(var_0) {
       }
     }
 
-    if(var_1 || var_13) {
+    if(var_1 || var_13)
       rpl_legs_clear_unused_anims(var_0, var_5);
-    }
 
-    if(var_1) {
+    if(var_1)
       var_0.current_foot = "left";
-    }
   }
 }
 
@@ -1303,9 +1232,8 @@ rpl_legs_changed_directions(var_0, var_1) {
   var_2 = getarraykeys(var_1);
 
   foreach(var_4 in var_2) {
-    if(!var_0.move[var_4].playing) {
+    if(!var_0.move[var_4].playing)
       return 1;
-    }
   }
 
   return 0;
@@ -1314,24 +1242,21 @@ rpl_legs_changed_directions(var_0, var_1) {
 rpl_legs_should_use_run_loop(var_0) {
   var_1 = 0.8;
 
-  if(var_0.horz_leg_move_percent < var_1) {
+  if(var_0.horz_leg_move_percent < var_1)
     return 0;
-  }
 
   return 1;
 }
 
 rpl_legs_traveling_horizontal(var_0, var_1) {
-  if(!var_1) {
+  if(!var_1)
     return 0;
-  }
 
   var_2 = rpl_legs_get_move_directions(var_0, 1);
   var_3 = getarraykeys(var_2);
 
-  if(_rpl_legs_is_horizontal(var_3[0])) {
+  if(_rpl_legs_is_horizontal(var_3[0]))
     return 1;
-  }
 
   return 0;
 }
@@ -1339,9 +1264,8 @@ rpl_legs_traveling_horizontal(var_0, var_1) {
 rpl_legs_is_loop_state_changing_direction(var_0, var_1) {
   var_2 = vectordot(var_0.last_move_vect_norm, var_0.cur_move_vect_norm);
 
-  if(var_2 <= var_0.cosine90) {
+  if(var_2 <= var_0.cosine90)
     return 1;
-  }
 
   return 0;
 }
@@ -1352,9 +1276,8 @@ rpl_legs_is_start_state_complete(var_0, var_1) {
     var_3 = rpl_legs_get_previous_move_directions(var_0);
     var_4 = var_3[0];
 
-    if(isDefined(var_4) && var_2 != var_4) {
+    if(isDefined(var_4) && var_2 != var_4)
       return 1;
-    }
   }
 
   var_5 = getarraykeys(var_0.move);
@@ -1364,9 +1287,8 @@ rpl_legs_is_start_state_complete(var_0, var_1) {
     var_9 = rpl_get_state_anim(var_0, var_8, var_7);
     var_10 = level.rappel_player_legs getanimtime(var_9);
 
-    if(var_10 > 0 && var_10 < var_0.state_anim_percent_complete) {
+    if(var_10 > 0 && var_10 < var_0.state_anim_percent_complete)
       return 0;
-    }
   }
 
   return 1;
@@ -1384,34 +1306,31 @@ rpl_legs_get_previous_move_directions(var_0) {
   var_2 = getarraykeys(var_0.move);
 
   foreach(var_4 in var_2) {
-    if(var_0.move[var_4].playing) {
+    if(var_0.move[var_4].playing)
       var_1[var_1.size] = var_4;
-    }
   }
 
   return var_1;
 }
 
 rpl_legs_get_animation_rate(var_0, var_1, var_2) {
-  if(var_2 == var_0.animtype_stop || var_2 == var_0.animtype_run_stop) {
+  if(var_2 == var_0.animtype_stop || var_2 == var_0.animtype_run_stop)
     return 1.0;
-  }
 
   var_3 = getdvarfloat("rappel_legs_scale_horizontal");
   var_4 = getdvarfloat("rappel_legs_scale_up");
   var_5 = getdvarfloat("rappel_legs_scale_down");
 
-  if(var_2 == var_0.animtype_loop_run) {
+  if(var_2 == var_0.animtype_loop_run)
     var_3 = getdvarfloat("rappel_legs_scale_run");
-  }
 
-  if(var_1 == "down") {
+  if(var_1 == "down")
     return var_0.down_leg_move_percent * var_5;
-  } else if(var_1 == "up") {
+  else if(var_1 == "up")
     return var_0.up_leg_move_percent * var_4;
-  } else if(var_1 == "left" || var_1 == "right") {
+  else if(var_1 == "left" || var_1 == "right")
     return var_0.horz_leg_move_percent * var_3;
-  } else if(var_1 == "left_down" || var_1 == "right_down") {
+  else if(var_1 == "left_down" || var_1 == "right_down") {
     var_6 = length((var_0.horz_leg_move_percent, var_0.down_leg_move_percent, 0));
     var_7 = var_5;
     return var_6 * var_7;
@@ -1426,15 +1345,13 @@ rpl_legs_get_direction_weights(var_0) {
   var_1 = getarraykeys(var_0);
   var_2 = 0;
 
-  foreach(var_4 in var_1) {
-    var_2 = var_2 + var_0[var_4];
-  }
+  foreach(var_4 in var_1)
+  var_2 = var_2 + var_0[var_4];
 
   var_6 = [];
 
-  foreach(var_4 in var_1) {
-    var_6[var_4] = var_0[var_4] / var_2;
-  }
+  foreach(var_4 in var_1)
+  var_6[var_4] = var_0[var_4] / var_2;
 
   return var_6;
 }
@@ -1458,16 +1375,14 @@ rpl_legs_get_start_move_direction(var_0) {
     if(var_6 <= var_0.cosine22_5) {
       continue;
     }
-    if(_rpl_legs_is_diagonal(var_5)) {
+    if(_rpl_legs_is_diagonal(var_5))
       var_2 = var_5;
-    }
 
     var_1[var_1.size] = var_5;
   }
 
-  if(var_1.size == 2) {
+  if(var_1.size == 2)
     var_1 = common_scripts\utility::array_remove(var_1, var_2);
-  }
 
   return var_1[0];
 }
@@ -1504,19 +1419,17 @@ rpl_legs_get_move_directions(var_0, var_1) {
       var_8[var_5] = var_6;
     }
 
-    if(var_8.size == 1) {
+    if(var_8.size == 1)
       return var_8;
-    }
   }
 
   if(var_2.size == 2) {
     var_3 = getarraykeys(var_2);
 
-    if(common_scripts\utility::array_contains(var_3, "left") && common_scripts\utility::array_contains(var_3, "left_down")) {
+    if(common_scripts\utility::array_contains(var_3, "left") && common_scripts\utility::array_contains(var_3, "left_down"))
       var_2["left_down"] = undefined;
-    } else if(common_scripts\utility::array_contains(var_3, "right") && common_scripts\utility::array_contains(var_3, "right_down")) {
+    else if(common_scripts\utility::array_contains(var_3, "right") && common_scripts\utility::array_contains(var_3, "right_down"))
       var_2["right_down"] = undefined;
-    }
   }
 
   if(var_2.size == 2 && var_1) {
@@ -1531,29 +1444,25 @@ rpl_legs_get_move_directions(var_0, var_1) {
 
 rpl_legs_get_blend_time(var_0, var_1, var_2) {
   if(var_1 == var_0.animtype_loop || var_1 == var_0.animtype_loop_run) {
-    if(rpl_legs_is_state_direction_anim_complete(var_0, var_0.animtype_start, var_2)) {
+    if(rpl_legs_is_state_direction_anim_complete(var_0, var_0.animtype_start, var_2))
       return var_0.leg_anim_blend_time_fast;
-    }
   }
 
   return var_0.leg_anim_blend_time;
 }
 
 rpl_legs_get_clear_blend_time(var_0, var_1, var_2) {
-  if(var_0.move_state == var_0.move_state_jump) {
+  if(var_0.move_state == var_0.move_state_jump)
     return var_0.leg_jump_anim_blend_time;
-  } else if(var_1 == var_0.animtype_start) {
-    if(var_0.move_state == var_0.move_state_start) {
+  else if(var_1 == var_0.animtype_start) {
+    if(var_0.move_state == var_0.move_state_start)
       return var_0.leg_clear_anim_blend_time_fast;
-    }
   } else if(var_1 == var_0.animtype_loop || var_1 == var_0.animtype_loop_run || var_1 == var_0.animtype_parent) {
-    if(var_0.move_state == var_0.move_state_idle) {
+    if(var_0.move_state == var_0.move_state_idle)
       return var_0.leg_idle_anim_blend_time;
-    }
 
-    if(var_0.move_state == var_0.move_state_start && rpl_legs_is_start_anim_ready_to_blend_out_loops(var_0, var_0.last_start_anim_direction)) {
+    if(var_0.move_state == var_0.move_state_start && rpl_legs_is_start_anim_ready_to_blend_out_loops(var_0, var_0.last_start_anim_direction))
       return 0;
-    }
   }
 
   return var_0.leg_clear_anim_blend_time;
@@ -1564,9 +1473,8 @@ rpl_legs_is_start_anim_ready_to_blend_out_loops(var_0, var_1) {
   var_3 = rpl_get_state_anim(var_0, var_0.animtype_start, var_1);
   var_4 = level.rappel_player_legs getanimtime(var_3);
 
-  if(var_4 >= var_2) {
+  if(var_4 >= var_2)
     return 1;
-  }
 
   return 0;
 }
@@ -1576,9 +1484,8 @@ rpl_legs_is_state_direction_anim_complete(var_0, var_1, var_2) {
   var_4 = level.rappel_player_legs getanimtime(var_3);
   var_5 = level.rappel_player_legs getanimweight(var_3);
 
-  if(var_4 >= var_0.state_anim_percent_complete && var_5 > 0) {
+  if(var_4 >= var_0.state_anim_percent_complete && var_5 > 0)
     return 1;
-  }
 
   return 0;
 }
@@ -1642,17 +1549,14 @@ rpl_legs_clear_unused_anims(var_0, var_1) {
       continue;
     }
 
-    if(var_0.move_state != var_0.move_state_start) {
+    if(var_0.move_state != var_0.move_state_start)
       rpl_legs_clear_anim(rpl_get_walk_start_anim(var_4), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_start, var_4));
-    }
 
-    if(var_0.move_state != var_0.move_state_loop) {
+    if(var_0.move_state != var_0.move_state_loop)
       rpl_legs_clear_anim(rpl_get_walk_loop_anim(var_4), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_loop, var_4));
-    }
 
-    if(var_0.move_state != var_0.move_state_loop_run && _rpl_legs_is_horizontal(var_4)) {
+    if(var_0.move_state != var_0.move_state_loop_run && _rpl_legs_is_horizontal(var_4))
       rpl_legs_clear_anim(rpl_get_run_loop_anim(var_4), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_loop_run, var_4));
-    }
 
     if(var_0.move_state != var_0.move_state_stop) {
       rpl_legs_clear_anim(rpl_get_walk_stop_anim(var_4), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_stop, var_4));
@@ -1669,17 +1573,14 @@ rpl_legs_clear_unused_anims(var_0, var_1) {
     var_6 = isDefined(var_0.current_foot) && var_0.current_foot == "right";
     var_7 = isDefined(var_0.current_foot) && var_0.current_foot == "left";
 
-    if(var_5) {
+    if(var_5)
       rpl_legs_clear_anim(rpl_get_walk_stop_anim(var_4), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_stop, var_4));
-    }
 
-    if(!var_5 && !var_6 && _rpl_legs_is_horizontal(var_4)) {
+    if(!var_5 && !var_6 && _rpl_legs_is_horizontal(var_4))
       rpl_legs_clear_anim(rpl_get_run_stop_anim(var_4, "right"), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_run_stop, var_4));
-    }
 
-    if(!var_5 && !var_7 && _rpl_legs_is_horizontal(var_4)) {
+    if(!var_5 && !var_7 && _rpl_legs_is_horizontal(var_4))
       rpl_legs_clear_anim(rpl_get_run_stop_anim(var_4, "left"), rpl_legs_get_clear_blend_time(var_0, var_0.animtype_run_stop, var_4));
-    }
   }
 }
 
@@ -1697,15 +1598,14 @@ rpl_legs_set_anim(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = isDefined(var_4) && var_4;
   var_7 = isDefined(var_5);
 
-  if(var_6 && var_7) {
+  if(var_6 && var_7)
     level.rappel_player_legs setflaggedanimrestart(var_5, var_0, var_1, var_2, var_3);
-  } else if(var_6) {
+  else if(var_6)
     level.rappel_player_legs setanimrestart(var_0, var_1, var_2, var_3);
-  } else if(var_7) {
+  else if(var_7)
     level.rappel_player_legs setflaggedanim(var_5, var_0, var_1, var_2, var_3);
-  } else {
+  else
     level.rappel_player_legs setanim(var_0, var_1, var_2, var_3);
-  }
 }
 
 rpl_legs_clear_anim(var_0, var_1) {
@@ -1713,39 +1613,39 @@ rpl_legs_clear_anim(var_0, var_1) {
 }
 
 rpl_legs_get_anim_type(var_0) {
-  if(var_0.move_state == var_0.move_state_start) {
+  if(var_0.move_state == var_0.move_state_start)
     return var_0.animtype_start;
-  } else if(var_0.move_state == var_0.move_state_idle) {
+  else if(var_0.move_state == var_0.move_state_idle)
     return var_0.animtype_idle;
-  } else if(var_0.move_state == var_0.move_state_stop && isDefined(var_0.was_running) && var_0.was_running) {
+  else if(var_0.move_state == var_0.move_state_stop && isDefined(var_0.was_running) && var_0.was_running)
     return var_0.animtype_run_stop;
-  } else if(var_0.move_state == var_0.move_state_stop) {
+  else if(var_0.move_state == var_0.move_state_stop)
     return var_0.animtype_stop;
-  } else if(var_0.move_state == var_0.move_state_loop) {
+  else if(var_0.move_state == var_0.move_state_loop)
     return var_0.animtype_loop;
-  } else if(var_0.move_state == var_0.move_state_loop_run) {
+  else if(var_0.move_state == var_0.move_state_loop_run)
     return var_0.animtype_loop_run;
-  } else if(var_0.move_state == var_0.move_state_idle_shift) {
+  else if(var_0.move_state == var_0.move_state_idle_shift)
     return var_0.animtype_idle_shift;
-  } else if(var_0.move_state == var_0.move_state_shift_back) {
+  else if(var_0.move_state == var_0.move_state_shift_back)
     return var_0.animtype_shift_back;
-  } else {}
+  else {}
 }
 
 rpl_get_state_anim(var_0, var_1, var_2) {
-  if(var_1 == var_0.animtype_start) {
+  if(var_1 == var_0.animtype_start)
     return rpl_get_walk_start_anim(var_2);
-  } else if(var_1 == var_0.animtype_loop) {
+  else if(var_1 == var_0.animtype_loop)
     return rpl_get_walk_loop_anim(var_2);
-  } else if(var_1 == var_0.animtype_loop_run) {
+  else if(var_1 == var_0.animtype_loop_run)
     return rpl_get_run_loop_anim(var_2);
-  } else if(var_1 == var_0.animtype_stop) {
+  else if(var_1 == var_0.animtype_stop)
     return rpl_get_walk_stop_anim(var_2);
-  } else if(var_1 == var_0.animtype_run_stop) {
+  else if(var_1 == var_0.animtype_run_stop)
     return rpl_get_run_stop_anim(var_2, var_0.current_foot);
-  } else if(var_1 == var_0.animtype_idle) {
+  else if(var_1 == var_0.animtype_idle)
     return rpl_get_idle_anim(var_2);
-  } else {}
+  else {}
 }
 
 #using_animtree("player");
@@ -1838,11 +1738,10 @@ rpl_get_legs_idle_anim() {
 }
 
 rpl_get_legs_jump_anim() {
-  if(isDefined(level.rappel_legs_jump_anim)) {
+  if(isDefined(level.rappel_legs_jump_anim))
     return level.rappel_legs_jump_anim;
-  } else {
+  else
     return % cnd_rappel_jump_playerlegs;
-  }
 }
 
 rpl_get_garden_entry_legs_static_anim() {
@@ -1914,9 +1813,8 @@ rappel_clear_vertical_limits() {
 rpl_calc_max_yaw_right(var_0) {
   var_1 = rpl_calc_dist_player_to_top(var_0);
 
-  if(level.rappel_max_lateral_dist_right / var_1 > 1) {
+  if(level.rappel_max_lateral_dist_right / var_1 > 1)
     return 60;
-  }
 
   var_2 = asin(level.rappel_max_lateral_dist_right / var_1);
   return var_2;
@@ -1925,9 +1823,8 @@ rpl_calc_max_yaw_right(var_0) {
 rpl_calc_max_yaw_left(var_0) {
   var_1 = rpl_calc_dist_player_to_top(var_0);
 
-  if(level.rappel_max_lateral_dist_left / var_1 > 1) {
+  if(level.rappel_max_lateral_dist_left / var_1 > 1)
     return -60;
-  }
 
   var_2 = asin(-1 * level.rappel_max_lateral_dist_left / var_1);
   return var_2;
@@ -1940,33 +1837,28 @@ rpl_calc_max_rot_speed(var_0, var_1) {
     var_0.anim_right_move_strength = var_0.right_move_strength;
     var_0.anim_down_move_strength = var_0.down_move_strength;
 
-    if(abs(var_0.vertical_change_this_update) == 0) {
+    if(abs(var_0.vertical_change_this_update) == 0)
       var_0.anim_down_move_strength = 0;
-    }
 
     var_0.cur_move_vect_norm = vectornormalize((var_0.anim_right_move_strength, var_0.anim_down_move_strength, 0));
     var_3 = abs(var_0.anim_down_move_strength) > 0 || abs(var_0.anim_right_move_strength) > 0;
     var_4 = rpl_legs_traveling_horizontal(var_0, var_3);
 
-    if(!var_4 && var_3 && common_scripts\utility::sign(var_0.vertical_change_this_update) == -1) {
+    if(!var_4 && var_3 && common_scripts\utility::sign(var_0.vertical_change_this_update) == -1)
       var_2 = rpl_get_max_downward_speed();
-    }
   }
 
   var_5 = rpl_calc_dist_player_to_top(var_0);
   var_6 = var_2 * 1000 / var_5;
 
-  if(!var_0.jumping && level.player maps\_utility::isads()) {
+  if(!var_0.jumping && level.player maps\_utility::isads())
     var_6 = var_6 * 0.25;
-  }
 
-  if(level.player issprinting()) {
+  if(level.player issprinting())
     var_6 = var_6 * 1.5;
-  }
 
-  if(var_0.too_close_to_ally) {
+  if(var_0.too_close_to_ally)
     var_6 = 0;
-  }
 
   return var_6;
 }
@@ -1974,13 +1866,11 @@ rpl_calc_max_rot_speed(var_0, var_1) {
 rpl_calc_dist_player_to_top(var_0, var_1) {
   var_2 = distance(level.player.origin, level.rpl_rope_anim_origin.origin);
 
-  if(isDefined(var_1) && var_1) {
+  if(isDefined(var_1) && var_1)
     return var_2;
-  }
 
-  if(abs(var_0.current_dist_to_top - var_2) > 10) {
+  if(abs(var_0.current_dist_to_top - var_2) > 10)
     var_0.current_dist_to_top = var_2;
-  }
 
   return var_0.current_dist_to_top;
 }
@@ -2029,11 +1919,10 @@ cnd_plyr_rpl_handle_jump(var_0, var_1) {
       var_9 = var_7 * rpl_get_jump_percent_considered_complete(var_0);
       var_10 = var_7 - var_9;
 
-      if(!var_5) {
+      if(!var_5)
         wait(var_9);
-      } else {
+      else
         wait(var_7);
-      }
 
       common_scripts\utility::flag_clear("player_jumping");
       level.player allowjump(1);
@@ -2074,21 +1963,18 @@ cnd_plyr_rpl_handle_view_lerp(var_0, var_1) {
       var_11 = level.player getweaponammoclip(var_10);
       var_12 = weaponclipsize(var_10);
 
-      if(var_11 == var_12) {
+      if(var_11 == var_12)
         continue;
-      }
     }
 
     level.player lerpviewangleclamp(var_2, 0, 0, var_4, var_5, var_6, var_8);
     wait(var_2);
 
-    if(var_9 == "rappel_lerp_fire") {
+    if(var_9 == "rappel_lerp_fire")
       wait 1;
-    }
 
-    while(level.player isreloading() || level.player isswitchingweapon()) {
+    while(level.player isreloading() || level.player isswitchingweapon())
       common_scripts\utility::waitframe();
-    }
 
     level.player lerpviewangleclamp(var_2, 0, 0, var_4, var_5, var_6, var_7);
   }
@@ -2116,9 +2002,8 @@ cnd_plyr_catch_fire_reload(var_0, var_1) {
         if(var_3) {
           var_5 = level.player common_scripts\utility::waittill_notify_or_timeout_return("player_fired", 0.2);
 
-          if(!isDefined(var_5) || var_5 != "timeout") {
+          if(!isDefined(var_5) || var_5 != "timeout")
             continue;
-          }
         } else
           common_scripts\utility::waitframe();
 
@@ -2131,23 +2016,21 @@ cnd_plyr_catch_fire_reload(var_0, var_1) {
 rpl_get_jump_percent_considered_complete(var_0) {
   var_1 = var_0.jump_type;
 
-  if(isDefined(level.rappel_rotate_jump_anim) || var_1 == "jump_small") {
+  if(isDefined(level.rappel_rotate_jump_anim) || var_1 == "jump_small")
     return 1.0;
-  } else {
+  else
     return 0.65;
-  }
 }
 
 rpl_get_rotate_jump_anim(var_0) {
   var_1 = var_0.jump_type;
 
-  if(isDefined(level.rappel_rotate_jump_anim)) {
+  if(isDefined(level.rappel_rotate_jump_anim))
     return level.rappel_rotate_jump_anim;
-  } else if(var_1 == "jump_small") {
+  else if(var_1 == "jump_small")
     return % rappel_movement_player_jump_rotate_sm;
-  } else {
+  else
     return % rappel_movement_player_jump_rotate;
-  }
 }
 
 rappel_rope_additive_jump_animations(var_0, var_1) {
@@ -2179,9 +2062,8 @@ rappel_rope_animate_rotate(var_0, var_1, var_2, var_3) {
 end_legs_jump_anim(var_0, var_1) {
   level endon("stop_manage_player_rappel_movement");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     wait(var_1);
-  }
 
   var_2 = rpl_get_legs_jump_anim();
 
@@ -2192,23 +2074,20 @@ end_legs_jump_anim(var_0, var_1) {
 }
 
 plyr_is_moving_up(var_0) {
-  if(var_0.move_state != var_0.move_state_start && var_0.move_state != var_0.move_state_loop) {
+  if(var_0.move_state != var_0.move_state_start && var_0.move_state != var_0.move_state_loop)
     return 0;
-  }
 
   if(var_0.move_state == var_0.move_state_start) {
     var_1 = rpl_legs_get_start_move_direction(var_0);
 
-    if(var_1 == "up" || var_1 == "left_up" || var_1 == "right_up") {
+    if(var_1 == "up" || var_1 == "left_up" || var_1 == "right_up")
       return 1;
-    }
   } else {
     var_2 = rpl_legs_get_move_directions(var_0, 0);
     var_3 = getarraykeys(var_2);
 
-    if(common_scripts\utility::array_contains(var_3, "up") || common_scripts\utility::array_contains(var_3, "left_up") || common_scripts\utility::array_contains(var_3, "right_up")) {
+    if(common_scripts\utility::array_contains(var_3, "up") || common_scripts\utility::array_contains(var_3, "left_up") || common_scripts\utility::array_contains(var_3, "right_up"))
       return 1;
-    }
   }
 
   return 0;
@@ -2221,19 +2100,16 @@ plyr_rappel_legs_set_origin(var_0) {
   var_3 = level.rpl_plyr_legs_link_ent.origin;
   var_4 = 0;
 
-  if(!isDefined(var_0.last_legs_offset)) {
+  if(!isDefined(var_0.last_legs_offset))
     var_0.last_legs_offset = 0;
-  }
 
-  if(plyr_is_moving_up(var_0)) {
+  if(plyr_is_moving_up(var_0))
     var_4 = var_4 + var_1;
-  }
 
   var_5 = var_4 - var_0.last_legs_offset;
 
-  if(abs(var_5) > 0 && abs(var_5) > var_2) {
+  if(abs(var_5) > 0 && abs(var_5) > var_2)
     var_4 = var_0.last_legs_offset + common_scripts\utility::sign(var_5) * var_2;
-  }
 
   var_0.last_legs_offset = var_4;
 
@@ -2251,11 +2127,10 @@ plyr_rappel_jump_down(var_0, var_1) {
   common_scripts\utility::flag_set("force_jump");
   common_scripts\utility::flag_clear("player_jumping");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = % rappel_movement_player_jump_rotate;
-  } else {
+  else
     var_2 = % rappel_movement_player_jump_rotate2;
-  }
 
   var_3 = % rappel_movement_player_jump_still;
   var_4 = cnd_get_rope_anim_origin();
@@ -2277,9 +2152,8 @@ plyr_rappel_jump_down(var_0, var_1) {
 
   wait(var_6);
 
-  if(rappel_use_plyr_legs(var_0)) {
+  if(rappel_use_plyr_legs(var_0))
     level.rappel_player_legs clearanim(var_7, 0.2);
-  }
 
   level.player allowjump(1);
   common_scripts\utility::flag_clear("player_jumping");
@@ -2289,9 +2163,8 @@ plyr_rappel_jump_down(var_0, var_1) {
 }
 
 rappel_use_plyr_legs(var_0) {
-  if(!var_0.show_legs) {
+  if(!var_0.show_legs)
     return 0;
-  }
 
   return 1;
 }

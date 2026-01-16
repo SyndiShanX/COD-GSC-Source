@@ -13,11 +13,11 @@
 #namespace globallogic_audio;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_audio", &__init__, undefined, undefined);
+  system::register("globallogic_audio", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
@@ -49,10 +49,10 @@ function init() {
   game["dialog"]["lead_taken"] = "lead_taken";
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "generic_boost";
-  if(!isDefined(game["dialog"]["offense_obj"])) {
+  if(!isdefined(game["dialog"]["offense_obj"])) {
     game["dialog"]["offense_obj"] = "generic_boost";
   }
-  if(!isDefined(game["dialog"]["defense_obj"])) {
+  if(!isdefined(game["dialog"]["defense_obj"])) {
     game["dialog"]["defense_obj"] = "generic_boost";
   }
   game["dialog"]["hardcore"] = "hardcore";
@@ -157,13 +157,13 @@ function init() {
 }
 
 function registerdialoggroup(group, skipifcurrentlyplayinggroup) {
-  if(!isDefined(level.dialoggroups)) {
+  if(!isdefined(level.dialoggroups)) {
     level.dialoggroups = [];
-  } else if(isDefined(level.dialoggroup[group])) {
+  } else if(isdefined(level.dialoggroup[group])) {
     util::error(("registerDialogGroup:Dialog group " + group) + " already registered.");
     return;
   }
-  level.dialoggroup[group] = spawnStruct();
+  level.dialoggroup[group] = spawnstruct();
   level.dialoggroup[group].group = group;
   level.dialoggroup[group].skipifcurrentlyplayinggroup = skipifcurrentlyplayinggroup;
   level.dialoggroup[group].currentcount = 0;
@@ -174,7 +174,7 @@ function sndstartmusicsystem() {
   if(game["state"] == "postgame") {
     return;
   }
-  if(!isDefined(level.nextmusicstate)) {
+  if(!isdefined(level.nextmusicstate)) {
     if(getdvarint("") > 0) {
       println("");
     }
@@ -198,12 +198,12 @@ function suspensemusic(random) {
   if(getdvarint("") > 0) {
     println("");
   }
-  while(true) {
+  while (true) {
     wait(randomintrange(25, 60));
     if(getdvarint("") > 0) {
       println("");
     }
-    if(!isDefined(self.pers["music"].inque)) {
+    if(!isdefined(self.pers["music"].inque)) {
       self.pers["music"].inque = 0;
     }
     if(self.pers["music"].inque) {
@@ -212,7 +212,7 @@ function suspensemusic(random) {
       }
       continue;
     }
-    if(!isDefined(self.pers["music"].currentstate)) {
+    if(!isdefined(self.pers["music"].currentstate)) {
       self.pers["music"].currentstate = "SILENT";
     }
     if(randomint(100) < self.underscorechance && self.pers["music"].currentstate != "ACTION" && self.pers["music"].currentstate != "TIME_OUT") {
@@ -237,10 +237,10 @@ function announceroundwinner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isdefined(winner) || isplayer(winner)) {
     return;
   }
-  if(isDefined(level.teams[winner])) {
+  if(isdefined(level.teams[winner])) {
     leaderdialog("round_success", winner);
     leaderdialogforotherteams("round_failure", winner);
   } else {
@@ -255,10 +255,10 @@ function announcegamewinner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isdefined(winner) || isplayer(winner)) {
     return;
   }
-  if(isDefined(level.teams[winner])) {
+  if(isdefined(level.teams[winner])) {
     leaderdialog("mission_success", winner);
     leaderdialogforotherteams("mission_failure", winner);
   } else {
@@ -269,7 +269,7 @@ function announcegamewinner(winner, delay) {
 function doflameaudio() {
   self endon("disconnect");
   waittillframeend();
-  if(!isDefined(self.lastflamehurtaudio)) {
+  if(!isdefined(self.lastflamehurtaudio)) {
     self.lastflamehurtaudio = 0;
   }
   currenttime = gettime();
@@ -280,14 +280,14 @@ function doflameaudio() {
 }
 
 function leaderdialog(dialog, team, group, excludelist, squaddialog) {
-  assert(isDefined(level.players));
+  assert(isdefined(level.players));
   if(level.splitscreen) {
     return;
   }
   if(level.wagermatch) {
     return;
   }
-  if(!isDefined(team)) {
+  if(!isdefined(team)) {
     dialogs = [];
     foreach(team in level.teams) {
       dialogs[team] = dialog;
@@ -301,17 +301,17 @@ function leaderdialog(dialog, team, group, excludelist, squaddialog) {
     }
     return;
   }
-  if(isDefined(excludelist)) {
-    for(i = 0; i < level.players.size; i++) {
+  if(isdefined(excludelist)) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if(isDefined(player.pers["team"]) && player.pers["team"] == team && !globallogic_utils::isexcluded(player, excludelist)) {
+      if(isdefined(player.pers["team"]) && player.pers["team"] == team && !globallogic_utils::isexcluded(player, excludelist)) {
         player leaderdialogonplayer(dialog, group);
       }
     }
   } else {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+      if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
         player leaderdialogonplayer(dialog, group);
       }
     }
@@ -319,7 +319,7 @@ function leaderdialog(dialog, team, group, excludelist, squaddialog) {
 }
 
 function leaderdialogallteams(dialogs, group, excludelist) {
-  assert(isDefined(level.players));
+  assert(isdefined(level.players));
   if(level.splitscreen) {
     return;
   }
@@ -329,16 +329,16 @@ function leaderdialogallteams(dialogs, group, excludelist) {
     }
     return;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     team = player.pers["team"];
-    if(!isDefined(team)) {
+    if(!isdefined(team)) {
       continue;
     }
-    if(!isDefined(dialogs[team])) {
+    if(!isdefined(dialogs[team])) {
       continue;
     }
-    if(isDefined(excludelist) && globallogic_utils::isexcluded(player, excludelist)) {
+    if(isdefined(excludelist) && globallogic_utils::isexcluded(player, excludelist)) {
       continue;
     }
     player leaderdialogonplayer(dialogs[team], group);
@@ -374,12 +374,12 @@ function flushgroupdialogonplayer(group) {
 }
 
 function addgroupdialogtoplayer(dialog, group) {
-  if(!isDefined(level.dialoggroup[group])) {
+  if(!isdefined(level.dialoggroup[group])) {
     util::error(("leaderDialogOnPlayer:Dialog group " + group) + " is not registered");
     return 0;
   }
   addtoqueue = 0;
-  if(!isDefined(self.leaderdialoggroups[group])) {
+  if(!isdefined(self.leaderdialoggroups[group])) {
     addtoqueue = 1;
   }
   if(!level.dialoggroup[group].skipifcurrentlyplayinggroup) {
@@ -387,7 +387,7 @@ function addgroupdialogtoplayer(dialog, group) {
       self.leaderdialoggroups[group] = undefined;
       foreach(key, leader_dialog in self.leaderdialogqueue) {
         if(leader_dialog == group) {
-          for(i = key + 1; i < self.leaderdialogqueue.size; i++) {
+          for (i = key + 1; i < self.leaderdialogqueue.size; i++) {
             self.leaderdialogqueue[i - 1] = self.leaderdialogqueue[i];
           }
           self.leaderdialogqueue[i - 1] = undefined;
@@ -420,13 +420,13 @@ function leaderdialogonplayer(dialog, group) {
   if(level.splitscreen) {
     return;
   }
-  if(!isDefined(team)) {
+  if(!isdefined(team)) {
     return;
   }
-  if(!isDefined(level.teams[team])) {
+  if(!isdefined(level.teams[team])) {
     return;
   }
-  if(isDefined(group)) {
+  if(isdefined(group)) {
     if(!addgroupdialogtoplayer(dialog, group)) {
       self testdialogqueue(group);
       return;
@@ -450,20 +450,20 @@ function waitforsound(sound, extratime = 0.1) {
 }
 
 function playleaderdialogonplayer(dialog) {
-  if(isDefined(level.allowannouncer) && !level.allowannouncer) {
+  if(isdefined(level.allowannouncer) && !level.allowannouncer) {
     return;
   }
   team = self.pers["team"];
   self endon("disconnect");
   self.leaderdialogactive = 1;
-  if(isDefined(self.leaderdialoggroups[dialog])) {
+  if(isdefined(self.leaderdialoggroups[dialog])) {
     group = dialog;
     dialog = self.leaderdialoggroups[group];
     self.leaderdialoggroups[group] = undefined;
     self.currentleaderdialoggroup = group;
     self testdialogqueue(group);
   }
-  if(level.wagermatch || !isDefined(game["voice"])) {
+  if(level.wagermatch || !isdefined(game["voice"])) {
     faction = "vox_wm_";
   } else {
     faction = game["voice"][team];
@@ -480,11 +480,11 @@ function playleaderdialogonplayer(dialog) {
   self.currentleaderdialog = "";
   if(self.leaderdialogqueue.size > 0) {
     nextdialog = self.leaderdialogqueue[0];
-    for(i = 1; i < self.leaderdialogqueue.size; i++) {
+    for (i = 1; i < self.leaderdialogqueue.size; i++) {
       self.leaderdialogqueue[i - 1] = self.leaderdialogqueue[i];
     }
     self.leaderdialogqueue[i - 1] = undefined;
-    if(isDefined(self.leaderdialoggroups[dialog])) {
+    if(isdefined(self.leaderdialoggroups[dialog])) {
       self testdialogqueue(dialog);
     }
     self thread playleaderdialogonplayer(nextdialog);
@@ -550,10 +550,10 @@ function actionmusicset() {
 }
 
 function play_2d_on_team(alias, team) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player playlocalsound(alias);
     }
   }
@@ -563,38 +563,38 @@ function set_music_on_team(state, team, save_state, return_state, wait_time) {
   if(sessionmodeiszombiesgame()) {
     return;
   }
-  assert(isDefined(level.players));
-  if(!isDefined(team)) {
+  assert(isdefined(level.players));
+  if(!isdefined(team)) {
     team = "both";
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(save_state)) {
+  if(!isdefined(save_state)) {
     save_sate = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(return_state)) {
+  if(!isdefined(return_state)) {
     return_state = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(wait_time)) {
+  if(!isdefined(wait_time)) {
     wait_time = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_music_on_player(state, save_state, return_state, wait_time);
       continue;
     }
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player thread set_music_on_player(state, save_state, return_state, wait_time);
       if(getdvarint("") > 0) {
         println((("" + state) + "") + player getentitynumber());
@@ -609,32 +609,32 @@ function set_music_on_player(state, save_state, return_state, wait_time) {
     return;
   }
   assert(isplayer(self));
-  if(!isDefined(save_state)) {
+  if(!isdefined(save_state)) {
     save_state = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(return_state)) {
+  if(!isdefined(return_state)) {
     return_state = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(wait_time)) {
+  if(!isdefined(wait_time)) {
     wait_time = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  if(!isDefined(state)) {
+  if(!isdefined(state)) {
     state = "UNDERSCORE";
     if(getdvarint("") > 0) {
       println("");
     }
   }
   music::setmusicstate(state, self);
-  if(isDefined(self.pers["music"].currentstate) && save_state) {
+  if(isdefined(self.pers["music"].currentstate) && save_state) {
     self.pers["music"].returnstate = state;
     if(getdvarint("") > 0) {
       println((("" + self.pers[""].returnstate) + "") + self getentitynumber());
@@ -645,7 +645,7 @@ function set_music_on_player(state, save_state, return_state, wait_time) {
   if(getdvarint("") > 0) {
     println((("" + state) + "") + self getentitynumber());
   }
-  if(isDefined(self.pers["music"].returnstate) && return_state) {
+  if(isdefined(self.pers["music"].returnstate) && return_state) {
     if(getdvarint("") > 0) {
       println((("" + self.pers[""].returnstate) + "") + self getentitynumber());
     }
@@ -654,7 +654,7 @@ function set_music_on_player(state, save_state, return_state, wait_time) {
 }
 
 function return_music_state_player(wait_time) {
-  if(!isDefined(wait_time)) {
+  if(!isdefined(wait_time)) {
     wait_time = 0;
     if(getdvarint("") > 0) {
       println("");
@@ -664,19 +664,19 @@ function return_music_state_player(wait_time) {
 }
 
 function return_music_state_team(team, wait_time) {
-  if(!isDefined(wait_time)) {
+  if(!isdefined(wait_time)) {
     wait_time = 0;
     if(getdvarint("") > 0) {
       println("");
     }
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_next_music_state(self.pers["music"].returnstate, wait_time);
       continue;
     }
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player thread set_next_music_state(self.pers["music"].returnstate, wait_time);
       if(getdvarint("") > 0) {
         println((("" + self.pers[""].returnstate) + "") + player getentitynumber());
@@ -691,7 +691,7 @@ function set_next_music_state(nextstate, wait_time) {
   if(getdvarint("") > 0) {
     println((("" + self.pers[""].nextstate) + "") + self getentitynumber());
   }
-  if(!isDefined(self.pers["music"].inque)) {
+  if(!isdefined(self.pers["music"].inque)) {
     self.pers["music"].inque = 0;
   }
   if(self.pers["music"].inque) {

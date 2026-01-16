@@ -82,7 +82,7 @@ listen_mk32_mode() {
 setup_rooftop_intro() {
   level.remote_target_override_function = ::handle_intro_sniper_outline;
   level.ehq_blackout_time = 5;
-  maps\_utility::intro_screen_create(&"ENEMY_HQ_INTROSCREEN_LINE_1", &"ENEMY_HQ_INTROSCREEN_LINE_2", &"ENEMY_HQ_INTROSCREEN_LINE_3");
+  maps\_utility::intro_screen_create(&"ENEMY_HQ_INTROSCREEN_LINE_1", & "ENEMY_HQ_INTROSCREEN_LINE_2", & "ENEMY_HQ_INTROSCREEN_LINE_3");
   maps\_utility::intro_screen_custom_timing(2, 1);
   maps\_utility::intro_screen_custom_func(::introscreen);
   level.sniper_wait_extra_black = 1;
@@ -187,7 +187,7 @@ player_failcase_road_mk32() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_road_mk32")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -202,7 +202,7 @@ player_failcase_road_mk32() {
 player_failcase_road_overrun_mk32() {
   level endon("kill_player_fail");
   common_scripts\utility::flag_wait("FLAG_player_failcase_road_overrun_mk32");
-  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -213,9 +213,8 @@ remove_ally_mk32() {
   level.allies[0] maps\_utility::forceuseweapon(level.allies[0].old_weap, "primary");
   level.allies[0].old_weapon = "none";
 
-  if(isDefined(level.allies[0].weaponinfo["mk32_dud_rocket"]) && isDefined(level.allies[0].weaponinfo["mk32_dud_rocket"].hasclip)) {
+  if(isDefined(level.allies[0].weaponinfo["mk32_dud_rocket"]) && isDefined(level.allies[0].weaponinfo["mk32_dud_rocket"].hasclip))
     level.allies[0].weaponinfo["mk32_dud_rocket"].hasclip = 0;
-  }
 }
 
 introscreen() {
@@ -230,9 +229,8 @@ intro_common() {
 
 monitor_player_used_zoom(var_0) {
   while(!common_scripts\utility::flag("checkit_zoom")) {
-    if(abs(var_0 - level.remote_turret_current_fov) > 20) {
+    if(abs(var_0 - level.remote_turret_current_fov) > 20)
       common_scripts\utility::flag_set("checkit_zoom");
-    }
 
     wait 0.05;
   }
@@ -244,9 +242,8 @@ sniper_paces() {
 }
 
 zoom_hint_wait() {
-  if(common_scripts\utility::flag("checkit_zoom")) {
+  if(common_scripts\utility::flag("checkit_zoom"))
     return 1;
-  }
 
   return 0;
 }
@@ -270,9 +267,8 @@ sniper_paces_static() {
         maps\_utility::smart_radio_dialogue("enemyhq_mrk_logantryzoomingin");
         common_scripts\utility::flag_wait_or_timeout("checkit_zoom", var_0);
 
-        if(var_0 < 30) {
+        if(var_0 < 30)
           var_0 = var_0 * 1.5;
-        }
       }
     }
 
@@ -367,9 +363,8 @@ intro_overlook_static() {
   var_6 = level common_scripts\utility::waittill_any_return("bishop_in_crosshairs", "identify_vo_timeout");
   thread maps\_utility::smart_radio_dialogue("enemyhq_mrk_wehaveapossible");
 
-  if(var_6 != "identify_vo_timeout") {
+  if(var_6 != "identify_vo_timeout")
     level waittill("identify_vo_timeout");
-  }
 
   var_7 = 9.5;
   maps\_utility::delaythread(var_7, maps\_utility::send_notify, "use_remote_turret");
@@ -415,9 +410,8 @@ monitor_player_bishop() {
       thread maps\_utility::smart_radio_dialogue(var_9[var_10]);
       var_10++;
 
-      if(var_10 >= var_9.size) {
+      if(var_10 >= var_9.size)
         var_10 = 0;
-      }
     }
 
     var_13 = level.player getplayerangles();
@@ -432,9 +426,8 @@ monitor_player_bishop() {
         thread maps\_utility::smart_radio_dialogue(var_3[var_2]);
         var_2++;
 
-        if(var_2 >= var_3.size) {
+        if(var_2 >= var_3.size)
           var_2 = 0;
-        }
 
         var_1 = gettime() + var_4;
         var_4 = var_4 * 1.5;
@@ -448,9 +441,8 @@ monitor_player_bishop() {
           var_18 = vectordot(var_17, var_14);
           var_19 = 0.9975;
 
-          if(isDefined(var_16.script_parameters)) {
+          if(isDefined(var_16.script_parameters))
             var_19 = int(var_16.script_parameters);
-          }
 
           if(var_18 > var_19) {
             var_16.found = 1;
@@ -463,9 +455,8 @@ monitor_player_bishop() {
 
     var_21 = 1;
 
-    if(var_13[1] > -104 && var_13[1] < -94 && var_13[0] < 10) {
+    if(var_13[1] > -104 && var_13[1] < -94 && var_13[0] < 10)
       var_21 = 0;
-    }
 
     if(var_21 && var_7 < gettime() && level.remote_turret_current_fov < 25) {
       var_7 = gettime() + 1000;
@@ -485,16 +476,14 @@ monitor_player_bishop() {
         }
 
         if(var_22 >= 3) {
-          foreach(var_27 in var_23) {
-            var_27.found = 1;
-          }
+          foreach(var_27 in var_23)
+          var_27.found = 1;
 
           thread maps\_utility::smart_radio_dialogue(var_8[var_12]);
           var_12++;
 
-          if(var_12 >= var_8.size) {
+          if(var_12 >= var_8.size)
             var_12 = 0;
-          }
 
           var_7 = gettime() + 8000;
           break;
@@ -522,9 +511,8 @@ monitor_player_bishop() {
       thread maps\_utility::smart_radio_dialogue("enemyhq_mrk_rightsideclear");
     }
 
-    if(var_5["armada"] == 4) {
+    if(var_5["armada"] == 4)
       var_5["armada"]++;
-    }
 
     wait 0.05;
   }
@@ -592,9 +580,8 @@ glimpsethefuture(var_0, var_1) {
   var_2 = var_1 / getanimlength(level.scr_anim["bish_e1"]["bishop_glimpse"]);
   level.future_start_percent = var_2;
 
-  foreach(var_4 in var_0) {
-    var_4 setanimtime(maps\_utility::getanim_from_animname("bishop_glimpse", var_4.animname), level.future_start_percent);
-  }
+  foreach(var_4 in var_0)
+  var_4 setanimtime(maps\_utility::getanim_from_animname("bishop_glimpse", var_4.animname), level.future_start_percent);
 }
 
 intro_dof(var_0) {
@@ -667,9 +654,8 @@ end_anim_then_loop(var_0, var_1, var_2, var_3) {
   self waittillmatch("single anim", "end");
 
   if(var_3) {
-    if(common_scripts\utility::flag("picked_up_mk32")) {
+    if(common_scripts\utility::flag("picked_up_mk32"))
       return;
-    }
   }
 
   var_0 thread maps\_anim::anim_loop_solo(self, var_1, var_2);
@@ -699,9 +685,8 @@ trig_active_on_look(var_0, var_1, var_2) {
 }
 
 handle_intro_ammo_counter() {
-  while(isDefined(level.sniper_wait_extra_black)) {
+  while(isDefined(level.sniper_wait_extra_black))
     wait 0.05;
-  }
 
   setsaveddvar("ammoCounterHide", 1);
 }
@@ -718,9 +703,8 @@ pickup_mk32(var_0) {
   common_scripts\utility::flag_wait_or_timeout("picked_up_mk32", 10);
   var_1 delete();
 
-  if(!common_scripts\utility::flag("picked_up_mk32")) {
+  if(!common_scripts\utility::flag("picked_up_mk32"))
     var_2 show();
-  }
 
   var_5 = common_scripts\utility::getstruct("sniper_placement_forward", "targetname");
   thread convoy();
@@ -740,11 +724,10 @@ pickup_mk32(var_0) {
   var_6 setModel("viewmodel_mk32_dud_bolt_ring_off");
   var_6 linktoplayerview(level.player, "J_Ammo1_Cap", (0, 0, 0), (0, 0, 0), 1);
 
-  if(level.start_point != "introshoot") {
+  if(level.start_point != "introshoot")
     wait 2.6;
-  } else {
+  else
     wait 3.1;
-  }
 
   var_6 unlinkfromplayerview(level.player);
   var_6 delete();
@@ -802,34 +785,30 @@ convoy() {
   var_4 = 10;
 
   while(var_3 < var_4) {
-    if(var_3 % 3) {
+    if(var_3 % 3)
       var_5 = var_1[0];
-    } else {
+    else
       var_5 = var_1[1];
-    }
 
     level thread maps\_utility::notify_delay("safe_spawn_fast", 10);
     var_2 = var_5 maps\_vehicle::spawn_vehicle_and_gopath();
     thread maps\enemyhq_audio::aud_convoy_start(var_2);
     var_2.cargo = [];
 
-    if(common_scripts\utility::string_starts_with(var_2.classname, "script_vehicle_man_7t")) {
+    if(common_scripts\utility::string_starts_with(var_2.classname, "script_vehicle_man_7t"))
       var_2 load_up();
-    }
 
     var_0++;
 
-    if(var_3 % 3) {
+    if(var_3 % 3)
       wait(randomfloatrange(3, 4));
-    } else {
+    else
       wait(randomfloatrange(2.5, 3));
-    }
 
     var_3++;
 
-    if(level.player_hit_convoy > 0) {
+    if(level.player_hit_convoy > 0)
       var_4 = 6;
-    }
   }
 
   level.last_spawned_veh = var_2;
@@ -869,13 +848,11 @@ watch_convoy_trig() {
   while(isDefined(var_0)) {
     var_0 waittill("trigger", var_1);
 
-    if(isDefined(level.last_spawned_veh) && var_1 == level.last_spawned_veh) {
+    if(isDefined(level.last_spawned_veh) && var_1 == level.last_spawned_veh)
       var_0 delete();
-    }
 
-    foreach(var_3 in var_1.cargo) {
-      var_3 delete();
-    }
+    foreach(var_3 in var_1.cargo)
+    var_3 delete();
 
     var_1 delete();
   }
@@ -935,9 +912,8 @@ go_street() {
   waittillframeend;
   var_0 = getent("beta_blocker_player_clip", "targetname");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 notsolid();
-  }
 
   common_scripts\utility::flag_set("FLAG_move_to_player_truck");
 
@@ -984,11 +960,10 @@ ally_shoot_convoy() {
       var_2++;
 
       if(level.player_hit_convoy == 0 && common_scripts\utility::mod(var_2, 4) == 0) {
-        if(var_2 < 5) {
+        if(var_2 < 5)
           level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_tagthetrucks");
-        } else {
+        else
           level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_logantagem");
-        }
       }
 
       continue;
@@ -1014,7 +989,7 @@ watch_last_truck() {
       wait 3;
 
       if(level.player_hit_convoy == 0) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
+        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
         maps\_utility::missionfailedwrapper();
         wait 20;
       }
@@ -1049,18 +1024,16 @@ handle_m32_launcher() {
     if(common_scripts\utility::string_starts_with(var_1, "mk32_du")) {
       var_2 = level.player getweaponammoclip("mk32_dud+eotech_sp_mk32dud");
 
-      if(var_2 == 0) {
+      if(var_2 == 0)
         level.player notify(level.c4_weaponname);
-      }
 
       playFXOnTag(common_scripts\utility::getfx("vfx_glow_stickyg_static"), var_0, "tag_origin");
       var_0.ally_fired = 0;
 
-      if(level.mk32_intro_fire) {
+      if(level.mk32_intro_fire)
         var_0 thread track_dud();
-      } else {
+      else
         var_0 thread track_live();
-      }
     }
   }
 }
@@ -1075,9 +1048,8 @@ handle_sticky_clacker() {
     var_2 = getEntArray("live_sticky_grenade", "targetname");
 
     if(var_1 == "sticky_gone_boom") {
-      if(var_2.size == 0) {
+      if(var_2.size == 0)
         self notify("cancel_clacker_ui");
-      }
 
       continue;
     }
@@ -1099,9 +1071,8 @@ handle_sticky_clacker() {
 }
 
 safe_switch_to_detonator() {
-  while(level.switching_from_detonator) {
+  while(level.switching_from_detonator)
     wait 0.05;
-  }
 
   level.switching_to_detonator = 1;
   level.preclack_weapon = self getcurrentweapon();
@@ -1115,9 +1086,8 @@ safe_switch_to_detonator() {
 }
 
 safe_switch_from_detonator() {
-  while(level.switching_to_detonator) {
+  while(level.switching_to_detonator)
     wait 0.05;
-  }
 
   level.switching_from_detonator = 1;
   self switchtoweapon(level.preclack_weapon);
@@ -1228,23 +1198,20 @@ track_live() {
         var_10 thread do_dud_damage(var_0, var_1);
         var_10 waittill("damage", var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21);
 
-        if(!var_11) {
+        if(!var_11)
           var_10 maps\_utility::stop_magic_bullet_shield();
-        }
 
         var_22 = "";
 
-        if(isDefined(var_19) && var_19 != "") {
+        if(isDefined(var_19) && var_19 != "")
           var_22 = var_19;
-        } else if(isDefined(var_18) && var_18 != "") {
+        else if(isDefined(var_18) && var_18 != "")
           var_22 = var_18;
-        }
 
-        if(var_22 != "") {
+        if(var_22 != "")
           var_6 linkto(var_10, var_22);
-        } else {
+        else
           var_9 = 0;
-        }
       } else
         var_6 linkto(var_10);
     }
@@ -1290,9 +1257,8 @@ track_dud() {
   if(isDefined(var_5) && isDefined(var_5["position"])) {
     var_6 = "default";
 
-    if(isDefined(var_5["surfacetype"])) {
+    if(isDefined(var_5["surfacetype"]))
       var_6 = var_5["surfacetype"];
-    }
 
     var_2 = var_5["position"] + var_5["normal"] * 1.5;
     var_7 = spawn("script_model", var_2);
@@ -1304,17 +1270,15 @@ track_dud() {
     if(isDefined(var_5["entity"])) {
       var_9 = var_5["entity"];
 
-      if(isDefined(var_9.linked_vehicle)) {
+      if(isDefined(var_9.linked_vehicle))
         var_9 = var_9.linked_vehicle;
-      }
     }
 
     if(isDefined(var_9) && (var_9 == level.player_truck || isai(var_9) && var_9.team == "allies")) {
-      if(var_9 == level.player_truck) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
-      } else {
-        setdvar("ui_deadquote", &"ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
-      }
+      if(var_9 == level.player_truck)
+        setdvar("ui_deadquote", & "ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
+      else
+        setdvar("ui_deadquote", & "ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
 
       maps\_utility::missionfailedwrapper();
       wait 10;
@@ -1328,9 +1292,8 @@ track_dud() {
       if(!isDefined(var_9.already_stuck) && var_3 == 0) {
         var_9.already_stuck = 0;
 
-        if(level.player_hit_convoy < 5 && level.player_hit_convoy % 2 == 0) {
+        if(level.player_hit_convoy < 5 && level.player_hit_convoy % 2 == 0)
           thread player_hit_vo(var_9.vehicletype, level.player_hit_convoy);
-        }
 
         level.player_hit_convoy++;
         level.player notify("player_tagged_truck");
@@ -1354,9 +1317,8 @@ track_dud() {
 }
 
 player_hit_vo(var_0, var_1) {
-  if(!isDefined(level.hit_vo)) {
+  if(!isDefined(level.hit_vo))
     level.hit_vo = 0;
-  }
 
   var_2 = [];
   var_2[var_2.size] = "enemyhq_mrk_thatsahit";
@@ -1367,9 +1329,8 @@ player_hit_vo(var_0, var_1) {
   level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go(var_2[level.hit_vo]);
   level.hit_vo++;
 
-  if(level.hit_vo >= var_2.size) {
+  if(level.hit_vo >= var_2.size)
     level.hit_vo = 0;
-  }
 }
 
 watch_for_remote_turret_activate(var_0) {
@@ -1382,9 +1343,8 @@ watch_for_remote_turret_activate(var_0) {
   for(;;) {
     self waittill("use_remote_turret");
 
-    if(self getstance() == "prone") {
+    if(self getstance() == "prone")
       self setstance("crouch");
-    }
 
     var_3 = var_2.origin + anglesToForward(var_2.angles) * var_0;
     var_4 = var_2.angles;
@@ -1401,18 +1361,16 @@ watch_for_remote_turret_activate(var_0) {
       if(isDefined(level.sniper_wait_extra_black)) {
         var_6 = level.sniper_wait_extra_black;
 
-        if(isDefined(level.ps3) && level.ps3) {
+        if(isDefined(level.ps3) && level.ps3)
           var_6 = var_6 + 0.75;
-        }
       }
 
       self giveweapon("remote_tablet_nopullout");
       level.pre_sniping_weapon = "remote_tablet_nopullout";
       thread maps\enemyhq_remoteturret::remote_turret_deactivate();
 
-      if(var_6) {
+      if(var_6)
         wait(var_6);
-      }
 
       cinematicingame("ehq_tablet_outro");
       wait 0.1;
@@ -1474,9 +1432,8 @@ cargo_choppers() {
   foreach(var_4 in var_2) {
     var_5 = getEntArray(var_4.script_noteworthy, "targetname");
 
-    foreach(var_7 in var_5) {
-      var_7 hide();
-    }
+    foreach(var_7 in var_5)
+    var_7 hide();
 
     var_4.cargo_item_spawners = var_5;
   }
@@ -1485,9 +1442,8 @@ cargo_choppers() {
 
   for(var_11 = 1; var_11 > 0; var_11--) {
     for(var_12 = var_2.size; var_12 > 0; var_12--) {
-      if(var_10 >= var_2.size) {
+      if(var_10 >= var_2.size)
         var_10 = 0;
-      }
 
       thread spawn_cargo_carrier(var_2[var_10]);
       var_10++;
@@ -1517,9 +1473,8 @@ spawn_cargo_carrier(var_0) {
   thread maps\_vehicle::gopath(var_1);
   var_1 waittill("death");
 
-  foreach(var_6 in var_3) {
-    var_6 delete();
-  }
+  foreach(var_6 in var_3)
+  var_6 delete();
 }
 
 air_armada() {
@@ -1530,13 +1485,11 @@ air_armada() {
 }
 
 oneshot_armada(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 20000;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = int(self.script_noteworthy);
-  }
 
   var_2 = anglesToForward(self.angles);
   var_3 = self.origin + var_2 * var_0;
@@ -1546,13 +1499,11 @@ oneshot_armada(var_0, var_1) {
 }
 
 loop_armada(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 30000.0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = int(self.script_noteworthy) * 1.5;
-  }
 
   var_1 = var_1 + (randomfloat(2) - 1);
   self endon("kill_war_ambiance");
@@ -1583,11 +1534,11 @@ ship_vista() {
     var_4.my_extra = 1;
     var_5 = 3;
 
-    if(var_4.origin[1] > -30000) {
+    if(var_4.origin[1] > -30000)
       var_5 = 0;
-    } else if(var_4.origin[1] > -36000) {
+    else if(var_4.origin[1] > -36000)
       var_5 = 1;
-    } else if(var_4.origin[1] > -42000) {
+    else if(var_4.origin[1] > -42000) {
       var_4.my_extra = 1.5;
       var_5 = 2;
     } else
@@ -1617,9 +1568,8 @@ loop_new_ships() {
   var_0 = 30000.0;
   var_1 = 300;
 
-  if(!isDefined(self.my_extra)) {
+  if(!isDefined(self.my_extra))
     self.my_extra = 1;
-  }
 
   self endon("kill_war_ambiance");
   var_2 = anglesToForward(self.angles);
@@ -1674,14 +1624,12 @@ handle_intro_sniper_outline() {
       var_6 = 0;
       var_7 = vectornormalize(var_4.origin - level.player.origin);
 
-      if(vectordot(var_1, var_7) >= var_5) {
+      if(vectordot(var_1, var_7) >= var_5)
         var_6 = 1;
-      }
 
       if(isDefined(var_4.has_target_shader) && var_4.has_target_shader && (!isDefined(var_4.disable_sniper_outline) || !var_4.disable_sniper_outline)) {
-        if(var_6) {
+        if(var_6)
           continue;
-        }
       }
 
       if((!isDefined(var_4.has_target_shader) || var_4.has_target_shader == 0) && isDefined(var_4.disable_sniper_outline) && var_4.disable_sniper_outline) {
@@ -1690,11 +1638,10 @@ handle_intro_sniper_outline() {
       if((!isDefined(var_4.disable_sniper_outline) || !var_4.disable_sniper_outline) && var_6) {
         var_4.has_target_shader = 1;
 
-        if(var_4.team == "axis") {
+        if(var_4.team == "axis")
           var_4 maps\_utility::set_hudoutline("enemy", 1);
-        } else {
+        else
           var_4 maps\_utility::set_hudoutline("friendly", 1);
-        }
 
         var_4.dot_check_time = var_0 + 2000;
         var_4 thread maps\enemyhq_remoteturret::remove_remote_turret_target_on_death();
@@ -1749,15 +1696,13 @@ digital_malarky(var_0, var_1) {
   var_3 = 0.3;
   var_4 = var_2;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_3 = var_0;
-  }
 
   var_5 = 1.25;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_5 = var_1;
-  }
 
   var_6 = 0.05;
   var_7 = var_5 / var_6;
@@ -1776,13 +1721,11 @@ digital_malarky(var_0, var_1) {
 swapout_mk32() {
   self giveweapon(level.player_intro_weapon);
 
-  if(maps\_utility::player_has_weapon("m9a1")) {
+  if(maps\_utility::player_has_weapon("m9a1"))
     self takeweapon("m9a1");
-  }
 
-  if(maps\_utility::player_has_weapon("freerunner")) {
+  if(maps\_utility::player_has_weapon("freerunner"))
     self takeweapon("freerunner");
-  }
 
   self enableweaponswitch();
   self enableweaponpickup();
@@ -1852,9 +1795,8 @@ pick_drone_gundown_anim() {
 }
 
 watch_anim_end(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "gundown";
-  }
 
   self endon("death");
   self endon("goal");
@@ -1864,11 +1806,10 @@ watch_anim_end(var_0) {
     self waittillmatch("drone_anim", "end");
     self.update_drone_anim = 1;
 
-    if(var_0 == "gundown") {
+    if(var_0 == "gundown")
       var_1 = pick_drone_gundown_anim();
-    } else {
+    else
       var_1 = pick_drone_patrol_anim();
-    }
 
     if(!isDefined(self.last_runanim) || isDefined(var_1) && var_1.runanim != self.last_runanim) {
       self.last_runanim = var_1.runanim;
@@ -1876,11 +1817,10 @@ watch_anim_end(var_0) {
       var_3 = var_1.run_speed;
       var_4 = var_1.anim_relative;
 
-      if(!var_4) {
+      if(!var_4)
         thread maps\_drone::drone_move_z(var_3);
-      } else {
+      else
         self notify("drone_move_z");
-      }
 
       maps\_drone::drone_play_looping_anim(var_2, self.moveplaybackrate);
       wait 0.3;
@@ -1934,9 +1874,8 @@ field_activity() {
   common_scripts\utility::flag_wait("FLAG_player_enter_truck");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_2 delete();
-    }
   }
 }
 
@@ -1973,15 +1912,13 @@ setup_soccer_scene() {
   common_scripts\utility::flag_wait("FLAG_player_enter_truck");
 
   foreach(var_8 in var_5) {
-    if(isDefined(var_8)) {
+    if(isDefined(var_8))
       var_8 delete();
-    }
   }
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8)) {
+    if(isDefined(var_8))
       var_8 delete();
-    }
   }
 }
 
@@ -2107,9 +2044,8 @@ wait_for_dpad() {
     var_0 = 1;
     level.player waittill("scripted_sniper_dpad");
 
-    if(level.player isthrowinggrenade() || common_scripts\utility::flag("sniper_block_player_nade")) {
+    if(level.player isthrowinggrenade() || common_scripts\utility::flag("sniper_block_player_nade"))
       var_0 = 0;
-    }
   }
 
   level.presnipe_grenades = level.player getweaponammoclip("fraggrenade");
@@ -2154,17 +2090,15 @@ sniper_grenade_check_dieout(var_0) {
   level.sniper_player_nades--;
   waittillframeend;
 
-  if(!level.sniper_player_nades) {
+  if(!level.sniper_player_nades)
     common_scripts\utility::flag_clear("sniper_block_player_nade");
-  }
 }
 
 setup_sniper_view(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   level.player thread watch_for_remote_turret_activate(var_1);
   var_2 = common_scripts\utility::getstruct("sniper_placement", "targetname");
@@ -2182,13 +2116,13 @@ setup_sniper_view(var_0, var_1) {
 
 intro_objectives() {
   var_0 = maps\_utility::obj("find_ajax");
-  objective_add(var_0, "active", &"ENEMY_HQ_LOCATE_AJAX_USING_THE");
+  objective_add(var_0, "active", & "ENEMY_HQ_LOCATE_AJAX_USING_THE");
   objective_current(var_0);
   common_scripts\utility::flag_wait("bishop_glimpse_over");
   maps\_utility::objective_complete(var_0);
   common_scripts\utility::flag_wait("picked_up_mk32");
   var_1 = maps\_utility::obj("tag_trucks");
-  objective_add(var_1, "active", &"ENEMY_HQ_MARK_THE_CONVOY_WITH");
+  objective_add(var_1, "active", & "ENEMY_HQ_MARK_THE_CONVOY_WITH");
   objective_current(var_1);
   level.player waittill("player_tagged_truck");
   maps\_utility::objective_complete(var_1);

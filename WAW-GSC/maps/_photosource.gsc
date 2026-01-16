@@ -50,15 +50,13 @@ main() {
   level.photosource.alpha = 0;
   level.photosource setshader("case", 640, 480);
   level.psource_editmode = false;
-  if(!isDefined(level.psource_views)) {
+  if(!isDefined(level.psource_views))
     level.psource_views = [];
-  }
-  if(!isDefined(level.psource_selectindex)) {
+  if(!isDefined(level.psource_selectindex))
     level.psource_selectindex = level.psource_views.size;
-  }
   level.psource_viewindex = undefined;
   thread psource_viewmode();
-  while(1) {
+  while (1) {
     psource_enable();
     psource_image_update();
     psource_editmode_update();
@@ -84,20 +82,18 @@ psource_enable() {
 }
 
 psource_waittill_enable() {
-  while(getdvar("psource_enable") != "1") {
+  while (getdvar("psource_enable") != "1")
     wait .1;
-  }
 }
 
 psource_viewmode() {
   wait .1;
-  while(1) {
+  while (1) {
     psource_waittill_enable();
     flag_set("psource_Notviewing");
     flag_clear("psource_refresh");
-    for(i = 0; i < level.psource_views.size; i++) {
+    for (i = 0; i < level.psource_views.size; i++)
       level.psource_views[i] thread psource_viewwait(i);
-    }
     thread psource_hud_preview();
     thread psource_activatebutton();
     thread psource_handleselectindex();
@@ -108,43 +104,39 @@ psource_viewmode() {
 
 psource_activatebutton() {
   level endon("psource_refresh");
-  while(1) {
+  while (1) {
     players = get_players();
-    while(!players[0] usebuttonpressed()) {
+    while (!players[0] usebuttonpressed())
       wait .05;
-    }
     pick = psource_getvisible();
     if(isDefined(pick)) {
       level.psource_selectindex = pick;
       level.psource_views[pick] thread psource_hudshow();
     }
-    while(players[0] usebuttonpressed()) {
+    while (players[0] usebuttonpressed())
       wait .05;
-    }
   }
 }
 
 psource_handleselectindex() {
   level endon("psource_refresh");
   lastselect = level.psource_selectindex;
-  while(1) {
-    if(!isDefined(level.psource_views[lastselect])) {
+  while (1) {
+    if(!isDefined(level.psource_views[lastselect]))
       level.photosourcemod setshader("psourcecreate", level.photosourcemodsize * 2, level.photosourcemodsize);
-    }
     if(lastselect == level.psource_selectindex) {
       wait .05;
       continue;
     }
     lastselect = level.psource_selectindex;
-    if(isDefined(level.psource_views[lastselect])) {
+    if(isDefined(level.psource_views[lastselect]))
       level.psource_views[lastselect] thread psource_hudshow();
-    }
   }
 }
 
 psource_hud_preview() {
   level endon("psource_refresh");
-  while(1) {
+  while (1) {
     pick = psource_getvisible();
     if(!isDefined(pick)) {
       level.photosource fadeovertime(1);
@@ -155,15 +147,13 @@ psource_hud_preview() {
     }
     level.psource_viewindex = pick;
     view = level.psource_views[pick];
-    if(isDefined(view.temp_image)) {
+    if(isDefined(view.temp_image))
       level.photosource setshader(view.temp_image, 200, 150);
-    } else {
+    else
       level.photosource setshader(view.image, 200, 150);
-    }
     level.photosource.alpha = 1;
-    while(isDefined(psource_getvisible()) && psource_getvisible() == pick) {
+    while (isDefined(psource_getvisible()) && psource_getvisible() == pick)
       wait .05;
-    }
     flag_set("psource_refresh");
   }
 }
@@ -172,9 +162,9 @@ psource_getvisible() {
   players = get_players();
   index = undefined;
   dist = 1000000;
-  for(i = 0; i < level.psource_views.size; i++) {
+  for (i = 0; i < level.psource_views.size; i++) {
     if(players[0] islookingorg(level.psource_views[i])) {
-      newdist = distance(players[0] getEye(), level.psource_views[i].origin);
+      newdist = distance(players[0] geteye(), level.psource_views[i].origin);
       if(newdist < dist) {
         dist = newdist;
         index = i;
@@ -191,24 +181,22 @@ psource_viewwait(index) {
   viewradexpandcount = 0;
   viewraddir = 1;
   frametime = .05;
-  while(1) {
+  while (1) {
     if(distance(flat_origin(self.origin), flat_origin(players[0].origin)) < 32) {
       wait .05;
       continue;
     }
-    thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
-    if(level.psource_selectindex == index) {
+    thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglestoforward(self.angles), arrowlength), (0, 1, 1), frametime);
+    if(level.psource_selectindex == index)
       thread plot_circle_star_fortime(level.psource_selectrad, frametime, (1, 1, 0));
-    } else {
+    else
       thread plot_circle_fortime(level.psource_selectrad, frametime, (0, 1, 0));
-    }
     if(isDefined(level.psource_viewindex) && level.psource_viewindex == index) {
       thread debug_message("image: " + self.image, self.origin, frametime);
-      if(viewradexpandcount > viewradexpandmax) {
+      if(viewradexpandcount > viewradexpandmax)
         viewraddir = -1;
-      } else if(viewradexpandcount < 0) {
+      else if(viewradexpandcount < 0)
         viewraddir = 1;
-      }
       viewradexpandcount += viewraddir;
       viewrad = level.psource_selectrad + 3 + viewradexpandcount;
       viewcolor = (0, 1, 1);
@@ -222,9 +210,8 @@ psource_viewwait(index) {
 }
 
 plot_circle_star_fortime(radius, time, color) {
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (0, 1, 0);
-  }
   hangtime = .05;
   circleres = 16;
   hemires = circleres / 2;
@@ -235,25 +222,23 @@ plot_circle_star_fortime(radius, time, color) {
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] getEye());
-    for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+    angletoplayer = vectortoangles(self.origin - players[0] geteye());
+    for (i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
-    for(i = 0; i < plotpoints.size; i++) {
+    for (i = 0; i < plotpoints.size; i++)
       line(plotpoints[i], self.origin, color, 1);
-    }
     plotpoints = [];
     wait hangtime;
   }
 }
 
 plot_circle_fortime(radius, time, color) {
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (0, 1, 0);
-  }
   hangtime = .05;
   circleres = 16;
   hemires = circleres / 2;
@@ -264,11 +249,11 @@ plot_circle_fortime(radius, time, color) {
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] getEye());
-    for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+    angletoplayer = vectortoangles(self.origin - players[0] geteye());
+    for (i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -280,57 +265,49 @@ plot_circle_fortime(radius, time, color) {
 psource_hudshow() {
   flag_clear("psource_Notviewing");
   level.photosourcemod setshader("psourcemodify", level.photosourcemodsize * 2, level.photosourcemodsize);
-  if(isDefined(self.temp_image)) {
+  if(isDefined(self.temp_image))
     level.photosource setshader(self.temp_image, 640, 480);
-  } else {
+  else
     level.photosource setshader(self.image, 640, 480);
-  }
   players = get_players();
   players[0] freezecontrols(true);
-  players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_multiply(anglesToForward(self.angles), 3));
+  players[0] setorigin(self.origin + (players[0].origin - players[0] geteye()) - vector_multiply(anglestoforward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   level.photosource.alpha = 1;
   flag_set("psource_refresh");
-  while(players[0] islookingorg(self) && players[0] usebuttonpressed()) {
+  while (players[0] islookingorg(self) && players[0] usebuttonpressed())
     wait .05;
-  }
   players[0] freezecontrols(false);
   level.photosource.alpha = 0;
   flag_set("psource_Notviewing");
 }
 
 psource_select_next() {
-  if(getdvar("psource_select_next") == "") {
+  if(getdvar("psource_select_next") == "")
     return;
-  }
-  if(!(level.psource_selectindex == level.psource_views.size)) {
+  if(!(level.psource_selectindex == level.psource_views.size))
     level.psource_selectindex++;
-  }
   setdvar("psource_select_next", "");
 }
 
 psource_select_prev() {
-  if(getdvar("psource_select_prev") == "") {
+  if(getdvar("psource_select_prev") == "")
     return;
-  }
-  if(!(level.psource_selectindex == 0)) {
+  if(!(level.psource_selectindex == 0))
     level.psource_selectindex--;
-  }
   setdvar("psource_select_prev", "");
 }
 
 psource_select_new() {
-  if(getdvar("psource_select_new") == "") {
+  if(getdvar("psource_select_new") == "")
     return;
-  }
   level.psource_selectindex = level.psource_views.size;
   setdvar("psource_select_new", "");
 }
 
 psource_setview() {
-  if(getdvar("psource_setview") == "") {
+  if(getdvar("psource_setview") == "")
     return;
-  }
   view = psource_getcurrentview();
   psource_setvieworgang(view);
   setdvar("psource_setview", "");
@@ -338,14 +315,13 @@ psource_setview() {
 
 psource_setvieworgang(view) {
   players = get_players();
-  view.origin = players[0] getEye();
+  view.origin = players[0] geteye();
   view.angles = players[0] getplayerangles();
 }
 
 psource_dump() {
-  if(getdvar("psource_dump") == "") {
+  if(getdvar("psource_dump") == "")
     return;
-  }
   println(" ");
   println(" ");
   println(" ");
@@ -354,9 +330,8 @@ psource_dump() {
   println("--------******--------");
   println(" ");
   println(" ");
-  for(i = 0; i < level.psource_views.size; i++) {
+  for (i = 0; i < level.psource_views.size; i++)
     println("maps\\\_photosource::psource_create(\"" + level.psource_views[i].image + "\"," + level.psource_views[i].origin + "," + level.psource_views[i].angles + ");");
-  }
   println(" ");
   println(" ");
   println(" ");
@@ -364,9 +339,8 @@ psource_dump() {
 }
 
 psource_help() {
-  if(getdvar("psource_help") == "") {
+  if(getdvar("psource_help") == "")
     return;
-  }
   println(" ");
   println(" ");
   println("Photo refrenence - Help ");
@@ -398,42 +372,36 @@ psource_help() {
 }
 
 psource_delete() {
-  if(getdvar("psource_delete") == "") {
+  if(getdvar("psource_delete") == "")
     return;
-  }
   newarray = [];
-  for(i = 0; i < level.psource_views.size; i++) {
+  for (i = 0; i < level.psource_views.size; i++)
     if(i != level.psource_selectindex)
-  }
-  newarray[newarray.size] = level.psource_views[i];
+      newarray[newarray.size] = level.psource_views[i];
   level.psource_views = newarray;
   flag_set("psource_refresh");
   setdvar("psource_delete", "");
 }
 
 psource_select_template() {
-  if(getdvar("psource_select_template") == "") {
+  if(getdvar("psource_select_template") == "")
     return;
-  }
   setdvar("psource_select_template", "");
 }
 
 psource_editmode_update() {
-  if(getdvar("psource_editmode") == "") {
+  if(getdvar("psource_editmode") == "")
     return;
-  }
-  if(!level.psource_editmode) {
+  if(!level.psource_editmode)
     level.psource_editmode = true;
-  } else {
+  else
     level.psource_editmode = false;
-  }
   setdvar("psource_editmode", "");
 }
 
 psource_image_update() {
-  if(getdvar("psource_image") == "") {
+  if(getdvar("psource_image") == "")
     return;
-  }
   view = psource_getcurrentview();
   view.image = getdvar("psource_image");
   view.temp_image = "case";
@@ -442,47 +410,39 @@ psource_image_update() {
 
 psource_getcurrentview() {
   view = undefined;
-  if(isDefined(level.psource_views[level.psource_selectindex])) {
+  if(isDefined(level.psource_views[level.psource_selectindex]))
     view = level.psource_views[level.psource_selectindex];
-  } else {
+  else
     view = psource_newview(false);
-  }
   return view;
 }
 
 psource_newview(bScriptAdded) {
-  if(!bScriptAdded) {
+  if(!bScriptAdded)
     level.photosourcemod setshader("psourcemodify", level.photosourcemodsize * 2, level.photosourcemodsize);
-  }
-  view = spawnStruct();
+  view = spawnstruct();
   view.image = "case";
   if(!bScriptAdded) {
     view.temp_image = "case";
     psource_setvieworgang(view);
   }
-  if(isDefined(level.psource_views[level.psource_selectindex])) {
+  if(isDefined(level.psource_views[level.psource_selectindex]))
     level.psource_views[level.psource_selectindex] delete();
-  }
   level.psource_views[level.psource_selectindex] = view;
-  if(!bScriptAdded) {
+  if(!bScriptAdded)
     flag_set("psource_refresh");
-  }
   return view;
 }
 
 psource_create(image, position, angle) {
-  if(!isDefined(level.flag)) {
+  if(!isDefined(level.flag))
     level.flag = [];
-  }
-  if(!isDefined(level.flag["psource_Notviewing"])) {
+  if(!isDefined(level.flag["psource_Notviewing"]))
     init();
-  }
-  if(!isDefined(level.psource_selectindex)) {
+  if(!isDefined(level.psource_selectindex))
     level.psource_selectindex = 0;
-  }
-  if(!isDefined(level.psource_views)) {
+  if(!isDefined(level.psource_views))
     level.psource_views = [];
-  }
   view = psource_newview(true);
   view.origin = position;
   view.angles = angle;
@@ -495,11 +455,10 @@ islookingorg(view) {
   normalvec = vectorNormalize(view.origin - self getShootAtPos());
   veccomp = vectorNormalize((view.origin - (0, 0, level.psource_selectrad * 2)) - self getShootAtPos());
   insidedot = vectordot(normalvec, veccomp);
-  anglevec = anglesToForward(self getplayerangles());
+  anglevec = anglestoforward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
-  if(vectordot > insidedot) {
+  if(vectordot > insidedot)
     return true;
-  } else {
+  else
     return false;
-  }
 }

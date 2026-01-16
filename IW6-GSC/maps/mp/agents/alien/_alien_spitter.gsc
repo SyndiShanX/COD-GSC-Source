@@ -56,17 +56,15 @@ is_escape_sequence_active() {
 }
 
 get_max_spit_distance_squared() {
-  if(is_escape_sequence_active()) {
+  if(is_escape_sequence_active())
     return ALIEN_ESCAPE_SPIT_ATTACK_DISTANCE_MAX_SQ;
-  }
 
   return ALIEN_SPIT_ATTACK_DISTANCE_MAX_SQ;
 }
 
 get_lookahead_percentage() {
-  if(is_escape_sequence_active()) {
+  if(is_escape_sequence_active())
     return SPITTER_ESCAPE_LOOK_AHEAD_PERCENTAGE;
-  }
 
   return SPITTER_LOOK_AHEAD_PERCENTAGE;
 }
@@ -87,11 +85,10 @@ spit_attack(enemy) {
   self endon("melee_pain_interrupt");
   isEnemyChopper = isDefined(enemy) && isDefined(enemy.code_classname) && enemy.code_classname == "script_vehicle";
 
-  if(isEnemyChopper) {
+  if(isEnemyChopper)
     targetedEnemy = enemy;
-  } else {
+  else
     targetedEnemy = self.spit_target;
-  }
 
   targetedEnemy endon("death");
   self maps\mp\agents\alien\_alien_anim_utils::turnTowardsEntity(targetedEnemy);
@@ -126,11 +123,10 @@ spit_attack(enemy) {
       self ScrAgentSetOrientMode("face enemy");
     } else {
       forward = VectorNormalize(targetedEnemy.origin - self.origin);
-      if(isDefined(self.current_spit_node)) {
+      if(isDefined(self.current_spit_node))
         up = AnglesToUp(self.current_spit_node.angles);
-      } else {
+      else
         up = AnglesToUp(self.angles);
-      }
       left = VectorCross(up, forward);
       forward = VectorCross(left, up);
       right = (0, 0, 0) - left;
@@ -138,11 +134,10 @@ spit_attack(enemy) {
       self ScrAgentSetOrientMode("face angle abs", anglesToFace);
     }
 
-    if(self.oriented) {
+    if(self.oriented)
       self ScrAgentSetAnimMode("anim angle delta");
-    } else {
+    else
       self ScrAgentSetAnimMode("anim deltas");
-    }
     play_spit_anim();
   }
 
@@ -163,9 +158,8 @@ play_spit_anim() {
       break;
     case "long_range":
       barrage_count = RandomIntRange(SPITTER_PROJECTILE_BARRAGE_SIZE_MIN, SPITTER_PROJECTILE_BARRAGE_SIZE_MAX);
-      for(spitIndex = 0; spitIndex < barrage_count; spitIndex++) {
+      for(spitIndex = 0; spitIndex < barrage_count; spitIndex++)
         self maps\mp\agents\_scriptedagents::PlayAnimUntilNotetrack("long_range_spit_attack", "spit_attack", "end", ::handleAttackNotetracks);
-      }
       break;
     default:
       AssertMsg(self.spit_type + " is an invalid spit type!");
@@ -178,17 +172,15 @@ get_best_spit_target(targeted_enemy) {
     griefTargets = get_grief_targets();
 
     foreach(griefTarget in griefTargets) {
-      if(is_valid_spit_target(griefTarget, false)) {
+      if(is_valid_spit_target(griefTarget, false))
         return griefTarget;
-      }
     }
     wait 0.05;
   }
 
   if(isDefined(targeted_enemy)) {
-    if(IsAlive(targeted_enemy) && is_valid_spit_target(targeted_enemy, false)) {
+    if(IsAlive(targeted_enemy) && is_valid_spit_target(targeted_enemy, false))
       return targeted_enemy;
-    }
   }
 
   possibleTargets = self get_current_possible_targets();
@@ -202,9 +194,8 @@ get_best_spit_target(targeted_enemy) {
     if(isDefined(targeted_enemy) && possibleTarget == targeted_enemy) {
       continue;
     }
-    if(is_valid_spit_target(possibleTarget, true)) {
+    if(is_valid_spit_target(possibleTarget, true))
       return possibleTarget;
-    }
 
     currentTestsThisFrame++;
     if(currentTestsThisFrame >= MAX_TARGET_TESTS_PER_FRAME) {
@@ -218,22 +209,19 @@ get_best_spit_target(targeted_enemy) {
 
 get_grief_targets() {
   griefTargets = [];
-  if(!can_spit_gas_cloud() || is_pet()) {
+  if(!can_spit_gas_cloud() || is_pet())
     return griefTargets;
-  }
 
   foreach(player in level.players) {
     if(!IsAlive(player)) {
       continue;
     }
-    if(isDefined(player.inLastStand) && player.inLastStand) {
+    if(isDefined(player.inLastStand) && player.inLastStand)
       griefTargets[griefTargets.size] = player;
-    }
   }
 
-  if(isDefined(level.drill) && isDefined(level.drill.state) && level.drill.state == "offline") {
+  if(isDefined(level.drill) && isDefined(level.drill.state) && level.drill.state == "offline")
     griefTargets[griefTargets.size] = level.drill;
-  }
 
   return array_randomize(griefTargets);
 }
@@ -250,9 +238,8 @@ is_valid_spit_target(spit_target, check_attacker_values) {
   maxValidDistanceSq = get_max_spit_distance_squared();
 
   flatDistanceToTargetSquared = Distance2DSquared(self.origin, spit_target.origin);
-  if(flatDistanceToTargetSquared > maxValidDistanceSq) {
+  if(flatDistanceToTargetSquared > maxValidDistanceSq)
     return false;
-  }
 
   self.looktarget = spit_target;
 
@@ -260,11 +247,10 @@ is_valid_spit_target(spit_target, check_attacker_values) {
     return false;
   }
 
-  if((isPlayer(spit_target) || IsSentient(spit_target)) && !isDefined(spit_target.usingRemote)) {
+  if((isPlayer(spit_target) || IsSentient(spit_target)) && !isDefined(spit_target.usingRemote))
     endPos = spit_target getEye();
-  } else {
+  else
     endPos = spit_target.origin;
-  }
 
   spitFirePos = self GetTagOrigin("TAG_BREATH");
   return BulletTracePassed(spitFirePos, endPos, false, self);
@@ -288,9 +274,8 @@ handleAttackNotetracks(note, animState, animIndex, animTime) {
     return;
   }
 
-  if(note == "spit") {
+  if(note == "spit")
     return self fire_spit_projectile();
-  }
 }
 
 fire_spit_projectile() {
@@ -299,37 +284,33 @@ fire_spit_projectile() {
   }
   hasValidTarget = IsAlive(self.spit_target);
   isTargetChopper = isDefined(self.spit_target.code_classname) && self.spit_target.code_classname == "script_vehicle";
-  if(hasValidTarget && !isTargetChopper) {
+  if(hasValidTarget && !isTargetChopper)
     targetLocation = self.spit_target.origin;
-  } else {
+  else
     targetLocation = self.spit_target_location;
-  }
 
   if(self.spit_type == "gas_cloud") {
     spit_gas_cloud_projectile(targetLocation);
   } else if(hasValidTarget) {
     PROJECTILE_SPEED = 1400;
     targetLocation = get_lookahead_target_location(PROJECTILE_SPEED, self.spit_target, false);
-    if(!BulletTracePassed(targetLocation, get_spit_fire_pos(targetLocation), false, self)) {
+    if(!BulletTracePassed(targetLocation, get_spit_fire_pos(targetLocation), false, self))
       targetLocation = get_lookahead_target_location(PROJECTILE_SPEED, self.spit_target, true);
-    }
 
     spit_basic_projectile(targetLocation);
   }
 }
 
 get_lookahead_target_location(projectile_speed, target, use_eye_location) {
-  if(!IsPlayer(target)) {
+  if(!IsPlayer(target))
     return target.origin;
-  }
 
   lookAheadPercentage = get_lookahead_percentage();
 
-  if(use_eye_location && !isDefined(target.usingRemote)) {
+  if(use_eye_location && !isDefined(target.usingRemote))
     targetLocation = target getEye();
-  } else {
+  else
     targetLocation = target.origin;
-  }
 
   distanceToTarget = Distance(self.origin, targetLocation);
   timeToImpact = distanceToTarget / projectile_speed;
@@ -339,13 +320,11 @@ get_lookahead_target_location(projectile_speed, target, use_eye_location) {
 }
 
 can_spit_gas_cloud() {
-  if(!self.gas_cloud_available) {
+  if(!self.gas_cloud_available)
     return false;
-  }
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.no_gas_cloud_attack) && self.enemy.no_gas_cloud_attack) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.no_gas_cloud_attack) && self.enemy.no_gas_cloud_attack)
     return false;
-  }
 
   time_since_last_spit = (gettime() - level.spitter_last_cloud_time) * 0.001;
 
@@ -357,9 +336,8 @@ spit_basic_projectile(targetLocation) {
   spitProjectile = MagicBullet("alienspit_mp", spitFirePos, targetLocation, self);
   spitProjectile.owner = self;
 
-  if(isDefined(spitProjectile)) {
+  if(isDefined(spitProjectile))
     spitProjectile thread spit_basic_projectile_impact_monitor(self);
-  }
 }
 
 spit_basic_projectile_impact_monitor(owner) {
@@ -376,9 +354,8 @@ spit_gas_cloud_projectile(targetLocation) {
   spitProjectile = MagicBullet("alienspit_gas_mp", spitFirePos, targetLocation, self);
   spitProjectile.owner = self;
 
-  if(isDefined(spitProjectile)) {
+  if(isDefined(spitProjectile))
     spitProjectile thread spit_gas_cloud_projectile_impact_monitor(self);
-  }
 
   self thread gas_cloud_available_timer();
 }
@@ -455,14 +432,13 @@ damage_player(player, trigger) {
 }
 
 disorient_player(player) {
-  if(is_chaos_mode() && player maps\mp\alien\_perk_utility::perk_GetGasDamageScalar() == 0) {
+  if(is_chaos_mode() && player maps\mp\alien\_perk_utility::perk_GetGasDamageScalar() == 0)
     return;
-  } else if(!player maps\mp\alien\_perk_utility::has_perk("perk_medic", [1, 2, 3, 4])) {
-    if(isDefined(level.shell_shock_override)) {
+  else if(!player maps\mp\alien\_perk_utility::has_perk("perk_medic", [1, 2, 3, 4])) {
+    if(isDefined(level.shell_shock_override))
       player[[level.shell_shock_override]](0.5);
-    } else {
+    else
       player ShellShock("alien_spitter_gas_cloud", 0.5);
-    }
   }
 }
 
@@ -470,9 +446,8 @@ get_RL_toward(target) {
   self_to_target_angles = VectorToAngles(target.origin - self.origin);
   target_direction = anglesToRight(self_to_target_angles);
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     target_direction *= -1;
-  }
 
   return target_direction;
 }
@@ -552,11 +527,10 @@ enemy_proximity_during_move_monitor() {
 }
 
 get_possible_spitter_attack_nodes(target_entity) {
-  if(get_alien_type() == "seeder") {
+  if(get_alien_type() == "seeder")
     attackNodes = GetNodesInRadius(target_entity.origin, 768, 128, 512, "jump attack");
-  } else {
+  else
     attackNodes = GetNodesInRadius(target_entity.origin, 1000, 300, 512, "jump attack");
-  }
 
   validNodes = [];
 
@@ -575,11 +549,10 @@ is_pet() {
 }
 
 get_current_possible_targets() {
-  if(is_pet()) {
+  if(is_pet())
     return level.agentArray;
-  } else {
+  else
     return level.players;
-  }
 }
 
 find_spitter_attack_node(target_enemy) {
@@ -587,14 +560,12 @@ find_spitter_attack_node(target_enemy) {
 
   if(is_escape_sequence_active() && isDefined(level.escape_spitter_target_node)) {
     nearbySpitNodes = get_possible_spitter_attack_nodes(level.escape_spitter_target_node);
-    if(nearbySpitNodes.size > 0) {
+    if(nearbySpitNodes.size > 0)
       target_enemy = level.escape_spitter_target_node;
-    }
   }
 
-  if(nearbySpitNodes.size == 0 && isDefined(target_enemy)) {
+  if(nearbySpitNodes.size == 0 && isDefined(target_enemy))
     nearbySpitNodes = get_possible_spitter_attack_nodes(target_enemy);
-  }
 
   if(nearbySpitNodes.size == 0) {
     possibleTargets = self get_current_possible_targets();
@@ -615,13 +586,11 @@ find_spitter_attack_node(target_enemy) {
     }
   }
 
-  if(nearbySpitNodes.size == 0) {
+  if(nearbySpitNodes.size == 0)
     nearbySpitNodes = get_possible_spitter_attack_nodes(self);
-  }
 
-  if(nearbySpitNodes.size == 0) {
+  if(nearbySpitNodes.size == 0)
     return undefined;
-  }
 
   filters = [];
 
@@ -661,15 +630,13 @@ find_spitter_attack_node(target_enemy) {
 get_central_enemies_direction() {
   possibleTargets = self get_current_possible_targets();
 
-  if(possibleTargets.size == 0) {
+  if(possibleTargets.size == 0)
     return self.origin + anglesToForward(self.angles) * 100;
-  }
 
   centralLocation = (0, 0, 0);
 
-  foreach(possibleTarget in possibleTargets) {
-    centralLocation += possibleTarget.origin;
-  }
+  foreach(possibleTarget in possibleTargets)
+  centralLocation += possibleTarget.origin;
 
   centralLocation = centralLocation / possibleTargets.size;
 
@@ -688,9 +655,8 @@ spitter_attack(enemy) {
 
   set_up_attack_node_watchers();
 
-  if(!is_escape_sequence_active()) {
+  if(!is_escape_sequence_active())
     wait RandomFloatRange(SPITTER_FIRE_INTERVAL_MIN, SPITTER_FIRE_INTERVAL_MAX) * SPITTER_NODE_INITIAL_FIRE_DELAY_SCALE;
-  }
 
   while(true) {
     targetedEnemy = undefined;
@@ -716,20 +682,18 @@ spitter_attack(enemy) {
 }
 
 choose_spit_type(default_type) {
-  if(!is_pet() && can_spit_gas_cloud()) {
+  if(!is_pet() && can_spit_gas_cloud())
     self.spit_type = "gas_cloud";
-  } else {
+  else
     self.spit_type = default_type;
-  }
 }
 
 set_up_attack_node_watchers() {
   self thread spitter_node_duration_monitor(SPITTER_NODE_DURATION);
   self thread spitter_node_attacked_monitor(SPITTER_NODE_DAMAGE_DELAY);
 
-  if(!is_pet()) {
+  if(!is_pet())
     self thread spitter_node_player_proximity(SPITTER_MIN_PLAYER_DISTANCE_SQ);
-  }
 }
 
 spitter_node_duration_monitor(duration) {
@@ -776,9 +740,8 @@ find_player_within_distance(distance_sq) {
       continue;
     }
     flatDistanceToPlayerSq = Distance2DSquared(self.origin, player.origin);
-    if(flatDistanceToPlayerSq < distance_sq) {
+    if(flatDistanceToPlayerSq < distance_sq)
       return player;
-    }
   }
 
   return undefined;

@@ -115,9 +115,8 @@ zombie_blood_hint_watch() {
     if(n_curr_step != level.n_ee_step) {
       n_curr_step = level.n_ee_step;
 
-      for(i = 0; i < a_player_hint.size; i++) {
+      for(i = 0; i < a_player_hint.size; i++)
         a_player_hint[i] = 0;
-      }
     }
 
     if(!a_player_hint[e_player.characterindex]) {
@@ -126,9 +125,8 @@ zombie_blood_hint_watch() {
       if(isDefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
         continue;
       }
-      while(isDefined(level.sam_talking) && level.sam_talking) {
+      while(isDefined(level.sam_talking) && level.sam_talking)
         wait 0.05;
-      }
 
       if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         a_player_hint[e_player.characterindex] = 1;
@@ -147,9 +145,8 @@ zombie_blood_hint_watch() {
       if(isDefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
         continue;
       }
-      while(isDefined(level.sam_talking) && level.sam_talking) {
+      while(isDefined(level.sam_talking) && level.sam_talking)
         wait 0.05;
-      }
 
       if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         str_vox = get_zombie_blood_hint_generic_vox();
@@ -190,17 +187,15 @@ get_step_announce_vox() {
 }
 
 get_zombie_blood_hint_vox() {
-  if(flag("all_zones_captured")) {
+  if(flag("all_zones_captured"))
     return "vox_sam_upgrade_staff_clue_" + level.n_ee_step + "_0";
-  }
 
   return "vox_sam_upgrade_staff_clue_" + level.n_ee_step + "_grbld_0";
 }
 
 get_zombie_blood_hint_generic_vox() {
-  if(!isDefined(level.generic_clue_index)) {
+  if(!isDefined(level.generic_clue_index))
     level.generic_clue_index = 0;
-  }
 
   vo_array[0] = "vox_sam_heard_by_all_1_0";
   vo_array[1] = "vox_sam_heard_by_all_2_0";
@@ -209,9 +204,8 @@ get_zombie_blood_hint_generic_vox() {
   vo_array[4] = "vox_sam_slow_progress_2";
   vo_array[5] = "vox_sam_slow_progress_3";
 
-  if(level.generic_clue_index >= vo_array.size) {
+  if(level.generic_clue_index >= vo_array.size)
     return undefined;
-  }
 
   str_vo = vo_array[level.generic_clue_index];
   level.generic_clue_index++;
@@ -236,25 +230,22 @@ complete_sidequest() {
 }
 
 remove_portal_beam() {
-  if(isDefined(level.ee_ending_beam_fx)) {
+  if(isDefined(level.ee_ending_beam_fx))
     level.ee_ending_beam_fx delete();
-  }
 }
 
 generic_stage_start() {
   str_vox = get_step_announce_vox();
 
-  if(isDefined(str_vox)) {
+  if(isDefined(str_vox))
     level thread ee_samantha_say(str_vox);
-  }
 }
 
 generic_stage_end() {
   level.n_ee_step++;
 
-  if(level.n_ee_step <= 6) {
+  if(level.n_ee_step <= 6)
     flag_wait("all_zones_captured");
-  }
 
   wait_network_frame();
   wait_network_frame();
@@ -264,16 +255,14 @@ all_staffs_inserted_in_puzzle_room() {
   n_staffs_inserted = 0;
 
   foreach(staff in level.a_elemental_staffs) {
-    if(staff.upgrade.charger.is_inserted) {
+    if(staff.upgrade.charger.is_inserted)
       n_staffs_inserted++;
-    }
   }
 
-  if(n_staffs_inserted == 4) {
+  if(n_staffs_inserted == 4)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 ee_samantha_say(str_vox) {
@@ -302,7 +291,7 @@ player_intermission_ee() {
   points = getstructarray("ee_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+    points = getentarray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -325,14 +314,13 @@ player_intermission_ee() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
 
-      if(!isDefined(org)) {
+      if(!isDefined(org))
         self spawn(point.origin, point.angles);
-      }
 
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setModel("tag_origin");
+          org setmodel("tag_origin");
         }
 
         org.origin = points[i].origin;
@@ -347,18 +335,16 @@ player_intermission_ee() {
 
         speed = 20;
 
-        if(isDefined(points[i].speed)) {
+        if(isDefined(points[i].speed))
           speed = points[i].speed;
-        }
 
         target_point = getstruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
 
-        if(q_time > 1) {
+        if(q_time > 1)
           q_time = 1;
-        }
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
@@ -388,9 +374,8 @@ setup_ee_main_devgui() {
       if(distance2d(player.origin, (2904, 5040, -336)) < 100 && player usebuttonpressed()) {
         wait 2;
 
-        if(player usebuttonpressed()) {
+        if(player usebuttonpressed())
           b_activated = 1;
-        }
       }
     }
 
@@ -430,9 +415,8 @@ watch_devgui_ee_main() {
           flag_set("ee_mech_zombie_hole_opened");
           m_floor = getent("easter_mechzombie_spawn", "targetname");
 
-          if(isDefined(m_floor)) {
+          if(isDefined(m_floor))
             m_floor delete();
-          }
 
           level waittill("little_girl_lost_step_3_over");
           break;

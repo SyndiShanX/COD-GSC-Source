@@ -36,18 +36,16 @@ bot_blitz_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done)) {
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait(0.05);
-  }
 
   self BotSetFlag("separation", 0);
 
   while(true) {
     wait(0.05);
 
-    if(!isDefined(self.role)) {
+    if(!isDefined(self.role))
       self initialize_blitz_role();
-    }
 
     if(bot_has_tactical_goal()) {
       continue;
@@ -55,13 +53,11 @@ bot_blitz_think() {
     if(self.role == "attacker") {
       target_portal = level.portalList[get_enemy_team(self.team)];
       if(target_portal.open) {
-        if(self bot_is_defending()) {
+        if(self bot_is_defending())
           self bot_defend_stop();
-        }
 
-        if(!self BotHasScriptGoal()) {
+        if(!self BotHasScriptGoal())
           self BotSetScriptGoal(target_portal.origin, 0, "objective");
-        }
       } else {
         if(!bot_is_defending()) {
           self BotClearScriptGoal();
@@ -98,11 +94,10 @@ initialize_blitz_role() {
         }
       }
 
-      if(kicked_out_bot) {
+      if(kicked_out_bot)
         self blitz_set_role("attacker");
-      } else {
+      else
         self blitz_set_role("defender");
-      }
     } else {
       self blitz_set_role("attacker");
     }
@@ -117,11 +112,10 @@ initialize_blitz_role() {
         }
       }
 
-      if(kicked_out_bot) {
+      if(kicked_out_bot)
         self blitz_set_role("defender");
-      } else {
+      else
         self blitz_set_role("attacker");
-      }
     } else {
       self blitz_set_role("defender");
     }
@@ -159,9 +153,8 @@ bot_blitz_ai_director_update() {
           }
         }
 
-        if(!removed_attacker && ai_attackers.size > 0) {
+        if(!removed_attacker && ai_attackers.size > 0)
           Random(ai_attackers) blitz_set_role("defender");
-        }
       }
 
       if(defenders.size > defender_limit) {
@@ -179,9 +172,8 @@ bot_blitz_ai_director_update() {
           }
         }
 
-        if(!removed_defender && ai_defenders.size > 0) {
+        if(!removed_defender && ai_defenders.size > 0)
           Random(ai_defenders) blitz_set_role("attacker");
-        }
       }
     }
 
@@ -202,9 +194,8 @@ blitz_bot_defender_limit_for_team(team) {
 blitz_get_num_players_on_team(team) {
   num_on_team = 0;
   foreach(player in level.participants) {
-    if(IsTeamParticipant(player) && isDefined(player.team) && player.team == team) {
+    if(IsTeamParticipant(player) && isDefined(player.team) && player.team == team)
       num_on_team++;
-    }
   }
 
   return num_on_team;
@@ -215,9 +206,8 @@ get_allied_attackers_for_team(team) {
 
   foreach(player in level.players) {
     if(!IsAI(player) && isDefined(player.team) && player.team == team) {
-      if(DistanceSquared(level.portalList[team].origin, player.origin) > level.protect_radius * level.protect_radius) {
+      if(DistanceSquared(level.portalList[team].origin, player.origin) > level.protect_radius * level.protect_radius)
         attackers = array_add(attackers, player);
-      }
     }
   }
 
@@ -229,9 +219,8 @@ get_allied_defenders_for_team(team) {
 
   foreach(player in level.players) {
     if(!IsAI(player) && isDefined(player.team) && player.team == team) {
-      if(DistanceSquared(level.portalList[team].origin, player.origin) <= level.protect_radius * level.protect_radius) {
+      if(DistanceSquared(level.portalList[team].origin, player.origin) <= level.protect_radius * level.protect_radius)
         defenders = array_add(defenders, player);
-      }
     }
   }
 
@@ -250,9 +239,8 @@ get_players_by_role(role, team) {
     if(!isDefined(player.team)) {
       continue;
     }
-    if(IsAlive(player) && IsTeamParticipant(player) && player.team == team && isDefined(player.role) && player.role == role) {
+    if(IsAlive(player) && IsTeamParticipant(player) && player.team == team && isDefined(player.role) && player.role == role)
       players[players.size] = player;
-    }
   }
 
   return players;

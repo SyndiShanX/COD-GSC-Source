@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_perk_paranoia;
 
 autoexec __init__system__() {
@@ -18,7 +19,7 @@ __init__() {
 
 function_930e5d42(localclientnum) {
   if(self function_da43934d()) {
-    var_369be743 = self hasperk(localclientnum, # "specialty_paranoia");
+    var_369be743 = self hasperk(localclientnum, #"specialty_paranoia");
     var_7c49d38b = self.var_369be743 !== var_369be743;
 
     if(var_7c49d38b) {
@@ -39,11 +40,11 @@ private function_dbd63244() {
   stance = self getstance();
 
   switch (stance) {
-    case # "prone":
+    case #"prone":
       return (self.origin + (0, 0, 11));
-    case # "crouch":
+    case #"crouch":
       return (self.origin + (0, 0, 40));
-    case # "stand":
+    case #"stand":
       return (self.origin + (0, 0, 60));
     default:
       return (self.origin + (0, 0, 60));
@@ -56,11 +57,11 @@ private function_c9d3a835() {
 
 private function_3e9077b(localclientnum) {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "shutdown", # "death");
+  self endon(#"disconnect", #"shutdown", #"death");
   self notify("1cd9d4f64a9f9459");
   self endon("1cd9d4f64a9f9459");
 
-  if(!self hasperk(localclientnum, # "specialty_paranoia")) {
+  if(!self hasperk(localclientnum, #"specialty_paranoia")) {
     return;
   }
 
@@ -143,14 +144,14 @@ private function_3e9077b(localclientnum) {
         trace_end = test_point + vectorscale(player_forward, trace_dist * -1);
         trace = bulletTrace(test_point, trace_end, 1, self);
 
-        if(trace[# "fraction"] < 1 && trace[# "entity"] === player) {
+        if(trace[#"fraction"] < 1 && trace[#"entity"] === player) {
           los = 1;
           break;
         }
       }
 
       if(los) {
-        var_7cefa3dc = # "hash_56f62705c6a2bcb6";
+        var_7cefa3dc = #"hash_56f62705c6a2bcb6";
         break;
       }
 

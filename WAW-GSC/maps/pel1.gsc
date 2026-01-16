@@ -62,13 +62,13 @@ main() {
   maps\_drones::init();
   maps\_bayonet::init();
   maps\_mganim::main();
-  add_start("beach", ::start_beach, &"STARTS_PEL1_BEACH");
-  add_start("off_lvt", ::start_off_lvt, &"STARTS_PEL1_OFF_LVT");
-  add_start("1st_fight", ::start_first_fight, &"STARTS_FIGHT1");
-  add_start("2nd_fight_l", ::start_second_fight_left, &"STARTS_FIGHT2");
-  add_start("3rd_fight", ::start_third_fight, &"STARTS_FIGHT3");
-  add_start("mortars", ::start_mortars, &"STARTS_MORTARS");
-  add_start("ending", ::start_ending, &"STARTS_ENDING");
+  add_start("beach", ::start_beach, & "STARTS_PEL1_BEACH");
+  add_start("off_lvt", ::start_off_lvt, & "STARTS_PEL1_OFF_LVT");
+  add_start("1st_fight", ::start_first_fight, & "STARTS_FIGHT1");
+  add_start("2nd_fight_l", ::start_second_fight_left, & "STARTS_FIGHT2");
+  add_start("3rd_fight", ::start_third_fight, & "STARTS_FIGHT3");
+  add_start("mortars", ::start_mortars, & "STARTS_MORTARS");
+  add_start("ending", ::start_ending, & "STARTS_ENDING");
   default_start(::event1_setup);
   maps\_load::main();
   maps\_loadout::set_player_interactive_hands("viewmodel_usa_player");
@@ -107,7 +107,7 @@ main() {
   level.rocket_barrage_targets[0] = getent("big_bunker_damage_area", "targetname");
   level.rocket_barrage_targets[1] = getent("small_bunker_damage_area", "targetname");
   level.rocket_barrage_targets[2] = getent("crush_ambient_mg", "targetname");
-  for(i = 0; i < level.heroes.size; i++) {}
+  for (i = 0; i < level.heroes.size; i++) {}
   array_thread(level.heroes, ::magic_bullet_shield);
   flag_set("heroes_setup");
   thread threat_group_setter();
@@ -120,11 +120,11 @@ main() {
   level.stop_ambients = false;
   level.sarge pushPlayer(true);
   if(NumRemoteClients()) {
-    things_to_damage = getEntArray("script_model", "classname");
+    things_to_damage = getentarray("script_model", "classname");
     things = 0;
     before = 0;
     after = 0;
-    for(i = 0; i < things_to_damage.size; i++) {
+    for (i = 0; i < things_to_damage.size; i++) {
       if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" ||
           things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
         before++;
@@ -173,11 +173,11 @@ flag_inits() {
 }
 
 water_watcher() {
-  while(1) {
+  while (1) {
     watersim = false;
     wait 1;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i].origin[1] < -8700) {
         watersim = true;
       }
@@ -188,7 +188,7 @@ water_watcher() {
 
 lvt_deleter() {
   lvt_remover = getent("lvt_remover", "targetname");
-  while(1) {
+  while (1) {
     lvt_remover waittill("trigger", who);
     if(who.model == "vehicle_usa_tracked_lvt4") {
       who delete();
@@ -205,7 +205,7 @@ catch_first_player() {
   level.otherPlayersSpectateClient = undefined;
   players = get_players();
   maps\_callbackglobal::Player_BreadCrumb_Reset(players[0].origin);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(i != 0) {}
   }
 }
@@ -263,8 +263,8 @@ event1_setup() {
 event1_remove_spawners_for_coop() {
   players = get_players();
   if(NumRemoteClients() > 0) {
-    spawners = getEntArray("remove_on_coop", "script_noteworthy");
-    for(i = 0; i < spawners.size; i++) {
+    spawners = getentarray("remove_on_coop", "script_noteworthy");
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] delete();
     }
   }
@@ -295,15 +295,15 @@ event1_plop_water() {
 event1_plane_bomb_dropper() {
   level.players_lvt waittill("start_vehiclepath");
   wait 0.05;
-  planes = getEntArray("intro_plane1", "targetname");
-  planes = array_combine(planes, getEntArray("intro_plane2", "targetname"));
-  for(i = 0; i < planes.size; i++) {
+  planes = getentarray("intro_plane1", "targetname");
+  planes = array_combine(planes, getentarray("intro_plane2", "targetname"));
+  for (i = 0; i < planes.size; i++) {
     planes[i] thread event1_plane_bomb_dropper_think();
   }
 }
 
 event1_plane_bomb_dropper_think() {
-  while(self.origin[1] < -16000) {
+  while (self.origin[1] < -16000) {
     wait 0.05;
   }
   wait randomfloatrange(0.05, 0.1);
@@ -345,7 +345,7 @@ lookat_notify(trig_name) {
 
 event1_rocket_hints_thread() {
   self endon("player pulledout rockets");
-  while(1) {
+  while (1) {
     self thread rocket_strike_user_notify();
     wait 20;
   }
@@ -357,7 +357,7 @@ event1_rocket_hints() {
   level thread event1_rocket_hints_finish();
   level thread event1_post_rockets_moveup_ai();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread event1_kill_player_on_too_far_up();
     players[i] thread event1_warn_player_on_too_far_up();
   }
@@ -369,7 +369,7 @@ event1_rocket_hints() {
   set_breadcrumbs(starts);
   level.rocket_barrage_allowed = true;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread event1_rocket_hints_thread();
   }
 }
@@ -377,9 +377,9 @@ event1_rocket_hints() {
 event1_check_for_weapons() {
   level endon("player pulledout rockets");
   wait 1;
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] getcurrentweapon() == "rocket_barrage") {
         if(isDefined(players[i].hintElem)) {
           players[i].hintElem thread fade_then_kill_hud();
@@ -387,7 +387,7 @@ event1_check_for_weapons() {
         if(isDefined(players[i].hintElem2)) {
           players[i].hintElem2 thread fade_then_kill_hud();
         }
-        for(j = 0; j < players.size; j++) {
+        for (j = 0; j < players.size; j++) {
           players[j] notify("player pulledout rockets");
         }
       }
@@ -415,7 +415,7 @@ event1_sullivan_instruct_rockets() {
   num = 1;
   num_strings = 6;
   did_once = false;
-  while(1) {
+  while (1) {
     level.sullivan anim_single_solo(level.sullivan, string + num);
     num++;
     if(num == 3 && !did_once) {
@@ -435,7 +435,7 @@ event1_sullivan_goodjob() {}
 event1_post_rockets_moveup_ai() {
   level waittill("do aftermath");
   wait 5;
-  level.sarge playSound(level.scr_sound["sarge"]["moveup_beach1"], "sounddone");
+  level.sarge playsound(level.scr_sound["sarge"]["moveup_beach1"], "sounddone");
   level.sarge waittill("sounddone");
   thread event1_post_aftermath_mortars();
   thread event1_post_rocket_dialogue();
@@ -453,7 +453,7 @@ event1_post_rockets_moveup_ai() {
 wait_to_do_water_depth(ai) {
   wait 3;
   valid_ai = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i]) && isalive(ai[i])) {
       valid_ai = array_add(valid_ai, ai[i]);
     }
@@ -463,7 +463,7 @@ wait_to_do_water_depth(ai) {
 
 event1_water_depth_out_think() {
   self endon("death");
-  while(self.origin[1] < -10917 && isalive(self) && isDefined(self)) {
+  while (self.origin[1] < -10917 && isalive(self) && isDefined(self)) {
     wait 0.5;
   }
   if(isalive(self) && isDefined(self)) {
@@ -486,39 +486,39 @@ event1_water_depth_out_think() {
 event1_post_rocket_dialogue() {
   level endon("stop color dialog");
   wait 2;
-  level.sarge playSound(level.scr_sound["sarge"]["moveup_beach2"], "sounddone");
+  level.sarge playsound(level.scr_sound["sarge"]["moveup_beach2"], "sounddone");
   level.sarge waittill("sounddone");
-  level.polo playSound(level.scr_sound["polo"]["moveup_beach3"], "sounddone");
+  level.polo playsound(level.scr_sound["polo"]["moveup_beach3"], "sounddone");
   level.polo waittill("sounddone");
   wait 2.5;
-  level.sullivan playSound(level.scr_sound["sullivan"]["moveup_beach4"], "sounddone");
+  level.sullivan playsound(level.scr_sound["sullivan"]["moveup_beach4"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["sullivan"]["moveup_beach5"], "sounddone");
+  level.sullivan playsound(level.scr_sound["sullivan"]["moveup_beach5"], "sounddone");
   level.sullivan waittill("sounddone");
   guys = grab_starting_guys();
   guy1 = undefined;
   guy2 = undefined;
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(guys[i] != level.sarge && guys[i] != level.polo && guys[i] != level.sullivan && guys[i] != level.radioguy) {
       guy1 = guys[i];
     }
   }
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(guys[i] != guy1 && guys[i] != level.sarge && guys[i] != level.polo && guys[i] != level.sullivan && guys[i] != level.radioguy) {
       guys[i] = guy2;
     }
   }
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt1"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt1"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt2"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt2"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt2a"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt2a"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt6"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt6"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt7"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt7"], "sounddone");
   level.sullivan waittill("sounddone");
-  level.sullivan playSound(level.scr_sound["redshirt"]["moveup_beach_redshirt8"], "sounddone");
+  level.sullivan playsound(level.scr_sound["redshirt"]["moveup_beach_redshirt8"], "sounddone");
   level.sullivan waittill("sounddone");
 }
 
@@ -533,15 +533,15 @@ event1_kill_player_on_too_far_up() {
   level endon("do aftermath");
   self endon("death");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     if(self.origin[1] > -12800) {
       wait randomfloatrange(0.1, 0.4);
       self dodamage(30, (2158, -10313, -380));
       if(self.health <= 10) {
         self enableHealthShield(false);
         self dodamage(self.health + 10, (2158, -10313, -380));
-        playFX(level._effect["water_mortar"], self.origin);
-        self playSound("mortar_impact_water");
+        playfx(level._effect["water_mortar"], self.origin);
+        self playsound("mortar_impact_water");
         self enableHealthShield(true);
       }
     }
@@ -563,7 +563,7 @@ event1_kill_player_on_too_far_up_during_strike() {
   self endon("disconnect");
   level endon("stop death wall");
   level waittill("do aftermath");
-  while(1) {
+  while (1) {
     if(self.origin[1] > -11502) {
       self shellshock("default", 5);
       self allowstand(false);
@@ -580,7 +580,7 @@ event1_warn_player_on_too_far_up() {
   string = "warn_get_back_here";
   num = 1;
   num_strings = 3;
-  while(1) {
+  while (1) {
     if(self.origin[1] > -13100) {
       level.polo anim_single_solo(level.polo, string + num);
       num++;
@@ -595,18 +595,18 @@ event1_warn_player_on_too_far_up() {
 
 event1_amtank_fire_watcher() {
   level waittill("players off lvt");
-  vehicles = getEntArray("script_vehicle", "classname");
+  vehicles = getentarray("script_vehicle", "classname");
   amtanks = [];
-  for(i = 0; i < vehicles.size; i++) {
+  for (i = 0; i < vehicles.size; i++) {
     if(vehicles[i].model == "vehicle_usa_tracked_lvta4_amtank") {
       amtanks = array_add(amtanks, vehicles[i]);
     }
   }
-  for(i = 0; i < amtanks.size; i++) {
+  for (i = 0; i < amtanks.size; i++) {
     amtanks[i] thread maps\_amtank::fire_loop_toggle(1);
   }
   level waittill("do aftermath");
-  for(i = 0; i < amtanks.size; i++) {
+  for (i = 0; i < amtanks.size; i++) {
     amtanks[i] thread maps\_amtank::fire_loop_toggle(0);
   }
 }
@@ -615,7 +615,7 @@ event1_guys_on_coral() {
   getent("radio_squad_spawner", "targetname") waittill("trigger");
   wait 0.1;
   ai = get_ai_group_ai("coral_radio_guys");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_forcecolor) && ai[i].script_forcecolor == "y") {
       level.radioguy = ai[i];
       level.radioguy.animname = "radioguy";
@@ -624,7 +624,7 @@ event1_guys_on_coral() {
     }
   }
   ai = array_remove(ai, level.radioguy);
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i].animname = "coralguy" + (i + 1);
   }
   playpoint = getstruct("event1_guys_on_coral", "targetname");
@@ -632,10 +632,10 @@ event1_guys_on_coral() {
   level thread anim_loop(ai, "coral_loop", undefined, "stop_coral_loop", playpoint);
   getent("event1_jeep_blowup_trig", "targetname") waittill("trigger");
   level notify("stop_coral_loop");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] stopanimscripted();
   }
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] thread event1_water_depth_think();
     if(ai[i] != level.radioguy) {
       ai[i].goalradius = 64;
@@ -653,27 +653,27 @@ event1_coral_timed_death() {
 
 event1_ambient_plane_crash() {
   self waittill("trigger", who);
-  playFXOnTag(level._effect["plane_crashing"], who, "tag_prop");
+  playfxontag(level._effect["plane_crashing"], who, "tag_prop");
   finalnode = getvehiclenode("auto5013", "targetname");
   finalnode waittill("trigger");
-  playFX(level._effect["bunker_explode_large"], finalnode.origin);
+  playfx(level._effect["bunker_explode_large"], finalnode.origin);
 }
 
 event1_crazy_plane_crash() {
   self waittill("trigger", who);
   who thread event1_crazy_plane_prop_fx();
   getvehiclenode("auto6154", "targetname") waittill("trigger");
-  who playSound("intro_plane_crash");
+  who playsound("intro_plane_crash");
   finalnode = getvehiclenode("auto4756", "targetname");
   finalnode waittill("trigger");
-  playFX(level._effect["water_mortar"], who.origin);
+  playfx(level._effect["water_mortar"], who.origin);
   playsoundatposition("plane_impact_water", who.origin);
   who notify("death");
 }
 
 event1_crazy_plane_prop_fx() {
-  while(isalive(self)) {
-    playFXOnTag(level._effect["plane_crashing"], self, "tag_prop");
+  while (isalive(self)) {
+    playfxontag(level._effect["plane_crashing"], self, "tag_prop");
     wait 5;
   }
 }
@@ -686,14 +686,14 @@ event1_ambient_aaa_fx() {
 
 event1_cleanup_lvts() {
   level waittill("remove floaters");
-  real_lvts = getEntArray("script_vehicle", "classname");
-  for(i = 0; i < real_lvts.size; i++) {
+  real_lvts = getentarray("script_vehicle", "classname");
+  for (i = 0; i < real_lvts.size; i++) {
     if(real_lvts[i].model == "vehicle_usa_tracked_lvt4") {
       real_lvts[i] notify("death");
     }
   }
-  beachdrones = getEntArray("beach_drones_cover", "script_noteworthy");
-  for(i = 0; i < beachdrones.size; i++) {
+  beachdrones = getentarray("beach_drones_cover", "script_noteworthy");
+  for (i = 0; i < beachdrones.size; i++) {
     beachdrones[i] notify("death");
     beachdrones[i] thread maps\_drones::drone_delete();
   }
@@ -712,18 +712,18 @@ event1_pillar_cover_guys() {
   guys2[1] = spawn_fake_guy_lvt(pillar2.origin, pillar2.angles, 1, "pillar_guy5", "pillar_guy5", 0, 1);
   guys2[2] = spawn_fake_guy_lvt(pillar2.origin, pillar2.angles, 1, "pillar_guy6", "pillar_guy6", 0, 1);
   allguys = array_combine(guys1, guys2);
-  for(i = 0; i < allguys.size; i++) {
+  for (i = 0; i < allguys.size; i++) {
     allguys[i] event1_give_guys_names();
   }
   level thread event2_waittill_obstacle_explode(guys2, pillar2);
   pillar1 thread anim_loop(guys1, "coverloop", undefined, "stop_pillar_cover", pillar1);
   pillar2 thread anim_loop(guys2, "coverloop", undefined, "stop_pillar_cover", pillar2);
   level waittill("remove floaters");
-  for(i = 0; i < guys1.size; i++) {
+  for (i = 0; i < guys1.size; i++) {
     pillar1 notify("stop_pillar_cover");
     guys1[i] delete();
   }
-  for(i = 0; i < guys2.size; i++) {
+  for (i = 0; i < guys2.size; i++) {
     pillar2 notify("stop_pillar_cover");
     guys2[i] delete();
   }
@@ -734,7 +734,7 @@ event2_waittill_obstacle_explode(guys2, pillar2) {
   barrier = getent("barrier2", "targetname");
   trig = getent("obstacle_explode", "targetname");
   player_saw_this = false;
-  while(!player_saw_this) {
+  while (!player_saw_this) {
     trig waittill("trigger", who);
     if(distance(who.origin, barrier.origin) < 1000) {
       player_saw_this = true;
@@ -744,10 +744,10 @@ event2_waittill_obstacle_explode(guys2, pillar2) {
   wait 1.5;
   getent("barrier1", "targetname") delete();
   barrier show();
-  playFX(level._effect["dirt_mortar"], barrier.origin);
-  barrier playSound("mortar_dirt");
+  playfx(level._effect["dirt_mortar"], barrier.origin);
+  barrier playsound("mortar_dirt");
   pillar2 notify("stop_pillar_cover");
-  for(i = 0; i < guys2.size; i++) {
+  for (i = 0; i < guys2.size; i++) {
     guys2[i] startragdoll();
   }
 }
@@ -776,7 +776,7 @@ event1_ambient_lci_trigger() {
   start_points = [];
   orgs = getstructarray("rocketbarrage_points2", "targetname");
   q = 0;
-  for(i = 0; i < num_rockets; i++) {
+  for (i = 0; i < num_rockets; i++) {
     q = i % num_rockets_per_ship;
     start_points[i] = orgs[q].origin;
   }
@@ -787,7 +787,7 @@ event1_ambient_lci_trigger() {
   start_points = [];
   orgs = getstructarray("rocketbarrage_points2", "targetname");
   q = 0;
-  for(i = 0; i < num_rockets; i++) {
+  for (i = 0; i < num_rockets; i++) {
     q = i % num_rockets_per_ship;
     start_points[i] = orgs[q].origin;
   }
@@ -798,7 +798,7 @@ event1_ambient_lci_trigger() {
   start_points = [];
   orgs = getstructarray("rocketbarrage_points1", "targetname");
   q = 0;
-  for(i = 0; i < num_rockets; i++) {
+  for (i = 0; i < num_rockets; i++) {
     q = i % num_rockets_per_ship;
     start_points[i] = orgs[q].origin;
   }
@@ -819,7 +819,7 @@ event1_water_depth_think() {
   self.old_run_combatanim = self.run_combatanim;
   self.a.old_combatrunanim = self.a.combatrunanim;
   self.isinwater = false;
-  while(isDefined(self) && isalive(self)) {
+  while (isDefined(self) && isalive(self)) {
     depth = self depthinwater();
     run_cycles = 3;
     num = randomint(run_cycles);
@@ -889,11 +889,11 @@ event1_squibline() {
 
 event1_squibline_think() {
   level endon("do aftermath");
-  while(1) {
+  while (1) {
     start = self;
     wait(randomintrange(5, 10));
-    while(isDefined(start.target)) {
-      playFX(level._effect["one_squib"], start.origin - (20 + randomint(40), 20 + randomint(40), 0));
+    while (isDefined(start.target)) {
+      playfx(level._effect["one_squib"], start.origin - (20 + randomint(40), 20 + randomint(40), 0));
       thread play_sound_in_space("bulletspray_large_sand", start.origin);
       wait(0.05);
       if(isDefined(start.target)) {
@@ -907,7 +907,7 @@ event1_squibline_think_v2() {
   level endon("do aftermath");
   start = self;
   end = getstruct(self.target, "targetname");
-  while(1) {
+  while (1) {
     wait(randomintrange(8, 15));
     org = spawn("script_origin", start.origin);
     org moveto(end.origin, 0.7);
@@ -929,7 +929,7 @@ event1_squibline_think_burst() {
 
 event1_squibline_think_impacts() {
   self endon("movedone");
-  while(1) {
+  while (1) {
     magicbullet("type100_smg_nosound", self.origin, self.origin + (100, 50, 0) - (randomint(200), randomint(100), 200));
     wait(0.05);
   }
@@ -937,7 +937,7 @@ event1_squibline_think_impacts() {
 
 event1_squibline_think_impacts_for_anim(rand) {
   self endon("movedone");
-  while(1) {
+  while (1) {
     if(!isDefined(rand)) {
       rand = 150;
     } else {
@@ -977,7 +977,7 @@ event1_drag1_setup() {
 
 fail_on_ff() {
   self endon("death");
-  self setCanDamage(1);
+  self setcandamage(1);
   name = undefined;
   if(!isai(self)) {
     self makefakeai();
@@ -985,13 +985,13 @@ fail_on_ff() {
     self.team = "allies";
     self.voice = "american";
     self maps\_names::get_name_for_nationality("american");
-    self setlookattext(self.name, &"WEAPON_RIFLEMAN");
+    self setlookattext(self.name, & "WEAPON_RIFLEMAN");
   }
   players = get_players();
   if(players.size > 1) {
     return;
   }
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("damage", amount, who);
     if(isplayer(who)) {
       thread maps\_friendlyfire::missionfail();
@@ -1002,12 +1002,12 @@ fail_on_ff() {
 event1_put_players_on_lvt() {
   players = get_players();
   level.players_lvt = getent("player_lvt", "targetname");
-  level.players_lvt playSound("lvt_start");
+  level.players_lvt playsound("lvt_start");
   level.players_lvt.front_sounds = getent("player_lvt_front_soundpoint", "targetname");
   level.players_lvt.rear_sounds = getent("player_lvt_rear_soundpoint", "targetname");
   level.players_lvt.front_sounds linkto(level.players_lvt);
   level.players_lvt.rear_sounds linkto(level.players_lvt);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     org = undefined;
     ang = undefined;
     tag = undefined;
@@ -1060,7 +1060,7 @@ attach_weapon_during_lvt_ride() {
 
 event1_stuck_on_coral() {
   earthquake(0.35, 1.5, level.players_lvt.origin, 2050);
-  level.players_lvt playSound("lvt_crash");
+  level.players_lvt playsound("lvt_crash");
   thread rumble_all_players("damage_heavy");
   level.players_lvt.front_sounds thread fake_sound_fade();
   level.players_lvt.rear_sounds thread fake_sound_fade();
@@ -1078,14 +1078,14 @@ fake_sound_fade() {
 
 event1_switch_weapons_on() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SwitchToWeapon("m1garand_bayonet");
   }
 }
 
 event1_get_players_off_of_lvt() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] PlayerSetGroundReferenceEnt(undefined);
     players[i] StopRumble("tank_rumble");
     level.enable_weapons = 1;
@@ -1114,25 +1114,25 @@ event1_explode_and_fade_to_white() {
   clientnotify("pol");
   println("players_off_lvt NOTIFY SENT");
   fadetowhite = [];
-  playFXOnTag(level._effect["special_lvt_explode"], level.players_lvt, "tag_origin");
+  playfxontag(level._effect["special_lvt_explode"], level.players_lvt, "tag_origin");
   playsoundatposition("lvt_explo", (0, 0, 0));
-  level.players_lvt setModel("vehicle_usa_tracked_lvta2_d");
+  level.players_lvt setmodel("vehicle_usa_tracked_lvta2_d");
   thread maps\pel1::rumble_all_players("damage_heavy");
   thread slow_mo_the_tip();
   players = get_players();
   players[0] thread maps\pel1_anim::lvt_tipover();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] shellshock("lvt_exp", 10);
   }
   level waittill("fade_from_white");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] freezecontrols(true);
     players[i] shellshock("default", 3);
   }
   wait 3;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] freezecontrols(false);
   }
 }
@@ -1167,7 +1167,7 @@ crawl_think() {
   self makeFakeAI();
   self solid();
   self.interval = 128;
-  self setCanDamage(true);
+  self setcandamage(true);
   self.team = "axis";
   self.health = 1;
   self endon("shot_death");
@@ -1198,9 +1198,9 @@ play_pain_sound() {
   soundtoplay[0] = "JA_0_pain_large";
   soundtoplay[1] = "JA_1_pain_large";
   soundtoplay[2] = "JA_3_pain_large";
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     rand = randomint(soundtoplay.size);
-    self playSound(soundtoplay[rand], "sounddone");
+    self playsound(soundtoplay[rand], "sounddone");
     self waittill("sounddone");
     wait randomfloatrange(2.0, 5.0);
   }
@@ -1227,7 +1227,7 @@ event1_underwater_squib(rand) {
   level endon("done underwater");
   start = getstruct("squibline_scripted1", "targetname");
   end = getstruct(start.target, "targetname");
-  while(1) {
+  while (1) {
     org = spawn("script_origin", start.origin);
     org moveto(end.origin, 1.5);
     org thread event1_squibline_think_impacts_for_anim(rand);
@@ -1272,12 +1272,12 @@ event1_put_ai_on_lvt() {
   guys = array_remove(guys, level.polo);
   guys = array_remove(guys, level.sullivan);
   guys = array_remove(guys, level.gibsworth);
-  coop_displacements = getEntArray("lvt_coop_redshirt_displacement", "targetname");
-  for(i = 0; i < coop_displacements.size; i++) {
+  coop_displacements = getentarray("lvt_coop_redshirt_displacement", "targetname");
+  for (i = 0; i < coop_displacements.size; i++) {
     coop_displacements[i] linkto(level.players_lvt);
   }
   players = get_players();
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(i == 0) {
       if(level.displaceredshirts && players.size >= 3) {
         tag = "tag_passenger5";
@@ -1330,7 +1330,7 @@ event1_put_ai_on_lvt() {
 driver_death() {
   self waittillmatch("looping anim", "shot");
   if(is_mature()) {
-    playFXOnTag(level._effect["head_shot"], self, "j_head");
+    playfxontag(level._effect["head_shot"], self, "j_head");
   }
 }
 
@@ -1347,56 +1347,56 @@ sully_has_a_tommy() {
 lvt_dialog() {
   setmusicstate("INTRO");
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro1"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro1"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro2"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro2"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro3"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro3"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro4"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro4"]);
   self waittillmatch("lvt_ridein", "dialog");
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro6"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro6"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro7"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro7"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro8"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro8"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro9"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro9"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro10"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro10"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro11"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro11"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro12"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro12"]);
   self waittillmatch("lvt_ridein", "dialog");
-  self playSound(level.scr_sound["intro"]["intro13"]);
+  self playsound(level.scr_sound["intro"]["intro13"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.polo playSound(level.scr_sound["intro"]["intro14"]);
+  level.polo playsound(level.scr_sound["intro"]["intro14"]);
   self waittillmatch("lvt_ridein", "dialog");
-  self playSound(level.scr_sound["intro"]["intro15"]);
+  self playsound(level.scr_sound["intro"]["intro15"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sarge playSound(level.scr_sound["intro"]["intro16"]);
+  level.sarge playsound(level.scr_sound["intro"]["intro16"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro17"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro17"]);
   self waittillmatch("lvt_ridein", "dialog");
-  self playSound(level.scr_sound["intro"]["intro18"]);
+  self playsound(level.scr_sound["intro"]["intro18"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro19"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro19"]);
   self waittillmatch("lvt_ridein", "dialog");
-  self playSound(level.scr_sound["intro"]["intro20"]);
+  self playsound(level.scr_sound["intro"]["intro20"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro21"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro21"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.polo playSound(level.scr_sound["intro"]["intro22"]);
+  level.polo playsound(level.scr_sound["intro"]["intro22"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.polo playSound(level.scr_sound["intro"]["intro23"]);
+  level.polo playsound(level.scr_sound["intro"]["intro23"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro24"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro24"]);
   self waittillmatch("lvt_ridein", "dialog");
-  self playSound(level.scr_sound["intro"]["intro25"]);
+  self playsound(level.scr_sound["intro"]["intro25"]);
   self waittillmatch("lvt_ridein", "dialog");
-  level.sullivan playSound(level.scr_sound["intro"]["intro26"]);
+  level.sullivan playsound(level.scr_sound["intro"]["intro26"]);
 }
 
 event1_put_ai_on_lvt_short() {
@@ -1416,12 +1416,12 @@ event1_put_ai_on_lvt_short() {
   guys = array_remove(guys, level.polo);
   guys = array_remove(guys, level.sullivan);
   guys = array_remove(guys, level.gibsworth);
-  coop_displacements = getEntArray("lvt_coop_redshirt_displacement", "targetname");
-  for(i = 0; i < coop_displacements.size; i++) {
+  coop_displacements = getentarray("lvt_coop_redshirt_displacement", "targetname");
+  for (i = 0; i < coop_displacements.size; i++) {
     coop_displacements[i] linkto(level.players_lvt);
   }
   players = get_players();
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(i == 2) {
       if(level.displaceredshirts && players.size >= 3) {
         tag = "tag_passenger5";
@@ -1455,9 +1455,9 @@ event2_headshot() {
   self endon("death");
   self waittillmatch("lvt_ridein", "head_shot");
   if(is_mature()) {
-    playFXOnTag(level._effect["head_shot"], self, "j_head");
+    playfxontag(level._effect["head_shot"], self, "j_head");
   }
-  self playSound("headshot_imp");
+  self playsound("headshot_imp");
   playsoundatposition("headshot_rico", self.origin - (0, 150, 30) + (100, 0, 0));
   self swap_gibhead_guy();
   setmusicstate("BEACH");
@@ -1488,11 +1488,11 @@ delete_hat() {
 
 event1_get_ai_off_of_lvt() {
   guys = grab_starting_guys();
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] unlink();
   }
   nodes = getnodearray("coral_nodes", "targetname");
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] disable_ai_color();
     guys[i].moveorg = spawn("script_origin", guys[i].origin);
     guys[i] linkto(guys[i].moveorg);
@@ -1500,7 +1500,7 @@ event1_get_ai_off_of_lvt() {
     guys[i] setgoalnode(nodes[i]);
   }
   wait 0.2;
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] unlink();
   }
   level.gibsworth notify("death");
@@ -1528,7 +1528,7 @@ event1_model3_fire(start_point) {
 event1_model3_fire_think(gun, random_fire) {
   self endon("death");
   gun setturrettargetent(get_players()[0]);
-  while(1) {
+  while (1) {
     if(!flag("ambients_on")) {
       wait 1;
       continue;
@@ -1567,7 +1567,7 @@ lvt_guys_exploding_out() {
   rand2 = 0;
   rand3 = 0;
   rand1 = randomint(tags.size);
-  while(rand1 == rand2 || rand1 == rand3 || rand2 == rand3) {
+  while (rand1 == rand2 || rand1 == rand3 || rand2 == rand3) {
     rand2 = randomint(tags.size);
     rand3 = randomint(tags.size);
   }
@@ -1596,7 +1596,7 @@ event1_model3_things_get_owned() {
   artypiece_quaketime = 3.0;
   artypiece_quakeradius = 10000;
   self waittill("200mm gun hit");
-  obj = spawnStruct();
+  obj = spawnstruct();
   obj.origin = level.players_lvt.origin;
   obj.origin = obj.origin + (-400, 1000, 0);
   obj thread maps\_mortar::explosion_boom("water_mortar", artypiece_quakepower, artypiece_quaketime, artypiece_quakeradius, 1);
@@ -1617,7 +1617,7 @@ event1_model3_things_get_owned() {
   thread rumble_all_players("damage_heavy");
   self setturrettargetent(level.players_lvt);
   self waittill("200mm gun hit");
-  obj = spawnStruct();
+  obj = spawnstruct();
   obj.origin = level.players_lvt.origin;
   obj.origin = obj.origin + (-200, 400, 0);
   obj thread maps\_mortar::explosion_boom("water_mortar", artypiece_quakepower, artypiece_quaketime, artypiece_quakeradius, 1);
@@ -1626,7 +1626,7 @@ event1_model3_things_get_owned() {
   thread rumble_all_players("damage_light");
   self setturrettargetent(level.players_lvt);
   self waittill("200mm gun hit");
-  obj = spawnStruct();
+  obj = spawnstruct();
   obj.origin = level.players_lvt.origin;
   obj.origin = obj.origin + (0, 300, 0);
   obj thread maps\_mortar::explosion_boom("water_mortar", artypiece_quakepower, artypiece_quaketime, artypiece_quakeradius, 1);
@@ -1642,7 +1642,7 @@ event1_model3_things_get_owned() {
   thread rumble_all_players("damage_heavy");
   self setturrettargetent(level.players_lvt);
   self waittill("200mm gun hit");
-  obj = spawnStruct();
+  obj = spawnstruct();
   obj.origin = level.players_lvt.origin;
   obj.origin = obj.origin + (0, 300, 0);
   obj thread maps\_mortar::explosion_boom("water_mortar", artypiece_quakepower, artypiece_quaketime, artypiece_quakeradius, 1);
@@ -1684,7 +1684,7 @@ event1_model3_fire_at_random_targets() {
   artypiece_quaketime = 2.25;
   artypiece_quakeradius = 3000;
   structs = getstructarray("water_mortar", "targetname");
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     target_struct = structs[randomint(structs.size)];
     self setturrettargetvec(target_struct.origin);
     self waittill("200mm gun hit");
@@ -1696,7 +1696,7 @@ event1_model3_fire_at_random_targets() {
 event1_floating_bodies() {
   body_points = getstructarray("floating_bodies", "targetname");
   bodyA = [];
-  for(i = 0; i < body_points.size; i++) {
+  for (i = 0; i < body_points.size; i++) {
     rand = randomint(4);
     pitchangle = 150;
     if(rand == 0) {
@@ -1710,14 +1710,14 @@ event1_floating_bodies() {
   }
   level waittill("remove floaters");
   level notify("stoploop_floaters");
-  for(i = 0; i < bodyA.size; i++) {
+  for (i = 0; i < bodyA.size; i++) {
     bodyA[i] delete();
   }
 }
 
 event1_beach_tanks_setup() {
   stop_points = getvehiclenodearray("beach_tank_stop", "script_noteworthy");
-  for(i = 0; i < stop_points.size; i++) {
+  for (i = 0; i < stop_points.size; i++) {
     stop_points[i] thread event1_beach_tanks_think();
   }
   left_tank_node = getvehiclenode("beach_tank_left_end", "script_noteworthy");
@@ -1788,10 +1788,10 @@ event2_weapon_pickups() {
   wait 10;
   if(isDefined(who) && who istouching(trig3)) {
     setbusstate("EASTER");
-    starts1 = getEntArray("gun01", "targetname");
-    starts2 = getEntArray("gun02", "targetname");
-    starts3 = getEntArray("gun03", "targetname");
-    starts4 = getEntArray("gun04", "targetname");
+    starts1 = getentarray("gun01", "targetname");
+    starts2 = getentarray("gun02", "targetname");
+    starts3 = getentarray("gun03", "targetname");
+    starts4 = getentarray("gun04", "targetname");
     starts1[0] moveto(starts1[0].origin + (0, 0, 500), 10, 6, 3);
     starts2[0] moveto(starts2[0].origin + (0, 0, 500), 10, 6, 3);
     starts3[0] moveto(starts3[0].origin + (0, 0, 500), 10, 6, 3);
@@ -1806,8 +1806,8 @@ event2_weapon_pickups() {
     earthquake(0.3, 16, starts1[0].origin + (0, 0, 500), 2000);
     playsoundatposition("earthquake", (0, 0, 0));
     thread rumble_all_players("damage_light", "damage_heavy", starts1[0].origin + (0, 0, 500), 400, 800);
-    starts = getEntArray("r_gun_trigs", "targetname");
-    for(i = 0; i < starts.size; i++) {
+    starts = getentarray("r_gun_trigs", "targetname");
+    for (i = 0; i < starts.size; i++) {
       starts[i] thread do_give();
     }
     level notify("rg_weapons_avail");
@@ -1823,7 +1823,7 @@ timer_for_bus(time) {
 do_give(weapon) {
   wait 10;
   self.origin = self.origin + (0, 0, 500);
-  while(1) {
+  while (1) {
     self waittill("trigger", who);
     primaryWeapons = who GetWeaponsListPrimaries();
     current_weapon = undefined;
@@ -1834,7 +1834,7 @@ do_give(weapon) {
       }
     }
     if(isDefined(primaryWeapons) && !isDefined(current_weapon)) {
-      for(i = 0; i < primaryWeapons.size; i++) {
+      for (i = 0; i < primaryWeapons.size; i++) {
         who TakeWeapon(primaryWeapons[i]);
       }
     }
@@ -1846,12 +1846,12 @@ do_give(weapon) {
 
 weapon_cleanup() {
   level endon("rg_weapons_avail");
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       primaryWeapons = players[i] GetWeaponsListPrimaries();
       if(isDefined(primaryWeapons)) {
-        for(x = 0; x < primaryWeapons.size; x++) {
+        for (x = 0; x < primaryWeapons.size; x++) {
           if(primaryWeapons[x] == "ray_gun") {
             players[i] TakeWeapon(primaryWeapons[x]);
           }
@@ -1864,8 +1864,8 @@ weapon_cleanup() {
 
 event2_delete_vehicles_on_warp() {
   trigger_wait("first_fight_warp", "script_noteworthy");
-  vehicles = getEntArray("script_vehicle", "classname");
-  for(i = 0; i < vehicles.size; i++) {
+  vehicles = getentarray("script_vehicle", "classname");
+  for (i = 0; i < vehicles.size; i++) {
     vehicles[i] notify("death");
     vehicles[i] delete();
   }
@@ -1942,7 +1942,7 @@ event2_over_the_berm_anims() {
   ref_point = getstruct("over_reference", "targetname");
   guys = grab_starting_guys();
   guys = array_remove(guys, level.sarge);
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] thread event2_over_berm_anim_think(ref_point, i);
   }
 }
@@ -1950,7 +1950,7 @@ event2_over_the_berm_anims() {
 event2_over_berm_anim_think(ref_point, point_num) {
   self disable_ai_color();
   self endon("death");
-  while(self.origin[1] < -11256) {
+  while (self.origin[1] < -11256) {
     wait 0.1;
   }
   self.animname = "berm" + (point_num + 1);
@@ -1968,7 +1968,7 @@ event2_over_berm_anim_think(ref_point, point_num) {
   if(self == level.sarge) {
     wait_for_berm3 = false;
     ai = getaiarray("allieS");
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(ai[i].animname == "berm3") {
         wait_for_berm3 = true;
         if(self != level.polo && self != level.sarge && self != level.sullivan && self != level.radioguy) {
@@ -2008,12 +2008,12 @@ event2_over_berm_anim_think(ref_point, point_num) {
 
 sullivan_over_sounds() {
   wait 1.0;
-  level.sullivan playSound(level.scr_sound["sullivan"]["moveup_beach6"]);
+  level.sullivan playsound(level.scr_sound["sullivan"]["moveup_beach6"]);
   flag_wait("polo_over_berm");
-  level.polo playSound(level.scr_sound["polo"]["over_berm1"]);
+  level.polo playsound(level.scr_sound["polo"]["over_berm1"]);
   wait 1.5;
   flag_wait("sarge_over_berm");
-  level.sarge playSound(level.scr_sound["sarge"]["over_berm2"]);
+  level.sarge playsound(level.scr_sound["sarge"]["over_berm2"]);
 }
 
 event2_redshirt_reinforce_begin() {
@@ -2053,7 +2053,7 @@ event2_fire_walkers() {
   level.flameguy thread event2_flame_ambient();
   ambient_turret = getent("ambient_side_mg", "targetname");
   level thread event2_ambient_mg_crush();
-  ambient_turret.manual_targets = getEntArray(ambient_turret.target, "targetname");
+  ambient_turret.manual_targets = getentarray(ambient_turret.target, "targetname");
   ambient_turret.manual_targets[0] thread move_mg_target(ambient_turret);
   ambient_turret SetMode("auto_nonai");
   ambient_turret thread maps\_mgturret::burst_fire_unmanned();
@@ -2074,7 +2074,7 @@ event2_ambient_battle_watcher() {
 
 move_mg_target(ambient_turret) {
   ambient_turret endon("death");
-  while(1) {
+  while (1) {
     self moveto((2632, -7357, -241.666), 2);
     wait randomfloatrange(1, 3);
     self moveto((2952, -7320, -216.542), 2);
@@ -2090,25 +2090,25 @@ event2_flame_walk_out_death() {
 event2_flame_walk_out_fx() {
   fx1 = getstruct("event2_walkflame_point1", "targetname");
   fx2 = getstruct("event2_walkflame_point2", "targetname");
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait(0.25);
-  playFX(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglesToForward(fx2.angles));
+  playfx(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglestoforward(fx2.angles));
   wait 0.25;
-  playFX(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglesToForward(fx2.angles));
+  playfx(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglestoforward(fx2.angles));
   wait(0.25);
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait 0.5;
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait(0.5);
-  playFX(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglesToForward(fx2.angles));
+  playfx(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglestoforward(fx2.angles));
   wait 0.75;
-  playFX(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglesToForward(fx2.angles));
+  playfx(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglestoforward(fx2.angles));
   wait(0.25);
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait 0.5;
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait(0.5);
-  playFX(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglesToForward(fx2.angles));
+  playfx(level._effect["bunker_fire_out"], fx2.origin + (0, 0, 32), anglestoforward(fx2.angles));
   level notify("bunker_busted");
   setmusicstate("FIRST_FIGHT");
 }
@@ -2127,7 +2127,7 @@ event2_first_fight_dialogue() {
     friendlies = getaiarray("allies");
     if(isDefined(banzai) && isalive(banzai)) {
       canseeai = false;
-      for(i = 0; i < friendlies.size; i++) {
+      for (i = 0; i < friendlies.size; i++) {
         if(friendlies[i] cansee(banzai)) {
           level.sarge anim_single_solo(level.sarge, "first_fight2");
           break;
@@ -2164,7 +2164,7 @@ event2_pistol_jap() {
   org = getstruct("event2_pistol_jap", "targetname");
   guy = spawn_fake_guy_lvt(org.origin, org.angles, 0, "pistol_jap", "pistol_jap", 0);
   guy makeFakeAI();
-  guy setCanDamage(true);
+  guy setcandamage(true);
   guy.team = "axis";
   guy.health = 5;
   guy UseAnimTree(#animtree);
@@ -2186,7 +2186,7 @@ event2_pistol_jap_think(org) {
 }
 
 event2_jap_pistol_fire(guy) {
-  playFXOnTag(level._effect["pistol_flash"], guy, "tag_flash");
+  playfxontag(level._effect["pistol_flash"], guy, "tag_flash");
   magicbullet("nambu", self.origin - (0, 0, 59), self.origin - (0, 0, 60));
   dam_trig = getent("event2_pistol_jap_fire_dam", "targetname");
   players = get_players();
@@ -2233,7 +2233,7 @@ event3_clean_up_enemies() {
   no_zone_mover = getent("no_zone_mover", "script_noteworthy");
   no_zone_mover.origin = no_zone_mover.origin + (0, 0, 10000);
   ai = getaiarray("axis");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i]) && isalive(ai[i]) && ai[i].origin[1] < -4090) {
       ai[i] thread bloody_death();
       wait randomfloatrange(0.75, 3.0);
@@ -2244,19 +2244,19 @@ event3_clean_up_enemies() {
 event3_setup_tunnel_radio() {
   broken_radio = "radio_jap_bro";
   radio = getent("tunnel_radio", "targetname");
-  radio playLoopSound("pel1_radio");
+  radio playloopsound("pel1_radio");
   broken = false;
-  radio setCanDamage(true);
+  radio setcandamage(true);
   radio waittill("damage", amount, who);
   arcademode_assignpoints("arcademode_score_generic500", who);
-  playFX(level._effect["broken_radio_spark"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
+  playfx(level._effect["broken_radio_spark"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
   radio stoploopsound();
-  radio playSound("radio_destroyed");
-  radio setModel(broken_radio);
-  for(i = 0; i < 12; i++) {
+  radio playsound("radio_destroyed");
+  radio setmodel(broken_radio);
+  for (i = 0; i < 12; i++) {
     wait(randomfloatrange(1, 3));
-    playFX(level._effect["broken_radio_spark"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
-    radio playSound("radio_destroyed");
+    playfx(level._effect["broken_radio_spark"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
+    radio playsound("radio_destroyed");
   }
 }
 
@@ -2265,13 +2265,13 @@ event3_last_bunker_rocket_damage_think() {
   spawner1 = getent("rocketman_delete1", "script_noteworthy");
   spawner2 = getent("rocketman_delete2", "script_noteworthy");
   area.remove_spawner = false;
-  while(1) {
+  while (1) {
     area waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_CRUSH") {
       level notify("bunker_crushed");
       area thread event3_rocket_remove_spawner(spawner1, spawner2);
       axis = getaiarray("axis");
-      for(i = 0; i < axis.size; i++) {
+      for (i = 0; i < axis.size; i++) {
         if(axis[i] istouching(area)) {
           axis[i] dodamage(axis[i].health + 10, (0, 0, 0));
         }
@@ -2282,11 +2282,11 @@ event3_last_bunker_rocket_damage_think() {
 
 event1_small_bunker_rocket_damage_think() {
   area = getent("small_bunker_damage_area", "targetname");
-  while(1) {
+  while (1) {
     area waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_CRUSH") {
       axis = getaiarray("axis");
-      for(i = 0; i < axis.size; i++) {
+      for (i = 0; i < axis.size; i++) {
         if(axis[i] istouching(area)) {
           axis[i] dodamage(axis[i].health + 10, (0, 0, 0));
           playsoundatposition("rocket_target_explo", (1944, -6304, -144));
@@ -2299,7 +2299,7 @@ event1_small_bunker_rocket_damage_think() {
 
 event2_ambient_mg_crush() {
   area = getent("crush_ambient_mg", "targetname");
-  while(1) {
+  while (1) {
     area waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_CRUSH") {
       mg = getent("ambient_side_mg", "targetname");
@@ -2403,7 +2403,7 @@ event3_into_bunker_dialogue() {
   trigger_wait("event3_into_final_bunker", "targetname");
   level.sarge set_force_color("r");
   guys_near_player_and_trig = false;
-  while(!guys_near_player_and_trig) {
+  while (!guys_near_player_and_trig) {
     if(distance(trigorg, level.sullivan.origin) < 500) {
       nearest_player = get_closest_player(trigorg);
       if(distance(nearest_player.origin, level.sullivan.origin) < 500) {
@@ -2455,7 +2455,7 @@ tell_player_to_use_rockets() {
   wait 3;
   level.sarge anim_single_solo(level.sarge, "use_rockets_end4");
   level.sarge anim_single_solo(level.sarge, "use_rockets_end2");
-  while(1) {
+  while (1) {
     wait 12;
     level.sarge anim_single_solo(level.sarge, "use_rockets_end3");
     level.sarge anim_single_solo(level.sarge, "use_rockets_end1");
@@ -2467,8 +2467,8 @@ tell_player_to_use_rockets() {
 
 event3_drones_moveup() {
   flag_wait("end_tanks_dead");
-  drones = getEntArray("run_n_gun_drones", "script_noteworthy");
-  for(i = 0; i < drones.size; i++) {
+  drones = getentarray("run_n_gun_drones", "script_noteworthy");
+  for (i = 0; i < drones.size; i++) {
     drones[i] notify("Stop shooting");
     if(i % 4 == 0) {
       wait 0.5;
@@ -2481,15 +2481,15 @@ event1_lci_rocket_fire(dest_point, start_points, do_aftermath, is_player_control
   if(isDefined(do_aftermath)) {
     level thread event1_lci_aftermath_effect();
   }
-  for(i = 0; i < start_points.size; i++) {
+  for (i = 0; i < start_points.size; i++) {
     rocket = spawn("script_model", start_points[i]);
-    rocket setModel("peleliu_aerial_rocket");
+    rocket setmodel("peleliu_aerial_rocket");
     yaw_vec = vectortoangles(dest_point - rocket.origin);
     rocket.angles = (315, yaw_vec[1], 0);
     wait(0.01);
-    playFX(level._effect["rocket_launch"], rocket.origin, anglesToForward(rocket.angles + (20, 0, 0)));
-    playFXOnTag(level._effect["rocket_trail"], rocket, "tag_origin");
-    rocket playLoopSound("rocket_run");
+    playfx(level._effect["rocket_launch"], rocket.origin, anglestoforward(rocket.angles + (20, 0, 0)));
+    playfxontag(level._effect["rocket_trail"], rocket, "tag_origin");
+    rocket playloopsound("rocket_run");
     if(isDefined(do_aftermath) && do_aftermath) {
       rocket thread event1_lci_rocket_fly_think((dest_point[0] - 1000 + randomint(2000), dest_point[1] - 1000 + randomint(2000), dest_point[2] + randomint(40)));
     } else {
@@ -2501,23 +2501,23 @@ event1_lci_rocket_fire(dest_point, start_points, do_aftermath, is_player_control
 
 event1_lci_aftermath_effect() {
   level waittill("do aftermath");
-  playFX(level._effect["rocket_aftermath"], (2071, -8481, -314.8));
+  playfx(level._effect["rocket_aftermath"], (2071, -8481, -314.8));
   playsoundatposition("rocket_target_explo", (2036, -10207, -295.9));
 }
 
 event1_lci_rocket_fly_think(destination_pos) {
   setmusicstate("PLAYER_ROCKETS");
   thread throw_object_with_gravity(self, destination_pos);
-  while(1) {
+  while (1) {
     if(self.origin[2] < -450) {
       if(self.origin[1] < -9552) {
-        playFX(level._effect["lci_rocket_impact"], self.origin);
+        playfx(level._effect["lci_rocket_impact"], self.origin);
         playsoundatposition("rocket_impact", self.origin);
         thread play_sound_in_space("rocket_dirt", self.origin);
       } else {
         rand = randomint(5);
         if(rand == 0) {
-          playFX(level._effect["lci_rocket_impact"], self.origin);
+          playfx(level._effect["lci_rocket_impact"], self.origin);
           playsoundatposition("rocket_impact", self.origin);
         }
         playsoundatposition("mortar_dirt", self.origin);
@@ -2541,21 +2541,21 @@ event1_lci_rocket_fly_think(destination_pos) {
 main_rocket_rumble() {
   thread rumble_all_players("damage_heavy");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     level.players_lvt PlayRumbleLoopOnEntity("tank_rumble");
   }
   wait 7;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] StopRumble("tank_rumble");
   }
 }
 
 event1_lci_simple_rocket_fly_think(destination_pos) {
   thread throw_object_with_gravity(self, destination_pos);
-  while(1) {
+  while (1) {
     if(self.origin[2] < -450) {
-      playFX(level._effect["lci_rocket_impact"], self.origin);
+      playfx(level._effect["lci_rocket_impact"], self.origin);
       self stoploopsound(1);
       playsoundatposition("rocket_impact", self.origin);
       earthquake(0.5, 3, self.origin, 2050);
@@ -2569,11 +2569,11 @@ event1_lci_simple_rocket_fly_think(destination_pos) {
 }
 
 event1_rocket_impact_think() {
-  things_to_damage = getEntArray("script_model", "classname");
+  things_to_damage = getentarray("script_model", "classname");
   level waittill("start removing trees");
   playsoundatposition("fake_rockets_L", (2036, -10207, -295.9));
   playsoundatposition("fake_rockets_R", (1036, -10207, -295.9));
-  for(i = 0; i < things_to_damage.size; i++) {
+  for (i = 0; i < things_to_damage.size; i++) {
     if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" ||
         things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
       if(things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02") {
@@ -2590,15 +2590,15 @@ event1_rocket_impact_think() {
         } else {
           rand = randomint(5);
           if(rand == 0) {
-            playFX(level._effect["palms01"], things_to_damage[i].origin, anglesToForward(things_to_damage[i].angles + (270, 0, 0)));
+            playfx(level._effect["palms01"], things_to_damage[i].origin, anglestoforward(things_to_damage[i].angles + (270, 0, 0)));
           } else if(rand == 1) {
-            playFX(level._effect["palms04"], things_to_damage[i].origin, anglesToForward(things_to_damage[i].angles + (270, 0, 0)));
+            playfx(level._effect["palms04"], things_to_damage[i].origin, anglestoforward(things_to_damage[i].angles + (270, 0, 0)));
           } else if(rand == 2) {
-            playFX(level._effect["palms04a"], things_to_damage[i].origin, anglesToForward(things_to_damage[i].angles + (270, 0, 0)));
+            playfx(level._effect["palms04a"], things_to_damage[i].origin, anglestoforward(things_to_damage[i].angles + (270, 0, 0)));
           } else if(rand == 3) {
-            playFX(level._effect["palms04b"], things_to_damage[i].origin, anglesToForward(things_to_damage[i].angles + (270, 0, 0)));
+            playfx(level._effect["palms04b"], things_to_damage[i].origin, anglestoforward(things_to_damage[i].angles + (270, 0, 0)));
           } else if(rand == 4) {
-            playFX(level._effect["palms04c"], things_to_damage[i].origin, anglesToForward(things_to_damage[i].angles + (270, 0, 0)));
+            playfx(level._effect["palms04c"], things_to_damage[i].origin, anglestoforward(things_to_damage[i].angles + (270, 0, 0)));
           }
           playsoundatposition("tree_fall", things_to_damage[i].origin);
           things_to_damage[i] thread event2_tree_rotate_and_delete();
@@ -2625,15 +2625,15 @@ event2_meet_with_sarge() {
   flag_set("jog_enabled");
   event1_jog_the_ai();
   thread event1_sarge_over_berm();
-  level.sullivanplaySound(level.scr_sound["sullivan"]["moveup_beach6a"]);
+  level.sullivanplaysound(level.scr_sound["sullivan"]["moveup_beach6a"]);
   level notify("start first mortar run");
-  drones = getEntArray("drone", "targetname");
-  for(i = 0; i < drones.size; i++) {
+  drones = getentarray("drone", "targetname");
+  for (i = 0; i < drones.size; i++) {
     drones[i] notify("drone out of cover");
   }
   getent("event2_foxhole_colorgroup", "targetname") useby(get_players()[0]);
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] set_ignoreall(true);
   }
   flag_init("flame_the_bunker");
@@ -2646,21 +2646,21 @@ event2_meet_with_sarge() {
   level notify("flame guy is flaming bunker");
   wait 2;
   smolderpoint = getstruct("event1_bunker_smolder", "targetname");
-  playFX(level._effect["bunker_fire_smolder"], smolderpoint.origin, anglesToForward(smolderpoint.angles));
+  playfx(level._effect["bunker_fire_smolder"], smolderpoint.origin, anglestoforward(smolderpoint.angles));
   flag_set("flame_the_bunker");
   level notify("moving up after flame");
   wait(1);
   level.sarge enable_ai_color();
   thread event2_use_and_remove_first_line_color_trigs();
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] set_ignoreall(false);
   }
 }
 
 event1_jog_the_ai() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] thread jog_internal();
   }
 }
@@ -2675,11 +2675,11 @@ event2_main_rocket_attack() {
   playsoundatposition("pa_fire", pa_fire.origin);
   wait(0.4);
   pa_fire_b = getent("pa_fire_left", "targetname");
-  pa_fire_b playSound("pa_fire");
+  pa_fire_b playsound("pa_fire");
   start_points = [];
   orgs = getstructarray("rocketbarrage_points2", "targetname");
   q = 0;
-  for(i = 0; i < num_rockets; i++) {
+  for (i = 0; i < num_rockets; i++) {
     q = i % num_rockets_per_ship;
     start_points[i] = orgs[q].origin;
   }
@@ -2688,7 +2688,7 @@ event2_main_rocket_attack() {
   start_points = [];
   orgs = getstructarray("rocketbarrage_points1", "targetname");
   q = 0;
-  for(i = 0; i < num_rockets; i++) {
+  for (i = 0; i < num_rockets; i++) {
     q = i % num_rockets_per_ship;
     start_points[i] = orgs[q].origin;
   }
@@ -2716,7 +2716,7 @@ event2_flame_the_bunker() {
   og_DelayTime_max = level.flameguy.a.flamethrowerShootDelay_max;
   level.flameguy.a.flamethrowerShootDelay_min = 0;
   level.flameguy.a.flamethrowerShootDelay_max = 1;
-  org = spawn("script_origin", (2171, -7800, -294));
+  org = Spawn("script_origin", (2171, -7800, -294));
   targets = [];
   targets[0] = (2000, -8000, -180);
   targets[1] = (2180, -8000, -220);
@@ -2724,8 +2724,8 @@ event2_flame_the_bunker() {
   level.flameguy SetEntityTarget(org);
   wait(1);
   level notify("bunker_getting_flamed");
-  while(!flag("flame_the_bunker")) {
-    for(i = 0; i < targets.size; i++) {
+  while (!flag("flame_the_bunker")) {
+    for (i = 0; i < targets.size; i++) {
       time = 1.5;
       org MoveTo(targets[i], time);
       org waittill("movedone");
@@ -2759,8 +2759,8 @@ event2_flame_ambient() {
   level notify("ambient_getting_flamed");
   targets[0] = (2728, -7176, -104);
   targets[0] = (2864, -7176, -104);
-  while(!flag("flame_the_ambient")) {
-    for(i = 0; i < targets.size; i++) {
+  while (!flag("flame_the_ambient")) {
+    for (i = 0; i < targets.size; i++) {
       time = 1.5;
       org MoveTo(targets[i], time);
       org waittill("movedone");
@@ -2777,7 +2777,7 @@ event2_flame_ambient() {
 
 flame_on_off(org) {
   self endon("stop_flaming");
-  while(isalive(self)) {
+  while (isalive(self)) {
     self SetEntityTarget(org);
     wait randomfloatrange(3, 5);
     self ClearEntityTarget();
@@ -2798,7 +2798,7 @@ event2_open_fire() {
   level thread mg_open_flap();
   friendlies_crouch_only(false);
   dazed = get_ai_group_ai("dazed");
-  for(i = 0; i < dazed.size; i++) {
+  for (i = 0; i < dazed.size; i++) {
     if(isalive(dazed[i])) {
       dazed[i] dodamage(dazed[i].health + 10, (0, 0, 32));
     }
@@ -2902,8 +2902,8 @@ do_rocket_hud_elem() {
 
 mg_open_flap() {
   flap = getent("the_flap", "targetname");
-  cover = getEntArray("flap_cover", "targetname");
-  for(i = 0; i < cover.size; i++) {
+  cover = getentarray("flap_cover", "targetname");
+  for (i = 0; i < cover.size; i++) {
     cover[i] linkto(flap);
   }
   flap rotateroll(-90, 1);
@@ -2919,16 +2919,16 @@ event2_stop_mg_fire_early() {
 
 event2_flame_out_fx() {
   fx1 = getstruct("event2_japflamedeath_point1", "targetname");
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   wait(0.25);
   playsoundatposition("rocket_falloff_dist", fx1.origin);
   wait 0.5;
   level notify("stop_caring_about_mg");
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   playsoundatposition("rocket_explode_dirt", fx1.origin);
   wait(0.75);
   wait 1.25;
-  playFX(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin + (0, 0, 32), anglestoforward(fx1.angles));
   playsoundatposition("bunker_explo", fx1.origin);
   wait(0.5);
 }
@@ -2939,19 +2939,19 @@ event2_bunker_flamedeath(t_name, animname, animpoint, flame_mg_guy) {
     guy = flame_mg_guy;
   } else {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distance(players[i].origin, point.origin) < 150) {
         return;
       }
     }
     guy = getent(t_name, "targetname") stalingradspawn();
   }
-  guy playSound("body_burn");
+  guy playsound("body_burn");
   guy.animname = animname;
   guy.ignoreme = true;
   guy thread event2_bunker_flamedeath_hack_wait();
   guy anim_single_solo(guy, "flamedeath", undefined, point);
-  guy playSound("body_burn");
+  guy playsound("body_burn");
   if(isalive(guy)) {
     if(guy.origin[0] > 2000) {
       guy.deathanim = level.scr_anim["flamebunker1"]["dead"];
@@ -2992,9 +2992,9 @@ event2_trap_door_watcher() {
   set_yaws_of_outro_guys(refpoint);
   trig = getent("event2_blow_door", "targetname");
   breakme = false;
-  while(!breakme) {
+  while (!breakme) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(trig istouching(players[i])) {
         breakme = true;
       }
@@ -3033,20 +3033,20 @@ event3_sully_drop() {
   ang = self gettagangles("tag_weapon_right");
   gun = spawn("script_model", org);
   gun.angles = ang;
-  gun setModel("weapon_usa_trenchgun_rifle");
+  gun setmodel("weapon_usa_trenchgun_rifle");
 }
 
 event3_roebuck_fire_and_drop() {
   self waittillmatch("single anim", "fire_gun");
-  playFXOnTag(level._effect["thompson_muzzle"], self, "tag_flash");
-  self playSound("outro_gunshot");
+  playfxontag(level._effect["thompson_muzzle"], self, "tag_flash");
+  self playsound("outro_gunshot");
   self waittillmatch("single anim", "detach_gun");
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
   org = self gettagorigin("tag_weapon_right");
   ang = self gettagangles("tag_weapon_right");
   gun = spawn("script_model", org);
   gun.angles = ang;
-  gun setModel("weapon_usa_thompson_smg");
+  gun setmodel("weapon_usa_thompson_smg");
 }
 
 set_yaws_of_outro_guys(ref_point) {
@@ -3066,7 +3066,7 @@ set_yaws_of_outro_guys(ref_point) {
   level.sullivan thread inc_goal_setter(sullnode);
   level.sarge thread inc_goal_setter(sargenode);
   level.polo thread inc_goal_setter(polonode);
-  while(level.at_outro_goals != 3) {
+  while (level.at_outro_goals != 3) {
     wait 0.05;
   }
 }
@@ -3111,25 +3111,25 @@ drop_the_sword() {
 event3_outro_dialogue(axis_guy) {
   battlechatter_off();
   level.polo waittillmatch("single anim", "dialog");
-  level.sarge playSound(level.scr_sound["outro"]["outro1"]);
+  level.sarge playsound(level.scr_sound["outro"]["outro1"]);
   level.polo waittillmatch("single anim", "dialog");
-  level.sullivan playSound(level.scr_sound["outro"]["outro2"]);
+  level.sullivan playsound(level.scr_sound["outro"]["outro2"]);
   level.polo waittillmatch("single anim", "dialog");
   playsoundatposition(level.scr_sound["outro"]["outro3"], level.sullivan.origin);
   level.polo waittillmatch("single anim", "dialog");
-  level.polo playSound(level.scr_sound["outro"]["outro4"]);
+  level.polo playsound(level.scr_sound["outro"]["outro4"]);
   level.polo waittillmatch("single anim", "dialog");
-  level.sullivan playSound(level.scr_sound["outro"]["outro5"]);
+  level.sullivan playsound(level.scr_sound["outro"]["outro5"]);
   level.polo waittillmatch("single anim", "dialog");
   playsoundatposition(level.scr_sound["outro"]["outro6"], axis_guy.origin);
   level.polo waittillmatch("single anim", "dialog");
-  axis_guy playSound(level.scr_sound["outro"]["outro7"]);
+  axis_guy playsound(level.scr_sound["outro"]["outro7"]);
   level.polo waittillmatch("single anim", "dialog");
   playsoundatposition(level.scr_sound["outro"]["outro8"], axis_guy.origin);
   level.polo waittillmatch("single anim", "dialog");
-  level.sullivan playSound(level.scr_sound["outro"]["outro9"]);
+  level.sullivan playsound(level.scr_sound["outro"]["outro9"]);
   level.polo waittillmatch("single anim", "dialog");
-  level.sarge playSound(level.scr_sound["outro"]["outro10"]);
+  level.sarge playsound(level.scr_sound["outro"]["outro10"]);
   level.polo waittillmatch("single anim", "dialog");
   playsoundatposition(level.scr_sound["outro"]["outro11"], level.sarge.origin);
 }
@@ -3149,7 +3149,7 @@ event3_door_open_notify_axis() {
   self waittillmatch("single anim", "hit_door");
   level notify("open_door_axis");
   level.sullivan waittillmatch("single anim", "stabbed");
-  playFXOnTag(level._effect["sullivan_death_fx"], level.sullivan, "tag_inhand");
+  playfxontag(level._effect["sullivan_death_fx"], level.sullivan, "tag_inhand");
   thread rumble_all_players("damage_light", "damage_heavy", level.sullivan.origin, 300, 600);
   level.sarge.name = "Sgt. Roebuck";
   self.allowdeath = true;
@@ -3161,11 +3161,10 @@ getClosestEnt(org, array) {
   }
   dist = 99999999;
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }
@@ -3174,10 +3173,10 @@ getClosestEnt(org, array) {
 
 event2_napalm_flameouts() {
   fx1 = getstruct("napalm_flameout1", "targetname");
-  playFX(level._effect["bunker_fire_out"], fx1.origin, anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin, anglestoforward(fx1.angles));
   wait 0.25;
   wait 1;
-  playFX(level._effect["bunker_fire_out"], fx1.origin, anglesToForward(fx1.angles));
+  playfx(level._effect["bunker_fire_out"], fx1.origin, anglestoforward(fx1.angles));
 }
 
 event2_use_and_remove_first_line_color_trigs() {
@@ -3199,7 +3198,7 @@ event3_player_stays_in_the_open_leftside() {
   num_headon_strings = 3;
   host = get_players()[0];
   wait 5;
-  while(!flag("flank_path_taken")) {
+  while (!flag("flank_path_taken")) {
     mgguys = get_ai_group_count("end_mgs");
     if(mgguys < 3) {
       break;
@@ -3237,7 +3236,7 @@ event3_flank_right_flag_set() {
 event3_branching_dialogue_kill_on_player_moveup() {
   level endon("bunker_crushed");
   host = get_players()[0];
-  while(1) {
+  while (1) {
     if(host.origin[1] > -4984) {
       level notify("bunker_crushed");
     }
@@ -3259,7 +3258,7 @@ event3_suppressed_amtank() {
 amtank_firing_loop() {
   level endon("mortar guys dead");
   structs = getstructarray("suppressed_amtank_firepoints", "targetname");
-  while(isalive(self)) {
+  while (isalive(self)) {
     struct = structs[randomint(structs.size)];
     self setturrettargetvec(struct.origin);
     wait randomfloatrange(5, 8);
@@ -3271,22 +3270,22 @@ event3_tanks() {
   level waittill("spawnvehiclegroup23");
   wait 0.05;
   Objective_Add(5, "current");
-  Objective_String(5, &"PEL1_OBJECTIVE2F");
+  Objective_String(5, & "PEL1_OBJECTIVE2F");
   setsaveddvar("compassMaxRange", 100);
   thread event3_tank_checker();
   level.rocket_barrage_max_x = 7500;
   level.rocket_barrage_min_y = -6300;
   level.barrage_charge_time = 15;
-  tanks = getEntArray("event3_tanks", "targetname");
+  tanks = getentarray("event3_tanks", "targetname");
   truck = getent("event3_truck", "targetname");
   truck.unload_group = "all";
-  for(i = 0; i < tanks.size; i++) {
+  for (i = 0; i < tanks.size; i++) {
     tanks[i] thread end_tank_firing_positions();
     tanks[i] thread end_tank_death_watcher(i);
   }
-  while(1) {
+  while (1) {
     tanks_dead = false;
-    for(i = 0; i < tanks.size; i++) {
+    for (i = 0; i < tanks.size; i++) {
       if(isalive(tanks[i])) {
         tanks_dead = true;
       }
@@ -3302,8 +3301,8 @@ event3_tanks() {
 }
 
 event3_remove_end_spawners() {
-  spawners = getEntArray("very_end_spawners", "script_noteworthy");
-  for(i = 0; i < spawners.size; i++) {
+  spawners = getentarray("very_end_spawners", "script_noteworthy");
+  for (i = 0; i < spawners.size; i++) {
     if(!spawners[i] isSpawner()) {
       continue;
     }
@@ -3321,7 +3320,7 @@ end_tank_death_watcher(num) {
 end_tank_firing_positions() {
   self endon("death");
   structs = getstructarray("end_tank_firing_positions", "targetname");
-  while(isalive(self)) {
+  while (isalive(self)) {
     struct = structs[randomint(structs.size)];
     self setturrettargetvec(struct.origin);
     wait randomfloatrange(5, 8);
@@ -3330,7 +3329,7 @@ end_tank_firing_positions() {
 }
 
 grab_starting_guys() {
-  return getEntArray("starting_allies", "targetname");
+  return getentarray("starting_allies", "targetname");
 }
 
 grab_start_points(startpoint, ai_or_player) {
@@ -3369,7 +3368,7 @@ warp_starting_guys(startpoint) {
   if(!isDefined(starts) || !isDefined(guys)) {
     return;
   }
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] teleport(starts[i].origin, starts[i].angles);
   }
 }
@@ -3377,35 +3376,35 @@ warp_starting_guys(startpoint) {
 warp_players(startpoint) {
   starts = grab_start_points(startpoint, "players");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     players[i] setPlayerAngles(starts[i].angles);
   }
 }
 
 set_friendlies_on_chain() {
-  for(i = 0; i < self.size; i++) {
+  for (i = 0; i < self.size; i++) {
     self[i] setgoalentity(get_players()[0]);
   }
 }
 
 disable_ai_color_allies() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] disable_ai_color();
   }
 }
 
 enable_ai_color_allies() {
   ai = getaiarray("allies");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] enable_ai_color();
   }
 }
 
 hide_players() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setorigin((3182, -3877, -164));
   }
   level waittill("ai teleported");
@@ -3414,15 +3413,15 @@ hide_players() {
 set_objective(num, ent) {
   startplace = getdvar("start");
   if(num == 0) {
-    objective_add(0, "active", &"PEL1_OBJECTIVE1", (3152, -7624, -256));
+    objective_add(0, "active", & "PEL1_OBJECTIVE1", (3152, -7624, -256));
     objective_current(0);
   } else if(num == 0.1) {
-    objective_string(0, &"PEL1_OBJECTIVE1A");
+    objective_string(0, & "PEL1_OBJECTIVE1A");
     objective_position(0, (2036, -10207, -295.9));
     objective_current(0);
   } else if(num == 0.3) {
     level.sarge notify("stop objective on entity");
-    objective_string(0, &"PEL1_OBJECTIVE2");
+    objective_string(0, & "PEL1_OBJECTIVE2");
     objective_position(0, (2066, -8670, -324.4));
     objective_current(0);
   } else if(num == 1) {
@@ -3430,9 +3429,9 @@ set_objective(num, ent) {
     trig = getent("bread_crumber_begin", "targetname");
     objective_state(0, "done");
     wait_network_frame();
-    objective_add(1, "active", &"PEL1_OBJECTIVE2A", (trig.origin));
+    objective_add(1, "active", & "PEL1_OBJECTIVE2A", (trig.origin));
     objective_current(1);
-    while(1) {
+    while (1) {
       trig waittill("trigger");
       if(!isDefined(trig.target)) {
         break;
@@ -3445,17 +3444,17 @@ set_objective(num, ent) {
   } else if(num == 2) {
     objective_state(1, "done");
     wait_network_frame();
-    objective_add(2, "current", &"PEL1_OBJECTIVE2B", (2897, -3763, -214));
+    objective_add(2, "current", & "PEL1_OBJECTIVE2B", (2897, -3763, -214));
     getent("obj_entrance_gained", "targetname") waittill("trigger");
     objective_state(2, "done");
     wait_network_frame();
-    objective_add(3, "current", &"PEL1_OBJECTIVE2C", (2838.3, -3879.7, -47.9));
+    objective_add(3, "current", & "PEL1_OBJECTIVE2C", (2838.3, -3879.7, -47.9));
     wait_network_frame();
     thread event3_stronghold_checker();
     flag_wait("mortars_cleared");
     flag_wait("stronghold_cleared");
     flag_wait("end_tanks_dead");
-    objective_add(6, "active", &"PEL1_OBJECTIVE2D", (2832, -3416, -40));
+    objective_add(6, "active", & "PEL1_OBJECTIVE2D", (2832, -3416, -40));
     objective_current(6);
     setsaveddvar("compassMaxRange", 800);
   }
@@ -3464,9 +3463,9 @@ set_objective(num, ent) {
 
 event3_tank_checker() {
   level waittill("end tank died");
-  objective_string(5, &"PEL1_OBJECTIVE2G");
+  objective_string(5, & "PEL1_OBJECTIVE2G");
   level waittill("end tank died");
-  objective_string(5, &"PEL1_OBJECTIVE2H");
+  objective_string(5, & "PEL1_OBJECTIVE2H");
 }
 
 event3_stronghold_checker() {
@@ -3477,7 +3476,7 @@ event3_stronghold_checker() {
 
 event3_mortar_checker() {
   trigger_wait("mortar_crew_spawn1", "script_noteworthy");
-  objective_add(4, "current", &"PEL1_OBJECTIVE2E", (4022, -3950, -165.1));
+  objective_add(4, "current", & "PEL1_OBJECTIVE2E", (4022, -3950, -165.1));
   waittill_aigroupcount("mortar_squads", 0);
   flag_set("mortars_cleared");
   objective_state(4, "done");
@@ -3489,7 +3488,7 @@ grab_friendlies() {
 
 cleanup_enemies() {
   ai = getaiarray("axis");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isalive(ai[i])) {
       ai[i] dodamage(ai[i].health + 5, (0, 0, 0));
     }
@@ -3498,16 +3497,16 @@ cleanup_enemies() {
 
 objective_on_entity(obj_num, ent) {
   ent endon("stop objective on entity");
-  while(1) {
+  while (1) {
     objective_position(obj_num, ent.origin);
     wait(0.1);
   }
 }
 
 threat_group_setter() {
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i] setthreatbiasgroup("players");
     }
     wait(2);
@@ -3536,7 +3535,7 @@ start_beach() {
   getent("radio_squad_spawner", "targetname") useby(get_players()[0]);
   wait 0.1;
   ai = get_ai_group_ai("coral_radio_guys");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_forcecolor) && ai[i].script_forcecolor == "y") {
       level.radioguy = ai[i];
       level.radioguy.animname = "radioguy";
@@ -3571,7 +3570,7 @@ start_off_lvt() {
   getent("radio_squad_spawner", "targetname") useby(get_players()[0]);
   wait 0.1;
   ai = get_ai_group_ai("coral_radio_guys");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_forcecolor) && ai[i].script_forcecolor == "y") {
       level.radioguy = ai[i];
       level.radioguy.animname = "radioguy";
@@ -3623,7 +3622,7 @@ start_first_fight() {
   getent("radio_squad_spawner", "targetname") useby(get_players()[0]);
   wait 0.1;
   ai = get_ai_group_ai("coral_radio_guys");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_forcecolor) && ai[i].script_forcecolor == "y") {
       level.radioguy = ai[i];
       level.radioguy.animname = "radioguy";
@@ -3649,7 +3648,7 @@ start_second_fight_left() {
   thread warp_players("2nd_fight_l");
   thread event2_trap_door_watcher();
   wait(1);
-  for(i = 0; i < level.heroes.size; i++) {
+  for (i = 0; i < level.heroes.size; i++) {
     level.heroes[i] enable_ai_color();
   }
   thread start_event2_colorsetup();
@@ -3671,7 +3670,7 @@ start_third_fight() {
   thread warp_players("3rd_fight");
   thread event2_trap_door_watcher();
   wait(1);
-  for(i = 0; i < level.heroes.size; i++) {
+  for (i = 0; i < level.heroes.size; i++) {
     level.heroes[i] enable_ai_color();
   }
   thread enable_player_weapons();
@@ -3695,7 +3694,7 @@ start_mortars() {
   thread event2_grenade_death_guy();
   thread set_objective(2);
   wait(1);
-  for(i = 0; i < level.heroes.size; i++) {
+  for (i = 0; i < level.heroes.size; i++) {
     level.heroes[i] enable_ai_color();
   }
   thread start_event2_colorsetup();
@@ -3726,7 +3725,7 @@ start_ending() {
 
 start_event2_colorsetup() {
   wait(1);
-  for(i = 0; i < level.heroes.size; i++) {
+  for (i = 0; i < level.heroes.size; i++) {
     level.heroes[i] enable_ai_color();
   }
   thread event2_use_and_remove_first_line_color_trigs();
@@ -3735,7 +3734,7 @@ start_event2_colorsetup() {
 enable_player_weapons() {
   level.enable_weapons = 1;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] enableweapons();
   }
 }
@@ -3752,9 +3751,8 @@ invincible_turret_setup(maxrange, fireondrones) {
     self thread maps\_mgturret::mg42_target_drones(undefined, "axis");
   }
   self setshadowhint("never");
-  if(isDefined(maxrange)) {
+  if(isDefined(maxrange))
     self.maxrange = maxrange;
-  }
 }
 
 always_fire(fireondrones) {
@@ -3763,14 +3761,14 @@ always_fire(fireondrones) {
   if(!isDefined(fireondrones) || fireondrones == 0) {
     squibs = getstructarray("squibline_flame_bunker", "targetname");
   }
-  while(1) {
+  while (1) {
     level endon("battle_on");
     burstsize = randomintrange(8, 20);
     if(isDefined(squibs) && squibs.size > 0) {
       squib = squibs[randomint(squibs.size)];
       squib thread event1_squibline_think_burst();
     }
-    for(i = 0; i < burstsize; i++) {
+    for (i = 0; i < burstsize; i++) {
       self shootturret();
       self.isfiring = true;
       wait(0.1);
@@ -3860,7 +3858,7 @@ remove_fake_shoulders() {
 }
 
 populate_lvt_with_drones(num_guys) {
-  for(i = 0; i < num_guys; i++) {
+  for (i = 0; i < num_guys; i++) {
     animpos = maps\_vehicle_aianim::anim_pos(self, i);
     self.drone_riders[i] = spawn_fake_guy_lvt(self gettagorigin(animpos.sittag), self gettagangles(animpos.sittag), 1, "drone_riders", undefined, 1);
     self.drone_riders[i] linkto(self, animpos.sittag);
@@ -3874,7 +3872,7 @@ populate_lvt_with_drones(num_guys) {
 
 drone_lvt_death_think() {
   self waittill_either("fake_death", "death");
-  for(i = 0; i < self.drone_riders.size; I++) {
+  for (i = 0; i < self.drone_riders.size; I++) {
     self.drone_riders[i] notify("death");
     self.drone_riders[i] thread maps\_drones::drone_delete();
   }
@@ -3884,7 +3882,7 @@ drone_on_lvt_think(guy) {
   self endon("drone_unload");
   self endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, guy.position);
-  while(1) {
+  while (1) {
     guy animscripted("lvt_ride_idle", self gettagorigin(animpos.sittag), self gettagangles(animpos.sittag) + (0, 180, 0), animpos.idle);
     guy waittillmatch("lvt_ride_idle", "end");
   }
@@ -3893,7 +3891,7 @@ drone_on_lvt_think(guy) {
 unload_lvt_think() {
   self endon("death");
   self waittill("drone_unload");
-  for(i = 0; i < self.drone_riders.size; i++) {
+  for (i = 0; i < self.drone_riders.size; i++) {
     animpos = maps\_vehicle_aianim::anim_pos(self, self.drone_riders[i].position);
     self.drone_riders[i] stopanimscripted();
     self.drone_riders[i] unlink();
@@ -3925,7 +3923,7 @@ spawn_fake_guy_lvt(startpoint, startangles, us, animname, name, is_lvt_drone, as
     guy character\char_jap_makpel_rifle::main();
   }
   guy UseAnimTree(#animtree);
-  guy.a = spawnStruct();
+  guy.a = spawnstruct();
   guy.animname = animname;
   if(!isDefined(name)) {
     guy.targetname = "drone";
@@ -4014,8 +4012,8 @@ event1_lvt_jeep_rollout() {
   self clearanim( % v_lvt4_float_loop, 0);
   self setflaggedanim("lvt_stuck", % v_lvt4_peleliu1_jeep_destroyed, 1, 0);
   wait 0.4;
-  playFXOnTag(level._effect["jeep_explode"], self.attached_jeep, "tag_origin");
-  self.attached_jeep playSound("vehicle_explo");
+  playfxontag(level._effect["jeep_explode"], self.attached_jeep, "tag_origin");
+  self.attached_jeep playsound("vehicle_explo");
   self thread lvt_fake_death(0);
   self clearanim( % v_lvt4_peleliu1_jeep_destroyed, 0);
   self setflaggedanim("fast_open_ramp", % v_lvt4_ramp_open, 1, 0);
@@ -4041,34 +4039,34 @@ event1_lst_door_open() {
 lst_door_sound_on_done() {
   self waittillmatch("lst_door_open", "end");
   door = getent("lst_door_open_sound", "targetname");
-  door playSound("door_stop");
+  door playsound("door_stop");
 }
 
 lst_door_fx() {
   wait 5;
   doorfxpoint = getstruct("lst_door_fx", "targetname");
-  playFX(level._effect["door_splash"], doorfxpoint.origin, anglesToForward(doorfxpoint.angles));
+  playfx(level._effect["door_splash"], doorfxpoint.origin, anglestoforward(doorfxpoint.angles));
   level notify("lst door splash");
   trigger_wait("lvt_splash_trig", "targetname");
-  playFXOnTag(level._effect["exit_splash"], level.players_lvt, "tag_wake");
+  playfxontag(level._effect["exit_splash"], level.players_lvt, "tag_wake");
   level notify("lvt_splash");
   thread rumble_all_players("damage_heavy");
   thread do_water_drops_on_camera_for_time(5);
   thread do_water_sheeting_on_camera();
   thread get_all_allies_wet_in_lvt();
-  level.players_lvt.front_sounds playLoopSound("lvt_wake");
-  level.players_lvt.rear_sounds playLoopSound("lvt_engines");
+  level.players_lvt.front_sounds playloopsound("lvt_wake");
+  level.players_lvt.rear_sounds playloopsound("lvt_engines");
 }
 
 get_all_allies_wet_in_lvt() {
   ai = getaiarray("allieS");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i] thread wetness_on_ai(1, 1);
   }
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerDisconnect();
     player thread onPlayerSpawned();
@@ -4084,7 +4082,7 @@ onPlayerDisconnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     println("Player spawned in to game at " + self.origin);
     self thread maps\_dpad_asset::rocket_barrage_player_init();
@@ -4097,7 +4095,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     println("Player killed at " + self.origin);
   }
@@ -4106,9 +4104,9 @@ onPlayerKilled() {
 lvt_fake_death(do_sink, do_exploding_guys) {
   self setspeed(0, 5);
   self notify("fake_death");
-  playFXOnTag(level._effect["lvt_explode"], self, "tag_origin");
-  self playSound("explo_metal_rand");
-  self setModel("vehicle_usa_tracked_lvt4_dest");
+  playfxontag(level._effect["lvt_explode"], self, "tag_origin");
+  self playsound("explo_metal_rand");
+  self setmodel("vehicle_usa_tracked_lvt4_dest");
   if(isDefined(do_exploding_guys)) {
     self thread lvt_guys_exploding_out();
   }
@@ -4126,13 +4124,13 @@ lvt_fake_death(do_sink, do_exploding_guys) {
 friendlies_crouch_only(on_off) {
   ai = grab_friendlies();
   if(on_off) {
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(isalive(ai[i])) {
         ai[i] allowedstances("crouch");
       }
     }
   } else {
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(isalive(ai[i])) {
         ai[i] allowedstances("crouch", "stand", "prone");
       }
@@ -4205,8 +4203,8 @@ log_guy_setup() {
   self endon("death");
   self waittill("goal");
   wait randomintrange(10, 25);
-  volumes = getEntArray("info_volume", "classname");
-  for(i = 0; i < volumes.size; i++) {
+  volumes = GetEntArray("info_volume", "classname");
+  for (i = 0; i < volumes.size; i++) {
     volume = volumes[i];
     if(isDefined(volume.script_goalvolume) && volume.script_goalvolume == 1) {
       self.goalradius = 1000;
@@ -4220,8 +4218,8 @@ stump_guy_setup() {
   self endon("death");
   self waittill("goal");
   wait randomintrange(10, 25);
-  volumes = getEntArray("info_volume", "classname");
-  for(i = 0; i < volumes.size; i++) {
+  volumes = GetEntArray("info_volume", "classname");
+  for (i = 0; i < volumes.size; i++) {
     volume = volumes[i];
     if(isDefined(volume.script_goalvolume) && volume.script_goalvolume == 1) {
       self.goalradius = 1000;
@@ -4360,7 +4358,7 @@ grass_guys_init() {
 
 give_grass_guy_achivement() {
   self endon("grassguy_awake");
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("damage", amount, attacker);
     if(isplayer(attacker) && isDefined(self)) {
       if(amount >= self.health) {
@@ -4421,11 +4419,11 @@ get_random(array) {
 die_if_ally_or_player_near() {
   self endon("death");
   self endon("damage");
-  while(1) {
+  while (1) {
     guys = getaiarray("allies");
     players = get_players();
     guys = array_combine(guys, players);
-    for(i = 0; i < guys.size; i++) {
+    for (i = 0; i < guys.size; i++) {
       if(distance(guys[i].origin, self.origin) < 150) {
         self dodamage(self.health + 1, self.origin + (0, 0, randomintrange(16, 64)));
       }
@@ -4444,10 +4442,10 @@ pel1_ai_spawner(spawner_targetname) {
 }
 
 delete_trees_and_bushes() {
-  deleteme = getEntArray("run1_bushes", "targetname");
-  deleteme2 = getEntArray("run1_trees", "targetname");
+  deleteme = getentarray("run1_bushes", "targetname");
+  deleteme2 = getentarray("run1_trees", "targetname");
   deleteme = array_combine(deleteme, deleteme2);
-  for(i = 0; i < deleteme.size; i++) {
+  for (i = 0; i < deleteme.size; i++) {
     deleteme[i] delete();
   }
 }
@@ -4455,7 +4453,7 @@ delete_trees_and_bushes() {
 lvt_float_loop() {
   wait randomfloatrange(0.1, 5.0);
   self endon("stop float loop");
-  while(1) {
+  while (1) {
     self setflaggedanimrestart("float_loop", level.scr_anim["lvts"]["float_loop"], 1);
     self waittillmatch("float_loop", "end");
   }
@@ -4476,7 +4474,7 @@ jog_internal() {
   jogs_forward[jogs_forward.size] = "jog2";
   self.run_dont_jog = false;
   jogging = false;
-  while(flag("jog_enabled")) {
+  while (flag("jog_enabled")) {
     jogging = true;
     if(!self.run_dont_jog && self.origin[1] > -10350) {
       if(self.origin[0] < 1930) {
@@ -4509,7 +4507,7 @@ start_teleport_players(start_name, coop) {
     starts = getstructarray(start_name, "targetname");
   }
   assertex(starts.size >= players.size, "Need more start positions for players!");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     if(isDefined(starts[i].angles)) {
       players[i] setPlayerAngles(starts[i].angles);
@@ -4523,8 +4521,8 @@ start_teleport_players(start_name, coop) {
 get_sorted_starts(start_name) {
   player_starts = [];
   player_starts = getstructarray(start_name, "targetname");
-  for(i = 0; i < player_starts.size; i++) {
-    for(j = i; j < player_starts.size; j++) {
+  for (i = 0; i < player_starts.size; i++) {
+    for (j = i; j < player_starts.size; j++) {
       if(player_starts[j].script_int < player_starts[i].script_int) {
         temp = player_starts[i];
         player_starts[i] = player_starts[j];
@@ -4543,21 +4541,21 @@ do_water_drops_on_camera_for_time(wait_time) {
 
 players_water_drops_on() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setwaterdrops(100);
   }
 }
 
 players_water_drops_off() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setwaterdrops(0);
   }
 }
 
 do_water_sheeting_on_camera() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setwatersheeting(2, 3);
   }
 }
@@ -4576,7 +4574,7 @@ ok_to_set_wetness() {
 
 wetness_monitor() {
   level._num_wetness = 0;
-  while(1) {
+  while (1) {
     wait_network_frame();
     level._num_wetness = 0;
   }
@@ -4585,7 +4583,7 @@ wetness_monitor() {
 wetness_on_ai(wetness, top_down, fade_time) {
   self endon("death");
   if(!isDefined(self.wetness)) {
-    while(!ok_to_set_wetness()) {
+    while (!ok_to_set_wetness()) {
       wait_network_frame();
     }
     self setwetness(wetness, top_down);
@@ -4598,8 +4596,8 @@ wetness_on_ai(wetness, top_down, fade_time) {
     }
     wet_diff = wetness - self.wetness;
     wet_per_frame = wet_diff / frames;
-    for(i = 0; i < frames; i++) {
-      while(!ok_to_set_wetness()) {
+    for (i = 0; i < frames; i++) {
+      while (!ok_to_set_wetness()) {
         wait_network_frame();
       }
       self.wetness += wet_per_frame;
@@ -4631,7 +4629,7 @@ bloody_death(delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     random = RandomIntRange(0, tags.size);
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
@@ -4644,12 +4642,12 @@ bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
-  playFXOnTag(fxName, self, tag);
+  PlayFxOnTag(fxName, self, tag);
 }
 
 rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);
@@ -4664,7 +4662,7 @@ rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumbl
 
 populate_lvt_with_heads_and_shoulders() {
   self.fake_shoulders = spawn("script_model", self.origin);
-  self.fake_shoulders setModel("static_peleliu_lvtcrew");
+  self.fake_shoulders setmodel("static_peleliu_lvtcrew");
   self.fake_shoulders.angles = self.angles;
   self.fake_shoulders linkto(self, "tag_origin", (-80, 0, 81));
   self thread remove_fake_shoulders();

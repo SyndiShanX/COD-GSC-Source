@@ -15,17 +15,17 @@
 #namespace _gadget_misdirection;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_misdirection", &__init__, undefined, undefined);
+  system::register("gadget_misdirection", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(37, &gadget_misdirection_on, &gadget_misdirection_off);
-  ability_player::register_gadget_possession_callbacks(37, &gadget_misdirection_on_give, &gadget_misdirection_on_take);
-  ability_player::register_gadget_flicker_callbacks(37, &gadget_misdirection_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(37, &gadget_misdirection_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(37, &gadget_misdirection_is_flickering);
-  ability_player::register_gadget_primed_callbacks(37, &gadget_misdirection_is_primed);
-  callback::on_connect(&gadget_misdirection_on_connect);
+  ability_player::register_gadget_activation_callbacks(37, & gadget_misdirection_on, & gadget_misdirection_off);
+  ability_player::register_gadget_possession_callbacks(37, & gadget_misdirection_on_give, & gadget_misdirection_on_take);
+  ability_player::register_gadget_flicker_callbacks(37, & gadget_misdirection_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(37, & gadget_misdirection_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(37, & gadget_misdirection_is_flickering);
+  ability_player::register_gadget_primed_callbacks(37, & gadget_misdirection_is_primed);
+  callback::on_connect( & gadget_misdirection_on_connect);
 }
 
 function gadget_misdirection_is_inuse(slot) {
@@ -33,52 +33,52 @@ function gadget_misdirection_is_inuse(slot) {
 }
 
 function gadget_misdirection_is_flickering(slot) {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     return self[[level.cybercom.misdirection._is_flickering]](slot);
   }
   return 0;
 }
 
 function gadget_misdirection_on_flicker(slot, weapon) {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._on_flicker]](slot, weapon);
   }
 }
 
 function gadget_misdirection_on_give(slot, weapon) {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._on_give]](slot, weapon);
   }
 }
 
 function gadget_misdirection_on_take(slot, weapon) {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._on_take]](slot, weapon);
   }
 }
 
 function gadget_misdirection_on_connect() {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._on_connect]]();
   }
 }
 
 function gadget_misdirection_on(slot, weapon) {
   self flagsys::set("gadget_misdirection_on");
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._on]](slot, weapon);
   }
 }
 
 function gadget_misdirection_off(slot, weapon) {
   self flagsys::clear("gadget_misdirection_on");
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._off]](slot, weapon);
   }
 }
 
 function gadget_misdirection_is_primed(slot, weapon) {
-  if(isDefined(level.cybercom) && isDefined(level.cybercom.misdirection)) {
+  if(isdefined(level.cybercom) && isdefined(level.cybercom.misdirection)) {
     self[[level.cybercom.misdirection._is_primed]](slot, weapon);
   }
 }

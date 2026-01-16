@@ -10,12 +10,12 @@ main() {
   self notify("killanimscript");
   self._tag_entity endon(self._anime);
 
-  if(isDefined(self._custom_anim_thread)) {
+  if(isdefined(self._custom_anim_thread)) {
     self thread[[self._custom_anim_thread]]();
     self._custom_anim_thread = undefined;
   }
 
-  var_0 = isDefined(self._custom_anim_loop) && self._custom_anim_loop;
+  var_0 = isdefined(self._custom_anim_loop) && self._custom_anim_loop;
 
   if(var_0) {
     self endon("stop_loop");
@@ -37,19 +37,18 @@ main() {
   var_5 = getstartangles(self._tag_entity.origin, self._tag_entity.angles, var_3);
   var_6 = self getdroptofloorposition(var_4);
 
-  if(isDefined(var_6)) {
+  if(isdefined(var_6))
     var_4 = var_6;
-  } else {}
+  else {}
 
-  if(!isDefined(self.noteleport)) {
+  if(!isdefined(self.noteleport))
     self teleport(var_4, var_5);
-  }
 
   self.pushable = 0;
   var_7 = 0.3;
   var_8 = 0.2;
 
-  if(isDefined(self.anim_blend_time_override)) {
+  if(isdefined(self.anim_blend_time_override)) {
     var_7 = self.anim_blend_time_override;
     var_8 = self.anim_blend_time_override;
   }
@@ -68,21 +67,20 @@ main() {
   var_11 = "end";
 
   if(!var_0) {
-    if(animhasnotetrack(var_3, "finish")) {
+    if(animhasnotetrack(var_3, "finish"))
       var_11 = "finish";
-    } else if(animhasnotetrack(var_3, "stop anim")) {
+    else if(animhasnotetrack(var_3, "stop anim"))
       var_11 = "stop anim";
-    }
   }
 
-  for(;;) {
+  for (;;) {
     self waittillmatch(var_9, var_11);
 
     if(var_0) {
       var_3 = level.scr_anim[self._animname][var_1][randomint(var_2)];
       self setflaggedanimknoblimitedrestart(var_9, var_3, 1, 0.2, 1);
 
-      if(isDefined(var_10)) {
+      if(isdefined(var_10)) {
         var_10 thread maps\_anim::start_notetrack_wait(self, var_9, var_1, self._animname, var_3);
         var_10 thread maps\_anim::animscriptdonotetracksthread(self, var_9, var_1);
       }
@@ -93,9 +91,8 @@ main() {
     break;
   }
 
-  if(var_11 != "end") {
+  if(var_11 != "end")
     self orientmode("face motion");
-  }
 
   self notify("finished_custom_animmode" + var_1);
 }

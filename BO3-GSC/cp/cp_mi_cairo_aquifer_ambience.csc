@@ -15,23 +15,23 @@
 #namespace namespace_1254c007;
 
 function autoexec __init__sytem__() {
-  system::register("aquifer_ambience", &__init__, undefined, undefined);
+  system::register("aquifer_ambience", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "show_sand_storm", 1, 1, "int", &function_7ddc918d, 0, 0);
-  clientfield::register("world", "hide_sand_storm", 1, 1, "int", &function_e5def758, 0, 0);
-  clientfield::register("world", "play_trucks", 1, 1, "int", &function_91528afa, 0, 0);
-  clientfield::register("world", "start_ambience", 1, 1, "int", &function_134f3566, 0, 0);
-  clientfield::register("world", "stop_ambience", 1, 1, "int", &function_ad396d58, 0, 0);
-  clientfield::register("world", "kill_ambience", 1, 1, "int", &function_9ba61e20, 0, 0);
+  clientfield::register("toplayer", "show_sand_storm", 1, 1, "int", & function_7ddc918d, 0, 0);
+  clientfield::register("world", "hide_sand_storm", 1, 1, "int", & function_e5def758, 0, 0);
+  clientfield::register("world", "play_trucks", 1, 1, "int", & function_91528afa, 0, 0);
+  clientfield::register("world", "start_ambience", 1, 1, "int", & function_134f3566, 0, 0);
+  clientfield::register("world", "stop_ambience", 1, 1, "int", & function_ad396d58, 0, 0);
+  clientfield::register("world", "kill_ambience", 1, 1, "int", & function_9ba61e20, 0, 0);
   level thread function_89b52898();
 }
 
 function main(localclientnum) {}
 
 function function_134f3566(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.scriptbundles["scene"]["p7_fxanim_cp_aqu_war_dogfight_main_loop_a_bundle_client"])) {
+  if(!isdefined(level.scriptbundles["scene"]["p7_fxanim_cp_aqu_war_dogfight_main_loop_a_bundle_client"])) {
     return;
   }
   thread function_ca056d7e();
@@ -45,7 +45,7 @@ function function_134f3566(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_ad396d58(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level notify("hash_9e245bdd");
-  if(!isDefined(level.var_c2750169)) {
+  if(!isdefined(level.var_c2750169)) {
     level.var_c2750169 = [];
   }
   foreach(jet in level.var_c2750169) {
@@ -63,12 +63,12 @@ function function_ad396d58(localclientnum, oldval, newval, bnewent, binitialsnap
     var_3668f67c thread scene::stop(1);
     var_3668f67c.scene_played = 0;
   }
-  array::run_all(level.var_c2750169, &scene::stop, 1);
+  array::run_all(level.var_c2750169, & scene::stop, 1);
 }
 
 function function_9ba61e20(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level notify("hash_9e245bdd");
-  if(isDefined(level.var_c2750169)) {
+  if(isdefined(level.var_c2750169)) {
     foreach(jet in level.var_c2750169) {
       jet thread scene::stop(1);
       jet.scene_played = 0;
@@ -101,7 +101,7 @@ function function_ca056d7e() {
   var_ed7818f9 = [];
   array::add(var_ed7818f9, "p7_fxanim_cp_aqu_war_flyover_a_jet_bundle");
   array::add(var_ed7818f9, "p7_fxanim_cp_aqu_war_flyover_b_jet_bundle");
-  if(isDefined(level.var_c2750169)) {
+  if(isdefined(level.var_c2750169)) {
     foreach(jet in level.var_c2750169) {
       if(jet scene::is_playing()) {
         jet scene::stop();
@@ -109,13 +109,13 @@ function function_ca056d7e() {
     }
   }
   level notify("hash_9e245bdd");
-  if(!isDefined(level.var_c2750169)) {
+  if(!isdefined(level.var_c2750169)) {
     level.var_c2750169 = [];
-    for(i = 0; i < 12; i++) {
+    for (i = 0; i < 12; i++) {
       level.var_c2750169[level.var_c2750169.size] = struct::spawn(a_pos[i].origin, a_pos[i].angles);
     }
   }
-  for(i = 0; i < 12; i++) {
+  for (i = 0; i < 12; i++) {
     level.var_c2750169[i] thread function_5794dab9(var_ed7818f9[i % 2], randomfloatrange(0, 20));
   }
 }
@@ -129,16 +129,16 @@ function function_5794dab9(s_bundle, delay) {
 }
 
 function function_e5def758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_76968f56 = getEntArray(localclientnum, "sand_storm", "targetname");
+  var_76968f56 = getentarray(localclientnum, "sand_storm", "targetname");
   if(var_76968f56.size > 0) {
-    array::run_all(var_76968f56, &visible, 0);
+    array::run_all(var_76968f56, & visible, 0);
   }
 }
 
 function function_7ddc918d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_76968f56 = getEntArray(localclientnum, "sand_storm", "targetname");
+  var_76968f56 = getentarray(localclientnum, "sand_storm", "targetname");
   if(var_76968f56.size > 0) {
-    array::run_all(var_76968f56, &visible, 1);
+    array::run_all(var_76968f56, & visible, 1);
   }
 }
 
@@ -151,7 +151,7 @@ function visible(bool) {
 }
 
 function function_91528afa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.scriptbundles["scene"]["p7_fxanim_cp_aqu_war_groundassault_bundle"])) {
+  if(!isdefined(level.scriptbundles["scene"]["p7_fxanim_cp_aqu_war_groundassault_bundle"])) {
     return;
   }
   pos = getent(localclientnum, "dogfighting_scene_client_side", "targetname");

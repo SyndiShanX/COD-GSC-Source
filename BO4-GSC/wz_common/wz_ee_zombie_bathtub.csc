@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace namespace_87f097c4;
 
 autoexec __init__system__() {
@@ -25,7 +26,7 @@ zombie_arm_blood_splash(localclientnum, oldval, newval, bnewent, binitialsnap, f
   bathtub = struct::get(#"zombie_bathub", "targetname");
 
   if(isDefined(bathtub)) {
-    playFX(localclientnum, # "hash_6e2b2bcea07134d1", bathtub.origin, (0, 0, 1));
+    playFX(localclientnum, #"hash_6e2b2bcea07134d1", bathtub.origin, (0, 0, 1));
   }
 }
 
@@ -34,6 +35,6 @@ bathtub_fake_soul_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   bathtub = struct::get(#"zombie_bathub", "targetname");
 
   if(isDefined(bathtub)) {
-    playSound(localclientnum, # "zmb_sq_souls_impact", bathtub.origin);
+    playSound(localclientnum, #"zmb_sq_souls_impact", bathtub.origin);
   }
 }

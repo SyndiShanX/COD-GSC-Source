@@ -32,7 +32,7 @@ init() {
   PrecacheRumble("artillery_rumble");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allownapalm")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("napalm_mp", "napalm_mp", "killstreak_napalm", "napalm_used", ::useKillstreakNapalm, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("napalm_mp", &"MP_EARNED_NAPALM", &"KILLSTREAK_NAPALM_NOT_AVAILABLE", &"MP_WAR_NAPALM_INBOUND", &"MP_WAR_NAPALM_INBOUND_NEAR_YOUR_POSITION");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("napalm_mp", & "MP_EARNED_NAPALM", & "KILLSTREAK_NAPALM_NOT_AVAILABLE", & "MP_WAR_NAPALM_INBOUND", & "MP_WAR_NAPALM_INBOUND_NEAR_YOUR_POSITION");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("napalm_mp", "mpl_killstreak_napalm", "kls_napalm_used", "", "kls_napalm_enemy", "", "kls_napalm_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("napalm_mp", "scr_givenapalm");
   }
@@ -40,13 +40,11 @@ init() {
   level.napalmFlameMaxAngle = 40;
 }
 useKillstreakNapalm(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
     return false;
-  }
   result = self maps\mp\_napalm::selectNapalmLocation(hardpointType);
-  if(!isDefined(result) || !result) {
+  if(!isDefined(result) || !result)
     return false;
-  }
   return true;
 }
 selectNapalmLocation(hardpointType) {
@@ -65,9 +63,8 @@ selectNapalmLocation(hardpointType) {
   return self finishDualHardpointLocationUsage(location, int(yaw), ::useNapalm);
 }
 useNapalm(origin, yaw) {
-  if(self maps\mp\_killstreakrules::killstreakStart("napalm_mp", self.team) == false) {
+  if(self maps\mp\_killstreakrules::killstreakStart("napalm_mp", self.team) == false)
     return false;
-  }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("team", "allowHardpointStreakAfterDeath")) {
     ownerDeathCount = self.deathCount;
   } else {
@@ -101,14 +98,14 @@ callNapalmStrike(owner, targetPos, startPoint, endPoint, yaw, planeFlyHeight) {
   plane setClientFlag(level.const_flag_napalm);
   team = owner.team;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] PlayRumbleOnEntity("plane_rumble");
   }
   exitRatio = 0.5;
   destPoint = getPointOnLine(startPoint, endPoint, exitRatio);
   plane moveTo(endPoint, flyTime, 0, 0);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] PlayRumbleOnEntity("plane_rumble");
   }
   planedir = anglesToForward(plane.angles);
@@ -130,7 +127,7 @@ callNapalmStrike(owner, targetPos, startPoint, endPoint, yaw, planeFlyHeight) {
 }
 createKillcams(startPoint, destPoint, planedir, flyTime) {
   killcamEntities = [];
-  for(i = 0; i < 6; i++) {
+  for (i = 0; i < 6; i++) {
     killcamEntities[killcamEntities.size] = createBombKillcamEnt(startPoint, destPoint, planedir, flyTime);
   }
   return killcamEntities;
@@ -165,8 +162,8 @@ doBombKillcams(killcamEntities, killcamIndex, velocity, heightAboveGround) {
 createGroundFlameEnt(origin) {
   groundFlameEnt = spawn("script_model", origin);
   if(isDefined(groundFlameEnt)) {
-    groundFlameEnt playSound("mpl_kls_napalm_exlpo");
-    groundFlameEnt playLoopSound("mpl_kls_napalm_fire");
+    groundFlameEnt playsound("mpl_kls_napalm_exlpo");
+    groundFlameEnt playloopsound("mpl_kls_napalm_fire");
     groundFlameEnt thread stopLoopSoundAfterTime(13.0);
   }
   return groundFlameEnt;
@@ -177,29 +174,25 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   bombSpeedScale = 1 / 2;
   planeflyspeed = 7000;
   bombWait = calculateReleaseTime(flyTime, heightAboveGround, planeflyspeed, bombSpeedScale);
-  if(bombWait < 0.0) {
+  if(bombWait < 0.0)
     bombWait = 0.0;
-  }
   wait(bombWait);
   planedir = anglesToForward(plane.angles);
-  velocity = vector_scale(anglesToForward(plane.angles), planeflyspeed * bombSpeedScale);
+  velocity = vector_scale(anglestoforward(plane.angles), planeflyspeed * bombSpeedScale);
   bomb = owner launchbomb("napalm_mp", plane.origin, velocity);
   assert(isDefined(bomb));
-  if(!isDefined(bomb)) {
+  if(!isDefined(bomb))
     return;
-  }
   bomb.killCamEntities = killcamEntities;
   thread doBombKillcams(killcamEntities, killcamIndex, velocity, heightAboveGround);
   fallTime = calculateFallTime(heightAboveGround);
   fxTimer = fallTime - 0.5;
-  if(fxTimer < 0.1) {
+  if(fxTimer < 0.1)
     fxTimer = 0.1;
-  }
   bomb.ownerRequiredDeathCount = requiredDeathCount;
   wait(fxTimer);
-  if(!isDefined(bomb)) {
+  if(!isDefined(bomb))
     return;
-  }
   originalBombAngles = bomb.angles;
   originalBombOrigin = bomb.origin;
   fakeBomb = spawn("script_model", originalBombOrigin);
@@ -212,13 +205,12 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     bomb setModel("tag_origin");
   }
   wait(0.10);
-  playFXOnTag(level.fx_napalm_bomb, fakeBomb, "tag_origin");
+  playfxontag(level.fx_napalm_bomb, fakeBomb, "tag_origin");
   wait 0.05;
-  if(!isDefined(bomb) || !isDefined(bomb.origin)) {
+  if(!isDefined(bomb) || !isDefined(bomb.origin))
     bombOrigin = originalBombOrigin;
-  } else {
+  else
     bombOrigin = bomb.origin;
-  }
   bombAngles = fakeBomb.angles;
   repeat = 7;
   minAngles = getDvarIntDefault(#"scr_napalm_minAngles", 5);
@@ -233,14 +225,13 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   trace = bulletTrace(traceStart, traceEnd, false, undefined);
   groundFlameEnt = createGroundFlameEnt(trace["position"]);
   seperation = getDvarIntDefault(#"scr_napalm_seperation", 200);
-  for(i = 0; i < repeat; i++) {
+  for (i = 0; i < repeat; i++) {
     traceStart = (bombOrigin - vector_scale(traceDir, 50)) + (bombDir * (seperation * (i + 1)));
     traceEnd = traceStart + vector_scale(traceDir, 10000);
     trace = bulletTrace(traceStart, traceEnd, false, undefined);
     traceHit = trace["position"];
-    if(!isDefined(traceHit)) {
+    if(!isDefined(traceHit))
       continue;
-    }
     hitpos += traceHit;
     hitNormal = trace["normal"];
     currentHeight = traceHit[2];
@@ -266,9 +257,8 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
 }
 unlinkKillcam(timer) {
   self.angles = (0, 0, 0);
-  if(timer > 0.0) {
+  if(timer > 0.0)
     wait(timer);
-  }
   self unlink();
 }
 callStrike_flareEffect(plane, pathEnd, flyTime, owner, heightAboveGround) {
@@ -277,20 +267,19 @@ callStrike_flareEffect(plane, pathEnd, flyTime, owner, heightAboveGround) {
   flareWait = calculateReleaseTime(flyTime, heightAboveGround, planeflyspeed, flareSpeedScale);
   wait(flareWait);
   planedir = anglesToForward(plane.angles);
-  velocity = vector_scale(anglesToForward(plane.angles), planeflyspeed * flareSpeedScale);
+  velocity = vector_scale(anglestoforward(plane.angles), planeflyspeed * flareSpeedScale);
   flare = owner launchbomb("napalmflare_mp", plane.origin, velocity);
   owner waittill("projectile_impact", name, position, explosionRadius);
   debug_star(position, (0, 0, 1));
-  playFX(level.fx_napalm_marker, position);
+  playfx(level.fx_napalm_marker, position);
   snd_flare_ent = spawn("script_origin", position);
-  snd_flare_ent playLoopSound("mpl_kls_marker_loop");
+  snd_flare_ent playloopsound("mpl_kls_marker_loop");
   wait(5);
   snd_flare_ent delete();
 }
 releaseNapalm(owner, plane, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, yaw, heightAboveGround, killcamEntities, killcamIndex, debugColor) {
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return;
-  }
   startPathRandomness = 100;
   endPathRandomness = 150;
   pathStart = startPoint;
@@ -301,13 +290,11 @@ releaseNapalm(owner, plane, requiredDeathCount, bombsite, startPoint, endPoint, 
 }
 anyCloseGroundFlameEnts(pos) {
   radiusSqr = 150 * 150;
-  for(index = 0; index < level.napalmGroundFlameCount; index++) {
-    if(!isDefined(level.napalmGroundFlameEnts[index])) {
+  for (index = 0; index < level.napalmGroundFlameCount; index++) {
+    if(!isDefined(level.napalmGroundFlameEnts[index]))
       continue;
-    }
-    if(DistanceSquared(pos, level.napalmGroundFlameEnts[index].origin) < radiusSqr) {
+    if(DistanceSquared(pos, level.napalmGroundFlameEnts[index].origin) < radiusSqr)
       return true;
-    }
   }
   return false;
 }
@@ -334,23 +321,19 @@ doFlameDamage() {
 napalmDamageEntsThread() {
   self notify("napalmDamageEntsThread");
   self endon("napalmDamageEntsThread");
-  for(; level.napalmDamagedEntsIndex < level.napalmDamagedEntsCount; level.napalmDamagedEntsIndex++) {
-    if(!isDefined(level.napalmDamagedEnts[level.napalmDamagedEntsIndex])) {
+  for (; level.napalmDamagedEntsIndex < level.napalmDamagedEntsCount; level.napalmDamagedEntsIndex++) {
+    if(!isDefined(level.napalmDamagedEnts[level.napalmDamagedEntsIndex]))
       continue;
-    }
     ent = level.napalmDamagedEnts[level.napalmDamagedEntsIndex];
-    if(!isDefined(ent.entity)) {
+    if(!isDefined(ent.entity))
       continue;
-    }
     if((!ent.isPlayer && !ent.isActor) || isAlive(ent.entity)) {
-      if(ent.isPlayer && isDefined(ent.spawntime) && (gettime() - ent.spawntime) / 1000 <= level.napalm_spawnprotection) {
+      if(ent.isPlayer && isDefined(ent.spawntime) && (gettime() - ent.spawntime) / 1000 <= level.napalm_spawnprotection)
         continue;
-      }
       ent thread doFlameDamage();
       level.napalmDamagedEnts[level.napalmDamagedEntsIndex] = undefined;
-      if(ent.isPlayer || ent.isActor) {
+      if(ent.isPlayer || ent.isActor)
         wait(0.05);
-      }
     } else {
       level.napalmDamagedEnts[level.napalmDamagedEntsIndex] = undefined;
     }
@@ -371,19 +354,17 @@ spawnGroundFlame(pos, fxToPlay, fxAngles, killCamEntities) {
 napalmLosRadiusDamage(pos, radius, max, min, owner, eInflictor, normal, waitframes, fxToPlay, yaw, burnNapalmEffectRadius, groundFlameEnt, killCamEntities, debugColor) {
   maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
   waittime = 0.5 - (waitframes * 0.1);
-  if(waittime > 0) {
+  if(waittime > 0)
     wait(waittime);
-  }
   fxAngles = (270, yaw - 180, 0);
   groundFlameEnt spawnGroundFlame(pos, fxToPlay, fxAngles, killCamEntities);
   wait(0.25);
   thread doGlassDamage(pos, radius, max, min, "MOD_EXPLOSIVE");
   pixbeginevent("napalm losRadiusDamage");
   ents = maps\mp\gametypes\_weapons::getDamageableEnts(pos, radius, true);
-  for(i = 0; i < ents.size; i++) {
-    if(ents[i].entity == self) {
+  for (i = 0; i < ents.size; i++) {
+    if(ents[i].entity == self)
       continue;
-    }
     if(entLOSRadiusDamage(ents[i], pos, radius, max, min, owner, eInflictor)) {
       ents[i].fxToPlay = fxToPlay;
       ents[i].fxAngles = fxAngles;
@@ -402,26 +383,23 @@ watchNapalmBurn(owner, eInflictor, pos, burnNapalmEffectRadius, debugColor) {
   loopWaitTime = 0.25;
   burnNapalmDuration = getDvarIntDefault(#"scr_burnNapalmDuration", level.burnNapalmDuration);
   napalmBurnDist2 = burnNapalmEffectRadius * burnNapalmEffectRadius;
-  while(burnNapalmDuration > 0) {
+  while (burnNapalmDuration > 0) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!isDefined(players[i].item)) {
         players[i].item = 0;
       }
-      if(isDefined(players[i].spawntime) && (gettime() - players[i].spawntime) / 1000 <= level.napalm_spawnprotection) {
+      if(isDefined(players[i].spawntime) && (gettime() - players[i].spawntime) / 1000 <= level.napalm_spawnprotection)
         continue;
-      }
       if((!isDefined(players[i].inGroundNapalm)) || (players[i].inGroundNapalm == false)) {
         if(players[i].sessionstate == "playing") {
           debug_star(pos, debugColor, 400);
           dist2 = DistanceSquared(players[i].origin, pos);
           if(dist2 < napalmBurnDist2) {
-            if((pos[2] - players[i].origin[2]) > 80) {
+            if((pos[2] - players[i].origin[2]) > 80)
               continue;
-            }
-            if((players[i].origin[2] - pos[2]) > 100) {
+            if((players[i].origin[2] - pos[2]) > 100)
               continue;
-            }
             players[i].napalmlastburntby = owner;
             players[i] thread maps\mp\_burnplayer::doNapalmGroundDamage(owner, eInflictor, "MOD_BURNED");
           }
@@ -436,8 +414,8 @@ watchNapalmBurn(owner, eInflictor, pos, burnNapalmEffectRadius, debugColor) {
 doNapalm(origin, yaw, owner, team) {
   planeHalfDistance = 24000;
   direction = (0, yaw, 0);
-  startPoint = origin + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
-  endPoint = origin + vector_scale(anglesToForward(direction), planeHalfDistance);
+  startPoint = origin + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
+  endPoint = origin + vector_scale(anglestoforward(direction), planeHalfDistance);
   minHeight = int(maps\mp\_airsupport::getMinimumFlyHeight());
   startPoint = (startPoint[0], startPoint[1], minHeight);
   endPoint = (endPoint[0], endPoint[1], minHeight);
@@ -445,7 +423,7 @@ doNapalm(origin, yaw, owner, team) {
   origin = (origin[0], origin[1], planeFlyHeight);
   startPoint = (startPoint[0], startPoint[1], planeFlyHeight);
   endPoint = (endPoint[0], endPoint[1], planeFlyHeight);
-  trace = bulletTrace(origin, origin + (0, 0, -4000), false, undefined);
+  trace = bullettrace(origin, origin + (0, 0, -4000), false, undefined);
   targetpos = trace["position"];
   maxs = level.spawnMaxs[2] + 200;
   mins = level.spawnMins[2] - 200;
@@ -466,43 +444,39 @@ doNapalm(origin, yaw, owner, team) {
   }
   owner notify("begin_napalm");
   ownerEntNum = owner GetEntityNumber();
-  if(level.teambased) {
+  if(level.teambased)
     teamType = owner.team;
-  } else {
+  else
     teamType = "free";
-  }
   burnNapalmDuration = getDvarFloatDefault("scr_burnNapalmDuration", level.burnNapalmDuration);
-  influencer_org = targetpos + vector_scale(anglesToForward(direction), 0);
+  influencer_org = targetpos + vector_scale(anglestoforward(direction), 0);
   maps\mp\gametypes\_spawning::create_napalm_fire_influencers(influencer_org, direction, team, level.burnNapalmDuration + 5.5);
   callNapalmStrike(owner, targetpos, startPoint, endPoint, yaw, planeFlyHeight);
   maps\mp\_killstreakrules::killstreakStop("napalm_mp", team);
 }
 targetisclose(other, target) {
   infront = targetisinfront(other, target);
-  if(infront) {
+  if(infront)
     dir = 1;
-  } else {
+  else
     dir = -1;
-  }
   a = flat_origin(other.origin);
-  b = a + vector_scale(anglesToForward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_scale(anglestoforward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
-  if(dist < 3000) {
+  if(dist < 3000)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 targetisinfront(other, target) {
-  forwardvec = anglesToForward(flat_angle(other.angles));
+  forwardvec = anglestoforward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0) {
+  if(dot > 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 flat_origin(org) {
   rorg = (org[0], org[1], 0);
@@ -523,10 +497,9 @@ getPlaneExitType() {
 getScoreRank() {
   players = get_players();
   rank = players.size;
-  if(!isDefined(self.score) || self.score < 1) {
+  if(!isDefined(self.score) || self.score < 1)
     return undefined;
-  }
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score) || players[i].score < 1) {
       rank--;
       continue;
@@ -569,11 +542,10 @@ planeTurnSimple(plane, startPoint, endPoint, moveTime, isTurningRight) {
   level endon("demo_jump");
   leftTurn = -1;
   rightTurn = 1;
-  if(isTurningRight) {
+  if(isTurningRight)
     turnDirection = rightTurn;
-  } else {
+  else
     turnDirection = leftTurn;
-  }
   radius = 25000;
   angles = VectorToAngles(endPoint - startPoint);
   right = anglestoright(angles);

@@ -6,10 +6,11 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_respin_cycle;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_respin_cycle", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_respin_cycle", &__init__, undefined, #"bgb");
 }
 
 __init__() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_ai_swat;
 
 autoexec __init__system__() {
@@ -44,7 +45,7 @@ function_8acd749d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
 }
 
 private function_e3151f98(entity) {
-  if(entity.subarchetype === # "human_swat_gunner") {
+  if(entity.subarchetype === #"human_swat_gunner") {
     return true;
   }
 

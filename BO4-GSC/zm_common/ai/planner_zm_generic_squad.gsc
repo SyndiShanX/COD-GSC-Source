@@ -8,6 +8,7 @@
 #include scripts\core_common\ai\planner_squad_utility;
 #include scripts\core_common\ai\systems\planner;
 #include scripts\zm_common\ai\planner_zm_squad_utility;
+
 #namespace namespace_42cba673;
 
 createsquadplanner(team) {

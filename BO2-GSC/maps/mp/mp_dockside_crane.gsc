@@ -23,8 +23,8 @@ init() {
   claw = getent("claw_base", "targetname");
   claw.z_upper = claw.origin[2];
   claw thread sound_wires_move();
-  arms_y = getEntArray("claw_arm_y", "targetname");
-  arms_z = getEntArray("claw_arm_z", "targetname");
+  arms_y = getentarray("claw_arm_y", "targetname");
+  arms_z = getentarray("claw_arm_z", "targetname");
   claw.arms = arraycombine(arms_y, arms_z, 1, 0);
 
   foreach(arm_z in arms_z) {
@@ -32,19 +32,18 @@ init() {
     arm_z.parent = arm_y;
   }
 
-  foreach(arm_y in arms_y) {
-    arm_y.parent = claw;
-  }
+  foreach(arm_y in arms_y)
+  arm_y.parent = claw;
 
   claw claw_link_arms("claw_arm_y");
   claw claw_link_arms("claw_arm_z");
-  crates = getEntArray("crate", "targetname");
+  crates = getentarray("crate", "targetname");
   array_thread(crates, ::sound_pit_move);
   crate_data = [];
 
   for(i = 0; i < crates.size; i++) {
     crates[i] disconnectpaths();
-    data = spawnStruct();
+    data = spawnstruct();
     data.origin = crates[i].origin;
     data.angles = crates[i].angles;
     crate_data[i] = data;
@@ -54,25 +53,24 @@ init() {
   rail thread sound_ring_move();
   rail.roller = getent("crane_roller", "targetname");
   rail.roller.wheel = getent("crane_wheel", "targetname");
-  claw.wires = getEntArray("crane_wire", "targetname");
+  claw.wires = getentarray("crane_wire", "targetname");
   claw.z_wire_max = rail.roller.wheel.origin[2] - 50;
 
   foreach(wire in claw.wires) {
     wire linkto(claw);
 
-    if(wire.origin[2] > claw.z_wire_max) {
+    if(wire.origin[2] > claw.z_wire_max)
       wire ghost();
-    }
   }
 
-  placements = getEntArray("crate_placement", "targetname");
+  placements = getentarray("crate_placement", "targetname");
 
   foreach(placement in placements) {
     placement.angles = placement.angles + vectorscale((0, 1, 0), 90.0);
     crates[crates.size] = spawn("script_model", placement.origin);
   }
 
-  triggers = getEntArray("crate_kill_trigger", "targetname");
+  triggers = getentarray("crate_kill_trigger", "targetname");
 
   foreach(crate in crates) {
     crate.kill_trigger = getclosest(crate.origin, triggers);
@@ -160,9 +158,8 @@ crane_think(claw, rail, crates, crate_data, placements) {
 
       claw claw_crate_move(crate);
 
-      if(lower) {
+      if(lower)
         crate crate_lower(target_crate, crate_data[target]);
-      }
 
       crate = target_crate;
       target = (i + 2) % (crates.size - placements.size);
@@ -210,9 +207,8 @@ crane_move(claw, desired, z_dist) {
   speed = getdvarfloat(#"scr_crane_claw_drop_speed");
   time = diff / speed;
 
-  if(time < getdvarfloat(#"scr_crane_claw_drop_time_min")) {
+  if(time < getdvarfloat(#"scr_crane_claw_drop_time_min"))
     time = getdvarfloat(#"scr_crane_claw_drop_time_min");
-  }
 
   self.roller moveto(goal, time, time * 0.25, time * 0.25);
   self.roller thread physics_move();
@@ -235,12 +231,11 @@ physics_move() {
 
   for(;;) {
     wait 0.05;
-    crates = getEntArray("care_package", "script_noteworthy");
+    crates = getentarray("care_package", "script_noteworthy");
 
     foreach(crate in crates) {
-      if(crate istouching(self)) {
+      if(crate istouching(self))
         crate physicslaunch(crate.origin, (0, 0, 0));
-      }
     }
   }
 }
@@ -249,9 +244,9 @@ claw_crate_grab(crate, z_dist) {
   self thread wire_render();
   self waittill("movedone");
   level notify("wires_stop");
-  self playSound("amb_crane_arms_b");
+  self playsound("amb_crane_arms_b");
   self claw_z_arms(-33);
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
   self arms_close(crate);
   crate movez(33, getdvarfloat(#"scr_crane_arm_z_move_time"));
   self claw_z_arms(33);
@@ -260,16 +255,16 @@ claw_crate_grab(crate, z_dist) {
   self thread wire_render();
   level notify("wires_move");
   self waittill("movedone");
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
 }
 
 sound_wires_move() {
   while(true) {
     level waittill("wires_move");
-    self playSound("amb_crane_wire_start");
-    self playLoopSound("amb_crane_wire_lp");
+    self playsound("amb_crane_wire_start");
+    self playloopsound("amb_crane_wire_lp");
     level waittill("wires_stop");
-    self playSound("amb_crane_wire_end");
+    self playsound("amb_crane_wire_end");
     wait 0.1;
     self stoploopsound(0.2);
   }
@@ -278,10 +273,10 @@ sound_wires_move() {
 sound_ring_move() {
   while(true) {
     level waittill("ring_move");
-    self playSound("amb_crane_ring_start");
-    self playLoopSound("amb_crane_ring_lp");
+    self playsound("amb_crane_ring_start");
+    self playloopsound("amb_crane_ring_lp");
     level waittill("ring_stop");
-    self playSound("amb_crane_ring_end");
+    self playsound("amb_crane_ring_end");
     wait 0.1;
     self stoploopsound(0.2);
   }
@@ -290,10 +285,10 @@ sound_ring_move() {
 sound_pit_move() {
   while(true) {
     level waittill("pit_move");
-    self playSound("amb_crane_pit_start");
-    self playLoopSound("amb_crane_pit_lp");
+    self playsound("amb_crane_pit_start");
+    self playloopsound("amb_crane_pit_lp");
     level waittill("pit_stop");
-    self playSound("amb_crane_pit_end");
+    self playsound("amb_crane_pit_end");
     self stoploopsound(0.2);
     wait 0.2;
   }
@@ -303,13 +298,13 @@ claw_crate_move(crate, claw) {
   self thread wire_render();
   self waittill("movedone");
   crate unlink();
-  self playSound("amb_crane_arms_b");
+  self playsound("amb_crane_arms_b");
   level notify("wires_stop");
   crate movez(-33, getdvarfloat(#"scr_crane_arm_z_move_time"));
   self claw_z_arms(-33);
-  self playSound("amb_crane_arms_b");
-  playFXOnTag(level._effect["crane_dust"], crate, "tag_origin");
-  crate playSound("amb_crate_drop");
+  self playsound("amb_crane_arms_b");
+  playfxontag(level._effect["crane_dust"], crate, "tag_origin");
+  crate playsound("amb_crate_drop");
   self arms_open();
   level notify("wires_move");
   self claw_z_arms(33);
@@ -324,18 +319,18 @@ claw_crate_drop(target, data) {
   self waittill("claw_movedone");
   target unlink();
   level notify("wires_stop");
-  self playSound("amb_crane_arms_b");
+  self playsound("amb_crane_arms_b");
   target movez(-33, getdvarfloat(#"scr_crane_arm_z_move_time"));
   self claw_z_arms(-33);
-  playFXOnTag(level._effect["crane_dust"], target, "tag_origin");
-  self playSound("amb_crate_drop");
+  playfxontag(level._effect["crane_dust"], target, "tag_origin");
+  self playsound("amb_crate_drop");
   target notify("claw_done");
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
   self arms_open();
   level notify("wires_move");
   target.origin = data.origin;
   self claw_z_arms(33);
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
   self movez(318, getdvarfloat(#"scr_crane_claw_move_time"));
   self thread wire_render();
   self waittill("movedone");
@@ -380,34 +375,32 @@ crate_set_random_model(other) {
     if(model == other.model) {
       continue;
     }
-    self setModel(model);
+    self setmodel(model);
     return;
   }
 }
 
 arms_open() {
   self claw_move_arms(-15);
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
 }
 
 arms_close(crate) {
   self claw_move_arms(15, crate);
-  self playSound("amb_crane_arms");
+  self playsound("amb_crane_arms");
 }
 
 claw_link_arms(name) {
   foreach(arm in self.arms) {
-    if(arm.targetname == name) {
+    if(arm.targetname == name)
       arm linkto(arm.parent);
-    }
   }
 }
 
 claw_unlink_arms(name) {
   foreach(arm in self.arms) {
-    if(arm.targetname == name) {
+    if(arm.targetname == name)
       arm unlink();
-    }
   }
 }
 
@@ -416,7 +409,7 @@ claw_move_arms(dist, crate) {
   arms = [];
 
   foreach(arm in self.arms) {
-    forward = anglesToForward(arm.angles);
+    forward = anglestoforward(arm.angles);
     arm.goal = arm.origin + vectorscale(forward, dist);
 
     if(arm.targetname == "claw_arm_y") {
@@ -431,21 +424,20 @@ claw_move_arms(dist, crate) {
     foreach(arm in self.arms) {
       if(arm.targetname == "claw_arm_y") {
         arm moveto(arm.goal, 0.1);
-        self playSound("amb_crane_arms_b");
+        self playsound("amb_crane_arms_b");
       }
     }
 
     wait 0.05;
-    playFXOnTag(level._effect["crane_spark"], crate, "tag_origin");
-    self playSound("amb_arms_latch");
+    playfxontag(level._effect["crane_spark"], crate, "tag_origin");
+    self playsound("amb_arms_latch");
   }
 
   assert(arms.size == 4);
   waittill_multiple_ents(arms[0], "movedone", arms[1], "movedone", arms[2], "movedone", arms[3], "movedone");
 
-  foreach(arm in self.arms) {
-    arm.origin = arm.goal;
-  }
+  foreach(arm in self.arms)
+  arm.origin = arm.goal;
 
   self claw_link_arms("claw_arm_y");
 }
@@ -533,9 +525,8 @@ crate_drop_think(claw) {
       }
 
       if(entity.classname == "auto_turret") {
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-        }
 
         continue;
       }
@@ -550,24 +541,21 @@ crate_drop_think(claw) {
 
     self destroy_supply_crates();
 
-    if(gettime() > corpse_delay) {
+    if(gettime() > corpse_delay)
       self destroy_corpses();
-    }
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.visuals[0] istouching(self.kill_trigger)) {
+        if(flag.visuals[0] istouching(self.kill_trigger))
           flag maps\mp\gametypes\ctf::returnflag();
-        }
       }
 
       continue;
     }
 
     if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(self.kill_trigger)) {
+      if(level.sdbomb.visuals[0] istouching(self.kill_trigger))
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
-      }
     }
   }
 }
@@ -595,12 +583,12 @@ claw_drop_pause() {
 }
 
 destroy_supply_crates() {
-  crates = getEntArray("care_package", "script_noteworthy");
+  crates = getentarray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
-        playFX(level._supply_drop_explosion_fx, crate.origin);
+        playfx(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
@@ -613,20 +601,17 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distancesquared(corpses[i].origin, self.origin) < 40000) {
+    if(distancesquared(corpses[i].origin, self.origin) < 40000)
       corpses[i] delete();
-    }
   }
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {

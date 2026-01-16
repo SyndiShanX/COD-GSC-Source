@@ -14,52 +14,52 @@
 #include maps\_debug;
 
 setup_spawn_functions() {
-  array_thread(getEntArray("E2_block_officerb_guys", "script_noteworthy"), ::add_spawn_function, ::E2_blockofficerb_guys_setup);
-  array_thread(getEntArray("E2_block_halftrack_guys", "script_noteworthy"), ::add_spawn_function, ::E2_halftrack_guys_setup);
-  array_thread(getEntArray("E2_mean_patrollers", "script_noteworthy"), ::add_spawn_function, ::e2_mean_patrollers_setup);
-  array_thread(getEntArray("E2_mean_patrollers", "targetname"), ::add_spawn_function, ::notify_bb_stealthbreak);
-  array_thread(getEntArray("halftrack2_riders", "targetname"), ::add_spawn_function, ::halftrack2_riders_setup);
-  array_thread(getEntArray("wounded_fountain_guys", "script_noteworthy"), ::wounded_fountain_guys_setup);
-  array_thread(getEntArray("e1_building_cleaners", "targetname"), ::add_spawn_function, ::hunters);
-  array_thread(getEntArray("charge_player", "script_noteworthy"), ::add_spawn_function, ::charge_player_dudes);
-  array_thread(getEntArray("bb_outside_shooters", "targetname"), ::add_spawn_function, ::burning_building_shooters_setup);
-  array_thread(getEntArray("e2_flamer1", "targetname"), ::add_spawn_function, ::e2_flamer1_setup);
-  array_thread(getEntArray("alley_dudes1", "targetname"), ::add_spawn_function, ::alley_dudes1_setup);
-  array_thread(getEntArray("alley_dudes1_2", "targetname"), ::add_spawn_function, ::alley_dudes1_2_setup);
-  array_thread(getEntArray("alley_dudes1_3", "targetname"), ::add_spawn_function, ::alley_dudes1_3_setup);
-  array_thread(getEntArray("e3_bb_finder3", "script_noteworthy"), ::add_spawn_function, ::dead_on_arrival);
-  array_thread(getEntArray("e3_snipercover_b_snipers", "script_noteworthy"), ::add_spawn_function, ::e3_snipers_setup);
-  array_thread(getEntArray("alley_dudes2", "script_noteworthy"), ::add_spawn_function, ::alley_dudes2_setup);
-  array_thread(getEntArray("alley_dudes6", "targetname"), ::add_spawn_function, ::alley_dudes2_setup);
-  array_thread(getEntArray("alley_dudes6_2", "targetname"), ::add_spawn_function, ::alley_dudes2_setup);
-  array_thread(getEntArray("officer_entourage", "targetname"), ::add_spawn_function, ::solo_set_pacifist, true);
-  array_thread(getEntArray("lastguys_shootatu", "targetname"), ::add_spawn_function, ::solo_set_pacifist, false);
-  array_thread(getEntArray("vehicle_riders", "script_noteworthy"), ::add_spawn_function, ::vehicle_riders_setup);
-  array_thread(getEntArray("e3_left_roof_guys", "script_noteworthy"), ::add_spawn_function, ::leftroofguys_setup);
-  array_thread(getEntArray("e3_left_balcony_guys", "script_noteworthy"), ::add_spawn_function, ::ignored_by_friendlies);
-  array_thread(getEntArray("flamer", "script_noteworthy"), ::add_spawn_function, ::flamer_setup);
-  array_thread(getEntArray("alley_dudes3", "targetname"), ::add_spawn_function, ::wait_and_kill, 45 * level.difficulty);
-  array_thread(getEntArray("alley_dudes3", "targetname"), ::add_spawn_function, ::level_alleyguys_dead_increment, 2);
-  array_thread(getEntArray("e3_p1_second_floor_guys", "script_noteworthy"), ::add_spawn_function, ::floor2_guys_setup);
-  array_thread(getEntArray("e3_redshirts", "script_noteworthy"), ::add_spawn_function, ::e3_redshirts_setup);
-  array_thread(getEntArray("dudeguys_charge", "script_noteworthy"), ::add_spawn_function, ::dudeguys_charge_setup);
-  array_thread(getEntArray("attack_player_only", "script_noteworthy"), ::add_spawn_function, ::player_only_enemy);
-  array_thread(getEntArray("dudeguys", "targetname"), ::add_spawn_function, ::solo_set_pacifist, true);
-  array_thread(getEntArray("e1_flameguy", "targetname"), ::add_spawn_function, ::streetdudes_findyou);
-  array_thread(getEntArray("e5_stairdudes_flood", "targetname"), ::add_spawn_function, ::stairfloods_setup);
-  array_thread(getEntArray("bodyguard", "script_noteworthy"), ::add_spawn_function, ::bodyguard_setup);
-  array_thread(getEntArray("lead_bodyguard", "script_noteworthy"), ::add_spawn_function, ::lead_bodyguard_setup);
-  array_thread(getEntArray("newbs_charge", "script_noteworthy"), ::add_spawn_function, ::newbs_setup);
-  array_thread(getEntArray("e5_run_underyou_guys", "targetname"), ::add_spawn_function, ::e5_holeguys_setup);
-  array_thread(getEntArray("e3_bb_runner", "script_noteworthy"), ::add_spawn_function, ::e3_bb_runner_setup);
-  array_thread(getEntArray("e4_cqb_guys", "targetname"), ::add_spawn_function, ::wait_and_chargeplayer, randomintrange(30, 60));
-  array_thread(getEntArray("actor_axis_ger_ber_wehr_reg_kar98k", "classname"), ::add_spawn_function, ::noscope_line);
-  array_thread(getEntArray("actor_axis_ger_ber_wehr_reg_mp40", "classname"), ::add_spawn_function, ::noscope_line);
-  array_thread(getEntArray("actor_enemy_dog", "classname"), ::add_spawn_function, ::noscope_line);
-  array_thread(getEntArray("e3_snipercover_3floordudes_left", "targetname"), ::add_spawn_function, ::player_only_enemy);
-  array_thread(getEntArray("e3_allied_squad", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
-  array_thread(getEntArray("e3_allied_squad_animate", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
-  array_thread(getEntArray("e3_allied_squad_leader", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
+  array_thread(getentarray("E2_block_officerb_guys", "script_noteworthy"), ::add_spawn_function, ::E2_blockofficerb_guys_setup);
+  array_thread(getentarray("E2_block_halftrack_guys", "script_noteworthy"), ::add_spawn_function, ::E2_halftrack_guys_setup);
+  array_thread(getentarray("E2_mean_patrollers", "script_noteworthy"), ::add_spawn_function, ::e2_mean_patrollers_setup);
+  array_thread(getentarray("E2_mean_patrollers", "targetname"), ::add_spawn_function, ::notify_bb_stealthbreak);
+  array_thread(getentarray("halftrack2_riders", "targetname"), ::add_spawn_function, ::halftrack2_riders_setup);
+  array_thread(getentarray("wounded_fountain_guys", "script_noteworthy"), ::wounded_fountain_guys_setup);
+  array_thread(getentarray("e1_building_cleaners", "targetname"), ::add_spawn_function, ::hunters);
+  array_thread(getentarray("charge_player", "script_noteworthy"), ::add_spawn_function, ::charge_player_dudes);
+  array_thread(getentarray("bb_outside_shooters", "targetname"), ::add_spawn_function, ::burning_building_shooters_setup);
+  array_thread(getentarray("e2_flamer1", "targetname"), ::add_spawn_function, ::e2_flamer1_setup);
+  array_thread(getentarray("alley_dudes1", "targetname"), ::add_spawn_function, ::alley_dudes1_setup);
+  array_thread(getentarray("alley_dudes1_2", "targetname"), ::add_spawn_function, ::alley_dudes1_2_setup);
+  array_thread(getentarray("alley_dudes1_3", "targetname"), ::add_spawn_function, ::alley_dudes1_3_setup);
+  array_thread(getentarray("e3_bb_finder3", "script_noteworthy"), ::add_spawn_function, ::dead_on_arrival);
+  array_thread(getentarray("e3_snipercover_b_snipers", "script_noteworthy"), ::add_spawn_function, ::e3_snipers_setup);
+  array_thread(getentarray("alley_dudes2", "script_noteworthy"), ::add_spawn_function, ::alley_dudes2_setup);
+  array_thread(getentarray("alley_dudes6", "targetname"), ::add_spawn_function, ::alley_dudes2_setup);
+  array_thread(getentarray("alley_dudes6_2", "targetname"), ::add_spawn_function, ::alley_dudes2_setup);
+  array_thread(getentarray("officer_entourage", "targetname"), ::add_spawn_function, ::solo_set_pacifist, true);
+  array_thread(getentarray("lastguys_shootatu", "targetname"), ::add_spawn_function, ::solo_set_pacifist, false);
+  array_thread(getentarray("vehicle_riders", "script_noteworthy"), ::add_spawn_function, ::vehicle_riders_setup);
+  array_thread(getentarray("e3_left_roof_guys", "script_noteworthy"), ::add_spawn_function, ::leftroofguys_setup);
+  array_thread(getentarray("e3_left_balcony_guys", "script_noteworthy"), ::add_spawn_function, ::ignored_by_friendlies);
+  array_thread(getentarray("flamer", "script_noteworthy"), ::add_spawn_function, ::flamer_setup);
+  array_thread(getentarray("alley_dudes3", "targetname"), ::add_spawn_function, ::wait_and_kill, 45 * level.difficulty);
+  array_thread(getentarray("alley_dudes3", "targetname"), ::add_spawn_function, ::level_alleyguys_dead_increment, 2);
+  array_thread(getentarray("e3_p1_second_floor_guys", "script_noteworthy"), ::add_spawn_function, ::floor2_guys_setup);
+  array_thread(getentarray("e3_redshirts", "script_noteworthy"), ::add_spawn_function, ::e3_redshirts_setup);
+  array_thread(getentarray("dudeguys_charge", "script_noteworthy"), ::add_spawn_function, ::dudeguys_charge_setup);
+  array_thread(getentarray("attack_player_only", "script_noteworthy"), ::add_spawn_function, ::player_only_enemy);
+  array_thread(getentarray("dudeguys", "targetname"), ::add_spawn_function, ::solo_set_pacifist, true);
+  array_thread(getentarray("e1_flameguy", "targetname"), ::add_spawn_function, ::streetdudes_findyou);
+  array_thread(getentarray("e5_stairdudes_flood", "targetname"), ::add_spawn_function, ::stairfloods_setup);
+  array_thread(getentarray("bodyguard", "script_noteworthy"), ::add_spawn_function, ::bodyguard_setup);
+  array_thread(getentarray("lead_bodyguard", "script_noteworthy"), ::add_spawn_function, ::lead_bodyguard_setup);
+  array_thread(getentarray("newbs_charge", "script_noteworthy"), ::add_spawn_function, ::newbs_setup);
+  array_thread(getentarray("e5_run_underyou_guys", "targetname"), ::add_spawn_function, ::e5_holeguys_setup);
+  array_thread(getentarray("e3_bb_runner", "script_noteworthy"), ::add_spawn_function, ::e3_bb_runner_setup);
+  array_thread(getentarray("e4_cqb_guys", "targetname"), ::add_spawn_function, ::wait_and_chargeplayer, randomintrange(30, 60));
+  array_thread(getentarray("actor_axis_ger_ber_wehr_reg_kar98k", "classname"), ::add_spawn_function, ::noscope_line);
+  array_thread(getentarray("actor_axis_ger_ber_wehr_reg_mp40", "classname"), ::add_spawn_function, ::noscope_line);
+  array_thread(getentarray("actor_enemy_dog", "classname"), ::add_spawn_function, ::noscope_line);
+  array_thread(getentarray("e3_snipercover_3floordudes_left", "targetname"), ::add_spawn_function, ::player_only_enemy);
+  array_thread(getentarray("e3_allied_squad", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
+  array_thread(getentarray("e3_allied_squad_animate", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
+  array_thread(getentarray("e3_allied_squad_leader", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
   getent("flamer_quickdeath", "script_noteworthy") add_spawn_function(::flamer_setup, randomintrange(10, 25));
   getent("floor2_mgguy", "script_noteworthy") add_spawn_function(::floor2_mgguy_setup);
   getent("e2_flamer2", "targetname") add_spawn_function(::e2_flamer_setup);
@@ -107,16 +107,16 @@ setup_spawn_functions() {
   getent("officers_sniper", "script_noteworthy") add_spawn_function(::officers_sniper_setup);
   getent("newbhater", "targetname") add_spawn_function(::newbhater_setup);
   getent("e3_allied_squad_leader", "script_noteworthy") add_spawn_function(::my_name_is_daletski);
-  guys = getEntArray("e3_arguing_dude", "script_noteworthy");
-  for(i = 0; i < guys.size; i++) {
+  guys = getentarray("e3_arguing_dude", "script_noteworthy");
+  for (i = 0; i < guys.size; i++) {
     guys[i] add_spawn_function(::e3_arguing_setup, i + 1);
   }
-  guys = getEntArray("e3_truck_vin_guys", "script_noteworthy");
-  for(i = 0; i < guys.size; i++) {
+  guys = getentarray("e3_truck_vin_guys", "script_noteworthy");
+  for (i = 0; i < guys.size; i++) {
     guys[i] add_spawn_function(::e3_arguing_setup2, i + 1);
   }
-  guys = getEntArray("rideon_tankguys", "script_noteworthy");
-  for(i = 0; i < guys.size; i++) {
+  guys = getentarray("rideon_tankguys", "script_noteworthy");
+  for (i = 0; i < guys.size; i++) {
     guys[i] add_spawn_function(::tankriders_setup, i + 1);
   }
 }
@@ -165,7 +165,7 @@ e3_bb_runner_setup() {
 
 floor2_mgguy_setup() {
   self endon("death");
-  while(!flag("rooftop_battle")) {
+  while (!flag("rooftop_battle")) {
     chance = 25 * level.difficulty;
     toss = randomint(99);
     if(toss >= chance) {
@@ -244,7 +244,7 @@ lead_bodyguard_setup() {
 
 newbs_deathpoint() {
   self endon("death");
-  while(1) {
+  while (1) {
     if(self.origin[0] < 5200) {
       self thread wait_and_kill(randomfloat(5));
     }
@@ -257,7 +257,7 @@ newbs_setup() {
   self endon("death");
   self setthreatbiasgroup("newbs");
   wait 3;
-  self playSound("russian_battle_crymn");
+  self playsound("russian_battle_crymn");
   wait randomfloatrange(2, 7);
   if(!isDefined(level.guythrewtov) && isDefined(self.enemy)) {
     self.animname = "allies";
@@ -273,7 +273,7 @@ newbhater_setup() {
   self.ignoreme = true;
   setthreatbias("newbs", "newbhater", 10000);
   waittill_aigroupcleared("newbs");
-  while(1) {
+  while (1) {
     self setthreatbiasgroup("ignoreplayer");
     wait 10;
     self setthreatbiasgroup("badguys");
@@ -287,7 +287,7 @@ stairfloods_setup() {
 }
 
 own_player_hard() {
-  while(1) {
+  while (1) {
     level.player waittill("damage", amount, attacker);
     if(attacker == self) {
       level.player dodamage(40, attacker.origin);
@@ -329,7 +329,7 @@ e2_flamer1_setup() {
   ang = (getstruct("flame_angles", "targetname")).angles;
   org = self gettagorigin("tag_flash");
   spot2 = spawn("script_model", org);
-  spot2 setModel("tag_origin");
+  spot2 setmodel("tag_origin");
   spot2.angles = ang;
   spot2 thread e2_flamer_struct_movers();
   self do_fake_flamethrower_fire(5, spot2);
@@ -370,7 +370,7 @@ e2_flamer_setup() {
   ang = (getstruct("flame_angles", "targetname")).angles;
   org = self gettagorigin("tag_flash");
   spot2 = spawn("script_model", org);
-  spot2 setModel("tag_origin");
+  spot2 setmodel("tag_origin");
   spot2.angles = ang;
   spot2 thread e2_flamer_struct_movers();
   self do_fake_flamethrower_fire(7, spot2);
@@ -384,19 +384,19 @@ e2_flamer_setup() {
 
 do_fake_flamethrower_fire(times, spot2) {
   self endon("death");
-  for(i = 0; i < times; i++) {
+  for (i = 0; i < times; i++) {
     org = self gettagorigin("tag_flash");
     spot2.origin = org;
-    playFXOnTag(level._effect["flamethrower_fire"], spot2, "tag_origin");
-    self playSound("weap_flamethrower_start_3p_scripted");
-    self playLoopSound("weap_flamethrower_fireloop_3p_scripted");
-    curtains = getEntArray(self.script_noteworthy + "_curtains", "targetname");
+    playfxontag(level._effect["flamethrower_fire"], spot2, "tag_origin");
+    self playsound("weap_flamethrower_start_3p_scripted");
+    self playloopsound("weap_flamethrower_fireloop_3p_scripted");
+    curtains = getentarray(self.script_noteworthy + "_curtains", "targetname");
     if(isDefined(curtains) && curtains.size > 0) {
       array_thread(curtains, ::its_curtains_for_ya);
     }
     wait randomfloatrange(1, 2);
     self stoploopsound();
-    self playSound("weap_flamethrower_cooldown_3p_scripted");
+    self playsound("weap_flamethrower_cooldown_3p_scripted");
     wait(1);
     self stoploopsound();
   }
@@ -436,8 +436,8 @@ by_tank_dude1_setup() {
   spot thread anim_loop_solo(self, "idle", undefined, "by_tankdude_1_stoploop");
   self Attach("anm_okinawa_cigarette_jpn", "tag_inhand");
   wait(1);
-  playFXOnTag(level._effect["cigarette"], self, "tag_fx");
-  playFXOnTag(level._effect["cigarette_glow"], self, "tag_fx");
+  PlayFxOnTag(level._effect["cigarette"], self, "tag_fx");
+  PlayFxOnTag(level._effect["cigarette_glow"], self, "tag_fx");
   flag_wait("tank2_dude_spawned");
   wait 0.1;
   friend = grab_ai_by_script_noteworthy("by_tank_dude2", "axis");
@@ -812,7 +812,7 @@ flamer_setup(time) {
 }
 
 flamer_blow() {
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker);
     if(isplayer(attacker)) {
       break;
@@ -822,7 +822,7 @@ flamer_blow() {
     self enable_pain();
   }
   earthquake(0.2, 0.2, self.origin, 1500);
-  playFX(level._effect["flameguy_explode"], self.origin + (0, 0, 50));
+  playfx(level._effect["flameguy_explode"], self.origin + (0, 0, 50));
   self.health = 50;
   allies = getaiarray("allies");
   allies[0] magicgrenade(self.origin + (-20, -25, 20), self.origin, 0.01);
@@ -949,7 +949,7 @@ officer_assistant_setup() {
   self solo_set_pacifist(true);
   wait 0.5;
   horch = getent("officer_horch", "targetname");
-  horch playSound("drive_up");
+  horch playsound("drive_up");
   tag = "tag_driver";
   org = horch gettagorigin(tag);
   ang = horch gettagangles(tag);
@@ -972,7 +972,7 @@ horch_movetag(spot, tag, magic_org) {
   horch = getent("officer_horch", "targetname");
   node = getvehiclenode("car_inplace", "script_noteworthy");
   node waittill("trigger");
-  spot setModel("tag_origin");
+  spot setmodel("tag_origin");
   wait 3;
   org = horch gettagorigin(tag);
   ang = horch gettagangles(tag);
@@ -1030,7 +1030,7 @@ e3_halftrack_mg_guy() {
   }
   self setthreatbiasgroup("badguys");
   self.ignoreme = true;
-  while(level.difficulty == 2) {
+  while (level.difficulty == 2) {
     wait 5;
     if(cointoss()) {
       self setthreatbiasgroup("ignoreplayer");
@@ -1050,7 +1050,7 @@ e5_halftrack_mg_guy() {
   self setthreatbiasgroup("badguys");
   self.ignoreme = true;
   spot = getstructent("e5_halftrack_target", "script_noteworthy");
-  while(!flag("officer_isincar") && !flag("officer_last_run")) {
+  while (!flag("officer_isincar") && !flag("officer_last_run")) {
     self setthreatbiasgroup("badguys");
     wait 5;
     if(level.difficulty == 2) {
@@ -1070,7 +1070,7 @@ e5_halftrack_mg_guy() {
 mg_guy_reminder() {
   self endon("death");
   wait 10;
-  while(1) {
+  while (1) {
     level thread say_dialogue("take_out_ht_mg");
     wait 40;
   }
@@ -1149,7 +1149,7 @@ e1_flameguy_setup() {
 charge_player_dudes() {
   self endon("death");
   self thread player_only_enemy();
-  while(1) {
+  while (1) {
     self.goalradius = 128;
     self setgoalentity(get_players()[0]);
     wait 3;
@@ -1198,12 +1198,12 @@ wounded_fountain_guys_setup() {
   node = getstruct("fountain_reznov_align_spot", "targetname");
   self animscripts\shared::placeweaponOn(self.weapon, "none");
   mynum = 0;
-  for(i = 1; i < 4; i++) {
+  for (i = 1; i < 4; i++) {
     if("fountain_wounded_" + i == self.targetname) {
       mynum = i;
       self.animname = "fountain_woundedguy" + i;
       self.health = 1000;
-      self playSound("fountain_guy_breathing_large_" + i);
+      self playsound("fountain_guy_breathing_large_" + i);
       if(is_german_build() && i != 3) {
         node thread anim_loop_solo(self, "dead_loop", undefined, "stop_loop" + i);
         self.nodeathragdoll = true;
@@ -1250,7 +1250,7 @@ fake_anim_loop(guy, anime, ender) {
   self endon(ender);
   animtime = getanimlength(level.scr_anim[guy.animname][anime]);
   level.woundedlooptime = animtime;
-  while(!flag("gunner_ready_toshoot")) {
+  while (!flag("gunner_ready_toshoot")) {
     level thread wounded_looptime_count(animtime);
     self anim_single_solo(guy, anime);
   }
@@ -1261,7 +1261,7 @@ wounded_looptime_count(mytime) {
   level notify("stop_looptime_count");
   level endon("stop_looptime_count");
   level.woundedloopcount = 0;
-  while(1) {
+  while (1) {
     level.woundedloopcount = level.woundedloopcount + 0.05;
     wait 0.05;
     if(level.woundedloopcount >= mytime) {
@@ -1289,7 +1289,7 @@ dog_setup() {
   level notify("stop_talking");
   waittillframeend;
   level thread say_dialogue("dog");
-  while(1) {
+  while (1) {
     if(self.origin[1] < 750) {
       level.player allowstand(true);
       level.e1_timing_feedback = "could_b_quicker";
@@ -1387,10 +1387,10 @@ first_sniper_setup() {
   self solo_set_pacifist(true);
   hittimes = 2;
   hitmax = level.difficulty;
-  while(breakloop == 0) {
+  while (breakloop == 0) {
     self waittill("damage", amount, attacker);
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(attacker == players[i]) {
         hittimes++;
         if(hittimes > hitmax) {
@@ -1415,7 +1415,7 @@ sniper1_grazed_dialogue() {
   lines = [];
   lines[0] = "winged_him";
   lines[1] = "grazed_him";
-  while(1) {
+  while (1) {
     line = lines[randomint(lines.size)];
     if(!isDefined(level.last_grazed_line) || (isDefined(level.last_grazed_line) && level.last_grazed_line != line)) {
       level thread say_dialogue(line);

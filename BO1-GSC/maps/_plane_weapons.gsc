@@ -17,7 +17,7 @@ build_bomb_explosions(type, quakepower, quaketime, quakeradius, range, min_damag
   AssertEx(isDefined(range), "_plane_weapons::build_bomb_explosions(): no range specified!");
   AssertEx(isDefined(min_damage), "_plane_weapons::build_bomb_explosions(): no min_damage specified!");
   AssertEx(isDefined(max_damage), "_plane_weapons::build_bomb_explosions(): no max_damage specified!");
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.quakepower = quakepower;
   struct.quaketime = quaketime;
   struct.quakeradius = quakeradius;
@@ -155,7 +155,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     total_bomb_count--;
     self.bomb_count--;
     self.bomb[new_bomb_index].dropped = true;
-    forward = anglesToForward(self.angles);
+    forward = AnglesToForward(self.angles);
     vec = vector_scale(forward, self GetSpeed());
     vec_predict = self.bomb[new_bomb_index].origin + vector_scale(forward, (self GetSpeed() * 0.06));
     self.bomb[new_bomb_index] UnLink();
@@ -215,9 +215,9 @@ bomb_trace(type, delay_trace, trace_dist) {
   }
   while(1) {
     vec1 = self.origin;
-    direction = anglesToForward((90, 0, 0));
+    direction = AnglesToForward((90, 0, 0));
     vec2 = vec1 + vector_scale(direction, 10000);
-    trace_result = bulletTrace(vec1, vec2, false, undefined);
+    trace_result = BulletTrace(vec1, vec2, false, undefined);
     dist = Distance(self.origin, trace_result["position"]);
     if(dist < trace_dist || dist >= 10000) {
       self thread bomb_explosion(type);
@@ -236,9 +236,9 @@ bomb_explosion(type) {
   max_damage = struct.mindamage;
   min_damage = struct.maxdamage;
   sound_org = spawn("script_origin", self.origin);
-  sound_org playSound(level.plane_bomb_sound[type]);
+  sound_org PlaySound(level.plane_bomb_sound[type]);
   sound_org thread bomb_sound_delete();
-  playFX(level.plane_bomb_fx[type], self.origin);
+  PlayFx(level.plane_bomb_fx[type], self.origin);
   Earthquake(quake_power, quake_time, self.origin, quake_radius);
   RadiusDamage(self.origin, damage_range, max_damage, min_damage);
   self Delete();

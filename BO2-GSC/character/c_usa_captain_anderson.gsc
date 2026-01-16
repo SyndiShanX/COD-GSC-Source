@@ -4,7 +4,7 @@
 ************************************************/
 
 main() {
-  self setModel("c_usa_captain_anderson_fb");
+  self setmodel("c_usa_captain_anderson_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

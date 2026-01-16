@@ -5,9 +5,17 @@
 
 #include maps\mp\_utility;
 
-precache_scripted_fx() {}
+// Scripted effects
+precache_scripted_fx() {
+  //level._effect["rocket_blast_trail"]								= loadfx("vehicle/exhaust/fx_russian_rocket_exhaust_mp");
+  //level._effect["mig_trail"]												= loadfx("trail/fx_geotrail_jet_contrail");
+  //level._effect["rocket_explosion"]									= loadfx("maps/flashpoint/fx_exp_rocket_soyuz");
+}
 
 precache_createfx_fx() {
+
+  //	level._effect["fx_mp_sand_dust_devil"]								= loadfx("maps/mp_maps/fx_mp_sand_dust_devil");
+
   level._effect["fx_mp_sand_blowing_lg_slow"] = loadfx("maps/mp_maps/fx_mp_sand_blowing_lg_slow");
 
   level._effect["fx_sand_windy_slow_door_os"] = loadfx("maps/mp_maps/fx_mp_sand_windy_slow_door_os");
@@ -33,6 +41,7 @@ precache_createfx_fx() {
   level._effect["codo_godray_afgan"] = loadfx("env/light/codo_godray_afgan");
   level._effect["tropical_bird_runner"] = loadfx("animals/tropical_bird_runner");
   level._effect["fx_mp_flies_carcass"] = loadfx("maps/mp_maps/fx_mp_flies_carcass");
+
 }
 
 main() {

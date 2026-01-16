@@ -4,9 +4,11 @@
 *********************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace multi_stage_target_lockon;
 
 class cmulti_stage_target_lockon: cluielem {
+
   function set_targetstate(localclientnum, value) {
     set_data(localclientnum, "targetState", value);
   }
@@ -16,7 +18,7 @@ class cmulti_stage_target_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "multi_stage_target_lockon");
+    cluielem::open(localclientnum, #"multi_stage_target_lockon");
   }
 
   function function_fa582112(localclientnum) {

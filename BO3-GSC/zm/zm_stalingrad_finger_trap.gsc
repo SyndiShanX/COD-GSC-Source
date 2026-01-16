@@ -29,9 +29,9 @@ function main() {
 function function_7715178d() {
   level thread scene::init("p7_fxanim_zm_stal_finger_trap_bundle");
   level.var_79dbe0dd = [];
-  scene::add_scene_func("p7_fxanim_zm_stal_finger_trap_bundle", &function_2d729696, "init");
+  scene::add_scene_func("p7_fxanim_zm_stal_finger_trap_bundle", & function_2d729696, "init");
   var_bbadd4a4 = struct::get_array("finger_trap_activate", "targetname");
-  array::thread_all(var_bbadd4a4, &function_eeb24547);
+  array::thread_all(var_bbadd4a4, & function_eeb24547);
 }
 
 function function_2d729696(a_ents) {
@@ -47,7 +47,7 @@ function function_2d729696(a_ents) {
 }
 
 function function_eeb24547() {
-  self zm_unitrigger::create_unitrigger("", 64, &function_512d92f4);
+  self zm_unitrigger::create_unitrigger("", 64, & function_512d92f4);
   self.s_unitrigger.hint_parm1 = 1500;
   self.s_unitrigger.require_look_at = 0;
   self thread function_891da2d8();
@@ -75,7 +75,7 @@ function function_512d92f4(e_player) {
 }
 
 function function_891da2d8() {
-  while(true) {
+  while (true) {
     if(level flag::get("finger_trap_cooldown")) {
       level flag::wait_till_clear("finger_trap_cooldown");
     }
@@ -99,10 +99,10 @@ function function_891da2d8() {
 
 function finger_trap_activate(var_3778532a) {
   var_3778532a thread zm_stalingrad_vo::function_c0914f1b();
-  array::run_all(level.var_79dbe0dd, &triggerenable, 1);
-  array::thread_all(level.var_79dbe0dd, &function_f5af37c6, var_3778532a);
+  array::run_all(level.var_79dbe0dd, & triggerenable, 1);
+  array::thread_all(level.var_79dbe0dd, & function_f5af37c6, var_3778532a);
   level function_88a65f39();
-  array::run_all(level.var_79dbe0dd, &triggerenable, 0);
+  array::run_all(level.var_79dbe0dd, & triggerenable, 0);
   level flag::clear("finger_trap_on");
   level flag::set("finger_trap_cooldown");
   level endon("hash_f8b849b9");
@@ -113,7 +113,7 @@ function finger_trap_activate(var_3778532a) {
 function function_88a65f39() {
   n_start_time = gettime();
   n_total_time = 0;
-  while(n_total_time < 15) {
+  while (n_total_time < 15) {
     level scene::play("p7_fxanim_zm_stal_finger_trap_bundle");
     n_total_time = (gettime() - n_start_time) / 1000;
   }
@@ -121,11 +121,11 @@ function function_88a65f39() {
 
 function function_f5af37c6(var_3778532a) {
   level endon("finger_trap_cooldown");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
-    if(!(isDefined(e_who.var_bd3a4420) && e_who.var_bd3a4420)) {
+    if(!(isdefined(e_who.var_bd3a4420) && e_who.var_bd3a4420)) {
       if(e_who.health <= 20000) {
-        if(!isplayer(e_who) && isDefined(var_3778532a)) {
+        if(!isplayer(e_who) && isdefined(var_3778532a)) {
           var_3778532a notify("hash_2637f64f");
           var_3778532a zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
         }

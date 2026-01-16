@@ -34,11 +34,10 @@ main_common(var_0, var_1, var_2) {
   maps\_vehicle::build_treadfx(var_2, "default", "vfx/gameplay/tread_fx/vfx_heli_dust_sand", 1);
   maps\_vehicle::build_treadfx(var_2, "sand", "vfx/gameplay/tread_fx/vfx_heli_dust_sand", 1);
 
-  if(isDefined(var_1) && var_1 == "aas_72x_nonheli") {
+  if(isDefined(var_1) && var_1 == "aas_72x_nonheli")
     maps\_vehicle::build_is_airplane();
-  } else {
+  else
     maps\_vehicle::build_is_helicopter();
-  }
 }
 
 init_local() {
@@ -84,9 +83,8 @@ shooter_death(var_0) {
   var_1 = randomfloatrange(2, 15);
   wait(var_1);
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self kill();
-  }
 }
 
 #using_animtree("generic_human");
@@ -94,9 +92,8 @@ shooter_death(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 6; var_1++) {
+  for(var_1 = 0; var_1 < 6; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_pilot1";
   var_0[0].bhasgunwhileriding = 0;
@@ -162,9 +159,8 @@ init_shooter() {
     return;
   }
 
-  if(!isDefined(self.ridingvehicle.shooters)) {
+  if(!isDefined(self.ridingvehicle.shooters))
     self.ridingvehicle.shooters = [];
-  }
 
   self.ridingvehicle.shooters[self.ridingvehicle.shooters.size] = self;
   self.custom_animscript["combat"] = ::shooter_animscript;
@@ -186,9 +182,8 @@ shooter_unload() {
   self.deathanim = undefined;
   maps\_utility::enable_surprise();
 
-  if(!isDefined(self.delay)) {
+  if(!isDefined(self.delay))
     self.delay = randomfloat(0.75);
-  }
 
   wait(self.delay);
   self.delay = undefined;
@@ -207,13 +202,11 @@ shooter_unload() {
 get_short_getout_time() {
   var_0 = self.vehicle_position;
 
-  if(var_0 == 2 || var_0 == 3) {
+  if(var_0 == 2 || var_0 == 3)
     return 1.7;
-  }
 
-  if(var_0 == 4 || var_0 == 5) {
+  if(var_0 == 4 || var_0 == 5)
     return 2.1;
-  }
 
   return undefined;
 }
@@ -309,9 +302,8 @@ event_thread() {
   self endon("killanimscript");
   var_0 = self.ridingvehicle;
 
-  for(;;) {
+  for(;;)
     var_0 waittill("start_event", var_1);
-  }
 }
 
 shooter_shooting() {
@@ -341,9 +333,8 @@ shooter_shooting() {
 
     shoot_behavior();
 
-    if(isplayer(self.enemy)) {
+    if(isplayer(self.enemy))
       self updateplayersightaccuracy();
-    }
   }
 }
 
@@ -409,9 +400,8 @@ chopper_lean(var_0) {
       var_8 = 1 - var_13;
     }
 
-    if(var_6 != var_7) {
+    if(var_6 != var_7)
       var_0 clearanim(var_7, 0);
-    }
 
     var_0 setanim(var_6, 1, 0, 0.5);
     var_0 setanimtime(var_6, var_8);

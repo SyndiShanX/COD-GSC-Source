@@ -23,26 +23,26 @@ function autoexec init() {
     return;
   }
   namespace_70ee1527::init_voice();
-  level.bzm_newworlddialogue1callback = &function_abbfb056;
-  level.bzm_newworlddialogue2callback = &function_85bd35ed;
-  level.bzm_newworlddialogue2_2callback = &function_3468d5a2;
-  level.bzm_newworlddialogue2_3callback = &function_5a6b500b;
-  level.bzm_newworlddialogue2_4callback = &function_806dca74;
-  level.bzm_newworlddialogue3callback = &function_5fbabb84;
-  level.bzm_newworlddialogue4callback = &function_39b8411b;
-  level.bzm_newworlddialogue5callback = &function_13b5c6b2;
-  level.bzm_newworlddialogue6callback = &function_edb34c49;
-  level.bzm_newworlddialogue7callback = &function_c7b0d1e0;
-  level.bzm_newworlddialogue8callback = &function_1d5fe07;
-  level.bzm_newworlddialogue9callback = &function_dbd3839e;
-  level.bzm_newworlddialogue10callback = &function_14ea3df2;
-  level.bzm_newworlddialogue11callback = &function_3aecb85b;
-  level.bzm_newworlddialogue12callback = &function_c8e54920;
+  level.bzm_newworlddialogue1callback = & function_abbfb056;
+  level.bzm_newworlddialogue2callback = & function_85bd35ed;
+  level.bzm_newworlddialogue2_2callback = & function_3468d5a2;
+  level.bzm_newworlddialogue2_3callback = & function_5a6b500b;
+  level.bzm_newworlddialogue2_4callback = & function_806dca74;
+  level.bzm_newworlddialogue3callback = & function_5fbabb84;
+  level.bzm_newworlddialogue4callback = & function_39b8411b;
+  level.bzm_newworlddialogue5callback = & function_13b5c6b2;
+  level.bzm_newworlddialogue6callback = & function_edb34c49;
+  level.bzm_newworlddialogue7callback = & function_c7b0d1e0;
+  level.bzm_newworlddialogue8callback = & function_1d5fe07;
+  level.bzm_newworlddialogue9callback = & function_dbd3839e;
+  level.bzm_newworlddialogue10callback = & function_14ea3df2;
+  level.bzm_newworlddialogue11callback = & function_3aecb85b;
+  level.bzm_newworlddialogue12callback = & function_c8e54920;
   function_f5c6d60c();
 }
 
 function private function_f5c6d60c() {
-  callback::on_spawned(&function_95d2ec9f);
+  callback::on_spawned( & function_95d2ec9f);
 }
 
 function function_95d2ec9f() {

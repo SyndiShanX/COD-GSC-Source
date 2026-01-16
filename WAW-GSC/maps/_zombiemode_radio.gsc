@@ -9,7 +9,7 @@
 
 init() {
   level._effect["broken_radio_spark"] = LoadFx("env/electrical/fx_elec_short_oneshot");
-  radios = getEntArray("kzmb", "targetname");
+  radios = getentarray("kzmb", "targetname");
   if(!isDefined(radios) || !radios.size) {
     return;
   }
@@ -18,8 +18,8 @@ init() {
 
 zombie_radio_play() {
   self transmittargetname();
-  self setCanDamage(true);
-  while(1) {
+  self setcandamage(true);
+  while (1) {
     self waittill("damage");
     println("changing radio stations");
     SetClientSysState("levelNotify", "kzmb_next_song");

@@ -4,15 +4,17 @@
 *****************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace vehicleturretdurability;
 
 class cvehicleturretdurability: cluielem {
+
   function set_bar_percent(localclientnum, value) {
     set_data(localclientnum, "bar_percent", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "vehicleturretdurability");
+    cluielem::open(localclientnum, #"vehicleturretdurability");
   }
 
   function function_fa582112(localclientnum) {

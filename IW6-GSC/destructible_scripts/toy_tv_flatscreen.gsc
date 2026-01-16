@@ -67,11 +67,10 @@ RemoveTargetted() {
     tgtModels = getEntArray(self.target, "targetname");
     if(isDefined(tgtModels)) {
       foreach(tgtModel in tgtModels) {
-        if(tgtModel.classname == "light_omni" || tgtModel.classname == "light_spot") {
+        if(tgtModel.classname == "light_omni" || tgtModel.classname == "light_spot")
           tgtModel SetLightIntensity(0);
-        } else {
+        else
           tgtModel Delete();
-        }
       }
     }
   }

@@ -9,9 +9,9 @@ main() {
   level thread game_messages();
   common_scripts\utility::flag_wait("start_is_set");
 
-  if(!isDefined(level.introscreen) || !maps\_utility::is_default_start() || var_0) {
+  if(!isDefined(level.introscreen) || !maps\_utility::is_default_start() || var_0)
     maps\_utility::delaythread(0.05, common_scripts\utility::flag_set, "introscreen_complete");
-  } else {
+  else {
     if(isDefined(level.introscreen.customfunc)) {
       [
         [level.introscreen.customfunc]
@@ -24,9 +24,8 @@ main() {
 }
 
 introscreen_feed_lines() {
-  if(!isDefined(level.introscreen)) {
+  if(!isDefined(level.introscreen))
     return 0;
-  }
 
   var_0 = level.introscreen.lines;
   var_1 = getarraykeys(var_0);
@@ -46,15 +45,13 @@ introscreen_generic_black_fade_in(var_0, var_1, var_2) {
 }
 
 introscreen_generic_fade_in(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 1.5;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     maps\_hud_util::start_overlay();
-  } else {
+  else
     maps\_hud_util::fade_out(var_3);
-  }
 
   wait(var_1);
   maps\_hud_util::fade_in(var_2);
@@ -65,11 +62,10 @@ introscreen_generic_fade_in(var_0, var_1, var_2, var_3) {
 introscreen_corner_line(var_0, var_1, var_2, var_3) {
   level notify("new_introscreen_element");
 
-  if(!isDefined(level.intro_offset)) {
+  if(!isDefined(level.intro_offset))
     level.intro_offset = 0;
-  } else {
+  else
     level.intro_offset++;
-  }
 
   var_4 = cornerline_height();
   var_5 = newhudelem();
@@ -116,9 +112,8 @@ old_introscreen_default() {
   level.player freezecontrols(1);
   thread introscreen_generic_black_fade_in(level.introscreen.completed_delay, level.introscreen.fade_out_time, level.introscreen.fade_in_time);
 
-  if(!introscreen_feed_lines()) {
+  if(!introscreen_feed_lines())
     wait 0.05;
-  }
 
   wait(level.introscreen.completed_delay);
   common_scripts\utility::flag_set("introscreen_complete");
@@ -182,9 +177,8 @@ introscreen(var_0, var_1) {
   wait 2;
   level.chyron.strips_disabled = 0;
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_5 thread name_drift();
-  }
 
   wait 1;
   faze_out(0, var_0);
@@ -244,11 +238,10 @@ fade_glow(var_0, var_1, var_2) {
 }
 
 chyron_sound(var_0, var_1) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     level.chyron.sound_org playSound(var_1);
-  } else {
+  else
     level.game_messages.sound_org playSound(var_1);
-  }
 }
 
 hud_destroy(var_0) {
@@ -290,11 +283,10 @@ quick_cursor(var_0, var_1) {
 }
 
 artifacts(var_0) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     level endon("chyron_faze_out_text_intro");
-  } else {
+  else
     level endon("chyron_faze_out_text_gamenotify");
-  }
 
   var_1 = [".", "-", "_", "|", "+"];
   var_2 = 0.7;
@@ -322,9 +314,8 @@ artifacts(var_0) {
       chyron_sound(var_0, "ui_chyron_plusminus");
       var_4.fontscale = var_2;
 
-      if(var_1[var_7] == "+") {
+      if(var_1[var_7] == "+")
         var_4.fontscale = 0.55;
-      }
 
       var_4 settext(var_1[var_7]);
       var_4.x = var_5 + randomint(200);
@@ -341,22 +332,20 @@ artifacts(var_0) {
 }
 
 artifact_pulse(var_0) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     level endon("chyron_faze_out_text_intro");
-  } else {
+  else
     level endon("chyron_faze_out_text_gamenotify");
-  }
 
   var_1 = 0.6;
   var_2 = 1;
 
   for(;;) {
-    if(level.chyron.artifacts_fade) {
+    if(level.chyron.artifacts_fade)
       var_1 = var_1 - 0.07;
-    } else {
-      if(var_1 < 0.15 || var_1 > 0.6) {
+    else {
+      if(var_1 < 0.15 || var_1 > 0.6)
         var_2 = var_2 * -1;
-      }
 
       var_1 = var_1 + (0.02 + randomfloat(0.04)) * var_2;
     }
@@ -379,9 +368,8 @@ artifact_pulse(var_0) {
       var_1 = 0.8;
       level.chyron.artifacts_fade = 0;
 
-      foreach(var_4 in level.chyron.artifacts) {
-        var_4.pulse = 0;
-      }
+      foreach(var_4 in level.chyron.artifacts)
+      var_4.pulse = 0;
     }
 
     wait 0.05;
@@ -389,11 +377,10 @@ artifact_pulse(var_0) {
 }
 
 strips(var_0) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     level endon("chyron_faze_out_text_intro");
-  } else {
+  else
     level endon("chyron_faze_out_text_gamenotify");
-  }
 
   var_1 = 5;
   var_2 = 0;
@@ -447,9 +434,8 @@ title_line(var_0, var_1) {
   var_2 thread quick_pulse(0);
   wait(var_6);
 
-  if(randomint(100) > 10) {
+  if(randomint(100) > 10)
     var_2 thread offset_thread(-30, 30, 20, -8, 8, 4);
-  }
 }
 
 offset_thread(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -529,9 +515,8 @@ fade_out_text(var_0, var_1) {
       var_3 thread hud_destroy(var_1);
     }
 
-    foreach(var_3 in level.chyron.strips) {
-      var_3 thread hud_destroy(var_1);
-    }
+    foreach(var_3 in level.chyron.strips)
+    var_3 thread hud_destroy(var_1);
   } else {
     level notify("chyron_faze_out_text_gamenotify");
 
@@ -542,9 +527,8 @@ fade_out_text(var_0, var_1) {
       var_3 thread hud_destroy(var_1);
     }
 
-    foreach(var_3 in level.game_messages.strips) {
-      var_3 thread hud_destroy(var_1);
-    }
+    foreach(var_3 in level.game_messages.strips)
+    var_3 thread hud_destroy(var_1);
   }
 }
 
@@ -552,15 +536,13 @@ sub_line(var_0, var_1, var_2, var_3, var_4) {
   var_5 = create_chyron_text(var_0);
   var_5.y = var_5.y + (20 + var_1 * 15);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_5.font = var_2;
-  }
 
   var_5.fontscale = 1;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_5.fontscale = var_3;
-  }
 
   level.chyron.text_incoming_x = var_5.x;
   level.chyron.text_incoming_y = var_5.y;
@@ -571,15 +553,13 @@ sub_line(var_0, var_1, var_2, var_3, var_4) {
   var_5 thread quick_pulse(0, var_4);
   var_5.alpha = 1;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_5.alpha = var_4;
-  }
 
   var_5 setpulsefx(30, 50000, 700);
 
-  if(randomint(100) > 70) {
+  if(randomint(100) > 70)
     var_5 maps\_utility::delaythread(2, ::offset_thread, -7, 7, 3, -5, 5, 3);
-  }
 
   level.chyron.text_incoming = 0;
   return var_5;
@@ -588,9 +568,8 @@ sub_line(var_0, var_1, var_2, var_3, var_4) {
 glowcolor_mult() {
   var_0 = 1;
 
-  if(isDefined(level.chyron) && level.chyron.no_bg) {
+  if(isDefined(level.chyron) && level.chyron.no_bg)
     var_0 = 0.3;
-  }
 
   return var_0;
 }
@@ -613,15 +592,13 @@ quick_pulse(var_0, var_1) {
   self endon("death");
   self endon("stop_quick_pulse");
 
-  if(var_0 == 0) {
+  if(var_0 == 0)
     level endon("chyron_faze_out_text_intro");
-  } else {
+  else
     level endon("chyron_faze_out_text_gamenotify");
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
   for(;;) {
     wait 0.05;
@@ -630,9 +607,8 @@ quick_pulse(var_0, var_1) {
 }
 
 location_dupes_thread(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   self endon("death");
   var_2 = self.x;
@@ -667,22 +643,19 @@ randomintrange_limit(var_0, var_1, var_2) {
   var_3 = randomintrange(var_0, var_1);
   var_4 = 1;
 
-  if(var_3 < 0) {
+  if(var_3 < 0)
     var_4 = -1;
-  }
 
   var_3 = max(abs(var_3), var_2);
   return var_3 * var_4;
 }
 
 create_chyron_text(var_0, var_1, var_2) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = level.chyron.text_x;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = level.chyron.text_y;
-  }
 
   var_3 = newhudelem();
   var_3.x = var_1;
@@ -698,16 +671,14 @@ create_chyron_text(var_0, var_1, var_2) {
   var_3.hidewheninmenu = 1;
   var_3.fontscale = 1.4;
 
-  if(level.console) {
+  if(level.console)
     var_3.fontscale = 1.2;
-  }
 
   var_3.color = (0.85, 0.93, 0.92);
   var_3.font = "default";
 
-  if(isDefined(level.chyron)) {
+  if(isDefined(level.chyron))
     level.chyron.huds[level.chyron.huds.size] = var_3;
-  }
 
   return var_3;
 }
@@ -791,9 +762,8 @@ create_strip(var_0) {
         var_6.x = var_7.x;
         var_6.y = var_7.y + var_7.height;
 
-        if(common_scripts\utility::cointoss()) {
+        if(common_scripts\utility::cointoss())
           var_6.y = var_7.y - var_6.height;
-        }
       } else
         level.chyron.last_strips = [];
 
@@ -828,9 +798,8 @@ create_strip(var_0) {
         var_6.x = var_7.x;
         var_6.y = var_7.y + var_7.height;
 
-        if(common_scripts\utility::cointoss()) {
+        if(common_scripts\utility::cointoss())
           var_6.y = var_7.y - var_6.height;
-        }
       } else
         level.game_messages.last_strips = [];
 
@@ -846,16 +815,14 @@ create_strip(var_0) {
   var_2.alpha = var_6.alpha;
   var_2.color = var_6.color;
 
-  if(var_2.alpha > 0.6) {
+  if(var_2.alpha > 0.6)
     chyron_sound(var_0, "ui_chyron_line_static");
-  }
 
   var_2.horzalign = "left";
   var_2.vertalign = "bottom";
 
-  if(var_0 == 1) {
+  if(var_0 == 1)
     var_2.vertalign = "top";
-  }
 
   var_2.sort = 1;
   var_2.foreground = 1;
@@ -869,9 +836,8 @@ create_strip(var_0) {
 dupe_hud(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1; var_3++) {
+  for(var_3 = 0; var_3 < var_1; var_3++)
     var_2[var_2.size] = create_chyron_text(var_0.text);
-  }
 
   return var_2;
 }
@@ -895,9 +861,8 @@ game_message_listen(var_0) {
 game_message_append(var_0) {
   level.game_messages.text_list[level.game_messages.text_list.size] = var_0;
 
-  if(!level.game_messages.active) {
+  if(!level.game_messages.active)
     level thread game_messages_process();
-  }
 }
 
 game_messages_startup() {
@@ -962,9 +927,8 @@ game_message_display(var_0, var_1) {
   var_2.alpha = 1;
   var_2 setpulsefx(30, 50000, 700);
 
-  if(randomint(100) < 10) {
+  if(randomint(100) < 10)
     var_2 maps\_utility::delaythread(2, ::offset_thread, -7, 7, 3, -5, 5, 3);
-  }
 }
 
 create_gamemessage_text(var_0, var_1) {
@@ -982,9 +946,8 @@ create_gamemessage_text(var_0, var_1) {
   var_2.font = "default";
   var_2.fontscale = 1.25;
 
-  if(level.console) {
+  if(level.console)
     var_2.fontscale = 1;
-  }
 
   var_2.color = (0.85, 0.93, 0.92);
   var_2.glowalpha = 0;
@@ -1002,13 +965,11 @@ stylized_line(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.alpha = 1;
   var_7.sort = 3;
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_7.glowcolor = var_5;
-  }
 
-  if(!isDefined(var_6)) {
+  if(!isDefined(var_6))
     var_6 = 20;
-  }
 
   var_7 setpulsefx(var_6, 50000, 700);
   var_8 = [var_7];

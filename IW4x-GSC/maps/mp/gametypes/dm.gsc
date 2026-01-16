@@ -23,32 +23,31 @@ main() {
 
   game["dialog"]["gametype"] = "freeforall";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("camera_thirdPerson")) {
+  else if(getDvarInt("camera_thirdPerson"))
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_diehard")) {
+  else if(getDvarInt("scr_diehard"))
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  else if(getDvarInt("scr_" + level.gameType + "_promode"))
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
-  }
 }
 
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", &"OBJECTIVES_DM");
-  setObjectiveText("axis", &"OBJECTIVES_DM");
+  setObjectiveText("allies", & "OBJECTIVES_DM");
+  setObjectiveText("axis", & "OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_DM");
-    setObjectiveScoreText("axis", &"OBJECTIVES_DM");
+    setObjectiveScoreText("allies", & "OBJECTIVES_DM");
+    setObjectiveScoreText("axis", & "OBJECTIVES_DM");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);

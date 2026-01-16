@@ -21,6 +21,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace globallogic_actor;
 
 autoexec init() {}
@@ -34,7 +35,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     return;
   }
 
-  if(self.team == # "spectator") {
+  if(self.team == #"spectator") {
     return;
   }
 
@@ -117,13 +118,13 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
   params.vdamageorigin = vdamageorigin;
   params.psoffsettime = psoffsettime;
 
-  if(!(idflags & 8192)) {
+  if(!(idflags&8192)) {
     if(isplayer(eattacker) && isDefined(eattacker.pers)) {
-      if(!isDefined(eattacker.pers[# "participation"])) {
-        eattacker.pers[# "participation"] = 0;
+      if(!isDefined(eattacker.pers[#"participation"])) {
+        eattacker.pers[#"participation"] = 0;
       }
 
-      eattacker.pers[# "participation"]++;
+      eattacker.pers[#"participation"]++;
     }
 
     prevhealthratio = self.health / self.maxhealth;
@@ -133,7 +134,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
       isshootingownclone = 1;
     }
 
-    if(level.teambased && isplayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[# "team"]) && !isshootingownclone) {
+    if(level.teambased && isplayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[#"team"]) && !isshootingownclone) {
       friendlyfire = [
         [level.figure_out_friendly_fire]
       ](self, eattacker);
@@ -219,26 +220,26 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     println("<dev string:x38>" + self getentitynumber() + "<dev string:x41>" + self.health + "<dev string:x4c>" + eattacker.clientid + "<dev string:x59>" + isplayer(einflictor) + "<dev string:x71>" + idamage + "<dev string:x7c>" + shitloc);
   }
 
-  if(true) {
-    lpselfnum = self getentitynumber();
-    lpselfteam = self.team;
-    lpattackerteam = "";
+    if(true) {
+      lpselfnum = self getentitynumber();
+      lpselfteam = self.team;
+      lpattackerteam = "";
 
-    if(isplayer(eattacker)) {
-      lpattacknum = eattacker getentitynumber();
+      if(isplayer(eattacker)) {
+        lpattacknum = eattacker getentitynumber();
+        var_c8fa9c41 = 0;
+        lpattackguid = eattacker getguid();
+        lpattackname = eattacker.name;
+        lpattackerteam = eattacker.pers[#"team"];
+        return;
+      }
+
+      lpattacknum = -1;
       var_c8fa9c41 = 0;
-      lpattackguid = eattacker getguid();
-      lpattackname = eattacker.name;
-      lpattackerteam = eattacker.pers[# "team"];
-      return;
+      lpattackguid = "";
+      lpattackname = "";
+      lpattackerteam = "world";
     }
-
-    lpattacknum = -1;
-    var_c8fa9c41 = 0;
-    lpattackguid = "";
-    lpattackname = "";
-    lpattackerteam = "world";
-  }
 }
 
 callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {

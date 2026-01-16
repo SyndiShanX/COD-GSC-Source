@@ -26,8 +26,8 @@ function init() {
   level.doa.var_6a7fa24c = [];
   level.doa.var_2f019708 = 1;
   defs = struct::get_array("doa_hazard_def");
-  for(i = 0; i < defs.size; i++) {
-    def = spawnStruct();
+  for (i = 0; i < defs.size; i++) {
+    def = spawnstruct();
     tokens = strtok(defs[i].script_noteworthy, " ");
     def.type = tokens[0];
     def.round = int(tokens[1]);
@@ -40,11 +40,11 @@ function init() {
     if(tokens.size > 4) {
       def.var_1e40a680 = int(tokens[4]);
     }
-    if(isDefined(defs[i].radius)) {
+    if(isdefined(defs[i].radius)) {
       def.radius = int(defs[i].radius);
     }
     def.model = defs[i].model;
-    if(isDefined(level.doa.var_aeeb3a0e)) {
+    if(isdefined(level.doa.var_aeeb3a0e)) {
       [
         [level.doa.var_aeeb3a0e]
       ](def);
@@ -54,7 +54,7 @@ function init() {
       level.doa.var_f6ba7ed2 = def;
     }
   }
-  def = spawnStruct();
+  def = spawnstruct();
   def.round = 37;
   def.type = "type_spider_egg";
   def.model = "zombietron_spider_egg";
@@ -62,20 +62,20 @@ function init() {
 }
 
 function function_116bb43() {
-  deathtriggers = getEntArray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_death", "targetname");
-  for(i = 0; i < deathtriggers.size; i++) {
+  deathtriggers = getentarray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_death", "targetname");
+  for (i = 0; i < deathtriggers.size; i++) {
     trigger = deathtriggers[i];
     trigger triggerenable(0);
     trigger notify("hash_3c011e06");
   }
-  var_825ea03d = getEntArray(namespace_3ca3c537::function_d2d75f5d() + "_water_volume", "targetname");
-  for(i = 0; i < var_825ea03d.size; i++) {
+  var_825ea03d = getentarray(namespace_3ca3c537::function_d2d75f5d() + "_water_volume", "targetname");
+  for (i = 0; i < var_825ea03d.size; i++) {
     trigger = var_825ea03d[i];
     trigger triggerenable(0);
     trigger notify("hash_3c011e06");
   }
-  for(i = 0; i < level.doa.hazards.size; i++) {
-    if(isDefined(level.doa.hazards[i])) {
+  for (i = 0; i < level.doa.hazards.size; i++) {
+    if(isdefined(level.doa.hazards[i])) {
       level.doa.hazards[i] thread function_65192900();
     }
   }
@@ -83,27 +83,27 @@ function function_116bb43() {
 }
 
 function private function_65192900() {
-  if(isDefined(self.trigger)) {
+  if(isdefined(self.trigger)) {
     self.trigger delete();
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("hazard_activated", 9);
-    if(isDefined(self.death_func)) {
+    if(isdefined(self.death_func)) {
       self thread[[self.death_func]]();
     }
     util::wait_network_frame();
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
 
 function function_f8530ca3() {
   level.doa.var_6a7fa24c = [];
-  for(i = 0; i < level.doa.var_61adacb4.size; i++) {
+  for (i = 0; i < level.doa.var_61adacb4.size; i++) {
     if(level.doa.var_61adacb4[i].round <= level.doa.round_number) {
       var_dbd69b20 = function_40c555dc(level.doa.var_61adacb4[i].type);
-      if(isDefined(var_dbd69b20)) {
+      if(isdefined(var_dbd69b20)) {
         level.doa.var_6a7fa24c[level.doa.var_6a7fa24c.size] = level.doa.var_61adacb4[i];
       }
     }
@@ -113,16 +113,16 @@ function function_f8530ca3() {
 function function_7b02a267() {
   level notify("hash_7b02a267");
   level endon("hash_7b02a267");
-  while(true) {
+  while (true) {
     if(getdvarint("scr_doa_show_hazards", 0)) {
-      for(i = 0; i < level.doa.var_6a7fa24c.size; i++) {
+      for (i = 0; i < level.doa.var_6a7fa24c.size; i++) {
         var_1ab7e3a5 = level.doa.var_6a7fa24c[i];
-        if(isDefined(var_1ab7e3a5)) {
+        if(isdefined(var_1ab7e3a5)) {
           locs = function_a4d53f1f(var_1ab7e3a5.type);
-          if(isDefined(locs)) {
+          if(isdefined(locs)) {
             foreach(loc in locs) {
-              radius = (isDefined(var_1ab7e3a5.radius) ? var_1ab7e3a5.radius : 85);
-              if(isDefined(loc.radius)) {
+              radius = (isdefined(var_1ab7e3a5.radius) ? var_1ab7e3a5.radius : 85);
+              if(isdefined(loc.radius)) {
                 radius = loc.radius;
               }
               level thread namespace_2f63e553::drawcylinder(loc.origin, radius, 5, 20);
@@ -139,13 +139,13 @@ function function_7a8a936b() {
   function_116bb43();
   function_f8530ca3();
   level thread function_7b02a267();
-  for(i = 0; i < level.doa.var_6a7fa24c.size; i++) {
+  for (i = 0; i < level.doa.var_6a7fa24c.size; i++) {
     var_1ab7e3a5 = level.doa.var_6a7fa24c[i];
     cluster_count = math::clamp(1 + (randomint(2 + (int((level.doa.round_number - 4) / 5)))), 1, 20);
     if(getdvarint("scr_doa_max_poles", 0)) {
       cluster_count = 20;
     }
-    if(isDefined(level.doa.var_fdc1fa6b)) {
+    if(isdefined(level.doa.var_fdc1fa6b)) {
       count = [
         [level.doa.var_fdc1fa6b]
       ]();
@@ -153,24 +153,24 @@ function function_7a8a936b() {
         cluster_count = count;
       }
     }
-    for(count = 0; count < cluster_count; count++) {
+    for (count = 0; count < cluster_count; count++) {
       if(!mayspawnentity()) {
         break;
       }
       locs = array::randomize(function_a4d53f1f(var_1ab7e3a5.type));
       loc = locs[0];
       radius = 85;
-      if(isDefined(loc.radius)) {
+      if(isdefined(loc.radius)) {
         radius = loc.radius;
       }
       origin = loc.origin + (randomintrange(0 - radius, radius), randomintrange(0 - radius, radius), 0);
       origin = function_3341776e(origin, loc.origin, radius);
-      if(isDefined(origin)) {
+      if(isdefined(origin)) {
         hazard = spawn("script_model", origin);
         hazard.targetname = "hazard";
-        hazard setModel(var_1ab7e3a5.model);
+        hazard setmodel(var_1ab7e3a5.model);
         hazard.def = var_1ab7e3a5;
-        if(isDefined(var_1ab7e3a5.width) && isDefined(var_1ab7e3a5.height)) {
+        if(isdefined(var_1ab7e3a5.width) && isdefined(var_1ab7e3a5.height)) {
           hazard.trigger = spawn("trigger_radius", origin, 3, var_1ab7e3a5.width, var_1ab7e3a5.height);
           hazard.trigger.targetname = "hazard";
         }
@@ -181,20 +181,20 @@ function function_7a8a936b() {
       doa_utility::debugmsg("");
     }
   }
-  deathtriggers = getEntArray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_death", "targetname");
-  for(i = 0; i < deathtriggers.size; i++) {
+  deathtriggers = getentarray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_death", "targetname");
+  for (i = 0; i < deathtriggers.size; i++) {
     trigger = deathtriggers[i];
     trigger triggerenable(1);
     trigger thread function_6ec8176a();
   }
-  var_825ea03d = getEntArray(namespace_3ca3c537::function_d2d75f5d() + "_water_volume", "targetname");
-  for(i = 0; i < var_825ea03d.size; i++) {
+  var_825ea03d = getentarray(namespace_3ca3c537::function_d2d75f5d() + "_water_volume", "targetname");
+  for (i = 0; i < var_825ea03d.size; i++) {
     trigger = var_825ea03d[i];
     trigger triggerenable(1);
     trigger thread function_323a3e31();
   }
-  var_88bc4fa4 = getEntArray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_warp", "targetname");
-  for(i = 0; i < var_88bc4fa4.size; i++) {
+  var_88bc4fa4 = getentarray(namespace_3ca3c537::function_d2d75f5d() + "_trigger_warp", "targetname");
+  for (i = 0; i < var_88bc4fa4.size; i++) {
     trigger = var_88bc4fa4[i];
     trigger triggerenable(1);
     trigger thread function_70dbf276();
@@ -209,8 +209,8 @@ function private _rotatevec(vector, angle) {
 }
 
 function function_1cb931df(def, var_3d19d2b1 = getdvarint("scr_doa_eggcount", 6)) {
-  if(isDefined(level.doa.var_d0cde02c)) {
-    if(isDefined(level.doa.var_d0cde02c.var_75f2c952)) {
+  if(isdefined(level.doa.var_d0cde02c)) {
+    if(isdefined(level.doa.var_d0cde02c.var_75f2c952)) {
       var_3d19d2b1 = level.doa.var_d0cde02c.var_75f2c952;
     } else {
       return;
@@ -219,11 +219,11 @@ function function_1cb931df(def, var_3d19d2b1 = getdvarint("scr_doa_eggcount", 6)
     var_3d19d2b1 = def.var_75f2c952;
   }
   spot = doa_utility::function_ada6d90();
-  while(isDefined(spot) && var_3d19d2b1) {
+  while (isdefined(spot) && var_3d19d2b1) {
     baseorigin = spot.origin;
     var_485dfece = 0;
     angle = randomint(180);
-    while(var_3d19d2b1) {
+    while (var_3d19d2b1) {
       if(var_485dfece == 0) {
         origin = baseorigin;
       } else {
@@ -252,7 +252,7 @@ function private function_fb78d226(var_6e476c41) {
   self endon("death");
   self asmsetanimationrate(0.8);
   self.in_water = 1;
-  while(isDefined(var_6e476c41) && self istouching(var_6e476c41)) {
+  while (isdefined(var_6e476c41) && self istouching(var_6e476c41)) {
     wait(0.25);
   }
   self asmsetanimationrate(1);
@@ -262,11 +262,11 @@ function private function_323a3e31() {
   self notify("hash_323a3e31");
   self endon("hash_323a3e31");
   self endon("hash_3c011e06");
-  while(true) {
+  while (true) {
     self waittill("trigger", guy);
-    if(isDefined(guy) && isalive(guy) && (isDefined(guy.takedamage) && guy.takedamage) && (!(isDefined(guy.boss) && guy.boss)) && (!(isDefined(guy.in_water) && guy.in_water))) {
+    if(isdefined(guy) && isalive(guy) && (isdefined(guy.takedamage) && guy.takedamage) && (!(isdefined(guy.boss) && guy.boss)) && (!(isdefined(guy.in_water) && guy.in_water))) {
       if(isplayer(guy)) {
-        if(isDefined(guy.doa) && isDefined(guy.doa.vehicle)) {
+        if(isdefined(guy.doa) && isdefined(guy.doa.vehicle)) {
           guy notify("hash_d28ba89d");
         }
         continue;
@@ -280,10 +280,10 @@ function private function_6ec8176a() {
   self notify("hash_6ec8176a");
   self endon("hash_6ec8176a");
   self endon("hash_3c011e06");
-  while(true) {
+  while (true) {
     self waittill("trigger", guy);
-    if(isDefined(guy) && isalive(guy) && (isDefined(guy.takedamage) && guy.takedamage) && (!(isDefined(guy.boss) && guy.boss))) {
-      if(isDefined(self.script_noteworthy)) {
+    if(isdefined(guy) && isalive(guy) && (isdefined(guy.takedamage) && guy.takedamage) && (!(isdefined(guy.boss) && guy.boss))) {
+      if(isdefined(self.script_noteworthy)) {
         switch (self.script_noteworthy) {
           case "water": {
             guy thread namespace_1a381543::function_90118d8c("zmb_hazard_water_death");
@@ -295,7 +295,7 @@ function private function_6ec8176a() {
           }
         }
       }
-      if(isDefined(self.script_parameters) && isDefined(guy.doa)) {
+      if(isdefined(self.script_parameters) && isdefined(guy.doa)) {
         guy.doa.var_bac6a79 = self.script_parameters;
       }
       if(isplayer(guy)) {
@@ -310,11 +310,11 @@ function private function_70dbf276() {
   self notify("hash_70dbf276");
   self endon("hash_70dbf276");
   self endon("hash_3c011e06");
-  while(true) {
+  while (true) {
     self waittill("trigger", guy);
-    if(isDefined(guy)) {
+    if(isdefined(guy)) {
       var_c99d2b6d = "spawn_at_safe";
-      if(isDefined(self.script_parameters)) {
+      if(isdefined(self.script_parameters)) {
         var_bac6a79 = self.script_parameters;
       }
       if(!isplayer(guy)) {
@@ -354,7 +354,7 @@ function private function_a4d53f1f(type) {
     return;
   }
   locs = [];
-  for(i = 0; i < spawn_locations.size; i++) {
+  for (i = 0; i < spawn_locations.size; i++) {
     if(issubstr(spawn_locations[i].script_noteworthy, type)) {
       locs[locs.size] = spawn_locations[i];
     }
@@ -370,7 +370,7 @@ function private function_40c555dc(type) {
     return;
   }
   locs = [];
-  for(i = 0; i < spawn_locations.size; i++) {
+  for (i = 0; i < spawn_locations.size; i++) {
     if(issubstr(spawn_locations[i].script_noteworthy, type)) {
       locs[locs.size] = spawn_locations[i];
     }
@@ -383,12 +383,12 @@ function function_3341776e(origin, var_891d7d80 = origin, var_ba2a535c = 85) {
   min_dist_squared = min_dist * min_dist;
   pushed = 1;
   max_tries = 3;
-  while(pushed && max_tries > 0) {
+  while (pushed && max_tries > 0) {
     max_tries--;
     pushed = 0;
-    for(i = 0; i < level.doa.hazards.size; i++) {
+    for (i = 0; i < level.doa.hazards.size; i++) {
       hazard = level.doa.hazards[i];
-      if(isDefined(hazard)) {
+      if(isdefined(hazard)) {
         dist_squared = distancesquared(origin, hazard.origin);
         if(dist_squared < min_dist_squared) {
           dir = origin - hazard.origin;
@@ -433,8 +433,8 @@ function function_3341776e(origin, var_891d7d80 = origin, var_ba2a535c = 85) {
 
 function private function_993013cd(trigger) {
   self endon("death");
-  while(true) {
-    if(isDefined(self.active) && self.active && isDefined(trigger)) {
+  while (true) {
+    if(isdefined(self.active) && self.active && isdefined(trigger)) {
       namespace_2f63e553::drawcylinder(trigger.origin, self.def.width, self.def.height);
     }
     wait(0.05);
@@ -444,16 +444,16 @@ function private function_993013cd(trigger) {
 function private function_8a97d2c0(trigger) {
   self endon("death");
   trigger endon("death");
-  while(true) {
+  while (true) {
     trigger waittill("trigger", guy);
-    if(isDefined(guy) && (isDefined(self.active) && self.active)) {
-      if(!isDefined(guy.doa)) {
+    if(isdefined(guy) && (isdefined(self.active) && self.active)) {
+      if(!isdefined(guy.doa)) {
         continue;
       }
-      if(isDefined(guy.var_de3055b5) && guy.var_de3055b5) {
+      if(isdefined(guy.var_de3055b5) && guy.var_de3055b5) {
         continue;
       }
-      if(!isDefined(guy.doa.var_84b9997f)) {
+      if(!isdefined(guy.doa.var_84b9997f)) {
         guy.doa.var_84b9997f = 0;
       }
       curtime = gettime();
@@ -463,10 +463,10 @@ function private function_8a97d2c0(trigger) {
       guy.doa.var_84b9997f = curtime + 1500;
       guy thread namespace_1a381543::function_90118d8c("zmb_hazard_hit");
       guy thread namespace_eaa992c::function_285a2999("hazard_electric");
-      if(isDefined(guy.boss) && guy.boss) {
+      if(isdefined(guy.boss) && guy.boss) {
         continue;
       }
-      if(guy.health > 0 && (isDefined(guy.takedamage) && guy.takedamage) && (isDefined(guy.allowdeath) && guy.allowdeath)) {
+      if(guy.health > 0 && (isdefined(guy.takedamage) && guy.takedamage) && (isdefined(guy.allowdeath) && guy.allowdeath)) {
         guy dodamage(guy.health + 500, guy.origin, self, trigger, "none", "MOD_ELECTROCUTED");
       }
     }
@@ -474,16 +474,16 @@ function private function_8a97d2c0(trigger) {
 }
 
 function function_5d31907f() {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
-  if(!isDefined(self.def)) {
+  if(!isdefined(self.def)) {
     return;
   }
   switch (self.def.type) {
     case "type_electric_mine": {
       self thread function_bf0f9f64();
-      if(!isDefined(level.doa.var_f6ba7ed2)) {
+      if(!isdefined(level.doa.var_f6ba7ed2)) {
         level.doa.var_f6ba7ed2 = self.def;
       }
       break;
@@ -498,12 +498,12 @@ function function_5d31907f() {
 function function_bf0f9f64() {
   self endon("death");
   self.active = 0;
-  self clientfield::set("hazard_type", (isDefined(self.var_d05d7e08) ? self.var_d05d7e08 : 1));
+  self clientfield::set("hazard_type", (isdefined(self.var_d05d7e08) ? self.var_d05d7e08 : 1));
   wait(0.05);
   self thread function_8a97d2c0(self.trigger);
   self clientfield::set("hazard_activated", 1);
   wait(randomfloatrange(2.1, 8));
-  while(true) {
+  while (true) {
     self clientfield::set("hazard_activated", 2);
     wait(1.2);
     self clientfield::set("hazard_activated", 3);
@@ -535,11 +535,11 @@ function function_d8d20160() {
   self thread function_d8c94716();
   self thread function_441547f1();
   self thread function_2a738695();
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("hazard_type", 2);
   }
   util::wait_network_frame();
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("hazard_activated", 3);
     self.takedamage = 1;
     self.health = level.doa.rules.var_5e3c9766;
@@ -548,11 +548,11 @@ function function_d8d20160() {
     self.trashcan = 1;
     self.var_1a563349 = 1;
     self.var_262e30aa = vectorscale((0, 0, 1), 42);
-    self.death_func = &function_193a95a6;
+    self.death_func = & function_193a95a6;
     level.doa.hazards[level.doa.hazards.size] = self;
-    while(isDefined(self)) {
+    while (isdefined(self)) {
       self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, tagname, modelname, partname, weapon);
-      if(isDefined(meansofdeath) && meansofdeath == "MOD_BURNED") {
+      if(isdefined(meansofdeath) && meansofdeath == "MOD_BURNED") {
         damage = int(max(self.health * 0.5, damage));
       }
       doa_utility::debugmsg((((("" + damage) + "") + meansofdeath) + "") + self.health);
@@ -584,12 +584,12 @@ function private function_d8c94716() {
 
 function private function_441547f1() {
   self endon("death");
-  while(true) {
-    pickupsitems = getEntArray("a_pickup_item", "script_noteworthy");
-    var_f3646f56 = self.origin + (isDefined(self.var_262e30aa) ? self.var_262e30aa : (0, 0, 0));
-    for(i = 0; i < pickupsitems.size; i++) {
+  while (true) {
+    pickupsitems = getentarray("a_pickup_item", "script_noteworthy");
+    var_f3646f56 = self.origin + (isdefined(self.var_262e30aa) ? self.var_262e30aa : (0, 0, 0));
+    for (i = 0; i < pickupsitems.size; i++) {
       pickup = pickupsitems[i];
-      if(!isDefined(pickup)) {
+      if(!isdefined(pickup)) {
         continue;
       }
       distsq = distance2dsquared(pickup.origin, var_f3646f56);
@@ -605,7 +605,7 @@ function private function_441547f1() {
 function function_ffe39afe() {
   count = 0;
   foreach(hazard in level.doa.hazards) {
-    if(isDefined(hazard) && (isDefined(hazard.trashcan) && hazard.trashcan)) {
+    if(isdefined(hazard) && (isdefined(hazard.trashcan) && hazard.trashcan)) {
       count++;
     }
   }
@@ -616,7 +616,7 @@ function function_cda60edb() {
   if(level.doa.round_number < level.doa.rules.var_8c016b75) {
     return false;
   }
-  if(!isDefined(level.doa.var_932f9d4d)) {
+  if(!isdefined(level.doa.var_932f9d4d)) {
     return true;
   }
   if(function_ffe39afe() >= level.doa.rules.var_3210f224) {

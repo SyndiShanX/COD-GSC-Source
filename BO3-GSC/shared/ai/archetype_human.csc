@@ -15,7 +15,7 @@
 function autoexec precache() {}
 
 function autoexec main() {
-  clientfield::register("actor", "facial_dial", 1, 1, "int", &humanclientutils::facialdialoguehandler, 0, 1);
+  clientfield::register("actor", "facial_dial", 1, 1, "int", & humanclientutils::facialdialoguehandler, 0, 1);
 }
 
 #namespace humanclientutils;
@@ -23,7 +23,7 @@ function autoexec main() {
 function facialdialoguehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     self.facialdialogueactive = 1;
-  } else if(isDefined(self.facialdialogueactive) && self.facialdialogueactive) {
+  } else if(isdefined(self.facialdialogueactive) && self.facialdialogueactive) {
     self clearanim( % generic::faces, 0);
   }
 }

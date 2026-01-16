@@ -17,9 +17,9 @@ function __init__() {
   foreach(team in level.teams) {
     level.recently_deceased[team] = util::spawn_array_struct();
   }
-  callback::on_connecting(&on_player_connecting);
+  callback::on_connecting( & on_player_connecting);
   level.spawnprotectiontime = getgametypesetting("spawnprotectiontime");
-  level.spawnprotectiontimems = int((isDefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
+  level.spawnprotectiontimems = int((isdefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
   setdvar("", "");
   setdvar("", "");
   setdvar("", "");
@@ -29,9 +29,9 @@ function __init__() {
 }
 
 function init_spawn_system() {
-  level.spawnsystem = spawnStruct();
+  level.spawnsystem = spawnstruct();
   spawnsystem = level.spawnsystem;
-  if(!isDefined(spawnsystem.unifiedsideswitching)) {
+  if(!isdefined(spawnsystem.unifiedsideswitching)) {
     spawnsystem.unifiedsideswitching = 1;
   }
   spawnsystem.objective_facing_bonus = 0;
@@ -51,15 +51,15 @@ function init_spawn_system() {
 function on_player_connecting() {
   level endon("game_ended");
   self setentertime(gettime());
-  callback::on_spawned(&on_player_spawned);
-  callback::on_joined_team(&on_joined_team);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_joined_team( & on_joined_team);
   self thread ongrenadethrow();
 }
 
 function on_player_spawned() {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self enable_player_influencers(1);
     self thread ondeath();
@@ -83,7 +83,7 @@ function on_joined_team() {
 function ongrenadethrow() {
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("grenade_fire", grenade, weapon);
     level thread create_grenade_influencers(self.pers["team"], weapon, grenade);
     wait(0.05);
@@ -152,14 +152,14 @@ function create_entity_masked_enemy_influencer(name, team_mask) {
 }
 
 function create_player_influencers() {
-  assert(!isDefined(self.influencers));
-  assert(!isDefined(self.influencers));
+  assert(!isdefined(self.influencers));
+  assert(!isdefined(self.influencers));
   if(!level.teambased) {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
   } else {
-    if(isDefined(self.pers["team"])) {
+    if(isdefined(self.pers["team"])) {
       team = self.pers["team"];
       team_mask = util::getteammask(team);
       enemy_teams_mask = util::getotherteamsmask(team);
@@ -179,7 +179,7 @@ function create_player_influencers() {
   if(level.teambased) {
     self create_entity_masked_friendly_influencer("friend", team_mask);
   }
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator") {
+  if(!isdefined(self.pers["team"]) || self.pers["team"] == "spectator") {
     self enable_influencers(0);
   }
 }
@@ -189,10 +189,10 @@ function remove_influencers() {
     removeinfluencer(influencer);
   }
   self.influencers = [];
-  if(isDefined(self.influencersfriendly)) {
+  if(isdefined(self.influencersfriendly)) {
     self.influencersfriendly = [];
   }
-  if(isDefined(self.influencersenemy)) {
+  if(isdefined(self.influencersenemy)) {
     self.influencersenemy = [];
   }
 }
@@ -215,7 +215,7 @@ function enable_influencers(enabled) {
 }
 
 function enable_player_influencers(enabled) {
-  if(!isDefined(self.influencers)) {
+  if(!isdefined(self.influencers)) {
     self create_player_influencers();
   }
   self enable_influencers(enabled);
@@ -230,12 +230,12 @@ function player_influencers_set_team() {
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   }
-  if(isDefined(self.influencersfriendly)) {
+  if(isdefined(self.influencersfriendly)) {
     foreach(influencer in self.influencersfriendly) {
       setinfluencerteammask(influencer, team_mask);
     }
   }
-  if(isDefined(self.influencersenemy)) {
+  if(isdefined(self.influencersenemy)) {
     foreach(influencer in self.influencersenemy) {
       setinfluencerteammask(influencer, enemy_teams_mask);
     }
@@ -245,7 +245,7 @@ function player_influencers_set_team() {
 function create_grenade_influencers(parent_team, weapon, grenade) {
   pixbeginevent("create_grenade_influencers");
   spawn_influencer = weapon.spawninfluencer;
-  if(isDefined(grenade.origin) && spawn_influencer != "") {
+  if(isdefined(grenade.origin) && spawn_influencer != "") {
     if(!level.teambased) {
       weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
     } else {
@@ -260,8 +260,8 @@ function create_grenade_influencers(parent_team, weapon, grenade) {
 }
 
 function create_map_placed_influencers() {
-  staticinfluencerents = getEntArray("mp_uspawn_influencer", "classname");
-  for(i = 0; i < staticinfluencerents.size; i++) {
+  staticinfluencerents = getentarray("mp_uspawn_influencer", "classname");
+  for (i = 0; i < staticinfluencerents.size; i++) {
     staticinfluencerent = staticinfluencerents[i];
     create_map_placed_influencer(staticinfluencerent);
   }
@@ -269,7 +269,7 @@ function create_map_placed_influencers() {
 
 function create_map_placed_influencer(influencer_entity) {
   influencer_id = -1;
-  if(isDefined(influencer_entity.script_noteworty)) {
+  if(isdefined(influencer_entity.script_noteworty)) {
     team_mask = util::getteammask(influencer_entity.script_team);
     level create_enemy_influencer(influencer_entity.script_noteworty, influencer_entity.origin, team_mask);
   } else {
@@ -303,7 +303,7 @@ function onspawnplayer_unified(predictedspawn = 0) {
   }
   use_new_spawn_system = 0;
   initial_spawn = 1;
-  if(isDefined(self.uspawn_already_spawned)) {
+  if(isdefined(self.uspawn_already_spawned)) {
     initial_spawn = !self.uspawn_already_spawned;
   }
   if(level.usestartspawns) {
@@ -327,7 +327,7 @@ function getspawnpoint(player_entity, predictedspawn = 0) {
     point_team = "free";
     influencer_team = "free";
   }
-  if(level.teambased && isDefined(game["switchedsides"]) && game["switchedsides"] && level.spawnsystem.unifiedsideswitching) {
+  if(level.teambased && isdefined(game["switchedsides"]) && game["switchedsides"] && level.spawnsystem.unifiedsideswitching) {
     point_team = util::getotherteam(point_team);
   }
   best_spawn = get_best_spawnpoint(point_team, influencer_team, player_entity, predictedspawn);
@@ -383,14 +383,14 @@ function get_best_spawnpoint(point_team, influencer_team, player, predictedspawn
 }
 
 function gatherspawnpoints(player_team) {
-  if(!isDefined(level.unified_spawn_points)) {
+  if(!isdefined(level.unified_spawn_points)) {
     level.unified_spawn_points = [];
-  } else if(isDefined(level.unified_spawn_points[player_team])) {
+  } else if(isdefined(level.unified_spawn_points[player_team])) {
     return level.unified_spawn_points[player_team];
   }
   spawn_entities_s = util::spawn_array_struct();
   spawn_entities_s.a = spawnlogic::getteamspawnpoints(player_team);
-  if(!isDefined(spawn_entities_s.a)) {
+  if(!isdefined(spawn_entities_s.a)) {
     spawn_entities_s.a = [];
   }
   level.unified_spawn_points[player_team] = spawn_entities_s;
@@ -398,11 +398,11 @@ function gatherspawnpoints(player_team) {
 }
 
 function is_hardcore() {
-  return isDefined(level.hardcoremode) && level.hardcoremode;
+  return isdefined(level.hardcoremode) && level.hardcoremode;
 }
 
 function teams_have_enmity(team1, team2) {
-  if(!isDefined(team1) || !isDefined(team2) || level.gametype == "dm") {
+  if(!isdefined(team1) || !isdefined(team2) || level.gametype == "dm") {
     return 1;
   }
   return team1 != "neutral" && team2 != "neutral" && team1 != team2;
@@ -430,7 +430,7 @@ function remove_unused_spawn_entities() {
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn_axis_start";
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn_allies_start";
   spawn_entity_types[spawn_entity_types.size] = "mp_twar_spawn";
-  for(i = 0; i < spawn_entity_types.size; i++) {
+  for (i = 0; i < spawn_entity_types.size; i++) {
     if(spawn_point_class_name_being_used(spawn_entity_types[i])) {
       continue;
     }
@@ -440,16 +440,16 @@ function remove_unused_spawn_entities() {
 }
 
 function delete_all_spawns(spawnpoints) {
-  for(i = 0; i < spawnpoints.size; i++) {
+  for (i = 0; i < spawnpoints.size; i++) {
     spawnpoints[i] delete();
   }
 }
 
 function spawn_point_class_name_being_used(name) {
-  if(!isDefined(level.spawn_point_class_names)) {
+  if(!isdefined(level.spawn_point_class_names)) {
     return false;
   }
-  for(i = 0; i < level.spawn_point_class_names.size; i++) {
+  for (i = 0; i < level.spawn_point_class_names.size; i++) {
     if(level.spawn_point_class_names[i] == name) {
       return true;
     }
@@ -468,7 +468,7 @@ function codecallback_updatespawnpoints() {
 function initialspawnprotection(specialtyname, spawnmonitorspeed) {
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(level.spawnprotectiontime) || level.spawnprotectiontime == 0) {
+  if(!isdefined(level.spawnprotectiontime) || level.spawnprotectiontime == 0) {
     return;
   }
   if(specialtyname == "specialty_nottargetedbyairsupport") {

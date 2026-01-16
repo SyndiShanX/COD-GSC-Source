@@ -140,17 +140,15 @@ skipto_setup() {
   flag_set("start_asd_wall_crash");
   flag_set("lab_lobby_doors");
 
-  if(skipto == "celerium_chamber") {
+  if(skipto == "celerium_chamber")
     return;
-  }
 }
 
 load_gumps_monsoon() {
-  if(is_after_skipto("ruins_interior")) {
+  if(is_after_skipto("ruins_interior"))
     load_gump("monsoon_gump_interior");
-  } else {
+  else
     load_gump("monsoon_gump_exterior");
-  }
 }
 
 setup_objectives() {
@@ -314,9 +312,8 @@ monsoon_hero_rampage(b_on) {
 }
 
 set_squad_blood_impact(str_value) {
-  foreach(hero in get_heroes()) {
-    hero bloodimpact(str_value);
-  }
+  foreach(hero in get_heroes())
+  hero bloodimpact(str_value);
 }
 
 weaken_ai() {
@@ -328,9 +325,8 @@ player_has_silenced_weapon() {
   a_current_weapons = self getweaponslist();
 
   foreach(weapon in a_current_weapons) {
-    if(issubstr(weapon, "silencer")) {
+    if(issubstr(weapon, "silencer"))
       return true;
-    }
   }
 
   return false;
@@ -347,9 +343,8 @@ player_has_explosive_weapon_equipped() {
 
   for(i = 0; i < a_wpn_exp.size; i++) {
     if(self getcurrentweapon() == a_wpn_exp[i]) {
-      if(self getammocount(a_wpn_exp[i])) {
+      if(self getammocount(a_wpn_exp[i]))
         return true;
-      }
     }
   }
 
@@ -362,16 +357,14 @@ player_titus_tutorial() {
 
   if(self hasweapon("titus6_sp")) {
     while(true) {
-      while(self getcurrentweapon() != "titus6_sp") {
+      while(self getcurrentweapon() != "titus6_sp")
         wait 0.05;
-      }
 
       screen_message_create(&"MONSOON_TUTORIAL_TITUS");
       self thread _player_titus_tutorial_watch();
 
-      while(self getcurrentweapon() == "titus6_sp") {
+      while(self getcurrentweapon() == "titus6_sp")
         wait 0.05;
-      }
 
       self notify("weapon_switched");
       screen_message_delete();
@@ -383,9 +376,8 @@ player_titus_tutorial() {
 _player_titus_tutorial_watch() {
   self endon("weapon_switched");
 
-  while(!self actionslotthreebuttonpressed()) {
+  while(!self actionslotthreebuttonpressed())
     wait 0.05;
-  }
 
   self notify("tutorial_complete");
   screen_message_delete();
@@ -399,8 +391,8 @@ setup_camo_suit_ai() {
   self ent_flag_set("camo_suit_on");
   self.camo_sound_ent = spawn("script_origin", self.origin);
   self.camo_sound_ent linkto(self, "tag_origin");
-  self playSound("fly_camo_suit_npc_on", self.origin);
-  self.camo_sound_ent playLoopSound("fly_camo_suit_npc_loop", 0.5);
+  self playsound("fly_camo_suit_npc_on", self.origin);
+  self.camo_sound_ent playloopsound("fly_camo_suit_npc_loop", 0.5);
   self.canflank = 1;
   self.aggressivemode = 1;
   self.moveplaybackrate = 1.3;
@@ -408,15 +400,14 @@ setup_camo_suit_ai() {
   self.health = 150;
   self thread camo_emp_behavior();
 
-  if(issubstr(tolower(self.classname), "sniper")) {
+  if(issubstr(tolower(self.classname), "sniper"))
     self.has_ir = 1;
-  }
 }
 
 deathfunction_clear_camo() {
   if(self ent_flag_exist("camo_suit_on") && self ent_flag("camo_suit_on")) {
     self toggle_camo_suit(1);
-    self playSound("fly_camo_suit_npc_off", self.origin);
+    self playsound("fly_camo_suit_npc_off", self.origin);
 
     if(isDefined(self.camo_sound_ent)) {
       self.camo_sound_ent stoploopsound(1);
@@ -449,21 +440,18 @@ handle_special_ai_death() {
 }
 
 handle_gasfreeze_ai_death() {
-  if(self.damagemod != "MOD_GAS") {
+  if(self.damagemod != "MOD_GAS")
     return false;
-  }
 
-  if(!self ent_flag_exist("camo_suit_on")) {
+  if(!self ent_flag_exist("camo_suit_on"))
     self setclientflag(10);
-  }
 
   return false;
 }
 
 toggle_camo_suit(b_on, b_play_fx) {
-  if(!isDefined(b_play_fx)) {
+  if(!isDefined(b_play_fx))
     b_play_fx = 1;
-  }
 
   if(!issubstr(tolower(self.classname), "camo")) {
     return;
@@ -476,9 +464,8 @@ toggle_camo_suit(b_on, b_play_fx) {
     self ent_flag_set("camo_suit_on");
   }
 
-  if(b_play_fx) {
-    playFXOnTag(getfx("camo_transition"), self, "J_SpineLower");
-  }
+  if(b_play_fx)
+    playfxontag(getfx("camo_transition"), self, "J_SpineLower");
 }
 
 lerp_vision(n_lerp_time, n_fov, n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur) {
@@ -538,9 +525,8 @@ challenge_nodeath(str_notify) {
   self waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0) {
+  if(n_deaths == 0)
     self notify(str_notify);
-  }
 }
 
 challenge_tituskills(str_notify) {
@@ -569,9 +555,8 @@ challenge_tituskills_think() {
   self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
 
   if(isDefined(weaponname)) {
-    if(weaponname == "exptitus6_sp" || weaponname == "exptitus6_bullet_sp" || weaponname == "titus_explosive_dart_sp") {
+    if(weaponname == "exptitus6_sp" || weaponname == "exptitus6_bullet_sp" || weaponname == "titus_explosive_dart_sp")
       level.n_titus_kills++;
-    }
   }
 }
 
@@ -585,15 +570,13 @@ challenge_assault_shield(str_notify) {
 challenge_save_player_asd(str_notify) {
   flag_wait("player_at_celerium");
 
-  if(flag("brute_force_perk_used") && !flag("player_asd_died")) {
+  if(flag("brute_force_perk_used") && !flag("player_asd_died"))
     self notify(str_notify);
-  }
 }
 
 set_rain_level(n_level) {
-  if(n_level > 5) {
+  if(n_level > 5)
     n_level = 5;
-  }
 
   if(n_level == 0) {
     flag_clear("monsoon_is_raining");
@@ -623,8 +606,8 @@ _ai_rain_thread() {
   self endon("death");
 
   while(true) {
-    playFXOnTag(getfx("ai_rain"), self, "j_spine4");
-    playFXOnTag(getfx("ai_rain_helmet"), self, "j_head_end");
+    playfxontag(getfx("ai_rain"), self, "j_spine4");
+    playfxontag(getfx("ai_rain_helmet"), self, "j_head_end");
     wait(randomfloatrange(0.1, 0.2));
   }
 }
@@ -634,14 +617,13 @@ hero_rain_thread() {
   self endon("stop_hero_rain");
 
   while(true) {
-    tracedata = bulletTrace(self getEye(), self getEye() + vectorscale((0, 0, 1), 500.0), 0, self);
+    tracedata = bullettrace(self geteye(), self geteye() + vectorscale((0, 0, 1), 500.0), 0, self);
 
     if(tracedata["fraction"] == 1) {
-      playFXOnTag(getfx("ai_rain"), self, "j_spine4");
+      playfxontag(getfx("ai_rain"), self, "j_spine4");
 
-      if(self == level.crosby) {
-        playFXOnTag(getfx("ai_rain_helmet"), self, "j_head_end");
-      }
+      if(self == level.crosby)
+        playfxontag(getfx("ai_rain_helmet"), self, "j_head_end");
     }
 
     wait(randomfloatrange(0.1, 0.2));
@@ -652,22 +634,20 @@ _rain_thread(n_level) {
   level notify("_rain_thread");
   level endon("_rain_thread");
 
-  if(n_level >= 3) {
+  if(n_level >= 3)
     level thread _wind_shake();
-  } else {
+  else
     level.player stoprumble("tank_rumble");
-  }
 
   n_wait = 0.6 - n_level / 10;
 
   while(true) {
-    if(!flag("intro_goggles_off")) {
-      playFX(getfx("player_rain_binoc"), level.player getorigin());
-    } else if(flag("ruins_door_destroyed")) {
-      playFX(getfx("player_rain_temple"), level.player getorigin());
-    } else {
-      playFX(getfx("player_rain"), level.player getorigin());
-    }
+    if(!flag("intro_goggles_off"))
+      playfx(getfx("player_rain_binoc"), level.player getorigin());
+    else if(flag("ruins_door_destroyed"))
+      playfx(getfx("player_rain_temple"), level.player getorigin());
+    else
+      playfx(getfx("player_rain"), level.player getorigin());
 
     wait(n_wait);
   }
@@ -684,7 +664,7 @@ _wind_shake() {
       n_wind_time = randomfloatrange(2.0, 3.0);
       earthquake(0.1, n_wind_time + 2.0, level.player.origin, 500, level.player);
       level.player playrumblelooponentity("tank_rumble");
-      level.player playSound("evt_wind_shake");
+      level.player playsound("evt_wind_shake");
       wait(n_wind_time);
       level.player stoprumble("tank_rumble");
     }
@@ -695,13 +675,12 @@ _rain_drops() {
   level endon("_rain_drops");
 
   while(isalive(level.player)) {
-    tracedata = bulletTrace(level.player getEye(), level.player getEye() + vectorscale((0, 0, 1), 500.0), 0, level.player);
+    tracedata = bullettrace(level.player geteye(), level.player geteye() + vectorscale((0, 0, 1), 500.0), 0, level.player);
 
-    if(tracedata["fraction"] == 1 && !flag("player_flying_wingsuit")) {
+    if(tracedata["fraction"] == 1 && !flag("player_flying_wingsuit"))
       level.player setclientflag(6);
-    } else {
+    else
       level.player clearclientflag(6);
-    }
 
     wait 1;
   }
@@ -759,16 +738,14 @@ outside_lift_init() {
     wait 1;
     level notify("player_used_outside_lift");
 
-    if(m_lift.b_top) {
+    if(m_lift.b_top)
       outside_lift_move_down();
-    } else {
+    else
       outside_lift_move_up();
-    }
   }
 
-  foreach(model in a_m_doors) {
-    model delete();
-  }
+  foreach(model in a_m_doors)
+  model delete();
 
   t_use delete();
   m_lift.t_hurt delete();
@@ -786,25 +763,25 @@ outside_lift_move_down() {
   m_door_north_r unlink();
   m_door_north_l movey(-60, 2, 0.5);
   m_door_north_r movey(60, 2, 0.5);
-  m_door_north_l playSound("evt_lift_close");
-  m_door_north_r playSound("evt_lift_close");
+  m_door_north_l playsound("evt_lift_close");
+  m_door_north_r playsound("evt_lift_close");
   m_door_north_r waittill("movedone");
   m_door_north_l linkto(m_lift);
   m_door_north_r linkto(m_lift);
   m_lift moveto(m_lift.v_lift_bottom, 6, 1.2, 1.2);
-  m_lift playSound("evt_lift_start_3d");
-  m_lift playLoopSound("evt_lift_loop_3d", 1);
+  m_lift playsound("evt_lift_start_3d");
+  m_lift playloopsound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
-  m_lift playSound("evt_lift_stop_3d");
+  m_lift playsound("evt_lift_stop_3d");
   m_door_south_l = getent("lift_ruins_door_1_left", "targetname");
   m_door_south_r = getent("lift_ruins_door_1_right", "targetname");
   m_door_south_l unlink();
   m_door_south_r unlink();
   m_door_south_l movey(60, 2, 0.5);
   m_door_south_r movey(-60, 2, 0.5);
-  m_door_north_l playSound("evt_lift_open");
-  m_door_north_r playSound("evt_lift_open");
+  m_door_north_l playsound("evt_lift_open");
+  m_door_north_r playsound("evt_lift_open");
   m_door_south_r waittill("movedone");
   m_door_south_l linkto(m_lift);
   m_door_south_r linkto(m_lift);
@@ -824,25 +801,25 @@ outside_lift_move_up() {
   m_door_south_r unlink();
   m_door_south_l movey(-60, 2, 0.5);
   m_door_south_r movey(60, 2, 0.5);
-  m_door_south_l playSound("evt_lift_close");
-  m_door_south_r playSound("evt_lift_close");
+  m_door_south_l playsound("evt_lift_close");
+  m_door_south_r playsound("evt_lift_close");
   m_door_south_r waittill("movedone");
   m_door_south_l linkto(m_lift);
   m_door_south_r linkto(m_lift);
   m_lift moveto(m_lift.v_lift_top, 6, 1.2, 1.2);
-  m_lift playSound("evt_lift_start_3d");
-  m_lift playLoopSound("evt_lift_loop_3d", 1);
+  m_lift playsound("evt_lift_start_3d");
+  m_lift playloopsound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
-  m_lift playSound("evt_lift_stop_3d");
+  m_lift playsound("evt_lift_stop_3d");
   m_door_north_l = getent("lift_ruins_door_2_left", "targetname");
   m_door_north_r = getent("lift_ruins_door_2_right", "targetname");
   m_door_north_l unlink();
   m_door_north_r unlink();
   m_door_north_l movey(60, 2, 0.5);
   m_door_north_r movey(-60, 2, 0.5);
-  m_door_north_l playSound("evt_lift_open");
-  m_door_north_r playSound("evt_lift_open");
+  m_door_north_l playsound("evt_lift_open");
+  m_door_north_r playsound("evt_lift_open");
   m_door_north_r waittill("movedone");
   m_door_north_l linkto(m_lift);
   m_door_north_r linkto(m_lift);
@@ -853,9 +830,8 @@ outside_lift_move_up() {
 use_trigger_on_group_clear(str_group_name, str_trigger_name) {
   t_color = getent(str_trigger_name, "targetname");
 
-  if(isDefined(t_color)) {
+  if(isDefined(t_color))
     t_color thread _use_trigger_on_group_clear_think(str_group_name);
-  }
 }
 
 _use_trigger_on_group_clear_think(str_group_name) {
@@ -866,15 +842,13 @@ _use_trigger_on_group_clear_think(str_group_name) {
 }
 
 use_trigger_on_group_count(str_group_name, str_trigger_name, n_count, b_weaken) {
-  if(!isDefined(b_weaken)) {
+  if(!isDefined(b_weaken))
     b_weaken = 0;
-  }
 
   t_color = getent(str_trigger_name, "targetname");
 
-  if(isDefined(t_color)) {
+  if(isDefined(t_color))
     t_color thread _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken);
-  }
 }
 
 _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken) {
@@ -882,9 +856,8 @@ _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken) {
   self endon("death");
   waittill_ai_group_count(str_group_name, n_count);
 
-  if(b_weaken) {
+  if(b_weaken)
     array_func(get_ai_group_ai(str_group_name), ::weaken_ai);
-  }
 
   self notify("trigger");
 }
@@ -922,9 +895,8 @@ monitor_player_asd_death() {
 player_asd_vo() {
   flag_wait("open_asd_door");
 
-  if(!flag("asd_player_vo") && !flag("isaac_defend_start") || !flag("asd_player_vo") && !flag("isaac_defend_start")) {
+  if(!flag("asd_player_vo") && !flag("isaac_defend_start") || !flag("asd_player_vo") && !flag("isaac_defend_start"))
     level.player thread say_dialog("sect_alright_you_little_0", 0.1);
-  }
 }
 
 asd_player_think() {
@@ -986,9 +958,8 @@ player_door_rumble() {
   while(self.is_moving) {
     n_distance = distance(self.origin, level.player.origin);
 
-    if(n_distance < n_rumble_distance) {
+    if(n_distance < n_rumble_distance)
       level.player playrumbleonentity("tank_rumble");
-    }
 
     wait 0.05;
   }
@@ -1000,9 +971,8 @@ player_asd_rumble() {
   while(true) {
     n_distance = distance(self.origin, level.player.origin);
 
-    if(n_distance < 200) {
+    if(n_distance < 200)
       level.player playrumbleonentity("tank_rumble");
-    }
 
     wait 0.05;
   }
@@ -1021,25 +991,22 @@ monsoon_heavy_rumble(guy) {
 }
 
 waittill_input(str_hint, str_buttonpress, str_direction) {
-  if(isDefined(str_hint)) {
+  if(isDefined(str_hint))
     screen_message_create(str_hint);
-  }
 
   wait 0.25;
 
-  if(str_buttonpress == "ltrig_rtrig") {
+  if(str_buttonpress == "ltrig_rtrig")
     self _input_both_triggers_pulled();
-  } else if(str_buttonpress == "ltrig") {
+  else if(str_buttonpress == "ltrig")
     self _input_left_trigger_pulled();
-  } else if(str_buttonpress == "lstick" || str_buttonpress == "rstick") {
+  else if(str_buttonpress == "lstick" || str_buttonpress == "rstick")
     self _input_stick(str_buttonpress, str_direction);
-  } else {
+  else
     self _input_button(str_buttonpress);
-  }
 
-  if(isDefined(str_hint)) {
+  if(isDefined(str_hint))
     screen_message_delete();
-  }
 }
 
 _input_both_triggers_pulled() {
@@ -1076,21 +1043,18 @@ _input_stick(str_stick, str_direction) {
   n_dot = -0.25;
 
   if(isDefined(str_direction)) {
-    if(str_direction == "forward" || str_direction == "right") {
+    if(str_direction == "forward" || str_direction == "right")
       n_dot = 0.85;
-    }
 
-    if(str_direction == "right" || str_direction == "left") {
+    if(str_direction == "right" || str_direction == "left")
       n_axis = 1;
-    }
   }
 
   while(true) {
-    if(str_stick == "lstick") {
+    if(str_stick == "lstick")
       stick = self get_normalized_movement(1, 1)[n_axis];
-    } else {
+    else
       stick = self get_normalized_camera_movement(1, 1)[n_axis];
-    }
 
     if(stick <= n_dot) {
       break;
@@ -1111,27 +1075,23 @@ _input_button(str_button) {
   while(!b_input) {
     switch (str_button) {
       case "reload_button":
-        if(self usebuttonpressed()) {
+        if(self usebuttonpressed())
           b_input = 1;
-        }
 
         break;
       case "ads_button":
-        if(self throwbuttonpressed()) {
+        if(self throwbuttonpressed())
           b_input = 1;
-        }
 
         break;
       case "attack_button":
-        if(self attackbuttonpressed()) {
+        if(self attackbuttonpressed())
           b_input = 1;
-        }
 
         break;
       case "jump_button":
-        if(self jumpbuttonpressed()) {
+        if(self jumpbuttonpressed())
           b_input = 1;
-        }
 
         break;
     }
@@ -1169,7 +1129,7 @@ sway_init() {
     wait 0.05;
   }
 
-  a_models = getEntArray("sway", "targetname");
+  a_models = getentarray("sway", "targetname");
 
   foreach(model in a_models) {
     model _sway_attach_vines();
@@ -1179,13 +1139,12 @@ sway_init() {
 }
 
 _sway_fx(str_fx_name, str_tag) {
-  playFXOnTag(getfx(str_fx_name), self, str_tag);
+  playfxontag(getfx(str_fx_name), self, str_tag);
 }
 
 _sway_tree_think() {
-  while(!flag("seal_ruins")) {
+  while(!flag("seal_ruins"))
     self _sway_model(0.4, 0.75);
-  }
 
   self delete();
 }
@@ -1214,9 +1173,8 @@ _sway_think(str_type) {
     }
   }
 
-  if(isDefined(self.vine_model)) {
+  if(isDefined(self.vine_model))
     self.vine_model delete();
-  }
 
   self.m_model delete();
   self delete();
@@ -1231,9 +1189,9 @@ _sway_model(n_degree, n_time) {
 }
 
 _sway_attach_vines() {
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_vines") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_vines")
     return;
-  } else if(self.model == "t5_foliage_tree_aquilaria01v2_small_no_vines") {
+  else if(self.model == "t5_foliage_tree_aquilaria01v2_small_no_vines") {
     self.vine_model = spawn_anim_model("aquilaria", self.origin, self.angles);
     self.vine_model linkto(self);
     self.vine_model thread anim_loop(self.vine_model, "vines");
@@ -1269,9 +1227,9 @@ add_ai_to_gaz() {
 }
 
 plant_c4(s_align) {
-  if(!isDefined(s_align.script_noteworthy)) {
+  if(!isDefined(s_align.script_noteworthy))
     plant_c4_spawn(s_align);
-  } else {
+  else {
     ai_enemy = simple_spawn_single("base_activity_enemy");
     ai_enemy attach("t6_wpn_c4_world", "tag_weapon_left");
     ai_enemy thread plant_c4_death();
@@ -1303,18 +1261,17 @@ plant_c4_spawn(s_pos) {
 plant_c4_think() {
   level endon("remove_c4");
   self.targetname = "planted_c4";
-  self setCanDamage(1);
-  playFXOnTag(getfx("c4_blink"), self, "tag_fx");
+  self setcandamage(1);
+  playfxontag(getfx("c4_blink"), self, "tag_fx");
   self waittill("damage", damage, attacker);
   v_origin = self gettagorigin("tag_fx");
   self playsoundontag("wpn_c4_explode", "tag_fx");
-  playFX(getfx("c4_explode"), v_origin);
+  playfx(getfx("c4_explode"), v_origin);
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isplayer(attacker))
     radiusdamage(v_origin, 200, 300, 50, attacker, "MOD_EXPLOSIVE");
-  } else {
+  else
     radiusdamage(v_origin, 200, 300, 50, self, "MOD_EXPLOSIVE");
-  }
 
   wait 0.05;
   physicsexplosionsphere(v_origin, 200, 100, 1);
@@ -1328,9 +1285,8 @@ plant_c4_trigger_think() {
   self waittill("trigger");
   a_s_pos = getstructarray(self.target, "targetname");
 
-  foreach(s_pos in a_s_pos) {
-    level thread plant_c4(s_pos);
-  }
+  foreach(s_pos in a_s_pos)
+  level thread plant_c4(s_pos);
 }
 
 emergency_light_init() {
@@ -1344,28 +1300,24 @@ emergency_light_init() {
         b_found_match = 0;
 
         for(j = 0; j < a_light_triggers.size; j++) {
-          if(a_light_models[i] istouching(a_light_triggers[j])) {
+          if(a_light_models[i] istouching(a_light_triggers[j]))
             b_found_match = 1;
-          }
         }
 
-        if(!b_found_match) {
+        if(!b_found_match)
           println("emergency light at " + a_light_models[i].origin + " is missing trigger!");
-        }
       }
     } else {
       for(i = 0; i < a_light_triggers.size; i++) {
         b_found_match = 0;
 
         for(j = 0; j < a_light_models.size; j++) {
-          if(a_light_triggers[i] istouching(a_light_models[j])) {
+          if(a_light_triggers[i] istouching(a_light_models[j]))
             b_found_match = 1;
-          }
         }
 
-        if(!b_found_match) {
+        if(!b_found_match)
           println("emergency light trigger at " + a_light_triggers[i].origin + " is not using a light!");
-        }
       }
     }
   }
@@ -1396,9 +1348,8 @@ emergency_light_trigger_think(a_light_models) {
   while(isDefined(self)) {
     self waittill("trigger");
 
-    if(!isDefined(level.emergency_light_active)) {
+    if(!isDefined(level.emergency_light_active))
       level.emergency_light_active = level.player;
-    }
 
     if(level.emergency_light_active != m_light) {
       level notify("new_emergency_light_playing");
@@ -1438,45 +1389,40 @@ set_low_ready_false(guy) {
 }
 
 play_single_spark(guy) {
-  playFXOnTag(level._effect["single_weld_spark"], guy, "fx_sparks");
+  playfxontag(level._effect["single_weld_spark"], guy, "fx_sparks");
 }
 
 play_loop_spark(guy) {
-  if(guy.targetname == "DDM_1") {
+  if(guy.targetname == "DDM_1")
     guy play_fx("single_weld_spark_loop", undefined, undefined, "stop_weld_loop_ddm_1", 1, "fx_sparks");
-  } else {
+  else
     guy play_fx("single_weld_spark_loop", undefined, undefined, "stop_weld_loop_ddm_2", 1, "fx_sparks");
-  }
 }
 
 stop_loop_spark(guy) {
-  if(guy.targetname == "DDM_1") {
+  if(guy.targetname == "DDM_1")
     guy notify("stop_weld_loop_ddm_1");
-  } else {
+  else
     guy notify("stop_weld_loop_ddm_2");
-  }
 }
 
 say_squad_dialog(str_ref) {
-  if(issubstr(str_ref, "harp")) {
+  if(issubstr(str_ref, "harp"))
     level.harper say_dialog(str_ref);
-  } else if(issubstr(str_ref, "sala")) {
+  else if(issubstr(str_ref, "sala"))
     level.salazar say_dialog(str_ref);
-  } else if(issubstr(str_ref, "cros")) {
+  else if(issubstr(str_ref, "cros"))
     level.crosby say_dialog(str_ref);
-  } else if(issubstr(str_ref, "sect")) {
+  else if(issubstr(str_ref, "sect"))
     level.player say_dialog(str_ref);
-  }
 }
 
 enemy_dialog_zone(a_vo, end_flag, n_min, n_max) {
-  if(!isDefined(n_min)) {
+  if(!isDefined(n_min))
     n_min = 8;
-  }
 
-  if(!isDefined(n_max)) {
+  if(!isDefined(n_max))
     n_max = 12;
-  }
 
   if(flag(end_flag)) {
     return;

@@ -105,9 +105,8 @@ useVanguard(lifeId, streakName) {
     return false;
   }
 
-  if(!is_aliens()) {
+  if(!is_aliens())
     self maps\mp\_matchdata::logKillstreakEvent(streakName, self.origin);
-  }
 
   return self startVanguard(vanguard, streakName, lifeId);
 }
@@ -128,51 +127,42 @@ findValidVanguardSpawnPoint(spawnDist, heightOffset) {
   startPos = eyePos + (0, 0, heightOffset);
 
   curPos = startPos + spawnDist * forward;
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos - spawnDist * forward;
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos += spawnDist * right;
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos - spawnDist * right;
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos;
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   waitframe();
 
   curPos = startPos + 0.707 * spawnDist * (forward + right);
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos + 0.707 * spawnDist * (forward - right);
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos + 0.707 * spawnDist * (right - forward);
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   curPos = startPos + 0.707 * spawnDist * (-1 * forward - right);
-  if(checkVanguardSpawnPoint(eyePos, curPos)) {
+  if(checkVanguardSpawnPoint(eyePos, curPos))
     return curPos;
-  }
 
   return undefined;
 }
@@ -184,9 +174,8 @@ checkVanguardSpawnPoint(startPoint, spawnPoint) {
     result = BulletTracePassed(startPoint, spawnPoint, false, undefined);
   }
 
-  if(!result && GetDvarInt("scr_dbg_drone_spawn") != 0) {
+  if(!result && GetDvarInt("scr_dbg_drone_spawn") != 0)
     Cylinder(spawnPoint - (0, 0, VANGUARD_HALF_SIZE), spawnPoint + (0, 0, VANGUARD_HALF_SIZE), VANGUARD_HALF_SIZE, (1, 0, 0), false, 300);
-  }
 
   return result;
 }
@@ -206,9 +195,8 @@ giveCarryVanguard(lifeId, streakName, duration) {
   }
 
   if(isDefined(origin)) {
-    if(GetDvarInt("scr_dbg_drone_spawn") != 0) {
+    if(GetDvarInt("scr_dbg_drone_spawn") != 0)
       Cylinder(origin - (0, 0, VANGUARD_HALF_SIZE), origin + (0, 0, VANGUARD_HALF_SIZE), VANGUARD_HALF_SIZE, (0, 1, 0), false, 300);
-    }
 
     angles = self.angles;
 
@@ -230,9 +218,8 @@ startVanguard(vanguard, streakName, lifeId) {
 
   self.restoreAngles = self.angles;
 
-  if(getDvarInt("camera_thirdPerson")) {
+  if(getDvarInt("camera_thirdPerson"))
     self setThirdPersonDOF(false);
-  }
 
   self thread watchIntroCleared(vanguard);
 
@@ -277,9 +264,8 @@ vanguard_moving_platform_death(data) {
 createVanguard(lifeId, owner, streakName, origin, angles, duration) {
   vanguard = spawnHelicopter(owner, origin, angles, "remote_uav_mp", "vehicle_drone_vanguard");
 
-  if(!isDefined(vanguard)) {
+  if(!isDefined(vanguard))
     return undefined;
-  }
 
   vanguard maps\mp\killstreaks\_helicopter::addToLittleBirdList();
   vanguard thread maps\mp\killstreaks\_helicopter::removeFromLittleBirdListOnDeath();
@@ -408,9 +394,8 @@ vanguard_monitorManualPlayerExit(vanguard) {
 
   vanguard waittill("killstreakExit");
 
-  if(isDefined(vanguard.owner)) {
+  if(isDefined(vanguard.owner))
     vanguard.owner leaderDialogOnPlayer(VANGUARD_VO_GONE);
-  }
 
   vanguard notify("death");
 }
@@ -421,9 +406,8 @@ vanguard_turretTarget(vanguard) {
   vanguard endon("death");
   vanguard endon("end_remote");
 
-  while(!isDefined(vanguard.attackArrow)) {
+  while(!isDefined(vanguard.attackArrow))
     wait(0.05);
-  }
 
   vanguard SetOtherEnt(vanguard.attackArrow);
 
@@ -500,12 +484,10 @@ getTargetPoint(player, vanguard) {
 
   res = bulletTrace(origin, endpoint, false, vanguard);
 
-  if(res["surfacetype"] == "none") {
+  if(res["surfacetype"] == "none")
     return undefined;
-  }
-  if(res["surfacetype"] == "default") {
+  if(res["surfacetype"] == "default")
     return undefined;
-  }
 
   ent = res["entity"];
 
@@ -745,20 +727,17 @@ vanguard_in_range() {
 
   if(isDefined(level.vanguardRangeTriggers[0])) {
     foreach(trigger in level.vanguardRangeTriggers) {
-      if(self isTouching(trigger)) {
+      if(self isTouching(trigger))
         return false;
-      }
     }
 
-    if(level.is_mp_descent) {
+    if(level.is_mp_descent)
       return self.origin[2] < level.vanguardMaxHeight;
-    } else {
+    else
       return true;
-    }
   } else {
-    if((Distance2DSquared(self.origin, level.mapCenter) < level.vanguradMaxDistanceSq) && (self.origin[2] < level.vanguardMaxHeight)) {
+    if((Distance2DSquared(self.origin, level.mapCenter) < level.vanguradMaxDistanceSq) && (self.origin[2] < level.vanguardMaxHeight))
       return true;
-    }
   }
 
   return false;
@@ -768,11 +747,10 @@ vanguard_rangeCountdown() {
   self endon("death");
   self endon("in_range");
 
-  if(isDefined(self.heliInProximity)) {
+  if(isDefined(self.heliInProximity))
     countdown = UAV_REMOTE_HELI_RANGE_COUNTDOWN;
-  } else {
+  else
     countdown = UAV_REMOTE_PAST_RANGE_COUNTDOWN;
-  }
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(countdown);
 
@@ -799,9 +777,8 @@ vanguard_monitorTimeout(vanguard, duration) {
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(timeout);
 
-  if(isDefined(vanguard.owner)) {
+  if(isDefined(vanguard.owner))
     vanguard.owner leaderDialogOnPlayer(VANGUARD_VO_GONE);
-  }
 
   vanguard notify("death");
 }
@@ -822,9 +799,8 @@ vanguard_monitorDeath(vanguard) {
   vanguard playSound(VANGUARD_SOUND_EXPLODE);
   turret Delete();
 
-  if(isDefined(vanguard.targetEffect)) {
+  if(isDefined(vanguard.targetEffect))
     vanguard.targetEffect Delete();
-  }
 
   vanguard_endride(vanguard.owner, vanguard);
 }
@@ -854,9 +830,8 @@ vanguard_endride(player, vanguard) {
 
   decrementFauxVehicleCount();
 
-  if(isDefined(vanguard.killCamEnt)) {
+  if(isDefined(vanguard.killCamEnt))
     vanguard.killCamEnt delete();
-  }
 
   vanguard.attackArrow delete();
   vanguard delete();
@@ -926,9 +901,9 @@ vanguard_watchHeliProximity() {
       }
     }
 
-    if(!self.inHeliProximity && inHeliProximity) {
+    if(!self.inHeliProximity && inHeliProximity)
       self.inHeliProximity = true;
-    } else if(self.inHeliProximity && !inHeliProximity) {
+    else if(self.inHeliProximity && !inHeliProximity) {
       self.inHeliProximity = false;
       self.heliInProximity = undefined;
     }
@@ -998,9 +973,8 @@ modifyDamage(attacker, weapon, type, damage) {
 }
 
 handleDeathDamage(attacker, weapon, type, damage) {
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner leaderDialogOnPlayer(VANGUARD_VO_DESTROYED);
-  }
   self maps\mp\gametypes\_damage::onKillstreakKilled(attacker, weapon, type, damage, "destroyed_vanguard", undefined, "callout_destroyed_vanguard");
 
   if(isDefined(attacker)) {

@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace recon_wz;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ __init__() {
     level.var_1f020f16 = [];
   }
 
-  level.var_1f020f16[# "vehicle_t8_drone_recon_wz"] = &function_3711499d;
+  level.var_1f020f16[#"vehicle_t8_drone_recon_wz"] = &function_3711499d;
 }
 
 function_294117a0() {
@@ -76,8 +77,8 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 watchownerdisconnect(player) {
   self notify("5f1e127cceae91cd");
   self endon("5f1e127cceae91cd");
-  self endon(#"death", # "exit_vehicle");
-  player waittill(#"disconnect", # "death");
+  self endon(#"death", #"exit_vehicle");
+  player waittill(#"disconnect", #"death");
   self makevehicleunusable();
   self thread function_ec1a4a6b();
 }
@@ -105,8 +106,8 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 private function_b96833b2(vehicle) {
   self notify("103a2be8751d4c46");
   self endon("103a2be8751d4c46");
-  self endon(#"death", # "disconnect");
-  vehicle endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"disconnect");
+  vehicle endon(#"death", #"exit_vehicle");
 
   while(true) {
     if(vehicle function_2c2c30e0()) {

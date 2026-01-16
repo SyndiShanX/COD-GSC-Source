@@ -8,6 +8,7 @@
 #include scripts\mp_common\gametypes\ct_tutorial_skirmish;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\laststand;
+
 #namespace svz;
 
 event_handler[gametype_init] main(eventstruct) {

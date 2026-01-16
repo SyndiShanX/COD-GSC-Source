@@ -7,21 +7,17 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0") {
+  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0")
     setdvar("scr_art_tweak", 0);
-  }
 
-  if(getdvar(#"scr_dof_enable") == "") {
+  if(getdvar(#"scr_dof_enable") == "")
     setdvar("scr_dof_enable", "1");
-  }
 
-  if(getdvar(#"scr_cinematic_autofocus") == "") {
+  if(getdvar(#"scr_cinematic_autofocus") == "")
     setdvar("scr_cinematic_autofocus", "1");
-  }
 
-  if(getdvar(#"scr_art_visionfile") == "") {
+  if(getdvar(#"scr_art_visionfile") == "")
     setdvar("scr_art_visionfile", level.script);
-  }
 
   if(!isDefined(level.dofdefault)) {
     level.dofdefault["nearStart"] = 0;
@@ -36,9 +32,8 @@ main() {
 
   thread tweakart();
 
-  if(!isDefined(level.script)) {
+  if(!isDefined(level.script))
     level.script = tolower(getdvar(#"mapname"));
-  }
 }
 
 artfxprintln(file, string) {
@@ -70,13 +65,11 @@ setfogsliders() {
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile)) {
+  if(!isDefined(level.tweakfile))
     level.tweakfile = 0;
-  }
 
-  if(level.tweakfile && level.bscriptgened) {
+  if(level.tweakfile && level.bscriptgened)
     script_gen_dump_addline("maps\\createart\\" + level.script + "_art::main();", level.script + "_art");
-  }
 
   if(getdvar(#"scr_fog_baseheight") == "") {
     setdvar("scr_fog_exp_halfplane", "500");
@@ -143,7 +136,7 @@ tweakart() {
       setdvar("scr_art_sun_fog_dir_set", "0");
       println("Setting sun fog direction to facing of player");
       players = get_players();
-      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
+      dir = vectornormalize(anglestoforward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];

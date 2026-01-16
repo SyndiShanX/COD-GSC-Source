@@ -7,11 +7,10 @@
 #include maps\_utility;
 
 init_bouncing_betties() {
-  level.betty_trigs = getEntArray("trip_betty", "targetname");
+  level.betty_trigs = getentarray("trip_betty", "targetname");
 
-  for(i = 0; i < level.betty_trigs.size; i++) {
+  for(i = 0; i < level.betty_trigs.size; i++)
     level thread betty_think(level.betty_trigs[i]);
-  }
 }
 
 betty_think(trigger) {
@@ -24,14 +23,14 @@ betty_think(trigger) {
   iprintln("Click!");
 
   wait 0.05;
-  playFX(level._effect["betty_groundPop"], betty.origin + vectorscale((0, 0, 1), 10.0));
+  playfx(level._effect["betty_groundPop"], betty.origin + vectorscale((0, 0, 1), 10.0));
   betty thread betty_rotate();
   betty moveto(betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
   betty waittill("movedone");
   betty moveto(betty.origin - (0, 0, dropheight), 0.1, 0.1 * 0.5);
   betty waittill("movedone");
   betty notify("stop_rotate_thread");
-  playFX(level._effect["betty_explosion"], betty.origin);
+  playfx(level._effect["betty_explosion"], betty.origin);
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
@@ -45,9 +44,8 @@ betty_think(trigger) {
       continue;
     }
 
-    if(distance(player.origin, betty.origin) < 90 + 90 * 1) {
+    if(distance(player.origin, betty.origin) < 90 + 90 * 1)
       player dodamage(player.health * 2, betty.origin);
-    }
   }
 
   for(i = 0; i < level.betty_trigs.size; i++) {
@@ -56,9 +54,8 @@ betty_think(trigger) {
     if(!isDefined(otherbetty) || trigger == otherbetty) {
       continue;
     }
-    if(distance2d(betty.origin, otherbetty.origin) <= 90 + 90 * 1) {
+    if(distance2d(betty.origin, otherbetty.origin) <= 90 + 90 * 1)
       otherbetty thread betty_pop(randomfloatrange(0.15, 0.25));
-    }
   }
 
   betty delete();
@@ -79,17 +76,16 @@ betty_rotate() {
 betty_rotate_fx() {
   self endon("stop_rotate_thread");
   fxorg = spawn("script_model", self.origin);
-  fxorg setModel("tag_origin");
+  fxorg setmodel("tag_origin");
   fxorg linkto(self);
   wait 0.75;
   assert(isDefined(level._effect["betty_smoketrail"]), "level._effect['betty_smoketrail'] needs to be defined");
-  fx = playFXOnTag(level._effect["betty_smoketrail"], fxorg, "tag_origin");
+  fx = playfxontag(level._effect["betty_smoketrail"], fxorg, "tag_origin");
 }
 
 betty_pop(waittime) {
-  if(isDefined(waittime) && waittime > 0) {
+  if(isDefined(waittime) && waittime > 0)
     wait(waittime);
-  }
 
   self notify("trigger");
 }
@@ -103,10 +99,10 @@ betty_think_no_wires(trigger) {
 
   wait 1.0;
   assert(isDefined(level._effect["betty_groundPop"]), "level._effect['betty_groundPop'] needs to be defined");
-  playFX(level._effect["betty_groundPop"], self.origin + vectorscale((0, 0, 1), 10.0));
+  playfx(level._effect["betty_groundPop"], self.origin + vectorscale((0, 0, 1), 10.0));
   self hide();
   fake_betty = spawn("script_model", self.origin);
-  fake_betty setModel("viewmodel_usa_bbetty_mine");
+  fake_betty setmodel("viewmodel_usa_bbetty_mine");
   fake_betty thread betty_rotate();
   fake_betty moveto(fake_betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
   fake_betty waittill("movedone");

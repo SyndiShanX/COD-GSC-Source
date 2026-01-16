@@ -24,9 +24,8 @@ stealth_disable() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(var_2 maps\_utility::ent_flag_exist("_stealth_spotted")) {
+    if(var_2 maps\_utility::ent_flag_exist("_stealth_spotted"))
       var_2 maps\_utility::ent_flag_set("_stealth_spotted");
-    }
   }
 
   common_scripts\utility::waitframe();
@@ -88,9 +87,8 @@ enemies_alerted() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(var_2 maps\_utility::ent_flag_exist("_stealth_spotted") && var_2 maps\_utility::ent_flag("_stealth_spotted")) {
+    if(var_2 maps\_utility::ent_flag_exist("_stealth_spotted") && var_2 maps\_utility::ent_flag("_stealth_spotted"))
       return 1;
-    }
   }
 
   return 0;
@@ -101,9 +99,8 @@ enemy_stealth() {
   self endon("death");
   self endon("disable_stealth");
 
-  if(isDefined(self.script_stealthgroup)) {
+  if(isDefined(self.script_stealthgroup))
     self.script_stealthgroup = 0;
-  }
 
   childthread ai_alert_loop();
   maps\_utility::ent_flag_init("_stealth_spotted");
@@ -163,9 +160,8 @@ alert_team() {
     if(isalive(var_2) && var_2.script_stealthgroup == self.script_stealthgroup && !var_2 maps\_utility::ent_flag("_stealth_spotted")) {
       var_2 maps\_utility::ent_flag_set("_stealth_spotted");
 
-      if(common_scripts\utility::cointoss()) {
+      if(common_scripts\utility::cointoss())
         wait(randomfloatrange(0.1, 0.3));
-      }
     }
   }
 }
@@ -205,9 +201,8 @@ player_stealth() {
 }
 
 player_flashlight_toggle() {
-  while(!maps\_utility::ent_flag_exist("flashlight_on")) {
+  while(!maps\_utility::ent_flag_exist("flashlight_on"))
     wait 0.05;
-  }
 
   for(;;) {
     maps\_utility::ent_flag_wait("flashlight_on");
@@ -232,9 +227,8 @@ sight_trigger_think() {
   level endon("disable_stealth");
   self endon("death ");
 
-  while(!level.player maps\_utility::ent_flag_exist("flashlight_on")) {
+  while(!level.player maps\_utility::ent_flag_exist("flashlight_on"))
     wait 0.05;
-  }
 
   for(;;) {
     self waittill("trigger");
@@ -245,37 +239,31 @@ sight_trigger_think() {
     level.player.maxvisibledist = self.script_faceenemydist;
     level.underwater_visible_dist["trigger"] = self.script_faceenemydist;
 
-    while(level.player istouching(self) && !common_scripts\utility::flag("_stealth_spotted") && !level.player maps\_utility::ent_flag("flashlight_on")) {
+    while(level.player istouching(self) && !common_scripts\utility::flag("_stealth_spotted") && !level.player maps\_utility::ent_flag("flashlight_on"))
       wait 0.05;
-    }
 
-    if(common_scripts\utility::flag("_stealth_spotted") || level.player maps\_utility::ent_flag("flashlight_on")) {
+    if(common_scripts\utility::flag("_stealth_spotted") || level.player maps\_utility::ent_flag("flashlight_on"))
       level.player.maxvisibledist = level.underwater_visible_dist["spotted"];
-    } else {
+    else
       level.player.maxvisibledist = level.underwater_visible_dist["hidden"];
-    }
 
-    if(isDefined(level.underwater_visible_dist["trigger"]) && level.underwater_visible_dist["trigger"] == self.script_faceenemydist) {
+    if(isDefined(level.underwater_visible_dist["trigger"]) && level.underwater_visible_dist["trigger"] == self.script_faceenemydist)
       level.underwater_visible_dist["trigger"] = undefined;
-    }
   }
 }
 
 _autosave_stealthcheck() {
-  if(common_scripts\utility::flag("_stealth_spotted") && common_scripts\utility::flag("stealth_spawn")) {
+  if(common_scripts\utility::flag("_stealth_spotted") && common_scripts\utility::flag("stealth_spawn"))
     return 0;
-  }
 
-  if(common_scripts\utility::flag("shark_eating_player")) {
+  if(common_scripts\utility::flag("shark_eating_player"))
     return 0;
-  }
 
   var_0 = getEntArray("destructible", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.healthdrain)) {
+    if(isDefined(var_2.healthdrain))
       return 0;
-    }
   }
 
   return 1;
@@ -302,11 +290,10 @@ stealth_idle(var_0, var_1) {
     var_6 = var_2[var_1];
     self.prop = maps\_utility::spawn_anim_model(var_6, self.origin);
 
-    if(isDefined(level.scr_anim[var_6]) && isDefined(level.scr_anim[var_6][var_1 + "_idle"])) {
+    if(isDefined(level.scr_anim[var_6]) && isDefined(level.scr_anim[var_6][var_1 + "_idle"]))
       var_5 = common_scripts\utility::array_add(var_5, self.prop);
-    } else {
+    else
       self.prop linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
-    }
   }
 
   thread stealth_idle_ender(var_0, var_1, self.prop);
@@ -314,17 +301,15 @@ stealth_idle(var_0, var_1) {
   self.allowpain = 1;
   self.anim_blend_time_override = 1;
 
-  foreach(var_8 in var_5) {
-    var_0 thread maps\_anim::anim_loop_solo(var_8, var_1 + "_idle");
-  }
+  foreach(var_8 in var_5)
+  var_0 thread maps\_anim::anim_loop_solo(var_8, var_1 + "_idle");
 }
 
 stealth_idle_ender(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::waittill_any_return("_stealth_stop_idle", "_stealth_spotted", "death", "damage");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     thread prop_drop(var_2);
-  }
 
   var_0 notify("stop_loop");
   self stopanimscripted();
@@ -336,14 +321,13 @@ prop_drop(var_0) {
   var_1 = 1;
   var_0 moveto(var_0.origin - (0, 0, 1000), 60, 0, 60);
 
-  if(var_0.animname == "bangstick") {
+  if(var_0.animname == "bangstick")
     var_0 thread bang_stick_rotate();
-  } else if(var_0.animname == "torch") {
+  else if(var_0.animname == "torch") {
     var_0 thread torch_rotate();
 
-    if(var_0.welding) {
+    if(var_0.welding)
       thread maps\ship_graveyard_anim::weld_fx_off(var_0);
-    }
   }
 
   while(var_1) {
@@ -355,9 +339,8 @@ prop_drop(var_0) {
   var_0 moveto(var_0.origin - (0, 0, 1), 1, 0, 1);
   wait 100;
 
-  while(level.player maps\_utility::can_see_origin(var_0.origin)) {
+  while(level.player maps\_utility::can_see_origin(var_0.origin))
     wait 1;
-  }
 
   var_0 delete();
 }
@@ -416,9 +399,8 @@ player_wait_for_melee_command() {
     self unlink();
     self notify("stop_loop");
 
-    if(isDefined(self.anim_node)) {
+    if(isDefined(self.anim_node))
       self.anim_node notify("stop_loop");
-    }
 
     var_0 = spawnStruct();
     var_0.origin = self.origin;

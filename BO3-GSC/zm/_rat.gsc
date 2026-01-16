@@ -11,17 +11,17 @@
 #namespace rat;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
   rat_shared::init();
-  level.rat.common.gethostplayer = &util::gethostplayer;
-  rat_shared::addratscriptcmd("", &derriesezombiespawnnavmeshtest);
+  level.rat.common.gethostplayer = & util::gethostplayer;
+  rat_shared::addratscriptcmd("", & derriesezombiespawnnavmeshtest);
 }
 
 function derriesezombiespawnnavmeshtest(params, inrat) {
-  if(!isDefined(inrat)) {
+  if(!isdefined(inrat)) {
     inrat = 1;
   }
   if(inrat) {
@@ -42,12 +42,12 @@ function derriesezombiespawnnavmeshtest(params, inrat) {
       enemy forceteleport(loc.origin, angles);
       wait(0.2);
       node = undefined;
-      for(j = 0; j < level.exterior_goals.size; j++) {
-        if(isDefined(level.exterior_goals[j].script_string) && level.exterior_goals[j].script_string == loc.script_string) {
+      for (j = 0; j < level.exterior_goals.size; j++) {
+        if(isdefined(level.exterior_goals[j].script_string) && level.exterior_goals[j].script_string == loc.script_string) {
           node = level.exterior_goals[j];
         }
       }
-      if(isDefined(node)) {
+      if(isdefined(node)) {
         ispath = enemy setgoal(node.origin);
         if(!ispath) {
           failed_spawn_origin[size] = loc.origin;
@@ -55,7 +55,7 @@ function derriesezombiespawnnavmeshtest(params, inrat) {
           size++;
         }
         wait(0.2);
-        for(j = 0; j < node.attack_spots.size; j++) {
+        for (j = 0; j < node.attack_spots.size; j++) {
           isattackpath = enemy setgoal(node.attack_spots[j]);
           if(!isattackpath) {
             failed_attack_spot_spawn_origin[failed_attack_spot_size] = loc.origin;
@@ -69,10 +69,10 @@ function derriesezombiespawnnavmeshtest(params, inrat) {
   }
   if(inrat) {
     errmsg = "";
-    for(i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
       errmsg = errmsg + (((("" + failed_spawn_origin[i]) + "") + failed_node_origin[i]) + "");
     }
-    for(i = 0; i < failed_attack_spot_size; i++) {
+    for (i = 0; i < failed_attack_spot_size; i++) {
       errmsg = errmsg + (((("" + failed_attack_spot_spawn_origin[i]) + "") + failed_attack_spot[i]) + "");
     }
     if(size > 0 || failed_attack_spot_size > 0) {

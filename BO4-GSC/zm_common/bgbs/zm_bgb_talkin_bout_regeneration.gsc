@@ -7,10 +7,11 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_talkin_bout_regeneration;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_talkin_bout_regeneration", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_talkin_bout_regeneration", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -32,7 +33,7 @@ disable() {
 }
 
 function_c0c85fe() {
-  self endon(#"death", # "hash_fcaa137035db4e");
+  self endon(#"death", #"hash_fcaa137035db4e");
   var_47624402 = 0;
 
   while(true) {

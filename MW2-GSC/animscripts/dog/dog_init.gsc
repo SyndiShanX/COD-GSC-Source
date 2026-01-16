@@ -45,19 +45,18 @@ main() {
 setMeleeAttackDist() {
   self endon("death");
 
-  while(1) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+  while (1) {
+    if(isdefined(self.enemy) && isplayer(self.enemy))
       self.meleeAttackDist = anim.dogAttackPlayerDist;
-    } else {
+    else
       self.meleeAttackDist = anim.dogAttackAIDist;
-    }
 
     self waittill("enemy");
   }
 }
 
 initDogAnimations() {
-  if(!isDefined(level.dogsInitialized)) {
+  if(!isdefined(level.dogsInitialized)) {
     level.dogsInitialized = true;
     // [{+melee}] Melee the dog right when it bites to grab its throat.
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING");
@@ -129,7 +128,7 @@ initDogAnimations() {
   // setup random timings for dogs attacking the player
   slices = 5;
   array = [];
-  for(i = 0; i <= slices; i++) {
+  for (i = 0; i <= slices; i++) {
     array[array.size] = i / slices;
   }
   level.dog_melee_index = 0;

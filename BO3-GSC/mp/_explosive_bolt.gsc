@@ -12,11 +12,11 @@
 #namespace explosive_bolt;
 
 function autoexec __init__sytem__() {
-  system::register("explosive_bolt", &__init__, undefined, undefined);
+  system::register("explosive_bolt", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -29,7 +29,7 @@ function begin_other_grenade_tracking() {
   self notify("bolttrackingstart");
   self endon("bolttrackingstart");
   weapon_bolt = getweapon("explosive_bolt");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon, cooktime);
     if(grenade util::ishacked()) {
       continue;

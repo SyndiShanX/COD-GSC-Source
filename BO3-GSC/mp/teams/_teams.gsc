@@ -14,17 +14,17 @@
 #namespace teams;
 
 function autoexec __init__sytem__() {
-  system::register("teams", &__init__, undefined, undefined);
+  system::register("teams", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  level.getenemyteam = &getenemyteam;
+  callback::on_start_gametype( & init);
+  level.getenemyteam = & getenemyteam;
   level.use_team_based_logic_for_locking_on = 1;
 }
 
 function init() {
-  game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
+  game["strings"]["autobalance"] = & "MP_AUTOBALANCE_NOW";
   if(getdvarstring("scr_teambalance") == "") {
     setdvar("scr_teambalance", "0");
   }
@@ -38,16 +38,16 @@ function init() {
   if(level.teambased) {
     level.alliesplayers = [];
     level.axisplayers = [];
-    callback::on_connect(&on_player_connect);
-    callback::on_joined_team(&on_joined_team);
-    callback::on_joined_spectate(&on_joined_spectators);
+    callback::on_connect( & on_player_connect);
+    callback::on_joined_team( & on_joined_team);
+    callback::on_joined_spectate( & on_joined_spectators);
     level thread update_balance_dvar();
     wait(0.15);
     if(level.onlinegame) {
       level thread update_player_times();
     }
   } else {
-    callback::on_connect(&on_free_player_connect);
+    callback::on_connect( & on_free_player_connect);
     wait(0.15);
     if(level.onlinegame) {
       level thread update_player_times();
@@ -74,7 +74,7 @@ function on_joined_spectators() {
 
 function track_played_time() {
   self endon("disconnect");
-  if(!isDefined(self.pers["totalTimePlayed"])) {
+  if(!isdefined(self.pers["totalTimePlayed"])) {
     self.pers["totalTimePlayed"] = 0;
   }
   foreach(team in level.teams) {
@@ -83,15 +83,15 @@ function track_played_time() {
   self.timeplayed["free"] = 0;
   self.timeplayed["other"] = 0;
   self.timeplayed["alive"] = 0;
-  if(!isDefined(self.timeplayed["total"]) || (!(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"]))) {
+  if(!isdefined(self.timeplayed["total"]) || (!(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"]))) {
     self.timeplayed["total"] = 0;
   }
-  while(level.inprematchperiod) {
+  while (level.inprematchperiod) {
     wait(0.05);
   }
-  for(;;) {
+  for (;;) {
     if(game["state"] == "playing") {
-      if(isDefined(level.teams[self.sessionteam])) {
+      if(isdefined(level.teams[self.sessionteam])) {
         self.timeplayed[self.sessionteam]++;
         self.timeplayed["total"]++;
         if(level.mpcustommatch) {
@@ -112,7 +112,7 @@ function track_played_time() {
 function update_player_times() {
   varwait = 10;
   nexttoupdate = 0;
-  for(;;) {
+  for (;;) {
     varwait = varwait - 1;
     nexttoupdate++;
     if(nexttoupdate >= level.players.size) {
@@ -122,7 +122,7 @@ function update_player_times() {
       }
       varwait = 10;
     }
-    if(isDefined(level.players[nexttoupdate])) {
+    if(isdefined(level.players[nexttoupdate])) {
       level.players[nexttoupdate] update_played_time();
       level.players[nexttoupdate] persistence::check_contract_expirations();
     }
@@ -174,7 +174,7 @@ function update_time() {
 }
 
 function update_balance_dvar() {
-  for(;;) {
+  for (;;) {
     teambalance = getdvarint("scr_teambalance");
     if(level.teambalance != teambalance) {
       level.teambalance = getdvarint("scr_teambalance");
@@ -220,7 +220,7 @@ function count_players() {
       continue;
     }
     team = player.pers["team"];
-    if(isDefined(team) && isDefined(level.teams[team])) {
+    if(isdefined(team) && isdefined(level.teams[team])) {
       playercounts[team]++;
     }
   }
@@ -235,10 +235,10 @@ function track_free_played_time() {
   self.timeplayed["other"] = 0;
   self.timeplayed["total"] = 0;
   self.timeplayed["alive"] = 0;
-  for(;;) {
+  for (;;) {
     if(game["state"] == "playing") {
       team = self.pers["team"];
-      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != "spectator") {
+      if(isdefined(team) && isdefined(level.teams[team]) && self.sessionteam != "spectator") {
         self.timeplayed[team]++;
         self.timeplayed["total"]++;
         if(isalive(self)) {
@@ -260,19 +260,19 @@ function set_player_model(team, weapon) {
 }
 
 function get_flag_model(teamref) {
-  assert(isDefined(game[""]));
-  assert(isDefined(game[""][teamref]));
+  assert(isdefined(game[""]));
+  assert(isdefined(game[""][teamref]));
   return game["flagmodels"][teamref];
 }
 
 function get_flag_carry_model(teamref) {
-  assert(isDefined(game[""]));
-  assert(isDefined(game[""][teamref]));
+  assert(isdefined(game[""]));
+  assert(isdefined(game[""][teamref]));
   return game["carry_flagmodels"][teamref];
 }
 
 function getteamindex(team) {
-  if(!isDefined(team)) {
+  if(!isdefined(team)) {
     return 0;
   }
   if(team == "free") {
@@ -307,7 +307,7 @@ function getenemyplayers() {
       continue;
     }
     if(level.teambased && player.team != self.team || (!level.teambased && player != self)) {
-      if(!isDefined(enemies)) {
+      if(!isdefined(enemies)) {
         enemies = [];
       } else if(!isarray(enemies)) {
         enemies = array(enemies);
@@ -322,7 +322,7 @@ function getfriendlyplayers() {
   friendlies = [];
   foreach(player in level.players) {
     if(player.team == self.team && player != self) {
-      if(!isDefined(friendlies)) {
+      if(!isdefined(friendlies)) {
         friendlies = [];
       } else if(!isarray(friendlies)) {
         friendlies = array(friendlies);
@@ -334,17 +334,17 @@ function getfriendlyplayers() {
 }
 
 function waituntilteamchange(player, callback, arg, end_condition1, end_condition2, end_condition3) {
-  if(isDefined(end_condition1)) {
+  if(isdefined(end_condition1)) {
     self endon(end_condition1);
   }
-  if(isDefined(end_condition2)) {
+  if(isdefined(end_condition2)) {
     self endon(end_condition2);
   }
-  if(isDefined(end_condition3)) {
+  if(isdefined(end_condition3)) {
     self endon(end_condition3);
   }
   event = player util::waittill_any("joined_team", "disconnect", "joined_spectators");
-  if(isDefined(callback)) {
+  if(isdefined(callback)) {
     self[[callback]](arg, event);
   }
 }
@@ -352,17 +352,17 @@ function waituntilteamchange(player, callback, arg, end_condition1, end_conditio
 function waituntilteamchangesingleton(player, singletonstring, callback, arg, end_condition1, end_condition2, end_condition3) {
   self notify(singletonstring);
   self endon(singletonstring);
-  if(isDefined(end_condition1)) {
+  if(isdefined(end_condition1)) {
     self endon(end_condition1);
   }
-  if(isDefined(end_condition2)) {
+  if(isdefined(end_condition2)) {
     self endon(end_condition2);
   }
-  if(isDefined(end_condition3)) {
+  if(isdefined(end_condition3)) {
     self endon(end_condition3);
   }
   event = player util::waittill_any("joined_team", "disconnect", "joined_spectators");
-  if(isDefined(callback)) {
+  if(isdefined(callback)) {
     self thread[[callback]](arg, event);
   }
 }

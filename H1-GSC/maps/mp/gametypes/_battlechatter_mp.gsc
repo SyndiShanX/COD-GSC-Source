@@ -36,15 +36,14 @@ init() {
   var_6 = getdvar("g_gametype");
   level.istactical = 1;
 
-  if(var_6 == "war" || var_6 == "conf" || var_6 == "dom") {
+  if(var_6 == "war" || var_6 == "conf" || var_6 == "dom")
     level.istactical = 0;
-  }
 
   level thread onplayerconnect();
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -53,7 +52,7 @@ onplayerconnect() {
 onplayerspawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     if(maps\mp\_utility::is_true(level.virtuallobbyactive)) {
@@ -62,22 +61,20 @@ onplayerspawned() {
     self.bcinfo = [];
     var_0 = maps\mp\gametypes\_teams::getteamvoiceprefix(self.team);
 
-    if(!isDefined(self.pers["voiceIndex"])) {
+    if(!isdefined(self.pers["voiceIndex"])) {
       var_1 = 4;
       var_2 = 4;
       var_3 = "m";
 
-      if(!isagent(self) && self hasfemalecustomizationmodel()) {
+      if(!isagent(self) && self hasfemalecustomizationmodel())
         var_3 = "fe";
-      }
 
       self.pers["voiceNum"] = level.voice_count[self.team][var_3] + 1;
 
-      if(var_3 == "fe") {
+      if(var_3 == "fe")
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_2;
-      } else {
+      else
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_1;
-      }
 
       self.pers["voicePrefix"] = var_0 + self.pers["voiceNum"] + var_3 + "_";
     }
@@ -99,7 +96,7 @@ reloadtracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for(;;) {
+  for (;;) {
     self waittill("reload_start");
     level thread saylocalsound(self, "reload", 0);
   }
@@ -110,7 +107,7 @@ grenadetracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "h1_fraggrenade_mp") {
@@ -133,9 +130,8 @@ grenadetracking() {
       continue;
     }
 
-    if(var_1 == "h1_c4_mp") {
+    if(var_1 == "h1_c4_mp")
       level thread saylocalsound(self, "c4_plant", 0);
-    }
   }
 }
 
@@ -144,13 +140,12 @@ claymoretracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for(;;) {
+  for (;;) {
     self waittill("begin_firing");
     var_0 = self getcurrentweapon();
 
-    if(var_0 == "h1_claymore_mp") {
+    if(var_0 == "h1_claymore_mp")
       level thread saylocalsound(self, "claymore_plant", 0);
-    }
   }
 }
 
@@ -159,9 +154,8 @@ saylocalsounddelayed(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("disconnect");
   wait(var_2);
 
-  if(!isDefined(var_3) && isDefined(0)) {
+  if(!isdefined(var_3) && isdefined(0))
     var_3 = 0;
-  }
 
   saylocalsound(var_0, var_1, var_3, var_4);
 }
@@ -170,10 +164,10 @@ saylocalsound(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
-  if(isDefined(level.chatterdisabled) && level.chatterdisabled) {
+  if(isdefined(level.chatterdisabled) && level.chatterdisabled) {
     return;
   }
-  if(isDefined(var_0.bcdisabled) && var_0.bcdisabled == 1) {
+  if(isdefined(var_0.bcdisabled) && var_0.bcdisabled == 1) {
     return;
   }
   if(isspeakerinrange(var_0)) {
@@ -182,7 +176,7 @@ saylocalsound(var_0, var_1, var_2, var_3) {
   if(var_0.team != "spectator") {
     var_4 = var_0.pers["voicePrefix"];
 
-    if(isDefined(level.bcsounds[var_1])) {
+    if(isdefined(level.bcsounds[var_1])) {
       var_5 = var_4 + level.bcsounds[var_1];
 
       switch (var_1) {
@@ -207,17 +201,15 @@ saylocalsound(var_0, var_1, var_2, var_3) {
 }
 
 dosound(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 0;
-  }
 
   var_3 = self.pers["team"];
   level addspeaker(self, var_3);
 
   if(var_2 && (!level.istactical || !maps\mp\_utility::_hasperk("specialty_coldblooded") && (isagent(self) || self issighted()))) {
-    if(isagent(self) || level.alivecount[var_3] > 3) {
+    if(isagent(self) || level.alivecount[var_3] > 3)
       thread dosounddistant(var_0, var_3);
-    }
   }
 
   if(!soundexists(var_0)) {
@@ -225,11 +217,10 @@ dosound(var_0, var_1, var_2) {
     return;
   }
 
-  if(isagent(self) || isDefined(var_1) && var_1) {
+  if(isagent(self) || isdefined(var_1) && var_1)
     self playsoundtoteam(var_0, var_3);
-  } else {
+  else
     self playsoundtoteam(var_0, var_3, self);
-  }
 
   thread timehack(var_0);
   common_scripts\utility::waittill_any(var_0, "death", "disconnect");
@@ -239,9 +230,8 @@ dosound(var_0, var_1, var_2) {
 dosounddistant(var_0, var_1) {
   if(soundexists(var_0)) {
     foreach(var_3 in level.teamnamelist) {
-      if(var_3 != var_1) {
+      if(var_3 != var_1)
         self playsoundtoteam(var_0, var_3);
-      }
     }
   }
 }
@@ -252,18 +242,17 @@ dothreatcalloutresponse(var_0, var_1) {
   if(var_2 == var_0) {
     var_3 = self.team;
 
-    if(!isagent(self)) {
+    if(!isagent(self))
       var_4 = self hasfemalecustomizationmodel();
-    } else {
+    else
       var_4 = 0;
-    }
 
     var_5 = self.pers["voiceNum"];
     var_6 = self.origin;
     wait 0.5;
 
     foreach(var_8 in level.participants) {
-      if(!isDefined(var_8)) {
+      if(!isdefined(var_8)) {
         continue;
       }
       if(var_8 == self) {
@@ -275,21 +264,19 @@ dothreatcalloutresponse(var_0, var_1) {
       if(var_8.team != var_3) {
         continue;
       }
-      if(!isagent(var_8)) {
+      if(!isagent(var_8))
         var_9 = var_8 hasfemalecustomizationmodel();
-      } else {
+      else
         var_9 = 0;
-      }
 
       if((var_5 != var_8.pers["voiceNum"] || var_4 != var_9) && distancesquared(var_6, var_8.origin) <= 262144 && !isspeakerinrange(var_8)) {
         var_10 = var_8.pers["voicePrefix"];
         var_11 = var_10 + "co_loc_" + var_1 + "_echo";
 
-        if(common_scripts\utility::cointoss() && soundexists(var_11)) {
+        if(common_scripts\utility::cointoss() && soundexists(var_11))
           var_12 = var_11;
-        } else {
+        else
           var_12 = var_10 + level.bcsounds["callout_response_generic"];
-        }
 
         var_8 thread dosound(var_12, 0, 0);
         break;
@@ -309,26 +296,23 @@ isspeakerinrange(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 1000;
-  }
 
   var_2 = var_1 * var_1;
 
-  if(isDefined(var_0) && isDefined(var_0.team) && var_0.team != "spectator") {
-    for(var_3 = 0; var_3 < level.speakers[var_0.team].size; var_3++) {
+  if(isdefined(var_0) && isdefined(var_0.team) && var_0.team != "spectator") {
+    for (var_3 = 0; var_3 < level.speakers[var_0.team].size; var_3++) {
       var_4 = level.speakers[var_0.team][var_3];
 
-      if(var_4 == var_0) {
+      if(var_4 == var_0)
         return 1;
-      }
 
-      if(!isDefined(var_4)) {
+      if(!isdefined(var_4)) {
         continue;
       }
-      if(distancesquared(var_4.origin, var_0.origin) < var_2) {
+      if(distancesquared(var_4.origin, var_0.origin) < var_2)
         return 1;
-      }
     }
   }
 
@@ -342,7 +326,7 @@ addspeaker(var_0, var_1) {
 removespeaker(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < level.speakers[var_1].size; var_3++) {
+  for (var_3 = 0; var_3 < level.speakers[var_1].size; var_3++) {
     if(level.speakers[var_1][var_3] == var_0) {
       continue;
     }
@@ -373,15 +357,13 @@ getlocation() {
 
   if(var_0.size) {
     foreach(var_2 in var_0) {
-      if(!location_called_out_ever(var_2)) {
+      if(!location_called_out_ever(var_2))
         return var_2;
-      }
     }
 
     foreach(var_2 in var_0) {
-      if(!location_called_out_recently(var_2)) {
+      if(!location_called_out_recently(var_2))
         return var_2;
-      }
     }
   }
 
@@ -394,15 +376,13 @@ getvalidlocation(var_0) {
 
   if(var_1.size) {
     foreach(var_3 in var_1) {
-      if(!location_called_out_ever(var_3) && var_0 cancalloutlocation(var_3)) {
+      if(!location_called_out_ever(var_3) && var_0 cancalloutlocation(var_3))
         return var_3;
-      }
     }
 
     foreach(var_3 in var_1) {
-      if(!location_called_out_recently(var_3) && var_0 cancalloutlocation(var_3)) {
+      if(!location_called_out_recently(var_3) && var_0 cancalloutlocation(var_3))
         return var_3;
-      }
     }
   }
 
@@ -415,27 +395,24 @@ get_all_my_locations() {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4.locationaliases)) {
+    if(isdefined(var_4.locationaliases))
       var_2[var_2.size] = var_4;
-    }
   }
 
   return var_2;
 }
 
 update_bcs_locations() {
-  if(isDefined(anim.bcs_locations)) {
+  if(isdefined(anim.bcs_locations))
     anim.bcs_locations = common_scripts\utility::array_removeundefined(anim.bcs_locations);
-  }
 }
 
 is_in_callable_location() {
   var_0 = get_all_my_locations();
 
   foreach(var_2 in var_0) {
-    if(!location_called_out_recently(var_2)) {
+    if(!location_called_out_recently(var_2))
       return 1;
-    }
   }
 
   return 0;
@@ -444,9 +421,8 @@ is_in_callable_location() {
 location_called_out_ever(var_0) {
   var_1 = location_get_last_callout_time(var_0.locationaliases[0]);
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return 0;
-  }
 
   return 1;
 }
@@ -454,15 +430,13 @@ location_called_out_ever(var_0) {
 location_called_out_recently(var_0) {
   var_1 = location_get_last_callout_time(var_0.locationaliases[0]);
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return 0;
-  }
 
   var_2 = var_1 + 25000;
 
-  if(gettime() < var_2) {
+  if(gettime() < var_2)
     return 1;
-  }
 
   return 0;
 }
@@ -472,9 +446,8 @@ location_add_last_callout_time(var_0) {
 }
 
 location_get_last_callout_time(var_0) {
-  if(isDefined(anim.locationlastcallouttimes[var_0])) {
+  if(isdefined(anim.locationlastcallouttimes[var_0]))
     return anim.locationlastcallouttimes[var_0];
-  }
 
   return undefined;
 }
@@ -486,9 +459,8 @@ cancalloutlocation(var_0) {
     var_5 = getloccalloutalias("concat_loc_" + var_2);
     var_6 = soundexists(var_3) || soundexists(var_4) || soundexists(var_5);
 
-    if(var_6) {
+    if(var_6)
       return var_6;
-    }
   }
 
   return 0;
@@ -498,9 +470,8 @@ canconcat(var_0) {
   var_1 = var_0.locationaliases;
 
   foreach(var_3 in var_1) {
-    if(iscallouttypeconcat(var_3, self)) {
+    if(iscallouttypeconcat(var_3, self))
       return 1;
-    }
   }
 
   return 0;
@@ -511,14 +482,13 @@ getcannedresponse(var_0) {
   var_2 = self.locationaliases;
 
   foreach(var_4 in var_2) {
-    if(iscallouttypeqa(var_4, var_0) && !isDefined(self.qafinished)) {
+    if(iscallouttypeqa(var_4, var_0) && !isdefined(self.qafinished)) {
       var_1 = var_4;
       break;
     }
 
-    if(iscallouttypereport(var_4)) {
+    if(iscallouttypereport(var_4))
       var_1 = var_4;
-    }
   }
 
   return var_1;
@@ -531,23 +501,20 @@ iscallouttypereport(var_0) {
 iscallouttypeconcat(var_0, var_1) {
   var_2 = var_1 getloccalloutalias("concat_loc_" + var_0);
 
-  if(soundexists(var_2)) {
+  if(soundexists(var_2))
     return 1;
-  }
 
   return 0;
 }
 
 iscallouttypeqa(var_0, var_1) {
-  if(issubstr(var_0, "_qa") && soundexists(var_0)) {
+  if(issubstr(var_0, "_qa") && soundexists(var_0))
     return 1;
-  }
 
   var_2 = var_1 getqacalloutalias(var_0, 0);
 
-  if(soundexists(var_2)) {
+  if(soundexists(var_2))
     return 1;
-  }
 
   return 0;
 }
@@ -582,15 +549,13 @@ getaliastypefromsoundalias(var_0) {}
 battlechatter_printdumpline(var_0, var_1, var_2) {}
 
 friendly_nearby(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 262144;
-  }
 
   foreach(var_2 in level.players) {
     if(var_2.team == self.pers["team"]) {
-      if(var_2 != self && distancesquared(var_2.origin, self.origin) <= var_0) {
+      if(var_2 != self && distancesquared(var_2.origin, self.origin) <= var_0)
         return 1;
-      }
     }
   }
 

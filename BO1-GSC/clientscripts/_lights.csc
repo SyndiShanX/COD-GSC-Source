@@ -93,14 +93,13 @@ set_light_notify(light_struct, name) {
 
 play_light_sound(light_struct, sound) {
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
-    playSound(0, sound, self.origin);
+    PlaySound(0, sound, self.origin);
   }
 }
 
 play_light_fx(light_struct, fx) {
-  if(!isDefined(level._effect[fx])) {
+  if(!isDefined(level._effect[fx]))
     return;
-  }
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
     players = getLocalPlayers();
     org = self.origin;
@@ -108,7 +107,7 @@ play_light_fx(light_struct, fx) {
     if(isDefined(self.light_models) && isDefined(self.light_models[0])) {
       org = self.light_models[0].origin;
       if(isDefined(self.script_light_fx_offset)) {
-        atf = anglesToForward(self.light_models[0].angles);
+        atf = AnglesToForward(self.light_models[0].angles);
         atr = AnglesToRight(self.light_models[0].angles);
         atu = AnglesToUp(self.light_models[0].angles);
         o = self.script_light_fx_offset;
@@ -122,7 +121,7 @@ play_light_fx(light_struct, fx) {
       }
     }
     for(i = 0; i < players.size; i++) {
-      playFX(i, level._effect[fx], org + off);
+      PlayFX(i, level._effect[fx], org + off);
     }
   }
 }
@@ -575,9 +574,8 @@ tv_changes_color(light_struct) {
 }
 
 triggered_lights_think(light_struct) {
-  if(!isDefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy))
     return;
-  }
   level waittill(self.script_noteworthy);
   if(isDefined(self.script_float)) {
     set_light_intensity(light_struct, self.script_float);
@@ -686,7 +684,7 @@ mixer_event_monitor() {
 init_mixer_lights(client_num) {
   self.mixer.lights = [];
   for(i = 0; i < 2; i++) {
-    self.mixer.lights[i] = spawnStruct();
+    self.mixer.lights[i] = spawnstruct();
   }
   self.mixer.lights[0].light_color = self.lights[client_num] GetLightColor();
   self.mixer.lights[0].light_intensity = self.lights[client_num] GetLightIntensity();
@@ -846,7 +844,7 @@ mixer_thread(client_num) {
   if(!IsSplitScreenHost(client_num)) {
     return;
   }
-  self.mixer = spawnStruct();
+  self.mixer = spawnstruct();
   self.mixer.mix_pos = 0;
   self.mixer.mix_val = 0.0;
   self.mixer.last_mix_val = 0.0;
@@ -936,7 +934,7 @@ register_light_type(type, func) {
     level._light_types = [];
   }
   if(!isDefined(level._light_types[type])) {
-    level._light_types[type] = spawnStruct();
+    level._light_types[type] = spawnstruct();
     level._light_types[type].func = func;
     level._light_types[type].count = [];
     level._light_types[type].count[0] = 0;
@@ -1016,7 +1014,7 @@ run_spin_model(notify_name, light, spin_model_name, spin_model_fx, spin_model_fx
     self.spin_models[i] setModel(spin_model_name);
     self.spin_models[i].angles = self.angles;
     if(isDefined(spin_model_fx) && isDefined(level._effect[spin_model_fx]) && isDefined(spin_model_fx_tag)) {
-      playFXOnTag(i, level._effect[spin_model_fx], self.spin_models[i], spin_model_fx_tag);
+      PlayFXOnTag(i, level._effect[spin_model_fx], self.spin_models[i], spin_model_fx_tag);
     }
   }
   if(notify_name == "on") {

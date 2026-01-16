@@ -8,7 +8,8 @@
 #include clientscripts\mp\createfx\mp_bridge_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_carrier_smoke_center"] = loadfx("maps/mp_maps/fx_mp_carrier_smoke_center");
@@ -94,13 +95,12 @@ main() {
   precache_fxanim_props_dlc3();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }
 
 fxanim_level_init(localclientnum) {
-  fxanims = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanims = getentarray(localclientnum, "fxanim", "targetname");
 
   if(!isDefined(level.fxanim_waits)) {
     level.fxanim_waits = [];
@@ -139,6 +139,6 @@ fxanim_wire_think(localclientnum, index, bone) {
 
   for(;;) {
     self waittill("wire_fx", note);
-    playFXOnTag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
+    playfxontag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
   }
 }

@@ -23,9 +23,8 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin)) {
+    if(isDefined(self.reroute_origin))
       location = self.reroute_origin;
-    }
   }
 
   return location;

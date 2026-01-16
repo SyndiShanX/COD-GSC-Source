@@ -18,26 +18,26 @@
 #namespace zm_bot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bot", &__init__, undefined, undefined);
+  system::register("zm_bot", & __init__, undefined, undefined);
 }
 
 function __init__() {
   println("");
-  level.onbotspawned = &on_bot_spawned;
-  level.getbotthreats = &bot_combat::get_ai_threats;
-  level.botprecombat = &bot::coop_pre_combat;
-  level.botpostcombat = &bot::coop_post_combat;
-  level.botidle = &bot::follow_coop_players;
-  level.botdevguicmd = &bot::coop_bot_devgui_cmd;
+  level.onbotspawned = & on_bot_spawned;
+  level.getbotthreats = & bot_combat::get_ai_threats;
+  level.botprecombat = & bot::coop_pre_combat;
+  level.botpostcombat = & bot::coop_post_combat;
+  level.botidle = & bot::follow_coop_players;
+  level.botdevguicmd = & bot::coop_bot_devgui_cmd;
   thread debug_coop_bot_test();
 }
 
 function debug_coop_bot_test() {
   botcount = 0;
   adddebugcommand("");
-  while(true) {
+  while (true) {
     if(getdvarint("") > 0) {
-      while(getdvarint("") > 0) {
+      while (getdvarint("") > 0) {
         if(botcount > 0 && randomint(100) > 60) {
           adddebugcommand("");
           botcount--;
@@ -50,7 +50,7 @@ function debug_coop_bot_test() {
         wait(randomintrange(1, 3));
       }
     } else {
-      while(botcount > 0) {
+      while (botcount > 0) {
         adddebugcommand("");
         botcount--;
         debugmsg("" + botcount);
@@ -69,7 +69,7 @@ function on_bot_spawned() {
 
 function debugmsg(str_txt) {
   iprintlnbold(str_txt);
-  if(isDefined(level.name)) {
+  if(isdefined(level.name)) {
     println((("" + level.name) + "") + str_txt);
   }
 }

@@ -357,15 +357,13 @@ bren_switchout_logic() {
         level.player takeweapon("cz805bren+acog_sp+hc_state_grab");
         level.player giveweapon("cz805bren+acog_sp");
 
-        if(!common_scripts\utility::flag("player_not_doing_strafe")) {
+        if(!common_scripts\utility::flag("player_not_doing_strafe"))
           level.player.a10_lastweapon = "cz805bren+acog_sp";
-        }
 
         if(level.player getcurrentweapon() == "none" || isDefined(level.player.using_ammo_cache) || isDefined(var_0) && var_0 == "none") {
           if(isDefined(level.player.using_ammo_cache)) {
-            while(isDefined(level.player.using_ammo_cache)) {
+            while(isDefined(level.player.using_ammo_cache))
               wait 0.05;
-            }
 
             level.player givemaxammo("cz805bren+acog_sp");
           }
@@ -381,9 +379,8 @@ bren_switchout_logic() {
 
 beach_balcony_collapse_watcher() {
   for(;;) {
-    if(level.a10_uses == 1) {
+    if(level.a10_uses == 1)
       level.a10_mechanic_skip_end_vo = 1;
-    }
 
     if(level.a10_uses == 2) {
       break;
@@ -423,18 +420,16 @@ bunker_balcony_setup() {
       }
     }
 
-    if(var_5 == "mid") {
+    if(var_5 == "mid")
       var_2 = var_6;
-    }
 
     var_1[var_5] = var_6;
     var_0[var_0.size] = var_6;
   }
 
   foreach(var_6 in var_0) {
-    if(var_6 != var_2) {
+    if(var_6 != var_2)
       var_6 linkto(var_2);
-    }
   }
 
   var_15 = getent("balcony_player_clip", "targetname");
@@ -450,9 +445,8 @@ bunker_balcony_damage_state(var_0) {
   getent("balcony_broken_back", "targetname") maps\_utility::show_entity();
   var_1 = ["left", "mid", "right"];
 
-  foreach(var_3 in var_1) {
-    var_0[var_3] maps\_utility::show_entity();
-  }
+  foreach(var_3 in var_1)
+  var_0[var_3] maps\_utility::show_entity();
 
   common_scripts\utility::array_thread(var_0["supports"], maps\_utility::show_entity);
   common_scripts\utility::array_thread(getEntArray("bhouse_roof_damage", "targetname"), maps\_utility::show_entity);
@@ -549,17 +543,15 @@ beach_wave1_logic() {
     var_10.nodroneweaponsound = 1;
     var_10.muzzleflashoverride = "drone_tracer";
 
-    if(var_9 maps\homecoming_util::noteworthy_check("hesco_tower_drone") || var_9 maps\homecoming_util::parameters_check("hesco_tower_drone")) {
+    if(var_9 maps\homecoming_util::noteworthy_check("hesco_tower_drone") || var_9 maps\homecoming_util::parameters_check("hesco_tower_drone"))
       level.artillery_hesco_tower_drones[level.artillery_hesco_tower_drones.size] = var_10;
-    }
 
-    if(!isDefined(var_10.magic_bullet_shield)) {
+    if(!isDefined(var_10.magic_bullet_shield))
       var_10 maps\_utility::magic_bullet_shield();
-    }
 
-    if(var_9 maps\homecoming_util::noteworthy_check("frontline_artillery_drones")) {
+    if(var_9 maps\homecoming_util::noteworthy_check("frontline_artillery_drones"))
       level.artillery_hit_drones = common_scripts\utility::array_add(level.artillery_hit_drones, var_10);
-    } else if(var_9 maps\homecoming_util::noteworthy_check("beach_javelin_drone")) {} else {
+    else if(var_9 maps\homecoming_util::noteworthy_check("beach_javelin_drone")) {} else {
       level.beachfronelinedrones = common_scripts\utility::array_removeundefined(level.beachfronelinedrones);
       level.beachfronelinedrones = common_scripts\utility::array_add(level.beachfronelinedrones, var_10);
     }
@@ -567,9 +559,8 @@ beach_wave1_logic() {
     var_11 = var_9 common_scripts\utility::get_linked_ents();
 
     foreach(var_13 in var_11) {
-      if(var_13 maps\homecoming_util::noteworthy_check("respawner")) {
+      if(var_13 maps\homecoming_util::noteworthy_check("respawner"))
         var_10 thread drone_frontline_respawner(var_13);
-      }
     }
   }
 
@@ -625,9 +616,8 @@ beach_nh90_damagestate(var_0) {
   thread common_scripts\utility::play_sound_in_space("hind_helicopter_hit", self.origin);
   self.diddamagestate = 1;
 
-  if(!maps\_utility::ent_flag("unload_started")) {
+  if(!maps\_utility::ent_flag("unload_started"))
     self.fakehealthinvulnerability = 1;
-  }
 
   self waittill("death");
   self notify("stop_looping_fx");
@@ -667,9 +657,8 @@ beach_wave1_enemy_ai(var_0, var_1, var_2) {
   var_4 = 0;
   var_5 = var_0.unloadspawners;
 
-  foreach(var_7 in var_5) {
-    var_4 = var_4 + var_7.script_index;
-  }
+  foreach(var_7 in var_5)
+  var_4 = var_4 + var_7.script_index;
 
   while(!common_scripts\utility::flag("FLAG_start_wave1_retreat")) {
     wait(randomintrange(3, 5));
@@ -714,9 +703,8 @@ beach_wave1_enemy_drones() {
   var_2 = [1, 2];
   var_3 thread maps\homecoming_drones::drone_infinite_runners("FLAG_stop_wave1_loops", var_2, var_1, undefined, undefined, 10);
 
-  while(!level.startingbunkerheli maps\_utility::ent_flag_exist("unload_complete")) {
+  while(!level.startingbunkerheli maps\_utility::ent_flag_exist("unload_complete"))
     wait 0.1;
-  }
 
   level.startingbunkerheli maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   level.startingbunkerheli maps\_utility::add_wait(maps\_utility::ent_flag_wait, "unload_complete");
@@ -772,9 +760,8 @@ wave1_hovercraft_missile_barrage() {
   var_2 = getEntArray("beach_towers_mgs", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-    if(var_4 maps\homecoming_util::parameters_check("hesco")) {
+    if(var_4 maps\homecoming_util::parameters_check("hesco"))
       var_0 = var_4;
-    }
   }
 
   thread metal_tower_collapse();
@@ -803,18 +790,16 @@ hovercraft_missile_barrage(var_0) {
   var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
   var_2 = [];
 
-  foreach(var_4 in var_1) {
-    var_2[var_4.script_index] = var_4;
-  }
+  foreach(var_4 in var_1)
+  var_2[var_4.script_index] = var_4;
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_4 = var_2[var_6];
 
-    if(var_4 maps\_utility::script_delay()) {
+    if(var_4 maps\_utility::script_delay())
       var_4 maps\_utility::script_delay();
-    } else {
+    else
       wait 1;
-    }
 
     thread hovercraft_artillery_incoming_missile(var_4, var_0);
   }
@@ -832,16 +817,14 @@ hovercraft_artillery_incoming_missile(var_0, var_1) {
   var_4 waittill("movedone");
   var_4 delete();
 
-  if(!common_scripts\utility::flag("FLAG_first_hovercraft_missile_hit")) {
+  if(!common_scripts\utility::flag("FLAG_first_hovercraft_missile_hit"))
     common_scripts\utility::flag_set("FLAG_first_hovercraft_missile_hit");
-  }
 
   var_5 = var_2 maps\_utility::get_linked_structs();
 
   foreach(var_7 in var_5) {
-    if(var_7 maps\homecoming_util::parameters_check("sandbag")) {
+    if(var_7 maps\homecoming_util::parameters_check("sandbag"))
       thread maps\homecoming_util::explosion_throw_sandbags(var_7);
-    }
   }
 
   var_4 thread common_scripts\utility::play_sound_in_space("artillery_explosion", var_2.origin);
@@ -851,22 +834,19 @@ hovercraft_artillery_incoming_missile(var_0, var_1) {
   thread maps\_utility::set_blur(randomintrange(3, 5), 0.05);
   thread maps\_utility::set_blur(0, 0.25);
 
-  if(isDefined(var_2.script_noteworthy)) {
+  if(isDefined(var_2.script_noteworthy))
     level notify(var_2.script_noteworthy);
-  }
 
   var_2 notify("artillery_hit");
   var_9 = "vfx_hesco_explosion";
 
-  if(isDefined(var_2.script_fxid)) {
+  if(isDefined(var_2.script_fxid))
     var_9 = var_2.script_fxid;
-  }
 
   playFX(common_scripts\utility::getfx(var_9), var_2.origin);
 
-  if(var_2 maps\homecoming_util::parameters_check("done")) {
+  if(var_2 maps\homecoming_util::parameters_check("done"))
     common_scripts\utility::flag_set(var_1 + "_done");
-  }
 }
 
 hovercraft_artillery_player_weapon() {
@@ -896,18 +876,16 @@ metal_tower_collapse() {
   var_3 = [];
 
   foreach(var_5 in var_1) {
-    if(var_5 maps\homecoming_util::parameters_check("window")) {
+    if(var_5 maps\homecoming_util::parameters_check("window"))
       var_3 = common_scripts\utility::array_add(var_3, var_5);
-    } else {
+    else
       var_2 = var_5;
-    }
 
     var_5 show();
   }
 
-  foreach(var_8 in var_3) {
-    var_8 linkto(var_2);
-  }
+  foreach(var_8 in var_3)
+  var_8 linkto(var_2);
 
   var_0 delete();
 }
@@ -916,9 +894,8 @@ beach_artillery_balcony_logic() {
   common_scripts\utility::flag_wait("FLAG_first_hovercraft_missile_hit");
   thread artillery_disable_player_mg();
 
-  if(common_scripts\utility::flag("player_on_chaingun_turret")) {
+  if(common_scripts\utility::flag("player_on_chaingun_turret"))
     common_scripts\utility::flag_waitopen("player_on_chaingun_turret");
-  }
 
   var_0 = level.balcony;
   bunker_balcony_damage_state(var_0);
@@ -1001,9 +978,8 @@ beach_wave1_artillery_drones() {
   var_2 = maps\homecoming_util::get_ai_array("inital_beach_guys");
 
   foreach(var_4 in var_2) {
-    if(var_4 maps\homecoming_util::parameters_check("artillery")) {
+    if(var_4 maps\homecoming_util::parameters_check("artillery"))
       var_1 = var_4;
-    }
   }
 
   var_6 = ["artillery_death_1", "artillery_death_2", "artillery_death_3"];
@@ -1053,27 +1029,23 @@ beach_wave1_dialog() {
   common_scripts\utility::flag_wait("FLAG_wave1_right_helicopter");
   wait 0.1;
 
-  if(!issentient(level.secondbunkerheli) && isDefined(level.secondbunkerheli) || isalive(level.secondbunkerheli)) {
+  if(!issentient(level.secondbunkerheli) && isDefined(level.secondbunkerheli) || isalive(level.secondbunkerheli))
     level.secondbunkerheli maps\_utility::ent_flag_wait("landing_gear");
-  }
 
   level.secondarygunner thread maps\_utility::dialogue_queue("homcom_us1_rightsiderightside");
 
-  if(!issentient(level.secondbunkerheli) && isDefined(level.secondbunkerheli) || isalive(level.secondbunkerheli)) {
+  if(!issentient(level.secondbunkerheli) && isDefined(level.secondbunkerheli) || isalive(level.secondbunkerheli))
     level.secondbunkerheli maps\_utility::ent_flag_wait("unload_complete");
-  }
 
   level.secondarygunner maps\_utility::dialogue_queue("homcom_us1_keepfiringbringit");
 
-  if(!issentient(level.thirdbunkerheli) && isDefined(level.thirdbunkerheli) || isalive(level.thirdbunkerheli)) {
+  if(!issentient(level.thirdbunkerheli) && isDefined(level.thirdbunkerheli) || isalive(level.thirdbunkerheli))
     level.thirdbunkerheli maps\_utility::ent_flag_wait("landing_gear");
-  }
 
   level.secondarygunner maps\_utility::dialogue_queue("homcom_us1_anotherhelicopterdownthe");
 
-  if(!issentient(level.thirdbunkerheli) && isDefined(level.thirdbunkerheli) || isalive(level.thirdbunkerheli)) {
+  if(!issentient(level.thirdbunkerheli) && isDefined(level.thirdbunkerheli) || isalive(level.thirdbunkerheli))
     level.thirdbunkerheli maps\_utility::ent_flag_wait("unload_complete");
-  }
 
   level.secondarygunner maps\_utility::dialogue_queue("homcom_us1_keepfiringkeepfiring");
 }
@@ -1111,9 +1083,8 @@ beach_wave2_logic() {
     var_5.drone_lookahead_value = 256;
     var_6 = 0;
 
-    if(isDefined(var_5.script_wait)) {
+    if(isDefined(var_5.script_wait))
       var_6 = var_5.script_wait;
-    }
 
     var_5 maps\_utility::delaythread(var_6, maps\homecoming_drones::beach_path_drones);
   }
@@ -1130,13 +1101,11 @@ beach_wave2_logic() {
   foreach(var_15 in var_13) {
     var_16 = undefined;
 
-    if(isDefined(var_15.target)) {
+    if(isDefined(var_15.target))
       var_16 = common_scripts\utility::getstructarray(var_15.target, "targetname");
-    }
 
-    if(var_15 maps\homecoming_util::parameters_check("target_tanks")) {
+    if(var_15 maps\homecoming_util::parameters_check("target_tanks"))
       var_15.javelin_smarttargeting = 1;
-    }
 
     var_15 thread maps\homecoming_drones::drone_fire_fake_javelin_loop(var_16);
   }
@@ -1171,9 +1140,8 @@ beach_a10_return_flybys() {
   foreach(var_2 in var_0) {
     var_3 = 0;
 
-    if(isDefined(var_2.script_wait)) {
+    if(isDefined(var_2.script_wait))
       var_3 = var_2.script_wait;
-    }
 
     var_2 maps\_utility::delaythread(var_3, maps\_vehicle::spawn_vehicle_and_gopath);
   }
@@ -1185,21 +1153,18 @@ beach_wave2_vehicle_watcher() {
   }
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isplayer(var_0))
     level.wave2_vehiclewatcher++;
-  }
 
-  if(level.wave2_vehiclewatcher == 1) {
+  if(level.wave2_vehiclewatcher == 1)
     common_scripts\utility::flag_set("FLAG_beach_start_wave_3");
-  }
 }
 
 beach_wave2_tank_setup() {
   var_0 = self;
 
-  if(!isDefined(level.beachtanks)) {
+  if(!isDefined(level.beachtanks))
     level.beachtanks = [];
-  }
 
   level.beachtanks = common_scripts\utility::array_add(level.beachtanks, var_0);
   var_0.firetime[0] = 3;
@@ -1221,9 +1186,8 @@ beach_wave2_inithinds() {
     if(isDefined(var_2.script_noteworthy)) {
       var_3 = var_2.script_noteworthy;
 
-      if(!isDefined(level.playerhind_attackspots[var_3])) {
+      if(!isDefined(level.playerhind_attackspots[var_3]))
         level.playerhind_attackspots[var_3] = [];
-      }
 
       level.playerhind_attackspots[var_3] = common_scripts\utility::array_add(level.playerhind_attackspots[var_3], var_2);
       continue;
@@ -1270,9 +1234,8 @@ beach_wave2_playerhind_path_logic() {
     if(isDefined(var_4.script_parameters)) {
       var_5 = var_4.script_parameters;
 
-      if(!isDefined(var_2[var_5])) {
+      if(!isDefined(var_2[var_5]))
         var_2[var_5] = [];
-      }
 
       var_2[var_5] = common_scripts\utility::array_add(var_2[var_5], var_4);
       continue;
@@ -1291,9 +1254,8 @@ beach_wave2_playerhind_path_logic() {
     common_scripts\utility::flag_set("FLAG_hind_is_targeting_player");
     thread beach_wave2_playerhind_strafe(var_2["strafe"]);
 
-    if(isDefined(level.balconystumblers)) {
+    if(isDefined(level.balconystumblers))
       common_scripts\utility::array_thread(level.balconystumblers, ::balcony_allies_playerhind_logic, self);
-    }
 
     thread playerhind_target_player_dialogue();
     thread playerhind_player_hind_hint();
@@ -1314,9 +1276,8 @@ beach_wave2_playerhind_pathing(var_0, var_1) {
   self setneargoalnotifydist(64);
   var_2 = "default";
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = var_1;
-  }
 
   var_3 = var_0;
   var_4 = common_scripts\utility::getclosest(self.origin, var_3);
@@ -1326,15 +1287,13 @@ beach_wave2_playerhind_pathing(var_0, var_1) {
     self vehicle_helisetai(var_4.origin, undefined, undefined, undefined, var_4.script_goalyaw, var_4.angles, var_4.angles[1], 0, 0, 0, 0, 0, 1);
     self waittill("near_goal");
 
-    if(var_4 maps\homecoming_util::noteworthy_check("missiles_fire")) {
+    if(var_4 maps\homecoming_util::noteworthy_check("missiles_fire"))
       thread maps\homecoming_util::heli_fire_missiles(undefined, 1, "tag_missile_left", 0, "missile_attackheli_no_explode");
-    }
 
     var_5 = var_2;
 
-    if(isDefined(var_4.script_parameters)) {
+    if(isDefined(var_4.script_parameters))
       var_5 = var_4.script_parameters;
-    }
 
     if(var_5 != self.currentattackgroup) {
       self.currentattackgroup = var_5;
@@ -1376,9 +1335,8 @@ beach_wave2_playerhind_strafe(var_0) {
   foreach(var_7 in var_4) {
     var_8 = 1;
 
-    if(var_7 == var_2) {
+    if(var_7 == var_2)
       var_8 = 0;
-    }
 
     self vehicle_helisetai(var_7.origin, var_5, var_5 * 2.5, var_5 * 2.5, 0, 1, var_7.angles[1], 0, 0, 0, 0, 0, 0);
     maps\_utility::add_wait(maps\_utility::waittill_msg, "near_goal");
@@ -1413,18 +1371,16 @@ beach_playerhind_strafe_attack(var_0, var_1) {
   var_8 = self.origin[1];
 
   while(common_scripts\utility::flag("FLAG_hind_is_targeting_player")) {
-    if(var_7) {
+    if(var_7)
       var_6 = var_8;
-    }
 
     wait 0.05;
     var_8 = self.origin[1];
     var_9 = var_8 - var_6;
     var_10 = var_9;
 
-    if(var_9 < 0) {
+    if(var_9 < 0)
       var_10 = var_10 * -1;
-    }
 
     if(var_10 < var_5) {
       var_7 = 0;
@@ -1473,9 +1429,8 @@ beach_playerhind_strafe_turret(var_0, var_1) {
 
     var_5 = var_1.origin;
 
-    if(distance2dsquared(level.player.origin, var_1.origin) < var_2) {
+    if(distance2dsquared(level.player.origin, var_1.origin) < var_2)
       var_5 = level.player.origin + (0, 0, 25);
-    }
 
     var_6 = maps\homecoming_util::return_point_in_circle(var_5, 70);
     var_6 = var_6 + (0, 0, var_3);
@@ -1493,9 +1448,8 @@ beach_playerhind_attack_logic(var_0) {
   var_1.targetent = var_2;
   var_3 = "default";
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_3 = var_0;
-  }
 
   var_4 = level.playerhind_attackspots[var_3];
 
@@ -1537,11 +1491,10 @@ beach_playerhind_attack_target_player(var_0) {
     var_5 = level.player.origin;
     var_6 = level.player getstance();
 
-    if(var_6 == "stand" || !level.player istouching(var_4)) {
+    if(var_6 == "stand" || !level.player istouching(var_4))
       var_3 = randomintrange(25, 40);
-    } else {
+    else
       var_3 = randomintrange(100, 150);
-    }
 
     var_7 = randomfloatrange(0.2, 0.4) * 1000;
     var_8 = gettime();
@@ -1565,9 +1518,8 @@ beach_playerhind_attack_target(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0);
     var_3 = undefined;
 
-    if(isDefined(var_2.height)) {
+    if(isDefined(var_2.height))
       var_3 = var_2.height;
-    }
 
     var_4 = var_2.radius;
     var_5 = randomintrange(5, 10) * 1000;
@@ -1579,9 +1531,8 @@ beach_playerhind_attack_target(var_0, var_1) {
       wait 0.4;
     }
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       wait(randomfloatrange(0.4, 0.8));
-    }
   }
 }
 
@@ -1589,16 +1540,14 @@ beach_hind_balcony_logic() {
   var_0 = self;
   var_0 endon("death");
 
-  foreach(var_2 in level.balconystumblers) {
-    var_2.alreadystumbling = 0;
-  }
+  foreach(var_2 in level.balconystumblers)
+  var_2.alreadystumbling = 0;
 
   var_4 = [];
   var_5 = getEntArray("balcony_playercheck_triggers", "targetname");
 
-  foreach(var_7 in var_5) {
-    var_4[var_7.script_noteworthy] = var_7;
-  }
+  foreach(var_7 in var_5)
+  var_4[var_7.script_noteworthy] = var_7;
 
   var_9 = getEntArray("hind_balcony_missile_targets", "targetname");
   var_10 = var_9;
@@ -1617,9 +1566,8 @@ beach_hind_balcony_logic() {
     while(!isDefined(var_11)) {
       var_12 = common_scripts\utility::random(var_10);
 
-      if(!level.player istouching(var_4[var_12.script_noteworthy])) {
+      if(!level.player istouching(var_4[var_12.script_noteworthy]))
         var_11 = var_12;
-      }
 
       wait 0.1;
     }
@@ -1654,20 +1602,17 @@ beach_hind_balcony_missile_logic(var_0) {
         playFX(common_scripts\utility::getfx("heli_missile_explosion"), var_9.origin);
         var_11 = distancesquared(var_9.origin, level.player.origin);
 
-        if(var_11 <= var_2) {
+        if(var_11 <= var_2)
           level.player shellshock("default", 2);
-        }
 
         var_11 = distancesquared(var_9.origin, var_7.origin);
 
-        if(var_11 <= var_3) {
+        if(var_11 <= var_3)
           var_10 = 1;
-        }
       }
 
-      if(var_10) {
+      if(var_10)
         var_6 thread beach_tank_balcony_stumble(var_7);
-      }
     }
   }
 }
@@ -1697,9 +1642,8 @@ playerhind_destory_balcony_mg_missiles(var_0) {
   playFX(common_scripts\utility::getfx("heli_missile_explosion"), var_1.origin);
   var_4 = distancesquared(var_1.origin, level.player.origin);
 
-  if(var_4 <= var_2) {
+  if(var_4 <= var_2)
     level.player shellshock("default", 2);
-  }
 
   if(var_0) {
     var_5 = level.balcony_turret;
@@ -1714,9 +1658,8 @@ playerhind_destory_balcony_mg_missiles(var_0) {
 playerhind_target_player_dialogue() {
   var_0 = [];
 
-  if(!isDefined(self.laststrafeline)) {
+  if(!isDefined(self.laststrafeline))
     self.laststrafeline = "";
-  }
 
   if(!isDefined(self.firststrafe) || self.laststrafeline == "homcom_hsh_lookslikewereon") {
     self.firststrafe = 1;
@@ -1769,13 +1712,12 @@ playerhind_player_hind_hint() {
   var_4 = getkeybinding("toggleprone");
   var_5 = getkeybinding("+prone");
 
-  if(isDefined(var_3) && var_3["count"] > 0) {
+  if(isDefined(var_3) && var_3["count"] > 0)
     maps\_utility::display_hint("hind_prone_hint_hold");
-  } else if(isDefined(var_4) && var_4["count"] > 0) {
+  else if(isDefined(var_4) && var_4["count"] > 0)
     maps\_utility::display_hint("hind_prone_hint_toggle");
-  } else if(isDefined(var_5) && var_5["count"] > 0) {
+  else if(isDefined(var_5) && var_5["count"] > 0)
     maps\_utility::display_hint("hind_prone_hint");
-  }
 }
 
 playerhind_kill_player_watcher() {
@@ -1905,9 +1847,8 @@ beach_tank_balcony_logic(var_0) {
     if(!isDefined(var_5)) {
       continue;
     }
-    if(var_5.script_noteworthy == var_1) {
+    if(var_5.script_noteworthy == var_1)
       var_4 thread beach_tank_balcony_stumble(var_5);
-    }
   }
 
   for(var_7 = 3; var_7 != 0; var_7--) {
@@ -1928,11 +1869,10 @@ beach_wave1_ai(var_0) {
   level endon("FLAG_stop_wave1_loops");
   var_1 = maps\_utility::array_spawn(getEntArray(var_0, "targetname"));
 
-  if(var_1[0].team == "axis") {
+  if(var_1[0].team == "axis")
     var_2 = ::beach_enemy_default;
-  } else {
+  else
     var_2 = ::beach_ally_default;
-  }
 
   common_scripts\utility::array_thread(var_1, var_2);
   var_3 = getEntArray(var_0 + "_respawners", "targetname");
@@ -1968,9 +1908,8 @@ bunker_balcony_bullet_impacts() {
   var_1 = anglesToForward((0, 180, 0));
   var_2 = ["balcony_impact_sand_1", "balcony_impact_sand_1"];
 
-  foreach(var_4 in var_0) {
-    var_4 childthread bunker_balcony_bullet_impacts_think(var_1, var_2);
-  }
+  foreach(var_4 in var_0)
+  var_4 childthread bunker_balcony_bullet_impacts_think(var_1, var_2);
 }
 
 bunker_balcony_bullet_impacts_think(var_0, var_1) {
@@ -2025,9 +1964,8 @@ drone_frontline_respawner(var_0) {
     while(!isDefined(var_3)) {
       var_3 = var_0 maps\homecoming_drones::drone_spawn();
 
-      if(!isDefined(var_3)) {
+      if(!isDefined(var_3))
         wait 0.5;
-      }
     }
 
     var_2 = var_3;
@@ -2043,18 +1981,16 @@ drone_frontline_respawner(var_0) {
     wait(randomfloatrange(1, 5));
   }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 maps\homecoming_util::delete_safe();
-  }
 }
 
 beach_hovercraft_looper() {
   var_0 = self;
   level endon("hovercraft_loopers_stop");
 
-  if(!isDefined(level.hovercraftloopers)) {
+  if(!isDefined(level.hovercraftloopers))
     level.hovercraftloopers = [];
-  }
 
   var_1 = var_0 common_scripts\utility::get_linked_ents();
   var_2 = undefined;
@@ -2082,9 +2018,8 @@ beach_hovercraft_looper() {
 }
 
 bunker_enemy_cover_drones(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     level endon(var_0);
-  }
 
   for(;;) {
     var_2 = maps\homecoming_drones::drones_request(1);
@@ -2092,9 +2027,8 @@ bunker_enemy_cover_drones(var_0, var_1) {
     if(var_2) {
       var_3 = maps\_utility::spawn_ai();
 
-      if(isDefined(var_1)) {
+      if(isDefined(var_1))
         var_3 maps\homecoming_util::set_ai_array(var_1);
-      }
 
       var_3 maps\homecoming_drones::drones_death_watcher();
     }
@@ -2107,9 +2041,8 @@ bunker_beach_attackers() {
   level endon("beach_attacker_logic_off");
   var_0 = common_scripts\utility::getstruct(self.target, "targetname");
 
-  if(!isDefined(var_0.aiamount)) {
+  if(!isDefined(var_0.aiamount))
     var_0.aiamount = 0;
-  }
 
   var_0.aiamount = var_0.aiamount + self.script_index;
   var_0.aliveai = [];
@@ -2144,9 +2077,8 @@ bunker_beach_attackers() {
 bunker_beach_attackers_think(var_0) {
   self endon("death");
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = common_scripts\utility::getstruct(self.target, "targetname");
-  }
 
   if(!isDefined(var_0)) {
     return;
@@ -2157,9 +2089,8 @@ bunker_beach_attackers_think(var_0) {
   var_1 = randomintrange(8, 20);
   maps\_utility::delaythread(var_1, maps\_utility::die);
 
-  if(!maps\homecoming_util::parameters_check("ignore_nodes")) {
+  if(!maps\homecoming_util::parameters_check("ignore_nodes"))
     level.beachfrontguys[level.beachfrontguys.size] = self;
-  }
 
   level.bunker_beach_ai = common_scripts\utility::array_removeundefined(level.bunker_beach_ai);
   level.bunker_beach_ai[level.bunker_beach_ai.size] = self;
@@ -2173,9 +2104,8 @@ bunker_beach_attackers_death(var_0) {
   for(;;) {
     var_2 = distance2dsquared(self.origin, var_0.origin);
 
-    if(var_2 <= var_1) {
+    if(var_2 <= var_1)
       self kill();
-    }
 
     wait 0.1;
   }
@@ -2195,9 +2125,8 @@ beach_bunker_stumble_event() {
   var_2 thread beach_bunker_stumbler_sound();
   var_3 = common_scripts\utility::getstructarray("bunker_stairs_explosion_soundspot", "targetname");
 
-  foreach(var_5 in var_3) {
-    thread common_scripts\utility::play_sound_in_space(var_5.script_sound, var_5.origin);
-  }
+  foreach(var_5 in var_3)
+  thread common_scripts\utility::play_sound_in_space(var_5.script_sound, var_5.origin);
 
   common_scripts\utility::exploder("hallway_exp");
   earthquake(0.35, 0.8, var_1.origin, 5000);
@@ -2225,7 +2154,7 @@ bunker_mg_guy() {
   maps\_utility::gun_remove();
   self notsolid();
   self.name = "";
-  self setlookattext("", &"");
+  self setlookattext("", & "");
   level.secondarygunner = getent("balcony_secondary_gunner", "targetname") maps\_utility::spawn_ai();
   level.secondarygunner.animname = "secondary_gunner";
   level.secondarygunner.name = "SGT. Harmer";
@@ -2316,9 +2245,8 @@ beach_hovercraft_tanks_default() {
   common_scripts\utility::waitframe();
   maps\_utility::ent_flag_wait("hovercraft_unload_complete");
 
-  if(!isDefined(level.hovercrafttanks)) {
+  if(!isDefined(level.hovercrafttanks))
     level.hovercrafttanks = [];
-  }
 
   level.hovercrafttanks[level.hovercrafttanks.size] = self;
   level.bunker_beach_vehicles[level.bunker_beach_vehicles.size] = self;
@@ -2347,11 +2275,10 @@ beach_battlehinds_manager(var_0) {
   level.beach_ambient_hinds = [];
   var_2 = [];
 
-  if(isDefined(var_1.script_linkto)) {
+  if(isDefined(var_1.script_linkto))
     var_2 = var_1 common_scripts\utility::get_linked_ents();
-  } else {
+  else
     var_2 = common_scripts\utility::array_add(var_2, var_0);
-  }
 
   var_3 = var_2;
 
@@ -2370,9 +2297,8 @@ beach_battlehinds_manager(var_0) {
     var_0 = var_3[randomint(var_3.size)];
     var_1 = var_0 maps\_vehicle::spawn_vehicle_and_gopath();
 
-    if(var_2.size > 1) {
+    if(var_2.size > 1)
       var_3 = common_scripts\utility::array_remove(var_2, var_0);
-    }
   }
 }
 
@@ -2442,9 +2368,8 @@ bunker_trench_drone_runners() {
 bunker_javelin_drones() {
   var_0 = self.spawner;
 
-  if(isDefined(var_0.script_linkto)) {
+  if(isDefined(var_0.script_linkto))
     self.javtargets = getEntArray(var_0.script_linkto, "script_linkname");
-  }
 
   self.javelin_smarttargeting = 1;
   self.drone_idle_custom = 1;

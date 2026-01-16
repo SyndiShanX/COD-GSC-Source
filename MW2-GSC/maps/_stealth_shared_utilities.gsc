@@ -9,7 +9,6 @@
 #include maps\_stealth_utility;
 
 /************************************************************************************************************/
-
 /*											SYSTEM UTILITIES												*/
 /************************************************************************************************************/
 
@@ -20,7 +19,7 @@
 ai_message_handler_spotted(function, plugin_override) {
   self endon("death");
 
-  assertex(isDefined(plugin_override), "plugin_override required, modify plugin script -z");
+  assertex(isdefined(plugin_override), "plugin_override required, modify plugin script -z");
   plugin_override = plugin_override + "spotted";
 
   self notify(plugin_override);
@@ -28,14 +27,13 @@ ai_message_handler_spotted(function, plugin_override) {
 
   switch (self.team) {
     case "allies":
-      while(1) {
+      while (1) {
         self ent_flag_wait("_stealth_enabled");
 
         self flag_wait("_stealth_spotted");
 
-        if(!self ent_flag("_stealth_enabled")) {
+        if(!self ent_flag("_stealth_enabled"))
           continue;
-        }
 
         self thread[[function]]();
 
@@ -45,14 +43,13 @@ ai_message_handler_spotted(function, plugin_override) {
 
     case "axis":
     case "team3":
-      while(1) {
+      while (1) {
         self ent_flag_wait("_stealth_enabled");
 
         self stealth_group_spotted_flag_wait();
 
-        if(!self ent_flag("_stealth_enabled")) {
+        if(!self ent_flag("_stealth_enabled"))
           continue;
-        }
 
         self thread[[function]]();
 
@@ -69,7 +66,7 @@ ai_message_handler_spotted(function, plugin_override) {
 ai_message_handler_hidden(function, plugin_override) {
   self endon("death");
 
-  assertex(isDefined(plugin_override), "plugin_override required, modify plugin script -z");
+  assertex(isdefined(plugin_override), "plugin_override required, modify plugin script -z");
   plugin_override = plugin_override + "hidden";
 
   self notify(plugin_override);
@@ -77,14 +74,13 @@ ai_message_handler_hidden(function, plugin_override) {
 
   switch (self.team) {
     case "allies":
-      while(1) {
+      while (1) {
         self ent_flag_wait("_stealth_enabled");
 
         self flag_waitopen("_stealth_spotted");
 
-        if(!self ent_flag("_stealth_enabled")) {
+        if(!self ent_flag("_stealth_enabled"))
           continue;
-        }
 
         self thread[[function]]();
 
@@ -94,14 +90,13 @@ ai_message_handler_hidden(function, plugin_override) {
 
     case "axis":
     case "team3":
-      while(1) {
+      while (1) {
         self ent_flag_wait("_stealth_enabled");
 
         self stealth_group_spotted_flag_waitopen();
 
-        if(!self ent_flag("_stealth_enabled")) {
+        if(!self ent_flag("_stealth_enabled"))
           continue;
-        }
 
         self thread[[function]]();
 
@@ -160,97 +155,93 @@ stealth_event_validate(key) {
 }
 
 stealth_debug_print(msg) {
-  if(!flag("_stealth_enabled")) {
+  /#
+  if(!flag("_stealth_enabled"))
     return;
-  }
 
   type = undefined;
   name = undefined;
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     type = "Script_noteworthy";
     name = self.script_noteworthy;
-  } else if(isDefined(self.targetname)) {
+  } else if(isdefined(self.targetname)) {
     type = "Targetname";
     name = self.targetname;
   }
 
   actor = "Actor -> ID: " + self.unique_id + " Export: " + self.export;
 
-  if(isDefined(type)) {
+  if(isdefined(type)) {
     actor += " " + type + ": " + name;
   }
   txt = "STEALTH DEBUG PRINT: " + actor + "\n " + msg;
 
   println(txt);
 
-  if(getdvarint("stealth_debug_prints") == 1) {
+  if(getdvarint("stealth_debug_prints") == 1)
     self thread debug_message_ai(msg);
-  }
+  # /
 }
 
 enemy_event_debug_print(type) {
   setDvarIfUninitialized("stealth_debug_prints", "0");
 
-  if(!isDefined(getdvar("stealth_debug_prints"))) {
+  if(!isdefined(getdvar("stealth_debug_prints")))
     setdvar("stealth_debug_prints", "0");
-  }
 
-  if(getdvarint("stealth_debug_prints") != 1) {
+  if(getdvarint("stealth_debug_prints") != 1)
     return;
-  }
 
+  /#
   self endon("death");
 
   self waittill(type, subtype);
 
-  if(isDefined(subtype)) {
+  if(isdefined(subtype))
     self stealth_debug_print("Received an event: " + type + " " + subtype);
-  } else {
+  else
     self stealth_debug_print("Received an event: " + type);
-  }
+  # /
 }
 
 stealth_flag_debug_print(_flag) {
-  while(1) {
+  /#
+  while (1) {
     flag_wait(_flag);
     {
-      if(getdvarint("stealth_debug_prints") == 1) {
+      if(getdvarint("stealth_debug_prints") == 1)
         iprintlnbold(_flag);
-      } else {
+      else
         println(_flag);
-      }
     }
 
     flag_waitopen(_flag);
     {
-      if(getdvarint("stealth_debug_prints") == 1) {
+      if(getdvarint("stealth_debug_prints") == 1)
         iprintlnbold("back to normal: " + _flag);
-      } else {
+      else
         println("back to normal: " + _flag);
-      }
     }
   }
-
+  # /
 }
 
 group_flag_init(_flag) {
   assertex(issentient(self), "an AI must call this function");
 
-  if(isDefined(self.script_stealthgroup)) {
+  if(isdefined(self.script_stealthgroup))
     self.script_stealthgroup = string(self.script_stealthgroup);
-  } else {
+  else
     self.script_stealthgroup = "default";
-  }
 
   name = self group_get_flagname(_flag);
 
   if(!flag_exist(name)) {
     flag_init(name);
 
-    if(!isDefined(level._stealth.group.flags[_flag])) {
+    if(!isdefined(level._stealth.group.flags[_flag]))
       level._stealth.group.flags[_flag] = [];
-    }
 
     size = level._stealth.group.flags[_flag].size;
     level._stealth.group.flags[_flag][size] = name;
@@ -260,7 +251,7 @@ group_flag_init(_flag) {
 group_add_to_global_list() {
   assertex(issentient(self), "an AI must call this function");
 
-  if(!isDefined(level._stealth.group.groups[self.script_stealthgroup])) {
+  if(!isdefined(level._stealth.group.groups[self.script_stealthgroup])) {
     level._stealth.group.groups[self.script_stealthgroup] = [];
     level._stealth.group notify(self.script_stealthgroup);
   }
@@ -295,9 +286,8 @@ group_return_groups_with_flag_set(_flag) {
   foreach(key, value in array) {
     name = group_get_flagname_from_group(_flag, key);
 
-    if(flag(name)) {
+    if(flag(name))
       return_value[return_value.size] = key;
-    }
   }
 
   return return_value;
@@ -328,9 +318,8 @@ group_flag_clear(_flag, group) {
   clear = true;
 
   foreach(key, value in array) {
-    if(flag(value)) {
+    if(flag(value))
       return;
-    }
   }
 
   flag_clear(_flag);
@@ -342,13 +331,11 @@ group_get_ai_in_group(group_name) {
 }
 
 group_wait_group_spawned(group_name) {
-  if(!isDefined(level._stealth.group.groups[group_name])) {
+  if(!isdefined(level._stealth.group.groups[group_name]))
     level._stealth.group waittill(group_name);
-  }
 }
 
 /************************************************************************************************************/
-
 /*											BEHAVIOR UTILITIES												*/
 /************************************************************************************************************/
 
@@ -356,7 +343,7 @@ ai_stealth_pause_handler() {
   self endon("death");
   self endon("pain_death");
 
-  while(1) {
+  while (1) {
     self ent_flag_waitopen("_stealth_enabled");
 
     spotted_func = self._stealth.behavior.ai_functions["state"]["spotted"];
@@ -383,29 +370,28 @@ enemy_go_back() {
   self endon("death");
   self notify("stop_loop");
 
-  if(isDefined(self._stealth.behavior.goback_startFunc)) {
+  if(IsDefined(self._stealth.behavior.goback_startFunc)) {
     self[[self._stealth.behavior.goback_startFunc]]();
   }
 
   spot = self._stealth.behavior.last_spot;
 
-  if(isDefined(spot) && self.type != "dog" && !isDefined(self.customMoveTransition)) {
+  if(isdefined(spot) && self.type != "dog" && !isdefined(self.customMoveTransition))
     self.customMoveTransition = maps\_patrol::patrol_resume_move_start_func;
-  }
 
   // stop before moving
-  if(isDefined(self.customMoveTransition) && isDefined(self.pathGoalPos)) {
+  if(isdefined(self.customMoveTransition) && isdefined(self.pathGoalPos)) {
     self setgoalpos(self.origin);
     wait 0.05;
   }
 
-  if(isDefined(self.script_patroller)) {
-    if(isDefined(self.last_patrol_goal)) {
+  if(isdefined(self.script_patroller)) {
+    if(isdefined(self.last_patrol_goal)) {
       self.target = self.last_patrol_goal.targetname;
     }
 
     //these guys on the ridge in cliffhanger get alerted and jump down a one way traverse. this gives them a pathable patrol path to go back to.
-    if(isDefined(self.stealth_first_alert_new_patrol_path)) {
+    if(isdefined(self.stealth_first_alert_new_patrol_path)) {
       self.target = self.stealth_first_alert_new_patrol_path.targetname;
       self.stealth_first_alert_new_patrol_path = undefined;
     }
@@ -415,10 +401,10 @@ enemy_go_back() {
     self thread maps\_patrol::pet_patrol();
     self set_dog_walk_anim();
     self.script_growl = undefined;
-  } else if(isDefined(spot)) {
-    if(self.type != "dog") {
+  } else if(isdefined(spot)) {
+    if(self.type != "dog")
       self set_generic_run_anim("_stealth_patrol_cqb", true);
-    } else {
+    else {
       self set_dog_walk_anim();
       self.script_growl = undefined;
     }
@@ -433,9 +419,8 @@ enemy_go_back() {
   waittillframeend;
   self ent_flag_clear("_stealth_override_goalpos");
 
-  if(isDefined(spot)) {
+  if(isdefined(spot))
     self thread enemy_go_back_clear_lastspot(spot);
-  }
 }
 
 enemy_go_back_clear_lastspot(origin) {
@@ -448,11 +433,10 @@ enemy_go_back_clear_lastspot(origin) {
 
 // caches result of search
 enemy_get_nearby_pathnodes(origin, radius, min_radius) {
-  if(!isDefined(min_radius)) {
+  if(!isdefined(min_radius))
     min_radius = 0;
-  }
 
-  if(isDefined(level._stealth.node_search.nodes_array) &&
+  if(isdefined(level._stealth.node_search.nodes_array) &&
     distanceSquared(origin, level._stealth.node_search.origin) < 64 * 64 &&
     radius == level._stealth.node_search.radius &&
     min_radius == level._stealth.node_search.min_radius)
@@ -483,15 +467,13 @@ enemy_alert_level_forget(enemy, delay) {
   self endon("death");
   enemy endon("death");
 
-  if(!isDefined(delay)) {
+  if(!isdefined(delay))
     delay = 60; //after 60 seconds - forget about it
-  }
 
   wait delay;
 
-  if(isDefined(enemy._stealth.logic.spotted_list[self.unique_id]) && enemy._stealth.logic.spotted_list[self.unique_id] > 0) {
+  if(isdefined(enemy._stealth.logic.spotted_list[self.unique_id]) && enemy._stealth.logic.spotted_list[self.unique_id] > 0)
     enemy._stealth.logic.spotted_list[self.unique_id]--;
-  }
 }
 
 enemy_stop_current_behavior() {
@@ -500,10 +482,9 @@ enemy_stop_current_behavior() {
     self notify("stop_animmode");
     self notify("stop_loop");
   }
-  if(isDefined(self.script_patroller)) {
-    if(isDefined(self.last_patrol_goal)) {
+  if(isdefined(self.script_patroller)) {
+    if(isdefined(self.last_patrol_goal))
       self.last_patrol_goal.patrol_claimed = undefined;
-    }
 
     self notify("release_node");
     self notify("end_patrol");
@@ -515,19 +496,17 @@ enemy_stop_current_behavior() {
 
 enemy_find_original_goal() {
   //if we already have an original goal - stick to it
-  if(isDefined(self._stealth.behavior.last_spot)) {
+  if(isdefined(self._stealth.behavior.last_spot))
     return;
-  }
 
-  if(isDefined(self.last_set_goalnode)) {
+  if(isdefined(self.last_set_goalnode))
     self._stealth.behavior.last_spot = self.last_set_goalnode.origin;
-  } else if(isDefined(self.last_set_goalent)) {
+  else if(isdefined(self.last_set_goalent))
     self._stealth.behavior.last_spot = self.last_set_goalent.origin;
-  } else if(isDefined(self.last_set_goalpos)) {
+  else if(isdefined(self.last_set_goalpos))
     self._stealth.behavior.last_spot = self.last_set_goalpos;
-  } else {
+  else
     self._stealth.behavior.last_spot = self.origin;
-  }
 }
 
 enemy_set_original_goal(origin) {
@@ -540,9 +519,8 @@ enemy_runto_and_lookaround(node, position) {
 
   self endon("death");
   self endon("_stealth_enemy_alert_level_change");
-  if(self.type != "dog") {
+  if(self.type != "dog")
     self endon("_stealth_saw_corpse");
-  }
 
   spotted_flag = self group_get_flagname("_stealth_spotted");
   level endon(spotted_flag);
@@ -552,10 +530,10 @@ enemy_runto_and_lookaround(node, position) {
 
   self ent_flag_set("_stealth_override_goalpos");
 
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     self setgoalnode(node);
   } else {
-    assertex(isDefined(position), "no node or position defined");
+    assertex(isdefined(position), "no node or position defined");
     self setgoalpos(position);
   }
 
@@ -563,25 +541,22 @@ enemy_runto_and_lookaround(node, position) {
 
   self waittill("goal");
 
-  if(self.type != "dog") {
+  if(self.type != "dog")
     self set_generic_idle_anim("_stealth_look_around");
-  }
 }
 
 enemy_find_free_pathnode_near(origin, radius, min_radius) {
   array = enemy_get_nearby_pathnodes(origin, radius, min_radius);
 
-  if(!isDefined(array) || array.size == 0) {
+  if(!isdefined(array) || array.size == 0)
     return;
-  }
 
   node = array[randomInt(array.size)];
   array = array_remove(array, node);
 
-  while(isDefined(node.owner)) {
-    if(array.size == 0) {
+  while (isdefined(node.owner)) {
+    if(array.size == 0)
       return;
-    }
 
     node = array[randomInt(array.size)];
     array = array_remove(array, node);
@@ -593,61 +568,51 @@ enemy_find_free_pathnode_near(origin, radius, min_radius) {
 }
 
 /************************************************************************************************************/
-
 /*												ANNOUCEMENTS												*/
 /************************************************************************************************************/
-
 enemy_announce_wtf() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
-  if(!(self enemy_announce_snd("wtf"))) {
+  if(!(self enemy_announce_snd("wtf")))
     return;
-  }
 
   alias = "stealth_" + self.npcID + "_anexplosion";
-  self playSound(alias);
+  self playsound(alias);
 }
 
 // Who's there?
 enemy_announce_huh() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
-  if(!(self enemy_announce_snd("huh"))) {
+  if(!(self enemy_announce_snd("huh")))
     return;
-  }
 
   alias = "stealth_" + self.npcID + "_huh";
-  self playSound(alias);
+  self playsound(alias);
 }
 
 // Didn't find anything, going back to patrol
 enemy_announce_hmph() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
-  if(!(self enemy_announce_snd("hmph"))) {
+  if(!(self enemy_announce_snd("hmph")))
     return;
-  }
 
   alias = "stealth_" + self.npcID + "_hmph";
-  self playSound(alias);
+  self playsound(alias);
 }
 
 enemy_announce_attack() {
   self endon("death");
   self endon("pain_death"); // don't actually want to be able to still call out to buddies - it kinda sucks to take him down and still lose
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
 
-  if(!(self enemy_announce_snd("spotted"))) {
+  if(!(self enemy_announce_snd("spotted")))
     return;
-  }
 
-  self playSound("RU_" + self.npcID + "_stealth_alert");
+  self playsound("RU_" + self.npcID + "_stealth_alert");
 }
 
 enemy_announce_spotted(pos) {
@@ -655,34 +620,31 @@ enemy_announce_spotted(pos) {
   self endon("pain_death"); // don't actually want to be able to still call out to buddies - it kinda sucks to take him down and still lose
 
   // this makes sure that if we're not spotted because we killed
-  // this guy before he could set the flag - we dont' bring
+  // this guy before he could set the flag - we dont' bring 
   // everyone over for no reason.
   self stealth_group_spotted_flag_wait();
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
 
   if(self enemy_announce_snd("spotted")) {
     self thread enemy_announce_spotted_bring_group(pos);
 
     alias = "RU_" + self.npcID + "_stealth_alert";
-    self playSound(alias);
+    self playsound(alias);
   }
 
-  if(self enemy_announce_snd("acknowledge")) {
+  if(self enemy_announce_snd("acknowledge"))
     self thread enemy_announce_spotted_acknowledge(self.origin);
-  }
 }
 
 enemy_announce_spotted_acknowledge(spotterPos) {
   wait 1.5;
 
-  if(isDefined(self.npcID)) {
+  if(isdefined(self.npcID))
     num = self.npcID;
-  } else {
+  else
     num = randomint(3);
-  }
 
   alias = "RU_" + num + "_stealth_alert_r";
   play_sound_in_space(alias, spotterPos);
@@ -692,13 +654,11 @@ enemy_announce_spotted_bring_group(pos) {
   group = group_get_ai_in_group(self.script_stealthgroup);
 
   foreach(key, ai in group) {
-    if(ai == self) {
+    if(ai == self)
       continue;
-    }
 
-    if(isDefined(ai.enemy) || isDefined(ai.favoriteenemy)) {
+    if(isdefined(ai.enemy) || isdefined(ai.favoriteenemy))
       continue;
-    }
 
     ai notify("heard_scream", pos);
   }
@@ -706,13 +666,11 @@ enemy_announce_spotted_bring_group(pos) {
 
 enemy_announce_corpse() {
   self endon("death");
-  if(isDefined(self.found_corpse_wait)) {
+  if(isdefined(self.found_corpse_wait))
     wait(self.found_corpse_wait);
-  }
 
-  if(!(self enemy_announce_snd("corpse"))) {
+  if(!(self enemy_announce_snd("corpse")))
     return;
-  }
 
   if(self.type == "dog") {
     self ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
@@ -721,25 +679,21 @@ enemy_announce_corpse() {
   }
 
   alias = "stealth_" + self.npcID + "_deadbody";
-  self playSound(alias);
+  self playsound(alias);
 }
 
 /************************************************************************************************************/
-
 /*										ANNOUCEMENT UTILITIES												*/
 /************************************************************************************************************/
-
 enemy_announce_snd(type) {
   if(type == "spotted") {
-    if(level._stealth.behavior.sound[type][self.script_stealthgroup]) {
+    if(level._stealth.behavior.sound[type][self.script_stealthgroup])
       return false;
-    }
 
     level._stealth.behavior.sound[type][self.script_stealthgroup] = true;
   } else {
-    if(level._stealth.behavior.sound[type]) {
+    if(level._stealth.behavior.sound[type])
       return false;
-    }
 
     level._stealth.behavior.sound[type] = true;
 
@@ -755,18 +709,15 @@ enemy_announce_snd_reset(type) {
 }
 
 /************************************************************************************************************/
-
 /*											ANIMATION SYSTEM												*/
 /************************************************************************************************************/
-
 enemy_animation_wrapper(type) {
   self endon("death");
   self endon("pain_death");
 
   // ALWAYS RUN THIS UNLESS YOU'RE SURE YOU KNOW WHAT YOU"RE DOING
-  if(self enemy_animation_pre_anim(type)) {
+  if(self enemy_animation_pre_anim(type))
     return;
-  }
 
   self enemy_animation_do_anim(type);
 
@@ -775,7 +726,7 @@ enemy_animation_wrapper(type) {
 }
 
 enemy_animation_do_anim(type) {
-  if(isDefined(self._stealth.behavior.event.custom_animation)) {
+  if(isdefined(self._stealth.behavior.event.custom_animation)) {
     self enemy_animation_custom(type);
     return;
   }
@@ -801,17 +752,16 @@ enemy_animation_custom(type) {
   // cut the loop
   node notify(ender);
 
-  if(isDefined(self.anim_props)) {
+  if(isdefined(self.anim_props)) {
     self.anim_props_animated = true;
     node thread anim_single(self.anim_props, anime);
   }
   if(type != "doFlashBanged") {
     // this is the reaction
-    if(isDefined(tag) || isDefined(self.has_delta)) {
+    if(isdefined(tag) || isdefined(self.has_delta))
       node anim_generic(self, anime, tag);
-    } else {
+    else
       node anim_generic_custom_animmode(self, "gravity", anime);
-    }
   }
   // once you the the reaction once - you dont wanna ever do it again...especially not off this node
   self ai_clear_custom_animation_reaction();
@@ -823,9 +773,8 @@ enemy_animation_pre_anim(type) {
   // this means that something really bad happened...a first reaction
   // to the player being spotted or something equally bad like a bullet
   // whizby
-  if(self ent_flag("_stealth_behavior_first_reaction") || self ent_flag("_stealth_behavior_reaction_anim_in_progress")) {
+  if(self ent_flag("_stealth_behavior_first_reaction") || self ent_flag("_stealth_behavior_reaction_anim_in_progress"))
     return true;
-  }
 
   // this function doesn't stop behavior if _stealth_behavior_reaction_anim
   // is set - because stoping behavior means ending current animations
@@ -833,9 +782,8 @@ enemy_animation_pre_anim(type) {
   // AFTER we've stopped the current ones
   self enemy_stop_current_behavior();
 
-  if(issubstr(type, "warning")) {
+  if(issubstr(type, "warning"))
     type = "warning";
-  }
 
   switch (type) {
     case "explode":
@@ -869,9 +817,8 @@ enemy_animation_pre_anim_dog_special_first_condition() {
   self endon("death");
 
   flag_wait_or_timeout(spotted_flag, 3);
-  if(flag(spotted_flag)) {
+  if(flag(spotted_flag))
     self ent_flag_set("_stealth_behavior_first_reaction");
-  }
 }
 
 enemy_animation_post_anim(type) {
@@ -885,10 +832,8 @@ enemy_animation_post_anim(type) {
 }
 
 /************************************************************************************************************/
-
 /*											ANIMATION UTILITIES												*/
 /************************************************************************************************************/
-
 ai_clear_custom_animation_reaction() {
   self._stealth.behavior.event.custom_animation = undefined;
 
@@ -897,20 +842,18 @@ ai_clear_custom_animation_reaction() {
 
 ai_clear_custom_animation_reaction_and_idle(waitanimend) {
   // could have been cleared by something else
-  if(!isDefined(self._stealth.behavior.event.custom_animation)) {
+  if(!isdefined(self._stealth.behavior.event.custom_animation))
     return;
-  }
 
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
-  if(!isDefined(waitanimend) || waitanimend == false) {
+  if(!isdefined(waitanimend) || waitanimend == false)
     self stopanimscripted();
-  }
 
   self ai_clear_custom_animation_reaction();
 }
 
 ai_set_custom_animation_reaction(node, anime, tag, ender) {
-  self._stealth.behavior.event.custom_animation = spawnStruct();
+  self._stealth.behavior.event.custom_animation = spawnstruct();
 
   self._stealth.behavior.event.custom_animation.node = node;
   self._stealth.behavior.event.custom_animation.anime = anime;
@@ -923,23 +866,20 @@ ai_set_custom_animation_reaction(node, anime, tag, ender) {
 
 ai_animate_props_on_death(node, anime, tag, ender) {
   wait .1;
-  if(!isDefined(self.anim_props)) {
+  if(!isdefined(self.anim_props))
     return;
-  }
 
   prop = self.anim_props;
 
   self waittill("death");
 
-  if(isDefined(self.anim_props_animated)) {
+  if(isdefined(self.anim_props_animated))
     return;
-  }
 
   node thread anim_single(prop, anime);
 }
 
 /************************************************************************************************************/
-
 /*												EVENT AWARENESS												*/
 /************************************************************************************************************/
 
@@ -955,14 +895,13 @@ event_awareness_main(dialogue_array, ender_array) {
   add_func(::flag_clear, "_stealth_event");
   thread do_wait_any();
 
-  while(1) {
+  while (1) {
     flag_wait("_stealth_enabled");
 
     flag_wait("_stealth_event");
 
-    if(!flag("_stealth_enabled")) {
+    if(!flag("_stealth_enabled"))
       continue;
-    }
 
     wait 2;
 
@@ -975,9 +914,8 @@ event_awareness_main(dialogue_array, ender_array) {
 event_awareness_dialogue_wrapper(array) {
   wait randomfloatrange(.5, 1);
 
-  if(!isDefined(array)) {
+  if(!isdefined(array))
     return;
-  }
 
   string = random(array);
   level thread function_stack(::radio_dialogue, string);
@@ -987,19 +925,17 @@ event_awareness_enders(ender_array) {
   level endon("default_event_awareness_enders");
   level endon("event_awareness_handler");
 
-  if(isDefined(ender_array)) {
+  if(isdefined(ender_array)) {
     foreach(string in ender_array) {
-      if(flag_exist(string) && flag(string)) {
+      if(flag_exist(string) && flag(string))
         level notify("default_event_awareness_enders");
-      }
     }
 
     //don't want to put into the same loop as above because we dont
     //want to add_wait and then kill this function without every calling
     //do_wait...cause that would cause some nasty bugs
-    foreach(string in ender_array) {
-      add_wait(::waittill_msg, string);
-    }
+    foreach(string in ender_array)
+    add_wait(::waittill_msg, string);
   }
 
   add_wait(::flag_wait, "_stealth_spotted");
@@ -1010,28 +946,23 @@ event_awareness_enders(ender_array) {
 }
 
 /************************************************************************************************************/
-
 /*										GLOBAL SCRIPT CALL BACKS											*/
 /************************************************************************************************************/
 
 _autosave_stealthcheck() {
-  if(!stealth_is_everything_normal()) {
+  if(!stealth_is_everything_normal())
     return false;
-  }
 
-  if(flag("_stealth_player_nade")) {
+  if(flag("_stealth_player_nade"))
     return false;
-  }
   if(flag_exist("_radiation_poisoning")) {
-    if(flag("_radiation_poisoning")) {
+    if(flag("_radiation_poisoning"))
       return false;
-    }
   }
-  vehicles = getEntArray("destructible", "classname");
+  vehicles = getentarray("destructible", "classname");
   foreach(vehicle in vehicles) {
-    if(isDefined(vehicle.healthDrain)) {
+    if(isDefined(vehicle.healthDrain))
       return false;
-    }
   }
 
   return true;

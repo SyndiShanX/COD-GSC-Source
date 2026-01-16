@@ -14,20 +14,20 @@ stealth_corpse_system_main() {
 }
 
 /************************************************************************************************************/
-
 /*													SETUP													*/
 /************************************************************************************************************/
-
 stealth_corpse_system_init() {
-  assertEX(isDefined(level._stealth), "There is no level._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::main() in your level load first");
+  assertEX(isdefined(level._stealth), "There is no level._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::main() in your level load first");
 
   //these are for levels of awareness about a corpse
   flag_init("_stealth_found_corpse");
 
+  /#
   thread stealth_flag_debug_print("_stealth_found_corpse");
+  # /
 
-  //corpse detection initilization
-  level._stealth.logic.corpse = spawnStruct();
+    //corpse detection initilization
+    level._stealth.logic.corpse = spawnstruct();
   level._stealth.logic.corpse.last_pos = undefined;
   level._stealth.logic.corpse.distances = [];
 
@@ -38,7 +38,7 @@ stealth_corpse_system_init() {
   stealth_corpse_default_forget_time();
   stealth_corpse_default_reset_time();
 
-  level._stealth.behavior.corpse = spawnStruct();
+  level._stealth.behavior.corpse = spawnstruct();
 }
 
 stealth_corpse_default_distances() {
@@ -53,9 +53,8 @@ stealth_corpse_default_distances() {
 }
 
 stealth_corpse_set_distances(array) {
-  foreach(key, value in array) {
-    level._stealth.logic.corpse.distances[key] = value;
-  }
+  foreach(key, value in array)
+  level._stealth.logic.corpse.distances[key] = value;
 
   //this is good for optimization
   level._stealth.logic.corpse.player_distsqrd = squared(level._stealth.logic.corpse.distances["player_dist"]);

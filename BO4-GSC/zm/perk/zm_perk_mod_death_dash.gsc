@@ -11,6 +11,7 @@
 #include scripts\core_common\throttle_shared;
 #include scripts\zm\perk\zm_perk_death_dash;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_mod_death_dash;
 
 autoexec __init__system__() {
@@ -22,7 +23,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_death_dash", "mod_death_dash", # "perk_death_dash", # "specialty_death_dash", 3000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_death_dash", "mod_death_dash", #"perk_death_dash", #"specialty_death_dash", 3000);
   zm_perks::register_perk_clientfields(#"specialty_mod_death_dash", &register_clientfield, &set_clientfield);
   zm_perks::register_perk_threads(#"specialty_mod_death_dash", &give_perk, &take_perk);
 }
@@ -47,7 +48,7 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_6607df78() {
-  self endon(#"death", # "hash_3e32f308aae32783");
+  self endon(#"death", #"hash_3e32f308aae32783");
   level endon(#"end_game");
 
   while(true) {
@@ -67,15 +68,15 @@ function_6607df78() {
       }
 
       switch (ai_zombie.zm_ai_category) {
-        case # "heavy":
-        case # "miniboss":
-        case # "enhanced":
+        case #"heavy":
+        case #"miniboss":
+        case #"enhanced":
           if(!(isDefined(ai_zombie.knockdown) && ai_zombie.knockdown)) {
             ai_zombie ai::stun();
           }
 
           break;
-        case # "popcorn":
+        case #"popcorn":
           ai_zombie.var_96d5504c = 1;
           [
             [self.var_3dd38cd4]
@@ -83,7 +84,7 @@ function_6607df78() {
           ai_zombie thread zm_perk_death_dash::function_c1c51837(self);
           ai_zombie.var_96d5504c = undefined;
           break;
-        case # "basic":
+        case #"basic":
           ai_zombie zombie_utility::setup_zombie_knockdown(self);
           break;
       }

@@ -14,9 +14,8 @@ init() {
   if(!isDefined(level.riotshield_name)) {
     level.riotshield_name = "riotshield_mp";
 
-    if(isDefined(level.is_zombie_level) && level.is_zombie_level) {
+    if(isDefined(level.is_zombie_level) && level.is_zombie_level)
       level.riotshield_name = "riotshield_zm";
-    }
   }
 
   level.deployedshieldmodel = "t6_wpn_shield_carry_world";
@@ -104,9 +103,8 @@ trackriotshield() {
     if(newweapon == level.riotshield_name) {
       refresh_attach = 1;
 
-      if(isDefined(self.riotshieldentity)) {
+      if(isDefined(self.riotshieldentity))
         self notify("destroy_riotshield");
-      }
 
       if(self.hasriotshield) {
         if(isDefined(self.riotshieldtakeweapon)) {
@@ -115,37 +113,30 @@ trackriotshield() {
         }
       }
 
-      if(isvalidnonshieldweapon(currentweapon)) {
+      if(isvalidnonshieldweapon(currentweapon))
         self.lastnonshieldweapon = currentweapon;
-      }
     }
 
-    if(self.hasriotshield || refresh_attach == 1) {
+    if(self.hasriotshield || refresh_attach == 1)
       self refreshshieldattachment();
-    }
   }
 }
 
 isvalidnonshieldweapon(weapon) {
-  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon)) {
+  if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon))
     return false;
-  }
 
-  if(maps\mp\killstreaks\_killstreak_weapons::isheldkillstreakweapon(weapon)) {
+  if(maps\mp\killstreaks\_killstreak_weapons::isheldkillstreakweapon(weapon))
     return false;
-  }
 
-  if(maps\mp\killstreaks\_killstreak_weapons::isgameplayweapon(weapon)) {
+  if(maps\mp\killstreaks\_killstreak_weapons::isgameplayweapon(weapon))
     return false;
-  }
 
-  if(weapon == "none") {
+  if(weapon == "none")
     return false;
-  }
 
-  if(isweaponequipment(weapon)) {
+  if(isweaponequipment(weapon))
     return false;
-  }
 
   return true;
 }
@@ -173,15 +164,13 @@ resetreconmodelvisibility(owner) {
       isenemy = 1;
 
       if(level.teambased) {
-        if(level.players[i].team == owner.team) {
+        if(level.players[i].team == owner.team)
           isenemy = 0;
-        }
       } else if(level.players[i] == owner)
         isenemy = 0;
 
-      if(isenemy) {
+      if(isenemy)
         self setvisibletoplayer(level.players[i]);
-      }
     }
   }
 }
@@ -192,9 +181,8 @@ resetreconmodelonevent(eventname, owner) {
   for(;;) {
     level waittill(eventname, newowner);
 
-    if(isDefined(newowner)) {
+    if(isDefined(newowner))
       owner = newowner;
-    }
 
     self resetreconmodelvisibility(owner);
   }
@@ -206,7 +194,7 @@ attachreconmodel(modelname, owner) {
   }
   reconmodel = spawn("script_model", self.origin);
   reconmodel.angles = self.angles;
-  reconmodel setModel(modelname);
+  reconmodel setmodel(modelname);
   reconmodel.model_name = modelname;
   reconmodel linkto(self);
   reconmodel setcontents(0);
@@ -220,7 +208,7 @@ spawnriotshieldcover(origin, angles) {
   shield_ent = spawn("script_model", origin, 1);
   shield_ent.targetname = "riotshield_mp";
   shield_ent.angles = angles;
-  shield_ent setModel(level.deployedshieldmodel);
+  shield_ent setmodel(level.deployedshieldmodel);
   shield_ent setowner(self);
   shield_ent.owner = self;
   shield_ent.team = self.team;
@@ -255,19 +243,17 @@ watchriotshielddeploy() {
       assert(!isDefined(self.riotshieldretrievetrigger));
       assert(!isDefined(self.riotshieldentity));
 
-      if(level.gametype != "shrp") {
+      if(level.gametype != "shrp")
         assert(primaries.size > 0);
-      }
 
       shield_ent setclientfield("riotshield_state", 1);
       shield_ent.reconmodel setclientfield("riotshield_state", 1);
 
       if(level.gametype != "shrp") {
-        if(self.lastnonshieldweapon != "none" && self hasweapon(self.lastnonshieldweapon)) {
+        if(self.lastnonshieldweapon != "none" && self hasweapon(self.lastnonshieldweapon))
           self switchtoweapon(self.lastnonshieldweapon);
-        } else {
+        else
           self switchtoweapon(primaries[0]);
-        }
       }
 
       if(!self hasweapon("knife_held_mp")) {
@@ -290,9 +276,8 @@ watchriotshielddeploy() {
   } else
     placement_hint = 1;
 
-  if(placement_hint) {
+  if(placement_hint)
     self setriotshieldfailhint();
-  }
 }
 
 riotshielddistancetest(origin) {
@@ -321,14 +306,12 @@ watchdeployedriotshieldents() {
 
   self waittill("destroy_riotshield");
 
-  if(isDefined(self.riotshieldretrievetrigger)) {
+  if(isDefined(self.riotshieldretrievetrigger))
     self.riotshieldretrievetrigger delete();
-  }
 
   if(isDefined(self.riotshieldentity)) {
-    if(isDefined(self.riotshieldentity.reconmodel)) {
+    if(isDefined(self.riotshieldentity.reconmodel))
       self.riotshieldentity.reconmodel delete();
-    }
 
     self.riotshieldentity connectpaths();
     self.riotshieldentity delete();
@@ -351,22 +334,20 @@ watchdeployedriotshielddamage() {
     assert(isDefined(self.owner) && isDefined(self.owner.team));
 
     if(isplayer(attacker)) {
-      if(level.teambased && attacker.team == self.owner.team && attacker != self.owner) {
+      if(level.teambased && attacker.team == self.owner.team && attacker != self.owner)
         continue;
-      }
     }
 
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       damage = damage * getdvarfloat(#"riotshield_melee_damage_scale");
-    } else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
+    else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET")
       damage = damage * getdvarfloat(#"riotshield_bullet_damage_scale");
-    } else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+    else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH")
       damage = damage * getdvarfloat(#"riotshield_explosive_damage_scale");
-    } else if(type == "MOD_IMPACT") {
+    else if(type == "MOD_IMPACT")
       damage = damage * getdvarfloat(#"riotshield_projectile_damage_scale");
-    } else if(type == "MOD_CRUSH") {
+    else if(type == "MOD_CRUSH")
       damage = damagemax;
-    }
 
     self.damagetaken = self.damagetaken + damage;
 
@@ -381,22 +362,19 @@ damagethendestroyriotshield(attacker, weaponname) {
   self notify("damageThenDestroyRiotshield");
   self endon("death");
 
-  if(isDefined(self.owner.riotshieldretrievetrigger)) {
+  if(isDefined(self.owner.riotshieldretrievetrigger))
     self.owner.riotshieldretrievetrigger delete();
-  }
 
-  if(isDefined(self.reconmodel)) {
+  if(isDefined(self.reconmodel))
     self.reconmodel delete();
-  }
 
   self connectpaths();
   self.owner.riotshieldentity = undefined;
   self notsolid();
   self setclientfield("riotshield_state", 2);
 
-  if(isDefined(attacker) && isDefined(weaponname) && attacker != self.owner && isplayer(attacker)) {
+  if(isDefined(attacker) && isDefined(weaponname) && attacker != self.owner && isplayer(attacker))
     maps\mp\_scoreevents::processscoreevent("destroyed_shield", attacker, self.owner, weaponname);
-  }
 
   wait(getdvarfloat(#"riotshield_destroyed_cleanup_time"));
   self delete();

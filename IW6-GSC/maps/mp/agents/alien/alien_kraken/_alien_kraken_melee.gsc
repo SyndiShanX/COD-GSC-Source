@@ -35,9 +35,8 @@ main() {
       break;
   }
 
-  if(var_0 == gettime()) {
+  if(var_0 == gettime())
     wait 0.05;
-  }
 
   self notify("melee_complete");
 }
@@ -48,9 +47,8 @@ charge() {
   level notify("dlc_vo_notify", "kraken_vo", "kraken_weak");
   common_scripts\utility::flag_clear("fx_kraken_water");
 
-  foreach(var_1 in self.tentacles) {
-    var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::retract();
-  }
+  foreach(var_1 in self.tentacles)
+  var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::retract();
 
   var_3 = getsideanimstate("charge_");
   var_4 = "charge_complete";
@@ -62,9 +60,8 @@ charge() {
   self setscriptablepartstate("body", "heat_charge_body_fx_01");
   thread maps\mp\agents\alien\alien_kraken\_alien_kraken::play_kraken_eyeglow1_fx();
 
-  while(gettime() < var_6) {
+  while(gettime() < var_6)
     wait 0.05;
-  }
 
   self.damage_multiplier = maps\mp\agents\alien\alien_kraken\_alien_kraken::getkrakendamagemultiplier();
   self.kraken_heated = 1;
@@ -85,9 +82,8 @@ playloopanim(var_0, var_1) {
   self endon(var_1);
   self endon("end_loop_anim");
 
-  for(;;) {
+  for(;;)
     playanim(var_0, 1);
-  }
 }
 
 playheatanims(var_0) {
@@ -149,9 +145,8 @@ heat() {
 
   maps\mp\agents\alien\alien_kraken\_alien_kraken::waitforidletentacles();
 
-  foreach(var_6 in self.tentacles) {
-    var_6 notify(var_4);
-  }
+  foreach(var_6 in self.tentacles)
+  var_6 notify(var_4);
 
   self notify(var_4);
   thread reset_deck_fx(var_2, var_3);
@@ -207,9 +202,8 @@ smash() {
   common_scripts\utility::flag_set("fx_kraken_water");
   var_0 = "smash";
 
-  if(isDefined(level.kraken.anim_state_modifier)) {
+  if(isDefined(level.kraken.anim_state_modifier))
     var_0 = var_0 + ("_" + level.kraken.anim_state_modifier);
-  }
 
   level notify("dlc_vo_notify", "warn_kraken_attack");
   self.tentacles[self.smash_tentacle_name] thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::smash(self.smash_trigger);
@@ -289,9 +283,8 @@ playpostureanim(var_0) {
 death() {
   thread kraken_death_music();
 
-  foreach(var_1 in self.tentacles) {
-    var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::death();
-  }
+  foreach(var_1 in self.tentacles)
+  var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::death();
 
   playanim("death", 0, ::handledeathnotetracks);
 }
@@ -312,9 +305,8 @@ kraken_death_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing")) {
+    if(!common_scripts\utility::flag("exfil_music_playing"))
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc2_kraken_death");
-    }
   }
 }
 
@@ -389,9 +381,8 @@ playintroanim() {
 }
 
 playemergeanim() {
-  foreach(var_1 in self.tentacles) {
-    thread extendtentacle(var_1, 1);
-  }
+  foreach(var_1 in self.tentacles)
+  thread extendtentacle(var_1, 1);
 
   var_3 = "emerge_" + level.alien_types["kraken"].attributes[self.stage]["ship_side"];
   thread play_emerge_music();
@@ -531,9 +522,8 @@ submerge() {
   common_scripts\utility::flag_set("fx_kraken_water");
   var_0 = getsideanimstate("emp_attack_");
 
-  foreach(var_2 in self.tentacles) {
-    var_2 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::emp();
-  }
+  foreach(var_2 in self.tentacles)
+  var_2 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::emp();
 
   level notify("dlc_vo_notify", "kraken_vo", "warn_emp");
   playanim(var_0, 0, ::handleempnotetracks);
@@ -543,9 +533,8 @@ submerge() {
   var_6 = "emp_loop_complete";
   thread playloopanim(var_0, var_6);
 
-  while(gettime() < var_5) {
+  while(gettime() < var_5)
     wait 0.05;
-  }
 
   self notify(var_6);
   thread kraken_submerge_music();
@@ -616,22 +605,19 @@ performempdamage() {
     if(!isDefined(var_5.crafted_items)) {
       continue;
     }
-    if(isDefined(var_5.crafted_items["alien_crafting_hypno_trap"])) {
+    if(isDefined(var_5.crafted_items["alien_crafting_hypno_trap"]))
       empattempttodestroydeployable(var_5.crafted_items["alien_crafting_hypno_trap"], var_1.origin);
-    }
 
-    if(isDefined(var_5.crafted_items["alien_crafting_tesla_trap"])) {
+    if(isDefined(var_5.crafted_items["alien_crafting_tesla_trap"]))
       empattempttodestroydeployable(var_5.crafted_items["alien_crafting_tesla_trap"], var_1.origin);
-    }
   }
 
   empprocessdeployablesarray(level.turrets, var_1.origin);
   empprocessdeployablesarray(level.placedims, var_1.origin);
   empprocessdeployablesarray(level.balldrones, var_1.origin);
 
-  if(isDefined(level.alien_types[self.alien_type].attributes[self.stage]["emp_notify"])) {
+  if(isDefined(level.alien_types[self.alien_type].attributes[self.stage]["emp_notify"]))
     self notify(level.alien_types[self.alien_type].attributes[self.stage]["emp_notify"]);
-  }
 }
 
 performempdamage_on_smash(var_0) {
@@ -648,21 +634,19 @@ performempdamage_on_smash(var_0) {
     if(isDefined(var_3.crafted_items["alien_crafting_hypno_trap"])) {
       var_4 = var_3.crafted_items["alien_crafting_hypno_trap"];
 
-      if(!isarray(var_4)) {
+      if(!isarray(var_4))
         var_1 = common_scripts\utility::add_to_array(var_1, var_4);
-      } else {
+      else
         var_1 = common_scripts\utility::array_combine(var_1, var_4);
-      }
     }
 
     if(isDefined(var_3.crafted_items["alien_crafting_tesla_trap"])) {
       var_4 = var_3.crafted_items["alien_crafting_tesla_trap"];
 
-      if(!isarray(var_4)) {
+      if(!isarray(var_4))
         var_1 = common_scripts\utility::add_to_array(var_1, var_4);
-      } else {
+      else
         var_1 = common_scripts\utility::array_combine(var_1, var_4);
-      }
     }
   }
 
@@ -670,18 +654,16 @@ performempdamage_on_smash(var_0) {
   var_1 = common_scripts\utility::array_combine(var_1, level.placedims);
   var_1 = common_scripts\utility::array_combine(var_1, level.balldrones);
 
-  if(var_1.size > 0) {
+  if(var_1.size > 0)
     empsmash_processdeployablesarray(var_1, var_0);
-  }
 }
 
 empsmash_processdeployablesarray(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3) && isDefined(var_3.origin)) {
       if(distance2dsquared(var_3.origin, var_1) < 40000) {
-        if(!isDefined(var_3.carriedby)) {
+        if(!isDefined(var_3.carriedby))
           var_3 notify("death");
-        }
       }
     }
   }
@@ -704,17 +686,15 @@ doempdisables(var_0) {
 }
 
 empprocessdeployablesarray(var_0, var_1) {
-  foreach(var_3 in var_0) {
-    empattempttodestroydeployable(var_3, var_1);
-  }
+  foreach(var_3 in var_0)
+  empattempttodestroydeployable(var_3, var_1);
 }
 
 empattempttodestroydeployable(var_0, var_1) {
   registeremptrace();
 
-  if(isDefined(var_0) && !isDefined(var_0.carriedby) && bullettracepassed(var_1, var_0.origin + (0, 0, 20), 0, var_0)) {
+  if(isDefined(var_0) && !isDefined(var_0.carriedby) && bullettracepassed(var_1, var_0.origin + (0, 0, 20), 0, var_0))
     var_0 notify("death");
-  }
 }
 
 registeremptrace() {
@@ -730,9 +710,8 @@ registeremptrace() {
 
 empdestroydeployables(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(bullettracepassed(var_1, var_3.origin, 0, var_3)) {
+    if(bullettracepassed(var_1, var_3.origin, 0, var_3))
       var_3 dodamage(1000000, var_1, self, self, "MOD_EXPLOSIVE");
-    }
   }
 }
 
@@ -744,11 +723,10 @@ getsideanimstate(var_0) {
 handleempnotetracks(var_0, var_1, var_2, var_3) {
   switch (var_0) {
     case "kra_scream_int":
-      if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
+      if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port")
         common_scripts\utility::exploder(3);
-      } else {
+      else
         common_scripts\utility::exploder(4);
-      }
 
       break;
     case "kra_scream":

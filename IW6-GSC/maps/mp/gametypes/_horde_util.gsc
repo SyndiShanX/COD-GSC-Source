@@ -18,31 +18,26 @@ isOnHumanTeam(player) {
 getNumPlayers() {
   numPlayers = 0;
 
-  if(!isDefined(level.players)) {
+  if(!isDefined(level.players))
     return 0;
-  }
 
   foreach(player in level.players) {
-    if(isOnHumanTeam(player)) {
+    if(isOnHumanTeam(player))
       numPlayers++;
-    }
   }
 
   return numPlayers;
 }
 
 isSpecialRound(roundNumber) {
-  if(!isDefined(roundNumber)) {
+  if(!isDefined(roundNumber))
     roundNumber = level.currentRoundNumber;
-  }
 
-  if(!level.enableSpecialRound) {
+  if(!level.enableSpecialRound)
     return false;
-  }
 
-  if((roundNumber % 5) == 1) {
+  if((roundNumber % 5) == 1)
     return true;
-  }
 
   return false;
 }
@@ -53,18 +48,16 @@ isDogRound() {
 
 showTeamSplashHorde(splash) {
   foreach(teamMate in level.players) {
-    if(isOnHumanTeam(teamMate) && isReallyAlive(teamMate)) {
+    if(isOnHumanTeam(teamMate) && isReallyAlive(teamMate))
       teamMate thread maps\mp\gametypes\_hud_message::SplashNotify(splash);
-    }
   }
 }
 
 hasAgentSquadMember(player) {
   hasAgentSquadMember = false;
 
-  if(IsAgent(player)) {
+  if(IsAgent(player))
     return hasAgentSquadMember;
-  }
 
   foreach(killstreak in player.pers["killstreaks"]) {
     if(isDefined(killstreak) && isDefined(killstreak.streakName) && killstreak.available && (killstreak.streakName == "agent")) {
@@ -79,17 +72,14 @@ hasAgentSquadMember(player) {
 getPlayerWeaponHorde(player) {
   weaponName = player GetCurrentPrimaryWeapon();
 
-  if(isDefined(player.changingWeapon)) {
+  if(isDefined(player.changingWeapon))
     weaponName = player.changingWeapon;
-  }
 
-  if(!maps\mp\gametypes\_weapons::isPrimaryWeapon(weaponName)) {
+  if(!maps\mp\gametypes\_weapons::isPrimaryWeapon(weaponName))
     weaponName = player getLastWeapon();
-  }
 
-  if(!player HasWeapon(weaponName)) {
+  if(!player HasWeapon(weaponName))
     weaponName = player maps\mp\killstreaks\_killstreaks::getFirstPrimaryWeapon();
-  }
 
   return weaponName;
 }
@@ -127,9 +117,8 @@ hordeShowDropLocations() {
 
   while(true) {
     if(GetDvarInt("scr_hordeShowDropLocations") > 0) {
-      foreach(dropLocation in level.hordeDropLocations) {
-        drawDropLocation(dropLocation);
-      }
+      foreach(dropLocation in level.hordeDropLocations)
+      drawDropLocation(dropLocation);
     }
 
     if(GetDvarInt("scr_hordeGiveIntelReward") > 0) {

@@ -41,7 +41,7 @@ wait_for_initial_conditions() {
   foreach(struct in a_s_mcguffin) {
     m_temp = spawn("script_model", struct.origin, 0);
     m_temp.targetname = "sq_bg_macguffin";
-    m_temp setModel(struct.model);
+    m_temp setmodel(struct.model);
     m_temp.angles = struct.angles;
     m_temp ghost();
     m_temp ghostindemo();
@@ -61,15 +61,15 @@ sq_bg_macguffin_think() {
   self endon("sq_bg_macguffin_received_by_player");
   self thread maps\mp\zombies\_zm_afterlife::enable_afterlife_prop();
   self.health = 10000;
-  self setCanDamage(1);
+  self setcandamage(1);
   self setforcenocull();
 
   while(true) {
     self waittill("damage", amount, attacker);
 
     if(attacker == level || isplayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
-      playFX(level._effect["ee_skull_shot"], self.origin);
-      self playSound("zmb_powerpanel_activate");
+      playfx(level._effect["ee_skull_shot"], self.origin);
+      self playsound("zmb_powerpanel_activate");
       self thread maps\mp\zombies\_zm_afterlife::disable_afterlife_prop();
       self thread wait_and_hide_sq_bg_macguffin();
     }
@@ -85,9 +85,8 @@ wait_and_hide_sq_bg_macguffin() {
 }
 
 tomahawk_the_macguffin(grenade, n_grenade_charge_power) {
-  if(!isDefined(level.sq_bg_macguffins) || level.sq_bg_macguffins.size <= 0) {
+  if(!isDefined(level.sq_bg_macguffins) || level.sq_bg_macguffins.size <= 0)
     return false;
-  }
 
   foreach(macguffin in level.sq_bg_macguffins) {
     if(distancesquared(macguffin.origin, grenade.origin) < 10000) {
@@ -109,9 +108,8 @@ tomahawk_the_macguffin(grenade, n_grenade_charge_power) {
 give_player_macguffin_upon_receipt(m_tomahawk, m_macguffin) {
   self endon("disconnect");
 
-  while(isDefined(m_tomahawk)) {
+  while(isDefined(m_tomahawk))
     wait 0.05;
-  }
 
   m_macguffin notify("sq_bg_macguffin_received_by_player");
   arrayremovevalue(level.sq_bg_macguffins, m_macguffin);
@@ -136,7 +134,7 @@ check_sq_bg_progress() {
   }
 
   wait 1.0;
-  player playSound("zmb_easteregg_laugh");
+  player playsound("zmb_easteregg_laugh");
 }
 
 play_sq_bg_collected_vo(player) {
@@ -165,14 +163,14 @@ give_sq_bg_reward() {
   if(a_players.size == 1) {
     if(a_players[0] hasweapon("blundergat_zm")) {
       str_reward_weapon = "blundersplat_zm";
-      str_loc = &"ZM_PRISON_SQ_BS";
+      str_loc = & "ZM_PRISON_SQ_BS";
     } else {
       str_reward_weapon = "blundergat_zm";
-      str_loc = &"ZM_PRISON_SQ_BG";
+      str_loc = & "ZM_PRISON_SQ_BG";
     }
   } else {
     str_reward_weapon = "blundergat_zm";
-    str_loc = &"ZM_PRISON_SQ_BG";
+    str_loc = & "ZM_PRISON_SQ_BG";
   }
 
   m_reward_model = spawn_weapon_model(str_reward_weapon, undefined, s_reward_origin.origin, s_reward_origin.angles);
@@ -206,25 +204,22 @@ sq_bg_spawn_rumble() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(player istouching(self)) {
+    if(player istouching(self))
       player setclientfieldtoplayer("rumble_sq_bg", 1);
-    }
   }
 }
 
 take_old_weapon_and_give_reward(current_weapon, reward_weapon, weapon_limit_override) {
-  if(!isDefined(weapon_limit_override)) {
+  if(!isDefined(weapon_limit_override))
     weapon_limit_override = 0;
-  }
 
-  if(weapon_limit_override == 1) {
+  if(weapon_limit_override == 1)
     self takeweapon(current_weapon);
-  } else {
+  else {
     primaries = self getweaponslistprimaries();
 
-    if(isDefined(primaries) && primaries.size >= 2) {
+    if(isDefined(primaries) && primaries.size >= 2)
       self takeweapon(current_weapon);
-    }
   }
 
   self giveweapon(reward_weapon);

@@ -30,14 +30,14 @@
 #namespace zurich_rails;
 
 function skipto_main(str_objective, b_starting) {
-  spawner::add_spawn_function_group("plaza_battle_boss", "targetname", &zurich_plaza_battle::function_8fdd138);
-  spawner::add_spawn_function_group("plaza_battle_intro_redshirts", "targetname", &zurich_plaza_battle::function_adfa2b54);
+  spawner::add_spawn_function_group("plaza_battle_boss", "targetname", & zurich_plaza_battle::function_8fdd138);
+  spawner::add_spawn_function_group("plaza_battle_intro_redshirts", "targetname", & zurich_plaza_battle::function_adfa2b54);
   if(b_starting) {
     load::function_73adcefc();
     zurich_util::init_kane(str_objective, 1);
     zurich_util::function_c049667c(1);
     trigger::use("garage_kane_exit_colortrig");
-    scene::add_scene_func("p7_fxanim_cp_zurich_car_crash_03_bundle", &zurich_street::function_5d018732, "done");
+    scene::add_scene_func("p7_fxanim_cp_zurich_car_crash_03_bundle", & zurich_street::function_5d018732, "done");
     level thread scene::skipto_end("p7_fxanim_cp_zurich_car_crash_03_bundle");
     level thread scene::skipto_end("p7_fxanim_cp_zurich_car_crash_04_bundle");
     level thread scene::skipto_end("p7_fxanim_cp_zurich_car_crash_05_bundle");
@@ -50,13 +50,13 @@ function skipto_main(str_objective, b_starting) {
     level flag::set("rails_triage_regroup_start");
     level flag::set("flag_start_kane_it_won_t_vo_done");
   }
-  scene::add_scene_func("p7_fxanim_cp_zurich_coalescence_tower_door_open_bundle", &zurich_util::function_162b9ea0, "init");
+  scene::add_scene_func("p7_fxanim_cp_zurich_coalescence_tower_door_open_bundle", & zurich_util::function_162b9ea0, "init");
   level scene::init("p7_fxanim_cp_zurich_coalescence_tower_door_open_bundle");
-  array::thread_all(level.players, &function_d5b7d39e);
+  array::thread_all(level.players, & function_d5b7d39e);
   level thread function_302750ab();
   level thread namespace_67110270::function_99ab0b3b();
   battlechatter::function_d9f49fba(0);
-  if(isDefined(level.bzm_zurichdialogue1_2callback)) {
+  if(isdefined(level.bzm_zurichdialogue1_2callback)) {
     level thread[[level.bzm_zurichdialogue1_2callback]]();
   }
   level thread function_51e389ee(b_starting);
@@ -115,7 +115,7 @@ function function_5ea42950() {
   level endon("hash_a835a95b");
   nd_spline = getvehiclenode("rails_hunter_spline", "targetname");
   s_look = struct::get("rails_hunter_look_spot");
-  while(!zurich_util::function_f8645b6(-1, s_look.origin, 0.6)) {
+  while (!zurich_util::function_f8645b6(-1, s_look.origin, 0.6)) {
     wait(0.05);
   }
   ai_hunter = nd_spline zurich_util::function_a569867c();

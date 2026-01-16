@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace zm_sq_modules;
 
 function_d8383812(id, version, script_noteworthy, speed, soul_fx, var_2e845a89, var_925337f4, var_6a1c7649, var_b8d19839 = 0) {
@@ -14,12 +15,12 @@ function_d8383812(id, version, script_noteworthy, speed, soul_fx, var_2e845a89, 
   }
 
   level.var_e4336230["sc_" + id] = {
-    #script_noteworthy: script_noteworthy,
-    #speed: speed,
-    #soul_fx: soul_fx,
-    #var_2e845a89: var_2e845a89,
-    #var_925337f4: var_925337f4,
-    #var_6a1c7649: var_6a1c7649,
+    #script_noteworthy: script_noteworthy, 
+    #speed: speed, 
+    #soul_fx: soul_fx, 
+    #var_2e845a89: var_2e845a89, 
+    #var_925337f4: var_925337f4, 
+    #var_6a1c7649: var_6a1c7649, 
     #var_b8d19839: var_b8d19839
   };
   clientfield::register("actor", "sc_" + id, version, 1, "int", &soul_capture, 0, 0);

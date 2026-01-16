@@ -186,18 +186,17 @@ init() {
   level thread onPlayerConnect();
 }
 
+
 precacheShaders() {
   precacheShader("specialty_blastshield");
 }
 
 givePerk(perkName) {
   if(IsSubStr(perkName, "_mp")) {
-    if(perkName == "frag_grenade_mp") {
+    if(perkName == "frag_grenade_mp")
       self SetOffhandPrimaryClass("frag");
-    }
-    if(perkName == "throwingknife_mp") {
+    if(perkName == "throwingknife_mp")
       self SetOffhandPrimaryClass("throwingknife");
-    }
 
     self _giveWeapon(perkName, 0);
     self giveStartAmmo(perkName);
@@ -212,13 +211,13 @@ givePerk(perkName) {
   }
 
   self _setPerk(perkName);
+
 }
 
 validatePerk(perkIndex, perkName) {
   if(getDvarInt("scr_game_perks") == 0) {
-    if(tableLookup("mp/perkTable.csv", 1, perkName, 5) != "equipment") {
+    if(tableLookup("mp/perkTable.csv", 1, perkName, 5) != "equipment")
       return "specialty_null";
-    }
   }
 
   /* Validation disabled for now	
@@ -233,7 +232,7 @@ validatePerk(perkIndex, perkName) {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
@@ -246,7 +245,7 @@ onPlayerSpawned() {
   self.weaponList = [];
   self.omaClassChanged = false;
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     self.omaClassChanged = false;
@@ -256,7 +255,7 @@ onPlayerSpawned() {
 
 drawLine(start, end, timeSlice) {
   drawTime = int(timeSlice * 20);
-  for(time = 0; time < drawTime; time++) {
+  for (time = 0; time < drawTime; time++) {
     line(start, end, (1, 0, 0), false, 1);
     wait(0.05);
   }
@@ -271,29 +270,25 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   if(isPrimaryDamage(meansOfDeath)) {
     assert(isDefined(attacker));
 
-    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest")) {
+    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))
       damageAdd += 0;
-    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
+    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage"))
       damageAdd += damage * level.bulletDamageMod;
-    } else if(victim _hasPerk("specialty_armorvest")) {
+    else if(victim _hasPerk("specialty_armorvest"))
       damageAdd -= damage * (1 - level.armorVestMod);
-    }
 
-    if(isPlayer(attacker) && attacker _hasPerk("specialty_fmj") && victim _hasPerk("specialty_armorvest")) {
+    if(isPlayer(attacker) && attacker _hasPerk("specialty_fmj") && victim _hasPerk("specialty_armorvest"))
       damageAdd += damage * level.hollowPointDamageMod;
-    }
   } else if(isExplosiveDamage(meansOfDeath)) {
-    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && victim _hasPerk("_specialty_blastshield")) {
+    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && victim _hasPerk("_specialty_blastshield"))
       damageAdd += 0;
-    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
+    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage"))
       damageAdd += damage * level.explosiveDamageMod;
-    } else if(victim _hasPerk("_specialty_blastshield")) {
+    else if(victim _hasPerk("_specialty_blastshield"))
       damageAdd -= damage * (1 - level.blastShieldMod);
-    }
 
-    if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose")) {
+    if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose"))
       damageAdd += damage * level.dangerCloseMod;
-    }
   } else if(meansOfDeath == "MOD_FALLING") {
     if(victim _hasPerk("specialty_falldamage")) {
       //eventually set a msg to do a roll
@@ -302,12 +297,11 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
     }
   }
 
-  if((victim.xpScaler == 2 && isDefined(attacker)) && (isPlayer(attacker) || attacker.classname == "scrip_vehicle")) {
+  if((victim.xpScaler == 2 && isDefined(attacker)) && (isPlayer(attacker) || attacker.classname == "scrip_vehicle"))
     damageAdd += 200;
-  }
 
   if(victim _hasperk("specialty_combathigh")) {
-    if(isDefined(self.damageBlockedTotal) && (!level.teamBased || (isDefined(attacker) && isDefined(attacker.team) && victim.team != attacker.team))) {
+    if(IsDefined(self.damageBlockedTotal) && (!level.teamBased || (isDefined(attacker) && isDefined(attacker.team) && victim.team != attacker.team))) {
       damageTotal = damage + damageAdd;
       damageBlocked = (damageTotal - (damageTotal / 3));
       self.damageBlockedTotal += damageBlocked;
@@ -353,9 +347,8 @@ cac_selector() {
   /*
   self.detectExplosives = false;
 
-  if( self _hasPerk( "specialty_detectexplosive" ) ) {
+  if( self _hasPerk( "specialty_detectexplosive" ) )
   	self.detectExplosives = true;
-  }
   	
   maps\mp\gametypes\_weapons::setupBombSquad();
   */
@@ -366,9 +359,8 @@ gambitUseTracker() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(getDvarInt("scr_game_perks") != 1) {
+  if(getDvarInt("scr_game_perks") != 1)
     return;
-  }
 
   gameFlagWait("prematch_done");
 

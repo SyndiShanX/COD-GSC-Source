@@ -40,13 +40,13 @@ main(model, type) {
   build_life(999, 500, 1500);
   build_team("allies");
   anim_func = ::setanims;
-  if(isDefined(type) && issubstr(type, "open")) {
+  if(isdefined(type) && issubstr(type, "open"))
     anim_func = ::opentop_anims;
-  }
 
   build_aianims(anim_func, ::set_vehicle_anims);
 
   build_compassicon("automobile", false);
+
 }
 
 #using_animtree("vehicles");
@@ -62,9 +62,8 @@ init_local() {
     //thread maps\_debug::drawTagForever( "tag_antenna2" );
   }
 
-  if(!issubstr(self.model, "opentop")) {
+  if(!issubstr(self.model, "opentop"))
     self hidepart("tag_blood");
-  }
 }
 
 unload_groups() {
@@ -92,6 +91,8 @@ unload_groups() {
   return unload_groups;
 }
 
+
+
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].vehicle_getoutanim = % uaz_driver_exit_into_run_door;
@@ -117,13 +118,14 @@ set_vehicle_anims(positions) {
   return positions;
 }
 
+
+
 #using_animtree("generic_human");
 
 opentop_anims() {
   positions = [];
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -152,9 +154,8 @@ opentop_anims() {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -180,6 +181,8 @@ setanims() {
 
   return positions;
 }
+
+
 
 /*QUAKED script_vehicle_hummer (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

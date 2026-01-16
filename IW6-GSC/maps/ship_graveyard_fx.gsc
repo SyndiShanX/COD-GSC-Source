@@ -215,9 +215,8 @@ main() {
   level._effect["falling_car_bubbles"] = loadfx("fx/_requests/ship_graveyard/underwater_obj_trail_small");
   level._effect["big_wreck_ceiling_collapse"] = loadfx("fx/explosions/wall_explosion_1");
 
-  if(!getdvarint("r_reflectionProbeGenerate")) {
+  if(!getdvarint("r_reflectionProbeGenerate"))
     maps\createfx\ship_graveyard_fx::main();
-  }
 
   maps\createfx\ship_graveyard_sound::main();
 }

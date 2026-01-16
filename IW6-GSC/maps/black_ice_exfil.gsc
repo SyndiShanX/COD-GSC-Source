@@ -95,18 +95,16 @@ main() {
   var_26 = common_scripts\utility::array_combine(var_26, level._exfil_heli);
   var_26 = common_scripts\utility::array_combine(var_27, var_26);
 
-  foreach(var_29 in var_26) {
-    var_29 linkto(var_24);
-  }
+  foreach(var_29 in var_26)
+  var_29 linkto(var_24);
 
   var_26 = common_scripts\utility::array_add(var_26, var_1);
   var_24 thread maps\_anim::anim_single(var_26, "ladder_chase");
   var_24 thread exfil_teleport(var_1);
   var_31 = [var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21];
 
-  foreach(var_33 in var_31) {
-    thread maps\black_ice_fx::fx_exfil_lifeboat_wake(var_33);
-  }
+  foreach(var_33 in var_31)
+  thread maps\black_ice_fx::fx_exfil_lifeboat_wake(var_33);
 
   thread ladder_chase_explosion_fx();
   thread player_explosion_reaction();
@@ -147,10 +145,10 @@ main() {
     var_38.alpha = 1;
     var_38.foreground = 0;
     wait 1.2;
-    setdvar("ui_deadquote", &"BLACK_ICE_EXFIL_LATE");
+    setdvar("ui_deadquote", & "BLACK_ICE_EXFIL_LATE");
     thread maps\_utility::missionfailedwrapper();
   } else if(common_scripts\utility::flag("flag_ladder_jumpfail_nojump")) {
-    setdvar("ui_deadquote", &"BLACK_ICE_EXFIL_NOJUMP");
+    setdvar("ui_deadquote", & "BLACK_ICE_EXFIL_NOJUMP");
     player_fail_rigexplode();
   } else {
     maps\_utility::autosave_by_name("exfil_end");
@@ -313,11 +311,10 @@ player_viewkick_distance(var_0, var_1, var_2, var_3, var_4) {
 }
 
 player_rumble_distance(var_0, var_1, var_2, var_3, var_4) {
-  if(var_0 < var_2) {
+  if(var_0 < var_2)
     level.player playrumbleonentity(var_1);
-  } else if(var_0 < var_4) {
+  else if(var_0 < var_4)
     level.player playrumbleonentity(var_3);
-  }
 }
 
 player_push_distance(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -494,9 +491,8 @@ ally_sprint_end() {
 }
 
 exfil_anims_cornering(var_0, var_1, var_2, var_3) {
-  if(var_3 == 0 && level.start_point != "exfil") {
+  if(var_3 == 0 && level.start_point != "exfil")
     var_2[var_3] waittill("notify_command_end_done");
-  }
 
   var_0 maps\_anim::anim_reach_solo(var_2[var_3], "exfil_corner_cut");
   var_0 maps\_anim::anim_single_solo(var_2[var_3], "exfil_corner_cut", undefined, 0.1);
@@ -545,7 +541,7 @@ rubberband_near_ally_steam_reaction_runout(var_0, var_1) {
     maps\_anim::anim_set_rate_single(var_0[0], "exfil_steam_react", var_16);
 
     if(var_11 > var_5) {
-      setdvar("ui_deadquote", &"BLACK_ICE_SPRINT_ESCAPE");
+      setdvar("ui_deadquote", & "BLACK_ICE_SPRINT_ESCAPE");
       player_fail_rigexplode();
     }
 
@@ -564,11 +560,10 @@ rubberband_far_ally_steam_reaction_runout(var_0) {
     var_4 = abs(var_3 - var_2);
 
     if(var_4 > var_1) {
-      if(var_3 > var_2) {
+      if(var_3 > var_2)
         var_3 = var_3 - var_1;
-      } else {
+      else
         var_3 = var_3 + var_1;
-      }
     } else
       var_3 = var_2;
 
@@ -587,19 +582,17 @@ ally_rubber_banding_solo(var_0) {
   for(;;) {
     var_4 = distance(self.origin, var_0.origin);
 
-    if(var_4 > var_3) {
+    if(var_4 > var_3)
       var_4 = var_3;
-    } else if(var_4 < 0) {
+    else if(var_4 < 0)
       var_4 = 0;
-    }
 
     var_5 = var_4 / var_3;
     var_6 = var_2 - (var_2 - var_1) * var_5;
     self.moveplaybackrate = var_6;
 
-    if(self.moveplaybackrate > 1.2) {
+    if(self.moveplaybackrate > 1.2)
       self.moveplaybackrate = 1.2;
-    }
 
     wait 0.05;
   }
@@ -616,13 +609,12 @@ player_rubber_banding_solo(var_0) {
     var_5 = distance(self.origin, var_0.origin);
 
     if(var_5 > var_4) {
-      setdvar("ui_deadquote", &"BLACK_ICE_FOLLOW_ALLIES");
+      setdvar("ui_deadquote", & "BLACK_ICE_FOLLOW_ALLIES");
       thread player_fail_rigexplode();
     } else if(var_5 > var_3)
       var_5 = var_3;
-    else if(var_5 < 0) {
+    else if(var_5 < 0)
       var_5 = 0;
-    }
 
     var_6 = var_5 / var_3;
     var_7 = var_2 - (var_2 - var_1) * var_6;
@@ -656,9 +648,8 @@ fires() {
   var_0 = ["exfil_fire"];
   var_1 = common_scripts\utility::getstructarray("struct_exfil_fires", "targetname");
 
-  foreach(var_3 in var_1) {
-    playFX(common_scripts\utility::getfx(common_scripts\utility::random(var_0)), var_3.origin + (0, 0, -200));
-  }
+  foreach(var_3 in var_1)
+  playFX(common_scripts\utility::getfx(common_scripts\utility::random(var_0)), var_3.origin + (0, 0, -200));
 }
 
 rubberband_ladder_chase(var_0) {
@@ -685,11 +676,10 @@ rubberband_ladder_chase(var_0) {
     setsaveddvar("g_speed", var_9);
     maps\_anim::anim_set_rate(var_0, "ladder_chase", var_13);
 
-    if(var_6 < var_1) {
+    if(var_6 < var_1)
       level.jump_distance_allowed = 1;
-    } else {
+    else
       level.jump_distance_allowed = 0;
-    }
 
     wait(level.timestep);
   }
@@ -742,19 +732,16 @@ ladder_player_jumpcheck() {
 
   while(!common_scripts\utility::flag("flag_ladder_jump")) {
     if(level.player jumpbuttonpressed()) {
-      if(var_0) {
+      if(var_0)
         var_1 = 1;
-      } else {
+      else
         var_0 = 1;
-      }
     } else {
-      if(var_1) {
+      if(var_1)
         var_1 = 0;
-      }
 
-      if(var_0) {
+      if(var_0)
         var_0 = 0;
-      }
     }
 
     if(common_scripts\utility::flag("flag_ladder_jumpcheck") && var_3 < 10 && var_0 && !var_1 || common_scripts\utility::flag("flag_ladder_autojump")) {
@@ -862,15 +849,13 @@ player_lerp_speed(var_0, var_1, var_2, var_3, var_4) {
 }
 
 player_fail_rigexplode() {
-  if(!common_scripts\utility::flag("flag_player_dying_on_rig")) {
+  if(!common_scripts\utility::flag("flag_player_dying_on_rig"))
     common_scripts\utility::flag_set("flag_player_dying_on_rig");
-  } else {
+  else
     return;
-  }
 
-  if(isDefined(level.jumparms)) {
+  if(isDefined(level.jumparms))
     level.jumparms delete();
-  }
 
   var_0 = maps\_utility::spawn_anim_model("exfil_viewexplosion_source");
   var_0 linktoplayerview(level.player, "tag_origin", (0, 0, 0), (0, 0, 0), 0);
@@ -948,9 +933,8 @@ get_blendtime_from_notetrack(var_0, var_1, var_2, var_3) {
   var_6 = var_0 getanimtime(var_1);
   var_7 = (var_5[0] - var_6) * var_4;
 
-  if(var_7 > var_3) {
+  if(var_7 > var_3)
     var_7 = var_3;
-  }
 
   return var_7;
 }
@@ -1040,15 +1024,12 @@ shrink_pdeck_lights() {
   var_1 = getEntArray("lights_pipedeck_b", "targetname");
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
 
-  foreach(var_4 in var_0) {
-    var_4 setlightradius(12);
-  }
+  foreach(var_4 in var_0)
+  var_4 setlightradius(12);
 
-  foreach(var_4 in var_1) {
-    var_4 setlightradius(12);
-  }
+  foreach(var_4 in var_1)
+  var_4 setlightradius(12);
 
-  foreach(var_4 in var_2) {
-    var_4 setlightradius(12);
-  }
+  foreach(var_4 in var_2)
+  var_4 setlightradius(12);
 }

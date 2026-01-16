@@ -14,14 +14,14 @@
 #namespace zm_bgb_newtonian_negation;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_newtonian_negation", &__init__, undefined, "bgb");
+  system::register("zm_bgb_newtonian_negation", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_newtonian_negation", "time", 1500, &enable, &disable, undefined);
+  bgb::register("zm_bgb_newtonian_negation", "time", 1500, & enable, & disable, undefined);
 }
 
 function enable() {
@@ -36,7 +36,7 @@ function function_7d6ddd3a() {
 }
 
 function disable() {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("hash_7e8cbf8f");
   }
   foreach(player in level.players) {

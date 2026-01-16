@@ -5,17 +5,16 @@
 ********************************/
 
 main() {
-  var_0 = getEntArray("script_model", "classname");
+  var_0 = getentarray("script_model", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_exploder)) {
+    if(isdefined(var_2.script_exploder))
       var_2 thread exploderanim_think();
-    }
   }
 }
 
 exploderanim_think() {
-  for(;;) {
+  for (;;) {
     self waittill("play_exploder_anim");
     thread anim_play();
   }
@@ -25,11 +24,10 @@ anim_play() {
   var_0 = undefined;
   var_1 = strtok(self.targetname, ":;, ");
 
-  if(var_1.size > 1 && isDefined(var_1[1])) {
+  if(var_1.size > 1 && isdefined(var_1[1]))
     var_0 = var_1[1];
-  } else {
+  else
     var_0 = self.model + "_anim";
-  }
 
   var_2 = get_animtree(var_0);
   maps\_utility::assign_animtree(var_2);
@@ -39,7 +37,7 @@ anim_play() {
 get_animtree(var_0) {
   var_1 = undefined;
 
-  for(var_2 = 0; var_2 < level.exploder_animtrees.size; var_2++) {
+  for (var_2 = 0; var_2 < level.exploder_animtrees.size; var_2++) {
     var_3 = getarraykeys(level.scr_anim[level.exploder_animtrees[var_2]]);
 
     if(common_scripts\utility::array_contains(var_3, var_0)) {

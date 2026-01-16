@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  level.fastrope_globals = spawnStruct();
+  level.fastrope_globals = spawnstruct();
   level.fastrope_globals.helicopters = [];
   level.fastrope_globals.animload = [];
   level.fastrope_globals.animload["blackhawk"] = 0;
@@ -48,22 +48,21 @@ play_fastrope_land_sfx(var_0) {
 fastrope_spawner_think() {
   self endon("death");
 
-  if(isDefined(self.script_parameters)) {
+  if(isdefined(self.script_parameters)) {
     var_0 = strtok(self.script_parameters, ":;, ");
 
-    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    for (var_1 = 0; var_1 < var_0.size; var_1++) {
       if(tolower(var_0[var_1]) == "fastrope_seat") {
         var_1++;
         self.fastrope_seat = int(var_0[var_1]);
       }
 
-      if(tolower(var_0[var_1]) == "nounload") {
+      if(tolower(var_0[var_1]) == "nounload")
         self.nounload = 1;
-      }
     }
   }
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned", var_2);
 
     if(maps\_utility::spawn_failed(var_2)) {
@@ -75,9 +74,8 @@ fastrope_spawner_think() {
 }
 
 fastrope_ai_think_hack(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 0.2;
-  }
 
   wait(var_0 - var_1);
   self stopanimscripted();
@@ -94,7 +92,7 @@ fastrope_ai_think(var_0) {
   var_1.ai hide();
   var_0 fastrope_wait_que(var_1);
 
-  if(isDefined(var_0.nounload) && var_0.nounload == 1) {
+  if(isdefined(var_0.nounload) && var_0.nounload == 1) {
     if(var_1.ai.seat_pos < 9) {
       var_0 fastrope_post_unload(var_1);
       var_0.heli waittill("unload_rest");
@@ -120,7 +118,7 @@ fastrope_ai_think(var_0) {
   var_2 = "custom_unload" + var_0.heli.targetname;
   var_3 = "custom_all" + var_0.heli.targetname;
 
-  if(isDefined(level.scr_anim[var_1.ai.animname][var_3])) {
+  if(isdefined(level.scr_anim[var_1.ai.animname][var_3])) {
     self waittillmatch("single anim", "start");
     thread maps\_utility::play_sound_on_entity("fastrope_start_npc");
     var_1 thread common_scripts\utility::play_loop_sound_on_entity("fastrope_loop_npc");
@@ -130,7 +128,7 @@ fastrope_ai_think(var_0) {
     var_1 notify("stop soundfastrope_loop_npc");
     thread maps\_utility::play_sound_on_entity("fastrope_end_npc");
     self unlink();
-  } else if(isDefined(level.scr_anim[var_1.ai.animname][var_2])) {
+  } else if(isdefined(level.scr_anim[var_1.ai.animname][var_2])) {
     thread fastrope_ai_think_hack(getanimlength(level.scr_anim[var_1.ai.animname][var_2]));
     var_0.heli.model thread maps\_anim::anim_single_solo(self, var_2, "tag_detach");
     self waittillmatch("single anim", "start");
@@ -142,9 +140,8 @@ fastrope_ai_think(var_0) {
     var_4 = 45 * var_1.ai.index + 90;
     var_5 = 360 * var_1.ai.spin;
 
-    if(var_1.ai.side == "right") {
+    if(var_1.ai.side == "right")
       var_4 = var_4 + 180;
-    }
 
     self unlink();
     var_1.origin = self.origin;
@@ -183,15 +180,14 @@ fastrope_wait_que(var_0) {
   var_0.ai endon("death");
   fastrope_waiton_helicopter(var_0);
 
-  if(isDefined(level.scr_anim[var_0.ai.animname]["custom_unload" + self.heli.targetname])) {
+  if(isdefined(level.scr_anim[var_0.ai.animname]["custom_unload" + self.heli.targetname])) {
     return;
   }
-  if(isDefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
+  if(isdefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
     return;
   }
-  if(var_0.ai.side == "left") {
+  if(var_0.ai.side == "left")
     wait 0.5;
-  }
 }
 
 #using_animtree("generic_human");
@@ -201,13 +197,13 @@ fastrope_ropethink(var_0) {
   var_2 = "ropeidle" + var_1;
   var_3 = "ropeall" + var_1;
 
-  if(!isDefined(level.scr_anim[self.targetname])) {
+  if(!isdefined(level.scr_anim[self.targetname])) {
     return;
   }
-  if(!(isDefined(level.scr_anim[self.targetname][var_2]) || isDefined(level.scr_anim[self.targetname][var_3]))) {
+  if(!(isdefined(level.scr_anim[self.targetname][var_2]) || isdefined(level.scr_anim[self.targetname][var_3]))) {
     return;
   }
-  if(isDefined(self.rope_dropped[var_1]) && self.rope_dropped[var_1] == 1) {
+  if(isdefined(self.rope_dropped[var_1]) && self.rope_dropped[var_1] == 1) {
     return;
   }
   self.rope_dropped[var_1] = 1;
@@ -229,12 +225,12 @@ fastrope_ropethink(var_0) {
 
   var_5 = spawn("script_model", self.model gettagorigin(var_4));
   var_5.angles = self.model gettagangles(var_4);
-  var_5 setModel(level.models["heli"]["rope"][var_1]);
+  var_5 setmodel(level.models["heli"]["rope"][var_1]);
   var_5.animname = self.animname;
   var_5 useanimtree(#animtree);
   var_5 linkto(self.model, var_4);
 
-  if(isDefined(level.scr_anim[self.targetname][var_3])) {
+  if(isdefined(level.scr_anim[self.targetname][var_3])) {
     var_6 = getanimlength(level.scr_anim[self.targetname][var_3]);
     self.model thread maps\_anim::anim_single_solo(var_5, var_3, var_4);
     wait(var_6 - 1.5);
@@ -245,9 +241,8 @@ fastrope_ropethink(var_0) {
     var_2 = "ropedrop" + var_1;
     self.model thread maps\_anim::anim_single_solo(var_5, var_2, var_4);
 
-    while(self.que.size) {
+    while (self.que.size)
       self waittill("check_fastrope_que");
-    }
 
     wait(self.lasttime);
   }
@@ -277,29 +272,26 @@ fastrope_waiton_helicopter(var_0) {
   var_0.ai endon("death");
   thread fastrope_attach_helicopter(var_0);
 
-  if(!self.heli.inflight) {
+  if(!self.heli.inflight)
     self.heli thread fastrope_heli_fly();
-  }
 
   self.heli endon("overtakenow");
 
-  if(!self.heli.ready) {
+  if(!self.heli.ready)
     self.heli waittill("ready");
-  }
 }
 
 fastrope_attach_helicopter(var_0) {
   var_0.ai endon("death");
   var_0.ai endon("overtakenow");
 
-  for(;;) {
-    if(!self.heli.inflight) {
+  for (;;) {
+    if(!self.heli.inflight)
       self.heli waittill("inflight");
-    }
 
     fastrope_find_seat(var_0.ai);
 
-    if(!isDefined(var_0.ai.seat_index)) {
+    if(!isdefined(var_0.ai.seat_index)) {
       self.heli waittill("seat_open");
       continue;
     } else
@@ -322,7 +314,7 @@ fastrope_attach_helicopter(var_0) {
   self.heli thread fastrope_ropethink(var_0.ai);
   self.heli.model endon("stop_" + var_1);
 
-  if(isDefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
+  if(isdefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
     var_0.ai linkto(self.heli.model, "tag_detach");
     var_0.ai pushplayer(1);
     var_0 linkto(var_0.ai);
@@ -332,22 +324,21 @@ fastrope_attach_helicopter(var_0) {
     return;
   }
 
-  if(isDefined(level.scr_anim[var_0.ai.animname]["custom_ride" + self.heli.targetname])) {
+  if(isdefined(level.scr_anim[var_0.ai.animname]["custom_ride" + self.heli.targetname])) {
     var_0.ai linkto(self.heli.model, "tag_detach");
     var_0.ai pushplayer(1);
     var_0 linkto(var_0.ai);
     self.heli.model maps\_anim::anim_single_solo(var_0.ai, "custom_ride" + self.heli.targetname, "tag_detach");
 
-    if(self.heli.ready) {
+    if(self.heli.ready)
       return;
-    }
   }
 
   self.heli.model thread maps\_anim::anim_loop_solo(var_0.ai, "idle", "tag_detach", "stop_" + var_1);
 }
 
 fastrope_free_seat(var_0) {
-  if(!isDefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
+  if(!isdefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
     self.heli.model notify("stop_" + var_0.ai.seat_index);
     var_0.ai stopanimscripted();
     var_0.origin = var_0.ai.origin;
@@ -361,14 +352,13 @@ fastrope_free_seat(var_0) {
 fastrope_find_seat(var_0) {
   var_0.seat_index = undefined;
 
-  if(isDefined(self.fastrope_seat)) {
-    for(var_1 = 0; var_1 < self.heli.seats.size; var_1++) {
+  if(isdefined(self.fastrope_seat)) {
+    for (var_1 = 0; var_1 < self.heli.seats.size; var_1++) {
       if(self.heli.seats[var_1].pos != self.fastrope_seat) {
         continue;
       }
-      if(isDefined(self.heli.seats[var_1].taken)) {
+      if(isdefined(self.heli.seats[var_1].taken))
         self.heli.seats[var_1].taken.spawner fastrope_find_seat(self.heli.seats[var_1].taken);
-      }
 
       self.heli.seats[var_1].taken = var_0;
       var_0.seat_index = var_1;
@@ -377,8 +367,8 @@ fastrope_find_seat(var_0) {
     }
   }
 
-  for(var_1 = 0; var_1 < self.heli.seats.size; var_1++) {
-    if(isDefined(self.heli.seats[var_1].taken)) {
+  for (var_1 = 0; var_1 < self.heli.seats.size; var_1++) {
+    if(isdefined(self.heli.seats[var_1].taken)) {
       continue;
     }
     self.heli.seats[var_1].taken = var_0;
@@ -397,8 +387,8 @@ fastrope_player_think() {
   wait 0.1;
   var_1 = 0;
 
-  for(var_2 = 0; var_2 < self.seats.size; var_2++) {
-    if(isDefined(self.seats[var_2].taken)) {
+  for (var_2 = 0; var_2 < self.seats.size; var_2++) {
+    if(isdefined(self.seats[var_2].taken)) {
       if(self.seats[var_2].taken != level.player) {
         var_1++;
         continue;
@@ -414,13 +404,11 @@ fastrope_player_think() {
   self.vehicle waittill("reached_wait_node");
   wait 2.5;
 
-  if(getdvar("fastropeunlock") == "") {
+  if(getdvar("fastropeunlock") == "")
     setdvar("fastropeunlock", "0");
-  }
 
-  if(!isDefined(getdvar("fastropeunlock"))) {
+  if(!isdefined(getdvar("fastropeunlock")))
     setdvar("fastropeunlock", "0");
-  }
 
   fastrope_player_viewshift();
   fastrope_player_unload();
@@ -428,9 +416,9 @@ fastrope_player_think() {
 
 play_fast_rope_fx() {
   var_0 = spawn("script_model", level.player.origin);
-  var_0 setModel("tag_origin");
+  var_0 setmodel("tag_origin");
   var_0 linkto(level.player);
-  playFXOnTag(level._effect["rain_drops_fastrope"], var_0, "tag_origin");
+  playfxontag(level._effect["rain_drops_fastrope"], var_0, "tag_origin");
   wait 3;
   var_0 delete();
 }
@@ -438,21 +426,19 @@ play_fast_rope_fx() {
 fastrope_player_viewshift() {
   var_0 = int(getdvar("fastropeunlock"));
 
-  if(!var_0) {
+  if(!var_0)
     fastrope_player_viewshift_lock();
-  } else {
+  else
     fastrope_player_viewshift_nolock();
-  }
 }
 
 fastrope_player_unload() {
   var_0 = int(getdvar("fastropeunlock"));
 
-  if(!var_0) {
+  if(!var_0)
     fastrope_player_unload_lock();
-  } else {
+  else
     fastrope_player_unload_nolock();
-  }
 }
 
 fastrope_player_viewshift_nolock() {
@@ -468,7 +454,7 @@ fastrope_player_unload_nolock() {
   var_1.angles = var_0.angles;
   var_0 linkto(var_1);
   var_2 = 1;
-  var_3 = anglesToForward((0, 233, 0));
+  var_3 = anglestoforward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, 30);
   self.que = common_scripts\utility::array_remove(self.que, level.player);
   thread fastrope_que_check();
@@ -510,7 +496,7 @@ fastrope_player_unload_nolock2() {
   var_1.angles = var_0.angles;
   var_0 linkto(var_1);
   var_2 = 1;
-  var_3 = anglesToForward((0, 233, 0));
+  var_3 = anglestoforward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, 30);
   self.que = common_scripts\utility::array_remove(self.que, level.player);
   thread fastrope_que_check();
@@ -545,7 +531,7 @@ fastrope_player_unload_nolock2() {
 fastrope_player_viewshift_lock() {
   var_0 = level.player.cgocamera;
 
-  if(isDefined(level.player.ropecamera)) {
+  if(isdefined(level.player.ropecamera)) {
     level.player lerpviewangleclamp(1, 0.1, 0.1, 0, 0, 0, 0);
     wait 1;
     level.player playerlinktodelta(level.player.ropecamera, "tag_player", 1, 0, 0, 0, 0, 1);
@@ -560,7 +546,7 @@ fastrope_player_viewshift_lock() {
     var_5 = var_4;
     level.player freezecontrols(1);
 
-    while(var_4) {
+    while (var_4) {
       var_4--;
       level.player setplayerangles((var_1.angles[0], var_1.angles[1], level.player getplayerangles()[2]));
       wait 0.05;
@@ -595,7 +581,7 @@ fastrope_player_unload_lock() {
   var_1.angles = var_0.angles;
   var_0 linkto(var_1);
   var_2 = 1;
-  var_3 = anglesToForward((0, 233, 0));
+  var_3 = anglestoforward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, -50);
   self.que = common_scripts\utility::array_remove(self.que, level.player);
   thread fastrope_que_check();
@@ -640,7 +626,7 @@ fastrope_player_unload_lock() {
   var_1 delete();
   var_0 delete();
 
-  if(isDefined(level.player.ropecamera)) {
+  if(isdefined(level.player.ropecamera)) {
     level.player.ropecamera delete();
     level.player.ropecamera = undefined;
   }
@@ -650,7 +636,7 @@ fastrope_player_unload_lock() {
 
 fastrope_player_attach() {
   var_0 = spawn("script_model", self.model gettagorigin("tag_detach"));
-  var_0 setModel(level.models["player"]["fastrope"]);
+  var_0 setmodel(level.models["player"]["fastrope"]);
   var_0 linkto(self.model, "tag_detach", (0, 0, 0), (0, 0, 0));
   var_0.animname = fastrope_animname(self.type, "player");
   var_0 useanimtree(#animtree);
@@ -661,16 +647,15 @@ fastrope_player_attach() {
   level.player allowcrouch(0);
   level.player allowprone(0);
 
-  if(isDefined(level.scr_model["fastrope_intro"])) {
+  if(isdefined(level.scr_model["fastrope_intro"])) {
     var_1 = maps\_utility::spawn_anim_model("fastrope_intro");
     var_1 linkto(self.model, "tag_detach");
     self.model thread maps\_anim::anim_single_solo(var_1, "opening", "tag_detach", self.model);
     level.player playerlinktodelta(var_1, "tag_player", 1, 65, 74, 30, 35, 1);
     level.player.ropecamera = var_1;
 
-    if(isDefined(level.scr_gun["fastrope_intro"])) {
+    if(isdefined(level.scr_gun["fastrope_intro"]))
       var_1 attach(level.scr_gun["fastrope_intro"], "tag_weapon");
-    }
   }
 
   return var_0;
@@ -680,7 +665,7 @@ fastrope_player_quake() {
   self endon("death");
   self endon("stopquake");
 
-  for(;;) {
+  for (;;) {
     wait 0.1;
     earthquake(0.2, 0.1, self.origin, 256);
   }
@@ -694,27 +679,25 @@ fastrope_heli_fly() {
   if(self.ready) {
     return;
   }
-  if(self.returnflight) {
+  if(self.returnflight)
     self waittill("returnflight");
-  }
 
-  if(isDefined(self.pathnode)) {
+  if(isdefined(self.pathnode)) {
     var_0 = getstartorigin(self.pathnode.origin, self.pathnode.angles, level.scr_anim[self.animname]["pathanim"]);
     var_1 = getstartangles(self.pathnode.origin, self.pathnode.angles, level.scr_anim[self.animname]["pathanim"]);
     self.vehicle = spawn("script_model", var_0);
     self.vehicle.angles = var_1;
-  } else if(isDefined(self.startnode))
+  } else if(isdefined(self.startnode))
     self.vehicle = spawnvehicle(self.modelname, self.targetname, self.type, self.startnode.origin, self.startnode.angles);
-  else {
+  else
     return;
-  }
 
-  self.vehicle setModel(self.modelname);
+  self.vehicle setmodel(self.modelname);
   self.model = self.vehicle;
 
-  if(isDefined(level._sea_org)) {
+  if(isdefined(level._sea_org)) {
     self.model = spawn("script_model", self.vehicle.origin);
-    self.model setModel(self.modelname);
+    self.model setmodel(self.modelname);
     self.model.angles = self.vehicle.angles;
     self.model thread fastrope_heli_fly_sea(self.vehicle);
     self.vehicle hide();
@@ -728,9 +711,8 @@ fastrope_heli_fly() {
   self.model thread maps\_vehicle_code::aircraft_wash_thread();
   self notify("inflight");
 
-  if(self.player) {
+  if(self.player)
     thread fastrope_player_think();
-  }
 
   self endon("overtakenow");
   wait 0.1;
@@ -744,19 +726,18 @@ fastrope_heli_fly() {
   self notify("ready");
   self.ready = 0;
 
-  while(self.que.size) {
+  while (self.que.size)
     self waittill("check_fastrope_que");
-  }
 
   wait(self.lasttime);
   self.vehicle notify("going_home");
 
-  if(isDefined(self.overtake)) {
+  if(isdefined(self.overtake)) {
     self notify("overtake");
     return;
   }
 
-  if(isDefined(self.pathnode)) {
+  if(isdefined(self.pathnode)) {
     self.vehicle waittillmatch("single anim", "end");
     self.vehicle notify("reached_end_node");
   } else {
@@ -768,7 +749,7 @@ fastrope_heli_fly() {
 }
 
 fastrope_heli_waittill_unload() {
-  if(isDefined(self.pathnode)) {
+  if(isdefined(self.pathnode)) {
     self.vehicle endon("fake_wait_node");
     wait 0.1;
     self.model thread common_scripts\utility::play_loop_sound_on_entity(self.enginesnd);
@@ -787,9 +768,8 @@ fastrope_heli_waittill_unload() {
     self notify("almost_ready");
     self.vehicle vehicle_setspeed(0, 25);
 
-    while(self.vehicle vehicle_getspeed() > 0) {
+    while (self.vehicle vehicle_getspeed() > 0)
       wait 0.1;
-    }
   }
 }
 
@@ -799,7 +779,7 @@ fastrope_heli_cleanup() {
   self.vehicle delete();
   self.vehicle = undefined;
 
-  if(isDefined(self.model)) {
+  if(isdefined(self.model)) {
     self.model delete();
     self.model = undefined;
   }
@@ -842,35 +822,34 @@ fastrope_heli_overtake_now() {
 }
 
 fastrope_heli_playexteriorlightfx() {
-  playFXOnTag(level._effect["aircraft_light_wingtip_red"], self, "tag_light_L_wing");
-  playFXOnTag(level._effect["aircraft_light_wingtip_green"], self, "tag_light_R_wing");
-  playFXOnTag(level._effect["aircraft_light_white_blink"], self, "tag_light_belly");
+  playfxontag(level._effect["aircraft_light_wingtip_red"], self, "tag_light_L_wing");
+  playfxontag(level._effect["aircraft_light_wingtip_green"], self, "tag_light_R_wing");
+  playfxontag(level._effect["aircraft_light_white_blink"], self, "tag_light_belly");
   wait 0.25;
-  playFXOnTag(level._effect["aircraft_light_white_blink"], self, "tag_light_tail");
+  playfxontag(level._effect["aircraft_light_white_blink"], self, "tag_light_tail");
 }
 
 fastrope_heli_playinteriorlightfx() {
-  playFXOnTag(level._effect["aircraft_light_cockpit_blue"], self, "tag_light_cockpit01");
+  playfxontag(level._effect["aircraft_light_cockpit_blue"], self, "tag_light_cockpit01");
 }
 
 fastrope_heli_playinteriorlightfx2() {
-  playFXOnTag(level._effect["aircraft_light_cockpit_red"], self, "tag_light_cargo01");
+  playfxontag(level._effect["aircraft_light_cockpit_red"], self, "tag_light_cargo01");
 }
 
 fastrope_heli_playinteriorlightgreenfx(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1 linkto(self, "tag_light_cargo01", (0, 0, 0), (0, -90, 0));
 
-  if(var_0 == 1) {
-    playFXOnTag(level._effect["aircraft_light_cockpit_green"], var_1, "tag_origin");
-  }
+  if(var_0 == 1)
+    playfxontag(level._effect["aircraft_light_cockpit_green"], var_1, "tag_origin");
 }
 
 fastrope_heli_fly_sea(var_0) {
   self endon("death");
   self endon("overtake");
 
-  for(;;) {
+  for (;;) {
     var_1 = level._sea_link localtoworldcoords(var_0.origin);
     var_2 = combineangles(level._sea_link.angles, var_0 gettagangles("tag_detach"));
     self moveto(var_1 + level._sea_link.offset, 0.1);
@@ -897,7 +876,7 @@ fastrope_calc(var_0) {
 }
 
 fastrope_setup() {
-  if(!(isDefined(self.script_noteworthy) && self.script_noteworthy == "fastrope_friendlies")) {
+  if(!(isdefined(self.script_noteworthy) && self.script_noteworthy == "fastrope_friendlies")) {
     return;
   }
   self.heli = fastrope_heli_setup(self.targetname);
@@ -909,12 +888,11 @@ fastrope_heli_setup(var_0) {
   var_1 = undefined;
   var_1 = level.fastrope_globals.helicopters[fastrope_heliname(var_0)];
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     return var_1;
-  }
 
   var_2 = common_scripts\utility::getstruct(var_0, "target");
-  var_1 = spawnStruct();
+  var_1 = spawnstruct();
   var_1.vehicle = undefined;
   var_1.targetname = fastrope_heliname(var_0);
   var_1.animname = var_1.targetname;
@@ -933,10 +911,10 @@ fastrope_heli_setup(var_0) {
   var_1.unload = "both";
   var_1.unloadwait = 1;
 
-  if(isDefined(var_2.script_parameters)) {
+  if(isdefined(var_2.script_parameters)) {
     var_3 = strtok(var_2.script_parameters, ":;,= ");
 
-    for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    for (var_4 = 0; var_4 < var_3.size; var_4++) {
       if(tolower(var_3[var_4]) == "model") {
         var_4++;
 
@@ -954,9 +932,8 @@ fastrope_heli_setup(var_0) {
       if(tolower(var_3[var_4]) == "player") {
         var_4++;
 
-        if(tolower(var_3[var_4]) == "true") {
+        if(tolower(var_3[var_4]) == "true")
           var_1.player = 1;
-        }
 
         continue;
       }
@@ -964,28 +941,29 @@ fastrope_heli_setup(var_0) {
       if(tolower(var_3[var_4]) == "unload") {
         var_4++;
 
-        if(var_3[var_4] == "both" || var_3[var_4] == "left" || var_3[var_4] == "right") {
+        if(var_3[var_4] == "both" || var_3[var_4] == "left" || var_3[var_4] == "right")
           var_1.unload = var_3[var_4];
-        }
       }
     }
   }
 
   fastrope_heli_setup_seats(var_1);
 
-  if(isDefined(var_1.startnode)) {
+  if(isdefined(var_1.startnode)) {
     var_5 = var_1.startnode;
 
-    while(isDefined(var_5.target)) {
+    while (isdefined(var_5.target)) {
       var_5 = getvehiclenode(var_5.target, "targetname");
 
-      if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "stop") {
+      if(isdefined(var_5.script_noteworthy) && var_5.script_noteworthy == "stop") {
         var_1.stopnode = var_5;
         break;
       }
     }
 
-    if(!isDefined(var_1.stopnode)) {}
+    if(!isdefined(var_1.stopnode)) {
+
+    }
   }
 
   level.fastrope_globals.helicopters[var_1.targetname] = var_1;
@@ -1038,9 +1016,8 @@ fastrope_heli_setup_seats(var_0) {
           var_0.seats[4] = fastrope_createseat(var_0.type, 9);
           var_0.seats[5] = fastrope_createseat(var_0.type, 10);
 
-          if(var_0.player) {
+          if(var_0.player)
             level.player.side = "right";
-          }
 
           break;
       }
@@ -1128,7 +1105,7 @@ fastrope_animload(var_0) {
 }
 
 fastrope_createseat(var_0, var_1) {
-  var_2 = spawnStruct();
+  var_2 = spawnstruct();
   var_2.taken = undefined;
   var_2.animname = fastrope_animname(var_0, var_1);
   var_2.side = fastrope_getside(var_0, var_1);

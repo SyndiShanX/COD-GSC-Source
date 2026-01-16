@@ -23,13 +23,13 @@ function init() {
 
 function musicsystem() {
   musicent = spawn("script_origin", (0, 0, 0));
-  while(true) {
+  while (true) {
     level waittill("hash_ba37290e", type);
-    if(!isDefined(type)) {
+    if(!isdefined(type)) {
       type = namespace_3ca3c537::function_d2d75f5d();
       level thread function_1a5a0c78();
     }
-    if(!isDefined(level.var_d068d66e[type])) {
+    if(!isdefined(level.var_d068d66e[type])) {
       continue;
     }
     music::setmusicstate(level.var_d068d66e[type]);
@@ -74,14 +74,14 @@ function function_4bbc3ecf() {
 }
 
 function function_2f2996ee(var_82a18d17, state) {
-  if(!isDefined(level.var_d068d66e)) {
+  if(!isdefined(level.var_d068d66e)) {
     level.var_d068d66e = array();
   }
   level.var_d068d66e[var_82a18d17] = state;
 }
 
 function function_1a5a0c78() {
-  if(!isDefined(level.var_7f30be2b)) {
+  if(!isdefined(level.var_7f30be2b)) {
     level.var_7f30be2b = 0;
   }
   if(level.var_7f30be2b >= 3) {
@@ -102,7 +102,7 @@ function function_1a5a0c78() {
       break;
     }
   }
-  if(isDefined(unlockname)) {
+  if(isdefined(unlockname)) {
     level thread audio::unlockfrontendmusic(unlockname);
   }
   level.var_7f30be2b++;

@@ -26,7 +26,7 @@ main() {
   level.dogrunpainspeed = 20;
   self.meleeattackdist = 0;
   self thread setmeleeattackdist();
-  self.a = spawnStruct();
+  self.a = spawnstruct();
   self.a.pose = "stand";
   self.a.nextstandinghitdying = 0;
   self.a.movement = "run";
@@ -40,9 +40,8 @@ main() {
   level.lastdogmeleeplayertime = 0;
   level.dogmeleeplayercounter = 0;
 
-  if(!isDefined(level.dog_hits_before_kill)) {
+  if(!isDefined(level.dog_hits_before_kill))
     level.dog_hits_before_kill = 1;
-  }
 }
 
 set_anim_playback_rate() {
@@ -56,9 +55,8 @@ setmeleeattackdist() {
   while(true) {
     self.meleeattackdist = 0;
 
-    if(self maps\mp\animscripts\dog_combat::use_low_attack()) {
+    if(self maps\mp\animscripts\dog_combat::use_low_attack())
       self.meleeattackdist = 64;
-    }
 
     wait 1;
   }

@@ -7,15 +7,15 @@
 
 function loop_fx_sound(clientnum, alias, origin, ender) {
   sound_entity = spawn(clientnum, origin, "script_origin");
-  if(isDefined(ender)) {
+  if(isdefined(ender)) {
     thread loop_delete(ender, sound_entity);
     self endon(ender);
   }
-  sound_entity playLoopSound(alias);
+  sound_entity playloopsound(alias);
 }
 
 function play_in_space(localclientnum, alias, origin) {
-  playSound(localclientnum, alias, origin);
+  playsound(localclientnum, alias, origin);
 }
 
 function loop_delete(ender, sound_entity) {
@@ -25,15 +25,15 @@ function loop_delete(ender, sound_entity) {
 
 function play_on_client(sound_alias) {
   players = level.localplayers;
-  playSound(0, sound_alias, players[0].origin);
+  playsound(0, sound_alias, players[0].origin);
 }
 
 function loop_on_client(sound_alias, min_delay, max_delay, end_on) {
   players = level.localplayers;
-  if(isDefined(end_on)) {
+  if(isdefined(end_on)) {
     level endon(end_on);
   }
-  for(;;) {
+  for (;;) {
     play_on_client(sound_alias);
     wait(min_delay + randomfloat(max_delay));
   }

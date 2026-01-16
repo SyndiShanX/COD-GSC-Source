@@ -8,11 +8,11 @@
 #namespace destructible;
 
 function autoexec __init__sytem__() {
-  system::register("destructible", &__init__, undefined, undefined);
+  system::register("destructible", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "start_destructible_explosion", 1, 10, "int", &doexplosion, 0, 0);
+  clientfield::register("scriptmover", "start_destructible_explosion", 1, 10, "int", & doexplosion, 0, 0);
 }
 
 function playgrenaderumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -25,7 +25,7 @@ function doexplosion(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
   physics_explosion = 0;
-  if(newval &(1 << 9)) {
+  if(newval & (1 << 9)) {
     physics_explosion = 1;
     newval = newval - (1 << 9);
   }

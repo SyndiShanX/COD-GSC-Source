@@ -51,4 +51,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "ground_smoke_launch_a";
   ent.v["delay"] = -15;
+
 }

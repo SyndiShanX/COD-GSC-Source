@@ -29,10 +29,11 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_avogadro;
 
 autoexec __init__system__() {
-  system::register(#"zm_ai_avogadro", &__init__, &__main__, # "archetype_avogadro");
+  system::register(#"zm_ai_avogadro", &__init__, &__main__, #"archetype_avogadro");
 }
 
 __init__() {
@@ -106,10 +107,10 @@ __init__() {
 
   function_22006009();
 
-  level thread aat::register_immunity("zm_aat_brain_decay", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "avogadro", 1, 1, 1);
+    level thread aat::register_immunity("zm_aat_brain_decay", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"avogadro", 1, 1, 1);
 }
 
 __main__() {}
@@ -150,9 +151,9 @@ private function_f34df3c() {
 
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
-    self._effect[# "hash_571a3bab8b805854"] = "zm_ai/fx8_avo_elec_teleport_flash";
-    self._effect[# "nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_avo_elec_teleport_appear";
+    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
+    self._effect[#"hash_571a3bab8b805854"] = "zm_ai/fx8_avo_elec_teleport_flash";
+    self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_avo_elec_teleport_appear";
   }
 
   if(isDefined(level.avogadro_intro_location)) {
@@ -168,7 +169,7 @@ private function_c41e67c() {
 
   self thread function_d60f39c2();
 
-  self thread function_44ac30aa();
+    self thread function_44ac30aa();
 }
 
 private function_22006009(cmd) {
@@ -179,83 +180,85 @@ private function_22006009(cmd) {
   adddebugcommand("<dev string:xe6>");
 }
 
-function private function_d60f39c2(entity, player, duration, color) {
-  self endon(#"death");
+  function private function_d60f39c2(entity, player, duration, color) {
+    self endon(#"death");
 
-  while(true) {
-    waitframe(1);
-    enabled = getdvarint(#"hash_5810c8643adc3e7c", 0);
-    var_b90a4dc9 = getdvarint(#"hash_4fad1b23f14d5bc4", 0);
+    while(true) {
+      waitframe(1);
+      enabled = getdvarint(#"hash_5810c8643adc3e7c", 0);
+      var_b90a4dc9 = getdvarint(#"hash_4fad1b23f14d5bc4", 0);
 
-    if(enabled) {
-      end = self getcentroid();
+      if(enabled) {
+        end = self getcentroid();
 
-      if(isDefined(self.favoriteenemy)) {
-        start = self.favoriteenemy getcentroid();
-        color = (1, 0, 0);
+        if(isDefined(self.favoriteenemy)) {
+          start = self.favoriteenemy getcentroid();
+          color = (1, 0, 0);
 
-        if(self function_cace91f9()) {
-          color = (0, 1, 0);
+          if(self function_cace91f9()) {
+            color = (0, 1, 0);
+          }
+
+          retreat = "";
+
+          if(function_ad642b3a(self)) {
+            retreat = " retreat";
+
+  
+            line(level.e_avogadro.var_77ef4a35.origin, end, (1, 1, 0));
+  
+          }
+
+          var_1fee3f71 = "";
+
+          if(function_5f4c1c68(self)) {
+            var_1fee3f71 = " no_charge_atk";
+          }
+
+          line(start, end, color);
+          sphere(end, 2, color, 1, 0, 4, 1);
+          distance = distance(start, end);
+          print3d(end + (0, 0, 30), "<dev string:x135>" + distance + retreat + var_1fee3f71, color, 1, 1, 1);
+
         }
 
-        retreat = "";
+        if(var_b90a4dc9 == 4 && isDefined(level.avogadro_outro_location)) {
 
-        if(function_ad642b3a(self)) {
-          retreat = " retreat";
-
-          line(level.e_avogadro.var_77ef4a35.origin, end, (1, 1, 0));
+          line(level.avogadro_outro_location.origin, end, (1, 0, 0));
+          sphere(level.avogadro_outro_location.origin, sqrt(10000), (1, 0, 0), 0.4, 0, 8, 1);
 
         }
-
-        var_1fee3f71 = "";
-
-        if(function_5f4c1c68(self)) {
-          var_1fee3f71 = " no_charge_atk";
-        }
-
-        line(start, end, color);
-        sphere(end, 2, color, 1, 0, 4, 1);
-        distance = distance(start, end);
-        print3d(end + (0, 0, 30), "<dev string:x135>" + distance + retreat + var_1fee3f71, color, 1, 1, 1);
-
       }
 
-      if(var_b90a4dc9 == 4 && isDefined(level.avogadro_outro_location)) {
-        line(level.avogadro_outro_location.origin, end, (1, 0, 0));
-        sphere(level.avogadro_outro_location.origin, sqrt(10000), (1, 0, 0), 0.4, 0, 8, 1);
-
+      if(self.var_b90a4dc9 != var_b90a4dc9) {
+        function_ed39491e(var_b90a4dc9);
       }
-    }
-
-    if(self.var_b90a4dc9 != var_b90a4dc9) {
-      function_ed39491e(var_b90a4dc9);
     }
   }
-}
 
 function_ed39491e(var_b90a4dc9) {
   self.var_b90a4dc9 = var_b90a4dc9;
 
   setdvar(#"hash_4fad1b23f14d5bc4", var_b90a4dc9);
 
-  switch (self.var_b90a4dc9) {
-    case 0:
-      self.var_355757c0 = 0;
-      self.var_e85deff3 = 0;
-      break;
-    case 1:
-    case 2:
-      self.var_355757c0 = 0;
-      self.var_e85deff3 = 1;
-      break;
-    case 3:
-    case 4:
-      self.var_355757c0 = 1;
-      self.var_e85deff3 = 1;
-      break;
-    default:
-      break;
-  }
+    switch (self.var_b90a4dc9) {
+      case 0:
+        self.var_355757c0 = 0;
+        self.var_e85deff3 = 0;
+        break;
+      case 1:
+      case 2:
+        self.var_355757c0 = 0;
+        self.var_e85deff3 = 1;
+        break;
+      case 3:
+      case 4:
+        self.var_355757c0 = 1;
+        self.var_e85deff3 = 1;
+        break;
+      default:
+        break;
+    }
 
   if(self.var_b90a4dc9 == 4 && self.model != "c_t8_c_zom_avagadro_fb") {
     self setModel("c_t8_c_zom_avagadro_fb");
@@ -426,18 +429,18 @@ private function_be9ade6d(entity) {
     sphere(var_e98404d8, sqrt(102400), (0, 0, 1), 0.1, 0, 8, 60);
   }
 
-  for(player_index = 0; player_index < players.size; player_index++) {
-    player_centroid = players[player_index] getcentroid();
-    distance_sq = distancesquared(var_e98404d8, player_centroid);
+    for(player_index = 0; player_index < players.size; player_index++) {
+      player_centroid = players[player_index] getcentroid();
+      distance_sq = distancesquared(var_e98404d8, player_centroid);
 
-    if(distance_sq <= 102400) {
-      players[player_index] thread function_15b528d9(3.5, player_index);
+      if(distance_sq <= 102400) {
+        players[player_index] thread function_15b528d9(3.5, player_index);
+      }
     }
-  }
 }
 
 private function_15b528d9(duration, var_2610777) {
-  self endoncallback(&function_866bf053, # "death", # "disconnect");
+  self endoncallback(&function_866bf053, #"death", #"disconnect");
   wait float(function_60d95f53()) / 1000 * var_2610777;
 
   if(zm_utility::is_player_valid(self)) {
@@ -499,7 +502,7 @@ private function_d59c4b07(entity) {
   var_31a419e0 = [];
 
   foreach(zombie in zombies) {
-    if(zombie.zm_ai_category === # "basic" || zombie.zm_ai_category === # "popcorn") {
+    if(zombie.zm_ai_category === #"basic" || zombie.zm_ai_category === #"popcorn") {
       if(!isDefined(var_31a419e0)) {
         var_31a419e0 = [];
       } else if(!isarray(var_31a419e0)) {
@@ -529,15 +532,15 @@ private function_96e43661(entity) {
     sphere(var_9a123fd6, sqrt(22500), (1, 0, 0), 0.1, 0, 8, 60);
   }
 
-  for(i = 0; i < players.size; i++) {
-    player_centroid = players[i] getcentroid();
-    distance_sq = distancesquared(var_9a123fd6, player_centroid);
+    for(i = 0; i < players.size; i++) {
+      player_centroid = players[i] getcentroid();
+      distance_sq = distancesquared(var_9a123fd6, player_centroid);
 
-    if(distance_sq <= 22500) {
-      result = 1;
-      break;
+      if(distance_sq <= 22500) {
+        result = 1;
+        break;
+      }
     }
-  }
 
   return result;
 }
@@ -608,19 +611,19 @@ private function_9c41ab55(entity) {
     sphere(var_e98404d8, sqrt(32400), (0, 0, 1), 0.5, 0, 8, 60);
   }
 
-  for(i = 0; i < players.size; i++) {
-    player_centroid = players[i] getcentroid();
-    distance_sq = distancesquared(var_e98404d8, player_centroid);
+    for(i = 0; i < players.size; i++) {
+      player_centroid = players[i] getcentroid();
+      distance_sq = distancesquared(var_e98404d8, player_centroid);
 
-    if(distance_sq <= 32400) {
-      players[i] dodamage(150, var_e98404d8, entity, entity, "none", "MOD_MELEE");
-      continue;
-    }
+      if(distance_sq <= 32400) {
+        players[i] dodamage(150, var_e98404d8, entity, entity, "none", "MOD_MELEE");
+        continue;
+      }
 
-    if(distance_sq <= 129600) {
-      players[i] dodamage(100, var_e98404d8, entity, entity, "none", "MOD_MELEE");
+      if(distance_sq <= 129600) {
+        players[i] dodamage(100, var_e98404d8, entity, entity, "none", "MOD_MELEE");
+      }
     }
-  }
 }
 
 private function_c96c9ef8(entity) {
@@ -659,9 +662,9 @@ private function_315c9db0(entity, asmstatename) {
   if(isDefined(entity.var_885c1824)) {
     var_45be44a6 = function_28df3aca(entity);
     fx_origin = entity gettagorigin("j_spine4");
-    playFX(entity._effect[# "hash_571a3bab8b805854"], fx_origin);
+    playFX(entity._effect[#"hash_571a3bab8b805854"], fx_origin);
     entity forceteleport(var_45be44a6.origin, var_45be44a6.angles);
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, entity._effect[# "nova_crawler_phase_teleport_end_fx"], entity, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, entity._effect[#"nova_crawler_phase_teleport_end_fx"], entity, "j_spine4");
   }
 
   animationstatenetworkutility::requeststate(entity, asmstatename);
@@ -774,7 +777,7 @@ private function_11d4db33() {
 }
 
 private function_4b206a3b(entity) {
-  entity clientfield::set("" + # "avogadro_health_fx", 0);
+  entity clientfield::set("" + #"avogadro_health_fx", 0);
 }
 
 private function_1661ef70(entity) {
@@ -811,7 +814,7 @@ function_a9be3eba(entity) {
         entity setblackboardattribute("_phase_direction", direction);
         entity setblackboardattribute("_phase_distance", distance);
         result = entity astsearch("phase@avogadro");
-        animation = animationstatenetworkutility::searchanimationmap(entity, result[# "animation"]);
+        animation = animationstatenetworkutility::searchanimationmap(entity, result[#"animation"]);
 
         if(isDefined(animation)) {
           localdeltavector = getmovedelta(animation, 0, 1, entity);
@@ -820,10 +823,12 @@ function_a9be3eba(entity) {
           var_9d872a34 = self maymovefrompointtopoint(entity.origin, endpoint, 1, 1);
 
           if(ispointonnavmesh(endpoint, entity) && self maymovefrompointtopoint(entity.origin, endpoint, 1, 1)) {
+  
             recordline(entity.origin, endpoint, (0, 1, 0));
             recordsphere(endpoint, 15, (0, 1, 0));
+  
 
-            entity.var_1ce249af = 1;
+              entity.var_1ce249af = 1;
             return 1;
           }
 

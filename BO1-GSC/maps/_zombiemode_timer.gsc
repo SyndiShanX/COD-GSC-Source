@@ -64,7 +64,7 @@ update_hud_position() {
   self endon("disconnect");
   self endon("stop_prev_timer");
   self endon("countdown_finished");
-  while(1) {
+  while (1) {
     self.stopwatch_elem.y = 20;
     self.stopwatch_elem_glass.y = 20;
     wait(0.05);

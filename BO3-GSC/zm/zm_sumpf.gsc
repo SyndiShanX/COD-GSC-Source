@@ -78,32 +78,32 @@ function main() {
   level.default_start_location = "default";
   level.use_water_risers = 1;
   level.sndzhdaudio = 1;
-  level._zombie_custom_add_weapons = &custom_add_weapons;
+  level._zombie_custom_add_weapons = & custom_add_weapons;
   zm_sumpf_fx::main();
   zm::init_fx();
-  level._zmbvoxlevelspecific = &init_level_specific_audio;
+  level._zmbvoxlevelspecific = & init_level_specific_audio;
   level.randomize_perks = 0;
   level.pulls_since_last_ray_gun = 0;
   level.pulls_since_last_tesla_gun = 0;
   level.player_drops_tesla_gun = 0;
-  level.door_dialog_function = &zm::play_door_dialog;
+  level.door_dialog_function = & zm::play_door_dialog;
   level.dogs_enabled = 1;
   level.zombie_rise_spawners = [];
   level.burning_zombies = [];
   level.use_zombie_heroes = 1;
   level.kzmb_name = "sumpf_kzmb";
   level.custom_ai_type = [];
-  if(!isDefined(level.custom_ai_type)) {
+  if(!isdefined(level.custom_ai_type)) {
     level.custom_ai_type = [];
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = &zm_ai_dogs::init;
-  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.custom_ai_type[level.custom_ai_type.size] = & zm_ai_dogs::init;
+  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
   level.use_zombie_heroes = 1;
-  level.givecustomcharacters = &givecustomcharacters;
+  level.givecustomcharacters = & givecustomcharacters;
   initcharacterstartindex();
-  level._round_start_func = &zm::round_start;
+  level._round_start_func = & zm::round_start;
   level._effect["zombie_grain"] = "misc/fx_zombie_grain_cloud";
   init_zombie_sumpf();
   clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int");
@@ -123,13 +123,13 @@ function main() {
   _zm_weap_tesla::init();
   zm_ai_dogs::enable_dog_rounds();
   level.zones = [];
-  level.zone_manager_init_func = &sumpf_zone_init;
+  level.zone_manager_init_func = & sumpf_zone_init;
   init_zones[0] = "center_building_upstairs";
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
   level.validate_poi_attractors = 1;
   level thread water_burst_overwrite();
-  level.custom_devgui = &function_920754d;
+  level.custom_devgui = & function_920754d;
   init_sounds();
   level thread setupmusic();
   level notify("setup_rope");
@@ -145,10 +145,10 @@ function main() {
   level thread function_5b94e922();
   setdvar("player_shallowWaterWadeScale", 0.55);
   setdvar("player_waistWaterWadeScale", 0.55);
-  scene::add_scene_func("p7_fxanim_zm_sumpf_zipline_down_bundle", &function_b87f949f, "init");
+  scene::add_scene_func("p7_fxanim_zm_sumpf_zipline_down_bundle", & function_b87f949f, "init");
   level scene::init("p7_fxanim_zm_sumpf_zipline_down_bundle");
-  level.var_9aaae7ae = &function_869d6f66;
-  level.var_9cef605e = &function_3e7eb37b;
+  level.var_9aaae7ae = & function_869d6f66;
+  level.var_9cef605e = & function_3e7eb37b;
   level thread zm_sumpf_ffotd::main_end();
 }
 
@@ -170,8 +170,8 @@ function function_5b94e922() {
   level endon("end_game");
   var_6c4e714 = struct::get_array("hanging_dead_guy_force", "targetname");
   n_index = 0;
-  while(true) {
-    while(!(isDefined(zm_zonemgr::any_player_in_zone("center_building_upstairs")) && zm_zonemgr::any_player_in_zone("center_building_upstairs"))) {
+  while (true) {
+    while (!(isdefined(zm_zonemgr::any_player_in_zone("center_building_upstairs")) && zm_zonemgr::any_player_in_zone("center_building_upstairs"))) {
       wait(0.1);
     }
     physicsexplosionsphere(var_6c4e714[n_index].origin + vectorscale((0, 1, 0), 5), 20, 10, 0.09);
@@ -184,17 +184,17 @@ function function_5b94e922() {
 }
 
 function function_869d6f66() {
-  if(!isDefined(self zm_bgb_anywhere_but_here::function_728dfe3())) {
+  if(!isdefined(self zm_bgb_anywhere_but_here::function_728dfe3())) {
     return false;
   }
-  if(isDefined(self.on_zipline) && self.on_zipline) {
+  if(isdefined(self.on_zipline) && self.on_zipline) {
     return false;
   }
   return true;
 }
 
 function function_3e7eb37b() {
-  if(isDefined(self.on_zipline) && self.on_zipline) {
+  if(isdefined(self.on_zipline) && self.on_zipline) {
     return false;
   }
   return true;
@@ -206,7 +206,7 @@ function function_39a5be7e() {
 }
 
 function function_c283498() {
-  while(true) {
+  while (true) {
     level flag::wait_till("dog_round");
     level clientfield::set("SUMPF_VISIONSET_DOGS", 1);
     level waittill("dog_round_ending");
@@ -215,11 +215,13 @@ function function_c283498() {
 }
 
 function givecustomcharacters() {
-  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_farmgirl_viewhands")) {
+  if(isdefined(level.hotjoin_player_setup) && [
+      [level.hotjoin_player_setup]
+    ]("c_zom_farmgirl_viewhands")) {
     return;
   }
   self detachall();
-  if(!isDefined(self.characterindex)) {
+  if(!isdefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
   }
   self.favorite_wall_weapons_list = [];
@@ -270,7 +272,7 @@ function assign_lowest_unused_character_index() {
     return charindexarray[0];
   }
   foreach(player in level.players) {
-    if(isDefined(player.characterindex)) {
+    if(isdefined(player.characterindex)) {
       arrayremovevalue(charindexarray, player.characterindex, 0);
     }
   }
@@ -385,57 +387,57 @@ function book_useage() {
   book_trig setcursorhint("HINT_NOICON");
   book_trig usetriggerrequirelookat();
   level thread function_620401c0((11308, 3635, -582), "", book_trig, "");
-  if(isDefined(book_trig)) {
+  if(isdefined(book_trig)) {
     maniac_l = getent("maniac_l", "targetname");
     maniac_r = getent("maniac_r", "targetname");
     book_trig waittill("trigger", player);
-    if(isDefined(maniac_l)) {
-      maniac_l playSound("evt_maniac_l");
+    if(isdefined(maniac_l)) {
+      maniac_l playsound("evt_maniac_l");
     }
-    if(isDefined(maniac_r)) {
-      maniac_r playSound("evt_maniac_r");
+    if(isdefined(maniac_r)) {
+      maniac_r playsound("evt_maniac_r");
     }
   }
 }
 
 function function_c06f4240() {
   s_phone_egg = struct::get("s_phone_egg", "targetname");
-  if(!isDefined(s_phone_egg)) {
+  if(!isdefined(s_phone_egg)) {
     return;
   }
   s_phone_egg zm_unitrigger::create_unitrigger(undefined, 256);
   var_e5549a81 = spawn("script_origin", s_phone_egg.origin);
   var_fd0167be = 0;
-  while(var_fd0167be < 4) {
+  while (var_fd0167be < 4) {
     s_phone_egg waittill("trigger_activated");
-    if(isDefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4 || (isDefined(level.musicsystemoverride) && level.musicsystemoverride)) {
+    if(isdefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4 || (isdefined(level.musicsystemoverride) && level.musicsystemoverride)) {
       continue;
     } else {
       switch (var_fd0167be) {
         case 0: {
-          var_e5549a81 playLoopSound("evt_phone_dialtone");
+          var_e5549a81 playloopsound("evt_phone_dialtone");
           wait(1);
           break;
         }
         case 1: {
           var_e5549a81 stoploopsound(0.5);
-          var_e5549a81 playSound("evt_dial_9");
+          var_e5549a81 playsound("evt_dial_9");
           wait(0.25);
           break;
         }
         case 2: {
-          var_e5549a81 playSound("evt_dial_1");
+          var_e5549a81 playsound("evt_dial_1");
           wait(0.25);
           break;
         }
         case 3: {
-          var_e5549a81 playSound("evt_dial_1");
+          var_e5549a81 playsound("evt_dial_1");
           wait(0.5);
-          var_e5549a81 playSound("evt_riiing");
+          var_e5549a81 playsound("evt_riiing");
           wait(2.5);
-          var_e5549a81 playSound("evt_riiing");
+          var_e5549a81 playsound("evt_riiing");
           wait(2);
-          var_e5549a81 playSound("evt_phone_answer");
+          var_e5549a81 playsound("evt_phone_answer");
           wait(3.7);
           break;
         }
@@ -457,10 +459,10 @@ function play_radio_sounds() {
 }
 
 function radio_eggs() {
-  if(!isDefined(level.radio_counter)) {
+  if(!isdefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  while(level.radio_counter < 3) {
+  while (level.radio_counter < 3) {
     wait(1);
   }
   level thread play_radio_sounds();
@@ -468,23 +470,23 @@ function radio_eggs() {
 }
 
 function function_34a348fc() {
-  level.var_34a348fc = getEntArray("super_egg_radio", "targetname");
-  if(isDefined(level.var_34a348fc)) {
-    for(i = 0; i < level.var_34a348fc.size; i++) {
+  level.var_34a348fc = getentarray("super_egg_radio", "targetname");
+  if(isdefined(level.var_34a348fc)) {
+    for (i = 0; i < level.var_34a348fc.size; i++) {
       level.var_34a348fc[i] thread function_53e56ac8();
     }
   }
 }
 
 function function_53e56ac8() {
-  if(!isDefined(level.superegg_counter)) {
+  if(!isdefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
   self zm_unitrigger::create_unitrigger(undefined, 128);
   self waittill("trigger_activated");
   self zm_unitrigger::unregister_unitrigger(self.unitrigger);
   level.superegg_counter = level.superegg_counter + 1;
-  self playLoopSound(self.script_sound);
+  self playloopsound(self.script_sound);
 }
 
 function play_super_egg_radio_pa_sounds() {
@@ -495,51 +497,51 @@ function play_super_egg_radio_pa_sounds() {
 }
 
 function super_egg() {
-  if(!isDefined(level.superegg_counter)) {
+  if(!isdefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
-  while(level.superegg_counter < 3) {
+  while (level.superegg_counter < 3) {
     wait(2);
   }
   level thread play_super_egg_radio_pa_sounds();
 }
 
 function function_8aa785e() {
-  level.var_34a348fc = getEntArray("sur_radio", "targetname");
-  if(isDefined(level.var_34a348fc)) {
-    for(i = 0; i < level.var_34a348fc.size; i++) {
+  level.var_34a348fc = getentarray("sur_radio", "targetname");
+  if(isdefined(level.var_34a348fc)) {
+    for (i = 0; i < level.var_34a348fc.size; i++) {
       level.var_34a348fc[i] thread function_4deca569();
     }
   }
 }
 
 function function_4deca569() {
-  if(!isDefined(level.superegg_counter)) {
+  if(!isdefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
   self thread zm_sidequests::fake_use("sur_radio_activated");
   self waittill("sur_radio_activated");
-  self playSound(self.script_sound);
+  self playsound(self.script_sound);
 }
 
 function function_5a36831b() {
-  level.var_5a36831b = getEntArray("radio_hut", "targetname");
-  if(isDefined(level.var_5a36831b)) {
-    for(i = 0; i < level.var_5a36831b.size; i++) {
+  level.var_5a36831b = getentarray("radio_hut", "targetname");
+  if(isdefined(level.var_5a36831b)) {
+    for (i = 0; i < level.var_5a36831b.size; i++) {
       level.var_5a36831b[i] thread function_2fa9f915();
     }
   }
 }
 
 function function_2fa9f915() {
-  if(!isDefined(level.radio_counter)) {
+  if(!isdefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
   self zm_unitrigger::create_unitrigger(undefined, 128);
   self waittill("trigger_activated");
   self zm_unitrigger::unregister_unitrigger(self.unitrigger);
   level.radio_counter = level.radio_counter + 1;
-  self playLoopSound(self.script_sound);
+  self playloopsound(self.script_sound);
 }
 
 function meteor_trigger() {
@@ -547,7 +549,7 @@ function meteor_trigger() {
   level endon("meteor_triggered");
   dmgtrig = getent("meteor", "targetname");
   level thread function_620401c0((11260.5, -2091, -634), "", dmgtrig, "", 3);
-  while(true) {
+  while (true) {
     dmgtrig waittill("trigger", player);
     if(distancesquared(player.origin, dmgtrig.origin) < 100000000) {
       player thread zm_audio::create_and_play_dialog("level", "meteor");
@@ -564,7 +566,7 @@ function sumpf_player_spawn_placement() {
   structs = struct::get_array("initial_spawn_points", "targetname");
   level flag::wait_till("start_zombie_round_logic");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setorigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
@@ -609,7 +611,7 @@ function function_22476936() {
 
 function function_c54ccb33() {
   var_4d028102 = getent("", "");
-  if(isDefined(var_4d028102)) {
+  if(isdefined(var_4d028102)) {
     zm_devgui::zombie_devgui_open_sesame();
     var_4d028102 notify("trigger", getplayers()[0]);
   }
@@ -620,7 +622,7 @@ function function_27cb39f1() {
     return;
   }
   all_nodes = getallnodes();
-  for(i = 0; i < all_nodes.size; i++) {
+  for (i = 0; i < all_nodes.size; i++) {
     node = all_nodes[i];
     if(node.type == "") {
       node thread debug_display();
@@ -629,20 +631,20 @@ function function_27cb39f1() {
 }
 
 function debug_display() {
-  while(true) {
+  while (true) {
     print3d(self.origin, self.animscript, (1, 0, 0), 1, 0.2, 1);
     wait(0.05);
   }
 }
 
 function function_620401c0(v_org, str_msg, var_5d64a595, str_ender, n_scale) {
-  if(!isDefined(n_scale)) {
+  if(!isdefined(n_scale)) {
     n_scale = 1;
   }
   var_5d64a595 endon(str_ender);
   level thread function_9a889da5(str_msg, var_5d64a595, str_ender);
   var_ded2b0d1 = v_org - vectorscale((0, 0, 1), 16);
-  while(true) {
+  while (true) {
     print3d(var_ded2b0d1, "", vectorscale((0, 1, 0), 255), 1, n_scale, 1);
     wait(0.1);
   }
@@ -657,12 +659,12 @@ function init_level_specific_audio() {}
 
 function function_d166ac07() {
   level.var_8ec97b54 = 0;
-  var_5e490b83 = getEntArray("sndzhd_plates", "targetname");
-  array::thread_all(var_5e490b83, &function_4bb6626e);
+  var_5e490b83 = getentarray("sndzhd_plates", "targetname");
+  array::thread_all(var_5e490b83, & function_4bb6626e);
 }
 
 function function_4bb6626e() {
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
     if(!isplayer(attacker)) {
       continue;
@@ -686,7 +688,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_staminup");
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = &function_c027d01d;
+  level.custom_random_perk_weights = & function_c027d01d;
 }
 
 function function_c027d01d() {

@@ -23,14 +23,13 @@ init_overheat() {
 
 overheat_enable(vehicle) {
   assert(isPlayer(self));
-  assert(isDefined(vehicle));
+  assert(isdefined(vehicle));
   assert(vehicle.classname == "script_vehicle");
 
-  assertEx(!isDefined(self.overheat), "Tried to call overheat_enable() on a player that is already doing overheat logic.");
+  assertEx(!isdefined(self.overheat), "Tried to call overheat_enable() on a player that is already doing overheat logic.");
 
-  if(isDefined(self.overheat)) {
+  if(isdefined(self.overheat))
     return;
-  }
 
   self.overheat = spawnStruct();
   self.overheat.turret_heat_status = 1;
@@ -48,12 +47,10 @@ overheat_disable() {
 
   waittillframeend;
 
-  if(isDefined(self.overheat.overheat_bg)) {
+  if(isdefined(self.overheat.overheat_bg))
     self.overheat.overheat_bg destroy();
-  }
-  if(isDefined(self.overheat.overheat_status)) {
+  if(isdefined(self.overheat.overheat_status))
     self.overheat.overheat_status destroy();
-  }
 
   self.overheat = undefined;
 }
@@ -63,7 +60,7 @@ status_meter_update(vehicle) {
 
   self endon("disable_overheat");
 
-  for(;;) {
+  for (;;) {
     //iprintln( self.overheat.turret_heat_status );
 
     if(self.overheat.turret_heat_status >= TURRET_HEAT_MAX) {
@@ -71,11 +68,10 @@ status_meter_update(vehicle) {
       continue;
     }
 
-    if(self attackButtonPressed() && !self.overheat.overheated) {
+    if(self attackButtonPressed() && !self.overheat.overheated)
       self.overheat.turret_heat_status += TURRET_HEAT_RATE;
-    } else {
+    else
       self.overheat.turret_heat_status -= TURRET_COOL_RATE;
-    }
 
     self.overheat.turret_heat_status = cap_value(self.overheat.turret_heat_status, 1, TURRET_HEAT_MAX);
 
@@ -97,13 +93,12 @@ create_hud() {
   self endon("disable_overheat");
 
   coopOffset = 0;
-  if(is_coop()) {
+  if(is_coop())
     coopOffset = 70;
-  }
   barX = -10;
   barY = -152 + coopOffset;
 
-  if(!isDefined(self.overheat.overheat_bg)) {
+  if(!isdefined(self.overheat.overheat_bg)) {
     self.overheat.overheat_bg = newClientHudElem(self);
     self.overheat.overheat_bg.alignX = "right";
     self.overheat.overheat_bg.alignY = "bottom";
@@ -116,7 +111,7 @@ create_hud() {
   }
 
   //status bar
-  if(!isDefined(self.overheat.overheat_status)) {
+  if(!isdefined(self.overheat.overheat_status)) {
     self.overheat.overheat_status = newClientHudElem(self);
     self.overheat.overheat_status.alignX = "right";
     self.overheat.overheat_status.alignY = "bottom";
@@ -134,13 +129,11 @@ create_hud() {
 overheated(vehicle) {
   self endon("disable_overheat");
 
-  if(self.overheat.turret_heat_status < TURRET_HEAT_MAX) {
+  if(self.overheat.turret_heat_status < TURRET_HEAT_MAX)
     return;
-  }
 
-  if(self.overheat.overheated) {
+  if(self.overheat.overheated)
     return;
-  }
   self.overheat.overheated = true;
 
   // Gun has overheated
@@ -150,14 +143,13 @@ overheated(vehicle) {
 
   self.overheat.turret_heat_status = TURRET_HEAT_MAX;
 
-  if(isDefined(vehicle.mgturret)) {
+  if(isdefined(vehicle.mgturret))
     vehicle.mgturret[0] turretFireDisable();
-  }
 
   time = getTime();
 
   flashTime = OVERHEAT_FLASH_TIME;
-  for(;;) {
+  for (;;) {
     self.overheat.overheat_status fadeovertime(flashTime);
     self.overheat.overheat_status.alpha = 0.2;
     wait flashTime;
@@ -167,9 +159,8 @@ overheated(vehicle) {
 
     flashTime += OVERHEAT_FLASH_TIME_INCREMENT;
 
-    if(getTime() - time >= OVERHEAT_TIME * 1000) {
+    if(getTime() - time >= OVERHEAT_TIME * 1000)
       break;
-    }
   }
   self.overheat.overheat_status.alpha = 1.0;
 
@@ -180,9 +171,8 @@ overheated(vehicle) {
   wait GUN_USAGE_DELAY_AFTER_OVERHEAT;
 
   // Make gun usable
-  if(isDefined(vehicle.mgturret)) {
+  if(isdefined(vehicle.mgturret))
     vehicle.mgturret[0] turretFireEnable();
-  }
 
   level.savehere = undefined;
   self.overheat.overheated = false;
@@ -222,25 +212,23 @@ overheat_setColor(value, fadeTime) {
 
   if((value > cold) && (value <= warm)) {
     iPercentage = int(value * (100 / warm));
-    for(colorIndex = 0; colorIndex < CurrentColor.size; colorIndex++) {
+    for (colorIndex = 0; colorIndex < CurrentColor.size; colorIndex++) {
       difference = (color_warm[colorIndex] - color_cold[colorIndex]);
       increment = (difference / 100);
       CurrentColor[colorIndex] = color_cold[colorIndex] + (increment * iPercentage);
     }
   } else if((value > warm) && (value <= hot)) {
     iPercentage = int((value - warm) * (100 / (hot - warm)));
-    for(colorIndex = 0; colorIndex < CurrentColor.size; colorIndex++) {
+    for (colorIndex = 0; colorIndex < CurrentColor.size; colorIndex++) {
       difference = (color_hot[colorIndex] - color_warm[colorIndex]);
       increment = (difference / 100);
       CurrentColor[colorIndex] = color_warm[colorIndex] + (increment * iPercentage);
     }
   }
 
-  if(isDefined(fadeTime)) {
+  if(isdefined(fadeTime))
     self.overheat.overheat_status fadeOverTime(fadeTime);
-  }
 
-  if(isDefined(self.overheat.overheat_status.color)) {
+  if(isdefined(self.overheat.overheat_status.color))
     self.overheat.overheat_status.color = (CurrentColor[0], CurrentColor[1], CurrentColor[2]);
-  }
 }

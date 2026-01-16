@@ -21,12 +21,11 @@ bot_sd_think() {
 
   zone = sd_get_planted_zone();
 
-  if(isDefined(zone)) {
+  if(isDefined(zone))
     self bot_sd_defender(zone, 1);
-  } else if(self.team == game["attackers"]) {
-    if(level.multibomb) {
+  else if(self.team == game["attackers"]) {
+    if(level.multibomb)
       self.isbombcarrier = 1;
-    }
 
     self bot_sd_attacker();
   } else {
@@ -63,9 +62,8 @@ bot_sd_attacker() {
         self pressusebutton(level.planttime + 1);
         wait 0.5;
 
-        if(is_true(self.isplanting)) {
+        if(is_true(self.isplanting))
           wait(level.planttime + 1);
-        }
 
         self pressusebutton(0);
         self setstance("crouch");
@@ -83,11 +81,10 @@ bot_sd_attacker() {
         goal = sd_get_bomb_goal(zone.visuals[0]);
 
         if(isDefined(goal)) {
-          if(frac > 0.85) {
+          if(frac > 0.85)
             self addgoal(goal, 24, 4, "sd_plant");
-          } else {
+          else
             self addgoal(goal, 24, 3, "sd_plant");
-          }
         }
       }
 
@@ -95,11 +92,10 @@ bot_sd_attacker() {
     }
   } else if(isDefined(level.sdbomb.carrier) && !isplayer(level.sdbomb.carrier)) {
     if(!isDefined(self.protectcarrier)) {
-      if(randomint(100) > 70) {
+      if(randomint(100) > 70)
         self.protectcarrier = 1;
-      } else {
+      else
         self.protectcarrier = 0;
-      }
     }
 
     if(self.protectcarrier) {
@@ -108,9 +104,8 @@ bot_sd_attacker() {
       if(isDefined(goal)) {
         nodes = getnodesinradiussorted(goal, 256, 0);
 
-        if(isDefined(nodes) && nodes.size > 0 && !isDefined(self getgoal("sd_protect_carrier"))) {
+        if(isDefined(nodes) && nodes.size > 0 && !isDefined(self getgoal("sd_protect_carrier")))
           self addgoal(nodes[randomint(nodes.size)], 24, 3, "sd_protect_carrier");
-        }
       }
     }
   }
@@ -124,18 +119,16 @@ bot_sd_defender(zone, isplanted) {
     planted = sd_get_planted_zone();
 
     foreach(zone in level.bombzones) {
-      if(planted != zone && distance2d(goal, zone.nearest_node.origin) < distance2d(goal, planted.nearest_node.origin)) {
+      if(planted != zone && distance2d(goal, zone.nearest_node.origin) < distance2d(goal, planted.nearest_node.origin))
         self cancelgoal("sd_defend");
-      }
     }
   }
 
   if(self atgoal("sd_defend") || self bot_need_to_defuse()) {
     bot_sd_defender_think(zone);
 
-    if(self hasgoal("sd_defend")) {
+    if(self hasgoal("sd_defend"))
       return;
-    }
   }
 
   if(self hasgoal("enemy_patrol")) {
@@ -200,34 +193,30 @@ bot_get_look_at() {
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
       return node.origin;
-    }
   }
 
   enemies = self maps\mp\bots\_bot::bot_get_enemies(0);
 
-  if(enemies.size) {
+  if(enemies.size)
     enemy = random(enemies);
-  }
 
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
       return node.origin;
-    }
   }
 
   zone = sd_get_closest_bomb();
   node = getvisiblenode(self.origin, zone.nearest_node.origin);
 
-  if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+  if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
     return node.origin;
-  }
 
-  forward = anglesToForward(self getplayerangles());
-  origin = self getEye() + forward * 1024;
+  forward = anglestoforward(self getplayerangles());
+  origin = self geteye() + forward * 1024;
   return origin;
 }
 
@@ -245,9 +234,8 @@ bot_sd_defender_think(zone) {
       self pressusebutton(level.defusetime + 1);
       wait 0.5;
 
-      if(is_true(self.isdefusing)) {
+      if(is_true(self.isdefusing))
         wait(level.defusetime + 1);
-      }
 
       self pressusebutton(0);
       self setstance("crouch");
@@ -257,9 +245,8 @@ bot_sd_defender_think(zone) {
       return;
     }
 
-    if(!isDefined(goal) && distance2dsquared(self.origin, level.sdbombmodel.origin) < 1000000) {
+    if(!isDefined(goal) && distance2dsquared(self.origin, level.sdbombmodel.origin) < 1000000)
       self addgoal(level.sdbombmodel.origin, 24, 4, "sd_defuse");
-    }
 
     return;
   }
@@ -289,9 +276,8 @@ bot_sd_defender_think(zone) {
     origin = self bot_get_look_at();
     z = 20;
 
-    if(distancesquared(origin, self.origin) > 262144) {
+    if(distancesquared(origin, self.origin) > 262144)
       z = randomintrange(16, 60);
-    }
 
     self lookat(origin + (0, 0, z));
     self.bot["lookat_update"] = gettime() + randomintrange(1500, 3000);
@@ -312,7 +298,7 @@ bot_need_to_defuse() {
 
 sd_get_bomb_goal(ent) {
   goals = [];
-  dir = anglesToForward(ent.angles);
+  dir = anglestoforward(ent.angles);
   dir = vectorscale(dir, 32);
   goals[0] = ent.origin + dir;
   goals[1] = ent.origin - dir;
@@ -323,9 +309,8 @@ sd_get_bomb_goal(ent) {
   goals = array_randomize(goals);
 
   foreach(goal in goals) {
-    if(findpath(self.origin, goal, 0)) {
+    if(findpath(self.origin, goal, 0))
       return goal;
-    }
   }
 
   return undefined;
@@ -368,9 +353,8 @@ sd_get_closest_bomb() {
 sd_get_planted_zone() {
   if(level.bombplanted) {
     foreach(zone in level.bombzones) {
-      if(zone.interactteam == "none") {
+      if(zone.interactteam == "none")
         return zone;
-      }
     }
   }
 
@@ -387,9 +371,8 @@ bot_sd_grenade() {
 
   foreach(enemy in enemies) {
     if(distancesquared(enemy.origin, zone.nearest_node.origin) < 147456) {
-      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(enemy.origin)) {
+      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(enemy.origin))
         self maps\mp\bots\_bot_combat::bot_combat_throw_tactical(enemy.origin);
-      }
 
       return;
     }

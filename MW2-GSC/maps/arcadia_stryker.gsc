@@ -48,17 +48,18 @@ stryker_setmode_ai() {
   self.turretMode = "ai";
   self.targetSearchOrigin = undefined;
 
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  /#
+  if(getdvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - " + self.turretMode + " mode");
-  }
+  # /
 
-  self thread stryker_turret_think();
+    self thread stryker_turret_think();
 }
 
 stryker_setmode_manual(origin) {
   self endon("death");
 
-  assert(isDefined(origin));
+  assert(isdefined(origin));
 
   self notify("stryker_setmode_manual");
   self endon("stryker_setmode_manual");
@@ -68,11 +69,12 @@ stryker_setmode_manual(origin) {
 
   self thread stryker_turret_think();
 
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  /#
+  if(getdvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - " + self.turretMode + " mode");
-  }
+  # /
 
-  wait STRYKER_MANUAL_AI_DURATION;
+    wait STRYKER_MANUAL_AI_DURATION;
 
   thread stryker_suppression_complete_dialog();
   thread stryker_laser_reminder_dialog();
@@ -80,19 +82,21 @@ stryker_setmode_manual(origin) {
 }
 
 stryker_turret_think() {
-  assert(isDefined(self.turretMode));
-  assert(isDefined(level.stryker_settings[self.turretMode]));
+  /#
+  assert(isdefined(self.turretMode));
+  assert(isdefined(level.stryker_settings[self.turretMode]));
+  # /
 
-  self notify("stryker_turret_think");
+    self notify("stryker_turret_think");
   self endon("stryker_turret_think");
   self endon("death");
 
   self thread stryker_scan_stop();
 
-  for(;;) {
+  for (;;) {
     target = self stryker_get_target();
 
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       self thread stryker_scan_start();
       wait level.stryker_settings[self.turretMode].target_engage_break_time;
       self stryker_scan_stop();
@@ -108,16 +112,17 @@ stryker_scan_start() {
   self endon("death");
   self endon("stop_scanning");
 
-  assert(!isDefined(self.scanning));
+  assert(!isdefined(self.scanning));
   self.scanning = true;
 
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  /#
+  if(getdvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - scan start");
-  }
+  # /
 
-  alternate = 0;
+    alternate = 0;
 
-  for(;;) {
+  for (;;) {
     // get random point in front of stryker
     forward = anglesToForward(self.angles) * 1000;
 
@@ -140,20 +145,20 @@ stryker_scan_start() {
 }
 
 stryker_scan_stop() {
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  /#
+  if(getdvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - scan stop");
-  }
+  # /
 
-  self clearTurretTarget();
+    self clearTurretTarget();
   self.scanning = undefined;
   self notify("stop_scanning");
 }
 
 stryker_get_target() {
   SEARCH_ORIGIN = self.origin;
-  if(isDefined(self.targetSearchOrigin)) {
+  if(isdefined(self.targetSearchOrigin))
     SEARCH_ORIGIN = self.targetSearchOrigin;
-  }
 
   SEARCH_RADIUS_MIN = level.stryker_settings[self.turretMode].target_min_range;
   SEARCH_RADIUS_MAX = level.stryker_settings[self.turretMode].target_max_range;
@@ -173,15 +178,14 @@ stryker_get_target() {
 
   // ADD VEHICLE AND DESTRUCTIBLE VEHICLE TARGETS
   if(GET_VEHICLES) {
-    assert(isDefined(level.vehicles[enemyTeam]));
+    assert(isdefined(level.vehicles[enemyTeam]));
     vehicleTargets = level.vehicles[enemyTeam];
     vehicleTargets = get_array_of_closest(SEARCH_ORIGIN, vehicleTargets, undefined, undefined, SEARCH_RADIUS_MAX_VEH, SEARCH_RADIUS_MIN_VEH);
 
-    ents = getEntArray("destructible_vehicle", "targetname");
+    ents = getentarray("destructible_vehicle", "targetname");
     foreach(ent in ents) {
-      if(isDefined(ent.exploded)) {
+      if(isdefined(ent.exploded))
         continue;
-      }
       destructibleTargets[destructibleTargets.size] = ent;
     }
     ents = undefined;
@@ -204,22 +208,19 @@ stryker_get_target() {
 
   foreach(target in possibleTargets) {
     // threatbias - if this is an ignored group then dont consider this target
-    if(isDefined(self.threatBiasGroup) && IsSentient(target)) {
+    if(isdefined(self.threatBiasGroup) && IsSentient(target)) {
       bias = getThreatBias(target getThreatBiasGroup(), self.threatBiasGroup);
-      if(bias <= -1000000) {
+      if(bias <= -1000000)
         continue;
-      }
     }
 
     // don't shoot at targets that are supposed to be ignored
-    if(isDefined(target.ignoreme) && target.ignoreme == true) {
+    if(isdefined(target.ignoreme) && target.ignoreme == true)
       continue;
-    }
 
     if(isAI(target)) {
-      if(!sightTracePassed(self getTagOrigin("tag_flash"), target getEye(), false, self)) {
+      if(!sightTracePassed(self getTagOrigin("tag_flash"), target getEye(), false, self))
         continue;
-      }
     }
 
     prof_end("stryker_ai");
@@ -237,16 +238,14 @@ stryker_get_target_offset(target) {
     return (0, 0, zOffset);
   }
 
-  if(isDefined(target.vehicletype)) {
-    if(target isHelicopter()) {
+  if(isdefined(target.vehicletype)) {
+    if(target isHelicopter())
       return (0, 0, STRYKER_TARGET_OFFSET_HELICOPTER);
-    }
     return (0, 0, STRYKER_TARGET_OFFSET_VEHICLE);
   }
 
-  if(isDefined(target.destuctableinfo)) {
+  if(isdefined(target.destuctableinfo))
     return (0, 0, STRYKER_TARGET_OFFSET_VEHICLE);
-  }
 
   return (0, 0, 0);
 }
@@ -255,35 +254,33 @@ stryker_shoot_target(target) {
   self notify("stryker_shoot_target");
   self endon("stryker_shoot_target");
 
-  if(!isDefined(target)) {
+  if(!isdefined(target))
     return;
-  }
 
   // aim the gun at the target and wait for it to be lined up or timeout
   targetOffset = stryker_get_target_offset(target);
 
+  /#
   if(getdvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - shooting a target");
-    if(self.turretMode == "ai") {
+    if(self.turretMode == "ai")
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 1, 0, 2.0);
-    } else {
+    else
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 0, 0, 2.0);
-    }
   }
+  # /
 
-  self setTurretTargetEnt(target, targetOffset);
-  if(self.lastTarget != target) {
+    self setTurretTargetEnt(target, targetOffset);
+  if(self.lastTarget != target)
     self waittill_notify_or_timeout("turret_rotate_stopped", 1.0);
-  }
   self.lastTarget = target;
 
   startTime = getTime();
-  while(isDefined(target)) {
+  while (isdefined(target)) {
     // thread ends after level.stryker_settings[ self.turretMode ].target_engage_duration time elapses
     timeElapsed = getTime() - startTime;
-    if(timeElapsed >= level.stryker_settings[self.turretMode].target_engage_duration * 1000) {
+    if(timeElapsed >= level.stryker_settings[self.turretMode].target_engage_duration * 1000)
       return;
-    }
 
     self stryker_fire_shots(target, targetOffset);
     wait randomfloatrange(level.stryker_settings[self.turretMode].burst_delay_min, level.stryker_settings[self.turretMode].burst_delay_max);
@@ -295,15 +292,20 @@ stryker_fire_shots(target, targetOffset) {
   self endon("stryker_fire_shots");
 
   shots = randomintrange(level.stryker_settings[self.turretMode].burst_count_min, level.stryker_settings[self.turretMode].burst_count_max);
-  for(i = 0; i < shots; i++) {
-    if(isDefined(target) && isDefined(targetOffset)) {
+  for (i = 0; i < shots; i++) {
+    if(isdefined(target) && isdefined(targetOffset))
       self fireWeapon("tag_flash", target, targetOffset, 0.0);
-    } else {
+    else
       self fireWeapon("tag_flash", undefined, (0, 0, 0), 0.0);
-    }
     wait level.stryker_settings[self.turretMode].fire_time;
   }
 }
+
+
+
+
+
+
 
 /*
 ai_becomes_suppressed()
@@ -313,11 +315,10 @@ ai_becomes_suppressed()
 	self notify( "ai_becomes_suppressed" );
 	self endon( "ai_becomes_suppressed" );
 	
-	
-	if( getdvar( "arcadia_debug_stryker" ) == "1" ) {
+	/#
+	if( getdvar( "arcadia_debug_stryker" ) == "1" )
 		thread draw_line_to_ent_for_time( ( 0, 0, 10000 ), self, 1, 0, 0, STRYKER_AI_SUPPRESSION_TIME );
-	}
-	
+	#/
 	
 	self.forceSuppression = true;
 	wait STRYKER_AI_SUPPRESSION_TIME;
@@ -331,9 +332,8 @@ stryker_suppression_complete_dialog() {
   dialog[dialog.size] = "arcadia_str_areasuppressed"; // Badger One to Hunter Two, area suppressed.
   dialog[dialog.size] = "arcadia_str_tasuppressed"; // Badger One to Hunter Two, target area suppressed.
 
-  if(flag("disable_stryker_dialog")) {
+  if(flag("disable_stryker_dialog"))
     return;
-  }
 
   thread radio_dialogue(dialog[randomint(dialog.size)]);
 }
@@ -346,16 +346,14 @@ stryker_laser_reminder_dialog() {
   level.stryker endon("stryker_laser_reminder_dialog");
   level.stryker endon("death");
 
-  for(;;) {
+  for (;;) {
     wait randomintrange(30, 60);
 
-    if(!isalive(level.stryker)) {
+    if(!isalive(level.stryker))
       return;
-    }
 
-    if(flag("disable_stryker_dialog")) {
+    if(flag("disable_stryker_dialog"))
       continue;
-    }
 
     if(flag_exist("no_living_enemies") && flag("no_living_enemies")) {
       continue;

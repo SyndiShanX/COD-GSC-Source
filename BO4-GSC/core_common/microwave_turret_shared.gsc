@@ -9,6 +9,7 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace microwave_turret;
 
 init_shared() {
@@ -88,8 +89,8 @@ turretdebug() {
 
 turretthink() {
   turret = self;
-  turret endon(#"microwave_turret_shutdown", # "death");
-  turret.trigger endon(#"death", # "delete");
+  turret endon(#"microwave_turret_shutdown", #"death");
+  turret.trigger endon(#"death", #"delete");
   turret.turret_vehicle_entnum = turret getentitynumber();
 
   while(true) {
@@ -111,7 +112,7 @@ turretthink() {
 }
 
 microwaveentitypostshutdowncleanup(entity) {
-  entity endon(#"disconnect", # "end_microwaveentitypostshutdowncleanup");
+  entity endon(#"disconnect", #"end_microwaveentitypostshutdowncleanup");
   turret = self;
   turret_vehicle_entnum = turret.turret_vehicle_entnum;
   turret waittill(#"microwave_turret_shutdown");
@@ -125,11 +126,11 @@ microwaveentitypostshutdowncleanup(entity) {
 
 microwaveentity(entity) {
   turret = self;
-  turret endon(#"microwave_turret_shutdown", # "death");
-  entity endon(#"disconnect", # "death");
+  turret endon(#"microwave_turret_shutdown", #"death");
+  entity endon(#"disconnect", #"death");
 
   if(isplayer(entity)) {
-    entity endon(#"joined_team", # "joined_spectators");
+    entity endon(#"joined_team", #"joined_spectators");
   }
 
   turret thread microwaveentitypostshutdowncleanup(entity);

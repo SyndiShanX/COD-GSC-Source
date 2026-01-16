@@ -13,6 +13,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\player_insertion;
 #include scripts\core_common\system_shared;
+
 #namespace player_reinsertion;
 
 autoexec __init__system__() {
@@ -28,6 +29,7 @@ on_game_playing() {
   level thread function_3d39c260();
 
   level thread function_a6eac3b7();
+
 }
 
 function_3d39c260() {
@@ -100,7 +102,7 @@ function_d5d96302(center, radius) {
     wait 0.5;
   }
 
-  vehicle = spawner spawnfromspawner("insertion_plane", 1, 1);
+    vehicle = spawner spawnfromspawner("insertion_plane", 1, 1);
   vehicle.takedamage = 0;
   vehicle setneargoalnotifydist(512);
   vehicle clientfield::set("infiltration_landing_gear", 1);
@@ -139,12 +141,12 @@ private function_521bff14(center, goal, var_e294ac7d) {
     thread player_insertion::debug_line(new_point, var_ced865d2, (0, 1, 1), level.reinsertion.debug_duration);
     thread player_insertion::debug_line(var_ced865d2, goal, (1, 0, 1), level.reinsertion.debug_duration);
 
-    return new_point;
+      return new_point;
   }
 
   thread player_insertion::debug_line(center, goal, (1, 0, 0), level.reinsertion.debug_duration);
 
-  return goal;
+    return goal;
 }
 
 function_8ea9be1c() {
@@ -184,7 +186,7 @@ private function_14f79b33(center, radius, height, var_e294ac7d) {
     level.reinsertion.debug_duration = 1000;
     thread player_insertion::debug_line(circle_origin, level.reinsertion.vehicle.origin, (0, 0, 1), level.reinsertion.debug_duration);
 
-    var_9c068ab1 = vectornormalize(level.reinsertion.vehicle.origin - circle_origin);
+      var_9c068ab1 = vectornormalize(level.reinsertion.vehicle.origin - circle_origin);
     var_c40f2e06 = vectortoangles(var_9c068ab1);
     current_yaw = var_c40f2e06[1];
     var_c5a2c1c9 = var_5d59bc67 / circle_radius * 57.2958;
@@ -195,8 +197,8 @@ private function_14f79b33(center, radius, height, var_e294ac7d) {
 
     thread player_insertion::debug_line(level.reinsertion.vehicle.origin, goal, (0, 1, 0), level.reinsertion.debug_duration);
 
-    self function_a57c34b7(goal, 0, 0);
-    self waittill(#"goal", # "near_goal");
+      self function_a57c34b7(goal, 0, 0);
+    self waittill(#"goal", #"near_goal");
   }
 }
 
@@ -216,7 +218,7 @@ private function_4f356be(start, end, offset, var_3a5f8906) {
     self pathvariableoffset((offset, offset, offset), var_3a5f8906);
   }
 
-  self waittill(#"goal", # "near_goal");
+  self waittill(#"goal", #"near_goal");
 }
 
 function_b24f3a72(origin, radius, height) {
@@ -434,10 +436,10 @@ function_584c9f1() {
     waitframe(1);
   }
 
-  if(!isDefined(level.reinsertion.vehicle)) {
-    self thread player_insertion::function_77132caf();
-    return;
-  }
+    if(!isDefined(level.reinsertion.vehicle)) {
+      self thread player_insertion::function_77132caf();
+      return;
+    }
 
   var_c40f2e06 = function_f9348c1d();
   self function_564e0871();
@@ -475,9 +477,9 @@ function_fec68e5c() {
     return;
   }
 
-  if(!isDefined(level.insertion) || !(isDefined(level.insertion.allowed) && level.insertion.allowed)) {
-    return;
-  }
+    if(!isDefined(level.insertion) || !(isDefined(level.insertion.allowed) && level.insertion.allowed)) {
+      return;
+    }
 
   level thread function_836fe662();
   player_insertion::function_ff107056(level.insertion);
@@ -493,7 +495,7 @@ function_fec68e5c() {
   }
 
   level.insertion flagsys::set(#"insertion_teleport_completed");
-  level.insertion flagsys::wait_till_timeout(1 + 2.5 + 0.5, # "insertion_presentation_completed");
+  level.insertion flagsys::wait_till_timeout(1 + 2.5 + 0.5, #"insertion_presentation_completed");
   level.reinsertion.vehicle player_insertion::function_bc16f3b4(level.insertion);
   assert(10 > 0);
   wait 10;
@@ -632,3 +634,4 @@ private function_c833e81f(killer) {
   wait 1;
   self dodamage(self.health + 10000, self.origin + (0, 0, 1), killer);
 }
+

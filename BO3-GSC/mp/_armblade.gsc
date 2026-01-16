@@ -12,12 +12,12 @@
 #namespace armblade;
 
 function autoexec __init__sytem__() {
-  system::register("armblade", &__init__, undefined, undefined);
+  system::register("armblade", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.weaponarmblade = getweapon("hero_armblade");
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -27,18 +27,18 @@ function on_player_spawned() {
 function armblade_sound_thread() {
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     result = self util::waittill_any_return("weapon_change", "disconnect");
-    if(isDefined(result)) {
+    if(isdefined(result)) {
       if(result == "weapon_change" && self getcurrentweapon() == level.weaponarmblade) {
-        if(!isDefined(self.armblade_loop_sound)) {
+        if(!isdefined(self.armblade_loop_sound)) {
           self.armblade_loop_sound = spawn("script_origin", self.origin);
           self.armblade_loop_sound linkto(self);
         }
-        self.armblade_loop_sound playLoopSound("wpn_armblade_idle", 0.25);
+        self.armblade_loop_sound playloopsound("wpn_armblade_idle", 0.25);
         continue;
       }
-      if(isDefined(self.armblade_loop_sound)) {
+      if(isdefined(self.armblade_loop_sound)) {
         self.armblade_loop_sound stoploopsound(0.25);
       }
     }

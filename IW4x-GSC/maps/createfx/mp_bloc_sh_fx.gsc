@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_bloc_sh_fx.gsc
 *******************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 137
   ent = createLoopSound();
   ent.v["origin"] = (-559.614, -3676.97, 325.512);
   ent.v["angles"] = (270, 0, 0);
@@ -628,4 +630,5 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "dust_wind_slow_yel_loop";
   ent.v["delay"] = -15;
+
 }

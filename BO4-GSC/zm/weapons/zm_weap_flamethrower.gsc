@@ -27,6 +27,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_flamethrower;
 
 autoexec __init__system__() {
@@ -34,9 +35,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.hero_weapon[# "flamethrower"][0] = getweapon(#"hero_flamethrower_t8_lv1");
-  level.hero_weapon[# "flamethrower"][1] = getweapon(#"hero_flamethrower_t8_lv2");
-  level.hero_weapon[# "flamethrower"][2] = getweapon(#"hero_flamethrower_t8_lv3");
+  level.hero_weapon[#"flamethrower"][0] = getweapon(#"hero_flamethrower_t8_lv1");
+  level.hero_weapon[#"flamethrower"][1] = getweapon(#"hero_flamethrower_t8_lv2");
+  level.hero_weapon[#"flamethrower"][2] = getweapon(#"hero_flamethrower_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv3");
@@ -67,15 +68,15 @@ is_flamethrower_weapon(weapon, var_e7c11b0c = 1) {
     return false;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][2]) {
+  if(weapon == level.hero_weapon[#"flamethrower"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"flamethrower"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"flamethrower"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -91,34 +92,34 @@ private function_f5430720() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "flamethrower"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"flamethrower"], wpn_cur)) {
       self clientfield::increment_to_player("hero_flamethrower_vigor_postfx");
       self function_8cbc7c8f(1);
       self thread function_58bc825e(wpn_cur);
       level callback::on_ai_killed(&on_armor_kill);
-    } else if(isinarray(level.hero_weapon[# "flamethrower"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"flamethrower"], wpn_prev)) {
       self function_8cbc7c8f(0);
       self notify(#"hero_flamethrower_expired");
       level callback::remove_on_ai_killed(&on_armor_kill);
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_258f60f733c7a181");
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][0]) {
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_258f60f733c7a181");
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_4c83bb6fd69bf1ea");
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][1]) {
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_4c83bb6fd69bf1ea");
       self thread function_16f31337(wpn_cur);
       self thread function_478a4910(wpn_cur);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][2]) {
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_1a1e29920a655055");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_1a1e29920a655055");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_43cbc37ab728289b");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_43cbc37ab728289b");
       }
 
       self thread function_16f31337(wpn_cur);
@@ -161,7 +162,7 @@ function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     self thread function_d8ee4d6a(eattacker);
   }
 
-  if(meansofdeath === "MOD_BURNED" && self.health <= idamage && self.zm_ai_category == # "basic") {
+  if(meansofdeath === "MOD_BURNED" && self.health <= idamage && self.zm_ai_category == #"basic") {
     self.var_b364c165 = 1;
   }
 
@@ -171,7 +172,7 @@ function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
   }
 
   if(isplayer(einflictor) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && meansofdeath === "MOD_BURNED") {
-    if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
+    if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
       return self.health;
     }
   }
@@ -183,12 +184,12 @@ private function_d8ee4d6a(eattacker) {
   self endon(#"death");
   self.var_95468c43 = 1;
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"popcorn") {
     self thread namespace_9ff9f642::slowdown(#"hash_6ff4731de876ab68");
     wait 1;
-  } else if(self.zm_ai_category == # "boss") {
+  } else if(self.zm_ai_category == #"boss") {
     wait 1;
-  } else if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+  } else if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
     if(self zombie_utility::function_33da7a07() !== "walk") {
       self thread function_c95fe16();
     }
@@ -216,7 +217,7 @@ private function_c95fe16() {
 private function_d8e7e308(v_position) {
   self endon(#"death");
 
-  if(self.zm_ai_category !== # "basic" || self.zm_ai_category !== # "enhanced" || isDefined(self.knockdown) && self.knockdown) {
+  if(self.zm_ai_category !== #"basic" || self.zm_ai_category !== #"enhanced" || isDefined(self.knockdown) && self.knockdown) {
     return;
   }
 
@@ -230,7 +231,7 @@ private function_d8e7e308(v_position) {
 }
 
 function_58bc825e(w_flamethrower) {
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -278,10 +279,10 @@ private function_e296efef(w_flamethrower, e_player) {
 
 function_31a142a2(w_flamethrower) {
   switch (w_flamethrower.name) {
-    case # "hero_flamethrower_t8_lv2":
+    case #"hero_flamethrower_t8_lv2":
       var_c4d00e65 = 0.75;
       break;
-    case # "hero_flamethrower_t8_lv3":
+    case #"hero_flamethrower_t8_lv3":
       var_c4d00e65 = 1;
       break;
     default:
@@ -298,7 +299,7 @@ function_31a142a2(w_flamethrower) {
 }
 
 function_16f31337(w_flamethrower) {
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_power_left");
@@ -320,11 +321,12 @@ function_99207e4d(w_flamethrower) {
 
   foreach(ai_zombie in a_ai_zombies) {
     if(!isDefined(ai_zombie.zm_ai_category)) {
+
       if(isDefined(ai_zombie.targetname)) {
         iprintlnbold("<dev string:x38>" + ai_zombie.targetname);
       }
 
-      continue;
+        continue;
     }
 
     if(distance(ai_zombie.origin, self.origin) <= 161) {
@@ -381,20 +383,20 @@ function_ea906434(e_player, w_flamethrower) {
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     self thread function_d8ee4d6a(e_player);
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.18, e_player.origin, e_player, e_player, "torso_lower", "MOD_IMPACT", 0, w_flamethrower);
   }
 
-  if(self.zm_ai_category == # "heavy") {
+  if(self.zm_ai_category == #"heavy") {
     self thread function_d8ee4d6a(e_player);
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.2, e_player.origin, e_player, e_player, "torso_lower", "MOD_IMPACT", 0, w_flamethrower);
     return;
   }
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
     [[level.var_f2f67d17]] - > waitinqueue(self);
     n_dist = distance2d(self.origin, e_player.origin);
 
@@ -435,14 +437,14 @@ function_ea906434(e_player, w_flamethrower) {
     return;
   }
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.health + 100, e_player.origin, e_player, e_player, undefined, "MOD_IMPACT", 0, w_flamethrower);
   }
 }
 
 function_29bbc43a(w_flamethrower) {
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -456,7 +458,7 @@ function_29bbc43a(w_flamethrower) {
 
 function_3be93b07(w_flamethrower) {
   self notify(#"hash_2ca901b5ada4f20f");
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired", # "hash_2ca901b5ada4f20f");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired", #"hash_2ca901b5ada4f20f");
   var_a85d39a2 = [];
   var_2ed6f142 = self getweaponmuzzlepoint();
   v_forward_angles = self getweaponforwarddir();
@@ -474,7 +476,7 @@ function_3be93b07(w_flamethrower) {
     util::wait_network_frame();
   }
 
-  self.var_be72e7c2.origin = s_trace[# "position"];
+  self.var_be72e7c2.origin = s_trace[#"position"];
   self.var_be72e7c2.angles = self.angles;
   self.var_be72e7c2.v_start = self.var_be72e7c2.origin;
 
@@ -521,7 +523,7 @@ function_95195ac0() {
 
   var_be72e7c2 = self.var_be72e7c2;
   var_be72e7c2 endon(#"death");
-  self waittill(#"death", # "hero_flamethrower_expired");
+  self waittill(#"death", #"hero_flamethrower_expired");
 
   if(isDefined(self)) {
     self notify(#"hash_751e0293eed9a1cf");
@@ -541,7 +543,7 @@ function_95195ac0() {
 }
 
 function_6c891578(v_forward_angles, var_a85d39a2) {
-  self endon(#"death", # "hash_2ca901b5ada4f20f");
+  self endon(#"death", #"hash_2ca901b5ada4f20f");
   var_2ddb51af = self.v_start + (0, 0, 16);
   var_d825e9dd = 1;
   v_start_pos = self.v_start + (0, 0, 16);
@@ -558,7 +560,7 @@ function_6c891578(v_forward_angles, var_a85d39a2) {
       } else if(isDefined(bullettracepassed(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)) && bullettracepassed(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)) {
         v_target_pos = var_2ddb51af + v_forward_angles * var_94a175c3;
       } else {
-        v_target_pos = bulletTrace(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)[# "position"];
+        v_target_pos = bulletTrace(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)[#"position"];
       }
     } else if(var_a85d39a2.size) {
       ai_zombie = array::random(var_a85d39a2);
@@ -574,7 +576,7 @@ function_6c891578(v_forward_angles, var_a85d39a2) {
       v_target_pos = var_6fba13f1;
     }
 
-    var_6fba13f1 = groundtrace(v_target_pos + (0, 0, 100), v_target_pos + (0, 0, -1000), 0, undefined, 0)[# "position"];
+    var_6fba13f1 = groundtrace(v_target_pos + (0, 0, 100), v_target_pos + (0, 0, -1000), 0, undefined, 0)[#"position"];
 
     if(isDefined(var_6fba13f1)) {
       v_target_pos = var_6fba13f1;
@@ -639,9 +641,9 @@ function_5adaf171(var_2ddb51af) {
     v_target_pos = (var_2ddb51af[0] + randomfloat(400), var_2ddb51af[1] + randomfloat(400), var_2ddb51af[2]);
     s_trace = bulletTrace(self.origin + (0, 0, 16), v_target_pos, 0, self);
 
-    if(isDefined(s_trace[# "position"])) {
-      if(sighttracepassed(s_trace[# "position"], v_target_pos, 0, self)) {
-        return s_trace[# "position"];
+    if(isDefined(s_trace[#"position"])) {
+      if(sighttracepassed(s_trace[#"position"], v_target_pos, 0, self)) {
+        return s_trace[#"position"];
       }
 
       continue;
@@ -656,7 +658,7 @@ function_5adaf171(var_2ddb51af) {
 }
 
 function_10c91a46() {
-  self endon(#"disconnect", # "hash_2ca901b5ada4f20f");
+  self endon(#"disconnect", #"hash_2ca901b5ada4f20f");
   self.var_be72e7c2 endon(#"death");
   self.var_be72e7c2.t_damage endon(#"death");
 
@@ -693,22 +695,22 @@ private function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_
   self.var_d9e7a08a = 1;
   v_origin = var_ab287846.origin;
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     self.no_powerups = 1;
     self dodamage(self.health + 100, v_origin, e_player, e_player, undefined, "MOD_BURNED", 0, w_flamethrower);
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss" || self.zm_ai_category == # "heavy") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss" || self.zm_ai_category == #"heavy") {
     self endon(#"death");
     [[level.var_f2f67d17]] - > waitinqueue(self);
 
-    if(var_ab287846 function_58942bba(self) && self.zm_ai_category == # "miniboss") {
+    if(var_ab287846 function_58942bba(self) && self.zm_ai_category == #"miniboss") {
       var_ab287846 thread scene::init(#"p8_zm_flame_tornado_miniboss_scene", self);
       self dodamage(self.maxhealth * 0.18, v_origin, e_player, e_player, "none", "MOD_BURNED", 0, w_flamethrower);
       self.var_42d5176d = 1;
       self val::set(#"trap_ignore", "ignoreall", 1);
-      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[# "position"];
+      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[#"position"];
 
       if(!isDefined(v_pos)) {
         v_pos = self.origin;
@@ -717,7 +719,7 @@ private function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_
       self.var_68f4c9de = util::spawn_model("tag_origin", v_pos, self.angles);
       self.var_68f4c9de thread scene::init(#"p8_zm_flame_tornado_miniboss_scene", self);
       self thread function_e6f0a2c7(var_ab287846);
-      var_ab287846 waittill(#"death", # "hash_751e0293eed9a1cf", # "hash_124840b260697eb9");
+      var_ab287846 waittill(#"death", #"hash_751e0293eed9a1cf", #"hash_124840b260697eb9");
 
       if(isDefined(self) && isDefined(self.var_68f4c9de)) {
         self.var_68f4c9de scene::play(#"p8_zm_flame_tornado_miniboss_scene", self);
@@ -729,7 +731,7 @@ private function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_
         self.var_d9e7a08a = undefined;
         self.var_68f4c9de delete();
       }
-    } else if(self.zm_ai_category == # "heavy") {
+    } else if(self.zm_ai_category == #"heavy") {
       self zombie_utility::setup_zombie_knockdown(e_player);
       self dodamage(self.maxhealth * 0.2, v_origin, e_player, e_player, "none", "MOD_BURNED", 0, w_flamethrower);
       wait 1;
@@ -757,7 +759,7 @@ private function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_
       var_ab287846 thread function_943cd1e3(e_player, self);
       var_c74251a4 = scene::function_8582657c(#"aib_vign_zm_mnsn_tornado_zombie", "Shot 1");
       n_time = randomfloatrange(2, var_c74251a4);
-      e_player waittilltimeout(n_time, # "hash_20d02a4b6d08596d", # "hash_2ca901b5ada4f20f", # "hash_751e0293eed9a1cf");
+      e_player waittilltimeout(n_time, #"hash_20d02a4b6d08596d", #"hash_2ca901b5ada4f20f", #"hash_751e0293eed9a1cf");
 
       if(!isDefined(self)) {
         return;
@@ -802,7 +804,7 @@ private function_e6f0a2c7(var_ab287846) {
     return;
   }
 
-  var_ab287846 endon(#"death", # "hash_751e0293eed9a1cf");
+  var_ab287846 endon(#"death", #"hash_751e0293eed9a1cf");
   var_ab287846.t_damage endon(#"death");
 
   while(isDefined(self) && self istouching(var_ab287846.t_damage)) {
@@ -864,19 +866,19 @@ function_8cbc7c8f(var_2fb75486) {
 }
 
 function_478a4910(w_flamethrower) {
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired");
   s_result = self waittill(#"weapon_melee_power_left");
 
   if(s_result.weapon == w_flamethrower) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_2", # "flamethrower");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_2", #"flamethrower");
   }
 }
 
 function_68ff89f7(w_flamethrower) {
-  self endon(#"bled_out", # "death", # "hero_flamethrower_expired");
+  self endon(#"bled_out", #"death", #"hero_flamethrower_expired");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon == w_flamethrower) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "flamethrower");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"flamethrower");
   }
 }

@@ -24,10 +24,10 @@
 function init() {
   level.missileentities = [];
   level.hackertooltargets = [];
-  if(!isDefined(level.grenadelauncherdudtime)) {
+  if(!isdefined(level.grenadelauncherdudtime)) {
     level.grenadelauncherdudtime = 0;
   }
-  if(!isDefined(level.throwngrenadedudtime)) {
+  if(!isdefined(level.throwngrenadedudtime)) {
     level.throwngrenadedudtime = 0;
   }
   level thread onplayerconnect();
@@ -37,7 +37,7 @@ function init() {
 }
 
 function onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player.usedweapons = 0;
     player.lastfiretime = 0;
@@ -49,7 +49,7 @@ function onplayerconnect() {
 
 function onplayerspawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self.concussionendtime = 0;
     self.hasdonecombat = 0;
@@ -71,7 +71,7 @@ function watchweaponchange() {
   self endon("death");
   self endon("disconnect");
   self.lastdroppableweapon = self getcurrentweapon();
-  while(true) {
+  while (true) {
     previous_weapon = self getcurrentweapon();
     self waittill("weapon_change", newweapon);
     if(maydropweapon(newweapon)) {
@@ -83,7 +83,7 @@ function watchweaponchange() {
 function watchriotshielduse() {}
 
 function updatelastheldweapontimings(newtime) {
-  if(isDefined(self.currentweapon) && isDefined(self.currentweaponstarttime)) {
+  if(isdefined(self.currentweapon) && isdefined(self.currentweaponstarttime)) {
     totaltime = int((newtime - self.currentweaponstarttime) / 1000);
     if(totaltime > 0) {
       self addweaponstat(self.currentweapon, "timeUsed", totaltime);
@@ -97,7 +97,7 @@ function updateweapontimings(newtime) {
     return;
   }
   updatelastheldweapontimings(newtime);
-  if(!isDefined(self.staticweaponsstarttime)) {
+  if(!isdefined(self.staticweaponsstarttime)) {
     return;
   }
   totaltime = int((newtime - self.staticweaponsstarttime) / 1000);
@@ -105,20 +105,20 @@ function updateweapontimings(newtime) {
     return;
   }
   self.staticweaponsstarttime = newtime;
-  if(isDefined(self.weapon_array_grenade)) {
-    for(i = 0; i < self.weapon_array_grenade.size; i++) {
+  if(isdefined(self.weapon_array_grenade)) {
+    for (i = 0; i < self.weapon_array_grenade.size; i++) {
       self addweaponstat(self.weapon_array_grenade[i], "timeUsed", totaltime);
     }
   }
-  if(isDefined(self.weapon_array_inventory)) {
-    for(i = 0; i < self.weapon_array_inventory.size; i++) {
+  if(isdefined(self.weapon_array_inventory)) {
+    for (i = 0; i < self.weapon_array_inventory.size; i++) {
       self addweaponstat(self.weapon_array_inventory[i], "timeUsed", totaltime);
     }
   }
-  if(isDefined(self.killstreak)) {
-    for(i = 0; i < self.killstreak.size; i++) {
+  if(isdefined(self.killstreak)) {
+    for (i = 0; i < self.killstreak.size; i++) {
       killstreakweapon = level.menureferenceforkillstreak[self.killstreak[i]];
-      if(isDefined(killstreakweapon)) {
+      if(isdefined(killstreakweapon)) {
         self addweaponstat(killstreakweapon, "timeUsed", totaltime);
       }
     }
@@ -126,21 +126,21 @@ function updateweapontimings(newtime) {
   if(level.rankedmatch && level.perksenabled) {
     perksindexarray = [];
     specialtys = self.specialty;
-    if(!isDefined(specialtys)) {
+    if(!isdefined(specialtys)) {
       return;
     }
-    if(!isDefined(self.curclass)) {
+    if(!isdefined(self.curclass)) {
       return;
     }
-    if(isDefined(self.class_num)) {
-      for(numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
+    if(isdefined(self.class_num)) {
+      for (numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
         perk = self getloadoutitem(self.class_num, "specialty" + (numspecialties + 1));
         if(perk != 0) {
           perksindexarray[perk] = 1;
         }
       }
       perkindexarraykeys = getarraykeys(perksindexarray);
-      for(i = 0; i < perkindexarraykeys.size; i++) {
+      for (i = 0; i < perkindexarraykeys.size; i++) {
         if(perksindexarray[perkindexarraykeys[i]] == 1) {
           self adddstat("itemStats", perkindexarraykeys[i], "stats", "timeUsed", "statValue", totaltime);
         }
@@ -153,7 +153,7 @@ function trackweapon() {
   currentweapon = self getcurrentweapon();
   currenttime = gettime();
   spawnid = getplayerspawnid(self);
-  while(true) {
+  while (true) {
     event = self util::waittill_any_return("weapon_change", "death", "disconnect");
     newtime = gettime();
     if(event == "weapon_change") {
@@ -192,10 +192,10 @@ function dropweaponfordeath(attacker) {
     return;
   }
   weapon = self.lastdroppableweapon;
-  if(isDefined(self.droppeddeathweapon)) {
+  if(isdefined(self.droppeddeathweapon)) {
     return;
   }
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     if(getdvarstring("") == "") {
       println("");
     }
@@ -236,7 +236,7 @@ function dropweaponfordeath(attacker) {
     stockammo = stockmax;
   }
   item = self dropitem(weapon);
-  if(!isDefined(item)) {
+  if(!isdefined(item)) {
     iprintlnbold("" + weapon.name);
     return;
   }
@@ -255,7 +255,7 @@ function dropweaponfordeath(attacker) {
 function deletepickupafterawhile() {
   self endon("death");
   wait(60);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self delete();
@@ -264,24 +264,24 @@ function deletepickupafterawhile() {
 function watchpickup() {
   self endon("death");
   weapon = self.item;
-  while(true) {
+  while (true) {
     self waittill("trigger", player, droppeditem);
-    if(isDefined(droppeditem)) {
+    if(isdefined(droppeditem)) {
       break;
     }
   }
   if(getdvarstring("") == "") {
-    println((("" + weapon.name) + "") + isDefined(self.ownersattacker));
+    println((("" + weapon.name) + "") + isdefined(self.ownersattacker));
   }
-  assert(isDefined(player.tookweaponfrom));
-  assert(isDefined(player.pickedupweaponkills));
-  if(isDefined(droppeditem)) {
-    for(i = 0; i < droppeditem.size; i++) {
-      if(!isDefined(droppeditem[i])) {
+  assert(isdefined(player.tookweaponfrom));
+  assert(isdefined(player.pickedupweaponkills));
+  if(isdefined(droppeditem)) {
+    for (i = 0; i < droppeditem.size; i++) {
+      if(!isdefined(droppeditem[i])) {
         continue;
       }
       droppedweapon = droppeditem[i].item;
-      if(isDefined(player.tookweaponfrom[droppedweapon])) {
+      if(isdefined(player.tookweaponfrom[droppedweapon])) {
         droppeditem[i].owner = player.tookweaponfrom[droppedweapon];
         droppeditem[i].ownersattacker = player;
         player.tookweaponfrom[droppedweapon] = undefined;
@@ -289,7 +289,7 @@ function watchpickup() {
       droppeditem[i] thread watchpickup();
     }
   }
-  if(isDefined(self.ownersattacker) && self.ownersattacker == player) {
+  if(isdefined(self.ownersattacker) && self.ownersattacker == player) {
     player.tookweaponfrom[weapon] = self.owner;
     player.pickedupweaponkills[weapon] = 0;
   } else {
@@ -314,7 +314,7 @@ function watchweaponusage() {
   self.killstreaktype["m202_flash"] = "m202_flash";
   self.killstreaktype["m220_tow"] = "m220_tow";
   self.killstreaktype["mp40_blinged"] = "mp40_blinged_drop";
-  for(;;) {
+  for (;;) {
     self waittill("weapon_fired", curweapon);
     self.lastfiretime = gettime();
     self.hasdonecombat = 1;
@@ -342,7 +342,7 @@ function watchweaponusage() {
 
 function trackweaponfire(curweapon) {
   shotsfired = 1;
-  if(isDefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
+  if(isdefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
     self.hits = 0;
     return;
   }
@@ -351,7 +351,7 @@ function trackweaponfire(curweapon) {
   self addweaponstat(curweapon, "shots", shotsfired);
   self addweaponstat(curweapon, "hits", self.hits);
   self addweaponstat(curweapon, "misses", misses);
-  if(isDefined(level.add_client_stat)) {
+  if(isdefined(level.add_client_stat)) {
     self[[level.add_client_stat]]("total_shots", shotsfired);
     self[[level.add_client_stat]]("hits", self.hits);
     self[[level.add_client_stat]]("misses", misses);
@@ -379,7 +379,7 @@ function watchgrenadeusage() {
   self thread watchforthrowbacks();
   self thread watchforgrenadeduds();
   self thread watchforgrenadelauncherduds();
-  for(;;) {
+  for (;;) {
     self waittill("grenade_pullback", weapon);
     self addweaponstat(weapon, "shots", 1);
     self.hasdonecombat = 1;
@@ -397,12 +397,12 @@ function watchmissileusage() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill("missile_fire", missile, weapon);
     self.hasdonecombat = 1;
-    /
+    /# /
     #
-    assert(isDefined(missile));
+    assert(isdefined(missile));
     level.missileentities[level.missileentities.size] = missile;
     missile.weapon = weapon;
     missile thread watchmissiledeath();
@@ -416,17 +416,17 @@ function watchmissiledeath() {
 
 function dropweaponstoground(origin, radius) {
   weapons = getdroppedweapons();
-  for(i = 0; i < weapons.size; i++) {
+  for (i = 0; i < weapons.size; i++) {
     if(distancesquared(origin, weapons[i].origin) < (radius * radius)) {
-      trace = bulletTrace(weapons[i].origin, weapons[i].origin + (vectorscale((0, 0, -1), 2000)), 0, weapons[i]);
+      trace = bullettrace(weapons[i].origin, weapons[i].origin + (vectorscale((0, 0, -1), 2000)), 0, weapons[i]);
       weapons[i].origin = trace["position"];
     }
   }
 }
 
 function dropgrenadestoground(origin, radius) {
-  grenades = getEntArray("grenade", "classname");
-  for(i = 0; i < grenades.size; i++) {
+  grenades = getentarray("grenade", "classname");
+  for (i = 0; i < grenades.size; i++) {
     if(distancesquared(origin, grenades[i].origin) < (radius * radius)) {
       grenades[i] launch(vectorscale((1, 1, 1), 5));
     }
@@ -439,7 +439,7 @@ function watchgrenadecancel() {
   self endon("grenade_fire");
   waittillframeend();
   weapon = level.weaponnone;
-  while(self isthrowinggrenade() && weapon == level.weaponnone) {
+  while (self isthrowinggrenade() && weapon == level.weaponnone) {
     self waittill("weapon_change", weapon);
   }
   self.throwinggrenade = 0;
@@ -449,7 +449,7 @@ function watchgrenadecancel() {
 function watch_offhand_end() {
   self notify("watchoffhandend");
   self endon("watchoffhandend");
-  while(self is_using_offhand_equipment()) {
+  while (self is_using_offhand_equipment()) {
     msg = self util::waittill_any_return("death", "disconnect", "grenade_fire", "weapon_change", "watchOffhandEnd");
     if(msg == "death" || msg == "disconnect") {
       break;
@@ -474,7 +474,7 @@ function begingrenadetracking() {
   starttime = gettime();
   self thread watchgrenadecancel();
   self waittill("grenade_fire", grenade, weapon);
-  if(!isDefined(grenade)) {
+  if(!isdefined(grenade)) {
     return;
   }
   level.missileentities[level.missileentities.size] = grenade;
@@ -504,11 +504,11 @@ function beginothergrenadetracking() {}
 function checkstucktoplayer(deleteonteamchange, awardscoreevent, weapon) {
   self endon("death");
   self waittill("stuck_to_player", player);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     if(deleteonteamchange) {
       self thread stucktoplayerteamchange(player);
     }
-    if(awardscoreevent && isDefined(self.originalowner)) {}
+    if(awardscoreevent && isdefined(self.originalowner)) {}
     self.stucktoplayer = player;
   }
 }
@@ -524,7 +524,7 @@ function stucktoplayerteamchange(player) {
   self endon("death");
   player endon("disconnect");
   originalteam = player.pers["team"];
-  while(true) {
+  while (true) {
     player waittill("joined_team");
     if(player.pers["team"] != originalteam) {
       self detonate();
@@ -536,7 +536,7 @@ function stucktoplayerteamchange(player) {
 function watchforthrowbacks() {
   self endon("death");
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon);
     if(self.gotpullbacknotify) {
       self.gotpullbacknotify = 0;
@@ -603,9 +603,9 @@ function turngrenadeintoadud(weapon, isthrowngrenade, player) {
         timeleft = 1;
       }
       if(isthrowngrenade) {
-        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
+        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
       } else {
-        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
+        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
       }
       self makegrenadedud();
     }
@@ -615,7 +615,7 @@ function turngrenadeintoadud(weapon, isthrowngrenade, player) {
 function watchforgrenadeduds() {
   self endon("spawned_player");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("grenade_fire", grenade, weapon);
     grenade turngrenadeintoadud(weapon, 1, self);
   }
@@ -624,12 +624,12 @@ function watchforgrenadeduds() {
 function watchforgrenadelauncherduds() {
   self endon("spawned_player");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("grenade_launcher_fire", grenade, weapon);
     grenade turngrenadeintoadud(weapon, 0, self);
-    /
+    /# /
     #
-    assert(isDefined(grenade));
+    assert(isdefined(grenade));
     level.missileentities[level.missileentities.size] = grenade;
     grenade.weapon = weapon;
     grenade thread watchmissiledeath();
@@ -638,21 +638,21 @@ function watchforgrenadelauncherduds() {
 
 function getdamageableents(pos, radius, dolos, startradius) {
   ents = [];
-  if(!isDefined(dolos)) {
+  if(!isdefined(dolos)) {
     dolos = 0;
   }
-  if(!isDefined(startradius)) {
+  if(!isdefined(startradius)) {
     startradius = 0;
   }
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
     }
     playerpos = players[i].origin + vectorscale((0, 0, 1), 32);
     distsq = distancesquared(pos, playerpos);
     if(distsq < (radius * radius) && (!dolos || weapondamagetracepassed(pos, playerpos, startradius, undefined))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 1;
       newent.isadestructable = 0;
       newent.isadestructible = 0;
@@ -662,12 +662,12 @@ function getdamageableents(pos, radius, dolos, startradius) {
       ents[ents.size] = newent;
     }
   }
-  grenades = getEntArray("grenade", "classname");
-  for(i = 0; i < grenades.size; i++) {
+  grenades = getentarray("grenade", "classname");
+  for (i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     distsq = distancesquared(pos, entpos);
     if(distsq < (radius * radius) && (!dolos || weapondamagetracepassed(pos, entpos, startradius, grenades[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.isadestructible = 0;
@@ -677,12 +677,12 @@ function getdamageableents(pos, radius, dolos, startradius) {
       ents[ents.size] = newent;
     }
   }
-  destructibles = getEntArray("destructible", "targetname");
-  for(i = 0; i < destructibles.size; i++) {
+  destructibles = getentarray("destructible", "targetname");
+  for (i = 0; i < destructibles.size; i++) {
     entpos = destructibles[i].origin;
     distsq = distancesquared(pos, entpos);
     if(distsq < (radius * radius) && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructibles[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.isadestructible = 1;
@@ -692,12 +692,12 @@ function getdamageableents(pos, radius, dolos, startradius) {
       ents[ents.size] = newent;
     }
   }
-  destructables = getEntArray("destructable", "targetname");
-  for(i = 0; i < destructables.size; i++) {
+  destructables = getentarray("destructable", "targetname");
+  for (i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     distsq = distancesquared(pos, entpos);
     if(distsq < (radius * radius) && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructables[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isplayer = 0;
       newent.isadestructable = 1;
       newent.isadestructible = 0;
@@ -730,7 +730,7 @@ function damageent(einflictor, eattacker, idamage, smeansofdeath, weapon, damage
 }
 
 function debugline(a, b, color) {
-  for(i = 0; i < 600; i++) {
+  for (i = 0; i < 600; i++) {
     line(a, b, color);
     wait(0.05);
   }
@@ -762,8 +762,10 @@ function onweapondamage(eattacker, einflictor, weapon, meansofdeath, damage) {
       break;
     }
     default: {
-      if(isDefined(level.shellshockonplayerdamage)) {
-        [[level.shellshockonplayerdamage]](meansofdeath, damage, weapon);
+      if(isdefined(level.shellshockonplayerdamage)) {
+        [
+          [level.shellshockonplayerdamage]
+        ](meansofdeath, damage, weapon);
       }
       break;
     }
@@ -777,12 +779,12 @@ function playconcussionsound(duration) {
   concussionsound.origin = self.origin;
   concussionsound linkto(self);
   concussionsound thread deleteentonownerdeath(self);
-  concussionsound playSound("");
-  concussionsound playLoopSound("");
+  concussionsound playsound("");
+  concussionsound playloopsound("");
   if(duration > 0.5) {
     wait(duration - 0.5);
   }
-  concussionsound playSound("");
+  concussionsound playsound("");
   concussionsound stoploopsound(0.5);
   wait(0.5);
   concussionsound notify("delete");
@@ -803,14 +805,14 @@ function updatestowedweapon() {
   self.tag_stowed_hip = undefined;
   team = self.pers["team"];
   curclass = self.pers["class"];
-  while(true) {
+  while (true) {
     self waittill("weapon_change", newweapon);
     self.weapon_array_primary = [];
     self.weapon_array_sidearm = [];
     self.weapon_array_grenade = [];
     self.weapon_array_inventory = [];
     weaponslist = self getweaponslist();
-    for(idx = 0; idx < weaponslist.size; idx++) {
+    for (idx = 0; idx < weaponslist.size; idx++) {
       switch (weaponslist[idx]) {
         case "m202_flash":
         case "m220_tow":
@@ -852,8 +854,8 @@ function updatestowedweapon() {
 
 function loadout_get_class_num() {
   assert(isplayer(self));
-  assert(isDefined(self.curclass));
-  if(isDefined(level.classtoclassnum[self.curclass])) {
+  assert(isdefined(self.curclass));
+  if(isdefined(level.classtoclassnum[self.curclass])) {
     return level.classtoclassnum[self.curclass];
   }
   class_num = (int(self.curclass[self.curclass.size - 1])) - 1;
@@ -864,19 +866,19 @@ function loadout_get_class_num() {
 }
 
 function loadout_get_offhand_weapon(stat) {
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     return level.weaponnone;
   }
   class_num = self loadout_get_class_num();
   index = 0;
-  if(isDefined(level.tbl_weaponids[index]) && isDefined(level.tbl_weaponids[index]["reference"])) {
+  if(isdefined(level.tbl_weaponids[index]) && isdefined(level.tbl_weaponids[index]["reference"])) {
     return getweapon(level.tbl_weaponids[index]["reference"]);
   }
   return level.weaponnone;
 }
 
 function loadout_get_offhand_count(stat) {
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     return 0;
   }
   class_num = self loadout_get_class_num();
@@ -890,14 +892,14 @@ function scavenger_think() {
   primary_weapons = player getweaponslistprimaries();
   offhand_weapons_and_alts = array::exclude(player getweaponslist(1), primary_weapons);
   arrayremovevalue(offhand_weapons_and_alts, level.weaponbasemelee);
-  player playSound("wpn_ammo_pickup");
+  player playsound("wpn_ammo_pickup");
   player playlocalsound("wpn_ammo_pickup");
   player.scavenger_icon.alpha = 1;
   player.scavenger_icon fadeovertime(2.5);
   player.scavenger_icon.alpha = 0;
   scavenger_lethal_proc = 1;
   scavenger_tactical_proc = 1;
-  if(!isDefined(player.scavenger_lethal_proc)) {
+  if(!isdefined(player.scavenger_lethal_proc)) {
     player.scavenger_lethal_proc = 0;
     player.scavenger_tactical_proc = 0;
   }
@@ -905,7 +907,7 @@ function scavenger_think() {
   loadout_primary_count = player loadout_get_offhand_count("primarygrenadecount");
   loadout_secondary = player loadout_get_offhand_weapon("specialgrenade");
   loadout_secondary_count = player loadout_get_offhand_count("specialgrenadeCount");
-  for(i = 0; i < offhand_weapons_and_alts.size; i++) {
+  for (i = 0; i < offhand_weapons_and_alts.size; i++) {
     weapon = offhand_weapons_and_alts[i];
     if(!weapon.isscavengable) {
       continue;
@@ -917,7 +919,7 @@ function scavenger_think() {
       case "hatchet":
       case "satchel_charge":
       case "sticky_grenade": {
-        if(isDefined(player.grenadetypeprimarycount) && player.grenadetypeprimarycount < 1) {
+        if(isdefined(player.grenadetypeprimarycount) && player.grenadetypeprimarycount < 1) {
           break;
         }
         if(player getweaponammostock(weapon) != loadout_primary_count) {
@@ -939,7 +941,7 @@ function scavenger_think() {
       case "tabun_gas":
       case "trophy_system":
       case "willy_pete": {
-        if(isDefined(player.grenadetypesecondarycount) && player.grenadetypesecondarycount < 1) {
+        if(isdefined(player.grenadetypesecondarycount) && player.grenadetypesecondarycount < 1) {
           break;
         }
         if(weapon == loadout_secondary && player getweaponammostock(weapon) != loadout_secondary_count) {
@@ -952,7 +954,7 @@ function scavenger_think() {
         }
         maxammo = weapon.maxammo;
         stock = player getweaponammostock(weapon);
-        if(isDefined(level.customloadoutscavenge)) {
+        if(isdefined(level.customloadoutscavenge)) {
           maxammo = self[[level.customloadoutscavenge]](weapon);
         } else {
           if(weapon == loadout_primary) {
@@ -990,7 +992,7 @@ function scavenger_think() {
       }
     }
   }
-  for(i = 0; i < primary_weapons.size; i++) {
+  for (i = 0; i < primary_weapons.size; i++) {
     weapon = primary_weapons[i];
     if(!weapon.isscavengable) {
       continue;
@@ -1037,7 +1039,7 @@ function dropscavengerfordeath(attacker) {
   if(level.wagermatch) {
     return;
   }
-  if(!isDefined(attacker)) {
+  if(!isdefined(attacker)) {
     return;
   }
   if(attacker == self) {
@@ -1052,7 +1054,7 @@ function dropscavengerfordeath(attacker) {
 }
 
 function addlimitedweapon(weapon, owner, num_drops) {
-  limited_info = spawnStruct();
+  limited_info = spawnstruct();
   limited_info.weapon = weapon;
   limited_info.drops = num_drops;
   owner.limited_info = limited_info;
@@ -1060,7 +1062,7 @@ function addlimitedweapon(weapon, owner, num_drops) {
 
 function shoulddroplimitedweapon(weapon, owner) {
   limited_info = owner.limited_info;
-  if(!isDefined(limited_info)) {
+  if(!isdefined(limited_info)) {
     return true;
   }
   if(limited_info.weapon != weapon) {
@@ -1074,7 +1076,7 @@ function shoulddroplimitedweapon(weapon, owner) {
 
 function droplimitedweapon(weapon, owner, item) {
   limited_info = owner.limited_info;
-  if(!isDefined(limited_info)) {
+  if(!isdefined(limited_info)) {
     return;
   }
   if(limited_info.weapon != weapon) {
@@ -1088,7 +1090,7 @@ function droplimitedweapon(weapon, owner, item) {
 function limitedpickup(limited_info) {
   self endon("death");
   self waittill("trigger", player, item);
-  if(!isDefined(item)) {
+  if(!isdefined(item)) {
     return;
   }
   player.limited_info = limited_info;

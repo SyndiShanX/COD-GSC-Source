@@ -49,37 +49,37 @@ function set_ambient_state() {
 function setup_vignettes() {
   function_82dd4dd2("cin_ram_02_03_station_vign_readingipad_guy01");
   a_str_scenes = [];
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_bloodmopping_clean";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_balcony_surveying_guy01";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_balcony_surveying_guy02";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_scaffold_inspecting";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_ram_02_03_station_vign_readingipad_guy01";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
@@ -88,7 +88,7 @@ function setup_vignettes() {
   e_spawner = getent("worker_spawner", "targetname");
   a_str_scenes = array::randomize(a_str_scenes);
   n_vign_total = randomintrange(3, 4);
-  for(n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
+  for (n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
     str_scene = a_str_scenes[n_vign_index];
     level thread scene::play(str_scene, e_spawner);
   }

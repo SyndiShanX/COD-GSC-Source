@@ -13,25 +13,25 @@
 #namespace rat;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
   rat_shared::init();
-  level.rat.common.gethostplayer = &util::gethostplayer;
+  level.rat.common.gethostplayer = & util::gethostplayer;
   level.rat.deathcount = 0;
-  rat_shared::addratscriptcmd("", &rscaddenemy);
+  rat_shared::addratscriptcmd("", & rscaddenemy);
   setdvar("", 0);
 }
 
 function rscaddenemy(params) {
   player = [[level.rat.common.gethostplayer]]();
   team = "";
-  if(isDefined(player.pers[""])) {
+  if(isdefined(player.pers[""])) {
     team = util::getotherteam(player.pers[""]);
   }
   bot = dev::getormakebot(team);
-  if(!isDefined(bot)) {
+  if(!isdefined(bot)) {
     println("");
     ratreportcommandresult(params._id, 0, "");
     return;
@@ -41,7 +41,7 @@ function rscaddenemy(params) {
   wait(2);
   pos = (float(params.x), float(params.y), float(params.z));
   bot setorigin(pos);
-  if(isDefined(params.ax)) {
+  if(isdefined(params.ax)) {
     angles = (float(params.ax), float(params.ay), float(params.az));
     bot setplayerangles(angles);
   }
@@ -50,7 +50,7 @@ function rscaddenemy(params) {
 
 function testenemy(team) {
   self endon("disconnect");
-  while(!isDefined(self.pers[""])) {
+  while (!isdefined(self.pers[""])) {
     wait(0.05);
   }
   if(level.teambased) {

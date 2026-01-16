@@ -32,9 +32,8 @@ mason_carry_woods(str_startup_scene) {
   if(isDefined(str_startup_scene)) {
     level thread run_scene_first_frame(str_startup_scene);
 
-    if(!isDefined(level.m_player_rig)) {
+    if(!isDefined(level.m_player_rig))
       level.m_player_rig = get_model_or_models_from_scene(str_startup_scene, "player_body_river");
-    }
 
     level.ai_woods thread debug_draw_star();
     level.ai_woods anim_set_blend_in_time(0.0);
@@ -44,7 +43,7 @@ mason_carry_woods(str_startup_scene) {
   }
 
   level.m_player_spot = spawn("script_model", level.m_player_rig.origin);
-  level.m_player_spot setModel("tag_origin");
+  level.m_player_spot setmodel("tag_origin");
   level.m_player_spot.angles = level.m_player_rig.angles;
   level.m_player_spot thread carry_movement_sounds();
   level.default_mason_carry_crouch_speed = 155;
@@ -59,8 +58,8 @@ carry_movement_sounds() {
 
   while(true) {
     self waittill("sound_run");
-    self playSound("evt_anim_woods_carry_lp", 0.7);
-    self playSound("fly_gear_run_plr");
+    self playsound("evt_anim_woods_carry_lp", 0.7);
+    self playsound("fly_gear_run_plr");
     wait(randomfloatrange(0.45, 0.65));
   }
 }
@@ -152,9 +151,8 @@ mason_movement() {
         wait 0.05;
       }
 
-      while(flag("pause_woods_carry")) {
+      while(flag("pause_woods_carry"))
         wait 0.05;
-      }
 
       level.woods_carry_is_crouched = 0;
       level.player setstance("stand");
@@ -190,16 +188,15 @@ mason_movement_translation(m_player_rig) {
     }
 
     if(level.woods_carry_disable_movement == 0) {
-      if(level.woods_carry_is_crouched == 0) {
+      if(level.woods_carry_is_crouched == 0)
         n_speed = level.mason_carry_crouch_speed;
-      } else {
+      else
         n_speed = n_movement_crouch_speed;
-      }
 
       a_normalized_movement = level.player getnormalizedmovement();
       n_movement_strength = length(a_normalized_movement);
       rig_angles = m_player_rig.angles;
-      forward = anglesToForward(rig_angles);
+      forward = anglestoforward(rig_angles);
       right = anglestoright(rig_angles);
       speed_forward = n_speed * a_normalized_movement[0];
       speed_right = n_speed * a_normalized_movement[1];
@@ -248,8 +245,8 @@ mason_movement_translation(m_player_rig) {
             v_movement_perp_inverse = v_movement_perp * -1;
             a_movement_perp_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward);
             a_movement_perp_inverse_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward);
-            bt_movement_perp_trace = bulletTrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, 0, m_player_rig);
-            bt_movement_perp_inverse_trace = bulletTrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, 0, m_player_rig);
+            bt_movement_perp_trace = bullettrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, 0, m_player_rig);
+            bt_movement_perp_inverse_trace = bullettrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, 0, m_player_rig);
             frac0 = calc_frac(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, a_movement_perp_trace);
             frac1 = calc_frac(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, a_movement_perp_inverse_trace);
             a_forward_trace = a_movement_perp_trace;
@@ -270,9 +267,8 @@ mason_movement_translation(m_player_rig) {
           v_collision_to_player = vectornormalize(v_forward_trace - level.player.origin);
           n_parallel_dot = vectordot(v_collision_parallel, v_collision_to_player);
 
-          if(n_parallel_dot < 0) {
+          if(n_parallel_dot < 0)
             v_collision_parallel = v_collision_parallel * -1;
-          }
 
           v_velocity = v_velocity + v_collision_parallel * (n_projection * abs(n_parallel_dot));
         }
@@ -282,9 +278,8 @@ mason_movement_translation(m_player_rig) {
         v_final_woods_spot = v_woods_spot + vectornormalize(v_velocity) * 16 + level.woods_carry_height_offset;
         v_final_woods_trace = playerphysicstrace(v_woods_spot + level.woods_carry_height_offset, v_final_woods_spot);
 
-        if(v_final_woods_spot != v_final_woods_trace) {
+        if(v_final_woods_spot != v_final_woods_trace)
           v_final_spot = level.m_player_spot.origin;
-        }
 
         v_start = v_final_spot + level.woods_carry_height_offset + vectorscale((0, 0, 1), 32.0);
         v_end = v_final_spot - vectorscale((0, 0, 1), 100.0);
@@ -292,24 +287,21 @@ mason_movement_translation(m_player_rig) {
         v_final_spot = (v_final_spot[0], v_final_spot[1], ground_trace[2]);
         n_to_hudson = distance2dsquared(v_final_spot, level.ai_hudson gettagorigin("tag_eye"));
 
-        if(n_to_hudson > 1024) {
+        if(n_to_hudson > 1024)
           level.m_player_spot.origin = v_final_spot;
-        }
 
         v_start = level.m_player_spot.origin + vectorscale((0, 0, 1), 32.0);
         v_end = level.m_player_spot.origin - vectorscale((0, 0, 1), 32.0);
         ground_trace = physicstrace(v_start, v_end);
 
-        if(ground_trace == v_end) {
+        if(ground_trace == v_end)
           level.m_player_spot.origin = v_start_pos;
-        }
       } else {
         if(level.woods_carry_is_moving) {
-          if(level.woods_carry_is_crouched == 0) {
+          if(level.woods_carry_is_crouched == 0)
             str_anim_name = "mason_carry_idle";
-          } else {
+          else
             str_anim_name = "mason_carry_crouch_idle";
-          }
 
           level.m_player_spot notify("sound_stop");
           level.m_player_spot notify("stop_loop");
@@ -330,9 +322,8 @@ calc_frac(v_start, v_end, v_midpoint) {
   dist = distance(v_start, v_end);
   mag = distance(v_start, v_midpoint);
 
-  if(dist == 0 || mag == 0) {
+  if(dist == 0 || mag == 0)
     return 0;
-  }
 
   frac = mag / dist;
   return frac;
@@ -354,7 +345,7 @@ mason_movement_rotation(m_player_rig) {
     }
 
     rig_angles = m_player_rig.angles;
-    forward = anglesToForward(rig_angles);
+    forward = anglestoforward(rig_angles);
     right = anglestoright(rig_angles);
     a_normalized_rotation = level.player getnormalizedcameramovement();
 
@@ -398,13 +389,11 @@ carry_crouch_buttonpressed() {
       binding = getkeybinding("togglecrouch");
 
       if(isDefined(binding)) {
-        if(binding["count"]) {
+        if(binding["count"])
           pressed = self buttonpressed(tolower(binding["key1"]));
-        }
 
-        if(!pressed && binding["count"] == 2) {
+        if(!pressed && binding["count"] == 2)
           pressed = self buttonpressed(tolower(binding["key2"]));
-        }
       }
 
       if(!pressed) {
@@ -412,13 +401,11 @@ carry_crouch_buttonpressed() {
         binding = getkeybinding("gocrouch");
 
         if(isDefined(binding)) {
-          if(binding["count"]) {
+          if(binding["count"])
             pressed = self buttonpressed(tolower(binding["key1"]));
-          }
 
-          if(!pressed && binding["count"] == 2) {
+          if(!pressed && binding["count"] == 2)
             pressed = self buttonpressed(tolower(binding["key2"]));
-          }
         }
       }
     }

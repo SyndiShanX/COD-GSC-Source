@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   character\mp_character_op_arab_sniper::main();
 }
 

@@ -283,12 +283,12 @@ moon_pad_malfunction_think() {
   pad_hook setModel("tag_origin");
   while(isDefined(self)) {
     wait(RandomIntRange(30, 60));
-    pad_hook playSound("zmb_turret_down");
+    pad_hook playsound("zmb_turret_down");
     pad_hook SetClientFlag(level._CLIENTFLAG_SCRIPTMOVER_DOME_MALFUNCTION_PAD);
     wait_network_frame();
     self trigger_off();
     wait(RandomIntRange(10, 30));
-    pad_hook playSound("zmb_turret_startup");
+    pad_hook playsound("zmb_turret_startup");
     pad_hook ClearClientFlag(level._CLIENTFLAG_SCRIPTMOVER_DOME_MALFUNCTION_PAD);
     wait_network_frame();
     self trigger_on();
@@ -533,7 +533,7 @@ moon_jump_pad_cushion_play_sound() {
   while(isDefined(self)) {
     self waittill("trigger", who);
     if(IsPlayer(who) && is_true(who._padded)) {
-      self playSound("evt_jump_pad_land");
+      self PlaySound("evt_jump_pad_land");
     }
   }
 }

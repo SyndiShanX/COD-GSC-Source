@@ -111,9 +111,8 @@ is_elevator_clear(elevator) {
   if(isDefined(elevator_door_safety)) {
     for(i = 0; i < elevator_door_safety.size; i++) {
       for(j = 0; j < players.size; j++) {
-        if(players[j] IsTouching(elevator_door_safety[i])) {
+        if(players[j] IsTouching(elevator_door_safety[i]))
           return false;
-        }
       }
     }
   }
@@ -247,7 +246,7 @@ enable_elevator_buys() {
 }
 
 enable_callboxes() {
-  call_boxes = getEntArray(self.targetname + "_call_box", "targetname");
+  call_boxes = getentarray(self.targetname + "_call_box", "targetname");
   for(j = 0; j < call_boxes.size; j++) {
     if(call_boxes[j].script_noteworthy != self.station) {
       call_boxes[j] trigger_on();
@@ -294,16 +293,16 @@ elevator_move_to(elevator) {
   if(elevator.targetname == "elevator2") {
     clientnotify("ele1e");
     if(elevator.station == elevator.targetname + "_up") {
-      elevator playSound("zmb_vox_pentann_level_1");
+      elevator PlaySound("zmb_vox_pentann_level_1");
     } else if(elevator.station == elevator.targetname + "_down") {
-      elevator playSound("zmb_vox_pentann_level_2");
+      elevator PlaySound("zmb_vox_pentann_level_2");
     }
   } else if(elevator.targetname == "elevator1") {
     clientnotify("ele2e");
     if(elevator.station == elevator.targetname + "_up") {
-      elevator playSound("zmb_vox_pentann_level_2");
+      elevator PlaySound("zmb_vox_pentann_level_2");
     } else if(elevator.station == elevator.targetname + "_down") {
-      elevator playSound("zmb_vox_pentann_level_3");
+      elevator PlaySound("zmb_vox_pentann_level_3");
     }
   }
   flag_set("elevator_grounded");
@@ -483,7 +482,7 @@ move_zombies_elevator(going_up) {
           if(isDefined(self.zombie_move_speed)) {
             move_speed = self.zombie_move_speed;
           }
-          playFX(level._effect["transporter_start"], zombies[i].origin);
+          PlayFX(level._effect["transporter_start"], zombies[i].origin);
           if(zombies[i].health == level.zombie_health) {
             level.zombie_total++;
             if(isDefined(zombies[i].fx_quad_trail)) {
@@ -523,7 +522,7 @@ laststand_elev_zombies_away(current_floor, next_floor) {
       } else if(zombies[i].floor == 3 && flag("power_on")) {
         zombies[i] thread send_zombies_out(level.portal_power);
       } else {
-        playFX(level._effect["transporter_start"], zombies[i].origin);
+        PlayFX(level._effect["transporter_start"], zombies[i].origin);
         if(zombies[i].health == level.zombie_health) {
           level.zombie_total++;
           if(isDefined(zombies[i].fx_quad_trail)) {
@@ -590,7 +589,7 @@ elev_clean_up_corpses() {
 }
 
 elev_remove_corpses() {
-  playFX(level._effect["dog_gib"], self.origin);
+  PlayFX(level._effect["dog_gib"], self.origin);
   self Delete();
 }
 
@@ -674,7 +673,7 @@ open_elev_doors() {
     for(i = 0; i < self.elevator_players.size; i++) {
       if(!self.elevator_players[i] IsTouching(check_trig)) {
         self.elevator_players[i] SetOrigin(self.origin + (RandomFloatRange(-32, 32), RandomFloatRange(-32, 32), 10));
-        self.elevator_players[i] playSound("zmb_laugh_child");
+        self.elevator_players[i] playsound("zmb_laugh_child");
       }
       self.elevator_players = array_remove(self.elevator_players, self.elevator_players[i]);
     }
@@ -766,9 +765,8 @@ redirect_zombies(destination) {
   players = get_players();
   num_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(players[i] IsTouching(self)) {
+    if(players[i] IsTouching(self))
       num_players++;
-    }
   }
   if(!num_players == players.size) {
     return;

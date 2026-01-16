@@ -149,11 +149,10 @@ init_cortex_score_component() {
 }
 
 init_cortex_score(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     var_0.max_cortex_damage_limit = 1200;
-  } else {
+  else
     var_0.max_cortex_damage_limit = 750;
-  }
 
   return var_0;
 }
@@ -177,9 +176,8 @@ update_cortex_charge_bonus(var_0) {
   }
   var_1 = var_0 * 25;
 
-  if(maps\mp\mp_alien_last_final_battle::get_cortex_charge_percent() >= var_1) {
+  if(maps\mp\mp_alien_last_final_battle::get_cortex_charge_percent() >= var_1)
     maps\mp\alien\_gamescore::update_team_encounter_performance("cortex", "reach_charge_goal");
-  }
 }
 
 init_partial_hive_score_component_list_func() {

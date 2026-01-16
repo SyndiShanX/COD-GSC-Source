@@ -64,7 +64,8 @@ skipto_slums_main() {
   level thread church_right_mg();
 }
 
-skipto_slums_halfway() {}
+skipto_slums_halfway() {
+}
 
 init_flags() {
   flag_init("ambulance_complete");
@@ -107,9 +108,8 @@ init_flags() {
 challenge_irstrobe_kill(str_notify) {
   level.ac130_irstrobe_kills = 0;
 
-  while(level.ac130_irstrobe_kills < 15) {
+  while(level.ac130_irstrobe_kills < 15)
     wait 0.5;
-  }
 
   self notify(str_notify);
 }
@@ -248,13 +248,13 @@ ambulance_van() {
   run_scene("slums_ambulance");
   v_ambulance = getent("ambulence", "targetname");
   light_left = spawn("script_model", v_ambulance gettagorigin("tag_light_left") + vectorscale((0, 0, 1), 6.0));
-  light_left setModel("tag_origin");
+  light_left setmodel("tag_origin");
   light_left.angles = v_ambulance gettagangles("tag_light_left");
-  playFXOnTag(getfx("ambulance_siren"), light_left, "tag_origin");
+  playfxontag(getfx("ambulance_siren"), light_left, "tag_origin");
   light_right = spawn("script_model", v_ambulance gettagorigin("tag_light_right") + vectorscale((0, 0, 1), 6.0));
-  light_right setModel("tag_origin");
+  light_right setmodel("tag_origin");
   light_right.angles = v_ambulance gettagangles("tag_light_right");
-  playFXOnTag(getfx("ambulance_siren"), light_right, "tag_origin");
+  playfxontag(getfx("ambulance_siren"), light_right, "tag_origin");
 }
 
 intro_ambulance() {
@@ -278,9 +278,8 @@ intro_ambulance() {
   if(!flag("ambulance_staff_killed")) {
     a_staff = get_ai_group_ai("ambulance_staff");
 
-    foreach(e_civ in a_staff) {
-      e_civ thread intro_civilian_saved();
-    }
+    foreach(e_civ in a_staff)
+    e_civ thread intro_civilian_saved();
 
     a_digbats = get_ai_group_ai("ambulance_digbats");
 
@@ -289,9 +288,8 @@ intro_ambulance() {
       e_digbat thread delay_thread(randomfloatrange(1, 3), ::play_digbat_dialog, count);
       count++;
 
-      if(e_digbat.animname == "amb_digbat_1" || e_digbat.animname == "amb_digbat_3") {
+      if(e_digbat.animname == "amb_digbat_1" || e_digbat.animname == "amb_digbat_3")
         e_digbat thread turn_into_melee_digbats("slums_intro_react_" + e_digbat.animname);
-      }
     }
   }
 
@@ -335,22 +333,20 @@ civ_death_melee_bat() {
     e_digbat thread delay_thread(randomfloatrange(0.5, 1), ::play_digbat_dialog, count);
     count++;
 
-    if(e_digbat.animname == "amb_digbat_1" || e_digbat.animname == "amb_digbat_3") {
+    if(e_digbat.animname == "amb_digbat_1" || e_digbat.animname == "amb_digbat_3")
       e_digbat thread make_barbwire_digbat();
-    }
   }
 }
 
 play_digbat_dialog(num) {
   self endon("death");
 
-  if(num == 0) {
+  if(num == 0)
     self say_dialog("db1_enemy_forces_0");
-  } else if(num == 1) {
+  else if(num == 1)
     self say_dialog("db2_kill_them_0");
-  } else {
+  else
     self say_dialog("db3_die_here_american_0");
-  }
 }
 
 intro_digbat_watch() {
@@ -569,7 +565,7 @@ slums_drones_setup() {
 }
 
 slums_magic_rpg_setup() {
-  a_triggers = getEntArray("slums_rpg", "targetname");
+  a_triggers = getentarray("slums_rpg", "targetname");
   array_thread(a_triggers, ::slums_magic_rpg_think);
 }
 
@@ -611,9 +607,8 @@ e_01_left_path_cleanup() {
   spawn_manager_kill("sm_slums_left_narrow", 1);
   a_ai = get_ai_group_ai("slums_left_narrow");
 
-  foreach(ai in a_ai) {
-    ai kill();
-  }
+  foreach(ai in a_ai)
+  ai kill();
 }
 
 init_slums_pre_mgnest_axis() {
@@ -627,9 +622,9 @@ init_slums_pre_mgnest_axis() {
 }
 
 e_01_army_street_push() {
-  a_sp_allies = getEntArray("slums_mg_nest_allies", "targetname");
+  a_sp_allies = getentarray("slums_mg_nest_allies", "targetname");
   array_thread(a_sp_allies, ::add_spawn_function, ::magic_bullet_shield);
-  a_slums_pre_mgnest_axis = getEntArray("slums_pre_mgnest_axis", "targetname");
+  a_slums_pre_mgnest_axis = getentarray("slums_pre_mgnest_axis", "targetname");
   array_thread(a_slums_pre_mgnest_axis, ::add_spawn_function, ::init_slums_pre_mgnest_axis);
   slums_mg_nest_allies = simple_spawn("slums_mg_nest_allies");
   spawn_manager_enable("sm_slums_axis_pre_mgnest");
@@ -641,7 +636,7 @@ e_01_army_street_push() {
 }
 
 e_01_fire_building_civs() {
-  a_fire_building_civilians = getEntArray("fire_building_civilians", "targetname");
+  a_fire_building_civilians = getentarray("fire_building_civilians", "targetname");
   array_thread(a_fire_building_civilians, ::add_spawn_function, ::init_fire_building_civilians);
   level thread run_scene("civs_building_01");
   level thread run_scene("civs_building_02");
@@ -667,11 +662,10 @@ init_fire_building_civilians() {
       self setgoalpos(nd_delete_fire_civs_array[i].origin);
       self waittill("goal");
 
-      if(level.player is_player_looking_at(self.origin, 0.5, 1)) {
+      if(level.player is_player_looking_at(self.origin, 0.5, 1))
         continue;
-      } else {
+      else
         self die();
-      }
     }
   }
 }
@@ -702,14 +696,14 @@ e_01_overlook() {
   stop_exploder(15011);
   level notify("fxanim_overlook_building_start");
   level thread e_01_fire_building_civs();
-  level.player playSound("fxa_pan_overwatch_collapse");
-  a_models = getEntArray("overlook_hide", "targetname");
+  level.player playsound("fxa_pan_overwatch_collapse");
+  a_models = getentarray("overlook_hide", "targetname");
   array_delete(a_models);
 }
 
 e_01_apc_digbat_alley() {
   level endon("kill_e_01_apc_digbat_alley");
-  a_apc_alley_army = getEntArray("apc_alley_army", "targetname");
+  a_apc_alley_army = getentarray("apc_alley_army", "targetname");
   array_thread(a_apc_alley_army, ::add_spawn_function, ::magic_bullet_shield);
   ai_alley_apc_gunner = getent("alley_apc_gunner", "targetname");
   ai_alley_apc_gunner add_spawn_function(::magic_bullet_shield);
@@ -718,9 +712,8 @@ e_01_apc_digbat_alley() {
   trigger_wait("digbat_alley_rpg", "script_noteworthy");
 
   foreach(guy in a_apc_alley_army) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy stop_magic_bullet_shield();
-    }
   }
 }
 
@@ -749,10 +742,10 @@ e_01_overlook_advance(str_aigroup) {
 e_01_overlook_attach_strobe(e_thrower) {
   e_thrower attach("t5_weapon_tactical_insertion_world", "tag_weapon_left");
   e_thrower.e_strobe = spawn("script_model", e_thrower.origin);
-  e_thrower.e_strobe setModel("tag_origin");
+  e_thrower.e_strobe setmodel("tag_origin");
   e_thrower.e_strobe linkto(e_thrower, "tag_weapon_left");
-  playFXOnTag(getfx("ir_strobe"), e_thrower.e_strobe, "tag_origin");
-  e_thrower.e_strobe playLoopSound("fly_irstrobe_beep", 0.1);
+  playfxontag(getfx("ir_strobe"), e_thrower.e_strobe, "tag_origin");
+  e_thrower.e_strobe playloopsound("fly_irstrobe_beep", 0.1);
 }
 
 e_01_overlook_detach_strobe(e_thrower) {
@@ -772,9 +765,8 @@ e_01_overlook_apc_think() {
   s_start_pos = get_struct("rpg_apc_scene_start", "targetname");
   e_rpg = magicbullet("rpg_magic_bullet_sp", s_start_pos.origin, get_struct(s_start_pos.target, "targetname").origin);
 
-  while(isDefined(e_rpg)) {
+  while(isDefined(e_rpg))
     wait 0.05;
-  }
 
   self maps\_turret::stop_turret(4);
   self veh_magic_bullet_shield(0);
@@ -801,7 +793,7 @@ e_02_apache_attack() {
   flag_set("slums_apache_retreat");
   maps\_drones::drones_delete("slums_apache_drones");
   level notify("apache_target_stop");
-  a_pdf = getEntArray("apache_target", "script_noteworthy");
+  a_pdf = getentarray("apache_target", "script_noteworthy");
 
   foreach(e_drone in a_pdf) {
     if(isDefined(e_drone)) {
@@ -842,9 +834,8 @@ e_02_heli_think() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 move_gazebo_target(e_target) {
@@ -871,7 +862,7 @@ e_02_gazebo_destruction() {
 
 gazebo_audio_loop() {
   gaz_sound = spawn("script_origin", (24465, 28335, 720));
-  gaz_sound playLoopSound("fxa_gzbo_loop", 2);
+  gaz_sound playloopsound("fxa_gzbo_loop", 2);
   gaz_sound thread gazebo_impacts();
   level waittill("blow_gazebo");
   gaz_sound stoploopsound(2.5);
@@ -883,17 +874,16 @@ gazebo_impacts() {
   level endon("blow_gazebo");
 
   while(true) {
-    self playSound("fxa_gzbo_hit_prj");
+    self playsound("fxa_gzbo_hit_prj");
     wait(randomfloatrange(0.02, 0.1));
   }
 }
 
 e_03_building_destroy() {
-  a_library_destroyed = getEntArray("jc_library_destroyed", "targetname");
+  a_library_destroyed = getentarray("jc_library_destroyed", "targetname");
 
-  foreach(e_piece in a_library_destroyed) {
-    e_piece hide();
-  }
+  foreach(e_piece in a_library_destroyed)
+  e_piece hide();
 
   trigger_wait("sm_slums_building_destroy");
   maps\_drones::drones_start("slums_howitzer_drones");
@@ -902,21 +892,19 @@ e_03_building_destroy() {
   s_start = getstruct("slums_howitzer_start", "targetname");
   s_end = getstruct(s_start.target, "targetname");
   magicbullet("ac130_howitzer_minigun", s_start.origin, s_end.origin);
-  a_pdf = getEntArray("howitzer_target", "script_noteworthy");
+  a_pdf = getentarray("howitzer_target", "script_noteworthy");
 
-  foreach(e_drone in a_pdf) {
-    e_drone thread drone_fakedeath(1);
-  }
+  foreach(e_drone in a_pdf)
+  e_drone thread drone_fakedeath(1);
 
   exploder(550);
   level notify("fxanim_library_start");
   wait 0.1;
 
-  foreach(e_piece in a_library_destroyed) {
-    e_piece show();
-  }
+  foreach(e_piece in a_library_destroyed)
+  e_piece show();
 
-  a_library_pristine = getEntArray("jc_library_intact", "targetname");
+  a_library_pristine = getentarray("jc_library_intact", "targetname");
   array_delete(a_library_pristine);
 }
 
@@ -927,7 +915,7 @@ e_04_apc_wall_crash() {
   s_pos = getstruct("APC_StoreCrash", "targetname");
   e_sound = spawn("script_origin", s_pos.origin);
   level notify("fxanim_laundromat_wall_start");
-  e_sound playSound("evt_apc_wall_crash");
+  e_sound playsound("evt_apc_wall_crash");
   run_scene("slums_apc_wall_crash");
   e_sound delete();
   wall_clip = getent("apc_marine_guard_clip", "targetname");
@@ -1020,9 +1008,8 @@ e_11_sniper_think() {
   s_target = getstruct(self.script_noteworthy, "targetname");
   e_focus_target = spawn("script_origin", s_target.origin);
 
-  while(!flag("slums_shot_at_snipers")) {
+  while(!flag("slums_shot_at_snipers"))
     self shoot_at_target(e_focus_target);
-  }
 
   self stop_shoot_at_target();
   e_focus_target delete();
@@ -1054,10 +1041,10 @@ apc_announcements(vehicle) {
   if(isDefined(vehicle.model) && vehicle.model == "veh_t6_mil_m113") {
     while(isDefined(vehicle)) {
       wait(randomfloatrange(3, 6));
-      vehicle playSound("vox_pan_2_01_024A_pa", "sounddone");
+      vehicle playsound("vox_pan_2_01_024A_pa", "sounddone");
       vehicle waittill("sounddone");
       wait(randomfloatrange(3, 6));
-      vehicle playSound("vox_pan_2_01_025A_pa", "sounddone");
+      vehicle playsound("vox_pan_2_01_025A_pa", "sounddone");
       vehicle waittill("sounddone");
     }
   }
@@ -1079,18 +1066,17 @@ e_15_dumpster_push() {
   e_volume = getent("slums_gv_5_15_axis", "targetname");
   a_pushers = get_ai_group_ai("slums_dumpster_pushers");
 
-  foreach(e_pusher in a_pushers) {
-    e_pusher setgoalvolumeauto(e_volume);
-  }
+  foreach(e_pusher in a_pushers)
+  e_pusher setgoalvolumeauto(e_volume);
 
   m_clip disconnectpaths();
 }
 
 e_16_claymore_alley() {
-  a_claymores = getEntArray("slums_claymore", "targetname");
+  a_claymores = getentarray("slums_claymore", "targetname");
 
   foreach(m_claymore in a_claymores) {
-    playFXOnTag(getfx("claymore_laser"), m_claymore, "tag_fx");
+    playfxontag(getfx("claymore_laser"), m_claymore, "tag_fx");
     m_claymore thread e_16_satchel_damage();
     m_claymore thread e_16_claymore_detonation();
   }
@@ -1099,7 +1085,7 @@ e_16_claymore_alley() {
 e_16_satchel_damage() {
   self endon("death");
   self.health = 100;
-  self setCanDamage(1);
+  self setcandamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   self waittill("damage");
@@ -1126,7 +1112,7 @@ e_16_claymore_detonation() {
 }
 
 e_16_detonate() {
-  playFX(getfx("claymore_explode"), self gettagorigin("tag_fx"));
+  playfx(getfx("claymore_explode"), self gettagorigin("tag_fx"));
   radiusdamage(self gettagorigin("tag_fx"), 192, 250, 500);
   self delete();
 }
@@ -1182,15 +1168,15 @@ e_19_molotov_digbat() {
 
 e_19_attach(e_digbat) {
   e_digbat attach("t6_wpn_molotov_cocktail_prop_world", "tag_weapon_left");
-  playFXOnTag(getfx("molotov_lit"), e_digbat, "TAG_FX");
+  playfxontag(getfx("molotov_lit"), e_digbat, "TAG_FX");
 }
 
 e_19_shot(e_digbat) {
-  playFXOnTag(getfx("on_fire_tor"), e_digbat, "J_Spine4");
-  playFXOnTag(getfx("on_fire_leg"), e_digbat, "J_Hip_LE");
-  playFXOnTag(getfx("on_fire_leg"), e_digbat, "J_Hip_RI");
-  playFXOnTag(getfx("on_fire_arm"), e_digbat, "J_Elbow_LE");
-  playFXOnTag(getfx("on_fire_arm"), e_digbat, "J_Elbow_RI");
+  playfxontag(getfx("on_fire_tor"), e_digbat, "J_Spine4");
+  playfxontag(getfx("on_fire_leg"), e_digbat, "J_Hip_LE");
+  playfxontag(getfx("on_fire_leg"), e_digbat, "J_Hip_RI");
+  playfxontag(getfx("on_fire_arm"), e_digbat, "J_Elbow_LE");
+  playfxontag(getfx("on_fire_arm"), e_digbat, "J_Elbow_RI");
 }
 
 e_19_left_side() {
@@ -1252,7 +1238,7 @@ ambience_right_alley_truck() {
 }
 
 ambience_alley_fire(flag_ender) {
-  a_triggers = getEntArray("slums_fakefire_lookat", "targetname");
+  a_triggers = getentarray("slums_fakefire_lookat", "targetname");
   array_thread(a_triggers, ::ambient_alley_fire_think, flag_ender);
 }
 
@@ -1273,9 +1259,8 @@ ambient_alley_fire_burst(s_start) {
   v_end = getstruct(s_start.target, "targetname").origin;
   str_weapon = "ak47_sp";
 
-  if(isDefined(s_start.script_noteworthy) && s_start.script_noteworthy == "ally") {
+  if(isDefined(s_start.script_noteworthy) && s_start.script_noteworthy == "ally")
     str_weapon = "m16_sp";
-  }
 
   for(i = 0; i < 10; i++) {
     magicbullet(str_weapon, v_start, v_end);
@@ -1286,7 +1271,7 @@ ambient_alley_fire_burst(s_start) {
 ambient_alley_dog() {
   level endon("slums_done");
   t_scare = trigger_wait("slums_dog_scare");
-  a_dogs = getEntArray("slums_dog", "script_noteworthy");
+  a_dogs = getentarray("slums_dog", "script_noteworthy");
   nd_delete = getnode("slums_dog_goal", "targetname");
 
   foreach(ai_dog in a_dogs) {
@@ -1326,7 +1311,7 @@ dog_that_runs_on_slum_entrance() {
 }
 
 ambient_slums_dog_init() {
-  a_dog_triggers = getEntArray("trig_run_a_dog", "script_noteworthy");
+  a_dog_triggers = getentarray("trig_run_a_dog", "script_noteworthy");
   array_thread(a_dog_triggers, ::ambient_slums_dog);
 }
 
@@ -1347,11 +1332,10 @@ ambient_slums_dog() {
     e_dog setgoalpos(end_struct.origin);
     e_dog waittill("goal");
 
-    if(isDefined(end_struct.target)) {
+    if(isDefined(end_struct.target))
       end_struct = getstruct(end_struct.target, "targetname");
-    } else {
+    else
       end_struct = undefined;
-    }
   }
 
   e_dog delete();
@@ -1363,11 +1347,10 @@ cleanup_slums_think() {
 }
 
 cleanup_slums_ai_by_targetname(str_targetname) {
-  a_guys = getEntArray(str_targetname, "targetname");
+  a_guys = getentarray(str_targetname, "targetname");
 
-  foreach(e_guy in a_guys) {
-    e_guy delete();
-  }
+  foreach(e_guy in a_guys)
+  e_guy delete();
 }
 
 cleanup_progression_passed_digbat_parking_lot() {
@@ -1380,7 +1363,7 @@ cleanup_progression_passed_digbat_parking_lot() {
   spawn_manager_kill("sm_apc_alley_digbats");
   wait 0.05;
   level notify("kill_e_01_apc_digbat_alley");
-  a_guys = getEntArray("apc_alley_army_ai", "targetname");
+  a_guys = getentarray("apc_alley_army_ai", "targetname");
   array_thread(a_guys, ::bloody_death);
   wait 0.05;
   cleanup_slums_ai_by_targetname("sm_apc_alley_digbats_ai");
@@ -1391,18 +1374,16 @@ cleanup_initial_mgnest_through_digbat_parking_lot() {
   trigger_wait("trig_warp_passed_apc", "targetname");
   t_for_warp = getent("trig_player_moving_around_parking_lot", "targetname");
 
-  if(isDefined(t_for_warp)) {
+  if(isDefined(t_for_warp))
     t_for_warp delete();
-  }
 
   level endon("cleanup_warp_around_parking_lot");
   level notify("kill_e_01_apc_digbat_alley");
   cleanup_slums_ai_by_targetname("apc_alley_army_ai");
   trig_digbat_parking_lot = getent("slums_e_23_start", "targetname");
 
-  if(isDefined(trig_digbat_parking_lot)) {
+  if(isDefined(trig_digbat_parking_lot))
     trig_digbat_parking_lot delete();
-  }
 
   a_spawn_managers = array("sm_slums_axis_mgnest", "sm_slums_axis_pre_mgnest", "sm_rooftop_and_windows_alley", "sm_slums_initial_retreat", "sm_digbat_parking");
 
@@ -1414,9 +1395,8 @@ cleanup_initial_mgnest_through_digbat_parking_lot() {
   foreach(str_sm in a_spawn_managers) {
     a_guys = get_ai_from_spawn_manager(str_sm, 1);
 
-    foreach(e_guy in a_guys) {
-      e_guy delete();
-    }
+    foreach(e_guy in a_guys)
+    e_guy delete();
 
     wait 0.05;
   }
@@ -1457,9 +1437,8 @@ warp_me_in_slums_logic(str_start_node) {
   self.disableexits = 1;
   self.disablearrivals = 1;
 
-  if(isDefined(self.slums_current_scene)) {
+  if(isDefined(self.slums_current_scene))
     end_scene(self.slums_current_scene);
-  }
 
   nd_warp_point = getnode(str_start_node, "targetname");
   self forceteleport(nd_warp_point.origin, nd_warp_point.angles);
@@ -1471,13 +1450,11 @@ warp_me_in_slums_logic(str_start_node) {
 }
 
 slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require_player_dist) {
-  if(!isDefined(get_target_func)) {
+  if(!isDefined(get_target_func))
     get_target_func = ::slums_get_target_nodes;
-  }
 
-  if(!isDefined(set_goal_func_quits)) {
+  if(!isDefined(set_goal_func_quits))
     set_goal_func_quits = maps\_spawner::go_to_node_set_goal_node;
-  }
 
   self endon("stop_going_to_node_slums");
   self endon("death");
@@ -1487,31 +1464,28 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
     player_wait_dist = require_player_dist;
 
     if(isDefined(node.script_requires_player)) {
-      if(node.script_requires_player > 1) {
+      if(node.script_requires_player > 1)
         player_wait_dist = node.script_requires_player;
-      } else {
+      else
         player_wait_dist = 256;
-      }
 
       node.script_requires_player = 0;
     }
 
-    if(node.type == "Path" || isDefined(node.script_string) && node.script_string == "anim_waitscene") {
+    if(node.type == "Path" || isDefined(node.script_string) && node.script_string == "anim_waitscene")
       self.disablearrivals = 1;
-    } else {
+    else {
       self.disableexits = 0;
       self.disablearrivals = 0;
     }
 
-    if(isDefined(node.script_radius)) {
+    if(isDefined(node.script_radius))
       self.goalradius = node.radius;
-    } else {
+    else
       self.goalradius = 32;
-    }
 
-    if(!isDefined(self.slum_state) || self.slum_state != "moving") {
+    if(!isDefined(self.slum_state) || self.slum_state != "moving")
       self set_slums_moving_ai_params();
-    }
 
     if(isDefined(node.script_string)) {
       if(issubstr(node.script_string, "notify")) {
@@ -1530,9 +1504,8 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
     if(node.type != "Path") {
       self set_slums_at_cover_ai_params();
 
-      if(self == level.mason) {
+      if(self == level.mason)
         level thread autosave_by_name("autosave_" + node.targetname);
-      }
     }
 
     if(isDefined(node.script_string)) {
@@ -1549,11 +1522,10 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
             flag_waitopen("slum_scene_waiting");
           }
         } else if(a_string_tokens[1] == "coverwall") {
-          if(self == level.mason) {
+          if(self == level.mason)
             level.noriega notify("stop_going_to_node_slums");
-          } else {
+          else
             level.mason notify("stop_going_to_node_slums");
-          }
 
           level.noriega.slums_current_scene = "slums_critical_path_along_the_wall_noriega";
           level.mason.slums_current_scene = "slums_critical_path_along_the_wall_mason";
@@ -1569,11 +1541,10 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
             level.mason thread slums_go_to_node_using_funcs(nd_start_point);
           }
         } else if(a_string_tokens[1] == "coverstairs") {
-          if(self == level.mason) {
+          if(self == level.mason)
             level.noriega notify("stop_going_to_node_slums");
-          } else {
+          else
             level.mason notify("stop_going_to_node_slums");
-          }
 
           level.noriega.slums_current_scene = "slums_critical_path_before_library";
           level.mason.slums_current_scene = "slums_critical_path_before_library";
@@ -1590,11 +1561,10 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
             level.mason thread slums_go_to_node_using_funcs(nd_start_point);
           }
         } else if(a_string_tokens[1] == "behindcar") {
-          if(self == level.mason) {
+          if(self == level.mason)
             level.noriega notify("stop_going_to_node_slums");
-          } else {
+          else
             level.mason notify("stop_going_to_node_slums");
-          }
 
           iprintln("animating at car");
 
@@ -1617,11 +1587,10 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
             level.mason thread slums_go_to_node_using_funcs(nd_start_point);
           }
         } else if(a_string_tokens[1] == "gobarrels") {
-          if(self == level.mason) {
+          if(self == level.mason)
             level.noriega notify("stop_going_to_node_slums");
-          } else {
+          else
             level.mason notify("stop_going_to_node_slums");
-          }
 
           level.noriega.slums_current_scene = "slums_critical_path_to_barrels_from_wall_noriega";
           level.mason.slums_current_scene = "slums_critical_path_to_barrels_from_wall_mason";
@@ -1643,13 +1612,11 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
       }
     }
 
-    if(isDefined(node.script_flag_set)) {
+    if(isDefined(node.script_flag_set))
       flag_set(node.script_flag_set);
-    }
 
-    if(isDefined(node.script_flag_clear)) {
+    if(isDefined(node.script_flag_clear))
       flag_set(node.script_flag_clear);
-    }
 
     if(isDefined(node.script_flag_wait)) {
       if(isDefined(node.script_timer)) {
@@ -1664,21 +1631,21 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
         flag_clear("noriega_moved_now_move_mason");
       }
 
-      if(self == level.noriega) {
+      if(self == level.noriega)
         delay_thread(1.0, ::flag_set, "noriega_moved_now_move_mason");
-      }
     } else if(isDefined(node.script_timer))
       wait(node.script_timer);
 
-    if(isDefined(node.script_aigroup)) {
+    if(isDefined(node.script_aigroup))
       waittill_ai_group_cleared(node.script_aigroup);
-    }
 
     if(!isDefined(node.target)) {
       break;
     }
 
-    nextnode_array = [[get_target_func]](node.target);
+    nextnode_array = [
+      [get_target_func]
+    ](node.target);
 
     if(!nextnode_array.size) {
       break;
@@ -1690,7 +1657,8 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
   self notify("reached_path_end");
 }
 
-get_animation_endings() {}
+get_animation_endings() {
+}
 
 print_out_end_location_of_animation(_anim, str_align_node, animname) {
   align_node = getstruct(str_align_node, "targetname");
@@ -1711,9 +1679,8 @@ set_slums_at_cover_ai_params() {
     self.disable_blindfire = 1;
   }
 
-  if(self == level.noriega) {
+  if(self == level.noriega)
     self.a.coveridleonly = 1;
-  }
 
   self set_ignoresuppression(0);
   self enable_pain();
@@ -1723,11 +1690,10 @@ set_slums_at_cover_ai_params() {
 }
 
 set_slums_moving_ai_params() {
-  if(self == level.mason) {
+  if(self == level.mason)
     self change_movemode("sprint");
-  } else if(self == level.noriega) {
+  else if(self == level.noriega)
     self change_movemode("run");
-  }
 
   self set_ignoreall(1);
   self set_ignoresuppression(1);
@@ -1745,9 +1711,8 @@ mn_moveup_after_mg_nest() {
   level endon("cleanup_player_committed_left");
   waittill_spawn_manager_cleared("sm_slums_axis_mgnest");
 
-  while(is_spawn_manager_enabled("sm_slums_axis_pre_mgnest")) {
+  while(is_spawn_manager_enabled("sm_slums_axis_pre_mgnest"))
     wait 0.15;
-  }
 
   flag_set("mv_noriega_to_dumpster");
 }
@@ -1782,9 +1747,8 @@ mn_moveup_after_digbat_parking() {
   e_digbat_2 = get_ais_from_scene("parking_window", "slums_park_digbat_02");
   waittill_spawn_manager_cleared("sm_digbat_parking");
 
-  while(isalive(e_digbat_1) || isalive(e_digbat_2)) {
+  while(isalive(e_digbat_1) || isalive(e_digbat_2))
     wait 0.15;
-  }
 
   flag_set("cleanup_before_digbat_parking_lot");
   trigger_use("trig_color_after_db_park", "targetname");
@@ -1795,7 +1759,8 @@ mn_moveup_after_apache_attack() {
   flag_set("mv_noriega_to_gazebo");
 }
 
-mn_move_along_cafe_wall() {}
+mn_move_along_cafe_wall() {
+}
 
 mn_moveup_into_bottleneck_right() {
   waittill_spawn_manager_cleared("sm_slums_bottleneck");
@@ -1826,9 +1791,8 @@ mn_warp_straight_passed_apc() {
   level endon("tier_2_teleport");
   trigger_wait("trig_warp_passed_apc", "targetname");
 
-  if(flag("alley_molotov_digbat_animating")) {
+  if(flag("alley_molotov_digbat_animating"))
     flag_waitopen("alley_molotov_digbat_animating");
-  }
 
   level notify("tier_1_magic_teleport");
   level notify("left_side_teleport");
@@ -1877,11 +1841,10 @@ mw_warp_end_failsafe() {
     if(isDefined(mason_node.target)) {
       temp_node = getnode(mason_node.target, "targetname");
 
-      if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1)) {
+      if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1))
         mason_node = temp_node;
-      } else {
+      else
         safe_to_warp = 0;
-      }
     } else
       safe_to_warp = 0;
   }
@@ -1895,11 +1858,10 @@ mw_warp_end_failsafe() {
     if(isDefined(noriega_node.target)) {
       temp_node = getnode(noriega_node.target, "targetname");
 
-      if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1)) {
+      if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1))
         noriega_node = temp_node;
-      } else {
+      else
         safe_to_warp = 0;
-      }
     } else
       safe_to_warp = 0;
   }
@@ -1910,7 +1872,7 @@ mw_warp_end_failsafe() {
 #using_animtree("animated_props");
 
 veh_animate_pickup_trucks() {
-  a_trucks = getEntArray("anim_truck_hood", "targetname");
+  a_trucks = getentarray("anim_truck_hood", "targetname");
 
   foreach(e_truck in a_trucks) {
     e_truck useanimtree(#animtree);
@@ -1922,7 +1884,7 @@ veh_animate_pickup_trucks() {
 }
 
 veh_animate_pickup_cars() {
-  a_cars = getEntArray("anim_car_door", "targetname");
+  a_cars = getentarray("anim_car_door", "targetname");
 
   foreach(e_car in a_cars) {
     e_car useanimtree(#animtree);
@@ -1953,9 +1915,8 @@ clear_slum_southeast_ai() {
     if(a_ai[i] == level.mason || a_ai[i] == level.noriega) {
       continue;
     }
-    if(a_ai[i] istouching(trigger)) {
+    if(a_ai[i] istouching(trigger))
       a_ai[i] dodamage(300, (0, 0, 0));
-    }
   }
 
   wait 1;
@@ -1965,9 +1926,8 @@ clear_slum_southeast_ai() {
     if(a_ai[i] == level.mason || a_ai[i] == level.noriega) {
       continue;
     }
-    if(a_ai[i] istouching(trigger)) {
+    if(a_ai[i] istouching(trigger))
       a_ai[i] dodamage(300, (0, 0, 0));
-    }
   }
 }
 
@@ -1986,9 +1946,8 @@ clear_central_ai() {
     if(a_ai[i] == level.mason || a_ai[i] == level.noriega) {
       continue;
     }
-    if(a_ai[i] istouching(trigger)) {
+    if(a_ai[i] istouching(trigger))
       a_ai[i] delete();
-    }
   }
 
   wait 1;
@@ -1998,9 +1957,8 @@ clear_central_ai() {
     if(a_ai[i] == level.mason || a_ai[i] == level.noriega) {
       continue;
     }
-    if(a_ai[i] istouching(trigger)) {
+    if(a_ai[i] istouching(trigger))
       a_ai[i] delete();
-    }
   }
 }
 
@@ -2067,15 +2025,14 @@ slum_edge_vo() {
 }
 
 get_player_location(location_1, location_2, location_3) {
-  if(level.player istouching(location_1)) {
+  if(level.player istouching(location_1))
     return location_1;
-  } else if(level.player istouching(location_2)) {
+  else if(level.player istouching(location_2))
     return location_2;
-  } else if(level.player istouching(location_3)) {
+  else if(level.player istouching(location_3))
     return location_3;
-  } else {
+  else
     return undefined;
-  }
 }
 
 play_vo_in_section(trigger_name) {
@@ -2093,11 +2050,10 @@ play_vo_in_section(trigger_name) {
   if(isDefined(random_dude)) {
     iprintln(distance2d(random_dude.origin, level.player.origin));
 
-    if(isai(random_dude)) {
+    if(isai(random_dude))
       random_dude say_dialog(new_line);
-    } else {
+    else
       random_dude say_dialog(new_line, 0, 1);
-    }
   }
 }
 
@@ -2107,9 +2063,8 @@ get_random_ai_no_closer_than(min_distance, max_distance, trigger) {
   for(i = 0; i < a_ai.size; i++) {
     player_distance = distance2dsquared(a_ai[i].origin, level.player.origin);
 
-    if(a_ai[i] istouching(trigger) && player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_ai[i].is_about_to_talk)) {
+    if(a_ai[i] istouching(trigger) && player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_ai[i].is_about_to_talk))
       return a_ai[i];
-    }
   }
 
   a_ai = getaiarray("allies");
@@ -2117,19 +2072,17 @@ get_random_ai_no_closer_than(min_distance, max_distance, trigger) {
   for(i = 0; i < a_ai.size; i++) {
     player_distance = distance2dsquared(a_ai[i].origin, level.player.origin);
 
-    if(a_ai[i] istouching(trigger) && player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_ai[i].is_about_to_talk)) {
+    if(a_ai[i] istouching(trigger) && player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_ai[i].is_about_to_talk))
       return a_ai[i];
-    }
   }
 
-  a_struct = getEntArray("random_vo_location", "targetname");
+  a_struct = getentarray("random_vo_location", "targetname");
 
   for(i = 0; i < a_struct.size; i++) {
     player_distance = distance2dsquared(a_struct[i].origin, level.player.origin);
 
-    if(player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_struct[i].is_about_to_talk)) {
+    if(player_distance > min_distance * min_distance && player_distance < max_distance * max_distance && !isDefined(a_struct[i].is_about_to_talk))
       return a_struct[i];
-    }
   }
 }
 
@@ -2143,9 +2096,8 @@ molotov_intro_van() {
 
 intro_cleanup() {
   flag_wait("move_intro_heli");
-  models = getEntArray("pan_intro_models", "script_noteworthy");
+  models = getentarray("pan_intro_models", "script_noteworthy");
 
-  for(i = 0; i < models.size; i++) {
+  for(i = 0; i < models.size; i++)
     models[i] delete();
-  }
 }

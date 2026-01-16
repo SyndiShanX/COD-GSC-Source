@@ -11,7 +11,7 @@
 #namespace sticky_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("pineapple_gun", &__init__, undefined, undefined);
+  system::register("pineapple_gun", & __init__, undefined, undefined);
 }
 
 function __init__() {}

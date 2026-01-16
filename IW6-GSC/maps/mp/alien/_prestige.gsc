@@ -72,9 +72,8 @@ init_prestige() {
 init_player_prestige() {
   init_nerf_scalar();
 
-  if(is_relics_enabled()) {
+  if(is_relics_enabled())
     nerf_based_on_selection();
-  }
 }
 
 init_nerf_scalar() {
@@ -126,9 +125,8 @@ reduce_wallet_size_and_money_earned() {
 }
 
 is_relics_enabled() {
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     return false;
-  }
 
   return true;
 }

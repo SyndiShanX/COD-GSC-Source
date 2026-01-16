@@ -8,7 +8,7 @@
 #using_animtree("vehicles");
 
 main(model, type, turret_type) {
-  if(!isDefined(type)) {
+  if(!IsDefined(type)) {
     type = "hummer_minigun";
   }
 
@@ -30,9 +30,8 @@ main(model, type, turret_type) {
 
   //	build_turret( "minigun_hummer", "tag_turret", "weapon_suburban_minigun_no_doors", undefined, undefined, 0.2 );
 
-  if(!isDefined(turret_type)) {
+  if(!isdefined(turret_type))
     turret_type = "minigun_hummer";
-  }
   build_turret(turret_type, "tag_turret", "weapon_suburban_minigun_no_doors", undefined, undefined, 0.2, 20, -14);
 }
 
@@ -55,8 +54,8 @@ init_local() {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 5; i++) {
-    positions[i] = spawnStruct();
+  for (i = 0; i < 5; i++) {
+    positions[i] = spawnstruct();
   }
 
   positions[0].sittag = "tag_driver";

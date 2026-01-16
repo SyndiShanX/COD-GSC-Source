@@ -14,10 +14,11 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_world_util;
+
 #namespace item_supply_drop;
 
 autoexec __init__system__() {
-  system::register(#"item_supply_drop", &__init__, undefined, # "item_world");
+  system::register(#"item_supply_drop", &__init__, undefined, #"item_world");
 }
 
 private __init__() {
@@ -29,7 +30,7 @@ private __init__() {
 
   level thread _setup_devgui();
 
-  clientfield::register("scriptmover", "supply_drop_fx", 1, 1, "int");
+    clientfield::register("scriptmover", "supply_drop_fx", 1, 1, "int");
   clientfield::register("scriptmover", "supply_drop_parachute_rob", 1, 1, "int");
 }
 
@@ -41,7 +42,7 @@ private function_eaba72c9() {
           level thread function_418e26fe();
           break;
         case 2:
-          vehicletypes = array(#"veh_suv_player_police_wz", # "veh_quad_player_wz_police", # "veh_muscle_car_convertible_player_wz_blk");
+          vehicletypes = array(#"veh_suv_player_police_wz", #"veh_quad_player_wz_police", #"veh_muscle_car_convertible_player_wz_blk");
           level thread function_418e26fe(undefined, 1, 1, 0, 1, vehicletypes[randomint(vehicletypes.size)]);
           break;
       }
@@ -75,14 +76,14 @@ private function_eaba72c9() {
             level thread drop_supply_drop(players[0].origin, 1);
             break;
           case 3:
-            vehicletypes = array(#"veh_suv_player_police_wz", # "veh_quad_player_wz_police", # "veh_muscle_car_convertible_player_wz_blk");
+            vehicletypes = array(#"veh_suv_player_police_wz", #"veh_quad_player_wz_police", #"veh_muscle_car_convertible_player_wz_blk");
             level thread drop_supply_drop(players[0].origin, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
             break;
           case 4:
             spawn_supply_drop(players[0].origin);
             break;
           case 5:
-            vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan");
+            vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan");
             level thread drop_supply_drop(players[0].origin, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
             break;
         }
@@ -160,58 +161,58 @@ private debug_supply_drop() {
   }
 }
 
-function private function_c7bd0aa8(point, startpoint) {
-  assert(isvec(point));
-  assert(isvec(startpoint));
+  function private function_c7bd0aa8(point, startpoint) {
+    assert(isvec(point));
+    assert(isvec(startpoint));
 
-  if(function_16bbdd8b(point)) {
+    if(function_16bbdd8b(point)) {
+      return point;
+    }
+
+    assert(function_16bbdd8b(startpoint));
+    min = level.supplydropmin;
+    max = level.supplydropmax;
+    var_1ccbeeaa = (point[0], point[1], 0);
+    var_49e5fac9 = (startpoint[0], startpoint[1], 0);
+
+    if(var_1ccbeeaa[0] < min[0]) {
+      toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+      assert(toend[0] != 0);
+      t = (min[0] - var_49e5fac9[0]) / toend[0];
+      var_1ccbeeaa = var_49e5fac9 + toend * t;
+    } else if(var_1ccbeeaa[0] > max[0]) {
+      toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+      assert(toend[0] != 0);
+      t = (max[0] - var_49e5fac9[0]) / toend[0];
+      var_1ccbeeaa = var_49e5fac9 + toend * t;
+    }
+
+    if(var_1ccbeeaa[1] < min[1]) {
+      toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+      assert(toend[1] != 0);
+      t = (min[1] - var_49e5fac9[1]) / toend[1];
+      var_1ccbeeaa = var_49e5fac9 + toend * t;
+    } else if(var_1ccbeeaa[1] > max[1]) {
+      toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+      assert(toend[1] != 0);
+      t = (max[1] - var_49e5fac9[1]) / toend[1];
+      var_1ccbeeaa = var_49e5fac9 + toend * t;
+    }
+
+    point = (var_1ccbeeaa[0], var_1ccbeeaa[1], point[2]);
     return point;
   }
 
-  assert(function_16bbdd8b(startpoint));
-  min = level.supplydropmin;
-  max = level.supplydropmax;
-  var_1ccbeeaa = (point[0], point[1], 0);
-  var_49e5fac9 = (startpoint[0], startpoint[1], 0);
-
-  if(var_1ccbeeaa[0] < min[0]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
-    assert(toend[0] != 0);
-    t = (min[0] - var_49e5fac9[0]) / toend[0];
-    var_1ccbeeaa = var_49e5fac9 + toend * t;
-  } else if(var_1ccbeeaa[0] > max[0]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
-    assert(toend[0] != 0);
-    t = (max[0] - var_49e5fac9[0]) / toend[0];
-    var_1ccbeeaa = var_49e5fac9 + toend * t;
-  }
-
-  if(var_1ccbeeaa[1] < min[1]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
-    assert(toend[1] != 0);
-    t = (min[1] - var_49e5fac9[1]) / toend[1];
-    var_1ccbeeaa = var_49e5fac9 + toend * t;
-  } else if(var_1ccbeeaa[1] > max[1]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
-    assert(toend[1] != 0);
-    t = (max[1] - var_49e5fac9[1]) / toend[1];
-    var_1ccbeeaa = var_49e5fac9 + toend * t;
-  }
-
-  point = (var_1ccbeeaa[0], var_1ccbeeaa[1], point[2]);
-  return point;
-}
-
 private function_13339b58(istank) {
   self endon(#"death");
-  open_anim = # "hash_4f2b2f1b4df13119";
-  idle_anim = # "hash_39265b4ed372175a";
-  var_e1c31bea = # "hash_32ad963f25f115d2";
+  open_anim = #"hash_4f2b2f1b4df13119";
+  idle_anim = #"hash_39265b4ed372175a";
+  var_e1c31bea = #"hash_32ad963f25f115d2";
 
   if(isDefined(istank) && istank) {
-    open_anim = # "hash_77322c90462ba8c";
-    idle_anim = # "hash_780b50c0a9393f1d";
-    var_e1c31bea = # "hash_ac2d4936b932903";
+    open_anim = #"hash_77322c90462ba8c";
+    idle_anim = #"hash_780b50c0a9393f1d";
+    var_e1c31bea = #"hash_ac2d4936b932903";
   }
 
   self animscripted("parachute_open", self.origin, self.angles, open_anim, "normal", "root", 1, 0);
@@ -236,7 +237,7 @@ private function_71c31c8d() {
   self.pop_parachute = 1;
 }
 
-private function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
+private function_500a6615(itemspawnlist = #"supply_drop_stash_parent_dlc1") {
   if(isDefined(self.supplydrop)) {
     supplydrop = self.supplydrop;
     self.supplydrop = undefined;
@@ -255,7 +256,7 @@ private function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
     travelspeed = isDefined(supplydrop.var_abd32694) && supplydrop.var_abd32694 ? 400 : 200;
     groundoffset = isDefined(supplydrop.var_abd32694) && supplydrop.var_abd32694 ? 200 : 120;
     groundtrace = physicstraceex(startpoint, endpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), supplydrop, 32);
-    groundpoint = groundtrace[# "position"] + (0, 0, groundoffset);
+    groundpoint = groundtrace[#"position"] + (0, 0, groundoffset);
     traveldistance = startpoint - groundpoint;
     movetime = traveldistance[2] / travelspeed;
 
@@ -288,7 +289,7 @@ private function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
     }
 
     if(!(isDefined(supplydrop.pop_parachute) && supplydrop.pop_parachute)) {
-      supplydrop waittill(#"movedone", # "pop_parachute");
+      supplydrop waittill(#"movedone", #"pop_parachute");
     }
 
     if(isDefined(supplydropparachute)) {
@@ -315,7 +316,7 @@ private function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
 }
 
 private function_e21ceb1b() {
-  self endon(#"death", # "movedone");
+  self endon(#"death", #"movedone");
   extendbounds = (10, 10, 10);
   previousorigin = self.origin;
   var_8bc27a4a = 0;
@@ -562,13 +563,13 @@ private trace_point(point, var_5fd22b95 = 1, maxheight = 10000, minheight = 5000
   trace = groundtrace(startpoint, endpoint, 0, undefined, var_5fd22b95);
 
   if(!var_5fd22b95) {
-    if(trace[# "surfacetype"] == "water" || trace[# "surfacetype"] == "watershallow") {
+    if(trace[#"surfacetype"] == "water" || trace[#"surfacetype"] == "watershallow") {
       return;
     }
   }
 
-  if(isDefined(trace[# "position"])) {
-    return (trace[# "position"] + (0, 0, 2000));
+  if(isDefined(trace[#"position"])) {
+    return (trace[#"position"] + (0, 0, 2000));
   }
 
   return startpoint;
@@ -640,7 +641,7 @@ private function_9e8348e4() {
 }
 
 private function_c2edbefb(path, droppoint, var_86928932 = 1, var_2118f785 = undefined) {
-  self endon(#"death", # "emergency_exit");
+  self endon(#"death", #"emergency_exit");
 
   for(pathindex = 1; pathindex < path.size; pathindex++) {
     var_f155e743 = 0;

@@ -8,19 +8,16 @@
 #include common_scripts\utility;
 
 setParent(element) {
-  if(isDefined(self.parent) && self.parent == element) {
+  if(isDefined(self.parent) && self.parent == element)
     return;
-  }
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removeChild(self);
-  }
   self.parent = element;
   self.parent addChild(self);
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  } else {
+  else
     self setPoint("TOPLEFT");
-  }
 }
 
 getParent() {
@@ -43,54 +40,41 @@ removeChild(element) {
 }
 
 setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
-  if(!isDefined(moveTime)) {
+  if(!isDefined(moveTime))
     moveTime = 0;
-  }
   element = self getParent();
-  if(moveTime) {
+  if(moveTime)
     self moveOverTime(moveTime);
-  }
-  if(!isDefined(xOffset)) {
+  if(!isDefined(xOffset))
     xOffset = 0;
-  }
   self.xOffset = xOffset;
-  if(!isDefined(yOffset)) {
+  if(!isDefined(yOffset))
     yOffset = 0;
-  }
   self.yOffset = yOffset;
   self.point = point;
   self.alignX = "center";
   self.alignY = "middle";
-  if(isSubStr(point, "TOP")) {
+  if(isSubStr(point, "TOP"))
     self.alignY = "top";
-  }
-  if(isSubStr(point, "BOTTOM")) {
+  if(isSubStr(point, "BOTTOM"))
     self.alignY = "bottom";
-  }
-  if(isSubStr(point, "LEFT")) {
+  if(isSubStr(point, "LEFT"))
     self.alignX = "left";
-  }
-  if(isSubStr(point, "RIGHT")) {
+  if(isSubStr(point, "RIGHT"))
     self.alignX = "right";
-  }
-  if(!isDefined(relativePoint)) {
+  if(!isDefined(relativePoint))
     relativePoint = point;
-  }
   self.relativePoint = relativePoint;
   relativeX = "center";
   relativeY = "middle";
-  if(isSubStr(relativePoint, "TOP")) {
+  if(isSubStr(relativePoint, "TOP"))
     relativeY = "top";
-  }
-  if(isSubStr(relativePoint, "BOTTOM")) {
+  if(isSubStr(relativePoint, "BOTTOM"))
     relativeY = "bottom";
-  }
-  if(isSubStr(relativePoint, "LEFT")) {
+  if(isSubStr(relativePoint, "LEFT"))
     relativeX = "left";
-  }
-  if(isSubStr(relativePoint, "RIGHT")) {
+  if(isSubStr(relativePoint, "RIGHT"))
     relativeX = "right";
-  }
   if(element == level.uiParent) {
     self.horzAlign = relativeX;
     self.vertAlign = relativeY;
@@ -103,18 +87,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     xFactor = 0;
   } else if(relativeX == "center" || element.alignX == "center") {
     offsetX = int(element.width / 2);
-    if(relativeX == "left" || element.alignX == "right") {
+    if(relativeX == "left" || element.alignX == "right")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   } else {
     offsetX = element.width;
-    if(relativeX == "left") {
+    if(relativeX == "left")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   }
   self.x = element.x + (offsetX * xFactor);
   if(relativeY == element.alignY) {
@@ -122,18 +104,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     yFactor = 0;
   } else if(relativeY == "middle" || element.alignY == "middle") {
     offsetY = int(element.height / 2);
-    if(relativeY == "top" || element.alignY == "bottom") {
+    if(relativeY == "top" || element.alignY == "bottom")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   } else {
     offsetY = element.height;
-    if(relativeY == "top") {
+    if(relativeY == "top")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   }
   self.y = element.y + (offsetY * yFactor);
   self.x += self.xOffset;
@@ -152,32 +132,28 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.alignX = "left";
   self.bar.alignY = self.alignY;
   self.bar.y = self.y;
-  if(self.alignX == "left") {
+  if(self.alignX == "left")
     self.bar.x = self.x;
-  } else if(self.alignX == "right") {
+  else if(self.alignX == "right")
     self.bar.x = self.x - self.width;
-  } else {
+  else
     self.bar.x = self.x - int(self.width / 2);
-  }
-  if(self.alignY == "top") {
+  if(self.alignY == "top")
     self.bar.y = self.y;
-  } else if(self.alignY == "bottom") {
+  else if(self.alignY == "bottom")
     self.bar.y = self.y;
-  }
   self updateBar(self.bar.frac);
 }
 
 updateBar(barFrac, rateOfChange) {
-  if(self.elemType == "bar") {
+  if(self.elemType == "bar")
     updateBarScale(barFrac, rateOfChange);
-  }
 }
 
 updateBarScale(barFrac, rateOfChange) {
   barWidth = int(self.width * barFrac + 0.5);
-  if(!barWidth) {
+  if(!barWidth)
     barWidth = 1;
-  }
   self.bar.frac = barFrac;
   self.bar setShader(self.bar.shader, barWidth, self.height);
   assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
@@ -263,9 +239,8 @@ createIcon(shader, width, height, player) {
   iconElem.yOffset = 0;
   iconElem.children = [];
   iconElem setParent(level.uiParent);
-  if(isDefined(shader)) {
+  if(isDefined(shader))
     iconElem setShader(shader, width, height);
-  }
   return iconElem;
 }
 
@@ -314,77 +289,65 @@ createBar(color, width, height, flashFrac) {
   barElemBG.color = (0, 0, 0);
   barElemBG.alpha = 0.5;
   barElemBG setParent(level.uiParent);
-  if(!level.splitScreen) {
+  if(!level.splitScreen)
     barElemBG setShader("black", width + 4, height + 4);
-  } else {
+  else
     barElemBG setShader("black", width + 0, height + 0);
-  }
   barElemBG.hidden = false;
   return barElemBG;
 }
 
 createPrimaryProgressBar() {
   bar = createBar((1, 1, 1), level.primaryProgressBarWidth, level.primaryProgressBarHeight);
-  if(level.splitScreen) {
+  if(level.splitScreen)
     bar setPoint("TOP", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
-  } else {
+  else
     bar setPoint("CENTER", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
-  }
   return bar;
 }
 
 createPrimaryProgressBarText() {
   text = createFontString("objective", level.primaryProgressBarFontSize, self);
-  if(level.splitScreen) {
+  if(level.splitScreen)
     text setPoint("TOP", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
-  } else {
+  else
     text setPoint("CENTER", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
-  }
   text.sort = -1;
   return text;
 }
 
 hideElem() {
-  if(self.hidden) {
+  if(self.hidden)
     return;
-  }
   self.hidden = true;
-  if(self.alpha != 0) {
+  if(self.alpha != 0)
     self.alpha = 0;
-  }
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     self.bar.hidden = true;
-    if(self.bar.alpha != 0) {
+    if(self.bar.alpha != 0)
       self.bar.alpha = 0;
-    }
     self.barFrame.hidden = true;
-    if(self.barFrame.alpha != 0) {
+    if(self.barFrame.alpha != 0)
       self.barFrame.alpha = 0;
-    }
   }
 }
 
 showElem() {
-  if(!self.hidden) {
+  if(!self.hidden)
     return;
-  }
   self.hidden = false;
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
-    if(self.alpha != .5) {
+    if(self.alpha != .5)
       self.alpha = .5;
-    }
     self.bar.hidden = false;
-    if(self.bar.alpha != 1) {
+    if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-    }
     self.barFrame.hidden = false;
-    if(self.barFrame.alpha != 1) {
+    if(self.barFrame.alpha != 1)
       self.barFrame.alpha = 1;
-    }
   } else {
-    if(self.alpha != 1) {
+    if(self.alpha != 1)
       self.alpha = 1;
-    }
   }
 }
 
@@ -408,12 +371,10 @@ flashThread() {
 
 destroyElem() {
   tempChildren = [];
-  for(index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++)
     tempChildren[index] = self.children[index];
-  }
-  for(index = 0; index < tempChildren.size; index++) {
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
-  }
   if(self.elemType == "bar") {
     self.bar destroy();
     self.barFrame destroy();
@@ -434,11 +395,10 @@ updateChildren() {
 
 get_countdown_hud(x) {
   xPos = undefined;
-  if(!isDefined(x)) {
+  if(!isDefined(x))
     xPos = -225;
-  } else {
+  else
     xPos = x;
-  }
   hudelem = newHudElem();
   hudelem.alignX = "left";
   hudelem.alignY = "middle";

@@ -20,8 +20,8 @@ main(allowed) {
     allowed[allowed.size] = "vehicle";
     filter_script_vehicles_from_vehicle_descriptors(allowed);
   }
-  entities = getEntArray();
-  for(entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
+  entities = GetEntArray();
+  for (entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
     entity = entities[entity_index];
     if(!entity_is_allowed(entity, allowed)) {
       entity delete();
@@ -40,8 +40,8 @@ entity_is_allowed(
     entity.script_gameobjectname != "[all_modes]") {
     allowed = false;
     gameobjectnames = strtok(entity.script_gameobjectname, " ");
-    for(i = 0; i < allowed_game_modes.size && !allowed; i++) {
-      for(j = 0; j < gameobjectnames.size && !allowed; j++) {
+    for (i = 0; i < allowed_game_modes.size && !allowed; i++) {
+      for (j = 0; j < gameobjectnames.size && !allowed; j++) {
         allowed = (gameobjectnames[j] == allowed_game_modes[i]);
       }
     }
@@ -50,14 +50,14 @@ entity_is_allowed(
 }
 filter_script_vehicles_from_vehicle_descriptors(
   allowed_game_modes) {
-  vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
-  script_vehicles = getEntArray("script_vehicle", "classname");
+  vehicle_descriptors = GetEntArray("vehicle_descriptor", "targetname");
+  script_vehicles = GetEntArray("script_vehicle", "classname");
   vehicles_to_remove = [];
-  for(descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
+  for (descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
     descriptor = vehicle_descriptors[descriptor_index];
     closest_distance_sq = 1000000000000.0;
     closest_vehicle = undefined;
-    for(vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
+    for (vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
       vehicle = script_vehicles[vehicle_index];
       dsquared = DistanceSquared(vehicle GetOrigin(), descriptor GetOrigin());
       if(dsquared < closest_distance_sq) {
@@ -71,7 +71,7 @@ filter_script_vehicles_from_vehicle_descriptors(
       }
     }
   }
-  for(vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
+  for (vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
     vehicles_to_remove[vehicle_index] delete();
   }
   return;
@@ -85,7 +85,7 @@ init() {
 }
 onPlayerConnect() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onDisconnect();
@@ -94,7 +94,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread onDeath();
     self.touchTriggers = [];
@@ -108,16 +108,14 @@ onPlayerSpawned() {
 onDeath() {
   level endon("game_ended");
   self waittill("death");
-  if(isDefined(self.carryObject)) {
+  if(isDefined(self.carryObject))
     self.carryObject thread setDropped();
-  }
 }
 onDisconnect() {
   level endon("game_ended");
   self waittill("disconnect");
-  if(isDefined(self.carryObject)) {
+  if(isDefined(self.carryObject))
     self.carryObject thread setDropped();
-  }
 }
 createCarryObject(ownerTeam, trigger, visuals, offset, pingDelay) {
   carryObject = spawnStruct();
@@ -125,24 +123,22 @@ createCarryObject(ownerTeam, trigger, visuals, offset, pingDelay) {
   carryObject.curOrigin = trigger.origin;
   carryObject.ownerTeam = ownerTeam;
   carryObject.entNum = trigger getEntityNumber();
-  if(isSubStr(trigger.classname, "use")) {
+  if(isSubStr(trigger.classname, "use"))
     carryObject.triggerType = "use";
-  } else {
+  else
     carryObject.triggerType = "proximity";
-  }
   trigger.baseOrigin = trigger.origin;
   carryObject.trigger = trigger;
   carryObject.useWeapon = undefined;
-  if(!isDefined(offset)) {
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  }
   if(!isDefined(pingDelay)) {
     carryObject.pingDelay = 5.0;
   } else {
     carryObject.pingDelay = pingDelay;
   }
   carryObject.offset3d = offset;
-  for(index = 0; index < visuals.size; index++) {
+  for (index = 0; index < visuals.size; index++) {
     visuals[index].baseOrigin = visuals[index].origin;
     visuals[index].baseAngles = visuals[index].angles;
   }
@@ -181,79 +177,60 @@ createCarryObject(ownerTeam, trigger, visuals, offset, pingDelay) {
   carryObject.onDrop = undefined;
   carryObject.onPickup = undefined;
   carryObject.onReset = undefined;
-  if(carryObject.triggerType == "use") {
+  if(carryObject.triggerType == "use")
     carryObject thread carryObjectUseThink();
-  } else {
+  else
     carryObject thread carryObjectProxThink();
-  }
   carryObject thread updateCarryObjectOrigin();
   return carryObject;
 }
 carryObjectUseThink() {
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
-    if(self.isResetting) {
+    if(self.isResetting)
       continue;
-    }
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       continue;
-    }
-    if(isDefined(player.laststand) && player.laststand) {
+    if(isDefined(player.laststand) && player.laststand)
       continue;
-    }
-    if(!self canInteractWith(player)) {
+    if(!self canInteractWith(player))
       continue;
-    }
-    if(!player.canPickupObject) {
+    if(!player.canPickupObject)
       continue;
-    }
-    if(player.throwingGrenade) {
+    if(player.throwingGrenade)
       continue;
-    }
-    if(isDefined(self.carrier)) {
+    if(isDefined(self.carrier))
       continue;
-    }
-    if(player isInVehicle()) {
+    if(player isInVehicle())
       continue;
-    }
-    if(!player isTouching(self.trigger)) {
+    if(!player isTouching(self.trigger))
       continue;
-    }
     self setPickedUp(player);
   }
 }
 carryObjectProxThink() {
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
-    if(self.isResetting) {
+    if(self.isResetting)
       continue;
-    }
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       continue;
-    }
-    if(isDefined(player.laststand) && player.laststand) {
+    if(isDefined(player.laststand) && player.laststand)
       continue;
-    }
-    if(!self canInteractWith(player)) {
+    if(!self canInteractWith(player))
       continue;
-    }
-    if(!player.canPickupObject) {
+    if(!player.canPickupObject)
       continue;
-    }
-    if(player.throwingGrenade) {
+    if(player.throwingGrenade)
       continue;
-    }
-    if(isDefined(self.carrier)) {
+    if(isDefined(self.carrier))
       continue;
-    }
-    if(player isInVehicle()) {
+    if(player isInVehicle())
       continue;
-    }
-    if(!player isTouching(self.trigger)) {
+    if(!player isTouching(self.trigger))
       continue;
-    }
     self setPickedUp(player);
   }
 }
@@ -262,7 +239,7 @@ pickupObjectDelay(origin) {
   self endon("death");
   self endon("disconnect");
   self.canPickupObject = false;
-  for(;;) {
+  for (;;) {
     if(distanceSquared(self.origin, origin) > 64 * 64) {
       break;
     }
@@ -272,33 +249,31 @@ pickupObjectDelay(origin) {
 }
 setPickedUp(player) {
   if(isDefined(player.carryObject)) {
-    if(isDefined(self.onPickupFailed)) {
+    if(isDefined(self.onPickupFailed))
       self[[self.onPickupFailed]](player);
-    }
     return;
   }
   player giveObject(self);
   self setCarrier(player);
-  for(index = 0; index < self.visuals.size; index++) {
+  for (index = 0; index < self.visuals.size; index++) {
     self.visuals[index] thread hideObject();
   }
   self.trigger.origin += (0, 0, 10000);
   self notify("pickup_object");
-  if(isDefined(self.onPickup)) {
+  if(isDefined(self.onPickup))
     self[[self.onPickup]](player);
-  }
   self updateCompassIcons();
   self updateWorldIcons();
 }
 hideObject() {
   radius = 32;
   origin = self.origin;
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
   radiusSq = radius * radius;
   linkedGrenades = [];
   linkedGrenadesIndex = 0;
   self hide();
-  for(i = 0; i < grenades.size; i++) {
+  for (i = 0; i < grenades.size; i++) {
     if(DistanceSquared(origin, grenades[i].origin) < radiusSq) {
       if(grenades[i] islinkedto(self)) {
         linkedGrenades[linkedGrenadesIndex] = grenades[i];
@@ -309,14 +284,14 @@ hideObject() {
   }
   self.origin += (0, 0, 10000);
   waittillframeend;
-  for(i = 0; i < linkedGrenadesIndex; i++) {
+  for (i = 0; i < linkedGrenadesIndex; i++) {
     linkedGrenades[i] launch((5, 5, 5));
   }
 }
 updateCarryObjectOrigin() {
   level endon("game_ended");
   objPingDelay = self.pingDelay;
-  for(;;) {
+  for (;;) {
     if(isDefined(self.carrier) && level.teamBased) {
       self.curOrigin = self.carrier.origin + (0, 0, 75);
       self.objPoints["allies"] maps\mp\gametypes\_objpoints::updateOrigin(self.curOrigin);
@@ -387,9 +362,9 @@ giveObject(object) {
       self.carryIcon.vertAlign = "bottom";
     } else {
       self.carryIcon = createIcon(object.carryIcon, 50, 50);
-      if(!object.allowWeapons) {
+      if(!object.allowWeapons)
         self.carryIcon setPoint("CENTER", "CENTER", 0, 60);
-      } else {
+      else {
         self.carryIcon.x = -135;
         self.carryIcon.y = -103;
         self.carryIcon.horzAlign = "user_right";
@@ -404,33 +379,30 @@ giveObject(object) {
 returnHome() {
   self.isResetting = true;
   self notify("reset");
-  for(index = 0; index < self.visuals.size; index++) {
+  for (index = 0; index < self.visuals.size; index++) {
     self.visuals[index].origin = self.visuals[index].baseOrigin;
     self.visuals[index].angles = self.visuals[index].baseAngles;
     self.visuals[index] show();
   }
   self.trigger.origin = self.trigger.baseOrigin;
   self.curOrigin = self.trigger.origin;
-  if(isDefined(self.onReset)) {
+  if(isDefined(self.onReset))
     self[[self.onReset]]();
-  }
   self clearCarrier();
   updateWorldIcons();
   updateCompassIcons();
   self.isResetting = false;
 }
 isObjectAwayFromHome() {
-  if(isDefined(self.carrier)) {
+  if(isDefined(self.carrier))
     return true;
-  }
-  if(distancesquared(self.trigger.origin, self.trigger.baseOrigin) > 4) {
+  if(distancesquared(self.trigger.origin, self.trigger.baseOrigin) > 4)
     return true;
-  }
   return false;
 }
 setPosition(origin, angles) {
   self.isResetting = true;
-  for(index = 0; index < self.visuals.size; index++) {
+  for (index = 0; index < self.visuals.size; index++) {
     visual = self.visuals[index];
     visual.origin = origin;
     visual.angles = angles;
@@ -444,9 +416,8 @@ setPosition(origin, angles) {
   self.isResetting = false;
 }
 onPlayerLastStand() {
-  if(isDefined(self.carryObject)) {
+  if(isDefined(self.carryObject))
     self.carryObject thread setDropped();
-  }
 }
 setDropped() {
   self.isResetting = true;
@@ -476,7 +447,7 @@ setDropped() {
     } else {
       dropAngles = (0, tempAngle, 0);
     }
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index].origin = dropOrigin;
       self.visuals[index].angles = dropAngles;
       self.visuals[index] show();
@@ -485,7 +456,7 @@ setDropped() {
     self.curOrigin = self.trigger.origin;
     self thread pickupTimeout(trace[2], startOrigin[2]);
   } else {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index].origin = self.visuals[index].baseOrigin;
       self.visuals[index].angles = self.visuals[index].baseAngles;
       self.visuals[index] show();
@@ -493,9 +464,8 @@ setDropped() {
     self.trigger.origin = self.trigger.baseOrigin;
     self.curOrigin = self.trigger.baseOrigin;
   }
-  if(isDefined(self.onDrop)) {
+  if(isDefined(self.onDrop))
     self[[self.onDrop]](droppingPlayer);
-  }
   self clearCarrier();
   self updateCompassIcons();
   self updateWorldIcons();
@@ -506,9 +476,8 @@ setCarrier(carrier) {
   self thread updateVisibilityAccordingToRadar();
 }
 clearCarrier() {
-  if(!isDefined(self.carrier)) {
+  if(!isDefined(self.carrier))
     return;
-  }
   self.carrier takeObject(self);
   self.carrier = undefined;
   self notify("carrier_cleared");
@@ -516,18 +485,18 @@ clearCarrier() {
 shouldBeReset(minZ, maxZ) {
   mineTriggers = getEntArray("minefield", "targetname");
   hurtTriggers = getEntArray("trigger_hurt", "classname");
-  elevators = getEntArray("script_elevator", "targetname");
-  for(index = 0; index < mineTriggers.size; index++) {
+  elevators = GetEntArray("script_elevator", "targetname");
+  for (index = 0; index < mineTriggers.size; index++) {
     if(self.visuals[0] isTouchingSwept(mineTriggers[index], minZ, maxZ)) {
       return true;
     }
   }
-  for(index = 0; index < hurtTriggers.size; index++) {
+  for (index = 0; index < hurtTriggers.size; index++) {
     if(self.visuals[0] isTouchingSwept(hurtTriggers[index], minZ, maxZ)) {
       return true;
     }
   }
-  for(index = 0; index < elevators.size; index++) {
+  for (index = 0; index < elevators.size; index++) {
     assert(isDefined(elevators[index].occupy_volume));
     if(self.visuals[0] isTouchingSwept(elevators[index].occupy_volume, minZ, maxZ)) {
       return true;
@@ -545,24 +514,20 @@ pickupTimeout(minZ, maxZ) {
   }
   if(isDefined(self.autoResetTime)) {
     wait(self.autoResetTime);
-    if(!isDefined(self.carrier)) {
+    if(!isDefined(self.carrier))
       self returnHome();
-    }
   }
 }
 takeObject(object) {
-  if(isDefined(self.carryIcon)) {
+  if(isDefined(self.carryIcon))
     self.carryIcon destroyElem();
-  }
   self.carryObject = undefined;
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     return;
-  }
   self notify("drop_object");
   self.disallowVehicleUsage = false;
-  if(object.triggerType == "proximity") {
+  if(object.triggerType == "proximity")
     self thread pickupObjectDelay(object.trigger.origin);
-  }
   if(isDefined(object.visibleCarrierModel)) {
     self maps\mp\gametypes\_weapons::forceStowedWeaponUpdate();
   }
@@ -575,12 +540,11 @@ trackCarrier() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  while(isDefined(self.carryObject) && isAlive(self)) {
+  while (isDefined(self.carryObject) && isAlive(self)) {
     if(self isOnGround()) {
       trace = bulletTrace(self.origin + (0, 0, 20), self.origin - (0, 0, 20), false, undefined);
-      if(trace["fraction"] < 1) {
+      if(trace["fraction"] < 1)
         self.carryObject.safeOrigin = trace["position"];
-      }
     }
     wait(0.05);
   }
@@ -590,16 +554,13 @@ manualDropThink() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  for(;;) {
-    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandButtonPressed() || self meleeButtonPressed()) {
+  for (;;) {
+    while (self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandButtonPressed() || self meleeButtonPressed())
       wait .05;
-    }
-    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandButtonPressed() && !self meleeButtonPressed()) {
+    while (!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandButtonPressed() && !self meleeButtonPressed())
       wait .05;
-    }
-    if(isDefined(self.carryObject) && !self useButtonPressed()) {
+    if(isDefined(self.carryObject) && !self useButtonPressed())
       self.carryObject thread setDropped();
-    }
   }
 }
 createUseObject(ownerTeam, trigger, visuals, offset) {
@@ -609,26 +570,23 @@ createUseObject(ownerTeam, trigger, visuals, offset) {
   useObject.ownerTeam = ownerTeam;
   useObject.entNum = trigger getEntityNumber();
   useObject.keyObject = undefined;
-  if(isSubStr(trigger.classname, "use")) {
+  if(isSubStr(trigger.classname, "use"))
     useObject.triggerType = "use";
-  } else {
+  else
     useObject.triggerType = "proximity";
-  }
   useObject.trigger = trigger;
-  for(index = 0; index < visuals.size; index++) {
+  for (index = 0; index < visuals.size; index++) {
     visuals[index].baseOrigin = visuals[index].origin;
     visuals[index].baseAngles = visuals[index].angles;
   }
   useObject.visuals = visuals;
-  if(!isDefined(offset)) {
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  }
   useObject.offset3d = offset;
   useObject.compassIcons = [];
   useObject.objIDAllies = getNextObjID();
-  if(level.teamBased) {
+  if(level.teamBased)
     useObject.objIDAxis = getNextObjID();
-  }
   objective_add(useObject.objIDAllies, "invisible", useObject.curOrigin);
   if(level.teamBased) {
     objective_add(useObject.objIDAxis, "invisible", useObject.curOrigin);
@@ -680,43 +638,34 @@ setKeyObject(object) {
 }
 useObjectUseThink() {
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       continue;
-    }
-    if(!self canInteractWith(player)) {
+    if(!self canInteractWith(player))
       continue;
-    }
-    if(!player isOnGround()) {
+    if(!player isOnGround())
       continue;
-    }
-    if(player isInVehicle()) {
+    if(player isInVehicle())
       continue;
-    }
     if(isDefined(self.keyObject) && (!isDefined(player.carryObject) || player.carryObject != self.keyObject)) {
-      if(isDefined(self.onCantUse)) {
+      if(isDefined(self.onCantUse))
         self[[self.onCantUse]](player);
-      }
       continue;
     }
     result = true;
     if(self.useTime > 0) {
-      if(isDefined(self.onBeginUse)) {
+      if(isDefined(self.onBeginUse))
         self[[self.onBeginUse]](player);
-      }
       team = player.pers["team"];
       result = self useHoldThink(player);
-      if(isDefined(self.onEndUse)) {
+      if(isDefined(self.onEndUse))
         self[[self.onEndUse]](team, player, result);
-      }
     }
-    if(!result) {
+    if(!result)
       continue;
-    }
-    if(isDefined(self.onUse)) {
+    if(isDefined(self.onUse))
       self[[self.onUse]](player);
-    }
   }
 }
 getEarliestClaimPlayer() {
@@ -726,7 +675,7 @@ getEarliestClaimPlayer() {
   if(self.touchList[team].size > 0) {
     earliestTime = undefined;
     players = getArrayKeys(self.touchList[team]);
-    for(index = 0; index < players.size; index++) {
+    for (index = 0; index < players.size; index++) {
       touchdata = self.touchList[team][players[index]];
       if(!isDefined(earliestTime) || touchdata.starttime < earliestTime) {
         earliestPlayer = touchdata.player;
@@ -739,24 +688,21 @@ getEarliestClaimPlayer() {
 useObjectProxThink() {
   level endon("game_ended");
   self thread proxTriggerThink();
-  while(true) {
+  while (true) {
     if(self.useTime && self.curProgress >= self.useTime) {
       self.curProgress = 0;
       creditPlayer = getEarliestClaimPlayer();
-      if(isDefined(self.onEndUse)) {
+      if(isDefined(self.onEndUse))
         self[[self.onEndUse]](self getClaimTeam(), creditPlayer, isDefined(creditPlayer));
-      }
-      if(isDefined(creditPlayer) && isDefined(self.onUse)) {
+      if(isDefined(creditPlayer) && isDefined(self.onUse))
         self[[self.onUse]](creditPlayer);
-      }
       self setClaimTeam("none");
       self.claimPlayer = undefined;
     }
     if(self.claimTeam != "none") {
       if(self useObjectLockedForTeam(self.claimTeam)) {
-        if(isDefined(self.onEndUse)) {
+        if(isDefined(self.onEndUse))
           self[[self.onEndUse]](self getClaimTeam(), self.claimPlayer, false);
-        }
         self setClaimTeam("none");
         self.claimPlayer = undefined;
         self.curProgress = 0;
@@ -764,37 +710,30 @@ useObjectProxThink() {
         if(self.useTime) {
           if(self.decayProgress && !self.numTouching[self.claimTeam]) {
             if(isDefined(self.claimPlayer)) {
-              if(isDefined(self.onEndUse)) {
+              if(isDefined(self.onEndUse))
                 self[[self.onEndUse]](self getClaimTeam(), self.claimPlayer, false);
-              }
               self.claimPlayer = undefined;
             }
             self.curProgress -= (50 * self.useRate);
-            if(self.curProgress <= 0) {
+            if(self.curProgress <= 0)
               self.curProgress = 0;
-            }
-            if(isDefined(self.onUseUpdate)) {
+            if(isDefined(self.onUseUpdate))
               self[[self.onUseUpdate]](self getClaimTeam(), self.curProgress / self.useTime, (50 * self.useRate) / self.useTime);
-            }
-            if(self.curProgress == 0) {
+            if(self.curProgress == 0)
               self setClaimTeam("none");
-            }
           } else if(!self.numTouching[self.claimTeam]) {
-            if(isDefined(self.onEndUse)) {
+            if(isDefined(self.onEndUse))
               self[[self.onEndUse]](self getClaimTeam(), self.claimPlayer, false);
-            }
             self setClaimTeam("none");
             self.claimPlayer = undefined;
           } else {
             self.curProgress += (50 * self.useRate);
-            if(isDefined(self.onUseUpdate)) {
+            if(isDefined(self.onUseUpdate))
               self[[self.onUseUpdate]](self getClaimTeam(), self.curProgress / self.useTime, (50 * self.useRate) / self.useTime);
-            }
           }
         } else {
-          if(isDefined(self.onUse)) {
+          if(isDefined(self.onUse))
             self[[self.onUse]](self.claimPlayer);
-          }
           self setClaimTeam("none");
           self.claimPlayer = undefined;
         }
@@ -813,39 +752,33 @@ useObjectLockedForTeam(team) {
 proxTriggerThink() {
   level endon("game_ended");
   entityNumber = self.entNum;
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
-    if(!isAlive(player) || self useObjectLockedForTeam(player.pers["team"])) {
+    if(!isAlive(player) || self useObjectLockedForTeam(player.pers["team"]))
       continue;
-    }
-    if(player isInVehicle()) {
+    if(player isInVehicle())
       continue;
-    }
     if(self canInteractWith(player) && self.claimTeam == "none") {
       if(!isDefined(self.keyObject) || (isDefined(player.carryObject) && player.carryObject == self.keyObject)) {
         setClaimTeam(player.pers["team"]);
         self.claimPlayer = player;
-        if(self.useTime && isDefined(self.onBeginUse)) {
+        if(self.useTime && isDefined(self.onBeginUse))
           self[[self.onBeginUse]](self.claimPlayer);
-        }
       } else {
-        if(isDefined(self.onCantUse)) {
+        if(isDefined(self.onCantUse))
           self[[self.onCantUse]](player);
-        }
       }
     }
-    if(self.useTime && isAlive(player) && !isDefined(player.touchTriggers[entityNumber])) {
+    if(self.useTime && isAlive(player) && !isDefined(player.touchTriggers[entityNumber]))
       player thread triggerTouchThink(self);
-    }
   }
 }
 setClaimTeam(newTeam) {
   assert(newTeam != self.claimTeam);
-  if(self.claimTeam == "none" && getTime() - self.lastClaimTime > 1000) {
+  if(self.claimTeam == "none" && getTime() - self.lastClaimTime > 1000)
     self.curProgress = 0;
-  } else if(newTeam != "none" && newTeam != self.lastClaimTeam) {
+  else if(newTeam != "none" && newTeam != self.lastClaimTeam)
     self.curProgress = 0;
-  }
   self.lastClaimTeam = self.claimTeam;
   self.lastClaimTime = getTime();
   self.claimTeam = newTeam;
@@ -855,18 +788,14 @@ getClaimTeam() {
   return self.claimTeam;
 }
 continueTriggerTouchThink(team, object) {
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     return false;
-  }
-  if(self useObjectLockedForTeam(team)) {
+  if(self useObjectLockedForTeam(team))
     return false;
-  }
-  if(self isinvehicle()) {
+  if(self isinvehicle())
     return false;
-  }
-  if(!self isTouching(object.trigger)) {
+  if(!self isTouching(object.trigger))
     return false;
-  }
   return true;
 }
 triggerTouchThink(object) {
@@ -878,15 +807,14 @@ triggerTouchThink(object) {
   object.numTouching[team] = object.numTouching[team] + score;
   object updateUseRate();
   touchName = "player" + self.clientid;
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.player = self;
   struct.starttime = gettime();
   object.touchList[team][touchName] = struct;
   self.touchTriggers[object.entNum] = object.trigger;
-  if(isDefined(object.onTouchUse)) {
+  if(isDefined(object.onTouchUse))
     object[[object.onTouchUse]](self);
-  }
-  while(self continueTriggerTouchThink(team, object)) {
+  while (self continueTriggerTouchThink(team, object)) {
     self updateProxBar(object, false);
     wait(0.05);
   }
@@ -894,9 +822,8 @@ triggerTouchThink(object) {
     self updateProxBar(object, true);
     self.touchTriggers[object.entNum] = undefined;
   }
-  if(level.gameEnded) {
+  if(level.gameEnded)
     return;
-  }
   object.touchList[team][touchName] = undefined;
   object.numTouching[team] = object.numTouching[team] - score;
   if(object.numTouching[team] < 1) {
@@ -906,21 +833,18 @@ triggerTouchThink(object) {
     object.curProgress = object.useTime - 1;
   }
   if(isDefined(self)) {
-    if(isDefined(object.onEndTouchUse)) {
+    if(isDefined(object.onEndTouchUse))
       object[[object.onEndTouchUse]](self);
-    }
   }
   object updateUseRate();
 }
 updateProxBar(object, forceRemove) {
   if(!forceRemove && object.decayProgress) {
     if(!object canInteractWith(self)) {
-      if(isDefined(self.proxBar)) {
+      if(isDefined(self.proxBar))
         self.proxBar hideElem();
-      }
-      if(isDefined(self.proxBarText)) {
+      if(isDefined(self.proxBarText))
         self.proxBarText hideElem();
-      }
       return;
     } else {
       if(!isDefined(self.proxBar)) {
@@ -940,12 +864,10 @@ updateProxBar(object, forceRemove) {
       }
     }
   } else if(forceRemove || !object canInteractWith(self) || self.pers["team"] != object.claimTeam) {
-    if(isDefined(self.proxBar)) {
+    if(isDefined(self.proxBar))
       self.proxBar hideElem();
-    }
-    if(isDefined(self.proxBarText)) {
+    if(isDefined(self.proxBarText))
       self.proxBarText hideElem();
-    }
     return;
   }
   if(!isDefined(self.proxBar)) {
@@ -967,24 +889,21 @@ updateProxBar(object, forceRemove) {
     self.proxBarText setText(object.useText);
   }
   if(self.proxBar.lastUseRate != object.useRate || self.proxBar.lastHostMigrationState != isDefined(level.hostMigrationTimer)) {
-    if(object.curProgress > object.useTime) {
+    if(object.curProgress > object.useTime)
       object.curProgress = object.useTime;
-    }
     if(object.decayProgress && self.pers["team"] != object.claimTeam) {
       if(object.curProgress > 0) {
         progress = object.curProgress / object.useTime;
         rate = (1000 / object.useTime) * (object.useRate * -1);
-        if(isDefined(level.hostMigrationTimer)) {
+        if(isDefined(level.hostMigrationTimer))
           rate = 0;
-        }
         self.proxBar updateBar(progress, rate);
       }
     } else {
       progress = object.curProgress / object.useTime;
       rate = (1000 / object.useTime) * object.useRate;
-      if(isDefined(level.hostMigrationTimer)) {
+      if(isDefined(level.hostMigrationTimer))
         rate = 0;
-      }
       self.proxBar updateBar(progress, rate);
     }
     self.proxBar.lastHostMigrationState = isDefined(level.hostMigrationTimer);
@@ -994,29 +913,24 @@ updateProxBar(object, forceRemove) {
 updateUseRate() {
   numClaimants = self.numTouching[self.claimTeam];
   numOther = 0;
-  if(self.claimTeam != "axis") {
+  if(self.claimTeam != "axis")
     numOther += self.numTouching["axis"];
-  }
-  if(self.claimTeam != "allies") {
+  if(self.claimTeam != "allies")
     numOther += self.numTouching["allies"];
-  }
   self.useRate = 0;
   if(self.decayProgress) {
-    if(numClaimants && !numOther) {
+    if(numClaimants && !numOther)
       self.useRate = numClaimants;
-    } else if(!numClaimants && numOther) {
+    else if(!numClaimants && numOther)
       self.useRate = numOther;
-    } else if(!numClaimants && !numOther) {
+    else if(!numClaimants && !numOther)
       self.useRate = 1;
-    }
   } else {
-    if(numClaimants && !numOther) {
+    if(numClaimants && !numOther)
       self.useRate = numClaimants;
-    }
   }
-  if(isDefined(self.onUpdateUseRate)) {
+  if(isDefined(self.onUpdateUseRate))
     self[[self.onUpdateUseRate]]();
-  }
 }
 useHoldThink(player) {
   player notify("use_hold");
@@ -1052,19 +966,17 @@ useHoldThink(player) {
     }
     player notify("done_using");
   }
-  if(isDefined(useWeapon) && isDefined(player)) {
+  if(isDefined(useWeapon) && isDefined(player))
     player thread takeUseWeapon(useWeapon);
-  }
-  if(isDefined(result) && result) {
+  if(isDefined(result) && result)
     return true;
-  }
   if(isDefined(player)) {
     player.claimTrigger = undefined;
     if(isDefined(useWeapon)) {
       ammo = player GetWeaponAmmoClip(lastWeapon);
-      if(lastWeapon != "none" && !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(lastWeapon) && !(IsWeaponEquipment(lastWeapon) && player GetWeaponAmmoClip(lastWeapon) == 0)) {
+      if(lastWeapon != "none" && !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(lastWeapon) && !(IsWeaponEquipment(lastWeapon) && player GetWeaponAmmoClip(lastWeapon) == 0))
         player switchToWeapon(lastWeapon);
-      } else {
+      else {
         player takeWeapon(useWeapon);
         primaries = player GetWeaponsListPrimaries();
         assert(primaries.size > 0);
@@ -1074,9 +986,8 @@ useHoldThink(player) {
       player _enableWeapon();
     }
     player unlink();
-    if(!isAlive(player)) {
+    if(!isAlive(player))
       player.killedInUse = true;
-    }
   }
   self.inUse = false;
   self.trigger releaseClaimedTrigger();
@@ -1087,43 +998,32 @@ takeUseWeapon(useWeapon) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(self getCurrentWeapon() == useWeapon && !self.throwingGrenade) {
+  while (self getCurrentWeapon() == useWeapon && !self.throwingGrenade)
     wait(0.05);
-  }
   self takeWeapon(useWeapon);
 }
 continueHoldThinkLoop(player, waitForWeapon, timedOut, useTime) {
   maxWaitTime = 1.5;
-  if(!IsAlive(player)) {
+  if(!IsAlive(player))
     return false;
-  }
-  if(isDefined(player.laststand) && player.laststand) {
+  if(isDefined(player.laststand) && player.laststand)
     return false;
-  }
-  if(self.curProgress >= useTime) {
+  if(self.curProgress >= useTime)
     return false;
-  }
-  if(!(player useButtonPressed())) {
+  if(!(player useButtonPressed()))
     return false;
-  }
-  if(player.throwingGrenade) {
+  if(player.throwingGrenade)
     return false;
-  }
-  if(player meleeButtonPressed()) {
+  if(player meleeButtonPressed())
     return false;
-  }
-  if(player isinvehicle()) {
+  if(player isinvehicle())
     return false;
-  }
-  if(!(player isTouching(self.trigger))) {
+  if(!(player isTouching(self.trigger)))
     return false;
-  }
-  if(!self.useRate && !waitForWeapon) {
+  if(!self.useRate && !waitForWeapon)
     return false;
-  }
-  if(waitForWeapon && timedOut > maxWaitTime) {
+  if(waitForWeapon && timedOut > maxWaitTime)
     return false;
-  }
   return true;
 }
 useHoldThinkLoop(player, lastWeapon) {
@@ -1136,7 +1036,7 @@ useHoldThinkLoop(player, lastWeapon) {
   if(player HasPerk("specialty_fastinteract")) {
     useTime = Int(useTime / GetDvarFloat("perk_interactSpeedMultiplier"));
   }
-  while(self continueHoldThinkLoop(player, waitForWeapon, timedOut, useTime)) {
+  while (self continueHoldThinkLoop(player, waitForWeapon, timedOut, useTime)) {
     timedOut += 0.05;
     if(!isDefined(useWeapon) || player getCurrentWeapon() == useWeapon) {
       self.curProgress += (50 * self.useRate);
@@ -1152,9 +1052,9 @@ useHoldThinkLoop(player, lastWeapon) {
       if(isDefined(useWeapon)) {
         player setWeaponAmmoStock(useWeapon, 1);
         player setWeaponAmmoClip(useWeapon, 1);
-        if(lastWeapon != "none" && !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(lastWeapon) && !(IsWeaponEquipment(lastWeapon) && player GetWeaponAmmoClip(lastWeapon) == 0)) {
+        if(lastWeapon != "none" && !maps\mp\gametypes\_hardpoints::isKillstreakWeapon(lastWeapon) && !(IsWeaponEquipment(lastWeapon) && player GetWeaponAmmoClip(lastWeapon) == 0))
           player switchToWeapon(lastWeapon);
-        } else {
+        else {
           player takeWeapon(useWeapon);
           primaries = player GetWeaponsListPrimaries();
           assert(primaries.size > 0);
@@ -1183,26 +1083,23 @@ personalUseBar(object) {
   }
   lastRate = -1;
   lastHostMigrationState = isDefined(level.hostMigrationTimer);
-  while(isAlive(self) && object.inUse && !level.gameEnded) {
+  while (isAlive(self) && object.inUse && !level.gameEnded) {
     if(lastRate != object.useRate || lastHostMigrationState != isDefined(level.hostMigrationTimer)) {
-      if(object.curProgress > useTime) {
+      if(object.curProgress > useTime)
         object.curProgress = useTime;
-      }
       if(object.decayProgress && self.pers["team"] != object.claimTeam) {
         if(object.curProgress > 0) {
           progress = object.curProgress / useTime;
           rate = (1000 / useTime) * (object.useRate * -1);
-          if(isDefined(level.hostMigrationTimer)) {
+          if(isDefined(level.hostMigrationTimer))
             rate = 0;
-          }
           self.proxBar updateBar(progress, rate);
         }
       } else {
         progress = object.curProgress / useTime;
         rate = (1000 / useTime) * object.useRate;
-        if(isDefined(level.hostMigrationTimer)) {
+        if(isDefined(level.hostMigrationTimer))
           rate = 0;
-        }
         self.useBar updateBar(progress, rate);
       }
       if(!object.useRate) {
@@ -1221,9 +1118,8 @@ personalUseBar(object) {
   self.useBarText destroyElem();
 }
 updateTrigger() {
-  if(self.triggerType != "use") {
+  if(self.triggerType != "use")
     return;
-  }
   if(self.interactTeam == "none") {
     self.trigger.origin -= (0, 0, 50000);
   } else if((self.interactTeam == "any") || !level.teamBased) {
@@ -1231,22 +1127,20 @@ updateTrigger() {
     self.trigger setTeamForTrigger("none");
   } else if(self.interactTeam == "friendly") {
     self.trigger.origin = self.curOrigin;
-    if(self.ownerTeam == "allies") {
+    if(self.ownerTeam == "allies")
       self.trigger setTeamForTrigger("allies");
-    } else if(self.ownerTeam == "axis") {
+    else if(self.ownerTeam == "axis")
       self.trigger setTeamForTrigger("axis");
-    } else {
+    else
       self.trigger.origin -= (0, 0, 50000);
-    }
   } else if(self.interactTeam == "enemy") {
     self.trigger.origin = self.curOrigin;
-    if(self.ownerTeam == "allies") {
+    if(self.ownerTeam == "allies")
       self.trigger setTeamForTrigger("axis");
-    } else if(self.ownerTeam == "axis") {
+    else if(self.ownerTeam == "axis")
       self.trigger setTeamForTrigger("allies");
-    } else {
+    else
       self.trigger setTeamForTrigger("none");
-    }
   }
 }
 updateWorldIcons() {
@@ -1265,14 +1159,12 @@ updateWorldIcons() {
   }
 }
 updateWorldIcon(relativeTeam, showIcon) {
-  if(!isDefined(self.worldIcons[relativeTeam])) {
+  if(!isDefined(self.worldIcons[relativeTeam]))
     showIcon = false;
-  }
   updateTeams = getUpdateTeams(relativeTeam);
-  for(index = 0; index < updateTeams.size; index++) {
-    if(!level.teamBased && updateTeams[index] != "allies") {
+  for (index = 0; index < updateTeams.size; index++) {
+    if(!level.teamBased && updateTeams[index] != "allies")
       continue;
-    }
     opName = "objpoint_" + updateTeams[index] + "_" + self.entNum;
     objPoint = maps\mp\gametypes\_objpoints::getObjPointByName(opName);
     objPoint notify("stop_flashing_thread");
@@ -1283,20 +1175,17 @@ updateWorldIcon(relativeTeam, showIcon) {
       objPoint.alpha = objPoint.baseAlpha;
       objPoint.isShown = true;
       isWaypoint = true;
-      if(isDefined(self.worldIsWaypoint[relativeTeam])) {
+      if(isDefined(self.worldIsWaypoint[relativeTeam]))
         isWaypoint = self.worldIsWaypoint[relativeTeam];
-      }
-      if(isDefined(self.compassIcons[relativeTeam])) {
+      if(isDefined(self.compassIcons[relativeTeam]))
         objPoint setWayPoint(isWaypoint, self.worldIcons[relativeTeam]);
-      } else {
+      else
         objPoint setWayPoint(isWaypoint);
-      }
       if(self.type == "carryObject") {
-        if(isDefined(self.carrier) && !shouldPingObject(relativeTeam)) {
+        if(isDefined(self.carrier) && !shouldPingObject(relativeTeam))
           objPoint SetTargetEnt(self.carrier);
-        } else {
+        else
           objPoint ClearTargetEnt();
-        }
       }
     } else {
       objPoint fadeOverTime(0.05);
@@ -1323,15 +1212,13 @@ updateCompassIcons() {
 }
 updateCompassIcon(relativeTeam, showIcon) {
   updateTeams = getUpdateTeams(relativeTeam);
-  for(index = 0; index < updateTeams.size; index++) {
+  for (index = 0; index < updateTeams.size; index++) {
     showIconThisTeam = showIcon;
-    if(!showIconThisTeam && shouldShowCompassDueToRadar(updateTeams[index])) {
+    if(!showIconThisTeam && shouldShowCompassDueToRadar(updateTeams[index]))
       showIconThisTeam = true;
-    }
     objId = self.objIDAllies;
-    if(updateTeams[index] == "axis" && level.teamBased) {
+    if(updateTeams[index] == "axis" && level.teamBased)
       objId = self.objIDAxis;
-    }
     if(!isDefined(self.compassIcons[relativeTeam]) || !showIconThisTeam) {
       objective_state(objId, "invisible");
       continue;
@@ -1339,66 +1226,57 @@ updateCompassIcon(relativeTeam, showIcon) {
     objective_icon(objId, self.compassIcons[relativeTeam]);
     objective_state(objId, "active");
     if(self.type == "carryObject") {
-      if(isAlive(self.carrier) && !shouldPingObject(relativeTeam)) {
+      if(isAlive(self.carrier) && !shouldPingObject(relativeTeam))
         objective_onentity(objId, self.carrier);
-      } else {
+      else
         objective_position(objId, self.curOrigin);
-      }
     }
   }
 }
 shouldPingObject(relativeTeam) {
-  if(relativeTeam == "friendly" && self.objIDPingFriendly) {
+  if(relativeTeam == "friendly" && self.objIDPingFriendly)
     return true;
-  } else if(relativeTeam == "enemy" && self.objIDPingEnemy) {
+  else if(relativeTeam == "enemy" && self.objIDPingEnemy)
     return true;
-  }
   return false;
 }
 getUpdateTeams(relativeTeam) {
   updateTeams = [];
   if(level.teamBased) {
     if(relativeTeam == "friendly") {
-      if(self isFriendlyTeam("allies")) {
+      if(self isFriendlyTeam("allies"))
         updateTeams[0] = "allies";
-      } else if(self isFriendlyTeam("axis")) {
+      else if(self isFriendlyTeam("axis"))
         updateTeams[0] = "axis";
-      }
     } else if(relativeTeam == "enemy") {
-      if(!self isFriendlyTeam("allies")) {
+      if(!self isFriendlyTeam("allies"))
         updateTeams[updateTeams.size] = "allies";
-      }
-      if(!self isFriendlyTeam("axis")) {
+      if(!self isFriendlyTeam("axis"))
         updateTeams[updateTeams.size] = "axis";
-      }
     }
   } else {
-    if(relativeTeam == "friendly") {
+    if(relativeTeam == "friendly")
       updateTeams[updateTeams.size] = "allies";
-    } else {
+    else
       updateTeams[updateTeams.size] = "axis";
-    }
   }
   return updateTeams;
 }
 shouldShowCompassDueToRadar(team) {
   showCompass = false;
-  if(!isDefined(self.carrier)) {
+  if(!isDefined(self.carrier))
     return false;
-  }
-  if(self.carrier hasPerk("specialty_gpsjammer") == false) {
+  if(self.carrier hasPerk("specialty_gpsjammer") == false)
     if(maps\mp\_radar::teamHasSpyplane(team))
-  }
-  showCompass = true;
-  if(maps\mp\_radar::teamHasSatellite(team)) {
+      showCompass = true;
+  if(maps\mp\_radar::teamHasSatellite(team))
     showCompass = true;
-  }
   return showCompass;
 }
 updateVisibilityAccordingToRadar() {
   self endon("death");
   self endon("carrier_cleared");
-  while(1) {
+  while (1) {
     level waittill("radar_status_change");
     self updateCompassIcons();
   }
@@ -1430,22 +1308,21 @@ allowUse(relativeTeam) {
 }
 setVisibleTeam(relativeTeam) {
   self.visibleTeam = relativeTeam;
-  if(!maps\mp\gametypes\_tweakables::getTweakableValue("hud", "showobjicons")) {
+  if(!maps\mp\gametypes\_tweakables::getTweakableValue("hud", "showobjicons"))
     self.visibleTeam = "none";
-  }
   updateCompassIcons();
   updateWorldIcons();
 }
 setModelVisibility(visibility) {
   if(visibility) {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] thread makeSolid();
       }
     }
   } else {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] hide();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] notify("changing_solidness");
@@ -1458,8 +1335,8 @@ makeSolid() {
   self endon("death");
   self notify("changing_solidness");
   self endon("changing_solidness");
-  while(1) {
-    for(i = 0; i < level.players.size; i++) {
+  while (1) {
+    for (i = 0; i < level.players.size; i++) {
       if(level.players[i] isTouching(self)) {
         break;
       }
@@ -1503,10 +1380,9 @@ getVisibleCarrierModel() {
 disableObject(forceHide) {
   self notify("disabled");
   if(self.type == "carryObject" || (isDefined(forceHide) && forceHide)) {
-    if(isDefined(self.carrier)) {
+    if(isDefined(self.carrier))
       self.carrier takeObject(self);
-    }
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] hide();
     }
   }
@@ -1515,7 +1391,7 @@ disableObject(forceHide) {
 }
 enableObject(forceShow) {
   if(self.type == "carryObject" || (isDefined(forceShow) && forceShow)) {
-    for(index = 0; index < self.visuals.size; index++) {
+    for (index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
     }
   }
@@ -1523,27 +1399,22 @@ enableObject(forceShow) {
   self setVisibleTeam("any");
 }
 getRelativeTeam(team) {
-  if(self.ownerTeam == "any") {
+  if(self.ownerTeam == "any")
     return "friendly";
-  }
-  if(team == self.ownerTeam) {
+  if(team == self.ownerTeam)
     return "friendly";
-  } else if(team == getEnemyTeam(self.ownerTeam)) {
+  else if(team == getEnemyTeam(self.ownerTeam))
     return "enemy";
-  } else {
+  else
     return "neutral";
-  }
 }
 isFriendlyTeam(team) {
-  if(!level.teamBased) {
+  if(!level.teamBased)
     return true;
-  }
-  if(self.ownerTeam == "any") {
+  if(self.ownerTeam == "any")
     return true;
-  }
-  if(self.ownerTeam == team) {
+  if(self.ownerTeam == team)
     return true;
-  }
   return false;
 }
 canInteractWith(player) {
@@ -1555,31 +1426,27 @@ canInteractWith(player) {
       return true;
     case "friendly":
       if(level.teamBased) {
-        if(team == self.ownerTeam) {
+        if(team == self.ownerTeam)
           return true;
-        } else {
+        else
           return false;
-        }
       } else {
-        if(player == self.ownerTeam) {
+        if(player == self.ownerTeam)
           return true;
-        } else {
+        else
           return false;
-        }
       }
     case "enemy":
       if(level.teamBased) {
-        if(team != self.ownerTeam) {
+        if(team != self.ownerTeam)
           return true;
-        } else {
+        else
           return false;
-        }
       } else {
-        if(player != self.ownerTeam) {
+        if(player != self.ownerTeam)
           return true;
-        } else {
+        else
           return false;
-        }
       }
     default:
       assertEx(0, "invalid interactTeam");
@@ -1587,46 +1454,36 @@ canInteractWith(player) {
   }
 }
 isTeam(team) {
-  if(team == "neutral") {
+  if(team == "neutral")
     return true;
-  }
-  if(team == "allies") {
+  if(team == "allies")
     return true;
-  }
-  if(team == "axis") {
+  if(team == "axis")
     return true;
-  }
-  if(team == "any") {
+  if(team == "any")
     return true;
-  }
-  if(team == "none") {
+  if(team == "none")
     return true;
-  }
   return false;
 }
 isRelativeTeam(relativeTeam) {
-  if(relativeTeam == "friendly") {
+  if(relativeTeam == "friendly")
     return true;
-  }
-  if(relativeTeam == "enemy") {
+  if(relativeTeam == "enemy")
     return true;
-  }
-  if(relativeTeam == "any") {
+  if(relativeTeam == "any")
     return true;
-  }
-  if(relativeTeam == "none") {
+  if(relativeTeam == "none")
     return true;
-  }
   return false;
 }
 getEnemyTeam(team) {
-  if(team == "neutral") {
+  if(team == "neutral")
     return "none";
-  } else if(team == "allies") {
+  else if(team == "allies")
     return "axis";
-  } else {
+  else
     return "allies";
-  }
 }
 getNextObjID() {
   nextID = 0;
@@ -1637,17 +1494,15 @@ getNextObjID() {
     nextID = level.numGametypeReservedObjectives;
     level.numGametypeReservedObjectives++;
   }
-  if(nextId > 31) {
+  if(nextId > 31)
     nextId = 31;
-  }
   return nextID;
 }
 releaseObjID(objID) {
   Assert(objID < level.numGametypeReservedObjectives);
-  for(i = 0; i < level.releasedObjectives.size; i++) {
-    if(objID == level.releasedObjectives[i] && objID == 31) {
+  for (i = 0; i < level.releasedObjectives.size; i++) {
+    if(objID == level.releasedObjectives[i] && objID == 31)
       return;
-    }
   }
   level.releasedObjectives[level.releasedObjectives.size] = objID;
 }
@@ -1657,8 +1512,7 @@ getLabel() {
     label = "";
     return label;
   }
-  if(label[0] != "_") {
+  if(label[0] != "_")
     return ("_" + label);
-  }
   return label;
 }

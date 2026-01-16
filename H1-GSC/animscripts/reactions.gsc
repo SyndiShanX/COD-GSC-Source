@@ -28,9 +28,8 @@ init_animset_reactions() {
   foreach(var_2 in var_0) {
     var_3 = length(getmovedelta(var_2, 0, 1));
 
-    if(var_3 > anim.longestrunwizby) {
+    if(var_3 > anim.longestrunwizby)
       anim.longestrunwizby = var_3;
-    }
   }
 
   anim.lastrunningreactanim = 0;
@@ -41,7 +40,7 @@ reactionscheckloop() {
 }
 
 canreactagain() {
-  return !isDefined(self.lastreacttime) || gettime() - self.lastreacttime > 2000;
+  return !isdefined(self.lastreacttime) || gettime() - self.lastreacttime > 2000;
 }
 
 bulletwhizbyreaction() {
@@ -49,11 +48,11 @@ bulletwhizbyreaction() {
   self endon("killanimscript");
   self.lastreacttime = gettime();
   self.a.movement = "stop";
-  var_1 = isDefined(self.whizbyenemy) && distancesquared(self.origin, self.whizbyenemy.origin) < 160000;
+  var_1 = isdefined(self.whizbyenemy) && distancesquared(self.origin, self.whizbyenemy.origin) < 160000;
   self animmode("gravity");
   self orientmode("face current");
 
-  if(isDefined(self.disable_crouch_whizby_react) || var_1 || common_scripts\utility::cointoss()) {
+  if(isdefined(self.disable_crouch_whizby_react) || var_1 || common_scripts\utility::cointoss()) {
     self clearanim( % animscript_root, 0.1);
     var_2 = [];
 
@@ -71,17 +70,16 @@ bulletwhizbyreaction() {
 
     var_3 = var_2[randomint(var_2.size)];
 
-    if(var_1) {
+    if(var_1)
       var_4 = 1 + randomfloat(0.5);
-    } else {
+    else
       var_4 = 0.2 + randomfloat(0.5);
-    }
 
     self setflaggedanimknobrestart("reactanim", var_3, 1, 0.1, 1);
     animscripts\notetracks::donotetracksfortime(var_4, "reactanim");
     self clearanim( % animscript_root, 0.1);
 
-    if(!var_1 && self.stairsstate == "none" && !isDefined(self.disable_dive_whizby_react)) {
+    if(!var_1 && self.stairsstate == "none" && !isdefined(self.disable_dive_whizby_react)) {
       var_5 = 1 + randomfloat(0.2);
       var_6 = animscripts\utility::randomanimoftwo( % exposed_dive_grenade_b, % exposed_dive_grenade_f);
       self setflaggedanimknobrestart("dive", var_6, 1, 0.1, var_5);
@@ -97,13 +95,12 @@ bulletwhizbyreaction() {
       animscripts\shared::donotetracks("crouch");
     }
 
-    var_7 = anglesToForward(self.angles);
+    var_7 = anglestoforward(self.angles);
 
-    if(isDefined(self.whizbyenemy)) {
+    if(isdefined(self.whizbyenemy))
       var_8 = vectornormalize(self.whizbyenemy.origin - self.origin);
-    } else {
+    else
       var_8 = var_7;
-    }
 
     if(vectordot(var_8, var_7) > 0) {
       var_9 = animscripts\utility::randomanimoftwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
@@ -127,19 +124,19 @@ bulletwhizbyreaction() {
 bulletwhizbycheckloop() {
   self endon("killanimscript");
 
-  if(isDefined(self.disablebulletwhizbyreaction)) {
+  if(isdefined(self.disablebulletwhizbyreaction)) {
     return;
   }
-  for(;;) {
+  for (;;) {
     self waittill("bulletwhizby", var_0);
 
-    if(isDefined(self.disablebulletwhizbyreaction)) {
+    if(isdefined(self.disablebulletwhizbyreaction)) {
       return;
     }
-    if(!isDefined(var_0.team) || self.team == var_0.team) {
+    if(!isdefined(var_0.team) || self.team == var_0.team) {
       continue;
     }
-    if(isDefined(self.covernode) || isDefined(self.ambushnode)) {
+    if(isdefined(self.covernode) || isdefined(self.ambushnode)) {
       continue;
     }
     if(self.a.pose != "stand") {
@@ -165,8 +162,8 @@ getnewenemyreactionanim() {
   if(self nearclaimnodeandangle()) {
     var_1 = animscripts\utility::lookupanimarray("cover_reactions");
 
-    if(isDefined(var_1[self.prevscript])) {
-      var_2 = anglesToForward(self.node.angles);
+    if(isdefined(var_1[self.prevscript])) {
+      var_2 = anglestoforward(self.node.angles);
       var_3 = vectornormalize(self.reactiontargetpos - self.origin);
 
       if(vectordot(var_2, var_3) < -0.5) {
@@ -177,13 +174,13 @@ getnewenemyreactionanim() {
     }
   }
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     var_5 = [];
 
     if(animscripts\utility::usingsmg()) {
       var_5[0] = % smg_exposed_backpedal;
       var_5[1] = % smg_exposed_idle_reactb;
-    } else if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+    } else if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
       var_5[0] = % s1_exposed_backpedal;
       var_5[1] = % s1_exposed_idle_alert_v5;
     } else {
@@ -191,15 +188,14 @@ getnewenemyreactionanim() {
       var_5[1] = % exposed_idle_reactb;
     }
 
-    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536) {
+    if(isdefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536)
       self orientmode("face enemy");
-    } else {
+    else
       self orientmode("face point", self.reactiontargetpos);
-    }
 
     if(self.a.pose == "crouch") {
       var_3 = vectornormalize(self.reactiontargetpos - self.origin);
-      var_6 = anglesToForward(self.angles);
+      var_6 = anglestoforward(self.angles);
 
       if(vectordot(var_6, var_3) < -0.5) {
         self orientmode("face current");
@@ -221,9 +217,8 @@ stealthnewenemyreactanim() {
     self orientmode("face enemy");
     var_0 = % exposed_idle_reactb;
 
-    if(animscripts\utility::usingsmg()) {
+    if(animscripts\utility::usingsmg())
       var_0 = % smg_exposed_idle_reactb;
-    }
 
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
     var_1 = getanimlength(var_0);
@@ -256,9 +251,9 @@ newenemyreactionanim() {
   self.a.movement = "stop";
   self.playing_new_enemy_reaction_anim = 1;
 
-  if(isDefined(self._stealth) && self.alertlevel != "combat") {
+  if(isdefined(self._stealth) && self.alertlevel != "combat")
     stealthnewenemyreactanim();
-  } else {
+  else {
     var_0 = getnewenemyreactionanim();
     self clearanim( % animscript_root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
@@ -272,24 +267,23 @@ newenemyreactionanim() {
 newenemysurprisedreaction() {
   self endon("death");
 
-  if(isDefined(self.disablereactionanims)) {
+  if(isdefined(self.disablereactionanims)) {
     return;
   }
   if(!canreactagain()) {
     return;
   }
-  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
+  if(self.a.pose == "prone" || isdefined(self.a.onback)) {
     return;
   }
   self animmode("gravity");
 
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy))
     newenemyreactionanim();
-  }
 }
 
 end_script() {
-  if(isDefined(self.playing_new_enemy_reaction_anim)) {
+  if(isdefined(self.playing_new_enemy_reaction_anim)) {
     self notify("newEnemyReactionDone");
     self.playing_new_enemy_reaction_anim = undefined;
   }

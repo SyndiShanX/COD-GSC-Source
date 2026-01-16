@@ -25,7 +25,7 @@
 #namespace zm_castle_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_teleporter", &__init__, &__main__, undefined);
+  system::register("zm_castle_teleporter", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -43,7 +43,7 @@ function __init__() {
   level.var_47f4765c = 0;
   level flag::init("castle_teleporter_used");
   visionset_mgr::register_info("overlay", "zm_factory_teleport", 5000, 61, 1, 1);
-  visionset_mgr::register_info("overlay", "zm_castle_transported", 1, 20, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_castle_transported", 1, 20, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
   clientfield::register("world", "ee_quest_time_travel_ready", 5000, 1, "int");
   clientfield::register("toplayer", "ee_quest_back_in_time_teleport_fx", 5000, 1, "int");
   clientfield::register("toplayer", "ee_quest_back_in_time_postfx", 5000, 1, "int");
@@ -51,7 +51,7 @@ function __init__() {
 }
 
 function __main__() {
-  var_a0cf8f2b = getEntArray("trigger_teleport_pad", "targetname");
+  var_a0cf8f2b = getentarray("trigger_teleport_pad", "targetname");
   foreach(n_index, e_trig in var_a0cf8f2b) {
     level.var_27b3c884[n_index] = e_trig;
     e_trig thread teleport_pad_think();
@@ -59,14 +59,14 @@ function __main__() {
   level.no_dog_clip = 1;
   level.teleport_ae_funcs = [];
   if(!issplitscreen()) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
 }
 
 function pad_manager() {
@@ -75,7 +75,7 @@ function pad_manager() {
     t_trig teleport_trigger_invisible(0);
   }
   level.is_cooldown = 1;
-  array::thread_all(level.var_27b3c884, &function_68ebacd3);
+  array::thread_all(level.var_27b3c884, & function_68ebacd3);
   wait(level.n_teleport_cooldown);
   level.is_cooldown = 0;
   foreach(t_trig in level.var_27b3c884) {
@@ -83,7 +83,7 @@ function pad_manager() {
       t_trig sethintstring(&"ZM_CASTLE_TELEPORT_LOCKED");
       continue;
     }
-    if(isDefined(t_trig.var_1c5080fe) && t_trig.var_1c5080fe) {
+    if(isdefined(t_trig.var_1c5080fe) && t_trig.var_1c5080fe) {
       t_trig sethintstring(&"ZM_CASTLE_TELEPORT_USE", 500);
       continue;
     }
@@ -94,8 +94,8 @@ function pad_manager() {
 function function_68ebacd3() {
   self.var_eb37ce09 = undefined;
   wait(10);
-  while(level.is_cooldown) {
-    if(!isDefined(self.var_eb37ce09)) {
+  while (level.is_cooldown) {
+    if(!isdefined(self.var_eb37ce09)) {
       foreach(e_player in level.activeplayers) {
         if(e_player istouching(self)) {
           if(!level flag::get("rocket_firing")) {
@@ -112,7 +112,7 @@ function function_68ebacd3() {
 function function_798f36c() {
   self.var_eb37ce09 = gettime();
   playsoundatposition("vox_maxis_teleporter_pa_recharging_0", self.origin);
-  while(level.is_cooldown) {
+  while (level.is_cooldown) {
     if((gettime() - self.var_eb37ce09) > 16000) {
       foreach(e_player in level.activeplayers) {
         if(e_player istouching(self)) {
@@ -145,8 +145,8 @@ function function_ee24bc2e() {
 
 function private update_trigger_visibility() {
   self endon("death");
-  while(true) {
-    for(i = 0; i < level.players.size; i++) {
+  while (true) {
+    for (i = 0; i < level.players.size; i++) {
       if(distancesquared(level.players[i].origin, self.origin) < 16384) {
         if(level.players[i].is_drinking > 0) {
           self setinvisibletoplayer(level.players[i], 1);
@@ -173,21 +173,21 @@ function teleport_pad_active_think() {
   e_player = undefined;
   self sethintstring(&"ZM_CASTLE_TELEPORT_USE", 500);
   exploder::exploder("fxexp_100");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_player);
     if(zm_utility::is_player_valid(e_player) && !level.is_cooldown && !level flag::get("rocket_firing") && level flag::get("time_travel_teleporter_ready")) {
       if(function_6b3344b4()) {
         if(!function_ad16f13c(e_player)) {
           continue;
         }
-        self playSound("evt_teleporter_warmup");
+        self playsound("evt_teleporter_warmup");
         self function_264f93ff(1, 0);
       }
     } else if(zm_utility::is_player_valid(e_player) && !level.is_cooldown && !level flag::get("rocket_firing")) {
       if(!function_ad16f13c(e_player)) {
         continue;
       }
-      self playSound("evt_teleporter_warmup");
+      self playsound("evt_teleporter_warmup");
       self function_264f93ff(0);
     }
   }
@@ -212,7 +212,7 @@ function function_ad16f13c(e_who) {
 }
 
 function function_6b3344b4() {
-  var_a0cf8f2b = getEntArray("trigger_teleport_pad", "targetname");
+  var_a0cf8f2b = getentarray("trigger_teleport_pad", "targetname");
   var_d30fe07b = 1;
   players = level.activeplayers;
   foreach(player in players) {
@@ -230,7 +230,7 @@ function function_6b3344b4() {
 }
 
 function function_264f93ff(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
-  array::thread_all(level.var_27b3c884, &teleport_trigger_invisible, 1);
+  array::thread_all(level.var_27b3c884, & teleport_trigger_invisible, 1);
   if(var_edc2ee2a && !var_66f7e6b9) {
     level.disable_nuke_delay_spawning = 1;
     level flag::clear("spawn_zombies");
@@ -271,7 +271,7 @@ function function_264f93ff(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
         level thread function_e421dd3f();
       } else {
         s_spawn_pos = struct::get("ee_mechz_time_lab", "targetname");
-        playFX(level._effect["lightning_dog_spawn"], s_spawn_pos.origin);
+        playfx(level._effect["lightning_dog_spawn"], s_spawn_pos.origin);
         ai_mechz = zm_castle_mechz::function_314d744b(0, s_spawn_pos, 0);
         ai_mechz.no_damage_points = 1;
         ai_mechz.deathpoints_already_given = 1;
@@ -289,7 +289,7 @@ function function_264f93ff(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
   }
   wait(2);
   ss = struct::get("teleporter_powerup", "targetname");
-  if(isDefined(ss)) {
+  if(isdefined(ss)) {
     ss thread zm_powerups::special_powerup_drop(ss.origin);
   }
   level.n_teleport_time = gettime();
@@ -308,7 +308,7 @@ function function_e421dd3f() {
   var_9e5ac8d1 = getent("trig_mechz_ee_a10", "targetname");
   var_9e5ac8d1 waittill("trigger", e_who);
   s_spawn_pos = arraygetclosest(e_who.origin, level.zm_loc_types["mechz_location"]);
-  if(isplayer(e_who) && isDefined(s_spawn_pos)) {
+  if(isplayer(e_who) && isdefined(s_spawn_pos)) {
     ai_mechz = zm_castle_mechz::function_314d744b(0, s_spawn_pos, 1);
     ai_mechz.no_damage_points = 1;
     ai_mechz.deathpoints_already_given = 1;
@@ -332,18 +332,18 @@ function player_is_near_pad(player) {
 }
 
 function function_f5a06c(n_duration) {
-  array::thread_all(level.activeplayers, &teleport_pad_player_fx, self, n_duration);
+  array::thread_all(level.activeplayers, & teleport_pad_player_fx, self, n_duration);
 }
 
 function teleport_pad_player_fx(var_7d7ca0ea, n_duration) {
   var_7d7ca0ea endon("fx_done");
   n_start_time = gettime();
   n_total_time = 0;
-  while(n_total_time < n_duration) {
+  while (n_total_time < n_duration) {
     if(var_7d7ca0ea player_is_near_pad(self)) {
       visionset_mgr::activate("overlay", "zm_factory_teleport", self, n_duration, n_duration);
       self playrumbleonentity("zm_castle_pulsing_rumble");
-      while(n_total_time < n_duration && var_7d7ca0ea player_is_near_pad(self)) {
+      while (n_total_time < n_duration && var_7d7ca0ea player_is_near_pad(self)) {
         n_current_time = gettime();
         n_total_time = (n_current_time - n_start_time) / 1000;
         util::wait_network_frame();
@@ -369,7 +369,7 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
   var_daad3c3c = vectorscale((0, 0, 1), 49);
   var_6b55b1c4 = vectorscale((0, 0, 1), 20);
   var_3abe10e2 = (0, 0, 0);
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(var_edc2ee2a) {
       if(var_66f7e6b9) {
@@ -389,7 +389,7 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
           player clientfield::set_to_player("ee_quest_back_in_time_sfx", 1);
         }
       }
-      if(isDefined(var_492a5e1e[i])) {
+      if(isdefined(var_492a5e1e[i])) {
         visionset_mgr::deactivate("overlay", "zm_trap_electric", player);
         if(var_edc2ee2a) {
           player clientfield::set_to_player("ee_quest_back_in_time_teleport_fx", 1);
@@ -417,7 +417,7 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
         player.var_601ebf01.angles = var_492a5e1e[i].angles;
         player freezecontrols(1);
         util::wait_network_frame();
-        if(isDefined(player)) {
+        if(isdefined(player)) {
           util::setclientsysstate("levelNotify", "black_box_start", player);
           player.var_601ebf01.angles = var_492a5e1e[i].angles;
         }
@@ -428,13 +428,13 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
   }
   wait(2);
   array::random(var_764d9cb) thread teleport_nuke(undefined, 300);
-  for(i = 0; i < level.activeplayers.size; i++) {
+  for (i = 0; i < level.activeplayers.size; i++) {
     util::setclientsysstate("levelNotify", "black_box_end", level.activeplayers[i]);
   }
   util::wait_network_frame();
-  for(i = 0; i < var_19ff0dfb.size; i++) {
+  for (i = 0; i < var_19ff0dfb.size; i++) {
     player = var_19ff0dfb[i];
-    if(!isDefined(player)) {
+    if(!isdefined(player)) {
       continue;
     }
     player unlink();
@@ -476,11 +476,11 @@ function function_4a0d1595() {
 
 function teleport_2d_audio() {
   self endon("fx_done");
-  while(true) {
+  while (true) {
     players = getplayers();
     wait(1.7);
-    for(i = 0; i < players.size; i++) {
-      if(isDefined(players[i])) {
+    for (i = 0; i < players.size; i++) {
+      if(isdefined(players[i])) {
         if(self player_is_near_pad(players[i])) {
           util::setclientsysstate("levelNotify", "t2d", players[i]);
         }
@@ -492,9 +492,9 @@ function teleport_2d_audio() {
 function teleport_nuke(max_zombies, range) {
   zombies = getaispeciesarray(level.zombie_team);
   zombies = util::get_array_of_closest(self.origin, zombies, undefined, max_zombies, range);
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     wait(randomfloatrange(0.2, 0.3));
-    if(!isDefined(zombies[i])) {
+    if(!isdefined(zombies[i])) {
       continue;
     }
     if(zm_utility::is_magic_bullet_shield_enabled(zombies[i])) {
@@ -513,11 +513,11 @@ function teleport_nuke(max_zombies, range) {
 
 function teleporter_wire_wait(index) {
   targ = struct::get(("pad_" + index) + "_wire", "targetname");
-  if(!isDefined(targ)) {
+  if(!isdefined(targ)) {
     return;
   }
-  while(isDefined(targ)) {
-    if(isDefined(targ.target)) {
+  while (isdefined(targ)) {
+    if(isdefined(targ.target)) {
       target = struct::get(targ.target, "targetname");
       wait(0.1);
       targ = target;

@@ -107,7 +107,7 @@ all_chunks_destroyed(barrier_chunks) {
 }
 
 check_point_in_playable_area(origin) {
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   check_model = spawn("script_model", origin + (0, 0, 40));
   valid_point = false;
   for(i = 0; i < playable_area.size; i++) {
@@ -120,7 +120,7 @@ check_point_in_playable_area(origin) {
 }
 
 check_point_in_active_zone(origin) {
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   if(!isDefined(level.zones) || !isDefined(player_zones)) {
     return true;
   }
@@ -335,13 +335,11 @@ assign_zombie_point_of_interest(origin, poi) {
   position = undefined;
   doremovalthread = false;
   if(isDefined(poi) && poi can_attract(self)) {
-    if(!isDefined(poi.attractor_array) || (isDefined(poi.attractor_array) && array_check_for_dupes(poi.attractor_array, self))) {
+    if(!isDefined(poi.attractor_array) || (isDefined(poi.attractor_array) && array_check_for_dupes(poi.attractor_array, self)))
       doremovalthread = true;
-    }
     position = self add_poi_attractor(poi);
-    if(isDefined(position) && doremovalthread && !array_check_for_dupes(poi.attractor_array, self)) {
+    if(isDefined(position) && doremovalthread && !array_check_for_dupes(poi.attractor_array, self))
       self thread update_on_poi_removal(poi);
-    }
   }
   return position;
 }
@@ -443,9 +441,8 @@ update_poi_on_death(zombie_poi) {
 
 update_on_poi_removal(zombie_poi) {
   zombie_poi waittill("death");
-  if(!isDefined(zombie_poi.attractor_array)) {
+  if(!isDefined(zombie_poi.attractor_array))
     return;
-  }
   for(i = 0; i < zombie_poi.attractor_array.size; i++) {
     if(zombie_poi.attractor_array[i] == self) {
       zombie_poi.attractor_array = array_remove_index(zombie_poi.attractor_array, i);
@@ -540,9 +537,8 @@ get_number_of_valid_players() {
   players = get_players();
   num_player_valid = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i])) {
+    if(is_player_valid(players[i]))
       num_player_valid += 1;
-    }
   }
   return num_player_valid;
 }
@@ -940,7 +936,7 @@ enable_trigger() {
 }
 
 in_playable_area() {
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   if(!isDefined(playable_area)) {
     println("No playable area playable_area found! Assume EVERYWHERE is PLAYABLE");
     return true;
@@ -1355,7 +1351,7 @@ play_sound_at_pos(ref, pos, ent) {
 
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
-    self playSound(self.script_soundalias);
+    self PlaySound(self.script_soundalias);
     return;
   }
   if(isDefined(self.script_sound)) {
@@ -1368,7 +1364,7 @@ play_sound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self playSound(level.zombie_sounds[ref]);
+  self PlaySound(level.zombie_sounds[ref]);
 }
 
 play_loopsound_on_ent(ref) {
@@ -1382,24 +1378,22 @@ play_loopsound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self playSound(level.zombie_sounds[ref]);
+  self PlaySound(level.zombie_sounds[ref]);
 }
 
 string_to_float(string) {
   floatParts = strTok(string, ".");
-  if(floatParts.size == 1) {
+  if(floatParts.size == 1)
     return int(floatParts[0]);
-  }
   whole = int(floatParts[0]);
   decimal = 0;
   for(i = floatParts[1].size - 1; i >= 0; i--) {
     decimal = decimal / 10 + int(floatParts[1][i]) / 10;
   }
-  if(whole >= 0) {
+  if(whole >= 0)
     return (whole + decimal);
-  } else {
+  else
     return (whole - decimal);
-  }
 }
 
 set_zombie_var(var, value, is_float, column) {
@@ -1485,7 +1479,7 @@ do_player_vo(snd, variation_count) {
   }
   if(level.player_is_speaking == 0) {
     level.player_is_speaking = 1;
-    self playSound(sound, "sound_done");
+    self playsound(sound, "sound_done");
     self waittill("sound_done");
     wait(2);
     level.player_is_speaking = 0;
@@ -1493,15 +1487,14 @@ do_player_vo(snd, variation_count) {
 }
 
 is_magic_bullet_shield_enabled(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
   return (isDefined(ent.magic_bullet_shield) && ent.magic_bullet_shield == true);
 }
 
 really_play_2D_sound(sound) {
   temp_ent = spawn("script_origin", (0, 0, 0));
-  temp_ent playSound(sound, sound + "wait");
+  temp_ent playsound(sound, sound + "wait");
   temp_ent waittill(sound + "wait");
   wait(0.05);
   temp_ent delete();
@@ -1562,36 +1555,30 @@ print3d_ent(text, color, scale, offset, end_msg, overwrite) {
 
 isExplosiveDamage(meansofdeath) {
   explosivedamage = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_PROJECTILE_SPLASH MOD_EXPLOSIVE";
-  if(isSubstr(explosivedamage, meansofdeath)) {
+  if(isSubstr(explosivedamage, meansofdeath))
     return true;
-  }
   return false;
 }
 
 isPrimaryDamage(meansofdeath) {
-  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET") {
+  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET")
     return true;
-  }
   return false;
 }
 
 isFireDamage(weapon, meansofdeath) {
-  if((isSubStr(weapon, "flame") || isSubStr(weapon, "molotov_") || isSubStr(weapon, "napalmblob_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH")) {
+  if((isSubStr(weapon, "flame") || isSubStr(weapon, "molotov_") || isSubStr(weapon, "napalmblob_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH"))
     return true;
-  }
   return false;
 }
 
 isPlayerExplosiveWeapon(weapon, meansofdeath) {
-  if(!isExplosiveDamage(meansofdeath)) {
+  if(!isExplosiveDamage(meansofdeath))
     return false;
-  }
-  if(weapon == "artillery_mp") {
+  if(weapon == "artillery_mp")
     return false;
-  }
-  if(issubstr(weapon, "turret")) {
+  if(issubstr(weapon, "turret"))
     return false;
-  }
   return true;
 }
 

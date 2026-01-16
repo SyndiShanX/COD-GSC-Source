@@ -24,11 +24,11 @@ destructible_car_animate(localClientNum, set) {
 }
 #using_animtree("fxanim_props");
 destructible_init(localClientNum) {
-  destructibles = getEntArray(localClientNum, "destructible", "targetname");
+  destructibles = GetEntArray(localClientNum, "destructible", "targetname");
   if(!isDefined(destructibles)) {
     return;
   }
-  for(i = 0; i < destructibles.size; i++) {
+  for (i = 0; i < destructibles.size; i++) {
     if(destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_modern_mod_MP" ||
       destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_old_mod_MP") {
       destructibles[i] thread destructible_ceiling_fan_think(localClientNum);
@@ -40,7 +40,7 @@ destructible_ceiling_fan_think(localClientNum) {
   speed = RandomFloatRange(0.5, 1);
   self UseAnimTree(#animtree);
   self SetAnim( % fxanim_gp_ceiling_fan_old_slow_anim, 1.0, 0.0, speed);
-  for(;;) {
+  for (;;) {
     self waittill("broken", event);
     if(event == "stop_idle") {
       self ClearAnim( % fxanim_gp_ceiling_fan_old_slow_anim, 0.0);

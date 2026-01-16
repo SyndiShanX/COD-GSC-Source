@@ -46,7 +46,7 @@ enemyhq_basement_pre_load() {
 
 escape_objective() {
   var_0 = maps\_utility::obj("escapeobj");
-  objective_add(var_0, "current", &"ENEMY_HQ_ESCAPE_FROM_THE_ENEMY");
+  objective_add(var_0, "current", & "ENEMY_HQ_ESCAPE_FROM_THE_ENEMY");
   common_scripts\utility::flag_wait("obj_escape_complete");
   maps\_utility::objective_complete(var_0);
 }
@@ -135,9 +135,8 @@ basement_combat_handlers() {
   common_scripts\utility::flag_wait("basement_final_stand");
   var_0 = getaiarray("axis");
 
-  foreach(var_3 in var_0) {
-    var_3.script_forcecolor = "r";
-  }
+  foreach(var_3 in var_0)
+  var_3.script_forcecolor = "r";
 
   var_0 = maps\enemyhq_code::array_spawn_targetname_allow_fail("basement_guys4");
   var_1 = getaiarray("axis");
@@ -237,9 +236,8 @@ teargas_patrol() {
   common_scripts\utility::flag_wait("tossed_gas");
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
 
-  foreach(var_2 in var_0) {
-    var_2 setgoalpos(var_2.origin);
-  }
+  foreach(var_2 in var_0)
+  var_2 setgoalpos(var_2.origin);
 
   wait 1;
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
@@ -309,9 +307,8 @@ handle_gas() {
   var_2 = getEntArray("cage_guys2a", "targetname");
   var_3 = [];
 
-  foreach(var_5 in var_2) {
-    var_3[var_3.size] = var_5 spawn_animate_and_get_shot(100, 1, 1);
-  }
+  foreach(var_5 in var_2)
+  var_3[var_3.size] = var_5 spawn_animate_and_get_shot(100, 1, 1);
 
   wait 1;
   common_scripts\utility::flag_set("cage_guys2");
@@ -463,9 +460,8 @@ cage_fake_firing(var_0) {
       magicbullet("m27", var_5, var_6);
       wait 0.1;
 
-      if(common_scripts\utility::flag(var_0)) {
+      if(common_scripts\utility::flag(var_0))
         var_4 = var_3;
-      }
     }
 
     wait(randomfloatrange(0.5, 1.25));
@@ -480,9 +476,8 @@ random_offset(var_0, var_1) {
 give_player_teargas() {
   level.player.gasmask_on = 1;
 
-  foreach(var_1 in level.allies) {
-    var_1.gasmask_on = 1;
-  }
+  foreach(var_1 in level.allies)
+  var_1.gasmask_on = 1;
 
   level.player takeweapon("flash_grenade");
   level.player setoffhandprimaryclass("smoke");
@@ -507,24 +502,20 @@ teargas_vo() {
   common_scripts\utility::flag_wait("start_gas_scene");
   common_scripts\utility::flag_wait_any("keegan_at_gas_door", "teargas_hot");
 
-  if(!common_scripts\utility::flag("teargas_hot")) {
+  if(!common_scripts\utility::flag("teargas_hot"))
     level.allies[1] maps\enemyhq_code::char_dialog_add_and_go("enemyhq_kgn_enemypatrolsprobablya");
-  }
 
-  if(!common_scripts\utility::flag("teargas_hot")) {
+  if(!common_scripts\utility::flag("teargas_hot"))
     level.allies[0] maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_wedonthavetime");
-  }
 
-  if(!common_scripts\utility::flag("teargas_hot")) {
+  if(!common_scripts\utility::flag("teargas_hot"))
     maps\_utility::delaythread(7, common_scripts\utility::flag_set, "ready_to_throw");
-  }
 
   maps\enemyhq_code::gas_mask_on_player_anim();
   give_player_teargas();
 
-  if(!common_scripts\utility::flag("teargas_hot")) {
+  if(!common_scripts\utility::flag("teargas_hot"))
     thread maps\enemyhq_code::nag_player_until_flag(level.allies[0], "gassed_out", "enemyhq_mrk_throwgasunderthe", "enemyhq_mrk_throwsomegasin");
-  }
 
   thread teargas_hint();
   common_scripts\utility::flag_wait("enter_cage_vo");
@@ -550,9 +541,8 @@ dog_scratch_scene() {
 }
 
 teargas_hint_wait() {
-  if(common_scripts\utility::flag("tossed_gas") || common_scripts\utility::flag("gassed_out")) {
+  if(common_scripts\utility::flag("tossed_gas") || common_scripts\utility::flag("gassed_out"))
     return 1;
-  }
 
   return 0;
 }
@@ -560,39 +550,34 @@ teargas_hint_wait() {
 teargas_hint() {
   wait 2;
 
-  if(!common_scripts\utility::flag("tossed_gas")) {
+  if(!common_scripts\utility::flag("tossed_gas"))
     thread maps\_utility::display_hint("tear_hint");
-  }
 }
 
 spawn_animate_and_get_shot(var_0, var_1, var_2, var_3) {
   var_4 = self.animation;
   var_5 = -1;
 
-  if(isDefined(self.script_parameters)) {
+  if(isDefined(self.script_parameters))
     var_5 = float(self.script_parameters);
-  }
 
   var_6 = undefined;
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     var_6 = common_scripts\utility::getstruct(self.target, "targetname");
-  }
 
   var_7 = maps\_utility::spawn_ai();
 
   if(isDefined(var_7)) {
     level.teargas_scripted_guys[level.teargas_scripted_guys.size] = var_7;
 
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       var_7.gasmask_on = var_3;
-    }
 
     var_7.allowdeath = 1;
 
-    if(var_2 == 1) {
+    if(var_2 == 1)
       var_7 maps\_utility::gun_remove();
-    }
 
     var_7 thread animate_and_get_shot(var_0, var_1, var_5, var_4, var_6);
   }
@@ -605,9 +590,8 @@ animate_and_get_shot(var_0, var_1, var_2, var_3, var_4) {
   var_5 thread monitor_teargas_lookat(var_0, var_1);
   var_5 endon("death");
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = self;
-  }
 
   if(var_2 > 0) {
     var_4 thread maps\_anim::anim_generic(var_5, var_3);
@@ -638,9 +622,8 @@ cqb_time() {
   while(!common_scripts\utility::flag("breach_setup1_ready")) {
     var_0 waittill("trigger", var_1);
 
-    if(var_1 != level.dog) {
+    if(var_1 != level.dog)
       var_1 maps\_utility::cqb_walk("on");
-    }
   }
 }
 
@@ -663,9 +646,8 @@ glowstick_scene() {
   var_0 thread maps\_anim::anim_single(var_4, "light_glowstick");
   var_5 = level.scr_anim["keegan"]["light_glowstick"];
 
-  while(var_3 getanimtime(var_5) < 0.16) {
+  while(var_3 getanimtime(var_5) < 0.16)
     wait 0.05;
-  }
 
   var_3 maps\_utility::anim_stopanimscripted();
   var_1 maps\_utility::anim_stopanimscripted();
@@ -791,9 +773,8 @@ new_glowstick_scene() {
   maps\_anim::anim_set_rate(var_4, "flare_kill", 1.3);
   level waittill("blend_out");
 
-  if(!common_scripts\utility::flag("pre_breach_hall")) {
+  if(!common_scripts\utility::flag("pre_breach_hall"))
     var_2 waittillmatch("single anim", "end");
-  }
 
   if(!common_scripts\utility::flag("pre_breach_hall")) {
     if(!common_scripts\utility::flag("pre_breach_hall")) {
@@ -908,9 +889,8 @@ clubhouse_breach() {
   var_3 hide();
   common_scripts\utility::flag_wait("breach_activate");
 
-  while(level.player isthrowinggrenade()) {
+  while(level.player isthrowinggrenade())
     wait 0.1;
-  }
 
   level.player takeweapon("teargas_grenade");
   var_2 show();
@@ -923,9 +903,8 @@ clubhouse_breach() {
   level.dog maps\_utility_dogs::disable_dog_sneak();
   var_6 = level.player getcurrentweapon();
 
-  if(var_6 != "none") {
+  if(var_6 != "none")
     level.player setweaponammoclip(var_6, weaponclipsize(var_6));
-  }
 
   maps\enemyhq_code::setupplayerforanimations();
   level.dog maps\enemyhq_code::lock_player_control();
@@ -1002,9 +981,8 @@ pre_breach_guys() {
   common_scripts\utility::exploder(306);
   common_scripts\utility::exploder(307);
 
-  foreach(var_5 in var_3) {
-    var_5 delete();
-  }
+  foreach(var_5 in var_3)
+  var_5 delete();
 
   wait 0.2;
 }
@@ -1038,9 +1016,8 @@ clubhouse_clear() {
   maps\enemyhq_code::safe_activate_trigger_with_targetname("post_breach_colors");
   wait 5;
 
-  if(!common_scripts\utility::flag("start_hvt_fight")) {
+  if(!common_scripts\utility::flag("start_hvt_fight"))
     level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_hsh_overhere");
-  }
 }
 
 ch_vo() {
@@ -1176,9 +1153,8 @@ keegan_shoots_a_guy(var_0) {
   level.keegan_shots_so_far++;
   var_2 = 0;
 
-  if(level.keegan_shots_so_far > var_1 - level.keegan_breach_guys.size) {
+  if(level.keegan_shots_so_far > var_1 - level.keegan_breach_guys.size)
     var_2 = 1;
-  }
 
   var_3 = var_0 gettagorigin("tag_flash");
   var_4 = var_0 gettagangles("tag_flash");
@@ -1189,16 +1165,14 @@ keegan_shoots_a_guy(var_0) {
   if(level.keegan_shots_so_far > var_1 - level.keegan_breach_guys.size && var_2) {
     var_7 = level.keegan_breach_guys[level.keegan_shoot_next];
 
-    if(isalive(var_7)) {
+    if(isalive(var_7))
       var_6 = var_7.origin + (0, 0, 30);
-    }
 
     magicbullet("sc2010", var_3, var_6);
     wait 0.2;
 
-    if(isalive(var_7)) {
+    if(isalive(var_7))
       var_7 maps\_utility::die();
-    }
 
     level.keegan_shoot_next++;
   } else
@@ -1211,9 +1185,8 @@ breach_grenade_smoke(var_0, var_1, var_2) {
   wait 3;
   stopFXOnTag(level._effect["smoke_tgas_trail_ehq"], var_0, "tag_fx");
 
-  if(isDefined(var_2) && var_2) {
+  if(isDefined(var_2) && var_2)
     var_0 delete();
-  }
 }
 
 setup_hvt() {
@@ -1267,9 +1240,8 @@ start_hvt_scene(var_0) {
   common_scripts\utility::array_thread(level.allies, ::hvt_reach_and_animate, var_0);
   maps\_utility::delaythread(10, common_scripts\utility::flag_set, "allies_in_position");
 
-  while(level.hvt_guys_in_position < 4 && !common_scripts\utility::flag("allies_in_position")) {
+  while(level.hvt_guys_in_position < 4 && !common_scripts\utility::flag("allies_in_position"))
     wait 0.1;
-  }
 
   common_scripts\utility::flag_wait("start_hvt_fight");
   common_scripts\utility::flag_set("start_hvt_rescue");

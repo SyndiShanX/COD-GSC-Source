@@ -17,9 +17,9 @@ init() {
     level.zombie_eyes_limited = 0;
   }
   zombies = getEntArray("zombie_spawner", "script_noteworthy");
-  later_rounds = getEntArray("later_round_spawners", "script_noteworthy");
+  later_rounds = getentarray("later_round_spawners", "script_noteworthy");
   zombies = array_combine(zombies, later_rounds);
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(is_spawner_targeted_by_blocker(zombies[i])) {
       zombies[i].locked_spawner = true;
     }
@@ -32,8 +32,8 @@ init() {
 
 is_spawner_targeted_by_blocker(ent) {
   if(isDefined(ent.targetname)) {
-    targeters = getEntArray(ent.targetname, "target");
-    for(i = 0; i < targeters.size; i++) {
+    targeters = GetEntArray(ent.targetname, "target");
+    for (i = 0; i < targeters.size; i++) {
       if(targeters[i].targetname == "zombie_door" || targeters[i].targetname == "zombie_debris") {
         return true;
       }
@@ -96,7 +96,7 @@ delayed_zombie_eye_glow() {
 zombie_damage_failsafe() {
   self endon("death");
   continue_failsafe_damage = false;
-  while(1) {
+  while (1) {
     wait 0.5;
     if(!isDefined(self.enemy)) {
       continue;
@@ -217,7 +217,7 @@ zombie_think() {
     max_dist = 500;
     desired_nodes[0] = nodes[0];
     prev_dist = Distance(self.origin, nodes[0].origin);
-    for(i = 1; i < nodes.size; i++) {
+    for (i = 1; i < nodes.size; i++) {
       dist = Distance(self.origin, nodes[i].origin);
       if((dist - prev_dist) > max_dist) {
         break;
@@ -293,7 +293,7 @@ zombie_assure_node() {
   self endon("goal");
   level endon("intermission");
   start_pos = self.origin;
-  for(i = 0; i < self.entrance_nodes.size; i++) {
+  for (i = 0; i < self.entrance_nodes.size; i++) {
     if(self zombie_bad_path()) {
       self zombie_history("zombie_assure_node -> assigned assured node = " + self.entrance_nodes[i].origin);
       println("^1Zombie @ " + self.origin + " did not move for 1 second. Going to next closest node @ " + self.entrance_nodes[i].origin);
@@ -308,7 +308,7 @@ zombie_assure_node() {
     wait(2);
     nodes = get_array_of_closest(self.origin, level.exterior_goals, undefined, 20);
     self.entrance_nodes = nodes;
-    for(i = 0; i < self.entrance_nodes.size; i++) {
+    for (i = 0; i < self.entrance_nodes.size; i++) {
       if(self zombie_bad_path()) {
         self zombie_history("zombie_assure_node -> assigned assured node = " + self.entrance_nodes[i].origin);
         println("^1Zombie @ " + self.origin + " did not move for 1 second. Going to next closest node @ " + self.entrance_nodes[i].origin);
@@ -331,7 +331,7 @@ zombie_bad_path() {
   self thread zombie_bad_path_notify();
   self thread zombie_bad_path_timeout();
   self.zombie_bad_path = undefined;
-  while(!isDefined(self.zombie_bad_path)) {
+  while (!isDefined(self.zombie_bad_path)) {
     wait(0.05);
   }
   self notify("stop_zombie_bad_path");
@@ -355,7 +355,7 @@ zombie_bad_path_timeout() {
 tear_into_building() {
   self endon("death");
   self zombie_history("tear_into_building -> start");
-  while(1) {
+  while (1) {
     if(isDefined(self.first_node.script_noteworthy)) {
       if(self.first_node.script_noteworthy == "no_blocker") {
         return;
@@ -380,10 +380,10 @@ tear_into_building() {
       self zombie_history("tear_into_building -> all chunks destroyed");
       return;
     }
-    while(1) {
+    while (1) {
       chunk = get_closest_non_destroyed_chunk(self.origin, self.first_node.barrier_chunks);
       if(!isDefined(chunk)) {
-        for(i = 0; i < self.first_node.attack_spots_taken.size; i++) {
+        for (i = 0; i < self.first_node.attack_spots_taken.size; i++) {
           self.first_node.attack_spots_taken[i] = false;
         }
         return;
@@ -400,7 +400,7 @@ tear_into_building() {
         }
       }
       if(all_chunks_destroyed(self.first_node.barrier_chunks)) {
-        for(i = 0; i < self.first_node.attack_spots_taken.size; i++) {
+        for (i = 0; i < self.first_node.attack_spots_taken.size; i++) {
           self.first_node.attack_spots_taken[i] = false;
         }
         return;
@@ -437,7 +437,7 @@ should_attack_player_thru_boards() {
   freq = getdvarint("zombie_reachin_freq");
   players = get_players();
   attack = false;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(distance2d(self.origin, players[i].origin) <= 72) {
       attack = true;
     }
@@ -464,7 +464,7 @@ should_attack_player_thru_boards() {
 }
 
 window_notetracks(msg) {
-  while(1) {
+  while (1) {
     self waittill(msg, notetrack);
     if(notetrack == "end") {
       self teleport(self.old_origin);
@@ -482,7 +482,7 @@ window_notetracks(msg) {
 crash_into_building() {
   self endon("death");
   self zombie_history("tear_into_building -> start");
-  while(1) {
+  while (1) {
     if(isDefined(self.first_node.script_noteworthy)) {
       if(self.first_node.script_noteworthy == "no_blocker") {
         return;
@@ -504,18 +504,18 @@ crash_into_building() {
     self SetGoalPos(self.attacking_spot, self.first_node.angles);
     self waittill("goal");
     self zombie_history("tear_into_building -> Reach position and orientated");
-    while(1) {
+    while (1) {
       chunk = get_closest_non_destroyed_chunk(self.origin, self.first_node.barrier_chunks);
       if(!isDefined(chunk)) {
-        for(i = 0; i < self.first_node.attack_spots_taken.size; i++) {
+        for (i = 0; i < self.first_node.attack_spots_taken.size; i++) {
           self.first_node.attack_spots_taken[i] = false;
         }
         return;
       }
       self zombie_history("tear_into_building -> crash");
-      playFX(level._effect["wood_chunk_destory"], chunk.origin);
-      playFX(level._effect["wood_chunk_destory"], chunk.origin + (randomint(20), randomint(20), randomint(10)));
-      playFX(level._effect["wood_chunk_destory"], chunk.origin + (randomint(40), randomint(40), randomint(20)));
+      PlayFx(level._effect["wood_chunk_destory"], chunk.origin);
+      PlayFx(level._effect["wood_chunk_destory"], chunk.origin + (randomint(20), randomint(20), randomint(10)));
+      PlayFx(level._effect["wood_chunk_destory"], chunk.origin + (randomint(40), randomint(40), randomint(20)));
       level thread maps\_zombiemode_blockers::remove_chunk(chunk, self.first_node, true);
       if(all_chunks_destroyed(self.first_node.barrier_chunks)) {
         EarthQuake(randomfloatrange(0.5, 0.8), 0.5, chunk.origin, 300);
@@ -524,7 +524,7 @@ crash_into_building() {
           wait(0.05);
           self.first_node.clip disable_trigger();
         } else {
-          for(i = 0; i < self.first_node.barrier_chunks.size; i++) {
+          for (i = 0; i < self.first_node.barrier_chunks.size; i++) {
             self.first_node.barrier_chunks[i] ConnectPaths();
           }
         }
@@ -560,7 +560,7 @@ get_attack_spot(node) {
 
 get_attack_spot_index(node) {
   indexes = [];
-  for(i = 0; i < node.attack_spots.size; i++) {
+  for (i = 0; i < node.attack_spots.size; i++) {
     if(!node.attack_spots_taken[i]) {
       indexes[indexes.size] = i;
     }
@@ -574,7 +574,7 @@ get_attack_spot_index(node) {
 zombie_tear_notetracks(msg, chunk, node) {
   self endon("death");
   chunk thread check_for_zombie_death(self);
-  while(1) {
+  while (1) {
     self waittill(msg, notetrack);
     if(notetrack == "end") {
       return;
@@ -582,9 +582,9 @@ zombie_tear_notetracks(msg, chunk, node) {
     if(notetrack == "board") {
       if(!chunk.destroyed) {
         self.lastchunk_destroy_time = getTime();
-        playFX(level._effect["wood_chunk_destory"], chunk.origin);
-        playFX(level._effect["wood_chunk_destory"], chunk.origin + (randomint(20), randomint(20), randomint(10)));
-        playFX(level._effect["wood_chunk_destory"], chunk.origin + (randomint(40), randomint(40), randomint(20)));
+        PlayFx(level._effect["wood_chunk_destory"], chunk.origin);
+        PlayFx(level._effect["wood_chunk_destory"], chunk.origin + (randomint(20), randomint(20), randomint(10)));
+        PlayFx(level._effect["wood_chunk_destory"], chunk.origin + (randomint(40), randomint(40), randomint(20)));
         level thread maps\_zombiemode_blockers::remove_chunk(chunk, node, true);
         chunk.successfully_destroyed = true;
         chunk notify("destroyed");
@@ -681,7 +681,7 @@ zombie_head_gib(attacker) {
   self.head_gibbed = true;
   self zombie_eye_glow_stop();
   size = self GetAttachSize();
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     model = self GetAttachModelName(i);
     if(IsSubStr(model, "head")) {
       self thread headshot_blood_fx();
@@ -705,7 +705,7 @@ damage_over_time(dmg, delay, attacker) {
   if(!IsPlayer(attacker)) {
     attacker = undefined;
   }
-  while(1) {
+  while (1) {
     wait(delay);
     if(isDefined(attacker)) {
       self DoDamage(dmg, self.origin, attacker);
@@ -766,21 +766,21 @@ headshot_blood_fx() {
   fxTag = "j_neck";
   fxOrigin = self GetTagOrigin(fxTag);
   upVec = AnglesToUp(self GetTagAngles(fxTag));
-  forwardVec = anglesToForward(self GetTagAngles(fxTag));
-  playFX(level._effect["headshot"], fxOrigin, forwardVec, upVec);
-  playFX(level._effect["headshot_nochunks"], fxOrigin, forwardVec, upVec);
+  forwardVec = AnglesToForward(self GetTagAngles(fxTag));
+  PlayFX(level._effect["headshot"], fxOrigin, forwardVec, upVec);
+  PlayFX(level._effect["headshot_nochunks"], fxOrigin, forwardVec, upVec);
   wait(0.3);
   if(isDefined(self)) {
     if(self maps\_zombiemode_tesla::enemy_killed_by_tesla()) {
-      playFXOnTag(level._effect["tesla_head_light"], self, fxTag);
+      PlayFxOnTag(level._effect["tesla_head_light"], self, fxTag);
     } else {
-      playFXOnTag(level._effect["bloodspurt"], self, fxTag);
+      PlayFxOnTag(level._effect["bloodspurt"], self, fxTag);
     }
   }
 }
 
 zombie_gib_on_damage() {
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
     if(!isDefined(self)) {
       return;
@@ -966,7 +966,7 @@ derive_damage_refs(point) {
     init_gib_tags();
   }
   closestTag = undefined;
-  for(i = 0; i < level.gib_tags.size; i++) {
+  for (i = 0; i < level.gib_tags.size; i++) {
     if(!isDefined(closestTag)) {
       closestTag = level.gib_tags[i];
     } else {
@@ -1155,7 +1155,7 @@ play_headshot_response_hero(player_index) {
   if(!isDefined(self.vox_resp_hr_headdist)) {
     num_variants = get_number_variants(player_index + "vox_resp_hr_headdist");
     self.vox_resp_hr_headdist = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_resp_hr_headdist[self.vox_resp_hr_headdist.size] = "vox_resp_hr_headdist_" + i;
     }
     self.vox_resp_hr_headdist_available = self.vox_resp_hr_headdist;
@@ -1181,7 +1181,7 @@ play_headshot_response_rival(player_index) {
   if(!isDefined(self.vox_resp_riv_headdist)) {
     num_variants = get_number_variants(player_index + "vox_resp_riv_headdist");
     self.vox_resp_riv_headdist = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_resp_riv_headdist[self.vox_resp_riv_headdist.size] = "vox_resp_riv_headdist_" + i;
     }
     self.vox_resp_riv_headdist_available = self.vox_resp_riv_headdist;
@@ -1207,7 +1207,7 @@ play_projectile_dialog(player_index) {
   if(!isDefined(self.vox_kill_explo)) {
     num_variants = get_number_variants(player_index + "vox_kill_explo");
     self.vox_kill_explo = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_explo[self.vox_kill_explo.size] = "vox_kill_explo_" + i;
     }
     self.vox_kill_explo_available = self.vox_kill_explo;
@@ -1232,7 +1232,7 @@ play_explosion_dialog(player_index) {
   if(!isDefined(self.vox_kill_explo)) {
     num_variants = get_number_variants(player_index + "vox_kill_explo");
     self.vox_kill_explo = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_explo[self.vox_kill_explo.size] = "vox_kill_explo_" + i;
     }
     self.vox_kill_explo_available = self.vox_kill_explo;
@@ -1257,7 +1257,7 @@ play_flamethrower_dialog(player_index) {
   if(!isDefined(self.vox_kill_flame)) {
     num_variants = get_number_variants(player_index + "vox_kill_flame");
     self.vox_kill_flame = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_flame[self.vox_kill_flame.size] = "vox_kill_flame_" + i;
     }
     self.vox_kill_flame_available = self.vox_kill_flame;
@@ -1282,7 +1282,7 @@ play_closekill_dialog(player_index) {
   if(!isDefined(self.vox_close)) {
     num_variants = get_number_variants(player_index + "vox_close");
     self.vox_close = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_close[self.vox_close.size] = "vox_close_" + i;
     }
     self.vox_close_available = self.vox_close;
@@ -1302,7 +1302,7 @@ play_closekill_dialog(player_index) {
 }
 
 get_number_variants(aliasPrefix) {
-  for(i = 0; i < 100; i++) {
+  for (i = 0; i < 100; i++) {
     if(!SoundExists(aliasPrefix + "_" + i)) {
       return i;
     }
@@ -1314,7 +1314,7 @@ play_headshot_dialog(player_index) {
   if(!isDefined(self.vox_kill_headdist)) {
     num_variants = get_number_variants(player_index + "vox_kill_headdist");
     self.vox_kill_headdist = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_headdist[self.vox_kill_headdist.size] = "vox_kill_headdist_" + i;
     }
     self.vox_kill_headdist_available = self.vox_kill_headdist;
@@ -1332,7 +1332,7 @@ play_tesla_dialog(player_index) {
   if(!isDefined(self.vox_kill_tesla)) {
     num_variants = get_number_variants(player_index + "vox_kill_tesla");
     self.vox_kill_tesla = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_tesla[self.vox_kill_tesla.size] = "vox_kill_tesla_" + i;
     }
     self.vox_kill_tesla_available = self.vox_kill_tesla;
@@ -1353,7 +1353,7 @@ play_raygun_dialog(player_index) {
   if(!isDefined(self.vox_kill_ray)) {
     num_variants = get_number_variants(player_index + "vox_kill_ray");
     self.vox_kill_ray = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_kill_ray[self.vox_kill_ray.size] = "vox_kill_ray_" + i;
     }
     self.vox_kill_ray_available = self.vox_kill_ray;
@@ -1377,7 +1377,7 @@ play_insta_melee_dialog(player_index) {
   if(!isDefined(self.vox_insta_melee)) {
     num_variants = get_number_variants(player_index + "vox_insta_melee");
     self.vox_insta_melee = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_insta_melee[self.vox_insta_melee.size] = "vox_insta_melee_" + i;
     }
     self.vox_insta_melee_available = self.vox_insta_melee;
@@ -1401,7 +1401,7 @@ do_player_playdialog(player_index, sound_to_play, waittime) {
   }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
-    self playSound(player_index + sound_to_play, "sound_done" + sound_to_play);
+    self playsound(player_index + sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.player_is_speaking = 0;
@@ -1428,7 +1428,7 @@ damage_on_fire(player) {
   self endon("death");
   self endon("stop_flame_damage");
   wait(2);
-  while(isDefined(self.is_on_fire) && self.is_on_fire) {
+  while (isDefined(self.is_on_fire) && self.is_on_fire) {
     if(level.round_number < 6) {
       dmg = level.zombie_health * RandomFloatRange(0.2, 0.3);
     } else if(level.round_number < 9) {
@@ -1528,7 +1528,7 @@ zombie_flame_damage(mod, player) {
     do_flame_death = true;
     dist = 100 * 100;
     ai = GetAiArray("axis");
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(isDefined(ai[i].is_on_fire) && ai[i].is_on_fire) {
         if(DistanceSquared(ai[i].origin, self.origin) < dist) {
           do_flame_death = false;
@@ -1567,7 +1567,7 @@ play_closeDamage_dialog() {
   if(!isDefined(self.vox_dmg_close)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_dmg_close");
     self.vox_dmg_close = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_dmg_close[self.vox_dmg_close.size] = "vox_dmg_close_" + i;
     }
     self.vox_dmg_close_available = self.vox_dmg_close;
@@ -1600,7 +1600,7 @@ find_flesh() {
   self.ignore_player = undefined;
   self zombie_history("find flesh -> start");
   self.goalradius = 32;
-  while(1) {
+  while (1) {
     players = get_players();
     if(players.size == 1) {
       self.ignore_player = undefined;
@@ -1618,7 +1618,7 @@ find_flesh() {
     self.favoriteenemy = player;
     self thread zombie_pathing();
     self.zombie_path_timer = GetTime() + (RandomFloatRange(1, 3) * 1000);
-    while(GetTime() < self.zombie_path_timer) {
+    while (GetTime() < self.zombie_path_timer) {
       wait(0.1);
     }
     self zombie_history("find flesh -> bottom of loop");
@@ -1638,7 +1638,7 @@ zombie_pathing() {
   debug_print("Zombie couldn't path to player at origin: " + self.favoriteenemy.origin + " Falling back to breadcrumb system");
   crumb_list = self.favoriteenemy.zombie_breadcrumbs;
   bad_crumbs = [];
-  while(1) {
+  while (1) {
     if(!is_player_valid(self.favoriteenemy)) {
       self.zombie_path_timer = 0;
       return;
@@ -1653,7 +1653,7 @@ zombie_pathing() {
     self SetGoalPos(goal);
     self waittill("bad_path");
     debug_print("Zombie couldn't path to breadcrumb at " + goal + " Finding next breadcrumb");
-    for(i = 0; i < crumb_list.size; i++) {
+    for (i = 0; i < crumb_list.size; i++) {
       if(goal == crumb_list[i]) {
         bad_crumbs[bad_crumbs.size] = i;
         break;
@@ -1669,7 +1669,7 @@ zombie_pathing_get_breadcrumb(origin, breadcrumbs, bad_crumbs, pick_random) {
   if(pick_random) {
     debug_print("Finding random breadcrumb");
   }
-  for(i = 0; i < breadcrumbs.size; i++) {
+  for (i = 0; i < breadcrumbs.size; i++) {
     if(pick_random) {
       crumb_index = RandomInt(breadcrumbs.size);
     } else {
@@ -1684,7 +1684,7 @@ zombie_pathing_get_breadcrumb(origin, breadcrumbs, bad_crumbs, pick_random) {
 }
 
 crumb_is_bad(crumb, bad_crumbs) {
-  for(i = 0; i < bad_crumbs.size; i++) {
+  for (i = 0; i < bad_crumbs.size; i++) {
     if(bad_crumbs[i] == crumb) {
       return true;
     }
@@ -1696,7 +1696,7 @@ jitter_enemies_bad_breadcrumbs(start_crumb) {
   trace_distance = 35;
   jitter_distance = 2;
   index = start_crumb;
-  while(isDefined(self.favoriteenemy.zombie_breadcrumbs[index + 1])) {
+  while (isDefined(self.favoriteenemy.zombie_breadcrumbs[index + 1])) {
     current_crumb = self.favoriteenemy.zombie_breadcrumbs[index];
     next_crumb = self.favoriteenemy.zombie_breadcrumbs[index + 1];
     angles = vectortoangles(current_crumb - next_crumb);
@@ -1725,7 +1725,7 @@ zombie_follow_enemy() {
   self endon("zombie_acquire_enemy");
   self endon("bad_path");
   level endon("intermission");
-  while(1) {
+  while (1) {
     if(isDefined(self.favoriteenemy)) {
       self SetGoalPos(self.favoriteenemy.origin);
     }
@@ -1734,9 +1734,8 @@ zombie_follow_enemy() {
         crumb_list = self.favoriteenemy.zombie_breadcrumbs;
         bad_crumbs = [];
         goal = zombie_pathing_get_breadcrumb(self.favoriteenemy.origin, crumb_list, bad_crumbs, 0);
-        if(isDefined(goal)) {
+        if(isDefined(goal))
           self SetGoalPos(goal);
-        }
       }
     }
     wait(0.1);
@@ -1762,11 +1761,11 @@ zombie_eye_glow() {
   linkTag = "J_Eyeball_LE";
   fxModel = "tag_origin";
   fxTag = "tag_origin";
-  self.fx_eye_glow = spawn("script_model", self GetTagOrigin(linkTag));
+  self.fx_eye_glow = Spawn("script_model", self GetTagOrigin(linkTag));
   self.fx_eye_glow.angles = self GetTagAngles(linkTag);
-  self.fx_eye_glow setModel(fxModel);
+  self.fx_eye_glow SetModel(fxModel);
   self.fx_eye_glow LinkTo(self, linkTag);
-  playFXOnTag(level._effect["eye_glow"], self.fx_eye_glow, fxTag);
+  PlayFxOnTag(level._effect["eye_glow"], self.fx_eye_glow, fxTag);
   level._numZombEyeGlows++;
 }
 
@@ -1787,7 +1786,7 @@ zombie_history(msg) {
 zombie_rise() {
   self endon("death");
   self endon("no_rise");
-  while(!isDefined(self.do_rise)) {
+  while (!isDefined(self.do_rise)) {
     wait_network_frame();
   }
   self do_zombie_rise();
@@ -1815,7 +1814,7 @@ do_zombie_rise() {
   } else
     spot = random(spots);
   if(GetDVarInt("zombie_rise_test")) {
-    spot = spawnStruct();
+    spot = SpawnStruct();
     spot.origin = (472, 240, 56);
     spot.angles = (0, 0, 0);
   }
@@ -1865,7 +1864,7 @@ handle_rise_notetracks(note, spot) {
 zombie_rise_death(zombie, spot) {
   zombie.zombie_rise_death_out = false;
   zombie endon("rise_anim_finished");
-  while(zombie.health > 1) {
+  while (zombie.health > 1) {
     zombie waittill("damage", amount);
   }
   spot notify("stop_zombie_rise_fx");
@@ -1889,13 +1888,13 @@ zombie_rise_burst_fx() {
   self endon("stop_zombie_rise_fx");
   self endon("rise_anim_finished");
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "in_water") {
-    playFX(level._effect["rise_burst_water"], self.origin + (0, 0, randomintrange(5, 10)));
+    playfx(level._effect["rise_burst_water"], self.origin + (0, 0, randomintrange(5, 10)));
     wait(.25);
-    playFX(level._effect["rise_billow_water"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+    playfx(level._effect["rise_billow_water"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
   } else {
-    playFX(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
+    playfx(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
     wait(.25);
-    playFX(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+    playfx(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
   }
 }
 
@@ -1906,13 +1905,13 @@ zombie_rise_dust_fx(zombie) {
   dust_time = 7.5;
   dust_interval = .1;
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "in_water") {
-    for(t = 0; t < dust_time; t += dust_interval) {
-      playFXOnTag(level._effect["rise_dust_water"], zombie, dust_tag);
+    for (t = 0; t < dust_time; t += dust_interval) {
+      PlayfxOnTag(level._effect["rise_dust_water"], zombie, dust_tag);
       wait dust_interval;
     }
   } else {
-    for(t = 0; t < dust_time; t += dust_interval) {
-      playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
+    for (t = 0; t < dust_time; t += dust_interval) {
+      PlayfxOnTag(level._effect["rise_dust"], zombie, dust_tag);
       wait dust_interval;
     }
   }

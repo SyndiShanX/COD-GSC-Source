@@ -17,25 +17,20 @@ precache_gib_fx() {
 }
 
 do_gib(iDamage, sMeansOfDeath, weapon) {
-  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon)) {
+  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon))
     return true;
-  }
   return false;
 }
 
 do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
-  if(weapon == "m8_white_smoke_mp") {
+  if(weapon == "m8_white_smoke_mp")
     return false;
-  }
-  if(weapon == "tabun_gas_mp") {
+  if(weapon == "tabun_gas_mp")
     return false;
-  }
-  if(weapon == "signal_flare_mp") {
+  if(weapon == "signal_flare_mp")
     return false;
-  }
-  if(weapon == "molotov_mp") {
+  if(weapon == "molotov_mp")
     return false;
-  }
   if(sMeansOfDeath == "MOD_EXPLOSIVE" ||
     sMeansOfDeath == "MOD_GRENADE" ||
     sMeansOfDeath == "MOD_GRENADE_SPLASH" ||
@@ -50,22 +45,18 @@ do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
 }
 
 is_weapon_shotgun(sWeapon) {
-  if(WeaponClass(sWeapon) == "spread") {
+  if(WeaponClass(sWeapon) == "spread")
     return true;
-  }
   return false;
 }
 
 do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
-  if(!isDefined(vAttackerOrigin)) {
+  if(!isDefined(vAttackerOrigin))
     return false;
-  }
-  if(!isDefined(sHitLoc)) {
+  if(!isDefined(sHitLoc))
     return false;
-  }
-  if(sMeansOfDeath == "MOD_MELEE") {
+  if(sMeansOfDeath == "MOD_MELEE")
     return false;
-  }
   shotty_gib = is_weapon_shotgun(sWeapon);
   if(iDamage < 35 && !shotty_gib) {
     return false;
@@ -225,18 +216,18 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
   }
   if(limb_data["spawn_tags"][0] != "") {
     if(isDefined(self.gib_vel)) {
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         velocities[i] = self.gib_vel;
       }
     } else {
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos1[pos1.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
       wait(0.05);
-      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos2[pos2.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
-      for(i = 0; i < pos1.size; i++) {
+      for (i = 0; i < pos1.size; i++) {
         forward = VectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
@@ -244,20 +235,19 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
     }
   }
   if(isDefined(limb_data["fx"])) {
-    for(i = 0; i < limb_data["spawn_tags"].size; i++) {
+    for (i = 0; i < limb_data["spawn_tags"].size; i++) {
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      playFXOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      PlayFxOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
-  self playSound("death_gibs");
+  self PlaySound("death_gibs");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
-  self setModel(limb_data["body_model"]);
+  self SetModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
-  if(gib_ref == "no_legs") {
+  if(gib_ref == "no_legs")
     return true;
-  }
   return false;
 }
 
@@ -349,7 +339,7 @@ throw_gib(spawn_models, spawn_tags, velocities) {
   if(velocities.size < 1) {
     return;
   }
-  for(i = 0; i < spawn_models.size; i++) {
+  for (i = 0; i < spawn_models.size; i++) {
     origin = self GetTagOrigin(spawn_tags[i]);
     angles = self GetTagAngles(spawn_tags[i]);
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], level._effect["animscript_gibtrail_fx"]);

@@ -3,19 +3,16 @@
 #include scripts\utility;
 
 h2_friendlyFireCheck(ent, attacker) {
-  if(!isDefined(ent.owner)) {
+  if(!isDefined(ent.owner))
     return false;
-  }
 
-  if(isDefined(level.nukeIncoming)) {
+  if(isDefined(level.nukeIncoming))
     return false;
-  }
 
-  if(level.teamBased) {
+  if(level.teamBased)
     return (ent.owner.team == attacker.team);
-  } else {
+  else
     return (ent.owner == attacker);
-  }
 }
 
 init() {
@@ -25,59 +22,61 @@ init() {
   level.teamEMPed["axis"] = false;
   level.empPlayer = undefined;
 
-  if(level.teamBased) {
+  if(level.teamBased)
     level thread EMP_TeamTracker();
-  } else {
+  else
     level thread EMP_PlayerTracker();
-  }
 
   level.killstreakFuncs["emp_mp"] = ::h2_EMP_Use;
 
   level thread onPlayerConnect();
+
 }
+
+
 
 onPlayerConnect() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
 }
 
+
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
-    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self)) {
+    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self))
       self _setEMPJammed(true);
-    }
   }
 }
+
 
 h2_EMP_Use(lifeId, delay) {
   assert(isDefined(self));
 
-  if(!isDefined(delay)) {
+  if(!isDefined(delay))
     delay = 1.0;
-  }
 
   myTeam = self.pers["team"];
   otherTeam = level.otherTeam[myTeam];
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self thread EMP_JamTeam(otherTeam, 60.0, delay);
-  } else {
+  else
     self thread EMP_JamPlayers(self, 60.0, delay);
-  }
 
   self maps\mp\_matchdata::logKillstreakEvent("emp_mp", self.origin);
   self notify("used_emp");
 
   return true;
 }
+
 
 EMP_JamTeam(teamName, duration, delay) {
   level endon("game_ended");
@@ -93,13 +92,11 @@ EMP_JamTeam(teamName, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("mp_lose_flag");
 
-    if(player.team != teamName) {
+    if(player.team != teamName)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
-    }
   }
 
   _visionsetnaked("coup_sunblind", 0.1);
@@ -123,13 +120,11 @@ EMP_JamTeam(teamName, duration, delay) {
   level.teamEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team != teamName) {
+    if(player.team != teamName)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
-    }
   }
 
   level notify("emp_update");
@@ -138,7 +133,7 @@ EMP_JamTeam(teamName, duration, delay) {
 emp_timer(duration) {
   level.empTimeRemaining = duration;
 
-  while(level.empTimeRemaining) {
+  while (level.empTimeRemaining) {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
@@ -157,13 +152,11 @@ EMP_JamPlayers(owner, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("mp_lose_flag");
 
-    if(player == owner) {
+    if(player == owner)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
-    }
   }
 
   _visionsetnaked("coup_sunblind", 0.1);
@@ -188,13 +181,11 @@ EMP_JamPlayers(owner, duration, delay) {
   emp_timer(duration);
 
   foreach(player in level.players) {
-    if(player == owner) {
+    if(player == owner)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
-    }
   }
 
   level.empPlayer = undefined;
@@ -212,13 +203,13 @@ empPlayerFFADisconnect() {
 
 empEffects() {
   foreach(player in level.players) {
-    playerForward = anglesToForward(player.angles);
+    playerForward = anglestoforward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     empDistance = 20000;
 
-    empEnt = spawn("script_model", player.origin + (0, 0, 8000) + vector_multiply(playerForward, empDistance));
+    empEnt = Spawn("script_model", player.origin + (0, 0, 8000) + vector_multiply(playerForward, empDistance));
     empEnt setModel("tag_origin");
     empEnt.angles = empEnt.angles + (270, 0, 0);
     empEnt thread empEffect(player);
@@ -235,35 +226,33 @@ empEffect(player) {
 EMP_TeamTracker() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator") {
+      if(player.team == "spectator")
         continue;
-      }
 
       player _setEMPJammed(level.teamEMPed[player.team]);
     }
   }
 }
 
+
 EMP_PlayerTracker() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator") {
+      if(player.team == "spectator")
         continue;
-      }
 
-      if(isDefined(level.empPlayer) && level.empPlayer != player) {
+      if(isDefined(level.empPlayer) && level.empPlayer != player)
         player _setEMPJammed(true);
-      } else {
+      else
         player _setEMPJammed(false);
-      }
     }
   }
 }
@@ -271,94 +260,77 @@ EMP_PlayerTracker() {
 destroyActiveVehicles(attacker) {
   if(isDefined(attacker)) {
     foreach(heli in level.helis) {
-      if(!h2_friendlyFireCheck(heli, attacker)) {
+      if(!h2_friendlyFireCheck(heli, attacker))
         radiusDamage(heli.origin, 384, 5000, 5000, attacker);
-      }
     }
 
     foreach(littleBird in level.littleBird) {
-      if(!h2_friendlyFireCheck(littleBird, attacker)) {
+      if(!h2_friendlyFireCheck(littleBird, attacker))
         radiusDamage(littleBird.origin, 384, 5000, 5000, attacker);
-      }
     }
 
     foreach(turret in level.turrets) {
-      if(!h2_friendlyFireCheck(turret, attacker)) {
+      if(!h2_friendlyFireCheck(turret, attacker))
         radiusDamage(turret.origin, 16, 5000, 5000, attacker);
-      }
     }
 
     foreach(rocket in level.rockets) {
-      if(!h2_friendlyFireCheck(rocket, attacker)) {
+      if(!h2_friendlyFireCheck(rocket, attacker))
         rocket notify("death");
-      }
     }
 
     if(level.teamBased) {
-      foreach(uav in level.uavModels[level.otherTeam[attacker.team]]) {
-        radiusDamage(uav.origin, 384, 5000, 5000, attacker);
-      }
+      foreach(uav in level.uavModels[level.otherTeam[attacker.team]])
+      radiusDamage(uav.origin, 384, 5000, 5000, attacker);
     } else {
       foreach(uav in level.uavModels) {
-        if(uav.owner != attacker) {
+        if(uav.owner != attacker)
           radiusDamage(uav.origin, 384, 5000, 5000, attacker);
-        }
       }
     }
 
-    if(isDefined(level.ac130player) && level.ac130player != attacker) {
+    if(isDefined(level.ac130player) && level.ac130player != attacker)
       radiusDamage(level.ac130.origin + (0, 0, 10), 1000, 5000, 5000, attacker);
-    }
   } else {
-    foreach(heli in level.helis) {
-      radiusDamage(heli.origin, 384, 5000, 5000);
-    }
+    foreach(heli in level.helis)
+    radiusDamage(heli.origin, 384, 5000, 5000);
 
-    foreach(littleBird in level.littleBird) {
-      radiusDamage(littleBird.origin, 384, 5000, 5000);
-    }
+    foreach(littleBird in level.littleBird)
+    radiusDamage(littleBird.origin, 384, 5000, 5000);
 
-    foreach(turret in level.turrets) {
-      radiusDamage(turret.origin, 16, 5000, 5000);
-    }
+    foreach(turret in level.turrets)
+    radiusDamage(turret.origin, 16, 5000, 5000);
 
-    foreach(rocket in level.rockets) {
-      rocket notify("death");
-    }
+    foreach(rocket in level.rockets)
+    rocket notify("death");
 
     if(level.teamBased) {
-      foreach(uav in level.uavModels["allies"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels["allies"])
+      radiusDamage(uav.origin, 384, 5000, 5000);
 
-      foreach(uav in level.uavModels["axis"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels["axis"])
+      radiusDamage(uav.origin, 384, 5000, 5000);
     } else {
-      foreach(uav in level.uavModels) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels)
+      radiusDamage(uav.origin, 384, 5000, 5000);
     }
 
-    if(isDefined(level.ac130player)) {
+    if(isDefined(level.ac130player))
       radiusDamage(level.ac130.planeModel.origin + (0, 0, 10), 1000, 5000, 5000);
-    }
   }
 }
 
 _setEMPJammed(var_0) {
   if(var_0) {
-    if(!self isUsingRemote()) {
+    if(!self isUsingRemote())
       self setclientomnvar("ui_killstreak_remote", 1);
-    }
 
     self setclientomnvar("ui_hud_emp_artifact", 1);
 
     self notify("got_emped");
   } else {
-    if(!self isUsingRemote()) {
+    if(!self isUsingRemote())
       self setclientomnvar("ui_killstreak_remote", 0);
-    }
 
     self setclientomnvar("ui_hud_emp_artifact", 0);
   }

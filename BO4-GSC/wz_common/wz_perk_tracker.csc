@@ -5,6 +5,7 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
+
 #namespace wz_perk_tracker;
 
 autoexec __init__system__() {
@@ -27,7 +28,7 @@ tracker(localclientnum) {
   while(true) {
     wait 0.2;
 
-    if(!function_5778f82(localclientnum, # "specialty_tracker")) {
+    if(!function_5778f82(localclientnum, #"specialty_tracker")) {
       continue;
     }
 

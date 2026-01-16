@@ -125,7 +125,7 @@ menendezchangedvar(menendez) {
   min_set = -1;
   max_set = -0.1;
   ent = spawn(0, (0, 0, 0), "script_origin");
-  loop_id = ent playLoopSound("evt_surv_talk_test_loop", 1);
+  loop_id = ent playloopsound("evt_surv_talk_test_loop", 1);
   setsoundvolume(loop_id, 1);
   level thread menendezendrecording(ent);
 
@@ -138,16 +138,15 @@ menendezchangedvar(menendez) {
 }
 
 set_dvar_and_volume(loop_id, set) {
-  if(set == 0 || !level.surv_on) {
+  if(set == 0 || !level.surv_on)
     setdvarfloat("snd_futz", 1);
-  } else {
+  else
     setdvarfloat("snd_futz", set);
-  }
 }
 
 get_view_num(start_origin, start_angles, end_origin) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = anglestoforward(start_angles);
   dot = vectordot(forward, normal);
   return dot;
 }
@@ -182,11 +181,11 @@ mill_scanner() {
   while(true) {
     level waittill("millibar_on");
     scanent = spawn(0, (0, 0, 0), "script_origin");
-    scanent playLoopSound("evt_mill_scan");
-    playSound(0, "evt_mill_scan_on", (0, 0, 0));
+    scanent playloopsound("evt_mill_scan");
+    playsound(0, "evt_mill_scan_on", (0, 0, 0));
     level waittill("millibar_off");
     scanent stoploopsound(0.5);
-    playSound(0, "evt_mill_scan_off", (0, 0, 0));
+    playsound(0, "evt_mill_scan_off", (0, 0, 0));
     wait 1;
     scanent delete();
   }

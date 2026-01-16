@@ -85,9 +85,8 @@ waitforsharpturn() {
 
   var_2 = 0;
 
-  if(var_2) {
+  if(var_2)
     var_1 = 0;
-  }
 
   var_3 = "run_turn";
   var_4 = self getanimentry(var_3, var_1);
@@ -102,9 +101,8 @@ waitforsharpturn() {
   self.blockgoalpos = 1;
   self.enablestop = 0;
 
-  if(var_2) {
+  if(var_2)
     maps\mp\agents\alien\_alien_anim_utils::turntowardsvector(self getlookaheaddir());
-  }
 
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
@@ -119,9 +117,9 @@ waitforstop() {
   self endon("alienmove_endwait_stop");
   self waittill("stop_soon");
 
-  if(!shoulddostopanim()) {
+  if(!shoulddostopanim())
     thread waitforstop();
-  } else {
+  else {
     var_0 = self getpathgoalpos();
     playstopanimation(var_0, 1);
     maps\mp\agents\alien\_alien_anim_utils::turntowardsvector(self getlookaheaddir());
@@ -147,9 +145,8 @@ playstopanimation(var_0, var_1) {
   var_2 = shouldrestartstop();
 
   if(!isDefined(var_0)) {
-    if(shouldrestartstop()) {
+    if(shouldrestartstop())
       thread waitforstop();
-    }
 
     return;
   }
@@ -163,9 +160,8 @@ playstopanimation(var_0, var_1) {
   var_9 = getangledelta(var_7);
 
   if(length(var_3) + 48 < length(var_8)) {
-    if(var_2) {
+    if(var_2)
       thread waitforstop();
-    }
 
     return;
   }
@@ -175,17 +171,15 @@ playstopanimation(var_0, var_1) {
   var_12 = maps\mp\agents\_scriptedagents::droppostoground(var_11);
 
   if(!isDefined(var_12)) {
-    if(var_2) {
+    if(var_2)
       thread waitforstop();
-    }
 
     return;
   }
 
   if(!maps\mp\agents\_scriptedagents::canmovepointtopoint(var_10.pos, var_12)) {
-    if(var_2) {
+    if(var_2)
       thread waitforstop();
-    }
 
     return;
   }
@@ -208,9 +202,8 @@ playstopanimation(var_0, var_1) {
 }
 
 getstopendfacedir(var_0) {
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return self.enemy.origin - var_0;
-  }
 
   return var_0 - self.origin;
 }
@@ -311,9 +304,8 @@ onflashbanged() {
 }
 
 ondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(maps\mp\alien\_utility::is_pain_available(var_1, var_4)) {
+  if(maps\mp\alien\_utility::is_pain_available(var_1, var_4))
     dostumble(var_3, var_7, var_8, var_2, var_4, var_1);
-  }
 }
 
 dostumble(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -336,9 +328,8 @@ dostumble(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.playing_pain_animation = 0;
   self.statelocked = 0;
 
-  if(shouldstartmove()) {
+  if(shouldstartmove())
     startmove();
-  }
 
   continuemovement();
 }
@@ -355,9 +346,8 @@ waitforstuck() {
     var_4 = gettime();
     var_5 = length(self.origin - var_2);
 
-    if(var_5 > var_3) {
+    if(var_5 > var_3)
       var_1 = var_4 + var_0;
-    }
 
     if(var_1 <= var_4) {
       stucklerp();
@@ -396,9 +386,8 @@ dowalkstart() {
   var_1 = maps\mp\agents\_scriptedagents::getrandomanimentry(var_0);
   var_2 = self getlookaheaddir();
 
-  if(isDefined(self.pathnode)) {
+  if(isDefined(self.pathnode))
     var_2 = vectornormalize(self.pathnode.origin - self.origin);
-  }
 
   maps\mp\agents\alien\_alien_anim_utils::turntowardsvector(var_2);
   self scragentsetanimmode("anim deltas");
@@ -412,11 +401,10 @@ dowalkstart() {
 dorunstart() {
   var_0 = self getnegotiationstartnode();
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_1 = var_0.origin;
-  } else {
+  else
     var_1 = self getpathgoalpos();
-  }
 
   if(!isDefined(var_1)) {
     return;
@@ -439,11 +427,10 @@ dostartmoveanim(var_0) {
 }
 
 candostartmove() {
-  if(!isDefined(self.skipstartmove)) {
+  if(!isDefined(self.skipstartmove))
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 getstartmovetype() {
@@ -466,9 +453,8 @@ candoturnanim(var_0) {
   var_2 = 10;
   var_3 = (0, 0, 16);
 
-  if(!isDefined(self getpathgoalpos())) {
+  if(!isDefined(self getpathgoalpos()))
     return 0;
-  }
 
   var_4 = getnotetracktimes(var_0, "code_move");
   var_5 = var_4[0];
@@ -476,17 +462,15 @@ candoturnanim(var_0) {
   var_7 = self localtoworldcoords(var_6);
   var_7 = getgroundposition(var_7, self.radius);
 
-  if(!isDefined(var_7)) {
+  if(!isDefined(var_7))
     return 0;
-  }
 
   var_8 = self aiphysicstracepassed(self.origin + var_3, var_7 + var_3, self.radius - var_2, self.height - var_1);
 
-  if(var_8) {
+  if(var_8)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 shouldstartmove() {

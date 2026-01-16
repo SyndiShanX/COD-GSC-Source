@@ -19,16 +19,15 @@ onplayerconnect() {
 }
 
 hintmessageplayers(players, hinttext) {
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.notifytext = hinttext;
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] notifymessage(notifydata);
-  }
 }
 
 hintmessage(hinttext) {
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.notifytext = hinttext;
   notifymessage(notifydata);
 }
@@ -119,47 +118,41 @@ shownotifymessageinternal(notifydata) {
   self.doingnotify = 1;
   waitrequirevisibility(0);
 
-  if(isDefined(notifydata.duration)) {
+  if(isDefined(notifydata.duration))
     duration = notifydata.duration;
-  } else if(level.gameended) {
+  else if(level.gameended)
     duration = 2.0;
-  } else {
+  else
     duration = 4.0;
-  }
 
   self thread resetoncancel();
 
-  if(isDefined(notifydata.sound)) {
+  if(isDefined(notifydata.sound))
     self playlocalsound(notifydata.sound);
-  }
 
-  if(isDefined(notifydata.glowcolor)) {
+  if(isDefined(notifydata.glowcolor))
     glowcolor = notifydata.glowcolor;
-  } else {
+  else
     glowcolor = (0, 0, 0);
-  }
 
   anchorelem = self.notifytitle;
 
   if(isDefined(notifydata.titletext)) {
     if(level.splitscreen) {
-      if(isDefined(notifydata.titlelabel)) {
+      if(isDefined(notifydata.titlelabel))
         self iprintlnbold(notifydata.titlelabel, notifydata.titletext);
-      } else {
+      else
         self iprintlnbold(notifydata.titletext);
-      }
     } else {
-      if(isDefined(notifydata.titlelabel)) {
+      if(isDefined(notifydata.titlelabel))
         self.notifytitle.label = notifydata.titlelabel;
-      } else {
-        self.notifytitle.label = &"";
-      }
+      else
+        self.notifytitle.label = & "";
 
-      if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring)) {
+      if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring))
         self.notifytitle setvalue(notifydata.titletext);
-      } else {
+      else
         self.notifytitle settext(notifydata.titletext);
-      }
 
       self.notifytitle setpulsefx(100, int(duration * 1000), 1000);
       self.notifytitle.glowcolor = glowcolor;
@@ -169,23 +162,20 @@ shownotifymessageinternal(notifydata) {
 
   if(isDefined(notifydata.notifytext)) {
     if(level.splitscreen) {
-      if(isDefined(notifydata.textlabel)) {
+      if(isDefined(notifydata.textlabel))
         self iprintlnbold(notifydata.textlabel, notifydata.notifytext);
-      } else {
+      else
         self iprintlnbold(notifydata.notifytext);
-      }
     } else {
-      if(isDefined(notifydata.textlabel)) {
+      if(isDefined(notifydata.textlabel))
         self.notifytext.label = notifydata.textlabel;
-      } else {
-        self.notifytext.label = &"";
-      }
+      else
+        self.notifytext.label = & "";
 
-      if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring)) {
+      if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring))
         self.notifytext setvalue(notifydata.notifytext);
-      } else {
+      else
         self.notifytext settext(notifydata.notifytext);
-      }
 
       self.notifytext setpulsefx(100, int(duration * 1000), 1000);
       self.notifytext.glowcolor = glowcolor;
@@ -196,25 +186,22 @@ shownotifymessageinternal(notifydata) {
 
   if(isDefined(notifydata.notifytext2)) {
     if(level.splitscreen) {
-      if(isDefined(notifydata.text2label)) {
+      if(isDefined(notifydata.text2label))
         self iprintlnbold(notifydata.text2label, notifydata.notifytext2);
-      } else {
+      else
         self iprintlnbold(notifydata.notifytext2);
-      }
     } else {
       self.notifytext2 setparent(anchorelem);
 
-      if(isDefined(notifydata.text2label)) {
+      if(isDefined(notifydata.text2label))
         self.notifytext2.label = notifydata.text2label;
-      } else {
-        self.notifytext2.label = &"";
-      }
+      else
+        self.notifytext2.label = & "";
 
-      if(isDefined(notifydata.text2label) && !isDefined(notifydata.textisstring)) {
+      if(isDefined(notifydata.text2label) && !isDefined(notifydata.textisstring))
         self.notifytext2 setvalue(notifydata.notifytext2);
-      } else {
+      else
         self.notifytext2 settext(notifydata.notifytext2);
-      }
 
       self.notifytext2 settext(notifydata.notifytext2);
       self.notifytext2 setpulsefx(100, int(duration * 1000), 1000);
@@ -226,25 +213,22 @@ shownotifymessageinternal(notifydata) {
 
   if(isDefined(notifydata.notifytext3)) {
     if(level.splitscreen) {
-      if(isDefined(notifydata.text3label)) {
+      if(isDefined(notifydata.text3label))
         self iprintlnbold(notifydata.text3label, notifydata.notifytext3);
-      } else {
+      else
         self iprintlnbold(notifydata.notifytext3);
-      }
     } else {
       self.notifytext3 setparent(anchorelem);
 
-      if(isDefined(notifydata.text3label)) {
+      if(isDefined(notifydata.text3label))
         self.notifytext3.label = notifydata.text3label;
-      } else {
-        self.notifytext3.label = &"";
-      }
+      else
+        self.notifytext3.label = & "";
 
-      if(isDefined(notifydata.text3label) && !isDefined(notifydata.textisstring)) {
+      if(isDefined(notifydata.text3label) && !isDefined(notifydata.textisstring))
         self.notifytext3 setvalue(notifydata.notifytext3);
-      } else {
+      else
         self.notifytext3 settext(notifydata.notifytext3);
-      }
 
       self.notifytext3 settext(notifydata.notifytext3);
       self.notifytext3 setpulsefx(100, int(duration * 1000), 1000);
@@ -277,9 +261,8 @@ shownotifymessageinternal(notifydata) {
     nextnotifydata = self.notifyqueue[0];
     newqueue = [];
 
-    for(i = 1; i < self.notifyqueue.size; i++) {
+    for(i = 1; i < self.notifyqueue.size; i++)
       self.notifyqueue[i - 1] = self.notifyqueue[i];
-    }
 
     self.notifyqueue[i - 1] = undefined;
     self thread shownotifymessageinternal(nextnotifydata);
@@ -287,16 +270,14 @@ shownotifymessageinternal(notifydata) {
 }
 
 waitrequirevisibility(waittime) {
-  while(!self canreadtext()) {
+  while(!self canreadtext())
     wait 0.05;
-  }
 
   while(waittime > 0) {
     wait 0.05;
 
-    if(self canreadtext()) {
+    if(self canreadtext())
       waittime = waittime - 0.05;
-    }
   }
 }
 
@@ -328,13 +309,11 @@ waittillnotifiesdone() {
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
-      if(isDefined(players[i].notifyqueue) && players[i].notifyqueue.size > 0) {
+      if(isDefined(players[i].notifyqueue) && players[i].notifyqueue.size > 0)
         pendingnotifies = 1;
-      }
     }
 
-    if(pendingnotifies) {
+    if(pendingnotifies)
       wait 0.2;
-    }
   }
 }

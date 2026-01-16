@@ -15,13 +15,13 @@
 #namespace spawning;
 
 function autoexec __init__sytem__() {
-  system::register("perks", &__init__, undefined, undefined);
+  system::register("perks", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "flying", 1, 1, "int");
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_connect(local_client_num) {}
@@ -36,7 +36,7 @@ function monitorflight() {
   self endon("death");
   self endon("disconnect");
   self.flying = 0;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     flying = !self isonground();
     if(self.flying != flying) {
       self clientfield::set("flying", flying);
@@ -77,7 +77,7 @@ function monitorgpsjammer() {
   timesincedistancecheck = 0;
   previousorigin = self.origin;
   gpsjammerprotection = 0;
-  while(true) {
+  while (true) {
     graceperiods = getdvarint("", graceperiods);
     minspeed = getdvarint("", minspeed);
     mindistance = getdvarint("", mindistance);
@@ -86,7 +86,7 @@ function monitorgpsjammer() {
     minspeedsq = minspeed * minspeed;
     mindistancesq = mindistance * mindistance;
     gpsjammerprotection = 0;
-    if(util::isusingremote() || (isDefined(self.isplanting) && self.isplanting) || (isDefined(self.isdefusing) && self.isdefusing)) {
+    if(util::isusingremote() || (isdefined(self.isplanting) && self.isplanting) || (isdefined(self.isdefusing) && self.isdefusing)) {
       gpsjammerprotection = 1;
     } else {
       if(timesincedistancecheck > 1) {
@@ -161,7 +161,7 @@ function monitorsengrenjammer() {
   timesincedistancecheck = 0;
   previousorigin = self.origin;
   sgjammerprotection = 0;
-  while(true) {
+  while (true) {
     graceperiods = getdvarint("", graceperiods);
     minspeed = getdvarint("", minspeed);
     mindistance = getdvarint("", mindistance);
@@ -170,7 +170,7 @@ function monitorsengrenjammer() {
     minspeedsq = minspeed * minspeed;
     mindistancesq = mindistance * mindistance;
     sgjammerprotection = 0;
-    if(util::isusingremote() || (isDefined(self.isplanting) && self.isplanting) || (isDefined(self.isdefusing) && self.isdefusing)) {
+    if(util::isusingremote() || (isdefined(self.isplanting) && self.isplanting) || (isdefined(self.isdefusing) && self.isdefusing)) {
       sgjammerprotection = 1;
     } else {
       if(timesincedistancecheck > 1) {

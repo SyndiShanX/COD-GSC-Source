@@ -27,12 +27,12 @@
 #namespace warlord;
 
 function autoexec __init__sytem__() {
-  system::register("warlord", &__init__, undefined, undefined);
+  system::register("warlord", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("warlord", &warlordbehavior::archetypewarlordblackboardinit);
-  spawner::add_archetype_spawn_function("warlord", &warlordserverutils::warlordspawnsetup);
+  spawner::add_archetype_spawn_function("warlord", & warlordbehavior::archetypewarlordblackboardinit);
+  spawner::add_archetype_spawn_function("warlord", & warlordserverutils::warlordspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("warlord")) {
     clientfield::register("actor", "warlord_damage_state", 1, 2, "int");
     clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int");
@@ -45,23 +45,23 @@ function __init__() {
 #namespace warlordbehavior;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanJukeCondition", &canjukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTacticalJukeCondition", &cantacticaljukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldBeAngryCondition", &shouldbeangrycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldNormalMelee", &warlordshouldnormalmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTakePainCondition", &cantakepaincondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordExposedPainActionStart", &exposedpainactionstart);
-  behaviortreenetworkutility::registerbehaviortreeaction("warlordDeathAction", &deathaction, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("warlordJukeAction", &jukeaction, undefined, &jukeactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterPositionService", &choosebetterpositionservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("WarlordAngryAttack", &warlordangryattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanJukeCondition", & canjukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTacticalJukeCondition", & cantacticaljukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldBeAngryCondition", & shouldbeangrycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldNormalMelee", & warlordshouldnormalmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTakePainCondition", & cantakepaincondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordExposedPainActionStart", & exposedpainactionstart);
+  behaviortreenetworkutility::registerbehaviortreeaction("warlordDeathAction", & deathaction, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("warlordJukeAction", & jukeaction, undefined, & jukeactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterPositionService", & choosebetterpositionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("WarlordAngryAttack", & warlordangryattack);
 }
 
 function private archetypewarlordblackboardinit() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self aiutility::registerutilityblackboardattributes();
-  self.___archetypeonanimscriptedcallback = &archetypewarlordonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = & archetypewarlordonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -71,7 +71,7 @@ function private archetypewarlordonanimscriptedcallback(entity) {
 }
 
 function private shouldhuntenemyplayer(entity) {
-  if(isDefined(entity.enemy) && isDefined(entity.huntenemytime) && gettime() < entity.huntenemytime) {
+  if(isdefined(entity.enemy) && isdefined(entity.huntenemytime) && gettime() < entity.huntenemytime) {
     return true;
   }
   return false;
@@ -82,7 +82,7 @@ function private _warlordhuntenemy(entity) {
   if(distance2dsquared(entity.origin, self lastknownpos(self.enemy)) <= (250 * 250)) {
     return false;
   }
-  if(isDefined(entity.huntupdatenexttime) && gettime() < entity.huntupdatenexttime) {
+  if(isdefined(entity.huntupdatenexttime) && gettime() < entity.huntupdatenexttime) {
     return false;
   }
   if(entity.isangryattack) {
@@ -90,7 +90,7 @@ function private _warlordhuntenemy(entity) {
     return false;
   }
   positiononnavmesh = getclosestpointonnavmesh(self lastknownpos(self.enemy), 200);
-  if(!isDefined(positiononnavmesh)) {
+  if(!isdefined(positiononnavmesh)) {
     positiononnavmesh = self lastknownpos(self.enemy);
   }
   queryresult = positionquery_source_navigation(positiononnavmesh, 150, 250, 45, 36, entity, 36);
@@ -102,13 +102,13 @@ function private _warlordhuntenemy(entity) {
     foreach(point in queryresult.data) {
       if(!point.inclaimedlocation && point.disttogoal == 0) {
         newclosestdistance = distance2dsquared(entity.origin, point.origin);
-        if(!isDefined(closestpoint) || newclosestdistance < closestdistance) {
+        if(!isdefined(closestpoint) || newclosestdistance < closestdistance) {
           closestpoint = point.origin;
           closestdistance = newclosestdistance;
         }
       }
     }
-    if(isDefined(closestpoint)) {
+    if(isdefined(closestpoint)) {
       warlorddebughelpers::setcurrentstate(entity, 3, 1);
       entity useposition(closestpoint);
       entity.huntupdatenexttime = gettime() + randomintrange(500, 1500);
@@ -131,9 +131,9 @@ function choosebetterpositionservice(entity) {
   if(!bapproachinggoal) {
     warlordserverutils::clearpreferedpoint(entity);
     warlorddebughelpers::setcurrentstate(entity, 6);
-    if(isDefined(entity.goalent) || entity.goalradius < 72) {
+    if(isdefined(entity.goalent) || entity.goalradius < 72) {
       goalposonmesh = getclosestpointonnavmesh(self.goalpos, 200);
-      if(!isDefined(goalposonmesh)) {
+      if(!isdefined(goalposonmesh)) {
         goalposonmesh = self.goalpos;
       }
       entity useposition(goalposonmesh);
@@ -146,25 +146,25 @@ function choosebetterpositionservice(entity) {
   if(bapproachinggoal && warlordserverutils::updatepreferedpoint(entity)) {
     return 1;
   }
-  if(isDefined(entity.lastenemysightpos) && !warlordserverutils::havetoolowtoattackenemy(entity)) {
+  if(isdefined(entity.lastenemysightpos) && !warlordserverutils::havetoolowtoattackenemy(entity)) {
     searchorigin = entity.lastenemysightpos;
   } else {
     entity warlorddebughelpers::printstate(undefined, (1, 0, 0), "");
     searchorigin = entity.goalpos;
   }
-  if(isDefined(searchorigin)) {
+  if(isdefined(searchorigin)) {
     searchorigin = getclosestpointonnavmesh(searchorigin, 200);
   }
-  if(!isDefined(searchorigin)) {
+  if(!isdefined(searchorigin)) {
     return 0;
   }
-  if(!bapproachinggoal || !isDefined(entity.nextfindbetterpositiontime) || gettime() > entity.nextfindbetterpositiontime) {
+  if(!bapproachinggoal || !isdefined(entity.nextfindbetterpositiontime) || gettime() > entity.nextfindbetterpositiontime) {
     shouldrepath = 1;
   }
-  if(isDefined(entity.enemy) && !entity seerecently(entity.enemy, 2) && isDefined(entity.lastenemysightpos)) {
+  if(isdefined(entity.enemy) && !entity seerecently(entity.enemy, 2) && isdefined(entity.lastenemysightpos)) {
     entity warlorddebughelpers::printstate(undefined, (1, 1, 1), "");
     istrackingenemylastpos = 1;
-    if(isDefined(entity.pathgoalpos)) {
+    if(isdefined(entity.pathgoalpos)) {
       distancetogoalsqr = distancesquared(searchorigin, entity.pathgoalpos);
       if(distancetogoalsqr < (200 * 200)) {
         shouldrepath = 0;
@@ -174,7 +174,7 @@ function choosebetterpositionservice(entity) {
     }
   }
   if(!shouldrepath) {
-    if(isDefined(entity.hascrouchingenemy)) {
+    if(isdefined(entity.hascrouchingenemy)) {
       entity.hascrouchingenemy = undefined;
       shouldrepath = 1;
     }
@@ -183,8 +183,8 @@ function choosebetterpositionservice(entity) {
     queryresult = positionquery_source_navigation(searchorigin, 0, entity.engagemaxdist, 45, 72, entity, 72);
     positionquery_filter_inclaimedlocation(queryresult, entity);
     positionquery_filter_distancetogoal(queryresult, entity);
-    if(isDefined(entity.enemy) && istrackingenemylastpos && (isDefined(entity.var_568222a9) && entity.var_568222a9)) {
-      positionquery_filter_sight(queryresult, self lastknownpos(self.enemy), self getEye() - self.origin, self, 20);
+    if(isdefined(entity.enemy) && istrackingenemylastpos && (isdefined(entity.var_568222a9) && entity.var_568222a9)) {
+      positionquery_filter_sight(queryresult, self lastknownpos(self.enemy), self geteye() - self.origin, self, 20);
     }
     preferedpoints = [];
     randompoints = [];
@@ -201,7 +201,7 @@ function choosebetterpositionservice(entity) {
         continue;
       }
       bpointsingoal++;
-      if(isDefined(point.visibility) && !point.visibility) {
+      if(isdefined(point.visibility) && !point.visibility) {
         continue;
       }
       bpointsvisible++;
@@ -210,7 +210,7 @@ function choosebetterpositionservice(entity) {
       }
       randompoints[randompoints.size] = point.origin;
     }
-    if(!(isDefined(entity.enemy) && istrackingenemylastpos && (isDefined(entity.var_568222a9) && entity.var_568222a9))) {
+    if(!(isdefined(entity.enemy) && istrackingenemylastpos && (isdefined(entity.var_568222a9) && entity.var_568222a9))) {
       preferedpoints = warlordserverutils::getpreferedvalidpoints(entity);
     }
     if(randompoints.size == 0 && preferedpoints.size == 0) {
@@ -234,7 +234,7 @@ function choosebetterpositionservice(entity) {
             continue;
           }
           bpointsingoal++;
-          if(isDefined(point.visibility) && !point.visibility) {
+          if(isdefined(point.visibility) && !point.visibility) {
             continue;
           }
           bpointsvisible++;
@@ -251,7 +251,7 @@ function choosebetterpositionservice(entity) {
             if(point.disttogoal > 0) {
               continue;
             }
-            if(bpointsvisible > 0 && isDefined(point.visibility) && !point.visibility) {
+            if(bpointsvisible > 0 && isdefined(point.visibility) && !point.visibility) {
               continue;
             }
             randompoints[randompoints.size] = point.origin;
@@ -265,7 +265,7 @@ function choosebetterpositionservice(entity) {
           if(point.disttogoal > 0) {
             continue;
           }
-          if(bpointsvisible > 0 && isDefined(point.visibility) && !point.visibility) {
+          if(bpointsvisible > 0 && isdefined(point.visibility) && !point.visibility) {
             continue;
           }
           randompoints[randompoints.size] = point.origin;
@@ -273,7 +273,7 @@ function choosebetterpositionservice(entity) {
       }
       if(randompoints.size == 0) {
         if(!bapproachinggoal) {
-          if(!isDefined(randompoints)) {
+          if(!isdefined(randompoints)) {
             randompoints = [];
           } else if(!isarray(randompoints)) {
             randompoints = array(randompoints);
@@ -290,13 +290,13 @@ function choosebetterpositionservice(entity) {
     engagemindistsqrd = entity.engagemindist * entity.engagemindist;
     engagemaxdistsqrd = entity.engagemaxdist * entity.engagemaxdist;
     engagemaxfalloffdistsqrd = entity.engagemaxfalloffdist * entity.engagemaxfalloffdist;
-    if(isDefined(entity.enemy) && issentient(entity.enemy)) {
-      enemyforward = vectornormalize(anglesToForward(entity.enemy.angles));
+    if(isdefined(entity.enemy) && issentient(entity.enemy)) {
+      enemyforward = vectornormalize(anglestoforward(entity.enemy.angles));
     }
-    for(index = 0; index < randompoints.size; index++) {
+    for (index = 0; index < randompoints.size; index++) {
       distancesqrdtoenemy = distance2dsquared(randompoints[index], searchorigin);
       bweightsign = 1;
-      if(isDefined(istrackingenemylastpos) || (isDefined(entity.var_568222a9) && entity.var_568222a9)) {
+      if(isdefined(istrackingenemylastpos) || (isdefined(entity.var_568222a9) && entity.var_568222a9)) {
         bweightsign = -1;
       }
       pointweight = 0;
@@ -313,7 +313,7 @@ function choosebetterpositionservice(entity) {
           }
         }
       }
-      if(isDefined(enemyforward)) {
+      if(isdefined(enemyforward)) {
         anglefromforward = acos(math::clamp(vectordot(vectornormalize(pointweight - entity.enemy.origin), enemyforward), -1, 1));
         if(anglefromforward > 80) {
           pointweight = pointweight + -0.5;
@@ -324,7 +324,7 @@ function choosebetterpositionservice(entity) {
         goalweight = pointweight;
         goalposition = randompoints[index];
       }
-      if(getdvarint("") > 0 && isDefined(getentbynum(getdvarint(""))) && entity == getentbynum(getdvarint(""))) {
+      if(getdvarint("") > 0 && isdefined(getentbynum(getdvarint(""))) && entity == getentbynum(getdvarint(""))) {
         as_debug::debugdrawweightedpoint(entity, randompoints[index], pointweight, -1.25, 1.75);
       }
     }
@@ -339,19 +339,19 @@ function choosebetterpositionservice(entity) {
         goalposition = point.origin;
         preferedpoint = point;
       }
-      if(getdvarint("") > 0 && isDefined(getentbynum(getdvarint(""))) && entity == getentbynum(getdvarint(""))) {
+      if(getdvarint("") > 0 && isdefined(getentbynum(getdvarint(""))) && entity == getentbynum(getdvarint(""))) {
         as_debug::debugdrawweightedpoint(entity, point.origin, pointweight, -1.25, 1.75);
       }
     }
-    if(isDefined(goalposition)) {
+    if(isdefined(goalposition)) {
       if(entity findpath(entity.origin, goalposition, 1, 0)) {
         entity useposition(goalposition);
         entity.nextfindbetterpositiontime = gettime() + entity.coversearchinterval;
-        if(isDefined(preferedpoint)) {
+        if(isdefined(preferedpoint)) {
           warlorddebughelpers::setcurrentstate(entity, 4);
           warlordserverutils::setpreferedpoint(entity, preferedpoint);
         }
-        if(!isDefined(preferedpoint)) {
+        if(!isdefined(preferedpoint)) {
           warlorddebughelpers::setcurrentstate(entity, 5);
         }
         return 1;
@@ -362,21 +362,21 @@ function choosebetterpositionservice(entity) {
 }
 
 function canjukecondition(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.nextjuketime) && gettime() < behaviortreeentity.nextjuketime) {
+  if(isdefined(behaviortreeentity.nextjuketime) && gettime() < behaviortreeentity.nextjuketime) {
     return 0;
   }
   return warlordserverutils::warlordcanjuke(behaviortreeentity);
 }
 
 function cantacticaljukecondition(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.nextjuketime) && gettime() < behaviortreeentity.nextjuketime) {
+  if(isdefined(behaviortreeentity.nextjuketime) && gettime() < behaviortreeentity.nextjuketime) {
     return 0;
   }
   return warlordserverutils::warlordcantacticaljuke(behaviortreeentity);
 }
 
 function warlordshouldnormalmelee(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.enemy.allowdeath) && behaviortreeentity.enemy.allowdeath))) {
+  if(isdefined(behaviortreeentity.enemy) && (!(isdefined(behaviortreeentity.enemy.allowdeath) && behaviortreeentity.enemy.allowdeath))) {
     return false;
   }
   if(aiutility::hasenemy(behaviortreeentity) && !isalive(behaviortreeentity.enemy)) {
@@ -385,7 +385,7 @@ function warlordshouldnormalmelee(behaviortreeentity) {
   if(!issentient(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isvehicle(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.enemy.good_melee_target) && behaviortreeentity.enemy.good_melee_target))) {
+  if(isvehicle(behaviortreeentity.enemy) && (!(isdefined(behaviortreeentity.enemy.good_melee_target) && behaviortreeentity.enemy.good_melee_target))) {
     return false;
   }
   if(!aiutility::shouldmutexmelee(behaviortreeentity)) {
@@ -397,7 +397,7 @@ function warlordshouldnormalmelee(behaviortreeentity) {
   if(behaviortreeentity.enemy ai::has_behavior_attribute("can_be_meleed") && !behaviortreeentity.enemy ai::get_behavior_attribute("can_be_meleed")) {
     return false;
   }
-  if(!isplayer(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.enemy.magic_bullet_shield) && behaviortreeentity.enemy.magic_bullet_shield))) {
+  if(!isplayer(behaviortreeentity.enemy) && (!(isdefined(behaviortreeentity.enemy.magic_bullet_shield) && behaviortreeentity.enemy.magic_bullet_shield))) {
     return false;
   }
   if(aiutility::hascloseenemytomeleewithrange(behaviortreeentity, 100 * 100)) {
@@ -434,11 +434,11 @@ function jukeaction(behaviortreeentity, asmstatename) {
     }
   }
   behaviortreeentity clearpath();
-  jukeinfo = spawnStruct();
+  jukeinfo = spawnstruct();
   jukeinfo.origin = behaviortreeentity.origin;
   jukeinfo.entity = behaviortreeentity;
   blackboard::addblackboardevent("actor_juke", jukeinfo, 2000);
-  jukeinfo.entity playSound("fly_jetpack_juke_warlord");
+  jukeinfo.entity playsound("fly_jetpack_juke_warlord");
   return 5;
 }
 
@@ -446,7 +446,7 @@ function jukeactionterminate(behaviortreeentity, asmstatename) {
   blackboard::setblackboardattribute(behaviortreeentity, "_juke_direction", undefined);
   clientfield::set("warlord_thruster_direction", 0);
   positiononnavmesh = getclosestpointonnavmesh(behaviortreeentity.origin, 200);
-  if(!isDefined(positiononnavmesh)) {
+  if(!isdefined(positiononnavmesh)) {
     positiononnavmesh = behaviortreeentity.origin;
   }
   behaviortreeentity useposition(positiononnavmesh);
@@ -465,16 +465,16 @@ function exposedpainactionstart(behaviortreeentity) {
 }
 
 function shouldbeangrycondition(behaviortreeentity) {
-  if(isDefined(behaviortreeentity.nextangrytime) && gettime() < behaviortreeentity.nextangrytime) {
+  if(isdefined(behaviortreeentity.nextangrytime) && gettime() < behaviortreeentity.nextangrytime) {
     return 0;
   }
-  if(!isDefined(behaviortreeentity.knownattackers) || behaviortreeentity.knownattackers.size == 0) {
+  if(!isdefined(behaviortreeentity.knownattackers) || behaviortreeentity.knownattackers.size == 0) {
     return 0;
   }
-  if(behaviortreeentity.knownattackers.size == 1 && isDefined(behaviortreeentity.enemy) && behaviortreeentity.knownattackers[0].attacker == behaviortreeentity.enemy) {
+  if(behaviortreeentity.knownattackers.size == 1 && isdefined(behaviortreeentity.enemy) && behaviortreeentity.knownattackers[0].attacker == behaviortreeentity.enemy) {
     return 0;
   }
-  if(isDefined(behaviortreeentity.accumilateddamage) && behaviortreeentity.accumilateddamage > warlordserverutils::getscaledforplayers(200, 1.5, 2, 2.5)) {
+  if(isdefined(behaviortreeentity.accumilateddamage) && behaviortreeentity.accumilateddamage > warlordserverutils::getscaledforplayers(200, 1.5, 2, 2.5)) {
     return 1;
   }
   return behaviortreeentity.isangryattack;
@@ -488,8 +488,8 @@ function warlordangryattack(entity) {
   entity.nextangrytime = gettime() + 13000;
   warlordserverutils::updateattackerslist(entity);
   attackersarray = [];
-  for(i = 0; i < entity.knownattackers.size; i++) {
-    for(j = i + 1; j < entity.knownattackers.size; j++) {
+  for (i = 0; i < entity.knownattackers.size; i++) {
+    for (j = i + 1; j < entity.knownattackers.size; j++) {
       if(entity.knownattackers[i].threat < entity.knownattackers[j].threat) {
         tmp = entity.knownattackers[j].threat;
         entity.knownattackers[j].threat = entity.knownattackers[i].threat;
@@ -498,7 +498,7 @@ function warlordangryattack(entity) {
     }
   }
   foreach(data in entity.knownattackers) {
-    if(!isDefined(attackersarray)) {
+    if(!isdefined(attackersarray)) {
       attackersarray = [];
     } else if(!isarray(attackersarray)) {
       attackersarray = array(attackersarray);
@@ -515,7 +515,7 @@ function warlordangryattack_shootthemall(entity, attackersarray) {
   entity notify("hash_b160390f");
   shoottime = getdvarfloat("warlordangryattack", 3);
   foreach(attacker in attackersarray) {
-    if(isDefined(attacker)) {
+    if(isdefined(attacker)) {
       entity ai::shoot_at_target("normal", attacker, undefined, shoottime, undefined, 1);
     }
   }
@@ -535,7 +535,7 @@ function getaliveplayerscount(entity) {
 
 function setwarlordaggressivemode(entity, b_aggressive_mode) {
   entity.var_568222a9 = b_aggressive_mode;
-  if(isDefined(b_aggressive_mode) && b_aggressive_mode) {
+  if(isdefined(b_aggressive_mode) && b_aggressive_mode) {
     foreach(player in level.players) {
       entity setpersonalthreatbias(player, 1000);
     }
@@ -548,7 +548,7 @@ function setwarlordaggressivemode(entity, b_aggressive_mode) {
 
 function addpreferedpoint(entity, position, min_duration, max_duration, name) {
   positiononnavmesh = getclosestpointonnavmesh(position, 200, 25);
-  if(!isDefined(positiononnavmesh)) {
+  if(!isdefined(positiononnavmesh)) {
     println("" + position);
     return;
   }
@@ -556,12 +556,12 @@ function addpreferedpoint(entity, position, min_duration, max_duration, name) {
   if(!entity isposatgoal(position)) {
     println("" + position);
   }
-  point = spawnStruct();
+  point = spawnstruct();
   point.origin = position;
   point.min_duration = min_duration;
   point.max_duration = max_duration;
   point.name = name;
-  if(!isDefined(entity.prefered_points)) {
+  if(!isdefined(entity.prefered_points)) {
     entity.prefered_points = [];
   } else if(!isarray(entity.prefered_points)) {
     entity.prefered_points = array(entity.prefered_points);
@@ -570,11 +570,11 @@ function addpreferedpoint(entity, position, min_duration, max_duration, name) {
 }
 
 function deletepreferedpoint(entity, name) {
-  if(isDefined(entity.prefered_points)) {
+  if(isdefined(entity.prefered_points)) {
     points_to_remove = [];
     foreach(point in entity.prefered_points) {
       if(point.name === name) {
-        if(!isDefined(points_to_remove)) {
+        if(!isdefined(points_to_remove)) {
           points_to_remove = [];
         } else if(!isarray(points_to_remove)) {
           points_to_remove = array(points_to_remove);
@@ -601,7 +601,7 @@ function clearpreferedpointsoutsidegoal(entity) {
   points_to_remove = [];
   foreach(point in entity.prefered_points) {
     if(!entity isposatgoal(point.origin)) {
-      if(!isDefined(points_to_remove)) {
+      if(!isdefined(points_to_remove)) {
         points_to_remove = [];
       } else if(!isarray(points_to_remove)) {
         points_to_remove = array(points_to_remove);
@@ -627,38 +627,38 @@ function private clearpreferedpoint(entity) {
 }
 
 function private atpreferedpoint(entity) {
-  if(isDefined(entity.current_prefered_point) && (distancesquared(entity.current_prefered_point.origin, entity.origin) < (36 * 36) && (abs(self.current_prefered_point.origin[2] - entity.origin[2])) < 45)) {
+  if(isdefined(entity.current_prefered_point) && (distancesquared(entity.current_prefered_point.origin, entity.origin) < (36 * 36) && (abs(self.current_prefered_point.origin[2] - entity.origin[2])) < 45)) {
     return true;
   }
   return false;
 }
 
 function private reachingpreferedpoint(entity) {
-  if(!isDefined(entity.current_prefered_point)) {
+  if(!isdefined(entity.current_prefered_point)) {
     return false;
   }
   if(atpreferedpoint(entity)) {
     return true;
   }
-  if(isDefined(entity.pathgoalpos) && entity.pathgoalpos == entity.current_prefered_point.origin) {
+  if(isdefined(entity.pathgoalpos) && entity.pathgoalpos == entity.current_prefered_point.origin) {
     return true;
   }
   return false;
 }
 
 function private updatepreferedpoint(entity) {
-  if(isDefined(entity.current_prefered_point)) {
+  if(isdefined(entity.current_prefered_point)) {
     if(atpreferedpoint(entity)) {
-      if(isDefined(entity.current_prefered_point_expiration)) {
+      if(isdefined(entity.current_prefered_point_expiration)) {
         if(gettime() > entity.current_prefered_point_expiration) {
           clearpreferedpoint(entity);
           return false;
         }
         return true;
       }
-      if(isDefined(entity.current_prefered_point.min_duration)) {
+      if(isdefined(entity.current_prefered_point.min_duration)) {
         entity.var_7e5dd3e4 = gettime();
-        if(!isDefined(entity.current_prefered_point.max_duration) || entity.current_prefered_point.max_duration == entity.current_prefered_point.min_duration) {
+        if(!isdefined(entity.current_prefered_point.max_duration) || entity.current_prefered_point.max_duration == entity.current_prefered_point.min_duration) {
           entity.current_prefered_point_expiration = gettime() + entity.current_prefered_point.min_duration;
         } else {
           duration = randomintrange(entity.current_prefered_point.min_duration, entity.current_prefered_point.max_duration);
@@ -679,7 +679,7 @@ function private updatepreferedpoint(entity) {
 
 function private getpreferedvalidpoints(entity) {
   validpoints = [];
-  if(isDefined(entity.prefered_points)) {
+  if(isdefined(entity.prefered_points)) {
     foreach(point in entity.prefered_points) {
       if(!entity isposatgoal(point.origin)) {
         distance = distance2dsquared(entity.origin, point.origin);
@@ -689,12 +689,12 @@ function private getpreferedvalidpoints(entity) {
       if(entity isposinclaimedlocation(point.origin)) {
         continue;
       }
-      if(isDefined(entity.enemy) && (isDefined(entity.var_568222a9) && entity.var_568222a9)) {
-        if(!bullettracepassed(entity getEye(), entity.enemy.origin + vectorscale((0, 0, 1), 50), 0, entity, entity.enemy)) {
+      if(isdefined(entity.enemy) && (isdefined(entity.var_568222a9) && entity.var_568222a9)) {
+        if(!bullettracepassed(entity geteye(), entity.enemy.origin + vectorscale((0, 0, 1), 50), 0, entity, entity.enemy)) {
           continue;
         }
       }
-      if(!isDefined(validpoints)) {
+      if(!isdefined(validpoints)) {
         validpoints = [];
       } else if(!isarray(validpoints)) {
         validpoints = array(validpoints);
@@ -706,7 +706,7 @@ function private getpreferedvalidpoints(entity) {
 }
 
 function getscaledforplayers(val, scale2, scale3, scale4) {
-  if(!isDefined(level.players)) {
+  if(!isdefined(level.players)) {
     return val;
   }
   if(level.players.size == 2) {
@@ -722,7 +722,7 @@ function getscaledforplayers(val, scale2, scale3, scale4) {
 }
 
 function warlordcanjuke(entity) {
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
   distancesqr = distancesquared(entity.enemy.origin, entity.origin);
@@ -761,11 +761,11 @@ function warlordcantacticaljuke(entity) {
 
 function isenemytoolowtoattack(enemy) {
   if(isplayer(enemy)) {
-    if(isDefined(enemy.laststand) && enemy.laststand) {
+    if(isdefined(enemy.laststand) && enemy.laststand) {
       return true;
     }
     playerstance = enemy getstance();
-    if(isDefined(playerstance) && (playerstance == "prone" || playerstance == "crouch")) {
+    if(isdefined(playerstance) && (playerstance == "prone" || playerstance == "crouch")) {
       return true;
     }
   }
@@ -773,7 +773,7 @@ function isenemytoolowtoattack(enemy) {
 }
 
 function havetoolowtoattackenemy(entity) {
-  if(!isDefined(entity.lasttimetohavecrouchingenemy)) {
+  if(!isdefined(entity.lasttimetohavecrouchingenemy)) {
     return false;
   }
   if((gettime() - entity.lasttimetohavecrouchingenemy) <= 4000) {
@@ -825,7 +825,7 @@ function shouldswitchtonewthreat(entity, attacker, threat) {
   if(entity.enemy === attacker) {
     return false;
   }
-  if(!isDefined(entity.currentdangerousattacker)) {
+  if(!isdefined(entity.currentdangerousattacker)) {
     return true;
   }
   if(entity.currentdangerousattacker.health <= 0) {
@@ -841,14 +841,14 @@ function shouldswitchtonewthreat(entity, attacker, threat) {
 }
 
 function updateattackerslist(entity, newattacker, damage) {
-  if(!isDefined(entity.knownattackers)) {
+  if(!isdefined(entity.knownattackers)) {
     entity.knownattackers = [];
   }
   maxthreat = 0;
   var_a75ea562 = 0;
-  for(i = 0; i < entity.knownattackers.size; i++) {
+  for (i = 0; i < entity.knownattackers.size; i++) {
     attacker = entity.knownattackers[i].attacker;
-    if(!isDefined(attacker) || !isentity(attacker) || attacker.health <= 0 || (gettime() - entity.knownattackers[i].lastattacktime) > 5000) {
+    if(!isdefined(attacker) || !isentity(attacker) || attacker.health <= 0 || (gettime() - entity.knownattackers[i].lastattacktime) > 5000) {
       arrayremoveindex(entity.knownattackers, i);
       i--;
       continue;
@@ -859,8 +859,8 @@ function updateattackerslist(entity, newattacker, damage) {
       var_64e4a88a = entity.knownattackers[i];
     }
   }
-  if(isDefined(newattacker)) {
-    for(i = 0; i < entity.knownattackers.size; i++) {
+  if(isdefined(newattacker)) {
+    for (i = 0; i < entity.knownattackers.size; i++) {
       if(entity.knownattackers[i].attacker == newattacker) {
         attackdata = entity.knownattackers[i];
         attackdata.lastattacktime = gettime();
@@ -868,13 +868,13 @@ function updateattackerslist(entity, newattacker, damage) {
         break;
       }
     }
-    if(!isDefined(attackdata)) {
-      attackdata = spawnStruct();
+    if(!isdefined(attackdata)) {
+      attackdata = spawnstruct();
       attackdata.attacker = newattacker;
       attackdata.lastattacktime = gettime();
       attackdata.damage = damage;
       attackdata.threat = 0;
-      if(!isDefined(entity.knownattackers)) {
+      if(!isdefined(entity.knownattackers)) {
         entity.knownattackers = [];
       } else if(!isarray(entity.knownattackers)) {
         entity.knownattackers = array(entity.knownattackers);
@@ -887,7 +887,7 @@ function updateattackerslist(entity, newattacker, damage) {
       var_64e4a88a = attackdata;
     }
   }
-  if(isDefined(var_64e4a88a) && maxthreat > 0) {
+  if(isdefined(var_64e4a88a) && maxthreat > 0) {
     if(shouldswitchtonewthreat(entity, var_64e4a88a.attacker, maxthreat)) {
       thread warlorddangerousenemyattack(entity, var_64e4a88a.attacker, maxthreat);
     }
@@ -896,18 +896,18 @@ function updateattackerslist(entity, newattacker, damage) {
 }
 
 function checkifweshouldmove(entity) {
-  if(!isDefined(entity.knownattackers) || entity.knownattackers.size <= 1) {
+  if(!isdefined(entity.knownattackers) || entity.knownattackers.size <= 1) {
     return;
   }
   var_a8e832eb = 0;
   if(atpreferedpoint(entity)) {
-    if(!isDefined(entity.var_7e5dd3e4) || (gettime() - entity.var_7e5dd3e4) < 1) {
+    if(!isdefined(entity.var_7e5dd3e4) || (gettime() - entity.var_7e5dd3e4) < 1) {
       return;
     }
     var_a8e832eb = 1;
   }
   if(!var_a8e832eb) {
-    if(isDefined(entity.pathgoalpos)) {
+    if(isdefined(entity.pathgoalpos)) {
       if(distance2dsquared(entity.pathgoalpos, entity.origin) < (36 * 36) && (abs(entity.pathgoalpos[2] - entity.origin[2])) < 45) {
         var_a8e832eb = 1;
       }
@@ -953,7 +953,7 @@ function warlorddamageoverride(einflictor, eattacker, idamage, idflags, smeansof
   if(!isplayer(eattacker)) {
     idamage = int(idamage * 0.05);
   }
-  if(isDefined(smeansofdeath) && (smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_GRENADE")) {
+  if(isdefined(smeansofdeath) && (smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_GRENADE")) {
     idamage = int(idamage * 0.25);
   }
   updateattackerslist(entity, eattacker, idamage);
@@ -966,7 +966,7 @@ function warlorddamageoverride(einflictor, eattacker, idamage, idflags, smeansof
       clientfield::set("warlord_damage_state", 0);
     }
   }
-  if(!isDefined(entity.lastdamagetime)) {
+  if(!isdefined(entity.lastdamagetime)) {
     entity.lastdamagetime = 0;
   }
   if((gettime() - entity.lastdamagetime) > 1500) {
@@ -991,7 +991,7 @@ function warlordspawnsetup() {
   entity.currentmaxthreat = 0;
   entity.ignorerunandgundist = 1;
   entity.combatmode = "no_cover";
-  aiutility::addaioverridedamagecallback(entity, &warlorddamageoverride);
+  aiutility::addaioverridedamagecallback(entity, & warlorddamageoverride);
   entity.health = int(getscaledforplayers(entity.health, 2, 2.5, 3));
   entity.fullhealth = entity.health;
   entity.damagestatehealth = int(entity.fullhealth * 0.5);
@@ -1012,7 +1012,7 @@ function warlordspawnsetup() {
 }
 
 function warlord_projectile_watcher() {
-  if(!isDefined(self.missile_repulsor)) {
+  if(!isdefined(self.missile_repulsor)) {
     self.missile_repulsor = missile_createrepulsorent(self, 40000, 256, 1);
   }
   self thread repulsor_fx();
@@ -1020,12 +1020,12 @@ function warlord_projectile_watcher() {
 
 function remove_repulsor() {
   self endon("death");
-  if(isDefined(self.missile_repulsor)) {
+  if(isdefined(self.missile_repulsor)) {
     missile_deleteattractor(self.missile_repulsor);
     self.missile_repulsor = undefined;
   }
   wait(0.5);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self warlord_projectile_watcher();
   }
 }
@@ -1033,18 +1033,18 @@ function remove_repulsor() {
 function repulsor_fx() {
   self endon("death");
   self endon("killing_repulsor");
-  while(true) {
+  while (true) {
     self util::waittill_any("projectile_applyattractor", "play_meleefx");
-    playFXOnTag("vehicle/fx_quadtank_airburst", self, "tag_origin");
-    playFXOnTag("vehicle/fx_quadtank_airburst_ground", self, "tag_origin");
-    self playSound("wpn_trophy_alert");
+    playfxontag("vehicle/fx_quadtank_airburst", self, "tag_origin");
+    playfxontag("vehicle/fx_quadtank_airburst_ground", self, "tag_origin");
+    self playsound("wpn_trophy_alert");
     self thread remove_repulsor();
     self notify("killing_repulsor");
   }
 }
 
 function trigger_player_shock_fx() {
-  if(!isDefined(self._player_shock_fx_quadtank_melee)) {
+  if(!isdefined(self._player_shock_fx_quadtank_melee)) {
     self._player_shock_fx_quadtank_melee = 0;
   }
   self._player_shock_fx_quadtank_melee = !self._player_shock_fx_quadtank_melee;
@@ -1055,11 +1055,11 @@ function trigger_player_shock_fx() {
 
 function printstate(state, color, string) {
   if(getdvarint("") > 0) {
-    if(!isDefined(string)) {
+    if(!isdefined(string)) {
       string = "";
     }
-    if(!isDefined(state)) {
-      if(!isDefined(self) || !isDefined(self.lastmessage) || self.lastmessage != string) {
+    if(!isdefined(state)) {
+      if(!isdefined(self) || !isdefined(self.lastmessage) || self.lastmessage != string) {
         self.lastmessage = string;
         printtoprightln(string + gettime(), color, -1);
       }
@@ -1095,7 +1095,7 @@ function printstate(state, color, string) {
 
 function trystate(entity, state, bchecknew) {
   if(getdvarint("") > 0) {
-    if(!(isDefined(bchecknew) && isnewstate(entity, state))) {
+    if(!(isdefined(bchecknew) && isnewstate(entity, state))) {
       color = (1, 1, 1);
       entity printstate(state, color);
     }
@@ -1104,12 +1104,12 @@ function trystate(entity, state, bchecknew) {
 
 function setcurrentstate(entity, state, bcanupdate = 0) {
   if(getdvarint("") > 0) {
-    if(!isDefined(bcanupdate) || isnewstate(entity, state)) {
+    if(!isdefined(bcanupdate) || isnewstate(entity, state)) {
       color = (0, 1, 0);
     } else {
       color = (0, 1, 1);
     }
-    if(!isDefined(state)) {
+    if(!isdefined(state)) {
       color = (0, 0, 1);
       entity printstate(entity.currentstate, color, "");
     }
@@ -1127,10 +1127,10 @@ function setstatefailed(entity, state) {
 
 function isnewstate(entity, state) {
   bnewstate = 0;
-  if(!isDefined(entity.currentstate)) {
+  if(!isdefined(entity.currentstate)) {
     bnewstate = 1;
   } else {
-    if(!isDefined(state)) {
+    if(!isdefined(state)) {
       return 0;
     }
     if(entity.currentstate != state) {

@@ -84,11 +84,11 @@ do_digger_moving_earthquake_rumble(localClientNum, quake_ent) {
   quake_ent endon("entityshutdown");
   quake_ent endon("stop_moving_rumble");
   dist_sqd = 2500 * 2500;
-  quake_ent.headlight1 = playFXOnTag(localClientNum, level._effect["exca_beam"], quake_ent, "tag_fx_headlight1");
-  quake_ent.headlight2 = playFXOnTag(localClientNum, level._effect["exca_beam"], quake_ent, "tag_fx_headlight2");
-  quake_ent.blink1 = playFXOnTag(localClientNum, level._effect["exca_blink"], quake_ent, "tag_fx_blink1");
-  quake_ent.blink2 = playFXOnTag(localClientNum, level._effect["exca_blink"], quake_ent, "tag_fx_blink2");
-  quake_ent.tread_fx = playFXOnTag(localClientNum, level._effect["digger_treadfx_fwd"], quake_ent, "tag_origin");
+  quake_ent.headlight1 = playfxontag(localClientNum, level._effect["exca_beam"], quake_ent, "tag_fx_headlight1");
+  quake_ent.headlight2 = playfxontag(localClientNum, level._effect["exca_beam"], quake_ent, "tag_fx_headlight2");
+  quake_ent.blink1 = playfxontag(localClientNum, level._effect["exca_blink"], quake_ent, "tag_fx_blink1");
+  quake_ent.blink2 = playfxontag(localClientNum, level._effect["exca_blink"], quake_ent, "tag_fx_blink2");
+  quake_ent.tread_fx = playfxontag(localClientNum, level._effect["digger_treadfx_fwd"], quake_ent, "tag_origin");
   player = getLocalPlayers()[LocalClientNum];
   if(!isDefined(player)) {
     return;
@@ -151,8 +151,8 @@ do_digger_arm_fx(localClientNum, ent) {
   if(!isDefined(player)) {
     return;
   }
-  ent.blink1 = playFXOnTag(localClientNum, level._effect["exca_blink"], ent, "tag_fx_blink3");
-  ent.blink2 = playFXOnTag(localClientNum, level._effect["exca_blink"], ent, "tag_fx_blink4");
+  ent.blink1 = playfxontag(localClientNum, level._effect["exca_blink"], ent, "tag_fx_blink3");
+  ent.blink2 = playfxontag(localClientNum, level._effect["exca_blink"], ent, "tag_fx_blink4");
 }
 
 hide_diggers() {
@@ -174,8 +174,8 @@ show_diggers() {
 }
 
 digger_visibility_toggle(localclient, visible) {
-  diggers = getEntArray(localclient, "digger_body", "targetname");
-  tracks = getEntArray(localclient, "tracks", "targetname");
+  diggers = GetEntArray(localclient, "digger_body", "targetname");
+  tracks = getentarray(localclient, "tracks", "targetname");
   switch (visible) {
     case "hide":
       for(i = 0; i < tracks.size; i++) {
@@ -238,14 +238,14 @@ excavator_console(localClientNum, name) {
       str_off = "BCO";
       break;
   }
-  console.dlight = playFXOnTag(localClientNum, level._effect["panel_off"], console, "tag_origin");
+  console.dlight = playfxontag(localClientNum, level._effect["panel_off"], console, "tag_origin");
   while(1) {
     level waittill(str_wait);
     stopfx(localClientNum, console.dlight);
-    console.dlight = playFXOnTag(localClientNum, level._effect["panel_on"], console, "tag_origin");
+    console.dlight = playfxontag(localClientNum, level._effect["panel_on"], console, "tag_origin");
     level waittill(str_off);
     stopfx(localClientNum, console.dlight);
-    console.dlight = playFXOnTag(localClientNum, level._effect["panel_off"], console, "tag_origin");
+    console.dlight = playfxontag(localClientNum, level._effect["panel_off"], console, "tag_origin");
   }
 }
 

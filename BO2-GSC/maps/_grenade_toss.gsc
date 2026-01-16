@@ -17,13 +17,11 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
 
   self.grenadeammo++;
 
-  if(!isDefined(explode_time)) {
+  if(!isDefined(explode_time))
     explode_time = 4;
-  }
 
-  if(!isDefined(throw_tag)) {
+  if(!isDefined(throw_tag))
     throw_tag = "tag_inhand";
-  }
 
   angles = vectortoangles(pos - self.origin);
   self orientmode("face angle", angles[1]);
@@ -41,19 +39,17 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   if(!isDefined(anime)) {
     anime = "force_grenade_throw";
 
-    if(!isDefined(self.animname)) {
+    if(!isDefined(self.animname))
       self.animname = "force_grenader";
-    }
 
     if(!isDefined(level.scr_anim[self.animname]) || !isDefined(level.scr_anim[self.animname][anime])) {
       switch (self.a.special) {
         case "cover_crouch":
         case "none":
-          if(self.a.pose == "stand") {
+          if(self.a.pose == "stand")
             throw_anim = % stand_grenade_throw;
-          } else {
+          else
             throw_anim = % crouch_grenade_throw;
-          }
 
           gun_hand = "left";
           break;
@@ -71,19 +67,16 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
 
   function = ::force_grenade_toss_internal;
 
-  if(!maps\_anim::notetrack_customfunction_exists(self.animname, "fire", function, anime)) {
+  if(!maps\_anim::notetrack_customfunction_exists(self.animname, "fire", function, anime))
     maps\_anim::addnotetrack_customfunction(self.animname, "fire", function, anime);
-  }
 
   self maps\_anim::anim_single(self, anime);
 
-  if(self.animname == "force_grenader") {
+  if(self.animname == "force_grenader")
     self.animname = undefined;
-  }
 
-  if(isDefined(og_grenadeweapon)) {
+  if(isDefined(og_grenadeweapon))
     self.grenadeweapon = og_grenadeweapon;
-  }
 
   self notify("forced_grenade_thrown");
   return true;

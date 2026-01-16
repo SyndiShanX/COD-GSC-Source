@@ -10,6 +10,7 @@
 #include scripts\core_common\string_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace val;
 
 autoexec __init__system__() {
@@ -156,7 +157,7 @@ private _push_value(str_id, str_name, value) {
   }
 
   arrayinsert(self.values[str_name], {
-    #str_id: str_id,
+    #str_id: str_id, 
     #value: value
   }, 0);
 }
@@ -488,3 +489,4 @@ display_value(index, str_name, str_id, value, b_valid, on_hud) {
 
   print3d(self.origin - (0, 0, index * 8), str_value, color, 1, 0.3, 1);
 }
+

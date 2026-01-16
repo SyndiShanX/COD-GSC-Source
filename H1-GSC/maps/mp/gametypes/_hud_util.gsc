@@ -5,21 +5,19 @@
 *******************************************/
 
 setparent(var_0) {
-  if(isDefined(self.parent) && self.parent == var_0) {
+  if(isdefined(self.parent) && self.parent == var_0) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isdefined(self.parent))
     self.parent removechild(self);
-  }
 
   self.parent = var_0;
   self.parent addchild(self);
 
-  if(isDefined(self.point)) {
+  if(isdefined(self.point))
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  } else {
+  else
     setpoint("TOPLEFT");
-  }
 }
 
 getparent() {
@@ -44,70 +42,57 @@ removechild(var_0) {
 }
 
 setpoint(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4)) {
+  if(!isdefined(var_4))
     var_4 = 0;
-  }
 
   var_5 = getparent();
 
-  if(var_4) {
+  if(var_4)
     self moveovertime(var_4);
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 0;
-  }
 
   self.xoffset = var_2;
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = 0;
-  }
 
   self.yoffset = var_3;
   self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var_0, "TOP")) {
+  if(issubstr(var_0, "TOP"))
     self.aligny = "top";
-  }
 
-  if(issubstr(var_0, "BOTTOM")) {
+  if(issubstr(var_0, "BOTTOM"))
     self.aligny = "bottom";
-  }
 
-  if(issubstr(var_0, "LEFT")) {
+  if(issubstr(var_0, "LEFT"))
     self.alignx = "left";
-  }
 
-  if(issubstr(var_0, "RIGHT")) {
+  if(issubstr(var_0, "RIGHT"))
     self.alignx = "right";
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = var_0;
-  }
 
   self.relativepoint = var_1;
   var_6 = "center_adjustable";
   var_7 = "middle";
 
-  if(issubstr(var_1, "TOP")) {
+  if(issubstr(var_1, "TOP"))
     var_7 = "top_adjustable";
-  }
 
-  if(issubstr(var_1, "BOTTOM")) {
+  if(issubstr(var_1, "BOTTOM"))
     var_7 = "bottom_adjustable";
-  }
 
-  if(issubstr(var_1, "LEFT")) {
+  if(issubstr(var_1, "LEFT"))
     var_6 = "left_adjustable";
-  }
 
-  if(issubstr(var_1, "RIGHT")) {
+  if(issubstr(var_1, "RIGHT"))
     var_6 = "right_adjustable";
-  }
 
   if(var_5 == level.uiparent) {
     self.horzalign = var_6;
@@ -123,19 +108,17 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_6 == "center" || var_5.alignx == "center") {
     var_8 = int(var_5.width / 2);
 
-    if(var_6 == "left_adjustable" || var_5.alignx == "right") {
+    if(var_6 == "left_adjustable" || var_5.alignx == "right")
       var_9 = -1;
-    } else {
+    else
       var_9 = 1;
-    }
   } else {
     var_8 = var_5.width;
 
-    if(var_6 == "left_adjustable") {
+    if(var_6 == "left_adjustable")
       var_9 = -1;
-    } else {
+    else
       var_9 = 1;
-    }
   }
 
   self.x = var_5.x + var_8 * var_9;
@@ -146,19 +129,17 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_7 == "middle" || var_5.aligny == "middle") {
     var_10 = int(var_5.height / 2);
 
-    if(var_7 == "top_adjustable" || var_5.aligny == "bottom") {
+    if(var_7 == "top_adjustable" || var_5.aligny == "bottom")
       var_11 = -1;
-    } else {
+    else
       var_11 = 1;
-    }
   } else {
     var_10 = var_5.height;
 
-    if(var_7 == "top_adjustable") {
+    if(var_7 == "top_adjustable")
       var_11 = -1;
-    } else {
+    else
       var_11 = 1;
-    }
   }
 
   self.y = var_5.y + var_10 * var_11;
@@ -181,45 +162,40 @@ setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if(self.alignx == "left") {
+  if(self.alignx == "left")
     self.bar.x = self.x;
-  } else if(self.alignx == "right") {
+  else if(self.alignx == "right")
     self.bar.x = self.x - self.width;
-  } else {
+  else
     self.bar.x = self.x - int(self.width / 2);
-  }
 
-  if(self.aligny == "top") {
+  if(self.aligny == "top")
     self.bar.y = self.y;
-  } else if(self.aligny == "bottom") {
+  else if(self.aligny == "bottom")
     self.bar.y = self.y;
-  }
 
   updatebar(self.bar.frac);
 }
 
 updatebar(var_0, var_1) {
-  if(self.elemtype == "bar") {
+  if(self.elemtype == "bar")
     updatebarscale(var_0, var_1);
-  }
 }
 
 updatebarscale(var_0, var_1) {
   var_2 = int(self.width * var_0 + 0.5);
 
-  if(!var_2) {
+  if(!var_2)
     var_2 = 1;
-  }
 
   self.bar.frac = var_0;
   self.bar setshader(self.bar.shader, var_2, self.height);
 
-  if(isDefined(var_1) && var_2 < self.width) {
-    if(var_1 > 0) {
+  if(isdefined(var_1) && var_2 < self.width) {
+    if(var_1 > 0)
       self.bar scaleovertime((1 - var_0) / var_1, self.width, self.height);
-    } else if(var_1 < 0) {
+    else if(var_1 < 0)
       self.bar scaleovertime(var_0 / (-1 * var_1), 1, self.height);
-    }
   }
 
   self.bar.rateofchange = var_1;
@@ -245,11 +221,10 @@ createfontstring(var_0, var_1) {
 }
 
 createserverfontstring(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_3 = newteamhudelem(var_2);
-  } else {
+  else
     var_3 = newhudelem();
-  }
 
   var_3.elemtype = "font";
   var_3.font = var_0;
@@ -268,11 +243,10 @@ createserverfontstring(var_0, var_1, var_2) {
 }
 
 createservertimer(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_3 = newteamhudelem(var_2);
-  } else {
+  else
     var_3 = newhudelem();
-  }
 
   var_3.elemtype = "timer";
   var_3.font = var_0;
@@ -323,7 +297,7 @@ createicon(var_0, var_1, var_2) {
   var_3 setparent(level.uiparent);
   var_3.hidden = 0;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     var_3 setshader(var_0, var_1, var_2);
     var_3.shader = var_0;
   }
@@ -332,11 +306,10 @@ createicon(var_0, var_1, var_2) {
 }
 
 createservericon(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     var_4 = newteamhudelem(var_3);
-  } else {
+  else
     var_4 = newhudelem();
-  }
 
   var_4.elemtype = "icon";
   var_4.x = 0;
@@ -351,7 +324,7 @@ createservericon(var_0, var_1, var_2, var_3) {
   var_4 setparent(level.uiparent);
   var_4.hidden = 0;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     var_4 setshader(var_0, var_1, var_2);
     var_4.shader = var_0;
   }
@@ -360,11 +333,10 @@ createservericon(var_0, var_1, var_2, var_3) {
 }
 
 createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     var_6 = newteamhudelem(var_4);
-  } else {
+  else
     var_6 = newhudelem();
-  }
 
   var_6.x = 0;
   var_6.y = 0;
@@ -375,15 +347,13 @@ createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setshader("progress_bar_fill", var_1, var_2);
   var_6.hidden = 0;
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     var_6.flashfrac = var_3;
-  }
 
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     var_7 = newteamhudelem(var_4);
-  } else {
+  else
     var_7 = newhudelem();
-  }
 
   var_7.elemtype = "bar";
   var_7.x = 0;
@@ -414,9 +384,8 @@ createbar(var_0, var_1, var_2, var_3) {
   var_4 setshader("progress_bar_fill", var_1, var_2);
   var_4.hidden = 0;
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     var_4.flashfrac = var_3;
-  }
 
   var_5 = newclienthudelem(self);
   var_5.elemtype = "bar";
@@ -438,33 +407,28 @@ createbar(var_0, var_1, var_2, var_3) {
 getcurrentfraction() {
   var_0 = self.bar.frac;
 
-  if(isDefined(self.bar.rateofchange)) {
+  if(isdefined(self.bar.rateofchange)) {
     var_0 = var_0 + (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange / 1000;
 
-    if(var_0 > 1) {
+    if(var_0 > 1)
       var_0 = 1;
-    }
 
-    if(var_0 < 0) {
+    if(var_0 < 0)
       var_0 = 0;
-    }
   }
 
   return var_0;
 }
 
 createprimaryprogressbar(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 0;
-  }
 
-  if(self issplitscreenplayer()) {
+  if(self issplitscreenplayer())
     var_1 = var_1 + 20;
-  }
 
   var_2 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
   var_2 setpoint("CENTER", undefined, level.primaryprogressbarx + var_0, level.primaryprogressbary + var_1);
@@ -472,17 +436,14 @@ createprimaryprogressbar(var_0, var_1) {
 }
 
 createprimaryprogressbartext(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 0;
-  }
 
-  if(self issplitscreenplayer()) {
+  if(self issplitscreenplayer())
     var_1 = var_1 + 20;
-  }
 
   var_2 = createfontstring("hudbig", level.primaryprogressbarfontsize);
   var_2 setpoint("CENTER", undefined, level.primaryprogressbartextx + var_0, level.primaryprogressbartexty + var_1);
@@ -512,16 +473,14 @@ hideelem() {
   }
   self.hidden = 1;
 
-  if(self.alpha != 0) {
+  if(self.alpha != 0)
     self.alpha = 0;
-  }
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     self.bar.hidden = 1;
 
-    if(self.bar.alpha != 0) {
+    if(self.bar.alpha != 0)
       self.bar.alpha = 0;
-    }
   }
 }
 
@@ -532,15 +491,13 @@ showelem() {
   self.hidden = 0;
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
-    if(self.alpha != 0.5) {
+    if(self.alpha != 0.5)
       self.alpha = 0.5;
-    }
 
     self.bar.hidden = 0;
 
-    if(self.bar.alpha != 1) {
+    if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-    }
   } else if(self.alpha != 1)
     self.alpha = 1;
 }
@@ -548,11 +505,10 @@ showelem() {
 flashthread() {
   self endon("death");
 
-  if(!self.hidden) {
+  if(!self.hidden)
     self.alpha = 1;
-  }
 
-  for(;;) {
+  for (;;) {
     if(self.frac >= self.flashfrac) {
       if(!self.hidden) {
         self fadeovertime(0.3);
@@ -566,9 +522,8 @@ flashthread() {
       continue;
     }
 
-    if(!self.hidden && self.alpha != 1) {
+    if(!self.hidden && self.alpha != 1)
       self.alpha = 1;
-    }
 
     wait 0.05;
   }
@@ -577,19 +532,16 @@ flashthread() {
 destroyelem() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < self.children.size; var_1++) {
-    if(isDefined(self.children[var_1])) {
+  for (var_1 = 0; var_1 < self.children.size; var_1++) {
+    if(isdefined(self.children[var_1]))
       var_0[var_0.size] = self.children[var_1];
-    }
   }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] setparent(getparent());
-  }
 
-  if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
+  if(self.elemtype == "bar" || self.elemtype == "bar_shader")
     self.bar destroy();
-  }
 
   self destroy();
 }
@@ -621,7 +573,7 @@ setsize(var_0, var_1) {
 }
 
 updatechildren() {
-  for(var_0 = 0; var_0 < self.children.size; var_0++) {
+  for (var_0 = 0; var_0 < self.children.size; var_0++) {
     var_1 = self.children[var_0];
     var_1 setpoint(var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
@@ -633,7 +585,7 @@ transitionreset() {
 
   if(self.elemtype == "font") {
     self.fontscale = self.basefontscale;
-    self.label = &"";
+    self.label = & "";
   } else if(self.elemtype == "icon")
     self setshader(self.shader, self.width, self.height);
 
@@ -670,9 +622,8 @@ transitionpulsefxin(var_0, var_1) {
 }
 
 transitionslidein(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = "left";
-  }
 
   switch (var_1) {
     case "left":
@@ -695,9 +646,8 @@ transitionslidein(var_0, var_1) {
 }
 
 transitionslideout(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = "left";
-  }
 
   var_2 = self.xoffset;
   var_3 = self.yoffset;
@@ -738,11 +688,10 @@ transitionzoomout(var_0) {
 transitionfadein(var_0) {
   self fadeovertime(var_0);
 
-  if(isDefined(self.maxalpha)) {
+  if(isdefined(self.maxalpha))
     self.alpha = self.maxalpha;
-  } else {
+  else
     self.alpha = 1;
-  }
 }
 
 transitionfadeout(var_0) {
@@ -751,47 +700,41 @@ transitionfadeout(var_0) {
 }
 
 istimelimitedchallenge(var_0) {
-  if(issubstr(var_0, "ch_limited")) {
+  if(issubstr(var_0, "ch_limited"))
     return 1;
-  }
 
   return 0;
 }
 
 isweaponclasschallenge(var_0) {
-  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills"))
     return 1;
-  }
 
-  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills"))
     return 1;
-  }
 
-  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots"))
     return 1;
-  }
 
   return 0;
 }
 
 ch_getprogress(var_0) {
-  if(isweaponclasschallenge(var_0)) {
+  if(isweaponclasschallenge(var_0))
     return processviaitemstatsprogress(var_0);
-  } else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_"))
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", "ch_daily");
-  } else {
+  else
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0);
-  }
 }
 
 ch_getstate(var_0) {
-  if(isweaponclasschallenge(var_0)) {
+  if(isweaponclasschallenge(var_0))
     return processviaitemstatsstate(var_0);
-  } else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_"))
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily");
-  } else {
+  else
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0);
-  }
 }
 
 ch_setprogress(var_0, var_1) {
@@ -800,30 +743,27 @@ ch_setprogress(var_0, var_1) {
   }
   var_2 = var_1;
 
-  if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  if(maps\mp\_utility::isstrstart(var_0, "ch_daily_"))
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", "ch_daily", var_2);
-  } else {
+  else
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0, var_2);
-  }
 }
 
 ch_setstate(var_0, var_1) {
   if(isweaponclasschallenge(var_0)) {
     return;
   }
-  if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  if(maps\mp\_utility::isstrstart(var_0, "ch_daily_"))
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily", var_1);
-  } else {
+  else
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0, var_1);
-  }
 }
 
 ch_gettarget(var_0, var_1) {
   var_2 = tablelookup("mp\allChallengesTable.csv", 0, var_0, 10 + (var_1 - 1) * 2);
 
-  if(isDefined(var_2) && var_2 != "") {
+  if(isdefined(var_2) && var_2 != "")
     return int(var_2);
-  }
 
   return 0;
 }
@@ -838,28 +778,25 @@ displayclientstring(var_0, var_1, var_2, var_3) {
   var_4 settext(var_0);
   common_scripts\utility::waittill_any(var_3, "joined_team", "death");
 
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     var_4 destroyelem();
-  }
 }
 
 processviaitemstatsprogress(var_0) {
-  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills"))
     return totalallweaponvariants(var_0, "hipfirekills");
-  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
+  else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills"))
     return totalallweaponvariants(var_0, "kills");
-  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
+  else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots"))
     return totalallweaponvariants(var_0, "headShots");
-  }
 }
 
 processviaitemstatsstate(var_0) {
   var_1 = processviaitemstatsprogress(var_0);
   var_2 = 1;
 
-  for(var_3 = ch_gettarget(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = ch_gettarget(var_0, var_2)) {
+  for (var_3 = ch_gettarget(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = ch_gettarget(var_0, var_2))
     var_2++;
-  }
 
   return var_2;
 }
@@ -869,36 +806,32 @@ totalallweaponvariants(var_0, var_1) {
   var_3 = 0;
   var_4 = strtok(var_0, "_");
 
-  for(var_5 = 0; var_5 < var_4.size - 1; var_5++) {
+  for (var_5 = 0; var_5 < var_4.size - 1; var_5++) {
     if(var_4[var_5] == var_1) {
       var_2 = var_4[var_5 + 1];
       break;
     }
   }
 
-  if(isDefined(var_2)) {
-    for(var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2); var_6 >= 0; var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2, var_6 - 1)) {
+  if(isdefined(var_2)) {
+    for (var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2); var_6 >= 0; var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2, var_6 - 1)) {
       var_7 = tablelookupbyrow("mp\statstable.csv", var_6, 4);
       var_3 = var_3 + self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", var_7, var_1);
     }
 
-    if(var_1 == "kills" && isDefined(self.trackingweaponkills)) {
+    if(var_1 == "kills" && isdefined(self.trackingweaponkills))
       var_3 = var_3 + self.trackingweaponkills;
-    }
 
-    if(var_1 == "hipfirekills" && isDefined(self.trackingweaponhipfirekills)) {
+    if(var_1 == "hipfirekills" && isdefined(self.trackingweaponhipfirekills))
       var_3 = var_3 + self.trackingweaponhipfirekills;
-    }
 
-    if(var_1 == "headShots" && isDefined(self.trackingweaponheadshots)) {
+    if(var_1 == "headShots" && isdefined(self.trackingweaponheadshots))
       var_3 = var_3 + self.trackingweaponheadshots;
-    }
 
     var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "attachUnlock_" + var_1, var_2);
 
-    if(var_8 > var_3) {
+    if(var_8 > var_3)
       var_8 = 0;
-    }
 
     return var_3 - var_8;
   }

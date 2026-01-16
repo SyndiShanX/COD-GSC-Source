@@ -233,7 +233,7 @@ ape_death_event(zombie) {
   if(!isDefined(zombie)) {
     return;
   }
-  zombie playSound("zmb_simianaut_death");
+  zombie PlaySound("zmb_simianaut_death");
   if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
     zombie.attacker maps\_zombietron_score::player_add_points(level.zombie_vars["zombie_points_boss"]);
   }
@@ -301,12 +301,12 @@ ape_think() {
   self.maxsightdistsqrd = 96 * 96;
   visionSetNaked("huey_city", 1);
   maps\createart\zombietron_art::do_single_lightning();
-  playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
+  Playfx(level._effect["ape_lightning_spawn"], spawnOrigin);
   playsoundatposition("zmb_ape_prespawn", spawnOrigin);
   wait(.5);
-  playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
+  Playfx(level._effect["ape_lightning_spawn"], spawnOrigin);
   wait(.5);
-  playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
+  Playfx(level._effect["ape_lightning_spawn"], spawnOrigin);
   playsoundatposition("zmb_ape_prespawn", spawnOrigin);
   wait(1.5);
   self notify("drop_me");
@@ -324,7 +324,7 @@ ape_think() {
   self thread set_ape_run_cycle();
   self.is_activated = true;
   flag_set("boss_is_spawned");
-  playFXOnTag(level._effect["boss"], self, "tag_origin");
+  PlayFxOnTag(level._effect["boss"], self, "tag_origin");
   while(true) {
     specialAttackChance = 10;
     if(isDefined(self.favoriteenemy)) {
@@ -338,7 +338,7 @@ ape_think() {
         self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_taunt, % body, 1, .1, 1);
         wait time;
         self ClearAnim( % ai_zombie_simianaut_taunt, 0.2);
-        self playSound("zmb_speed_boost_activate");
+        self PlaySound("zmb_speed_boost_activate");
         Earthquake(0.5, 0.75, self.origin, 1000);
         PlayRumbleOnPosition("explosion_generic", self.origin);
         curdir = anglesToForward(self.angles);
@@ -353,7 +353,7 @@ ape_think() {
         self thread animscripts\zombie_move::moveAgain();
         continue;
       }
-      if(isDefined(self.favoriteenemy.heli)) {
+      if(isDefineD(self.favoriteenemy.heli)) {
         specialAttackChance += 45;
       }
       if(randomInt(100) < specialAttackChance) {
@@ -366,8 +366,8 @@ ape_think() {
         self ClearAnim( % ai_zombie_simianaut_chest_beat, 0.2);
         Earthquake(0.5, 0.75, self.origin, 1000);
         PlayRumbleOnPosition("explosion_generic", self.origin);
-        self playSound("evt_turret_takeoff");
-        playFXOnTag(level._effect["boss_takeoff"], self, "tag_origin");
+        self PlaySound("evt_turret_takeoff");
+        PlayFxOnTag(level._effect["boss_takeoff"], self, "tag_origin");
         height = 800;
         timeMS = height / 1000 * 3000;
         trigger = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 65, 50);
@@ -375,9 +375,9 @@ ape_think() {
         trigger LinkTo(self);
         trigger thread maps\_zombietron_pickups::shield_trigger_think(self);
         self move_to_position_over_time(self.favoriteenemy.origin, timeMS, height);
-        self playSound("zmb_simianaut_groundpound");
+        self PlaySound("zmb_simianaut_groundpound");
         PlayRumbleOnPosition("explosion_generic", self.origin);
-        playFXOnTag(level._effect["boss_groundhit"], self, "tag_origin");
+        PlayFxOnTag(level._effect["boss_groundhit"], self, "tag_origin");
         self notify("killanimscript");
         trigger Delete();
         self thread maps\_zombietron_spawner::find_flesh();
@@ -454,7 +454,7 @@ ape_shielder() {
   level endon("exit_taken");
   level endon("ape_exited");
   while(1) {
-    playFXOnTag(level._effect["red_shield"], self, "tag_origin");
+    PlayFxOnTag(level._effect["red_shield"], self, "tag_origin");
     wait 3;
   }
 }

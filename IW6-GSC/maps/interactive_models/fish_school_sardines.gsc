@@ -101,9 +101,8 @@ main() {
   var_0.line.tagmodels["30"] = 0.5;
   var_0.line.tagmodels["31"] = 0.5;
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive["sardines"] = var_0;
   thread sardines(var_0);
@@ -113,9 +112,8 @@ sardines(var_0) {
   precachemodel(var_0.piece.model);
 
   foreach(var_2 in var_0.fish.model) {
-    foreach(var_4 in var_2) {
-      precachemodel(var_4);
-    }
+    foreach(var_4 in var_2)
+    precachemodel(var_4);
   }
 
   precachestring(&"PLATFORM_HOLD_TO_USE");
@@ -125,9 +123,8 @@ sardines(var_0) {
     level._interactive[var_0.name + "_setup"] = 1;
     var_0.line.animlengths = [];
 
-    for(var_7 = 0; var_7 < var_0.line.animspeeds.size; var_7++) {
+    for(var_7 = 0; var_7 < var_0.line.animspeeds.size; var_7++)
       var_0.line.animlengths[var_7] = getanimlength(var_0.line.anims[var_7]);
-    }
 
     var_8 = getEntArray(var_0.targetname, "targetname");
 
@@ -147,13 +144,12 @@ sardines_line(var_0) {
   self hideallparts();
   var_1 = [];
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     var_1 = getvehiclenodearray(self.target, "targetname");
-  }
 
-  if(var_1.size >= 1) {
+  if(var_1.size >= 1)
     var_2 = common_scripts\utility::getclosest(self.origin, var_1);
-  } else {
+  else {
     var_1 = getvehiclenodearray("fish_path", "script_noteworthy");
     var_2 = undefined;
 
@@ -172,11 +168,10 @@ sardines_line(var_0) {
   var_9 = int(var_8 / var_0.line.spacing + 0.5);
   self.spacing = var_8 / var_9;
 
-  if(isDefined(self.interactive_number)) {
+  if(isDefined(self.interactive_number))
     self.numpieces = int(min(var_9, self.interactive_number));
-  } else {
+  else
     self.numpieces = var_9;
-  }
 
   sardines_linemonitortriggers(var_0);
 }
@@ -184,9 +179,8 @@ sardines_line(var_0) {
 sardines_linemonitortriggers(var_0) {
   var_1 = undefined;
 
-  if(isDefined(self.target)) {
+  if(isDefined(self.target))
     var_1 = getEntArray(self.target, "targetname");
-  }
 
   var_2 = 0;
 
@@ -194,9 +188,8 @@ sardines_linemonitortriggers(var_0) {
     var_3 = [];
 
     foreach(var_5 in var_1) {
-      if(!isDefined(var_5.script_triggername)) {
+      if(!isDefined(var_5.script_triggername))
         var_5.script_triggername = "start";
-      }
 
       var_5 thread maps\interactive_models\_interactive_utility::waittill_notify("trigger", self, var_5.script_triggername, undefined, 1);
     }
@@ -228,11 +221,10 @@ sardines_linethinkloop(var_0, var_1) {
   sardines_linespawnpieces(var_0);
 
   if(self.startstopstate == "start_instant") {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_6 = self.spacing * var_1;
-    } else {
+    else
       var_6 = self.spacing * self.numpieces;
-    }
 
     self.startstopstate = "started";
 
@@ -245,9 +237,8 @@ sardines_linethinkloop(var_0, var_1) {
         var_6 = var_6 - self.spacing;
         var_8.distance = var_6;
 
-        if(isDefined(var_2)) {
+        if(isDefined(var_2))
           var_2--;
-        }
       }
     }
   } else {}
@@ -255,9 +246,9 @@ sardines_linethinkloop(var_0, var_1) {
   self.startstopstate = "started";
 
   while(!isDefined(var_2) || var_2 > 0 || self.numberoffishinexistence > 0) {
-    if(self.startstopstate == "stop" && (!isDefined(var_2) || var_2 > var_0.line.taper)) {
+    if(self.startstopstate == "stop" && (!isDefined(var_2) || var_2 > var_0.line.taper))
       var_2 = var_0.line.taper;
-    } else if(self.startstopstate == "stop_instant") {
+    else if(self.startstopstate == "stop_instant") {
       break;
     }
 
@@ -272,9 +263,8 @@ sardines_linethinkloop(var_0, var_1) {
           var_8 sardines_lineattachmodelsandtaperends(var_0, self.numberoffishinexistence, var_2);
         }
 
-        if(isDefined(var_2)) {
+        if(isDefined(var_2))
           var_2--;
-        }
       }
 
       var_8.distance = var_8.distance + 1;
@@ -285,15 +275,13 @@ sardines_linethinkloop(var_0, var_1) {
         var_8.animoffset = self.pieces[maps\interactive_models\_interactive_utility::wrap(var_10 + 1, self.pieces.size)].animoffset - var_0.line.animoffset;
         var_8.animoffset = var_8.animoffset + 1 - int(var_8.animoffset + 1);
 
-        for(var_12 = 0; var_12 < var_0.line.anims.size; var_12++) {
+        for(var_12 = 0; var_12 < var_0.line.anims.size; var_12++)
           var_8 setanimtime(var_0.line.anims[var_12], var_8.animoffset);
-        }
 
         var_8 sardines_piecesetmodelsfromarray(var_0, var_0.line.tagmodels, undefined);
 
-        if(var_8.visible) {
+        if(var_8.visible)
           self.numberoffishinexistence--;
-        }
 
         var_8.visible = 0;
         var_11 = 0;
@@ -320,11 +308,10 @@ sardines_linethinkloop(var_0, var_1) {
 }
 
 sardines_lineattachmodelsandtaperends(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_3 = min(var_1, var_2);
-  } else {
+  else
     var_3 = var_1;
-  }
 
   if(var_3 < var_0.line.taper) {
     if(var_3 == 2) {
@@ -354,9 +341,8 @@ sardines_linespawnpieces(var_0) {
       var_3 useanimtree(var_0.piece.animtree);
       var_3 setanim(var_0.line.anim_base, 1, 0.1, 1);
 
-      for(var_4 = 0; var_4 < var_0.line.anims.size; var_4++) {
+      for(var_4 = 0; var_4 < var_0.line.anims.size; var_4++)
         var_3 setanim(var_0.line.anims[var_4], 0.01, 0.1, 0);
-      }
 
       if(var_2 == 0) {
         var_5 = 0;
@@ -364,18 +350,16 @@ sardines_linespawnpieces(var_0) {
       } else {
         var_5 = self.pieces[var_2 - 1].offset;
 
-        if(var_2 > 1) {
+        if(var_2 > 1)
           var_6 = self.pieces[var_2 - 2].offset;
-        } else {
+        else
           var_6 = 0;
-        }
       }
 
-      if(var_2 == self.numpieces - 1) {
+      if(var_2 == self.numpieces - 1)
         var_3.offset = 0.5 * (var_5 + self.pieces[0].offset);
-      } else {
+      else
         var_3.offset = 0.85 * (randomfloatrange(-18, 18) + 1.5 * var_5 - 0.5 * var_6);
-      }
 
       var_3.distance = var_1;
       var_1 = var_1 - self.spacing;
@@ -390,9 +374,8 @@ sardines_linespawnpieces(var_0) {
       var_7 = var_3.animoffset + var_3.distance / 20;
       var_7 = var_7 - int(var_7);
 
-      for(var_4 = 0; var_4 < var_0.line.anims.size; var_4++) {
+      for(var_4 = 0; var_4 < var_0.line.anims.size; var_4++)
         var_3 setanimtime(var_0.line.anims[var_4], var_7);
-      }
 
       var_3.visible = 0;
     }
@@ -400,9 +383,8 @@ sardines_linespawnpieces(var_0) {
 }
 
 sardines_linedeletepieces() {
-  foreach(var_1 in self.pieces) {
-    var_1 delete();
-  }
+  foreach(var_1 in self.pieces)
+  var_1 delete();
 
   self.pieces = undefined;
 }
@@ -420,9 +402,9 @@ sardines_ball(var_0) {
   self.currectlocindex = 0;
   var_1 = maps\_utility::getstruct_delete(self.target, "targetname");
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     self.locations[1] = self.origin + (-800, 0, 0);
-  } else {
+  else {
     while(isDefined(var_1)) {
       self.locations[self.locations.size] = var_1.origin + (0, 0, 32);
 
@@ -465,9 +447,8 @@ sardines_ball(var_0) {
       self.pieces[var_2] setanim(var_0.fish.anims["idle_loop"], 1, 0.1, 1);
       var_6 = var_0.fish.model[2]["grey2"];
 
-      if(var_3 == 1 || var_3 == 3) {
+      if(var_3 == 1 || var_3 == 3)
         var_6 = var_0.fish.model[2]["bright"];
-      }
 
       self.pieces[var_2].fish_model = [];
       self.pieces[var_2] thread sardines_piecesetmodels(var_6, var_0.ball.numtags, var_0.piece.tagprefix, 0);
@@ -507,9 +488,8 @@ sardines_piecesetmodels(var_0, var_1, var_2, var_3) {
   var_4 = var_3 / var_1;
 
   for(var_5 = 1; var_5 <= var_1; var_5++) {
-    if(isDefined(self.fish_model[var_5])) {
+    if(isDefined(self.fish_model[var_5]))
       self detach(self.fish_model[var_5], var_2 + var_5);
-    }
 
     self attach(var_0, var_2 + var_5);
     self.fish_model[var_5] = var_0;
@@ -525,15 +505,13 @@ sardines_piecesetmodelsfromarray(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   self endon("death");
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 0;
-  }
 
   var_5 = var_4 / var_1.size;
   var_6 = getarraykeys(var_1);
@@ -546,27 +524,23 @@ sardines_piecesetmodelsfromarray(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(self.brightness)) {
       var_10 = int(var_1[var_9] + self.thicknessoffset + (2 * var_7 - 1));
 
-      if(var_10 >= var_0.fish.model.size) {
+      if(var_10 >= var_0.fish.model.size)
         var_10 = var_0.fish.model.size - 1;
-      }
 
       if(var_10 >= 0) {
-        if(isDefined(var_0.fish.model[var_10])) {
+        if(isDefined(var_0.fish.model[var_10]))
           self detach(var_0.fish.model[var_10][self.brightness], var_0.piece.tagprefix + var_9);
-        }
       }
     }
 
     var_11 = int(var_1[var_9] + var_3 + (2 * var_7 - 1));
 
-    if(var_11 >= var_0.fish.model.size) {
+    if(var_11 >= var_0.fish.model.size)
       var_11 = var_0.fish.model.size - 1;
-    }
 
     if(var_11 >= 0) {
-      if(isDefined(var_0.fish.model[var_11])) {
+      if(isDefined(var_0.fish.model[var_11]))
         self attach(var_0.fish.model[var_11][var_2], var_0.piece.tagprefix + var_9);
-      }
 
       wait(var_5);
     }
@@ -584,16 +558,14 @@ sardines_ballrotate(var_0) {
   for(;;) {
     var_1 = var_1 + self.rotationspeed;
 
-    if(var_1 > 360) {
+    if(var_1 > 360)
       var_1 = var_1 - 360;
-    }
 
     self.angles = (0, var_1, 0);
 
     for(var_2 = 0; var_2 < var_0.ball.rings.size; var_2++) {
-      if(!self.rings_isspread[var_2]) {
+      if(!self.rings_isspread[var_2])
         self.rings_isspread[var_2] = sardines_spreadring(var_0, self, var_2);
-      }
     }
 
     common_scripts\utility::waitframe();
@@ -714,9 +686,8 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
   foreach(var_23 in var_18) {
     var_24 = undefined;
 
-    if(var_14 > 400) {
+    if(var_14 > 400)
       var_24 = common_scripts\_csplines::cspline_makepathtopoint(var_23.midpoint, var_23.endpoint, var_23.midvel, var_23.endvel);
-    }
 
     var_25 = [];
     var_26 = [];
@@ -736,9 +707,8 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
       var_5 = var_27[var_30];
       var_31 = var_29 + var_28 * var_5;
 
-      if(var_26[var_5] > var_31) {
+      if(var_26[var_5] > var_31)
         var_29 = var_29 + (var_26[var_5] - var_31);
-      }
     }
 
     var_29 = var_29 / 2;
@@ -753,11 +723,10 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
       var_23.pieces[var_5] setanimknob(var_0.line.anim_base, 1, 0.3);
       var_23.pieces[var_5] thread sardines_setpathanimstarttimes(var_5, var_0.line.anims);
 
-      if(var_5 == 0 || var_5 == var_23.pieces.size - 1) {
+      if(var_5 == 0 || var_5 == var_23.pieces.size - 1)
         var_23.pieces[var_5] thread sardines_pieceswimpath(var_0, var_25[var_5], var_3, undefined, var_24, 3);
-      } else {
+      else
         var_23.pieces[var_5] thread sardines_pieceswimpath(var_0, var_25[var_5], var_3, undefined, var_24);
-      }
 
       if(isDefined(var_23.pieces[var_5].ball_ring)) {
         self.rings[var_23.pieces[var_5].ball_ring][var_23.pieces[var_5].ball_i] = undefined;
@@ -772,9 +741,8 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
 
   self.origin = self.origin + var_1;
 
-  for(var_5 = 0; var_5 < self.pieces.size; var_5++) {
+  for(var_5 = 0; var_5 < self.pieces.size; var_5++)
     self.pieces[var_5] thread sardines_ballwaitthenaddpiece(var_0, self, var_5);
-  }
 }
 
 sardines_setpathanimstarttimes(var_0, var_1) {
@@ -784,23 +752,20 @@ sardines_setpathanimstarttimes(var_0, var_1) {
   var_2 = var_0 * 5 / 24;
   var_2 = var_2 - int(var_2);
 
-  for(var_0 = 0; var_0 < var_1.size; var_0++) {
+  for(var_0 = 0; var_0 < var_1.size; var_0++)
     self setanimtime(var_1[var_0], var_2);
-  }
 }
 
 sardines_pieceswimpath(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_5)) {
+  if(!isDefined(var_5))
     var_5 = 1;
-  }
 
   self endon("death");
   self endon("stop_path");
   var_6 = undefined;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_6 = var_3.origin;
-  }
 
   self.path = var_1;
   self.path_distance = 0;
@@ -810,9 +775,8 @@ sardines_pieceswimpath(var_0, var_1, var_2, var_3, var_4, var_5) {
   while(self.path_distance < var_7 - self.speed / 2) {
     self.path_distance = self.path_distance + self.speed;
 
-    if(self.path_distance > var_7) {
+    if(self.path_distance > var_7)
       self.path_distance = var_7;
-    }
 
     var_8 = common_scripts\_csplines::cspline_getpointattime(var_1, self.path_distance);
     self.origin = var_8["pos"];
@@ -844,11 +808,10 @@ sardines_pieceswimpath(var_0, var_1, var_2, var_3, var_4, var_5) {
     common_scripts\utility::waitframe();
   }
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     sardines_pieceswimpath(var_0, var_4, var_2, var_3, undefined, var_5);
-  } else {
+  else
     self notify("path_complete");
-  }
 }
 
 sardines_ballwaitthenaddpiece(var_0, var_1, var_2, var_3) {
@@ -936,9 +899,8 @@ sardines_detectpeople(var_0, var_1, var_2, var_3, var_4) {
           var_6.origin = self.origin + var_5;
           var_9 = 0;
 
-          if(distancesquared(self.origin, var_7) > var_11 || var_14 < var_1) {
+          if(distancesquared(self.origin, var_7) > var_11 || var_14 < var_1)
             var_8 = 0;
-          }
 
           common_scripts\utility::waitframe();
           continue;
@@ -977,18 +939,15 @@ sardines_ballfindemptyspot(var_0, var_1) {
     var_4 = 0;
 
     while(var_4 < var_0[var_3].numpieces && !var_5) {
-      if(!isDefined(var_1.rings[var_3][var_4])) {
+      if(!isDefined(var_1.rings[var_3][var_4]))
         var_5 = 1;
-      }
 
-      if(!var_5) {
+      if(!var_5)
         var_4++;
-      }
     }
 
-    if(!var_5) {
+    if(!var_5)
       var_3++;
-    }
   }
 
   var_2.ring = var_3;
@@ -1016,9 +975,8 @@ sardines_sortring(var_0, var_1, var_2) {
 sardines_spreadring(var_0, var_1, var_2) {
   var_3 = var_1.rings[var_2];
 
-  if(var_3.size == 0) {
+  if(var_3.size == 0)
     return 1;
-  }
 
   var_4 = var_0.ball.rings[var_2];
   var_5 = 1;
@@ -1031,9 +989,8 @@ sardines_spreadring(var_0, var_1, var_2) {
   var_12 = [];
   var_13 = [];
 
-  for(var_14 = 0; var_14 <= var_7; var_14++) {
+  for(var_14 = 0; var_14 <= var_7; var_14++)
     var_13[var_14] = var_1.pieces[var_3[var_14]];
-  }
 
   for(var_14 = 0; var_14 <= var_7; var_14++) {
     var_9[var_14] = 0;
@@ -1044,17 +1001,14 @@ sardines_spreadring(var_0, var_1, var_2) {
     var_17 = var_13[maps\interactive_models\_interactive_utility::wrap(var_14 - 2, var_3.size)].ball_angle;
     var_18 = var_13[maps\interactive_models\_interactive_utility::wrap(var_14 - 3, var_3.size)].ball_angle;
 
-    if(var_14 == 0) {
+    if(var_14 == 0)
       var_16 = var_16 - 360;
-    }
 
-    if(var_14 <= 1) {
+    if(var_14 <= 1)
       var_17 = var_17 - 360;
-    }
 
-    if(var_14 <= 2) {
+    if(var_14 <= 2)
       var_18 = var_18 - 360;
-    }
 
     if(var_15 - var_16 < var_8) {
       var_9[var_14] = var_6 * (1.01 - (var_15 - var_16) / var_8);
@@ -1064,9 +1018,8 @@ sardines_spreadring(var_0, var_1, var_2) {
     if(var_15 - var_17 < 2 * var_8 && var_13[maps\interactive_models\_interactive_utility::wrap(var_14 - 1, var_3.size)].ball_inplace) {
       var_10[var_14] = var_10[var_14] + var_6 * (1.01 - (var_15 - var_17) / (var_8 * 2));
 
-      if(var_15 - var_17 < 3 * var_8 && var_13[maps\interactive_models\_interactive_utility::wrap(var_14 - 1, var_3.size)].ball_inplace) {
+      if(var_15 - var_17 < 3 * var_8 && var_13[maps\interactive_models\_interactive_utility::wrap(var_14 - 1, var_3.size)].ball_inplace)
         var_11[var_14] = var_11[var_14] + var_6 * (1.01 - (var_15 - var_18) / (var_8 * 3));
-      }
     }
 
     if(var_13[var_14].ball_offset != var_4.offset) {
@@ -1097,18 +1050,16 @@ sardines_spreadring(var_0, var_1, var_2) {
         if(var_22 != 0 || isDefined(var_12[var_14])) {
           var_13[var_14].ball_angle = var_13[var_14].ball_angle + var_22;
 
-          if(var_13[var_14].ball_angle < 0 || var_13[var_14].ball_angle > 360) {
+          if(var_13[var_14].ball_angle < 0 || var_13[var_14].ball_angle > 360)
             var_21 = 1;
-          }
 
           var_13[var_14] sardines_balllinkpiece(var_1, var_13[var_14].ball_angle, var_4.radius, var_13[var_14].ball_offset);
         }
       }
     }
 
-    if(var_21) {
+    if(var_21)
       sardines_sortring(var_4, var_1, var_2);
-    }
   }
 
   return var_5;

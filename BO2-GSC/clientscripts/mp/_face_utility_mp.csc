@@ -6,25 +6,21 @@
 #include clientscripts\mp\_utility;
 
 setfaceroot(root) {
-  if(!isDefined(level.facestates)) {
+  if(!isDefined(level.facestates))
     level.facestates = [];
-  }
 
-  if(!isDefined(level.facestates)) {
+  if(!isDefined(level.facestates))
     level.facestates = [];
-  }
 
   level.facestates["face_root"] = root;
 }
 
 buildfacestate(face_state, looping, timer, priority, statetype, animation) {
-  if(!isDefined(level.facestates)) {
+  if(!isDefined(level.facestates))
     level.facestates = [];
-  }
 
-  if(!isDefined(level.facestates)) {
+  if(!isDefined(level.facestates))
     level.facestates = [];
-  }
 
   level.facestates[face_state]["looping"] = looping;
   level.facestates[face_state]["timer"] = timer;
@@ -69,9 +65,8 @@ waitforfaceeventrepeat(base_time) {
   while(true) {
     self waittill("face", newstate);
 
-    if(newstate == state) {
+    if(newstate == state)
       self.face_timer = base_time;
-    }
   }
 }
 
@@ -81,20 +76,17 @@ waitforfaceeventcomplete(localclientnum) {
   self endon("stop_face_anims");
   self endon("new_face_event");
 
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("Trying to get animation for state " + self.face_curr_event + " # " + self.face_curr_event_idx);
-  }
 
   assert(isDefined(level.facestates[self.face_curr_event]["animation"][self.face_curr_event_idx]));
   self.face_timer = getanimlength(level.facestates[self.face_curr_event]["animation"][self.face_curr_event_idx]);
 
-  if(level.facestates[self.face_curr_event]["looping"]) {
+  if(level.facestates[self.face_curr_event]["looping"])
     self thread waitforfaceeventrepeat(self.face_timer);
-  }
 
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("faceTime is " + self.face_timer + "\\n");
-  }
 
   if(!isDefined(self)) {
     return;
@@ -102,25 +94,22 @@ waitforfaceeventcomplete(localclientnum) {
   waitrealtime(self.face_timer);
   self notify("face_timer_expired");
 
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("face_timer_expired");
-  }
 
   self.face_curr_event = undefined;
   self.face_curr_event_idx = undefined;
 
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("waiting on dobj");
-  }
 
   self waittill_dobj(localclientnum);
 
   if(!isDefined(self)) {
     return;
   }
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("setAnimKnob Back To base state " + self.face_curr_base);
-  }
 
   self setanimknob(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
   self notify("face", "face_advance");
@@ -134,9 +123,8 @@ processfaceevents(localclientnum) {
   numanims = level.facestates[state]["animation"].size;
   self.face_curr_base_idx = randomint(numanims);
 
-  if(getdvarint(#"_id_B5C61264") != 0) {
+  if(getdvarint(#"_id_B5C61264") != 0)
     println("setAnimKnobProcessFaceEvents");
-  }
 
   self waittill_dobj(localclientnum);
 
@@ -145,11 +133,10 @@ processfaceevents(localclientnum) {
   }
   self setanimknob(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.0, 1.0);
 
-  if(isDefined(self.face_disable) && self.face_disable) {
+  if(isDefined(self.face_disable) && self.face_disable)
     state = "face_disable";
-  } else if(isDefined(self.face_death) && self.face_death) {
+  else if(isDefined(self.face_death) && self.face_death)
     state = "face_death";
-  }
 
   if(!isDefined(self)) {
     return;
@@ -162,21 +149,17 @@ processfaceevents(localclientnum) {
 
   while(true) {
     if(getdvarint(#"_id_B5C61264") != 0) {
-      if(!isDefined(state)) {
+      if(!isDefined(state))
         println("state undefined\\n");
-      }
 
-      if(!isDefined(level.facestates)) {
+      if(!isDefined(level.facestates))
         println("level.faceStates undefined\\n");
-      }
 
-      if(!isDefined(level.facestates)) {
+      if(!isDefined(level.facestates))
         println("level.faceStates undefined\\n");
-      }
 
-      if(!isDefined(level.facestates[state])) {
+      if(!isDefined(level.facestates[state]))
         println("level.faceStates[state] undefined\\n");
-      }
 
       if(!isDefined(level.facestates[state])) {
         facestatesarray = getarraykeys(level.facestates);
@@ -189,46 +172,38 @@ processfaceevents(localclientnum) {
       }
     }
 
-    if(state == "face_disable") {
+    if(state == "face_disable")
       numanims = 0;
-    } else {
+    else
       numanims = level.facestates[state]["animation"].size;
-    }
 
-    if(getdvarint(#"_id_B5C61264") != 0) {
+    if(getdvarint(#"_id_B5C61264") != 0)
       println("Found " + numanims + " anims for state " + state);
-    }
 
     if(isDefined(self.face_disable) && self.face_disable == 1) {
-      if(getdvarint(#"_id_B5C61264") != 0) {
+      if(getdvarint(#"_id_B5C61264") != 0)
         println("Disabling face anims");
-      }
 
       setfacestate("face_disabled");
       self clearanim(level.facestates["face_root"], 0);
       self notify("stop_face_anims");
 
-      while(self.face_disable) {
+      while(self.face_disable)
         wait 0.05;
-      }
     }
 
     if(getdvarint(#"_id_B5C61264") != 0) {
-      if(!isDefined(state)) {
+      if(!isDefined(state))
         println("state undefined\\n");
-      }
 
-      if(!isDefined(level.facestates)) {
+      if(!isDefined(level.facestates))
         println("level.faceStates undefined\\n");
-      }
 
-      if(!isDefined(level.facestates)) {
+      if(!isDefined(level.facestates))
         println("level.faceStates undefined\\n");
-      }
 
-      if(!isDefined(level.facestates[state])) {
+      if(!isDefined(level.facestates[state]))
         println("level.faceStates[state] undefined\\n");
-      }
 
       if(!isDefined(level.facestates[state])) {
         facestatesarray = getarraykeys(level.facestates);
@@ -244,18 +219,16 @@ processfaceevents(localclientnum) {
     setfacestate(state);
 
     if(level.facestates[state]["statetype"] == "exitstate") {
-      if(getdvarint(#"_id_B5C61264") != 0) {
+      if(getdvarint(#"_id_B5C61264") != 0)
         println("Exitstate found, returning, anim tree:" + level.face_anim_tree);
-      }
 
       self waittill_dobj(localclientnum);
 
       if(!isDefined(self)) {
         return;
       }
-      if(getdvarint(#"_id_B5C61264") != 0) {
+      if(getdvarint(#"_id_B5C61264") != 0)
         println("setAnimKnob286");
-      }
 
       self setanimknob(level.facestates[state]["animation"][randomint(numanims)], 1.0, 0.1, 1.0);
       self notify("stop_face_anims");
@@ -267,14 +240,12 @@ processfaceevents(localclientnum) {
         self.face_curr_base = state;
         self.face_curr_base_idx = randomint(numanims);
 
-        if(getdvarint(#"_id_B5C61264") != 0) {
+        if(getdvarint(#"_id_B5C61264") != 0)
           println("New base face anim state " + self.face_curr_base + " anim # " + self.face_curr_base_idx);
-        }
 
         if(!isDefined(self.face_curr_event)) {
-          if(getdvarint(#"_id_B5C61264") != 0) {
+          if(getdvarint(#"_id_B5C61264") != 0)
             println("trying to play animation for state " + self.face_curr_base + " w/ index " + self.face_curr_base_idx);
-          }
 
           self waittill_dobj(localclientnum);
 
@@ -289,9 +260,8 @@ processfaceevents(localclientnum) {
         self.face_curr_event = state;
         self.face_curr_event_idx = randomint(numanims);
 
-        if(getdvarint(#"_id_B5C61264") != 0) {
+        if(getdvarint(#"_id_B5C61264") != 0)
           println("New face anim event " + self.face_curr_event + " anim # " + self.face_curr_event_idx);
-        }
 
         self waittill_dobj(localclientnum);
 
@@ -302,18 +272,16 @@ processfaceevents(localclientnum) {
         self thread waitforfaceeventcomplete(localclientnum);
       }
     } else if(level.facestates[state]["statetype"] == "nullstate") {
-      if(isDefined(self.face_curr_event)) {
+      if(isDefined(self.face_curr_event))
         self setanimknob(level.facestates[self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
-      } else if(isDefined(self.face_curr_base)) {
+      else if(isDefined(self.face_curr_base))
         self setanimknob(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
-      }
     }
 
-    if(isDefined(self.face_curr_event)) {
+    if(isDefined(self.face_curr_event))
       state = self waitforanypriorityreturn(self.face_curr_event);
-    } else {
+    else
       state = self waitforanypriorityreturn(self.face_curr_base);
-    }
   }
 }
 
@@ -326,21 +294,18 @@ showstate(state) {
       if(isDefined(self.face_state) && isDefined(self.origin)) {
         entnum = self getentitynumber();
 
-        if(!isDefined(entnum)) {
+        if(!isDefined(entnum))
           entnum = "?";
-        }
 
-        if(isDefined(self.face_disable) && self.face_disable) {
+        if(isDefined(self.face_disable) && self.face_disable)
           disablechar = "-";
-        } else {
+        else
           disablechar = "+";
-        }
 
-        if(isDefined(self.face_death) && self.face_death) {
+        if(isDefined(self.face_death) && self.face_death)
           deathchar = "D";
-        } else {
+        else
           deathchar = "A";
-        }
 
         print3d(self.origin + vectorscale((0, 0, 1), 72.0), disablechar + deathchar + "[" + entnum + "]" + self.face_state, (1, 1, 1), 1, 0.25);
       }
@@ -353,11 +318,10 @@ showstate(state) {
 
 setfacestate(state) {
   if(state == "face_advance") {
-    if(isDefined(self.face_curr_event)) {
+    if(isDefined(self.face_curr_event))
       self.face_state = self.face_curr_event;
-    } else if(isDefined(self.face_curr_base)) {
+    else if(isDefined(self.face_curr_base))
       self.face_state = self.face_curr_base;
-    }
 
     return;
   }

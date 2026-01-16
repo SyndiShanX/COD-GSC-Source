@@ -13,18 +13,15 @@
 #include maps\mp\_compass;
 
 playercanafford(player, cost) {
-  if(!player usebuttonpressed()) {
+  if(!player usebuttonpressed())
     return false;
-  }
 
-  if(player in_revive_trigger()) {
+  if(player in_revive_trigger())
     return false;
-  }
 
   if(isDefined(cost)) {
-    if(player.score < cost) {
+    if(player.score < cost)
       return false;
-    }
 
     player maps\mp\zombies\_zm_score::minus_to_player_score(cost);
   }
@@ -35,26 +32,25 @@ playercanafford(player, cost) {
 setinvisibletoall() {
   players = get_players();
 
-  for(playerindex = 0; playerindex < players.size; playerindex++) {
+  for(playerindex = 0; playerindex < players.size; playerindex++)
     self setinvisibletoplayer(players[playerindex]);
-  }
 }
 
 spawnandlinkfxtotag(effect, ent, tag) {
   fxent = spawn("script_model", ent gettagorigin(tag));
-  fxent setModel("tag_origin");
+  fxent setmodel("tag_origin");
   fxent linkto(ent, tag);
   wait_network_frame();
-  playFXOnTag(effect, fxent, "tag_origin");
+  playfxontag(effect, fxent, "tag_origin");
   return fxent;
 }
 
 spawnandlinkfxtooffset(effect, ent, offsetorigin, offsetangles) {
   fxent = spawn("script_model", (0, 0, 0));
-  fxent setModel("tag_origin");
+  fxent setmodel("tag_origin");
   fxent linkto(ent, "", offsetorigin, offsetangles);
   wait_network_frame();
-  playFXOnTag(effect, fxent, "tag_origin");
+  playfxontag(effect, fxent, "tag_origin");
   return fxent;
 }
 
@@ -63,7 +59,7 @@ custom_weapon_wall_prices() {
     return;
   }
   weapon_spawns = [];
-  weapon_spawns = getEntArray("weapon_upgrade", "targetname");
+  weapon_spawns = getentarray("weapon_upgrade", "targetname");
 
   for(i = 0; i < weapon_spawns.size; i++) {
     if(!isDefined(level.zombie_weapons[weapon_spawns[i].zombie_weapon_upgrade])) {
@@ -77,18 +73,16 @@ custom_weapon_wall_prices() {
 }
 
 pause_zombie_spawning() {
-  if(!isDefined(level.spawnpausecount)) {
+  if(!isDefined(level.spawnpausecount))
     level.spawnpausecount = 0;
-  }
 
   level.spawnpausecount++;
   flag_clear("spawn_zombies");
 }
 
 try_resume_zombie_spawning() {
-  if(!isDefined(level.spawnpausecount)) {
+  if(!isDefined(level.spawnpausecount))
     level.spawnpausecount = 0;
-  }
 
   level.spawnpausecount--;
 
@@ -100,9 +94,8 @@ try_resume_zombie_spawning() {
 
 automatonspeak(category, type, response, force_variant, override) {
   if(isDefined(level.automaton) && !is_true(level.automaton.disabled_by_emp)) {
-    if(getdvar(#"_id_6DF184E8") == "") {
+    if(getdvar(#"_id_6DF184E8") == "")
       iprintlnbold("Automaton VO: " + type);
-    }
 
     if(type != "leaving" && type != "leaving_warning") {
       level.automaton notify("want_to_be_speaking", type);
@@ -136,7 +129,7 @@ get_random_encounter_match(location) {
 }
 
 transit_breakable_glass_init() {
-  glass = getEntArray("transit_glass", "targetname");
+  glass = getentarray("transit_glass", "targetname");
 
   if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
     array_delete(glass);
@@ -149,7 +142,7 @@ transit_breakable_glass_init() {
 transit_breakable_glass() {
   level endon("intermission");
   self.health = 99999;
-  self setCanDamage(1);
+  self setcandamage(1);
   self.damage_state = 0;
 
   while(true) {
@@ -159,21 +152,20 @@ transit_breakable_glass() {
       if(self.damage_state == 0) {
         self glass_gets_destroyed();
         self.damage_state = 1;
-        self playSound("fly_glass_break");
+        self playsound("fly_glass_break");
       }
     }
   }
 }
 
 glass_gets_destroyed() {
-  if(isDefined(level._effect["glass_impact"])) {
-    playFX(level._effect["glass_impact"], self.origin, anglesToForward(self.angles));
-  }
+  if(isDefined(level._effect["glass_impact"]))
+    playfx(level._effect["glass_impact"], self.origin, anglestoforward(self.angles));
 
   wait 0.1;
 
   if(isDefined(self.model) && self.damage_state == 0) {
-    self setModel(self.model + "_broken");
+    self setmodel(self.model + "_broken");
     self.damage_state = 1;
     return;
   } else {
@@ -191,7 +183,7 @@ solo_tombstone_removal() {
 }
 
 sparking_power_lines() {
-  lines = getEntArray("power_line_sparking", "targetname");
+  lines = getentarray("power_line_sparking", "targetname");
 }
 
 disconnect_door_zones(zone_a, zone_b, flag_name) {
@@ -224,27 +216,27 @@ transit_pathnode_spawning() {
   maps\mp\_compass::setupminimap("compass_map_zm_transit");
   flag_wait("start_zombie_round_logic");
   collision1 = spawn("script_model", (2273, -126, 143));
-  collision1 setModel("collision_wall_128x128x10_standard");
+  collision1 setmodel("collision_wall_128x128x10_standard");
   collision1.angles = (0, 0, 0);
   collision1 ghost();
   collision2 = spawn("script_model", (2096, -126, 143));
-  collision2 setModel("collision_wall_128x128x10_standard");
+  collision2 setmodel("collision_wall_128x128x10_standard");
   collision2.angles = (0, 0, 0);
   collision2 ghost();
   collision3 = spawn("script_model", (1959, -126, 143));
-  collision3 setModel("collision_wall_128x128x10_standard");
+  collision3 setmodel("collision_wall_128x128x10_standard");
   collision3.angles = (0, 0, 0);
   collision3 ghost();
   collision4 = spawn("script_model", (12239, 8509, -688));
-  collision4 setModel("collision_wall_128x128x10_standard");
+  collision4 setmodel("collision_wall_128x128x10_standard");
   collision4.angles = (0, 0, 0);
   collision4 ghost();
   collision5 = spawn("script_model", (8320, -6679, 362));
-  collision5 setModel("collision_wall_256x256x10_standard");
+  collision5 setmodel("collision_wall_256x256x10_standard");
   collision5.angles = vectorscale((0, 1, 0), 300.0);
   collision5 ghost();
   collision5 = spawn("script_model", (10068, 7272, -67));
-  collision5 setModel("collision_clip_64x64x256");
+  collision5 setmodel("collision_clip_64x64x256");
   collision5.angles = (0, 0, 0);
   collision5 ghost();
 }

@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_supply_drop;
+
 #namespace wz_ee_motd_plane;
 
 autoexec __init__system__() {
@@ -26,6 +27,7 @@ __init__() {
   }
 
   level thread function_fc45523f();
+
 }
 
 function_d53a8c5b() {
@@ -53,7 +55,7 @@ function_3e59cbbb(goal) {
   level endon(#"game_ended");
   self endon(#"death");
   self function_a57c34b7(goal.origin, 0, 0);
-  self waittill(#"goal", # "near_goal");
+  self waittill(#"goal", #"near_goal");
   self player_insertion::function_723d686d();
   waitframe(1);
   self ghost();
@@ -69,7 +71,7 @@ function_f3dbfe8d(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     self ghost();
 
     if(!(isDefined(level.var_f2ea2755) && level.var_f2ea2755)) {
-      item_supply_drop::spawn_supply_drop(self.origin, # "zombie_supply_stash_parent");
+      item_supply_drop::spawn_supply_drop(self.origin, #"zombie_supply_stash_parent");
       level.var_f2ea2755 = 1;
     }
   }
@@ -177,3 +179,4 @@ function_de4b0705() {
 
   function_9dc0fa01();
 }
+

@@ -34,21 +34,21 @@ init() {
   precacheMiniMapIcon("compass_objpoint_c130_friendly");
   precacheMiniMapIcon("compass_objpoint_c130_enemy");
 
-  game["strings"]["ammo_hint"] = &"MP_AMMO_PICKUP";
-  game["strings"]["uav_hint"] = &"MP_UAV_PICKUP";
-  game["strings"]["counter_uav_hint"] = &"MP_COUNTER_UAV_PICKUP";
-  game["strings"]["sentry_hint"] = &"MP_SENTRY_PICKUP";
-  game["strings"]["predator_missile_hint"] = &"MP_PREDATOR_MISSILE_PICKUP";
-  game["strings"]["airstrike_hint"] = &"MP_AIRSTRIKE_PICKUP";
-  game["strings"]["precision_airstrike_hint"] = &"MP_PRECISION_AIRSTRIKE_PICKUP";
-  game["strings"]["harrier_airstrike_hint"] = &"MP_HARRIER_AIRSTRIKE_PICKUP";
-  game["strings"]["helicopter_hint"] = &"MP_HELICOPTER_PICKUP";
-  game["strings"]["helicopter_flares_hint"] = &"MP_HELICOPTER_FLARES_PICKUP";
-  game["strings"]["stealth_airstrike_hint"] = &"MP_STEALTH_AIRSTRIKE_PICKUP";
-  game["strings"]["helicopter_minigun_hint"] = &"MP_HELICOPTER_MINIGUN_PICKUP";
-  game["strings"]["ac130_hint"] = &"MP_AC130_PICKUP";
-  game["strings"]["emp_hint"] = &"MP_EMP_PICKUP";
-  game["strings"]["nuke_hint"] = &"MP_NUKE_PICKUP";
+  game["strings"]["ammo_hint"] = & "MP_AMMO_PICKUP";
+  game["strings"]["uav_hint"] = & "MP_UAV_PICKUP";
+  game["strings"]["counter_uav_hint"] = & "MP_COUNTER_UAV_PICKUP";
+  game["strings"]["sentry_hint"] = & "MP_SENTRY_PICKUP";
+  game["strings"]["predator_missile_hint"] = & "MP_PREDATOR_MISSILE_PICKUP";
+  game["strings"]["airstrike_hint"] = & "MP_AIRSTRIKE_PICKUP";
+  game["strings"]["precision_airstrike_hint"] = & "MP_PRECISION_AIRSTRIKE_PICKUP";
+  game["strings"]["harrier_airstrike_hint"] = & "MP_HARRIER_AIRSTRIKE_PICKUP";
+  game["strings"]["helicopter_hint"] = & "MP_HELICOPTER_PICKUP";
+  game["strings"]["helicopter_flares_hint"] = & "MP_HELICOPTER_FLARES_PICKUP";
+  game["strings"]["stealth_airstrike_hint"] = & "MP_STEALTH_AIRSTRIKE_PICKUP";
+  game["strings"]["helicopter_minigun_hint"] = & "MP_HELICOPTER_MINIGUN_PICKUP";
+  game["strings"]["ac130_hint"] = & "MP_AC130_PICKUP";
+  game["strings"]["emp_hint"] = & "MP_EMP_PICKUP";
+  game["strings"]["nuke_hint"] = & "MP_NUKE_PICKUP";
 
   level.airDropCrates = getEntArray("care_package", "targetname");
   level.oldAirDropCrates = getEntArray("airdrop_crate", "targetname");
@@ -60,18 +60,16 @@ init() {
 
     level.airDropCrateCollision = getEnt(level.airDropCrates[0].target, "targetname");
   } else {
-    foreach(crate in level.oldAirDropCrates) {
-      crate delete();
-    }
+    foreach(crate in level.oldAirDropCrates)
+    crate delete();
 
     level.airDropCrateCollision = getEnt(level.airDropCrates[0].target, "targetname");
     level.oldAirDropCrates = getEntArray("airdrop_crate", "targetname");
   }
 
   if(level.airDropCrates.size) {
-    foreach(crate in level.AirDropCrates) {
-      crate delete();
-    }
+    foreach(crate in level.AirDropCrates)
+    crate delete();
   }
 
   level.killStreakFuncs["airdrop"] = ::tryUseAirdrop;
@@ -124,9 +122,8 @@ init() {
   foreach(dropType, crateTypes in level.crateTypes) {
     level.crateMaxVal[dropType] = 0;
     foreach(crateType, crateWeight in level.crateTypes[dropType]) {
-      if(!crateWeight) {
+      if(!crateWeight)
         continue;
-      }
 
       level.crateMaxVal[dropType] += crateWeight;
       level.crateTypes[dropType][crateType] = level.crateMaxVal[dropType];
@@ -142,6 +139,7 @@ init() {
     }
   }
   level.lowSpawn = lowSpawn;
+
 }
 
 addCrateType(dropType, crateType, crateWeight, crateFunc) {
@@ -154,15 +152,13 @@ getRandomCrateType(dropType) {
 
   selectedCrateType = undefined;
   foreach(crateType, crateWeight in level.crateTypes[dropType]) {
-    if(!crateWeight) {
+    if(!crateWeight)
       continue;
-    }
 
     selectedCrateType = crateType;
 
-    if(crateWeight > value) {
+    if(crateWeight > value)
       break;
-    }
   }
 
   return (selectedCrateType);
@@ -192,7 +188,7 @@ getCrateTypeForDropType(dropType) {
 
 drawLine(start, end, timeSlice) {
   drawTime = int(timeSlice * 20);
-  for(time = 0; time < drawTime; time++) {
+  for (time = 0; time < drawTime; time++) {
     line(start, end, (1, 0, 0), false, 1);
     wait(0.05);
   }
@@ -217,13 +213,11 @@ tryUseMegaAirdrop(lifeId, kID) {
 tryUseAirdrop(lifeId, kID, dropType) {
   result = undefined;
 
-  if(!isDefined(dropType)) {
+  if(!isDefined(dropType))
     dropType = "airdrop";
-  }
 
-  if(!isDefined(self.pers["kIDs_valid"][kID])) {
+  if(!isDefined(self.pers["kIDs_valid"][kID]))
     return true;
-  }
 
   if(level.littleBirds >= 3 && dropType != "airdrop_mega") {
     self iPrintLnBold(&"MP_AIR_SPACE_TOO_CROWDED");
@@ -249,16 +243,14 @@ tryUseAirdrop(lifeId, kID, dropType) {
   if((!isDefined(result) || !result) && isDefined(self.pers["kIDs_valid"][kID])) {
     self notify("markerDetermined");
 
-    if(dropType != "airdrop_mega") {
+    if(dropType != "airdrop_mega")
       decrementLittleBirdCount();
-    }
 
     return false;
   }
 
-  if(dropType == "airdrop_mega") {
+  if(dropType == "airdrop_mega")
     thread teamPlayerCardSplash("used_airdrop_mega", self);
-  }
 
   self notify("markerDetermined");
   return true;
@@ -283,31 +275,27 @@ beginAirdropViaMarker(lifeId, kID, dropType) {
 
   self thread watchAirDropMarkerUsage(dropType, kID);
 
-  while(self isChangingWeapon()) {
+  while (self isChangingWeapon())
     wait(0.05);
-  }
 
   currentWeapon = self getCurrentWeapon();
 
-  if(isAirdropMarker(currentWeapon)) {
+  if(isAirdropMarker(currentWeapon))
     airdropMarkerWeapon = currentWeapon;
-  } else {
+  else
     airdropMarkerWeapon = undefined;
-  }
 
-  while(isAirdropMarker(currentWeapon) /*|| currentWeapon == "none"*/ ) {
+  while (isAirdropMarker(currentWeapon) /*|| currentWeapon == "none"*/ ) {
     self waittill("weapon_change", currentWeapon);
 
-    if(isAirdropMarker(currentWeapon)) {
+    if(isAirdropMarker(currentWeapon))
       airdropMarkerWeapon = currentWeapon;
-    }
   }
 
   self notify("stopWatchingAirDropMarker");
 
-  if(!isDefined(airdropMarkerWeapon)) {
+  if(!isDefined(airdropMarkerWeapon))
     return false;
-  }
 
   return (!(self getAmmoCount(airdropMarkerWeapon) && self hasWeapon(airdropMarkerWeapon)));
 }
@@ -321,12 +309,11 @@ watchAirDropMarkerUsage(dropType, kID) {
 
   thread watchAirDropMarker(dropType, kID);
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_pullback", weaponName);
 
-    if(!isAirdropMarker(weaponName)) {
+    if(!isAirdropMarker(weaponName))
       continue;
-    }
 
     self _disableUsability();
 
@@ -341,12 +328,11 @@ watchAirDropMarker(dropType, kID) {
   self endon("spawned_player");
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", airDropWeapon, weapname);
 
-    if(!isAirdropMarker(weapname)) {
+    if(!isAirdropMarker(weapname))
       continue;
-    }
 
     if(!isDefined(self.pers["kIDs_valid"][kID])) {
       airDropWeapon delete();
@@ -381,31 +367,26 @@ airDropMarkerActivate(dropType) {
   self waittill("explode", position);
   owner = self.owner;
 
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return;
-  }
 
-  if(owner isEMPed()) {
+  if(owner isEMPed())
     return;
-  }
 
-  if(dropType != "airdrop_mega") {
+  if(dropType != "airdrop_mega")
     owner maps\mp\_matchdata::logKillstreakEvent(dropType, position);
-  }
 
   wait 0.05;
 
-  if(dropType != "airdrop_mega") {
+  if(dropType != "airdrop_mega")
     level doFlyBy(owner, position, randomFloat(360), dropType);
-  } else {
+  else
     level doC130FlyBy(owner, position, randomFloat(360), dropType);
-  }
 }
 
 /**********************************************************
  *		 crate functions
 ***********************************************************/
-
 initAirDropCrate() {
   self.inUse = false;
   self hide();
@@ -427,25 +408,24 @@ deleteOnOwnerDeath(owner) {
   self delete();
 }
 
+
 crateModelTeamUpdater(showForTeam) {
   self endon("death");
 
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == showForTeam) {
+    if(player.team == showForTeam)
       self showToPlayer(player);
-    }
   }
 
-  for(;;) {
+  for (;;) {
     level waittill("joined_team");
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == showForTeam) {
+      if(player.team == showForTeam)
         self showToPlayer(player);
-      }
     }
   }
 }
@@ -458,11 +438,10 @@ createAirDropCrate(owner, dropType, crateType, startPos) {
   dropCrate.useRate = 0;
   dropCrate.team = self.team;
 
-  if(isDefined(owner)) {
+  if(isDefined(owner))
     dropCrate.owner = owner;
-  } else {
+  else
     dropCrate.owner = undefined;
-  }
 
   dropCrate.crateType = crateType;
   dropCrate.dropType = dropType;
@@ -489,6 +468,7 @@ createAirDropCrate(owner, dropType, crateType, startPos) {
 }
 
 crateSetupForUse(hintString, mode, icon) {
+
   if(mode != "nukeDrop") {
     self setCursorHint("HINT_NOICON");
     self setHintString(hintString);
@@ -523,9 +503,8 @@ crateSetupForUse(hintString, mode, icon) {
     objective_icon(curObjID, "compass_objpoint_ammo_friendly");
     self.objIdFriendly = curObjID;
 
-    if(isDefined(self.owner)) {
+    if(isDefined(self.owner))
       self maps\mp\_entityheadIcons::setHeadIcon(self.owner, icon, (0, 0, 24), 14, 14);
-    }
   } else if(mode == "single" && isDefined(self.owner)) {
     setSelfAndEnemyUsable(self.owner);
 
@@ -550,7 +529,7 @@ crateSetupForUse(hintString, mode, icon) {
 checkChange(team) {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     level waittill("joined_team");
 
     self setUnUsable(team);
@@ -560,46 +539,42 @@ checkChange(team) {
 
 setSelfAndEnemyUsable(owner) {
   foreach(player in level.players) {
-    if(player != owner && player.team == self.team) {
+    if(player != owner && player.team == self.team)
       self disablePlayerUse(player);
-    } else {
+    else
       self enablePlayerUse(player);
-    }
   }
 
 }
 
 setUnUsable(team) {
   foreach(player in level.players) {
-    if(team != player.team) {
+    if(team != player.team)
       self disablePlayerUse(player);
-    }
   }
 }
 
 setUsableByTeam(team) {
   foreach(player in level.players) {
-    if(!isDefined(team)) {
+    if(!isDefined(team))
       self enablePlayerUse(player);
-    } else if(team == player.team) {
+    else if(team == player.team)
       self enablePlayerUse(player);
-    } else {
+    else
       self disablePlayerUse(player);
-    }
   }
 }
 
 setUsableOnceByTeam(team) {
   foreach(player in level.players) {
-    if(isDefined(self.usedBy[player.guid])) {
+    if(isDefined(self.usedBy[player.guid]))
       self disablePlayerUse(player);
-    } else if(!isDefined(team)) {
+    else if(!isDefined(team))
       self enablePlayerUse(player);
-    } else if(team == player.team) {
+    else if(team == player.team)
       self enablePlayerUse(player);
-    } else {
+    else
       self disablePlayerUse(player);
-    }
   }
 }
 
@@ -607,19 +582,17 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
   dropCrate = [];
   self.owner endon("disconnect");
 
-  if(!isDefined(crateOverride)) {
+  if(!isDefined(crateOverride))
     crateType = getCrateTypeForDropType(dropType);
-  } else {
+  else
     crateType = crateOverride;
-  }
 
   dropCrate = createAirDropCrate(self.owner, dropType, crateType, startPos);
 
-  if(dropType == "airdrop_mega" || dropType == "nuke_drop") {
+  if(dropType == "airdrop_mega" || dropType == "nuke_drop")
     dropCrate LinkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
-  } else {
+  else
     dropCrate LinkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
-  }
 
   dropCrate.angles = (0, 0, 0);
   dropCrate show();
@@ -639,13 +612,11 @@ physicsWaiter(dropType, crateType) {
   level thread dropTimeOut(self, self.owner);
 
   if(abs(self.origin[2] - level.lowSpawn.origin[2]) > 3000) {
-    if(isDefined(self.objIdFriendly)) {
+    if(isDefined(self.objIdFriendly))
       _objective_delete(self.objIdFriendly);
-    }
 
-    if(isDefined(self.objIdEnemy)) {
+    if(isDefined(self.objIdEnemy))
       _objective_delete(self.objIdEnemy);
-    }
 
     self delete();
   }
@@ -656,23 +627,19 @@ dropTimeOut(dropCrate, owner) {
   level endon("game_ended");
   dropCrate endon("death");
 
-  if(dropCrate.dropType == "nuke_drop") {
+  if(dropCrate.dropType == "nuke_drop")
     return;
-  }
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(90.0);
 
-  while(dropCrate.curProgress != 0) {
+  while (dropCrate.curProgress != 0)
     wait 1;
-  }
 
-  if(isDefined(dropcrate.objIdFriendly)) {
+  if(isDefined(dropcrate.objIdFriendly))
     _objective_delete(dropcrate.objIdFriendly);
-  }
 
-  if(isDefined(dropcrate.objIdEnemy)) {
+  if(isDefined(dropcrate.objIdEnemy))
     _objective_delete(dropcrate.objIdEnemy);
-  }
 
   dropCrate delete();
 }
@@ -683,7 +650,7 @@ getPathStart(coord, yaw) {
 
   direction = (0, yaw, 0);
 
-  startPoint = coord + vector_multiply(anglesToForward(direction), -1 * lbHalfDistance);
+  startPoint = coord + vector_multiply(anglestoforward(direction), -1 * lbHalfDistance);
   startPoint += ((randomfloat(2) - 1) * pathRandomness, (randomfloat(2) - 1) * pathRandomness, 0);
 
   return startPoint;
@@ -695,7 +662,7 @@ getPathEnd(coord, yaw) {
 
   direction = (0, yaw, 0);
 
-  endPoint = coord + vector_multiply(anglesToForward(direction + (0, 90, 0)), lbHalfDistance);
+  endPoint = coord + vector_multiply(anglestoforward(direction + (0, 90, 0)), lbHalfDistance);
   endPoint += ((randomfloat(2) - 1) * pathRandomness, (randomfloat(2) - 1) * pathRandomness, 0);
 
   return endPoint;
@@ -706,20 +673,21 @@ getFlyHeightOffset(dropSite) {
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(!isDefined(heightEnt)) //old system
+  if(!isDefined(heightEnt)) //old system 
   {
+    /#
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
+    # /
+      if(isDefined(level.airstrikeHeightScale)) {
+        if(level.airstrikeHeightScale > 2) {
+          lbFlyHeight = 1500;
+          return (lbFlyHeight * (level.airStrikeHeightScale));
+        }
 
-    if(isDefined(level.airstrikeHeightScale)) {
-      if(level.airstrikeHeightScale > 2) {
-        lbFlyHeight = 1500;
-        return (lbFlyHeight * (level.airStrikeHeightScale));
+        return (lbFlyHeight * level.airStrikeHeightScale + 256 + dropSite[2]);
       }
-
-      return (lbFlyHeight * level.airStrikeHeightScale + 256 + dropSite[2]);
-    } else {
+    else
       return (lbFlyHeight + dropsite[2]);
-    }
   } else {
     return heightEnt.origin[2];
   }
@@ -732,21 +700,19 @@ getFlyHeightOffset(dropSite) {
 
 doFlyBy(owner, dropSite, dropYaw, dropType, heightAdjustment) {
   flyHeight = self getFlyHeightOffset(dropSite);
-  if(!isDefined(heightAdjustment)) {
+  if(!isDefined(heightAdjustment))
     heightAdjustment = 0;
-  }
 
   flyHeight += heightAdjustment;
 
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return;
-  }
 
   pathGoal = dropSite * (1, 1, 0) + (0, 0, flyHeight);
   pathStart = getPathStart(pathGoal, dropYaw);
   pathEnd = getPathEnd(pathGoal, dropYaw);
 
-  pathGoal = pathGoal + vector_multiply(anglesToForward((0, dropYaw, 0)), -50);
+  pathGoal = pathGoal + vector_multiply(anglestoforward((0, dropYaw, 0)), -50);
 
   chopper = heliSetup(owner, pathStart, pathGoal);
 
@@ -797,10 +763,10 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
 
   flyHeight = self getFlyHeightOffset(dropSite);
 
-  pathStart = dropSite + vector_multiply(anglesToForward(direction), -1 * planeHalfDistance);
+  pathStart = dropSite + vector_multiply(anglestoforward(direction), -1 * planeHalfDistance);
   pathStart = pathStart * (1, 1, 0) + (0, 0, flyHeight);
 
-  pathEnd = dropSite + vector_multiply(anglesToForward(direction), planeHalfDistance);
+  pathEnd = dropSite + vector_multiply(anglestoforward(direction), planeHalfDistance);
   pathEnd = pathEnd * (1, 1, 0) + (0, 0, flyHeight);
 
   d = length(pathStart - pathEnd);
@@ -809,7 +775,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
   c130 = c130Setup(owner, pathStart, pathEnd);
   c130.veh_speed = planeFlySpeed;
   c130.dropType = dropType;
-  c130 playLoopSound("veh_ac130_dist_loop");
+  c130 playloopsound("veh_ac130_dist_loop");
 
   c130.angles = direction;
   forward = anglesToForward(direction);
@@ -818,15 +784,14 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
   minDist = distance2D(c130.origin, dropSite);
   boomPlayed = false;
 
-  for(;;) {
+  for (;;) {
     dist = distance2D(c130.origin, dropSite);
 
     // handle missing our target
-    if(dist < minDist) {
+    if(dist < minDist)
       minDist = dist;
-    } else if(dist > minDist) {
+    else if(dist > minDist)
       break;
-    }
 
     if(dist < 256) {
       break;
@@ -875,10 +840,10 @@ dropNuke(dropSite, owner, dropType) {
 
   flyHeight = self getFlyHeightOffset(dropSite);
 
-  pathStart = dropSite + vector_multiply(anglesToForward(direction), -1 * planeHalfDistance);
+  pathStart = dropSite + vector_multiply(anglestoforward(direction), -1 * planeHalfDistance);
   pathStart = pathStart * (1, 1, 0) + (0, 0, flyHeight);
 
-  pathEnd = dropSite + vector_multiply(anglesToForward(direction), planeHalfDistance);
+  pathEnd = dropSite + vector_multiply(anglestoforward(direction), planeHalfDistance);
   pathEnd = pathEnd * (1, 1, 0) + (0, 0, flyHeight);
 
   d = length(pathStart - pathEnd);
@@ -887,7 +852,7 @@ dropNuke(dropSite, owner, dropType) {
   c130 = c130Setup(owner, pathStart, pathEnd);
   c130.veh_speed = planeFlySpeed;
   c130.dropType = dropType;
-  c130 playLoopSound("veh_ac130_dist_loop");
+  c130 playloopsound("veh_ac130_dist_loop");
 
   c130.angles = direction;
   forward = anglesToForward(direction);
@@ -896,15 +861,14 @@ dropNuke(dropSite, owner, dropType) {
   // TODO: fix this... it's bad.if we miss our distance (which could happen if plane speed is changed in the future) we stick in this thread forever
   boomPlayed = false;
   minDist = distance2D(c130.origin, dropSite);
-  for(;;) {
+  for (;;) {
     dist = distance2D(c130.origin, dropSite);
 
     // handle missing our target
-    if(dist < minDist) {
+    if(dist < minDist)
       minDist = dist;
-    } else if(dist > minDist) {
+    else if(dist > minDist)
       break;
-    }
 
     if(dist < 256) {
       break;
@@ -945,7 +909,7 @@ playloopOnEnt(alias) {
   soundOrg.angles = self.angles;
   soundOrg linkto(self);
 
-  soundOrg playLoopSound(alias);
+  soundOrg playloopsound(alias);
 
   self waittill("stop sound" + alias);
   soundOrg stoploopsound(alias);
@@ -958,9 +922,8 @@ c130Setup(owner, pathStart, pathGoal) {
   c130 = spawnplane(owner, "script_model", pathStart, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
   c130 setModel("vehicle_ac130_low_mp");
 
-  if(!isDefined(c130)) {
+  if(!isDefined(c130))
     return;
-  }
 
   //chopper playLoopSound( "littlebird_move" );
   c130.owner = owner;
@@ -972,12 +935,12 @@ c130Setup(owner, pathStart, pathGoal) {
 
 // spawn helicopter at a start node and monitors it
 heliSetup(owner, pathStart, pathGoal) {
+
   forward = vectorToAngles(pathGoal - pathStart);
   chopper = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
 
-  if(!isDefined(chopper)) {
+  if(!isDefined(chopper))
     return;
-  }
 
   //chopper playLoopSound( "littlebird_move" );
 
@@ -1004,15 +967,13 @@ heli_existence() {
 }
 
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE")) {
+  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE"))
     return;
-  }
 
   attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
-  if(self.health <= damage) {
+  if(self.health <= damage)
     attacker notify("destroyed_killstreak");
-  }
 
   self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
 }
@@ -1023,9 +984,8 @@ heliDestroyed() {
 
   self waittill("death");
 
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
 
   self trimActiveBirdList();
   decrementLittleBirdCount();
@@ -1042,7 +1002,7 @@ heliDestroyed() {
 // crash explosion
 lbExplode() {
   forward = (self.origin + (0, 0, 1)) - self.origin;
-  playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, forward);
+  playfx(level.chopper_fx["explode"]["death"]["cobra"], self.origin, forward);
 
   // play heli explosion sound
   self playSound("cobra_helicopter_crash");
@@ -1055,18 +1015,18 @@ lbSpin(speed) {
   self endon("explode");
 
   // tail explosion that caused the spinning
-  playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
-  playFXOnTag(level.chopper_fx["fire"]["trail"]["medium"], self, "tail_rotor_jnt");
+  playfxontag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
+  playfxontag(level.chopper_fx["fire"]["trail"]["medium"], self, "tail_rotor_jnt");
 
   self setyawspeed(speed, speed, speed);
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self settargetyaw(self.angles[1] + (speed * 0.9));
     wait(1);
   }
 }
 
 trimActiveBirdList() {
-  for(i = 0; i < level.littlebird.size; i++) {
+  for (i = 0; i < level.littlebird.size; i++) {
     if(level.littlebird.size == 1) {
       level.littlebird = [];
     } else if(level.littlebird[i] == self) {
@@ -1081,61 +1041,54 @@ trimActiveBirdList() {
 ***********************************************************/
 
 nukeCaptureThink() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("trigger", player);
 
-    if(!player isOnGround()) {
+    if(!player isOnGround())
       continue;
-    }
 
-    if(!useHoldThink(player)) {
+    if(!useHoldThink(player))
       continue;
-    }
 
     self notify("captured", player);
   }
 }
 
 crateOtherCaptureThink() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("trigger", player);
 
     //if( !player isOnGround() )
     //	continue;
 
-    if(isDefined(self.owner) && player == self.owner) {
+    if(isDefined(self.owner) && player == self.owner)
       continue;
-    }
 
     useEnt = self createUseEnt();
     result = useEnt useHoldThink(player);
 
-    if(isDefined(useEnt)) {
+    if(isDefined(useEnt))
       useEnt delete();
-    }
 
-    if(!result) {
+    if(!result)
       continue;
-    }
 
     self notify("captured", player);
   }
 }
 
 crateOwnerCaptureThink() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("trigger", player);
 
     //if( !player isOnGround() )
     //	continue;
 
-    if(isDefined(self.owner) && player != self.owner) {
+    if(isDefined(self.owner) && player != self.owner)
       continue;
-    }
 
-    if(!useHoldThink(player, 500)) {
+    if(!useHoldThink(player, 500))
       continue;
-    }
 
     self notify("captured", player);
   }
@@ -1144,18 +1097,17 @@ crateOwnerCaptureThink() {
 killstreakCrateThink(dropType) {
   self endon("death");
 
-  if(isDefined(game["strings"][self.crateType + "_hint"])) {
+  if(isDefined(game["strings"][self.crateType + "_hint"]))
     crateHint = game["strings"][self.crateType + "_hint"];
-  } else {
-    crateHint = &"PLATFORM_GET_KILLSTREAK";
-  }
+  else
+    crateHint = & "PLATFORM_GET_KILLSTREAK";
 
   crateSetupForUse(crateHint, "all", maps\mp\killstreaks\_killstreaks::getKillstreakCrateIcon(self.crateType));
 
   self thread crateOtherCaptureThink();
   self thread crateOwnerCaptureThink();
 
-  for(;;) {
+  for (;;) {
     self waittill("captured", player);
 
     if(isDefined(self.owner) && player != self.owner) {
@@ -1190,15 +1142,14 @@ nukeCrateThink(dropType) {
 
   self thread nukeCaptureThink();
 
-  for(;;) {
+  for (;;) {
     self waittill("captured", player);
 
     player thread[[level.killstreakFuncs[self.crateType]]](level.gtnw);
     level notify("nukeCaptured", player);
 
-    if(isDefined(level.gtnw) && level.gtnw) {
+    if(isDefined(level.gtnw) && level.gtnw)
       player.capturedNuke = 1;
-    }
 
     player playLocalSound("ammo_crate_use");
     self deleteCrate();
@@ -1213,16 +1164,15 @@ sentryCrateThink(dropType) {
   self thread crateOtherCaptureThink();
   self thread crateOwnerCaptureThink();
 
-  for(;;) {
+  for (;;) {
     self waittill("captured", player);
 
     if(isDefined(self.owner) && player != self.owner) {
       if(!level.teamBased || player.team != self.team) {
-        if(isSubStr(dropType, "airdrop_sentry")) {
+        if(isSubStr(dropType, "airdrop_sentry"))
           player thread hijackNotify(self, "sentry");
-        } else {
+        else
           player thread hijackNotify(self, "emergency_airdrop");
-        }
       } else {
         self.owner thread maps\mp\gametypes\_rank::giveRankXP("killstreak_giveaway", maps\mp\killstreaks\_killstreaks::getStreakCost("sentry") * 50);
         self.owner maps\mp\gametypes\_hud_message::playerCardSplashNotify("giveaway_sentry", player);
@@ -1237,46 +1187,41 @@ sentryCrateThink(dropType) {
 }
 
 deleteCrate() {
-  if(isDefined(self.objIdFriendly)) {
+  if(isDefined(self.objIdFriendly))
     _objective_delete(self.objIdFriendly);
-  }
 
-  if(isDefined(self.objIdEnemy)) {
+  if(isDefined(self.objIdEnemy))
     _objective_delete(self.objIdEnemy);
-  }
 
   self delete();
 }
 
 sentryUseTracker() {
-  if(!self maps\mp\killstreaks\_autosentry::giveSentry("sentry_minigun")) {
+  if(!self maps\mp\killstreaks\_autosentry::giveSentry("sentry_minigun"))
     self maps\mp\killstreaks\_killstreaks::giveKillstreak("sentry");
-  }
 }
 
 ammoCrateThink(dropType) {
   self endon("death");
   self.usedBy = [];
 
-  if(dropType == "airdrop" || !level.teamBased) {
+  if(dropType == "airdrop" || !level.teamBased)
     crateSetupForUse(game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly");
-  } else {
+  else
     crateSetupForUse(game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly");
-  }
 
   self thread crateOtherCaptureThink();
   self thread crateOwnerCaptureThink();
 
-  for(;;) {
+  for (;;) {
     self waittill("captured", player);
 
     if(isDefined(self.owner) && player != self.owner) {
       if(!level.teamBased || player.team != self.team) {
-        if(dropType == "airdrop") {
+        if(dropType == "airdrop")
           player thread hijackNotify(self, "airdrop");
-        } else {
+        else
           player thread hijackNotify(self, "emergency_airdrop");
-        }
       }
     }
 
@@ -1293,15 +1238,13 @@ hijackNotify(crate, crateType) {
 refillAmmo() {
   weaponList = self GetWeaponsListAll();
 
-  if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1) {
+  if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1)
     self _setPerk("specialty_tacticalinsertion");
-  }
 
   foreach(weaponName in weaponList) {
     if(isSubStr(weaponName, "grenade")) {
-      if(self getAmmoCount(weaponName) >= 1) {
+      if(self getAmmoCount(weaponName) >= 1)
         continue;
-      }
     }
 
     self giveMaxAmmo(weaponName);
@@ -1311,7 +1254,6 @@ refillAmmo() {
 /**********************************************************
  *		 Capture crate functions
 ***********************************************************/
-
 useHoldThink(player, useTime) {
   player playerLinkTo(self);
   player playerLinkedOffsetEnable();
@@ -1322,11 +1264,10 @@ useHoldThink(player, useTime) {
   self.inUse = true;
   self.useRate = 0;
 
-  if(isDefined(useTime)) {
+  if(isDefined(useTime))
     self.useTime = useTime;
-  } else {
+  else
     self.useTime = 3000;
-  }
 
   player thread personalUseBar(self);
 
@@ -1338,9 +1279,8 @@ useHoldThink(player, useTime) {
     player unlink();
   }
 
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return false;
-  }
 
   self.inUse = false;
   self.curProgress = 0;
@@ -1356,11 +1296,10 @@ personalUseBar(object) {
   useBarText setText(&"MP_CAPTURING_CRATE");
 
   lastRate = -1;
-  while(isReallyAlive(self) && isDefined(object) && object.inUse && !level.gameEnded) {
+  while (isReallyAlive(self) && isDefined(object) && object.inUse && !level.gameEnded) {
     if(lastRate != object.useRate) {
-      if(object.curProgress > object.useTime) {
+      if(object.curProgress > object.useTime)
         object.curProgress = object.useTime;
-      }
 
       useBar updateBar(object.curProgress / object.useTime, (1000 / object.useTime) * object.useRate);
 
@@ -1381,18 +1320,16 @@ personalUseBar(object) {
 }
 
 useHoldThinkLoop(player) {
-  while(!level.gameEnded && isDefined(self) && isReallyAlive(player) && player useButtonPressed() && self.curProgress < self.useTime) {
+  while (!level.gameEnded && isDefined(self) && isReallyAlive(player) && player useButtonPressed() && self.curProgress < self.useTime) {
     self.curProgress += (50 * self.useRate);
 
-    if(isDefined(self.objectiveScaler)) {
+    if(isDefined(self.objectiveScaler))
       self.useRate = 1 * self.objectiveScaler;
-    } else {
+    else
       self.useRate = 1;
-    }
 
-    if(self.curProgress >= self.useTime) {
+    if(self.curProgress >= self.useTime)
       return (isReallyAlive(player));
-    }
 
     wait 0.05;
   }

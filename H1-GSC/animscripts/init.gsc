@@ -5,19 +5,18 @@
 ********************************/
 
 initweapon(var_0) {
-  self.weaponinfo[var_0] = spawnStruct();
+  self.weaponinfo[var_0] = spawnstruct();
   self.weaponinfo[var_0].position = "none";
   self.weaponinfo[var_0].hasclip = 1;
 
-  if(getweaponclipmodel(var_0) != "") {
+  if(getweaponclipmodel(var_0) != "")
     self.weaponinfo[var_0].useclip = 1;
-  } else {
+  else
     self.weaponinfo[var_0].useclip = 0;
-  }
 }
 
 isweaponinitialized(var_0) {
-  return isDefined(self.weaponinfo[var_0]);
+  return isdefined(self.weaponinfo[var_0]);
 }
 
 setglobalaimsettings() {
@@ -37,13 +36,11 @@ setglobalaimsettings() {
 }
 
 everusessecondaryweapon() {
-  if(animscripts\utility::isshotgun(self.secondaryweapon)) {
+  if(animscripts\utility::isshotgun(self.secondaryweapon))
     return 1;
-  }
 
-  if(weaponclass(self.primaryweapon) == "rocketlauncher") {
+  if(weaponclass(self.primaryweapon) == "rocketlauncher")
     return 1;
-  }
 
   return 0;
 }
@@ -51,22 +48,19 @@ everusessecondaryweapon() {
 #using_animtree("generic_human");
 
 main() {
-  self.a = spawnStruct();
+  self.a = spawnstruct();
   self.a.laseron = 0;
   self.primaryweapon = self.weapon;
   firstinit();
 
-  if(!isDefined(self.primaryweapon) || self.primaryweapon == "") {
+  if(!isdefined(self.primaryweapon) || self.primaryweapon == "")
     self.primaryweapon = "none";
-  }
 
-  if(self.secondaryweapon == "") {
+  if(self.secondaryweapon == "")
     self.secondaryweapon = "none";
-  }
 
-  if(self.sidearm == "") {
+  if(self.sidearm == "")
     self.sidearm = "none";
-  }
 
   initweapon(self.primaryweapon);
   initweapon(self.secondaryweapon);
@@ -86,9 +80,8 @@ main() {
   var_0 = animscripts\utility::usingrocketlauncher();
   self.a.neverlean = var_0;
 
-  if(var_0) {
+  if(var_0)
     thread animscripts\shared::rpgplayerrepulsor();
-  }
 
   self.a.rockets = 3;
   self.a.rocketvisible = 1;
@@ -103,9 +96,8 @@ main() {
   self.minexposedgrenadedist = 850;
   animscripts\shared::placeweaponon(self.primaryweapon, "right");
 
-  if(animscripts\utility::isshotgun(self.secondaryweapon)) {
+  if(animscripts\utility::isshotgun(self.secondaryweapon))
     animscripts\shared::placeweaponon(self.secondaryweapon, "back");
-  }
 
   self.a.needstorechamber = 0;
   self.a.combatendtime = gettime();
@@ -120,9 +112,8 @@ main() {
   setdvarifuninitialized("ai_reactToBulletChance", 0.8);
   setdvarifuninitialized("ai_reactToBulletCooldown", 5000);
 
-  if(self.team == "allies" && !issubstr(self.classname, "russian") && allies_with_ir()) {
+  if(self.team == "allies" && !issubstr(self.classname, "russian") && allies_with_ir())
     self.has_ir = 1;
-  }
 
   self.a.postscriptfunc = undefined;
   self.a.stance = "stand";
@@ -144,9 +135,8 @@ main() {
   self.defaultturnthreshold = 55;
   self.a.nextstandinghitdying = 0;
 
-  if(!isDefined(self.script_forcegrenade)) {
+  if(!isdefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
-  }
 
   setupuniqueanims();
   animscripts\weaponlist::refillclip();
@@ -155,17 +145,15 @@ main() {
   self.suppressed = 0;
   self.suppressedtime = 0;
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.suppressionthreshold = 0.75;
-  } else {
+  else
     self.suppressionthreshold = 0.5;
-  }
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.randomgrenaderange = 0;
-  } else {
+  else
     self.randomgrenaderange = 128;
-  }
 
   self.ammocheatinterval = 8000;
   self.ammocheattime = 0;
@@ -180,15 +168,14 @@ main() {
   self.exception["corner_normal"] = 1;
   var_1 = getarraykeys(self.exception);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++)
     common_scripts\utility::clear_exception(var_1[var_2]);
-  }
 
   self.reacquire_state = 0;
   thread setnameandrank_andaddtosquad();
   self.shouldconserveammotime = 0;
 
-  if(isDefined(level.h1_bullet_whizby_enabled) && level.h1_bullet_whizby_enabled) {
+  if(isdefined(level.h1_bullet_whizby_enabled) && level.h1_bullet_whizby_enabled) {
     self.disablebulletwhizbyreaction = undefined;
     self.disable_dive_whizby_react = 1;
   } else
@@ -196,25 +183,23 @@ main() {
 
   self.noruntwitch = 1;
 
-  if(isDefined(level.h1_team_run_twitch_enabled)) {
-    if(isDefined(level.h1_team_run_twitch_enabled[self.team])) {
+  if(isdefined(level.h1_team_run_twitch_enabled)) {
+    if(isdefined(level.h1_team_run_twitch_enabled[self.team]))
       self.noruntwitch = !level.h1_team_run_twitch_enabled[self.team];
-    }
   }
 
-  self.proneaimlimits = spawnStruct();
+  self.proneaimlimits = spawnstruct();
   self.proneaimlimits.rightaimlimit = 45;
   self.proneaimlimits.leftaimlimit = -45;
   self.proneaimlimits.upaimlimit = 35;
   self.proneaimlimits.downaimlimit = -35;
-  self.animaimlimit = spawnStruct();
+  self.animaimlimit = spawnstruct();
   self.animaimlimit.rightaimlimit = 45;
   self.animaimlimit.leftaimlimit = -45;
   self.doaimidlethread = 1;
 
-  if(!isDefined(level.disablemonitorflash)) {
+  if(!isdefined(level.disablemonitorflash))
     thread animscripts\combat_utility::monitorflash();
-  }
 
   thread ondeath();
   thread handleikevent();
@@ -227,7 +212,7 @@ handleikevent() {
   self setanimlimited( % stand_exposed_ik_add, 1);
   var_1 = 0;
 
-  for(;;) {
+  for (;;) {
     self waittill("actorik", var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
     if(var_2 <= 0.01) {
@@ -242,21 +227,18 @@ handleikevent() {
     var_5 = var_5 * -1;
     var_9 = var_0;
 
-    if(length2dsquared(self.velocity) > 0.01) {
+    if(length2dsquared(self.velocity) > 0.01)
       var_9 = -10;
-    }
 
     var_10 = 0;
     var_11 = 8;
     var_12 = 8;
 
-    if(var_3) {
+    if(var_3)
       var_12 = 5;
-    }
 
-    if(var_4) {
+    if(var_4)
       var_11 = 5;
-    }
 
     var_13[0] = var_8;
     var_13[1] = var_8 + var_7 * var_11;
@@ -276,46 +258,41 @@ handleikevent() {
       var_16[1] = 1;
     } else if(var_15[0] < var_15[1])
       var_16[0] = 1;
-    else {
+    else
       var_16[1] = 1;
-    }
 
     var_17[0] = 0;
     var_17[1] = 0;
     var_17[2] = 0;
     var_17[3] = 0;
 
-    for(var_18 = 0; var_18 < 4; var_18++) {
+    for (var_18 = 0; var_18 < 4; var_18++) {
       var_19 = var_13[var_18] + (0, 0, 30);
       var_20 = var_13[var_18] - (0, 0, 30);
       var_21 = self aiphysicstrace(var_19, var_20, 1.5, 3, 1, 1, 0, 1, 1, 1);
       var_22 = var_19 + 2 * var_21["fraction"] * (0, 0, -30);
       var_17[var_18] = var_22[2] - self.origin[2];
 
-      if(var_21["fraction"] == 1) {
+      if(var_21["fraction"] == 1)
         var_14[var_18] = 0;
-      }
     }
 
-    if(var_14[0] || var_14[1]) {
+    if(var_14[0] || var_14[1])
       var_23 = max(var_17[0], var_17[1]);
-    } else {
+    else
       var_23 = 0;
-    }
 
-    if(var_14[2] || var_14[3]) {
+    if(var_14[2] || var_14[3])
       var_24 = max(var_17[2], var_17[3]);
-    } else {
+    else
       var_24 = 0;
-    }
 
-    if(var_16[0] == 1 && var_16[1] == 1) {
+    if(var_16[0] == 1 && var_16[1] == 1)
       var_10 = min(var_23, var_24);
-    } else if(var_16[0] == 1) {
+    else if(var_16[0] == 1)
       var_10 = var_23;
-    } else {
+    else
       var_10 = var_24;
-    }
 
     var_10 = clamp(var_10, var_9, 0);
 
@@ -331,17 +308,15 @@ handleikevent() {
 }
 
 allies_with_ir() {
-  if(!isDefined(self.script_friendname)) {
+  if(!isdefined(self.script_friendname))
     return 1;
-  }
 
   var_0[0] = "Griggs";
   var_0[1] = "Nikolai";
 
   foreach(var_2 in var_0) {
-    if(issubstr(self.script_friendname, var_2)) {
+    if(issubstr(self.script_friendname, var_2))
       return 0;
-    }
   }
 
   return 1;
@@ -353,14 +328,12 @@ weapons_with_ir(var_0) {
   var_1[2] = "m4_silencer";
   var_1[3] = "m4m203";
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return 0;
-  }
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(issubstr(var_0, var_1[var_2])) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(issubstr(var_0, var_1[var_2]))
       return 1;
-    }
   }
 
   return 0;
@@ -369,16 +342,15 @@ weapons_with_ir(var_0) {
 setnameandrank_andaddtosquad() {
   self endon("death");
 
-  if(!isDefined(level.loadoutcomplete)) {
+  if(!isdefined(level.loadoutcomplete))
     level waittill("loadout complete");
-  }
 
   maps\_names::get_name();
   thread animscripts\squadmanager::addtosquad();
 }
 
 pollallowedstancesthread() {
-  for(;;) {
+  for (;;) {
     if(self isstanceallowed("stand")) {
       var_0[0] = "stand allowed";
       var_1[0] = (0, 1, 0);
@@ -406,18 +378,16 @@ pollallowedstancesthread() {
     var_2 = self getshootatpos() + (0, 0, 30);
     var_3 = (0, 0, -10);
 
-    for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    for (var_4 = 0; var_4 < var_0.size; var_4++)
       var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
-    }
 
     wait 0.05;
   }
 }
 
 setupuniqueanims() {
-  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate)) {
+  if(!isdefined(self.animplaybackrate) || !isdefined(self.moveplaybackrate))
     set_anim_playback_rate();
-  }
 }
 
 set_anim_playback_rate() {
@@ -439,16 +409,15 @@ enemynotify() {
   if(1) {
     return;
   }
-  for(;;) {
+  for (;;) {
     self waittill("enemy");
 
     if(!isalive(self.enemy)) {
       continue;
     }
-    while(isplayer(self.enemy)) {
-      if(animscripts\utility::hasenemysightpos()) {
+    while (isplayer(self.enemy)) {
+      if(animscripts\utility::hasenemysightpos())
         level.lastplayersighted = gettime();
-      }
 
       wait 2;
     }
@@ -471,7 +440,7 @@ initwindowtraverse() {
 }
 
 firstinit() {
-  if(isDefined(anim.notfirsttime)) {
+  if(isdefined(anim.notfirsttime)) {
     return;
   }
   anim.notfirsttime = 1;
@@ -492,26 +461,22 @@ firstinit() {
   initgrenades();
   initadvancetoenemy();
 
-  if(!isDefined(anim.optionalstepeffectfunction)) {
+  if(!isdefined(anim.optionalstepeffectfunction)) {
     anim.optionalstepeffectsmallfunction = animscripts\notetracks::playfootstepeffectsmall;
     anim.optionalstepeffectfunction = animscripts\notetracks::playfootstepeffect;
   }
 
-  if(!isDefined(anim.optionalstepeffects)) {
+  if(!isdefined(anim.optionalstepeffects))
     anim.optionalstepeffects = [];
-  }
 
-  if(!isDefined(anim.optionalstepeffectssmall)) {
+  if(!isdefined(anim.optionalstepeffectssmall))
     anim.optionalstepeffectssmall = [];
-  }
 
-  if(!isDefined(anim.shootenemywrapper_func)) {
+  if(!isdefined(anim.shootenemywrapper_func))
     anim.shootenemywrapper_func = animscripts\utility::shootenemywrapper_shootnotify;
-  }
 
-  if(!isDefined(anim.shootposwrapper_func)) {
+  if(!isdefined(anim.shootposwrapper_func))
     anim.shootposwrapper_func = animscripts\utility::shootposwrapper;
-  }
 
   anim.fire_notetrack_functions["scripted"] = animscripts\notetracks::fire_straight;
   anim.fire_notetrack_functions["cover_right"] = animscripts\notetracks::shootnotetrack;
@@ -521,9 +486,8 @@ firstinit() {
   anim.fire_notetrack_functions["move"] = animscripts\notetracks::shootnotetrack;
   animscripts\notetracks::registernotetracks();
 
-  if(!isDefined(level.flag)) {
+  if(!isdefined(level.flag))
     common_scripts\utility::init_flags();
-  }
 
   maps\_gameskill::setskill();
   level.painai = undefined;
@@ -534,7 +498,7 @@ firstinit() {
   anim.semifirenumshots = animscripts\utility::array(1, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5);
   anim.badplaces = [];
   anim.badplaceint = 0;
-  anim.player = getEntArray("player", "classname")[0];
+  anim.player = getentarray("player", "classname")[0];
   initbattlechatter();
   initwindowtraverse();
   animscripts\cqb::setupcqbpointsofinterest();
@@ -565,7 +529,7 @@ initdeaths() {
 }
 
 initgrenades() {
-  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+  for (var_0 = 0; var_0 < level.players.size; var_0++) {
     var_1 = level.players[var_0];
     var_1.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
     var_1.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
@@ -614,7 +578,7 @@ aiturnnotifies() {
   var_0 = 0;
   var_1 = 3;
 
-  for(;;) {
+  for (;;) {
     var_2 = getaiarray();
 
     if(var_2.size == 0) {
@@ -623,8 +587,8 @@ aiturnnotifies() {
       continue;
     }
 
-    for(var_3 = 0; var_3 < var_2.size; var_3++) {
-      if(!isDefined(var_2[var_3])) {
+    for (var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(!isdefined(var_2[var_3])) {
         continue;
       }
       var_2[var_3] notify("do_slow_things");
@@ -641,37 +605,35 @@ aiturnnotifies() {
 setnextplayergrenadetime() {
   waittillframeend;
 
-  if(isDefined(self.gs.playergrenaderangetime)) {
+  if(isdefined(self.gs.playergrenaderangetime)) {
     var_0 = int(self.gs.playergrenaderangetime * 0.7);
 
-    if(var_0 < 1) {
+    if(var_0 < 1)
       var_0 = 1;
-    }
 
     self.grenadetimers["fraggrenade"] = randomintrange(0, var_0);
     self.grenadetimers["flash_grenade"] = randomintrange(0, var_0);
     self.grenadetimers["microwave_grenade"] = randomintrange(0, var_0);
   }
 
-  if(isDefined(self.gs.playerdoublegrenadetime)) {
+  if(isdefined(self.gs.playerdoublegrenadetime)) {
     var_0 = int(self.gs.playerdoublegrenadetime);
     var_1 = int(var_0 / 2);
 
-    if(var_0 <= var_1) {
+    if(var_0 <= var_1)
       var_0 = var_1 + 1;
-    }
 
     self.grenadetimers["double_grenade"] = randomintrange(var_1, var_0);
   }
 }
 
 begingrenadetracking() {
-  if(isDefined(level.disablegrenadetracking)) {
+  if(isdefined(level.disablegrenadetracking)) {
     return;
   }
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", var_0, var_1);
     var_0 thread maps\_utility::grenade_earthquake();
   }
@@ -681,11 +643,10 @@ setuprandomtable() {
   anim.randominttablesize = 60;
   anim.randominttable = [];
 
-  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
+  for (var_0 = 0; var_0 < anim.randominttablesize; var_0++)
     anim.randominttable[var_0] = var_0;
-  }
 
-  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
+  for (var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
     var_1 = randomint(anim.randominttablesize);
     var_2 = anim.randominttable[var_0];
     anim.randominttable[var_0] = anim.randominttable[var_1];
@@ -694,14 +655,13 @@ setuprandomtable() {
 }
 
 ondeath() {
-  if(isDefined(level.disablestrangeondeath)) {
+  if(isdefined(level.disablestrangeondeath)) {
     return;
   }
   self waittill("death");
 
-  if(!isDefined(self)) {
-    if(isDefined(self.a.usingturret)) {
+  if(!isdefined(self)) {
+    if(isdefined(self.a.usingturret))
       self.a.usingturret delete();
-    }
   }
 }

@@ -126,12 +126,12 @@ coast_director_water_rise_fx(angles, fx_pos, anim_time) {
   }
   org = (fx_pos[0], fx_pos[1], offset);
   level thread coast_director_water_on_screen();
-  playFX(level._effect["director_water_burst"], org);
+  Playfx(level._effect["director_water_burst"], org);
   trail = spawn("script_model", org);
   trail.angles = angles;
   trail setModel("tag_origin");
-  playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
-  forward = VectorNormalize(anglesToForward(angles));
+  playfxontag(level._effect["director_water_trail"], trail, "tag_origin");
+  forward = VectorNormalize(AnglesToForward(angles));
   end = org + vector_scale(forward, ENTER_DIST);
   trail moveTo(end, anim_time);
   trail waittill("movedone");
@@ -164,7 +164,7 @@ coast_director_water_rise(angles, origin) {
   ENTER_DIST = 295;
   emerge_anim = % ai_zombie_boss_emerge_from_water;
   time = getAnimLength(emerge_anim);
-  forward = VectorNormalize(anglesToForward(angles));
+  forward = VectorNormalize(AnglesToForward(angles));
   fx_pos = origin - vector_scale(forward, ENTER_DIST);
   offset = fx_pos[2];
   if(isDefined(self.water_trigger)) {
@@ -172,7 +172,7 @@ coast_director_water_rise(angles, origin) {
     offset = point.origin[2];
   }
   org = (fx_pos[0], fx_pos[1], offset);
-  playFX(level._effect["director_glow_docile"], org);
+  Playfx(level._effect["director_glow_docile"], org);
   wait(1);
   playsoundatposition("zmb_director_bubble_effect", fx_pos);
   players = getplayers();
@@ -193,7 +193,7 @@ coast_director_water_rise(angles, origin) {
   self Show();
   self thread coast_director_delay_weapon();
   self SetPlayerCollision(1);
-  self playSound("zmb_director_exit_water");
+  self PlaySound("zmb_director_exit_water");
   level notify("director_emerging_audio");
   self animscripted("emerge_anim", self.origin, self.angles, emerge_anim, "normal", % body, 1, 0.1);
   wait(time);
@@ -269,7 +269,7 @@ coast_director_exit_level(exit, calm) {
   time = getAnimLength(return_anim);
   playsoundatposition("zmb_director_bubble_effect", exit.origin);
   self thread coast_director_exit_fx(time);
-  self playSound("zmb_director_enter_water");
+  self PlaySound("zmb_director_enter_water");
   self animscripted("return_anim", self.origin, self.angles, return_anim, "normal", % body, 1, 0.1);
   wait(time);
   self OrientMode("face default");
@@ -296,12 +296,12 @@ coast_director_exit_fx(anim_time) {
   self endon("death");
   EXIT_DIST = 295;
   PlayRumbleOnPosition("explosion_generic", self.origin);
-  playFX(level._effect["rise_burst_water"], self.origin);
+  Playfx(level._effect["rise_burst_water"], self.origin);
   trail = spawn("script_model", self.origin);
   trail.angles = self.angles;
   trail setModel("tag_origin");
-  playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
-  forward = VectorNormalize(anglesToForward(self.angles));
+  playfxontag(level._effect["director_water_trail"], trail, "tag_origin");
+  forward = VectorNormalize(AnglesToForward(self.angles));
   end = self.origin + vector_scale(forward, EXIT_DIST);
   trail moveTo(end, anim_time);
   trail waittill("movedone");

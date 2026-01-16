@@ -4,20 +4,18 @@
 **********************************************/
 
 birds() {
-  if(common_scripts\utility::issp()) {
+  if(common_scripts\utility::issp())
     level waittill("load_finished");
-  } else {
+  else
     level waittill("interactive_start");
-  }
 
   if(!isDefined(level._interactive["birds_setup"])) {
     level._interactive["birds_setup"] = 1;
     level._interactive["bird_perches"] = [];
     var_0 = getEntArray("interactive_birds", "targetname");
 
-    foreach(var_2 in var_0) {
-      var_2 thread birds_setup();
-    }
+    foreach(var_2 in var_0)
+    var_2 thread birds_setup();
   }
 }
 
@@ -38,15 +36,13 @@ birds_setup() {
 birds_createents() {
   var_0 = level._interactive[self.interactive_type];
 
-  if(!isDefined(self.interactive_number)) {
+  if(!isDefined(self.interactive_number))
     self.interactive_number = var_0.rig_numtags;
-  }
 
   self setModel(var_0.rig_model);
 
-  if(common_scripts\utility::issp()) {
+  if(common_scripts\utility::issp())
     self call[[level.func["useanimtree"]]](var_0.rig_animtree);
-  }
 
   self hideallparts();
   self.birds = [];
@@ -58,34 +54,30 @@ birds_createents() {
     self.birds[var_1] setModel(var_0.bird_model["idle"]);
     self.birds[var_1] linkto(self, "tag_bird" + var_1);
 
-    if(common_scripts\utility::issp()) {
+    if(common_scripts\utility::issp())
       self.birds[var_1] call[[level.func["useanimtree"]]](var_0.bird_animtree);
-    }
 
     var_2 = (var_1 - randomfloat(1)) / self.interactive_number;
     self.birds[var_1] thread maps\interactive_models\_interactive_utility::wait_then_fn(var_2, "Stop initial model setup", ::bird_sit, self, "tag_bird" + var_1, var_0.bird_model["idle"], var_0.birdmodel_anims);
     self.birdexists[var_1] = 1;
     self.numbirds++;
 
-    if(isDefined(var_0.bird_health)) {
+    if(isDefined(var_0.bird_health))
       self.birds[var_1].health = var_0.bird_health;
-    } else {
+    else
       self.birds[var_1].health = 20;
-    }
 
     self.birds[var_1] setCanDamage(1);
     self.birds[var_1] thread bird_waitfordamage(self, var_1);
   }
 
-  if(isDefined(self.script_triggername)) {
+  if(isDefined(self.script_triggername))
     thread birds_waitfortriggerstop();
-  }
 }
 
 birds_setupconnectedperches(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = getent(self.target, "targetname");
-  }
 
   var_2 = spawnStruct();
   var_2.targetname = var_0.targetname;
@@ -98,43 +90,37 @@ birds_setupconnectedperches(var_0, var_1) {
   var_2.script_noteworthy = var_0.script_noteworthy;
   var_2.script_triggername = var_0.script_triggername;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1[0] = var_2;
-  }
 
   if(isDefined(var_0.incoming)) {
-    foreach(var_4 in var_0.incoming) {
-      var_4.endperch = var_2;
-    }
+    foreach(var_4 in var_0.incoming)
+    var_4.endperch = var_2;
   }
 
   var_0 delete();
   level._interactive["bird_perches"][var_2.targetname] = var_2;
 
-  if(!isDefined(var_2.interactive_takeoffanim)) {
+  if(!isDefined(var_2.interactive_takeoffanim))
     var_2.interactive_takeoffanim = "flying";
-  }
 
-  if(!isDefined(var_2.interactive_landanim)) {
+  if(!isDefined(var_2.interactive_landanim))
     var_2.interactive_landanim = "flying";
-  }
 
   var_2.triggers = [];
   var_6 = getEntArray(var_2.targetname, "target");
 
   foreach(var_8 in var_6) {
-    if(var_8.classname == "trigger_multiple") {
+    if(var_8.classname == "trigger_multiple")
       var_2.triggers[var_2.triggers.size] = var_8;
-    }
   }
 
   if(isDefined(var_2.target)) {
     var_6 = getEntArray(var_2.target, "targetname");
 
     foreach(var_8 in var_6) {
-      if(var_8.classname == "trigger_multiple") {
+      if(var_8.classname == "trigger_multiple")
         var_2.triggers[var_2.triggers.size] = var_8;
-      }
     }
   }
 
@@ -142,9 +128,8 @@ birds_setupconnectedperches(var_0, var_1) {
     var_6 = getEntArray(var_2.script_triggername, "target");
 
     foreach(var_8 in var_6) {
-      if(var_8.classname == "trigger_multiple") {
+      if(var_8.classname == "trigger_multiple")
         var_2.triggers[var_2.triggers.size] = var_8;
-      }
     }
   }
 
@@ -170,11 +155,10 @@ birds_setupconnectedperches(var_0, var_1) {
           if(!isDefined(var_20)) {
             var_20 = getent(var_19, "targetname");
 
-            if(isDefined(var_20)) {
+            if(isDefined(var_20))
               var_20 = birds_setupconnectedperches(var_20);
-            } else {
+            else
               var_20 = level._interactive["bird_perches"][var_2.targetname];
-            }
           }
         }
 
@@ -190,17 +174,15 @@ birds_setupconnectedperches(var_0, var_1) {
 }
 
 birds_perchsetuppath(var_0) {
-  if(!isDefined(self.outgoing)) {
+  if(!isDefined(self.outgoing))
     self.outgoing = [];
-  }
 
   var_1 = common_scripts\_csplines::cspline_makepath(var_0);
   var_2 = var_0[var_0.size - 1];
 
   if(isDefined(var_2.classname)) {
-    if(!isDefined(var_2.incoming)) {
+    if(!isDefined(var_2.incoming))
       var_2.incoming = [];
-    }
 
     var_2.incoming[var_2.incoming.size] = var_1;
   }
@@ -237,13 +219,11 @@ birds_fly(var_0) {
   self.landed = 1;
   var_5 = var_1.scareradius;
 
-  if(isDefined(self.perch.script_radius)) {
+  if(isDefined(self.perch.script_radius))
     var_5 = self.perch.script_radius;
-  }
 
-  if(var_5 > 0) {
+  if(var_5 > 0)
     self.perch thread birds_perchdangertrigger(var_5, "triggered", "leaving perch");
-  }
 
   for(;;) {
     var_6 = 0;
@@ -260,11 +240,10 @@ birds_fly(var_0) {
       var_12 = undefined;
     }
 
-    if(isDefined(var_1.rigmodel_pausestart[var_2.takeoffanim])) {
+    if(isDefined(var_1.rigmodel_pausestart[var_2.takeoffanim]))
       var_13 = var_1.rigmodel_pausestart[var_2.takeoffanim];
-    } else {
+    else
       var_13 = 0;
-    }
 
     var_14 = 0;
 
@@ -283,20 +262,18 @@ birds_fly(var_0) {
       }
     }
 
-    if(isDefined(var_11) && isDefined(var_1.rigmodel_pauseend[var_2.landanim])) {
+    if(isDefined(var_11) && isDefined(var_1.rigmodel_pauseend[var_2.landanim]))
       var_15 = var_1.rigmodel_pauseend[var_2.landanim];
-    } else {
+    else
       var_15 = 0;
-    }
 
     var_16 = var_1.accn / 400;
     var_17 = var_2.segments[var_2.segments.size - 1].endat;
     var_18 = sqrt(var_16 * var_17 + var_4 * var_4 / 2);
     var_19 = var_1.topspeed / 20;
 
-    if(var_18 < var_19) {
+    if(var_18 < var_19)
       var_19 = var_18;
-    }
 
     var_20 = int((var_19 - var_4) / var_16);
     var_21 = var_16 * (var_20 / 2) * (var_20 + 1) + var_4 * var_20;
@@ -313,11 +290,10 @@ birds_fly(var_0) {
     var_25 = (var_24 + (var_20 + var_22)) / 20;
     var_26 = getanimlength(var_9);
 
-    if(isDefined(var_11)) {
+    if(isDefined(var_11))
       var_27 = getanimlength(var_7) + getanimlength(var_11) - (var_13 + var_14 + var_15);
-    } else {
+    else
       var_27 = getanimlength(var_7) - (var_13 + var_14 + var_15);
-    }
 
     var_28 = int((var_25 - var_27) / var_26 + 0.5);
     var_29 = (var_28 * var_26 + var_27) / var_25;
@@ -332,18 +308,16 @@ birds_fly(var_0) {
       var_31 = var_13 == 0;
 
       for(var_32 = 1; var_32 <= self.interactive_number; var_32++) {
-        if(self.birdexists[var_32]) {
+        if(self.birdexists[var_32])
           self.birds[var_32] thread bird_flyfromperch(self, "tag_bird" + var_32, var_1.bird_model["fly"], var_1.bird_model["idle"], var_1.birdmodel_anims, "land_" + var_32, "takeoff_" + var_32, var_31);
-        }
       }
     } else {
       self notify("stop_path");
       thread flock_fly_anim(var_7, var_6, var_9, var_11, var_29, var_28, var_8, var_10, var_12);
 
       for(var_32 = 1; var_32 <= self.interactive_number; var_32++) {
-        if(self.birdexists[var_32]) {
+        if(self.birdexists[var_32])
           self.birds[var_32] thread bird_fly(self, "tag_bird" + var_32, var_1.bird_model["fly"], var_1.bird_model["idle"], var_1.birdmodel_anims, "land_" + var_32);
-        }
       }
     }
 
@@ -377,9 +351,8 @@ birds_fly(var_0) {
       wait 0.05;
     }
 
-    if(!isDefined(var_2.endperch)) {
+    if(!isDefined(var_2.endperch))
       birds_delete();
-    }
 
     var_35 = var_17 - var_33;
     var_36 = var_35 / var_23;
@@ -402,13 +375,11 @@ birds_fly(var_0) {
       self.angles = self.perch.angles;
       var_2 = self.perch.outgoing[randomint(self.perch.outgoing.size)];
 
-      for(var_32 = 0; var_32 < 20 * var_15 && birds_isperchsafe(self.perch); var_32++) {
+      for(var_32 = 0; var_32 < 20 * var_15 && birds_isperchsafe(self.perch); var_32++)
         wait 0.05;
-      }
 
-      if(birds_isperchsafe(self.perch)) {
+      if(birds_isperchsafe(self.perch))
         self.landed = 1;
-      }
 
       continue;
     }
@@ -440,9 +411,8 @@ birds_set_flying_angles(var_0, var_1, var_2, var_3) {
 }
 
 flock_playSound(var_0, var_1) {
-  if(isDefined(var_0.sounds) && isDefined(var_0.sounds[var_1])) {
+  if(isDefined(var_0.sounds) && isDefined(var_0.sounds[var_1]))
     self playSound(var_0.sounds[var_1]);
-  }
 }
 
 flock_fly_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -456,9 +426,8 @@ flock_fly_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_10 = var_4 / (getanimlength(var_0) * 20);
       var_1 = var_1 - 2 * var_10;
 
-      if(var_1 > var_10) {
+      if(var_1 > var_10)
         var_9 = 0.3;
-      }
 
       self call[[level.func["setflaggedanimknob"]]]("bird_rig_takeoff_anim", var_0, 1, var_9, var_4);
       self.currentanim = var_0;
@@ -474,9 +443,8 @@ flock_fly_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self call[[level.func["setflaggedanimknobrestart"]]]("bird_rig_loop_anim", var_2, 1, 0, var_4);
     self.currentanim = var_2;
 
-    for(var_11 = 0; var_11 < var_5; var_11++) {
+    for(var_11 = 0; var_11 < var_5; var_11++)
       self waittillmatch("bird_rig_loop_anim", "end");
-    }
 
     if(isDefined(var_3)) {
       self call[[level.func["setflaggedanimknobrestart"]]]("bird_rig_land_anim", var_3, 1, 0.05, var_4);
@@ -494,9 +462,8 @@ flock_fly_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self call[[level.func["scriptModelPlayAnim"]]](var_7);
     self.currentanim = var_2;
 
-    for(var_11 = 0; var_11 < var_5; var_11++) {
+    for(var_11 = 0; var_11 < var_5; var_11++)
       wait(getanimlength(var_2));
-    }
 
     if(isDefined(var_3)) {
       self call[[level.func["scriptModelPlayAnim"]]](var_8);
@@ -510,9 +477,8 @@ bird_flyfromperch(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("death");
   var_0 endon("stop_path");
 
-  if(isDefined(var_6) && !var_7 && common_scripts\utility::issp()) {
+  if(isDefined(var_6) && !var_7 && common_scripts\utility::issp())
     var_0 waittillmatch("bird_rig_takeoff_anim", var_6);
-  }
 
   self notify("Stop initial model setup");
   self setModel(var_2);
@@ -528,11 +494,10 @@ bird_flyfromperch(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   } else if(isDefined(var_4["takeoff"])) {
     var_9 = maps\interactive_models\_interactive_utility::single_anim(var_4, "takeoff", "takeoff_anim", 1);
 
-    if(common_scripts\utility::issp()) {
+    if(common_scripts\utility::issp())
       self waittillmatch("takeoff_anim", "end");
-    } else {
+    else
       wait(getanimlength(var_9));
-    }
   }
 
   bird_fly(var_0, var_1, var_2, var_3, var_4, var_5);
@@ -567,9 +532,8 @@ bird_waitfordamage(var_0, var_1) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
     if(isDefined(self.origin)) {
-      if(var_6 == "MOD_GRENADE_SPLASH") {
+      if(var_6 == "MOD_GRENADE_SPLASH")
         var_5 = self.origin + (0, 0, 5);
-      }
 
       playFX(level._interactive[var_0.interactive_type].death_effect, var_5);
 
@@ -577,49 +541,42 @@ bird_waitfordamage(var_0, var_1) {
         var_0.birdexists[var_1] = 0;
         var_0.numbirds--;
 
-        if(var_0.numbirds == 0) {
+        if(var_0.numbirds == 0)
           var_0 delete();
-        }
 
         self delete();
         continue;
       }
 
-      if(isDefined(var_0.perch)) {
+      if(isDefined(var_0.perch))
         var_0.perch notify("triggered");
-      }
     }
   }
 }
 
 birds_finishbirdtypesetup(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   precachemodel(var_0.rig_model);
 
-  foreach(var_3 in var_0.bird_model) {
-    precachemodel(var_3);
-  }
+  foreach(var_3 in var_0.bird_model)
+  precachemodel(var_3);
 
   if(!common_scripts\utility::issp()) {
-    foreach(var_6 in var_0.sounds) {
-      precachesound(var_6);
-    }
+    foreach(var_6 in var_0.sounds)
+    precachesound(var_6);
 
-    for(var_8 = 1; var_8 <= 12; var_8++) {
+    for(var_8 = 1; var_8 <= 12; var_8++)
       precachestring("tag_bird" + var_8);
-    }
 
     foreach(var_10 in getarraykeys(level._interactive[self.interactive_type].rigmodel_anims)) {
       if(isendstr(var_10, "mp")) {
         var_11 = level._interactive[self.interactive_type].rigmodel_anims[var_10];
 
         if(isarray(var_11)) {
-          foreach(var_13 in var_11) {
-            call[[level.func["precacheMpAnim"]]](var_13);
-          }
+          foreach(var_13 in var_11)
+          call[[level.func["precacheMpAnim"]]](var_13);
         } else
           call[[level.func["precacheMpAnim"]]](var_11);
       }
@@ -630,9 +587,8 @@ birds_finishbirdtypesetup(var_0, var_1) {
         var_11 = level._interactive[self.interactive_type].birdmodel_anims[var_10];
 
         if(isarray(var_11)) {
-          foreach(var_13 in var_11) {
-            call[[level.func["precacheMpAnim"]]](var_13);
-          }
+          foreach(var_13 in var_11)
+          call[[level.func["precacheMpAnim"]]](var_13);
         } else
           call[[level.func["precacheMpAnim"]]](var_11);
       }
@@ -683,9 +639,8 @@ birds_get_last_takeoff(var_0, var_1, var_2) {
     if(var_6.size > 1) {
       continue;
     }
-    if(var_6[0] > var_4) {
+    if(var_6[0] > var_4)
       var_4 = var_6[0];
-    }
   }
 
   return getanimlength(var_0.rigmodel_anims[var_1]) * var_4;
@@ -704,9 +659,8 @@ birds_get_first_land(var_0, var_1, var_2) {
     if(var_6.size > 1) {
       continue;
     }
-    if(var_6[0] < var_4) {
+    if(var_6[0] < var_4)
       var_4 = var_6[0];
-    }
   }
 
   return getanimlength(var_0.rigmodel_anims[var_1]) * (1 - var_4);
@@ -718,9 +672,8 @@ birds_perchdangertrigger(var_0, var_1, var_2) {
   thread birds_perchtouchtrigger(self.trigger, var_1, var_2);
   thread birds_percheventtrigger(var_0, var_1, var_2);
 
-  foreach(var_4 in self.triggers) {
-    thread birds_perchtouchtrigger(var_4, var_1, var_2);
-  }
+  foreach(var_4 in self.triggers)
+  thread birds_perchtouchtrigger(var_4, var_1, var_2);
 }
 
 birds_perchtouchtrigger(var_0, var_1, var_2) {
@@ -775,13 +728,11 @@ birds_isperchsafe(var_0) {
       }
     }
 
-    if(var_0.lastaieventtrigger > gettime()) {
+    if(var_0.lastaieventtrigger > gettime())
       var_0.lastaieventtrigger = gettime() - 500;
-    }
 
-    if(gettime() - var_0.lastaieventtrigger >= 500) {
+    if(gettime() - var_0.lastaieventtrigger >= 500)
       var_1 = 1;
-    }
   }
 
   return var_2 && var_1;
@@ -791,37 +742,30 @@ birds_path_move_first_point(var_0, var_1, var_2) {
   var_3 = common_scripts\_csplines::cspline_movefirstpoint(var_0, var_1, var_2);
   var_3.startorigin = var_1;
 
-  if(isDefined(var_0.startangles)) {
+  if(isDefined(var_0.startangles))
     var_3.startangles = var_0.startangles;
-  }
 
-  if(isDefined(var_0.endorigin)) {
+  if(isDefined(var_0.endorigin))
     var_3.endorigin = var_0.endorigin;
-  }
 
-  if(isDefined(var_0.endangles)) {
+  if(isDefined(var_0.endangles))
     var_3.endangles = var_0.endangles;
-  }
 
-  if(isDefined(var_0.endperch)) {
+  if(isDefined(var_0.endperch))
     var_3.endperch = var_0.endperch;
-  }
 
-  if(isDefined(var_0.takeoffanim)) {
+  if(isDefined(var_0.takeoffanim))
     var_3.takeoffanim = var_0.takeoffanim;
-  }
 
-  if(isDefined(var_0.landanim)) {
+  if(isDefined(var_0.landanim))
     var_3.landanim = var_0.landanim;
-  }
 
   return var_3;
 }
 
 birds_spawnandflyaway(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level._interactive["scriptSpawnedCount"])) {
+  if(!isDefined(level._interactive["scriptSpawnedCount"]))
     level._interactive["scriptSpawnedCount"] = 0;
-  }
 
   level._interactive["scriptSpawnedCount"]++;
   var_4 = spawn("script_model", var_1);
@@ -864,9 +808,8 @@ birds_savetostruct() {
   var_0.origin = self.origin;
   var_0.targetname = self.targetname;
 
-  if(isDefined(self.interactive_number)) {
+  if(isDefined(self.interactive_number))
     var_0.interactive_number = self.interactive_number;
-  }
 
   var_0.script_triggername = self.script_triggername;
   birds_delete();
@@ -879,16 +822,14 @@ birds_loadfromstruct() {
   var_0.target = self.target;
   var_0.origin = self.origin;
 
-  if(isDefined(self.interactive_number)) {
+  if(isDefined(self.interactive_number))
     var_0.interactive_number = self.interactive_number;
-  }
 
   var_0.script_triggername = self.script_triggername;
   var_0.targetname = "interactive_birds";
 
-  if(!isDefined(level._interactive["bird_perches"][self.target])) {
+  if(!isDefined(level._interactive["bird_perches"][self.target]))
     var_0 birds_setupconnectedperches();
-  }
 
   var_0 birds_createents();
   var_0 thread birds_fly(var_0.target);
@@ -897,15 +838,13 @@ birds_loadfromstruct() {
 birds_delete() {
   if(isDefined(self.birds)) {
     for(var_0 = 1; var_0 <= self.birds.size; var_0++) {
-      if(self.birdexists[var_0]) {
+      if(self.birdexists[var_0])
         self.birds[var_0] delete();
-      }
     }
   }
 
-  if(isDefined(self.perch)) {
+  if(isDefined(self.perch))
     self.perch notify("leaving perch");
-  }
 
   self delete();
 }

@@ -13,14 +13,14 @@
 #namespace zm_bgb_power_vacuum;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_power_vacuum", &__init__, undefined, "bgb");
+  system::register("zm_bgb_power_vacuum", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_power_vacuum", "rounds", 4, &enable, &disable, undefined);
+  bgb::register("zm_bgb_power_vacuum", "rounds", 4, & enable, & disable, undefined);
 }
 
 function enable() {
@@ -28,7 +28,7 @@ function enable() {
   self endon("bled_out");
   self endon("bgb_update");
   level.powerup_drop_count = 0;
-  while(true) {
+  while (true) {
     level waittill("powerup_dropped");
     self bgb::do_one_shot_use();
     level.powerup_drop_count = 0;

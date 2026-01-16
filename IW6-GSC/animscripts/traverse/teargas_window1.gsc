@@ -4,11 +4,10 @@
 ****************************************************/
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     animscripts\traverse\shared::dog_wall_and_window_hop("wallhop", 40);
-  } else {
+  else
     teargas_traverse_window();
-  }
 }
 
 #using_animtree("generic_human");

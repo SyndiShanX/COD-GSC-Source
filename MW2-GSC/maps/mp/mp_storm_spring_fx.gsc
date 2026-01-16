@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   //ambient fx
   //level._effect[ "gas_coop_storm" ] 			= loadfx( "weather/gas_coop_storm" );
   level._effect["smoke_plume_white_01"] = loadfx("smoke/smoke_plume_white_01");
@@ -17,7 +18,9 @@ main() {
   //level._effect[ "light_c4_blink_nodlight" ] 			= loadfx( "misc/light_c4_blink_nodlight" );
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  if(getdvar("clientSideEffects") != "1") {
+  /#
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_storm_spring_fx::main();
-  }
+  # /
+
 }

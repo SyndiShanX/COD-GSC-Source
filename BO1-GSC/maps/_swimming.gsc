@@ -7,7 +7,7 @@
 #include common_scripts\utility;
 #using_animtree("player");
 settings() {
-  level._swimming = spawnStruct();
+  level._swimming = SpawnStruct();
   level._swimming.swim_times[0] = 0;
   level._swimming.swim_times[1] = 15;
   level._swimming.swim_times[2] = 25;
@@ -107,7 +107,7 @@ fx() {
 }
 
 init_player() {
-  self._swimming = spawnStruct();
+  self._swimming = SpawnStruct();
   self._swimming.is_swimming = false;
   self._swimming.is_underwater = false;
   self._swimming.is_swimming_enabled = true;

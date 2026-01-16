@@ -14,10 +14,11 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_bgb_bullet_boost;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_bullet_boost", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_bullet_boost", &__init__, undefined, #"bgb");
 }
 
 __init__() {

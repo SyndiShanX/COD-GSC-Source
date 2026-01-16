@@ -23,16 +23,16 @@
 #namespace _gadget_clone;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_clone", &__init__, undefined, undefined);
+  system::register("gadget_clone", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(42, &gadget_clone_on, &gadget_clone_off);
-  ability_player::register_gadget_possession_callbacks(42, &gadget_clone_on_give, &gadget_clone_on_take);
-  ability_player::register_gadget_flicker_callbacks(42, &gadget_clone_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(42, &gadget_clone_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(42, &gadget_clone_is_flickering);
-  callback::on_connect(&gadget_clone_on_connect);
+  ability_player::register_gadget_activation_callbacks(42, & gadget_clone_on, & gadget_clone_off);
+  ability_player::register_gadget_possession_callbacks(42, & gadget_clone_on_give, & gadget_clone_on_take);
+  ability_player::register_gadget_flicker_callbacks(42, & gadget_clone_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(42, & gadget_clone_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(42, & gadget_clone_is_flickering);
+  callback::on_connect( & gadget_clone_on_connect);
   clientfield::register("actor", "clone_activated", 1, 1, "int");
   clientfield::register("actor", "clone_damaged", 1, 1, "int");
   clientfield::register("allplayers", "clone_activated", 1, 1, "int");
@@ -56,9 +56,9 @@ function gadget_clone_on_take(slot, weapon) {}
 function gadget_clone_on_connect() {}
 
 function killclones(player) {
-  if(isDefined(player._clone)) {
+  if(isdefined(player._clone)) {
     foreach(clone in player._clone) {
-      if(isDefined(clone)) {
+      if(isdefined(clone)) {
         clone notify("clone_shutdown");
       }
     }
@@ -67,7 +67,7 @@ function killclones(player) {
 
 function is_jumping() {
   ground_ent = self getgroundent();
-  return !isDefined(ground_ent);
+  return !isdefined(ground_ent);
 }
 
 function calculatespawnorigin(origin, angles, clonedistance) {
@@ -86,7 +86,7 @@ function calculatespawnorigin(origin, angles, clonedistance) {
   testangles[9] = vectorscale((0, 1, 0), 150);
   testangles[10] = vectorscale((0, -1, 0), 150);
   testangles[11] = vectorscale((0, 1, 0), 180);
-  validspawns = spawnStruct();
+  validspawns = spawnstruct();
   validpositions = [];
   validangles = [];
   zoffests = [];
@@ -96,16 +96,16 @@ function calculatespawnorigin(origin, angles, clonedistance) {
     zoffests[2] = -5;
   }
   foreach(zoff in zoffests) {
-    for(i = 0; i < testangles.size; i++) {
+    for (i = 0; i < testangles.size; i++) {
       startangles[i] = (0, angles[1], 0);
-      startpoint = origin + (vectorscale(anglesToForward(startangles[i] + testangles[i]), clonedistance));
+      startpoint = origin + (vectorscale(anglestoforward(startangles[i] + testangles[i]), clonedistance));
       startpoint = startpoint + (0, 0, zoff);
       if(playerpositionvalidignoreent(startpoint, self)) {
         closestnavmeshpoint = getclosestpointonnavmesh(startpoint, 500);
-        if(isDefined(closestnavmeshpoint)) {
+        if(isdefined(closestnavmeshpoint)) {
           startpoint = closestnavmeshpoint;
           trace = groundtrace(startpoint + (0, 0, 24), startpoint - (0, 0, 24), 0, 0, 0);
-          if(isDefined(trace["position"])) {
+          if(isdefined(trace["position"])) {
             startpoint = trace["position"];
           }
         }
@@ -127,8 +127,8 @@ function calculatespawnorigin(origin, angles, clonedistance) {
 
 function insertclone(clone) {
   insertedclone = 0;
-  for(i = 0; i < 20; i++) {
-    if(!isDefined(level._clone[i])) {
+  for (i = 0; i < 20; i++) {
+    if(!isdefined(level._clone[i])) {
       level._clone[i] = clone;
       insertedclone = 1;
       println((("" + i) + "") + level._clone.size);
@@ -139,8 +139,8 @@ function insertclone(clone) {
 }
 
 function removeclone(clone) {
-  for(i = 0; i < 20; i++) {
-    if(isDefined(level._clone[i]) && level._clone[i] == clone) {
+  for (i = 0; i < 20; i++) {
+    if(isdefined(level._clone[i]) && level._clone[i] == clone) {
       level._clone[i] = undefined;
       array::remove_undefined(level._clone);
       println((("" + i) + "") + level._clone.size);
@@ -152,13 +152,13 @@ function removeclone(clone) {
 function removeoldestclone() {
   assert(level._clone.size == 20);
   oldestclone = undefined;
-  for(i = 0; i < 20; i++) {
-    if(!isDefined(oldestclone) && isDefined(level._clone[i])) {
+  for (i = 0; i < 20; i++) {
+    if(!isdefined(oldestclone) && isdefined(level._clone[i])) {
       oldestclone = level._clone[i];
       oldestindex = i;
       continue;
     }
-    if(isDefined(level._clone[i]) && level._clone[i].spawntime < oldestclone.spawntime) {
+    if(isdefined(level._clone[i]) && level._clone[i].spawntime < oldestclone.spawntime) {
       oldestclone = level._clone[i];
       oldestindex = i;
     }
@@ -176,27 +176,27 @@ function spawnclones() {
   velocity = self getvelocity();
   velocity = velocity + (0, 0, velocity[2] * -1);
   velocity = vectornormalize(velocity);
-  origin = (self.origin + (velocity * 17)) + vectorscale(anglesToForward(self getangles()), 17);
+  origin = (self.origin + (velocity * 17)) + vectorscale(anglestoforward(self getangles()), 17);
   validspawns = calculatespawnorigin(origin, self getangles(), 60);
   if(validspawns.validpositions.size < 3) {
     validextendedspawns = calculatespawnorigin(origin, self getangles(), 180);
-    for(index = 0; index < validextendedspawns.validpositions.size && validspawns.validpositions.size < 3; index++) {
+    for (index = 0; index < validextendedspawns.validpositions.size && validspawns.validpositions.size < 3; index++) {
       validspawns.validpositions[validspawns.validpositions.size] = validextendedspawns.validpositions[index];
       validspawns.validangles[validspawns.validangles.size] = validextendedspawns.validangles[index];
     }
   }
-  for(i = 0; i < validspawns.validpositions.size; i++) {
+  for (i = 0; i < validspawns.validpositions.size; i++) {
     traveldistance = distance(validspawns.validpositions[i], self.origin);
     validspawns.spawntimes[i] = traveldistance / 800;
     self thread _cloneorbfx(validspawns.validpositions[i], validspawns.spawntimes[i]);
   }
-  for(i = 0; i < validspawns.validpositions.size; i++) {
+  for (i = 0; i < validspawns.validpositions.size; i++) {
     if(level._clone.size < 20) {} else {
       removeoldestclone();
     }
     clone = spawnactor("spawner_bo3_human_male_reaper_mp", validspawns.validpositions[i], validspawns.validangles[i], "", 1);
     recordcircle(validspawns.validpositions[i], 2, (1, 0.5, 0), "", clone);
-    _configureclone(clone, self, anglesToForward(validspawns.validangles[i]), validspawns.spawntimes[i]);
+    _configureclone(clone, self, anglestoforward(validspawns.validangles[i]), validspawns.spawntimes[i]);
     self._clone[self._clone.size] = clone;
     insertclone(clone);
     wait(0.05);
@@ -210,14 +210,14 @@ function spawnclones() {
 function gadget_clone_on(slot, weapon) {
   self clientfield::set("clone_activated", 1);
   self flagsys::set("clone_activated");
-  fx = playFX("player/fx_plyr_clone_reaper_appear", self.origin, anglesToForward(self getangles()));
+  fx = playfx("player/fx_plyr_clone_reaper_appear", self.origin, anglestoforward(self getangles()));
   fx.team = self.team;
   thread spawnclones();
 }
 
 function private _updateclonepathing() {
   self endon("death");
-  while(true) {
+  while (true) {
     if(getdvarint("tu1_gadgetCloneSwimming", 1)) {
       if((self.origin[2] + 36) <= getwaterheight(self.origin)) {
         blackboard::setblackboardattribute(self, "_stance", "swim");
@@ -227,7 +227,7 @@ function private _updateclonepathing() {
       }
     }
     if(getdvarint("tu1_gadgetCloneCrouching", 1)) {
-      if(!isDefined(self.lastknownpos)) {
+      if(!isdefined(self.lastknownpos)) {
         self.lastknownpos = self.origin;
         self.lastknownpostime = gettime();
       }
@@ -242,11 +242,11 @@ function private _updateclonepathing() {
       }
     }
     distance = 0;
-    if(isDefined(self._clone_goal)) {
+    if(isdefined(self._clone_goal)) {
       distance = distancesquared(self._clone_goal, self.origin);
     }
     if(distance < 14400 || !self haspath()) {
-      forward = anglesToForward(self getangles());
+      forward = anglestoforward(self getangles());
       searchorigin = self.origin + (forward * 750);
       self._goal_center_point = searchorigin;
       queryresult = positionquery_source_navigation(self._goal_center_point, 500, 750, 750, 100, self);
@@ -267,8 +267,8 @@ function private _updateclonepathing() {
 function _cloneorbfx(endpos, traveltime) {
   spawnpos = self gettagorigin("j_spine4");
   fxorg = spawn("script_model", spawnpos);
-  fxorg setModel("tag_origin");
-  fx = playFXOnTag("player/fx_plyr_clone_reaper_orb", fxorg, "tag_origin");
+  fxorg setmodel("tag_origin");
+  fx = playfxontag("player/fx_plyr_clone_reaper_orb", fxorg, "tag_origin");
   fx.team = self.team;
   fxendpos = endpos + (0, 0, 35);
   fxorg moveto(fxendpos, traveltime);
@@ -280,18 +280,18 @@ function private _clonecopyplayerlook(clone, player) {
   if(getdvarint("tu1_gadgetCloneCopyLook", 1)) {
     if(isplayer(player) && isai(clone)) {
       bodymodel = player getcharacterbodymodel();
-      if(isDefined(bodymodel)) {
-        clone setModel(bodymodel);
+      if(isdefined(bodymodel)) {
+        clone setmodel(bodymodel);
       }
       headmodel = player getcharacterheadmodel();
-      if(isDefined(headmodel)) {
-        if(isDefined(clone.head)) {
+      if(isdefined(headmodel)) {
+        if(isdefined(clone.head)) {
           clone detach(clone.head);
         }
         clone attach(headmodel);
       }
       helmetmodel = player getcharacterhelmetmodel();
-      if(isDefined(helmetmodel)) {
+      if(isdefined(helmetmodel)) {
         clone attach(helmetmodel);
       }
     }
@@ -303,12 +303,12 @@ function private _configureclone(clone, player, forward, spawntime) {
   clone.propername = "";
   clone.ignoretriggerdamage = 1;
   clone.minwalkdistance = 125;
-  clone.overrideactordamage = &clonedamageoverride;
+  clone.overrideactordamage = & clonedamageoverride;
   clone.spawntime = gettime();
   clone setmaxhealth(int(1.5 * level.playermaxhealth));
   if(getdvarint("tu1_aiPathableMaterials", 0)) {
-    if(isDefined(clone.pathablematerial)) {
-      clone.pathablematerial = clone.pathablematerial &(~2);
+    if(isdefined(clone.pathablematerial)) {
+      clone.pathablematerial = clone.pathablematerial & (~2);
     }
   }
   clone pushactors(1);
@@ -327,7 +327,7 @@ function private _configureclone(clone, player, forward, spawntime) {
   clone._goal_center_point = (forward * 1000) + clone.origin;
   clone._goal_center_point = getclosestpointonnavmesh(clone._goal_center_point, 600);
   queryresult = undefined;
-  if(isDefined(clone._goal_center_point) && clone findpath(clone.origin, clone._goal_center_point, 1, 0)) {
+  if(isdefined(clone._goal_center_point) && clone findpath(clone.origin, clone._goal_center_point, 1, 0)) {
     queryresult = positionquery_source_navigation(clone._goal_center_point, 0, 450, 450, 100, clone);
   } else {
     queryresult = positionquery_source_navigation(clone.origin, 500, 750, 750, 50, clone);
@@ -346,8 +346,8 @@ function private _configureclone(clone, player, forward, spawntime) {
 }
 
 function private _playdematerialization() {
-  if(isDefined(self)) {
-    fx = playFX("player/fx_plyr_clone_vanish", self.origin);
+  if(isdefined(self)) {
+    fx = playfx("player/fx_plyr_clone_vanish", self.origin);
     fx.team = self.team;
     playsoundatposition("mpl_clone_holo_death", self.origin);
   }
@@ -355,7 +355,7 @@ function private _playdematerialization() {
 
 function private _clonewatchdeath() {
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self stoploopsound();
     self _playdematerialization();
     removeclone(self);
@@ -379,9 +379,9 @@ function private _show(spawntime) {
   wait(spawntime);
   self show();
   self clientfield::set("clone_activated", 1);
-  fx = playFX("player/fx_plyr_clone_reaper_appear", self.origin, anglesToForward(self getangles()));
+  fx = playfx("player/fx_plyr_clone_reaper_appear", self.origin, anglestoforward(self getangles()));
   fx.team = self.team;
-  self playLoopSound("mpl_clone_gadget_loop_npc");
+  self playloopsound("mpl_clone_gadget_loop_npc");
 }
 
 function gadget_clone_off(slot, weapon) {
@@ -389,7 +389,7 @@ function gadget_clone_off(slot, weapon) {
   self flagsys::clear("clone_activated");
   self killclones(self);
   self _playdematerialization();
-  if(isalive(self) && isDefined(level.playgadgetsuccess)) {
+  if(isalive(self) && isdefined(level.playgadgetsuccess)) {
     self[[level.playgadgetsuccess]](weapon, "cloneSuccessDelay");
   }
 }
@@ -402,9 +402,9 @@ function private _clonedamaged() {
 }
 
 function processclonescoreevent(clone, attacker, weapon) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isdefined(attacker) && isplayer(attacker)) {
     if(!level.teambased || clone.team != attacker.pers["team"]) {
-      if(isDefined(clone.isaiclone) && clone.isaiclone) {
+      if(isdefined(clone.isaiclone) && clone.isaiclone) {
         scoreevents::processscoreevent("killed_clone_enemy", attacker, clone, weapon);
       }
     }
@@ -417,12 +417,12 @@ function clonedamageoverride(einflictor, eattacker, idamage, idflags, smeansofde
     processclonescoreevent(self, eattacker, weapon);
     self notify("clone_shutdown");
   }
-  if(isDefined(level.weaponlightninggun) && weapon == level.weaponlightninggun) {
+  if(isdefined(level.weaponlightninggun) && weapon == level.weaponlightninggun) {
     processclonescoreevent(self, eattacker, weapon);
     self notify("clone_shutdown");
   }
   supplydrop = getweapon("supplydrop");
-  if(isDefined(supplydrop) && supplydrop == weapon) {
+  if(isdefined(supplydrop) && supplydrop == weapon) {
     processclonescoreevent(self, eattacker, weapon);
     self notify("clone_shutdown");
   }
@@ -435,7 +435,7 @@ function _clonewatchownerdisconnect(player) {
   clone endon("watchcloneownerdisconnect");
   clone endon("clone_shutdown");
   player util::waittill_any("joined_team", "disconnect", "joined_spectators");
-  if(isDefined(clone)) {
+  if(isdefined(clone)) {
     clone notify("clone_shutdown");
   }
 }
@@ -444,7 +444,7 @@ function _clonewatchshutdown() {
   clone = self;
   clone waittill("clone_shutdown");
   removeclone(clone);
-  if(isDefined(clone)) {
+  if(isdefined(clone)) {
     if(!level.gameended) {
       clone kill();
     } else {
@@ -459,7 +459,7 @@ function _clonebreakglass() {
   clone = self;
   clone endon("clone_shutdown");
   clone endon("death");
-  while(true) {
+  while (true) {
     clone util::break_glass();
     wait(0.25);
   }
@@ -469,14 +469,14 @@ function _clonefakefire() {
   clone = self;
   clone endon("clone_shutdown");
   clone endon("death");
-  while(true) {
+  while (true) {
     waittime = randomfloatrange(0.5, 3);
     wait(waittime);
     shotsfired = randomintrange(1, 4);
-    if(isDefined(clone.fakefireweapon) && clone.fakefireweapon != level.weaponnone) {
+    if(isdefined(clone.fakefireweapon) && clone.fakefireweapon != level.weaponnone) {
       players = getplayers();
       foreach(player in players) {
-        if(isDefined(player) && isalive(player) && player getteam() != clone.team) {
+        if(isdefined(player) && isalive(player) && player getteam() != clone.team) {
           if(distancesquared(player.origin, clone.origin) < 562500) {
             if(clone cansee(player)) {
               clone fakefire(clone.owner, clone.origin, clone.fakefireweapon, shotsfired);
@@ -496,23 +496,25 @@ function _cloneselectweapon(player) {
   items = _clonebuilditemlist(player);
   playerweapon = player getcurrentweapon();
   ball = getweapon("ball");
-  if(isDefined(playerweapon) && isDefined(ball) && playerweapon == ball) {
+  if(isdefined(playerweapon) && isdefined(ball) && playerweapon == ball) {
     weapon = ball;
   } else {
-    if(isDefined(playerweapon.worldmodel) && _testplayerweapon(playerweapon, items["primary"])) {
+    if(isdefined(playerweapon.worldmodel) && _testplayerweapon(playerweapon, items["primary"])) {
       weapon = playerweapon;
     } else {
-      if(isDefined(level.var_7ce7fbed)) {
-        weapon = [[level.var_7ce7fbed]](player);
+      if(isdefined(level.var_7ce7fbed)) {
+        weapon = [
+          [level.var_7ce7fbed]
+        ](player);
       } else {
         weapon = undefined;
       }
-      if(!isDefined(weapon)) {
+      if(!isdefined(weapon)) {
         weapon = _chooseweapon(player);
       }
     }
   }
-  if(isDefined(weapon)) {
+  if(isdefined(weapon)) {
     clone shared::placeweaponon(weapon, "right");
     clone.fakefireweapon = weapon;
   }
@@ -521,7 +523,7 @@ function _cloneselectweapon(player) {
 function _clonebuilditemlist(player) {
   pixbeginevent("clone_build_item_list");
   items = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     row = tablelookuprownum(level.statstableid, 0, i);
     if(row > -1) {
       slot = tablelookupcolumnforrow(level.statstableid, row, 13);
@@ -537,7 +539,7 @@ function _clonebuilditemlist(player) {
         continue;
       }
       name = tablelookupcolumnforrow(level.statstableid, row, 3);
-      if(!isDefined(items[slot])) {
+      if(!isdefined(items[slot])) {
         items[slot] = [];
       }
       items[slot][items[slot].size] = name;
@@ -549,7 +551,7 @@ function _clonebuilditemlist(player) {
 
 function private _chooseweapon(player) {
   classnum = randomint(10);
-  for(i = 0; i < 10; i++) {
+  for (i = 0; i < 10; i++) {
     weapon = player getloadoutweapon((i + classnum) % 10, "primary");
     if(weapon != level.weaponnone) {
       break;
@@ -559,10 +561,10 @@ function private _chooseweapon(player) {
 }
 
 function private _testplayerweapon(playerweapon, items) {
-  if(!isDefined(items) || !items.size || !isDefined(playerweapon)) {
+  if(!isdefined(items) || !items.size || !isdefined(playerweapon)) {
     return false;
   }
-  for(i = 0; i < items.size; i++) {
+  for (i = 0; i < items.size; i++) {
     displayname = items[i];
     if(playerweapon.displayname == displayname) {
       return true;

@@ -37,9 +37,8 @@ onstartgametype() {
 zstandard_main() {
   level.dog_rounds_allowed = getgametypesetting("allowdogs");
 
-  if(level.dog_rounds_allowed) {
+  if(level.dog_rounds_allowed)
     maps\mp\zombies\_zm_ai_dogs::enable_dog_rounds();
-  }
 
   level thread maps\mp\zombies\_zm::round_start();
   level thread maps\mp\gametypes_zm\_zm_gametype::kill_all_zombies();

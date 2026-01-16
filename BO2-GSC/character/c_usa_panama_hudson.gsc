@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setModel("c_usa_panama_hudson_upper");
+  self setmodel("c_usa_panama_hudson_upper");
   self.headmodel = "c_usa_panama_hudson_head";
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_usa_panama_hudson_lower";

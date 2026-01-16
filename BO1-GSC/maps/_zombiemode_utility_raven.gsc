@@ -34,7 +34,7 @@ SpawnAndLinkFXToTag(effect, ent, tag) {
   fxEnt = spawn("script_model", ent GetTagOrigin(tag));
   fxEnt LinkTo(ent, tag);
   fxEnt setModel("tag_origin_animate");
-  playFXOnTag(effect, fxEnt, "tag_origin");
+  PlayFxOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
 }
 
@@ -42,7 +42,7 @@ SpawnAndLinkFXToOffset(effect, ent, offsetOrigin, offsetAngles) {
   fxEnt = spawn("script_model", (0, 0, 0));
   fxEnt LinkTo(ent, "", offsetOrigin, offsetAngles);
   fxEnt setModel("tag_origin_animate");
-  playFXOnTag(effect, fxEnt, "tag_origin");
+  PlayFxOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
 }
 

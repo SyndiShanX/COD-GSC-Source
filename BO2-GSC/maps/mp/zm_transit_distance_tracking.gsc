@@ -11,13 +11,11 @@
 zombie_tracking_init() {
   level.zombie_respawned_health = [];
 
-  if(!isDefined(level.zombie_tracking_dist)) {
+  if(!isDefined(level.zombie_tracking_dist))
     level.zombie_tracking_dist = 1500;
-  }
 
-  if(!isDefined(level.zombie_tracking_wait)) {
+  if(!isDefined(level.zombie_tracking_wait))
     level.zombie_tracking_wait = 10;
-  }
 
   while(true) {
     zombies = get_round_enemy_array();
@@ -27,9 +25,8 @@ zombie_tracking_init() {
       continue;
     } else {
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i]) && !(isDefined(zombies[i].ignore_distance_tracking) && zombies[i].ignore_distance_tracking)) {
+        if(isDefined(zombies[i]) && !(isDefined(zombies[i].ignore_distance_tracking) && zombies[i].ignore_distance_tracking))
           zombies[i] thread delete_zombie_noone_looking(level.zombie_tracking_dist);
-        }
       }
     }
 
@@ -40,16 +37,14 @@ zombie_tracking_init() {
 delete_zombie_noone_looking(how_close) {
   self endon("death");
 
-  if(!isDefined(how_close)) {
+  if(!isDefined(how_close))
     how_close = 1000;
-  }
 
   distance_squared_check = how_close * how_close;
   too_far_dist = distance_squared_check * 3;
 
-  if(isDefined(level.zombie_tracking_too_far_dist)) {
+  if(isDefined(level.zombie_tracking_too_far_dist))
     too_far_dist = level.zombie_tracking_too_far_dist * level.zombie_tracking_too_far_dist;
-  }
 
   self.inview = 0;
   self.player_close = 0;
@@ -60,20 +55,17 @@ delete_zombie_noone_looking(how_close) {
       continue;
     }
     if(isDefined(level.only_track_targeted_players)) {
-      if(!isDefined(self.favoriteenemy) || self.favoriteenemy != players[i]) {
+      if(!isDefined(self.favoriteenemy) || self.favoriteenemy != players[i])
         continue;
-      }
     }
 
     can_be_seen = self player_can_see_me(players[i]);
 
-    if(can_be_seen && distancesquared(self.origin, players[i].origin) < too_far_dist) {
+    if(can_be_seen && distancesquared(self.origin, players[i].origin) < too_far_dist)
       self.inview++;
-    }
 
-    if(distancesquared(self.origin, players[i].origin) < distance_squared_check) {
+    if(distancesquared(self.origin, players[i].origin) < distance_squared_check)
       self.player_close++;
-    }
   }
 
   wait 0.1;
@@ -99,9 +91,8 @@ delete_zombie_noone_looking(how_close) {
       if(!(isDefined(self.exclude_distance_cleanup_adding_to_total) && self.exclude_distance_cleanup_adding_to_total) && !(isDefined(self.isscreecher) && self.isscreecher)) {
         level.zombie_total++;
 
-        if(self.health < level.zombie_health) {
+        if(self.health < level.zombie_health)
           level.zombie_respawned_health[level.zombie_respawned_health.size] = self.health;
-        }
       }
     }
 
@@ -114,7 +105,7 @@ delete_zombie_noone_looking(how_close) {
 
 player_can_see_me(player) {
   playerangles = player getplayerangles();
-  playerforwardvec = anglesToForward(playerangles);
+  playerforwardvec = anglestoforward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
@@ -122,20 +113,18 @@ player_can_see_me(player) {
   playertobanzaiunitvec = vectornormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
 
-  if(forwarddotbanzai >= 1) {
+  if(forwarddotbanzai >= 1)
     anglefromcenter = 0;
-  } else if(forwarddotbanzai <= -1) {
+  else if(forwarddotbanzai <= -1)
     anglefromcenter = 180;
-  } else {
+  else
     anglefromcenter = acos(forwarddotbanzai);
-  }
 
   playerfov = getdvarfloat(#"cg_fov");
   banzaivsplayerfovbuffer = getdvarfloat(#"_id_BCB625CF");
 
-  if(banzaivsplayerfovbuffer <= 0) {
+  if(banzaivsplayerfovbuffer <= 0)
     banzaivsplayerfovbuffer = 0.2;
-  }
 
   playercanseeme = anglefromcenter <= playerfov * 0.5 * (1 - banzaivsplayerfovbuffer);
   return playercanseeme;

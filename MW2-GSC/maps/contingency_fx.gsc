@@ -67,13 +67,14 @@ main() {
   level thread footStepEffects();
 
   maps\createfx\contingency_fx::main();
+
 }
 
 playerEffect() {
   level endon("stop_snow");
-  player = getEntArray("player", "classname")[0];
-  for(;;) {
-    playFX(level._effect["snow_light"], player.origin + (0, 0, 300), player.origin + (0, 0, 350));
+  player = getentarray("player", "classname")[0];
+  for (;;) {
+    playfx(level._effect["snow_light"], player.origin + (0, 0, 300), player.origin + (0, 0, 350));
     wait(0.075);
   }
 }
@@ -107,6 +108,7 @@ footStepEffects() {
 }
 
 treadfx_override() {
+
   maps\_treadfx::setvehiclefx("bm21_troops", "brick", "treadfx/tread_snow_slush_uaz");
   maps\_treadfx::setvehiclefx("bm21_troops", "bark", "treadfx/tread_snow_slush_uaz");
   maps\_treadfx::setvehiclefx("bm21_troops", "carpet", "treadfx/tread_snow_slush_uaz");
@@ -325,4 +327,5 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("mi17", "painted metal", flying_tread_fx);
   maps\_treadfx::setvehiclefx("mi17", "default", flying_tread_fx);
   maps\_treadfx::setvehiclefx("mi17", "none", flying_tread_fx);
+
 }

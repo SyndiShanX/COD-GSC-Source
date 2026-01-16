@@ -39,10 +39,9 @@ player_is_in_laststand() {
 player_num_in_laststand() {
   num = 0;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
-    if(players[i] player_is_in_laststand()) {
+  for (i = 0; i < players.size; i++) {
+    if(players[i] player_is_in_laststand())
       num++;
-    }
   }
   return num;
 }
@@ -69,11 +68,12 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self.stats["downs"] = self.downs;
   dvarName = "player" + self GetEntityNumber() + "downs";
   setdvar(dvarName, self.downs);
-  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
+  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf")
     self AllowJump(false);
-  }
   if(isDefined(level.playerlaststand_func)) {
-    [[level.playerlaststand_func]]();
+    [
+      [level.playerlaststand_func]
+    ]();
   }
   maps\_challenges_coop::doMissionCallback("playerDied", self);
   if(!laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc)) {
@@ -121,7 +121,7 @@ laststand_take_player_weapons() {
   self.lastActiveWeapon = self GetCurrentWeapon();
   self.laststandpistol = undefined;
   self.weaponAmmo = [];
-  for(i = 0; i < self.weaponInventory.size; i++) {
+  for (i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     if(WeaponClass(weapon) == "pistol" && !isDefined(self.laststandpistol)) {
       self.laststandpistol = weapon;
@@ -150,7 +150,7 @@ laststand_take_player_weapons() {
 laststand_giveback_player_weapons() {
   ASSERTEX(isDefined(self.weaponInventory), "player.weaponInventory is not defined - did you run laststand_take_player_weapons() first?");
   self TakeAllWeapons();
-  for(i = 0; i < self.weaponInventory.size; i++) {
+  for (i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     switch (weapon) {
       case "syrette":
@@ -162,9 +162,8 @@ laststand_giveback_player_weapons() {
     }
     self GiveWeapon(weapon);
     self SetWeaponAmmoClip(weapon, self.weaponAmmo[weapon]["clip"]);
-    if(WeaponType(weapon) != "grenade") {
+    if(WeaponType(weapon) != "grenade")
       self SetWeaponAmmoStock(weapon, self.weaponAmmo[weapon]["stock"]);
-    }
   }
   if(self.lastActiveWeapon != "none" && self.lastActiveWeapon != "mortar_round" && self.lastActiveWeapon != "mine_bouncing_betty") {
     self SwitchToWeapon(self.lastActiveWeapon);
@@ -214,7 +213,7 @@ laststand_give_pistol() {
 laststand_give_grenade() {
   self endon("player_revived");
   self endon("disconnect");
-  while(self isThrowingGrenade()) {
+  while (self isThrowingGrenade()) {
     wait(0.05);
   }
   if(level.campaign == "russian") {
@@ -232,16 +231,16 @@ laststand_bleedout(delay) {
   self endon("disconnect");
   setClientSysState("lsm", "1", self);
   self.bleedout_time = delay;
-  while(self.bleedout_time > Int(delay * 0.5)) {
+  while (self.bleedout_time > Int(delay * 0.5)) {
     self.bleedout_time -= 1;
     wait(1);
   }
   self VisionSetLastStand("death", delay * 0.5);
-  while(self.bleedout_time > 0) {
+  while (self.bleedout_time > 0) {
     self.bleedout_time -= 1;
     wait(1);
   }
-  while(self.revivetrigger.beingRevived == 1) {
+  while (self.revivetrigger.beingRevived == 1) {
     wait(0.1);
   }
   setClientSysState("lsm", "0", self);
@@ -270,11 +269,10 @@ revive_trigger_spawn() {
 }
 
 revive_debug() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
-    if(!player player_is_in_laststand()) {
+    if(!player player_is_in_laststand())
       iprintln("revive triggered!");
-    }
     wait(0.05);
   }
 }
@@ -282,11 +280,11 @@ revive_debug() {
 revive_trigger_think() {
   self endon("disconnect");
   self endon("zombified");
-  while(1) {
+  while (1) {
     wait(0.1);
     players = get_players();
     self.revivetrigger setHintString("");
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       is_sumpf = 0;
       d = 0;
       if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
@@ -299,7 +297,7 @@ revive_trigger_think() {
         break;
       }
     }
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       reviver = players[i];
       if(!reviver is_reviving(self)) {
         continue;
@@ -314,9 +312,8 @@ revive_trigger_think() {
       reviver SetWeaponAmmoStock("syrette", 1);
       revive_success = reviver revive_do_revive(self, gun);
       reviver revive_give_back_weapons(gun);
-      if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
+      if(isDefined(level.script) && level.script == "nazi_zombie_sumpf")
         self AllowJump(true);
-      }
       if(revive_success) {
         self thread revive_success(reviver);
         return;
@@ -338,27 +335,20 @@ revive_give_back_weapons(gun) {
 }
 
 can_revive(revivee) {
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     return false;
-  }
-  if(self player_is_in_laststand()) {
+  if(self player_is_in_laststand())
     return false;
-  }
-  if(!isDefined(revivee.revivetrigger)) {
+  if(!isDefined(revivee.revivetrigger))
     return false;
-  }
-  if(!self IsTouching(revivee.revivetrigger)) {
+  if(!self IsTouching(revivee.revivetrigger))
     return false;
-  }
-  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && (revivee depthinwater() > 10)) {
+  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && (revivee depthinwater() > 10))
     return true;
-  }
-  if(!self is_facing(revivee)) {
+  if(!self is_facing(revivee))
     return false;
-  }
-  if(!SightTracePassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined)) {
+  if(!SightTracePassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined))
     return false;
-  }
   if(!bullettracepassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined)) {
     return false;
   }
@@ -367,12 +357,10 @@ can_revive(revivee) {
       return false;
     }
   }
-  if(level.script == "nazi_zombie_asylum" && isDefined(self.is_drinking)) {
+  if(level.script == "nazi_zombie_asylum" && isDefined(self.is_drinking))
     return false;
-  }
-  if(level.script == "nazi_zombie_sumpf" && isDefined(self.is_drinking)) {
+  if(level.script == "nazi_zombie_sumpf" && isDefined(self.is_drinking))
     return false;
-  }
   return true;
 }
 
@@ -405,12 +393,10 @@ revive_do_revive(playerBeingRevived, reviverGun) {
   playerBeingRevived revive_hud_show_n_fade(3.0);
   playerBeingRevived.revivetrigger setHintString("");
   playerBeingRevived startrevive(self);
-  if(!isDefined(self.reviveProgressBar)) {
+  if(!isDefined(self.reviveProgressBar))
     self.reviveProgressBar = self createPrimaryProgressBar();
-  }
-  if(!isDefined(self.reviveTextHud)) {
+  if(!isDefined(self.reviveTextHud))
     self.reviveTextHud = newclientHudElem(self);
-  }
   self thread laststand_clean_up_on_disconnect(playerBeingRevived, reviverGun);
   self.reviveProgressBar updateBar(0.01, 1 / reviveTime);
   self.reviveTextHud.alignX = "center";
@@ -418,16 +404,15 @@ revive_do_revive(playerBeingRevived, reviverGun) {
   self.reviveTextHud.horzAlign = "center";
   self.reviveTextHud.vertAlign = "bottom";
   self.reviveTextHud.y = -148;
-  if(IsSplitScreen()) {
+  if(IsSplitScreen())
     self.reviveTextHud.y = -107;
-  }
   self.reviveTextHud.foreground = true;
   self.reviveTextHud.font = "default";
   self.reviveTextHud.fontScale = 1.8;
   self.reviveTextHud.alpha = 1;
   self.reviveTextHud.color = (1.0, 1.0, 1.0);
   self.reviveTextHud setText(&"GAME_REVIVING");
-  while(self is_reviving(playerBeingRevived)) {
+  while (self is_reviving(playerBeingRevived)) {
     wait(0.05);
     timer += 0.05;
     if(self player_is_in_laststand()) {
@@ -455,9 +440,9 @@ revive_do_revive(playerBeingRevived, reviverGun) {
 say_reviving_vo() {
   if(GetDvar("zombiemode") == "1" || IsSubStr(level.script, "nazi_zombie_")) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] == self) {
-        self playSound("plr_" + i + "_vox_reviving" + "_" + randomintrange(0, 2));
+        self playsound("plr_" + i + "_vox_reviving" + "_" + randomintrange(0, 2));
       }
     }
   }
@@ -466,9 +451,9 @@ say_reviving_vo() {
 say_revived_vo() {
   if(GetDvar("zombiemode") == "1" || IsSubStr(level.script, "nazi_zombie_")) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] == self) {
-        self playSound("plr_" + i + "_vox_revived" + "_" + randomintrange(0, 2));
+        self playsound("plr_" + i + "_vox_revived" + "_" + randomintrange(0, 2));
       }
     }
   }
@@ -518,14 +503,14 @@ revive_hud_create() {
 
 revive_hud_think() {
   self endon("disconnect");
-  while(1) {
+  while (1) {
     wait(0.1);
     if(!player_any_player_in_laststand()) {
       continue;
     }
     players = get_players();
     playerToRevive = undefined;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!players[i] player_is_in_laststand() || !isDefined(players[i].revivetrigger.createtime)) {
         continue;
       }
@@ -534,7 +519,7 @@ revive_hud_think() {
       }
     }
     if(isDefined(playerToRevive)) {
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i] player_is_in_laststand()) {
           continue;
         }
@@ -574,7 +559,7 @@ revive_hud_show_n_fade(time) {
 drawcylinder(pos, rad, height) {
   currad = rad;
   curheight = height;
-  for(r = 0; r < 20; r++) {
+  for (r = 0; r < 20; r++) {
     theta = r / 20 * 360;
     theta2 = (r + 1) / 20 * 360;
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));
@@ -588,7 +573,7 @@ mission_failed_during_laststand(dead_player) {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       players[i] thread maps\_quotes::displayMissionFailed();
       if(players[i] == self) {

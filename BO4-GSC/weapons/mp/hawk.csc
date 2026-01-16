@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace hawk_mp;
 
 autoexec __init__system__() {
@@ -117,7 +118,7 @@ on_local_player_spawned(localclientnum) {
   player = function_5c10bd79(localclientnum);
   vehicle = getplayervehicle(player);
 
-  if(isDefined(vehicle) && (vehicle.vehicletype === # "veh_hawk_player_mp" || vehicle.vehicletype === # "veh_hawk_player_far_range_mp")) {
+  if(isDefined(vehicle) && (vehicle.vehicletype === #"veh_hawk_player_mp" || vehicle.vehicletype === #"veh_hawk_player_far_range_mp")) {
     return;
   }
 
@@ -125,7 +126,7 @@ on_local_player_spawned(localclientnum) {
 }
 
 function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.vehicletype != # "veh_hawk_player_mp" && self.vehicletype != # "veh_hawk_player_far_range_mp") {
+  if(self.vehicletype != #"veh_hawk_player_mp" && self.vehicletype != #"veh_hawk_player_far_range_mp") {
     return;
   }
 
@@ -143,12 +144,12 @@ function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_775073e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    function_a837926b(localclientnum, # "hash_594d5293046135ff");
+  if(!function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    function_a837926b(localclientnum, #"hash_594d5293046135ff");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -159,12 +160,12 @@ function_775073e(localclientnum) {
 }
 
 function_6367489e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    function_a837926b(localclientnum, # "hash_63b0389eb9286669");
+  if(!function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    function_a837926b(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -175,12 +176,12 @@ function_6367489e(localclientnum) {
 }
 
 function_3759fcf(localclientnum, var_c5e2f09a) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -249,13 +250,13 @@ function_5a1bf101(localclientnum) {
   var_8736e321 = 1;
   var_6c8b920a = [];
   stance_offsets = [];
-  stance_offsets[# "stand"] = (0, 0, 60);
-  stance_offsets[# "crouch"] = (0, 0, 40);
-  stance_offsets[# "prone"] = (0, 0, 12);
+  stance_offsets[#"stand"] = (0, 0, 60);
+  stance_offsets[#"crouch"] = (0, 0, 40);
+  stance_offsets[#"prone"] = (0, 0, 12);
 
   while(isDefined(hawk_owner) && isplayer(hawk_owner) && hawk_owner function_21c0fa55()) {
     if(hawk_owner isremotecontrolling(localclientnum)) {
-      if(!isinvehicle(localclientnum, self) && isDefined(hawk_owner.weapon) && hawk_owner.weapon.statname == # "remote_missile") {
+      if(!isinvehicle(localclientnum, self) && isDefined(hawk_owner.weapon) && hawk_owner.weapon.statname == #"remote_missile") {
         if(var_c0443ab2) {
           function_86f17acc(controllermodel, var_1f3cc5f9);
           var_6c8b920a = [];
@@ -273,7 +274,7 @@ function_5a1bf101(localclientnum) {
       var_98977cea = isDefined(bundle.var_98977cea) ? bundle.var_98977cea : 2;
     }
 
-    now = hawk_owner getclienttime();
+      now = hawk_owner getclienttime();
     var_c0443ab2 = 1;
     var_1d7ce7ba = project2dto3d(localclientnum, 0, 0, 12);
     var_14569a7a = 0;
@@ -318,7 +319,7 @@ function_5a1bf101(localclientnum) {
           trace = bulletTrace(var_1d7ce7ba, target_player.origin + stance_offsets[target_player getstance()], 0, hawk_owner);
 
           if(isDefined(trace)) {
-            var_d7caaee9 = trace[# "fraction"] < 1;
+            var_d7caaee9 = trace[#"fraction"] < 1;
             setuimodelvalue(var_78e27c6d[ti], var_d7caaee9);
           }
         }

@@ -51,9 +51,8 @@ sidequest_complete_fx(story, skiprunners) {
   electric_struct = getstruct("sq_common_tower_fx", "targetname");
   players = getlocalplayers();
 
-  if(isDefined(electric_struct)) {
+  if(isDefined(electric_struct))
     level thread sidequest_complete_fx_lightning(electric_struct);
-  }
 
   if(isDefined(electric_structs) && !is_true(skiprunners)) {
     while(true) {
@@ -74,9 +73,8 @@ sidequest_complete_fx_lightning(electric_struct) {
   while(true) {
     players = getlocalplayers();
 
-    foreach(clientnum, player in players) {
-      playFX(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
-    }
+    foreach(clientnum, player in players)
+    playfx(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
 
     wait(randomfloatrange(1, 2));
   }
@@ -89,11 +87,10 @@ sidequest_complete_pyramid_watch() {
     event = level waittill_any_return8("zsd", "zsf", "zsb", "zsbd", "zsbt", "zsh", "zsp", "zsc");
     story = level waittill_any_return("sq_max", "sq_rich");
 
-    if(story == "sq_max") {
+    if(story == "sq_max")
       story = "maxis";
-    } else {
+    else
       story = "richtofen";
-    }
 
     level thread sidequest_complete_fx_triangle_runner(story, event, electric_struct);
   }
@@ -110,9 +107,9 @@ sidequest_complete_fx_triangle_runner(story, event, end_struct) {
 
     foreach(index, client in players) {
       fxrunners[index] = spawn(index, screech_struct.origin + vectorscale((0, 0, 1), 140.0), "script_model");
-      fxrunners[index] setModel("tag_origin");
+      fxrunners[index] setmodel("tag_origin");
       wait 0.05;
-      playFXOnTag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
+      playfxontag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
     }
 
     foreach(runner in fxrunners) {
@@ -144,9 +141,9 @@ sidequest_complete_fx_runner(story, struct) {
 
   foreach(index, client in players) {
     fxrunners[index] = spawn(index, struct.origin, "script_model");
-    fxrunners[index] setModel("tag_origin");
+    fxrunners[index] setmodel("tag_origin");
     wait 0.1;
-    playFXOnTag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
+    playfxontag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
     fxrunners[index] thread sidequest_complete_fx_runner_move(struct);
     wait 0.1;
   }
@@ -159,9 +156,8 @@ sidequest_complete_fx_runner_move(struct) {
     self waittill("movedone");
   }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 get_screecher_zone(str) {
@@ -197,50 +193,40 @@ get_screecher_zone(str) {
   structs = getstructarray("screecher_escape", "targetname");
 
   for(x = 0; x < structs.size; x++) {
-    if(isDefined(structs[x].script_noteworthy) && structs[x].script_noteworthy == key) {
+    if(isDefined(structs[x].script_noteworthy) && structs[x].script_noteworthy == key)
       return structs[x];
-    }
   }
 }
 
 waittill_any_return8(string1, string2, string3, string4, string5, string6, string7, string8) {
-  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death") && (!isDefined(string7) || string7 != "death") && (!isDefined(string8) || string8 != "death")) {
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death") && (!isDefined(string7) || string7 != "death") && (!isDefined(string8) || string8 != "death"))
     self endon("death");
-  }
 
-  ent = spawnStruct();
+  ent = spawnstruct();
 
-  if(isDefined(string1)) {
+  if(isDefined(string1))
     self thread waittill_string(string1, ent);
-  }
 
-  if(isDefined(string2)) {
+  if(isDefined(string2))
     self thread waittill_string(string2, ent);
-  }
 
-  if(isDefined(string3)) {
+  if(isDefined(string3))
     self thread waittill_string(string3, ent);
-  }
 
-  if(isDefined(string4)) {
+  if(isDefined(string4))
     self thread waittill_string(string4, ent);
-  }
 
-  if(isDefined(string5)) {
+  if(isDefined(string5))
     self thread waittill_string(string5, ent);
-  }
 
-  if(isDefined(string6)) {
+  if(isDefined(string6))
     self thread waittill_string(string6, ent);
-  }
 
-  if(isDefined(string7)) {
+  if(isDefined(string7))
     self thread waittill_string(string7, ent);
-  }
 
-  if(isDefined(string8)) {
+  if(isDefined(string8))
     self thread waittill_string(string8, ent);
-  }
 
   ent waittill("returned", msg);
   ent notify("die");

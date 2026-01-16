@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_tutorial_skirmish;
+
 #namespace sd;
 
 event_handler[gametype_init] main(eventstruct) {

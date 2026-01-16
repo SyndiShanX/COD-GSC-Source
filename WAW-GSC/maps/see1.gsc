@@ -54,11 +54,11 @@ main() {
   flag_init("truck3_unloading");
   flag_init("ending_tank_ready");
   flag_init("reznov_on_tank");
-  add_start("event0", ::start_opening, &"START_SEE1_1_OPENING");
-  add_start("event1", ::start_event1, &"START_SEE1_2_BURNING_FOREST");
-  add_start("event2", ::start_event2, &"START_SEE1_3_TANK_BATTLE");
-  add_start("event3", ::start_event3, &"START_SEE1_4_CAMP");
-  add_start("outro", ::start_event3_outro, &"START_SEE1_5_OUTRO");
+  add_start("event0", ::start_opening, & "START_SEE1_1_OPENING");
+  add_start("event1", ::start_event1, & "START_SEE1_2_BURNING_FOREST");
+  add_start("event2", ::start_event2, & "START_SEE1_3_TANK_BATTLE");
+  add_start("event3", ::start_event3, & "START_SEE1_4_CAMP");
+  add_start("outro", ::start_event3_outro, & "START_SEE1_5_OUTRO");
   default_start(::start_opening);
   level.campaign = "russian";
   setdvar("r_watersim_enabled", "0");
@@ -108,9 +108,9 @@ main() {
 debug_model_debug() {
   wait(5);
   players = get_players();
-  while(1) {
-    all_models = getEntArray("script_model", "classname");
-    for(i = 0; i < all_models.size; i++) {
+  while (1) {
+    all_models = getentarray("script_model", "classname");
+    for (i = 0; i < all_models.size; i++) {
       if(all_models[i].model == "char_rus_guard_body1_2") {
         line(players[0].origin, all_models[i].origin, (0.9, 0.9, 0.9), false);
         print3d(all_models[i].origin + (0, 0, 40), "*2*", (0.9, 0.9, 0.9), 1, 3);
@@ -151,26 +151,26 @@ precache_items() {
   precachemodel("vehicle_rus_tracked_t34_setc_turret");
   precacheRumble("artillery_rumble");
   precacheRumble("damage_heavy");
-  level.obj1_string = &"SEE1_OBJECTIVE1";
-  level.obj2_string = &"SEE1_OBJECTIVE2";
-  level.obj1b_string = &"SEE1_OBJECTIVE1_B";
-  level.obj1c_string = &"SEE1_OBJECTIVE1_C";
-  level.obj3a_string = &"SEE1_OBJECTIVE3A";
-  level.obj3b_string = &"SEE1_OBJECTIVE3B";
-  level.obj3c_string = &"SEE1_OBJECTIVE3C";
-  level.obj3d_string = &"SEE1_OBJECTIVE3D";
-  level.obj3e_string = &"SEE1_OBJECTIVE3E";
-  level.obj4_string = &"SEE1_OBJECTIVE4";
-  level.obj5_string = &"SEE1_OBJECTIVE5";
-  level.obj6_string = &"SEE1_OBJECTIVE6";
-  level.obj7_string = &"SEE1_OBJECTIVE7";
-  level.obj8_string = &"SEE1_OBJECTIVE8";
-  level.obj9_string = &"SEE1_OBJECTIVE9";
-  level.obj10a_string = &"SEE1_OBJECTIVE10A";
-  level.obj10b_string = &"SEE1_OBJECTIVE10B";
-  level.obj10c_string = &"SEE1_OBJECTIVE10C";
-  level.obj11_string = &"SEE1_OBJECTIVE11";
-  level.obj12_string = &"SEE1_OBJECTIVE12";
+  level.obj1_string = & "SEE1_OBJECTIVE1";
+  level.obj2_string = & "SEE1_OBJECTIVE2";
+  level.obj1b_string = & "SEE1_OBJECTIVE1_B";
+  level.obj1c_string = & "SEE1_OBJECTIVE1_C";
+  level.obj3a_string = & "SEE1_OBJECTIVE3A";
+  level.obj3b_string = & "SEE1_OBJECTIVE3B";
+  level.obj3c_string = & "SEE1_OBJECTIVE3C";
+  level.obj3d_string = & "SEE1_OBJECTIVE3D";
+  level.obj3e_string = & "SEE1_OBJECTIVE3E";
+  level.obj4_string = & "SEE1_OBJECTIVE4";
+  level.obj5_string = & "SEE1_OBJECTIVE5";
+  level.obj6_string = & "SEE1_OBJECTIVE6";
+  level.obj7_string = & "SEE1_OBJECTIVE7";
+  level.obj8_string = & "SEE1_OBJECTIVE8";
+  level.obj9_string = & "SEE1_OBJECTIVE9";
+  level.obj10a_string = & "SEE1_OBJECTIVE10A";
+  level.obj10b_string = & "SEE1_OBJECTIVE10B";
+  level.obj10c_string = & "SEE1_OBJECTIVE10C";
+  level.obj11_string = & "SEE1_OBJECTIVE11";
+  level.obj12_string = & "SEE1_OBJECTIVE12";
 }
 
 start_opening() {
@@ -194,7 +194,7 @@ start_opening() {
 
 players_connect_opening() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] allowstand(true);
     players[i] allowcrouch(false);
     players[i] allowprone(false);

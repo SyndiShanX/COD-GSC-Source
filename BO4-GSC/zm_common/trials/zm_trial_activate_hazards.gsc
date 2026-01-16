@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_activate_hazards;
 
 autoexec __init__system__() {

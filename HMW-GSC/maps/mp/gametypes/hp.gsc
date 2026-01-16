@@ -8,7 +8,9 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [[level.initializematchrules]]();
+    [
+      [level.initializematchrules]
+    ]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 30);
@@ -40,9 +42,8 @@ main() {
   level.onprecachegametype = ::onprecachegametype;
   game["dialog"]["gametype"] = "headquarters";
 
-  if(getdvarint("g_hardcore")) {
+  if(getdvarint("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
 
   if(!level.initialzonedelay) {
     game["dialog"]["offense_obj"] = "null";
@@ -99,9 +100,9 @@ initializematchrules() {
 }
 
 onprecachegametype() {
-  level.objectivehintpreparezone = &"MP_CONTROL_KOTH";
-  level.objectivehintcapturezone = &"MP_CAPTURE_KOTH";
-  level.objectivehintdefendhq = &"MP_DEFEND_KOTH";
+  level.objectivehintpreparezone = & "MP_CONTROL_KOTH";
+  level.objectivehintcapturezone = & "MP_CAPTURE_KOTH";
+  level.objectivehintdefendhq = & "MP_DEFEND_KOTH";
   level.iconneutral3d = "waypoint_captureneutral";
   level.iconneutral2d = "waypoint_captureneutral";
   level.iconcapture3d = "waypoint_capture";
@@ -114,8 +115,8 @@ onprecachegametype() {
   level.iconbluespectator = "waypoint_esports_hardpoint_blue";
   level.iconredspectator = "waypoint_esports_hardpoint_red";
   level.iconcontestedspectator = "waypoint_contested";
-  level.zonespawninginstr = &"MP_KOTH_AVAILABLE_IN";
-  level.zonedestroyedinenemystr = &"MP_KOTH_MOVING_IN";
+  level.zonespawninginstr = & "MP_KOTH_AVAILABLE_IN";
+  level.zonedestroyedinenemystr = & "MP_KOTH_MOVING_IN";
 }
 
 updateobjectivehintmessages(var_0, var_1) {
@@ -128,9 +129,8 @@ updateobjectivehintmessage(var_0) {
 }
 
 onstartgametype() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = 0;
-  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -139,22 +139,21 @@ onstartgametype() {
     game["defenders"] = var_0;
   }
 
-  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_KOTH");
-  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_KOTH");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH");
-    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH_SCORE");
   }
 
-  if(level.initialzonedelay) {
+  if(level.initialzonedelay)
     updateobjectivehintmessage(level.objectivehintpreparezone);
-  } else {
+  else
     updateobjectivehintmessage(level.objectivehintcapturezone);
-  }
 
   setclientnamemode("auto_change");
   initspawns();
@@ -175,7 +174,7 @@ onstartgametype() {
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0.gameobjecthudindex = 0;
     var_0.objective = 0;
@@ -204,9 +203,8 @@ initspawns() {
 getspawnpointiw4() {
   var_0 = self.pers["team"];
 
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     var_0 = maps\mp\_utility::getotherteam(var_0);
-  }
 
   var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
   var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_hardpoint(var_2);
@@ -218,16 +216,16 @@ getspawnpointiw4() {
 getspawnpointh1() {
   var_0 = self.pers["team"];
 
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     var_0 = maps\mp\_utility::getotherteam(var_0);
-  }
 
-  if(level.usestartspawns && level.ingraceperiod) {
+  if(level.usestartspawns && level.ingraceperiod)
     var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_hp_spawn_" + var_0 + "_start");
-  } else {
+  else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_hardpoint(var_2);
   }
+
 
   maps\mp\gametypes\_spawnlogic::recon_set_spawnpoint(var_1);
   return var_1;
@@ -240,17 +238,15 @@ hpupdateuserate() {
 }
 
 spawn_next_zone() {
-  if(level.randomzonespawn) {
+  if(level.randomzonespawn)
     level.zone = getnextzonefromqueue();
-  } else {
+  else
     level.zone = getnextzone();
-  }
 
   setneutralicons();
 
-  if(ish1map()) {
+  if(ish1map())
     level.zone namedborderhidden();
-  }
 }
 
 hpcaptureloop() {
@@ -258,10 +254,10 @@ hpcaptureloop() {
   level endon("zone_moved");
   level.hpstarttime = gettime();
 
-  for(;;) {
+  for (;;) {
     level.zone.gameobject maps\mp\gametypes\_gameobjects::allowuse("any");
     level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetime(0);
-    level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetext(&"MP_CAPTURING_OBJECTIVE");
+    level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetext( & "MP_CAPTURING_OBJECTIVE");
     level.zone.gameobject maps\mp\gametypes\_gameobjects::setvisibleteam("any");
     if(scripts\mp_patches\common::is_iw4_map()) {
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setmodelvisibility(0);
@@ -280,13 +276,12 @@ hpcaptureloop() {
     }
     var_1 = level.zone.gameobject maps\mp\gametypes\_gameobjects::getownerteam();
 
-    if(var_1 == "allies") {
+    if(var_1 == "allies")
       updateobjectivehintmessages(level.objectivehintdefendhq, level.objectivehintcapturezone);
-    } else if(var_1 == "axis") {
+    else if(var_1 == "axis")
       updateobjectivehintmessages(level.objectivehintcapturezone, level.objectivehintdefendhq);
-    } else {
+    else
       updateobjectivehintmessages(level.objectivehintcapturezone, level.objectivehintcapturezone);
-    }
 
     level.zone.gameobject maps\mp\gametypes\_gameobjects::allowuse("none");
     level.zone.gameobject.onuse = undefined;
@@ -296,7 +291,7 @@ hpcaptureloop() {
     level waittill("zone_destroyed", var_2);
     thread forcespawnteam(var_1);
 
-    if(isDefined(var_2)) {
+    if(isdefined(var_2)) {
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setownerteam(var_2);
       continue;
     }
@@ -306,13 +301,12 @@ hpcaptureloop() {
 }
 
 updategameobjecthudindex() {
-  for(;;) {
+  for (;;) {
     foreach(var_1 in level.players) {
       var_2 = var_1;
 
-      if(var_1.team == "spectator" || var_1.sessionstate == "spectator") {
+      if(var_1.team == "spectator" || var_1.sessionstate == "spectator")
         var_2 = var_1 getspectatingplayer();
-      }
 
       if(!maps\mp\_utility::isreallyalive(var_2)) {
         var_1 setgameobjecthudindex(var_1, 0);
@@ -344,9 +338,8 @@ setgameobjecthudindex(var_0, var_1) {
   if(var_1) {
     var_2 = 1;
 
-    if(isDefined(level.zone.gameobject.iscontested) && level.zone.gameobject.iscontested) {
+    if(isdefined(level.zone.gameobject.iscontested) && level.zone.gameobject.iscontested)
       var_2 = 2;
-    }
   }
 
   if(var_2 != var_0.gameobjecthudindex) {
@@ -363,7 +356,7 @@ hardpointmainloop() {
   maps\mp\_utility::gameflagwait("prematch_done");
   level childthread updategameobjecthudindex();
 
-  for(;;) {
+  for (;;) {
     maps\mp\_utility::playsoundonplayers("mp_suitcase_pickup");
     maps\mp\_utility::flushgroupdialog("gamemode_objective");
     if(scripts\mp_patches\common::is_iw4_map()) {
@@ -380,9 +373,8 @@ hardpointmainloop() {
     if(level.initialzonedelay) {
       setwaitingicons(level.zone);
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setvisibleteam("any");
-      if(ish1map()) {
+      if(ish1map())
         level.zone namedborderneutral();
-      }
 
       updateobjectivehintmessage(level.objectivehintpreparezone);
       setomnvar("ui_hardpoint_timer", gettime() + 1000 * level.initialzonedelay);
@@ -396,9 +388,8 @@ hardpointmainloop() {
     level thread maps\mp\_utility::playsoundonplayers(game["objective_active"]);
     level.zone.gameobject maps\mp\gametypes\_gameobjects::enableobject();
     level.zone.gameobject.capturecount = 0;
-    if(ish1map()) {
+    if(ish1map())
       level.zone namedborderneutral();
-    }
 
     if(level.zoneduration) {
       thread movezoneaftertime(level.zoneduration);
@@ -417,15 +408,13 @@ hardpointmainloop() {
     level.zone.gameobject maps\mp\gametypes\_gameobjects::set2dicon("mlg", undefined);
     level.zone.gameobject maps\mp\gametypes\_gameobjects::set3dicon("mlg", undefined);
 
-    if(ish1map()) {
+    if(ish1map())
       level.zone namedborderhidden();
-    }
 
     level notify("zone_reset");
 
-    if(isDefined(level.hp_pause_for_dynamic_event) && level.hp_pause_for_dynamic_event == 1) {
+    if(isdefined(level.hp_pause_for_dynamic_event) && level.hp_pause_for_dynamic_event == 1)
       level waittill("ready_for_next_hp_zone");
-    }
 
     spawn_next_zone();
     wait 0.5;
@@ -437,10 +426,10 @@ hardpointmainloop() {
 forcespawnteam(var_0) {
   var_1 = level.players;
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
 
-    if(!isDefined(var_3)) {
+    if(!isdefined(var_3)) {
       continue;
     }
     if(var_3.pers["team"] == var_0) {
@@ -459,17 +448,15 @@ onzonecapture(var_0) {
   level.usestartspawns = 0;
   setteamicons(var_1);
 
-  if(ish1map()) {
+  if(ish1map())
     level.zone namedborderowned(var_1);
-  }
 
-  if(!isDefined(self.lastcaptureteam) || self.lastcaptureteam != var_1) {
+  if(!isdefined(self.lastcaptureteam) || self.lastcaptureteam != var_1) {
     var_4 = [];
     var_5 = getarraykeys(self.touchlist[var_1]);
 
-    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    for (var_6 = 0; var_6 < var_5.size; var_6++)
       var_4[var_5[var_6]] = self.touchlist[var_1][var_5[var_6]];
-    }
 
     level thread give_capture_credit(var_4, var_3, var_1, self.lastcaptureteam);
     level thread maps\mp\_utility::leaderdialog("hp_secured", var_1, "gamemode_objective");
@@ -481,14 +468,13 @@ onzonecapture(var_0) {
   level.hpcapteam = var_1;
   maps\mp\gametypes\_gameobjects::setownerteam(var_1);
 
-  if(isDefined(self.lastcaptureteam) && self.lastcaptureteam != var_1) {
-    for(var_7 = 0; var_7 < level.players.size; var_7++) {
+  if(isdefined(self.lastcaptureteam) && self.lastcaptureteam != var_1) {
+    for (var_7 = 0; var_7 < level.players.size; var_7++) {
       var_0 = level.players[var_7];
 
       if(var_0.pers["team"] == var_1) {
-        if(isDefined(var_0.lastkilldefendertime) && var_0.lastkilldefendertime + 500 > gettime()) {
+        if(isdefined(var_0.lastkilldefendertime) && var_0.lastkilldefendertime + 500 > gettime())
           var_0 maps\mp\gametypes\_missions::processchallenge("ch_hp_killedLastContester");
-        }
       }
     }
   }
@@ -504,26 +490,27 @@ onzonecapture(var_0) {
 give_capture_credit(var_0, var_1, var_2, var_3) {
   var_4 = getarraykeys(var_0);
 
-  for(var_5 = 0; var_5 < var_4.size; var_5++) {
+  for (var_5 = 0; var_5 < var_4.size; var_5++) {
     var_6 = var_0[var_4[var_5]].player;
     var_6 updatecapsperminute(var_3);
 
     if(!isscoreboosting(var_6)) {
       var_6 maps\mp\gametypes\_missions::processchallenge("ch_hpcaptures");
 
-      if(level.hpstarttime + 500 > var_1) {
+      if(level.hpstarttime + 500 > var_1)
         var_6 maps\mp\gametypes\_missions::processchallenge("ch_hp_immediateCapture");
-      }
 
       var_6 thread maps\mp\_events::securehardpointevent();
-    } else {}
+    } else {
+
+    }
 
     wait 0.05;
   }
 }
 
 namedbordervisible(var_0, var_1) {
-  if(!isDefined(self.namedborders[var_0])) {
+  if(!isdefined(self.namedborders[var_0])) {
     return;
   }
   foreach(var_3 in self.namedborders[var_0]) {
@@ -541,7 +528,7 @@ namedbordervisible(var_0, var_1) {
 }
 
 namedbordershowtoteam(var_0, var_1) {
-  if(!isDefined(self.namedborders[var_0])) {
+  if(!isdefined(self.namedborders[var_0])) {
     return;
   }
   foreach(var_3 in self.namedborders[var_0]) {
@@ -588,9 +575,8 @@ onzoneunoccupied() {
     level.zone.gameobject.wasleftunoccupied = 1;
     setneutralicons();
 
-    if(ish1map()) {
+    if(ish1map())
       level.zone namedborderneutral();
-    }
   }
 }
 
@@ -600,9 +586,8 @@ onzonecontested() {
   level.zone.gameobject.iscontested = 1;
   setcontestedicons();
 
-  if(ish1map()) {
+  if(ish1map())
     level.zone namedbordercontested();
-  }
 
   level thread maps\mp\_utility::playsoundonplayers(game["objective_contested_sound"]);
   maps\mp\_utility::leaderdialog("hp_contested", undefined, "gamemode_objective");
@@ -612,17 +597,15 @@ onzoneuncontested(var_0) {
   level.zone.gameobject.iscontested = 0;
   setteamicons(var_0);
 
-  if(ish1map()) {
+  if(ish1map())
     level.zone namedborderowned(var_0);
-  }
 
   level.zone.gameobject maps\mp\gametypes\_gameobjects::setclaimteam(var_0);
 }
 
 setneutralicons(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = level.zone;
-  }
 
   var_0.gameobject maps\mp\gametypes\_gameobjects::set2dicon("friendly", level.iconneutral2d);
   var_0.gameobject maps\mp\gametypes\_gameobjects::set3dicon("friendly", level.iconneutral3d);
@@ -633,9 +616,8 @@ setneutralicons(var_0) {
 }
 
 setwaitingicons(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = level.zone;
-  }
 
   var_1 = "waypoint_waitfor_flag_neutral";
   var_0.gameobject maps\mp\gametypes\_gameobjects::set2dicon("friendly", var_1);
@@ -677,14 +659,13 @@ movezoneaftertime(var_0) {
   level.zonedestroyedbytimer = 0;
   wait(var_0);
 
-  if(!isDefined(level.zone.gameobject.wascontested) || level.zone.gameobject.wascontested == 0) {
-    if(!isDefined(level.zone.gameobject.wasleftunoccupied) || level.zone.gameobject.wasleftunoccupied == 0) {
+  if(!isdefined(level.zone.gameobject.wascontested) || level.zone.gameobject.wascontested == 0) {
+    if(!isdefined(level.zone.gameobject.wasleftunoccupied) || level.zone.gameobject.wasleftunoccupied == 0) {
       var_1 = level.zone.gameobject maps\mp\gametypes\_gameobjects::getownerteam();
 
       foreach(var_3 in level.players) {
-        if(var_3.pers["team"] == var_1) {
+        if(var_3.pers["team"] == var_1)
           var_3 maps\mp\gametypes\_missions::processchallenge("ch_hp_controlZoneEntirely");
-        }
       }
     }
   }
@@ -703,19 +684,18 @@ awardcapturepoints(var_0, var_1) {
   var_2 = 1;
   var_3 = 1;
 
-  while(!level.gameended) {
+  while (!level.gameended) {
     wait(var_2);
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
     if(!level.zone.gameobject.iscontested) {
-      if(level.scoreperplayer) {
+      if(level.scoreperplayer)
         var_3 = level.zone.gameobject.numtouching[var_0];
-      }
 
       var_4 = level.zone.gameobject.touchlist[var_0];
       var_5 = getarraykeys(var_4);
 
-      for(var_6 = 0; var_6 < var_5.size; var_6++) {
+      for (var_6 = 0; var_6 < var_5.size; var_6++) {
         var_7 = var_4[var_5[var_6]].player;
 
         if(!isplayer(var_7)) {
@@ -733,38 +713,33 @@ comparezoneindexes(var_0, var_1) {
   var_2 = var_0.script_index;
   var_3 = var_1.script_index;
 
-  if(!isDefined(var_2) && !isDefined(var_3)) {
+  if(!isdefined(var_2) && !isdefined(var_3))
     return 0;
-  }
 
-  if(!isDefined(var_2) && isDefined(var_3)) {
+  if(!isdefined(var_2) && isdefined(var_3))
     return 1;
-  }
 
-  if(isDefined(var_2) && !isDefined(var_3)) {
+  if(isdefined(var_2) && !isdefined(var_3))
     return 0;
-  }
 
-  if(var_2 > var_3) {
+  if(var_2 > var_3)
     return 1;
-  }
 
   return 0;
 }
 
 getzonearray(var_0) {
-  var_1 = getEntArray(var_0, "targetname");
+  var_1 = getentarray(var_0, "targetname");
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return undefined;
-  }
 
   var_2 = 1;
 
-  for(var_3 = var_1.size; var_2; var_3--) {
+  for (var_3 = var_1.size; var_2; var_3--) {
     var_2 = 0;
 
-    for(var_4 = 0; var_4 < var_3 - 1; var_4++) {
+    for (var_4 = 0; var_4 < var_3 - 1; var_4++) {
       if(comparezoneindexes(var_1[var_4], var_1[var_4 + 1])) {
         var_5 = var_1[var_4];
         var_1[var_4] = var_1[var_4 + 1];
@@ -780,29 +755,28 @@ getzonearray(var_0) {
 setupzones() {
   if(scripts\mp_patches\common::is_iw4_map()) {
     level.zonesentr = getzonearray("hq_hardpoint");
-    level.zonetrigg = getEntArray("radiotrigger", "targetname");
+    level.zonetrigg = getentarray("radiotrigger", "targetname");
     level.zones = matchzonestotriggers(level.zonesentr, level.zonetrigg);
     level.centeraugm = getzonearray("hq_hardpoint");
-    level.triggaugm = getEntArray("radiotrigger", "targetname");
+    level.triggaugm = getentarray("radiotrigger", "targetname");
   }
 
   if(ish1map()) {
     level.zonesentr = getzonearray("hp_zone_center");
-    level.zonetrigg = getEntArray("hp_zone_trigger", "targetname");
+    level.zonetrigg = getentarray("hp_zone_trigger", "targetname");
     level.zones = matchzonestotriggers(level.zonesentr, level.zonetrigg);
     level.centeraugm = getzonearray("hp_zone_center_augmented");
-    level.triggaugm = getEntArray("hp_zone_trigger_augmented", "targetname");
+    level.triggaugm = getentarray("hp_zone_trigger_augmented", "targetname");
   }
 
-  if(isDefined(level.centeraugm) && isDefined(level.triggaugm)) {
+  if(isdefined(level.centeraugm) && isdefined(level.triggaugm)) {
     level.centeraugm = matchzonestotriggers(level.centeraugm, level.triggaugm);
 
     if(maps\mp\_utility::isaugmentedgamemode()) {
       foreach(var_5 in level.centeraugm) {
-        for(var_6 = 0; var_6 < level.zones.size; var_6++) {
-          if(level.zones[var_6].script_index == var_5.script_index) {
+        for (var_6 = 0; var_6 < level.zones.size; var_6++) {
+          if(level.zones[var_6].script_index == var_5.script_index)
             level.zones[var_6] = var_5;
-          }
         }
       }
     }
@@ -813,14 +787,14 @@ setupzones() {
 }
 
 matchzonestotriggers(var_0, var_1) {
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = 0;
     var_4 = var_0[var_2];
     var_4.trig = undefined;
 
-    for(var_5 = 0; var_5 < var_1.size; var_5++) {
+    for (var_5 = 0; var_5 < var_1.size; var_5++) {
       if(var_4 istouching(var_1[var_5])) {
-        if(isDefined(var_4.trig)) {
+        if(isdefined(var_4.trig)) {
           var_3 = 1;
           break;
         }
@@ -830,10 +804,9 @@ matchzonestotriggers(var_0, var_1) {
       }
     }
 
-    if(!isDefined(var_4.trig)) {
-      if(!var_3) {
+    if(!isdefined(var_4.trig)) {
+      if(!var_3)
         continue;
-      }
     }
 
     var_4.trigorigin = var_4.trig.origin;
@@ -841,16 +814,15 @@ matchzonestotriggers(var_0, var_1) {
     var_6[0] = var_4;
     var_4.namedborders = [];
 
-    if(isDefined(var_4.target)) {
-      var_7 = getEntArray(var_4.target, "targetname");
+    if(isdefined(var_4.target)) {
+      var_7 = getentarray(var_4.target, "targetname");
 
       foreach(var_9 in var_7) {
         var_10 = var_9.script_noteworthy;
 
-        if(isDefined(var_10)) {
-          if(!isDefined(var_4.namedborders[var_10])) {
+        if(isdefined(var_10)) {
+          if(!isdefined(var_4.namedborders[var_10]))
             var_4.namedborders[var_10] = [];
-          }
 
           var_11 = var_4.namedborders[var_10].size;
           var_4.namedborders[var_10][var_11] = var_9;
@@ -873,9 +845,8 @@ matchzonestotriggers(var_0, var_1) {
     var_4.gameobject.objpoints["mlg"] sethidetrigger(var_4.trig);
     var_4 setupnearbyspawns();
 
-    if(ish1map()) {
+    if(ish1map())
       var_4 namedborderhidden();
-    }
   }
 
   return var_0;
@@ -884,16 +855,14 @@ matchzonestotriggers(var_0, var_1) {
 setupnearbyspawns() {
   var_0 = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_hp_spawn");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1].distsq = distancesquared(var_0[var_1].origin, self.origin);
-  }
 
-  for(var_1 = 1; var_1 < var_0.size; var_1++) {
+  for (var_1 = 1; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    for(var_3 = var_1 - 1; var_3 >= 0 && var_2.distsq < var_0[var_3].distsq; var_3--) {
+    for (var_3 = var_1 - 1; var_3 >= 0 && var_2.distsq < var_0[var_3].distsq; var_3--)
       var_0[var_3 + 1] = var_0[var_3];
-    }
 
     var_0[var_3 + 1] = var_2;
   }
@@ -904,18 +873,16 @@ setupnearbyspawns() {
   var_7 = [];
   var_8 = var_0.size / 3;
 
-  for(var_1 = 0; var_1 <= var_8; var_1++) {
+  for (var_1 = 0; var_1 <= var_8; var_1++)
     var_4[var_4.size] = var_0[var_1];
-  }
 
-  while(var_1 < var_0.size) {
+  while (var_1 < var_0.size) {
     var_7[var_7.size] = var_0[var_1];
 
-    if(var_1 <= var_8 * 2) {
+    if(var_1 <= var_8 * 2)
       var_5[var_5.size] = var_0[var_1];
-    } else {
+    else
       var_6[var_6.size] = var_0[var_1];
-    }
 
     var_1++;
   }
@@ -942,22 +909,19 @@ getnextzone() {
 shufflezones() {
   level.zonespawnqueue = common_scripts\utility::array_randomize(level.zones);
 
-  if(level.zone == level.zonespawnqueue[0]) {
+  if(level.zone == level.zonespawnqueue[0])
     level.zonespawnqueue = maps\mp\_utility::swap(level.zonespawnqueue, 0, randomintrange(1, level.zonespawnqueue.size));
-  }
 }
 
 getnextzonefromqueue() {
-  if(level.zonespawnqueue.size == 0) {
+  if(level.zonespawnqueue.size == 0)
     shufflezones();
-  }
 
   var_0 = level.zonespawnqueue[0];
   var_1 = [];
 
-  for(var_2 = 1; var_2 < level.zonespawnqueue.size; var_2++) {
+  for (var_2 = 1; var_2 < level.zonespawnqueue.size; var_2++)
     var_1[var_2 - 1] = level.zonespawnqueue[var_2];
-  }
 
   level.zonespawnqueue = var_1;
   return var_0;
@@ -973,15 +937,15 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   if(var_1 == self) {
     return;
   }
-  if(!isDefined(level.zone)) {
+  if(!isdefined(level.zone)) {
     return;
   }
   var_10 = level.zone.gameobject maps\mp\gametypes\_gameobjects::getownerteam();
 
-  if(!isDefined(var_10) || var_10 == "neutral") {
+  if(!isdefined(var_10) || var_10 == "neutral") {
     return;
   }
-  if(isDefined(var_4) && maps\mp\_utility::iskillstreakweapon(var_4)) {
+  if(isdefined(var_4) && maps\mp\_utility::iskillstreakweapon(var_4)) {
     return;
   }
   var_11 = 0;
@@ -997,9 +961,9 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     if(var_11) {
       return;
     }
-    if(self.team == var_10) {
+    if(self.team == var_10)
       var_1 thread maps\mp\_events::assaultobjectiveevent(self, var_9);
-    } else {
+    else {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_hp_zoneDefense");
       var_1 thread maps\mp\_events::defendobjectiveevent(self, var_9);
       var_1 maps\mp\_utility::setextrascore1(var_1.pers["defends"]);
@@ -1008,42 +972,37 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 }
 
 onendgame(var_0) {
-  for(var_1 = 0; var_1 < level.zones.size; var_1++) {
+  for (var_1 = 0; var_1 < level.zones.size; var_1++)
     level.zones[var_1].gameobject maps\mp\gametypes\_gameobjects::allowuse("none");
-  }
 }
 
 updatecapsperminute(var_0) {
-  if(!isDefined(self.capsperminute)) {
+  if(!isdefined(self.capsperminute)) {
     self.numcaps = 0;
     self.capsperminute = 0;
   }
 
-  if(!isDefined(var_0) || var_0 == "neutral") {
+  if(!isdefined(var_0) || var_0 == "neutral") {
     return;
   }
   self.numcaps++;
   var_1 = maps\mp\_utility::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isplayer(self) && isdefined(self.timeplayed["total"]))
     var_1 = max(self.timeplayed["total"], 1) / 60;
-  }
 
   self.capsperminute = self.numcaps / var_1;
 
-  if(self.capsperminute > self.numcaps) {
+  if(self.capsperminute > self.numcaps)
     self.capsperminute = self.numcaps;
-  }
 }
 
 isscoreboosting(var_0) {
-  if(!level.rankedmatch) {
+  if(!level.rankedmatch)
     return 0;
-  }
 
-  if(var_0.capsperminute > level.playercapturelpm) {
+  if(var_0.capsperminute > level.playercapturelpm)
     return 1;
-  }
 
   return 0;
 }

@@ -166,9 +166,8 @@ runDroneHive(player, lifeId) {
       rocket.missilesLeft = CONST_MISSILE_COUNT - missileCount;
       player setClientOmnVar("ui_predator_missiles_left", rocket.missilesLeft);
 
-      if(missileCount == CONST_MISSILE_COUNT) {
+      if(missileCount == CONST_MISSILE_COUNT)
         rocket EnableMissileBoosting();
-      }
     }
   }
 
@@ -238,9 +237,8 @@ spawnSwitchBlade(rocket, spawnOnLeft) {
   spawnOffset = (35, 35, 35);
   targetOffset = (15000, 15000, 15000);
 
-  if(spawnOnLeft) {
+  if(spawnOnLeft)
     spawnOffset = spawnOffset * -1;
-  }
 
   result = bulletTrace(rocket.origin, rocket.origin + (forwardDir * targetOffset), false, rocket);
 
@@ -421,17 +419,14 @@ monitorDeath(killStreakEnt, mainMissile) {
   killStreakEnt waittill("death");
   maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-  if(isDefined(killStreakEnt.targEffect)) {
+  if(isDefined(killStreakEnt.targEffect))
     killStreakEnt.targEffect Delete();
-  }
 
-  if(isDefined(killStreakEnt.entityNumber)) {
+  if(isDefined(killStreakEnt.entityNumber))
     level.rockets[killStreakEnt.entityNumber] = undefined;
-  }
 
-  if(mainMissile) {
+  if(mainMissile)
     level.remoteMissileInProgress = undefined;
-  }
 }
 
 returnPlayer(player, instant) {
@@ -445,9 +440,8 @@ returnPlayer(player, instant) {
   player ThermalVisionFOFOverlayOff();
   player ControlsUnlink();
 
-  if(!isDefined(instant)) {
+  if(!isDefined(instant))
     maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(0.95);
-  }
 
   player CameraUnlink();
   player SetClientOmnvar("ui_predator_missile", 0);

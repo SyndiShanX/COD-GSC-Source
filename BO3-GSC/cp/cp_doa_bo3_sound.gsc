@@ -12,10 +12,10 @@ function main() {}
 #namespace namespace_1a381543;
 
 function function_68fdd800() {
-  if(!isDefined(level.var_ae4549e5)) {
+  if(!isdefined(level.var_ae4549e5)) {
     level.var_ae4549e5 = spawn("script_origin", (0, 0, 0));
   }
-  level.var_ae4549e5 playLoopSound("amb_rally_bg");
+  level.var_ae4549e5 playloopsound("amb_rally_bg");
   level.var_ae4549e5 function_42b6c406();
 }
 

@@ -14,39 +14,33 @@ init_color_grouping(var_0) {
   level.colorcoded_volumes["axis"] = [];
   level.colorcoded_volumes["allies"] = [];
   var_1 = [];
-  var_1 = common_scripts\utility::array_combine(var_1, getEntArray("trigger_multiple", "classname"));
-  var_1 = common_scripts\utility::array_combine(var_1, getEntArray("trigger_radius", "classname"));
-  var_1 = common_scripts\utility::array_combine(var_1, getEntArray("trigger_once", "classname"));
-  var_2 = getEntArray("info_volume", "classname");
+  var_1 = common_scripts\utility::array_combine(var_1, getentarray("trigger_multiple", "classname"));
+  var_1 = common_scripts\utility::array_combine(var_1, getentarray("trigger_radius", "classname"));
+  var_1 = common_scripts\utility::array_combine(var_1, getentarray("trigger_once", "classname"));
+  var_2 = getentarray("info_volume", "classname");
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    if(isDefined(var_0[var_3].script_color_allies)) {
+  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+    if(isdefined(var_0[var_3].script_color_allies))
       var_0[var_3] add_node_to_global_arrays(var_0[var_3].script_color_allies, "allies");
-    }
 
-    if(isDefined(var_0[var_3].script_color_axis)) {
+    if(isdefined(var_0[var_3].script_color_axis))
       var_0[var_3] add_node_to_global_arrays(var_0[var_3].script_color_axis, "axis");
-    }
   }
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(isDefined(var_1[var_3].script_color_allies)) {
+  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(isdefined(var_1[var_3].script_color_allies))
       var_1[var_3] thread trigger_issues_orders(var_1[var_3].script_color_allies, "allies");
-    }
 
-    if(isDefined(var_1[var_3].script_color_axis)) {
+    if(isdefined(var_1[var_3].script_color_axis))
       var_1[var_3] thread trigger_issues_orders(var_1[var_3].script_color_axis, "axis");
-    }
   }
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(isDefined(var_2[var_3].script_color_allies)) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(isdefined(var_2[var_3].script_color_allies))
       var_2[var_3] add_volume_to_global_arrays(var_2[var_3].script_color_allies, "allies");
-    }
 
-    if(isDefined(var_2[var_3].script_color_axis)) {
+    if(isdefined(var_2[var_3].script_color_axis))
       var_2[var_3] add_volume_to_global_arrays(var_2[var_3].script_color_allies, "axis");
-    }
   }
 
   level.color_node_type_function = [];
@@ -108,7 +102,7 @@ init_color_grouping(var_0) {
   level.lastcolorforced["allies"] = [];
   level.lastcolorforced["axis"] = [];
 
-  for(var_3 = 0; var_3 < level.colorlist.size; var_3++) {
+  for (var_3 = 0; var_3 < level.colorlist.size; var_3++) {
     level.arrays_of_colorforced_ai["allies"][level.colorlist[var_3]] = [];
     level.arrays_of_colorforced_ai["axis"][level.colorlist[var_3]] = [];
     level.currentcolorforced["allies"][level.colorlist[var_3]] = undefined;
@@ -117,9 +111,8 @@ init_color_grouping(var_0) {
 
   thread player_color_node();
 
-  if(getdvar("shownodecolors") == "1") {
+  if(getdvar("shownodecolors") == "1")
     thread shownodecolors();
-  }
 }
 
 convert_color_to_short_string() {
@@ -127,7 +120,7 @@ convert_color_to_short_string() {
 }
 
 ai_picks_destination(var_0) {
-  if(isDefined(self.script_forcecolor)) {
+  if(isdefined(self.script_forcecolor)) {
     convert_color_to_short_string();
     self.currentcolorcode = var_0;
     var_1 = self.script_forcecolor;
@@ -138,7 +131,7 @@ ai_picks_destination(var_0) {
 }
 
 goto_current_colorindex() {
-  if(!isDefined(self.currentcolorcode)) {
+  if(!isdefined(self.currentcolorcode)) {
     return;
   }
   var_0 = level.arrays_of_colorcoded_nodes[self.team][self.currentcolorcode];
@@ -150,7 +143,7 @@ goto_current_colorindex() {
   if(!maps\_utility::has_color()) {
     return;
   }
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
     if(isalive(var_2.color_user) && var_2.color_user != level.player) {
@@ -188,17 +181,17 @@ get_colorcodes_from_trigger(var_0, var_1) {
   var_5 = [];
   var_6 = get_color_list();
 
-  for(var_7 = 0; var_7 < var_2.size; var_7++) {
+  for (var_7 = 0; var_7 < var_2.size; var_7++) {
     var_8 = undefined;
 
-    for(var_9 = 0; var_9 < var_6.size; var_9++) {
+    for (var_9 = 0; var_9 < var_6.size; var_9++) {
       if(issubstr(var_2[var_7], var_6[var_9])) {
         var_8 = var_6[var_9];
         break;
       }
     }
 
-    if(!isDefined(level.arrays_of_colorcoded_nodes[var_1][var_2[var_7]])) {
+    if(!isdefined(level.arrays_of_colorcoded_nodes[var_1][var_2[var_7]])) {
       continue;
     }
     var_4[var_8] = var_2[var_7];
@@ -220,10 +213,10 @@ trigger_issues_orders(var_0, var_1) {
   var_4 = var_2["colorCodesByColorIndex"];
   var_5 = var_2["colors"];
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger");
 
-    if(isDefined(self.activated_color_trigger)) {
+    if(isdefined(self.activated_color_trigger)) {
       self.activated_color_trigger = undefined;
       continue;
     }
@@ -233,11 +226,10 @@ trigger_issues_orders(var_0, var_1) {
 }
 
 activate_color_trigger(var_0) {
-  if(var_0 == "allies") {
+  if(var_0 == "allies")
     thread get_colorcodes_and_activate_trigger(self.script_color_allies, var_0);
-  } else {
+  else
     thread get_colorcodes_and_activate_trigger(self.script_color_axis, var_0);
-  }
 }
 
 get_colorcodes_and_activate_trigger(var_0, var_1) {
@@ -249,18 +241,17 @@ get_colorcodes_and_activate_trigger(var_0, var_1) {
 }
 
 activate_color_trigger_internal(var_0, var_1, var_2, var_3) {
-  for(var_4 = 0; var_4 < var_0.size; var_4++) {
-    if(!isDefined(level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]])) {
+  for (var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(!isdefined(level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]])) {
       continue;
     }
     level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]] = common_scripts\utility::array_removeundefined(level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]]);
 
-    for(var_5 = 0; var_5 < level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]].size; var_5++) {
+    for (var_5 = 0; var_5 < level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]].size; var_5++)
       level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]][var_5].currentcolorcode = var_0[var_4];
-    }
   }
 
-  for(var_4 = 0; var_4 < var_1.size; var_4++) {
+  for (var_4 = 0; var_4 < var_1.size; var_4++) {
     level.arrays_of_colorforced_ai[var_2][var_1[var_4]] = maps\_utility::array_removedead(level.arrays_of_colorforced_ai[var_2][var_1[var_4]]);
     level.lastcolorforced[var_2][var_1[var_4]] = level.currentcolorforced[var_2][var_1[var_4]];
     level.currentcolorforced[var_2][var_1[var_4]] = var_3[var_1[var_4]];
@@ -268,28 +259,28 @@ activate_color_trigger_internal(var_0, var_1, var_2, var_3) {
 
   var_6 = [];
 
-  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+  for (var_4 = 0; var_4 < var_0.size; var_4++) {
     if(same_color_code_as_last_time(var_2, var_1[var_4])) {
       continue;
     }
     var_7 = var_0[var_4];
 
-    if(!isDefined(level.arrays_of_colorcoded_ai[var_2][var_7])) {
+    if(!isdefined(level.arrays_of_colorcoded_ai[var_2][var_7])) {
       continue;
     }
     var_6[var_7] = issue_leave_node_order_to_ai_and_get_ai(var_7, var_1[var_4], var_2);
   }
 
-  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+  for (var_4 = 0; var_4 < var_0.size; var_4++) {
     var_7 = var_0[var_4];
 
-    if(!isDefined(var_6[var_7])) {
+    if(!isdefined(var_6[var_7])) {
       continue;
     }
     if(same_color_code_as_last_time(var_2, var_1[var_4])) {
       continue;
     }
-    if(!isDefined(level.arrays_of_colorcoded_ai[var_2][var_7])) {
+    if(!isdefined(level.arrays_of_colorcoded_ai[var_2][var_7])) {
       continue;
     }
     issue_color_order_to_ai(var_7, var_1[var_4], var_2, var_6[var_7]);
@@ -297,27 +288,24 @@ activate_color_trigger_internal(var_0, var_1, var_2, var_3) {
 }
 
 same_color_code_as_last_time(var_0, var_1) {
-  if(!isDefined(level.lastcolorforced[var_0][var_1])) {
+  if(!isdefined(level.lastcolorforced[var_0][var_1]))
     return 0;
-  }
 
   return level.lastcolorforced[var_0][var_1] == level.currentcolorforced[var_0][var_1];
 }
 
 process_cover_node_with_last_in_mind_allies(var_0, var_1) {
-  if(issubstr(var_0.script_color_allies, var_1)) {
+  if(issubstr(var_0.script_color_allies, var_1))
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  } else {
+  else
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
-  }
 }
 
 process_cover_node_with_last_in_mind_axis(var_0, var_1) {
-  if(issubstr(var_0.script_color_axis, var_1)) {
+  if(issubstr(var_0.script_color_axis, var_1))
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  } else {
+  else
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
-  }
 }
 
 process_cover_node(var_0, var_1) {
@@ -330,13 +318,13 @@ process_path_node(var_0, var_1) {
 
 prioritize_colorcoded_nodes(var_0, var_1, var_2) {
   var_3 = level.arrays_of_colorcoded_nodes[var_0][var_1];
-  var_4 = spawnStruct();
+  var_4 = spawnstruct();
   var_4.path_nodes = [];
   var_4.cover_nodes_first = [];
   var_4.cover_nodes_last = [];
-  var_5 = isDefined(level.lastcolorforced[var_0][var_2]);
+  var_5 = isdefined(level.lastcolorforced[var_0][var_2]);
 
-  for(var_6 = 0; var_6 < var_3.size; var_6++) {
+  for (var_6 = 0; var_6 < var_3.size; var_6++) {
     var_7 = var_3[var_6];
     var_4[[level.color_node_type_function[var_7.type][var_5][var_0]]](var_7, level.lastcolorforced[var_0][var_2]);
   }
@@ -344,13 +332,11 @@ prioritize_colorcoded_nodes(var_0, var_1, var_2) {
   var_4.cover_nodes_first = common_scripts\utility::array_randomize(var_4.cover_nodes_first);
   var_3 = var_4.cover_nodes_first;
 
-  for(var_6 = 0; var_6 < var_4.cover_nodes_last.size; var_6++) {
+  for (var_6 = 0; var_6 < var_4.cover_nodes_last.size; var_6++)
     var_3[var_3.size] = var_4.cover_nodes_last[var_6];
-  }
 
-  for(var_6 = 0; var_6 < var_4.path_nodes.size; var_6++) {
+  for (var_6 = 0; var_6 < var_4.path_nodes.size; var_6++)
     var_3[var_3.size] = var_4.path_nodes[var_6];
-  }
 
   level.arrays_of_colorcoded_nodes[var_0][var_1] = var_3;
 }
@@ -365,8 +351,8 @@ issue_leave_node_order_to_ai_and_get_ai(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::array_combine(var_3, level.arrays_of_colorforced_ai[var_2][var_1]);
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_3.size; var_5++) {
-    if(isDefined(var_3[var_5].currentcolorcode) && var_3[var_5].currentcolorcode == var_0) {
+  for (var_5 = 0; var_5 < var_3.size; var_5++) {
+    if(isdefined(var_3[var_5].currentcolorcode) && var_3[var_5].currentcolorcode == var_0) {
       continue;
     }
     var_4[var_4.size] = var_3[var_5];
@@ -377,9 +363,8 @@ issue_leave_node_order_to_ai_and_get_ai(var_0, var_1, var_2) {
   if(!var_3.size) {
     return;
   }
-  for(var_5 = 0; var_5 < var_3.size; var_5++) {
+  for (var_5 = 0; var_5 < var_3.size; var_5++)
     var_3[var_5] left_color_node();
-  }
 
   return var_3;
 }
@@ -404,9 +389,8 @@ issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
     foreach(var_10 in var_3) {
       var_11 = var_10 should_assign_nodes_intelligently_for_squad();
 
-      if(var_11) {
+      if(var_11)
         var_7 = 1;
-      }
     }
 
     var_13 = var_5[0] should_assign_nodes_intelligently_for_squad();
@@ -414,9 +398,8 @@ issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
     foreach(var_15 in var_5) {
       var_16 = var_15 should_assign_nodes_intelligently_for_squad();
 
-      if(var_16) {
+      if(var_16)
         var_7 = 1;
-      }
     }
   }
 
@@ -427,23 +410,21 @@ issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
     var_18 = 1;
     var_20 = (0, 0, 0);
 
-    foreach(var_15 in var_5) {
-      var_20 = var_20 + var_15.origin;
-    }
+    foreach(var_15 in var_5)
+    var_20 = var_20 + var_15.origin;
 
     var_20 = var_20 / var_5.size;
     var_23 = (0, 0, 0);
 
-    foreach(var_10 in var_3) {
-      var_23 = var_23 + var_10.origin;
-    }
+    foreach(var_10 in var_3)
+    var_23 = var_23 + var_10.origin;
 
     var_23 = var_23 / var_3.size;
     var_3 = sortbydistance(var_3, var_20);
     var_5 = sortbydistance(var_5, var_23);
   }
 
-  for(var_26 = 0; var_26 < var_5.size; var_26++) {
+  for (var_26 = 0; var_26 < var_5.size; var_26++) {
     var_15 = var_5[var_26];
 
     if(isalive(var_15.color_user)) {
@@ -462,9 +443,8 @@ issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
     var_27 take_color_node(var_15, var_0, self, var_28);
     var_18++;
 
-    if(!var_3.size) {
+    if(!var_3.size)
       return;
-    }
   }
 }
 
@@ -475,45 +455,42 @@ take_color_node(var_0, var_1, var_2, var_3) {
 }
 
 assign_nodes_intelligently_for_squad(var_0) {
-  if(var_0) {
+  if(var_0)
     self.script_color_assign_intelligently = 1;
-  } else {
+  else
     self.script_color_assign_intelligently = undefined;
-  }
 }
 
 assign_nodes_intelligently_for_team(var_0, var_1) {
-  if(!isDefined(level.team_assign_nodes_intelligently)) {
+  if(!isdefined(level.team_assign_nodes_intelligently))
     level.team_assign_nodes_intelligently = [];
-  }
 
   level.team_assign_nodes_intelligently[var_0] = var_1;
   var_2 = getaiarray(var_0);
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++)
     var_2[var_3].script_color_assign_intelligently = var_1;
-  }
 }
 
 setup_nodes_intelligently_from_team() {
-  if(!isDefined(level.team_assign_nodes_intelligently)) {
+  if(!isdefined(level.team_assign_nodes_intelligently)) {
     return;
   }
-  if(!isDefined(level.team_assign_nodes_intelligently[self.team])) {
+  if(!isdefined(level.team_assign_nodes_intelligently[self.team])) {
     return;
   }
   self.script_color_assign_intelligently = level.team_assign_nodes_intelligently[self.team];
 }
 
 should_assign_nodes_intelligently_for_squad() {
-  return isDefined(self.script_color_assign_intelligently) && self.script_color_assign_intelligently;
+  return isdefined(self.script_color_assign_intelligently) && self.script_color_assign_intelligently;
 }
 
 player_color_node() {
-  for(;;) {
+  for (;;) {
     var_0 = undefined;
 
-    if(!isDefined(level.player.node)) {
+    if(!isdefined(level.player.node)) {
       wait 0.05;
       continue;
     }
@@ -522,8 +499,8 @@ player_color_node() {
     var_0 = level.player.node;
     var_0.color_user = level.player;
 
-    for(;;) {
-      if(!isDefined(level.player.node)) {
+    for (;;) {
+      if(!isdefined(level.player.node)) {
         break;
       }
 
@@ -540,17 +517,15 @@ player_color_node() {
 }
 
 color_node_finds_a_user() {
-  if(isDefined(self.script_color_allies)) {
+  if(isdefined(self.script_color_allies))
     color_node_finds_user_from_colorcodes(self.script_color_allies, "allies");
-  }
 
-  if(isDefined(self.script_color_axis)) {
+  if(isdefined(self.script_color_axis))
     color_node_finds_user_from_colorcodes(self.script_color_axis, "axis");
-  }
 }
 
 color_node_finds_user_from_colorcodes(var_0, var_1) {
-  if(isDefined(self.color_user)) {
+  if(isdefined(self.color_user)) {
     return;
   }
   var_2 = strtok(var_0, " ");
@@ -560,7 +535,7 @@ color_node_finds_user_from_colorcodes(var_0, var_1) {
 color_node_finds_user_for_colorcode(var_0, var_1) {
   var_2 = var_0[0];
 
-  if(!isDefined(level.currentcolorforced[var_1][var_2])) {
+  if(!isdefined(level.currentcolorforced[var_1][var_2])) {
     return;
   }
   if(level.currentcolorforced[var_1][var_2] != var_0) {
@@ -571,7 +546,7 @@ color_node_finds_user_for_colorcode(var_0, var_1) {
   if(!var_3.size) {
     return;
   }
-  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+  for (var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_3[var_4];
 
     if(var_5 occupies_colorcode(var_0)) {
@@ -583,9 +558,8 @@ color_node_finds_user_for_colorcode(var_0, var_1) {
 }
 
 occupies_colorcode(var_0) {
-  if(!isDefined(self.currentcolorcode)) {
+  if(!isdefined(self.currentcolorcode))
     return 0;
-  }
 
   return self.currentcolorcode == var_0;
 }
@@ -607,38 +581,34 @@ ai_sets_goal(var_0) {
   set_goal_and_volume(var_0);
   var_1 = level.colorcoded_volumes[self.team][self.currentcolorcode];
 
-  if(isDefined(self.script_careful)) {
+  if(isdefined(self.script_careful))
     thread careful_logic(var_0, var_1);
-  }
 }
 
 set_goal_and_volume(var_0) {
-  if(isDefined(self._colors_go_line)) {
+  if(isdefined(self._colors_go_line)) {
     thread maps\_anim::anim_single_queue(self, self._colors_go_line);
     self._colors_go_line = undefined;
   }
 
   self setgoalnode(var_0);
 
-  if(!self.fixednode) {
+  if(!self.fixednode)
     self.goalradius = var_0.radius;
-  } else if(isDefined(var_0.radius)) {
+  else if(isdefined(var_0.radius))
     self.goalradius = var_0.radius;
-  }
 
   var_1 = level.colorcoded_volumes[self.team][self.currentcolorcode];
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     self setfixednodesafevolume(var_1);
-  } else {
+  else
     self clearfixednodesafevolume();
-  }
 
-  if(isDefined(var_0.fixednodesaferadius)) {
+  if(isdefined(var_0.fixednodesaferadius))
     self.fixednodesaferadius = var_0.fixednodesaferadius;
-  } else {
+  else
     self.fixednodesaferadius = 64;
-  }
 }
 
 careful_logic(var_0, var_1) {
@@ -647,7 +617,7 @@ careful_logic(var_0, var_1) {
   self endon("stop_going_to_node");
   thread recover_from_careful_disable(var_0);
 
-  for(;;) {
+  for (;;) {
     wait_until_an_enemy_is_in_safe_area(var_0, var_1);
     use_big_goal_until_goal_is_safe(var_0, var_1);
     self.fixednode = 1;
@@ -668,8 +638,8 @@ use_big_goal_until_goal_is_safe(var_0, var_1) {
   self.goalradius = 1024;
   self.fixednode = 0;
 
-  if(isDefined(var_1)) {
-    for(;;) {
+  if(isdefined(var_1)) {
+    for (;;) {
       wait 1;
 
       if(self isknownenemyinradius(var_0.origin, self.fixednodesaferadius)) {
@@ -681,7 +651,7 @@ use_big_goal_until_goal_is_safe(var_0, var_1) {
       return;
     }
   } else {
-    for(;;) {
+    for (;;) {
       if(!isknownenemyinradius_tmp(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
@@ -693,18 +663,17 @@ use_big_goal_until_goal_is_safe(var_0, var_1) {
 isknownenemyinradius_tmp(var_0, var_1) {
   var_2 = getaiarray("axis");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(distance2d(var_2[var_3].origin, var_0) < var_1) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(distance2d(var_2[var_3].origin, var_0) < var_1)
       return 1;
-    }
   }
 
   return 0;
 }
 
 wait_until_an_enemy_is_in_safe_area(var_0, var_1) {
-  if(isDefined(var_1)) {
-    for(;;) {
+  if(isdefined(var_1)) {
+    for (;;) {
       if(self isknownenemyinradius(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
@@ -714,7 +683,7 @@ wait_until_an_enemy_is_in_safe_area(var_0, var_1) {
       wait 1;
     }
   } else {
-    for(;;) {
+    for (;;) {
       if(isknownenemyinradius_tmp(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
@@ -724,9 +693,8 @@ wait_until_an_enemy_is_in_safe_area(var_0, var_1) {
 }
 
 my_current_node_delays() {
-  if(!isDefined(self.node)) {
+  if(!isdefined(self.node))
     return 0;
-  }
 
   return self.node maps\_utility::script_delay();
 }
@@ -736,40 +704,36 @@ process_color_order_to_ai(var_0, var_1, var_2) {
   self endon("stop_color_move");
   self endon("death");
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1)) {
     var_1 maps\_utility::script_delay();
 
-    if(isDefined(var_1.colordelayinfo)) {
+    if(isdefined(var_1.colordelayinfo)) {
       var_3 = getarraykeys(var_1.colordelayinfo);
 
-      if(common_scripts\utility::array_contains(var_3, self.script_forcecolor)) {
+      if(common_scripts\utility::array_contains(var_3, self.script_forcecolor))
         wait(var_1.colordelayinfo[self.script_forcecolor]);
-      }
     }
   }
 
   if(!my_current_node_delays()) {
-    if(isDefined(var_2)) {
+    if(isdefined(var_2))
       wait(var_2 * randomfloatrange(0.2, 0.35));
-    }
   }
 
   ai_sets_goal(var_0);
   self.color_ordered_node_assignment = var_0;
 
-  for(;;) {
+  for (;;) {
     self waittill("node_taken", var_4);
 
-    if(var_4 == level.player) {
+    if(var_4 == level.player)
       wait 0.05;
-    }
 
     var_0 = get_best_available_new_colored_node();
 
-    if(isDefined(var_0)) {
-      if(isalive(self.color_node.color_user) && self.color_node.color_user == self) {
+    if(isdefined(var_0)) {
+      if(isalive(self.color_node.color_user) && self.color_node.color_user == self)
         self.color_node.color_user = undefined;
-      }
 
       self.color_node = var_0;
       var_0.color_user = self;
@@ -782,10 +746,9 @@ get_best_available_colored_node() {
   var_0 = level.currentcolorforced[self.team][self.script_forcecolor];
   var_1 = get_prioritized_colorcoded_nodes(self.team, var_0, self.script_forcecolor);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(!isalive(var_1[var_2].color_user)) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!isalive(var_1[var_2].color_user))
       return var_1[var_2];
-    }
   }
 }
 
@@ -793,13 +756,12 @@ get_best_available_new_colored_node() {
   var_0 = level.currentcolorforced[self.team][self.script_forcecolor];
   var_1 = get_prioritized_colorcoded_nodes(self.team, var_0, self.script_forcecolor);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] == self.color_node) {
       continue;
     }
-    if(!isalive(var_1[var_2].color_user)) {
+    if(!isalive(var_1[var_2].color_user))
       return var_1[var_2];
-    }
   }
 }
 
@@ -807,7 +769,7 @@ process_stop_short_of_node(var_0) {
   self endon("stopScript");
   self endon("death");
 
-  if(isDefined(self.node)) {
+  if(isdefined(self.node)) {
     return;
   }
   if(distance(var_0.origin, self.origin) < 32) {
@@ -819,9 +781,8 @@ process_stop_short_of_node(var_0) {
   wait_for_killanimscript_or_time(1);
   var_2 = gettime();
 
-  if(var_2 - var_1 >= 1000) {
+  if(var_2 - var_1 >= 1000)
     reached_node_but_could_not_claim_it(var_0);
-  }
 }
 
 wait_for_killanimscript_or_time(var_0) {
@@ -833,8 +794,8 @@ reached_node_but_could_not_claim_it(var_0) {
   var_1 = getaiarray();
   var_2 = undefined;
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(!isDefined(var_1[var_3].node)) {
+  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(!isdefined(var_1[var_3].node)) {
       continue;
     }
     if(var_1[var_3].node != var_0) {
@@ -858,10 +819,9 @@ decrementcolorusers(var_0) {
 }
 
 colorislegit(var_0) {
-  for(var_1 = 0; var_1 < level.colorlist.size; var_1++) {
-    if(var_0 == level.colorlist[var_1]) {
+  for (var_1 = 0; var_1 < level.colorlist.size; var_1++) {
+    if(var_0 == level.colorlist[var_1])
       return 1;
-    }
   }
 
   return 0;
@@ -870,17 +830,16 @@ colorislegit(var_0) {
 add_volume_to_global_arrays(var_0, var_1) {
   var_2 = strtok(var_0, " ");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++)
     level.colorcoded_volumes[var_1][var_2[var_3]] = self;
-  }
 }
 
 add_node_to_global_arrays(var_0, var_1) {
   self.color_user = undefined;
   var_2 = strtok(var_0, " ");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(isDefined(level.arrays_of_colorcoded_nodes[var_1]) && isDefined(level.arrays_of_colorcoded_nodes[var_1][var_2[var_3]])) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(isdefined(level.arrays_of_colorcoded_nodes[var_1]) && isdefined(level.arrays_of_colorcoded_nodes[var_1][var_2[var_3]])) {
       level.arrays_of_colorcoded_nodes[var_1][var_2[var_3]] = common_scripts\utility::array_add(level.arrays_of_colorcoded_nodes[var_1][var_2[var_3]], self);
       continue;
     }
@@ -899,9 +858,9 @@ nodethink() {
   var_0 = "";
   var_1 = "gg-";
 
-  if(isDefined(self.script_color_allies)) {
+  if(isdefined(self.script_color_allies))
     var_0 = self.script_color_allies;
-  } else if(isDefined(self.script_color_axis)) {
+  else if(isdefined(self.script_color_axis)) {
     var_0 = self.script_color_axis;
     var_1 = "bg-";
   }
@@ -909,25 +868,30 @@ nodethink() {
   if(var_0 == "") {
     return;
   }
-  for(;;) {
+  for (;;) {
     var_2 = maps\_utility::get_script_palette();
     var_3 = strtok(var_0, " ");
 
-    if(var_3.size > 1) {} else {}
+    if(var_3.size > 1) {
 
-    if(randomint(100) > 70) {}
+    } else {
+
+    }
+
+    if(randomint(100) > 70) {
+
+    }
 
     waitframe();
   }
 }
 
 left_color_node() {
-  if(!isDefined(self.color_node)) {
+  if(!isdefined(self.color_node)) {
     return;
   }
-  if(isDefined(self.color_node.color_user) && self.color_node.color_user == self) {
+  if(isdefined(self.color_node.color_user) && self.color_node.color_user == self)
     self.color_node.color_user = undefined;
-  }
 
   self.color_node = undefined;
   self notify("stop_color_move");
@@ -946,9 +910,8 @@ getcolornumberarray() {
     var_0["colorTeam"] = self.script_color_allies;
   }
 
-  if(!isDefined(var_0["colorTeam"])) {
+  if(!isdefined(var_0["colorTeam"]))
     var_0 = undefined;
-  }
 
   return var_0;
 }
@@ -956,16 +919,15 @@ getcolornumberarray() {
 removespawnerfromcolornumberarray() {
   var_0 = getcolornumberarray();
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
   var_1 = var_0["team"];
   var_2 = var_0["colorTeam"];
   var_3 = strtok(var_2, " ");
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+  for (var_4 = 0; var_4 < var_3.size; var_4++)
     level.arrays_of_colorcoded_spawners[var_1][var_3[var_4]] = common_scripts\utility::array_remove(level.arrays_of_colorcoded_spawners[var_1][var_3[var_4]], self);
-  }
 }
 
 add_cover_node(var_0) {
@@ -986,9 +948,8 @@ colornode_spawn_reinforcement(var_0, var_1) {
   level endon("kill_color_replacements");
   var_2 = spawn_hidden_reinforcement(var_0, var_1);
 
-  if(isDefined(level.friendly_startup_thread)) {
+  if(isdefined(level.friendly_startup_thread))
     var_2 thread[[level.friendly_startup_thread]]();
-  }
 
   var_2 thread colornode_replace_on_death();
 }
@@ -997,7 +958,7 @@ colornode_replace_on_death() {
   level endon("kill_color_replacements");
   self endon("_disable_reinforcement");
 
-  if(isDefined(self.replace_on_death)) {
+  if(isdefined(self.replace_on_death)) {
     return;
   }
   self.replace_on_death = 1;
@@ -1005,26 +966,23 @@ colornode_replace_on_death() {
   var_1 = self.script_forcecolor;
   waittillframeend;
 
-  if(isalive(self)) {
+  if(isalive(self))
     self waittill("death");
-  }
 
   var_2 = level.current_color_order;
 
-  if(!isDefined(self.script_forcecolor)) {
+  if(!isdefined(self.script_forcecolor)) {
     return;
   }
   thread colornode_spawn_reinforcement(var_0, self.script_forcecolor);
 
-  if(isDefined(self) && isDefined(self.script_forcecolor)) {
+  if(isdefined(self) && isdefined(self.script_forcecolor))
     var_1 = self.script_forcecolor;
-  }
 
-  if(isDefined(self) && isDefined(self.origin)) {
+  if(isdefined(self) && isdefined(self.origin))
     var_3 = self.origin;
-  }
 
-  for(;;) {
+  for (;;) {
     if(get_color_from_order(var_1, var_2) == "none") {
       return;
     }
@@ -1045,26 +1003,22 @@ colornode_replace_on_death() {
     }
     var_5 maps\_utility::set_force_color(var_1);
 
-    if(isDefined(level.friendly_promotion_thread)) {
+    if(isdefined(level.friendly_promotion_thread))
       var_5[[level.friendly_promotion_thread]](var_1);
-    }
 
     var_1 = var_2[var_1];
   }
 }
 
 get_color_from_order(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return "none";
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return "none";
-  }
 
-  if(!isDefined(var_1[var_0])) {
+  if(!isdefined(var_1[var_0]))
     return "none";
-  }
 
   return var_1[var_0];
 }
@@ -1073,11 +1027,11 @@ friendly_spawner_vision_checker() {
   level.friendly_respawn_vision_checker_thread = 1;
   var_0 = 0;
 
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_waitopen("respawn_friendlies");
     wait 1;
 
-    if(!isDefined(level.respawn_spawner)) {
+    if(!isdefined(level.respawn_spawner)) {
       continue;
     }
     var_1 = level.respawn_spawner;
@@ -1088,7 +1042,7 @@ friendly_spawner_vision_checker() {
       continue;
     }
 
-    var_3 = anglesToForward((0, level.player getplayerangles()[1], 0));
+    var_3 = anglestoforward((0, level.player getplayerangles()[1], 0));
     var_4 = vectornormalize(var_2);
     var_5 = vectordot(var_3, var_4);
 
@@ -1107,21 +1061,19 @@ friendly_spawner_vision_checker() {
 }
 
 get_color_spawner(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return level.respawn_spawner;
-  }
 
-  var_1 = getEntArray("color_spawner", "targetname");
+  var_1 = getentarray("color_spawner", "targetname");
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+  for (var_3 = 0; var_3 < var_1.size; var_3++)
     var_2[var_1[var_3].classname] = var_1[var_3];
-  }
 
   var_4 = undefined;
   var_5 = getarraykeys(var_2);
 
-  for(var_3 = 0; var_3 < var_5.size; var_3++) {
+  for (var_3 = 0; var_3 < var_5.size; var_3++) {
     if(!issubstr(var_2[var_5[var_3]].classname, var_0)) {
       continue;
     }
@@ -1129,9 +1081,8 @@ get_color_spawner(var_0) {
     break;
   }
 
-  if(!isDefined(var_4)) {
+  if(!isdefined(var_4))
     return level.respawn_spawner;
-  }
 
   var_4.origin = level.respawn_spawner.origin;
   return var_4;
@@ -1141,13 +1092,12 @@ spawn_hidden_reinforcement(var_0, var_1) {
   level endon("kill_color_replacements");
   var_2 = undefined;
 
-  for(;;) {
+  for (;;) {
     if(!common_scripts\utility::flag("respawn_friendlies")) {
-      if(!isDefined(level.friendly_respawn_vision_checker_thread)) {
+      if(!isdefined(level.friendly_respawn_vision_checker_thread))
         thread friendly_spawner_vision_checker();
-      }
 
-      for(;;) {
+      for (;;) {
         common_scripts\utility::flag_wait_either("player_looks_away_from_spawner", "respawn_friendlies");
         common_scripts\utility::flag_waitopen("friendly_spawner_locked");
 
@@ -1173,8 +1123,8 @@ spawn_hidden_reinforcement(var_0, var_1) {
     break;
   }
 
-  for(;;) {
-    if(!isDefined(var_1)) {
+  for (;;) {
+    if(!isdefined(var_1)) {
       break;
     }
 
@@ -1185,9 +1135,8 @@ spawn_hidden_reinforcement(var_0, var_1) {
     var_1 = level.current_color_order[var_1];
   }
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     var_2 maps\_utility::set_force_color(var_1);
-  }
 
   var_2 setup_nodes_intelligently_from_team();
   thread lock_spawner_for_awhile();
@@ -1217,7 +1166,7 @@ remove_replace_on_death() {
 }
 
 init_color_delay_info(var_0) {
-  if(!isDefined(var_0.script_parameters)) {
+  if(!isdefined(var_0.script_parameters)) {
     return;
   }
   if(!issubstr(var_0.script_parameters, "color_delays")) {
@@ -1226,11 +1175,11 @@ init_color_delay_info(var_0) {
   var_1 = strtok(var_0.script_parameters, ":, ");
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+  for (var_3 = 0; var_3 < var_1.size; var_3++) {
     if(var_1[var_3] == "color_delays") {
       continue;
     }
-    if(!isDefined(var_1[var_3 + 1])) {
+    if(!isdefined(var_1[var_3 + 1])) {
       return;
     }
     var_2[var_1[var_3]] = float(var_1[var_3 + 1]);

@@ -29,20 +29,18 @@ electric_cherry_code_callback_func() {
 }
 
 electric_cherry_reload_attack_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(isDefined(self.electric_cherry_reload_fx)) {
+  if(isDefined(self.electric_cherry_reload_fx))
     stopfx(localclientnum, self.electric_cherry_reload_fx);
-  }
 
-  if(newval == 1) {
-    self.electric_cherry_reload_fx = playFXOnTag(localclientnum, level._effect["electric_cherry_reload_small"], self, "tag_origin");
-  } else if(newval == 2) {
-    self.electric_cherry_reload_fx = playFXOnTag(localclientnum, level._effect["electric_cherry_reload_medium"], self, "tag_origin");
-  } else if(newval == 3) {
-    self.electric_cherry_reload_fx = playFXOnTag(localclientnum, level._effect["electric_cherry_reload_large"], self, "tag_origin");
-  } else {
-    if(isDefined(self.electric_cherry_reload_fx)) {
+  if(newval == 1)
+    self.electric_cherry_reload_fx = playfxontag(localclientnum, level._effect["electric_cherry_reload_small"], self, "tag_origin");
+  else if(newval == 2)
+    self.electric_cherry_reload_fx = playfxontag(localclientnum, level._effect["electric_cherry_reload_medium"], self, "tag_origin");
+  else if(newval == 3)
+    self.electric_cherry_reload_fx = playfxontag(localclientnum, level._effect["electric_cherry_reload_large"], self, "tag_origin");
+  else {
+    if(isDefined(self.electric_cherry_reload_fx))
       stopfx(localclientnum, self.electric_cherry_reload_fx);
-    }
 
     self.electric_cherry_reload_fx = undefined;
   }

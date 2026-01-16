@@ -78,11 +78,11 @@ function dark_battle_heros_init() {
 
 function dark_battle_main() {
   objectives::set("cp_level_prologue_escort_data_center");
-  array::thread_all(level.players, &function_2909799b);
-  array::thread_all(level.players, &function_b7634680);
-  callback::on_ai_killed(&function_e2b1615a);
+  array::thread_all(level.players, & function_2909799b);
+  array::thread_all(level.players, & function_b7634680);
+  callback::on_ai_killed( & function_e2b1615a);
   level thread vtol_guards_handler();
-  array::thread_all(level.players, &clientfield::set_to_player, "turn_off_tacmode_vfx", 1);
+  array::thread_all(level.players, & clientfield::set_to_player, "turn_off_tacmode_vfx", 1);
   level scene::init("p7_fxanim_cp_prologue_vtol_tackle_windows_bundle");
   level thread objectives::breadcrumb("dark_battle_breadcrumb_3");
   level thread dark_battle_behavior_handler();
@@ -94,11 +94,11 @@ function dark_battle_main() {
   level.ai_hyperion thread function_43d5fd7a();
   level.ai_khalil ai::set_behavior_attribute("coverIdleOnly", 1);
   level.ai_minister ai::set_behavior_attribute("coverIdleOnly", 1);
-  if(isDefined(level.bzm_prologuedialogue5_2callback)) {
+  if(isdefined(level.bzm_prologuedialogue5_2callback)) {
     level thread[[level.bzm_prologuedialogue5_2callback]]();
   }
   function_f7eee26d();
-  while(!spawn_manager::is_cleared("sm_darkroom_spawner")) {
+  while (!spawn_manager::is_cleared("sm_darkroom_spawner")) {
     wait(0.5);
   }
   level thread namespace_21b2c1f2::function_973b77f9();
@@ -114,7 +114,7 @@ function dark_battle_main() {
   level.ai_hendricks setgoal(getnode("hendricks_dark_battle_final", "targetname"), 1);
   level.ai_hendricks waittill("goal");
   level thread objectives::breadcrumb("dark_battle_breadcrumb_4");
-  callback::remove_on_ai_killed(&function_e2b1615a);
+  callback::remove_on_ai_killed( & function_e2b1615a);
   foreach(player in level.players) {
     if(isalive(player)) {
       player thread function_63222c73();
@@ -149,14 +149,14 @@ function function_997d6fdc() {
 function function_f7eee26d() {
   level endon("hash_b1b6677a");
   level endon("hash_9babf62");
-  array::thread_all(level.players, &function_7cd37960);
-  array::thread_all(level.players, &function_997d6fdc);
+  array::thread_all(level.players, & function_7cd37960);
+  array::thread_all(level.players, & function_997d6fdc);
   trigger::wait_till("t_dark_battle_glass");
   level notify("hash_9babf62");
 }
 
 function function_e6296f02(a_ents) {
-  array::thread_all(a_ents, &function_dabc0173);
+  array::thread_all(a_ents, & function_dabc0173);
 }
 
 function function_dabc0173() {
@@ -171,13 +171,13 @@ function function_dabc0173() {
 }
 
 function function_4d2734fa() {
-  spawner::add_spawn_function_group("darkroom_spawner", "targetname", &dark_battle_spawner_init);
+  spawner::add_spawn_function_group("darkroom_spawner", "targetname", & dark_battle_spawner_init);
   function_62e89023();
   spawn_manager::enable("sm_darkroom_spawner");
   spawn_manager::wait_till_complete("sm_darkroom_spawner");
   var_5ca9a217 = getent("outside_dark_battle_room", "targetname");
   b_clear = 0;
-  while(!b_clear) {
+  while (!b_clear) {
     b_clear = 1;
     a_ai = spawner::get_ai_group_ai("aig_darkroom");
     foreach(ai in a_ai) {
@@ -211,7 +211,7 @@ function function_b3666179() {
   a_friendly_ai = array(level.ai_minister, level.ai_hendricks, level.ai_khalil, level.ai_hyperion);
   level thread cp_prologue_util::function_21f52196("vtol_tackle_doors", t_door);
   level thread cp_prologue_util::function_2e61b3e8("vtol_tackle_doors", t_door, a_friendly_ai);
-  while(!cp_prologue_util::function_cdd726fb("vtol_tackle_doors")) {
+  while (!cp_prologue_util::function_cdd726fb("vtol_tackle_doors")) {
     wait(0.05);
   }
   function_62e89023(0, 0);
@@ -243,7 +243,7 @@ function function_62e89023(b_open = 1, var_abf03d83 = 1) {
 }
 
 function function_43d5fd7a() {
-  level scene::add_scene_func("cin_pro_12_01_darkbattle_vign_dive_kill_enemyloop", &function_e6296f02);
+  level scene::add_scene_func("cin_pro_12_01_darkbattle_vign_dive_kill_enemyloop", & function_e6296f02);
   level thread dialog::remote("hall_heads_up_we_have_m_0", undefined, "normal");
   level thread scene::play("cin_pro_12_01_darkbattle_vign_dive_kill_enemyloop");
   level thread function_356b8cd9();
@@ -320,8 +320,8 @@ function function_312ac345() {
 
 function function_c2326e34() {
   level endon("hash_c63a5f38");
-  var_94ace873 = getEntArray("dark_wall_logo_off", "targetname");
-  var_cd29e581 = getEntArray("dark_wall_logo_on", "targetname");
+  var_94ace873 = getentarray("dark_wall_logo_off", "targetname");
+  var_cd29e581 = getentarray("dark_wall_logo_on", "targetname");
   foreach(e_sign in var_94ace873) {
     e_sign ghost();
   }
@@ -335,7 +335,7 @@ function function_c2326e34() {
     e_sign show();
   }
   level waittill("hash_113f3cd3");
-  array::thread_all(level.activeplayers, &oed::set_player_ev, 1);
+  array::thread_all(level.activeplayers, & oed::set_player_ev, 1);
   level flag::set("ev_enabled");
   wait(1);
   level notify("lights_out");
@@ -362,7 +362,7 @@ function function_7bd8c5a3() {
   level.ai_hyperion dialog::say("mare_clear_0", 1);
   level.ai_hyperion thread dialog::say("mare_disabling_tactical_f_0", 0.5);
   wait(1);
-  array::thread_all(level.players, &oed::set_player_ev, 0);
+  array::thread_all(level.players, & oed::set_player_ev, 0);
   level flag::clear("ev_enabled");
   wait(1);
   exploder::exploder("light_exploder_darkbattle");
@@ -373,22 +373,22 @@ function function_7bd8c5a3() {
 function dark_room_confusion_dialog() {
   level waittill("hash_400d768d");
   wait(0.5);
-  while(spawner::get_ai_group_count("aig_darkroom") > 6) {
+  while (spawner::get_ai_group_count("aig_darkroom") > 6) {
     a_ai_array = getaiteamarray("axis");
     var_e248524d = array::get_all_closest(level.players[0].origin, a_ai_array, undefined, 4);
     var_1f76714 = array("hear_that", "cannot_hide", "happened_lights", "power_on");
-    for(i = 0; i < var_e248524d.size; i++) {
+    for (i = 0; i < var_e248524d.size; i++) {
       if(isalive(var_e248524d[0])) {
         var_e248524d[i] function_11c60e29(var_1f76714[i]);
       }
     }
     wait(1);
   }
-  while(spawner::get_ai_group_count("aig_darkroom") > 1) {
+  while (spawner::get_ai_group_count("aig_darkroom") > 1) {
     a_ai_array = getaiteamarray("axis");
     var_e248524d = array::get_all_closest(level.players[0].origin, a_ai_array, undefined, 4);
     var_1f76714 = array("cant_see", "please_no", "dont_take", "screw_this");
-    for(i = 0; i < var_e248524d.size; i++) {
+    for (i = 0; i < var_e248524d.size; i++) {
       if(isalive(var_e248524d[0])) {
         var_e248524d[i] function_11c60e29(var_1f76714[i]);
       }
@@ -466,7 +466,7 @@ function function_494e04e8() {
 function dark_battle_player_firing_check() {
   self endon("hash_bd74d007");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("weapon_fired");
     self thread dark_battle_shots_fired(1);
     wait(3);
@@ -476,7 +476,7 @@ function dark_battle_player_firing_check() {
 function dark_battle_ai_firing_check() {
   self endon("hash_bd74d007");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("about_to_fire");
     self thread dark_battle_shots_fired(0.25);
     wait(3);
@@ -486,7 +486,7 @@ function dark_battle_ai_firing_check() {
 function dark_battle_shots_fired(n_chance) {
   self endon("death");
   self endon("hash_bd74d007");
-  a_enemies = getEntArray("darkroom_enemy", "script_noteworthy");
+  a_enemies = getentarray("darkroom_enemy", "script_noteworthy");
   foreach(cur_enemy in a_enemies) {
     if(isalive(cur_enemy) && n_chance > randomfloatrange(0, 1)) {
       if(cur_enemy.firing_at_something == 0) {
@@ -503,7 +503,7 @@ function fire_at_location(e_target, duration = 5) {
     var_a03ca40a = e_target;
   } else {
     var_a03ca40a = spawn("script_model", e_target.origin + vectorscale((0, 0, 1), 32));
-    var_a03ca40a setModel("tag_origin");
+    var_a03ca40a setmodel("tag_origin");
     var_a03ca40a.health = 1000;
     var_a03ca40a.takedamage = 0;
     var_a03ca40a thread move_target(e_target, self);
@@ -530,7 +530,7 @@ function move_target(e_target, e_shooter) {
   var_58670eab = (var_7dad3ff1 * -1) + e_target.origin;
   var_67766dec = e_target.origin;
   var_20b9665f = e_target.origin + vectorscale((0, 0, 1), 50);
-  while(isDefined(e_shooter) && e_shooter.firing_at_something == 1) {
+  while (isdefined(e_shooter) && e_shooter.firing_at_something == 1) {
     self moveto(var_58670eab, 0.5);
     self waittill("movedone");
     self moveto(var_67766dec, 0.5);
@@ -552,11 +552,11 @@ function fire_random_direction(height_offset) {
   height_offset = 48 + height_offset;
   self.firing_at_something = 1;
   distance = 64 + height_offset;
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     myangles = self.angles;
     random_yaw = randomfloatrange(myangles[1] + 30, myangles[1] + 90);
     new_angles = (0, random_yaw, 0);
-    vector = anglesToForward(new_angles);
+    vector = anglestoforward(new_angles);
     height_offset_vector = (0, 0, height_offset);
     end_point = (self.origin + height_offset_vector) + (vector * distance);
     var_a03ca40a = spawn("script_origin", end_point);
@@ -571,7 +571,7 @@ function fire_random_direction(height_offset) {
 }
 
 function vtol_guards_handler() {
-  spawner::add_spawn_function_group("vtol_tackle_guy", "script_noteworthy", &cp_prologue_util::ai_idle_then_alert, "vtol_guards_alerted");
+  spawner::add_spawn_function_group("vtol_tackle_guy", "script_noteworthy", & cp_prologue_util::ai_idle_then_alert, "vtol_guards_alerted");
   spawn_manager::enable("vtol_tackle_spwn_mgr2");
 }
 
@@ -627,7 +627,7 @@ function function_63222c73() {
 
 function vtol_tackle_main(b_starting) {
   var_6cf84815 = array(level.ai_hyperion, level.ai_prometheus, level.ai_khalil, level.ai_minister, level.ai_hendricks);
-  array::thread_all(var_6cf84815, &function_b243f34);
+  array::thread_all(var_6cf84815, & function_b243f34);
   if(!b_starting) {
     level flag::wait_till("dark_battle_end");
   }
@@ -643,9 +643,9 @@ function vtol_tackle_main(b_starting) {
     ai_ally function_b243f34();
   }
   level thread objectives::breadcrumb("dark_battle_breadcrumb_5");
-  array::thread_all(var_6cf84815, &function_b243f34, 0);
-  array::thread_all(level.var_681ad194, &function_b243f34, 0);
-  if(isDefined(level.ai_pallas)) {
+  array::thread_all(var_6cf84815, & function_b243f34, 0);
+  array::thread_all(level.var_681ad194, & function_b243f34, 0);
+  if(isdefined(level.ai_pallas)) {
     level.ai_pallas colors::disable();
   }
   level.ai_prometheus colors::set_force_color("o");
@@ -679,8 +679,8 @@ function function_b243f34(b_state = 1) {
 }
 
 function vtol_tackle_scene(b_starting) {
-  array::thread_all(level.players, &function_236046c4);
-  level scene::add_scene_func("cin_pro_13_01_vtoltackle_vign_takedown", &function_b007992c, "play");
+  array::thread_all(level.players, & function_236046c4);
+  level scene::add_scene_func("cin_pro_13_01_vtoltackle_vign_takedown", & function_b007992c, "play");
   if(b_starting) {
     level thread scene::skipto_end("cin_pro_13_01_vtoltackle_vign_takedown", undefined, undefined, 0.2);
     level thread scene::skipto_end("cin_pro_13_01_vtoltackle_vign_takedown_khalil", undefined, undefined, 0.2);
@@ -710,7 +710,7 @@ function function_b007992c(a_ents) {
   level waittill("hash_3af3e792");
   vh_vtol notify("death");
   vh_vtol notify("hash_c5b436ee");
-  vh_vtol setModel("veh_t7_mil_vtol_nrc_no_interior_d");
+  vh_vtol setmodel("veh_t7_mil_vtol_nrc_no_interior_d");
   level thread cp_prologue_util::function_2a0bc326(vh_vtol.origin, 0.6, 2, 5000, 6);
   exploder::exploder("light_exploder_vtol_tackle_fire");
   wait(1);
@@ -789,8 +789,8 @@ function function_236046c4() {
 function function_ecf2e565() {
   level endon("hash_51bc43cb");
   veh_vtol = getent("vtol", "animname");
-  while(true) {
-    if(!isDefined(veh_vtol)) {
+  while (true) {
+    if(!isdefined(veh_vtol)) {
       wait(0.5);
       continue;
     }

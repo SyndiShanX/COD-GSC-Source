@@ -28,7 +28,7 @@ sndtrackers() {
 
 sndstingersetup() {
   level.sndmusicstingerevent = ::sndplaystinger;
-  level.sndstinger = spawnStruct();
+  level.sndstinger = spawnstruct();
   level.sndstinger.ent = spawn("script_origin", (0, 0, 0));
   level.sndstinger.queue = 0;
   level.sndstinger.isplaying = 0;
@@ -77,7 +77,7 @@ createstingerstate(state, alias, prewait, interrupt) {
   s = level.sndstinger;
 
   if(!isDefined(s.states[state])) {
-    s.states[state] = spawnStruct();
+    s.states[state] = spawnstruct();
     s.states[state].alias = alias;
     s.states[state].prewait = prewait;
     s.states[state].interrupt = interrupt;
@@ -113,9 +113,9 @@ locationstingerwait(zone_name, type) {
     if(!sndlocationshouldplay(array, activezone)) {
       continue;
     }
-    if(is_true(level.sndroundwait)) {
+    if(is_true(level.sndroundwait))
       continue;
-    } else if(is_true(level.sndstinger.isplaying)) {
+    else if(is_true(level.sndstinger.isplaying)) {
       level thread sndlocationqueue(activezone);
       continue;
     }
@@ -125,17 +125,15 @@ locationstingerwait(zone_name, type) {
     array = sndcurrentlocationarray(array, activezone, numcut, sndnorepeats);
     level.sndlastzone = activezone;
 
-    if(numcut >= sndnorepeats) {
+    if(numcut >= sndnorepeats)
       numcut = 0;
-    } else {
+    else
       numcut++;
-    }
 
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait)) {
+    while(is_true(level.sndroundwait))
       wait 0.1;
-    }
 
     level.sndlocationplayed = 0;
   }
@@ -159,48 +157,41 @@ sndlocationsarray() {
 sndlocationshouldplay(array, activezone) {
   shouldplay = 0;
 
-  if(activezone == "zone_start_lower" && !flag("fountain_transport_active")) {
+  if(activezone == "zone_start_lower" && !flag("fountain_transport_active"))
     return shouldplay;
-  }
 
-  if(is_true(level.music_override)) {
+  if(is_true(level.music_override))
     return shouldplay;
-  }
 
   foreach(place in array) {
-    if(place == activezone) {
+    if(place == activezone)
       shouldplay = 1;
-    }
   }
 
-  if(shouldplay == 0) {
+  if(shouldplay == 0)
     return shouldplay;
-  }
 
   playersinlocal = 0;
   players = getplayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
-      if(!is_true(player.afterlife)) {
+      if(!is_true(player.afterlife))
         playersinlocal++;
-      }
     }
   }
 
-  if(playersinlocal >= 1) {
+  if(playersinlocal >= 1)
     shouldplay = 1;
-  } else {
+  else
     shouldplay = 0;
-  }
 
   return shouldplay;
 }
 
 sndcurrentlocationarray(current_array, activezone, numcut, max_num_removed) {
-  if(numcut >= max_num_removed) {
+  if(numcut >= max_num_removed)
     current_array = sndlocationsarray();
-  }
 
   foreach(place in current_array) {
     if(place == activezone) {
@@ -236,26 +227,23 @@ sndlocationbetweenrounds() {
 }
 
 sndlocationbetweenroundswait() {
-  while(is_true(level.sndroundwait)) {
+  while(is_true(level.sndroundwait))
     wait 0.1;
-  }
 
   while(true) {
     level thread sndlocationbetweenrounds();
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait)) {
+    while(is_true(level.sndroundwait))
       wait 0.1;
-    }
   }
 }
 
 sndlocationqueue(zone) {
   level endon("newzoneActive");
 
-  while(is_true(level.sndstinger.isplaying)) {
+  while(is_true(level.sndstinger.isplaying))
     wait 0.5;
-  }
 
   level notify("newzoneActive", zone);
 }
@@ -284,9 +272,8 @@ sndplaystinger(state, player) {
     return;
   }
 
-  if(s.states[state].interrupt == "queue") {
+  if(s.states[state].interrupt == "queue")
     level thread sndqueuestinger(state, player);
-  }
 }
 
 playstinger(state, player, ignore) {
@@ -299,10 +286,10 @@ playstinger(state, player, ignore) {
     return;
   }
   if(is_true(ignore)) {
-    if(isDefined(player)) {
+    if(isDefined(player))
       player playsoundtoplayer(s.states[state].alias, player);
-    } else {
-      s.ent playSound(s.states[state].alias);
+    else {
+      s.ent playsound(s.states[state].alias);
       s.ent thread playstingerstop();
     }
   } else if(isDefined(player)) {
@@ -318,17 +305,16 @@ playstinger(state, player, ignore) {
 sndqueuestinger(state, player) {
   s = level.sndstinger;
 
-  if(is_true(s.queue)) {
+  if(is_true(s.queue))
     return;
-  } else {
+  else {
     s.queue = 1;
 
     while(true) {
-      if(is_true(level.sndroundwait) || is_true(s.isplaying)) {
+      if(is_true(level.sndroundwait) || is_true(s.isplaying))
         wait 0.5;
-      } else {
+      else
         break;
-      }
     }
 
     level thread sndplaystinger(state, player);
@@ -413,13 +399,11 @@ sndbackgroundmustracker() {
 }
 
 sndshoulditplay(activezone) {
-  if(self.prevzone == activezone) {
+  if(self.prevzone == activezone)
     return false;
-  }
 
-  if(!self maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
+  if(!self maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone))
     return false;
-  }
 
   return true;
 }
@@ -473,18 +457,17 @@ sndmusicegg() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++) {
+  for(i = 0; i < origins.size; i++)
     level thread sndmusicegg_wait(origins[i]);
-  }
 }
 
 sndmusicegg_wait(bottle_origin) {
   temp_ent = spawn("script_origin", bottle_origin);
-  temp_ent playLoopSound("zmb_meteor_loop");
+  temp_ent playloopsound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playSound("zmb_meteor_activate");
+  player playsound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
   if(level.meteor_counter == 3) {
@@ -497,9 +480,8 @@ sndmusicegg_wait(bottle_origin) {
 }
 
 sndmusicegg_override() {
-  if(is_true(level.music_override)) {
+  if(is_true(level.music_override))
     return false;
-  }
 
   return true;
 }
@@ -507,7 +489,7 @@ sndmusicegg_override() {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playSound(alias);
+  ent playsound(alias);
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
@@ -525,14 +507,13 @@ sndeggmusicwait(time) {
 }
 
 sndmusicquestendgame(alias, length) {
-  while(is_true(level.music_override)) {
+  while(is_true(level.music_override))
     wait 1;
-  }
 
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playSound(alias);
+  ent playsound(alias);
   wait(length);
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;
@@ -543,22 +524,21 @@ sndmusicquestendgame(alias, length) {
 }
 
 easter_egg_song_vo(player) {
-  if(isalive(player)) {
+  if(isalive(player))
     player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("quest", "find_secret");
-  }
 }
 
 sndendgamemusicredux(alias, length) {
   m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
   temp_ent = spawn("script_origin", m_endgame_machine.origin);
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
-  temp_ent playLoopSound("zmb_meteor_loop");
+  temp_ent playloopsound("zmb_meteor_loop");
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
   level.music_override = 1;
-  temp_ent playSound("zmb_endgame_mach_button");
+  temp_ent playsound("zmb_endgame_mach_button");
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
-  temp_ent playSound(alias);
+  temp_ent playsound(alias);
   wait(length);
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;

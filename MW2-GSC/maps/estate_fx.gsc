@@ -7,6 +7,7 @@
 #include maps\_utility;
 
 main() {
+
   maps\createfx\estate_fx::main();
   level thread treadfx_override();
 
@@ -72,9 +73,11 @@ main() {
   level._effect["thin_black_smoke_M"] = loadfx("smoke/thin_black_smoke_M");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["steam_solar_panels"] = loadfx("smoke/steam_solar_panels");
+
 }
 
 treadfx_override() {
+
   flying_tread_fx = "treadfx/heli_dust_estate";
   flying_tread_fx_large = "treadfx/heli_dust_estate_large";
 
@@ -170,4 +173,5 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("mi17", "painted metal", flying_tread_fx);
   maps\_treadfx::setvehiclefx("mi17", "default", flying_tread_fx);
   maps\_treadfx::setvehiclefx("mi17", "none", flying_tread_fx);
+
 }

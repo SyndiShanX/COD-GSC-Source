@@ -47,7 +47,7 @@ init() {
   game["end_reason"]["infected_eliminated"] = 99;
   game["end_reason"]["survivors_forfeited"] = 99;
   game["end_reason"]["infected_forfeited"] = 99;
-  game["strings"]["overtime"] = &"MP_OVERTIME";
+  game["strings"]["overtime"] = & "MP_OVERTIME";
   level.lua_splash_type_none = 0;
   level.lua_splash_type_killstreak = 1;
   level.lua_splash_type_medal = 2;
@@ -59,7 +59,7 @@ init() {
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread lowermessagethink();
     var_0 thread initnotifymessage();
@@ -68,7 +68,7 @@ onplayerconnect() {
 }
 
 hintmessage(var_0) {
-  var_1 = spawnStruct();
+  var_1 = spawnstruct();
   var_1.notifytext = var_0;
   notifymessage(var_1);
 }
@@ -136,7 +136,7 @@ initnotifymessage() {
 }
 
 oldnotifymessage(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = spawnStruct();
+  var_6 = spawnstruct();
   var_6.titletext = var_0;
   var_6.notifytext = var_1;
   var_6.iconname = var_2;
@@ -150,17 +150,15 @@ notifymessage(var_0) {
   self endon("death");
   self endon("disconnect");
 
-  if(!isDefined(var_0.slot)) {
+  if(!isdefined(var_0.slot))
     var_0.slot = 0;
-  }
 
   var_1 = var_0.slot;
 
-  if(!isDefined(var_0.type)) {
+  if(!isdefined(var_0.type))
     var_0.type = "";
-  }
 
-  if(!isDefined(self.doingsplash[var_1])) {
+  if(!isdefined(self.doingsplash[var_1])) {
     thread shownotifymessage(var_0);
     return;
   }
@@ -172,20 +170,18 @@ dispatchnotify(var_0) {
   waittillframeend;
   var_1 = self.splashqueue[var_0][0];
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
-  for(var_2 = 1; var_2 < self.splashqueue[var_0].size; var_2++) {
+  for (var_2 = 1; var_2 < self.splashqueue[var_0].size; var_2++)
     self.splashqueue[var_0][var_2 - 1] = self.splashqueue[var_0][var_2];
-  }
 
   self.splashqueue[var_0][var_2 - 1] = undefined;
 
-  if(isDefined(var_1.name)) {
+  if(isdefined(var_1.name))
     actionnotify(var_1);
-  } else {
+  else
     shownotifymessage(var_1);
-  }
 }
 
 promotionsplashnotify() {
@@ -193,7 +189,7 @@ promotionsplashnotify() {
     return;
   }
   self endon("disconnect");
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_1 = "promotion";
   var_0.name = var_1;
   var_0.type = tablelookup(get_table_name(), 0, var_1, 11);
@@ -205,95 +201,82 @@ promotionsplashnotify() {
 shownotifymessage(var_0) {
   self endon("disconnect");
 
-  if(maps\mp\_utility::is_true(var_0.resetondeath)) {
+  if(maps\mp\_utility::is_true(var_0.resetondeath))
     self endon("death");
-  }
 
   var_1 = var_0.slot;
 
   if(level.gameended) {
-    if(isDefined(var_0.type) && var_0.type == "rank") {
+    if(isdefined(var_0.type) && var_0.type == "rank") {
       self setclientdvar("ui_promotion", 1);
       self.postgamepromotion = 1;
     }
 
-    if(self.splashqueue[var_1].size) {
+    if(self.splashqueue[var_1].size)
       thread dispatchnotify(var_1);
-    }
 
     return;
   }
 
   self.doingsplash[var_1] = var_0;
 
-  if(maps\mp\_utility::is_true(var_0.resetondeath)) {
+  if(maps\mp\_utility::is_true(var_0.resetondeath))
     thread resetondeath();
-  }
 
   thread resetoncancel();
   waitrequirevisibility(0);
 
-  if(isDefined(var_0.duration)) {
+  if(isdefined(var_0.duration))
     var_2 = var_0.duration;
-  } else if(level.gameended) {
+  else if(level.gameended)
     var_2 = 2.0;
-  } else {
+  else
     var_2 = 4.0;
-  }
 
-  if(isDefined(var_0.sound)) {
+  if(isdefined(var_0.sound))
     self playlocalsound(var_0.sound);
-  }
 
-  if(isDefined(var_0.leadersound)) {
+  if(isdefined(var_0.leadersound))
     maps\mp\_utility::leaderdialogonplayer(var_0.leadersound);
-  }
 
   var_3 = var_0.glowcolor;
   var_4 = self.notifytitle;
 
-  if(isDefined(var_0.titletext)) {
-    if(isDefined(var_0.titlelabel)) {
+  if(isdefined(var_0.titletext)) {
+    if(isdefined(var_0.titlelabel))
       self.notifytitle.label = var_0.titlelabel;
-    } else {
-      self.notifytitle.label = &"";
-    }
+    else
+      self.notifytitle.label = & "";
 
-    if(isDefined(var_0.titlelabel) && !isDefined(var_0.titleisstring)) {
+    if(isdefined(var_0.titlelabel) && !isdefined(var_0.titleisstring))
       self.notifytitle setvalue(var_0.titletext);
-    } else {
+    else
       self.notifytitle settext(var_0.titletext);
-    }
 
-    if(isDefined(var_3)) {
+    if(isdefined(var_3))
       self.notifytitle.glowcolor = var_3;
-    }
 
     self.notifytitle.alpha = 1;
     self.notifytitle fadeovertime(var_2 * 1.25);
     self.notifytitle.alpha = 0;
   }
 
-  if(isDefined(var_0.textglowcolor)) {
+  if(isdefined(var_0.textglowcolor))
     var_3 = var_0.textglowcolor;
-  }
 
-  if(isDefined(var_0.notifytext)) {
-    if(isDefined(var_0.textlabel)) {
+  if(isdefined(var_0.notifytext)) {
+    if(isdefined(var_0.textlabel))
       self.notifytext.label = var_0.textlabel;
-    } else {
-      self.notifytext.label = &"";
-    }
+    else
+      self.notifytext.label = & "";
 
-    if(isDefined(var_0.textlabel) && !isDefined(var_0.textisstring)) {
+    if(isdefined(var_0.textlabel) && !isdefined(var_0.textisstring))
       self.notifytext setvalue(var_0.notifytext);
-    } else {
+    else
       self.notifytext settext(var_0.notifytext);
-    }
 
-    if(isDefined(var_3)) {
+    if(isdefined(var_3))
       self.notifytext.glowcolor = var_3;
-    }
 
     self.notifytext.alpha = 1;
     self.notifytext fadeovertime(var_2 * 1.25);
@@ -301,20 +284,18 @@ shownotifymessage(var_0) {
     var_4 = self.notifytext;
   }
 
-  if(isDefined(var_0.notifytext2)) {
+  if(isdefined(var_0.notifytext2)) {
     self.notifytext2 maps\mp\gametypes\_hud_util::setparent(var_4);
 
-    if(isDefined(var_0.text2label)) {
+    if(isdefined(var_0.text2label))
       self.notifytext2.label = var_0.text2label;
-    } else {
-      self.notifytext2.label = &"";
-    }
+    else
+      self.notifytext2.label = & "";
 
     self.notifytext2 settext(var_0.notifytext2);
 
-    if(isDefined(var_3)) {
+    if(isdefined(var_3))
       self.notifytext2.glowcolor = var_3;
-    }
 
     self.notifytext2.alpha = 1;
     self.notifytext2 fadeovertime(var_2 * 1.25);
@@ -322,18 +303,17 @@ shownotifymessage(var_0) {
     var_4 = self.notifytext2;
   }
 
-  if(isDefined(var_0.iconname)) {
+  if(isdefined(var_0.iconname)) {
     self.notifyicon maps\mp\gametypes\_hud_util::setparent(var_4);
 
-    if(level.splitscreen || self issplitscreenplayer()) {
+    if(level.splitscreen || self issplitscreenplayer())
       self.notifyicon setshader(var_0.iconname, 30, 30);
-    } else {
+    else
       self.notifyicon setshader(var_0.iconname, 60, 60);
-    }
 
     self.notifyicon.alpha = 0;
 
-    if(isDefined(var_0.iconoverlay)) {
+    if(isdefined(var_0.iconoverlay)) {
       self.notifyicon fadeovertime(0.15);
       self.notifyicon.alpha = 1;
       var_0.overlayoffsety = 0;
@@ -363,9 +343,8 @@ shownotifymessage(var_0) {
   self notify("notifyMessageDone");
   self.doingsplash[var_1] = undefined;
 
-  if(self.splashqueue[var_1].size) {
+  if(self.splashqueue[var_1].size)
     thread dispatchnotify(var_1);
-  }
 }
 
 coopkillstreaksplashnotify(var_0, var_1) {
@@ -378,7 +357,7 @@ coopkillstreaksplashnotify(var_0, var_1) {
   if(level.gameended) {
     return;
   }
-  var_2 = spawnStruct();
+  var_2 = spawnstruct();
   var_2.name = var_0;
   var_2.type = tablelookup(get_table_name(), 0, var_0, 11);
   var_2.optionalnumber = 0;
@@ -395,19 +374,17 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
   self endon("disconnect");
   waittillframeend;
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(level.gameended) {
     return;
   }
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_0 = var_0 + ("_" + var_2);
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isdefined(var_4))
     var_4 = -1;
-  }
 
   if(getdvarint("scr_lua_splashes")) {
     var_5 = tablelookuprownum("mp\splashTable.csv", 0, var_0);
@@ -421,7 +398,7 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_6 = spawnStruct();
+  var_6 = spawnstruct();
   var_6.name = var_0;
   var_6.type = tablelookup(get_table_name(), 0, var_0, 11);
   var_6.optionalnumber = var_1;
@@ -431,18 +408,15 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
   var_6.slot = 0;
   var_6.killstreakslot = var_4;
 
-  if(isDefined(var_3) && isarray(var_3)) {
-    if(var_3.size > 0) {
+  if(isdefined(var_3) && isarray(var_3)) {
+    if(var_3.size > 0)
       var_6.module1idx = tablelookuprownum(level.ks_modules_table, level.ks_module_ref_column, var_3[0]);
-    }
 
-    if(var_3.size > 1) {
+    if(var_3.size > 1)
       var_6.module2idx = tablelookuprownum(level.ks_modules_table, level.ks_module_ref_column, var_3[1]);
-    }
 
-    if(var_3.size > 2) {
+    if(var_3.size > 2)
       var_6.module3idx = tablelookuprownum(level.ks_modules_table, level.ks_module_ref_column, var_3[2]);
-    }
   }
 
   thread actionnotify(var_6);
@@ -456,18 +430,16 @@ challengesplashnotify(var_0, var_1, var_2) {
   waittillframeend;
   wait 0.05;
 
-  for(var_3 = var_2 - 1; var_3 >= var_1; var_3--) {
+  for (var_3 = var_2 - 1; var_3 >= var_1; var_3--) {
     var_4 = maps\mp\gametypes\_hud_util::ch_gettarget(var_0, var_3);
 
-    if(var_4 == 0) {
+    if(var_4 == 0)
       var_4 = 1;
-    }
 
-    if(var_0 == "ch_longersprint_pro" || var_0 == "ch_longersprint_pro_daily" || var_0 == "ch_longersprint_pro_weekly") {
+    if(var_0 == "ch_longersprint_pro" || var_0 == "ch_longersprint_pro_daily" || var_0 == "ch_longersprint_pro_weekly")
       var_4 = int(var_4 / 528);
-    } else if(var_0 == "ch_exomech_frontier") {
+    else if(var_0 == "ch_exomech_frontier")
       var_4 = int(var_4 / 528);
-    }
 
     if(getdvarint("scr_lua_splashes")) {
       var_5 = tablelookup("mp\allChallengesTable.csv", 0, var_0, 28);
@@ -482,7 +454,7 @@ challengesplashnotify(var_0, var_1, var_2) {
       continue;
     }
 
-    var_7 = spawnStruct();
+    var_7 = spawnstruct();
     var_7.name = var_0;
     var_7.type = tablelookup(get_table_name(), 0, var_0, 11);
     var_7.challengetier = var_3;
@@ -515,7 +487,7 @@ splashnotify(var_0, var_1, var_2) {
     var_3 = tablelookuprownum("mp\splashTable.csv", 0, var_0);
 
     if(var_3 >= 0) {
-      if(isDefined(var_1)) {
+      if(isdefined(var_1)) {
         self luinotifyevent(&"generic_splash_number", 2, var_3, var_1);
         self luinotifyeventtospectators(&"generic_splash_number", 2, var_3, var_1);
       } else {
@@ -531,15 +503,14 @@ splashnotify(var_0, var_1, var_2) {
 
   self endon("disconnect");
   wait 0.05;
-  var_4 = spawnStruct();
+  var_4 = spawnstruct();
   var_4.name = var_0;
   var_4.type = tablelookup(get_table_name(), 0, var_0, 11);
   var_4.optionalnumber = var_1;
   var_4.sound = tablelookup(get_table_name(), 0, var_4.name, 9);
 
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = -1;
-  }
 
   var_4.killstreakslot = var_2;
   var_4.slot = 0;
@@ -553,7 +524,7 @@ rankupsplashnotify(var_0, var_1, var_2) {
   self endon("disconnect");
   waittillframeend;
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(level.gameended) {
@@ -571,7 +542,7 @@ rankupsplashnotify(var_0, var_1, var_2) {
     return;
   }
 
-  var_4 = spawnStruct();
+  var_4 = spawnstruct();
   var_4.name = var_0;
   var_4.type = tablelookup(get_table_name(), 0, var_0, 11);
   var_4.sound = tablelookup(get_table_name(), 0, var_0, 9);
@@ -588,13 +559,13 @@ playercardsplashnotify(var_0, var_1, var_2) {
   self endon("disconnect");
   waittillframeend;
 
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(level.gameended) {
     return;
   }
-  var_3 = spawnStruct();
+  var_3 = spawnstruct();
   var_3.name = var_0;
   var_3.type = tablelookup(get_table_name(), 0, var_0, 11);
   var_3.optionalnumber = var_2;
@@ -602,9 +573,8 @@ playercardsplashnotify(var_0, var_1, var_2) {
   var_3.playercardplayer = var_1;
   var_3.slot = 0;
 
-  if(var_3.type == "playercard_splash") {
+  if(var_3.type == "playercard_splash")
     var_3.slot = 1;
-  }
 
   thread actionnotify(var_3);
 }
@@ -614,11 +584,10 @@ actionnotify(var_0) {
   self endon("disconnect");
   var_1 = var_0.slot;
 
-  if(!isDefined(var_0.type)) {
+  if(!isdefined(var_0.type))
     var_0.type = "";
-  }
 
-  if(!isDefined(self.doingsplash[var_1])) {
+  if(!isdefined(self.doingsplash[var_1])) {
     thread actionnotifymessage(var_0);
     return;
   } else {
@@ -650,9 +619,8 @@ actionnotify(var_0) {
   }
 
   if(var_0.type == "challenge_splash" || var_0.type == "killstreak_splash" || var_0.type == "killstreak_coop_splash") {
-    for(var_2 = self.splashqueue[var_1].size; var_2 > 0; var_2--) {
+    for (var_2 = self.splashqueue[var_1].size; var_2 > 0; var_2--)
       self.splashqueue[var_1][var_2] = self.splashqueue[var_1][var_2 - 1];
-    }
 
     self.splashqueue[var_1][0] = var_0;
   } else
@@ -664,17 +632,16 @@ actionnotifymessage(var_0) {
   var_1 = var_0.slot;
 
   if(level.gameended) {
-    if(isDefined(var_0.type) && (var_0.type == "promotion_splash" || var_0.type == "promotion_weapon_splash")) {
+    if(isdefined(var_0.type) && (var_0.type == "promotion_splash" || var_0.type == "promotion_weapon_splash")) {
       self setclientdvar("ui_promotion", 1);
       self.postgamepromotion = 1;
-    } else if(isDefined(var_0.type) && var_0.type == "challenge_splash") {
+    } else if(isdefined(var_0.type) && var_0.type == "challenge_splash") {
       self.pers["postGameChallenges"]++;
       self setclientdvar("ui_challenge_" + self.pers["postGameChallenges"] + "_ref", var_0.name);
     }
 
-    if(self.splashqueue[var_1].size) {
+    if(self.splashqueue[var_1].size)
       thread dispatchnotify(var_1);
-    }
 
     return;
   }
@@ -686,54 +653,46 @@ actionnotifymessage(var_0) {
     switch (var_0.type) {
       case "killstreak_coop_splash":
       case "killstreak_splash":
-        if(isDefined(var_0.killstreakslot) && !level.console) {
+        if(isdefined(var_0.killstreakslot) && !level.console)
           self setclientomnvar("ui_splash_killstreak_slot_idx", var_0.killstreakslot);
-        }
 
         self setclientomnvar("ui_splash_killstreak_idx", var_2);
 
-        if(isDefined(var_0.playercardplayer) && var_0.playercardplayer != self) {
+        if(isdefined(var_0.playercardplayer) && var_0.playercardplayer != self)
           self setclientomnvar("ui_splash_killstreak_clientnum", var_0.playercardplayer getentitynumber());
-        } else {
+        else
           self setclientomnvar("ui_splash_killstreak_clientnum", -1);
-        }
 
-        if(isDefined(var_0.optionalnumber)) {
+        if(isdefined(var_0.optionalnumber))
           self setclientomnvar("ui_splash_killstreak_optional_number", var_0.optionalnumber);
-        } else {
+        else
           self setclientomnvar("ui_splash_killstreak_optional_number", 0);
-        }
 
-        if(isDefined(var_0.module1idx)) {
+        if(isdefined(var_0.module1idx))
           self setclientomnvar("ui_splash_killstreak_mod_1", var_0.module1idx);
-        } else {
+        else
           self setclientomnvar("ui_splash_killstreak_mod_1", -1);
-        }
 
-        if(isDefined(var_0.module2idx)) {
+        if(isdefined(var_0.module2idx))
           self setclientomnvar("ui_splash_killstreak_mod_2", var_0.module2idx);
-        } else {
+        else
           self setclientomnvar("ui_splash_killstreak_mod_2", -1);
-        }
 
-        if(isDefined(var_0.module3idx)) {
+        if(isdefined(var_0.module3idx))
           self setclientomnvar("ui_splash_killstreak_mod_3", var_0.module3idx);
-        } else {
+        else
           self setclientomnvar("ui_splash_killstreak_mod_3", -1);
-        }
 
         break;
       case "playercard_splash":
-        if(isDefined(var_0.playercardplayer)) {
+        if(isdefined(var_0.playercardplayer)) {
           self setclientomnvar("ui_splash_playercard_idx", var_2);
 
-          if(isplayer(var_0.playercardplayer)) {
+          if(isplayer(var_0.playercardplayer))
             self setclientomnvar("ui_splash_playercard_clientnum", var_0.playercardplayer getentitynumber());
-          }
 
-          if(isDefined(var_0.optionalnumber)) {
+          if(isdefined(var_0.optionalnumber))
             self setclientomnvar("ui_splash_playercard_optional_number", var_0.optionalnumber);
-          }
         }
 
         break;
@@ -742,21 +701,18 @@ actionnotifymessage(var_0) {
       case "splash":
         self setclientomnvar("ui_splash_idx", var_2);
 
-        if(isDefined(var_0.optionalnumber)) {
+        if(isdefined(var_0.optionalnumber))
           self setclientomnvar("ui_splash_optional_number", var_0.optionalnumber);
-        }
 
         break;
       case "rankup_splash":
         self setclientomnvar("ui_rankup_splash_idx", var_2);
 
-        if(isDefined(var_0.rank)) {
+        if(isdefined(var_0.rank))
           self setclientomnvar("ui_rank_splash_rank", var_0.rank);
-        }
 
-        if(isDefined(var_0.prestige)) {
+        if(isdefined(var_0.prestige))
           self setclientomnvar("ui_rank_splash_prestige", var_0.prestige);
-        }
 
         break;
       case "perk_challenge_splash":
@@ -764,13 +720,11 @@ actionnotifymessage(var_0) {
         var_2 = int(tablelookup("mp\allchallengestable.csv", 0, var_0.name, 28));
         self setclientomnvar("ui_challenge_splash_idx", var_2);
 
-        if(isDefined(var_0.challengetier)) {
+        if(isdefined(var_0.challengetier))
           self setclientomnvar("ui_challenge_splash_tier", var_0.challengetier);
-        }
 
-        if(isDefined(var_0.optionalnumber)) {
+        if(isdefined(var_0.optionalnumber))
           self setclientomnvar("ui_challenge_splash_optional_number", var_0.optionalnumber);
-        }
 
         break;
       default:
@@ -779,16 +733,14 @@ actionnotifymessage(var_0) {
 
     self.doingsplash[var_1] = var_0;
 
-    if(isDefined(var_0.sound) && var_0.sound != "") {
+    if(isdefined(var_0.sound) && var_0.sound != "")
       self playlocalsound(var_0.sound);
-    }
 
-    if(isDefined(var_0.leadersound)) {
-      if(isDefined(var_0.leadersoundgroup)) {
+    if(isdefined(var_0.leadersound)) {
+      if(isdefined(var_0.leadersoundgroup))
         maps\mp\_utility::leaderdialogonplayer(var_0.leadersound, var_0.leadersoundgroup, 1);
-      } else {
+      else
         maps\mp\_utility::leaderdialogonplayer(var_0.leadersound);
-      }
     }
 
     self notify("actionNotifyMessage" + var_1);
@@ -797,31 +749,27 @@ actionnotifymessage(var_0) {
     self.doingsplash[var_1] = undefined;
   }
 
-  if(self.splashqueue[var_1].size) {
+  if(self.splashqueue[var_1].size)
     thread dispatchnotify(var_1);
-  }
 }
 
 waitrequirevisibility(var_0) {
   var_1 = 0.05;
 
-  while(!canreadtext()) {
-    wait(var_1);
-  }
-
-  while(var_0 > 0) {
+  while (!canreadtext())
     wait(var_1);
 
-    if(canreadtext()) {
+  while (var_0 > 0) {
+    wait(var_1);
+
+    if(canreadtext())
       var_0 = var_0 - var_1;
-    }
   }
 }
 
 canreadtext() {
-  if(maps\mp\_flashgrenades::isflashbanged()) {
+  if(maps\mp\_flashgrenades::isflashbanged())
     return 0;
-  }
 
   return 1;
 }
@@ -859,9 +807,8 @@ lowermessagethink() {
   self.lowermessages = [];
   var_0 = "objective";
 
-  if(isDefined(level.lowermessagefont)) {
+  if(isdefined(level.lowermessagefont))
     var_0 = level.lowermessagefont;
-  }
 
   var_1 = -140;
   var_2 = level.lowertextfontsize;
@@ -889,18 +836,16 @@ lowermessagethink() {
 
 outcomeoverlay(var_0) {
   if(level.teambased) {
-    if(var_0 == "tie") {
+    if(var_0 == "tie")
       matchoutcomenotify("draw");
-    } else if(var_0 == self.team) {
+    else if(var_0 == self.team)
       matchoutcomenotify("victory");
-    } else {
+    else
       matchoutcomenotify("defeat");
-    }
   } else if(var_0 == self)
     matchoutcomenotify("victory");
-  else {
+  else
     matchoutcomenotify("defeat");
-  }
 }
 
 matchoutcomenotify(var_0) {
@@ -940,27 +885,22 @@ matchoutcomenotify(var_0) {
 }
 
 isdoingsplash() {
-  if(isDefined(self.doingsplash)) {
-    if(isDefined(self.doingsplash[0])) {
+  if(isdefined(self.doingsplash)) {
+    if(isdefined(self.doingsplash[0]))
       return 1;
-    }
 
-    if(isDefined(self.doingsplash[1])) {
+    if(isdefined(self.doingsplash[1]))
       return 1;
-    }
 
-    if(isDefined(self.doingsplash[2])) {
+    if(isdefined(self.doingsplash[2]))
       return 1;
-    }
 
-    if(isDefined(self.doingsplash[3])) {
+    if(isdefined(self.doingsplash[3]))
       return 1;
-    }
   }
 
-  if(isdoingluasplash()) {
+  if(isdoingluasplash())
     return 1;
-  }
 
   return 0;
 }
@@ -972,28 +912,24 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   wait 0.5;
   var_4 = self.pers["team"];
 
-  if(!isDefined(var_4) || var_4 != "allies" && var_4 != "axis") {
+  if(!isdefined(var_4) || var_4 != "allies" && var_4 != "axis")
     var_4 = "allies";
-  }
 
-  while(isdoingsplash()) {
+  while (isdoingsplash())
     wait 0.05;
-  }
 
   self endon("reset_outcome");
   var_5 = 0;
 
-  if(level.gametype == "ctf" && isDefined(var_3) && var_3) {
+  if(level.gametype == "ctf" && isdefined(var_3) && var_3)
     var_5 = 1;
-  }
 
   if(var_0 == "halftime") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["halftime"]);
     var_0 = "allies";
 
-    if(level.gametype == "ctf") {
+    if(level.gametype == "ctf")
       var_5 = 1;
-    }
   } else if(var_0 == "intermission") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["intermission"]);
     var_0 = "allies";
@@ -1003,32 +939,28 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   } else if(maps\mp\_utility::isovertimetext(var_0)) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["overtime"]);
 
-    if(level.gametype == "ctf" && var_0 == "overtime") {
+    if(level.gametype == "ctf" && var_0 == "overtime")
       var_5 = 1;
-    }
 
     var_0 = "allies";
   } else if(var_0 == "tie") {
-    if(var_1) {
+    if(var_1)
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_draw"]);
-    } else {
+    else
       self setclientomnvar("ui_round_end_title", game["round_end"]["draw"]);
-    }
 
     var_0 = "allies";
   } else if(self ismlgspectator())
     self setclientomnvar("ui_round_end_title", game["round_end"]["spectator"]);
-  else if(isDefined(self.pers["team"]) && var_0 == var_4) {
-    if(var_1) {
+  else if(isdefined(self.pers["team"]) && var_0 == var_4) {
+    if(var_1)
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
-    } else {
+    else
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
-    }
   } else if(var_1)
     self setclientomnvar("ui_round_end_title", game["round_end"]["round_loss"]);
-  else {
+  else
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
-  }
 
   self setclientomnvar("ui_round_end_reason", var_2);
 
@@ -1043,13 +975,11 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
     self setclientomnvar("ui_round_end_enemy_score", game["roundsWon"][level.otherteam[var_4]]);
   }
 
-  if(isDefined(self.matchbonus)) {
+  if(isdefined(self.matchbonus))
     self setclientomnvar("ui_round_end_match_bonus", self.matchbonus);
-  }
 
-  if(isDefined(game["round_time_to_beat"])) {
+  if(isdefined(game["round_time_to_beat"]))
     self setclientomnvar("ui_round_end_stopwatch", int(game["round_time_to_beat"] * 60));
-  }
 
   self setclientomnvar("ui_round_end", 1);
 }
@@ -1058,9 +988,8 @@ outcomenotify(var_0, var_1) {
   self endon("disconnect");
   self notify("reset_outcome");
 
-  while(isdoingsplash()) {
+  while (isdoingsplash())
     wait 0.05;
-  }
 
   self endon("reset_outcome");
   var_2 = level.placement["all"];
@@ -1069,27 +998,24 @@ outcomenotify(var_0, var_1) {
   var_5 = var_2[2];
   var_6 = 0;
 
-  if(isDefined(var_3) && self.score == var_3.score && self.deaths == var_3.deaths) {
-    if(self != var_3) {
+  if(isdefined(var_3) && self.score == var_3.score && self.deaths == var_3.deaths) {
+    if(self != var_3)
       var_6 = 1;
-    } else if(isDefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths) {
+    else if(isdefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths)
       var_6 = 1;
-    }
   }
 
-  if(var_6) {
+  if(var_6)
     self setclientomnvar("ui_round_end_title", game["round_end"]["tie"]);
-  } else if(isDefined(var_3) && self == var_3) {
+  else if(isdefined(var_3) && self == var_3)
     self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
-  } else {
+  else
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
-  }
 
   self setclientomnvar("ui_round_end_reason", var_1);
 
-  if(isDefined(self.matchbonus)) {
+  if(isdefined(self.matchbonus))
     self setclientomnvar("ui_round_end_match_bonus", self.matchbonus);
-  }
 
   self setclientomnvar("ui_round_end", 1);
   self waittill("update_outcome");
@@ -1117,10 +1043,9 @@ manageluasplashtimers() {
   self.luasplashnextintrocompletetime = 0;
   self.luasplashnextoutrocompletetime = 0;
 
-  for(;;) {
-    if(!self.luasplashqueue.size) {
+  for (;;) {
+    if(!self.luasplashqueue.size)
       self waittill("luaSplashTimerUpdate");
-    }
 
     if(!self.luasplashqueue.size) {
       continue;
@@ -1183,7 +1108,7 @@ manageluasplashtimers() {
       wait(var_3);
     }
 
-    while(gettime() < self.luasplashnextoutrocompletetime) {
+    while (gettime() < self.luasplashnextoutrocompletetime) {
       if(self.luasplashqueue.size > 0) {
         if(self.luasplashcurrenttype == level.lua_splash_type_none || self.luasplashqueue[0].splashtype == self.luasplashcurrenttype) {
           break;
@@ -1199,32 +1124,31 @@ manageluasplashtimers() {
 }
 
 insertluasplash(var_0, var_1) {
-  if(!isDefined(self.luasplashqueue)) {
+  if(!isdefined(self.luasplashqueue)) {
     return;
   }
   if(var_0 == level.lua_splash_type_medal) {
-    for(var_2 = 0; var_2 < self.luasplashqueue.size; var_2++) {
-      if(self.luasplashqueue[var_2].splashtype == var_0 && self.luasplashqueue[var_2].splashdata == var_1) {
+    for (var_2 = 0; var_2 < self.luasplashqueue.size; var_2++) {
+      if(self.luasplashqueue[var_2].splashtype == var_0 && self.luasplashqueue[var_2].splashdata == var_1)
         return;
-      }
     }
   }
 
-  var_3 = spawnStruct();
+  var_3 = spawnstruct();
   var_3.splashtype = var_0;
   var_3.splashdata = var_1;
 
   if(var_0 == level.lua_splash_type_killstreak) {
     var_4 = undefined;
 
-    for(var_2 = 0; var_2 < self.luasplashqueue.size; var_2++) {
+    for (var_2 = 0; var_2 < self.luasplashqueue.size; var_2++) {
       if(self.luasplashqueue[var_2].splashtype != level.lua_splash_type_killstreak) {
         var_4 = var_2;
         break;
       }
     }
 
-    if(isDefined(var_4)) {
+    if(isdefined(var_4)) {
       self.luasplashqueue = common_scripts\utility::array_insert(self.luasplashqueue, var_3, var_4);
       self notify("luaSplashTimerUpdate");
       return;

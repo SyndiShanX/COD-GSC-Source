@@ -30,7 +30,7 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playSound(localclientnum, "wpn_semtex_alert");
+    self playsound(localclientnum, "wpn_semtex_alert");
     serverwait(localclientnum, interval, 0.01, "player_switch");
     interval = clamp(interval / 1.2, 0.08, 0.3);
   }
@@ -40,11 +40,10 @@ start_light_fx(localclientnum) {
   friend = self friendnotfoe(localclientnum);
   player = getlocalplayer(localclientnum);
 
-  if(friend) {
-    self.fx = playFXOnTag(localclientnum, level._effect["grenade_friendly_light"], self, "tag_fx");
-  } else {
-    self.fx = playFXOnTag(localclientnum, level._effect["grenade_enemy_light"], self, "tag_fx");
-  }
+  if(friend)
+    self.fx = playfxontag(localclientnum, level._effect["grenade_friendly_light"], self, "tag_fx");
+  else
+    self.fx = playfxontag(localclientnum, level._effect["grenade_enemy_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {
@@ -58,11 +57,10 @@ fullscreen_fx(localclientnum) {
   player = getlocalplayer(localclientnum);
 
   if(isDefined(player)) {
-    if(player getinkillcam(localclientnum)) {
+    if(player getinkillcam(localclientnum))
       return;
-    } else if(player isplayerviewlinkedtoentity(localclientnum)) {
+    else if(player isplayerviewlinkedtoentity(localclientnum))
       return;
-    }
   }
 
   if(self friendnotfoe(localclientnum)) {
@@ -76,15 +74,13 @@ fullscreen_fx(localclientnum) {
     if(issplitscreen()) {
       animateui(localclientnum, "sticky_grenade_overlay_ss" + localclientnum, "overlay", "pulse", 0);
 
-      if(getdvarint(#"ui_hud_hardcore") == 0) {
+      if(getdvarint(#"ui_hud_hardcore") == 0)
         animateui(localclientnum, "stuck_ss" + localclientnum, "sticky_grenade", "pulse", 0);
-      }
     } else {
       animateui(localclientnum, "sticky_grenade_overlay" + localclientnum, "overlay", "pulse", 0);
 
-      if(getdvarint(#"ui_hud_hardcore") == 0) {
+      if(getdvarint(#"ui_hud_hardcore") == 0)
         animateui(localclientnum, "stuck" + localclientnum, "sticky_grenade", "pulse", 0);
-      }
     }
   }
 }

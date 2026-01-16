@@ -19,6 +19,7 @@
 #include scripts\mp\mp_nuketown_4_sound;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_nuketown_4;
 
 event_handler[level_init] main(eventstruct) {
@@ -26,7 +27,7 @@ event_handler[level_init] main(eventstruct) {
   lui::add_luimenu("full_screen_movie", &full_screen_movie::register, "full_screen_movie");
   level.mannequin_mode = 0;
   level.var_ecb7b947 = 0;
-  level.destructible_callbacks[# "headless"] = &function_e0136874;
+  level.destructible_callbacks[#"headless"] = &function_e0136874;
   level.nuketown_population = 0;
   clientfield::register("world", "nuketown_population", 8000, 7, "int");
   clientfield::register("world", "nuketown_missile_scene", 8000, 1, "int");
@@ -44,7 +45,7 @@ event_handler[level_init] main(eventstruct) {
 
   adddebugcommand("<dev string:x38>" + "<dev string:x51>");
 
-  level thread function_b3e0f5e0();
+    level thread function_b3e0f5e0();
   kill_triggers = getEntArray("ee_kill", "targetname");
 
   foreach(trigger in kill_triggers) {
@@ -224,13 +225,13 @@ function_25cf04b2(a_ents) {
   blue_train = getent("blue_train", "targetname");
   orange_train = getent("orange_train", "targetname");
 
-  if(isDefined(a_ents[# "prop 1"]) && isDefined(blue_train)) {
-    hatch_left = a_ents[# "prop 1"];
+  if(isDefined(a_ents[#"prop 1"]) && isDefined(blue_train)) {
+    hatch_left = a_ents[#"prop 1"];
     blue_train linkto(hatch_left, "tag_link_train_engine", (0, 0, 0));
   }
 
-  if(isDefined(a_ents[# "prop 2"]) && isDefined(orange_train)) {
-    hatch_right = a_ents[# "prop 2"];
+  if(isDefined(a_ents[#"prop 2"]) && isDefined(orange_train)) {
+    hatch_right = a_ents[#"prop 2"];
     orange_train linkto(hatch_right, "tag_link_train_carriage", (0, 0, 0));
   }
 
@@ -513,8 +514,8 @@ function_f062b7d9(bhide) {
 function_c2bd6a1f(a_ents) {
   truck = getent("truck_destructible", "targetname");
 
-  if(isDefined(a_ents[# "prop 1"]) && isDefined(truck)) {
-    truck linkto(a_ents[# "prop 1"], "tag_link_uaz", (0, 0, 0));
+  if(isDefined(a_ents[#"prop 1"]) && isDefined(truck)) {
+    truck linkto(a_ents[#"prop 1"], "tag_link_uaz", (0, 0, 0));
   }
 }
 
@@ -523,7 +524,7 @@ function_bf48abde() {
 }
 
 mannequin_falling(var_e5031929) {
-  self endoncallback(&function_6bc3bcb8, # "death");
+  self endoncallback(&function_6bc3bcb8, #"death");
   var_e5031929 waittill(#"movedone");
   self notify(#"landed");
   self unlink();
@@ -538,7 +539,7 @@ function_6bc3bcb8(notifyhash) {
 }
 
 function_4eca5590() {
-  self endon(#"death", # "landed");
+  self endon(#"death", #"landed");
 
   while(true) {
     animation::play(#"hash_1f02283eb11fce2a", self.origin, self.angles, 1, 0.2, 0.2, 0, 0, 0, 0);
@@ -597,9 +598,10 @@ spawn_mannequin() {
 }
 
 mannequindamage(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isDefined(inflictor) && isactor(inflictor) && inflictor.archetype == # "zombie") {
+  if(isDefined(inflictor) && isactor(inflictor) && inflictor.archetype == #"zombie") {
     return 0;
   }
 
   return damage;
 }
+

@@ -18,7 +18,7 @@ function main() {
   level thread wait_for_game_end();
   level thread snd_start_autofx_audio();
   level thread function_d19cb2f8();
-  clientfield::register("scriptmover", "meteor_shrink", 21000, 1, "counter", &meteor_shrink, 0, 0);
+  clientfield::register("scriptmover", "meteor_shrink", 21000, 1, "counter", & meteor_shrink, 0, 0);
 }
 
 function function_28416c1e() {
@@ -31,14 +31,14 @@ function function_a96d8fc7() {
 }
 
 function function_418a175a(var_ef677c68) {
-  playSound(0, "evt_sq_gen_transition", (0, 0, 0));
+  playsound(0, "evt_sq_gen_transition", (0, 0, 0));
   setsoundcontext("aquifer_cockpit", "active");
   audio::playloopat("evt_sq_gen_bg", (0, 0, 0));
 }
 
 function function_e3a6a660(bnewent, binitialsnap, bwasdemojump) {
   if(!bnewent && !binitialsnap && !bwasdemojump) {
-    playSound(0, "evt_sq_gen_transition", (0, 0, 0));
+    playsound(0, "evt_sq_gen_transition", (0, 0, 0));
   }
   setsoundcontext("aquifer_cockpit", "");
   audio::stoploopat("evt_sq_gen_bg", (0, 0, 0));
@@ -50,7 +50,7 @@ function function_b11e8fe8() {
 }
 
 function function_e2433f87(num) {
-  while(true) {
+  while (true) {
     level waittill("ge" + num);
     level notify("evt_geyser_blast_" + num);
     wait(14.5);
@@ -65,7 +65,7 @@ function meteor_shrink(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 function function_762642a6() {
   wait(5.5);
-  if(isDefined(level.var_15e33496)) {
+  if(isdefined(level.var_15e33496)) {
     audio::snd_set_snapshot("zmb_temple_sq");
   } else {
     audio::snd_set_snapshot("default");
@@ -82,11 +82,11 @@ function snd_start_autofx_audio() {
 }
 
 function function_60a32834() {
-  while(true) {
+  while (true) {
     self waittill("trigger", trigplayer);
     if(trigplayer islocalplayer()) {
       level notify("hash_51d7bc7c", self.script_sound);
-      while(isDefined(trigplayer) && trigplayer istouching(self)) {
+      while (isdefined(trigplayer) && trigplayer istouching(self)) {
         wait(0.016);
       }
     } else {
@@ -99,8 +99,8 @@ function function_d667714e() {
   level.var_b6342abd = "mus_temple_underscore_default";
   level.var_6d9d81aa = "mus_temple_underscore_default";
   level.var_eb526c90 = spawn(0, (0, 0, 0), "script_origin");
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(level.var_b6342abd, 2);
-  while(true) {
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(level.var_b6342abd, 2);
+  while (true) {
     level waittill("hash_51d7bc7c", location);
     level.var_6d9d81aa = "mus_temple_underscore_" + location;
     if(level.var_6d9d81aa != level.var_b6342abd) {
@@ -114,17 +114,17 @@ function function_b234849(var_6d9d81aa) {
   level endon("hash_51d7bc7c");
   level.var_eb526c90 stopallloopsounds(2);
   wait(1);
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(var_6d9d81aa, 2);
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(var_6d9d81aa, 2);
 }
 
 function function_d19cb2f8() {
   loopers = struct::get_array("exterior_goal", "targetname");
-  if(isDefined(loopers) && loopers.size > 0) {
+  if(isdefined(loopers) && loopers.size > 0) {
     delay = 0;
     if(getdvarint("") > 0) {
       println(("" + loopers.size) + "");
     }
-    for(i = 0; i < loopers.size; i++) {
+    for (i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
       if((delay % 20) == 0) {
@@ -138,27 +138,27 @@ function function_d19cb2f8() {
 }
 
 function soundloopthink() {
-  if(!isDefined(self.origin)) {
+  if(!isdefined(self.origin)) {
     return;
   }
-  if(!isDefined(self.script_sound)) {
+  if(!isdefined(self.script_sound)) {
     self.script_sound = "zmb_spawn_walla";
   }
   notifyname = "";
-  assert(isDefined(notifyname));
-  if(isDefined(self.script_string)) {
+  assert(isdefined(notifyname));
+  if(isdefined(self.script_string)) {
     notifyname = self.script_string;
   }
-  assert(isDefined(notifyname));
+  assert(isdefined(notifyname));
   started = 1;
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     started = self.script_int != 0;
   }
   if(started) {
     soundloopemitter(self.script_sound, self.origin);
   }
   if(notifyname != "") {
-    for(;;) {
+    for (;;) {
       level waittill(notifyname);
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);

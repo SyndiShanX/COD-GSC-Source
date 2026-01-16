@@ -11,11 +11,13 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnStruct();
+    level._systemStates[system] = spawnstruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [[level._systemStates[system].callback]](clientNum, newState);
+    [
+      [level._systemStates[system].callback]
+    ](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }

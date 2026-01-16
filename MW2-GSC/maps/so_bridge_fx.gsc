@@ -18,6 +18,7 @@ main() {
   level._effect["falling_brick_runner_line_400"] = loadfx("misc/falling_brick_runner_line_400_bridge");
   level._effect["falling_brick_runner_line_200"] = loadfx("misc/falling_brick_runner_line_200_bridge");
 
+
   //footstep fx	
   animscripts\utility::setFootstepEffect("asphalt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", loadfx("impacts/footstep_dust"));

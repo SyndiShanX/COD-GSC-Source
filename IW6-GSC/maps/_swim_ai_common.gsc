@@ -84,9 +84,8 @@ playfootstep(var_0, var_1) {
   var_2 = "water";
   var_3 = "J_Ball_RI";
 
-  if(var_0) {
+  if(var_0)
     var_3 = "J_Ball_LE";
-  }
 
   var_4 = "run";
   thread maps\_utility::play_sound_on_entity("foot_flipper_underwater");
@@ -94,9 +93,8 @@ playfootstep(var_0, var_1) {
 }
 
 playbubbleeffect(var_0, var_1) {
-  if(!isDefined(anim.optionalstepeffects[var_1])) {
+  if(!isDefined(anim.optionalstepeffects[var_1]))
     return 0;
-  }
 
   var_2 = self gettagorigin(var_0);
   var_3 = self.angles;

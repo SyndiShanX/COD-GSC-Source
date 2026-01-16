@@ -9,7 +9,7 @@
 #namespace zm_powerup_weapon_minigun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_weapon_minigun", &__init__, undefined, undefined);
+  system::register("zm_powerup_weapon_minigun", & __init__, undefined, undefined);
 }
 
 function __init__() {

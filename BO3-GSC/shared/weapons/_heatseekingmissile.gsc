@@ -16,7 +16,7 @@
 function init_shared() {
   game["locking_on_sound"] = "uin_alert_lockon_start";
   game["locked_on_sound"] = "uin_alert_lockon";
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   level.fx_flare = "killstreaks/fx_heli_chaff";
   setdvar("", "");
 }
@@ -37,7 +37,7 @@ function clearirtarget() {
   self.stingerlockstarted = 0;
   self.stingerlockfinalized = 0;
   self.stingerlockdetected = 0;
-  if(isDefined(self.stingertarget)) {
+  if(isdefined(self.stingertarget)) {
     self.stingertarget notify("missile_unlocked");
     self lockingon(self.stingertarget, 0);
     self lockedon(self.stingertarget, 0);
@@ -54,11 +54,11 @@ function clearirtarget() {
 function stingerfirednotify() {
   self endon("disconnect");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("missile_fire", missile, weapon);
     thread debug_missile(missile);
     if(weapon.lockontype == "Legacy Single") {
-      if(isDefined(self.stingertarget) && self.stingerlockfinalized) {
+      if(isdefined(self.stingertarget) && self.stingerlockfinalized) {
         self.stingertarget notify("stinger_fired_at_me", missile, weapon, self);
       }
     }
@@ -69,17 +69,17 @@ function debug_missile(missile) {
   level notify("debug_missile");
   level endon("debug_missile");
   level.debug_missile_dots = [];
-  while(true) {
+  while (true) {
     if(getdvarint("", 0) == 0) {
       wait(0.5);
       continue;
     }
-    if(isDefined(missile)) {
-      missile_info = spawnStruct();
+    if(isdefined(missile)) {
+      missile_info = spawnstruct();
       missile_info.origin = missile.origin;
       target = missile missile_gettarget();
-      missile_info.targetentnum = (isDefined(target) ? target getentitynumber() : undefined);
-      if(!isDefined(level.debug_missile_dots)) {
+      missile_info.targetentnum = (isdefined(target) ? target getentitynumber() : undefined);
+      if(!isdefined(level.debug_missile_dots)) {
         level.debug_missile_dots = [];
       } else if(!isarray(level.debug_missile_dots)) {
         level.debug_missile_dots = array(level.debug_missile_dots);
@@ -87,7 +87,7 @@ function debug_missile(missile) {
       level.debug_missile_dots[level.debug_missile_dots.size] = missile_info;
     }
     foreach(missile_info in level.debug_missile_dots) {
-      dot_color = (isDefined(missile_info.targetentnum) ? (1, 0, 0) : (0, 1, 0));
+      dot_color = (isdefined(missile_info.targetentnum) ? (1, 0, 0) : (0, 1, 0));
       dev::debug_sphere(missile_info.origin, 10, dot_color, 0.66, 1);
     }
     wait(0.05);
@@ -95,7 +95,7 @@ function debug_missile(missile) {
 }
 
 function stingerwaitforads() {
-  while(!self playerstingerads()) {
+  while (!self playerstingerads()) {
     wait(0.05);
     currentweapon = self getcurrentweapon();
     if(currentweapon.lockontype != "Legacy Single") {
@@ -108,9 +108,9 @@ function stingerwaitforads() {
 function stingertoggleloop() {
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change", weapon);
-    while(weapon.lockontype == "Legacy Single") {
+    while (weapon.lockontype == "Legacy Single") {
       if(self getweaponammoclip(weapon) == 0) {
         wait(0.05);
         weapon = self getcurrentweapon();
@@ -120,7 +120,7 @@ function stingertoggleloop() {
         break;
       }
       self thread stingerirtloop(weapon);
-      while(self playerstingerads()) {
+      while (self playerstingerads()) {
         wait(0.05);
       }
       self notify("stinger_irt_off");
@@ -135,7 +135,7 @@ function stingerirtloop(weapon) {
   self endon("death");
   self endon("stinger_irt_off");
   locklength = self getlockonspeed();
-  for(;;) {
+  for (;;) {
     wait(0.05);
     if(!self hasweapon(weapon)) {
       break;
@@ -155,7 +155,7 @@ function stingerirtloop(weapon) {
       }
       self lockingon(self.stingertarget, 0);
       self lockedon(self.stingertarget, 1);
-      if(isDefined(weapon)) {
+      if(isdefined(weapon)) {
         setfriendlyflags(weapon, self.stingertarget);
       }
       thread looplocallocksound(game["locked_on_sound"], 0.75);
@@ -169,7 +169,7 @@ function stingerirtloop(weapon) {
       }
       self lockingon(self.stingertarget, 1);
       self lockedon(self.stingertarget, 0);
-      if(isDefined(weapon)) {
+      if(isdefined(weapon)) {
         setfriendlyflags(weapon, self.stingertarget);
       }
       passed = softsighttest();
@@ -177,21 +177,21 @@ function stingerirtloop(weapon) {
         continue;
       }
       timepassed = gettime() - self.stingerlockstarttime;
-      if(isDefined(weapon)) {
+      if(isdefined(weapon)) {
         self setweaponlockonpercent(weapon, (timepassed / locklength) * 100);
         setfriendlyflags(weapon, self.stingertarget);
       }
       if(timepassed < locklength) {
         continue;
       }
-      assert(isDefined(self.stingertarget));
+      assert(isdefined(self.stingertarget));
       self notify("stop_lockon_sound");
       self.stingerlockfinalized = 1;
       self weaponlockfinalize(self.stingertarget);
       continue;
     }
     besttarget = self getbeststingertarget(weapon);
-    if(!isDefined(besttarget) || (isDefined(self.stingertarget) && self.stingertarget != besttarget)) {
+    if(!isdefined(besttarget) || (isdefined(self.stingertarget) && self.stingertarget != besttarget)) {
       self destroylockoncanceledmessage();
       if(self.stingerlockdetected == 1) {
         self weaponlockfree();
@@ -203,7 +203,7 @@ function stingerirtloop(weapon) {
       self destroylockoncanceledmessage();
       continue;
     }
-    if(isDefined(besttarget.lockondelay) && besttarget.lockondelay) {
+    if(isdefined(besttarget.lockondelay) && besttarget.lockondelay) {
       self displaylockoncanceledmessage();
       continue;
     }
@@ -217,7 +217,7 @@ function stingerirtloop(weapon) {
         self weaponlockdetect(besttarget);
       }
       self.stingerlockdetected = 1;
-      if(isDefined(weapon)) {
+      if(isdefined(weapon)) {
         setfriendlyflags(weapon, besttarget);
       }
       continue;
@@ -236,19 +236,19 @@ function stingerirtloop(weapon) {
 function targetwithinrangeofplayspace(target) {
   if(getdvarint("", 0) > 0) {
     extraradiusdvar = getdvarint("", 5000);
-    if(extraradiusdvar != (isDefined(level.missilelockplayspacecheckextraradius) ? level.missilelockplayspacecheckextraradius : 0)) {
+    if(extraradiusdvar != (isdefined(level.missilelockplayspacecheckextraradius) ? level.missilelockplayspacecheckextraradius : 0)) {
       level.missilelockplayspacecheckextraradius = extraradiusdvar;
       level.missilelockplayspacecheckradiussqr = undefined;
     }
   }
   if(level.missilelockplayspacecheckenabled === 1) {
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       return false;
     }
-    if(!isDefined(level.playspacecenter)) {
+    if(!isdefined(level.playspacecenter)) {
       level.playspacecenter = util::getplayspacecenter();
     }
-    if(!isDefined(level.missilelockplayspacecheckradiussqr)) {
+    if(!isdefined(level.missilelockplayspacecheckradiussqr)) {
       level.missilelockplayspacecheckradiussqr = ((util::getplayspacemaxwidth() * 0.5) + level.missilelockplayspacecheckextraradius) * ((util::getplayspacemaxwidth() * 0.5) + level.missilelockplayspacecheckextraradius);
     }
     if(distance2dsquared(target.origin, level.playspacecenter) > level.missilelockplayspacecheckradiussqr) {
@@ -259,13 +259,13 @@ function targetwithinrangeofplayspace(target) {
 }
 
 function destroylockoncanceledmessage() {
-  if(isDefined(self.lockoncanceledmessage)) {
+  if(isdefined(self.lockoncanceledmessage)) {
     self.lockoncanceledmessage destroy();
   }
 }
 
 function displaylockoncanceledmessage() {
-  if(isDefined(self.lockoncanceledmessage)) {
+  if(isdefined(self.lockoncanceledmessage)) {
     return;
   }
   self.lockoncanceledmessage = newclienthudelem(self);
@@ -286,13 +286,13 @@ function displaylockoncanceledmessage() {
 
 function getbeststingertarget(weapon) {
   targetsall = [];
-  if(isDefined(self.get_stinger_target_override)) {
+  if(isdefined(self.get_stinger_target_override)) {
     targetsall = self[[self.get_stinger_target_override]]();
   } else {
     targetsall = target_getarray();
   }
   targetsvalid = [];
-  for(idx = 0; idx < targetsall.size; idx++) {
+  for (idx = 0; idx < targetsall.size; idx++) {
     if(getdvarstring("") == "") {
       if(self insidestingerreticlenolock(targetsall[idx], weapon)) {
         targetsvalid[targetsvalid.size] = targetsall[idx];
@@ -301,10 +301,10 @@ function getbeststingertarget(weapon) {
     }
     target = targetsall[idx];
     if(level.teambased || level.use_team_based_logic_for_locking_on === 1) {
-      if(isDefined(target.team) && target.team != self.team) {
+      if(isdefined(target.team) && target.team != self.team) {
         if(self insidestingerreticledetect(target, weapon)) {
-          if(!isDefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
-            hascamo = isDefined(target.camo_state) && target.camo_state == 1 && !self hasperk("specialty_showenemyequipment");
+          if(!isdefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
+            hascamo = isdefined(target.camo_state) && target.camo_state == 1 && !self hasperk("specialty_showenemyequipment");
             if(!hascamo) {
               targetsvalid[targetsvalid.size] = target;
             }
@@ -314,8 +314,8 @@ function getbeststingertarget(weapon) {
       continue;
     }
     if(self insidestingerreticledetect(target, weapon)) {
-      if(isDefined(target.owner) && self != target.owner || (isplayer(target) && self != target)) {
-        if(!isDefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
+      if(isdefined(target.owner) && self != target.owner || (isplayer(target) && self != target)) {
+        if(!isdefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
           targetsvalid[targetsvalid.size] = target;
         }
       }
@@ -340,10 +340,10 @@ function getbeststingertarget(weapon) {
 
 function calclockonradius(target, weapon) {
   radius = self getlockonradius();
-  if(isDefined(weapon) && isDefined(weapon.lockonscreenradius) && weapon.lockonscreenradius > radius) {
+  if(isdefined(weapon) && isdefined(weapon.lockonscreenradius) && weapon.lockonscreenradius > radius) {
     radius = weapon.lockonscreenradius;
   }
-  if(isDefined(level.lockoncloserange) && isDefined(level.lockoncloseradiusscaler)) {
+  if(isdefined(level.lockoncloserange) && isdefined(level.lockoncloseradiusscaler)) {
     dist2 = distancesquared(target.origin, self.origin);
     if(dist2 < (level.lockoncloserange * level.lockoncloserange)) {
       radius = radius * level.lockoncloseradiusscaler;
@@ -354,10 +354,10 @@ function calclockonradius(target, weapon) {
 
 function calclockonlossradius(target, weapon) {
   radius = self getlockonlossradius();
-  if(isDefined(weapon) && isDefined(weapon.lockonscreenradius) && weapon.lockonscreenradius > radius) {
+  if(isdefined(weapon) && isdefined(weapon.lockonscreenradius) && weapon.lockonscreenradius > radius) {
     radius = weapon.lockonscreenradius;
   }
-  if(isDefined(level.lockoncloserange) && isDefined(level.lockoncloseradiusscaler)) {
+  if(isdefined(level.lockoncloserange) && isdefined(level.lockoncloseradiusscaler)) {
     dist2 = distancesquared(target.origin, self.origin);
     if(dist2 < (level.lockoncloserange * level.lockoncloserange)) {
       radius = radius * level.lockoncloseradiusscaler;
@@ -387,13 +387,13 @@ function insidestingerreticlelocked(target, weapon) {
 }
 
 function isstillvalidtarget(ent, weapon) {
-  if(!isDefined(ent)) {
+  if(!isdefined(ent)) {
     return 0;
   }
-  if(isDefined(self.is_still_valid_target_for_stinger_override)) {
+  if(isdefined(self.is_still_valid_target_for_stinger_override)) {
     return self[[self.is_still_valid_target_for_stinger_override]](ent, weapon);
   }
-  if(!target_istarget(ent) && (!(isDefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis))) {
+  if(!target_istarget(ent) && (!(isdefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis))) {
     return 0;
   }
   if(!insidestingerreticledetect(ent, weapon)) {
@@ -410,7 +410,7 @@ function looplocalseeksound(alias, interval) {
   self endon("stop_lockon_sound");
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self playsoundforlocalplayer(alias);
     self playrumbleonentity("stinger_lock_rumble");
     wait(interval / 2);
@@ -420,7 +420,7 @@ function looplocalseeksound(alias, interval) {
 function playsoundforlocalplayer(alias) {
   if(self isinvehicle()) {
     sound_target = self getvehicleoccupied();
-    if(isDefined(sound_target)) {
+    if(isdefined(sound_target)) {
       sound_target playsoundtoplayer(alias, self);
     }
   } else {
@@ -432,11 +432,11 @@ function looplocallocksound(alias, interval) {
   self endon("stop_locked_sound");
   self endon("disconnect");
   self endon("death");
-  if(isDefined(self.stingerlocksound)) {
+  if(isdefined(self.stingerlocksound)) {
     return;
   }
   self.stingerlocksound = 1;
-  for(;;) {
+  for (;;) {
     self playsoundforlocalplayer(alias);
     self playrumbleonentity("stinger_lock_rumble");
     wait(interval / 6);
@@ -453,10 +453,10 @@ function looplocallocksound(alias, interval) {
 
 function locksighttest(target) {
   camerapos = self getplayercamerapos();
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return false;
   }
-  if(isDefined(target.parent)) {
+  if(isdefined(target.parent)) {
     passed = bullettracepassed(camerapos, target.origin, 0, target, target.parent);
   } else {
     passed = bullettracepassed(camerapos, target.origin, 0, target);
@@ -465,7 +465,7 @@ function locksighttest(target) {
     return true;
   }
   front = target getpointinbounds(1, 0, 0);
-  if(isDefined(target.parent)) {
+  if(isdefined(target.parent)) {
     passed = bullettracepassed(camerapos, front, 0, target, target.parent);
   } else {
     passed = bullettracepassed(camerapos, front, 0, target);
@@ -474,7 +474,7 @@ function locksighttest(target) {
     return true;
   }
   back = target getpointinbounds(-1, 0, 0);
-  if(isDefined(target.parent)) {
+  if(isdefined(target.parent)) {
     passed = bullettracepassed(camerapos, back, 0, target, target.parent);
   } else {
     passed = bullettracepassed(camerapos, back, 0, target);
@@ -503,7 +503,7 @@ function softsighttest() {
 }
 
 function initlockfield(target) {
-  if(isDefined(target.locking_on)) {
+  if(isdefined(target.locking_on)) {
     return;
   }
   target.locking_on = 0;
@@ -512,7 +512,7 @@ function initlockfield(target) {
 }
 
 function lockingon(target, lock) {
-  assert(isDefined(target.locking_on));
+  assert(isdefined(target.locking_on));
   clientnum = self getentitynumber();
   if(lock) {
     target notify("hash_b081980b");
@@ -520,7 +520,7 @@ function lockingon(target, lock) {
     self thread watchclearlockingon(target, clientnum);
   } else {
     self notify("locking_on_cleared");
-    target.locking_on = target.locking_on &(~(1 << clientnum));
+    target.locking_on = target.locking_on & (~(1 << clientnum));
   }
 }
 
@@ -528,23 +528,23 @@ function watchclearlockingon(target, clientnum) {
   target endon("death");
   self endon("locking_on_cleared");
   self util::waittill_any("death", "disconnect");
-  target.locking_on = target.locking_on &(~(1 << clientnum));
+  target.locking_on = target.locking_on & (~(1 << clientnum));
 }
 
 function lockedon(target, lock) {
-  assert(isDefined(target.locked_on));
+  assert(isdefined(target.locked_on));
   clientnum = self getentitynumber();
   if(lock) {
     target.locked_on = target.locked_on | (1 << clientnum);
     self thread watchclearlockedon(target, clientnum);
   } else {
     self notify("locked_on_cleared");
-    target.locked_on = target.locked_on &(~(1 << clientnum));
+    target.locked_on = target.locked_on & (~(1 << clientnum));
   }
 }
 
 function targetinghacking(target, lock) {
-  assert(isDefined(target.locking_on_hacking));
+  assert(isdefined(target.locking_on_hacking));
   clientnum = self getentitynumber();
   if(lock) {
     target notify("hash_e1494b46");
@@ -552,7 +552,7 @@ function targetinghacking(target, lock) {
     self thread watchclearhacking(target, clientnum);
   } else {
     self notify("locking_on_hacking_cleared");
-    target.locking_on_hacking = target.locking_on_hacking &(~(1 << clientnum));
+    target.locking_on_hacking = target.locking_on_hacking & (~(1 << clientnum));
   }
 }
 
@@ -560,7 +560,7 @@ function watchclearhacking(target, clientnum) {
   target endon("death");
   self endon("locking_on_hacking_cleared");
   self util::waittill_any("death", "disconnect");
-  target.locking_on_hacking = target.locking_on_hacking &(~(1 << clientnum));
+  target.locking_on_hacking = target.locking_on_hacking & (~(1 << clientnum));
 }
 
 function setfriendlyflags(weapon, target) {
@@ -568,17 +568,17 @@ function setfriendlyflags(weapon, target) {
     self setfriendlyhacking(weapon, target);
     self setfriendlytargetting(weapon, target);
     self setfriendlytargetlocked(weapon, target);
-    if(isDefined(level.killstreakmaxhealthfunction)) {
-      if(isDefined(target.usevtoltime) && isDefined(level.vtol)) {
+    if(isdefined(level.killstreakmaxhealthfunction)) {
+      if(isdefined(target.usevtoltime) && isdefined(level.vtol)) {
         killstreakendtime = level.vtol.killstreakendtime;
-        if(isDefined(killstreakendtime)) {
+        if(isdefined(killstreakendtime)) {
           self settargetedentityendtime(weapon, killstreakendtime);
         }
       } else {
-        if(isDefined(target.killstreakendtime)) {
+        if(isdefined(target.killstreakendtime)) {
           self settargetedentityendtime(weapon, target.killstreakendtime);
         } else {
-          if(isDefined(target.parentstruct) && isDefined(target.parentstruct.killstreakendtime)) {
+          if(isdefined(target.parentstruct) && isdefined(target.parentstruct.killstreakendtime)) {
             self settargetedentityendtime(weapon, target.parentstruct.killstreakendtime);
           } else {
             self settargetedentityendtime(weapon, 0);
@@ -587,37 +587,37 @@ function setfriendlyflags(weapon, target) {
       }
       self settargetedmissilesremaining(weapon, 0);
       killstreaktype = target.killstreaktype;
-      if(!isDefined(target.killstreaktype) && isDefined(target.parentstruct) && isDefined(target.parentstruct.killstreaktype)) {
+      if(!isdefined(target.killstreaktype) && isdefined(target.parentstruct) && isdefined(target.parentstruct.killstreaktype)) {
         killstreaktype = target.parentstruct.killstreaktype;
-      } else if(isDefined(target.usevtoltime) && isDefined(level.vtol.killstreaktype)) {
+      } else if(isdefined(target.usevtoltime) && isdefined(level.vtol.killstreaktype)) {
         killstreaktype = level.vtol.killstreaktype;
       }
-      if(isDefined(killstreaktype) && isDefined(level.killstreakbundle[killstreaktype])) {
-        if(isDefined(target.forceonemissile)) {
+      if(isdefined(killstreaktype) && isdefined(level.killstreakbundle[killstreaktype])) {
+        if(isdefined(target.forceonemissile)) {
           self settargetedmissilesremaining(weapon, 1);
         } else {
-          if(isDefined(target.usevtoltime) && isDefined(level.vtol) && isDefined(level.vtol.totalrockethits) && isDefined(level.vtol.missiletodestroy)) {
+          if(isdefined(target.usevtoltime) && isdefined(level.vtol) && isdefined(level.vtol.totalrockethits) && isdefined(level.vtol.missiletodestroy)) {
             self settargetedmissilesremaining(weapon, level.vtol.missiletodestroy - level.vtol.totalrockethits);
           } else {
             maxhealth = [
               [level.killstreakmaxhealthfunction]
             ](killstreaktype);
             damagetaken = target.damagetaken;
-            if(!isDefined(damagetaken) && isDefined(target.parentstruct)) {
+            if(!isdefined(damagetaken) && isdefined(target.parentstruct)) {
               damagetaken = target.parentstruct.damagetaken;
             }
-            if(isDefined(target.missiletrackdamage)) {
+            if(isdefined(target.missiletrackdamage)) {
               damagetaken = target.missiletrackdamage;
             }
-            if(isDefined(damagetaken) && isDefined(maxhealth)) {
+            if(isdefined(damagetaken) && isdefined(maxhealth)) {
               damageperrocket = (maxhealth / level.killstreakbundle[killstreaktype].ksrocketstokill) + 1;
               remaininghealth = maxhealth - damagetaken;
               if(remaininghealth > 0) {
                 missilesremaining = int(ceil(remaininghealth / damageperrocket));
-                if(isDefined(target.numflares) && target.numflares > 0) {
+                if(isdefined(target.numflares) && target.numflares > 0) {
                   missilesremaining = missilesremaining + target.numflares;
                 }
-                if(isDefined(target.flak_drone)) {
+                if(isdefined(target.flak_drone)) {
                   missilesremaining = missilesremaining + 1;
                 }
                 self settargetedmissilesremaining(weapon, missilesremaining);
@@ -633,10 +633,10 @@ function setfriendlyflags(weapon, target) {
 function setfriendlyhacking(weapon, target) {
   if(level.teambased) {
     friendlyhackingmask = target.locking_on_hacking;
-    if(isDefined(friendlyhackingmask)) {
+    if(isdefined(friendlyhackingmask)) {
       friendlyhacking = 0;
       clientnum = self getentitynumber();
-      friendlyhackingmask = friendlyhackingmask &(~(1 << clientnum));
+      friendlyhackingmask = friendlyhackingmask & (~(1 << clientnum));
       if(friendlyhackingmask != 0) {
         friendlyhacking = 1;
       }
@@ -648,10 +648,10 @@ function setfriendlyhacking(weapon, target) {
 function setfriendlytargetting(weapon, target) {
   if(level.teambased) {
     friendlytargetingmask = target.locking_on;
-    if(isDefined(friendlytargetingmask)) {
+    if(isdefined(friendlytargetingmask)) {
       friendlytargeting = 0;
       clientnum = self getentitynumber();
-      friendlytargetingmask = friendlytargetingmask &(~(1 << clientnum));
+      friendlytargetingmask = friendlytargetingmask & (~(1 << clientnum));
       if(friendlytargetingmask != 0) {
         friendlytargeting = 1;
       }
@@ -664,10 +664,10 @@ function setfriendlytargetlocked(weapon, target) {
   if(level.teambased) {
     friendlytargetlocked = 0;
     friendlylockingonmask = target.locked_on;
-    if(isDefined(friendlylockingonmask)) {
+    if(isdefined(friendlylockingonmask)) {
       friendlytargetlocked = 0;
       clientnum = self getentitynumber();
-      friendlylockingonmask = friendlylockingonmask &(~(1 << clientnum));
+      friendlylockingonmask = friendlylockingonmask & (~(1 << clientnum));
       if(friendlylockingonmask != 0) {
         friendlytargetlocked = 1;
       }
@@ -682,32 +682,32 @@ function setfriendlytargetlocked(weapon, target) {
 function watchclearlockedon(target, clientnum) {
   self endon("locked_on_cleared");
   self util::waittill_any("death", "disconnect");
-  if(isDefined(target)) {
-    target.locked_on = target.locked_on &(~(1 << clientnum));
+  if(isdefined(target)) {
+    target.locked_on = target.locked_on & (~(1 << clientnum));
   }
 }
 
 function missiletarget_lockonmonitor(player, endon1, endon2) {
   self endon("death");
-  if(isDefined(endon1)) {
+  if(isdefined(endon1)) {
     self endon(endon1);
   }
-  if(isDefined(endon2)) {
+  if(isdefined(endon2)) {
     self endon(endon2);
   }
-  for(;;) {
+  for (;;) {
     if(target_istarget(self)) {
       if(self missiletarget_ismissileincoming()) {
         self clientfield::set("heli_warn_fired", 1);
         self clientfield::set("heli_warn_locked", 0);
         self clientfield::set("heli_warn_targeted", 0);
       } else {
-        if(isDefined(self.locked_on) && self.locked_on) {
+        if(isdefined(self.locked_on) && self.locked_on) {
           self clientfield::set("heli_warn_locked", 1);
           self clientfield::set("heli_warn_fired", 0);
           self clientfield::set("heli_warn_targeted", 0);
         } else {
-          if(isDefined(self.locking_on) && self.locking_on) {
+          if(isdefined(self.locking_on) && self.locking_on) {
             self clientfield::set("heli_warn_targeted", 1);
             self clientfield::set("heli_warn_fired", 0);
             self clientfield::set("heli_warn_locked", 0);
@@ -724,13 +724,13 @@ function missiletarget_lockonmonitor(player, endon1, endon2) {
 }
 
 function _incomingmissile(missile, attacker) {
-  if(!isDefined(self.incoming_missile)) {
+  if(!isdefined(self.incoming_missile)) {
     self.incoming_missile = 0;
   }
-  if(!isDefined(self.incoming_missile_owner)) {
+  if(!isdefined(self.incoming_missile_owner)) {
     self.incoming_missile_owner = [];
   }
-  if(!isDefined(self.incoming_missile_owner[attacker.entnum])) {
+  if(!isdefined(self.incoming_missile_owner[attacker.entnum])) {
     self.incoming_missile_owner[attacker.entnum] = 0;
   }
   self.incoming_missile++;
@@ -748,14 +748,14 @@ function _incomingmissiletracker(missile, attacker) {
   if(self.incoming_missile_owner[attacker_entnum] == 0) {
     self.incoming_missile_owner[attacker_entnum] = undefined;
   }
-  if(isDefined(attacker)) {
+  if(isdefined(attacker)) {
     attacker lockedon(self, 0);
   }
   assert(self.incoming_missile >= 0);
 }
 
 function missiletarget_ismissileincoming() {
-  if(!isDefined(self.incoming_missile)) {
+  if(!isdefined(self.incoming_missile)) {
     return false;
   }
   if(self.incoming_missile) {
@@ -765,13 +765,13 @@ function missiletarget_ismissileincoming() {
 }
 
 function missiletarget_isotherplayermissileincoming(attacker) {
-  if(!isDefined(self.incoming_missile_owner)) {
+  if(!isdefined(self.incoming_missile_owner)) {
     return false;
   }
   if(self.incoming_missile_owner.size == 0) {
     return false;
   }
-  if(self.incoming_missile_owner.size == 1 && isDefined(self.incoming_missile_owner[attacker.entnum])) {
+  if(self.incoming_missile_owner.size == 1 && isdefined(self.incoming_missile_owner[attacker.entnum])) {
     return false;
   }
   return true;
@@ -780,16 +780,16 @@ function missiletarget_isotherplayermissileincoming(attacker) {
 function missiletarget_handleincomingmissile(responsefunc, endon1, endon2, allowdirectdamage) {
   level endon("game_ended");
   self endon("death");
-  if(isDefined(endon1)) {
+  if(isdefined(endon1)) {
     self endon(endon1);
   }
-  if(isDefined(endon2)) {
+  if(isdefined(endon2)) {
     self endon(endon2);
   }
-  for(;;) {
+  for (;;) {
     self waittill("stinger_fired_at_me", missile, weapon, attacker);
     _incomingmissile(missile, attacker);
-    if(isDefined(responsefunc)) {
+    if(isdefined(responsefunc)) {
       [
         [responsefunc]
       ](missile, attacker, weapon, endon1, endon2, allowdirectdamage);
@@ -798,15 +798,15 @@ function missiletarget_handleincomingmissile(responsefunc, endon1, endon2, allow
 }
 
 function missiletarget_proximitydetonateincomingmissile(endon1, endon2, allowdirectdamage) {
-  missiletarget_handleincomingmissile(&missiletarget_proximitydetonate, endon1, endon2, allowdirectdamage);
+  missiletarget_handleincomingmissile( & missiletarget_proximitydetonate, endon1, endon2, allowdirectdamage);
 }
 
 function _missiledetonate(attacker, weapon, range, mindamage, maxdamage, allowdirectdamage) {
   origin = self.origin;
   target = self missile_gettarget();
   self detonate();
-  if(allowdirectdamage === 1 && isDefined(target) && isDefined(target.origin)) {
-    mindistsq = (isDefined(target.locked_missile_min_distsq) ? target.locked_missile_min_distsq : range * range);
+  if(allowdirectdamage === 1 && isdefined(target) && isdefined(target.origin)) {
+    mindistsq = (isdefined(target.locked_missile_min_distsq) ? target.locked_missile_min_distsq : range * range);
     distsq = distancesquared(self.origin, target.origin);
     if(distsq < mindistsq) {
       target dodamage(maxdamage, origin, attacker, self, "none", "MOD_PROJECTILE", 0, weapon);
@@ -818,35 +818,35 @@ function _missiledetonate(attacker, weapon, range, mindamage, maxdamage, allowdi
 function missiletarget_proximitydetonate(missile, attacker, weapon, endon1, endon2, allowdirectdamage) {
   level endon("game_ended");
   missile endon("death");
-  if(isDefined(endon1)) {
+  if(isdefined(endon1)) {
     self endon(endon1);
   }
-  if(isDefined(endon2)) {
+  if(isdefined(endon2)) {
     self endon(endon2);
   }
   mindist = distancesquared(missile.origin, self.origin);
   lastcenter = self.origin;
-  missile missile_settarget(self, (isDefined(target_getoffset(self)) ? target_getoffset(self) : (0, 0, 0)));
-  if(isDefined(self.missiletargetmissdistance)) {
+  missile missile_settarget(self, (isdefined(target_getoffset(self)) ? target_getoffset(self) : (0, 0, 0)));
+  if(isdefined(self.missiletargetmissdistance)) {
     misseddistancesq = self.missiletargetmissdistance * self.missiletargetmissdistance;
   } else {
     misseddistancesq = 250000;
   }
   flaredistancesq = 12250000;
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self)) {
       center = lastcenter;
     } else {
       center = self.origin;
     }
     lastcenter = center;
     curdist = distancesquared(missile.origin, center);
-    if(curdist < flaredistancesq && isDefined(self.numflares) && self.numflares > 0) {
+    if(curdist < flaredistancesq && isdefined(self.numflares) && self.numflares > 0) {
       self.numflares--;
       self thread missiletarget_playflarefx();
       self challenges::trackassists(attacker, 0, 1);
       newtarget = self missiletarget_deployflares(missile.origin, missile.angles);
-      missile missile_settarget(newtarget, (isDefined(target_getoffset(newtarget)) ? target_getoffset(newtarget) : (0, 0, 0)));
+      missile missile_settarget(newtarget, (isdefined(target_getoffset(newtarget)) ? target_getoffset(newtarget) : (0, 0, 0)));
       missiletarget = newtarget;
       return;
     }
@@ -865,28 +865,28 @@ function missiletarget_proximitydetonate(missile, attacker, weapon, endon1, endo
 }
 
 function missiletarget_playflarefx() {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   flare_fx = level.fx_flare;
-  if(isDefined(self.fx_flare)) {
+  if(isdefined(self.fx_flare)) {
     flare_fx = self.fx_flare;
   }
-  if(isDefined(self.flare_ent)) {
-    playFXOnTag(flare_fx, self.flare_ent, "tag_origin");
+  if(isdefined(self.flare_ent)) {
+    playfxontag(flare_fx, self.flare_ent, "tag_origin");
   } else {
-    playFXOnTag(flare_fx, self, "tag_origin");
+    playfxontag(flare_fx, self, "tag_origin");
   }
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner)) {
     self playsoundtoplayer("veh_huey_chaff_drop_plr", self.owner);
   }
-  self playSound("veh_huey_chaff_explo_npc");
+  self playsound("veh_huey_chaff_explo_npc");
 }
 
 function missiletarget_deployflares(origin, angles) {
-  vec_toforward = anglesToForward(self.angles);
+  vec_toforward = anglestoforward(self.angles);
   vec_toright = anglestoright(self.angles);
-  vec_tomissileforward = anglesToForward(angles);
+  vec_tomissileforward = anglestoforward(angles);
   delta = self.origin - origin;
   dot = vectordot(vec_tomissileforward, vec_toright);
   sign = 1;
@@ -899,12 +899,12 @@ function missiletarget_deployflares(origin, angles) {
   flareorigin = self.origin;
   flareorigin = flareorigin + vectorscale(flare_dir, randomintrange(600, 800));
   flareorigin = flareorigin + vectorscale((0, 0, 1), 500);
-  if(isDefined(self.flareoffset)) {
+  if(isdefined(self.flareoffset)) {
     flareorigin = flareorigin + self.flareoffset;
   }
   flareobject = spawn("script_origin", flareorigin);
   flareobject.angles = self.angles;
-  flareobject setModel("tag_origin");
+  flareobject setmodel("tag_origin");
   flareobject movegravity(velocity, 5);
   flareobject thread util::deleteaftertime(5);
   self thread debug_tracker(flareobject);
@@ -913,7 +913,7 @@ function missiletarget_deployflares(origin, angles) {
 
 function debug_tracker(target) {
   target endon("death");
-  while(true) {
+  while (true) {
     dev::debug_sphere(target.origin, 10, (1, 0, 0), 1, 1);
     wait(0.05);
   }

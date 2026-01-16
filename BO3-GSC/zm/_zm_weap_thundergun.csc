@@ -11,7 +11,7 @@
 #namespace zm_weap_thundergun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_thundergun", &__init__, &__main__, undefined);
+  system::register("zm_weap_thundergun", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -20,7 +20,7 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_localplayer_spawned(&localplayer_spawned);
+  callback::on_localplayer_spawned( & localplayer_spawned);
 }
 
 function localplayer_spawned(localclientnum) {
@@ -31,7 +31,7 @@ function watch_for_thunderguns(localclientnum) {
   self endon("disconnect");
   self notify("watch_for_thunderguns");
   self endon("watch_for_thunderguns");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill("weapon_change", w_new_weapon, w_old_weapon);
     if(w_new_weapon == level.weaponzmthundergun || w_new_weapon == level.weaponzmthundergunupgraded) {
       self thread thundergun_fx_power_cell(localclientnum, w_new_weapon);
@@ -45,9 +45,9 @@ function thundergun_fx_power_cell(localclientnum, w_weapon) {
   self endon("entityshutdown");
   n_old_ammo = -1;
   n_shader_val = 0;
-  while(true) {
+  while (true) {
     wait(0.1);
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
     n_ammo = getweaponammoclip(localclientnum, w_weapon);
@@ -65,5 +65,5 @@ function thundergun_fx_power_cell(localclientnum, w_weapon) {
 }
 
 function thundergun_fx_fire(localclientnum) {
-  playSound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
+  playsound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
 }

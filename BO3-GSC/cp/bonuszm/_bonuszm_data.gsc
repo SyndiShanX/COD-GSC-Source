@@ -13,14 +13,14 @@ function autoexec function_dc036a7c() {
     return;
   }
   level.var_a432d965 = struct::get_script_bundle("bonuszmdata", getdvarstring("mapname"));
-  level.bzm_overridelocomotion = &bzm_overridelocomotion;
-  level.bzm_overridehealth = &bzm_overridehealth;
-  level.bzm_overridesuicidalchance = &bzm_overridesuicidalchance;
+  level.bzm_overridelocomotion = & bzm_overridelocomotion;
+  level.bzm_overridehealth = & bzm_overridehealth;
+  level.bzm_overridesuicidalchance = & bzm_overridesuicidalchance;
 }
 
 function function_da5f2c0d(mapname, checkpointname) {
   level.var_a9e78bf7 = undefined;
-  if(!isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a432d965)) {
     function_9a6a6726();
     function_97b4bacb(1, 0);
     function_4542e087();
@@ -30,10 +30,10 @@ function function_da5f2c0d(mapname, checkpointname) {
   var_6967e3b9 = undefined;
   prefix = "";
   var_e6879fdc = getstructfield(level.var_a432d965, "skiptocount");
-  if(!isDefined(var_e6879fdc)) {
+  if(!isdefined(var_e6879fdc)) {
     var_e6879fdc = 0;
   }
-  for(i = 1; i <= var_e6879fdc; i++) {
+  for (i = 1; i <= var_e6879fdc; i++) {
     prefix = function_15c7079(i);
     var_454219da = getstructfield(level.var_a432d965, prefix + "skiptoname");
     if(var_454219da == checkpointname) {
@@ -42,7 +42,7 @@ function function_da5f2c0d(mapname, checkpointname) {
     }
   }
   level.var_a9e78bf7 = [];
-  if(!isDefined(var_6967e3b9)) {
+  if(!isdefined(var_6967e3b9)) {
     level.var_5deb2d16 = 1;
     function_9a6a6726();
     function_97b4bacb(1, 0);
@@ -124,10 +124,10 @@ function function_da5f2c0d(mapname, checkpointname) {
 }
 
 function function_9a6a6726() {
-  if(!isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a432d965)) {
     return;
   }
-  if(!isDefined(level.var_a9e78bf7)) {
+  if(!isdefined(level.var_a9e78bf7)) {
     return;
   }
   level.var_a9e78bf7["aitypeMale1"] = getstructfield(level.var_a432d965, "aitypeMale1");
@@ -142,262 +142,262 @@ function function_9a6a6726() {
 }
 
 function function_97b4bacb(zombify, var_a621e856) {
-  if(!isDefined(level.var_a9e78bf7["powerdropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["powerdropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["powerdropchance"] = getstructfield(level.var_a432d965, "powerdropchance");
-      if(!isDefined(level.var_a9e78bf7["powerdropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["powerdropchance"])) {
         level.var_a9e78bf7["powerdropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["powerdropchance"] = 40;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["maxdropammochance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["maxdropammochance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["maxdropammochance"] = getstructfield(level.var_a432d965, "maxdropammochance");
-      if(!isDefined(level.var_a9e78bf7["maxdropammochance"])) {
+      if(!isdefined(level.var_a9e78bf7["maxdropammochance"])) {
         level.var_a9e78bf7["maxdropammochance"] = 0;
       }
     } else {
       level.var_a9e78bf7["maxdropammochance"] = 50;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["maxdropammoupgradedchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["maxdropammoupgradedchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["maxdropammoupgradedchance"] = getstructfield(level.var_a432d965, "maxdropammoupgradedchance");
-      if(!isDefined(level.var_a9e78bf7["maxdropammoupgradedchance"])) {
+      if(!isdefined(level.var_a9e78bf7["maxdropammoupgradedchance"])) {
         level.var_a9e78bf7["maxdropammoupgradedchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["maxdropammoupgradedchance"] = 0;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["cybercoredropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["cybercoredropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["cybercoredropchance"] = getstructfield(level.var_a432d965, "cybercoredropchance");
-      if(!isDefined(level.var_a9e78bf7["cybercoredropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["cybercoredropchance"])) {
         level.var_a9e78bf7["cybercoredropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["cybercoredropchance"] = 30;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["cybercoreupgradeddropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["cybercoreupgradeddropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["cybercoreupgradeddropchance"] = getstructfield(level.var_a432d965, "cybercoreupgradeddropchance");
-      if(!isDefined(level.var_a9e78bf7["cybercoreupgradeddropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["cybercoreupgradeddropchance"])) {
         level.var_a9e78bf7["cybercoreupgradeddropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["cybercoreupgradeddropchance"] = 0;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["rapsdropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["rapsdropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["rapsdropchance"] = getstructfield(level.var_a432d965, "rapsdropchance");
-      if(!isDefined(level.var_a9e78bf7["rapsdropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["rapsdropchance"])) {
         level.var_a9e78bf7["rapsdropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["rapsdropchance"] = 0;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["weapondropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["weapondropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["weapondropchance"] = getstructfield(level.var_a432d965, "weapondropchance");
-      if(!isDefined(level.var_a9e78bf7["weapondropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["weapondropchance"])) {
         level.var_a9e78bf7["weapondropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["weapondropchance"] = 20;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["instakilldropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["instakilldropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["instakilldropchance"] = getstructfield(level.var_a432d965, "instakilldropchance");
-      if(!isDefined(level.var_a9e78bf7["instakilldropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["instakilldropchance"])) {
         level.var_a9e78bf7["instakilldropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["powerdropchance"] = 15;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["instakillupgradeddropchance"])) {
-    if(isDefined(level.var_a432d965)) {
+  if(!isdefined(level.var_a9e78bf7["instakillupgradeddropchance"])) {
+    if(isdefined(level.var_a432d965)) {
       level.var_a9e78bf7["instakillupgradeddropchance"] = getstructfield(level.var_a432d965, "instakillupgradeddropchance");
-      if(!isDefined(level.var_a9e78bf7["instakillupgradeddropchance"])) {
+      if(!isdefined(level.var_a9e78bf7["instakillupgradeddropchance"])) {
         level.var_a9e78bf7["instakillupgradeddropchance"] = 0;
       }
     } else {
       level.var_a9e78bf7["instakillupgradeddropchance"] = 0;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["powerupdropsenabled"])) {
+  if(!isdefined(level.var_a9e78bf7["powerupdropsenabled"])) {
     level.var_a9e78bf7["powerupdropsenabled"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["waituntilskiptostarts"])) {
+  if(!isdefined(level.var_a9e78bf7["waituntilskiptostarts"])) {
     level.var_a9e78bf7["waituntilskiptostarts"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["skiptoname"])) {
+  if(!isdefined(level.var_a9e78bf7["skiptoname"])) {
     level.var_a9e78bf7["skiptoname"] = "default";
   }
-  if(!isDefined(level.var_a9e78bf7["onlyuseonstart"])) {
+  if(!isdefined(level.var_a9e78bf7["onlyuseonstart"])) {
     level.var_a9e78bf7["onlyuseonstart"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["zombifyenabled"])) {
+  if(!isdefined(level.var_a9e78bf7["zombifyenabled"])) {
     level.var_a9e78bf7["zombifyenabled"] = zombify;
   }
-  if(!isDefined(level.var_a9e78bf7["startunaware"])) {
+  if(!isdefined(level.var_a9e78bf7["startunaware"])) {
     level.var_a9e78bf7["startunaware"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["alertnessspreaddelay"])) {
+  if(!isdefined(level.var_a9e78bf7["alertnessspreaddelay"])) {
     level.var_a9e78bf7["alertnessspreaddelay"] = 2;
   }
-  if(!isDefined(level.var_a9e78bf7["forcecleanuponcompletion"])) {
+  if(!isdefined(level.var_a9e78bf7["forcecleanuponcompletion"])) {
     level.var_a9e78bf7["forcecleanuponcompletion"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["disablefailsafelogic"])) {
+  if(!isdefined(level.var_a9e78bf7["disablefailsafelogic"])) {
     level.var_a9e78bf7["disablefailsafelogic"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["extraspawns"])) {
+  if(!isdefined(level.var_a9e78bf7["extraspawns"])) {
     level.var_a9e78bf7["extraspawns"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["zigzagdeviationmin"])) {
+  if(!isdefined(level.var_a9e78bf7["zigzagdeviationmin"])) {
     level.var_a9e78bf7["zigzagdeviationmin"] = 250;
   }
-  if(!isDefined(level.var_a9e78bf7["zigzagdeviationmax"])) {
+  if(!isdefined(level.var_a9e78bf7["zigzagdeviationmax"])) {
     level.var_a9e78bf7["zigzagdeviationmax"] = 400;
   }
-  if(!isDefined(level.var_a9e78bf7["zigzagdeviationmintime"])) {
+  if(!isdefined(level.var_a9e78bf7["zigzagdeviationmintime"])) {
     level.var_a9e78bf7["zigzagdeviationmintime"] = 2500;
   }
-  if(!isDefined(level.var_a9e78bf7["zigzagdeviationmaxtime"])) {
+  if(!isdefined(level.var_a9e78bf7["zigzagdeviationmaxtime"])) {
     level.var_a9e78bf7["zigzagdeviationmaxtime"] = 4000;
   }
-  if(!isDefined(level.var_a9e78bf7["extraspawngapmin"])) {
+  if(!isdefined(level.var_a9e78bf7["extraspawngapmin"])) {
     level.var_a9e78bf7["extraspawngapmin"] = 2;
   }
-  if(!isDefined(level.var_a9e78bf7["walkpercent"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["walkpercent"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["walkpercent"] = 0;
     } else {
       level.var_a9e78bf7["walkpercent"] = 33;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["runpercent"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["runpercent"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["runpercent"] = 0;
     } else {
       level.var_a9e78bf7["runpercent"] = 33;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["sprintpercent"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["sprintpercent"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["sprintpercent"] = 0;
     } else {
       level.var_a9e78bf7["sprintpercent"] = 34;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["levelonehealth"])) {
+  if(!isdefined(level.var_a9e78bf7["levelonehealth"])) {
     level.var_a9e78bf7["levelonehealth"] = 150;
   }
-  if(!isDefined(level.var_a9e78bf7["leveltwohealth"])) {
+  if(!isdefined(level.var_a9e78bf7["leveltwohealth"])) {
     level.var_a9e78bf7["leveltwohealth"] = 350;
   }
-  if(!isDefined(level.var_a9e78bf7["levelthreehealth"])) {
+  if(!isdefined(level.var_a9e78bf7["levelthreehealth"])) {
     level.var_a9e78bf7["levelthreehealth"] = 650;
   }
-  if(!isDefined(level.var_a9e78bf7["levelonezombies"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["levelonezombies"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["levelonezombies"] = 0;
     } else {
       level.var_a9e78bf7["levelonezombies"] = 33;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["leveltwozombies"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["leveltwozombies"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["leveltwozombies"] = 0;
     } else {
       level.var_a9e78bf7["leveltwozombies"] = 33;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["levelthreezombies"])) {
-    if(isDefined(var_a621e856) && var_a621e856) {
+  if(!isdefined(level.var_a9e78bf7["levelthreezombies"])) {
+    if(isdefined(var_a621e856) && var_a621e856) {
       level.var_a9e78bf7["levelthreezombies"] = 0;
     } else {
       level.var_a9e78bf7["levelthreezombies"] = 34;
     }
   }
-  if(!isDefined(level.var_a9e78bf7["zombiehealthscale1"])) {
+  if(!isdefined(level.var_a9e78bf7["zombiehealthscale1"])) {
     level.var_a9e78bf7["zombiehealthscale1"] = 0.5;
   }
-  if(!isDefined(level.var_a9e78bf7["zombiehealthscale2"])) {
+  if(!isdefined(level.var_a9e78bf7["zombiehealthscale2"])) {
     level.var_a9e78bf7["zombiehealthscale2"] = 1;
   }
-  if(!isDefined(level.var_a9e78bf7["zombiehealthscale3"])) {
+  if(!isdefined(level.var_a9e78bf7["zombiehealthscale3"])) {
     level.var_a9e78bf7["zombiehealthscale3"] = 1.25;
   }
-  if(!isDefined(level.var_a9e78bf7["zombiehealthscale4"])) {
+  if(!isdefined(level.var_a9e78bf7["zombiehealthscale4"])) {
     level.var_a9e78bf7["zombiehealthscale4"] = 1.5;
   }
-  if(!isDefined(level.var_a9e78bf7["zombiehealthscale5"])) {
+  if(!isdefined(level.var_a9e78bf7["zombiehealthscale5"])) {
     level.var_a9e78bf7["zombiehealthscale5"] = 2;
   }
-  if(!isDefined(level.var_a9e78bf7["extrazombiescale1"])) {
+  if(!isdefined(level.var_a9e78bf7["extrazombiescale1"])) {
     level.var_a9e78bf7["extrazombiescale1"] = 1;
   }
-  if(!isDefined(level.var_a9e78bf7["extrazombiescale2"])) {
+  if(!isdefined(level.var_a9e78bf7["extrazombiescale2"])) {
     level.var_a9e78bf7["extrazombiescale2"] = 1.5;
   }
-  if(!isDefined(level.var_a9e78bf7["extrazombiescale3"])) {
+  if(!isdefined(level.var_a9e78bf7["extrazombiescale3"])) {
     level.var_a9e78bf7["extrazombiescale3"] = 1.75;
   }
-  if(!isDefined(level.var_a9e78bf7["extrazombiescale4"])) {
+  if(!isdefined(level.var_a9e78bf7["extrazombiescale4"])) {
     level.var_a9e78bf7["extrazombiescale4"] = 2;
   }
-  if(!isDefined(level.var_a9e78bf7["suicidalzombiechance"])) {
+  if(!isdefined(level.var_a9e78bf7["suicidalzombiechance"])) {
     level.var_a9e78bf7["suicidalzombiechance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["suicidalzombieupgradedchance"])) {
+  if(!isdefined(level.var_a9e78bf7["suicidalzombieupgradedchance"])) {
     level.var_a9e78bf7["suicidalzombieupgradedchance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["deimosinfectedzombiechance"])) {
+  if(!isdefined(level.var_a9e78bf7["deimosinfectedzombiechance"])) {
     level.var_a9e78bf7["deimosinfectedzombiechance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["sparkzombiechance"])) {
+  if(!isdefined(level.var_a9e78bf7["sparkzombiechance"])) {
     level.var_a9e78bf7["sparkzombiechance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["sparkzombieupgradedchance"])) {
+  if(!isdefined(level.var_a9e78bf7["sparkzombieupgradedchance"])) {
     level.var_a9e78bf7["sparkzombieupgradedchance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["magicboxonlyweaponchance"])) {
+  if(!isdefined(level.var_a9e78bf7["magicboxonlyweaponchance"])) {
     level.var_a9e78bf7["magicboxonlyweaponchance"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["maxmagicboxonlyweapons"])) {
+  if(!isdefined(level.var_a9e78bf7["maxmagicboxonlyweapons"])) {
     level.var_a9e78bf7["maxmagicboxonlyweapons"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["camochance"])) {
+  if(!isdefined(level.var_a9e78bf7["camochance"])) {
     level.var_a9e78bf7["camochance"] = 30;
   }
-  if(!isDefined(level.var_a9e78bf7["pathabilityenabled"])) {
+  if(!isdefined(level.var_a9e78bf7["pathabilityenabled"])) {
     level.var_a9e78bf7["pathabilityenabled"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["sprinttoplayerdistance"])) {
+  if(!isdefined(level.var_a9e78bf7["sprinttoplayerdistance"])) {
     level.var_a9e78bf7["sprinttoplayerdistance"] = 1000;
   }
-  if(!isDefined(level.var_a9e78bf7["skipobjectivewait"])) {
+  if(!isdefined(level.var_a9e78bf7["skipobjectivewait"])) {
     level.var_a9e78bf7["skipobjectivewait"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["maxreachabilitylevel"])) {
+  if(!isdefined(level.var_a9e78bf7["maxreachabilitylevel"])) {
     level.var_a9e78bf7["maxreachabilitylevel"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["reachabilityinterval"])) {
+  if(!isdefined(level.var_a9e78bf7["reachabilityinterval"])) {
     level.var_a9e78bf7["reachabilityinterval"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["maxreachabilityparasites"])) {
+  if(!isdefined(level.var_a9e78bf7["maxreachabilityparasites"])) {
     level.var_a9e78bf7["maxreachabilityparasites"] = 0;
   }
-  if(!isDefined(level.var_a9e78bf7["powerdropsscalar"])) {
+  if(!isdefined(level.var_a9e78bf7["powerdropsscalar"])) {
     level.var_a9e78bf7["powerdropsscalar"] = 1;
   }
 }

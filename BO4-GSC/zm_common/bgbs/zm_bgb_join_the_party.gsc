@@ -8,10 +8,11 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_player;
+
 #namespace zm_bgb_join_the_party;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_join_the_party", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_join_the_party", &__init__, undefined, #"bgb");
 }
 
 __init__() {

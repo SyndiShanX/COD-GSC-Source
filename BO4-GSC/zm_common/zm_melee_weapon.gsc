@@ -20,6 +20,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_melee_weapon;
 
 autoexec __init__system__() {
@@ -193,9 +194,9 @@ function_e5bf8f08(player) {
 
     if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7a24a147b8f09767";
+        self.stub.hint_string = #"hash_7a24a147b8f09767";
       } else {
-        self.stub.hint_string = # "hash_791fe9da17cf7059";
+        self.stub.hint_string = #"hash_791fe9da17cf7059";
       }
 
       if(self.stub.var_8d306e51) {
@@ -205,9 +206,9 @@ function_e5bf8f08(player) {
       }
     } else {
       if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_2791ecebb85142c4";
+        self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = # "hash_60606b68e93a29c8";
+        self.stub.hint_string = #"hash_60606b68e93a29c8";
       }
 
       if(self.stub.var_8d306e51) {
@@ -410,18 +411,18 @@ melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon) {
         }
 
         level notify(#"weapon_bought", {
-          #player: player,
+          #player: player, 
           #weapon: weapon
         });
         player zm_score::minus_to_player_score(cost);
         player zm_stats::function_c0c6ab19(#"wallbuys", 1, 1);
         player zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
-        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
-        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, # "zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, #"zstandard");
         player thread give_melee_weapon(vo_dialog_id, flourish_weapon, weapon, flourish_fn, self);
       } else {
         zm_utility::play_sound_on_ent("no_purchase");
-        player zm_audio::create_and_play_dialog(#"general", # "outofmoney", 1);
+        player zm_audio::create_and_play_dialog(#"general", #"outofmoney", 1);
       }
 
       continue;
@@ -477,7 +478,7 @@ give_melee_weapon(vo_dialog_id, flourish_weapon, weapon, flourish_fn, trigger) {
   }
 
   self endon(#"disconnect");
-  self waittill(#"fake_death", # "death", # "player_downed", # "weapon_change_complete");
+  self waittill(#"fake_death", #"death", #"player_downed", #"weapon_change_complete");
 
   if(!isDefined(self)) {
     return;

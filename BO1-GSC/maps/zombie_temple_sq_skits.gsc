@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 build_skit_entry(character, vo) {
-  entry = spawnStruct();
+  entry = SpawnStruct();
   switch (character) {
     case "dempsey":
       entry.character = 0;
@@ -189,7 +189,7 @@ skit_interupt(fail_pos, group) {
     num = 8;
   }
   snd = "vox_plr_" + character + "_safety_" + RandomIntRange(0, num);
-  speaker playSound(snd, "line_done");
+  speaker PlaySound(snd, "line_done");
   speaker waittill("line_done");
   level.skit_vox_override = 0;
 }
@@ -212,7 +212,7 @@ do_skit_line(script_line) {
   }
   speaking_player.speaking_line = true;
   level._last_skit_line_speaker = speaking_player;
-  speaking_player playSound(script_line.vo, "line_done");
+  speaking_player PlaySound(script_line.vo, "line_done");
   speaking_player waittill("line_done");
   speaking_player.speaking_line = false;
   level notify("line_spoken");

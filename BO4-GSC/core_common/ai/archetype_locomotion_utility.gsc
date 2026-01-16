@@ -9,6 +9,7 @@
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\math_shared;
+
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -158,12 +159,12 @@ private locomotionshouldlooponstairs(behaviortreeentity) {
 
   if(direction == "staircase_up") {
     switch (exittype) {
-      case # "staircase_up_exit_l_3_stairs":
-      case # "staircase_up_exit_r_3_stairs":
+      case #"staircase_up_exit_l_3_stairs":
+      case #"staircase_up_exit_r_3_stairs":
         numoutsteps = 3;
         break;
-      case # "staircase_up_exit_r_4_stairs":
-      case # "staircase_up_exit_l_4_stairs":
+      case #"staircase_up_exit_r_4_stairs":
+      case #"staircase_up_exit_l_4_stairs":
         numoutsteps = 4;
         break;
     }
@@ -184,7 +185,7 @@ private locomotionstairsstart(behaviortreeentity) {
   behaviortreeentity._stairsstartnode = startnode;
   behaviortreeentity._stairsendnode = endnode;
 
-  if(startnode.type == # "begin") {
+  if(startnode.type == #"begin") {
     direction = "staircase_down";
   } else {
     direction = "staircase_up";
@@ -364,10 +365,10 @@ traverseactionstart(behaviortreeentity, asmstatename) {
 
   result = behaviortreeentity astsearch(asmstatename);
 
-  if(!isDefined(result[# "animation"])) {
+  if(!isDefined(result[#"animation"])) {
     record3dtext("<dev string:x6e>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   } else {
-    record3dtext("<dev string:xa6>" + (ishash(result[# "animation"]) ? function_9e72a96(result[# "animation"]) : result[# "animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
+    record3dtext("<dev string:xa6>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   }
 
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);

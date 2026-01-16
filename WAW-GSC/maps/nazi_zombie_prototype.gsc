@@ -11,9 +11,8 @@ main() {
   level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
   include_weapons();
   include_powerups();
-  if(!isDefined(level.startInvulnerableTime)) {
+  if(!isDefined(level.startInvulnerableTime))
     level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
-  }
   maps\nazi_zombie_prototype_fx::main();
   maps\_zombiemode_prototype::main();
   init_sounds();
@@ -29,7 +28,7 @@ bad_area_fixes() {
 
 disable_stances_in_zones() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] thread fix_hax();
     players[i] thread fix_couch_stuckspot();
     players[i] thread out_of_bounds_watcher();
@@ -41,7 +40,7 @@ fix_hax() {
   self endon("death");
   check = 15;
   check1 = 10;
-  while(1) {
+  while (1) {
     wait(.5);
     if(distance2d(self.origin, (101, -100, 40)) < check) {
       self setorigin((101, -90, self.origin[2]));
@@ -69,7 +68,7 @@ fix_couch_stuckspot() {
   self endon("disconnect");
   self endon("death");
   level endon("upstairs_blocker_purchased");
-  while(1) {
+  while (1) {
     wait(.5);
     if(distance2d(self.origin, (181, 161, 206)) < 10) {
       self setorigin((175, 175, self.origin[2]));
@@ -88,14 +87,14 @@ in_bad_zone_watcher() {
   no_prone_zones[0]["max"] = (-55, 30, 269);
   no_prone_zones[1]["min"] = (88, 305, 144);
   no_prone_zones[1]["max"] = (245, 405, 269);
-  while(1) {
+  while (1) {
     array_check = 0;
     if(no_prone_and_crouch_zones.size > no_prone_zones.size) {
       array_check = no_prone_and_crouch_zones.size;
     } else {
       array_check = no_prone_zones.size;
     }
-    for(i = 0; i < array_check; i++) {
+    for (i = 0; i < array_check; i++) {
       if(isDefined(no_prone_and_crouch_zones[i]) &&
         self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0],
           no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1],
@@ -178,10 +177,10 @@ include_powerup(powerup_name) {
 
 above_couches_death() {
   level endon("junk purchased");
-  while(1) {
+  while (1) {
     wait 0.2;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i].origin[2] > 145) {
         setsaveddvar("player_deathInvulnerableTime", 0);
         players[i] DoDamage(players[i].health + 1000, players[i].origin, undefined, undefined, "riflebullet");
@@ -192,10 +191,10 @@ above_couches_death() {
 }
 
 above_roof_death() {
-  while(1) {
+  while (1) {
     wait 0.2;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i].origin[2] > 235) {
         setsaveddvar("player_deathInvulnerableTime", 0);
         players[i] DoDamage(players[i].health + 1000, players[i].origin, undefined, undefined, "riflebullet");
@@ -206,10 +205,10 @@ above_roof_death() {
 }
 
 below_ground_death() {
-  while(1) {
+  while (1) {
     wait 0.2;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i].origin[2] < -11) {
         setsaveddvar("player_deathInvulnerableTime", 0);
         players[i] DoDamage(players[i].health + 1000, players[i].origin, undefined, undefined, "riflebullet");
@@ -230,10 +229,10 @@ out_of_bounds_watcher() {
   outside_of_map[2]["max"] = (370, 591, 235);
   outside_of_map[3]["min"] = (-272, -912, -11);
   outside_of_map[3]["max"] = (273, 120, 235);
-  while(1) {
+  while (1) {
     array_check = outside_of_map.size;
     kill_player = true;
-    for(i = 0; i < array_check; i++) {
+    for (i = 0; i < array_check; i++) {
       if(self is_within_volume(outside_of_map[i]["min"][0], outside_of_map[i]["max"][0],
           outside_of_map[i]["min"][1], outside_of_map[i]["max"][1],
           outside_of_map[i]["min"][2], outside_of_map[i]["max"][2])) {

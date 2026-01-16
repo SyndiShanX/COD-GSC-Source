@@ -13,9 +13,8 @@ init() {
 
   foreach(trap in s_traps_array) {
     if(isDefined(trap.script_noteworthy)) {
-      if(!trap is_trap_registered(a_registered_traps)) {
+      if(!trap is_trap_registered(a_registered_traps))
         a_registered_traps[trap.script_noteworthy] = 1;
-      }
     }
   }
 

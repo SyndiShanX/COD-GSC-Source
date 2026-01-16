@@ -48,7 +48,6 @@ music_handler(var_0, var_1) {}
 start_ac130_finish_fadeout() {
   common_scripts\utility::flag_wait("choppers_flew_away");
 
-  if(getdvar("arcademode") != "1") {
+  if(getdvar("arcademode") != "1")
     soundscripts\_audio_mix_manager::mm_add_submix("ac130_fadeout_mix");
-  }
 }

@@ -67,9 +67,9 @@ setup_spawn_funcs() {
 }
 
 play_a_word() {
-  level.player playSound("evt_fake_f35_flyby");
+  level.player playsound("evt_fake_f35_flyby");
   wait 0.8;
-  level.player playSound("evt_fake_f35_flyby");
+  level.player playsound("evt_fake_f35_flyby");
 }
 
 on_player_connect() {
@@ -126,22 +126,21 @@ level_precache() {
   precachemodel("veh_t6_drone_avenger_x2");
   precachemodel("veh_t6_drone_pegasus");
 
-  if(isassetloaded("weapon", "riotshield_sp")) {
+  if(isassetloaded("weapon", "riotshield_sp"))
     precacheitem("riotshield_sp");
-  }
 }
 
 setup_skiptos() {
-  add_skipto("intro", maps\la_intro::skipto_intro, &"SKIPTO_STRING_HERE", maps\la_intro::main);
-  add_skipto("after_the_attack", maps\la_sam::skipto_after_attack, &"SKIPTO_STRING_HERE", maps\la_sam::main);
-  add_skipto("sam_jump", maps\la_sam::skipto_sam_jump, &"SKIPTO_STRING_HERE", maps\la_sam::main);
-  add_skipto("sam", maps\la_sam::skipto_sam, &"SKIPTO_STRING_HERE", maps\la_sam::sam_main);
-  add_skipto("cougar_fall", maps\la_sam::skipto_cougar_fall, &"SKIPTO_STRING_HERE", maps\la_sam::cougar_fall);
-  add_skipto("sniper_rappel", maps\la_low_road::skipto_sniper_rappel, &"SKIPTO_STRING_HERE", maps\la_low_road::main);
-  add_skipto("sniper_exit", maps\la_low_road::skipto_sniper_exit, &"SKIPTO_STRING_HERE", maps\la_low_road::last_stand_main);
-  add_skipto("g20_group1", maps\la_low_road::skipto_g20, &"SKIPTO_STRING_HERE", maps\la_low_road::last_stand_main);
-  add_skipto("drive", maps\la_drive::skipto_drive, &"SKIPTO_STRING_HERE", maps\la_drive::main);
-  add_skipto("skyline", maps\la_drive::skipto_skyline, &"SKIPTO_STRING_HERE", maps\la_drive::main);
+  add_skipto("intro", maps\la_intro::skipto_intro, & "SKIPTO_STRING_HERE", maps\la_intro::main);
+  add_skipto("after_the_attack", maps\la_sam::skipto_after_attack, & "SKIPTO_STRING_HERE", maps\la_sam::main);
+  add_skipto("sam_jump", maps\la_sam::skipto_sam_jump, & "SKIPTO_STRING_HERE", maps\la_sam::main);
+  add_skipto("sam", maps\la_sam::skipto_sam, & "SKIPTO_STRING_HERE", maps\la_sam::sam_main);
+  add_skipto("cougar_fall", maps\la_sam::skipto_cougar_fall, & "SKIPTO_STRING_HERE", maps\la_sam::cougar_fall);
+  add_skipto("sniper_rappel", maps\la_low_road::skipto_sniper_rappel, & "SKIPTO_STRING_HERE", maps\la_low_road::main);
+  add_skipto("sniper_exit", maps\la_low_road::skipto_sniper_exit, & "SKIPTO_STRING_HERE", maps\la_low_road::last_stand_main);
+  add_skipto("g20_group1", maps\la_low_road::skipto_g20, & "SKIPTO_STRING_HERE", maps\la_low_road::last_stand_main);
+  add_skipto("drive", maps\la_drive::skipto_drive, & "SKIPTO_STRING_HERE", maps\la_drive::main);
+  add_skipto("skyline", maps\la_drive::skipto_skyline, & "SKIPTO_STRING_HERE", maps\la_drive::main);
   add_skipto("street", ::skipto_la_1b);
   add_skipto("plaza", ::skipto_la_1b);
   add_skipto("intersection", ::skipto_la_1b);
@@ -181,16 +180,14 @@ sam_visionset() {
     visionset = self getvisionsetnaked();
     self visionsetnaked("sam_turret", 0.5);
 
-    if(!level.wiiu) {
+    if(!level.wiiu)
       cin_id = start3dcinematic("sam_gizmos_v2", 1, 1);
-    }
 
     self waittill("missileTurret_off");
     clientnotify("sam_off");
 
-    if(!level.wiiu) {
+    if(!level.wiiu)
       stop3dcinematic(cin_id);
-    }
 
     battlechatter_on("allies");
     battlechatter_on("axis");
@@ -199,28 +196,26 @@ sam_visionset() {
 }
 
 sam_hint() {
-  screen_message_create(&"LA_SHARED_SAM_HINT_ADS", &"LA_SHARED_SAM_HINT_FIRE");
+  screen_message_create(&"LA_SHARED_SAM_HINT_ADS", & "LA_SHARED_SAM_HINT_FIRE");
   level waittill("sam_hint_drone_killed");
   screen_message_delete();
 }
 
 init_vehicles() {
-  a_script_models = getEntArray("script_model", "classname");
-  a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
+  a_script_models = getentarray("script_model", "classname");
+  a_vehicles = arraycombine(a_script_models, getentarray("script_vehicle", "classname"), 0, 0);
 
-  foreach(veh in a_vehicles) {
-    global_vehicle_spawn_func(veh);
-  }
+  foreach(veh in a_vehicles)
+  global_vehicle_spawn_func(veh);
 }
 
 global_vehicle_spawn_func(veh) {
-  if(is_police_car(veh)) {
+  if(is_police_car(veh))
     veh thread police_car();
-  } else if(is_police_motorcycle(veh)) {
+  else if(is_police_motorcycle(veh))
     veh thread police_motorcycle();
-  } else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors")) {
+  else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors"))
     veh open_suv_doors();
-  }
 }
 
 cleanup() {

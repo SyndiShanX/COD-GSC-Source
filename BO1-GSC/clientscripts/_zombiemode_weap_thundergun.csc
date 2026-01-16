@@ -133,7 +133,7 @@ thundergun_notetrack_think() {
 thundergun_death_effects(localClientNum, weaponname, userdata) {}
 thread_zombie_vox() {
   ent = spawn(0, self.origin, "script_origin");
-  playSound(0, "wpn_thundergun_proj_impact_zombie", ent.origin);
+  playsound(0, "wpn_thundergun_proj_impact_zombie", ent.origin);
   wait(5);
   ent delete();
 }

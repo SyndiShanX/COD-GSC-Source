@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\sound_shared;
+
 #namespace zombie_shared;
 
 deleteatlimit() {
@@ -68,32 +69,32 @@ growling() {
 }
 
 registernotetracks() {
-  anim.notetracks[# "anim_pose = "
+  anim.notetracks[#"anim_pose = "
     stand ""] = &notetrackposestand;
-  anim.notetracks[# "anim_pose = "
+  anim.notetracks[#"anim_pose = "
     crouch ""] = &notetrackposecrouch;
-  anim.notetracks[# "anim_movement = "
+  anim.notetracks[#"anim_movement = "
     stop ""] = &notetrackmovementstop;
-  anim.notetracks[# "anim_movement = "
+  anim.notetracks[#"anim_movement = "
     walk ""] = &notetrackmovementwalk;
-  anim.notetracks[# "anim_movement = "
+  anim.notetracks[#"anim_movement = "
     run ""] = &notetrackmovementrun;
-  anim.notetracks[# "anim_alertness = causal"] = &notetrackalertnesscasual;
-  anim.notetracks[# "anim_alertness = alert"] = &notetrackalertnessalert;
-  anim.notetracks[# "gravity on"] = &notetrackgravity;
-  anim.notetracks[# "gravity off"] = &notetrackgravity;
-  anim.notetracks[# "hash_3a65333187809d2e"] = &notetrackgravity;
-  anim.notetracks[# "bodyfall large"] = &notetrackbodyfall;
-  anim.notetracks[# "bodyfall small"] = &notetrackbodyfall;
-  anim.notetracks[# "footstep"] = &notetrackfootstep;
-  anim.notetracks[# "step"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_right_large"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_right_small"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_left_large"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_left_small"] = &notetrackfootstep;
-  anim.notetracks[# "footscrape"] = &notetrackfootscrape;
-  anim.notetracks[# "land"] = &notetrackland;
-  anim.notetracks[# "start_ragdoll"] = &notetrackstartragdoll;
+  anim.notetracks[#"anim_alertness = causal"] = &notetrackalertnesscasual;
+  anim.notetracks[#"anim_alertness = alert"] = &notetrackalertnessalert;
+  anim.notetracks[#"gravity on"] = &notetrackgravity;
+  anim.notetracks[#"gravity off"] = &notetrackgravity;
+  anim.notetracks[#"hash_3a65333187809d2e"] = &notetrackgravity;
+  anim.notetracks[#"bodyfall large"] = &notetrackbodyfall;
+  anim.notetracks[#"bodyfall small"] = &notetrackbodyfall;
+  anim.notetracks[#"footstep"] = &notetrackfootstep;
+  anim.notetracks[#"step"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_right_large"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_right_small"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_left_large"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_left_small"] = &notetrackfootstep;
+  anim.notetracks[#"footscrape"] = &notetrackfootscrape;
+  anim.notetracks[#"land"] = &notetrackland;
+  anim.notetracks[#"start_ragdoll"] = &notetrackstartragdoll;
 }
 
 notetrackstopanim(note, flagname) {}
@@ -231,34 +232,34 @@ handlenotetrack(note, flagname, customfunction, var1) {
   }
 
   switch (note) {
-    case # "undefined":
-    case # "end":
-    case # "finish":
+    case #"undefined":
+    case #"end":
+    case #"finish":
       return note;
-    case # "hash_701bc5c059dfaa52":
+    case #"hash_701bc5c059dfaa52":
       self thread sound::play_in_space("fly_gear_enemy", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "hash_5f5e275b9f3b93ee":
+    case #"hash_5f5e275b9f3b93ee":
       self thread sound::play_in_space("fly_gear_enemy_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "no death":
+    case #"no death":
       self.a.nodeath = 1;
       break;
-    case # "no pain":
+    case #"no pain":
       self.allowpain = 0;
       break;
-    case # "hash_50c6c08f5de3ec2a":
+    case #"hash_50c6c08f5de3ec2a":
       self.allowpain = 1;
       break;
-    case # "anim_melee = right":
-    case # "hash_39ec7b0969bab796":
+    case #"anim_melee = right":
+    case #"hash_39ec7b0969bab796":
       self.a.meleestate = "right";
       break;
-    case # "anim_melee = left":
-    case # "hash_6b554a9080ec8b07":
+    case #"anim_melee = left":
+    case #"hash_6b554a9080ec8b07":
       self.a.meleestate = "left";
       break;
-    case # "swap taghelmet to tagleft":
+    case #"swap taghelmet to tagleft":
       if(isDefined(self.hatmodel)) {
         if(isDefined(self.helmetsidemodel)) {
           self detach(self.helmetsidemodel, "TAG_HELMETSIDE");
@@ -307,7 +308,7 @@ donotetracks(flagname, customfunction, var1) {
 
 donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, var1) {
   if(isDefined(killstring)) {
-    self endon(killstring, # "killanimscript");
+    self endon(killstring, #"killanimscript");
   }
 
   for(;;) {

@@ -23,7 +23,7 @@
 #namespace zm_tomb_ee_main_step_2;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_2", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_2", & init_stage, & stage_logic, & exit_stage);
 }
 
 function init_stage() {
@@ -62,10 +62,10 @@ function exit_stage(success) {
 }
 
 function remove_plinth() {
-  playFX(level._effect["teleport_1p"], self.m_plinth.origin);
+  playfx(level._effect["teleport_1p"], self.m_plinth.origin);
   playsoundatposition("zmb_footprintbox_disappear", self.m_plinth.origin);
   wait(3);
-  if(isDefined(self.m_plinth.m_staff)) {
+  if(isdefined(self.m_plinth.m_staff)) {
     self.m_plinth.m_staff unlink();
     self.m_plinth.m_staff.origin = self.m_plinth.v_old_origin;
     self.m_plinth.m_staff.angles = self.m_plinth.v_old_angles;
@@ -78,7 +78,7 @@ function remove_plinth() {
 }
 
 function create_robot_head_trigger(unitrigger_stub) {
-  playFX(level._effect["teleport_1p"], unitrigger_stub.origin);
+  playfx(level._effect["teleport_1p"], unitrigger_stub.origin);
   playsoundatposition("zmb_footprintbox_disappear", unitrigger_stub.origin);
   wait(3);
   unitrigger_stub.radius = 50;
@@ -87,16 +87,16 @@ function create_robot_head_trigger(unitrigger_stub) {
   unitrigger_stub.cursor_hint = "HINT_NOICON";
   unitrigger_stub.require_look_at = 1;
   m_coll = spawn("script_model", unitrigger_stub.origin);
-  m_coll setModel("drone_collision");
+  m_coll setmodel("drone_collision");
   unitrigger_stub.m_coll = m_coll;
   util::wait_network_frame();
   m_plinth = spawn("script_model", unitrigger_stub.origin);
   m_plinth.angles = unitrigger_stub.angles;
-  m_plinth setModel("p7_zm_ori_staff_holder");
+  m_plinth setmodel("p7_zm_ori_staff_holder");
   unitrigger_stub.m_plinth = m_plinth;
   util::wait_network_frame();
   m_sign = spawn("script_model", unitrigger_stub.origin);
-  m_sign setModel("p7_zm_ori_runes");
+  m_sign setmodel("p7_zm_ori_runes");
   m_sign linkto(unitrigger_stub.m_plinth, "tag_origin", (0, 15, 40));
   m_sign hidepart("j_fire");
   m_sign hidepart("j_ice");
@@ -123,7 +123,7 @@ function create_robot_head_trigger(unitrigger_stub) {
   m_sign zm_powerup_zombie_blood::make_zombie_blood_entity();
   unitrigger_stub.m_sign = m_sign;
   unitrigger_stub.origin = unitrigger_stub.origin + vectorscale((0, 0, 1), 30);
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &robot_head_trigger_think);
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & robot_head_trigger_think);
 }
 
 function robot_head_trigger_think() {
@@ -131,7 +131,7 @@ function robot_head_trigger_think() {
   str_weap_staff = "staff_" + self.script_noteworthy;
   var_5ec0aa73 = level.a_elemental_staffs[str_weap_staff].w_weapon;
   e_upgraded_staff = zm_tomb_craftables::get_staff_info_from_weapon_name(var_5ec0aa73, 0);
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(player hasweapon(e_upgraded_staff.w_weapon)) {
       e_upgraded_staff.ee_in_use = 1;
@@ -154,5 +154,5 @@ function place_staff(m_plinth) {
   m_plinth.v_old_origin = m_staff.origin;
   m_staff linkto(m_plinth, "tag_origin", (0, 9, 30), (0, 0, 0));
   m_staff show();
-  m_plinth playSound("zmb_squest_robot_place_staff");
+  m_plinth playsound("zmb_squest_robot_place_staff");
 }

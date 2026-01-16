@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setModel("body_zakhaev_viktor");
+  self setmodel("body_zakhaev_viktor");
   self attach("head_zakhaev_viktor", "", 1);
   self.headmodel = "head_zakhaev_viktor";
   self.voice = "russian";

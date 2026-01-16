@@ -8,22 +8,22 @@
 
 init() {
   level.medalsettings.waittime = 1.25;
-  level.contractsettings = spawnStruct();
+  level.contractsettings = spawnstruct();
   level.contractsettings.waittime = 4.2;
-  level.killstreaksettings = spawnStruct();
+  level.killstreaksettings = spawnstruct();
   level.killstreaksettings.waittime = 3;
-  level.ranksettings = spawnStruct();
+  level.ranksettings = spawnstruct();
   level.ranksettings.waittime = 3;
-  level.startmessage = spawnStruct();
+  level.startmessage = spawnstruct();
   level.startmessagedefaultduration = 2.0;
   level.endmessagedefaultduration = 2.0;
-  level.challengesettings = spawnStruct();
+  level.challengesettings = spawnstruct();
   level.challengesettings.waittime = 3;
-  level.teammessage = spawnStruct();
+  level.teammessage = spawnstruct();
   level.teammessage.waittime = 3;
-  level.regulargamemessages = spawnStruct();
+  level.regulargamemessages = spawnstruct();
   level.regulargamemessages.waittime = 6;
-  level.wagersettings = spawnStruct();
+  level.wagersettings = spawnstruct();
   level.wagersettings.waittime = 3;
   level.momentumnotifywaittime = 0.5;
   level thread onplayerconnect();
@@ -36,9 +36,8 @@ displaypopupswaiter() {
   self.startmessagenotifyqueue = [];
 
   while(true) {
-    if(self.killstreaknotifyqueue.size == 0 && self.messagenotifyqueue.size == 0) {
+    if(self.killstreaknotifyqueue.size == 0 && self.messagenotifyqueue.size == 0)
       self waittill("received award");
-    }
 
     waittillframeend;
 
@@ -46,17 +45,15 @@ displaypopupswaiter() {
       self clearcenterpopups();
       nextnotifydata = self.startmessagenotifyqueue[0];
 
-      for(i = 1; i < self.startmessagenotifyqueue.size; i++) {
+      for(i = 1; i < self.startmessagenotifyqueue.size; i++)
         self.startmessagenotifyqueue[i - 1] = self.startmessagenotifyqueue[i];
-      }
 
       self.startmessagenotifyqueue[i - 1] = undefined;
 
-      if(isDefined(nextnotifydata.duration)) {
+      if(isDefined(nextnotifydata.duration))
         duration = nextnotifydata.duration;
-      } else {
+      else
         duration = level.startmessagedefaultduration;
-      }
 
       wait(duration);
     } else if(self.killstreaknotifyqueue.size > 0) {
@@ -64,15 +61,13 @@ displaypopupswaiter() {
       killstreaktablenumber = self.killstreaknotifyqueue[0].killstreaktablenumber;
       hardpointtype = self.killstreaknotifyqueue[0].hardpointtype;
 
-      for(i = 1; i < self.killstreaknotifyqueue.size; i++) {
+      for(i = 1; i < self.killstreaknotifyqueue.size; i++)
         self.killstreaknotifyqueue[i - 1] = self.killstreaknotifyqueue[i];
-      }
 
       self.killstreaknotifyqueue[i - 1] = undefined;
 
-      if(!isDefined(streakcount)) {
+      if(!isDefined(streakcount))
         streakcount = 0;
-      }
 
       self displaykillstreak(streakcount, killstreaktablenumber);
       wait(level.killstreaksettings.waittime);
@@ -80,17 +75,15 @@ displaypopupswaiter() {
       self clearcenterpopups();
       nextnotifydata = self.messagenotifyqueue[0];
 
-      for(i = 1; i < self.messagenotifyqueue.size; i++) {
+      for(i = 1; i < self.messagenotifyqueue.size; i++)
         self.messagenotifyqueue[i - 1] = self.messagenotifyqueue[i];
-      }
 
       self.messagenotifyqueue[i - 1] = undefined;
 
-      if(isDefined(nextnotifydata.duration)) {
+      if(isDefined(nextnotifydata.duration))
         duration = nextnotifydata.duration;
-      } else {
+      else
         duration = level.regulargamemessages.waittime;
-      }
     }
   }
 }

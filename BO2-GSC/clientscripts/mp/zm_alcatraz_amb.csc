@@ -198,26 +198,26 @@ snd_start_autofx_audio() {
   snd_play_auto_fx("fx_alcatraz_light_round_oo", "amb_outside_lights", 0, 0, 0, 0);
 }
 
-sndnuclearbomb() {}
+sndnuclearbomb() {
+}
 
 afterlifeaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     self activateafterlifeaudio();
-  } else {
+  else
     self deactivateafterlifeaudio();
-  }
 }
 
 activateafterlifeaudio() {
   activateambientroom(0, "afterlife", 98);
-  playSound(0, "zmb_afterlife_start", (0, 0, 0));
+  playsound(0, "zmb_afterlife_start", (0, 0, 0));
   snd_set_snapshot("zmb_afterlife");
   setsoundcontext("grass", "in_grass");
 }
 
 deactivateafterlifeaudio() {
   deactivateambientroom(0, "afterlife", 98);
-  playSound(0, "zmb_afterlife_end", (0, 0, 0));
+  playsound(0, "zmb_afterlife_end", (0, 0, 0));
   snd_set_snapshot("default");
   setsoundcontext("grass", "no_grass");
 }
@@ -260,12 +260,12 @@ sndforcefieldwait() {
 
 sndstartff(array, array2) {
   foreach(place in array) {
-    playSound(0, "zmb_quest_forcefield_start", place);
+    playsound(0, "zmb_quest_forcefield_start", place);
     playloopat("zmb_quest_forcefield_loop", place);
   }
 
   foreach(position in array2) {
-    playSound(0, "evt_shower_steam_srt", position);
+    playsound(0, "evt_shower_steam_srt", position);
     wait 0.05;
     playloopat("evt_shower_steam", position);
   }
@@ -274,13 +274,13 @@ sndstartff(array, array2) {
 sndendff(array, array2) {
   foreach(place in array) {
     stoploopat("zmb_quest_forcefield_loop", place);
-    playSound(0, "zmb_quest_forcefield_end", place);
+    playsound(0, "zmb_quest_forcefield_end", place);
   }
 
   foreach(position in array2) {
     stoploopat("evt_shower_steam", position);
     wait 0.05;
-    playSound(0, "evt_shower_steam_stop", position);
+    playsound(0, "evt_shower_steam_stop", position);
   }
 }
 
@@ -307,15 +307,15 @@ sndgondolaloops() {
 sndplanealarmoneshots() {
   while(true) {
     level waittill("sndPB");
-    playSound(0, "zmb_plane_countdown_alarm", (756, 9664, 2153));
+    playsound(0, "zmb_plane_countdown_alarm", (756, 9664, 2153));
     wait 0.1;
-    playSound(0, "zmb_plane_countdown_alarm", (4852, 9653, 1980));
+    playsound(0, "zmb_plane_countdown_alarm", (4852, 9653, 1980));
   }
 }
 
 snddefendeventscreams() {
   level waittill("sndFF");
-  playSound(0, "zmb_easteregg_scream", (2233, 10345, 1224));
+  playsound(0, "zmb_easteregg_scream", (2233, 10345, 1224));
   wait 1;
-  playSound(0, "zmb_easteregg_laugh", (1597, 10068, 1228));
+  playsound(0, "zmb_easteregg_laugh", (1597, 10068, 1228));
 }

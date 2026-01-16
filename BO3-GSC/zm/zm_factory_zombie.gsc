@@ -20,21 +20,21 @@
 
 function autoexec init() {
   initzmfactorybehaviorsandasm();
-  level.zombie_init_done = &function_f06eec12;
+  level.zombie_init_done = & function_f06eec12;
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = &factory_closest_player;
+  level.closest_player_override = & factory_closest_player;
   level thread update_closest_player();
   level.move_valid_poi_to_navmesh = 1;
   level.pathdist_type = 2;
 }
 
 function private initzmfactorybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmFactoryTraversalService", &zmfactorytraversalservice);
-  animationstatenetwork::registeranimationmocomp("mocomp_idle_special_factory", &mocompidlespecialfactorystart, undefined, &mocompidlespecialfactoryterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmFactoryTraversalService", & zmfactorytraversalservice);
+  animationstatenetwork::registeranimationmocomp("mocomp_idle_special_factory", & mocompidlespecialfactorystart, undefined, & mocompidlespecialfactoryterminate);
 }
 
 function zmfactorytraversalservice(entity) {
-  if(isDefined(entity.traversestartnode)) {
+  if(isdefined(entity.traversestartnode)) {
     entity pushactors(0);
     return true;
   }
@@ -42,7 +42,7 @@ function zmfactorytraversalservice(entity) {
 }
 
 function private mocompidlespecialfactorystart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1])) {
+  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1])) {
     entity orientmode("face direction", entity.enemyoverride[1].origin - entity.origin);
     entity animmode("zonly_physics", 0);
   } else {
@@ -58,12 +58,12 @@ function function_f06eec12() {
 }
 
 function private factory_validate_last_closest_player(players) {
-  if(isDefined(self.last_closest_player) && (isDefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
+  if(isdefined(self.last_closest_player) && (isdefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
     return;
   }
   self.need_closest_player = 1;
   foreach(player in players) {
-    if(isDefined(player.am_i_valid) && player.am_i_valid) {
+    if(isdefined(player.am_i_valid) && player.am_i_valid) {
       self.last_closest_player = player;
       return;
     }
@@ -75,35 +75,35 @@ function private factory_closest_player(origin, players) {
   if(players.size == 0) {
     return undefined;
   }
-  if(isDefined(self.zombie_poi)) {
+  if(isdefined(self.zombie_poi)) {
     return undefined;
   }
   if(players.size == 1) {
     self.last_closest_player = players[0];
     return self.last_closest_player;
   }
-  if(!isDefined(self.last_closest_player)) {
+  if(!isdefined(self.last_closest_player)) {
     self.last_closest_player = players[0];
   }
-  if(!isDefined(self.need_closest_player)) {
+  if(!isdefined(self.need_closest_player)) {
     self.need_closest_player = 1;
   }
-  if(isDefined(level.last_closest_time) && level.last_closest_time >= level.time) {
+  if(isdefined(level.last_closest_time) && level.last_closest_time >= level.time) {
     self factory_validate_last_closest_player(players);
     return self.last_closest_player;
   }
-  if(isDefined(self.need_closest_player) && self.need_closest_player) {
+  if(isdefined(self.need_closest_player) && self.need_closest_player) {
     level.last_closest_time = level.time;
     self.need_closest_player = 0;
     closest = players[0];
     closest_dist = self zm_utility::approximate_path_dist(closest);
-    if(!isDefined(closest_dist)) {
+    if(!isdefined(closest_dist)) {
       closest = undefined;
     }
-    for(index = 1; index < players.size; index++) {
+    for (index = 1; index < players.size; index++) {
       dist = self zm_utility::approximate_path_dist(players[index]);
-      if(isDefined(dist)) {
-        if(isDefined(closest_dist)) {
+      if(isdefined(dist)) {
+        if(isdefined(closest_dist)) {
           if(dist < closest_dist) {
             closest = players[index];
             closest_dist = dist;
@@ -116,7 +116,7 @@ function private factory_closest_player(origin, players) {
     }
     self.last_closest_player = closest;
   }
-  if(players.size > 1 && isDefined(closest)) {
+  if(players.size > 1 && isdefined(closest)) {
     self zm_utility::approximate_path_dist(closest);
   }
   self factory_validate_last_closest_player(players);
@@ -125,18 +125,18 @@ function private factory_closest_player(origin, players) {
 
 function private update_closest_player() {
   level waittill("start_of_round");
-  while(true) {
+  while (true) {
     reset_closest_player = 1;
     zombies = zombie_utility::get_round_enemy_array();
     foreach(zombie in zombies) {
-      if(isDefined(zombie.need_closest_player) && zombie.need_closest_player) {
+      if(isdefined(zombie.need_closest_player) && zombie.need_closest_player) {
         reset_closest_player = 0;
         break;
       }
     }
     if(reset_closest_player) {
       foreach(zombie in zombies) {
-        if(isDefined(zombie.need_closest_player)) {
+        if(isdefined(zombie.need_closest_player)) {
           zombie.need_closest_player = 1;
         }
       }

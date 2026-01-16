@@ -8,6 +8,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_crash_tutorial;
+
 #namespace ct_crash;
 
 event_handler[gametype_init] main(eventstruct) {

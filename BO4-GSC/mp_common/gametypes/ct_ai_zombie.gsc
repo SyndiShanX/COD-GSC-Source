@@ -17,6 +17,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\armor;
+
 #namespace mp_ai_zombie;
 
 autoexec __init__system__() {
@@ -27,18 +28,18 @@ private __init__() {
   clientfield::register("actor", "zombie_riser_fx", 1, 1, "int");
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int");
   level.var_9ee73630 = [];
-  level.var_9ee73630[# "walk"] = [];
-  level.var_9ee73630[# "run"] = [];
-  level.var_9ee73630[# "sprint"] = [];
-  level.var_9ee73630[# "super_sprint"] = [];
-  level.var_9ee73630[# "walk"][# "down"] = 14;
-  level.var_9ee73630[# "walk"][# "up"] = 16;
-  level.var_9ee73630[# "run"][# "down"] = 13;
-  level.var_9ee73630[# "run"][# "up"] = 12;
-  level.var_9ee73630[# "sprint"][# "down"] = 9;
-  level.var_9ee73630[# "sprint"][# "up"] = 8;
-  level.var_9ee73630[# "super_sprint"][# "down"] = 1;
-  level.var_9ee73630[# "super_sprint"][# "up"] = 1;
+  level.var_9ee73630[#"walk"] = [];
+  level.var_9ee73630[#"run"] = [];
+  level.var_9ee73630[#"sprint"] = [];
+  level.var_9ee73630[#"super_sprint"] = [];
+  level.var_9ee73630[#"walk"][#"down"] = 14;
+  level.var_9ee73630[#"walk"][#"up"] = 16;
+  level.var_9ee73630[#"run"][#"down"] = 13;
+  level.var_9ee73630[#"run"][#"up"] = 12;
+  level.var_9ee73630[#"sprint"][#"down"] = 9;
+  level.var_9ee73630[#"sprint"][#"up"] = 8;
+  level.var_9ee73630[#"super_sprint"][#"down"] = 1;
+  level.var_9ee73630[#"super_sprint"][#"up"] = 1;
   spawner::add_archetype_spawn_function(#"zombie", &function_cf051788);
   initzombiebehaviors();
   val::register("allowoffnavmesh", 1);
@@ -196,7 +197,7 @@ private function_3d9b8ab3(params) {
 
 private function_9c573bc6() {
   self notify("403817714a013a66");
-  self endon("6c94e145f7d12787", # "death");
+  self endon("6c94e145f7d12787", #"death");
 
   if(isDefined(self.allowoffnavmesh) && self.allowoffnavmesh && isDefined(level.var_5e8121a) && level.var_5e8121a) {
     self.var_ef59b90 = 5;
@@ -500,7 +501,7 @@ function_e261b81d() {
 }
 
 private update_goal() {
-  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == # "blight_father")) {
+  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == #"blight_father")) {
     if(!self.allowoffnavmesh && self.isonnavmesh) {
       adjustedgoal = getclosestpointonnavmesh(self.var_80780af2, 100, self getpathfindingradius());
 
@@ -871,35 +872,35 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     }
 
     switch (self.damagelocation) {
-      case # "torso_upper":
-      case # "torso_lower":
+      case #"torso_upper":
+      case #"torso_lower":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "right_arm_lower":
-      case # "right_arm_upper":
-      case # "right_hand":
+      case #"right_arm_lower":
+      case #"right_arm_upper":
+      case #"right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "left_arm_lower":
-      case # "left_arm_upper":
-      case # "left_hand":
+      case #"left_arm_lower":
+      case #"left_arm_upper":
+      case #"left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self);
         }
 
         break;
-      case # "right_leg_upper":
-      case # "left_leg_lower":
-      case # "right_leg_lower":
-      case # "left_foot":
-      case # "right_foot":
-      case # "left_leg_upper":
+      case #"right_leg_upper":
+      case #"left_leg_lower":
+      case #"right_leg_lower":
+      case #"left_foot":
+      case #"right_foot":
+      case #"left_leg_upper":
         break;
       default:
         if(self.damagelocation == "none") {
@@ -914,8 +915,8 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
 
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       level notify(#"crawler_created", {
-        #zombie: self,
-        #player: attacker,
+        #zombie: self, 
+        #player: attacker, 
         #weapon: weapon
       });
       self allowedstances("crouch");
@@ -1050,14 +1051,14 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   switch (type) {
-    case # "mod_telefrag":
-    case # "mod_unknown":
-    case # "mod_burned":
-    case # "mod_trigger_hurt":
-    case # "mod_suicide":
-    case # "mod_falling":
+    case #"mod_telefrag":
+    case #"mod_unknown":
+    case #"mod_burned":
+    case #"mod_trigger_hurt":
+    case #"mod_suicide":
+    case #"mod_falling":
       return false;
-    case # "mod_melee":
+    case #"mod_melee":
       return false;
   }
 
@@ -1148,7 +1149,7 @@ zombie_head_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker, means_of_death) {
-  self endon(#"death", # "exploding");
+  self endon(#"death", #"exploding");
 
   if(!isalive(self)) {
     return;
@@ -1182,29 +1183,29 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       level thread zmbaivox_playvox(self, notify_string, 1, 4);
       break;
-    case # "pain":
+    case #"pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "behind":
+    case #"behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "attack_melee_notetrack":
+    case #"attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case # "chase_state_start":
+    case #"chase_state_start":
       level thread zmbaivox_playvox(self, "sprint", 1, 2);
       break;
-    case # "sprint":
-    case # "ambient":
-    case # "crawler":
-    case # "teardown":
-    case # "taunt":
+    case #"sprint":
+    case #"ambient":
+    case #"crawler":
+    case #"teardown":
+    case #"taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);
@@ -1291,7 +1292,7 @@ zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0) {
 
 zmbaivox_ambientdelay() {
   self notify(#"sndambientdelay");
-  self endon(#"sndambientdelay", # "death", # "disconnect");
+  self endon(#"sndambientdelay", #"death", #"disconnect");
   wait 2;
   self.delayambientvox = 0;
 }
@@ -1368,7 +1369,7 @@ zmbaivox_playdeath() {
 }
 
 function_b8c2c5cc() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     self waittill(#"reset_pathing");

@@ -34,7 +34,7 @@
 #namespace zm_zod_sword;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_sword", &__init__, &__main__, undefined);
+  system::register("zm_zod_sword", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -60,17 +60,17 @@ function __init__() {
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_EGG_PICKUP", 1, 1, "int");
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_SWORD_PICKUP", 1, 1, "int");
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_EGG_PICKUP", 1, 1, "int");
-  callback::on_connect(&on_player_connect);
-  callback::on_disconnect(&on_player_disconnect);
-  callback::on_spawned(&on_player_spawned);
-  zm_zod_util::on_zombie_killed(&on_zombie_killed);
-  zm_zod_util::on_player_bled_out(&on_bled_out);
+  callback::on_connect( & on_player_connect);
+  callback::on_disconnect( & on_player_disconnect);
+  callback::on_spawned( & on_player_spawned);
+  zm_zod_util::on_zombie_killed( & on_zombie_killed);
+  zm_zod_util::on_player_bled_out( & on_bled_out);
   level thread sword_devgui();
 }
 
 function function_541cb3c4() {
   s_initial = getent("initial_egg_statue", "script_noteworthy");
-  level.sword_quest.eggs[self.characterindex] setModel(level.sword_quest.egg_models[0]);
+  level.sword_quest.eggs[self.characterindex] setmodel(level.sword_quest.egg_models[0]);
   self function_abf3df35(s_initial.statue_id);
   self clientfield::set_player_uimodel("zmInventory.player_sword_quest_egg_state", 0);
 }
@@ -84,9 +84,9 @@ function reset_sword(b_show) {
 }
 
 function __main__() {
-  level.sword_quest = spawnStruct();
+  level.sword_quest = spawnstruct();
   level.sword_quest.weapons = [];
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     level.sword_quest.weapons[i] = [];
     level.sword_quest.weapons[i][1] = getweapon(("glaive_apothicon" + "_") + i);
     level.sword_quest.weapons[i][2] = getweapon(("glaive_keeper" + "_") + i);
@@ -94,14 +94,14 @@ function __main__() {
       assert(wpn != level.weaponnone);
     }
   }
-  level.sword_quest.statues = getEntArray("sword_upgrade_statue", "targetname");
+  level.sword_quest.statues = getentarray("sword_upgrade_statue", "targetname");
   level.sword_quest.var_e91b9e85 = [];
   level.sword_quest.var_e91b9e85[0] = "wpn_t7_zmb_zod_sword1_box_no_egg_world";
   level.sword_quest.var_e91b9e85[1] = "wpn_t7_zmb_zod_sword1_det_no_egg_world";
   level.sword_quest.var_e91b9e85[2] = "wpn_t7_zmb_zod_sword1_fem_no_egg_world";
   level.sword_quest.var_e91b9e85[3] = "wpn_t7_zmb_zod_sword1_mag_no_egg_world";
   level.sword_quest.egg_models = array("zm_zod_sword_egg_apothicon_s1", "zm_zod_sword_egg_apothicon_s2", "zm_zod_sword_egg_apothicon_s3", "zm_zod_sword_egg_apothicon_s4", "zm_zod_sword_egg_apothicon_s5");
-  for(statue_id = 0; statue_id < level.sword_quest.statues.size; statue_id++) {
+  for (statue_id = 0; statue_id < level.sword_quest.statues.size; statue_id++) {
     e_statue = level.sword_quest.statues[statue_id];
     if(e_statue.script_noteworthy === "initial_egg_statue") {
       e_statue.egg_tags = array("j_egg_location_01", "j_egg_location_02", "j_egg_location_03", "j_egg_location_04");
@@ -111,7 +111,7 @@ function __main__() {
         v_origin = e_statue gettagorigin(str_tag);
         v_angles = e_statue gettagangles(str_tag);
         e_egg = util::spawn_model(level.sword_quest.egg_models[0], v_origin, v_angles);
-        if(!isDefined(level.sword_quest.eggs)) {
+        if(!isdefined(level.sword_quest.eggs)) {
           level.sword_quest.eggs = [];
         } else if(!isarray(level.sword_quest.eggs)) {
           level.sword_quest.eggs = array(level.sword_quest.eggs);
@@ -119,7 +119,7 @@ function __main__() {
         level.sword_quest.eggs[level.sword_quest.eggs.size] = e_egg;
       }
       level.sword_quest.swords = [];
-      for(i = 0; i < e_statue.sword_tags.size; i++) {
+      for (i = 0; i < e_statue.sword_tags.size; i++) {
         v_origin = e_statue gettagorigin(e_statue.sword_tags[i]);
         v_angles = e_statue gettagangles(e_statue.sword_tags[i]);
         e_sword = util::spawn_model(level.sword_quest.var_e91b9e85[i], v_origin, v_angles);
@@ -131,8 +131,8 @@ function __main__() {
     }
     e_statue.statue_id = statue_id;
     s_trigger_pos = struct::get(e_statue.target, "targetname");
-    if(isDefined(s_trigger_pos.target)) {
-      zm_zod_smashables::add_callback(s_trigger_pos.target, &function_2c009d2e, e_statue);
+    if(isdefined(s_trigger_pos.target)) {
+      zm_zod_smashables::add_callback(s_trigger_pos.target, & function_2c009d2e, e_statue);
       continue;
     }
     level thread function_2c009d2e(e_statue);
@@ -141,11 +141,11 @@ function __main__() {
 }
 
 function second_sword_quest() {
-  level.sword_quest_2 = spawnStruct();
+  level.sword_quest_2 = spawnstruct();
   level.sword_quest_2.var_765ff5d4 = [];
   level.sword_quest_2.var_765ff5d4 = struct::get_array("sword_quest_magic_circle_place", "targetname");
   level flag::wait_till("ritual_pap_complete");
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     foreach(player in level.players) {
       player clientfield::set_to_player("magic_circle_state_" + i, 1);
     }
@@ -161,10 +161,10 @@ function second_sword_quest() {
 }
 
 function function_e9bb9efa() {
-  while(true) {
+  while (true) {
     level util::waittill_any("between_round_over", "magic_circle_failed");
     foreach(player in level.players) {
-      for(i = 0; i < 4; i++) {
+      for (i = 0; i < 4; i++) {
         n_quest_state = player clientfield::get_to_player("magic_circle_state_" + i);
         if(n_quest_state === 0 && !player function_a7e71a86(i)) {
           player clientfield::set_to_player("magic_circle_state_" + i, 1);
@@ -178,10 +178,10 @@ function function_e9bb9efa() {
 }
 
 function function_2f36dd89(var_6b55cb3b) {
-  if(!isDefined(var_6b55cb3b)) {
+  if(!isdefined(var_6b55cb3b)) {
     self flag::set("magic_circle_wait_for_round_completed");
   }
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     if(var_6b55cb3b !== i) {
       self clientfield::set_to_player("magic_circle_state_" + i, 0);
     }
@@ -209,7 +209,7 @@ function function_aa4e4fa4(s_loc, n_char_index) {
   width = 128;
   height = 128;
   length = 128;
-  s_loc.unitrigger_stub = spawnStruct();
+  s_loc.unitrigger_stub = spawnstruct();
   s_loc.unitrigger_stub.origin = s_loc.origin;
   s_loc.unitrigger_stub.angles = s_loc.angles;
   s_loc.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -220,13 +220,13 @@ function function_aa4e4fa4(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_ac03c228;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_4a3c552c);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_ac03c228;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_4a3c552c);
 }
 
 function function_ac03c228(player) {
   b_can_see = 1;
-  if(isDefined(player.beastmode) && player.beastmode) {
+  if(isdefined(player.beastmode) && player.beastmode) {
     b_can_see = 0;
   }
   if(b_can_see) {
@@ -235,7 +235,7 @@ function function_ac03c228(player) {
     self setinvisibletoplayer(player);
   }
   var_a3338832 = self function_4a703d7c(player);
-  if(isDefined(self.hint_string)) {
+  if(isdefined(self.hint_string)) {
     self sethintstring(self.hint_string);
   }
   return var_a3338832;
@@ -245,16 +245,16 @@ function function_4a703d7c(player) {
   n_char_index = self.stub.n_char_index;
   n_quest_state = level clientfield::get("keeper_quest_state_" + n_char_index);
   b_result = 0;
-  if(isDefined(player.beastmode) && player.beastmode) {
-    self.hint_string = &"";
+  if(isdefined(player.beastmode) && player.beastmode) {
+    self.hint_string = & "";
   } else {
     if(n_quest_state === 2 || n_quest_state === 3) {
-      self.hint_string = &"";
+      self.hint_string = & "";
     } else {
       if(player.characterindex !== n_char_index) {
-        self.hint_string = &"ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
+        self.hint_string = & "ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
       } else if(n_quest_state === 1 && player has_sword()) {
-        self.hint_string = &"ZM_ZOD_KEEPER_EGG_PICKUP";
+        self.hint_string = & "ZM_ZOD_KEEPER_EGG_PICKUP";
         b_result = 1;
       }
     }
@@ -263,7 +263,7 @@ function function_4a703d7c(player) {
 }
 
 function function_4a3c552c() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -289,7 +289,7 @@ function function_5356f68f(trig, player) {
   player clientfield::set_player_uimodel("zmInventory.player_sword_quest_egg_state", 1);
   player thread zm_zod_util::function_55f114f9("zmInventory.widget_egg", 3.5);
   player thread zm_zod_util::show_infotext_for_duration("ZM_ZOD_UI_LVL2_EGG_PICKUP", 3.5);
-  player playSound("zmb_zod_egg2_pickup");
+  player playsound("zmb_zod_egg2_pickup");
   player thread zm_zod_vo::function_9bd30516();
 }
 
@@ -297,7 +297,7 @@ function create_magic_circle_unitrigger(s_loc, n_char_index) {
   width = 128;
   height = 128;
   length = 128;
-  s_loc.unitrigger_stub = spawnStruct();
+  s_loc.unitrigger_stub = spawnstruct();
   s_loc.unitrigger_stub.origin = s_loc.origin;
   s_loc.unitrigger_stub.angles = s_loc.angles;
   s_loc.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -308,17 +308,17 @@ function create_magic_circle_unitrigger(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = &magic_circle_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &magic_circle_trigger_think);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = & magic_circle_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & magic_circle_trigger_think);
 }
 
 function magic_circle_trigger_visibility(player) {
   self setinvisibletoplayer(player);
-  if(isDefined(self.stub.activated) && self.stub.activated || !player has_sword()) {
+  if(isdefined(self.stub.activated) && self.stub.activated || !player has_sword()) {
     return 0;
   }
   var_a3338832 = self function_74e5c19(player);
-  if(isDefined(self.hint_string)) {
+  if(isdefined(self.hint_string)) {
     self sethintstring(self.hint_string);
   }
   return var_a3338832;
@@ -339,7 +339,7 @@ function function_74e5c19(player) {
   if(!var_bca28fa8) {
     var_efb73168 = 0;
   }
-  if(isDefined(player.beastmode) && player.beastmode) {
+  if(isdefined(player.beastmode) && player.beastmode) {
     var_efb73168 = 0;
   }
   if(level flag::get("magic_circle_in_progress")) {
@@ -349,7 +349,7 @@ function function_74e5c19(player) {
     var_efb73168 = 0;
   }
   if(var_efb73168) {
-    self.hint_string = &"ZM_ZOD_SWORD_DEFEND_PLACE";
+    self.hint_string = & "ZM_ZOD_SWORD_DEFEND_PLACE";
     self setvisibletoplayer(player);
   } else {
     self.hint_string = "";
@@ -359,7 +359,7 @@ function function_74e5c19(player) {
 }
 
 function magic_circle_trigger_think() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -370,7 +370,7 @@ function magic_circle_trigger_think() {
     if(!zm_utility::is_player_valid(player)) {
       continue;
     }
-    if(isDefined(self.stub.activated) && self.stub.activated) {
+    if(isdefined(self.stub.activated) && self.stub.activated) {
       continue;
     }
     if(level flag::get("magic_circle_in_progress")) {
@@ -398,7 +398,7 @@ function magic_circle_trigger_activate(trig_stub, player) {
     e_player clientfield::set_to_player("magic_circle_state_" + var_181b74a5, 2);
   }
   zm_unitrigger::run_visibility_function_for_all_triggers();
-  player playSound("zmb_zod_egg_place");
+  player playsound("zmb_zod_egg_place");
   player clientfield::set_player_uimodel("zmInventory.widget_egg", 0);
   str_endon = ("magic_circle_" + var_181b74a5) + "_off";
   player thread function_278154b(trig_stub.origin, var_181b74a5, 32, 0.01, str_endon);
@@ -417,18 +417,18 @@ function magic_circle_trigger_activate(trig_stub, player) {
   player clientfield::set_player_uimodel("zmhud.swordEnergy", player.sword_power);
   player gadgetpowerset(0, 100);
   player clientfield::increment_uimodel("zmhud.swordChargeUpdate");
-  while(true) {
+  while (true) {
     trig_stub.ai_defender = [];
-    trig_stub.var_2330d68c = array::filter(var_fb35e9c2, 0, &function_ed69c2a1, var_181b74a5);
+    trig_stub.var_2330d68c = array::filter(var_fb35e9c2, 0, & function_ed69c2a1, var_181b74a5);
     var_90e5cd72 = 0;
-    while(var_90e5cd72 < 2 && var_73fc403f < n_kills_needed) {
+    while (var_90e5cd72 < 2 && var_73fc403f < n_kills_needed) {
       trig_stub.var_87b7360++;
       level thread function_7922af5f(player, trig_stub, var_90e5cd72, str_endon);
       var_90e5cd72++;
       var_73fc403f++;
       wait(0.05);
     }
-    while(trig_stub.var_87b7360 > 0) {
+    while (trig_stub.var_87b7360 > 0) {
       wait(0.05);
     }
     if(player.sword_quest_2.kills[var_181b74a5] == n_kills_needed) {
@@ -460,7 +460,7 @@ function function_7922af5f(player, trig_stub, index, str_endon) {
   level endon(str_endon);
   level endon("magic_circle_failed");
   var_181b74a5 = trig_stub.n_char_index;
-  while(true) {
+  while (true) {
     var_cf8830de = array::random(trig_stub.var_2330d68c);
     arrayremovevalue(trig_stub.var_2330d68c, var_cf8830de);
     trig_stub.ai_defender[index] = zm_ai_margwa::function_8a0708c2(var_cf8830de);
@@ -470,12 +470,12 @@ function function_7922af5f(player, trig_stub, index, str_endon) {
     trig_stub.ai_defender[index].var_2d5d7413 = 1;
     trig_stub.ai_defender[index].var_de609f65 = player;
     trig_stub.ai_defender[index] waittill("death", attacker, mod, var_13b27531);
-    if(isDefined(var_13b27531 === level.sword_quest.weapons[player.characterindex][1])) {
+    if(isdefined(var_13b27531 === level.sword_quest.weapons[player.characterindex][1])) {
       player.sword_quest_2.kills[var_181b74a5]++;
       trig_stub.var_87b7360--;
       break;
     } else {
-      if(!isDefined(trig_stub.var_2330d68c)) {
+      if(!isdefined(trig_stub.var_2330d68c)) {
         trig_stub.var_2330d68c = [];
       } else if(!isarray(trig_stub.var_2330d68c)) {
         trig_stub.var_2330d68c = array(trig_stub.var_2330d68c);
@@ -494,7 +494,7 @@ function function_47563199(trig_stub, player, str_endon) {
   player util::waittill_any("entering_last_stand", "disconnect");
   level notify("hash_278154b");
   level notify("magic_circle_failed");
-  for(i = 0; i < trig_stub.ai_defender.size; i++) {
+  for (i = 0; i < trig_stub.ai_defender.size; i++) {
     if(isalive(trig_stub.ai_defender[i])) {
       trig_stub.ai_defender[i] kill();
     }
@@ -522,11 +522,11 @@ function function_278154b(var_a246d2ec, var_181b74a5, n_radius, n_rate, str_endo
   level endon("hash_278154b");
   level endon(str_endon);
   n_dist_max = n_radius * n_radius;
-  while(true) {
+  while (true) {
     var_2108630b = 0;
-    if(isDefined(self.sword_power)) {
+    if(isdefined(self.sword_power)) {
       v_player_origin = self getorigin();
-      if(isDefined(v_player_origin)) {
+      if(isdefined(v_player_origin)) {
         n_dist_2 = distancesquared(var_a246d2ec, v_player_origin);
         if(n_dist_2 <= n_dist_max) {
           var_2108630b = 1;
@@ -538,7 +538,7 @@ function function_278154b(var_a246d2ec, var_181b74a5, n_radius, n_rate, str_endo
           self gadgetpowerset(slot, 100 * temp);
           self.sword_power = temp;
           self clientfield::set_player_uimodel("zmhud.swordEnergy", self.sword_power);
-          if(!isDefined(self.var_88d65f) || (!(isDefined(self.var_88d65f) && self.var_88d65f))) {
+          if(!isdefined(self.var_88d65f) || (!(isdefined(self.var_88d65f) && self.var_88d65f))) {
             self.var_88d65f = 1;
             self thread function_9867bf60(var_a246d2ec, n_dist_max, str_endon);
           }
@@ -564,9 +564,9 @@ function function_9867bf60(var_a246d2ec, n_dist_max, str_endon) {
   level endon("hash_278154b");
   level endon(str_endon);
   self playsoundtoplayer("zmb_zod_sword2_charge", self);
-  while(distancesquared(var_a246d2ec, self.origin) <= n_dist_max) {
+  while (distancesquared(var_a246d2ec, self.origin) <= n_dist_max) {
     wait(0.1);
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
   }
@@ -574,7 +574,7 @@ function function_9867bf60(var_a246d2ec, n_dist_max, str_endon) {
 }
 
 function function_ed69c2a1(e_entity, n_script_int) {
-  if(!isDefined(e_entity.script_int) || e_entity.script_int != n_script_int) {
+  if(!isdefined(e_entity.script_int) || e_entity.script_int != n_script_int) {
     return false;
   }
   return true;
@@ -582,7 +582,7 @@ function function_ed69c2a1(e_entity, n_script_int) {
 
 function function_b7af29e0() {
   n_charges = 0;
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     if(self function_a7e71a86(i)) {
       n_charges = n_charges + 1;
     }
@@ -612,7 +612,7 @@ function function_6f69a416(s_loc, n_char_index) {
   width = 128;
   height = 128;
   length = 128;
-  s_loc.unitrigger_stub = spawnStruct();
+  s_loc.unitrigger_stub = spawnstruct();
   s_loc.unitrigger_stub.origin = s_loc.origin;
   s_loc.unitrigger_stub.angles = s_loc.angles;
   s_loc.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -623,14 +623,14 @@ function function_6f69a416(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_8ca48fdc;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_2bca570);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_8ca48fdc;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_2bca570);
 }
 
 function function_8ca48fdc(player) {
   self setinvisibletoplayer(player);
   var_a3338832 = self function_c722bbbb(player);
-  if(isDefined(self.hint_string)) {
+  if(isdefined(self.hint_string)) {
     self sethintstring(self.hint_string);
   }
   if(var_a3338832) {
@@ -640,30 +640,30 @@ function function_8ca48fdc(player) {
 }
 
 function function_c722bbbb(player) {
-  if(isDefined(player.beastmode) && player.beastmode || player flag::get("waiting_for_upgraded_sword")) {
-    self.hint_string = &"";
+  if(isdefined(player.beastmode) && player.beastmode || player flag::get("waiting_for_upgraded_sword")) {
+    self.hint_string = & "";
     return false;
   }
   n_char_index = self.stub.n_char_index;
   n_quest_state = level clientfield::get("keeper_quest_state_" + n_char_index);
   if(n_quest_state === 6 && player has_sword(1)) {
-    self.hint_string = &"ZM_ZOD_KEEPER_SWORD_PLACE";
+    self.hint_string = & "ZM_ZOD_KEEPER_SWORD_PLACE";
     return true;
   }
   if(n_quest_state === 7) {
-    self.hint_string = &"ZM_ZOD_KEEPER_SWORD_PICKUP";
+    self.hint_string = & "ZM_ZOD_KEEPER_SWORD_PICKUP";
     return true;
   }
   if(player.characterindex === n_char_index) {
-    self.hint_string = &"ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
+    self.hint_string = & "ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
     return false;
   }
-  self.hint_string = &"";
+  self.hint_string = & "";
   return false;
 }
 
 function function_2bca570() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -705,19 +705,19 @@ function function_e5a7a0eb(stub, player, n_quest_state) {
     player give_sword(2, 1);
     switch (player.characterindex) {
       case 0: {
-        level.sword_quest.swords[player.characterindex] setModel("wpn_t7_zmb_zod_sword2_box_world");
+        level.sword_quest.swords[player.characterindex] setmodel("wpn_t7_zmb_zod_sword2_box_world");
         break;
       }
       case 1: {
-        level.sword_quest.swords[player.characterindex] setModel("wpn_t7_zmb_zod_sword2_det_world");
+        level.sword_quest.swords[player.characterindex] setmodel("wpn_t7_zmb_zod_sword2_det_world");
         break;
       }
       case 2: {
-        level.sword_quest.swords[player.characterindex] setModel("wpn_t7_zmb_zod_sword2_fem_world");
+        level.sword_quest.swords[player.characterindex] setmodel("wpn_t7_zmb_zod_sword2_fem_world");
         break;
       }
       case 3: {
-        level.sword_quest.swords[player.characterindex] setModel("wpn_t7_zmb_zod_sword2_mag_world");
+        level.sword_quest.swords[player.characterindex] setmodel("wpn_t7_zmb_zod_sword2_mag_world");
         break;
       }
     }
@@ -728,7 +728,7 @@ function function_2f31f931(e_player) {
   self setinvisibletoplayer(e_player);
   n_statue = self.stub.statue_id;
   e_statue = level.sword_quest.statues[n_statue];
-  b_inventory = !isDefined(e_player.sword_quest.egg_placement);
+  b_inventory = !isdefined(e_player.sword_quest.egg_placement);
   b_satisfied = e_player function_24978bad(n_statue);
   b_here = e_player function_6dc5b484(n_statue);
   b_sword_rock = e_statue.script_noteworthy === "initial_egg_statue";
@@ -736,34 +736,34 @@ function function_2f31f931(e_player) {
   var_5f66b0c7 = level clientfield::get("ee_quest_state");
   n_quest_state = level clientfield::get("keeper_quest_state_" + e_player.characterindex);
   if(n_quest_state === 7) {
-    self.hint_string = &"";
+    self.hint_string = & "";
   } else {
     if(e_player.sword_quest.upgrade_stage >= 1) {
       if(b_sword_rock && !e_player has_sword() && !var_c9c683e8) {
         if(b_inventory && e_player.var_b170d6d6 === 0) {
           self setvisibletoplayer(e_player);
-          self.hint_string = &"ZM_ZOD_SWORD_EGG_PLACE";
+          self.hint_string = & "ZM_ZOD_SWORD_EGG_PLACE";
         } else {
           if(var_5f66b0c7 < 1) {
             self setvisibletoplayer(e_player);
-            self.hint_string = &"ZM_ZOD_SWORD_EGG_RETRIEVE";
+            self.hint_string = & "ZM_ZOD_SWORD_EGG_RETRIEVE";
           } else {
-            self.hint_string = &"";
+            self.hint_string = & "";
           }
         }
       } else {
-        self.hint_string = &"";
+        self.hint_string = & "";
       }
     } else {
       if(b_here && b_satisfied) {
         self setvisibletoplayer(e_player);
-        self.hint_string = &"ZM_ZOD_X_TO_PICK_UP_EGG";
+        self.hint_string = & "ZM_ZOD_X_TO_PICK_UP_EGG";
       } else {
         if(!b_here && !b_satisfied && b_inventory) {
           self setvisibletoplayer(e_player);
-          self.hint_string = &"ZM_ZOD_SWORD_EGG_PLACE";
+          self.hint_string = & "ZM_ZOD_SWORD_EGG_PLACE";
         } else {
-          self.hint_string = &"";
+          self.hint_string = & "";
         }
       }
     }
@@ -780,17 +780,17 @@ function reset_hud() {
 function on_player_connect() {
   self reset_hud();
   self.var_b170d6d6 = 0;
-  self.sword_quest = spawnStruct();
+  self.sword_quest = spawnstruct();
   self.sword_quest.kills = [];
   self.sword_quest.all_kills_completed = 0;
-  self.sword_quest_2 = spawnStruct();
+  self.sword_quest_2 = spawnstruct();
   self.sword_quest_2.kills = [];
   self.sword_quest_2.all_kills_completed = 0;
   self.sword_quest_2.var_db999762 = [];
   self.sword_quest.upgrade_stage = 0;
   self flag::init("waiting_for_upgraded_sword");
   self flag::init("magic_circle_wait_for_round_completed");
-  a_statues = getEntArray("sword_upgrade_statue", "targetname");
+  a_statues = getentarray("sword_upgrade_statue", "targetname");
   foreach(e_statue in a_statues) {
     self.sword_quest.kills[e_statue.statue_id] = 0;
     if(e_statue.script_noteworthy === "initial_egg_statue") {
@@ -807,7 +807,7 @@ function on_player_connect() {
 }
 
 function on_player_spawned() {
-  if(isDefined(self.sword_quest) && self.sword_quest.upgrade_stage < 1) {
+  if(isdefined(self.sword_quest) && self.sword_quest.upgrade_stage < 1) {
     self function_abf3df35(self.sword_quest.egg_placement);
   }
   self reset_hud();
@@ -815,7 +815,7 @@ function on_player_spawned() {
   if(n_quest_state !== 7) {
     reset_sword();
   }
-  if(isDefined(self.sword_quest) && self.sword_quest.upgrade_stage < 1) {
+  if(isdefined(self.sword_quest) && self.sword_quest.upgrade_stage < 1) {
     function_541cb3c4();
   }
   if(self clientfield::get_to_player("pod_sprayer_held")) {} else {
@@ -826,12 +826,12 @@ function on_player_spawned() {
 function on_player_disconnect() {
   var_d95a0cf3 = self.characterindex;
   s_initial = getent("initial_egg_statue", "script_noteworthy");
-  level.sword_quest.eggs[var_d95a0cf3] setModel(level.sword_quest.egg_models[0]);
+  level.sword_quest.eggs[var_d95a0cf3] setmodel(level.sword_quest.egg_models[0]);
   level.sword_quest.swords[var_d95a0cf3] show();
 }
 
 function on_bled_out() {
-  if(!isDefined(self.var_b170d6d6) && level flag::get("keeper_sword_locker")) {
+  if(!isdefined(self.var_b170d6d6) && level flag::get("keeper_sword_locker")) {
     self.var_b170d6d6 = 1;
   }
 }
@@ -839,13 +839,13 @@ function on_bled_out() {
 function on_zombie_killed() {
   foreach(e_statue in level.sword_quest.statues) {
     dist_sq = distancesquared(self.origin, e_statue.origin);
-    if(isDefined(e_statue.radius)) {
+    if(isdefined(e_statue.radius)) {
       var_d41ef8d1 = e_statue.radius * e_statue.radius;
     } else {
       var_d41ef8d1 = 589294;
     }
     if(dist_sq < var_d41ef8d1) {
-      if(isDefined(self.attacker) && isplayer(self.attacker)) {
+      if(isdefined(self.attacker) && isplayer(self.attacker)) {
         if(self.attacker function_6dc5b484(e_statue.statue_id) && !self.attacker function_24978bad(e_statue.statue_id) && !self.attacker flag::get("in_beastmode")) {
           self bank_zombie_kill(self.attacker, e_statue);
         }
@@ -857,7 +857,7 @@ function on_zombie_killed() {
 function private bank_zombie_kill(e_player, e_statue) {
   e_player.sword_quest.kills[e_statue.statue_id]++;
   e_player function_67bcb9d9();
-  if(isDefined(e_player.sword_quest.cheat) && e_player.sword_quest.cheat) {
+  if(isdefined(e_player.sword_quest.cheat) && e_player.sword_quest.cheat) {
     e_player.sword_quest.kills[e_statue.statue_id] = 12;
   }
   if(e_player function_24978bad(e_statue.statue_id)) {
@@ -876,13 +876,13 @@ function private bank_zombie_kill(e_player, e_statue) {
     }
     str_model = level.sword_quest.egg_models[n_statues_complete];
     e_model = level.sword_quest.eggs[e_player.characterindex];
-    e_model setModel(str_model);
+    e_model setmodel(str_model);
     e_model clientfield::set("zod_egg_glow", 1);
-    e_model playLoopSound("zmb_zod_egg_glow_ready", 3);
+    e_model playloopsound("zmb_zod_egg_glow_ready", 3);
     if(n_statues_complete < 4) {
-      e_model playSound("zmb_zod_soul_full");
+      e_model playsound("zmb_zod_soul_full");
     } else {
-      e_model playSound("zmb_zod_soul_full_final");
+      e_model playsound("zmb_zod_soul_full_final");
     }
   }
   self thread zombie_blood_soul_streak_fx(e_statue, e_player);
@@ -890,7 +890,7 @@ function private bank_zombie_kill(e_player, e_statue) {
 }
 
 function private function_6dc5b484(statue_id) {
-  if(!isDefined(self.sword_quest.egg_placement)) {
+  if(!isdefined(self.sword_quest.egg_placement)) {
     return 0;
   }
   return self.sword_quest.egg_placement == statue_id;
@@ -906,18 +906,18 @@ function private function_5fd6959f(var_a94aa7ef) {
 }
 
 function private function_a7e71a86(var_a94aa7ef) {
-  return isDefined(self.sword_quest_2.var_db999762[var_a94aa7ef]);
+  return isdefined(self.sword_quest_2.var_db999762[var_a94aa7ef]);
 }
 
 function private zombie_blood_soul_streak_fx(e_statue, e_killer) {
   v_start = self gettagorigin("J_SpineLower");
   e_fx = zm_zod_util::tag_origin_allocate(v_start, self.angles);
   e_fx clientfield::set("zod_egg_soul", 1);
-  e_fx playSound("zmb_zod_soul_release");
+  e_fx playsound("zmb_zod_soul_release");
   v_endpos = e_statue gettagorigin(e_statue.egg_tags[e_killer.characterindex]);
   e_fx moveto(v_endpos, 1);
   e_fx waittill("movedone");
-  e_fx playSound("zmb_zod_soul_impact");
+  e_fx playsound("zmb_zod_soul_impact");
   wait(0.25);
   e_fx clientfield::set("zod_egg_soul", 0);
   e_fx zm_zod_util::tag_origin_free();
@@ -926,8 +926,8 @@ function private zombie_blood_soul_streak_fx(e_statue, e_killer) {
 function private spawn_zombie_clone() {
   clone = spawn("script_model", self.origin);
   clone.angles = self.angles;
-  clone setModel(self.model);
-  if(isDefined(self.headmodel)) {
+  clone setmodel(self.model);
+  if(isdefined(self.headmodel)) {
     clone.headmodel = self.headmodel;
     clone attach(clone.headmodel, "", 1);
   }
@@ -957,7 +957,7 @@ function function_abf3df35(n_egg_placement, b_completed = 0) {
   self.sword_quest.egg_placement = n_egg_placement;
   self.sword_quest.egg_placement_time = gettime();
   e_egg = level.sword_quest.eggs[self.characterindex];
-  if(!isDefined(n_egg_placement)) {
+  if(!isdefined(n_egg_placement)) {
     self thread zm_zod_util::function_55f114f9("zmInventory.widget_egg", 3.5);
     e_egg ghost();
     e_egg clientfield::set("zod_egg_glow", 0);
@@ -1000,12 +1000,12 @@ function function_3608024(b_is_active) {
 function defend_player_message(e_player) {
   s_placement = level.sword_quest.defend.a_placement[e_player.characterindex];
   if(e_player has_sword(1)) {
-    return &"ZM_ZOD_SWORD_DEFEND_PLACE";
+    return & "ZM_ZOD_SWORD_DEFEND_PLACE";
   }
-  if(isDefined(s_placement.sword_model) && e_player.sword_quest.upgrade_stage == 2) {
-    return &"ZM_ZOD_SWORD_DEFEND_RETRIEVE";
+  if(isdefined(s_placement.sword_model) && e_player.sword_quest.upgrade_stage == 2) {
+    return & "ZM_ZOD_SWORD_DEFEND_RETRIEVE";
   }
-  return &"";
+  return & "";
 }
 
 function give_sword(n_sword_level, var_74719138 = 0) {
@@ -1014,7 +1014,7 @@ function give_sword(n_sword_level, var_74719138 = 0) {
   self notify("hash_b29853d8");
   wait(0.1);
   wpn_sword = level.sword_quest.weapons[self.characterindex][n_sword_level];
-  assert(isDefined(wpn_sword));
+  assert(isdefined(wpn_sword));
   if(self has_sword()) {
     self take_sword();
   }
@@ -1042,7 +1042,7 @@ function give_sword(n_sword_level, var_74719138 = 0) {
 function function_40f1b35b(wpn_sword, n_sword_level) {
   self endon("disconnect");
   var_6f140d05 = 0;
-  while(!var_6f140d05) {
+  while (!var_6f140d05) {
     self waittill("weapon_change_complete");
     weapon = self getcurrentweapon();
     if(weapon === wpn_sword) {
@@ -1062,7 +1062,7 @@ function take_sword() {
 }
 
 function has_sword(n_sword_level = self.sword_quest.upgrade_stage) {
-  if(!isDefined(level.sword_quest.weapons[self.characterindex][n_sword_level])) {
+  if(!isdefined(level.sword_quest.weapons[self.characterindex][n_sword_level])) {
     return false;
   }
   if(self zm_utility::get_player_hero_weapon() === level.sword_quest.weapons[self.characterindex][n_sword_level]) {
@@ -1076,7 +1076,7 @@ function sword_equipped(n_sword_level = self.sword_quest.upgrade_stage) {
 }
 
 function sword_use_hint(n_sword_level, var_74719138) {
-  if(!isDefined(self.var_75dcfb99)) {
+  if(!isdefined(self.var_75dcfb99)) {
     self.var_75dcfb99 = 0;
   }
   if(self.var_75dcfb99 >= n_sword_level) {
@@ -1084,11 +1084,11 @@ function sword_use_hint(n_sword_level, var_74719138) {
   }
   self.var_75dcfb99++;
   if(var_74719138) {
-    while(self sword_equipped()) {
+    while (self sword_equipped()) {
       self waittill("weapon_change_complete", weapon);
     }
   }
-  while(!self sword_equipped()) {
+  while (!self sword_equipped()) {
     self waittill("weapon_change_complete", weapon);
   }
   if(n_sword_level == 1) {
@@ -1099,24 +1099,24 @@ function sword_use_hint(n_sword_level, var_74719138) {
 }
 
 function function_2c009d2e(e_statue) {
-  if(isDefined(e_statue.trigger)) {
+  if(isdefined(e_statue.trigger)) {
     return;
   }
   s_trigger_pos = struct::get(e_statue.target, "targetname");
-  e_statue.trigger = zm_zod_util::spawn_trigger_radius(s_trigger_pos.origin, 64, 1, &function_2f31f931);
+  e_statue.trigger = zm_zod_util::spawn_trigger_radius(s_trigger_pos.origin, 64, 1, & function_2f31f931);
   e_statue.trigger.statue_id = e_statue.statue_id;
-  while(true) {
+  while (true) {
     e_statue.trigger zm_zod_util::unitrigger_refresh_message();
     e_statue.trigger waittill("trigger", e_who);
-    if(!isDefined(e_who.var_b170d6d6) && !level flag::get("keeper_sword_locker")) {
+    if(!isdefined(e_who.var_b170d6d6) && !level flag::get("keeper_sword_locker")) {
       continue;
     }
-    if(isDefined(e_who.sword_quest.egg_placement)) {
+    if(isdefined(e_who.sword_quest.egg_placement)) {
       if(e_who.sword_quest.egg_placement == e_statue.statue_id) {
         if(e_who.sword_quest.kills[e_statue.statue_id] >= 12) {
           e_who function_abf3df35(undefined);
           e_who thread zm_zod_vo::function_9bd30516();
-          e_who playSound("zmb_zod_egg_pickup");
+          e_who playsound("zmb_zod_egg_pickup");
           if(e_statue.script_noteworthy === "initial_egg_statue") {
             wait(0.1);
             e_who clientfield::set_player_uimodel("zmInventory.player_sword_quest_egg_state", 1);
@@ -1132,31 +1132,31 @@ function function_2c009d2e(e_statue) {
     } else {
       if(e_who.sword_quest.kills[e_statue.statue_id] < 12) {
         e_who function_abf3df35(e_statue.statue_id);
-        e_who playSound("zmb_zod_egg_place");
+        e_who playsound("zmb_zod_egg_place");
         e_who clientfield::set_player_uimodel("zmInventory.widget_egg", 0);
         e_who thread zm_zod_vo::function_c10cc6c5();
       } else {
         if(e_who.sword_quest.upgrade_stage > 0 && e_statue.script_noteworthy === "initial_egg_statue" && e_who.var_b170d6d6 === 0) {
-          e_who playSound("zmb_zod_egg_place");
+          e_who playsound("zmb_zod_egg_place");
           e_who clientfield::set_player_uimodel("zmInventory.widget_egg", 0);
           e_who.var_b170d6d6 = 1;
           e_who thread zm_zod_vo::function_c10cc6c5();
           e_who.sword_quest.egg_placement = undefined;
           switch (e_who.characterindex) {
             case 0: {
-              level.sword_quest.swords[e_who.characterindex] setModel("wpn_t7_zmb_zod_sword1_box_world");
+              level.sword_quest.swords[e_who.characterindex] setmodel("wpn_t7_zmb_zod_sword1_box_world");
               break;
             }
             case 1: {
-              level.sword_quest.swords[e_who.characterindex] setModel("wpn_t7_zmb_zod_sword1_det_world");
+              level.sword_quest.swords[e_who.characterindex] setmodel("wpn_t7_zmb_zod_sword1_det_world");
               break;
             }
             case 2: {
-              level.sword_quest.swords[e_who.characterindex] setModel("wpn_t7_zmb_zod_sword1_fem_world");
+              level.sword_quest.swords[e_who.characterindex] setmodel("wpn_t7_zmb_zod_sword1_fem_world");
               break;
             }
             case 3: {
-              level.sword_quest.swords[e_who.characterindex] setModel("wpn_t7_zmb_zod_sword1_mag_world");
+              level.sword_quest.swords[e_who.characterindex] setmodel("wpn_t7_zmb_zod_sword1_mag_world");
               break;
             }
           }
@@ -1204,21 +1204,21 @@ function sword_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  level thread zm_zod_util::setup_devgui_func("", "", 0, &function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 4, &function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, & function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 4, & function_b3babd8c);
   n_sword_level = 0;
   var_47719d0d = 0;
   s_sword_rock = getent("", "");
-  while(true) {
+  while (true) {
     n_level = getdvarint("");
     if(n_level == 1) {
       foreach(e_player in level.activeplayers) {
         e_player.usingsword = 0;
         e_player zm_weap_glaive::disabled_sword();
         e_player notify("hash_b29853d8");
-        if(isDefined(e_player.var_c0d25105)) {
+        if(isdefined(e_player.var_c0d25105)) {
           e_player.var_c0d25105 notify("returned_to_owner");
         }
         e_player give_sword(n_level, 1);
@@ -1231,7 +1231,7 @@ function sword_devgui() {
         e_player.usingsword = 0;
         e_player zm_weap_glaive::disabled_sword();
         e_player notify("hash_b29853d8");
-        if(isDefined(e_player.var_c0d25105)) {
+        if(isdefined(e_player.var_c0d25105)) {
           e_player.var_c0d25105 notify("returned_to_owner");
         }
         e_player give_sword(n_level, 1);
@@ -1255,7 +1255,7 @@ function sword_devgui() {
     switch (str_cheat) {
       case "": {
         foreach(e_player in level.players) {
-          if(!isDefined(e_player.swordpreserve)) {
+          if(!isdefined(e_player.swordpreserve)) {
             e_player.swordpreserve = 1;
             continue;
           }
@@ -1283,7 +1283,7 @@ function function_31880c32(var_27b0f0e4) {}
 
 function function_b3babd8c(var_5df86706) {
   foreach(player in level.players) {
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
       player clientfield::set_to_player("" + i, var_5df86706);
     }
   }

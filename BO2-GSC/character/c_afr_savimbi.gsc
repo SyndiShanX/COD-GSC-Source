@@ -4,7 +4,7 @@
 ***************************************/
 
 main() {
-  self setModel("c_afr_savimbi_fb");
+  self setmodel("c_afr_savimbi_fb");
   self.voice = "unita";
   self.skeleton = "base";
 }

@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setModel("veh_t6_drone_claw_mk2_alt");
+  self setmodel("veh_t6_drone_claw_mk2_alt");
   self.headmodel = "veh_t6_drone_claw_mk2_turret";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

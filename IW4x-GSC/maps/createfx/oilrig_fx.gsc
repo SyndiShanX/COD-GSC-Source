@@ -3,10 +3,12 @@
  * Script: maps\createfx\oilrig_fx.gsc
 ***************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 291
   ent = createLoopSound();
   ent.v["origin"] = (8.59009, 1485.01, -243.875);
   ent.v["angles"] = (270, 0, 0);
@@ -1592,4 +1594,5 @@ main() {
   ent.v["exploder"] = "exploder_ambush_afterfx";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "nil";
+
 }

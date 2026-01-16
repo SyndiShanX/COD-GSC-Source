@@ -32,9 +32,8 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   self ent_flag_clear("strength_test_half_way");
   self ent_flag_clear("strength_test_complete");
 
-  if(!isDefined(self.strengthtest_max_button_presses)) {
+  if(!isDefined(self.strengthtest_max_button_presses))
     self set_strengthtest_difficulty(15, 8);
-  }
 
   level thread maps\_strength_test::strength_test_update(self, button_prompt_text);
   align_node = getent(align_node_targetname, "targetname");
@@ -49,9 +48,8 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   e_enemy.ignoreme = 1;
   e_enemy magic_bullet_shield();
 
-  if(isDefined(self.strengthtest_enemy_attack_audio)) {
-    e_enemy playSound(self.strengthtest_enemy_attack_audio);
-  }
+  if(isDefined(self.strengthtest_enemy_attack_audio))
+    e_enemy playsound(self.strengthtest_enemy_attack_audio);
 
   self attacking_enemy_dof();
   actors = array(self.body, e_enemy);
@@ -60,9 +58,8 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   align_node thread anim_loop_aligned(actors, "strength_test_loop");
   sound_org = spawn("script_origin", (0, 0, 0));
 
-  if(isDefined(self.strengthtest_fight_looping_audio)) {
-    sound_org playLoopSound(self.strengthtest_fight_looping_audio);
-  }
+  if(isDefined(self.strengthtest_fight_looping_audio))
+    sound_org playloopsound(self.strengthtest_fight_looping_audio);
 
   self ent_flag_wait("strength_test_complete");
   level clientnotify("vcd");
@@ -91,33 +88,27 @@ strength_test_update(player, button_prompt_text) {
   player thread strength_test_fail_timer();
 
   while(player.strengthtest_button_presses <= player.strengthtest_max_button_presses * 0.05) {
-    if(!player ent_flag("strength_test_half_way") && player.strengthtest_button_presses >= player.strengthtest_max_button_presses * 0.05 * 0.5) {
+    if(!player ent_flag("strength_test_half_way") && player.strengthtest_button_presses >= player.strengthtest_max_button_presses * 0.05 * 0.5)
       player ent_flag_set("strength_test_half_way");
-    }
 
     if(player usebuttonpressed()) {
-      if(button_state == 1 || button_state == 3) {
+      if(button_state == 1 || button_state == 3)
         button_state = 2;
-      } else if(button_state == 2) {
+      else if(button_state == 2)
         button_state = 0;
-      }
     } else if(button_state == 0 || button_state == 2)
       button_state = 3;
-    else if(button_state == 3) {
+    else if(button_state == 3)
       button_state = 1;
-    }
 
-    if(button_state == 1) {
+    if(button_state == 1)
       player.strengthtest_button_presses = player.strengthtest_button_presses - decay_rate * 0.05;
-    }
 
-    if(button_state == 2) {
+    if(button_state == 2)
       player.strengthtest_button_presses = player.strengthtest_button_presses + 1 / player.strengthtest_max_button_presses;
-    }
 
-    if(player.strengthtest_button_presses <= 0) {
+    if(player.strengthtest_button_presses <= 0)
       player.strengthtest_button_presses = 0;
-    }
 
     wait 0.05;
   }
@@ -132,17 +123,15 @@ strength_test_fail_timer() {
   x = fail_time * 1.01;
   blur = 1;
 
-  if(isDefined(self.strengthtest_blur) && self.strengthtest_blur == 0) {
+  if(isDefined(self.strengthtest_blur) && self.strengthtest_blur == 0)
     blur = 0;
-  }
 
   while(true) {
-    if(isgodmode(self)) {
+    if(isgodmode(self))
       fail_time = 10;
-    } else {
-      if(blur) {
+    else {
+      if(blur)
         self setblur(x - fail_time, 0.05);
-      }
 
       if(fail_time <= 0) {
         level notify("end");
@@ -221,17 +210,14 @@ strength_test_button_prompt(button_message) {
 }
 
 strength_test_screen_out(shader, time) {
-  if(!isDefined(shader)) {
+  if(!isDefined(shader))
     shader = "black";
-  }
 
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 2.0;
-  }
 
-  if(isDefined(level.st_fade_screen)) {
+  if(isDefined(level.st_fade_screen))
     level.st_fade_screen destroy();
-  }
 
   level.st_fade_screen = newhudelem();
   level.st_fade_screen.x = 0;
@@ -241,9 +227,9 @@ strength_test_screen_out(shader, time) {
   level.st_fade_screen.foreground = 1;
   level.st_fade_screen setshader(shader, 640, 480);
 
-  if(time == 0) {
+  if(time == 0)
     level.st_fade_screen.alpha = 1;
-  } else {
+  else {
     level.st_fade_screen.alpha = 0;
     level.st_fade_screen fadeovertime(time);
     level.st_fade_screen.alpha = 1;

@@ -7,7 +7,7 @@
 #include xmodelalias\c_mul_cordis_head_als;
 
 main() {
-  self setModel("c_mul_cordis_body1_3");
+  self setmodel("c_mul_cordis_body1_3");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_mul_cordis_head_als::main());
   self attach(self.headmodel, "", 1);
   self.voice = "terrorist";

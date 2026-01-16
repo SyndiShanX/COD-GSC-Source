@@ -212,9 +212,8 @@ perktablelookupimage(var_0) {
 }
 
 validateperk(var_0, var_1) {
-  if(getdvarint("scr_game_perks") == 0) {
+  if(getdvarint("scr_game_perks") == 0)
     return "specialty_null";
-  }
 
   if(var_0 == 0) {
     switch (var_1) {
@@ -274,16 +273,15 @@ validateperk(var_0, var_1) {
 getemptyperks() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 3; var_1++) {
+  for (var_1 = 0; var_1 < 3; var_1++)
     var_0[var_1] = "specialty_null";
-  }
 
   return var_0;
 }
 
 onplayerconnect() {
   level endon("game_ended");
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -307,17 +305,14 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   assert(isPlayer(victim));
   assert(isDefined(victim.team));
 
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker) || !maps\mp\_utility::invirtuallobby() && !isplayer(victim)) {
+  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker) || !maps\mp\_utility::invirtuallobby() && !isplayer(victim))
     return damage;
-  }
 
-  if(attacker.sessionstate != "playing" || !isDefined(damage) || !isDefined(meansofdeath)) {
+  if(attacker.sessionstate != "playing" || !isDefined(damage) || !isDefined(meansofdeath))
     return damage;
-  }
 
-  if(meansofdeath == "") {
+  if(meansofdeath == "")
     return damage;
-  }
 
   //if( isDefined( victim.inlaststand ) && victim.inlaststand )
   //return 0;
@@ -329,30 +324,27 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   if(isPrimaryDamage(meansofdeath)) {
     assert(isDefined(attacker));
 
-    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest")) {
+    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))
       damageAdd += 0;
-    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
+    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage"))
       damageAdd += damage * level.bulletDamageMod;
-    } else if(victim _hasPerk("specialty_armorvest")) {
+    else if(victim _hasPerk("specialty_armorvest"))
       damageAdd -= damage * (level.armorVestMod * -1);
-    }
 
-    if(isPlayer(attacker) && attacker _hasPerk("specialty_fmj") && victim _hasPerk("specialty_armorvest")) {
+    if(isPlayer(attacker) && attacker _hasPerk("specialty_fmj") && victim _hasPerk("specialty_armorvest"))
       damageAdd += damage * level.hollowPointDamageMod;
-    }
   } else if(isExplosiveDamage(meansofdeath)) {
-    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && isDefined(victim.blastShielded)) {
+    if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && isDefined(victim.blastShielded))
       damageAdd += 0;
-    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
+    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage"))
       damageAdd += damage * level.explosiveDamageMod;
-    } else if(isDefined(victim.blastShielded)) {
+    else if(isDefined(victim.blastShielded))
       damageAdd -= damage * (level.blastShieldMod * -1);
-    } else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) // is this needed?
+    else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) // is this needed?
       damageAdd *= level.juggernautmod;
 
-    if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose")) {
+    if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose"))
       damageAdd += damage * level.dangerCloseMod;
-    }
   } else if(meansofdeath == "MOD_FALLING") {
     if(victim _hasPerk("specialty_falldamage")) {
       damageAdd = 0;
@@ -405,7 +397,9 @@ initperkdvars() {
   level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %
 }
 
-cac_selector() {}
+cac_selector() {
+
+}
 
 giveblindeyeafterspawn() {
   self endon("death");
@@ -413,7 +407,7 @@ giveblindeyeafterspawn() {
   maps\mp\_utility::giveperk("specialty_blindeye", 0);
   self.spawnperk = 1;
 
-  while(self.avoidkillstreakonspawntimer > 0) {
+  while (self.avoidkillstreakonspawntimer > 0) {
     self.avoidkillstreakonspawntimer -= 0.05;
     wait 0.05;
   }
@@ -430,15 +424,14 @@ applyperks() {
 
   table = "mp/perkTable.csv";
 
-  for(i = 0; i < tablegetrowcount(table); i++) {
+  for (i = 0; i < tablegetrowcount(table); i++) {
     pro_perk = tableLookup(table, 0, i, 8);
 
     if(!isSubStr(pro_perk, "specialty_")) {
       continue;
     }
-    if(self maps\mp\_utility::_hasPerk(pro_perk)) {
+    if(self maps\mp\_utility::_hasPerk(pro_perk))
       self maps\mp\_utility::givePerk(tableLookup(table, 0, i, 1), false);
-    }
   }
 }
 
@@ -449,17 +442,15 @@ get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
 
   if(var_1 == "specialty1") {
     if(issubstr(var_3, "grenade")) {
-      if(var_0 == "specialty_fraggrenade") {
+      if(var_0 == "specialty_fraggrenade")
         self.perkscustom["grenades_count"] = var_4;
-      } else {
+      else
         self.perkscustom["grenades_count"] = 1;
-      }
 
-      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp") {
+      if(var_0 == "specialty_specialgrenade" && isdefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
         self.perkscustom["specialgrenades_count"] = var_4;
-      } else {
+      else
         self.perkscustom["specialgrenades_count"] = 1;
-      }
 
       return;
     } else {
@@ -477,7 +468,7 @@ get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
 giveperkinventory() {
   var_0 = self.perkscustom["inventory"];
 
-  if(isDefined(var_0) && var_0 != "") {
+  if(isdefined(var_0) && var_0 != "") {
     var_0 = "h1_" + var_0;
     self giveweapon(var_0);
     setweaponammooverall(var_0, self.perkscustom["inventory_count"]);
@@ -487,9 +478,9 @@ giveperkinventory() {
 }
 
 setweaponammooverall(var_0, var_1) {
-  if(isweaponcliponly(var_0)) {
+  if(isweaponcliponly(var_0))
     self setweaponammoclip(var_0, var_1);
-  } else {
+  else {
     self setweaponammoclip(var_0, var_1);
     var_2 = var_1 - self getweaponammoclip(var_0);
     self setweaponammostock(var_0, var_2);

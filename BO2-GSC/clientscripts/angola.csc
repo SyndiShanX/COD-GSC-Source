@@ -25,9 +25,8 @@ main() {
 }
 
 toggle_extra_cam(localclientnum, set, newent) {
-  if(!isDefined(level.extracamactive)) {
+  if(!isDefined(level.extracamactive))
     level.extracamactive = 0;
-  }
 
   if(!level.extracamactive && set) {
     println("**** extra cam on - client****");
@@ -76,9 +75,8 @@ fade_in_static() {
     set_filter_angola_gun_cam(player, 0, amount);
     amount = amount - 0.05;
 
-    if(amount <= 0.25) {
+    if(amount <= 0.25)
       amount = 0.25;
-    }
 
     wait 0.05;
   }
@@ -92,9 +90,8 @@ fade_out_static() {
     set_filter_angola_gun_cam(player, 0, amount);
     amount = amount + 0.0375;
 
-    if(amount >= 1) {
+    if(amount >= 1)
       amount = 1;
-    }
 
     wait 0.05;
   }

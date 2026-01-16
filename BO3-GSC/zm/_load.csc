@@ -49,16 +49,16 @@ function warnmissilelocked(localclientnum, set) {}
 function warnmissilefired(localclientnum, set) {}
 
 function main() {
-  /
+  /# /
   #
-  assert(isDefined(level.first_frame), "");
+  assert(isdefined(level.first_frame), "");
   zm::init();
   level thread server_time();
   level thread util::init_utility();
-  util::register_system("levelNotify", &levelnotifyhandler);
+  util::register_system("levelNotify", & levelnotifyhandler);
   register_clientfields();
   level.createfx_disable_fx = getdvarint("disable_fx") == 1;
-  if(isDefined(level._uses_sticky_grenades) && level._uses_sticky_grenades) {
+  if(isdefined(level._uses_sticky_grenades) && level._uses_sticky_grenades) {
     level thread _sticky_grenade::main();
   }
   system::wait_till("all");
@@ -67,14 +67,14 @@ function main() {
 }
 
 function server_time() {
-  for(;;) {
+  for (;;) {
     level.servertime = getservertime(0);
     wait(0.01);
   }
 }
 
 function register_clientfields() {
-  clientfield::register("allplayers", "zmbLastStand", 1, 1, "int", &zm::laststand, 0, 1);
+  clientfield::register("allplayers", "zmbLastStand", 1, 1, "int", & zm::laststand, 0, 1);
   clientfield::register("clientuimodel", "zmhud.swordEnergy", 1, 7, "float", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.swordState", 1, 4, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.swordChargeUpdate", 1, 1, "counter", undefined, 0, 0);

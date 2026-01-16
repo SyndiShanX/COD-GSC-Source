@@ -12,9 +12,9 @@ init_foliage_cover() {
 }
 
 init_foliage_triggers() {
-  prone_triggers = getEntArray("foliage_cover_prone", "script_noteworthy");
-  crouch_triggers = getEntArray("foliage_cover_crouch", "script_noteworthy");
-  stand_triggers = getEntArray("foliage_cover_stand", "script_noteworthy");
+  prone_triggers = getentarray("foliage_cover_prone", "script_noteworthy");
+  crouch_triggers = getentarray("foliage_cover_crouch", "script_noteworthy");
+  stand_triggers = getentarray("foliage_cover_stand", "script_noteworthy");
   array_thread(prone_triggers, ::foliage_cover_watch_trigger);
   array_thread(crouch_triggers, ::foliage_cover_watch_trigger);
   array_thread(stand_triggers, ::foliage_cover_watch_trigger);
@@ -49,9 +49,10 @@ calculate_foliage_cover(stance) {
   current_trig = get_current_foliage_trigger();
   dist = level.foliage_cover.sight_dist["no_cover"];
 
-  if(isDefined(current_trig)) {
-    dist = [[level.foliage_cover.cover_think[current_trig.script_noteworthy]]]();
-  }
+  if(isDefined(current_trig))
+    dist = [
+      [level.foliage_cover.cover_think[current_trig.script_noteworthy]]
+    ]();
 
   return dist;
 }
@@ -77,11 +78,10 @@ pop_trig_on_leave(guy) {
 cover_prone_think() {
   stance = self getstance();
 
-  if(stance == "prone") {
+  if(stance == "prone")
     dist = self thread set_modified_sight_dist("foliage_cover_prone");
-  } else {
+  else
     dist = self thread set_modified_sight_dist("no_cover");
-  }
 
   return dist;
 }
@@ -89,11 +89,10 @@ cover_prone_think() {
 cover_crouch_think() {
   stance = self getstance();
 
-  if(stance == "prone" || stance == "crouch") {
+  if(stance == "prone" || stance == "crouch")
     dist = self set_modified_sight_dist("foliage_cover_crouch");
-  } else {
+  else
     dist = self set_modified_sight_dist("no_cover");
-  }
 
   return dist;
 }
@@ -101,11 +100,10 @@ cover_crouch_think() {
 cover_stand_think() {
   stance = self getstance();
 
-  if(stance == "prone" || stance == "crouch" || stance == "stand") {
+  if(stance == "prone" || stance == "crouch" || stance == "stand")
     dist = self set_modified_sight_dist("foliage_cover_stand");
-  } else {
+  else
     dist = self set_modified_sight_dist("no_cover");
-  }
 
   return dist;
 }
@@ -126,9 +124,8 @@ set_modified_sight_dist(trigger_type) {
       break;
   }
 
-  if(!isDefined(self.foliage_last_stance)) {
+  if(!isDefined(self.foliage_last_stance))
     self.foliage_last_stance = curr_stance;
-  }
 
   return dist;
 }
@@ -136,29 +133,25 @@ set_modified_sight_dist(trigger_type) {
 push_foliage_trigger(trigger) {
   ent_flag_set("_stealth_in_foliage");
 
-  if(!isDefined(self.foliage_trigger_stack)) {
+  if(!isDefined(self.foliage_trigger_stack))
     self.foliage_trigger_stack = [];
-  }
 
   self.foliage_trigger_stack[self.foliage_trigger_stack.size] = trigger;
 }
 
 pop_foliage_trigger(trigger) {
-  if(trigger == self.foliage_trigger_stack[self.foliage_trigger_stack.size - 1]) {
+  if(trigger == self.foliage_trigger_stack[self.foliage_trigger_stack.size - 1])
     self notify("left_top_trigger");
-  }
 
   arrayremovevalue(self.foliage_trigger_stack, trigger);
 
-  if(self.foliage_trigger_stack.size == 0) {
+  if(self.foliage_trigger_stack.size == 0)
     ent_flag_clear("_stealth_in_foliage");
-  }
 }
 
 get_current_foliage_trigger() {
-  if(isDefined(self.foliage_trigger_stack) && self.foliage_trigger_stack.size > 0) {
+  if(isDefined(self.foliage_trigger_stack) && self.foliage_trigger_stack.size > 0)
     return self.foliage_trigger_stack[self.foliage_trigger_stack.size - 1];
-  }
 
   return undefined;
 }

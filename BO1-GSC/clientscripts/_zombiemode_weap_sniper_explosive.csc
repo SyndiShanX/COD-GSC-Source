@@ -38,6 +38,6 @@ sniper_explosive_death_response(localClientNum, set, newEnt) {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
     self clientscripts\_zombiemode::deleteZombieEyes(i);
-    playFX(i, level._effect["sniper_explosive_death_mist"], tag_pos);
+    playfx(i, level._effect["sniper_explosive_death_mist"], tag_pos);
   }
 }

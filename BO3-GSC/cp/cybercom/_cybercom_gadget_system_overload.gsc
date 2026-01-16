@@ -26,15 +26,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(0, 1);
-  level.cybercom.system_overload = spawnStruct();
-  level.cybercom.system_overload._is_flickering = &_is_flickering;
-  level.cybercom.system_overload._on_flicker = &_on_flicker;
-  level.cybercom.system_overload._on_give = &_on_give;
-  level.cybercom.system_overload._on_take = &_on_take;
-  level.cybercom.system_overload._on_connect = &_on_connect;
-  level.cybercom.system_overload._on = &_on;
-  level.cybercom.system_overload._off = &_off;
-  level.cybercom.system_overload._is_primed = &_is_primed;
+  level.cybercom.system_overload = spawnstruct();
+  level.cybercom.system_overload._is_flickering = & _is_flickering;
+  level.cybercom.system_overload._on_flicker = & _on_flicker;
+  level.cybercom.system_overload._on_give = & _on_give;
+  level.cybercom.system_overload._on_take = & _on_take;
+  level.cybercom.system_overload._on_connect = & _on_connect;
+  level.cybercom.system_overload._on = & _on;
+  level.cybercom.system_overload._off = & _off;
+  level.cybercom.system_overload._is_primed = & _is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -48,8 +48,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_110c156a = getdvarint("scr_system_overload_upgraded_count", 5);
     self.cybercom.system_overload_lifetime = getdvarfloat("scr_system_overload_upgraded_lifetime", 6.3) * 1000;
   }
-  self.cybercom.targetlockcb = &_get_valid_targets;
-  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.targetlockcb = & _get_valid_targets;
+  self.cybercom.targetlockrequirementcb = & _lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -74,7 +74,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self notify("hash_eec19461");
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
@@ -83,18 +83,18 @@ function _is_primed(slot, weapon) {
 }
 
 function private _lock_requirement(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return false;
   }
   if(target cybercom::cybercom_aicheckoptout("cybercom_systemoverload")) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isDefined(target.hijacked) && target.hijacked) {
+  if(isdefined(target.hijacked) && target.hijacked) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isDefined(target.is_disabled) && target.is_disabled) {
+  if(isdefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
@@ -123,7 +123,7 @@ function private _activate_system_overload(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
+    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -145,7 +145,7 @@ function private _activate_system_overload(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_systemoverload");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -153,13 +153,13 @@ function private _activate_system_overload(slot, weapon) {
 }
 
 function private _system_overload_vehicle(attacker, weapon) {
-  if(isDefined(self.var_7c04bee3) && gettime() < self.var_7c04bee3) {
+  if(isdefined(self.var_7c04bee3) && gettime() < self.var_7c04bee3) {
     return;
   }
   self clientfield::set("cybercom_sysoverload", 1);
   self stopsounds();
   damage = 5;
-  if(isDefined(self.archetype)) {
+  if(isdefined(self.archetype)) {
     if(self.archetype == "wasp") {
       damage = 25;
     }
@@ -169,7 +169,7 @@ function private _system_overload_vehicle(attacker, weapon) {
 }
 
 function ai_activatesystemoverload(target, var_9bc2efcb = 1, disabletimemsec) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -189,7 +189,7 @@ function ai_activatesystemoverload(target, var_9bc2efcb = 1, disabletimemsec) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
@@ -213,18 +213,18 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
     return;
   }
   if(!cybercom::function_76e3026d(self)) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   self.is_disabled = 1;
-  if(isDefined(disabletimemsec)) {
+  if(isdefined(disabletimemsec)) {
     disabletime = disabletimemsec;
   } else {
-    if(isDefined(attacker.cybercom) && isDefined(attacker.cybercom.system_overload_lifetime)) {
+    if(isdefined(attacker.cybercom) && isdefined(attacker.cybercom.system_overload_lifetime)) {
       disabletime = attacker.cybercom.system_overload_lifetime;
     } else {
       disabletime = getdvarfloat("scr_system_overload_lifetime", 6.3) * 1000;
@@ -251,11 +251,11 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
   waittillframeend();
   self ai::set_behavior_attribute("robot_lights", 2);
   self.ignoreall = 1;
-  while(gettime() < disablefor) {
+  while (gettime() < disablefor) {
     if(var_c60a5dd5) {
       blackboard::setblackboardattribute(self, "_stance", "crouch");
     }
-    self dodamage(2, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+    self dodamage(2, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
     self waittillmatch("bhtn_action_terminate");
   }
   if(isalive(self) && !self isragdoll()) {
@@ -272,7 +272,7 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
     if(var_fea6d69a) {
       self ai::set_behavior_attribute("move_mode", "marching");
     }
-    if(isDefined(var_243ca3e3)) {
+    if(isdefined(var_243ca3e3)) {
       self useposition(var_243ca3e3);
       self clearpath();
     }

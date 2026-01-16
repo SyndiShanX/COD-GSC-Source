@@ -131,7 +131,7 @@ event4_kick_door_open(guy) {
   guy SetGoalNode(node);
   flankers = get_ai_group_ai("event4_flankers");
   nodes = GetNodeArray("event4_flank_nodes", "targetname");
-  for(i = 0; i < flankers.size; i++) {
+  for (i = 0; i < flankers.size; i++) {
     flankers[i] SetGoalNode(nodes[i]);
   }
 }

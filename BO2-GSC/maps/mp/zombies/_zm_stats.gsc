@@ -179,18 +179,16 @@ player_stats_init() {
   self maps\mp\zombies\_zm_pers_upgrades::pers_abilities_init_globals();
   self maps\mp\gametypes_zm\_globallogic_score::initpersstat("score", 0);
 
-  if(level.resetplayerscoreeveryround) {
+  if(level.resetplayerscoreeveryround)
     self.pers["score"] = 0;
-  }
 
   self.pers["score"] = level.player_starting_points;
   self.score = self.pers["score"];
   self incrementplayerstat("score", self.score);
   self maps\mp\gametypes_zm\_globallogic_score::initpersstat("zteam", 0);
 
-  if(isDefined(level.level_specific_stats_init)) {
+  if(isDefined(level.level_specific_stats_init))
     [[level.level_specific_stats_init]]();
-  }
 
   if(!isDefined(self.stats_this_frame)) {
     self.pers_upgrade_force_test = 1;
@@ -207,16 +205,14 @@ update_players_stats_at_match_end(players) {
   game_mode_group = level.scr_zm_ui_gametype_group;
   map_location_name = level.scr_zm_map_start_location;
 
-  if(map_location_name == "") {
+  if(map_location_name == "")
     map_location_name = "default";
-  }
 
   if(isDefined(level.gamemodulewinningteam)) {
-    if(level.gamemodulewinningteam == "B") {
+    if(level.gamemodulewinningteam == "B")
       matchrecorderincrementheaderstat("winningTeam", 1);
-    } else if(level.gamemodulewinningteam == "A") {
+    else if(level.gamemodulewinningteam == "A")
       matchrecorderincrementheaderstat("winningTeam", 2);
-    }
   }
 
   recordmatchsummaryzombieendgamedata(game_mode, game_mode_group, map_location_name, level.round_number);
@@ -235,15 +231,13 @@ update_players_stats_at_match_end(players) {
     recordplayerstats(player, "presentAtEnd", 1);
     player maps\mp\zombies\_zm_weapons::updateweapontimingszm(newtime);
 
-    if(isDefined(level._game_module_stat_update_func)) {
+    if(isDefined(level._game_module_stat_update_func))
       player[[level._game_module_stat_update_func]]();
-    }
 
     old_high_score = player get_game_mode_stat(game_mode, "score");
 
-    if(player.score_total > old_high_score) {
+    if(player.score_total > old_high_score)
       player set_game_mode_stat(game_mode, "score", player.score_total);
-    }
 
     if(gamemodeismode(level.gamemode_public_match)) {
       player gamehistoryfinishmatch(4, 0, 0, 0, 0, 0);
@@ -261,9 +255,8 @@ update_players_stats_at_match_end(players) {
       }
     }
 
-    if(!isDefined(player.pers["previous_distance_traveled"])) {
+    if(!isDefined(player.pers["previous_distance_traveled"]))
       player.pers["previous_distance_traveled"] = 0;
-    }
 
     distancethisround = int(player.pers["distance_traveled"] - player.pers["previous_distance_traveled"]);
     player.pers["previous_distance_traveled"] = player.pers["distance_traveled"];
@@ -295,9 +288,11 @@ update_playing_utc_time(matchendutctime) {
   }
 }
 
-survival_classic_custom_stat_update() {}
+survival_classic_custom_stat_update() {
+}
 
-grief_custom_stat_update() {}
+grief_custom_stat_update() {
+}
 
 add_game_mode_group_stat(game_mode, stat_name, value) {
   if(is_true(level.zm_disable_recording_stats)) {
@@ -354,17 +349,15 @@ add_global_stat(stat_name, value) {
 }
 
 get_map_stat(stat_name, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   return self getdstat("PlayerStatsByMap", map, stat_name);
 }
 
 set_map_stat(stat_name, value, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   if(is_true(level.zm_disable_recording_stats)) {
     return;
@@ -373,9 +366,8 @@ set_map_stat(stat_name, value, map) {
 }
 
 add_map_stat(stat_name, value, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   if(is_true(level.zm_disable_recording_stats)) {
     return;
@@ -402,32 +394,28 @@ add_location_gametype_stat(start_location, game_type, stat_name, value) {
 }
 
 get_map_weaponlocker_stat(stat_name, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   return self getdstat("PlayerStatsByMap", map, "weaponLocker", stat_name);
 }
 
 set_map_weaponlocker_stat(stat_name, value, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   if(is_true(level.zm_disable_recording_stats)) {
     return;
   }
-  if(isDefined(value)) {
+  if(isDefined(value))
     self setdstat("PlayerStatsByMap", map, "weaponLocker", stat_name, value);
-  } else {
+  else
     self setdstat("PlayerStatsByMap", map, "weaponLocker", stat_name, 0);
-  }
 }
 
 add_map_weaponlocker_stat(stat_name, value, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   if(is_true(level.zm_disable_recording_stats)) {
     return;
@@ -436,23 +424,20 @@ add_map_weaponlocker_stat(stat_name, value, map) {
 }
 
 has_stored_weapondata(map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   storedweapon = self get_map_weaponlocker_stat("name", map);
 
-  if(!isDefined(storedweapon) || isstring(storedweapon) && storedweapon == "" || isint(storedweapon) && storedweapon == 0) {
+  if(!isDefined(storedweapon) || isstring(storedweapon) && storedweapon == "" || isint(storedweapon) && storedweapon == 0)
     return false;
-  }
 
   return true;
 }
 
 get_stored_weapondata(map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   if(self has_stored_weapondata(map)) {
     weapondata = [];
@@ -469,9 +454,8 @@ get_stored_weapondata(map) {
 }
 
 clear_stored_weapondata(map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   self set_map_weaponlocker_stat("name", "", map);
   self set_map_weaponlocker_stat("lh_clip", 0, map);
@@ -482,9 +466,8 @@ clear_stored_weapondata(map) {
 }
 
 set_stored_weapondata(weapondata, map) {
-  if(!isDefined(map)) {
+  if(!isDefined(map))
     map = level.script;
-  }
 
   self set_map_weaponlocker_stat("name", weapondata["name"], map);
   self set_map_weaponlocker_stat("lh_clip", weapondata["lh_clip"], map);
@@ -498,9 +481,8 @@ add_client_stat(stat_name, stat_value, include_gametype) {
   if(getdvar(#"ui_zm_mapstartlocation") == "" || is_true(level.zm_disable_recording_stats)) {
     return;
   }
-  if(!isDefined(include_gametype)) {
+  if(!isDefined(include_gametype))
     include_gametype = 1;
-  }
 
   self maps\mp\gametypes_zm\_globallogic_score::incpersstat(stat_name, stat_value, 0, include_gametype);
   self.stats_this_frame[stat_name] = 1;
@@ -556,11 +538,10 @@ get_stat_distance_traveled() {
   miles = int(self.pers["distance_traveled"] / 63360);
   remainder = self.pers["distance_traveled"] / 63360 - miles;
 
-  if(miles < 1 && remainder < 0.5) {
+  if(miles < 1 && remainder < 0.5)
     miles = 1;
-  } else if(remainder >= 0.5) {
+  else if(remainder >= 0.5)
     miles++;
-  }
 
   return miles;
 }
@@ -573,9 +554,8 @@ get_stat_combined_rank_value_survival_classic() {
   rounds = get_stat_round_number();
   kills = self.pers["kills"];
 
-  if(rounds > 99) {
+  if(rounds > 99)
     rounds = 99;
-  }
 
   result = rounds * 10000000 + kills;
   return result;
@@ -585,13 +565,11 @@ get_stat_combined_rank_value_grief() {
   wins = self.pers["wins"];
   losses = self.pers["losses"];
 
-  if(wins > 9999) {
+  if(wins > 9999)
     wins = 9999;
-  }
 
-  if(losses > 9999) {
+  if(losses > 9999)
     losses = 9999;
-  }
 
   losses_value = 9999 - losses;
   result = wins * 10000 + losses_value;
@@ -813,9 +791,8 @@ update_global_counters_on_match_end() {
   incrementcounter("global_zm_" + game_mode, 1);
   incrementcounter("global_zm_games", 1);
 
-  if("zclassic" == game_mode || "zm_nuked" == level.script) {
+  if("zclassic" == game_mode || "zm_nuked" == level.script)
     incrementcounter("global_zm_games_" + level.script, 1);
-  }
 
   incrementcounter("global_zm_killed", level.global_zombies_killed);
   incrementcounter("global_zm_killed_by_players", kills);
@@ -931,17 +908,16 @@ do_stats_for_gibs(zombie, limb_tags_array) {
     foreach(limb in limb_tags_array) {
       stat_name = undefined;
 
-      if(limb == level._zombie_gib_piece_index_right_arm) {
+      if(limb == level._zombie_gib_piece_index_right_arm)
         stat_name = "right_arm_gibs";
-      } else if(limb == level._zombie_gib_piece_index_left_arm) {
+      else if(limb == level._zombie_gib_piece_index_left_arm)
         stat_name = "left_arm_gibs";
-      } else if(limb == level._zombie_gib_piece_index_right_leg) {
+      else if(limb == level._zombie_gib_piece_index_right_leg)
         stat_name = "right_leg_gibs";
-      } else if(limb == level._zombie_gib_piece_index_left_leg) {
+      else if(limb == level._zombie_gib_piece_index_left_leg)
         stat_name = "left_leg_gibs";
-      } else if(limb == level._zombie_gib_piece_index_head) {
+      else if(limb == level._zombie_gib_piece_index_head)
         stat_name = "head_gibs";
-      }
 
       if(!isDefined(stat_name)) {
         continue;

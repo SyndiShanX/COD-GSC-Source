@@ -299,12 +299,10 @@ _flag_wait_trigger(message, continuous) {
 
 wait_endon(waitTime, endOnString, endonString2, endonString3) {
   self endon(endOnString);
-  if(isDefined(endonString2)) {
+  if(isDefined(endonString2))
     self endon(endonString2);
-  }
-  if(isDefined(endonString3)) {
+  if(isDefined(endonString3))
     self endon(endonString3);
-  }
   wait(waitTime);
 }
 
@@ -321,7 +319,7 @@ level_end_save() {
   }
   flag_set("game_saving");
   imagename = "levelshots / autosave / autosave_" + level.script + "end";
-  saveGame("levelend", &"AUTOSAVE_AUTOSAVE", imagename, true);
+  saveGame("levelend", & "AUTOSAVE_AUTOSAVE", imagename, true);
   flag_clear("game_saving");
 }
 
@@ -409,7 +407,9 @@ compareSizesFx(org, array, dist, compareFunc) {
     keys = getArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].v["origin"], org);
-      if([[compareFunc]](newDist, dist)) {
+      if([
+          [compareFunc]
+        ](newDist, dist)) {
         continue;
       }
       dist = newdist;
@@ -442,7 +442,9 @@ compareSizes(org, array, dist, compareFunc) {
     keys = GetArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].origin, org);
-      if([[compareFunc]](newDist, dist)) {
+      if([
+          [compareFunc]
+        ](newDist, dist)) {
         continue;
       }
       dist = newdist;
@@ -532,11 +534,11 @@ get_highest_dot(start, end, array) {
   }
   ent = undefined;
   angles = VectorToAngles(end - start);
-  dotforward = anglesToForward(angles);
+  dotforward = AnglesToForward(angles);
   dot = -1;
   for(i = 0; i < array.size; i++) {
     angles = vectorToAngles(array[i].origin - start);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     newdot = VectorDot(dotforward, forward);
     if(newdot < dot) {
       continue;
@@ -756,7 +758,7 @@ magic_bullet_shield() {
     if(IsAI(self) || IsPlayer(self)) {
       self.magic_bullet_shield = true;
       if(!isDefined(self._mbs)) {
-        self._mbs = spawnStruct();
+        self._mbs = SpawnStruct();
       }
       if(IsAI(self)) {
         AssertEx(IsAlive(self), "Tried to do magic_bullet_shield on a dead or undefined guy.");
@@ -1234,7 +1236,7 @@ play_sound_on_tag(alias, tag, ends_on_death) {
     org.angles = self.angles;
     org LinkTo(self);
   }
-  org playSound(alias, "sounddone");
+  org PlaySound(alias, "sounddone");
   if(isDefined(ends_on_death)) {
     assertex(ends_on_death, "ends_on_death must be true or undefined");
     wait_for_sounddone_or_death(org);
@@ -1310,7 +1312,7 @@ play_sound_in_space(alias, origin, master) {
   if(isDefined(master) && master) {
     org PlaySoundAsMaster(alias, "sounddone");
   } else {
-    org playSound(alias, "sounddone");
+    org PlaySound(alias, "sounddone");
   }
   org waittill("sounddone");
   if(isDefined(org)) {
@@ -1478,7 +1480,7 @@ waittill_dead(guys, num, timeoutLength) {
     }
     guys = newArray;
   }
-  ent = spawnStruct();
+  ent = SpawnStruct();
   if(isDefined(timeoutLength)) {
     ent endon("thread_timed_out");
     ent thread waittill_dead_timeout(timeoutLength);
@@ -1827,7 +1829,7 @@ draw_arrow_time(start, end, color, duration) {
   pts = [];
   angles = VectorToAngles(start - end);
   right = AnglesToRight(angles);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
   dist = Distance(start, end);
   arrow = [];
@@ -1852,7 +1854,7 @@ draw_arrow(start, end, color) {
   pts = [];
   angles = VectorToAngles(start - end);
   right = AnglesToRight(angles);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   dist = Distance(start, end);
   arrow = [];
   range = 0.05;
@@ -1912,7 +1914,7 @@ debugorigin() {
   self endon("Debug origin");
   self endon("death");
   for(;;) {
-    forward = anglesToForward(self.angles);
+    forward = AnglesToForward(self.angles);
     forwardFar = vector_scale(forward, 30);
     forwardClose = vector_scale(forward, 20);
     right = AnglesToRight(self.angles);
@@ -2040,7 +2042,7 @@ array_removeDead(array) {
 }
 
 struct_arrayspawn() {
-  struct = spawnStruct();
+  struct = SpawnStruct();
   struct.array = [];
   struct.lastindex = 0;
   return struct;
@@ -2488,7 +2490,7 @@ vehicle_dynamicpath(node, bwaitforstart) {
 }
 
 groundpos(origin) {
-  return bulletTrace(origin, (origin + (0, 0, -100000)), 0, self)["position"];
+  return bullettrace(origin, (origin + (0, 0, -100000)), 0, self)["position"];
 }
 
 playergroundpos(origin) {
@@ -2501,7 +2503,7 @@ getvehiclespawner(targetname) {
 }
 
 getvehiclespawnerarray(targetname) {
-  spawner = getEntArray(targetname + "_vehiclespawner", "targetname");
+  spawner = getentarray(targetname + "_vehiclespawner", "targetname");
   return spawner;
 }
 
@@ -2531,7 +2533,7 @@ add_start(msg, func, loc_string) {
     precachestring(loc_string);
     level.start_loc_string[msg] = loc_string;
   } else {
-    level.start_loc_string[msg] = &"MISSING_LOC_STRING";
+    level.start_loc_string[msg] = & "MISSING_LOC_STRING";
   }
 }
 
@@ -2618,7 +2620,7 @@ start_teleport(start_name, ai_names, coop_sort) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = AnglesToForward(start_angles);
   dot = VectorDot(forward, normal);
   return dot >= fov;
 }
@@ -3070,21 +3072,21 @@ wait_for_flag_or_timeout(msg, timer) {
   if(flag(msg)) {
     return;
   }
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread ent_waits_for_level_notify(msg);
   ent thread ent_times_out(timer);
   ent waittill("done");
 }
 
 wait_for_trigger_or_timeout(timer) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread ent_waits_for_trigger(self);
   ent thread ent_times_out(timer);
   ent waittill("done");
 }
 
 wait_for_either_trigger(msg1, msg2) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   array = [];
   array = array_combine(array, getEntArray(msg1, "targetname"));
   array = array_combine(array, getEntArray(msg2, "targetname"));
@@ -3159,9 +3161,8 @@ disable_cqbwalk() {
 }
 
 enable_cqbsprint() {
-  if(!(self animscripts\utility::isCQBWalking())) {
+  if(!(self animscripts\utility::isCQBWalking()))
     self enable_cqbwalk();
-  }
   self.sprint = true;
 }
 
@@ -3361,9 +3362,8 @@ enable_ai_reviver() {
 
 switch_weapon_ASAP() {
   assertEX(IsAI(self), "Can only call this function on an AI character");
-  if(IsAlive(self) && !self.a.weapon_switch_ASAP) {
+  if(IsAlive(self) && !self.a.weapon_switch_ASAP)
     self.a.weapon_switch_ASAP = true;
-  }
 }
 
 sg_precachemodel(model) {
@@ -3792,7 +3792,7 @@ timer(time) {
 }
 
 waittill_either_function(func1, parm1, func2, parm2) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   thread waittill_either_function_internal(ent, func1, parm1);
   thread waittill_either_function_internal(ent, func2, parm2);
   ent waittill("done");
@@ -3877,7 +3877,7 @@ kill_spawnernum(number) {
 
 function_stack(func, param1, param2, param3, param4) {
   self endon("death");
-  localentity = spawnStruct();
+  localentity = spawnstruct();
   localentity thread function_stack_proc(self, func, param1, param2, param3, param4);
   localentity waittill_either("function_done", "death");
 }
@@ -3902,12 +3902,12 @@ set_goal_ent(target) {
 }
 
 run_thread_on_targetname(msg, func, param1, param2, param3) {
-  array = getEntArray(msg, "targetname");
+  array = getentarray(msg, "targetname");
   array_thread(array, func, param1, param2, param3);
 }
 
 run_thread_on_noteworthy(msg, func, param1, param2, param3) {
-  array = getEntArray(msg, "script_noteworthy");
+  array = getentarray(msg, "script_noteworthy");
   array_thread(array, func, param1, param2, param3);
 }
 
@@ -4184,8 +4184,8 @@ is_player_looking_at(origin, dot, do_trace) {
     do_trace = true;
   }
   eye = self get_eye();
-  delta_vec = anglesToForward(VectorToAngles(origin - eye));
-  view_vec = anglesToForward(self GetPlayerAngles());
+  delta_vec = AnglesToForward(VectorToAngles(origin - eye));
+  view_vec = AnglesToForward(self GetPlayerAngles());
   new_dot = VectorDot(delta_vec, view_vec);
   if(new_dot >= dot) {
     if(do_trace) {
@@ -4230,7 +4230,7 @@ look_at(origin_or_ent, tween, force, tag, offset) {
 }
 
 add_wait(func, parm1, parm2, parm3) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.caller = self;
   ent.func = func;
   ent.parms = [];
@@ -4257,7 +4257,7 @@ do_wait(count_to_reach) {
     count_to_reach = 0;
   }
   assertex(isDefined(level.wait_any_func_array), "Tried to do a do_wait without addings funcs first");
-  ent = spawnStruct();
+  ent = spawnstruct();
   array = level.wait_any_func_array;
   endons = level.do_wait_endons_array;
   after_array = level.run_func_after_wait_array;
@@ -4285,7 +4285,7 @@ waterfx(endflag) {
     wait(randomfloatrange(0.15, 0.3));
     start = self.origin + (0, 0, 150);
     end = self.origin - (0, 0, 150);
-    trace = bulletTrace(start, end, false, undefined);
+    trace = BulletTrace(start, end, false, undefined);
     if(trace["surfacetype"] != "water") {
       continue;
     }
@@ -4297,7 +4297,7 @@ waterfx(endflag) {
     } else if(isDefined(level._effect["water_" + self.a.movement])) {
       fx = "water_" + self.a.movement;
     }
-    playFX(getfx(fx), trace["position"], trace["normal"]);
+    playfx(getfx(fx), trace["position"], trace["normal"]);
   }
 }
 
@@ -4401,7 +4401,7 @@ coopGame() {
 }
 
 player_is_near_live_grenade() {
-  grenades = getEntArray("grenade", "classname");
+  grenades = getentarray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
     grenade = grenades[i];
     players = get_players();
@@ -4710,7 +4710,7 @@ registerClientSys(sSysName) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._clientSys[sSysName] = spawnStruct();
+    level._clientSys[sSysName] = spawnstruct();
     level._clientSys[sSysName].sysID = ClientSysRegister(sSysName);
   }
 }
@@ -5696,34 +5696,28 @@ add_trigger_to_ent(ent) {
 }
 
 remove_trigger_from_ent(ent) {
-  if(!isDefined(ent._triggers)) {
+  if(!isDefined(ent._triggers))
     return;
-  }
-  if(!isDefined(ent._triggers[self getEntityNumber()])) {
+  if(!isDefined(ent._triggers[self getEntityNumber()]))
     return;
-  }
   ent._triggers[self getEntityNumber()] = 0;
 }
 
 ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers)) {
+  if(!isDefined(self._triggers))
     return false;
-  }
-  if(!isDefined(self._triggers[trig getEntityNumber()])) {
+  if(!isDefined(self._triggers[trig getEntityNumber()]))
     return false;
-  }
-  if(!self._triggers[trig getEntityNumber()]) {
+  if(!self._triggers[trig getEntityNumber()])
     return false;
-  }
   return true;
 }
 
 trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon("entityshutdown");
   ent endon("death");
-  if(ent ent_already_in_trigger(self)) {
+  if(ent ent_already_in_trigger(self))
     return;
-  }
   self add_trigger_to_ent(ent);
   endon_condition = "leave_trigger_" + self getEntityNumber();
   if(isDefined(on_enter_payload)) {
@@ -5806,9 +5800,8 @@ take_weapons() {
   self.offhand = self GetCurrentOffhand();
   weapon_list_modified = [];
   for(i = 0; i < self.weapons_list.size; i++) {
-    if(!is_weapon_attachment(self.weapons_list[i])) {
+    if(!is_weapon_attachment(self.weapons_list[i]))
       weapon_list_modified[weapon_list_modified.size] = self.weapons_list[i];
-    }
   }
   self.weapons_list = weapon_list_modified;
   if(is_weapon_attachment(self.curweapon)) {
@@ -5816,7 +5809,7 @@ take_weapons() {
   }
   self.weapons_info = [];
   for(i = 0; i < self.weapons_list.size; i++) {
-    self.weapons_info[i] = spawnStruct();
+    self.weapons_info[i] = SpawnStruct();
     if(isDefined(self.offhand) && self.weapons_list[i] == self.offhand) {
       self.weapons_info[i]._ammo = 0;
       self.weapons_info[i]._stock = self GetWeaponAmmoStock(self.weapons_list[i]);
@@ -5861,9 +5854,8 @@ get_baseweapon_for_attachment(weapon_name) {
   weapon = weapon_pieces[1];
   Assert(weapon_pieces[1] != "ft" && weapon_pieces[1] != "mk" && weapon_pieces[1] != "gl" && weapon_pieces[1] != "db");
   for(i = 0; i < self.weapons_list.size; i++) {
-    if(IsSubStr(self.weapons_list[i], weapon) && IsSubStr(self.weapons_list[i], attachment)) {
+    if(IsSubStr(self.weapons_list[i], weapon) && IsSubStr(self.weapons_list[i], attachment))
       return self.weapons_list[i];
-    }
   }
   return self.weapons_list[0];
 }
@@ -5902,12 +5894,10 @@ average_origin_internal(org_array) {
 }
 
 screen_message_create(string_message_1, string_message_2, string_message_3) {
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isDefined(level.missionfailed) && level.missionfailed)
     return;
-  }
-  if(GetDvarInt("hud_missionFailed") == 1) {
+  if(GetDvarInt("hud_missionFailed") == 1)
     return;
-  }
   if(!isDefined(level._screen_message_1)) {
     level._screen_message_1 = NewHudElem();
     level._screen_message_1.elemType = "font";
@@ -5988,7 +5978,7 @@ get_eye() {
       }
     }
   }
-  pos = self getEye();
+  pos = self GetEye();
   return pos;
 }
 
@@ -5998,7 +5988,7 @@ vehicle_node_wait(strName, strKey) {
   }
   nodes = GetVehicleNodeArray(strName, strKey);
   AssertEX(isDefined(nodes) && nodes.size > 0, "_utility::vehicle_node_wait - vehicle node not found: " + strName + " key: " + strKey);
-  ent = spawnStruct();
+  ent = SpawnStruct();
   array_thread(nodes, common_scripts\utility::trigger_wait_think, ent);
   ent waittill("trigger", eOther, node_hit);
   level notify(strName, eOther);
@@ -6451,7 +6441,7 @@ add_scene_line(scene_line, time, duration) {
   if(!isDefined(level._scene_subs)) {
     level._scene_subs = [];
   }
-  sl = spawnStruct();
+  sl = SpawnStruct();
   sl.line = scene_line;
   sl.time = time;
   sl.duration = duration;
@@ -6476,9 +6466,8 @@ sub_fade(alpha, duration) {
 }
 
 do_scene_sub(sub_string, duration) {
-  if(!GetDvarInt(#"cg_subtitles")) {
+  if(!GetDvarInt(#"cg_subtitles"))
     return;
-  }
   if(!isDefined(level.vo_hud)) {
     level.vo_hud = NewHudElem();
     level.vo_hud.fontscale = 2;

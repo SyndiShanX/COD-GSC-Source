@@ -17,7 +17,7 @@ init() {
   if(!maps\mp\zombies\_zm_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
   }
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
   onplayerconnect_callback(::hacker_on_player_connect);
@@ -25,9 +25,8 @@ init() {
   level thread hacker_trigger_pool_think();
   level thread hacker_round_reward();
 
-  if(getdvarint(#"_id_53BD7080") == 1) {
+  if(getdvarint(#"_id_53BD7080") == 1)
     level thread hacker_debug();
-  }
 }
 
 hacker_round_reward() {
@@ -66,9 +65,8 @@ hacker_debug() {
         if(isDefined(hackable._trigger)) {
           col = vectorscale((0, 1, 0), 255.0);
 
-          if(isDefined(hackable.custom_debug_color)) {
+          if(isDefined(hackable.custom_debug_color))
             col = hackable.custom_debug_color;
-          }
 
           print3d(hackable.origin, "+", col, 1, 1);
 
@@ -89,18 +87,17 @@ hacker_debug() {
 }
 
 hacker_trigger_pool_think() {
-  if(!isDefined(level._zombie_hacker_trigger_pool_size)) {
+  if(!isDefined(level._zombie_hacker_trigger_pool_size))
     level._zombie_hacker_trigger_pool_size = 8;
-  }
 
   pool_active = 0;
   level._hacker_pool = [];
 
   while(true) {
     if(pool_active) {
-      if(!any_hackers_active()) {
+      if(!any_hackers_active())
         destroy_pooled_items();
-      } else {
+      else {
         sweep_pooled_items();
         add_eligable_pooled_items();
       }
@@ -131,9 +128,8 @@ sweep_pooled_items() {
       continue;
     }
 
-    if(isDefined(level._hacker_pool[i]._trigger)) {
+    if(isDefined(level._hacker_pool[i]._trigger))
       level._hacker_pool[i]._trigger delete();
-    }
 
     level._hacker_pool[i]._trigger = undefined;
   }
@@ -148,9 +144,8 @@ should_pooled_object_exist() {
     if(players[i] hacker_active()) {
       if(isDefined(self.entity)) {
         if(self.entity != players[i]) {
-          if(distance2dsquared(players[i].origin, self.entity.origin) <= self.radius * self.radius) {
+          if(distance2dsquared(players[i].origin, self.entity.origin) <= self.radius * self.radius)
             return true;
-          }
         }
       } else if(distance2dsquared(players[i].origin, self.origin) <= self.radius * self.radius)
         return true;
@@ -168,9 +163,8 @@ add_eligable_pooled_items() {
 
     if(isDefined(hackable.pooled) && hackable.pooled && !isDefined(hackable._trigger)) {
       if(!isinarray(level._hacker_pool, hackable)) {
-        if(hackable should_pooled_object_exist()) {
+        if(hackable should_pooled_object_exist())
           candidates[candidates.size] = hackable;
-        }
       }
     }
   }
@@ -180,13 +174,11 @@ add_eligable_pooled_items() {
     height = 72;
     radius = 32;
 
-    if(isDefined(candidate.radius)) {
+    if(isDefined(candidate.radius))
       radius = candidate.radius;
-    }
 
-    if(isDefined(candidate.height)) {
+    if(isDefined(candidate.height))
       height = candidate.height;
-    }
 
     trigger = spawn("trigger_radius_use", candidate.origin, 0, radius, height);
     trigger usetriggerrequirelookat();
@@ -201,24 +193,22 @@ add_eligable_pooled_items() {
 }
 
 get_hackable_trigger() {
-  if(isDefined(self.door)) {
+  if(isDefined(self.door))
     return self.door;
-  } else if(isDefined(self.perk)) {
+  else if(isDefined(self.perk))
     return self.perk;
-  } else if(isDefined(self.window)) {
+  else if(isDefined(self.window))
     return self.window.unitrigger_stub.trigger;
-  } else if(isDefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_") {
+  else if(isDefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_")
     return self;
-  }
 }
 
 any_hackers_active() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i] hacker_active()) {
+    if(players[i] hacker_active())
       return true;
-    }
   }
 
   return false;
@@ -239,15 +229,13 @@ register_hackable(name, callback_func, qualifier_func) {
       structs[i]._hack_qualifier_func = qualifier_func;
       structs[i].pooled = level._hacker_pooled;
 
-      if(isDefined(structs[i].targetname)) {
+      if(isDefined(structs[i].targetname))
         structs[i].hacker_target = getent(structs[i].targetname, "targetname");
-      }
 
       level._hackable_objects[level._hackable_objects.size] = structs[i];
 
-      if(isDefined(level._hacker_pooled)) {
+      if(isDefined(level._hacker_pooled))
         level._pooled_hackable_objects[level._pooled_hackable_objects.size] = structs[i];
-      }
 
       structs[i] thread hackable_object_thread();
       wait_network_frame();
@@ -261,15 +249,13 @@ register_hackable_struct(struct, callback_func, qualifier_func) {
     struct._hack_qualifier_func = qualifier_func;
     struct.pooled = level._hacker_pooled;
 
-    if(isDefined(struct.targetname)) {
+    if(isDefined(struct.targetname))
       struct.hacker_target = getent(struct.targetname, "targetname");
-    }
 
     level._hackable_objects[level._hackable_objects.size] = struct;
 
-    if(isDefined(level._hacker_pooled)) {
+    if(isDefined(level._hacker_pooled))
       level._pooled_hackable_objects[level._pooled_hackable_objects.size] = struct;
-    }
 
     struct thread hackable_object_thread();
   }
@@ -299,9 +285,8 @@ deregister_hackable_struct(struct) {
 
       level._hackable_objects[i] notify("hackable_deregistered");
 
-      if(isDefined(level._hackable_objects[i]._trigger)) {
+      if(isDefined(level._hackable_objects[i]._trigger))
         level._hackable_objects[i]._trigger delete();
-      }
 
       if(isDefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
         arrayremovevalue(level._hacker_pool, level._hackable_objects[i]);
@@ -317,19 +302,17 @@ deregister_hackable(noteworthy) {
   new_list = [];
 
   for(i = 0; i < level._hackable_objects.size; i++) {
-    if(!isDefined(level._hackable_objects[i].script_noteworthy) || level._hackable_objects[i].script_noteworthy != noteworthy) {
+    if(!isDefined(level._hackable_objects[i].script_noteworthy) || level._hackable_objects[i].script_noteworthy != noteworthy)
       new_list[new_list.size] = level._hackable_objects[i];
-    } else {
+    else {
       level._hackable_objects[i] notify("hackable_deregistered");
 
-      if(isDefined(level._hackable_objects[i]._trigger)) {
+      if(isDefined(level._hackable_objects[i]._trigger))
         level._hackable_objects[i]._trigger delete();
-      }
     }
 
-    if(isDefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
+    if(isDefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled)
       arrayremovevalue(level._hacker_pool, level._hackable_objects[i]);
-    }
   }
 
   level._hackable_objects = new_list;
@@ -348,9 +331,8 @@ hack_trigger_think() {
         if(isDefined(hackable._trigger)) {
           qualifier_passed = 1;
 
-          if(isDefined(hackable._hack_qualifier_func)) {
+          if(isDefined(hackable._hack_qualifier_func))
             qualifier_passed = hackable[[hackable._hack_qualifier_func]](player);
-          }
 
           if(player hacker_active() && qualifier_passed && !hackable._trigger.beinghacked) {
             hackable._trigger setinvisibletoplayer(player, 0);
@@ -368,7 +350,7 @@ hack_trigger_think() {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglesToForward(orientation);
+  forwardvec = anglestoforward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -377,85 +359,68 @@ is_facing(facee) {
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   dot_limit = 0.8;
 
-  if(isDefined(facee.dot_limit)) {
+  if(isDefined(facee.dot_limit))
     dot_limit = facee.dot_limit;
-  }
 
   return dotproduct > dot_limit;
 }
 
 can_hack(hackable) {
-  if(!isalive(self)) {
+  if(!isalive(self))
     return false;
-  }
 
-  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
+  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand())
     return false;
-  }
 
-  if(!self hacker_active()) {
+  if(!self hacker_active())
     return false;
-  }
 
-  if(!isDefined(hackable._trigger)) {
+  if(!isDefined(hackable._trigger))
     return false;
-  }
 
   if(isDefined(hackable.player)) {
-    if(hackable.player != self) {
+    if(hackable.player != self)
       return false;
-    }
   }
 
-  if(self throwbuttonpressed()) {
+  if(self throwbuttonpressed())
     return false;
-  }
 
-  if(self fragbuttonpressed()) {
+  if(self fragbuttonpressed())
     return false;
-  }
 
   if(isDefined(hackable._hack_qualifier_func)) {
-    if(!hackable[[hackable._hack_qualifier_func]](self)) {
+    if(!hackable[[hackable._hack_qualifier_func]](self))
       return false;
-    }
   }
 
-  if(!isinarray(level._hackable_objects, hackable)) {
+  if(!isinarray(level._hackable_objects, hackable))
     return false;
-  }
 
   radsquared = 1024;
 
-  if(isDefined(hackable.radius)) {
+  if(isDefined(hackable.radius))
     radsquared = hackable.radius * hackable.radius;
-  }
 
   origin = hackable.origin;
 
-  if(isDefined(hackable.entity)) {
+  if(isDefined(hackable.entity))
     origin = hackable.entity.origin;
-  }
 
-  if(distance2dsquared(self.origin, origin) > radsquared) {
+  if(distance2dsquared(self.origin, origin) > radsquared)
     return false;
-  }
 
-  if(!isDefined(hackable.no_touch_check) && !self istouching(hackable._trigger)) {
+  if(!isDefined(hackable.no_touch_check) && !self istouching(hackable._trigger))
     return false;
-  }
 
-  if(!self is_facing(hackable)) {
+  if(!self is_facing(hackable))
     return false;
-  }
 
-  if(!isDefined(hackable.no_sight_check) && !sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), origin, 0, undefined)) {
+  if(!isDefined(hackable.no_sight_check) && !sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), origin, 0, undefined))
     return false;
-  }
 
-  if(!isDefined(hackable.no_bullet_trace) && !bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), origin, 0, undefined)) {
+  if(!isDefined(hackable.no_bullet_trace) && !bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), origin, 0, undefined))
     return false;
-  }
 
   return true;
 }
@@ -466,13 +431,12 @@ is_hacking(hackable) {
 
 set_hack_hint_string() {
   if(isDefined(self._trigger)) {
-    if(isDefined(self.custom_string)) {
+    if(isDefined(self.custom_string))
       self._trigger sethintstring(self.custom_string);
-    } else if(!isDefined(self.script_int) || self.script_int <= 0) {
+    else if(!isDefined(self.script_int) || self.script_int <= 0)
       self._trigger sethintstring(&"ZOMBIE_HACK_NO_COST");
-    } else {
+    else
       self._trigger sethintstring(&"ZOMBIE_HACK", self.script_int);
-    }
   }
 }
 
@@ -480,13 +444,11 @@ tidy_on_deregister(hackable) {
   self endon("clean_up_tidy_up");
   hackable waittill("hackable_deregistered");
 
-  if(isDefined(self.hackerprogressbar)) {
+  if(isDefined(self.hackerprogressbar))
     self.hackerprogressbar maps\mp\gametypes_zm\_hud_util::destroyelem();
-  }
 
-  if(isDefined(self.hackertexthud)) {
+  if(isDefined(self.hackertexthud))
     self.hackertexthud destroy();
-  }
 }
 
 hacker_do_hack(hackable) {
@@ -494,19 +456,16 @@ hacker_do_hack(hackable) {
   hacked = 0;
   hackable._trigger.beinghacked = 1;
 
-  if(!isDefined(self.hackerprogressbar)) {
+  if(!isDefined(self.hackerprogressbar))
     self.hackerprogressbar = self maps\mp\gametypes_zm\_hud_util::createprimaryprogressbar();
-  }
 
-  if(!isDefined(self.hackertexthud)) {
+  if(!isDefined(self.hackertexthud))
     self.hackertexthud = newclienthudelem(self);
-  }
 
   hack_duration = hackable.script_float;
 
-  if(self hasperk("specialty_fastreload")) {
+  if(self hasperk("specialty_fastreload"))
     hack_duration = hack_duration * 0.66;
-  }
 
   hack_duration = max(1.5, hack_duration);
   self thread tidy_on_deregister(hackable);
@@ -517,9 +476,8 @@ hacker_do_hack(hackable) {
   self.hackertexthud.vertalign = "bottom";
   self.hackertexthud.y = -113;
 
-  if(issplitscreen()) {
+  if(issplitscreen())
     self.hackertexthud.y = -107;
-  }
 
   self.hackertexthud.foreground = 1;
   self.hackertexthud.font = "default";
@@ -527,7 +485,7 @@ hacker_do_hack(hackable) {
   self.hackertexthud.alpha = 1;
   self.hackertexthud.color = (1, 1, 1);
   self.hackertexthud settext(&"ZOMBIE_HACKING");
-  self playLoopSound("zmb_progress_bar", 0.5);
+  self playloopsound("zmb_progress_bar", 0.5);
 
   while(self is_hacking(hackable)) {
     wait 0.05;
@@ -545,25 +503,21 @@ hacker_do_hack(hackable) {
 
   self stoploopsound(0.5);
 
-  if(hacked) {
-    self playSound("vox_mcomp_hack_success");
-  } else {
-    self playSound("vox_mcomp_hack_fail");
-  }
+  if(hacked)
+    self playsound("vox_mcomp_hack_success");
+  else
+    self playsound("vox_mcomp_hack_fail");
 
-  if(isDefined(self.hackerprogressbar)) {
+  if(isDefined(self.hackerprogressbar))
     self.hackerprogressbar maps\mp\gametypes_zm\_hud_util::destroyelem();
-  }
 
-  if(isDefined(self.hackertexthud)) {
+  if(isDefined(self.hackertexthud))
     self.hackertexthud destroy();
-  }
 
   hackable set_hack_hint_string();
 
-  if(isDefined(hackable._trigger)) {
+  if(isDefined(hackable._trigger))
     hackable._trigger.beinghacked = 0;
-  }
 
   self notify("clean_up_tidy_up");
   return hacked;
@@ -580,13 +534,11 @@ hackable_object_thread() {
   height = 72;
   radius = 64;
 
-  if(isDefined(self.radius)) {
+  if(isDefined(self.radius))
     radius = self.radius;
-  }
 
-  if(isDefined(self.height)) {
+  if(isDefined(self.height))
     height = self.height;
-  }
 
   if(!isDefined(self.pooled)) {
     trigger = spawn("trigger_radius_use", self.origin, 0, radius, height);
@@ -600,15 +552,13 @@ hackable_object_thread() {
 
   cost = 0;
 
-  if(isDefined(self.script_int)) {
+  if(isDefined(self.script_int))
     cost = self.script_int;
-  }
 
   duration = 1.0;
 
-  if(isDefined(self.script_float)) {
+  if(isDefined(self.script_float))
     duration = self.script_float;
-  }
 
   while(true) {
     wait 0.1;
@@ -623,9 +573,8 @@ hackable_object_thread() {
         self.origin = self.entity.origin;
         self._trigger.origin = self.entity.origin;
 
-        if(isDefined(self.trigger_offset)) {
+        if(isDefined(self.trigger_offset))
           self._trigger.origin = self._trigger.origin + self.trigger_offset;
-        }
       }
     }
 
@@ -647,22 +596,21 @@ hackable_object_thread() {
         hack_success = hacker hacker_do_hack(self);
         self notify("kill_lowreadywatcher");
 
-        if(isDefined(hacker)) {}
+        if(isDefined(hacker)) {
+        }
 
         if(isDefined(hacker) && hack_success) {
           if(cost) {
-            if(cost > 0) {
+            if(cost > 0)
               hacker maps\mp\zombies\_zm_score::minus_to_player_score(cost);
-            } else {
+            else
               hacker maps\mp\zombies\_zm_score::add_to_player_score(cost * -1);
-            }
           }
 
           hacker notify("successful_hack");
 
-          if(isDefined(self._hack_callback_func)) {
+          if(isDefined(self._hack_callback_func))
             self thread[[self._hack_callback_func]](hacker);
-          }
         }
 
         continue;
@@ -675,7 +623,7 @@ hackable_object_thread() {
 }
 
 hacker_on_player_connect() {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.origin = self.origin;
   struct.radius = 48;
   struct.height = 64;
@@ -693,31 +641,25 @@ player_hack_disconnect_watcher(player) {
 }
 
 player_hack(hacker) {
-  if(isDefined(self.entity)) {
+  if(isDefined(self.entity))
     self.entity maps\mp\zombies\_zm_score::player_add_points("hacker_transfer", 500);
-  }
 
-  if(isDefined(hacker)) {
+  if(isDefined(hacker))
     hacker thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "hack_plr");
-  }
 }
 
 player_qualifier(player) {
-  if(player == self.entity) {
+  if(player == self.entity)
     return false;
-  }
 
-  if(self.entity maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
+  if(self.entity maps\mp\zombies\_zm_laststand::player_is_in_laststand())
     return false;
-  }
 
-  if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
+  if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand())
     return false;
-  }
 
-  if(isDefined(self.entity.sessionstate == "spectator") && self.entity.sessionstate == "spectator") {
+  if(isDefined(self.entity.sessionstate == "spectator") && self.entity.sessionstate == "spectator")
     return false;
-  }
 
   return true;
 }
@@ -726,9 +668,8 @@ hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_param) {
   invis_to_any = 0;
 
   while(true) {
-    if(isDefined(custom_logic_func)) {
+    if(isDefined(custom_logic_func))
       self[[custom_logic_func]](custom_logic_func_param);
-    }
 
     if(maps\mp\zombies\_zm_equip_hacker::any_hackers_active()) {
       players = get_players();
@@ -746,9 +687,8 @@ hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_param) {
       invis_to_any = 0;
       players = get_players();
 
-      for(i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++)
         self setinvisibletoplayer(players[i], 0);
-      }
     }
 
     wait 0.1;
@@ -759,9 +699,8 @@ hacker_debug_print(msg, color) {
   if(!getdvarint(#"_id_428DE100")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (1, 1, 1);
-  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }

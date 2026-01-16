@@ -53,9 +53,8 @@ on_player_connect() {
   setsaveddvar("phys_buoyancy", 1);
   n_water_level_offset = 2;
 
-  if(flag("frogger_started") && !flag("frogger_done")) {
+  if(flag("frogger_started") && !flag("frogger_done"))
     n_water_level_offset = 10;
-  }
 
   setdvar("r_waterWaveBase", n_water_level_offset);
   self thread scale_speed_in_water();
@@ -86,9 +85,8 @@ scale_speed_in_water() {
       self.moveplaybackrate = linear_map(n_depth, 35, 0, 0.75, 1);
 
       if(n_depth >= 16) {
-        if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode)) {
+        if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode))
           self change_movemode("cqb_walk");
-        }
       } else if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode))
         self reset_movemode();
     }
@@ -231,7 +229,7 @@ spawn_func_salazar() {
 }
 
 drone_add_cheap_spotlight() {
-  e_spotlight_target = spawn("script_origin", self.origin + anglesToForward(self.angles) * 5000 + vectorscale((0, 0, -1), 500.0));
+  e_spotlight_target = spawn("script_origin", self.origin + anglestoforward(self.angles) * 5000 + vectorscale((0, 0, -1), 500.0));
   self maps\_turret::set_turret_target(e_spotlight_target, undefined, 0);
   self play_fx("helicopter_drone_spotlight_cheap", undefined, undefined, "death", 1, "tag_spotlight");
   self thread ambient_drone_target_delete(e_spotlight_target);
@@ -240,9 +238,8 @@ drone_add_cheap_spotlight() {
 float_longer_on_death() {
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self floatlonger();
-  }
 }
 
 take_no_damage() {
@@ -251,24 +248,24 @@ take_no_damage() {
 
 setup_skiptos() {
   default_skipto("intro");
-  add_skipto("intro", maps\pakistan_market::skipto_intro, &"intro", maps\pakistan_market::intro);
-  add_skipto("market", maps\pakistan_market::skipto_market, &"market", maps\pakistan_market::market);
-  add_skipto("dev_market_perk", maps\pakistan_market::skipto_market_dev_perk, &"market_with_perk", maps\pakistan_market::market);
-  add_skipto("dev_market_no_perk", maps\pakistan_market::skipto_market_dev_no_perk, &"market_with_perk", maps\pakistan_market::market);
-  add_skipto("car_smash", maps\pakistan_market::skipto_car_smash, &"car_smash", maps\pakistan_market::car_smash);
-  add_skipto("market_exit", maps\pakistan_market::skipto_market_exit, &"market_exit", maps\pakistan_market::market_exit);
-  add_skipto("dev_market_exit_perk", maps\pakistan_market::skipto_market_exit_perk, &"market_exit", maps\pakistan_market::market_exit);
-  add_skipto("dev_market_exit_no_perk", maps\pakistan_market::skipto_market_exit_no_perk, &"market_exit", maps\pakistan_market::market_exit);
-  add_skipto("frogger", maps\pakistan_street::skipto_frogger, &"frogger", maps\pakistan_street::frogger);
-  add_skipto("dev_frogger_claw_support", maps\pakistan_street::skipto_frogger_claw_support, &"frogger", maps\pakistan_street::frogger);
-  add_skipto("bus_street", maps\pakistan_street::skipto_bus_street, &"bus_street", maps\pakistan_street::bus_street);
-  add_skipto("bus_dam", maps\pakistan_street::skipto_bus_dam, &"bus_dam", maps\pakistan_street::bus_dam);
-  add_skipto("alley", maps\pakistan_street::skipto_alley, &"alley", maps\pakistan_street::alley);
-  add_skipto("anthem_approach", maps\pakistan_anthem_approach::skipto_anthem_approach, &"anthem_approach", maps\pakistan_anthem_approach::anthem_approach);
-  add_skipto("sewer_exterior", maps\pakistan_anthem_approach::skipto_sewer_exterior, &"sewer_exterior", maps\pakistan_anthem_approach::sewer_exterior);
-  add_skipto("sewer_interior", maps\pakistan_anthem_approach::skipto_sewer_interior, &"sewer_interior", maps\pakistan_anthem_approach::sewer_interior);
-  add_skipto("dev_sewer_interior_perk", maps\pakistan_anthem_approach::skipto_sewer_interior_perk, &"sewer_interior_perk", maps\pakistan_anthem_approach::sewer_interior);
-  add_skipto("dev_sewer_interior_no_perk", maps\pakistan_anthem_approach::skipto_sewer_interior_no_perk, &"sewer_interior_perk", maps\pakistan_anthem_approach::sewer_interior);
+  add_skipto("intro", maps\pakistan_market::skipto_intro, & "intro", maps\pakistan_market::intro);
+  add_skipto("market", maps\pakistan_market::skipto_market, & "market", maps\pakistan_market::market);
+  add_skipto("dev_market_perk", maps\pakistan_market::skipto_market_dev_perk, & "market_with_perk", maps\pakistan_market::market);
+  add_skipto("dev_market_no_perk", maps\pakistan_market::skipto_market_dev_no_perk, & "market_with_perk", maps\pakistan_market::market);
+  add_skipto("car_smash", maps\pakistan_market::skipto_car_smash, & "car_smash", maps\pakistan_market::car_smash);
+  add_skipto("market_exit", maps\pakistan_market::skipto_market_exit, & "market_exit", maps\pakistan_market::market_exit);
+  add_skipto("dev_market_exit_perk", maps\pakistan_market::skipto_market_exit_perk, & "market_exit", maps\pakistan_market::market_exit);
+  add_skipto("dev_market_exit_no_perk", maps\pakistan_market::skipto_market_exit_no_perk, & "market_exit", maps\pakistan_market::market_exit);
+  add_skipto("frogger", maps\pakistan_street::skipto_frogger, & "frogger", maps\pakistan_street::frogger);
+  add_skipto("dev_frogger_claw_support", maps\pakistan_street::skipto_frogger_claw_support, & "frogger", maps\pakistan_street::frogger);
+  add_skipto("bus_street", maps\pakistan_street::skipto_bus_street, & "bus_street", maps\pakistan_street::bus_street);
+  add_skipto("bus_dam", maps\pakistan_street::skipto_bus_dam, & "bus_dam", maps\pakistan_street::bus_dam);
+  add_skipto("alley", maps\pakistan_street::skipto_alley, & "alley", maps\pakistan_street::alley);
+  add_skipto("anthem_approach", maps\pakistan_anthem_approach::skipto_anthem_approach, & "anthem_approach", maps\pakistan_anthem_approach::anthem_approach);
+  add_skipto("sewer_exterior", maps\pakistan_anthem_approach::skipto_sewer_exterior, & "sewer_exterior", maps\pakistan_anthem_approach::sewer_exterior);
+  add_skipto("sewer_interior", maps\pakistan_anthem_approach::skipto_sewer_interior, & "sewer_interior", maps\pakistan_anthem_approach::sewer_interior);
+  add_skipto("dev_sewer_interior_perk", maps\pakistan_anthem_approach::skipto_sewer_interior_perk, & "sewer_interior_perk", maps\pakistan_anthem_approach::sewer_interior);
+  add_skipto("dev_sewer_interior_no_perk", maps\pakistan_anthem_approach::skipto_sewer_interior_no_perk, & "sewer_interior_perk", maps\pakistan_anthem_approach::sewer_interior);
   add_skipto("anthem", ::skipto_pakistan_2);
   add_skipto("roof_meeting", ::skipto_pakistan_2);
   add_skipto("claw", ::skipto_pakistan_2);
@@ -317,9 +314,8 @@ claw_kill_callback(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, 
     if(sweapon == "claw_grenade_impact_explode_sp" || sweapon == "bigdog_flamethrower" || sweapon == "bigdog_dual_turret") {
       level.n_fire_direction_kill_count++;
 
-      if(level.n_fire_direction_kill_count >= 8) {
+      if(level.n_fire_direction_kill_count >= 8)
         flag_set("claw_challenge_done");
-      }
     }
   }
 }

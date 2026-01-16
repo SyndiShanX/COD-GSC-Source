@@ -23,7 +23,8 @@ init_flags() {
   flag_init("obj_capture_menendez");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_capture() {
   capture_skipto_setup();
@@ -44,16 +45,14 @@ skipto_outro_vtol() {
 
 skipto_outro_vtol_play_anim() {
   while(true) {
-    while(!level.player actionslotonebuttonpressed()) {
+    while(!level.player actionslotonebuttonpressed())
       wait 0.05;
-    }
 
     level thread run_scene("surrender_menendez");
     level thread run_scene("surrender_menendez_player");
 
-    while(level.player actionslotonebuttonpressed()) {
+    while(level.player actionslotonebuttonpressed())
       wait 0.05;
-    }
   }
 }
 
@@ -76,9 +75,8 @@ clean_up_friendly_ai_quad() {
     if(friend == level.salazar) {
       continue;
     }
-    if(!isDefined(friend.script_noteworthy) || friend.script_noteworthy != "capture_allies") {
+    if(!isDefined(friend.script_noteworthy) || friend.script_noteworthy != "capture_allies")
       friend thread ai_delete_when_offscreen();
-    }
   }
 }
 
@@ -108,9 +106,8 @@ kill_friendly_quadrotors() {
   a_vh_quads = get_alive_from_noteworthy("allied_quadrotor");
   enemies = getaiarray("axis");
 
-  foreach(quad in a_vh_quads) {
-    quad notify("death", enemies[0]);
-  }
+  foreach(quad in a_vh_quads)
+  quad notify("death", enemies[0]);
 
   wait(randomfloatrange(0.3, 0.5));
 }
@@ -121,9 +118,8 @@ ally_quadrotors_fly_away() {
   goal_pos = getvehiclenode("ally_qrs_flyaway", "targetname");
 
   foreach(quad in a_vh_quads) {
-    if(isDefined(quad)) {
+    if(isDefined(quad))
       quad thread handle_quadrotor_flyaway(goal_pos);
-    }
   }
 }
 
@@ -190,9 +186,8 @@ vtol_turret_attacks_target(e_target, n_delay, n_shoottime, v_target) {
   level endon("stop_vtol_turret");
   vh_vtol = getent("yemen_morals_rail_vtol_spawner", "targetname");
 
-  if(isDefined(n_delay)) {
+  if(isDefined(n_delay))
     wait(n_delay);
-  }
 
   vh_vtol _set_vtol_turret_target(e_target, v_target);
   vh_vtol _shoot_vtol_turret(n_shoottime);
@@ -202,11 +197,10 @@ vtol_turret_attacks_target(e_target, n_delay, n_shoottime, v_target) {
 _set_vtol_turret_target(e_target, v_target) {
   self cleargunnertarget(0);
 
-  if(isDefined(e_target)) {
+  if(isDefined(e_target))
     self setgunnertargetent(e_target, (0, 0, 0), 0);
-  } else {
+  else
     self setgunnertargetvec(v_target, 0);
-  }
 }
 
 _shoot_vtol_turret(n_shoottime) {
@@ -263,9 +257,8 @@ clean_up_left_over_ais_and_vehs() {
   spawn_manager_kill("end_battle");
   enemies = getaiarray("axis");
 
-  foreach(enemy in enemies) {
-    enemy delete();
-  }
+  foreach(enemy in enemies)
+  enemy delete();
 
   enemy_veh = getvehiclearray("axis");
 
@@ -273,9 +266,8 @@ clean_up_left_over_ais_and_vehs() {
     veh.delete_on_death = 1;
     veh notify("death");
 
-    if(!isalive(veh)) {
+    if(!isalive(veh))
       veh delete();
-    }
   }
 
   spawn_manager_enable("capture_end_ally_trigger");
@@ -283,9 +275,8 @@ clean_up_left_over_ais_and_vehs() {
   friendlies = getaiarray("allies");
   menendez = get_model_or_models_from_scene("surrender_menendez", "capture_menendez");
 
-  foreach(friend in friendlies) {
-    friend aim_at_target(menendez, 500);
-  }
+  foreach(friend in friendlies)
+  friend aim_at_target(menendez, 500);
 }
 
 capture_start_fadeout(unused_param) {
@@ -365,7 +356,7 @@ capture_spawn_fake_qrotors_at_structs_and_move(str_drone_pos, n_move_time) {
 
   foreach(s_drone_pos in a_drone_pos) {
     m_drone = spawn("script_model", s_drone_pos.origin);
-    m_drone setModel("veh_t6_drone_quad_rotor_sp");
+    m_drone setmodel("veh_t6_drone_quad_rotor_sp");
     s_drone_target = getstruct(s_drone_pos.target, "targetname");
     m_drone moveto(s_drone_target.origin, n_move_time);
     m_drone waittill("movedone");
@@ -390,7 +381,7 @@ debug_get_player_position() {
     v_player_pos = level.player.origin;
     v_player_angles = level.player.angles;
     v_player_angles2 = level.player getplayerangles();
-    v_player_eye = level.player getEye();
+    v_player_eye = level.player geteye();
     wait 0.05;
   }
 }
@@ -424,7 +415,6 @@ fearless_challenge(str_notify) {
   n_fearless_start = gettime();
   flag_wait("menendez_surrenders");
 
-  if(gettime() < n_fearless_start + 25000) {
+  if(gettime() < n_fearless_start + 25000)
     self notify(str_notify);
-  }
 }

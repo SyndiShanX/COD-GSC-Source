@@ -22,30 +22,26 @@ MoveRun() {
         return;
       }
 
-      if(changeWeaponStandRun()) {
+      if(changeWeaponStandRun())
         return;
-      }
 
-      if(ReloadStandRun()) {
+      if(ReloadStandRun())
         return;
-      }
 
-      if(self animscripts\utility::IsInCombat()) {
+      if(self animscripts\utility::IsInCombat())
         MoveStandCombatNormal();
-      } else {
+      else
         MoveStandNoncombatNormal();
-      }
       break;
 
     case "crouch":
       if(BeginCrouchRun()) // returns false( and does nothing ) if we're already crouch - running
         return;
 
-      if(isDefined(self.crouchrun_combatanim)) {
+      if(isDefined(self.crouchrun_combatanim))
         MoveCrouchRunOverride();
-      } else {
+      else
         MoveCrouchRunNormal();
-      }
       break;
 
     default:
@@ -59,29 +55,25 @@ MoveRun() {
 }
 
 GetRunAnim() {
-  if(!isDefined(self.a.moveAnimSet)) {
+  if(!isdefined(self.a.moveAnimSet))
     return % run_lowready_F;
-  }
 
   if(!self.faceMotion) {
-    if(self.stairsState == "none" || abs(self getMotionAngle()) > 45) {
+    if(self.stairsState == "none" || abs(self getMotionAngle()) > 45)
       return moveAnim("move_f");
-    }
   }
 
-  if(self.stairsState == "up") {
+  if(self.stairsState == "up")
     return moveAnim("stairs_up");
-  } else if(self.stairsState == "down") {
+  else if(self.stairsState == "down")
     return moveAnim("stairs_down");
-  }
 
   return moveAnim("straight");
 }
 
 GetCrouchRunAnim() {
-  if(!isDefined(self.a.moveAnimSet)) {
+  if(!isdefined(self.a.moveAnimSet))
     return % crouch_fastwalk_F;
-  }
 
   return moveAnim("crouch");
 }
@@ -93,7 +85,7 @@ ProneCrawl() {
 }
 
 InitRunNGun() {
-  if(!isDefined(self.runNGun)) {
+  if(!isdefined(self.runNGun)) {
     self notify("stop_move_anim_update");
     self.update_move_anim_type = undefined;
 
@@ -111,7 +103,7 @@ InitRunNGun() {
 }
 
 StopRunNGun() {
-  if(isDefined(self.runNGun)) {
+  if(isdefined(self.runNGun)) {
     self clearanim( % run_n_gun, 0.2);
     self.runNGun = undefined;
   }
@@ -150,13 +142,12 @@ RunNGun(validTarget) {
     newWeight = enemyyaw / maxRunNGunAngle;
     diff = newWeight - self.runNGunWeight;
 
-    if(abs(diff) < runNGunTransitionPoint * 0.7) {
+    if(abs(diff) < runNGunTransitionPoint * 0.7)
       self.runNGunWeight = newWeight;
-    } else if(diff > 0) {
+    else if(diff > 0)
       self.runNGunWeight = self.runNGunWeight + runNGunIncrement;
-    } else {
+    else
       self.runNGunWeight = self.runNGunWeight - runNGunIncrement;
-    }
   }
 
   InitRunNGun();
@@ -189,9 +180,8 @@ RunNGun(validTarget) {
 
   self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
 
-  if(validTarget && isplayer(self.enemy)) {
+  if(validTarget && isplayer(self.enemy))
     self updatePlayerSightAccuracy();
-  }
 
   return true;
 }
@@ -206,9 +196,8 @@ RunNGun_Backward() {
 
   self setFlaggedAnimKnob("runanim", % combatwalk_B, 1, 0.3, 0.8);
 
-  if(isplayer(self.enemy)) {
+  if(isplayer(self.enemy))
     self updatePlayerSightAccuracy();
-  }
 
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 
@@ -220,14 +209,13 @@ RunNGun_Backward() {
 ReactToBulletsInterruptCheck() {
   self endon("killanimscript");
 
-  while(1) {
+  while (1) {
     wait 0.2;
 
-    if(!isDefined(self.reactingToBullet)) {
+    if(!isdefined(self.reactingToBullet))
       break;
-    }
 
-    if(!isDefined(self.pathGoalPos) || distanceSquared(self.pathGoalPos, self.origin) < squared(80)) {
+    if(!isdefined(self.pathGoalPos) || distanceSquared(self.pathGoalPos, self.origin) < squared(80)) {
       EndRunningReactToBullets();
       self notify("interrupt_react_to_bullet");
       break;
@@ -245,18 +233,19 @@ RunningReactToBullets() {
   self.aim_while_moving_thread = undefined;
   self notify("end_face_enemy_tracking");
 
-  assert(!isDefined(self.trackLoopThread));
+  /#
+  assert(!isdefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
+  # /
 
-  self endon("interrupt_react_to_bullet");
+    self endon("interrupt_react_to_bullet");
 
   self.reactingToBullet = true;
   self orientmode("face motion");
 
   reactAnimIndex = randomint(anim.runningReactToBullets.size);
-  if(reactAnimIndex == anim.lastRunningReactAnim) {
+  if(reactAnimIndex == anim.lastRunningReactAnim)
     reactAnimIndex = (reactAnimIndex + 1) % anim.runningReactToBullets.size;
-  }
 
   anim.lastRunningReactAnim = reactAnimIndex;
 
@@ -273,13 +262,15 @@ CustomRunningReactToBullets() {
   self.aim_while_moving_thread = undefined;
   self notify("end_face_enemy_tracking");
 
-  assert(!isDefined(self.trackLoopThread));
+  /#
+  assert(!isdefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
+  # /
 
-  self.reactingToBullet = true;
+    self.reactingToBullet = true;
   self orientmode("face motion");
 
-  assert(isDefined(self.run_overrideBulletReact));
+  assert(isdefined(self.run_overrideBulletReact));
 
   reactAnimIndex = randomint(self.run_overrideBulletReact.size);
   reactAnim = self.run_overrideBulletReact[reactAnimIndex];
@@ -294,54 +285,45 @@ CustomRunningReactToBullets() {
 GetSprintAnim() {
   sprintAnim = undefined;
 
-  if(isDefined(self.grenade)) {
+  if(isdefined(self.grenade))
     sprintAnim = moveAnim("sprint_short");
-  }
 
-  if(!isDefined(sprintAnim)) {
+  if(!isdefined(sprintAnim))
     sprintAnim = moveAnim("sprint");
-  }
 
   return sprintAnim;
 }
 
 ShouldSprint() {
-  if(isDefined(self.sprint)) {
+  if(isdefined(self.sprint))
     return true;
-  }
 
-  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontShieldAngleCos == 1) {
+  if(isdefined(self.grenade) && isdefined(self.enemy) && self.frontShieldAngleCos == 1)
     return (distanceSquared(self.origin, self.enemy.origin) > 300 * 300);
-  }
 
   return false;
 }
 
 ShouldSprintForVariation() {
-  if(isDefined(self.neverSprintForVariation)) {
+  if(isdefined(self.neverSprintForVariation))
     return false;
-  }
 
-  if(!self.faceMotion || self.stairsState != "none") {
+  if(!self.faceMotion || self.stairsState != "none")
     return false;
-  }
 
   time = gettime();
 
-  if(isDefined(self.dangerSprintTime)) {
-    if(time < self.dangerSprintTime) {
+  if(isdefined(self.dangerSprintTime)) {
+    if(time < self.dangerSprintTime)
       return true;
-    }
 
     // if already sprinted, don't do it again for at least 5 seconds
-    if(time - self.dangerSprintTime < 6000) {
+    if(time - self.dangerSprintTime < 6000)
       return false;
-    }
   }
 
-  if(!isDefined(self.enemy) || !isSentient(self.enemy)) {
+  if(!isdefined(self.enemy) || !isSentient(self.enemy))
     return false;
-  }
 
   if(randomInt(100) < 25 && (self lastKnownTime(self.enemy) + 2000) > time) {
     self.dangerSprintTime = time + 2000 + randomint(1000);
@@ -354,9 +336,8 @@ ShouldSprintForVariation() {
 GetMovePlaybackRate() {
   rate = self.moveplaybackrate;
 
-  if(self.lookaheadHitsStairs && self.stairsState == "none" && self.lookaheadDist < 300) {
+  if(self.lookaheadHitsStairs && self.stairsState == "none" && self.lookaheadDist < 300)
     rate *= 0.75;
-  }
 
   return rate;
 }
@@ -370,7 +351,7 @@ MoveStandCombatNormal() {
 
   decidedAnimation = false;
 
-  if(isDefined(self.requestReactToBullet) && gettime() - self.requestReactToBullet < 100 && randomFloat(1) < self.a.reactToBulletChance) {
+  if(isdefined(self.requestReactToBullet) && gettime() - self.requestReactToBullet < 100 && randomFloat(1) < self.a.reactToBulletChance) {
     StopRunNGun();
     RunningReactToBullets();
     return;
@@ -379,45 +360,47 @@ MoveStandCombatNormal() {
   if(self ShouldSprint()) {
     self setFlaggedAnimKnob("runanim", GetSprintAnim(), 1, 0.5);
     decidedAnimation = true;
-  } else if(isDefined(self.enemy) && animscripts\move::MayShootWhileMoving()) {
+  } else if(isdefined(self.enemy) && animscripts\move::MayShootWhileMoving()) {
     runShootWhileMovingThreads();
 
     if(!self.faceMotion) {
       self thread faceEnemyAimTracking();
-    } else if((self.shootStyle != "none" && !isDefined(self.noRunNGun))) {
+    } else if((self.shootStyle != "none" && !isdefined(self.noRunNGun))) {
       self notify("end_face_enemy_tracking");
       self.aim_while_moving_thread = undefined;
 
-      assert(!isDefined(self.trackLoopThread));
+      /#
+      assert(!isdefined(self.trackLoopThread));
       self.trackLoopThread = undefined;
+      # /
 
-      if(CanShootWhileRunningForward()) {
-        decidedAnimation = self RunNGun(true);
-      } else if(CanShootWhileRunningBackward()) {
+        if(CanShootWhileRunningForward()) {
+          decidedAnimation = self RunNGun(true);
+        }
+      else if(CanShootWhileRunningBackward()) {
         self RunNGun_Backward();
         return;
       }
-    } else if(isDefined(self.runNGunWeight) && self.runNGunWeight != 0) {
+    } else if(isdefined(self.runNGunWeight) && self.runNGunWeight != 0) {
       // can't shoot enemy anymore but still need to clear out runNGun
       decidedAnimation = self RunNGun(false);
     }
-  } else if(isDefined(self.runNGunWeight) && self.runNGunWeight != 0) {
+  } else if(isdefined(self.runNGunWeight) && self.runNGunWeight != 0) {
     decidedAnimation = self RunNGun(false);
   }
 
   if(!decidedAnimation) {
     StopRunNGun();
 
-    if(isDefined(self.requestReactToBullet) && gettime() - self.requestReactToBullet < 100 && self.a.reactToBulletChance != 0) {
+    if(isdefined(self.requestReactToBullet) && gettime() - self.requestReactToBullet < 100 && self.a.reactToBulletChance != 0) {
       RunningReactToBullets();
       return;
     }
 
-    if(ShouldSprintForVariation()) {
+    if(ShouldSprintForVariation())
       runAnim = moveAnim("sprint_short");
-    } else {
+    else
       runAnim = GetRunAnim();
-    }
 
     self setFlaggedAnimKnobLimited("runanim", runAnim, 1, 0.1, 1, true);
     self SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"), self.sideStepRate);
@@ -434,19 +417,20 @@ MoveStandCombatNormal() {
 faceEnemyAimTracking() {
   self notify("want_aim_while_moving");
 
-  assert(isDefined(self.aim_while_moving_thread) == isDefined(self.trackLoopThread));
-  assertex(!isDefined(self.trackLoopThread) || (self.trackLoopThreadType == "faceEnemyAimTracking"), self.trackLoopThreadType);
+  assert(isdefined(self.aim_while_moving_thread) == isdefined(self.trackLoopThread));
+  assertex(!isdefined(self.trackLoopThread) || (self.trackLoopThreadType == "faceEnemyAimTracking"), self.trackLoopThreadType);
 
-  if(isDefined(self.aim_while_moving_thread)) {
+  if(isdefined(self.aim_while_moving_thread))
     return;
-  }
 
   self.aim_while_moving_thread = true;
 
+  /#
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "faceEnemyAimTracking";
+  # /
 
-  self endon("killanimscript");
+    self endon("killanimscript");
   self endon("end_face_enemy_tracking");
 
   self setDefaultAimLimits();
@@ -463,16 +447,17 @@ endFaceEnemyAimTracking() {
   self.aim_while_moving_thread = undefined;
   self notify("end_face_enemy_tracking");
 
-  assert(!isDefined(self.trackLoopThread));
+  /#
+  assert(!isdefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
+  # /
 }
 
 runShootWhileMovingThreads() {
   self notify("want_shoot_while_moving");
 
-  if(isDefined(self.shoot_while_moving_thread)) {
+  if(isdefined(self.shoot_while_moving_thread))
     return;
-  }
   self.shoot_while_moving_thread = true;
 
   self thread RunDecideWhatAndHowToShoot();
@@ -492,10 +477,12 @@ stopShootWhileMovingThreads() // we don't stop them if we shoot while moving aga
   self.shoot_while_moving_thread = undefined;
   self.aim_while_moving_thread = undefined;
 
-  assert(!isDefined(self.trackLoopThread));
+  /#
+  assert(!isdefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
+  # /
 
-  self.runNGun = undefined;
+    self.runNGun = undefined;
 }
 
 RunDecideWhatAndHowToShoot() {
@@ -513,41 +500,37 @@ aimedSomewhatAtEnemy() {
   weaponAngles = self getMuzzleAngle();
   anglesToShootPos = vectorToAngles(self.enemy getShootAtPos() - self getMuzzlePos());
 
-  if(AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]) > 15) {
+  if(AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]) > 15)
     return false;
-  }
 
   return AbsAngleClamp180(weaponAngles[0] - anglesToShootPos[0]) <= 20;
 }
 
 CanShootWhileRunningForward() {
   // continue runNGun if runNGunWeight != 0
-  if((!isDefined(self.runNGunWeight) || self.runNGunWeight == 0) && abs(self getMotionAngle()) > self.maxRunNGunAngle) {
+  if((!isdefined(self.runNGunWeight) || self.runNGunWeight == 0) && abs(self getMotionAngle()) > self.maxRunNGunAngle)
     return false;
-  }
 
   return true;
 }
 
 CanShootWhileRunningBackward() {
-  if(180 - abs(self getMotionAngle()) >= 45) {
+  if(180 - abs(self getMotionAngle()) >= 45)
     return false;
-  }
 
   enemyyaw = self GetPredictedYawToEnemy(0.2);
-  if(abs(enemyyaw) > 30) {
+  if(abs(enemyyaw) > 30)
     return false;
-  }
 
   return true;
 }
 
 CanShootWhileRunning() {
-  return animscripts\move::MayShootWhileMoving() && isDefined(self.enemy) && (CanShootWhileRunningForward() || CanShootWhileRunningBackward());
+  return animscripts\move::MayShootWhileMoving() && isdefined(self.enemy) && (CanShootWhileRunningForward() || CanShootWhileRunningBackward());
 }
 
 GetPredictedYawToEnemy(lookAheadTime) {
-  assert(isDefined(self.enemy));
+  assert(isdefined(self.enemy));
 
   selfPredictedPos = self.origin;
   moveAngle = self.angles[1] + self getMotionAngle();
@@ -567,17 +550,15 @@ MoveStandNoncombatNormal() {
 
   self setanimknoball( % combatrun, % body, 1, 0.2, rate);
 
-  if(self ShouldSprint()) {
+  if(self ShouldSprint())
     runAnim = GetSprintAnim();
-  } else {
+  else
     runAnim = GetRunAnim();
-  }
 
-  if(self.stairsState == "none") {
+  if(self.stairsState == "none")
     transTime = 0.3; // 0.3 because it pops when the AI goes from combat to noncombat
-  } else {
+  else
     transTime = 0.1; // need to transition to stairs quickly
-  }
 
   self setflaggedanimknob("runanim", runAnim, 1, transTime, 1, true);
 
@@ -610,55 +591,45 @@ MoveCrouchRunNormal() {
 }
 
 ReloadStandRun() {
-  reloadIfEmpty = isDefined(self.a.allowedPartialReloadOnTheRunTime) && self.a.allowedPartialReloadOnTheRunTime > gettime();
-  reloadIfEmpty = reloadIfEmpty || (isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 256 * 256);
+  reloadIfEmpty = isdefined(self.a.allowedPartialReloadOnTheRunTime) && self.a.allowedPartialReloadOnTheRunTime > gettime();
+  reloadIfEmpty = reloadIfEmpty || (isdefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 256 * 256);
   if(reloadIfEmpty) {
-    if(!self NeedToReload(0)) {
+    if(!self NeedToReload(0))
       return false;
-    }
   } else {
-    if(!self NeedToReload(.5)) {
+    if(!self NeedToReload(.5))
       return false;
-    }
   }
 
-  if(isDefined(self.grenade)) {
+  if(isdefined(self.grenade))
     return false;
-  }
 
-  if(!self.faceMotion || self.stairsState != "none") {
+  if(!self.faceMotion || self.stairsState != "none")
     return false;
-  }
 
   // if not allowed to shoot, not allowed to reload
-  if(isDefined(self.dontShootWhileMoving) || isDefined(self.noRunReload)) {
+  if(isdefined(self.dontShootWhileMoving) || isdefined(self.noRunReload))
     return false;
-  }
 
-  if(self CanShootWhileRunning() && !self NeedToReload(0)) {
+  if(self CanShootWhileRunning() && !self NeedToReload(0))
     return false;
-  }
 
-  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256) {
+  if(!isdefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
     return false;
-  }
 
   motionAngle = AngleClamp180(self getMotionAngle());
 
   // want to be running forward; otherwise we won't see the animation play!
-  if(abs(motionAngle) > 25) {
+  if(abs(motionAngle) > 25)
     return false;
-  }
 
-  if(!usingRifleLikeWeapon()) {
+  if(!usingRifleLikeWeapon())
     return false;
-  }
 
   // need to restart the run cycle because the reload animation has to be played from start to finish!
   // the goal is to play it only when we're near the end of the run cycle.
-  if(!runLoopIsNearBeginning()) {
+  if(!runLoopIsNearBeginning())
     return false;
-  }
 
   // call in a separate function so we can cleanup if we get an endon
   ReloadStandRunInternal();
@@ -695,26 +666,22 @@ runLoopIsNearBeginning() {
   animfraction = self getAnimTime( % walk_and_run_loops);
   loopLength = getAnimLength( % run_lowready_F) / 3.0;
   animfraction *= 3.0;
-  if(animfraction > 3) {
+  if(animfraction > 3)
     animfraction -= 2.0;
-  } else if(animfraction > 2) {
+  else if(animfraction > 2)
     animfraction -= 1.0;
-  }
 
-  if(animfraction < .15 / loopLength) {
+  if(animfraction < .15 / loopLength)
     return true;
-  }
-  if(animfraction > 1 - .3 / loopLength) {
+  if(animfraction > 1 - .3 / loopLength)
     return true;
-  }
 
   return false;
 }
 
 SetMoveNonForwardAnims(backAnim, leftAnim, rightAnim, rate) {
-  if(!isDefined(rate)) {
+  if(!isdefined(rate))
     rate = 1;
-  }
 
   self setAnimKnobLimited(backAnim, 1, 0.1, rate, true);
   self setAnimKnobLimited(leftAnim, 1, 0.1, rate, true);
@@ -726,9 +693,8 @@ SetCombatStandMoveAnimWeights(moveAnimType) {
 }
 
 UpdateMoveAnimWeights(moveAnimType, frontAnim, backAnim, leftAnim, rightAnim) {
-  if(isDefined(self.update_move_anim_type) && self.update_move_anim_type == moveAnimType) {
+  if(isdefined(self.update_move_anim_type) && self.update_move_anim_type == moveAnimType)
     return;
-  }
 
   self notify("stop_move_anim_update");
 
@@ -739,7 +705,7 @@ UpdateMoveAnimWeights(moveAnimType, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("move_interrupt");
   self endon("stop_move_anim_update");
 
-  for(;;) {
+  for (;;) {
     UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim);
     wait .05;
     waittillframeend;
@@ -747,11 +713,11 @@ UpdateMoveAnimWeights(moveAnimType, frontAnim, backAnim, leftAnim, rightAnim) {
 }
 
 UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
-  //assert( !isDefined( self.runNGun ) || isDefined( self.update_move_front_bias ) );
+  //assert( !isdefined( self.runNGun ) || isdefined( self.update_move_front_bias ) );
 
-  if(self.faceMotion && !self shouldCQB() && !isDefined(self.update_move_front_bias)) {
+  if(self.faceMotion && !self shouldCQB() && !isdefined(self.update_move_front_bias)) {
     // once you start to face motion, don't need to change weights
-    if(!isDefined(self.wasFacingMotion)) {
+    if(!isdefined(self.wasFacingMotion)) {
       self.wasFacingMotion = 1;
       self setanim(frontAnim, 1, 0.2, 1, true);
       self setanim(backAnim, 0, 0.2, 1, true);
@@ -764,11 +730,10 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
     // Play the appropriately weighted animations for the direction he's moving.
     animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
 
-    if(isDefined(self.update_move_front_bias)) {
+    if(isdefined(self.update_move_front_bias)) {
       animWeights["back"] = 0.0;
-      if(animWeights["front"] < .2) {
+      if(animWeights["front"] < .2)
         animWeights["front"] = .2;
-      }
     }
 
     self setanim(frontAnim, animWeights["front"], 0.2, 1, true);
@@ -781,54 +746,44 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
 // change our weapon while running if we want to and can
 changeWeaponStandRun() {
   // right now this only handles shotguns, but it could do other things too
-  wantShotgun = (isDefined(self.wantShotgun) && self.wantShotgun);
+  wantShotgun = (isdefined(self.wantShotgun) && self.wantShotgun);
   usingShotgun = isShotgun(self.weapon);
-  if(wantShotgun == usingShotgun) {
+  if(wantShotgun == usingShotgun)
     return false;
-  }
 
-  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256) {
+  if(!isdefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
     return false;
-  }
 
-  if(usingSidearm()) {
+  if(usingSidearm())
     return false;
-  }
   assert(self.weapon == self.primaryweapon || self.weapon == self.secondaryweapon);
 
   if(self.weapon == self.primaryweapon) {
-    if(!wantShotgun) {
+    if(!wantShotgun)
       return false;
-    }
-    if(isShotgun(self.secondaryweapon)) {
+    if(isShotgun(self.secondaryweapon))
       return false;
-    }
   } else {
     assert(self.weapon == self.secondaryweapon);
 
-    if(wantShotgun) {
+    if(wantShotgun)
       return false;
-    }
-    if(isShotgun(self.primaryweapon)) {
+    if(isShotgun(self.primaryweapon))
       return false;
-    }
   }
 
   // want to be running forward; otherwise we won't see the animation play!
   motionAngle = AngleClamp180(self getMotionAngle());
-  if(abs(motionAngle) > 25) {
+  if(abs(motionAngle) > 25)
     return false;
-  }
 
-  if(!runLoopIsNearBeginning()) {
+  if(!runLoopIsNearBeginning())
     return false;
-  }
 
-  if(wantShotgun) {
+  if(wantShotgun)
     shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  } else {
+  else
     shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
-  }
 
   self notify("switchEnded");
 
@@ -853,9 +808,8 @@ shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTa
 }
 
 interceptNotetracksForWeaponSwitch(notetrack) {
-  if(notetrack == "gun_2_chest" || notetrack == "gun_2_back") {
+  if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
     return true; // "don't do the default behavior for this notetrack"
-  }
 }
 
 watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {

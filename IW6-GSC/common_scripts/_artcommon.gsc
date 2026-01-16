@@ -62,9 +62,8 @@ translateFogSlidersToScript() {
 
 limit(i) {
   limit = 0.001;
-  if((i < limit) && (i > (limit * -1))) {
+  if((i < limit) && (i > (limit * -1)))
     i = 0;
-  }
   return i;
 }
 
@@ -180,15 +179,12 @@ print_vision(vision_set) {
   colorizationName = GetDvar("r_colorizationTweakName");
   toneMappingName = GetDvar("r_toneMappingTweakName");
   clutMaterialName = GetDvar("r_clutMaterialTweakName");
-  if(colorizationName != "") {
+  if(colorizationName != "")
     fileprint_launcher("colorizationSet \"" + colorizationName + "\"");
-  }
-  if(toneMappingName != "") {
+  if(toneMappingName != "")
     fileprint_launcher("toneMapping \"" + toneMappingName + "\"");
-  }
-  if(clutMaterialName != "") {
+  if(clutMaterialName != "")
     fileprint_launcher("clutMaterial\"" + clutMaterialName + "\"");
-  }
 
   return fileprint_launcher_end_file("\\share\\raw\\vision\\" + vision_set + ".vision", true);
 }
@@ -198,11 +194,10 @@ print_fog_ents(forMP) {
     if(!isDefined(ent.name)) {
       continue;
     }
-    if(forMP) {
+    if(forMP)
       fileprint_launcher("\tent = maps\\mp\\_art::create_vision_set_fog( \"" + ent.name + "\" );");
-    } else {
+    else
       fileprint_launcher("\tent = maps\\_utility::create_vision_set_fog( \"" + ent.name + "\" );");
-    }
 
     fileprint_launcher("\tent.startDist =" + ent.startDist + ";");
     fileprint_launcher("\tent.halfwayDist =" + ent.halfwayDist + ";");
@@ -225,17 +220,15 @@ print_fog_ents(forMP) {
     fileprint_launcher("\tent.skyFogMinAngle = " + ent.skyFogMinAngle + ";");
     fileprint_launcher("\tent.skyFogMaxAngle = " + ent.skyFogMaxAngle + ";");
 
-    if(isDefined(ent.HDROverride)) {
+    if(isDefined(ent.HDROverride))
       fileprint_launcher("\tent.HDROverride =\"" + ent.HDROverride + "\";");
-    }
 
     if(isDefined(ent.stagedVisionSets)) {
       string = " ";
       for(i = 0; i < ent.stagedVisionSets.size; i++) {
         string = string + "\"" + ent.stagedVisionSets[i] + "\"";
-        if(i < ent.stagedVisionSets.size - 1) {
+        if(i < ent.stagedVisionSets.size - 1)
           string = string + ",";
-        }
         string = string + " ";
       }
 
@@ -259,9 +252,8 @@ print_fog_ents_csv() {
       }
     }
 
-    if(!targettedByHDROverride) {
+    if(!targettedByHDROverride)
       fileprint_launcher("rawfile,vision/" + ent.name + ".vision");
-    }
   }
 }
 # /

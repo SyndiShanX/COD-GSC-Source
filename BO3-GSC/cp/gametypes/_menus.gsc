@@ -13,12 +13,12 @@
 #namespace menus;
 
 function autoexec __init__sytem__() {
-  system::register("menus", &__init__, undefined, undefined);
+  system::register("menus", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_player_connect);
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_player_connect);
 }
 
 function init() {
@@ -41,13 +41,13 @@ function on_player_connect() {
 }
 
 function function_521a4b1f(player) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return;
   }
   player setcontrolleruimodelvalue("MusicPlayer.state", "stop");
   player notify("music_stop");
   player.musicplaying = 0;
-  if(isDefined(player.var_c6ff6155)) {
+  if(isdefined(player.var_c6ff6155)) {
     alias = tablelookupcolumnforrow("gamedata/tables/common/music_player.csv", player.var_c6ff6155, 1);
     player stopsound(alias);
   }
@@ -55,13 +55,13 @@ function function_521a4b1f(player) {
 
 function on_menu_response() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("menuresponse", menu, response);
     if(response == "back") {
       self closeingamemenu();
       if(level.console) {
         if(menu == game["menu_changeclass"] || menu == game["menu_changeclass_offline"] || menu == game["menu_team"] || menu == game["menu_controls"]) {
-          if(isDefined(level.teams[self.pers["team"]])) {
+          if(isdefined(level.teams[self.pers["team"]])) {
             self openmenu(game["menu_start_menu"]);
           }
         }
@@ -128,7 +128,7 @@ function on_menu_response() {
         player savegame::set_player_data("savegame_assists", undefined);
         player savegame::set_player_data("savegame_incaps", undefined);
         player savegame::set_player_data("savegame_revives", undefined);
-        if(!isDefined(getrootmapname())) {
+        if(!isdefined(getrootmapname())) {
           continue;
         }
         foreach(stat in var_c722c1b3) {
@@ -159,7 +159,7 @@ function on_menu_response() {
       continue;
     }
     if(menu == game["menu_changeclass"] || menu == game["menu_changeclass_offline"]) {
-      if(response != "back" && response != "cancel" && (!isDefined(self.disableclasscallback) || !self.disableclasscallback)) {
+      if(response != "back" && response != "cancel" && (!isdefined(self.disableclasscallback) || !self.disableclasscallback)) {
         self closeingamemenu();
         self.selectedclass = 1;
         self[[level.curclass]](response);
@@ -170,7 +170,7 @@ function on_menu_response() {
     }
     if(menu == "spectate") {
       player = util::getplayerfromclientnum(int(response));
-      if(isDefined(player)) {
+      if(isdefined(player)) {
         self setcurrentspectatorclient(player);
       }
     }

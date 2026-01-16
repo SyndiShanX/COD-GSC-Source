@@ -12,16 +12,16 @@
 #namespace zm_castle_tram;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_tram", &__init__, undefined, undefined);
+  system::register("zm_castle_tram", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["tram_fuse_destroy"] = "dlc1/castle/fx_glow_115_fuse_burst_castle";
   level._effect["tram_fuse_fx"] = "dlc1/castle/fx_glow_115_fuse_castle";
-  clientfield::register("scriptmover", "tram_fuse_destroy", 1, 1, "counter", &tram_fuse_destroy, 0, 0);
-  clientfield::register("scriptmover", "tram_fuse_fx", 1, 1, "counter", &function_1383302a, 0, 0);
-  clientfield::register("scriptmover", "cleanup_dynents", 1, 1, "counter", &function_8a2bbd06, 0, 0);
-  clientfield::register("world", "snd_tram", 5000, 2, "int", &snd_tram, 0, 0);
+  clientfield::register("scriptmover", "tram_fuse_destroy", 1, 1, "counter", & tram_fuse_destroy, 0, 0);
+  clientfield::register("scriptmover", "tram_fuse_fx", 1, 1, "counter", & function_1383302a, 0, 0);
+  clientfield::register("scriptmover", "cleanup_dynents", 1, 1, "counter", & function_8a2bbd06, 0, 0);
+  clientfield::register("world", "snd_tram", 5000, 2, "int", & snd_tram, 0, 0);
   thread function_58a73de9();
   thread function_60283937();
 }
@@ -43,7 +43,7 @@ function function_2d89f1a7(var_e2026f3a, n_blink_rate) {
   self endon("entityshutdown");
   n_counter = 0;
   n_timer = 0;
-  while(n_timer < var_e2026f3a) {
+  while (n_timer < var_e2026f3a) {
     if(n_counter % 2) {
       self show();
     } else {
@@ -56,21 +56,21 @@ function function_2d89f1a7(var_e2026f3a, n_blink_rate) {
 }
 
 function function_1383302a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.tram_fuse_fx = playFXOnTag(localclientnum, level._effect["tram_fuse_fx"], self, "j_fuse_main");
+  self.tram_fuse_fx = playfxontag(localclientnum, level._effect["tram_fuse_fx"], self, "j_fuse_main");
 }
 
 function tram_fuse_destroy(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.tram_fuse_fx)) {
+  if(isdefined(self.tram_fuse_fx)) {
     deletefx(localclientnum, self.tram_fuse_fx, 1);
     self.tram_fuse_fx = undefined;
   }
-  playFXOnTag(localclientnum, level._effect["tram_fuse_destroy"], self, "j_fuse_main");
+  playfxontag(localclientnum, level._effect["tram_fuse_destroy"], self, "j_fuse_main");
 }
 
 function snd_tram(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(newval == 1) {
-      playSound(0, "evt_tram_motor_start", (342, 979, 135));
+      playsound(0, "evt_tram_motor_start", (342, 979, 135));
       foreach(location in level.var_4ea0a9e6) {
         audio::playloopat("evt_tram_pulley_large_loop", location);
       }
@@ -79,7 +79,7 @@ function snd_tram(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
     }
     if(newval == 2) {
-      playSound(0, "evt_tram_motor_stop", (342, 979, 135));
+      playsound(0, "evt_tram_motor_stop", (342, 979, 135));
       foreach(location in level.var_4ea0a9e6) {
         audio::stoploopat("evt_tram_pulley_large_loop", location);
       }
@@ -96,12 +96,12 @@ function function_58a73de9() {
 }
 
 function function_60283937() {
-  while(true) {
+  while (true) {
     level waittill("hash_dc18b3bb", duration);
     if(duration == "long") {
-      playSound(0, "evt_tram_motor_long", (342, 979, 135));
+      playsound(0, "evt_tram_motor_long", (342, 979, 135));
     } else {
-      playSound(0, "evt_tram_motor_short", (342, 979, 135));
+      playsound(0, "evt_tram_motor_short", (342, 979, 135));
     }
   }
 }

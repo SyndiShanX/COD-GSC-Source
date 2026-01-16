@@ -15,7 +15,9 @@ main() {
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
   level._effect["ground_smoke_1200x1200"] = loadfx("smoke/ground_smoke1200x1200");
 
-  if(getdvar("clientSideEffects") != "1") {
+  /#
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_nightshift_fx::main();
-  }
+  # /
+
 }

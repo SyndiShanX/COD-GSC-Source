@@ -29,9 +29,8 @@ movemainloop() {
   for(;;) {
     self maps\mp\animscripts\zm_run::moverun();
 
-    if(isDefined(self.zombie_can_sidestep) && self.zombie_can_sidestep) {
+    if(isDefined(self.zombie_can_sidestep) && self.zombie_can_sidestep)
       self trysidestep();
-    }
   }
 }
 
@@ -45,13 +44,11 @@ trysidestepthread() {
   self notify("new_trySideStepThread");
   self endon("new_trySideStepThread");
 
-  if(!isDefined(self.zombie_can_sidestep)) {
+  if(!isDefined(self.zombie_can_sidestep))
     return false;
-  }
 
-  if(isDefined(self.zombie_can_sidestep) && !self.zombie_can_sidestep) {
+  if(isDefined(self.zombie_can_sidestep) && !self.zombie_can_sidestep)
     return false;
-  }
 
   while(true) {
     self trysidestep();
@@ -60,30 +57,26 @@ trysidestepthread() {
 }
 
 trysidestep() {
-  if(isDefined(self.shouldsidestepfunc)) {
+  if(isDefined(self.shouldsidestepfunc))
     self.sidesteptype = self[[self.shouldsidestepfunc]]();
-  } else {
+  else
     self.sidesteptype = shouldsidestep();
-  }
 
   if(self.sidesteptype == "none") {
-    if(isDefined(self.zombie_can_forwardstep) && self.zombie_can_forwardstep) {
+    if(isDefined(self.zombie_can_forwardstep) && self.zombie_can_forwardstep)
       self.sidesteptype = shouldforwardstep();
-    }
   }
 
-  if(self.sidesteptype == "none") {
+  if(self.sidesteptype == "none")
     return false;
-  }
 
   self.desiredstepdir = getdesiredsidestepdir(self.sidesteptype);
   self.asd_name = "zm_" + self.sidesteptype + "_" + self.desiredstepdir;
   self.substate_index = self getanimsubstatefromasd(self.asd_name);
   self.stepanim = self getanimfromasd(self.asd_name, self.substate_index);
 
-  if(!self checkroomforanim(self.stepanim)) {
+  if(!self checkroomforanim(self.stepanim))
     return false;
-  }
 
   self.allowpain = 0;
   self animcustom(::dosidestep);
@@ -100,127 +93,106 @@ getdesiredsidestepdir(sidesteptype) {
   assert(sidesteptype == "step", "Unsupported SideStepType");
   randomroll = randomfloat(1);
 
-  if(self.a.steppeddir < 0) {
+  if(self.a.steppeddir < 0)
     self.desiredstepdir = "right";
-  } else if(self.a.steppeddir > 0) {
+  else if(self.a.steppeddir > 0)
     self.desiredstepdir = "left";
-  } else if(randomroll < 0.5) {
+  else if(randomroll < 0.5)
     self.desiredstepdir = "right";
-  } else {
+  else
     self.desiredstepdir = "left";
-  }
 
   return self.desiredstepdir;
 }
 
 checkroomforanim(stepanim) {
-  if(!self maymovefrompointtopoint(self.origin, getanimendpos(stepanim))) {
+  if(!self maymovefrompointtopoint(self.origin, getanimendpos(stepanim)))
     return false;
-  }
 
   return true;
 }
 
 shouldsidestep() {
   if(cansidestep() && isplayer(self.enemy) && self.enemy islookingat(self)) {
-    if(self.zombie_move_speed != "sprint" || randomfloat(1) < 0.7) {
+    if(self.zombie_move_speed != "sprint" || randomfloat(1) < 0.7)
       return "step";
-    } else {
+    else
       return "roll";
-    }
   }
 
   return "none";
 }
 
 cansidestep() {
-  if(!isDefined(self.zombie_can_sidestep) || !self.zombie_can_sidestep) {
+  if(!isDefined(self.zombie_can_sidestep) || !self.zombie_can_sidestep)
     return false;
-  }
 
-  if(gettime() - self.a.lastsidesteptime < 2000) {
+  if(gettime() - self.a.lastsidesteptime < 2000)
     return false;
-  }
 
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
 
-  if(self.a.pose != "stand") {
+  if(self.a.pose != "stand")
     return false;
-  }
 
   distsqfromenemy = distancesquared(self.origin, self.enemy.origin);
 
-  if(distsqfromenemy < 4096) {
+  if(distsqfromenemy < 4096)
     return false;
-  }
 
-  if(distsqfromenemy > 1000000) {
+  if(distsqfromenemy > 1000000)
     return false;
-  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 4096) {
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 4096)
     return false;
-  }
 
-  if(abs(self getmotionangle()) > 15) {
+  if(abs(self getmotionangle()) > 15)
     return false;
-  }
 
   yaw = getyawtoorigin(self.enemy.origin);
 
-  if(abs(yaw) > 45) {
+  if(abs(yaw) > 45)
     return false;
-  }
 
   return true;
 }
 
 shouldforwardstep() {
-  if(canforwardstep() && isplayer(self.enemy)) {
+  if(canforwardstep() && isplayer(self.enemy))
     return "phase";
-  }
 
   return "none";
 }
 
 canforwardstep() {
-  if(isDefined(self.a.lastsidesteptime) && gettime() - self.a.lastsidesteptime < 2000) {
+  if(isDefined(self.a.lastsidesteptime) && gettime() - self.a.lastsidesteptime < 2000)
     return false;
-  }
 
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
 
-  if(self.a.pose != "stand") {
+  if(self.a.pose != "stand")
     return false;
-  }
 
   distsqfromenemy = distancesquared(self.origin, self.enemy.origin);
 
-  if(distsqfromenemy < 14400) {
+  if(distsqfromenemy < 14400)
     return false;
-  }
 
-  if(distsqfromenemy > 5760000) {
+  if(distsqfromenemy > 5760000)
     return false;
-  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 4096) {
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 4096)
     return false;
-  }
 
-  if(abs(self getmotionangle()) > 15) {
+  if(abs(self getmotionangle()) > 15)
     return false;
-  }
 
   yaw = getyawtoorigin(self.enemy.origin);
 
-  if(abs(yaw) > 45) {
+  if(abs(yaw) > 45)
     return false;
-  }
 
   return true;
 }
@@ -230,11 +202,10 @@ dosidestep() {
   self endon("killanimscript");
   self playsidestepanim(self.stepanim, self.sidesteptype);
 
-  if(self.desiredstepdir == "left") {
+  if(self.desiredstepdir == "left")
     self.a.steppeddir--;
-  } else {
+  else
     self.a.steppeddir++;
-  }
 
   self.a.lastsidesteptime = gettime();
   self notify("sidestep_done");
@@ -245,16 +216,14 @@ playsidestepanim(stepanim, sidesteptype) {
   self orientmode("face angle", self.angles[1]);
   runblendouttime = 0.2;
 
-  if(isDefined(self.sidestepfunc)) {
+  if(isDefined(self.sidestepfunc))
     self thread[[self.sidestepfunc]]("step_anim", stepanim);
-  }
 
   self setanimstatefromasd(self.asd_name, self.substate_index);
   maps\mp\animscripts\zm_shared::donotetracks("step_anim");
 
-  if(isalive(self)) {
+  if(isalive(self))
     self thread facelookaheadforabit();
-  }
 }
 
 facelookaheadforabit() {

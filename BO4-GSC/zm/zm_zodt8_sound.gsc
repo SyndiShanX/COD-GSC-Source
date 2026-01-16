@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
+
 #namespace zodt8_sound;
 
 main() {
@@ -18,16 +19,16 @@ function_45b0f2f3(str_weapon_name) {
   str_weapon = undefined;
 
   switch (str_weapon_name) {
-    case # "ww_tricannon_fire_t8":
-    case # "ww_tricannon_earth_t8":
-    case # "ww_tricannon_t8_upgraded":
-    case # "ww_tricannon_air_t8_upgraded":
-    case # "ww_tricannon_earth_t8_upgraded":
-    case # "ww_tricannon_fire_t8_upgraded":
-    case # "ww_tricannon_water_t8_upgraded":
-    case # "ww_tricannon_water_t8":
-    case # "ww_tricannon_t8":
-    case # "ww_tricannon_air_t8":
+    case #"ww_tricannon_fire_t8":
+    case #"ww_tricannon_earth_t8":
+    case #"ww_tricannon_t8_upgraded":
+    case #"ww_tricannon_air_t8_upgraded":
+    case #"ww_tricannon_earth_t8_upgraded":
+    case #"ww_tricannon_fire_t8_upgraded":
+    case #"ww_tricannon_water_t8_upgraded":
+    case #"ww_tricannon_water_t8":
+    case #"ww_tricannon_t8":
+    case #"ww_tricannon_air_t8":
       str_weapon = "wonder";
       break;
   }

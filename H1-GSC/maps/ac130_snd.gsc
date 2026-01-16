@@ -168,8 +168,8 @@ main() {
 }
 
 add_context_sensative_dialog(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.scr_sound[var_0]) || !isDefined(level.scr_sound[var_0][var_1]) || !isDefined(level.scr_sound[var_0][var_1][var_2])) {
-    level.scr_sound[var_0][var_1][var_2] = spawnStruct();
+  if(!isdefined(level.scr_sound[var_0]) || !isdefined(level.scr_sound[var_0][var_1]) || !isdefined(level.scr_sound[var_0][var_1][var_2])) {
+    level.scr_sound[var_0][var_1][var_2] = spawnstruct();
     level.scr_sound[var_0][var_1][var_2].played = 0;
     level.scr_sound[var_0][var_1][var_2].sounds = [];
   }
@@ -179,25 +179,22 @@ add_context_sensative_dialog(var_0, var_1, var_2, var_3) {
 }
 
 add_context_sensative_timeout(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.context_sensative_dialog_timeouts)) {
+  if(!isdefined(level.context_sensative_dialog_timeouts))
     level.context_sensative_dialog_timeouts = [];
-  }
 
   var_4 = 0;
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var_0])) {
+  if(!isdefined(level.context_sensative_dialog_timeouts[var_0]))
     var_4 = 1;
-  } else if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1])) {
+  else if(!isdefined(level.context_sensative_dialog_timeouts[var_0][var_1]))
     var_4 = 1;
-  }
 
-  if(var_4) {
-    level.context_sensative_dialog_timeouts[var_0][var_1] = spawnStruct();
-  }
+  if(var_4)
+    level.context_sensative_dialog_timeouts[var_0][var_1] = spawnstruct();
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2)) {
     level.context_sensative_dialog_timeouts[var_0][var_1].groups = [];
-    level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)] = spawnStruct();
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)] = spawnstruct();
     level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["timeoutDuration"] = var_3 * 1000;
     level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["lastPlayed"] = var_3 * -1000;
   } else {

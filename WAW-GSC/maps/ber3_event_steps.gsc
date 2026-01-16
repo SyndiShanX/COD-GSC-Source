@@ -37,7 +37,7 @@ e3_objectives() {
   wait(2);
   level.ready_to_count_deaths = true;
   obj_struct = getstruct("obj_storm_stag", "targetname");
-  objective_add(4, "current", &"BER3_OBJ4", obj_struct.origin);
+  objective_add(4, "current", & "BER3_OBJ4", obj_struct.origin);
   getent("e3_trig_end_mission", "targetname") waittill("trigger");
   objective_state(4, "done");
   nextmission();
@@ -56,7 +56,7 @@ send_friendlies_to_end() {
 }
 
 e3_panzer_guys_setup() {
-  guys = getEntArray("e3_panzerguy", "script_noteworthy");
+  guys = getentarray("e3_panzerguy", "script_noteworthy");
   array_thread(guys, ::add_spawn_function, ::e3_panzer_set_threatgroup);
 }
 
@@ -67,8 +67,8 @@ e3_panzer_set_threatgroup() {
 e3_spawn_axis_controller() {
   getent("e3_begin_spawning", "script_noteworthy") waittill("trigger");
   level.sarge set_force_color("b");
-  dest_barricades = getEntArray("reich_steps_blocker", "targetname");
-  for(i = 0; i < dest_barricades.size; i++) {
+  dest_barricades = getentarray("reich_steps_blocker", "targetname");
+  for (i = 0; i < dest_barricades.size; i++) {
     dest_barricades[i] connectpaths();
   }
   trig_axis_group1 = getent("e3_axis_group1", "script_noteworthy");
@@ -88,12 +88,12 @@ e3_spawn_axis_controller() {
   thread spawner_notify_manager();
   thread e3_spawn_group(trig_axis_group1, 1);
   level waittill("finished spawning group 1");
-  while(!level.ready_to_spawn_group2) {
+  while (!level.ready_to_spawn_group2) {
     wait(.2);
   }
   wait(1.0);
   thread e3_spawn_group(trig_axis_group2, 2);
-  while(!level.ready_to_spawn_group3) {
+  while (!level.ready_to_spawn_group3) {
     wait(.2);
   }
   autosave_by_name("ber3_steps_checkpoint");
@@ -108,9 +108,9 @@ wait_to_spawn_group2() {
 
 spawner_notify_manager() {
   level endon("stop stair group 3");
-  while(true) {
+  while (true) {
     wait(.1);
-    for(i = 0; i < 2; i++) {
+    for (i = 0; i < 2; i++) {
       if(isDefined(level.spawner_notifies[0])) {
         spNotify = level.spawner_notifies[0];
         level notify(spNotify);
@@ -121,9 +121,9 @@ spawner_notify_manager() {
 }
 
 e3_spawn_group(trig_spawner, whichGroup) {
-  spawners = getEntArray(trig_spawner.target, "targetname");
-  for(i = 0; i < spawners.size; i++) {
-    if(!OkTospawn()) {
+  spawners = getentarray(trig_spawner.target, "targetname");
+  for (i = 0; i < spawners.size; i++) {
+    if(!OkToSpawn()) {
       wait_network_frame();
     }
     spawners[i] thread e3_stairs_spawner(whichGroup);
@@ -137,16 +137,16 @@ e3_stairs_spawner(whichGroup) {
   spawnerNum = level.spawner_num;
   level.spawner_num++;
   self add_spawn_function(::e3_count_axis_deaths, whichGroup);
-  while(true) {
+  while (true) {
     level.spawner_notifies[level.spawner_notifies.size] = "e3 spawn guy " + spawnerNum;
     level waittill("e3 spawn guy " + spawnerNum);
-    while(!OkTospawn()) {
+    while (!OkToSpawn()) {
       wait_network_frame();
     }
     if(isDefined(self) && self.count <= 0) {
       self.count = 1;
     }
-    ai = self Stalingradspawn();
+    ai = self StalingradSpawn();
     spawn_failed(ai);
     if(isDefined(ai)) {
       ai waittill("death");
@@ -194,7 +194,7 @@ e3_count_axis_deaths(whichGroup) {
 }
 
 watch_group_deaths() {
-  while(!level.ready_to_count_deaths) {
+  while (!level.ready_to_count_deaths) {
     wait(1);
   }
   level.sarge thread anim_single_solo(level.sarge, "stairs_rez_01");
@@ -205,10 +205,10 @@ watch_group_deaths() {
   group3_pkill_min = (group3_death_min * 0.5);
   trig_axis_group1_kill = getent("e3_axis_group1_kill", "script_noteworthy");
   trig_axis_group2_kill = getent("e3_axis_group2_kill", "script_noteworthy");
-  while(level.group1_deaths < group12_death_min) {
+  while (level.group1_deaths < group12_death_min) {
     wait(.5);
   }
-  while(level.playerkill < group12_pkill_min) {
+  while (level.playerkill < group12_pkill_min) {
     wait(.5);
   }
   level notify("stop stair group 1");
@@ -216,20 +216,20 @@ watch_group_deaths() {
   level.current_watch_group = 2;
   level.playerkill = 0;
   thread e3_friendlies_move_1();
-  while(level.group2_deaths < group12_death_min) {
+  while (level.group2_deaths < group12_death_min) {
     wait(.5);
   }
-  while(level.playerkill < group12_pkill_min) {
+  while (level.playerkill < group12_pkill_min) {
     wait(.5);
   }
   level notify("stop stair group 2");
   level.current_watch_group = 3;
   level.playerkill = 0;
   thread e3_friendlies_move_2();
-  while(level.group3_deaths < group3_death_min) {
+  while (level.group3_deaths < group3_death_min) {
     wait(.5);
   }
-  while(level.playerkill < group3_pkill_min) {
+  while (level.playerkill < group3_pkill_min) {
     wait(.5);
   }
   level notify("stop stair group 3");
@@ -250,16 +250,16 @@ e3_friendlies_move_2() {
 
 e3_allies_storm_reich() {
   thread spawn_outro_axis();
-  spawner_trigs = getEntArray("e3_finale_allies", "script_noteworthy");
+  spawner_trigs = getentarray("e3_finale_allies", "script_noteworthy");
   wait(13);
-  for(i = 0; i < spawner_trigs.size; i++) {
-    spawners = getEntArray(spawner_trigs[i].target, "targetname");
+  for (i = 0; i < spawner_trigs.size; i++) {
+    spawners = getentarray(spawner_trigs[i].target, "targetname");
     array_thread(spawners, ::add_spawn_function, ::e3_reich_stormers_init);
     thread e3_spawn_group(spawner_trigs[i], 10);
     wait(.5);
   }
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     allies[i].grenadeawareness = 0;
     if(isDefined(allies[i].magic_bullet_shield) && allies[i].magic_bullet_shield) {
       continue;
@@ -281,7 +281,7 @@ e3_reich_stormers_init() {
 }
 
 spawn_outro_axis() {
-  spawners = getEntArray("e3_outro_axis", "script_noteworthy");
+  spawners = getentarray("e3_outro_axis", "script_noteworthy");
   array_thread(spawners, ::add_spawn_function, ::e3_reich_germans_init);
 }
 
@@ -295,8 +295,8 @@ e3_outro_anim_start() {
   touch_trig = getent("trig_kill_chernov", "targetname");
   players = getplayers();
   level.sarge anim_single_solo(level.sarge, "stairs_rez_04");
-  while(!player_ready) {
-    for(i = 0; i < players.size; i++) {
+  while (!player_ready) {
+    for (i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && players[i] IsTouching(touch_trig)) {
         player_ready = true;
       }
@@ -348,7 +348,7 @@ e3_play_chernov_death_anim() {
   level notify("drop pillar");
   wait(4);
   level notify("spawn flamethrower");
-  level.chernov setModel("char_rus_guard_grachev_burn");
+  level.chernov setmodel("char_rus_guard_grachev_burn");
   if(isDefined(level.cher_rus_flag)) {
     level.cher_rus_flag delete();
   }
@@ -367,7 +367,7 @@ chernov_remove_gun() {
 
 give_chernov_outro_flag() {
   cherFlag = spawn("script_model", level.chernov.origin);
-  cherFlag setModel("anim_berlin_rus_flag_rolled");
+  cherFlag setmodel("anim_berlin_rus_flag_rolled");
   cherFlag linkto(level.chernov, "tag_inhand", (0, 0, 0), (0, 0, 0));
   level waittill("detach outro flag");
   cherFlag unlink();
@@ -406,7 +406,7 @@ reznov_outro_detach_book(guy) {
 
 has_diary() {
   size = level.sarge GetAttachSize();
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     if(level.sarge GetAttachModelName(i) == "static_berlin_books_diary") {
       return true;
     }
@@ -424,7 +424,7 @@ death_flame_fx() {
   tagArray[tagArray.size] = "J_Knee_LE";
   tagArray[tagArray.size] = "J_Ankle_RI";
   tagArray[tagArray.size] = "J_Ankle_LE";
-  playFXOnTag(level._effect["flame_death2"], self, "J_SpineLower");
+  PlayFxOnTag(level._effect["flame_death2"], self, "J_SpineLower");
   self StartTanning();
 }
 
@@ -432,7 +432,7 @@ kill_all_nazis() {
   getent("e3_axis_group1_kill", "script_noteworthy") notify("trigger");
   axis = getaiarray("axis");
   level waittill("drop pillar");
-  for(i = 0; i < axis.size; i++) {
+  for (i = 0; i < axis.size; i++) {
     if(isDefined(axis[i]) && is_active_ai(axis[i])) {
       axis[i] thread bloody_death(true, 4);
     }
@@ -446,7 +446,7 @@ e3_pillar_FX1n2(guy) {
   earthquake(0.5, 1.5, quake_struct.origin, 1024);
   touch_trig = getent("trig_kill_chernov", "targetname");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] IsTouching(touch_trig)) {
       players[i] thread e3_knock_down();
     }
@@ -480,9 +480,9 @@ e3_knock_down() {
 
 cover_smoke() {
   fxSpot = spawn("script_model", (1256, 11256, 284));
-  fxSpot setModel("tag_origin");
+  fxSpot setmodel("tag_origin");
   fxSpot.angles = (0, 270, 0);
-  playFXOnTag(level._effect["pillar_cover_smoke"], fxSpot, "tag_origin");
+  playFXonTag(level._effect["pillar_cover_smoke"], fxSpot, "tag_origin");
   wait(.5);
   level.chernov animscripts\shared::PlaceWeaponOn(level.chernov.primaryweapon, "none");
 }
@@ -516,7 +516,7 @@ bunker2_friendlies() {
 
 get_friendly_by_color(which_color) {
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(allies[i] check_force_color(which_color)) {
       return allies[i];
     }
@@ -531,7 +531,7 @@ flameguy_init() {
   level.flameguy.goalradius = 32;
   level.flameguy.dropweapon = false;
   level.flameguy thread magic_bullet_shield();
-  level.flameguy setCanDamage(false);
+  level.flameguy setcandamage(false);
   level.flameguy.anim_disableLongDeath = true;
   flameguy_think();
 }
@@ -549,7 +549,7 @@ flameguy_think() {
   wait(1.5);
   level.chernov thread death_flame_fx();
   wait(1.5);
-  level.flameguy setCanDamage(true);
+  level.flameguy setcandamage(true);
   level.flameguy flamer_blow();
 }
 
@@ -559,7 +559,7 @@ flamer_blow() {
     self enable_pain();
   }
   earthquake(0.2, 0.2, self.origin, 1500);
-  playFX(level._effect["flameguy_explode"], self.origin + (0, 0, 50));
+  playfx(level._effect["flameguy_explode"], self.origin + (0, 0, 50));
   self.health = 50;
   allies = getaiarray("allies");
   allies[0] magicgrenade(self.origin + (-20, -25, 20), self.origin, 0.01);
@@ -581,17 +581,17 @@ reich_pillar_fall() {
   pillar delete();
   anode = getstruct("e3_pillar_fall_struct", "targetname");
   amodel = spawn("script_model", anode.origin, 1);
-  amodel setModel(level.scr_model["reich_pillar"]);
+  amodel setmodel(level.scr_model["reich_pillar"]);
   amodel.animname = "reich_pillar";
   amodel useanimtree(level.scr_animtree["reich_pillar"]);
   thread kill_players_under_pillar();
-  amodel playSound("explosion");
+  amodel playsound("explosion");
   setmusicstate("PILLAR");
   anode anim_single_solo(amodel, "pillar_collapse");
-  dest_barricades = getEntArray("reich_steps_blocker", "targetname");
+  dest_barricades = getentarray("reich_steps_blocker", "targetname");
   thread rumble_all_players("damage_heavy");
   earthquake(0.4, 3, amodel.origin, 1000);
-  for(i = 0; i < dest_barricades.size; i++) {
+  for (i = 0; i < dest_barricades.size; i++) {
     dest_barricades[i] delete();
   }
   set_all_players_shock("ber3_outro", 6);
@@ -611,12 +611,12 @@ kill_players_under_pillar() {
   wait(3);
   pillarClip = getent("e3_pillar_deathzone", "targetname");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] istouching(pillarClip)) {
       players[i] enableHealthShield(false);
       players[i] dodamage(players[i].health * 10, players[i].origin);
     } else {
-      players[i] setCanDamage(false);
+      players[i] setcandamage(false);
     }
   }
 }

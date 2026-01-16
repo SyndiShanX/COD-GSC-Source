@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_melee_weapon;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_bowie;
 
 autoexec __init__system__() {
@@ -27,9 +28,9 @@ private __main__() {
   }
 
   if(function_8b1a219a()) {
-    prompt = # "hash_2791ecebb85142c4";
+    prompt = #"hash_2791ecebb85142c4";
   } else {
-    prompt = # "hash_60606b68e93a29c8";
+    prompt = #"hash_60606b68e93a29c8";
   }
 
   level.var_8e4168e9 = "bowie_knife";

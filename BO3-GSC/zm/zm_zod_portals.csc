@@ -22,7 +22,7 @@
 #namespace zm_zod_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_portals", &__init__, undefined, undefined);
+  system::register("zm_zod_portals", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -35,17 +35,17 @@ function __init__() {
   level._effect["portal_shortcut_closed_base"] = "zombie/fx_quest_portal_closed_zod_zmb";
   level._effect["portal_shortcut_ending"] = "zombie/fx_quest_portal_close_igc_zod_zmb";
   n_bits = getminbitcountfornum(3);
-  clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", &player_stargate_fx, 0, 0);
-  clientfield::register("world", "portal_state_canal", 1, n_bits, "int", &portal_state_canal, 0, 1);
-  clientfield::register("world", "portal_state_slums", 1, n_bits, "int", &portal_state_slums, 0, 1);
-  clientfield::register("world", "portal_state_theater", 1, n_bits, "int", &portal_state_theater, 0, 1);
-  clientfield::register("world", "portal_state_ending", 1, 1, "int", &portal_state_ending, 0, 0);
-  clientfield::register("world", "pulse_canal_portal_top", 1, 1, "counter", &function_4bc7c0a1, 0, 0);
-  clientfield::register("world", "pulse_canal_portal_bottom", 1, 1, "counter", &function_bd6fa919, 0, 0);
-  clientfield::register("world", "pulse_slums_portal_top", 1, 1, "counter", &function_e66eb44e, 0, 0);
-  clientfield::register("world", "pulse_slums_portal_bottom", 1, 1, "counter", &function_9be42b84, 0, 0);
-  clientfield::register("world", "pulse_theater_portal_top", 1, 1, "counter", &function_7acc82f, 0, 0);
-  clientfield::register("world", "pulse_theater_portal_bottom", 1, 1, "counter", &function_8fbd3c13, 0, 0);
+  clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", & player_stargate_fx, 0, 0);
+  clientfield::register("world", "portal_state_canal", 1, n_bits, "int", & portal_state_canal, 0, 1);
+  clientfield::register("world", "portal_state_slums", 1, n_bits, "int", & portal_state_slums, 0, 1);
+  clientfield::register("world", "portal_state_theater", 1, n_bits, "int", & portal_state_theater, 0, 1);
+  clientfield::register("world", "portal_state_ending", 1, 1, "int", & portal_state_ending, 0, 0);
+  clientfield::register("world", "pulse_canal_portal_top", 1, 1, "counter", & function_4bc7c0a1, 0, 0);
+  clientfield::register("world", "pulse_canal_portal_bottom", 1, 1, "counter", & function_bd6fa919, 0, 0);
+  clientfield::register("world", "pulse_slums_portal_top", 1, 1, "counter", & function_e66eb44e, 0, 0);
+  clientfield::register("world", "pulse_slums_portal_bottom", 1, 1, "counter", & function_9be42b84, 0, 0);
+  clientfield::register("world", "pulse_theater_portal_top", 1, 1, "counter", & function_7acc82f, 0, 0);
+  clientfield::register("world", "pulse_theater_portal_bottom", 1, 1, "counter", & function_8fbd3c13, 0, 0);
 }
 
 function player_stargate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -70,7 +70,7 @@ function function_e7a8756e(localclientnum) {
 function portal_3p(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("death");
   if(newval == 1) {
-    self.fx_portal_3p = playFXOnTag(localclientnum, level._effect["portal_3p"], self, "j_spineupper");
+    self.fx_portal_3p = playfxontag(localclientnum, level._effect["portal_3p"], self, "j_spineupper");
   } else {
     stop_fx_if_defined(localclientnum, self.fx_portal_3p);
   }
@@ -118,15 +118,15 @@ function portal_state_internal(localclientnum, str_areaname, newval) {
 
 function portal_state_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   s_loc = struct::get("ending_igc_portal", "targetname");
-  v_fwd = anglesToForward(s_loc.angles);
+  v_fwd = anglestoforward(s_loc.angles);
   if(newval) {
     level.var_92f13ff4 = spawn(localclientnum, s_loc.origin, "script_model");
     level.var_92f13ff4.angles = s_loc.angles;
-    level.var_92f13ff4 setModel("p7_zm_zod_keeper_portal_01");
+    level.var_92f13ff4 setmodel("p7_zm_zod_keeper_portal_01");
     level.var_120797a1 = [];
-    for(i = 1; i < 25; i++) {
-      fx_id = playFXOnTag(localclientnum, level._effect["portal_shortcut_open_border"], level.var_92f13ff4, "tag_fx_ring_" + i);
-      if(!isDefined(level.var_120797a1)) {
+    for (i = 1; i < 25; i++) {
+      fx_id = playfxontag(localclientnum, level._effect["portal_shortcut_open_border"], level.var_92f13ff4, "tag_fx_ring_" + i);
+      if(!isdefined(level.var_120797a1)) {
         level.var_120797a1 = [];
       } else if(!isarray(level.var_120797a1)) {
         level.var_120797a1 = array(level.var_120797a1);
@@ -138,7 +138,7 @@ function portal_state_ending(localclientnum, oldval, newval, bnewent, binitialsn
     foreach(fx_id in level.var_120797a1) {
       stopfx(localclientnum, fx_id);
     }
-    playFX(localclientnum, level._effect["portal_shortcut_ending"], s_loc.origin, v_fwd);
+    playfx(localclientnum, level._effect["portal_shortcut_ending"], s_loc.origin, v_fwd);
     level.var_92f13ff4 delete();
     level thread function_c968dcbc(s_loc.origin, "zmb_teleporter_igc_lp", "zmb_teleporter_igc_end");
   }
@@ -171,70 +171,70 @@ function function_8fbd3c13(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_11ac3c33(localclientnum, str_areaname, b_is_top) {
   s_loc = get_portal_fx_loc("teleport_effect_origin", str_areaname, b_is_top);
   var_836f2873 = function_86743484(localclientnum, s_loc);
-  for(i = 1; i < 25; i++) {
+  for (i = 1; i < 25; i++) {
     if((i % 5) === 0) {
-      playFXOnTag(localclientnum, level._effect["portal_shortcut_pulse"], var_836f2873, "tag_fx_ring_" + i);
+      playfxontag(localclientnum, level._effect["portal_shortcut_pulse"], var_836f2873, "tag_fx_ring_" + i);
     }
   }
 }
 
 function function_c0c1771a(localclientnum, s_loc, b_open, var_9c9cfb54 = 0) {
-  v_fwd = anglesToForward(s_loc.angles);
-  if(!isDefined(s_loc.var_7c0ed442)) {
+  v_fwd = anglestoforward(s_loc.angles);
+  if(!isdefined(s_loc.var_7c0ed442)) {
     s_loc.var_7c0ed442 = [];
   }
-  if(!isDefined(s_loc.var_20dc3b64)) {
+  if(!isdefined(s_loc.var_20dc3b64)) {
     s_loc.var_20dc3b64 = [];
   }
-  if(!isDefined(s_loc.var_1db71ac6)) {
+  if(!isdefined(s_loc.var_1db71ac6)) {
     s_loc.var_1db71ac6 = [];
   }
   stop_fx_if_defined(localclientnum, s_loc.var_7c0ed442[localclientnum]);
   stop_fx_if_defined(localclientnum, s_loc.var_20dc3b64[localclientnum]);
-  if(isDefined(b_open) && b_open) {
-    s_loc.var_1db71ac6[localclientnum] = playFX(localclientnum, level._effect["portal_shortcut_opening"], s_loc.origin, v_fwd);
+  if(isdefined(b_open) && b_open) {
+    s_loc.var_1db71ac6[localclientnum] = playfx(localclientnum, level._effect["portal_shortcut_opening"], s_loc.origin, v_fwd);
   }
   var_836f2873 = function_86743484(localclientnum, s_loc);
   var_836f2873 hidepart(localclientnum, "tag_portal_open");
   if(b_open) {
     wait(1.3);
     var_836f2873 showpart(localclientnum, "tag_portal_open");
-    for(i = 1; i < 25; i++) {
-      playFXOnTag(localclientnum, level._effect["portal_shortcut_open_border"], var_836f2873, "tag_fx_ring_" + i);
+    for (i = 1; i < 25; i++) {
+      playfxontag(localclientnum, level._effect["portal_shortcut_open_border"], var_836f2873, "tag_fx_ring_" + i);
     }
   } else {
     var_836f2873 hidepart(localclientnum, "tag_portal_open");
   }
   stop_fx_if_defined(localclientnum, s_loc.var_1db71ac6[localclientnum]);
-  if(isDefined(b_open) && b_open) {
-    s_loc.var_7c0ed442[localclientnum] = playFX(localclientnum, level._effect["portal_shortcut_ambient"], s_loc.origin, v_fwd);
+  if(isdefined(b_open) && b_open) {
+    s_loc.var_7c0ed442[localclientnum] = playfx(localclientnum, level._effect["portal_shortcut_ambient"], s_loc.origin, v_fwd);
   } else {
     if(var_9c9cfb54) {
-      s_loc.var_20dc3b64[localclientnum] = playFX(localclientnum, level._effect["portal_shortcut_closed_base"], s_loc.origin - vectorscale((0, 0, 1), 48), v_fwd);
+      s_loc.var_20dc3b64[localclientnum] = playfx(localclientnum, level._effect["portal_shortcut_closed_base"], s_loc.origin - vectorscale((0, 0, 1), 48), v_fwd);
     } else {
-      s_loc.var_7c0ed442[localclientnum] = playFX(localclientnum, level._effect["portal_shortcut_closed"], s_loc.origin, v_fwd);
+      s_loc.var_7c0ed442[localclientnum] = playfx(localclientnum, level._effect["portal_shortcut_closed"], s_loc.origin, v_fwd);
     }
   }
 }
 
 function function_86743484(localclientnum, s_loc) {
-  if(!isDefined(level.var_ef51ee6d)) {
+  if(!isdefined(level.var_ef51ee6d)) {
     level.var_ef51ee6d = [];
   }
-  if(!isDefined(level.var_ef51ee6d[localclientnum])) {
+  if(!isdefined(level.var_ef51ee6d[localclientnum])) {
     level.var_ef51ee6d[localclientnum] = [];
   }
   str_name = s_loc.script_noteworthy;
-  if(isDefined(level.var_ef51ee6d[localclientnum][str_name])) {
+  if(isdefined(level.var_ef51ee6d[localclientnum][str_name])) {
     return level.var_ef51ee6d[localclientnum][str_name].var_836f2873;
   }
-  level.var_ef51ee6d[localclientnum][str_name] = spawnStruct();
+  level.var_ef51ee6d[localclientnum][str_name] = spawnstruct();
   level.var_ef51ee6d[localclientnum][str_name].var_836f2873 = spawn(localclientnum, s_loc.origin, "script_model");
   level.var_ef51ee6d[localclientnum][str_name].var_836f2873.angles = s_loc.angles;
-  level.var_ef51ee6d[localclientnum][str_name].var_836f2873 setModel("p7_zm_zod_keeper_portal_01");
+  level.var_ef51ee6d[localclientnum][str_name].var_836f2873 setmodel("p7_zm_zod_keeper_portal_01");
   level.var_ef51ee6d[localclientnum][str_name].mdl_base = spawn(localclientnum, s_loc.origin - vectorscale((0, 0, 1), 48), "script_model");
   level.var_ef51ee6d[localclientnum][str_name].mdl_base.angles = s_loc.angles;
-  level.var_ef51ee6d[localclientnum][str_name].mdl_base setModel("p7_zm_zod_keeper_portal_base");
+  level.var_ef51ee6d[localclientnum][str_name].mdl_base setmodel("p7_zm_zod_keeper_portal_base");
   return level.var_ef51ee6d[localclientnum][str_name].var_836f2873;
 }
 
@@ -242,7 +242,7 @@ function get_portal_fx_loc(str_targetname, str_areaname, b_is_top) {
   a_s_portal_locs = struct::get_array(str_targetname, "targetname");
   s_return_loc = undefined;
   str_top_or_bottom = undefined;
-  if(isDefined(b_is_top) && b_is_top) {
+  if(isdefined(b_is_top) && b_is_top) {
     str_top_or_bottom = "top";
   } else {
     str_top_or_bottom = "bottom";
@@ -256,7 +256,7 @@ function get_portal_fx_loc(str_targetname, str_areaname, b_is_top) {
 }
 
 function stop_fx_if_defined(localclientnum, fx_reference) {
-  if(isDefined(fx_reference)) {
+  if(isdefined(fx_reference)) {
     stopfx(localclientnum, fx_reference);
   }
 }
@@ -264,22 +264,22 @@ function stop_fx_if_defined(localclientnum, fx_reference) {
 function function_a2d0d0e4(origin1, origin2, var_4358f968, var_2978dbc6, activation) {
   audio::playloopat(var_4358f968, origin1);
   audio::stoploopat(var_2978dbc6, origin1);
-  if(isDefined(activation)) {
-    playSound(0, activation, origin1);
+  if(isdefined(activation)) {
+    playsound(0, activation, origin1);
   }
   wait(0.05);
   audio::playloopat(var_4358f968, origin2);
   audio::stoploopat(var_2978dbc6, origin2);
-  if(isDefined(activation)) {
-    playSound(0, activation, origin2);
+  if(isdefined(activation)) {
+    playsound(0, activation, origin2);
   }
 }
 
 function function_c968dcbc(origin1, var_4358f968, oneshot, activate = 0) {
-  if(isDefined(activate) && activate) {
+  if(isdefined(activate) && activate) {
     audio::playloopat(var_4358f968, origin1);
   } else {
     audio::stoploopat(var_4358f968, origin1);
   }
-  playSound(0, oneshot, origin1);
+  playsound(0, oneshot, origin1);
 }

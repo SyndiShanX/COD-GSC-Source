@@ -20,7 +20,7 @@ function lookatposition(looktargetpos, lookduration, lookspeed, eyesonly, interr
   assert(isai(self), "");
   assert(self.a.targetlookinitilized == 1, "");
   assert(lookspeed == "" || lookspeed == "", "");
-  if(!isDefined(interruptothers) || interruptothers == "interrupt others" || gettime() > self.a.lookendtime) {
+  if(!isdefined(interruptothers) || interruptothers == "interrupt others" || gettime() > self.a.lookendtime) {
     self.a.looktargetpos = looktargetpos;
     self.a.lookendtime = gettime() + (lookduration * 1000);
     if(lookspeed == "casual") {
@@ -28,7 +28,7 @@ function lookatposition(looktargetpos, lookduration, lookspeed, eyesonly, interr
     } else {
       self.a.looktargetspeed = 1600;
     }
-    if(isDefined(eyesonly) && eyesonly == "eyes only") {
+    if(isdefined(eyesonly) && eyesonly == "eyes only") {
       self notify("hash_c1896d90");
     } else {
       self notify("hash_9a1a418c");
@@ -43,7 +43,7 @@ function lookatanimations(leftanim, rightanim) {
 
 function handledogsoundnotetracks(note) {
   if(note == "sound_dogstep_run_default" || note == "dogstep_rf" || note == "dogstep_lf") {
-    self playSound("fly_dog_step_run_default");
+    self playsound("fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -60,37 +60,37 @@ function handledogsoundnotetracks(note) {
 }
 
 function growling() {
-  return isDefined(self.script_growl);
+  return isdefined(self.script_growl);
 }
 
 function registernotetracks() {
-  anim.notetracks["anim_pose = \"stand\""] = &notetrackposestand;
-  anim.notetracks["anim_pose = \"crouch\""] = &notetrackposecrouch;
-  anim.notetracks["anim_movement = \"stop\""] = &notetrackmovementstop;
-  anim.notetracks["anim_movement = \"walk\""] = &notetrackmovementwalk;
-  anim.notetracks["anim_movement = \"run\""] = &notetrackmovementrun;
-  anim.notetracks["anim_alertness = causal"] = &notetrackalertnesscasual;
-  anim.notetracks["anim_alertness = alert"] = &notetrackalertnessalert;
-  anim.notetracks["gravity on"] = &notetrackgravity;
-  anim.notetracks["gravity off"] = &notetrackgravity;
-  anim.notetracks["gravity code"] = &notetrackgravity;
-  anim.notetracks["bodyfall large"] = &notetrackbodyfall;
-  anim.notetracks["bodyfall small"] = &notetrackbodyfall;
-  anim.notetracks["footstep"] = &notetrackfootstep;
-  anim.notetracks["step"] = &notetrackfootstep;
-  anim.notetracks["footstep_right_large"] = &notetrackfootstep;
-  anim.notetracks["footstep_right_small"] = &notetrackfootstep;
-  anim.notetracks["footstep_left_large"] = &notetrackfootstep;
-  anim.notetracks["footstep_left_small"] = &notetrackfootstep;
-  anim.notetracks["footscrape"] = &notetrackfootscrape;
-  anim.notetracks["land"] = &notetrackland;
-  anim.notetracks["start_ragdoll"] = &notetrackstartragdoll;
+  anim.notetracks["anim_pose = \"stand\""] = & notetrackposestand;
+  anim.notetracks["anim_pose = \"crouch\""] = & notetrackposecrouch;
+  anim.notetracks["anim_movement = \"stop\""] = & notetrackmovementstop;
+  anim.notetracks["anim_movement = \"walk\""] = & notetrackmovementwalk;
+  anim.notetracks["anim_movement = \"run\""] = & notetrackmovementrun;
+  anim.notetracks["anim_alertness = causal"] = & notetrackalertnesscasual;
+  anim.notetracks["anim_alertness = alert"] = & notetrackalertnessalert;
+  anim.notetracks["gravity on"] = & notetrackgravity;
+  anim.notetracks["gravity off"] = & notetrackgravity;
+  anim.notetracks["gravity code"] = & notetrackgravity;
+  anim.notetracks["bodyfall large"] = & notetrackbodyfall;
+  anim.notetracks["bodyfall small"] = & notetrackbodyfall;
+  anim.notetracks["footstep"] = & notetrackfootstep;
+  anim.notetracks["step"] = & notetrackfootstep;
+  anim.notetracks["footstep_right_large"] = & notetrackfootstep;
+  anim.notetracks["footstep_right_small"] = & notetrackfootstep;
+  anim.notetracks["footstep_left_large"] = & notetrackfootstep;
+  anim.notetracks["footstep_left_small"] = & notetrackfootstep;
+  anim.notetracks["footscrape"] = & notetrackfootscrape;
+  anim.notetracks["land"] = & notetrackland;
+  anim.notetracks["start_ragdoll"] = & notetrackstartragdoll;
 }
 
 function notetrackstopanim(note, flagname) {}
 
 function notetrackstartragdoll(note, flagname) {
-  if(isDefined(self.noragdoll)) {
+  if(isdefined(self.noragdoll)) {
     return;
   }
   self unlink();
@@ -156,15 +156,15 @@ function notetrackgravity(note, flagname) {
 }
 
 function notetrackbodyfall(note, flagname) {
-  if(isDefined(self.groundtype)) {
+  if(isdefined(self.groundtype)) {
     groundtype = self.groundtype;
   } else {
     groundtype = "dirt";
   }
   if(issubstr(note, "large")) {
-    self playSound("fly_bodyfall_large_" + groundtype);
+    self playsound("fly_bodyfall_large_" + groundtype);
   } else if(issubstr(note, "small")) {
-    self playSound("fly_bodyfall_small_" + groundtype);
+    self playsound("fly_bodyfall_small_" + groundtype);
   }
 }
 
@@ -175,32 +175,32 @@ function notetrackfootstep(note, flagname) {
     playfootstep("J_BALL_RI");
   }
   if(!level.clientscripts) {
-    self playSound("fly_gear_run");
+    self playsound("fly_gear_run");
   }
 }
 
 function notetrackfootscrape(note, flagname) {
-  if(isDefined(self.groundtype)) {
+  if(isdefined(self.groundtype)) {
     groundtype = self.groundtype;
   } else {
     groundtype = "dirt";
   }
-  self playSound("fly_step_scrape_" + groundtype);
+  self playsound("fly_step_scrape_" + groundtype);
 }
 
 function notetrackland(note, flagname) {
-  if(isDefined(self.groundtype)) {
+  if(isdefined(self.groundtype)) {
     groundtype = self.groundtype;
   } else {
     groundtype = "dirt";
   }
-  self playSound("fly_land_npc_" + groundtype);
+  self playsound("fly_land_npc_" + groundtype);
 }
 
 function handlenotetrack(note, flagname, customfunction, var1) {
-  if(isai(self) && isDefined(anim.notetracks)) {
+  if(isai(self) && isdefined(anim.notetracks)) {
     notetrackfunc = anim.notetracks[note];
-    if(isDefined(notetrackfunc)) {
+    if(isdefined(notetrackfunc)) {
       return [
         [notetrackfunc]
       ](note, flagname);
@@ -243,8 +243,8 @@ function handlenotetrack(note, flagname, customfunction, var1) {
       break;
     }
     case "swap taghelmet to tagleft": {
-      if(isDefined(self.hatmodel)) {
-        if(isDefined(self.helmetsidemodel)) {
+      if(isdefined(self.hatmodel)) {
+        if(isdefined(self.helmetsidemodel)) {
           self detach(self.helmetsidemodel, "TAG_HELMETSIDE");
           self.helmetsidemodel = undefined;
         }
@@ -255,8 +255,8 @@ function handlenotetrack(note, flagname, customfunction, var1) {
       break;
     }
     default: {
-      if(isDefined(customfunction)) {
-        if(!isDefined(var1)) {
+      if(isdefined(customfunction)) {
+        if(!isdefined(var1)) {
           return [
             [customfunction]
           ](note);
@@ -272,26 +272,28 @@ function handlenotetrack(note, flagname, customfunction, var1) {
 }
 
 function donotetracks(flagname, customfunction, var1) {
-  for(;;) {
+  for (;;) {
     self waittill(flagname, note);
-    if(!isDefined(note)) {
+    if(!isdefined(note)) {
       note = "undefined";
     }
     val = self handlenotetrack(note, flagname, customfunction, var1);
-    if(isDefined(val)) {
+    if(isdefined(val)) {
       return val;
     }
   }
 }
 
 function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, var1) {
-  if(isDefined(killstring)) {
+  if(isdefined(killstring)) {
     self endon(killstring);
   }
   self endon("killanimscript");
-  for(;;) {
+  for (;;) {
     time = gettime();
-    returnednote = [[notetracksfunc]](flagname, customfunction, var1);
+    returnednote = [
+      [notetracksfunc]
+    ](flagname, customfunction, var1);
     timetaken = gettime() - time;
     if(timetaken < 0.05) {
       time = gettime();
@@ -308,7 +310,7 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
 }
 
 function donotetracksforever(flagname, killstring, customfunction, var1) {
-  donotetracksforeverproc(&donotetracks, flagname, killstring, customfunction, var1);
+  donotetracksforeverproc( & donotetracks, flagname, killstring, customfunction, var1);
 }
 
 function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction, ent, var1) {
@@ -317,9 +319,9 @@ function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, custom
 }
 
 function donotetracksfortime(time, flagname, customfunction, var1) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc(&donotetracksforever, time, flagname, customfunction, ent, var1);
+  donotetracksfortimeproc( & donotetracksforever, time, flagname, customfunction, ent, var1);
 }
 
 function donotetracksfortimeendnotify(time) {
@@ -330,15 +332,15 @@ function donotetracksfortimeendnotify(time) {
 function playfootstep(foot) {
   if(!level.clientscripts) {
     if(!isai(self)) {
-      self playSound("fly_step_run_dirt");
+      self playsound("fly_step_run_dirt");
       return;
     }
   }
   groundtype = undefined;
-  if(!isDefined(self.groundtype)) {
-    if(!isDefined(self.lastgroundtype)) {
+  if(!isdefined(self.groundtype)) {
+    if(!isdefined(self.lastgroundtype)) {
       if(!level.clientscripts) {
-        self playSound("fly_step_run_dirt");
+        self playsound("fly_step_run_dirt");
       }
       return;
     }
@@ -348,7 +350,7 @@ function playfootstep(foot) {
     self.lastgroundtype = self.groundtype;
   }
   if(!level.clientscripts) {
-    self playSound("fly_step_run_" + groundtype);
+    self playsound("fly_step_run_" + groundtype);
   }
   [[anim.optionalstepeffectfunction]](foot, groundtype);
 }
@@ -357,15 +359,15 @@ function playfootstepeffect(foot, groundtype) {
   if(level.clientscripts) {
     return;
   }
-  for(i = 0; i < anim.optionalstepeffects.size; i++) {
-    if(isDefined(self.fire_footsteps) && self.fire_footsteps) {
+  for (i = 0; i < anim.optionalstepeffects.size; i++) {
+    if(isdefined(self.fire_footsteps) && self.fire_footsteps) {
       groundtype = "fire";
     }
     if(groundtype != anim.optionalstepeffects[i]) {
       continue;
     }
     org = self gettagorigin(foot);
-    playFX(level._effect["step_" + anim.optionalstepeffects[i]], org, org + vectorscale((0, 0, 1), 100));
+    playfx(level._effect["step_" + anim.optionalstepeffects[i]], org, org + vectorscale((0, 0, 1), 100));
     return;
   }
 }
@@ -380,7 +382,7 @@ function movetooriginovertime(origin, time) {
   offset = self.origin - origin;
   frames = int(time * 20);
   offsetreduction = vectorscale(offset, 1 / frames);
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     offset = offset - offsetreduction;
     self teleport(origin + offset);
     wait(0.05);
@@ -407,24 +409,24 @@ function trackloop() {
     self.shootent = self.enemy;
   } else {
     domaxanglecheck = 1;
-    if(self.a.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean") {
+    if(self.a.script == "cover_crouch" && isdefined(self.a.covermode) && self.a.covermode == "lean") {
       pitchadd = -1 * anim.covercrouchleanpitch;
     }
-    if(self.a.script == "cover_left" || self.a.script == "cover_right" && isDefined(self.a.cornermode) && self.a.cornermode == "lean") {
+    if(self.a.script == "cover_left" || self.a.script == "cover_right" && isdefined(self.a.cornermode) && self.a.cornermode == "lean") {
       yawadd = self.covernode.angles[1] - self.angles[1];
     }
   }
   yawdelta = 0;
   pitchdelta = 0;
   firstframe = 1;
-  for(;;) {
+  for (;;) {
     incranimaimweight();
-    selfshootatpos = (self.origin[0], self.origin[1], self getEye()[2]);
+    selfshootatpos = (self.origin[0], self.origin[1], self geteye()[2]);
     shootpos = undefined;
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       shootpos = self.enemy getshootatpos();
     }
-    if(!isDefined(shootpos)) {
+    if(!isdefined(shootpos)) {
       yawdelta = 0;
       pitchdelta = 0;
     } else {
@@ -489,7 +491,7 @@ function trackloop() {
 }
 
 function setanimaimweight(goalweight, goaltime) {
-  if(!isDefined(goaltime) || goaltime <= 0) {
+  if(!isdefined(goaltime) || goaltime <= 0) {
     self.a.aimweight = goalweight;
     self.a.aimweight_start = goalweight;
     self.a.aimweight_end = goalweight;

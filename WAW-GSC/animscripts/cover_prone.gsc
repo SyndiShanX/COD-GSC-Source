@@ -31,11 +31,10 @@ main() {
   self.coverNode = self.node;
   self OrientMode("face angle", self.coverNode.angles[1]);
   self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
-  if(self.a.pose != "prone") {
+  if(self.a.pose != "prone")
     self transitionTo("prone");
-  } else {
+  else
     self EnterProneWrapper(0);
-  }
   self thread idleThread();
   self setAnimKnobAll( % prone_aim_5, % body, 1, 0.1, 1);
   self OrientMode("face angle", self.coverNode.angles[1]);
@@ -47,7 +46,7 @@ main() {
 idleThread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
-  for(;;) {
+  for (;;) {
     idleAnim = animArrayPickRandom("prone_idle");
     self setflaggedanimlimited("idle", idleAnim);
     self waittillmatch("idle", "end");
@@ -66,7 +65,7 @@ proneCombatMainLoop() {
   self thread animscripts\shoot_behavior::decideWhatAndHowToShoot("normal");
   nextShootTime = 0;
   desynched = (gettime() > 2500);
-  for(;;) {
+  for (;;) {
     self animscripts\utility::IsInCombat();
     self UpdateProneWrapper(0.05);
     if(!desynched) {
@@ -151,11 +150,10 @@ setup_cover_prone() {
 
 tryThrowingGrenade(throwAt, safe) {
   theanim = undefined;
-  if(isDefined(safe) && safe) {
+  if(isDefined(safe) && safe)
     theanim = animArrayPickRandom("grenade_safe");
-  } else {
+  else
     theanim = animArrayPickRandom("grenade_exposed");
-  }
   self animMode("zonly_physics");
   self.keepClaimedNodeInGoal = true;
   armOffset = (32, 20, 64);
@@ -167,27 +165,23 @@ tryThrowingGrenade(throwAt, safe) {
 considerThrowGrenade() {
   if(isDefined(anim.throwGrenadeAtPlayerASAP)) {
     players = GetPlayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isAlive(players[i])) {
-        if(tryThrowingGrenade(players[i], 200)) {
+        if(tryThrowingGrenade(players[i], 200))
           return true;
-        }
       }
     }
   }
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return tryThrowingGrenade(self.enemy, 850);
-  }
   return false;
 }
 
 shouldFireWhileChangingPose() {
-  if(isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
+  if(isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16)
     return false;
-  }
-  if(isDefined(self.enemy) && self canSee(self.enemy) && !isDefined(self.grenade) && self getAimYawToShootEntOrPos() < 20) {
+  if(isDefined(self.enemy) && self canSee(self.enemy) && !isDefined(self.grenade) && self getAimYawToShootEntOrPos() < 20)
     return animscripts\move::MayShootWhileMoving();
-  }
   return false;
 }
 
@@ -197,11 +191,10 @@ transitionTo(newPose) {
   }
   self clearanim( % root, .3);
   self notify("kill_idle_thread");
-  if(shouldFireWhileChangingPose()) {
+  if(shouldFireWhileChangingPose())
     transAnim = animArray(self.a.pose + "_2_" + newPose + "_firing");
-  } else {
+  else
     transAnim = animArray(self.a.pose + "_2_" + newPose);
-  }
   if(newPose == "prone") {
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
   }
@@ -230,22 +223,19 @@ proneTo(newPose, rate) {
   self clearanim( % root, .3);
   transAnim = undefined;
   if(shouldFireWhileChangingPose()) {
-    if(newPose == "crouch") {
+    if(newPose == "crouch")
       transAnim = % prone_2_crouch_firing;
-    } else if(newPose == "stand") {
+    else if(newPose == "stand")
       transAnim = % prone_2_stand_firing;
-    }
   } else {
-    if(newPose == "crouch") {
+    if(newPose == "crouch")
       transAnim = % prone_2_crouch;
-    } else if(newPose == "stand") {
+    else if(newPose == "stand")
       transAnim = % prone_2_stand_nodelta;
-    }
   }
   assert(isDefined(transAnim));
-  if(!isDefined(rate)) {
+  if(!isDefined(rate))
     rate = 1;
-  }
   self ExitProneWrapper(getAnimLength(transAnim) / 2);
   self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, rate);
   animscripts\shared::DoNoteTracks("trans");

@@ -115,17 +115,15 @@ playerhealthregen() {
       veryhurt = 1;
       self.atbrinkofdeath = 1;
 
-      if(!wasveryhurt) {
+      if(!wasveryhurt)
         hurttime = gettime();
-      }
     }
 
     if(player.health >= oldhealth) {
       regentime = level.playerhealth_regularregendelay;
 
-      if(player hasperk("specialty_healthregen")) {
+      if(player hasperk("specialty_healthregen"))
         regentime = int(regentime / getdvarfloat(#"perk_healthRegenMultiplier"));
-      }
 
       if(gettime() - hurttime < regentime) {
         continue;
@@ -142,18 +140,15 @@ playerhealthregen() {
         newhealth = ratio;
         veryhurttime = 3000;
 
-        if(player hasperk("specialty_healthregen")) {
+        if(player hasperk("specialty_healthregen"))
           veryhurttime = int(veryhurttime / getdvarfloat(#"perk_healthRegenMultiplier"));
-        }
 
-        if(gettime() > hurttime + veryhurttime) {
+        if(gettime() > hurttime + veryhurttime)
           newhealth = newhealth + regenrate;
-        }
       } else if(usetrueregen)
         newhealth = ratio + regenrate;
-      else {
+      else
         newhealth = 1;
-      }
 
       if(newhealth >= 1.0) {
         self maps\mp\gametypes_zm\_globallogic_player::resetattackerlist();
@@ -166,9 +161,8 @@ playerhealthregen() {
       player setnormalhealth(newhealth);
       change = player.health - oldhealth;
 
-      if(change > 0) {
+      if(change > 0)
         player decayplayerdamages(change);
-      }
 
       oldhealth = player.health;
       continue;
@@ -191,9 +185,8 @@ decayplayerdamages(decay) {
     }
     self.attackerdamage[i].damage = self.attackerdamage[i].damage - decay;
 
-    if(self.attackerdamage[i].damage < 0) {
+    if(self.attackerdamage[i].damage < 0)
       self.attackerdamage[i].damage = 0;
-    }
   }
 }
 
@@ -245,8 +238,7 @@ playerheartbeatsound(healthcap) {
     player playlocalsound("mpl_player_heartbeat");
     wait(self.hearbeatwait);
 
-    if(self.hearbeatwait <= 0.6) {
+    if(self.hearbeatwait <= 0.6)
       self.hearbeatwait = self.hearbeatwait + 0.1;
-    }
   }
 }

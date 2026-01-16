@@ -13,14 +13,14 @@
 #namespace zm_bgb_licensed_contractor;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_licensed_contractor", &__init__, undefined, "bgb");
+  system::register("zm_bgb_licensed_contractor", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_licensed_contractor", "activated", 3, undefined, undefined, undefined, &activation);
+  bgb::register("zm_bgb_licensed_contractor", "activated", 3, undefined, undefined, undefined, & activation);
 }
 
 function activation() {

@@ -4,7 +4,7 @@
 ************************************************/
 
 main() {
-  self setModel("c_usa_nicaragua_hudson_fb");
+  self setmodel("c_usa_nicaragua_hudson_fb");
   self.headmodel = "c_usa_nicaragua_hudson_glasses";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

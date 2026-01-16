@@ -19,7 +19,7 @@ docks_glass_smash() {
 }
 
 dingbat_shot_sound(e_digbat) {
-  level.player playSound("evt_dingbat_shot");
+  level.player playsound("evt_dingbat_shot");
 }
 
 sndchangemotelmusicstate(duderino) {

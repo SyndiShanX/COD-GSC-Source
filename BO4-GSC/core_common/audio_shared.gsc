@@ -8,6 +8,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace audio;
 
 autoexec __init__system__() {
@@ -104,7 +105,7 @@ sndupdatevehiclecontext(added) {
 
 playtargetmissilesound(alias, looping) {
   self notify(#"stop_target_missile_sound");
-  self endon(#"stop_target_missile_sound", # "disconnect", # "death");
+  self endon(#"stop_target_missile_sound", #"disconnect", #"death");
 
   if(isDefined(alias)) {
     time = soundgetplaybacktime(alias) * 0.001;
@@ -124,17 +125,17 @@ on_missile_lock(params) {
 
   if(!flag::get("playing_stinger_fired_at_me")) {
     self thread playtargetmissilesound(params.weapon.lockontargetlockedsound, params.weapon.lockontargetlockedsoundloops);
-    self waittill(#"stinger_fired_at_me", # "missile_unlocked", # "death");
+    self waittill(#"stinger_fired_at_me", #"missile_unlocked", #"death");
     self notify(#"stop_target_missile_sound");
   }
 }
 
 function_c25f7d1(params) {
   assert(isplayer(self));
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self flag::set("playing_stinger_fired_at_me");
   self thread playtargetmissilesound(params.weapon.lockontargetfiredonsound, params.weapon.lockontargetfiredonsoundloops);
-  params.projectile waittill(#"projectile_impact_explode", # "death");
+  params.projectile waittill(#"projectile_impact_explode", #"death");
   self notify(#"stop_target_missile_sound");
   self flag::clear("playing_stinger_fired_at_me");
 }
@@ -151,91 +152,91 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
     return;
   }
 
-  str_alias = # "hash_6d746e7e1822ad79";
+  str_alias = #"hash_6d746e7e1822ad79";
 
   switch (weapon.rootweapon.name) {
-    case # "hero_annihilator":
-      str_alias = # "hash_5e5050d7f9042fac";
+    case #"hero_annihilator":
+      str_alias = #"hash_5e5050d7f9042fac";
       break;
-    case # "eq_gravityslam":
-      str_alias = # "hash_191ff361b2a52032";
+    case #"eq_gravityslam":
+      str_alias = #"hash_191ff361b2a52032";
       break;
-    case # "molotov_fire":
-      str_alias = # "hash_40a5f428bba291a8";
+    case #"molotov_fire":
+      str_alias = #"hash_40a5f428bba291a8";
       break;
-    case # "gadget_radiation_field":
-      str_alias = # "hash_16cc324cc4a290fc";
+    case #"gadget_radiation_field":
+      str_alias = #"hash_16cc324cc4a290fc";
       break;
-    case # "sig_bow_quickshot5":
-      str_alias = # "hash_1732b1323f11b7bf";
+    case #"sig_bow_quickshot5":
+      str_alias = #"hash_1732b1323f11b7bf";
       break;
-    case # "sig_lmg":
-      str_alias = # "hash_7b92159573aee640";
+    case #"sig_lmg":
+      str_alias = #"hash_7b92159573aee640";
       break;
-    case # "sniper_powersemi_t8":
-    case # "sniper_powerbolt_t8":
-    case # "sniper_fastrechamber_t8":
-    case # "sniper_quickscope_t8":
-      str_alias = # "hash_9b40eefa77d6446";
+    case #"sniper_powersemi_t8":
+    case #"sniper_powerbolt_t8":
+    case #"sniper_fastrechamber_t8":
+    case #"sniper_quickscope_t8":
+      str_alias = #"hash_9b40eefa77d6446";
       break;
-    case # "ar_damage_t8":
-    case # "ar_accurate_t8":
-    case # "smg_capacity_t8":
-    case # "pistol_burst_t8":
-    case # "ar_fastfire_t8":
-    case # "lmg_heavy_t8":
-    case # "tr_midburst_t8":
-    case # "ar_stealth_t8":
-    case # "tr_longburst_t8":
-    case # "smg_standard_t8":
-    case # "lmg_spray_t8":
-    case # "smg_accurate_t8":
-    case # "ar_modular_t8":
-    case # "smg_fastfire_t8":
-    case # "lmg_standard_t8":
-    case # "smg_handling_t8":
-      str_alias = # "hash_669a22b65807ee3b";
+    case #"ar_damage_t8":
+    case #"ar_accurate_t8":
+    case #"smg_capacity_t8":
+    case #"pistol_burst_t8":
+    case #"ar_fastfire_t8":
+    case #"lmg_heavy_t8":
+    case #"tr_midburst_t8":
+    case #"ar_stealth_t8":
+    case #"tr_longburst_t8":
+    case #"smg_standard_t8":
+    case #"lmg_spray_t8":
+    case #"smg_accurate_t8":
+    case #"ar_modular_t8":
+    case #"smg_fastfire_t8":
+    case #"lmg_standard_t8":
+    case #"smg_handling_t8":
+      str_alias = #"hash_669a22b65807ee3b";
       break;
-    case # "pistol_revolver_t8":
-    case # "tr_powersemi_t8":
-    case # "pistol_standard_t8":
-      str_alias = # "hash_2b81ab20b5e3d199";
+    case #"pistol_revolver_t8":
+    case #"tr_powersemi_t8":
+    case #"pistol_standard_t8":
+      str_alias = #"hash_2b81ab20b5e3d199";
       break;
-    case # "shotgun_pump_t8":
-    case # "shotgun_semiauto_t8":
-      str_alias = # "hash_10ba93a0930567c5";
+    case #"shotgun_pump_t8":
+    case #"shotgun_semiauto_t8":
+      str_alias = #"hash_10ba93a0930567c5";
       break;
-    case # "eq_sticky_grenade":
-      str_alias = # "hash_5330d1fc9ae03536";
+    case #"eq_sticky_grenade":
+      str_alias = #"hash_5330d1fc9ae03536";
       break;
-    case # "eq_cluster_semtex_grenade":
-      str_alias = # "hash_58d3e2978f41dc59";
+    case #"eq_cluster_semtex_grenade":
+      str_alias = #"hash_58d3e2978f41dc59";
       break;
   }
 
   switch (smeansofdeath) {
-    case # "mod_trigger_hurt":
-      str_alias = # "hash_3f3f94dcb425d73b";
+    case #"mod_trigger_hurt":
+      str_alias = #"hash_3f3f94dcb425d73b";
       break;
-    case # "mod_melee_weapon_butt":
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_weapon_butt":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       if(function_641cec60(weapon)) {
-        str_alias = # "hash_5cd2899685b79029";
+        str_alias = #"hash_5cd2899685b79029";
       } else if(weapon.rootweapon.name == "sig_blade") {
-        str_alias = # "hash_6494570483effef0";
+        str_alias = #"hash_6494570483effef0";
       } else {
-        str_alias = # "hash_3fa09e466fc19e30";
+        str_alias = #"hash_3fa09e466fc19e30";
       }
 
       break;
-    case # "mod_meta":
-    case # "mod_suicide":
+    case #"mod_meta":
+    case #"mod_suicide":
       str_alias = undefined;
       break;
-    case # "mod_dot":
+    case #"mod_dot":
       if(weapon.doesfiredamage) {
-        str_alias = # "hash_40a5f428bba291a8";
+        str_alias = #"hash_40a5f428bba291a8";
         break;
       }
 
@@ -254,9 +255,9 @@ function_641cec60(weapon) {
 
   var_80de6af = 0;
 
-  if(weapon.name == # "knife_loadout") {
+  if(weapon.name == #"knife_loadout") {
     var_80de6af = 1;
-  } else if(weapon.name == # "ar_stealth_t8" || weapon.name == # "pistol_standard_t8") {
+  } else if(weapon.name == #"ar_stealth_t8" || weapon.name == #"pistol_standard_t8") {
     if(weaponhasattachment(weapon, "uber")) {
       var_80de6af = 1;
     }

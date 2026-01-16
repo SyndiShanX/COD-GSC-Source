@@ -7,6 +7,7 @@
 #include scripts\core_common\footsteps_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace ct_ai_blight_father;
 
 autoexec __init__system__() {
@@ -14,12 +15,12 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "fx8_blightfather_weakspot_sack_amb"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
-  level._effect[# "fx8_blightfather_weakspot_elbow_amb"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
-  level._effect[# "fx8_blightfather_weakspot_jaw_amb"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
-  level._effect[# "fx8_blightfather_maggot_spawn_burst"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
-  level._effect[# "fx8_blightfather_chaos_missle"] = "zm_ai/fx8_blightfather_chaos_missle";
-  level._effect[# "fx8_blightfather_maggot_death_exp"] = "zm_ai/fx8_blightfather_maggot_death_exp";
+  level._effect[#"fx8_blightfather_weakspot_sack_amb"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
+  level._effect[#"fx8_blightfather_weakspot_elbow_amb"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
+  level._effect[#"fx8_blightfather_weakspot_jaw_amb"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
+  level._effect[#"fx8_blightfather_maggot_spawn_burst"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
+  level._effect[#"fx8_blightfather_chaos_missle"] = "zm_ai/fx8_blightfather_chaos_missle";
+  level._effect[#"fx8_blightfather_maggot_death_exp"] = "zm_ai/fx8_blightfather_maggot_death_exp";
   footsteps::registeraitypefootstepcb(#"blight_father", &function_958ba8d1);
   clientfield::register("actor", "blight_father_amb_sac_clientfield", 1, 1, "int", &function_192c82f8, 0, 0);
   clientfield::register("actor", "blight_father_weakpoint_l_elbow_fx", 1, 1, "int", &function_c6aa29ea, 0, 0);
@@ -52,7 +53,7 @@ private function_7d5fa1ae(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_c6aa29ea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_cc8c05d5 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_le");
+    self.var_cc8c05d5 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_le");
     return;
   }
 
@@ -64,7 +65,7 @@ private function_c6aa29ea(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_caf74103(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_e844c6a2 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_ri");
+    self.var_e844c6a2 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_ri");
     return;
   }
 
@@ -76,7 +77,7 @@ private function_caf74103(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_bc64a2a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_81531422 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_le_fx");
+    self.var_81531422 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_le_fx");
     return;
   }
 
@@ -88,7 +89,7 @@ private function_bc64a2a(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
 private function_c4fff539(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_40cb39ba = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_ri_fx");
+    self.var_40cb39ba = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_ri_fx");
     return;
   }
 
@@ -100,7 +101,7 @@ private function_c4fff539(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_de0a50df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_2beadf7 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_weakspot_jaw_amb"], self, "tag_jaw");
+    self.var_2beadf7 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_weakspot_jaw_amb"], self, "tag_jaw");
     return;
   }
 
@@ -111,11 +112,11 @@ private function_de0a50df(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 private function_67ad42f3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_le");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_le");
 }
 
 private function_f102952d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_ri");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_ri");
 }
 
 private function_192c82f8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -135,7 +136,7 @@ private function_192c82f8(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 private function_e47c2324(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_f2668f6d = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_chaos_missle"], self, "tag_origin");
+    self.var_f2668f6d = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_chaos_missle"], self, "tag_origin");
     return;
   }
 
@@ -149,8 +150,8 @@ private function_f02b0934(localclientnum, oldvalue, newvalue, bnewent, binitials
   angles = self.angles;
 
   if(isDefined(position) && isDefined(angles)) {
-    playFX(localclientnum, level._effect[# "fx8_blightfather_maggot_death_exp"], position, anglesToForward(angles), anglestoup(angles));
-    function_2a9101fe(localclientnum, # "hash_7867f8f9aaaa0c40", position);
+    playFX(localclientnum, level._effect[#"fx8_blightfather_maggot_death_exp"], position, anglesToForward(angles), anglestoup(angles));
+    function_2a9101fe(localclientnum, #"hash_7867f8f9aaaa0c40", position);
   }
 
   earthquake(localclientnum, 0.4, 0.8, self.origin, 300);

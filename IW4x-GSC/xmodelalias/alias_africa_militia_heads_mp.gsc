@@ -3,6 +3,9 @@
  * Script: xmodelalias\alias_africa_militia_heads_mp.gsc
 *********************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   var_0[0] = "head_africa_militia_a_mp";
   var_0[1] = "head_africa_militia_b_mp";

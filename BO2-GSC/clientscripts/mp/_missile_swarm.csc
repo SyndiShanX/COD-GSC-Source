@@ -20,11 +20,11 @@ swarm_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
   if(isdemoplaying()) {
     return;
   }
-  if(newval && newval != oldval && newval != 2) {
+  if(newval && newval != oldval && newval != 2)
     player thread swarm_think(localclientnum, self.origin);
-  } else if(!newval) {
+  else if(!newval)
     level notify("missile_swarm_stop");
-  } else if(newval == 2) {
+  else if(newval == 2) {
     level notify("missile_emp_death");
     level notify("missile_swarm_stop");
   }
@@ -38,9 +38,8 @@ swarm_think(localclientnum, sound_origin) {
   level thread swarm_sound(localclientnum, sound_origin);
 
   for(;;) {
-    if(self.missile_swarm_count < 0) {
+    if(self.missile_swarm_count < 0)
       self.missile_swarm_count = 0;
-    }
 
     if(self.missile_swarm_count > self.missile_swarm_max) {
       wait 0.5;
@@ -50,9 +49,8 @@ swarm_think(localclientnum, sound_origin) {
     count = randomintrange(1, 3);
     self.missile_swarm_count = self.missile_swarm_count + count;
 
-    for(i = 0; i < count; i++) {
+    for(i = 0; i < count; i++)
       self projectile_spawn(localclientnum);
-    }
 
     wait(self.missile_swarm_count / self.missile_swarm_max);
   }
@@ -65,11 +63,11 @@ projectile_spawn(localclientnum) {
   upvector = (0, 0, randomintrange(1000, 1300));
   yaw = randomintrange(0, 360);
   angles = (0, yaw, 0);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   origin = self.origin + upvector + forward * dist * -1;
   end = self.origin + upvector + forward * dist;
   rocket = spawn(localclientnum, origin, "script_model");
-  rocket setModel("veh_t6_drone_hunterkiller_viewmodel");
+  rocket setmodel("veh_t6_drone_hunterkiller_viewmodel");
   rocket useanimtree(#animtree);
   rocket setanim( % o_drone_hunter_launch, 1.0, 0.0, 1.0);
   rocket thread projectile_move_think(localclientnum, self, origin, end);
@@ -79,16 +77,15 @@ projectile_spawn(localclientnum) {
 projectile_move_think(localclientnum, player, start, end) {
   level endon("missile_emp_death");
   wait(randomfloatrange(0.5, 1));
-  playFXOnTag(localclientnum, level._effect["swarm_tail"], self, "tag_origin");
+  playfxontag(localclientnum, level._effect["swarm_tail"], self, "tag_origin");
   direction = end - self.origin;
   self rotateto(vectortoangles(direction), 0.05);
   self waittill("rotatedone");
   self moveto(end, randomfloatrange(12, 18));
   self waittill("movedone");
 
-  if(isDefined(player)) {
+  if(isDefined(player))
     player.missile_swarm_count--;
-  }
 
   self delete();
 }
@@ -98,7 +95,7 @@ swarm_sound(localclientnum, origin) {
   entity = spawn(localclientnum, origin, "script_model");
   entity thread deleteonmissileswarmstop();
   wait 2;
-  entity playLoopSound("veh_harpy_drone_swarm_close__lp", 1);
+  entity playloopsound("veh_harpy_drone_swarm_close__lp", 1);
 }
 
 deleteonmissileswarmstop() {
@@ -112,7 +109,6 @@ projectile_delete_think(localclientnum) {
   self endon("death");
   level waittill("missile_emp_death");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }

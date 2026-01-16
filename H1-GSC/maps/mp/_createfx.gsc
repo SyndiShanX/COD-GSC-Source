@@ -38,8 +38,8 @@ func_position_player_get(var_0) {
 callback_playerconnect() {
   self waittill("begin");
 
-  if(!isDefined(level.player)) {
-    var_0 = getEntArray("mp_global_intermission", "classname");
+  if(!isdefined(level.player)) {
+    var_0 = getentarray("mp_global_intermission", "classname");
     var_1 = (var_0[0].angles[0], var_0[0].angles[1], 0.0);
     self spawn(var_0[0].origin, var_1);
     maps\mp\_utility::updatesessionstate("playing");

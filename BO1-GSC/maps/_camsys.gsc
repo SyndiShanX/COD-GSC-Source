@@ -11,7 +11,7 @@ camsys_init() {
 }
 
 create_cp(origin) {
-  cp = spawnStruct();
+  cp = SpawnStruct();
   cp.origin = origin;
   cp.attrib = [];
   cp.attrib["time"] = 1;
@@ -26,15 +26,15 @@ build_shot(shot_name, track_type, target_type, track_array, target_array) {
     assertmsg("shot_name of, '" + shot_name + "' already exists.");
     return;
   }
-  shot = spawnStruct();
-  track = spawnStruct();
+  shot = SpawnStruct();
+  track = SpawnStruct();
   track.type = track_type;
   track.cpoints = [];
   for(i = 0; i < track_array.size; i++) {
     track.cpoints[track.cpoints.size] = track_array[i];
   }
   shot.cam_track = track;
-  target = spawnStruct();
+  target = SpawnStruct();
   target.type = target_type;
   target.cpoints = [];
   for(i = 0; i < target_array.size; i++) {
@@ -116,7 +116,7 @@ create_scene_add_shot(name_of_scene, shot_name, shot_number) {
     level.cam_scenes = [];
   }
   if(!isDefined(level.cam_scenes[name_of_scene])) {
-    level.cam_scenes[name_of_scene] = spawnStruct();
+    level.cam_scenes[name_of_scene] = SpawnStruct();
   }
   if(!isDefined(level.cam_scenes[name_of_scene].shots)) {
     level.cam_scenes[name_of_scene].shots = [];
@@ -243,7 +243,7 @@ playback_scene(option1, option2, option3) {
   temp_text.alpha = 1;
   wait(1.0);
   level notify("blacked out");
-  if(isDefined(option1) && !IsString(option1)) {
+  if(IsDefineD(option1) && !IsString(option1)) {
     wait(option1);
   } else {
     wait(3);

@@ -15,7 +15,7 @@ function precache_fx_anims() {
 
 function main() {
   disablefx = getdvarint("disable_fx");
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isdefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
 }

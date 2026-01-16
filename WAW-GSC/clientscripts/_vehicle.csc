@@ -82,7 +82,7 @@ vehicle_rumble(localClientNum) {
   }
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
-  while(1) {
+  while (1) {
     if((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) > radius_squared) || self getspeed() == 0) {
       wait(0.2);
       continue;
@@ -92,7 +92,7 @@ vehicle_rumble(localClientNum) {
       continue;
     }
     self PlayRumbleLoopOnEntity(localClientNum, level.vehicle_rumble[type].rumble);
-    while((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 0)) {
+    while ((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 0)) {
       self earthquake(self.rumble_scale, self.rumble_duration, self.origin, self.rumble_radius);
       wait(self.rumble_basetime + randomfloat(self.rumble_randomaditionaltime));
     }
@@ -134,7 +134,7 @@ tread(localClientNum, tagname, side, relativeOffset) {
   if(treadfx == -1) {
     return;
   }
-  for(;;) {
+  for (;;) {
     speed = self getspeed();
     if(speed == 0) {
       wait 0.1;
@@ -152,10 +152,10 @@ tread(localClientNum, tagname, side, relativeOffset) {
     treadfx = treadget(self, side);
     if(treadfx != -1) {
       ang = self getTagAngles(tagname);
-      forwardVec = anglesToForward(ang);
+      forwardVec = anglestoforward(ang);
       effectOrigin = self getTagOrigin(tagname);
       forwardVec = vector_multiply(forwardVec, waitTime);
-      playFX(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
+      playfx(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
     }
   }
 }
@@ -192,7 +192,7 @@ playTankExhaust(localClientNum) {
   level endon("stop_exhaust_fx");
   level endon("save_restore");
   exhaustDelay = 0.1;
-  for(;;) {
+  for (;;) {
     if(!isDefined(self) || !(self isalive())) {
       return;
     } else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
@@ -201,11 +201,11 @@ playTankExhaust(localClientNum) {
     }
     tag_left_orig = self gettagorigin("tag_engine_left");
     tag_left_angles = self gettagangles("tag_engine_left");
-    playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglesToForward(tag_left_angles));
+    playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglestoforward(tag_left_angles));
     if(!level.vehicle_exhaust[self.model].one_exhaust) {
       tag_right_orig = self gettagorigin("tag_engine_right");
       tag_right_angles = self gettagangles("tag_engine_right");
-      playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglesToForward(tag_right_angles));
+      playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglestoforward(tag_right_angles));
     }
     wait exhaustDelay;
   }
@@ -220,7 +220,7 @@ build_exhaust(model, effect, one_exhaust) {
   if(!isDefined(level.vehicle_exhaust)) {
     level.vehicle_exhaust = [];
   }
-  level.vehicle_exhaust[model] = spawnStruct();
+  level.vehicle_exhaust[model] = spawnstruct();
   level.vehicle_exhaust[model].exhaust_fx = loadfx(effect);
   if(isDefined(one_exhaust) && one_exhaust) {
     level.vehicle_exhaust[model].one_exhaust = true;
@@ -241,7 +241,7 @@ build_gear(vehicletype, model, tag) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
@@ -287,13 +287,13 @@ vehicle_variants(localClientNum) {
         maxGear = numGear;
       }
       randomConstantNumber = self getentitynumber();
-      for(i = 0; i < maxGear; i++) {
+      for (i = 0; i < maxGear; i++) {
         alreadyChosen = true;
         gearChoices[i] = -1;
-        while(alreadyChosen) {
+        while (alreadyChosen) {
           alreadyChosen = false;
           gearChoices[i] = randomConstantNumber % numGear;
-          for(j = 0; j < i; j++) {
+          for (j = 0; j < i; j++) {
             if(level.vehicleGearTags[self.vehicletype][gearChoices[j]] == level.vehicleGearTags[self.vehicletype][gearChoices[i]]) {
               alreadyChosen = true;
               break;
@@ -333,7 +333,7 @@ aircraft_dustkick() {
   trace = undefined;
   d = undefined;
   trace_ent = self;
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     if(repeatRate <= 0) {
       repeatRate = defaultRepeatRate;
     }
@@ -344,7 +344,7 @@ aircraft_dustkick() {
     doTraceThisFrame--;
     if(doTraceThisFrame <= 0) {
       doTraceThisFrame = numFramesPerTrace;
-      trace = bulletTrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
+      trace = bullettrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), false, trace_ent);
       d = distance(trace_ent.origin, trace["position"]);
       repeatRate = ((d - minHeight) / (maxHeight - minHeight)) * (slowestRepeatWait - fastestRepeatWait) + fastestRepeatWait;
     }
@@ -371,8 +371,8 @@ aircraft_dustkick() {
     assertEx(isDefined(level._vehicle_effect[self.vehicletype][trace["surfacetype"]]), "UNKNOWN SURFACE TYPE: " + trace["surfacetype"]);
     if(level._vehicle_effect[self.vehicletype][trace["surfacetype"]] != -1) {
       players = getlocalplayers();
-      for(j = 0; j < players.size; j++) {
-        playFX(j, level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
+      for (j = 0; j < players.size; j++) {
+        playfx(j, level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
       }
     }
   }
@@ -383,10 +383,10 @@ vehicle_weapon_fired() {
   level endon("save_restore");
   shock_distance = 400 * 400;
   rumble_distance = 500 * 500;
-  while(true) {
+  while (true) {
     self waittill("weapon_fired");
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player_distance = DistanceSquared(self.origin, players[i].origin);
       if(player_distance < rumble_distance) {
         if(isDefined(level.vehicle_shoot_rumble) && isDefined(level.vehicle_shoot_rumble[self.vehicletype])) {

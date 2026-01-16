@@ -26,59 +26,59 @@ play_tinnitus() {
   tinnitus = getent("2d_origin", "targetname");
   cough_player = getent("rats_2d", "targetname");
   wait 2;
-  tinnitus playLoopSound("player_explosion_loop", 3);
+  tinnitus playloopsound("player_explosion_loop", 3);
   wait 3.5;
   tinnitus stoploopsound(2);
-  cough_player playSound("cough_player_self");
+  cough_player playsound("cough_player_self");
 }
 
 play_arty_sound() {
   level endon("subway_gate_opened");
-  while(1) {
+  while (1) {
     level waittill("ber2_earthquake");
     ber2_earthquake = getent("2d_origin", "targetname");
-    ber2_earthquake playSound("art_int");
+    ber2_earthquake playsound("art_int");
   }
 }
 
 play_metro_arty_sound() {
   level endon("subway_exitgate_startDefenders");
-  while(1) {
+  while (1) {
     level waittill("metro_arty");
     metro_arty = getent("2d_origin", "targetname");
-    metro_arty playSound("metro_arty");
+    metro_arty playsound("metro_arty");
   }
 }
 
 play_metro_rats_sound() {
   level endon("wave_finished");
-  while(1) {
+  while (1) {
     level waittill("start_rats");
     start_rats = getent("rats_2d", "targetname");
-    start_rats playSound("rats");
+    start_rats playsound("rats");
   }
 }
 
 play_wave_arty_sound() {
   level endon("wave_finished");
-  while(1) {
+  while (1) {
     level waittill("wave_arty");
     wave_arty = getent("2d_origin", "targetname");
-    wave_arty playSound("wave_arty");
+    wave_arty playsound("wave_arty");
   }
 }
 
 play_rumble_sound() {
   level endon("wave_finished");
-  while(1) {
+  while (1) {
     level waittill("rumble");
     rumble = getent("rumble_2d", "targetname");
     rattle1 = getent("rattle1", "targetname");
     rattle2 = getent("rattle2", "targetname");
-    rumble playLoopSound("rumble", 1);
+    rumble playloopsound("rumble", 1);
     wait 7;
-    rattle1 playSound("rattle1");
-    rattle2 playSound("rattle2");
+    rattle1 playsound("rattle1");
+    rattle2 playsound("rattle2");
     level waittill("stop_wave_sound");
     rumble stoploopsound(.2);
   }
@@ -93,21 +93,21 @@ play_wave_sound() {
   underwater_scream1 = getent("underwater_scream1", "targetname");
   underwater_scream2 = getent("underwater_scream2", "targetname");
   slow_shatter = getent("slow_shatter", "targetname");
-  subway_exitgate_startRunners playLoopSound("wave");
+  subway_exitgate_startRunners playloopsound("wave");
   level waittill("slow_shatter");
-  slow_shatter playSound("slow_shatterL");
-  slow_shatter playSound("slow_shatterLrev");
-  slow_shatter playSound("dewww");
+  slow_shatter playsound("slow_shatterL");
+  slow_shatter playsound("slow_shatterLrev");
+  slow_shatter playsound("dewww");
   level waittill("stop_wave_sound");
   subway_exitgate_startRunners stoploopsound(.1);
-  wave_impact playSound("wave_impactF");
-  underwater_loop1 playLoopSound("under_waterF", 1);
-  underwater_loop2 playLoopSound("under_waterR", 1);
-  wave_impact playSound("water_passF");
+  wave_impact playsound("wave_impactF");
+  underwater_loop1 playloopsound("under_waterF", 1);
+  underwater_loop2 playloopsound("under_waterR", 1);
+  wave_impact playsound("water_passF");
   level waittill("water_scream");
-  underwater_scream1 playSound("water_scream1");
+  underwater_scream1 playsound("water_scream1");
   level waittill("water_scream");
-  underwater_scream2 playSound("water_scream3");
+  underwater_scream2 playsound("water_scream3");
   level waittill("loops_stop");
   underwater_loop1 stoploopsound(5);
   underwater_loop2 stoploopsound(5);
@@ -120,8 +120,8 @@ state_timer(time, state_name) {
 
 destructible_speakers_init() {
   flag_wait("all_players_connected");
-  speakers = getEntArray("destructible_speaker", "targetname");
-  for(i = 0; i < speakers.size; i++) {
+  speakers = GetEntArray("destructible_speaker", "targetname");
+  for (i = 0; i < speakers.size; i++) {
     if(!isDefined(speakers[i].script_noteworthy)) {
       ASSERTMSG("Destructible speaker at origin " + speakers[i].origin + " must have script_noteworthy set to the soundalias you want it to loop.");
     }
@@ -133,9 +133,9 @@ destructible_speaker(speaker) {
   alias = speaker.script_noteworthy;
   speakerDmg = maps\ber2_util::getent_safe(speaker.target, "targetname");
   speakerDmg Hide();
-  speaker playLoopSound(alias);
-  speaker setCanDamage(true);
-  while(1) {
+  speaker PlayLoopSound(alias);
+  speaker SetCanDamage(true);
+  while (1) {
     speaker waittill("damage", dmg, attacker, direction_vec, point, type);
     if(IsPlayer(attacker)) {
       if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
@@ -144,8 +144,8 @@ destructible_speaker(speaker) {
     }
   }
   speakerDmg Show();
-  speakerDmg playSound("speaker_break");
-  playFX(level._effect["wire_sparks"], speakerDmg.origin);
+  speakerDmg PlaySound("speaker_break");
+  PlayFx(level._effect["wire_sparks"], speakerDmg.origin);
   speaker Delete();
   if(arcademode()) {
     arcademode_assignpoints("arcademode_score_generic500", attacker);

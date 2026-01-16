@@ -18,9 +18,8 @@ minefield_think() {
   while(1) {
     self waittill("trigger", other);
 
-    if(isPlayer(other)) {
+    if(isPlayer(other))
       other thread minefield_kill(self);
-    }
   }
 }
 

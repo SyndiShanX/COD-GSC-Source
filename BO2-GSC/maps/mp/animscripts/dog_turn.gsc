@@ -13,11 +13,10 @@ main() {
   self.safetochangescript = 0;
   deltayaw = self getdeltaturnyaw();
 
-  if(need_to_turn_around(deltayaw)) {
+  if(need_to_turn_around(deltayaw))
     turn_180(deltayaw);
-  } else {
+  else
     turn_90(deltayaw);
-  }
 
   move_out_of_turn();
   self.skipstartmove = 1;

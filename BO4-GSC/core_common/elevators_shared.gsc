@@ -13,6 +13,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace elevators;
 
 class class_727456f3 {
@@ -104,7 +105,7 @@ class class_727456f3 {
     self flag::clear("elevator_moving");
 
     if(isDefined(var_10b20309)) {
-      var_10b20309.mdl_gameobject.interactteam = # "any";
+      var_10b20309.mdl_gameobject.interactteam = #"any";
       var_10b20309 gameobjects::enable_object();
     }
 
@@ -182,7 +183,7 @@ class class_727456f3 {
     self flag::clear("elevator_moving");
 
     if(isDefined(var_10b20309)) {
-      var_10b20309.mdl_gameobject.interactteam = # "any";
+      var_10b20309.mdl_gameobject.interactteam = #"any";
       var_10b20309 gameobjects::enable_object();
     }
 
@@ -443,7 +444,7 @@ class class_727456f3 {
       }
     } else {
       if(isDefined(var_10b20309) && isDefined(b_inside) && b_inside) {
-        var_10b20309.mdl_gameobject.interactteam = # "any";
+        var_10b20309.mdl_gameobject.interactteam = #"any";
         var_10b20309 gameobjects::enable_object();
         return;
       }
@@ -488,7 +489,7 @@ class class_727456f3 {
         var_10b20309 gameobjects::function_2efe0342();
         thread function_da0405b7(e_player);
         e_player clientfield::set_to_player("elevator_floor_selection", 1);
-        waitresult = e_player waittill(#"menuresponse", # "disconnect", # "death");
+        waitresult = e_player waittill(#"menuresponse", #"disconnect", #"death");
         flag::clear("inner_button_menu_active");
 
         if(waitresult._notify == "menuresponse") {
@@ -499,7 +500,7 @@ class class_727456f3 {
             floornum = waitresult.intpayload;
             function_47b06180(floornum, b_inside);
           } else {
-            var_10b20309.mdl_gameobject.interactteam = # "any";
+            var_10b20309.mdl_gameobject.interactteam = #"any";
             var_10b20309 gameobjects::enable_object();
           }
         }
@@ -544,7 +545,7 @@ class class_727456f3 {
         var_2af3d553 notify(#"hash_10ae3aed4e10c4c7");
         e_player clientfield::set_to_player("elevator_floor_selection", 0);
         flag::clear("inner_button_menu_active");
-        var_10b20309.mdl_gameobject.interactteam = # "any";
+        var_10b20309.mdl_gameobject.interactteam = #"any";
         var_10b20309 gameobjects::enable_object();
         thread function_64d6a132(var_10b20309, 0, 1);
         break;

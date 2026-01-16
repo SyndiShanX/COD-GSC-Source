@@ -16,6 +16,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\remote_weapons;
+
 #namespace lead_drone;
 
 autoexec __init__system__() {
@@ -87,7 +88,7 @@ state_death_update(params) {
 }
 
 function_f358791() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   wait 1;
 
   for(;;) {
@@ -278,7 +279,7 @@ cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -359,7 +360,7 @@ reload() {
 }
 
 attackthread() {
-  self endon(#"death", # "change_state", # "end_attack_thread");
+  self endon(#"death", #"change_state", #"end_attack_thread");
 
   while(true) {
     enemy = undefined;
@@ -412,18 +413,19 @@ function_1c4cd527(origin, owner, innerradius, outerradius, halfheight, spacing) 
 
   foreach(point in queryresult.data) {
     if(!point.visibility) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x63>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x63>";
 
-      point.score += -5000;
+        point.score += -5000;
     }
   }
 
@@ -476,13 +478,15 @@ function_5ebe7443() {
 
   while(true) {
     if(isDefined(self.protectdest)) {
+
       recordsphere(self.protectdest, 8, (0, 0, 1), "<dev string:x73>");
 
-      if(isDefined(self.var_d6acaac4)) {
-        recordsphere(self.protectdest, 8, (0, 1, 0), "<dev string:x73>");
-        recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x73>");
+        if(isDefined(self.var_d6acaac4)) {
 
-      }
+          recordsphere(self.protectdest, 8, (0, 1, 0), "<dev string:x73>");
+          recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x73>");
+
+        }
     }
 
     waitframe(1);
@@ -490,7 +494,7 @@ function_5ebe7443() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self thread function_5ebe7443();
   self thread attackthread();
 
@@ -539,12 +543,12 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = vehicle_ai::shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
 
   if(isDefined(weapon)) {
-    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === # "damageeffecttype_electrical") {
+    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === #"damageeffecttype_electrical") {
       minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
       maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
       self notify(#"emped", {
-        #param0: randomfloatrange(minempdowntime, maxempdowntime),
-        #param1: eattacker,
+        #param0: randomfloatrange(minempdowntime, maxempdowntime), 
+        #param1: eattacker, 
         #param2: einflictor
       });
     }
@@ -554,7 +558,7 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = killstreaks::ondamageperweapon("drone_squadron", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, &destroyed_cb, self.maxhealth * 0.4, &low_health_cb, emp_damage, undefined, 1, 1);
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "hatchet" && smeansofdeath == "MOD_IMPACT") {
+    if(weapon.name == #"hatchet" && smeansofdeath == "MOD_IMPACT") {
       idamage = self.maxhealth;
     }
   }

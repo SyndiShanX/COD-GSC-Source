@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_countdown_fx.gsc
 *********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 107
   ent = createOneshotEffect("smoke_missile_launched");
   ent.v["origin"] = (577.799, 1040.57, -522);
   ent.v["angles"] = (270, 0, 0);
@@ -211,4 +213,5 @@ main() {
   ent.v["origin"] = (-645.241, 77.4099, -59.7673);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_ac_air_vent";
+
 }

@@ -8,10 +8,11 @@
 #include scripts\core_common\util_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_scarlett;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_scarlett", &__init__, undefined, # "character_unlock_scarlett_fixup");
+  system::register(#"character_unlock_scarlett", &__init__, undefined, #"character_unlock_scarlett_fixup");
 }
 
 __init__() {
@@ -45,5 +46,5 @@ on_player_killed() {
     return;
   }
 
-  attacker character_unlock::function_c8beca5e(#"scarlett_unlock", # "hash_698918780b4406f1", 1);
+  attacker character_unlock::function_c8beca5e(#"scarlett_unlock", #"hash_698918780b4406f1", 1);
 }

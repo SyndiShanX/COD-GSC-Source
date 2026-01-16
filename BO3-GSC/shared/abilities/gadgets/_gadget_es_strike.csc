@@ -15,11 +15,11 @@
 #namespace _gadget_es_strike;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_es_strike", &__init__, undefined, undefined);
+  system::register("gadget_es_strike", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_spawned(local_client_num) {}

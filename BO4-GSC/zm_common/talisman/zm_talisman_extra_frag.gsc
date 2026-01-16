@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_talisman_extra_frag;
 
 autoexec __init__system__() {
@@ -40,7 +41,7 @@ function_fbcc1e50() {
 
   level flagsys::wait_till(#"all_players_spawned");
 
-  if(self.slot_weapons[# "lethal_grenade"] === getweapon(#"eq_frag_grenade")) {
+  if(self.slot_weapons[#"lethal_grenade"] === getweapon(#"eq_frag_grenade")) {
     self takeweapon(getweapon(#"eq_frag_grenade"));
     self giveweapon(getweapon(#"eq_frag_grenade_extra"));
     self zm_loadout::set_player_lethal_grenade(getweapon(#"eq_frag_grenade_extra"));

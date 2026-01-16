@@ -69,9 +69,9 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "asylum_trap_fx_north", 21000, 1, "int", &zm_asylum_fx::function_93f91575, 0, 0);
-  clientfield::register("world", "asylum_trap_fx_south", 21000, 1, "int", &zm_asylum_fx::function_4c17ba1b, 0, 0);
-  clientfield::register("world", "asylum_generator_state", 21000, 1, "int", &function_d56a2c4b, 0, 0);
+  clientfield::register("world", "asylum_trap_fx_north", 21000, 1, "int", & zm_asylum_fx::function_93f91575, 0, 0);
+  clientfield::register("world", "asylum_trap_fx_south", 21000, 1, "int", & zm_asylum_fx::function_4c17ba1b, 0, 0);
+  clientfield::register("world", "asylum_generator_state", 21000, 1, "int", & function_d56a2c4b, 0, 0);
 }
 
 function start_zombie_stuff() {
@@ -85,7 +85,7 @@ function include_weapons() {
 
 function function_d87a7dcc() {
   var_bd7ba30 = 0;
-  while(true) {
+  while (true) {
     if(!level clientfield::get("zombie_power_on")) {
       level.power_on = 0;
       if(var_bd7ba30) {
@@ -103,31 +103,31 @@ function function_d56a2c4b(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval) {
     level.var_c4ea7bb2 = 1;
     level thread play_random_generator_sparks();
-  } else if(isDefined(level.var_c4ea7bb2) && level.var_c4ea7bb2) {
+  } else if(isdefined(level.var_c4ea7bb2) && level.var_c4ea7bb2) {
     level.var_c4ea7bb2 = 0;
   }
 }
 
 function play_random_generator_sparks() {
-  while(level.var_c4ea7bb2) {
+  while (level.var_c4ea7bb2) {
     wait(randomfloatrange(0.45, 0.85));
-    playSound(0, "amb_elec_arc_generator", (-672, -264, 296));
+    playsound(0, "amb_elec_arc_generator", (-672, -264, 296));
   }
 }
 
 function function_c9207335() {
   wait(3);
   level thread function_d667714e();
-  var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, &function_60a32834);
+  var_13a52dfe = getentarray(0, "sndMusicTrig", "targetname");
+  array::thread_all(var_13a52dfe, & function_60a32834);
 }
 
 function function_60a32834() {
-  while(true) {
+  while (true) {
     self waittill("trigger", trigplayer);
     if(trigplayer islocalplayer()) {
       level notify("hash_51d7bc7c", self.script_sound);
-      while(isDefined(trigplayer) && trigplayer istouching(self)) {
+      while (isdefined(trigplayer) && trigplayer istouching(self)) {
         wait(0.016);
       }
     } else {
@@ -140,8 +140,8 @@ function function_d667714e() {
   level.var_b6342abd = "mus_asylum_underscore_default";
   level.var_6d9d81aa = "mus_asylum_underscore_default";
   level.var_eb526c90 = spawn(0, (0, 0, 0), "script_origin");
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(level.var_b6342abd, 2);
-  while(true) {
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(level.var_b6342abd, 2);
+  while (true) {
     level waittill("hash_51d7bc7c", location);
     level.var_6d9d81aa = "mus_asylum_underscore_" + location;
     if(level.var_6d9d81aa != level.var_b6342abd) {
@@ -155,17 +155,17 @@ function function_b234849(var_6d9d81aa) {
   level endon("hash_51d7bc7c");
   level.var_eb526c90 stopallloopsounds(2);
   wait(1);
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(var_6d9d81aa, 2);
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(var_6d9d81aa, 2);
 }
 
 function function_d19cb2f8() {
   loopers = struct::get_array("exterior_goal", "targetname");
-  if(isDefined(loopers) && loopers.size > 0) {
+  if(isdefined(loopers) && loopers.size > 0) {
     delay = 0;
     if(getdvarint("") > 0) {
       println(("" + loopers.size) + "");
     }
-    for(i = 0; i < loopers.size; i++) {
+    for (i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
       if((delay % 20) == 0) {
@@ -179,27 +179,27 @@ function function_d19cb2f8() {
 }
 
 function soundloopthink() {
-  if(!isDefined(self.origin)) {
+  if(!isdefined(self.origin)) {
     return;
   }
-  if(!isDefined(self.script_sound)) {
+  if(!isdefined(self.script_sound)) {
     self.script_sound = "zmb_spawn_walla";
   }
   notifyname = "";
-  assert(isDefined(notifyname));
-  if(isDefined(self.script_string)) {
+  assert(isdefined(notifyname));
+  if(isdefined(self.script_string)) {
     notifyname = self.script_string;
   }
-  assert(isDefined(notifyname));
+  assert(isdefined(notifyname));
   started = 1;
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     started = self.script_int != 0;
   }
   if(started) {
     soundloopemitter(self.script_sound, self.origin);
   }
   if(notifyname != "") {
-    for(;;) {
+    for (;;) {
       level waittill(notifyname);
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);

@@ -14,9 +14,8 @@ rappel_precache() {
 rappel_start(s_aligned) {
   assert(isDefined(s_aligned), "s_aligned is a required parameter for rappel_start");
 
-  if(!isDefined(self._rappel)) {
+  if(!isDefined(self._rappel))
     self rappel_init_2h();
-  }
 
   if(isDefined(self._rappel.anims.rappel_viewmodel)) {
     str_viewmodel = self._rappel.anims.rappel_viewmodel;
@@ -56,7 +55,7 @@ rappel_init_1h() {
 }
 
 rappel_init_2h() {
-  self._rappel = spawnStruct();
+  self._rappel = spawnstruct();
   _rappel_setup_default_anims_2h();
   self._rappel _rappel_init_controls();
   self._rappel _rappel_init_anims();
@@ -92,9 +91,8 @@ rappel_set_control_scheme(func_rappel, func_brake) {
 
   self._rappel.controls.rappel_button = func_rappel;
 
-  if(isDefined(func_brake)) {
+  if(isDefined(func_brake))
     self._rappel.controls.rappel_brake_button = func_brake;
-  }
 }
 
 rappel_set_can_fail(b_can_fail, n_drop_speed_before_fail) {
@@ -102,9 +100,8 @@ rappel_set_can_fail(b_can_fail, n_drop_speed_before_fail) {
   assert(isDefined(self._rappel), "rappel struct has not been set up on entity " + self getentitynumber() + ". run rappel_init_1h or rappel_init_2h prior to rappel_set_can_fail");
   self._rappel.difficulty.can_fail = b_can_fail;
 
-  if(isDefined(n_drop_speed_before_fail)) {
+  if(isDefined(n_drop_speed_before_fail))
     self._rappel.movement.drop_speed_max = n_drop_speed_before_fail;
-  }
 }
 
 rappel_set_drop_and_stop_parameters(n_speed_drop, n_brake_time_min, n_brake_time_max) {
@@ -188,57 +185,45 @@ rappel_set_data_struct(s_rappel_data) {
   assert(isDefined(s_rappel_data), "s_rappel_data is a required parameter for rappel_set_data_struct");
   self._rappel = s_rappel_data;
 
-  if(!isDefined(self._rappel.ent)) {
+  if(!isDefined(self._rappel.ent))
     self._rappel.ent = spawn("script_origin", self.origin);
-  }
 }
 
 rappel_update_anim_set(a_anims) {
   assert(isDefined(a_anims), "a_anims is a required parameter for rappel_update_anim_set");
 
-  if(isDefined(a_anims["hookup"])) {
+  if(isDefined(a_anims["hookup"]))
     self._rappel.anims.rappel_start = a_anims["hookup"];
-  }
 
-  if(isDefined(a_anims["idle_hang"])) {
+  if(isDefined(a_anims["idle_hang"]))
     self._rappel.anims.idle_loop = a_anims["idle_hang"];
-  }
 
-  if(isDefined(a_anims["charge"])) {
+  if(isDefined(a_anims["charge"]))
     self._rappel.anims.charge = a_anims["charge"];
-  }
 
-  if(isDefined(a_anims["charge_loop"])) {
+  if(isDefined(a_anims["charge_loop"]))
     self._rappel.anims.charge_loop = a_anims["charge_loop"];
-  }
 
-  if(isDefined(a_anims["kickoff"])) {
+  if(isDefined(a_anims["kickoff"]))
     self._rappel.anims.push = a_anims["kickoff"];
-  }
 
-  if(isDefined(a_anims["brake"])) {
+  if(isDefined(a_anims["brake"]))
     self._rappel.anims.brake = a_anims["brake"];
-  }
 
-  if(isDefined(a_anims["brake_loop"])) {
+  if(isDefined(a_anims["brake_loop"]))
     self._rappel.anims.brake_loop = a_anims["brake_loop"];
-  }
 
-  if(isDefined(a_anims["fall_start"])) {
+  if(isDefined(a_anims["fall_start"]))
     self._rappel.anims.fall = a_anims["fall_start"];
-  }
 
-  if(isDefined(a_anims["fall_loop"])) {
+  if(isDefined(a_anims["fall_loop"]))
     self._rappel.anims.fall_loop = a_anims["fall_loop"];
-  }
 
-  if(isDefined(a_anims["fall_ground_hit"])) {
+  if(isDefined(a_anims["fall_ground_hit"]))
     self._rappel.anims.fall_splat = a_anims["fall_ground_hit"];
-  }
 
-  if(isDefined(a_anims["land"])) {
+  if(isDefined(a_anims["land"]))
     self._rappel.anims.land = a_anims["land"];
-  }
 }
 
 rappel_set_viewmodel(str_viewmodel_name) {
@@ -268,16 +253,14 @@ rappel_play_custom_anim(str_animname, n_blend_time_to_idle) {
   assert(isDefined(self._rappel), "rappel not initialized on entity " + self getentitynumber() + "! Call rappel_init_1h or rappel_init_2h before using rappel_play_custom_anim");
   assert(!self._rappel.status.can_rappel_now, "rappel_play_custom_anim() called while rappel controls were active. call rappel_pause() before rappel_play_custom_anim()!");
 
-  while(self._rappel.status.is_descending) {
+  while(self._rappel.status.is_descending)
     wait 0.05;
-  }
 
   str_idle_loop = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.idle_loop][0];
   str_idle_stop_notify = self._rappel.anims.idle_stop_notify;
 
-  if(!isDefined(n_blend_time_to_idle)) {
+  if(!isDefined(n_blend_time_to_idle))
     n_blend_time_to_idle = 1;
-  }
 
   self disableweapons();
   self unlink();
@@ -344,7 +327,7 @@ _rappel_setup_default_anims_1h() {
 }
 
 _rappel_init_strings() {
-  self.strings = spawnStruct();
+  self.strings = spawnstruct();
   self.strings.rappel_1h_grab = "Press [{+speed_throw}] to grab rappel rope";
   self.strings.rappel_hint = "Charge and release [{+speed_throw}] to rappel";
   self.strings.brake_hint = "Hold [{+attack}] to brake";
@@ -352,16 +335,15 @@ _rappel_init_strings() {
 }
 
 _rappel_init_difficulty() {
-  self.difficulty = spawnStruct();
+  self.difficulty = spawnstruct();
   self.difficulty.can_fail = 1;
 }
 
 _rappel_init_status(s_aligned) {
-  if(isDefined(self.status)) {
+  if(isDefined(self.status))
     self.status = undefined;
-  }
 
-  self.status = spawnStruct();
+  self.status = spawnstruct();
   self.status.is_rotating = 0;
   self.status.is_descending = 0;
   self.status.is_near_ground = 0;
@@ -373,13 +355,12 @@ _rappel_init_status(s_aligned) {
   self.status.ground_position = undefined;
   self.status.frames_since_jump = 0;
 
-  if(isDefined(s_aligned)) {
+  if(isDefined(s_aligned))
     self.status.reference_node = s_aligned;
-  }
 }
 
 _rappel_init_controls() {
-  self.controls = spawnStruct();
+  self.controls = spawnstruct();
   self.controls.rappel_button = ::_check_rappel_button;
   self.controls.rappel_brake_button = ::_check_rappel_brake_button;
   self.controls.allow_weapons = 0;
@@ -388,7 +369,7 @@ _rappel_init_controls() {
 }
 
 _rappel_init_anims() {
-  self.anims = spawnStruct();
+  self.anims = spawnstruct();
   self.anims.anim_tag = "tag_player";
   self.anims.body_model = "player_body";
   self.anims.rappel_start = "rappel_hookup";
@@ -407,7 +388,7 @@ _rappel_init_anims() {
 }
 
 _rappel_init_depth_of_field() {
-  self.depth_of_field = spawnStruct();
+  self.depth_of_field = spawnstruct();
   self.depth_of_field.near_start = 5;
   self.depth_of_field.near_end = 33;
   self.depth_of_field.far_start = 0;
@@ -423,7 +404,7 @@ _rappel_set_depth_of_field(e_player) {
 }
 
 _rappel_get_depth_of_field_old() {
-  self._rappel.depth_of_field_old = spawnStruct();
+  self._rappel.depth_of_field_old = spawnstruct();
   self._rappel.depth_of_field_old.near_start = self getdepthoffield_nearstart();
   self._rappel.depth_of_field_old.near_end = self getdepthoffield_nearend();
   self._rappel.depth_of_field_old.near_blur = self getdepthoffield_nearblur();
@@ -433,7 +414,7 @@ _rappel_get_depth_of_field_old() {
 }
 
 _rappel_init_viewcone() {
-  self.viewcone = spawnStruct();
+  self.viewcone = spawnstruct();
   self.viewcone.link_tag = "tag_player";
   self.viewcone.percentage = 0;
   self.viewcone.right_arc = 0;
@@ -446,7 +427,7 @@ _rappel_init_viewcone() {
 }
 
 _rappel_init_movement() {
-  self.movement = spawnStruct();
+  self.movement = spawnstruct();
   self.movement.rotate_speed = 10;
   self.movement.threshold_to_ground = 55;
   self.movement.enable_rotation = 0;
@@ -473,11 +454,10 @@ _check_rappel_brake_button() {
 _descent_control_active() {
   b_is_2h_rappel = self _is_2h_rappel();
 
-  if(b_is_2h_rappel) {
+  if(b_is_2h_rappel)
     b_control_active = self _is_pressing_rappel_button();
-  } else {
+  else
     b_control_active = self _is_pressing_rappel_button();
-  }
 
   return b_control_active;
 }
@@ -486,9 +466,8 @@ _is_pressing_rappel_button() {
   b_is_rappelling = 0;
 
   if(self _is_2h_rappel()) {
-    if(self[[self._rappel.controls.rappel_button]]()) {
+    if(self[[self._rappel.controls.rappel_button]]())
       b_is_rappelling = 1;
-    }
   } else if(self[[self._rappel.controls.rappel_button]]())
     b_is_rappelling = 1;
 
@@ -497,7 +476,7 @@ _is_pressing_rappel_button() {
 
 _rappel_hook_up(s_aligned) {
   self disableweapons();
-  self playSound("evt_rappel_hookup");
+  self playsound("evt_rappel_hookup");
   self.body = spawn_anim_model(self._rappel.anims.body_model, self.origin);
   self.body.angles = self.angles;
   self.body hide();
@@ -529,9 +508,8 @@ _1h_rappel_start(s_aligned) {
     self.body setanimlimited(str_hookup_anim, 1, 0, 0);
     screen_message_create(self._rappel.strings.rappel_1h_grab);
 
-    while(!self _is_pressing_rappel_button()) {
+    while(!self _is_pressing_rappel_button())
       wait 0.05;
-    }
 
     self.body setanimlimited(str_hookup_anim, 1, 0, 1);
     screen_message_delete();
@@ -543,19 +521,17 @@ _1h_rappel_start(s_aligned) {
 _rappel_player_link(e_to_link, b_no_viewlook) {
   assert(isDefined(e_to_link), "_rappel_player_link is missing e_to_link parameter");
 
-  if(!isDefined(b_no_viewlook)) {
+  if(!isDefined(b_no_viewlook))
     b_no_viewlook = 0;
-  }
 
   b_use_absolute = self._rappel.viewcone.use_absolute;
 
-  if(b_use_absolute) {
+  if(b_use_absolute)
     self playerlinktoabsolute(e_to_link, self._rappel.viewcone.link_tag);
-  } else if(!b_use_absolute && b_no_viewlook) {
+  else if(!b_use_absolute && b_no_viewlook)
     self playerlinktodelta(e_to_link, self._rappel.viewcone.link_tag, 80, 0, 0, 0, 0, 1);
-  } else {
+  else
     self playerlinktodelta(e_to_link, self._rappel.viewcone.link_tag, self._rappel.viewcone.percentage, self._rappel.viewcone.right_arc, self._rappel.viewcone.left_arc, self._rappel.viewcone.top_arc, self._rappel.viewcone.bottom_arc, self._rappel.viewcone.use_tag_angles);
-  }
 }
 
 _rappel_print_controls_full() {
@@ -569,9 +545,8 @@ _rappel_controls_print_brake() {
   screen_message_delete();
   str_brake = self._rappel.strings.brake_hint;
 
-  if(isDefined(str_brake) && str_brake != "") {
+  if(isDefined(str_brake) && str_brake != "")
     screen_message_create(str_brake);
-  }
 }
 
 _rappel_control_start(s_aligned) {
@@ -584,15 +559,13 @@ _rappel_control_start(s_aligned) {
   self.body linkto(self._rappel.ent);
   self.body thread maps\_anim::anim_loop(self.body, self._rappel.anims.idle_loop, self._rappel.anims.idle_stop_notify);
 
-  if(isDefined(self._rappel.anims.rappel_viewmodel)) {
+  if(isDefined(self._rappel.anims.rappel_viewmodel))
     self setviewmodel(self._rappel.anims.rappel_viewmodel);
-  }
 
   self _rappel_enable_weapons_if_allowed();
 
-  if(isDefined(self._rappel.movement.disable_decend_until_notify)) {
+  if(isDefined(self._rappel.movement.disable_decend_until_notify))
     self waittill(self._rappel.movement.disable_decend_until_notify);
-  }
 
   self allowads(0);
 
@@ -604,9 +577,9 @@ _rappel_control_start(s_aligned) {
 
     if(self._rappel.movement.enable_rotation) {
       v_angles_player_forward = self.angles;
-      v_angles_player_forward = anglesToForward(v_angles_player_forward);
+      v_angles_player_forward = anglestoforward(v_angles_player_forward);
       v_angles_player_forward = _rappel_vector_remove_z(v_angles_player_forward);
-      v_angles_body_forward = anglesToForward(self.body.angles);
+      v_angles_body_forward = anglestoforward(self.body.angles);
       v_angles_body_forward = _rappel_vector_remove_z(v_angles_body_forward);
       v_angles_body_right = anglestoright(self.body.angles);
       n_dot_forward_view = vectordot(v_angles_body_forward, v_angles_player_forward);
@@ -654,9 +627,8 @@ _rappel_switch_to_sidearm() {
     for(i = 0; i < a_weapon_list.size; i++) {
       str_class = weaponclass(a_weapon_list[i]);
 
-      if(str_class == "pistol") {
+      if(str_class == "pistol")
         self switchtoweapon(a_weapon_list[i]);
-      }
     }
   }
 }
@@ -664,7 +636,7 @@ _rappel_switch_to_sidearm() {
 _rappel_landing() {
   screen_message_delete();
   level.player stoploopsound(0.25);
-  level.player playSound("fly_land_plr_default");
+  level.player playsound("fly_land_plr_default");
 
   if(!self._rappel.status.falling_to_death) {
     self notify("_rappel_safe_landing");
@@ -697,11 +669,10 @@ _rappel_cleanup() {
 decend_sound() {
   self endon("_rappel_safe_landing");
 
-  if(self._rappel.status.is_descending == 1) {
-    level.player playLoopSound("evt_rappel_slide");
-  } else {
+  if(self._rappel.status.is_descending == 1)
+    level.player playloopsound("evt_rappel_slide");
+  else
     level.player stoploopsound(0.25);
-  }
 }
 
 _rappel_descend() {
@@ -727,9 +698,8 @@ _rappel_descend() {
     }
   }
 
-  if(!isDefined(self._rappel.status.ground_position)) {
+  if(!isDefined(self._rappel.status.ground_position))
     self._rappel.status.ground_position = self _rappel_get_ground_trace_position();
-  }
 
   _rappel_controls_print_brake();
 
@@ -772,9 +742,9 @@ _rappel_jump(n_charge_time) {
   self.body setanim(str_push_anim, 1, n_anim_time_push);
 
   while(self _is_freefalling()) {
-    if(n_counter < n_anim_time_push) {
+    if(n_counter < n_anim_time_push)
       n_counter = n_counter + 0.05;
-    } else {
+    else {
       self.body setanimknoball(str_idle_loop_anim, % root, 1, n_anim_time_push, 1);
       break;
     }
@@ -787,15 +757,13 @@ _rappel_fall(v_velocity) {
   self endon("_rappel_safe_landing");
   self endon("_rappel_stop_movement");
 
-  if(!isDefined(self._rappel.movement.acceleration_per_frame)) {
+  if(!isDefined(self._rappel.movement.acceleration_per_frame))
     self._rappel.movement.acceleration_per_frame = self._rappel.movement.acceleration / 20;
-  }
 
   self._rappel.status.frames_since_jump = 0;
 
-  if(!isDefined(self._rappel.status.ground_position)) {
+  if(!isDefined(self._rappel.status.ground_position))
     self._rappel.status.ground_position = self _rappel_get_ground_trace_position();
-  }
 
   v_ground_pos = self._rappel.status.ground_position;
   n_counter_threshold = self _rappel_get_frames_to_threshold();
@@ -805,18 +773,16 @@ _rappel_fall(v_velocity) {
   v_drop_per_frame = (0, 0, self._rappel.movement.acceleration_per_frame);
 
   while(self _is_freefalling()) {
-    if(n_counter > n_counter_threshold) {
+    if(n_counter > n_counter_threshold)
       v_velocity_per_frame = (0, 0, 0);
-    }
 
     v_fall_vector_current = v_velocity_per_frame + v_drop_per_frame * n_counter;
     v_new_position = self._rappel.ent.origin + v_fall_vector_current;
     n_distance_to_ground = distance(self.origin, v_ground_pos);
     b_next_point_above_threshold = self _is_above_threshold();
 
-    if(!b_next_point_above_threshold) {
+    if(!b_next_point_above_threshold)
       self._rappel.status.is_near_ground = 1;
-    }
 
     b_is_point_below_threshold = self._rappel.movement.threshold_to_ground > n_distance_to_ground;
     b_is_point_above_ground = self _is_point_above_ground(v_new_position, v_ground_pos);
@@ -834,9 +800,8 @@ _rappel_fall(v_velocity) {
     n_drop_this_frame = abs(v_fall_vector_current[2]);
     self._rappel.ent.origin = v_new_position;
 
-    if(self._rappel.difficulty.can_fail && n_drop_this_frame > n_fail_speed && !self._rappel.status.falling_to_death) {
+    if(self._rappel.difficulty.can_fail && n_drop_this_frame > n_fail_speed && !self._rappel.status.falling_to_death)
       self thread _rappel_do_falling_death();
-    }
 
     n_counter++;
     self._rappel.status.frames_since_jump = n_counter;
@@ -851,9 +816,8 @@ _rappel_get_frames_to_threshold() {
   n_distance_to_threshold = n_distance_to_ground - self._rappel.movement.threshold_to_ground;
   n_distance_after_frames = 0;
 
-  for(n_frames_to_threshold = 0; n_distance_after_frames < n_distance_to_threshold; n_frames_to_threshold++) {
+  for(n_frames_to_threshold = 0; n_distance_after_frames < n_distance_to_threshold; n_frames_to_threshold++)
     n_distance_after_frames = n_distance_after_frames + (n_frames_to_threshold + 1) * n_drop_speed;
-  }
 
   n_frames_to_threshold = clamp(n_frames_to_threshold, 1, 20);
   return n_frames_to_threshold;
@@ -864,9 +828,8 @@ _is_above_threshold() {
   n_threshold_height = self._rappel.movement.threshold_to_ground;
   n_distance_to_ground = self _rappel_get_distance_to_ground();
 
-  if(n_threshold_height > n_distance_to_ground) {
+  if(n_threshold_height > n_distance_to_ground)
     b_is_above_threshold = 0;
-  }
 
   return b_is_above_threshold;
 }
@@ -876,15 +839,14 @@ _is_point_above_ground(v_next_position, v_ground_position) {
   n_height_next = v_next_position[2];
   n_height_ground = v_ground_position[2];
 
-  if(n_height_ground > n_height_next) {
+  if(n_height_ground > n_height_next)
     b_is_above_ground = 0;
-  }
 
   return b_is_above_ground;
 }
 
 _rappel_do_falling_death() {
-  self playSound("evt_rappel_fail");
+  self playsound("evt_rappel_fail");
   screen_message_delete();
   self disableweapons();
   self notify("_rappel_falling_death");
@@ -898,11 +860,10 @@ _rappel_do_falling_death() {
   n_counter = 0;
 
   while(!self._rappel.status.on_ground) {
-    if(n_counter < n_anim_length) {
+    if(n_counter < n_anim_length)
       n_counter = n_counter + 0.05;
-    } else {
+    else
       self.body setanimknoball(str_fall_death_loop, % root, 1, 0.2, 1);
-    }
 
     wait 0.05;
   }
@@ -924,11 +885,10 @@ _is_2h_rappel() {
 }
 
 _is_pressing_brake_button() {
-  if(self _is_2h_rappel()) {
+  if(self _is_2h_rappel())
     b_is_pressing_brake = self[[self._rappel.controls.rappel_brake_button]]();
-  } else {
+  else
     b_is_pressing_brake = !self[[self._rappel.controls.rappel_button]]();
-  }
 
   return b_is_pressing_brake;
 }
@@ -937,24 +897,21 @@ _rappel_brake(n_charge_time) {
   self endon("_rappel_safe_landing");
   self endon("_rappel_falling_death");
 
-  if(!isDefined(self._rappel.movement.acceleration_per_frame)) {
+  if(!isDefined(self._rappel.movement.acceleration_per_frame))
     self._rappel.movement.acceleration_per_frame = self._rappel.movement.acceleration / 20;
-  }
 
   self._rappel.status.is_braking = 0;
 
-  while(!self _is_pressing_brake_button() && self._rappel.status.can_rappel_now) {
+  while(!self _is_pressing_brake_button() && self._rappel.status.can_rappel_now)
     wait 0.05;
-  }
 
   n_frames_to_stop_min = self._rappel.movement.brake_frames_min;
   n_frames_to_stop_max = self._rappel.movement.brake_frames_max;
   b_is_short_stop = 0;
   n_frames_since_jump = self._rappel.status.frames_since_jump;
 
-  if(self._rappel.status.frames_since_jump > n_frames_to_stop_max) {
+  if(self._rappel.status.frames_since_jump > n_frames_to_stop_max)
     n_frames_since_jump = n_frames_to_stop_max;
-  }
 
   n_frames_to_stop = int(n_frames_to_stop_min + (n_frames_to_stop_max - n_frames_to_stop_min) * (n_frames_since_jump / n_frames_to_stop_max));
   n_distance_to_ground = self _rappel_get_distance_to_ground();
@@ -965,9 +922,8 @@ _rappel_brake(n_charge_time) {
     if(n_required_distance_to_stop > n_distance_left_to_stop) {
       n_frames_to_stop = i;
 
-      if(i == 0) {
+      if(i == 0)
         n_frames_to_stop = 1;
-      }
 
       b_is_short_stop = 1;
       break;
@@ -983,9 +939,8 @@ _rappel_brake(n_charge_time) {
 
   self._rappel.status.is_braking = 1;
 
-  if(self._rappel.status.can_rappel_now) {
+  if(self._rappel.status.can_rappel_now)
     _rappel_print_controls_full();
-  }
 
   v_movement_down = (0, 0, self._rappel.movement.acceleration_per_frame);
   v_to_wall = (0, 0, 0);
@@ -1027,9 +982,8 @@ _rappel_brake_then_idle() {
 _is_freefalling() {
   b_is_freefalling = 1;
 
-  if(self._rappel.status.on_ground || self._rappel.status.is_braking) {
+  if(self._rappel.status.on_ground || self._rappel.status.is_braking)
     b_is_freefalling = 0;
-  }
 
   return b_is_freefalling;
 }
@@ -1037,7 +991,7 @@ _is_freefalling() {
 _rappel_get_wall_vector() {
   v_normal = self _rappel_get_wall_normal();
   v_scaled = v_normal * 999999;
-  a_trace = bulletTrace(self.origin, v_scaled, 0, undefined);
+  a_trace = bullettrace(self.origin, v_scaled, 0, undefined);
   v_hit = a_trace["position"];
   v_to_wall = v_hit - self.origin;
   v_from_wall = self.origin - v_hit;
@@ -1049,14 +1003,14 @@ _rappel_get_wall_vector() {
 
 _rappel_get_wall_normal() {
   assert(isDefined(self._rappel.status.reference_node), "missing reference node for _rappel_get_wall_normal");
-  v_node_normal = anglesToForward(self._rappel.status.reference_node.angles);
+  v_node_normal = anglestoforward(self._rappel.status.reference_node.angles);
   return v_node_normal;
 }
 
 _rappel_get_distance_to_ground() {
   assert(isDefined(self._rappel), "rappel struct not set up on player attempting to use _rappel_get_distance_to_ground!");
   v_ground_line = self.origin - (0, 0, 999999);
-  a_trace = bulletTrace(self.origin, v_ground_line, 0, undefined);
+  a_trace = bullettrace(self.origin, v_ground_line, 0, undefined);
   v_trace_hit = a_trace["position"];
   n_height = distance(v_trace_hit, self.origin);
   return n_height;
@@ -1064,7 +1018,7 @@ _rappel_get_distance_to_ground() {
 
 _rappel_get_ground_trace_position() {
   v_ground_line = self.origin - (0, 0, 999999);
-  a_trace = bulletTrace(self.origin, v_ground_line, 0, undefined);
+  a_trace = bullettrace(self.origin, v_ground_line, 0, undefined);
   v_trace_hit = a_trace["position"];
   return v_trace_hit;
 }

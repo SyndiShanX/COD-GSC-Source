@@ -43,22 +43,22 @@ set_crosshair() {
 }
 
 setup_models() {
-  dyn_ents = getEntArray("script_model", "classname");
+  dyn_ents = GetEntArray("script_model", "classname");
   if(dyn_ents.size == 0) {
     level thread model_error("Cannot find any dyn_ent models to use for \"Dyn_Ents Mode\"", 300);
   }
-  for(i = 0; i < dyn_ents.size; i++) {
+  for (i = 0; i < dyn_ents.size; i++) {
     if(isDefined(dyn_ents[i].targetname)) {
       dyn_ents[i].og_origin = dyn_ents[i].origin;
       add_to_dyn_ent_group(dyn_ents[i].targetname);
     }
     dyn_ents[i] add_dyn_ent_model();
   }
-  models = getEntArray("script_model", "classname");
+  models = GetEntArray("script_model", "classname");
   if(models.size == 0) {
     level thread model_error("Cannot find any script_models to use for \"Misc Model Mode\"", 320);
   }
-  for(i = 0; i < models.size; i++) {
+  for (i = 0; i < models.size; i++) {
     models[i] add_script_modelnames();
   }
 }
@@ -142,7 +142,7 @@ remove_misc_model() {
 }
 
 check_for_dupes(array, single) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     if(array[i] == single) {
       return false;
     }
@@ -152,7 +152,7 @@ check_for_dupes(array, single) {
 
 setup_menus() {
   level.menu_sys = [];
-  level.menu_sys["current_menu"] = spawnStruct();
+  level.menu_sys["current_menu"] = SpawnStruct();
   add_menu("choose_mode", "Choose Mode:");
   add_menuoptions("choose_mode", "Dyn_Ent Mode");
   add_menuoptions("choose_mode", "Misc Model Mode");
@@ -231,7 +231,7 @@ add_menu(menu_name, title) {
     println("^1level.menu_sys[" + menu_name + "] already exists, change the menu_name");
     return;
   }
-  level.menu_sys[menu_name] = spawnStruct();
+  level.menu_sys[menu_name] = SpawnStruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
@@ -288,7 +288,7 @@ enable_menu(menu_name) {
   back_option_num = 0;
   if(isDefined(level.menu_sys[menu_name].options)) {
     options = level.menu_sys[menu_name].options;
-    for(i = 0; i < options.size; i++) {
+    for (i = 0; i < options.size; i++) {
       text = (i + 1) + ". " + options[i];
       level.menu_sys["current_menu"].options[i] = set_menu_hudelem(text, "options", 20 * i);
       back_option_num = i;
@@ -308,7 +308,7 @@ disable_menu(menu_name) {
     }
     if(isDefined(level.menu_sys[menu_name].options)) {
       options = level.menu_sys[menu_name].options;
-      for(i = 0; i < options.size; i++) {
+      for (i = 0; i < options.size; i++) {
         options[i] Destroy();
       }
     }
@@ -358,7 +358,7 @@ set_hudelem(text, x, y, scale, alpha) {
 }
 
 menu_input() {
-  while(1) {
+  while (1) {
     level waittill("menu_button_pressed", keystring);
     menu_name = level.menu_sys["current_menu"].menu_name;
     if(keystring == "dpad_up" || keystring == "uparrow") {
@@ -452,7 +452,7 @@ force_menu_back() {
 list_menu(list, x, y, scale, func) {
   hud_array = [];
   space_apart = 15;
-  for(i = 0; i < list.size; i++) {
+  for (i = 0; i < list.size; i++) {
     alpha = 1 / (i + 1);
     if(alpha < 0.3) {
       alpha = 0.1;
@@ -464,7 +464,7 @@ list_menu(list, x, y, scale, func) {
   old_num = 0;
   selected = false;
   [[func]](list[current_num]);
-  while(true) {
+  while (true) {
     level waittill("menu_button_pressed", key);
     if(any_button_hit(key, "numbers")) {
       break;
@@ -492,7 +492,7 @@ list_menu(list, x, y, scale, func) {
       ](list[current_num]);
     }
   }
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     hud_array[i] Destroy();
   }
   if(selected) {
@@ -507,7 +507,7 @@ move_list_menu(hud_array, dir, space, num) {
   } else {
     movement = space * -1;
   }
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     hud_array[i] MoveOverTime(time);
     hud_array[i].y = hud_array[i].y + movement;
     temp = i - num;
@@ -576,7 +576,7 @@ hud_font_scaler(mult) {
   dif = og_scale - self.fontscale;
   time = 1;
   dif /= time * 20;
-  for(i = 0; i < time * 20; i++) {
+  for (i = 0; i < time * 20; i++) {
     self.fontscale += dif;
     wait(0.05);
   }
@@ -584,7 +584,7 @@ hud_font_scaler(mult) {
 
 draw_model_axis() {
   range = 16;
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   forward = VectorScale(forward, range);
   right = AnglesToRight(self.angles);
   right = VectorScale(right, range);
@@ -600,7 +600,7 @@ rotate_model() {
   self endon("unlink_selected_object");
   self endon("death");
   rate = 2;
-  while(1) {
+  while (1) {
     level waittill("menu_button_pressed", key);
     if(key == "kp_rightarrow") {
       self DevAddYaw(rate);
@@ -694,17 +694,17 @@ spawn_selected_object(model_name, with_trace) {
     level.selected_object_dist = 48;
   }
   level thread selected_object_dist();
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  vector = level.debug_player getEye() + VectorScale(forward, level.selected_object_dist);
-  level.selected_object = spawn("script_model", vector);
-  level.selected_object setModel(model_name);
+  forward = AnglesToforward(level.debug_player GetPlayerAngles());
+  vector = level.debug_player GetEye() + VectorScale(forward, level.selected_object_dist);
+  level.selected_object = Spawn("script_model", vector);
+  level.selected_object SetModel(model_name);
   level.selected_object thread move_selected_object(with_trace);
 }
 
 selected_object_dist() {
   level notify("stop_selected_object_dist");
   level endon("stop_selected_object_dist");
-  while(1) {
+  while (1) {
     level waittill("menu_button_pressed", key);
     if(key == "-") {
       level.selected_object_dist -= 8;
@@ -731,11 +731,11 @@ move_selected_object(with_trace) {
     with_trace = false;
   }
   self thread rotate_model();
-  while(true) {
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
+  while (true) {
+    forward = AnglesToforward(level.debug_player GetPlayerAngles());
     if(with_trace) {
-      vector = level.debug_player getEye() + VectorScale(forward, 5000);
-      trace = bulletTrace(level.debug_player getEye(), vector, false, self);
+      vector = level.debug_player GetEye() + VectorScale(forward, 5000);
+      trace = BulletTrace(level.debug_player GetEye(), vector, false, self);
       if(trace["fraction"] == 1) {
         wait(0.1);
         continue;
@@ -744,7 +744,7 @@ move_selected_object(with_trace) {
       }
       vector = vector + (0, 0, level.misc_model_z_offset);
     } else {
-      vector = level.debug_player getEye() + VectorScale(forward, level.selected_object_dist);
+      vector = level.debug_player GetEye() + VectorScale(forward, level.selected_object_dist);
     }
     if(vector != self.origin) {
       self MoveTo(vector, 0.1);
@@ -779,7 +779,7 @@ shoot_model() {
   max_power_hud = set_hudelem("Max Power:", 215, 435, 1.2);
   max_power_value = set_hudelem(level.shooter_max_power, 300, 435, 1.2);
   wait(0.2);
-  while(1) {
+  while (1) {
     level waittill("menu_button_pressed", key);
     if(any_button_hit(key, "numbers")) {
       break;
@@ -853,7 +853,7 @@ shoot_model_think(current_power_value) {
   level.shoot_model_power_bar.sort = 50;
   power = power_bar_scaler(level.shoot_model_power_bar, current_power_value);
   level.selected_object notify("unlink_selected_object");
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
+  forward = AnglesToforward(level.debug_player GetPlayerAngles());
   velocity = VectorScale(forward, level.shooter_max_power * power);
   level.selected_object MoveGravity(velocity, 1);
   level.selected_object store_shooter_model();
@@ -872,7 +872,7 @@ power_bar_scaler(hud, current_power_value) {
   time = 1.0;
   time_inc = time / segments;
   og_time_inc = time_inc;
-  while(1) {
+  while (1) {
     wait(0.05);
     if(current + increment > 1) {
       increase = false;
@@ -886,12 +886,12 @@ power_bar_scaler(hud, current_power_value) {
     }
     power = level.shooter_max_power * current;
     time_inc = og_time_inc;
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
+    forward = AnglesToForward(level.debug_player GetPlayerAngles());
     velocity = VectorScale(forward, power);
     sub_vel = VectorScale(velocity, time_inc);
     start_pos = level.selected_object.origin;
     gravity = GetDvarInt("g_gravity");
-    for(i = 1; i < segments + 1; i++) {
+    for (i = 1; i < segments + 1; i++) {
       pos = start_pos + VectorScale(sub_vel, i);
       pos = pos - (0, 0, (0.5 * gravity * (time_inc * time_inc)));
       print3d(pos, ".", (1, 1, 0));
@@ -909,21 +909,21 @@ power_bar_scaler(hud, current_power_value) {
 
 display_final_shooting_trajectory(time_inc, segments, power) {
   og_time_inc = time_inc;
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
+  forward = AnglesToForward(level.debug_player GetPlayerAngles());
   velocity = VectorScale(forward, power);
   sub_vel = VectorScale(velocity, time_inc);
   start_pos = level.selected_object.origin;
   gravity = GetDvarInt("g_gravity");
   old_pos = start_pos;
   pos_array = [];
-  for(i = 1; i < segments + 1; i++) {
+  for (i = 1; i < segments + 1; i++) {
     pos = start_pos + VectorScale(sub_vel, i);
     pos_array[pos_array.size] = pos - (0, 0, (0.5 * gravity * (time_inc * time_inc)));
     time_inc += og_time_inc;
   }
   timer = GetTime() + 3000;
-  while(GetTime() < timer) {
-    for(i = 0; i < pos_array.size; i++) {
+  while (GetTime() < timer) {
+    for (i = 0; i < pos_array.size; i++) {
       print3d(pos_array[i], ".", (0, 1, 0));
     }
     wait(0.05);
@@ -962,7 +962,7 @@ spray_model() {
   spray_buttons();
   spray_hud();
   level thread spray_trajectory();
-  while(1) {
+  while (1) {
     level waittill("spray_button_pressed", key);
     if(key == "fire") {
       do_spray_model();
@@ -1008,10 +1008,10 @@ spray_model() {
 }
 
 do_spray_model() {
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  vector = level.debug_player getEye() + VectorScale(forward, 48);
-  object = spawn("script_model", vector);
-  object setModel(level.spray["model"]);
+  forward = AnglesToForward(level.debug_player GetPlayerAngles());
+  vector = level.debug_player GetEye() + VectorScale(forward, 48);
+  object = Spawn("script_model", vector);
+  object SetModel(level.spray["model"]);
   velocity = VectorScale(forward, level.spray["power"]);
   object MoveGravity(velocity, 1);
   object store_shooter_model();
@@ -1023,14 +1023,14 @@ spray_trajectory() {
   time = 1.0;
   time_inc = time / segments;
   og_time_inc = time_inc;
-  while(1) {
+  while (1) {
     time_inc = og_time_inc;
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
+    forward = AnglesToForward(level.debug_player GetPlayerAngles());
     velocity = VectorScale(forward, level.spray["power"]);
     sub_vel = VectorScale(velocity, time_inc);
-    start_pos = level.debug_player getEye() + VectorScale(forward, 48);;
+    start_pos = level.debug_player GetEye() + VectorScale(forward, 48);;
     gravity = GetDvarInt("g_gravity");
-    for(i = 1; i < segments + 1; i++) {
+    for (i = 1; i < segments + 1; i++) {
       pos = start_pos + VectorScale(sub_vel, i);
       pos = pos - (0, 0, (0.5 * gravity * (time_inc * time_inc)));
       print3d(pos, ".", (1, 1, 0));
@@ -1118,7 +1118,7 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
   notify_name = button_group + "_button_pressed";
   buttons = level.u_buttons[button_group];
   level.u_buttons_disable[button_group] = false;
-  while(1) {
+  while (1) {
     if(level.u_buttons_disable[button_group]) {
       wait(0.05);
       continue;
@@ -1135,7 +1135,7 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
       wait(0.1);
       continue;
     }
-    for(i = 0; i < buttons.size; i++) {
+    for (i = 0; i < buttons.size; i++) {
       if(level.debug_player ButtonPressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.1);
@@ -1182,8 +1182,8 @@ select_group() {
 }
 
 select_group_highlight(group_name) {
-  dyn_ents = getEntArray(group_name, "targetname");
-  for(i = 0; i < dyn_ents.size; i++) {
+  dyn_ents = GetEntArray(group_name, "targetname");
+  for (i = 0; i < dyn_ents.size; i++) {
     dyn_ents[i] thread group_highlight_thread();
   }
 }
@@ -1191,7 +1191,7 @@ select_group_highlight(group_name) {
 group_highlight_thread() {
   level endon("scroll_list");
   level endon("stop_select_group");
-  while(1) {
+  while (1) {
     self draw_model_axis();
     wait(0.05);
   }
@@ -1206,7 +1206,7 @@ group_plant_bomb() {
   level.plant_bomb_z = 0;
   plant_bomb_buttons();
   plant_bomb_hud();
-  while(1) {
+  while (1) {
     level waittill("plantbomb_button_pressed", key);
     if(key == "fire") {
       plant_bomb();
@@ -1254,9 +1254,9 @@ plant_bomb() {
   if(isDefined(level.planted_bomb)) {
     level.planted_bomb Delete();
   }
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  vector = level.debug_player getEye() + VectorScale(forward, 5000);
-  trace = bulletTrace(level.debug_player getEye(), vector, false, undefined);
+  forward = AnglesToforward(level.debug_player GetPlayerAngles());
+  vector = level.debug_player GetEye() + VectorScale(forward, 5000);
+  trace = BulletTrace(level.debug_player GetEye(), vector, false, undefined);
   if(trace["fraction"] == 1) {
     return;
   }
@@ -1264,20 +1264,20 @@ plant_bomb() {
 }
 
 spawn_bomb(vector) {
-  bomb = spawn("script_origin", vector + (0, 0, -20));
+  bomb = Spawn("script_origin", vector + (0, 0, -20));
   level.planted_bomb = bomb;
   bomb thread draw_bomb();
 }
 
 draw_bomb() {
   self endon("death");
-  ents = getEntArray(level.dyn_ent_selected_group, "targetname");
-  for(i = 0; i < ents.size; i++) {
+  ents = GetEntArray(level.dyn_ent_selected_group, "targetname");
+  for (i = 0; i < ents.size; i++) {
     ents[i] thread draw_trajectory();
   }
   og_z = self.origin[2];
   z = og_z;
-  while(1) {
+  while (1) {
     z = og_z + level.plant_bomb_z;
     self.origin = (self.origin[0], self.origin[1], z);
     self draw_sphere(level.plant_bomb_radius, 16, "pitch");
@@ -1310,26 +1310,26 @@ draw_sphere(radius, segments, axis) {
   add_angles = 360 / segments;
   angles = (0, 0, 0);
   if(axis == "pitch") {
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (add_angles, 0, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   } else if(axis == "roll") {
     angles = angles + (0, 90, 0);
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (add_angles, 0, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   } else {
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (0, add_angles, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   }
-  for(i = 0; i < points.size; i++) {
+  for (i = 0; i < points.size; i++) {
     if(i == (points.size - 1)) {
       Line(points[i], points[0], (1, 0, 0), 1);
     } else {
@@ -1345,8 +1345,8 @@ detonate_bomb() {
 }
 
 temp_radius_damage(origin, radius, max_dmg, min_dmg) {
-  ents = getEntArray(level.dyn_ent_selected_group, "targetname");
-  for(i = 0; i < ents.size; i++) {
+  ents = GetEntArray(level.dyn_ent_selected_group, "targetname");
+  for (i = 0; i < ents.size; i++) {
     dist = Distance(origin, ents[i].origin);
     if(dist > radius) {
       continue;
@@ -1365,7 +1365,7 @@ draw_trajectory() {
   time = 1.0;
   time_inc = time / segments;
   og_time_inc = time_inc;
-  while(1) {
+  while (1) {
     dist = Distance(level.planted_bomb.origin, self.origin);
     if(dist < level.plant_bomb_radius) {
       max_dmg = level.plant_bomb_power;
@@ -1378,7 +1378,7 @@ draw_trajectory() {
       start_pos = self.origin;
       gravity = GetDvarInt("g_gravity");
       old_pos = start_pos;
-      for(i = 1; i < segments + 1; i++) {
+      for (i = 1; i < segments + 1; i++) {
         pos = start_pos + VectorScale(sub_vel, i);
         pos = pos - (0, 0, (0.5 * gravity * (time_inc * time_inc)));
         line(old_pos, pos, (0, 1, 0));
@@ -1428,7 +1428,7 @@ remove_hud(hud_name) {
     return;
   }
   huds = level.hud_array[hud_name];
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
   }
   level.hud_array[hud_name] = undefined;
@@ -1475,8 +1475,8 @@ reset_group() {
   if(!isDefined(level.dyn_ent_selected_group)) {
     return "ERROR: Group not selected!";
   }
-  ents = getEntArray(level.dyn_ent_selected_group, "targetname");
-  for(i = 0; i < ents.size; i++) {
+  ents = GetEntArray(level.dyn_ent_selected_group, "targetname");
+  for (i = 0; i < ents.size; i++) {
     ents[i].origin = ents[i].og_origin;
   }
 }
@@ -1495,7 +1495,7 @@ select_mode_thread() {
 }
 
 draw_selectables(objects) {
-  for(i = 0; i < objects.size; i++) {
+  for (i = 0; i < objects.size; i++) {
     objects[i] thread select_icon_think();
   }
 }
@@ -1509,7 +1509,7 @@ select_icon_think() {
     self.select_scale = 1;
   }
   self.select_color = level.unselected_color;
-  while(1) {
+  while (1) {
     print3d(self.origin, ".", self.select_color, 1, self.select_scale);
     wait(0.05);
   }
@@ -1520,7 +1520,7 @@ select_main_thread() {
   level.highlighted_object = undefined;
   level.selected_object = undefined;
   level.selected_object_dist = 48;
-  while(1) {
+  while (1) {
     if(!isDefined(level.selected_object)) {
       level thread object_highlight(level.all_objects);
     }
@@ -1531,8 +1531,8 @@ select_main_thread() {
 object_highlight(objects) {
   dot = 0.85;
   highlighted_object = undefined;
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  for(i = 0; i < objects.size; i++) {
+  forward = AnglesToForward(level.debug_player GetPlayerAngles());
+  for (i = 0; i < objects.size; i++) {
     if(!isDefined(objects[i].select_scale)) {
       objects[i] select_icon_think();
     }
@@ -1545,11 +1545,11 @@ object_highlight(objects) {
     dot = newdot;
     highlighted_object = ent;
   }
-  if(isDefined(highlighted_object)) {
+  if(IsDefineD(highlighted_object)) {
     highlighted_object.select_scale = 3;
     highlighted_object.select_color = level.selected_color;
     level.highlighted_object = highlighted_object;
-    for(i = 0; i < objects.size; i++) {
+    for (i = 0; i < objects.size; i++) {
       if(objects[i] == highlighted_object) {
         continue;
       }
@@ -1568,8 +1568,8 @@ select_grab() {
 select_copy() {
   origin = level.highlighted_object.origin;
   model = level.highlighted_object.model;
-  level.selected_object = spawn("script_model", origin);
-  level.selected_object setModel(model);
+  level.selected_object = Spawn("script_model", origin);
+  level.selected_object SetModel(model);
   level.selected_object.select_og_origin = level.selected_object.origin;
   level.selected_object thread move_selected_object();
 }
@@ -1650,7 +1650,7 @@ selected_save_highlight(key) {
 
 save_highlight_loop() {
   self endon("stop_save_highlight");
-  while(1) {
+  while (1) {
     print3d(self.origin, "S", (0, 1, 0), 1);
     wait(0.05);
   }
@@ -1679,7 +1679,7 @@ selected_save() {
 
 selected_save_thread() {
   level waittill("disable select_save_menu");
-  for(i = 0; i < level.all_objects.size; i++) {
+  for (i = 0; i < level.all_objects.size; i++) {
     level.all_objects[i] remove_save_stat();
   }
 }
@@ -1690,7 +1690,7 @@ selected_misc_model_save() {
 
 selected_misc_model_save_thread() {
   level waittill("disable misc_model_select_save_menu");
-  for(i = 0; i < level.misc_models.size; i++) {
+  for (i = 0; i < level.misc_models.size; i++) {
     level.misc_models[i] remove_save_stat();
   }
 }
@@ -1717,7 +1717,7 @@ save_dyn_ent_highlighted() {
 draw_line(ent, ent2) {
   level notify("stop_draw_line");
   level endon("stop_draw_line");
-  while(1) {
+  while (1) {
     line(ent.origin, ent2.origin, (1, 1, 1));
     wait(0.05);
   }
@@ -1787,7 +1787,7 @@ any_button_hit(button_hit, type) {
   } else {
     buttons = level.buttons;
   }
-  for(i = 0; i < buttons.size; i++) {
+  for (i = 0; i < buttons.size; i++) {
     if(button_hit == buttons[i]) {
       return true;
     }
@@ -1799,7 +1799,7 @@ attackbutton_hold_think() {
   level endon("stop_attackbutton_hold_think");
   level.attack_button_held = false;
   count = 0;
-  while(true) {
+  while (true) {
     if(level.debug_player AttackButtonPressed()) {
       count++;
       if(count == 3) {
@@ -1886,7 +1886,7 @@ prop_buttons() {
 }
 
 prop_mode_input() {
-  while(1) {
+  while (1) {
     level waittill("prop_button_pressed", key);
     if(key == "r" || key == "button_x") {
       if(level.prop_mode["random_yaw"]) {
@@ -1963,8 +1963,8 @@ prop_move_thread() {
 prop_copy() {
   origin = level.highlighted_object.origin;
   model = level.highlighted_object.model;
-  level.selected_object = spawn("script_model", origin);
-  level.selected_object setModel(model);
+  level.selected_object = Spawn("script_model", origin);
+  level.selected_object SetModel(model);
   level.selected_object.select_og_origin = level.selected_object.origin;
   level.selected_object thread move_selected_object(true);
   level thread prop_copy_thread();
@@ -1996,7 +1996,7 @@ select_prop_main_thread() {
   level endon("stop_select_model");
   level.highlighted_object = undefined;
   level.selected_object = undefined;
-  while(1) {
+  while (1) {
     if(!isDefined(level.selected_object)) {
       level thread object_highlight(level.misc_models);
     }
@@ -2029,7 +2029,7 @@ rotate_prop_mode_thread() {
 }
 
 set_rotate_og_angles() {
-  for(i = 0; i < level.misc_models.size; i++) {
+  for (i = 0; i < level.misc_models.size; i++) {
     level.misc_models[i].og_angles = level.misc_models[i].angles;
   }
 }
@@ -2049,7 +2049,7 @@ selected_rotate_highlight() {
 rotate_highlight_loop() {
   level endon("stop_rotate_mode");
   self endon("stop_rotate_highlight");
-  while(1) {
+  while (1) {
     print3d(self.origin, "*", (0, 1, 0), 1);
     wait(0.05);
   }
@@ -2104,9 +2104,9 @@ rotate_prop_main_thread() {
   self endon("unlink_selected_object");
   self endon("death");
   rate = 2;
-  while(1) {
+  while (1) {
     level waittill("rotate_button_pressed", key);
-    for(i = 0; i < level.rotate_highlighted.size; i++) {
+    for (i = 0; i < level.rotate_highlighted.size; i++) {
       object = level.rotate_highlighted[i];
       if(key == "kp_rightarrow" || key == "button_b") {
         object DevAddYaw(rate);
@@ -2178,7 +2178,7 @@ save_master(save_msg, filename, save_array, classname) {
   no_key = "n";
   xenon_yes_key = "button_x";
   xenon_no_key = "button_n";
-  while(true) {
+  while (true) {
     level waittill("save_button_pressed", key);
     if(key == yes_key || key == xenon_yes_key) {
       level thread save_selector(level.save_yes_hud.x, level.save_yes_hud.y, 40);
@@ -2301,7 +2301,7 @@ save(model_array, filename, classname) {
     file = OpenFile(level.fullpath_file, "write");
     assertex(file != -1, "File not writeable (maybe you should check it out): " + level.fullpath_file);
     fprintln(file, "
-      for(i = 0; i < model_array.size; i++) {
+      for (i = 0; i < model_array.size; i++) {
         fprintln(file, "{");
         fprintln(file, "\"angles\" \"" + model_array[i].angles[0] + " " + model_array[i].angles[1] + " " + model_array[i].angles[2] + "\"");
         fprintln(file, "\"origin\" \"" + model_array[i].origin[0] + " " + model_array[i].origin[1] + " " + model_array[i].origin[2] + "\"");
@@ -2331,6 +2331,6 @@ save(model_array, filename, classname) {
       if(!isDefined(level.dyn_ent_selected_group)) {
         return "ERROR: Group not Selected!";
       }
-      ents = getEntArray(level.dyn_ent_selected_group, "targetname");
+      ents = GetEntArray(level.dyn_ent_selected_group, "targetname");
       return save_master("Save Selected Dyn_Ent Group?", "dyn_ent_group", ents);
     }

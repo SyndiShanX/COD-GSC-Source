@@ -55,10 +55,10 @@ init() {
   level.microwaveopenanim = % o_hpm_open;
   level.microwavecloseanim = % o_hpm_close;
   level.microwavedestroyedanim = % o_hpm_destroyed;
-  level.auto_turret_settings["sentry"] = spawnStruct();
-  level.auto_turret_settings["sentry"].hintstring = &"KILLSTREAK_SENTRY_TURRET_PICKUP";
-  level.auto_turret_settings["sentry"].hackerhintstring = &"KILLSTREAK_TURRET_HACKING";
-  level.auto_turret_settings["sentry"].disablehintstring = &"KILLSTREAK_TURRET_SENTRY_DISABLE";
+  level.auto_turret_settings["sentry"] = spawnstruct();
+  level.auto_turret_settings["sentry"].hintstring = & "KILLSTREAK_SENTRY_TURRET_PICKUP";
+  level.auto_turret_settings["sentry"].hackerhintstring = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["sentry"].disablehintstring = & "KILLSTREAK_TURRET_SENTRY_DISABLE";
   level.auto_turret_settings["sentry"].hinticon = "hud_ks_auto_turret";
   level.auto_turret_settings["sentry"].modelbase = "t6_wpn_turret_sentry_gun";
   level.auto_turret_settings["sentry"].modelgoodplacement = "t6_wpn_turret_sentry_gun_yellow";
@@ -73,9 +73,9 @@ init() {
   level.auto_turret_settings["sentry"].turretinitdelay = 1.6;
   level.auto_turret_settings["sentry"].hackertoolradius = level.sentryhackertoolradius;
   level.auto_turret_settings["sentry"].hackertooltimems = level.sentryhackertooltimems;
-  level.auto_turret_settings["tow"] = spawnStruct();
-  level.auto_turret_settings["tow"].hintstring = &"KILLSTREAK_TOW_TURRET_PICKUP";
-  level.auto_turret_settings["tow"].hackerhintstring = &"KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["tow"] = spawnstruct();
+  level.auto_turret_settings["tow"].hintstring = & "KILLSTREAK_TOW_TURRET_PICKUP";
+  level.auto_turret_settings["tow"].hackerhintstring = & "KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["tow"].hinticon = "hud_ks_sam_turret";
   level.auto_turret_settings["tow"].modelbase = "t6_wpn_turret_sam";
   level.auto_turret_settings["tow"].modelgoodplacement = "t6_wpn_turret_sam_yellow";
@@ -86,10 +86,10 @@ init() {
   level.auto_turret_settings["tow"].stunfxfrequencymax = 0.75;
   level.auto_turret_settings["tow"].turretinitdelay = 3.0;
   level.auto_turret_settings["tow"].turretfiredelay = 5.0;
-  level.auto_turret_settings["microwave"] = spawnStruct();
-  level.auto_turret_settings["microwave"].hintstring = &"KILLSTREAK_MICROWAVE_TURRET_PICKUP";
-  level.auto_turret_settings["microwave"].hackerhintstring = &"KILLSTREAK_TURRET_MICROWAVE_HACKING";
-  level.auto_turret_settings["microwave"].disablehintstring = &"KILLSTREAK_TURRET_MICROWAVE_DISABLE";
+  level.auto_turret_settings["microwave"] = spawnstruct();
+  level.auto_turret_settings["microwave"].hintstring = & "KILLSTREAK_MICROWAVE_TURRET_PICKUP";
+  level.auto_turret_settings["microwave"].hackerhintstring = & "KILLSTREAK_TURRET_MICROWAVE_HACKING";
+  level.auto_turret_settings["microwave"].disablehintstring = & "KILLSTREAK_TURRET_MICROWAVE_DISABLE";
   level.auto_turret_settings["microwave"].hinticon = "hud_ks_microwave_turret";
   level.auto_turret_settings["microwave"].modelbase = "t6_wpn_turret_ads_world";
   level.auto_turret_settings["microwave"].modelgoodplacement = "t6_wpn_turret_ads_carry";
@@ -115,38 +115,38 @@ init() {
   level.auto_turret_settings["microwave"].microwave_radius_4 = int(level.microwave_radius);
   level.auto_turret_settings["microwave"].fx = loadfx("weapon/silent_gaurdian/fx_sg_distortion_cone_ash");
   level._turret_explode_fx = loadfx("explosions/fx_exp_equipment_lg");
-  minefields = getEntArray("minefield", "targetname");
-  hurt_triggers = getEntArray("trigger_hurt", "classname");
+  minefields = getentarray("minefield", "targetname");
+  hurt_triggers = getentarray("trigger_hurt", "classname");
   level.fatal_triggers = arraycombine(minefields, hurt_triggers, 1, 0);
-  level.noturretplacementtriggers = getEntArray("no_turret_placement", "targetname");
+  level.noturretplacementtriggers = getentarray("no_turret_placement", "targetname");
   level notify("no_turret_trigger_created");
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowauto_turret")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("autoturret_mp", "autoturret_mp", "killstreak_auto_turret", "auto_turret_used", ::usesentryturretkillstreak);
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("autoturret_mp", "auto_gun_turret_mp");
     maps\mp\killstreaks\_killstreaks::registerkillstreakremoteoverrideweapon("autoturret_mp", "killstreak_remote_turret_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("autoturret_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("autoturret_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("autoturret_mp", "mpl_killstreak_auto_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("autoturret_mp", "scr_giveautoturret");
     maps\mp\killstreaks\_killstreaks::registerkillstreak("turret_drop_mp", "turret_drop_mp", "killstreak_auto_turret_drop", "auto_turret_used", ::usekillstreakturretdrop, undefined, 1);
     maps\mp\killstreaks\_killstreaks::registerkillstreakremoteoverrideweapon("turret_drop_mp", "killstreak_remote_turret_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("turret_drop_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("turret_drop_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("turret_drop_mp", "mpl_killstreak_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("turret_drop_mp", "scr_giveautoturretdrop");
-    maps\mp\killstreaks\_supplydrop::registercratetype("turret_drop_mp", "killstreak", "autoturret_mp", 1, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
+    maps\mp\killstreaks\_supplydrop::registercratetype("turret_drop_mp", "killstreak", "autoturret_mp", 1, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
     level.killstreakicons["autoturret_mp"] = "hud_ks_auto_turret";
     maps\mp\killstreaks\_killstreaks::registerkillstreak("microwaveturret_mp", "microwaveturret_mp", "killstreak_microwave_turret", "microwave_turret_used", ::usemicrowaveturretkillstreak);
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("microwaveturret_mp", "microwave_turret_mp");
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("microwaveturret_mp", "microwave_turret_damage_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_mp", &"KILLSTREAK_EARNED_MICROWAVE_TURRET", &"KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_mp", & "KILLSTREAK_EARNED_MICROWAVE_TURRET", & "KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("microwaveturret_mp", "mpl_killstreak_auto_turret", "kls_microwave_used", "", "kls_microwave_enemy", "", "kls_microwave_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("microwaveturret_mp", "scr_givemicrowaveturret");
     maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("microwaveturret_mp", level.teamkillreducedpenalty);
     maps\mp\killstreaks\_killstreaks::registerkillstreak("microwaveturret_drop_mp", "microwaveturret_drop_mp", "killstreak_microwave_turret_drop", "microwave_turret_used", ::usekillstreakturretdrop, undefined, 1);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_drop_mp", &"KILLSTREAK_EARNED_MICROWAVE_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_drop_mp", & "KILLSTREAK_EARNED_MICROWAVE_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("microwaveturret_drop_mp", "mpl_killstreak_turret", "kls_microwave_used", "", "kls_microwave_enemy", "", "kls_microwave_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("microwaveturret_drop_mp", "scr_givemicrowaveturretdrop");
-    maps\mp\killstreaks\_supplydrop::registercratetype("microwaveturret_drop_mp", "killstreak", "microwaveturret_mp", 1, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_MICROWAVE_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
+    maps\mp\killstreaks\_supplydrop::registercratetype("microwaveturret_drop_mp", "killstreak", "microwaveturret_mp", 1, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_MICROWAVE_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
     level.killstreakicons["microwaveturret_mp"] = "hud_ks_microwave_turret";
   }
 
@@ -164,34 +164,29 @@ init() {
 }
 
 usekillstreakturretdrop(hardpointtype) {
-  if(self maps\mp\killstreaks\_supplydrop::issupplydropgrenadeallowed(hardpointtype) == 0) {
+  if(self maps\mp\killstreaks\_supplydrop::issupplydropgrenadeallowed(hardpointtype) == 0)
     return 0;
-  }
 
   result = self maps\mp\killstreaks\_supplydrop::usesupplydropmarker();
   self notify("supply_drop_marker_done");
 
-  if(!isDefined(result) || !result) {
+  if(!isDefined(result) || !result)
     return 0;
-  }
 
   return result;
 }
 
 usesentryturretkillstreak(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreaks::isinteractingwithobject()) {
+  if(self maps\mp\killstreaks\_killstreaks::isinteractingwithobject())
     return false;
-  }
 
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return false;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return false;
-  }
 
   turret = self usesentryturret(hardpointtype);
   turret.killstreak_id = killstreak_id;
@@ -219,23 +214,20 @@ usesentryturretkillstreak(hardpointtype) {
 }
 
 usetowturretkillstreak(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return false;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return false;
-  }
 
   turret = self usetowturret(hardpointtype);
   turret.killstreak_id = killstreak_id;
   event = turret waittill_any_return("turret_placed", "destroy_turret", "death", "turret_emped");
 
-  if(event == "turret_placed") {
+  if(event == "turret_placed")
     return true;
-  }
 
   if(event == "death") {
     returnturrettoinventory(turret);
@@ -251,19 +243,16 @@ usetowturretkillstreak(hardpointtype) {
 }
 
 usemicrowaveturretkillstreak(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return false;
-  }
 
-  if(self maps\mp\killstreaks\_killstreaks::isinteractingwithobject()) {
+  if(self maps\mp\killstreaks\_killstreaks::isinteractingwithobject())
     return false;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return false;
-  }
 
   turret = self usemicrowaveturret(hardpointtype);
   turret.killstreak_id = killstreak_id;
@@ -301,7 +290,7 @@ usesentryturret(hardpointtype) {
   turret = spawnturret("auto_turret", self.origin, "auto_gun_turret_mp");
   turret.turrettype = "sentry";
   turret setturrettype(turret.turrettype);
-  turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
+  turret setmodel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
   turret.angles = self.angles;
   turret.hardpointweapon = hardpointtype;
   turret.hasbeenplanted = 0;
@@ -317,11 +306,10 @@ usesentryturret(hardpointtype) {
   target_set(turret, vectorscale((0, 0, 1), 40.0));
   turret.controlled = 0;
 
-  if(!isDefined(self.numturrets)) {
+  if(!isDefined(self.numturrets))
     self.numturrets = 1;
-  } else {
+  else
     self.numturrets++;
-  }
 
   turret.ownernumber = self.numturrets;
 
@@ -359,7 +347,7 @@ usetowturret(hardpointtype) {
   turret = spawnturret("auto_turret", self.origin, "tow_turret_mp");
   turret.turrettype = "tow";
   turret setturrettype(turret.turrettype);
-  turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
+  turret setmodel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
   turret.angles = self.angles;
   turret.hardpointweapon = hardpointtype;
   turret.hasbeenplanted = 0;
@@ -404,7 +392,7 @@ usemicrowaveturret(hardpointtype) {
   turret = spawnturret("auto_turret", self.origin, "microwave_turret_mp");
   turret.turrettype = "microwave";
   turret setturrettype(turret.turrettype);
-  turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
+  turret setmodel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
   turret.angles = self.angles;
   turret.hardpointweapon = hardpointtype;
   turret.hasbeenplanted = 0;
@@ -453,9 +441,8 @@ watchroundandgameend(turret) {
 }
 
 giveturretback(turret) {
-  if(!isDefined(level.usingmomentum) || !level.usingmomentum || isDefined(turret.isfrominventory) && turret.isfrominventory) {
+  if(!isDefined(level.usingmomentum) || !level.usingmomentum || isDefined(turret.isfrominventory) && turret.isfrominventory)
     maps\mp\killstreaks\_killstreaks::givekillstreak(turret.hardpointweapon, undefined, undefined, 1);
-  }
 }
 
 watchownerdeath(turret) {
@@ -465,9 +452,9 @@ watchownerdeath(turret) {
   turret endon("hacked");
   self waittill("death");
 
-  if(!turret.hasbeenplanted) {
+  if(!turret.hasbeenplanted)
     self returnturrettoinventory(turret);
-  } else if(turret.canbeplaced && turret.carried) {
+  else if(turret.canbeplaced && turret.carried) {
     if(level.teambased && self.team != turret.team) {
       self stopcarryturret(turret);
       turret notify("destroy_turret", 0);
@@ -537,9 +524,8 @@ watchownerteamkillkicked(turret) {
   turret endon("destroy_turret");
   self waittill("teamKillKicked");
 
-  if(isDefined(turret)) {
+  if(isDefined(turret))
     turret notify("destroy_turret", 0);
-  }
 }
 
 watchownerdisconnect(turret) {
@@ -547,9 +533,8 @@ watchownerdisconnect(turret) {
   turret endon("hacked");
   self waittill_any("disconnect", "joined_team");
 
-  if(isDefined(turret)) {
+  if(isDefined(turret))
     turret notify("destroy_turret", 1);
-  }
 }
 
 startcarryturret(turret) {
@@ -559,19 +544,17 @@ startcarryturret(turret) {
   turret stoploopsound();
   turret setmode("auto_ai");
 
-  if(turret.turrettype == "sentry") {
+  if(turret.turrettype == "sentry")
     turret notify("stop_burst_fire_unmanned");
-  } else if(turret.turrettype == "tow") {
+  else if(turret.turrettype == "tow")
     turret notify("target_lost");
-  } else if(turret.turrettype == "microwave") {
+  else if(turret.turrettype == "microwave")
     turret notify("stop_microwave");
-  }
 
   turret.carried = 1;
 
-  if(turret.hasbeenplanted) {
+  if(turret.hasbeenplanted)
     level notify("drop_objects_to_ground", turret.origin, 80);
-  }
 
   self carryturret(turret, vectorscale((1, 0, 0), 40.0), (0, 0, 0));
   self thread watchownerdeath(turret);
@@ -581,9 +564,8 @@ startcarryturret(turret) {
   turret setturretowner(self);
   turret setdefaultdroppitch(-90.0);
 
-  if(!turret.hasbeenplanted) {
+  if(!turret.hasbeenplanted)
     self thread watchreturnturrettoinventory(turret);
-  }
 
   self thread updateturretplacement(turret);
   self thread watchturretplacement(turret);
@@ -630,25 +612,23 @@ updateturretplacement(turret) {
     placement = self canplayerplaceturret(turret);
     turret.origin = placement["origin"];
     turret.angles = placement["angles"];
-    good_spot_check = placement["result"] &!turret turretinhurttrigger() &!turret turretinnoturretplacementtrigger();
+    good_spot_check = placement["result"] & !turret turretinhurttrigger() & !turret turretinnoturretplacementtrigger();
     turret.canbeplaced = good_spot_check;
 
     if(turret.canbeplaced != lastplacedturret && !(turret.turrettype == "microwave" && firstmodel == 1)) {
-      if(good_spot_check) {
-        turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
-      } else {
-        turret setModel(level.auto_turret_settings[turret.turrettype].modelbadplacement);
-      }
+      if(good_spot_check)
+        turret setmodel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
+      else
+        turret setmodel(level.auto_turret_settings[turret.turrettype].modelbadplacement);
 
       lastplacedturret = turret.canbeplaced;
     }
 
     if(turret.turrettype == "microwave" && firstmodel == 1) {
-      if(turret.canbeplaced) {
-        turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacementanimate);
-      } else {
-        turret setModel(level.auto_turret_settings[turret.turrettype].modelbadplacementanimate);
-      }
+      if(turret.canbeplaced)
+        turret setmodel(level.auto_turret_settings[turret.turrettype].modelgoodplacementanimate);
+      else
+        turret setmodel(level.auto_turret_settings[turret.turrettype].modelbadplacementanimate);
 
       firstmodel = 0;
       lastplacedturret = turret.canbeplaced;
@@ -660,9 +640,8 @@ updateturretplacement(turret) {
 
 turretinhurttrigger() {
   for(i = 0; i < level.fatal_triggers.size; i++) {
-    if(self istouching(level.fatal_triggers[i])) {
+    if(self istouching(level.fatal_triggers[i]))
       return true;
-    }
   }
 
   return false;
@@ -670,9 +649,8 @@ turretinhurttrigger() {
 
 turretinnoturretplacementtrigger() {
   for(i = 0; i < level.noturretplacementtriggers.size; i++) {
-    if(self istouching(level.noturretplacementtriggers[i])) {
+    if(self istouching(level.noturretplacementtriggers[i]))
       return true;
-    }
   }
 
   return false;
@@ -685,9 +663,8 @@ watchturretplacement(turret) {
   turret endon("turret_placed");
   turret endon("turret_deactivated");
 
-  while(self attackbuttonpressed()) {
+  while(self attackbuttonpressed())
     wait 0.05;
-  }
 
   while(true) {
     if(self attackbuttonpressed() && turret.canbeplaced) {
@@ -717,13 +694,11 @@ placeturret(turret) {
   turret.carried = 0;
   turret.hasbeenplanted = 1;
 
-  if(turret.stunnedbytacticalgrenade) {
+  if(turret.stunnedbytacticalgrenade)
     turret thread stunturrettacticalgrenade(turret.stunduration);
-  }
 
-  if(isDefined(level.auto_turret_settings[turret.turrettype].loopsoundfx)) {
-    turret playLoopSound(level.auto_turret_settings[turret.turrettype].loopsoundfx);
-  }
+  if(isDefined(level.auto_turret_settings[turret.turrettype].loopsoundfx))
+    turret playloopsound(level.auto_turret_settings[turret.turrettype].loopsoundfx);
 
   self playrumbleonentity("damage_heavy");
   turret notify("turret_placed");
@@ -731,7 +706,7 @@ placeturret(turret) {
 
 initturret(turret) {
   maps\mp\_mgturret::turret_set_difficulty(turret, "fu");
-  turret setModel(level.auto_turret_settings[turret.turrettype].modelbase);
+  turret setmodel(level.auto_turret_settings[turret.turrettype].modelbase);
 
   if(turret.turrettype == "microwave") {
     turret clearclientflag(3);
@@ -739,14 +714,13 @@ initturret(turret) {
   }
 
   turret setforcenocull();
-  turret playSound("mpl_turret_startup");
+  turret playsound("mpl_turret_startup");
 
   if(level.teambased) {
     offset = level.turrets_headicon_offset["default"];
 
-    if(isDefined(level.turrets_headicon_offset[turret.turrettype])) {
+    if(isDefined(level.turrets_headicon_offset[turret.turrettype]))
       offset = level.turrets_headicon_offset[turret.turrettype];
-    }
 
     turret maps\mp\_entityheadicons::setentityheadicon(self.pers["team"], self, offset);
   }
@@ -758,13 +732,12 @@ initturret(turret) {
   turret setdefaultdroppitch(45.0);
   turret.dangerous_nodes = [];
 
-  if(turret.turrettype == "sentry") {
+  if(turret.turrettype == "sentry")
     turret thread turret_sentry_think(self);
-  } else if(turret.turrettype == "tow") {
+  else if(turret.turrettype == "tow")
     turret thread turret_tow_think(self);
-  } else if(turret.turrettype == "microwave") {
+  else if(turret.turrettype == "microwave")
     turret thread turret_microwave_think(self);
-  }
 
   turret.turret_active = 1;
   turret.spawninfluencerid = maps\mp\gametypes\_spawning::create_auto_turret_influencer(turret.origin, turret.team, turret.angles);
@@ -786,14 +759,13 @@ watchdamage() {
   self endon("turret_deactivated");
   medalgiven = 0;
 
-  if(!isDefined(self.damagetaken)) {
+  if(!isDefined(self.damagetaken))
     self.damagetaken = 0;
-  }
 
   low_health = 0;
 
   if(self.damagetaken > self.maxhealth / 1.8) {
-    playFXOnTag(level.auto_turret_settings[self.turrettype].damagefx, self, level.auto_turret_settings[self.turrettype].stunfxtag);
+    playfxontag(level.auto_turret_settings[self.turrettype].damagefx, self, level.auto_turret_settings[self.turrettype].stunfxtag);
     low_health = 1;
   }
 
@@ -822,9 +794,8 @@ watchdamage() {
       continue;
     }
     if(!level.teambased && !level.hardcoremode) {
-      if(self.owner == attacker) {
+      if(self.owner == attacker)
         continue;
-      }
     }
 
     if(self.turrettype == "microwave" && partname == "tag_shield") {
@@ -834,78 +805,67 @@ watchdamage() {
       damagetakenbefore = self.damagetaken;
 
       if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET" || type == "MOD_PROJECTILE_SPLASH" && isexplosivebulletweapon(weaponname)) {
-        if(allowperks && attacker hasperk("specialty_armorpiercing")) {
+        if(allowperks && attacker hasperk("specialty_armorpiercing"))
           damage = damage + int(damage * level.cac_armorpiercing_data);
-        }
 
-        if(weaponclass(weaponname) == "spread") {
+        if(weaponclass(weaponname) == "spread")
           damage = damage * 5;
-        }
 
         self.damagetaken = self.damagetaken + self.bulletdamagereduction * damage;
       } else if(weaponname == "remote_missile_missile_mp" || weaponname == "remote_mortar_mp" || weaponname == "missile_drone_projectile_mp")
         self.damagetaken = self.damagetaken + damage * 10;
-      else if(type == "MOD_PROJECTILE" && (weaponname == "smaw_mp" || weaponname == "fhj18_mp")) {
+      else if(type == "MOD_PROJECTILE" && (weaponname == "smaw_mp" || weaponname == "fhj18_mp"))
         self.damagetaken = self.damagetaken + 200 * self.explosivedamagereduction;
-      } else if((type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") && damage != 0 && weaponname != "emp_grenade_mp" && !isexplosivebulletweapon(weaponname)) {
+      else if((type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") && damage != 0 && weaponname != "emp_grenade_mp" && !isexplosivebulletweapon(weaponname))
         self.damagetaken = self.damagetaken + self.explosivedamagereduction * damage;
-      } else if(type == "MOD_MELEE") {
-        if(isplayer(attacker)) {
+      else if(type == "MOD_MELEE") {
+        if(isplayer(attacker))
           attacker playlocalsound("fly_riotshield_impact_knife");
-        }
 
         continue;
       } else if(isDefined(weaponname) && weaponname == "emp_grenade_mp" && type == "MOD_GRENADE_SPLASH")
         self.damagetaken = self.damagetaken + self.maxhealth;
-      else {
+      else
         self.damagetaken = self.damagetaken + damage;
-      }
 
       damagedealt = self.damagetaken - damagetakenbefore;
 
-      if(damagedealt > 0 && isDefined(self.controlled) && self.controlled) {
+      if(damagedealt > 0 && isDefined(self.controlled) && self.controlled)
         self.owner sendkillstreakdamageevent(int(damagedealt));
-      }
     }
 
     if(isDefined(weaponname) && type == "MOD_GRENADE_SPLASH") {
       switch (weaponname) {
         case "emp_grenade_mp":
-          if(!self.stunnedbytacticalgrenade) {
+          if(!self.stunnedbytacticalgrenade)
             self thread stunturrettacticalgrenade(self.stunduration);
-          }
 
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(type);
-            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(type);
-            }
           }
 
           break;
         default:
-          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
             attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(type);
-          }
 
           break;
       }
     } else if(isDefined(weaponname)) {
-      if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
+      if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
         attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(type);
-      }
     }
 
     if(self.damagetaken >= self.maxhealth) {
       if(self isenemyplayer(attacker) && self.owner != attacker) {
-        if(self.turrettype == "sentry") {
+        if(self.turrettype == "sentry")
           maps\mp\_scoreevents::processscoreevent("destroyed_sentry_gun", attacker, self, weaponname);
-        } else if(self.turrettype == "microwave") {
+        else if(self.turrettype == "microwave")
           maps\mp\_scoreevents::processscoreevent("destroyed_microwave_turret", attacker, self, weaponname);
-        }
 
         attacker maps\mp\_challenges::destroyedturret(weaponname);
 
@@ -914,18 +874,16 @@ watchdamage() {
           attacker addweaponstat(self.hardpointweapon, "destroyed", 1);
         }
 
-        if(isDefined(self.controlled) && self.controlled) {
+        if(isDefined(self.controlled) && self.controlled)
           attacker addweaponstat(weaponname, "destroyed_controlled_killstreak", 1);
-        }
       }
 
       owner = self.owner;
 
-      if(self.turrettype == "sentry") {
+      if(self.turrettype == "sentry")
         owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("sentry_destroyed", "item_destroyed");
-      } else if(self.turrettype == "microwave") {
+      else if(self.turrettype == "microwave")
         owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("microwave_destroyed", "item_destroyed");
-      }
 
       owner stopcarryturret(self);
       self.damagetaken = self.health;
@@ -934,7 +892,7 @@ watchdamage() {
     }
 
     if(!low_health && self.damagetaken > self.maxhealth / 1.8) {
-      playFXOnTag(level.auto_turret_settings[self.turrettype].damagefx, self, level.auto_turret_settings[self.turrettype].stunfxtag);
+      playfxontag(level.auto_turret_settings[self.turrettype].damagefx, self, level.auto_turret_settings[self.turrettype].stunfxtag);
       low_health = 1;
     }
   }
@@ -947,9 +905,8 @@ watchturretlifespan(turret) {
   while(true) {
     timeout = level.auto_turret_timeout;
 
-    if(isDefined(turret) && isDefined(level.auto_turret_settings[turret.turrettype].timeout)) {
+    if(isDefined(turret) && isDefined(level.auto_turret_settings[turret.turrettype].timeout))
       timeout = level.auto_turret_settings[turret.turrettype].timeout;
-    }
 
     if(self.curr_time > timeout) {
       break;
@@ -960,13 +917,11 @@ watchturretlifespan(turret) {
       continue;
     }
 
-    if(self.curr_time + 2.0 > level.auto_turret_timeout) {
+    if(self.curr_time + 2.0 > level.auto_turret_timeout)
       self deleteturretusetrigger();
-    }
 
-    if(!self.carried) {
+    if(!self.carried)
       self.curr_time = self.curr_time + 1.0;
-    }
 
     wait 1.0;
   }
@@ -985,9 +940,8 @@ checkforstundamage() {
   while(true) {
     self waittill("damage_caused_by", weapon);
 
-    if(isstunweapon(weapon) && !self.stunnedbytacticalgrenade) {
+    if(isstunweapon(weapon) && !self.stunnedbytacticalgrenade)
       self thread stunturrettacticalgrenade(self.stunduration);
-    }
   }
 }
 
@@ -1008,13 +962,11 @@ stunturrettacticalgrenade(duration) {
     self notify("microwave_end_fx");
   }
 
-  if(isDefined(self.controlled) && self.controlled) {
+  if(isDefined(self.controlled) && self.controlled)
     self.owner freezecontrols(1);
-  }
 
-  if(isDefined(self.owner.fullscreen_static)) {
+  if(isDefined(self.owner.fullscreen_static))
     self.owner thread maps\mp\killstreaks\_remote_weapons::stunstaticfx(duration);
-  }
 
   if(self.stunnedbytacticalgrenade) {
     while(true) {
@@ -1033,17 +985,14 @@ stunturrettacticalgrenade(duration) {
   self.stunnedbytacticalgrenade = 0;
   self.stuntime = 0.0;
 
-  if(isDefined(self.controlled) && self.controlled) {
+  if(isDefined(self.controlled) && self.controlled)
     self.owner freezecontrols(0);
-  }
 
-  if(!self.carried) {
+  if(!self.carried)
     self setmode("auto_nonai");
-  }
 
-  if(self.turrettype != "tow" && !self.carried && !self.controlled) {
+  if(self.turrettype != "tow" && !self.carried && !self.controlled)
     self thread maps\mp\_mgturret::burst_fire_unmanned();
-  }
 
   if(self.turrettype == "microwave" && !self.carried) {
     self clearclientflag(3);
@@ -1061,32 +1010,27 @@ stunturret(duration, isdead, isemp) {
   self notify("stop_burst_fire_unmanned");
   self thread stunturretfx(duration, isdead, isemp);
 
-  if(isDefined(self.controlled) && self.controlled && isDefined(self.owner)) {
+  if(isDefined(self.controlled) && self.controlled && isDefined(self.owner))
     self.owner freezecontrols(1);
-  }
 
   if(self.turrettype == "microwave") {
     self clearclientflag(2);
     self setclientflag(4);
   }
 
-  if(isDefined(duration)) {
+  if(isDefined(duration))
     wait(duration);
-  } else {
+  else
     return;
-  }
 
-  if(isDefined(self.controlled) && self.controlled && isDefined(self.owner)) {
+  if(isDefined(self.controlled) && self.controlled && isDefined(self.owner))
     self.owner freezecontrols(0);
-  }
 
-  if(!self.carried) {
+  if(!self.carried)
     self setmode("auto_nonai");
-  }
 
-  if(self.turrettype != "tow" && !self.carried && !self.controlled) {
+  if(self.turrettype != "tow" && !self.carried && !self.controlled)
     self thread maps\mp\_mgturret::burst_fire_unmanned();
-  }
 
   self notify("turret_stun_ended");
   level notify("turret_stun_ended", self);
@@ -1098,9 +1042,8 @@ stunfxthink(fx) {
   self waittill_any("death", "turret_stun_ended", "turret_deactivated", "hacked", "turret_carried");
 
   if(isDefined(self)) {
-    if(isDefined(level.auto_turret_settings[self.turrettype].loopsoundfx)) {
-      self playLoopSound(level.auto_turret_settings[self.turrettype].loopsoundfx);
-    }
+    if(isDefined(level.auto_turret_settings[self.turrettype].loopsoundfx))
+      self playloopsound(level.auto_turret_settings[self.turrettype].loopsoundfx);
   }
 
   fx delete();
@@ -1112,20 +1055,18 @@ stunturretfx(duration, isdead, isemp) {
   self endon("turret_stun_ended");
   origin = self gettagorigin(level.auto_turret_settings[self.turrettype].stunfxtag);
   self.stun_fx = spawn("script_model", origin);
-  self.stun_fx setModel("tag_origin");
+  self.stun_fx setmodel("tag_origin");
   self thread stunfxthink(self.stun_fx);
   wait 0.1;
-  self.stun_fx playSound("dst_disable_spark");
+  self.stun_fx playsound("dst_disable_spark");
 
   for(time = 0; time < duration; time = time + 0.25) {
     if(int(time * 10) % 20 == 0) {
-      if(isDefined(isdead) && isdead) {
-        playFXOnTag(level.auto_turret_settings[self.turrettype].disablefx, self.stun_fx, "tag_origin");
-      }
+      if(isDefined(isdead) && isdead)
+        playfxontag(level.auto_turret_settings[self.turrettype].disablefx, self.stun_fx, "tag_origin");
 
-      if(isDefined(isemp) && isemp) {
-        playFXOnTag(level.auto_turret_settings[self.turrettype].stunfx, self.stun_fx, "tag_origin");
-      }
+      if(isDefined(isemp) && isemp)
+        playfxontag(level.auto_turret_settings[self.turrettype].stunfx, self.stun_fx, "tag_origin");
     }
 
     wait 0.25;
@@ -1142,14 +1083,13 @@ isstunweapon(weapon) {
 }
 
 scramblerstun(stun) {
-  if(stun) {
+  if(stun)
     self thread stunturret(0, 1);
-  } else {
+  else {
     self setmode("auto_nonai");
 
-    if(self.turrettype != "tow" && !self.controlled) {
+    if(self.turrettype != "tow" && !self.controlled)
       self thread maps\mp\_mgturret::burst_fire_unmanned();
-    }
 
     self notify("turret_stun_ended");
     level notify("turret_stun_ended", self);
@@ -1161,9 +1101,8 @@ watchscramble() {
   self endon("turret_deactivated");
   self endon("turret_carried");
 
-  if(self maps\mp\_scrambler::checkscramblerstun()) {
+  if(self maps\mp\_scrambler::checkscramblerstun())
     self thread scramblerstun(1);
-  }
 
   for(;;) {
     level waittill_any("scrambler_spawn", "scrambler_death", "hacked", "turret_stun_ended");
@@ -1212,7 +1151,7 @@ destroyturret() {
   self deleteturretusetrigger();
 
   if(isDefined(playdeathanim) && playdeathanim && !self.carried) {
-    self playSound("dst_equipment_destroy");
+    self playsound("dst_equipment_destroy");
     self stunturret(self.stunduration, 1, self.stunnedbytacticalgrenade);
   }
 
@@ -1234,8 +1173,8 @@ destroyturret() {
 
   if(isDefined(self)) {
     if(self.hasbeenplanted) {
-      playFX(level.auto_turret_settings[self.turrettype].explodefx, self.origin, self.angles);
-      self playSound("mpl_turret_exp");
+      playfx(level.auto_turret_settings[self.turrettype].explodefx, self.origin, self.angles);
+      self playsound("mpl_turret_exp");
     }
 
     if(self.carried && isDefined(self.owner)) {
@@ -1250,9 +1189,8 @@ destroyturret() {
 deleteturretusetrigger() {
   self remove_turret_dangerous_nodes();
 
-  if(isDefined(self.pickuptrigger)) {
+  if(isDefined(self.pickuptrigger))
     self.pickuptrigger delete();
-  }
 
   if(isDefined(self.hackertrigger)) {
     if(isDefined(self.hackertrigger.progressbar)) {
@@ -1278,15 +1216,13 @@ spawnturretpickuptrigger(player) {
   self.pickuptrigger = spawn("trigger_radius_use", pos);
   self.pickuptrigger setcursorhint("HINT_NOICON", self);
 
-  if(isDefined(level.auto_turret_settings[self.turrettype].hintstring)) {
+  if(isDefined(level.auto_turret_settings[self.turrettype].hintstring))
     self.pickuptrigger sethintstring(level.auto_turret_settings[self.turrettype].hintstring);
-  } else {
+  else
     self.pickuptrigger sethintstring(&"MP_GENERIC_PICKUP");
-  }
 
-  if(level.teambased) {
+  if(level.teambased)
     self.pickuptrigger setteamfortrigger(player.team);
-  }
 
   player clientclaimtrigger(self.pickuptrigger);
   self thread watchturretuse(self.pickuptrigger);
@@ -1327,16 +1263,14 @@ watchturretuse(trigger) {
       }
 
       player playrumbleonentity("damage_heavy");
-      self playSound("mpl_turret_down");
+      self playsound("mpl_turret_down");
       self deleteturretusetrigger();
 
-      if(self.turrettype == "microwave") {
+      if(self.turrettype == "microwave")
         self notify("microwave_end_fx");
-      }
 
-      if(isDefined(player.remoteweapon) && player.remoteweapon == self) {
+      if(isDefined(player.remoteweapon) && player.remoteweapon == self)
         player notify("remove_remote_weapon", 0);
-      }
 
       player thread startcarryturret(self);
       self deleteturretusetrigger();
@@ -1353,9 +1287,8 @@ turret_target_aquired_watch(player) {
   for(;;) {
     self waittill("turret_target_aquired");
 
-    if(!self.remotecontrolled) {
+    if(!self.remotecontrolled)
       self laseron();
-    }
   }
 }
 
@@ -1368,9 +1301,8 @@ turret_target_lost_watch(player) {
   for(;;) {
     self waittill("turret_target_lost");
 
-    if(!self.remotecontrolled) {
+    if(!self.remotecontrolled)
       self laseroff();
-    }
   }
 }
 
@@ -1394,7 +1326,7 @@ turret_tow_think(player) {
   while(true) {
     if(self isfiringturret() && turretstate != "firing") {
       turretstate = "firing";
-      self playSound("mpl_turret_alert");
+      self playsound("mpl_turret_alert");
       self thread do_tow_shoot(player);
     } else {
       self notify("target_lost");
@@ -1409,57 +1341,46 @@ turret_tow_think(player) {
 deletetriggeronparentdeath(trigger) {
   self waittill("death");
 
-  if(isDefined(trigger)) {
+  if(isDefined(trigger))
     trigger delete();
-  }
 }
 
 doesmicrowaveturretaffectentity(entity) {
-  if(!isalive(entity)) {
+  if(!isalive(entity))
     return false;
-  }
 
-  if(!isplayer(entity) && !isai(entity)) {
+  if(!isplayer(entity) && !isai(entity))
     return false;
-  }
 
-  if(isDefined(self.carried) && self.carried) {
+  if(isDefined(self.carried) && self.carried)
     return false;
-  }
 
-  if(self maps\mp\gametypes\_weaponobjects::isstunned()) {
+  if(self maps\mp\gametypes\_weaponobjects::isstunned())
     return false;
-  }
 
-  if(isDefined(self.owner) && entity == self.owner) {
+  if(isDefined(self.owner) && entity == self.owner)
     return false;
-  }
 
-  if(!maps\mp\gametypes\_weaponobjects::friendlyfirecheck(self.owner, entity, 0)) {
+  if(!maps\mp\gametypes\_weaponobjects::friendlyfirecheck(self.owner, entity, 0))
     return false;
-  }
 
-  if(distancesquared(entity.origin, self.origin) > level.microwave_radius * level.microwave_radius) {
+  if(distancesquared(entity.origin, self.origin) > level.microwave_radius * level.microwave_radius)
     return false;
-  }
 
   entdirection = vectornormalize(entity.origin - self.origin);
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   dot = vectordot(entdirection, forward);
 
-  if(dot < level.microwave_turret_cone_dot) {
+  if(dot < level.microwave_turret_cone_dot)
     return false;
-  }
 
   pitchdifference = int(abs(vectortoangles(entdirection)[0] - self.angles[0])) % 360;
 
-  if(pitchdifference > 15 && pitchdifference < 345) {
+  if(pitchdifference > 15 && pitchdifference < 345)
     return false;
-  }
 
-  if(entity damageconetrace(self.origin + vectorscale((0, 0, 1), 40.0), self) <= 0) {
+  if(entity damageconetrace(self.origin + vectorscale((0, 0, 1), 40.0), self) <= 0)
     return false;
-  }
 
   return true;
 }
@@ -1478,18 +1399,16 @@ microwaveentity(entity) {
       entity.beingmicrowaved = 0;
       entity.beingmicrowavedby = undefined;
 
-      if(isDefined(entity.microwavepoisoning) && entity.microwavepoisoning) {
+      if(isDefined(entity.microwavepoisoning) && entity.microwavepoisoning)
         entity.microwavepoisoning = 0;
-      }
 
       return;
     }
 
     damage = level.microwave_turret_damage;
 
-    if(level.hardcoremode) {
+    if(level.hardcoremode)
       damage = damage / 2;
-    }
 
     if(!isai(entity) && entity mayapplyscreeneffect()) {
       if(!isDefined(entity.microwavepoisoning) || !entity.microwavepoisoning) {
@@ -1515,9 +1434,8 @@ microwaveentity(entity) {
         }
       }
 
-      if(entity.microwaveeffect % 3 == 2) {
+      if(entity.microwaveeffect % 3 == 2)
         maps\mp\_scoreevents::processscoreevent("hpm_suppress", self.owner, entity);
-      }
     }
 
     wait 0.5;
@@ -1540,9 +1458,8 @@ turret_microwave_think(player) {
   for(;;) {
     trigger waittill("trigger", ent);
 
-    if(!isDefined(ent.beingmicrowaved) || !ent.beingmicrowaved) {
+    if(!isDefined(ent.beingmicrowaved) || !ent.beingmicrowaved)
       self thread microwaveentity(ent);
-    }
   }
 }
 
@@ -1554,7 +1471,7 @@ turret_microwave_watchfordogs(trigger, player) {
   damage = level.microwave_turret_damage;
 
   for(;;) {
-    dogs = getEntArray("attack_dog", "targetname");
+    dogs = getentarray("attack_dog", "targetname");
 
     foreach(dog in dogs) {
       if(dog.aiteam == player.team) {
@@ -1576,47 +1493,38 @@ turret_microwave_watchfordogs(trigger, player) {
 }
 
 doesmicrowaveturretaffectdog(entity) {
-  if(!isalive(entity)) {
+  if(!isalive(entity))
     return false;
-  }
 
-  if(!isplayer(entity) && !isai(entity)) {
+  if(!isplayer(entity) && !isai(entity))
     return false;
-  }
 
-  if(isDefined(self.carried) && self.carried) {
+  if(isDefined(self.carried) && self.carried)
     return false;
-  }
 
-  if(self maps\mp\gametypes\_weaponobjects::isstunned()) {
+  if(self maps\mp\gametypes\_weaponobjects::isstunned())
     return false;
-  }
 
-  if(isDefined(self.owner) && entity == self.owner) {
+  if(isDefined(self.owner) && entity == self.owner)
     return false;
-  }
 
-  if(distancesquared(entity.origin, self.origin) > level.microwave_radius * level.microwave_radius) {
+  if(distancesquared(entity.origin, self.origin) > level.microwave_radius * level.microwave_radius)
     return false;
-  }
 
   entdirection = vectornormalize(entity.origin - self.origin);
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   dot = vectordot(entdirection, forward);
 
-  if(dot < level.microwave_turret_cone_dot) {
+  if(dot < level.microwave_turret_cone_dot)
     return false;
-  }
 
   pitchdifference = int(abs(vectortoangles(entdirection)[0] - self.angles[0])) % 360;
 
-  if(pitchdifference > 15 && pitchdifference < 345) {
+  if(pitchdifference > 15 && pitchdifference < 345)
     return false;
-  }
 
-  if(entity damageconetrace(self.origin + vectorscale((0, 0, 1), 40.0), self) <= 0) {
+  if(entity damageconetrace(self.origin + vectorscale((0, 0, 1), 40.0), self) <= 0)
     return false;
-  }
 
   return true;
 }
@@ -1642,15 +1550,15 @@ waittillendfx() {
 update_microwave_fx() {
   angles = self gettagangles("tag_flash");
   origin = self gettagorigin("tag_flash");
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   forward = vectorscale(forward, level.microwave_radius);
-  forwardright = anglesToForward(angles - (0, level.microwave_turret_angle / 3, 0));
+  forwardright = anglestoforward(angles - (0, level.microwave_turret_angle / 3, 0));
   forwardright = vectorscale(forwardright, level.microwave_radius);
-  forwardleft = anglesToForward(angles + (0, level.microwave_turret_angle / 3, 0));
+  forwardleft = anglestoforward(angles + (0, level.microwave_turret_angle / 3, 0));
   forwardleft = vectorscale(forwardleft, level.microwave_radius);
-  trace = bulletTrace(origin, origin + forward, 0, self);
-  traceright = bulletTrace(origin, origin + forwardright, 0, self);
-  traceleft = bulletTrace(origin, origin + forwardleft, 0, self);
+  trace = bullettrace(origin, origin + forward, 0, self);
+  traceright = bullettrace(origin, origin + forwardright, 0, self);
+  traceleft = bullettrace(origin, origin + forwardleft, 0, self);
   fxhash = self microwave_fx_hash(trace, origin);
   fxhashright = self microwave_fx_hash(traceright, origin);
   fxhashleft = self microwave_fx_hash(traceleft, origin);
@@ -1658,12 +1566,11 @@ update_microwave_fx() {
   if(isDefined(self.microwavefxhash) && self.microwavefxhash == fxhash && isDefined(self.microwavefxhashright) && self.microwavefxhashright == fxhashright && isDefined(self.microwavefxhashleft) && self.microwavefxhashleft == fxhashleft) {
     return;
   }
-  if(isDefined(self.microwavefxent)) {
+  if(isDefined(self.microwavefxent))
     self.microwavefxent deleteaftertime(0.1);
-  }
 
   self.microwavefxent = spawn("script_model", origin);
-  self.microwavefxent setModel("tag_microwavefx");
+  self.microwavefxent setmodel("tag_microwavefx");
   self.microwavefxent.angles = angles;
   self thread deleteonendfx();
   self.microwavefxhash = fxhash;
@@ -1681,9 +1588,8 @@ deleteonendfx() {
   self.microwavefxhashright = undefined;
   self.microwavefxhashleft = undefined;
 
-  if(isDefined(self.microwavefxent)) {
+  if(isDefined(self.microwavefxent))
     self.microwavefxent delete();
-  }
 }
 
 microwave_fx_hash(trace, origin) {
@@ -1693,9 +1599,8 @@ microwave_fx_hash(trace, origin) {
   for(i = 0; i < 5; i++) {
     distsq = i * level.microwave_fx_size * (i * level.microwave_fx_size);
 
-    if(distancesquared(origin, trace["position"]) >= distsq) {
+    if(distancesquared(origin, trace["position"]) >= distsq)
       hash = hash + counter;
-    }
 
     counter = counter * 2;
   }
@@ -1712,23 +1617,23 @@ microwave_play_fx(trace, traceright, traceleft, origin) {
     if(distancesquared(origin, trace["position"]) >= distsq) {
       switch (i) {
         case 0:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx11");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx11");
           wait 0.05;
           break;
         case 1:
           break;
         case 2:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx32");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx32");
           wait 0.05;
           break;
         case 3:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx42");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx42");
           wait 0.05;
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx43");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx43");
           wait 0.05;
           break;
         case 4:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx53");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx53");
           wait 0.05;
           break;
       }
@@ -1739,21 +1644,21 @@ microwave_play_fx(trace, traceright, traceleft, origin) {
         case 0:
           break;
         case 1:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx22");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx22");
           wait 0.05;
           break;
         case 2:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx33");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx33");
           wait 0.05;
           break;
         case 3:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx44");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx44");
           wait 0.05;
           break;
         case 4:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx54");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx54");
           wait 0.05;
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx55");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx55");
           wait 0.05;
           break;
       }
@@ -1764,21 +1669,21 @@ microwave_play_fx(trace, traceright, traceleft, origin) {
         case 0:
           break;
         case 1:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx21");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx21");
           wait 0.05;
           break;
         case 2:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx31");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx31");
           wait 0.05;
           break;
         case 3:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx41");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx41");
           wait 0.05;
           break;
         case 4:
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx51");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx51");
           wait 0.05;
-          playFXOnTag(level.auto_turret_settings["microwave"].fx, self, "tag_fx52");
+          playfxontag(level.auto_turret_settings["microwave"].fx, self, "tag_fx52");
           wait 0.05;
           break;
       }
@@ -1800,7 +1705,7 @@ do_tow_shoot(player) {
       continue;
     }
 
-    self playSound("wpn_sam_launcher_rocket_npc");
+    self playsound("wpn_sam_launcher_rocket_npc");
     self shootturret();
     self.firetime = 0.0;
   }
@@ -1811,16 +1716,14 @@ missile_fired_notify() {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner endon("disconnect");
-  }
 
   while(true) {
     self waittill("missile_fire", missile, weap, target);
 
-    if(isDefined(target)) {
+    if(isDefined(target))
       target notify("stinger_fired_at_me", missile, weap, self.owner);
-    }
 
     level notify("missile_fired", self, missile, target, 1);
   }
@@ -1863,13 +1766,11 @@ hackerthink(trigger, owner) {
 
     maps\mp\_scoreevents::processscoreevent("hacked", player, self);
 
-    if(self.turrettype == "sentry") {
+    if(self.turrettype == "sentry")
       owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("sentry_hacked", "item_destroyed");
-    }
 
-    if(self.turrettype == "microwave") {
+    if(self.turrettype == "microwave")
       owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("microwave_hacked", "item_destroyed");
-    }
 
     if(level.teambased) {
       self setturretteam(player.team);
@@ -1880,9 +1781,8 @@ hackerthink(trigger, owner) {
     }
 
     if(isDefined(self.owner) && isDefined(self.owner.remoteweapon)) {
-      if(self.owner.remoteweapon == self) {
+      if(self.owner.remoteweapon == self)
         self.owner notify("remove_remote_weapon", 1);
-      }
     }
 
     self.hacked = 1;
@@ -1902,16 +1802,14 @@ hackerthink(trigger, owner) {
 
     offset = level.turrets_headicon_offset["default"];
 
-    if(isDefined(level.turrets_headicon_offset[self.turrettype])) {
+    if(isDefined(level.turrets_headicon_offset[self.turrettype]))
       offset = level.turrets_headicon_offset[self.turrettype];
-    }
 
     self maps\mp\_entityheadicons::setentityheadicon(player.pers["team"], player, offset);
     self spawnturrethackertrigger(player);
 
-    if(self.turrettype == "sentry") {
+    if(self.turrettype == "sentry")
       player maps\mp\killstreaks\_remote_weapons::initremoteweapon(self, "killstreak_remote_turret_mp");
-    }
 
     return;
   }
@@ -1937,11 +1835,10 @@ disabletriggerthink(trigger, owner) {
       continue;
     }
     if(self isenemyplayer(attacker)) {
-      if(self.turrettype == "sentry") {
+      if(self.turrettype == "sentry")
         maps\mp\_scoreevents::processscoreevent("destroyed_sentry_gun", attacker, self, "knife_mp");
-      } else if(self.turrettype == "microwave") {
+      else if(self.turrettype == "microwave")
         maps\mp\_scoreevents::processscoreevent("destroyed_microwave_turret", attacker, self, "knife_mp");
-      }
 
       if(isDefined(self.hardpointweapon)) {
         level.globalkillstreaksdestroyed++;
@@ -1952,9 +1849,8 @@ disabletriggerthink(trigger, owner) {
     if(isDefined(self.owner) && isplayer(self.owner)) {
       owner = self.owner;
 
-      if(self.turrettype == "sentry") {
+      if(self.turrettype == "sentry")
         owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("sentry_destroyed", "item_destroyed");
-      }
     }
 
     self notify("destroy_turret", 1);
@@ -1966,9 +1862,8 @@ disableresult(player, owner) {
   time = gettime();
   hacktime = getdvarfloat(#"perk_disarmExplosiveTime");
 
-  if(!candisable(player, owner, 1)) {
+  if(!candisable(player, owner, 1))
     return 0;
-  }
 
   self thread hackerunfreezeplayer(player);
 
@@ -2015,104 +1910,81 @@ disableresult(player, owner) {
     self.progresstext destroyelem();
   }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self notify("hack_done");
-  }
 
   return success;
 }
 
 candisable(player, owner, weapon_check) {
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return false;
-  }
 
-  if(!isplayer(player)) {
+  if(!isplayer(player))
     return false;
-  }
 
-  if(!isalive(player)) {
+  if(!isalive(player))
     return false;
-  }
 
-  if(!isDefined(owner)) {
+  if(!isDefined(owner))
     return false;
-  }
 
-  if(owner == player) {
+  if(owner == player)
     return false;
-  }
 
-  if(level.teambased && player.team == owner.team) {
+  if(level.teambased && player.team == owner.team)
     return false;
-  }
 
-  if(isDefined(player.isdefusing) && player.isdefusing) {
+  if(isDefined(player.isdefusing) && player.isdefusing)
     return false;
-  }
 
-  if(isDefined(player.isplanting) && player.isplanting) {
+  if(isDefined(player.isplanting) && player.isplanting)
     return false;
-  }
 
-  if(isDefined(player.proxbar) && !player.proxbar.hidden) {
+  if(isDefined(player.proxbar) && !player.proxbar.hidden)
     return false;
-  }
 
-  if(isDefined(player.revivingteammate) && player.revivingteammate == 1) {
+  if(isDefined(player.revivingteammate) && player.revivingteammate == 1)
     return false;
-  }
 
-  if(!player isonground()) {
+  if(!player isonground())
     return false;
-  }
 
-  if(player isinvehicle()) {
+  if(player isinvehicle())
     return false;
-  }
 
-  if(player isweaponviewonlylinked()) {
+  if(player isweaponviewonlylinked())
     return false;
-  }
 
-  if(player hasperk("specialty_disarmexplosive")) {
+  if(player hasperk("specialty_disarmexplosive"))
     return false;
-  }
 
-  if(isDefined(player.laststand) && player.laststand) {
+  if(isDefined(player.laststand) && player.laststand)
     return false;
-  }
 
   if(weapon_check) {
-    if(player isthrowinggrenade()) {
+    if(player isthrowinggrenade())
       return false;
-    }
 
-    if(player isswitchingweapons()) {
+    if(player isswitchingweapons())
       return false;
-    }
 
-    if(player ismeleeing()) {
+    if(player ismeleeing())
       return false;
-    }
 
     weapon = player getcurrentweapon();
 
-    if(!isDefined(weapon)) {
+    if(!isDefined(weapon))
       return false;
-    }
 
-    if(weapon == "none") {
+    if(weapon == "none")
       return false;
-    }
 
-    if(isweaponequipment(weapon) && player isfiring()) {
+    if(isweaponequipment(weapon) && player isfiring())
       return false;
-    }
 
-    if(isweaponspecificuse(weapon)) {
+    if(isweaponspecificuse(weapon))
       return false;
-    }
   }
 
   return true;
@@ -2152,12 +2024,12 @@ turretscanstopwaitercleanup(ent) {
 
   println("snd scan delete");
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
-turretscanstopnotify() {}
+turretscanstopnotify() {
+}
 
 startturretremotecontrol(turret) {
   self.killstreak_waitamount = level.auto_turret_timeout * 1000;
@@ -2199,9 +2071,8 @@ endremoteturret(turret, isdead) {
   turret.remotecontrolled = 0;
   turret setmode("auto_nonai");
 
-  if(!isdead) {
+  if(!isdead)
     turret thread maps\mp\_mgturret::burst_fire_unmanned();
-  }
 }
 
 stop_remote() {
@@ -2263,21 +2134,18 @@ fade_out_hint_hud() {
 }
 
 remove_turret_hint_hud() {
-  if(isDefined(self.fire_turret_hud)) {
+  if(isDefined(self.fire_turret_hud))
     self.fire_turret_hud destroy();
-  }
 
-  if(isDefined(self.zoom_turret_hud)) {
+  if(isDefined(self.zoom_turret_hud))
     self.zoom_turret_hud destroy();
-  }
 }
 
 remove_turret_dangerous_nodes() {
   if(isDefined(self.dangerous_nodes)) {
     foreach(node in self.dangerous_nodes) {
-      foreach(team in level.teams) {
-        node setdangerous(team, 0);
-      }
+      foreach(team in level.teams)
+      node setdangerous(team, 0);
     }
   }
 
@@ -2293,15 +2161,13 @@ addnoturrettrigger(position, radius, height) {
 turret_debug_box(origin, mins, maxs, color) {
   debug_turret = getdvar(#"_id_94A738D1");
 
-  if(debug_turret == "1") {
+  if(debug_turret == "1")
     box(origin, mins, maxs, 0, color, 1, 1, 300);
-  }
 }
 
 turret_debug_line(start, end, color) {
   debug_turret = getdvar(#"_id_94A738D1");
 
-  if(debug_turret == "1") {
+  if(debug_turret == "1")
     line(start, end, color, 1, 1, 300);
-  }
 }

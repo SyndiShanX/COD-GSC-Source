@@ -43,9 +43,8 @@ destructible_car_lights(localclientnum, oldval, newval, bnewent, binitialsnap, f
       self.fx = undefined;
     }
 
-    if(fieldname == "police_car_lights") {
-      self.fx = playFXOnTag(localclientnum, level._effect["fx_mp_light_police_car_japan"], self, "tag_origin");
-    }
+    if(fieldname == "police_car_lights")
+      self.fx = playfxontag(localclientnum, level._effect["fx_mp_light_police_car_japan"], self, "tag_origin");
   } else if(isDefined(self.fx)) {
     stopfx(localclientnum, self.fx);
     self.fx = undefined;

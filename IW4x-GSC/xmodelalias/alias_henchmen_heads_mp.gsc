@@ -3,6 +3,9 @@
  * Script: xmodelalias\alias_henchmen_heads_mp.gsc
 ***************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   var_0[0] = "head_henchmen_a";
   var_0[1] = "head_henchmen_aa";

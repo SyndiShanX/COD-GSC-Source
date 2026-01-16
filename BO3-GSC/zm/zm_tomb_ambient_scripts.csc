@@ -11,13 +11,13 @@
 #namespace zm_tomb_ambient_scripts;
 
 function main() {
-  clientfield::register("scriptmover", "zeppelin_fx", 21000, 1, "int", &zeppelin_fx, 0, 0);
+  clientfield::register("scriptmover", "zeppelin_fx", 21000, 1, "int", & zeppelin_fx, 0, 0);
 }
 
 function zeppelin_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self.var_1f4bb75 = playFXOnTag(localclientnum, level._effect["zeppelin_lights"], self, "tag_body");
-  } else if(isDefined(self.var_1f4bb75)) {
+    self.var_1f4bb75 = playfxontag(localclientnum, level._effect["zeppelin_lights"], self, "tag_body");
+  } else if(isdefined(self.var_1f4bb75)) {
     stopfx(localclientnum, self.var_1f4bb75);
   }
 }

@@ -115,11 +115,10 @@ main() {
   level._effect["truck_smoke"] = loadfx("vfx\dust\veh_dust_kick_up_night");
   level._effect["flashlight"] = loadfx("fx\misc\flashlight_night_maps");
 
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
     level._effect["spotlight"] = loadfx("fx\misc\hunted_spotlight_model_night_no_noise");
-  } else {
+  else
     level._effect["spotlight"] = loadfx("fx\misc\spotlight_large_night");
-  }
 
   level.flare_fx["mi17"] = loadfx("fx\misc\flares_cobra");
   level._effect["gasstation_explosion"] = loadfx("vfx\map\hunted\ca_hunted_gasstation_explosion");
@@ -383,10 +382,10 @@ fuel_explosion() {
 }
 
 ac130_gas_station() {
-  var_0 = getEntArray("gas_station", "targetname");
-  var_1 = getEntArray("gas_station_d", "targetname");
-  var_2 = getEntArray("big_explosion", "targetname");
-  var_3 = getEntArray("small_explosion", "targetname");
+  var_0 = getentarray("gas_station", "targetname");
+  var_1 = getentarray("gas_station_d", "targetname");
+  var_2 = getentarray("big_explosion", "targetname");
+  var_3 = getentarray("small_explosion", "targetname");
   common_scripts\utility::array_thread(var_0, ::hide_ent);
   common_scripts\utility::array_thread(var_1, ::swap_ent, (7680, 0, 0));
 }

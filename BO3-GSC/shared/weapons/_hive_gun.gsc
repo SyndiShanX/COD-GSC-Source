@@ -24,7 +24,7 @@ function init_shared() {
   level.firefly_pod_grace_period = getdvarfloat("scr_fireflyPodGracePeriod", 0);
   level.firefly_pod_activation_time = getdvarfloat("scr_fireflyPodActivationTime", 1);
   level.firefly_pod_partial_move_percent = getdvarfloat("scr_fireflyPartialMovePercent", 0.8);
-  if(!isDefined(level.vsmgr_prio_overlay_gel_splat)) {
+  if(!isdefined(level.vsmgr_prio_overlay_gel_splat)) {
     level.vsmgr_prio_overlay_gel_splat = 21;
   }
   level.fireflies_spawn_height = getdvarint("betty_jump_height_onground", 55);
@@ -35,13 +35,13 @@ function init_shared() {
   level.fireflies_min_speed = getdvarint("scr_firefly_min_speed", 400);
   level.fireflies_attack_speed_scale = getdvarfloat("scr_firefly_attack_attack_speed_scale", 1.75);
   level.fireflies_collision_check_interval = getdvarfloat("scr_firefly_collision_check_interval", 0.2);
-  callback::add_weapon_damage(level.firefly_pod_weapon, &on_damage_firefly_pod);
+  callback::add_weapon_damage(level.firefly_pod_weapon, & on_damage_firefly_pod);
   level thread register();
   level thread update_dvars();
 }
 
 function update_dvars() {
-  while(true) {
+  while (true) {
     wait(1);
     level.fireflies_min_speed = getdvarint("", 250);
     level.fireflies_attack_speed_scale = getdvarfloat("", 1.15);
@@ -57,7 +57,7 @@ function register() {
 
 function createfireflypodwatcher() {
   watcher = self weaponobjects::createproximityweaponobjectwatcher("hero_chemicalgelgun", self.team);
-  watcher.onspawn = &on_spawn_firefly_pod;
+  watcher.onspawn = & on_spawn_firefly_pod;
   watcher.watchforfire = 1;
   watcher.hackable = 0;
   watcher.headicon = 0;
@@ -67,25 +67,25 @@ function createfireflypodwatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.firefly_pod_grace_period;
   watcher.detonateradius = level.firefly_pod_detection_radius;
-  watcher.onstun = &weaponobjects::weaponstun;
+  watcher.onstun = & weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondetonatecallback = &firefly_pod_detonate;
+  watcher.ondetonatecallback = & firefly_pod_detonate;
   watcher.activationdelay = level.firefly_pod_activation_time;
   watcher.activatesound = "wpn_gelgun_blob_burst";
-  watcher.shoulddamage = &firefly_pod_should_damage;
+  watcher.shoulddamage = & firefly_pod_should_damage;
   watcher.deleteonplayerspawn = 1;
   watcher.timeout = getdvarfloat("scr_firefly_pod_timeout", 0);
   watcher.ignorevehicles = 0;
   watcher.ignoreai = 0;
-  watcher.onsupplementaldetonatecallback = &firefly_death;
+  watcher.onsupplementaldetonatecallback = & firefly_death;
 }
 
 function on_spawn_firefly_pod(watcher, owner) {
   weaponobjects::onspawnproximityweaponobject(watcher, owner);
-  self playLoopSound("wpn_gelgun_blob_alert_lp", 1);
+  self playloopsound("wpn_gelgun_blob_alert_lp", 1);
   self endon("death");
   self waittill("stationary");
-  self setModel("wpn_t7_hero_chemgun_residue3_grn");
+  self setmodel("wpn_t7_hero_chemgun_residue3_grn");
   self setenemymodel("wpn_t7_hero_chemgun_residue3_org");
 }
 
@@ -110,7 +110,7 @@ function on_damage_firefly_pod(eattacker, einflictor, weapon, meansofdeath, dama
 function spawn_firefly_mover() {
   firefly_mover = spawn("script_model", self.origin);
   firefly_mover.angles = self.angles;
-  firefly_mover setModel("tag_origin");
+  firefly_mover setmodel("tag_origin");
   firefly_mover.owner = self.owner;
   firefly_mover.killcamoffset = (0, 0, getdvarfloat("scr_fireflies_start_height", 8));
   firefly_mover.weapon = getweapon("hero_firefly_swarm");
@@ -119,7 +119,7 @@ function spawn_firefly_mover() {
   firefly_mover.team = self.team;
   killcament = spawn("script_model", firefly_mover.origin + firefly_mover.killcamoffset);
   killcament.angles = (0, 0, 0);
-  killcament setModel("tag_origin");
+  killcament setmodel("tag_origin");
   killcament setweapon(firefly_mover.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   firefly_mover.killcament = killcament;
@@ -130,15 +130,15 @@ function spawn_firefly_mover() {
 }
 
 function firefly_mover_damage() {
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     self thread firefly_death();
   }
 }
 
 function kill_firefly_mover() {
-  if(isDefined(self.firefly_mover)) {
-    if(isDefined(self.firefly_mover.killcament)) {
+  if(isdefined(self.firefly_mover)) {
+    if(isdefined(self.firefly_mover.killcament)) {
       self.firefly_mover.killcament delete();
     }
     self.firefly_mover delete();
@@ -146,9 +146,9 @@ function kill_firefly_mover() {
 }
 
 function firefly_pod_detonate(attacker, weapon, target) {
-  if(!isDefined(target) || !isDefined(target.team) || !isDefined(self.team) || self.team == target.team) {
-    if(isDefined(weapon) && weapon.isvalid) {
-      if(isDefined(attacker)) {
+  if(!isdefined(target) || !isdefined(target.team) || !isdefined(self.team) || self.team == target.team) {
+    if(isdefined(weapon) && weapon.isvalid) {
+      if(isdefined(attacker)) {
         if(self.owner util::isenemyplayer(attacker)) {
           attacker challenges::destroyedexplosive(weapon);
           scoreevents::processscoreevent("destroyed_fireflyhive", attacker, self.owner, weapon);
@@ -165,10 +165,10 @@ function firefly_pod_detonate(attacker, weapon, target) {
 }
 
 function firefly_pod_destroyed() {
-  fx_ent = playFX("weapon/fx_hero_chem_gun_blob_death", self.origin);
+  fx_ent = playfx("weapon/fx_hero_chem_gun_blob_death", self.origin);
   fx_ent.team = self.team;
   playsoundatposition("wpn_gelgun_blob_destroy", self.origin);
-  if(isDefined(self.trigger)) {
+  if(isdefined(self.trigger)) {
     self.trigger delete();
   }
   self kill_firefly_mover();
@@ -176,7 +176,7 @@ function firefly_pod_destroyed() {
 }
 
 function firefly_killcam_move(position, time) {
-  if(!isDefined(self.killcament)) {
+  if(!isdefined(self.killcament)) {
     return;
   }
   self endon("death");
@@ -188,7 +188,7 @@ function firefly_killcam_move(position, time) {
 
 function firefly_killcam_stop() {
   self notify("stop_killcam");
-  if(isDefined(self.killcament)) {
+  if(isdefined(self.killcament)) {
     self.killcament moveto(self.killcament.origin, 0.1, 0, 0);
   }
 }
@@ -228,10 +228,10 @@ function firefly_check_for_collisions(target, move_to, time) {
   dist = distance(self.origin, move_to);
   speed = dist / time;
   delta = dir * (speed * level.fireflies_collision_check_interval);
-  while(true) {
+  while (true) {
     if(!firefly_check_move(self.origin + delta, target)) {
       self thread firefly_death();
-      self playSound("wpn_gelgun_hive_wall_impact");
+      self playsound("wpn_gelgun_hive_wall_impact");
     }
     wait(level.fireflies_collision_check_interval);
   }
@@ -251,7 +251,7 @@ function firefly_pod_random_point() {
 function firefly_pod_random_movement() {
   self endon("death");
   self endon("attacking");
-  while(true) {
+  while (true) {
     point = firefly_pod_random_point();
     delta = point - self.origin;
     angles = vectortoangles(delta);
@@ -271,7 +271,7 @@ function firefly_spyrograph_patrol(degrees, increment, radius) {
   self endon("attacking");
   current_degrees = (randomint(int(360 / degrees))) * degrees;
   height_offset = 0;
-  while(true) {
+  while (true) {
     point = firefly_pod_rotated_point(current_degrees, radius, height_offset);
     delta = point - self.origin;
     angles = (0, current_degrees, 0);
@@ -296,13 +296,13 @@ function firefly_damage_target(target) {
   damage = 25;
   damage_delay = 0.1;
   weapon = self.weapon;
-  target playSound("wpn_gelgun_hive_attack");
+  target playsound("wpn_gelgun_hive_attack");
   target notify("snd_burn_scream");
   remaining_hits = 10;
   if(!isplayer(target)) {
     remaining_hits = 4;
   }
-  while(remaining_hits > 0) {
+  while (remaining_hits > 0) {
     wait(damage_delay);
     target dodamage(damage, self.origin, self.owner, self, "", "MOD_IMPACT", 0, weapon);
     remaining_hits = remaining_hits - 1;
@@ -310,16 +310,16 @@ function firefly_damage_target(target) {
       bodytype = target getcharacterbodytype();
       if(bodytype >= 0) {
         bodytypefields = getcharacterfields(bodytype, currentsessionmode());
-        if((isDefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0)) {
-          playFXOnTag("weapon/fx_hero_firefly_sparks_os", target, "J_SpineLower");
+        if((isdefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0)) {
+          playfxontag("weapon/fx_hero_firefly_sparks_os", target, "J_SpineLower");
         } else {
-          playFXOnTag("weapon/fx_hero_firefly_blood_os", target, "J_SpineLower");
+          playfxontag("weapon/fx_hero_firefly_blood_os", target, "J_SpineLower");
         }
       } else {
-        playFXOnTag("weapon/fx_hero_firefly_blood_os", target, "J_SpineLower");
+        playfxontag("weapon/fx_hero_firefly_blood_os", target, "J_SpineLower");
       }
     } else if(!isplayer(target)) {
-      playFXOnTag("weapon/fx_hero_firefly_sparks_os", target, "tag_origin");
+      playfxontag("weapon/fx_hero_firefly_sparks_os", target, "tag_origin");
     }
   }
 }
@@ -349,14 +349,14 @@ function firefly_watch_for_game_ended(target) {
 function firefly_death() {
   println("" + self getentnum());
   self clientfield::set("firefly_state", 5);
-  self playSound("wpn_gelgun_hive_die");
-  if(isDefined(self.target_entity) && isplayer(self.target_entity)) {
+  self playsound("wpn_gelgun_hive_die");
+  if(isdefined(self.target_entity) && isplayer(self.target_entity)) {
     self.target_entity clientfield::set_to_player("fireflies_attacking", 0);
     self.target_entity clientfield::set_to_player("fireflies_chasing", 0);
   }
   waittillframeend();
   thread cleanup_killcam_entity(self.killcament);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     println("" + self getentnum());
     self delete();
   }
@@ -364,7 +364,7 @@ function firefly_death() {
 
 function cleanup_killcam_entity(killcament) {
   wait(5);
-  if(isDefined(killcament)) {
+  if(isdefined(killcament)) {
     killcament delete();
   }
 }
@@ -397,7 +397,7 @@ function firefly_attack(target, state) {
   }
   self.enemy = target;
   firefly_move(target_origin, time);
-  if(!isDefined(target) || !isalive(target)) {
+  if(!isdefined(target) || !isalive(target)) {
     return;
   }
   self linkto(target);
@@ -424,9 +424,9 @@ function get_crumb_position(target) {
 function target_bread_crumbs_render(target) {
   self endon("death");
   self endon("attack");
-  while(true) {
+  while (true) {
     previous_crumb = self.origin;
-    for(i = 0; i < self.target_breadcrumbs.size; i++) {
+    for (i = 0; i < self.target_breadcrumbs.size; i++) {
       if((self.target_breadcrumb_current_index + i) > self.target_breadcrumb_last_added) {
         break;
       }
@@ -454,7 +454,7 @@ function target_bread_crumbs(target) {
   if(level.firefly_debug) {
     self thread target_bread_crumbs_render(target);
   }
-  while(true) {
+  while (true) {
     wait(0.25);
     previous_crumb_index = self.target_breadcrumb_last_added % self.max_crumbs;
     potential_crumb_position = get_crumb_position(target);
@@ -473,7 +473,7 @@ function get_target_bread_crumb(target) {
     return get_crumb_position(target);
   }
   current_index = self.target_breadcrumb_current_index % self.max_crumbs;
-  if(!isDefined(self.target_breadcrumbs[current_index])) {
+  if(!isdefined(self.target_breadcrumbs[current_index])) {
     return get_crumb_position(target);
   }
   return self.target_breadcrumbs[current_index];
@@ -497,7 +497,7 @@ function firefly_chase(target) {
   attack_distance = 50;
   max_offset = 10;
   up = (0, 0, 1);
-  while(true) {
+  while (true) {
     target_origin = target.origin + vectorscale((0, 0, 1), 50);
     delta = target_origin - self.origin;
     dist = length(delta);
@@ -541,14 +541,14 @@ function firefly_pod_start(start_pos, target, linked) {
   thread target_bread_crumbs(target);
   self moveto(start_pos, level.fireflies_emit_time, 0, level.fireflies_emit_time);
   self waittill("movedone");
-  if(isDefined(target) && isDefined(target.origin)) {
+  if(isdefined(target) && isdefined(target.origin)) {
     delta = target.origin - self.origin;
     angles = vectortoangles(delta);
     self.angles = angles;
     self thread firefly_chase(target);
   }
   wait(30);
-  if(isDefined(self.killcament)) {
+  if(isdefined(self.killcament)) {
     self.killcament delete();
   }
   self delete();
@@ -566,7 +566,7 @@ function firefly_pod_release_fireflies(attacker, target) {
   linked_to = self getlinkedent();
   linked = linked_to === target;
   if(!linked) {
-    fx_ent = playFX("weapon/fx_hero_firefly_start", self.origin, anglestoup(self.angles));
+    fx_ent = playfx("weapon/fx_hero_firefly_start", self.origin, anglestoup(self.angles));
     fx_ent.team = self.team;
     self.firefly_mover clientfield::set("firefly_state", 1);
     self.firefly_mover.killcament moveto(explodepos + self.firefly_mover.killcamoffset, level.fireflies_emit_time, 0, level.fireflies_emit_time);

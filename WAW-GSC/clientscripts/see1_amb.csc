@@ -10,14 +10,14 @@
 main() {
   /
   if(isDefined(level._explosionEntPos)) {
-    playSound(0, "explosion_house", level._explosionEntPos.origin);
+    playsound(0, "explosion_house", level._explosionEntPos.origin);
   }
 }
 
 house_explosion2() {
   level waittill("house_explosion");
   house_explo = getstruct("house_explo", "targetname");
-  playSound(0, "explosion_house", house_explo.origin);
+  playsound(0, "explosion_house", house_explo.origin);
 }
 
 camp_audio() {
@@ -33,7 +33,7 @@ camp_audio() {
 }
 
 plane_machine_gun() {
-  for(;;) {
+  for (;;) {
     level waittill("start_firing_sound");
     thread my_coolness();
   }
@@ -41,10 +41,10 @@ plane_machine_gun() {
 
 my_coolness() {
   level endon("stop_firing_sound");
-  while(1) {
-    plane_guns = getEntArray(0, "plane", "targetname");
-    for(i = 0; i < plane_guns.size; i++) {
-      playSound(0, "plane_shot", plane_guns[i].origin);
+  while (1) {
+    plane_guns = getentarray(0, "plane", "targetname");
+    for (i = 0; i < plane_guns.size; i++) {
+      playsound(0, "plane_shot", plane_guns[i].origin);
     }
     wait(.048);
   }

@@ -25,11 +25,10 @@ trackriotshield() {
   self.hasriotshieldequipped = self getcurrentweapon() == "riotshield_sp";
 
   if(self.hasriotshield) {
-    if(self.hasriotshieldequipped) {
+    if(self.hasriotshieldequipped)
       self attachshieldmodel(level.carriedshieldmodel, "tag_weapon_left");
-    } else {
+    else
       self attachshieldmodel(level.stowedshieldmodel, "tag_stowed_back");
-    }
   }
 
   for(;;) {
@@ -39,9 +38,8 @@ trackriotshield() {
       if(self.hasriotshieldequipped) {
         continue;
       }
-      if(isDefined(self.riotshieldentity)) {
+      if(isDefined(self.riotshieldentity))
         self notify("destroy_riotshield");
-      }
 
       if(self.hasriotshield) {
         self detachshieldmodel(level.stowedshieldmodel, "tag_stowed_back");
@@ -88,7 +86,7 @@ startriotshielddeploy() {
 spawnriotshieldcover(origin, angles) {
   shield_ent = spawn("script_model", origin, 1);
   shield_ent.angles = angles;
-  shield_ent setModel(level.deployedshieldmodel);
+  shield_ent setmodel(level.deployedshieldmodel);
   shield_ent setowner(self);
   shield_ent.owner = self;
   shield_ent setscriptmoverflag(0);
@@ -100,9 +98,9 @@ spawnriotshieldcover(origin, angles) {
 riotshielddeployanim() {
   self useanimtree(#animtree);
   self setanim( % o_riot_stand_deploy, 1.0, 0.0, 1.0);
-  playFXOnTag(level._effect["riotshield_dust"], self, "tag_origin");
+  playfxontag(level._effect["riotshield_dust"], self, "tag_origin");
   wait 0.8;
-  self.shieldlightfx = playFXOnTag(level._effect["riotshield_light"], self, "tag_fx");
+  self.shieldlightfx = playfxontag(level._effect["riotshield_light"], self, "tag_fx");
 }
 
 watchriotshielddeploy() {
@@ -146,9 +144,8 @@ watchriotshielddeploy() {
   } else
     placement_hint = 1;
 
-  if(placement_hint) {
+  if(placement_hint)
     self setriotshieldfailhint();
-  }
 }
 
 riotshielddistancetest(origin) {
@@ -178,15 +175,13 @@ watchdeployedriotshieldents() {
 
   self waittill("destroy_riotshield");
 
-  if(isDefined(self.riotshieldretrievetrigger)) {
+  if(isDefined(self.riotshieldretrievetrigger))
     self.riotshieldretrievetrigger delete();
-  }
 
   self.riotshieldentity connectpaths();
 
-  if(isDefined(self.riotshieldentity)) {
+  if(isDefined(self.riotshieldentity))
     self.riotshieldentity delete();
-  }
 }
 
 watchdeployedriotshielddamage() {
@@ -200,32 +195,29 @@ watchdeployedriotshielddamage() {
     self waittill("damage", damage, attacker, direction, point, type);
     self useanimtree(#animtree);
 
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       self setanimknobrestart( % o_riot_stand_melee_front, 1.0, 0.0, 1.0);
-    } else {
+    else
       self setanimknobrestart( % o_riot_stand_shot, 1.0, 0.0, 1.0);
-    }
 
     if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     assert(isDefined(self.owner) && isDefined(self.owner.team));
 
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       damage = damage * getdvarfloat(#"riotshield_melee_damage_scale");
-    } else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
+    else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET")
       damage = damage * getdvarfloat(#"riotshield_bullet_damage_scale");
-    } else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+    else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH")
       damage = damage * getdvarfloat(#"riotshield_explosive_damage_scale");
-    } else if(type == "MOD_IMPACT") {
+    else if(type == "MOD_IMPACT")
       damage = damage * getdvarfloat(#"riotshield_projectile_damage_scale");
-    }
 
     self.damagetaken = self.damagetaken + damage;
 
-    if(self.damagetaken >= damagemax) {
+    if(self.damagetaken >= damagemax)
       self damagethendestroyriotshield();
-    }
   }
 }
 

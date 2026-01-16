@@ -6,7 +6,8 @@
 #include maps\_utility;
 #include maps\createfx\so_rts_mp_socotra_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
 precache_scripted_fx() {
   level._effect["fx_vtol_explo"] = loadfx("explosions/fx_exp_aerial_lg_dist");

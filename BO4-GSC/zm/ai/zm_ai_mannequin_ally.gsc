@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
+
 #namespace namespace_ca8676a3;
 
 autoexec __init__system__() {
@@ -68,13 +69,13 @@ function_f1be5640(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         n_base_damage *= 0.2;
         break;
-      case # "miniboss":
+      case #"miniboss":
         n_base_damage *= 0.1;
         break;
-      case # "boss":
+      case #"boss":
         n_base_damage *= 0.05;
         break;
       default:

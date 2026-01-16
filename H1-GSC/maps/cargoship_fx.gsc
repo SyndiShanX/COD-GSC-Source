@@ -215,22 +215,22 @@ main() {
   thread rampupsun();
   thread rainmask();
   thread ocean_scenario_vfx();
-  common_scripts\utility::array_thread(getEntArray("interactive_tv", "targetname"), ::tv_fx);
+  common_scripts\utility::array_thread(getentarray("interactive_tv", "targetname"), ::tv_fx);
   level.facemaskfx = undefined;
 }
 
 tv_fx() {
-  while(!isDefined(self.onmodel) && !isDefined(self.onmodel)) {
+  while (!isdefined(self.onmodel) && !isdefined(self.onmodel)) {
     wait 0.1;
     continue;
   }
 
-  if(self.model == self.offmodel && !isDefined(self.usetrig)) {
+  if(self.model == self.offmodel && !isdefined(self.usetrig)) {
     return;
   }
   var_0 = undefined;
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     switch (self.script_noteworthy) {
       case "quarters_tv":
       case "bridge_tv":
@@ -242,9 +242,9 @@ tv_fx() {
     }
   }
 
-  if(isDefined(var_0)) {
-    for(;;) {
-      var_1 = spawnfx(var_0, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  if(isdefined(var_0)) {
+    for (;;) {
+      var_1 = spawnfx(var_0, self.origin, anglestoforward(self.angles), anglestoup(self.angles));
       triggerfx(var_1);
       self waittill("off");
       var_1 delete();
@@ -262,21 +262,19 @@ is_lightning_vision_set(var_0) {
 }
 
 cargoship_can_change_anyset(var_0, var_1) {
-  var_2 = isDefined(var_0) && is_interior_vision_set(var_0);
+  var_2 = isdefined(var_0) && is_interior_vision_set(var_0);
   var_3 = is_interior_vision_set(var_1);
 
-  if(var_3) {
+  if(var_3)
     return 1;
-  }
 
   var_4 = 1;
   var_5 = is_lightning_vision_set(var_1);
 
-  if(var_2) {
+  if(var_2)
     var_4 = !var_5;
-  } else {
-    var_4 = !isDefined(var_0) || !is_lightning_vision_set(var_0) || var_5;
-  }
+  else
+    var_4 = !isdefined(var_0) || !is_lightning_vision_set(var_0) || var_5;
 
   return var_4;
 }
@@ -286,9 +284,8 @@ cargoship_can_change_vision_set(var_0) {
 }
 
 cargoship_pre_set_vision_set(var_0) {
-  if(!is_lightning_vision_set(var_0)) {
+  if(!is_lightning_vision_set(var_0))
     level.lvl_visionset_wanted = var_0;
-  }
 }
 
 cargoship_can_change_light_set(var_0) {
@@ -296,9 +293,8 @@ cargoship_can_change_light_set(var_0) {
 }
 
 cargoship_pre_set_light_set(var_0) {
-  if(!is_lightning_vision_set(var_0)) {
+  if(!is_lightning_vision_set(var_0))
     level.wanted_lightset = var_0;
-  }
 }
 
 treadfx_override() {
@@ -369,9 +365,8 @@ treadfx_override() {
 raincontrol() {
   maps\_weather::raininit("hard");
 
-  if(level.jumpto == "start") {
+  if(level.jumpto == "start")
     wait 40;
-  }
 
   thread maps\_weather::lightning(::normal, ::flash);
 }
@@ -390,7 +385,7 @@ rampupsun() {
   var_4[2] = var_2[2] / var_3;
   wait 12;
 
-  while(var_3) {
+  while (var_3) {
     level.orgsuncolor[0] = level.orgsuncolor[0] + var_4[0];
     level.orgsuncolor[1] = level.orgsuncolor[1] + var_4[1];
     level.orgsuncolor[2] = level.orgsuncolor[2] + var_4[2];
@@ -436,7 +431,7 @@ init_exploders() {
   level._waves_exploders = common_scripts\utility::array_combine(level._waves_exploders, maps\_utility::getfxarraybyid("watersplash_2"));
   level._lighting_exploders = maps\_utility::getfxarraybyid("lightning");
 
-  for(var_0 = 0; var_0 < level._lighting_exploders.size; var_0++) {
+  for (var_0 = 0; var_0 < level._lighting_exploders.size; var_0++) {
     var_1 = level._lighting_exploders[var_0];
     var_1.v["cargoship_origin"] = var_1.v["origin"];
     var_1.tagorigin = common_scripts\utility::spawn_tag_origin();
@@ -447,11 +442,11 @@ init_exploders() {
 }
 
 cargoship_cannon_spawnfx() {
-  playFXOnTag(common_scripts\utility::getfx(self.v["fxid"]), self.tagorigin, "tag_origin");
+  playfxontag(common_scripts\utility::getfx(self.v["fxid"]), self.tagorigin, "tag_origin");
 }
 
 rainmask() {
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_wait("cargoship_rain_on");
     common_scripts\utility::flag_clear("cargoship_rain_off");
     thread rainmaskcheck();
@@ -459,9 +454,8 @@ rainmask() {
     common_scripts\utility::flag_clear("cargoship_rain_on");
     self notify("stopRainCheck");
 
-    if(isDefined(level.facemaskfx)) {
+    if(isdefined(level.facemaskfx))
       level.facemaskfx delete();
-    }
   }
 }
 
@@ -469,13 +463,13 @@ rainmaskcheck() {
   self endon("stopRainCheck");
   level.player endon("death");
 
-  for(;;) {
+  for (;;) {
     var_0 = level.player getplayerangles()[0];
 
-    if(var_0 < 50 && !isDefined(level.facemaskfx)) {
+    if(var_0 < 50 && !isdefined(level.facemaskfx)) {
       level.facemaskfx = spawnfx(level._effect["screen_heavy_rain_cgoshp"], level.player.origin);
       triggerfx(level.facemaskfx);
-    } else if(isDefined(level.facemaskfx))
+    } else if(isdefined(level.facemaskfx))
       level.facemaskfx delete();
 
     wait 0.1;
@@ -483,7 +477,7 @@ rainmaskcheck() {
 }
 
 ocean_scenario_vfx() {
-  for(;;) {
+  for (;;) {
     common_scripts\utility::flag_wait("cargoship_ocean_scenario_start");
     common_scripts\utility::flag_clear("cargoship_ocean_scenario_end");
     common_scripts\_exploder::exploder("501");
@@ -494,9 +488,8 @@ ocean_scenario_vfx() {
 }
 
 update_exploders() {
-  for(var_0 = 0; var_0 < level._lighting_exploders.size; var_0++) {
+  for (var_0 = 0; var_0 < level._lighting_exploders.size; var_0++)
     level._lighting_exploders[var_0].v["origin"] = level._sea_org localtoworldcoords(level._lighting_exploders[var_0].v["cargoship_origin"]);
-  }
 }
 
 flash(var_0, var_1, var_2, var_3, var_4) {
@@ -516,39 +509,34 @@ flash(var_0, var_1, var_2, var_3, var_4) {
 
   var_8 = undefined;
 
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     var_8 = var_4;
-  } else {
+  else
     var_8 = (randomfloatrange(20, 30) * -1, randomfloatrange(20, 25), 0);
-  }
 
   var_9 = 1;
   var_10 = 4;
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_9 = var_0;
-  }
 
-  if(isDefined(var_1) && var_1 < var_10) {
+  if(isdefined(var_1) && var_1 < var_10)
     var_10 = var_1;
-  }
 
   var_11 = randomintrange(var_9, var_10);
   var_9 = 0;
   var_10 = 3;
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_9 = var_2;
-  }
 
-  if(isDefined(var_3) && var_3 < var_10) {
+  if(isdefined(var_3) && var_3 < var_10)
     var_10 = var_3;
-  }
 
   var_12 = randomfloatrange(0.01, 0.04);
   var_13 = randomfloatrange(0.01, 0.04);
 
-  for(var_14 = 0; var_14 < var_11; var_14++) {
+  for (var_14 = 0; var_14 < var_11; var_14++) {
     var_15 = randomintrange(var_9, var_10);
 
     switch (var_15) {
@@ -573,11 +561,10 @@ flash(var_0, var_1, var_2, var_3, var_4) {
 do_flash(var_0, var_1, var_2, var_3, var_4) {
   wait(var_0);
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     common_scripts\utility::flag_clear(var_2);
-  }
 
-  for(var_5 = 0; var_5 < var_4; var_5++) {
+  for (var_5 = 0; var_5 < var_4; var_5++) {
     var_6 = randomfloatrange(1.4, 6.5);
     var_7 = (var_3[0] * var_6, var_3[1] * var_6, var_3[2] * var_6);
     do_flash_loop(var_1, var_7, var_5 == 0);
@@ -591,9 +578,8 @@ do_flash_loop(var_0, var_1, var_2) {
   setsunlight(var_1[0], var_1[1], var_1[2]);
   level.player maps\_utility::set_light_set_player("cargoship_lightning");
 
-  if(var_2) {
+  if(var_2)
     show_water();
-  }
 
   wait(var_0);
   level.player maps\_utility::set_light_set_player("cargoship_lightning_soft");

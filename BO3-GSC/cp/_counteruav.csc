@@ -10,22 +10,22 @@
 #namespace counteruav;
 
 function autoexec __init__sytem__() {
-  system::register("counteruav", &__init__, undefined, undefined);
+  system::register("counteruav", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "counteruav", 1, 1, "int", &spawned, 0, 0);
+  clientfield::register("scriptmover", "counteruav", 1, 1, "int", & spawned, 0, 0);
 }
 
 function spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.counteruavs)) {
+  if(!isdefined(level.counteruavs)) {
     level.counteruavs = [];
   }
-  if(!isDefined(level.counteruavs[localclientnum])) {
+  if(!isdefined(level.counteruavs[localclientnum])) {
     level.counteruavs[localclientnum] = 0;
   }
   player = getlocalplayer(localclientnum);
-  assert(isDefined(player));
+  assert(isdefined(player));
   if(newval) {
     level.counteruavs[localclientnum]++;
     self thread counteruav_think(localclientnum);
@@ -42,7 +42,7 @@ function counteruav_think(localclientnum) {
     level.counteruavs[localclientnum] = 0;
   }
   player = getlocalplayer(localclientnum);
-  assert(isDefined(player));
+  assert(isdefined(player));
   if(level.counteruavs[localclientnum] == 0) {
     player setenemyglobalscrambler(0);
   }

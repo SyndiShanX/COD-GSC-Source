@@ -51,7 +51,8 @@ precache_scripted_fx() {
   level._effect["fx_mp_express_vista_fire01"] = loadfx("maps/mp_maps/fx_mp_express_vista_fire01");
 }
 
-precache_createfx_fx() {}
+precache_createfx_fx() {
+}
 
 #using_animtree("fxanim_props");
 

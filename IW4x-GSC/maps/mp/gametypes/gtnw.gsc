@@ -32,15 +32,14 @@ main() {
 
   game["dialog"]["gametype"] = "gtw";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("camera_thirdPerson")) {
+  else if(getDvarInt("camera_thirdPerson"))
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_diehard")) {
+  else if(getDvarInt("scr_diehard"))
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  else if(getDvarInt("scr_" + level.gameType + "_promode"))
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
-  }
 
   game["dialog"]["offense_obj"] = "obj_destroy";
   game["dialog"]["defense_obj"] = "obj_defend";
@@ -52,7 +51,7 @@ gtnw_endGame(winningTeam, endReasonText) {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     useBar = player createPrimaryProgressBar();
@@ -68,13 +67,11 @@ onPlayerConnect() {
 }
 
 onStartGameType() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
-  if(!isDefined(game["original_defenders"])) {
+  if(!isdefined(game["original_defenders"]))
     game["original_defenders"] = game["defenders"];
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -86,18 +83,18 @@ onStartGameType() {
   setClientNameMode("auto_change");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW");
-    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW");
   } else {
-    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW_SCORE");
-    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW_SCORE");
   }
 
-  setObjectiveText(game["attackers"], &"OBJECTIVES_GTNW");
-  setObjectiveText(game["defenders"], &"OBJECTIVES_GTNW");
+  setObjectiveText(game["attackers"], & "OBJECTIVES_GTNW");
+  setObjectiveText(game["defenders"], & "OBJECTIVES_GTNW");
 
-  setObjectiveHintText(game["attackers"], &"OBJECTIVES_GTNW_HINT");
-  setObjectiveHintText(game["defenders"], &"OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["attackers"], & "OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["defenders"], & "OBJECTIVES_GTNW_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -122,6 +119,7 @@ onStartGameType() {
   maps\mp\gametypes\_gameobjects::main(allowed);
 
   thread setupNukeSite();
+
 }
 
 onPrecacheGameType() {
@@ -161,18 +159,17 @@ setupNukeSite() {
 }
 
 getSpawnPoint() {
-  if(self.team == "axis") {
+  if(self.team == "axis")
     spawnTeam = game["attackers"];
-  } else {
+  else
     spawnTeam = game["defenders"];
-  }
 
   if(level.inGracePeriod) {
     if(getDvar("mapname") == "mp_shipment_long") {
-      spawnPoints = getEntArray("mp_cha_spawn_" + spawnteam + "_start", "classname");
+      spawnPoints = getentarray("mp_cha_spawn_" + spawnteam + "_start", "classname");
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
     } else {
-      spawnPoints = getEntArray("mp_ctf_spawn_" + spawnteam + "_start", "classname");
+      spawnPoints = getentarray("mp_ctf_spawn_" + spawnteam + "_start", "classname");
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
     }
   } else {
@@ -231,9 +228,8 @@ overtimeThread(time) {
 
   time = level.endGameTime;
 
-  foreach(player in level.players) {
-    player thread maps\mp\gametypes\_hud_message::SplashNotify("gtnw_overtime");
-  }
+  foreach(player in level.players)
+  player thread maps\mp\gametypes\_hud_message::SplashNotify("gtnw_overtime");
 
   maps\mp\gametypes\_gamelogic::pauseTimer();
   level.timeLimitOverride = true;
@@ -274,7 +270,8 @@ scoreCounter() {
   level endon("game_ended");
   self endon("stop_counting");
 
-  for(;;) {
+  for (;;) {
+
     if(!self.touchList["axis"].size && !self.touchlist["allies"].size) {
       setDvar("ui_danger_team", "none");
 
@@ -293,9 +290,8 @@ scoreCounter() {
     self maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_capture");
 
     if(self.touchList["axis"].size > self.touchList["allies"].size) {
-      if(maps\mp\gametypes\_gamescore::_getTeamScore("axis") < 100) {
+      if(maps\mp\gametypes\_gamescore::_getTeamScore("axis") < 100)
         maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("axis", 1);
-      }
 
       self thread setUseBarScore("axis");
       setDvar("ui_danger_team", "allies");
@@ -307,9 +303,8 @@ scoreCounter() {
         self notify("stop_counting");
       }
     } else if(self.touchList["axis"].size < self.touchList["allies"].size) {
-      if(maps\mp\gametypes\_gamescore::_getTeamScore("allies") < 100) {
+      if(maps\mp\gametypes\_gamescore::_getTeamScore("allies") < 100)
         maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("allies", 1);
-      }
 
       self thread setUseBarScore("allies");
       setDvar("ui_danger_team", "axis");
@@ -372,7 +367,7 @@ giveFlagCaptureXP(touchList) {
   WaitTillSlowProcessAllowed();
 
   players = getArrayKeys(touchList);
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = touchList[players[index]].player;
     player thread maps\mp\gametypes\_hud_message::SplashNotify("captured_nuke", maps\mp\gametypes\_rank::getScoreInfoValue("capture"));
     player thread[[level.onXPEvent]]("capture");
@@ -393,6 +388,7 @@ setUseBarScore(team) {
     if(!isDefined(self.touchlist[team][player.guid])) {
       continue;
     }
+    //player thread maps\mp\gametypes\_rank::giveRankXP( "challenge",50 );
 
     player.useBar updateBar(teamScore / 100, 0);
   }
@@ -421,7 +417,6 @@ onNormalDeath(victim, attacker, lifeId) {
   }
   team = victim.team;
 
-  if(game["state"] == "postgame") {
+  if(game["state"] == "postgame")
     attacker.finalKill = true;
-  }
 }

@@ -34,6 +34,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
+
 #namespace namespace_a35b43eb;
 
 autoexec __init__system__() {
@@ -55,8 +56,8 @@ __init__() {
 __main__() {}
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "trap_light", 8000, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_17df66ef5f71c0de", 8000, 2, "int");
+  clientfield::register("scriptmover", "" + #"trap_light", 8000, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_17df66ef5f71c0de", 8000, 2, "int");
 }
 
 init() {
@@ -151,7 +152,7 @@ function_aa539d7b() {
   self.var_23769a97 = [];
 
   foreach(s_src in self.var_3a2026c0) {
-    str_prompt = zm_utility::function_d6046228(#"hash_888d5fd1e90d685", # "hash_f1db4a15f0e12bb");
+    str_prompt = zm_utility::function_d6046228(#"hash_888d5fd1e90d685", #"hash_f1db4a15f0e12bb");
     var_47323b73 = mansion_util::create_unitrigger(s_src, &function_5b8a557f, str_prompt, 0, 0, 0);
     var_47323b73.e_trap = self;
     var_47323b73.prompt_and_visibility_func = &function_9026cbcd;
@@ -234,7 +235,7 @@ function_5b8a557f() {
 
 private function_1bcb6813() {
   if(!(isDefined(self.var_72a21e82) && self.var_72a21e82)) {
-    self.var_72a21e82 = self zm_audio::create_and_play_dialog(#"fire_trap", # "set");
+    self.var_72a21e82 = self zm_audio::create_and_play_dialog(#"fire_trap", #"set");
   }
 }
 
@@ -271,7 +272,7 @@ function_9026cbcd(player) {
       return true;
     }
   } else if(level.var_940ee624 > 0) {
-    str_prompt = zm_utility::function_d6046228(#"hash_888d5fd1e90d685", # "hash_f1db4a15f0e12bb");
+    str_prompt = zm_utility::function_d6046228(#"hash_888d5fd1e90d685", #"hash_f1db4a15f0e12bb");
     self sethintstring(str_prompt);
     return true;
   } else {
@@ -320,7 +321,7 @@ function_2a5a929(str_location, mdl_orb) {
     }
   }
 
-  str_prompt = zm_utility::function_d6046228(#"hash_78bf6e69946b64ca", # "hash_7042b50d373a6fce");
+  str_prompt = zm_utility::function_d6046228(#"hash_78bf6e69946b64ca", #"hash_7042b50d373a6fce");
   var_47323b73 = mansion_util::create_unitrigger(s_loc, &function_b1bd4115, str_prompt, 0, undefined, 0);
   var_47323b73.mdl = util::spawn_model(#"p8_zm_man_fire_trap_power_core_on", s_loc.origin, s_loc.angles);
   var_47323b73.mdl notsolid();
@@ -340,7 +341,7 @@ function_b1bd4115() {
       level.var_940ee624++;
       level.var_adc872f3++;
       level thread function_7b170638(level.var_adc872f3, 1);
-      e_player thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
       arrayremovevalue(level.var_4f17d729, self, 0);
       playsoundatposition(#"hash_7512ff4121bb5604", e_player.origin);
 
@@ -356,13 +357,13 @@ function_b1bd4115() {
 function_7b170638(var_8163cc4, b_found) {
   switch (var_8163cc4) {
     case 1:
-      var_7a0a29e3 = # "hash_379a0cb8e272c259";
+      var_7a0a29e3 = #"hash_379a0cb8e272c259";
       break;
     case 2:
-      var_7a0a29e3 = # "hash_379a09b8e272bd40";
+      var_7a0a29e3 = #"hash_379a09b8e272bd40";
       break;
     case 3:
-      var_7a0a29e3 = # "hash_379a0ab8e272bef3";
+      var_7a0a29e3 = #"hash_379a0ab8e272bef3";
       break;
   }
 
@@ -402,7 +403,7 @@ function_16746b30() {
     }
   }
 
-  self waittilltimeout(self._trap_duration, # "trap_deactivate");
+  self waittilltimeout(self._trap_duration, #"trap_deactivate");
 
   foreach(e_trap in level.var_ba53c5c5) {
     if(e_trap.script_string === self.script_string) {
@@ -483,22 +484,22 @@ function_7d9e84f9(str_color = "red") {
   }
 
   switch (self.script_string) {
-    case # "firegate_entrance_hall":
+    case #"firegate_entrance_hall":
       self.str_exploder = "fxexp_tf_" + str_color + "_mh";
       break;
-    case # "firegate_cellar":
+    case #"firegate_cellar":
       self.str_exploder = "fxexp_tf_" + str_color + "_clr";
       break;
-    case # "firegate_bedroom":
+    case #"firegate_bedroom":
       self.str_exploder = "fxexp_tf_" + str_color + "_br";
       break;
-    case # "firegate_library":
+    case #"firegate_library":
       self.str_exploder = "fxexp_tf_" + str_color + "_lb";
       break;
-    case # "firegate_cemetery":
+    case #"firegate_cemetery":
       self.str_exploder = "fxexp_tf_" + str_color + "_msm";
       break;
-    case # "firegate_greenhouse":
+    case #"firegate_greenhouse":
       self.str_exploder = "fxexp_tf_" + str_color + "_gh";
       break;
   }
@@ -518,20 +519,20 @@ function_5627d722() {
 function_5ad19000(e_trap) {
   self endon(#"death");
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     return;
   }
 
-  if(self.subarchetype === # "catalyst_plasma" && e_trap flag::get(#"friendly") == 0) {
+  if(self.subarchetype === #"catalyst_plasma" && e_trap flag::get(#"friendly") == 0) {
     return;
   }
 
-  if(self.team === # "allies") {
+  if(self.team === #"allies") {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy" || self.zm_ai_category === # "boss") {
-    if(self.archetype === # "blight_father") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy" || self.zm_ai_category === #"boss") {
+    if(self.archetype === #"blight_father") {
       e_trap deactivate_trap();
     }
 
@@ -556,7 +557,7 @@ function_5ad19000(e_trap) {
 
   [[level.var_db63b33b]] - > waitinqueue(self);
   level notify(#"trap_kill", {
-    #e_victim: self,
+    #e_victim: self, 
     #e_trap: e_trap
   });
 
@@ -632,19 +633,19 @@ blue_fire() {
 
 private function_e714e3a8(str_state = "off") {
   switch (str_state) {
-    case # "off":
+    case #"off":
       self hidepart("light_green");
       self hidepart("light_red");
       self showpart("light_off");
       break;
-    case # "green":
-      self clientfield::set("" + # "trap_light", 1);
+    case #"green":
+      self clientfield::set("" + #"trap_light", 1);
       self hidepart("light_off");
       self hidepart("light_red");
       self showpart("light_green");
       break;
-    case # "red":
-      self clientfield::set("" + # "trap_light", 2);
+    case #"red":
+      self clientfield::set("" + #"trap_light", 2);
       self hidepart("light_green");
       self hidepart("light_off");
       self showpart("light_red");

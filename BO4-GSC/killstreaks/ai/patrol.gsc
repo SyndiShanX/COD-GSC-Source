@@ -9,6 +9,7 @@
 #include scripts\killstreaks\ai\escort;
 #include scripts\killstreaks\ai\state;
 #include scripts\killstreaks\ai\target;
+
 #namespace ai_patrol;
 
 init() {
@@ -18,16 +19,16 @@ init() {
 function_7d8be726(patrol_radius, var_edc20efd, var_d73e0c6e, marker_fx, marker_objective, var_861daf20, var_a85cb855, var_52e43a03, var_544ae93d, var_7d9560c1) {
   assert(isDefined(self.ai));
   self.ai.patrol = {
-    #state: 2,
-    #patrol_radius: patrol_radius,
-    #var_edc20efd: var_edc20efd,
-    #var_d73e0c6e: var_d73e0c6e,
-    #marker_fx: marker_fx,
-    #marker_objective: marker_objective,
-    #var_861daf20: var_861daf20,
-    #var_a85cb855: var_a85cb855,
-    #var_52e43a03: var_52e43a03,
-    #var_544ae93d: var_544ae93d,
+    #state: 2, 
+    #patrol_radius: patrol_radius, 
+    #var_edc20efd: var_edc20efd, 
+    #var_d73e0c6e: var_d73e0c6e, 
+    #marker_fx: marker_fx, 
+    #marker_objective: marker_objective, 
+    #var_861daf20: var_861daf20, 
+    #var_a85cb855: var_a85cb855, 
+    #var_52e43a03: var_52e43a03, 
+    #var_544ae93d: var_544ae93d, 
     #var_7d9560c1: var_7d9560c1
   };
 }
@@ -192,15 +193,15 @@ private is_debugging(dvar) {
   return 0;
 }
 
-function function_38d931e7() {
-  goalinfo = self function_4794d6a3();
+  function function_38d931e7() {
+    goalinfo = self function_4794d6a3();
 
-  if(!isDefined(goalinfo.var_9e404264) || goalinfo.var_9e404264) {
-    return true;
+    if(!isDefined(goalinfo.var_9e404264) || goalinfo.var_9e404264) {
+      return true;
+    }
+
+    return false;
   }
-
-  return false;
-}
 
 function_6b33bfb8(radius) {
   if(self function_38d931e7()) {
@@ -283,6 +284,7 @@ update_patrol() {
 
   recordcircle(self.ai.patrol.var_9033671b, self.ai.patrol.patrol_radius, (0, 0, 1), "<dev string:x38>");
   recordcircle(self.ai.patrol.var_9033671b, self.ai.patrol.var_edc20efd, (1, 0, 0), "<dev string:x38>");
+
 }
 
 update_enemy() {
@@ -356,7 +358,7 @@ private function_7c779aaf() {
   self endon(#"hash_5824b020cde66d5");
   fx_marker = self.var_74e8fd19;
   hud_marker = self.var_e2aca908;
-  self waittill(#"death", # "state_changed");
+  self waittill(#"death", #"state_changed");
 
   if(isDefined(self)) {
     self function_3ec67269();

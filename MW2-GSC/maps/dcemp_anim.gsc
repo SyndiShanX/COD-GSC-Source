@@ -270,10 +270,11 @@ tunnels() {
   level.scr_sound["foley"]["dcemp_fly_fortourists"] = "dcemp_fly_fortourists";
   level.scr_face["foley"]["dcemp_fly_fortourists"] = % dcemp_fly_fortourists;
 
+
   // Feet dry.
   level.scr_sound["marine1"]["dcemp_ar1_feetdry"] = "dcemp_ar1_feetdry";
 
-  // Let's go! Let's go!
+  // Let's go! Let's go! 
   level.scr_sound["generic"]["dcemp_ar2_letsgo"] = "dcemp_ar2_letsgo";
 
   // Hustle up! Get to the Whiskey Hotel! Move!
@@ -313,9 +314,9 @@ tunnels() {
 }
 
 whitehouse() {
-  // Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank!
+  // Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank! 
   level.scr_sound["marshall"]["dcemp_cml_moremen"] = "dcemp_cml_moremen";
-  // You're lookin' at the 'high ground' Sergeant! There's still power in the Whiskey Hotel!
+  // You're lookin' at the 'high ground' Sergeant! There's still power in the Whiskey Hotel! 
   // 	level.scr_sound[ "marshall" ][ "dcemp_cml_highground" ] 		= "dcemp_cml_highground";
   // That means we still have a way to talk to Central Command IF we can retake it!
   // 	level.scr_sound[ "marshall" ][ "dcemp_cml_retakeit" ] 			= "dcemp_cml_retakeit";
@@ -335,11 +336,11 @@ whitehouse() {
   level.scr_sound["foley"]["dcemp_fly_rogerstayfrosty"] = "dcemp_fly_rogerstayfrosty";
   // Sir, what's the situation here?
   //	level.scr_sound[ "foley" ][ "dcemp_fly_situationhere" ] 		= "dcemp_fly_situationhere";
-  // Roger that! Squad! Let's go! We're oscar mike!
+  // Roger that! Squad! Let's go! We're oscar mike! 
   //	level.scr_sound[ "foley" ][ "dcemp_fly_squadoscarmike" ] 		= "dcemp_fly_squadoscarmike";
   //Work your way to the left!!
   level.scr_sound["foley"]["dcemp_fly_workyourwayleft"] = "dcemp_fly_workyourwayleft";
-  //Ramirez, let's go!
+  //Ramirez, let's go! 
   level.scr_sound["foley"]["dcemp_fly_ramirezgo"] = "dcemp_fly_ramirezgo";
   //Move up! We gotta take the left flank!
   level.scr_sound["foley"]["dcemp_fly_takeleftflank"] = "dcemp_fly_takeleftflank";
@@ -347,7 +348,7 @@ whitehouse() {
   level.scr_sound["foley"]["dcemp_fly_punchthrough"] = "dcemp_fly_punchthrough";
   //Take out those machine guns!
   level.scr_sound["foley"]["dcemp_fly_machineguns"] = "dcemp_fly_machineguns";
-  //Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em!
+  //Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em! 
   level.scr_sound["foley"]["dcemp_fly_flattenthecity"] = "dcemp_fly_flattenthecity";
   //We got less than two minutes, let's go!
   level.scr_sound["foley"]["dcemp_fly_lessthantwomins"] = "dcemp_fly_lessthantwomins";
@@ -359,26 +360,26 @@ whitehouse() {
   level.scr_sound["foley"]["dcemp_fly_90seconds"] = "dcemp_fly_90seconds";
   // Pop the flares!!
   level.scr_sound["foley"]["dcemp_fly_poptheflares"] = "dcemp_fly_poptheflares";
-  //This war ain't over yet Corporal...all we did was level the playing field.
+  //This war ain't over yet Corporal...all we did was level the playing field. 
   level.scr_sound["foley"]["dcemp_fly_waraintover"] = "dcemp_fly_waraintover";
-  //Everyone back downstairs. Let's try and get the transmitter working on that radio.
+  //Everyone back downstairs. Let's try and get the transmitter working on that radio. 
   level.scr_sound["foley"]["dcemp_fly_backdownstairs"] = "dcemp_fly_backdownstairs";
 
-  //This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect.
+  //This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect. 
   level.scr_radio["dcemp_fp1_hammerdown"] = "dcemp_fp1_hammerdown";
-  //If you can receive this transmission, you are in a hardened high-value structure.
+  //If you can receive this transmission, you are in a hardened high-value structure. 
   level.scr_radio["dcemp_fp1_highvalue"] = "dcemp_fp1_highvalue";
-  //Deploy green flares on the roof of this structure to indicate you are still combat effective.
+  //Deploy green flares on the roof of this structure to indicate you are still combat effective. 
   level.scr_radio["dcemp_fp1_greenflares"] = "dcemp_fp1_greenflares";
-  //We will abort our mission on direct visual contact with this countersign.
+  //We will abort our mission on direct visual contact with this countersign. 
   level.scr_radio["dcemp_fp1_willabort"] = "dcemp_fp1_willabort";
-  //Two minutes to weapons release.
+  //Two minutes to weapons release. 
   level.scr_radio["dcemp_fp1_2minutes"] = "dcemp_fp1_2minutes";
-  //Ninety seconds to weapons release.
+  //Ninety seconds to weapons release. 
   level.scr_radio["dcemp_fp1_90secs"] = "dcemp_fp1_90secs";
-  //1 minute to weapons release.
+  //1 minute to weapons release. 
   level.scr_radio["dcemp_fp1_1minute"] = "dcemp_fp1_1minute";
-  //Thirty seconds to weapons release.
+  //Thirty seconds to weapons release. 
   level.scr_radio["dcemp_fp1_30secs"] = "dcemp_fp1_30secs";
   //(garble)...target package Whiskey Hotel Zero-One has been authorized....roger...passing IP Buick...standby…
   level.scr_radio["dcemp_fp1_beenauthorized"] = "dcemp_fp1_beenauthorized";
@@ -386,7 +387,7 @@ whitehouse() {
   level.scr_radio["dcemp_fp1_bombsaway"] = "dcemp_fp1_bombsaway";
   //Countersign detected at the Whiskey Hotel! Abort abort!!
   level.scr_radio["dcemp_fp1_abortabort"] = "dcemp_fp1_abortabort";
-  //Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one.
+  //Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one. 
   level.scr_radio["dcemp_fp1_closeone"] = "dcemp_fp1_closeone";
   //We're sending word back to HQ, stay alive down there. Cujo 5-1 out.
   level.scr_radio["dcemp_fp1_wordtohq"] = "dcemp_fp1_wordtohq";
@@ -422,13 +423,13 @@ whitehouse() {
 
   // Sir, what's the situation here?
   addNotetrack_dialogue("foley", "dcemp_fly_situationhere_ps", "DCemp_whitehouse_briefing", "dcemp_fly_situationhere");
-  // You're lookin' at the 'high ground' Sergeant! There's still power in the Whiskey Hotel!
+  // You're lookin' at the 'high ground' Sergeant! There's still power in the Whiskey Hotel! 
   addNotetrack_dialogue("marshall", "dcemp_cml_highground_ps", "DCemp_whitehouse_briefing", "dcemp_cml_highground");
   // That means we still have a way to talk to Central Command IF we can retake it!
   addNotetrack_dialogue("marshall", "dcemp_cml_retakeit_ps", "DCemp_whitehouse_briefing", "dcemp_cml_retakeit");
   // Now get your squad movin' up the left flank! Go!
   addNotetrack_dialogue("marshall", "dcemp_cml_getyoursquad_ps", "DCemp_whitehouse_briefing", "dcemp_cml_getyoursquad");
-  // Roger that! Squad! Let's go! We're oscar mike!
+  // Roger that! Squad! Let's go! We're oscar mike! 
   addNotetrack_dialogue("foley", "dcemp_fly_squadoscarmike_ps", "DCemp_whitehouse_briefing", "dcemp_fly_squadoscarmike");
   // not track for when to start moving towards the wh entrance.
   addNotetrack_flag("marshall", "dcemp_cml_getyoursquad_ps", "whitehouse_moveout", "DCemp_whitehouse_briefing");
@@ -640,6 +641,7 @@ linebook() {
   level.scr_sound["foley"]["dcemp_fly_oscarmike"] = "dcemp_fly_oscarmike";
   //Watch for movement.		
   level.scr_sound["foley"]["dcemp_fly_watchmovement"] = "dcemp_fly_watchmovement";
+
 }
 
 #using_animtree("vehicles");
@@ -671,7 +673,7 @@ mi28() {
 
 lobby_door_kick(guy) {
   door = getent("lobby_door_right", "targetname");
-  parts = getEntArray(door.target, "targetname");
+  parts = getentarray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door connectpaths();
 
@@ -679,7 +681,7 @@ lobby_door_kick(guy) {
 
   time = .4;
   door rotateroll(-90, time);
-  door playSound("wood_door_kick");
+  door playsound("wood_door_kick");
 
   door waittill("rotatedone");
   door Vibrate((0, 0, 1), 1, 0.4, .5);
@@ -703,13 +705,13 @@ street_pickup_flare(guy) {
   model = getent("street_flare", "targetname");
   newtag = spawn("script_model", model.fxtag.origin);
   newtag.angles = model.fxtag.angles;
-  newtag setModel(model.fxtag.model);
+  newtag setmodel(model.fxtag.model);
   newtag linkto(model);
   model.fxtag delete();
   model.fxtag = newtag;
   model.fxtag linkto(model);
 
-  playFXOnTag(level._effect["handflare"], model.fxtag, "TAG_ORIGIN");
+  playfxontag(level._effect["handflare"], model.fxtag, "TAG_ORIGIN");
 
   model.origin = guy gettagorigin("TAG_INHAND");
   vec = anglestoup(guy gettagangles("TAG_INHAND"));
@@ -723,7 +725,7 @@ street_throw_flare(guy) {
   model unlink();
 
   //throw
-  vec = anglesToForward(guy.angles);
+  vec = anglestoforward(guy.angles);
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 18);
   vec = vectornormalize(end - guy.origin);
@@ -740,7 +742,7 @@ street_throw_flare(guy) {
   old = model;
   model = spawn("script_model", old.origin);
   model.angles = old.angles;
-  model setModel(old.model);
+  model setmodel(old.model);
   model.fxtag = old.fxtag;
   model.targetname = "street_flare";
   old.fxtag linkto(model);
@@ -762,7 +764,7 @@ street_throw_flare(guy) {
   old = model;
   model = spawn("script_model", old.origin);
   model.angles = old.angles;
-  model setModel(old.model);
+  model setmodel(old.model);
   model.fxtag = old.fxtag;
   model.targetname = "street_flare";
   old.fxtag linkto(model);
@@ -780,13 +782,13 @@ street_throw_flare(guy) {
   model = getent("street_flare", "targetname");
   newtag = spawn("script_model", model.fxtag.origin);
   newtag.angles = model.fxtag.angles;
-  newtag setModel(model.fxtag.model);
+  newtag setmodel(model.fxtag.model);
   newtag linkto(model);
   model.fxtag delete();
   model.fxtag = newtag;
   model.fxtag linkto(model);
 
-  playFXOnTag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
+  playfxontag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
 }
 
 dialogue_meetup_1(guy) {
@@ -854,6 +856,7 @@ player_animations() {
   level.scr_anim["iss_rig"]["ISS_animation"] = % ISS_player_rotate;
   level.scr_anim["iss_rig"]["ISS_float_away"] = % ISS_player_float_away;
 }
+
 
 #using_animtree("door");
 whitehouse_door() {

@@ -11,7 +11,9 @@ main() {
   level._effect["room_smoke_400"] = loadfx("smoke/room_smoke_400");
   level._effect["light_shaft_motes_airport"] = loadfx("dust/light_shaft_motes_airport");
 
-  if(getdvar("clientSideEffects") != "1") {
+  /#
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_terminal_fx::main();
-  }
+  # /
+
 }

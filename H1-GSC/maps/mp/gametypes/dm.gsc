@@ -11,7 +11,9 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [[level.initializematchrules]]();
+    [
+      [level.initializematchrules]
+    ]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 10);
@@ -31,13 +33,11 @@ main() {
   level.onnormaldeath = ::onnormaldeath;
   level.onplayerscore = ::onplayerscore;
 
-  if(getdvarint("party_maxPlayers", 18) == 2) {
+  if(getdvarint("party_maxPlayers", 18) == 2)
     level.xpgamemodescale = 2;
-  }
 
-  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
     level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
-  }
 
   setteammode("ffa");
   game["dialog"]["gametype"] = "freeforall";
@@ -55,19 +55,19 @@ initializematchrules() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
-  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
-    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addspawnpoints("allies", "mp_dm_spawn");
@@ -80,9 +80,9 @@ onstartgametype() {
 }
 
 getspawnpoint() {
-  if(level.ingraceperiod) {
+  if(level.ingraceperiod)
     var_0 = maps\mp\gametypes\_spawnlogic::getstartspawnffa(self.team);
-  } else {
+  else {
     var_1 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.team);
     var_0 = maps\mp\gametypes\_spawnscoring::getspawnpoint_freeforall(var_1);
   }
@@ -95,14 +95,12 @@ onnormaldeath(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isDefined(var_5.score) && var_5.score > var_3) {
+    if(isdefined(var_5.score) && var_5.score > var_3)
       var_3 = var_5.score;
-    }
   }
 
-  if(game["state"] == "postgame" && var_1.score >= var_3) {
+  if(game["state"] == "postgame" && var_1.score >= var_3)
     var_1.finalkill = 1;
-  }
 }
 
 onplayerscore(var_0, var_1, var_2) {
@@ -110,11 +108,10 @@ onplayerscore(var_0, var_1, var_2) {
   var_1 maps\mp\_utility::setextrascore0(var_1.extrascore0 + var_3);
   var_1 maps\mp\gametypes\_gamescore::updatescorestatsffa(var_1, var_3);
 
-  if(isscoringevent(var_0)) {
+  if(isscoringevent(var_0))
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 isscoringevent(var_0) {

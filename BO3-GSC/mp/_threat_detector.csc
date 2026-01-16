@@ -14,13 +14,13 @@
 #namespace threat_detector;
 
 function autoexec __init__sytem__() {
-  system::register("threat_detector", &__init__, undefined, undefined);
+  system::register("threat_detector", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.sensorhandle = 1;
   level.sensors = [];
-  clientfield::register("missile", "threat_detector", 1, 1, "int", &spawnedthreatdetector, 0, 0);
+  clientfield::register("missile", "threat_detector", 1, 1, "int", & spawnedthreatdetector, 0, 0);
 }
 
 function spawnedthreatdetector(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -32,7 +32,7 @@ function spawnedthreatdetector(localclientnum, oldval, newval, bnewent, binitial
   }
   sensorindex = level.sensors.size;
   level.sensorhandle++;
-  level.sensors[sensorindex] = spawnStruct();
+  level.sensors[sensorindex] = spawnstruct();
   level.sensors[sensorindex].handle = level.sensorhandle;
   level.sensors[sensorindex].cent = self;
   level.sensors[sensorindex].team = self.team;
@@ -44,10 +44,10 @@ function spawnedthreatdetector(localclientnum, oldval, newval, bnewent, binitial
 
 function sensorgrenadethink(sensorent, sensorhandle, localclientnum) {
   sensorent endon("entityshutdown");
-  if(isDefined(sensorent.owner) == 0) {
+  if(isdefined(sensorent.owner) == 0) {
     return;
   }
-  while(true) {
+  while (true) {
     players = getplayers(localclientnum);
     foreach(player in players) {
       if(self util::isenemyplayer(player)) {
@@ -71,7 +71,7 @@ function sensorgrenadethink(sensorent, sensorhandle, localclientnum) {
 function clearthreatdetectorondelete(sensorent, sensorhandle, localclientnum) {
   sensorent waittill("entityshutdown");
   entindex = 0;
-  for(i = 0; i < level.sensors.size; i++) {
+  for (i = 0; i < level.sensors.size; i++) {
     size = level.sensors.size;
     if(sensorhandle == level.sensors[i].handle) {
       level.sensors[i].owner removesensorgrenadearea(sensorhandle);

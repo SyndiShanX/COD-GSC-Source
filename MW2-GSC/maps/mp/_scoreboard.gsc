@@ -7,21 +7,19 @@
 #include common_scripts\utility;
 
 processLobbyScoreboards() {
-  foreach(player in level.placement["all"]) {
-    player setPlayerScoreboardInfo();
-  }
+  foreach(player in level.placement["all"])
+  player setPlayerScoreboardInfo();
 
   if(level.teamBased) {
     alliesScore = getTeamScore("allies");
     axisScore = getTeamScore("axis");
 
-    if(alliesScore == axisScore) {
+    if(alliesScore == axisScore)
       winner = "tied";
-    } else if(alliesScore > axisScore) {
+    else if(alliesScore > axisScore)
       winner = "allies";
-    } else {
+    else
       winner = "axis";
-    }
 
     if(winner == "tied") {
       // build both, assign type to your team
@@ -29,27 +27,24 @@ processLobbyScoreboards() {
       buildScoreboardType("axis");
 
       foreach(player in level.players) {
-        if(player.pers["team"] == "spectator") {
+        if(player.pers["team"] == "spectator")
           player setPlayerData("round", "scoreboardType", "allies");
-        } else {
+        else
           player setPlayerData("round", "scoreboardType", player.pers["team"]);
-        }
       }
     } else {
       // build just winner, assign type to winner
       buildScoreboardType(winner);
 
-      foreach(player in level.players) {
-        player setPlayerData("round", "scoreboardType", winner);
-      }
+      foreach(player in level.players)
+      player setPlayerData("round", "scoreboardType", winner);
     }
   } else // not teambased
   {
     buildScoreboardType("neutral");
 
-    foreach(player in level.players) {
-      player setPlayerData("round", "scoreboardType", "neutral");
-    }
+    foreach(player in level.players)
+    player setPlayerData("round", "scoreboardType", "neutral");
   }
 
   foreach(player in level.players) {

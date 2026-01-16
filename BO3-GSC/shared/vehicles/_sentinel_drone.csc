@@ -17,81 +17,81 @@
 #namespace sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("sentinel_drone", &__init__, undefined, undefined);
+  system::register("sentinel_drone", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "sentinel_drone_beam_set_target_id", 12000, 5, "int", &sentinel_drone_beam_set_target_id, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_set_source_to_target", 12000, 5, "int", &sentinel_drone_beam_set_source_to_target, 0, 0);
-  clientfield::register("toplayer", "sentinel_drone_damage_player_fx", 12000, 1, "counter", &sentinel_drone_damage_player_fx, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire1", 12000, 1, "int", &sentinel_drone_beam_fire1, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire2", 12000, 1, "int", &sentinel_drone_beam_fire2, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire3", 12000, 1, "int", &sentinel_drone_beam_fire3, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_1", 12000, 1, "int", &sentinel_drone_arm_cut_1, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_2", 12000, 1, "int", &sentinel_drone_arm_cut_2, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_3", 12000, 1, "int", &sentinel_drone_arm_cut_3, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_face_cut", 12000, 1, "int", &sentinel_drone_face_cut, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_charge", 12000, 1, "int", &sentinel_drone_beam_charge, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_camera_scanner", 12000, 1, "int", &sentinel_drone_camera_scanner, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_camera_destroyed", 12000, 1, "int", &sentinel_drone_camera_destroyed, 0, 0);
-  clientfield::register("scriptmover", "sentinel_drone_deathfx", 1, 1, "int", &sentinel_drone_deathfx, 0, 0);
+  clientfield::register("scriptmover", "sentinel_drone_beam_set_target_id", 12000, 5, "int", & sentinel_drone_beam_set_target_id, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_set_source_to_target", 12000, 5, "int", & sentinel_drone_beam_set_source_to_target, 0, 0);
+  clientfield::register("toplayer", "sentinel_drone_damage_player_fx", 12000, 1, "counter", & sentinel_drone_damage_player_fx, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire1", 12000, 1, "int", & sentinel_drone_beam_fire1, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire2", 12000, 1, "int", & sentinel_drone_beam_fire2, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire3", 12000, 1, "int", & sentinel_drone_beam_fire3, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_1", 12000, 1, "int", & sentinel_drone_arm_cut_1, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_2", 12000, 1, "int", & sentinel_drone_arm_cut_2, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_3", 12000, 1, "int", & sentinel_drone_arm_cut_3, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_face_cut", 12000, 1, "int", & sentinel_drone_face_cut, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_charge", 12000, 1, "int", & sentinel_drone_beam_charge, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_camera_scanner", 12000, 1, "int", & sentinel_drone_camera_scanner, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_camera_destroyed", 12000, 1, "int", & sentinel_drone_camera_destroyed, 0, 0);
+  clientfield::register("scriptmover", "sentinel_drone_deathfx", 1, 1, "int", & sentinel_drone_deathfx, 0, 0);
   level._sentinel_enemy_detected_taunts = [];
-  if(!isDefined(level._sentinel_enemy_detected_taunts)) {
+  if(!isdefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
   } else if(!isarray(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = array(level._sentinel_enemy_detected_taunts);
   }
   level._sentinel_enemy_detected_taunts[level._sentinel_enemy_detected_taunts.size] = "vox_valk_valkyrie_detected_0";
-  if(!isDefined(level._sentinel_enemy_detected_taunts)) {
+  if(!isdefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
   } else if(!isarray(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = array(level._sentinel_enemy_detected_taunts);
   }
   level._sentinel_enemy_detected_taunts[level._sentinel_enemy_detected_taunts.size] = "vox_valk_valkyrie_detected_1";
-  if(!isDefined(level._sentinel_enemy_detected_taunts)) {
+  if(!isdefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
   } else if(!isarray(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = array(level._sentinel_enemy_detected_taunts);
   }
   level._sentinel_enemy_detected_taunts[level._sentinel_enemy_detected_taunts.size] = "vox_valk_valkyrie_detected_2";
-  if(!isDefined(level._sentinel_enemy_detected_taunts)) {
+  if(!isdefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
   } else if(!isarray(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = array(level._sentinel_enemy_detected_taunts);
   }
   level._sentinel_enemy_detected_taunts[level._sentinel_enemy_detected_taunts.size] = "vox_valk_valkyrie_detected_3";
-  if(!isDefined(level._sentinel_enemy_detected_taunts)) {
+  if(!isdefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
   } else if(!isarray(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = array(level._sentinel_enemy_detected_taunts);
   }
   level._sentinel_enemy_detected_taunts[level._sentinel_enemy_detected_taunts.size] = "vox_valk_valkyrie_detected_4";
   level._sentinel_attack_taunts = [];
-  if(!isDefined(level._sentinel_attack_taunts)) {
+  if(!isdefined(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = [];
   } else if(!isarray(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = array(level._sentinel_attack_taunts);
   }
   level._sentinel_attack_taunts[level._sentinel_attack_taunts.size] = "vox_valk_valkyrie_attack_0";
-  if(!isDefined(level._sentinel_attack_taunts)) {
+  if(!isdefined(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = [];
   } else if(!isarray(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = array(level._sentinel_attack_taunts);
   }
   level._sentinel_attack_taunts[level._sentinel_attack_taunts.size] = "vox_valk_valkyrie_attack_1";
-  if(!isDefined(level._sentinel_attack_taunts)) {
+  if(!isdefined(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = [];
   } else if(!isarray(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = array(level._sentinel_attack_taunts);
   }
   level._sentinel_attack_taunts[level._sentinel_attack_taunts.size] = "vox_valk_valkyrie_attack_2";
-  if(!isDefined(level._sentinel_attack_taunts)) {
+  if(!isdefined(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = [];
   } else if(!isarray(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = array(level._sentinel_attack_taunts);
   }
   level._sentinel_attack_taunts[level._sentinel_attack_taunts.size] = "vox_valk_valkyrie_attack_3";
-  if(!isDefined(level._sentinel_attack_taunts)) {
+  if(!isdefined(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = [];
   } else if(!isarray(level._sentinel_attack_taunts)) {
     level._sentinel_attack_taunts = array(level._sentinel_attack_taunts);
@@ -100,8 +100,8 @@ function __init__() {
 }
 
 function sentinel_is_drone_initialized(localclientnum, b_check_for_target_existance_only) {
-  if(!(isDefined(b_check_for_target_existance_only) && b_check_for_target_existance_only)) {
-    if(!(isDefined(self.init) && self.init)) {
+  if(!(isdefined(b_check_for_target_existance_only) && b_check_for_target_existance_only)) {
+    if(!(isdefined(self.init) && self.init)) {
       return false;
     }
     if(!self hasdobj(localclientnum)) {
@@ -110,7 +110,7 @@ function sentinel_is_drone_initialized(localclientnum, b_check_for_target_exista
     return true;
   }
   source_num = self getentitynumber();
-  if(isDefined(level.sentinel_drone_source_to_target) && isDefined(level.sentinel_drone_source_to_target[source_num]) && isDefined(level.sentinel_drone_target_id) && isDefined(level.sentinel_drone_target_id[level.sentinel_drone_source_to_target[source_num]])) {
+  if(isdefined(level.sentinel_drone_source_to_target) && isdefined(level.sentinel_drone_source_to_target[source_num]) && isdefined(level.sentinel_drone_target_id) && isdefined(level.sentinel_drone_target_id[level.sentinel_drone_source_to_target[source_num]])) {
     return true;
   }
   return false;
@@ -118,18 +118,18 @@ function sentinel_is_drone_initialized(localclientnum, b_check_for_target_exista
 
 function sentinel_drone_damage_player_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   localplayer = getlocalplayer(localclientnum);
-  if(isDefined(localplayer)) {
+  if(isdefined(localplayer)) {
     localplayer thread postfx::playpostfxbundle("sentinel_pstfx_shock_charge");
   }
 }
 
 function sentinel_drone_deathfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   settings = struct::get_script_bundle("vehiclecustomsettings", "sentinel_drone_settings");
-  if(isDefined(settings)) {
+  if(isdefined(settings)) {
     if(newval) {
-      handle = playFX(localclientnum, settings.drone_secondary_death_fx_1, self.origin);
+      handle = playfx(localclientnum, settings.drone_secondary_death_fx_1, self.origin);
       setfxignorepause(localclientnum, handle, 1);
-      if(isDefined(self.beam_target_fx) && isDefined(self.beam_target_fx[localclientnum])) {
+      if(isdefined(self.beam_target_fx) && isdefined(self.beam_target_fx[localclientnum])) {
         stopfx(localclientnum, self.beam_target_fx[localclientnum]);
         self.beam_target_fx[localclientnum] = undefined;
       }
@@ -142,13 +142,13 @@ function sentinel_drone_camera_scanner(localclientnum, oldval, newval, bnewent, 
     return false;
   }
   if(newval == 1) {
-    if(!isDefined(self.camerascannerfx) && (!(isDefined(self.cameradestroyed) && self.cameradestroyed))) {
-      self.camerascannerfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
+    if(!isdefined(self.camerascannerfx) && (!(isdefined(self.cameradestroyed) && self.cameradestroyed))) {
+      self.camerascannerfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
     }
     sentinel_play_engine_fx(localclientnum, 0, 1);
   } else {
     keep_scanner_on = getdvarint("", 0);
-    if(isDefined(self.camerascannerfx) && (!(isDefined(keep_scanner_on) && keep_scanner_on))) {
+    if(isdefined(self.camerascannerfx) && (!(isdefined(keep_scanner_on) && keep_scanner_on))) {
       stopfx(localclientnum, self.camerascannerfx);
       self.camerascannerfx = undefined;
     }
@@ -158,11 +158,11 @@ function sentinel_drone_camera_scanner(localclientnum, oldval, newval, bnewent, 
 
 function sentinel_drone_camera_destroyed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.cameradestroyed = 1;
-  if(isDefined(self.camerascannerfx)) {
+  if(isdefined(self.camerascannerfx)) {
     stopfx(localclientnum, self.camerascannerfx);
     self.camerascannerfx = undefined;
   }
-  if(isDefined(self.cameraambientfx)) {
+  if(isdefined(self.cameraambientfx)) {
     stopfx(localclientnum, self.cameraambientfx);
     self.cameraambientfx = undefined;
   }
@@ -189,21 +189,21 @@ function sentinel_drone_beam_fire(localclientnum, newval, tag_id) {
   }
   if(newval == 1) {
     level beam::launch(self, tag_id, beam_target, "tag_origin", "electric_taser_beam_1");
-    self playSound(0, "zmb_sentinel_attack_short");
-    if(!isDefined(beam_target.beam_target_fx)) {
+    self playsound(0, "zmb_sentinel_attack_short");
+    if(!isdefined(beam_target.beam_target_fx)) {
       beam_target.beam_target_fx = [];
     }
-    if(!isDefined(beam_target.beam_target_fx[localclientnum])) {
-      beam_target.beam_target_fx[localclientnum] = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_fire_tgt", beam_target, "tag_origin");
+    if(!isdefined(beam_target.beam_target_fx[localclientnum])) {
+      beam_target.beam_target_fx[localclientnum] = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_fire_tgt", beam_target, "tag_origin");
     }
     keep_scanner_on = getdvarint("", 0);
-    if(isDefined(self.camerascannerfx) && (!(isDefined(keep_scanner_on) && keep_scanner_on))) {
+    if(isdefined(self.camerascannerfx) && (!(isdefined(keep_scanner_on) && keep_scanner_on))) {
       stopfx(localclientnum, self.camerascannerfx);
       self.camerascannerfx = undefined;
     }
   } else {
     level beam::kill(self, tag_id, beam_target, "tag_origin", "electric_taser_beam_1");
-    if(isDefined(beam_target.beam_target_fx) && isDefined(beam_target.beam_target_fx[localclientnum])) {
+    if(isdefined(beam_target.beam_target_fx) && isdefined(beam_target.beam_target_fx[localclientnum])) {
       stopfx(localclientnum, beam_target.beam_target_fx[localclientnum]);
       beam_target.beam_target_fx[localclientnum] = undefined;
     }
@@ -212,22 +212,22 @@ function sentinel_drone_beam_fire(localclientnum, newval, tag_id) {
 }
 
 function sentinel_drone_beam_set_target_id(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.sentinel_drone_target_id)) {
+  if(!isdefined(level.sentinel_drone_target_id)) {
     level.sentinel_drone_target_id = [];
   }
   level.sentinel_drone_target_id[newval] = self;
 }
 
 function sentinel_drone_beam_set_source_to_target(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.sentinel_drone_source_to_target)) {
+  if(!isdefined(level.sentinel_drone_source_to_target)) {
     level.sentinel_drone_source_to_target = [];
   }
   source_num = self getentitynumber();
   level.sentinel_drone_source_to_target[source_num] = newval;
   self.init = 1;
   self sentinel_play_claws_ambient_fx(localclientnum);
-  self.cameraambientfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_eye_camera_lens_glow", self, "tag_flash");
-  self.camerascannerfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
+  self.cameraambientfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_eye_camera_lens_glow", self, "tag_flash");
+  self.camerascannerfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
   sentinel_play_engine_fx(localclientnum, 1, 0);
   self useanimtree($generic);
   self setanim("ai_zm_dlc3_sentinel_antenna_twitch");
@@ -253,7 +253,7 @@ function sentinel_spawn_broken_arm(localclientnum, arm, arm_tag, claw_tag) {
   velocity_normal = vectornormalize(velocity);
   velocity_length = length(velocity);
   if(arm == 3) {
-    launch_dir = anglesToForward(self.angles) * -1;
+    launch_dir = anglestoforward(self.angles) * -1;
     launch_dir = launch_dir + (0, 0, 1);
     launch_dir = vectornormalize(launch_dir);
   } else {
@@ -279,57 +279,57 @@ function sentinel_spawn_broken_arm(localclientnum, arm, arm_tag, claw_tag) {
 
 function sentinel_drone_arm_cut(localclientnum, arm) {
   if(arm == 1) {
-    if(!(isDefined(self.rightarmlost) && self.rightarmlost)) {
+    if(!(isdefined(self.rightarmlost) && self.rightarmlost)) {
       sentinel_spawn_broken_arm(localclientnum, 1, "tag_arm_right_04_d1", "tag_fx1");
       self.rightarmlost = 1;
       sentinel_drone_beam_fire(localclientnum, 0, "tag_fx1");
-      if(isDefined(self.rightclawambientfx)) {
+      if(isdefined(self.rightclawambientfx)) {
         stopfx(localclientnum, self.rightclawambientfx);
         self.rightclawambientfx = undefined;
       }
-      if(isDefined(self.rightclawchargefx)) {
+      if(isdefined(self.rightclawchargefx)) {
         stopfx(localclientnum, self.rightclawchargefx);
         self.rightclawchargefx = undefined;
       }
       if(sentinel_is_drone_initialized(localclientnum)) {
-        playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_right_04_d1");
+        playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_right_04_d1");
         self setanim("ai_zm_dlc3_sentinel_arms_broken_right");
       }
     }
   } else {
     if(arm == 2) {
-      if(!(isDefined(self.leftarmlost) && self.leftarmlost)) {
+      if(!(isdefined(self.leftarmlost) && self.leftarmlost)) {
         sentinel_spawn_broken_arm(localclientnum, 2, "tag_arm_left_03_d1", "tag_fx2");
         self.leftarmlost = 1;
         sentinel_drone_beam_fire(localclientnum, 0, "tag_fx2");
-        if(isDefined(self.leftclawambientfx)) {
+        if(isdefined(self.leftclawambientfx)) {
           stopfx(localclientnum, self.leftclawambientfx);
           self.leftclawambientfx = undefined;
         }
-        if(isDefined(self.leftclawchargefx)) {
+        if(isdefined(self.leftclawchargefx)) {
           stopfx(localclientnum, self.leftclawchargefx);
           self.leftclawchargefx = undefined;
         }
         if(sentinel_is_drone_initialized(localclientnum)) {
-          playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_left_03_d1");
+          playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_left_03_d1");
           self setanim("ai_zm_dlc3_sentinel_arms_broken_left");
         }
       }
     } else if(arm == 3) {
-      if(!(isDefined(self.toparmlost) && self.toparmlost)) {
+      if(!(isdefined(self.toparmlost) && self.toparmlost)) {
         sentinel_spawn_broken_arm(localclientnum, 3, "tag_arm_top_03_d1", "tag_fx3");
         self.toparmlost = 1;
         sentinel_drone_beam_fire(localclientnum, 0, "tag_fx3");
-        if(isDefined(self.topclawambientfx)) {
+        if(isdefined(self.topclawambientfx)) {
           stopfx(localclientnum, self.topclawambientfx);
           self.topclawambientfx = undefined;
         }
-        if(isDefined(self.topclawchargefx)) {
+        if(isdefined(self.topclawchargefx)) {
           stopfx(localclientnum, self.topclawchargefx);
           self.topclawchargefx = undefined;
         }
         if(sentinel_is_drone_initialized(localclientnum)) {
-          playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_top_03_d1");
+          playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_arm", self, "tag_arm_top_03_d1");
           self setanim("ai_zm_dlc3_sentinel_arms_broken_top");
         }
       }
@@ -342,20 +342,20 @@ function sentinel_drone_beam_charge(localclientnum, oldval, newval, bnewent, bin
     return false;
   }
   if(newval == 1) {
-    if(!isDefined(self.camerascannerfx)) {
-      self.camerascannerfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
+    if(!isdefined(self.camerascannerfx)) {
+      self.camerascannerfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_scanner_light_glow", self, "tag_flash");
     }
     self sentinel_play_claws_ambient_fx(localclientnum, 1);
-    if(!(isDefined(self.rightarmlost) && self.rightarmlost)) {
-      self.rightclawchargefx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx1");
+    if(!(isdefined(self.rightarmlost) && self.rightarmlost)) {
+      self.rightclawchargefx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx1");
     }
-    if(!(isDefined(self.leftarmlost) && self.leftarmlost)) {
-      self.leftclawchargefx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx2");
+    if(!(isdefined(self.leftarmlost) && self.leftarmlost)) {
+      self.leftclawchargefx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx2");
     }
-    if(!(isDefined(self.toparmlost) && self.toparmlost)) {
-      self.topclawchargefx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx3");
+    if(!(isdefined(self.toparmlost) && self.toparmlost)) {
+      self.topclawchargefx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_charging", self, "tag_fx3");
     }
-    if(isDefined(self.enemy_already_spotted)) {
+    if(isdefined(self.enemy_already_spotted)) {
       if(randomint(100) < 30) {
         sentinel_play_taunt(localclientnum, level._sentinel_attack_taunts);
       }
@@ -364,15 +364,15 @@ function sentinel_drone_beam_charge(localclientnum, oldval, newval, bnewent, bin
       sentinel_play_taunt(localclientnum, level._sentinel_enemy_detected_taunts);
     }
   } else {
-    if(isDefined(self.rightclawchargefx)) {
+    if(isdefined(self.rightclawchargefx)) {
       stopfx(localclientnum, self.rightclawchargefx);
       self.rightclawchargefx = undefined;
     }
-    if(isDefined(self.leftclawchargefx)) {
+    if(isdefined(self.leftclawchargefx)) {
       stopfx(localclientnum, self.leftclawchargefx);
       self.leftclawchargefx = undefined;
     }
-    if(isDefined(self.topclawchargefx)) {
+    if(isdefined(self.topclawchargefx)) {
       stopfx(localclientnum, self.topclawchargefx);
       self.topclawchargefx = undefined;
     }
@@ -388,7 +388,7 @@ function sentinel_drone_face_cut(localclientnum, oldval, newval, bnewent, biniti
   velocity = self getvelocity();
   velocity_normal = vectornormalize(velocity);
   velocity_length = length(velocity);
-  launch_dir = anglesToForward(self.angles);
+  launch_dir = anglestoforward(self.angles);
   velocity_length = velocity_length * 0.1;
   if(velocity_length < 10) {
     velocity_length = 10;
@@ -396,34 +396,34 @@ function sentinel_drone_face_cut(localclientnum, oldval, newval, bnewent, biniti
   launch_dir = (launch_dir * 0.5) + (velocity_normal * 0.5);
   launch_dir = launch_dir * velocity_length;
   thread sentinel_launch_piece(localclientnum, "veh_t7_dlc3_sentinel_drone_faceplate", face_pos, face_ang, self.origin, launch_dir);
-  playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_core", self, "tag_faceplate_d0");
-  playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_energy_core_glow", self, "ag_core_d0");
+  playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_dest_core", self, "tag_faceplate_d0");
+  playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_energy_core_glow", self, "ag_core_d0");
 }
 
 function sentinel_play_claws_ambient_fx(localclientnum, b_false) {
   if(!sentinel_is_drone_initialized(localclientnum)) {
     return false;
   }
-  if(!(isDefined(b_false) && b_false)) {
-    if(!(isDefined(self.rightarmlost) && self.rightarmlost) && !isDefined(self.rightclawambientfx)) {
-      self.rightclawambientfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx1");
+  if(!(isdefined(b_false) && b_false)) {
+    if(!(isdefined(self.rightarmlost) && self.rightarmlost) && !isdefined(self.rightclawambientfx)) {
+      self.rightclawambientfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx1");
     }
-    if(!(isDefined(self.leftarmlost) && self.leftarmlost) && !isDefined(self.leftclawambientfx)) {
-      self.leftclawambientfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx2");
+    if(!(isdefined(self.leftarmlost) && self.leftarmlost) && !isdefined(self.leftclawambientfx)) {
+      self.leftclawambientfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx2");
     }
-    if(!(isDefined(self.toparmlost) && self.toparmlost) && !isDefined(self.topclawambientfx)) {
-      self.topclawambientfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx3");
+    if(!(isdefined(self.toparmlost) && self.toparmlost) && !isdefined(self.topclawambientfx)) {
+      self.topclawambientfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_taser_idle", self, "tag_fx3");
     }
   } else {
-    if(isDefined(self.rightclawambientfx)) {
+    if(isdefined(self.rightclawambientfx)) {
       stopfx(localclientnum, self.rightclawambientfx);
       self.rightclawambientfx = undefined;
     }
-    if(isDefined(self.leftclawambientfx)) {
+    if(isdefined(self.leftclawambientfx)) {
       stopfx(localclientnum, self.leftclawambientfx);
       self.leftclawambientfx = undefined;
     }
-    if(isDefined(self.topclawambientfx)) {
+    if(isdefined(self.topclawambientfx)) {
       stopfx(localclientnum, self.topclawambientfx);
       self.topclawambientfx = undefined;
     }
@@ -434,38 +434,38 @@ function sentinel_play_engine_fx(localclientnum, b_engine, b_roll_engine) {
   if(!sentinel_is_drone_initialized(localclientnum)) {
     return false;
   }
-  if(isDefined(b_engine) && b_engine) {
-    self.enginefx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_engine_idle", self, "tag_fx_engine_left");
-  } else if(isDefined(self.enginefx)) {
+  if(isdefined(b_engine) && b_engine) {
+    self.enginefx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_engine_idle", self, "tag_fx_engine_left");
+  } else if(isdefined(self.enginefx)) {
     stopfx(localclientnum, self.enginefx);
   }
-  if(isDefined(b_roll_engine) && b_roll_engine) {
-    self.enginerollfx = playFXOnTag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_engine_smk_fast", self, "tag_fx_engine_left");
-  } else if(isDefined(self.enginerollfx)) {
+  if(isdefined(b_roll_engine) && b_roll_engine) {
+    self.enginerollfx = playfxontag(localclientnum, "dlc3/stalingrad/fx_sentinel_drone_engine_smk_fast", self, "tag_fx_engine_left");
+  } else if(isdefined(self.enginerollfx)) {
     stopfx(localclientnum, self.enginerollfx);
   }
 }
 
 function sentinel_play_taunt(localclientnum, taunt_arr) {
-  if(isDefined(level._lastplayed_drone_taunt) && (gettime() - level._lastplayed_drone_taunt) < 6000) {
+  if(isdefined(level._lastplayed_drone_taunt) && (gettime() - level._lastplayed_drone_taunt) < 6000) {
     return;
   }
-  if(isDefined(level.voxaideactivate) && level.voxaideactivate) {
+  if(isdefined(level.voxaideactivate) && level.voxaideactivate) {
     return;
   }
   taunt = randomint(taunt_arr.size);
   level._lastplayed_drone_taunt = gettime();
-  self playSound(localclientnum, taunt_arr[taunt]);
+  self playsound(localclientnum, taunt_arr[taunt]);
 }
 
 function sentinel_launch_piece(localclientnum, model, pos, angles, hitpos, force) {
   dynent = createdynentandlaunch(localclientnum, model, pos, angles, hitpos, force);
-  if(!isDefined(dynent)) {
+  if(!isdefined(dynent)) {
     return;
   }
   posheight = pos[2];
   wait(0.5);
-  if(!isDefined(dynent) || !isdynentvalid(dynent)) {
+  if(!isdefined(dynent) || !isdynentvalid(dynent)) {
     return false;
   }
   if(dynent.origin == pos) {
@@ -474,7 +474,7 @@ function sentinel_launch_piece(localclientnum, model, pos, angles, hitpos, force
   }
   pos = dynent.origin;
   wait(0.4);
-  if(!isDefined(dynent) || !isdynentvalid(dynent)) {
+  if(!isdefined(dynent) || !isdynentvalid(dynent)) {
     return false;
   }
   if(dynent.origin == pos) {
@@ -482,12 +482,12 @@ function sentinel_launch_piece(localclientnum, model, pos, angles, hitpos, force
     return;
   }
   wait(1);
-  if(!isDefined(dynent) || !isdynentvalid(dynent)) {
+  if(!isdefined(dynent) || !isdynentvalid(dynent)) {
     return false;
   }
   count = 0;
   old_pos = dynent.origin;
-  while(isDefined(dynent) && isdynentvalid(dynent)) {
+  while (isdefined(dynent) && isdynentvalid(dynent)) {
     if(old_pos == dynent.origin) {
       old_pos = dynent.origin;
       count++;

@@ -12,7 +12,7 @@ main() {
 
 play_fake_japanese_battlechatter() {
   wait(4);
-  while(1) {
+  while (1) {
     level endon("player_win");
     ai = getaiarray("axis");
     ent = ai[randomint(ai.size)];
@@ -22,7 +22,7 @@ play_fake_japanese_battlechatter() {
     }
     num_battle_chatters = 24;
     randomizer = randomintrange(1, num_battle_chatters);
-    ent playSound("fake_jbc_" + randomizer, "sound_done");
+    ent playsound("fake_jbc_" + randomizer, "sound_done");
     ent.isplaying_fake_bc = true;
     ent waittill("sound_done");
     if(isalive(ent) && isDefined(ent)) {

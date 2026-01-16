@@ -43,9 +43,8 @@ main() {
   level.setbacksperdemotion = getgametypesetting("setbacks");
   gunlist = getgametypesetting("gunSelection");
 
-  if(gunlist == 3) {
+  if(gunlist == 3)
     gunlist = randomintrange(0, 3);
-  }
 
   switch (gunlist) {
     case 0:
@@ -124,17 +123,15 @@ main() {
 }
 
 addguntoprogression(gunname, altname) {
-  if(!isDefined(level.gunprogression)) {
+  if(!isDefined(level.gunprogression))
     level.gunprogression = [];
-  }
 
-  newweapon = spawnStruct();
+  newweapon = spawnstruct();
   newweapon.names = [];
   newweapon.names[newweapon.names.size] = gunname;
 
-  if(isDefined(altname)) {
+  if(isDefined(altname))
     newweapon.names[newweapon.names.size] = altname;
-  }
 
   level.gunprogression[level.gunprogression.size] = newweapon;
 }
@@ -142,13 +139,11 @@ addguntoprogression(gunname, altname) {
 givecustomloadout(takeallweapons, alreadyspawned) {
   chooserandombody = 0;
 
-  if(!isDefined(alreadyspawned) || !alreadyspawned) {
+  if(!isDefined(alreadyspawned) || !alreadyspawned)
     chooserandombody = 1;
-  }
 
-  if(!isDefined(self.gunprogress)) {
+  if(!isDefined(self.gunprogress))
     self.gunprogress = 0;
-  }
 
   currentweapon = level.gunprogression[self.gunprogress].names[0];
   self maps\mp\gametypes\_wager::setupblankrandomplayer(takeallweapons, chooserandombody, currentweapon);
@@ -157,15 +152,13 @@ givecustomloadout(takeallweapons, alreadyspawned) {
   self switchtoweapon(currentweapon);
   self giveweapon("knife_mp");
 
-  if(!isDefined(alreadyspawned) || !alreadyspawned) {
+  if(!isDefined(alreadyspawned) || !alreadyspawned)
     self setspawnweapon(currentweapon);
-  }
 
-  if(isDefined(takeallweapons) && !takeallweapons) {
+  if(isDefined(takeallweapons) && !takeallweapons)
     self thread takeoldweapons(currentweapon);
-  } else {
+  else
     self enableweaponcycling();
-  }
 
   return currentweapon;
 }
@@ -185,9 +178,8 @@ takeoldweapons(currentweapon) {
   weaponslist = self getweaponslist();
 
   for(i = 0; i < weaponslist.size; i++) {
-    if(weaponslist[i] != currentweapon && weaponslist[i] != "knife_mp") {
+    if(weaponslist[i] != currentweapon && weaponslist[i] != "knife_mp")
       self takeweapon(weaponslist[i]);
-    }
   }
 
   self enableweaponcycling();
@@ -204,11 +196,10 @@ promoteplayer(weaponused) {
       if(self.gunprogress < level.gunprogression.size - 1) {
         self.gunprogress++;
 
-        if(isalive(self)) {
+        if(isalive(self))
           self thread givecustomloadout(0, 1);
-        }
 
-        self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, &"MP_GUN_NEXT_LEVEL");
+        self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, & "MP_GUN_NEXT_LEVEL");
       }
 
       pointstowin = self.pers["pointstowin"];
@@ -238,13 +229,12 @@ demoteplayer() {
     self.gunprogress--;
   }
 
-  if(startinggunprogress != self.gunprogress && isalive(self)) {
+  if(startinggunprogress != self.gunprogress && isalive(self))
     self thread givecustomloadout(0, 1);
-  }
 
   self.pers["humiliated"]++;
   self.humiliated = self.pers["humiliated"];
-  self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, &"MP_GUN_PREV_LEVEL", "wm_humiliated");
+  self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, & "MP_GUN_PREV_LEVEL", "wm_humiliated");
   self playlocalsound(game["dialog"]["wm_humiliation"]);
   self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("wm_humiliated");
 }
@@ -261,16 +251,14 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       return;
     }
 
-    if(isDefined(attacker.lastpromotiontime) && attacker.lastpromotiontime + 3000 > gettime()) {
+    if(isDefined(attacker.lastpromotiontime) && attacker.lastpromotiontime + 3000 > gettime())
       maps\mp\_scoreevents::processscoreevent("kill_in_3_seconds_gun", attacker, self, sweapon);
-    }
 
     if(smeansofdeath == "MOD_MELEE") {
-      if(maps\mp\gametypes\_globallogic::istopscoringplayer(self)) {
+      if(maps\mp\gametypes\_globallogic::istopscoringplayer(self))
         maps\mp\_scoreevents::processscoreevent("knife_leader_gun", attacker, self, sweapon);
-      } else {
+      else
         maps\mp\_scoreevents::processscoreevent("humiliation_gun", attacker, self, sweapon);
-      }
 
       attacker playlocalsound(game["dialog"]["wm_humiliation"]);
       self thread demoteplayer();
@@ -286,25 +274,25 @@ onstartgametype() {
   setdvar("ui_weapon_tiers", level.gunprogression.size);
   makedvarserverinfo("ui_weapon_tiers", level.gunprogression.size);
   setclientnamemode("auto_change");
-  setobjectivetext("allies", &"OBJECTIVES_GUN");
-  setobjectivetext("axis", &"OBJECTIVES_GUN");
+  setobjectivetext("allies", & "OBJECTIVES_GUN");
+  setobjectivetext("axis", & "OBJECTIVES_GUN");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", &"OBJECTIVES_GUN");
-    setobjectivescoretext("axis", &"OBJECTIVES_GUN");
+    setobjectivescoretext("allies", & "OBJECTIVES_GUN");
+    setobjectivescoretext("axis", & "OBJECTIVES_GUN");
   } else {
-    setobjectivescoretext("allies", &"OBJECTIVES_GUN_SCORE");
-    setobjectivescoretext("axis", &"OBJECTIVES_GUN_SCORE");
+    setobjectivescoretext("allies", & "OBJECTIVES_GUN_SCORE");
+    setobjectivescoretext("axis", & "OBJECTIVES_GUN_SCORE");
   }
 
-  setobjectivehinttext("allies", &"OBJECTIVES_GUN_HINT");
-  setobjectivehinttext("axis", &"OBJECTIVES_GUN_HINT");
+  setobjectivehinttext("allies", & "OBJECTIVES_GUN_HINT");
+  setobjectivehinttext("axis", & "OBJECTIVES_GUN_HINT");
   allowed[0] = "gun";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
-  newspawns = getEntArray("mp_wager_spawn", "classname");
+  newspawns = getentarray("mp_wager_spawn", "classname");
 
   if(newspawns.size > 0) {
     maps\mp\gametypes\_spawnlogic::addspawnpoints("allies", "mp_wager_spawn");
@@ -333,9 +321,9 @@ onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn) {
+  if(predictedspawn)
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  } else {
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "gun");
     self thread infiniteammo();
   }
@@ -355,29 +343,27 @@ infiniteammo() {
 onwagerawards() {
   stabs = self maps\mp\gametypes\_globallogic_score::getpersstat("stabs");
 
-  if(!isDefined(stabs)) {
+  if(!isDefined(stabs))
     stabs = 0;
-  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", stabs, 0);
   headshots = self maps\mp\gametypes\_globallogic_score::getpersstat("headshots");
 
-  if(!isDefined(headshots)) {
+  if(!isDefined(headshots))
     headshots = 0;
-  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", headshots, 1);
   bestkillstreak = self maps\mp\gametypes\_globallogic_score::getpersstat("best_kill_streak");
 
-  if(!isDefined(bestkillstreak)) {
+  if(!isDefined(bestkillstreak))
     bestkillstreak = 0;
-  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", bestkillstreak, 2);
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
-    [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + level.gungamekillscore);
-  }
+  if(isDefined(winningplayer) && isplayer(winningplayer))
+    [[level._setplayerscore]](winningplayer, [
+      [level._getplayerscore]
+    ](winningplayer) + level.gungamekillscore);
 }

@@ -78,11 +78,10 @@ activate() {
   var_0 = self.hud;
   self.isactive = 1;
 
-  if(isDefined(var_0["missile"].isavailable)) {
+  if(isDefined(var_0["missile"].isavailable))
     var_0["missile"].alpha = 1.0;
-  } else {
+  else
     var_0["missile"].alpha = 0;
-  }
 
   var_0["missile_name"].alpha = 1.0;
 }
@@ -91,11 +90,10 @@ deactivate() {
   var_0 = self.hud;
   self.isactive = undefined;
 
-  if(isDefined(var_0["missile"].isavailable)) {
+  if(isDefined(var_0["missile"].isavailable))
     var_0["missile"].alpha = 0.2;
-  } else {
+  else
     var_0["missile"].alpha = 0;
-  }
 
   var_0["missile_name"].alpha = 0.2;
 }
@@ -103,17 +101,15 @@ deactivate() {
 hud_start() {
   var_0 = self.hud;
 
-  if(isDefined(var_0["missile"].isavailable)) {
+  if(isDefined(var_0["missile"].isavailable))
     var_0["missile"].alpha = common_scripts\utility::ter_op(isDefined(self.isactive), 1.0, 0.2);
-  } else {
+  else
     var_0["missile"].alpha = 0;
-  }
 
-  if(isDefined(var_0["missile"].islockedontarget)) {
+  if(isDefined(var_0["missile"].islockedontarget))
     var_0["missile"] setshader("apache_missile_icon_lock", 16, 16);
-  } else {
+  else
     var_0["missile"] setshader("apache_missile_icon", 16, 16);
-  }
 
   var_0["missile_name"].alpha = common_scripts\utility::ter_op(isDefined(self.isactive), 1.0, 0.2);
 }
@@ -146,9 +142,8 @@ lockontarget() {
 
     foreach(var_3 in var_1) {
       if(var_3 target_islockedon(var_0)) {
-        if(!target_isincircle(var_3, var_0, 65, 128)) {
+        if(!target_isincircle(var_3, var_0, 65, 128))
           removelockedontarget(var_3);
-        }
       }
     }
 
@@ -168,14 +163,12 @@ gettargetclosesttoreticule(var_0) {
 
   for(var_3 = 96; !var_2 && var_3 > 16; var_3 = var_3 * 0.75) {
     foreach(var_5 in var_0) {
-      if(!var_5 maps\_vehicle::isvehicle() || var_5 target_islockedon(var_1) || !target_isincircle(var_5, var_1, 65, var_3)) {
+      if(!var_5 maps\_vehicle::isvehicle() || var_5 target_islockedon(var_1) || !target_isincircle(var_5, var_1, 65, var_3))
         var_0 = common_scripts\utility::array_remove(var_0, var_5);
-      }
     }
 
-    if(var_0.size <= 2) {
+    if(var_0.size <= 2)
       var_2 = 1;
-    }
   }
 
   return common_scripts\utility::array_randomize(var_0)[0];
@@ -190,9 +183,8 @@ hud_flashalpha(var_0, var_1, var_2) {
     self.alpha = 0;
     wait(var_1);
 
-    if(isDefined(var_2) && var_2 > 0) {
+    if(isDefined(var_2) && var_2 > 0)
       wait(var_2);
-    }
 
     self fadeovertime(var_1);
     self.alpha = var_0;
@@ -220,9 +212,8 @@ addlockedontarget(var_0) {
     return;
   }
   if(!isdummytarget(var_0)) {
-    if(!var_0 target_islockedonbyanyweaponsystem(var_1)) {
+    if(!var_0 target_islockedonbyanyweaponsystem(var_1))
       target_setcolor(var_0, (1, 0, 0));
-    }
 
     var_0 target_set_islockedon(var_1);
   }
@@ -261,9 +252,8 @@ removelockedontarget(var_0) {
   var_1 = self.owner;
   var_0 target_unset_islockedon(var_1);
 
-  if(!var_0 target_islockedonbyanyweaponsystem(var_1)) {
+  if(!var_0 target_islockedonbyanyweaponsystem(var_1))
     target_setcolor(var_0, (0, 1, 0));
-  }
 
   hud_markfree_usedmissileicon();
 }
@@ -271,16 +261,14 @@ removelockedontarget(var_0) {
 target_islockedonbyanyweaponsystem(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = var_1;
-  } else {
+  else
     var_2 = var_0 getentitynumber();
-  }
 
   foreach(var_4 in self._target.weapon) {
-    if(isDefined(var_4.islockedon[var_2])) {
+    if(isDefined(var_4.islockedon[var_2]))
       return 1;
-    }
   }
 
   return 0;
@@ -289,15 +277,13 @@ target_islockedonbyanyweaponsystem(var_0, var_1) {
 target_unset_islockedon(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = var_1;
-  } else {
+  else
     var_2 = var_0 getentitynumber();
-  }
 
-  if(isDefined(self._target)) {
+  if(isDefined(self._target))
     self._target.weapon["raining_missile"].islockedon[var_2] = undefined;
-  }
 }
 
 hud_markfree_usedmissileicon() {
@@ -341,11 +327,10 @@ _fire() {
   var_6.owner = var_0;
   var_7 = 0.000005 * distance(var_4, self.target.origin);
 
-  if(var_7 < 0.05) {
+  if(var_7 < 0.05)
     var_6 common_scripts\utility::missile_settargetandflightmode(var_1, "top");
-  } else {
+  else
     var_6 maps\_utility::delaythread(var_7, common_scripts\utility::missile_settargetandflightmode, var_1, "top");
-  }
 
   thread deployrainingmissiles(var_6, var_1, self.target);
   var_0 playrumbleonentity("heavygun_fire");
@@ -367,13 +352,11 @@ deployrainingmissiles(var_0, var_1, var_2) {
   var_0 thread missile_trackrealtarget(var_2);
   waittill_ent_moving_dir_world_relative(var_0, (0, 0, 1), 0.707107);
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     waittill_ent_moving_dir_world_relative(var_0, (0, 0, -1));
-  }
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     waittill_ent1_in_z_range_of_ent2(var_0, var_1, var_3);
-  }
 
   if(!isDefined(var_0)) {
     return;
@@ -423,9 +406,8 @@ deployrainingmissiles(var_0, var_1, var_2) {
 
   var_23 = [];
 
-  for(var_17 = 0; var_17 < var_12; var_17++) {
+  for(var_17 = 0; var_17 < var_12; var_17++)
     var_23[var_17] = var_17;
-  }
 
   var_23 = common_scripts\utility::array_randomize(var_23);
 
@@ -449,9 +431,8 @@ missile_trackrealtarget(var_0) {
 }
 
 missile_spawnandlockontotarget(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(var_0 > 0.05) {
+  if(var_0 > 0.05)
     wait(var_0);
-  }
 
   var_6 = magicbullet("apache_raining_missile", var_1, var_2, var_3);
   var_6.owner = var_3;
@@ -468,9 +449,8 @@ missile_ondeathdeletetarget(var_0) {
 }
 
 waittill_ent_moving_dir_world_relative(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
   var_0 endon("death");
   var_3 = var_0.origin;
@@ -499,9 +479,8 @@ target_monitorfreelockedon(var_0, var_1, var_2) {
     if(!isdummytarget(self)) {
       target_unset_islockedon(var_0, var_3);
 
-      if(target_istarget(self) && !target_islockedonbyanyweaponsystem(var_0, var_3)) {
+      if(target_istarget(self) && !target_islockedonbyanyweaponsystem(var_0, var_3))
         target_setcolor(self, (0, 1, 0));
-      }
     }
   }
 
@@ -723,17 +702,14 @@ override_array_call(var_0, var_1, var_2) {
 }
 
 gt_op(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isDefined(var_1))
     return common_scripts\utility::ter_op(var_0 > var_1, var_0, var_1);
-  }
 
-  if(isDefined(var_0) && !isDefined(var_1)) {
+  if(isDefined(var_0) && !isDefined(var_1))
     return var_0;
-  }
 
-  if(!isDefined(var_0) && isDefined(var_1)) {
+  if(!isDefined(var_0) && isDefined(var_1))
     return var_1;
-  }
 
   return var_2;
 }
@@ -741,9 +717,8 @@ gt_op(var_0, var_1, var_2) {
 waittill_ent1_in_z_range_of_ent2(var_0, var_1, var_2) {
   var_2 = gt_op(var_2, 0);
 
-  while(dsq_z_ents_gt(var_0, var_1, var_2)) {
+  while(dsq_z_ents_gt(var_0, var_1, var_2))
     wait 0.05;
-  }
 }
 
 dsq_z_ents(var_0, var_1) {
@@ -751,9 +726,8 @@ dsq_z_ents(var_0, var_1) {
 }
 
 dsq_z_ents_gt(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
+  if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2))
     return common_scripts\utility::ter_op(dsq_z_ents(var_0, var_1) > squared(var_2), 1, 0);
-  }
 
   return common_scripts\utility::ter_op(isDefined(var_3), var_3, 0);
 }

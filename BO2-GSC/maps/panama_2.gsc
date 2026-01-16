@@ -104,13 +104,13 @@ setup_section_challenges() {
 }
 
 actor_ac130_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(self.team == "axis" && sweapon == "ac130_vulcan_minigun") {
+  if(self.team == "axis" && sweapon == "ac130_vulcan_minigun")
     level.ac130_irstrobe_kills++;
-  }
 
   return idamage;
 }
 
 onplayerkilled_strobe(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(sweapon == "ac130_vulcan_minigun") {}
+  if(sweapon == "ac130_vulcan_minigun") {
+  }
 }

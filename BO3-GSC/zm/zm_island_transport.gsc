@@ -47,13 +47,13 @@ function init() {
   level thread function_daa052ec("zip_line", "flag_zipline_in_use", "ex_power_zipline");
   level thread function_daa052ec("sewer_interior", "flag_sewer_on_cooldown_interior", "ex_power_pipe_int");
   level thread function_daa052ec("sewer_exterior", "flag_sewer_on_cooldown_exterior", "ex_power_pipe");
-  array::thread_all(struct::get_array("transport_zip_line", "targetname"), &spawn_unitrigger);
-  array::thread_all(struct::get_array("transport_sewer_interior", "targetname"), &spawn_unitrigger);
-  array::thread_all(struct::get_array("transport_sewer_exterior", "targetname"), &spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_zip_line", "targetname"), & spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_sewer_interior", "targetname"), & spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_sewer_exterior", "targetname"), & spawn_unitrigger);
 }
 
 function spawn_unitrigger() {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
   unitrigger_stub.angles = self.angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -63,13 +63,13 @@ function spawn_unitrigger() {
   unitrigger_stub.e_parent = self;
   if(self.targetname == "transport_zip_line") {
     unitrigger_stub.hint_parm1 = 250;
-    unitrigger_stub.prompt_and_visibility_func = &function_1388fe2d;
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_727b0365);
+    unitrigger_stub.prompt_and_visibility_func = & function_1388fe2d;
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_727b0365);
   } else {
     unitrigger_stub.script_noteworthy = self.script_noteworthy;
     unitrigger_stub.hint_parm1 = 500;
-    unitrigger_stub.prompt_and_visibility_func = &function_da8a0706;
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_32c54c4);
+    unitrigger_stub.prompt_and_visibility_func = & function_da8a0706;
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_32c54c4);
   }
 }
 
@@ -77,7 +77,7 @@ function function_daa052ec(str_location, str_flag, str_exploder) {
   level flag::wait_till("power_on");
   exploder::exploder(str_exploder);
   function_b708e2f9(str_location, 1);
-  while(true) {
+  while (true) {
     level flag::wait_till(str_flag);
     exploder::exploder_stop(str_exploder);
     function_b708e2f9(str_location, 0);
@@ -98,16 +98,16 @@ function function_b708e2f9(var_7d3faaf0, var_7afe5e99 = 1) {
   var_fae0d733 = struct::get_array("transport_" + var_7d3faaf0, "targetname");
   foreach(s_loc in var_fae0d733) {
     if(var_7afe5e99) {
-      s_loc.var_1cdf0f7a setModel("p7_zm_isl_control_panel_cage");
+      s_loc.var_1cdf0f7a setmodel("p7_zm_isl_control_panel_cage");
       continue;
     }
-    s_loc.var_1cdf0f7a setModel("p7_zm_isl_control_panel_cage_off");
+    s_loc.var_1cdf0f7a setmodel("p7_zm_isl_control_panel_cage_off");
   }
 }
 
 function function_727b0365() {
   var_ff0e60dd = arraygetclosest(self.origin, struct::get_array("transport_zip_line", "targetname"));
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(!level flag::get("flag_zipline_in_use")) {
       if(level flag::get("zipline_lightning_charge")) {
@@ -156,7 +156,7 @@ function function_1388fe2d(player) {
 
 function function_32c54c4() {
   var_f7516332 = self.stub.e_parent;
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(level flag::get("flag_sewer_on_cooldown_" + self.script_noteworthy)) {
       continue;
@@ -210,7 +210,7 @@ function function_51885f3b(e_who, var_f7516332) {
   e_who thread function_8fda04e6(var_f7516332, 1);
   e_who thread player_rail_sequence_init(var_f7516332, 1);
   e_who thread zm_island_power::function_a7a30925();
-  level util::delay(3, undefined, &flag::clear, "flag_sewer_in_use_" + var_f7516332.script_noteworthy);
+  level util::delay(3, undefined, & flag::clear, "flag_sewer_in_use_" + var_f7516332.script_noteworthy);
 }
 
 function player_rail_sequence_init(s_start, var_b4b1932b) {
@@ -255,8 +255,8 @@ function player_rail_sequence(var_b4b1932b) {
   } else {
     self notify("zipline_start");
     self clientfield::set_to_player("wind_blur", 1);
-    self playSound("evt_zipline_attach");
-    self playLoopSound("evt_zipline_move", 0.3);
+    self playsound("evt_zipline_attach");
+    self playloopsound("evt_zipline_move", 0.3);
     self.is_ziplining = 1;
     self thread function_f027bda7();
     if(!level flag::get("solo_game")) {
@@ -276,7 +276,7 @@ function player_rail_sequence(var_b4b1932b) {
     self clientfield::set_to_player("tp_water_sheeting", 0);
     self notify("sewer_over");
   } else {
-    self playSound("evt_zipline_detach");
+    self playsound("evt_zipline_detach");
     self clientfield::set_to_player("wind_blur", 0);
     self notify("hash_329f91e1");
   }
@@ -339,7 +339,7 @@ function function_8fda04e6(s_start, var_b4b1932b) {
   var_9c4f4858 scene::play(var_f70ad1d7, var_9c4f4858);
   wait(0.5);
   var_9c4f4858 scene::play(var_240b3589, var_9c4f4858);
-  if(isDefined(var_99552fbd)) {
+  if(isdefined(var_99552fbd)) {
     var_99552fbd waittill("touch");
   }
   var_fcf7bffb scene::play(var_f70ad1d7, var_fcf7bffb);

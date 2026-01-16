@@ -8,41 +8,37 @@ main(var_0) {
   self endon("killanimscript");
   animscripts\utility::initialize("saw");
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
   self.a.special = "saw";
 
-  if(isDefined(var_0.script_delay_min)) {
+  if(isdefined(var_0.script_delay_min))
     var_1 = var_0.script_delay_min;
-  } else {
+  else
     var_1 = maps\_mgturret::burst_fire_settings("delay");
-  }
 
-  if(isDefined(var_0.script_delay_max)) {
+  if(isdefined(var_0.script_delay_max))
     var_2 = var_0.script_delay_max - var_1;
-  } else {
+  else
     var_2 = maps\_mgturret::burst_fire_settings("delay_range");
-  }
 
-  if(isDefined(var_0.script_burst_min)) {
+  if(isdefined(var_0.script_burst_min))
     var_3 = var_0.script_burst_min;
-  } else {
+  else
     var_3 = maps\_mgturret::burst_fire_settings("burst");
-  }
 
-  if(isDefined(var_0.script_burst_max)) {
+  if(isdefined(var_0.script_burst_max))
     var_4 = var_0.script_burst_max - var_3;
-  } else {
+  else
     var_4 = maps\_mgturret::burst_fire_settings("burst_range");
-  }
 
   var_5 = gettime();
   var_6 = "start";
   animscripts\shared::placeweaponon(self.weapon, "none");
   var_0 show();
 
-  if(isDefined(var_0.aiowner)) {
+  if(isdefined(var_0.aiowner)) {
     self.a.postscriptfunc = ::postscriptfunc;
     self.a.usingturret = var_0;
     var_0 notify("being_used");
@@ -60,7 +56,7 @@ main(var_0) {
   var_0 setanimknoblimitedrestart(var_0.additiveturretfire);
   var_0 endon("death");
 
-  for(;;) {
+  for (;;) {
     if(var_0.dofiring) {
       thread doshoot(var_0);
       waittimeoruntilturretstatechange(randomfloatrange(var_3, var_3 + var_4), var_0);
@@ -88,8 +84,8 @@ firecontroller(var_0) {
   self endon("killanimscript");
   var_1 = cos(15);
 
-  for(;;) {
-    while(isDefined(self.enemy)) {
+  for (;;) {
+    while (isdefined(self.enemy)) {
       var_2 = self.enemy.origin;
       var_3 = var_0 gettagangles("tag_aim");
 
@@ -128,10 +124,9 @@ turrettimer(var_0, var_1) {
 stopusingturretwhennodelost() {
   self endon("killanimscript");
 
-  for(;;) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
+  for (;;) {
+    if(!isdefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096)
       self stopuseturret();
-    }
 
     wait 0.25;
   }
@@ -139,7 +134,7 @@ stopusingturretwhennodelost() {
 
 postscriptfunc(var_0) {
   if(var_0 == "pain") {
-    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
+    if(isdefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
       self.a.usingturret hide();
       animscripts\shared::placeweaponon(self.weapon, "right");
       self.a.postscriptfunc = ::postpainfunc;
@@ -159,14 +154,13 @@ postscriptfunc(var_0) {
 }
 
 postpainfunc(var_0) {
-  if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
+  if(!isdefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
     self stopuseturret();
     self.a.usingturret delete();
     self.a.usingturret = undefined;
 
-    if(isDefined(self.weapon) && self.weapon != "none") {
+    if(isdefined(self.weapon) && self.weapon != "none")
       animscripts\shared::placeweaponon(self.weapon, "right");
-    }
   } else if(var_0 != "saw")
     self.a.usingturret delete();
 }
@@ -194,7 +188,7 @@ turretdoshoot(var_0) {
   self endon("killanimscript");
   var_0 endon("turretstatechange");
 
-  for(;;) {
+  for (;;) {
     var_0 shootturret();
     wait 0.1;
   }

@@ -35,6 +35,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
+
 #namespace sas;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -177,13 +178,13 @@ giveperks() {
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(weapon == level.weapon_sas_primary_weapon && smeansofdeath == "MOD_IMPACT") {
     if(isDefined(eattacker) && isplayer(eattacker)) {
-      if(!isDefined(eattacker.pers[# "sticks"])) {
-        eattacker.pers[# "sticks"] = 1;
+      if(!isDefined(eattacker.pers[#"sticks"])) {
+        eattacker.pers[#"sticks"] = 1;
       } else {
-        eattacker.pers[# "sticks"]++;
+        eattacker.pers[#"sticks"]++;
       }
 
-      eattacker.sticks = eattacker.pers[# "sticks"];
+      eattacker.sticks = eattacker.pers[#"sticks"];
     }
   }
 
@@ -220,8 +221,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
 
     if(isDefined(level.setbackweapon) && weapon == level.setbackweapon) {
-      self.pers[# "humiliated"]++;
-      self.humiliated = self.pers[# "humiliated"];
+      self.pers[#"humiliated"]++;
+      self.humiliated = self.pers[#"humiliated"];
 
       if(globallogic_score::gethighestscoringplayer() === self) {
         scoreevents::processscoreevent(#"humiliation_sas", attacker, self, weapon);
@@ -242,8 +243,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     return;
   }
 
-  self.pers[# "humiliated"]++;
-  self.humiliated = self.pers[# "humiliated"];
+  self.pers[#"humiliated"]++;
+  self.humiliated = self.pers[#"humiliated"];
 
   if(level.setbacks == 0) {
     self globallogic_score::setpointstowin(0);
@@ -260,16 +261,16 @@ onendgame(var_c1e98979) {
 }
 
 function_bbf3128e() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 }
 
 setupteam(team) {
-  util::setobjectivetext(team, # "objectives_sas");
+  util::setobjectivetext(team, #"objectives_sas");
 
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, # "objectives_sas");
+    util::setobjectivescoretext(team, #"objectives_sas");
   } else {
-    util::setobjectivescoretext(team, # "objectives_sas_score");
+    util::setobjectivescoretext(team, #"objectives_sas_score");
   }
 
   spawning::add_spawn_points(team, "mp_dm_spawn");

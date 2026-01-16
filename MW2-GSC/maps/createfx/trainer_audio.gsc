@@ -12,4 +12,5 @@ main() {
 
 init_animsounds() {
   waittillframeend;
+
 }

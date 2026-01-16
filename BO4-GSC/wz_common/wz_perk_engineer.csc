@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace wz_perk_engineer;
 
 autoexec __init__system__() {
@@ -16,9 +17,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  renderoverridebundle::function_f72f089c(#"hash_f5de00feee70c13", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_8550d243);
-  renderoverridebundle::function_f72f089c(#"hash_77f7418d2f2a7890", # "rob_sonar_set_enemyequip", &function_62888a11);
-  renderoverridebundle::function_f72f089c(#"hash_61c696df3d5a1765", # "hash_44adc567f9f60d61", &function_b52a94e5);
+  renderoverridebundle::function_f72f089c(#"hash_f5de00feee70c13", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_8550d243);
+  renderoverridebundle::function_f72f089c(#"hash_77f7418d2f2a7890", #"rob_sonar_set_enemyequip", &function_62888a11);
+  renderoverridebundle::function_f72f089c(#"hash_61c696df3d5a1765", #"hash_44adc567f9f60d61", &function_b52a94e5);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
@@ -42,14 +43,14 @@ function_e446e567(notifyhash) {
 
 private function_7800b9c2(localclientnum) {
   level endon(#"game_ended");
-  self endoncallback(&function_e446e567, # "death");
+  self endoncallback(&function_e446e567, #"death");
 
   if(!isDefined(self.var_100abb43)) {
     self.var_100abb43 = [];
   }
 
   while(true) {
-    var_94c264dd = self hasperk(localclientnum, # "specialty_showenemyequipment");
+    var_94c264dd = self hasperk(localclientnum, #"specialty_showenemyequipment");
 
     if(!var_94c264dd && isDefined(self.var_53204996)) {
       var_94c264dd |= self[[self.var_53204996]](localclientnum);
@@ -103,9 +104,9 @@ private function_5118c0a3(item) {
 }
 
 private function_c34cebb1(localclientnum) {
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "friendly", # "hash_f5de00feee70c13");
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "enemy", # "hash_77f7418d2f2a7890");
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "neutral", # "hash_61c696df3d5a1765");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"friendly", #"hash_f5de00feee70c13");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"enemy", #"hash_77f7418d2f2a7890");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"neutral", #"hash_61c696df3d5a1765");
 }
 
 private function_76a0624a() {
@@ -113,7 +114,7 @@ private function_76a0624a() {
     return 0;
   }
 
-  if(self.owner.team == # "neutral") {
+  if(self.owner.team == #"neutral") {
     return 0;
   }
 
@@ -125,7 +126,7 @@ private function_da8108ae() {
     return false;
   }
 
-  if(self.owner.team == # "neutral") {
+  if(self.owner.team == #"neutral") {
     return false;
   }
 

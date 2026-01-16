@@ -6,6 +6,7 @@
 #include script_4daa124bc391e7ed;
 #include scripts\core_common\renderoverridebundle;
 #include scripts\killstreaks\killstreak_detect;
+
 #namespace killstreak_bundles;
 
 spawned(local_client_num, bundle) {
@@ -28,7 +29,7 @@ spawned(local_client_num, bundle) {
   }
 
   killstreak_detect::function_8ac48939(bundle);
-  renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_ebb37dab2ee0ae3");
+  renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_ebb37dab2ee0ae3");
 }
 
 function_48e9536e() {

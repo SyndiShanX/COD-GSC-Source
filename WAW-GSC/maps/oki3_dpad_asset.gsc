@@ -32,7 +32,7 @@ airstrike_player_init() {
 
 airstrike_ammo_taker() {
   level endon("stop_air_support");
-  while(1) {
+  while (1) {
     level waittill("take_ammo");
     remove_airstrike_from_all();
   }
@@ -40,7 +40,7 @@ airstrike_ammo_taker() {
 
 airstrike_ammo_giver() {
   level endon("stop_air_support");
-  while(1) {
+  while (1) {
     level waittill("give_ammo");
     give_airstrike_to_all();
   }
@@ -50,7 +50,7 @@ rocket_barrage_watcher() {
   self endon("death");
   self endon("disconnect");
   level endon("stop_air_support");
-  for(;;) {
+  for (;;) {
     weap = self getcurrentweapon();
     if(weap == "air_support" && !is_radio_available(self)) {} else if(weap == "air_support" && self maps\_laststand::player_is_in_laststand()) {
       self GiveWeapon(self.laststandpistol);
@@ -88,11 +88,11 @@ rocket_barrage_targeting() {
   self endon("death");
   self endon("disconnect");
   self notify("start rocket barrage targeting");
-  for(;;) {
+  for (;;) {
     direction = self getPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = self getEye();
-    trace2 = bulletTrace(eye, eye + vector_multiply(direction_vec, level.rocketbarrage_traceLength), 0, undefined);
+    trace2 = bullettrace(eye, eye + vector_multiply(direction_vec, level.rocketbarrage_traceLength), 0, undefined);
     if(isDefined(self.rocket_barrage_target)) {
       self.rocket_barrage_target.origin = trace2["position"];
       self.rocket_barrage_target rotateTo(vectortoangles(trace2["normal"]), 0.15);
@@ -101,7 +101,7 @@ rocket_barrage_targeting() {
     players = get_players();
     friends = array_merge(friends, players);
     strike_ok = true;
-    for(i = 0; i < friends.size; i++) {
+    for (i = 0; i < friends.size; i++) {
       if(distance(trace2["position"], friends[i].origin) <= level.friendly_check_radius) {
         strike_ok = false;
       }
@@ -114,7 +114,7 @@ rocket_barrage_targeting() {
     }
     if(!isDefined(self.rocket_barrage_target)) {
       targetpoint = spawn("script_model", trace2["position"]);
-      targetpoint setModel("tag_origin");
+      targetpoint setmodel("tag_origin");
       self.rocket_barrage_target = targetpoint;
       self thread draw_target(self.rocket_barrage_target);
     } else {
@@ -133,7 +133,7 @@ draw_target(targetpoint) {
   self endon("target smoke deleted");
   if(!isDefined(targetpoint.fx_drawn)) {
     targetpoint.fx_drawn = true;
-    playFXOnTag(level._effect["target_arrow"], targetpoint, "tag_origin");
+    playfxontag(level._effect["target_arrow"], targetpoint, "tag_origin");
   }
 }
 
@@ -206,10 +206,10 @@ rocket_barrage_fire(fire_point) {
   } else {
     level.no_nag_dialogue = true;
     self.rocket_barrage_confirm = spawn("script_model", fire_point);
-    self.rocket_barrage_confirm setModel("tag_origin");
+    self.rocket_barrage_confirm setmodel("tag_origin");
     self.rocket_barrage_confirm.angles = self.rocket_barrage_target.angles;
     delete_target();
-    playFXOnTag(level._effect["target_arrow_confirm"], self.rocket_barrage_confirm, "tag_origin");
+    playfxontag(level._effect["target_arrow_confirm"], self.rocket_barrage_confirm, "tag_origin");
     thread delete_confirm_arrow();
     level notify("take_ammo");
     level.last_hero thread do_dialogue("confirmed" + randomint(2));
@@ -226,7 +226,7 @@ rocket_barrage_fire(fire_point) {
 
 remove_airstrike_from_all() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setweaponammoclip("air_support", 0);
     players[i].rocket_barrages_remaining = 0;
   }
@@ -234,7 +234,7 @@ remove_airstrike_from_all() {
 
 give_airstrike_to_all() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] giveweapon("air_support");
     players[i] GiveMaxAmmo("air_support");
     players[i].rocket_barrages_remaining++;
@@ -272,7 +272,7 @@ delete_spotting_target() {
 rocket_barrage_hud_elements_think() {
   self endon("death");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     self waittill("rocket barrage firing");
     level notify("airstrike");
     wait(level.barrage_charge_time);
@@ -281,8 +281,8 @@ rocket_barrage_hud_elements_think() {
 
 get_firepoint_target(fire_point) {
   x = spawn("script_origin", fire_point);
-  trigs = getEntArray("airstrike_target", "targetname");
-  for(i = 0; i < trigs.size; i++) {
+  trigs = getentarray("airstrike_target", "targetname");
+  for (i = 0; i < trigs.size; i++) {
     if(x istouching(trigs[i])) {
       x delete();
       return trigs[i].script_noteworthy;
@@ -295,11 +295,10 @@ get_firepoint_target(fire_point) {
 air_support_switch_back() {
   primaryWeapons = self GetWeaponsListPrimaries();
   if(isDefined(primaryWeapons)) {
-    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker")) {
+    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker"))
       self SwitchToWeapon(primaryWeapons[0]);
-    } else {
+    else
       self SwitchToWeapon(primaryWeapons[1]);
-    }
   }
   self.rocket_targeting_on = false;
 }
@@ -333,7 +332,7 @@ is_valid_airstrike_target(target) {
 do_countdown_dialogue() {
   wait(7);
   level.last_hero thread do_dialogue("45_sec");
-  for(i = level.barrage_charge_time; i > 0; i--) {
+  for (i = level.barrage_charge_time; i > 0; i--) {
     wait(1);
     if(i == 30) {
       level.last_hero thread do_dialogue("30_sec");

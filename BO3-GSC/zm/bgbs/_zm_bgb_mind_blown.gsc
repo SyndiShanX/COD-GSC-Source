@@ -18,21 +18,21 @@
 #namespace zm_bgb_mind_blown;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_mind_blown", &__init__, undefined, "bgb");
+  system::register("zm_bgb_mind_blown", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   clientfield::register("actor", "zm_bgb_mind_pop_fx", 15000, 1, "int");
   clientfield::register("actor", "zm_bgb_mind_ray_fx", 15000, 1, "int");
-  bgb::register("zm_bgb_mind_blown", "activated", 3, undefined, undefined, &validation, &activation);
+  bgb::register("zm_bgb_mind_blown", "activated", 3, undefined, undefined, & validation, & activation);
   level.var_3e825919 = lightning_chain::create_lightning_chain_params(0, 1, 300, 20, 100, 0.11, 10, 0, 4, 1, 0, undefined, 1, 1);
 }
 
 function validation() {
-  if(isDefined(level.var_398d0113) && level.var_398d0113) {
+  if(isdefined(level.var_398d0113) && level.var_398d0113) {
     return false;
   }
   return true;
@@ -57,13 +57,13 @@ function function_2a8862aa() {
   var_3c48f56 = [];
   allai = getaiarray();
   foreach(ai in allai) {
-    if(isDefined(ai.var_5691b7d8) && ai[[ai.var_5691b7d8]]()) {
+    if(isdefined(ai.var_5691b7d8) && ai[[ai.var_5691b7d8]]()) {
       continue;
     }
     if(distance2dsquared(ai.origin, self.origin) >= var_bd6badee) {
       continue;
     }
-    if(isalive(ai) && !ai ispaused() && ai.team == level.zombie_team && ai.archetype === "zombie" && !ai ishidden() && (!(isDefined(ai.var_85934541) && ai.var_85934541))) {
+    if(isalive(ai) && !ai ispaused() && ai.team == level.zombie_team && ai.archetype === "zombie" && !ai ishidden() && (!(isdefined(ai.var_85934541) && ai.var_85934541))) {
       array::add(var_3c48f56, ai);
     }
   }
@@ -98,7 +98,7 @@ function function_1bb7ee0(ai) {
   ai.var_85934541 = 1;
   ai.no_powerups = 1;
   ai.deathpoints_already_given = 1;
-  ai.tesla_head_gib_func = &zombie_head_gib;
+  ai.tesla_head_gib_func = & zombie_head_gib;
   ai lightning_chain::arc_damage(ai, self, 1, level.var_3e825919);
 }
 

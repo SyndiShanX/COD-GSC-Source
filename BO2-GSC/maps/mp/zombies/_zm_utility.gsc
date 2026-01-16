@@ -18,14 +18,14 @@
 #include maps\mp\zombies\_zm_stats;
 #include maps\mp\zombies\_zm_audio;
 
-init_utility() {}
+init_utility() {
+}
 
 is_classic() {
   var = getdvar(#"ui_zm_gamemodegroup");
 
-  if(var == "zclassic") {
+  if(var == "zclassic")
     return true;
-  }
 
   return false;
 }
@@ -33,9 +33,8 @@ is_classic() {
 is_standard() {
   var = getdvar(#"ui_gametype");
 
-  if(var == "zstandard") {
+  if(var == "zstandard")
     return true;
-  }
 
   return false;
 }
@@ -60,36 +59,34 @@ lerp(chunk) {
 }
 
 clear_mature_blood() {
-  blood_patch = getEntArray("mature_blood", "targetname");
+  blood_patch = getentarray("mature_blood", "targetname");
 
   if(is_mature()) {
     return;
   }
   if(isDefined(blood_patch)) {
-    for(i = 0; i < blood_patch.size; i++) {
+    for(i = 0; i < blood_patch.size; i++)
       blood_patch[i] delete();
-    }
   }
 }
 
-recalc_zombie_array() {}
+recalc_zombie_array() {
+}
 
 clear_all_corpses() {
   corpse_array = getcorpsearray();
 
   for(i = 0; i < corpse_array.size; i++) {
-    if(isDefined(corpse_array[i])) {
+    if(isDefined(corpse_array[i]))
       corpse_array[i] delete();
-    }
   }
 }
 
 get_current_corpse_count() {
   corpse_array = getcorpsearray();
 
-  if(isDefined(corpse_array)) {
+  if(isDefined(corpse_array))
     return corpse_array.size;
-  }
 
   return 0;
 }
@@ -98,9 +95,8 @@ get_current_actor_count() {
   count = 0;
   actors = getaispeciesarray(level.zombie_team, "all");
 
-  if(isDefined(actors)) {
+  if(isDefined(actors))
     count = count + actors.size;
-  }
 
   count = count + get_current_corpse_count();
   return count;
@@ -162,11 +158,10 @@ init_zombie_run_cycle() {
 change_zombie_run_cycle() {
   level.speed_change_num++;
 
-  if(level.gamedifficulty == 0) {
+  if(level.gamedifficulty == 0)
     self set_zombie_run_cycle("sprint");
-  } else {
+  else
     self set_zombie_run_cycle("walk");
-  }
 
   self thread speed_change_watcher();
 }
@@ -174,21 +169,19 @@ change_zombie_run_cycle() {
 speed_change_watcher() {
   self waittill("death");
 
-  if(level.speed_change_num > 0) {
+  if(level.speed_change_num > 0)
     level.speed_change_num--;
-  }
 }
 
 set_zombie_run_cycle(new_move_speed) {
   self.zombie_move_speed_original = self.zombie_move_speed;
 
-  if(isDefined(new_move_speed)) {
+  if(isDefined(new_move_speed))
     self.zombie_move_speed = new_move_speed;
-  } else if(level.gamedifficulty == 0) {
+  else if(level.gamedifficulty == 0)
     self set_run_speed_easy();
-  } else {
+  else
     self set_run_speed();
-  }
 
   self maps\mp\animscripts\zm_run::needsupdate();
   self.deathanim = self maps\mp\animscripts\zm_utility::append_missing_legs_suffix("zm_death");
@@ -197,23 +190,21 @@ set_zombie_run_cycle(new_move_speed) {
 set_run_speed() {
   rand = randomintrange(level.zombie_move_speed, level.zombie_move_speed + 35);
 
-  if(rand <= 35) {
+  if(rand <= 35)
     self.zombie_move_speed = "walk";
-  } else if(rand <= 70) {
+  else if(rand <= 70)
     self.zombie_move_speed = "run";
-  } else {
+  else
     self.zombie_move_speed = "sprint";
-  }
 }
 
 set_run_speed_easy() {
   rand = randomintrange(level.zombie_move_speed, level.zombie_move_speed + 25);
 
-  if(rand <= 35) {
+  if(rand <= 35)
     self.zombie_move_speed = "walk";
-  } else {
+  else
     self.zombie_move_speed = "run";
-  }
 }
 
 spawn_zombie(spawner, target_name, spawn_point, round_number) {
@@ -223,24 +214,21 @@ spawn_zombie(spawner, target_name, spawn_point, round_number) {
     return undefined;
   }
 
-  while(getfreeactorcount() < 1) {
+  while(getfreeactorcount() < 1)
     wait 0.05;
-  }
 
   spawner.script_moveoverride = 1;
 
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
     guy = spawner spawnactor();
 
-    if(isDefined(level.giveextrazombies)) {
+    if(isDefined(level.giveextrazombies))
       guy[[level.giveextrazombies]]();
-    }
 
     guy enableaimassist();
 
-    if(isDefined(round_number)) {
+    if(isDefined(round_number))
       guy._starting_round_number = round_number;
-    }
 
     guy.aiteam = level.zombie_team;
     guy clearentityowner();
@@ -253,9 +241,8 @@ spawn_zombie(spawner, target_name, spawn_point, round_number) {
   spawner.count = 666;
 
   if(!spawn_failed(guy)) {
-    if(isDefined(target_name)) {
+    if(isDefined(target_name))
       guy.targetname = target_name;
-    }
 
     return guy;
   }
@@ -295,9 +282,8 @@ create_simple_hud(client, team) {
     hud.team = team;
   } else if(isDefined(client))
     hud = newclienthudelem(client);
-  else {
+  else
     hud = newhudelem();
-  }
 
   level.hudelem_count++;
   hud.foreground = 1;
@@ -315,14 +301,12 @@ all_chunks_intact(barrier, barrier_chunks) {
   if(isDefined(barrier.zbarrier)) {
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("closed");
 
-    if(pieces.size != barrier.zbarrier getnumzbarrierpieces()) {
+    if(pieces.size != barrier.zbarrier getnumzbarrierpieces())
       return false;
-    }
   } else {
     for(i = 0; i < barrier_chunks.size; i++) {
-      if(barrier_chunks[i] get_chunk_state() != "repaired") {
+      if(barrier_chunks[i] get_chunk_state() != "repaired")
         return false;
-      }
     }
   }
 
@@ -333,14 +317,12 @@ no_valid_repairable_boards(barrier, barrier_chunks) {
   if(isDefined(barrier.zbarrier)) {
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("open");
 
-    if(pieces.size) {
+    if(pieces.size)
       return false;
-    }
   } else {
     for(i = 0; i < barrier_chunks.size; i++) {
-      if(barrier_chunks[i] get_chunk_state() == "destroyed") {
+      if(barrier_chunks[i] get_chunk_state() == "destroyed")
         return false;
-      }
     }
   }
 
@@ -350,17 +332,15 @@ no_valid_repairable_boards(barrier, barrier_chunks) {
 is_survival() {
   var = getdvar(#"ui_zm_gamemodegroup");
 
-  if(var == "zsurvival") {
+  if(var == "zsurvival")
     return true;
-  }
 
   return false;
 }
 
 is_encounter() {
-  if(isDefined(level._is_encounter) && level._is_encounter) {
+  if(isDefined(level._is_encounter) && level._is_encounter)
     return true;
-  }
 
   var = getdvar(#"ui_zm_gamemodegroup");
 
@@ -376,16 +356,14 @@ all_chunks_destroyed(barrier, barrier_chunks) {
   if(isDefined(barrier.zbarrier)) {
     pieces = arraycombine(barrier.zbarrier getzbarrierpieceindicesinstate("open"), barrier.zbarrier getzbarrierpieceindicesinstate("opening"), 1, 0);
 
-    if(pieces.size != barrier.zbarrier getnumzbarrierpieces()) {
+    if(pieces.size != barrier.zbarrier getnumzbarrierpieces())
       return false;
-    }
   } else if(isDefined(barrier_chunks)) {
     assert(isDefined(barrier_chunks), "_zm_utility::all_chunks_destroyed - Barrier chunks undefined");
 
     for(i = 0; i < barrier_chunks.size; i++) {
-      if(barrier_chunks[i] get_chunk_state() != "destroyed") {
+      if(barrier_chunks[i] get_chunk_state() != "destroyed")
         return false;
-      }
     }
   }
 
@@ -393,14 +371,13 @@ all_chunks_destroyed(barrier, barrier_chunks) {
 }
 
 check_point_in_playable_area(origin) {
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   check_model = spawn("script_model", origin + vectorscale((0, 0, 1), 40.0));
   valid_point = 0;
 
   for(i = 0; i < playable_area.size; i++) {
-    if(check_model istouching(playable_area[i])) {
+    if(check_model istouching(playable_area[i]))
       valid_point = 1;
-    }
   }
 
   check_model delete();
@@ -408,13 +385,11 @@ check_point_in_playable_area(origin) {
 }
 
 check_point_in_enabled_zone(origin, zone_is_active, player_zones) {
-  if(!isDefined(player_zones)) {
-    player_zones = getEntArray("player_volume", "script_noteworthy");
-  }
+  if(!isDefined(player_zones))
+    player_zones = getentarray("player_volume", "script_noteworthy");
 
-  if(!isDefined(level.zones) || !isDefined(player_zones)) {
+  if(!isDefined(level.zones) || !isDefined(player_zones))
     return 1;
-  }
 
   scr_org = spawn("script_origin", origin + vectorscale((0, 0, 1), 40.0));
   one_valid_zone = 0;
@@ -440,9 +415,8 @@ check_point_in_enabled_zone(origin, zone_is_active, player_zones) {
 round_up_to_ten(score) {
   new_score = score - score % 10;
 
-  if(new_score < score) {
+  if(new_score < score)
     new_score = new_score + 10;
-  }
 
   return new_score;
 }
@@ -451,9 +425,8 @@ round_up_score(score, value) {
   score = int(score);
   new_score = score - score % value;
 
-  if(new_score < score) {
+  if(new_score < score)
     new_score = new_score + value;
-  }
 
   return new_score;
 }
@@ -461,11 +434,10 @@ round_up_score(score, value) {
 random_tan() {
   rand = randomint(100);
 
-  if(isDefined(level.char_percent_override)) {
+  if(isDefined(level.char_percent_override))
     percentnotcharred = level.char_percent_override;
-  } else {
+  else
     percentnotcharred = 65;
-  }
 }
 
 places_before_decimal(num) {
@@ -476,31 +448,27 @@ places_before_decimal(num) {
     abs_num = abs_num * 0.1;
     count = count + 1;
 
-    if(abs_num < 1) {
+    if(abs_num < 1)
       return count;
-    }
   }
 }
 
 create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, start_turned_on, initial_attract_func, arrival_attract_func, poi_team) {
-  if(!isDefined(added_poi_value)) {
+  if(!isDefined(added_poi_value))
     self.added_poi_value = 0;
-  } else {
+  else
     self.added_poi_value = added_poi_value;
-  }
 
-  if(!isDefined(start_turned_on)) {
+  if(!isDefined(start_turned_on))
     start_turned_on = 1;
-  }
 
   self.script_noteworthy = "zombie_poi";
   self.poi_active = start_turned_on;
 
-  if(isDefined(attract_dist)) {
+  if(isDefined(attract_dist))
     self.poi_radius = attract_dist * attract_dist;
-  } else {
+  else
     self.poi_radius = undefined;
-  }
 
   self.num_poi_attracts = num_attractors;
   self.attract_to_origin = 1;
@@ -508,17 +476,14 @@ create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, s
   self.initial_attract_func = undefined;
   self.arrival_attract_func = undefined;
 
-  if(isDefined(poi_team)) {
+  if(isDefined(poi_team))
     self._team = poi_team;
-  }
 
-  if(isDefined(initial_attract_func)) {
+  if(isDefined(initial_attract_func))
     self.initial_attract_func = initial_attract_func;
-  }
 
-  if(isDefined(arrival_attract_func)) {
+  if(isDefined(arrival_attract_func))
     self.arrival_attract_func = arrival_attract_func;
-  }
 }
 
 create_zombie_point_of_interest_attractor_positions(num_attract_dists, diff_per_dist, attractor_width) {
@@ -528,37 +493,31 @@ create_zombie_point_of_interest_attractor_positions(num_attract_dists, diff_per_
   if(!isDefined(self.num_poi_attracts) || isDefined(self.script_noteworthy) && self.script_noteworthy != "zombie_poi") {
     return;
   }
-  if(!isDefined(num_attract_dists)) {
+  if(!isDefined(num_attract_dists))
     num_attract_dists = 4;
-  }
 
-  if(!isDefined(diff_per_dist)) {
+  if(!isDefined(diff_per_dist))
     diff_per_dist = 45;
-  }
 
-  if(!isDefined(attractor_width)) {
+  if(!isDefined(attractor_width))
     attractor_width = 45;
-  }
 
   self.attract_to_origin = 0;
   self.num_attract_dists = num_attract_dists;
   self.last_index = [];
 
-  for(i = 0; i < num_attract_dists; i++) {
+  for(i = 0; i < num_attract_dists; i++)
     self.last_index[i] = -1;
-  }
 
   self.attract_dists = [];
 
-  for(i = 0; i < self.num_attract_dists; i++) {
+  for(i = 0; i < self.num_attract_dists; i++)
     self.attract_dists[i] = diff_per_dist * (i + 1);
-  }
 
   max_positions = [];
 
-  for(i = 0; i < self.num_attract_dists; i++) {
+  for(i = 0; i < self.num_attract_dists; i++)
     max_positions[i] = int(6.28 * self.attract_dists[i] / attractor_width);
-  }
 
   num_attracts_per_dist = self.num_poi_attracts / self.num_attract_dists;
   self.max_attractor_dist = self.attract_dists[self.attract_dists.size - 1] * 1.1;
@@ -610,15 +569,14 @@ generated_radius_attract_positions(forward, offset, num_positions, attract_radiu
     altforward = forward * attract_radius;
     rotated_forward = (cos(i) * altforward[0] - sin(i) * altforward[1], sin(i) * altforward[0] + cos(i) * altforward[1], altforward[2]);
 
-    if(isDefined(level.poi_positioning_func)) {
+    if(isDefined(level.poi_positioning_func))
       pos = [
-        }
-        [level.poi_positioning_func]](self.origin, rotated_forward);
-    else if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
+        [level.poi_positioning_func]
+      ](self.origin, rotated_forward);
+    else if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning)
       pos = maps\mp\zombies\_zm_server_throttle::server_safe_ground_trace("poi_trace", 10, self.origin + rotated_forward + vectorscale((0, 0, 1), 10.0));
-    } else {
+    else
       pos = maps\mp\zombies\_zm_server_throttle::server_safe_ground_trace("poi_trace", 10, self.origin + rotated_forward + vectorscale((0, 0, 1), 100.0));
-    }
 
     if(!isDefined(pos)) {
       failed++;
@@ -660,31 +618,27 @@ debug_draw_attractor_positions() {
       continue;
     }
 
-    for(i = 0; i < self.attractor_positions.size; i++) {
+    for(i = 0; i < self.attractor_positions.size; i++)
       line(self.origin, self.attractor_positions[i][0], (1, 0, 0), 1, 1);
-    }
 
     wait 0.05;
 
-    if(!isDefined(self)) {
+    if(!isDefined(self))
       return;
-    }
   }
 
 }
 
 get_zombie_point_of_interest(origin, poi_array) {
-  if(isDefined(self.ignore_all_poi) && self.ignore_all_poi) {
+  if(isDefined(self.ignore_all_poi) && self.ignore_all_poi)
     return undefined;
-  }
 
   curr_radius = undefined;
 
-  if(isDefined(poi_array)) {
+  if(isDefined(poi_array))
     ent_array = poi_array;
-  } else {
-    ent_array = getEntArray("zombie_poi", "script_noteworthy");
-  }
+  else
+    ent_array = getentarray("zombie_poi", "script_noteworthy");
 
   best_poi = undefined;
   position = undefined;
@@ -705,9 +659,8 @@ get_zombie_point_of_interest(origin, poi_array) {
           }
         }
 
-        if(ignore) {
+        if(ignore)
           continue;
-        }
       }
     }
 
@@ -721,17 +674,15 @@ get_zombie_point_of_interest(origin, poi_array) {
         }
       }
 
-      if(ignore) {
+      if(ignore)
         continue;
-      }
     }
 
     dist = distancesquared(origin, ent_array[i].origin);
     dist = dist - ent_array[i].added_poi_value;
 
-    if(isDefined(ent_array[i].poi_radius)) {
+    if(isDefined(ent_array[i].poi_radius))
       curr_radius = ent_array[i].poi_radius;
-    }
 
     if((!isDefined(curr_radius) || dist < curr_radius) && dist < best_dist && ent_array[i] can_attract(self)) {
       best_poi = ent_array[i];
@@ -741,9 +692,8 @@ get_zombie_point_of_interest(origin, poi_array) {
 
   if(isDefined(best_poi)) {
     if(isDefined(best_poi._team)) {
-      if(isDefined(self._race_team) && self._race_team != best_poi._team) {
+      if(isDefined(self._race_team) && self._race_team != best_poi._team)
         return undefined;
-      }
     }
 
     if(isDefined(best_poi._new_ground_trace) && best_poi._new_ground_trace) {
@@ -757,13 +707,11 @@ get_zombie_point_of_interest(origin, poi_array) {
     } else
       position = self add_poi_attractor(best_poi);
 
-    if(isDefined(best_poi.initial_attract_func)) {
+    if(isDefined(best_poi.initial_attract_func))
       self thread[[best_poi.initial_attract_func]](best_poi);
-    }
 
-    if(isDefined(best_poi.arrival_attract_func)) {
+    if(isDefined(best_poi.arrival_attract_func))
       self thread[[best_poi.arrival_attract_func]](best_poi);
-    }
   }
 
   return position;
@@ -780,9 +728,8 @@ deactivate_zombie_point_of_interest() {
   if(self.script_noteworthy != "zombie_poi") {
     return;
   }
-  for(i = 0; i < self.attractor_array.size; i++) {
+  for(i = 0; i < self.attractor_array.size; i++)
     self.attractor_array[i] notify("kill_poi");
-  }
 
   self.attractor_array = [];
   self.claimed_attractor_positions = [];
@@ -794,15 +741,13 @@ assign_zombie_point_of_interest(origin, poi) {
   doremovalthread = 0;
 
   if(isDefined(poi) && poi can_attract(self)) {
-    if(!isDefined(poi.attractor_array) || isDefined(poi.attractor_array) && array_check_for_dupes(poi.attractor_array, self)) {
+    if(!isDefined(poi.attractor_array) || isDefined(poi.attractor_array) && array_check_for_dupes(poi.attractor_array, self))
       doremovalthread = 1;
-    }
 
     position = self add_poi_attractor(poi);
 
-    if(isDefined(position) && doremovalthread && !array_check_for_dupes(poi.attractor_array, self)) {
+    if(isDefined(position) && doremovalthread && !array_check_for_dupes(poi.attractor_array, self))
       self thread update_on_poi_removal(poi);
-    }
   }
 
   return position;
@@ -840,18 +785,15 @@ add_poi_attractor(zombie_poi) {
   if(!isDefined(zombie_poi)) {
     return;
   }
-  if(!isDefined(zombie_poi.attractor_array)) {
+  if(!isDefined(zombie_poi.attractor_array))
     zombie_poi.attractor_array = [];
-  }
 
   if(array_check_for_dupes(zombie_poi.attractor_array, self)) {
-    if(!isDefined(zombie_poi.claimed_attractor_positions)) {
+    if(!isDefined(zombie_poi.claimed_attractor_positions))
       zombie_poi.claimed_attractor_positions = [];
-    }
 
-    if(!isDefined(zombie_poi.attractor_positions) || zombie_poi.attractor_positions.size <= 0) {
+    if(!isDefined(zombie_poi.attractor_positions) || zombie_poi.attractor_positions.size <= 0)
       return undefined;
-    }
 
     start = -1;
     end = -1;
@@ -870,13 +812,11 @@ add_poi_attractor(zombie_poi) {
     best_dist = 100000000;
     best_pos = undefined;
 
-    if(start < 0) {
+    if(start < 0)
       start = 0;
-    }
 
-    if(end < 0) {
+    if(end < 0)
       return undefined;
-    }
 
     for(i = int(start); i <= int(end); i++) {
       if(!isDefined(zombie_poi.attractor_positions[i])) {
@@ -894,9 +834,8 @@ add_poi_attractor(zombie_poi) {
       }
     }
 
-    if(!isDefined(best_pos)) {
+    if(!isDefined(best_pos))
       return undefined;
-    }
 
     zombie_poi.attractor_array[zombie_poi.attractor_array.size] = self;
     self thread update_poi_on_death(zombie_poi);
@@ -905,9 +844,8 @@ add_poi_attractor(zombie_poi) {
   } else {
     for(i = 0; i < zombie_poi.attractor_array.size; i++) {
       if(zombie_poi.attractor_array[i] == self) {
-        if(isDefined(zombie_poi.claimed_attractor_positions) && isDefined(zombie_poi.claimed_attractor_positions[i])) {
+        if(isDefined(zombie_poi.claimed_attractor_positions) && isDefined(zombie_poi.claimed_attractor_positions[i]))
           return zombie_poi.claimed_attractor_positions[i];
-        }
       }
     }
   }
@@ -916,21 +854,17 @@ add_poi_attractor(zombie_poi) {
 }
 
 can_attract(attractor) {
-  if(!isDefined(self.attractor_array)) {
+  if(!isDefined(self.attractor_array))
     self.attractor_array = [];
-  }
 
-  if(isDefined(self.attracted_array) && !isinarray(self.attracted_array, attractor)) {
+  if(isDefined(self.attracted_array) && !isinarray(self.attracted_array, attractor))
     return false;
-  }
 
-  if(!array_check_for_dupes(self.attractor_array, attractor)) {
+  if(!array_check_for_dupes(self.attractor_array, attractor))
     return true;
-  }
 
-  if(isDefined(self.num_poi_attracts) && self.attractor_array.size >= self.num_poi_attracts) {
+  if(isDefined(self.num_poi_attracts) && self.attractor_array.size >= self.num_poi_attracts)
     return false;
-  }
 
   return true;
 }
@@ -965,24 +899,21 @@ invalidate_attractor_pos(attractor_pos, zombie) {
     index = 0;
 
     for(i = 0; i < self.attractor_positions.size; i++) {
-      if(poi_locations_equal(self.attractor_positions[i], attractor_pos)) {
+      if(poi_locations_equal(self.attractor_positions[i], attractor_pos))
         index = i;
-      }
     }
 
     for(i = 0; i < self.last_index.size; i++) {
-      if(index <= self.last_index[i]) {
+      if(index <= self.last_index[i])
         self.last_index[i]--;
-      }
     }
 
     arrayremovevalue(self.attractor_array, zombie);
     arrayremovevalue(self.attractor_positions, attractor_pos);
 
     for(i = 0; i < self.claimed_attractor_positions.size; i++) {
-      if(self.claimed_attractor_positions[i][0] == attractor_pos[0]) {
+      if(self.claimed_attractor_positions[i][0] == attractor_pos[0])
         arrayremovevalue(self.claimed_attractor_positions, self.claimed_attractor_positions[i]);
-      }
     }
   } else
     wait 0.1;
@@ -1002,9 +933,8 @@ remove_poi_from_ignore_list(poi) {
 }
 
 add_poi_to_ignore_list(poi) {
-  if(!isDefined(self.ignore_poi)) {
+  if(!isDefined(self.ignore_poi))
     self.ignore_poi = [];
-  }
 
   add_poi = 1;
 
@@ -1017,18 +947,16 @@ add_poi_to_ignore_list(poi) {
     }
   }
 
-  if(add_poi) {
+  if(add_poi)
     self.ignore_poi[self.ignore_poi.size] = poi;
-  }
 }
 
 default_validate_enemy_path_length(player) {
   max_dist = 1296;
   d = distancesquared(self.origin, player.origin);
 
-  if(d <= max_dist) {
+  if(d <= max_dist)
     return true;
-  }
 
   return false;
 }
@@ -1051,9 +979,8 @@ get_closest_player_using_paths(origin, players) {
       if(length_to_player == 0) {
         valid = self thread[[level.validate_enemy_path_length]](player);
 
-        if(!valid) {
+        if(!valid)
           continue;
-        }
       }
     }
 
@@ -1082,14 +1009,12 @@ get_closest_valid_player(origin, ignore_player) {
   valid_player_found = 0;
   players = get_players();
 
-  if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun) {
+  if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun)
     players = arraycombine(players, level._zombie_human_array, 0, 0);
-  }
 
   if(isDefined(ignore_player)) {
-    for(i = 0; i < ignore_player.size; i++) {
+    for(i = 0; i < ignore_player.size; i++)
       arrayremovevalue(players, ignore_player[i]);
-    }
   }
 
   done = 0;
@@ -1108,39 +1033,34 @@ get_closest_valid_player(origin, ignore_player) {
     }
   }
 
-  if(players.size == 0) {
+  if(players.size == 0)
     return undefined;
-  }
 
   while(!valid_player_found) {
-    if(isDefined(self.closest_player_override)) {
+    if(isDefined(self.closest_player_override))
       player = [
-        }
-        [self.closest_player_override]](origin, players);
-    else if(isDefined(level.closest_player_override)) {
+        [self.closest_player_override]
+      ](origin, players);
+    else if(isDefined(level.closest_player_override))
       player = [
-        }
-        [level.closest_player_override]](origin, players);
-    else if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths) {
+        [level.closest_player_override]
+      ](origin, players);
+    else if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)
       player = get_closest_player_using_paths(origin, players);
-    } else {
+    else
       player = getclosest(origin, players);
-    }
 
-    if(!isDefined(player) || players.size == 0) {
+    if(!isDefined(player) || players.size == 0)
       return undefined;
-    }
 
-    if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun && isai(player)) {
+    if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun && isai(player))
       return player;
-    }
 
     if(!is_player_valid(player, 1)) {
       arrayremovevalue(players, player);
 
-      if(players.size == 0) {
+      if(players.size == 0)
         return undefined;
-      }
 
       continue;
     }
@@ -1150,47 +1070,39 @@ get_closest_valid_player(origin, ignore_player) {
 }
 
 is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return 0;
-  }
 
-  if(!isalive(player)) {
+  if(!isalive(player))
     return 0;
-  }
 
-  if(!isplayer(player)) {
+  if(!isplayer(player))
     return 0;
-  }
 
-  if(isDefined(player.is_zombie) && player.is_zombie == 1) {
+  if(isDefined(player.is_zombie) && player.is_zombie == 1)
     return 0;
-  }
 
-  if(player.sessionstate == "spectator") {
+  if(player.sessionstate == "spectator")
     return 0;
-  }
 
-  if(player.sessionstate == "intermission") {
+  if(player.sessionstate == "intermission")
     return 0;
-  }
 
-  if(isDefined(self.intermission) && self.intermission) {
+  if(isDefined(self.intermission) && self.intermission)
     return 0;
-  }
 
   if(!(isDefined(ignore_laststand_players) && ignore_laststand_players)) {
-    if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
+    if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand())
       return 0;
-    }
   }
 
-  if(isDefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
+  if(isDefined(checkignoremeflag) && checkignoremeflag && player.ignoreme)
     return 0;
-  }
 
-  if(isDefined(level.is_player_valid_override)) {
-    return [[level.is_player_valid_override]](player);
-  }
+  if(isDefined(level.is_player_valid_override))
+    return [
+      [level.is_player_valid_override]
+    ](player);
 
   return 1;
 }
@@ -1200,18 +1112,16 @@ get_number_of_valid_players() {
   num_player_valid = 0;
 
   for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i])) {
+    if(is_player_valid(players[i]))
       num_player_valid = num_player_valid + 1;
-    }
   }
 
   return num_player_valid;
 }
 
 in_revive_trigger() {
-  if(isDefined(self.rt_time) && self.rt_time + 100 >= gettime()) {
+  if(isDefined(self.rt_time) && self.rt_time + 100 >= gettime())
     return self.in_rt_cached;
-  }
 
   self.rt_time = gettime();
   players = level.players;
@@ -1242,15 +1152,13 @@ non_destroyed_bar_board_order(origin, chunks) {
 
   for(i = 0; i < chunks.size; i++) {
     if(isDefined(chunks[i].script_team) && chunks[i].script_team == "classic_boards") {
-      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "board") {
+      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "board")
         return get_closest_2d(origin, chunks);
-      } else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" || chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5") {
+      else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" || chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5")
         return undefined;
-      }
     } else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "new_barricade") {
-      if(isDefined(chunks[i].script_parameters) && (chunks[i].script_parameters == "repair_board" || chunks[i].script_parameters == "barricade_vents")) {
+      if(isDefined(chunks[i].script_parameters) && (chunks[i].script_parameters == "repair_board" || chunks[i].script_parameters == "barricade_vents"))
         return get_closest_2d(origin, chunks);
-      }
     }
   }
 
@@ -1258,9 +1166,8 @@ non_destroyed_bar_board_order(origin, chunks) {
     if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
       if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
         if(isDefined(chunks[i].script_noteworthy)) {
-          if(chunks[i].script_noteworthy == "4" || chunks[i].script_noteworthy == "6") {
+          if(chunks[i].script_noteworthy == "4" || chunks[i].script_noteworthy == "6")
             first_bars[first_bars.size] = chunks[i];
-          }
         }
       }
     }
@@ -1269,9 +1176,8 @@ non_destroyed_bar_board_order(origin, chunks) {
   for(i = 0; i < first_bars.size; i++) {
     if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
       if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
-        if(!first_bars[i].destroyed) {
+        if(!first_bars[i].destroyed)
           return first_bars[i];
-        }
       }
     }
   }
@@ -1279,9 +1185,8 @@ non_destroyed_bar_board_order(origin, chunks) {
   for(i = 0; i < chunks.size; i++) {
     if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
       if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
-        if(!chunks[i].destroyed) {
+        if(!chunks[i].destroyed)
           return get_closest_2d(origin, chunks);
-        }
       }
     }
   }
@@ -1299,29 +1204,23 @@ non_destroyed_grate_order(origin, chunks_grate) {
   if(isDefined(chunks_grate)) {
     for(i = 0; i < chunks_grate.size; i++) {
       if(isDefined(chunks_grate[i].script_parameters) && chunks_grate[i].script_parameters == "grate") {
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "1") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "1")
           grate_order1[grate_order1.size] = chunks_grate[i];
-        }
 
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "2") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "2")
           grate_order2[grate_order2.size] = chunks_grate[i];
-        }
 
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "3") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "3")
           grate_order3[grate_order3.size] = chunks_grate[i];
-        }
 
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "4") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "4")
           grate_order4[grate_order4.size] = chunks_grate[i];
-        }
 
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "5") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "5")
           grate_order5[grate_order5.size] = chunks_grate[i];
-        }
 
-        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "6") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "6")
           grate_order6[grate_order6.size] = chunks_grate[i];
-        }
       }
     }
 
@@ -1374,29 +1273,23 @@ non_destroyed_variant1_order(origin, chunks_variant1) {
     for(i = 0; i < chunks_variant1.size; i++) {
       if(isDefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
         if(isDefined(chunks_variant1[i].script_noteworthy)) {
-          if(chunks_variant1[i].script_noteworthy == "1") {
+          if(chunks_variant1[i].script_noteworthy == "1")
             variant1_order1[variant1_order1.size] = chunks_variant1[i];
-          }
 
-          if(chunks_variant1[i].script_noteworthy == "2") {
+          if(chunks_variant1[i].script_noteworthy == "2")
             variant1_order2[variant1_order2.size] = chunks_variant1[i];
-          }
 
-          if(chunks_variant1[i].script_noteworthy == "3") {
+          if(chunks_variant1[i].script_noteworthy == "3")
             variant1_order3[variant1_order3.size] = chunks_variant1[i];
-          }
 
-          if(chunks_variant1[i].script_noteworthy == "4") {
+          if(chunks_variant1[i].script_noteworthy == "4")
             variant1_order4[variant1_order4.size] = chunks_variant1[i];
-          }
 
-          if(chunks_variant1[i].script_noteworthy == "5") {
+          if(chunks_variant1[i].script_noteworthy == "5")
             variant1_order5[variant1_order5.size] = chunks_variant1[i];
-          }
 
-          if(chunks_variant1[i].script_noteworthy == "6") {
+          if(chunks_variant1[i].script_noteworthy == "6")
             variant1_order6[variant1_order6.size] = chunks_variant1[i];
-          }
         }
       }
     }
@@ -1404,19 +1297,18 @@ non_destroyed_variant1_order(origin, chunks_variant1) {
     for(i = 0; i < chunks_variant1.size; i++) {
       if(isDefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
         if(isDefined(variant1_order2[i])) {
-          if(variant1_order2[i].state == "repaired") {
+          if(variant1_order2[i].state == "repaired")
             return variant1_order2[i];
-          } else if(variant1_order3[i].state == "repaired") {
+          else if(variant1_order3[i].state == "repaired")
             return variant1_order3[i];
-          } else if(variant1_order4[i].state == "repaired") {
+          else if(variant1_order4[i].state == "repaired")
             return variant1_order4[i];
-          } else if(variant1_order6[i].state == "repaired") {
+          else if(variant1_order6[i].state == "repaired")
             return variant1_order6[i];
-          } else if(variant1_order5[i].state == "repaired") {
+          else if(variant1_order5[i].state == "repaired")
             return variant1_order5[i];
-          } else if(variant1_order1[i].state == "repaired") {
+          else if(variant1_order1[i].state == "repaired")
             return variant1_order1[i];
-          }
         }
       }
     }
@@ -1435,48 +1327,41 @@ non_destroyed_variant2_order(origin, chunks_variant2) {
   if(isDefined(chunks_variant2)) {
     for(i = 0; i < chunks_variant2.size; i++) {
       if(isDefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "1") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "1")
           variant2_order1[variant2_order1.size] = chunks_variant2[i];
-        }
 
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "2") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "2")
           variant2_order2[variant2_order2.size] = chunks_variant2[i];
-        }
 
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "3") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "3")
           variant2_order3[variant2_order3.size] = chunks_variant2[i];
-        }
 
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "4") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "4")
           variant2_order4[variant2_order4.size] = chunks_variant2[i];
-        }
 
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "5") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "5")
           variant2_order5[variant2_order5.size] = chunks_variant2[i];
-        }
 
-        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "6") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "6")
           variant2_order6[variant2_order6.size] = chunks_variant2[i];
-        }
       }
     }
 
     for(i = 0; i < chunks_variant2.size; i++) {
       if(isDefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
         if(isDefined(variant2_order1[i])) {
-          if(variant2_order1[i].state == "repaired") {
+          if(variant2_order1[i].state == "repaired")
             return variant2_order1[i];
-          } else if(variant2_order2[i].state == "repaired") {
+          else if(variant2_order2[i].state == "repaired")
             return variant2_order2[i];
-          } else if(variant2_order3[i].state == "repaired") {
+          else if(variant2_order3[i].state == "repaired")
             return variant2_order3[i];
-          } else if(variant2_order5[i].state == "repaired") {
+          else if(variant2_order5[i].state == "repaired")
             return variant2_order5[i];
-          } else if(variant2_order4[i].state == "repaired") {
+          else if(variant2_order4[i].state == "repaired")
             return variant2_order4[i];
-          } else if(variant2_order6[i].state == "repaired") {
+          else if(variant2_order6[i].state == "repaired")
             return variant2_order6[i];
-          }
         }
       }
     }
@@ -1495,48 +1380,41 @@ non_destroyed_variant4_order(origin, chunks_variant4) {
   if(isDefined(chunks_variant4)) {
     for(i = 0; i < chunks_variant4.size; i++) {
       if(isDefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && !isDefined(chunks_variant4[i].script_location)) {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && !isDefined(chunks_variant4[i].script_location))
           variant4_order1[variant4_order1.size] = chunks_variant4[i];
-        }
 
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "2") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "2")
           variant4_order2[variant4_order2.size] = chunks_variant4[i];
-        }
 
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "3") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "3")
           variant4_order3[variant4_order3.size] = chunks_variant4[i];
-        }
 
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && isDefined(chunks_variant4[i].script_location) && chunks_variant4[i].script_location == "3") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && isDefined(chunks_variant4[i].script_location) && chunks_variant4[i].script_location == "3")
           variant4_order4[variant4_order4.size] = chunks_variant4[i];
-        }
 
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "5") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "5")
           variant4_order5[variant4_order5.size] = chunks_variant4[i];
-        }
 
-        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "6") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "6")
           variant4_order6[variant4_order6.size] = chunks_variant4[i];
-        }
       }
     }
 
     for(i = 0; i < chunks_variant4.size; i++) {
       if(isDefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
         if(isDefined(variant4_order1[i])) {
-          if(variant4_order1[i].state == "repaired") {
+          if(variant4_order1[i].state == "repaired")
             return variant4_order1[i];
-          } else if(variant4_order6[i].state == "repaired") {
+          else if(variant4_order6[i].state == "repaired")
             return variant4_order6[i];
-          } else if(variant4_order3[i].state == "repaired") {
+          else if(variant4_order3[i].state == "repaired")
             return variant4_order3[i];
-          } else if(variant4_order4[i].state == "repaired") {
+          else if(variant4_order4[i].state == "repaired")
             return variant4_order4[i];
-          } else if(variant4_order2[i].state == "repaired") {
+          else if(variant4_order2[i].state == "repaired")
             return variant4_order2[i];
-          } else if(variant4_order5[i].state == "repaired") {
+          else if(variant4_order5[i].state == "repaired")
             return variant4_order5[i];
-          }
         }
       }
     }
@@ -1556,29 +1434,23 @@ non_destroyed_variant5_order(origin, chunks_variant5) {
     for(i = 0; i < chunks_variant5.size; i++) {
       if(isDefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
         if(isDefined(chunks_variant5[i].script_noteworthy)) {
-          if(chunks_variant5[i].script_noteworthy == "1" && !isDefined(chunks_variant5[i].script_location)) {
+          if(chunks_variant5[i].script_noteworthy == "1" && !isDefined(chunks_variant5[i].script_location))
             variant5_order1[variant5_order1.size] = chunks_variant5[i];
-          }
 
-          if(chunks_variant5[i].script_noteworthy == "2") {
+          if(chunks_variant5[i].script_noteworthy == "2")
             variant5_order2[variant5_order2.size] = chunks_variant5[i];
-          }
 
-          if(isDefined(chunks_variant5[i].script_noteworthy) && chunks_variant5[i].script_noteworthy == "1" && isDefined(chunks_variant5[i].script_location) && chunks_variant5[i].script_location == "3") {
+          if(isDefined(chunks_variant5[i].script_noteworthy) && chunks_variant5[i].script_noteworthy == "1" && isDefined(chunks_variant5[i].script_location) && chunks_variant5[i].script_location == "3")
             variant5_order3[variant5_order3.size] = chunks_variant5[i];
-          }
 
-          if(chunks_variant5[i].script_noteworthy == "4") {
+          if(chunks_variant5[i].script_noteworthy == "4")
             variant5_order4[variant5_order4.size] = chunks_variant5[i];
-          }
 
-          if(chunks_variant5[i].script_noteworthy == "5") {
+          if(chunks_variant5[i].script_noteworthy == "5")
             variant5_order5[variant5_order5.size] = chunks_variant5[i];
-          }
 
-          if(chunks_variant5[i].script_noteworthy == "6") {
+          if(chunks_variant5[i].script_noteworthy == "6")
             variant5_order6[variant5_order6.size] = chunks_variant5[i];
-          }
         }
       }
     }
@@ -1586,19 +1458,18 @@ non_destroyed_variant5_order(origin, chunks_variant5) {
     for(i = 0; i < chunks_variant5.size; i++) {
       if(isDefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
         if(isDefined(variant5_order1[i])) {
-          if(variant5_order1[i].state == "repaired") {
+          if(variant5_order1[i].state == "repaired")
             return variant5_order1[i];
-          } else if(variant5_order6[i].state == "repaired") {
+          else if(variant5_order6[i].state == "repaired")
             return variant5_order6[i];
-          } else if(variant5_order3[i].state == "repaired") {
+          else if(variant5_order3[i].state == "repaired")
             return variant5_order3[i];
-          } else if(variant5_order2[i].state == "repaired") {
+          else if(variant5_order2[i].state == "repaired")
             return variant5_order2[i];
-          } else if(variant5_order5[i].state == "repaired") {
+          else if(variant5_order5[i].state == "repaired")
             return variant5_order5[i];
-          } else if(variant5_order4[i].state == "repaired") {
+          else if(variant5_order4[i].state == "repaired")
             return variant5_order4[i];
-          }
         }
       }
     }
@@ -1612,9 +1483,8 @@ show_grate_pull() {
 }
 
 get_closest_2d(origin, ents) {
-  if(!isDefined(ents)) {
+  if(!isDefined(ents))
     return undefined;
-  }
 
   dist = distance2d(origin, ents[0].origin);
   index = 0;
@@ -1660,7 +1530,7 @@ enable_trigger() {
 }
 
 in_playable_area() {
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
 
   if(!isDefined(playable_area)) {
     println("No playable area playable_area found! Assume EVERYWHERE is PLAYABLE");
@@ -1669,9 +1539,8 @@ in_playable_area() {
   }
 
   for(i = 0; i < playable_area.size; i++) {
-    if(self istouching(playable_area[i])) {
+    if(self istouching(playable_area[i]))
       return true;
-    }
   }
 
   return false;
@@ -1684,18 +1553,15 @@ get_closest_non_destroyed_chunk(origin, barrier, barrier_chunks) {
   chunks = get_non_destroyed_chunks(barrier, barrier_chunks);
 
   if(isDefined(barrier.zbarrier)) {
-    if(isDefined(chunks)) {
+    if(isDefined(chunks))
       return array_randomize(chunks)[0];
-    }
 
-    if(isDefined(chunks_grate)) {
+    if(isDefined(chunks_grate))
       return array_randomize(chunks_grate)[0];
-    }
   } else if(isDefined(chunks))
     return non_destroyed_bar_board_order(origin, chunks);
-  else if(isDefined(chunks_grate)) {
+  else if(isDefined(chunks_grate))
     return non_destroyed_grate_order(origin, chunks_grate);
-  }
 
   return undefined;
 }
@@ -1705,9 +1571,8 @@ get_random_destroyed_chunk(barrier, barrier_chunks) {
     ret = undefined;
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("open");
 
-    if(pieces.size) {
+    if(pieces.size)
       ret = array_randomize(pieces)[0];
-    }
 
     return ret;
   } else {
@@ -1716,11 +1581,10 @@ get_random_destroyed_chunk(barrier, barrier_chunks) {
     chunks = get_destroyed_chunks(barrier_chunks);
     chunks_repair_grate = get_destroyed_repair_grates(barrier_chunks);
 
-    if(isDefined(chunks)) {
+    if(isDefined(chunks))
       return chunks[randomint(chunks.size)];
-    } else if(isDefined(chunks_repair_grate)) {
+    else if(isDefined(chunks_repair_grate))
       return grate_order_destroyed(chunks_repair_grate);
-    }
 
     return undefined;
   }
@@ -1731,32 +1595,29 @@ get_destroyed_repair_grates(barrier_chunks) {
 
   for(i = 0; i < barrier_chunks.size; i++) {
     if(isDefined(barrier_chunks[i])) {
-      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate")
         array[array.size] = barrier_chunks[i];
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
 
 get_non_destroyed_chunks(barrier, barrier_chunks) {
-  if(isDefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier))
     return barrier.zbarrier getzbarrierpieceindicesinstate("closed");
-  } else {
+  else {
     array = [];
 
     for(i = 0; i < barrier_chunks.size; i++) {
       if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "classic_boards") {
         if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "board") {
           if(barrier_chunks[i] get_chunk_state() == "repaired") {
-            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
+            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin)
               array[array.size] = barrier_chunks[i];
-            }
           }
         }
       }
@@ -1764,9 +1625,8 @@ get_non_destroyed_chunks(barrier, barrier_chunks) {
       if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "new_barricade") {
         if(isDefined(barrier_chunks[i].script_parameters) && (barrier_chunks[i].script_parameters == "repair_board" || barrier_chunks[i].script_parameters == "barricade_vents")) {
           if(barrier_chunks[i] get_chunk_state() == "repaired") {
-            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
+            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin)
               array[array.size] = barrier_chunks[i];
-            }
           }
         }
 
@@ -1776,9 +1636,8 @@ get_non_destroyed_chunks(barrier, barrier_chunks) {
       if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_bent") {
         if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
           if(barrier_chunks[i] get_chunk_state() == "repaired") {
-            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
+            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin)
               array[array.size] = barrier_chunks[i];
-            }
           }
         }
 
@@ -1788,39 +1647,35 @@ get_non_destroyed_chunks(barrier, barrier_chunks) {
       if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_prestine") {
         if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
           if(barrier_chunks[i] get_chunk_state() == "repaired") {
-            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
+            if(barrier_chunks[i].origin == barrier_chunks[i].og_origin)
               array[array.size] = barrier_chunks[i];
-            }
           }
         }
       }
     }
 
-    if(array.size == 0) {
+    if(array.size == 0)
       return undefined;
-    }
 
     return array;
   }
 }
 
 get_non_destroyed_chunks_grate(barrier, barrier_chunks) {
-  if(isDefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier))
     return barrier.zbarrier getzbarrierpieceindicesinstate("closed");
-  } else {
+  else {
     array = [];
 
     for(i = 0; i < barrier_chunks.size; i++) {
       if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
-        if(isDefined(barrier_chunks[i])) {
+        if(isDefined(barrier_chunks[i]))
           array[array.size] = barrier_chunks[i];
-        }
       }
     }
 
-    if(array.size == 0) {
+    if(array.size == 0)
       return undefined;
-    }
 
     return array;
   }
@@ -1831,15 +1686,13 @@ get_non_destroyed_variant1(barrier_chunks) {
 
   for(i = 0; i < barrier_chunks.size; i++) {
     if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant1") {
-      if(isDefined(barrier_chunks[i])) {
+      if(isDefined(barrier_chunks[i]))
         array[array.size] = barrier_chunks[i];
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
@@ -1849,15 +1702,13 @@ get_non_destroyed_variant2(barrier_chunks) {
 
   for(i = 0; i < barrier_chunks.size; i++) {
     if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant2") {
-      if(isDefined(barrier_chunks[i])) {
+      if(isDefined(barrier_chunks[i]))
         array[array.size] = barrier_chunks[i];
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
@@ -1867,15 +1718,13 @@ get_non_destroyed_variant4(barrier_chunks) {
 
   for(i = 0; i < barrier_chunks.size; i++) {
     if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant4") {
-      if(isDefined(barrier_chunks[i])) {
+      if(isDefined(barrier_chunks[i]))
         array[array.size] = barrier_chunks[i];
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
@@ -1885,15 +1734,13 @@ get_non_destroyed_variant5(barrier_chunks) {
 
   for(i = 0; i < barrier_chunks.size; i++) {
     if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant5") {
-      if(isDefined(barrier_chunks[i])) {
+      if(isDefined(barrier_chunks[i]))
         array[array.size] = barrier_chunks[i];
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
@@ -1918,15 +1765,13 @@ get_destroyed_chunks(barrier_chunks) {
         continue;
       }
 
-      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate")
         return undefined;
-      }
     }
   }
 
-  if(array.size == 0) {
+  if(array.size == 0)
     return undefined;
-  }
 
   return array;
 }
@@ -1942,29 +1787,23 @@ grate_order_destroyed(chunks_repair_grate) {
 
   for(i = 0; i < chunks_repair_grate.size; i++) {
     if(isDefined(chunks_repair_grate[i].script_parameters) && chunks_repair_grate[i].script_parameters == "grate") {
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "1") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "1")
         grate_repair_order1[grate_repair_order1.size] = chunks_repair_grate[i];
-      }
 
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "2") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "2")
         grate_repair_order2[grate_repair_order2.size] = chunks_repair_grate[i];
-      }
 
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "3") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "3")
         grate_repair_order3[grate_repair_order3.size] = chunks_repair_grate[i];
-      }
 
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "4") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "4")
         grate_repair_order4[grate_repair_order4.size] = chunks_repair_grate[i];
-      }
 
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "5") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "5")
         grate_repair_order5[grate_repair_order5.size] = chunks_repair_grate[i];
-      }
 
-      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "6") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "6")
         grate_repair_order6[grate_repair_order6.size] = chunks_repair_grate[i];
-      }
     }
   }
 
@@ -2021,31 +1860,28 @@ get_chunk_state() {
 is_float(num) {
   val = num - int(num);
 
-  if(val != 0) {
+  if(val != 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 array_limiter(array, total) {
   new_array = [];
 
   for(i = 0; i < array.size; i++) {
-    if(i < total) {
+    if(i < total)
       new_array[new_array.size] = array[i];
-    }
   }
 
   return new_array;
 }
 
 array_validate(array) {
-  if(isDefined(array) && array.size > 0) {
+  if(isDefined(array) && array.size > 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 add_spawner(spawner) {
@@ -2076,18 +1912,16 @@ fake_physicslaunch(target_pos, power) {
 }
 
 add_zombie_hint(ref, text) {
-  if(!isDefined(level.zombie_hints)) {
+  if(!isDefined(level.zombie_hints))
     level.zombie_hints = [];
-  }
 
   precachestring(text);
   level.zombie_hints[ref] = text;
 }
 
 get_zombie_hint(ref) {
-  if(isDefined(level.zombie_hints[ref])) {
+  if(isDefined(level.zombie_hints[ref]))
     return level.zombie_hints[ref];
-  }
 
   println("UNABLE TO FIND HINT STRING " + ref);
 
@@ -2097,9 +1931,8 @@ get_zombie_hint(ref) {
 set_hint_string(ent, default_ref, cost) {
   ref = default_ref;
 
-  if(isDefined(ent.script_hint)) {
+  if(isDefined(ent.script_hint))
     ref = ent.script_hint;
-  }
 
   if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
     ref = ref + "_" + cost;
@@ -2107,24 +1940,21 @@ set_hint_string(ent, default_ref, cost) {
   } else {
     hint = get_zombie_hint(ref);
 
-    if(isDefined(cost)) {
+    if(isDefined(cost))
       self sethintstring(hint, cost);
-    } else {
+    else
       self sethintstring(hint);
-    }
   }
 }
 
 get_hint_string(ent, default_ref, cost) {
   ref = default_ref;
 
-  if(isDefined(ent.script_hint)) {
+  if(isDefined(ent.script_hint))
     ref = ent.script_hint;
-  }
 
-  if(isDefined(level.legacy_hint_system) && level.legacy_hint_system && isDefined(cost)) {
+  if(isDefined(level.legacy_hint_system) && level.legacy_hint_system && isDefined(cost))
     ref = ref + "_" + cost;
-  }
 
   return get_zombie_hint(ref);
 }
@@ -2132,18 +1962,16 @@ get_hint_string(ent, default_ref, cost) {
 unitrigger_set_hint_string(ent, default_ref, cost) {
   triggers = [];
 
-  if(self.trigger_per_player) {
+  if(self.trigger_per_player)
     triggers = self.playertrigger;
-  } else {
+  else
     triggers[0] = self.trigger;
-  }
 
   foreach(trigger in triggers) {
     ref = default_ref;
 
-    if(isDefined(ent.script_hint)) {
+    if(isDefined(ent.script_hint))
       ref = ent.script_hint;
-    }
 
     if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
       ref = ref + "_" + cost;
@@ -2163,9 +1991,8 @@ unitrigger_set_hint_string(ent, default_ref, cost) {
 }
 
 add_sound(ref, alias) {
-  if(!isDefined(level.zombie_sounds)) {
+  if(!isDefined(level.zombie_sounds))
     level.zombie_sounds = [];
-  }
 
   level.zombie_sounds[ref] = alias;
 }
@@ -2177,9 +2004,8 @@ play_sound_at_pos(ref, pos, ent) {
       return;
     }
 
-    if(isDefined(self.script_sound)) {
+    if(isDefined(self.script_sound))
       ref = self.script_sound;
-    }
   }
 
   if(ref == "none") {
@@ -2196,13 +2022,12 @@ play_sound_at_pos(ref, pos, ent) {
 
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
-    self playSound(self.script_soundalias);
+    self playsound(self.script_soundalias);
     return;
   }
 
-  if(isDefined(self.script_sound)) {
+  if(isDefined(self.script_sound))
     ref = self.script_sound;
-  }
 
   if(ref == "none") {
     return;
@@ -2213,13 +2038,12 @@ play_sound_on_ent(ref) {
     return;
   }
 
-  self playSound(level.zombie_sounds[ref]);
+  self playsound(level.zombie_sounds[ref]);
 }
 
 play_loopsound_on_ent(ref) {
-  if(isDefined(self.script_firefxsound)) {
+  if(isDefined(self.script_firefxsound))
     ref = self.script_firefxsound;
-  }
 
   if(ref == "none") {
     return;
@@ -2230,28 +2054,25 @@ play_loopsound_on_ent(ref) {
     return;
   }
 
-  self playSound(level.zombie_sounds[ref]);
+  self playsound(level.zombie_sounds[ref]);
 }
 
 string_to_float(string) {
   floatparts = strtok(string, ".");
 
-  if(floatparts.size == 1) {
+  if(floatparts.size == 1)
     return int(floatparts[0]);
-  }
 
   whole = int(floatparts[0]);
   decimal = 0;
 
-  for(i = floatparts[1].size - 1; i >= 0; i--) {
+  for(i = floatparts[1].size - 1; i >= 0; i--)
     decimal = decimal / 10 + int(floatparts[1][i]) / 10;
-  }
 
-  if(whole >= 0) {
+  if(whole >= 0)
     return whole + decimal;
-  } else {
+  else
     return whole - decimal;
-  }
 }
 
 onplayerconnect_callback(func) {
@@ -2263,30 +2084,26 @@ onplayerdisconnect_callback(func) {
 }
 
 set_zombie_var(var, value, is_float, column, is_team_based) {
-  if(!isDefined(is_float)) {
+  if(!isDefined(is_float))
     is_float = 0;
-  }
 
-  if(!isDefined(column)) {
+  if(!isDefined(column))
     column = 1;
-  }
 
   table = "mp/zombiemode.csv";
   table_value = tablelookup(table, 0,
     var, column);
 
   if(isDefined(table_value) && table_value != "") {
-    if(is_float) {
+    if(is_float)
       value = float(table_value);
-    } else {
+    else
       value = int(table_value);
-    }
   }
 
   if(isDefined(is_team_based) && is_team_based) {
-    foreach(team in level.teams) {
-      level.zombie_vars[team][var] = value;
-    }
+    foreach(team in level.teams)
+    level.zombie_vars[team][var] = value;
   } else
     level.zombie_vars[var] = value;
 
@@ -2294,26 +2111,22 @@ set_zombie_var(var, value, is_float, column, is_team_based) {
 }
 
 get_table_var(table, var_name, value, is_float, column) {
-  if(!isDefined(table)) {
+  if(!isDefined(table))
     table = "mp/zombiemode.csv";
-  }
 
-  if(!isDefined(is_float)) {
+  if(!isDefined(is_float))
     is_float = 0;
-  }
 
-  if(!isDefined(column)) {
+  if(!isDefined(column))
     column = 1;
-  }
 
   table_value = tablelookup(table, 0, var_name, column);
 
   if(isDefined(table_value) && table_value != "") {
-    if(is_float) {
+    if(is_float)
       value = string_to_float(table_value);
-    } else {
+    else
       value = int(table_value);
-    }
   }
 
   return value;
@@ -2324,9 +2137,8 @@ hudelem_count() {
   curr_total = 0;
 
   while(true) {
-    if(level.hudelem_count > max) {
+    if(level.hudelem_count > max)
       max = level.hudelem_count;
-    }
 
     println("HudElems: " + level.hudelem_count + "[Peak: " + max + "]");
     wait 0.05;
@@ -2378,9 +2190,8 @@ draw_line_ent_to_pos(ent, pos, end_on) {
   ent notify("stop_draw_line_ent_to_pos");
   ent endon("stop_draw_line_ent_to_pos");
 
-  if(isDefined(end_on)) {
+  if(isDefined(end_on))
     ent endon(end_on);
-  }
 
   while(true) {
     line(ent.origin, pos);
@@ -2390,9 +2201,8 @@ draw_line_ent_to_pos(ent, pos, end_on) {
 }
 
 debug_print(msg) {
-  if(getdvarint(#"zombie_debug") > 0) {
+  if(getdvarint(#"zombie_debug") > 0)
     println("######### ZOMBIE: " + msg);
-  }
 }
 
 debug_blocker(pos, rad, height) {
@@ -2431,9 +2241,8 @@ print3d_at_pos(msg, pos, thread_endon, offset) {
     self endon(thread_endon);
   }
 
-  if(!isDefined(offset)) {
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  }
 
   while(true) {
     print3d(self.origin + offset, msg);
@@ -2453,9 +2262,8 @@ debug_breadcrumbs() {
       continue;
     }
 
-    for(i = 0; i < self.zombie_breadcrumbs.size; i++) {
+    for(i = 0; i < self.zombie_breadcrumbs.size; i++)
       drawcylinder(self.zombie_breadcrumbs[i], 5, 5);
-    }
 
     wait 0.05;
   }
@@ -2508,13 +2316,11 @@ do_player_vo(snd, variation_count) {
   index = maps\mp\zombies\_zm_weapons::get_player_index(self);
   sound = "zmb_vox_plr_" + index + "_" + snd;
 
-  if(isDefined(variation_count)) {
+  if(isDefined(variation_count))
     sound = sound + "_" + randomintrange(0, variation_count);
-  }
 
-  if(!isDefined(level.player_is_speaking)) {
+  if(!isDefined(level.player_is_speaking))
     level.player_is_speaking = 0;
-  }
 
   if(level.player_is_speaking == 0) {
     level.player_is_speaking = 1;
@@ -2539,9 +2345,8 @@ magic_bullet_shield() {
 
       level thread debug_magic_bullet_shield_death(self);
 
-      if(!isDefined(self._mbs)) {
-        self._mbs = spawnStruct();
-      }
+      if(!isDefined(self._mbs))
+        self._mbs = spawnstruct();
 
       if(isai(self)) {
         assert(isalive(self), "Tried to do magic_bullet_shield on a dead or undefined guy.");
@@ -2561,9 +2366,8 @@ magic_bullet_shield() {
 debug_magic_bullet_shield_death(guy) {
   targetname = "none";
 
-  if(isDefined(guy.targetname)) {
+  if(isDefined(guy.targetname))
     targetname = guy.targetname;
-  }
 
   guy endon("stop_magic_bullet_shield");
   guy waittill("death");
@@ -2571,9 +2375,8 @@ debug_magic_bullet_shield_death(guy) {
 }
 
 is_magic_bullet_shield_enabled(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
 
   return isDefined(ent.magic_bullet_shield) && ent.magic_bullet_shield == 1;
 }
@@ -2593,13 +2396,11 @@ play_sound_2d(sound) {
 include_weapon(weapon_name, in_box, collector, weighting_func) {
   println("ZM >> include_weapon = " + weapon_name);
 
-  if(!isDefined(in_box)) {
+  if(!isDefined(in_box))
     in_box = 1;
-  }
 
-  if(!isDefined(collector)) {
+  if(!isDefined(collector))
     collector = 0;
-  }
 
   maps\mp\zombies\_zm_weapons::include_zombie_weapon(weapon_name, in_box, collector, weighting_func);
 }
@@ -2611,9 +2412,8 @@ include_buildable(buildable_struct) {
 }
 
 is_buildable_included(name) {
-  if(isDefined(level.zombie_include_buildables[name])) {
+  if(isDefined(level.zombie_include_buildables[name]))
     return true;
-  }
 
   return false;
 }
@@ -2653,9 +2453,8 @@ trigger_invisible(enable) {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i])) {
+    if(isDefined(players[i]))
       self setinvisibletoplayer(players[i], enable);
-    }
   }
 }
 
@@ -2669,21 +2468,17 @@ print3d_ent(text, color, scale, offset, end_msg, overwrite) {
 
   self endon("end_print3d");
 
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (1, 1, 1);
-  }
 
-  if(!isDefined(scale)) {
+  if(!isDefined(scale))
     scale = 1.0;
-  }
 
-  if(!isDefined(offset)) {
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  }
 
-  if(isDefined(end_msg)) {
+  if(isDefined(end_msg))
     self endon(end_msg);
-  }
 
   self._debug_print3d_msg = text;
 
@@ -2697,49 +2492,42 @@ print3d_ent(text, color, scale, offset, end_msg, overwrite) {
 isexplosivedamage(meansofdeath) {
   explosivedamage = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_PROJECTILE_SPLASH MOD_EXPLOSIVE";
 
-  if(issubstr(explosivedamage, meansofdeath)) {
+  if(issubstr(explosivedamage, meansofdeath))
     return true;
-  }
 
   return false;
 }
 
 isprimarydamage(meansofdeath) {
-  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET") {
+  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET")
     return true;
-  }
 
   return false;
 }
 
 isfiredamage(weapon, meansofdeath) {
-  if((issubstr(weapon, "flame") || issubstr(weapon, "molotov_") || issubstr(weapon, "napalmblob_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH")) {
+  if((issubstr(weapon, "flame") || issubstr(weapon, "molotov_") || issubstr(weapon, "napalmblob_")) && (meansofdeath == "MOD_BURNED" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH"))
     return true;
-  }
 
   return false;
 }
 
 isplayerexplosiveweapon(weapon, meansofdeath) {
-  if(!isexplosivedamage(meansofdeath)) {
+  if(!isexplosivedamage(meansofdeath))
     return false;
-  }
 
-  if(weapon == "artillery_mp") {
+  if(weapon == "artillery_mp")
     return false;
-  }
 
-  if(issubstr(weapon, "turret")) {
+  if(issubstr(weapon, "turret"))
     return false;
-  }
 
   return true;
 }
 
 create_counter_hud(x) {
-  if(!isDefined(x)) {
+  if(!isDefined(x))
     x = 0;
-  }
 
   hud = create_simple_hud();
   hud.alignx = "left";
@@ -2763,9 +2551,8 @@ get_current_zone(return_zone) {
 
     for(i = 0; i < zone.volumes.size; i++) {
       if(self istouching(zone.volumes[i])) {
-        if(isDefined(return_zone) && return_zone) {
+        if(isDefined(return_zone) && return_zone)
           return zone;
-        }
 
         return zone_name;
       }
@@ -2782,13 +2569,12 @@ remove_mod_from_methodofdeath(mod) {
 clear_fog_threads() {
   players = get_players();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] notify("stop_fog");
-  }
 }
 
 display_message(titletext, notifytext, duration) {
-  notifydata = spawnStruct();
+  notifydata = spawnstruct();
   notifydata.titletext = notifytext;
   notifydata.notifytext = titletext;
   notifydata.sound = "mus_level_up";
@@ -2813,9 +2599,8 @@ shock_onpain() {
   self notify("stop_shock_onpain");
   self endon("stop_shock_onpain");
 
-  if(getdvar(#"blurpain") == "") {
+  if(getdvar(#"blurpain") == "")
     setdvar("blurpain", "on");
-  }
 
   while(true) {
     oldhealth = self.health;
@@ -2830,9 +2615,9 @@ shock_onpain() {
     if(self.health < 1) {
       continue;
     }
-    if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH") {
+    if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH")
       continue;
-    } else if(mod == "MOD_GRENADE_SPLASH" || mod == "MOD_GRENADE" || mod == "MOD_EXPLOSIVE") {
+    else if(mod == "MOD_GRENADE_SPLASH" || mod == "MOD_GRENADE" || mod == "MOD_EXPLOSIVE") {
       shocktype = undefined;
       shocklight = undefined;
 
@@ -2851,20 +2636,18 @@ shock_onexplosion(damage, shocktype, shocklight) {
   time = 0;
   scaled_damage = 100 * damage / self.maxhealth;
 
-  if(scaled_damage >= 90) {
+  if(scaled_damage >= 90)
     time = 4;
-  } else if(scaled_damage >= 50) {
+  else if(scaled_damage >= 50)
     time = 3;
-  } else if(scaled_damage >= 25) {
+  else if(scaled_damage >= 25)
     time = 2;
-  } else if(scaled_damage > 10) {
+  else if(scaled_damage > 10)
     time = 1;
-  }
 
   if(time) {
-    if(!isDefined(shocktype)) {
+    if(!isDefined(shocktype))
       shocktype = "explosion";
-    }
 
     self shellshock(shocktype, time);
   } else if(isDefined(shocklight))
@@ -2877,9 +2660,8 @@ increment_is_drinking() {
     return;
   }
 
-  if(!isDefined(self.is_drinking)) {
+  if(!isDefined(self.is_drinking))
     self.is_drinking = 0;
-  }
 
   if(self.is_drinking == 0) {
     self disableoffhandweapons();
@@ -2894,9 +2676,9 @@ is_multiple_drinking() {
 }
 
 decrement_is_drinking() {
-  if(self.is_drinking > 0) {
+  if(self.is_drinking > 0)
     self.is_drinking--;
-  } else {
+  else {
     assertmsg("making is_drinking less than 0");
 
   }
@@ -2916,17 +2698,14 @@ clear_is_drinking() {
 getweaponclasszm(weapon) {
   assert(isDefined(weapon));
 
-  if(!isDefined(weapon)) {
+  if(!isDefined(weapon))
     return undefined;
-  }
 
-  if(!isDefined(level.weaponclassarray)) {
+  if(!isDefined(level.weaponclassarray))
     level.weaponclassarray = [];
-  }
 
-  if(isDefined(level.weaponclassarray[weapon])) {
+  if(isDefined(level.weaponclassarray[weapon]))
     return level.weaponclassarray[weapon];
-  }
 
   baseweaponindex = getbaseweaponitemindex(weapon) + 1;
   weaponclass = tablelookupcolumnforrow("zm/zm_statstable.csv", baseweaponindex, 2);
@@ -2935,47 +2714,40 @@ getweaponclasszm(weapon) {
 }
 
 spawn_weapon_model(weapon, model, origin, angles, options) {
-  if(!isDefined(model)) {
+  if(!isDefined(model))
     model = getweaponmodel(weapon);
-  }
 
   weapon_model = spawn("script_model", origin);
 
-  if(isDefined(angles)) {
+  if(isDefined(angles))
     weapon_model.angles = angles;
-  }
 
-  if(isDefined(options)) {
+  if(isDefined(options))
     weapon_model useweaponmodel(weapon, model, options);
-  } else {
+  else
     weapon_model useweaponmodel(weapon, model);
-  }
 
   return weapon_model;
 }
 
 is_limited_weapon(weapname) {
   if(isDefined(level.limited_weapons)) {
-    if(isDefined(level.limited_weapons[weapname])) {
+    if(isDefined(level.limited_weapons[weapname]))
       return true;
-    }
   }
 
   return false;
 }
 
 is_alt_weapon(weapname) {
-  if(getsubstr(weapname, 0, 3) == "gl_") {
+  if(getsubstr(weapname, 0, 3) == "gl_")
     return true;
-  }
 
-  if(getsubstr(weapname, 0, 3) == "sf_") {
+  if(getsubstr(weapname, 0, 3) == "sf_")
     return true;
-  }
 
-  if(getsubstr(weapname, 0, 10) == "dualoptic_") {
+  if(getsubstr(weapname, 0, 10) == "dualoptic_")
     return true;
-  }
 
   return false;
 }
@@ -2988,25 +2760,22 @@ register_lethal_grenade_for_level(weaponname) {
   if(is_lethal_grenade(weaponname)) {
     return;
   }
-  if(!isDefined(level.zombie_lethal_grenade_list)) {
+  if(!isDefined(level.zombie_lethal_grenade_list))
     level.zombie_lethal_grenade_list = [];
-  }
 
   level.zombie_lethal_grenade_list[weaponname] = weaponname;
 }
 
 is_lethal_grenade(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(level.zombie_lethal_grenade_list)) {
+  if(!isDefined(weaponname) || !isDefined(level.zombie_lethal_grenade_list))
     return 0;
-  }
 
   return isDefined(level.zombie_lethal_grenade_list[weaponname]);
 }
 
 is_player_lethal_grenade(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.current_lethal_grenade)) {
+  if(!isDefined(weaponname) || !isDefined(self.current_lethal_grenade))
     return false;
-  }
 
   return self.current_lethal_grenade == weaponname;
 }
@@ -3014,9 +2783,8 @@ is_player_lethal_grenade(weaponname) {
 get_player_lethal_grenade() {
   grenade = "";
 
-  if(isDefined(self.current_lethal_grenade)) {
+  if(isDefined(self.current_lethal_grenade))
     grenade = self.current_lethal_grenade;
-  }
 
   return grenade;
 }
@@ -3033,25 +2801,22 @@ register_tactical_grenade_for_level(weaponname) {
   if(is_tactical_grenade(weaponname)) {
     return;
   }
-  if(!isDefined(level.zombie_tactical_grenade_list)) {
+  if(!isDefined(level.zombie_tactical_grenade_list))
     level.zombie_tactical_grenade_list = [];
-  }
 
   level.zombie_tactical_grenade_list[weaponname] = weaponname;
 }
 
 is_tactical_grenade(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(level.zombie_tactical_grenade_list)) {
+  if(!isDefined(weaponname) || !isDefined(level.zombie_tactical_grenade_list))
     return 0;
-  }
 
   return isDefined(level.zombie_tactical_grenade_list[weaponname]);
 }
 
 is_player_tactical_grenade(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.current_tactical_grenade)) {
+  if(!isDefined(weaponname) || !isDefined(self.current_tactical_grenade))
     return false;
-  }
 
   return self.current_tactical_grenade == weaponname;
 }
@@ -3059,9 +2824,8 @@ is_player_tactical_grenade(weaponname) {
 get_player_tactical_grenade() {
   tactical = "";
 
-  if(isDefined(self.current_tactical_grenade)) {
+  if(isDefined(self.current_tactical_grenade))
     tactical = self.current_tactical_grenade;
-  }
 
   return tactical;
 }
@@ -3079,25 +2843,22 @@ register_placeable_mine_for_level(weaponname) {
   if(is_placeable_mine(weaponname)) {
     return;
   }
-  if(!isDefined(level.zombie_placeable_mine_list)) {
+  if(!isDefined(level.zombie_placeable_mine_list))
     level.zombie_placeable_mine_list = [];
-  }
 
   level.zombie_placeable_mine_list[weaponname] = weaponname;
 }
 
 is_placeable_mine(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(level.zombie_placeable_mine_list)) {
+  if(!isDefined(weaponname) || !isDefined(level.zombie_placeable_mine_list))
     return 0;
-  }
 
   return isDefined(level.zombie_placeable_mine_list[weaponname]);
 }
 
 is_player_placeable_mine(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.current_placeable_mine)) {
+  if(!isDefined(weaponname) || !isDefined(self.current_placeable_mine))
     return false;
-  }
 
   return self.current_placeable_mine == weaponname;
 }
@@ -3118,25 +2879,22 @@ register_melee_weapon_for_level(weaponname) {
   if(is_melee_weapon(weaponname)) {
     return;
   }
-  if(!isDefined(level.zombie_melee_weapon_list)) {
+  if(!isDefined(level.zombie_melee_weapon_list))
     level.zombie_melee_weapon_list = [];
-  }
 
   level.zombie_melee_weapon_list[weaponname] = weaponname;
 }
 
 is_melee_weapon(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(level.zombie_melee_weapon_list)) {
+  if(!isDefined(weaponname) || !isDefined(level.zombie_melee_weapon_list))
     return 0;
-  }
 
   return isDefined(level.zombie_melee_weapon_list[weaponname]);
 }
 
 is_player_melee_weapon(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.current_melee_weapon)) {
+  if(!isDefined(weaponname) || !isDefined(self.current_melee_weapon))
     return false;
-  }
 
   return self.current_melee_weapon == weaponname;
 }
@@ -3161,17 +2919,15 @@ register_equipment_for_level(weaponname) {
   if(is_equipment(weaponname)) {
     return;
   }
-  if(!isDefined(level.zombie_equipment_list)) {
+  if(!isDefined(level.zombie_equipment_list))
     level.zombie_equipment_list = [];
-  }
 
   level.zombie_equipment_list[weaponname] = weaponname;
 }
 
 is_equipment(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(level.zombie_equipment_list)) {
+  if(!isDefined(weaponname) || !isDefined(level.zombie_equipment_list))
     return 0;
-  }
 
   return isDefined(level.zombie_equipment_list[weaponname]);
 }
@@ -3181,22 +2937,19 @@ is_equipment_that_blocks_purchase(weaponname) {
 }
 
 is_player_equipment(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.current_equipment)) {
+  if(!isDefined(weaponname) || !isDefined(self.current_equipment))
     return false;
-  }
 
   return self.current_equipment == weaponname;
 }
 
 has_deployed_equipment(weaponname) {
-  if(!isDefined(weaponname) || !isDefined(self.deployed_equipment) || self.deployed_equipment.size < 1) {
+  if(!isDefined(weaponname) || !isDefined(self.deployed_equipment) || self.deployed_equipment.size < 1)
     return false;
-  }
 
   for(i = 0; i < self.deployed_equipment.size; i++) {
-    if(self.deployed_equipment[i] == weaponname) {
+    if(self.deployed_equipment[i] == weaponname)
       return true;
-    }
   }
 
   return false;
@@ -3215,21 +2968,17 @@ hacker_active() {
 }
 
 set_player_equipment(weaponname) {
-  if(!isDefined(self.current_equipment_active)) {
+  if(!isDefined(self.current_equipment_active))
     self.current_equipment_active = [];
-  }
 
-  if(isDefined(weaponname)) {
+  if(isDefined(weaponname))
     self.current_equipment_active[weaponname] = 0;
-  }
 
-  if(!isDefined(self.equipment_got_in_round)) {
+  if(!isDefined(self.equipment_got_in_round))
     self.equipment_got_in_round = [];
-  }
 
-  if(isDefined(weaponname)) {
+  if(isDefined(weaponname))
     self.equipment_got_in_round[weaponname] = level.round_number;
-  }
 
   self.current_equipment = weaponname;
 }
@@ -3240,7 +2989,9 @@ init_player_equipment() {
 
 register_offhand_weapons_for_level_defaults() {
   if(isDefined(level.register_offhand_weapons_for_level_defaults_override)) {
-    [[level.register_offhand_weapons_for_level_defaults_override]]();
+    [
+      [level.register_offhand_weapons_for_level_defaults_override]
+    ]();
     return;
   }
 
@@ -3280,23 +3031,20 @@ give_start_weapon(switch_to_weapon) {
   self giveweapon(level.start_weapon);
   self givestartammo(level.start_weapon);
 
-  if(isDefined(switch_to_weapon) && switch_to_weapon) {
+  if(isDefined(switch_to_weapon) && switch_to_weapon)
     self switchtoweapon(level.start_weapon);
-  }
 }
 
 array_flag_wait_any(flag_array) {
-  if(!isDefined(level._array_flag_wait_any_calls)) {
+  if(!isDefined(level._array_flag_wait_any_calls))
     level._n_array_flag_wait_any_calls = 0;
-  } else {
+  else
     level._n_array_flag_wait_any_calls++;
-  }
 
   str_condition = "array_flag_wait_call_" + level._n_array_flag_wait_any_calls;
 
-  for(index = 0; index < flag_array.size; index++) {
+  for(index = 0; index < flag_array.size; index++)
     level thread array_flag_wait_any_thread(flag_array[index], str_condition);
-  }
 
   level waittill(str_condition);
 }
@@ -3310,9 +3058,8 @@ array_flag_wait_any_thread(flag_name, condition) {
 array_removedead(array) {
   newarray = [];
 
-  if(!isDefined(array)) {
+  if(!isDefined(array))
     return undefined;
-  }
 
   for(i = 0; i < array.size; i++) {
     if(!isalive(array[i]) || isDefined(array[i].isacorpse) && array[i].isacorpse) {
@@ -3325,11 +3072,11 @@ array_removedead(array) {
 }
 
 groundpos(origin) {
-  return bulletTrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
+  return bullettrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
 }
 
 groundpos_ignore_water(origin) {
-  return bulletTrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self, 1)["position"];
+  return bullettrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self, 1)["position"];
 }
 
 groundpos_ignore_water_new(origin) {
@@ -3343,9 +3090,8 @@ waittill_notify_or_timeout(msg, timer) {
 }
 
 self_delete() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 script_delay() {
@@ -3363,9 +3109,8 @@ script_delay() {
 button_held_think(which_button) {
   self endon("disconnect");
 
-  if(!isDefined(self._holding_button)) {
+  if(!isDefined(self._holding_button))
     self._holding_button = [];
-  }
 
   self._holding_button[which_button] = 0;
   time_started = 0;
@@ -3373,17 +3118,14 @@ button_held_think(which_button) {
 
   while(true) {
     if(self._holding_button[which_button]) {
-      if(!self[[level._button_funcs[which_button]]]()) {
+      if(!self[[level._button_funcs[which_button]]]())
         self._holding_button[which_button] = 0;
-      }
     } else if(self[[level._button_funcs[which_button]]]()) {
-      if(time_started == 0) {
+      if(time_started == 0)
         time_started = gettime();
-      }
 
-      if(gettime() - time_started > use_time) {
+      if(gettime() - time_started > use_time)
         self._holding_button[which_button] = 1;
-      }
     } else if(time_started != 0)
       time_started = 0;
 
@@ -3451,9 +3193,8 @@ wait_network_frame() {
   if(numremoteclients()) {
     snapshot_ids = getsnapshotindexarray();
 
-    for(acked = undefined; !isDefined(acked); acked = snapshotacknowledged(snapshot_ids)) {
+    for(acked = undefined; !isDefined(acked); acked = snapshotacknowledged(snapshot_ids))
       level waittill("snapacknowledged");
-    }
   } else
     wait 0.1;
 }
@@ -3462,11 +3203,10 @@ ignore_triggers(timer) {
   self endon("death");
   self.ignoretriggers = 1;
 
-  if(isDefined(timer)) {
+  if(isDefined(timer))
     wait(timer);
-  } else {
+  else
     wait 0.5;
-  }
 
   self.ignoretriggers = 0;
 }
@@ -3488,16 +3228,14 @@ giveachievement_wrapper(achievement, all_players) {
       players[i] giveachievement(achievement);
       has_achievement = players[i] maps\mp\zombies\_zm_stats::get_global_stat(achievement_lower);
 
-      if(!(isDefined(has_achievement) && has_achievement)) {
+      if(!(isDefined(has_achievement) && has_achievement))
         global_counter++;
-      }
 
       players[i] maps\mp\zombies\_zm_stats::increment_client_stat(achievement_lower, 0);
 
       if(issplitscreen() && i == 0 || !issplitscreen()) {
-        if(isDefined(level.achievement_sound_func)) {
+        if(isDefined(level.achievement_sound_func))
           players[i] thread[[level.achievement_sound_func]](achievement_lower);
-        }
       }
     }
   } else {
@@ -3510,27 +3248,23 @@ giveachievement_wrapper(achievement, all_players) {
     self giveachievement(achievement);
     has_achievement = self maps\mp\zombies\_zm_stats::get_global_stat(achievement_lower);
 
-    if(!(isDefined(has_achievement) && has_achievement)) {
+    if(!(isDefined(has_achievement) && has_achievement))
       global_counter++;
-    }
 
     self maps\mp\zombies\_zm_stats::increment_client_stat(achievement_lower, 0);
 
-    if(isDefined(level.achievement_sound_func)) {
+    if(isDefined(level.achievement_sound_func))
       self thread[[level.achievement_sound_func]](achievement_lower);
-    }
   }
 
-  if(global_counter) {
+  if(global_counter)
     incrementcounter("global_" + achievement_lower, global_counter);
-  }
 }
 
 spawn_failed(spawn) {
   if(isDefined(spawn) && isalive(spawn)) {
-    if(isalive(spawn)) {
+    if(isalive(spawn))
       return false;
-    }
   }
 
   return true;
@@ -3557,9 +3291,8 @@ add_spawn_function(function, param1, param2, param3, param4) {
   func["param3"] = param3;
   func["param4"] = param4;
 
-  if(!isDefined(self.spawn_funcs)) {
+  if(!isDefined(self.spawn_funcs))
     self.spawn_funcs = [];
-  }
 
   self.spawn_funcs[self.spawn_funcs.size] = func;
 }
@@ -3602,9 +3335,8 @@ isads(player) {
 }
 
 bullet_attack(type) {
-  if(type == "MOD_PISTOL_BULLET") {
+  if(type == "MOD_PISTOL_BULLET")
     return true;
-  }
 
   return type == "MOD_RIFLE_BULLET";
 }
@@ -3615,9 +3347,8 @@ pick_up() {
   clip_ammo = player getweaponammoclip(self.name);
   clip_max_ammo = weaponclipsize(self.name);
 
-  if(clip_ammo < clip_max_ammo) {
+  if(clip_ammo < clip_max_ammo)
     clip_ammo++;
-  }
 
   player setweaponammoclip(self.name, clip_ammo);
 }
@@ -3632,9 +3363,9 @@ waittill_not_moving() {
   self endon("detonated");
   level endon("game_ended");
 
-  if(self.classname == "grenade") {
+  if(self.classname == "grenade")
     self waittill("stationary");
-  } else {
+  else {
     for(prevorigin = self.origin; 1; prevorigin = self.origin) {
       wait 0.15;
 
@@ -3654,9 +3385,8 @@ get_closest_player(org) {
 ent_flag_wait(msg) {
   self endon("death");
 
-  while(!self.ent_flag[msg]) {
+  while(!self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_wait_either(flag1, flag2) {
@@ -3698,9 +3428,8 @@ ent_flag_wait_or_timeout(flagname, timer) {
 ent_flag_waitopen(msg) {
   self endon("death");
 
-  while(self.ent_flag[msg]) {
+  while(self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_init(message, val) {
@@ -3709,9 +3438,8 @@ ent_flag_init(message, val) {
     self.ent_flags_lock = [];
   }
 
-  if(!isDefined(level.first_frame)) {
+  if(!isDefined(level.first_frame))
     assert(!isDefined(self.ent_flag[message]), "Attempt to reinitialize existing flag '" + message + "' on entity.");
-  }
 
   if(isDefined(val) && val) {
     self.ent_flag[message] = 1;
@@ -3727,9 +3455,8 @@ ent_flag_init(message, val) {
 }
 
 ent_flag_exist(message) {
-  if(isDefined(self.ent_flag) && isDefined(self.ent_flag[message])) {
+  if(isDefined(self.ent_flag) && isDefined(self.ent_flag[message]))
     return true;
-  }
 
   return false;
 }
@@ -3750,11 +3477,10 @@ ent_flag_set(message) {
 }
 
 ent_flag_toggle(message) {
-  if(self ent_flag(message)) {
+  if(self ent_flag(message))
     self ent_flag_clear(message);
-  } else {
+  else
     self ent_flag_set(message);
-  }
 }
 
 ent_flag_clear(message) {
@@ -3778,9 +3504,8 @@ ent_flag(message) {
   assert(isDefined(message), "Tried to check flag but the flag was not defined.");
   assert(isDefined(self.ent_flag[message]), "Tried to check entity flag '" + message + "', but the flag was not initialized.");
 
-  if(!self.ent_flag[message]) {
+  if(!self.ent_flag[message])
     return false;
-  }
 
   return true;
 }
@@ -3811,21 +3536,17 @@ waittill_any_or_timeout(timer, string1, string2, string3, string4, string5) {
   assert(isDefined(string1));
   self endon(string1);
 
-  if(isDefined(string2)) {
+  if(isDefined(string2))
     self endon(string2);
-  }
 
-  if(isDefined(string3)) {
+  if(isDefined(string3))
     self endon(string3);
-  }
 
-  if(isDefined(string4)) {
+  if(isDefined(string4))
     self endon(string4);
-  }
 
-  if(isDefined(string5)) {
+  if(isDefined(string5))
     self endon(string5);
-  }
 
   wait(timer);
 }
@@ -3880,9 +3601,8 @@ track_players_intersection_tracker() {
         players[i] dodamage(1000, (0, 0, 0));
         players[j] dodamage(1000, (0, 0, 0));
 
-        if(!killed_players) {
+        if(!killed_players)
           players[i] playlocalsound(level.zmb_laugh_alias);
-        }
 
         players[i] maps\mp\zombies\_zm_stats::increment_map_cheat_stat("cheat_too_friendly");
         players[i] maps\mp\zombies\_zm_stats::increment_client_stat("cheat_too_friendly", 0);
@@ -3905,51 +3625,48 @@ get_eye() {
     if(isDefined(linked_ent) && getdvarint(#"_id_5AEFD7E9") > 0) {
       camera = linked_ent gettagorigin("tag_camera");
 
-      if(isDefined(camera)) {
+      if(isDefined(camera))
         return camera;
-      }
     }
   }
 
-  pos = self getEye();
+  pos = self geteye();
   return pos;
 }
 
 is_player_looking_at(origin, dot, do_trace, ignore_ent) {
   assert(isplayer(self), "player_looking_at must be called on a player.");
 
-  if(!isDefined(dot)) {
+  if(!isDefined(dot))
     dot = 0.7;
-  }
 
-  if(!isDefined(do_trace)) {
+  if(!isDefined(do_trace))
     do_trace = 1;
-  }
 
   eye = self get_eye();
-  delta_vec = anglesToForward(vectortoangles(origin - eye));
-  view_vec = anglesToForward(self getplayerangles());
+  delta_vec = anglestoforward(vectortoangles(origin - eye));
+  view_vec = anglestoforward(self getplayerangles());
   new_dot = vectordot(delta_vec, view_vec);
 
   if(new_dot >= dot) {
-    if(do_trace) {
+    if(do_trace)
       return bullettracepassed(origin, eye, 0, ignore_ent);
-    } else {
+    else
       return 1;
-    }
   }
 
   return 0;
 }
 
-add_gametype(gt, dummy1, name, dummy2) {}
+add_gametype(gt, dummy1, name, dummy2) {
+}
 
-add_gameloc(gl, dummy1, name, dummy2) {}
+add_gameloc(gl, dummy1, name, dummy2) {
+}
 
 get_closest_index(org, array, dist) {
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
 
   distsq = dist * dist;
 
@@ -3980,9 +3697,8 @@ is_valid_zombie_spawn_point(point) {
   absmins = liftedorigin + mins;
   absmaxs = liftedorigin + maxs;
 
-  if(boundswouldtelefrag(absmins, absmaxs)) {
+  if(boundswouldtelefrag(absmins, absmaxs))
     return false;
-  }
 
   return true;
 }
@@ -3990,9 +3706,8 @@ is_valid_zombie_spawn_point(point) {
 get_closest_index_to_entity(entity, array, dist, extra_check) {
   org = entity.origin;
 
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
 
   distsq = dist * dist;
 
@@ -4020,21 +3735,18 @@ get_closest_index_to_entity(entity, array, dist, extra_check) {
 }
 
 set_gamemode_var(var, val) {
-  if(!isDefined(game["gamemode_match"])) {
+  if(!isDefined(game["gamemode_match"]))
     game["gamemode_match"] = [];
-  }
 
   game["gamemode_match"][var] = val;
 }
 
 set_gamemode_var_once(var, val) {
-  if(!isDefined(game["gamemode_match"])) {
+  if(!isDefined(game["gamemode_match"]))
     game["gamemode_match"] = [];
-  }
 
-  if(!isDefined(game["gamemode_match"][var])) {
+  if(!isDefined(game["gamemode_match"][var]))
     game["gamemode_match"][var] = val;
-  }
 }
 
 set_game_var(var, val) {
@@ -4042,30 +3754,27 @@ set_game_var(var, val) {
 }
 
 set_game_var_once(var, val) {
-  if(!isDefined(game[var])) {
+  if(!isDefined(game[var]))
     game[var] = val;
-  }
 }
 
 get_game_var(var) {
-  if(isDefined(game[var])) {
+  if(isDefined(game[var]))
     return game[var];
-  }
 
   return undefined;
 }
 
 get_gamemode_var(var) {
-  if(isDefined(game["gamemode_match"]) && isDefined(game["gamemode_match"][var])) {
+  if(isDefined(game["gamemode_match"]) && isDefined(game["gamemode_match"][var]))
     return game["gamemode_match"][var];
-  }
 
   return undefined;
 }
 
 waittill_subset(min_num, string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.threads = 0;
   returned_threads = 0;
 
@@ -4108,13 +3817,11 @@ waittill_subset(min_num, string1, string2, string3, string4, string5) {
 }
 
 is_headshot(sweapon, shitloc, smeansofdeath) {
-  if(shitloc != "head" && shitloc != "helmet") {
+  if(shitloc != "head" && shitloc != "helmet")
     return false;
-  }
 
-  if(smeansofdeath == "MOD_IMPACT" && issubstr(sweapon, "knife_ballistic")) {
+  if(smeansofdeath == "MOD_IMPACT" && issubstr(sweapon, "knife_ballistic"))
     return true;
-  }
 
   return smeansofdeath != "MOD_MELEE" && smeansofdeath != "MOD_BAYONET" && smeansofdeath != "MOD_IMPACT" && smeansofdeath != "MOD_UNKNOWN";
 }
@@ -4125,13 +3832,11 @@ is_jumping() {
 }
 
 is_explosive_damage(mod) {
-  if(!isDefined(mod)) {
+  if(!isDefined(mod))
     return false;
-  }
 
-  if(mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
+  if(mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE")
     return true;
-  }
 
   return false;
 }
@@ -4155,9 +3860,8 @@ do_player_general_vox(category, type, timer, chance) {
   if(isDefined(timer) && isDefined(level.votimer[type]) && level.votimer[type] > 0) {
     return;
   }
-  if(!isDefined(chance)) {
+  if(!isDefined(chance))
     chance = maps\mp\zombies\_zm_audio::get_response_chance(type);
-  }
 
   if(chance > randomint(100)) {
     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog(category, type);
@@ -4193,14 +3897,12 @@ play_vox_to_player(category, type, force_variant) {
 }
 
 is_favorite_weapon(weapon_to_check) {
-  if(!isDefined(self.favorite_wall_weapons_list)) {
+  if(!isDefined(self.favorite_wall_weapons_list))
     return false;
-  }
 
   foreach(weapon in self.favorite_wall_weapons_list) {
-    if(weapon_to_check == weapon) {
+    if(weapon_to_check == weapon)
       return true;
-    }
   }
 
   return false;
@@ -4211,7 +3913,7 @@ add_vox_response_chance(event, chance) {
 }
 
 set_demo_intermission_point() {
-  spawnpoints = getEntArray("mp_global_intermission", "classname");
+  spawnpoints = getentarray("mp_global_intermission", "classname");
 
   if(!spawnpoints.size) {
     return;
@@ -4220,9 +3922,8 @@ set_demo_intermission_point() {
   match_string = "";
   location = level.scr_zm_map_start_location;
 
-  if((location == "default" || location == "") && isDefined(level.default_start_location)) {
+  if((location == "default" || location == "") && isDefined(level.default_start_location))
     location = level.default_start_location;
-  }
 
   match_string = level.scr_zm_ui_gametype + "_" + location;
 
@@ -4253,16 +3954,15 @@ does_player_have_map_navcard(player) {
 }
 
 does_player_have_correct_navcard(player) {
-  if(!isDefined(level.navcard_needed)) {
+  if(!isDefined(level.navcard_needed))
     return 0;
-  }
 
   return player maps\mp\zombies\_zm_stats::get_global_stat(level.navcard_needed);
 }
 
 place_navcard(str_model, str_stat, org, angles) {
   navcard = spawn("script_model", org);
-  navcard setModel(str_model);
+  navcard setmodel(str_model);
   navcard.angles = angles;
   wait 1;
   navcard_pickup_trig = spawn("trigger_radius_use", org, 0, 84, 72);
@@ -4285,7 +3985,7 @@ place_navcard(str_model, str_stat, org, angles) {
         }
       }
 
-      who playSound("zmb_buildable_piece_add");
+      who playsound("zmb_buildable_piece_add");
       who maps\mp\zombies\_zm_stats::set_global_stat(str_stat, 1);
       who.navcard_grabbed = str_stat;
       wait_network_frame();
@@ -4298,9 +3998,8 @@ place_navcard(str_model, str_stat, org, angles) {
   navcard delete();
   navcard_pickup_trig delete();
 
-  if(is_holding_card) {
+  if(is_holding_card)
     level thread place_navcard(str_model, str_placing_stat, org, angles);
-  }
 }
 
 sq_refresh_player_navcard_hud() {
@@ -4309,9 +4008,8 @@ sq_refresh_player_navcard_hud() {
   }
   players = get_players();
 
-  foreach(player in players) {
-    player thread sq_refresh_player_navcard_hud_internal();
-  }
+  foreach(player in players)
+  player thread sq_refresh_player_navcard_hud_internal();
 }
 
 sq_refresh_player_navcard_hud_internal() {
@@ -4321,13 +4019,11 @@ sq_refresh_player_navcard_hud_internal() {
   for(i = 0; i < level.navcards.size; i++) {
     hasit = self maps\mp\zombies\_zm_stats::get_global_stat(level.navcards[i]);
 
-    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i]) {
+    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i])
       hasit = 1;
-    }
 
-    if(hasit) {
+    if(hasit)
       navcard_bits = navcard_bits + (1 << i);
-    }
   }
 
   wait_network_frame();
@@ -4343,11 +4039,10 @@ set_player_is_female(onoff) {
   if(isDefined(level.use_female_animations) && level.use_female_animations) {
     female_perk = "specialty_gpsjammer";
 
-    if(onoff) {
+    if(onoff)
       self setperk(female_perk);
-    } else {
+    else
       self unsetperk(female_perk);
-    }
   }
 }
 
@@ -4360,48 +4055,39 @@ disable_player_move_states(forcestancechange) {
   self allowmelee(0);
 
   if(isDefined(forcestancechange) && forcestancechange == 1) {
-    if(self getstance() == "prone") {
+    if(self getstance() == "prone")
       self setstance("crouch");
-    }
   }
 }
 
 enable_player_move_states() {
-  if(!isDefined(self._allow_lean) || self._allow_lean == 1) {
+  if(!isDefined(self._allow_lean) || self._allow_lean == 1)
     self allowlean(1);
-  }
 
-  if(!isDefined(self._allow_ads) || self._allow_ads == 1) {
+  if(!isDefined(self._allow_ads) || self._allow_ads == 1)
     self allowads(1);
-  }
 
-  if(!isDefined(self._allow_sprint) || self._allow_sprint == 1) {
+  if(!isDefined(self._allow_sprint) || self._allow_sprint == 1)
     self allowsprint(1);
-  }
 
-  if(!isDefined(self._allow_prone) || self._allow_prone == 1) {
+  if(!isDefined(self._allow_prone) || self._allow_prone == 1)
     self allowprone(1);
-  }
 
-  if(!isDefined(self._allow_melee) || self._allow_melee == 1) {
+  if(!isDefined(self._allow_melee) || self._allow_melee == 1)
     self allowmelee(1);
-  }
 }
 
 check_and_create_node_lists() {
-  if(!isDefined(level._link_node_list)) {
+  if(!isDefined(level._link_node_list))
     level._link_node_list = [];
-  }
 
-  if(!isDefined(level._unlink_node_list)) {
+  if(!isDefined(level._unlink_node_list))
     level._unlink_node_list = [];
-  }
 }
 
 link_nodes(a, b, bdontunlinkonmigrate) {
-  if(!isDefined(bdontunlinkonmigrate)) {
+  if(!isDefined(bdontunlinkonmigrate))
     bdontunlinkonmigrate = 0;
-  }
 
   if(nodesarelinked(a, b)) {
     return;
@@ -4411,7 +4097,7 @@ link_nodes(a, b, bdontunlinkonmigrate) {
   b_index_string = "" + b.origin;
 
   if(!isDefined(level._link_node_list[a_index_string])) {
-    level._link_node_list[a_index_string] = spawnStruct();
+    level._link_node_list[a_index_string] = spawnstruct();
     level._link_node_list[a_index_string].node = a;
     level._link_node_list[a_index_string].links = [];
     level._link_node_list[a_index_string].ignore_on_migrate = [];
@@ -4433,9 +4119,8 @@ link_nodes(a, b, bdontunlinkonmigrate) {
 }
 
 unlink_nodes(a, b, bdontlinkonmigrate) {
-  if(!isDefined(bdontlinkonmigrate)) {
+  if(!isDefined(bdontlinkonmigrate))
     bdontlinkonmigrate = 0;
-  }
 
   if(!nodesarelinked(a, b)) {
     return;
@@ -4445,7 +4130,7 @@ unlink_nodes(a, b, bdontlinkonmigrate) {
   b_index_string = "" + b.origin;
 
   if(!isDefined(level._unlink_node_list[a_index_string])) {
-    level._unlink_node_list[a_index_string] = spawnStruct();
+    level._unlink_node_list[a_index_string] = spawnstruct();
     level._unlink_node_list[a_index_string].node = a;
     level._unlink_node_list[a_index_string].links = [];
     level._unlink_node_list[a_index_string].ignore_on_migrate = [];
@@ -4467,11 +4152,10 @@ unlink_nodes(a, b, bdontlinkonmigrate) {
 }
 
 spawn_path_node(origin, angles, k1, v1, k2, v2) {
-  if(!isDefined(level._spawned_path_nodes)) {
+  if(!isDefined(level._spawned_path_nodes))
     level._spawned_path_nodes = [];
-  }
 
-  node = spawnStruct();
+  node = spawnstruct();
   node.origin = origin;
   node.angles = angles;
   node.k1 = k1;
@@ -4484,18 +4168,18 @@ spawn_path_node(origin, angles, k1, v1, k2, v2) {
 }
 
 spawn_path_node_internal(origin, angles, k1, v1, k2, v2) {
-  if(isDefined(k2)) {
+  if(isDefined(k2))
     return spawnpathnode("node_pathnode", origin, angles, k1, v1, k2, v2);
-  } else if(isDefined(k1)) {
+  else if(isDefined(k1))
     return spawnpathnode("node_pathnode", origin, angles, k1, v1);
-  } else {
+  else
     return spawnpathnode("node_pathnode", origin, angles);
-  }
 
   return undefined;
 }
 
-delete_spawned_path_nodes() {}
+delete_spawned_path_nodes() {
+}
 
 respawn_path_nodes() {
   if(!isDefined(level._spawned_path_nodes)) {
@@ -4527,7 +4211,9 @@ link_changes_internal_internal(list, func) {
 
         println("Node at " + keys[i] + " to node at " + node_keys[j]);
 
-        [[func]](node, list[keys[i]].links[node_keys[j]]);
+        [
+          [func]
+        ](node, list[keys[i]].links[node_keys[j]]);
       }
     }
   }
@@ -4548,15 +4234,13 @@ link_changes_internal(func_for_link_list, func_for_unlink_list) {
 }
 
 link_nodes_wrapper(a, b) {
-  if(!nodesarelinked(a, b)) {
+  if(!nodesarelinked(a, b))
     linknodes(a, b);
-  }
 }
 
 unlink_nodes_wrapper(a, b) {
-  if(nodesarelinked(a, b)) {
+  if(nodesarelinked(a, b))
     unlinknodes(a, b);
-  }
 }
 
 undo_link_changes() {
@@ -4578,9 +4262,8 @@ redo_link_changes() {
 }
 
 set_player_tombstone_index() {
-  if(!isDefined(level.tombstone_index)) {
+  if(!isDefined(level.tombstone_index))
     level.tombstone_index = 0;
-  }
 
   if(!isDefined(self.tombstone_index)) {
     self.tombstone_index = level.tombstone_index;
@@ -4605,23 +4288,20 @@ is_temporary_zombie_weapon(str_weapon) {
 is_gametype_active(a_gametypes) {
   b_is_gametype_active = 0;
 
-  if(!isarray(a_gametypes)) {
+  if(!isarray(a_gametypes))
     a_gametypes = array(a_gametypes);
-  }
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i]) {
+    if(getdvar(#"g_gametype") == a_gametypes[i])
       b_is_gametype_active = 1;
-    }
   }
 
   return b_is_gametype_active;
 }
 
 is_createfx_active() {
-  if(!isDefined(level.createfx_enabled)) {
+  if(!isDefined(level.createfx_enabled))
     level.createfx_enabled = getdvar(#"createfx") != "";
-  }
 
   return level.createfx_enabled;
 }
@@ -4653,31 +4333,29 @@ is_zombie_perk_bottle(str_weapon) {
 }
 
 register_custom_spawner_entry(spot_noteworthy, func) {
-  if(!isDefined(level.custom_spawner_entry)) {
+  if(!isDefined(level.custom_spawner_entry))
     level.custom_spawner_entry = [];
-  }
 
   level.custom_spawner_entry[spot_noteworthy] = func;
 }
 
 get_player_weapon_limit(player) {
-  if(isDefined(level.get_player_weapon_limit)) {
-    return [[level.get_player_weapon_limit]](player);
-  }
+  if(isDefined(level.get_player_weapon_limit))
+    return [
+      [level.get_player_weapon_limit]
+    ](player);
 
   weapon_limit = 2;
 
-  if(player hasperk("specialty_additionalprimaryweapon")) {
+  if(player hasperk("specialty_additionalprimaryweapon"))
     weapon_limit = level.additionalprimaryweapon_limit;
-  }
 
   return weapon_limit;
 }
 
 get_player_perk_purchase_limit() {
-  if(isDefined(level.get_player_perk_purchase_limit)) {
+  if(isDefined(level.get_player_perk_purchase_limit))
     return self[[level.get_player_perk_purchase_limit]]();
-  }
 
   return level.perk_purchase_limit;
 }

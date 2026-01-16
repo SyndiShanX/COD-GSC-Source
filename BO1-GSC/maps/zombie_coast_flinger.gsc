@@ -43,7 +43,7 @@ start_flinger_in_open_position() {
   blocker trigger_on();
   blocker disconnectpaths();
   blocker trigger_off();
-  flinger_trig.flipper playSound("zmb_flinger_close");
+  flinger_trig.flipper PlaySound("zmb_flinger_close");
   angles_dif = flinger_trig.flipper_closed_struct.angles - flinger_trig.flipper_open_struct.angles;
   flinger_trig.flipper_anchor rotatePitch(angles_dif[0], .2);
   wait(.3);
@@ -72,7 +72,7 @@ flinger_think() {
       continue;
     }
     flinger_trig.flipper = getEnt("flipper", "targetname");
-    flinger_trig.flipper playSound("zmb_flinger_activate");
+    flinger_trig.flipper PlaySound("zmb_flinger_activate");
     flinger_trig.flipper thread play_delayed_activate_sound();
     wait(2);
     flinger_trig flinger_fling();
@@ -84,7 +84,7 @@ flinger_think() {
 
 play_delayed_activate_sound() {
   wait(1.9);
-  self playSound("zmb_flinger_activate");
+  self PlaySound("zmb_flinger_activate");
 }
 
 flinger_fling() {
@@ -114,10 +114,10 @@ flinger_fling() {
   self.flipper linkto(self.flipper_anchor);
   angles_dif = self.flipper_open_struct.angles - self.flipper_closed_struct.angles;
   self.flipper_anchor rotatePitch(angles_dif[0], .2);
-  self.flipper playSound("zmb_flinger_fling_add");
+  self.flipper PlaySound("zmb_flinger_fling_add");
   self.zombies_flinged = false;
   level thread player_launch(self, gate);
-  playFX(level._effect["large_ceiling_dust"], self.flipper.origin + (100, 0, 0));
+  PlayFX(level._effect["large_ceiling_dust"], self.flipper.origin + (100, 0, 0));
   self thread flipper_second_dust();
   do_flipper_corpse_cleanup(self);
   zombs = GetAIArray();
@@ -136,7 +136,7 @@ flinger_fling() {
   blocker trigger_on();
   blocker disconnectpaths();
   blocker trigger_off();
-  self.flipper playSound("zmb_flinger_close");
+  self.flipper PlaySound("zmb_flinger_close");
   self.zombies_flinged = false;
   angles_dif = self.flipper_closed_struct.angles - self.flipper_open_struct.angles;
   self.flipper_anchor rotatePitch(angles_dif[0], .2);
@@ -184,7 +184,7 @@ fling_zombie(fling_dir) {
   self.no_powerups = true;
   self StartRagdoll();
   self setclientflag(level._ZOMBIE_ACTOR_FLAG_LAUNCH_RAGDOLL);
-  self playSound("zmb_zombie_flinger_death");
+  self PlaySound("zmb_zombie_flinger_death");
   wait(.5);
   self dodamage(self.health + 100, self.origin);
   level.zombie_total++;
@@ -207,7 +207,7 @@ unlink_later(link_ent) {
     self show();
   }
   self stopLoopSound(.75);
-  self playSound("zmb_player_flinger_land");
+  self PlaySound("zmb_player_flinger_land");
   link_ent delete();
   if(isplayer(self)) {
     if(!self maps\_laststand::player_is_in_laststand()) {
@@ -330,7 +330,7 @@ boss_launch(flipper_area) {
 
 flipper_second_dust() {
   wait(0.2);
-  playFX(level._effect["rise_dust"], self.flipper.origin + (-100, 0, 0));
+  PlayFX(level._effect["rise_dust"], self.flipper.origin + (-100, 0, 0));
 }
 
 do_flipper_corpse_cleanup(area) {
@@ -345,6 +345,6 @@ do_flipper_corpse_cleanup(area) {
 }
 
 remove_corpse() {
-  playFX(level._effect["corpse_burst"], self.origin);
+  PlayFX(level._effect["corpse_burst"], self.origin);
   self Delete();
 }

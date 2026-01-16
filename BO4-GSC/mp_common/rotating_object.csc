@@ -7,6 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace rotating_object;
 
 autoexec __init__system__() {
@@ -56,13 +57,13 @@ rotating_object_think() {
 
   while(true) {
     switch (axis) {
-      case # "roll":
+      case #"roll":
         self rotateroll(direction * revolutions, rotate_time * revolutions);
         break;
-      case # "pitch":
+      case #"pitch":
         self rotatepitch(direction * revolutions, rotate_time * revolutions);
         break;
-      case # "yaw":
+      case #"yaw":
       default:
         self rotateyaw(direction * revolutions, rotate_time * revolutions);
         break;

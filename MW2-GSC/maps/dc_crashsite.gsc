@@ -52,7 +52,6 @@ main() {
 /****************************************************************************
 CRASH SITE
 ****************************************************************************/
-
 AA_crash_site_init() {
   array_spawn_function_noteworthy("axis_crash", ::AI_axis_crash_think);
   thread AAA_sequence_player_crash_site();
@@ -136,6 +135,7 @@ dialogue_crash_site() {
 
   wait(4);
 
+
   //Ranger 2	Last mag!	
   crash_chatter_org_left delaycall(0, ::playsound, "dcburn_ar2_lastmag");
 
@@ -178,14 +178,14 @@ dialogue_crash_site() {
   wait(1);
   //Ranger 2	Got it got it!!	
   crash_chatter_org_left delaycall(.6, ::playsound, "dcburn_ar2_gotitgotit");
+
 }
 
 entity_delete_on_flag(sFlag) {
   self endon("death");
   flag_wait(sFlag);
-  if(isDefined(self)) {
+  if(isdefined(self))
     self delete();
-  }
 }
 
 AAA_sequence_player_crash_site() {
@@ -206,9 +206,8 @@ AAA_sequence_player_crash_site() {
   movement_grid = crash_site_player_and_heli_setup();
 
   flag_wait("player_crash_done");
-  if(level.script == "dcburning") {
+  if(level.script == "dcburning")
     thread autosave_now(true);
-  }
 
   /*-----------------------
   VISUAL CHANGES
@@ -231,7 +230,7 @@ AAA_sequence_player_crash_site() {
     array_thread(level.effects_commerce, ::pauseEffect);
   }
 
-  if(!isDefined(level.black_overlay)) {
+  if(!isdefined(level.black_overlay)) {
     level.black_overlay = create_client_overlay("black", 1);
     level.black_overlay.foreground = false;
   }
@@ -276,7 +275,7 @@ AAA_sequence_player_crash_site() {
   crash_node anim_first_frame(anim_actors_rescue, "dcburning_BHrescue");
 
   level.m4 = spawn("script_model", (0, 0, 0));
-  level.m4 setModel("weapon_m4");
+  level.m4 setmodel("weapon_m4");
   level.m4 HidePart("TAG_THERMAL_SCOPE");
   level.m4 HidePart("TAG_FOREGRIP");
   //weapon HidePart( "TAG_WEAPON"
@@ -309,7 +308,7 @@ AAA_sequence_player_crash_site() {
   ENEMIES AND VEHICLES
   -------------------------*/
   spawn_trigger_dummy_crashsite("dummy_spawner_axis_crash_flood");
-  axis_crash_drones = getEntArray("axis_crash_drones", "targetname");
+  axis_crash_drones = getentarray("axis_crash_drones", "targetname");
   thread drone_flood_start_crashsite(axis_crash_drones, "axis_crash_drones");
 
   /*-----------------------
@@ -324,7 +323,7 @@ AAA_sequence_player_crash_site() {
   REDSHIRT TRIES TO RESCUE, DIES
   -------------------------*/
   level.friendly03 show();
-  hostiles_drones_crash_site_01 = array_spawn(getEntArray("hostiles_drones_crash_site_01", "targetname"));
+  hostiles_drones_crash_site_01 = array_spawn(getentarray("hostiles_drones_crash_site_01", "targetname"));
 
   level.friendly03.dontdonotetracks = true;
   level.friendly03.dropweapon = false;
@@ -379,9 +378,8 @@ AAA_sequence_player_crash_site() {
   level.friendly02 thread play_sound_on_entity("dcburn_cpd_tracer3rounds");
 
   //wait ( 3 );
-  foreach(guy in anim_actors_leader_and_dunn) {
-    guy.ignorme = true;
-  }
+  foreach(guy in anim_actors_leader_and_dunn)
+  guy.ignorme = true;
   level.player.ignoreme = true;
 
   flag_wait("crash_cut_to_black");
@@ -392,13 +390,13 @@ AAA_sequence_player_crash_site() {
   CUT TO WHITE
   -------------------------*/
   crash_end_scene();
+
 }
 
 delete_on_flag(sFlag) {
   flag_wait(sFlag);
-  if(isDefined(self)) {
+  if(isdefined(self))
     self delete();
-  }
 }
 
 macey_last_mag_dialogue() {
@@ -463,7 +461,7 @@ delete_at_end_of_anim() {
   self waittillmatch("single anim", "end");
   weapon_model = getWeaponModel(self.weapon);
   weapon = self.weapon;
-  if(isDefined(weapon_model)) {
+  if(isdefined(weapon_model)) {
     self detach(weapon_model, "tag_weapon_right");
   }
 
@@ -472,9 +470,8 @@ delete_at_end_of_anim() {
 
 player_ammo_monitor_clip_01() {
   //GetWeaponAmmoClip
-  while(level.player GetWeaponAmmoClip("m4m203_eotech") > 0) {
+  while (level.player GetWeaponAmmoClip("m4m203_eotech") > 0)
     wait(0.05);
-  }
   flag_set("player_ran_out_of_first_clip");
 }
 
@@ -488,7 +485,7 @@ player_ammo_monitor_clip_01() {
 //		while( level.player GetWeaponAmmoClip( "m4m203_eotech" ) == 0 )
 //		{
 //			waittill_player_fires_empty_gun();				
-//			level.player playSound( "dcburning_dryfire_rifle_plr" );
+//			level.player playsound( "dcburning_dryfire_rifle_plr" );
 //			wait( 1 );
 //		}
 //
@@ -496,9 +493,8 @@ player_ammo_monitor_clip_01() {
 //}
 
 waittill_player_fires_empty_gun() {
-  while(!level.player AttackButtonPressed()) {
+  while (!level.player AttackButtonPressed())
     wait(0.05);
-  }
 }
 
 crash_site_player_and_heli_setup() {
@@ -579,6 +575,7 @@ crash_end_scene() {
 
     nextMission();
   } else {
+
     //	delaythread( 0, ::exploder, "emp_flash" );
     //delaythread( .5, ::exploder, "emp_flash" );
     //delaythread( 1, ::exploder, "emp_flash" );
@@ -597,12 +594,12 @@ crash_end_scene() {
 
       vehicle_delete_all_crashsite(excluders);
 
-      //ai
+      //ai 
       array_thread(getaiarray("neutral", "allies"), ::AI_delete_crashsite);
-      array_call(getEntArray("axis_crash_flood", "targetname"), ::delete);
+      array_call(getentarray("axis_crash_flood", "targetname"), ::delete);
       //drones
       level notify("stop_drone_flood" + "axis_crash_drones");
-      drones = getEntArray("axis_crash_drone", "script_noteworthy");
+      drones = getentarray("axis_crash_drone", "script_noteworthy");
       array_call(drones, ::delete);
     }
     flag_set("emp_entity_cleanup_done");
@@ -631,12 +628,12 @@ crash_white_out() {
 
   //old way
   /*
-  	
+	
   white_overlay = create_client_overlay( "white", 0 );
   white_overlay fadeOverTime( .75 );
   white_overlay.alpha = 1;
   wait( .75 );
-  	
+	
   */
 
   return white_overlay;
@@ -676,6 +673,7 @@ crash_vehicles() {
 
   //wait( 5 );
   thread heli_crash_site_spotlight_think(btr80s_end);
+
 }
 
 btr80s_end_think() {
@@ -742,6 +740,7 @@ player_crash_vision() {
   -------------------------*/
   //iprintLnBold( "Go back into default DOF" );
   //thread blend_dof( dof_see_dudes, dof_start, 3 );
+
 }
 
 blur_blink() {
@@ -750,6 +749,7 @@ blur_blink() {
   SetBlur(0, .5);
   wait(.5);
   SetBlur(3, .5);
+
 }
 
 crash_music() {
@@ -780,7 +780,7 @@ crash_music() {
 //	while( true )
 //	{
 //		level.player waittill( "damage", amount, attacker );
-//		if( !isDefined( attacker ) )
+//		if( !isdefined( attacker ) )
 //			continue;
 //		if( attacker.team == "axis" )
 //			player_crash_temp_invulnerable();
@@ -805,36 +805,35 @@ crash_music() {
 player_killing_crash_enemies_at_good_pace() {
   currentTime = getTime();
   timeElapsed = currentTime - level.lasttimePlayerKilledEnemy;
-  if(currentTime == level.lasttimePlayerKilledEnemy) {
+  if(currentTime == level.lasttimePlayerKilledEnemy)
     return true;
-  } else if(timeElapsed > 5000) {
+  else if(timeElapsed > 5000)
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 crash_dlight(ePlayer_rig) {
-  while(!flag("end_sequence_starting")) {
-    playFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+  while (!flag("end_sequence_starting")) {
+    playfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(1);
-    stopFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    stopfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.3);
-    playFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    playfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.5);
-    stopFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    stopfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.3);
-    playFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    playfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.2);
-    stopFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    stopfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.4);
-    playFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    playfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.6);
-    stopFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+    stopfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
     wait(.4);
   }
 
-  stopFXOnTag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
+  stopfxontag(getfx("dlight_blue"), ePlayer_rig, "tag_player");
 }
 
 player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_rig) {
@@ -845,9 +844,8 @@ player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_r
 
   thread crash_dlight(ePlayer_rig);
 
-  if(level.script != "dcemp" || level.start_point != "iss") {
+  if(level.script != "dcemp" || level.start_point != "iss")
     delaythread(1, ::open_player_fov, ePlayer_rig);
-  }
 
   flag_wait("redshirt_headshot");
 
@@ -855,6 +853,7 @@ player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_r
   zoffset = (0, 0, 0);
   crash_node = getent("crash_node", "targetname");
   playerOrg = spawn_tag_origin();
+
 
   //playerOrg.origin = level.player.origin + zoffset;
   //playerOrg.angles = level.player.angles;
@@ -887,7 +886,7 @@ player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_r
   //Get the player's normalized movement vector. Returns [-1,1] for X(forward) and Y(right) based on player's input.
   //getnormalizedMovement - add this value times the dvar "moverate" or something
 
-  while(true) {
+  while (true) {
     wait(updateTime);
 
     movement = level.player GetNormalizedMovement();
@@ -919,9 +918,9 @@ AI_axis_crash_think() {
   self.aggressivemode = true; //dont linger at cover when you cant see your enemy
 
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isplayer(attacker))) {
+  if((isdefined(attacker)) && (isplayer(attacker)))
     level.lasttimePlayerKilledEnemy = getTime();
-  }
+
 }
 
 open_player_fov(ePlayer_rig) {
@@ -961,14 +960,14 @@ obj_crash_site() {
   flag_wait("obj_crash_site_given");
   if(level.script == "dcburning") {
     objective_number = 9;
-    objective_add(objective_number, "active", &"DCBURNING_OBJ_CRASH_SITE");
+    objective_add(objective_number, "active", & "DCBURNING_OBJ_CRASH_SITE");
     objective_current(objective_number);
 
     flag_wait("obj_crash_site_complete");
 
     objective_state(objective_number, "done");
   } else {
-    objective_add(level.objnum, "active", &"DCEMP_OBJ_CRASH_SITE");
+    objective_add(level.objnum, "active", & "DCEMP_OBJ_CRASH_SITE");
     objective_current(level.objnum);
 
     flag_wait("iss_fx");
@@ -1003,6 +1002,7 @@ player_blackhawk_health_tweaks() {
   setsaveddvar("bg_viewKickMax", old_bg_viewKickMax);
   setsaveddvar("bg_viewKickMin", old_bg_viewKickMin);
   level.player ent_flag_set("near_death_vision_enabled");
+
 }
 
 #using_animtree("generic_human");
@@ -1104,7 +1104,7 @@ crash_anims() {
   level.scr_sound["crash_leader"]["dcburn_mcy_hangon"] = "dcburn_mcy_hangon";
 
   /*-----------------------
-  MORTAR EFFECTS &SOUNDS
+  MORTAR EFFECTS & SOUNDS
   -------------------------*/
   level._effect["mortar"]["bunker_ceiling"] = loadfx("dust/ceiling_dust_bunker");
   level._effect["mortar"]["bunker_ceiling_green"] = loadfx("dust/ceiling_dust_bunker_green");
@@ -1190,7 +1190,7 @@ notetrack_redshirt_dialogue(guy) {
   flag_set("crash_redshirt_speaks");
   wait 1.0;
 
-  level.player playSound("scn_dcemp_player_handed_gun");
+  level.player playsound("scn_dcemp_player_handed_gun");
 }
 
 notetrack_redshirt_gives_gun(guy) {
@@ -1201,14 +1201,15 @@ notetrack_redshirt_shot_in_head(guy) {
   flag_set("redshirt_headshot");
   thread play_sound_in_space("weap_deserteagle_fire_npc", guy.origin);
   thread play_sound_in_space("bullet_large_flesh", guy.origin);
-  playFXOnTag(getfx("headshot3"), guy, "TAG_EYE");
+  playfxontag(getfx("headshot3"), guy, "TAG_EYE");
 }
+
 
 notetrack_friendly_02_is_wounded(guy) {
   flag_set("friendly_02_injured");
   thread play_sound_in_space("weap_deserteagle_fire_npc", guy.origin);
   thread play_sound_in_space("bullet_large_flesh", guy.origin);
-  playFXOnTag(getfx("headshot3"), guy, "J_Shoulder_RI");
+  playfxontag(getfx("headshot3"), guy, "J_Shoulder_RI");
 
   //Cpl. Dunn	(sequence of pain while being dragged to safety after having been shot)	
   //level.friendly02 thread dialogue_queue( "dcburn_cpd_pain" );
@@ -1228,6 +1229,7 @@ notetrack_friendly_02_is_wounded(guy) {
   //wait( 1 );
   //Overlord (HQ Radio)	Dagger Two-One, this is Overlord, do you read me, over?	
   //radio_dialogue( "dcburn_hqr_doyoureadme" );
+
 }
 
 notetrack_player_upright(guy) {
@@ -1255,6 +1257,7 @@ crash_player_anims() {
   addNotetrack_customFunction("player_rig", "upright", ::notetrack_player_upright, "dcburning_BHrescue");
   addNotetrack_customFunction("player_rig", "handsup", ::notetrack_player_raisehands, "dcburning_BHrescue");
   addNotetrack_customFunction("player_rig", "handsdown", ::notetrack_player_lowerhands, "dcburning_BHrescue");
+
 }
 
 #using_animtree("vehicles");
@@ -1264,21 +1267,19 @@ crash_bh_anims() {
   level.scr_anim["crash_blackhawk"]["rotors_start"] = % dcburning_BHrescue_BH;
   level.scr_anim["crash_blackhawk"]["rotors"][0] = % dcburning_BHrescue_BH;
   level.scr_animtree["crash_blackhawk"] = #animtree;
+
 }
 
 AI_delete_crashsite(excluders) {
   self endon("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
-  if((isDefined(excluders)) && (excluders.size > 0)) {
-    if(is_in_array(excluders, self)) {
+  if((isdefined(excluders)) && (excluders.size > 0)) {
+    if(is_in_array(excluders, self))
       return;
-    }
   }
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isdefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
   if(!isSentient(self)) {
     //		self notify( "death" );
     //		waittillframeend;
@@ -1288,18 +1289,17 @@ AI_delete_crashsite(excluders) {
 }
 
 vehicle_delete_all_crashsite(excluders) {
+
   vehicles_to_delete1 = level.vehicles["axis"];
   vehicles_to_delete2 = level.vehicles["allies"];
   vehicles_to_delete = array_merge(vehicles_to_delete1, vehicles_to_delete2);
   foreach(vehicle in vehicles_to_delete) {
-    if(!isDefined(vehicle)) {
+    if(!isdefined(vehicle))
       continue;
-    }
 
-    if((isDefined(excluders)) && (excluders.size > 0)) {
-      if(is_in_array(excluders, vehicle)) {
+    if((isdefined(excluders)) && (excluders.size > 0)) {
+      if(is_in_array(excluders, vehicle))
         continue;
-      }
     }
 
     vehicle maps\_vehicle::godoff();
@@ -1308,21 +1308,18 @@ vehicle_delete_all_crashsite(excluders) {
 }
 
 vehicle_delete_crashsite() {
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self endon("death");
   //cleanly delete riders even if magic_bullet_shielded
-  if((isDefined(self.riders)) && (self.riders.size)) {
+  if((isdefined(self.riders)) && (self.riders.size))
     array_thread(self.riders, ::AI_delete_crashsite);
-  }
 
   //delete any attached turrets
-  if(isDefined(self.mgturret)) {
+  if(isdefined(self.mgturret)) {
     foreach(turret in self.mgturret) {
-      if(isDefined(turret)) {
+      if(isdefined(turret))
         turret delete();
-      }
     }
 
   }
@@ -1331,7 +1328,7 @@ vehicle_delete_crashsite() {
 
 drone_flood_start_crashsite(aSpawners, groupName) {
   level endon("stop_drone_flood" + groupName);
-  while(true) {
+  while (true) {
     foreach(spawner in aSpawners) {
       spawner.script_noteworthy = "axis_crash_drone";
       add_wait(::_wait, randomfloatrange(5, 6));
@@ -1345,24 +1342,22 @@ drone_flood_start_crashsite(aSpawners, groupName) {
 }
 
 spawn_trigger_dummy_crashsite(sDummyTargetname) {
-  //triggers a spawner trig through convoluted means
+  //triggers a spawner trig through convoluted means 
   //since I can't use a unique targetname or script_noteworthy
   ent = getent(sDummyTargetname, "targetname");
-  assert(isDefined(ent));
-  assert(isDefined(ent.script_linkTo));
+  assert(isdefined(ent));
+  assert(isdefined(ent.script_linkTo));
   trig = getent(ent.script_linkTo, "script_linkname");
-  assert(isDefined(trig));
+  assert(isdefined(trig));
   trig notify("trigger", level.player);
 }
 
 AI_ignored_and_oblivious_crashsite() {
   self endon("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
-  if((isDefined(self.code_classname)) && (self.code_classname == "script_model")) {
+  if((isdefined(self.code_classname)) && (self.code_classname == "script_model"))
     return;
-  }
   self setFlashbangImmunity(true);
   self.ignoreme = true;
   self.ignoreall = true;

@@ -30,7 +30,7 @@ function init() {
   level.var_ee516197 = getweapon("zombie_one_inch_punch_upgrade_flourish");
   level._effect["oneinch_impact"] = "dlc5/tomb/fx_one_inch_punch_impact";
   level._effect["punch_knockdown_ground"] = "dlc5/zmb_weapon/fx_thundergun_knockback_ground";
-  callback::on_connect(&one_inch_punch_take_think);
+  callback::on_connect( & one_inch_punch_take_think);
 }
 
 function widows_wine_knife_override() {
@@ -49,14 +49,14 @@ function widows_wine_knife_override() {
 function one_inch_punch_melee_attack() {
   self endon("disconnect");
   self endon("stop_one_inch_punch_attack");
-  if(!(isDefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init)) {
+  if(!(isdefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init)) {
     self flag::init("melee_punch_cooldown");
   }
   self.one_inch_punch_flag_has_been_init = 1;
-  self.widows_wine_knife_override = &widows_wine_knife_override;
+  self.widows_wine_knife_override = & widows_wine_knife_override;
   current_melee_weapon = self zm_utility::get_player_melee_weapon();
   self takeweapon(current_melee_weapon);
-  if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
+  if(isdefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
     w_weapon = self getcurrentweapon();
     self zm_utility::disable_player_move_states(1);
     self giveweapon(level.var_9d7b544c);
@@ -109,8 +109,8 @@ function monitor_melee_swipe() {
   self endon("stop_monitor_melee_swipe");
   self endon("bled_out");
   var_ac486a40 = getweapon("tomb_shield");
-  while(true) {
-    while(!self ismeleeing()) {
+  while (true) {
+    while (!self ismeleeing()) {
       wait(0.05);
     }
     if(self getcurrentweapon() == var_ac486a40) {
@@ -121,9 +121,9 @@ function monitor_melee_swipe() {
     self clientfield::set("oneinchpunch_impact", 1);
     util::wait_network_frame();
     self clientfield::set("oneinchpunch_impact", 0);
-    v_punch_effect_fwd = anglesToForward(self getplayerangles());
+    v_punch_effect_fwd = anglestoforward(self getplayerangles());
     v_punch_yaw = get_2d_yaw((0, 0, 0), v_punch_effect_fwd);
-    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air") {
+    if(isdefined(self.b_punch_upgraded) && self.b_punch_upgraded && isdefined(self.str_punch_element) && self.str_punch_element == "air") {
       range_mod = range_mod * 2;
     }
     a_zombies = getaispeciesarray(level.zombie_team, "all");
@@ -137,7 +137,7 @@ function monitor_melee_swipe() {
         self thread zombie_punch_damage(zombie, 0.5);
       }
     }
-    while(self ismeleeing()) {
+    while (self ismeleeing()) {
       wait(0.05);
     }
     wait(0.05);
@@ -157,7 +157,7 @@ function is_player_facing(zombie, v_punch_yaw) {
 }
 
 function is_oneinch_punch_damage() {
-  return isDefined(self.damageweapon) && self.damageweapon == level.var_653c9585;
+  return isdefined(self.damageweapon) && self.damageweapon == level.var_653c9585;
 }
 
 function gib_zombies_head(player) {
@@ -172,22 +172,22 @@ function punch_cooldown() {
 
 function zombie_punch_damage(ai_zombie, n_mod) {
   self endon("disconnect");
-  ai_zombie.punch_handle_pain_notetracks = &handle_punch_pain_notetracks;
-  if(isDefined(n_mod)) {
+  ai_zombie.punch_handle_pain_notetracks = & handle_punch_pain_notetracks;
+  if(isdefined(n_mod)) {
     if(self hasperk("specialty_widowswine")) {
       n_mod = n_mod * 1.1;
     }
-    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
+    if(isdefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
       n_base_damage = 11275;
     } else {
       n_base_damage = 2250;
     }
     n_damage = int(n_base_damage * n_mod);
-    if(!(isDefined(ai_zombie.is_mechz) && ai_zombie.is_mechz)) {
+    if(!(isdefined(ai_zombie.is_mechz) && ai_zombie.is_mechz)) {
       if(n_damage >= ai_zombie.health) {
         self thread zombie_punch_death(ai_zombie);
         self zm_utility::do_player_general_vox("kill", "one_inch_punch");
-        if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element)) {
+        if(isdefined(self.b_punch_upgraded) && self.b_punch_upgraded && isdefined(self.str_punch_element)) {
           switch (self.str_punch_element) {
             case "fire": {
               ai_zombie clientfield::set("fire_char_fx", 1);
@@ -198,10 +198,10 @@ function zombie_punch_damage(ai_zombie, n_mod) {
               break;
             }
             case "lightning": {
-              if(isDefined(ai_zombie.is_mechz) && ai_zombie.is_mechz) {
+              if(isdefined(ai_zombie.is_mechz) && ai_zombie.is_mechz) {
                 return;
               }
-              if(isDefined(ai_zombie.is_electrocuted) && ai_zombie.is_electrocuted) {
+              if(isdefined(ai_zombie.is_electrocuted) && ai_zombie.is_electrocuted) {
                 return;
               }
               tag = "J_SpineUpper";
@@ -212,7 +212,7 @@ function zombie_punch_damage(ai_zombie, n_mod) {
         }
       } else {
         self zm_score::player_add_points("damage_light");
-        if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element)) {
+        if(isdefined(self.b_punch_upgraded) && self.b_punch_upgraded && isdefined(self.str_punch_element)) {
           switch (self.str_punch_element) {
             case "fire": {
               ai_zombie clientfield::set("fire_char_fx", 1);
@@ -236,10 +236,12 @@ function zombie_punch_damage(ai_zombie, n_mod) {
 
 function zombie_punch_death(ai_zombie) {
   ai_zombie thread gib_zombies_head(self);
-  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
+  if(isdefined(level.ragdoll_limit_check) && ![
+      [level.ragdoll_limit_check]
+    ]()) {
     return;
   }
-  if(isDefined(ai_zombie)) {
+  if(isdefined(ai_zombie)) {
     ai_zombie startragdoll();
     v_launch = (vectornormalize(ai_zombie.origin - self.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
     ai_zombie launchragdoll(v_launch);
@@ -248,13 +250,13 @@ function zombie_punch_death(ai_zombie) {
 
 function handle_punch_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect["punch_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    playfx(level._effect["punch_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
   }
 }
 
 function one_inch_punch_take_think() {
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("bled_out");
     self.one_inch_punch_flag_has_been_init = 0;
     self.widows_wine_knife_override = undefined;
@@ -269,7 +271,7 @@ function knockdown_zombie_animate() {
   self endon("killanimscript");
   self endon("death");
   self endon("end_play_punch_pain_anim");
-  if(isDefined(self.marked_for_death) && self.marked_for_death) {
+  if(isdefined(self.marked_for_death) && self.marked_for_death) {
     return;
   }
   self.allowpain = 0;
@@ -277,10 +279,10 @@ function knockdown_zombie_animate() {
   animation_legs = "";
   animation_side = undefined;
   animation_duration = "_default";
-  v_forward = vectordot(anglesToForward(self.angles), vectornormalize(self.v_punched_from - self.origin));
+  v_forward = vectordot(anglestoforward(self.angles), vectornormalize(self.v_punched_from - self.origin));
   if(v_forward > 0.6) {
     animation_direction = "back";
-    if(isDefined(self.missinglegs) && self.missinglegs) {
+    if(isdefined(self.missinglegs) && self.missinglegs) {
       animation_legs = "_crawl";
     }
     if(randomint(100) > 75) {
@@ -305,10 +307,10 @@ function knockdown_zombie_animate() {
   self thread knockdown_zombie_animate_state();
   self setanimstatefromasd(("zm_punch_fall_" + animation_direction) + animation_legs);
   self zombie_shared::donotetracks("punch_fall_anim", self.punch_handle_pain_notetracks);
-  if(isDefined(self.missinglegs) && self.missinglegs || (isDefined(self.marked_for_death) && self.marked_for_death)) {
+  if(isdefined(self.missinglegs) && self.missinglegs || (isdefined(self.marked_for_death) && self.marked_for_death)) {
     return;
   }
-  if(isDefined(self.a.gib_ref)) {
+  if(isdefined(self.a.gib_ref)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg" && randomint(100) > 25) || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm" && randomint(100) > 75)) {
       animation_duration = "_late";
     } else if(randomint(100) > 75) {

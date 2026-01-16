@@ -55,9 +55,8 @@ enemy_state_spotted(var_0) {
   self.dontattackme = undefined;
   self.dontevershoot = undefined;
 
-  if(isDefined(self.oldfixednode)) {
+  if(isDefined(self.oldfixednode))
     self.fixednode = self.oldfixednode;
-  }
 
   if(self.type != "dog") {
     self.diequietly = 0;
@@ -77,9 +76,8 @@ enemy_state_spotted(var_0) {
   if(isDefined(level._stealth.group.spotted_enemy)) {
     var_1 = level._stealth.group.spotted_enemy[self.script_stealthgroup];
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       self getenemyinfo(var_1);
-    }
   }
 }
 
@@ -97,18 +95,16 @@ enemy_init() {
   enemy_default_anim_behavior();
   self._stealth.behavior.event = spawnStruct();
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     enemy_dog_init();
-  }
 
   self._stealth.plugins = spawnStruct();
   thread maps\_stealth_shared_utilities::ai_stealth_pause_handler();
 }
 
 enemy_dog_init() {
-  if(threatbiasgroupexists("dog")) {
+  if(threatbiasgroupexists("dog"))
     self setthreatbiasgroup("dog");
-  }
 
   if(isDefined(self.enemy) || isDefined(self.favoriteenemy)) {
     return;
@@ -126,9 +122,8 @@ enemy_dog_init() {
 }
 
 enemy_custom_state_behavior(var_0) {
-  foreach(var_3, var_2 in var_0) {
-    maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
-  }
+  foreach(var_3, var_2 in var_0)
+  maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
 
   var_4 = self._stealth.behavior.ai_functions["state"]["hidden"];
   thread maps\_stealth_shared_utilities::ai_message_handler_hidden(var_4, "enemy_behavior");

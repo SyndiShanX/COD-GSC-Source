@@ -8,8 +8,8 @@
 #include maps\_zombiemode_utility;
 
 purchase_bouncing_betties() {
-  trigs = getEntArray("betty_purchase", "targetname");
-  for(i = 0; i < trigs.size; i++) {
+  trigs = getentarray("betty_purchase", "targetname");
+  for (i = 0; i < trigs.size; i++) {
     model = getent(trigs[i].target, "targetname");
     model hide();
   }
@@ -22,7 +22,7 @@ buy_bouncing_betties() {
   self setCursorHint("HINT_NOICON");
   level thread set_betty_visible();
   self.betties_triggered = false;
-  while(1) {
+  while (1) {
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -40,8 +40,8 @@ buy_bouncing_betties() {
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.betties_triggered = true;
           }
-          trigs = getEntArray("betty_purchase", "targetname");
-          for(i = 0; i < trigs.size; i++) {
+          trigs = getentarray("betty_purchase", "targetname");
+          for (i = 0; i < trigs.size; i++) {
             trigs[i] SetInvisibleToPlayer(who);
           }
         } else {}
@@ -52,11 +52,11 @@ buy_bouncing_betties() {
 
 set_betty_visible() {
   players = getplayers();
-  trigs = getEntArray("betty_purchase", "targetname");
-  while(1) {
-    for(j = 0; j < players.size; j++) {
+  trigs = getentarray("betty_purchase", "targetname");
+  while (1) {
+    for (j = 0; j < players.size; j++) {
       if(!isDefined(players[j].has_betties)) {
-        for(i = 0; i < trigs.size; i++) {
+        for (i = 0; i < trigs.size; i++) {
           trigs[i] SetInvisibleToPlayer(players[j], false);
         }
       }
@@ -68,7 +68,7 @@ set_betty_visible() {
 
 bouncing_betty_watch() {
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", betty, weapname);
     if(weapname == "mine_bouncing_betty") {
       betty.owner = self;
@@ -98,21 +98,21 @@ betty_think() {
   trigger = spawn("trigger_radius", self.origin, 9, 80, 64);
   trigger waittill("trigger");
   trigger = trigger;
-  self playSound("betty_activated");
+  self playsound("betty_activated");
   wait(.1);
   fake_model = spawn("script_model", self.origin);
-  fake_model setModel(self.model);
+  fake_model setmodel(self.model);
   self hide();
   tag_origin = spawn("script_model", self.origin);
-  tag_origin setModel("tag_origin");
+  tag_origin setmodel("tag_origin");
   tag_origin linkto(fake_model);
-  playFXOnTag(level._effect["betty_trail"], tag_origin, "tag_origin");
+  playfxontag(level._effect["betty_trail"], tag_origin, "tag_origin");
   fake_model moveto(fake_model.origin + (0, 0, 32), .2);
   fake_model waittill("movedone");
-  playFX(level._effect["betty_explode"], fake_model.origin);
+  playfx(level._effect["betty_explode"], fake_model.origin);
   earthquake(1, .4, fake_model.origin, 512);
   zombs = getaispeciesarray("axis");
-  for(i = 0; i < zombs.size; i++) {
+  for (i = 0; i < zombs.size; i++) {
     if(zombs[i].origin[2] < fake_model.origin[2] + 80 && zombs[i].origin[2] > fake_model.origin[2] - 80 && DistanceSquared(zombs[i].origin, fake_model.origin) < 200 * 200) {
       zombs[i] thread maps\_zombiemode_spawner::zombie_damage("MOD_ZOMBIE_BETTY", "none", zombs[i].origin, self.owner);
     }
@@ -127,17 +127,17 @@ betty_think() {
 
 betty_smoke_trail() {
   self.tag_origin = spawn("script_model", self.origin);
-  self.tag_origin setModel("tag_origin");
-  playFXOnTag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
+  self.tag_origin setmodel("tag_origin");
+  playfxontag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
   self.tag_origin moveto(self.tag_origin.origin + (0, 0, 100), .15);
 }
 
 give_betties_after_rounds() {
-  while(1) {
+  while (1) {
     level waittill("between_round_over");
     {
       players = get_players();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(isDefined(players[i].has_betties)) {
           players[i] giveweapon("mine_bouncing_betty");
           players[i] setactionslot(4, "weapon", "mine_bouncing_betty");
@@ -170,11 +170,10 @@ setup_client_hintelem() {
 show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
-  if(string == "betty_purchased") {
-    text = &"ZOMBIE_BETTY_HOWTO";
-  } else {
-    text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
-  }
+  if(string == "betty_purchased")
+    text = & "ZOMBIE_BETTY_HOWTO";
+  else
+    text = & "ZOMBIE_BETTY_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

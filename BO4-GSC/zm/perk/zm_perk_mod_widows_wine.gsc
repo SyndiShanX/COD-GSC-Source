@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_mod_widows_wine;
 
 autoexec __init__system__() {
@@ -16,7 +17,7 @@ __init__() {
 }
 
 enable_widows_wine_perk_for_level() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_widowswine", "mod_widows_wine", # "perk_widows_wine", # "specialty_widowswine", 4500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_widowswine", "mod_widows_wine", #"perk_widows_wine", #"specialty_widowswine", 4500);
   zm_perks::register_perk_threads(#"specialty_mod_widowswine", &widows_wine_perk_activate, &widows_wine_perk_lost);
 }
 

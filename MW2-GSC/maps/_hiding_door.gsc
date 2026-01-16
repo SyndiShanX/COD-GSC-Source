@@ -8,13 +8,13 @@
 #include maps\_anim;
 
 hiding_door_spawner() {
-  // place a hiding_door_guy prefab and then place a spawner next to it with script_noteworthy "hiding_door_spawner".
+  // place a hiding_door_guy prefab and then place a spawner next to it with script_noteworthy "hiding_door_spawner". 
   // Spawn the guy however you like (trigger or script)
   // Target the spawner to a trigger, this trigger will make the guy open the door.
   // Alternatively put a script_flag_wait on the spawner. The guy will wait for the flag to be set before opening the door.
   // If you put neither, a trigger_radius will be spawned, using the radius of the spawner if a radius is set
 
-  door_orgs = getEntArray("hiding_door_guy_org", "targetname");
+  door_orgs = getentarray("hiding_door_guy_org", "targetname");
   assertex(door_orgs.size, "Hiding door guy with export " + self.export+" couldn't find a hiding_door_org!");
 
   door_org = getclosest(self.origin, door_orgs);
@@ -23,12 +23,12 @@ hiding_door_spawner() {
   door_org.targetname = undefined; // so future searches won't grab this one
 
   //get door models (and script_brushmodel doors, if applicable)
-  door_models = getEntArray(door_org.target, "targetname");
+  door_models = getentarray(door_org.target, "targetname");
   door_model = undefined;
   brushmodel_door = undefined;
 
   badplaceBrush = undefined;
-  if(isDefined(door_org.script_linkto)) {
+  if(IsDefined(door_org.script_linkto)) {
     badplaceBrush = door_org get_linked_ent();
   }
 
@@ -46,21 +46,20 @@ hiding_door_spawner() {
         door_model = ent;
       }
     }
-    assertex(isDefined(brushmodel_door), "Hiding door org at " + door_org.origin + " targets multiple entities, but not a script_brushmodel door");
-    assertex(isDefined(door_model), "Hiding door org at " + door_org.origin + " targets multiple entities, but not a script_model door");
+    assertex(isdefined(brushmodel_door), "Hiding door org at " + door_org.origin + " targets multiple entities, but not a script_brushmodel door");
+    assertex(isdefined(door_model), "Hiding door org at " + door_org.origin + " targets multiple entities, but not a script_model door");
   }
 
   door_clip = getent(door_model.target, "targetname");
-  assert(isDefined(door_model.target));
+  assert(isdefined(door_model.target));
 
   pushPlayerClip = undefined;
-  if(isDefined(door_clip.target)) {
+  if(isdefined(door_clip.target))
     pushPlayerClip = getent(door_clip.target, "targetname");
-  }
-  if(isDefined(pushPlayerClip)) {
+  if(isdefined(pushPlayerClip)) {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
 
-    if(!isDefined(level._hiding_door_pushplayer_clips)) {
+    if(!IsDefined(level._hiding_door_pushplayer_clips)) {
       level._hiding_door_pushplayer_clips = [];
     }
     level._hiding_door_pushplayer_clips[level._hiding_door_pushplayer_clips.size] = pushPlayerClip;
@@ -70,37 +69,34 @@ hiding_door_spawner() {
 
   door = spawn_anim_model("hiding_door");
   door_org thread anim_first_frame_solo(door, "fire_3");
-  if(isDefined(brushmodel_door)) {
+  if(isdefined(brushmodel_door)) {
     brushmodel_door linkTo(door, "door_hinge_jnt");
     door hide();
   }
 
-  if(isDefined(door_clip)) {
+  if(isdefined(door_clip)) {
     door_clip linkto(door, "door_hinge_jnt");
     door_clip disconnectPaths();
   }
 
   trigger = undefined;
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     trigger = getent(self.target, "targetname");
-    if(!issubstr(trigger.classname, "trigger")) {
+    if(!issubstr(trigger.classname, "trigger"))
       trigger = undefined;
-    }
   }
 
-  if(!isDefined(self.script_flag_wait) && !isDefined(trigger)) {
+  if(!isdefined(self.script_flag_wait) && !isdefined(trigger)) {
     radius = 200;
-    if(isDefined(self.radius)) {
+    if(isdefined(self.radius))
       radius = self.radius;
-    }
 
     // no trigger mechanism specified, so add a radius trigger
     trigger = spawn("trigger_radius", door_org.origin, 0, radius, 48);
   }
 
-  if(isDefined(badplaceBrush)) {
+  if(isdefined(badplaceBrush))
     badPlace_Brush(badplaceBrush getentitynumber(), 0, badplaceBrush, "allies");
-  }
 
   self add_spawn_function(::hiding_door_guy, door_org, trigger, door, door_clip, badplaceBrush);
 }
@@ -132,7 +128,7 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
     door_org thread anim_first_frame(guy_and_door, "fire_3");
   }
 
-  if(isDefined(trigger)) {
+  if(isdefined(trigger)) {
     wait 0.05;
     trigger waittill("trigger");
   } else {
@@ -146,16 +142,15 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
 
   counter = 0;
   timesFired = 0;
-  for(;;) {
+  for (;;) {
     //-----------------
     // GET ENEMY AND ENEMY DIRECTION
     //-----------------
 
     enemy = level.player;
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy))
       enemy = self.enemy;
-    }
-    assert(isDefined(enemy));
+    assert(isdefined(enemy));
     direction = hiding_door_get_enemy_direction(door.angles, self.origin, enemy.origin);
 
     //-----------------
@@ -164,16 +159,14 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
 
     // Abort door behavior if the player comes up behind the AI
     if(self player_entered_backdoor(direction)) {
-      if(self quit_door_behavior()) {
+      if(self quit_door_behavior())
         return;
-      }
     }
 
     // Abort door behavior after peeking a couple times if the player can see him from behind
     if(counter >= 2) {
-      if(self quit_door_behavior(true)) {
+      if(self quit_door_behavior(true))
         return;
-      }
     }
 
     //-----------------
@@ -185,9 +178,8 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
       scene = "fire_3";
     } else if(direction == "right") {
       scene = "fire_1";
-      if(cointoss()) {
+      if(cointoss())
         scene = "fire_2";
-      }
     } else {
       // player or enemy is behind him so just open and close the door and peek
       door_org anim_single(guy_and_door, "open");
@@ -195,7 +187,7 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
       counter++;
       continue;
     }
-    assert(isDefined(scene));
+    assert(isdefined(scene));
 
     //-----------------
     // CHARGE CONDITION + CHANCE
@@ -204,9 +196,8 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
     if(self hiding_door_guy_should_charge(direction, enemy, timesFired)) {
       scene = "jump";
       if(coinToss()) {
-        if(self mayMoveToPoint(animscripts\utility::getAnimEndPos(level.scr_anim[self.animname]["kick"]))) {
+        if(self mayMoveToPoint(animscripts\utility::getAnimEndPos(level.scr_anim[self.animname]["kick"])))
           scene = "kick";
-        }
       }
 
       // connect paths on the door and handle player clip
@@ -263,14 +254,12 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
 }
 
 quit_door_behavior(sightTraceRequired, door_org) {
-  if(!isDefined(sightTraceRequired)) {
+  if(!isdefined(sightTraceRequired))
     sightTraceRequired = false;
-  }
 
   if(sightTraceRequired) {
-    if(!sightTracePassed(level.player getEye(), self getEye(), false, self)) {
+    if(!sightTracePassed(level.player getEye(), self getEye(), false, self))
       return false;
-    }
   }
 
   self.health = 100;
@@ -284,18 +273,15 @@ quit_door_behavior(sightTraceRequired, door_org) {
 }
 
 player_entered_backdoor(direction) {
-  if(direction != "behind") {
+  if(direction != "behind")
     return false;
-  }
 
   d = distance(self.origin, level.player.origin);
-  if(d > 250) {
+  if(d > 250)
     return false;
-  }
 
-  if(!sightTracePassed(level.player getEye(), self getEye(), false, self)) {
+  if(!sightTracePassed(level.player getEye(), self getEye(), false, self))
     return false;
-  }
 
   return true;
 }
@@ -305,39 +291,31 @@ hiding_door_guy_should_charge(direction, enemy, timesFired) {
   MIN_DIST = 100;
   MAX_DIST = 600;
 
-  if(timesFired < TIMES_FIRED_MIN) {
+  if(timesFired < TIMES_FIRED_MIN)
     return false;
-  }
 
-  if(enemy != level.player) {
+  if(enemy != level.player)
     return false;
-  }
 
-  if(direction != "front") {
+  if(direction != "front")
     return false;
-  }
 
   d = distance(self.origin, level.player.origin);
-  if(d < MIN_DIST) {
+  if(d < MIN_DIST)
     return false;
-  }
-  if(d > MAX_DIST) {
+  if(d > MAX_DIST)
     return false;
-  }
 
   return coinToss();
 }
 
 hiding_door_guy_should_throw_grenade(direction, timesFired) {
-  if(timesFired < 1) {
+  if(timesFired < 1)
     return false;
-  }
-  if(direction == "behind") {
+  if(direction == "behind")
     return false;
-  }
-  if(randomint(100) < 25 * self.grenadeammo) {
+  if(randomint(100) < 25 * self.grenadeammo)
     return true;
-  }
   return false;
 }
 
@@ -353,17 +331,16 @@ hiding_door_get_enemy_direction(viewerAngles, viewerOrigin, targetOrigin) {
 
   direction = undefined;
 
-  if(angle >= 90 && angle <= 270) {
+  if(angle >= 90 && angle <= 270)
     direction = "behind";
-  } else if(angle >= 300 || angle <= 45) {
+  else if(angle >= 300 || angle <= 45)
     direction = "front";
-  } else if(angle < 90) {
+  else if(angle < 90)
     direction = "right";
-  } else if(angle > 270) {
+  else if(angle > 270)
     direction = "left";
-  }
 
-  assert(isDefined(direction));
+  assert(isdefined(direction));
   return direction;
 }
 
@@ -378,7 +355,7 @@ hiding_door_guy_cleanup(door_org, guy, door, door_clip, badplaceBrush) {
 
   thread hiding_door_death_door_connections(door_clip, badplaceBrush);
   door_org notify("push_player");
-  if(!isDefined(door.played_death_anim)) {
+  if(!isdefined(door.played_death_anim)) {
     door.played_death_anim = true;
     door_org thread anim_single_solo(door, "death_2");
   }
@@ -395,12 +372,10 @@ hiding_door_guy_grenade_throw(guy) {
   // called from a notetrack
   startOrigin = guy getTagOrigin("J_Wrist_RI");
   strength = (distance(level.player.origin, guy.origin) * 2.0);
-  if(strength < 300) {
+  if(strength < 300)
     strength = 300;
-  }
-  if(strength > 1000) {
+  if(strength > 1000)
     strength = 1000;
-  }
   vector = vectorNormalize(level.player.origin - guy.origin);
   velocity = vector_multiply(vector, strength);
   guy magicGrenadeManual(startOrigin, velocity, randomfloatrange(3.0, 5.0));
@@ -411,19 +386,18 @@ hiding_door_death(door, door_org, guy, door_clip, badplaceBrush) {
   guy endon("quit_door_behavior");
 
   guy waittill("damage", dmg, attacker);
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
   thread hiding_door_death_door_connections(door_clip, badplaceBrush);
   door_org notify("push_player");
   door_org thread anim_single_solo(guy, "death_2");
-  if(!isDefined(door.played_death_anim)) {
+  if(!isdefined(door.played_death_anim)) {
     door.played_death_anim = true;
     door_org thread anim_single_solo(door, "death_2");
   }
   wait(0.5);
   if(isalive(guy)) {
-    if(isDefined(attacker)) {
+    if(IsDefined(attacker)) {
       guy Kill((0, 0, 0), attacker);
     } else {
       //guy.a.nodeath = true;
@@ -435,15 +409,13 @@ hiding_door_death(door, door_org, guy, door_clip, badplaceBrush) {
 hiding_door_death_door_connections(door_clip, badplaceBrush) {
   wait 2;
 
-  if(isDefined(door_clip)) {
+  if(isdefined(door_clip))
     door_clip disconnectpaths();
-  }
 
-  if(isDefined(badplaceBrush)) {
+  if(isdefined(badplaceBrush))
     badPlace_Delete(badplaceBrush getentitynumber());
-  }
 }
 
 hiding_door_starts_open(door_org) {
-  return (isDefined(door_org.script_noteworthy) && (door_org.script_noteworthy == "starts_open"));
+  return (isdefined(door_org.script_noteworthy) && (door_org.script_noteworthy == "starts_open"));
 }

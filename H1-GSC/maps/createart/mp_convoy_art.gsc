@@ -7,11 +7,10 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr()) {
+  if(isusinghdr())
     maps\createart\mp_convoy_fog_hdr::main();
-  } else {
+  else
     maps\createart\mp_convoy_fog::main();
-  }
 
   visionsetnaked("mp_convoy", 0);
 }

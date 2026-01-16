@@ -505,4 +505,5 @@ main() {
   ent.v["angles"] = (0, 90, 0);
   ent.v["fxid"] = "hallway_smoke_light";
   ent.v["delay"] = -15;
+
 }

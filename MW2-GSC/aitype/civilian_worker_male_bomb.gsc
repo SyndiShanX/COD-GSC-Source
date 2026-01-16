@@ -53,4 +53,5 @@ precache() {
   character\character_civilian_worker_bomb_a::precache();
   character\character_civilian_worker_bomb_b::precache();
   character\character_civilian_worker_bomb_c::precache();
+
 }

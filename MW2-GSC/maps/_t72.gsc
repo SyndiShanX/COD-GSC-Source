@@ -30,6 +30,7 @@ main(model, type) {
   build_mainturret();
   build_frontarmor(.33); // regens this much of the damage from attacks to the front
   build_compassicon("tank", false);
+
 }
 
 init_local() {}
@@ -42,14 +43,15 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 11; i++)
+    positions[i] = spawnstruct();
 
   positions[0].getout_delete = true;
 
   return positions;
 }
+
+
 
 /*QUAKED script_vehicle_t72_tank (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

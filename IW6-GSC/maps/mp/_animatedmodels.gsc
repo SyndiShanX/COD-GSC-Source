@@ -6,16 +6,14 @@
 #include common_scripts\utility;
 #using_animtree("animated_props");
 main() {
-  if(!isDefined(level.anim_prop_models)) {
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
-  }
 
   model_keys = GetArrayKeys(level.anim_prop_models);
   foreach(model_key in model_keys) {
     anim_keys = GetArrayKeys(level.anim_prop_models[model_key]);
-    foreach(anim_key in anim_keys) {
-      PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
-    }
+    foreach(anim_key in anim_keys)
+    PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
 
   }
 

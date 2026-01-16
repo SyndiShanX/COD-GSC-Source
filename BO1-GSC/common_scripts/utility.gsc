@@ -244,7 +244,7 @@ array_wait(array, msg, timeout) {
   structs = [];
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnStruct();
+    structs[key] = spawnstruct();
     structs[key]._array_wait = true;
     structs[key] thread array_waitlogic1(array[key], msg, timeout);
   }
@@ -265,7 +265,7 @@ array_wait_any(array, msg, timeout) {
   internal_msg = msg + "array_wait";
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnStruct();
+    structs[key] = spawnstruct();
     structs[key]._array_wait = true;
     structs[key] thread array_waitlogic3(array[key], msg, internal_msg, timeout);
   }
@@ -406,59 +406,48 @@ randomvector(num) {
 }
 
 angle_dif(oldangle, newangle) {
-  if(oldangle == newangle) {
+  if(oldangle == newangle)
     return 0;
-  }
-  while(newangle > 360) {
+  while(newangle > 360)
     newangle -= 360;
-  }
-  while(newangle < 0) {
+  while(newangle < 0)
     newangle += 360;
-  }
-  while(oldangle > 360) {
+  while(oldangle > 360)
     oldangle -= 360;
-  }
-  while(oldangle < 0) {
+  while(oldangle < 0)
     oldangle += 360;
-  }
   olddif = undefined;
   newdif = undefined;
-  if(newangle > 180) {
+  if(newangle > 180)
     newdif = 360 - newangle;
-  } else {
+  else
     newdif = newangle;
-  }
-  if(oldangle > 180) {
+  if(oldangle > 180)
     olddif = 360 - oldangle;
-  } else {
+  else
     olddif = oldangle;
-  }
   outerdif = newdif + olddif;
   innerdif = 0;
-  if(newangle > oldangle) {
+  if(newangle > oldangle)
     innerdif = newangle - oldangle;
-  } else {
+  else
     innerdif = oldangle - newangle;
-  }
-  if(innerdif < outerdif) {
+  if(innerdif < outerdif)
     return innerdif;
-  } else {
+  else
     return outerdif;
-  }
 }
 
 sign(x) {
-  if(x >= 0) {
+  if(x >= 0)
     return 1;
-  }
   return -1;
 }
 
 track(spot_to_track) {
   if(isDefined(self.current_target)) {
-    if(spot_to_track == self.current_target) {
+    if(spot_to_track == self.current_target)
       return;
-    }
   }
   self.current_target = spot_to_track;
 }
@@ -485,9 +474,8 @@ cointoss() {
 }
 
 waittill_string(msg, ent) {
-  if(msg != "death") {
+  if(msg != "death")
     self endon("death");
-  }
   ent endon("die");
   self waittill(msg);
   ent notify("returned", msg);
@@ -495,7 +483,7 @@ waittill_string(msg, ent) {
 
 waittill_multiple(string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.threads = 0;
   if(isDefined(string1)) {
     self thread waittill_string(string1, ent);
@@ -526,7 +514,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 
 waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4) {
   self endon("death");
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.threads = 0;
   if(isDefined(ent1)) {
     assert(isDefined(string1));
@@ -563,25 +551,19 @@ waittill_any_return(string1, string2, string3, string4, string5, string6) {
     (!isDefined(string5) || string5 != "death") &&
     (!isDefined(string6) || string6 != "death"))
     self endon("death");
-  ent = spawnStruct();
-  if(isDefined(string1)) {
+  ent = SpawnStruct();
+  if(isDefined(string1))
     self thread waittill_string(string1, ent);
-  }
-  if(isDefined(string2)) {
+  if(isDefined(string2))
     self thread waittill_string(string2, ent);
-  }
-  if(isDefined(string3)) {
+  if(isDefined(string3))
     self thread waittill_string(string3, ent);
-  }
-  if(isDefined(string4)) {
+  if(isDefined(string4))
     self thread waittill_string(string4, ent);
-  }
-  if(isDefined(string5)) {
+  if(isDefined(string5))
     self thread waittill_string(string5, ent);
-  }
-  if(isDefined(string6)) {
+  if(isDefined(string6))
     self thread waittill_string(string6, ent);
-  }
   ent waittill("returned", msg);
   ent notify("die");
   return msg;
@@ -589,58 +571,46 @@ waittill_any_return(string1, string2, string3, string4, string5, string6) {
 
 waittill_any(string1, string2, string3, string4, string5) {
   assert(isDefined(string1));
-  if(isDefined(string2)) {
+  if(isDefined(string2))
     self endon(string2);
-  }
-  if(isDefined(string3)) {
+  if(isDefined(string3))
     self endon(string3);
-  }
-  if(isDefined(string4)) {
+  if(isDefined(string4))
     self endon(string4);
-  }
-  if(isDefined(string5)) {
+  if(isDefined(string5))
     self endon(string5);
-  }
   self waittill(string1);
 }
 
 waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {
   assert(isDefined(ent1));
   assert(isDefined(string1));
-  if((isDefined(ent2)) && (isDefined(string2))) {
+  if((isDefined(ent2)) && (isDefined(string2)))
     ent2 endon(string2);
-  }
-  if((isDefined(ent3)) && (isDefined(string3))) {
+  if((isDefined(ent3)) && (isDefined(string3)))
     ent3 endon(string3);
-  }
-  if((isDefined(ent4)) && (isDefined(string4))) {
+  if((isDefined(ent4)) && (isDefined(string4)))
     ent4 endon(string4);
-  }
-  if((isDefined(ent5)) && (isDefined(string5))) {
+  if((isDefined(ent5)) && (isDefined(string5)))
     ent5 endon(string5);
-  }
-  if((isDefined(ent6)) && (isDefined(string6))) {
+  if((isDefined(ent6)) && (isDefined(string6)))
     ent6 endon(string6);
-  }
-  if((isDefined(ent7)) && (isDefined(string7))) {
+  if((isDefined(ent7)) && (isDefined(string7)))
     ent7 endon(string7);
-  }
   ent1 waittill(string1);
 }
 
 isFlashed() {
-  if(!isDefined(self.flashEndTime)) {
+  if(!isDefined(self.flashEndTime))
     return false;
-  }
   return GetTime() < self.flashEndTime;
 }
 
 flag(message) {
   assertEx(isDefined(message), "Tried to check flag but the flag was not defined.");
   assertEx(isDefined(level.flag[message]), "Tried to check flag " + message + " but the flag was not initialized.");
-  if(!level.flag[message]) {
+  if(!level.flag[message])
     return false;
-  }
   return true;
 }
 
@@ -673,13 +643,11 @@ flag_init(message, val) {
 
 empty_init_func(empty) {}
 issuffix(msg, suffix) {
-  if(suffix.size > msg.size) {
+  if(suffix.size > msg.size)
     return false;
-  }
   for(i = 0; i < suffix.size; i++) {
-    if(msg[i] != suffix[i]) {
+    if(msg[i] != suffix[i])
       return false;
-    }
   }
   return true;
 }
@@ -699,9 +667,8 @@ flag_toggle(message) {
 }
 
 flag_wait(msg) {
-  while(!level.flag[msg]) {
+  while(!level.flag[msg])
     level waittill(msg);
-  }
 }
 
 flag_clear(message) {
@@ -713,47 +680,39 @@ flag_clear(message) {
 }
 
 flag_waitopen(msg) {
-  while(level.flag[msg]) {
+  while(level.flag[msg])
     level waittill(msg);
-  }
 }
 
 flag_exists(msg) {
   if(self == level) {
-    if(!isDefined(level.flag)) {
+    if(!isDefined(level.flag))
       return false;
-    }
-    if(isDefined(level.flag[msg])) {
+    if(isDefined(level.flag[msg]))
       return true;
-    }
   } else {
-    if(!isDefined(self.ent_flag)) {
+    if(!isDefined(self.ent_flag))
       return false;
-    }
-    if(isDefined(self.ent_flag[msg])) {
+    if(isDefined(self.ent_flag[msg]))
       return true;
-    }
   }
   return false;
 }
 
 script_gen_dump_addline(string, signature) {
-  if(!isDefined(string)) {
+  if(!isDefined(string))
     string = "nowrite";
-  }
   if(!isDefined(level._loadstarted)) {
-    if(!isDefined(level.script_gen_dump_preload)) {
+    if(!isDefined(level.script_gen_dump_preload))
       level.script_gen_dump_preload = [];
-    }
-    struct = spawnStruct();
+    struct = SpawnStruct();
     struct.string = string;
     struct.signature = signature;
     level.script_gen_dump_preload[level.script_gen_dump_preload.size] = struct;
     return;
   }
-  if(!isDefined(level.script_gen_dump[signature])) {
+  if(!isDefined(level.script_gen_dump[signature]))
     level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Added: " + string;
-  }
   level.script_gen_dump[signature] = string;
   level.script_gen_dump2[signature] = string;
 }
@@ -827,9 +786,8 @@ single_thread(entity, func, arg1, arg2, arg3, arg4, arg5) {
 remove_undefined_from_array(array) {
   newarray = [];
   for(i = 0; i < array.size; i++) {
-    if(!isDefined(array[i])) {
+    if(!isDefined(array[i]))
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -844,34 +802,31 @@ realWait(seconds) {
 
 trigger_on(name, type) {
   if(isDefined(name) && isDefined(type)) {
-    ents = getEntArray(name, type);
+    ents = getentarray(name, type);
     array_thread(ents, ::trigger_on_proc);
   } else
     self trigger_on_proc();
 }
 
 trigger_on_proc() {
-  if(isDefined(self.realOrigin)) {
+  if(isDefined(self.realOrigin))
     self.origin = self.realOrigin;
-  }
   self.trigger_off = undefined;
 }
 
 trigger_off(name, type) {
   if(isDefined(name) && isDefined(type)) {
-    ents = getEntArray(name, type);
+    ents = getentarray(name, type);
     array_thread(ents, ::trigger_off_proc);
   } else
     self trigger_off_proc();
 }
 
 trigger_off_proc() {
-  if(!isDefined(self.realOrigin)) {
+  if(!isDefined(self.realOrigin))
     self.realOrigin = self.origin;
-  }
-  if(self.origin == self.realorigin) {
+  if(self.origin == self.realorigin)
     self.origin += (0, 0, -10000);
-  }
   self.trigger_off = true;
 }
 
@@ -881,7 +836,7 @@ trigger_wait(strName, strKey) {
   }
   triggers = getEntArray(strName, strKey);
   AssertEX(isDefined(triggers) && triggers.size > 0, "trigger not found: " + strName + " key: " + strKey);
-  ent = spawnStruct();
+  ent = spawnstruct();
   array_thread(triggers, ::trigger_wait_think, ent);
   ent waittill("trigger", eOther, trigger_hit);
   level notify(strName, eOther);
@@ -901,9 +856,8 @@ trigger_wait_think(ent) {
 }
 
 set_trigger_flag_permissions(msg) {
-  if(!isDefined(level.trigger_flags)) {
+  if(!isDefined(level.trigger_flags))
     return;
-  }
   level.trigger_flags[msg] = remove_undefined_from_array(level.trigger_flags[msg]);
   array_thread(level.trigger_flags[msg], ::update_trigger_based_on_flags);
 }
@@ -971,9 +925,8 @@ getstructarray(name, type) {
     type = "targetname";
   }
   array = level.struct_class_names[type][name];
-  if(!isDefined(array)) {
+  if(!isDefined(array))
     return [];
-  }
   return array;
 }
 
@@ -986,23 +939,20 @@ struct_class_init() {
   level.struct_class_names["script_linkname"] = [];
   for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
-      if(!isDefined(level.struct_class_names["targetname"][level.struct[i].targetname])) {
+      if(!isDefined(level.struct_class_names["targetname"][level.struct[i].targetname]))
         level.struct_class_names["targetname"][level.struct[i].targetname] = [];
-      }
       size = level.struct_class_names["targetname"][level.struct[i].targetname].size;
       level.struct_class_names["targetname"][level.struct[i].targetname][size] = level.struct[i];
     }
     if(isDefined(level.struct[i].target)) {
-      if(!isDefined(level.struct_class_names["target"][level.struct[i].target])) {
+      if(!isDefined(level.struct_class_names["target"][level.struct[i].target]))
         level.struct_class_names["target"][level.struct[i].target] = [];
-      }
       size = level.struct_class_names["target"][level.struct[i].target].size;
       level.struct_class_names["target"][level.struct[i].target][size] = level.struct[i];
     }
     if(isDefined(level.struct[i].script_noteworthy)) {
-      if(!isDefined(level.struct_class_names["script_noteworthy"][level.struct[i].script_noteworthy])) {
+      if(!isDefined(level.struct_class_names["script_noteworthy"][level.struct[i].script_noteworthy]))
         level.struct_class_names["script_noteworthy"][level.struct[i].script_noteworthy] = [];
-      }
       size = level.struct_class_names["script_noteworthy"][level.struct[i].script_noteworthy].size;
       level.struct_class_names["script_noteworthy"][level.struct[i].script_noteworthy][size] = level.struct[i];
     }
@@ -1023,9 +973,8 @@ fileprint_start(file) {}
 fileprint_map_start(file) {}
 fileprint_chk(file, str) {}
 fileprint_map_header(bInclude_blank_worldspawn) {
-  if(!isDefined(bInclude_blank_worldspawn)) {
+  if(!isDefined(bInclude_blank_worldspawn))
     bInclude_blank_worldspawn = false;
-  }
   assert(isDefined(level.fileprint));
 }
 
@@ -1035,9 +984,8 @@ fileprint_map_entity_end() {}
 fileprint_end() {}
 fileprint_radiant_vec(vector) {}
 is_mature() {
-  if(level.onlineGame) {
+  if(level.onlineGame)
     return true;
-  }
   return GetDvarInt(#"cg_mature");
 }
 
@@ -1068,7 +1016,7 @@ is_false(check) {
 
 has_spawnflag(spawnflags) {
   if(isDefined(self.spawnflags)) {
-    return ((self.spawnflags &spawnflags) == spawnflags);
+    return ((self.spawnflags & spawnflags) == spawnflags);
   }
   return false;
 }
@@ -1128,9 +1076,8 @@ _disableUsability() {
 _enableUsability() {
   self.disabledUsability--;
   assert(self.disabledUsability >= 0);
-  if(!self.disabledUsability) {
+  if(!self.disabledUsability)
     self EnableUsability();
-  }
 }
 
 resetUsability() {
@@ -1146,9 +1093,8 @@ _disableWeapon() {
 _enableWeapon() {
   self.disabledWeapon--;
   assert(self.disabledWeapon >= 0);
-  if(!self.disabledWeapon) {
+  if(!self.disabledWeapon)
     self enableWeapons();
-  }
 }
 
 isWeaponEnabled() {

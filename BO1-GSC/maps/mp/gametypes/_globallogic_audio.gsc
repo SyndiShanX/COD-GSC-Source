@@ -34,12 +34,10 @@ init() {
   game["dialog"]["lead_taken"] = "lead_taken";
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "generic_boost";
-  if(!isDefined(game["dialog"]["offense_obj"])) {
+  if(!isDefined(game["dialog"]["offense_obj"]))
     game["dialog"]["offense_obj"] = "generic_boost";
-  }
-  if(!isDefined(game["dialog"]["defense_obj"])) {
+  if(!isDefined(game["dialog"]["defense_obj"]))
     game["dialog"]["defense_obj"] = "generic_boost";
-  }
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["oldschool"] = "oldschool";
   game["dialog"]["highspeed"] = "highspeed";
@@ -139,9 +137,9 @@ suspenseMusic() {
   level endon("game_ended");
   level endon("match_ending_soon");
   wait 20;
-  while(1) {
+  while (1) {
     wait(randomintrange(60, 85));
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(!isDefined(player.pers["music"].inque)) {
         player.pers["music"].inque = false;
@@ -162,12 +160,10 @@ suspenseMusic() {
   }
 }
 announceRoundWinner(winner, delay) {
-  if(delay > 0) {
+  if(delay > 0)
     wait delay;
-  }
-  if(!isDefined(winner) || isPlayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner))
     return;
-  }
   if(winner == "allies") {
     leaderDialog("round_success", "allies");
     leaderDialog("round_failure", "axis");
@@ -181,12 +177,10 @@ announceRoundWinner(winner, delay) {
   }
 }
 announceGameWinner(winner, delay) {
-  if(delay > 0) {
+  if(delay > 0)
     wait delay;
-  }
-  if(!isDefined(winner) || isPlayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner))
     return;
-  }
   if(winner == "allies") {
     leaderDialog("mission_success", "allies");
     leaderDialog("mission_failure", "axis");
@@ -200,9 +194,8 @@ announceGameWinner(winner, delay) {
 doFlameAudio() {
   self endon("disconnect");
   waittillframeend;
-  if(!isDefined(self.lastFlameHurtAudio)) {
+  if(!isDefined(self.lastFlameHurtAudio))
     self.lastFlameHurtAudio = 0;
-  }
   currentTime = gettime();
   if(self.lastFlameHurtAudio + level.fire_audio_repeat_duration + RandomInt(level.fire_audio_random_max_duration) < currentTime) {
     self playLocalSound("vox_pain_small");
@@ -211,107 +204,89 @@ doFlameAudio() {
 }
 leaderDialog(dialog, team, group, excludeList, squadDialog) {
   assert(isDefined(level.players));
-  if(level.splitscreen) {
+  if(level.splitscreen)
     return;
-  }
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
   if(!isDefined(team)) {
     leaderDialogBothTeams(dialog, "allies", dialog, "axis", group, excludeList);
     return;
   }
   if(level.splitscreen) {
-    if(level.players.size) {
+    if(level.players.size)
       level.players[0] leaderDialogOnPlayer(dialog, group);
-    }
     return;
   }
   if(isDefined(excludeList)) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !maps\mp\gametypes\_globallogic_utils::isExcluded(player, excludeList)) {
+      if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !maps\mp\gametypes\_globallogic_utils::isExcluded(player, excludeList))
         player leaderDialogOnPlayer(dialog, group);
-      }
     }
   } else {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
+      if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
         player leaderDialogOnPlayer(dialog, group);
-      }
     }
   }
 }
 leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
   assert(isDefined(level.players));
-  if(level.splitscreen) {
+  if(level.splitscreen)
     return;
-  }
   if(level.splitscreen) {
-    if(level.players.size) {
+    if(level.players.size)
       level.players[0] leaderDialogOnPlayer(dialog1, group);
-    }
     return;
   }
   if(isDefined(excludeList)) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
-      if(!isDefined(team)) {
+      if(!isDefined(team))
         continue;
-      }
-      if(maps\mp\gametypes\_globallogic_utils::isExcluded(player, excludeList)) {
+      if(maps\mp\gametypes\_globallogic_utils::isExcluded(player, excludeList))
         continue;
-      }
-      if(team == team1) {
+      if(team == team1)
         player leaderDialogOnPlayer(dialog1, group);
-      } else if(team == team2) {
+      else if(team == team2)
         player leaderDialogOnPlayer(dialog2, group);
-      }
     }
   } else {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
-      if(!isDefined(team)) {
+      if(!isDefined(team))
         continue;
-      }
-      if(team == team1) {
+      if(team == team1)
         player leaderDialogOnPlayer(dialog1, group);
-      } else if(team == team2) {
+      else if(team == team2)
         player leaderDialogOnPlayer(dialog2, group);
-      }
     }
   }
 }
 leaderDialogOnPlayer(dialog, group) {
   team = self.pers["team"];
-  if(level.splitscreen) {
+  if(level.splitscreen)
     return;
-  }
-  if(!isDefined(team)) {
+  if(!isDefined(team))
     return;
-  }
-  if(team != "allies" && team != "axis") {
+  if(team != "allies" && team != "axis")
     return;
-  }
   if(isDefined(group)) {
-    if(self.leaderDialogGroup == group) {
+    if(self.leaderDialogGroup == group)
       return;
-    }
     hadGroupDialog = isDefined(self.leaderDialogGroups[group]);
     self.leaderDialogGroups[group] = dialog;
     dialog = group;
-    if(hadGroupDialog) {
+    if(hadGroupDialog)
       return;
-    }
   }
-  if(!self.leaderDialogActive) {
+  if(!self.leaderDialogActive)
     self thread playLeaderDialogOnPlayer(dialog, team);
-  } else {
+  else
     self.leaderDialogQueue[self.leaderDialogQueue.size] = dialog;
-  }
 }
 playLeaderDialogOnPlayer(dialog, team) {
   self endon("disconnect");
@@ -323,11 +298,10 @@ playLeaderDialogOnPlayer(dialog, team) {
     self.leaderDialogGroup = group;
   }
   if(level.allowAnnouncer) {
-    if(level.wagerMatch) {
+    if(level.wagerMatch)
       faction = "vox_wm_";
-    } else {
+    else
       faction = game["voice"][team];
-    }
     self playLocalSound(faction + game["dialog"][dialog]);
   }
   wait(3.0);
@@ -335,9 +309,8 @@ playLeaderDialogOnPlayer(dialog, team) {
   self.leaderDialogGroup = "";
   if(self.leaderDialogQueue.size > 0) {
     nextDialog = self.leaderDialogQueue[0];
-    for(i = 1; i < self.leaderDialogQueue.size; i++) {
+    for (i = 1; i < self.leaderDialogQueue.size; i++)
       self.leaderDialogQueue[i - 1] = self.leaderDialogQueue[i];
-    }
     self.leaderDialogQueue[i - 1] = undefined;
     self thread playLeaderDialogOnPlayer(nextDialog, team);
   }
@@ -382,7 +355,7 @@ actionMusicSet() {
 }
 play_2d_on_team(alias, team) {
   assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
       player playLocalSound(alias);
@@ -415,7 +388,7 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
       println("Music System - wait_time undefined: Setting to 0");
     }
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_music_on_player(state, save_state, return_state, wait_time);
@@ -489,7 +462,7 @@ return_music_state_team(team, wait_time) {
       println("Music System - wait_time undefined: Setting to 0");
     }
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_next_music_state(self.pers["music"].returnState, wait_time);

@@ -13,9 +13,8 @@ main() {
   setdvar("credits_active", "1");
   level.credits_active = 1;
 
-  if(getdvar("credits_frommenu") == "1") {
+  if(getdvar("credits_frommenu") == "1")
     level.credits_frommenu = 1;
-  }
 
   common_scripts\utility::flag_init("credits_ended");
   maps\simplecredits_precache::main();
@@ -41,9 +40,8 @@ skipbuttonpressed() {
     if(level.ps4) {
       var_0 = getdvarint("loc_language", 0);
 
-      if(var_0 == 15 || var_0 == 11 || var_0 == 10 || var_0 == 9 || var_0 == 8) {
+      if(var_0 == 15 || var_0 == 11 || var_0 == 10 || var_0 == 9 || var_0 == 8)
         return level.player buttonpressed("BUTTON_B");
-      }
     }
 
     return level.player buttonpressed("BUTTON_A");
@@ -52,11 +50,10 @@ skipbuttonpressed() {
 }
 
 showskipbuttonpressed() {
-  if(level.player usinggamepad()) {
+  if(level.player usinggamepad())
     return level.player buttonpressed("BUTTON_Y") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_X");
-  } else {
+  else
     return level.player buttonpressed("SPACE") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER") || level.player buttonpressed("MOUSE1");
-  }
 }
 
 skipcreditscheck() {
@@ -66,7 +63,7 @@ skipcreditscheck() {
   level.wanttoshowskip = 0;
   level endon("credits_ended");
 
-  for(;;) {
+  for (;;) {
     var_0 = skipbuttonpressed();
     var_1 = showskipbuttonpressed();
 
@@ -74,15 +71,13 @@ skipcreditscheck() {
       if(level.wanttoskip) {
         var_2 = gettime();
 
-        if(var_2 - level.pressedtime >= 1500) {
+        if(var_2 - level.pressedtime >= 1500)
           quitcredits();
-        }
       } else if(!level.wanttoshowskip) {
-        if(level.console || level.player usinggamepad()) {
+        if(level.console || level.player usinggamepad())
           level.skipcredits settext(&"PLATFORM_HOLD_TO_SKIP");
-        } else {
+        else
           level.skipcredits settext(&"PLATFORM_HOLD_TO_SKIP_KEYBOARD");
-        }
 
         level.skipcredits fadeovertime(0.5);
         level.skipcredits.alpha = 1;
@@ -165,9 +160,8 @@ quitcredits() {
   wait(var_0);
   setdvar("credits_active", "0");
 
-  if(isDefined(level.credits_frommenu)) {
+  if(isdefined(level.credits_frommenu))
     changelevel("");
-  } else {
+  else
     maps\_endmission::credits_end();
-  }
 }

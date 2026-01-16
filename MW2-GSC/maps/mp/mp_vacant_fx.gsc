@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   level._effect["hallway_smoke"] = loadfx("smoke/hallway_smoke_light");
   level._effect["light_shaft_dust_large"] = loadfx("dust/light_shaft_dust_large");
   level._effect["room_dust_200"] = loadfx("dust/room_dust_200_blend");
@@ -21,7 +22,7 @@ main() {
   level._effect["light_shaft_dust_large_mp_vacant_sidewall"] = loadfx("dust/light_shaft_dust_large_mp_vacant_sidewall");
 
   /#		
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_vacant_fx::main();
-  }
+  # /
 }

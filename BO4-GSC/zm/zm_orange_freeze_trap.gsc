@@ -19,6 +19,7 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_orange_freeze_trap;
 
 init() {
@@ -92,7 +93,7 @@ function_c2e32275() {
       level.s_freeze_trap.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_ice", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_ice", #"activate");
       }
     }
   }
@@ -122,7 +123,7 @@ function_270aecf7() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
+        #trap_activator: e_who, 
         #trap: self
       });
       level.s_freeze_trap.e_volume.activated_by_player = e_who;
@@ -204,7 +205,7 @@ function_92f341d0(e_activator, e_volume) {
     }
 
     level notify(#"trap_kill", {
-      #victim: self,
+      #victim: self, 
       #trap: e_volume
     });
     self dodamage(self.health + 1000, e_volume.origin, e_volume);
@@ -237,7 +238,7 @@ function_c38e2c52() {
 }
 
 function_67a7a129(s_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(self.var_88eddb97) || !self.var_88eddb97) {
     self.var_88eddb97 = 1;
@@ -261,7 +262,7 @@ function_67a7a129(s_trap) {
 }
 
 function_be814134() {
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self clientfield::get_to_player("player_freeze_trap_post_fx") === 1) {
     return;

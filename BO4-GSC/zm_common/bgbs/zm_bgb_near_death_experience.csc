@@ -7,10 +7,11 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_near_death_experience;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_near_death_experience", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_near_death_experience", &__init__, undefined, #"bgb");
 }
 
 __init__() {

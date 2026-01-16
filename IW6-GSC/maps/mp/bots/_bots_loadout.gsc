@@ -97,26 +97,21 @@ init_template_table() {
 }
 
 bot_loadout_item_allowed(type, item, streakType) {
-  if(!IsUsingMatchRulesData()) {
+  if(!IsUsingMatchRulesData())
     return true;
-  }
 
-  if(!GetMatchRulesData("commonOption", "allowCustomClasses")) {
+  if(!GetMatchRulesData("commonOption", "allowCustomClasses"))
     return true;
-  }
 
-  if(item == "specialty_null") {
+  if(item == "specialty_null")
     return true;
-  }
 
-  if(item == "none") {
+  if(item == "none")
     return true;
-  }
 
   if(type == "equipment") {
-    if(GetMatchRulesData("commonOption", "perkRestricted", item)) {
+    if(GetMatchRulesData("commonOption", "perkRestricted", item))
       return false;
-    }
 
     type = "weapon";
   }
@@ -145,13 +140,11 @@ bot_loadout_item_allowed(type, item, streakType) {
       return false;
   }
 
-  if(GetMatchRulesData("commonOption", itemRuleName, item)) {
+  if(GetMatchRulesData("commonOption", itemRuleName, item))
     return false;
-  }
 
-  if(GetMatchRulesData("commonOption", classRuleName, class)) {
+  if(GetMatchRulesData("commonOption", classRuleName, class))
     return false;
-  }
 
   return true;
 }
@@ -163,9 +156,8 @@ bot_loadout_choose_fallback_primary(loadoutValueArray) {
   difficulties = array_randomize(difficulties);
   foreach(difficulty in difficulties) {
     weapon = bot_loadout_choose_from_statstable("weap_statstable", loadoutValueArray, "loadoutPrimary", self.personality, difficulty);
-    if(weapon != "none") {
+    if(weapon != "none")
       return weapon;
-    }
   }
 
   if(isDefined(level.bot_personality_list)) {
@@ -204,9 +196,8 @@ bot_pick_personality_from_weapon(weapon) {
     weapPers = level.bot_weap_personality[weapon];
     if(isDefined(weapPers)) {
       personalityChoices = StrTok(weapPers, "| ");
-      if(personalityChoices.size > 0) {
+      if(personalityChoices.size > 0)
         self maps\mp\bots\_bots_util::bot_set_personality(random(personalityChoices));
-      }
     }
   }
 }
@@ -215,9 +206,8 @@ assert_field_valid(field, value) {
   if(field == "loadoutStreak1" || field == "loadoutStreak2" || field == "loadoutStreak3") {
     killstreaks = StrTok(value, "| ");
     foreach(streak in killstreaks) {
-      if(streak != "none" && GetSubStr(streak, 0, 9) != "template_" && GetSubStr(streak, 0, 5) != "class") {
+      if(streak != "none" && GetSubStr(streak, 0, 9) != "template_" && GetSubStr(streak, 0, 5) != "class")
         assert_streak_valid_for_bots_in_general(streak);
-      }
     }
   }
 }
@@ -271,18 +261,16 @@ bot_loadout_fields() {
 bot_loadout_set(personality, difficulty, createIfNeeded) {
   setName = difficulty + "_" + personality;
 
-  if(!isDefined(level.botLoadoutSets)) {
+  if(!isDefined(level.botLoadoutSets))
     level.botLoadoutSets = [];
-  }
 
   if(!isDefined(level.botLoadoutSets[setName]) && createIfNeeded) {
     level.botLoadoutSets[setName] = spawnStruct();
     level.botLoadoutSets[setName].loadouts = [];
   }
 
-  if(isDefined(level.botLoadoutSets[setName])) {
+  if(isDefined(level.botLoadoutSets[setName]))
     return level.botLoadoutSets[setName];
-  }
 }
 
 bot_loadout_pick(personality, difficulty) {
@@ -296,33 +284,26 @@ bot_loadout_pick(personality, difficulty) {
 bot_validate_weapon(weaponName, attachment, attachment2, attachment3) {
   validAttachments = getWeaponAttachmentArrayFromStats(weaponName);
 
-  if(isDefined(attachment) && attachment != "none" && !bot_loadout_item_allowed("attachment", attachment)) {
+  if(isDefined(attachment) && attachment != "none" && !bot_loadout_item_allowed("attachment", attachment))
     return false;
-  }
 
-  if(isDefined(attachment2) && attachment2 != "none" && !bot_loadout_item_allowed("attachment", attachment2)) {
+  if(isDefined(attachment2) && attachment2 != "none" && !bot_loadout_item_allowed("attachment", attachment2))
     return false;
-  }
 
-  if(isDefined(attachment3) && attachment3 != "none" && !bot_loadout_item_allowed("attachment", attachment3)) {
+  if(isDefined(attachment3) && attachment3 != "none" && !bot_loadout_item_allowed("attachment", attachment3))
     return false;
-  }
 
-  if(attachment != "none" && !array_contains(validAttachments, attachment)) {
+  if(attachment != "none" && !array_contains(validAttachments, attachment))
     return false;
-  }
 
-  if(attachment2 != "none" && !array_contains(validAttachments, attachment2)) {
+  if(attachment2 != "none" && !array_contains(validAttachments, attachment2))
     return false;
-  }
 
-  if(isDefined(attachment3) && attachment3 != "none" && !array_contains(validAttachments, attachment3)) {
+  if(isDefined(attachment3) && attachment3 != "none" && !array_contains(validAttachments, attachment3))
     return false;
-  }
 
-  if((attachment == "none" || attachment2 == "none") && (!isDefined(attachment3) || attachment3 == "none")) {
+  if((attachment == "none" || attachment2 == "none") && (!isDefined(attachment3) || attachment3 == "none"))
     return true;
-  }
 
   if(!isDefined(level.bot_invalid_attachment_combos)) {
     level.bot_invalid_attachment_combos = [];
@@ -346,57 +327,46 @@ bot_validate_weapon(weaponName, attachment, attachment2, attachment3) {
         }
 
         if(attachmentTesting == currentAttachment) {
-          if(TableLookupByRow(attachmentComboTable, row, column) != "no") {
+          if(TableLookupByRow(attachmentComboTable, row, column) != "no")
             level.allowable_double_attachments[attachmentTesting] = true;
-          }
         } else {
-          if(TableLookupByRow(attachmentComboTable, row, column) == "no") {
+          if(TableLookupByRow(attachmentComboTable, row, column) == "no")
             level.bot_invalid_attachment_combos[currentAttachment][attachmentTesting] = true;
-          }
         }
       }
     }
   }
 
-  if(attachment == attachment2 && !isDefined(level.allowable_double_attachments[attachment])) {
+  if(attachment == attachment2 && !isDefined(level.allowable_double_attachments[attachment]))
     return false;
-  }
 
   if(isDefined(attachment3)) {
-    if(attachment2 == attachment3 && !isDefined(level.allowable_double_attachments[attachment2])) {
+    if(attachment2 == attachment3 && !isDefined(level.allowable_double_attachments[attachment2]))
       return false;
-    }
 
-    if(attachment == attachment3 && !isDefined(level.allowable_double_attachments[attachment])) {
+    if(attachment == attachment3 && !isDefined(level.allowable_double_attachments[attachment]))
       return false;
-    }
 
-    if(attachment3 != "none" && attachment == attachment3 && attachment2 == attachment3) {
+    if(attachment3 != "none" && attachment == attachment3 && attachment2 == attachment3)
       return false;
-    }
 
-    if(isDefined(level.bot_invalid_attachment_combos[attachment2]) && isDefined(level.bot_invalid_attachment_combos[attachment2][attachment3])) {
+    if(isDefined(level.bot_invalid_attachment_combos[attachment2]) && isDefined(level.bot_invalid_attachment_combos[attachment2][attachment3]))
       return false;
-    }
 
-    if(isDefined(level.bot_invalid_attachment_combos[attachment]) && isDefined(level.bot_invalid_attachment_combos[attachment][attachment3])) {
+    if(isDefined(level.bot_invalid_attachment_combos[attachment]) && isDefined(level.bot_invalid_attachment_combos[attachment][attachment3]))
       return false;
-    }
   }
 
   return !(isDefined(level.bot_invalid_attachment_combos[attachment]) && isDefined(level.bot_invalid_attachment_combos[attachment][attachment2]));
 }
 
 bot_validate_reticle(loadoutBaseName, loadoutValueArray, choice) {
-  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment"]])) {
+  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment"]]))
     return true;
-  }
-  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment2"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment2"]])) {
+  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment2"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment2"]]))
     return true;
-  }
-  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment3"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment3"]])) {
+  if(isDefined(loadoutValueArray[loadoutBaseName + "Attachment3"]) && isDefined(level.bot_attachment_reticle[loadoutValueArray[loadoutBaseName + "Attachment3"]]))
     return true;
-  }
 
   return false;
 }
@@ -445,9 +415,8 @@ init_perktable() {
 
     for(col = 4; col <= 13; col++) {
       perkName = TableLookupByRow("mp/cacabilitytable.csv", row, col);
-      if(perkName != "") {
+      if(perkName != "")
         perktable_add(perkName, abilityType);
-      }
     }
 
     row++;
@@ -475,9 +444,8 @@ init_bot_weap_statstable() {
     weapDiff = TableLookupByRow(fileName, row, colDiff);
     weapPers = TableLookupByRow(fileName, row, colPers);
 
-    if(weapName != "" && weapPers != "") {
+    if(weapName != "" && weapPers != "")
       level.bot_weap_personality[weapName] = weapPers;
-    }
 
     if(weapDiff != "" && weapName != "" && weapPers != "") {
       slotType = "loadoutPrimary";
@@ -488,22 +456,19 @@ init_bot_weap_statstable() {
         continue;
       }
 
-      if(!isDefined(level.bot_weap_statstable[slotType])) {
+      if(!isDefined(level.bot_weap_statstable[slotType]))
         level.bot_weap_statstable[slotType] = [];
-      }
 
       persList = StrTok(weapPers, "| ");
       diffList = StrTok(weapDiff, "| ");
 
       foreach(personality in persList) {
-        if(!isDefined(level.bot_weap_statstable[slotType][personality])) {
+        if(!isDefined(level.bot_weap_statstable[slotType][personality]))
           level.bot_weap_statstable[slotType][personality] = [];
-        }
 
         foreach(difficulty in diffList) {
-          if(!isDefined(level.bot_weap_statstable[slotType][personality][difficulty])) {
+          if(!isDefined(level.bot_weap_statstable[slotType][personality][difficulty]))
             level.bot_weap_statstable[slotType][personality][difficulty] = [];
-          }
 
           newIndex = level.bot_weap_statstable[slotType][personality][difficulty].size;
           level.bot_weap_statstable[slotType][personality][difficulty][newIndex] = weapName;
@@ -517,35 +482,28 @@ init_bot_weap_statstable() {
 
 bot_loadout_choose_from_statstable(loadoutValue, loadoutValueArray, loadoutValueName, personality, difficulty) {
   result = "specialty_null";
-  if(loadoutValueName == "loadoutPrimary") {
+  if(loadoutValueName == "loadoutPrimary")
     result = "iw6_honeybadger";
-  } else if(loadoutValueName == "loadoutSecondary") {
+  else if(loadoutValueName == "loadoutSecondary")
     result = "iw6_p226";
-  }
 
-  if(personality == "default") {
+  if(personality == "default")
     personality = "run_and_gun";
-  }
 
-  if(loadoutValueName == "loadoutSecondary" && array_contains(loadoutValueArray, "specialty_twoprimaries")) {
+  if(loadoutValueName == "loadoutSecondary" && array_contains(loadoutValueArray, "specialty_twoprimaries"))
     loadoutValueName = "loadoutPrimary";
-  }
 
-  if(!isDefined(level.bot_weap_statstable)) {
+  if(!isDefined(level.bot_weap_statstable))
     return result;
-  }
 
-  if(!isDefined(level.bot_weap_statstable[loadoutValueName])) {
+  if(!isDefined(level.bot_weap_statstable[loadoutValueName]))
     return result;
-  }
 
-  if(!isDefined(level.bot_weap_statstable[loadoutValueName][personality])) {
+  if(!isDefined(level.bot_weap_statstable[loadoutValueName][personality]))
     return result;
-  }
 
-  if(!isDefined(level.bot_weap_statstable[loadoutValueName][personality][difficulty])) {
+  if(!isDefined(level.bot_weap_statstable[loadoutValueName][personality][difficulty]))
     return result;
-  }
 
   result = bot_loadout_choose_from_set(level.bot_weap_statstable[loadoutValueName][personality][difficulty], loadoutValue, loadoutValueArray, loadoutValueName);
 
@@ -555,60 +513,51 @@ bot_loadout_choose_from_statstable(loadoutValue, loadoutValueArray, loadoutValue
 bot_loadout_choose_from_perktable(choice, loadoutValue, loadoutValueArray, loadoutValueName, personality, difficulty) {
   result = "specialty_null";
 
-  if(!isDefined(level.bot_perktable)) {
+  if(!isDefined(level.bot_perktable))
     return result;
-  }
 
-  if(!isDefined(level.bot_perktable_groups)) {
+  if(!isDefined(level.bot_perktable_groups))
     level.bot_perktable_groups = [];
-  }
 
   if(!isDefined(level.bot_perktable_groups[choice])) {
     types = StrTok(choice, "_");
     assert(types[0] == "perktable");
     types[0] = "";
     any = false;
-    if(array_contains(types, "any")) {
+    if(array_contains(types, "any"))
       any = true;
-    }
 
     choices = [];
 
     foreach(perk in level.bot_perktable) {
-      if(any || array_contains(types, perk["type"])) {
+      if(any || array_contains(types, perk["type"]))
         choices[choices.size] = perk["name"];
-      }
     }
 
     level.bot_perktable_groups[choice] = choices;
   }
 
-  if(level.bot_perktable_groups[choice].size > 0) {
+  if(level.bot_perktable_groups[choice].size > 0)
     result = bot_loadout_choose_from_set(level.bot_perktable_groups[choice], loadoutValue, loadoutValueArray, loadoutValueName);
-  }
 
   return result;
 }
 
 bot_validate_perk(choice, loadoutValueName, loadoutValueArray, costRangeStart, costRangeEnd, costAllowed) {
   totalCostAllowed = (costRangeEnd - costRangeStart) + 1;
-  if(isDefined(costAllowed)) {
+  if(isDefined(costAllowed))
     totalCostAllowed = costAllowed;
-  }
   allocatedCost = 0;
 
   index = int(GetSubStr(loadoutValueName, 11));
 
-  if(choice == "specialty_twoprimaries") {
+  if(choice == "specialty_twoprimaries")
     return false;
-  }
-  if(choice == "specialty_extra_attachment") {
+  if(choice == "specialty_extra_attachment")
     return false;
-  }
 
-  if(!bot_loadout_item_allowed("perk", choice)) {
+  if(!bot_loadout_item_allowed("perk", choice))
     return false;
-  }
 
   for(i = index - 1; i > 0; i--) {
     prevPerkName = "loadoutPerk" + i;
@@ -616,18 +565,15 @@ bot_validate_perk(choice, loadoutValueName, loadoutValueArray, costRangeStart, c
     if(loadoutValueArray[prevPerkName] == "none" || loadoutValueArray[prevPerkName] == "specialty_null") {
       continue;
     }
-    if(choice == loadoutValueArray[prevPerkName]) {
+    if(choice == loadoutValueArray[prevPerkName])
       return false;
-    }
 
-    if((i >= costRangeStart) && (i <= costRangeEnd)) {
+    if((i >= costRangeStart) && (i <= costRangeEnd))
       allocatedCost += bot_perk_cost(loadoutValueArray[prevPerkName]);
-    }
   }
 
-  if((allocatedCost + bot_perk_cost(choice)) > totalCostAllowed) {
+  if((allocatedCost + bot_perk_cost(choice)) > totalCostAllowed)
     return false;
-  }
 
   return true;
 }
@@ -678,9 +624,8 @@ bot_loadout_choose_from_default_class(class, loadoutValue, loadoutValueArray, lo
     case "loadoutPerk6": {
       perkIndex = int(GetSubStr(loadoutValueName, 11));
       perk = maps\mp\gametypes\_class::table_getPerk(level.classTableName, class_num, perkIndex);
-      if(perk == "") {
+      if(perk == "")
         return "specialty_null";
-      }
       perkRow = int(GetSubStr(perk, 0, 1));
       perkCol = int(GetSubStr(perk, 1, 2));
       perkName = TableLookupByRow("mp/cacabilitytable.csv", perkRow + 1, perkCol + 3);
@@ -715,22 +660,19 @@ init_bot_attachmenttable() {
     attachmentDiff = TableLookupByRow(fileName, row, colDiff);
 
     if(attachmentName != "" && attachmentDiff != "") {
-      if(isDefined(level.bot_att_cross_reference[attachmentName]) && level.bot_att_cross_reference[attachmentName] != attachmentDiff) {
+      if(isDefined(level.bot_att_cross_reference[attachmentName]) && level.bot_att_cross_reference[attachmentName] != attachmentDiff)
         AssertMsg("base ref '" + attachmentName + "' is associated with conflicting Bot Difficulty in attachmenttable.csv");
-      }
       level.bot_att_cross_reference[attachmentName] = attachmentDiff;
 
       attachmentReticle = TableLookupByRow(fileName, row, colReticle);
-      if(attachmentReticle == "TRUE") {
+      if(attachmentReticle == "TRUE")
         level.bot_attachment_reticle[attachmentName] = true;
-      }
 
       diffList = StrTok(attachmentDiff, "| ");
 
       foreach(difficulty in diffList) {
-        if(!isDefined(level.bot_attachmenttable[difficulty])) {
+        if(!isDefined(level.bot_attachmenttable[difficulty]))
           level.bot_attachmenttable[difficulty] = [];
-        }
 
         if(!array_contains(level.bot_attachmenttable[difficulty], attachmentName)) {
           newIndex = level.bot_attachmenttable[difficulty].size;
@@ -748,13 +690,11 @@ init_bot_attachmenttable() {
 bot_loadout_choose_from_attachmenttable(loadoutValue, loadoutValueArray, loadoutValueName, personality, difficulty) {
   result = "none";
 
-  if(!isDefined(level.bot_attachmenttable)) {
+  if(!isDefined(level.bot_attachmenttable))
     return result;
-  }
 
-  if(!isDefined(level.bot_attachmenttable[difficulty])) {
+  if(!isDefined(level.bot_attachmenttable[difficulty]))
     return result;
-  }
 
   result = bot_loadout_choose_from_set(level.bot_attachmenttable[difficulty], loadoutValue, loadoutValueArray, loadoutValueName);
 
@@ -777,9 +717,8 @@ init_bot_camotable() {
     }
 
     botValid = TableLookupByRow(fileName, row, colBotValid);
-    if(isDefined(botValid) && Int(botValid)) {
+    if(isDefined(botValid) && Int(botValid))
       level.bot_camotable[level.bot_camotable.size] = camoName;
-    }
 
     row++;
   }
@@ -788,9 +727,8 @@ init_bot_camotable() {
 bot_loadout_choose_from_camotable(loadoutValue, loadoutValueArray, loadoutValueName, personality, difficulty) {
   result = "none";
 
-  if(!isDefined(level.bot_camotable)) {
+  if(!isDefined(level.bot_camotable))
     return result;
-  }
 
   result = bot_loadout_choose_from_set(level.bot_camotable, loadoutValue, loadoutValueArray, loadoutValueName);
 
@@ -799,18 +737,14 @@ bot_loadout_choose_from_camotable(loadoutValue, loadoutValueArray, loadoutValueN
 
 bot_loadout_perk_slots(loadoutValueArray) {
   result = SCR_CONST_base_perk_slots;
-  if(isDefined(loadoutValueArray["loadoutPrimary"]) && loadoutValueArray["loadoutPrimary"] == "none") {
+  if(isDefined(loadoutValueArray["loadoutPrimary"]) && loadoutValueArray["loadoutPrimary"] == "none")
     result = result + 1;
-  }
-  if(isDefined(loadoutValueArray["loadoutSecondary"]) && loadoutValueArray["loadoutSecondary"] == "none") {
+  if(isDefined(loadoutValueArray["loadoutSecondary"]) && loadoutValueArray["loadoutSecondary"] == "none")
     result = result + 1;
-  }
-  if(isDefined(loadoutValueArray["loadoutEquipment"]) && loadoutValueArray["loadoutEquipment"] == "none") {
+  if(isDefined(loadoutValueArray["loadoutEquipment"]) && loadoutValueArray["loadoutEquipment"] == "none")
     result = result + 1;
-  }
-  if(isDefined(loadoutValueArray["loadoutOffhand"]) && loadoutValueArray["loadoutOffhand"] == "none") {
+  if(isDefined(loadoutValueArray["loadoutOffhand"]) && loadoutValueArray["loadoutOffhand"] == "none")
     result = result + 1;
-  }
   return result;
 }
 
@@ -888,11 +822,10 @@ bot_loadout_valid_choice(loadoutValueVerbatim, loadoutValueArray, loadoutValueNa
     case "loadoutPerk13":
     case "loadoutPerk14":
     case "loadoutPerk15":
-      if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist") {
+      if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist")
         valid = false;
-      } else {
+      else
         valid = bot_validate_perk(choice, loadoutValueName, loadoutValueArray, -1, -1);
-      }
       break;
     case "loadoutPerk16":
     case "loadoutPerk17":
@@ -902,11 +835,10 @@ bot_loadout_valid_choice(loadoutValueVerbatim, loadoutValueArray, loadoutValueNa
     case "loadoutPerk21":
     case "loadoutPerk22":
     case "loadoutPerk23":
-      if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist") {
+      if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist")
         valid = false;
-      } else {
+      else
         valid = bot_validate_perk(choice, loadoutValueName, loadoutValueArray, 16, 23, SCR_CONST_base_perk_slots);
-      }
       break;
   };
 
@@ -918,47 +850,39 @@ bot_loadout_choose_from_set(valueChoices, loadoutValue, loadoutValueArray, loado
   chosenTemplate = undefined;
   validCount = 0.0;
 
-  if(array_contains(valueChoices, "specialty_null")) {
+  if(array_contains(valueChoices, "specialty_null"))
     chosenValue = "specialty_null";
-  }
 
   foreach(choice in valueChoices) {
     template = undefined;
 
     if(GetSubStr(choice, 0, 9) == "template_") {
-      if(isDefined(isTemplate) && isTemplate) {
+      if(isDefined(isTemplate) && isTemplate)
         AssertMsg("template_ entries should not reference other template_ entries as the random weighting does not work right for that");
-      }
 
       template = choice;
       templateValues = level.botLoadoutTemplates[choice][loadoutValueName];
       assert(isDefined(templateValues));
       choice = bot_loadout_choose_from_set(StrTok(templateValues, "| "), loadoutValue, loadoutValueArray, loadoutValueName, true);
 
-      if(isDefined(template) && isDefined(self.chosenTemplates[template])) {
+      if(isDefined(template) && isDefined(self.chosenTemplates[template]))
         return choice;
-      }
     }
 
-    if(choice == "attachmenttable") {
+    if(choice == "attachmenttable")
       return bot_loadout_choose_from_attachmenttable(loadoutValue, loadoutValueArray, loadoutValueName, self.personality, self.difficulty);
-    }
 
-    if(choice == "weap_statstable") {
+    if(choice == "weap_statstable")
       return bot_loadout_choose_from_statstable(loadoutValue, loadoutValueArray, loadoutValueName, self.personality, self.difficulty);
-    }
 
-    if(choice == "camotable") {
+    if(choice == "camotable")
       return bot_loadout_choose_from_camotable(loadoutValue, loadoutValueArray, loadoutValueName, self.personality, self.difficulty);
-    }
 
-    if(GetSubStr(choice, 0, 5) == "class" && int(GetSubStr(choice, 5, 6)) > 0) {
+    if(GetSubStr(choice, 0, 5) == "class" && int(GetSubStr(choice, 5, 6)) > 0)
       choice = bot_loadout_choose_from_default_class(choice, loadoutValue, loadoutValueArray, loadoutValueName, self.personality, self.difficulty);
-    }
 
-    if(isDefined(level.bot_perktable) && (GetSubStr(choice, 0, 10) == "perktable_")) {
+    if(isDefined(level.bot_perktable) && (GetSubStr(choice, 0, 10) == "perktable_"))
       return bot_loadout_choose_from_perktable(choice, loadoutValue, loadoutValueArray, loadoutValueName, self.personality, self.difficulty);
-    }
 
     if(self bot_loadout_valid_choice(loadoutValue, loadoutValueArray, loadoutValueName, choice)) {
       validCount = validCount + 1.0;
@@ -969,9 +893,8 @@ bot_loadout_choose_from_set(valueChoices, loadoutValue, loadoutValueArray, loado
     }
   }
 
-  if(isDefined(chosenTemplate)) {
+  if(isDefined(chosenTemplate))
     self.chosenTemplates[chosenTemplate] = true;
-  }
 
   return chosenValue;
 }
@@ -985,9 +908,8 @@ bot_loadout_choose_values(loadoutValueArray) {
     chosenValue = self bot_loadout_choose_from_set(valueChoices, loadoutValue, loadoutValueArray, loadoutValueName);
 
     debugLoadoutValue = GetDvar("bot_Debug" + loadoutValueName, "");
-    if(isDefined(debugLoadoutValue) && debugLoadoutValue != "") {
+    if(isDefined(debugLoadoutValue) && debugLoadoutValue != "")
       chosenValue = debugLoadoutValue;
-    }
 
     loadoutValueArray[loadoutValueName] = chosenValue;
   }
@@ -1030,13 +952,11 @@ bot_loadout_get_difficulty() {
 }
 
 bot_loadout_class_callback() {
-  while(!isDefined(level.bot_loadouts_initialized)) {
+  while(!isDefined(level.bot_loadouts_initialized))
     wait(0.05);
-  }
 
-  while(!isDefined(self.personality)) {
+  while(!isDefined(self.personality))
     wait(0.05);
-  }
 
   loadoutValueArray = [];
 
@@ -1068,9 +988,8 @@ bot_loadout_class_callback() {
     loadoutValueArray = self bot_loadout_pick(personality, difficulty);
     loadoutValueArray = self bot_loadout_choose_values(loadoutValueArray);
 
-    if(isDefined(level.bot_funcs["gametype_loadout_modify"])) {
+    if(isDefined(level.bot_funcs["gametype_loadout_modify"]))
       loadoutValueArray = self[[level.bot_funcs["gametype_loadout_modify"]]](loadoutValueArray);
-    }
 
     AssertEx(isDefined(loadoutValueArray), "Bot '" + self.name + "'spawning (randomized loadout) with loadoutValueArray not defined");
 
@@ -1083,11 +1002,10 @@ bot_loadout_class_callback() {
       loadoutValueArray["loadoutPrimaryAttachment3"] = "none";
       loadoutValueArray["loadoutPrimaryReticle"] = "none";
       if(isDefined(self.bot_fallback_personality)) {
-        if(self.bot_fallback_personality == "weapon") {
+        if(self.bot_fallback_personality == "weapon")
           self bot_pick_personality_from_weapon(loadoutValueArray["loadoutPrimary"]);
-        } else {
+        else
           self maps\mp\bots\_bots_util::bot_set_personality(self.bot_fallback_personality);
-        }
 
         personality = self.personality;
 
@@ -1099,9 +1017,8 @@ bot_loadout_class_callback() {
     self.botLastLoadoutDifficulty = difficulty;
     self.botLastLoadoutPersonality = personality;
 
-    if(isDefined(loadoutValueArray["loadoutPrimaryCamo"]) && loadoutValueArray["loadoutPrimaryCamo"] != "none") {
+    if(isDefined(loadoutValueArray["loadoutPrimaryCamo"]) && loadoutValueArray["loadoutPrimaryCamo"] != "none")
       self.botLoadoutFavoriteCamo = loadoutValueArray["loadoutPrimaryCamo"];
-    }
 
     if(isDefined(self.respawn_with_launcher)) {
       if(isDefined(level.bot_respawn_launcher_name) && bot_loadout_item_allowed("weapon", level.bot_respawn_launcher_name)) {
@@ -1133,18 +1050,16 @@ bot_loadout_class_callback() {
     if(array_contains(self.pers["loadoutPerks"], "specialty_extra_attachment")) {
       otherAttachmentLoadout = self bot_loadout_pick(personality, difficulty);
       loadoutValueArray["loadoutPrimaryAttachment3"] = otherAttachmentLoadout["loadoutPrimaryAttachment2"];
-      if(array_contains(self.pers["loadoutPerks"], "specialty_twoprimaries")) {
+      if(array_contains(self.pers["loadoutPerks"], "specialty_twoprimaries"))
         loadoutValueArray["loadoutSecondaryAttachment2"] = otherAttachmentLoadout["loadoutPrimaryAttachment2"];
-      } else {
+      else
         loadoutValueArray["loadoutSecondaryAttachment2"] = otherAttachmentLoadout["loadoutSecondaryAttachment2"];
-      }
       loadoutValueArray = self bot_loadout_choose_values(loadoutValueArray);
       loadoutValueArray = self bot_loadout_setup_perks(loadoutValueArray);
     } else {
       loadoutValueArray["loadoutSecondaryAttachment2"] = "none";
-      if(!(self bot_validate_reticle("loadoutSecondary", loadoutValueArray, loadoutValueArray["loadoutSecondaryReticle"]))) {
+      if(!(self bot_validate_reticle("loadoutSecondary", loadoutValueArray, loadoutValueArray["loadoutSecondaryReticle"])))
         loadoutValueArray["loadoutSecondaryReticle"] = "none";
-      }
     }
   }
 
@@ -1185,9 +1100,8 @@ bot_loadout_setup_perks(loadoutValueArray) {
         loadoutValueArray["loadoutStreak" + (streakIndex + 1)] = baseName + "_ks";
         self.pers["specialistStreaks"][self.pers["specialistStreaks"].size] = baseName + "_ks";
         prevCost = 0;
-        if(streakIndex > 0) {
+        if(streakIndex > 0)
           prevCost = self.pers["specialistStreakKills"][self.pers["specialistStreakKills"].size - 1];
-        }
         self.pers["specialistStreakKills"][self.pers["specialistStreakKills"].size] = prevCost + bot_perk_cost(baseName) + 2;
         streakIndex++;
       } else {
@@ -1229,61 +1143,56 @@ bot_setup_loadout_callback() {
 }
 
 bot_squad_lookup_private(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
-  if(isDefined(fieldBIndex)) {
+  if(isDefined(fieldBIndex))
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  } else if(isDefined(fieldB)) {
+  else if(isDefined(fieldB))
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  } else if(isDefined(fieldAIndex)) {
+  else if(isDefined(fieldAIndex))
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  } else {
+  else
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
-  }
 }
 
 bot_squad_lookup_ranked(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
-  if(isDefined(fieldBIndex)) {
+  if(isDefined(fieldBIndex))
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  } else if(isDefined(fieldB)) {
+  else if(isDefined(fieldB))
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  } else if(isDefined(fieldAIndex)) {
+  else if(isDefined(fieldAIndex))
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  } else {
+  else
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
-  }
 }
 
 bot_squad_lookup_enemy(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
-  if(isDefined(fieldBIndex)) {
+  if(isDefined(fieldBIndex))
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  } else if(isDefined(fieldB)) {
+  else if(isDefined(fieldB))
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  } else if(isDefined(fieldAIndex)) {
+  else if(isDefined(fieldAIndex))
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  } else {
+  else
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
-  }
 }
 
 bot_squad_lookup(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
   bot_squad_lookup_func = ::bot_squad_lookup_ranked;
 
-  if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
+  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
     bot_squad_lookup_func = ::bot_squad_lookup_enemy;
-  } else if(!matchMakingGame()) {
+  else if(!matchMakingGame())
     bot_squad_lookup_func = ::bot_squad_lookup_private;
-  }
 
   return self[[bot_squad_lookup_func]](owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
 }
 
 bot_squadmember_lookup(owner, squad_slot, fieldA) {
-  if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
+  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
     return GetEnemySquadData("squadMembers", squad_slot, fieldA);
-  } else if(!matchMakingGame()) {
+  else if(!matchMakingGame())
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, fieldA);
-  } else {
+  else
     return owner GetRankedPlayerData("squadMembers", squad_slot, fieldA);
-  }
 }
 
 bot_loadout_copy_from_client(loadoutValueArray, owner, squad_slot, loadout_slot) {
@@ -1366,11 +1275,10 @@ bot_loadout_copy_from_client(loadoutValueArray, owner, squad_slot, loadout_slot)
   self.playerCardPatch = self bot_squadmember_lookup(owner, squad_slot, "patch");
   self.playerCardBackground = self bot_squadmember_lookup(owner, squad_slot, "background");
 
-  if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
+  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
     self.squad_bot_dog_type = GetEnemySquadDogType();
-  } else {
+  else
     self.squad_bot_dog_type = owner GetCommonPlayerDataReservedInt("mp_dog_type");
-  }
 
   return loadoutValueArray;
 }

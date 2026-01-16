@@ -20,11 +20,11 @@
 function init() {}
 
 function main() {
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_sensorybuffer", 4);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_sensorybuffer", &sensorybuffergive, &sensorybuffertake);
-  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_sensorybuffer", &sensorybufferactivate, &sensorybufferdeactivate);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_sensorybuffer", & sensorybuffergive, & sensorybuffertake);
+  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_sensorybuffer", & sensorybufferactivate, & sensorybufferdeactivate);
 }
 
 function on_player_connect() {}

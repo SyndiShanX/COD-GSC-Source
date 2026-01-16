@@ -33,6 +33,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_spear_shield;
 
 autoexec __init__system__() {
@@ -51,14 +52,14 @@ __main__() {
 
 function_64ff58da(color, var_6ab2cf36) {}
 
-function function_4b03aab(weapon) {
-  if(weapon == level.var_ce3aa8a8) {
-    riotshield::riotshield_melee(weapon);
-    return;
-  }
+  function function_4b03aab(weapon) {
+    if(weapon == level.var_ce3aa8a8) {
+      riotshield::riotshield_melee(weapon);
+      return;
+    }
 
-  function_dcdaf81c(weapon, 128, 128, 96, 360, 240);
-}
+    function_dcdaf81c(weapon, 128, 128, 96, 360, 240);
+  }
 
 function_dcdaf81c(weapon, riotshield_knockdown_range, riotshield_gib_range, riotshield_fling_range, var_1c3d89, riotshield_cylinder_radius, riotshield_fling_force_melee) {
   level.riotshield_knockdown_enemies = [];
@@ -73,9 +74,10 @@ function_dcdaf81c(weapon, riotshield_knockdown_range, riotshield_gib_range, riot
     [[level.var_2677b8bb]] - > waitinqueue(level.riotshield_fling_enemies[i]);
 
     if(isDefined(level.riotshield_fling_enemies[i])) {
+
       function_64ff58da((1, 0, 0), level.riotshield_fling_enemies[i].origin);
 
-      level.riotshield_fling_enemies[i] thread function_80a146c1(self, weapon);
+        level.riotshield_fling_enemies[i] thread function_80a146c1(self, weapon);
       var_d3f92d4d = 30;
 
       if(self hasperk(#"specialty_mod_shield")) {
@@ -87,9 +89,12 @@ function_dcdaf81c(weapon, riotshield_knockdown_range, riotshield_gib_range, riot
   }
 
   for(i = 0; i < level.riotshield_knockdown_enemies.size; i++) {
+
     function_64ff58da((0, 1, 0), level.riotshield_knockdown_enemies[i].origin);
 
-    [[level.var_2677b8bb]] - > waitinqueue(level.riotshield_knockdown_enemies[i]);
+      [
+        [level.var_2677b8bb]
+      ] - > waitinqueue(level.riotshield_knockdown_enemies[i]);
 
     if(!isDefined(level.riotshield_knockdown_enemies[i])) {
       continue;
@@ -107,9 +112,9 @@ function_dcdaf81c(weapon, riotshield_knockdown_range, riotshield_gib_range, riot
     }
 
     switch (ai_enemy.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         var_d3f92d4d = 30;
         break;
       default:
@@ -171,7 +176,7 @@ function_a5ed9221(weapon) {
 
   sphere(end_pos, 48, (1, 0, 0), 0.1, 1, 16, int(5 * 1 / float(function_60d95f53()) / 1000));
 
-  a_e_targets = array::get_all_closest(end_pos, a_e_targets, undefined, undefined, 48);
+    a_e_targets = array::get_all_closest(end_pos, a_e_targets, undefined, undefined, 48);
 
   if(!isDefined(a_e_targets) || a_e_targets.size < 1) {
     return;
@@ -228,9 +233,9 @@ function_376cd4f6(weapon) {
 
   foreach(ai_enemy in level.var_21ffc192) {
     switch (ai_enemy.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         var_d3f92d4d = zombie_utility::get_zombie_var(#"hash_bfdf728041b626a");
         break;
       default:

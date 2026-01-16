@@ -11,7 +11,7 @@
 main() {
   flag_wait("level.player");
   init_intel_map();
-  a_collectibles = getEntArray("collectible", "targetname");
+  a_collectibles = getentarray("collectible", "targetname");
 
   if(!isDefined(level.intel_map[level.script])) {
     assert(a_collectibles.size == 0);
@@ -29,26 +29,23 @@ main() {
 
   level.collectibles = collectible_init(a_collectibles, n_intel_index);
 
-  for(i = 0; i < level.collectibles.size; i++) {
+  for(i = 0; i < level.collectibles.size; i++)
     level.collectibles[i] thread collectible_wait_for_pickup();
-  }
 
   onsaverestored_callback(::collectibles_level_restore);
 }
 
 set_intel_map(map, start_index, num_intel) {
-  if(!isDefined(level.intel_map[map])) {
+  if(!isDefined(level.intel_map[map]))
     level.intel_map[map] = [];
-  }
 
   level.intel_map[map]["start_index"] = start_index;
   level.intel_map[map]["num_intel"] = num_intel;
 }
 
 init_intel_map() {
-  if(!isDefined(level.intel_map)) {
+  if(!isDefined(level.intel_map))
     level.intel_map = [];
-  }
 
   set_intel_map("angola", 1, 1);
   set_intel_map("angola_2", 2, 2);
@@ -83,7 +80,7 @@ collectibles_level_challenge(str_notify) {
 }
 
 collectibles_level_restore() {
-  map_collectibles = getEntArray("collectible", "targetname");
+  map_collectibles = getentarray("collectible", "targetname");
 
   for(i = 0; i < map_collectibles.size; i++) {
     if(hascollectible(int(map_collectibles[i].script_parameters))) {
@@ -118,9 +115,8 @@ collectible_init(map_collectibles, n_intel_index) {
 }
 
 collectible_remove_found(collectible_item) {
-  if(isDefined(collectible_item.trigger)) {
+  if(isDefined(collectible_item.trigger))
     collectible_item.trigger delete();
-  }
 
   if(isDefined(collectible_item.target)) {
     m_stand = getent(collectible_item.target, "targetname");
@@ -137,11 +133,10 @@ collectible_wait_for_pickup() {
     self.trigger waittill("trigger", player);
     player_is_looking_at = player is_player_looking_at(self.origin, 0.8, 0);
 
-    if(player_is_looking_at) {
+    if(player_is_looking_at)
       self.trigger sethintstring(&"SCRIPT_COLLECTIBLE_PICKUP");
-    } else {
+    else
       self.trigger sethintstring("");
-    }
 
     if(isalive(player) && player_is_looking_at && player use_button_held()) {
       playsoundatposition("uin_aar_unlock_loud", (0, 0, 0));
@@ -150,9 +145,8 @@ collectible_wait_for_pickup() {
 
     wait 0.05;
 
-    if(!player istouching(self.trigger)) {
+    if(!player istouching(self.trigger))
       self.trigger sethintstring("");
-    }
   }
 
   setcollectible(int(self.script_parameters));

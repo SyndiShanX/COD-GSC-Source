@@ -48,7 +48,7 @@ Elevator(elevatorID) {
   waitTime = 2.0;
 
   floorIndex = 0;
-  while(1) {
+  while (1) {
     newPos = elevFloors[floorIndex];
     moveDist = distance(elevator.origin, newPos);
     if(moveDist <= 0.0) {
@@ -64,10 +64,11 @@ Elevator(elevatorID) {
   }
 }
 
+
 SetupRappel() {
   // Press and hold ^3[{+activate}]^7 to rappel
-  //precacheString(&"MP_PRESS_TO_RAPPEL" );
-  trigs = getEntArray("rappeltrigger", "targetname");
+  //precacheString( &"MP_PRESS_TO_RAPPEL" );
+  trigs = getentarray("rappeltrigger", "targetname");
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
     trig.rappelPoint = org.origin;
@@ -77,29 +78,25 @@ SetupRappel() {
   }
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
-    if(isDefined(org)) {
+    if(isdefined(org))
       org delete();
-    }
   }
 }
 
 RappelThink() {
   // Press and hold ^3[{+activate}]^7 to rappel
-  //self setHintString(&"MP_PRESS_TO_RAPPEL" );
+  //self setHintString( &"MP_PRESS_TO_RAPPEL" );
 
-  while(1) {
+  while (1) {
     self waittill("trigger", player);
-    if(!isPlayer(player)) {
+    if(!isPlayer(player))
       continue;
-    }
 
-    if(!player isOnGround()) {
+    if(!player isOnGround())
       continue;
-    }
 
-    if(isDefined(player.rapelling)) {
+    if(isdefined(player.rapelling))
       continue;
-    }
 
     player thread Rappel(self);
   }

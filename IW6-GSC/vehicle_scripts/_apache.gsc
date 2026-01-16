@@ -34,9 +34,8 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/heli_dust_default", 0);
   maps\_vehicle::build_team("allies");
 
-  if(isDefined(var_2) && issubstr(var_2, "_mg")) {
+  if(isDefined(var_2) && issubstr(var_2, "_mg"))
     maps\_vehicle::build_turret("apache_turret", "tag_turret", "vehicle_apache_mg", undefined, "auto_nonai", 0.0, 20, -14);
-  }
 
   if(!issubstr(var_2, "_berlin")) {
     precacheitem("zippy_rockets_apache");
@@ -65,9 +64,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 11; var_1++) {
+  for(var_1 = 0; var_1 < 11; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].getout_delete = 1;
   return var_0;

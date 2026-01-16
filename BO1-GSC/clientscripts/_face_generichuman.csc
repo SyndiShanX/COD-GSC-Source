@@ -89,12 +89,10 @@ buildDeathFaceAnims() {
 }
 
 doFace_generichuman(localClientNum) {
-  if(isDefined(level.zombiemode) && level.zombiemode) {
+  if(isDefined(level.zombiemode) && level.zombiemode)
     return;
-  }
-  if(self.species != "human") {
+  if(self.species != "human")
     return;
-  }
   if(!isDefined(self.face_disable)) {
     self.face_disable = false;
   }

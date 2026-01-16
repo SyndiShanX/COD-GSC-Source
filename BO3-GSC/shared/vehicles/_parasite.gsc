@@ -23,15 +23,15 @@
 #namespace parasite;
 
 function autoexec __init__sytem__() {
-  system::register("parasite", &__init__, undefined, undefined);
+  system::register("parasite", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("parasite", &parasite_initialize);
+  vehicle::add_main_callback("parasite", & parasite_initialize);
   clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int");
   clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int");
   clientfield::register("toplayer", "parasite_damage", 1, 1, "counter");
-  callback::on_spawned(&parasite_damage);
+  callback::on_spawned( & parasite_damage);
   ai::registermatchedinterface("parasite", "firing_rate", "slow", array("slow", "medium", "fast"));
 }
 
@@ -39,16 +39,16 @@ function parasite_damage() {
   self notify("parasite_damage_thread");
   self endon("parasite_damage_thread");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("damage", n_ammount, e_attacker);
-    if(isDefined(e_attacker) && (isDefined(e_attacker.is_parasite) && e_attacker.is_parasite) && (!(isDefined(e_attacker.squelch_damage_overlay) && e_attacker.squelch_damage_overlay))) {
+    if(isdefined(e_attacker) && (isdefined(e_attacker.is_parasite) && e_attacker.is_parasite) && (!(isdefined(e_attacker.squelch_damage_overlay) && e_attacker.squelch_damage_overlay))) {
       self clientfield::increment_to_player("parasite_damage");
     }
   }
 }
 
 function private is_target_valid(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return 0;
   }
   if(!isalive(target)) {
@@ -60,13 +60,13 @@ function private is_target_valid(target) {
   if(isplayer(target) && target.sessionstate == "intermission") {
     return 0;
   }
-  if(isDefined(target.ignoreme) && target.ignoreme) {
+  if(isdefined(target.ignoreme) && target.ignoreme) {
     return 0;
   }
   if(target isnotarget()) {
     return 0;
   }
-  if(isDefined(self.is_target_valid_cb)) {
+  if(isdefined(self.is_target_valid_cb)) {
     return self[[self.is_target_valid_cb]](target);
   }
   return 1;
@@ -75,8 +75,8 @@ function private is_target_valid(target) {
 function get_parasite_enemy() {
   parasite_targets = getplayers();
   least_hunted = parasite_targets[0];
-  for(i = 0; i < parasite_targets.size; i++) {
-    if(!isDefined(parasite_targets[i].hunted_by)) {
+  for (i = 0; i < parasite_targets.size; i++) {
+    if(!isdefined(parasite_targets[i].hunted_by)) {
       parasite_targets[i].hunted_by = 0;
     }
     if(!is_target_valid(parasite_targets[i])) {
@@ -99,8 +99,8 @@ function set_parasite_enemy(enemy) {
   if(!is_target_valid(enemy)) {
     return;
   }
-  if(isDefined(self.parasiteenemy)) {
-    if(!isDefined(self.parasiteenemy.hunted_by)) {
+  if(isdefined(self.parasiteenemy)) {
+    if(!isdefined(self.parasiteenemy.hunted_by)) {
       self.parasiteenemy.hunted_by = 0;
     }
     if(self.parasiteenemy.hunted_by > 0) {
@@ -108,7 +108,7 @@ function set_parasite_enemy(enemy) {
     }
   }
   self.parasiteenemy = enemy;
-  if(!isDefined(self.parasiteenemy.hunted_by)) {
+  if(!isdefined(self.parasiteenemy.hunted_by)) {
     self.parasiteenemy.hunted_by = 0;
   }
   self.parasiteenemy.hunted_by++;
@@ -119,8 +119,8 @@ function set_parasite_enemy(enemy) {
 function private parasite_target_selection() {
   self endon("change_state");
   self endon("death");
-  for(;;) {
-    if(isDefined(self.ignoreall) && self.ignoreall) {
+  for (;;) {
+    if(isdefined(self.ignoreall) && self.ignoreall) {
       wait(0.5);
       continue;
     }
@@ -129,7 +129,7 @@ function private parasite_target_selection() {
       continue;
     }
     target = get_parasite_enemy();
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       self.parasiteenemy = undefined;
     } else {
       self.parasiteenemy = target;
@@ -146,7 +146,7 @@ function parasite_initialize() {
   blackboard::createblackboardforentity(self);
   self blackboard::registervehicleblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_parasite_firing_rate", "slow", &getparasitefiringrate);
+  blackboard::registerblackboardattribute(self, "_parasite_firing_rate", "slow", & getparasitefiringrate);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -158,24 +158,26 @@ function parasite_initialize() {
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
   self.vehaircraftcollisionenabled = 1;
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self.goalradius = 999999;
   self.goalheight = 4000;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self.is_parasite = 1;
   self thread vehicle_ai::nudge_collision();
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   defaultrole();
 }
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }
@@ -187,13 +189,13 @@ function getparasitefiringrate() {
 function state_death_update(params) {
   self endon("death");
   self asmrequestsubstate("death@stationary");
-  if(isDefined(self.parasiteenemy) && isDefined(self.parasiteenemy.hunted_by)) {
+  if(isdefined(self.parasiteenemy) && isdefined(self.parasiteenemy.hunted_by)) {
     self.parasiteenemy.hunted_by--;
   }
   self setphysacceleration(vectorscale((0, 0, -1), 300));
   self.vehcheckforpredictedcrash = 1;
   self thread vehicle_death::death_fx();
-  self playSound("zmb_parasite_explo");
+  self playsound("zmb_parasite_explo");
   self util::waittill_notify_or_timeout("veh_predictedcollision", 4);
   self clientfield::set("parasite_secondary_deathfx", 1);
   wait(0.2);
@@ -201,7 +203,7 @@ function state_death_update(params) {
 }
 
 function state_combat_enter(params) {
-  if(isDefined(self.owner) && isDefined(self.owner.enemy)) {
+  if(isdefined(self.owner) && isdefined(self.owner.enemy)) {
     self.parasiteenemy = self.owner.enemy;
   }
   self thread parasite_target_selection();
@@ -215,17 +217,17 @@ function state_combat_update(params) {
   self.lasttimetargetinsight = 0;
   self.lasttimejuked = 0;
   self asmrequestsubstate("locomotion@movement");
-  for(;;) {
-    if(isDefined(self._override_parasite_combat_speed)) {
+  for (;;) {
+    if(isdefined(self._override_parasite_combat_speed)) {
       self setspeed(self._override_parasite_combat_speed);
     } else {
       self setspeed(self.settings.defaultmovespeed);
     }
-    if(isDefined(self.inpain) && self.inpain) {
+    if(isdefined(self.inpain) && self.inpain) {
       wait(0.1);
       continue;
     }
-    if(!isDefined(self.parasiteenemy)) {
+    if(!isdefined(self.parasiteenemy)) {
       wait(0.25);
       continue;
     }
@@ -234,7 +236,7 @@ function state_combat_update(params) {
       returndata["origin"] = self getclosestpointonnavvolume(self.goalpos, 100);
       returndata["centerOnNav"] = ispointinnavvolume(self.origin, "navvolume_small");
     } else {
-      if(randomint(100) < self.settings.jukeprobability && (!(isDefined(self.lasttimejuked) && self.lasttimejuked)) || (isDefined(self._override_juke) && self._override_juke)) {
+      if(randomint(100) < self.settings.jukeprobability && (!(isdefined(self.lasttimejuked) && self.lasttimejuked)) || (isdefined(self._override_juke) && self._override_juke)) {
         returndata = getnextmoveposition_forwardjuke();
         self.lasttimejuked = 1;
         self._override_juke = undefined;
@@ -244,27 +246,27 @@ function state_combat_update(params) {
       }
     }
     self.current_pathto_pos = returndata["origin"];
-    if(isDefined(self.current_pathto_pos)) {
-      if(isDefined(self.stucktime)) {
+    if(isdefined(self.current_pathto_pos)) {
+      if(isdefined(self.stucktime)) {
         self.stucktime = undefined;
       }
       if(self setvehgoalpos(self.current_pathto_pos, 1, returndata["centerOnNav"])) {
         self thread path_update_interrupt();
-        self playSound("zmb_vocals_parasite_juke");
+        self playsound("zmb_vocals_parasite_juke");
         self vehicle_ai::waittill_pathing_done(5);
       } else {
         wait(0.1);
       }
-    } else if(!(isDefined(returndata["centerOnNav"]) && returndata["centerOnNav"])) {
-      if(!isDefined(self.stucktime)) {
+    } else if(!(isdefined(returndata["centerOnNav"]) && returndata["centerOnNav"])) {
+      if(!isdefined(self.stucktime)) {
         self.stucktime = gettime();
       }
       if((gettime() - self.stucktime) > 10000) {
         self dodamage(self.health + 100, self.origin);
       }
     }
-    if(isDefined(self.lasttimejuked) && self.lasttimejuked) {
-      if(randomint(100) < 50 && isDefined(self.parasiteenemy) && distance2dsquared(self.origin, self.parasiteenemy.origin) < (64 * 64)) {
+    if(isdefined(self.lasttimejuked) && self.lasttimejuked) {
+      if(randomint(100) < 50 && isdefined(self.parasiteenemy) && distance2dsquared(self.origin, self.parasiteenemy.origin) < (64 * 64)) {
         self.parasiteenemy dodamage(self.settings.meleedamage, self.parasiteenemy.origin, self);
       } else {
         self fire_pod_logic(self.lasttimejuked);
@@ -278,12 +280,12 @@ function state_combat_update(params) {
 }
 
 function fire_pod_logic(chosetojuke) {
-  if(isDefined(self.parasiteenemy) && self vehcansee(self.parasiteenemy) && distance2dsquared(self.parasiteenemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
+  if(isdefined(self.parasiteenemy) && self vehcansee(self.parasiteenemy) && distance2dsquared(self.parasiteenemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
     self asmrequestsubstate("fire@stationary");
-    self playSound("zmb_vocals_parasite_preattack");
+    self playsound("zmb_vocals_parasite_preattack");
     self clientfield::set("parasite_tell_fx", 1);
     self waittill("pre_fire");
-    if(isDefined(self.parasiteenemy) && self vehcansee(self.parasiteenemy) && distance2dsquared(self.parasiteenemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
+    if(isdefined(self.parasiteenemy) && self vehcansee(self.parasiteenemy) && distance2dsquared(self.parasiteenemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
       self setturrettargetent(self.parasiteenemy, self.parasiteenemy getvelocity() * 0.3);
     }
     self vehicle_ai::waittill_asm_complete("fire@stationary", 5);
@@ -308,7 +310,7 @@ function getnextmoveposition_tactical() {
   preferedheightrange = 0.5 * (self.settings.engagementheightmax - self.settings.engagementheightmin);
   randomness = 30;
   queryresult = positionquery_source_navigation(self.origin, 75, 225 * querymultiplier, 75, 20 * querymultiplier, self, 20 * querymultiplier);
-  if(!(isDefined(queryresult.centeronnav) && queryresult.centeronnav)) {
+  if(!(isdefined(queryresult.centeronnav) && queryresult.centeronnav)) {
     self.vehaircraftcollisionenabled = 0;
   } else {
     self.vehaircraftcollisionenabled = 1;
@@ -321,7 +323,7 @@ function getnextmoveposition_tactical() {
   best_score = -999999;
   trace_count = 0;
   foreach(point in queryresult.data) {
-    if(!(isDefined(queryresult.centeronnav) && queryresult.centeronnav)) {
+    if(!(isdefined(queryresult.centeronnav) && queryresult.centeronnav)) {
       if(sighttracepassed(self.origin, point.origin, 0, undefined)) {
         trace_count++;
         if(trace_count > 3) {
@@ -335,12 +337,12 @@ function getnextmoveposition_tactical() {
         continue;
       }
     }
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, randomness);
     point.score = point.score + randomfloatrange(0, randomness);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = point.distawayfromengagementarea * -1;
@@ -348,7 +350,7 @@ function getnextmoveposition_tactical() {
     distfrompreferredheight = abs(point.origin[2] - goalheight);
     if(distfrompreferredheight > preferedheightrange) {
       heightscore = mapfloat(0, 500, 0, 2000, distfrompreferredheight);
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = heightscore * -1;
@@ -360,12 +362,12 @@ function getnextmoveposition_tactical() {
     }
   }
   self vehicle_ai::positionquery_debugscores(queryresult);
-  if(isDefined(getdvarint("")) && getdvarint("")) {
+  if(isdefined(getdvarint("")) && getdvarint("")) {
     recordline(self.origin, best_point.origin, (0.3, 1, 0));
     recordline(self.origin, self.parasiteenemy.origin, (1, 0, 0.4));
   }
   returndata = [];
-  returndata["origin"] = (isDefined(best_point) ? best_point.origin : undefined);
+  returndata["origin"] = (isdefined(best_point) ? best_point.origin : undefined);
   returndata["centerOnNav"] = queryresult.centeronnav;
   return returndata;
 }
@@ -381,7 +383,7 @@ function getnextmoveposition_forwardjuke() {
   preferedheightrange = 0.5 * (self.settings.forwardjukeengagementheightmax - self.settings.forwardjukeengagementheightmin);
   randomness = 30;
   queryresult = positionquery_source_navigation(self.origin, 75, 300 * querymultiplier, 75, 20 * querymultiplier, self, 20 * querymultiplier);
-  if(!(isDefined(queryresult.centeronnav) && queryresult.centeronnav)) {
+  if(!(isdefined(queryresult.centeronnav) && queryresult.centeronnav)) {
     self.vehaircraftcollisionenabled = 0;
   } else {
     self.vehaircraftcollisionenabled = 1;
@@ -394,7 +396,7 @@ function getnextmoveposition_forwardjuke() {
   best_score = -999999;
   trace_count = 0;
   foreach(point in queryresult.data) {
-    if(!(isDefined(queryresult.centeronnav) && queryresult.centeronnav)) {
+    if(!(isdefined(queryresult.centeronnav) && queryresult.centeronnav)) {
       if(sighttracepassed(self.origin, point.origin, 0, undefined)) {
         trace_count++;
         if(trace_count > 3) {
@@ -408,12 +410,12 @@ function getnextmoveposition_forwardjuke() {
         continue;
       }
     }
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, randomness);
     point.score = point.score + randomfloatrange(0, randomness);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = point.distawayfromengagementarea * -1;
@@ -421,7 +423,7 @@ function getnextmoveposition_forwardjuke() {
     distfrompreferredheight = abs(point.origin[2] - goalheight);
     if(distfrompreferredheight > preferedheightrange) {
       heightscore = mapfloat(0, 500, 0, 2000, distfrompreferredheight);
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = heightscore * -1;
@@ -433,12 +435,12 @@ function getnextmoveposition_forwardjuke() {
     }
   }
   self vehicle_ai::positionquery_debugscores(queryresult);
-  if(isDefined(getdvarint("")) && getdvarint("")) {
+  if(isdefined(getdvarint("")) && getdvarint("")) {
     recordline(self.origin, best_point.origin, (0.3, 1, 0));
     recordline(self.origin, self.parasiteenemy.origin, (1, 0, 0.4));
   }
   returndata = [];
-  returndata["origin"] = (isDefined(best_point) ? best_point.origin : undefined);
+  returndata["origin"] = (isdefined(best_point) ? best_point.origin : undefined);
   returndata["centerOnNav"] = queryresult.centeronnav;
   return returndata;
 }
@@ -449,8 +451,8 @@ function path_update_interrupt() {
   self endon("near_goal");
   self endon("reached_end_node");
   wait(1);
-  while(true) {
-    if(isDefined(self.current_pathto_pos)) {
+  while (true) {
+    if(isdefined(self.current_pathto_pos)) {
       if(distance2dsquared(self.current_pathto_pos, self.goalpos) > (self.goalradius * self.goalradius)) {
         wait(0.2);
         self._override_juke = 1;
@@ -464,17 +466,17 @@ function path_update_interrupt() {
 function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
   self endon("death");
   self.painstarttime = gettime();
-  if(!(isDefined(self.inpain) && self.inpain)) {
+  if(!(isdefined(self.inpain) && self.inpain)) {
     self.inpain = 1;
-    self playSound("zmb_vocals_parasite_pain");
-    while(gettime() < (self.painstarttime + (time * 1000))) {
+    self playsound("zmb_vocals_parasite_pain");
+    while (gettime() < (self.painstarttime + (time * 1000))) {
       self setvehvelocity(self.velocity * stablizeparam);
       self setangularvelocity(self getangularvelocity() * stablizeparam);
       wait(0.1);
     }
-    if(isDefined(restorelookpoint)) {
+    if(isdefined(restorelookpoint)) {
       restorelookent = spawn("script_model", restorelookpoint);
-      restorelookent setModel("tag_origin");
+      restorelookent setmodel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
       self setturrettargetent(restorelookent);
@@ -488,7 +490,7 @@ function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
 }
 
 function drone_pain(eattacker, damagetype, hitpoint, hitdirection, hitlocationinfo, partname) {
-  if(!(isDefined(self.inpain) && self.inpain)) {
+  if(!(isdefined(self.inpain) && self.inpain)) {
     yaw_vel = math::randomsign() * randomfloatrange(280, 320);
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + (randomfloatrange(-120, -100), yaw_vel, randomfloatrange(-200, 200));

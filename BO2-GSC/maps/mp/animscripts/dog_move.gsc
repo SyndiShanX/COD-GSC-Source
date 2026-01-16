@@ -8,8 +8,8 @@
 #include maps\mp\animscripts\dog_stop;
 
 setup_sound_variables() {
-  level.dog_sounds["far"] = spawnStruct();
-  level.dog_sounds["close"] = spawnStruct();
+  level.dog_sounds["far"] = spawnstruct();
+  level.dog_sounds["close"] = spawnstruct();
   level.dog_sounds["close"].minrange = 0;
   level.dog_sounds["close"].maxrange = 500;
   level.dog_sounds["close"].sound = "aml_dog_bark_close";
@@ -34,13 +34,11 @@ main() {
   self setaimanimweights(0, 0);
   do_movement = 1;
 
-  if(!debug_allow_movement()) {
+  if(!debug_allow_movement())
     do_movement = 0;
-  }
 
-  if(isDefined(level.hostmigrationtimer)) {
+  if(isDefined(level.hostmigrationtimer))
     do_movement = 0;
-  }
 
   if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && do_movement) {
     self startmove();
@@ -70,9 +68,8 @@ main() {
     self moveloop();
 
     if(self.a.movement == "run") {
-      if(self.disablearrivals == 0) {
+      if(self.disablearrivals == 0)
         self thread stopmove();
-      }
 
       self waittill("run");
     }
@@ -86,13 +83,11 @@ moveloop() {
   while(true) {
     do_movement = 1;
 
-    if(!debug_allow_movement()) {
+    if(!debug_allow_movement())
       do_movement = 0;
-    }
 
-    if(isDefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer))
       do_movement = 0;
-    }
 
     if(!do_movement) {
       self setaimanimweights(0, 0);
@@ -101,11 +96,10 @@ moveloop() {
       continue;
     }
 
-    if(self.disablearrivals) {
+    if(self.disablearrivals)
       self.stopanimdistsq = 0;
-    } else {
+    else
       self.stopanimdistsq = level.dogstoppingdistsq;
-    }
 
     if(shouldrun()) {
       debug_anim_print("dog_move::moveLoop() - Setting move_run");
@@ -140,27 +134,23 @@ stopmove() {
 }
 
 shouldrun() {
-  if(getdvarint(#"_id_DFB12081") != 0) {
+  if(getdvarint(#"_id_DFB12081") != 0)
     return true;
-  } else if(getdvarint(#"_id_D5D7999B") != 0) {
+  else if(getdvarint(#"_id_D5D7999B") != 0)
     return false;
-  }
 
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return true;
-  }
 
-  if(self.lookaheaddist <= 90) {
+  if(self.lookaheaddist <= 90)
     return false;
-  }
 
   angles = vectortoangles(self.lookaheaddir);
   yaw_desired = absangleclamp180(angles[1]);
   yaw = absangleclamp180(self.angles[1]);
 
-  if(abs(yaw_desired - yaw) >= 8) {
+  if(abs(yaw_desired - yaw) >= 8)
     return false;
-  }
 
   return true;
 }

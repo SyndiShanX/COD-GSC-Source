@@ -194,16 +194,16 @@ fire_turret_2(vh_f35) {
 }
 
 ce_f35_hit(vh_f35) {
-  playFXOnTag(level._effect["ce_f35_fx"], vh_f35, "tag_origin");
+  playfxontag(level._effect["ce_f35_fx"], vh_f35, "tag_origin");
 }
 
 bdog_muzzle_flash(m_bdog) {
   m_turret = get_model_or_models_from_scene("cougar_exit_claw", "ce_bdog_turret");
-  playFXOnTag(level._effect["ce_bdog_tracer"], m_turret, "tag_flash");
+  playfxontag(level._effect["ce_bdog_tracer"], m_turret, "tag_flash");
 }
 
 ce_blood_fx(ai_cop) {
-  playFXOnTag(level._effect["ce_cop_blood_fx_single"], ai_cop, "j_spineupper");
+  playfxontag(level._effect["ce_cop_blood_fx_single"], ai_cop, "j_spineupper");
 }
 
 clear_street_lapd_car_explode(vh_lapd_car) {
@@ -215,12 +215,12 @@ ce_tire_fx(m_cop_car) {
   v_left_tire_angle = (m_cop_car.angles[1] * -1, m_cop_car.angles[2], m_cop_car.angles[0]);
   m_fx_left = spawn_model("tag_origin", v_left_tire_org, v_left_tire_angle);
   m_fx_left linkto(m_cop_car);
-  playFXOnTag(getfx("ce_cop_car_marks_left"), m_fx_left, "tag_origin");
+  playfxontag(getfx("ce_cop_car_marks_left"), m_fx_left, "tag_origin");
   v_right_tire_org = m_cop_car gettagorigin("tag_wheel_back_right");
   v_right_tire_angle = (m_cop_car.angles[1] * -1, m_cop_car.angles[2], m_cop_car.angles[0]);
   m_fx_right = spawn_model("tag_origin", v_right_tire_org, v_right_tire_angle);
   m_fx_right linkto(m_cop_car);
-  playFXOnTag(getfx("ce_cop_car_marks_right"), m_fx_right, "tag_origin");
+  playfxontag(getfx("ce_cop_car_marks_right"), m_fx_right, "tag_origin");
   level notify("cop_car_skid_done");
   scene_wait("ce_fxanim_cop_car");
   m_fx_left delete();
@@ -241,7 +241,7 @@ ce_harper_grenade(ai_harper) {
 
 bdog_die_explosion(m_bdog) {
   fxorigin = m_bdog gettagorigin("tag_body_animate");
-  playFX(level._effect["ce_bdog_death"], fxorigin);
+  playfx(level._effect["ce_bdog_death"], fxorigin);
   playsoundatposition("wpn_bigdog_explode", fxorigin);
   m_bdog delete();
   m_turret = get_model_or_models_from_scene("cougar_exit_claw", "ce_bdog_turret");
@@ -430,12 +430,12 @@ fxanim_test() {
 }
 
 snd_bdog_fire(bigdog) {
-  bigdog playLoopSound("wpn_intro_claw_loop");
+  bigdog playloopsound("wpn_intro_claw_loop");
 }
 
 snd_bdog_stop_fire(bigdog) {
   bigdog stoploopsound();
-  bigdog playSound("wpn_intro_claw_stop");
+  bigdog playsound("wpn_intro_claw_stop");
 }
 
 sndturnoffintrosnapshot(guy) {

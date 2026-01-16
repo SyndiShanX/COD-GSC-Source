@@ -15,7 +15,7 @@
 #namespace _gadget_mrpukey;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_es_strike", &__init__, undefined, undefined);
+  system::register("gadget_es_strike", & __init__, undefined, undefined);
 }
 
 function __init__() {}

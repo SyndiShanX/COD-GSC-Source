@@ -31,15 +31,15 @@ function main() {
   level._effect["iff_takeover"] = "electric/fx_elec_sparks_burst_lg_os";
   level._effect["iff_takeover_revert"] = "explosions/fx_exp_grenade_flshbng";
   level._effect["iff_takeover_death"] = "explosions/fx_exp_grenade_flshbng";
-  level.cybercom.iff_override = spawnStruct();
-  level.cybercom.iff_override._is_flickering = &_is_flickering;
-  level.cybercom.iff_override._on_flicker = &_on_flicker;
-  level.cybercom.iff_override._on_give = &_on_give;
-  level.cybercom.iff_override._on_take = &_on_take;
-  level.cybercom.iff_override._on_connect = &_on_connect;
-  level.cybercom.iff_override._on = &_on;
-  level.cybercom.iff_override._off = &_off;
-  level.cybercom.iff_override._is_primed = &_is_primed;
+  level.cybercom.iff_override = spawnstruct();
+  level.cybercom.iff_override._is_flickering = & _is_flickering;
+  level.cybercom.iff_override._on_flicker = & _on_flicker;
+  level.cybercom.iff_override._on_give = & _on_give;
+  level.cybercom.iff_override._on_take = & _on_take;
+  level.cybercom.iff_override._on_connect = & _on_connect;
+  level.cybercom.iff_override._on = & _on;
+  level.cybercom.iff_override._off = & _off;
+  level.cybercom.iff_override._is_primed = & _is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -55,10 +55,10 @@ function _on_give(slot, weapon) {
     self.cybercom.iff_override_lifetime = getdvarint("scr_iff_override_upgraded_lifetime", 120);
     self.cybercom.var_84bab148 = getdvarint("scr_iff_override_control_upgraded_count", 2);
   }
-  self.cybercom.targetlockcb = &_get_valid_targets;
-  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.targetlockcb = & _get_valid_targets;
+  self.cybercom.targetlockrequirementcb = & _lock_requirement;
   self.cybercom.var_46a37937 = [];
-  self.cybercom.var_73d069a7 = &function_17342509;
+  self.cybercom.var_73d069a7 = & function_17342509;
   self.cybercom.var_46483c8f = 63;
   self thread cybercom::function_b5f4e597(weapon);
 }
@@ -89,7 +89,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -103,8 +103,8 @@ function private function_f1ec3062(team, attacker) {
   self setteam(team);
   wait(1);
   self clientfield::set("cybercom_setiffname", 0);
-  playFX(level._effect["iff_takeover_death"], self.origin);
-  if(isDefined(attacker)) {
+  playfx(level._effect["iff_takeover_death"], self.origin);
+  if(isdefined(attacker)) {
     self kill(self.origin, attacker);
   } else {
     self kill();
@@ -117,7 +117,7 @@ function private function_2458babe(entity) {
   }
   valid = [];
   foreach(guy in self.cybercom.var_46a37937) {
-    if(isDefined(guy) && isalive(guy)) {
+    if(isdefined(guy) && isalive(guy)) {
       valid[valid.size] = guy;
     }
   }
@@ -126,7 +126,7 @@ function private function_2458babe(entity) {
   if(self.cybercom.var_46a37937.size > self.cybercom.var_84bab148) {
     var_983e95da = self.cybercom.var_46a37937[0];
     arrayremoveindex(self.cybercom.var_46a37937, 0);
-    if(isDefined(var_983e95da)) {
+    if(isdefined(var_983e95da)) {
       var_983e95da notify("iff_override_reverted");
       wait(1.5);
       if(isalive(var_983e95da)) {
@@ -138,14 +138,14 @@ function private function_2458babe(entity) {
 
 function private _lock_requirement(target) {
   if(target cybercom::cybercom_aicheckoptout("cybercom_iffoverride")) {
-    if(isDefined(target.rogue_controlled) && target.rogue_controlled) {
+    if(isdefined(target.rogue_controlled) && target.rogue_controlled) {
       self cybercom::function_29bf9dee(target, 4);
     } else {
       self cybercom::function_29bf9dee(target, 2);
     }
     return false;
   }
-  if(isDefined(target.is_disabled) && target.is_disabled) {
+  if(isdefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
@@ -163,11 +163,11 @@ function private _lock_requirement(target) {
   if(!isactor(target) && !isvehicle(target)) {
     return false;
   }
-  if(isvehicle(target) && isDefined(target.iffowner)) {
+  if(isvehicle(target) && isdefined(target.iffowner)) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isDefined(target.var_f40d252c) && target.var_f40d252c) {
+  if(isdefined(target.var_f40d252c) && target.var_f40d252c) {
     return false;
   }
   if(isactor(target) && target.archetype == "robot" && target ai::get_behavior_attribute("rogue_control") == "level_3") {
@@ -181,7 +181,7 @@ function private _get_valid_targets(weapon) {
   prospects = getaiteamarray("axis");
   valid = [];
   foreach(enemy in prospects) {
-    if(isvehicle(enemy) || (isactor(enemy) && isDefined(enemy.archetype))) {
+    if(isvehicle(enemy) || (isactor(enemy) && isdefined(enemy.archetype))) {
       valid[valid.size] = enemy;
     }
   }
@@ -192,7 +192,7 @@ function private _activate_iff_override(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
+    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -214,7 +214,7 @@ function private _activate_iff_override(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_iffoverride");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -229,7 +229,7 @@ function private _iff_leash_to_owner(owner) {
   } else {
     owner endon("death");
   }
-  while(isDefined(owner)) {
+  while (isdefined(owner)) {
     wait(randomfloatrange(1, 4));
     if(distancesquared(self.origin, owner.origin) > (self.goalradius * self.goalradius)) {
       self setgoal(owner.origin);
@@ -238,10 +238,10 @@ function private _iff_leash_to_owner(owner) {
 }
 
 function iff_vehiclecb(isactive) {
-  if(isactive && isDefined(self.iffowner) && isplayer(self.iffowner)) {
+  if(isactive && isdefined(self.iffowner) && isplayer(self.iffowner)) {
     self clientfield::set("cybercom_setiffname", 2);
     self thread function_384a3bfb();
-  } else if(!isactive && isDefined(self.iffowner)) {
+  } else if(!isactive && isdefined(self.iffowner)) {
     self clientfield::set("cybercom_setiffname", 0);
     achievements::function_6903d776(self);
     self.iffowner = undefined;
@@ -260,7 +260,7 @@ function private _iff_overridevehicle(assignedowner) {
   self endon("death");
   wait(randomfloatrange(0, 0.75));
   if(isplayer(assignedowner)) {
-    self.iff_override_cb = &iff_vehiclecb;
+    self.iff_override_cb = & iff_vehiclecb;
     self.iffowner = assignedowner;
   }
   assignedowner thread function_2458babe(self);
@@ -287,13 +287,13 @@ function iff_override(attacker, disabletimemsec, weapon = getweapon("gadget_iff_
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
-  if(isDefined(disabletimemsec)) {
+  if(isdefined(disabletimemsec)) {
     disabletime = int(disabletimemsec / 1000);
   } else {
-    if(isDefined(attacker.cybercom) && isDefined(attacker.cybercom.iff_override_lifetime)) {
+    if(isdefined(attacker.cybercom) && isdefined(attacker.cybercom.iff_override_lifetime)) {
       disabletime = attacker.cybercom.iff_override_lifetime;
     } else {
       disabletime = getdvarint("scr_iff_override_lifetime", 60);
@@ -302,7 +302,7 @@ function iff_override(attacker, disabletimemsec, weapon = getweapon("gadget_iff_
   self.ignoreall = 1;
   self ai::set_behavior_attribute("robot_lights", 2);
   wait(1);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   entnum = self getentitynumber();
@@ -311,7 +311,7 @@ function iff_override(attacker, disabletimemsec, weapon = getweapon("gadget_iff_
   wait(0.05);
   team = self.team;
   clone = cloneandremoveentity(self);
-  if(!isDefined(clone)) {
+  if(!isdefined(clone)) {
     return;
   }
   level notify("clonedentity", clone, entnum);
@@ -326,19 +326,19 @@ function iff_override(attacker, disabletimemsec, weapon = getweapon("gadget_iff_
   clone setteam(attacker.team);
   clone.remote_owner = attacker;
   clone.oldteam = team;
-  if(isDefined(clone.favoriteenemy) && isDefined(clone.favoriteenemy._currentroguerobot)) {
+  if(isdefined(clone.favoriteenemy) && isdefined(clone.favoriteenemy._currentroguerobot)) {
     clone.favoriteenemy._currentroguerobot = undefined;
   }
   clone.favoriteenemy = undefined;
-  playFX(level._effect["iff_takeover"], clone.origin);
+  playfx(level._effect["iff_takeover"], clone.origin);
   clone thread _iff_leash_to_owner(attacker);
   clone.oldgoalradius = clone.goalradius;
   clone.goalradius = 512;
   clone clientfield::set("cybercom_setiffname", 2);
-  if(isDefined(self.var_72f54197)) {
+  if(isdefined(self.var_72f54197)) {
     clone.var_72f54197 = self.var_72f54197;
   }
-  if(isDefined(self.var_b0ac175a)) {
+  if(isdefined(self.var_b0ac175a)) {
     clone.var_b0ac175a = self.var_b0ac175a;
   }
 }
@@ -361,7 +361,7 @@ function private _iff_override_revert_after(timesec, attacker) {
 }
 
 function ai_activateiffoverride(target, var_9bc2efcb = 1) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -381,7 +381,7 @@ function ai_activateiffoverride(target, var_9bc2efcb = 1) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");

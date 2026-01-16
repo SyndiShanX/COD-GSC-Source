@@ -11,22 +11,22 @@
 
 function is_primary_weapon(weapon) {
   root_weapon = weapon.rootweapon;
-  return root_weapon != level.weaponnone && isDefined(level.primary_weapon_array[root_weapon]);
+  return root_weapon != level.weaponnone && isdefined(level.primary_weapon_array[root_weapon]);
 }
 
 function is_side_arm(weapon) {
   root_weapon = weapon.rootweapon;
-  return root_weapon != level.weaponnone && isDefined(level.side_arm_array[root_weapon]);
+  return root_weapon != level.weaponnone && isdefined(level.side_arm_array[root_weapon]);
 }
 
 function is_inventory(weapon) {
   root_weapon = weapon.rootweapon;
-  return root_weapon != level.weaponnone && isDefined(level.inventory_array[root_weapon]);
+  return root_weapon != level.weaponnone && isdefined(level.inventory_array[root_weapon]);
 }
 
 function is_grenade(weapon) {
   root_weapon = weapon.rootweapon;
-  return root_weapon != level.weaponnone && isDefined(level.grenade_array[root_weapon]);
+  return root_weapon != level.weaponnone && isdefined(level.grenade_array[root_weapon]);
 }
 
 function force_stowed_weapon_update() {
@@ -36,8 +36,8 @@ function force_stowed_weapon_update() {
 }
 
 function detach_carry_object_model() {
-  if(isDefined(self.carryobject) && isDefined(self.carryobject gameobjects::get_visible_carrier_model())) {
-    if(isDefined(self.tag_stowed_back)) {
+  if(isdefined(self.carryobject) && isdefined(self.carryobject gameobjects::get_visible_carrier_model())) {
+    if(isdefined(self.tag_stowed_back)) {
       self detach(self.tag_stowed_back, "tag_stowed_back");
       self.tag_stowed_back = undefined;
     }
@@ -45,11 +45,11 @@ function detach_carry_object_model() {
 }
 
 function detach_all_weapons() {
-  if(isDefined(self.tag_stowed_back)) {
+  if(isdefined(self.tag_stowed_back)) {
     clear_weapon = 1;
-    if(isDefined(self.carryobject)) {
+    if(isdefined(self.carryobject)) {
       carriermodel = self.carryobject gameobjects::get_visible_carrier_model();
-      if(isDefined(carriermodel) && carriermodel == self.tag_stowed_back) {
+      if(isdefined(carriermodel) && carriermodel == self.tag_stowed_back) {
         self detach(self.tag_stowed_back, "tag_stowed_back");
         clear_weapon = 0;
       }
@@ -61,7 +61,7 @@ function detach_all_weapons() {
   } else {
     self clearstowedweapon();
   }
-  if(isDefined(self.tag_stowed_hip)) {
+  if(isdefined(self.tag_stowed_hip)) {
     detach_model = self.tag_stowed_hip.worldmodel;
     self detach(detach_model, "tag_stowed_hip_rear");
     self.tag_stowed_hip = undefined;
@@ -74,15 +74,15 @@ function stow_on_back(current) {
   self.tag_stowed_back = undefined;
   weaponoptions = 0;
   index_weapon = level.weaponnone;
-  if(isDefined(self.carryobject) && isDefined(self.carryobject gameobjects::get_visible_carrier_model())) {
+  if(isdefined(self.carryobject) && isdefined(self.carryobject gameobjects::get_visible_carrier_model())) {
     self.tag_stowed_back = self.carryobject gameobjects::get_visible_carrier_model();
     self attach(self.tag_stowed_back, "tag_stowed_back", 1);
     return;
   }
   if(currentweapon != level.weaponnone) {
-    for(idx = 0; idx < self.weapon_array_primary.size; idx++) {
+    for (idx = 0; idx < self.weapon_array_primary.size; idx++) {
       temp_index_weapon = self.weapon_array_primary[idx];
-      assert(isDefined(temp_index_weapon), "");
+      assert(isdefined(temp_index_weapon), "");
       if(temp_index_weapon == currentweapon) {
         continue;
       }
@@ -101,7 +101,7 @@ function stow_on_back(current) {
 function stow_on_hip() {
   currentweapon = self getcurrentweapon();
   self.tag_stowed_hip = undefined;
-  for(idx = 0; idx < self.weapon_array_inventory.size; idx++) {
+  for (idx = 0; idx < self.weapon_array_inventory.size; idx++) {
     if(self.weapon_array_inventory[idx] == currentweapon) {
       continue;
     }
@@ -110,7 +110,7 @@ function stow_on_hip() {
     }
     self.tag_stowed_hip = self.weapon_array_inventory[idx];
   }
-  if(!isDefined(self.tag_stowed_hip)) {
+  if(!isdefined(self.tag_stowed_hip)) {
     return;
   }
   self attach(self.tag_stowed_hip.worldmodel, "tag_stowed_hip_rear", 1);
@@ -129,7 +129,7 @@ function weapondamagetrace(from, to, startradius, ignore) {
   }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
-  trace = bulletTrace(midpos, to, 0, ignore);
+  trace = bullettrace(midpos, to, 0, ignore);
   if(getdvarint("scr_damage_debug") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
@@ -159,5 +159,5 @@ function has_hero_weapon() {
 function has_lockon(target) {
   player = self;
   clientnum = player getentitynumber();
-  return isDefined(target.locked_on) && target.locked_on &(1 << clientnum);
+  return isdefined(target.locked_on) && target.locked_on & (1 << clientnum);
 }

@@ -11,13 +11,13 @@
 #namespace microwave_turret;
 
 function autoexec __init__sytem__() {
-  system::register("microwave_turret", &__init__, undefined, undefined);
+  system::register("microwave_turret", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "turret_microwave_open", 1, 1, "int", &microwave_open, 0, 0);
-  clientfield::register("scriptmover", "turret_microwave_init", 1, 1, "int", &microwave_init_anim, 0, 0);
-  clientfield::register("scriptmover", "turret_microwave_close", 1, 1, "int", &microwave_close_anim, 0, 0);
+  clientfield::register("vehicle", "turret_microwave_open", 1, 1, "int", & microwave_open, 0, 0);
+  clientfield::register("scriptmover", "turret_microwave_init", 1, 1, "int", & microwave_init_anim, 0, 0);
+  clientfield::register("scriptmover", "turret_microwave_close", 1, 1, "int", & microwave_close_anim, 0, 0);
 }
 
 function turret_microwave_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -31,22 +31,22 @@ function turret_microwave_sounds(localclientnum, oldval, newval, bnewent, biniti
 function turret_microwave_sound_start(localclientnum) {
   self endon("entityshutdown");
   self endon("sound_stop");
-  if(isDefined(self.sound_loop_enabled) && self.sound_loop_enabled) {
+  if(isdefined(self.sound_loop_enabled) && self.sound_loop_enabled) {
     return;
   }
-  self playSound(0, "wpn_micro_turret_start");
+  self playsound(0, "wpn_micro_turret_start");
   wait(0.7);
   origin = self gettagorigin("tag_flash");
   angles = self gettagangles("tag_flash");
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   forward = vectorscale(forward, 750);
-  trace = bulletTrace(origin, origin + forward, 0, self);
+  trace = bullettrace(origin, origin + forward, 0, self);
   start = origin;
   end = trace["position"];
   self.microwave_audio_start = start;
   self.microwave_audio_end = end;
   self thread turret_microwave_sound_updater();
-  if(!(isDefined(self.sound_loop_enabled) && self.sound_loop_enabled)) {
+  if(!(isdefined(self.sound_loop_enabled) && self.sound_loop_enabled)) {
     self.sound_loop_enabled = 1;
     soundlineemitter("wpn_micro_turret_loop", self.microwave_audio_start, self.microwave_audio_end);
     self thread turret_microwave_sound_off_waiter(localclientnum);
@@ -56,10 +56,10 @@ function turret_microwave_sound_start(localclientnum) {
 function turret_microwave_sound_off_waiter(localclientnum) {
   msg = self util::waittill_any("sound_stop", "entityshutdown");
   if(msg === "sound_stop") {
-    playSound(0, "wpn_micro_turret_stop", self.microwave_audio_start);
+    playsound(0, "wpn_micro_turret_stop", self.microwave_audio_start);
   }
   soundstoplineemitter("wpn_micro_turret_loop", self.microwave_audio_start, self.microwave_audio_end);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.sound_loop_enabled = 0;
   }
 }
@@ -67,15 +67,15 @@ function turret_microwave_sound_off_waiter(localclientnum) {
 function turret_microwave_sound_updater() {
   self endon("beam_stop");
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     origin = self gettagorigin("tag_flash");
     if(origin[0] != self.microwave_audio_start[0] || origin[1] != self.microwave_audio_start[1] || origin[2] != self.microwave_audio_start[2]) {
       previousstart = self.microwave_audio_start;
       previousend = self.microwave_audio_end;
       angles = self gettagangles("tag_flash");
-      forward = anglesToForward(angles);
+      forward = anglestoforward(angles);
       forward = vectorscale(forward, 750);
-      trace = bulletTrace(origin, origin + forward, 0, self);
+      trace = bullettrace(origin, origin + forward, 0, self);
       self.microwave_audio_start = origin;
       self.microwave_audio_end = trace["position"];
       soundupdatelineemitter("wpn_micro_turret_loop", previousstart, previousend, self.microwave_audio_start, self.microwave_audio_end);
@@ -135,7 +135,7 @@ function startmicrowavefx(localclientnum) {
   origin = turret gettagorigin("tag_flash");
   angles = turret gettagangles("tag_flash");
   microwavefxent = spawn(localclientnum, origin, "script_model");
-  microwavefxent setModel("tag_microwavefx");
+  microwavefxent setmodel("tag_microwavefx");
   microwavefxent.angles = angles;
   microwavefxent linkto(turret, "tag_flash");
   microwavefxent.fxhandles = [];
@@ -144,7 +144,7 @@ function startmicrowavefx(localclientnum) {
   self thread updatemicrowaveaim(microwavefxent);
   self thread cleanupfx(localclientnum, microwavefxent);
   wait(0.3);
-  while(true) {
+  while (true) {
     if(getdvarint("")) {
       turret.should_update_fx = 1;
       microwavefxent.fxhashs[""] = 0;
@@ -153,21 +153,21 @@ function startmicrowavefx(localclientnum) {
       wait(1);
       continue;
     }
-    if(isDefined(level.last_microwave_turret_fx_trace) && level.last_microwave_turret_fx_trace == gettime()) {
+    if(isdefined(level.last_microwave_turret_fx_trace) && level.last_microwave_turret_fx_trace == gettime()) {
       wait(0.05);
       continue;
     }
     angles = turret gettagangles("tag_flash");
     origin = turret gettagorigin("tag_flash");
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     forward = vectorscale(forward, 750 + 40);
-    forwardright = anglesToForward(angles - (0, 55 / 3, 0));
+    forwardright = anglestoforward(angles - (0, 55 / 3, 0));
     forwardright = vectorscale(forwardright, 750 + 40);
-    forwardleft = anglesToForward(angles + (0, 55 / 3, 0));
+    forwardleft = anglestoforward(angles + (0, 55 / 3, 0));
     forwardleft = vectorscale(forwardleft, 750 + 40);
-    trace = bulletTrace(origin, origin + forward, 0, turret);
-    traceright = bulletTrace(origin, origin + forwardright, 0, turret);
-    traceleft = bulletTrace(origin, origin + forwardleft, 0, turret);
+    trace = bullettrace(origin, origin + forward, 0, turret);
+    traceright = bullettrace(origin, origin + forwardright, 0, turret);
+    traceleft = bullettrace(origin, origin + forwardleft, 0, turret);
     if(getdvarint("")) {
       debug_trace(origin, trace);
       debug_trace(origin, traceright);
@@ -193,7 +193,7 @@ function updatemicrowaveaim(microwavefxent) {
   turret endon("entityshutdown");
   turret endon("beam_stop");
   last_angles = turret gettagangles("tag_flash");
-  while(true) {
+  while (true) {
     angles = turret gettagangles("tag_flash");
     if(last_angles != angles) {
       turret.should_update_fx = 1;
@@ -206,7 +206,7 @@ function updatemicrowaveaim(microwavefxent) {
 function microwavefxhash(trace, origin, name) {
   hash = 0;
   counter = 2;
-  for(i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     endofhalffxsq = ((i * 150) + 125) * ((i * 150) + 125);
     endoffullfxsq = ((i * 150) + 200) * ((i * 150) + 200);
     tracedistsq = distancesquared(origin, trace["position"]);
@@ -219,7 +219,7 @@ function microwavefxhash(trace, origin, name) {
     }
     counter = counter * 2;
   }
-  if(!isDefined(self.fxhashs[name])) {
+  if(!isdefined(self.fxhashs[name])) {
     self.fxhashs[name] = 0;
   }
   last_hash = self.fxhashs[name];
@@ -230,7 +230,7 @@ function microwavefxhash(trace, origin, name) {
 function cleanupfx(localclientnum, microwavefxent) {
   self util::waittill_any("entityshutdown", "beam_stop");
   foreach(handle in microwavefxent.fxhandles) {
-    if(isDefined(handle)) {
+    if(isdefined(handle)) {
       stopfx(localclientnum, handle);
     }
   }
@@ -238,15 +238,15 @@ function cleanupfx(localclientnum, microwavefxent) {
 }
 
 function play_fx_on_tag(localclientnum, fxname, tag) {
-  if(!isDefined(self.fxhandles[tag]) || fxname != self.fxnames[tag]) {
+  if(!isdefined(self.fxhandles[tag]) || fxname != self.fxnames[tag]) {
     stop_fx_on_tag(localclientnum, fxname, tag);
     self.fxnames[tag] = fxname;
-    self.fxhandles[tag] = playFXOnTag(localclientnum, fxname, self, tag);
+    self.fxhandles[tag] = playfxontag(localclientnum, fxname, self, tag);
   }
 }
 
 function stop_fx_on_tag(localclientnum, fxname, tag) {
-  if(isDefined(self.fxhandles[tag])) {
+  if(isdefined(self.fxhandles[tag])) {
     stopfx(localclientnum, self.fxhandles[tag]);
     self.fxhandles[tag] = undefined;
     self.fxnames[tag] = undefined;
@@ -276,7 +276,7 @@ function stop_or_start_fx(localclientnum, fxname, tag, start) {
 
 function playmicrowavefx(localclientnum, trace, traceright, traceleft, origin) {
   rows = 5;
-  for(i = 0; i < rows; i++) {
+  for (i = 0; i < rows; i++) {
     endofhalffxsq = ((i * 150) + 125) * ((i * 150) + 125);
     endoffullfxsq = ((i * 150) + 200) * ((i * 150) + 200);
     tracedistsq = distancesquared(origin, trace["position"]);

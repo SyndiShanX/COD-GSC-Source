@@ -29,9 +29,8 @@ main() {
 }
 
 toggle_extra_cam(localclientnum, set, newent) {
-  if(!isDefined(level.extracamactive)) {
+  if(!isDefined(level.extracamactive))
     level.extracamactive = 0;
-  }
 
   if(!level.extracamactive && set) {
     println("**** extra cam on - client****");
@@ -49,9 +48,9 @@ toggle_extra_cam(localclientnum, set, newent) {
 put_on_hat(localclientnum, set, newent) {
   if(set) {
     self.m_hat = spawn(self getlocalclientnumber(), self gettagorigin("J_HEAD"), "script_model");
-    self.m_hat setModel("c_usa_milcas_woods_cap");
+    self.m_hat setmodel("c_usa_milcas_woods_cap");
     self.m_hat_linker = spawn(self getlocalclientnumber(), self gettagorigin("J_HEAD"), "script_model");
-    self.m_hat_linker setModel("tag_origin");
+    self.m_hat_linker setmodel("tag_origin");
     self.m_hat_linker.angles = self.angles;
     self.m_hat linkto(self.m_hat_linker, "tag_origin", (0, 0, 0), vectorscale((0, 1, 0), 90.0));
     self.m_hat_linker linktocamera(4, (12, 0, 1.8));

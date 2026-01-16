@@ -26,6 +26,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_altbody;
 
 autoexec __init__system__() {
@@ -96,37 +97,37 @@ devgui_start_altbody(name) {
   self player_altbody(name);
 }
 
-function private function_17d98816(trigger, name) {
-  if(self zm_utility::is_drinking() && !(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody)) {
-    return false;
-  }
-
-  if(self zm_utility::in_revive_trigger()) {
-    return false;
-  }
-
-  if(self laststand::player_is_in_laststand()) {
-    return false;
-  }
-
-  if(self isthrowinggrenade()) {
-    return false;
-  }
-
-  if(self function_1193c448(name)) {
-    return false;
-  }
-
-  callback = level.altbody_allow_callbacks[name];
-
-  if(isDefined(callback)) {
-    if(!self[[callback]](name, trigger.kiosk)) {
+  function private function_17d98816(trigger, name) {
+    if(self zm_utility::is_drinking() && !(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody)) {
       return false;
     }
-  }
 
-  return true;
-}
+    if(self zm_utility::in_revive_trigger()) {
+      return false;
+    }
+
+    if(self laststand::player_is_in_laststand()) {
+      return false;
+    }
+
+    if(self isthrowinggrenade()) {
+      return false;
+    }
+
+    if(self function_1193c448(name)) {
+      return false;
+    }
+
+    callback = level.altbody_allow_callbacks[name];
+
+    if(isDefined(callback)) {
+      if(!self[[callback]](name, trigger.kiosk)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
 private player_can_altbody(kiosk, name) {
   if(isDefined(self.altbody) && self.altbody) {
@@ -268,7 +269,7 @@ private player_apply_loadout(name) {
     }
 
     self.altbody_loadout_ever_had[name] = 1;
-    self waittilltimeout(1, # "weapon_change_complete");
+    self waittilltimeout(1, #"weapon_change_complete");
     self resetanimations();
   }
 }
@@ -307,7 +308,7 @@ private player_restore_loadout(name, trigger) {
     if(isDefined(self.altbody_loadout[name])) {
       self zm_weapons::switch_back_primary_weapon(self.altbody_loadout[name].current, 1);
       self.altbody_loadout[name] = undefined;
-      self waittilltimeout(1, # "weapon_change_complete");
+      self waittilltimeout(1, #"weapon_change_complete");
     }
 
     self zm_weapons::player_take_loadout(loadout);
@@ -322,11 +323,11 @@ private player_restore_loadout(name, trigger) {
 
 function_d709966a(washuman) {
   if(washuman) {
-    playFX(level._effect[# "human_disappears"], self.origin);
+    playFX(level._effect[#"human_disappears"], self.origin);
     return;
   }
 
-  playFX(level._effect[# "zombie_disappears"], self.origin);
+  playFX(level._effect[#"zombie_disappears"], self.origin);
   playsoundatposition(#"zmb_player_disapparate", self.origin);
   self playlocalsound(#"zmb_player_disapparate_2d");
 }

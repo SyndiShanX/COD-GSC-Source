@@ -10,15 +10,14 @@ autoexec _karma_utility() {
 }
 
 set_id_shader(localclientnum, set, newent) {
-  if(set) {
+  if(set)
     lerp_shader_constant(localclientnum, 2, "ScriptVector3", 2, 0.01, 1);
-  } else {
+  else
     lerp_shader_constant(localclientnum, 2, "ScriptVector3", 2, 0.01, 0);
-  }
 }
 
 screen_flash() {
-  playSound(0, "evt_smashcut_flash", (0, 0, 0));
+  playsound(0, "evt_smashcut_flash", (0, 0, 0));
   screen_flash_dvar();
 }
 

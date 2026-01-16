@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_orange_mq_dials;
 
 preload() {}
@@ -24,10 +25,10 @@ main() {
   level flag::init(#"dials_done");
   level.var_62bfa1a6 = [];
   level.var_4cf6900e = [];
-  level.var_4cf6900e[# "orange"] = struct::get("orange", "script_noteworthy");
-  level.var_4cf6900e[# "blue"] = struct::get("blue", "script_noteworthy");
-  level.var_4cf6900e[# "yellow"] = struct::get("yellow", "script_noteworthy");
-  level.var_4cf6900e[# "violet"] = struct::get("violet", "script_noteworthy");
+  level.var_4cf6900e[#"orange"] = struct::get("orange", "script_noteworthy");
+  level.var_4cf6900e[#"blue"] = struct::get("blue", "script_noteworthy");
+  level.var_4cf6900e[#"yellow"] = struct::get("yellow", "script_noteworthy");
+  level.var_4cf6900e[#"violet"] = struct::get("violet", "script_noteworthy");
 
   foreach(s_dial in level.var_4cf6900e) {
     s_dial.var_e5f66b29 = 0;
@@ -45,6 +46,7 @@ function_77ed3bab(var_5ea5c94d) {
   zm_ui_inventory::function_7df6bb60(#"zm_orange_objective_progress", 1);
 
   if(!var_5ea5c94d) {
+
     if(getdvarint(#"zm_debug_ee", 0)) {
       if(getdvarint(#"zm_debug_ee", 0)) {
         iprintlnbold("<dev string:x38>");
@@ -59,7 +61,7 @@ function_77ed3bab(var_5ea5c94d) {
       }
     }
 
-    zm_orange_pablo::function_3f9e02b8(6, # "hash_2934f352bd60d6d6", # "hash_68fc56c1fbf3b972", &function_bd605daa);
+      zm_orange_pablo::function_3f9e02b8(6, #"hash_2934f352bd60d6d6", #"hash_68fc56c1fbf3b972", &function_bd605daa);
     zm_orange_pablo::function_d83490c5(6);
     level flag::wait_till(#"dials_aquired");
 
@@ -108,9 +110,9 @@ private function_1e5c0d3b() {
   level endon(#"end_game");
 
   while(!level flag::get(#"dials_done")) {
-    s_results = self waittill(#"trigger_activated", # "dials_done");
+    s_results = self waittill(#"trigger_activated", #"dials_done");
 
-    if(s_results._notify == # "dials_done") {
+    if(s_results._notify == #"dials_done") {
       return;
     }
 
@@ -148,6 +150,7 @@ private function_1e5c0d3b() {
     }
 
     if(self.n_value == self.var_7bb4ff56) {
+
       if(getdvarint(#"zm_debug_ee", 0)) {
         if(getdvarint(#"zm_debug_ee", 0)) {
           iprintlnbold("<dev string:x69>" + self.script_noteworthy + "<dev string:x71>");
@@ -155,7 +158,7 @@ private function_1e5c0d3b() {
         }
       }
 
-      self.b_correct = 1;
+        self.b_correct = 1;
       self.dial_model playSound("zmb_quest_dial_success");
       continue;
     }
@@ -204,16 +207,16 @@ function_eb2835af() {
 
 function_66365668(n_code) {
   switch (self.script_noteworthy) {
-    case # "orange_code":
+    case #"orange_code":
       self showpart("tag_orange_" + n_code);
       break;
-    case # "blue_code":
+    case #"blue_code":
       self showpart("tag_blue_" + n_code);
       break;
-    case # "yellow_code":
+    case #"yellow_code":
       self showpart("tag_yellow_" + n_code);
       break;
-    case # "violet_code":
+    case #"violet_code":
       self showpart("tag_violet_" + n_code);
       break;
   }
@@ -223,10 +226,10 @@ function_5f228e90() {
   level function_a02dfba();
 
   if(zm_utility::is_ee_enabled()) {
-    function_ca3efcd8(level.var_c205c941, "orange_code", level.var_4cf6900e[# "orange"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "blue_code", level.var_4cf6900e[# "blue"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "yellow_code", level.var_4cf6900e[# "yellow"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "violet_code", level.var_4cf6900e[# "violet"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "orange_code", level.var_4cf6900e[#"orange"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "blue_code", level.var_4cf6900e[#"blue"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "yellow_code", level.var_4cf6900e[#"yellow"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "violet_code", level.var_4cf6900e[#"violet"].var_7bb4ff56);
   }
 }
 

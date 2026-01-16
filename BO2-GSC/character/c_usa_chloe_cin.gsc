@@ -4,7 +4,7 @@
 *****************************************/
 
 main() {
-  self setModel("c_usa_chloe_karma_body");
+  self setmodel("c_usa_chloe_karma_body");
   self.headmodel = "c_usa_chloe_head_cin";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

@@ -11,15 +11,13 @@ chopper_ai_init() {
 }
 
 spawn_hind_enemies(var_0, var_1) {
-  if(!isDefined(level.heli_targeting_player)) {
+  if(!isDefined(level.heli_targeting_player))
     level.heli_targeting_player = 0;
-  }
 
   var_2 = 0;
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "heli_nav_mesh_start";
-  }
 
   var_3 = common_scripts\utility::getstructarray(var_1, "targetname");
   var_4 = [];
@@ -55,16 +53,14 @@ spawn_hind_enemies(var_0, var_1) {
 spawn_hind_enemy(var_0) {
   var_1 = getent("hind_enemy", "targetname");
 
-  while(isDefined(var_1.vehicle_spawned_thisframe)) {
+  while(isDefined(var_1.vehicle_spawned_thisframe))
     wait 0.05;
-  }
 
   if(isDefined(var_0)) {
     var_1.origin = var_0.origin;
 
-    if(isDefined(var_0.angles)) {
+    if(isDefined(var_0.angles))
       var_1.angles = var_0.angles;
-    }
   }
 
   var_2 = maps\_vehicle::vehicle_spawn(var_1);
@@ -133,15 +129,13 @@ heli_lock_player_target() {
 }
 
 heli_ai_shoot_target(var_0) {
-  if(var_0 == level.playertank) {
+  if(var_0 == level.playertank)
     thread heli_lock_player_target();
-  }
 
   var_1 = 1;
 
-  if(!self.is_moving) {
+  if(!self.is_moving)
     var_1 = randomintrange(1, 4);
-  }
 
   heli_fire_missiles(var_0, var_1);
   self notify("heli_fire_complete");
@@ -152,29 +146,25 @@ heli_fire_missiles(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("heli_players_dead");
 
-  if(isDefined(self.defaultweapon)) {
+  if(isDefined(self.defaultweapon))
     var_5 = self.defaultweapon;
-  } else {
+  else
     var_5 = "minigun_littlebird_quickspin";
-  }
 
   var_6 = "missile_attackheli";
 
-  if(isDefined(var_3) && !(var_3 == "")) {
+  if(isDefined(var_3) && !(var_3 == ""))
     var_6 = var_3;
-  }
 
   var_7 = undefined;
   var_8 = [];
   self setvehweapon(var_5);
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 1;
-  }
 
   if(!isDefined(var_0.classname)) {
     if(!isDefined(self.dummytarget)) {
@@ -193,33 +183,28 @@ heli_fire_missiles(var_0, var_1, var_2, var_3, var_4) {
   for(var_10 = 0; var_10 < var_1; var_10++) {
     var_9++;
 
-    if(var_9 >= var_8.size) {
+    if(var_9 >= var_8.size)
       var_9 = 0;
-    }
 
     self setvehweapon(var_6);
     self.firingmissiles = 1;
     var_11 = var_0;
 
-    if(var_0 == level.playertank) {
+    if(var_0 == level.playertank)
       var_11 = _get_player_tank_target();
-    }
 
     var_12 = self fireweapon(var_8[var_9], var_11);
     var_12 thread _missile_earthquake();
     var_12 thread _missile_start_lockon_notify(var_0, var_4);
 
-    if(isDefined(var_0.is_fake) && var_0.is_fake) {
+    if(isDefined(var_0.is_fake) && var_0.is_fake)
       var_12 thread _missile_cleanup_fake_target(var_0);
-    }
 
-    if(isDefined(var_11.is_fake) && var_11.is_fake) {
+    if(isDefined(var_11.is_fake) && var_11.is_fake)
       var_12 thread _missile_cleanup_fake_target(var_11);
-    }
 
-    if(var_10 < var_1 - 1) {
+    if(var_10 < var_1 - 1)
       wait(var_2);
-    }
   }
 
   self.firingmissiles = 0;
@@ -229,9 +214,8 @@ heli_fire_missiles(var_0, var_1, var_2, var_3, var_4) {
 _get_player_tank_target() {
   var_0 = level.playertank vehicle_getspeed();
 
-  if(var_0 == 0) {
+  if(var_0 == 0)
     return level.playertank;
-  }
 
   var_1 = level.playertank vehicle_getvelocity();
   var_2 = var_0 * 2;
@@ -258,13 +242,11 @@ _missile_start_lockon_notify(var_0, var_1) {
   }
   level.next_missile_lockon_notify = gettime() + level.missile_lockon_notify_delay * 1000;
 
-  if(!isDefined(level.chopper_lockon_vo_num)) {
+  if(!isDefined(level.chopper_lockon_vo_num))
     level.chopper_lockon_vo_num = 0;
-  }
 
-  if(level.chopper_lockon_vo_num > 2) {
+  if(level.chopper_lockon_vo_num > 2)
     level.chopper_lockon_vo_num = 0;
-  }
 
   var_3 = [];
   var_3[0] = "satfarm_td3_wevegotamissile";
@@ -330,9 +312,8 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
       }
       var_10 = var_9.origin + (0, 0, 64);
 
-      if(isai(var_9) || isplayer(var_9)) {
+      if(isai(var_9) || isplayer(var_9))
         var_10 = var_9 getEye();
-      }
 
       if(self[[var_2]](var_6.origin, var_10)) {
         if(!isDefined(var_6.heli_target)) {
@@ -358,9 +339,8 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
     var_14 = [];
 
     foreach(var_6 in var_3) {
-      if(isDefined(var_6.heli_target) && !isDefined(var_6.in_use) && !isDefined(var_6.disabled)) {
+      if(isDefined(var_6.heli_target) && !isDefined(var_6.in_use) && !isDefined(var_6.disabled))
         var_14[var_14.size] = var_6;
-      }
     }
 
     var_3 = var_14;
@@ -394,14 +374,12 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
         }
       }
 
-      if(isDefined(var_6.dist2d)) {
+      if(isDefined(var_6.dist2d))
         var_3[var_3.size] = var_6;
-      }
     }
   } else {
-    foreach(var_6 in var_3) {
-      var_6.dist2d = distance2d(var_6.heli_target.origin, var_6.origin);
-    }
+    foreach(var_6 in var_3)
+    var_6.dist2d = distance2d(var_6.heli_target.origin, var_6.origin);
   }
 
   var_25 = common_scripts\utility::array_sort_by_handler(var_3, maps\_chopperboss::chopper_boss_loc_compare);
@@ -417,21 +395,18 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
     }
   }
 
-  if(!isDefined(var_26) && var_25.size) {
+  if(!isDefined(var_26) && var_25.size)
     var_26 = var_25[0];
-  }
 
-  if(isDefined(var_26) && isDefined(var_26.heli_target)) {
+  if(isDefined(var_26) && isDefined(var_26.heli_target))
     maps\_chopperboss::chopper_boss_set_target(var_26.heli_target);
-  }
 
   self notify("chopper_done_targeting");
 
-  if(isDefined(var_26) && var_26 != self.loc_current) {
+  if(isDefined(var_26) && var_26 != self.loc_current)
     return var_26;
-  } else {
+  else
     return undefined;
-  }
 }
 
 heli_ai_pre_move_func() {}
@@ -450,23 +425,21 @@ _heli_ai_pre_move_func_internal() {
 }
 
 heli_set_look_at_ent() {
-  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get())) {
+  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get()))
     self setlookatent(maps\_chopperboss_utility::chopper_boss_forced_target_get());
-  } else if(isDefined(self.heli_target)) {
+  else if(isDefined(self.heli_target))
     self setlookatent(self.heli_target);
-  } else {
+  else
     self clearlookatent();
-  }
 }
 
 heli_ai_stop_func() {}
 
 heli_attempt_fire() {
-  if(isDefined(self.heli_target)) {
+  if(isDefined(self.heli_target))
     self.fired_weapons = maps\_chopperboss::chopper_boss_attempt_firing(self.heli_target);
-  } else {
+  else
     self.fired_weapons = 0;
-  }
 }
 
 hind_manage_damage_states() {
@@ -501,9 +474,8 @@ heli_ai_collision_cylinder_add() {
   var_0 = undefined;
 
   foreach(var_2 in level.heli_collision_ai) {
-    if(!var_2.in_use) {
+    if(!var_2.in_use)
       var_0 = var_2;
-    }
   }
 
   if(isDefined(var_0)) {

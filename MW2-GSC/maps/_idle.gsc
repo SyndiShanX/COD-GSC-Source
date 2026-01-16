@@ -27,50 +27,48 @@ idle_main() {
 
 idle() {
   //->since this system works with the stealth system - we want to make sure that _stealth has had a chance
-  //to be initialized...if it's done through radient it will be, but if it's done through script with a
+  //to be initialized...if it's done through radient it will be, but if it's done through script with a 
   //spawn_func, then it will initalize after this causing problems...this waittillframeend insures that the
   //spawn_func for stealth apps has a chance to run before this does.
   waittillframeend;
 
   //the waittillframeend ( which is necessary ) is just enough time for this guy to be deleted from max 32 ai over-spawning.
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   node = undefined;
 
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target))
     node = self;
-  } else {
+  else {
     node = getnode(self.target, "targetname");
     ent = getent(self.target, "targetname");
     struct = getstruct(self.target, "targetname");
     getfunc = undefined;
 
-    if(isDefined(node)) {
+    if(isdefined(node))
       getfunc = ::get_node;
-    } else if(isDefined(ent)) {
+    else if(isdefined(ent))
       getfunc = ::get_ent;
-    } else if(isDefined(struct)) {
+    else if(isdefined(struct))
       getfunc = ::getstruct;
-    }
 
-    node = [[getfunc]](self.target, "targetname");
+    node = [
+      [getfunc]
+    ](self.target, "targetname");
 
-    while(isDefined(node.target)) {
+    while (isdefined(node.target))
       node = [
-        }
-        [getfunc]](node.target, "targetname");
+        [getfunc]
+      ](node.target, "targetname");
   }
 
   anime = node.script_animation;
-  if(!isDefined(anime)) {
+  if(!isdefined(anime))
     anime = "random";
-  }
 
-  if(!check_animation(anime, node)) {
+  if(!check_animation(anime, node))
     return;
-  }
 
   if(anime == "random") {
     anime = create_random_animation();
@@ -86,9 +84,9 @@ idle_reach_node(node, idle_anim) {
   self endon("death");
   self endon("stop_idle_proc");
 
-  if(isDefined(self._stealth)) {
+  if(isdefined(self._stealth)) {
     level add_wait(::flag_wait, self stealth_get_group_spotted_flag());
-    if(isDefined(self._stealth.plugins.corpse)) {
+    if(isdefined(self._stealth.plugins.corpse)) {
       level add_wait(::flag_wait, self stealth_get_group_corpse_flag());
       self add_wait(::ent_flag_wait, "_stealth_saw_corpse");
     }
@@ -98,11 +96,10 @@ idle_reach_node(node, idle_anim) {
   self add_func(::send_notify, "stop_idle_proc");
   self thread do_wait_any();
 
-  if(isDefined(self.script_patroller)) {
+  if(isdefined(self.script_patroller))
     self waittill("_patrol_reached_path_end");
-  } else {
+  else
     node anim_generic_reach(self, idle_anim);
-  }
 }
 
 idle_proc(node, idle_anim, react_anim) {
@@ -110,12 +107,12 @@ idle_proc(node, idle_anim, react_anim) {
 
   self endon("death");
 
-  if(isDefined(self.script_idlereach)) {
+  if(isdefined(self.script_idlereach)) {
     self endon("stop_idle_proc");
     self idle_reach_node(node, idle_anim);
   }
 
-  if(isDefined(self.script_idlereach)) {
+  if(isdefined(self.script_idlereach)) {
     self.script_animation = node.script_animation;
     node = self;
   }
@@ -127,9 +124,8 @@ idle_proc(node, idle_anim, react_anim) {
     node thread anim_first_frame_solo(chair, "sit_load_ak_react");
   }
 
-  if(node.script_animation == "lean_smoke") {
+  if(node.script_animation == "lean_smoke")
     self thread attach_cig_self();
-  }
 
   if(node.script_animation == "sleep") {
     chair = spawn_anim_model("chair");
@@ -141,7 +137,7 @@ idle_proc(node, idle_anim, react_anim) {
 
   node script_delay();
 
-  if(isDefined(self._stealth)) {
+  if(isdefined(self._stealth)) {
     node stealth_ai_idle_and_react(self, idle_anim, react_anim);
     return;
   }
@@ -165,7 +161,7 @@ reaction_sleep() {
 reaction_sleep_wait_wakeup() {
   self endon("death");
 
-  if(isDefined(self._stealth)) {
+  if(isdefined(self._stealth)) {
     self thread stealth_enemy_endon_alert();
     self endon("stealth_enemy_endon_alert");
   }
@@ -184,15 +180,13 @@ reaction_sleep_wait_wakeup_dist(guy, dist) {
 
   distsqrd = dist * dist;
 
-  while(1) {
-    while(distancesquared(self.origin, guy.origin) > distsqrd) {
+  while (1) {
+    while (distancesquared(self.origin, guy.origin) > distsqrd)
       wait .1;
-    }
     guy.ignoreall = false;
 
-    while(distancesquared(self.origin, guy.origin) <= distsqrd) {
+    while (distancesquared(self.origin, guy.origin) <= distsqrd)
       wait .1;
-    }
     guy.ignoreall = true;
   }
 }
@@ -212,7 +206,7 @@ reaction_proc(node, ender, react_anim, tag) {
   // cut the loop
   node notify(ender);
 
-  if(isDefined(self.anim_props)) {
+  if(isdefined(self.anim_props)) {
     self.anim_props_animated = true;
     node thread anim_single(self.anim_props, react_anim);
   }
@@ -224,11 +218,10 @@ reaction_proc(node, ender, react_anim, tag) {
 
   if(type != "doFlashBanged") {
     // this is the reaction
-    if(isDefined(tag) || isDefined(self.has_delta)) {
+    if(isdefined(tag) || isdefined(self.has_delta))
       node anim_generic(self, react_anim, tag);
-    } else {
+    else
       node anim_generic_custom_animmode(self, "gravity", react_anim);
-    }
   }
 }
 
@@ -238,17 +231,15 @@ reaction_wait(msg) {
 }
 
 animate_props_on_death(node, anime) {
-  if(!isDefined(self.anim_props)) {
+  if(!isdefined(self.anim_props))
     return;
-  }
 
   prop = self.anim_props;
 
   self waittill("death");
 
-  if(isDefined(self.anim_props_animated)) {
+  if(isdefined(self.anim_props_animated))
     return;
-  }
 
   node thread anim_single(prop, anime);
 }
@@ -264,22 +255,19 @@ check_animation(anime, node) {
 
   if(anime == "random") {
     array2 = [];
-    for(i = 0; i < array.size; i++) {
-      if(!isDefined(level.scr_anim["generic"][array[i] + "_react"])) {
+    for (i = 0; i < array.size; i++) {
+      if(!isdefined(level.scr_anim["generic"][array[i] + "_react"]))
         array2[array2.size] = array[i];
-      }
     }
 
-    if(!array2.size) {
+    if(!array2.size)
       return true;
-    }
 
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- - add these lines to your level script AFTER maps\\\_load::main(); -- -- -- -- -- -- - ");
-    for(i = 0; i < array2.size; i++) {
+    for (i = 0; i < array2.size; i++)
       println("maps\\\_idle_" + array2[i] + "::main();");
-    }
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- - hint copy paste them from console.log -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
@@ -288,9 +276,9 @@ check_animation(anime, node) {
     return false;
   }
 
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     if(array[i] == anime) {
-      if(!isDefined(level.scr_anim["generic"][anime + "_react"])) {
+      if(!isdefined(level.scr_anim["generic"][anime + "_react"])) {
         println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
         println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
         println(" -- -- - add these lines to your level script AFTER maps\\\_load::main(); -- -- -- -- -- -- - ");
@@ -308,9 +296,8 @@ check_animation(anime, node) {
   }
 
   msg = "";
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++)
     msg = msg + array[i] + ", ";
-  }
   msg = msg + "and random.";
 
   assertmsg("node at (" + node.origin[0] + ", " + node.origin[1] + ", " + node.origin[2] + ") using the maps\_idle:: system with script_animation set to " + anime + ", which isn't valid. Valid names are " + msg);

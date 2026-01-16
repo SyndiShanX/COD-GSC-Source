@@ -13,16 +13,16 @@ init() {
 
 playerjump(client_num, player, ground_type, firstperson, quiet) {
   sound_alias = buildmovementsoundaliasname("step_run", ground_type, firstperson, quiet);
-  player playSound(client_num, sound_alias);
+  player playsound(client_num, sound_alias);
 }
 
 playerland(client_num, player, ground_type, firstperson, quiet, damageplayer) {
   sound_alias = buildmovementsoundaliasname("land", ground_type, firstperson, quiet);
-  player playSound(client_num, sound_alias);
+  player playsound(client_num, sound_alias);
 
   if(isDefined(player.step_sound) && !quiet && player.step_sound != "none") {
     volume = clientscripts\_audio::get_vol_from_speed(player);
-    player playSound(client_num, player.step_sound, player.origin, volume);
+    player playsound(client_num, player.step_sound, player.origin, volume);
   }
 
   if(damageplayer) {
@@ -30,7 +30,7 @@ playerland(client_num, player, ground_type, firstperson, quiet, damageplayer) {
 
     if(firstperson) {
       sound_alias = "fly_land_damage_plr";
-      player playSound(client_num, sound_alias);
+      player playsound(client_num, sound_alias);
     }
   }
 }
@@ -38,11 +38,10 @@ playerland(client_num, player, ground_type, firstperson, quiet, damageplayer) {
 playerfoliage(client_num, player, firstperson, quiet) {
   sound_alias = "fly_movement_foliage_npc";
 
-  if(firstperson) {
+  if(firstperson)
     sound_alias = "fly_movement_foliage_plr";
-  }
 
-  player playSound(client_num, sound_alias);
+  player playsound(client_num, sound_alias);
 }
 
 setaifootstepprepend(prepend) {
@@ -54,13 +53,11 @@ getaiboneorigin(note) {
   boneorigin = (0, 0, 0);
   bonename = level.footstepbones[note];
 
-  if(isDefined(bonename)) {
+  if(isDefined(bonename))
     boneorigin = self gettagorigin(bonename);
-  }
 
-  if(!isDefined(boneorigin)) {
+  if(!isDefined(boneorigin))
     boneorigin = self.origin;
-  }
 
   return boneorigin;
 }
@@ -68,17 +65,15 @@ getaiboneorigin(note) {
 missing_ai_footstep_callback() {
   type = self._aitype;
 
-  if(!isDefined(type)) {
+  if(!isDefined(type))
     type = "unknown";
-  }
 
   println("*** Ai type : " + type + " has a client-script footstep script callback specified, but has no callback specified.Call _footsteps::RegisterAITypeFootstepCB(\"" + self._aitype + "\", ::yourcbfunc); in your level main .csc file.");
 }
 
 registeraitypefootstepcb(aitype, func) {
-  if(!isDefined(level._footstepcbfuncs)) {
+  if(!isDefined(level._footstepcbfuncs))
     level._footstepcbfuncs = [];
-  }
 
   if(isDefined(level._footstepcbfuncs[aitype])) {
     println("Attempting to register footstep callback function for ai type " + aitype + " multiple times.");
@@ -92,26 +87,23 @@ registeraitypefootstepcb(aitype, func) {
 bigdogfootstepcbfunc(client_num, pos, surface, notetrack, bone) {
   sound_alias = undefined;
 
-  if(issubstr(notetrack, "small")) {
+  if(issubstr(notetrack, "small"))
     sound_alias = "fly_step_walk_bigdog_" + surface;
-  } else if(issubstr(notetrack, "shuffle")) {
+  else if(issubstr(notetrack, "shuffle"))
     sound_alias = "fly_step_turn_bigdog_" + surface;
-  } else if(issubstr(notetrack, "scrape")) {
+  else if(issubstr(notetrack, "scrape")) {
     sound_alias = "fly_step_scrape_bigdog_" + surface;
 
-    if(!isDefined(level._effect[self.species]) || !isDefined(level._effect[self.species]["step_sparks"])) {
+    if(!isDefined(level._effect[self.species]) || !isDefined(level._effect[self.species]["step_sparks"]))
       clientscripts\_utility::setfootstepeffect("sparks", loadfx("destructibles/fx_claw_metal_scrape_sparks"), "bigdog");
-    }
 
-    if(isDefined(level._effect[self.species]["step_sparks"])) {
+    if(isDefined(level._effect[self.species]["step_sparks"]))
       self thread playscrapeforframes(client_num, level._effect[self.species]["step_sparks"], bone, 15);
-    }
   } else
     sound_alias = "fly_step_run_bigdog_" + surface;
 
-  if(isDefined(sound_alias)) {
-    playSound(client_num, sound_alias, pos);
-  }
+  if(isDefined(sound_alias))
+    playsound(client_num, sound_alias, pos);
 
   footstepdofootstepfx();
 }
@@ -137,14 +129,14 @@ playscrapeforframes(client_num, effect, tag, frames) {
   self endon("death");
   offsetvec = vectorscale((0, 0, 1), 30.0);
   prevorigin = self.origin;
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   forward = vectorscale(forward, -1);
 
   for(i = 0; isDefined(self) && i < frames; i++) {
     boneorigin = self gettagorigin(tag);
     surfacetrace = tracepoint(boneorigin, boneorigin - offsetvec);
     groundpos = surfacetrace["position"];
-    playFX(client_num, effect, groundpos, forward, (0, 0, 1));
+    playfx(client_num, effect, groundpos, forward, (0, 0, 1));
     wait 0.01;
 
     if(isDefined(self) && distancesquared(self.origin, prevorigin) > 1) {
@@ -156,55 +148,47 @@ playscrapeforframes(client_num, effect, tag, frames) {
 }
 
 buildmovementsoundaliasname(movementtype, ground_type, firstperson, quiet) {
-  if(firstperson && isDefined(level.snd_footstep_override_plr) && level.snd_footstep_override_plr != "") {
+  if(firstperson && isDefined(level.snd_footstep_override_plr) && level.snd_footstep_override_plr != "")
     return level.snd_footstep_override_plr;
-  }
 
-  if(!firstperson && isDefined(level.snd_footstep_override_npc) && level.snd_footstep_override_npc != "") {
+  if(!firstperson && isDefined(level.snd_footstep_override_npc) && level.snd_footstep_override_npc != "")
     return level.snd_footstep_override_npc;
-  }
 
   sound_alias = "fly_";
 
-  if(quiet) {
+  if(quiet)
     sound_alias = sound_alias + "q";
-  }
 
   sound_alias = sound_alias + movementtype;
 
-  if(firstperson) {
+  if(firstperson)
     sound_alias = sound_alias + "_plr_";
-  } else {
+  else
     sound_alias = sound_alias + "_npc_";
-  }
 
   sound_alias = sound_alias + ground_type;
   return sound_alias;
 }
 
 do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
-  if(on_fire) {
+  if(on_fire)
     ground_type = "fire";
-  }
 
-  if(getdvarint(#"_id_49A098B5")) {
+  if(getdvarint(#"_id_49A098B5"))
     print3d(foot_pos, ground_type, (0.5, 0.5, 0.8), 1, 3, 30);
-  }
 
   effectname = "step_" + ground_type;
 
   if(isDefined(level._effect)) {
     effect = undefined;
 
-    if(self.type == "actor" && isDefined(level._effect[self.species]) && isDefined(level._effect[self.species][effectname])) {
+    if(self.type == "actor" && isDefined(level._effect[self.species]) && isDefined(level._effect[self.species][effectname]))
       effect = level._effect[self.species][effectname];
-    } else if(isDefined(level._effect["human"]) && isDefined(level._effect["human"][effectname])) {
+    else if(isDefined(level._effect["human"]) && isDefined(level._effect["human"][effectname]))
       effect = level._effect["human"][effectname];
-    }
 
-    if(isDefined(effect)) {
-      playFX(client_num, effect, foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
-    }
+    if(isDefined(effect))
+      playfx(client_num, effect, foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
   }
 }
 
@@ -213,7 +197,6 @@ registervehiclefootstepcallback(type, callback) {
 }
 
 playvehiclefootstep(client_num, note, ground_type) {
-  if(isDefined(level.vehiclefootstepcallbacks[self.vehicletype])) {
+  if(isDefined(level.vehiclefootstepcallbacks[self.vehicletype]))
     self thread[[level.vehiclefootstepcallbacks[self.vehicletype]]](client_num, note, ground_type);
-  }
 }

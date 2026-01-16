@@ -5,9 +5,8 @@
 
 init() {
   precacheShader("damage_feedback");
-  if(getDvar("scr_damagefeedback") == "") {
+  if(getDvar("scr_damagefeedback") == "")
     setDvar("scr_damagefeedback", "0");
-  }
   if(!getDvarInt("scr_damagefeedback")) {
     return;
   }
@@ -25,11 +24,10 @@ monitorDamage() {
   if(!getDvarInt("scr_damagefeedback")) {
     return;
   }
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker);
-    if(IsPlayer(attacker)) {
+    if(IsPlayer(attacker))
       attacker updateDamageFeedback();
-    }
   }
 }
 

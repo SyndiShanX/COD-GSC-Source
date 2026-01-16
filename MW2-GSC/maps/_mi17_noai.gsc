@@ -14,7 +14,7 @@ main(model, type, no_death) {
   build_deathmodel("vehicle_mi17_woodland_fly"); // RADNAME = _noai
   build_deathmodel("vehicle_mi17_woodland_fly_cheap"); // RADNAME = _noai
 
-  if(!isDefined(no_death)) {
+  if(!isdefined(no_death)) {
     mi17_death_fx = [];
     mi17_death_fx["vehicle_mi17_woodland"] = "explosions/helicopter_explosion_mi17_woodland";
     mi17_death_fx["vehicle_mi17_woodland_fly"] = "explosions/helicopter_explosion_mi17_woodland_low";

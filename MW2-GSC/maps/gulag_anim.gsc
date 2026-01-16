@@ -49,6 +49,7 @@ gulag_anims() {
   // flash
   level.scr_anim["generic"]["grenade_throw"] = % corner_standr_grenade_b;
   addNotetrack_customFunction("generic", "grenade_throw", ::throw_flash, "grenade_throw");
+
 }
 
 throw_flash(guy) {
@@ -71,8 +72,8 @@ slide_start(guy) {
 
   guy endon("stop_slide_fx");
   guy endon("death");
-  while(true) {
-    playFXOnTag(slide_fx, guy, "tag_origin");
+  while (true) {
+    PlayFXOnTag(slide_fx, guy, "tag_origin");
     wait(.1);
   }
 }
@@ -82,39 +83,38 @@ slide_stop(guy) {
 }
 
 slide_land(guy) {
-  if(!isDefined(guy.slide_landed)) {
+  if(!isdefined(guy.slide_landed)) {
     // only play it on first notetrack hit
     index = guy get_my_index();
 
     guy.slide_landed = true;
     // scn_gulag_sewer_slide_friend1, scn_gulag_sewer_slide_friend2, scn_gulag_sewer_slide_friend3
-    guy playSound("scn_gulag_sewer_slide_friend" + index);
+    guy playsound("scn_gulag_sewer_slide_friend" + index);
   }
 
   slide_start_fx = getFX("water_slide_start");
-  playFXOnTag(slide_start_fx, guy, "tag_origin");
+  PlayFXOnTag(slide_start_fx, guy, "tag_origin");
 }
 
 slide_land_deep(guy) {
-  if(!isDefined(guy.slide_landed_deep)) {
+  if(!isdefined(guy.slide_landed_deep)) {
     // only play it on first notetrack hit
     index = guy get_my_index();
 
     guy.slide_landed_deep = true;
     // scn_gulag_sewer_splash_friend1, scn_gulag_sewer_splash_friend2, scn_gulag_sewer_splash_friend3
-    guy playSound("scn_gulag_sewer_splash_friend" + index);
+    guy playsound("scn_gulag_sewer_splash_friend" + index);
   }
 
   slide_splash_fx = getFX("water_slide_splash");
-  playFXOnTag(slide_splash_fx, guy, "tag_origin");
+  PlayFXOnTag(slide_splash_fx, guy, "tag_origin");
 }
 
 get_my_index() {
   allies = getaiarray("allies");
   foreach(index, ai in allies) {
-    if(ai == self) {
+    if(ai == self)
       break;
-    }
   }
 
   index %= 3;
@@ -148,6 +148,7 @@ gulag_script_models() {
   level.scr_animtree["strangle_chain"] = #animtree;
   level.scr_model["strangle_chain"] = "strangle_chain";
   level.scr_anim["strangle_chain"]["price_breach"] = % gulag_strangle_chain;
+
 }
 
 #using_animtree("player");
@@ -202,16 +203,16 @@ gulag_vehicles() {
 
 f15_fire_missile(f15) {
   if(f15.scene == "intro_1") {
-    f15.missiles[0] playSound("scn_gulag_f15_missile_fire1");
+    f15.missiles[0] playsound("scn_gulag_f15_missile_fire1");
   } else {
-    f15.missiles[0] playSound("scn_gulag_f15_missile_fire2");
+    f15.missiles[0] playsound("scn_gulag_f15_missile_fire2");
   }
 
   brackets = getfx("missile_brackets");
 
   foreach(model in f15.missiles) {
     model show();
-    playFXOnTag(brackets, model, "TAG_FX");
+    PlayFXOnTag(brackets, model, "TAG_FX");
   }
 }
 
@@ -227,15 +228,15 @@ f15_missile_fx(f15) {
 
   foreach(model in f15.missiles) {
     model show();
-    playFXOnTag(trail, model, "TAG_FX");
-    playFXOnTag(ignition, model, "TAG_FX");
+    PlayFXOnTag(trail, model, "TAG_FX");
+    PlayFXOnTag(ignition, model, "TAG_FX");
   }
 }
 
 f15_afterburner(f15) {
   jet_afterburn_ignites = getfx("jet_afterburner_ignite");
-  playFXOnTag(jet_afterburn_ignites, f15, "tag_engine_left");
-  playFXOnTag(jet_afterburn_ignites, f15, "tag_engine_right");
+  playfxontag(jet_afterburn_ignites, f15, "tag_engine_left");
+  playfxontag(jet_afterburn_ignites, f15, "tag_engine_right");
 
   f15 ent_flag_set("contrails");
 }
@@ -244,16 +245,17 @@ missile_launch_fx(missile) {
   missile endon("death");
   smoke = getfx("missile_trail");
 
-  for(;;) {
-    playFXOnTag(smoke, missile, "tag_weapon");
+  for (;;) {
+    playFxOnTag(smoke, missile, "tag_weapon");
     wait(0.05);
   }
 }
 
 f15_explode(f15) {
   fx = getfx("missile_explosion");
-  playFXOnTag(fx, f15, "le_side_wing_jnt");
+  PlayFXOnTag(fx, f15, "le_side_wing_jnt");
   f15 thread maps\gulag_fx::f15_smoke();
+
 }
 
 #using_animtree("generic_human");
@@ -385,6 +387,7 @@ gulag_vo() {
   // Bloody Yanks...I thought they were the good guys!		
   level.scr_radio["gulag_tco_goodorbad"] = "gulag_gst_yanks1";
 
+
   // Taco cut the chatter. Stay frosty.	
   level.scr_radio["gulag_rpt_cutchatter"] = "gulag_rpt_cutchatter";
   level.scr_anim["gulag_rpt_cutchatter"] = % gulag_rpt_cutchatter;
@@ -471,6 +474,7 @@ gulag_vo() {
   // Switch to night vision.	
   level.scr_sound["soap"]["gulag_cmt_switchnv"] = "gulag_cmt_switchnv";
 
+
   // See anything you like?		
   // Bad news mate. I'm tracking three, no, four hostile squads converging on your position!		
   level.scr_radio["gulag_gst_badnews"] = "gulag_gst_badnews";
@@ -525,6 +529,10 @@ gulag_vo() {
   level.scr_radio["gulag_tf3_emptytoo"] = "gulag_tf3_emptytoo";
   // Clear.		
   level.scr_radio["gulag_tf3_clear"] = "gulag_tf3_clear";
+
+
+
+
 
   // Quarterback, what the hell was that? Call off the barrage!	
   level.scr_sound["soap"]["gulag_cmt_calloff"] = "gulag_cmt_calloff";
@@ -604,6 +612,7 @@ gulag_vo() {
   // Ahh, bollocks!!! Go back go back!!! We'll find another way out!!!	
   level.scr_sound["soap"]["gulag_cmt_anotherway"] = "gulag_cmt_anotherway";
 
+
   // Viper Six-Four, this is Hunter Two-One! We're trapped in the mess hall at the northeast corner of the gulag, depth 100 meters!!! I need a four-point SPIE rig for emergency extraction over!	
   level.scr_sound["soap"]["gulag_cmt_depth100"] = "gulag_cmt_depth100";
 
@@ -636,6 +645,11 @@ gulag_vo() {
 
   // Hang on!!!	
   level.scr_sound["price"]["gulag_pri_hangon"] = "gulag_pri_hangon";
+
+
+
+
+
 
   //*****************************
   //new dialogue for exterior to cellblocks
@@ -707,6 +721,10 @@ gulag_vo() {
   // Almost there! Routing through the auxiliary circuit...got it!	
   level.scr_radio["gulag_gst_gotit"] = "gulag_gst_gotit";
 
+
+
+
+
   // Let's go!! Let's go!!!	
   level.scr_sound["soap"]["gulag_cmt_letsgo"] = "gulag_cmt_letsgo";
 
@@ -756,6 +774,9 @@ gulag_vo() {
 
   // Hang on!!!	
   level.scr_sound["price"]["gulag_pri_hangon"] = "gulag_pri_hangon";
+
+
+
 
   // I see 4 hostiles on the next tower!	
   level.scr_sound["soap"]["gulag_cmt_seehostiles"] = "gulag_cmt_seehostiles";
@@ -834,6 +855,7 @@ gulag_vo() {
   // Sorry buddy. The navy says 'no can do.' Get your ass outta there now, I'm sending the chopper.	
   level.scr_radio["gulag_hqr_nocando"] = "gulag_hqr_nocando";
 
+
   // Price! He's with us!	
   level.scr_sound["generic"]["gulag_cmt_heswithus"] = "gulag_cmt_heswithus";
 
@@ -889,10 +911,10 @@ gulag_vo() {
   level.scr_sound["generic"]["gulag_rpa_int_5"] = "gulag_rpa_int_5";
 
   /*
-  // heavy breathing and "Soap?"
+  // heavy breathing and "Soap?" 
   level.scr_sound[ "generic" ][ "gulag_pri_soap" ] = "gulag_pri_soap";
 
-  //: just breathing
+  //: just breathing 
   level.scr_sound[ "generic" ][ "gulag_pri_breath" ] = "gulag_pri_breath";
 
   // soap?
@@ -901,4 +923,5 @@ gulag_vo() {
 
   // yes!
   level.scr_sound["generic"]["gulag_pri_yes"] = "gulag_pri_yes";
+
 }

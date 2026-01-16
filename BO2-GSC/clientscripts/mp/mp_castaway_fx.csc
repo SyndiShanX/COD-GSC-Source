@@ -110,9 +110,8 @@ fxanim_init(localclientnum) {
   for(i = 0; i < 3; i++) {
     crabs[i] = getent(localclientnum, "fxanim_dlc3_crab_0" + (i + 1), "targetname");
 
-    if(isDefined(crabs[i])) {
+    if(isDefined(crabs[i]))
       crabs[i] thread fxanim_crab_think(localclientnum, i);
-    }
   }
 }
 
@@ -155,7 +154,6 @@ main() {
   precache_fxanim_props_dlc3();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

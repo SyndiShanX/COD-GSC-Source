@@ -130,9 +130,8 @@ mason_exits_server_terminal() {
   run_scene_and_delete("cctv_mason_after_exit");
   level.player say_dialog("sect_hurry_the_fuck_up_0", 0.5);
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     level.player say_dialog("sect_harper_get_to_the_0", 2);
-  }
 
   wait 5;
   level.player queue_dialog("sect_attention_all_securi_0");
@@ -156,9 +155,8 @@ cctv_door_fix() {
 }
 
 cctv_room_guys_toggle_headlook(b_use_headlook) {
-  if(!isDefined(b_use_headlook)) {
+  if(!isDefined(b_use_headlook))
     b_use_headlook = 0;
-  }
 
   a_guys = [];
   a_guys[a_guys.size] = level.ai_redshirt1;
@@ -176,17 +174,15 @@ cctv_room_guys_toggle_headlook(b_use_headlook) {
 hide_super_kill_bodies() {
   a_guys = _get_all_super_kill_actors();
 
-  foreach(guy in a_guys) {
-    guy hide();
-  }
+  foreach(guy in a_guys)
+  guy hide();
 }
 
 show_super_kill_bodies(a_guys) {
   a_guys = _get_all_super_kill_actors();
 
-  foreach(guy in a_guys) {
-    guy show();
-  }
+  foreach(guy in a_guys)
+  guy show();
 }
 
 _get_all_super_kill_actors() {
@@ -219,9 +215,8 @@ player_slow_speed_in_vent() {
     t_in_vent waittill("trigger");
     level.player setmovespeedscale(0.7);
 
-    while(level.player istouching(t_in_vent) && !flag("mason_vent_done")) {
+    while(level.player istouching(t_in_vent) && !flag("mason_vent_done"))
       wait 0.05;
-    }
 
     level.player setmovespeedscale(1.0);
   }
@@ -259,16 +254,16 @@ notetrack_torch_guy_torch_on(ai_torch_guy) {
   m_torch = get_model_or_models_from_scene("panel_removed_for_vent_access", "torch");
   m_torch play_fx("laser_cutter_sparking", undefined, undefined, "stop_torch_fx", 1, "tag_fx");
   m_torch play_fx("fx_laser_cutter_on", undefined, undefined, "stop_torch_fx", 1, "tag_fx");
-  m_torch playSound("evt_vent_cutter_start");
+  m_torch playsound("evt_vent_cutter_start");
   wait 0.2;
-  m_torch playLoopSound("evt_vent_cutter_loop");
+  m_torch playloopsound("evt_vent_cutter_loop");
 }
 
 notetrack_torch_guy_torch_off(ai_torch_guy) {
   m_torch = get_model_or_models_from_scene("panel_removed_for_vent_access", "torch");
   m_torch notify("stop_torch_fx");
   m_torch stoploopsound(0.1);
-  m_torch playSound("evt_vent_cutter_end");
+  m_torch playsound("evt_vent_cutter_end");
 }
 
 torch_guy_cutting_wall() {
@@ -294,9 +289,8 @@ notetrack_torch_guy_takes_cover(ai_torch_guy) {
   scene_wait("panel_removed_for_vent_access");
   nd_cover = getnode("torch_guy_vent_node", "targetname");
 
-  if(isDefined(nd_cover)) {
+  if(isDefined(nd_cover))
     ai_torch_guy set_goal_node(nd_cover);
-  }
 }
 
 remove_vent_collision(ai_torch_guy) {
@@ -325,11 +319,10 @@ player_kick_grate() {
 }
 
 setup_aftermath_scene() {
-  if(level.is_briggs_alive) {
+  if(level.is_briggs_alive)
     run_scene_first_frame("briggs_alive_first_frame");
-  } else {
+  else
     run_scene_first_frame("briggs_dead_pose");
-  }
 
   flag_wait("player_kicks_vent_to_server_room_started");
   run_scene_first_frame("console_chair_karma_sit_loop");
@@ -338,9 +331,8 @@ setup_aftermath_scene() {
 }
 
 set_dead_poses_from_betrayal_anim() {
-  if(isDefined(level.betrayal_scene_label) && level scene_exists("super_kill_" + level.betrayal_scene_label + "_deadpose")) {
+  if(isDefined(level.betrayal_scene_label) && level scene_exists("super_kill_" + level.betrayal_scene_label + "_deadpose"))
     level thread run_scene("super_kill_" + level.betrayal_scene_label + "_deadpose");
-  }
 
   super_kill_exploder_restore_all();
 }
@@ -404,11 +396,10 @@ karma_alive_or_not() {
 }
 
 redshirt_checks_on_briggs() {
-  if(level.is_briggs_alive) {
+  if(level.is_briggs_alive)
     run_scene_then_loop("aftermath_briggs_enter", "aftermath_briggs_wait");
-  } else {
+  else
     run_scene_then_loop("redshirt_02_briggs_dead_enter", "redshirt_02_briggs_dead_loop");
-  }
 }
 
 aftermath_player() {
@@ -419,15 +410,14 @@ aftermath_player() {
   delay_thread(1, ::server_room_exit_door_open);
   level.player startcameratween(0.3);
 
-  if(level.is_karma_alive) {
+  if(level.is_karma_alive)
     run_scene_and_delete("aftermath_karma_alive", 0.3);
-  } else {
+  else
     run_scene_and_delete("aftermath_karma_dead", 0.3);
-  }
 
-  if(level.is_briggs_alive) {
+  if(level.is_briggs_alive)
     run_scene_and_delete("aftermath_briggs_alive");
-  } else {
+  else {
     level.player startcameratween(0.1);
     level thread run_scene("aftermath_console_look_loop");
     ai_briggs_redshirt = get_ent("redshirt2_ai", "targetname");
@@ -441,9 +431,9 @@ aftermath_player() {
     level.player say_dialog("sect_we_ll_need_our_tech_1", 0.5);
   }
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     run_scene_and_delete("aftermath_harper_alive");
-  } else {
+  else {
     level thread run_scene("aftermath_console_look_loop");
     delay_thread(4, ::run_scene_and_delete, "aftermath_harper_dead");
   }
@@ -468,9 +458,8 @@ server_room_virus_bink() {
 }
 
 save_restored_mason_server_room_bink() {
-  if(!isDefined(level.streaming_binks_restored)) {
+  if(!isDefined(level.streaming_binks_restored))
     level.streaming_binks_restored = 0;
-  }
 
   if(!level.streaming_binks_restored) {
     level.streaming_binks_restored = 1;
@@ -479,9 +468,8 @@ save_restored_mason_server_room_bink() {
     m_console_bink show();
     m_console_dark hide();
 
-    if(isDefined(m_console_bink.n_bink_id)) {
+    if(isDefined(m_console_bink.n_bink_id))
       stop3dcinematic(m_console_bink.n_bink_id);
-    }
 
     m_console_bink.n_bink_id = play_movie_on_surface_async("blackout_virus_mason", 1, 0);
     wait 2;
@@ -494,7 +482,6 @@ notetrack_aftermath_karma_uses_computer(e_player_body) {
 }
 
 notetrack_briggs_exits(e_player_body) {
-  if(level.is_briggs_alive) {
+  if(level.is_briggs_alive)
     run_scene_and_delete("aftermath_briggs_exit");
-  }
 }

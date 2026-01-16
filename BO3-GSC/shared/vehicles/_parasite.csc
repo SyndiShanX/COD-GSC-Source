@@ -15,22 +15,22 @@
 #namespace parasite;
 
 function autoexec main() {
-  clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int", &parasitetellfxhandler, 0, 0);
-  clientfield::register("toplayer", "parasite_damage", 1, 1, "counter", &parasite_damage, 0, 0);
-  clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int", &parasitesecondarydeathfxhandler, 0, 0);
-  vehicle::add_vehicletype_callback("parasite", &_setup_);
+  clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int", & parasitetellfxhandler, 0, 0);
+  clientfield::register("toplayer", "parasite_damage", 1, 1, "counter", & parasite_damage, 0, 0);
+  clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int", & parasitesecondarydeathfxhandler, 0, 0);
+  vehicle::add_vehicletype_callback("parasite", & _setup_);
 }
 
 function private parasitetellfxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(isDefined(self.tellfxhandle)) {
+  if(isdefined(self.tellfxhandle)) {
     stopfx(localclientnum, self.tellfxhandle);
     self.tellfxhandle = undefined;
     self mapshaderconstant(localclientnum, 0, "scriptVector2", 0.1);
   }
   settings = struct::get_script_bundle("vehiclecustomsettings", "parasitesettings");
-  if(isDefined(settings)) {
+  if(isdefined(settings)) {
     if(newvalue) {
-      self.tellfxhandle = playFXOnTag(localclientnum, settings.weakspotfx, self, "tag_flash");
+      self.tellfxhandle = playfxontag(localclientnum, settings.weakspotfx, self, "tag_flash");
       self mapshaderconstant(localclientnum, 0, "scriptVector2", 1);
     }
   }
@@ -44,9 +44,9 @@ function private parasite_damage(localclientnum, oldvalue, newvalue, bnewent, bi
 
 function private parasitesecondarydeathfxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   settings = struct::get_script_bundle("vehiclecustomsettings", "parasitesettings");
-  if(isDefined(settings)) {
+  if(isdefined(settings)) {
     if(newvalue) {
-      handle = playFX(localclientnum, settings.secondary_death_fx_1, self gettagorigin(settings.secondary_death_tag_1));
+      handle = playfx(localclientnum, settings.secondary_death_fx_1, self gettagorigin(settings.secondary_death_tag_1));
       setfxignorepause(localclientnum, handle, 1);
     }
   }
@@ -54,7 +54,7 @@ function private parasitesecondarydeathfxhandler(localclientnum, oldvalue, newva
 
 function private _setup_(localclientnum) {
   self mapshaderconstant(localclientnum, 0, "scriptVector2", 0.1);
-  if(isDefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
+  if(isdefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
     self duplicate_render::set_dr_flag("keyline_active", 1);
     self duplicate_render::update_dr_filters(localclientnum);
   }

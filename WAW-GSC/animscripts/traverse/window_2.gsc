@@ -7,11 +7,10 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "human") {
+  if(self.type == "human")
     self advancedWindowTraverse( % windowclimb, 35);
-  } else if(self.type == "dog") {
+  else if(self.type == "dog")
     dog_wall_and_window_hop("wallhop", 40);
-  }
 }
 
 advancedWindowTraverse(traverseAnim, normalHeight) {

@@ -13,32 +13,31 @@
 
 init_nuked_perks() {
   level.perk_arrival_vehicle = getent("perk_arrival_vehicle", "targetname");
-  level.perk_arrival_vehicle setModel("tag_origin");
+  level.perk_arrival_vehicle setmodel("tag_origin");
   flag_init("perk_vehicle_bringing_in_perk");
   structs = getstructarray("zm_perk_machine", "targetname");
 
-  for(i = 0; i < structs.size; i++) {
+  for(i = 0; i < structs.size; i++)
     structs[i] structdelete();
-  }
 
   level.nuked_perks = [];
-  level.nuked_perks[0] = spawnStruct();
+  level.nuked_perks[0] = spawnstruct();
   level.nuked_perks[0].model = "zombie_vending_revive";
   level.nuked_perks[0].script_noteworthy = "specialty_quickrevive";
   level.nuked_perks[0].turn_on_notify = "revive_on";
-  level.nuked_perks[1] = spawnStruct();
+  level.nuked_perks[1] = spawnstruct();
   level.nuked_perks[1].model = "zombie_vending_sleight";
   level.nuked_perks[1].script_noteworthy = "specialty_fastreload";
   level.nuked_perks[1].turn_on_notify = "sleight_on";
-  level.nuked_perks[2] = spawnStruct();
+  level.nuked_perks[2] = spawnstruct();
   level.nuked_perks[2].model = "zombie_vending_doubletap2";
   level.nuked_perks[2].script_noteworthy = "specialty_rof";
   level.nuked_perks[2].turn_on_notify = "doubletap_on";
-  level.nuked_perks[3] = spawnStruct();
+  level.nuked_perks[3] = spawnstruct();
   level.nuked_perks[3].model = "zombie_vending_jugg";
   level.nuked_perks[3].script_noteworthy = "specialty_armorvest";
   level.nuked_perks[3].turn_on_notify = "juggernog_on";
-  level.nuked_perks[4] = spawnStruct();
+  level.nuked_perks[4] = spawnstruct();
   level.nuked_perks[4].model = "p6_anim_zm_buildable_pap";
   level.nuked_perks[4].script_noteworthy = "specialty_weapupgrade";
   level.nuked_perks[4].turn_on_notify = "Pack_A_Punch_on";
@@ -60,9 +59,8 @@ init_nuked_perks() {
     level.random_revive_structs[0].script_noteworthy = level.nuked_perks[0].script_noteworthy;
     level.random_revive_structs[0].turn_on_notify = level.nuked_perks[0].turn_on_notify;
 
-    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
+    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
       level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
-    }
 
     level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_revive_structs[0];
 
@@ -86,9 +84,8 @@ init_nuked_perks() {
       level.random_perk_structs[i].script_noteworthy = level.nuked_perks[i].script_noteworthy;
       level.random_perk_structs[i].turn_on_notify = level.nuked_perks[i].turn_on_notify;
 
-      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
+      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
         level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
-      }
 
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
@@ -114,9 +111,8 @@ init_nuked_perks() {
       level.random_perk_structs[i].script_noteworthy = level.nuked_perks[i].script_noteworthy;
       level.random_perk_structs[i].turn_on_notify = level.nuked_perks[i].turn_on_notify;
 
-      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
+      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
         level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
-      }
 
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
@@ -126,14 +122,14 @@ init_nuked_perks() {
   }
 }
 
-draw_debug_location() {}
+draw_debug_location() {
+}
 
 wait_for_round_range(start_round, end_round) {
   round_to_spawn = randomintrange(start_round, end_round);
 
-  while(level.round_number < round_to_spawn) {
+  while(level.round_number < round_to_spawn)
     wait 1;
-  }
 }
 
 bring_random_perk(machines, machine_triggers) {
@@ -159,10 +155,10 @@ bring_perk(machine, trigger) {
   playsoundatposition("zmb_perks_incoming_alarm", (-2198, 486, 327));
   machine setclientfield("clientfield_perk_intro_fx", 1);
   machine.fx = spawn("script_model", machine.origin);
-  machine.fx playLoopSound("zmb_perks_incoming_loop", 6);
+  machine.fx playloopsound("zmb_perks_incoming_loop", 6);
   machine.fx thread perk_incoming_sound();
   machine.fx.angles = machine.angles;
-  machine.fx setModel("tag_origin");
+  machine.fx setmodel("tag_origin");
   machine.fx linkto(machine);
   machine linkto(level.perk_arrival_vehicle, "tag_origin", (0, 0, 0), (0, 0, 0));
   start_node = getvehiclenode("perk_arrival_path_" + machine.script_int, "targetname");
@@ -174,27 +170,26 @@ bring_perk(machine, trigger) {
   offset = (0, 0, 0);
 
   if(issubstr(machine.targetname, "doubletap")) {
-    forward_dir = anglesToForward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
+    forward_dir = anglestoforward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
     offset = vectorscale(forward_dir * -1, 20);
     is_doubletap = 1;
   } else if(issubstr(machine.targetname, "sleight")) {
-    forward_dir = anglesToForward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
+    forward_dir = anglestoforward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
     offset = vectorscale(forward_dir * -1, 5);
     is_sleight = 1;
   } else if(issubstr(machine.targetname, "revive")) {
-    forward_dir = anglesToForward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
+    forward_dir = anglestoforward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
     offset = vectorscale(forward_dir * -1, 10);
     trigger.blocker_model hide();
     is_revive = 1;
   } else if(issubstr(machine.targetname, "jugger")) {
-    forward_dir = anglesToForward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
+    forward_dir = anglestoforward(machine.original_angles + vectorscale((0, -1, 0), 90.0));
     offset = vectorscale(forward_dir * -1, 10);
     is_jugger = 1;
   }
 
-  if(!is_revive) {
+  if(!is_revive)
     trigger.blocker_model delete();
-  }
 
   machine.original_pos = machine.original_pos + (offset[0], offset[1], 0);
   machine.origin = machine.original_pos;
@@ -215,7 +210,7 @@ bring_perk(machine, trigger) {
   machine notify(machine.turn_on_notify);
   level notify(machine.turn_on_notify);
   machine vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-  machine playSound("zmb_perks_power_on");
+  machine playsound("zmb_perks_power_on");
   machine maps\mp\zombies\_zm_perks::perk_fx(undefined, 1);
 
   if(is_revive) {
@@ -223,17 +218,16 @@ bring_perk(machine, trigger) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("revive_light");
   } else if(is_jugger)
     machine thread maps\mp\zombies\_zm_perks::perk_fx("jugger_light");
-  else if(is_doubletap) {
+  else if(is_doubletap)
     machine thread maps\mp\zombies\_zm_perks::perk_fx("doubletap_light");
-  } else if(is_sleight) {
+  else if(is_sleight)
     machine thread maps\mp\zombies\_zm_perks::perk_fx("sleight_light");
-  }
 }
 
 perk_incoming_sound() {
   self endon("death");
   wait 10;
-  self playSound("zmb_perks_incoming");
+  self playsound("zmb_perks_incoming");
 }
 
 bring_perk_landing_damage() {
@@ -279,9 +273,8 @@ perk_follow_path(node) {
   flag_set("perk_vehicle_bringing_in_perk");
   self notify("newpath");
 
-  if(isDefined(node)) {
+  if(isDefined(node))
     self.attachedpath = node;
-  }
 
   pathstart = self.attachedpath;
   self.currentnode = self.attachedpath;

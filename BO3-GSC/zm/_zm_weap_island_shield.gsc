@@ -28,13 +28,13 @@
 #namespace namespace_b2c57c5e;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_island_shield", &__init__, &__main__, undefined);
+  system::register("zm_weap_island_shield", & __init__, & __main__, undefined);
 }
 
 function __init__() {
   zm_craft_shield::init("craft_shield_zm", "island_riotshield", "wpn_t7_zmb_dlc2_shield_world");
   level.weaponriotshield = getweapon("island_riotshield");
-  zm_equipment::register("island_riotshield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("island_riotshield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
 }
 
 function __main__() {

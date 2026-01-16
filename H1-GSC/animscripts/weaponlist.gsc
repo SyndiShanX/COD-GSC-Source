@@ -13,19 +13,17 @@ usingsemiautoweapon() {
 }
 
 autoshootanimrate() {
-  if(usingautomaticweapon()) {
+  if(usingautomaticweapon())
     return 0.1 / weaponfiretime(self.weapon);
-  } else {
+  else
     return 0.5;
-  }
 }
 
 burstshootanimrate() {
-  if(usingautomaticweapon()) {
+  if(usingautomaticweapon())
     return 0.1 / weaponfiretime(self.weapon);
-  } else {
+  else
     return 0.2;
-  }
 }
 
 waitaftershot() {
@@ -33,7 +31,7 @@ waitaftershot() {
 }
 
 shootanimtime(var_0) {
-  if(!usingautomaticweapon() || isDefined(var_0) && var_0 == 1) {
+  if(!usingautomaticweapon() || isdefined(var_0) && var_0 == 1) {
     var_1 = 0.5 + randomfloat(1);
     return weaponfiretime(self.weapon) * var_1;
   } else
@@ -46,31 +44,26 @@ refillclip() {
     return 0;
   }
 
-  if(!isDefined(self.bulletsinclip)) {
+  if(!isdefined(self.bulletsinclip))
     self.bulletsinclip = weaponclipsize(self.weapon);
-  } else {
+  else
     self.bulletsinclip = weaponclipsize(self.weapon);
-  }
 
-  if(self.bulletsinclip <= 0) {
+  if(self.bulletsinclip <= 0)
     return 0;
-  } else {
+  else
     return 1;
-  }
 }
 
 add_weapon(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 3.0;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_2 = 1;
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isdefined(var_4))
     var_4 = "rifle";
-  }
 
   var_0 = tolower(var_0);
   anim.aiweapon[var_0]["type"] = var_1;

@@ -25,9 +25,8 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     set_default_mb_values();
-  }
 
   maps\youngblood_audio::main();
   maps\youngblood_anim::main();
@@ -63,7 +62,7 @@ yb_precache() {
   precacheshellshock("ygb_crash");
   precacheshellshock("ygb_end");
   precacheshellshock("ygb_end_lite");
-  maps\_utility::add_hint_string("hint_sprint", &"YOUNGBLOOD_HINT_SPRINT", ::sprint_hint_check);
+  maps\_utility::add_hint_string("hint_sprint", & "YOUNGBLOOD_HINT_SPRINT", ::sprint_hint_check);
 }
 
 custom_intro_screen_func() {
@@ -148,9 +147,8 @@ yb_flag_inits() {
   common_scripts\utility::flag_init("truck_exit_map");
   common_scripts\utility::flag_init("npc_near_truck");
 
-  if(!common_scripts\utility::flag_exist("transition_from_odin_to_yb_done")) {
+  if(!common_scripts\utility::flag_exist("transition_from_odin_to_yb_done"))
     common_scripts\utility::flag_init("transition_from_odin_to_yb_done");
-  }
 }
 
 yb_setup() {
@@ -183,7 +181,7 @@ yb_setup() {
   soundsettimescalefactor("physics", 0.2);
   soundsettimescalefactor("ambient", 0.5);
   soundsettimescalefactor("auto", 0.5);
-  maps\_utility::intro_screen_create(&"YOUNGBLOOD_INTROSCREEN_LINE_1", &"YOUNGBLOOD_INTROSCREEN_LINE_5", "");
+  maps\_utility::intro_screen_create(&"YOUNGBLOOD_INTROSCREEN_LINE_1", & "YOUNGBLOOD_INTROSCREEN_LINE_5", "");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_utility::array_spawn_function_noteworthy("videotaper", maps\youngblood_util::videotaper_think);
   maps\_utility::array_spawn_function_noteworthy("n_watchers", maps\youngblood_code::n_watchers_think);
@@ -417,9 +415,8 @@ youngblood_script_setup() {
   common_scripts\utility::array_thread(getEntArray("flat_trigger", "targetname"), maps\youngblood_util::flat_trigger);
   var_0 = getEntArray("fxchunknames", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   var_4 = common_scripts\utility::get_target_ent("campfire_player_blocker");
   var_4 delete();
@@ -431,9 +428,8 @@ player_speed() {
     var_1 = float(self.script_speed) * 0.01;
     level.player setmovespeedscale(var_1);
 
-    while(var_0 istouching(self)) {
+    while(var_0 istouching(self))
       wait 0.05;
-    }
 
     level.player setmovespeedscale(1);
     wait 0.05;

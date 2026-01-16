@@ -18,7 +18,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -46,27 +48,25 @@ main() {
     SetTeamMode("ffa");
   }
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   game["dialog"]["gametype"] = "cranked";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("camera_thirdPerson")) {
+  else if(getDvarInt("camera_thirdPerson"))
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_diehard")) {
+  else if(getDvarInt("scr_diehard"))
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  else if(getDvarInt("scr_" + level.gameType + "_promode"))
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
-  }
 
   game["dialog"]["offense_obj"] = "crnk_hint";
   game["dialog"]["begin_cranked"] = "crnk_cranked";
   game["dialog"]["five_seconds_left"] = "crnk_det";
 
-  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
 
   level thread onPlayerConnect();
 }
@@ -104,9 +104,8 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -115,13 +114,13 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  obj_text = &"OBJECTIVES_WAR";
-  obj_score_text = &"OBJECTIVES_WAR_SCORE";
-  obj_hint_text = &"OBJECTIVES_WAR_HINT";
+  obj_text = & "OBJECTIVES_WAR";
+  obj_score_text = & "OBJECTIVES_WAR_SCORE";
+  obj_hint_text = & "OBJECTIVES_WAR_HINT";
   if(!level.teamBased) {
-    obj_text = &"OBJECTIVES_DM";
-    obj_score_text = &"OBJECTIVES_DM_SCORE";
-    obj_hint_text = &"OBJECTIVES_DM_HINT";
+    obj_text = & "OBJECTIVES_DM";
+    obj_score_text = & "OBJECTIVES_DM_SCORE";
+    obj_hint_text = & "OBJECTIVES_DM_HINT";
   }
 
   setObjectiveText("allies", obj_text);
@@ -167,9 +166,8 @@ initSpawns() {
 getSpawnPoint() {
   if(level.teamBased) {
     spawnteam = self.pers["team"];
-    if(game["switchedsides"]) {
+    if(game["switchedsides"])
       spawnteam = getOtherTeam(spawnteam);
-    }
 
     if(maps\mp\gametypes\_spawnlogic::shouldUseTeamStartspawn()) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -215,9 +213,8 @@ onNormalDeath(victim, attacker, lifeId) {
     attacker.pers["killChains"]++;
     attacker maps\mp\gametypes\_persistence::statSetChild("round", "killChains", attacker.pers["killChains"]);
   } else {
-    if(isReallyAlive(attacker)) {
+    if(isReallyAlive(attacker))
       attacker makeCranked("begin_cranked");
-    }
   }
 
   if(isDefined(victim.attackers) && !isDefined(level.assists_disabled)) {
@@ -241,19 +238,16 @@ onNormalDeath(victim, attacker, lifeId) {
   if(level.teamBased) {
     level maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(attacker.pers["team"], score);
 
-    if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
+    if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
       attacker.finalKill = true;
-    }
   } else {
     highestScore = 0;
     foreach(player in level.players) {
-      if(isDefined(player.score) && player.score > highestScore) {
+      if(isDefined(player.score) && player.score > highestScore)
         highestScore = player.score;
-      }
     }
-    if(game["state"] == "postgame" && attacker.score >= highestScore) {
+    if(game["state"] == "postgame" && attacker.score >= highestScore)
       attacker.finalKill = true;
-    }
   }
 }
 
@@ -338,9 +332,8 @@ onKill(event) {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(!isDefined(self.pers)) {
+  while(!isDefined(self.pers))
     wait(0.05);
-  }
 
   self thread maps\mp\gametypes\_rank::xpEventPopup(event);
   maps\mp\gametypes\_gamescore::givePlayerScore(event, self, undefined, true);
@@ -389,9 +382,8 @@ watchBombTimer(waitTime) {
 setCrankedBombTimer(type) {
   waitTime = level.crankedBombTimer;
 
-  if(type == "assist") {
+  if(type == "assist")
     waitTime = int(min(((self.cranked_end_time - GetTime()) / 1000) + (level.crankedBombTimer * 0.5), level.crankedBombTimer));
-  }
 
   waitTime = GetDvarInt("scr_cranked_bomb_timer");
 

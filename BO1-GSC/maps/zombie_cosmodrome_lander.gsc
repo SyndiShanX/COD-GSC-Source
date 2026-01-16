@@ -59,19 +59,18 @@ setup_initial_lander_states() {
   ClientNotify("S_O");
 }
 lander_poi_init() {
-  lander_poi = getEntArray("lander_poi", "targetname");
-  for(i = 0; i < lander_poi.size; i++) {
+  lander_poi = GetEntArray("lander_poi", "targetname");
+  for (i = 0; i < lander_poi.size; i++) {
     lander_poi[i] create_zombie_point_of_interest(undefined, 30, 0, false);
     lander_poi[i] thread create_zombie_point_of_interest_attractor_positions(4, 45);
   }
 }
 activate_lander_poi(station) {
-  if(!isDefined(station)) {
+  if(!isDefined(station))
     return;
-  }
   current_poi = undefined;
-  lander_poi = getEntArray("lander_poi", "targetname");
-  for(i = 0; i < lander_poi.size; i++) {
+  lander_poi = GetEntArray("lander_poi", "targetname");
+  for (i = 0; i < lander_poi.size; i++) {
     if(lander_poi[i].script_string == station) {
       current_poi = lander_poi[i];
       continue;
@@ -82,11 +81,11 @@ activate_lander_poi(station) {
   current_poi deactivate_zombie_point_of_interest();
 }
 init_lander_screen() {
-  self setModel("p_zom_lunar_control_scrn_on");
+  self SetModel("p_zom_lunar_control_scrn_on");
 }
 link_pieces(piece, no_cull) {
-  pieces = getEntArray(self.target, "targetname");
-  for(i = 0; i < pieces.size; i++) {
+  pieces = GetEntArray(self.target, "targetname");
+  for (i = 0; i < pieces.size; i++) {
     if(isDefined(pieces[i].script_noteworthy) && pieces[i].script_noteworthy == "zip_buy") {
       pieces[i] EnableLinkTo();
     }
@@ -139,7 +138,7 @@ move_gate(pos, lower, time) {
     if(self.classname == "script_brushmodel") {
       self moveto(pos.origin + (0, 0, -132), time);
     } else {
-      self playSound("zmb_lander_gate");
+      self PlaySound("zmb_lander_gate");
       self moveto(pos.origin + (0, 0, -44), time);
     }
     self waittill("movedone");
@@ -148,7 +147,7 @@ move_gate(pos, lower, time) {
     }
   } else {
     if(self.classname == "script_brushmodel") {} else {
-      self playSound("zmb_lander_gate");
+      self PlaySound("zmb_lander_gate");
     }
     self notsolid();
     self moveto(pos.origin, time);
@@ -166,8 +165,8 @@ init_buy() {
 }
 init_call_boxes() {
   flag_wait("zones_initialized");
-  trigger = getEntArray("zip_call_box", "targetname");
-  for(i = 0; i < trigger.size; i++) {
+  trigger = getentarray("zip_call_box", "targetname");
+  for (i = 0; i < trigger.size; i++) {
     trigger[i] thread call_box_think();
     self.destination = "lander_station5";
   }
@@ -185,7 +184,7 @@ call_box_think() {
     self sethintstring(&"ZOMBIE_COSMODROME_LANDER_AT_STATION");
     self setcursorhint("HINT_NOICON");
   }
-  while(1) {
+  while (1) {
     who = undefined;
     self waittill("trigger", who);
     if(who maps\_laststand::player_is_in_laststand()) {
@@ -202,8 +201,8 @@ call_box_think() {
       lander.called = true;
       bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type escape_call", who.playername, who.score, level.team_pool[who.team_num].score, level.round_number, level.lander_cost, call_destination, self.origin);
       level.lander_in_use = true;
-      self playSound("zmb_push_button");
-      self playSound("vox_ann_lander_current_0");
+      self PlaySound("zmb_push_button");
+      self PlaySound("vox_ann_lander_current_0");
       switch (call_destination) {
         case "lander_station5":
           level clientnotify("LLCF");
@@ -232,14 +231,14 @@ lander_buy_think() {
   self sethintstring(&"ZOMBIE_COSMODROME_LANDER_NO_CONNECTIONS");
   lander_lights_red();
   level clientnotify("LACF");
-  while(!lander.called) {
+  while (!lander.called) {
     wait(1);
   }
   level.zone_connected = true;
   flag_set("lander_connected");
   self SetHintString(&"ZOMBIE_COSMODROME_LANDER");
   node = GetNode("goto_centrifuge", "targetname");
-  while(1) {
+  while (1) {
     who = undefined;
     self waittill("trigger", who);
     if(flag("lander_cooldown") || flag("lander_inuse")) {
@@ -253,7 +252,7 @@ lander_buy_think() {
     rider_trigger = getent(lander.station + "_riders", "targetname");
     touching = false;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(rider_trigger isTouching(players[i])) {
         touching = true;
       }
@@ -264,8 +263,8 @@ lander_buy_think() {
     if(is_player_valid(who) && who.score >= level.lander_cost) {
       who maps\_zombiemode_score::minus_to_player_score(level.lander_cost);
       play_sound_at_pos("purchase", self.origin);
-      self playSound("zmb_push_button");
-      self playSound("vox_ann_lander_current_0");
+      self PlaySound("zmb_push_button");
+      self PlaySound("vox_ann_lander_current_0");
       level.lander_in_use = true;
       lander.called = false;
       switch (lander.station) {
@@ -295,7 +294,7 @@ lander_buy_think() {
       if(lander.station == "lander_station5") {
         dest = [];
         azkeys = GetArrayKeys(lander.zone);
-        for(i = 0; i < azkeys.size; i++) {
+        for (i = 0; i < azkeys.size; i++) {
           if(azkeys[i] == lander.station) {
             continue;
           }
@@ -313,8 +312,8 @@ lander_buy_think() {
       if(IsPlayer(who)) {
         bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type escape", who.playername, who.score, level.team_pool[who.team_num].score, level.round_number, level.lander_cost, call_box.destination, self.origin);
       }
-      lander playSound("zmb_lander_start");
-      lander playLoopSound("zmb_lander_exhaust_loop", 1);
+      lander PlaySound("zmb_lander_start");
+      lander PlayLoopSound("zmb_lander_exhaust_loop", 1);
       switch (call_box.destination) {
         case "lander_station5":
           level clientnotify("LLCF");
@@ -339,9 +338,9 @@ lander_buy_think() {
   }
 }
 enable_callboxes() {
-  call_boxes = getEntArray("zip_call_box", "targetname");
+  call_boxes = getentarray("zip_call_box", "targetname");
   lander = getent("lander", "targetname");
-  for(j = 0; j < call_boxes.size; j++) {
+  for (j = 0; j < call_boxes.size; j++) {
     if(call_boxes[j].script_noteworthy != lander.station) {
       call_boxes[j] trigger_on();
       call_boxes[j] sethintstring(&"ZOMBIE_COSMODROME_LANDER_CALL");
@@ -366,11 +365,11 @@ new_lander_intro() {
   flag_wait("all_players_spawned");
   lander = getent("lander", "targetname");
   lander lock_players_intro();
-  lander playLoopSound("zmb_lander_exhaust_loop");
-  lander.sound_ent = spawn("script_origin", lander.origin);
+  lander PlayLoopSound("zmb_lander_exhaust_loop");
+  lander.sound_ent = Spawn("script_origin", lander.origin);
   lander.sound_ent LinkTo(lander);
-  lander.sound_ent playSound("zmb_lander_launch");
-  lander.sound_ent playLoopSound("zmb_lander_flying_low_loop");
+  lander.sound_ent PlaySound("zmb_lander_launch");
+  lander.sound_ent playloopsound("zmb_lander_flying_low_loop");
   lander_struct = getstruct("lander_station5", "targetname");
   spot1 = lander_struct.origin;
   wait(1.5);
@@ -386,7 +385,7 @@ new_lander_intro() {
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_startup");
   lander.sound_ent StopLoopSound(1);
   lander StopLoopSound(3);
-  lander.sound_ent playSound("zmb_lander_land");
+  lander.sound_ent PlaySound("zmb_lander_land");
   open_lander_gate();
   unlock_players();
   level thread force_wait_for_gersh_line();
@@ -416,8 +415,8 @@ lander_take_off(dest) {
   } else if(depart.target == "storage_zip_door") {
     clientnotify("S_O");
   }
-  depart_door = getEntArray(depart.target, "targetname");
-  for(i = 0; i < depart_door.size; i++) {
+  depart_door = GetEntArray(depart.target, "targetname");
+  for (i = 0; i < depart_door.size; i++) {
     depart_door[i] thread open_lander_door();
   }
   close_lander_gate();
@@ -442,11 +441,11 @@ lander_take_off(dest) {
     } else if(arrive.target == "storage_zip_door") {
       clientnotify("SOD");
     }
-    arrive_door = getEntArray(arrive.target, "targetname");
-    for(i = 0; i < arrive_door.size; i++) {}
+    arrive_door = GetEntArray(arrive.target, "targetname");
+    for (i = 0; i < arrive_door.size; i++) {}
   }
-  lander.sound_ent playSound("zmb_lander_launch");
-  lander.sound_ent playLoopSound("zmb_lander_flying_low_loop");
+  lander.sound_ent PlaySound("zmb_lander_launch");
+  lander.sound_ent playloopsound("zmb_lander_flying_low_loop");
   lander.anchor moveto(hub.origin, 3.0, 2, 1);
   lander.anchor thread lander_takeoff_wobble();
   level notify("lander_launched");
@@ -463,7 +462,7 @@ lander_take_off(dest) {
     lander.anchor waittill("movedone");
   }
   call_box = getent(lander.station, "script_noteworthy");
-  call_box playSound("vox_ann_lander_current_1");
+  call_box PlaySound("vox_ann_lander_current_1");
   lander clearclientflag(9);
   lander_goto_dest();
 }
@@ -479,19 +478,19 @@ player_blocking_lander() {
   lander = getent("lander", "targetname");
   rider_trigger = getent(lander.station + "_riders", "targetname");
   crumb = getstruct(rider_trigger.target, "targetname");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(rider_trigger isTouching(players[i])) {
       players[i] setOrigin(crumb.origin + (RandomIntRange(-20, 20), RandomIntRange(-20, 20), 0));
       players[i] DoDamage(players[i].health + 10000, players[i].origin);
     }
   }
   zombies = getaispeciesarray("axis");
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(isDefined(zombies[i])) {
       if(rider_trigger isTouching(zombies[i])) {
         level.zombie_total++;
         playsoundatposition("nuked", zombies[i].origin);
-        playFX(level._effect["zomb_gib"], zombies[i].origin);
+        PlayFX(level._effect["zomb_gib"], zombies[i].origin);
         if(isDefined(zombies[i].lander_death)) {
           zombies[i][
             [zombies[i].lander_death]
@@ -506,7 +505,7 @@ player_blocking_lander() {
 lock_players(destination) {
   lander = getent("lander", "targetname");
   lander.riders = 0;
-  spots = getEntArray("zipline_spots", "script_noteworthy");
+  spots = getentarray("zipline_spots", "script_noteworthy");
   taken = [];
   zipline_door1 = getent("zipline_door_n", "script_noteworthy");
   zipline_door2 = getent("zipline_door_s", "script_noteworthy");
@@ -519,9 +518,9 @@ lock_players(destination) {
   players = getplayers();
   lander_trig = getent("zip_buy", "script_noteworthy");
   x = 0;
-  while(!flag("lander_grounded")) {
+  while (!flag("lander_grounded")) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!rider_trigger isTouching(players[i]) && !players[i] istouching(zipline_door1) && !players[i] istouching(zipline_door2) && !players[i] istouching(base) && x < 8) {
         continue;
       }
@@ -534,7 +533,7 @@ lock_players(destination) {
           players[i].on_lander_last_stand = 1;
           max_dist = 196;
           grab = -1;
-          for(j = 0; j < 4; j++) {
+          for (j = 0; j < 4; j++) {
             if(is_true(ls_taken[j]) || is_true(taken[j])) {
               continue;
             }
@@ -559,7 +558,7 @@ lock_players(destination) {
       }
       max_dist = 10000;
       grab = -1;
-      for(j = 0; j < 4; j++) {
+      for (j = 0; j < 4; j++) {
         if(isDefined(taken[j]) && taken[j] == 1) {
           continue;
         }
@@ -597,14 +596,14 @@ laststand_lander_link() {
 lock_players_intro() {
   lander = getent("lander", "targetname");
   lander.riders = 0;
-  spots = getEntArray("zipline_spots", "script_noteworthy");
+  spots = getentarray("zipline_spots", "script_noteworthy");
   players = getplayers();
   taken = [];
   rider_trigger = getent("lander_in_sky_riders", "targetname");
   crumb = getstruct(rider_trigger.target, "targetname");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     grab = -1;
-    for(j = 0; j < 4; j++) {
+    for (j = 0; j < 4; j++) {
       if(isDefined(taken[j]) && taken[j] == 1) {
         continue;
       }
@@ -619,7 +618,7 @@ lock_players_intro() {
 }
 unlock_players() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] unlink();
     players[i] disableinvulnerability();
     players[i].on_lander_last_stand = undefined;
@@ -678,13 +677,13 @@ lander_goto_dest() {
       clientnotify("S_C");
     }
   }
-  arrive_door = getEntArray(arrive.target, "targetname");
-  for(i = 0; i < arrive_door.size; i++) {
+  arrive_door = GetEntArray(arrive.target, "targetname");
+  for (i = 0; i < arrive_door.size; i++) {
     arrive_door[i] thread close_lander_door(1.0);
   }
   lander.anchor moveto(final_dest.origin, movetime, acceltime, deceltime);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].lander) {
       players[i] clearclientflag(0);
     }
@@ -732,7 +731,7 @@ lander_engine_fx() {
   flag_wait("lander_grounded");
   lander_base clearclientflag(7);
   wait(2.5);
-  playFX(level._effect["lunar_lander_dust"], lander_base.origin);
+  PlayFX(level._effect["lunar_lander_dust"], lander_base.origin);
   lander_base Clearclientflag(1);
 }
 takeoff_nuke(max_zombies, range, delay, trig) {
@@ -742,7 +741,7 @@ takeoff_nuke(max_zombies, range, delay, trig) {
   zombies = getaispeciesarray("axis");
   spot = self.origin;
   zombies = get_array_of_closest(self.origin, zombies, undefined, max_zombies, range);
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     if(!zombies[i] istouching(trig)) {
       continue;
     }
@@ -756,7 +755,7 @@ zombie_burst() {
   wait(randomfloatrange(0.2, 0.3));
   level.zombie_total++;
   playsoundatposition("nuked", self.origin);
-  playFX(level._effect["zomb_gib"], self.origin);
+  PlayFX(level._effect["zomb_gib"], self.origin);
   if(isDefined(self.lander_death)) {
     self[[self.lander_death]]();
   }
@@ -764,7 +763,7 @@ zombie_burst() {
 }
 takeoff_knockdown(min_range, max_range) {
   zombies = getaispeciesarray("axis");
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     dist = distancesquared(zombies[i].origin, self.origin);
     if(dist >= (min_range * min_range) && dist <= (max_range * max_range)) {
       zombies[i] thread zombie_knockdown();
@@ -784,7 +783,7 @@ zombie_knockdown() {
 lander_clean_up_corpses(spot, range) {
   corpses = GetCorpseArray();
   if(isDefined(corpses)) {
-    for(i = 0; i < corpses.size; i++) {
+    for (i = 0; i < corpses.size; i++) {
       if(distancesquared(spot, corpses[i].origin) <= (range * range)) {
         corpses[i] thread lander_remove_corpses();
       }
@@ -796,7 +795,7 @@ lander_remove_corpses() {
   if(!isDefined(self)) {
     return;
   }
-  playFX(level._effect["zomb_gib"], self.origin);
+  PlayFX(level._effect["zomb_gib"], self.origin);
   self Delete();
 }
 lander_flight_wobble(lander, final_dest) {
@@ -805,7 +804,7 @@ lander_flight_wobble(lander, final_dest) {
   self endon("start_approach");
   first_time = true;
   rot_time = 0.75;
-  while(1) {
+  while (1) {
     if(first_time) {
       rot_time = 1.75;
     }
@@ -832,7 +831,7 @@ lander_flight_wobble(lander, final_dest) {
 }
 lander_takeoff_wobble() {
   level endon("lander_launched");
-  while(1) {
+  while (1) {
     self rotateto((randomfloatrange(-10, 10), 0, randomfloatrange(-10, 10)), .5);
     wait(.5);
   }
@@ -840,7 +839,7 @@ lander_takeoff_wobble() {
 lander_landing_wobble(movetime) {
   time = movetime - 1;
   timer = gettime() + (time * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     self rotateto((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), .75);
     wait(.75);
   }
@@ -857,16 +856,16 @@ lander_flight_stop_wobble() {
 }
 lander_cooldown_think() {
   lander_use_trig = GetEnt("zip_buy", "script_noteworthy");
-  lander_callboxes = getEntArray("zip_call_box", "targetname");
+  lander_callboxes = getentarray("zip_call_box", "targetname");
   lander = getent("lander", "targetname");
-  while(1) {
+  while (1) {
     level waittill("LU", riders, trig);
     flag_set("lander_inuse");
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], true);
     }
-    for(i = 0; i < lander_callboxes.size; i++) {
+    for (i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i] == trig) {
         lander_callboxes[i] SetHintString(&"ZOMBIE_COSMODROME_LANDER_ON_WAY");
         lander_callboxes[i] setcursorhint("HINT_NOICON");
@@ -875,28 +874,28 @@ lander_cooldown_think() {
         lander_callboxes[i] setcursorhint("HINT_NOICON");
       }
     }
-    while(level.lander_in_use) {
+    while (level.lander_in_use) {
       wait(.1);
     }
     flag_clear("lander_inuse");
     flag_set("lander_cooldown");
     cooldown = 3;
-    str = &"ZOMBIE_COSMODROME_LANDER_COOLDOWN";
+    str = & "ZOMBIE_COSMODROME_LANDER_COOLDOWN";
     if(riders != 0) {
       cooldown = 30;
-      str = &"ZOMBIE_COSMODROME_LANDER_REFUEL";
-      for(i = 0; i < lander_callboxes.size; i++) {
-        lander_callboxes[i] playSound("vox_ann_lander_cooldown");
+      str = & "ZOMBIE_COSMODROME_LANDER_REFUEL";
+      for (i = 0; i < lander_callboxes.size; i++) {
+        lander_callboxes[i] PlaySound("vox_ann_lander_cooldown");
       }
-      lander playSound("zmb_lander_pump_start");
-      lander playLoopSound("zmb_lander_pump_loop", 1);
+      lander PlaySound("zmb_lander_pump_start");
+      lander PlayLoopSound("zmb_lander_pump_loop", 1);
     }
     lander_use_trig SetHintString(str);
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], false);
     }
-    for(i = 0; i < lander_callboxes.size; i++) {
+    for (i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i].script_noteworthy != lander.station) {
         lander_callboxes[i] sethintstring(str);
       } else {
@@ -906,19 +905,19 @@ lander_cooldown_think() {
     }
     wait(cooldown);
     lander StopLoopSound(1.5);
-    lander playSound("zmb_lander_pump_end");
+    lander PlaySound("zmb_lander_pump_end");
     if(cooldown == 30) {
-      for(i = 0; i < lander_callboxes.size; i++) {
-        lander_callboxes[i] playSound("vox_ann_lander_ready");
+      for (i = 0; i < lander_callboxes.size; i++) {
+        lander_callboxes[i] PlaySound("vox_ann_lander_ready");
       }
     }
     lander_lights_green();
     lander_use_trig SetHintString(&"ZOMBIE_COSMODROME_LANDER");
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], false);
     }
-    for(i = 0; i < lander_callboxes.size; i++) {
+    for (i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i].script_noteworthy != lander.station) {
         lander_callboxes[i] sethintstring(&"ZOMBIE_COSMODROME_LANDER_CALL");
       } else {
@@ -936,7 +935,7 @@ lander_lights_red() {
   clientnotify("L_R");
 }
 play_launch_unlock_vox() {
-  while(1) {
+  while (1) {
     flag_wait("lander_grounded");
     if(flag("lander_a_used") && flag("lander_b_used") && flag("lander_c_used")) {
       level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_landers_used");
@@ -951,14 +950,14 @@ force_wait_for_gersh_line() {
 }
 put_players_back_on_lander() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!is_true(players[i].lander) && !is_true(players[i].on_lander_last_stand)) {
       continue;
     }
     if(!players[i] is_player_on_lander()) {
       if(isDefined(players[i].lander_link_spot)) {
         players[i] SetOrigin(players[i].lander_link_spot.origin);
-        players[i] playSound("zmb_laugh_child");
+        players[i] playsound("zmb_laugh_child");
       }
     }
   }

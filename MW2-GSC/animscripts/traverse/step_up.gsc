@@ -11,11 +11,10 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     dog_jump_up(40, 3);
-  } else {
+  else
     step_up_human();
-  }
 }
 
 step_up_human() {
@@ -29,7 +28,7 @@ step_up_human() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("stepanim", % step_up_low_wall, % body, 1, .1, 1);

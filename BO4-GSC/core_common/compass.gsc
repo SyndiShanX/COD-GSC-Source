@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\match_record;
+
 #namespace compass;
 
 setupminimap(material = "", zone = 0) {

@@ -93,13 +93,11 @@ begin_interior_vault_scene() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals2", "targetname"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_interior_attack();
-  }
 
   maps\clockwork_code::setup_drill(1);
   maps\_utility::disable_trigger_with_targetname("pickup_drill_trigger");
@@ -144,9 +142,8 @@ setup_vault_props() {
   level.drill_prop = maps\_utility::spawn_anim_model("vault_drill_prop");
   maps\clockwork_code::setup_drill(0);
 
-  foreach(var_1 in level.drill_pickup) {
-    var_1 linkto(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
-  }
+  foreach(var_1 in level.drill_pickup)
+  var_1 linkto(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
 
   level.vault_props = maps\_utility::make_array(level.thermite1, level.thermite2, level.charge1, level.charge2);
   level.spool_prop = maps\_utility::spawn_anim_model("vault_spool_prop");
@@ -168,9 +165,8 @@ vault_nvg_off_hint() {
   level.player thread maps\_utility::display_hint_timeout("disable_nvg", 5);
   common_scripts\utility::flag_wait("approaching_vault_door");
 
-  while(level.player isswitchingweapon()) {
+  while(level.player isswitchingweapon())
     wait 0.01;
-  }
 
   thread maps\clockwork_code::nvg_goggles_off();
 }
@@ -350,9 +346,8 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
 
       if(var_9) {
         if(level.drill_bink) {
-          if(!isDefined(var_11)) {
+          if(!isDefined(var_11))
             var_11 = maps\_utility::hint_create(&"CLOCKWORK_HINT_DRILL");
-          }
         }
 
         var_9 = 0;
@@ -368,9 +363,8 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
           level notify("started_drilling");
           thread showdrillhole(var_3);
 
-          if(level.drill_bink) {
+          if(level.drill_bink)
             pausecinematicingame(0);
-          }
 
           var_4 = 1;
           playFXOnTag(level._effect["drill_sparks"], level.vault_door, var_3);
@@ -379,9 +373,8 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
           var_13 playLoopSound("clkw_scn_vault_drill_lp");
         }
       } else if(var_4 == 1) {
-        if(level.drill_bink) {
+        if(level.drill_bink)
           pausecinematicingame(1);
-        }
 
         var_4 = 0;
         stopFXOnTag(level._effect["drill_sparks"], level.vault_door, var_3);
@@ -404,9 +397,8 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
         var_5 = 0;
         common_scripts\utility::flag_clear("drill_attached");
 
-        if(!common_scripts\utility::flag(var_2)) {
+        if(!common_scripts\utility::flag(var_2))
           level.player unlink();
-        }
 
         level.player thread maps\_utility::play_sound_on_entity("clkw_scn_vault_drill_off_door");
 
@@ -417,11 +409,10 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
 
         level.player setactionslot(1, "nightvision");
 
-        if(level.drill_bink) {
+        if(level.drill_bink)
           reset_tablet_screen();
-        } else {
+        else
           maps\clockwork_pip::pip_disable();
-        }
 
         level.player enableweaponswitch();
         level.player allowcrouch(1);
@@ -454,11 +445,10 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
     level.player thread maps\_utility::play_sound_on_entity("clkw_scn_vault_drill_pullout");
     level.player setactionslot(1, "nightvision");
 
-    if(level.drill_bink) {
+    if(level.drill_bink)
       reset_tablet_screen();
-    } else {
+    else
       thread maps\clockwork_pip::pip_disable();
-    }
 
     level.player enableweaponswitch();
     level.player allowcrouch(1);
@@ -516,9 +506,8 @@ reset_tablet_screen() {
     cinematicingame("clockwork_vault_drill");
     wait 0.05;
 
-    while(cinematicgetframe() < 2) {
+    while(cinematicgetframe() < 2)
       wait 0.05;
-    }
 
     pausecinematicingame(1);
   }
@@ -529,9 +518,8 @@ handle_drilling(var_0, var_1) {
   common_scripts\utility::flag_clear("drill_toofar");
   var_2 = 300;
 
-  if(level.drill_bink) {
+  if(level.drill_bink)
     var_2 = var_2 + 50;
-  }
 
   var_3 = 550;
   var_4 = 450;
@@ -546,9 +534,9 @@ handle_drilling(var_0, var_1) {
   var_11 = getent("pip_drill", "targetname");
   var_12 = var_11.angles;
 
-  if(isDefined(level.drill_reset_pos)) {
+  if(isDefined(level.drill_reset_pos))
     var_13 = level.drill_reset_pos;
-  } else {
+  else {
     var_13 = var_11.origin + (0, -900, 0);
     level.drill_reset_pos = var_13;
   }
@@ -599,9 +587,8 @@ handle_drilling(var_0, var_1) {
           common_scripts\utility::flag_set("drill_toofar");
           common_scripts\utility::flag_set("drill_safezone");
 
-          if(!level.drill_bink) {
+          if(!level.drill_bink)
             thread drill_fail_animation();
-          }
 
           level.player maps\_utility::play_sound_on_entity("clkw_scn_vault_drill_gears");
           thread vault_fail_vo();
@@ -610,7 +597,7 @@ handle_drilling(var_0, var_1) {
           level.player playrumbleonentity("drill_through");
 
           if(level.drill_bink) {
-            setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_BACKPLATE");
+            setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_BACKPLATE");
             maps\_utility::missionfailedwrapper();
           } else
             wait 10;
@@ -625,9 +612,8 @@ handle_drilling(var_0, var_1) {
       } else {
         level notify("stop_drilling_sounds");
 
-        if(var_15 > var_16 && !common_scripts\utility::flag(var_0)) {
+        if(var_15 > var_16 && !common_scripts\utility::flag(var_0))
           common_scripts\utility::flag_set(var_0);
-        }
       }
     } else {
       level notify("stop_drilling_sounds");
@@ -648,9 +634,8 @@ handle_drilling(var_0, var_1) {
 
   level notify("stop_drilling_sounds");
 
-  if(common_scripts\utility::flag("drill_toofar")) {
+  if(common_scripts\utility::flag("drill_toofar"))
     wait 100;
-  }
 
   var_11.origin = level.drill_reset_pos;
 }
@@ -772,9 +757,8 @@ get_animating_actors(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4) && isDefined(level.scr_anim[var_4.animname][var_1])) {
+    if(isDefined(var_4) && isDefined(level.scr_anim[var_4.animname][var_1]))
       var_2[var_2.size] = var_4;
-    }
   }
 
   return var_2;
@@ -786,16 +770,14 @@ ally_animate_vault_scene() {
   var_2 = common_scripts\utility::array_add(var_1, self);
   self waittill("anim_reach_complete");
 
-  if(self.animname == "cypher" && level.drill_bink) {
+  if(self.animname == "cypher" && level.drill_bink)
     setsaveddvar("cg_cinematicFullScreen", "0");
-  }
 
   var_3 = get_animating_actors(var_2, "vault_approach");
   var_0 maps\_anim::anim_single(var_3, "vault_approach");
 
-  if(self.animname == "cypher") {
+  if(self.animname == "cypher")
     level.tablet unlink();
-  }
 
   if(!common_scripts\utility::flag("drill1_complete")) {
     var_3 = get_animating_actors(var_2, "vault_loop1");
@@ -804,9 +786,8 @@ ally_animate_vault_scene() {
     var_0 notify("drill1_complete" + self.animname);
   }
 
-  if(self.animname == "cypher") {
+  if(self.animname == "cypher")
     level.tablet linkto(level.tablet_prop, "J_prop_1");
-  }
 
   var_3 = get_animating_actors(var_2, "vault_betweener");
   var_0 thread maps\_anim::anim_single(var_3, "vault_betweener");
@@ -827,17 +808,14 @@ ally_animate_vault_scene() {
   var_3 = get_animating_actors(var_2, "vault_exit");
   var_0 maps\_anim::anim_single(var_3, "vault_exit");
 
-  if(self.animname == "keegan") {
+  if(self.animname == "keegan")
     maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-  }
 
-  if(self.animname == "baker") {
+  if(self.animname == "baker")
     maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-  }
 
-  if(self.animname == "cypher") {
+  if(self.animname == "cypher")
     maps\_utility::forceuseweapon("mts255", "primary");
-  }
 }
 
 animate_vault_door() {
@@ -869,53 +847,41 @@ animate_vault_door() {
   level.tablet delete();
   level.thermite3 delete();
 
-  foreach(var_3 in level.vault_props) {
-    var_3 delete();
-  }
+  foreach(var_3 in level.vault_props)
+  var_3 delete();
 
-  foreach(var_6 in level.chalk_mark) {
-    var_6 delete();
-  }
+  foreach(var_6 in level.chalk_mark)
+  var_6 delete();
 
-  if(isDefined(level.spool_prop)) {
+  if(isDefined(level.spool_prop))
     level.spool_prop delete();
-  }
 
-  if(isDefined(level.spool)) {
+  if(isDefined(level.spool))
     level.spool delete();
-  }
 
-  if(isDefined(level.glowstick1)) {
+  if(isDefined(level.glowstick1))
     level.glowstick1 delete();
-  }
 
-  if(isDefined(level.glowstick1_prop)) {
+  if(isDefined(level.glowstick1_prop))
     level.glowstick1_prop delete();
-  }
 
-  if(isDefined(level.glowstick2)) {
+  if(isDefined(level.glowstick2))
     level.glowstick2 delete();
-  }
 
-  if(isDefined(level.glowstick2_prop)) {
+  if(isDefined(level.glowstick2_prop))
     level.glowstick2_prop delete();
-  }
 
-  if(isDefined(level.charge1)) {
+  if(isDefined(level.charge1))
     level.charge1 delete();
-  }
 
-  if(isDefined(level.charge2)) {
+  if(isDefined(level.charge2))
     level.charge2 delete();
-  }
 
-  if(isDefined(level.thermite1)) {
+  if(isDefined(level.thermite1))
     level.thermite1 delete();
-  }
 
-  if(isDefined(level.thermite2)) {
+  if(isDefined(level.thermite2))
     level.thermite2 delete();
-  }
 
   thread maps\clockwork_code::screenshakefade(0.45, 1.25, 0.25, 0.8);
   var_8 = getent("smoke_spot", "targetname");
@@ -935,17 +901,14 @@ animate_vault_door() {
 ally_vault_props() {
   var_0 = [];
 
-  if(self.animname == "cypher") {
+  if(self.animname == "cypher")
     var_0 = maps\_utility::make_array(level.tablet_prop);
-  }
 
-  if(self.animname == "baker") {
+  if(self.animname == "baker")
     var_0 = maps\_utility::make_array(level.thermite1, level.thermite2, level.thermite3, level.glowstick1_prop, level.spool_prop);
-  }
 
-  if(self.animname == "keegan") {
+  if(self.animname == "keegan")
     var_0 = maps\_utility::make_array(level.drill_prop, level.charge1, level.charge2, level.glowstick2_prop);
-  }
 
   return var_0;
 }
@@ -970,9 +933,8 @@ stop_scan(var_0) {
     cinematicingame("clockwork_vault_drill");
     wait 0.05;
 
-    while(cinematicgetframe() < 2) {
+    while(cinematicgetframe() < 2)
       wait 0.05;
-    }
 
     pausecinematicingame(1);
   }
@@ -1039,9 +1001,8 @@ showdrillhole(var_0) {
   var_1 = level.vault_door gettagorigin(var_0);
   var_2 = getent("drill_hole_01", "targetname");
 
-  if(var_0 != "TAG_FX_XMark_RI") {
+  if(var_0 != "TAG_FX_XMark_RI")
     var_2 = getent("drill_hole_02", "targetname");
-  }
 
   var_2.origin = var_1;
 }
@@ -1173,9 +1134,8 @@ breach_charge_fx_activate() {
 }
 
 open_vault(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = getent("vault_door_scene", "targetname");
-  }
 
   if(isDefined(var_0) && var_0 == 1) {
     maps\clockwork_code::setup_drill(1);
@@ -1200,9 +1160,8 @@ drilled_good_vo(var_0) {
     level.allies[2] maps\clockwork_code::char_dialog_add_and_go(var_1[level.drilled_good_line]);
     level.drilled_good_line++;
 
-    if(level.drilled_good_line >= var_1.size) {
+    if(level.drilled_good_line >= var_1.size)
       level.drilled_good_line = 0;
-    }
   }
 }
 
@@ -1271,9 +1230,8 @@ drill_nag(var_0, var_1) {
     level.allies[2] maps\clockwork_code::char_dialog_add_and_go(var_2[level.drill_nag_num]);
     level.drill_nag_num++;
 
-    if(level.drill_nag_num >= var_2.size) {
+    if(level.drill_nag_num >= var_2.size)
       level.drill_nag_num = 0;
-    }
 
     wait 8;
   }
@@ -1303,14 +1261,14 @@ setup_interior_combat() {
 
 vault_objective() {
   var_0 = maps\_utility::obj("vaultobj");
-  objective_add(var_0, "current", &"CLOCKWORK_DISABLE_THE_SECURITY");
+  objective_add(var_0, "current", & "CLOCKWORK_DISABLE_THE_SECURITY");
   common_scripts\utility::flag_wait("obj_vault_complete");
   maps\_utility::objective_complete(var_0);
 }
 
 fight_objective() {
   var_0 = maps\_utility::obj("fightobj");
-  objective_add(var_0, "current", &"CLOCKWORK_ADVANCE_TO_THE_DATA_CENTER");
+  objective_add(var_0, "current", & "CLOCKWORK_ADVANCE_TO_THE_DATA_CENTER");
   common_scripts\utility::flag_wait("Obj_datacenter_complete");
   maps\_utility::objective_complete(var_0);
 }
@@ -1320,9 +1278,8 @@ begin_interior_combat() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals2", "targetname"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   common_scripts\utility::flag_clear("player_dynamic_move_speed");
   thread maps\clockwork_code::blend_movespeedscale_custom(85, 1);
@@ -1335,17 +1292,14 @@ begin_interior_combat() {
     var_5.ignoreall = 0;
     var_5.disablereactionanims = 1;
 
-    if(var_5.animname == "keegan") {
+    if(var_5.animname == "keegan")
       var_5 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_5.animname == "baker") {
+    if(var_5.animname == "baker")
       var_5 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_5.animname == "cypher") {
+    if(var_5.animname == "cypher")
       var_5 maps\_utility::forceuseweapon("mts255", "primary");
-    }
   }
 
   maps\_utility::battlechatter_on("axis");
@@ -1413,17 +1367,15 @@ combat_handle_allies() {
 combat_allies_mainhall() {
   common_scripts\utility::flag_wait("combat_first_guys_dead");
 
-  if(!common_scripts\utility::flag("combat_sidehall")) {
+  if(!common_scripts\utility::flag("combat_sidehall"))
     maps\clockwork_code::safe_activate_trigger_with_targetname("combat_mainhall1");
-  }
 }
 
 handle_combat_guys() {
   common_scripts\utility::flag_wait_either("combat_guys1", "end_discovery");
 
-  foreach(var_1 in level.allies) {
-    var_1 maps\_utility::set_baseaccuracy(var_1.old_baseaccuracy);
-  }
+  foreach(var_1 in level.allies)
+  var_1 maps\_utility::set_baseaccuracy(var_1.old_baseaccuracy);
 
   maps\_utility::battlechatter_on("allies");
   maps\_utility::battlechatter_on("axis");
@@ -1446,9 +1398,8 @@ handle_combat_guys2() {
   var_0 = maps\clockwork_code::array_spawn_targetname_allow_fail("combat_guys2_pre");
   var_1 = getEntArray("combat_guys2_waver", "targetname");
 
-  foreach(var_3 in var_1) {
-    var_3 thread maps\clockwork_code::ambient_animate(0, "start_combat2", 0, 0);
-  }
+  foreach(var_3 in var_1)
+  var_3 thread maps\clockwork_code::ambient_animate(0, "start_combat2", 0, 0);
 
   common_scripts\utility::flag_wait("combat_guys2");
   var_0 = maps\clockwork_code::array_spawn_targetname_allow_fail("combat_guys2");
@@ -1519,17 +1470,14 @@ setup_interior_cqb() {
   common_scripts\utility::flag_set("to_cqb");
 
   foreach(var_1 in level.allies) {
-    if(var_1.animname == "keegan") {
+    if(var_1.animname == "keegan")
       var_1 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_1.animname == "baker") {
+    if(var_1.animname == "baker")
       var_1 maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-    }
 
-    if(var_1.animname == "cypher") {
+    if(var_1.animname == "cypher")
       var_1 maps\_utility::forceuseweapon("mts255", "primary");
-    }
   }
 
   maps\_utility::disable_trigger_with_targetname("to_cqb");
@@ -1617,9 +1565,8 @@ spin_fans(var_0) {
   var_2 = randomfloatrange(-5.0, 5.0);
 
   while(!common_scripts\utility::flag(var_0)) {
-    foreach(var_4 in var_1) {
-      var_4 rotatepitch(30 + var_2, 0.25);
-    }
+    foreach(var_4 in var_1)
+    var_4 rotatepitch(30 + var_2, 0.25);
 
     wait 0.25;
   }
@@ -1867,9 +1814,8 @@ handle_troll_player(var_0) {
   thread troll_stairs_trigger();
   level common_scripts\utility::waittill_either("cqb_guys7", "troll_stairs_trigger");
 
-  if(isDefined(var_0[0]) && isalive(var_0[0])) {
+  if(isDefined(var_0[0]) && isalive(var_0[0]))
     var_0[0] notify("damage", 1, level.player);
-  }
 
   level notify("rotunda_kill_interrupted");
 }
@@ -1924,17 +1870,15 @@ catch_interrupt_notify() {
 catch_death_notify() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isplayer(var_0))
     self notify("death_by_player");
-  }
 }
 
 catch_damage_notify() {
   self waittill("damage", var_0, var_1);
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isplayer(var_1))
     self notify("damage_by_player");
-  }
 }
 
 interrupt_rotunda_kill() {
@@ -2015,20 +1959,18 @@ cqb_encounter(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = [];
 
   foreach(var_10 in var_7) {
-    if(isDefined(var_10.animation)) {
+    if(isDefined(var_10.animation))
       var_8[var_8.size] = var_10 maps\clockwork_code::ambient_animate(0, "cqb_attack5");
-    }
   }
 
   var_8 = common_scripts\utility::array_combine(var_8, maps\clockwork_code::array_spawn_targetname_allow_fail(var_4));
   thread maps\clockwork_code::ai_array_killcount_flag_set(var_8, var_8.size, var_1);
   thread cqb_encounter_allies_move_up(var_1, var_2);
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     common_scripts\utility::flag_wait(var_5);
-  } else {
+  else
     wait 1;
-  }
 
   thread maps\clockwork_code::attack_targets(var_3, var_8, undefined, undefined, var_6);
 }
@@ -2046,9 +1988,8 @@ handle_cqb_allies() {
   maps\_utility::autosave_by_name("catwalks");
   wait 1;
 
-  while(level.run_guy_count > 0 && !common_scripts\utility::flag("moved_into_rotunda")) {
+  while(level.run_guy_count > 0 && !common_scripts\utility::flag("moved_into_rotunda"))
     wait 0.25;
-  }
 
   common_scripts\utility::flag_wait("cqb_guys7");
   level.player allowsprint(1);
@@ -2066,9 +2007,8 @@ handle_cqb_enemies() {
   common_scripts\utility::flag_wait("cqb_guys7");
   var_0 = maps\_utility::get_ai_group_ai("roundroom_runners");
 
-  foreach(var_2 in var_0) {
-    var_2.ignoreme = 0;
-  }
+  foreach(var_2 in var_0)
+  var_2.ignoreme = 0;
 
   if(var_0.size < 3) {
     thread maps\clockwork_code::ai_array_killcount_flag_set(var_0, var_0.size, "extra_guys_dead");
@@ -2105,11 +2045,10 @@ attack_if_provoked() {
   maps\_utility::enable_ai_color();
   wait 0.1;
 
-  if(!common_scripts\utility::flag("round_room_fight")) {
+  if(!common_scripts\utility::flag("round_room_fight"))
     maps\clockwork_code::reassign_goal_volume(self, "round_room_alerted_volume");
-  } else {
+  else
     maps\clockwork_code::reassign_goal_volume(self, "round_room_combat_volume");
-  }
 
   level notify("round_room_enemies_provoked");
 }

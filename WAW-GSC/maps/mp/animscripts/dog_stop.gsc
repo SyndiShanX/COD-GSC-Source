@@ -11,7 +11,7 @@ main() {
   self endon("killanimscript");
   self SetAimAnimWeights(0, 0);
   self thread lookAtTarget("attackIdle");
-  while(1) {
+  while (1) {
     if(shouldAttackIdle()) {
       self randomAttackIdle();
       maps\mp\animscripts\shared::DoNoteTracks("done");
@@ -32,9 +32,8 @@ isFacingEnemy(toleranceCosAngle) {
   assert(isDefined(self.enemy));
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
-  if(distToEnemy < 1) {
+  if(distToEnemy < 1)
     return true;
-  }
   forward = anglesToForward(self.angles);
   val1 = (forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1]);
   val2 = ((forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1])) / distToEnemy;
@@ -42,11 +41,10 @@ isFacingEnemy(toleranceCosAngle) {
 }
 
 randomAttackIdle() {
-  if(isFacingEnemy(-0.5)) {
+  if(isFacingEnemy(-0.5))
     self set_orient_mode("face current");
-  } else {
+  else
     self set_orient_mode("face enemy");
-  }
   if(should_growl()) {
     debug_anim_print("dog_stop::main() - Setting stop_attackidle_growl");
     self setanimstate("stop_attackidle_growl");
@@ -81,12 +79,10 @@ shouldAttackIdle() {
 }
 
 should_growl() {
-  if(isDefined(self.script_growl)) {
+  if(isDefined(self.script_growl))
     return true;
-  }
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return true;
-  }
   return !(self cansee(self.enemy));
 }
 

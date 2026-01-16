@@ -31,11 +31,11 @@ init() {
   level.turretSettings["mg_turret"].modelDestroyed = "mp_remote_turret";
 
   level.turretSettings["mg_turret"].teamSplash = "used_remote_mg_turret";
-  level.turretSettings["mg_turret"].hintEnter = &"KILLSTREAKS_ENTER_REMOTE_TURRET";
-  level.turretSettings["mg_turret"].hintExit = &"KILLSTREAKS_EARLY_EXIT";
-  level.turretSettings["mg_turret"].hintPickUp = &"KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
-  level.turretSettings["mg_turret"].placeString = &"KILLSTREAKS_TURRET_PLACE";
-  level.turretSettings["mg_turret"].cannotPlaceString = &"KILLSTREAKS_TURRET_CANNOT_PLACE";
+  level.turretSettings["mg_turret"].hintEnter = & "KILLSTREAKS_ENTER_REMOTE_TURRET";
+  level.turretSettings["mg_turret"].hintExit = & "KILLSTREAKS_EARLY_EXIT";
+  level.turretSettings["mg_turret"].hintPickUp = & "KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
+  level.turretSettings["mg_turret"].placeString = & "KILLSTREAKS_TURRET_PLACE";
+  level.turretSettings["mg_turret"].cannotPlaceString = & "KILLSTREAKS_TURRET_CANNOT_PLACE";
   level.turretSettings["mg_turret"].voDestroyed = "remote_sentry_destroyed";
   level.turretSettings["mg_turret"].laptopInfo = "killstreak_remote_turret_laptop_mp";
   level.turretSettings["mg_turret"].remoteInfo = "killstreak_remote_turret_remote_mp";
@@ -79,11 +79,10 @@ tryUseRemoteTurret(lifeId, turretType) {
 
   self thread restorePerks();
 
-  if(isDefined(turret)) {
+  if(isDefined(turret))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 setCarryingTurret(turret, allowCancel) {
@@ -198,21 +197,17 @@ restoreWeapons() {
     }
 
     self _giveWeapon(weapon);
-    if(isDefined(self.restoreWeaponClipAmmo[weapon])) {
+    if(isDefined(self.restoreWeaponClipAmmo[weapon]))
       self SetWeaponAmmoClip(weapon, self.restoreWeaponClipAmmo[weapon]);
-    }
-    if(isDefined(self.restoreWeaponStockAmmo[weapon])) {
+    if(isDefined(self.restoreWeaponStockAmmo[weapon]))
       self SetWeaponAmmoStock(weapon, self.restoreWeaponStockAmmo[weapon]);
-    }
   }
 
   foreach(altWeapon in altWeapons) {
-    if(isDefined(self.restoreWeaponClipAmmo[altWeapon])) {
+    if(isDefined(self.restoreWeaponClipAmmo[altWeapon]))
       self SetWeaponAmmoClip(altWeapon, self.restoreWeaponClipAmmo[altWeapon]);
-    }
-    if(isDefined(self.restoreWeaponStockAmmo[altWeapon])) {
+    if(isDefined(self.restoreWeaponStockAmmo[altWeapon]))
       self SetWeaponAmmoStock(altWeapon, self.restoreWeaponStockAmmo[altWeapon]);
-    }
   }
 
   self.restoreWeaponClipAmmo = undefined;
@@ -249,9 +244,8 @@ turret_setPlaced() {
 
 turret_setCancelled() {
   self.carriedBy forceUseHintOff();
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner.isCarrying = false;
-  }
 
   self delete();
 }
@@ -322,11 +316,10 @@ turret_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced) {
+  if(self.canBePlaced)
     self turret_setPlaced();
-  } else {
+  else
     self delete();
-  }
 }
 
 turret_onCarrierDisconnect(carrier) {
@@ -411,9 +404,8 @@ turret_setActive() {
   owner.using_remote_turret = false;
   owner.pickup_message_deleted = false;
   owner.enter_message_deleted = true;
-  if(IsAlive(owner)) {
+  if(IsAlive(owner))
     owner setLowerMessage("pickup_remote_turret", level.turretSettings[self.turretType].hintPickUp, undefined, undefined, undefined, undefined, undefined, undefined, true);
-  }
   owner thread watchOwnerMessageOnDeath(self);
 
   if(level.teamBased) {
@@ -446,9 +438,8 @@ startUsingRemoteTurret() {
   owner freezeControlsWrapper(true);
   result = owner maps\mp\killstreaks\_killstreaks::initRideKillstreak();
   if(result != "success") {
-    if(result != "disconnect") {
+    if(result != "disconnect")
       owner clearUsingRemote();
-    }
 
     return false;
   }
@@ -460,13 +451,11 @@ startUsingRemoteTurret() {
 
   owner thread waitSetThermal(1.0, self);
 
-  if(isDefined(level.HUDItem["thermal_mode"])) {
+  if(isDefined(level.HUDItem["thermal_mode"]))
     level.HUDItem["thermal_mode"] settext("");
-  }
 
-  if(getDvarInt("camera_thirdPerson")) {
+  if(getDvarInt("camera_thirdPerson"))
     owner setThirdPersonDOF(false);
-  }
 
   owner PlayerLinkWeaponViewToDelta(self, "tag_player", 0, 180, 180, 50, 25, false);
   owner PlayerLinkedSetViewZNear(false);
@@ -500,9 +489,8 @@ stopUsingRemoteTurret() {
     owner switchToWeapon(owner getLastWeapon());
     owner clearUsingRemote();
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       owner setThirdPersonDOF(true);
-    }
 
     owner VisionSetThermalForPlayer(game["thermal_vision"], 0);
 
@@ -513,9 +501,8 @@ stopUsingRemoteTurret() {
     owner StopShellShock();
   }
   owner clearLowerMessage("early_exit");
-  if(!isDefined(owner.using_remote_turret_when_died) || !owner.using_remote_turret_when_died) {
+  if(!isDefined(owner.using_remote_turret_when_died) || !owner.using_remote_turret_when_died)
     owner setLowerMessage("enter_remote_turret", level.turretSettings[self.turretType].hintEnter, undefined, undefined, undefined, true, ENTER_MESSAGE_ALPHA, ENTER_MESSAGE_FADE_TIME, true);
-  }
 
   self notify("exit");
 }
@@ -526,26 +513,23 @@ watchOwnerMessageOnDeath(turret) {
 
   self.using_remote_turret_when_died = false;
   while(true) {
-    if(IsAlive(self)) {
+    if(IsAlive(self))
       self waittill("death");
-    }
 
     self clearLowerMessage("enter_remote_turret");
     self clearLowerMessage("pickup_remote_turret");
 
-    if(self.using_remote_turret) {
+    if(self.using_remote_turret)
       self.using_remote_turret_when_died = true;
-    } else {
+    else
       self.using_remote_turret_when_died = false;
-    }
 
     self waittill("spawned_player");
 
-    if(!self.using_remote_turret_when_died) {
+    if(!self.using_remote_turret_when_died)
       self setLowerMessage("enter_remote_turret", level.turretSettings[turret.turretType].hintEnter, undefined, undefined, undefined, true, ENTER_MESSAGE_ALPHA, ENTER_MESSAGE_FADE_TIME, true);
-    } else {
+    else
       turret notify("death");
-    }
   }
 }
 
@@ -767,11 +751,10 @@ turret_blinky_light() {
 turret_setInactive() {
   self SetMode(level.turretSettings[self.turretType].sentryModeOff);
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
-  }
 
   if(!isDefined(self.owner)) {
     return;
@@ -786,16 +769,14 @@ turret_setInactive() {
     owner switchToWeapon(owner getLastWeapon());
     owner clearUsingRemote();
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       owner setThirdPersonDOF(true);
-    }
 
     owner maps\mp\killstreaks\_killstreaks::clearRideIntro();
     owner VisionSetThermalForPlayer(game["thermal_vision"], 0);
 
-    if(isDefined(owner.disabledUsability) && owner.disabledUsability) {
+    if(isDefined(owner.disabledUsability) && owner.disabledUsability)
       owner _enableUsability();
-    }
 
     owner takeKillstreakWeapons(self.turretType);
   }
@@ -825,14 +806,12 @@ turret_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       lifeSpan = max(0, lifeSpan - 1.0);
-    }
   }
 
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner thread leaderDialogOnPlayer("sentry_gone");
-  }
 
   self notify("death");
 }
@@ -858,9 +837,8 @@ turret_handleDeath() {
   self SetSentryOwner(undefined);
   self SetTurretMinimapVisible(false);
 
-  if(isDefined(self.ownerTrigger)) {
+  if(isDefined(self.ownerTrigger))
     self.ownerTrigger delete();
-  }
 
   owner = self.owner;
   if(isDefined(owner)) {
@@ -871,13 +849,11 @@ turret_handleDeath() {
 
     owner restorePerks();
     owner restoreWeapons();
-    if(owner GetCurrentWeapon() == "none") {
+    if(owner GetCurrentWeapon() == "none")
       owner SwitchToWeapon(owner getLastWeapon());
-    }
 
-    if(self.stunned) {
+    if(self.stunned)
       owner StopShellShock();
-    }
   }
 
   self playSound("sentry_explode");
@@ -891,9 +867,8 @@ turret_handleDeath() {
   }
   self notify("deleting");
 
-  if(isDefined(self.target_ent)) {
+  if(isDefined(self.target_ent))
     self.target_ent delete();
-  }
 
   self delete();
 }
@@ -927,13 +902,11 @@ turret_handleDamage() {
     if(!isDefined(self)) {
       return;
     }
-    if(meansOfDeath == "MOD_MELEE") {
+    if(meansOfDeath == "MOD_MELEE")
       self.damageTaken += self.maxHealth;
-    }
 
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
-    }
 
     self.wasDamaged = true;
 
@@ -987,9 +960,8 @@ turret_handleDamage() {
         attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 100, weapon, meansOfDeath);
         attacker notify("destroyed_killstreak");
       }
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self.owner thread leaderDialogOnPlayer(level.turretSettings[self.turretType].voDestroyed, undefined, undefined, self.origin);
-      }
 
       self notify("death");
       return;

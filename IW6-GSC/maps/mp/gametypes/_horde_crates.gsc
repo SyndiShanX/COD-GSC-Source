@@ -52,151 +52,151 @@ createHordeCrates(friendly_crate_model, enemy_crate_model) {
   level.hordeIcon["specialty_sprintreload"] = "icon_perks_on_the_go";
   level.hordeIcon["specialty_triggerhappy"] = "icon_perks_triggerhappy";
 
-  addCrateType("a", "iw6_mts255_mp_barrelrange03_reflexshotgun", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MTS");
-  addCrateType("a", "iw6_fp6_mp_barrelrange03_reflexshotgun", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FP6");
-  addCrateType("a", "iw6_vepr_mp_grip", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_VEPR");
-  addCrateType("a", "iw6_microtar_mp_eotechsmg", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MICRO");
-  addCrateType("a", "iw6_ak12_mp_flashsuppress_grip", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AK");
-  addCrateType("a", "iw6_arx160_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_ARX");
-  addCrateType("a", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_M27");
-  addCrateType("a", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KAC");
-  addCrateType("a", "iw6_usr_mp_usrvzscope_xmags", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_USR");
-  addCrateType("a", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_WEST");
+  addCrateType("a", "iw6_mts255_mp_barrelrange03_reflexshotgun", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MTS");
+  addCrateType("a", "iw6_fp6_mp_barrelrange03_reflexshotgun", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FP6");
+  addCrateType("a", "iw6_vepr_mp_grip", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_VEPR");
+  addCrateType("a", "iw6_microtar_mp_eotechsmg", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MICRO");
+  addCrateType("a", "iw6_ak12_mp_flashsuppress_grip", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AK");
+  addCrateType("a", "iw6_arx160_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_ARX");
+  addCrateType("a", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_M27");
+  addCrateType("a", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KAC");
+  addCrateType("a", "iw6_usr_mp_usrvzscope_xmags", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_USR");
+  addCrateType("a", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_WEST");
 
-  addCrateType("a", "throwingknife_mp", 3, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KNIFE");
-  addCrateType("a", "specialty_lightweight", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_LIGHT");
-  addCrateType("a", "specialty_fastreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FAST");
-  addCrateType("a", "specialty_quickdraw", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_QIUCK");
-  addCrateType("a", "specialty_marathon", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MARA");
-  addCrateType("a", "specialty_quickswap", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_SWAP");
-  addCrateType("a", "specialty_bulletaccuracy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AIM");
-  addCrateType("a", "specialty_fastsprintrecovery", 7, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_READY");
-  addCrateType("a", "_specialty_blastshield", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_BLAST");
-  addCrateType("a", "specialty_stalker", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_STALK");
-  addCrateType("a", "specialty_sharp_focus", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FOCUS");
-  addCrateType("a", "specialty_regenfaster", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_HEALTH");
-  addCrateType("a", "specialty_sprintreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_GO");
-  addCrateType("a", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_TRIGGER");
-  addCrateType("a", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, &"HORDE_AMMO");
+  addCrateType("a", "throwingknife_mp", 3, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KNIFE");
+  addCrateType("a", "specialty_lightweight", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_LIGHT");
+  addCrateType("a", "specialty_fastreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FAST");
+  addCrateType("a", "specialty_quickdraw", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_QIUCK");
+  addCrateType("a", "specialty_marathon", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MARA");
+  addCrateType("a", "specialty_quickswap", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_SWAP");
+  addCrateType("a", "specialty_bulletaccuracy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AIM");
+  addCrateType("a", "specialty_fastsprintrecovery", 7, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_READY");
+  addCrateType("a", "_specialty_blastshield", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_BLAST");
+  addCrateType("a", "specialty_stalker", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_STALK");
+  addCrateType("a", "specialty_sharp_focus", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FOCUS");
+  addCrateType("a", "specialty_regenfaster", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_HEALTH");
+  addCrateType("a", "specialty_sprintreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_GO");
+  addCrateType("a", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_TRIGGER");
+  addCrateType("a", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, & "HORDE_AMMO");
 
-  addCrateType("b", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MTS");
-  addCrateType("b", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FP6");
-  addCrateType("b", "iw6_vepr_mp_grip", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_VEPR");
-  addCrateType("b", "iw6_microtar_mp_eotechsmg", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MICRO");
-  addCrateType("b", "iw6_ak12_mp_flashsuppress_grip", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AK");
-  addCrateType("b", "iw6_arx160_mp_flashsuppress_hybrid", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_ARX");
-  addCrateType("b", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_M27");
-  addCrateType("b", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KAC");
-  addCrateType("b", "iw6_usr_mp_usrvzscope_xmags", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_USR");
-  addCrateType("b", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_WEST");
+  addCrateType("b", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MTS");
+  addCrateType("b", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FP6");
+  addCrateType("b", "iw6_vepr_mp_grip", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_VEPR");
+  addCrateType("b", "iw6_microtar_mp_eotechsmg", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MICRO");
+  addCrateType("b", "iw6_ak12_mp_flashsuppress_grip", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AK");
+  addCrateType("b", "iw6_arx160_mp_flashsuppress_hybrid", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_ARX");
+  addCrateType("b", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_M27");
+  addCrateType("b", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KAC");
+  addCrateType("b", "iw6_usr_mp_usrvzscope_xmags", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_USR");
+  addCrateType("b", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_WEST");
 
-  addCrateType("b", "throwingknife_mp", 3, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KNIFE");
-  addCrateType("b", "specialty_lightweight", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_LIGHT");
-  addCrateType("b", "specialty_fastreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FAST");
-  addCrateType("b", "specialty_quickdraw", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_QIUCK");
-  addCrateType("b", "specialty_marathon", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MARA");
-  addCrateType("b", "specialty_quickswap", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_SWAP");
-  addCrateType("b", "specialty_bulletaccuracy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AIM");
-  addCrateType("b", "specialty_fastsprintrecovery", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_READY");
-  addCrateType("b", "_specialty_blastshield", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_BLAST");
-  addCrateType("b", "specialty_stalker", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_STALK");
-  addCrateType("b", "specialty_sharp_focus", 7, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FOCUS");
-  addCrateType("b", "specialty_regenfaster", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_HEALTH");
-  addCrateType("b", "specialty_sprintreload", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_GO");
-  addCrateType("b", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_TRIGGER");
-  addCrateType("b", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, &"HORDE_AMMO");
+  addCrateType("b", "throwingknife_mp", 3, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KNIFE");
+  addCrateType("b", "specialty_lightweight", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_LIGHT");
+  addCrateType("b", "specialty_fastreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FAST");
+  addCrateType("b", "specialty_quickdraw", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_QIUCK");
+  addCrateType("b", "specialty_marathon", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MARA");
+  addCrateType("b", "specialty_quickswap", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_SWAP");
+  addCrateType("b", "specialty_bulletaccuracy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AIM");
+  addCrateType("b", "specialty_fastsprintrecovery", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_READY");
+  addCrateType("b", "_specialty_blastshield", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_BLAST");
+  addCrateType("b", "specialty_stalker", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_STALK");
+  addCrateType("b", "specialty_sharp_focus", 7, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FOCUS");
+  addCrateType("b", "specialty_regenfaster", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_HEALTH");
+  addCrateType("b", "specialty_sprintreload", 10, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_GO");
+  addCrateType("b", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_TRIGGER");
+  addCrateType("b", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, & "HORDE_AMMO");
 
-  addCrateType("c", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MTS");
-  addCrateType("c", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FP6");
-  addCrateType("c", "iw6_vepr_mp_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_VEPR");
-  addCrateType("c", "iw6_microtar_mp_eotechsmg", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MICRO");
-  addCrateType("c", "iw6_ak12_mp_flashsuppress_grip", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AK");
-  addCrateType("c", "iw6_arx160_mp_flashsuppress_hybrid", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_ARX");
-  addCrateType("c", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_M27");
-  addCrateType("c", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KAC");
-  addCrateType("c", "iw6_usr_mp_usrvzscope_xmags", 6, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_USR");
-  addCrateType("c", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_WEST");
+  addCrateType("c", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MTS");
+  addCrateType("c", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FP6");
+  addCrateType("c", "iw6_vepr_mp_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_VEPR");
+  addCrateType("c", "iw6_microtar_mp_eotechsmg", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MICRO");
+  addCrateType("c", "iw6_ak12_mp_flashsuppress_grip", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AK");
+  addCrateType("c", "iw6_arx160_mp_flashsuppress_hybrid", 12, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_ARX");
+  addCrateType("c", "iw6_m27_mp_flashsuppress_hybrid", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_M27");
+  addCrateType("c", "iw6_kac_mp_flashsuppress", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KAC");
+  addCrateType("c", "iw6_usr_mp_usrvzscope_xmags", 6, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_USR");
+  addCrateType("c", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_WEST");
 
-  addCrateType("c", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KNIFE");
-  addCrateType("c", "specialty_lightweight", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_LIGHT");
-  addCrateType("c", "specialty_fastreload", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FAST");
-  addCrateType("c", "specialty_quickdraw", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_QIUCK");
-  addCrateType("c", "specialty_marathon", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MARA");
-  addCrateType("c", "specialty_quickswap", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_SWAP");
-  addCrateType("c", "specialty_bulletaccuracy", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AIM");
-  addCrateType("c", "specialty_fastsprintrecovery", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_READY");
-  addCrateType("c", "_specialty_blastshield", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_BLAST");
-  addCrateType("c", "specialty_stalker", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_STALK");
-  addCrateType("c", "specialty_sharp_focus", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FOCUS");
-  addCrateType("c", "specialty_regenfaster", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_HEALTH");
-  addCrateType("c", "specialty_sprintreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_GO");
-  addCrateType("c", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_TRIGGER");
-  addCrateType("c", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, &"HORDE_AMMO");
+  addCrateType("c", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KNIFE");
+  addCrateType("c", "specialty_lightweight", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_LIGHT");
+  addCrateType("c", "specialty_fastreload", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FAST");
+  addCrateType("c", "specialty_quickdraw", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_QIUCK");
+  addCrateType("c", "specialty_marathon", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MARA");
+  addCrateType("c", "specialty_quickswap", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_SWAP");
+  addCrateType("c", "specialty_bulletaccuracy", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AIM");
+  addCrateType("c", "specialty_fastsprintrecovery", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_READY");
+  addCrateType("c", "_specialty_blastshield", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_BLAST");
+  addCrateType("c", "specialty_stalker", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_STALK");
+  addCrateType("c", "specialty_sharp_focus", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FOCUS");
+  addCrateType("c", "specialty_regenfaster", 12, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_HEALTH");
+  addCrateType("c", "specialty_sprintreload", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_GO");
+  addCrateType("c", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_TRIGGER");
+  addCrateType("c", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, & "HORDE_AMMO");
 
-  addCrateType("d", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MTS");
-  addCrateType("d", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FP6");
-  addCrateType("d", "iw6_vepr_mp_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_VEPR");
-  addCrateType("d", "iw6_microtar_mp_eotechsmg", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MICRO");
-  addCrateType("d", "iw6_ak12_mp_flashsuppress_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AK");
-  addCrateType("d", "iw6_arx160_mp_flashsuppress_hybrid", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_ARX");
-  addCrateType("d", "iw6_m27_mp_flashsuppress_hybrid", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_M27");
-  addCrateType("d", "iw6_kac_mp_flashsuppress", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KAC");
-  addCrateType("d", "iw6_usr_mp_usrvzscope_xmags", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_USR");
-  addCrateType("d", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_WEST");
+  addCrateType("d", "iw6_mts255_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MTS");
+  addCrateType("d", "iw6_fp6_mp_barrelrange03_reflexshotgun", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FP6");
+  addCrateType("d", "iw6_vepr_mp_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_VEPR");
+  addCrateType("d", "iw6_microtar_mp_eotechsmg", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MICRO");
+  addCrateType("d", "iw6_ak12_mp_flashsuppress_grip", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AK");
+  addCrateType("d", "iw6_arx160_mp_flashsuppress_hybrid", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_ARX");
+  addCrateType("d", "iw6_m27_mp_flashsuppress_hybrid", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_M27");
+  addCrateType("d", "iw6_kac_mp_flashsuppress", 10, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KAC");
+  addCrateType("d", "iw6_usr_mp_usrvzscope_xmags", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_USR");
+  addCrateType("d", "iw6_magnumhorde_mp_fmj", 0, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_WEST");
 
-  addCrateType("d", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KNIFE");
-  addCrateType("d", "specialty_lightweight", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_LIGHT");
-  addCrateType("d", "specialty_fastreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FAST");
-  addCrateType("d", "specialty_quickdraw", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_QIUCK");
-  addCrateType("d", "specialty_marathon", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MARA");
-  addCrateType("d", "specialty_quickswap", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_SWAP");
-  addCrateType("d", "specialty_bulletaccuracy", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AIM");
-  addCrateType("d", "specialty_fastsprintrecovery", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_READY");
-  addCrateType("d", "_specialty_blastshield", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_BLAST");
-  addCrateType("d", "specialty_stalker", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_STALK");
-  addCrateType("d", "specialty_sharp_focus", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FOCUS");
-  addCrateType("d", "specialty_regenfaster", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_HEALTH");
-  addCrateType("d", "specialty_sprintreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_GO");
-  addCrateType("d", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_TRIGGER");
-  addCrateType("d", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, &"HORDE_AMMO");
+  addCrateType("d", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KNIFE");
+  addCrateType("d", "specialty_lightweight", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_LIGHT");
+  addCrateType("d", "specialty_fastreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FAST");
+  addCrateType("d", "specialty_quickdraw", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_QIUCK");
+  addCrateType("d", "specialty_marathon", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MARA");
+  addCrateType("d", "specialty_quickswap", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_SWAP");
+  addCrateType("d", "specialty_bulletaccuracy", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AIM");
+  addCrateType("d", "specialty_fastsprintrecovery", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_READY");
+  addCrateType("d", "_specialty_blastshield", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_BLAST");
+  addCrateType("d", "specialty_stalker", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_STALK");
+  addCrateType("d", "specialty_sharp_focus", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FOCUS");
+  addCrateType("d", "specialty_regenfaster", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_HEALTH");
+  addCrateType("d", "specialty_sprintreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_GO");
+  addCrateType("d", "specialty_triggerhappy", 0, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_TRIGGER");
+  addCrateType("d", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, & "HORDE_AMMO");
 
-  addCrateType("e", "iw6_mts255_mp_barrelrange03_reflexshotgun", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MTS");
-  addCrateType("e", "iw6_fp6_mp_barrelrange03_reflexshotgun", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FP6");
-  addCrateType("e", "iw6_vepr_mp_grip", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_VEPR");
-  addCrateType("e", "iw6_microtar_mp_eotechsmg", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MICRO");
-  addCrateType("e", "iw6_ak12_mp_flashsuppress_grip", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AK");
-  addCrateType("e", "iw6_arx160_mp_flashsuppress_hybrid", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_ARX");
-  addCrateType("e", "iw6_m27_mp_flashsuppress_hybrid", 9, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_M27");
-  addCrateType("e", "iw6_kac_mp_flashsuppress", 9, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KAC");
-  addCrateType("e", "iw6_usr_mp_usrvzscope_xmags", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_USR");
-  addCrateType("e", "iw6_magnumhorde_mp_fmj", 3, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_WEST");
+  addCrateType("e", "iw6_mts255_mp_barrelrange03_reflexshotgun", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MTS");
+  addCrateType("e", "iw6_fp6_mp_barrelrange03_reflexshotgun", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FP6");
+  addCrateType("e", "iw6_vepr_mp_grip", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_VEPR");
+  addCrateType("e", "iw6_microtar_mp_eotechsmg", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MICRO");
+  addCrateType("e", "iw6_ak12_mp_flashsuppress_grip", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AK");
+  addCrateType("e", "iw6_arx160_mp_flashsuppress_hybrid", 4, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_ARX");
+  addCrateType("e", "iw6_m27_mp_flashsuppress_hybrid", 9, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_M27");
+  addCrateType("e", "iw6_kac_mp_flashsuppress", 9, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KAC");
+  addCrateType("e", "iw6_usr_mp_usrvzscope_xmags", 5, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_USR");
+  addCrateType("e", "iw6_magnumhorde_mp_fmj", 3, ::hordeCrateWeaponThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_WEST");
 
-  addCrateType("e", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_KNIFE");
-  addCrateType("e", "specialty_lightweight", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_LIGHT");
-  addCrateType("e", "specialty_fastreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FAST");
-  addCrateType("e", "specialty_quickdraw", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_QIUCK");
-  addCrateType("e", "specialty_marathon", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_MARA");
-  addCrateType("e", "specialty_quickswap", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_SWAP");
-  addCrateType("e", "specialty_bulletaccuracy", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_AIM");
-  addCrateType("e", "specialty_fastsprintrecovery", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_READY");
-  addCrateType("e", "_specialty_blastshield", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_BLAST");
-  addCrateType("e", "specialty_stalker", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_STALK");
-  addCrateType("e", "specialty_sharp_focus", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_FOCUS");
-  addCrateType("e", "specialty_regenfaster", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_HEALTH");
-  addCrateType("e", "specialty_sprintreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_GO");
-  addCrateType("e", "specialty_triggerhappy", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, &"HORDE_DOUBLE_TAP_TRIGGER");
-  addCrateType("e", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, &"HORDE_AMMO");
+  addCrateType("e", "throwingknife_mp", 2, ::hordeCrateLethalThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_KNIFE");
+  addCrateType("e", "specialty_lightweight", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_LIGHT");
+  addCrateType("e", "specialty_fastreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FAST");
+  addCrateType("e", "specialty_quickdraw", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_QIUCK");
+  addCrateType("e", "specialty_marathon", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_MARA");
+  addCrateType("e", "specialty_quickswap", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_SWAP");
+  addCrateType("e", "specialty_bulletaccuracy", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_AIM");
+  addCrateType("e", "specialty_fastsprintrecovery", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_READY");
+  addCrateType("e", "_specialty_blastshield", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_BLAST");
+  addCrateType("e", "specialty_stalker", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_STALK");
+  addCrateType("e", "specialty_sharp_focus", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_FOCUS");
+  addCrateType("e", "specialty_regenfaster", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_HEALTH");
+  addCrateType("e", "specialty_sprintreload", 4, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_GO");
+  addCrateType("e", "specialty_triggerhappy", 3, ::hordeCratePerkThink, friendly_crate_model, enemy_crate_model, & "HORDE_DOUBLE_TAP_TRIGGER");
+  addCrateType("e", "ammo", 0, ::hordeCrateAmmoThink, friendly_crate_model, enemy_crate_model, & "HORDE_AMMO");
 
   setupLootCrates(friendly_crate_model, enemy_crate_model);
 }
 
 setupLootCrates(friendly_crate_model, enemy_crate_model) {
-  addCrateType("loot", "ims", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_IMS_PICKUP");
-  addCrateType("loot", "helicopter", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_HELICOPTER_PICKUP");
-  addCrateType("loot", "drone_hive", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP");
-  addCrateType("loot", "sentry", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_SENTRY_PICKUP");
-  addCrateType("loot", "heli_sniper", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP");
-  addCrateType("loot", "ball_drone_backup", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP");
+  addCrateType("loot", "ims", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_IMS_PICKUP");
+  addCrateType("loot", "helicopter", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_HELICOPTER_PICKUP");
+  addCrateType("loot", "drone_hive", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP");
+  addCrateType("loot", "sentry", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_SENTRY_PICKUP");
+  addCrateType("loot", "heli_sniper", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP");
+  addCrateType("loot", "ball_drone_backup", 15, ::killstreakCrateThinkHorde, friendly_crate_model, enemy_crate_model, & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP");
 }
 
 hordeCrateWeaponThink(dropType) {
@@ -204,9 +204,8 @@ hordeCrateWeaponThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount)) {
+  if(!isDefined(self.doubleTapCount))
     self.doubleTapCount = 0;
-  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -244,21 +243,18 @@ tryGiveHordeWeapon(player, weaponName) {
     removeWeapon = true;
 
     foreach(weaponInList in weaponList) {
-      if(weaponName == weaponInList) {
+      if(weaponName == weaponInList)
         removeWeapon = false;
-      }
     }
 
     if(removeWeapon) {
       replaceWeapon = player GetCurrentPrimaryWeapon();
 
-      if(replaceWeapon == "none") {
+      if(replaceWeapon == "none")
         replaceWeapon = player getLastWeapon();
-      }
 
-      if(!player HasWeapon(replaceWeapon) || (replaceWeapon == level.intelMiniGun)) {
+      if(!player HasWeapon(replaceWeapon) || (replaceWeapon == level.intelMiniGun))
         replaceWeapon = player maps\mp\killstreaks\_killstreaks::getFirstPrimaryWeapon();
-      }
 
       player TakeWeapon(replaceWeapon);
     } else {
@@ -281,9 +277,8 @@ hordeCratePerkThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount)) {
+  if(!isDefined(self.doubleTapCount))
     self.doubleTapCount = 0;
-  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -320,9 +315,8 @@ hordeCrateLethalThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount)) {
+  if(!isDefined(self.doubleTapCount))
     self.doubleTapCount = 0;
-  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -420,9 +414,8 @@ crateAllCaptureThinkHorde(useTime) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(useTime)) {
+  if(!isDefined(useTime))
     useTime = 500;
-  }
 
   while(isDefined(self)) {
     self MakeUsable();
@@ -462,9 +455,8 @@ handleKillStreakLimit(player) {
 
 handleAgentUse(player) {
   if(!IsPlayer(player)) {
-    if(isDefined(player.disablePlayerUseEnt)) {
+    if(isDefined(player.disablePlayerUseEnt))
       player.disablePlayerUseEnt EnablePlayerUse(player);
-    }
 
     player.disablePlayerUseEnt = self;
     self DisablePlayerUse(player);
@@ -513,9 +505,8 @@ doubleTapThink() {
 
   maxDistanceSq = 128 * 128;
 
-  if(self.doubleTapCount > 0) {
+  if(self.doubleTapCount > 0)
     wait(1.0);
-  }
 
   while(true) {
     level waittill("doubleTap", player);
@@ -561,13 +552,11 @@ runLootDrop() {
   crateOffest = RandomInt(level.crateTypes["loot"].size);
   createSpawnHeight = (0, 0, 75);
 
-  if(isDefined(level.spawnMaxCrates)) {
+  if(isDefined(level.spawnMaxCrates))
     dropNum = level.hordeDropLocations.size;
-  }
 
-  if(!level.carePackages.size) {
+  if(!level.carePackages.size)
     sortDropLocations();
-  }
 
   for(i = 0; i < dropNum; i++) {
     dropLocation = level.hordeDropLocations[level.dropLocationIndex];
@@ -612,16 +601,14 @@ lootCrateEffect(crate) {
 }
 
 getFinalDropLocation(groundLocation) {
-  if(!isPlayerNearLocation(groundLocation)) {
+  if(!isPlayerNearLocation(groundLocation))
     return groundLocation;
-  }
 
   pathNodeArray = GetNodesInRadiusSorted(groundLocation, 256, 64, 128, "Path");
 
   foreach(pathNode in pathNodeArray) {
-    if(!isPlayerNearLocation(pathNode.origin)) {
+    if(!isPlayerNearLocation(pathNode.origin))
       return pathNode.origin;
-    }
   }
 
   return undefined;
@@ -714,25 +701,21 @@ getNumPowerWeapons() {
     if(!isOnHumanTeam(player)) {
       continue;
     }
-    if(player HasWeapon(CONST_POWER_GUN)) {
+    if(player HasWeapon(CONST_POWER_GUN))
       numPowerWeapons++;
-    }
 
-    if(player _hasPerk(CONST_POWER_PERK)) {
+    if(player _hasPerk(CONST_POWER_PERK))
       numPowerWeapons++;
-    }
   }
 
   carePackages = getEntArray("care_package", "targetname");
 
   foreach(crate in carePackages) {
-    if(crate.crateType == CONST_POWER_GUN) {
+    if(crate.crateType == CONST_POWER_GUN)
       numPowerWeapons++;
-    }
 
-    if(crate.crateType == CONST_POWER_PERK) {
+    if(crate.crateType == CONST_POWER_PERK)
       numPowerWeapons++;
-    }
   }
 
   return numPowerWeapons;
@@ -743,9 +726,8 @@ isPowerWeapon(crateType) {
 }
 
 canPickCrate(crateType, numPowerWeapons) {
-  if(isPowerWeapon(crateType) && (numPowerWeapons >= CONST_POWER_LIMIT)) {
+  if(isPowerWeapon(crateType) && (numPowerWeapons >= CONST_POWER_LIMIT))
     return false;
-  }
 
   return true;
 }
@@ -754,9 +736,8 @@ setCrateLook(crate, outlineNum, HUDColor) {
   crate.friendlyModel HudOutlineEnable(outlineNum, false);
   crate.outlineColor = outlineNum;
 
-  foreach(icon in crate.entityHeadIcons) {
-    icon.color = HUDColor;
-  }
+  foreach(icon in crate.entityHeadIcons)
+  icon.color = HUDColor;
 }
 
 setCrateLooksBasedOnTap(crate) {

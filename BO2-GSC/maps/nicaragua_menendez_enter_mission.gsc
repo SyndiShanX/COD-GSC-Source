@@ -88,9 +88,8 @@ truck_speed_logic() {
   self setspeed(0);
   self setbrake(1);
 
-  while(!(isDefined(self.b_player_near_courtyard) && self.b_player_near_courtyard)) {
+  while(!(isDefined(self.b_player_near_courtyard) && self.b_player_near_courtyard))
     wait 0.05;
-  }
 
   self setbrake(0);
   self resumespeed(1);
@@ -151,15 +150,13 @@ mem_courtyard_kill_optional_spawns() {
   trigger_wait("sm_mem_courtyard_center_0");
   t_spawn_manager = getent("sm_mem_courtyard_right_0", "targetname");
 
-  if(isDefined(t_spawn_manager)) {
+  if(isDefined(t_spawn_manager))
     t_spawn_manager delete();
-  }
 
   t_spawn_manager = getent("sm_mem_courtyard_left_1", "targetname");
 
-  if(isDefined(t_spawn_manager)) {
+  if(isDefined(t_spawn_manager))
     t_spawn_manager delete();
-  }
 }
 
 event_global_setup() {
@@ -243,26 +240,22 @@ courtyard_pdf_wave_1_fallback() {
       }
     }
   } else if(a_guys.size > 0) {
-    for(i = 0; i < a_guys.size; i++) {
+    for(i = 0; i < a_guys.size; i++)
       a_guys[i] thread _trigger_fallback(e_volume);
-    }
   }
 }
 
 _trigger_fallback(e_volume, b_sprint, n_delay) {
-  if(!isDefined(b_sprint)) {
+  if(!isDefined(b_sprint))
     b_sprint = 1;
-  }
 
-  if(!isDefined(n_delay)) {
+  if(!isDefined(n_delay))
     n_delay = 0;
-  }
 
   self endon("death");
 
-  if(n_delay > 0) {
+  if(n_delay > 0)
     wait(n_delay);
-  }
 
   self notify("goal");
   self cleargoalvolume();
@@ -270,9 +263,8 @@ _trigger_fallback(e_volume, b_sprint, n_delay) {
   n_old_radius = self.goalradius;
   self set_goalradius(64);
 
-  if(isDefined(self.rusher) && self.rusher) {
+  if(isDefined(self.rusher) && self.rusher)
     self maps\_rusher::rusher_go_back_to_normal(undefined, undefined, 1);
-  }
 
   waittillframeend;
 
@@ -306,9 +298,8 @@ turret_waits_for_player_use() {
   while(!b_player_using_turret) {
     self waittill("enter_vehicle", e_user);
 
-    if(isplayer(e_user)) {
+    if(isplayer(e_user))
       b_player_using_turret = 1;
-    }
   }
 }
 
@@ -318,9 +309,8 @@ turret_waits_for_player_exit() {
   while(b_player_using_turret) {
     self waittill("exit_vehicle", e_user);
 
-    if(isplayer(e_user)) {
+    if(isplayer(e_user))
       b_player_using_turret = 0;
-    }
   }
 }
 
@@ -335,14 +325,14 @@ truck_bashes_gate() {
   level.player thread say_dialog("mene_smash_the_gate_0");
   self setbrake(0);
   self resumespeed(1);
-  self playSound("evt_gate_truck");
+  self playsound("evt_gate_truck");
   self waittill("vehicle_hits_gate");
   level notify("fxanim_gate_crash_start");
   exploder(450);
   earthquake(0.45, 1.0, self.origin, 3000);
   bm_clip = get_ent("menendez_courtyard_gate_clip", "targetname", 1);
   bm_clip connectpaths();
-  bm_clip playSound("evt_gate_hit");
+  bm_clip playsound("evt_gate_hit");
   flag_set("courtyard_gate_breached");
   flag_clear("rage_weapon_fire_audio_on");
   level thread _truck_bashes_gate_aftermath(bm_clip);
@@ -360,9 +350,8 @@ _truck_bashes_gate_aftermath(m_gate_clip) {
 truck_continue_rail_after_wave1_cleared() {
   waittill_spawn_manager_complete("courtyard_battle_start");
 
-  if(!self.player_using_turret) {
+  if(!self.player_using_turret)
     level waittill("player_using_truck_turret");
-  }
 
   a_allies = getaiarray("allies");
   ai_driver = getclosest(self gettagorigin("tag_driver"), a_allies);
@@ -374,9 +363,8 @@ _debug_driver_run(vh_truck) {
   self endon("death");
   self endon("goal");
 
-  while(true) {
+  while(true)
     wait 0.05;
-  }
 }
 
 func_spawn_veh_truck_courtyard() {

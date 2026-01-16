@@ -8,9 +8,8 @@
 VFX_BAT_COOLDOWN = 60;
 
 vfxBatCaveWaitInit(triggername, exploderID, audioAnim, pos, emptyRoomCooldown) {
-  if(!isDefined(emptyRoomCooldown)) {
+  if(!isDefined(emptyRoomCooldown))
     emptyRoomCooldown = 0;
-  }
 
   level endon("game_ended");
 

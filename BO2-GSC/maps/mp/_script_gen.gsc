@@ -43,9 +43,8 @@ script_gen_dump() {
       } else
         println(i + ". ) " + level.script_gen_dump_reasons[i]);
 
-      if(level.script_gen_dump_reasons[i] == "First run") {
+      if(level.script_gen_dump_reasons[i] == "First run")
         firstrun = 1;
-      }
     }
 
     println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
@@ -74,11 +73,10 @@ script_gen_dump() {
   filename = "scriptgen/" + level.script + "_scriptgen.gsc";
   csvfilename = "zone_source/" + level.script + ".csv";
 
-  if(level.bscriptgened) {
+  if(level.bscriptgened)
     file = openfile(filename, "write");
-  } else {
+  else
     file = 0;
-  }
 
   assert(file != -1, "File not writeable( check it and and restart the map ): " + filename);
   script_gen_dumpprintln(file, "// script generated script do not write your own script here it will go away if you do.");
@@ -90,9 +88,8 @@ script_gen_dump() {
   signatures = getarraykeys(level.script_gen_dump);
 
   for(i = 0; i < signatures.size; i++) {
-    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite")) {
+    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
       script_gen_dumpprintln(file, "\\t" + level.script_gen_dump[signatures[i]]);
-    }
   }
 
   for(i = 0; i < signatures.size; i++) {
@@ -108,23 +105,20 @@ script_gen_dump() {
   keys1 = undefined;
   keys2 = undefined;
 
-  if(isDefined(level.sg_precacheanims)) {
+  if(isDefined(level.sg_precacheanims))
     keys1 = getarraykeys(level.sg_precacheanims);
-  }
 
   if(isDefined(keys1)) {
-    for(i = 0; i < keys1.size; i++) {
+    for(i = 0; i < keys1.size; i++)
       script_gen_dumpprintln(file, "\\tanim_precach_" + keys1[i] + "();");
-    }
   }
 
   script_gen_dumpprintln(file, "\\tmaps\\_load::main( 1, " + level.bcsvgened + ", 1 );");
   script_gen_dumpprintln(file, "}");
   script_gen_dumpprintln(file, "");
 
-  if(isDefined(level.sg_precacheanims)) {
+  if(isDefined(level.sg_precacheanims))
     keys1 = getarraykeys(level.sg_precacheanims);
-  }
 
   if(isDefined(keys1)) {
     for(i = 0; i < keys1.size; i++) {
@@ -135,9 +129,8 @@ script_gen_dump() {
       keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
 
       if(isDefined(keys2)) {
-        for(j = 0; j < keys2.size; j++) {
+        for(j = 0; j < keys2.size; j++)
           script_gen_dumpprintln(file, "\\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";");
-        }
       }
 
       script_gen_dumpprintln(file, "}");
@@ -145,30 +138,26 @@ script_gen_dump() {
     }
   }
 
-  if(level.bscriptgened) {
+  if(level.bscriptgened)
     saved = closefile(file);
-  } else {
+  else
     saved = 1;
-  }
 
-  if(level.bcsvgened) {
+  if(level.bcsvgened)
     csvfile = openfile(csvfilename, "write");
-  } else {
+  else
     csvfile = 0;
-  }
 
   assert(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename);
   signatures = getarraykeys(level.script_gen_dump);
 
-  for(i = 0; i < signatures.size; i++) {
+  for(i = 0; i < signatures.size; i++)
     script_gen_csvdumpprintln(csvfile, signatures[i]);
-  }
 
-  if(level.bcsvgened) {
+  if(level.bcsvgened)
     csvfilesaved = closefile(csvfile);
-  } else {
+  else
     csvfilesaved = 1;
-  }
 
   assert(csvfilesaved == 1, "csv not saved( see above message? ): " + csvfilename);
   assert(saved == 1, "map not saved( see above message? ): " + filename);
@@ -189,21 +178,21 @@ script_gen_csvdumpprintln(file, signature) {
   path = "";
   extension = "";
 
-  if(issubstr(signature, "ignore")) {
+  if(issubstr(signature, "ignore"))
     prefix = "ignore";
-  } else if(issubstr(signature, "col_map_sp")) {
+  else if(issubstr(signature, "col_map_sp"))
     prefix = "col_map_sp";
-  } else if(issubstr(signature, "gfx_map")) {
+  else if(issubstr(signature, "gfx_map"))
     prefix = "gfx_map";
-  } else if(issubstr(signature, "rawfile")) {
+  else if(issubstr(signature, "rawfile"))
     prefix = "rawfile";
-  } else if(issubstr(signature, "sound")) {
+  else if(issubstr(signature, "sound"))
     prefix = "sound";
-  } else if(issubstr(signature, "xmodel")) {
+  else if(issubstr(signature, "xmodel"))
     prefix = "xmodel";
-  } else if(issubstr(signature, "xanim")) {
+  else if(issubstr(signature, "xanim"))
     prefix = "xanim";
-  } else if(issubstr(signature, "item")) {
+  else if(issubstr(signature, "item")) {
     prefix = "item";
     writtenprefix = "weapon";
     path = "sp/";
@@ -244,23 +233,20 @@ script_gen_csvdumpprintln(file, signature) {
   if(!isDefined(prefix)) {
     return;
   }
-  if(!isDefined(writtenprefix)) {
+  if(!isDefined(writtenprefix))
     string = prefix + ", " + getsubstr(signature, prefix.size + 1, signature.size);
-  } else {
+  else
     string = writtenprefix + ", " + path + getsubstr(signature, prefix.size + 1, signature.size) + extension;
-  }
 
-  if(file == -1 || !level.bcsvgened) {
+  if(file == -1 || !level.bcsvgened)
     println(string);
-  } else {
+  else
     fprintln(file, string);
-  }
 }
 
 script_gen_dumpprintln(file, string) {
-  if(file == -1 || !level.bscriptgened) {
+  if(file == -1 || !level.bscriptgened)
     println(string);
-  } else {
+  else
     fprintln(file, string);
-  }
 }

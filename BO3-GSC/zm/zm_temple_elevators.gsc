@@ -25,8 +25,8 @@ function init_elevator() {
 }
 
 function init_temple_geyser() {
-  level.geysers = getEntArray("temple_geyser", "targetname");
-  for(i = 0; i < level.geysers.size; i++) {
+  level.geysers = getentarray("temple_geyser", "targetname");
+  for (i = 0; i < level.geysers.size; i++) {
     level.geysers[i].enabled = 0;
     level.geysers[i].line_emitter = i;
     geysertrigger = level.geysers[i];
@@ -37,30 +37,30 @@ function init_temple_geyser() {
     geysertrigger.push_time = float(parms[3]);
     geysertrigger.lift = getent(geysertrigger.target, "targetname");
     geysertrigger.bottom = struct::get(geysertrigger.target, "targetname");
-    if(!isDefined(geysertrigger.bottom.angles)) {
+    if(!isdefined(geysertrigger.bottom.angles)) {
       geysertrigger.bottom.angles = (0, 0, 0);
     }
     geysertrigger.top = struct::get(geysertrigger.bottom.target, "targetname");
-    if(!isDefined(geysertrigger.top.angles)) {
+    if(!isdefined(geysertrigger.top.angles)) {
       geysertrigger.top.angles = (0, 0, 0);
     }
     geysertrigger.trigger_dust = getent(("trigger_" + geysertrigger.script_noteworthy) + "_dust", "targetname");
-    if(isDefined(geysertrigger.trigger_dust)) {
+    if(isdefined(geysertrigger.trigger_dust)) {
       geysertrigger.trigger_dust thread geyser_trigger_dust_think();
     }
-    if(isDefined(geysertrigger.script_noteworthy)) {
+    if(isdefined(geysertrigger.script_noteworthy)) {
       level flag::init(geysertrigger.script_noteworthy + "_active");
       blocker = getent(geysertrigger.script_noteworthy + "_blocker", "targetname");
-      if(isDefined(blocker)) {
+      if(isdefined(blocker)) {
         geysertrigger thread geyser_blocker_think(blocker);
       }
       geysertrigger.jump_down_start = getnode(geysertrigger.script_noteworthy + "_jump_down", "targetname");
-      if(isDefined(geysertrigger.jump_down_start)) {
+      if(isdefined(geysertrigger.jump_down_start)) {
         setenablenode(geysertrigger.jump_down_start, 0);
         geysertrigger.jump_down_end = getnode(geysertrigger.jump_down_start.target, "targetname");
       }
       geysertrigger.var_5a14c16 = getnode(geysertrigger.script_noteworthy + "_jump_up", "targetname");
-      if(isDefined(geysertrigger.var_5a14c16)) {
+      if(isdefined(geysertrigger.var_5a14c16)) {
         setenablenode(geysertrigger.var_5a14c16, 0);
       }
     }
@@ -70,15 +70,15 @@ function init_temple_geyser() {
 function alternate_geysers() {
   currentgeyser = undefined;
   level waittill("geyser_enabled");
-  while(true) {
+  while (true) {
     geysers = [];
-    for(i = 0; i < level.geysers.size; i++) {
+    for (i = 0; i < level.geysers.size; i++) {
       g = level.geysers[i];
-      if(!isDefined(currentgeyser) || g != currentgeyser && g.enabled) {
+      if(!isdefined(currentgeyser) || g != currentgeyser && g.enabled) {
         geysers[geysers.size] = g;
       }
     }
-    if(isDefined(currentgeyser)) {
+    if(isdefined(currentgeyser)) {
       currentgeyser notify("geyser_end");
       currentgeyser = undefined;
     }
@@ -93,11 +93,11 @@ function alternate_geysers() {
 function geyser_start() {
   self.geyser_active = 0;
   var_f3e27be7 = getnode(self.script_noteworthy + "_jump_up", "targetname");
-  if(isDefined(var_f3e27be7)) {
+  if(isdefined(var_f3e27be7)) {
     setenablenode(var_f3e27be7, 1);
   }
   var_2ba76614 = getnode(self.script_noteworthy + "_jump_down", "targetname");
-  if(isDefined(var_2ba76614)) {
+  if(isdefined(var_2ba76614)) {
     setenablenode(var_2ba76614, 1);
   }
   self thread geyser_watch_for_player();
@@ -105,7 +105,7 @@ function geyser_start() {
 
 function geyser_watch_for_zombies() {
   self endon("geyser_end");
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
     if(!self.geyser_active) {
       continue;
@@ -120,7 +120,7 @@ function geyser_watch_for_player() {
   self endon("geyser_end");
   level endon("intermission");
   level endon("fake_death");
-  while(true) {
+  while (true) {
     self waittill("trigger", who);
     if(!isplayer(who)) {
       continue;
@@ -137,12 +137,12 @@ function geyser_watch_for_player() {
       who thread player_geyser_move(self);
       continue;
     }
-    self playSound("evt_geyser_buildup");
+    self playsound("evt_geyser_buildup");
     starttime = gettime();
     players = getplayers();
-    while(true) {
+    while (true) {
       playerstouching = [];
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i] istouching(self)) {
           playerstouching[playerstouching.size] = players[i];
         }
@@ -167,25 +167,25 @@ function geyser_activate(playerstouching) {
 
 function geyser_erupt(playerstouching) {
   self.geyser_active = 1;
-  if(isDefined(self.trigger_dust)) {
+  if(isdefined(self.trigger_dust)) {
     self.trigger_dust thread geyser_trigger_dust_activate();
   }
   self thread geyser_fx();
-  if(isDefined(self.line_emitter)) {
+  if(isdefined(self.line_emitter)) {
     util::clientnotify("ge" + self.line_emitter);
   }
-  for(i = 0; i < playerstouching.size; i++) {
+  for (i = 0; i < playerstouching.size; i++) {
     playerstouching[i] thread player_geyser_move(self);
     playerstouching[i] thread zm_audio::create_and_play_dialog("general", "geyser");
   }
-  if(isDefined(self.jump_down_start) && isDefined(self.jump_down_end)) {
+  if(isdefined(self.jump_down_start) && isdefined(self.jump_down_end)) {
     unlinknodes(self.jump_down_start, self.jump_down_end);
   }
   level flag::set(self.script_noteworthy + "_active");
   wait(10);
   self notify("stop_geyser_fx");
   level flag::clear(self.script_noteworthy + "_active");
-  if(isDefined(self.jump_down_start) && isDefined(self.jump_down_end)) {
+  if(isdefined(self.jump_down_start) && isdefined(self.jump_down_end)) {
     linknodes(self.jump_down_start, self.jump_down_end);
   }
   self.geyser_active = 0;
@@ -195,7 +195,7 @@ function player_geyser_move(geyser) {
   self endon("death");
   self endon("disconnect");
   self endon("spawned_spectator");
-  if(isDefined(self.riding_geyser) && self.riding_geyser || (isDefined(self.intermission) && self.intermission)) {
+  if(isdefined(self.riding_geyser) && self.riding_geyser || (isdefined(self.intermission) && self.intermission)) {
     return;
   }
   self.riding_geyser = 1;
@@ -225,7 +225,7 @@ function player_geyser_move(geyser) {
   mover movegravity((x, y, z), time);
   self player_geyser_move_wait(time);
   vel = self getvelocity();
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set(self.geyser_anim, 0);
     util::wait_network_frame();
     self show();
@@ -257,14 +257,14 @@ function geyser_erupt_old(playerstouching) {
   wait(0.1);
   start_origin = self.lift.origin;
   start_angles = self.lift.angles;
-  for(i = 0; i < playerstouching.size; i++) {
+  for (i = 0; i < playerstouching.size; i++) {
     playerstouching[i] setplayerangles(self.bottom.angles);
   }
   self.lift movez(movedist, moveuptime, 0.1, 0.3);
   wait(moveuptime);
   bouncetime = 0.3;
   bouncedist = 20;
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     self.lift movez(bouncedist, bouncetime, bouncetime / 2, bouncetime / 2);
     wait(bouncetime);
     self.lift movez(-1 * bouncedist, bouncetime, bouncetime / 2, bouncetime / 2);
@@ -293,7 +293,7 @@ function geyser_fx() {
 
 function geyser_earthquake() {
   self endon("stop_geyser_fx");
-  while(true) {
+  while (true) {
     earthquake(0.2, 0.1, self.origin, 100);
     wait(0.1);
   }
@@ -332,15 +332,15 @@ function geyser_blocker_think(blocker) {
 
 function geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
   sound_struct = struct::get(struct_name, "targetname");
-  if(isDefined(sound_struct)) {
+  if(isdefined(sound_struct)) {
     level thread sound::play_in_space(sfx_start, sound_struct.origin);
-    if(isDefined(sfx_loop_delay) && sfx_loop_delay > 0) {
+    if(isdefined(sfx_loop_delay) && sfx_loop_delay > 0) {
       wait(sfx_loop_delay);
     }
     ambient_ent = spawn("script_origin", (0, 0, 1));
-    if(isDefined(ambient_ent)) {
+    if(isdefined(ambient_ent)) {
       ambient_ent.origin = sound_struct.origin;
-      ambient_ent playLoopSound(sfx_loop);
+      ambient_ent playloopsound(sfx_loop);
     }
   }
 }
@@ -349,7 +349,7 @@ function geyser_blocker_remove() {
   clip = getent(self.target, "targetname");
   clip notsolid();
   clip connectpaths();
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.origin = self.origin + vectorscale((0, 0, 1), 500);
   struct.angles = self.angles + vectorscale((0, 1, 0), 180);
   self.script_noteworthy = "jiggle";
@@ -365,11 +365,11 @@ function geyser_trigger_dust_activate() {
 }
 
 function geyser_trigger_dust_think() {
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
-    if(isDefined(player) && isDefined(player.geyser_dust_time) && player.geyser_dust_time > gettime()) {
-      playFX(level._effect["player_land_dust"], player.origin);
-      player playSound("fly_bodyfall_large_dirt");
+    if(isdefined(player) && isdefined(player.geyser_dust_time) && player.geyser_dust_time > gettime()) {
+      playfx(level._effect["player_land_dust"], player.origin);
+      player playsound("fly_bodyfall_large_dirt");
       player.geyser_dust_time = 0;
     }
   }

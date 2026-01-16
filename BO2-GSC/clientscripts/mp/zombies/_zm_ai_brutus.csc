@@ -18,7 +18,7 @@ brutus_helmet_launch_cb(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
   if(newval) {
     self.helmet_launched = 1;
-    createdynentandlaunch(localclientnum, "c_zom_cellbreaker_helmet", self.origin + vectorscale((0, 0, 1), 85.0), self.angles, self.origin + vectorscale((0, 0, 1), 85.0), anglesToForward(self.angles));
+    createdynentandlaunch(localclientnum, "c_zom_cellbreaker_helmet", self.origin + vectorscale((0, 0, 1), 85.0), self.angles, self.origin + vectorscale((0, 0, 1), 85.0), anglestoforward(self.angles));
   }
 }
 
@@ -49,9 +49,8 @@ brutusfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
       players[i] earthquake(0.5, 0.1, self.origin, 1500);
       playerlocalclientnum = players[i] getlocalclientnumber();
 
-      if(isDefined(playerlocalclientnum)) {
+      if(isDefined(playerlocalclientnum))
         playrumbleonposition(playerlocalclientnum, "brutus_footsteps", self.origin);
-      }
     }
   }
 
@@ -59,9 +58,8 @@ brutusfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
 }
 
 registerbrutusfootstepcb(aitype, func) {
-  if(!isDefined(level._footstepcbfuncs)) {
+  if(!isDefined(level._footstepcbfuncs))
     level._footstepcbfuncs = [];
-  }
 
   if(isDefined(level._footstepcbfuncs[aitype])) {
     println("Attempting to register footstep callback function for ai type " + aitype + " multiple times.");

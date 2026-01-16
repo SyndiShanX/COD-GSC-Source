@@ -57,14 +57,14 @@ function main_end() {
   zm::spawn_kill_brush((1200, 928, 64), 92, 43);
   level thread function_965d5385();
   level thread function_78328cd0();
-  level.no_target_override = &function_c428951;
-  level.player_score_override = &function_d6da0785;
-  level.player_intersection_tracker_override = &function_401305fb;
+  level.no_target_override = & function_c428951;
+  level.player_score_override = & function_d6da0785;
+  level.player_intersection_tracker_override = & function_401305fb;
 }
 
 function function_965d5385() {
   a_s_spawn_pos = struct::get_array("zone_tram_to_gatehouse_spawners", "targetname");
-  for(i = 0; i < a_s_spawn_pos.size; i++) {
+  for (i = 0; i < a_s_spawn_pos.size; i++) {
     if(a_s_spawn_pos[i].origin == (1550.5, 1291.7, 243.239)) {
       a_s_spawn_pos[i].angles = vectorscale((0, 1, 0), 180);
     }
@@ -116,10 +116,10 @@ function function_f9f5dbb3(v_origin) {
   var_640a9eac = spawn("trigger_box", v_origin, 9, 100, 128, 128);
   var_640a9eac.angles = vectorscale((0, 1, 0), 75.7984);
   var_640a9eac setteamfortrigger(level.zombie_team);
-  while(true) {
+  while (true) {
     var_640a9eac waittill("trigger", e_who);
     e_who.no_powerups = 1;
-    while(isalive(e_who) && e_who istouching(var_640a9eac)) {
+    while (isalive(e_who) && e_who istouching(var_640a9eac)) {
       wait(1);
     }
     if(isalive(e_who) && !level flag::get("rocket_firing")) {
@@ -129,7 +129,7 @@ function function_f9f5dbb3(v_origin) {
 }
 
 function function_c428951(ai_zombie) {
-  if(isDefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
+  if(isdefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
     return;
   }
   var_b52b26b9 = ai_zombie get_escape_position();
@@ -138,15 +138,15 @@ function function_c428951(ai_zombie) {
 
 function private get_escape_position() {
   str_zone = zm_zonemgr::get_zone_from_position(self.origin + vectorscale((0, 0, 1), 32), 1);
-  if(!isDefined(str_zone)) {
+  if(!isdefined(str_zone)) {
     str_zone = self.zone_name;
   }
-  if(isDefined(str_zone)) {
+  if(isdefined(str_zone)) {
     a_zones = castle_cleanup::get_adjacencies_to_zone(str_zone);
     a_wait_locations = get_wait_locations_in_zones(a_zones);
     arraysortclosest(a_wait_locations, self.origin);
     a_wait_locations = array::reverse(a_wait_locations);
-    for(i = 0; i < a_wait_locations.size; i++) {
+    for (i = 0; i < a_wait_locations.size; i++) {
       if(a_wait_locations[i] function_eadbcbdb()) {
         return a_wait_locations[i].origin;
       }
@@ -164,7 +164,7 @@ function private get_wait_locations_in_zones(a_zones) {
 }
 
 function private function_eadbcbdb() {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return false;
   }
   if(!ispointonnavmesh(self.origin) || !zm_utility::check_point_in_playable_area(self.origin)) {
@@ -189,7 +189,7 @@ function private function_dc683d01(var_b52b26b9) {
 
 function private check_player_available() {
   self endon("death");
-  while(isDefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
+  while (isdefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
     wait(randomfloatrange(0.2, 0.5));
     if(self can_zombie_see_any_player()) {
       self.b_zombie_path_bad = undefined;
@@ -200,7 +200,7 @@ function private check_player_available() {
 }
 
 function private can_zombie_see_any_player() {
-  for(i = 0; i < level.activeplayers.size; i++) {
+  for (i = 0; i < level.activeplayers.size; i++) {
     if(zombie_utility::is_player_valid(level.activeplayers[i])) {
       if(self zm_castle_zombie::function_7b63bf24(level.activeplayers[i])) {
         return true;
@@ -212,7 +212,7 @@ function private can_zombie_see_any_player() {
 }
 
 function function_d6da0785(var_2f7fd5db, n_points) {
-  if(!isDefined(n_points)) {
+  if(!isdefined(n_points)) {
     return 0;
   }
   if(var_2f7fd5db === getweapon("hero_gravityspikes_melee") && n_points > 20) {
@@ -222,7 +222,7 @@ function function_d6da0785(var_2f7fd5db, n_points) {
 }
 
 function function_401305fb(var_3c6a24bf) {
-  if(isDefined(self.is_flung) && self.is_flung || (isDefined(var_3c6a24bf.is_flung) && var_3c6a24bf.is_flung)) {
+  if(isdefined(self.is_flung) && self.is_flung || (isdefined(var_3c6a24bf.is_flung) && var_3c6a24bf.is_flung)) {
     return true;
   }
   return false;

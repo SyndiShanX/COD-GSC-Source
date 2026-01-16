@@ -13,9 +13,8 @@ registerWeaponInfo(name, string, type, clip) {
 }
 
 isWeaponRegistered(name) {
-  if(!isDefined(level.weaponInfo[name])) {
+  if(!isDefined(level.weaponInfo[name]))
     return false;
-  }
   return true;
 }
 
@@ -63,39 +62,38 @@ init() {
   level.bulletAlphas[level.bulletAlphas.size] = 0.509;
   level.bulletAlphas[level.bulletAlphas.size] = 0.498;
   level.weaponInfo = [];
-  registerWeaponInfo("ak47", &"WEAPON_AK47_FULLAUTO", "rifle", 30);
-  registerWeaponInfo("ak47_semi", &"WEAPON_AK47_SEMIAUTO", "rifle", 30);
-  registerWeaponInfo("ak47_grenadier", &"WEAPON_AK47", "rifle", 30);
-  registerWeaponInfo("ak74u", &"WEAPON_AK74U_FULLAUTO", "rifle", 30);
-  registerWeaponInfo("ak74u_semi", &"WEAPON_AK74U_SEMIAUTO", "rifle", 30);
-  registerWeaponInfo("beretta", &"WEAPON_BERETTA", "pistol", 15);
-  registerWeaponInfo("g36c", &"WEAPON_G36C", "rifle", 30);
-  registerWeaponInfo("m14_scoped", &"WEAPON_M14", "sniper", 10);
-  registerWeaponInfo("m16_basic", &"WEAPON_M16A4_FULLAUTO", "rifle", 30);
-  registerWeaponInfo("m16_basic_semi", &"WEAPON_M16A4_SEMIAUTO", "rifle", 30);
-  registerWeaponInfo("m16_grenadier", &"WEAPON_M16", "rifle", 30);
-  registerWeaponInfo("m203", &"WEAPON_M203", "grenade", 1);
-  registerWeaponInfo("rpg", &"WEAPON_RPG", "grenade", 5);
-  registerWeaponInfo("saw", &"WEAPON_SAW", "support", 100);
-  registerWeaponInfo("m4_grunt", &"WEAPON_M4_FULLAUTO", "rifle", 30);
-  registerWeaponInfo("m4_grunt_semi", &"WEAPON_M4_SEMIAUTO", "rifle", 30);
-  registerWeaponInfo("m4_grenadier", &"WEAPON_M4", "rifle", 30);
-  registerWeaponInfo("m40a3", &"WEAPON_M40A3", "sniper", 10);
-  registerWeaponInfo("mp5", &"WEAPON_MP5", "smg", 30);
-  registerWeaponInfo("mp5_silencer", &"WEAPON_MP5SD", "smg", 30);
-  registerWeaponInfo("usp", &"WEAPON_USP", "pistol", 10);
-  registerWeaponInfo("at4", &"WEAPON_AT4", "rocketlauncher", 1);
-  registerWeaponInfo("dragunov", &"WEAPON_DRAGUNOV", "sniper", 10);
-  registerWeaponInfo("g3", &"WEAPON_G3", "rifle", 30);
-  registerWeaponInfo("winchester1200", &"WEAPON_WINCHESTER1200", "shotgun", 4);
-  registerWeaponInfo("uzi", &"WEAPON_UZI", "smg", 32);
+  registerWeaponInfo("ak47", & "WEAPON_AK47_FULLAUTO", "rifle", 30);
+  registerWeaponInfo("ak47_semi", & "WEAPON_AK47_SEMIAUTO", "rifle", 30);
+  registerWeaponInfo("ak47_grenadier", & "WEAPON_AK47", "rifle", 30);
+  registerWeaponInfo("ak74u", & "WEAPON_AK74U_FULLAUTO", "rifle", 30);
+  registerWeaponInfo("ak74u_semi", & "WEAPON_AK74U_SEMIAUTO", "rifle", 30);
+  registerWeaponInfo("beretta", & "WEAPON_BERETTA", "pistol", 15);
+  registerWeaponInfo("g36c", & "WEAPON_G36C", "rifle", 30);
+  registerWeaponInfo("m14_scoped", & "WEAPON_M14", "sniper", 10);
+  registerWeaponInfo("m16_basic", & "WEAPON_M16A4_FULLAUTO", "rifle", 30);
+  registerWeaponInfo("m16_basic_semi", & "WEAPON_M16A4_SEMIAUTO", "rifle", 30);
+  registerWeaponInfo("m16_grenadier", & "WEAPON_M16", "rifle", 30);
+  registerWeaponInfo("m203", & "WEAPON_M203", "grenade", 1);
+  registerWeaponInfo("rpg", & "WEAPON_RPG", "grenade", 5);
+  registerWeaponInfo("saw", & "WEAPON_SAW", "support", 100);
+  registerWeaponInfo("m4_grunt", & "WEAPON_M4_FULLAUTO", "rifle", 30);
+  registerWeaponInfo("m4_grunt_semi", & "WEAPON_M4_SEMIAUTO", "rifle", 30);
+  registerWeaponInfo("m4_grenadier", & "WEAPON_M4", "rifle", 30);
+  registerWeaponInfo("m40a3", & "WEAPON_M40A3", "sniper", 10);
+  registerWeaponInfo("mp5", & "WEAPON_MP5", "smg", 30);
+  registerWeaponInfo("mp5_silencer", & "WEAPON_MP5SD", "smg", 30);
+  registerWeaponInfo("usp", & "WEAPON_USP", "pistol", 10);
+  registerWeaponInfo("at4", & "WEAPON_AT4", "rocketlauncher", 1);
+  registerWeaponInfo("dragunov", & "WEAPON_DRAGUNOV", "sniper", 10);
+  registerWeaponInfo("g3", & "WEAPON_G3", "rifle", 30);
+  registerWeaponInfo("winchester1200", & "WEAPON_WINCHESTER1200", "shotgun", 4);
+  registerWeaponInfo("uzi", & "WEAPON_UZI", "smg", 32);
   self initWeaponHUD();
 }
 
 initWeaponHUD() {
-  if(!isDefined(self.hud_bullets)) {
+  if(!isDefined(self.hud_bullets))
     self.hud_bullets = [];
-  }
   if(!isDefined(self.hud_bullets[0])) {
     self.hud_bullets[0] = createIcon(undefined, 24, 96);
     self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
@@ -131,7 +129,7 @@ updateBulletHudThink() {
   lastAmmoCount = -1;
   lastWeapon = "";
   lastWeaponType = "";
-  while(true) {
+  while (true) {
     weapon = self getCurrentWeapon();
     if(isWeaponRegistered(weapon)) {
       weaponType = self getWeaponInfoType(weapon);
@@ -156,9 +154,8 @@ setHudWeaponType(type) {
   if(!isDefined(self.hud_bullets)) {
     return;
   }
-  for(index = 0; index < self.hud_bullets.size; index++) {
+  for (index = 0; index < self.hud_bullets.size; index++)
     self.hud_bullets[index].alpha = 0;
-  }
   switch (type) {
     case "pistol":
       self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
@@ -193,14 +190,13 @@ setHudWeaponType(type) {
       break;
     case "support":
       xOffset = 0;
-      for(index = 0; index < 5; index++) {
+      for (index = 0; index < 5; index++) {
         self.hud_bullets[index] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6 + xOffset, -70);
         self.hud_bullets[index].alpha = 1;
-        if(index % 2) {
+        if(index % 2)
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
-        } else {
+        else
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
-        }
         xOffset -= 14;
       }
       break;
@@ -252,14 +248,13 @@ updateHudWeaponAmmo(weapon, ammoCount) {
       diff = getWeaponInfoClip(weapon) - ammoCount;
       diff = baseDiff + diff;
       bulletOffset = 20;
-      for(index = 4; index >= 0; index--) {
-        if(diff > bulletOffset) {
+      for (index = 4; index >= 0; index--) {
+        if(diff > bulletOffset)
           self.hud_bullets[index].alpha = 0;
-        } else if((bulletOffset - diff) <= 20) {
+        else if((bulletOffset - diff) <= 20)
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
-        } else {
+        else
           self.hud_bullets[index].alpha = 1;
-        }
         bulletOffset += 20;
       }
       break;

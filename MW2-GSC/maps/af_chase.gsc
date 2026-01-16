@@ -137,6 +137,7 @@ main() {
 
   maps\af_chase_knife_fight::init_ending();
 
+
   init_flags_here();
 
   maps\_load::main();
@@ -152,39 +153,41 @@ main() {
 
   //add_hint_string( "btobackup" , &"SCRIPT_PLATFORM_ZODIAC_STEADY", ::hint_test );
 
+  /#
   SetDevDvarIfUninitialized("scr_zodiac_test", 0);
+  # /
 
-  //	SetExpFog( 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0 );
+    //	SetExpFog( 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0 );
 
-  /* - Some temp stuff for messing with level fog and vision sets.
-  	maps\_utility::set_vision_set( "af_chase_outdoors_2", 0 );
-  	Start Fog - 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0
-  	Caves fog - 1000, 8000, 0.60, 0.50, 0.40, 0.45, 0
-  	resevoir fog 1 -8000, 45000, 0.60, 0.50, 0.40, 0.3, 0
-  	reveoir 2 - 2000, 20000, 0.60, 0.50, 0.40, 0.2, 0
-  	rapids - 1000, 11000, 0.60, 0.50, 0.40, 0.55, 0
-  	gorge - 1500, 15000, 0.60, 0.50, 0.40, 0.45, 0
-  	waterfall - 10000, 50000, 0.60, 0.50, 0.40, 0.75, 0*/
+    /* - Some temp stuff for messing with level fog and vision sets.
+    	maps\_utility::set_vision_set( "af_chase_outdoors_2", 0 );
+    	Start Fog - 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0
+    	Caves fog - 1000, 8000, 0.60, 0.50, 0.40, 0.45, 0
+    	resevoir fog 1 -8000, 45000, 0.60, 0.50, 0.40, 0.3, 0
+    	reveoir 2 - 2000, 20000, 0.60, 0.50, 0.40, 0.2, 0
+    	rapids - 1000, 11000, 0.60, 0.50, 0.40, 0.55, 0
+    	gorge - 1500, 15000, 0.60, 0.50, 0.40, 0.45, 0
+    	waterfall - 10000, 50000, 0.60, 0.50, 0.40, 0.75, 0*/
 
-  script_vehicle_zodiac_players = getEntArray("script_vehicle_zodiac_player", "classname");
+    script_vehicle_zodiac_players = GetEntArray("script_vehicle_zodiac_player", "classname");
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, maps\_zodiac_drive::drive_vehicle);
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, ::setup_boat_for_drive);
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, ::zodiac_physics);
 
-  rpg_bridge_guy = getEntArray("rpg_bridge_guy", "script_noteworthy");
+  rpg_bridge_guy = GetEntArray("rpg_bridge_guy", "script_noteworthy");
   array_thread(rpg_bridge_guy, ::add_spawn_function, ::rpg_bridge_guy);
 
-  actor_enemy_afghan_RPG = getEntArray("actor_enemy_afghan_RPG", "classname");
+  actor_enemy_afghan_RPG = GetEntArray("actor_enemy_afghan_RPG", "classname");
   array_thread(actor_enemy_afghan_RPG, ::add_spawn_function, ::rpg_bridge_guy_target);
   sight_range = 3000 * 3000;
   foreach(object in actor_enemy_afghan_RPG) {
     object.script_sightrange = sight_range;
   }
 
-  //	thread_the_needle = getEntArray( "thread_the_needle", "targetname" );
+  //	thread_the_needle = GetEntArray( "thread_the_needle", "targetname" );
   //	array_thread( thread_the_needle, ::trigger_thread_the_needle );
 
-  rope_splashers = getEntArray("rope_splashers", "script_noteworthy");
+  rope_splashers = GetEntArray("rope_splashers", "script_noteworthy");
   array_thread(rope_splashers, ::add_spawn_function, ::rope_splashers);
 
   GetEnt("enemy_chase_boat", "targetname") add_spawn_function(::enemy_chase_boat);
@@ -203,14 +206,14 @@ main() {
   increase_enemy_boats_mid_lake = GetEnt("increase_enemy_boats_mid_lake", "script_noteworthy");
   increase_enemy_boats_mid_lake thread trigger_set_max_zodiacs(2);
 
-  trigger_multiple_speeds = getEntArray("trigger_multiple_speed", "classname");
+  trigger_multiple_speeds = GetEntArray("trigger_multiple_speed", "classname");
   array_thread(trigger_multiple_speeds, ::trigger_multiple_speed_think);
 
-  script_vehicle_littlebird_armed = getEntArray("script_vehicle_littlebird_armed", "classname");
+  script_vehicle_littlebird_armed = GetEntArray("script_vehicle_littlebird_armed", "classname");
   array_thread(script_vehicle_littlebird_armed, ::add_spawn_function, ::godon);
 
-  script_vehicle_zodiacs = getEntArray("script_vehicle_zodiac", "classname");
-  script_vehicle_zodiac_physics = getEntArray("script_vehicle_zodiac_physics", "classname");
+  script_vehicle_zodiacs = GetEntArray("script_vehicle_zodiac", "classname");
+  script_vehicle_zodiac_physics = GetEntArray("script_vehicle_zodiac_physics", "classname");
   array_thread(script_vehicle_zodiac_physics, ::add_spawn_function, ::zodiac_physics);
 
   all_zodicas = array_combine(script_vehicle_zodiacs, script_vehicle_zodiac_physics);
@@ -220,7 +223,7 @@ main() {
   //	foreach ( zodiac in script_vehicle_zodiac_physics )
   //		zodiac.origin += ( 0, 0, 64 );// bump them up because they were previously not physics and placed below the surface
 
-  script_vehicle_pavelow = getEntArray("script_vehicle_pavelow", "classname");
+  script_vehicle_pavelow = GetEntArray("script_vehicle_pavelow", "classname");
   array_thread(script_vehicle_pavelow, ::add_spawn_function, ::disable_origin_offset);
 
   add_global_spawn_function("axis", ::set_fixed_node_after_seeing_player_spawn_func);
@@ -229,7 +232,7 @@ main() {
 
   thread remove_global_spawn_funcs();
 
-  destructible_fake = getEntArray("destructible_fake", "script_noteworthy");
+  destructible_fake = GetEntArray("destructible_fake", "script_noteworthy");
   array_thread(destructible_fake, ::destructible_fake);
 
   thread afchase_objectives();
@@ -244,10 +247,10 @@ main() {
   heli_attack_player_idle = getstructarray("heli_attack_player_idle", "script_noteworthy");
   array_thread(heli_attack_player_idle, ::heli_attack_player_idle);
 
-  heli_attack_player_idle = getEntArray("heli_attack_player_idle", "script_noteworthy");
+  heli_attack_player_idle = GetEntArray("heli_attack_player_idle", "script_noteworthy");
   array_thread(heli_attack_player_idle, ::heli_attack_player_idle);
 
-  kill_destructibles_and_barrels_in_volume = getEntArray("kill_destructibles_and_barrels_in_volume", "targetname");
+  kill_destructibles_and_barrels_in_volume = GetEntArray("kill_destructibles_and_barrels_in_volume", "targetname");
   array_thread(kill_destructibles_and_barrels_in_volume, ::kill_destructibles_and_barrels_in_volume);
 
   add_extra_autosave_check("boat_check_trailing", ::autosave_boat_check_trailing, "trailing too far behind the enemy boat.");
@@ -258,23 +261,23 @@ main() {
 
   SetSavedDvar("ai_friendlyFireBlockDuration", "0"); // this might bite me later.
 
-  price_position_switch = getEntArray("price_position_switch", "targetname");
+  price_position_switch = GetEntArray("price_position_switch", "targetname");
   array_thread(price_position_switch, ::price_position_switch);
 
-  bobbing_boat = getEntArray("bobbing_boat", "script_noteworthy");
+  bobbing_boat = GetEntArray("bobbing_boat", "script_noteworthy");
   array_thread(bobbing_boat, ::add_spawn_function, ::bobbing_boat_spawn);
 
-  crashable_whizby_boats = getEntArray("crashable_whizby_boats", "script_noteworthy");
+  crashable_whizby_boats = GetEntArray("crashable_whizby_boats", "script_noteworthy");
   array_thread(crashable_whizby_boats, ::add_spawn_function, ::crashable_whizby_boats);
 
   enemy_zodiacs_wipe_out = GetEnt("enemy_zodiacs_wipe_out", "targetname");
   enemy_zodiacs_wipe_out thread trigger_enemy_zodiacs_wipe_out();
 
-  neutral_enemies = getEntArray("neutral_enemies", "targetname");
+  neutral_enemies = GetEntArray("neutral_enemies", "targetname");
   array_thread(neutral_enemies, ::trigger_neutral_enemies);
 
   dialog_cave = GetEnt("dialog_cave", "targetname");
-  //	dialog_cave = spawn( "trigger_radius", (-18968, -18324, 0), 0, 730.399, 1000 );
+  //	dialog_cave = Spawn( "trigger_radius", (-18968, -18324, 0), 0, 730.399, 1000 );
   dialog_cave thread dialog_cave();
 
   thread dialog_boat_battlechatter();
@@ -287,30 +290,30 @@ main() {
 
   thread search_the_scrash_site();
 
-  if(is_default_start() || issubstr(level.start_point, "boat")) {
+  if(is_default_start() || issubstr(level.start_point, "boat"))
     thread maps\af_chase_waterfall::main();
-  }
 
   trigger_out_of_caves = GetEnt("trigger_out_of_caves", "targetname");
-  if(isDefined(trigger_out_of_caves)) {
+  if(IsDefined(trigger_out_of_caves))
     trigger_out_of_caves thread trigger_out_of_caves();
-  }
 
-  open_area = getEntArray("open_area", "targetname");
+  open_area = getentarray("open_area", "targetname");
   array_thread(open_area, ::trigger_open_area);
   battlechatter_off("allies");
   //	thread dump_on_command();
 
-  sentry_technicals = getEntArray("sentry_technical", "script_noteworthy");
+  sentry_technicals = getentarray("sentry_technical", "script_noteworthy");
   array_thread(sentry_technicals, ::add_spawn_function, ::sentry_technical_think);
 
   //	thread dialog_radio();
-  explode_barrels_in_radiuss = getEntArray("explode_barrels_in_radius", "targetname");
+  explode_barrels_in_radiuss = getentarray("explode_barrels_in_radius", "targetname");
   array_thread(explode_barrels_in_radiuss, ::explode_barrels_in_radius_think);
   thread af_chase_music();
+
 }
 
 init_flags_here() {
+
   flag_init("no_more_physics_effects");
   flag_init("player_in_open");
   flag_init("zodiac_catchup");
@@ -325,7 +328,10 @@ init_flags_here() {
   flag_init("rapids_head_bobbing");
   flag_init("heli_firing");
 
+  /#
   flag_init("debug_crumbs");
+  # /
+
 }
 
 empty() {}
@@ -336,12 +342,12 @@ music_start() {
   MusicStop(.4);
   wait 1.5;
 
-  org = spawn("script_origin", (0, 0, 0));
+  org = Spawn("script_origin", (0, 0, 0));
   org endon("death");
   level.music_emitter = org;
 
-  while(1) {
-    org playSound("af_chase_startinboat", "sounddone");
+  while (1) {
+    org playsound("af_chase_startinboat", "sounddone");
     org waittill("sounddone");
   }
 }
@@ -368,6 +374,7 @@ start_default() {
   thread set_breadcrumb_fail_time(10, 30);
 }
 
+
 start_boatdrive_begin() {
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_boatdrive_begin");
   boat_common();
@@ -390,7 +397,7 @@ start_debug_boatdrive() {
   friendly_boat = spawn_vehicle_from_targetname("players_boat");
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
-  array_thread(getEntArray("trigger_multiple", "code_classname"), ::trigger_off);
+  array_thread(GetEntArray("trigger_multiple", "code_classname"), ::trigger_off);
 }
 
 start_boatdrive_lake_mid() {
@@ -419,6 +426,7 @@ start_boatdrive_lake_mid() {
   thread enable_bread_crumb_chase();
 
   thread river_current("river_current_start_boatdrive_lake");
+
 }
 
 start_boatdrive_lake() {
@@ -446,7 +454,10 @@ start_boatdrive_lake() {
   thread enable_bread_crumb_chase();
 
   thread river_current("river_current_start_boatdrive_lake");
+
 }
+
+
 
 start_boatdrive_rapids() {
   //fast forward to new location. speed is approximated based on pretend playthrough.
@@ -482,6 +493,7 @@ start_boatdrive_rapids() {
 
   //catch up the current
   thread river_current("river_current_start_rapids");
+
 }
 
 start_boatdrive_river_below_rapids() {
@@ -517,6 +529,7 @@ start_boatdrive_river_below_rapids() {
 
   //catch up the current
   thread river_current("river_current_start_rapids");
+
 }
 
 start_boatdrive_end() {
@@ -557,6 +570,7 @@ start_boatdrive_end() {
 
   thread enable_bread_crumb_chase();
   thread river_current("river_current_start_boatdrive_end");
+
 }
 
 start_boatdrive_nofail() {
@@ -569,6 +583,7 @@ afchase_objectives() {
   waittillframeend; // let the start points initiate stuff first
 
   switch (level.start_point) {
+
     case "default":
     case "boatdrive_nofail":
     case "boatdrive_begin":
@@ -579,7 +594,7 @@ afchase_objectives() {
     case "boatdrive_end":
     case "boatdrive_end_test":
       // Don't let Shepherd get away.
-      Objective_Add(obj("pursue"), "current", &"AF_CHASE_PURSUE");
+      Objective_Add(obj("pursue"), "current", & "AF_CHASE_PURSUE");
       objective_onentity(obj("pursue"), level.enemy_boat, (0, 0, 160));
 
       flag_wait("player_in_sight_of_boarding");
@@ -615,7 +630,9 @@ afchase_objectives() {
   }
 }
 
+
 dialog_radio() {
+
   level.scr_radio["afchase_shp_stillincaves"] = "afchase_shp_stillincaves";
   level.scr_radio["afchase_shp_observe"] = "afchase_shp_observe";
   level.scr_radio["afchase_shp_uavsupport"] = "afchase_shp_uavsupport";
@@ -628,7 +645,7 @@ dialog_radio() {
 
   level.player radio_dialogue("afchase_shp_observe");
 
-  //"afchase_shp_uavsupport"
+  //"afchase_shp_uavsupport" 
   //"afchase_shp_dangerclose"
   //"afchase_shp_clearedhot"
   //"afchase_shp_takeem"
@@ -640,41 +657,33 @@ dialog_radio() {
   level.player radio_dialogue("afchase_shp_uavsupport");
 }
 
+
 start_point_catchup_thread() {
   waittillframeend; // let the actual start functions run before this one
   start = level.start_point;
-  if(is_default_start()) {
+  if(is_default_start())
     return;
-  }
-  if(start == "boatdrive_nofail") {
+  if(start == "boatdrive_nofail")
     return;
-  }
-  if(start == "boatdrive_begin") {
+  if(start == "boatdrive_begin")
     return;
-  }
-  if(start == "boatdrive_lake") {
+  if(start == "boatdrive_lake")
     return;
-  }
-  if(start == "boatdrive_lake_mid") {
+  if(start == "boatdrive_lake_mid")
     return;
-  }
-  if(start == "boatdrive_rapids") {
+  if(start == "boatdrive_rapids")
     return;
-  }
-  if(start == "boatdrive_below_rapids") {
+  if(start == "boatdrive_below_rapids")
     return;
-  }
 
   remove_global_spawn_function("axis", ::set_fixed_node_after_seeing_player_spawn_func);
   remove_global_spawn_function("axis", ::lower_accuracy_behind_player);
 
   flag_set("stop_boat_dialogue");
-  if(start == "boatdrive_end") {
+  if(start == "boatdrive_end")
     return;
-  }
-  if(start == "boatdrive_end_test") {
+  if(start == "boatdrive_end_test")
     return;
-  }
 
   thread maps\af_chase_knife_fight::startpoint_catchup();
 }

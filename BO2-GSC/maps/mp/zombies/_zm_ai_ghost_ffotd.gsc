@@ -32,9 +32,8 @@ ghost_round_end() {
 is_player_in_ghost_zone(player) {
   result = 0;
 
-  if(!isDefined(level.ghost_zone_overrides)) {
-    level.ghost_zone_overrides = getEntArray("ghost_round_override", "script_noteworthy");
-  }
+  if(!isDefined(level.ghost_zone_overrides))
+    level.ghost_zone_overrides = getentarray("ghost_round_override", "script_noteworthy");
 
   is_player_in_override_trigger = 0;
 
@@ -49,28 +48,27 @@ is_player_in_ghost_zone(player) {
 
   curr_zone = player get_current_zone();
 
-  if(!is_player_in_override_trigger && isDefined(curr_zone) && curr_zone == "zone_mansion") {
+  if(!is_player_in_override_trigger && isDefined(curr_zone) && curr_zone == "zone_mansion")
     result = 1;
-  }
 
   return result;
 }
 
 ghost_bad_path_init() {
   level.bad_zones = [];
-  level.bad_zones[0] = spawnStruct();
+  level.bad_zones[0] = spawnstruct();
   level.bad_zones[0].name = "zone_underground_courthouse";
   level.bad_zones[0].adjacent = [];
   level.bad_zones[0].adjacent[0] = "zone_underground_courthouse2";
   level.bad_zones[0].adjacent[1] = "zone_tunnels_north2";
   level.bad_zones[0].ignore_func = maps\mp\zm_buried::is_courthouse_open;
-  level.bad_zones[1] = spawnStruct();
+  level.bad_zones[1] = spawnstruct();
   level.bad_zones[1].name = "zone_underground_courthouse2";
   level.bad_zones[1].adjacent = [];
   level.bad_zones[1].adjacent[0] = "zone_underground_courthouse";
   level.bad_zones[1].adjacent[1] = "zone_tunnels_north2";
   level.bad_zones[1].ignore_func = maps\mp\zm_buried::is_courthouse_open;
-  level.bad_zones[2] = spawnStruct();
+  level.bad_zones[2] = spawnstruct();
   level.bad_zones[2].name = "zone_tunnels_north2";
   level.bad_zones[2].adjacent = [];
   level.bad_zones[2].adjacent[0] = "zone_underground_courthouse2";
@@ -78,20 +76,20 @@ ghost_bad_path_init() {
   level.bad_zones[2].flag = "tunnels2courthouse";
   level.bad_zones[2].flag_adjacent = "zone_tunnels_north";
   level.bad_zones[2].ignore_func = maps\mp\zm_buried::is_courthouse_open;
-  level.bad_zones[3] = spawnStruct();
+  level.bad_zones[3] = spawnstruct();
   level.bad_zones[3].name = "zone_tunnels_north";
   level.bad_zones[3].adjacent = [];
   level.bad_zones[3].adjacent[0] = "zone_tunnels_center";
   level.bad_zones[3].flag = "tunnels2courthouse";
   level.bad_zones[3].flag_adjacent = "zone_tunnels_north2";
   level.bad_zones[3].ignore_func = maps\mp\zm_buried::is_tunnel_open;
-  level.bad_zones[4] = spawnStruct();
+  level.bad_zones[4] = spawnstruct();
   level.bad_zones[4].name = "zone_tunnels_center";
   level.bad_zones[4].adjacent = [];
   level.bad_zones[4].adjacent[0] = "zone_tunnels_north";
   level.bad_zones[4].adjacent[1] = "zone_tunnels_south";
   level.bad_zones[4].ignore_func = maps\mp\zm_buried::is_tunnel_open;
-  level.bad_zones[5] = spawnStruct();
+  level.bad_zones[5] = spawnstruct();
   level.bad_zones[5].name = "zone_tunnels_south";
   level.bad_zones[5].adjacent = [];
   level.bad_zones[5].adjacent[0] = "zone_tunnels_center";
@@ -132,9 +130,8 @@ ghost_bad_path_failsafe() {
           }
 
           if(isDefined(zone.flag) && flag(zone.flag)) {
-            if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone.flag_adjacent)) {
+            if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone.flag_adjacent))
               ghost_is_adjacent = 1;
-            }
           }
 
           if(!ghost_is_adjacent) {
@@ -147,11 +144,10 @@ ghost_bad_path_failsafe() {
       if(in_bad_zone) {
         nodes = getnodesinradiussorted(player.origin, 540, 180, 60, "Path");
 
-        if(nodes.size > 0) {
+        if(nodes.size > 0)
           node = nodes[randomint(nodes.size)];
-        } else {
+        else
           node = getnearestnode(player.origin);
-        }
 
         if(isDefined(node)) {
           while(true) {
@@ -190,9 +186,8 @@ non_ghost_round_failsafe() {
 
 disable_traversal_clip_around_mansion() {
   if(isDefined(level.ghost_zone_door_clips) && level.ghost_zone_door_clips.size > 0) {
-    foreach(door_clip in level.ghost_zone_door_clips) {
-      door_clip notsolid();
-    }
+    foreach(door_clip in level.ghost_zone_door_clips)
+    door_clip notsolid();
   }
 }
 
@@ -204,17 +199,14 @@ ghost_bad_spawn_zone_init() {
 }
 
 can_use_mansion_back_flying_out_node(zone_name) {
-  if(zone_name == "zone_mansion_backyard") {
+  if(zone_name == "zone_mansion_backyard")
     return true;
-  }
 
-  if(zone_name == "zone_maze") {
+  if(zone_name == "zone_maze")
     return true;
-  }
 
-  if(zone_name == "zone_maze_staircase") {
+  if(zone_name == "zone_maze_staircase")
     return true;
-  }
 
   return false;
 }
@@ -245,11 +237,10 @@ ghost_teleport_to_playable_area() {
             }
 
             if(!is_true(self.is_teleported_in_bad_zone)) {
-              if(can_use_mansion_back_flying_out_node(bad_spawn_zone_name)) {
+              if(can_use_mansion_back_flying_out_node(bad_spawn_zone_name))
                 ghost forceteleport(level.ghost_back_flying_out_path_starts[0].origin, (0, 0, 0));
-              } else {
+              else
                 ghost forceteleport(level.ghost_front_flying_out_path_starts[0].origin, (0, 0, 0));
-              }
 
               self.is_teleported_in_bad_zone = 1;
             }

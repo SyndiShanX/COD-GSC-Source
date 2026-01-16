@@ -5,10 +5,11 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\ai_tank_shared;
+
 #namespace ai_tank;
 
 autoexec __init__system__() {
-  system::register(#"ai_tank", &__init__, undefined, # "killstreaks");
+  system::register(#"ai_tank", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

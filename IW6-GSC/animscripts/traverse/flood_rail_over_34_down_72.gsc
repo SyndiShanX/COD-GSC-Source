@@ -4,11 +4,10 @@
 ***************************************************************/
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  } else {
+  else
     low_wall_human();
-  }
 }
 
 #using_animtree("generic_human");

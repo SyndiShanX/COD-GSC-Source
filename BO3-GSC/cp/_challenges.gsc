@@ -15,27 +15,27 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", &__init__, undefined, undefined);
+  system::register("challenges", & __init__, undefined, undefined);
 }
 
 function __init__() {
   init_shared();
-  callback::on_start_gametype(&start_gametype);
+  callback::on_start_gametype( & start_gametype);
 }
 
 function start_gametype() {
-  if(!isDefined(level.challengescallbacks)) {
+  if(!isdefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
   }
   waittillframeend();
   if(canprocesschallenges()) {
-    registerchallengescallback("actorKilled", &challengeactorkills);
-    registerchallengescallback("actorDamaged", &function_e0360654);
-    registerchallengescallback("VehicleKilled", &function_2acd9b03);
-    registerchallengescallback("VehicleDamage", &challengeactorkills);
+    registerchallengescallback("actorKilled", & challengeactorkills);
+    registerchallengescallback("actorDamaged", & function_e0360654);
+    registerchallengescallback("VehicleKilled", & function_2acd9b03);
+    registerchallengescallback("VehicleDamage", & challengeactorkills);
   }
-  callback::on_connect(&on_player_connect);
-  callback::on_connect(&function_dadf37f9);
+  callback::on_connect( & on_player_connect);
+  callback::on_connect( & function_dadf37f9);
 }
 
 function function_2acd9b03(data, time) {
@@ -47,14 +47,14 @@ function function_7d1957ed(data, time) {
 }
 
 function function_e0360654(data, time) {
-  if(isDefined(data)) {
+  if(isdefined(data)) {
     switch (data.weapon.rootweapon.name) {
       case "emp_grenade": {
         break;
       }
       case "ravage_core_emp_grenade":
       case "ravage_core_emp_grenade_upg": {
-        if(!isDefined(data.victim.var_fcad099b) && data.victim.archetype != "human") {
+        if(!isdefined(data.victim.var_fcad099b) && data.victim.archetype != "human") {
           data.attacker addplayerstat("cybercom_uses_esdamage", 1);
           data.attacker addplayerstat("cybercom_uses_ravagecore", 1);
           data.victim.var_fcad099b = 1;
@@ -66,18 +66,18 @@ function function_e0360654(data, time) {
 }
 
 function challengeactorkills(data, time) {
-  if(isDefined(data)) {
-    if(isDefined(data.victim) && isDefined(data.victim.swarm)) {
+  if(isdefined(data)) {
+    if(isdefined(data.victim) && isdefined(data.victim.swarm)) {
       data.attacker addplayerstat("cybercom_uses_fireflies", 1);
       data.attacker thread function_96ed590f("cybercom_uses_chaos");
     }
-    if(isDefined(data.attacker.hijacked_vehicle_entity)) {
+    if(isdefined(data.attacker.hijacked_vehicle_entity)) {
       data.attacker addplayerstat("cybercom_uses_remotehijack", 1);
     }
     if(data.smeansofdeath == "MOD_GRENADE_SPLASH" || data.smeansofdeath == "MOD_ELECTROCUTED" || data.smeansofdeath == "MOD_GRENADE" || data.smeansofdeath == "MOD_EXPLOSIVE" || data.smeansofdeath == "MOD_BURNED" || data.smeansofdeath == "MOD_PROJECTILE_SPLASH") {
       if(data.weapon.rootweapon.name != "gadget_concussive_wave" && data.weapon.rootweapon.name != "hero_gravityspikes_cybercom_upgraded") {
         data.attacker addplayerstat("cybercom_uses_explosives", 1);
-        if(isDefined(data.attacker.heroability)) {
+        if(isdefined(data.attacker.heroability)) {
           if(data.attacker.heroability.name == "gadget_immolation_upgraded" || data.attacker.heroability.name == "gadget_immolation") {
             data.attacker notify("hash_a15c319", data.victim);
           }
@@ -93,7 +93,7 @@ function challengeactorkills(data, time) {
       }
       case "gadget_immolation":
       case "gadget_immolation_upgraded": {
-        if(isDefined(data.victim) && isDefined(data.attacker) && !isDefined(data.victim.var_e9560d5)) {
+        if(isdefined(data.victim) && isdefined(data.attacker) && !isdefined(data.victim.var_e9560d5)) {
           data.victim.var_e9560d5 = 1;
           data.attacker addplayerstat("cybercom_uses_immolation", 1);
           data.attacker thread function_8ef347b3(data.victim.origin);
@@ -108,7 +108,7 @@ function challengeactorkills(data, time) {
       }
       case "ravage_core_emp_grenade":
       case "ravage_core_emp_grenade_upg": {
-        if(isDefined(data.victim) && !isDefined(data.victim.var_fcad099b)) {
+        if(isdefined(data.victim) && !isdefined(data.victim.var_fcad099b)) {
           data.attacker addplayerstat("cybercom_uses_ravagecore", 1);
           data.victim.var_fcad099b = 1;
         }
@@ -123,7 +123,7 @@ function challengeactorkills(data, time) {
         break;
       }
     }
-    if(isDefined(data.attacker) && isplayer(data.attacker)) {
+    if(isdefined(data.attacker) && isplayer(data.attacker)) {
       data.attacker decorations::function_2bc66a34();
     }
   }
@@ -132,18 +132,18 @@ function challengeactorkills(data, time) {
 function function_8ef347b3(v_location) {
   self endon("death");
   self endon("hash_31573b44");
-  if(!isDefined(v_location)) {
+  if(!isdefined(v_location)) {
     return;
   }
   self util::delay_notify(2, "stop_catching_immolation_secondaries");
   n_start_time = gettime();
-  while((gettime() - n_start_time) < 2) {
+  while ((gettime() - n_start_time) < 2) {
     self waittill("hash_a15c319", e_enemy);
-    if(!isDefined(e_enemy)) {
+    if(!isdefined(e_enemy)) {
       break;
     }
     if((length(v_location - e_enemy.origin)) < 200) {
-      if(isDefined(e_enemy) && isDefined(self) && !isDefined(e_enemy.var_e9560d5)) {
+      if(isdefined(e_enemy) && isdefined(self) && !isdefined(e_enemy.var_e9560d5)) {
         e_enemy.var_e9560d5 = 1;
         self addplayerstat("cybercom_uses_immolation", 1);
       }
@@ -156,7 +156,7 @@ function function_4c17acc8() {
   self endon("hash_534b9c4b");
   self util::delay_notify(2, "stop_catching_rapid_strike_attacks");
   n_start_time = gettime();
-  while((gettime() - n_start_time) < 2) {
+  while ((gettime() - n_start_time) < 2) {
     self waittill("hash_e11b0770");
     self addplayerstat("cybercom_uses_rapidstrike", 1);
   }
@@ -164,7 +164,7 @@ function function_4c17acc8() {
 
 function actorkilled(einflictor, attacker, idamage, smeansofdeath, weapon = level.weaponnone, shitloc) {
   attacker endon("disconnect");
-  data = spawnStruct();
+  data = spawnstruct();
   data.victim = self;
   data.einflictor = einflictor;
   data.attacker = attacker;
@@ -179,7 +179,7 @@ function actorkilled(einflictor, attacker, idamage, smeansofdeath, weapon = leve
 }
 
 function waitandprocessactorkilledcallback(data) {
-  if(isDefined(data.attacker)) {
+  if(isdefined(data.attacker)) {
     data.attacker endon("disconnect");
   }
   wait(0.05);
@@ -190,7 +190,7 @@ function waitandprocessactorkilledcallback(data) {
 
 function actordamaged(einflictor, attacker, idamage, weapon = level.weaponnone, shitloc) {
   attacker endon("disconnect");
-  data = spawnStruct();
+  data = spawnstruct();
   data.victim = self;
   data.einflictor = einflictor;
   data.attacker = attacker;
@@ -204,7 +204,7 @@ function actordamaged(einflictor, attacker, idamage, weapon = level.weaponnone, 
 }
 
 function function_2a703585(data) {
-  if(isDefined(data.attacker)) {
+  if(isdefined(data.attacker)) {
     data.attacker endon("disconnect");
   }
   wait(0.05);
@@ -214,7 +214,7 @@ function function_2a703585(data) {
 
 function vehiclekilled(einflictor, attacker, idamage, smeansofdeath, weapon = level.weaponnone, shitloc) {
   attacker endon("disconnect");
-  data = spawnStruct();
+  data = spawnstruct();
   data.victim = self;
   data.einflictor = einflictor;
   data.attacker = attacker;
@@ -229,7 +229,7 @@ function vehiclekilled(einflictor, attacker, idamage, smeansofdeath, weapon = le
 }
 
 function function_79c2e402(data) {
-  if(isDefined(data.attacker)) {
+  if(isdefined(data.attacker)) {
     data.attacker endon("disconnect");
   }
   wait(0.05);
@@ -239,7 +239,7 @@ function function_79c2e402(data) {
 
 function vehicledamaged(einflictor, attacker, idamage, weapon = level.weaponnone, shitloc) {
   attacker endon("disconnect");
-  data = spawnStruct();
+  data = spawnstruct();
   data.victim = self;
   data.einflictor = einflictor;
   data.attacker = attacker;
@@ -253,7 +253,7 @@ function vehicledamaged(einflictor, attacker, idamage, weapon = level.weaponnone
 }
 
 function function_c0fc6584(data) {
-  if(isDefined(data.attacker)) {
+  if(isdefined(data.attacker)) {
     data.attacker endon("disconnect");
   }
   wait(0.05);
@@ -274,7 +274,7 @@ function function_96ed590f(statname, n_amount = 1) {
 }
 
 function function_dadf37f9() {
-  self.challenge_callback_cp = &function_97666686;
+  self.challenge_callback_cp = & function_97666686;
   self thread function_4f96d6bd();
 }
 
@@ -325,12 +325,12 @@ function function_5bb05b72() {
   if(var_671e7f8c > 0) {
     var_2b0fb6af = tablelookuprowcount("gamedata/stats/cp/statsmilestones3.csv");
     challenge_data = [];
-    for(i = 0; i < (var_2b0fb6af - 1); i++) {
+    for (i = 0; i < (var_2b0fb6af - 1); i++) {
       challenge_data = tablelookuprow("gamedata/stats/cp/statsmilestones3.csv", i);
       var_ec486758 = challenge_data[3];
       if(var_ec486758 == "global") {
         challenge_stat_name = challenge_data[4];
-        if(isDefined(challenge_stat_name) && challenge_stat_name != "") {
+        if(isdefined(challenge_stat_name) && challenge_stat_name != "") {
           var_db5490e3 = self getdstat("PlayerStatsList", challenge_stat_name, "statValue");
           if(challenge_data[10] != "") {
             var_60596ad1 = int(challenge_data[2]);
@@ -361,7 +361,7 @@ function function_5bb05b72() {
 }
 
 function function_4f96d6bd() {
-  while(true) {
+  while (true) {
     if(getdvarint("", 0) == 1) {
       self function_f2d8f1d0();
       setdvar("", 0);

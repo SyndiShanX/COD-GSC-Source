@@ -18,34 +18,30 @@ watchGrenadeUsage() {
   thread watchSatchelDetonation();
   thread watchBouncingBetty();
   thread watchClaymores();
-  for(;;) {
+  for (;;) {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
-    if(weaponName == "satchel_charge") {
+    if(weaponName == "satchel_charge")
       self beginSatchelTracking();
-    }
-    if(weaponName == "satchel_charge_new") {
+    if(weaponName == "satchel_charge_new")
       self beginSatchelTracking();
-    } else if(weaponName == "smoke_grenade_american") {
+    else if(weaponName == "smoke_grenade_american")
       self beginsmokegrenadetracking();
-    } else if(weaponName == "mortar_round") {
+    else if(weaponName == "mortar_round")
       self beginMortarTracking();
-    } else {
+    else
       self beginGrenadeTracking();
-    }
   }
 }
 
 beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades)) {
+  if(!isDefined(level.smokegrenades))
     level.smokegrenades = 0;
-  }
-  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0") {
+  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0")
     grenade delete();
-  } else {
+  else
     grenade thread smoke_grenade_death();
-  }
 }
 
 beginMortarTracking() {
@@ -82,7 +78,7 @@ beginSatchelTracking() {
 }
 
 watchSatchel() {
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", satchel, weapname);
     if(weapname == "satchel_charge" || weapname == "satchel_charge_new") {
       self.satchelarray[self.satchelarray.size] = satchel;
@@ -93,7 +89,7 @@ watchSatchel() {
 }
 
 watchBouncingBetty() {
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", bouncing_betty, weapname);
     if(weapname == "bouncing_betty") {
       self.bouncing_betty_array[self.bouncing_betty_array.size] = bouncing_betty;
@@ -111,7 +107,7 @@ c4death(c4) {
 watchClaymores() {
   self endon("spawned_player");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", claymore, weapname);
     if(weapname == "claymore" || weapname == "claymore_mp") {
       claymore.owner = self;
@@ -124,7 +120,7 @@ watchClaymores() {
 
 waitTillNotMoving() {
   prevorigin = self.origin;
-  while(1) {
+  while (1) {
     wait .1;
     if(self.origin == prevorigin) {
       break;
@@ -139,14 +135,12 @@ claymoreDetonation() {
   detonateRadius = 192;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), 9, detonateRadius, detonateRadius * 2);
   self thread deleteOnDeath(damagearea);
-  if(!isDefined(level.claymores)) {
+  if(!isDefined(level.claymores))
     level.claymores = [];
-  }
   level.claymores = array_add(level.claymores, self);
-  if(level.claymores.size > 15 && getdvar("player_sustainAmmo") != "0") {
+  if(level.claymores.size > 15 && getdvar("player_sustainAmmo") != "0")
     level.claymores[0] delete();
-  }
-  while(1) {
+  while (1) {
     damagearea waittill("trigger", ent);
     if(isDefined(self.owner) && ent == self.owner) {
       continue;
@@ -155,13 +149,12 @@ claymoreDetonation() {
       continue;
     }
     if(ent damageConeTrace(self.origin, self) > 0) {
-      self playSound("claymore_activated_SP");
+      self playsound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self detonate(self.owner);
-      } else {
+      else
         self detonate(undefined);
-      }
       return;
     }
   }
@@ -171,21 +164,19 @@ deleteOnDeath(ent) {
   self waittill("death");
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 watchSatchelDetonation() {
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("detonate");
     weap = self getCurrentWeapon();
     if(weap == "satchel_charge" || weap == "satchel_charge_new") {
-      for(i = 0; i < self.satchelarray.size; i++) {
-        if(isDefined(self.satchelarray[i])) {
+      for (i = 0; i < self.satchelarray.size; i++) {
+        if(isDefined(self.satchelarray[i]))
           self.satchelarray[i] thread waitAndDetonate(0.1);
-        }
       }
       self.satchelarray = [];
     }
@@ -201,22 +192,21 @@ waitAndDetonate(delay) {
 
 satchelDamage() {
   self.health = 100;
-  self setCanDamage(true);
+  self setcandamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker);
     if(!isplayer(attacker)) {
       continue;
     }
     break;
   }
-  if(level.satchelexplodethisframe) {
+  if(level.satchelexplodethisframe)
     wait .1 + randomfloat(.4);
-  } else {
+  else
     wait .05;
-  }
   if(!isDefined(self)) {
     return;
   }
@@ -227,11 +217,11 @@ satchelDamage() {
 
 bouncingBettyDamage() {
   self.health = 100;
-  self setCanDamage(true);
+  self setcandamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker);
     if(!isplayer(attacker)) {
       continue;
@@ -245,7 +235,7 @@ bouncingBettyDamage() {
 }
 
 betty_setup_trigger() {
-  betty_trig = spawn("trigger_radius", self.origin, 9, 80, 300);
+  betty_trig = Spawn("trigger_radius", self.origin, 9, 80, 300);
   self thread maps\_bouncing_betties::betty_think_no_wires(betty_trig);
 }
 
@@ -255,7 +245,7 @@ resetSatchelExplodeThisFrame() {
 }
 
 saydamaged(orig, amount) {
-  for(i = 0; i < 60; i++) {
+  for (i = 0; i < 60; i++) {
     print3d(orig, "damaged! " + amount);
     wait .05;
   }
@@ -278,21 +268,19 @@ clearFXOnDeath(fx) {
 
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS)) {
+  if(!isDefined(doLOS))
     doLOS = false;
-  }
-  if(!isDefined(startRadius)) {
+  if(!isDefined(startRadius))
     startRadius = 0;
-  }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
     }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = true;
       newent.isADestructable = false;
       newent.entity = players[i];
@@ -300,12 +288,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  grenades = getEntArray("grenade", "classname");
-  for(i = 0; i < grenades.size; i++) {
+  grenades = getentarray("grenade", "classname");
+  for (i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, grenades[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = grenades[i];
@@ -313,12 +301,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  destructables = getEntArray("destructable", "targetname");
-  for(i = 0; i < destructables.size; i++) {
+  destructables = getentarray("destructable", "targetname");
+  for (i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, destructables[i]))) {
-      newent = spawnStruct();
+      newent = spawnstruct();
       newent.isPlayer = false;
       newent.isADestructable = true;
       newent.entity = destructables[i];
@@ -332,12 +320,11 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius) {
+  if(lengthsquared(diff) < startRadius * startRadius)
     midpos = to;
-  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
-  trace = bulletTrace(midpos, to, false, ignore);
+  trace = bullettrace(midpos, to, false, ignore);
   if(getdvarint("scr_damage_debug") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
@@ -373,7 +360,7 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
 }
 
 debugline(a, b, color) {
-  for(i = 0; i < 30 * 20; i++) {
+  for (i = 0; i < 30 * 20; i++) {
     line(a, b, color);
     wait .05;
   }

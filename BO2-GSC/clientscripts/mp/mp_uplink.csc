@@ -36,9 +36,8 @@ _glasssmashcbfunc(org, dir) {
   level notify("_glassSmashCBFunc");
   level endon("_glassSmashCBFunc");
 
-  if(!isDefined(level._uplinkglasssmashed)) {
+  if(!isDefined(level._uplinkglasssmashed))
     level._uplinkglasssmashed = [];
-  }
 
   level._uplinkglasssmashed[level._uplinkglasssmashed.size] = org;
 
@@ -64,19 +63,17 @@ uplinkonplayerconnect(localclientnum) {
     }
   }
 
-  windvanearray = getEntArray(localclientnum, "wind_direction", "targetname");
+  windvanearray = getentarray(localclientnum, "wind_direction", "targetname");
 
   if(isDefined(windvanearray) && windvanearray.size > 0) {
-    foreach(windvane in windvanearray) {
-      windvane thread windvanedirection(localclientnum);
-    }
+    foreach(windvane in windvanearray)
+    windvane thread windvanedirection(localclientnum);
   }
 
   lightpost = getent(localclientnum, "sway_lightpost", "targetname");
 
-  if(isDefined(lightpost) && !isdemoplaying()) {
+  if(isDefined(lightpost) && !isdemoplaying())
     lightpost thread lightpostsway();
-  }
 }
 
 initlightningloop(localclientnum) {
@@ -103,7 +100,7 @@ playlightning(localclientnum) {
     for(i = 0; i < n_strikes; i++) {
       n_blend_time = randomfloatrange(0.0, 0.25);
       setdvar("r_exposureTweak", 1);
-      playSound(localclientnum, "amb_thunder_flash", lightning_origin);
+      playsound(localclientnum, "amb_thunder_flash", lightning_origin);
       setdvar("r_exposureValue", randomfloatrange(1.8, 2.3));
       level thread serverlerpdvar(localclientnum, "r_exposureValue", n_level_exposure, n_blend_time);
       setsaveddvar("r_lightTweakSunLight", randomfloatrange(25, 32));
@@ -147,9 +144,8 @@ initrainfx(localclientnum) {
     if(ent.v["exploder"] >= 6001 && ent.v["exploder"] <= 6020) {
       shattered_window_exploders[shattered_window_exploders.size] = ent;
 
-      if(ent.v["exploder"] >= 6003 && ent.v["exploder"] <= 6006) {
+      if(ent.v["exploder"] >= 6003 && ent.v["exploder"] <= 6006)
         directional_exploders[directional_exploders.size] = ent;
-      }
     }
   }
 
@@ -172,9 +168,8 @@ rainexploderswitch(localclientnum, directional_exploders) {
     if(!isDefined(level.createfxexploders)) {
       return;
     }
-    for(i = 0; i < directional_exploders.size; i++) {
+    for(i = 0; i < directional_exploders.size; i++)
       clientscripts\mp\_fx::deactivate_exploder(directional_exploders[i].v["exploder"]);
-    }
 
     if(randomint(2)) {
       level.current_rain_exploder = 1002;
@@ -185,9 +180,8 @@ rainexploderswitch(localclientnum, directional_exploders) {
 
       if(isdemoplaying() == 0) {
         for(i = 0; i < directional_exploders.size; i++) {
-          if(isDefined(directional_exploders[i].glass_broken)) {
+          if(isDefined(directional_exploders[i].glass_broken))
             clientscripts\mp\_fx::activate_exploder(directional_exploders[i].v["exploder"]);
-          }
         }
       }
     }
@@ -223,9 +217,8 @@ windvanejitter(originalangles, yaw) {
 
 activateintactwindowexploders(intact_window_exploders) {
   if(intact_window_exploders.size > 0) {
-    for(i = 0; i < intact_window_exploders.size; i++) {
+    for(i = 0; i < intact_window_exploders.size; i++)
       clientscripts\mp\_fx::activate_exploder(intact_window_exploders[i].v["exploder"]);
-    }
   }
 }
 
@@ -284,11 +277,10 @@ glasssmashdetected(localclientnum, origin, intact_window_exploders, shattered_wi
     }
     distsq = distancesquared(shattered_window_exploder.v["origin"], origin);
 
-    if(issouthernexploder(shattered_window_exploder)) {
+    if(issouthernexploder(shattered_window_exploder))
       currentthreshold = 7225;
-    } else {
+    else
       currentthreshold = 2500;
-    }
 
     if(distsq > currentthreshold) {
       continue;
@@ -306,7 +298,7 @@ glasssmashdetected(localclientnum, origin, intact_window_exploders, shattered_wi
       clientscripts\mp\_fx::activate_exploder(closest_shattered_exploder.v["exploder"]);
       origin = closest_shattered_exploder.v["origin"];
       rainsnd = spawn(localclientnum, origin, "script_origin");
-      rainsnd playLoopSound("amb_rain_thru_window", 0.5);
+      rainsnd playloopsound("amb_rain_thru_window", 0.5);
     }
   }
 }
@@ -315,4 +307,5 @@ issouthernexploder(exploder) {
   return exploder.v["exploder"] >= 6003 && exploder.v["exploder"] <= 6006;
 }
 
-emptyfunction(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
+emptyfunction(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+}

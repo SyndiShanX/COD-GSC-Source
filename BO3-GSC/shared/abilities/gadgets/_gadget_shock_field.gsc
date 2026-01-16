@@ -16,17 +16,17 @@
 #namespace _gadget_shock_field;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_shock_field", &__init__, undefined, undefined);
+  system::register("gadget_shock_field", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "shock_field", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(39, &gadget_shock_field_on, &gadget_shock_field_off);
-  ability_player::register_gadget_possession_callbacks(39, &gadget_shock_field_on_give, &gadget_shock_field_on_take);
-  ability_player::register_gadget_flicker_callbacks(39, &gadget_shock_field_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(39, &gadget_shock_field_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(39, &gadget_shock_field_is_flickering);
-  callback::on_connect(&gadget_shock_field_on_connect);
+  ability_player::register_gadget_activation_callbacks(39, & gadget_shock_field_on, & gadget_shock_field_off);
+  ability_player::register_gadget_possession_callbacks(39, & gadget_shock_field_on_give, & gadget_shock_field_on_take);
+  ability_player::register_gadget_flicker_callbacks(39, & gadget_shock_field_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(39, & gadget_shock_field_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(39, & gadget_shock_field_is_flickering);
+  callback::on_connect( & gadget_shock_field_on_connect);
 }
 
 function gadget_shock_field_is_inuse(slot) {
@@ -62,7 +62,7 @@ function shock_field_think(slot, weapon) {
   self endon("shock_field_off");
   self notify("shock_field_on");
   self endon("shock_field_on");
-  while(true) {
+  while (true) {
     wait(0.25);
     if(!self gadget_shock_field_is_inuse(slot)) {
       return;
@@ -97,13 +97,13 @@ function shock_field_think(slot, weapon) {
 }
 
 function shock_field_zap_sound(weapon) {
-  if(isDefined(self.shock_field_zap_sound) && self.shock_field_zap_sound) {
+  if(isdefined(self.shock_field_zap_sound) && self.shock_field_zap_sound) {
     return;
   }
   self.shock_field_zap_sound = 1;
-  self playSound("wpn_taser_mine_zap");
+  self playsound("wpn_taser_mine_zap");
   wait(1);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.shock_field_zap_sound = 0;
   }
 }
@@ -114,7 +114,7 @@ function flicker_field_fx() {
   self endon("flicker_field_fx");
   self clientfield::set("shock_field", 0);
   wait(randomfloatrange(0.03, 0.23));
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self clientfield::set("shock_field", 1);
   }
 }

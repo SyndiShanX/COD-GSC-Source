@@ -13,7 +13,7 @@ windmill_wheel_setup() {
   self enablequatinterpolationrotation(1);
   var_0 = getent(self.target, "targetname");
 
-  if(!isDefined(var_0)) {}
+  if(!isdefined(var_0)) {}
 
   self linkto(var_0);
   thread windmill_wheel_think();
@@ -29,7 +29,7 @@ windmill_top_setup() {
 windmill_wheel_think() {
   self endon("deleting");
 
-  for(;;) {
+  for (;;) {
     self rotatebylinked((30, 0, 0), self.rotate_speed);
     wait(self.rotate_speed);
   }
@@ -39,7 +39,7 @@ windmill_top_think() {
   self endon("deleting");
   var_0 = 1.5;
 
-  for(;;) {
+  for (;;) {
     var_1 = randomfloatrange(self.min_time, self.max_time);
     var_0 = var_0 * -1;
     self rotateyaw(var_0, var_1, var_1 * 0.5, var_1 * 0.5);

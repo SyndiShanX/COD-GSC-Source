@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\math_shared;
+
 #namespace gfx;
 
 setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, setconstants) {
@@ -39,19 +40,19 @@ setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, 
         delta = endvalue[chanidx] - startvalue[chanidx];
 
         switch (animname) {
-          case # "linear":
+          case #"linear":
             lerpratio = timeratio;
             break;
-          case # "step":
+          case #"step":
             lerpratio = 1;
             break;
-          case # "ease in":
+          case #"ease in":
             lerpratio = timeratio * timeratio;
             break;
-          case # "ease out":
+          case #"ease out":
             lerpratio = timeratio * -1 * (timeratio - 2);
             break;
-          case # "ease inout":
+          case #"ease inout":
             timeratio *= 2;
 
             if(timeratio < 1) {
@@ -62,10 +63,10 @@ setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, 
             }
 
             break;
-          case # "linear repeat":
+          case #"linear repeat":
             lerpratio = timeratio;
             break;
-          case # "linear mirror":
+          case #"linear mirror":
             if(timeratio > 0.5) {
               lerpratio = 1 - timeratio;
             } else {
@@ -73,7 +74,7 @@ setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, 
             }
 
             break;
-          case # "sin":
+          case #"sin":
             lerpratio = 0.5 - 0.5 * cos(360 * timeratio);
             break;
           default:
@@ -110,33 +111,33 @@ getshaderconstantvalue(bundle, constprefix, constname, delay) {
 
   switch (channels) {
     case 1:
-    case # "1":
+    case #"1":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_x");
       break;
     case 2:
-    case # "2":
+    case #"2":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_x");
       vals[1] = getstructfieldorzero(bundle, constprefix + constname + "_y");
       break;
     case 3:
-    case # "3":
+    case #"3":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_x");
       vals[1] = getstructfieldorzero(bundle, constprefix + constname + "_y");
       vals[2] = getstructfieldorzero(bundle, constprefix + constname + "_z");
       break;
     case 4:
-    case # "4":
+    case #"4":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_x");
       vals[1] = getstructfieldorzero(bundle, constprefix + constname + "_y");
       vals[2] = getstructfieldorzero(bundle, constprefix + constname + "_z");
       vals[3] = getstructfieldorzero(bundle, constprefix + constname + "_w");
       break;
-    case # "color":
+    case #"color":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_clr_r");
       vals[1] = getstructfieldorzero(bundle, constprefix + constname + "_clr_g");
       vals[2] = getstructfieldorzero(bundle, constprefix + constname + "_clr_b");
       break;
-    case # "color+alpha":
+    case #"color+alpha":
       vals[0] = getstructfieldorzero(bundle, constprefix + constname + "_clr_r");
       vals[1] = getstructfieldorzero(bundle, constprefix + constname + "_clr_g");
       vals[2] = getstructfieldorzero(bundle, constprefix + constname + "_clr_b");
@@ -159,21 +160,21 @@ getstructfieldorzero(bundle, field) {
 
 getshaderconstantindex(codeconstname) {
   switch (codeconstname) {
-    case # "scriptvector0":
+    case #"scriptvector0":
       return 0;
-    case # "scriptvector1":
+    case #"scriptvector1":
       return 4;
-    case # "scriptvector2":
+    case #"scriptvector2":
       return 8;
-    case # "scriptvector3":
+    case #"scriptvector3":
       return 12;
-    case # "scriptvector4":
+    case #"scriptvector4":
       return 16;
-    case # "scriptvector5":
+    case #"scriptvector5":
       return 20;
-    case # "scriptvector6":
+    case #"scriptvector6":
       return 24;
-    case # "scriptvector7":
+    case #"scriptvector7":
       return 28;
   }
 

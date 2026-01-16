@@ -13,13 +13,14 @@
 Called by code after the level's main script function has run.
 ================*/
 CodeCallback_StartGameType() {
-  if(getDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
-  }
 
   // If the gametype has not beed started, run the startup
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [[level.callbackStartGameType]]();
+    [
+      [level.callbackStartGameType]
+    ]();
 
     level.gametypestarted = true; // so we know that the gametype has been started up
   }
@@ -40,9 +41,8 @@ to the server machine, but qfalse on map changes and tournement
 restarts.
 ================*/
 CodeCallback_PlayerConnect() {
-  if(getDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
-  }
 
   self endon("disconnect");
   [[level.callbackPlayerConnect]]();
@@ -81,11 +81,10 @@ Called when a vehicle has taken damage.
 self is the vehicle that took damage.
 ================*/
 CodeCallback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if(isDefined(self.damageCallback)) {
+  if(isDefined(self.damageCallback))
     self[[self.damageCallback]](inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
-  } else {
+  else
     self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
-  }
 }
 
 /*================
@@ -121,6 +120,7 @@ Called once when a host migration has occured.
 CodeCallback_HostMigration() {
   [[level.callbackHostMigration]]();
 }
+
 
 //=============================================================================
 

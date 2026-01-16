@@ -23,9 +23,8 @@ main() {
     level.tilt_sky hide();
   }
 
-  if(getdvar("createfx") != "") {
+  if(getdvar("createfx") != "")
     thread create_fx_ent_setup();
-  }
 
   maps\_load::main();
   maps\_dynamic_run_speed::main();
@@ -95,7 +94,7 @@ obj_flags() {
 
 obj_flight_deck() {
   var_0 = 1;
-  objective_add(var_0, "active", &"CARRIER_OBJ_FLIGHT_DECK");
+  objective_add(var_0, "active", & "CARRIER_OBJ_FLIGHT_DECK");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_flight_deck_complete");
   objective_state(var_0, "done");
@@ -103,7 +102,7 @@ obj_flight_deck() {
 
 obj_clear_deck() {
   var_0 = 2;
-  objective_add(var_0, "active", &"CARRIER_OBJ_CLEAR_DECK");
+  objective_add(var_0, "active", & "CARRIER_OBJ_CLEAR_DECK");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("obj_deck_combat_complete");
   objective_state(var_0, "done");
@@ -111,10 +110,10 @@ obj_clear_deck() {
 
 obj_regroup_with_hesh() {
   var_0 = 3;
-  objective_add(var_0, "active", &"CARRIER_OBJ_REGROUP_WITH_HESH");
+  objective_add(var_0, "active", & "CARRIER_OBJ_REGROUP_WITH_HESH");
   objective_state(var_0, "current");
   objective_onentity(var_0, level.hesh, (0, 0, 70));
-  objective_setpointertextoverride(var_0, &"CARRIER_OBJ_FOLLOW");
+  objective_setpointertextoverride(var_0, & "CARRIER_OBJ_FOLLOW");
   var_1 = getdvar("objectiveFadeTooFar");
   setsaveddvar("objectiveFadeTooFar", 1);
   wait 3;
@@ -132,13 +131,13 @@ obj_regroup_with_hesh() {
 
 obj_defend_carrier() {
   var_0 = 4;
-  objective_add(var_0, "active", &"CARRIER_OBJ_DEFEND_CARRIER");
+  objective_add(var_0, "active", & "CARRIER_OBJ_DEFEND_CARRIER");
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
   wait 1;
   var_1 = common_scripts\utility::getstruct("defend_dot", "targetname");
   objective_position(var_0, var_1.origin);
-  objective_setpointertextoverride(var_0, &"CARRIER_OBJ_DEFEND");
+  objective_setpointertextoverride(var_0, & "CARRIER_OBJ_DEFEND");
   common_scripts\utility::flag_wait_any("defend_zodiac_arrived_catwalk", "gunship_attack");
   objective_position(var_0, (0, 0, 0));
   common_scripts\utility::flag_wait("obj_defend_carrier_complete");
@@ -147,12 +146,12 @@ obj_defend_carrier() {
 
 obj_sparrow() {
   var_0 = 5;
-  objective_add(var_0, "active", &"CARRIER_OBJ_SPARROW");
+  objective_add(var_0, "active", & "CARRIER_OBJ_SPARROW");
   objective_state(var_0, "current");
 
   if(!common_scripts\utility::flag("gunship_trans_mid")) {
     objective_onentity(var_0, level.hesh, (0, 0, 70));
-    objective_setpointertextoverride(var_0, &"CARRIER_OBJ_FOLLOW");
+    objective_setpointertextoverride(var_0, & "CARRIER_OBJ_FOLLOW");
     var_1 = getdvar("objectiveFadeTooFar");
     setsaveddvar("objectiveFadeTooFar", 1);
     common_scripts\utility::flag_wait("gunship_trans_mid");
@@ -173,7 +172,7 @@ obj_sparrow() {
 
 obj_gunship() {
   var_0 = 6;
-  objective_add(var_0, "active", &"CARRIER_OBJ_GUNSHIP");
+  objective_add(var_0, "active", & "CARRIER_OBJ_GUNSHIP");
   objective_state(var_0, "current");
   var_1 = level.ac_130 common_scripts\utility::spawn_tag_origin();
   var_1 linkto(level.ac_130);
@@ -197,25 +196,23 @@ obj_gunship() {
 obj_exfil() {
   var_0 = 7;
   var_1 = getent("exfil_obj_origin", "targetname");
-  objective_add(var_0, "active", &"CARRIER_OBJ_EXFIL");
+  objective_add(var_0, "active", & "CARRIER_OBJ_EXFIL");
   objective_state(var_0, "current");
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("obj_exfil_complete");
 
-  if(common_scripts\utility::flag("player_at_silenthawk")) {
+  if(common_scripts\utility::flag("player_at_silenthawk"))
     objective_state(var_0, "done");
-  } else {
+  else
     objective_state(var_0, "failed");
-  }
 }
 
 create_fx_ent_setup() {
   wait 2;
   var_0 = getEntArray("deck_intact_odin", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 
   var_4 = getent("island_antenna", "targetname");
   var_4.animname = "tilt_tower";
@@ -225,9 +222,8 @@ create_fx_ent_setup() {
   var_5 delete();
   var_7 = getEntArray("deck_damaged", "targetname");
 
-  foreach(var_2 in var_7) {
-    var_2 movez(-4096, 0.05);
-  }
+  foreach(var_2 in var_7)
+  var_2 movez(-4096, 0.05);
 
   var_10 = getEntArray("deck_clean", "targetname");
   maps\_utility::array_delete(var_10);

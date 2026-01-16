@@ -24,23 +24,23 @@
 #namespace zm_genesis_power;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_power", &__init__, undefined, undefined);
+  system::register("zm_genesis_power", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "power_zombie_soul", 15000, 1, "int", &function_cb47574e, 0, 0);
-  clientfield::register("scriptmover", "power_cables_shader", 15000, 1, "int", &power_cables_shader, 0, 0);
-  for(i = 1; i <= 4; i++) {
+  clientfield::register("scriptmover", "power_zombie_soul", 15000, 1, "int", & function_cb47574e, 0, 0);
+  clientfield::register("scriptmover", "power_cables_shader", 15000, 1, "int", & power_cables_shader, 0, 0);
+  for (i = 1; i <= 4; i++) {
     str_name = "corruption_tower" + i;
-    clientfield::register("world", str_name, 15000, 7, "float", &corruption_tower, 0, 0);
+    clientfield::register("world", str_name, 15000, 7, "float", & corruption_tower, 0, 0);
   }
 }
 
 function function_cb47574e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playFXOnTag(localclientnum, level._effect["corruption_engine_soul"], self, "tag_origin");
-    self playSound(0, "zmb_ee_soul_start");
-    self.sndlooper = self playLoopSound("zmb_ee_soul_lp");
+    playfxontag(localclientnum, level._effect["corruption_engine_soul"], self, "tag_origin");
+    self playsound(0, "zmb_ee_soul_start");
+    self.sndlooper = self playloopsound("zmb_ee_soul_lp");
   }
 }
 
@@ -55,7 +55,7 @@ function power_cables_shader(localclientnum, oldval, newval, bnewent, binitialsn
 function corruption_tower(n_local_client, n_old, n_new, b_new_ent, b_initial_snap, str_field, b_was_time_jump) {
   var_6bf7783a = getent(n_local_client, str_field, "targetname");
   var_6bf7783a util::waittill_dobj(n_local_client);
-  if(!isDefined(var_6bf7783a.a_fx)) {
+  if(!isdefined(var_6bf7783a.a_fx)) {
     var_6bf7783a.a_fx = [];
   }
   if(!var_6bf7783a hasanimtree()) {
@@ -113,18 +113,18 @@ function corruption_tower(n_local_client, n_old, n_new, b_new_ent, b_initial_sna
 
 function tower_fx(n_local_client, var_47d9b5f4, str_tag, str_fx, str_alias) {
   if(var_47d9b5f4 == 2 || var_47d9b5f4 == 3) {
-    if(isDefined(str_alias)) {
-      for(i = 1; i <= 4; i++) {
+    if(isdefined(str_alias)) {
+      for (i = 1; i <= 4; i++) {
         var_3805981f = (("pillar_0" + i) + "_") + str_alias;
-        if(isDefined(self.a_fx[var_3805981f])) {
+        if(isdefined(self.a_fx[var_3805981f])) {
           stopfx(n_local_client, self.a_fx[var_3805981f]);
           self.a_fx[var_3805981f] = undefined;
         }
       }
     } else {
-      for(i = 1; i <= 4; i++) {
+      for (i = 1; i <= 4; i++) {
         var_da7eab4b = (("pillar_0" + i) + "_") + str_tag;
-        if(isDefined(self.a_fx[var_da7eab4b])) {
+        if(isdefined(self.a_fx[var_da7eab4b])) {
           stopfx(n_local_client, self.a_fx[var_da7eab4b]);
           self.a_fx[var_da7eab4b] = undefined;
         }
@@ -132,19 +132,19 @@ function tower_fx(n_local_client, var_47d9b5f4, str_tag, str_fx, str_alias) {
     }
   }
   if(var_47d9b5f4 == 1 || var_47d9b5f4 == 3) {
-    if(isDefined(str_alias)) {
-      for(i = 1; i <= 4; i++) {
+    if(isdefined(str_alias)) {
+      for (i = 1; i <= 4; i++) {
         var_da7eab4b = (("pillar_0" + i) + "_") + str_tag;
         var_3805981f = (("pillar_0" + i) + "_") + str_alias;
-        if(!isDefined(self.a_fx[var_3805981f])) {
-          self.a_fx[var_3805981f] = playFXOnTag(n_local_client, level._effect[str_fx], self, var_da7eab4b);
+        if(!isdefined(self.a_fx[var_3805981f])) {
+          self.a_fx[var_3805981f] = playfxontag(n_local_client, level._effect[str_fx], self, var_da7eab4b);
         }
       }
     } else {
-      for(i = 1; i <= 4; i++) {
+      for (i = 1; i <= 4; i++) {
         var_da7eab4b = (("pillar_0" + i) + "_") + str_tag;
-        if(!isDefined(self.a_fx[var_da7eab4b])) {
-          self.a_fx[var_da7eab4b] = playFXOnTag(n_local_client, level._effect[str_fx], self, var_da7eab4b);
+        if(!isdefined(self.a_fx[var_da7eab4b])) {
+          self.a_fx[var_da7eab4b] = playfxontag(n_local_client, level._effect[str_fx], self, var_da7eab4b);
         }
       }
     }

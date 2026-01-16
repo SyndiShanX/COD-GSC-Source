@@ -8,17 +8,14 @@
 #include maps\mp\zombies\_zm_utility;
 
 init() {
-  if(!(isDefined(level.disable_blackscreen_clientfield) && level.disable_blackscreen_clientfield)) {
+  if(!(isDefined(level.disable_blackscreen_clientfield) && level.disable_blackscreen_clientfield))
     registerclientfield("toplayer", "blackscreen", 1, 1, "int");
-  }
 
-  if(!isDefined(level.uses_gumps)) {
+  if(!isDefined(level.uses_gumps))
     level.uses_gumps = 0;
-  }
 
-  if(isDefined(level.uses_gumps) && level.uses_gumps) {
+  if(isDefined(level.uses_gumps) && level.uses_gumps)
     onplayerconnect_callback(::player_connect_gump);
-  }
 }
 
 player_teleport_blackscreen_on() {
@@ -32,7 +29,8 @@ player_teleport_blackscreen_on() {
   }
 }
 
-player_connect_gump() {}
+player_connect_gump() {
+}
 
 player_watch_spectate_change() {
   if(isDefined(level.disable_blackscreen_clientfield) && level.disable_blackscreen_clientfield) {
@@ -55,19 +53,16 @@ gump_test() {
   pos2 = (1986, -73, 4);
   players = get_players();
 
-  if(isDefined(players[0])) {
+  if(isDefined(players[0]))
     players[0] setorigin(pos1);
-  }
 
   wait 0.05;
 
-  if(isDefined(players[1])) {
+  if(isDefined(players[1]))
     players[1] setorigin(pos2);
-  }
 
   wait 0.05;
 
-  if(isDefined(players[2])) {
+  if(isDefined(players[2]))
     players[2] setorigin(pos3);
-  }
 }

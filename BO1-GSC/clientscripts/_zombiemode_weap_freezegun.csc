@@ -113,7 +113,7 @@ freezegun_end_extremity_damage_fx_for_all_localclients(key) {
 }
 
 freezegun_play_extremity_damage_fx(localClientNum, fx, key, tag) {
-  self.freezegun_extremity_damage_fx_handles[localclientnum][key] = playFXOnTag(localClientNum, fx, self, tag);
+  self.freezegun_extremity_damage_fx_handles[localclientnum][key] = PlayFxOnTag(localClientNum, fx, self, tag);
 }
 
 freezegun_play_all_extremity_damage_fx(localClientNum) {
@@ -160,7 +160,7 @@ freezegun_play_all_torso_damage_fx(localClientNum) {
   if(isDefined(self.freezegun_damage_torso_fx[localclientnum])) {
     return;
   }
-  self.freezegun_damage_torso_fx[localclientnum] = playFXOnTag(localClientNum, level._effect["freezegun_damage_torso"], self, "J_SpineLower");
+  self.freezegun_damage_torso_fx[localclientnum] = PlayFxOnTag(localClientNum, level._effect["freezegun_damage_torso"], self, "J_SpineLower");
 }
 
 freezegun_torso_damage_fx(localClientNum, set, newEnt) {
@@ -177,7 +177,7 @@ freezegun_torso_damage_fx(localClientNum, set, newEnt) {
 freezegun_do_gib_fx(tag, shatter) {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    playFXOnTag(i, freezegun_get_gibtrailfx(shatter), self, tag);
+    PlayFxOnTag(i, freezegun_get_gibtrailfx(shatter), self, tag);
   }
 }
 
@@ -245,8 +245,8 @@ freezegun_gib_override(type, locations) {
     self clientscripts\_zombiemode::deleteZombieEyes(i);
     self freezegun_end_all_extremity_damage_fx(i);
     self freezegun_end_all_torso_damage_fx(i);
-    playFX(i, explosion_effect, self.origin);
-    playSound(0, alias, self.origin);
+    PlayFX(i, explosion_effect, self.origin);
+    PlaySound(0, alias, self.origin);
   }
   for(i = 0; i < locations.size; i++) {
     switch (locations[i]) {

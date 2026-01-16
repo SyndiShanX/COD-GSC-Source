@@ -7,10 +7,11 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_bgb_secret_shopper;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_secret_shopper", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_secret_shopper", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -22,7 +23,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   level thread function_bdbf3da2(self);
 }
 
@@ -31,7 +32,7 @@ disable() {}
 function_bdbf3da2(player) {
   self notify("6daba2448119ac03");
   self endon("6daba2448119ac03");
-  player endon(#"bgb_update", # "disconnect");
+  player endon(#"bgb_update", #"disconnect");
 
   while(true) {
     is_melee = player meleebuttonpressed();

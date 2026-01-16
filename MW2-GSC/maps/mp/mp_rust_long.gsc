@@ -6,6 +6,7 @@
 #include maps\mp\_utility;
 
 main() {
+
   maps\mp\mp_rust_long_precache::main();
   maps\createart\mp_rust_long_art::main();
   maps\createfx\mp_rust_long_fx::main();

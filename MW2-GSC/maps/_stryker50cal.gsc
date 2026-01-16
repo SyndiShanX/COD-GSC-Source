@@ -22,14 +22,15 @@ main(model, type) {
   build_rumble("stryker_rumble", 0.15, 4.5, 900, 1, 1);
 }
 
-init_local() {}
+init_local() {
+
+}
 
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 11; i++)
+    positions[i] = spawnstruct();
 
   positions[0].getout_delete = true;
   return positions;

@@ -20,17 +20,15 @@ bot_killstreak_sentry(killstreak_info, killstreaks_array, can_use, targetType) {
     wait 1;
   }
 
-  if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy))) {
+  if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy)))
     return true;
-  }
 
   targetPoint = self.origin;
   if(targetType != "hide_nonlethal") {
     targetPoint = bot_sentry_choose_target(targetType);
 
-    if(!isDefined(targetPoint)) {
+    if(!isDefined(targetPoint))
       return true;
-    }
   }
 
   self bot_sentry_add_goal(killstreak_info, targetPoint, targetType, killstreaks_array);
@@ -68,9 +66,8 @@ bot_sentry_should_abort(tactical_goal) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy))) {
+  if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy)))
     return true;
-  }
 
   self.sentry_place_delay = GetTime() + 1000;
 
@@ -86,9 +83,8 @@ bot_sentry_cancel_failsafe() {
   level endon("game_ended");
 
   while(1) {
-    if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy))) {
+    if(isDefined(self.enemy) && (self.enemy.health > 0) && (self BotCanSeeEntity(self.enemy)))
       self thread bot_sentry_cancel();
-    }
 
     wait 0.05;
   }
@@ -121,32 +117,27 @@ bot_sentry_path_thread(tactical_goal) {
 
 bot_sentry_choose_target(targetType) {
   defend_center = self defend_valid_center();
-  if(isDefined(defend_center)) {
+  if(isDefined(defend_center))
     return defend_center;
-  }
 
-  if(isDefined(self.node_ambushing_from)) {
+  if(isDefined(self.node_ambushing_from))
     return self.node_ambushing_from.origin;
-  }
 
   nodes = GetNodesInRadius(self.origin, 1000, 0, 512);
   nodes_to_select_from = 5;
   if(targetType != "turret") {
-    if(self BotGetDifficultySetting("strategyLevel") == 1) {
+    if(self BotGetDifficultySetting("strategyLevel") == 1)
       nodes_to_select_from = 10;
-    } else if(self BotGetDifficultySetting("strategyLevel") == 0) {
+    else if(self BotGetDifficultySetting("strategyLevel") == 0)
       nodes_to_select_from = 15;
-    }
   }
 
-  if(targetType == "turret_air") {
+  if(targetType == "turret_air")
     targetNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic", "ignore_no_sky");
-  } else {
+  else
     targetNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic");
-  }
-  if(isDefined(targetNode)) {
+  if(isDefined(targetNode))
     return targetNode.origin;
-  }
 }
 
 bot_sentry_choose_placement(killstreak_info, targetOrigin, targetType, killstreaks_array) {
@@ -155,31 +146,28 @@ bot_sentry_choose_placement(killstreak_info, targetOrigin, targetType, killstrea
   nodes = GetNodesInRadius(targetOrigin, 1000, 0, 512);
   nodes_to_select_from = 5;
   if(targetType != "turret") {
-    if(self BotGetDifficultySetting("strategyLevel") == 1) {
+    if(self BotGetDifficultySetting("strategyLevel") == 1)
       nodes_to_select_from = 10;
-    } else if(self BotGetDifficultySetting("strategyLevel") == 0) {
+    else if(self BotGetDifficultySetting("strategyLevel") == 0)
       nodes_to_select_from = 15;
-    }
   }
 
-  if(targetType == "turret_air") {
+  if(targetType == "turret_air")
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_sentry", targetOrigin, "ignore_no_sky");
-  } else if(targetType == "trap") {
+  else if(targetType == "trap")
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic");
-  } else if(targetType == "hide_nonlethal") {
+  else if(targetType == "hide_nonlethal")
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_hide");
-  } else {
+  else
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_sentry", targetOrigin);
-  }
 
   if(isDefined(placeNode)) {
     placement = spawnStruct();
     placement.node = placeNode;
-    if(targetOrigin != placeNode.origin && targetType != "hide_nonlethal") {
+    if(targetOrigin != placeNode.origin && targetType != "hide_nonlethal")
       placement.yaw = VectorToYaw(targetOrigin - placeNode.origin);
-    } else {
+    else
       placement.yaw = undefined;
-    }
     placement.weapon = killstreak_info.weapon;
     placement.killstreak_info = killstreak_info;
     placement.killstreaks_array = killstreaks_array;
@@ -189,17 +177,14 @@ bot_sentry_choose_placement(killstreak_info, targetOrigin, targetType, killstrea
 }
 
 bot_sentry_carried_obj() {
-  if(isDefined(self.carriedsentry)) {
+  if(isDefined(self.carriedsentry))
     return self.carriedsentry;
-  }
 
-  if(isDefined(self.carriedIMS)) {
+  if(isDefined(self.carriedIMS))
     return self.carriedIMS;
-  }
 
-  if(isDefined(self.carriedItem)) {
+  if(isDefined(self.carriedItem))
     return self.carriedItem;
-  }
 }
 
 bot_sentry_activate(tactical_goal) {
@@ -215,9 +200,8 @@ bot_sentry_activate(tactical_goal) {
       start_time = GetTime();
 
       placementYaw = self.angles[1];
-      if(isDefined(tactical_goal.object.yaw)) {
+      if(isDefined(tactical_goal.object.yaw))
         placementYaw = tactical_goal.object.yaw;
-      }
 
       moveYaws = [];
       moveYaws[0] = placementYaw + 180;
@@ -305,26 +289,22 @@ bot_sentry_ensure_exit() {
     self bot_send_cancel_notify();
     wait 0.25;
 
-    if(attempts > 2) {
+    if(attempts > 2)
       self bot_sentry_force_cancel();
-    }
   }
 
   self notify("bot_sentry_exited");
 }
 
 bot_sentry_force_cancel() {
-  if(isDefined(self.carriedsentry)) {
+  if(isDefined(self.carriedsentry))
     self.carriedsentry maps\mp\killstreaks\_autosentry::sentry_setCancelled();
-  }
 
-  if(isDefined(self.carriedIMS)) {
+  if(isDefined(self.carriedIMS))
     self.carriedIMS maps\mp\killstreaks\_ims::ims_setCancelled();
-  }
 
-  if(isDefined(self.carriedItem)) {
+  if(isDefined(self.carriedItem))
     self.carriedItem maps\mp\killstreaks\_placeable::onCancel(self.placingItemStreakName, false);
-  }
 
   self.carriedsentry = undefined;
   self.carriedIMS = undefined;

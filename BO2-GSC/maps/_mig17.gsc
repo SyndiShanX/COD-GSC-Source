@@ -7,9 +7,8 @@
 #include maps\_plane_weapons;
 
 main() {
-  if(isDefined(self.script_numbombs) && self.script_numbombs > 0) {
+  if(isDefined(self.script_numbombs) && self.script_numbombs > 0)
     self thread maps\_plane_weapons::bomb_init(self.script_numbombs);
-  }
 }
 
 mig_setup_bombs(type) {

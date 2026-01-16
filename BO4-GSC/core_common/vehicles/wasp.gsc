@@ -15,6 +15,7 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_death_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace wasp;
 
 autoexec __init__system__() {
@@ -160,7 +161,7 @@ state_death_update(params) {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   waitframe(1);
   gravity = 400;
   self notify(#"end_nudge_collision");
@@ -219,7 +220,7 @@ state_emped_update(params) {
 
     if(isDefined(goalpoint) && sighttracepassed(self.origin + originoffset, goalpoint, 0, self)) {
       self function_a57c34b7(goalpoint, 0, 0);
-      self waittilltimeout(0.3, # "near_goal", # "goal");
+      self waittilltimeout(0.3, #"near_goal", #"goal");
 
       if(isDefined(self.enemy) && isalive(self)) {
         self vehlookat(self.enemy);
@@ -235,7 +236,7 @@ state_emped_update(params) {
       }
 
       if(foundgoal) {
-        self waittilltimeout(1, # "near_goal", # "goal");
+        self waittilltimeout(1, #"near_goal", #"goal");
       } else {
         self function_a57c34b7(self.origin, 1, 0);
       }
@@ -259,7 +260,7 @@ function_d34735d1() {
 }
 
 fall_and_bounce(killonimpact_speed, killonimpact_time, killonimpact = 0) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   maxbouncetime = 3;
   bouncescale = 0.3;
   velocityloss = 0.3;
@@ -395,44 +396,44 @@ guard_points_debug() {
   }
 }
 
-function get_guard_points(owner) {
-  assert(self._guard_points.size > 0, "<dev string:x4a>");
-  points_array = [];
+  function get_guard_points(owner) {
+    assert(self._guard_points.size > 0, "<dev string:x4a>");
+    points_array = [];
 
-  foreach(point in self._guard_points) {
-    offset = rotatepoint(point, owner.angles);
-    worldpoint = offset + owner.origin + owner getvelocity() * 0.5;
+    foreach(point in self._guard_points) {
+      offset = rotatepoint(point, owner.angles);
+      worldpoint = offset + owner.origin + owner getvelocity() * 0.5;
 
-    if(ispointinnavvolume(worldpoint, "navvolume_small")) {
-      if(!isDefined(points_array)) {
-        points_array = [];
-      } else if(!isarray(points_array)) {
-        points_array = array(points_array);
-      }
-
-      points_array[points_array.size] = worldpoint;
-    }
-  }
-
-  if(points_array.size < 1) {
-    queryresult = positionquery_source_navigation(owner.origin + (0, 0, 50), 25, 200, 100, 1.2 * self.radius, self);
-    positionquery_filter_sight(queryresult, owner.origin + (0, 0, 10), (0, 0, 0), self, 3);
-
-    foreach(point in queryresult.data) {
-      if(point.visibility === 1 && bullettracepassed(owner.origin + (0, 0, 10), point.origin, 0, self, self, 0, 1)) {
+      if(ispointinnavvolume(worldpoint, "navvolume_small")) {
         if(!isDefined(points_array)) {
           points_array = [];
         } else if(!isarray(points_array)) {
           points_array = array(points_array);
         }
 
-        points_array[points_array.size] = point.origin;
+        points_array[points_array.size] = worldpoint;
       }
     }
-  }
 
-  return points_array;
-}
+    if(points_array.size < 1) {
+      queryresult = positionquery_source_navigation(owner.origin + (0, 0, 50), 25, 200, 100, 1.2 * self.radius, self);
+      positionquery_filter_sight(queryresult, owner.origin + (0, 0, 10), (0, 0, 0), self, 3);
+
+      foreach(point in queryresult.data) {
+        if(point.visibility === 1 && bullettracepassed(owner.origin + (0, 0, 10), point.origin, 0, self, self, 0, 1)) {
+          if(!isDefined(points_array)) {
+            points_array = [];
+          } else if(!isarray(points_array)) {
+            points_array = array(points_array);
+          }
+
+          points_array[points_array.size] = point.origin;
+        }
+      }
+    }
+
+    return points_array;
+  }
 
 state_guard_can_enter(from_state, to_state, connection) {
   if(self.enable_guard !== 1 || !isDefined(self.owner)) {
@@ -505,7 +506,7 @@ test_get_back_queryresult(queryresult) {
 }
 
 state_guard_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self sethoverparams(20, 40, 30);
   timenotatgoal = gettime();
   pointindex = 0;
@@ -562,6 +563,7 @@ state_guard_update(params) {
         if(stuckcount == 1) {
           stucklocation = self.origin;
         } else if(stuckcount > 10) {
+
           assert(0, "<dev string:x65>" + self.origin);
           v_box_min = (self.radius * -1, self.radius * -1, self.radius * -1);
           v_box_max = (self.radius, self.radius, self.radius);
@@ -571,7 +573,7 @@ state_guard_update(params) {
             line(stucklocation, self.origin, (1, 0, 0), 1, 1, 1000000);
           }
 
-          self kill();
+            self kill();
         }
       }
     }
@@ -668,7 +670,7 @@ state_combat_enter(params) {
 }
 
 turretfireupdate() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   isrockettype = self.variant === "rocket";
 
   while(true) {
@@ -739,7 +741,7 @@ turretfireupdate() {
 }
 
 path_update_interrupt() {
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node");
   self notify(#"path_update_interrupt");
   self endon(#"path_update_interrupt");
   old_enemy = self.enemy;
@@ -775,7 +777,7 @@ path_update_interrupt() {
 }
 
 wait_till_something_happens(timeout) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   wait 0.1;
   time = timeout;
   cant_see_count = 0;
@@ -912,7 +914,7 @@ should_fly_forward(distancetogoalsq) {
 }
 
 function_739ac4a0(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self setspeed(self.settings.defaultmovespeed);
 
   for(;;) {
@@ -934,7 +936,7 @@ function_739ac4a0(params) {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   wait 0.1;
   stuckcount = 0;
 
@@ -1014,6 +1016,7 @@ state_combat_update(params) {
         if(stuckcount == 1) {
           stucklocation = self.origin;
         } else if(stuckcount > 10) {
+
           v_box_min = (self.radius * -1, self.radius * -1, self.radius * -1);
           v_box_max = (self.radius, self.radius, self.radius);
           box(self.origin, v_box_min, v_box_max, self.angles[1], (1, 0, 0), 1, 0, 1000000);
@@ -1022,7 +1025,7 @@ state_combat_update(params) {
             line(stucklocation, self.origin, (1, 0, 0), 1, 1, 1000000);
           }
 
-          self kill();
+            self kill();
         }
       }
     } else {
@@ -1095,14 +1098,14 @@ getnextmoveposition_wander() {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-      point._scoredebug[# "disttoorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+      point._scoredebug[#"disttoorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttoorigin"].score = disttooriginscore;
-    point._scoredebug[# "disttoorigin"].scorename = "<dev string:x8a>";
+    point._scoredebug[#"disttoorigin"].score = disttooriginscore;
+    point._scoredebug[#"disttoorigin"].scorename = "<dev string:x8a>";
 
-    point.score += disttooriginscore;
+      point.score += disttooriginscore;
 
     if(point.score > best_score) {
       best_score = point.score;
@@ -1149,33 +1152,37 @@ getnextmoveposition_tactical() {
 
         foreach(point in queryresult.data) {
           if(point.visowner === 1) {
+  
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "visowner"])) {
-              point._scoredebug[# "visowner"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"visowner"])) {
+              point._scoredebug[#"visowner"] = spawnStruct();
             }
 
-            point._scoredebug[# "visowner"].score = 300;
-            point._scoredebug[# "visowner"].scorename = "<dev string:x99>";
+            point._scoredebug[#"visowner"].score = 300;
+            point._scoredebug[#"visowner"].scorename = "<dev string:x99>";
+  
 
-            point.score += 300;
+              point.score += 300;
           }
 
           if(point.visenemy === 1) {
+  
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "visenemy"])) {
-              point._scoredebug[# "visenemy"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"visenemy"])) {
+              point._scoredebug[#"visenemy"] = spawnStruct();
             }
 
-            point._scoredebug[# "visenemy"].score = 300;
-            point._scoredebug[# "visenemy"].scorename = "<dev string:xa4>";
+            point._scoredebug[#"visenemy"].score = 300;
+            point._scoredebug[#"visenemy"].scorename = "<dev string:xa4>";
+  
 
-            point.score += 300;
+              point.score += 300;
           }
         }
       }
@@ -1209,90 +1216,94 @@ getnextmoveposition_tactical() {
   best_score = -999999;
 
   foreach(point in queryresult.data) {
-    if(!isDefined(point._scoredebug)) {
-      point._scoredebug = [];
-    }
-
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
-    }
-
-    point._scoredebug[# "random"].score = randomfloatrange(0, randomness);
-    point._scoredebug[# "random"].scorename = "<dev string:xaf>";
-
-    point.score += randomfloatrange(0, randomness);
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "engagementdist"])) {
-      point._scoredebug[# "engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[# "engagementdist"].scorename = "<dev string:xb8>";
+    point._scoredebug[#"random"].score = randomfloatrange(0, randomness);
+    point._scoredebug[#"random"].scorename = "<dev string:xaf>";
 
-    point.score += point.distawayfromengagementarea * -1;
+      point.score += randomfloatrange(0, randomness);
 
     if(!isDefined(point._scoredebug)) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "height"])) {
-      point._scoredebug[# "height"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"engagementdist"])) {
+      point._scoredebug[#"engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[# "height"].score = point.distengagementheight * -1 * 1.4;
-    point._scoredebug[# "height"].scorename = "<dev string:xc9>";
+    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[#"engagementdist"].scorename = "<dev string:xb8>";
 
-    point.score += point.distengagementheight * -1 * 1.4;
+      point.score += point.distawayfromengagementarea * -1;
+
+    if(!isDefined(point._scoredebug)) {
+      point._scoredebug = [];
+    }
+
+    if(!isDefined(point._scoredebug[#"height"])) {
+      point._scoredebug[#"height"] = spawnStruct();
+    }
+
+    point._scoredebug[#"height"].score = point.distengagementheight * -1 * 1.4;
+    point._scoredebug[#"height"].scorename = "<dev string:xc9>";
+
+      point.score += point.distengagementheight * -1 * 1.4;
 
     if(point.disttoorigin2d < 120) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "tooclosetoself"])) {
-        point._scoredebug[# "tooclosetoself"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"tooclosetoself"])) {
+        point._scoredebug[#"tooclosetoself"] = spawnStruct();
       }
 
-      point._scoredebug[# "tooclosetoself"].score = (120 - point.disttoorigin2d) * -1.5;
-      point._scoredebug[# "tooclosetoself"].scorename = "<dev string:xd2>";
+      point._scoredebug[#"tooclosetoself"].score = (120 - point.disttoorigin2d) * -1.5;
+      point._scoredebug[#"tooclosetoself"].scorename = "<dev string:xd2>";
 
-      point.score += (120 - point.disttoorigin2d) * -1.5;
+        point.score += (120 - point.disttoorigin2d) * -1.5;
     }
 
     foreach(location in avoid_locations) {
       if(distancesquared(point.origin, location) < avoid_radius * avoid_radius) {
+
         if(!isDefined(point._scoredebug)) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "tooclosetoothers"])) {
-          point._scoredebug[# "tooclosetoothers"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"tooclosetoothers"])) {
+          point._scoredebug[#"tooclosetoothers"] = spawnStruct();
         }
 
-        point._scoredebug[# "tooclosetoothers"].score = avoid_radius * -1;
-        point._scoredebug[# "tooclosetoothers"].scorename = "<dev string:xe3>";
+        point._scoredebug[#"tooclosetoothers"].score = avoid_radius * -1;
+        point._scoredebug[#"tooclosetoothers"].scorename = "<dev string:xe3>";
 
-        point.score += avoid_radius * -1;
+          point.score += avoid_radius * -1;
       }
     }
 
     if(point.inclaimedlocation) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:xf6>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:xf6>";
 
-      point.score += -500;
+        point.score += -500;
     }
 
     if(point.score > best_score) {
@@ -1312,7 +1323,7 @@ getnextmoveposition_tactical() {
     recordline(self.origin, self.enemy.origin, (1, 0, 0.4));
   }
 
-  return best_point.origin;
+    return best_point.origin;
 }
 
 drone_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
@@ -1321,7 +1332,7 @@ drone_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
 }
 
 drone_allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == # "wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == #"wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
 
@@ -1342,7 +1353,7 @@ wasp_driving(params) {
 }
 
 wasp_manage_camera_swaps() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   driver = self getseatoccupant(0);
   driver endon(#"disconnect");
   cam_low_type = self.vehicletype;
@@ -1350,7 +1361,7 @@ wasp_manage_camera_swaps() {
 }
 
 wasp_towers_on_load() {
-  if(!isDefined(level.flag) || !(isDefined(level.flag[# "load_main_complete"]) && level.flag[# "load_main_complete"])) {
+  if(!isDefined(level.flag) || !(isDefined(level.flag[#"load_main_complete"]) && level.flag[#"load_main_complete"])) {
     level waittill(#"load_main_complete");
   }
 

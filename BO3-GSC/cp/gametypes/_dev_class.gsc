@@ -12,25 +12,25 @@
 #namespace dev_class;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
 }
 
 function init() {
   dev_cac_overlay = 0;
   dev_cac_camera_on = 0;
   level thread dev_cac_gdt_update_think();
-  for(;;) {
+  for (;;) {
     wait(0.5);
     reset = 1;
     if(getdvarstring("") != "") {
       continue;
     }
     host = util::gethostplayer();
-    if(!isDefined(level.dev_cac_player)) {
+    if(!isdefined(level.dev_cac_player)) {
       level.dev_cac_player = host;
     }
     switch (getdvarstring("")) {
@@ -39,15 +39,15 @@ function init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_body, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_body, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_head, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_head, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_character, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_character, "");
         break;
       }
       case "": {
@@ -67,27 +67,27 @@ function init() {
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_greatest, "");
+        dev_cac_set_model_range( & sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_least, "");
+        dev_cac_set_model_range( & sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_greatest, "");
+        dev_cac_set_model_range( & sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_least, "");
+        dev_cac_set_model_range( & sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_greatest, "");
+        dev_cac_set_model_range( & sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range(&sort_least, "");
+        dev_cac_set_model_range( & sort_least, "");
         break;
       }
       case "": {
@@ -96,39 +96,39 @@ function init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
@@ -163,7 +163,7 @@ function dev_cac_dpad_think(part_name, cycle_function, tag) {
   dpad_left = 0;
   dpad_right = 0;
   level.dev_cac_player thread highlight_player();
-  for(;;) {
+  for (;;) {
     self setactionslot(3, "");
     self setactionslot(4, "");
     if(!dpad_left && self buttonpressed("")) {
@@ -187,12 +187,12 @@ function dev_cac_dpad_think(part_name, cycle_function, tag) {
 }
 
 function next_in_list(value, list) {
-  if(!isDefined(value)) {
+  if(!isdefined(value)) {
     return list[0];
   }
-  for(i = 0; i < list.size; i++) {
+  for (i = 0; i < list.size; i++) {
     if(value == list[i]) {
-      if(isDefined(list[i + 1])) {
+      if(isdefined(list[i + 1])) {
         value = list[i + 1];
       } else {
         value = list[0];
@@ -204,12 +204,12 @@ function next_in_list(value, list) {
 }
 
 function prev_in_list(value, list) {
-  if(!isDefined(value)) {
+  if(!isdefined(value)) {
     return list[0];
   }
-  for(i = 0; i < list.size; i++) {
+  for (i = 0; i < list.size; i++) {
     if(value == list[i]) {
-      if(isDefined(list[i - 1])) {
+      if(isdefined(list[i - 1])) {
         value = list[i - 1];
       } else {
         value = list[list.size - 1];
@@ -277,12 +277,12 @@ function dev_cac_cycle_render_options(forward, tag) {
 }
 
 function dev_cac_player_valid() {
-  return isDefined(level.dev_cac_player) && level.dev_cac_player.sessionstate == "";
+  return isdefined(level.dev_cac_player) && level.dev_cac_player.sessionstate == "";
 }
 
 function dev_cac_cycle_player(forward) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(forward) {
       level.dev_cac_player = next_in_list(level.dev_cac_player, players);
     } else {
@@ -312,7 +312,7 @@ function dev_cac_overlay_think() {
 function dev_cac_overlay_update(hud) {}
 
 function dev_cac_overlay_destroy(hud) {
-  for(i = 0; i < hud.menu.size; i++) {
+  for (i = 0; i < hud.menu.size; i++) {
     hud.menu[i] destroy();
   }
   hud destroy();
@@ -396,7 +396,7 @@ function color(value) {
 }
 
 function dev_cac_gdt_update_think() {
-  for(;;) {
+  for (;;) {
     level waittill("gdt_update", asset, keyvalue);
     keyvalue = strtok(keyvalue, "");
     key = keyvalue[0];
@@ -426,20 +426,20 @@ function dev_cac_gdt_update_think() {
         break;
       }
     }
-    if(!isDefined(key)) {
+    if(!isdefined(key)) {
       continue;
     }
     value = float(keyvalue[1]);
     level.cac_attributes[key][asset] = value;
     players = getplayers();
-    for(i = 0; i < players.size; i++) {}
+    for (i = 0; i < players.size; i++) {}
   }
 }
 
 function sort_greatest(func, attribute, greatest) {
   keys = getarraykeys(level.cac_functions[func]);
   greatest = keys[0];
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level.cac_attributes[attribute][keys[i]] > level.cac_attributes[attribute][greatest]) {
       greatest = keys[i];
     }
@@ -450,7 +450,7 @@ function sort_greatest(func, attribute, greatest) {
 function sort_least(func, attribute, least) {
   keys = getarraykeys(level.cac_functions[func]);
   least = keys[0];
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(level.cac_attributes[attribute][keys[i]] < level.cac_attributes[attribute][least]) {
       least = keys[i];
     }

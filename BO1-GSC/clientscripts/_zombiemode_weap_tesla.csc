@@ -64,7 +64,7 @@ tesla_fx_rail(localClientNum) {
       fx = level._effect["tesla_viewmodel_rail_upgraded"];
     }
     PlayViewmodelFx(localClientNum, fx, "tag_flash");
-    playSound(localClientNum, "wpn_tesla_effects", (0, 0, 0));
+    playsound(localClientNum, "wpn_tesla_effects", (0, 0, 0));
   }
 }
 
@@ -130,7 +130,7 @@ tesla_happy(localClientNum) {
     level waittill("TGH");
     currentweapon = GetCurrentWeapon(localClientNum);
     if(currentweapon == "tesla_gun_zm" || currentweapon == "tesla_gun_upgraded_zm") {
-      playSound(localClientNum, "wpn_tesla_happy", (0, 0, 0));
+      playsound(localClientNum, "wpn_tesla_happy", (0, 0, 0));
       level.tesla_play_rail = false;
       realwait(2);
       level.tesla_play_rail = true;

@@ -20,9 +20,8 @@ subclass_elite() {
 }
 
 enable_elite() {
-  if(self.subclass != "elite") {
+  if(self.subclass != "elite")
     self.subclass = "elite";
-  }
 
   self.a.disablewoundedset = 1;
   self.a.userifleanimsforsmg = 1;

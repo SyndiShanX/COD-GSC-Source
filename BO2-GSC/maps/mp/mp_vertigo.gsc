@@ -19,11 +19,11 @@ main() {
   maps\mp\mp_vertigo_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_vertigo");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -31,9 +31,8 @@ main() {
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAPNAME_E";
   level thread waitforglassbreak();
 
-  if(getgametypesetting("allowMapScripting")) {
+  if(getgametypesetting("allowMapScripting"))
     level maps\mp\mp_vertigo_doors::init();
-  }
 }
 
 levelspawndvars(reset_dvars) {
@@ -93,7 +92,7 @@ playglassexploder(origin, exploderbase, explodercount) {
 
 window_smash_wind_sound(origin) {
   wind_ent = spawn("script_origin", origin);
-  wind_ent playLoopSound("evt_window_wind", 1);
+  wind_ent playloopsound("evt_window_wind", 1);
   level waittill("game_ended");
   wind_ent stoploopsound(0.5);
   wind_ent delete();
@@ -127,16 +126,14 @@ ragdoll_override(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin
     if(animhasnotetrack(deathanim, "start_ragdoll")) {
       times = getnotetracktimes(deathanim, "start_ragdoll");
 
-      if(isDefined(times)) {
+      if(isDefined(times))
         startfrac = times[0];
-      }
     }
 
     self.body = body;
 
-    if(!isDefined(self.switching_teams)) {
+    if(!isDefined(self.switching_teams))
       thread maps\mp\gametypes\_deathicons::adddeathicon(body, self, self.team, 5.0);
-    }
 
     thread startragdollonground(startfrac);
     return true;

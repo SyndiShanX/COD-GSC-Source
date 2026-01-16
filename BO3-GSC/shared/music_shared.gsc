@@ -9,23 +9,23 @@
 #namespace music;
 
 function autoexec __init__sytem__() {
-  system::register("music", &__init__, undefined, undefined);
+  system::register("music", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.musicstate = "";
   util::registerclientsys("musicCmd");
   if(sessionmodeiscampaigngame()) {
-    callback::on_spawned(&on_player_spawned);
+    callback::on_spawned( & on_player_spawned);
   }
 }
 
 function setmusicstate(state, player) {
-  if(isDefined(level.musicstate)) {
-    if(isDefined(level.bonuszm_musicoverride) && level.bonuszm_musicoverride) {
+  if(isdefined(level.musicstate)) {
+    if(isdefined(level.bonuszm_musicoverride) && level.bonuszm_musicoverride) {
       return;
     }
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       util::setclientsysstate("musicCmd", state, player);
       return;
     }
@@ -37,11 +37,11 @@ function setmusicstate(state, player) {
 }
 
 function on_player_spawned() {
-  if(isDefined(level.musicstate)) {
+  if(isdefined(level.musicstate)) {
     if(issubstr(level.musicstate, "_igc") || issubstr(level.musicstate, "igc_")) {
       return;
     }
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       setmusicstate(level.musicstate, self);
     } else {
       setmusicstate(level.musicstate);

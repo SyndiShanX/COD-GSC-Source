@@ -16,11 +16,12 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_1063645;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_3e57db9b106dff0a", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_4ccf2ce25e0dc836", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3e57db9b106dff0a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4ccf2ce25e0dc836", 1, 1, "int");
 }
 
 function_fb0bd6b9() {
@@ -112,7 +113,7 @@ function_89f2ec87() {
 function_e5c8fd1d() {
   level endon(#"hash_7ebd1255a2e91e3e");
   self waittill(#"blast_attack");
-  self thread clientfield::set("" + # "hash_4ccf2ce25e0dc836", 1);
+  self thread clientfield::set("" + #"hash_4ccf2ce25e0dc836", 1);
   level notify(#"hash_dfac532bccdb293");
 }
 
@@ -139,7 +140,7 @@ function_97f8efcd() {
 }
 
 function_ca5612ce(a_mdl_tubes) {
-  level endon(#"hash_59db65b924f851e4", # "hash_795bde5570f8b67c");
+  level endon(#"hash_59db65b924f851e4", #"hash_795bde5570f8b67c");
   level flag::set(#"hash_7ebd1255a2e91e3e");
   wait 25;
   level flag::wait_till_clear(#"hash_795bde5570f8b67c");
@@ -148,7 +149,7 @@ function_ca5612ce(a_mdl_tubes) {
   e_closest_player = arraygetclosest(var_3c04def5.origin, level.players);
 
   if(isalive(e_closest_player)) {
-    e_closest_player thread zm_audio::create_and_play_dialog(#"negative_resp", # "generic");
+    e_closest_player thread zm_audio::create_and_play_dialog(#"negative_resp", #"generic");
   }
 
   level notify(#"hash_59db65b924f851e4");
@@ -166,7 +167,7 @@ function_172e72fa() {
       mdl_tube hidepart("tag_nixie_" + i);
     }
 
-    mdl_tube thread clientfield::set("" + # "hash_4ccf2ce25e0dc836", 0);
+    mdl_tube thread clientfield::set("" + #"hash_4ccf2ce25e0dc836", 0);
     mdl_tube showpart("tag_nixie_off");
 
     if(s_tube.targetname == "nixie_tube_2") {
@@ -243,13 +244,13 @@ function_bad2e505(player) {
     self setvisibletoplayer(player);
 
     switch (self.targetname) {
-      case # "nixie_tube_trigger_1":
+      case #"nixie_tube_trigger_1":
         self sethintstring(#"");
         break;
-      case # "nixie_tube_trigger_2":
+      case #"nixie_tube_trigger_2":
         self sethintstring(#"");
         break;
-      case # "nixie_tube_trigger_3":
+      case #"nixie_tube_trigger_3":
         self sethintstring(#"");
         break;
     }
@@ -295,7 +296,7 @@ function_290d172d() {
 
 function_bbca669b(e_activator) {
   level notify(#"hash_2f586f8df1e6596d");
-  level endon(#"hash_2f586f8df1e6596d", # "hash_59db65b924f851e4", # "hash_f787bd652d7a4b");
+  level endon(#"hash_2f586f8df1e6596d", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b");
   wait 2;
   level thread function_c1cc29be(e_activator);
 }
@@ -341,7 +342,7 @@ function_c1cc29be(e_activator) {
     level flag::set(#"hash_795bde5570f8b67c");
 
     if(isalive(e_activator) && !(isDefined(var_b402acf2) && var_b402acf2)) {
-      e_activator thread zm_audio::create_and_play_dialog(#"success_resp", # "generic");
+      e_activator thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
     }
 
     var_4f5b63ea thread function_4b17c9f6(1.5);
@@ -379,13 +380,13 @@ function_a5d20d9b(str_code) {
   });
 
   switch (str_code) {
-    case # "115":
+    case #"115":
       level thread music_ee();
       break;
-    case # "872":
+    case #"872":
       level thread function_f2f53f97();
       break;
-    case # "666":
+    case #"666":
       level thread function_15aa00e7();
       break;
     default:
@@ -412,7 +413,7 @@ private function_f2f53f97() {
   level.var_461a9705 = 1;
   s_spawn_location = struct::get("nixie_tube_zombie_blood_start");
   mdl_powerup = util::spawn_model(s_spawn_location.model, s_spawn_location.origin, s_spawn_location.angles);
-  mdl_powerup clientfield::set("" + # "hash_3e57db9b106dff0a", 1);
+  mdl_powerup clientfield::set("" + #"hash_3e57db9b106dff0a", 1);
 
   for(s_target = struct::get(s_spawn_location.target); isDefined(s_target); s_target = struct::get(s_target.target)) {
     n_time = distance(mdl_powerup.origin, s_target.origin) / 300;
@@ -457,7 +458,7 @@ private function_f50cec70() {
     level.var_988ed695 = 0;
   }
 
-  s_result = self waittill(#"powerup_timedout", # "powerup_grabbed");
+  s_result = self waittill(#"powerup_timedout", #"powerup_grabbed");
 
   if(s_result._notify !== "powerup_grabbed" || level.var_988ed695 > 2) {
     return;

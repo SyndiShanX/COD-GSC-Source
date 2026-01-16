@@ -9,14 +9,13 @@
 #include maps\mp\zombies\_zm_audio;
 
 init() {
-  if(is_true(level._uses_jump_pads)) {
+  if(is_true(level._uses_jump_pads))
     level jump_pad_init();
-  }
 }
 
 jump_pad_init() {
   level._jump_pad_override = [];
-  jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
+  jump_pad_triggers = getentarray("trig_jump_pad", "targetname");
 
   if(!isDefined(jump_pad_triggers)) {
     return;
@@ -25,9 +24,8 @@ jump_pad_init() {
     jump_pad_triggers[i].start = getstruct(jump_pad_triggers[i].target, "targetname");
     jump_pad_triggers[i].destination = getstructarray(jump_pad_triggers[i].start.target, "targetname");
 
-    if(isDefined(jump_pad_triggers[i].script_string)) {
+    if(isDefined(jump_pad_triggers[i].script_string))
       jump_pad_triggers[i].overrides = strtok(jump_pad_triggers[i].script_string, ",");
-    }
 
     jump_pad_triggers[i] thread jump_pad_think();
   }
@@ -54,9 +52,8 @@ jump_pad_think() {
   forward_scaling = 1.0;
 
   if(isDefined(self.script_flag_wait)) {
-    if(!isDefined(level.flag[self.script_flag_wait])) {
+    if(!isDefined(level.flag[self.script_flag_wait]))
       flag_init(self.script_flag_wait);
-    }
 
     flag_wait(self.script_flag_wait);
   }
@@ -64,9 +61,8 @@ jump_pad_think() {
   while(isDefined(self)) {
     self waittill("trigger", who);
 
-    if(isplayer(who)) {
+    if(isplayer(who))
       self thread trigger_thread(who, ::jump_pad_start, ::jump_pad_cancel);
-    }
   }
 }
 
@@ -91,32 +87,28 @@ jump_pad_start(ent_player, endon_condition) {
     self._action_overrides = strtok(self.name, ",");
 
     if(isDefined(self._action_overrides)) {
-      for(i = 0; i < self._action_overrides.size; i++) {
+      for(i = 0; i < self._action_overrides.size; i++)
         ent_player jump_pad_player_overrides(self._action_overrides[i]);
-      }
     }
   }
 
   if(isDefined(self.script_wait)) {
-    if(self.script_wait < 1) {
-      self playSound("evt_jump_pad_charge_short");
-    } else {
-      self playSound("evt_jump_pad_charge");
-    }
+    if(self.script_wait < 1)
+      self playsound("evt_jump_pad_charge_short");
+    else
+      self playsound("evt_jump_pad_charge");
 
     wait(self.script_wait);
   } else {
-    self playSound("evt_jump_pad_charge");
+    self playsound("evt_jump_pad_charge");
     wait 1.0;
   }
 
-  if(isDefined(self.script_parameters) && isDefined(level._jump_pad_override[self.script_parameters])) {
+  if(isDefined(self.script_parameters) && isDefined(level._jump_pad_override[self.script_parameters]))
     end_point = self[[level._jump_pad_override[self.script_parameters]]](ent_player);
-  }
 
-  if(!isDefined(end_point)) {
+  if(!isDefined(end_point))
     end_point = self.destination[randomint(self.destination.size)];
-  }
 
   if(isDefined(self.script_string) && isDefined(level._jump_pad_override[self.script_string])) {
     info_array = self[[level._jump_pad_override[self.script_string]]](start_point, end_point);
@@ -141,13 +133,11 @@ jump_pad_start(ent_player, endon_condition) {
       forward_scaling = 1.1;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "") {
+        if(getdvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
-        }
 
-        if(getdvar(#"_id_4E3BC729") != "") {
+        if(getdvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
-        }
       }
 
     } else if(z_dist >= 135) {
@@ -155,13 +145,11 @@ jump_pad_start(ent_player, endon_condition) {
       forward_scaling = 1.3;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "") {
+        if(getdvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
-        }
 
-        if(getdvar(#"_id_4E3BC729") != "") {
+        if(getdvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
-        }
       }
 
     } else if(z_dist < 0) {
@@ -169,34 +157,29 @@ jump_pad_start(ent_player, endon_condition) {
       forward_scaling = 1.0;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "") {
+        if(getdvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
-        }
 
-        if(getdvar(#"_id_4E3BC729") != "") {
+        if(getdvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
-        }
       }
 
     }
 
     z_velocity = 2 * z_dist * world_gravity;
 
-    if(z_velocity < 0) {
+    if(z_velocity < 0)
       z_velocity = z_velocity * -1;
-    }
 
-    if(z_dist < 0) {
+    if(z_dist < 0)
       z_dist = z_dist * -1;
-    }
 
     jump_time = sqrt(2 * pad_dist / world_gravity);
     jump_time_2 = sqrt(2 * z_dist / world_gravity);
     jump_time = jump_time + jump_time_2;
 
-    if(jump_time < 0) {
+    if(jump_time < 0)
       jump_time = jump_time * -1;
-    }
 
     x = jump_velocity[0] * forward_scaling / jump_time;
     y = jump_velocity[1] * forward_scaling / jump_time;
@@ -204,61 +187,56 @@ jump_pad_start(ent_player, endon_condition) {
     fling_this_way = (x, y, z);
   }
 
-  if(isDefined(end_point.target)) {
+  if(isDefined(end_point.target))
     poi_spot = getstruct(end_point.target, "targetname");
-  } else {
+  else
     poi_spot = end_point;
-  }
 
-  if(!isDefined(self.script_index)) {
+  if(!isDefined(self.script_index))
     ent_player.script_index = undefined;
-  } else {
+  else
     ent_player.script_index = self.script_index;
-  }
 
   if(isDefined(self.script_start) && self.script_start == 1) {
     if(!is_true(ent_player._padded)) {
-      self playSound("evt_jump_pad_launch");
-      playFX(level._effect["jump_pad_jump"], self.origin);
+      self playsound("evt_jump_pad_launch");
+      playfx(level._effect["jump_pad_jump"], self.origin);
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
 
-      if(isDefined(self.script_label)) {
+      if(isDefined(self.script_label))
         level notify(self.script_label);
-      }
 
       return;
     }
   } else if(ent_player isonground() && !is_true(ent_player._padded)) {
-    self playSound("evt_jump_pad_launch");
-    playFX(level._effect["jump_pad_jump"], self.origin);
+    self playsound("evt_jump_pad_launch");
+    playfx(level._effect["jump_pad_jump"], self.origin);
     ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
 
-    if(isDefined(self.script_label)) {
+    if(isDefined(self.script_label))
       level notify(self.script_label);
-    }
 
     return;
   }
 
   wait 0.5;
 
-  if(ent_player istouching(self)) {
+  if(ent_player istouching(self))
     self jump_pad_start(ent_player, endon_condition);
-  }
 }
 
 jump_pad_cancel(ent_player) {
   ent_player notify("left_jump_pad");
 
-  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {}
+  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {
+  }
 
   if(isDefined(self.name)) {
     self._action_overrides = strtok(self.name, ",");
 
     if(isDefined(self._action_overrides)) {
-      for(i = 0; i < self._action_overrides.size; i++) {
+      for(i = 0; i < self._action_overrides.size; i++)
         ent_player jump_pad_player_overrides(self._action_overrides[i]);
-      }
     }
   }
 }
@@ -274,9 +252,8 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
   start_turned_on = 1;
   poi_start_func = undefined;
 
-  while(is_true(self.divetoprone) || is_true(self._padded)) {
+  while(is_true(self.divetoprone) || is_true(self._padded))
     wait 0.05;
-  }
 
   self._padded = 1;
   self.lander = 1;
@@ -304,19 +281,16 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
   if(isDefined(struct_poi)) {
     self.poi_spot = spawn("script_origin", struct_poi.origin);
 
-    if(isDefined(level._pad_poi_ignore)) {
+    if(isDefined(level._pad_poi_ignore))
       level[[level._pad_poi_ignore]](self.poi_spot);
-    }
 
     self thread jump_pad_enemy_follow_or_ignore(self.poi_spot);
 
-    if(isDefined(level._jump_pad_poi_start_override) && !is_true(self.script_index)) {
+    if(isDefined(level._jump_pad_poi_start_override) && !is_true(self.script_index))
       poi_start_func = level._jump_pad_poi_start_override;
-    }
 
-    if(isDefined(level._jump_pad_poi_end_override)) {
+    if(isDefined(level._jump_pad_poi_end_override))
       poi_end_func = level._jump_pad_poi_end_override;
-    }
 
     self.poi_spot create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, start_turned_on, poi_start_func);
     self thread disconnect_failsafe_pad_poi_clean();
@@ -324,22 +298,20 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
 
   self setorigin(self.origin + (0, 0, 1));
 
-  if(20 >= randomintrange(0, 101)) {
+  if(20 >= randomintrange(0, 101))
     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "jumppad");
-  }
 
   while(gettime() - start_time < jump_time) {
     self setvelocity(vec_direction);
     wait 0.05;
   }
 
-  while(!self isonground()) {
+  while(!self isonground())
     wait 0.05;
-  }
 
   self._padded = 0;
   self.lander = 0;
-  jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
+  jump_pad_triggers = getentarray("trig_jump_pad", "targetname");
 
   for(i = 0; i < jump_pad_triggers.size; i++) {
     if(self istouching(jump_pad_triggers[i])) {
@@ -368,11 +340,10 @@ disconnect_failsafe_pad_poi_clean() {
 }
 
 failsafe_pad_poi_clean(ent_trig, ent_poi) {
-  if(isDefined(ent_trig.script_wait)) {
+  if(isDefined(ent_trig.script_wait))
     wait(ent_trig.script_wait);
-  } else {
+  else
     wait 0.5;
-  }
 
   if(isDefined(ent_poi)) {
     level jump_pad_ignore_poi_cleanup(ent_poi);
@@ -389,9 +360,8 @@ jump_pad_enemy_follow_or_ignore(ent_poi) {
   valid_players = 0;
 
   for(p = 0; p < players.size; p++) {
-    if(is_player_valid(players[p])) {
+    if(is_player_valid(players[p]))
       valid_players++;
-    }
   }
 
   for(i = 0; i < zombies.size; i++) {
@@ -404,9 +374,8 @@ jump_pad_enemy_follow_or_ignore(ent_poi) {
 
     if(isDefined(enemy)) {
       if(players.size > 1 && valid_players > 1) {
-        if(enemy != self || isDefined(enemy.jump_pad_previous) && enemy.jump_pad_previous == enemy.jump_pad_current) {
+        if(enemy != self || isDefined(enemy.jump_pad_previous) && enemy.jump_pad_previous == enemy.jump_pad_current)
           ignore_poi = 1;
-        }
       }
     }
 
@@ -432,9 +401,8 @@ jump_pad_ignore_poi_cleanup(ent_poi) {
         zombies[i].ignore_distance_tracking = 0;
       }
 
-      if(isDefined(ent_poi)) {
+      if(isDefined(ent_poi))
         zombies[i] thread remove_poi_from_ignore_list(ent_poi);
-      }
     }
   }
 }
@@ -469,19 +437,21 @@ jump_pad_player_overrides(st_behavior, int_clean) {
   if(!isDefined(st_behavior) || !isstring(st_behavior)) {
     return;
   }
-  if(!isDefined(int_clean)) {
+  if(!isDefined(int_clean))
     int_clean = 0;
-  }
 
   switch (st_behavior) {
     case "no_sprint":
-      if(!int_clean) {} else {}
+      if(!int_clean) {
+      } else {
+      }
 
       break;
     default:
-      if(isDefined(level._jump_pad_level_behavior)) {
+      if(isDefined(level._jump_pad_level_behavior))
         self[[level._jump_pad_level_behavior]](st_behavior, int_clean);
-      } else {}
+      else {
+      }
 
       break;
   }

@@ -7,6 +7,7 @@
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace deathicons;
 
 autoexec __init__system__() {
@@ -41,7 +42,7 @@ add(entity, dyingplayer, team) {
 
   timeout = getdvarfloat(#"scr_deathicon_time", 5);
   iconorg = entity.origin;
-  dyingplayer endon(#"spawned_player", # "disconnect");
+  dyingplayer endon(#"spawned_player", #"disconnect");
   waitframe(1);
   util::waittillslowprocessallowed();
   assert(isDefined(level.teams[team]));
@@ -59,7 +60,7 @@ add(entity, dyingplayer, team) {
     return;
   }
 
-  objectivename = sessionmodeiswarzonegame() ? # "headicon_dead_wz" : # "headicon_dead";
+  objectivename = sessionmodeiswarzonegame() ? #"headicon_dead_wz" : #"headicon_dead";
   deathiconobjid = gameobjects::get_next_obj_id();
   objective_add(deathiconobjid, "active", iconorg, objectivename, dyingplayer);
   objective_setteam(deathiconobjid, team);

@@ -67,11 +67,11 @@ target_thread() {
   self thread begin_std_story_vox();
   self thread player_hint_line();
   self thread player_first_success();
-  self playSound("evt_sq_std_spray_start");
+  self playsound("evt_sq_std_spray_start");
   self playLoopSound("evt_sq_std_spray_loop", 1);
   self waittill("spiked");
   self stopLoopSound(1);
-  self playSound("evt_sq_std_spray_stop");
+  self playsound("evt_sq_std_spray_stop");
   flag_set("std_target_" + self.script_int);
   clientnotify("S" + self.script_int);
   maps\_zombiemode_spikemore::remove_spikeable_object(self);
@@ -179,11 +179,11 @@ std_story_vox(player) {
   }
   level._std_sound_ent = spawn("script_origin", struct.origin);
   level thread std_story_vox_wait_for_finish();
-  level._std_sound_ent playSound("vox_egg_story_4_0", "sounddone");
+  level._std_sound_ent playsound("vox_egg_story_4_0", "sounddone");
   level._std_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playSound("vox_egg_story_4_1" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playsound("vox_egg_story_4_1" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
@@ -198,12 +198,12 @@ std_story_vox_wait_for_finish() {
     {
       if(!flag("std_target_1") || !flag("std_target_2") || !flag("std_target_3") || !flag("std_target_4")) {
         if(count < 1) {
-          level._std_sound_ent playSound("vox_egg_story_4_2", "sounddone");
+          level._std_sound_ent playsound("vox_egg_story_4_2", "sounddone");
           level._std_sound_ent waittill("sounddone");
           count++;
         }
       } else {
-        level._std_sound_ent playSound("vox_egg_story_4_3", "sounddone");
+        level._std_sound_ent playsound("vox_egg_story_4_3", "sounddone");
         level._std_sound_ent waittill("sounddone");
         break;
       }

@@ -27,9 +27,8 @@ init() {
   thread tracksuit_mode_init();
   thread tire_explosionmode_init();
 
-  if(!isDefined(level._effect)) {
+  if(!isdefined(level._effect))
     level._effect = [];
-  }
 
   level._effect["grain_test"] = loadfx("fx\misc\grain_test");
   common_scripts\utility::flag_init("has_cheated");
@@ -50,21 +49,19 @@ init() {
 death_monitor() {
   setdvars_based_on_varibles();
 
-  for(;;) {
-    if(issaverecentlyloaded()) {
+  for (;;) {
+    if(issaverecentlyloaded())
       setdvars_based_on_varibles();
-    }
 
     wait 0.1;
   }
 }
 
 setdvars_based_on_varibles() {
-  for(var_0 = 0; var_0 < level.cheatdvars.size; var_0++) {
+  for (var_0 = 0; var_0 < level.cheatdvars.size; var_0++)
     setdvar(level.cheatdvars[var_0], level.cheatstates[level.cheatdvars[var_0]]);
-  }
 
-  if(!isDefined(level.credits_active) || !level.credits_active) {
+  if(!isdefined(level.credits_active) || !level.credits_active) {
     setdvar("credits_active", "0");
     setdvar("credits_load", "0");
   }
@@ -80,9 +77,8 @@ addcheat(var_0, var_1) {
   level.cheatstates[var_0] = getcheatvalue(var_0);
   level.cheatfuncs[var_0] = var_1;
 
-  if(level.cheatstates[var_0]) {
+  if(level.cheatstates[var_0])
     [[var_1]](level.cheatstates[var_0]);
-  }
 }
 
 checkcheatchanged(var_0) {
@@ -91,9 +87,8 @@ checkcheatchanged(var_0) {
   if(level.cheatstates[var_0] == var_1) {
     return;
   }
-  if(var_1) {
+  if(var_1)
     common_scripts\utility::flag_set("has_cheated");
-  }
 
   level.cheatstates[var_0] = var_1;
   [[level.cheatfuncs[var_0]]](var_1);
@@ -115,14 +110,12 @@ specialfeaturesmenu() {
   addcheat("sf_use_tracksuit_mode", ::tracksuit_mode_update);
   level.cheatdvars = getarraykeys(level.cheatstates);
 
-  if(is_cheating()) {
+  if(is_cheating())
     common_scripts\utility::flag_set("has_cheated");
-  }
 
-  for(;;) {
-    for(var_0 = 0; var_0 < level.cheatdvars.size; var_0++) {
+  for (;;) {
+    for (var_0 = 0; var_0 < level.cheatdvars.size; var_0++)
       checkcheatchanged(level.cheatdvars[var_0]);
-    }
 
     wait 0.05;
   }
@@ -134,7 +127,7 @@ tire_explosionmode_init() {
 }
 
 tirecheat_dogs_enemy_spawned() {
-  if(!isDefined(self.classname)) {
+  if(!isdefined(self.classname)) {
     return;
   }
   if(self.classname != "actor_enemy_dog") {
@@ -147,55 +140,50 @@ tirecheat_dogs_enemy_spawned() {
   }
   if(level.tire_explosion) {
     var_0 = self.origin;
-    var_1 = self getEye();
+    var_1 = self geteye();
     waittillframeend;
 
-    for(var_2 = 0; var_2 < 15; var_2++) {
+    for (var_2 = 0; var_2 < 15; var_2++)
       thread maps\_spawner::random_tire(var_0, var_1);
-    }
 
-    if(isDefined(self) && !isremovedentity(self)) {
+    if(isdefined(self) && !isremovedentity(self))
       self delete();
-    }
   }
 }
 
 tire_explosionmode(var_0) {
-  if(var_0) {
+  if(var_0)
     level.tire_explosion = 1;
-  } else {
+  else
     level.tire_explosion = 0;
-  }
 }
 
 clustergrenademode(var_0) {
-  if(var_0) {
+  if(var_0)
     level.player thread wait_for_grenades();
-  } else {
+  else
     level notify("end_cluster_grenades");
-  }
 }
 
 wait_for_grenades() {
   level endon("end_cluster_grenades");
 
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(isDefined(var_0.cluster_grenade) && var_0.cluster_grenade) {
+    if(isdefined(var_0.cluster_grenade) && var_0.cluster_grenade) {
       continue;
     }
-    if(var_1 == "fraggrenade" || var_1 == level.cheat_lemonade_weaponname) {
+    if(var_1 == "fraggrenade" || var_1 == level.cheat_lemonade_weaponname)
       var_0 thread create_clustergrenade("fraggrenade");
-    }
   }
 }
 
 create_clustergrenade(var_0) {
   var_1 = self.origin;
 
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isdefined(self)) {
       break;
     }
 
@@ -206,7 +194,7 @@ create_clustergrenade(var_0) {
   var_1 = var_1 + (0, 0, 5);
   var_2 = 8;
 
-  for(var_3 = 0; var_3 < var_2; var_3++) {
+  for (var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = getclustergrenadevelocity();
     var_5 = 1.5 + var_3 / 6 + randomfloat(0.1);
     var_6 = magicgrenademanual(var_0, var_1, var_4, var_5, level.player);
@@ -230,39 +218,35 @@ ignore_ammomode(var_0) {
   if(level.script == "ac130") {
     return;
   }
-  if(var_0) {
+  if(var_0)
     setsaveddvar("player_sustainAmmo", 1);
-  } else {
+  else
     setsaveddvar("player_sustainAmmo", 0);
-  }
 }
 
 contrastmode(var_0) {
-  if(var_0) {
+  if(var_0)
     level.visionsets["contrast"] = 1;
-  } else {
+  else
     level.visionsets["contrast"] = 0;
-  }
 
   applyvisionsets();
 }
 
 bwmode(var_0) {
-  if(var_0) {
+  if(var_0)
     level.visionsets["bw"] = 1;
-  } else {
+  else
     level.visionsets["bw"] = 0;
-  }
 
   applyvisionsets();
 }
 
 invertmode(var_0) {
-  if(var_0) {
+  if(var_0)
     level.visionsets["invert"] = 1;
-  } else {
+  else
     level.visionsets["invert"] = 0;
-  }
 
   applyvisionsets();
 }
@@ -274,24 +258,21 @@ applyvisionsets() {
   var_0 = 0;
   var_1 = "";
 
-  if(level.visionsets["bw"]) {
+  if(level.visionsets["bw"])
     var_1 = var_1 + "_bw";
-  }
 
   if(level.visionsets["invert"]) {
     var_1 = var_1 + "_invert";
 
-    if(isDefined(level.cheat_invert_override)) {
+    if(isdefined(level.cheat_invert_override))
       var_1 = var_1 + level.cheat_invert_override;
-    }
   }
 
   if(level.visionsets["contrast"]) {
     var_1 = var_1 + "_contrast";
 
-    if(isDefined(level.cheat_highcontrast_override)) {
+    if(isdefined(level.cheat_highcontrast_override))
       var_1 = var_1 + level.cheat_highcontrast_override;
-    }
   }
 
   if(level.visionsets["chaplin"]) {
@@ -310,7 +291,7 @@ applyvisionsets() {
 }
 
 slowmo_system_init() {
-  level.slowmo = spawnStruct();
+  level.slowmo = spawnstruct();
   slowmo_system_defaults();
   notifyoncommand("_cheat_player_press_slowmo", "+melee");
   notifyoncommand("_cheat_player_press_slowmo", "+melee_breath");
@@ -336,11 +317,10 @@ slowmo_hintprint() {
     return;
   }
 
-  if(level.console) {
+  if(level.console)
     var_0 = 5;
-  } else {
+  else
     var_0 = 6;
-  }
 
   level.cheatshowslowmohint = 1;
   var_1 = 180;
@@ -368,7 +348,7 @@ slowmo_hintprint() {
   var_5.sort = 0.5;
   var_5 settext(&"SCRIPT_PLATFORM_CHEAT_USETOSLOWMO");
 
-  for(var_6 = 0; var_6 < 100; var_6++) {
+  for (var_6 = 0; var_6 < 100; var_6++) {
     if(level.cheatshowslowmohint != 1) {
       break;
     }
@@ -411,17 +391,16 @@ gamespeed_proc() {
   level endon("disable_slowmo");
   thread gamespeed_reset_on_death();
 
-  for(;;) {
+  for (;;) {
     level.player waittill("_cheat_player_press_slowmo");
     level.cheatshowslowmohint = 0;
     slowmo_system_defaults();
 
     if(!common_scripts\utility::flag("disable_slowmo_cheat")) {
-      if(gettimescale() < level.slowmo.speed_norm) {
+      if(gettimescale() < level.slowmo.speed_norm)
         thread gamespeed_reset();
-      } else {
+      else
         thread gamespeed_slowmo();
-      }
     }
 
     waittillframeend;
@@ -443,20 +422,18 @@ gamespeed_slowmo() {
 gamespeed_reset() {
   level.player thread common_scripts\utility::stop_loop_sound_on_entity("h1_slowmo_cheat_heartbeat");
 
-  if(!common_scripts\utility::flag("disable_slowmo_cheat")) {
+  if(!common_scripts\utility::flag("disable_slowmo_cheat"))
     setslowmotion(self.speed_slow, self.speed_norm, self.lerp_time_out);
-  }
 }
 
 slowmomodesuspend() {
   level endon("slowmo_resume");
 
-  if(gettimescale() < level.slowmo.speed_norm) {
+  if(gettimescale() < level.slowmo.speed_norm)
     level.sloweddown = 1;
-  }
 
-  for(;;) {
-    if(isDefined(level.slowmo_mode_enabled) && level.slowmo_mode_enabled) {
+  for (;;) {
+    if(isdefined(level.slowmo_mode_enabled) && level.slowmo_mode_enabled) {
       level notify("disable_slowmo");
       level.slowmo thread gamespeed_reset();
       level.player allowmelee(1);
@@ -467,12 +444,11 @@ slowmomodesuspend() {
 }
 
 slowmomoderesume() {
-  if(isDefined(level.slowmo_mode_enabled) && level.slowmo_mode_enabled) {
+  if(isdefined(level.slowmo_mode_enabled) && level.slowmo_mode_enabled) {
     level notify("slowmo_resume");
 
-    if(isDefined(level.sloweddown)) {
+    if(isdefined(level.sloweddown))
       level.slowmo thread gamespeed_slowmo();
-    }
 
     level.slowmo thread gamespeed_proc();
     level.player allowmelee(0);
@@ -505,9 +481,8 @@ chaplinmode(var_0) {
     setsaveddvar("bg_weaponBobAmplitudeStanding", level.cheatbobamporiginal);
     setsaveddvar("chaplincheat", "0");
 
-    if(!common_scripts\utility::flag("disable_slowmo_cheat")) {
+    if(!common_scripts\utility::flag("disable_slowmo_cheat"))
       settimescale(1.0);
-    }
   }
 
   applyvisionsets();
@@ -570,7 +545,7 @@ chaplin_proc() {
   level endon("disable_chaplin");
   soundscripts\_snd::snd_message("aud_start_ragtime_warfare");
 
-  for(;;) {
+  for (;;) {
     level.player shellshock("chaplincheat", 60, 1);
     wait 0.5;
 
@@ -586,15 +561,15 @@ chaplin_proc() {
 }
 
 chaplin_grain_start() {
-  level.cheatgrainlooper = spawn("script_model", level.player getEye());
-  level.cheatgrainlooper setModel("tag_origin");
+  level.cheatgrainlooper = spawn("script_model", level.player geteye());
+  level.cheatgrainlooper setmodel("tag_origin");
   level.cheatgrainlooper hide();
-  playFXOnTag(level._effect["grain_test"], level.cheatgrainlooper, "tag_origin");
+  playfxontag(level._effect["grain_test"], level.cheatgrainlooper, "tag_origin");
   thread chaplin_grain_proc();
 }
 
 chaplin_grain_end() {
-  if(!isDefined(level.cheatgrainlooper)) {
+  if(!isdefined(level.cheatgrainlooper)) {
     return;
   }
   level.cheatgrainlooper delete();
@@ -603,17 +578,16 @@ chaplin_grain_end() {
 chaplin_grain_proc() {
   level endon("disable_chaplin_grain");
 
-  for(;;) {
-    level.cheatgrainlooper.origin = level.player getEye() + 50 * anglesToForward(level.player getplayerangles());
+  for (;;) {
+    level.cheatgrainlooper.origin = level.player geteye() + 50 * anglestoforward(level.player getplayerangles());
     wait 0.01;
   }
 }
 
 is_cheating() {
-  for(var_0 = 0; var_0 < level.cheatdvars.size; var_0++) {
-    if(level.cheatstates[level.cheatdvars[var_0]]) {
+  for (var_0 = 0; var_0 < level.cheatdvars.size; var_0++) {
+    if(level.cheatstates[level.cheatdvars[var_0]])
       return 1;
-    }
   }
 
   return 0;
@@ -644,15 +618,14 @@ melonhead_monitor() {
   self endon("melonhead_monitor");
   waitframe();
 
-  if(isDefined(self.melonhead_ignore) && self.melonhead_ignore) {
+  if(isdefined(self.melonhead_ignore) && self.melonhead_ignore) {
     return;
   }
-  for(;;) {
-    if(level.melonhead_mode_enabled) {
+  for (;;) {
+    if(level.melonhead_mode_enabled)
       melonhead_add_melon();
-    } else {
+    else
       melonhead_remove_melon();
-    }
 
     level waittill("melonhead_mode_updated");
   }
@@ -662,10 +635,10 @@ melonhead_add_melon() {
   if(isremovedentity(self)) {
     return;
   }
-  if(isDefined(self.melonhead_disabled) && self.melonhead_disabled) {
+  if(isdefined(self.melonhead_disabled) && self.melonhead_disabled) {
     return;
   }
-  if(isDefined(self.melonhead_attached)) {
+  if(isdefined(self.melonhead_attached)) {
     return;
   }
   self attach(level.melonhead_mode_model, level.melonhead_mode_attachtag, 1);
@@ -678,18 +651,17 @@ melonhead_remove_melon(var_0, var_1) {
   if(isremovedentity(self)) {
     return;
   }
-  if(isDefined(var_1) && var_1) {
+  if(isdefined(var_1) && var_1)
     self.melonhead_disabled = 1;
-  }
 
-  if(!isDefined(self.melonhead_attached)) {
+  if(!isdefined(self.melonhead_attached)) {
     return;
   }
   self detach(level.melonhead_mode_model, level.melonhead_mode_attachtag);
   self.melonhead_attached = undefined;
 
-  if(isDefined(var_0) && var_0) {
-    playFX(level.melonhead_mode_fx, self gettagorigin(level.melonhead_mode_attachtag), anglesToForward(self.angles));
+  if(isdefined(var_0) && var_0) {
+    playfx(level.melonhead_mode_fx, self gettagorigin(level.melonhead_mode_attachtag), anglestoforward(self.angles));
     thread common_scripts\utility::play_sound_in_space("h1_hit_watermelon", self gettagorigin(level.melonhead_mode_attachtag));
   }
 
@@ -705,10 +677,10 @@ melonhead_detect_death() {
 melonhead_detect_hit() {
   self endon("melonhead_removed");
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isDefined(self.damagelocation)) {
+    if(!isdefined(self.damagelocation)) {
       continue;
     }
     if((self.damagelocation == "head" || self.damagelocation == "helmet") && var_4 != "MOD_IMPACT") {
@@ -733,23 +705,21 @@ handgun_mode_update(var_0) {
   level.cheat_handgun = common_scripts\utility::ter_op(var_0, 1, 0);
   level notify("handgun_mode_updated");
 
-  if(level.cheat_handgun) {
+  if(level.cheat_handgun)
     givehandgun();
-  } else {
+  else
     takehandgun();
-  }
 }
 
 handgun_monitor() {
   self endon("handgun_removed");
   self endon("death");
 
-  for(;;) {
-    if(level.player weaponpickupenabled() == 1 && level.player getcurrentweapon() == level.cheat_handgun_weaponname) {
+  for (;;) {
+    if(level.player weaponpickupenabled() == 1 && level.player getcurrentweapon() == level.cheat_handgun_weaponname)
       level.player maps\_utility::playerallowweaponpickup(0, "cheat_handgun");
-    } else if(level.player weaponpickupenabled() == 0 && level.player getcurrentweapon() != level.cheat_handgun_weaponname) {
+    else if(level.player weaponpickupenabled() == 0 && level.player getcurrentweapon() != level.cheat_handgun_weaponname)
       level.player maps\_utility::playerallowweaponpickup(1, "cheat_handgun");
-    }
 
     wait 0.05;
   }
@@ -759,7 +729,7 @@ handgun_monitor_reload() {
   self endon("handgun_removed");
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     if(level.player isreloading()) {
       level.player givemaxammo(level.cheat_handgun_weaponname);
       level.player setweaponammoclip(level.cheat_handgun_weaponname, weaponclipsize(level.cheat_handgun_weaponname));
@@ -779,9 +749,8 @@ givehandgun() {
 }
 
 takehandgun() {
-  if(level.player weaponpickupenabled() == 0) {
+  if(level.player weaponpickupenabled() == 0)
     level.player maps\_utility::playerallowweaponpickup(1, "cheat_handgun");
-  }
 
   var_0 = level.player getcurrentweapon();
   var_1 = 0;
@@ -797,9 +766,8 @@ takehandgun() {
       }
     }
 
-    if(!var_1 && var_2.size > 0) {
+    if(!var_1 && var_2.size > 0)
       level.player switchtoweaponimmediate(var_2[0]);
-    }
   }
 
   level.player takeweapon(level.cheat_handgun_weaponname);
@@ -817,17 +785,16 @@ lemonade_mode_init() {
 lemonade_mode_update(var_0) {
   level.cheat_lemonade = common_scripts\utility::ter_op(var_0, 1, 0);
 
-  if(level.cheat_lemonade) {
+  if(level.cheat_lemonade)
     givelemonade();
-  } else {
+  else
     takelemonade();
-  }
 }
 
 givelemonade() {
   level.cheat_lemonade_currentlethal = level.player getlethalweapon();
 
-  if(isDefined(level.cheat_lemonade_currentlethal) && level.cheat_lemonade_currentlethal != "none") {
+  if(isdefined(level.cheat_lemonade_currentlethal) && level.cheat_lemonade_currentlethal != "none") {
     var_0 = level.player getweaponammoclip(level.cheat_lemonade_currentlethal);
     level.player takeweapon(level.cheat_lemonade_currentlethal);
     level.player setlethalweapon(level.cheat_lemonade_weaponname);
@@ -840,7 +807,7 @@ takelemonade() {
   var_0 = level.player getweaponammoclip(level.cheat_lemonade_weaponname);
   level.player takeweapon(level.cheat_lemonade_weaponname);
 
-  if(isDefined(level.cheat_lemonade_currentlethal)) {
+  if(isdefined(level.cheat_lemonade_currentlethal)) {
     level.player setlethalweapon(level.cheat_lemonade_currentlethal);
     level.player giveweapon(level.cheat_lemonade_currentlethal);
     level.player setweaponammoclip(level.cheat_lemonade_currentlethal, var_0);
@@ -876,18 +843,17 @@ tracksuit_monitor() {
   self endon("death");
   waitframe();
 
-  if(isDefined(self.tracksuit_ignore) && self.tracksuit_ignore) {
+  if(isdefined(self.tracksuit_ignore) && self.tracksuit_ignore) {
     return;
   }
-  if(isDefined(self.animtree) && self.animtree == "dog.atr") {
+  if(isdefined(self.animtree) && self.animtree == "dog.atr") {
     return;
   }
-  for(;;) {
-    if(level.tracksuit_mode_enabled) {
+  for (;;) {
+    if(level.tracksuit_mode_enabled)
       add_tracksuit();
-    } else {
+    else
       remove_tracksuit();
-    }
 
     level waittill("tracksuit_mode_updated");
   }
@@ -899,18 +865,16 @@ add_tracksuit() {
   }
   self.tracksuitmode = 1;
 
-  if(isDefined(self.weapon) && !isDefined(self.ignoreweaponintracksuitmode) && self.classname != "script_model") {
-    if(isDefined(self.a) && isDefined(self.a.aimidlethread)) {
+  if(isdefined(self.weapon) && !isdefined(self.ignoreweaponintracksuitmode) && self.classname != "script_model") {
+    if(isdefined(self.a) && isdefined(self.a.aimidlethread))
       animscripts\combat_utility::endfireandanimidlethread();
-    }
 
     self.tracksuitmode_previousprimary = animscripts\utility::getaiprimaryweapon();
     var_0 = tracksuit_should_equipweapon();
     maps\_utility::forceuseweapon(level.tracksuit_mode_weapon, "primary");
 
-    if(!var_0) {
+    if(!var_0)
       maps\_utility::gun_remove();
-    }
 
     self.tracksuitmode_previousneverlean = self.a.neverlean;
     self.a.neverlean = 1;
@@ -927,19 +891,19 @@ add_tracksuit() {
   if(self.model == level.tracksuit_mode_model || self.model == "body_zakhaev_viktor") {
     return;
   }
-  if(isDefined(self.hatmodel)) {
+  if(isdefined(self.hatmodel)) {
     self.tracksuitmode_previoushatmodel = self.hatmodel;
     self detach(self.hatmodel);
     self.hatmodel = undefined;
   }
 
-  if(isDefined(self.headmodel)) {
+  if(isdefined(self.headmodel)) {
     self.tracksuitmode_previousheadmodel = self.headmodel;
     self detach(self.headmodel);
   }
 
   self.tracksuitmode_previousmodel = self.model;
-  self setModel(level.tracksuit_mode_model);
+  self setmodel(level.tracksuit_mode_model);
   self attach(level.tracksuit_mode_head);
   self.headmodel = level.tracksuit_mode_head;
 }
@@ -948,36 +912,34 @@ remove_tracksuit() {
   if(isremovedentity(self)) {
     return;
   }
-  if(!isDefined(self.tracksuitmode)) {
+  if(!isdefined(self.tracksuitmode)) {
     return;
   }
-  if(isDefined(self.tracksuitmode_previousmodel)) {
+  if(isdefined(self.tracksuitmode_previousmodel)) {
     self detach(self.headmodel);
     self.headmodel = undefined;
-    self setModel(self.tracksuitmode_previousmodel);
+    self setmodel(self.tracksuitmode_previousmodel);
     self.tracksuitmode_previousmodel = undefined;
   }
 
-  if(isDefined(self.tracksuitmode_previousheadmodel)) {
+  if(isdefined(self.tracksuitmode_previousheadmodel)) {
     self attach(self.tracksuitmode_previousheadmodel);
     self.headmodel = self.tracksuitmode_previousheadmodel;
     self.tracksuitmode_previousheadmodel = undefined;
   }
 
-  if(isDefined(self.tracksuitmode_previoushatmodel)) {
+  if(isdefined(self.tracksuitmode_previoushatmodel)) {
     self attach(self.tracksuitmode_previoushatmodel);
     self.hatmodel = self.tracksuitmode_previoushatmodel;
     self.tracksuitmode_previoushatmodel = undefined;
   }
 
-  if(isDefined(self.tracksuitmode_previousprimary) && !isDefined(self.ignoreweaponintracksuitmode)) {
-    if(isDefined(self.a) && isDefined(self.a.aimidlethread)) {
+  if(isdefined(self.tracksuitmode_previousprimary) && !isdefined(self.ignoreweaponintracksuitmode)) {
+    if(isdefined(self.a) && isdefined(self.a.aimidlethread))
       animscripts\combat_utility::endfireandanimidlethread();
-    }
 
-    if(tracksuit_should_equipweapon()) {
+    if(tracksuit_should_equipweapon())
       maps\_utility::forceuseweapon(self.tracksuitmode_previousprimary, "primary");
-    }
 
     self.secondaryweapon = self.tracksuitmode_previoussecondary;
     self.a.neverlean = self.tracksuitmode_previousneverlean;
@@ -990,9 +952,8 @@ remove_tracksuit() {
 
 tracksuit_should_equipweapon() {
   foreach(var_1 in self.weaponinfo) {
-    if(var_1.position != "none") {
+    if(var_1.position != "none")
       return 1;
-    }
   }
 
   return 0;

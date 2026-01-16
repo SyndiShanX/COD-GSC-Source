@@ -117,20 +117,18 @@ ee_mechz_spawn(n_spawn_pos) {
   a_spawner_structs = getstructarray("mech_hole_spawner", "targetname");
   spawn_pos = a_spawner_structs[n_spawn_pos];
 
-  if(!isDefined(spawn_pos.angles)) {
+  if(!isDefined(spawn_pos.angles))
     spawn_pos.angles = (0, 0, 0);
-  }
 
   self thread mechz_death();
   self thread mechz_death_ee();
   self forceteleport(spawn_pos.origin, spawn_pos.angles);
   self set_zombie_run_cycle("walk");
 
-  if(isDefined(level.mechz_find_flesh_override_func)) {
+  if(isDefined(level.mechz_find_flesh_override_func))
     level thread[[level.mechz_find_flesh_override_func]]();
-  } else {
+  else
     self thread mechz_find_flesh();
-  }
 
   self thread mechz_jump_think(spawn_pos);
   self ee_mechz_do_jump(spawn_pos);
@@ -158,13 +156,11 @@ ee_mechz_do_jump(s_spawn_pos) {
   self endon("death");
   self endon("kill_jump");
 
-  if(getdvarint(#"_id_E7121222") > 0) {
+  if(getdvarint(#"_id_E7121222") > 0)
     println("\\nMZ: Doing Jump-Teleport\\n");
-  }
 
-  if(getdvarint(#"_id_E7121222") > 1) {
+  if(getdvarint(#"_id_E7121222") > 1)
     println("\\nMZ: Jump setting not interruptable\\n");
-  }
 
   self.not_interruptable = 1;
   self setfreecameralockonallowed(0);
@@ -172,9 +168,8 @@ ee_mechz_do_jump(s_spawn_pos) {
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   self ghost();
 
-  if(isDefined(self.m_claw)) {
+  if(isDefined(self.m_claw))
     self.m_claw ghost();
-  }
 
   old_fx = self.fx_field;
   self thread maps\mp\zombies\_zm_spawner::zombie_eye_glow_stop();
@@ -183,9 +178,8 @@ ee_mechz_do_jump(s_spawn_pos) {
   wait(level.mechz_jump_delay);
   s_landing_point = getstruct(s_spawn_pos.target, "targetname");
 
-  if(!isDefined(s_landing_point.angles)) {
+  if(!isDefined(s_landing_point.angles))
     s_landing_point.angles = (0, 0, 0);
-  }
 
   self animscripted(s_landing_point.origin, s_landing_point.angles, "zm_fly_in");
   self show();
@@ -193,17 +187,15 @@ ee_mechz_do_jump(s_spawn_pos) {
   self setclientfield("mechz_fx", self.fx_field);
   self thread maps\mp\zombies\_zm_spawner::zombie_eye_glow();
 
-  if(isDefined(self.m_claw)) {
+  if(isDefined(self.m_claw))
     self.m_claw show();
-  }
 
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   self.not_interruptable = 0;
   self setfreecameralockonallowed(1);
 
-  if(getdvarint(#"_id_E7121222") > 1) {
+  if(getdvarint(#"_id_E7121222") > 1)
     println("\\nMZ: Jump clearing not interruptable\\n");
-  }
 
   mechz_jump_cleanup();
   self.closest_jump_point = s_landing_point;
@@ -218,7 +210,7 @@ sndee4music() {
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playLoopSound("mus_mechz_fight_loop");
+  ent playloopsound("mus_mechz_fight_loop");
   flag_wait("ee_mech_zombie_fight_completed");
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;
@@ -233,9 +225,8 @@ sndwait() {
     wait 1;
     counter++;
 
-    if(counter >= 60) {
+    if(counter >= 60)
       return false;
-    }
   }
 
   return true;

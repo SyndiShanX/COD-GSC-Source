@@ -12,15 +12,15 @@
 #namespace _zm_demo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_demo", &__init__, undefined, undefined);
+  system::register("zm_demo", & __init__, undefined, undefined);
 }
 
 function __init__() {
   if(isdemoplaying()) {
-    if(!isDefined(level.demolocalclients)) {
+    if(!isdefined(level.demolocalclients)) {
       level.demolocalclients = [];
     }
-    callback::on_localclient_connect(&player_on_connect);
+    callback::on_localclient_connect( & player_on_connect);
   }
 }
 
@@ -29,10 +29,10 @@ function player_on_connect(localclientnum) {
 }
 
 function watch_predicted_player_changes(localclientnum) {
-  level.demolocalclients[localclientnum] = spawnStruct();
+  level.demolocalclients[localclientnum] = spawnstruct();
   level.demolocalclients[localclientnum].nonpredicted_local_player = getnonpredictedlocalplayer(localclientnum);
   level.demolocalclients[localclientnum].predicted_local_player = getlocalplayer(localclientnum);
-  while(true) {
+  while (true) {
     nonpredicted_local_player = getnonpredictedlocalplayer(localclientnum);
     predicted_local_player = getlocalplayer(localclientnum);
     if(nonpredicted_local_player !== level.demolocalclients[localclientnum].nonpredicted_local_player) {

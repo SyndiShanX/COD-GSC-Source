@@ -16,6 +16,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
+
 #namespace util;
 
 autoexec __init__system__() {
@@ -331,7 +332,7 @@ draw_arrow(start, end, color) {
 
 debugorigin() {
   self notify(#"debug origin");
-  self endon(#"debug origin", # "death");
+  self endon(#"debug origin", #"death");
 
   for(;;) {
     forward = anglesToForward(self.angles);
@@ -615,7 +616,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
       }
 
       break;
@@ -623,7 +626,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
       }
 
       break;
@@ -631,7 +636,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
       }
 
       break;
@@ -639,7 +646,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
       }
 
       break;
@@ -647,7 +656,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
       }
 
       break;
@@ -655,7 +666,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2]);
       } else {
-        return [[func]](a_vars[0], a_vars[1], a_vars[2]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1], a_vars[2]);
       }
 
       break;
@@ -663,7 +676,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1]);
       } else {
-        return [[func]](a_vars[0], a_vars[1]);
+        return [
+          [func]
+        ](a_vars[0], a_vars[1]);
       }
 
       break;
@@ -671,7 +686,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0]);
       } else {
-        return [[func]](a_vars[0]);
+        return [
+          [func]
+        ](a_vars[0]);
       }
 
       break;
@@ -679,7 +696,9 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]]();
       } else {
-        return [[func]]();
+        return [
+          [func]
+        ]();
       }
 
       break;
@@ -999,36 +1018,36 @@ fileprint_radiant_vec(vector) {
 
 death_notify_wrapper(attacker, damagetype) {
   level notify(#"face", {
-    #face_notify: "death",
+    #face_notify: "death", 
     #entity: self
   });
   self notify(#"death", {
-    #attacker: attacker,
+    #attacker: attacker, 
     #mod: damagetype
   });
 }
 
 damage_notify_wrapper(damage, attacker, direction_vec, point, type, modelname, tagname, partname, idflags) {
   level notify(#"face", {
-    #face_notify: "damage",
+    #face_notify: "damage", 
     #entity: self
   });
   self notify(#"damage", {
-    #amount: damage,
-    #attacker: attacker,
-    #direction: direction_vec,
-    #position: point,
-    #mod: type,
-    #model_name: modelname,
-    #tag_name: tagname,
-    #part_name: partname,
+    #amount: damage, 
+    #attacker: attacker, 
+    #direction: direction_vec, 
+    #position: point, 
+    #mod: type, 
+    #model_name: modelname, 
+    #tag_name: tagname, 
+    #part_name: partname, 
     #flags: idflags
   });
 }
 
 explode_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "explode",
+    #face_notify: "explode", 
     #entity: self
   });
   self notify(#"explode");
@@ -1036,7 +1055,7 @@ explode_notify_wrapper() {
 
 alert_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "alert",
+    #face_notify: "alert", 
     #entity: self
   });
   self notify(#"alert");
@@ -1044,7 +1063,7 @@ alert_notify_wrapper() {
 
 shoot_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "shoot",
+    #face_notify: "shoot", 
     #entity: self
   });
   self notify(#"shoot");
@@ -1052,7 +1071,7 @@ shoot_notify_wrapper() {
 
 melee_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "melee",
+    #face_notify: "melee", 
     #entity: self
   });
   self notify(#"melee");
@@ -1561,7 +1580,7 @@ debug_magic_bullet_shield_death(guy) {
     targetname = guy.targetname;
   }
 
-  guy endon(#"stop_magic_bullet_shield", # "_stop_magic_bullet_shield_debug");
+  guy endon(#"stop_magic_bullet_shield", #"_stop_magic_bullet_shield_debug");
   guy waittill(#"death");
   assert(!isDefined(guy), "<dev string:x839>" + targetname);
 }
@@ -1648,7 +1667,7 @@ stop_magic_bullet_shield(ent = self) {
 
 get_rounds_won(team) {
   team = get_team_mapping(team);
-  return game.stat[# "roundswon"][team];
+  return game.stat[#"roundswon"][team];
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
@@ -2047,7 +2066,7 @@ waittillrollingornotmoving() {
     return "stationary";
   }
 
-  movestate = self waittill(#"stationary", # "rolling");
+  movestate = self waittill(#"stationary", #"rolling");
   return movestate._notify;
 }
 
@@ -2070,7 +2089,7 @@ getweaponclass(weapon) {
 
   baseweaponparam = weapons::getbaseweapon(weapon);
   baseweaponindex = getbaseweaponitemindex(baseweaponparam);
-  weaponclass = # "";
+  weaponclass = #"";
   weaponinfo = getunlockableiteminfofromindex(baseweaponindex, 1);
 
   if(isDefined(weaponinfo)) {
@@ -2388,7 +2407,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  self endon(#"death", # "hash_375a9d48dd6a9427");
+  self endon(#"death", #"hash_375a9d48dd6a9427");
   self notify(#"__auto_delete__");
   self endon(#"__auto_delete__");
   level flag::wait_till("all_players_spawned");
@@ -2401,7 +2420,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  if(n_mode & 16 || n_mode == 1 || n_mode == 8) {
+  if(n_mode&16 || n_mode == 1 || n_mode == 8) {
     n_mode |= 2;
     n_mode |= 4;
   }
@@ -2410,7 +2429,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
   n_tests_to_do = 2;
   n_dot_check = 0;
 
-  if(n_mode & 16) {
+  if(n_mode&16) {
     n_think_time = 0.2;
     n_tests_to_do = 1;
     n_dot_check = 0.4;
@@ -2444,7 +2463,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
       v_eye = player getplayercamerapos();
       b_behind = 0;
 
-      if(n_mode & 2) {
+      if(n_mode&2) {
         v_facing = anglesToForward(player getplayerangles());
         v_to_ent = vectornormalize(self.origin - v_eye);
         n_dot = vectordot(v_facing, v_to_ent);
@@ -2452,16 +2471,16 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
         if(n_dot < n_dot_check) {
           b_behind = 1;
 
-          if(!(n_mode & 1)) {
+          if(!(n_mode&1)) {
             n_tests_passed++;
             continue;
           }
         }
       }
 
-      if(n_mode & 4) {
+      if(n_mode&4) {
         if(!self sightconetrace(v_eye, isDefined(player getvehicleoccupied()) ? player getvehicleoccupied() : player)) {
-          if(b_behind || !(n_mode & 1)) {
+          if(b_behind || !(n_mode&1)) {
             n_tests_passed++;
           }
         }
@@ -2734,7 +2753,7 @@ anyteamhitroundwinlimit() {
 }
 
 anyteamhitroundlimitwithdraws() {
-  tie_wins = game.stat[# "roundswon"][# "tie"];
+  tie_wins = game.stat[#"roundswon"][#"tie"];
 
   foreach(team, _ in level.teams) {
     if(getroundswon(team) + tie_wins >= level.roundwinlimit) {
@@ -2784,7 +2803,7 @@ hitroundwinlimit() {
 
 any_team_hit_score_limit() {
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= level.scorelimit) {
+    if(game.stat[#"teamscores"][team] >= level.scorelimit) {
       return true;
     }
   }
@@ -2826,7 +2845,7 @@ any_team_hit_round_score_limit() {
   round_score_limit = get_current_round_score_limit();
 
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= round_score_limit) {
+    if(game.stat[#"teamscores"][team] >= round_score_limit) {
       return true;
     }
   }
@@ -2860,7 +2879,7 @@ hitroundscorelimit() {
 
 getroundswon(team) {
   team = get_team_mapping(team);
-  return game.stat[# "roundswon"][team];
+  return game.stat[#"roundswon"][team];
 }
 
 getotherteamsroundswon(str_skip_team) {
@@ -2876,7 +2895,7 @@ getotherteamsroundswon(str_skip_team) {
       continue;
     }
 
-    roundswon += game.stat[# "roundswon"][team];
+    roundswon += game.stat[#"roundswon"][team];
   }
 
   return roundswon;
@@ -2907,16 +2926,16 @@ function_97cf7eb0(v_start, n_max_dist = 5000, n_ground_offset = 0, e_ignore, b_i
   v_trace_end = v_trace_start + (0, 0, (n_max_dist + 5) * -1);
   a_trace = groundtrace(v_trace_start, v_trace_end, 0, e_ignore, b_ignore_water, b_ignore_glass);
 
-  if(a_trace[# "surfacetype"] != "none") {
+  if(a_trace[#"surfacetype"] != "none") {
     return {
-      #position: a_trace[# "position"] + (0, 0, n_ground_offset),
-      #entity: a_trace[# "entity"]
+      #position: a_trace[#"position"] + (0, 0, n_ground_offset), 
+      #entity: a_trace[#"entity"]
     };
   }
 
   return {
-    #position: v_start,
-    #entity: a_trace[# "entity"]
+    #position: v_start, 
+    #entity: a_trace[#"entity"]
   };
 }
 
@@ -3031,7 +3050,7 @@ has_flak_jacket_perk_purchased_and_equipped() {
 }
 
 has_blind_eye_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyairsupport", # "specialty_nottargetedbyairsupport|specialty_nokillstreakreticle");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyairsupport", #"specialty_nottargetedbyairsupport|specialty_nokillstreakreticle");
 }
 
 has_ghost_perk_purchased_and_equipped() {
@@ -3039,27 +3058,27 @@ has_ghost_perk_purchased_and_equipped() {
 }
 
 has_tactical_mask_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_stunprotection", # "specialty_stunprotection|specialty_flashprotection|specialty_proximityprotection");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_stunprotection", #"specialty_stunprotection|specialty_flashprotection|specialty_proximityprotection");
 }
 
 has_hacker_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_showenemyequipment", # "specialty_showenemyequipment|specialty_showscorestreakicons|specialty_showenemyvehicles");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_showenemyequipment", #"specialty_showenemyequipment|specialty_showscorestreakicons|specialty_showenemyvehicles");
 }
 
 has_cold_blooded_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyaitank", # "specialty_nottargetedbyaitank|specialty_nottargetedbyraps|specialty_nottargetedbysentry|specialty_nottargetedbyrobot|specialty_immunenvthermal");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyaitank", #"specialty_nottargetedbyaitank|specialty_nottargetedbyraps|specialty_nottargetedbysentry|specialty_nottargetedbyrobot|specialty_immunenvthermal");
 }
 
 has_hard_wired_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_immunecounteruav", # "specialty_immunecounteruav|specialty_immuneemp|specialty_immunetriggerc4|specialty_immunetriggershock|specialty_immunetriggerbetty|specialty_sixthsensejammer|specialty_trackerjammer|specialty_immunesmoke");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_immunecounteruav", #"specialty_immunecounteruav|specialty_immuneemp|specialty_immunetriggerc4|specialty_immunetriggershock|specialty_immunetriggerbetty|specialty_sixthsensejammer|specialty_trackerjammer|specialty_immunesmoke");
 }
 
 has_gung_ho_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_sprintfire", # "specialty_sprintfire|specialty_sprintgrenadelethal|specialty_sprintgrenadetactical|specialty_sprintequipment");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_sprintfire", #"specialty_sprintfire|specialty_sprintgrenadelethal|specialty_sprintgrenadetactical|specialty_sprintequipment");
 }
 
 has_fast_hands_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_fastweaponswitch", # "specialty_fastweaponswitch|specialty_sprintrecovery|specialty_sprintfirerecovery");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_fastweaponswitch", #"specialty_fastweaponswitch|specialty_sprintrecovery|specialty_sprintfirerecovery");
 }
 
 has_scavenger_perk_purchased_and_equipped() {
@@ -3067,7 +3086,7 @@ has_scavenger_perk_purchased_and_equipped() {
 }
 
 has_jetquiet_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_jetquiet", # "specialty_jetnoradar|specialty_jetquiet");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_jetquiet", #"specialty_jetnoradar|specialty_jetquiet");
 }
 
 has_awareness_perk_purchased_and_equipped() {
@@ -3179,12 +3198,12 @@ getteammask(team) {
 getotherteam(team) {
   team = get_team_mapping(team);
 
-  if(team == # "allies") {
-    return # "axis";
-  } else if(team == # "axis") {
-    return # "allies";
+  if(team == #"allies") {
+    return #"axis";
+  } else if(team == #"axis") {
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:x9c8>" + team);
@@ -3220,10 +3239,10 @@ add_debug_command(cmd) {
   adddebugcommand(cmd);
 }
 
-get_players(team = # "any") {
+get_players(team = #"any") {
   arrayremovevalue(level.players, undefined, 0);
 
-  if(team == # "any") {
+  if(team == #"any") {
     return arraycopy(level.players);
   }
 
@@ -3243,8 +3262,8 @@ get_players(team = # "any") {
   return players;
 }
 
-get_active_players(team = # "any") {
-  if(team != # "any") {
+get_active_players(team = #"any") {
+  if(team != #"any") {
     assert(isDefined(level.teams[team]), "<dev string:x9e6>" + function_9e72a96(team) + "<dev string:x9ea>");
   }
 
@@ -3256,7 +3275,7 @@ get_active_players(team = # "any") {
       continue;
     }
 
-    if(!isDefined(team) || team == # "any" || player.team === team) {
+    if(!isDefined(team) || team == #"any" || player.team === team) {
       players[players.size] = player;
     }
   }
@@ -3264,10 +3283,10 @@ get_active_players(team = # "any") {
   return players;
 }
 
-function_81ccf6d3(team = # "any") {
+function_81ccf6d3(team = #"any") {
   players = get_active_players();
 
-  if(team == # "any") {
+  if(team == #"any") {
     return players;
   }
 
@@ -3283,7 +3302,7 @@ function_81ccf6d3(team = # "any") {
   return enemies;
 }
 
-get_human_players(team = # "any") {
+get_human_players(team = #"any") {
   players = getplayers(team);
   humanplayers = [];
 
@@ -3300,7 +3319,7 @@ function_8e89351(player) {
   return isDefined(player) && !isbot(player) && isinarray(level.players, player);
 }
 
-get_bot_players(team = # "any") {
+get_bot_players(team = #"any") {
   players = get_players(team);
   botplayers = [];
 
@@ -3313,12 +3332,12 @@ get_bot_players(team = # "any") {
   return botplayers;
 }
 
-is_game_solo(team = # "any") {
+is_game_solo(team = #"any") {
   humanplayers = get_human_players(team);
   return humanplayers.size == 1;
 }
 
-is_game_coop(team = # "any") {
+is_game_coop(team = #"any") {
   humanplayers = get_human_players(team);
   return humanplayers.size > 1;
 }
@@ -3401,7 +3420,7 @@ private function_4627b63d(alias) {
 private function_3cb7a62d() {
   assert(isDefined(level.team_mapping));
 
-  if(get_team_mapping("sidea") == # "allies" && get_team_mapping("sideb") == # "axis") {
+  if(get_team_mapping("sidea") == #"allies" && get_team_mapping("sideb") == #"axis") {
     level clientfield::set("cf_team_mapping", 1);
     return;
   }
@@ -3415,8 +3434,8 @@ function_73fab74d() {
   }
 
   level.var_1bbf77be = 1;
-  function_9db3109f(#"allies", # "allies");
-  function_9db3109f(#"axis", # "axis");
+  function_9db3109f(#"allies", #"allies");
+  function_9db3109f(#"axis", #"axis");
   function_9db3109f(#"allies", "wun");
   function_9db3109f(#"axis", "fpa");
   function_9db3109f(#"team3", "side3");
@@ -3425,9 +3444,9 @@ function_73fab74d() {
   function_d3e0802c("attacker", "defender");
   function_d3e0802c("attackers", "defenders");
   function_d3e0802c("wun", "fpa");
-  function_c16f65a3(#"allies", # "axis");
-  function_c16f65a3(#"team3", # "any");
-  set_team_mapping(#"allies", # "axis");
+  function_c16f65a3(#"allies", #"axis");
+  function_c16f65a3(#"team3", #"any");
+  set_team_mapping(#"allies", #"axis");
 }
 
 function_f9ce1d49() {
@@ -3498,7 +3517,7 @@ function_c16f65a3(enemy_a, enemy_b) {
 }
 
 function_9db3109f(team, alias) {
-  assert(team == # "allies" || team == # "axis" || team == # "team3");
+  assert(team == #"allies" || team == #"axis" || team == #"team3");
   level.team_mapping_alias[alias] = team;
 }
 
@@ -3522,9 +3541,9 @@ function_310d70e2(team) {
   assert(isDefined(level.var_af68e94e));
 
   if(isDefined(team)) {
-    if(team === level.team_mapping[level.var_af68e94e[# "sidea"]]) {
+    if(team === level.team_mapping[level.var_af68e94e[#"sidea"]]) {
       return "sidea";
-    } else if(team === level.team_mapping[level.var_af68e94e[# "sideb"]]) {
+    } else if(team === level.team_mapping[level.var_af68e94e[#"sideb"]]) {
       return "sideb";
     }
   }
@@ -3547,7 +3566,7 @@ get_enemy_team(team) {
     return level.team_enemy_mapping[team];
   }
 
-  return # "none";
+  return #"none";
 }
 
 get_game_type() {
@@ -3620,7 +3639,7 @@ ghost_wait_show_to_player(player, wait_time = 0.1, self_endon_string1) {
   self.abort_ghost_wait_show_to_player = undefined;
 
   if(isDefined(player)) {
-    player endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+    player endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   }
 
   if(isDefined(self_endon_string1)) {
@@ -3646,7 +3665,7 @@ ghost_wait_show_to_others(player, wait_time = 0.1, self_endon_string1) {
   self.abort_ghost_wait_show_to_others = undefined;
 
   if(isDefined(player)) {
-    player endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+    player endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   }
 
   if(isDefined(self_endon_string1)) {
@@ -3732,10 +3751,10 @@ function_f9af3d43(time) {
 
 is_party_gamemode() {
   switch (level.gametype) {
-    case # "sas":
-    case # "oic":
-    case # "shrp":
-    case # "gun":
+    case #"sas":
+    case #"oic":
+    case #"shrp":
+    case #"gun":
       return true;
   }
 
@@ -3857,7 +3876,7 @@ function_8eb53136(radius) {
 }
 
 is_spectating() {
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     return true;
   }
 
@@ -3959,7 +3978,7 @@ register_callback(str_kvp, func, ...) {
     }
 
     s_callback = {
-      #func: func,
+      #func: func, 
       #params: vararg
     };
     self.var_c18fbf49[var_a12e87bd] = s_callback;
@@ -4018,7 +4037,7 @@ register_custom_callback(str_name, str_kvp, func) {
 
 function_d608a743() {
   self notify(#"hash_29bf696e43d4a08b");
-  self endon(#"hash_29bf696e43d4a08b", # "death");
+  self endon(#"hash_29bf696e43d4a08b", #"death");
   a_str_notifies = getarraykeys(self.var_c18fbf49);
 
   while(true) {

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace zm_white_private_mannequin;
 
 autoexec __init__system__() {
@@ -12,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + # "hash_681de2aa531ffcd0", 20000, 1, "int", &function_a1ee0828, 0, 0);
+  clientfield::register("world", "" + #"hash_681de2aa531ffcd0", 20000, 1, "int", &function_a1ee0828, 0, 0);
 }
 
 __main__() {}

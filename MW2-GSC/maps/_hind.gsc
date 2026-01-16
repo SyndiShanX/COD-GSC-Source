@@ -60,6 +60,7 @@ main(model, type) {
   build_compassicon("helicopter", false);
 
   build_bulletshield(true);
+
 }
 
 init_local() {
@@ -69,15 +70,15 @@ init_local() {
   //self.delete_on_death = true;
   self.script_badplace = false; // All helicopters dont need to create bad places
   maps\_vehicle::lights_on("running");
-  //maps\_vehicle::lights_on( "interior" );
+  //maps\_vehicle::lights_on( "interior" ); 
+
 }
 
 set_vehicle_anims(positions) {
   //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
 
-  for(i = 0; i < positions.size; i++) {
+  for (i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
-  }
 
   return positions;
 }
@@ -100,9 +101,8 @@ setplayer_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 9; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 9; i++)
+    positions[i] = spawnstruct();
 
   positions[0].idle[0] = % helicopter_pilot1_idle;
   positions[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;
@@ -263,6 +263,7 @@ setanims() {
   return setplayer_anims(positions);
 }
 
+
 //WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
@@ -290,17 +291,18 @@ unload_groups() {
   unload_groups["default"] = unload_groups["both"];
 
   return unload_groups;
+
 }
 
 set_attached_models() {
   array = [];
-  array["TAG_FastRope_LE"] = spawnStruct();
+  array["TAG_FastRope_LE"] = spawnstruct();
   array["TAG_FastRope_LE"].model = "rope_test";
   array["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   array["TAG_FastRope_LE"].idleanim = % bh_rope_idle_le;
   array["TAG_FastRope_LE"].dropanim = % bh_rope_drop_le;
 
-  array["TAG_FastRope_RI"] = spawnStruct();
+  array["TAG_FastRope_RI"] = spawnstruct();
   array["TAG_FastRope_RI"].model = "rope_test_ri";
   array["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   array["TAG_FastRope_RI"].idleanim = % bh_rope_idle_ri;
@@ -308,12 +310,13 @@ set_attached_models() {
 
   strings = getarraykeys(array);
 
-  for(i = 0; i < strings.size; i++) {
+  for (i = 0; i < strings.size; i++) {
     precachemodel(array[strings[i]].model);
   }
 
   return array;
 }
+
 
 /*QUAKED script_vehicle_mi24p_hind_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

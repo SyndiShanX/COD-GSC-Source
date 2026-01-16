@@ -56,13 +56,11 @@ boat_mginit(var_0, var_1, var_2) {
   var_3 = self.classname;
   var_4 = 0;
 
-  if(isDefined(self.script_mg_angle)) {
+  if(isDefined(self.script_mg_angle))
     var_4 = self.script_mg_angle;
-  }
 
-  if(!isDefined(self.mgturret)) {
+  if(!isDefined(self.mgturret))
     self.mgturret = [];
-  }
 
   var_5 = spawnturret("misc_turret", (0, 0, 0), var_0);
   var_5 linkto(self, var_1, (0, 0, 0), (0, -1 * var_4, 0));
@@ -75,20 +73,18 @@ boat_mginit(var_0, var_1, var_2) {
   var_5 makeunusable();
   maps\_vehicle_code::set_turret_team(var_5);
 
-  if(isDefined(self.script_fireondrones)) {
+  if(isDefined(self.script_fireondrones))
     var_5.script_fireondrones = self.script_fireondrones;
-  }
 
   self.mgturret = common_scripts\utility::array_add(self.mgturret, var_5);
   var_5.script_index = get_position_from_tag(var_1);
 
-  if(!isDefined(self.script_turretmg)) {
+  if(!isDefined(self.script_turretmg))
     self.script_turretmg = 1;
-  }
 
-  if(self.script_turretmg == 0) {
+  if(self.script_turretmg == 0)
     thread maps\_vehicle_code::_mgoff();
-  } else {
+  else {
     self.script_turretmg = 1;
     thread maps\_vehicle_code::_mgon();
   }
@@ -103,9 +99,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 6; var_1++) {
+  for(var_1 = 0; var_1 < 6; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "TAG_DRIVER";
   var_0[1].sittag = "TAG_GUY_FRONT_LEFT";

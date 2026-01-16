@@ -25,11 +25,10 @@ init_elevators() {
 }
 
 quick_revive_solo_watch() {
-  if(flag("solo_game")) {
+  if(flag("solo_game"))
     self.body perkelevatordoor(1);
-  }
 
-  machine_triggers = getEntArray("vending_revive", "target");
+  machine_triggers = getentarray("vending_revive", "target");
   machine_trigger = machine_triggers[0];
   triggeroffset = machine_trigger.origin - self.body.origin;
   machineoffset = level.quick_revive_machine.origin - self.body.origin;
@@ -98,21 +97,18 @@ perkelevatordoor(set) {
 get_link_entity_for_host_migration() {
   foreach(elevator in level.elevators) {
     if(isDefined(elevator.body.trig)) {
-      if(self istouching(elevator.body.trig)) {
+      if(self istouching(elevator.body.trig))
         return elevator.body;
-      }
     }
   }
 
   escape_pod = getent("elevator_bldg1a_body", "targetname");
 
-  if(self istouching(escape_pod)) {
+  if(self istouching(escape_pod))
     return escape_pod;
-  }
 
-  if(distance(escape_pod.origin, self.origin) < 128) {
+  if(distance(escape_pod.origin, self.origin) < 128)
     return escape_pod;
-  }
 
   return undefined;
 }
@@ -146,28 +142,24 @@ is_self_on_elevator() {
   elevator_volumes[elevator_volumes.size] = getent("elevator_3d", "targetname");
 
   foreach(zone in elevator_volumes) {
-    if(self istouching(zone)) {
+    if(self istouching(zone))
       return true;
-    }
   }
 
   foreach(elevator in level.elevators) {
     if(isDefined(elevator.body.trig)) {
-      if(self istouching(elevator.body.trig)) {
+      if(self istouching(elevator.body.trig))
         return true;
-      }
     }
   }
 
   escape_pod = getent("elevator_bldg1a_body", "targetname");
 
-  if(self istouching(escape_pod)) {
+  if(self istouching(escape_pod))
     return true;
-  }
 
-  if(distance(escape_pod.origin, self.origin) < 128) {
+  if(distance(escape_pod.origin, self.origin) < 128)
     return true;
-  }
 
   return false;
 }
@@ -196,23 +188,20 @@ object_is_on_elevator() {
 elevator_level_for_floor(floor) {
   flevel = "0";
 
-  if(isDefined(self.floors["" + (floor + 1)])) {
+  if(isDefined(self.floors["" + (floor + 1)]))
     flevel = "" + (floor + 1);
-  } else {
+  else
     flevel = "0";
-  }
 
   return flevel;
 }
 
 elevator_is_on_floor(floor) {
-  if(self.body.current_level == floor) {
+  if(self.body.current_level == floor)
     return true;
-  }
 
-  if(self.floors[self.body.current_level].script_location == self.floors[floor].script_location) {
+  if(self.floors[self.body.current_level].script_location == self.floors[floor].script_location)
     return true;
-  }
 
   return false;
 }
@@ -246,30 +235,27 @@ elevator_enable_paths(floor) {
   self elevator_disable_paths(floor);
   paths = undefined;
 
-  if(!isDefined(floor) || !isDefined(self.floors[floor].paths)) {
+  if(!isDefined(floor) || !isDefined(self.floors[floor].paths))
     return;
-  } else {
+  else
     paths = self.floors[floor].paths;
-  }
 
   self.current_paths = paths;
   self.current_paths elevator_paths_onoff(1, self.roof_paths);
 }
 
 elevator_disable_paths(floor) {
-  if(isDefined(self.current_paths)) {
+  if(isDefined(self.current_paths))
     self.current_paths elevator_paths_onoff(0, self.roof_paths);
-  }
 
   self.current_paths = undefined;
 }
 
 init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
-  if(!isDefined(level.elevators)) {
+  if(!isDefined(level.elevators))
     level.elevators = [];
-  }
 
-  elevator = spawnStruct();
+  elevator = spawnstruct();
   elevator.name = elevatorname;
   elevator.body = undefined;
   level.elevators["bldg" + elevatorname] = elevator;
@@ -315,17 +301,14 @@ init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
     }
   }
 
-  if(elevatorname != "3c") {
+  if(elevatorname != "3c")
     elevator.floors["" + elevator.floors.size] = elevator.floors["1"];
-  }
 
-  if(isDefined(force_starting_floor)) {
+  if(isDefined(force_starting_floor))
     elevator.body.force_starting_floor = force_starting_floor;
-  }
 
-  if(isDefined(force_starting_origin)) {
+  if(isDefined(force_starting_origin))
     elevator.body.force_starting_origin_offset = force_starting_origin;
-  }
 
   level thread elevator_think(elevator);
   level thread elevator_depart_early(elevator);
@@ -342,9 +325,8 @@ elevator_roof_watcher() {
 
     if(isDefined(who) && isplayer(who)) {
       while(isDefined(who) && who istouching(self.trig)) {
-        if(self.is_moving) {
+        if(self.is_moving)
           self waittill_any("movedone", "forcego");
-        }
 
         zombies = getaiarray(level.zombie_team);
 
@@ -352,9 +334,8 @@ elevator_roof_watcher() {
           foreach(zombie in zombies) {
             climber = zombie zombie_for_elevator_unseen();
 
-            if(isDefined(climber)) {
+            if(isDefined(climber))
               continue;
-            }
           }
 
           if(isDefined(climber)) {
@@ -380,9 +361,8 @@ zombie_for_elevator_unseen() {
   for(i = 0; i < players.size; i++) {
     can_be_seen = self maps\mp\zm_highrise_distance_tracking::player_can_see_me(players[i]);
 
-    if(can_be_seen || distancesquared(self.origin, players[i].origin) < distance_squared_check) {
+    if(can_be_seen || distancesquared(self.origin, players[i].origin) < distance_squared_check)
       return undefined;
-    }
   }
 
   return self;
@@ -421,23 +401,21 @@ elev_clean_up_corpses() {
 
   if(isDefined(corpses)) {
     for(i = 0; i < corpses.size; i++) {
-      if(corpses[i] istouching(self.trig)) {
+      if(corpses[i] istouching(self.trig))
         corpses[i] thread elev_remove_corpses();
-      }
     }
   }
 
   if(isDefined(zombies)) {
     foreach(zombie in zombies) {
-      if(zombie istouching(self.trig) && zombie.health <= 0) {
+      if(zombie istouching(self.trig) && zombie.health <= 0)
         zombie thread elev_remove_corpses();
-      }
     }
   }
 }
 
 elev_remove_corpses() {
-  playFX(level._effect["zomb_gib"], self.origin);
+  playfx(level._effect["zomb_gib"], self.origin);
   self delete();
 }
 
@@ -445,20 +423,17 @@ elevator_next_floor(elevator, last, justchecking) {
   if(isDefined(elevator.body.force_starting_floor)) {
     floor = elevator.body.force_starting_floor;
 
-    if(!justchecking) {
+    if(!justchecking)
       elevator.body.force_starting_floor = undefined;
-    }
 
     return floor;
   }
 
-  if(!isDefined(last)) {
+  if(!isDefined(last))
     return 0;
-  }
 
-  if(last + 1 < elevator.floors.size) {
+  if(last + 1 < elevator.floors.size)
     return last + 1;
-  }
 
   return 0;
 }
@@ -467,41 +442,36 @@ elevator_initial_wait(elevator, minwait, maxwait, delaybeforeleaving) {
   elevator.body endon("forcego");
   elevator.body waittill_any_or_timeout(randomintrange(minwait, maxwait), "depart_early");
 
-  if(!is_true(elevator.body.lock_doors)) {
+  if(!is_true(elevator.body.lock_doors))
     elevator.body setanim(level.perk_elevators_anims[elevator.body.perk_type][0]);
-  }
 
-  if(!is_true(elevator.body.departing_early)) {
+  if(!is_true(elevator.body.departing_early))
     wait(delaybeforeleaving);
-  }
 
   if(elevator.body.perk_type == "specialty_weapupgrade") {
-    while(flag("pack_machine_in_use")) {
+    while(flag("pack_machine_in_use"))
       wait 0.5;
-    }
 
     wait(randomintrange(1, 3));
   }
 
-  while(isDefined(level.elevators_stop) && level.elevators_stop || isDefined(elevator.body.elevator_stop) && elevator.body.elevator_stop) {
+  while(isDefined(level.elevators_stop) && level.elevators_stop || isDefined(elevator.body.elevator_stop) && elevator.body.elevator_stop)
     wait 0.05;
-  }
 }
 
 elevator_set_moving(moving) {
   self.body.is_moving = moving;
 
-  if(self.body is_pap()) {
+  if(self.body is_pap())
     level.pap_moving = moving;
-  }
 }
 
 predict_floor(elevator, next, speed) {
   next = elevator_next_floor(elevator, next, 1);
 
-  if(isDefined(elevator.floors["" + (next + 1)])) {
+  if(isDefined(elevator.floors["" + (next + 1)]))
     elevator.body.next_level = "" + (next + 1);
-  } else {
+  else {
     start_location = 1;
     elevator.body.next_level = "0";
   }
@@ -511,21 +481,19 @@ predict_floor(elevator, next, speed) {
   cur_level_start_pos = elevator.floors[elevator.body.next_level].starting_position;
   start_level_start_pos = elevator.floors[elevator.body.starting_floor].starting_position;
 
-  if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos) {
+  if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos)
     floor_goal = cur_level_start_pos;
-  } else {
+  else
     floor_goal = floor_stop.origin;
-  }
 
   dist = distance(elevator.body.origin, floor_goal);
   time = dist / speed;
 
   if(dist > 0) {
-    if(elevator.body.origin[2] > floor_goal[2]) {
+    if(elevator.body.origin[2] > floor_goal[2])
       clientnotify(elevator.name + "_d");
-    } else {
+    else
       clientnotify(elevator.name + "_u");
-    }
   }
 }
 
@@ -542,9 +510,8 @@ elevator_think(elevator) {
     elevator.body.current_level = "" + elevator.body.force_starting_floor;
     elevator.body.origin = elevator.floors[elevator.body.current_level].origin;
 
-    if(isDefined(elevator.body.force_starting_origin_offset)) {
+    if(isDefined(elevator.body.force_starting_origin_offset))
       elevator.body.origin = elevator.body.origin + (0, 0, elevator.body.force_starting_origin_offset);
-    }
   }
 
   elevator.body.can_move = 1;
@@ -557,7 +524,8 @@ elevator_think(elevator) {
     elevator thread quick_revive_solo_watch();
   }
 
-  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {} else
+  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {
+  } else
     flag_wait("power_on");
 
   elevator.body perkelevatordoor(1);
@@ -566,31 +534,28 @@ elevator_think(elevator) {
   while(true) {
     start_location = 0;
 
-    if(isDefined(elevator.body.force_starting_floor)) {
+    if(isDefined(elevator.body.force_starting_floor))
       skipinitialwait = 1;
-    }
 
     elevator.body.departing = 1;
 
-    if(!is_true(elevator.body.lock_doors)) {
+    if(!is_true(elevator.body.lock_doors))
       elevator.body setanim(level.perk_elevators_anims[elevator.body.perk_type][1]);
-    }
 
     predict_floor(elevator, next, speed);
 
     if(!is_true(skipinitialwait)) {
       elevator_initial_wait(elevator, minwait, maxwait, delaybeforeleaving);
 
-      if(!is_true(elevator.body.lock_doors)) {
+      if(!is_true(elevator.body.lock_doors))
         elevator.body setanim(level.perk_elevators_anims[elevator.body.perk_type][1]);
-      }
     }
 
     next = elevator_next_floor(elevator, next, 0);
 
-    if(isDefined(elevator.floors["" + (next + 1)])) {
+    if(isDefined(elevator.floors["" + (next + 1)]))
       elevator.body.next_level = "" + (next + 1);
-    } else {
+    else {
       start_location = 1;
       elevator.body.next_level = "0";
     }
@@ -600,29 +565,26 @@ elevator_think(elevator) {
     cur_level_start_pos = elevator.floors[elevator.body.next_level].starting_position;
     start_level_start_pos = elevator.floors[elevator.body.starting_floor].starting_position;
 
-    if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos) {
+    if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos)
       floor_goal = cur_level_start_pos;
-    } else {
+    else
       floor_goal = floor_stop.origin;
-    }
 
     dist = distance(elevator.body.origin, floor_goal);
     time = dist / speed;
 
     if(dist > 0) {
-      if(elevator.body.origin[2] > floor_goal[2]) {
+      if(elevator.body.origin[2] > floor_goal[2])
         clientnotify(elevator.name + "_d");
-      } else {
+      else
         clientnotify(elevator.name + "_u");
-      }
     }
 
     if(is_true(start_location)) {
       elevator.body thread squashed_death_alarm();
 
-      if(!skipinitialwait) {
+      if(!skipinitialwait)
         wait 3;
-      }
     }
 
     skipinitialwait = 0;
@@ -635,9 +597,8 @@ elevator_think(elevator) {
     if(dist > 0) {
       elevator.body moveto(floor_goal, time, time * 0.25, time * 0.25);
 
-      if(isDefined(elevator.body.trig)) {
+      if(isDefined(elevator.body.trig))
         elevator.body thread elev_clean_up_corpses();
-      }
 
       elevator.body thread elevator_move_sound();
       elevator.body waittill_any("movedone", "forcego");
@@ -646,9 +607,8 @@ elevator_think(elevator) {
     elevator elevator_set_moving(0);
     elevator elevator_enable_paths(elevator.body.current_level);
 
-    if(elevator.body.perk_type == "vending_revive" && !flag("solo_game") && !flag("power_on")) {
+    if(elevator.body.perk_type == "vending_revive" && !flag("solo_game") && !flag("power_on"))
       flag_wait("power_on");
-    }
   }
 }
 
@@ -660,7 +620,7 @@ squashed_death_alarm() {
   if(!is_true(self.squashed_death_alarm)) {
     self.squashed_death_alarm = 1;
     alarm_origin = spawn("script_origin", self squashed_death_alarm_nearest_point());
-    alarm_origin playLoopSound("amb_alarm_bell", 0.1);
+    alarm_origin playloopsound("amb_alarm_bell", 0.1);
     self waittill_any("movedone", "forcego");
     alarm_origin delete();
     self.squashed_death_alarm = 0;
@@ -672,24 +632,23 @@ squashed_death_alarm_nearest_point() {
   closest = vectorscale((1, 1, 1), 999999.0);
 
   foreach(vector in positions) {
-    if(distance2dsquared(self.origin, vector) < distance2dsquared(self.origin, closest)) {
+    if(distance2dsquared(self.origin, vector) < distance2dsquared(self.origin, closest))
       closest = vector;
-    }
   }
 
   return closest;
 }
 
 elevator_move_sound() {
-  self playSound("zmb_elevator_ding");
+  self playsound("zmb_elevator_ding");
   wait 0.4;
-  self playSound("zmb_elevator_ding");
-  self playSound("zmb_elevator_run_start");
-  self playLoopSound("zmb_elevator_run", 0.5);
+  self playsound("zmb_elevator_ding");
+  self playsound("zmb_elevator_run_start");
+  self playloopsound("zmb_elevator_run", 0.5);
   self waittill("movedone");
   self stoploopsound(0.5);
-  self playSound("zmb_elevator_run_stop");
-  self playSound("zmb_elevator_ding");
+  self playsound("zmb_elevator_run_stop");
+  self playsound("zmb_elevator_ding");
 }
 
 init_elevator_perks() {
@@ -697,7 +656,7 @@ init_elevator_perks() {
   level.elevator_perks_building = [];
   level.elevator_perks_building["green"] = [];
   level.elevator_perks_building["blue"] = [];
-  level.elevator_perks_building["green"][0] = spawnStruct();
+  level.elevator_perks_building["green"][0] = spawnstruct();
   level.elevator_perks_building["green"][0].model = "zombie_vending_revive";
   level.elevator_perks_building["green"][0].script_noteworthy = "specialty_quickrevive";
   level.elevator_perks_building["green"][0].turn_on_notify = "revive_on";
@@ -709,27 +668,27 @@ init_elevator_perks() {
     b = 1;
   }
 
-  level.elevator_perks_building["green"][a] = spawnStruct();
+  level.elevator_perks_building["green"][a] = spawnstruct();
   level.elevator_perks_building["green"][a].model = "p6_zm_vending_chugabud";
   level.elevator_perks_building["green"][a].script_noteworthy = "specialty_finalstand";
   level.elevator_perks_building["green"][a].turn_on_notify = "chugabud_on";
-  level.elevator_perks_building["green"][b] = spawnStruct();
+  level.elevator_perks_building["green"][b] = spawnstruct();
   level.elevator_perks_building["green"][b].model = "zombie_vending_sleight";
   level.elevator_perks_building["green"][b].script_noteworthy = "specialty_fastreload";
   level.elevator_perks_building["green"][b].turn_on_notify = "sleight_on";
-  level.elevator_perks_building["blue"][0] = spawnStruct();
+  level.elevator_perks_building["blue"][0] = spawnstruct();
   level.elevator_perks_building["blue"][0].model = "zombie_vending_three_gun";
   level.elevator_perks_building["blue"][0].script_noteworthy = "specialty_additionalprimaryweapon";
   level.elevator_perks_building["blue"][0].turn_on_notify = "specialty_additionalprimaryweapon_power_on";
-  level.elevator_perks_building["blue"][1] = spawnStruct();
+  level.elevator_perks_building["blue"][1] = spawnstruct();
   level.elevator_perks_building["blue"][1].model = "zombie_vending_jugg";
   level.elevator_perks_building["blue"][1].script_noteworthy = "specialty_armorvest";
   level.elevator_perks_building["blue"][1].turn_on_notify = "juggernog_on";
-  level.elevator_perks_building["blue"][2] = spawnStruct();
+  level.elevator_perks_building["blue"][2] = spawnstruct();
   level.elevator_perks_building["blue"][2].model = "zombie_vending_doubletap2";
   level.elevator_perks_building["blue"][2].script_noteworthy = "specialty_rof";
   level.elevator_perks_building["blue"][2].turn_on_notify = "doubletap_on";
-  level.elevator_perks_building["blue"][3] = spawnStruct();
+  level.elevator_perks_building["blue"][3] = spawnstruct();
   level.elevator_perks_building["blue"][3].model = "p6_anim_zm_buildable_pap";
   level.elevator_perks_building["blue"][3].script_noteworthy = "specialty_weapupgrade";
   level.elevator_perks_building["blue"][3].turn_on_notify = "Pack_A_Punch_on";
@@ -778,9 +737,8 @@ init_elevator_perks() {
     level.random_perk_structs[i].script_noteworthy = level.elevator_perks[i].script_noteworthy;
     level.random_perk_structs[i].turn_on_notify = level.elevator_perks[i].turn_on_notify;
 
-    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
+    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
       level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
-    }
 
     level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
   }
@@ -800,9 +758,8 @@ random_elevator_perks() {
     trigger enablelinkto();
     trigger linkto(machine);
 
-    if(isDefined(trigger.clip)) {
+    if(isDefined(trigger.clip))
       trigger.clip delete();
-    }
 
     if(isDefined(trigger.bump)) {
       trigger.bump enablelinkto();
@@ -812,9 +769,8 @@ random_elevator_perks() {
     if(isDefined(elevator)) {
       elevator.perk_type = perk;
 
-      if(issubstr(elevator.targetname, "3b")) {
+      if(issubstr(elevator.targetname, "3b"))
         machine.origin = machine.origin + vectorscale((0, 0, 1), 8.0);
-      }
 
       elevator elevator_perk_offset(machine, perk);
       machine linkto(elevator);
@@ -843,9 +799,8 @@ random_elevator_perks() {
     trigger enablelinkto();
     trigger linkto(machine);
 
-    if(isDefined(trigger.clip)) {
+    if(isDefined(trigger.clip))
       trigger.clip delete();
-    }
 
     if(isDefined(elevator)) {
       elevator.perk_type = "specialty_weapupgrade";
@@ -884,7 +839,7 @@ elevator_perk_offset(machine, perk) {
   if(scale == 0) {
     return;
   }
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   machine.origin = machine.origin - forward * scale;
 }
 
@@ -912,9 +867,8 @@ get_perk_elevator() {
       tn = self.targetname;
 
       if(nw == "specialty_quickrevive" && tn == "vending_revive" || nw == "specialty_fastreload" && tn == "vending_sleight" || nw == "specialty_rof" && tn == "vending_doubletap" || nw == "specialty_armorvest" && tn == "vending_jugg" || nw == "specialty_finalstand" && tn == "vending_chugabud" || nw == "specialty_additionalprimaryweapon" && tn == "vending_additionalprimaryweapon" || nw == "specialty_weapupgrade" && tn == "vending_packapunch") {
-        if(isDefined(struct.script_linkent)) {
+        if(isDefined(struct.script_linkent))
           return struct.script_linkent;
-        }
       }
     }
   }
@@ -925,22 +879,19 @@ get_perk_elevator() {
 elevator_depart_early(elevator) {
   touchent = elevator.body;
 
-  if(isDefined(elevator.body.trig)) {
+  if(isDefined(elevator.body.trig))
     touchent = elevator.body.trig;
-  }
 
   while(true) {
-    while(is_true(elevator.body.is_moving)) {
+    while(is_true(elevator.body.is_moving))
       wait 0.5;
-    }
 
     someone_touching_elevator = 0;
     players = get_players();
 
     foreach(player in players) {
-      if(player istouching(touchent)) {
+      if(player istouching(touchent))
         someone_touching_elevator = 1;
-      }
     }
 
     if(is_true(someone_touching_elevator)) {
@@ -949,9 +900,8 @@ elevator_depart_early(elevator) {
       players = get_players();
 
       foreach(player in players) {
-        if(player istouching(touchent)) {
+        if(player istouching(touchent))
           someone_still_touching_elevator = 1;
-        }
       }
 
       if(is_true(someone_still_touching_elevator)) {
@@ -968,15 +918,13 @@ elevator_depart_early(elevator) {
 
 elevator_sparks_fx(elevator) {
   while(true) {
-    while(!is_true(elevator.body.door_state)) {
+    while(!is_true(elevator.body.door_state))
       wait 1;
-    }
 
-    if(is_true(elevator.body.departing)) {
-      playFXOnTag(level._effect["perk_elevator_departing"], elevator.body, "tag_origin");
-    } else {
-      playFXOnTag(level._effect["perk_elevator_idle"], elevator.body, "tag_origin");
-    }
+    if(is_true(elevator.body.departing))
+      playfxontag(level._effect["perk_elevator_departing"], elevator.body, "tag_origin");
+    else
+      playfxontag(level._effect["perk_elevator_idle"], elevator.body, "tag_origin");
 
     wait 0.5;
   }
@@ -991,9 +939,8 @@ faller_location_logic() {
   elevator_names = getarraykeys(level.elevators);
   elevators = [];
 
-  for(i = 0; i < elevator_names.size; i++) {
+  for(i = 0; i < elevator_names.size; i++)
     elevators[i] = getent("elevator_" + elevator_names[i] + "_body", "targetname");
-  }
 
   elevator_volumes = [];
   elevator_volumes[elevator_volumes.size] = getent("elevator_1b", "targetname");
@@ -1010,9 +957,8 @@ faller_location_logic() {
       should_block = 0;
 
       foreach(elevator in elevators) {
-        if(distancesquared(elevator.origin, point.origin) <= dist_check) {
+        if(distancesquared(elevator.origin, point.origin) <= dist_check)
           should_block = 1;
-        }
       }
 
       if(should_block) {
@@ -1021,18 +967,16 @@ faller_location_logic() {
         continue;
       }
 
-      if(isDefined(point.is_blocked) && point.is_blocked) {
+      if(isDefined(point.is_blocked) && point.is_blocked)
         point.is_blocked = 0;
-      }
 
       if(!isDefined(point.zone_name)) {
         continue;
       }
       zone = level.zones[point.zone_name];
 
-      if(zone.is_enabled && zone.is_active && zone.is_spawning_allowed) {
+      if(zone.is_enabled && zone.is_active && zone.is_spawning_allowed)
         point.is_enabled = 1;
-      }
     }
 
     players = get_players();
@@ -1042,15 +986,13 @@ faller_location_logic() {
 
       foreach(player in players) {
         if(is_player_valid(player)) {
-          if(player istouching(volume)) {
+          if(player istouching(volume))
             should_disable = 1;
-          }
         }
       }
 
-      if(should_disable) {
+      if(should_disable)
         disable_elevator_spawners(volume, spawn_points);
-      }
     }
 
     wait 0.5;
@@ -1059,9 +1001,8 @@ faller_location_logic() {
 
 disable_elevator_spawners(volume, spawn_points) {
   foreach(point in spawn_points) {
-    if(isDefined(point.name) && point.name == volume.targetname) {
+    if(isDefined(point.name) && point.name == volume.targetname)
       point.is_enabled = 0;
-    }
   }
 }
 
@@ -1086,9 +1027,8 @@ shouldsuppressgibs() {
           if(is_true(shouldnotgib)) {
             continue;
           }
-          if(zombie istouching(zone)) {
+          if(zombie istouching(zone))
             shouldnotgib = 1;
-          }
         }
 
         zombie.dont_throw_gib = shouldnotgib;
@@ -1108,17 +1048,15 @@ watch_for_elevator_during_faller_spawn() {
     should_gib = 0;
 
     foreach(elevator in level.elevators) {
-      if(self istouching(elevator.body)) {
+      if(self istouching(elevator.body))
         should_gib = 1;
-      }
     }
 
     if(should_gib) {
-      playFX(level._effect["zomb_gib"], self.origin);
+      playfx(level._effect["zomb_gib"], self.origin);
 
-      if(!(isDefined(self.has_been_damaged_by_player) && self.has_been_damaged_by_player) && !(isDefined(self.is_leaper) && self.is_leaper)) {
+      if(!(isDefined(self.has_been_damaged_by_player) && self.has_been_damaged_by_player) && !(isDefined(self.is_leaper) && self.is_leaper))
         level.zombie_total++;
-      }
 
       if(isDefined(self.is_leaper) && self.is_leaper) {
         self maps\mp\zombies\_zm_ai_leaper::leaper_cleanup();
@@ -1158,11 +1096,10 @@ watch_elevator_devgui(name, global) {
     stopcmd = getdvar(#"_id_7844BB8F");
 
     if(isDefined(stopcmd) && stopcmd == name) {
-      if(global) {
+      if(global)
         level.elevators_stop = 1;
-      } else if(isDefined(self)) {
+      else if(isDefined(self))
         self.body.elevator_stop = 1;
-      }
 
       setdvar("zombie_devgui_hrelevatorstop", "");
     }
@@ -1171,14 +1108,13 @@ watch_elevator_devgui(name, global) {
     gocmd = getdvar(#"_id_8693373F");
 
     if(isDefined(gocmd) && gocmd == name) {
-      if(global) {
+      if(global)
         level.elevators_stop = 0;
-      } else if(isDefined(self)) {
+      else if(isDefined(self)) {
         self.body.elevator_stop = 0;
 
-        if(gofloor >= 0) {
+        if(gofloor >= 0)
           self.body.force_starting_floor = gofloor;
-        }
 
         self.body notify("forcego");
       }
@@ -1199,27 +1135,23 @@ show_elevator_floor(name) {
       forced = isDefined(self.body.force_starting_floor);
       color = vectorscale((1, 1, 0), 0.7);
 
-      if(forced) {
+      if(forced)
         color = (0.7, 0.3, 0.0);
-      }
 
       if(isDefined(level.elevators_stop) && level.elevators_stop || isDefined(self.body.elevator_stop) && self.body.elevator_stop) {
-        if(forced) {
+        if(forced)
           color = vectorscale((1, 0, 1), 0.7);
-        } else {
+        else
           color = vectorscale((1, 0, 0), 0.7);
-        }
       } else if(self.body.is_moving) {
-        if(forced) {
+        if(forced)
           color = vectorscale((0, 0, 1), 0.7);
-        } else {
+        else
           color = vectorscale((0, 1, 0), 0.7);
-        }
       }
 
-      if(isDefined(self.body.current_level)) {
+      if(isDefined(self.body.current_level))
         floor = self.body.current_level;
-      }
 
       text = "elv " + name + " stop " + self.body.current_level + " floor " + self.floors[self.body.current_level].script_location;
       pos = self.body.origin;

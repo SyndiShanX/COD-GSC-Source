@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_ui_inventory;
+
 #namespace namespace_ff847c6a;
 
 init() {
@@ -19,33 +20,33 @@ init() {
   }
 
   level.var_a7b0c29c[0] = {
-    #start_func: &function_6882655b,
-    #end_func: &function_55f180c2,
-    #n_index: 1,
+    #start_func:&function_6882655b, 
+    #end_func:&function_55f180c2, 
+    #n_index: 1, 
     #n_target: 2
   };
   level.var_a7b0c29c[1] = {
-    #start_func: &function_6882655b,
-    #end_func: &function_55f180c2,
-    #n_index: 2,
+    #start_func:&function_6882655b, 
+    #end_func:&function_55f180c2, 
+    #n_index: 2, 
     #n_target: 4
   };
   level.var_a7b0c29c[2] = {
-    #start_func: &function_6882655b,
-    #end_func: &function_55f180c2,
-    #n_index: 3,
+    #start_func:&function_6882655b, 
+    #end_func:&function_55f180c2, 
+    #n_index: 3, 
     #n_target: 6
   };
   level.var_a7b0c29c[3] = {
-    #start_func: &function_6882655b,
-    #end_func: &function_55f180c2,
-    #n_index: 4,
+    #start_func:&function_6882655b, 
+    #end_func:&function_55f180c2, 
+    #n_index: 4, 
     #n_target: 8
   };
   level.var_a7b0c29c[4] = {
-    #start_func: &function_6882655b,
-    #end_func: &function_55f180c2,
-    #n_index: 5,
+    #start_func:&function_6882655b, 
+    #end_func:&function_55f180c2, 
+    #n_index: 5, 
     #n_target: 10
   };
   level.var_f0efd877 = 0;
@@ -59,9 +60,10 @@ function_1525b94c() {
 }
 
 challenge_completed() {
+
   iprintlnbold("<dev string:x38>");
 
-  wait 3;
+    wait 3;
 
   if(level.var_a7b0c29c.size == 0) {
     function_8bddfcc3();
@@ -100,9 +102,10 @@ function_f76df1da() {
 }
 
 function_8bddfcc3() {
+
   iprintlnbold("<dev string:x5d>");
 
-  level notify(#"hash_4d3a2c46c22b012e");
+    level notify(#"hash_4d3a2c46c22b012e");
   function_bc0ec5b3(0);
 }
 

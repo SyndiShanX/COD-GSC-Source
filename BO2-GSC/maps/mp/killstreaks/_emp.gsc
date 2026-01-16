@@ -15,23 +15,21 @@
 init() {
   level._effect["emp_flash"] = loadfx("weapon/emp/fx_emp_explosion");
 
-  foreach(team in level.teams) {
-    level.teamemping[team] = 0;
-  }
+  foreach(team in level.teams)
+  level.teamemping[team] = 0;
 
   level.empplayer = undefined;
   level.emptimeout = 40.0;
   level.empowners = [];
 
-  if(level.teambased) {
+  if(level.teambased)
     level thread emp_teamtracker();
-  } else {
+  else
     level thread emp_playertracker();
-  }
 
   level thread onplayerconnect();
   registerkillstreak("emp_mp", "emp_mp", "killstreak_emp", "emp_used", ::emp_use);
-  registerkillstreakstrings("emp_mp", &"KILLSTREAK_EARNED_EMP", &"KILLSTREAK_EMP_NOT_AVAILABLE", &"KILLSTREAK_EMP_INBOUND");
+  registerkillstreakstrings("emp_mp", & "KILLSTREAK_EARNED_EMP", & "KILLSTREAK_EMP_NOT_AVAILABLE", & "KILLSTREAK_EMP_INBOUND");
   registerkillstreakdialog("emp_mp", "mpl_killstreak_emp_activate", "kls_emp_used", "", "kls_emp_enemy", "", "kls_emp_ready");
   registerkillstreakdevdvar("emp_mp", "scr_giveemp");
   maps\mp\killstreaks\_killstreaks::createkillstreaktimer("emp_mp");
@@ -53,9 +51,8 @@ onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if(level.teambased && emp_isteamemped(self.team) || !level.teambased && isDefined(level.empplayer) && level.empplayer != self) {
+    if(level.teambased && emp_isteamemped(self.team) || !level.teambased && isDefined(level.empplayer) && level.empplayer != self)
       self setempjammed(1);
-    }
   }
 }
 
@@ -64,9 +61,8 @@ emp_isteamemped(check_team) {
     if(team == check_team) {
       continue;
     }
-    if(level.teamemping[team]) {
+    if(level.teamemping[team])
       return true;
-    }
   }
 
   return false;
@@ -76,17 +72,15 @@ emp_use(lifeid) {
   assert(isDefined(self));
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart("emp_mp", self.team, 0, 1);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return false;
-  }
 
   myteam = self.pers["team"];
 
-  if(level.teambased) {
+  if(level.teambased)
     self thread emp_jamotherteams(myteam, killstreak_id);
-  } else {
+  else
     self thread emp_jamplayers(self, killstreak_id);
-  }
 
   self.emptime = gettime();
   self notify("used_emp");
@@ -117,11 +111,10 @@ emp_jamotherteams(teamname, killstreak_id) {
   wait 0.1;
   visionsetnaked("flash_grenade", 0);
 
-  if(isDefined(level.nukedetonated)) {
+  if(isDefined(level.nukedetonated))
     visionsetnaked(level.nukevisionset, 5.0);
-  } else {
+  else
     visionsetnaked(getdvar(#"mapname"), 5.0);
-  }
 
   level.teamemping[teamname] = 1;
   level notify("emp_update");
@@ -156,11 +149,10 @@ emp_jamplayers(owner, killstreak_id) {
   wait 0.1;
   visionsetnaked("flash_grenade", 0);
 
-  if(isDefined(level.nukedetonated)) {
+  if(isDefined(level.nukedetonated))
     visionsetnaked(level.nukevisionset, 5.0);
-  } else {
+  else
     visionsetnaked(getdvar(#"mapname"), 5.0);
-  }
 
   level notify("emp_update");
   level.empplayer = owner;
@@ -187,12 +179,12 @@ empplayerffadisconnect() {
 
 empeffects() {
   foreach(player in level.players) {
-    playerforward = anglesToForward(player.angles);
+    playerforward = anglestoforward(player.angles);
     playerforward = (playerforward[0], playerforward[1], 0);
     playerforward = vectornormalize(playerforward);
     empdistance = 20000;
     empent = spawn("script_model", player.origin + vectorscale((0, 0, 1), 8000.0) + playerforward * empdistance);
-    empent setModel("tag_origin");
+    empent setmodel("tag_origin");
     empent.angles = empent.angles + vectorscale((1, 0, 0), 270.0);
     empent thread empeffect(player);
   }
@@ -203,8 +195,8 @@ empeffect(player) {
   self setinvisibletoall();
   self setvisibletoplayer(player);
   wait 0.5;
-  playFXOnTag(level._effect["emp_flash"], self, "tag_origin");
-  self playSound("wpn_emp_bomb");
+  playfxontag(level._effect["emp_flash"], self, "tag_origin");
+  self playsound("wpn_emp_bomb");
   self deleteaftertime(11);
 }
 
@@ -221,9 +213,8 @@ emp_teamtracker() {
       emped = emp_isteamemped(player.team);
       player setempjammed(emped);
 
-      if(emped) {
+      if(emped)
         player notify("emp_jammed");
-      }
     }
   }
 }
@@ -269,9 +260,9 @@ destroyequipment(attacker, teamemped) {
     if(!isDefined(item.owner)) {
       continue;
     }
-    if(isDefined(teamemped) && item.owner.team != teamemped) {
+    if(isDefined(teamemped) && item.owner.team != teamemped)
       continue;
-    } else if(item.owner == attacker) {
+    else if(item.owner == attacker) {
       continue;
     }
     if(!isweaponequipment(item.name) && item.name != "proximity_grenade_mp") {
@@ -304,13 +295,11 @@ destroytacticalinsertions(attacker, victimteam) {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return undefined;
-  }
 
-  if(!isplayer(self)) {
+  if(!isplayer(self))
     return undefined;
-  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -332,36 +321,34 @@ destroyotherteamsactivevehicles(attacker, teamemping) {
 }
 
 destroyactivevehicles(attacker, teamemped) {
-  turrets = getEntArray("auto_turret", "classname");
+  turrets = getentarray("auto_turret", "classname");
   destroyentities(turrets, attacker, teamemped);
   targets = target_getarray();
   destroyentities(targets, attacker, teamemped);
-  rcbombs = getEntArray("rcbomb", "targetname");
+  rcbombs = getentarray("rcbomb", "targetname");
   destroyentities(rcbombs, attacker, teamemped);
-  remotemissiles = getEntArray("remote_missile", "targetname");
+  remotemissiles = getentarray("remote_missile", "targetname");
   destroyentities(remotemissiles, attacker, teamemped);
-  remotedrone = getEntArray("remote_drone", "targetname");
+  remotedrone = getentarray("remote_drone", "targetname");
   destroyentities(remotedrone, attacker, teamemped);
-  planemortars = getEntArray("plane_mortar", "targetname");
+  planemortars = getentarray("plane_mortar", "targetname");
 
   foreach(planemortar in planemortars) {
     if(isDefined(teamemped) && isDefined(planemortar.team)) {
-      if(planemortar.team != teamemped) {
+      if(planemortar.team != teamemped)
         continue;
-      }
     } else if(planemortar.owner == attacker) {
       continue;
     }
     planemortar notify("emp_deployed", attacker);
   }
 
-  satellites = getEntArray("satellite", "targetname");
+  satellites = getentarray("satellite", "targetname");
 
   foreach(satellite in satellites) {
     if(isDefined(teamemped) && isDefined(satellite.team)) {
-      if(satellite.team != teamemped) {
+      if(satellite.team != teamemped)
         continue;
-      }
     } else if(satellite.owner == attacker) {
       continue;
     }
@@ -369,9 +356,8 @@ destroyactivevehicles(attacker, teamemped) {
   }
 
   if(isDefined(level.missile_swarm_owner)) {
-    if(level.missile_swarm_owner isenemyplayer(attacker)) {
+    if(level.missile_swarm_owner isenemyplayer(attacker))
       level.missile_swarm_owner notify("emp_destroyed_missile_swarm", attacker);
-    }
   }
 }
 
@@ -387,9 +373,8 @@ destroyentities(entities, attacker, team) {
 
   foreach(entity in entities) {
     if(isDefined(team) && isDefined(entity.team)) {
-      if(entity.team != team) {
+      if(entity.team != team)
         continue;
-      }
     } else if(entity.owner == attacker) {
       continue;
     }
@@ -399,10 +384,10 @@ destroyentities(entities, attacker, team) {
 
 drawempdamageorigin(pos, ang, radius) {
   while(getdvarint(#"scr_emp_damage_debug")) {
-    line(pos, pos + anglesToForward(ang) * radius, (1, 0, 0));
+    line(pos, pos + anglestoforward(ang) * radius, (1, 0, 0));
     line(pos, pos + anglestoright(ang) * radius, (0, 1, 0));
     line(pos, pos + anglestoup(ang) * radius, (0, 0, 1));
-    line(pos, pos - anglesToForward(ang) * radius, (1, 0, 0));
+    line(pos, pos - anglestoforward(ang) * radius, (1, 0, 0));
     line(pos, pos - anglestoright(ang) * radius, (0, 1, 0));
     line(pos, pos - anglestoup(ang) * radius, (0, 0, 1));
     wait 0.05;
@@ -411,25 +396,22 @@ drawempdamageorigin(pos, ang, radius) {
 }
 
 isenemyempkillstreakactive() {
-  if(level.teambased && maps\mp\killstreaks\_emp::emp_isteamemped(self.team) || !level.teambased && isDefined(level.empplayer) && level.empplayer != self) {
+  if(level.teambased && maps\mp\killstreaks\_emp::emp_isteamemped(self.team) || !level.teambased && isDefined(level.empplayer) && level.empplayer != self)
     return true;
-  }
 
   return false;
 }
 
 isempweapon(weaponname) {
-  if(isDefined(weaponname) && (weaponname == "emp_mp" || weaponname == "emp_grenade_mp" || weaponname == "emp_grenade_zm")) {
+  if(isDefined(weaponname) && (weaponname == "emp_mp" || weaponname == "emp_grenade_mp" || weaponname == "emp_grenade_zm"))
     return true;
-  }
 
   return false;
 }
 
 isempkillstreakweapon(weaponname) {
-  if(isDefined(weaponname) && weaponname == "emp_mp") {
+  if(isDefined(weaponname) && weaponname == "emp_mp")
     return true;
-  }
 
   return false;
 }

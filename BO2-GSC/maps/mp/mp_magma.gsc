@@ -28,11 +28,11 @@ main() {
   maps\mp\mp_magma_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_magma");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -42,17 +42,17 @@ main() {
   barrier1.angles = (2.96968, 263.594, -1.33952);
   barrier2 = spawn("script_model", (245.37, 837.028, -401.885));
   barrier2.angles = (6.5989, 268.994, -0.115603);
-  barrier1 setModel("p6_mag_k_rail_barrier");
-  barrier2 setModel("p6_mag_k_rail_barrier");
+  barrier1 setmodel("p6_mag_k_rail_barrier");
+  barrier2 setmodel("p6_mag_k_rail_barrier");
   rock1 = spawn("script_model", (271.92, 893.99, -494));
   rock1.angles = vectorscale((0, 1, 0), 132.0);
   rock2 = spawn("script_model", (393.42, 895.49, -494));
   rock2.angles = vectorscale((0, 1, 0), 132.0);
   rock3 = spawn("script_model", (477.92, 882.49, -509));
   rock3.angles = vectorscale((0, 1, 0), 132.0);
-  rock1 setModel("p6_mag_rocks_medium_02");
-  rock2 setModel("p6_mag_rocks_medium_02");
-  rock3 setModel("p6_mag_rocks_medium_02");
+  rock1 setmodel("p6_mag_rocks_medium_02");
+  rock2 setmodel("p6_mag_rocks_medium_02");
+  rock3 setmodel("p6_mag_rocks_medium_02");
   spawncollision("collision_clip_64x64x10", "collider", (234, 907, -391.5), (356.785, 83.5728, -83.5116));
   spawncollision("collision_clip_64x64x10", "collider", (243.5, 835.5, -399), (353.903, 88.8464, -83.1852));
   spawncollision("collision_clip_64x64x10", "collider", (254, 902.5, -395), (0.42985, 353.514, 3.77564));
@@ -79,12 +79,11 @@ main() {
 
 lava_trigger_init() {
   wait 3;
-  killbrushes = getEntArray("trigger_hurt", "classname");
+  killbrushes = getentarray("trigger_hurt", "classname");
 
   for(i = 0; i < killbrushes.size; i++) {
-    if(isDefined(killbrushes[i].script_noteworthy) && killbrushes[i].script_noteworthy == "lava") {
+    if(isDefined(killbrushes[i].script_noteworthy) && killbrushes[i].script_noteworthy == "lava")
       level.levelkillbrushes[level.levelkillbrushes.size] = killbrushes[i];
-    }
   }
 }
 
@@ -94,16 +93,15 @@ levelspawndvars(reset_dvars) {
 }
 
 overrideweaponfunc(sweapon, script_noteworthy) {
-  if(isDefined(script_noteworthy) && script_noteworthy == "lava") {
+  if(isDefined(script_noteworthy) && script_noteworthy == "lava")
     sweapon = "lava_mp";
-  }
 
   return sweapon;
 }
 
 destructible_lights() {
   wait 0.05;
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
     if(destructible.destructibledef == "veh_t6_dlc_police_car_jp_destructible") {
@@ -128,29 +126,26 @@ checkcorpseinlava(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, s
   if(!isDefined(self.body)) {
     return;
   }
-  playFXOnTag(level._effect["fx_fire_torso"], self.body, "J_Spine4");
-  playFXOnTag(level._effect["fx_fire_arm_left"], self.body, "J_Elbow_LE");
-  playFXOnTag(level._effect["fx_fire_arm_right"], self.body, "J_Elbow_RI");
-  playFXOnTag(level._effect["fx_fire_leg_left"], self.body, "J_Hip_LE");
-  playFXOnTag(level._effect["fx_fire_leg_right"], self.body, "J_Hip_RI");
+  playfxontag(level._effect["fx_fire_torso"], self.body, "J_Spine4");
+  playfxontag(level._effect["fx_fire_arm_left"], self.body, "J_Elbow_LE");
+  playfxontag(level._effect["fx_fire_arm_right"], self.body, "J_Elbow_RI");
+  playfxontag(level._effect["fx_fire_leg_left"], self.body, "J_Hip_LE");
+  playfxontag(level._effect["fx_fire_leg_right"], self.body, "J_Hip_RI");
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinlava()) {
+  if(self isinlava())
     return getdvarfloatdefault("scr_lavaPlayerDeathWatchTime", 0.5);
-  }
 
   return defaulttime;
 }
 
 isinlava() {
-  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.script_noteworthy)) {
+  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.script_noteworthy))
     return false;
-  }
 
-  if(self.lastattacker.script_noteworthy != "lava") {
+  if(self.lastattacker.script_noteworthy != "lava")
     return false;
-  }
 
   return true;
 }
@@ -163,7 +158,7 @@ testkillbrushonstationary(lavaarray, killbrusharray, player, watcher) {
 
   for(i = 0; i < lavaarray.size; i++) {
     if(self istouching(lavaarray[i])) {
-      playFX(level._effect["fx_fire_torso"], self.origin);
+      playfx(level._effect["fx_fire_torso"], self.origin);
       watcher maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0.0, undefined, "lava_mp");
       return;
     }
@@ -175,9 +170,8 @@ testkillbrushonstationary(lavaarray, killbrusharray, player, watcher) {
         break;
       }
 
-      if(isDefined(self)) {
+      if(isDefined(self))
         self delete();
-      }
 
       return;
     }
@@ -188,7 +182,7 @@ deleteonkillbrushoverride(player, watcher) {
   player endon("disconnect");
   self endon("death");
   self endon("stationary");
-  trigger_hurtarray = getEntArray("trigger_hurt", "classname");
+  trigger_hurtarray = getentarray("trigger_hurt", "classname");
   lavaarray = [];
   killbrusharray = [];
 
@@ -210,7 +204,7 @@ deleteonkillbrushoverride(player, watcher) {
     for(i = 0; i < lavaarray.size; i++) {
       if(self istouching(lavaarray[i])) {
         wait 0.05;
-        playFX(level._effect["fx_fire_torso"], self.origin);
+        playfx(level._effect["fx_fire_torso"], self.origin);
         watcher maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0.0, undefined, "lava_mp");
         return;
       }
@@ -222,9 +216,8 @@ deleteonkillbrushoverride(player, watcher) {
           break;
         }
 
-        if(isDefined(self)) {
+        if(isDefined(self))
           self delete();
-        }
 
         return;
       }

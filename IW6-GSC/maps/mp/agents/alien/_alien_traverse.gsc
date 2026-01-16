@@ -54,9 +54,8 @@ find_attackable_enemy_at_node(nodeToCheck) {
     playerForward = anglesToForward(player.angles);
     forwardDot = VectorDot(playerToNode, playerForward);
 
-    if(forwardDot > COS_45) {
+    if(forwardDot > COS_45)
       return player;
-    }
   }
 
   return undefined;
@@ -76,12 +75,13 @@ end_script() {
 
 Jump(startNode, endNode, nextNode) {
   nextPos = undefined;
-  if(isDefined(nextNode)) {
+  if(isDefined(nextNode))
     nextPos = nextNode.origin;
-  }
 
   if(isDefined(level.dlc_alien_jump_override)) {
-    [[level.dlc_alien_jump_override]](startNode, endNode, nextNode, nextPos);
+    [
+      [level.dlc_alien_jump_override]
+    ](startNode, endNode, nextNode, nextPos);
     return;
   }
 
@@ -103,13 +103,11 @@ doTraverse(startNode, endNode) {
   self ScrAgentSetAnimMode("anim deltas");
   self ScrAgentSetAnimScale(1.0, 1.0);
 
-  if(isDefined(traverseData["traverseSound"])) {
+  if(isDefined(traverseData["traverseSound"]))
     self thread maps\mp\_utility::play_sound_on_tag(traverseData["traverseSound"]);
-  }
 
-  if(isDefined(traverseData["traverseAnimScale"])) {
+  if(isDefined(traverseData["traverseAnimScale"]))
     self ScrAgentSetAnimScale(traverseData["traverseAnimScale"], traverseData["traverseAnimScale"]);
-  }
 
   switch (animState) {
     case "traverse_climb_up":
@@ -165,20 +163,18 @@ alienRegularTraversal(startNode, animState, animIndexArray, endInOriented, flexH
 
   self traverseAnimLerp(animEntry, startNode);
 
-  if(AnimHasNotetrack(animEntry, "highest_point")) {
+  if(AnimHasNotetrack(animEntry, "highest_point"))
     self.apexTraversalDeathVector = VectorNormalize(self.startNode.origin - self.endNode.origin);
-  }
 
   scriptable = GetEnt(startnode.target, "targetname");
   if(isDefined(scriptable)) {
     scriptable thread runScriptableTraverse(animTime);
   }
 
-  if(result.need_support) {
+  if(result.need_support)
     doTraversalWithFlexibleHeight(animState, animIndex, animEntry, result.start_notetrack, result.end_notetrack, flexHeightEndAtTraverseEnd, ::alienTraverseNotetrackHandler);
-  } else {
+  else
     PlayAnimNUntilNotetrack(animState, animIndex, "canned_traverse", "end", ::alienTraverseNotetrackHandler);
-  }
 
   endRegularTraversal(endInOriented);
 }
@@ -263,11 +259,10 @@ doTraversalWithFlexibleHeight_internal(animState, animIndex, animLabel, animEntr
   AssertEx(scaled_anim_height > 0.0, "Traversal " + animState + " " + animIndex + " has bad traverse notetracks.");
   not_scaled_anim_height = remaining_anim_height - scaled_anim_height;
 
-  if(remaining_height <= not_scaled_anim_height) {
+  if(remaining_height <= not_scaled_anim_height)
     anim_scale = 1;
-  } else {
+  else
     anim_scale = (remaining_height - not_scaled_anim_height) / scaled_anim_height;
-  }
 
   anim_rate = 1 / anim_scale;
 
@@ -287,9 +282,8 @@ alienTraverseNotetrackHandler(note, animState, animIndex, animTime) {
       break;
 
     case "highest_point":
-      if(isDefined(self.apexTraversalDeathVector)) {
+      if(isDefined(self.apexTraversalDeathVector))
         self.apexTraversalDeathVector *= -1;
-      }
       break;
 
     default:
@@ -315,9 +309,8 @@ alienClimbUp(startNode, endNode, animState, longerEndAnim) {
   climbUpAnimDeltaAfterNotetrack = GetMoveDelta(startAnim, climbUpNotetrackTime, 1);
   startAnimHeightAfterNotetrack = climbUpAnimDeltaAfterNotetrack[2];
 
-  if(totalHeight < (startAnimHeight + endAnimHeight)) {
+  if(totalHeight < (startAnimHeight + endAnimHeight))
     Println("ERROR: Height is too short for " + animState + ".Modify the geo or use another traversal.");
-  }
 
   distForScrabbleAndLoop = totalHeight - (startAnimHeight + endAnimHeight);
   canDoScrabble = false;
@@ -340,9 +333,8 @@ alienClimbUp(startNode, endNode, animState, longerEndAnim) {
   }
 
   selectedEndAnim = endAnim;
-  if(canDoLongerEndAnim) {
+  if(canDoLongerEndAnim)
     selectedEndAnim = longerEndAnim;
-  }
 
   stopTeleportNotetrack = getNoteTrackTimes(selectedEndAnim, "stop_teleport")[0];
   endAnimHeightBeforeNotetrack = GetMoveDelta(selectedEndAnim, 0, stopTeleportNotetrack)[2];
@@ -359,9 +351,8 @@ alienClimbUp(startNode, endNode, animState, longerEndAnim) {
   self WaitUntilNotetrack("canned_traverse", "end");
 
   self ScrAgentSetAnimScale(1, animScalerZ);
-  if(canDoScrabble) {
+  if(canDoScrabble)
     PlayAnimNUntilNotetrack(animState, 1, "canned_traverse", "finish");
-  }
 
   for(i = 0; i < numOfLoop; i++) {
     PlayAnimNUntilNotetrack(animState, 2, "canned_traverse", "end");
@@ -369,17 +360,15 @@ alienClimbUp(startNode, endNode, animState, longerEndAnim) {
 
   selfToEndHeight = endNode.origin[2] - self.origin[2] - stopToEndAnimDelta[2];
   animScalerZ = 1.0;
-  if(selfToEndHeight > endAnimHeightBeforeNotetrack) {
+  if(selfToEndHeight > endAnimHeightBeforeNotetrack)
     animScalerZ = selfToEndHeight / endAnimHeightBeforeNotetrack;
-  }
 
   self ScrAgentSetAnimScale(1, animScalerZ);
 
-  if(canDoLongerEndAnim) {
+  if(canDoLongerEndAnim)
     PlayAnimNUntilNotetrack(animState, 4, "canned_traverse", "stop_teleport", ::alienTraverseNotetrackHandler);
-  } else {
+  else
     PlayAnimNUntilNotetrack(animState, 3, "canned_traverse", "stop_teleport", ::alienTraverseNotetrackHandler);
-  }
 
   selfToEndXY = distance2D(self.origin, endNode.origin);
   animScalerXY = selfToEndXY / stopToEndAnimDeltaXY;
@@ -402,9 +391,8 @@ alienClimbDown(startNode, endNode, animState) {
   endAnimHeight = -1 * GetMoveDelta(endAnim, 0, 1)[2];
   jumpOffEndAnimHeight = -1 * GetMoveDelta(jumpOffEndAnim, 0, 1)[2];
 
-  if(totalHeight < (startAnimHeight + endAnimHeight)) {
+  if(totalHeight < (startAnimHeight + endAnimHeight))
     Println("ERROR: Height is too short for " + animState + ".Modify the geo or use another traversal.");
-  }
 
   endAnimToPlay = endAnim;
   endAnimToPlayHeight = endAnimHeight;
@@ -439,9 +427,8 @@ alienClimbDown(startNode, endNode, animState) {
   for(i = 0; i < numOfLoop; i++) {
     PlayAnimNUntilNotetrack("traverse_climb_down_loop", 0, "traverse_climb_down_loop", "end");
   }
-  if(canDoSlide) {
+  if(canDoSlide)
     PlayAnimNUntilNotetrack("traverse_climb_down_slide", 0, "traverse_climb_down_slide", "end");
-  }
 
   teleportStartTime = getNoteTrackTimes(endAnimToPlay, "climb_down_teleport")[0];
   teleportEndTime = getNoteTrackTimes(endAnimToPlay, "stop_teleport")[0];
@@ -451,11 +438,10 @@ alienClimbDown(startNode, endNode, animState) {
 
   self ScrAgentSetAnimScale(1, animScaler);
 
-  if(canDoJump) {
+  if(canDoJump)
     PlayAnimNUntilNotetrack(animState, 4, "canned_traverse", "stop_teleport");
-  } else {
+  else
     PlayAnimNUntilNotetrack(animState, 3, "canned_traverse", "stop_teleport");
-  }
 
   self ScrAgentSetAnimScale(1, 1);
   self ScrAgentSetPhysicsMode("gravity");
@@ -487,11 +473,10 @@ doTraverseClimbLerp(startAnim, startNode, verticalProbeDis, horizontalProbeDis, 
   lerp_time = maps\mp\agents\alien\_alien_anim_utils::getLerpTime(startAnim);
   lerp_target_pos = maps\mp\agents\alien\_alien_anim_utils::getPosInSpaceAtAnimTime(startAnim, startNode.origin, startNode.angles, lerp_time);
 
-  if(probeForward) {
+  if(probeForward)
     horizontal_probe_direction = (lerp_target_pos - startNode.origin) * (1, 1, 0);
-  } else {
+  else
     horizontal_probe_direction = (startNode.origin - lerp_target_pos) * (1, 1, 0);
-  }
 
   horizontal_offset = vectorNormalize(horizontal_probe_direction);
   horizontal_offset *= horizontalProbeDis;
@@ -539,9 +524,8 @@ canDoJumpForEnd(startnode, endNode, startAnim, jumpAnim) {
   startAnimEndGroundPos = PhysicsTrace(startAnimEndPos, startAnimEndPos + (0, 0, -2000));
   startAnimEndAboveGround = (startAnimEndPos - startAnimEndGroundPos)[2];
 
-  if(startAnimEndAboveGround < jumpAnimDeltaZ) {
+  if(startAnimEndAboveGround < jumpAnimDeltaZ)
     return false;
-  }
 
   jumpStartPos = startAnimEndGroundPos + (0, 0, jumpAnimDeltaZ);
   jumpEndPos = startAnimEndGroundPos + startToEndXY * jumpAnimDeltaXY;
@@ -582,15 +566,12 @@ alienWallRun(startNode, endNode, animState) {
 }
 
 alienWallRun_AnglesAlmostEqual(angles1, angles2, diff) {
-  if(abs(angleClamp180(angles2[0] - angles1[0]) > diff)) {
+  if(abs(angleClamp180(angles2[0] - angles1[0]) > diff))
     return false;
-  }
-  if(abs(angleClamp180(angles2[1] - angles1[1]) > diff)) {
+  if(abs(angleClamp180(angles2[1] - angles1[1]) > diff))
     return false;
-  }
-  if(abs(angleClamp180(angles2[2] - angles1[2]) > diff)) {
+  if(abs(angleClamp180(angles2[2] - angles1[2]) > diff))
     return false;
-  }
   return true;
 }
 

@@ -17,39 +17,35 @@ decidewhatandhowtoshoot(var_0) {
   self.fastburst = 0;
   self.shouldreturntocover = undefined;
 
-  if(!isDefined(self.changingcoverpos)) {
+  if(!isdefined(self.changingcoverpos))
     self.changingcoverpos = 0;
-  }
 
-  var_1 = isDefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
+  var_1 = isdefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
 
-  if(var_1) {
+  if(var_1)
     wait 0.05;
-  }
 
   var_2 = self.shootent;
   var_3 = self.shootpos;
   var_4 = self.shootstyle;
 
-  if(isDefined(self.has_ir)) {
+  if(isdefined(self.has_ir)) {
     self.a.laseron = 1;
     animscripts\shared::updatelaserstatus();
   }
 
-  if(animscripts\combat_utility::issniper()) {
+  if(animscripts\combat_utility::issniper())
     resetsniperaim();
-  }
 
-  if(var_1 && (!self.a.atconcealmentnode || !animscripts\utility::canseeenemy())) {
+  if(var_1 && (!self.a.atconcealmentnode || !animscripts\utility::canseeenemy()))
     thread watchforincomingfire();
-  }
 
   thread runonshootbehaviorend();
   self.ambushendtime = undefined;
 
-  for(;;) {
-    if(isDefined(self.shootposoverride)) {
-      if(!isDefined(self.enemy)) {
+  for (;;) {
+    if(isdefined(self.shootposoverride)) {
+      if(!isdefined(self.enemy)) {
         self.shootpos = self.shootposoverride;
         self.shootposoverride = undefined;
         waitabit();
@@ -59,33 +55,27 @@ decidewhatandhowtoshoot(var_0) {
 
     var_5 = undefined;
 
-    if(self.weapon == "none") {
+    if(self.weapon == "none")
       nogunshoot();
-    } else if(animscripts\utility::usingrocketlauncher()) {
+    else if(animscripts\utility::usingrocketlauncher())
       var_5 = rpgshoot();
-    } else if(animscripts\utility::usingsidearm() || isDefined(self.alwaysusepistol)) {
+    else if(animscripts\utility::usingsidearm() || isdefined(self.alwaysusepistol))
       var_5 = pistolshoot();
-    } else {
+    else
       var_5 = rifleshoot();
-    }
 
-    if(isDefined(self.a.specialshootbehavior)) {
-      [
-        [self.a.specialshootbehavior]
-      ]();
-    }
+    if(isdefined(self.a.specialshootbehavior))
+      [[self.a.specialshootbehavior]]();
 
-    if(checkchanged(var_2, self.shootent) || !isDefined(self.shootent) && checkchanged(var_3, self.shootpos) || checkchanged(var_4, self.shootstyle)) {
+    if(checkchanged(var_2, self.shootent) || !isdefined(self.shootent) && checkchanged(var_3, self.shootpos) || checkchanged(var_4, self.shootstyle))
       self notify("shoot_behavior_change");
-    }
 
     var_2 = self.shootent;
     var_3 = self.shootpos;
     var_4 = self.shootstyle;
 
-    if(!isDefined(var_5)) {
+    if(!isdefined(var_5))
       waitabit();
-    }
   }
 }
 
@@ -95,17 +85,16 @@ waitabit() {
   self endon("weapon_position_change");
   self endon("enemy_visible");
 
-  if(isDefined(self.shootent)) {
+  if(isdefined(self.shootent)) {
     self.shootent endon("death");
     self endon("do_slow_things");
     wait 0.05;
 
-    while(isDefined(self.shootent)) {
-      if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
+    while (isdefined(self.shootent)) {
+      if(common_scripts\utility::flag("_cloaked_stealth_enabled"))
         self.shootpos = animscripts\combat_utility::get_last_known_shoot_pos(self.shootent);
-      } else {
+      else
         self.shootpos = self.shootent getshootatpos();
-      }
 
       wait 0.05;
     }
@@ -125,34 +114,31 @@ shouldsuppress() {
 }
 
 shouldshootenemyent() {
-  if(!animscripts\utility::canseeenemy()) {
+  if(!animscripts\utility::canseeenemy())
     return 0;
-  }
 
   return 1;
 }
 
 rifleshootobjectivenormal() {
   if(!shouldshootenemyent()) {
-    if(animscripts\combat_utility::issniper()) {
+    if(animscripts\combat_utility::issniper())
       resetsniperaim();
-    }
 
     if(self.doingambush) {
       self.shootobjective = "ambush";
       return "retry";
     }
 
-    if(!isDefined(self.enemy)) {
+    if(!isdefined(self.enemy))
       havenothingtoshoot();
-    } else {
+    else {
       markenemyposinvisible();
 
-      if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress()) {
+      if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress())
         self.shootobjective = "suppress";
-      } else {
+      else
         self.shootobjective = "ambush";
-      }
 
       return "retry";
     }
@@ -163,9 +149,9 @@ rifleshootobjectivenormal() {
 }
 
 rifleshootobjectivesuppress(var_0) {
-  if(!var_0) {
+  if(!var_0)
     havenothingtoshoot();
-  } else {
+  else {
     self.shootent = undefined;
     self.shootpos = animscripts\utility::getenemysightpos();
     setshootstyleforsuppression();
@@ -190,9 +176,8 @@ rifleshootobjectiveambush(var_0) {
     if(shouldstopambushing()) {
       self.ambushendtime = undefined;
 
-      if(shouldsuppress()) {
+      if(shouldsuppress())
         self.shootobjective = "suppress";
-      }
 
       if(randomint(3) == 0) {
         self notify("return_to_cover");
@@ -205,40 +190,37 @@ rifleshootobjectiveambush(var_0) {
 }
 
 getambushshootpos() {
-  if(isDefined(self.enemy) && self cansee(self.enemy)) {
+  if(isdefined(self.enemy) && self cansee(self.enemy)) {
     setshootenttoenemy();
     return;
   }
 
   var_0 = self getanglestolikelyenemypath();
 
-  if(!isDefined(var_0)) {
-    if(isDefined(self.covernode)) {
+  if(!isdefined(var_0)) {
+    if(isdefined(self.covernode))
       var_0 = self.covernode.angles;
-    } else if(isDefined(self.ambushnode)) {
+    else if(isdefined(self.ambushnode))
       var_0 = self.ambushnode.angles;
-    } else {
+    else
       var_0 = self.angles;
-    }
   }
 
   var_1 = 1024;
 
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy))
     var_1 = distance(self.origin, self.enemy.origin);
-  }
 
-  var_2 = self getEye() + anglesToForward(var_0) * var_1;
+  var_2 = self geteye() + anglestoforward(var_0) * var_1;
 
-  if(!isDefined(self.shootpos) || distancesquared(var_2, self.shootpos) > 25) {
+  if(!isdefined(self.shootpos) || distancesquared(var_2, self.shootpos) > 25)
     self.shootpos = var_2;
-  }
 }
 
 rifleshoot() {
-  if(self.shootobjective == "normal") {
+  if(self.shootobjective == "normal")
     rifleshootobjectivenormal();
-  } else {
+  else {
     if(shouldshootenemyent()) {
       self.shootobjective = "normal";
       self.ambushendtime = undefined;
@@ -247,27 +229,24 @@ rifleshoot() {
 
     markenemyposinvisible();
 
-    if(animscripts\combat_utility::issniper()) {
+    if(animscripts\combat_utility::issniper())
       resetsniperaim();
-    }
 
     var_0 = animscripts\utility::cansuppressenemy();
 
-    if(self.shootobjective == "suppress" || self.team == "allies" && !isDefined(self.enemy) && !var_0) {
+    if(self.shootobjective == "suppress" || self.team == "allies" && !isdefined(self.enemy) && !var_0)
       rifleshootobjectivesuppress(var_0);
-    } else {
+    else
       rifleshootobjectiveambush(var_0);
-    }
   }
 }
 
 shouldstopambushing() {
-  if(!isDefined(self.ambushendtime)) {
-    if(self isbadguy()) {
+  if(!isdefined(self.ambushendtime)) {
+    if(self isbadguy())
       self.ambushendtime = gettime() + randomintrange(10000, 60000);
-    } else {
+    else
       self.ambushendtime = gettime() + randomintrange(4000, 10000);
-    }
   }
 
   return self.ambushendtime < gettime();
@@ -294,7 +273,7 @@ rpgshoot() {
 pistolshoot() {
   if(self.shootobjective == "normal") {
     if(!shouldshootenemyent()) {
-      if(!isDefined(self.enemy)) {
+      if(!isdefined(self.enemy)) {
         havenothingtoshoot();
         return;
       } else {
@@ -318,9 +297,8 @@ pistolshoot() {
     self.shootstyle = "none";
     self.shootpos = animscripts\utility::getenemysightpos();
 
-    if(!isDefined(self.ambushendtime)) {
+    if(!isdefined(self.ambushendtime))
       self.ambushendtime = gettime() + randomintrange(4000, 8000);
-    }
 
     if(self.ambushendtime < gettime()) {
       self.shootobjective = "normal";
@@ -331,11 +309,10 @@ pistolshoot() {
 }
 
 markenemyposinvisible() {
-  if(isDefined(self.enemy) && !self.changingcoverpos && self.script != "combat") {
-    if(isai(self.enemy) && isDefined(self.enemy.script) && (self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch")) {
-      if(isDefined(self.enemy.a.covermode) && self.enemy.a.covermode == "hide") {
+  if(isdefined(self.enemy) && !self.changingcoverpos && self.script != "combat") {
+    if(isai(self.enemy) && isdefined(self.enemy.script) && (self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch")) {
+      if(isdefined(self.enemy.a.covermode) && self.enemy.a.covermode == "hide")
         return;
-      }
     }
 
     self.couldntseeenemypos = self.enemy.origin;
@@ -346,7 +323,7 @@ watchforincomingfire() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
 
-  for(;;) {
+  for (;;) {
     self waittill("suppression");
 
     if(self.suppressionmeter > self.suppressionthreshold) {
@@ -359,22 +336,18 @@ watchforincomingfire() {
 }
 
 readytoreturntocover() {
-  if(self.changingcoverpos) {
+  if(self.changingcoverpos)
     return 0;
-  }
 
-  if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
+  if(!isdefined(self.enemy) || !self cansee(self.enemy))
     return 1;
-  }
 
-  if(gettime() < self.coverposestablishedtime + 800) {
+  if(gettime() < self.coverposestablishedtime + 800)
     return 0;
-  }
 
   if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
-    if(gettime() < self.coverposestablishedtime + 3000) {
+    if(gettime() < self.coverposestablishedtime + 3000)
       return 0;
-    }
   }
 
   return 1;
@@ -388,13 +361,11 @@ runonshootbehaviorend() {
 }
 
 checkchanged(var_0, var_1) {
-  if(isDefined(var_0) != isDefined(var_1)) {
+  if(isdefined(var_0) != isdefined(var_1))
     return 1;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return 0;
-  }
 
   return var_0 != var_1;
 }
@@ -403,11 +374,10 @@ setshootenttoenemy() {
   self.shootent = self.enemy;
 
   if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
-    if(isDefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy) {
+    if(isdefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy)
       self.shootpos = self.shootent getshootatpos();
-    } else {
+    else
       self.shootpos = animscripts\combat_utility::get_last_known_shoot_pos(self.shootent);
-    }
   } else
     self.shootpos = self.shootent getshootatpos();
 }
@@ -417,9 +387,8 @@ havenothingtoshoot() {
   self.shootpos = undefined;
   self.shootstyle = "none";
 
-  if(self.doingambush) {
+  if(self.doingambush)
     self.shootobjective = "ambush";
-  }
 
   if(!self.changingcoverpos) {
     self notify("return_to_cover");
@@ -432,51 +401,42 @@ shouldbeajerk() {
 }
 
 setshootstyleforvisibleenemy() {
-  if(isDefined(self.shootent.enemy) && isDefined(self.shootent.enemy.syncedmeleetarget)) {
+  if(isdefined(self.shootent.enemy) && isdefined(self.shootent.enemy.syncedmeleetarget))
     return setshootstyle("single", 0);
-  }
 
-  if(animscripts\combat_utility::issniper()) {
+  if(animscripts\combat_utility::issniper())
     return setshootstyle("single", 0);
-  }
 
-  if(animscripts\utility::isshotgun(self.weapon)) {
+  if(animscripts\utility::isshotgun(self.weapon))
     return setshootstyle("single", 0);
-  }
 
-  if(weaponclass(self.weapon) == "grenade") {
+  if(weaponclass(self.weapon) == "grenade")
     return setshootstyle("single", 0);
-  }
 
-  if(weaponburstcount(self.weapon) > 0) {
+  if(weaponburstcount(self.weapon) > 0)
     return setshootstyle("burst", 0);
-  }
 
-  if(isDefined(self.juggernaut) && self.juggernaut || isDefined(self.mech) && self.mech) {
+  if(isdefined(self.juggernaut) && self.juggernaut || isdefined(self.mech) && self.mech)
     return setshootstyle("full", 1);
-  }
 
   var_0 = distancesquared(self getshootatpos(), self.shootpos);
   var_1 = weaponclass(self.weapon) == "mg";
 
-  if(var_1) {
+  if(var_1)
     return setshootstyle("full", 0);
-  }
 
   if(var_0 < 90000) {
-    if(isDefined(self.shootent) && isDefined(self.shootent.magic_bullet_shield)) {
+    if(isdefined(self.shootent) && isdefined(self.shootent.magic_bullet_shield))
       return setshootstyle("single", 0);
-    } else {
+    else
       return setshootstyle("full", 0);
-    }
   } else if(var_0 < 810000 || shouldbeajerk())
     return setshootstyle("burst", 1);
   else if(self.providecoveringfire || var_1 || var_0 < 2560000) {
-    if(shoulddosemiforvariety()) {
+    if(shoulddosemiforvariety())
       return setshootstyle("semi", 0);
-    } else {
+    else
       return setshootstyle("burst", 0);
-    }
   }
 
   return setshootstyle("single", 0);
@@ -486,23 +446,20 @@ setshootstyleforsuppression() {
   var_0 = distancesquared(self getshootatpos(), self.shootpos);
 
   if(weaponissemiauto(self.weapon)) {
-    if(var_0 < 2560000) {
+    if(var_0 < 2560000)
       return setshootstyle("semi", 0);
-    }
 
     return setshootstyle("single", 0);
   }
 
-  if(weaponclass(self.weapon) == "mg") {
+  if(weaponclass(self.weapon) == "mg")
     return setshootstyle("full", 0);
-  }
 
   if(self.providecoveringfire || var_0 < 1690000) {
-    if(shoulddosemiforvariety()) {
+    if(shoulddosemiforvariety())
       return setshootstyle("semi", 0);
-    } else {
+    else
       return setshootstyle("burst", 0);
-    }
   }
 
   return setshootstyle("single", 0);
@@ -514,13 +471,11 @@ setshootstyle(var_0, var_1) {
 }
 
 shoulddosemiforvariety() {
-  if(weaponclass(self.weapon) != "rifle") {
+  if(weaponclass(self.weapon) != "rifle")
     return 0;
-  }
 
-  if(self.team != "allies") {
+  if(self.team != "allies")
     return 0;
-  }
 
   var_0 = animscripts\utility::safemod(int(self.origin[1]), 10000) + 2000;
   var_1 = int(self.origin[0]) + gettime();
@@ -540,10 +495,10 @@ sniper_glint_behavior() {
   self notify("new_glint_thread");
   self endon("new_glint_thread");
 
-  if(isDefined(self.disable_sniper_glint) && self.disable_sniper_glint) {
+  if(isdefined(self.disable_sniper_glint) && self.disable_sniper_glint) {
     return;
   }
-  if(!isDefined(level._effect["sniper_glint"])) {
+  if(!isdefined(level._effect["sniper_glint"])) {
     return;
   }
   if(!isalive(self.enemy)) {
@@ -552,11 +507,10 @@ sniper_glint_behavior() {
   var_0 = common_scripts\utility::getfx("sniper_glint");
   wait 0.2;
 
-  for(;;) {
+  for (;;) {
     if(self.weapon == self.primaryweapon && animscripts\combat_utility::player_sees_my_scope()) {
-      if(distancesquared(self.origin, self.enemy.origin) > 65536) {
-        playFXOnTag(var_0, self, "tag_flash");
-      }
+      if(distancesquared(self.origin, self.enemy.origin) > 65536)
+        playfxontag(var_0, self, "tag_flash");
 
       var_1 = randomfloatrange(3, 5);
       wait(var_1);

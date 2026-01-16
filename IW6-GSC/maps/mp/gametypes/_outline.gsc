@@ -208,9 +208,8 @@ outlineRemoveFromGlobalList(entOutlined) {
 outlineGetHighestPriorityID(entOutlined) {
   result = -1;
 
-  if(!isDefined(entOutlined.outlines) || entOutlined.size == 0) {
+  if(!isDefined(entOutlined.outlines) || entOutlined.size == 0)
     return result;
-  }
 
   oInfoHighest = undefined;
 

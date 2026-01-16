@@ -4,9 +4,8 @@
 *****************************************************/
 
 vignette_register(var_0, var_1) {
-  if(!common_scripts\utility::flag_exist(var_1)) {
+  if(!common_scripts\utility::flag_exist(var_1))
     common_scripts\utility::flag_init(var_1);
-  }
 
   thread vignette_register_wait(var_0, var_1);
 }
@@ -40,9 +39,8 @@ vignette_actor_spawn_func() {
 }
 
 vignette_actor_delete() {
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self delete();
 }
@@ -51,9 +49,8 @@ vignette_actor_kill() {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self.allowdeath = 1;
   self.a.nodeath = 1;

@@ -9,6 +9,7 @@
 #include scripts\core_common\player\player_loadout;
 #include scripts\core_common\throttle_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace ammo;
 
 autoexec main() {
@@ -34,7 +35,7 @@ dropaiammo() {
 
   if(isDefined(droppedweapon)) {
     droppedweapon thread ammo_pouch_think();
-    droppedweapon setcontents(droppedweapon setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
+    droppedweapon setcontents(droppedweapon setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
   }
 }
 

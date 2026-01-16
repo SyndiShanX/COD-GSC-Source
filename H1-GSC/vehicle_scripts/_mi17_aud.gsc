@@ -9,18 +9,18 @@ snd_init_mi17() {
 }
 
 snd_start_mi17() {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     wait 1.0;
     snd_stop_mi17(1.0);
   }
 
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   var_0.preset_name = "mi17";
   soundscripts\_snd::snd_message("snd_start_vehicle", var_0);
 }
 
 snd_stop_mi17(var_0) {
-  if(isDefined(self.snd_instance)) {
+  if(isdefined(self.snd_instance)) {
     soundscripts\_snd::snd_message("snd_stop_vehicle", var_0);
     self notify("snd_stop_vehicle");
   }
@@ -104,35 +104,43 @@ snd_mi17_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_dist_towards_vel2vol", [[0, 1.0],
     [10, 1.0],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_close_towards_vel2vol", [[0, 1.0],
     [20, 1.0],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_dist_towards_vel2pch", [[0, 0.9],
     [10, 1.0],
-    [20, 1.05]]);
+    [20, 1.05]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_windup_duck", [[0.0, 1.0],
     [0.25, 1.0],
     [0.3, 0.7],
     [0.7, 1.0],
-    [1.0, 1.0]]);
+    [1.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_by_windup_vel2vol", [[0.0, 0.0],
     [3.0, 0.3],
     [5.0, 0.7],
     [8.0, 0.8],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_flyby_duck_envelope", [[0.0, 1.0],
     [0.15, 1.0],
     [0.3, 0.5],
     [0.5, 0.55],
-    [0.6, 1.0]]);
+    [0.6, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_flyby_vel2vol", [[0.0, 0.0],
     [16.08, 0.0],
     [20.1, 0.5],
     [40.2, 0.8],
-    [150.0, 1.0]]);
+    [150.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("mi17_doppler2pch", [[0.0, 0.0],
-    [2.0, 2.0]]);
+    [2.0, 2.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 
@@ -141,9 +149,8 @@ mi17_condition_callback_to_hover(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 < 1.1 && var_4 < 3000) {
+  if(var_2 < 1.1 && var_4 < 3000)
     return 1;
-  }
 
   return 0;
 }
@@ -153,9 +160,8 @@ mi17_condition_callback_to_fly(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 >= 1.1 && var_4 < 3000) {
+  if(var_2 >= 1.1 && var_4 < 3000)
     return 1;
-  }
 
   return 0;
 }
@@ -166,16 +172,15 @@ mi17_condition_callback_to_flyby(var_0, var_1) {
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
   var_5 = var_0["speed"];
 
-  if(!isDefined(var_1.flyby)) {
-    var_1.flyby = spawnStruct();
+  if(!isdefined(var_1.flyby)) {
+    var_1.flyby = spawnstruct();
     var_1.flyby.prev_dist = var_3;
     var_1.flyby.prev_dx = 0;
   } else {
     var_6 = var_3 - var_1.flyby.prev_dist;
 
-    if(var_6 < 0 && var_4 < 2500 && var_5 >= 20.1) {
+    if(var_6 < 0 && var_4 < 2500 && var_5 >= 20.1)
       var_2 = 1;
-    }
 
     var_1.flyby.prev_dist = var_3;
     var_1.flyby.prev_dx = var_6;
@@ -188,9 +193,8 @@ mi17_condition_callback_to_distant(var_0, var_1) {
   var_2 = var_0["distance2d"];
   var_3 = soundscripts\_audio_vehicle_manager::dist2yards(var_2);
 
-  if(var_3 >= 3000) {
+  if(var_3 >= 3000)
     return 1;
-  }
 
   return 0;
 }

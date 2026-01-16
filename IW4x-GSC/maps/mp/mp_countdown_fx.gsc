@@ -17,13 +17,15 @@ main() {
   level._effect["smoke_missile_launched"] = loadfx("smoke/smoke_launchtubes");
   level._effect["ground_smoke_launch_a"] = loadfx("smoke/ground_smoke_launch_a");
 
+  //ambientFX();
   /#	
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_countdown_fx::main();
-  }
 }
 
 ambientFX() {
+  // temp tube smoke
+
   ent = createOneshotEffect("smoke_missile_launched");
   ent.v["origin"] = (632, 936, -200);
   ent.v["angles"] = (270, 0, 0);

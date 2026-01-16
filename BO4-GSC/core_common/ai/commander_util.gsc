@@ -4,17 +4,18 @@
 ***********************************************/
 
 #include scripts\core_common\ai\planner_commander;
+
 #namespace commander_util;
 
 function_2c38e191(team) {
   switch (team) {
-    case # "allies":
+    case #"allies":
       if(isDefined(level.alliescommander)) {
         plannercommanderutility::function_2974807c(level.alliescommander);
       }
 
       break;
-    case # "axis":
+    case #"axis":
       if(isDefined(level.axiscommander)) {
         plannercommanderutility::function_2974807c(level.axiscommander);
       }
@@ -25,13 +26,13 @@ function_2c38e191(team) {
 
 pause_commander(team) {
   switch (team) {
-    case # "allies":
+    case #"allies":
       if(isDefined(level.alliescommander)) {
         plannercommanderutility::pausecommander(level.alliescommander);
       }
 
       break;
-    case # "axis":
+    case #"axis":
       if(isDefined(level.axiscommander)) {
         plannercommanderutility::pausecommander(level.axiscommander);
       }

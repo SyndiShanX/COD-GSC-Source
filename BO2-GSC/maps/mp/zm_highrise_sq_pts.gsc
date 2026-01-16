@@ -53,9 +53,8 @@ wait_for_zombies_launched() {
   t_tower = getent("pts_tower_trig", "targetname");
   s_tower_top = getstruct("sq_zombie_launch_target", "targetname");
 
-  while(level.n_launched_zombies < 16) {
+  while(level.n_launched_zombies < 16)
     wait 0.5;
-  }
 }
 
 watch_zombie_flings() {
@@ -68,9 +67,8 @@ watch_zombie_flings() {
     self waittill("fling");
     level.n_launched_zombies++;
 
-    if(level.n_launched_zombies == 1 || level.n_launched_zombies == 5 || level.n_launched_zombies == 10) {
+    if(level.n_launched_zombies == 1 || level.n_launched_zombies == 5 || level.n_launched_zombies == 10)
       level notify("pts1_say_next_line");
-    }
 
     wait 0.1;
   }
@@ -103,9 +101,8 @@ wait_for_balls_launched() {
   foreach(player in a_players) {
     player.a_place_ball_trigs = [];
 
-    if(isDefined(player.zm_sq_has_ball)) {
+    if(isDefined(player.zm_sq_has_ball))
       player thread player_has_ball();
-    }
   }
 
   while(true) {
@@ -153,19 +150,21 @@ place_ball_think(t_place_ball, s_lion_spot) {
   self.t_putdown_ball delete();
 }
 
-delete_all_springpads() {}
+delete_all_springpads() {
+}
 
-exit_stage_1(success) {}
+exit_stage_1(success) {
+}
 
-exit_stage_2(success) {}
+exit_stage_2(success) {
+}
 
 watch_player_springpads(is_generator) {
   level thread springpad_count_watcher(is_generator);
   a_players = get_players();
 
-  foreach(player in a_players) {
-    player thread pts_watch_springpad_use(is_generator);
-  }
+  foreach(player in a_players)
+  player thread pts_watch_springpad_use(is_generator);
 }
 
 pts_watch_springpad_use(is_generator) {
@@ -175,9 +174,8 @@ pts_watch_springpad_use(is_generator) {
   while(!flag("sq_branch_complete")) {
     self waittill("equipment_placed", weapon, weapname);
 
-    if(weapname == level.springpad_name) {
+    if(weapname == level.springpad_name)
       self is_springpad_in_place(weapon, is_generator);
-    }
   }
 }
 
@@ -185,9 +183,8 @@ springpad_count_watcher(is_generator) {
   level endon("sq_pts_springad_count4");
   str_which_spots = "pts_ghoul";
 
-  if(is_generator) {
+  if(is_generator)
     str_which_spots = "pts_lion";
-  }
 
   a_spots = getstructarray(str_which_spots, "targetname");
 
@@ -196,9 +193,8 @@ springpad_count_watcher(is_generator) {
     n_count = 0;
 
     foreach(s_spot in a_spots) {
-      if(isDefined(s_spot.springpad)) {
+      if(isDefined(s_spot.springpad))
         n_count++;
-      }
     }
 
     level notify("sq_pts_springad_count" + n_count);
@@ -214,8 +210,8 @@ is_springpad_in_place(m_springpad, is_generator) {
     n_dist = distance2dsquared(m_springpad.origin, s_spot.origin);
 
     if(n_dist < 1024) {
-      v_spot_forward = vectornormalize(anglesToForward(s_spot.angles));
-      v_pad_forward = vectornormalize(anglesToForward(m_springpad.angles));
+      v_spot_forward = vectornormalize(anglestoforward(s_spot.angles));
+      v_pad_forward = vectornormalize(anglestoforward(m_springpad.angles));
       n_dot = vectordot(v_spot_forward, v_pad_forward);
 
       iprintlnbold("Trample Steam OFF: Dist(" + sqrt(n_dist) + ") Dot(" + n_dot + ")");
@@ -279,7 +275,7 @@ pts_springpad_fling(str_spot_name, m_buddy_springpad) {
 
   m_anim = spawn("script_model", (2090, 675, 3542));
   m_anim.angles = (0, 0, 0);
-  m_anim setModel("fxanim_zom_highrise_trample_gen_mod");
+  m_anim setmodel("fxanim_zom_highrise_trample_gen_mod");
   m_anim useanimtree(#animtree);
   m_anim.targetname = "trample_gen_" + str_spot_name;
   pts_springpad_anim_ball(m_buddy_springpad, m_anim, str_anim1, str_anim2);
@@ -295,16 +291,14 @@ pts_springpad_anim_ball(m_buddy_springpad, m_anim, str_anim1, str_anim2) {
   while(isDefined(m_anim)) {
     self notify("fling", 1);
 
-    if(isDefined(m_anim)) {
+    if(isDefined(m_anim))
       m_anim setanim(level.scr_anim["fxanim_props"]["trample_gen_" + str_anim1]);
-    }
 
     wait(n_anim_length1);
     m_buddy_springpad notify("fling", 1);
 
-    if(isDefined(m_anim)) {
+    if(isDefined(m_anim))
       m_anim setanim(level.scr_anim["fxanim_props"]["trample_gen_" + str_anim2]);
-    }
 
     wait(n_anim_length2);
   }
@@ -328,14 +322,12 @@ wait_for_all_springpads_placed(str_type, str_flag) {
     is_clear = 0;
 
     foreach(s_spot in a_spots) {
-      if(!isDefined(s_spot.springpad)) {
+      if(!isDefined(s_spot.springpad))
         is_clear = 1;
-      }
     }
 
-    if(!is_clear) {
+    if(!is_clear)
       flag_set(str_flag);
-    }
 
     wait 1;
   }
@@ -345,9 +337,8 @@ pts_should_player_create_trigs(player) {
   a_lion_spots = getstructarray("pts_lion", "targetname");
 
   foreach(s_lion_spot in a_lion_spots) {
-    if(isDefined(s_lion_spot.springpad) && isDefined(s_lion_spot.springpad_buddy.springpad)) {
+    if(isDefined(s_lion_spot.springpad) && isDefined(s_lion_spot.springpad_buddy.springpad))
       pts_putdown_trigs_create_for_spot(s_lion_spot, player);
-    }
   }
 }
 
@@ -368,14 +359,13 @@ pts_putdown_trigs_create_for_spot(s_lion_spot, player) {
   if(isDefined(s_lion_spot.which_ball) || isDefined(s_lion_spot.springpad_buddy) && isDefined(s_lion_spot.springpad_buddy.which_ball)) {
     return;
   }
-  t_place_ball = sq_pts_create_use_trigger(s_lion_spot.origin, 16, 70, &"ZM_HIGHRISE_SQ_PUTDOWN_BALL");
+  t_place_ball = sq_pts_create_use_trigger(s_lion_spot.origin, 16, 70, & "ZM_HIGHRISE_SQ_PUTDOWN_BALL");
   player clientclaimtrigger(t_place_ball);
   t_place_ball.owner = player;
   player thread place_ball_think(t_place_ball, s_lion_spot);
 
-  if(!isDefined(s_lion_spot.pts_putdown_trigs)) {
+  if(!isDefined(s_lion_spot.pts_putdown_trigs))
     s_lion_spot.pts_putdown_trigs = [];
-  }
 
   s_lion_spot.pts_putdown_trigs[player.characterindex] = t_place_ball;
   level thread pts_putdown_trigs_springpad_delete_watcher(player, s_lion_spot);
@@ -393,7 +383,7 @@ pts_reset_ball(s_lion_spot) {
     s_lion_spot.sq_pickup_reset = 1;
     s_lion_spot.which_ball notify("sq_pickup_reset");
     m_ball_anim = getent("trample_gen_" + s_lion_spot.script_noteworthy, "targetname");
-    playFX(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
+    playfx(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
     flag_clear("pts_2_generator_" + s_lion_spot.which_generator + "_started");
     level.current_generator--;
     s_lion_spot.which_ball = undefined;
@@ -402,7 +392,7 @@ pts_reset_ball(s_lion_spot) {
     s_lion_spot.springpad_buddy.sq_pickup_reset = 1;
     s_lion_spot.springpad_buddy.which_ball notify("sq_pickup_reset");
     m_ball_anim = getent("trample_gen_" + s_lion_spot.springpad_buddy.script_noteworthy, "targetname");
-    playFX(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
+    playfx(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
     flag_clear("pts_2_generator_" + s_lion_spot.springpad_buddy.which_generator + "_started");
     level.current_generator--;
     s_lion_spot.springpad_buddy.which_ball = undefined;
@@ -414,9 +404,9 @@ pts_putdown_trigs_remove_for_player(player) {
   a_lion_spots = getstructarray("pts_lion", "targetname");
 
   foreach(s_lion_spot in a_lion_spots) {
-    if(!isDefined(s_lion_spot.pts_putdown_trigs)) {
+    if(!isDefined(s_lion_spot.pts_putdown_trigs))
       continue;
-    } else if(isDefined(s_lion_spot.pts_putdown_trigs[player.characterindex])) {
+    else if(isDefined(s_lion_spot.pts_putdown_trigs[player.characterindex])) {
       s_lion_spot.pts_putdown_trigs[player.characterindex] delete();
       arrayremoveindex(s_lion_spot.pts_putdown_trigs, player.characterindex, 1);
     }
@@ -427,9 +417,8 @@ pts_putdown_trigs_remove_for_spot(s_lion_spot) {
   if(!isDefined(s_lion_spot.pts_putdown_trigs)) {
     return;
   }
-  foreach(t_putdown in s_lion_spot.pts_putdown_trigs) {
-    t_putdown delete();
-  }
+  foreach(t_putdown in s_lion_spot.pts_putdown_trigs)
+  t_putdown delete();
 
   s_lion_spot.pts_putdown_trigs = [];
 }

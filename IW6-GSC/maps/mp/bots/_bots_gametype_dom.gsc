@@ -32,15 +32,13 @@ setup_callbacks() {
 bot_is_assigned_location(origin) {
   distCheckSq = (300 * 300);
 
-  if((self bot_is_defending()) && Distance2DSquared(origin, self.bot_defending_center) < distCheckSq) {
+  if((self bot_is_defending()) && Distance2DSquared(origin, self.bot_defending_center) < distCheckSq)
     return true;
-  }
 
   if(self BotHasScriptGoal()) {
     scriptGoalOrigin = self BotGetScriptGoal();
-    if(Distance2DSquared(origin, scriptGoalOrigin) < distCheckSq) {
+    if(Distance2DSquared(origin, scriptGoalOrigin) < distCheckSq)
       return true;
-    }
   }
 
   return false;
@@ -48,13 +46,11 @@ bot_is_assigned_location(origin) {
 
 crate_can_use_smartglass(crate) {
   if(IsAgent(self)) {
-    if(!isDefined(level.smartglass_commander) || (self.owner != level.smartglass_commander)) {
+    if(!isDefined(level.smartglass_commander) || (self.owner != level.smartglass_commander))
       return crate_can_use();
-    }
 
-    if(!isDefined(crate.boxType) && bot_crate_is_command_goal(crate)) {
+    if(!isDefined(crate.boxType) && bot_crate_is_command_goal(crate))
       return self bot_is_assigned_location(crate.origin);
-    }
 
     return false;
   }
@@ -63,35 +59,30 @@ crate_can_use_smartglass(crate) {
 }
 
 crate_can_use(crate) {
-  if(IsAgent(self) && !isDefined(crate.boxType)) {
+  if(IsAgent(self) && !isDefined(crate.boxType))
     return false;
-  }
 
-  if(!IsTeamParticipant(self)) {
+  if(!IsTeamParticipant(self))
     return true;
-  }
 
   return (self bot_is_protecting());
 }
 
 bot_dom_debug() {
-  while(!isDefined(level.bot_gametype_precaching_done)) {
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait(0.05);
-  }
 
   while(1) {
     if(GetDvar("bot_DrawDebugGametype") == "dom") {
       flags = bot_get_all_possible_flags();
       foreach(flag in flags) {
-        if(flag.classname != "trigger_radius") {
+        if(flag.classname != "trigger_radius")
           BotDebugDrawTrigger(true, flag, (0, 1, 0), true);
-        } else {
+        else
           bot_draw_cylinder(flag.origin, flag.radius, flag.height, 0.05, undefined, (0, 1, 0), true);
-        }
 
-        foreach(node in flag.nodes) {
-          bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, (0, 1, 0), true, 4);
-        }
+        foreach(node in flag.nodes)
+        bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, (0, 1, 0), true, 4);
       }
     }
 
@@ -153,9 +144,8 @@ bot_dom_apply_commander_tactics(new_tactic) {
       if(!isDefined(participant.team)) {
         continue;
       }
-      if(IsAITeamParticipant(participant) && participant.team == self.team) {
+      if(IsAITeamParticipant(participant) && participant.team == self.team)
         participant.force_new_goal = true;
-      }
     }
   }
 }
@@ -171,9 +161,8 @@ monitor_zone_control() {
     team = self maps\mp\gametypes\dom::getFlagTeam();
     if(team != "neutral") {
       zone = GetZoneNearest(self.origin);
-      if(isDefined(zone)) {
+      if(isDefined(zone))
         BotZoneSetTeam(zone, team);
-      }
     }
   }
 }
@@ -187,9 +176,8 @@ monitor_flag_ownership() {
   prev_team = self maps\mp\gametypes\dom::getFlagTeam();
   for(;;) {
     current_team = self maps\mp\gametypes\dom::getFlagTeam();
-    if(current_team != prev_team) {
+    if(current_team != prev_team)
       level notify("flag_changed_ownership");
-    }
     prev_team = current_team;
 
     wait(0.05);
@@ -202,17 +190,15 @@ setup_bot_dom() {
 
   flags = bot_get_all_possible_flags();
   if(flags.size > 3) {
-    while(!isDefined(level.teleport_dom_finished_initializing)) {
+    while(!isDefined(level.teleport_dom_finished_initializing))
       wait(0.05);
-    }
 
     Assert(flags.size % 3 == 0);
     flags_in_zone = [];
     foreach(flag in flags) {
       Assert(isDefined(flag.teleport_zone));
-      if(!isDefined(flags_in_zone[flag.teleport_zone])) {
+      if(!isDefined(flags_in_zone[flag.teleport_zone]))
         flags_in_zone[flag.teleport_zone] = [];
-      }
 
       flags_in_zone[flag.teleport_zone] = array_add(flags_in_zone[flag.teleport_zone], flag);
     }
@@ -231,9 +217,8 @@ setup_bot_dom() {
   foreach(flag in flags) {
     flag thread monitor_zone_control();
     flag thread monitor_flag_ownership();
-    if(flag.script_label != "_a" && flag.script_label != "_b" && flag.script_label != "_c") {
+    if(flag.script_label != "_a" && flag.script_label != "_b" && flag.script_label != "_c")
       assertmsg("Domination flag at location " + flag.origin + " needs a script_label of'_a''_b'or'_c'");
-    }
     flag.nodes = GetNodesInTrigger(flag);
     add_missing_nodes(flag);
   }
@@ -246,17 +231,15 @@ setup_bot_dom() {
 }
 
 bot_get_all_possible_flags() {
-  if(isDefined(level.all_dom_flags)) {
+  if(isDefined(level.all_dom_flags))
     return level.all_dom_flags;
-  } else {
+  else
     return level.flags;
-  }
 }
 
 bot_cache_flag_distances(flags) {
-  if(!isDefined(level.flag_distances)) {
+  if(!isDefined(level.flag_distances))
     level.flag_distances = [];
-  }
 
   for(i = 0; i < flags.size - 1; i++) {
     for(j = i + 1; j < flags.size; j++) {
@@ -273,9 +256,8 @@ add_missing_nodes(flag) {
   if(flag.classname == "trigger_radius") {
     test_nodes_in_radius = GetNodesInRadius(flag.origin, flag.radius, 0, 100);
     nodes_in_radius_not_in_volume = array_remove_array(test_nodes_in_radius, flag.nodes);
-    if(nodes_in_radius_not_in_volume.size > 0) {
+    if(nodes_in_radius_not_in_volume.size > 0)
       flag.nodes = array_combine(flag.nodes, nodes_in_radius_not_in_volume);
-    }
   } else if(flag.classname == "trigger_multiple") {
     bound_points[0] = flag GetPointInBounds(1, 1, 1);
     bound_points[1] = flag GetPointInBounds(1, 1, -1);
@@ -289,9 +271,8 @@ add_missing_nodes(flag) {
     farthest_dist = 0;
     foreach(point in bound_points) {
       dist = Distance(point, flag.origin);
-      if(dist > farthest_dist) {
+      if(dist > farthest_dist)
         farthest_dist = dist;
-      }
     }
 
     test_nodes_in_radius = GetNodesInRadius(flag.origin, farthest_dist, 0, 100);
@@ -316,9 +297,8 @@ should_start_cautious_approach_dom(firstCheck) {
         dist_my_spawn_to_target_sq = DistanceSquared(my_spawn_flag.origin, self.current_flag.origin);
         dist_enemy_spawn_to_target_sq = DistanceSquared(enemy_spawn_flag.origin, self.current_flag.origin);
 
-        if(dist_my_spawn_to_target_sq < dist_enemy_spawn_to_target_sq) {
+        if(dist_my_spawn_to_target_sq < dist_enemy_spawn_to_target_sq)
           return false;
-        }
       }
     }
   }
@@ -327,17 +307,15 @@ should_start_cautious_approach_dom(firstCheck) {
 }
 
 bot_dom_debug_should_capture_all() {
-  if(GetDvar("bot_dom_debug_capture_all") == "1") {
+  if(GetDvar("bot_dom_debug_capture_all") == "1")
     return true;
-  }
 
   return false;
 }
 
 bot_dom_debug_should_protect_all() {
-  if(GetDvar("bot_dom_debug_protect_all") == "1") {
+  if(GetDvar("bot_dom_debug_protect_all") == "1")
     return true;
-  }
 
   return false;
 }
@@ -350,9 +328,8 @@ bot_dom_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done)) {
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait(0.05);
-  }
 
   self.force_new_goal = false;
   self.new_goal_time = 0;
@@ -385,24 +362,20 @@ bot_dom_think() {
 }
 
 should_delay_flag_decision() {
-  if(self.force_new_goal) {
+  if(self.force_new_goal)
     return false;
-  }
 
-  if(!self bot_is_capturing()) {
+  if(!self bot_is_capturing())
     return false;
-  }
 
-  if(self.current_flag maps\mp\gametypes\dom::getFlagTeam() == self.team) {
+  if(self.current_flag maps\mp\gametypes\dom::getFlagTeam() == self.team)
     return false;
-  }
 
   flag_capture_radius = get_flag_capture_radius();
   if(DistanceSquared(self.origin, self.current_flag.origin) < (flag_capture_radius * 2) * (flag_capture_radius * 2)) {
     ally_flags = get_ally_flags(self.team);
-    if(ally_flags.size == 2 && !array_contains(ally_flags, self.current_flag) && !self bot_allowed_to_3_cap()) {
+    if(ally_flags.size == 2 && !array_contains(ally_flags, self.current_flag) && !self bot_allowed_to_3_cap())
       return false;
-    }
 
     return true;
   }
@@ -434,28 +407,25 @@ bot_choose_flag() {
   no_flags_captured_yet = true;
 
   override_targets = self get_override_flag_targets();
-  if(override_targets.size > 0) {
+  if(override_targets.size > 0)
     all_possible_flags = override_targets;
-  } else {
+  else
     all_possible_flags = level.flags;
-  }
 
   for(i = 0; i < all_possible_flags.size; i++) {
     team = all_possible_flags[i] maps\mp\gametypes\dom::getFlagTeam();
 
     if(no_flags_captured_yet) {
-      if(flag_has_been_captured_before(all_possible_flags[i])) {
+      if(flag_has_been_captured_before(all_possible_flags[i]))
         no_flags_captured_yet = false;
-      } else {
+      else
         Assert(team == "neutral");
-      }
     }
 
-    if(team != self.team) {
+    if(team != self.team)
       flags_to_take[flags_to_take.size] = all_possible_flags[i];
-    } else {
+    else
       flags_to_defend[flags_to_defend.size] = all_possible_flags[i];
-    }
   }
   assert(self has_override_flag_targets() || (flags_to_take.size + flags_to_defend.size == 3));
 
@@ -513,11 +483,10 @@ bot_choose_flag() {
   if(attacking) {
     assert(flags_to_take.size >= 1 && flags_to_take.size <= 3);
 
-    if(flags_to_take.size > 1) {
+    if(flags_to_take.size > 1)
       flags_to_take_sorted = get_array_of_closest(self.origin, flags_to_take);
-    } else {
+    else
       flags_to_take_sorted = flags_to_take;
-    }
 
     if(no_flags_captured_yet && !self has_override_flag_targets()) {
       Assert(flags_to_take_sorted.size == 3);
@@ -537,20 +506,18 @@ bot_choose_flag() {
         }
 
         random_roll = RandomInt(100);
-        if(random_roll < chance_to_take_closest) {
+        if(random_roll < chance_to_take_closest)
           flag_num = 0;
-        } else if(random_roll < chance_to_take_closest + chance_to_take_middle) {
+        else if(random_roll < chance_to_take_closest + chance_to_take_middle)
           flag_num = 1;
-        } else {
+        else
           flag_num = 2;
-        }
 
       }
 
       goal_type = undefined;
-      if(flag_num == 0) {
+      if(flag_num == 0)
         goal_type = "critical";
-      }
 
       self capture_flag(flags_to_take_sorted[flag_num], goal_type);
       return;
@@ -574,9 +541,8 @@ bot_choose_flag() {
 
         if(flags_to_defend.size == 1) {
           weight_close_to_flag = 1.5;
-          for(i = 0; i < flag_combined_dist.size; i++) {
+          for(i = 0; i < flag_combined_dist.size; i++)
             flag_combined_dist[i] += (level.flag_distances[get_flag_label(flags_to_take_sorted[i])][get_flag_label(flags_to_defend[0])] * weight_close_to_flag);
-          }
         }
 
         if(self.strategy_level == 0) {
@@ -584,11 +550,10 @@ bot_choose_flag() {
           if(random_roll < 50) {
             flag = flags_to_take_sorted[0];
           } else {
-            if(random_roll < 50 + (50 / (flags_to_take_sorted.size - 1))) {
+            if(random_roll < 50 + (50 / (flags_to_take_sorted.size - 1)))
               flag = flags_to_take_sorted[1];
-            } else {
+            else
               flag = flags_to_take_sorted[2];
-            }
           }
         } else if(flag_combined_dist.size == 2) {
           chance_to_take_flag[0] = 50;
@@ -612,11 +577,10 @@ bot_choose_flag() {
           }
 
           random_roll = RandomInt(100);
-          if(random_roll < chance_to_take_flag[0]) {
+          if(random_roll < chance_to_take_flag[0])
             flag = flags_to_take_sorted[0];
-          } else {
+          else
             flag = flags_to_take_sorted[1];
-          }
         } else if(flag_combined_dist.size == 3) {
           chance_to_take_flag[0] = 34;
           chance_to_take_flag[1] = 33;
@@ -645,24 +609,22 @@ bot_choose_flag() {
           }
 
           random_roll = RandomInt(100);
-          if(random_roll < chance_to_take_flag[0]) {
+          if(random_roll < chance_to_take_flag[0])
             flag = flags_to_take_sorted[0];
-          } else if(random_roll < chance_to_take_flag[0] + chance_to_take_flag[1]) {
+          else if(random_roll < chance_to_take_flag[0] + chance_to_take_flag[1])
             flag = flags_to_take_sorted[1];
-          } else {
+          else
             flag = flags_to_take_sorted[2];
-          }
         }
       }
     }
   } else {
     assert(flags_to_defend.size > 0);
 
-    if(flags_to_defend.size > 1) {
+    if(flags_to_defend.size > 1)
       flags_to_defend_sorted = get_array_of_closest(self.origin, flags_to_defend);
-    } else {
+    else
       flags_to_defend_sorted = flags_to_defend;
-    }
 
     foreach(test_flag in flags_to_defend_sorted) {
       if(self bot_should_defend_flag(test_flag, flags_to_defend.size)) {
@@ -680,11 +642,10 @@ bot_choose_flag() {
         flags_to_defend_sorted_to_third_flag = get_array_of_closest(third_flag.origin, flags_to_defend_sorted);
 
         random_roll = RandomInt(100);
-        if(random_roll < 70) {
+        if(random_roll < 70)
           flag = flags_to_defend_sorted_to_third_flag[0];
-        } else {
+        else
           flag = flags_to_defend_sorted_to_third_flag[1];
-        }
       } else {
         assert(flags_to_defend_sorted.size == 1 || flags_to_defend_sorted.size == 3);
 
@@ -701,14 +662,12 @@ bot_choose_flag() {
 }
 
 bot_allowed_to_3_cap() {
-  if(self.strategy_level == 0) {
+  if(self.strategy_level == 0)
     return true;
-  }
 
   override_targets = self get_override_flag_targets();
-  if(override_targets.size == 3) {
+  if(override_targets.size == 3)
     return true;
-  }
 
   enemy_score = maps\mp\gametypes\_gamescore::_getteamscore(get_enemy_team(self.team));
   my_score = maps\mp\gametypes\_gamescore::_getteamscore(self.team);
@@ -722,16 +681,14 @@ bot_allowed_to_3_cap() {
 
 bot_should_defend(chance_to_override_personality_and_defend) {
   Assert(chance_to_override_personality_and_defend >= 0 && chance_to_override_personality_and_defend <= 1);
-  if(RandomFloat(1) < chance_to_override_personality_and_defend) {
+  if(RandomFloat(1) < chance_to_override_personality_and_defend)
     return true;
-  }
 
   personality_type = level.bot_personality_type[self.personality];
-  if(personality_type == "stationary") {
+  if(personality_type == "stationary")
     return true;
-  } else if(personality_type == "active") {
+  else if(personality_type == "active")
     return false;
-  }
 
   AssertMsg("unreachable");
 }
@@ -750,9 +707,8 @@ capture_flag(flag_to_capture, override_goal_type, dont_monitor_status) {
     self bot_capture_zone(flag_to_capture.origin, flag_to_capture.nodes, flag_to_capture, optional_params);
   }
 
-  if(!isDefined(dont_monitor_status) || !dont_monitor_status) {
+  if(!isDefined(dont_monitor_status) || !dont_monitor_status)
     self thread monitor_flag_status(flag_to_capture);
-  }
 }
 
 defend_flag(flag_to_defend) {
@@ -818,13 +774,11 @@ bot_dom_leader_dialog(dialog, location) {
 
 bot_allow_to_capture_flag(flag) {
   override_targets = self get_override_flag_targets();
-  if(override_targets.size == 0) {
+  if(override_targets.size == 0)
     return true;
-  }
 
-  if(array_contains(override_targets, flag)) {
+  if(array_contains(override_targets, flag))
     return true;
-  }
 
   return false;
 }
@@ -850,9 +804,8 @@ monitor_flag_status(flag) {
 
     if(self bot_is_capturing()) {
       if(current_flag_team == self.team && flag.useobj.claimteam == "none") {
-        if(!bot_dom_debug_should_capture_all()) {
+        if(!bot_dom_debug_should_capture_all())
           needs_new_goal = true;
-        }
       }
 
       if(cur_num_ally_flags == 2 && current_flag_team != self.team && !self bot_allowed_to_3_cap()) {
@@ -896,9 +849,8 @@ monitor_flag_status(flag) {
 
     if(self bot_is_protecting()) {
       if(current_flag_team != self.team) {
-        if(!bot_dom_debug_should_protect_all()) {
+        if(!bot_dom_debug_should_protect_all())
           needs_new_goal = true;
-        }
       } else {
         if(cur_num_ally_flags == 1 && prev_num_ally_flags > 1) {
           needs_new_goal = true;
@@ -943,9 +895,8 @@ bot_dom_get_node_chance(node) {
         third_flag = get_other_flag(self.current_flag, ally_flag);
         third_flag_team = third_flag maps\mp\gametypes\dom::getFlagTeam();
         if(third_flag_team != self.team) {
-          if(node node_is_on_path_from_labels(self_current_flag_label, get_flag_label(third_flag))) {
+          if(node node_is_on_path_from_labels(self_current_flag_label, get_flag_label(third_flag)))
             node_on_safe_path = false;
-          }
         }
       }
     }
@@ -960,9 +911,8 @@ bot_dom_get_node_chance(node) {
 
 get_flag_label(flag) {
   flag_label = "";
-  if(isDefined(flag.teleport_zone)) {
+  if(isDefined(flag.teleport_zone))
     flag_label += (flag.teleport_zone + "_");
-  }
   flag_label += "flag" + flag.script_label;
 
   return flag_label;
@@ -971,9 +921,8 @@ get_flag_label(flag) {
 get_other_flag(flag1, flag2) {
   Assert(level.flags.size == 3);
   for(i = 0; i < level.flags.size; i++) {
-    if(level.flags[i] != flag1 && level.flags[i] != flag2) {
+    if(level.flags[i] != flag1 && level.flags[i] != flag2)
       return level.flags[i];
-    }
   }
 }
 
@@ -982,9 +931,8 @@ get_specific_flag(flag_letter) {
   flag_letter = "_" + ToLower(flag_letter);
 
   for(i = 0; i < level.flags.size; i++) {
-    if(level.flags[i].script_label == flag_letter) {
+    if(level.flags[i].script_label == flag_letter)
       return level.flags[i];
-    }
   }
 }
 
@@ -1027,17 +975,15 @@ get_num_allies_capturing_flag(flag, ignore_humans) {
 }
 
 bot_is_capturing_flag(flag) {
-  if(!self bot_is_capturing()) {
+  if(!self bot_is_capturing())
     return false;
-  }
 
   return self bot_target_is_flag(flag);
 }
 
 bot_is_protecting_flag(flag) {
-  if(!self bot_is_protecting()) {
+  if(!self bot_is_protecting())
     return false;
-  }
 
   return self bot_target_is_flag(flag);
 }
@@ -1083,11 +1029,10 @@ get_ally_flags(team) {
 }
 
 bot_should_defend_flag(flag, num_flags_defending) {
-  if(num_flags_defending == 1) {
+  if(num_flags_defending == 1)
     max_num_bots_defending_this_flag = 1;
-  } else {
+  else
     max_num_bots_defending_this_flag = 2;
-  }
 
   bots_defending_flag = get_bots_defending_flag(flag);
 

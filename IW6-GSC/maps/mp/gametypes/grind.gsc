@@ -14,7 +14,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -55,23 +57,22 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
-  setObjectiveText("allies", &"OBJECTIVES_WAR");
-  setObjectiveText("axis", &"OBJECTIVES_WAR");
+  setObjectiveText("allies", & "OBJECTIVES_WAR");
+  setObjectiveText("axis", & "OBJECTIVES_WAR");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_WAR");
-    setObjectiveScoreText("axis", &"OBJECTIVES_WAR");
+    setObjectiveScoreText("allies", & "OBJECTIVES_WAR");
+    setObjectiveScoreText("axis", & "OBJECTIVES_WAR");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_WAR_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_WAR_SCORE");
   }
 
-  setObjectiveHintText("allies", &"OBJECTIVES_WAR_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_WAR_HINT");
 
   initSpawns();
   createTags();
@@ -87,9 +88,8 @@ onStartGameType() {
 }
 
 onSpawnPlayer() {
-  if(isDefined(self.tagsCarried)) {
+  if(isDefined(self.tagsCarried))
     self SetClientOmnvar("ui_grind_tags", self.tagsCarried);
-  }
 }
 
 createTags() {
@@ -188,9 +188,8 @@ monitorTagUse(tag) {
     if(isDefined(player.classname) && player.classname == "script_vehicle") {
       continue;
     }
-    if(IsAgent(player) && isDefined(player.owner)) {
+    if(IsAgent(player) && isDefined(player.owner))
       player = player.owner;
-    }
 
     tag.visual hide();
     tag.trigger hide();
@@ -223,9 +222,8 @@ onPlayerConnect() {
 playerSetTagCount(tagCount) {
   self.tagsCarried = tagCount;
   self.game_extrainfo = tagCount;
-  if(tagCount > 999) {
+  if(tagCount > 999)
     tagCount = 999;
-  }
   self SetClientOmnvar("ui_grind_tags", tagCount);
 }
 
@@ -246,9 +244,8 @@ monitorJoinTeam() {
 hideHudElementOnGameEnd(hudElement) {
   level waittill("game_ended");
 
-  if(isDefined(hudElement)) {
+  if(isDefined(hudElement))
     hudElement.alpha = 0;
-  }
 }
 
 createZones() {
@@ -475,9 +472,8 @@ initSpawns() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(maps\mp\gametypes\_spawnlogic::shouldUseTeamStartspawn()) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -493,9 +489,8 @@ getSpawnPoint() {
 onNormalDeath(victim, attacker, lifeId) {
   level thread dropTags(victim, attacker);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
     attacker.finalKill = true;
-  }
 }
 
 dropTags(victim, attacker) {
@@ -507,9 +502,8 @@ dropTags(victim, attacker) {
   counter = 0;
 
   while(counter < dropNumber) {
-    if(counter > 0) {
+    if(counter > 0)
       radomDropLocation = true;
-    }
 
     newTag = spawnTag(victim.origin, radomDropLocation);
     newTag.victim = victim;

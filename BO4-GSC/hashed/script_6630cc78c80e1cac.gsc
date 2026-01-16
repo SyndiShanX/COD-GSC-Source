@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_sq;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_vo;
+
 #namespace namespace_a35b0e2;
 
 autoexec __init__system__() {
@@ -36,9 +37,9 @@ init() {
   level.var_2a66053e hide();
   level.var_3830a0d3.angles += (20, 0, 0);
   level flag::init(#"hash_7b1fd4fc459e497c");
-  zm_sq::register(#"hash_6039fc2dd130edf5", # "step_1", # "hash_5873576264199a27", &function_4ac6cf37, &function_cb27a665);
+  zm_sq::register(#"hash_6039fc2dd130edf5", #"step_1", #"hash_5873576264199a27", &function_4ac6cf37, &function_cb27a665);
   zm_sq::start(#"hash_6039fc2dd130edf5");
-  zm_sq::register(#"hash_6039fc2dd130edf5", # "step_2", # "hash_5873586264199bda", &function_955fffb1, &function_fabb1fba);
+  zm_sq::register(#"hash_6039fc2dd130edf5", #"step_2", #"hash_5873586264199bda", &function_955fffb1, &function_fabb1fba);
   zm_sq::start(#"hash_6039fc2dd130edf5");
 }
 
@@ -132,7 +133,7 @@ function_715c9476() {
 
   iprintlnbold("<dev string:x62>");
 
-  level thread function_bd81f4e2(waitresult.activator);
+    level thread function_bd81f4e2(waitresult.activator);
 }
 
 function_63f29ee9() {
@@ -144,7 +145,7 @@ function_63f29ee9() {
 
   iprintlnbold("<dev string:x80>");
 
-  level thread function_bd81f4e2(waitresult.activator);
+    level thread function_bd81f4e2(waitresult.activator);
 }
 
 function_bd81f4e2(user) {
@@ -158,9 +159,9 @@ function_bd81f4e2(user) {
 
     iprintlnbold("<dev string:x9f>");
 
-    if(user zm_characters::is_character(array(#"hash_1aa57ef704f24fa5", # "hash_36bc80636f0fdac4"))) {
-      user thread zm_vo::vo_say("vox_mcnamara_log_repair_plr_6_0");
-    }
+      if(user zm_characters::is_character(array(#"hash_1aa57ef704f24fa5", #"hash_36bc80636f0fdac4"))) {
+        user thread zm_vo::vo_say("vox_mcnamara_log_repair_plr_6_0");
+      }
 
     level flag::set(#"hash_7b1fd4fc459e497c");
   }

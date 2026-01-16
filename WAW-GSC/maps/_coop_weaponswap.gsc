@@ -11,10 +11,10 @@ init() {
 flamethrower_swap() {
   self endon("death");
   self endon("disconnect");
-  while(1) {
+  while (1) {
     weapons = self GetWeaponsList();
     self.has_flame_thrower = false;
-    for(i = 0; i < weapons.size; i++) {
+    for (i = 0; i < weapons.size; i++) {
       if(weapons[i] == "m2_flamethrower" || weapons[i] == "flamethrower" || weapons[i] == "m2_flamethrower_wet") {
         self.has_flame_thrower = true;
       }

@@ -32,12 +32,12 @@
 #namespace archetype_robot;
 
 function autoexec __init__sytem__() {
-  system::register("robot", &__init__, undefined, undefined);
+  system::register("robot", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("robot", &robotsoldierbehavior::archetyperobotblackboardinit);
-  spawner::add_archetype_spawn_function("robot", &robotsoldierserverutils::robotsoldierspawnsetup);
+  spawner::add_archetype_spawn_function("robot", & robotsoldierbehavior::archetyperobotblackboardinit);
+  spawner::add_archetype_spawn_function("robot", & robotsoldierserverutils::robotsoldierspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("robot")) {
     clientfield::register("actor", "robot_mind_control", 1, 2, "int");
     clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int");
@@ -51,105 +51,105 @@ function __init__() {
 #namespace robotsoldierbehavior;
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreeaction("robotStepIntoAction", &stepintoinitialize, undefined, &stepintoterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotStepOutAction", &stepoutinitialize, undefined, &stepoutterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotTakeOverAction", &takeoverinitialize, undefined, &takeoverterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotEmpIdleAction", &robotempidleinitialize, &robotempidleupdate, &robotempidleterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotBecomeCrawler", &robotbecomecrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDropStartingWeapon", &robotdropstartingweapon);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDontTakeCover", &robotdonttakecover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverInitialize", &robotcoveroverinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverTerminate", &robotcoveroverterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplode", &robotexplode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplodeTerminate", &robotexplodeterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDeployMiniRaps", &robotdeployminiraps);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayer", &movetoplayerupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSprint", &robotstartsprint);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotStartSprint", &robotstartsprint);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSuperSprint", &robotstartsupersprint);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTacticalWalkActionStart", &robottacticalwalkactionstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotTacticalWalkActionStart", &robottacticalwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDie", &robotdie);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCleanupChargeMeleeAttack", &robotcleanupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMoving", &robotismoving);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotAbleToShoot", &robotabletoshootcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerCanShootEnemy", &robotcrawlercanshootenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveToEnemy", &canmovetoenemycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveCloseToEnemy", &canmoveclosetoenemycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasMiniRaps", &hasminiraps);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCover", &robotisatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldTacticalWalk", &robotshouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasCloseEnemyToMelee", &robothascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasEnemyToMelee", &robothasenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasCloseEnemyToMelee", &robotroguehascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasEnemyToMelee", &robotroguehasenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsCrawler", &robotiscrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMarching", &robotismarching);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPrepareForAdjustToCover", &robotprepareforadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldAdjustToCover", &robotshouldadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldBecomeCrawler", &robotshouldbecomecrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldReactAtCover", &robotshouldreactatcover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldExplode", &robotshouldexplode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldShutdown", &robotshouldshutdown);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSupportsOverCover", &robotsupportsovercover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStepIn", &shouldstepincondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTakeOver", &shouldtakeovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsStepOut", &supportsstepoutcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToStand", &setdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToCrouch", &setdesiredstancetocrouch);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("toggleDesiredStance", &toggledesiredstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMovement", &robotmovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDelayMovement", &robotdelaymovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotInvalidateCover", &robotinvalidatecover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldChargeMelee", &robotshouldchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldMelee", &robotshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScriptRequiresToSprint", &scriptrequirestosprintcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScanExposedPainTerminate", &robotscanexposedpainterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTookEmpDamage", &robottookempdamage);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotNoCloseEnemyService", &robotnocloseenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSprintRange", &robotwithinsprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSuperSprintRange", &robotwithinsupersprintrange);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotWithinSuperSprintRange", &robotwithinsupersprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideTacticalWalkRange", &robotoutsidetacticalwalkrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSprintRange", &robotoutsidesprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSuperSprintRange", &robotoutsidesupersprintrange);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotOutsideSuperSprintRange", &robotoutsidesupersprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOff", &robotlightsoff);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsFlicker", &robotlightsflicker);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOn", &robotlightson);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldGibDeath", &robotshouldgibdeath);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotProceduralTraversal", &robottraversestart, &robotproceduraltraversalupdate, &robottraverseragdollondeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCalcProceduralTraversal", &robotcalcproceduraltraversal);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotProceduralLanding", &robotprocedurallandingupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseEnd", &robottraverseend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseRagdollOnDeath", &robottraverseragdollondeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldProceduralTraverse", &robotshouldproceduraltraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunTraverse", &robotwallruntraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldWallrun", &robotshouldwallrun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunJump", &robotsetupwallrunjump);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunLand", &robotsetupwallrunland);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunStart", &robotwallrunstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunEnd", &robotwallrunend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanJuke", &robotcanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanTacticalJuke", &robotcantacticaljuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanPreemptiveJuke", &robotcanpreemptivejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotJukeInitialize", &robotjukeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPreemptiveJukeTerminate", &robotpreemptivejuketerminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanInitialize", &robotcoverscaninitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanTerminate", &robotcoverscanterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCoverModeScan", &robotisatcovermodescan);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExposedCoverService", &robotexposedcoverservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPositionService", &robotpositionservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTargetService", &robottargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTryReacquireService", &robottryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushEnemyService", &robotrushenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushNeighborService", &robotrushneighborservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerService", &robotcrawlerservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayerService", &movetoplayerupdate);
-  animationstatenetwork::registeranimationmocomp("mocomp_ignore_pain_face_enemy", &mocompignorepainfaceenemyinit, &mocompignorepainfaceenemyupdate, &mocompignorepainfaceenemyterminate);
-  animationstatenetwork::registeranimationmocomp("robot_procedural_traversal", &mocomprobotproceduraltraversalinit, &mocomprobotproceduraltraversalupdate, &mocomprobotproceduraltraversalterminate);
-  animationstatenetwork::registeranimationmocomp("robot_start_traversal", &mocomprobotstarttraversalinit, undefined, &mocomprobotstarttraversalterminate);
-  animationstatenetwork::registeranimationmocomp("robot_start_wallrun", &mocomprobotstartwallruninit, &mocomprobotstartwallrunupdate, &mocomprobotstartwallrunterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotStepIntoAction", & stepintoinitialize, undefined, & stepintoterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotStepOutAction", & stepoutinitialize, undefined, & stepoutterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotTakeOverAction", & takeoverinitialize, undefined, & takeoverterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotEmpIdleAction", & robotempidleinitialize, & robotempidleupdate, & robotempidleterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotBecomeCrawler", & robotbecomecrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDropStartingWeapon", & robotdropstartingweapon);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDontTakeCover", & robotdonttakecover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverInitialize", & robotcoveroverinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverTerminate", & robotcoveroverterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplode", & robotexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplodeTerminate", & robotexplodeterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDeployMiniRaps", & robotdeployminiraps);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayer", & movetoplayerupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSprint", & robotstartsprint);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotStartSprint", & robotstartsprint);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSuperSprint", & robotstartsupersprint);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTacticalWalkActionStart", & robottacticalwalkactionstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotTacticalWalkActionStart", & robottacticalwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDie", & robotdie);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCleanupChargeMeleeAttack", & robotcleanupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMoving", & robotismoving);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotAbleToShoot", & robotabletoshootcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerCanShootEnemy", & robotcrawlercanshootenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveToEnemy", & canmovetoenemycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveCloseToEnemy", & canmoveclosetoenemycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasMiniRaps", & hasminiraps);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCover", & robotisatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldTacticalWalk", & robotshouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasCloseEnemyToMelee", & robothascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasEnemyToMelee", & robothasenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasCloseEnemyToMelee", & robotroguehascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasEnemyToMelee", & robotroguehasenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsCrawler", & robotiscrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMarching", & robotismarching);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPrepareForAdjustToCover", & robotprepareforadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldAdjustToCover", & robotshouldadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldBecomeCrawler", & robotshouldbecomecrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldReactAtCover", & robotshouldreactatcover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldExplode", & robotshouldexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldShutdown", & robotshouldshutdown);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSupportsOverCover", & robotsupportsovercover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStepIn", & shouldstepincondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTakeOver", & shouldtakeovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsStepOut", & supportsstepoutcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToStand", & setdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToCrouch", & setdesiredstancetocrouch);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("toggleDesiredStance", & toggledesiredstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMovement", & robotmovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDelayMovement", & robotdelaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotInvalidateCover", & robotinvalidatecover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldChargeMelee", & robotshouldchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldMelee", & robotshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScriptRequiresToSprint", & scriptrequirestosprintcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScanExposedPainTerminate", & robotscanexposedpainterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTookEmpDamage", & robottookempdamage);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotNoCloseEnemyService", & robotnocloseenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSprintRange", & robotwithinsprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSuperSprintRange", & robotwithinsupersprintrange);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotWithinSuperSprintRange", & robotwithinsupersprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideTacticalWalkRange", & robotoutsidetacticalwalkrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSprintRange", & robotoutsidesprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSuperSprintRange", & robotoutsidesupersprintrange);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotOutsideSuperSprintRange", & robotoutsidesupersprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOff", & robotlightsoff);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsFlicker", & robotlightsflicker);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOn", & robotlightson);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldGibDeath", & robotshouldgibdeath);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotProceduralTraversal", & robottraversestart, & robotproceduraltraversalupdate, & robottraverseragdollondeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCalcProceduralTraversal", & robotcalcproceduraltraversal);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotProceduralLanding", & robotprocedurallandingupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseEnd", & robottraverseend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseRagdollOnDeath", & robottraverseragdollondeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldProceduralTraverse", & robotshouldproceduraltraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunTraverse", & robotwallruntraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldWallrun", & robotshouldwallrun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunJump", & robotsetupwallrunjump);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunLand", & robotsetupwallrunland);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunStart", & robotwallrunstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunEnd", & robotwallrunend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanJuke", & robotcanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanTacticalJuke", & robotcantacticaljuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanPreemptiveJuke", & robotcanpreemptivejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotJukeInitialize", & robotjukeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPreemptiveJukeTerminate", & robotpreemptivejuketerminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanInitialize", & robotcoverscaninitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanTerminate", & robotcoverscanterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCoverModeScan", & robotisatcovermodescan);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExposedCoverService", & robotexposedcoverservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPositionService", & robotpositionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTargetService", & robottargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTryReacquireService", & robottryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushEnemyService", & robotrushenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushNeighborService", & robotrushneighborservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerService", & robotcrawlerservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayerService", & movetoplayerupdate);
+  animationstatenetwork::registeranimationmocomp("mocomp_ignore_pain_face_enemy", & mocompignorepainfaceenemyinit, & mocompignorepainfaceenemyupdate, & mocompignorepainfaceenemyterminate);
+  animationstatenetwork::registeranimationmocomp("robot_procedural_traversal", & mocomprobotproceduraltraversalinit, & mocomprobotproceduraltraversalupdate, & mocomprobotproceduraltraversalterminate);
+  animationstatenetwork::registeranimationmocomp("robot_start_traversal", & mocomprobotstarttraversalinit, undefined, & mocomprobotstarttraversalterminate);
+  animationstatenetwork::registeranimationmocomp("robot_start_wallrun", & mocomprobotstartwallruninit, & mocomprobotstartwallrunupdate, & mocomprobotstartwallrunterminate);
 }
 
 function robotcleanupchargemeleeattack(behaviortreeentity) {
@@ -204,7 +204,7 @@ function private robotempidleterminate(entity, asmstatename) {
 }
 
 function robotproceduraltraversalupdate(entity, asmstatename) {
-  assert(isDefined(entity.traversal));
+  assert(isdefined(entity.traversal));
   traversal = entity.traversal;
   t = min((gettime() - traversal.starttime) / traversal.totaltime, 1);
   curveremaining = traversal.curvelength * (1 - t);
@@ -216,17 +216,17 @@ function robotproceduraltraversalupdate(entity, asmstatename) {
 }
 
 function robotprocedurallandingupdate(entity, asmstatename) {
-  if(isDefined(entity.traversal)) {
+  if(isdefined(entity.traversal)) {
     entity finishtraversal();
   }
   return 5;
 }
 
 function robotcalcproceduraltraversal(entity, asmstatename) {
-  if(!isDefined(entity.traversestartnode) || !isDefined(entity.traverseendnode)) {
+  if(!isdefined(entity.traversestartnode) || !isdefined(entity.traverseendnode)) {
     return true;
   }
-  entity.traversal = spawnStruct();
+  entity.traversal = spawnstruct();
   traversal = entity.traversal;
   traversal.landingdistance = 24;
   traversal.minimumspeed = 18;
@@ -240,7 +240,7 @@ function robotcalcproceduraltraversal(entity, asmstatename) {
     facenormal = getnavmeshfacenormal(traversal.endpoint1, 30);
     traversal.endpoint1 = traversal.endpoint1 + ((facenormal * 30) / 2);
   }
-  if(!isDefined(traversal.endpoint1)) {
+  if(!isdefined(traversal.endpoint1)) {
     traversal.endpoint1 = traversal.endnode.origin;
   }
   traversal.distancetoend = distance(traversal.startpoint1, traversal.endpoint1);
@@ -256,7 +256,7 @@ function robotcalcproceduraltraversal(entity, asmstatename) {
       speedboost = 4;
     }
   }
-  if(isDefined(entity.traversalspeedboost)) {
+  if(isdefined(entity.traversalspeedboost)) {
     speedboost = entity[[entity.traversalspeedboost]]();
   }
   traversal.speedoncurve = (traversal.minimumspeed + speedboost) * 12;
@@ -306,7 +306,7 @@ function robotcalcproceduraltraversal(entity, asmstatename) {
   segments = 10;
   previouspoint = traversal.startpoint1;
   traversal.curvelength = 0;
-  for(index = 1; index <= segments; index++) {
+  for (index = 1; index <= segments; index++) {
     t = index / segments;
     nextpoint = calculatecubicbezier(t, traversal.startpoint1, traversal.startpoint2, traversal.endpoint2, traversal.endpoint1);
     recordline(previouspoint, nextpoint, (0, 1, 0), "", entity);
@@ -346,7 +346,7 @@ function private robottraverseragdollondeath(entity, asmstatename) {
 }
 
 function private robotshouldproceduraltraverse(entity) {
-  if(isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode)) {
+  if(isdefined(entity.traversestartnode) && isdefined(entity.traverseendnode)) {
     isprocedural = entity ai::get_behavior_attribute("traversals") == "procedural" || entity.traversestartnode.spawnflags & 1024 || entity.traverseendnode.spawnflags & 1024;
     return isprocedural;
   }
@@ -356,7 +356,7 @@ function private robotshouldproceduraltraverse(entity) {
 function private robotwallruntraverse(entity) {
   startnode = entity.traversestartnode;
   endnode = entity.traverseendnode;
-  if(isDefined(startnode) && isDefined(endnode) && entity shouldstarttraversal()) {
+  if(isdefined(startnode) && isdefined(endnode) && entity shouldstarttraversal()) {
     startiswallrun = startnode.spawnflags & 2048;
     endiswallrun = endnode.spawnflags & 2048;
     return startiswallrun || endiswallrun;
@@ -381,7 +381,7 @@ function private mocomprobotstartwallrunupdate(entity, mocompanim, mocompanimble
   facenormal = getnavmeshfacenormal(entity.origin, 30);
   positiononwall = getclosestpointonnavmesh(entity.origin, 30, 0);
   direction = blackboard::getblackboardattribute(entity, "_robot_wallrun_direction");
-  if(isDefined(facenormal) && isDefined(positiononwall)) {
+  if(isdefined(facenormal) && isdefined(positiononwall)) {
     facenormal = (facenormal[0], facenormal[1], 0);
     facenormal = vectornormalize(facenormal);
     movedirection = vectorcross(facenormal, (0, 0, 1));
@@ -452,14 +452,14 @@ function private mocomprobotproceduraltraversalinit(entity, mocompanim, mocompan
   entity animmode("noclip", 0);
   entity.blockingpain = 1;
   entity.clamptonavmesh = 0;
-  if(isDefined(traversal) && traversal.landing) {
+  if(isdefined(traversal) && traversal.landing) {
     entity animmode("angle deltas", 0);
   }
 }
 
 function private mocomprobotproceduraltraversalupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   traversal = entity.traversal;
-  if(isDefined(traversal)) {
+  if(isdefined(traversal)) {
     if(entity ispaused()) {
       traversal.starttime = traversal.starttime + 50;
       return;
@@ -470,7 +470,7 @@ function private mocomprobotproceduraltraversalupdate(entity, mocompanim, mocomp
     if(t < 1 || realt == 1 || !endiswallrun) {
       currentpos = calculatecubicbezier(t, traversal.startpoint1, traversal.startpoint2, traversal.endpoint2, traversal.endpoint1);
       angles = entity.angles;
-      if(isDefined(traversal.angles)) {
+      if(isdefined(traversal.angles)) {
         angles = traversal.angles;
       }
       entity forceteleport(currentpos, angles, 0);
@@ -482,7 +482,7 @@ function private mocomprobotproceduraltraversalupdate(entity, mocompanim, mocomp
 
 function private mocomprobotproceduraltraversalterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   traversal = entity.traversal;
-  if(isDefined(traversal) && gettime() >= traversal.endtime) {
+  if(isdefined(traversal) && gettime() >= traversal.endtime) {
     endiswallrun = traversal.endnode.spawnflags & 2048;
     if(!endiswallrun) {
       entity pathmode("move allowed");
@@ -496,7 +496,7 @@ function private mocomprobotproceduraltraversalterminate(entity, mocompanim, moc
 
 function private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 1;
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     entity orientmode("face enemy");
   } else {
     entity orientmode("face angle", entity.angles[1]);
@@ -505,7 +505,7 @@ function private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimble
 }
 
 function private mocompignorepainfaceenemyupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(isDefined(entity.enemy) && entity getanimtime(mocompanim) < 0.5) {
+  if(isdefined(entity.enemy) && entity getanimtime(mocompanim) < 0.5) {
     entity orientmode("face enemy");
   } else {
     entity orientmode("face angle", entity.angles[1]);
@@ -520,7 +520,7 @@ function private _calculatewallrundirection(startposition, endposition) {
   entity = self;
   facenormal = getnavmeshfacenormal(endposition, 30);
   recordline(startposition, endposition, (1, 0.5, 0), "", entity);
-  if(isDefined(facenormal)) {
+  if(isdefined(facenormal)) {
     recordline(endposition, endposition + (facenormal * 12), (1, 0.5, 0), "", entity);
     angles = vectortoangles(facenormal);
     right = anglestoright(angles);
@@ -557,7 +557,7 @@ function private robotsetupwallrunjump() {
   direction = "unknown";
   jumpdirection = "unknown";
   traversaltype = "unknown";
-  if(isDefined(startnode) && isDefined(endnode)) {
+  if(isdefined(startnode) && isdefined(endnode)) {
     startiswallrun = startnode.spawnflags & 2048;
     endiswallrun = endnode.spawnflags & 2048;
     if(endiswallrun) {
@@ -586,7 +586,7 @@ function private robotsetupwallrunland() {
   endnode = entity.traverseendnode;
   landdirection = "unknown";
   traversaltype = "unknown";
-  if(isDefined(startnode) && isDefined(endnode)) {
+  if(isdefined(startnode) && isdefined(endnode)) {
     landdirection = robotendjumpdirection();
     traversaltype = robottraversaltype(endnode);
   }
@@ -599,7 +599,7 @@ function private robotstartjumpdirection() {
   entity = self;
   startnode = entity.traversestartnode;
   endnode = entity.traverseendnode;
-  if(isDefined(startnode) && isDefined(endnode)) {
+  if(isdefined(startnode) && isdefined(endnode)) {
     startiswallrun = startnode.spawnflags & 2048;
     endiswallrun = endnode.spawnflags & 2048;
     if(startiswallrun) {
@@ -617,7 +617,7 @@ function private robotendjumpdirection() {
   entity = self;
   startnode = entity.traversestartnode;
   endnode = entity.traverseendnode;
-  if(isDefined(startnode) && isDefined(endnode)) {
+  if(isdefined(startnode) && isdefined(endnode)) {
     startiswallrun = startnode.spawnflags & 2048;
     endiswallrun = endnode.spawnflags & 2048;
     if(endiswallrun) {
@@ -632,7 +632,7 @@ function private robotendjumpdirection() {
 }
 
 function private robottraversaltype(node) {
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     if(node.spawnflags & 2048) {
       return "wall";
     }
@@ -650,7 +650,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_mind_control", "normal", &robotismindcontrolled);
+  blackboard::registerblackboardattribute(self, "_mind_control", "normal", & robotismindcontrolled);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -658,7 +658,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, &robotgetgibbedlimbs);
+  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, & robotgetgibbedlimbs);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -682,7 +682,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  entity.___archetypeonanimscriptedcallback = &archetyperobotonanimscriptedcallback;
+  entity.___archetypeonanimscriptedcallback = & archetyperobotonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
   if(sessionmodeiscampaigngame() || sessionmodeiszombiesgame()) {
     self thread gameskill::accuracy_buildup_before_fire(self);
@@ -694,7 +694,7 @@ function private archetyperobotblackboardinit() {
 }
 
 function private robotcrawlercanshootenemy(entity) {
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return 0;
   }
   aimlimits = entity getaimlimitsfromentry("robot_crawler");
@@ -757,7 +757,7 @@ function private robotcoverscanterminate(entity) {
 }
 
 function robotcanjuke(entity) {
-  if(!entity ai::get_behavior_attribute("phalanx") && (!(isDefined(entity.steppedoutofcover) && entity.steppedoutofcover)) && aiutility::canjuke(entity)) {
+  if(!entity ai::get_behavior_attribute("phalanx") && (!(isdefined(entity.steppedoutofcover) && entity.steppedoutofcover)) && aiutility::canjuke(entity)) {
     jukeevents = blackboard::getblackboardevents("actor_juke");
     tooclosejukedistancesqr = 57600;
     foreach(event in jukeevents) {
@@ -779,7 +779,7 @@ function robotcantacticaljuke(entity) {
 }
 
 function robotcanpreemptivejuke(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isdefined(entity.enemy) || !isplayer(entity.enemy)) {
     return 0;
   }
   if(blackboard::getblackboardattribute(entity, "_stance") == "crouch") {
@@ -788,14 +788,14 @@ function robotcanpreemptivejuke(entity) {
   if(!entity.shouldpreemptivejuke) {
     return 0;
   }
-  if(isDefined(entity.nextpreemptivejuke) && entity.nextpreemptivejuke > gettime()) {
+  if(isdefined(entity.nextpreemptivejuke) && entity.nextpreemptivejuke > gettime()) {
     return 0;
   }
   if(entity.enemy playerads() < entity.nextpreemptivejukeads) {
     return 0;
   }
   jukemaxdistance = 600;
-  if(isweapon(entity.enemy.currentweapon) && isDefined(entity.enemy.currentweapon.enemycrosshairrange) && entity.enemy.currentweapon.enemycrosshairrange > 0) {
+  if(isweapon(entity.enemy.currentweapon) && isdefined(entity.enemy.currentweapon.enemycrosshairrange) && entity.enemy.currentweapon.enemycrosshairrange > 0) {
     jukemaxdistance = entity.enemy.currentweapon.enemycrosshairrange;
     if(jukemaxdistance > 1200) {
       jukemaxdistance = 1200;
@@ -807,7 +807,7 @@ function robotcanpreemptivejuke(entity) {
     if(angledifference > 135) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
-      forward = anglesToForward(enemyangles);
+      forward = anglestoforward(enemyangles);
       dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
       record3dtext(acos(dotproduct), entity.origin + vectorscale((0, 0, 1), 10), (0, 1, 0), "");
       if(dotproduct > 0.9848) {
@@ -829,7 +829,7 @@ function private robotprepareforadjusttocover(entity) {
 }
 
 function private robotcrawlerservice(entity) {
-  if(isDefined(entity.crawlerlifetime) && entity.crawlerlifetime <= gettime() && entity.health > 0) {
+  if(isdefined(entity.crawlerlifetime) && entity.crawlerlifetime <= gettime() && entity.health > 0) {
     entity kill();
   }
   return true;
@@ -905,14 +905,14 @@ function private robotdonttakecover(entity) {
 }
 
 function private _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isdefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
 }
 
 function private robotrushenemyservice(entity) {
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
   distancetoenemy = distance2dsquared(entity.origin, entity.enemy.origin);
@@ -925,7 +925,7 @@ function private robotrushenemyservice(entity) {
 }
 
 function private _isvalidrusher(entity, neighbor) {
-  return isDefined(neighbor) && isDefined(neighbor.archetype) && neighbor.archetype == "robot" && isDefined(neighbor.team) && entity.team == neighbor.team && entity != neighbor && isDefined(neighbor.enemy) && neighbor ai::get_behavior_attribute("move_mode") == "normal" && !neighbor ai::get_behavior_attribute("phalanx") && neighbor ai::get_behavior_attribute("rogue_control") == "level_0" && distancesquared(entity.origin, neighbor.origin) < 160000 && distancesquared(neighbor.origin, neighbor.enemy.origin) < 1440000;
+  return isdefined(neighbor) && isdefined(neighbor.archetype) && neighbor.archetype == "robot" && isdefined(neighbor.team) && entity.team == neighbor.team && entity != neighbor && isdefined(neighbor.enemy) && neighbor ai::get_behavior_attribute("move_mode") == "normal" && !neighbor ai::get_behavior_attribute("phalanx") && neighbor ai::get_behavior_attribute("rogue_control") == "level_0" && distancesquared(entity.origin, neighbor.origin) < 160000 && distancesquared(neighbor.origin, neighbor.enemy.origin) < 1440000;
 }
 
 function private robotrushneighborservice(entity) {
@@ -935,13 +935,13 @@ function private robotrushneighborservice(entity) {
   foreach(ai in actors) {
     if(_isvalidrusher(entity, ai)) {
       enemydistance = distancesquared(entity.origin, ai.origin);
-      if(!isDefined(closestenemydistance) || enemydistance < closestenemydistance) {
+      if(!isdefined(closestenemydistance) || enemydistance < closestenemydistance) {
         closestenemydistance = enemydistance;
         closestenemy = ai;
       }
     }
   }
-  if(isDefined(closestenemy)) {
+  if(isdefined(closestenemy)) {
     findpathresult = entity findpath(closestenemy.origin, closestenemy.enemy.origin, 1, 0);
     if(findpathresult) {
       closestenemy ai::set_behavior_attribute("move_mode", "rusher");
@@ -950,11 +950,11 @@ function private robotrushneighborservice(entity) {
 }
 
 function private _findclosest(entity, entities) {
-  closest = spawnStruct();
+  closest = spawnstruct();
   if(entities.size > 0) {
     closest.entity = entities[0];
     closest.distancesquared = distancesquared(entity.origin, closest.entity.origin);
-    for(index = 1; index < entities.size; index++) {
+    for (index = 1; index < entities.size; index++) {
       distancesquared = distancesquared(entity.origin, entities[index].origin);
       if(distancesquared < closest.distancesquared) {
         closest.distancesquared = distancesquared;
@@ -969,17 +969,17 @@ function private robottargetservice(entity) {
   if(robotabletoshootcondition(entity)) {
     return false;
   }
-  if(isDefined(entity.ignoreall) && entity.ignoreall) {
+  if(isdefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
-  if(isDefined(entity.nexttargetserviceupdate) && entity.nexttargetserviceupdate > gettime() && isalive(entity.favoriteenemy)) {
+  if(isdefined(entity.nexttargetserviceupdate) && entity.nexttargetserviceupdate > gettime() && isalive(entity.favoriteenemy)) {
     return false;
   }
   positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
-  if(!isDefined(positiononnavmesh)) {
+  if(!isdefined(positiononnavmesh)) {
     return;
   }
-  if(isDefined(entity.favoriteenemy) && isDefined(entity.favoriteenemy._currentroguerobot) && entity.favoriteenemy._currentroguerobot == entity) {
+  if(isdefined(entity.favoriteenemy) && isdefined(entity.favoriteenemy._currentroguerobot) && entity.favoriteenemy._currentroguerobot == entity) {
     entity.favoriteenemy._currentroguerobot = undefined;
   }
   aienemies = [];
@@ -990,9 +990,9 @@ function private robottargetservice(entity) {
     if(issentient(value) && entity getignoreent(value)) {
       continue;
     }
-    if(value.team != entity.team && isactor(value) && !isDefined(entity.favoriteenemy)) {
+    if(value.team != entity.team && isactor(value) && !isdefined(entity.favoriteenemy)) {
       enemypositiononnavmesh = getclosestpointonnavmesh(value.origin, 200, 30);
-      if(isDefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
+      if(isdefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
         aienemies[aienemies.size] = value;
       }
     }
@@ -1003,20 +1003,20 @@ function private robottargetservice(entity) {
         continue;
       }
       enemypositiononnavmesh = getclosestpointonnavmesh(value.origin, 200, 30);
-      if(isDefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
+      if(isdefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
         playerenemies[playerenemies.size] = value;
       }
     }
   }
   closestplayer = _findclosest(entity, playerenemies);
   closestai = _findclosest(entity, aienemies);
-  if(!isDefined(closestplayer.entity) && !isDefined(closestai.entity)) {
+  if(!isdefined(closestplayer.entity) && !isdefined(closestai.entity)) {
     return;
   }
-  if(!isDefined(closestai.entity)) {
+  if(!isdefined(closestai.entity)) {
     entity.favoriteenemy = closestplayer.entity;
   } else {
-    if(!isDefined(closestplayer.entity)) {
+    if(!isdefined(closestplayer.entity)) {
       entity.favoriteenemy = closestai.entity;
       entity.favoriteenemy._currentroguerobot = entity;
     } else {
@@ -1063,7 +1063,7 @@ function private robotshouldexplode(entity) {
     if(entity ai::get_behavior_attribute("rogue_force_explosion")) {
       return 1;
     }
-    if(isDefined(entity.enemy)) {
+    if(isdefined(entity.enemy)) {
       enemydistsq = distancesquared(entity.origin, entity.enemy.origin);
       return enemydistsq < 3600;
     }
@@ -1072,7 +1072,7 @@ function private robotshouldexplode(entity) {
 }
 
 function private robotshouldadjusttocover(entity) {
-  if(!isDefined(entity.node)) {
+  if(!isdefined(entity.node)) {
     return 0;
   }
   return blackboard::getblackboardattribute(entity, "_stance") != "crouch";
@@ -1106,11 +1106,11 @@ function private robotexplodeterminate(entity) {
 }
 
 function private robotexposedcoverservice(entity) {
-  if(isDefined(entity.steppedoutofcover) && isDefined(entity.steppedoutofcovernode) && (!entity iscovervalid(entity.steppedoutofcovernode) || entity haspath() || !entity issafefromgrenade())) {
+  if(isdefined(entity.steppedoutofcover) && isdefined(entity.steppedoutofcovernode) && (!entity iscovervalid(entity.steppedoutofcovernode) || entity haspath() || !entity issafefromgrenade())) {
     entity.steppedoutofcover = 0;
     entity pathmode("move allowed");
   }
-  if(isDefined(entity.resumecover) && gettime() > entity.resumecover) {
+  if(isdefined(entity.resumecover) && gettime() > entity.resumecover) {
     entity.combatmode = "cover";
     entity.resumecover = undefined;
   }
@@ -1118,7 +1118,7 @@ function private robotexposedcoverservice(entity) {
 
 function private robotisatcovercondition(entity) {
   enemytooclose = 0;
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     lastknownenemypos = entity lastknownpos(entity.enemy);
     distancetoenemysqr = distance2dsquared(entity.origin, lastknownenemypos);
     enemytooclose = distancetoenemysqr <= 57600;
@@ -1127,8 +1127,8 @@ function private robotisatcovercondition(entity) {
 }
 
 function private robotsupportsovercover(entity) {
-  if(isDefined(entity.node)) {
-    if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4) {
+  if(isdefined(entity.node)) {
+    if(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4) {
       return entity.node.type == "Cover Stand" || entity.node.type == "Conceal Stand";
     }
     return entity.node.type == "Cover Left" || entity.node.type == "Cover Right" || (entity.node.type == "Cover Crouch" || entity.node.type == "Cover Crouch Window" || entity.node.type == "Conceal Crouch");
@@ -1137,12 +1137,12 @@ function private robotsupportsovercover(entity) {
 }
 
 function private canmovetoenemycondition(entity) {
-  if(!isDefined(entity.enemy) || entity.enemy.health <= 0) {
+  if(!isdefined(entity.enemy) || entity.enemy.health <= 0) {
     return 0;
   }
   positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
   enemypositiononnavmesh = getclosestpointonnavmesh(entity.enemy.origin, 200, 30);
-  if(!isDefined(positiononnavmesh) || !isDefined(enemypositiononnavmesh)) {
+  if(!isdefined(positiononnavmesh) || !isdefined(enemypositiononnavmesh)) {
     return 0;
   }
   findpathresult = entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0);
@@ -1154,7 +1154,7 @@ function private canmovetoenemycondition(entity) {
 }
 
 function private canmoveclosetoenemycondition(entity) {
-  if(!isDefined(entity.enemy) || entity.enemy.health <= 0) {
+  if(!isdefined(entity.enemy) || entity.enemy.health <= 0) {
     return 0;
   }
   queryresult = positionquery_source_navigation(entity.enemy.origin, 0, 120, 120, 20, entity);
@@ -1189,21 +1189,21 @@ function private robotdie(entity) {
 function private movetoplayerupdate(entity, asmstatename) {
   entity.keepclaimednode = 0;
   positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
-  if(!isDefined(positiononnavmesh)) {
+  if(!isdefined(positiononnavmesh)) {
     return 4;
   }
-  if(isDefined(entity.ignoreall) && entity.ignoreall) {
+  if(isdefined(entity.ignoreall) && entity.ignoreall) {
     entity clearuseposition();
     return 4;
   }
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return 4;
   }
   if(robotroguehascloseenemytomelee(entity)) {
     return 4;
   }
   if(entity.allowpushactors) {
-    if(isDefined(entity.enemy) && distancesquared(entity.origin, entity.enemy.origin) > (300 * 300)) {
+    if(isdefined(entity.enemy) && distancesquared(entity.origin, entity.enemy.origin) > (300 * 300)) {
       entity pushactors(0);
     } else {
       entity pushactors(1);
@@ -1212,12 +1212,12 @@ function private movetoplayerupdate(entity, asmstatename) {
   if(entity asmistransdecrunning() || entity asmistransitionrunning()) {
     return 4;
   }
-  if(!isDefined(entity.lastknownenemypos)) {
+  if(!isdefined(entity.lastknownenemypos)) {
     entity.lastknownenemypos = entity.enemy.origin;
   }
-  shouldrepath = !isDefined(entity.lastvalidenemypos);
-  if(!shouldrepath && isDefined(entity.enemy)) {
-    if(isDefined(entity.nextmovetoplayerupdate) && entity.nextmovetoplayerupdate <= gettime()) {
+  shouldrepath = !isdefined(entity.lastvalidenemypos);
+  if(!shouldrepath && isdefined(entity.enemy)) {
+    if(isdefined(entity.nextmovetoplayerupdate) && entity.nextmovetoplayerupdate <= gettime()) {
       shouldrepath = 1;
     } else {
       if(distancesquared(entity.lastknownenemypos, entity.enemy.origin) > (72 * 72)) {
@@ -1225,7 +1225,7 @@ function private movetoplayerupdate(entity, asmstatename) {
       } else {
         if(distancesquared(entity.origin, entity.enemy.origin) <= (120 * 120)) {
           shouldrepath = 1;
-        } else if(isDefined(entity.pathgoalpos)) {
+        } else if(isdefined(entity.pathgoalpos)) {
           distancetogoalsqr = distancesquared(entity.origin, entity.pathgoalpos);
           shouldrepath = distancetogoalsqr < (72 * 72);
         }
@@ -1239,18 +1239,18 @@ function private movetoplayerupdate(entity, asmstatename) {
     if(queryresult.data.size > 0) {
       entity.lastvalidenemypos = queryresult.data[0].origin;
     }
-    if(isDefined(entity.lastvalidenemypos)) {
+    if(isdefined(entity.lastvalidenemypos)) {
       entity useposition(entity.lastvalidenemypos);
       if(distancesquared(entity.origin, entity.lastvalidenemypos) > (240 * 240)) {
         path = entity calcapproximatepathtoposition(entity.lastvalidenemypos, 0);
         if(getdvarint("")) {
-          for(index = 1; index < path.size; index++) {
+          for (index = 1; index < path.size; index++) {
             recordline(path[index - 1], path[index], (1, 0.5, 0), "", entity);
           }
         }
         deviationdistance = randomintrange(240, 480);
         segmentlength = 0;
-        for(index = 1; index < path.size; index++) {
+        for (index = 1; index < path.size; index++) {
           currentseglength = distance(path[index - 1], path[index]);
           if((segmentlength + currentseglength) > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
@@ -1283,7 +1283,7 @@ function private robotshouldchargemelee(entity) {
 }
 
 function private robothasenemytomelee(entity) {
-  if(isDefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0) {
+  if(isdefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0) {
     enemydistsq = distancesquared(entity.origin, entity.enemy.origin);
     if(enemydistsq < (entity.chargemeleedistance * entity.chargemeleedistance) && (abs(entity.enemy.origin[2] - entity.origin[2])) < 24) {
       yawtoenemy = angleclamp180(entity.angles[1] - (vectortoangles(entity.enemy.origin - entity.origin)[1]));
@@ -1294,7 +1294,7 @@ function private robothasenemytomelee(entity) {
 }
 
 function private robotroguehasenemytomelee(entity) {
-  if(isDefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0 && entity ai::get_behavior_attribute("rogue_control") != "level_3") {
+  if(isdefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0 && entity ai::get_behavior_attribute("rogue_control") != "level_3") {
     if(!entity cansee(entity.enemy)) {
       return 0;
     }
@@ -1311,7 +1311,7 @@ function private robotshouldmelee(entity) {
 }
 
 function private robothascloseenemytomelee(entity) {
-  if(isDefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0) {
+  if(isdefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0) {
     if(!entity cansee(entity.enemy)) {
       return 0;
     }
@@ -1325,7 +1325,7 @@ function private robothascloseenemytomelee(entity) {
 }
 
 function private robotroguehascloseenemytomelee(entity) {
-  if(isDefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0 && entity ai::get_behavior_attribute("rogue_control") != "level_3") {
+  if(isdefined(entity.enemy) && issentient(entity.enemy) && entity.enemy.health > 0 && entity ai::get_behavior_attribute("rogue_control") != "level_3") {
     return distancesquared(entity.origin, entity.enemy.origin) < (64 * 64);
   }
   return 0;
@@ -1341,15 +1341,15 @@ function private robotscanexposedpainterminate(entity) {
 }
 
 function private robottookempdamage(entity) {
-  if(isDefined(entity.damageweapon) && isDefined(entity.damagemod)) {
+  if(isdefined(entity.damageweapon) && isdefined(entity.damagemod)) {
     weapon = entity.damageweapon;
-    return entity.damagemod == "MOD_GRENADE_SPLASH" && isDefined(weapon.rootweapon) && issubstr(weapon.rootweapon.name, "emp_grenade");
+    return entity.damagemod == "MOD_GRENADE_SPLASH" && isdefined(weapon.rootweapon) && issubstr(weapon.rootweapon.name, "emp_grenade");
   }
   return 0;
 }
 
 function private robotnocloseenemyservice(entity) {
-  if(isDefined(entity.enemy) && aiutility::shouldmelee(entity)) {
+  if(isdefined(entity.enemy) && aiutility::shouldmelee(entity)) {
     entity clearpath();
     return true;
   }
@@ -1357,15 +1357,15 @@ function private robotnocloseenemyservice(entity) {
 }
 
 function private _robotoutsidemovementrange(entity, range, useenemypos) {
-  assert(isDefined(range));
-  if(!isDefined(entity.enemy) && !entity haspath()) {
+  assert(isdefined(range));
+  if(!isdefined(entity.enemy) && !entity haspath()) {
     return 0;
   }
   goalpos = entity.pathgoalpos;
-  if(isDefined(entity.enemy) && useenemypos) {
+  if(isdefined(entity.enemy) && useenemypos) {
     goalpos = entity lastknownpos(entity.enemy);
   }
-  if(!isDefined(goalpos)) {
+  if(!isdefined(goalpos)) {
     return 0;
   }
   outsiderange = distancesquared(entity.origin, goalpos) > (range * range);
@@ -1394,7 +1394,7 @@ function private robotoutsidetacticalwalkrange(entity) {
   if(entity ai::get_behavior_attribute("disablesprint")) {
     return 0;
   }
-  if(isDefined(entity.enemy) && distancesquared(entity.origin, entity.goalpos) < (entity.minwalkdistance * entity.minwalkdistance)) {
+  if(isdefined(entity.enemy) && distancesquared(entity.origin, entity.goalpos) < (entity.minwalkdistance * entity.minwalkdistance)) {
     return 0;
   }
   return _robotoutsidemovementrange(entity, entity.runandgundist * 1.15, 1);
@@ -1404,7 +1404,7 @@ function private robotwithinsprintrange(entity) {
   if(entity ai::get_behavior_attribute("disablesprint")) {
     return 0;
   }
-  if(isDefined(entity.enemy) && distancesquared(entity.origin, entity.goalpos) < (entity.minwalkdistance * entity.minwalkdistance)) {
+  if(isdefined(entity.enemy) && distancesquared(entity.origin, entity.goalpos) < (entity.minwalkdistance * entity.minwalkdistance)) {
     return 0;
   }
   return _robotoutsidemovementrange(entity, entity.runandgundist, 1);
@@ -1426,7 +1426,7 @@ function private shouldtakeovercondition(entity) {
 }
 
 function private hasminiraps(entity) {
-  return isDefined(entity.miniraps);
+  return isdefined(entity.miniraps);
 }
 
 function private robotismoving(entity) {
@@ -1457,7 +1457,7 @@ function private _robotcoverposition(entity) {
   shouldusecovernode = undefined;
   itsbeenawhile = gettime() > entity.nextfindbestcovertime;
   isatscriptgoal = undefined;
-  if(isDefined(entity.robotnode)) {
+  if(isdefined(entity.robotnode)) {
     isatscriptgoal = entity isposatgoal(entity.robotnode.origin);
     shouldusecovernode = entity iscovervalid(entity.robotnode);
   } else {
@@ -1466,7 +1466,7 @@ function private _robotcoverposition(entity) {
   }
   shouldlookforbettercover = !shouldusecovernode || itsbeenawhile || !isatscriptgoal;
   recordenttext((((("" + shouldusecovernode) + "") + itsbeenawhile) + "") + isatscriptgoal, entity, (shouldlookforbettercover ? (0, 1, 0) : (1, 0, 0)), "");
-  if(shouldlookforbettercover && isDefined(entity.enemy) && !entity.keepclaimednode) {
+  if(shouldlookforbettercover && isdefined(entity.enemy) && !entity.keepclaimednode) {
     transitionrunning = entity asmistransitionrunning();
     substatepending = entity asmissubstatepending();
     transdecrunning = entity asmistransdecrunning();
@@ -1474,17 +1474,17 @@ function private _robotcoverposition(entity) {
     if(!transitionrunning && !substatepending && !transdecrunning && isbehaviortreeinrunningstate) {
       nodes = entity findbestcovernodes(entity.goalradius, entity.goalpos);
       node = undefined;
-      for(nodeindex = 0; nodeindex < nodes.size; nodeindex++) {
-        if(entity.robotnode === nodes[nodeindex] || !isDefined(nodes[nodeindex].robotclaimed)) {
+      for (nodeindex = 0; nodeindex < nodes.size; nodeindex++) {
+        if(entity.robotnode === nodes[nodeindex] || !isdefined(nodes[nodeindex].robotclaimed)) {
           node = nodes[nodeindex];
           break;
         }
       }
-      if(isentity(entity.node) && (!isDefined(entity.robotnode) || entity.robotnode != entity.node)) {
+      if(isentity(entity.node) && (!isdefined(entity.robotnode) || entity.robotnode != entity.node)) {
         entity.robotnode = entity.node;
         entity.robotnode.robotclaimed = 1;
       }
-      goingtodifferentnode = isDefined(node) && (!isDefined(entity.robotnode) || node != entity.robotnode) && (!isDefined(entity.steppedoutofcovernode) || entity.steppedoutofcovernode != node);
+      goingtodifferentnode = isdefined(node) && (!isdefined(entity.robotnode) || node != entity.robotnode) && (!isdefined(entity.steppedoutofcovernode) || entity.steppedoutofcovernode != node);
       aiutility::setnextfindbestcovertime(entity, node);
       if(goingtodifferentnode) {
         if(randomfloat(1) <= 0.75 || entity ai::get_behavior_attribute("force_cover")) {
@@ -1501,7 +1501,7 @@ function private _robotcoverposition(entity) {
             entity useposition(entity getnodeoffsetposition(node));
           }
         }
-        if(isDefined(entity.robotnode)) {
+        if(isdefined(entity.robotnode)) {
           entity.robotnode.robotclaimed = undefined;
         }
         entity.robotnode = node;
@@ -1517,20 +1517,20 @@ function private _robotcoverposition(entity) {
 function private _robotescortposition(entity) {
   if(entity ai::get_behavior_attribute("move_mode") == "escort") {
     escortposition = entity ai::get_behavior_attribute("escort_position");
-    if(!isDefined(escortposition)) {
+    if(!isdefined(escortposition)) {
       return true;
     }
     if(distance2dsquared(entity.origin, escortposition) <= 22500) {
       return true;
     }
-    if(isDefined(entity.escortnexttime) && gettime() < entity.escortnexttime) {
+    if(isdefined(entity.escortnexttime) && gettime() < entity.escortnexttime) {
       return true;
     }
     if(entity getpathmode() == "dont move") {
       return true;
     }
     positiononnavmesh = getclosestpointonnavmesh(escortposition, 200);
-    if(!isDefined(positiononnavmesh)) {
+    if(!isdefined(positiononnavmesh)) {
       positiononnavmesh = escortposition;
     }
     queryresult = positionquery_source_navigation(positiononnavmesh, 75, 150, 36, 16, entity, 16);
@@ -1541,13 +1541,13 @@ function private _robotescortposition(entity) {
       foreach(point in queryresult.data) {
         if(!point.inclaimedlocation) {
           newclosestdistance = distance2dsquared(entity.origin, point.origin);
-          if(!isDefined(closestpoint) || newclosestdistance < closestdistance) {
+          if(!isdefined(closestpoint) || newclosestdistance < closestdistance) {
             closestpoint = point.origin;
             closestdistance = newclosestdistance;
           }
         }
       }
-      if(isDefined(closestpoint)) {
+      if(isdefined(closestpoint)) {
         entity useposition(closestpoint);
         entity.escortnexttime = gettime() + randomintrange(200, 300);
       }
@@ -1560,36 +1560,36 @@ function private _robotescortposition(entity) {
 function private _robotrusherposition(entity) {
   if(entity ai::get_behavior_attribute("move_mode") == "rusher") {
     entity pathmode("move allowed");
-    if(!isDefined(entity.enemy)) {
+    if(!isdefined(entity.enemy)) {
       return true;
     }
     disttoenemysqr = distance2dsquared(entity.origin, entity.enemy.origin);
     if(disttoenemysqr <= (entity.robotrushermaxradius * entity.robotrushermaxradius) && disttoenemysqr >= (entity.robotrusherminradius * entity.robotrusherminradius)) {
       return true;
     }
-    if(isDefined(entity.rushernexttime) && gettime() < entity.rushernexttime) {
+    if(isdefined(entity.rushernexttime) && gettime() < entity.rushernexttime) {
       return true;
     }
     positiononnavmesh = getclosestpointonnavmesh(entity.enemy.origin, 200);
-    if(!isDefined(positiononnavmesh)) {
+    if(!isdefined(positiononnavmesh)) {
       positiononnavmesh = entity.enemy.origin;
     }
     queryresult = positionquery_source_navigation(positiononnavmesh, entity.robotrusherminradius, entity.robotrushermaxradius, 36, 16, entity, 16);
     positionquery_filter_inclaimedlocation(queryresult, entity);
-    positionquery_filter_sight(queryresult, entity.enemy.origin, entity getEye() - entity.origin, entity, 2, entity.enemy);
+    positionquery_filter_sight(queryresult, entity.enemy.origin, entity geteye() - entity.origin, entity, 2, entity.enemy);
     if(queryresult.data.size > 0) {
       closestpoint = undefined;
       closestdistance = undefined;
       foreach(point in queryresult.data) {
         if(!point.inclaimedlocation && point.visibility === 1) {
           newclosestdistance = distance2dsquared(entity.origin, point.origin);
-          if(!isDefined(closestpoint) || newclosestdistance < closestdistance) {
+          if(!isdefined(closestpoint) || newclosestdistance < closestdistance) {
             closestpoint = point.origin;
             closestdistance = newclosestdistance;
           }
         }
       }
-      if(isDefined(closestpoint)) {
+      if(isdefined(closestpoint)) {
         entity useposition(closestpoint);
         entity.rushernexttime = gettime() + randomintrange(500, 1500);
       }
@@ -1604,7 +1604,7 @@ function private _robotguardposition(entity) {
     if(entity getpathmode() == "dont move") {
       return true;
     }
-    if(!isDefined(entity.guardposition) || distancesquared(entity.origin, entity.guardposition) < (60 * 60)) {
+    if(!isdefined(entity.guardposition) || distancesquared(entity.origin, entity.guardposition) < (60 * 60)) {
       entity pathmode("move delayed", 1, randomfloatrange(1, 1.5));
       queryresult = positionquery_source_navigation(entity.goalpos, 0, entity.goalradius / 2, 36, 36, entity, 72);
       positionquery_filter_inclaimedlocation(queryresult, entity);
@@ -1626,14 +1626,14 @@ function private _robotguardposition(entity) {
       }
     }
     currenttime = gettime();
-    if(!isDefined(entity.intermediateguardtime) || entity.intermediateguardtime < currenttime) {
-      if(isDefined(entity.intermediateguardposition) && distancesquared(entity.intermediateguardposition, entity.origin) < (24 * 24)) {
+    if(!isdefined(entity.intermediateguardtime) || entity.intermediateguardtime < currenttime) {
+      if(isdefined(entity.intermediateguardposition) && distancesquared(entity.intermediateguardposition, entity.origin) < (24 * 24)) {
         entity.guardposition = entity.origin;
       }
       entity.intermediateguardposition = entity.origin;
       entity.intermediateguardtime = currenttime + 3000;
     }
-    if(isDefined(entity.guardposition)) {
+    if(isdefined(entity.guardposition)) {
       entity useposition(entity.guardposition);
       return true;
     }
@@ -1645,13 +1645,13 @@ function private _robotguardposition(entity) {
 }
 
 function private robotpositionservice(entity) {
-  if(getdvarint("") && isDefined(entity.enemy)) {
+  if(getdvarint("") && isdefined(entity.enemy)) {
     lastknownpos = entity lastknownpos(entity.enemy);
     recordline(entity.origin, lastknownpos, (1, 0.5, 0), "", entity);
     record3dtext("", lastknownpos + vectorscale((0, 0, 1), 5), (1, 0.5, 0), "");
   }
   if(!isalive(entity)) {
-    if(isDefined(entity.robotnode)) {
+    if(isdefined(entity.robotnode)) {
       aiutility::releaseclaimnode(entity);
       entity.robotnode.robotclaimed = undefined;
       entity.robotnode = undefined;
@@ -1700,7 +1700,7 @@ function private robotjukeinitialize(entity) {
   aiutility::choosejukedirection(entity);
   entity clearpath();
   entity notify("bhtn_action_notify", "rbJuke");
-  jukeinfo = spawnStruct();
+  jukeinfo = spawnstruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;
   blackboard::addblackboardevent("actor_juke", jukeinfo, 3000);
@@ -1716,10 +1716,10 @@ function private robottryreacquireservice(entity) {
   if(movemode == "rusher" || movemode == "escort" || movemode == "guard") {
     return false;
   }
-  if(!isDefined(entity.reacquire_state)) {
+  if(!isdefined(entity.reacquire_state)) {
     entity.reacquire_state = 0;
   }
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     entity.reacquire_state = 0;
     return false;
   }
@@ -1737,7 +1737,7 @@ function private robottryreacquireservice(entity) {
     return false;
   }
   dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
-  forward = anglesToForward(entity.angles);
+  forward = anglestoforward(entity.angles);
   if(vectordot(dirtoenemy, forward) < 0.5) {
     entity.reacquire_state = 0;
     return false;
@@ -1846,7 +1846,7 @@ function private supportsstepoutcondition(entity) {
 }
 
 function private shouldstepincondition(entity) {
-  if(!isDefined(entity.steppedoutofcover) || !entity.steppedoutofcover || !isDefined(entity.steppedouttime) || !entity.steppedoutofcover) {
+  if(!isdefined(entity.steppedoutofcover) || !entity.steppedoutofcover || !isdefined(entity.steppedouttime) || !entity.steppedoutofcover) {
     return 0;
   }
   exposedtimeinseconds = (gettime() - entity.steppedouttime) / 1000;
@@ -1857,7 +1857,7 @@ function private shouldstepincondition(entity) {
 
 function private robotdeployminiraps() {
   entity = self;
-  if(isDefined(entity) && isDefined(entity.miniraps)) {
+  if(isdefined(entity) && isdefined(entity.miniraps)) {
     positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
     raps = spawnvehicle("spawner_bo3_mini_raps", positiononnavmesh, (0, 0, 0));
     raps.team = entity.team;
@@ -1947,7 +1947,7 @@ function private _trygibbinglegs(entity, damage, hitloc, isexplosive, attacker =
 
 function private robotgibdamageoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
-  if(isDefined(attacker) && attacker.team == entity.team) {
+  if(isdefined(attacker) && attacker.team == entity.team) {
     return damage;
   }
   if(!entity ai::get_behavior_attribute("can_gib")) {
@@ -2008,13 +2008,13 @@ function private robotdestructdeathoverride(inflictor, attacker, damage, meansof
   destructserverutils::togglespawngibs(entity, 1);
   piececount = destructserverutils::getpiececount(entity);
   possiblepieces = [];
-  for(index = 1; index <= piececount; index++) {
+  for (index = 1; index <= piececount; index++) {
     if(!destructserverutils::isdestructed(entity, index) && randomfloatrange(0, 1) <= 0.2) {
       possiblepieces[possiblepieces.size] = index;
     }
   }
   gibbedpieces = 0;
-  for(index = 0; index < possiblepieces.size && possiblepieces.size > 1 && gibbedpieces < 2; index++) {
+  for (index = 0; index < possiblepieces.size && possiblepieces.size > 1 && gibbedpieces < 2; index++) {
     randompiece = randomintrange(0, possiblepieces.size - 1);
     if(!destructserverutils::isdestructed(entity, possiblepieces[randompiece])) {
       destructserverutils::destructpiece(entity, possiblepieces[randompiece]);
@@ -2027,7 +2027,7 @@ function private robotdestructdeathoverride(inflictor, attacker, damage, meansof
 function private robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
   if(hitloc != "helmet" || hitloc != "head" || hitloc != "neck") {
-    if(isDefined(attacker) && !isplayer(attacker) && !isvehicle(attacker)) {
+    if(isdefined(attacker) && !isplayer(attacker) && !isvehicle(attacker)) {
       dist = distancesquared(entity.origin, attacker.origin);
       if(dist < 65536) {
         damage = int(damage * 10);
@@ -2039,7 +2039,7 @@ function private robotdamageoverride(inflictor, attacker, damage, flags, meansof
   if(hitloc == "helmet" || hitloc == "head" || hitloc == "neck") {
     damage = int(damage * 0.5);
   }
-  if(isDefined(dir) && isDefined(meansofdamage) && isDefined(hitloc) && vectordot(anglesToForward(entity.angles), dir) > 0) {
+  if(isdefined(dir) && isdefined(meansofdamage) && isdefined(hitloc) && vectordot(anglestoforward(entity.angles), dir) > 0) {
     isbullet = isinarray(array("MOD_RIFLE_BULLET", "MOD_PISTOL_BULLET"), meansofdamage);
     istorsoshot = isinarray(array("torso_upper", "torso_lower"), hitloc);
     if(isbullet && istorsoshot) {
@@ -2053,7 +2053,7 @@ function private robotdamageoverride(inflictor, attacker, damage, flags, meansof
         break;
       }
       case "MOD_GRENADE_SPLASH": {
-        if(isDefined(entity.stuckwithstickygrenade) && entity.stuckwithstickygrenade) {
+        if(isdefined(entity.stuckwithstickygrenade) && entity.stuckwithstickygrenade) {
           damage = entity.health;
         }
         break;
@@ -2077,9 +2077,9 @@ function private robotdestructrandompieces(inflictor, attacker, damage, flags, m
 
 function private findclosestnavmeshpositiontoenemy(enemy) {
   enemypositiononnavmesh = undefined;
-  for(tolerancelevel = 1; tolerancelevel <= 4; tolerancelevel++) {
+  for (tolerancelevel = 1; tolerancelevel <= 4; tolerancelevel++) {
     enemypositiononnavmesh = getclosestpointonnavmesh(enemy.origin, 200 * tolerancelevel, 30);
-    if(isDefined(enemypositiononnavmesh)) {
+    if(isdefined(enemypositiononnavmesh)) {
       break;
     }
   }
@@ -2087,7 +2087,7 @@ function private findclosestnavmeshpositiontoenemy(enemy) {
 }
 
 function private robotchoosecoverdirection(entity, stepout) {
-  if(!isDefined(entity.node)) {
+  if(!isdefined(entity.node)) {
     return;
   }
   coverdirection = blackboard::getblackboardattribute(entity, "_cover_direction");
@@ -2130,13 +2130,13 @@ function private robotsoldierspawnsetup() {
     entity ai::set_behavior_attribute("", "");
   }
   entity thread cleanupequipment(entity);
-  aiutility::addaioverridedamagecallback(entity, &destructserverutils::handledamage);
-  aiutility::addaioverridedamagecallback(entity, &robotdamageoverride);
-  aiutility::addaioverridedamagecallback(entity, &robotdestructrandompieces);
-  aiutility::addaioverridedamagecallback(entity, &robotgibdamageoverride);
-  aiutility::addaioverridekilledcallback(entity, &robotdeathoverride);
-  aiutility::addaioverridekilledcallback(entity, &robotgibdeathoverride);
-  aiutility::addaioverridekilledcallback(entity, &robotdestructdeathoverride);
+  aiutility::addaioverridedamagecallback(entity, & destructserverutils::handledamage);
+  aiutility::addaioverridedamagecallback(entity, & robotdamageoverride);
+  aiutility::addaioverridedamagecallback(entity, & robotdestructrandompieces);
+  aiutility::addaioverridedamagecallback(entity, & robotgibdamageoverride);
+  aiutility::addaioverridekilledcallback(entity, & robotdeathoverride);
+  aiutility::addaioverridekilledcallback(entity, & robotgibdeathoverride);
+  aiutility::addaioverridekilledcallback(entity, & robotdestructdeathoverride);
   if(getdvarint("") == 1) {
     entity ai::set_behavior_attribute("", "");
   } else {
@@ -2163,9 +2163,9 @@ function private robotsoldierspawnsetup() {
 }
 
 function private robotgivewasp(entity) {
-  if(isDefined(entity) && !isDefined(entity.wasp)) {
+  if(isdefined(entity) && !isdefined(entity.wasp)) {
     wasp = spawn("script_model", (0, 0, 0));
-    wasp setModel("veh_t7_drone_attack_red");
+    wasp setmodel("veh_t7_drone_attack_red");
     wasp setscale(0.75);
     wasp linkto(entity, "j_spine4", (5, -15, 0), vectorscale((0, 0, 1), 90));
     entity.wasp = wasp;
@@ -2175,9 +2175,9 @@ function private robotgivewasp(entity) {
 function private robotdeploywasp(entity) {
   entity endon("death");
   wait(randomfloatrange(7, 10));
-  if(isDefined(entity) && isDefined(entity.wasp)) {
+  if(isdefined(entity) && isdefined(entity.wasp)) {
     spawnoffset = (5, -15, 0);
-    while(!ispointinnavvolume(entity.wasp.origin + spawnoffset, "small volume")) {
+    while (!ispointinnavvolume(entity.wasp.origin + spawnoffset, "small volume")) {
       wait(1);
     }
     entity.wasp unlink();
@@ -2201,13 +2201,13 @@ function private becomecrawler(entity) {
 
 function private cleanupequipment(entity) {
   entity waittill("death");
-  if(!isDefined(entity)) {
+  if(!isdefined(entity)) {
     return;
   }
-  if(isDefined(entity.miniraps)) {
+  if(isdefined(entity.miniraps)) {
     entity.miniraps = undefined;
   }
-  if(isDefined(entity.wasp)) {
+  if(isdefined(entity.wasp)) {
     entity.wasp delete();
     entity.wasp = undefined;
   }

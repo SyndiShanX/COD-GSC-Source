@@ -19,13 +19,13 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("scriptmover", "low_grav_powerup_triggered", 5000, 1, "counter", &function_69e96b4d, 0, 0);
-  clientfield::register("scriptmover", "zombie_wall_dust", 5000, 1, "counter", &wall_dust, 0, 0);
-  clientfield::register("toplayer", "player_postfx", 5000, 1, "int", &function_df81c23d, 0, 0);
-  clientfield::register("toplayer", "player_screen_fx", 5000, 1, "int", &player_screen_fx, 0, 1);
-  clientfield::register("scriptmover", "undercroft_emissives", 5000, 1, "int", &function_9a8a19ab, 0, 0);
-  clientfield::register("scriptmover", "undercroft_wall_panel_shutdown", 5000, 1, "counter", &function_a3279a5, 0, 0);
-  clientfield::register("scriptmover", "floor_panel_emissives_glow", 5000, 1, "int", &function_23861dfe, 0, 0);
+  clientfield::register("scriptmover", "low_grav_powerup_triggered", 5000, 1, "counter", & function_69e96b4d, 0, 0);
+  clientfield::register("scriptmover", "zombie_wall_dust", 5000, 1, "counter", & wall_dust, 0, 0);
+  clientfield::register("toplayer", "player_postfx", 5000, 1, "int", & function_df81c23d, 0, 0);
+  clientfield::register("toplayer", "player_screen_fx", 5000, 1, "int", & player_screen_fx, 0, 1);
+  clientfield::register("scriptmover", "undercroft_emissives", 5000, 1, "int", & function_9a8a19ab, 0, 0);
+  clientfield::register("scriptmover", "undercroft_wall_panel_shutdown", 5000, 1, "counter", & function_a3279a5, 0, 0);
+  clientfield::register("scriptmover", "floor_panel_emissives_glow", 5000, 1, "int", & function_23861dfe, 0, 0);
 }
 
 function function_554db684() {
@@ -39,20 +39,20 @@ function function_554db684() {
 }
 
 function function_69e96b4d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playSound(0, "zmb_cha_ching", self.origin);
+  playsound(0, "zmb_cha_ching", self.origin);
 }
 
 function wall_dust(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFX(localclientnum, level._effect["wall_dust"], self.origin);
+  playfx(localclientnum, level._effect["wall_dust"], self.origin);
 }
 
 function player_screen_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(isDefined(level.var_51541120[localclientnum])) {
+    if(isdefined(level.var_51541120[localclientnum])) {
       deletefx(localclientnum, level.var_51541120[localclientnum], 1);
     }
     level.var_51541120[localclientnum] = playfxoncamera(localclientnum, level._effect["low_grav_screen_fx"]);
-  } else if(isDefined(level.var_51541120[localclientnum])) {
+  } else if(isdefined(level.var_51541120[localclientnum])) {
     deletefx(localclientnum, level.var_51541120[localclientnum], 1);
   }
 }
@@ -75,7 +75,7 @@ function function_9a8a19ab(localclientnum, oldval, newval, bnewent, binitialsnap
     n_start_time = gettime();
     n_end_time = n_start_time + (1 * 1000);
     b_is_updating = 1;
-    while(b_is_updating) {
+    while (b_is_updating) {
       n_time = gettime();
       if(n_time >= n_end_time) {
         n_shader_value = mapfloat(n_start_time, n_end_time, 0, 1, n_end_time);
@@ -90,7 +90,7 @@ function function_9a8a19ab(localclientnum, oldval, newval, bnewent, binitialsnap
     n_start_time = gettime();
     n_end_time = n_start_time + (2 * 1000);
     b_is_updating = 1;
-    while(b_is_updating) {
+    while (b_is_updating) {
       n_time = gettime();
       if(n_time >= n_end_time) {
         n_shader_value = mapfloat(n_start_time, n_end_time, 1, 0, n_end_time);
@@ -111,7 +111,7 @@ function function_a3279a5(localclientnum, oldval, newval, bnewent, binitialsnap,
   n_start_time = gettime();
   n_end_time = n_start_time + (1 * 1000);
   b_is_updating = 1;
-  while(b_is_updating) {
+  while (b_is_updating) {
     n_time = gettime();
     if(n_time >= n_end_time) {
       n_shader_value = mapfloat(n_start_time, n_end_time, 1, 0, n_end_time);
@@ -132,7 +132,7 @@ function function_23861dfe(localclientnum, oldval, newval, bnewent, binitialsnap
     n_start_time = gettime();
     n_end_time = n_start_time + (1 * 1000);
     b_is_updating = 1;
-    while(b_is_updating) {
+    while (b_is_updating) {
       n_time = gettime();
       if(n_time >= n_end_time) {
         n_shader_value = mapfloat(n_start_time, n_end_time, 0.3, 1, n_end_time);
@@ -147,7 +147,7 @@ function function_23861dfe(localclientnum, oldval, newval, bnewent, binitialsnap
     n_start_time = gettime();
     n_end_time = n_start_time + (2 * 1000);
     b_is_updating = 1;
-    while(b_is_updating) {
+    while (b_is_updating) {
       n_time = gettime();
       if(n_time >= n_end_time) {
         n_shader_value = mapfloat(n_start_time, n_end_time, 1, 0.3, n_end_time);
@@ -162,7 +162,7 @@ function function_23861dfe(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_a81107fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(newval)) {
+  if(!isdefined(newval)) {
     return;
   }
   if(newval) {
@@ -172,7 +172,7 @@ function function_a81107fc(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function private function_10dcbf51(localclientnum, fxobj) {
-  fxobj playSound(localclientnum, "evt_ai_explode");
+  fxobj playsound(localclientnum, "evt_ai_explode");
   wait(1);
   fxobj delete();
 }

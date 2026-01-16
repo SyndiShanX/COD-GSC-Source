@@ -28,7 +28,9 @@ main() {
 
   if(IsUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 3, 0, 9);
@@ -64,9 +66,8 @@ main() {
 
   level.siegeFlagCapturing = [];
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   game["dialog"]["offense_obj"] = "capture_objs";
   game["dialog"]["defense_obj"] = "capture_objs";
@@ -115,9 +116,8 @@ initializeMatchRules() {
 }
 
 onStartGameType() {
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -126,23 +126,23 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", &"OBJECTIVES_DOM");
+  setObjectiveText("allies", & "OBJECTIVES_DOM");
 
-  setObjectiveText("axis", &"OBJECTIVES_DOM");
+  setObjectiveText("axis", & "OBJECTIVES_DOM");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_DOM");
+    setObjectiveScoreText("allies", & "OBJECTIVES_DOM");
 
-    setObjectiveScoreText("axis", &"OBJECTIVES_DOM");
+    setObjectiveScoreText("axis", & "OBJECTIVES_DOM");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_DOM_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_DOM_SCORE");
 
-    setObjectiveScoreText("axis", &"OBJECTIVES_DOM_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_DOM_SCORE");
   }
 
-  setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
 
-  setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
 
   initSpawns();
 
@@ -274,17 +274,15 @@ onPlayerSwitchTeam() {
   while(true) {
     level waittill("joined_team", player);
 
-    if(gameHasStarted()) {
+    if(gameHasStarted())
       player.siegeLateComer = true;
-    }
   }
 }
 
 onSpawnPlayer() {
   self setExtraScore0(0);
-  if(isDefined(self.pers["captures"])) {
+  if(isDefined(self.pers["captures"]))
     self setExtraScore0(self.pers["captures"]);
-  }
 
   level notify("spawned_player");
 }
@@ -293,9 +291,8 @@ onPlayerDisconnect() {
   self waittill("disconnect");
 
   foreach(effect in self._domFlagEffect) {
-    if(isDefined(effect)) {
+    if(isDefined(effect))
       effect Delete();
-    }
   }
 }
 
@@ -311,9 +308,8 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update) {
+  if(update)
     maps\mp\gametypes\_spectating::updateSpectateSettings();
-  }
 }
 
 initGametypeAwards() {
@@ -351,18 +347,15 @@ domFlags() {
   for(returnCol = 2; returnCol < CONST_MAX_FLAGPOS_COL + 1; returnCol++) {
     returnValue = TableLookup(filename, searchCol, currentMap, returnCol);
 
-    if(returnValue != "") {
+    if(returnValue != "")
       setFlagPositions(returnCol, Float(returnValue));
-    }
   }
 
-  for(index = 0; index < primaryFlags.size; index++) {
+  for(index = 0; index < primaryFlags.size; index++)
     level.flags[level.flags.size] = primaryFlags[index];
-  }
 
-  for(index = 0; index < secondaryFlags.size; index++) {
+  for(index = 0; index < secondaryFlags.size; index++)
     level.flags[level.flags.size] = secondaryFlags[index];
-  }
 
   level.domFlags = [];
   for(index = 0; index < level.flags.size; index++) {
@@ -487,17 +480,14 @@ getFlagPos(flagLabel, flagOrigin) {
   returnOrigin = flagOrigin;
 
   if(flagLabel == "_a") {
-    if(isDefined(level.siege_A_XPos) && isDefined(level.siege_A_YPos) && isDefined(level.siege_A_ZPos)) {
+    if(isDefined(level.siege_A_XPos) && isDefined(level.siege_A_YPos) && isDefined(level.siege_A_ZPos))
       returnOrigin = (level.siege_A_XPos, level.siege_A_YPos, level.siege_A_ZPos);
-    }
   } else if(flagLabel == "_b") {
-    if(isDefined(level.siege_B_XPos) && isDefined(level.siege_B_YPos) && isDefined(level.siege_B_ZPos)) {
+    if(isDefined(level.siege_B_XPos) && isDefined(level.siege_B_YPos) && isDefined(level.siege_B_ZPos))
       returnOrigin = (level.siege_B_XPos, level.siege_B_YPos, level.siege_B_ZPos);
-    }
   } else {
-    if(isDefined(level.siege_C_XPos) && isDefined(level.siege_C_YPos) && isDefined(level.siege_C_ZPos)) {
+    if(isDefined(level.siege_C_XPos) && isDefined(level.siege_C_YPos) && isDefined(level.siege_C_ZPos))
       returnOrigin = (level.siege_C_XPos, level.siege_C_YPos, level.siege_C_ZPos);
-    }
   }
 
   return returnOrigin;
@@ -507,9 +497,8 @@ storeCenterFlag() {
   bestcentersq = undefined;
 
   foreach(flag in level.flags) {
-    if(flag.script_label == "_b") {
+    if(flag.script_label == "_b")
       level.centerFlag = flag;
-    }
   }
 }
 
@@ -527,9 +516,8 @@ watchFlagTimerPause() {
         level.siegeTimerState = "pause";
         pauseCountdownTimer();
 
-        if(!flagOwnersAlive(flag.prevTeam)) {
+        if(!flagOwnersAlive(flag.prevTeam))
           setWinner(capturingTeam, flag.prevTeam + "_eliminated");
-        }
       }
     }
   }
@@ -540,9 +528,8 @@ isWinningTeam(team) {
 
   teamFlags = getFlagCount(team);
 
-  if(teamFlags == 2) {
+  if(teamFlags == 2)
     isWinning = true;
-  }
 
   return isWinning;
 }
@@ -606,9 +593,8 @@ watchFlagEndUse() {
         if(level.siegeFlagCapturing.size == 0 && (!flag.flagCapSuccess || !isDefined(level.siegeTimerState) || level.siegeTimerState != "start")) {
           siegeRushTimer = GetDvarFloat("scr_siege_rushtimeramount");
 
-          if(isDefined(level.siegeTimeLeft)) {
+          if(isDefined(level.siegeTimeLeft))
             siegeRushTimer = level.siegeTimeLeft;
-          }
 
           gameOverTime = Int(GetTime() + siegeRushTimer * 1000);
 
@@ -625,16 +611,14 @@ watchFlagEndUse() {
             notifyPlayers("siege_timer_start");
           }
 
-          if(!level.gameTimerBeeps) {
+          if(!level.gameTimerBeeps)
             thread watchGameTimer(siegeRushTimer);
-          }
         }
       }
     } else if(alliesFlags == 3)
       setWinner("allies", "score_limit_reached");
-    else if(axisFlags == 3) {
+    else if(axisFlags == 3)
       setWinner("axis", "score_limit_reached");
-    }
 
     flag.prevTeam = flag.ownerTeam;
   }
@@ -671,9 +655,8 @@ watchGameStart() {
 }
 
 haveSpawnedPlayers() {
-  if(level.teamBased) {
+  if(level.teamBased)
     return (level.hasSpawned["axis"] && level.hasSpawned["allies"]);
-  }
 
   return (level.maxPlayerCount > 1);
 }
@@ -694,9 +677,8 @@ watchGameTimer(gameTime) {
     level.siegeTimeLeft = remainingTime;
 
     if(remainingTime <= 30) {
-      if(remainingTime != 0) {
+      if(remainingTime != 0)
         clockObject playSound("ui_mp_timer_countdown");
-      }
     }
 
     wait(1);
@@ -709,9 +691,8 @@ getFlagCount(team) {
   teamFlags = 0;
 
   foreach(flag in level.domFlags) {
-    if(flag.ownerTeam == team && !isBeingCaptured(flag)) {
+    if(flag.ownerTeam == team && !isBeingCaptured(flag))
       teamFlags += 1;
-    }
   }
 
   return teamFlags;
@@ -723,9 +704,8 @@ isBeingCaptured(flag) {
   if(isDefined(flag)) {
     if(level.siegeFlagCapturing.size > 0) {
       foreach(flagLabel in level.siegeFlagCapturing) {
-        if(flag.label == flagLabel) {
+        if(flag.label == flagLabel)
           cappingFlag = true;
-        }
       }
     }
   }
@@ -734,11 +714,10 @@ isBeingCaptured(flag) {
 }
 
 setWinner(team, reason) {
-  if(team != "tie") {
+  if(team != "tie")
     level.finalKillCam_winner = team;
-  } else {
+  else
     level.finalKillCam_winner = "none";
-  }
 
   foreach(player in level.players) {
     if(!IsAI(player)) {
@@ -874,9 +853,8 @@ isFlagExcluded(flagToCheck, excludeFlag) {
       }
     }
   } else {
-    if(flagToCheck == excludeFlag) {
+    if(flagToCheck == excludeFlag)
       excluded = true;
-    }
   }
 
   return excluded;
@@ -962,9 +940,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       continue;
     }
     if(attackerTeam != ownerTeam) {
-      if(!awardedAssault) {
+      if(!awardedAssault)
         attacker thread maps\mp\gametypes\_hud_message::splashNotify("assault", maps\mp\gametypes\_rank::getScoreInfoValue("assault"));
-      }
       attacker thread maps\mp\gametypes\_rank::giveRankXP("assault");
       maps\mp\gametypes\_gamescore::givePlayerScore("assault", attacker);
 
@@ -980,9 +957,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     defendDistance = 300 * 300;
 
     if(attackerTeam == ownerTeam && victimDistanceToFlag < defendDistance) {
-      if(!awardedDefend) {
+      if(!awardedDefend)
         attacker thread maps\mp\gametypes\_hud_message::splashNotify("defend", maps\mp\gametypes\_rank::getScoreInfoValue("defend"));
-      }
       attacker thread maps\mp\gametypes\_rank::giveRankXP("defend");
       maps\mp\gametypes\_gamescore::givePlayerScore("defend", attacker);
 
@@ -1010,19 +986,18 @@ giveLastOnTeamWarning() {
 }
 
 onTimeLimit() {
-  if(isDefined(level.siegeGameInactive)) {
+  if(isDefined(level.siegeGameInactive))
     level thread maps\mp\gametypes\_gamelogic::forceEnd();
-  } else {
+  else {
     alliesFlags = getFlagCount("allies");
     axisFlags = getFlagCount("axis");
 
-    if(alliesFlags > axisFlags) {
+    if(alliesFlags > axisFlags)
       setWinner("allies", "time_limit_reached");
-    } else if(axisFlags > alliesFlags) {
+    else if(axisFlags > alliesFlags)
       setWinner("axis", "time_limit_reached");
-    } else {
+    else
       setWinner("tie", "time_limit_reached");
-    }
   }
 }
 
@@ -1047,9 +1022,8 @@ delayedLeaderDialog(sound, team) {
 teamRespawn(team, credit_player) {
   foreach(player in level.participants) {
     if(isDefined(player) && player.team == team && !isReallyAlive(player) && !array_contains(level.alive_players[player.team], player) && (!isDefined(player.waitingToSelectClass) || !player.waitingToSelectClass)) {
-      if(isDefined(player.siegeLateComer) && player.siegeLateComer) {
+      if(isDefined(player.siegeLateComer) && player.siegeLateComer)
         player.siegeLateComer = false;
-      }
 
       player maps\mp\gametypes\_playerlogic::incrementAliveCount(player.team);
       player.alreadyAddedToAliveCount = true;
@@ -1128,19 +1102,17 @@ refreshFreecamBaseFX() {
 }
 
 showCapturedBaseEffectToPlayer(team, player) {
-  if(isDefined(player._domFlagEffect[self.label])) {
+  if(isDefined(player._domFlagEffect[self.label]))
     player._domFlagEffect[self.label] Delete();
-  }
 
   effect = undefined;
 
   viewerTeam = player.team;
   isMLG = player IsMLGSpectator();
-  if(isMLG) {
+  if(isMLG)
     viewerTeam = player GetMLGSpectatorTeam();
-  } else if(viewerTeam == "spectator") {
+  else if(viewerTeam == "spectator")
     viewerTeam = "allies";
-  }
 
   if(viewerTeam == team) {
     effect = SpawnFXForClient(level.flagBaseFXid["friendly"], self.baseEffectPos, player, self.baseEffectForward);
@@ -1169,9 +1141,8 @@ setFlagNeutral() {
 }
 
 playFlagNeutralFX() {
-  if(isDefined(self.neutralFlagFx)) {
+  if(isDefined(self.neutralFlagFx))
     self.neutralFlagFx Delete();
-  }
   self.neutralFlagFx = SpawnFx(level.flagBaseFXid["neutral"], self.baseEffectPos, self.baseEffectForward);
   TriggerFX(self.neutralFlagFx);
 }
@@ -1179,9 +1150,8 @@ playFlagNeutralFX() {
 getTeamFlagCount(team) {
   score = 0;
   for(i = 0; i < level.flags.size; i++) {
-    if(level.domFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team) {
+    if(level.domFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team)
       score++;
-    }
   }
   return score;
 }
@@ -1257,9 +1227,8 @@ giveFlagCaptureXP(touchList) {
   level endon("game_ended");
 
   first_player = self maps\mp\gametypes\_gameobjects::getEarliestClaimPlayer();
-  if(isDefined(first_player.owner)) {
+  if(isDefined(first_player.owner))
     first_player = first_player.owner;
-  }
 
   level.lastCapTime = GetTime();
 
@@ -1272,9 +1241,8 @@ giveFlagCaptureXP(touchList) {
   players_touching = GetArrayKeys(touchList);
   for(index = 0; index < players_touching.size; index++) {
     player = touchList[players_touching[index]].player;
-    if(isDefined(player.owner)) {
+    if(isDefined(player.owner))
       player = player.owner;
-    }
 
     if(!IsPlayer(player)) {
       continue;
@@ -1293,20 +1261,18 @@ giveFlagCaptureXP(touchList) {
 
     player setExtraScore0(player.pers["captures"]);
 
-    if(player != first_player) {
+    if(player != first_player)
       player maps\mp\_events::giveObjectivePointStreaks();
-    }
 
     wait(0.05);
   }
 }
 
 getCapXPScale() {
-  if(self.CPM < 4) {
+  if(self.CPM < 4)
     return 1;
-  } else {
+  else
     return 0.25;
-  }
 }
 
 updateCPM() {
@@ -1332,9 +1298,8 @@ setFlagCaptured(team, oldTeam, credit_player, setStartingFlags) {
   self maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_defend" + self.label);
   self.visuals[0] setModel(game["flagmodels"][team]);
 
-  if(isDefined(self.neutralFlagFx)) {
+  if(isDefined(self.neutralFlagFx))
     self.neutralFlagFx Delete();
-  }
 
   foreach(player in level.players) {
     self showCapturedBaseEffectToPlayer(team, player);

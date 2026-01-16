@@ -83,9 +83,8 @@ rt_start() {
 rt_hero_train_impact(var_0, var_1) {
   thread maps\skyway_util::jet_flyover(level._train.cars["train_loco"].body, "rt_bomb");
 
-  while(!common_scripts\utility::flag("flag_rooftops_rt0_hit") && distancesquared(var_0.body gettagorigin("j_spineupper"), var_1.origin) > 302500) {
+  while(!common_scripts\utility::flag("flag_rooftops_rt0_hit") && distancesquared(var_0.body gettagorigin("j_spineupper"), var_1.origin) > 302500)
     wait 0.1;
-  }
 
   thread rt_hero_train_impact_sequence();
   thread rt_train_impact_fic();
@@ -114,13 +113,11 @@ rt_hero_train_impact(var_0, var_1) {
 }
 
 rt_hero_train_impact_sequence(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0.65;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
   var_2 = "tag_explode_close_r";
   var_3 = "tag_explode_close_r2";
@@ -161,9 +158,8 @@ rt_helos(var_0) {
     var_3 thread maps\skyway_util::rt_helo_bullethits();
     var_3 thread maps\skyway_audio::sfx_skyway_helo(var_4);
 
-    if(var_4 > 0) {
+    if(var_4 > 0)
       var_3 thread rt_helo_lane_switch(level.helos[0]);
-    }
   }
 
   wait 0.05;
@@ -200,32 +196,27 @@ rt_helos_dead() {
     common_scripts\utility::flag_set("flag_helo_fail");
 
     foreach(var_1 in level.helos) {
-      if(isDefined(var_1) && isalive(var_1)) {
+      if(isDefined(var_1) && isalive(var_1))
         var_1 notify("rt_helo_dead", "tunnel");
-      }
     }
   }
 
-  if(!common_scripts\utility::flag("flag_helos_dead")) {
+  if(!common_scripts\utility::flag("flag_helos_dead"))
     common_scripts\utility::flag_set("flag_helos_dead");
-  }
 
-  if(!common_scripts\utility::flag("flag_helo_end")) {
+  if(!common_scripts\utility::flag("flag_helo_end"))
     common_scripts\utility::flag_set("flag_helo_end");
-  }
 
   if(common_scripts\utility::flag("flag_rooftops_combat_done") || common_scripts\utility::flag("flag_loco_started")) {
     return;
   }
-  if(!common_scripts\utility::flag("flag_rt2_combat_start")) {
+  if(!common_scripts\utility::flag("flag_rt2_combat_start"))
     thread maps\_utility::autosave_by_name("rooftops_helo_end");
-  }
 
   level._ally thread maps\_utility::set_force_color("r");
 
-  if(!common_scripts\utility::flag("flag_rt2_combat_start")) {
+  if(!common_scripts\utility::flag("flag_rt2_combat_start"))
     getent("rt2_color_start", "targetname") notify("trigger");
-  }
 
   common_scripts\utility::flag_wait("flag_rt2_combat_start");
   maps\_utility::autosave_by_name("rooftops_combat");
@@ -238,22 +229,19 @@ rt_helos_fic() {
   level._ally maps\_utility::smart_dialogue("skyway_hsh_helostakecoveradam");
   var_0 = level common_scripts\utility::waittill_notify_or_timeout_return("rt_helo_dead", randomfloatrange(3, 5));
 
-  if(isDefined(var_0) && var_0 == "timeout") {
+  if(isDefined(var_0) && var_0 == "timeout")
     level._ally maps\_utility::smart_dialogue("skyway_hsh_takeoutthegunners");
-  }
 
-  while(level.helos.size > 1) {
+  while(level.helos.size > 1)
     wait 0.5;
-  }
 
   if(!common_scripts\utility::flag("flag_helo_reinforce")) {
     level._ally maps\_utility::smart_dialogue("skyway_hsh_niceshot");
     common_scripts\utility::flag_wait("flag_helo_reinforce");
     wait 0.1;
 
-    while(level.helos.size > 1) {
+    while(level.helos.size > 1)
       wait 0.05;
-    }
   } else
     level._ally maps\_utility::smart_dialogue("skyway_hsh_onedown");
 
@@ -269,15 +257,13 @@ rt_helos_fic() {
   level waittill("rt1_compromised");
   wait 3;
 
-  if(!common_scripts\utility::flag("flag_rt2_combat_start")) {
+  if(!common_scripts\utility::flag("flag_rt2_combat_start"))
     level._ally maps\_utility::smart_dialogue("skyway_hsh_moveitthecars");
-  }
 
   wait 2;
 
-  if(!common_scripts\utility::flag("flag_rt1_move_up")) {
+  if(!common_scripts\utility::flag("flag_rt1_move_up"))
     level._ally maps\_utility::smart_dialogue("skyway_hsh_cmonlogankeepmoving");
-  }
 
   wait 10;
   var_1 = ["skyway_hsh_comeonadamget", "skyway_hsh_moveitweneed", "skyway_hsh_whereareyouwe", "skyway_hsh_moveitthecars"];
@@ -302,9 +288,8 @@ rt_helo_proc(var_0, var_1, var_2) {
   var_3 = getEntArray(self.targetname + "_clip", "targetname");
 
   if(isDefined(var_3) && var_3.size > 0) {
-    foreach(var_5 in var_3) {
-      var_5 linkto(self);
-    }
+    foreach(var_5 in var_3)
+    var_5 linkto(self);
   }
 
   self.dam = [];
@@ -322,9 +307,8 @@ rt_helo_proc(var_0, var_1, var_2) {
   wait 0.05;
   var_7 = level.scr_anim["generic"]["helo_shooter_death"];
 
-  foreach(var_10, var_9 in self.shooters) {
-    var_9.deathanim = var_7[common_scripts\utility::mod(var_10, var_7.size)];
-  }
+  foreach(var_10, var_9 in self.shooters)
+  var_9.deathanim = var_7[common_scripts\utility::mod(var_10, var_7.size)];
 
   self.deathanims = var_7;
   maps\_utility::assign_animtree("rt_helo_small");
@@ -356,9 +340,8 @@ rt_helo_proc(var_0, var_1, var_2) {
   thread rt_helo_set_ignore(1, 0);
   self setCanDamage(0);
 
-  if(!isDefined(var_12)) {
+  if(!isDefined(var_12))
     var_12 = "generic";
-  }
 
   self.org thread maps\skyway_util::blend_link_over_time(self.org.link1, self.org.link2, 1.8, 0.5);
 
@@ -385,9 +368,8 @@ rt_helo_proc(var_0, var_1, var_2) {
         rt_helo_crash_ground("death_norm");
     }
 
-    if(var_13) {
+    if(var_13)
       common_scripts\utility::flag_set("flag_helo_end");
-    }
   } else {
     common_scripts\utility::flag_set("flag_helos_dead");
 
@@ -442,9 +424,8 @@ rt_helo_crash_train(var_0) {
   self setanim(level.scr_anim["rt_helo_small"]["blades_death"]);
   var_1 = distancesquared(level._ally.origin, level.ally_impact_org.origin);
 
-  if(var_1 < 16) {
+  if(var_1 < 16)
     level._ally thread rt_helo_crash_ally();
-  }
 
   thread maps\skyway_audio::sfx_heli_crash(self);
   self stoploopsound("scn_skyway_heli_loop");
@@ -489,9 +470,8 @@ rt_helo_crash_train(var_0) {
   maps\_vehicle::vehicle_lights_off("running");
   wait 0.1;
 
-  if(level.player istouching(var_4) || level.player istouching(var_5)) {
+  if(level.player istouching(var_4) || level.player istouching(var_5))
     level.player kill();
-  }
 }
 
 rt_helo_crash_ally() {
@@ -504,11 +484,10 @@ rt_player_helocrash_effect(var_0) {
   level endon("flag_loco_enter");
   player_push(var_0, 500, 10, 75, 2, ::rumble_helo_hit);
 
-  if(level.player.car == "train_rt1") {
+  if(level.player.car == "train_rt1")
     thread maps\skyway_util::player_view_roll_with_traincar("roll_R", 1);
-  } else {
+  else
     thread maps\skyway_util::player_view_roll_with_traincar("roll_R", 0.4);
-  }
 
   var_1 = 0.6;
   var_2 = 0.15;
@@ -557,13 +536,11 @@ rt_helo_crash_ground(var_0) {
 rt_helo_blend_backward(var_0, var_1, var_2) {
   var_3 = 0;
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 3;
-  }
 
   foreach(var_3, var_5 in var_0.names) {
     if(var_5 == self.linked_car) {
@@ -591,9 +568,8 @@ rt_helo_shooter_check() {
   self endon("rt_helo_dead");
   self endon("rt_helo_delete");
 
-  while(self.shooters.size > 0) {
+  while(self.shooters.size > 0)
     wait 1;
-  }
 
   wait(randomfloat(1));
   self notify("rt_helo_dead", "shooters");
@@ -603,9 +579,8 @@ rt_helo_driver_check() {
   self endon("rt_helo_dead");
   self endon("rt_helo_delete");
 
-  while(self.usedpositions[0]) {
+  while(self.usedpositions[0])
     wait 0.1;
-  }
 
   self notify("rt_helo_dead", "driver");
 }
@@ -614,21 +589,18 @@ rt_helo_dam() {
   self endon("rt_helo_dead");
   self endon("rt_helo_delete");
 
-  while(self.health > self.damaged) {
+  while(self.health > self.damaged)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx("belly_damage");
 
-  while(self.health > self.critical) {
+  while(self.health > self.critical)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx("engine_damage");
 
-  while(self.health > self.healthbuffer) {
+  while(self.health > self.healthbuffer)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx("belly_death");
   thread maps\skyway_util::rt_helo_damage_fx("engine_death");
@@ -645,33 +617,27 @@ rt_helo_loc_dam(var_0, var_1, var_2, var_3) {
   self.dam[var_0].damaged = self.dam[var_0].healthbuffer + 750;
   self.dam[var_0].critical = self.dam[var_0].healthbuffer + 200;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     self.dam[var_0].health = self.dam[var_0].healthbuffer + var_1;
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     self.dam[var_0].damaged = self.dam[var_0].healthbuffer + var_2;
-  }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     self.dam[var_0].critical = self.dam[var_0].healthbuffer + var_3;
-  }
 
-  while(self.dam[var_0].health > self.dam[var_0].damaged) {
+  while(self.dam[var_0].health > self.dam[var_0].damaged)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx(var_0 + "_damage");
 
-  while(self.dam[var_0].health > self.dam[var_0].critical) {
+  while(self.dam[var_0].health > self.dam[var_0].critical)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx(var_0 + "_crit");
 
-  while(self.dam[var_0].health > self.dam[var_0].healthbuffer) {
+  while(self.dam[var_0].health > self.dam[var_0].healthbuffer)
     wait 0.05;
-  }
 
   thread maps\skyway_util::rt_helo_damage_fx(var_0 + "_death");
   self notify("rt_helo_dead", var_0);
@@ -696,9 +662,8 @@ rt_helo_loc_dam_watcher() {
       continue;
     }
 
-    if(var_12[0] > -95 && var_12[0] < 20 && var_12[2] > -130 && var_12[2] < -65) {
+    if(var_12[0] > -95 && var_12[0] < 20 && var_12[2] > -130 && var_12[2] < -65)
       self.dam["belly"].health = self.dam["belly"].health - var_0;
-    }
   }
 }
 
@@ -714,9 +679,8 @@ rt_helo_target_anim() {
     var_1 = distance(self.origin, level._ally.origin) + 100;
     var_2 = level.player;
 
-    if(var_1 < var_0) {
+    if(var_1 < var_0)
       var_2 = level._ally;
-    }
 
     var_3 = vectortoangles(var_2.origin - self.origin) - self.angles - (0, 90, 0);
     var_4 = clamp(var_3[1], 0, 90) / 90.0;
@@ -733,9 +697,8 @@ rt_helo_lane_switch(var_0) {
   var_0 waittill("rt_helo_dead");
   wait(randomfloatrange(1, 5));
 
-  while(!isDefined(self.is_idling) || !self.is_idling) {
+  while(!isDefined(self.is_idling) || !self.is_idling)
     wait 0.05;
-  }
 
   self.org setanimknob(level.scr_anim[self.org.animname]["idle_inside"], 1, 2.7);
   wait(getanimlength(level.scr_anim[self.org.animname]["idle_inside"]) - 0.5);
@@ -751,9 +714,8 @@ rt_tunnel_queue(var_0) {
   var_2 = (1 - var_0.body getanimtime(var_1)) * getanimlength(var_1);
 
   if(level._train.path.anime == "loop_a2" && var_2 < 20) {
-    while(level._train.path.anime == "loop_a2") {
+    while(level._train.path.anime == "loop_a2")
       wait 0.25;
-    }
   }
 
   common_scripts\utility::flag_set("flag_tunnel_ready");
@@ -764,9 +726,8 @@ rt_traincar_tracker(var_0, var_1, var_2) {
   level notify("starting_traincar_tracker");
   level endon("starting_traincar_tracker");
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = ["train_hangar", "train_sat_1", "train_sat_2"];
-  }
 
   wait(randomfloatrange(0.1, 1));
 
@@ -779,9 +740,8 @@ rt_traincar_tracker(var_0, var_1, var_2) {
 
         foreach(var_4 in level.helos) {
           foreach(var_6 in var_4.shooters) {
-            if(isDefined(var_6) && isai(var_6) && isalive(var_6)) {
+            if(isDefined(var_6) && isai(var_6) && isalive(var_6))
               var_6.baseaccuracy = 1;
-            }
           }
         }
 
@@ -819,17 +779,15 @@ rt_helos_kill_ally(var_0, var_1) {
     var_5.car = var_0.cars[var_5.linked_car];
 
     foreach(var_7 in var_5.shooters) {
-      if(isDefined(var_7) && isai(var_7) && isalive(var_7)) {
+      if(isDefined(var_7) && isai(var_7) && isalive(var_7))
         var_7.baseaccuracy = 9;
-      }
     }
   }
 
   level._ally thread rt_ally_dam_watch();
 
-  while(maps\_utility::is_in_array(var_1, level.player.car)) {
+  while(maps\_utility::is_in_array(var_1, level.player.car))
     wait 0.1;
-  }
 
   level notify("rt_player_stopped_avoiding_helos");
 }
@@ -842,7 +800,7 @@ rt_ally_dam_watch() {
   self.v.invincible = 0;
   wait(randomintrange(3, 5));
   self waittill("damage");
-  setdvar("ui_deadquote", &"SKYWAY_HESH_BY_HELOS");
+  setdvar("ui_deadquote", & "SKYWAY_HESH_BY_HELOS");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -856,9 +814,8 @@ player_push(var_0, var_1, var_2, var_3, var_4, var_5) {
     thread player_push_impulse(var_8, var_4);
   }
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     thread[[var_5]](var_6 / var_1, var_0);
-  }
 }
 
 player_push_train(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -869,15 +826,13 @@ player_push_train(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = anglesToForward(var_6) * var_2;
   thread player_push_impulse(var_7, var_3);
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     thread[[var_4]](level.player.origin + var_7, var_2);
-  }
 }
 
 player_push_impulse(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0.5;
-  }
 
   var_2 = var_1;
 
@@ -913,9 +868,8 @@ rumble_helo_hit(var_0, var_1) {
 }
 
 rt_helo_set_ignore(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = var_0;
-  }
 
   foreach(var_3 in self.shooters) {
     if(isDefined(var_3) && isai(var_3) && isalive(var_3)) {
@@ -938,9 +892,8 @@ rt_helo_tele_proc(var_0) {
 }
 
 rt_respawn_ammo() {
-  while(common_scripts\utility::flag("game_saving")) {
+  while(common_scripts\utility::flag("game_saving"))
     wait 0.05;
-  }
 
   var_0 = getdvarint("rt_helo_lives", 0);
   setdvar("rt_helo_lives", var_0 + 1);
@@ -949,9 +902,8 @@ rt_respawn_ammo() {
     var_1 = level.player getweaponslistprimaries();
 
     foreach(var_3 in var_1) {
-      if(level.player getfractionmaxammo(var_3) < 0.7) {
+      if(level.player getfractionmaxammo(var_3) < 0.7)
         level.player setweaponammostock(var_3, int(weaponmaxammo(var_3) * 0.8));
-      }
     }
   }
 }
@@ -970,9 +922,8 @@ init_helo_ai() {
   wait 0.05;
 
   if(self.vehicle_position > 1) {
-    while(self.ridingvehicle.shooters.size > 1) {
+    while(self.ridingvehicle.shooters.size > 1)
       wait 0.05;
-    }
   }
 
   thread helo_ai_dam_mon();
@@ -983,11 +934,10 @@ helo_ai_handle_death() {
   self.ridingvehicle endon("rt_helo_delete");
   self waittill("death");
 
-  if(self.vehicle_position > 1) {
+  if(self.vehicle_position > 1)
     self.ridingvehicle.shooters = common_scripts\utility::array_remove(self.ridingvehicle.shooters, self);
-  } else {
+  else
     self linkto(self.ridingvehicle, "tag_pilot1", (0, 0, -16), (16, 16, 0));
-  }
 }
 
 helo_ai_dam_mon() {
@@ -1017,9 +967,8 @@ init_helo(var_0) {
   var_1 = var_0.classname;
 
   if(isDefined(level.vehicle_hide_list[var_1])) {
-    foreach(var_3 in level.vehicle_hide_list[var_1]) {
-      var_0 hidepart(var_3);
-    }
+    foreach(var_3 in level.vehicle_hide_list[var_1])
+    var_0 hidepart(var_3);
   }
 
   var_5 = var_0.vehicletype;
@@ -1040,21 +989,18 @@ init_helo(var_0) {
     }
   }
 
-  if(isDefined(var_0.script_godmode)) {
+  if(isDefined(var_0.script_godmode))
     var_0.godmode = 1;
-  }
 
   var_0.damage_functions = [];
   var_0 thread maps\_vehicle_aianim::handle_attached_guys();
   var_0 thread maps\_vehicle_code::vehicle_rumble();
 
-  if(isDefined(var_0.script_physicsjolt) && var_0.script_physicsjolt) {
+  if(isDefined(var_0.script_physicsjolt) && var_0.script_physicsjolt)
     var_0 thread maps\_utility::physicsjolt_proximity();
-  }
 
-  if(isDefined(level.vehiclespawncallbackthread)) {
+  if(isDefined(level.vehiclespawncallbackthread))
     level thread[[level.vehiclespawncallbackthread]](var_0);
-  }
 
   maps\_vehicle_code::vehicle_levelstuff(var_0);
   var_0 maps\_vehicle_code::spawn_group();
@@ -1135,11 +1081,10 @@ temp_ref_check() {
     var_0 = level.player_rumble_ent.origin;
     var_1 = level.player getEye();
 
-    if(isDefined(distance(var_0 - var_1))) {
+    if(isDefined(distance(var_0 - var_1)))
       iprintln("delta: " + distance(var_0 - var_1));
-    } else {
+    else
       iprintln("delta: 0");
-    }
 
     wait 0.05;
   }

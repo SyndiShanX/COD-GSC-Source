@@ -32,11 +32,10 @@ advancedtraverse(var_0, var_1) {
     self waittillmatch("traverse", "gravity on");
     self traversemode("gravity");
 
-    if(!animhasnotetrack(var_0, "blend")) {
+    if(!animhasnotetrack(var_0, "blend"))
       wait(var_5);
-    } else {
+    else
       self waittillmatch("traverse", "blend");
-    }
   }
 }
 
@@ -61,24 +60,21 @@ teleportthreadex(var_0, var_1, var_2, var_3) {
   if(var_0 == 0 || var_2 <= 0) {
     return;
   }
-  if(var_1 > 0) {
+  if(var_1 > 0)
     wait(var_1);
-  }
 
   var_4 = (0, 0, var_0 / var_2);
 
-  if(isDefined(var_3) && var_3 < 1.0) {
+  if(isDefined(var_3) && var_3 < 1.0)
     self setflaggedanimknoball("traverseAnim", self.traverseanim, self.traverseanimroot, 1, 0.2, var_3);
-  }
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
     self forceteleport(self.origin + var_4);
     wait 0.05;
   }
 
-  if(isDefined(var_3) && var_3 < 1.0) {
+  if(isDefined(var_3) && var_3 < 1.0)
     self setflaggedanimknoball("traverseAnim", self.traverseanim, self.traverseanimroot, 1, 0.2, 1.0);
-  }
 }
 
 dotraverse(var_0) {
@@ -97,9 +93,8 @@ dotraverse(var_0) {
   self traversemode("noclip");
   self.traversestartz = self.origin[2];
 
-  if(!animhasnotetrack(var_3, "traverse_align")) {
+  if(!animhasnotetrack(var_3, "traverse_align"))
     handletraversealignment();
-  }
 
   var_5 = 0;
 
@@ -111,9 +106,8 @@ dotraverse(var_0) {
   }
 
   if(var_5) {
-    if(isDefined(var_0["traverseToCoverSound"])) {
+    if(isDefined(var_0["traverseToCoverSound"]))
       thread maps\_utility::play_sound_on_entity(var_0["traverseToCoverSound"]);
-    }
   } else if(isDefined(var_0["traverseSound"]))
     thread maps\_utility::play_sound_on_entity(var_0["traverseSound"]);
 
@@ -147,13 +141,12 @@ dotraverse(var_0) {
 }
 
 handletraversenotetracks(var_0) {
-  if(var_0 == "traverse_death") {
+  if(var_0 == "traverse_death")
     return handletraversedeathnotetrack();
-  } else if(var_0 == "traverse_align") {
+  else if(var_0 == "traverse_align")
     return handletraversealignment();
-  } else if(var_0 == "traverse_drop") {
+  else if(var_0 == "traverse_drop")
     return handletraversedrop();
-  }
 }
 
 handletraversedeathnotetrack() {
@@ -185,11 +178,10 @@ handletraversedrop() {
   var_7 = 0 - var_5[2];
   var_8 = var_7 - var_3;
 
-  if(var_7 < var_3) {
+  if(var_7 < var_3)
     var_9 = var_7 / var_3;
-  } else {
+  else
     var_9 = 1;
-  }
 
   var_10 = (var_6 - var_4) / 3.0;
   var_11 = ceil(var_10 * 20);
@@ -225,9 +217,9 @@ dog_handle_traverse_notetracks(var_0) {
     var_2 = 1;
     var_4 = getnotetracktimes(self.traverseanim, "traverse_align");
 
-    if(var_4.size > 0) {
+    if(var_4.size > 0)
       var_1 = var_4;
-    } else {
+    else {
       var_1 = getnotetracktimes(self.traverseanim, "traverse_jump_end");
       var_3 = 1;
     }
@@ -304,18 +296,16 @@ dog_jump_down(var_0, var_1, var_2, var_3) {
   var_5 = self getnegotiationendnode();
   self orientmode("face angle", var_4.angles[1]);
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = "jump_down_40";
-  }
 
   self.traverseanim = anim.dogtraverseanims[var_2];
   self.traverseanimroot = % body;
   self.traversestartnode = var_4;
   self.traverseendnode = var_5;
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   if(!var_3) {
     var_6 = var_4.origin[2] - var_5.origin[2];
@@ -326,11 +316,10 @@ dog_jump_down(var_0, var_1, var_2, var_3) {
   self clearanim( % body, 0.2);
   self setflaggedanimrestart("traverseAnim", self.traverseanim, 1, 0.2, 1);
 
-  if(!var_3) {
+  if(!var_3)
     animscripts\shared::donotetracks("traverseAnim");
-  } else {
+  else
     animscripts\notetracks::donotetracksintercept("traverseAnim", ::dog_handle_traverse_notetracks);
-  }
 
   self.moveanimtype = undefined;
   self traversemode("gravity");
@@ -345,32 +334,28 @@ dog_jump_up(var_0, var_1, var_2, var_3) {
   var_4 = self getnegotiationstartnode();
   self orientmode("face angle", var_4.angles[1]);
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = "jump_up_40";
-  }
 
   self.traverseanim = anim.dogtraverseanims[var_2];
   self.traverseanimroot = % body;
   self.traversestartnode = var_4;
   self.traverseendnode = self getnegotiationendnode();
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
-  if(!var_3) {
+  if(!var_3)
     thread teleportthreadex(var_0 - 40.0, 0.2, var_1);
-  }
 
   self.moveanimtype = "land";
   self clearanim( % body, 0.2);
   self setflaggedanimrestart("traverseAnim", self.traverseanim, 1, 0.2, 1);
 
-  if(!var_3) {
+  if(!var_3)
     animscripts\shared::donotetracks("traverseAnim");
-  } else {
+  else
     animscripts\notetracks::donotetracksintercept("traverseAnim", ::dog_handle_traverse_notetracks);
-  }
 
   self.moveanimtype = undefined;
   self traversemode("gravity");
@@ -386,9 +371,8 @@ dog_long_jump(var_0, var_1) {
   var_2 = self getnegotiationstartnode();
   self orientmode("face angle", var_2.angles[1]);
 
-  if(!isDefined(var_2.traverse_height)) {
+  if(!isDefined(var_2.traverse_height))
     var_2.traverse_height = var_2.origin[2];
-  }
 
   var_3 = var_2.traverse_height - var_2.origin[2];
   thread teleportthread(var_3 - var_1);

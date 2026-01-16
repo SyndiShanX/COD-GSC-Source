@@ -9,6 +9,7 @@
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace weapons;
 
 autoexec __init__system__() {
@@ -93,7 +94,7 @@ function_c0101095(weapon, forward, var_62e5b78) {
   var_4f64fb6b = 3;
   trace = physicstrace(trace_start, trace_end, (var_4f64fb6b * -1, var_4f64fb6b * -1, 0), (var_4f64fb6b, var_4f64fb6b, 1), player, 1);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     var_79ed7809 = 30;
   }
 
@@ -119,7 +120,7 @@ function_e870d33d() {
   self notify("562ab31eaeed790b");
   self endon("562ab31eaeed790b");
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   gameobject_link = undefined;
   vehicle = undefined;
   var_13ab34e1 = undefined;
@@ -149,7 +150,7 @@ function_e870d33d() {
     }
 
     if(player playerads() == 0) {
-      waitresult = player waittill(#"weapon_switch_started", # "weapon_ads_started");
+      waitresult = player waittill(#"weapon_switch_started", #"weapon_ads_started");
 
       if(waitresult._notify != "weapon_ads_started") {
         continue;
@@ -350,7 +351,7 @@ function_18a9a4e4(settings) {
   }
 
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   rumble_delay = float(isDefined(settings.var_efe13502) ? settings.var_efe13502 : 0.5);
 
   if(rumble_delay > 0) {
@@ -460,7 +461,7 @@ stow_on_back(current) {
   index_weapon = level.weaponnone;
 
   if(isDefined(self.carryobject) && isDefined(self.carryobject gameobjects::get_visible_carrier_model())) {
-    if(self.carryobject.identifier === # "hash_7044a4ac19b5324e") {
+    if(self.carryobject.identifier === #"hash_7044a4ac19b5324e") {
       return;
     }
 
@@ -564,7 +565,7 @@ stow_on_hip() {
 
 weapondamagetracepassed(from, to, startradius, ignore) {
   trace = weapondamagetrace(from, to, startradius, ignore);
-  return trace[# "fraction"] == 1;
+  return trace[#"fraction"] == 1;
 }
 
 weapondamagetrace(from, to, startradius, ignore) {
@@ -580,11 +581,11 @@ weapondamagetrace(from, to, startradius, ignore) {
   trace = bulletTrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"scr_damage_debug", 0) != 0) {
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       thread debug::drawdebugline(midpos, to, (1, 1, 1), 600);
     } else {
-      thread debug::drawdebugline(midpos, trace[# "position"], (1, 0.9, 0.8), 600);
-      thread debug::drawdebugline(trace[# "position"], to, (1, 0.4, 0.3), 600);
+      thread debug::drawdebugline(midpos, trace[#"position"], (1, 0.9, 0.8), 600);
+      thread debug::drawdebugline(trace[#"position"], to, (1, 0.4, 0.3), 600);
     }
   }
 
@@ -609,7 +610,7 @@ has_heavy_weapon() {
 has_lockon(target) {
   player = self;
   clientnum = player getentitynumber();
-  return isDefined(target.locked_on) && target.locked_on & 1 << clientnum;
+  return isDefined(target.locked_on) && target.locked_on&1 << clientnum;
 }
 
 function_9568854f(weapon, attachmentname) {
@@ -644,8 +645,8 @@ isheadshot(shitloc, smeansofdeath) {
   }
 
   switch (smeansofdeath) {
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
   }
 

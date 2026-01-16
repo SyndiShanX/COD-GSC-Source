@@ -8,12 +8,12 @@
 
 function loop_fx_sound(alias, origin, ender) {
   org = spawn("script_origin", (0, 0, 0));
-  if(isDefined(ender)) {
+  if(isdefined(ender)) {
     thread loop_delete(ender, org);
     self endon(ender);
   }
   org.origin = origin;
-  org playLoopSound(alias);
+  org playloopsound(alias);
 }
 
 function loop_delete(ender, ent) {
@@ -24,13 +24,13 @@ function loop_delete(ender, ent) {
 
 function play_in_space(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
-  if(!isDefined(origin)) {
+  if(!isdefined(origin)) {
     origin = self.origin;
   }
   org.origin = origin;
   org playsoundwithnotify(alias, "sounddone");
   org waittill("sounddone");
-  if(isDefined(org)) {
+  if(isdefined(org)) {
     org delete();
   }
 }
@@ -38,20 +38,20 @@ function play_in_space(alias, origin, master) {
 function loop_on_tag(alias, tag, bstopsoundondeath) {
   org = spawn("script_origin", (0, 0, 0));
   org endon("death");
-  if(!isDefined(bstopsoundondeath)) {
+  if(!isdefined(bstopsoundondeath)) {
     bstopsoundondeath = 1;
   }
   if(bstopsoundondeath) {
     thread util::delete_on_death(org);
   }
-  if(isDefined(tag)) {
+  if(isdefined(tag)) {
     org linkto(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
     org linkto(self);
   }
-  org playLoopSound(alias);
+  org playloopsound(alias);
   self waittill("stop sound" + alias);
   org stoploopsound(alias);
   org delete();
@@ -61,7 +61,7 @@ function play_on_tag(alias, tag, ends_on_death) {
   org = spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread delete_on_death_wait(org, "sounddone");
-  if(isDefined(tag)) {
+  if(isdefined(tag)) {
     org.origin = self gettagorigin(tag);
     org linkto(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
@@ -70,7 +70,7 @@ function play_on_tag(alias, tag, ends_on_death) {
     org linkto(self);
   }
   org playsoundwithnotify(alias, "sounddone");
-  if(isDefined(ends_on_death)) {
+  if(isdefined(ends_on_death)) {
     assert(ends_on_death, "");
     wait_for_sounddone_or_death(org);
     wait(0.05);
@@ -97,7 +97,7 @@ function loop_on_entity(alias, offset) {
   org = spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread util::delete_on_death(org);
-  if(isDefined(offset)) {
+  if(isdefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
     org linkto(self);
@@ -106,7 +106,7 @@ function loop_on_entity(alias, offset) {
     org.angles = self.angles;
     org linkto(self);
   }
-  org playLoopSound(alias);
+  org playloopsound(alias);
   self waittill("stop sound" + alias);
   org stoploopsound(0.1);
   org delete();
@@ -114,11 +114,11 @@ function loop_on_entity(alias, offset) {
 
 function loop_in_space(alias, origin, ender) {
   org = spawn("script_origin", (0, 0, 1));
-  if(!isDefined(origin)) {
+  if(!isdefined(origin)) {
     origin = self.origin;
   }
   org.origin = origin;
-  org playLoopSound(alias);
+  org playloopsound(alias);
   level waittill(ender);
   org stoploopsound();
   wait(0.1);
@@ -128,27 +128,27 @@ function loop_in_space(alias, origin, ender) {
 function delete_on_death_wait(ent, sounddone) {
   ent endon("death");
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     ent delete();
   }
 }
 
 function play_on_players(sound, team) {
-  assert(isDefined(level.players));
+  assert(isdefined(level.players));
   if(level.splitscreen) {
-    if(isDefined(level.players[0])) {
+    if(isdefined(level.players[0])) {
       level.players[0] playlocalsound(sound);
     }
   } else {
-    if(isDefined(team)) {
-      for(i = 0; i < level.players.size; i++) {
+    if(isdefined(team)) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
-        if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+        if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
           player playlocalsound(sound);
         }
       }
     } else {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         level.players[i] playlocalsound(sound);
       }
     }

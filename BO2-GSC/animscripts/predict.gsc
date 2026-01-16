@@ -95,9 +95,8 @@ tumblewall(notifyname) {
       self waittill("predictGetNotetrack", notetrack);
 
       if(isDefined(notetrack)) {
-        if(notetrack == "end") {
+        if(notetrack == "end")
           return true;
-        }
       }
 
       if(!bpredictmore) {
@@ -107,9 +106,8 @@ tumblewall(notifyname) {
 
     self predictoriginandangles();
 
-    if(self isdeflected()) {
+    if(self isdeflected())
       return false;
-    }
 
     entry["handler"] = ::moveh;
     entry["origin"] = self.origin;
@@ -138,7 +136,9 @@ playback() {
   for(i = 0; i < count; i++) {
     entry = self.codepredictcmd[i];
     handler = entry["handler"];
-    [[handler]](entry);
+    [
+      [handler]
+    ](entry);
     self.codepredictcmd[i] = undefined;
   }
 

@@ -156,9 +156,8 @@ setupExploders() {
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] NotSolid();
-        if(isDefined(ents[i].script_disconnectpaths)) {
+        if(isDefined(ents[i].script_disconnectpaths))
           ents[i] ConnectPaths();
-        }
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] hide();
         ents[i] NotSolid();
@@ -286,9 +285,8 @@ setupExploders() {
   }
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(ent.v["type"] != "exploder") {
+    if(ent.v["type"] != "exploder")
       continue;
-    }
     ent.v["exploder_id"] = getExploderId(ent);
   }
   reportExploderIds();
@@ -334,18 +332,16 @@ player_special_death_hint() {
     return;
   }
   if(level.gameskill >= 2) {
-    if(!map_is_early_in_the_game()) {
+    if(!map_is_early_in_the_game())
       return;
-    }
   }
   if(cause == "MOD_SUICIDE") {
     TimeSinceThrown = GetTime() - self.lastgrenadetime;
-    if((TimeSinceThrown) < 3.5 * 1000 || (TimeSinceThrown) > 4.5 * 1000) {
+    if((TimeSinceThrown) < 3.5 * 1000 || (TimeSinceThrown) > 4.5 * 1000)
       return;
-    }
     level notify("new_quote_string");
     SetDvar("ui_deadquote", "");
-    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
+    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
   if(cause == "MOD_EXPLOSIVE") {
@@ -509,16 +505,14 @@ special_death_indicator_hudelement(shader, iWidth, iHeight, fDelay, x, y) {
   }
   wait(fDelay);
   overlay = NewClientHudElem(self);
-  if(isDefined(x)) {
+  if(isDefined(x))
     overlay.x = x;
-  } else {
+  else
     overlay.x = 0;
-  }
-  if(isDefined(y)) {
+  if(isDefined(y))
     overlay.y = y;
-  } else {
+  else
     overlay.y = 40;
-  }
   overlay SetShader(shader, iWidth, iHeight);
   overlay.alignX = "center";
   overlay.alignY = "middle";
@@ -685,7 +679,7 @@ trigger_unlock_death(target) {
 
 wait_for_an_unlocked_trigger(triggers, noteworthy) {
   level endon("unlocked_trigger_hit" + noteworthy);
-  ent = spawnStruct();
+  ent = SpawnStruct();
   for(i = 0; i < triggers.size; i++) {
     triggers[i] thread report_trigger(ent, noteworthy);
   }
@@ -769,7 +763,7 @@ trigger_lookat_think(trigger, endOnFlag) {
       continue;
     }
     while(other IsTouching(trigger)) {
-      if(!SightTracePassed(other getEye(), target_origin, false, undefined)) {
+      if(!SightTracePassed(other GetEye(), target_origin, false, undefined)) {
         if(has_flag) {
           flag_clear(flagName);
         }
@@ -778,7 +772,7 @@ trigger_lookat_think(trigger, endOnFlag) {
       }
       normal = VectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
-      player_forward = anglesToForward(player_angles);
+      player_forward = AnglesToForward(player_angles);
       dot = VectorDot(player_forward, normal);
       if(dot >= 0.78) {
         if(has_flag) {
@@ -851,7 +845,7 @@ trigger_CanSee(trigger) {
 
 cantraceto(target_origin, offsets) {
   for(i = 0; i < offsets.size; i++) {
-    if(SightTracePassed(self getEye(), target_origin + offsets[i], true, self)) {
+    if(SightTracePassed(self GetEye(), target_origin + offsets[i], true, self)) {
       return true;
     }
   }

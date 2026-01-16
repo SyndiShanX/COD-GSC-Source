@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace namespace_87e11242;
 
 autoexec __init__system__() {
@@ -25,23 +26,23 @@ init() {
 }
 
 init_fx() {
-  level._effect[# "server_spark_fx"] = # "hash_620a92bcd2225e0f";
-  level._effect[# "hash_170e9793dab7aa5b"] = # "hash_14eb4b8e52dfe0bb";
-  level._effect[# "hash_78b4a1a435fd8bf7"] = # "hash_62f9570a97e8f893";
+  level._effect[#"server_spark_fx"] = #"hash_620a92bcd2225e0f";
+  level._effect[#"hash_170e9793dab7aa5b"] = #"hash_14eb4b8e52dfe0bb";
+  level._effect[#"hash_78b4a1a435fd8bf7"] = #"hash_62f9570a97e8f893";
 }
 
 init_clientfields() {
-  clientfield::register("world", "" + # "hash_31a98ee76e835504", 1, 1, "int", &function_eae1fc85, 0, 0);
-  clientfield::register("world", "" + # "hash_3284b0cf34bfe44e", 1, 1, "int", &function_85c61737, 0, 0);
-  clientfield::register("world", "" + # "hash_b143d97bf92fc66", 1, 1, "counter", &function_e322771e, 0, 0);
-  clientfield::register("world", "" + # "hash_28f972533bb468fd", 1, 1, "int", &function_d20d32f2, 0, 0);
+  clientfield::register("world", "" + #"hash_31a98ee76e835504", 1, 1, "int", &function_eae1fc85, 0, 0);
+  clientfield::register("world", "" + #"hash_3284b0cf34bfe44e", 1, 1, "int", &function_85c61737, 0, 0);
+  clientfield::register("world", "" + #"hash_b143d97bf92fc66", 1, 1, "counter", &function_e322771e, 0, 0);
+  clientfield::register("world", "" + #"hash_28f972533bb468fd", 1, 1, "int", &function_d20d32f2, 0, 0);
 }
 
 function_eae1fc85(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   s_fix_server_spark_fx = struct::get("fix_server_spark_fx", "targetname");
 
   if(newval == 1) {
-    level.var_6171ce61 = playFX(localclientnum, level._effect[# "server_spark_fx"], s_fix_server_spark_fx.origin);
+    level.var_6171ce61 = playFX(localclientnum, level._effect[#"server_spark_fx"], s_fix_server_spark_fx.origin);
     return;
   }
 

@@ -9,16 +9,16 @@
 #namespace destructible_character;
 
 function autoexec main() {
-  clientfield::register("actor", "destructible_character_state", 1, 21, "int", &destructclientutils::_destructhandler, 0, 0);
+  clientfield::register("actor", "destructible_character_state", 1, 21, "int", & destructclientutils::_destructhandler, 0, 0);
   destructibles = struct::get_script_bundles("destructiblecharacterdef");
   processedbundles = [];
   foreach(destructiblename, destructible in destructibles) {
-    destructbundle = spawnStruct();
+    destructbundle = spawnstruct();
     destructbundle.piececount = destructible.piececount;
     destructbundle.pieces = [];
     destructbundle.name = destructiblename;
-    for(index = 1; index <= destructbundle.piececount; index++) {
-      piecestruct = spawnStruct();
+    for (index = 1; index <= destructbundle.piececount; index++) {
+      piecestruct = spawnstruct();
       piecestruct.gibmodel = getstructfield(destructible, ("piece" + index) + "_gibmodel");
       piecestruct.gibtag = getstructfield(destructible, ("piece" + index) + "_gibtag");
       piecestruct.gibfx = getstructfield(destructible, ("piece" + index) + "_gibfx");
@@ -44,13 +44,13 @@ function private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, b
   if(bnewent) {
     destructflags = 0 ^ newvalue;
   }
-  if(!isDefined(entity.destructibledef)) {
+  if(!isdefined(entity.destructibledef)) {
     return;
   }
   currentdestructflag = 2;
   piecenumber = 1;
-  while(destructflags >= currentdestructflag) {
-    if(destructflags &currentdestructflag) {
+  while (destructflags >= currentdestructflag) {
+    if(destructflags & currentdestructflag) {
       _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs);
     }
     currentdestructflag = currentdestructflag << 1;
@@ -60,12 +60,12 @@ function private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, b
 }
 
 function private _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs) {
-  if(!isDefined(entity.destructibledef)) {
+  if(!isdefined(entity.destructibledef)) {
     return;
   }
   destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
   piece = destructbundle.pieces[piecenumber - 1];
-  if(isDefined(piece)) {
+  if(isdefined(piece)) {
     if(shouldspawngibs) {
       gibclientutils::_playgibfx(localclientnum, entity, piece.gibfx, piece.gibfxtag);
       entity thread gibclientutils::_gibpiece(localclientnum, entity, piece.gibmodel, piece.gibtag, piece.gibdynentfx);
@@ -76,17 +76,19 @@ function private _destructpiece(localclientnum, entity, piecenumber, shouldspawn
 }
 
 function private _getdestructstate(localclientnum, entity) {
-  if(isDefined(entity._destruct_state)) {
+  if(isdefined(entity._destruct_state)) {
     return entity._destruct_state;
   }
   return 0;
 }
 
 function private _handledestructcallbacks(localclientnum, entity, piecenumber) {
-  if(isDefined(entity._destructcallbacks) && isDefined(entity._destructcallbacks[piecenumber])) {
+  if(isdefined(entity._destructcallbacks) && isdefined(entity._destructcallbacks[piecenumber])) {
     foreach(callback in entity._destructcallbacks[piecenumber]) {
       if(isfunctionptr(callback)) {
-        [[callback]](localclientnum, entity, piecenumber);
+        [
+          [callback]
+        ](localclientnum, entity, piecenumber);
       }
     }
   }
@@ -94,10 +96,10 @@ function private _handledestructcallbacks(localclientnum, entity, piecenumber) {
 
 function adddestructpiececallback(localclientnum, entity, piecenumber, callbackfunction) {
   assert(isfunctionptr(callbackfunction));
-  if(!isDefined(entity._destructcallbacks)) {
+  if(!isdefined(entity._destructcallbacks)) {
     entity._destructcallbacks = [];
   }
-  if(!isDefined(entity._destructcallbacks[piecenumber])) {
+  if(!isdefined(entity._destructcallbacks[piecenumber])) {
     entity._destructcallbacks[piecenumber] = [];
   }
   destructcallbacks = entity._destructcallbacks[piecenumber];
@@ -106,5 +108,5 @@ function adddestructpiececallback(localclientnum, entity, piecenumber, callbackf
 }
 
 function ispiecedestructed(localclientnum, entity, piecenumber) {
-  return _getdestructstate(localclientnum, entity) &(1 << piecenumber);
+  return _getdestructstate(localclientnum, entity) & (1 << piecenumber);
 }

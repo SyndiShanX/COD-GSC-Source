@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_double_points;
 
 autoexec __init__system__() {
@@ -24,7 +25,7 @@ __init__() {
   zm_powerups::register_powerup("double_points", &grab_double_points);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", # "hash_774207d74b355a8a", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
+    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", #"hash_774207d74b355a8a", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
   }
 }
 
@@ -40,7 +41,7 @@ grab_double_points(player) {
 
 function_6fd6ae61(e_powerup, player) {
   player notify(#"powerup points scaled");
-  player endon(#"powerup points scaled", # "disconnect");
+  player endon(#"powerup points scaled", #"disconnect");
   player thread zm_powerups::function_5091b029("double_points");
   player zombie_utility::set_zombie_var_player(#"zombie_point_scalar", 2);
   player clientfield::set_player_uimodel("hudItems.doublePointsActive", 1);
@@ -51,7 +52,7 @@ function_6fd6ae61(e_powerup, player) {
     n_wait_time = 30;
   }
 
-  level waittilltimeout(n_wait_time, # "end_game");
+  level waittilltimeout(n_wait_time, #"end_game");
   player zombie_utility::set_zombie_var_player(#"zombie_point_scalar", undefined);
   player clientfield::set_player_uimodel("hudItems.doublePointsActive", 0);
 }

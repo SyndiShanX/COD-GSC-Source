@@ -16,6 +16,7 @@
 #include scripts\mp_common\gametypes\match;
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\gametypes\round;
+
 #namespace globallogic_audio;
 
 autoexec __init__system__() {
@@ -32,106 +33,106 @@ __init__() {
 }
 
 init() {
-  game.music[# "defeat"] = "mus_defeat";
-  game.music[# "victory_spectator"] = "mus_defeat";
-  game.music[# "winning"] = "mus_time_running_out_winning";
-  game.music[# "losing"] = "mus_time_running_out_losing";
-  game.music[# "match_end"] = "mus_match_end";
-  game.music[# "victory_tie"] = "mus_defeat";
-  game.music[# "spawn_short"] = "SPAWN_SHORT";
-  game.music[# "suspense"] = [];
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_01";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_02";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_03";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_04";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_05";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_06";
+  game.music[#"defeat"] = "mus_defeat";
+  game.music[#"victory_spectator"] = "mus_defeat";
+  game.music[#"winning"] = "mus_time_running_out_winning";
+  game.music[#"losing"] = "mus_time_running_out_losing";
+  game.music[#"match_end"] = "mus_match_end";
+  game.music[#"victory_tie"] = "mus_defeat";
+  game.music[#"spawn_short"] = "SPAWN_SHORT";
+  game.music[#"suspense"] = [];
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_01";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_02";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_03";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_04";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_05";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_06";
   level callback::function_d8abfc3d(#"on_end_game", &on_end_game);
   level.multipledialogkeys = [];
-  level.multipledialogkeys[# "enemyaitank"] = "enemyAiTankMultiple";
-  level.multipledialogkeys[# "enemysupplydrop"] = "enemySupplyDropMultiple";
-  level.multipledialogkeys[# "enemycombatrobot"] = "enemyCombatRobotMultiple";
-  level.multipledialogkeys[# "enemycounteruav"] = "enemyCounterUavMultiple";
-  level.multipledialogkeys[# "enemydart"] = "enemyDartMultiple";
-  level.multipledialogkeys[# "enemyemp"] = "enemyEmpMultiple";
-  level.multipledialogkeys[# "enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
-  level.multipledialogkeys[# "enemyrcbomb"] = "enemyRcBombMultiple";
-  level.multipledialogkeys[# "enemyplanemortar"] = "enemyPlaneMortarMultiple";
-  level.multipledialogkeys[# "enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
-  level.multipledialogkeys[# "enemyraps"] = "enemyRapsMultiple";
-  level.multipledialogkeys[# "enemydronestrike"] = "enemyDroneStrikeMultiple";
-  level.multipledialogkeys[# "enemyturret"] = "enemyTurretMultiple";
-  level.multipledialogkeys[# "enemyhelicopter"] = "enemyHelicopterMultiple";
-  level.multipledialogkeys[# "enemyuav"] = "enemyUavMultiple";
-  level.multipledialogkeys[# "enemysatellite"] = "enemySatelliteMultiple";
-  level.multipledialogkeys[# "friendlyaitank"] = "";
-  level.multipledialogkeys[# "friendlysupplydrop"] = "";
-  level.multipledialogkeys[# "friendlycombatrobot"] = "";
-  level.multipledialogkeys[# "friendlycounteruav"] = "";
-  level.multipledialogkeys[# "friendlydart"] = "";
-  level.multipledialogkeys[# "friendlyemp"] = "";
-  level.multipledialogkeys[# "friendlymicrowaveturret"] = "";
-  level.multipledialogkeys[# "friendlyrcbomb"] = "";
-  level.multipledialogkeys[# "friendlyplanemortar"] = "";
-  level.multipledialogkeys[# "friendlyhelicoptergunner"] = "";
-  level.multipledialogkeys[# "friendlyraps"] = "";
-  level.multipledialogkeys[# "friendlydronestrike"] = "";
-  level.multipledialogkeys[# "friendlyturret"] = "";
-  level.multipledialogkeys[# "friendlyhelicopter"] = "";
-  level.multipledialogkeys[# "friendlyuav"] = "";
-  level.multipledialogkeys[# "friendlysatellite"] = "";
+  level.multipledialogkeys[#"enemyaitank"] = "enemyAiTankMultiple";
+  level.multipledialogkeys[#"enemysupplydrop"] = "enemySupplyDropMultiple";
+  level.multipledialogkeys[#"enemycombatrobot"] = "enemyCombatRobotMultiple";
+  level.multipledialogkeys[#"enemycounteruav"] = "enemyCounterUavMultiple";
+  level.multipledialogkeys[#"enemydart"] = "enemyDartMultiple";
+  level.multipledialogkeys[#"enemyemp"] = "enemyEmpMultiple";
+  level.multipledialogkeys[#"enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
+  level.multipledialogkeys[#"enemyrcbomb"] = "enemyRcBombMultiple";
+  level.multipledialogkeys[#"enemyplanemortar"] = "enemyPlaneMortarMultiple";
+  level.multipledialogkeys[#"enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
+  level.multipledialogkeys[#"enemyraps"] = "enemyRapsMultiple";
+  level.multipledialogkeys[#"enemydronestrike"] = "enemyDroneStrikeMultiple";
+  level.multipledialogkeys[#"enemyturret"] = "enemyTurretMultiple";
+  level.multipledialogkeys[#"enemyhelicopter"] = "enemyHelicopterMultiple";
+  level.multipledialogkeys[#"enemyuav"] = "enemyUavMultiple";
+  level.multipledialogkeys[#"enemysatellite"] = "enemySatelliteMultiple";
+  level.multipledialogkeys[#"friendlyaitank"] = "";
+  level.multipledialogkeys[#"friendlysupplydrop"] = "";
+  level.multipledialogkeys[#"friendlycombatrobot"] = "";
+  level.multipledialogkeys[#"friendlycounteruav"] = "";
+  level.multipledialogkeys[#"friendlydart"] = "";
+  level.multipledialogkeys[#"friendlyemp"] = "";
+  level.multipledialogkeys[#"friendlymicrowaveturret"] = "";
+  level.multipledialogkeys[#"friendlyrcbomb"] = "";
+  level.multipledialogkeys[#"friendlyplanemortar"] = "";
+  level.multipledialogkeys[#"friendlyhelicoptergunner"] = "";
+  level.multipledialogkeys[#"friendlyraps"] = "";
+  level.multipledialogkeys[#"friendlydronestrike"] = "";
+  level.multipledialogkeys[#"friendlyturret"] = "";
+  level.multipledialogkeys[#"friendlyhelicopter"] = "";
+  level.multipledialogkeys[#"friendlyuav"] = "";
+  level.multipledialogkeys[#"friendlysatellite"] = "";
 }
 
 function_6e084fd3(var_37ecca7, taacombundle) {
   bundlename = undefined;
 
   switch (var_37ecca7) {
-    case # "tank_robot":
+    case #"tank_robot":
       bundlename = taacombundle.aitankdialogbundle;
       break;
-    case # "counteruav":
+    case #"counteruav":
       bundlename = taacombundle.counteruavdialogbundle;
       break;
-    case # "dart":
+    case #"dart":
       bundlename = taacombundle.dartdialogbundle;
       break;
-    case # "drone_squadron":
+    case #"drone_squadron":
       bundlename = taacombundle.var_69a9ca12;
       break;
-    case # "ac130":
+    case #"ac130":
       bundlename = taacombundle.var_71693229;
       break;
-    case # "helicopter_comlink":
+    case #"helicopter_comlink":
       bundlename = taacombundle.helicopterdialogbundle;
       break;
-    case # "overwatch_helicopter":
+    case #"overwatch_helicopter":
       bundlename = taacombundle.overwatchhelicopterdialogbundle;
       break;
-    case # "overwatch_helicopter_snipers":
+    case #"overwatch_helicopter_snipers":
       bundlename = taacombundle.var_4062b33e;
       break;
-    case # "planemortar":
+    case #"planemortar":
       bundlename = taacombundle.planemortardialogbundle;
       break;
-    case # "recon_car":
+    case #"recon_car":
       bundlename = taacombundle.rcbombdialogbundle;
       break;
-    case # "remote_missile":
+    case #"remote_missile":
       bundlename = taacombundle.remotemissiledialogbundle;
       break;
-    case # "straferun":
+    case #"straferun":
       bundlename = taacombundle.straferundialogbundle;
       break;
-    case # "supply_drop":
+    case #"supply_drop":
       bundlename = taacombundle.supplydropdialogbundle;
       break;
-    case # "swat_team":
+    case #"swat_team":
       bundlename = taacombundle.var_d93fd150;
       break;
-    case # "uav":
+    case #"uav":
       bundlename = taacombundle.uavdialogbundle;
       break;
-    case # "ultimate_turret":
+    case #"ultimate_turret":
       bundlename = taacombundle.ultturretdialogbundle;
       break;
     default:
@@ -369,7 +370,7 @@ killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pilotindex,
 }
 
 wait_for_player_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   while(self.playingdialog) {
@@ -380,7 +381,7 @@ wait_for_player_dialog() {
 }
 
 play_next_killstreak_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   if(self.killstreakdialogqueue.size == 0) {
@@ -388,8 +389,8 @@ play_next_killstreak_dialog() {
     return;
   }
 
-  if(isDefined(self.pers[# "mptaacom"])) {
-    taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers[# "mptaacom"]);
+  if(isDefined(self.pers[#"mptaacom"])) {
+    taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers[#"mptaacom"]);
   } else {
     self.killstreakdialogqueue = [];
     self.currentkillstreakdialog = undefined;
@@ -443,7 +444,7 @@ play_next_killstreak_dialog() {
 }
 
 wait_next_killstreak_dialog(waittime) {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
   wait waittime;
   self thread play_next_killstreak_dialog();
@@ -469,11 +470,11 @@ leader_dialog(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbu
   assert(isDefined(level.players));
 
   foreach(player in level.players) {
-    if(!isDefined(player.pers[# "team"])) {
+    if(!isDefined(player.pers[#"team"])) {
       continue;
     }
 
-    if(isDefined(team) && team != player.pers[# "team"]) {
+    if(isDefined(team) && team != player.pers[#"team"]) {
       continue;
     }
 
@@ -564,7 +565,7 @@ leader_dialog_on_player(dialogkey, objectivekey, killstreakid, dialogbufferkey, 
 }
 
 play_next_leader_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   if(!isDefined(self.leaderdialogqueue) || self.leaderdialogqueue.size == 0) {
@@ -615,7 +616,7 @@ play_next_leader_dialog() {
 }
 
 wait_next_leader_dialog(dialogbuffer) {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
   wait dialogbuffer;
   self thread play_next_leader_dialog();
@@ -623,111 +624,111 @@ wait_next_leader_dialog(dialogbuffer) {
 
 dialogkey_priority(dialogkey) {
   switch (dialogkey) {
-    case # "enemydronestrikemultiple":
-    case # "enemyplanemortarmultiple":
-    case # "enemyaitank":
-    case # "enemydronestrike":
-    case # "enemymicrowaveturretmultiple":
-    case # "enemydart":
-    case # "enemydartmultiple":
-    case # "enemyremotemissile":
-    case # "enemyplanemortar":
-    case # "enemycombatrobotmultiple":
-    case # "enemyrcbombmultiple":
-    case # "enemyremotemissilemultiple":
-    case # "enemyrapsmultiple":
-    case # "enemyhelicoptergunner":
-    case # "enemyrcbomb":
-    case # "enemycombatrobot":
-    case # "enemyhelicopter":
-    case # "enemyturret":
-    case # "enemyturretmultiple":
-    case # "enemyhelicoptergunnermultiple":
-    case # "enemyraps":
-    case # "enemyplanemortarused":
-    case # "enemyhelicoptermultiple":
-    case # "enemymicrowaveturret":
-    case # "enemyaitankmultiple":
+    case #"enemydronestrikemultiple":
+    case #"enemyplanemortarmultiple":
+    case #"enemyaitank":
+    case #"enemydronestrike":
+    case #"enemymicrowaveturretmultiple":
+    case #"enemydart":
+    case #"enemydartmultiple":
+    case #"enemyremotemissile":
+    case #"enemyplanemortar":
+    case #"enemycombatrobotmultiple":
+    case #"enemyrcbombmultiple":
+    case #"enemyremotemissilemultiple":
+    case #"enemyrapsmultiple":
+    case #"enemyhelicoptergunner":
+    case #"enemyrcbomb":
+    case #"enemycombatrobot":
+    case #"enemyhelicopter":
+    case #"enemyturret":
+    case #"enemyturretmultiple":
+    case #"enemyhelicoptergunnermultiple":
+    case #"enemyraps":
+    case #"enemyplanemortarused":
+    case #"enemyhelicoptermultiple":
+    case #"enemymicrowaveturret":
+    case #"enemyaitankmultiple":
       return 1;
-    case # "roundencouragelastplayer":
-    case # "gamelosing":
-    case # "nearwinning":
-    case # "gameleadlost":
-    case # "nearlosing":
-    case # "neardrawing":
-    case # "gameleadtaken":
-    case # "gamewinning":
+    case #"roundencouragelastplayer":
+    case #"gamelosing":
+    case #"nearwinning":
+    case #"gameleadlost":
+    case #"nearlosing":
+    case #"neardrawing":
+    case #"gameleadtaken":
+    case #"gamewinning":
       return 1;
-    case # "upltheyuplink":
-    case # "uplorders":
-    case # "sfgrobotneedreboot":
-    case # "domfriendlysecuredall":
-    case # "hubsonline":
-    case # "sfgstarttow":
-    case # "sfgtheyreturn":
-    case # "sfgrobotunderfire":
-    case # "kothonline":
-    case # "bombfriendlytaken":
-    case # "ctffriendlyflagcaptured":
-    case # "sfgrobotrebootedtowdefender":
-    case # "hubmoved":
-    case # "sfgrobotrebootedtowattacker":
-    case # "uplweuplinkremote":
-    case # "bombplanted":
-    case # "uplreset":
-    case # "sfgrobotrebooteddefender":
-    case # "ctfenemyflagdropped":
-    case # "sfgrobotunderfireneutral":
-    case # "ctffriendlyflagdropped":
-    case # "upltheydrop":
-    case # "domenemyhasc":
-    case # "kothcontested":
-    case # "ctfenemyflagtaken":
-    case # "domenemyhasb":
-    case # "uplwedrop":
-    case # "uplweuplink":
-    case # "hubsoffline":
-    case # "domenemysecureda":
-    case # "domenemysecuredb":
-    case # "domenemysecuredc":
-    case # "domenemyhasa":
-    case # "upltransferred":
-    case # "sfgstarthrdefend":
-    case # "upltheyuplinkremote":
-    case # "ctfenemyflagreturned":
-    case # "bombenemytaken":
-    case # "uplwetake":
-    case # "sfgstarthrattack":
-    case # "sfgrobotclosedefender":
-    case # "kothsecured":
-    case # "sfgwereturn":
-    case # "hubsmoved":
-    case # "sfgstartattack":
-    case # "ctfenemyflagcaptured":
-    case # "sfgrobotdisabledattacker":
-    case # "sfgrobotrebootedattacker":
-    case # "hubonline":
-    case # "sfgstartdefend":
-    case # "ctffriendlyflagreturned":
-    case # "ctffriendlyflagtaken":
-    case # "upltheytake":
-    case # "sfgrobotcloseattacker":
-    case # "bombdefused":
-    case # "huboffline":
-    case # "domenemysecuringc":
-    case # "sfgrobotdisableddefender":
-    case # "domfriendlysecuredc":
-    case # "domfriendlysecuredb":
-    case # "domfriendlysecureda":
-    case # "domenemysecuringb":
-    case # "domenemysecuringa":
-    case # "kothcaptured":
-    case # "kothlocated":
-    case # "kothlost":
-    case # "bombfriendlydropped":
-    case # "domfriendlysecuringb":
-    case # "domfriendlysecuringc":
-    case # "domfriendlysecuringa":
+    case #"upltheyuplink":
+    case #"uplorders":
+    case #"sfgrobotneedreboot":
+    case #"domfriendlysecuredall":
+    case #"hubsonline":
+    case #"sfgstarttow":
+    case #"sfgtheyreturn":
+    case #"sfgrobotunderfire":
+    case #"kothonline":
+    case #"bombfriendlytaken":
+    case #"ctffriendlyflagcaptured":
+    case #"sfgrobotrebootedtowdefender":
+    case #"hubmoved":
+    case #"sfgrobotrebootedtowattacker":
+    case #"uplweuplinkremote":
+    case #"bombplanted":
+    case #"uplreset":
+    case #"sfgrobotrebooteddefender":
+    case #"ctfenemyflagdropped":
+    case #"sfgrobotunderfireneutral":
+    case #"ctffriendlyflagdropped":
+    case #"upltheydrop":
+    case #"domenemyhasc":
+    case #"kothcontested":
+    case #"ctfenemyflagtaken":
+    case #"domenemyhasb":
+    case #"uplwedrop":
+    case #"uplweuplink":
+    case #"hubsoffline":
+    case #"domenemysecureda":
+    case #"domenemysecuredb":
+    case #"domenemysecuredc":
+    case #"domenemyhasa":
+    case #"upltransferred":
+    case #"sfgstarthrdefend":
+    case #"upltheyuplinkremote":
+    case #"ctfenemyflagreturned":
+    case #"bombenemytaken":
+    case #"uplwetake":
+    case #"sfgstarthrattack":
+    case #"sfgrobotclosedefender":
+    case #"kothsecured":
+    case #"sfgwereturn":
+    case #"hubsmoved":
+    case #"sfgstartattack":
+    case #"ctfenemyflagcaptured":
+    case #"sfgrobotdisabledattacker":
+    case #"sfgrobotrebootedattacker":
+    case #"hubonline":
+    case #"sfgstartdefend":
+    case #"ctffriendlyflagreturned":
+    case #"ctffriendlyflagtaken":
+    case #"upltheytake":
+    case #"sfgrobotcloseattacker":
+    case #"bombdefused":
+    case #"huboffline":
+    case #"domenemysecuringc":
+    case #"sfgrobotdisableddefender":
+    case #"domfriendlysecuredc":
+    case #"domfriendlysecuredb":
+    case #"domfriendlysecureda":
+    case #"domenemysecuringb":
+    case #"domenemysecuringa":
+    case #"kothcaptured":
+    case #"kothlocated":
+    case #"kothlost":
+    case #"bombfriendlydropped":
+    case #"domfriendlysecuringb":
+    case #"domfriendlysecuringc":
+    case #"domfriendlysecuringa":
       return 1;
   }
 
@@ -743,11 +744,11 @@ play_equipment_hacked_on_player() {
 }
 
 get_commander_dialog_alias(dialogkey) {
-  if(!isDefined(self.pers[# "mpcommander"])) {
+  if(!isDefined(self.pers[#"mpcommander"])) {
     return undefined;
   }
 
-  commanderbundle = struct::get_script_bundle("mpdialog_commander", self.pers[# "mpcommander"]);
+  commanderbundle = struct::get_script_bundle("mpdialog_commander", self.pers[#"mpcommander"]);
   return get_dialog_bundle_alias(commanderbundle, dialogkey);
 }
 
@@ -772,11 +773,11 @@ get_dialog_bundle_alias(dialogbundle, dialogkey) {
 }
 
 is_team_winning(checkteam) {
-  score = game.stat[# "teamscores"][checkteam];
+  score = game.stat[#"teamscores"][checkteam];
 
   foreach(team, _ in level.teams) {
     if(team != checkteam) {
-      if(game.stat[# "teamscores"][team] >= score) {
+      if(game.stat[#"teamscores"][team] >= score) {
         return false;
       }
     }
@@ -803,7 +804,7 @@ play_2d_on_team(alias, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player playlocalsound(alias);
     }
   }
@@ -879,19 +880,19 @@ sndmusicunlock() {
   unlockname = undefined;
 
   switch (game.musicset) {
-    case # "_01":
+    case #"_01":
       unlockname = "mus_dystopia_intro";
       break;
-    case # "_02":
+    case #"_02":
       unlockname = "mus_filter_intro";
       break;
-    case # "_03":
+    case #"_03":
       unlockname = "mus_immersion_intro";
       break;
-    case # "_04":
+    case #"_04":
       unlockname = "mus_ruin_intro";
       break;
-    case # "_05":
+    case #"_05":
       unlockname = "mus_cod_bites_intro";
       break;
   }
@@ -902,7 +903,7 @@ sndmusicunlock() {
 }
 
 sndmusictimesout() {
-  level endon(#"game_ended", # "musicendingoverride");
+  level endon(#"game_ended", #"musicendingoverride");
   level waittill(#"match_ending_very_soon");
 
   if(isDefined(level.gametype) && level.gametype == "sd") {
@@ -914,13 +915,13 @@ sndmusictimesout() {
 }
 
 sndmusichalfway() {
-  level endon(#"game_ended", # "match_ending_soon", # "match_ending_very_soon");
+  level endon(#"game_ended", #"match_ending_soon", #"match_ending_very_soon");
   level waittill(#"sndmusichalfway");
   level thread set_music_on_team("underscore");
 }
 
 sndmusictimelimitwatcher() {
-  level endon(#"game_ended", # "match_ending_soon", # "match_ending_very_soon", # "sndmusichalfway");
+  level endon(#"game_ended", #"match_ending_soon", #"match_ending_very_soon", #"sndmusichalfway");
 
   if(!isDefined(level.timelimit) || level.timelimit == 0) {
     return;
@@ -949,7 +950,7 @@ set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, return_st
       continue;
     }
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
     }
   }
@@ -1009,11 +1010,11 @@ function_85818e24(var_9c1ed9ea, team) {
 
   if(isDefined(team)) {
     foreach(player in level.players) {
-      if(!isDefined(player.pers[# "team"])) {
+      if(!isDefined(player.pers[#"team"])) {
         continue;
       }
 
-      if(isDefined(team) && team != player.pers[# "team"]) {
+      if(isDefined(team) && team != player.pers[#"team"]) {
         continue;
       }
 

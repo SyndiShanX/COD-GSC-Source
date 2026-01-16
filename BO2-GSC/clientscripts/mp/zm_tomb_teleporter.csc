@@ -17,9 +17,8 @@ teleporter_fx_play(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   self endon("disconnect");
 
   if(newval == 1) {
-    if(!isDefined(self.fx_teleport)) {
-      self.fx_teleport = playFXOnTag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
-    }
+    if(!isDefined(self.fx_teleport))
+      self.fx_teleport = playfxontag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
   } else if(isDefined(self.fx_teleport)) {
     stopfx(localclientnum, self.fx_teleport);
     self.fx_teleport = undefined;
@@ -35,9 +34,8 @@ teleporter_door_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(newval) {
-    if(!first_time_run) {
+    if(!first_time_run)
       self clearanim( % fxanim_zom_tomb_portal_collapse_anim, 0);
-    }
 
     self setanim( % fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
   } else {

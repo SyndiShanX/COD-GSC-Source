@@ -51,7 +51,7 @@ function init_hendricks(str_objective) {
 function kill_previous_spawns(spawn_str) {
   if(!spawn_manager::is_killed(spawn_str) && spawn_manager::is_enabled(spawn_str)) {
     a_enemies = spawn_manager::get_ai(spawn_str);
-    if(isDefined(a_enemies)) {
+    if(isdefined(a_enemies)) {
       foreach(ai in a_enemies) {
         ai util::stop_magic_bullet_shield();
         ai kill();
@@ -64,9 +64,9 @@ function kill_previous_spawns(spawn_str) {
 }
 
 function group_triggers_enable(str_group, b_enable) {
-  a_triggers = getEntArray(str_group, "script_noteworthy");
-  assert(isDefined(a_triggers), str_group + "");
-  if(isDefined(a_triggers)) {
+  a_triggers = getentarray(str_group, "script_noteworthy");
+  assert(isdefined(a_triggers), str_group + "");
+  if(isdefined(a_triggers)) {
     foreach(trigger in a_triggers) {
       trigger triggerenable(b_enable);
     }
@@ -105,7 +105,7 @@ function player_interact_anim_generic(n_duration = 1) {
     self switchtoweapon(weapon_current);
   } else {
     primaryweapons = self getweaponslistprimaries();
-    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
     }
   }
@@ -120,15 +120,15 @@ function function_f61c0df8(var_e39815ad, n_time_min, n_time_max) {
 
 function aigroup_retreat(str_aigroup, str_volume, n_delay_min = 0, n_delay_max = 0) {
   a_enemies = spawner::get_ai_group_ai(str_aigroup);
-  if(isDefined(a_enemies)) {
+  if(isdefined(a_enemies)) {
     a_enemies set_group_goal_volume(str_volume, n_delay_min, n_delay_max);
   }
 }
 
 function set_group_goal_volume(str_volume, n_delay_min = 0, n_delay_max = 0) {
   volume = getent(str_volume, "targetname");
-  assert(isDefined(volume), ("" + str_volume) + "");
-  if(isDefined(volume)) {
+  assert(isdefined(volume), ("" + str_volume) + "");
+  if(isdefined(volume)) {
     foreach(ai in self) {
       if(isalive(ai)) {
         ai setgoal(volume, 1);

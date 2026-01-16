@@ -226,20 +226,18 @@ CancelAllBut(doNotCancel) {
   bCheckDoNotCancel = isDefined(doNotCancel);
 
   foreach(cleanup in cleanups) {
-    if(bCheckDoNotCancel && cleanup == doNotCancel) {
+    if(bCheckDoNotCancel && cleanup == doNotCancel)
       continue;
-    }
     self notify("dogmove_endwait_" + cleanup);
   }
 }
 
 StartMove() {
   negStartNode = self GetNegotiationStartNode();
-  if(isDefined(negStartNode)) {
+  if(isDefined(negStartNode))
     goalPos = negStartNode.origin;
-  } else {
+  else
     goalPos = self GetPathGoalPos();
-  }
 
   if(DistanceSquared(goalPos, self.origin) < 100 * 100) {
     return;
@@ -250,9 +248,8 @@ StartMove() {
   myVelocity = self GetVelocity();
   if(Length2DSquared(myVelocity) > 16) {
     myVelocity = VectorNormalize(myVelocity);
-    if(VectorDot(myVelocity, lookaheadDir) > 0.707) {
+    if(VectorDot(myVelocity, lookaheadDir) > 0.707)
       return;
-    }
   }
 
   angleDiff = AngleClamp180(lookaheadAngles[1] - self.angles[1]);
@@ -268,11 +265,10 @@ StartMove() {
   startAnimAngles = GetAngleDelta3D(startAnim);
 
   self ScrAgentSetAnimMode("anim deltas");
-  if(3 <= angleIndex && angleIndex <= 5) {
+  if(3 <= angleIndex && angleIndex <= 5)
     self ScrAgentSetOrientMode("face angle abs", (0, AngleClamp180(lookaheadAngles[1] - startAnimAngles[1]), 0));
-  } else {
+  else
     self ScrAgentSetOrientMode("face angle abs", self.angles);
-  }
 
   self.bLockGoalPos = true;
 
@@ -331,9 +327,8 @@ Dog_AddLean() {
 }
 
 HandleFootstepNotetracks(note, animState, animIndex, animTime) {
-  if(true) {
+  if(true)
     return false;
-  }
 
   switch (note) {
     case "footstep_front_left_small":
@@ -354,23 +349,20 @@ HandleFootstepNotetracks(note, animState, animIndex, animTime) {
         surfaceType = "dirt";
       }
 
-      if(surfaceType != "dirt" && surfaceType != "concrete" && surfaceType != "wood" && surfaceType != "metal") {
+      if(surfaceType != "dirt" && surfaceType != "concrete" && surfaceType != "wood" && surfaceType != "metal")
         surfaceType = "dirt";
-      }
 
-      if(surfaceType == "concrete") {
+      if(surfaceType == "concrete")
         surfaceType = "cement";
-      }
 
-      if(self.aiState == "traverse") {
+      if(self.aiState == "traverse")
         moveType = "land";
-      } else if(self.moveMode == "sprint") {
+      else if(self.moveMode == "sprint")
         moveType = "sprint";
-      } else if(self.moveMode == "fastwalk") {
+      else if(self.moveMode == "fastwalk")
         moveType = "walk";
-      } else {
+      else
         moveType = "run";
-      }
 
       self PlaySoundOnMovingEnt("dogstep_" + moveType + "_" + surfaceType);
 
@@ -378,11 +370,10 @@ HandleFootstepNotetracks(note, animState, animIndex, animTime) {
         soundAlias1 = "anml_dog_mvmt_accent";
         soundAlias2 = "anml_dog_mvmt_vest";
 
-        if(moveType == "walk") {
+        if(moveType == "walk")
           suffix = "_npc";
-        } else {
+        else
           suffix = "_run_npc";
-        }
 
         self PlaySoundOnMovingEnt(soundAlias1 + suffix);
         self PlaySoundOnMovingEnt(soundAlias2 + suffix);
@@ -403,11 +394,10 @@ DoHitReaction(hitAngle) {
 
   angleDiff = AngleClamp180(hitAngle - self.angles[1]);
 
-  if(angleDiff > 0) {
+  if(angleDiff > 0)
     animIndex = 1;
-  } else {
+  else
     animIndex = 0;
-  }
 
   self ScrAgentSetAnimMode("anim deltas");
   self ScrAgentSetOrientMode("face angle abs", self.angles);

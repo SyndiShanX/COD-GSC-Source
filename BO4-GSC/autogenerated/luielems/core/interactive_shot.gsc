@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace interactive_shot;
 
 class cinteractive_shot: cluielem {

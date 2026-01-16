@@ -26,11 +26,11 @@
 #namespace zm_castle_flingers;
 
 function function_976c9217() {
-  zm::register_player_damage_callback(&function_4b3d145d);
+  zm::register_player_damage_callback( & function_4b3d145d);
   var_fa27add4 = struct::get_array("115_flinger_pad_aimer", "targetname");
-  array::thread_all(var_fa27add4, &function_5ecbd7cb);
+  array::thread_all(var_fa27add4, & function_5ecbd7cb);
   var_a6e47643 = struct::get_array("115_flinger_landing_pad", "targetname");
-  array::thread_all(var_a6e47643, &function_cc8f94df);
+  array::thread_all(var_a6e47643, & function_cc8f94df);
   level thread function_979004a();
   register_clientfields();
   level._effect["flinger_land_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
@@ -48,17 +48,17 @@ function function_5ecbd7cb() {
   level waittill("start_zombie_round_logic");
   var_845e036a = getent(self.target, "targetname");
   vol_fling = getent(var_845e036a.target, "targetname");
-  var_845e036a setModel("p7_zm_ctl_jumpsphere_combined_snow");
-  v_fling = anglesToForward(self.angles) * self.script_int;
-  s_unitrigger_stub = spawnStruct();
+  var_845e036a setmodel("p7_zm_ctl_jumpsphere_combined_snow");
+  v_fling = anglestoforward(self.angles) * self.script_int;
+  s_unitrigger_stub = spawnstruct();
   s_unitrigger_stub.origin = self.origin + vectorscale((0, 0, 1), 30);
   s_unitrigger_stub.radius = 64;
   s_unitrigger_stub.hint_parm1 = 500;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger_stub, 1);
-  s_unitrigger_stub.prompt_and_visibility_func = &function_485001bf;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
+  s_unitrigger_stub.prompt_and_visibility_func = & function_485001bf;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
   var_81b99a73 = self.script_noteworthy;
   s_unitrigger_stub thread function_52d18d43(var_81b99a73, 500);
   var_3432399a = var_845e036a.target + "_spline";
@@ -66,8 +66,8 @@ function function_5ecbd7cb() {
   var_df826fd8 = nd_start function_53f4df();
   level flag::wait_till(var_81b99a73);
   var_845e036a thread function_2f34da41();
-  while(true) {
-    var_845e036a setModel("p7_zm_ctl_jumpsphere_combined_snow_blue");
+  while (true) {
+    var_845e036a setmodel("p7_zm_ctl_jumpsphere_combined_snow_blue");
     var_845e036a thread function_cc3a384b(1);
     s_unitrigger_stub waittill("trigger", e_who);
     if(level flag::get("rocket_firing") && s_unitrigger_stub.in_zone === "zone_rooftop") {
@@ -81,21 +81,21 @@ function function_5ecbd7cb() {
       zm_unitrigger::unregister_unitrigger(s_unitrigger_stub);
     }
     s_unitrigger_stub notify("hash_4baa9cb4");
-    var_df826fd8 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
+    var_df826fd8 setmodel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
     var_df826fd8 clientfield::set("flinger_pad_active_fx", 1);
     n_timer = 0;
-    vol_fling playSound("zmb_fling_activate");
-    while(n_timer <= 3) {
+    vol_fling playsound("zmb_fling_activate");
+    while (n_timer <= 3) {
       a_ai_zombies = zombie_utility::get_zombie_array();
       a_ai_zombies = function_3dcd0982(a_ai_zombies, vol_fling);
       if(a_ai_zombies.size) {
-        array::thread_all(a_ai_zombies, &function_e9d3c391, vol_fling, v_fling, nd_start);
+        array::thread_all(a_ai_zombies, & function_e9d3c391, vol_fling, v_fling, nd_start);
       } else {
         var_7092e170 = function_3dcd0982(level.activeplayers, vol_fling);
         if(var_7092e170.size > 1) {
           var_7092e170 thread function_f7842163(vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
         } else {
-          array::thread_all(var_7092e170, &function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
+          array::thread_all(var_7092e170, & function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
         }
       }
       n_timer = n_timer + 0.1;
@@ -104,25 +104,25 @@ function function_5ecbd7cb() {
     var_845e036a thread function_5205dda3(var_df826fd8);
     wait(15);
     s_unitrigger_stub notify("hash_7edb4c9b");
-    zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
-    var_df826fd8 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
-    var_df826fd8 playSound("zmb_fling_activate");
+    zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
+    var_df826fd8 setmodel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
+    var_df826fd8 playsound("zmb_fling_activate");
   }
 }
 
 function function_5205dda3(var_df826fd8) {
-  while(isDefined(function_21a777b0()) && function_21a777b0()) {
+  while (isdefined(function_21a777b0()) && function_21a777b0()) {
     wait(0.1);
   }
   var_df826fd8 clientfield::set("flinger_pad_active_fx", 0);
-  var_df826fd8 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow_red");
-  self setModel("p7_zm_ctl_jumpsphere_combined_snow_red");
+  var_df826fd8 setmodel("p7_zm_ctl_jumpsphere_landing_pad_snow_red");
+  self setmodel("p7_zm_ctl_jumpsphere_combined_snow_red");
   self thread function_cc3a384b(0);
 }
 
 function function_21a777b0() {
   foreach(e_player in level.activeplayers) {
-    if(isDefined(e_player.is_flung) && e_player.is_flung || (isDefined(e_player.var_9a017681) && e_player.var_9a017681)) {
+    if(isdefined(e_player.is_flung) && e_player.is_flung || (isdefined(e_player.var_9a017681) && e_player.var_9a017681)) {
       return true;
     }
   }
@@ -132,7 +132,7 @@ function function_21a777b0() {
 function function_52d18d43(var_81b99a73, n_cost) {
   self function_e2ae5aa6(&"ZM_CASTLE_FLING_LOCKED");
   level flag::wait_till(var_81b99a73);
-  while(true) {
+  while (true) {
     self function_e2ae5aa6(&"ZM_CASTLE_FLING_AVAILABLE", n_cost);
     self waittill("hash_4baa9cb4");
     self function_e2ae5aa6(&"ZM_CASTLE_FLING_COOLDOWN");
@@ -144,13 +144,13 @@ function function_e2ae5aa6(str_message, param1) {
   self.hint_string = str_message;
   self.hint_parm1 = param1;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_static_unitrigger(self, &unitrigger_think);
+  zm_unitrigger::register_static_unitrigger(self, & unitrigger_think);
 }
 
 function unitrigger_think() {
   self endon("kill_trigger");
   self.stub thread unitrigger_refresh_message();
-  while(true) {
+  while (true) {
     self waittill("trigger", var_4161ad80);
     self.stub notify("trigger", var_4161ad80);
   }
@@ -160,12 +160,12 @@ function unitrigger_refresh_message() {
   self zm_unitrigger::run_visibility_function_for_all_triggers();
 }
 
-function function_3dcd0982(&array, var_8d88ae81) {
-  return array::filter(array, 0, &function_a78c631a, var_8d88ae81);
+function function_3dcd0982( & array, var_8d88ae81) {
+  return array::filter(array, 0, & function_a78c631a, var_8d88ae81);
 }
 
 function function_a78c631a(val, var_8d88ae81) {
-  return isalive(val) && (!(isDefined(val.is_flung) && val.is_flung)) && (!(isDefined(val.var_9a017681) && val.var_9a017681)) && val istouching(var_8d88ae81);
+  return isalive(val) && (!(isdefined(val.is_flung) && val.is_flung)) && (!(isdefined(val.var_9a017681) && val.var_9a017681)) && val istouching(var_8d88ae81);
 }
 
 function function_2f34da41() {
@@ -243,11 +243,11 @@ function function_cc3a384b(b_active) {
 }
 
 function function_f7842163(var_ca34f349, v_fling, nd_start, var_173065cc, var_df826fd8) {
-  for(i = 0; i < self.size; i++) {
+  for (i = 0; i < self.size; i++) {
     self[i].var_9a017681 = 1;
   }
-  for(i = 0; i < self.size; i++) {
-    if(self[i] istouching(var_ca34f349) && (isDefined(self[i].var_9a017681) && self[i].var_9a017681)) {
+  for (i = 0; i < self.size; i++) {
+    if(self[i] istouching(var_ca34f349) && (isdefined(self[i].var_9a017681) && self[i].var_9a017681)) {
       self[i] thread function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df826fd8);
       wait(0.25);
     }
@@ -267,7 +267,7 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
     self thread function_149a5187();
     self enableinvulnerability();
     self.is_flung = 1;
-    while(self isslamming()) {
+    while (self isslamming()) {
       util::wait_network_frame();
     }
     self zm_utility::create_streamer_hint(var_df826fd8.origin, self.angles, 1);
@@ -281,14 +281,14 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
         self setstance("stand");
       }
     }
-    self playSound("zmb_fling_fly");
+    self playsound("zmb_fling_fly");
     var_413ea50f = vehicle::spawn(undefined, "player_vehicle", "flinger_vehicle", nd_start.origin, nd_start.angles);
     self playerlinktodelta(var_413ea50f);
     self thread function_44659337(nd_start, var_ca34f349, v_fling);
     self playrumbleonentity("zm_castle_flinger_launch");
     self clientfield::set_to_player("flinger_flying_postfx", 1);
     self thread function_c1f1756a();
-    if(isDefined(var_173065cc)) {
+    if(isdefined(var_173065cc)) {
       var_173065cc clientfield::increment("flinger_launch_fx");
     }
     var_6a7beeb2 = function_cbac68fe(self);
@@ -301,7 +301,7 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
     }
     var_6a7beeb2 thread scene::play("cin_zm_dlc1_jump_pad_air_loop", var_6a7beeb2);
     var_6a7beeb2 clientfield::set("player_visibility", 1);
-    if(isDefined(var_f5434f17)) {
+    if(isdefined(var_f5434f17)) {
       var_f5434f17 clientfield::set("player_visibility", 1);
     }
     self ghost();
@@ -314,11 +314,11 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
     self playrumbleonentity("zm_castle_flinger_land");
     self clientfield::set_to_player("flinger_flying_postfx", 0);
     var_6a7beeb2 clientfield::set("player_visibility", 0);
-    if(isDefined(var_f5434f17)) {
+    if(isdefined(var_f5434f17)) {
       var_f5434f17 clientfield::set("player_visibility", 0);
     }
     var_6a7beeb2 thread scene::stop("cin_zm_dlc1_jump_pad_air_loop");
-    if(isDefined(var_f5434f17)) {
+    if(isdefined(var_f5434f17)) {
       var_f5434f17 delete();
     }
     self show();
@@ -328,7 +328,7 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
       self allowcrouch(1);
       self allowprone(1);
     }
-    self playSound("zmb_fling_land");
+    self playsound("zmb_fling_land");
     var_6a7beeb2 hide();
     util::wait_network_frame();
     var_6a7beeb2 delete();
@@ -356,7 +356,7 @@ function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df
       util::wait_network_frame();
       self dodamage(self.health, self.origin);
       level.zombie_total++;
-      while(self istouching(var_ca34f349)) {
+      while (self istouching(var_ca34f349)) {
         wait(0.1);
       }
       self.is_flung = undefined;
@@ -370,9 +370,9 @@ function function_9f131b98() {
 }
 
 function function_d1736cb5() {
-  if(!isDefined(level.var_d69af29) || (gettime() - level.var_d69af29) > 30000) {
+  if(!isdefined(level.var_d69af29) || (gettime() - level.var_d69af29) > 30000) {
     var_323d1645 = randomint(5);
-    while(var_323d1645 === self.var_9a3fa33b) {
+    while (var_323d1645 === self.var_9a3fa33b) {
       var_323d1645 = randomint(5);
     }
     if(zm_castle_vo::function_68ee653()) {
@@ -390,7 +390,7 @@ function function_cbac68fe(e_player) {
   var_629f4b8 = spawn("script_model", e_player.origin);
   var_629f4b8.angles = e_player.angles;
   mdl_body = e_player getcharacterbodymodel();
-  var_629f4b8 setModel(mdl_body);
+  var_629f4b8 setmodel(mdl_body);
   bodyrenderoptions = e_player getcharacterbodyrenderoptions();
   var_629f4b8 setbodyrenderoptions(bodyrenderoptions, bodyrenderoptions, bodyrenderoptions);
   var_629f4b8.health = 100;
@@ -404,12 +404,12 @@ function function_74d2bb99(nd_start) {
   self endon("death");
   self endon("reached_end_node");
   var_5f7e3f41 = nd_start;
-  while(isDefined(var_5f7e3f41)) {
+  while (isdefined(var_5f7e3f41)) {
     self waittill("reached_node", var_5f7e3f41);
     nd_last = var_5f7e3f41;
     var_5f7e3f41 = undefined;
     var_5f7e3f41 = getvehiclenode(nd_last.target, "targetname");
-    if(isDefined(var_5f7e3f41) && isDefined(var_5f7e3f41.speed)) {
+    if(isdefined(var_5f7e3f41) && isdefined(var_5f7e3f41.speed)) {
       var_2a07f017 = var_5f7e3f41.speed / 17.6;
       var_db94396f = self getspeedmph();
       if(var_db94396f != var_2a07f017) {
@@ -421,7 +421,7 @@ function function_74d2bb99(nd_start) {
 }
 
 function function_c1f1756a() {
-  while(isDefined(self.is_flung) && self.is_flung) {
+  while (isdefined(self.is_flung) && self.is_flung) {
     self playrumbleonentity("zod_beast_grapple_reel");
     wait(0.2);
   }
@@ -430,13 +430,13 @@ function function_c1f1756a() {
 function function_3298b25f(nd_start) {
   var_a05a47c7 = nd_start function_fbd80603();
   var_16f5c370 = var_a05a47c7.origin;
-  while(positionwouldtelefrag(var_16f5c370)) {
+  while (positionwouldtelefrag(var_16f5c370)) {
     util::wait_network_frame();
     var_16f5c370 = var_a05a47c7.origin + (randomfloatrange(-24, 24), randomfloatrange(-24, 24), 0);
   }
   self unlink();
   self setorigin(var_16f5c370);
-  if(isDefined(self.var_3048ac6d) && self.var_3048ac6d) {
+  if(isdefined(self.var_3048ac6d) && self.var_3048ac6d) {
     self freezecontrols(1);
   }
   self clientfield::increment_to_player("flinger_land_smash");
@@ -447,8 +447,8 @@ function function_3298b25f(nd_start) {
 function function_fbd80603() {
   var_df826fd8 = self function_53f4df();
   a_s_spots = struct::get_array(var_df826fd8.target, "targetname");
-  for(i = 0; i < a_s_spots.size; i++) {
-    for(j = i; j < a_s_spots.size; j++) {
+  for (i = 0; i < a_s_spots.size; i++) {
+    for (j = i; j < a_s_spots.size; j++) {
       if(a_s_spots[j].script_int < a_s_spots[i].script_int) {
         temp = a_s_spots[i];
         a_s_spots[i] = a_s_spots[j];
@@ -456,8 +456,8 @@ function function_fbd80603() {
       }
     }
   }
-  for(i = 0; i < a_s_spots.size; i++) {
-    if(!(isDefined(a_s_spots[i].occupied) && a_s_spots[i].occupied)) {
+  for (i = 0; i < a_s_spots.size; i++) {
+    if(!(isdefined(a_s_spots[i].occupied) && a_s_spots[i].occupied)) {
       a_s_spots[i].occupied = 1;
       return a_s_spots[i];
     }
@@ -488,16 +488,16 @@ function function_53f4df() {
 function function_44659337(nd_target, var_ca34f349, v_fling) {
   a_ai = getaiteamarray(level.zombie_team);
   a_sorted_ai = arraysortclosest(a_ai, nd_target.origin, a_ai.size, 0, 512);
-  array::thread_all(a_sorted_ai, &function_1a4837ab, nd_target, self, var_ca34f349, v_fling);
+  array::thread_all(a_sorted_ai, & function_1a4837ab, nd_target, self, var_ca34f349, v_fling);
 }
 
 function function_1a4837ab(nd_target, e_target, var_ca34f349, v_fling) {
   self endon("death");
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
+  if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
     return;
   }
   var_c95b4513 = [];
-  for(i = 0; i < level.activeplayers.size; i++) {
+  for (i = 0; i < level.activeplayers.size; i++) {
     if(level.activeplayers[i] != e_target) {
       array::add(var_c95b4513, level.activeplayers[i]);
     }
@@ -514,7 +514,7 @@ function function_1a4837ab(nd_target, e_target, var_ca34f349, v_fling) {
     self.ignoreall = 0;
     n_end_time = gettime();
     n_total_time = (n_end_time - n_start_time) / 1000;
-    if(!(isDefined(self.is_flung) && self.is_flung) && n_total_time < 6) {
+    if(!(isdefined(self.is_flung) && self.is_flung) && n_total_time < 6) {
       self thread function_e9d3c391(var_ca34f349, v_fling, nd_target);
     }
   }
@@ -534,7 +534,7 @@ function function_29c06608() {
 function zombie_slam_direction(ai_zombie) {
   v_zombie_to_player = self.origin - ai_zombie.origin;
   v_zombie_to_player_2d = vectornormalize((v_zombie_to_player[0], v_zombie_to_player[1], 0));
-  v_zombie_forward = anglesToForward(ai_zombie.angles);
+  v_zombie_forward = anglestoforward(ai_zombie.angles);
   v_zombie_forward_2d = vectornormalize((v_zombie_forward[0], v_zombie_forward[1], 0));
   v_zombie_right = anglestoright(ai_zombie.angles);
   v_zombie_right_2d = vectornormalize((v_zombie_right[0], v_zombie_right[1], 0));
@@ -566,29 +566,29 @@ function zombie_slam_direction(ai_zombie) {
 }
 
 function function_4b3d145d(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(isDefined(self.is_flung) && self.is_flung) {
+  if(isdefined(self.is_flung) && self.is_flung) {
     return 0;
   }
   return -1;
 }
 
 function function_485001bf() {
-  str_msg = &"";
+  str_msg = & "";
   str_msg = self.stub.hint_string;
   param1 = self.stub.hint_parm1;
   if(level flag::get("rocket_firing") && self.stub.in_zone === "zone_rooftop") {
     self sethintstring(&"ZM_CASTLE_WUNDERSPHERE_LOCKED");
     return false;
   }
-  if(isDefined(param1)) {
+  if(isdefined(param1)) {
     self sethintstring(str_msg, param1);
   } else {
-    if(isDefined(self.stub.flag_name) && level flag::get(self.stub.flag_name) == 1) {
+    if(isdefined(self.stub.flag_name) && level flag::get(self.stub.flag_name) == 1) {
       self sethintstring("");
     } else {
       self sethintstring(str_msg);
       if(str_msg == (&"ZM_CASTLE_FLING_LOCKED")) {
-        if(!isDefined(level.var_4f91b555) || !isDefined(level.var_4f91b555["sphere_" + self.stub.in_zone]) || (gettime() - (level.var_4f91b555["sphere_" + self.stub.in_zone])) > 11000) {
+        if(!isdefined(level.var_4f91b555) || !isdefined(level.var_4f91b555["sphere_" + self.stub.in_zone]) || (gettime() - (level.var_4f91b555["sphere_" + self.stub.in_zone])) > 11000) {
           level.var_4f91b555["sphere_" + self.stub.in_zone] = gettime();
           playsoundatposition("vox_maxis_pad_pa_unable_0", self.origin);
         }
@@ -601,7 +601,7 @@ function function_485001bf() {
 function function_4029cf56() {
   self endon("kill_trigger");
   self.stub thread zm_unitrigger::run_visibility_function_for_all_triggers();
-  while(true) {
+  while (true) {
     self waittill("trigger", var_4161ad80);
     self.stub notify("trigger", var_4161ad80);
   }
@@ -611,31 +611,31 @@ function function_cc8f94df() {
   var_9ca35935 = self.script_noteworthy;
   level flag::init(var_9ca35935);
   var_1143aa58 = getent(self.target, "targetname");
-  var_1143aa58 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow");
-  s_unitrigger_stub = spawnStruct();
+  var_1143aa58 setmodel("p7_zm_ctl_jumpsphere_landing_pad_snow");
+  s_unitrigger_stub = spawnstruct();
   s_unitrigger_stub.origin = self.origin + vectorscale((0, 0, 1), 30);
   s_unitrigger_stub.radius = 50;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   s_unitrigger_stub.flag_name = var_9ca35935;
-  s_unitrigger_stub.prompt_and_visibility_func = &function_485001bf;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
+  s_unitrigger_stub.prompt_and_visibility_func = & function_485001bf;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
   s_unitrigger_stub function_e2ae5aa6(&"ZM_CASTLE_ENABLE_LANDING_PAD");
   s_unitrigger_stub waittill("trigger", e_who);
-  var_1143aa58 playSound("evt_launchpad_on");
+  var_1143aa58 playsound("evt_launchpad_on");
   if(level zm_utility::is_player_valid(e_who)) {
     playsoundatposition("vox_maxis_pad_pa_activate_0", e_who.origin);
     e_who playrumbleonentity("zm_castle_interact_rumble");
   }
   zm_unitrigger::unregister_unitrigger(s_unitrigger_stub);
   level flag::set(var_9ca35935);
-  var_1143aa58 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
+  var_1143aa58 setmodel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
 }
 
 function function_979004a() {
   level waittill("start_zombie_round_logic");
   var_7d3b9ef4 = getent("trig_115_lift", "targetname");
-  while(true) {
+  while (true) {
     var_7d3b9ef4 waittill("trigger", e_player);
     if(zm_utility::is_player_valid(e_player)) {
       e_player thread function_ab3112dc(var_7d3b9ef4);
@@ -645,15 +645,15 @@ function function_979004a() {
 }
 
 function function_ab3112dc(var_16a4e32) {
-  if(!(isDefined(self.var_c7a6615d) && self.var_c7a6615d)) {
+  if(!(isdefined(self.var_c7a6615d) && self.var_c7a6615d)) {
     var_2d04a37c = randomfloatrange(1.4, 1.7);
     self.var_c7a6615d = 1;
     n_start_time = gettime();
-    if(!isDefined(level.var_bf38980c) || (gettime() - level.var_bf38980c) > 7000) {
+    if(!isdefined(level.var_bf38980c) || (gettime() - level.var_bf38980c) > 7000) {
       level.var_bf38980c = gettime();
       playsoundatposition("vox_maxis_pad_pa_use_0", self.origin);
     }
-    while(self istouching(var_16a4e32) && (!(isDefined(self.is_flung) && self.is_flung))) {
+    while (self istouching(var_16a4e32) && (!(isdefined(self.is_flung) && self.is_flung))) {
       self playrumbleonentity("zod_beast_grapple_reel");
       n_current_time = gettime();
       n_time = (n_current_time - n_start_time) / 1000;
@@ -681,7 +681,7 @@ function function_894853cb(var_16a4e32) {
       self setstance("stand");
     }
   }
-  self playSound("zmb_fling_fly");
+  self playsound("zmb_fling_fly");
   var_413ea50f = vehicle::spawn(undefined, "player_vehicle", "flinger_vehicle", nd_start.origin, nd_start.angles);
   self linkto(var_413ea50f);
   self disableweaponcycling();
@@ -699,13 +699,13 @@ function function_894853cb(var_16a4e32) {
   }
   var_6a7beeb2 thread scene::play("cin_zm_dlc1_jump_pad_air_loop", var_6a7beeb2);
   var_6a7beeb2 clientfield::set("player_visibility", 1);
-  if(isDefined(var_f5434f17)) {
+  if(isdefined(var_f5434f17)) {
     var_f5434f17 clientfield::set("player_visibility", 1);
   }
   self ghost();
   var_413ea50f notsolid();
   var_6a7beeb2 notsolid();
-  if(isDefined(var_f5434f17)) {
+  if(isdefined(var_f5434f17)) {
     var_f5434f17 notsolid();
   }
   var_413ea50f setignorepauseworld(1);
@@ -718,12 +718,12 @@ function function_894853cb(var_16a4e32) {
   self playrumbleonentity("zm_castle_well_land");
   self clientfield::set_to_player("flinger_flying_postfx", 0);
   var_6a7beeb2 clientfield::set("player_visibility", 0);
-  if(isDefined(var_f5434f17)) {
+  if(isdefined(var_f5434f17)) {
     var_f5434f17 clientfield::set("player_visibility", 0);
   }
   var_6a7beeb2 thread scene::stop("cin_zm_dlc1_jump_pad_air_loop");
   var_6a7beeb2 hide();
-  if(isDefined(var_f5434f17)) {
+  if(isdefined(var_f5434f17)) {
     var_f5434f17 delete();
   }
   self show();
@@ -736,7 +736,7 @@ function function_894853cb(var_16a4e32) {
     self allowprone(1);
   }
   self thread function_9f131b98();
-  self playSound("zmb_fling_land");
+  self playsound("zmb_fling_land");
   util::wait_network_frame();
   var_6a7beeb2 delete();
   self.is_flung = undefined;

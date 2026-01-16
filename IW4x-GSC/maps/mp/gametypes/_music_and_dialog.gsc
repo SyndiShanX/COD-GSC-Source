@@ -8,6 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
+
   game["music"]["spawn_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "spawn_music";
   game["music"]["defeat_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "defeat_music";
   game["music"]["victory_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "victory_music";
@@ -46,6 +47,7 @@ init() {
   game["dialog"]["round_failure"] = "encourage_lost";
   game["dialog"]["round_draw"] = "draw";
 
+  // status
   game["dialog"]["timesup"] = "timesup";
   game["dialog"]["winning_time"] = "winning";
   game["dialog"]["losing_time"] = "losing";
@@ -58,12 +60,10 @@ init() {
 
   game["dialog"]["boost"] = "boost";
 
-  if(!isDefined(game["dialog"]["offense_obj"])) {
+  if(!isDefined(game["dialog"]["offense_obj"]))
     game["dialog"]["offense_obj"] = "boost";
-  }
-  if(!isDefined(game["dialog"]["defense_obj"])) {
+  if(!isDefined(game["dialog"]["defense_obj"]))
     game["dialog"]["defense_obj"] = "boost";
-  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["highspeed"] = "highspeed";
@@ -163,7 +163,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -179,22 +179,19 @@ onPlayerSpawned() {
   if(!level.splitscreen || level.splitscreen && !isDefined(level.playedStartingMusic)) {
     self playLocalSound(game["music"]["spawn_" + self.team]);
 
-    if(level.splitscreen) {
+    if(level.splitscreen)
       level.playedStartingMusic = true;
-    }
   }
 
-  if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
+  if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0]))
     self leaderDialogOnPlayer("gametype");
-  }
 
   gameFlagWait("prematch_done");
 
-  if(self.team == game["attackers"]) {
+  if(self.team == game["attackers"])
     self leaderDialogOnPlayer("offense_obj", "introboost");
-  } else {
+  else
     self leaderDialogOnPlayer("defense_obj", "introboost");
-  }
 }
 
 onLastAlive() {
@@ -213,19 +210,16 @@ onRoundSwitch() {
 
   switch (switchType) {
     case "halftime":
-      foreach(player in level.players) {
-        player leaderDialogOnPlayer("halftime");
-      }
+      foreach(player in level.players)
+      player leaderDialogOnPlayer("halftime");
       break;
     case "overtime":
-      foreach(player in level.players) {
-        player leaderDialogOnPlayer("overtime");
-      }
+      foreach(player in level.players)
+      player leaderDialogOnPlayer("overtime");
       break;
     default:
-      foreach(player in level.players) {
-        player leaderDialogOnPlayer("side_switch");
-      }
+      foreach(player in level.players)
+      player leaderDialogOnPlayer("side_switch");
       break;
   }
 }
@@ -237,24 +231,22 @@ onGameEnded() {
   level waittill("game_win", winner);
 
   if(isDefined(level.nukeDetonated)) {
-    if(!level.splitScreen) {
+    if(!level.splitScreen)
       playSoundOnPlayers(game["music"]["nuke_music"]);
-    } else {
+    else
       level.players[0] playLocalSound(game["music"]["nuke_music"]);
-    }
 
     return;
   }
 
   if(level.teamBased) {
     if(level.splitscreen) {
-      if(winner == "allies") {
+      if(winner == "allies")
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
-      } else if(winner == "axis") {
+      else if(winner == "axis")
         playSoundOnPlayers(game["music"]["victory_axis"], "axis");
-      } else {
+      else
         playSoundOnPlayers(game["music"]["nuke_music"]);
-      }
     } else {
       if(winner == "allies") {
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
@@ -268,13 +260,12 @@ onGameEnded() {
     }
   } else {
     foreach(player in level.players) {
-      if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
+      if(player.pers["team"] != "allies" && player.pers["team"] != "axis")
         player playLocalSound(game["music"]["nuke_music"]);
-      } else if(isDefined(winner) && player == winner) {
+      else if(isDefined(winner) && player == winner)
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      } else if(!level.splitScreen) {
+      else if(!level.splitScreen)
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
-      }
     }
   }
 }
@@ -283,9 +274,8 @@ roundWinnerDialog() {
   level waittill("round_win", winner);
 
   delay = level.roundEndDelay / 4;
-  if(delay > 0) {
+  if(delay > 0)
     wait(delay);
-  }
 
   if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated)) {
     return;
@@ -303,9 +293,8 @@ gameWinnerDialog() {
   level waittill("game_win", winner);
 
   delay = level.postRoundTime / 2;
-  if(delay > 0) {
+  if(delay > 0)
     wait(delay);
-  }
 
   if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated)) {
     return;
@@ -324,9 +313,8 @@ gameWinnerDialog() {
 musicController() {
   level endon("game_ended");
 
-  if(!level.hardcoreMode) {
+  if(!level.hardcoreMode)
     thread suspenseMusic();
-  }
 
   level waittill("match_ending_soon", reason);
   assert(isDefined(reason));
@@ -361,9 +349,8 @@ musicController() {
             leaderDialog("lead_tied", "allies");
           }
         } else {
-          if(!level.hardcoreMode) {
+          if(!level.hardcoreMode)
             playSoundOnPlayers(game["music"]["losing_time"]);
-          }
 
           leaderDialog("timesup");
         }
@@ -419,9 +406,8 @@ musicController() {
       leaderDialog("timesup");
     }
   } else {
-    if(!level.hardcoreMode) {
+    if(!level.hardcoreMode)
       playSoundOnPlayers(game["music"]["losing_allies"]);
-    }
 
     leaderDialog("timesup");
   }
@@ -432,7 +418,7 @@ suspenseMusic() {
   level endon("match_ending_soon");
 
   numTracks = game["music"]["suspense"].size;
-  for(;;) {
+  for (;;) {
     wait(randomFloatRange(60, 120));
 
     playSoundOnPlayers(game["music"]["suspense"][randomInt(numTracks)]);
@@ -441,4 +427,6 @@ suspenseMusic() {
 
 finalKillcamMusic() {
   self waittill("showing_final_killcam");
+
+  //	self playLocalSound( game["music"]["winning"] );
 }

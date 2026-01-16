@@ -23,25 +23,25 @@ function autoexec init() {
     return;
   }
   namespace_10893d25::init_voice();
-  level.bzm_vengeancedialogue1callback = &function_f3907da8;
-  level.bzm_vengeancedialogue2callback = &function_6597ece3;
-  level.bzm_vengeancedialogue2_1callback = &function_ed743e53;
-  level.bzm_vengeancedialogue3callback = &function_3f95727a;
-  level.bzm_vengeancedialogue3_1callback = &function_ae2421f2;
-  level.bzm_vengeancedialogue4callback = &function_b19ce1b5;
-  level.bzm_vengeancedialogue5callback = &function_8b9a674c;
-  level.bzm_vengeancedialogue6callback = &function_fda1d687;
-  level.bzm_vengeancedialogue6_1callback = &function_3c7cab4f;
-  level.bzm_vengeancedialogue6_2callback = &function_ca753c14;
-  level.bzm_vengeancedialogue7callback = &function_d79f5c1e;
-  level.bzm_vengeancedialogue7_1callback = &function_75eb7a4e;
-  level.bzm_vengeancedialogue8callback = &function_e97f24c9;
-  level.bzm_vengeancedialogue9callback = &function_c37caa60;
+  level.bzm_vengeancedialogue1callback = & function_f3907da8;
+  level.bzm_vengeancedialogue2callback = & function_6597ece3;
+  level.bzm_vengeancedialogue2_1callback = & function_ed743e53;
+  level.bzm_vengeancedialogue3callback = & function_3f95727a;
+  level.bzm_vengeancedialogue3_1callback = & function_ae2421f2;
+  level.bzm_vengeancedialogue4callback = & function_b19ce1b5;
+  level.bzm_vengeancedialogue5callback = & function_8b9a674c;
+  level.bzm_vengeancedialogue6callback = & function_fda1d687;
+  level.bzm_vengeancedialogue6_1callback = & function_3c7cab4f;
+  level.bzm_vengeancedialogue6_2callback = & function_ca753c14;
+  level.bzm_vengeancedialogue7callback = & function_d79f5c1e;
+  level.bzm_vengeancedialogue7_1callback = & function_75eb7a4e;
+  level.bzm_vengeancedialogue8callback = & function_e97f24c9;
+  level.bzm_vengeancedialogue9callback = & function_c37caa60;
   function_1c8c2a72();
 }
 
 function private function_1c8c2a72() {
-  callback::on_spawned(&function_2aefb731);
+  callback::on_spawned( & function_2aefb731);
 }
 
 function function_2aefb731() {}

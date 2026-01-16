@@ -10,7 +10,7 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("grenadecower");
 
-  if(isDefined(self.grenadecowerfunction)) {
+  if(isdefined(self.grenadecowerfunction)) {
     self[[self.grenadecowerfunction]]();
     return;
   }
@@ -24,14 +24,13 @@ main() {
   self orientmode("face angle", self.angles[1]);
   var_0 = 0;
 
-  if(isDefined(self.grenade)) {
+  if(isdefined(self.grenade))
     var_0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
-  } else {
+  else
     var_0 = self.angles[1];
-  }
 
   if(self.a.pose == "stand") {
-    if(isDefined(self.grenade) && trydive(var_0)) {
+    if(isdefined(self.grenade) && trydive(var_0)) {
       return;
     }
     self setflaggedanimknoballrestart("cowerstart", animscripts\utility::lookupanim("grenade", "cower_squat"), % body, 1, 0.2);
@@ -62,28 +61,24 @@ end_script() {
 }
 
 trydive(var_0) {
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     return 0;
-  }
 
-  if(self.stairsstate != "none") {
+  if(self.stairsstate != "none")
     return 0;
-  }
 
   var_1 = undefined;
 
-  if(abs(var_0) > 90) {
+  if(abs(var_0) > 90)
     var_1 = animscripts\utility::lookupanim("grenade", "cower_dive_back");
-  } else {
+  else
     var_1 = animscripts\utility::lookupanim("grenade", "cower_dive_front");
-  }
 
   var_2 = getmovedelta(var_1, 0, 0.5);
   var_3 = self localtoworldcoords(var_2);
 
-  if(!self maymovetopoint(var_3)) {
+  if(!self maymovetopoint(var_3))
     return 0;
-  }
 
   self.safetochangescript = 0;
   self setflaggedanimknoballrestart("cowerstart", var_1, % body, 1, 0.2);

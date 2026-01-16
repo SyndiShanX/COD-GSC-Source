@@ -88,8 +88,8 @@ money_grab() {
       }
       dist = distance(players[i].origin, self.origin);
       if(dist < 64) {
-        playFX(level._effect["powerup_grabbed"], self.origin);
-        playFX(level._effect["powerup_grabbed_wave"], self.origin);
+        playfx(level._effect["powerup_grabbed"], self.origin);
+        playfx(level._effect["powerup_grabbed_wave"], self.origin);
         playsoundatposition("zmb_powerup_grabbed_3p", self.origin);
         players[i].old_score += self.score;
         players[i].score += self.score;
@@ -109,8 +109,8 @@ money_grab() {
 money_wobble() {
   self endon("money_grabbed");
   if(isDefined(self)) {
-    playFXOnTag(level._effect["powerup_on"], self, "tag_origin");
-    self playSound("zmb_spawn_powerup");
+    playfxontag(level._effect["powerup_on"], self, "tag_origin");
+    self playsound("zmb_spawn_powerup");
     self playLoopSound("zmb_spawn_powerup_loop");
   }
   while(isDefined(self)) {

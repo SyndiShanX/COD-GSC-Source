@@ -21,7 +21,7 @@
 #namespace zm_zod_transformer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_transformer", undefined, &__main__, undefined);
+  system::register("zm_zod_transformer", undefined, & __main__, undefined);
 }
 
 function __main__() {
@@ -33,7 +33,7 @@ function __main__() {
 function init_transformers() {
   level flag::wait_till("all_players_spawned");
   level flag::wait_till("zones_initialized");
-  var_38d937f = getEntArray("use_elec_switch", "targetname");
+  var_38d937f = getentarray("use_elec_switch", "targetname");
   foreach(var_b46b59df in var_38d937f) {
     var_677edb82 = getent(var_b46b59df.target, "targetname");
     var_677edb82 thread transformer_think(var_b46b59df);
@@ -42,14 +42,14 @@ function init_transformers() {
 }
 
 function transformer_think(var_b46b59df) {
-  assert(isDefined(self.script_int), "" + self.origin);
+  assert(isdefined(self.script_int), "" + self.origin);
   n_power_index = self.script_int;
   self thread zm_altbody_beast::watch_lightning_damage(var_b46b59df);
   self clientfield::set("bminteract", 2);
   level flag::wait_till("power_on" + n_power_index);
   self thread scene::play("p7_fxanim_zm_zod_power_box_bundle", self);
   self clientfield::set("transformer_light_switch", n_power_index);
-  self playSound("zmb_bm_interaction_machine_start");
-  self playLoopSound("zmb_bm_interaction_machine_loop", 2);
+  self playsound("zmb_bm_interaction_machine_start");
+  self playloopsound("zmb_bm_interaction_machine_loop", 2);
   self clientfield::set("bminteract", 0);
 }

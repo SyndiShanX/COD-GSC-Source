@@ -57,11 +57,11 @@ function leave_water_traversal(startnode, endnode) {
   level endon("game_ended");
   self thread watch_traversal_end();
   self botsetmoveanglefrompoint(endnode.origin);
-  while(self isplayerunderwater()) {
+  while (self isplayerunderwater()) {
     self press_swim_up();
     wait(0.05);
   }
-  while(true) {
+  while (true) {
     self press_doublejump_button();
     wait(0.05);
   }
@@ -108,7 +108,7 @@ function jump_up_traversal(startnode, endnode) {
   wait(0.05);
   self thread jump_to(ledgetop);
   wait(0.05);
-  while((self.origin[2] + 72) < ledgetop[2]) {
+  while ((self.origin[2] + 72) < ledgetop[2]) {
     wait(0.05);
   }
   self botsetmovemagnitude(1);
@@ -123,7 +123,7 @@ function jump_down_traversal(startnode, endnode) {
   fwd = vectornormalize(fwd) * 128;
   start = startnode.origin + vectorscale((0, 0, 1), 16);
   end = (startnode.origin + fwd) + vectorscale((0, 0, 1), 16);
-  result = bulletTrace(start, end, 0, self);
+  result = bullettrace(start, end, 0, self);
   if(result["surfacetype"] != "none") {
     self botsetmoveanglefrompoint(endnode.origin);
     wait(0.05);
@@ -175,9 +175,9 @@ function wait_wallrun_begin(startnode, endnode, wallnormal, rundir) {
   index = self getnodeindexonpath(startnode);
   index++;
   exitstartnode = self getnexttraversalnodeonpath(index);
-  if(isDefined(exitstartnode)) {
+  if(isdefined(exitstartnode)) {
     exitendnode = getothernodeinnegotiationpair(exitstartnode);
-    if(isDefined(exitendnode)) {
+    if(isdefined(exitendnode)) {
       self thread exit_wallrun(exitstartnode, exitendnode, wallnormal, vectornormalize(rundir));
     }
   }
@@ -208,7 +208,7 @@ function exit_wallrun(startnode, endnode, wallnormal, runnormal) {
   } else {
     vforward = 0;
   }
-  while(true) {
+  while (true) {
     wait(0.05);
     enddir = endnode.origin - self.origin;
     enddist = vectordot(enddir, runnormal);
@@ -231,7 +231,7 @@ function jump_to(target, vector) {
   self endon("death");
   self endon("traversal_end");
   level endon("game_ended");
-  if(isDefined(vector)) {
+  if(isdefined(vector)) {
     self botsetmoveangle(vector);
     movedir = vectornormalize((vector[0], vector[1], 0));
   } else {
@@ -246,9 +246,9 @@ function jump_to(target, vector) {
   }
   self tap_jump_button();
   wait(0.05);
-  while(!self isonground() && !self ismantling() && !self iswallrunning() && !self bot_hit_target(target)) {
+  while (!self isonground() && !self ismantling() && !self iswallrunning() && !self bot_hit_target(target)) {
     press_doublejump_button();
-    if(!isDefined(vector)) {
+    if(!isdefined(vector)) {
       self botsetmoveanglefrompoint(target);
     }
     wait(0.05);
@@ -260,7 +260,7 @@ function bot_update_move_angle(target) {
   self endon("death");
   self endon("traversal_end");
   level endon("game_ended");
-  while(!self ismantling()) {
+  while (!self ismantling()) {
     self botsetmoveanglefrompoint(target);
     wait(0.05);
   }
@@ -307,11 +307,11 @@ function watch_start_swimming() {
   self endon("traversal_end");
   self endon("watch_travesal_end");
   level endon("game_ended");
-  while(self isplayerswimming()) {
+  while (self isplayerswimming()) {
     wait(0.05);
   }
   wait(0.05);
-  while(!self isplayerswimming()) {
+  while (!self isplayerswimming()) {
     wait(0.05);
   }
   self thread traversal_end();

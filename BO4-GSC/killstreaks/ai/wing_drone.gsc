@@ -15,6 +15,7 @@
 #include scripts\killstreaks\ai\lead_drone;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\remote_weapons;
+
 #namespace wing_drone;
 
 autoexec __init__system__() {
@@ -76,7 +77,7 @@ malfunction_update(params) {
   self setangularvelocity(ang_vel);
   self cancelaimove();
   self setphysacceleration((0, 0, 100 * -1));
-  waitresult = self waittilltimeout(randomintrange(4, 6), # "veh_collision");
+  waitresult = self waittilltimeout(randomintrange(4, 6), #"veh_collision");
   self vehicle_ai::set_state("death");
 }
 
@@ -187,18 +188,19 @@ function_789652f2(origin, owner, innerradius, outerradius, halfheight, spacing) 
 
   foreach(point in queryresult.data) {
     if(!point.visibility) {
+
       if(!isDefined(point._scoredebug)) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x38>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x38>";
 
-      point.score += -5000;
+        point.score += -5000;
     }
   }
 
@@ -284,18 +286,19 @@ function_b0c75ada(leader) {
 
     foreach(point in queryresult.data) {
       if(!point.visibility) {
+
         if(!isDefined(point._scoredebug)) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "no visibility"])) {
-          point._scoredebug[# "no visibility"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"no visibility"])) {
+          point._scoredebug[#"no visibility"] = spawnStruct();
         }
 
-        point._scoredebug[# "no visibility"].score = -5000;
-        point._scoredebug[# "no visibility"].scorename = "<dev string:x38>";
+        point._scoredebug[#"no visibility"].score = -5000;
+        point._scoredebug[#"no visibility"].scorename = "<dev string:x38>";
 
-        point.score += -5000;
+          point.score += -5000;
       }
     }
 
@@ -321,13 +324,15 @@ function_5ebe7443() {
 
   while(true) {
     if(isDefined(self.protectdest)) {
+
       recordsphere(self.protectdest, 8, (0, 1, 1), "<dev string:x48>");
 
-      if(isDefined(self.var_d6acaac4)) {
-        recordsphere(self.protectdest, 8, (1, 1, 0), "<dev string:x48>");
-        recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x48>");
+        if(isDefined(self.var_d6acaac4)) {
 
-      }
+          recordsphere(self.protectdest, 8, (1, 1, 0), "<dev string:x48>");
+          recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x48>");
+
+        }
     }
 
     waitframe(1);
@@ -390,12 +395,12 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = vehicle_ai::shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
 
   if(isDefined(weapon)) {
-    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === # "damageeffecttype_electrical") {
+    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === #"damageeffecttype_electrical") {
       minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
       maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
       self notify(#"emped", {
-        #param0: randomfloatrange(minempdowntime, maxempdowntime),
-        #param1: eattacker,
+        #param0: randomfloatrange(minempdowntime, maxempdowntime), 
+        #param1: eattacker, 
         #param2: einflictor
       });
     }
@@ -405,7 +410,7 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = killstreaks::ondamageperweapon("drone_squadron", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, &destroyed_cb, self.maxhealth * 0.4, &low_health_cb, emp_damage, undefined, 1, 1);
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "hatchet" && smeansofdeath == "MOD_IMPACT") {
+    if(weapon.name == #"hatchet" && smeansofdeath == "MOD_IMPACT") {
       idamage = self.maxhealth;
     }
   }

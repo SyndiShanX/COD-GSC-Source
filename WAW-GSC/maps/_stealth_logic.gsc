@@ -86,15 +86,15 @@ system_init() {
   flag_init("_stealth_spotted");
   flag_init("_stealth_found_corpse");
   flag_set("_stealth_hidden");
-  level._stealth = spawnStruct();
-  level._stealth.logic = spawnStruct();
+  level._stealth = spawnstruct();
+  level._stealth.logic = spawnstruct();
   level._stealth.logic.detection_level = "hidden";
   level._stealth.logic.detect_range = [];
   level._stealth.logic.detect_range["alert"] = [];
   level._stealth.logic.detect_range["hidden"] = [];
   level._stealth.logic.detect_range["spotted"] = [];
   system_default_detect_ranges();
-  level._stealth.logic.corpse = spawnStruct();
+  level._stealth.logic.corpse = spawnstruct();
   level._stealth.logic.corpse.array = [];
   level._stealth.logic.corpse.last_pos = undefined;
   level._stealth.logic.corpse.max_num = int(getdvar("ai_corpseCount"));
@@ -143,15 +143,15 @@ system_init() {
 }
 
 system_init_shadows() {
-  array_thread(getEntArray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
-  array_thread(getEntArray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getentarray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getentarray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
 }
 
 stealth_shadow_volumes() {
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
   self endon("death");
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
     if(!isalive(other)) {
       continue;
@@ -172,7 +172,7 @@ system_message_loop() {
 
 system_message_handler(_flag, detection_level, function) {
   level endon("_stealth_stop_stealth_logic");
-  while(1) {
+  while (1) {
     flag_wait(_flag);
     system_event_change(detection_level);
     level._stealth.logic.detection_level = detection_level;
@@ -184,7 +184,7 @@ system_message_handler(_flag, detection_level, function) {
 
 system_event_change(name) {
   keys = getarraykeys(level._stealth.logic.ai_event);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
     setsaveddvar(key, level._stealth.logic.ai_event[key][name]);
   }
@@ -197,10 +197,10 @@ system_state_spotted() {
   level endon("_stealth_stop_stealth_logic");
   waittillframeend;
   ai = getaispeciesarray("axis", "all");
-  while(ai.size) {
+  while (ai.size) {
     clear = true;
     ai = getaispeciesarray("axis", "all");
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(isalive(ai[i].enemy)) {
         clear = false;
         break;
@@ -209,7 +209,7 @@ system_state_spotted() {
     if(clear) {
       wait 1;
       ai = getaispeciesarray("axis", "all");
-      for(i = 0; i < ai.size; i++) {
+      for (i = 0; i < ai.size; i++) {
         if(isalive(ai[i].enemy)) {
           clear = false;
           break;
@@ -233,7 +233,7 @@ system_state_alert() {
   waittillframeend;
   count = 15;
   interval = .1;
-  while(count > 0) {
+  while (count > 0) {
     ai = getaispeciesarray("axis", "all");
     if(!ai.size) {
       break;
@@ -259,10 +259,9 @@ friendly_logic() {
   self endon("_stealth_stop_stealth_logic");
   self friendly_init();
   current_stance_func = self._stealth.logic.current_stance_func;
-  if(isPlayer(self)) {
+  if(isPlayer(self))
     self thread friendly_movespeed_calc_loop();
-  }
-  while(1) {
+  while (1) {
     self[[current_stance_func]]();
     self.maxVisibleDist = self friendly_compute_score();
     wait .05;
@@ -271,14 +270,14 @@ friendly_logic() {
 
 friendly_init() {
   assertex(!isDefined(self._stealth), "you called maps\_stealth_logic::friendly_init() twice on the same ai or player");
-  self._stealth = spawnStruct();
-  self._stealth.logic = spawnStruct();
+  self._stealth = spawnstruct();
+  self._stealth.logic = spawnstruct();
   if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
-    if(level.Console) {
+    if(level.Console)
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    } else {
+    else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }
@@ -327,18 +326,16 @@ player_getvelocity_pc() {
   sub["stand"] = 40;
   sub["crouch"] = 25;
   sub["prone"] = 10;
-  if(!velocity) {
+  if(!velocity)
     self._stealth.logic.player_pc_velocity = 0;
-  } else if(velocity > self._stealth.logic.player_pc_velocity) {
+  else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity += add[stance];
-    if(self._stealth.logic.player_pc_velocity > velocity) {
+    if(self._stealth.logic.player_pc_velocity > velocity)
       self._stealth.logic.player_pc_velocity = velocity;
-    }
   } else if(velocity < self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity -= sub[stance];
-    if(self._stealth.logic.player_pc_velocity < 0) {
+    if(self._stealth.logic.player_pc_velocity < 0)
       self._stealth.logic.player_pc_velocity = 0;
-    }
   }
   return self._stealth.logic.player_pc_velocity;
 }
@@ -351,16 +348,15 @@ friendly_movespeed_calc_loop() {
   angles_func = self._stealth.logic.getangles_func;
   velocity_func = self._stealth.logic.getvelocity_func;
   oldangles = self[[angles_func]]();
-  while(1) {
+  while (1) {
     score = undefined;
     if(self ent_flag("_stealth_in_shadow")) {
       score = 0;
     } else {
       score_move = self[[velocity_func]]();
       score_turn = length(oldangles - self[[angles_func]]());
-      if(score_turn > 30) {
+      if(score_turn > 30)
         score_turn = 30;
-      }
       score = score_move + score_turn;
     }
     self._stealth.logic.movespeed_multiplier["hidden"]["prone"] = (score) * self._stealth.logic.movespeed_scale["hidden"]["prone"];
@@ -378,21 +374,18 @@ friendly_movespeed_calc_loop() {
 }
 
 friendly_compute_score(stance) {
-  if(!isDefined(stance)) {
+  if(!isDefined(stance))
     stance = self._stealth.logic.stance;
-  }
   detection_level = level._stealth.logic.detection_level;
   score_range = level._stealth.logic.detect_range[detection_level][stance];
   if(self ent_flag("_stealth_in_shadow")) {
     score_range *= .5;
-    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"]) {
+    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"])
       score_range = level._stealth.logic.detect_range["hidden"]["prone"];
-    }
   }
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];
-  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap) {
+  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap)
     score_move = self._stealth_move_detection_cap;
-  }
   return (score_range + score_move);
 }
 
@@ -423,22 +416,20 @@ friendly_compute_stances_player() {
   if(!self._stealth.logic.stance_change) {
     switch (stance) {
       case "prone":
-        if(self._stealth.logic.oldstance != "prone") {
+        if(self._stealth.logic.oldstance != "prone")
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
-        }
         break;
       case "crouch":
-        if(self._stealth.logic.oldstance == "stand") {
+        if(self._stealth.logic.oldstance == "stand")
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
-        }
         break;
     }
   }
   if(self._stealth.logic.stance_change) {
     self._stealth.logic.stance = self._stealth.logic.oldstance;
-    if(self._stealth.logic.stance_change > .05) {
+    if(self._stealth.logic.stance_change > .05)
       self._stealth.logic.stance_change -= .05;
-    } else {
+    else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
       self._stealth.logic.oldstance = stance;
@@ -458,17 +449,16 @@ enemy_logic() {
 enemy_init() {
   assertex(!isDefined(self._stealth), "you called maps\_stealth_logic::enemy_init() twice on the same ai");
   self clearenemy();
-  self._stealth = spawnStruct();
-  self._stealth.logic = spawnStruct();
+  self._stealth = spawnstruct();
+  self._stealth.logic = spawnstruct();
   self._stealth.logic.dog = false;
-  if(issubstr(self.classname, "dog")) {
+  if(issubstr(self.classname, "dog"))
     self._stealth.logic.dog = true;
-  }
-  self._stealth.logic.alert_level = spawnStruct();
+  self._stealth.logic.alert_level = spawnstruct();
   self._stealth.logic.alert_level.lvl = undefined;
   self._stealth.logic.alert_level.enemy = undefined;
   self._stealth.logic.stoptime = 0;
-  self._stealth.logic.corpse = spawnStruct();
+  self._stealth.logic.corpse = spawnstruct();
   self._stealth.logic.corpse.corpse_entity = undefined;
   self ent_flag_init("_stealth_saw_corpse");
   self ent_flag_init("_stealth_found_corpse");
@@ -478,21 +468,19 @@ enemy_init() {
 
 enemy_event_listeners_init() {
   self ent_flag_init("_stealth_bad_event_listener");
-  self._stealth.logic.event = spawnStruct();
+  self._stealth.logic.event = spawnstruct();
   self._stealth.logic.event.listener = [];
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "grenade danger";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "gunshot";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "bulletwhizby";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "silenced_shot";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "projectile_impact";
-  for(i = 0; i < self._stealth.logic.event.listener.size; i++) {
+  for (i = 0; i < self._stealth.logic.event.listener.size; i++)
     self addAIEventListener(self._stealth.logic.event.listener[i]);
-  }
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "explode";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "doFlashBanged";
-  for(i = 0; i < self._stealth.logic.event.listener.size; i++) {
+  for (i = 0; i < self._stealth.logic.event.listener.size; i++)
     self thread enemy_event_listeners_logic(self._stealth.logic.event.listener[i]);
-  }
   self thread enemy_event_declare_to_team("damage", "ai_eventDistPain");
   self thread enemy_event_declare_to_team("death", "ai_eventDistDeath");
   self thread enemy_event_listeners_proc();
@@ -516,7 +504,7 @@ enemy_event_listeners_logic(type) {
   self endon("pain_death");
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
-  while(1) {
+  while (1) {
     self waittill(type);
     self ent_flag_set("_stealth_bad_event_listener");
   }
@@ -527,7 +515,7 @@ enemy_event_listeners_proc() {
   self endon("pain_death");
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
-  while(1) {
+  while (1) {
     self ent_flag_wait("_stealth_bad_event_listener");
     wait .65;
     self ent_flag_clear("_stealth_bad_event_listener");
@@ -541,12 +529,11 @@ enemy_event_awareness(type) {
   self endon("_stealth_stop_stealth_logic");
   self._stealth.logic.event.awareness[type] = true;
   var = undefined;
-  while(1) {
+  while (1) {
     self waittill(type, var1, var2);
     if(!self._stealth.logic.dog) {
-      if(flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy))) {
+      if(flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy)))
         continue;
-      }
     }
     switch (type) {
       case "projectile_impact":
@@ -561,9 +548,8 @@ enemy_event_awareness(type) {
     self notify("event_awareness", type);
     level notify("event_awareness", type);
     waittillframeend;
-    if(!flag("_stealth_spotted") && type != "alerted_once") {
+    if(!flag("_stealth_spotted") && type != "alerted_once")
       flag_set("_stealth_alert");
-    }
   }
 }
 
@@ -572,7 +558,7 @@ enemy_event_declare_to_team(type, name) {
   self endon("_stealth_stop_stealth_logic");
   other = undefined;
   team = self.team;
-  while(1) {
+  while (1) {
     if(!isalive(self)) {
       return;
     }
@@ -597,13 +583,11 @@ enemy_event_declare_to_team(type, name) {
   }
   ai = getaispeciesarray("axis", "all");
   check = int(level._stealth.logic.ai_event[name][level._stealth.logic.detection_level]);
-  for(i = 0; i < ai.size; i++) {
-    if(!isalive(ai[i])) {
+  for (i = 0; i < ai.size; i++) {
+    if(!isalive(ai[i]))
       continue;
-    }
-    if(!isDefined(ai[i]._stealth)) {
+    if(!isDefined(ai[i]._stealth))
       continue;
-    }
     if(distance(ai[i].origin, self.origin) > check) {
       continue;
     }
@@ -616,23 +600,21 @@ enemy_threat_logic() {
   self endon("pain_death");
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
-  while(1) {
+  while (1) {
     self waittill("enemy");
     if(!isalive(self.enemy)) {
       continue;
     }
     if(!flag("_stealth_spotted") && !self._stealth.logic.dog) {
-      if(!(self enemy_alert_level_logic(self.enemy))) {
+      if(!(self enemy_alert_level_logic(self.enemy)))
         continue;
-      }
     } else
       self enemy_alert_level_change("attack", self.enemy);
     self thread enemy_threat_set_spotted();
     wait 20;
-    while(isDefined(self.enemy)) {
-      if(distance(self.origin, self.enemy.origin) > self.maxVisibleDist) {
+    while (isDefined(self.enemy)) {
+      if(distance(self.origin, self.enemy.origin) > self.maxVisibleDist)
         self clearenemy();
-      }
       wait .25;
     }
     enemy_alert_level_change("reset", undefined);
@@ -649,23 +631,19 @@ enemy_threat_set_spotted() {
 }
 
 enemy_alert_level_logic(enemy) {
-  if(!isDefined(enemy._stealth)) {
+  if(!isDefined(enemy._stealth))
     return true;
-  }
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number])) {
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number]))
     enemy._stealth.logic.spotted_list[self.ai_number] = 0;
-  }
-  if(!self._stealth.logic.stoptime) {
+  if(!self._stealth.logic.stoptime)
     enemy._stealth.logic.spotted_list[self.ai_number]++;
-  }
   if(self ent_flag("_stealth_bad_event_listener") || enemy._stealth.logic.spotted_list[self.ai_number] > 2) {
     self enemy_alert_level_change("attack", enemy);
     return true;
   }
   self clearenemy();
-  if(self._stealth.logic.stoptime) {
+  if(self._stealth.logic.stoptime)
     return false;
-  }
   switch (enemy._stealth.logic.spotted_list[self.ai_number]) {
     case 1:
       self enemy_alert_level_change("alerted_once", enemy);
@@ -715,12 +693,12 @@ enemy_corpse_logic() {
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
   self thread enemy_corpse_found_loop();
-  while(1) {
-    while(!flag("_stealth_spotted")) {
+  while (1) {
+    while (!flag("_stealth_spotted")) {
       found = false;
       saw = false;
       corpse = undefined;
-      for(i = 0; i < level._stealth.logic.corpse.array.size; i++) {
+      for (i = 0; i < level._stealth.logic.corpse.array.size; i++) {
         corpse = level._stealth.logic.corpse.array[i];
         distsqrd = distancesquared(self.origin, corpse.origin);
         if(distsqrd < level._stealth.logic.corpse.found_distsqrd) {
@@ -732,9 +710,8 @@ enemy_corpse_logic() {
             continue;
           }
           distsqrd2 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
-          if(distsqrd2 <= distsqrd) {
+          if(distsqrd2 <= distsqrd)
             continue;
-          }
         }
         if(distsqrd > level._stealth.logic.corpse.sight_distsqrd) {
           continue;
@@ -747,7 +724,7 @@ enemy_corpse_logic() {
         }
         angles = self gettagangles("tag_eye");
         origin = self gettagorigin("tag_eye");
-        sight = anglesToForward(angles);
+        sight = anglestoforward(angles);
         vec_to_corpse = vectornormalize(corpse.origin - origin);
         if(vectordot(sight, vec_to_corpse) > .55) {
           if(self cansee(corpse)) {
@@ -757,21 +734,19 @@ enemy_corpse_logic() {
         }
       }
       if(found) {
-        if(!ent_flag("_stealth_found_corpse")) {
+        if(!ent_flag("_stealth_found_corpse"))
           self ent_flag_set("_stealth_found_corpse");
-        } else {
+        else
           self notify("_stealth_found_corpse");
-        }
         self ent_flag_clear("_stealth_saw_corpse");
         self thread enemy_corpse_found(corpse);
         self notify("found_corpse", corpse);
       } else if(saw) {
         self._stealth.logic.corpse.corpse_entity = corpse;
-        if(!ent_flag("_stealth_saw_corpse")) {
+        if(!ent_flag("_stealth_saw_corpse"))
           self ent_flag_set("_stealth_saw_corpse");
-        } else {
+        else
           self notify("_stealth_saw_corpse");
-        }
         level notify("_stealth_saw_corpse");
         self notify("saw_corpse", corpse);
       }
@@ -797,20 +772,18 @@ enemy_corpse_death() {
   corpse.ai_number = id;
   corpse.script_noteworthy = corpse.targetname + "_" + corpse.ai_number;
   corpse endon("death");
-  while(isDefined(self.origin)) {
+  while (isDefined(self.origin)) {
     corpse.origin = self.origin + offset;
     wait .01;
   }
-  if(level.cheatStates["sf_use_tire_explosion"]) {
+  if(level.cheatStates["sf_use_tire_explosion"])
     wait .25;
-  }
   corpse enemy_corpse_add_to_stack();
 }
 
 enemy_corpse_add_to_stack() {
-  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num) {
+  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num)
     enemy_corpse_shorten_stack();
-  }
   level._stealth.logic.corpse.array[level._stealth.logic.corpse.array.size] = self;
 }
 
@@ -818,9 +791,8 @@ enemy_corpse_shorten_stack() {
   array1 = [];
   array2 = level._stealth.logic.corpse.array;
   remove = level._stealth.logic.corpse.array[0];
-  for(i = 1; i < level._stealth.logic.corpse.max_num; i++) {
+  for (i = 1; i < level._stealth.logic.corpse.max_num; i++)
     array1[array1.size] = array2[i];
-  }
   level._stealth.logic.corpse.array = array1;
   remove delete();
 }
@@ -834,11 +806,10 @@ enemy_corpse_found(corpse) {
     return;
   }
   wait randomfloatrange(.25, .5);
-  if(!flag("_stealth_found_corpse")) {
+  if(!flag("_stealth_found_corpse"))
     flag_set("_stealth_found_corpse");
-  } else {
+  else
     level notify("_stealth_found_corpse");
-  }
   thread enemy_corpse_clear();
 }
 
@@ -847,7 +818,7 @@ enemy_corpse_found_loop() {
   self endon("pain_death");
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
-  while(1) {
+  while (1) {
     level waittill("_stealth_found_corpse");
     if(!flag("_stealth_found_corpse")) {
       continue;
@@ -858,14 +829,13 @@ enemy_corpse_found_loop() {
 
 enemy_corpse_alert_level() {
   enemy = undefined;
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     enemy = self.enemy;
-  } else {
+  else {
     enemy = get_closest_player(self.origin);
   }
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number])) {
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number]))
     enemy._stealth.logic.spotted_list[self.ai_number] = 0;
-  }
   switch (enemy._stealth.logic.spotted_list[self.ai_number]) {
     case 0:
       enemy._stealth.logic.spotted_list[self.ai_number]++;
@@ -895,9 +865,8 @@ stealth_shadow_ai_in_volume(volume) {
   level endon("_stealth_stop_stealth_logic");
   self endon("_stealth_stop_stealth_logic");
   self ent_flag_set("_stealth_in_shadow");
-  while(self istouching(volume)) {
+  while (self istouching(volume))
     wait .05;
-  }
   self ent_flag_clear("_stealth_in_shadow");
 }
 
@@ -935,19 +904,16 @@ stealth_ai_behavior(state_functions, alert_functions, corpse_functions, awarenes
 }
 
 stealth_enemy_waittill_alert() {
-  if(flag("_stealth_spotted")) {
+  if(flag("_stealth_spotted"))
     return;
-  }
   level endon("_stealth_spotted");
-  if(flag("_stealth_found_corpse")) {
+  if(flag("_stealth_found_corpse"))
     return;
-  }
   level endon("_stealth_found_corpse");
   self endon("_stealth_enemy_alert_level_change");
   waittillframeend;
-  if(self ent_flag("_stealth_saw_corpse")) {
+  if(self ent_flag("_stealth_saw_corpse"))
     return;
-  }
   self endon("_stealth_saw_corpse");
   self waittill("event_awareness", type);
 }
@@ -1096,8 +1062,7 @@ stealth_ai_reach_and_arrive_idle_and_react_proc(guy, reach_anim, idle_anim, reac
 }
 
 stealth_insure_enabled() {
-  if(isDefined(self._stealth)) {
+  if(isDefined(self._stealth))
     return;
-  }
   self thread stealth_ai();
 }

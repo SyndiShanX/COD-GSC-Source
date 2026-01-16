@@ -21,14 +21,14 @@ function init_shared(localclientnum) {
   level._effect["fx_betty_exp"] = "weapon/fx_betty_exp";
   level._effect["fx_betty_exp_death"] = "weapon/fx_betty_exp_death";
   level._effect["fx_betty_launch_dust"] = "weapon/fx_betty_launch_dust";
-  clientfield::register("missile", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
-  clientfield::register("scriptmover", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
+  clientfield::register("missile", "bouncingbetty_state", 1, 2, "int", & bouncingbetty_state_change, 0, 0);
+  clientfield::register("scriptmover", "bouncingbetty_state", 1, 2, "int", & bouncingbetty_state_change, 0, 0);
 }
 
 function bouncingbetty_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newval) {
@@ -52,9 +52,9 @@ function bouncingbetty_deploying(localclientnum) {
 function bouncingbetty_detonating(localclientnum) {
   self endon("entityshutdown");
   up = anglestoup(self.angles);
-  forward = anglesToForward(self.angles);
-  playFX(localclientnum, level._effect["fx_betty_launch_dust"], self.origin, up, forward);
-  self playSound(localclientnum, "wpn_betty_jump");
+  forward = anglestoforward(self.angles);
+  playfx(localclientnum, level._effect["fx_betty_launch_dust"], self.origin, up, forward);
+  self playsound(localclientnum, "wpn_betty_jump");
   self useanimtree($bouncing_betty);
   self setanim( % bouncing_betty::o_spider_mine_detonate, 1, 0, 1);
   self thread watchforexplosionnotetracks(localclientnum, up, forward);
@@ -62,20 +62,20 @@ function bouncingbetty_detonating(localclientnum) {
 
 function watchforexplosionnotetracks(localclientnum, up, forward) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     notetrack = self util::waittill_any_return("explode_1st", "explode_2nd", "explode_main", "entityshutdown");
     switch (notetrack) {
       case "explode_1st": {
-        playFX(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_1st_offset), up, forward);
+        playfx(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_1st_offset), up, forward);
         break;
       }
       case "explode_2nd": {
-        playFX(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_2nd_offset), up, forward);
+        playfx(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_2nd_offset), up, forward);
         break;
       }
       case "explode_main": {
-        playFX(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_main_offset), up, forward);
-        playFX(localclientnum, level._effect["fx_betty_exp_death"], self.origin, up, forward);
+        playfx(localclientnum, level._effect["fx_betty_exp"], self.origin + (up * level.explode_main_offset), up, forward);
+        playfx(localclientnum, level._effect["fx_betty_exp_death"], self.origin, up, forward);
         break;
       }
       default: {

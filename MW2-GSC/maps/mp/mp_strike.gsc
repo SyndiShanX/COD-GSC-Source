@@ -25,7 +25,6 @@ main() {
 BreakGlass() {
   glass = GetGlassArray("brokenglass01");
 
-  foreach(piece in glass) {
-    DestroyGlass(piece);
-  }
+  foreach(piece in glass)
+  DestroyGlass(piece);
 }

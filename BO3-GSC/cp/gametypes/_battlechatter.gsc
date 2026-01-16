@@ -13,17 +13,17 @@
 #namespace battlechatter;
 
 function autoexec __init__sytem__() {
-  system::register("battlechatter", &__init__, undefined, undefined);
+  system::register("battlechatter", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&init);
+  callback::on_start_gametype( & init);
   aispawnerarray = getactorspawnerarray();
-  callback::on_ai_spawned(&on_joined_ai);
+  callback::on_ai_spawned( & on_joined_ai);
 }
 
 function init() {
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   level.battlechatter_init = 1;
   level.allowbattlechatter = [];
   level.allowbattlechatter["bc"] = 1;
@@ -31,9 +31,9 @@ function init() {
 }
 
 function sndvehiclehijackwatcher() {
-  while(true) {
+  while (true) {
     level waittill("clonedentity", clone, vehentnum);
-    if(isDefined(clone) && isDefined(clone.archetype)) {
+    if(isdefined(clone) && isdefined(clone.archetype)) {
       vehiclename = clone.archetype;
       if(vehiclename == "wasp") {
         alias = "hijack_wasps";
@@ -49,7 +49,7 @@ function sndvehiclehijackwatcher() {
         }
       }
       nearbyenemy = get_closest_ai_to_object("axis", clone);
-      if(isDefined(nearbyenemy) && isDefined(alias)) {
+      if(isdefined(nearbyenemy) && isdefined(alias)) {
         level thread bc_makeline(nearbyenemy, alias);
       }
     }
@@ -58,22 +58,22 @@ function sndvehiclehijackwatcher() {
 
 function on_joined_ai() {
   self endon("disconnect");
-  if(isDefined(level.deadops) && level.deadops) {
+  if(isdefined(level.deadops) && level.deadops) {
     return;
   }
   if(isvehicle(self)) {
     return;
   }
-  if(isDefined(self.archetype) && self.archetype == "zombie") {
+  if(isdefined(self.archetype) && self.archetype == "zombie") {
     return;
   }
-  if(isDefined(self.archetype) && self.archetype == "direwolf") {
+  if(isdefined(self.archetype) && self.archetype == "direwolf") {
     return;
   }
-  if(!isDefined(self.voiceprefix)) {
+  if(!isdefined(self.voiceprefix)) {
     self.voiceprefix = "vox_ax";
   }
-  if(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz")) {
+  if(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz")) {
     self.bcvoicenumber = "";
   } else {
     if(self.voiceprefix == "vox_term") {
@@ -82,7 +82,7 @@ function on_joined_ai() {
       self.bcvoicenumber = randomintrange(0, 4);
     }
   }
-  if(isDefined(self.archetype) && self.archetype == "warlord") {
+  if(isdefined(self.archetype) && self.archetype == "warlord") {
     self thread function_c8397d24();
   }
   self.isspeaking = 0;
@@ -90,10 +90,10 @@ function on_joined_ai() {
   self thread bc_ainotifyconvert();
   self thread bc_grenadewatcher();
   self thread bc_stickygrenadewatcher();
-  if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+  if(!(isdefined(self.archetype) && self.archetype == "robot")) {
     self thread bc_death();
     self thread bc_scriptedline();
-    if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+    if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
       self.bcvoicenumber = randomintrange(0, 2);
     }
   } else {
@@ -105,9 +105,9 @@ function function_c8397d24() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     wait(randomintrange(6, 14));
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       linearray = array("action_peek", "action_moving", "enemy_contact");
       line = linearray[randomintrange(0, linearray.size)];
       level thread bc_makeline(self, line);
@@ -119,23 +119,23 @@ function bc_ainotifyconvert() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("bhtn_action_notify", notify_string);
     switch (notify_string) {
       case "pain": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
           level thread bc_makeline(self, "exert_pain");
         }
         break;
       }
       case "concussiveReact": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
           level thread bc_makeline(self, "exert_cough", undefined, undefined, 1);
         }
         break;
       }
       case "enemyKill": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot") && (!(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot") && (!(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
           if(randomintrange(0, 100) <= 50) {
             level thread bc_makeline(self, "enemy_kill");
           }
@@ -143,7 +143,7 @@ function bc_ainotifyconvert() {
         break;
       }
       case "meleeKill": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot") && (!(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot") && (!(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
           if(randomintrange(0, 100) <= 50) {
             level thread bc_makeline(self, "melee_kill");
           }
@@ -158,32 +158,32 @@ function bc_ainotifyconvert() {
       case "robots_incoming":
       case "talon_incoming":
       case "technical_incoming": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot") && (!(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot") && (!(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_germ" || self.voiceprefix == "vox_usa")))) {
           level thread bc_makeline(self, notify_string);
         }
         break;
       }
       case "electrocute":
       case "pukeStart": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
           level thread bc_makeline(self, "exert_electrocution", undefined, undefined, 1);
         }
         break;
       }
       case "puke": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
           level thread bc_makeline(self, "exert_sonic", undefined, undefined, 1);
         }
         break;
       }
       case "scream": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
           level thread bc_makeline(self, "exert_scream");
         }
         break;
       }
       case "scriptedRobotvox": {
-        if(isDefined(self.archetype) && self.archetype == "robot") {
+        if(isdefined(self.archetype) && self.archetype == "robot") {
           level thread bc_makeline(self, "action_intocover");
         }
         break;
@@ -211,10 +211,10 @@ function bc_ainotifyconvert() {
         break;
       }
       case "charge": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
-          if(!(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz"))) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
+          if(!(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz"))) {
             soundalias = "vox_generic_exert_charge_male";
-            if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+            if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
               soundalias = "vox_generic_exert_charge_female";
             }
             self thread do_sound(soundalias, 1);
@@ -225,10 +225,10 @@ function bc_ainotifyconvert() {
         break;
       }
       case "attack_melee": {
-        if(!(isDefined(self.archetype) && self.archetype == "robot")) {
-          if(!(isDefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz"))) {
+        if(!(isdefined(self.archetype) && self.archetype == "robot")) {
+          if(!(isdefined(self.voiceprefix) && (self.voiceprefix == "vox_hend" || self.voiceprefix == "vox_khal" || self.voiceprefix == "vox_kane" || self.voiceprefix == "vox_hall" || self.voiceprefix == "vox_mare" || self.voiceprefix == "vox_diaz"))) {
             soundalias = "vox_generic_exert_melee_male";
-            if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+            if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
               soundalias = "vox_generic_exert_melee_female";
             }
             self thread do_sound(soundalias, 1);
@@ -288,8 +288,8 @@ function bc_ainotifyconvert() {
         }
         if(randomintrange(0, 100) <= 50) {
           alliesguy = get_closest_ai_to_object("allies", self);
-          if(isDefined(alliesguy)) {
-            level util::delay(1, undefined, &bc_makeline, alliesguy, "firefly_response");
+          if(isdefined(alliesguy)) {
+            level util::delay(1, undefined, & bc_makeline, alliesguy, "firefly_response");
           }
         }
         break;
@@ -297,7 +297,7 @@ function bc_ainotifyconvert() {
       case "firefly_explode": {
         if(randomintrange(0, 100) <= 50) {
           teammate = get_closest_ai_on_sameteam(self);
-          if(isDefined(teammate)) {
+          if(isdefined(teammate)) {
             level thread bc_makeline(teammate, "firefly_explode");
           }
         }
@@ -360,7 +360,7 @@ function bc_scriptedline() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("scriptedbc", alias_suffix);
     level thread bc_makeline(self, alias_suffix);
   }
@@ -370,7 +370,7 @@ function bc_enemycontact() {
   self endon("death");
   self endon("disconnect");
   if(randomintrange(0, 100) <= 35) {
-    if(!(isDefined(level.bc_enemycontact) && level.bc_enemycontact)) {
+    if(!(isdefined(level.bc_enemycontact) && level.bc_enemycontact)) {
       level thread bc_makeline(self, "enemy_contact");
       level thread bc_enemycontact_wait();
     }
@@ -386,7 +386,7 @@ function bc_enemycontact_wait() {
 function bc_grenadewatcher() {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("grenade_fire", grenade, weapon);
     if(weapon.name == "frag_grenade" || weapon.name == "frag_grenade_invisible") {
       if(randomintrange(0, 100) <= 80 && !isplayer(self)) {
@@ -400,15 +400,15 @@ function bc_grenadewatcher() {
 function bc_incominggrenadewatcher(thrower, grenade) {
   if(randomintrange(0, 100) <= 95) {
     wait(1);
-    if(!isDefined(thrower) || !isDefined(grenade)) {
+    if(!isdefined(thrower) || !isdefined(grenade)) {
       return;
     }
     team = "axis";
-    if(isDefined(thrower.team) && team == thrower.team) {
+    if(isdefined(thrower.team) && team == thrower.team) {
       team = "allies";
     }
     ai = get_closest_ai_to_object(team, grenade);
-    if(isDefined(ai)) {
+    if(isdefined(ai)) {
       level thread bc_makeline(ai, "grenade_incoming", 1);
     }
   }
@@ -418,9 +418,9 @@ function bc_stickygrenadewatcher() {
   self endon("death");
   self endon("disconnect");
   self endon("sticky_explode");
-  while(true) {
+  while (true) {
     self waittill("grenade_stuck", grenade);
-    if(isDefined(grenade)) {
+    if(isdefined(grenade)) {
       grenade.stucktoplayer = self;
     }
     if(isalive(self)) {
@@ -433,7 +433,7 @@ function bc_stickygrenadewatcher() {
 function function_897d1130() {
   self endon("disconnect");
   self waittill("death", attacker, meansofdeath);
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isdefined(attacker) && !isplayer(attacker)) {
     if(meansofdeath == "MOD_MELEE") {
       attacker notify("bhtn_action_notify", "meleeKill");
     } else {
@@ -445,12 +445,12 @@ function function_897d1130() {
 function bc_death() {
   self endon("disconnect");
   self waittill("death", attacker, meansofdeath);
-  if(isDefined(self)) {
-    meleeassassinate = isDefined(meansofdeath) && meansofdeath == "MOD_MELEE_ASSASSINATE";
-    if(isDefined(self.archetype) && self.archetype == "warlord") {
-      self playSound("chr_warlord_death");
+  if(isdefined(self)) {
+    meleeassassinate = isdefined(meansofdeath) && meansofdeath == "MOD_MELEE_ASSASSINATE";
+    if(isdefined(self.archetype) && self.archetype == "warlord") {
+      self playsound("chr_warlord_death");
     }
-    if(!(isDefined(self.quiet_death) && self.quiet_death) && !meleeassassinate && isDefined(attacker)) {
+    if(!(isdefined(self.quiet_death) && self.quiet_death) && !meleeassassinate && isdefined(attacker)) {
       if(meansofdeath == "MOD_ELECTROCUTED") {
         soundalias = ((self.voiceprefix + self.bcvoicenumber) + "_") + "exert_electrocution";
       } else {
@@ -462,21 +462,21 @@ function bc_death() {
       }
       self thread do_sound(soundalias, 1);
     }
-    if(isDefined(self.sndissniper) && self.sndissniper && isDefined(attacker) && !isplayer(attacker)) {
+    if(isdefined(self.sndissniper) && self.sndissniper && isdefined(attacker) && !isplayer(attacker)) {
       level thread bc_makeline(attacker, "sniper_kill");
       return;
     }
-    if(isDefined(attacker) && !isplayer(attacker)) {
+    if(isdefined(attacker) && !isplayer(attacker)) {
       if(meansofdeath == "MOD_MELEE") {
         attacker notify("bhtn_action_notify", "meleeKill");
       } else {
         attacker notify("bhtn_action_notify", "enemyKill");
       }
     }
-    sniper = isDefined(attacker) && isDefined(attacker.scoretype) && attacker.scoretype == "_sniper";
+    sniper = isdefined(attacker) && isdefined(attacker.scoretype) && attacker.scoretype == "_sniper";
     if(!meleeassassinate && (sniper || randomintrange(0, 100) <= 35)) {
       close_ai = get_closest_ai_on_sameteam(self);
-      if(isDefined(close_ai) && (!(isDefined(close_ai.quiet_death) && close_ai.quiet_death))) {
+      if(isdefined(close_ai) && (!(isdefined(close_ai.quiet_death) && close_ai.quiet_death))) {
         if(sniper) {
           attacker.sndissniper = 1;
           level thread bc_makeline(close_ai, "sniper_threat");
@@ -491,7 +491,7 @@ function bc_death() {
 function bc_ainearexplodable(object, type) {
   wait(randomfloatrange(0.1, 0.4));
   ai = get_closest_ai_to_object("both", object, 500);
-  if(isDefined(ai)) {
+  if(isdefined(ai)) {
     if(type == "car") {
       level thread bc_makeline(ai, "destructible_car");
     } else {
@@ -504,17 +504,17 @@ function bc_robotbehindvox() {
   level endon("unloaded");
   self endon("death_or_disconnect");
   self endon("hash_f8c5dd60");
-  if(!isDefined(level._bc_robotbehindvoxtime)) {
+  if(!isdefined(level._bc_robotbehindvoxtime)) {
     level._bc_robotbehindvoxtime = 0;
     enemies = getaiteamarray("axis", "team3");
     level._bc_robotbehindarray = array();
     foreach(enemy in enemies) {
-      if(isDefined(enemy.archetype) && enemy.archetype == "robot") {
+      if(isdefined(enemy.archetype) && enemy.archetype == "robot") {
         array::add(level._bc_robotbehindarray, enemy, 0);
       }
     }
   }
-  while(true) {
+  while (true) {
     wait(1);
     t = gettime();
     if(t > (level._bc_robotbehindvoxtime + 1000)) {
@@ -523,7 +523,7 @@ function bc_robotbehindvox() {
       array::remove_dead(level._bc_robotbehindarray);
       array::remove_undefined(level._bc_robotbehindarray);
       foreach(enemy in enemies) {
-        if(isDefined(enemy.archetype) && enemy.archetype == "robot") {
+        if(isdefined(enemy.archetype) && enemy.archetype == "robot") {
           array::add(level._bc_robotbehindarray, enemy, 0);
         }
       }
@@ -533,23 +533,23 @@ function bc_robotbehindvox() {
     }
     played_sound = 0;
     foreach(robot in level._bc_robotbehindarray) {
-      if(!isDefined(robot)) {
+      if(!isdefined(robot)) {
         continue;
       }
       if(distancesquared(robot.origin, self.origin) < 90000) {
-        if(isDefined(robot.current_scene)) {
+        if(isdefined(robot.current_scene)) {
           continue;
         }
-        if(isDefined(robot.health) && robot.health <= 0) {
+        if(isdefined(robot.health) && robot.health <= 0) {
           continue;
         }
-        if(isDefined(level.scenes) && level.scenes.size >= 1) {
+        if(isdefined(level.scenes) && level.scenes.size >= 1) {
           continue;
         }
         yaw = self getyawtospot(robot.origin);
         diff = self.origin[2] - robot.origin[2];
         if(yaw < -95 || yaw > 95 && abs(diff) < 200) {
-          robot playSound("chr_robot_behind");
+          robot playsound("chr_robot_behind");
           played_sound = 1;
           break;
         }
@@ -574,19 +574,19 @@ function getyaw(org) {
 }
 
 function bc_makeline(ai, line, causeresponse, category, alwaysplay) {
-  if(!isDefined(ai)) {
+  if(!isdefined(ai)) {
     return;
   }
   ai endon("death");
   ai endon("disconnect");
   response = undefined;
-  if(isDefined(causeresponse)) {
+  if(isdefined(causeresponse)) {
     response = line + "_response";
   }
-  if(!isDefined(ai.voiceprefix) || !isDefined(ai.bcvoicenumber)) {
+  if(!isdefined(ai.voiceprefix) || !isdefined(ai.bcvoicenumber)) {
     return;
   }
-  if(isDefined(ai.archetype) && ai.archetype == "robot") {
+  if(isdefined(ai.archetype) && ai.archetype == "robot") {
     soundalias = ((ai.voiceprefix + ai.bcvoicenumber) + "_") + "chatter";
   } else {
     soundalias = ((ai.voiceprefix + ai.bcvoicenumber) + "_") + line;
@@ -595,68 +595,68 @@ function bc_makeline(ai, line, causeresponse, category, alwaysplay) {
 }
 
 function do_sound(soundalias, alwaysplay, response, category) {
-  if(!isDefined(soundalias)) {
+  if(!isdefined(soundalias)) {
     return;
   }
-  if(!isDefined(alwaysplay)) {
+  if(!isdefined(alwaysplay)) {
     alwaysplay = 0;
   }
-  if(self bc_allowed(category) && (!(isDefined(self.isspeaking) && self.isspeaking) || alwaysplay)) {
-    if(!isDefined(self.enemy) && !alwaysplay) {
+  if(self bc_allowed(category) && (!(isdefined(self.isspeaking) && self.isspeaking) || alwaysplay)) {
+    if(!isdefined(self.enemy) && !alwaysplay) {
       return;
     }
     function_20dcacc5();
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
-    if(isDefined(self.istalking) && self.istalking) {
+    if(isdefined(self.istalking) && self.istalking) {
       return;
     }
-    if(isDefined(self.isspeaking) && self.isspeaking) {
+    if(isdefined(self.isspeaking) && self.isspeaking) {
       self notify("bc_interrupt");
     }
     if(isalive(self)) {
       self playsoundontag(soundalias, "J_neck");
     } else {
-      self playSound(soundalias);
+      self playsound(soundalias);
     }
     self thread wait_playback_time(soundalias);
     result = self util::waittill_any_return(soundalias, "death", "disconnect", "bc_interrupt");
     if(result == soundalias) {
-      if(isDefined(response)) {
+      if(isdefined(response)) {
         ai = get_closest_ai_on_sameteam(self);
-        if(isDefined(ai)) {
+        if(isdefined(ai)) {
           level thread bc_makeline(ai, response);
         }
       }
-    } else if(isDefined(self)) {
+    } else if(isdefined(self)) {
       self stopsound(soundalias);
     }
   }
 }
 
 function function_20dcacc5() {
-  if(!isDefined(level.var_769cc2b1)) {
+  if(!isdefined(level.var_769cc2b1)) {
     level thread function_1af43712();
   }
-  while(level.var_769cc2b1 != 0) {
+  while (level.var_769cc2b1 != 0) {
     util::wait_network_frame();
   }
   level.var_769cc2b1++;
 }
 
 function function_1af43712() {
-  while(true) {
+  while (true) {
     level.var_769cc2b1 = 0;
     util::wait_network_frame();
   }
 }
 
 function bc_allowed(str_category = "bc") {
-  if(isDefined(level.allowbattlechatter) && (!(isDefined(level.allowbattlechatter[str_category]) && level.allowbattlechatter[str_category]))) {
+  if(isdefined(level.allowbattlechatter) && (!(isdefined(level.allowbattlechatter[str_category]) && level.allowbattlechatter[str_category]))) {
     return false;
   }
-  if(isDefined(self.allowbattlechatter) && (!(isDefined(self.allowbattlechatter[str_category]) && self.allowbattlechatter[str_category]))) {
+  if(isdefined(self.allowbattlechatter) && (!(isdefined(self.allowbattlechatter[str_category]) && self.allowbattlechatter[str_category]))) {
     return false;
   }
   return true;
@@ -679,7 +679,7 @@ function bc_plrnotifyconvert() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("bhtn_action_notify", notify_string);
     switch (notify_string) {
       case "firefly_deploy": {
@@ -697,7 +697,7 @@ function bc_plrnotifyconvert() {
 
 function bc_doplayervox(suffix) {
   soundalias = "vox_plyr_" + suffix;
-  if(self bc_allowed() && (!(isDefined(self.istalking) && self.istalking)) && (!(isDefined(self.isspeaking) && self.isspeaking))) {
+  if(self bc_allowed() && (!(isdefined(self.istalking) && self.istalking)) && (!(isdefined(self.isspeaking) && self.isspeaking))) {
     self playsoundtoplayer(soundalias, self);
     self thread wait_playback_time(soundalias);
   }
@@ -706,7 +706,7 @@ function bc_doplayervox(suffix) {
 function pain_vox() {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("snd_pain_player", meansofdeath);
     if(randomintrange(0, 100) <= 100) {
       if(isalive(self)) {
@@ -731,7 +731,7 @@ function water_gasp() {
   self endon("snd_gasp");
   level endon("game_ended");
   self.voxshouldgasploop = 0;
-  while(true) {
+  while (true) {
     if(!self isplayerunderwater() && self.voxshouldgasp) {
       self.voxshouldgasp = 0;
       self.voxshouldgasploop = 1;
@@ -746,7 +746,7 @@ function cybercoremeleewatcher() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     self waittill("melee_cybercom");
     self thread sndcybercoremeleeresponse();
   }
@@ -755,9 +755,9 @@ function cybercoremeleewatcher() {
 function sndcybercoremeleeresponse() {
   self endon("melee_cybercom");
   wait(2);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     ai = level get_closest_ai_to_object("axis", self, 700);
-    if(isDefined(ai)) {
+    if(isdefined(ai)) {
       ai notify("bhtn_action_notify", "rapidstrike");
     }
   }
@@ -779,17 +779,17 @@ function wait_playback_time(soundalias, timeout) {
 }
 
 function get_closest_ai_on_sameteam(some_ai, maxdist) {
-  if(isDefined(some_ai)) {
+  if(isdefined(some_ai)) {
     aiarray = getaiteamarray(some_ai.team);
     aiarray = arraysort(aiarray, some_ai.origin);
-    if(!isDefined(maxdist)) {
+    if(!isdefined(maxdist)) {
       maxdist = 1000;
     }
     foreach(dude in aiarray) {
-      if(!isDefined(some_ai)) {
+      if(!isdefined(some_ai)) {
         return undefined;
       }
-      if(!isDefined(dude) || !isalive(dude) || !isDefined(dude.bcvoicenumber)) {
+      if(!isdefined(dude) || !isalive(dude) || !isdefined(dude.bcvoicenumber)) {
         continue;
       }
       if(dude == some_ai) {
@@ -798,10 +798,10 @@ function get_closest_ai_on_sameteam(some_ai, maxdist) {
       if(isvehicle(dude)) {
         continue;
       }
-      if(isDefined(dude.archetype) && dude.archetype == "robot") {
+      if(isdefined(dude.archetype) && dude.archetype == "robot") {
         continue;
       }
-      if(!(isDefined(dude.voiceprefix) && (dude.voiceprefix == "vox_hend" || dude.voiceprefix == "vox_khal" || dude.voiceprefix == "vox_kane" || dude.voiceprefix == "vox_hall" || dude.voiceprefix == "vox_mare" || dude.voiceprefix == "vox_diaz")) && (!(isDefined(some_ai.voiceprefix) && (some_ai.voiceprefix == "vox_hend" || some_ai.voiceprefix == "vox_khal" || some_ai.voiceprefix == "vox_kane" || some_ai.voiceprefix == "vox_hall" || some_ai.voiceprefix == "vox_mare" || some_ai.voiceprefix == "vox_diaz")))) {
+      if(!(isdefined(dude.voiceprefix) && (dude.voiceprefix == "vox_hend" || dude.voiceprefix == "vox_khal" || dude.voiceprefix == "vox_kane" || dude.voiceprefix == "vox_hall" || dude.voiceprefix == "vox_mare" || dude.voiceprefix == "vox_diaz")) && (!(isdefined(some_ai.voiceprefix) && (some_ai.voiceprefix == "vox_hend" || some_ai.voiceprefix == "vox_khal" || some_ai.voiceprefix == "vox_kane" || some_ai.voiceprefix == "vox_hall" || some_ai.voiceprefix == "vox_mare" || some_ai.voiceprefix == "vox_diaz")))) {
         if(dude.bcvoicenumber == some_ai.bcvoicenumber) {
           continue;
         }
@@ -816,7 +816,7 @@ function get_closest_ai_on_sameteam(some_ai, maxdist) {
 }
 
 function get_closest_ai_to_object(team, object, maxdist) {
-  if(!isDefined(object)) {
+  if(!isdefined(object)) {
     return;
   }
   if(team == "both") {
@@ -825,20 +825,20 @@ function get_closest_ai_to_object(team, object, maxdist) {
     aiarray = getaiteamarray(team);
   }
   aiarray = arraysort(aiarray, object.origin);
-  if(!isDefined(maxdist)) {
+  if(!isdefined(maxdist)) {
     maxdist = 1000;
   }
   foreach(dude in aiarray) {
-    if(!isDefined(dude) || !isalive(dude)) {
+    if(!isdefined(dude) || !isalive(dude)) {
       continue;
     }
     if(isvehicle(dude)) {
       continue;
     }
-    if(isDefined(dude.archetype) && dude.archetype == "robot") {
+    if(isdefined(dude.archetype) && dude.archetype == "robot") {
       continue;
     }
-    if(!isDefined(dude.voiceprefix) || !isDefined(dude.bcvoicenumber)) {
+    if(!isdefined(dude.voiceprefix) || !isdefined(dude.bcvoicenumber)) {
       continue;
     }
     if(distance(dude.origin, object.origin) > maxdist) {
@@ -850,6 +850,6 @@ function get_closest_ai_to_object(team, object, maxdist) {
 }
 
 function function_d9f49fba(b_allow, str_category = "bc") {
-  assert(isDefined(b_allow), "");
+  assert(isdefined(b_allow), "");
   level.allowbattlechatter[str_category] = b_allow;
 }

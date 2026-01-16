@@ -9,14 +9,14 @@
 #namespace rat_shared;
 
 function init() {
-  if(!isDefined(level.rat)) {
-    level.rat = spawnStruct();
-    level.rat.common = spawnStruct();
+  if(!isdefined(level.rat)) {
+    level.rat = spawnstruct();
+    level.rat.common = spawnstruct();
     level.rat.script_command_list = [];
-    addratscriptcmd("", &rscteleport);
-    addratscriptcmd("", &rscteleportenemies);
-    addratscriptcmd("", &rscsimulatescripterror);
-    addratscriptcmd("", &rscrecteleport);
+    addratscriptcmd("", & rscteleport);
+    addratscriptcmd("", & rscteleportenemies);
+    addratscriptcmd("", & rscsimulatescripterror);
+    addratscriptcmd("", & rscrecteleport);
   }
 }
 
@@ -27,9 +27,9 @@ function addratscriptcmd(commandname, functioncallback) {
 
 function codecallback_ratscriptcommand(params) {
   init();
-  assert(isDefined(params._cmd));
-  assert(isDefined(params._id));
-  assert(isDefined(level.rat.script_command_list[params._cmd]), "" + params._cmd);
+  assert(isdefined(params._cmd));
+  assert(isdefined(params._id));
+  assert(isdefined(level.rat.script_command_list[params._cmd]), "" + params._cmd);
   callback = level.rat.script_command_list[params._cmd];
   level thread[[callback]](params);
 }
@@ -38,7 +38,7 @@ function rscteleport(params) {
   player = [[level.rat.common.gethostplayer]]();
   pos = (float(params.x), float(params.y), float(params.z));
   player setorigin(pos);
-  if(isDefined(params.ax)) {
+  if(isdefined(params.ax)) {
     angles = (float(params.ax), float(params.ay), float(params.az));
     player setplayerangles(angles);
   }
@@ -47,16 +47,16 @@ function rscteleport(params) {
 
 function rscteleportenemies(params) {
   foreach(player in level.players) {
-    if(!isDefined(player.bot)) {
+    if(!isdefined(player.bot)) {
       continue;
     }
     pos = (float(params.x), float(params.y), float(params.z));
     player setorigin(pos);
-    if(isDefined(params.ax)) {
+    if(isdefined(params.ax)) {
       angles = (float(params.ax), float(params.ay), float(params.az));
       player setplayerangles(angles);
     }
-    if(!isDefined(params.all)) {
+    if(!isdefined(params.all)) {
       break;
     }
   }

@@ -12,11 +12,10 @@ precache() {
 }
 
 register_gibs() {
-  if(!isDefined(level._gibbing_actor_models)) {
+  if(!isDefined(level._gibbing_actor_models))
     level._gibbing_actor_models = [];
-  }
 
-  gib_spawn = spawnStruct();
+  gib_spawn = spawnstruct();
   gib_spawn.gibspawn1 = "c_zom_zombie_scientist_g_rarmspawn";
   gib_spawn.gibspawntag1 = "J_Elbow_RI";
   gib_spawn.gibspawn2 = "c_zom_zombie_scientist_g_larmspawn";

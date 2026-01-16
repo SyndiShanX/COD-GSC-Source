@@ -17,11 +17,10 @@ bot_dem_think() {
     }
   }
 
-  if(self.team == game["attackers"]) {
+  if(self.team == game["attackers"])
     bot_dem_attack_think();
-  } else {
+  else
     bot_dem_defend_think();
-  }
 }
 
 bot_dem_attack_think() {
@@ -51,11 +50,10 @@ bot_dem_attack_think() {
       self cancelgoal("bomb");
     } else if(is_true(self.goal_flag.bombplanted))
       self bot_dem_guard(self.goal_flag, self.goal_flag.dem_nodes, self.goal_flag.trigger.origin);
-    else if(self bot_dem_friend_interacting(self.goal_flag.trigger.origin)) {
+    else if(self bot_dem_friend_interacting(self.goal_flag.trigger.origin))
       self bot_dem_guard(self.goal_flag, self.goal_flag.dem_nodes, self.goal_flag.trigger.origin);
-    } else {
+    else
       self bot_dem_attack(self.goal_flag);
-    }
   }
 }
 
@@ -86,9 +84,8 @@ bot_dem_defend_think() {
       self cancelgoal("bomb");
     } else if(is_true(self.goal_flag.bombplanted) && !self bot_dem_friend_interacting(self.goal_flag.trigger.origin))
       self bot_dem_defuse(self.goal_flag);
-    else {
+    else
       self bot_dem_guard(self.goal_flag, self.goal_flag.dem_nodes, self.goal_flag.trigger.origin);
-    }
   }
 }
 
@@ -98,18 +95,16 @@ bot_dem_attack(zone) {
   if(!self hasgoal("bomb")) {
     self.bomb_goal = self dem_get_bomb_goal(zone.visuals[0]);
 
-    if(isDefined(self.bomb_goal)) {
+    if(isDefined(self.bomb_goal))
       self addgoal(self.bomb_goal, 48, 2, "bomb");
-    }
 
     return;
   }
 
   if(!self atgoal("bomb")) {
     if(!self maps\mp\bots\_bot_combat::bot_combat_throw_smoke(self.bomb_goal)) {
-      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(self.bomb_goal)) {
+      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(self.bomb_goal))
         self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(self.bomb_goal);
-      }
     }
 
     return;
@@ -120,17 +115,15 @@ bot_dem_attack(zone) {
   self pressusebutton(level.planttime + 1);
   wait 0.5;
 
-  if(is_true(self.isplanting)) {
+  if(is_true(self.isplanting))
     wait(level.planttime + 1);
-  }
 
   self pressusebutton(0);
   defenders = self bot_get_enemies();
 
   foreach(defender in defenders) {
-    if(defender is_bot()) {
+    if(defender is_bot())
       defender.goal_flag = undefined;
-    }
   }
 
   self setstance("crouch");
@@ -172,41 +165,36 @@ bot_dem_defuse(zone) {
   if(!self hasgoal("bomb")) {
     self.bomb_goal = self dem_get_bomb_goal(zone.visuals[0]);
 
-    if(isDefined(self.bomb_goal)) {
+    if(isDefined(self.bomb_goal))
       self addgoal(self.bomb_goal, 48, 2, "bomb");
-    }
 
     return;
   }
 
   if(!self atgoal("bomb")) {
     if(!self maps\mp\bots\_bot_combat::bot_combat_throw_smoke(self.bomb_goal)) {
-      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(self.bomb_goal)) {
+      if(!self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(self.bomb_goal))
         self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(self.bomb_goal);
-      }
     }
 
-    if(self.goal_flag.detonatetime - gettime() < 12000) {
+    if(self.goal_flag.detonatetime - gettime() < 12000)
       self addgoal(self.bomb_goal, 48, 4, "bomb");
-    }
 
     return;
   }
 
   self addgoal(self.bomb_goal, 48, 4, "bomb");
 
-  if(cointoss()) {
+  if(cointoss())
     self setstance("crouch");
-  } else {
+  else
     self setstance("prone");
-  }
 
   self pressusebutton(level.defusetime + 1);
   wait 0.5;
 
-  if(is_true(self.isdefusing)) {
+  if(is_true(self.isdefusing))
     wait(level.defusetime + 1);
-  }
 
   self pressusebutton(0);
   self setstance("crouch");
@@ -222,9 +210,8 @@ bot_dem_enemy_interacting(origin) {
     if(distancesquared(enemy.origin, origin) > 65536) {
       continue;
     }
-    if(is_true(enemy.isdefusing) || is_true(enemy.isplanting)) {
+    if(is_true(enemy.isdefusing) || is_true(enemy.isplanting))
       return enemy;
-    }
   }
 
   return undefined;
@@ -237,9 +224,8 @@ bot_dem_friend_interacting(origin) {
     if(distancesquared(friend.origin, origin) > 65536) {
       continue;
     }
-    if(is_true(friend.isdefusing) || is_true(friend.isplanting)) {
+    if(is_true(friend.isdefusing) || is_true(friend.isplanting))
       return true;
-    }
   }
 
   return false;
@@ -249,9 +235,8 @@ bot_dem_enemy_nearby(origin) {
   enemy = maps\mp\bots\_bot::bot_get_closest_enemy(origin, 1);
 
   if(isDefined(enemy)) {
-    if(distancesquared(enemy.origin, origin) < 1048576) {
+    if(distancesquared(enemy.origin, origin) < 1048576)
       return enemy;
-    }
   }
 
   return undefined;
@@ -274,7 +259,7 @@ dem_get_bomb_goal(ent) {
   if(!isDefined(ent.bot_goals)) {
     goals = [];
     ent.bot_goals = [];
-    dir = anglesToForward(ent.angles);
+    dir = anglestoforward(ent.angles);
     dir = vectorscale(dir, 32);
     goals[0] = ent.origin + dir;
     goals[1] = ent.origin - dir;
@@ -285,7 +270,7 @@ dem_get_bomb_goal(ent) {
 
     foreach(goal in goals) {
       start = goal + vectorscale((0, 0, 1), 128.0);
-      trace = bulletTrace(start, goal, 0, undefined);
+      trace = bullettrace(start, goal, 0, undefined);
       ent.bot_goals[ent.bot_goals.size] = trace["position"];
     }
   }
@@ -293,9 +278,8 @@ dem_get_bomb_goal(ent) {
   goals = array_randomize(ent.bot_goals);
 
   foreach(goal in goals) {
-    if(findpath(self.origin, goal, 0)) {
+    if(findpath(self.origin, goal, 0))
       return goal;
-    }
   }
 
   return undefined;

@@ -6,6 +6,7 @@
 #include scripts\core_common\potm_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace hostmigration;
 
 debug_script_structs() {
@@ -56,7 +57,7 @@ resumetimer() {
 }
 
 locktimer() {
-  level endon(#"host_migration_begin", # "host_migration_end");
+  level endon(#"host_migration_begin", #"host_migration_end");
 
   for(;;) {
     currtime = gettime();
@@ -127,7 +128,7 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationtimerthink_internal() {
-  level endon(#"host_migration_begin", # "host_migration_end");
+  level endon(#"host_migration_begin", #"host_migration_end");
   self.hostmigrationcontrolsfrozen = 0;
 
   while(!isalive(self)) {

@@ -111,11 +111,8 @@ init_player_score() {
 
 reset_encounter_performance() {
   foreach(component_name, score_component in level.encounter_score_components) {
-    if(isDefined(score_component.reset_team_performance_func)) {
-      [
-        [score_component.reset_team_performance_func]
-      ](score_component);
-    }
+    if(isDefined(score_component.reset_team_performance_func))
+      [[score_component.reset_team_performance_func]](score_component);
   }
 
   reset_players_encounter_performance_and_LUA();
@@ -130,28 +127,21 @@ reset_players_encounter_performance_and_LUA() {
 
 component_specific_init(player) {
   foreach(component_name, score_component in level.encounter_score_components) {
-    if(isDefined(score_component.player_init_func)) {
-      [
-        [score_component.player_init_func]
-      ](player);
-    }
+    if(isDefined(score_component.player_init_func))
+      [[score_component.player_init_func]](player);
   }
 }
 
 reset_player_encounter_performance(player) {
   foreach(component_name, score_component in level.encounter_score_components) {
-    if(isDefined(score_component.reset_player_performance_func)) {
-      [
-        [score_component.reset_player_performance_func]
-      ](player);
-    }
+    if(isDefined(score_component.reset_player_performance_func))
+      [[score_component.reset_player_performance_func]](player);
   }
 }
 
 reset_end_game_score() {
-  foreach(eog_component_name, score_component in level.eog_score_components) {
-    self.end_game_score[eog_component_name] = 0;
-  }
+  foreach(eog_component_name, score_component in level.eog_score_components)
+  self.end_game_score[eog_component_name] = 0;
 }
 
 calculate_total_end_game_score(player) {
@@ -173,27 +163,25 @@ calculate_players_total_end_game_score() {
   if(is_scoring_disabled()) {
     return;
   }
-  if(common_scripts\utility::flag_exist("drill_drilling") && common_scripts\utility::flag("drill_drilling")) {
+  if(common_scripts\utility::flag_exist("drill_drilling") && common_scripts\utility::flag("drill_drilling"))
     calculate_encounter_scores(level.players, get_partial_hive_score_component_list());
-  }
 
-  foreach(player in level.players) {
-    calculate_total_end_game_score(player);
-  }
+  foreach(player in level.players)
+  calculate_total_end_game_score(player);
 }
 
 get_partial_hive_score_component_list() {
-  if(isDefined(level.partial_hive_score_component_list_func)) {
-    return [[level.partial_hive_score_component_list_func]]();
-  }
+  if(isDefined(level.partial_hive_score_component_list_func))
+    return [
+      [level.partial_hive_score_component_list_func]
+    ]();
 
   return [CONST_NAME_REF_CHALLENGE, CONST_NAME_REF_TEAM];
 }
 
 update_players_encounter_performance(score_component_name, performance_type, amount) {
-  foreach(player in level.players) {
-    player update_personal_encounter_performance(score_component_name, performance_type, amount);
-  }
+  foreach(player in level.players)
+  player update_personal_encounter_performance(score_component_name, performance_type, amount);
 }
 
 calculate_and_show_encounter_scores(players_list, score_component_name_list) {
@@ -203,9 +191,8 @@ calculate_and_show_encounter_scores(players_list, score_component_name_list) {
 }
 
 calculate_encounter_scores(players_list, score_component_name_list) {
-  foreach(player in players_list) {
-    calculate_player_encounter_scores(player, score_component_name_list);
-  }
+  foreach(player in players_list)
+  calculate_player_encounter_scores(player, score_component_name_list);
 }
 
 calculate_player_encounter_scores(player, score_component_name_list) {
@@ -219,7 +206,9 @@ calculate_player_encounter_scores(player, score_component_name_list) {
     AssertEx(isDefined(level.encounter_score_components[score_component_name]), "'" + score_component_name + "' is not a initialized score component");
     score_component_struct = level.encounter_score_components[score_component_name];
 
-    encounter_score = [[score_component_struct.calculate_func]](player, score_component_struct);
+    encounter_score = [
+      [score_component_struct.calculate_func]
+    ](player, score_component_struct);
     encounter_score *= level.cycle_score_scalar;
     encounter_score = int(encounter_score);
     player.end_game_score[score_component_struct.end_game_score_component_ref] += encounter_score;
@@ -264,11 +253,10 @@ init_challenge_score_component() {
 }
 
 init_challenge_score(score_component_struct) {
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     score_component_struct.max_score = SOLO_CONST_MAX_SCORE_COMPLETE_CHALLENGE;
-  } else {
+  else
     score_component_struct.max_score = COOP_CONST_MAX_SCORE_COMPLETE_CHALLENGE;
-  }
 
   return score_component_struct;
 }
@@ -389,9 +377,8 @@ calculate_teamwork_score(player, score_component_struct) {
   }
 
   team_damage_done_on_alien = get_team_encounter_performance(score_component_struct, "damage_done_on_alien");
-  if(team_damage_done_on_alien == 0) {
+  if(team_damage_done_on_alien == 0)
     team_damage_done_on_alien = 1;
-  }
 
   damage_done_ratio = get_player_encounter_performance(player, "damage_done_on_alien") / team_damage_done_on_alien;
   max_score_damage_done = score_component_struct.max_score_damage;
@@ -471,11 +458,10 @@ calculate_personal_skill_score(player, score_component_struct) {
   max_score_demage_taken = score_component_struct.max_score_damage_taken;
   damage_score_earned = max_score_demage_taken * damage_score_percent_earned;
 
-  if(get_player_encounter_performance(player, "shots_fired") == 0) {
+  if(get_player_encounter_performance(player, "shots_fired") == 0)
     accuracy_ratio = 1.0;
-  } else {
+  else
     accuracy_ratio = get_player_encounter_performance(player, "shots_hit") / get_player_encounter_performance(player, "shots_fired");
-  }
 
   accuracy_ratio = min(1.0, accuracy_ratio);
   max_score_accuracy = score_component_struct.max_score_accuracy;
@@ -568,9 +554,8 @@ update_team_encounter_performance(score_component_name, performance_type, amount
   if(!has_encounter_score_component(score_component_name)) {
     return;
   }
-  if(!isDefined(amount)) {
+  if(!isDefined(amount))
     amount = 1;
-  }
 
   level.encounter_score_components[score_component_name].team_encounter_performance[performance_type] += amount;
 }
@@ -579,9 +564,8 @@ update_encounter_performance_internal(performance_list, performance_type, amount
   AssertEx(isDefined(performance_list), "Performance list is not defined");
   AssertEx(isDefined(performance_list[performance_type]), "Unknown performance type: " + performance_type);
 
-  if(!isDefined(amount)) {
+  if(!isDefined(amount))
     amount = 1;
-  }
 
   performance_list[performance_type] += amount;
 
@@ -589,11 +573,10 @@ update_encounter_performance_internal(performance_list, performance_type, amount
 }
 
 register_scoring_mode() {
-  if(isPlayingSolo()) {
+  if(isPlayingSolo())
     SetOmnvar("ui_alien_is_solo", true);
-  } else {
+  else
     SetOmnvar("ui_alien_is_solo", false);
-  }
 }
 
 get_team_encounter_performance(score_component_struct, performance_type) {
@@ -613,9 +596,8 @@ has_eog_score_component(score_component_name) {
 }
 
 has_score_component_internal(score_component_list, score_component_name) {
-  if(is_scoring_disabled()) {
+  if(is_scoring_disabled())
     return false;
-  }
 
   return isDefined(score_component_list[score_component_name]);
 }
@@ -640,9 +622,8 @@ register_encounter_score_component(name_ref, init_func, reset_team_performance_f
   score_component.lua_string_index = lua_string_index;
   score_component.end_game_score_component_ref = end_game_score_component_ref;
 
-  if(isDefined(player_init_func)) {
+  if(isDefined(player_init_func))
     score_component.player_init_func = player_init_func;
-  }
 
   level.encounter_score_components[name_ref] = score_component;
 }
@@ -661,11 +642,10 @@ update_performance_alien_damage(eAttacker, iDamage, sMeansOfDeath) {
 
   personal_score_component_name = get_personal_score_component_name();
 
-  if(isPlayer(eAttacker)) {
+  if(isPlayer(eAttacker))
     eAttacker update_personal_encounter_performance(personal_score_component_name, "damage_done_on_alien", iDamage);
-  } else if(isDefined(eAttacker.owner)) {
+  else if(isDefined(eAttacker.owner))
     eAttacker.owner update_personal_encounter_performance(personal_score_component_name, "damage_done_on_alien", iDamage);
-  }
 }
 
 give_attacker_kill_rewards(attacker, sHitloc) {
@@ -712,9 +692,8 @@ give_attacker_kill_rewards(attacker, sHitloc) {
     isEquipmentKill = true;
   }
   reward_point = get_reward_point_for_kill();
-  if(isDefined(sHitloc) && sHitloc == "soft" && !isEquipmentKill) {
+  if(isDefined(sHitloc) && sHitloc == "soft" && !isEquipmentKill)
     reward_point = int(reward_point * 1.5);
-  }
   giveKillReward(attacker, reward_point, "large", sHitloc);
 }
 
@@ -742,9 +721,8 @@ giveAssistBonus(attacker, damage) {
   if(!isPlayer(attacker) && (!isDefined(attacker.owner) || !isPlayer(attacker.owner))) {
     return;
   }
-  if(isDefined(attacker.owner)) {
+  if(isDefined(attacker.owner))
     attacker = attacker.owner;
-  }
 
   if(!isDefined(self.attacker_damage)) {
     self.attacker_damage = [];
@@ -778,17 +756,14 @@ round_up_to_nearest(cash_amount, base) {
 }
 
 is_scoring_disabled() {
-  if(alien_mode_has("nogame")) {
+  if(alien_mode_has("nogame"))
     return true;
-  }
 
-  if(maps\mp\alien\_debug::spawn_test_enable()) {
+  if(maps\mp\alien\_debug::spawn_test_enable())
     return true;
-  }
 
-  if(is_chaos_mode()) {
+  if(is_chaos_mode())
     return true;
-  }
 
   return false;
 }

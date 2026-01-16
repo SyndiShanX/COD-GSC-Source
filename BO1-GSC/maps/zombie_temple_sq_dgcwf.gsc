@@ -89,7 +89,7 @@ plate_monitor(trig) {
     if(level._on_plate < 4) {
       level._on_plate++;
     }
-    trig playSound("evt_sq_dgcwf_plate_" + level._on_plate);
+    trig playsound("evt_sq_dgcwf_plate_" + level._on_plate);
     if(level._on_plate <= 2 && !flag("dgcwf_sw1_pressed")) {
       self thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest2", undefined, 0);
     } else {
@@ -160,12 +160,12 @@ sw1_thread() {
     if(flag("dgcwf_on_plate")) {
       self.pressed = false;
       self moveTo(self.on_pos, 0.25);
-      self playSound("evt_sq_dgcwf_lever_kachunk");
+      self playsound("evt_sq_dgcwf_lever_kachunk");
       self waittill("movedone");
       self.trigger trigger_on();
       while(flag("dgcwf_on_plate")) {
         if(self.pressed) {
-          self playSound("evt_sq_dgcwf_lever_success");
+          self playsound("evt_sq_dgcwf_lever_success");
           self RotateRoll(75, 0.15);
           self.trigger trigger_off();
           flag_set("dgcwf_sw1_pressed");
@@ -176,7 +176,7 @@ sw1_thread() {
     } else {
       self.pressed = false;
       self.trigger trigger_off();
-      self playSound("evt_sq_dgcwf_lever_dechunk");
+      self playsound("evt_sq_dgcwf_lever_dechunk");
       self moveTo(self.off_pos, 0.25);
       self waittill("movedone");
       while(!flag("dgcwf_on_plate")) {
@@ -229,7 +229,7 @@ play_success_audio() {
   level endon("sq_DgCWf_over");
   flag_wait("dgcwf_on_plate");
   flag_wait("dgcwf_sw1_pressed");
-  self playSound("evt_sq_dgcwf_gears");
+  self playsound("evt_sq_dgcwf_gears");
 }
 
 exit_stage(success) {
@@ -264,20 +264,20 @@ dgcwf_story_vox() {
   level._dgcwf_sound_ent = spawn("script_origin", struct.origin);
   if(isDefined(self)) {
     level.skit_vox_override = true;
-    self playSound("vox_egg_story_2_0" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
+    self playsound("vox_egg_story_2_0" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
     self waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
-  level._dgcwf_sound_ent playSound("vox_egg_story_2_1", "sounddone");
+  level._dgcwf_sound_ent playsound("vox_egg_story_2_1", "sounddone");
   level._dgcwf_sound_ent waittill("sounddone");
   if(isDefined(self)) {
     level.skit_vox_override = true;
-    self playSound("vox_egg_story_2_2" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
+    self playsound("vox_egg_story_2_2" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
     self waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
   flag_wait("dgcwf_sw1_pressed");
-  level._dgcwf_sound_ent playSound("vox_egg_story_2_3", "sounddone");
+  level._dgcwf_sound_ent playsound("vox_egg_story_2_3", "sounddone");
   level._dgcwf_sound_ent waittill("sounddone");
   flag_set("dgcwf_plot_vo_done");
   level._dgcwf_sound_ent delete();

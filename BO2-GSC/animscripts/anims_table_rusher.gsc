@@ -35,9 +35,8 @@ reset_rusher_anims() {
 #using_animtree("generic_human");
 
 setup_default_rusher_anim_array() {
-  if(!isDefined(self.anim_array)) {
+  if(!isDefined(self.anim_array))
     self.anim_array = [];
-  }
 
   assert(isDefined(self.rushertype), "Call this function after setting the rusherType on the AI");
 

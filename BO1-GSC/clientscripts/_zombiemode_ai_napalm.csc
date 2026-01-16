@@ -56,7 +56,7 @@ _napalm_zombie_RunSteamEffects(client_num) {
       if(!isDefined(self.steam_fx)) {
         effectEnt = spawn(client_num, self.origin, "script_model");
         effectEnt setModel("tag_origin");
-        playFXOnTag(client_num, level._effect["napalm_feet_steam"], effectEnt, "tag_origin");
+        PlayFXOnTag(client_num, level._effect["napalm_feet_steam"], effectEnt, "tag_origin");
         self.steam_fx = effectEnt;
       }
       origin = (self.origin[0], self.origin[1], waterHeight);
@@ -162,7 +162,7 @@ _zombie_SetupFXOnJoint(client_num, jointName, fxName, offset) {
     offset = (0, 0, 0);
   }
   effectEnt LinkTo(self, jointName, offset);
-  playFXOnTag(client_num, level._effect[fxName], effectEnt, "tag_origin");
+  PlayFXOnTag(client_num, level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
 
@@ -207,7 +207,7 @@ player_napalm_radius_overlay_fade() {
 player_can_see_napalm(ent_napalm) {
   trace = undefined;
   if(isDefined(level.napalm_zombie)) {
-    trace = bulletTrace(self getEye(), level.napalm_zombie.origin, false, self);
+    trace = bullettrace(self GetEye(), level.napalm_zombie.origin, false, self);
     if(isDefined(trace) && trace["fraction"] < 0.85) {
       return true;
     }

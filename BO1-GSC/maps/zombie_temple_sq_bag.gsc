@@ -176,7 +176,7 @@ butter_fingers() {
     self waittill("trigger", who);
     if(isDefined(who) && is_player_valid(who)) {
       who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 6);
-      who playSound("evt_sq_bag_dynamite_catch");
+      who playsound("evt_sq_bag_dynamite_catch");
       who._has_dynamite = true;
       self.owner_ent notify("caught");
       self.owner_ent hide();
@@ -308,7 +308,7 @@ gong_resonate(player) {
   if(is_true(self.right_gong)) {
     self playLoopSound("evt_sq_bag_gong_correct_loop_" + level._num_gongs, 5);
   } else {
-    self playSound("evt_sq_bag_gong_incorrect");
+    self playsound("evt_sq_bag_gong_incorrect");
   }
   if(level._num_gongs == 4) {
     level thread resonate_runner();
@@ -363,7 +363,7 @@ gong_handler() {
   while(1) {
     self waittill("triggered", who);
     if(!self.ringing) {
-      self playSound("evt_sq_bag_gong_hit");
+      self playsound("evt_sq_bag_gong_hit");
       self gong_goes_bong(true, who);
     }
   }
@@ -387,7 +387,7 @@ gong_wobble() {
   self.wobble_threaded = true;
   while(1) {
     self waittill("triggered");
-    self playSound("evt_sq_bag_gong_hit");
+    self playsound("evt_sq_bag_gong_hit");
     self maps\_anim::anim_single(self, "ring");
   }
 }
@@ -414,21 +414,21 @@ bag_story_vox_pt1(player) {
     return;
   }
   level._bag_sound_ent = spawn("script_origin", struct.origin);
-  level._bag_sound_ent playSound("vox_egg_story_5_0", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_0", "sounddone");
   level._bag_sound_ent waittill("sounddone");
-  level._bag_sound_ent playSound("vox_egg_story_5_1", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_1", "sounddone");
   level._bag_sound_ent waittill("sounddone");
-  level._bag_sound_ent playSound("vox_egg_story_5_2", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_2", "sounddone");
   level._bag_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playSound("vox_egg_story_5_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playsound("vox_egg_story_5_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
-  level._bag_sound_ent playSound("vox_egg_story_5_4", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_4", "sounddone");
   level._bag_sound_ent waittill("sounddone");
-  level._bag_sound_ent playSound("vox_egg_story_5_5", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_5", "sounddone");
   level._bag_sound_ent waittill("sounddone");
   level._bag_sound_ent delete();
   level._bag_sound_ent = undefined;
@@ -441,9 +441,9 @@ bag_story_vox_pt2() {
     return;
   }
   level._bag_sound_ent = spawn("script_origin", struct.origin);
-  level._bag_sound_ent playSound("vox_egg_story_5_7", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_7", "sounddone");
   level._bag_sound_ent waittill("sounddone");
-  level._bag_sound_ent playSound("vox_egg_story_5_8", "sounddone");
+  level._bag_sound_ent playsound("vox_egg_story_5_8", "sounddone");
   level._bag_sound_ent waittill("sounddone");
   level._bag_sound_ent delete();
   level._bag_sound_ent = undefined;

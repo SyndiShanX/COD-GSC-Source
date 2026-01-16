@@ -82,9 +82,8 @@ main() {
 }
 
 register_client_fields() {
-  if(level.scr_zm_ui_gametype == "zclassic") {
+  if(level.scr_zm_ui_gametype == "zclassic")
     clientscripts\mp\zm_buried_sq::sq_buried_clientfield_init();
-  }
 
   level.generator_lights = 0;
   num_bits = 2;
@@ -124,57 +123,52 @@ player_flashlight_flicker_update(life_left_frac) {
   wait_flicker2 = level.oil_lamp_life_time * (1.0 - wait_frac2);
   wait_flicker3 = level.oil_lamp_life_time * (1.0 - wait_frac3);
 
-  if(life_left_frac < 1.0) {
+  if(life_left_frac < 1.0)
     used_frac = 1.0 - life_left_frac;
-  } else {
+  else
     used_frac = 0.0;
-  }
 
   if(used_frac > 0) {
-    if(used_frac > 0.0 && used_frac < wait_frac0) {
+    if(used_frac > 0.0 && used_frac < wait_frac0)
       wait_full = (wait_frac0 - used_frac) * level.oil_lamp_life_time;
-    } else if(used_frac >= wait_frac0) {
+    else if(used_frac >= wait_frac0)
       wait_full = 0.0;
-    }
 
-    if(used_frac > wait_frac0 && used_frac < wait_frac1) {
+    if(used_frac > wait_frac0 && used_frac < wait_frac1)
       wait_flicker1 = (wait_frac1 - used_frac) * level.oil_lamp_life_time;
-    } else if(used_frac >= wait_frac1) {
+    else if(used_frac >= wait_frac1)
       wait_flicker1 = 0.0;
-    }
 
-    if(used_frac > wait_frac1 && used_frac < wait_frac2) {
+    if(used_frac > wait_frac1 && used_frac < wait_frac2)
       wait_flicker2 = (wait_frac2 - used_frac) * level.oil_lamp_life_time;
-    } else if(used_frac >= wait_frac2) {
+    else if(used_frac >= wait_frac2)
       wait_flicker2 = 0.0;
-    }
 
-    if(used_frac > wait_frac2 && used_frac < wait_frac3) {
+    if(used_frac > wait_frac2 && used_frac < wait_frac3)
       wait_flicker3 = (wait_frac3 - used_frac) * level.oil_lamp_life_time;
-    } else if(used_frac >= wait_frac3) {
+    else if(used_frac >= wait_frac3)
       wait_flicker3 = 0.0;
-    }
   }
 
   if(wait_full > 0) {
-    self.sndlightent playLoopSound("zmb_lantern_plr_loop_1", 0.05);
+    self.sndlightent playloopsound("zmb_lantern_plr_loop_1", 0.05);
     setdvar("r_flashLightFlickerAmount", full_flicker);
     wait(wait_full);
   }
 
   if(wait_flicker1 > 0) {
-    self.sndlightent playLoopSound("zmb_lantern_plr_loop_2", 0.05);
+    self.sndlightent playloopsound("zmb_lantern_plr_loop_2", 0.05);
     setdvar("r_flashLightFlickerAmount", flicker1);
     wait(wait_flicker1);
   }
 
   if(wait_flicker2 > 0) {
-    self.sndlightent playLoopSound("zmb_lantern_plr_loop_3", 0.05);
+    self.sndlightent playloopsound("zmb_lantern_plr_loop_3", 0.05);
     setdvar("r_flashLightFlickerAmount", flicker2);
     wait(wait_flicker2);
   }
 
-  self.sndlightent playLoopSound("zmb_lantern_plr_loop_4", 0.05);
+  self.sndlightent playloopsound("zmb_lantern_plr_loop_4", 0.05);
   setdvar("r_flashLightFlickerAmount", flicker3);
   wait(wait_flicker3);
 }
@@ -192,7 +186,7 @@ flashlight_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         self equipflashlight();
         self player_flashlight_flicker_update(newval);
       } else {
-        playSound(localclientnum, "zmb_lantern_die", self.origin);
+        playsound(localclientnum, "zmb_lantern_die", self.origin);
         self notify("player_remove_flashlight");
         self removeflashlight();
       }
@@ -228,36 +222,31 @@ start_3rd_person_flashlight(localclientnum, power_frac) {
   self endon("disconnect");
   self endon("player_remove_flashlight_fx");
 
-  if(power_frac < 1.0) {
+  if(power_frac < 1.0)
     used_frac = 1.0 - power_frac;
-  } else {
+  else
     used_frac = 0.0;
-  }
 
-  if(used_frac < 0.0) {
+  if(used_frac < 0.0)
     used_frac = 0.0;
-  }
 
   wait_flicker0 = level.oil_lamp_life_time * level.flashlight_fx_flicker1_starts;
   wait_flicker1 = level.oil_lamp_life_time * (level.flashlight_fx_flicker2_starts - level.flashlight_fx_flicker1_starts);
   wait_flicker2 = level.oil_lamp_life_time * (1.0 - level.flashlight_fx_flicker2_starts);
 
   if(used_frac < 1.0) {
-    if(used_frac < level.flashlight_fx_flicker1_starts) {
+    if(used_frac < level.flashlight_fx_flicker1_starts)
       wait_flicker0 = (level.flashlight_fx_flicker1_starts - used_frac) * level.oil_lamp_life_time;
-    } else {
+    else
       wait_flicker0 = 0;
-    }
 
-    if(used_frac >= level.flashlight_fx_flicker1_starts && used_frac < level.flashlight_fx_flicker2_starts) {
+    if(used_frac >= level.flashlight_fx_flicker1_starts && used_frac < level.flashlight_fx_flicker2_starts)
       wait_flicker1 = (level.flashlight_fx_flicker2_starts - used_frac) * level.oil_lamp_life_time;
-    } else if(used_frac >= level.flashlight_fx_flicker2_starts) {
+    else if(used_frac >= level.flashlight_fx_flicker2_starts)
       wait_flicker1 = 0;
-    }
 
-    if(used_frac >= level.flashlight_fx_flicker2_starts && used_frac < 1.0) {
+    if(used_frac >= level.flashlight_fx_flicker2_starts && used_frac < 1.0)
       wait_flicker2 = (1.0 - used_frac) * level.oil_lamp_life_time;
-    }
 
     if(wait_flicker0 > 0) {
       self set_flashlight_fx(localclientnum, level._effect["player_3rd_spotlight_lite"]);
@@ -286,7 +275,7 @@ set_flashlight_fx(localclientnum, flashlight_fx) {
     level.flashlight_fx[sgen] = undefined;
   }
 
-  level.flashlight_fx[sgen] = playFXOnTag(localclientnum, flashlight_fx, self, "tag_weapon_right");
+  level.flashlight_fx[sgen] = playfxontag(localclientnum, flashlight_fx, self, "tag_weapon_right");
 }
 
 grab_generator_light_array() {
@@ -297,11 +286,10 @@ grab_generator_light_array() {
     if(isDefined(light.script_mixer_event) && light.script_mixer_event == "generator_light") {
       level.generator_lights_array[level.generator_lights_array.size] = light;
 
-      if(isDefined(light.script_light2_intensity)) {
+      if(isDefined(light.script_light2_intensity))
         light.original_rhs_intensity = light.script_light2_intensity;
-      } else {
+      else
         light.original_rhs_intensity = light.lights[0] getlightintensity();
-      }
 
       if(isDefined(light.script_light2_color)) {
         light.original_rhs_color = light.script_light2_color;
@@ -324,9 +312,8 @@ make_generator_lights_flicker_lights() {
     }
   }
 
-  if(!isDefined(level.generator_lights_array)) {
+  if(!isDefined(level.generator_lights_array))
     grab_generator_light_array();
-  }
 
   foreach(light in level.generator_lights_array) {
     light.lights[splitscreenhost] setmixerlightparam("right", 0, undefined);
@@ -358,9 +345,8 @@ restore_generator_lights_to_original_params() {
     }
   }
 
-  if(!isDefined(level.generator_lights_array)) {
+  if(!isDefined(level.generator_lights_array))
     grab_generator_light_array();
-  }
 
   foreach(light in level.generator_lights_array) {
     light.lights[splitscreenhost] setmixerlightintensity("right", light.original_rhs_intensity);
@@ -403,9 +389,8 @@ generator_light_callback(localclientnum, oldval, newval, bnewent, binitialsnap, 
 }
 
 generator_light_color_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(level.generator_lights_array)) {
+  if(!isDefined(level.generator_lights_array))
     grab_generator_light_array();
-  }
 
   foreach(light in level.generator_lights_array) {
     if(newval) {
@@ -418,9 +403,8 @@ generator_light_color_callback(localclientnum, oldval, newval, bnewent, binitial
 }
 
 generator_light_lerp_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(level.generator_lights_array)) {
+  if(!isDefined(level.generator_lights_array))
     grab_generator_light_array();
-  }
 
   foreach(light in level.generator_lights_array) {
     light.lights[localclientnum] setmixerlightparam("right", 2, newval * light.original_rhs_intensity * 0.5);
@@ -461,9 +445,8 @@ start_zombie_stuff() {
   registerclientfield("allplayers", "buried_sq_richtofen_player_eyes_stuhlinger", 12000, 1, "int", ::buried_sq_richtofen_player_eyes_stuhlinger, 0);
   registerclientfield("allplayers", "phd_flopper_effects", 12000, 1, "int", ::buried_phd_flopper_effects, 0);
 
-  if(is_gametype_active("zclassic")) {
+  if(is_gametype_active("zclassic"))
     clientscripts\mp\zombies\_zm_weap_time_bomb::init_time_bomb();
-  }
 
   clientscripts\mp\zombies\_zm_weap_cymbal_monkey::init();
   clientscripts\mp\zombies\_zm_weap_tazer_knuckles::init();
@@ -489,9 +472,11 @@ start_zombie_stuff() {
   }
 }
 
-init_clientflag_variables() {}
+init_clientflag_variables() {
+}
 
-register_clientflag_callbacks() {}
+register_clientflag_callbacks() {
+}
 
 init_level_specific_wall_buy_fx() {
   if(getdvar(#"createfx") != "") {
@@ -532,9 +517,8 @@ include_weapons() {
   include_weapon("mp5k_zm", 0);
   include_weapon("mp5k_upgraded_zm", 0);
 
-  if(gametype == "zcleansed") {
+  if(gametype == "zcleansed")
     include_weapon("qcw05_zm");
-  }
 
   include_weapon("870mcs_zm", 0);
   include_weapon("870mcs_upgraded_zm", 0);
@@ -591,7 +575,8 @@ include_powerups() {
   include_powerup("random_weapon");
 }
 
-include_equipment_for_level() {}
+include_equipment_for_level() {
+}
 
 setup_personality_character_exerts() {
   level.exert_sounds[1]["playerbreathinsound"][0] = "vox_plr_0_exert_inhale_0";
@@ -740,9 +725,8 @@ buried_watch_for_power() {
     if(!level getclientfield("zombie_power_on")) {
       level.power_on = 0;
 
-      if(is_true(looped_once)) {
+      if(is_true(looped_once))
         level notify("power_controlled_light");
-      }
 
       level waittill_any("power_on", "pwr", "ZPO");
     }
@@ -750,9 +734,8 @@ buried_watch_for_power() {
     level notify("power_controlled_light");
     players = getlocalplayers();
 
-    for(i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++)
       level.current_fog = 2;
-    }
 
     level waittill_any("pwo", "ZPOff");
   }
@@ -765,30 +748,29 @@ init_fog_vol_to_visionset() {
 }
 
 sndlightsfx(num) {
-  while(!isDefined(level.generator_lights_array)) {
+  while(!isDefined(level.generator_lights_array))
     wait 0.1;
-  }
 
   generator_origin = (-579, 32, 69);
 
   if(num == 0) {
     foreach(light in level.generator_lights_array) {
       stoploopat("zmb_lantern_world_flicker", light.origin);
-      playSound(0, "zmb_lantern_world_off", light.origin);
+      playsound(0, "zmb_lantern_world_off", light.origin);
       wait 0.05;
     }
 
     stoploopat("zmb_generator_loop_2", generator_origin);
-    playSound(0, "zmb_generator_off", generator_origin);
+    playsound(0, "zmb_generator_off", generator_origin);
   } else if(num == 1) {
     foreach(light in level.generator_lights_array) {
       playloopat("zmb_lantern_world_loop", light.origin);
-      playSound(0, "zmb_lantern_world_on", light.origin);
+      playsound(0, "zmb_lantern_world_on", light.origin);
       wait 0.05;
     }
 
     playloopat("zmb_generator_loop_1", generator_origin);
-    playSound(0, "zmb_generator_on", generator_origin);
+    playsound(0, "zmb_generator_on", generator_origin);
   } else {
     foreach(light in level.generator_lights_array) {
       stoploopat("zmb_lantern_world_loop", light.origin);
@@ -824,9 +806,8 @@ buried_sq_maxis_eye_glow_override(localclientnum, oldval, newval, bnewent, binit
 
 buried_sq_richtofen_player_eyes_stuhlinger(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
-    if(localclientnum == self getlocalclientnumber()) {
+    if(localclientnum == self getlocalclientnumber())
       return;
-    }
   }
 
   if(isDefined(self.model) && issubstr(self.model, "reporter")) {
@@ -850,10 +831,9 @@ buried_sq_richtofen_player_eyes_stuhlinger(localclientnum, oldval, newval, bnewe
 
 buried_phd_flopper_effects(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playFX(localclientnum, level._effect["divetonuke_groundhit"], self.origin);
+    playfx(localclientnum, level._effect["divetonuke_groundhit"], self.origin);
 
-    if(localclientnum == 0) {
-      self playSound(localclientnum, "zmb_phdflop_explo");
-    }
+    if(localclientnum == 0)
+      self playsound(localclientnum, "zmb_phdflop_explo");
   }
 }

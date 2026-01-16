@@ -89,7 +89,7 @@ main() {
 }
 
 horizon_flashes() {
-  for(;;) {
+  for (;;) {
     var_0 = randomfloatrange(1, 4);
     var_1 = randomint(3);
     wait(var_0);

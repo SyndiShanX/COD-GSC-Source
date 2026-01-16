@@ -27,6 +27,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicles\raps;
+
 #namespace archetype_robot;
 
 autoexec __init__system__() {
@@ -343,8 +344,8 @@ private robotcalcproceduraltraversal(entity, asmstatename) {
   traversal.minimumspeed = 18;
   traversal.startnode = entity.traversestartnode;
   traversal.endnode = entity.traverseendnode;
-  startiswallrun = traversal.startnode.spawnflags & 2048;
-  endiswallrun = traversal.endnode.spawnflags & 2048;
+  startiswallrun = traversal.startnode.spawnflags&2048;
+  endiswallrun = traversal.endnode.spawnflags&2048;
   traversal.startpoint1 = entity.origin;
   traversal.endpoint1 = traversal.endnode.origin;
 
@@ -477,7 +478,7 @@ private robottraverseragdollondeath(entity, asmstatename) {
 
 private robotshouldproceduraltraverse(entity) {
   if(isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode)) {
-    isprocedural = entity ai::get_behavior_attribute("traversals") == "procedural" || entity.traversestartnode.spawnflags & 1024 || entity.traverseendnode.spawnflags & 1024;
+    isprocedural = entity ai::get_behavior_attribute("traversals") == "procedural" || entity.traversestartnode.spawnflags&1024 || entity.traverseendnode.spawnflags&1024;
     return isprocedural;
   }
 
@@ -489,8 +490,8 @@ private robotwallruntraverse(entity) {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode) && entity shouldstarttraversal()) {
-    startiswallrun = startnode.spawnflags & 2048;
-    endiswallrun = endnode.spawnflags & 2048;
+    startiswallrun = startnode.spawnflags&2048;
+    endiswallrun = endnode.spawnflags&2048;
     return (startiswallrun || endiswallrun);
   }
 
@@ -546,9 +547,9 @@ private calculatecubicbezier(t, p1, p2, p3, p4) {
 
 private mocomprobotstarttraversalinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   startnode = entity.traversestartnode;
-  startiswallrun = startnode.spawnflags & 2048;
+  startiswallrun = startnode.spawnflags&2048;
   endnode = entity.traverseendnode;
-  endiswallrun = endnode.spawnflags & 2048;
+  endiswallrun = endnode.spawnflags&2048;
 
   if(!endiswallrun) {
     angletoend = vectortoangles(entity.traverseendnode.origin - entity.traversestartnode.origin);
@@ -613,7 +614,7 @@ private mocomprobotproceduraltraversalupdate(entity, mocompanim, mocompanimblend
       return;
     }
 
-    endiswallrun = traversal.endnode.spawnflags & 2048;
+    endiswallrun = traversal.endnode.spawnflags&2048;
     realt = (gettime() - traversal.starttime) / traversal.totaltime;
     t = min(realt, 1);
 
@@ -637,7 +638,7 @@ private mocomprobotproceduraltraversalterminate(entity, mocompanim, mocompanimbl
   traversal = entity.traversal;
 
   if(isDefined(traversal) && gettime() >= traversal.endtime) {
-    endiswallrun = traversal.endnode.spawnflags & 2048;
+    endiswallrun = traversal.endnode.spawnflags&2048;
 
     if(!endiswallrun) {
       entity pathmode("move allowed");
@@ -699,8 +700,8 @@ private robotsetupwallrunjump() {
   traversaltype = "unknown";
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags & 2048;
-    endiswallrun = endnode.spawnflags & 2048;
+    startiswallrun = startnode.spawnflags&2048;
+    endiswallrun = endnode.spawnflags&2048;
 
     if(endiswallrun) {
       direction = _calculatewallrundirection(startnode.origin, endnode.origin);
@@ -748,8 +749,8 @@ private robotstartjumpdirection() {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags & 2048;
-    endiswallrun = endnode.spawnflags & 2048;
+    startiswallrun = startnode.spawnflags&2048;
+    endiswallrun = endnode.spawnflags&2048;
 
     if(startiswallrun) {
       abslengthtoend = distance2d(startnode.origin, endnode.origin);
@@ -771,8 +772,8 @@ private robotendjumpdirection() {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags & 2048;
-    endiswallrun = endnode.spawnflags & 2048;
+    startiswallrun = startnode.spawnflags&2048;
+    endiswallrun = endnode.spawnflags&2048;
 
     if(endiswallrun) {
       abslengthtoend = distance2d(startnode.origin, endnode.origin);
@@ -790,7 +791,7 @@ private robotendjumpdirection() {
 
 private robottraversaltype(node) {
   if(isDefined(node)) {
-    if(node.spawnflags & 2048) {
+    if(node.spawnflags&2048) {
       return "wall";
     }
 
@@ -821,7 +822,7 @@ private robotcrawlercanshootenemy(entity) {
   aimlimits = entity getaimlimitsfromentry("robot_crawler");
   yawtoenemy = angleclamp180(vectortoangles(entity lastknownpos(entity.enemy) - entity.origin)[1] - entity.angles[1]);
   angleepsilon = 10;
-  return yawtoenemy <= aimlimits[# "aim_left"] + angleepsilon && yawtoenemy >= aimlimits[# "aim_right"] + angleepsilon;
+  return yawtoenemy <= aimlimits[#"aim_left"] + angleepsilon && yawtoenemy >= aimlimits[#"aim_right"] + angleepsilon;
 }
 
 private archetyperobotonanimscriptedcallback(entity) {
@@ -991,11 +992,11 @@ private robotlocomotionspeed() {
 
   if(robotismindcontrolled() == "mind_controlled") {
     switch (ai::getaiattribute(entity, "rogue_control_speed")) {
-      case # "walk":
+      case #"walk":
         return "locomotion_speed_walk";
-      case # "run":
+      case #"run":
         return "locomotion_speed_run";
-      case # "sprint":
+      case #"sprint":
         return "locomotion_speed_sprint";
     }
   } else if(ai::getaiattribute(entity, "sprint")) {
@@ -1290,11 +1291,11 @@ private robotisatcovercondition(entity) {
 
 private robotsupportsovercover(entity) {
   if(isDefined(entity.node)) {
-    if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4) {
-      return (entity.node.type == # "cover stand" || entity.node.type == # "conceal stand");
+    if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags&4) == 4) {
+      return (entity.node.type == #"cover stand" || entity.node.type == #"conceal stand");
     }
 
-    return (entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch");
+    return (entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch");
   }
 
   return false;
@@ -1543,7 +1544,7 @@ private robotscanexposedpainterminate(entity) {
 private robottookempdamage(entity) {
   if(isDefined(entity.damageweapon) && isDefined(entity.damagemod)) {
     weapon = entity.damageweapon;
-    return (entity.damagemod == "MOD_GRENADE_SPLASH" && weapon.rootweapon.name == # "emp_grenade");
+    return (entity.damagemod == "MOD_GRENADE_SPLASH" && weapon.rootweapon.name == #"emp_grenade");
   }
 
   return false;
@@ -2064,13 +2065,13 @@ private robottryreacquireservice(entity) {
 
 private takeoverinitialize(entity, asmstatename) {
   switch (entity ai::get_behavior_attribute("rogue_control")) {
-    case # "level_1":
+    case #"level_1":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel1();
       break;
-    case # "level_2":
+    case #"level_2":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel2();
       break;
-    case # "level_3":
+    case #"level_3":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel3();
       break;
   }
@@ -2081,8 +2082,8 @@ private takeoverinitialize(entity, asmstatename) {
 
 private takeoverterminate(entity, asmstatename) {
   switch (entity ai::get_behavior_attribute("rogue_control")) {
-    case # "level_2":
-    case # "level_3":
+    case #"level_2":
+    case #"level_3":
       entity thread shared::dropaiweapon();
       break;
   }
@@ -2132,7 +2133,7 @@ private stepoutterminate(entity, asmstatename) {
 }
 
 private supportsstepoutcondition(entity) {
-  return entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover pillar";
+  return entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover pillar";
 }
 
 private shouldstepincondition(entity) {
@@ -2159,7 +2160,7 @@ private robotdeployminiraps() {
 }
 
 private function_125cc705() {
-  if(self.subarchetype === # "robot_rpg") {
+  if(self.subarchetype === #"robot_rpg") {
     self.var_21001b38 = getweapon(#"hash_3b5610f58856b4ea");
     self.var_d5bd74f1 = getweapon(#"hash_1d8ec79043d16eb");
     self.var_cdf2311b = 0;
@@ -2434,12 +2435,12 @@ private robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, w
     }
   }
 
-  if(weapon.name == # "sticky_grenade") {
+  if(weapon.name == #"sticky_grenade") {
     switch (meansofdamage) {
-      case # "mod_impact":
+      case #"mod_impact":
         entity.stuckwithstickygrenade = 1;
         break;
-      case # "mod_grenade_splash":
+      case #"mod_grenade_splash":
         if(isDefined(entity.stuckwithstickygrenade) && entity.stuckwithstickygrenade) {
           damage = entity.health;
         }
@@ -2732,13 +2733,13 @@ randomgibroguerobot(entity) {
 
 roguecontrolattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "forced_level_1":
+    case #"forced_level_1":
       if(entity.controllevel <= 0) {
         forcerobotsoldiermindcontrollevel1();
       }
 
       break;
-    case # "forced_level_2":
+    case #"forced_level_2":
       if(entity.controllevel <= 1) {
         forcerobotsoldiermindcontrollevel2();
         destructserverutils::togglespawngibs(entity, 0);
@@ -2749,7 +2750,7 @@ roguecontrolattributecallback(entity, attribute, oldvalue, value) {
       }
 
       break;
-    case # "forced_level_3":
+    case #"forced_level_3":
       if(entity.controllevel <= 2) {
         forcerobotsoldiermindcontrollevel3();
         destructserverutils::togglespawngibs(entity, 0);
@@ -2772,16 +2773,16 @@ robotmovemodeattributecallback(entity, attribute, oldvalue, value) {
   }
 
   switch (value) {
-    case # "normal":
+    case #"normal":
       break;
-    case # "rambo":
+    case #"rambo":
       entity.ignorepathenemyfightdist = 1;
       break;
-    case # "marching":
+    case #"marching":
       entity.ignorepathenemyfightdist = 1;
       entity setblackboardattribute("_move_mode", "marching");
       break;
-    case # "rusher":
+    case #"rusher":
       if(!entity ai::get_behavior_attribute("can_become_rusher")) {
         entity ai::set_behavior_attribute("move_mode", oldvalue);
       }
@@ -2800,13 +2801,13 @@ robotforcecrawler(entity, attribute, oldvalue, value) {
   }
 
   switch (value) {
-    case # "normal":
+    case #"normal":
       return;
-    case # "gib_legs":
+    case #"gib_legs":
       gibserverutils::togglespawngibs(entity, 1);
       destructserverutils::togglespawngibs(entity, 1);
       break;
-    case # "remove_legs":
+    case #"remove_legs":
       gibserverutils::togglespawngibs(entity, 0);
       destructserverutils::togglespawngibs(entity, 0);
       break;
@@ -2857,13 +2858,13 @@ roguecontrolforcegoalattributecallback(entity, attribute, oldvalue, value) {
 
 roguecontrolspeedattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "walk":
+    case #"walk":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
       break;
-    case # "run":
+    case #"run":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
       break;
-    case # "sprint":
+    case #"sprint":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
       break;
   }
@@ -2871,10 +2872,10 @@ roguecontrolspeedattributecallback(entity, attribute, oldvalue, value) {
 
 robottraversalattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "normal":
+    case #"normal":
       entity.manualtraversemode = 0;
       break;
-    case # "procedural":
+    case #"procedural":
       entity.manualtraversemode = 1;
       break;
   }

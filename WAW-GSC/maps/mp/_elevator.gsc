@@ -15,7 +15,7 @@ init() {
   platforms_non_switched = [];
   platforms_total = [];
   trigger_target_targets = [];
-  for(i = 0; i < platform_triggers.size; i++) {
+  for (i = 0; i < platform_triggers.size; i++) {
     trigger_target = getEnt(platform_triggers[i].target, "targetname");
     if(!isDefined(trigger_target)) {
       AssertMsg("This trigger does not have a target: " + platform_triggers[i].origin);
@@ -29,13 +29,13 @@ init() {
       }
     }
   }
-  for(i = 0; i < platform_switches.size; i++) {
+  for (i = 0; i < platform_switches.size; i++) {
     platform = getEnt(platform_switches[i].target, "targetname");
     if(!isDefined(platform)) {
       AssertMsg("This switch does not target a platform: " + platform_switches[i].origin);
     } else {
       counter = 0;
-      for(x = 0; x < platforms_total.size; x++) {
+      for (x = 0; x < platforms_total.size; x++) {
         if(platform == platforms_total[x]) {
           counter++;
         }
@@ -47,9 +47,9 @@ init() {
       }
     }
   }
-  for(i = 0; i < platforms_non_switched.size; i++) {
+  for (i = 0; i < platforms_non_switched.size; i++) {
     counter = 0;
-    for(x = 0; x < platforms_total.size; x++) {
+    for (x = 0; x < platforms_total.size; x++) {
       if(platforms_non_switched[i] == platforms_total[x]) {
         counter++;
       }
@@ -73,7 +73,7 @@ define_elevator_parts() {
   platform.at_start = true;
   platform_triggers = [];
   targets_platform = getEntArray(platform_name, "target");
-  for(i = 0; i < targets_platform.size; i++) {
+  for (i = 0; i < targets_platform.size; i++) {
     if(targets_platform[i].classname == "script_model" || targets_platform[i].classname == "script_brushmodel") {
       switch_trigger = getEnt(targets_platform[i].targetname, "target");
       platform_triggers[platform_triggers.size] = switch_trigger;
@@ -88,7 +88,7 @@ define_elevator_parts() {
     AssertMsg("This platform does not have any targets: " + platform.origin);
   }
   if(isDefined(platform_targets)) {
-    for(i = 0; i < platform_targets.size; i++) {
+    for (i = 0; i < platform_targets.size; i++) {
       if(isDefined(platform_targets[i].script_noteworthy)) {
         if(platform_targets[i].script_noteworthy == "audio_point") {
           audio_points[audio_points.size] = platform_targets[i];
@@ -122,7 +122,7 @@ define_elevator_parts() {
 }
 
 trigger_think(platform_name) {
-  while(1) {
+  while (1) {
     self waittill("trigger");
     level notify("start_" + platform_name + "_klaxon");
     wait 2;
@@ -166,7 +166,7 @@ move_elevator_gates(platform_name, direction) {
   } else {
     speed = 1;
   }
-  while(1) {
+  while (1) {
     level waittill(direction + platform_name + "_gates");
     self rotatePitch(amount, speed);
   }
@@ -182,7 +182,7 @@ move_platform(platform_start, platform_name) {
   }
   path = true;
   pstruct = platform_start;
-  while(path) {
+  while (path) {
     if(isDefined(pstruct.target)) {
       pstruct = getStruct(pstruct.target, "targetname");
       if(isDefined(pstruct)) {
@@ -192,10 +192,10 @@ move_platform(platform_start, platform_name) {
       path = false;
     }
   }
-  for(i = move_up.size - 1; i >= 0; i--) {
+  for (i = move_up.size - 1; i >= 0; i--) {
     move_down[move_down.size] = move_up[i];
   }
-  while(1) {
+  while (1) {
     level waittill("elevator_" + platform_name + "_move");
     wait 2;
     if(isDefined(level.scr_sound["elevator_start"])) {
@@ -203,7 +203,7 @@ move_platform(platform_start, platform_name) {
     }
     if(self.at_start) {
       speed = -1;
-      for(i = 0; i < move_up.size; i++) {
+      for (i = 0; i < move_up.size; i++) {
         org = move_up[i + 1];
         if(isDefined(org)) {
           speed = get_speed(org, speed);
@@ -231,7 +231,7 @@ move_platform(platform_start, platform_name) {
         self playSound(level.scr_sound["elevator_start"]);
       }
       speed = -1;
-      for(i = 0; i < move_down.size; i++) {
+      for (i = 0; i < move_down.size; i++) {
         org = move_down[i + 1];
         if(isDefined(org)) {
           speed = get_speed(org, speed);

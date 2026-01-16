@@ -34,11 +34,10 @@ playflarefx(localclientnum) {
   self endon("entityshutdown");
   level endon("player_switch");
 
-  if(friendnotfoe(localclientnum)) {
-    fx_handle = playFXOnTag(localclientnum, level._effect["satchel_charge_friendly_light"], self, "tag_origin");
-  } else {
-    fx_handle = playFXOnTag(localclientnum, level._effect["satchel_charge_enemy_light"], self, "tag_origin");
-  }
+  if(friendnotfoe(localclientnum))
+    fx_handle = playfxontag(localclientnum, level._effect["satchel_charge_friendly_light"], self, "tag_origin");
+  else
+    fx_handle = playfxontag(localclientnum, level._effect["satchel_charge_enemy_light"], self, "tag_origin");
 
   self thread watchsatchelchargeshutdown(localclientnum, fx_handle);
   return fx_handle;
@@ -48,9 +47,8 @@ watchsatchelchargeshutdown(localclientnum, fxhandle) {
   msg = self waittill_any_return("entityshutdown", "team_changed", "player_switch");
   stopfx(localclientnum, fxhandle);
 
-  if(msg == "team_changed") {
+  if(msg == "team_changed")
     self thread satchel_charge_fx(localclientnum);
-  }
 }
 
 checkforplayerswitch(localclientnum, fxhandle) {
@@ -59,9 +57,8 @@ checkforplayerswitch(localclientnum, fxhandle) {
   level waittill("player_switch");
   self notify("player_switch");
 
-  if(isDefined(fxhandle)) {
+  if(isDefined(fxhandle))
     stopfx(localclientnum, fxhandle);
-  }
 
   waittillframeend;
   self thread satchel_charge_fx(localclientnum);

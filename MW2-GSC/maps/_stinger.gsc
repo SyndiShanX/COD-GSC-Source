@@ -9,9 +9,8 @@
 init() {
   precacherumble("stinger_lock_rumble");
 
-  foreach(player in level.players) {
-    player ClearIRTarget();
-  }
+  foreach(player in level.players)
+  player ClearIRTarget();
 
   foreach(player in level.players) {
     player thread StingerFiredNotify();
@@ -20,9 +19,8 @@ init() {
 }
 
 ClearIRTarget() {
-  if(!isDefined(self.stinger)) {
+  if(!isdefined(self.stinger))
     self.stinger = spawnStruct();
-  }
   self.stinger.stingerLockStartTime = 0;
   self.stinger.stingerLockStarted = false;
   self.stinger.stingerLockFinalized = false;
@@ -45,13 +43,12 @@ ClearIRTarget() {
 StingerFiredNotify() {
   assert(self.classname == "player");
 
-  while(true) {
+  while (true) {
     self waittill("weapon_fired");
 
     weap = self getCurrentWeapon();
-    if(weap != "stinger") {
+    if(weap != "stinger")
       continue;
-    }
 
     self notify("stinger_fired");
   }
@@ -61,16 +58,14 @@ StingerToggleLoop() {
   assert(self.classname == "player");
   self endon("death");
 
-  for(;;) {
-    while(!self PlayerStingerAds()) {
+  for (;;) {
+    while (!self PlayerStingerAds())
       wait 0.05;
-    }
 
     self thread StingerIRTLoop();
 
-    while(self PlayerStingerAds()) {
+    while (self PlayerStingerAds())
       wait 0.05;
-    }
     self notify("stinger_IRT_off");
     self ClearIRTarget();
   }
@@ -83,7 +78,7 @@ StingerIRTLoop() {
 
   LOCK_LENGTH = 1150;
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     //-------------------------
@@ -113,11 +108,10 @@ StingerIRTLoop() {
       }
 
       timePassed = getTime() - self.stinger.stingerLockStartTime;
-      if(timePassed < LOCK_LENGTH) {
+      if(timePassed < LOCK_LENGTH)
         continue;
-      }
 
-      assert(isDefined(self.stinger.stingerTarget));
+      assert(isdefined(self.stinger.stingerTarget));
       self notify("stop_lockon_sound");
       self.stinger.stingerLockFinalized = true;
       self WeaponLockFinalize(self.stinger.stingerTarget);
@@ -127,9 +121,8 @@ StingerIRTLoop() {
     }
 
     bestTarget = self GetBestStingerTarget();
-    if(!isDefined(bestTarget)) {
+    if(!isDefined(bestTarget))
       continue;
-    }
 
     self.stinger.stingerTarget = bestTarget;
     self.stinger.stingerLockStartTime = getTime();
@@ -143,15 +136,13 @@ GetBestStingerTarget() {
   targetsAll = target_getArray();
   targetsValid = [];
 
-  for(idx = 0; idx < targetsAll.size; idx++) {
-    if(self InsideStingerReticleNoLock(targetsAll[idx])) {
+  for (idx = 0; idx < targetsAll.size; idx++) {
+    if(self InsideStingerReticleNoLock(targetsAll[idx]))
       targetsValid[targetsValid.size] = targetsAll[idx];
-    }
   }
 
-  if(targetsValid.size == 0) {
+  if(targetsValid.size == 0)
     return undefined;
-  }
 
   chosenEnt = targetsValid[0];
   if(targetsValid.size > 1) {
@@ -172,15 +163,12 @@ InsideStingerReticleLocked(target) {
 IsStillValidTarget(ent) {
   assert(self.classname == "player");
 
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
-  if(!target_isTarget(ent)) {
+  if(!target_isTarget(ent))
     return false;
-  }
-  if(!self InsideStingerReticleLocked(ent)) {
+  if(!self InsideStingerReticleLocked(ent))
     return false;
-  }
 
   return true;
 }
@@ -189,13 +177,11 @@ PlayerStingerAds() {
   assert(self.classname == "player");
 
   weap = self getCurrentWeapon();
-  if(weap != "stinger") {
+  if(weap != "stinger")
     return false;
-  }
 
-  if(self playerads() == 1.0) {
+  if(self playerads() == 1.0)
     return true;
-  }
 
   return false;
 }
@@ -205,9 +191,8 @@ SetTargetTooClose(ent) {
 
   MINIMUM_STI_DISTANCE = 1000;
 
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
   dist = Distance2D(self.origin, ent.origin);
 
   //PrintLn( "Jav Distance: ", dist );
@@ -227,7 +212,7 @@ LoopLocalSeekSound(alias, interval) {
 
   self endon("stop_lockon_sound");
 
-  for(;;) {
+  for (;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
 
@@ -240,12 +225,11 @@ LoopLocalLockSound(alias, interval) {
 
   self endon("stop_locked_sound");
 
-  if(isDefined(self.stinger.stingerlocksound)) {
+  if(isdefined(self.stinger.stingerlocksound))
     return;
-  }
 
   self.stinger.stingerlocksound = true;
-  for(;;) {
+  for (;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;

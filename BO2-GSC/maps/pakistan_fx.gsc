@@ -42,9 +42,8 @@ play_water_fx() {
   self setclientflag(n_client_flag);
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self clearclientflag(n_client_flag);
-  }
 }
 
 precache_createfx_fx() {
@@ -168,7 +167,8 @@ wind_init() {
   setsaveddvar("wind_global_low_strength_percent", 0.5);
 }
 
-footsteps() {}
+footsteps() {
+}
 
 #using_animtree("fxanim_props");
 #using_animtree("animated_props");

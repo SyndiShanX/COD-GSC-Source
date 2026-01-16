@@ -55,9 +55,8 @@ survival_init() {
   level.force_team_characters = 1;
   level.should_use_cia = 0;
 
-  if(randomint(100) > 50) {
+  if(randomint(100) > 50)
     level.should_use_cia = 1;
-  }
 
   level.precachecustomcharacters = ::precache_team_characters;
   level.givecustomcharacters = ::give_team_characters;
@@ -85,7 +84,7 @@ transit_standard_intermission() {
   point = undefined;
 
   if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+    points = getentarray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -107,23 +106,20 @@ transit_standard_intermission() {
 
   while(true) {
     foreach(struct in points) {
-      if(isDefined(struct.script_string) && struct.script_string == level.scr_zm_map_start_location) {
+      if(isDefined(struct.script_string) && struct.script_string == level.scr_zm_map_start_location)
         point = struct;
-      }
     }
 
-    if(!isDefined(point)) {
+    if(!isDefined(point))
       point = points[0];
-    }
 
-    if(!isDefined(org)) {
+    if(!isDefined(org))
       self spawn(point.origin, point.angles);
-    }
 
     if(isDefined(point.target)) {
       if(!isDefined(org)) {
         org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-        org setModel("tag_origin");
+        org setmodel("tag_origin");
       }
 
       org.origin = point.origin;
@@ -138,18 +134,16 @@ transit_standard_intermission() {
 
       speed = 20;
 
-      if(isDefined(point.speed)) {
+      if(isDefined(point.speed))
         speed = point.speed;
-      }
 
       target_point = getstruct(point.target, "targetname");
       dist = distance(point.origin, target_point.origin);
       time = dist / speed;
       q_time = time * 0.25;
 
-      if(q_time > 1) {
+      if(q_time > 1)
         q_time = 1;
-      }
 
       self.game_over_bg fadeovertime(q_time);
       self.game_over_bg.alpha = 0;
@@ -173,12 +167,11 @@ zturned_preinit() {
 }
 
 createfx_callback() {
-  ents = getEntArray();
+  ents = getentarray();
 
   for(i = 0; i < ents.size; i++) {
-    if(ents[i].classname != "info_player_start") {
+    if(ents[i].classname != "info_player_start")
       ents[i] delete();
-    }
   }
 }
 
@@ -241,9 +234,8 @@ main() {
   level.legacy_cymbal_monkey = 1;
   maps\mp\zombies\_zm_weap_cymbal_monkey::init();
 
-  if(!isDefined(level.vsmgr_prio_overlay_zm_transit_burn)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_transit_burn))
     level.vsmgr_prio_overlay_zm_transit_burn = 20;
-  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_transit_burn", 1, level.vsmgr_prio_overlay_zm_transit_burn, 15, 1, maps\mp\_visionset_mgr::vsmgr_duration_lerp_thread_per_player, 0);
   level maps\mp\zm_transit_dr_achievement::init();
@@ -271,30 +263,29 @@ setup_rex_starts() {
   add_gameloc("diner", ::dummy, "diner", ::dummy);
 }
 
-dummy() {}
+dummy() {
+}
 
-init_clientflags() {}
+init_clientflags() {
+}
 
 set_player_in_fog(onoff) {
-  if(onoff) {
+  if(onoff)
     self setclientfield("playerinfog", 1);
-  } else {
+  else
     self setclientfield("playerinfog", 0);
-  }
 }
 
 transit_breadcrumb_store_func(store_crumb) {
-  if(isDefined(self.isonbus) && self.isonbus) {
+  if(isDefined(self.isonbus) && self.isonbus)
     return 0;
-  }
 
   return store_crumb;
 }
 
 post_first_init() {
-  while(!isDefined(anim.notfirsttime)) {
+  while(!isDefined(anim.notfirsttime))
     wait 0.5;
-  }
 
   anim.meleerange = 36;
   anim.meleerangesq = anim.meleerange * anim.meleerange;
@@ -320,9 +311,8 @@ precache_survival_barricade_assets() {
 
   for(i = 0; i < survival_barricades.size; i++) {
     if(isDefined(survival_barricades[i].script_string) && survival_barricades[i].script_string == "survival") {
-      if(isDefined(survival_barricades[i].script_parameters)) {
+      if(isDefined(survival_barricades[i].script_parameters))
         precachemodel(survival_barricades[i].script_parameters);
-      }
     }
   }
 }
@@ -332,20 +322,18 @@ initcharacterstartindex() {
 
   forcecharacter = getdvarint(#"_id_FEE4CB69");
 
-  if(forcecharacter != 0) {
+  if(forcecharacter != 0)
     level.characterstartindex = forcecharacter - 1;
-  }
 }
 
 give_team_characters() {
   self detachall();
   self set_player_is_female(0);
 
-  if(!isDefined(self.characterindex)) {
+  if(!isDefined(self.characterindex))
     self.characterindex = 1;
-  }
 
-  self setModel("c_zom_player_cdc_dlc1_fb");
+  self setmodel("c_zom_player_cdc_dlc1_fb");
   self.voice = "american";
   self.skeleton = "base";
   self setviewmodel("c_zom_hazmat_viewhands");
@@ -461,9 +449,8 @@ transit_intermission() {
     near_bridge = 0;
 
     foreach(zone in zonestocheck) {
-      if(level.the_bus maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_bridge")) {
+      if(level.the_bus maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_amb_bridge"))
         near_bridge = 1;
-      }
     }
 
     if(near_bridge) {
@@ -472,7 +459,7 @@ transit_intermission() {
     }
 
     org = spawn("script_model", level.the_bus gettagorigin("tag_camera"));
-    org setModel("tag_origin");
+    org setmodel("tag_origin");
     org.angles = level.the_bus gettagangles("tag_camera");
     org linkto(level.the_bus);
     self setorigin(org.origin);
@@ -524,19 +511,16 @@ include_powerups() {
   include_powerup("double_points");
   include_powerup("full_ammo");
 
-  if(gametype != "zgrief") {
+  if(gametype != "zgrief")
     include_powerup("carpenter");
-  }
 }
 
 claymore_safe_to_plant() {
-  if(self maps\mp\zm_transit_lava::object_touching_lava()) {
+  if(self maps\mp\zm_transit_lava::object_touching_lava())
     return false;
-  }
 
-  if(self.owner maps\mp\zm_transit_lava::object_touching_lava()) {
+  if(self.owner maps\mp\zm_transit_lava::object_touching_lava())
     return false;
-  }
 
   return true;
 }
@@ -546,13 +530,11 @@ grenade_safe_to_throw(player, weapname) {
 }
 
 grenade_safe_to_bounce(player, weapname) {
-  if(!is_offhand_weapon(weapname) && !is_grenade_launcher(weapname)) {
+  if(!is_offhand_weapon(weapname) && !is_grenade_launcher(weapname))
     return true;
-  }
 
-  if(self maps\mp\zm_transit_lava::object_touching_lava()) {
+  if(self maps\mp\zm_transit_lava::object_touching_lava())
     return false;
-  }
 
   return true;
 }
@@ -651,41 +633,42 @@ less_than_normal() {
 }
 
 custom_add_weapons() {
-  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "", "", undefined);
-  add_zombie_weapon("python_zm", "python_upgraded_zm", &"ZOMBIE_WEAPON_PYTHON", 50, "wpck_python", "", undefined, 1);
-  add_zombie_weapon("judge_zm", "judge_upgraded_zm", &"ZOMBIE_WEAPON_JUDGE", 50, "wpck_judge", "", undefined, 1);
-  add_zombie_weapon("kard_zm", "kard_upgraded_zm", &"ZOMBIE_WEAPON_KARD", 50, "wpck_kap", "", undefined, 1);
-  add_zombie_weapon("fiveseven_zm", "fiveseven_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_57", "", undefined, 1);
-  add_zombie_weapon("beretta93r_zm", "beretta93r_upgraded_zm", &"ZOMBIE_WEAPON_BERETTA93r", 1000, "", "", undefined);
-  add_zombie_weapon("fivesevendw_zm", "fivesevendw_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_duel57", "", undefined, 1);
-  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", &"ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
-  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", &"ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
-  add_zombie_weapon("qcw05_zm", "qcw05_upgraded_zm", &"ZOMBIE_WEAPON_QCW05", 50, "wpck_chicom", "", undefined, 1);
-  add_zombie_weapon("870mcs_zm", "870mcs_upgraded_zm", &"ZOMBIE_WEAPON_870MCS", 1500, "shotgun", "", undefined);
-  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", &"ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
-  add_zombie_weapon("saiga12_zm", "saiga12_upgraded_zm", &"ZOMBIE_WEAPON_SAIGA12", 50, "wpck_saiga12", "", undefined, 1);
-  add_zombie_weapon("srm1216_zm", "srm1216_upgraded_zm", &"ZOMBIE_WEAPON_SRM1216", 50, "wpck_m1216", "", undefined, 1);
-  add_zombie_weapon("m14_zm", "m14_upgraded_zm", &"ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
-  add_zombie_weapon("saritch_zm", "saritch_upgraded_zm", &"ZOMBIE_WEAPON_SARITCH", 50, "wpck_sidr", "", undefined, 1);
-  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", &"ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
-  add_zombie_weapon("xm8_zm", "xm8_upgraded_zm", &"ZOMBIE_WEAPON_XM8", 50, "wpck_m8a1", "", undefined, 1);
-  add_zombie_weapon("type95_zm", "type95_upgraded_zm", &"ZOMBIE_WEAPON_TYPE95", 50, "wpck_type25", "", undefined, 1);
-  add_zombie_weapon("tar21_zm", "tar21_upgraded_zm", &"ZOMBIE_WEAPON_TAR21", 50, "wpck_x95l", "", undefined, 1);
-  add_zombie_weapon("galil_zm", "galil_upgraded_zm", &"ZOMBIE_WEAPON_GALIL", 50, "wpck_galil", "", undefined, 1);
-  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", &"ZOMBIE_WEAPON_FNFAL", 50, "wpck_fal", "", undefined, 1);
-  add_zombie_weapon("dsr50_zm", "dsr50_upgraded_zm", &"ZOMBIE_WEAPON_DR50", 50, "wpck_dsr50", "", undefined, 1);
-  add_zombie_weapon("barretm82_zm", "barretm82_upgraded_zm", &"ZOMBIE_WEAPON_BARRETM82", 50, "sniper", "", undefined);
-  add_zombie_weapon("rpd_zm", "rpd_upgraded_zm", &"ZOMBIE_WEAPON_RPD", 50, "wpck_rpd", "", undefined, 1);
-  add_zombie_weapon("hamr_zm", "hamr_upgraded_zm", &"ZOMBIE_WEAPON_HAMR", 50, "wpck_hamr", "", undefined, 1);
-  add_zombie_weapon("frag_grenade_zm", undefined, &"ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
-  add_zombie_weapon("usrpg_zm", "usrpg_upgraded_zm", &"ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
-  add_zombie_weapon("m32_zm", "m32_upgraded_zm", &"ZOMBIE_WEAPON_M32", 50, "wpck_m32", "", undefined, 1);
-  add_zombie_weapon("cymbal_monkey_zm", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
-  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
-  add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", &"ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
+  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", & "ZOMBIE_WEAPON_M1911", 50, "", "", undefined);
+  add_zombie_weapon("python_zm", "python_upgraded_zm", & "ZOMBIE_WEAPON_PYTHON", 50, "wpck_python", "", undefined, 1);
+  add_zombie_weapon("judge_zm", "judge_upgraded_zm", & "ZOMBIE_WEAPON_JUDGE", 50, "wpck_judge", "", undefined, 1);
+  add_zombie_weapon("kard_zm", "kard_upgraded_zm", & "ZOMBIE_WEAPON_KARD", 50, "wpck_kap", "", undefined, 1);
+  add_zombie_weapon("fiveseven_zm", "fiveseven_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_57", "", undefined, 1);
+  add_zombie_weapon("beretta93r_zm", "beretta93r_upgraded_zm", & "ZOMBIE_WEAPON_BERETTA93r", 1000, "", "", undefined);
+  add_zombie_weapon("fivesevendw_zm", "fivesevendw_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_duel57", "", undefined, 1);
+  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", & "ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
+  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", & "ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
+  add_zombie_weapon("qcw05_zm", "qcw05_upgraded_zm", & "ZOMBIE_WEAPON_QCW05", 50, "wpck_chicom", "", undefined, 1);
+  add_zombie_weapon("870mcs_zm", "870mcs_upgraded_zm", & "ZOMBIE_WEAPON_870MCS", 1500, "shotgun", "", undefined);
+  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", & "ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
+  add_zombie_weapon("saiga12_zm", "saiga12_upgraded_zm", & "ZOMBIE_WEAPON_SAIGA12", 50, "wpck_saiga12", "", undefined, 1);
+  add_zombie_weapon("srm1216_zm", "srm1216_upgraded_zm", & "ZOMBIE_WEAPON_SRM1216", 50, "wpck_m1216", "", undefined, 1);
+  add_zombie_weapon("m14_zm", "m14_upgraded_zm", & "ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
+  add_zombie_weapon("saritch_zm", "saritch_upgraded_zm", & "ZOMBIE_WEAPON_SARITCH", 50, "wpck_sidr", "", undefined, 1);
+  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", & "ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
+  add_zombie_weapon("xm8_zm", "xm8_upgraded_zm", & "ZOMBIE_WEAPON_XM8", 50, "wpck_m8a1", "", undefined, 1);
+  add_zombie_weapon("type95_zm", "type95_upgraded_zm", & "ZOMBIE_WEAPON_TYPE95", 50, "wpck_type25", "", undefined, 1);
+  add_zombie_weapon("tar21_zm", "tar21_upgraded_zm", & "ZOMBIE_WEAPON_TAR21", 50, "wpck_x95l", "", undefined, 1);
+  add_zombie_weapon("galil_zm", "galil_upgraded_zm", & "ZOMBIE_WEAPON_GALIL", 50, "wpck_galil", "", undefined, 1);
+  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", & "ZOMBIE_WEAPON_FNFAL", 50, "wpck_fal", "", undefined, 1);
+  add_zombie_weapon("dsr50_zm", "dsr50_upgraded_zm", & "ZOMBIE_WEAPON_DR50", 50, "wpck_dsr50", "", undefined, 1);
+  add_zombie_weapon("barretm82_zm", "barretm82_upgraded_zm", & "ZOMBIE_WEAPON_BARRETM82", 50, "sniper", "", undefined);
+  add_zombie_weapon("rpd_zm", "rpd_upgraded_zm", & "ZOMBIE_WEAPON_RPD", 50, "wpck_rpd", "", undefined, 1);
+  add_zombie_weapon("hamr_zm", "hamr_upgraded_zm", & "ZOMBIE_WEAPON_HAMR", 50, "wpck_hamr", "", undefined, 1);
+  add_zombie_weapon("frag_grenade_zm", undefined, & "ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
+  add_zombie_weapon("usrpg_zm", "usrpg_upgraded_zm", & "ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
+  add_zombie_weapon("m32_zm", "m32_upgraded_zm", & "ZOMBIE_WEAPON_M32", 50, "wpck_m32", "", undefined, 1);
+  add_zombie_weapon("cymbal_monkey_zm", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
+  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
+  add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", & "ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
 }
 
-include_game_modules() {}
+include_game_modules() {
+}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");
@@ -697,7 +680,7 @@ zombie_init_done() {
 }
 
 setup_zombie_init() {
-  zombies = getEntArray("zombie_spawner", "script_noteworthy");
+  zombies = getentarray("zombie_spawner", "script_noteworthy");
 }
 
 assign_lowest_unused_character_index() {
@@ -715,15 +698,13 @@ assign_lowest_unused_character_index() {
     foreach(player in players) {
       if(isDefined(player.characterindex)) {
         if(player.characterindex == 2 || player.characterindex == 0) {
-          if(randomint(100) > 50) {
+          if(randomint(100) > 50)
             return 1;
-          }
 
           return 3;
         } else if(player.characterindex == 3 || player.characterindex == 1) {
-          if(randomint(100) > 50) {
+          if(randomint(100) > 50)
             return 0;
-          }
 
           return 2;
         }
@@ -731,14 +712,12 @@ assign_lowest_unused_character_index() {
     }
   } else {
     foreach(player in players) {
-      if(isDefined(player.characterindex)) {
+      if(isDefined(player.characterindex))
         arrayremovevalue(charindexarray, player.characterindex, 0);
-      }
     }
 
-    if(charindexarray.size > 0) {
+    if(charindexarray.size > 0)
       return charindexarray[0];
-    }
   }
 
   return 0;
@@ -776,15 +755,13 @@ zombie_transit_dr_devgui(cmd) {
 less_time() {
   level.time_to_add = 30000.0;
 
-  if(!isDefined(level.time_to_remove)) {
+  if(!isDefined(level.time_to_remove))
     level.time_to_remove = 60000;
-  } else {
+  else
     level.time_to_remove = level.time_to_remove * 2;
-  }
 
-  if(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() < level.time_to_remove) {
+  if(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() < level.time_to_remove)
     level.time_to_remove = maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() / 2;
-  }
 
   level.discardtime = level.discardtime - level.time_to_remove;
 }
@@ -792,11 +769,10 @@ less_time() {
 more_time() {
   level.time_to_remove = 30000.0;
 
-  if(!isDefined(level.time_to_add)) {
+  if(!isDefined(level.time_to_add))
     level.time_to_add = 60000;
-  } else {
+  else
     level.time_to_add = level.time_to_add * 2;
-  }
 
   level.discardtime = level.discardtime + level.time_to_add;
 }

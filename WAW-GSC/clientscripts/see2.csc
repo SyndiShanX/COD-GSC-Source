@@ -52,11 +52,11 @@ event1_ambient_aaa_fx_think(endon_string) {
   if(isDefined(endon_string)) {
     level endon(endon_string);
   }
-  while(1) {
+  while (1) {
     firetime = randomintrange(3, 8);
-    for(i = 0; i < firetime * 5; i++) {
-      playFX(0, level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
-      playSound(0, "pacific_fake_fire", self.origin);
+    for (i = 0; i < firetime * 5; i++) {
+      playfx(0, level._effect["aaa_tracer"], self.origin, anglestoforward(self.angles));
+      playsound(0, "pacific_fake_fire", self.origin);
       wait 0.2;
     }
     wait randomintrange(1, 3);
@@ -65,7 +65,7 @@ event1_ambient_aaa_fx_think(endon_string) {
 
 event1_ambient_aaa_fx_rotate() {
   going_forward = true;
-  while(1) {
+  while (1) {
     self rotateto((312.6, 180, -90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
     self rotateto((307.4, 1.7, 90), randomfloatrange(3.5, 6));
@@ -77,8 +77,8 @@ client_distance_planes(str_structname, str_waittill) {
   level endon(str_waittill + "_stop");
   level waittill(str_waittill);
   plane_splines = GetStructArray(str_structname, "targetname");
-  while(1) {
-    for(i = 0; i < plane_splines.size; i++) {
+  while (1) {
+    for (i = 0; i < plane_splines.size; i++) {
       plane_splines[i] thread client_spawn_and_path_plane();
     }
     wait(5);
@@ -92,11 +92,11 @@ client_field_planes(str_structname, str_waittill, spawn_percent, delay_min, dela
   players = getlocalplayers();
   planes_max = 5;
   planes_spawned = 0;
-  while(1) {
-    for(j = 0; j < plane_splines.size && planes_spawned < planes_max; j++) {
+  while (1) {
+    for (j = 0; j < plane_splines.size && planes_spawned < planes_max; j++) {
       random_spawn = RandomIntRange(0, 100);
       if(random_spawn < spawn_percent) {
-        for(i = 0; i < players.size; i++) {
+        for (i = 0; i < players.size; i++) {
           plane_splines[j] thread client_spawn_and_path_plane(i);
         }
         planes_spawned++;
@@ -123,7 +123,7 @@ plane_sound_thread(client_num, plane) {
   fake = spawnfakeent(client_num);
   setfakeentorg(client_num, fake, plane.origin);
   playLoopSound(client_num, fake, "amb_planes", 1);
-  while(isDefined(plane) && isDefined(fake)) {
+  while (isDefined(plane) && isDefined(fake)) {
     setfakeentorg(client_num, fake, plane.origin);
     wait(.01);
   }
@@ -146,16 +146,16 @@ client_spawn_and_path_plane(client_num) {
   if(!isDefined(client_num)) {
     client_num = 0;
   }
-  plane = spawn(client_num, self.origin, "script_model");
+  plane = Spawn(client_num, self.origin, "script_model");
   plane thread delete_plane_on_save_restore();
-  plane setModel(_modelname);
+  plane SetModel(_modelname);
   plane RotateTo(self.angles, 0.05);
   wait(0.05);
   thread plane_sound_thread(client_num, plane);
   plane.current_node = self;
   current_node = self;
   next_node = self;
-  while(isDefined(current_node.target)) {
+  while (isDefined(current_node.target)) {
     next_node = GetStruct(current_node.target, "targetname");
     plane MoveTo(next_node.origin, _trans_time);
     plane RotateTo(next_node.angles, _trans_time);
@@ -165,7 +165,7 @@ client_spawn_and_path_plane(client_num) {
       if(plane_action == "blow_up") {
         blow_up_chance = RandomIntRange(0, 100);
         if(blow_up_chance < current_node.script_int) {
-          playFX(client_num, level._effect[current_node.script_string], plane.origin);
+          PlayFX(client_num, level._effect[current_node.script_string], plane.origin);
           plane Delete();
           return;
         }
@@ -196,7 +196,7 @@ client_plane_fire_rocket(client_num) {
   rocket = spawn(client_num, self.origin, "script_model");
   rocket thread delete_rocket_on_saverestore();
   rocket.angles = self.angles;
-  rocket setModel("katyusha_rocket");
+  rocket setmodel("katyusha_rocket");
   angles = VectorToAngles(end_pos - start_pos);
   rocket.angles = angles;
   distance = distance(start_pos, end_pos);
@@ -204,7 +204,7 @@ client_plane_fire_rocket(client_num) {
   rocket thread client_rocket_trail(client_num);
   rocket MoveTo(end_pos, time);
   realWait(time);
-  playFX(client_num, level._effect["pc132_explode"], rocket.origin);
+  playfx(client_num, level._effect["pc132_explode"], rocket.origin);
   rocket notify("rocket done");
   rocket Delete();
 }
@@ -212,8 +212,8 @@ client_plane_fire_rocket(client_num) {
 client_rocket_trail(client_num) {
   self endon("rocket done");
   level endon("save_restore");
-  while(1) {
-    playFX(client_num, level._effect["client_rocket_trail"], self.origin);
+  while (1) {
+    PlayFX(client_num, level._effect["client_rocket_trail"], self.origin);
     realWait(0.1);
   }
 }

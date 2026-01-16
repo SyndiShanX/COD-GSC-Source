@@ -4,9 +4,8 @@
 *****************************************************/
 
 linetime_proc(var_0, var_1, var_2, var_3) {
-  for(var_4 = 0; var_4 < var_3 * 20; var_4++) {
+  for(var_4 = 0; var_4 < var_3 * 20; var_4++)
     wait 0.05;
-  }
 }
 
 structarray_swap(var_0, var_1) {
@@ -32,9 +31,8 @@ waitspread_code(var_0, var_1) {
   var_2[0] = var_0;
   var_2[var_2.size] = var_1;
 
-  for(var_3 = 1; var_3 < level.wait_spreaders - 1; var_3++) {
+  for(var_3 = 1; var_3 < level.wait_spreaders - 1; var_3++)
     var_2 = waitspread_insert(var_2);
-  }
 
   level.wait_spreader_allotment = common_scripts\utility::array_randomize(var_2);
   level.active_wait_spread = undefined;
@@ -57,9 +55,8 @@ waitspread_insert(var_0) {
   var_5 = [];
 
   for(var_6 = 0; var_6 < var_0.size; var_6++) {
-    if(var_1 == var_6 - 1) {
+    if(var_1 == var_6 - 1)
       var_5[var_5.size] = randomfloatrange(var_0[var_1], var_0[var_1 + 1]);
-    }
 
     var_5[var_5.size] = var_0[var_6];
   }
@@ -68,13 +65,11 @@ waitspread_insert(var_0) {
 }
 
 waittill_objective_event_proc(var_0) {
-  while(level.deathspawner[self.script_deathchain] > 0) {
+  while(level.deathspawner[self.script_deathchain] > 0)
     level waittill("spawner_expired" + self.script_deathchain);
-  }
 
-  if(var_0) {
+  if(var_0)
     self waittill("trigger");
-  }
 
   var_1 = maps\_utility::get_trigger_flag();
   common_scripts\utility::flag_set(var_1);
@@ -84,9 +79,8 @@ wait_until_done_speaking() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  while(self.isspeaking) {
+  while(self.isspeaking)
     wait 0.05;
-  }
 }
 
 wait_for_trigger_think(var_0) {
@@ -121,11 +115,10 @@ update_debug_friendlycolor_on_death() {
 update_debug_friendlycolor(var_0) {
   thread update_debug_friendlycolor_on_death();
 
-  if(isDefined(self.script_forcecolor)) {
+  if(isDefined(self.script_forcecolor))
     level.debug_color_friendlies[var_0] = self.script_forcecolor;
-  } else {
+  else
     level.debug_color_friendlies[var_0] = undefined;
-  }
 
   level notify("updated_color_friendlies");
 }
@@ -144,11 +137,10 @@ new_color_being_set(var_0) {
   if(isDefined(self.script_forcecolor)) {
     self.currentcolorcode = level.currentcolorforced[maps\_colors::get_team()][self.script_forcecolor];
 
-    if(isDefined(self.dontcolormove)) {
+    if(isDefined(self.dontcolormove))
       self.dontcolormove = undefined;
-    } else {
+    else
       thread maps\_colors::goto_current_colorindex();
-    }
   }
 
   self.new_force_color_being_set = undefined;
@@ -165,9 +157,8 @@ radio_queue_thread(var_0) {
 
     self waittill("finished_radio");
 
-    if(gettime() > var_1 + 7500) {
+    if(gettime() > var_1 + 7500)
       return;
-    }
   }
 
   self._radio_queue = 1;
@@ -222,16 +213,14 @@ _hint_stick_get_config_suffix(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
-      if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
+      if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy"))
         return var_4;
-      } else {
+      else
         return var_3;
-      }
     } else if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy"))
       return var_2;
-    else {
+    else
       return var_1;
-    }
   } else
     return var_0;
 }
@@ -271,9 +260,8 @@ hint_stick_update(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = gettime();
 
-  if(!isDefined(var_6)) {
+  if(!isDefined(var_6))
     var_6 = 0;
-  }
 
   if(!isalive(self)) {
     return;
@@ -284,22 +272,19 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 = 0.4;
   var_12 = 2;
 
-  if(isDefined(level.hint_fontscale)) {
+  if(isDefined(level.hint_fontscale))
     var_12 = level.hint_fontscale;
-  }
 
   if(isDefined(self.current_global_hint)) {
-    if(self.current_global_hint == var_0) {
+    if(self.current_global_hint == var_0)
       return;
-    }
   }
 
   maps\_utility::ent_flag_waitopen("global_hint_in_use");
 
   if(isDefined(self.current_global_hint)) {
-    if(self.current_global_hint == var_0) {
+    if(self.current_global_hint == var_0)
       return;
-    }
   }
 
   maps\_utility::ent_flag_set("global_hint_in_use");
@@ -326,20 +311,18 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   hintprintwait(var_8, level.hint_breakfunc);
   var_14 = 0;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_14 = 3;
-  } else if(isDefined(var_3)) {
+  else if(isDefined(var_3))
     var_14 = 2;
-  } else if(isDefined(var_2)) {
+  else if(isDefined(var_2))
     var_14 = 1;
-  }
 
   var_15 = spawnStruct();
   var_15.timed_out = 0;
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_15 thread hint_timeout(var_5);
-  }
 
   if(isDefined(level.hint_breakfunc)) {
     for(;;) {
@@ -365,7 +348,9 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           ](var_2)) {
           break;
         }
-      } else if([[level.hint_breakfunc]]()) {
+      } else if([
+          [level.hint_breakfunc]
+        ]()) {
         break;
       }
 
@@ -395,7 +380,9 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           ](var_2)) {
           break;
         }
-      } else if([[level.hint_breakfunc]]()) {
+      } else if([
+          [level.hint_breakfunc]
+        ]()) {
         break;
       }
     }
@@ -446,9 +433,8 @@ showhintprint_struct(var_0) {
   if(var_0.timed_out) {
     return;
   }
-  if(isDefined(var_0.timeout)) {
+  if(isDefined(var_0.timeout))
     var_0 thread hint_timeout(var_0.timeout);
-  }
 
   var_5 = maps\_hud_util::createclientfontstring("objective", 2);
   var_5.alpha = 0.9;
@@ -489,9 +475,8 @@ showhintprint_struct(var_0) {
 }
 
 lerp_player_view_to_tag_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.first_frame_time) && self.first_frame_time == gettime()) {
+  if(isDefined(self.first_frame_time) && self.first_frame_time == gettime())
     wait 0.1;
-  }
 
   var_9 = self gettagorigin(var_1);
   var_10 = self gettagangles(var_1);
@@ -504,9 +489,8 @@ lerp_player_view_to_tag_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6
 }
 
 lerp_player_view_to_tag_oldstyle_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.first_frame_time) && self.first_frame_time == gettime()) {
+  if(isDefined(self.first_frame_time) && self.first_frame_time == gettime())
     wait 0.1;
-  }
 
   var_9 = self gettagorigin(var_1);
   var_10 = self gettagangles(var_1);
@@ -526,17 +510,14 @@ function_stack_wait(var_0) {
 function_stack_wait_finish(var_0) {
   function_stack_wait(var_0);
 
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return 0;
-  }
 
-  if(!issentient(self)) {
+  if(!issentient(self))
     return 1;
-  }
 
-  if(isalive(self)) {
+  if(isalive(self))
     return 1;
-  }
 
   return 0;
 }
@@ -544,9 +525,8 @@ function_stack_wait_finish(var_0) {
 function_stack_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
-  if(!isDefined(var_0.function_stack)) {
+  if(!isDefined(var_0.function_stack))
     var_0.function_stack = [];
-  }
 
   var_0.function_stack[var_0.function_stack.size] = self;
   thread function_stack_self_death(var_0);
@@ -556,19 +536,18 @@ function_stack_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.function_stack_func_begun = 1;
     self notify("function_stack_func_begun");
 
-    if(isDefined(var_6)) {
+    if(isDefined(var_6))
       var_0[[var_1]](var_2, var_3, var_4, var_5, var_6);
-    } else if(isDefined(var_5)) {
+    else if(isDefined(var_5))
       var_0[[var_1]](var_2, var_3, var_4, var_5);
-    } else if(isDefined(var_4)) {
+    else if(isDefined(var_4))
       var_0[[var_1]](var_2, var_3, var_4);
-    } else if(isDefined(var_3)) {
+    else if(isDefined(var_3))
       var_0[[var_1]](var_2, var_3);
-    } else if(isDefined(var_2)) {
+    else if(isDefined(var_2))
       var_0[[var_1]](var_2);
-    } else {
+    else
       var_0[[var_1]]();
-    }
 
     if(isDefined(var_0) && isDefined(var_0.function_stack)) {
       var_0.function_stack = common_scripts\utility::array_remove(var_0.function_stack, self);
@@ -597,9 +576,8 @@ function_stack_caller_waits_for_turn(var_0) {
   self endon("death");
   var_0 endon("clear_function_stack");
 
-  while(var_0.function_stack[0] != self) {
+  while(var_0.function_stack[0] != self)
     var_0 waittill("level_function_stack_ready");
-  }
 }
 
 unflash_flag(var_0) {
@@ -617,9 +595,8 @@ wait_for_sounddone_or_death(var_0) {
 init_vision_set(var_0) {
   level.lvl_visionset = var_0;
 
-  if(!isDefined(level.vision_cheat_enabled)) {
+  if(!isDefined(level.vision_cheat_enabled))
     level.vision_cheat_enabled = 0;
-  }
 
   return level.vision_cheat_enabled;
 }
@@ -634,78 +611,67 @@ array_waitlogic2(var_0, var_1, var_2) {
   var_0 endon(var_1);
   var_0 endon("death");
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     wait(var_2);
-  } else {
+  else
     var_0 waittill(var_1);
-  }
 }
 
 exec_call(var_0) {
-  if(var_0.parms.size == 0) {
+  if(var_0.parms.size == 0)
     var_0.caller call[[var_0.func]]();
-  } else if(var_0.parms.size == 1) {
+  else if(var_0.parms.size == 1)
     var_0.caller call[[var_0.func]](var_0.parms[0]);
-  } else if(var_0.parms.size == 2) {
+  else if(var_0.parms.size == 2)
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  } else if(var_0.parms.size == 3) {
+  else if(var_0.parms.size == 3)
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
-  }
 
-  if(var_0.parms.size == 4) {
+  if(var_0.parms.size == 4)
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
-  }
 
-  if(var_0.parms.size == 5) {
+  if(var_0.parms.size == 5)
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
-  }
 }
 
 exec_call_noself(var_0) {
-  if(var_0.parms.size == 0) {
+  if(var_0.parms.size == 0)
     call[[var_0.func]]();
-  } else if(var_0.parms.size == 1) {
+  else if(var_0.parms.size == 1)
     call[[var_0.func]](var_0.parms[0]);
-  } else if(var_0.parms.size == 2) {
+  else if(var_0.parms.size == 2)
     call[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  } else if(var_0.parms.size == 3) {
+  else if(var_0.parms.size == 3)
     call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
-  }
 
-  if(var_0.parms.size == 4) {
+  if(var_0.parms.size == 4)
     call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
-  }
 
-  if(var_0.parms.size == 5) {
+  if(var_0.parms.size == 5)
     call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
-  }
 }
 
 exec_func(var_0, var_1) {
   if(!isDefined(var_0.caller)) {
     return;
   }
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2].caller endon(var_1[var_2].ender);
-  }
 
-  if(var_0.parms.size == 0) {
+  if(var_0.parms.size == 0)
     var_0.caller[[var_0.func]]();
-  } else if(var_0.parms.size == 1) {
+  else if(var_0.parms.size == 1)
     var_0.caller[[var_0.func]](var_0.parms[0]);
-  } else if(var_0.parms.size == 2) {
+  else if(var_0.parms.size == 2)
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  } else if(var_0.parms.size == 3) {
+  else if(var_0.parms.size == 3)
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
-  }
 
-  if(var_0.parms.size == 4) {
+  if(var_0.parms.size == 4)
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
-  }
 
-  if(var_0.parms.size == 5) {
+  if(var_0.parms.size == 5)
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
-  }
 }
 
 waittill_func_ends(var_0, var_1) {
@@ -762,17 +728,14 @@ translate_local_on_ent(var_0) {
     var_0.origin = var_0.origin + var_3 * self.up;
   }
 
-  if(isDefined(self.yaw)) {
+  if(isDefined(self.yaw))
     var_0 addyaw(self.yaw);
-  }
 
-  if(isDefined(self.pitch)) {
+  if(isDefined(self.pitch))
     var_0 addpitch(self.pitch);
-  }
 
-  if(isDefined(self.roll)) {
+  if(isDefined(self.roll))
     var_0 addroll(self.roll);
-  }
 }
 
 dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
@@ -782,9 +745,8 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
   self endon("start_dynamic_run_speed");
   level endon("_stealth_spotted");
 
-  if(maps\_utility::ent_flag_exist("_stealth_custom_anim")) {
+  if(maps\_utility::ent_flag_exist("_stealth_custom_anim"))
     maps\_utility::ent_flag_waitopen("_stealth_custom_anim");
-  }
 
   if(!maps\_utility::ent_flag_exist("dynamic_run_speed_stopped")) {
     maps\_utility::ent_flag_init("dynamic_run_speed_stopped");
@@ -807,9 +769,8 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
     var_9 = level.players[0];
 
     foreach(var_11 in level.players) {
-      if(distancesquared(var_9.origin, self.origin) > distancesquared(var_11.origin, self.origin)) {
+      if(distancesquared(var_9.origin, self.origin) > distancesquared(var_11.origin, self.origin))
         var_9 = var_11;
-      }
     }
 
     var_13 = anglesToForward(self.angles);
@@ -825,18 +786,17 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
 
     var_19 = 0;
 
-    if(isDefined(self.last_set_goalent)) {
+    if(isDefined(self.last_set_goalent))
       var_19 = [
-        }
-        [level.drs_ahead_test]](self.last_set_goalent, var_1);
-    else if(isDefined(self.last_set_goalnode)) {
+        [level.drs_ahead_test]
+      ](self.last_set_goalent, var_1);
+    else if(isDefined(self.last_set_goalnode))
       var_19 = [
-        }
-        [level.drs_ahead_test]](self.last_set_goalnode, var_1);
+        [level.drs_ahead_test]
+      ](self.last_set_goalnode, var_1);
 
-    if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate) {
+    if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate)
       self.moveplaybackrate = 1;
-    }
 
     if(var_16 < var_6 || var_15 > -0.25 || var_19) {
       dynamic_run_set("sprint");
@@ -866,16 +826,14 @@ stop_dynamic_run_speed() {
   self endon("death");
   stop_dynamic_run_speed_wait();
 
-  if(!self.dontchangemoveplaybackrate) {
+  if(!self.dontchangemoveplaybackrate)
     self.moveplaybackrate = self.old_moveplaybackrate;
-  }
 
   if(isDefined(level.scr_anim["generic"]["DRS_run"])) {
-    if(isarray(level.scr_anim["generic"]["DRS_run"])) {
+    if(isarray(level.scr_anim["generic"]["DRS_run"]))
       maps\_utility::set_generic_run_anim_array("DRS_run");
-    } else {
+    else
       maps\_utility::set_generic_run_anim("DRS_run");
-    }
   } else
     maps\_utility::clear_run_anim();
 
@@ -891,11 +849,10 @@ stop_dynamic_run_speed_wait() {
 
 dynamic_run_ahead_test(var_0, var_1) {
   if(!isDefined(var_0.classname)) {
-    if(!isDefined(var_0.type)) {
+    if(!isDefined(var_0.type))
       var_2 = maps\_spawner::get_target_structs;
-    } else {
+    else
       var_2 = maps\_spawner::get_target_nodes;
-    }
   } else
     var_2 = maps\_spawner::get_target_ents;
 
@@ -910,33 +867,29 @@ dynamic_run_set(var_0) {
 
   switch (var_0) {
     case "sprint":
-      if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate) {
+      if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate)
         self.moveplaybackrate = 1;
-      } else if(!self.dontchangemoveplaybackrate) {
+      else if(!self.dontchangemoveplaybackrate)
         self.moveplaybackrate = 1.15;
-      }
 
-      if(isarray(level.scr_anim["generic"]["DRS_sprint"])) {
+      if(isarray(level.scr_anim["generic"]["DRS_sprint"]))
         maps\_utility::set_generic_run_anim_array("DRS_sprint");
-      } else {
+      else
         maps\_utility::set_generic_run_anim("DRS_sprint");
-      }
 
       self notify("stop_loop");
       maps\_utility::anim_stopanimscripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "run":
-      if(!self.dontchangemoveplaybackrate) {
+      if(!self.dontchangemoveplaybackrate)
         self.moveplaybackrate = self.old_moveplaybackrate;
-      }
 
       if(isDefined(level.scr_anim["generic"]["DRS_run"])) {
-        if(isarray(level.scr_anim["generic"]["DRS_run"])) {
+        if(isarray(level.scr_anim["generic"]["DRS_run"]))
           maps\_utility::set_generic_run_anim_array("DRS_run");
-        } else {
+        else
           maps\_utility::set_generic_run_anim("DRS_run");
-        }
       } else
         maps\_utility::clear_run_anim();
 
@@ -948,16 +901,14 @@ dynamic_run_set(var_0) {
       thread dynamic_run_speed_stopped();
       break;
     case "jog":
-      if(!self.dontchangemoveplaybackrate) {
+      if(!self.dontchangemoveplaybackrate)
         self.moveplaybackrate = self.old_moveplaybackrate;
-      }
 
       if(isDefined(level.scr_anim["generic"]["DRS_combat_jog"])) {
-        if(isarray(level.scr_anim["generic"]["DRS_combat_jog"])) {
+        if(isarray(level.scr_anim["generic"]["DRS_combat_jog"]))
           maps\_utility::set_generic_run_anim_array("DRS_combat_jog");
-        } else {
+        else
           maps\_utility::set_generic_run_anim("DRS_combat_jog");
-        }
       } else
         maps\_utility::clear_run_anim();
 
@@ -991,15 +942,13 @@ dynamic_run_speed_stopped() {
     var_1 = "DRS_stop_idle";
     thread maps\_anim::anim_generic_loop(self, var_1);
 
-    if(isDefined(level.scr_anim["generic"]["signal_go"])) {
+    if(isDefined(level.scr_anim["generic"]["signal_go"]))
       maps\_utility::handsignal("go");
-    }
 
     wait(randomfloatrange(12, 20));
 
-    if(maps\_utility::ent_flag_exist("_stealth_stance_handler")) {
+    if(maps\_utility::ent_flag_exist("_stealth_stance_handler"))
       maps\_utility::ent_flag_waitopen("_stealth_stance_handler");
-    }
 
     self notify("stop_loop");
 
@@ -1011,9 +960,8 @@ dynamic_run_speed_stopped() {
       level thread maps\_utility::radio_dialogue_queue(var_2);
     }
 
-    if(isDefined(level.scr_anim["generic"]["signal_go"])) {
+    if(isDefined(level.scr_anim["generic"]["signal_go"]))
       maps\_utility::handsignal("go");
-    }
   }
 }
 
@@ -1069,9 +1017,8 @@ autosave_tactical_grenade_check_dieout(var_0) {
   level.autosave_tactical_player_nades--;
   waittillframeend;
 
-  if(!level.autosave_tactical_player_nades) {
+  if(!level.autosave_tactical_player_nades)
     common_scripts\utility::flag_clear("autosave_tactical_player_nade");
-  }
 }
 
 autosave_tactical_proc() {
@@ -1084,17 +1031,15 @@ autosave_tactical_proc() {
   if(common_scripts\utility::flag("autosave_tactical_player_nade")) {
     common_scripts\utility::flag_waitopen_or_timeout("autosave_tactical_player_nade", 4);
 
-    if(common_scripts\utility::flag("autosave_tactical_player_nade")) {
+    if(common_scripts\utility::flag("autosave_tactical_player_nade"))
       return;
-    }
   }
 
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.enemy) && isplayer(var_2.enemy)) {
+    if(isDefined(var_2.enemy) && isplayer(var_2.enemy))
       return;
-    }
   }
 
   waittillframeend;
@@ -1132,13 +1077,11 @@ music_loop_internal(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = maps\_utility::musiclength(var_0);
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
-  if(var_1 <= 10) {
+  if(var_1 <= 10)
     var_6 = var_6 + var_1;
-  }
 
   wait(var_6);
   maps\_utility::music_loop(var_0, var_1, var_2, var_3, var_4);
@@ -1177,9 +1120,8 @@ doslide(var_0, var_1, var_2) {
 kill_deathflag_proc(var_0) {
   self endon("death");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     wait(randomfloat(var_0));
-  }
 
   playFXOnTag(common_scripts\utility::getfx("flesh_hit"), self, "tag_eye");
   self kill(level.player.origin);
@@ -1220,17 +1162,14 @@ start_glow(var_0) {
 process_blend(var_0, var_1, var_2, var_3, var_4) {
   waittillframeend;
 
-  if(!isDefined(self.start)) {
+  if(!isDefined(self.start))
     self.start = 0;
-  }
 
-  if(!isDefined(self.end)) {
+  if(!isDefined(self.end))
     self.end = 1;
-  }
 
-  if(!isDefined(self.base)) {
+  if(!isDefined(self.base))
     self.base = 0;
-  }
 
   var_5 = self.time * 20;
   var_6 = self.end - self.start;
@@ -1266,33 +1205,26 @@ process_blend(var_0, var_1, var_2, var_3, var_4) {
 add_trace_fx_proc(var_0) {
   waittillframeend;
 
-  if(!isDefined(level.trace_fx)) {
+  if(!isDefined(level.trace_fx))
     level.trace_fx = [];
-  }
 
-  if(!isDefined(level.trace_fx)) {
+  if(!isDefined(level.trace_fx))
     level.trace_fx[var_0] = [];
-  }
 
-  if(isDefined(self.fx)) {
+  if(isDefined(self.fx))
     level.trace_fx[var_0][self.surface]["fx"] = self.fx;
-  }
 
-  if(isDefined(self.fx_array)) {
+  if(isDefined(self.fx_array))
     level.trace_fx[var_0][self.surface]["fx_array"] = self.fx_array;
-  }
 
-  if(isDefined(self.sound)) {
+  if(isDefined(self.sound))
     level.trace_fx[var_0][self.surface]["sound"] = self.sound;
-  }
 
-  if(isDefined(self.rumble)) {
+  if(isDefined(self.rumble))
     level.trace_fx[var_0][self.surface]["rumble"] = self.rumble;
-  }
 
-  if(!isDefined(level.trace_fx[var_0]["default"])) {
+  if(!isDefined(level.trace_fx[var_0]["default"]))
     level.trace_fx[var_0]["default"] = level.trace_fx[var_0][self.surface];
-  }
 }
 
 put_toy_in_volume(var_0) {
@@ -1316,9 +1248,8 @@ put_toy_in_volume(var_0) {
 get_color_info_from_trigger() {
   var_0 = "allies";
 
-  if(isDefined(self.script_color_axis)) {
+  if(isDefined(self.script_color_axis))
     var_0 = "axis";
-  }
 
   var_0 = maps\_colors::get_team(var_0);
   var_1 = [];
@@ -1342,21 +1273,20 @@ delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("stop_delay_thread");
   wait(var_1);
 
-  if(isDefined(var_7)) {
+  if(isDefined(var_7))
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  } else if(isDefined(var_6)) {
+  else if(isDefined(var_6))
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  } else if(isDefined(var_5)) {
+  else if(isDefined(var_5))
     thread[[var_0]](var_2, var_3, var_4, var_5);
-  } else if(isDefined(var_4)) {
+  else if(isDefined(var_4))
     thread[[var_0]](var_2, var_3, var_4);
-  } else if(isDefined(var_3)) {
+  else if(isDefined(var_3))
     thread[[var_0]](var_2, var_3);
-  } else if(isDefined(var_2)) {
+  else if(isDefined(var_2))
     thread[[var_0]](var_2);
-  } else {
+  else
     thread[[var_0]]();
-  }
 }
 
 delaychildthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -1364,21 +1294,20 @@ delaychildthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("stop_delay_thread");
   wait(var_1);
 
-  if(isDefined(var_7)) {
+  if(isDefined(var_7))
     childthread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  } else if(isDefined(var_6)) {
+  else if(isDefined(var_6))
     childthread[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  } else if(isDefined(var_5)) {
+  else if(isDefined(var_5))
     childthread[[var_0]](var_2, var_3, var_4, var_5);
-  } else if(isDefined(var_4)) {
+  else if(isDefined(var_4))
     childthread[[var_0]](var_2, var_3, var_4);
-  } else if(isDefined(var_3)) {
+  else if(isDefined(var_3))
     childthread[[var_0]](var_2, var_3);
-  } else if(isDefined(var_2)) {
+  else if(isDefined(var_2))
     childthread[[var_0]](var_2);
-  } else {
+  else
     childthread[[var_0]]();
-  }
 }
 
 flagwaitthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -1397,17 +1326,15 @@ add_wait_asserter() {
   level notify("kill_add_wait_asserter");
   level endon("kill_add_wait_asserter");
 
-  for(var_0 = 0; var_0 < 20; var_0++) {
+  for(var_0 = 0; var_0 < 20; var_0++)
     waittillframeend;
-  }
 }
 
 update_battlechatter_hud() {}
 
 comparesizesfx(var_0, var_1, var_2, var_3) {
-  if(!var_1.size) {
+  if(!var_1.size)
     return undefined;
-  }
 
   if(isDefined(var_2)) {
     var_4 = undefined;
@@ -1416,7 +1343,9 @@ comparesizesfx(var_0, var_1, var_2, var_3) {
     for(var_6 = 0; var_6 < var_5.size; var_6++) {
       var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-      if([[var_3]](var_7, var_2)) {
+      if([
+          [var_3]
+        ](var_7, var_2)) {
         continue;
       }
       var_2 = var_7;
@@ -1450,9 +1379,8 @@ waittill_triggered_current() {
     self waittill("trigger", var_0);
     waittillframeend;
 
-    if(var_0.currentnode == self) {
+    if(var_0.currentnode == self)
       return var_0;
-    }
   }
 }
 
@@ -1462,39 +1390,32 @@ add_trigger_func_thread() {
   var_1 = self.trigger_functions;
   self.trigger_functions = undefined;
 
-  foreach(var_3 in var_1) {
-    thread[[var_3]](var_0);
-  }
+  foreach(var_3 in var_1)
+  thread[[var_3]](var_0);
 }
 
 add_to_radio(var_0) {
-  if(!isDefined(level.scr_radio[var_0])) {
+  if(!isDefined(level.scr_radio[var_0]))
     level.scr_radio[var_0] = var_0;
-  }
 }
 
 add_to_dialogue(var_0) {
-  if(!isDefined(level.scr_anim[self.animname])) {
+  if(!isDefined(level.scr_anim[self.animname]))
     level.scr_anim[self.animname] = [];
-  }
 
-  if(!isDefined(level.scr_sound[self.animname])) {
+  if(!isDefined(level.scr_sound[self.animname]))
     level.scr_sound[self.animname] = [];
-  }
 
-  if(!isDefined(level.scr_sound[self.animname][var_0])) {
+  if(!isDefined(level.scr_sound[self.animname][var_0]))
     level.scr_sound[self.animname][var_0] = var_0;
-  }
 }
 
 add_to_dialogue_generic(var_0) {
-  if(!isDefined(level.scr_sound["generic"])) {
+  if(!isDefined(level.scr_sound["generic"]))
     level.scr_sound["generic"] = [];
-  }
 
-  if(!isDefined(level.scr_sound["generic"][var_0])) {
+  if(!isDefined(level.scr_sound["generic"][var_0]))
     level.scr_sound["generic"][var_0] = var_0;
-  }
 }
 
 objective_recon(var_0) {
@@ -1504,9 +1425,8 @@ objective_recon(var_0) {
   var_1 = get_leveltime();
   var_2 = var_1;
 
-  if(isDefined(level.recon_objective_lasttime)) {
+  if(isDefined(level.recon_objective_lasttime))
     var_2 = var_1 - level.recon_objective_lasttime;
-  }
 
   level.recon_objective_lasttime = var_1;
   reconevent("script_objective: objective %d, leveltime %d, deltatime %d", var_0, var_1, var_2);
@@ -1514,9 +1434,8 @@ objective_recon(var_0) {
 
 mission_recon(var_0) {
   if(maps\_utility::is_default_start()) {
-    if(!isDefined(var_0)) {
+    if(!isDefined(var_0))
       var_0 = 1;
-    }
 
     var_1 = get_leveltime();
     var_2 = var_1;
@@ -1538,9 +1457,8 @@ _flag_wait_trigger(var_0, var_1) {
     if(!var_1) {
       return;
     }
-    while(var_2 istouching(self)) {
+    while(var_2 istouching(self))
       wait 0.05;
-    }
 
     common_scripts\utility::flag_clear(var_0);
   }

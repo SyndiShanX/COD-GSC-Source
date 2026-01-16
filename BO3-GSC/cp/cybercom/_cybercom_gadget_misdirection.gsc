@@ -32,15 +32,15 @@ function init() {
 
 function main() {
   cybercom_gadget::registerability(2, 32, 1);
-  level.cybercom.misdirection = spawnStruct();
-  level.cybercom.misdirection._is_flickering = &_is_flickering;
-  level.cybercom.misdirection._on_flicker = &_on_flicker;
-  level.cybercom.misdirection._on_give = &_on_give;
-  level.cybercom.misdirection._on_take = &_on_take;
-  level.cybercom.misdirection._on_connect = &_on_connect;
-  level.cybercom.misdirection._on = &_on;
-  level.cybercom.misdirection._off = &_off;
-  level.cybercom.misdirection._is_primed = &_is_primed;
+  level.cybercom.misdirection = spawnstruct();
+  level.cybercom.misdirection._is_flickering = & _is_flickering;
+  level.cybercom.misdirection._on_flicker = & _on_flicker;
+  level.cybercom.misdirection._on_give = & _on_give;
+  level.cybercom.misdirection._on_take = & _on_take;
+  level.cybercom.misdirection._on_connect = & _on_connect;
+  level.cybercom.misdirection._on = & _on;
+  level.cybercom.misdirection._off = & _off;
+  level.cybercom.misdirection._is_primed = & _is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -76,7 +76,7 @@ function _on(slot, weapon) {
   self.cybercom.is_primed = 0;
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_misdirection");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -87,13 +87,13 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     self.cybercom.is_primed = 1;
   }
 }
 
 function private _get_valid_targets(weapon) {
-  playerforward = anglesToForward(self getplayerangles());
+  playerforward = anglestoforward(self getplayerangles());
   enemies = arraycombine(getaiteamarray("axis"), getaiteamarray("team3"), 0, 0);
   enemies = arraysort(enemies, self.origin, 1);
   valid = [];
@@ -104,7 +104,7 @@ function private _get_valid_targets(weapon) {
     if(!isactor(guy)) {
       continue;
     }
-    if(!isDefined(guy.archetype) || guy.archetype == "direwolf" || guy.archetype == "zombie") {
+    if(!isdefined(guy.archetype) || guy.archetype == "direwolf" || guy.archetype == "zombie") {
       continue;
     }
     distsq = distancesquared(self.origin, guy.origin);
@@ -127,9 +127,9 @@ function private _get_valid_targets(weapon) {
 function private _activate_misdirection(slot, weapon) {
   targets = _get_valid_targets(weapon);
   self.cybercom.var_1beb8e5f = [];
-  for(i = 0; i < self.cybercom.var_c0a69197; i++) {
+  for (i = 0; i < self.cybercom.var_c0a69197; i++) {
     decoy = self function_4adc7dc8(targets);
-    if(isDefined(decoy)) {
+    if(isdefined(decoy)) {
       self.cybercom.var_1beb8e5f[self.cybercom.var_1beb8e5f.size] = decoy;
       util::wait_network_frame();
     }
@@ -150,10 +150,10 @@ function function_7074260(point) {
   return true;
 }
 
-function function_10cd71b(decoy, &potentialtargets) {
+function function_10cd71b(decoy, & potentialtargets) {
   mins = vectorscale((1, 1, 1), 1000000);
   maxs = vectorscale((-1, -1, -1), 1000000);
-  playerforward = anglesToForward(self getplayerangles());
+  playerforward = anglestoforward(self getplayerangles());
   playerforward = (playerforward[0], playerforward[1], 0);
   var_81ca05ac = anglestoright(self getplayerangles());
   var_81ca05ac = (var_81ca05ac[0], var_81ca05ac[1], 0);
@@ -174,25 +174,25 @@ function function_10cd71b(decoy, &potentialtargets) {
   maxtries = 6;
   var_539aaa1a = 0;
   step = var_81ca05ac * getdvarint("scr_misdirection_decoy_spacing", 90);
-  while(maxtries > 0) {
+  while (maxtries > 0) {
     left = var_6a0945f2 + ((6 - maxtries) * step);
-    v_ground = bulletTrace(left + vectorscale((0, 0, 1), 72), left + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
+    v_ground = bullettrace(left + vectorscale((0, 0, 1), 72), left + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     left = (left[0], left[1], v_ground[2]);
-    v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), left + vectorscale((0, 0, 1), 24), 1, self)["position"];
+    v_trace = bullettrace(self.origin + vectorscale((0, 0, 1), 24), left + vectorscale((0, 0, 1), 24), 1, self)["position"];
     dir = vectornormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
-    v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
+    v_ground = bullettrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     if(self function_7074260(v_ground)) {
       var_b333c85b = v_ground;
       break;
     }
     right = var_6a0945f2 - ((6 - maxtries) * step);
-    v_ground = bulletTrace(right + vectorscale((0, 0, 1), 72), right + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
+    v_ground = bullettrace(right + vectorscale((0, 0, 1), 72), right + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     right = (right[0], right[1], v_ground[2]);
-    v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), right + vectorscale((0, 0, 1), 24), 1, self)["position"];
+    v_trace = bullettrace(self.origin + vectorscale((0, 0, 1), 24), right + vectorscale((0, 0, 1), 24), 1, self)["position"];
     dir = vectornormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
-    v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
+    v_ground = bullettrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     if(self function_7074260(v_ground)) {
       var_b333c85b = v_ground;
       break;
@@ -214,23 +214,23 @@ function initthreatbias() {
   }
 }
 
-function function_4adc7dc8(&potentialtargets) {
+function function_4adc7dc8( & potentialtargets) {
   decoy = spawn("script_model", self.origin);
-  if(!isDefined(decoy)) {
+  if(!isdefined(decoy)) {
     return undefined;
   }
   decoy.angles = self.angles;
-  decoy setModel("tag_origin");
+  decoy setmodel("tag_origin");
   decoy makesentient();
   decoy.team = self.team;
   decoy.var_e42818a3 = 1;
   decoy ghost();
   decoy initthreatbias();
   foreach(target in potentialtargets) {
-    v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), target.origin + vectorscale((0, 0, 1), 24), 1, self)["position"];
+    v_trace = bullettrace(self.origin + vectorscale((0, 0, 1), 24), target.origin + vectorscale((0, 0, 1), 24), 1, self)["position"];
     dir = vectornormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
-    v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, target, 1)["position"];
+    v_ground = bullettrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, target, 1)["position"];
     if(self function_7074260(v_ground) == 0) {
       continue;
     }
@@ -238,7 +238,7 @@ function function_4adc7dc8(&potentialtargets) {
     decoy.var_faa77c1d = target;
     break;
   }
-  if(!isDefined(decoy.var_faa77c1d)) {
+  if(!isdefined(decoy.var_faa77c1d)) {
     self function_10cd71b(decoy, potentialtargets);
   }
   decoy notsolid();

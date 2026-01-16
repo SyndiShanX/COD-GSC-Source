@@ -30,7 +30,7 @@ function wait_to_load() {
 }
 
 function vehicle_init_cybercom(vehicle) {
-  if(isDefined(vehicle.archetype)) {
+  if(isdefined(vehicle.archetype)) {
     vehicle.var_9147087d = [];
     switch (vehicle.archetype) {
       case "hunter": {
@@ -91,7 +91,7 @@ function getcybercomflags() {
   self.cybercom.flags.type = self getcybercomactivetype();
   self.cybercom.flags.abilities = [];
   self.cybercom.flags.upgrades = [];
-  for(i = 0; i <= 2; i++) {
+  for (i = 0; i <= 2; i++) {
     self.cybercom.flags.abilities[i] = self getcybercomabilities(i);
     self.cybercom.flags.upgrades[i] = self getcybercomupgrades(i);
   }
@@ -107,14 +107,14 @@ function updatecybercomflags() {
 function setcybercomflags() {
   self setcybercomrigsflags(self.cybercom.flags.tacrigs);
   self setcybercomactivetype(self.cybercom.flags.type);
-  for(i = 0; i <= 2; i++) {
+  for (i = 0; i <= 2; i++) {
     self setcybercomabilityflags(self.cybercom.flags.abilities[i], i);
     self setcybercomupgradeflags(self.cybercom.flags.upgrades[i], i);
   }
 }
 
 function setabilitiesbyflags(flags) {
-  if(isDefined(flags)) {
+  if(isdefined(flags)) {
     self.cybercom.flags = flags;
   }
   self setcybercomflags();
@@ -180,14 +180,14 @@ function function_1adaa876(var_e4230c26, var_f4132a83) {
     return;
   }
   var_d66f8a9e = int(self getdstat("PlayerStatsList", "LAST_CYBERCOM_EQUIPPED", "statValue"));
-  var_2324b7c = var_d66f8a9e &(1024 - 1);
+  var_2324b7c = var_d66f8a9e & (1024 - 1);
   var_768ee804 = var_d66f8a9e >> 10;
   self function_1e4531c7(var_e4230c26);
-  if(isDefined(var_f4132a83) && var_f4132a83 && var_2324b7c > 99 && var_2324b7c < 142) {
+  if(isdefined(var_f4132a83) && var_f4132a83 && var_2324b7c > 99 && var_2324b7c < 142) {
     var_cac3be21 = tablelookup("gamedata/stats/cp/cp_statstable.csv", 0, var_2324b7c, 4);
     var_b5725157 = cybercom_gadget::getabilitybyname(var_cac3be21);
     if(self hascybercomability(var_b5725157.name)) {
-      if(var_e4230c26 == var_b5725157.type || self function_6e0bf068() || (isDefined(self.cybercoreselectmenudisabled) && self.cybercoreselectmenudisabled == 1)) {
+      if(var_e4230c26 == var_b5725157.type || self function_6e0bf068() || (isdefined(self.cybercoreselectmenudisabled) && self.cybercoreselectmenudisabled == 1)) {
         self setcybercomactivetype(var_b5725157.type);
         self.var_768ee804 = var_768ee804;
         self cybercom_gadget::equipability(var_b5725157.name, 0);
@@ -212,13 +212,13 @@ function function_1adaa876(var_e4230c26, var_f4132a83) {
 }
 
 function function_6e0bf068() {
-  return (self.cur_ranknum + 1) >= 20 || (isDefined(self.var_8201758a) && (isDefined(self.var_8201758a) && self.var_8201758a));
+  return (self.cur_ranknum + 1) >= 20 || (isdefined(self.var_8201758a) && (isdefined(self.var_8201758a) && self.var_8201758a));
 }
 
 function function_674d724c(class_num_for_global_weapons, var_f4132a83, var_f69e782a = 1) {
   self endon("death_or_disconnect");
-  if(!isDefined(self.cybercoreselectmenudisabled) || self.cybercoreselectmenudisabled != 1) {
-    for(cybercore_type = 0; cybercore_type <= 2; cybercore_type++) {
+  if(!isdefined(self.cybercoreselectmenudisabled) || self.cybercoreselectmenudisabled != 1) {
+    for (cybercore_type = 0; cybercore_type <= 2; cybercore_type++) {
       self function_8b088b97(cybercore_type);
     }
   }
@@ -226,7 +226,7 @@ function function_674d724c(class_num_for_global_weapons, var_f4132a83, var_f69e7
   var_d1833846["cybercore_martial"] = 1;
   var_d1833846["cybercore_chaos"] = 2;
   var_fb135494 = self getloadoutitemref(0, "cybercore");
-  if(var_fb135494 != "weapon_null" && var_fb135494 != "weapon_null_cp" && isDefined(var_d1833846[var_fb135494])) {
+  if(var_fb135494 != "weapon_null" && var_fb135494 != "weapon_null_cp" && isdefined(var_d1833846[var_fb135494])) {
     self function_1adaa876(var_d1833846[var_fb135494], var_f4132a83);
     self updatecybercomflags();
   }
@@ -242,7 +242,7 @@ function function_4b8ac464(class_num, class_num_for_global_weapons, var_f4132a83
   self clearcybercomability();
   rig1 = self getloadoutitemref(class_num, "cybercom_tacrig1");
   rig2 = self getloadoutitemref(class_num, "cybercom_tacrig2");
-  if(isDefined(altplayer)) {
+  if(isdefined(altplayer)) {
     rig1 = altplayer getloadoutitemref(class_num, "cybercom_tacrig1");
     rig2 = altplayer getloadoutitemref(class_num, "cybercom_tacrig2");
   }
@@ -258,13 +258,13 @@ function function_4b8ac464(class_num, class_num_for_global_weapons, var_f4132a83
   } else {
     rig2_upgraded = 0;
   }
-  if(isDefined(self.var_8201758a) && self.var_8201758a) {
+  if(isdefined(self.var_8201758a) && self.var_8201758a) {
     rig1_upgraded = 1;
     rig2_upgraded = 1;
   } else if(class_num < 5) {
     rig1_upgraded = self function_cc812e3b(rig1);
     rig2_upgraded = self function_cc812e3b(rig2);
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       rig1_upgraded = altplayer function_cc812e3b(rig1);
       rig2_upgraded = altplayer function_cc812e3b(rig2);
     }
@@ -272,12 +272,12 @@ function function_4b8ac464(class_num, class_num_for_global_weapons, var_f4132a83
   self cybercom_tacrig::takeallrigabilities();
   if(!self flag::exists("in_training_sim") || !self flag::get("in_training_sim")) {
     saved_rig1 = self savegame::get_player_data("saved_rig1", undefined);
-    if(isDefined(saved_rig1)) {
+    if(isdefined(saved_rig1)) {
       rig1 = saved_rig1;
       rig1_upgraded = self savegame::get_player_data("saved_rig1_upgraded", undefined);
       rig2 = self savegame::get_player_data("saved_rig2", undefined);
       rig2_upgraded = self savegame::get_player_data("saved_rig2_upgraded", undefined);
-      assert(isDefined(rig1_upgraded));
+      assert(isdefined(rig1_upgraded));
     }
   }
   self cybercom_tacrig::giverigability(rig1, rig1_upgraded, 0, 0);
@@ -297,10 +297,10 @@ function weaponlockwatcher(slot, weapon, maxlocks) {
   self endon("disconnect");
   self endon("death");
   self cybercom_initentityfields();
-  if(!isDefined(self.cybercom.lock_targets)) {
+  if(!isdefined(self.cybercom.lock_targets)) {
     self.cybercom.lock_targets = [];
   }
-  locks = (isDefined(maxlocks) ? maxlocks : getdvarint("scr_max_simLocks"));
+  locks = (isdefined(maxlocks) ? maxlocks : getdvarint("scr_max_simLocks"));
   assert(locks <= 5, "");
   self thread function_17fea3ed(slot, weapon, locks);
   self thread function_d4f9f451(slot, weapon);
@@ -314,7 +314,7 @@ function function_348de0be(slot, weapon) {
   self endon("ccom_stop_lock_on");
   self notify("hash_348de0be");
   self endon("hash_348de0be");
-  if(!isDefined(self.cybercom.var_46483c8f)) {
+  if(!isdefined(self.cybercom.var_46483c8f)) {
     return;
   }
   if(self.cybercom.var_46483c8f & 1) {
@@ -355,20 +355,22 @@ function function_d4f9f451(slot, weapon) {
   self endon("death");
   self endon("weaponendlockwatcher");
   self endon("ccom_stop_lock_on");
-  while(true) {
-    for(i = 0; i < self.cybercom.lock_targets.size; i++) {
-      if(!isDefined(self.cybercom.lock_targets[i].target)) {
+  while (true) {
+    for (i = 0; i < self.cybercom.lock_targets.size; i++) {
+      if(!isdefined(self.cybercom.lock_targets[i].target)) {
         continue;
       }
-      if(!isDefined(self.cybercom.lock_targets[i].target.lockon_owner) || self.cybercom.lock_targets[i].target.lockon_owner != self) {
+      if(!isdefined(self.cybercom.lock_targets[i].target.lockon_owner) || self.cybercom.lock_targets[i].target.lockon_owner != self) {
         continue;
       }
-      if(isDefined(self.cybercom.lock_targets[i].target.var_1e1a5e6f) && self.cybercom.lock_targets[i].target.var_1e1a5e6f != 1) {
+      if(isdefined(self.cybercom.lock_targets[i].target.var_1e1a5e6f) && self.cybercom.lock_targets[i].target.var_1e1a5e6f != 1) {
         continue;
       }
-      if(isDefined(self.cybercom.var_73d069a7)) {
+      if(isdefined(self.cybercom.var_73d069a7)) {
         function_c5b2f654(self);
-        [[self.cybercom.var_73d069a7]](slot, weapon);
+        [
+          [self.cybercom.var_73d069a7]
+        ](slot, weapon);
         return;
       }
     }
@@ -403,9 +405,9 @@ function private _lock_fired_watcher(weapon) {
   event = self util::waittill_any_return(weapon.name + "_fired");
   level notify("ccom_lock_fired", self, weapon);
   foreach(item in self.cybercom.lock_targets) {
-    if(isDefined(item.target)) {
+    if(isdefined(item.target)) {
       item.target notify("ccom_lock_fired", self, weapon);
-      if(isDefined(item.target.lockon_owner) && item.target.lockon_owner == self) {
+      if(isdefined(item.target.lockon_owner) && item.target.lockon_owner == self) {
         item.target.lockon_owner = undefined;
       }
     }
@@ -414,8 +416,8 @@ function private _lock_fired_watcher(weapon) {
 }
 
 function private _lock_sighttest(target, var_b3464abe = 1) {
-  eyepos = self getEye();
-  if(!isDefined(target)) {
+  eyepos = self geteye();
+  if(!isdefined(target)) {
     return 0;
   }
   if(!isalive(target)) {
@@ -424,14 +426,14 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
   if(target isragdoll()) {
     return 0;
   }
-  if(!isDefined(target.cybercom)) {
-    target.cybercom = spawnStruct();
+  if(!isdefined(target.cybercom)) {
+    target.cybercom = spawnstruct();
   }
-  if(!isDefined(target.cybercom.var_8d2f4636)) {
+  if(!isdefined(target.cybercom.var_8d2f4636)) {
     target.cybercom.var_8d2f4636 = [];
   }
   pos = target getshootatpos();
-  if(isDefined(pos)) {
+  if(isdefined(pos)) {
     passed = bullettracepassed(eyepos, pos, 0, target, undefined, 1, 1);
     if(passed) {
       target.cybercom.var_8d2f4636[self getentitynumber()] = gettime();
@@ -439,7 +441,7 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
     }
   }
   pos = target getcentroid();
-  if(isDefined(pos)) {
+  if(isdefined(pos)) {
     passed = bullettracepassed(eyepos, pos, 0, target, undefined, 1, 1);
     if(passed) {
       target.cybercom.var_8d2f4636[self getentitynumber()] = gettime();
@@ -450,7 +452,7 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
     mins = target getmins();
     maxs = target getmaxs();
     var_d11e725f = (maxs[2] - mins[2]) / 4;
-    for(i = 0; i <= 4; i++) {
+    for (i = 0; i <= 4; i++) {
       pos = target.origin + (0, 0, var_d11e725f * i);
       passed = bullettracepassed(eyepos, pos, 0, target, undefined, 1, 1);
       if(passed) {
@@ -471,8 +473,8 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
       }
     }
     var_cb365fdc = target.cybercom.var_8d2f4636[self getentitynumber()];
-    if(isDefined(var_cb365fdc) && (var_cb365fdc + getdvarint("scr_los_latency", 3000)) > gettime()) {
-      trace = bulletTrace(eyepos, pos, 0, target);
+    if(isdefined(var_cb365fdc) && (var_cb365fdc + getdvarint("scr_los_latency", 3000)) > gettime()) {
+      trace = bullettrace(eyepos, pos, 0, target);
       distsq = distancesquared(pos, trace["position"]);
       if(distsq <= (getdvarint("scr_cached_dist_threshhold", 315 * 315))) {
         return 2;
@@ -485,7 +487,7 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
 
 function targetisvalid(target, weapon, lockreq = 1) {
   result = 1;
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return 0;
   }
   if(!isalive(target)) {
@@ -494,46 +496,48 @@ function targetisvalid(target, weapon, lockreq = 1) {
   if(target isragdoll()) {
     return 0;
   }
-  if(isDefined(target.is_disabled) && target.is_disabled) {
+  if(isdefined(target.is_disabled) && target.is_disabled) {
     return 0;
   }
-  if(!(isDefined(target.takedamage) && target.takedamage)) {
+  if(!(isdefined(target.takedamage) && target.takedamage)) {
     return 0;
   }
-  if(isDefined(target._ai_melee_opponent)) {
+  if(isdefined(target._ai_melee_opponent)) {
     return 0;
   }
-  if(isactor(target) && (!target isonground() || isDefined(target.traversestartnode))) {
+  if(isactor(target) && (!target isonground() || isdefined(target.traversestartnode))) {
     return 0;
   }
-  if(isDefined(target.cybercomtargetstatusoverride)) {
+  if(isdefined(target.cybercomtargetstatusoverride)) {
     if(target.cybercomtargetstatusoverride == 0) {
       return 0;
     }
   } else {
-    if(isDefined(target.magic_bullet_shield) && target.magic_bullet_shield) {
+    if(isdefined(target.magic_bullet_shield) && target.magic_bullet_shield) {
       return 0;
     }
     if(isactor(target) && target isinscriptedstate()) {
-      if(isDefined(self.rider_info)) {
-        if(isDefined(self.rider_info.position) && issubstr(self.rider_info.position, "gunner")) {
+      if(isdefined(self.rider_info)) {
+        if(isdefined(self.rider_info.position) && issubstr(self.rider_info.position, "gunner")) {
           return 1;
         }
       }
     }
-    if(isDefined(target.allowdeath) && !target.allowdeath) {
+    if(isdefined(target.allowdeath) && !target.allowdeath) {
       return 0;
     }
   }
-  if(lockreq && isDefined(self.cybercom) && isDefined(self.cybercom.targetlockrequirementcb)) {
+  if(lockreq && isdefined(self.cybercom) && isdefined(self.cybercom.targetlockrequirementcb)) {
     result = self[[self.cybercom.targetlockrequirementcb]](target);
   }
-  if(result && isDefined(level.var_732e9c7d)) {
-    result = result &[[level.var_732e9c7d]](self, target, weapon);
+  if(result && isdefined(level.var_732e9c7d)) {
+    result = result & [
+      [level.var_732e9c7d]
+    ](self, target, weapon);
   }
-  if(isDefined(target.var_fb7ce72a)) {
+  if(isdefined(target.var_fb7ce72a)) {
     temp_result = target[[target.var_fb7ce72a]](self, weapon);
-    if(isDefined(temp_result)) {
+    if(isdefined(temp_result)) {
       return temp_result;
     }
   }
@@ -541,13 +545,13 @@ function targetisvalid(target, weapon, lockreq = 1) {
 }
 
 function weapon_lock_meetsrangerequirement(target, maxrange, weapon) {
-  if(isDefined(target.var_fb7ce72a)) {
+  if(isdefined(target.var_fb7ce72a)) {
     var_a3ded052 = target[[target.var_fb7ce72a]](self, weapon);
-    if(isDefined(var_a3ded052)) {
+    if(isdefined(var_a3ded052)) {
       return var_a3ded052;
     }
   }
-  if(isDefined(maxrange)) {
+  if(isdefined(maxrange)) {
     distancesqr = distancesquared(target.origin, self.origin);
     if(distancesqr > (maxrange * maxrange)) {
       return 0;
@@ -558,18 +562,18 @@ function weapon_lock_meetsrangerequirement(target, maxrange, weapon) {
 
 function weapon_lock_meetsrequirement(target, radius, weapon, maxrange) {
   result = 1;
-  if(isDefined(target.var_fb7ce72a)) {
+  if(isdefined(target.var_fb7ce72a)) {
     var_a3ded052 = target[[target.var_fb7ce72a]](self, weapon);
-    if(isDefined(var_a3ded052)) {
+    if(isdefined(var_a3ded052)) {
       return var_a3ded052;
     }
   }
   isvalid = self targetisvalid(target, weapon);
-  if(!(isDefined(isvalid) && isvalid)) {
+  if(!(isdefined(isvalid) && isvalid)) {
     self function_29bf9dee(target, 1);
     return 0;
   }
-  if(isDefined(maxrange)) {
+  if(isdefined(maxrange)) {
     distancesqr = distancesquared(target.origin, self.origin);
     if(distancesqr > (maxrange * maxrange)) {
       self function_29bf9dee(target, 3);
@@ -584,7 +588,7 @@ function weapon_lock_meetsrequirement(target, radius, weapon, maxrange) {
   if(var_edc325e == 2) {
     radius = radius * 2;
   }
-  if(isDefined(radius)) {
+  if(isdefined(radius)) {
     distsq = distancesquared(self.origin, target.origin);
     if(distsq > (144 * 144)) {
       result = target_isincircle(target, self, 65, radius);
@@ -607,7 +611,7 @@ function targetinsertionsortcompare(a, b) {
 }
 
 function function_18d9de78(target) {
-  if(isDefined(target.lockon_owner) && target.lockon_owner == self) {
+  if(isdefined(target.lockon_owner) && target.lockon_owner == self) {
     function_c5b2f654(self);
     target.var_6c8af4c4 = gettime() - target.var_9d876bed;
     target thread function_5ad57748();
@@ -622,15 +626,15 @@ function function_18d9de78(target) {
 }
 
 function weapon_lock_clearslot(slot, note, clearprogress) {
-  if(isDefined(self.cybercom.lock_targets[slot])) {
+  if(isdefined(self.cybercom.lock_targets[slot])) {
     item = self.cybercom.lock_targets[slot];
-    if(isDefined(item.target)) {
-      if(isDefined(note)) {
+    if(isdefined(item.target)) {
+      if(isdefined(note)) {
         item.target notify(note);
       }
       self weaponlocknoclearance(0, item.lockslot);
       self weaponlockremoveslot(item.lockslot);
-      if(isDefined(clearprogress) && clearprogress) {
+      if(isdefined(clearprogress) && clearprogress) {
         self function_18d9de78(item.target);
       }
       item.target = undefined;
@@ -652,22 +656,22 @@ function weapon_lock_settargettoslot(slot, target, maxrange, weapon) {
   if(slot == -1 || slot >= getdvarint("scr_max_simLocks")) {
     return;
   }
-  if(isDefined(target.var_87aa3c26) && gettime() < target.var_87aa3c26) {
+  if(isdefined(target.var_87aa3c26) && gettime() < target.var_87aa3c26) {
     return;
   }
-  if(isDefined(self.cybercom.lock_targets[slot])) {
+  if(isdefined(self.cybercom.lock_targets[slot])) {
     self weapon_lock_clearslot(slot, "ccom_lost_lock");
     newitem = self.cybercom.lock_targets[slot];
     newitem.target = target;
   } else {
-    newitem = spawnStruct();
+    newitem = spawnstruct();
     newitem.target = target;
     newitem.lockslot = slot;
     self.cybercom.lock_targets[slot] = newitem;
   }
-  if(isDefined(newitem.target)) {
-    if(isDefined(newitem.target.var_9147087d) && isDefined(newitem.target.var_9147087d[self.cybercom.lastequipped.name])) {
-      if(!isDefined(newitem.target.lockon_owner)) {
+  if(isdefined(newitem.target)) {
+    if(isdefined(newitem.target.var_9147087d) && isdefined(newitem.target.var_9147087d[self.cybercom.lastequipped.name])) {
+      if(!isdefined(newitem.target.lockon_owner)) {
         newitem.target.var_9d876bed = gettime() - newitem.target.var_6c8af4c4;
         newitem.target.lockon_owner = self;
         newitem.target notify("hash_1bf7ef5");
@@ -675,7 +679,7 @@ function weapon_lock_settargettoslot(slot, target, maxrange, weapon) {
         function_eae88e7f(self, newitem.target.var_9147087d[self.cybercom.lastequipped.name], var_9df7c303);
         level thread function_9641f650(self);
       }
-      if(isDefined(newitem.target.lockon_owner) && newitem.target.lockon_owner == self) {
+      if(isdefined(newitem.target.lockon_owner) && newitem.target.lockon_owner == self) {
         newitem.target.var_1e1a5e6f = math::clamp((gettime() - newitem.target.var_9d876bed) / (newitem.target.var_9147087d[self.cybercom.lastequipped.name] * 1000), 0, 1);
       }
     }
@@ -685,7 +689,7 @@ function weapon_lock_settargettoslot(slot, target, maxrange, weapon) {
       newitem.inrange = 0;
       self weaponlocknoclearance(1, slot);
     }
-    if(isDefined(newitem.target.var_1e1a5e6f)) {
+    if(isdefined(newitem.target.var_1e1a5e6f)) {
       if(newitem.target.lockon_owner == self) {
         if(newitem.target.var_1e1a5e6f != 1) {
           newitem.inrange = 2;
@@ -722,7 +726,7 @@ function function_eae88e7f(hacker, duration, startratio) {
 }
 
 function function_c5b2f654(hacker) {
-  if(isDefined(hacker)) {
+  if(isdefined(hacker)) {
     hacker clientfield::set_to_player("hacking_progress", 0);
     hacker clientfield::set_to_player("sndCCHacking", 0);
   }
@@ -737,8 +741,8 @@ function function_9641f650(hacker) {
 }
 
 function weapon_lock_alreadylocked(target) {
-  for(i = 0; i < self.cybercom.lock_targets.size; i++) {
-    if(!isDefined(self.cybercom.lock_targets[i].target)) {
+  for (i = 0; i < self.cybercom.lock_targets.size; i++) {
+    if(!isdefined(self.cybercom.lock_targets[i].target)) {
       continue;
     }
     if(self.cybercom.lock_targets[i].target == target) {
@@ -750,8 +754,8 @@ function weapon_lock_alreadylocked(target) {
 
 function weapon_lock_getlockedontargets() {
   targets = [];
-  for(i = 0; i < self.cybercom.lock_targets.size; i++) {
-    if(!isDefined(self.cybercom.lock_targets[i].target)) {
+  for (i = 0; i < self.cybercom.lock_targets.size; i++) {
+    if(!isdefined(self.cybercom.lock_targets[i].target)) {
       continue;
     }
     targets[targets.size] = self.cybercom.lock_targets[i].target;
@@ -768,25 +772,25 @@ function weapon_lock_getslot(target, force = 0) {
     return alreadyinslot;
   }
   slot = -1;
-  playerforward = anglesToForward(self getplayerangles());
+  playerforward = anglestoforward(self getplayerangles());
   dots = [];
-  for(i = 0; i < self.cybercom.lock_targets.size; i++) {
+  for (i = 0; i < self.cybercom.lock_targets.size; i++) {
     locktarget = self.cybercom.lock_targets[i].target;
-    if(!isDefined(locktarget)) {
+    if(!isdefined(locktarget)) {
       return i;
     }
-    newitem = spawnStruct();
+    newitem = spawnstruct();
     newitem.dot = vectordot(playerforward, vectornormalize(locktarget.origin - self.origin));
-    var_f72b478f = (isDefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
+    var_f72b478f = (isdefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
     if(newitem.dot > var_f72b478f) {
       newitem.target = locktarget;
-      array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
+      array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
     }
   }
-  newitem = spawnStruct();
+  newitem = spawnstruct();
   newitem.dot = vectordot(playerforward, vectornormalize(target.origin - self.origin));
   newitem.target = target;
-  array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
+  array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
   worsttarget = dots[dots.size - 1].target;
   if(!force && worsttarget == target) {
     return -1;
@@ -795,8 +799,8 @@ function weapon_lock_getslot(target, force = 0) {
 }
 
 function weapon_lock_clearslots(clearprogress = 0) {
-  if(isDefined(self.cybercom) && isDefined(self.cybercom.lock_targets)) {
-    for(i = 0; i < self.cybercom.lock_targets.size; i++) {
+  if(isdefined(self.cybercom) && isdefined(self.cybercom.lock_targets)) {
+    for (i = 0; i < self.cybercom.lock_targets.size; i++) {
       self weapon_lock_clearslot(i, undefined, clearprogress);
     }
   }
@@ -810,7 +814,7 @@ function function_b5f4e597(weapon) {
   self endon("hash_b5f4e597");
   if(weapon.requirelockontofire) {
     maxrange = 1500;
-    if(isDefined(weapon.lockonmaxrange)) {
+    if(isdefined(weapon.lockonmaxrange)) {
       maxrange = weapon.lockonmaxrange;
     }
     maxrangesqr = maxrange * maxrange;
@@ -818,9 +822,9 @@ function function_b5f4e597(weapon) {
     maxrangesqr = 0;
   }
   var_6f023b72 = 0;
-  while(self hasweapon(weapon)) {
+  while (self hasweapon(weapon)) {
     if(maxrangesqr > 0) {
-      if(isDefined(self.cybercom.targetlockcb)) {
+      if(isdefined(self.cybercom.targetlockcb)) {
         enemies = self[[self.cybercom.targetlockcb]](weapon);
       } else {
         enemies = arraycombine(getaiteamarray("axis"), getaiteamarray("team3"), 0, 0);
@@ -856,7 +860,7 @@ function function_5ad57748() {
   self endon("hash_5ad57748");
   self endon("hash_1bf7ef5");
   var_82361971 = int((getdvarfloat("scr_hacktime_decay_rate", 0.25) / 20) * 1000);
-  while(self.var_6c8af4c4 > 0) {
+  while (self.var_6c8af4c4 > 0) {
     wait(0.05);
     self.var_6c8af4c4 = self.var_6c8af4c4 - var_82361971;
     if(self.var_6c8af4c4 < 0) {
@@ -866,18 +870,18 @@ function function_5ad57748() {
 }
 
 function function_f5799ee1() {
-  if(!isDefined(self.cybercom.var_4eb8cd67) || self.cybercom.var_4eb8cd67.size == 0) {
+  if(!isdefined(self.cybercom.var_4eb8cd67) || self.cybercom.var_4eb8cd67.size == 0) {
     return;
   }
   var_4eb8cd67 = [];
   foreach(target in self.cybercom.var_4eb8cd67) {
-    if(!isDefined(target)) {
+    if(!isdefined(target)) {
       continue;
     }
     found = 0;
     if(self.cybercom.lock_targets.size) {
       foreach(var_9ddde835 in self.cybercom.lock_targets) {
-        if(!isDefined(var_9ddde835.target)) {
+        if(!isdefined(var_9ddde835.target)) {
           continue;
         }
         if(var_9ddde835.target == target) {
@@ -903,8 +907,8 @@ function function_17fea3ed(slot, weapon, maxtargets) {
   self endon("weapon_change");
   self endon("disconnect");
   self endon("death");
-  radius = (isDefined(self.cybercom.var_23d4a73a) ? self.cybercom.var_23d4a73a : 130);
-  if(!isDefined(maxtargets)) {
+  radius = (isdefined(self.cybercom.var_23d4a73a) ? self.cybercom.var_23d4a73a : 130);
+  if(!isdefined(maxtargets)) {
     maxtargets = 3;
   }
   self thread _lock_fired_watcher(weapon);
@@ -916,17 +920,17 @@ function function_17fea3ed(slot, weapon, maxtargets) {
     maxtargets = 5;
   }
   maxrange = 1500;
-  if(isDefined(weapon.lockonmaxrange)) {
+  if(isdefined(weapon.lockonmaxrange)) {
     maxrange = weapon.lockonmaxrange;
   }
   validtargets = [];
   dots = [];
-  while(self hasweapon(weapon)) {
+  while (self hasweapon(weapon)) {
     wait(0.05);
     self function_f5799ee1();
     self weapon_lock_clearslots();
     self.cybercom.var_b766574c = 0;
-    if(isDefined(self.cybercom.targetlockcb)) {
+    if(isdefined(self.cybercom.targetlockcb)) {
       enemies = self[[self.cybercom.targetlockcb]](weapon);
     } else {
       enemies = arraycombine(getaiteamarray("axis"), getaiteamarray("team3"), 0, 0);
@@ -935,20 +939,20 @@ function function_17fea3ed(slot, weapon, maxtargets) {
       self function_29bf9dee(undefined, 1);
     }
     var_ab2554ab = [];
-    playerforward = anglesToForward(self getplayerangles());
+    playerforward = anglestoforward(self getplayerangles());
     var_6f14dd02 = self gettagorigin("tag_aim");
     foreach(enemy in enemies) {
       center = enemy getcentroid();
       dirtotarget = vectornormalize(center - var_6f14dd02);
       enemy.var_4ddba9ea = vectordot(dirtotarget, playerforward);
-      if(isDefined(enemy.var_fb7ce72a)) {
+      if(isdefined(enemy.var_fb7ce72a)) {
         result = enemy[[enemy.var_fb7ce72a]](self, weapon);
-        if(isDefined(result) && result) {
+        if(isdefined(result) && result) {
           var_ab2554ab[var_ab2554ab.size] = enemy;
           continue;
         }
       }
-      var_f72b478f = (isDefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
+      var_f72b478f = (isdefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
       if(enemy.var_4ddba9ea > var_f72b478f) {
         var_ab2554ab[var_ab2554ab.size] = enemy;
       }
@@ -960,7 +964,7 @@ function function_17fea3ed(slot, weapon, maxtargets) {
     validtargets = [];
     potentialtargets = [];
     foreach(enemy in var_ab2554ab) {
-      if(!isDefined(enemy)) {
+      if(!isdefined(enemy)) {
         continue;
       }
       if(!self weapon_lock_meetsrequirement(enemy, radius, weapon, maxrange)) {
@@ -971,10 +975,10 @@ function function_17fea3ed(slot, weapon, maxtargets) {
     var_304647c9 = dots.size;
     dots = [];
     foreach(target in validtargets) {
-      newitem = spawnStruct();
+      newitem = spawnstruct();
       newitem.dot = target.var_4ddba9ea;
       newitem.target = target;
-      array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
+      array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
     }
     if(dots.size) {
       i = 0;
@@ -983,19 +987,19 @@ function function_17fea3ed(slot, weapon, maxtargets) {
         if(i > maxtargets) {
           break;
         }
-        if(isDefined(item.target)) {
-          if(isDefined(item.target.var_ced13b2f) && item.target.var_ced13b2f && self weapon_lock_alreadylocked(item.target) == -1) {
+        if(isdefined(item.target)) {
+          if(isdefined(item.target.var_ced13b2f) && item.target.var_ced13b2f && self weapon_lock_alreadylocked(item.target) == -1) {
             foreach(other in self.cybercom.var_4eb8cd67) {
               if(other == item.target) {
                 continue;
               }
-              if(isDefined(other.var_ced13b2f) && other.var_ced13b2f) {
+              if(isdefined(other.var_ced13b2f) && other.var_ced13b2f) {
                 item.target = undefined;
                 break;
               }
             }
           }
-          if(!isDefined(item.target)) {
+          if(!isdefined(item.target)) {
             continue;
           }
           if(self weapon_lock_alreadylocked(item.target) != -1) {
@@ -1019,14 +1023,14 @@ function function_17fea3ed(slot, weapon, maxtargets) {
 
 function draworiginforever() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     debug_arrow(self.origin, self.angles);
     wait(0.05);
   }
 }
 
 function debug_arrow(org, ang, opcolor) {
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   forwardfar = vectorscale(forward, 50);
   forwardclose = vectorscale(forward, 50 * 0.8);
   right = anglestoright(ang);
@@ -1038,7 +1042,7 @@ function debug_arrow(org, ang, opcolor) {
   red = (0.9, 0.2, 0.2);
   green = (0.2, 0.9, 0.2);
   blue = (0.2, 0.2, 0.9);
-  if(isDefined(opcolor)) {
+  if(isdefined(opcolor)) {
     red = opcolor;
     green = opcolor;
     blue = opcolor;
@@ -1051,10 +1055,10 @@ function debug_arrow(org, ang, opcolor) {
 }
 
 function debug_circle(origin, radius, seconds, color) {
-  if(!isDefined(seconds)) {
+  if(!isdefined(seconds)) {
     seconds = 1;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 0, 0);
   }
   frames = int(20 * seconds);
@@ -1062,49 +1066,49 @@ function debug_circle(origin, radius, seconds, color) {
 }
 
 function getclosestto(origin, entarray, max) {
-  if(!isDefined(entarray)) {
+  if(!isdefined(entarray)) {
     return;
   }
   if(entarray.size == 0) {
     return;
   }
-  arraysortclosest(entarray, origin, 1, 0, (isDefined(max) ? max : 2048));
+  arraysortclosest(entarray, origin, 1, 0, (isdefined(max) ? max : 2048));
   return entarray[0];
 }
 
 function cybercom_aioptoutgetflag(name) {
   ability = cybercom_gadget::getabilitybyname(name);
-  if(isDefined(ability)) {
+  if(isdefined(ability)) {
     shift = 8 * ability.type;
     return ability.flag << shift;
   }
-  if(isDefined(level._cybercom_rig_ability[name])) {
+  if(isdefined(level._cybercom_rig_ability[name])) {
     return 1 << (24 + level._cybercom_rig_ability[name].type);
   }
 }
 
 function function_58c312f2() {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self cybercom_initentityfields();
   foreach(ability in level.cybercom.abilities) {
-    if(!isDefined(ability)) {
+    if(!isdefined(ability)) {
       continue;
     }
     flag = cybercom_aioptoutgetflag(ability.name);
-    if(isDefined(flag)) {
+    if(isdefined(flag)) {
       self.cybercom.optoutflags = self.cybercom.optoutflags | flag;
     }
   }
 }
 
 function cybercom_aioptout(name) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   flag = cybercom_aioptoutgetflag(name);
-  if(!isDefined(flag)) {
+  if(!isdefined(flag)) {
     return;
   }
   self cybercom_initentityfields();
@@ -1112,40 +1116,40 @@ function cybercom_aioptout(name) {
 }
 
 function cybercom_aiclearoptout(name) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self cybercom_initentityfields();
   flag = cybercom_aioptoutgetflag(name);
-  if(!isDefined(flag)) {
+  if(!isdefined(flag)) {
     return;
   }
-  self.cybercom.optoutflags = self.cybercom.optoutflags &(~flag);
+  self.cybercom.optoutflags = self.cybercom.optoutflags & (~flag);
 }
 
 function cybercom_aicheckoptout(name) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return false;
   }
-  if(isDefined(self.nocybercom) && self.nocybercom) {
+  if(isdefined(self.nocybercom) && self.nocybercom) {
     return true;
   }
   self cybercom_initentityfields();
   flag = cybercom_aioptoutgetflag(name);
-  if(!isDefined(flag)) {
+  if(!isdefined(flag)) {
     return false;
   }
-  if(self.cybercom.optoutflags &flag) {
+  if(self.cybercom.optoutflags & flag) {
     return true;
   }
   return false;
 }
 
 function cybercom_initentityfields() {
-  if(!isDefined(self.cybercom)) {
-    self.cybercom = spawnStruct();
+  if(!isdefined(self.cybercom)) {
+    self.cybercom = spawnstruct();
   }
-  if(!isDefined(self.cybercom.optoutflags)) {
+  if(!isdefined(self.cybercom.optoutflags)) {
     self.cybercom.optoutflags = 0;
   }
 }
@@ -1160,31 +1164,31 @@ function notifymeonmatchend(note, animname) {
 function stopanimscriptedonnotify(note, animname, kill = 0, attacker, weapon) {
   self notify(("stopOnNotify" + note) + animname);
   self endon(("stopOnNotify" + note) + animname);
-  if(isDefined(animname)) {
+  if(isdefined(animname)) {
     self thread notifymeonmatchend(("stopOnNotify" + note) + animname, animname);
   }
   self util::waittill_any_return(note, "death");
-  if(isDefined(self) && self isinscriptedstate()) {
+  if(isdefined(self) && self isinscriptedstate()) {
     self stopanimscripted(0.3);
   }
-  if(isalive(self) && (isDefined(kill) && kill)) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+  if(isalive(self) && (isdefined(kill) && kill)) {
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
   }
 }
 
 function function_421746e0() {
-  if(isDefined(self.allowdeath)) {
+  if(isdefined(self.allowdeath)) {
     if(self.allowdeath == 0) {
       return false;
     }
   }
-  if(isDefined(self.var_770a8906) && self.var_770a8906) {
+  if(isdefined(self.var_770a8906) && self.var_770a8906) {
     return true;
   }
-  if(isDefined(self.rider_info)) {
+  if(isdefined(self.rider_info)) {
     return true;
   }
-  if(isDefined(self.archetype) && self.archetype == "robot" && !function_76e3026d(self)) {
+  if(isdefined(self.archetype) && self.archetype == "robot" && !function_76e3026d(self)) {
     return true;
   }
   if(isactor(self) && !self isonground()) {
@@ -1194,23 +1198,23 @@ function function_421746e0() {
 }
 
 function islinked() {
-  return isDefined(self getlinkedent());
+  return isdefined(self getlinkedent());
 }
 
 function function_8257bcb3(context, max = 2) {
-  if(!isDefined(self.cybercom.variants)) {
+  if(!isdefined(self.cybercom.variants)) {
     self.cybercom.variants = [];
   }
-  if(isDefined(self.cybercom.variants[context])) {
+  if(isdefined(self.cybercom.variants[context])) {
     self.cybercom.variants[context] = undefined;
   }
-  self.cybercom.variants[context] = spawnStruct();
+  self.cybercom.variants[context] = spawnstruct();
   self.cybercom.variants[context].var_9689b47c = 0;
   self.cybercom.variants[context].var_51b4aeb8 = max;
 }
 
 function getanimationvariant(context) {
-  if(!isDefined(self.cybercom) || !isDefined(self.cybercom.variants) || !isDefined(self.cybercom.variants[context])) {
+  if(!isdefined(self.cybercom) || !isdefined(self.cybercom.variants) || !isdefined(self.cybercom.variants[context])) {
     return "";
   }
   cur = self.cybercom.variants[context].var_9689b47c;
@@ -1250,7 +1254,7 @@ function notifymeonnote(note, waitnote) {
 function deleteentonnote(note, ent) {
   ent endon("death");
   self waittill(note);
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     ent delete();
   }
 }
@@ -1281,10 +1285,10 @@ function debugmsg(txt) {
 }
 
 function function_76e3026d(entity) {
-  if(isDefined(entity.missinglegs) && entity.missinglegs) {
+  if(isdefined(entity.missinglegs) && entity.missinglegs) {
     return false;
   }
-  if(isDefined(entity.iscrawler) && entity.iscrawler) {
+  if(isdefined(entity.iscrawler) && entity.iscrawler) {
     return false;
   }
   return true;
@@ -1312,7 +1316,7 @@ function function_adc40f11(weapon, fired) {
 
 function function_a3e55896(weapon) {
   if(self.cybercom.var_b766574c != 0 && (self.cybercom.lock_targets.size == 0 || self.cybercom.var_b766574c == 8)) {
-    if(self.cybercom.var_b766574c == 2 && isDefined(self.cybercom.var_42d20903)) {
+    if(self.cybercom.var_b766574c == 2 && isdefined(self.cybercom.var_42d20903)) {
       var_edc325e = self _lock_sighttest(self.cybercom.var_42d20903, 0);
       if(var_edc325e == 0) {
         self.cybercom.var_b766574c = 1;
@@ -1359,13 +1363,13 @@ function function_a3e55896(weapon) {
 }
 
 function function_29bf9dee(var_42d20903, var_b766574c, var_10853dc3 = 1, priority = 1) {
-  if(!isplayer(self) || !isDefined(self.cybercom)) {
+  if(!isplayer(self) || !isdefined(self.cybercom)) {
     return;
   }
-  if(var_10853dc3 && (!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed))) {
+  if(var_10853dc3 && (!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed))) {
     return;
   }
-  if(!(isDefined(self.cybercom.var_8967863e) && self.cybercom.var_8967863e)) {
+  if(!(isdefined(self.cybercom.var_8967863e) && self.cybercom.var_8967863e)) {
     return;
   }
   if(priority) {
@@ -1392,14 +1396,14 @@ function getyaw(org) {
 }
 
 function function_5ad6b98d(eattacker, eplayer, idamage) {
-  if(!isplayer(eplayer) || !isDefined(eattacker) || !isDefined(eattacker.aitype)) {
+  if(!isplayer(eplayer) || !isdefined(eattacker) || !isdefined(eattacker.aitype)) {
     return idamage;
   }
-  if(!isDefined(eplayer.cybercom.var_5e76d31b) || !eplayer.cybercom.var_5e76d31b) {
+  if(!isdefined(eplayer.cybercom.var_5e76d31b) || !eplayer.cybercom.var_5e76d31b) {
     return idamage;
   }
   var_31dd08f5 = level.var_e4e6dd84[eattacker.aitype];
-  if(!isDefined(var_31dd08f5)) {
+  if(!isdefined(var_31dd08f5)) {
     var_31dd08f5 = level.var_e4e6dd84["default"];
   }
   damage_scale = 1;
@@ -1417,7 +1421,7 @@ function function_5ad6b98d(eattacker, eplayer, idamage) {
 }
 
 function function_1be27df7() {
-  if(isDefined(self.currentweapon) && (self.currentweapon == getweapon("gadget_unstoppable_force") || self.currentweapon == getweapon("gadget_unstoppable_force_upgraded"))) {
+  if(isdefined(self.currentweapon) && (self.currentweapon == getweapon("gadget_unstoppable_force") || self.currentweapon == getweapon("gadget_unstoppable_force_upgraded"))) {
     return true;
   }
   return false;

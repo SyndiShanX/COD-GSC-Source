@@ -34,9 +34,9 @@ function init() {
   clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int");
   clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int");
   clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int");
-  callback::on_spawned(&onplayerspawned);
-  level.enemy_location_override_func = &enemy_location_override;
-  level.zm_mantle_over_40_move_speed_override = &zm_mantle_over_40_move_speed_override;
+  callback::on_spawned( & onplayerspawned);
+  level.enemy_location_override_func = & enemy_location_override;
+  level.zm_mantle_over_40_move_speed_override = & zm_mantle_over_40_move_speed_override;
 }
 
 function main() {
@@ -56,12 +56,12 @@ function onplayerspawned() {
 function tank_discovery_vo() {
   max_dist_sq = 640000;
   level flag::wait_till("activate_zone_village_0");
-  while(true) {
+  while (true) {
     a_players = getplayers();
     foreach(e_player in a_players) {
       dist_sq = distance2dsquared(level.vh_tank.origin, e_player.origin);
       height_diff = abs(level.vh_tank.origin[2] - e_player.origin[2]);
-      if(dist_sq < max_dist_sq && height_diff < 150 && (!(isDefined(e_player.isspeaking) && e_player.isspeaking))) {
+      if(dist_sq < max_dist_sq && height_diff < 150 && (!(isdefined(e_player.isspeaking) && e_player.isspeaking))) {
         e_player zm_audio::create_and_play_dialog("tank", "discover_tank");
         return;
       }
@@ -73,7 +73,7 @@ function tank_discovery_vo() {
 function tank_drop_powerups() {
   level flag::wait_till("start_zombie_round_logic");
   a_drop_nodes = [];
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     drop_num = i + 1;
     a_drop_nodes[i] = getvehiclenode("tank_powerup_drop_" + drop_num, "script_noteworthy");
     a_drop_nodes[i].next_drop_round = level.round_number + i;
@@ -81,7 +81,7 @@ function tank_drop_powerups() {
     a_drop_nodes[i].drop_pos = s_drop.origin;
   }
   a_possible_powerups = array("nuke", "full_ammo", "zombie_blood", "insta_kill", "fire_sale", "double_points");
-  while(true) {
+  while (true) {
     self flag::wait_till("tank_moving");
     foreach(node in a_drop_nodes) {
       dist_sq = distance2dsquared(node.origin, self.origin);
@@ -128,7 +128,7 @@ function drawtag(tag, opcolor) {
 
 function draw_tank_tag(tag, opcolor) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     if(self tank_tag_is_valid(tag)) {
       drawtag(tag.str_tag, vectorscale((0, 1, 0), 255));
     } else {
@@ -143,9 +143,9 @@ function tank_debug_tags() {
   adddebugcommand("");
   level flag::wait_till("");
   a_spots = struct::get_array("", "");
-  while(true) {
+  while (true) {
     if(getdvarstring("") == "") {
-      if(!(isDefined(self.tags_drawing) && self.tags_drawing)) {
+      if(!(isdefined(self.tags_drawing) && self.tags_drawing)) {
         foreach(s_tag in self.a_tank_tags) {
           self thread draw_tank_tag(s_tag);
         }
@@ -158,7 +158,7 @@ function tank_debug_tags() {
       }
       a_zombies = zombie_utility::get_round_enemy_array();
       foreach(e_zombie in a_zombies) {
-        if(isDefined(e_zombie.tank_state)) {
+        if(isdefined(e_zombie.tank_state)) {
           print3d(e_zombie.origin + vectorscale((0, 0, 1), 60), e_zombie.tank_state, vectorscale((1, 0, 0), 255), 1);
         }
       }
@@ -170,7 +170,7 @@ function tank_debug_tags() {
 function tank_jump_down_store_offset(s_pos) {
   v_up = anglestoup(self.angles);
   v_right = anglestoright(self.angles);
-  v_fwd = anglesToForward(self.angles);
+  v_fwd = anglestoforward(self.angles);
   offset = s_pos.origin - self.origin;
   s_pos.tank_offset = (vectordot(v_fwd, offset), vectordot(v_right, offset), vectordot(v_up, offset));
 }
@@ -178,7 +178,7 @@ function tank_jump_down_store_offset(s_pos) {
 function tank_get_jump_down_offset(s_pos) {
   v_up = anglestoup(self.angles);
   v_right = anglestoright(self.angles);
-  v_fwd = anglesToForward(self.angles);
+  v_fwd = anglestoforward(self.angles);
   v_offset = s_pos.tank_offset;
   return (self.origin + (v_offset[0] * v_fwd)) + (v_offset[1] * v_right) + (v_offset[2] * v_up);
 }
@@ -241,14 +241,14 @@ function tank_setup() {
   self thread function_118e38b5();
   self thread tank_drop_powerups();
   self thread tank_debug_tags();
-  self playLoopSound("zmb_tank_idle", 0.5);
+  self playloopsound("zmb_tank_idle", 0.5);
 }
 
 function function_c9714eb4() {
   self endon("death");
   level flag::wait_till("start_zombie_round_logic");
   do {
-    for(var_6b1535d6 = 0; var_6b1535d6 < self.a_tank_tags.size; var_6b1535d6++) {
+    for (var_6b1535d6 = 0; var_6b1535d6 < self.a_tank_tags.size; var_6b1535d6++) {
       tag_origin = self gettagorigin(self.a_tank_tags[var_6b1535d6].str_tag);
       queryresult = positionquery_source_navigation(tag_origin, 0, 32, 128, 4);
       if(queryresult.data.size) {
@@ -259,14 +259,14 @@ function function_c9714eb4() {
     self flag::wait_till("tank_moving");
     wait(0.05);
   }
-  while(1);
+  while (1);
 }
 
 function function_617c74cb() {
   self endon("death");
   level flag::wait_till("start_zombie_round_logic");
   do {
-    for(var_6b1535d6 = 0; var_6b1535d6 < self.a_mechz_tags.size; var_6b1535d6++) {
+    for (var_6b1535d6 = 0; var_6b1535d6 < self.a_mechz_tags.size; var_6b1535d6++) {
       tag_origin = self gettagorigin(self.a_mechz_tags[var_6b1535d6].str_tag);
       queryresult = positionquery_source_navigation(tag_origin, 0, 32, 128, 4);
       if(queryresult.data.size) {
@@ -277,7 +277,7 @@ function function_617c74cb() {
     self flag::wait_till("tank_moving");
     self flag::wait_till_clear("tank_moving");
   }
-  while(1);
+  while (1);
 }
 
 function function_1db98f69(tag_name) {
@@ -301,7 +301,7 @@ function function_21d81b2c(tag_name) {
 function do_cooldown_fx() {
   self endon("death");
   level flag::wait_till("start_zombie_round_logic");
-  while(true) {
+  while (true) {
     self clientfield::set("tank_cooldown_fx", 2);
     self flag::wait_till("tank_moving");
     self clientfield::set("tank_cooldown_fx", 0);
@@ -313,7 +313,7 @@ function do_cooldown_fx() {
 
 function do_treadfx() {
   self endon("death");
-  while(true) {
+  while (true) {
     self flag::wait_till("tank_moving");
     self clientfield::set("tank_tread_fx", 1);
     self flag::wait_till_clear("tank_moving");
@@ -324,7 +324,7 @@ function do_treadfx() {
 function function_118e38b5() {
   self endon("death");
   self vehicle::lights_off();
-  while(true) {
+  while (true) {
     self flag::wait_till("tank_moving");
     self vehicle::lights_on();
     self flag::wait_till_clear("tank_moving");
@@ -334,10 +334,10 @@ function function_118e38b5() {
 
 function disconnect_reconnect_paths(vh_tank) {
   self endon("death");
-  while(true) {
+  while (true) {
     self disconnectpaths();
     wait(1);
-    while(vh_tank getspeedmph() < 1) {
+    while (vh_tank getspeedmph() < 1) {
       wait(0.05);
     }
     self connectpaths();
@@ -346,7 +346,7 @@ function disconnect_reconnect_paths(vh_tank) {
 }
 
 function tank_rumble_update() {
-  while(self.b_already_on_tank) {
+  while (self.b_already_on_tank) {
     if(level.vh_tank flag::get("tank_moving")) {
       self clientfield::set_to_player("player_rumble_and_shake", 6);
     } else {
@@ -360,11 +360,11 @@ function tank_rumble_update() {
 function players_on_tank_update() {
   level flag::wait_till("start_zombie_round_logic");
   self thread tank_disconnect_paths();
-  while(true) {
+  while (true) {
     a_players = getplayers();
     foreach(e_player in a_players) {
       if(zombie_utility::is_player_valid(e_player)) {
-        if(isDefined(e_player.b_already_on_tank) && !e_player.b_already_on_tank && e_player entity_on_tank()) {
+        if(isdefined(e_player.b_already_on_tank) && !e_player.b_already_on_tank && e_player entity_on_tank()) {
           e_player.b_already_on_tank = 1;
           self.n_players_on++;
           if(self flag::get("tank_cooldown")) {
@@ -380,7 +380,7 @@ function players_on_tank_update() {
           e_player allowprone(0);
           continue;
         }
-        if(isDefined(e_player.b_already_on_tank) && e_player.b_already_on_tank && !e_player entity_on_tank()) {
+        if(isdefined(e_player.b_already_on_tank) && e_player.b_already_on_tank && !e_player entity_on_tank()) {
           e_player.b_already_on_tank = 0;
           self.n_players_on--;
           level notify("vo_tank_leave", e_player);
@@ -405,10 +405,10 @@ function tank_force_crouch_from_prone_after_on_tank() {
 
 function function_de2a4a6e(trig) {
   self endon("player_jumped_off_tank");
-  while(self.b_already_on_tank) {
+  while (self.b_already_on_tank) {
     trig waittill("trigger", player);
     if(player == self && self isonground()) {
-      v_push = anglesToForward(trig.angles) * 150;
+      v_push = anglestoforward(trig.angles) * 150;
       self setvelocity(v_push);
     }
     wait(0.05);
@@ -426,7 +426,7 @@ function tank_rides_around_map_achievement_watcher() {
     level.vh_tank flag::wait_till("tank_moving");
     level.vh_tank flag::wait_till_clear("tank_moving");
   }
-  while(str_starting_location != level.vh_tank.str_location_current);
+  while (str_starting_location != level.vh_tank.str_location_current);
   self notify("rode_tank_around_map");
 }
 
@@ -443,7 +443,7 @@ function entity_on_tank() {
 function tank_station() {
   self thread tank_watch_use();
   self thread tank_movement();
-  a_call_boxes = getEntArray("trig_tank_station_call", "targetname");
+  a_call_boxes = getentarray("trig_tank_station_call", "targetname");
   foreach(t_call_box in a_call_boxes) {
     t_call_box thread tank_call_box();
   }
@@ -461,9 +461,9 @@ function tank_left_behind() {
   e_rider = array::random(a_riders);
   a_players = getplayers();
   a_victims = [];
-  v_tank_fwd = anglesToForward(self.angles);
+  v_tank_fwd = anglestoforward(self.angles);
   foreach(e_player in a_players) {
-    if(isDefined(e_player.b_already_on_tank) && e_player.b_already_on_tank) {
+    if(isdefined(e_player.b_already_on_tank) && e_player.b_already_on_tank) {
       continue;
     }
     if(distance2dsquared(e_player.origin, self.origin) > n_valid_dist_sq) {
@@ -474,7 +474,7 @@ function tank_left_behind() {
     if(vectordot(v_to_tank, v_tank_fwd) < 0) {
       continue;
     }
-    v_player_fwd = anglesToForward(e_player.angles);
+    v_player_fwd = anglestoforward(e_player.angles);
     if(vectordot(v_player_fwd, v_to_tank) < 0) {
       continue;
     }
@@ -488,7 +488,7 @@ function tank_left_behind() {
 }
 
 function tank_watch_use() {
-  while(true) {
+  while (true) {
     self.t_use waittill("trigger", e_player);
     cooling_down = self flag::get("tank_cooldown");
     if(zombie_utility::is_player_valid(e_player) && e_player.score >= 500 && !cooling_down) {
@@ -498,9 +498,9 @@ function tank_watch_use() {
       self thread tank_left_behind();
       e_player zm_score::minus_to_player_score(500);
       self waittill("tank_stop");
-      self playSound("zmb_tank_stop");
+      self playsound("zmb_tank_stop");
       self stoploopsound(1.5);
-      if(isDefined(self.b_call_box_used) && self.b_call_box_used) {
+      if(isdefined(self.b_call_box_used) && self.b_call_box_used) {
         self.b_call_box_used = 0;
         self activate_tank_wait_with_no_cost();
       }
@@ -520,7 +520,7 @@ function activate_tank_wait_with_no_cost() {
 }
 
 function tank_call_box() {
-  while(true) {
+  while (true) {
     self waittill("trigger", e_player);
     cooling_down = level.vh_tank flag::get("tank_cooldown");
     if(!level.vh_tank flag::get("tank_activated") && e_player.score >= 500 && !cooling_down) {
@@ -540,7 +540,7 @@ function tank_call_box() {
 
 function tank_call_boxes_update() {
   str_loc = level.vh_tank.str_location_current;
-  a_trigs = getEntArray("trig_tank_station_call", "targetname");
+  a_trigs = getentarray("trig_tank_station_call", "targetname");
   moving = level.vh_tank flag::get("tank_moving");
   cooling = level.vh_tank flag::get("tank_cooldown");
   foreach(trig in a_trigs) {
@@ -574,7 +574,7 @@ function tank_movement() {
   n_location_index = 0;
   self.str_location_current = self.a_locations[n_location_index];
   tank_call_boxes_update();
-  while(true) {
+  while (true) {
     self flag::wait_till("tank_activated");
     if(!self.var_78665041) {
       self.var_78665041 = 1;
@@ -585,7 +585,7 @@ function tank_movement() {
     }
     iprintln("");
     self thread tank_connect_paths();
-    self playSound("evt_tank_call");
+    self playsound("evt_tank_call");
     self setspeedimmediate(8);
     self.t_use setinvisibletoall();
     tank_call_boxes_update();
@@ -606,7 +606,7 @@ function tank_movement() {
     tank_call_boxes_update();
     self wait_for_tank_cooldown();
     self flag::clear("tank_cooldown");
-    if(isDefined(self.b_no_cost) && self.b_no_cost) {
+    if(isdefined(self.b_no_cost) && self.b_no_cost) {
       self.t_use sethintstring(&"ZM_TOMB_X2ATF");
     } else {
       self.t_use sethintstring(&"ZM_TOMB_X2AT", 500);
@@ -619,7 +619,7 @@ function tank_movement() {
 
 function tank_disconnect_paths() {
   self endon("death");
-  while(self getspeedmph() > 0) {
+  while (self getspeedmph() > 0) {
     wait(0.05);
   }
   self.var_5c499e37 disconnectpaths();
@@ -635,9 +635,9 @@ function tank_kill_players() {
   foreach(player in level.players) {
     player.var_32857832 = 0;
   }
-  while(true) {
+  while (true) {
     self.t_kill waittill("trigger", player);
-    if(!(isDefined(player.b_already_on_tank) && player.b_already_on_tank) && (!(isDefined(player.var_d0cd73ec) && player.var_d0cd73ec))) {
+    if(!(isdefined(player.b_already_on_tank) && player.b_already_on_tank) && (!(isdefined(player.var_d0cd73ec) && player.var_d0cd73ec))) {
       player thread tank_ran_me_over();
       wait(0.05);
     } else {
@@ -658,10 +658,10 @@ function tank_ran_me_over() {
   a_nodes = getnodesinradiussorted(self.origin, 256, 0, 72, "path", 15);
   foreach(node in a_nodes) {
     str_zone = zm_zonemgr::get_zone_from_position(node.origin);
-    if(!isDefined(str_zone)) {
+    if(!isdefined(str_zone)) {
       continue;
     }
-    if(!(isDefined(node.b_player_downed_here) && node.b_player_downed_here)) {
+    if(!(isdefined(node.b_player_downed_here) && node.b_player_downed_here)) {
       start_wait = 0;
       black_screen_wait = 4;
       fade_in_time = 0.01;
@@ -690,11 +690,11 @@ function wait_to_unlink(player) {
 function tank_cooldown_timer() {
   self.n_cooldown_timer = 0;
   str_location_original = self.str_location_current;
-  self playSound("zmb_tank_start");
+  self playsound("zmb_tank_start");
   self stoploopsound(0.4);
   wait(0.4);
-  self playLoopSound("zmb_tank_loop", 1);
-  while(str_location_original == self.str_location_current) {
+  self playloopsound("zmb_tank_loop", 1);
+  while (str_location_original == self.str_location_current) {
     self.n_cooldown_timer = self.n_cooldown_timer + (self.n_players_on * 0.05);
     wait(0.05);
   }
@@ -709,39 +709,39 @@ function wait_for_tank_cooldown() {
   }
   wait(self.n_cooldown_timer);
   level notify("stp_cd");
-  self playSound("zmb_tank_ready");
-  self playLoopSound("zmb_tank_idle");
+  self playsound("zmb_tank_ready");
+  self playloopsound("zmb_tank_idle");
 }
 
 function snd_fuel() {
   snd_cd_ent = spawn("script_origin", self.origin);
   snd_cd_ent linkto(self);
   wait(4);
-  snd_cd_ent playSound("zmb_tank_fuel_start");
+  snd_cd_ent playsound("zmb_tank_fuel_start");
   wait(0.5);
-  snd_cd_ent playLoopSound("zmb_tank_fuel_loop");
+  snd_cd_ent playloopsound("zmb_tank_fuel_loop");
   level waittill("stp_cd");
   snd_cd_ent stoploopsound(0.5);
-  snd_cd_ent playSound("zmb_tank_fuel_end");
+  snd_cd_ent playsound("zmb_tank_fuel_end");
   wait(2);
   snd_cd_ent delete();
 }
 
 function follow_path(n_path_start) {
   self endon("death");
-  assert(isDefined(n_path_start), "");
+  assert(isdefined(n_path_start), "");
   self notify("newpath");
   self endon("newpath");
   n_next_point = n_path_start;
-  while(isDefined(n_next_point)) {
+  while (isdefined(n_next_point)) {
     self.n_next_node = getvehiclenode(n_next_point.target, "targetname");
     self waittill("reached_node", n_next_point);
-    if(isDefined(n_next_point.script_noteworthy) && issubstr(n_next_point.script_noteworthy, "fxexp")) {
+    if(isdefined(n_next_point.script_noteworthy) && issubstr(n_next_point.script_noteworthy, "fxexp")) {
       exploder::exploder(n_next_point.script_noteworthy);
     }
     self.n_current = n_next_point;
     n_next_point notify("trigger", self);
-    if(isDefined(n_next_point.script_noteworthy)) {
+    if(isdefined(n_next_point.script_noteworthy)) {
       self notify(n_next_point.script_noteworthy);
       self notify("noteworthy", n_next_point.script_noteworthy, n_next_point);
     }
@@ -751,43 +751,43 @@ function follow_path(n_path_start) {
 
 function tank_tag_array_setup() {
   a_tank_tags = [];
-  a_tank_tags[0] = spawnStruct();
+  a_tank_tags[0] = spawnstruct();
   a_tank_tags[0].str_tag = "window_left_1_jmp_jnt";
   a_tank_tags[0].disabled_at_bunker = 1;
   a_tank_tags[0].disabled_at_church = 1;
   a_tank_tags[0].side = "left";
   a_tank_tags[0].var_bd6a9142 = "_markiv_leftfront";
-  a_tank_tags[1] = spawnStruct();
+  a_tank_tags[1] = spawnstruct();
   a_tank_tags[1].str_tag = "window_left_2_jmp_jnt";
   a_tank_tags[1].disabled_at_bunker = 1;
   a_tank_tags[1].disabled_at_church = 1;
   a_tank_tags[1].side = "left";
   a_tank_tags[1].var_bd6a9142 = "_markiv_leftmid";
-  a_tank_tags[2] = spawnStruct();
+  a_tank_tags[2] = spawnstruct();
   a_tank_tags[2].str_tag = "window_left_3_jmp_jnt";
   a_tank_tags[2].disabled_at_bunker = 1;
   a_tank_tags[2].disabled_at_church = 1;
   a_tank_tags[2].side = "left";
   a_tank_tags[2].var_bd6a9142 = "_markiv_leftrear";
-  a_tank_tags[3] = spawnStruct();
+  a_tank_tags[3] = spawnstruct();
   a_tank_tags[3].str_tag = "window_right_front_jmp_jnt";
   a_tank_tags[3].side = "front";
   a_tank_tags[3].var_bd6a9142 = "_markiv_front";
-  a_tank_tags[4] = spawnStruct();
+  a_tank_tags[4] = spawnstruct();
   a_tank_tags[4].str_tag = "window_right_1_jmp_jnt";
   a_tank_tags[4].side = "right";
   a_tank_tags[4].var_bd6a9142 = "_markiv_rightfront";
-  a_tank_tags[5] = spawnStruct();
+  a_tank_tags[5] = spawnstruct();
   a_tank_tags[5].str_tag = "window_right_2_jmp_jnt";
   a_tank_tags[5].disabled_at_church = 1;
   a_tank_tags[5].side = "right";
   a_tank_tags[5].var_bd6a9142 = "_markiv_rightmid";
-  a_tank_tags[6] = spawnStruct();
+  a_tank_tags[6] = spawnstruct();
   a_tank_tags[6].str_tag = "window_right_3_jmp_jnt";
   a_tank_tags[6].disabled_at_church = 1;
   a_tank_tags[6].side = "right";
   a_tank_tags[6].var_bd6a9142 = "_markiv_rightrear";
-  a_tank_tags[7] = spawnStruct();
+  a_tank_tags[7] = spawnstruct();
   a_tank_tags[7].str_tag = "window_left_rear_jmp_jnt";
   a_tank_tags[7].side = "rear";
   a_tank_tags[7].var_bd6a9142 = "_markiv_rear";
@@ -798,9 +798,9 @@ function get_players_on_tank(valid_targets_only = 0) {
   a_players_on_tank = [];
   a_players = getplayers();
   foreach(e_player in a_players) {
-    if(zombie_utility::is_player_valid(e_player) && (isDefined(e_player.b_already_on_tank) && e_player.b_already_on_tank)) {
-      if(!valid_targets_only || (!(isDefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player))) {
-        if(!isDefined(a_players_on_tank)) {
+    if(zombie_utility::is_player_valid(e_player) && (isdefined(e_player.b_already_on_tank) && e_player.b_already_on_tank)) {
+      if(!valid_targets_only || (!(isdefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player))) {
+        if(!isdefined(a_players_on_tank)) {
           a_players_on_tank = [];
         } else if(!isarray(a_players_on_tank)) {
           a_players_on_tank = array(a_players_on_tank);
@@ -814,19 +814,19 @@ function get_players_on_tank(valid_targets_only = 0) {
 
 function mechz_tag_array_setup() {
   a_mechz_tags = [];
-  a_mechz_tags[0] = spawnStruct();
+  a_mechz_tags[0] = spawnstruct();
   a_mechz_tags[0].str_tag = "tag_mechz_1";
   a_mechz_tags[0].in_use = 0;
   a_mechz_tags[0].in_use_by = undefined;
-  a_mechz_tags[1] = spawnStruct();
+  a_mechz_tags[1] = spawnstruct();
   a_mechz_tags[1].str_tag = "tag_mechz_2";
   a_mechz_tags[1].in_use = 0;
   a_mechz_tags[1].in_use_by = undefined;
-  a_mechz_tags[2] = spawnStruct();
+  a_mechz_tags[2] = spawnstruct();
   a_mechz_tags[2].str_tag = "tag_mechz_3";
   a_mechz_tags[2].in_use = 0;
   a_mechz_tags[2].in_use_by = undefined;
-  a_mechz_tags[3] = spawnStruct();
+  a_mechz_tags[3] = spawnstruct();
   a_mechz_tags[3].str_tag = "tag_mechz_4";
   a_mechz_tags[3].in_use = 0;
   a_mechz_tags[3].in_use_by = undefined;
@@ -843,7 +843,7 @@ function mechz_tag_in_use_cleanup(mechz, tag_struct_index) {
 function get_closest_mechz_tag_on_tank(mechz, target_org) {
   best_dist = -1;
   best_tag_index = undefined;
-  for(i = 0; i < self.a_mechz_tags.size; i++) {
+  for (i = 0; i < self.a_mechz_tags.size; i++) {
     if(self.a_mechz_tags[i].in_use && self.a_mechz_tags[i].in_use_by != mechz) {
       continue;
     }
@@ -855,8 +855,8 @@ function get_closest_mechz_tag_on_tank(mechz, target_org) {
       best_tag_index = i;
     }
   }
-  if(isDefined(best_tag_index)) {
-    for(i = 0; i < self.a_mechz_tags.size; i++) {
+  if(isdefined(best_tag_index)) {
+    for (i = 0; i < self.a_mechz_tags.size; i++) {
       if(self.a_mechz_tags[i].in_use && self.a_mechz_tags[i].in_use_by == mechz) {
         self.a_mechz_tags[i].in_use = 0;
         self.a_mechz_tags[i].in_use_by = undefined;
@@ -880,10 +880,10 @@ function tank_tag_is_valid(s_tag, disable_sides = 0) {
     if(s_tag.side == "front") {
       return 0;
     }
-    if(!isDefined(self.n_next_node)) {
+    if(!isdefined(self.n_next_node)) {
       return 1;
     }
-    if(!isDefined(self.n_next_node.script_string)) {
+    if(!isdefined(self.n_next_node.script_string)) {
       return 1;
     }
     if(issubstr(self.n_next_node.script_string, "disable_" + s_tag.side)) {
@@ -894,10 +894,10 @@ function tank_tag_is_valid(s_tag, disable_sides = 0) {
   at_church = self.str_location_current == "village";
   at_bunker = self.str_location_current == "bunkers";
   if(at_church) {
-    return !(isDefined(s_tag.disabled_at_church) && s_tag.disabled_at_church);
+    return !(isdefined(s_tag.disabled_at_church) && s_tag.disabled_at_church);
   }
   if(at_bunker) {
-    return !(isDefined(s_tag.disabled_at_bunker) && s_tag.disabled_at_bunker);
+    return !(isdefined(s_tag.disabled_at_bunker) && s_tag.disabled_at_bunker);
   }
   return 1;
 }
@@ -907,10 +907,10 @@ function zombies_watch_tank() {
   self.a_tank_tags = a_tank_tags;
   a_mechz_tags = mechz_tag_array_setup();
   self.a_mechz_tags = a_mechz_tags;
-  while(true) {
+  while (true) {
     a_zombies = zombie_utility::get_round_enemy_array();
     foreach(e_zombie in a_zombies) {
-      if(!isDefined(e_zombie.tank_state)) {
+      if(!isdefined(e_zombie.tank_state)) {
         e_zombie thread tank_zombie_think();
       }
     }
@@ -930,14 +930,14 @@ function stop_chasing_tank() {
   self.b_on_tank = 0;
   self.tank_re_eval_time = undefined;
   self notify("change_goal");
-  if(isDefined(self.zombie_move_speed_original)) {
+  if(isdefined(self.zombie_move_speed_original)) {
     self zombie_utility::set_zombie_run_cycle(self.zombie_move_speed_original);
   }
 }
 
 function choose_tag_and_chase() {
   s_tag = self get_closest_valid_tank_tag();
-  if(isDefined(s_tag)) {
+  if(isdefined(s_tag)) {
     self.str_tank_tag = s_tag.str_tag;
     self.var_69140779 = s_tag.var_bd6a9142;
     self.tank_tag = s_tag;
@@ -949,13 +949,13 @@ function choose_tag_and_chase() {
 
 function choose_tag_and_jump_down() {
   s_tag = self get_closest_valid_tank_tag(1);
-  if(isDefined(s_tag)) {
+  if(isdefined(s_tag)) {
     self.str_tank_tag = s_tag.str_tag;
     self.var_69140779 = s_tag.var_bd6a9142;
     self.tank_tag = struct::get(s_tag.str_tag + "_down_start", "targetname");
     self.tank_state = "exit_tank";
     self zombie_utility::set_zombie_run_cycle("walk");
-    assert(isDefined(self.tank_tag));
+    assert(isdefined(self.tank_tag));
   } else {
     wait(1);
   }
@@ -1016,7 +1016,7 @@ function jump_down_tag() {
 
 function watch_zombie_fall_off_tank() {
   self endon("death");
-  while(true) {
+  while (true) {
     if(self.tank_state == "on_tank" || self.tank_state == "exit_tank") {
       if(!self entity_on_tank()) {
         stop_chasing_tank();
@@ -1044,7 +1044,7 @@ function tank_zombie_think() {
   self.tank_state = "none";
   self thread watch_zombie_fall_off_tank();
   think_time = 0.5;
-  while(true) {
+  while (true) {
     a_players_on_tank = get_players_on_tank(1);
     tag_range = 32;
     if(level.vh_tank flag::get("tank_moving")) {
@@ -1052,21 +1052,21 @@ function tank_zombie_think() {
     }
     switch (self.tank_state) {
       case "none": {
-        if(!isDefined(self.ai_state) || self.ai_state != "find_flesh") {
+        if(!isdefined(self.ai_state) || self.ai_state != "find_flesh") {
           break;
         }
         if(a_players_on_tank.size == 0) {
           break;
         }
         if(zombie_utility::is_player_valid(self.favoriteenemy)) {
-          if(isDefined(self.favoriteenemy.b_already_on_tank) && self.favoriteenemy.b_already_on_tank) {
+          if(isdefined(self.favoriteenemy.b_already_on_tank) && self.favoriteenemy.b_already_on_tank) {
             self start_chasing_tank();
           }
         } else {
           a_players = getplayers();
           a_eligible_players = [];
           foreach(e_player in a_players) {
-            if(!(isDefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player)) {
+            if(!(isdefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player)) {
               a_eligible_players[a_eligible_players.size] = e_player;
             }
           }
@@ -1093,7 +1093,7 @@ function tank_zombie_think() {
         if(dist_sq_to_tank < 250000) {
           self choose_tag_and_chase();
         }
-        if(!self.missinglegs && self.zombie_move_speed != "super_sprint" && (!(isDefined(self.is_traversing) && self.is_traversing)) && self.ai_state == "find_flesh") {
+        if(!self.missinglegs && self.zombie_move_speed != "super_sprint" && (!(isdefined(self.is_traversing) && self.is_traversing)) && self.ai_state == "find_flesh") {
           if(level.vh_tank flag::get("tank_moving")) {
             self zombie_utility::set_zombie_run_cycle("super_sprint");
             self thread zombie_chasing_tank_turn_crawler();
@@ -1102,7 +1102,7 @@ function tank_zombie_think() {
         break;
       }
       case "tag_chase": {
-        if(!isDefined(self.tank_re_eval_time)) {
+        if(!isdefined(self.tank_re_eval_time)) {
           self.tank_re_eval_time = 6;
         } else if(self.tank_re_eval_time <= 0) {
           if(self entity_on_tank()) {
@@ -1142,7 +1142,7 @@ function tank_zombie_think() {
       case "on_tank": {
         if(a_players_on_tank.size == 0) {
           choose_tag_and_jump_down();
-        } else if(!isDefined(self.favoriteenemy) || !zombie_utility::is_player_valid(self.favoriteenemy, 1)) {
+        } else if(!isdefined(self.favoriteenemy) || !zombie_utility::is_player_valid(self.favoriteenemy, 1)) {
           self.favoriteenemy = array::random(a_players_on_tank);
         }
         break;
@@ -1178,12 +1178,12 @@ function update_zombie_goal_pos(str_position, stop_notify) {
   self endon("goal");
   self endon("near_goal");
   self endon("change_goal");
-  if(isDefined(stop_notify)) {
+  if(isdefined(stop_notify)) {
     self endon(stop_notify);
   }
   s_script_origin = struct::get(str_position, "targetname");
-  while(self.tank_state != "none") {
-    if(isDefined(s_script_origin)) {
+  while (self.tank_state != "none") {
+    if(isdefined(s_script_origin)) {
       v_origin = level.vh_tank tank_get_jump_down_offset(s_script_origin);
       if(getdvarstring("") == "") {
         line(self.origin + vectorscale((0, 0, 1), 30), v_origin);
@@ -1200,7 +1200,7 @@ function zombie_chasing_tank_turn_crawler() {
   self notify("tank_watch_turn_crawler");
   self endon("tank_watch_turn_crawler");
   self endon("death");
-  while(!self.missinglegs) {
+  while (!self.missinglegs) {
     wait(0.05);
   }
   self zombie_utility::set_zombie_run_cycle(self.zombie_move_speed_original);
@@ -1210,7 +1210,7 @@ function tank_mark_tag_occupied(str_tag, ai_occupier, set_occupied) {
   current_occupier = self.tag_occupied[str_tag];
   min_dist_sq_to_tag = 1024;
   if(set_occupied) {
-    if(!isDefined(current_occupier)) {
+    if(!isdefined(current_occupier)) {
       self.tag_occupied[str_tag] = ai_occupier;
       return true;
     }
@@ -1223,7 +1223,7 @@ function tank_mark_tag_occupied(str_tag, ai_occupier, set_occupied) {
     }
     return false;
   }
-  if(!isDefined(current_occupier)) {
+  if(!isdefined(current_occupier)) {
     return true;
   }
   if(current_occupier != ai_occupier) {
@@ -1240,7 +1240,7 @@ function is_tag_crowded(str_tag) {
   foreach(e_zombie in a_zombies) {
     dist_sq = distancesquared(v_tag, e_zombie.origin);
     if(dist_sq < 4096) {
-      if(isDefined(e_zombie.tank_state)) {
+      if(isdefined(e_zombie.tank_state)) {
         if(e_zombie.tank_state != "tank_chase" && e_zombie.tank_state != "tag_chase" && e_zombie.tank_state != "none") {
           continue;
         }
@@ -1278,7 +1278,7 @@ function get_closest_valid_tank_tag(jumping_down = 0) {
 
 function zombieanimnotetrackthink(str_anim_notetrack_notify, chunk, node) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill(str_anim_notetrack_notify, str_notetrack);
     if(str_notetrack == "end") {
       return;
@@ -1299,14 +1299,14 @@ function tank_flamethrower_get_targets(str_tag, n_flamethrower_id) {
   a_targets = [];
   v_tag_pos = self gettagorigin(str_tag);
   v_tag_angles = self gettagangles(str_tag);
-  v_tag_fwd = anglesToForward(v_tag_angles);
+  v_tag_fwd = anglestoforward(v_tag_angles);
   v_kill_pos = v_tag_pos + (v_tag_fwd * 80);
   foreach(ai_zombie in a_zombies) {
     dist_sq = distance2dsquared(ai_zombie.origin, v_kill_pos);
     if(dist_sq > (80 * 80)) {
       continue;
     }
-    if(isDefined(ai_zombie.tank_state)) {
+    if(isdefined(ai_zombie.tank_state)) {
       if(ai_zombie.tank_state == "climbing" || ai_zombie.tank_state == "jumping_down") {
         continue;
       }
@@ -1316,7 +1316,7 @@ function tank_flamethrower_get_targets(str_tag, n_flamethrower_id) {
     if(n_dot < 0.95) {
       continue;
     }
-    if(!isDefined(a_targets)) {
+    if(!isdefined(a_targets)) {
       a_targets = [];
     } else if(!isarray(a_targets)) {
       a_targets = array(a_targets);
@@ -1328,7 +1328,7 @@ function tank_flamethrower_get_targets(str_tag, n_flamethrower_id) {
 
 function tank_flamethrower_cycle_targets(str_tag, n_flamethrower_id) {
   self endon("flamethrower_stop_" + n_flamethrower_id);
-  while(true) {
+  while (true) {
     a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
     foreach(ai in a_targets) {
       if(isalive(ai)) {
@@ -1343,10 +1343,10 @@ function tank_flamethrower_cycle_targets(str_tag, n_flamethrower_id) {
 function tank_flamethrower(str_tag, n_flamethrower_id) {
   zombieless_waits = 0;
   time_between_flames = randomfloatrange(3, 6);
-  while(true) {
+  while (true) {
     wait(1);
     if(n_flamethrower_id == 1) {
-      self setturrettargetvec(self.origin + (anglesToForward(self.angles) * 1000));
+      self setturrettargetvec(self.origin + (anglestoforward(self.angles) * 1000));
     }
     self flag::wait_till("tank_moving");
     a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
@@ -1373,7 +1373,7 @@ function tank_flamethrower(str_tag, n_flamethrower_id) {
 
 function flamethrower_damage_zombies(n_flamethrower_id, str_tag) {
   self endon("flamethrower_stop_" + n_flamethrower_id);
-  while(true) {
+  while (true) {
     a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
     foreach(ai_zombie in a_targets) {
       if(isalive(ai_zombie)) {
@@ -1398,24 +1398,24 @@ function enemy_location_override() {
   enemy = self.favoriteenemy;
   location = enemy.origin;
   tank = level.vh_tank;
-  if(isDefined(self.is_mechz) && self.is_mechz) {
-    if(isDefined(self.var_afe67307)) {
+  if(isdefined(self.is_mechz) && self.is_mechz) {
+    if(isdefined(self.var_afe67307)) {
       return self.var_afe67307;
     }
-    if(isDefined(self.jump_pos)) {
+    if(isdefined(self.jump_pos)) {
       return self.jump_pos.origin;
     }
     return undefined;
   }
-  if(isDefined(self.attackable)) {
+  if(isdefined(self.attackable)) {
     return self.origin;
   }
-  if(isDefined(self.reroute) && self.reroute) {
-    if(isDefined(self.reroute_origin)) {
+  if(isdefined(self.reroute) && self.reroute) {
+    if(isdefined(self.reroute_origin)) {
       location = self.reroute_origin;
     }
   }
-  if(isDefined(self.tank_state)) {
+  if(isdefined(self.tank_state)) {
     if(self.tank_state == "tank_chase") {
       self.goalradius = 128;
     } else {
@@ -1425,16 +1425,16 @@ function enemy_location_override() {
         self.goalradius = 32;
       }
     }
-    if(self.tank_state == "tank_chase" || (self.tank_state == "none" && (isDefined(enemy.b_already_on_tank) && enemy.b_already_on_tank))) {
+    if(self.tank_state == "tank_chase" || (self.tank_state == "none" && (isdefined(enemy.b_already_on_tank) && enemy.b_already_on_tank))) {
       tank_front = tank function_1db98f69("window_right_front_jmp_jnt");
       tank_back = tank function_1db98f69("window_left_rear_jmp_jnt");
       if(tank flag::get("tank_moving")) {
         self.ignoreall = 1;
-        if(!(isDefined(self.close_to_tank) && self.close_to_tank)) {
+        if(!(isdefined(self.close_to_tank) && self.close_to_tank)) {
           if(gettime() != tank.chase_pos_time) {
             tank.chase_pos_time = gettime();
             tank.chase_pos_index = 0;
-            tank_forward = vectornormalize(anglesToForward(level.vh_tank.angles));
+            tank_forward = vectornormalize(anglestoforward(level.vh_tank.angles));
             tank_right = vectornormalize(anglestoright(level.vh_tank.angles));
             tank.chase_pos = [];
             tank.chase_pos[0] = level.vh_tank.origin + (vectorscale(tank_forward, -164));
@@ -1475,36 +1475,36 @@ function enemy_location_override() {
       }
     }
   }
-  if(self.var_13ed8adf === level.time && isDefined(location)) {
+  if(self.var_13ed8adf === level.time && isdefined(location)) {
     if(isplayer(enemy) && location == enemy.origin) {
       self zm_utility::approximate_path_dist(enemy);
     } else {
       pathdistance(self.origin, location, 1, self, level.pathdist_type);
     }
-  } else if(isplayer(enemy) && isDefined(enemy.last_valid_position) && location === enemy.origin) {
+  } else if(isplayer(enemy) && isdefined(enemy.last_valid_position) && location === enemy.origin) {
     location = enemy.last_valid_position;
   }
   return location;
 }
 
 function closest_player_tank(origin, players) {
-  if(isDefined(level.vh_tank) && level.vh_tank.n_players_on > 0 || (!(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths))) {
+  if(isdefined(level.vh_tank) && level.vh_tank.n_players_on > 0 || (!(isdefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths))) {
     player = arraygetclosest(origin, players);
   } else {
     player = zm_tomb_utility::tomb_get_closest_player_using_paths(origin, players);
   }
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     return player;
   }
 }
 
 function zombie_on_tank_death_animscript_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, surfacenormal) {
-  if(isDefined(self.exploding) && self.exploding) {
+  if(isdefined(self.exploding) && self.exploding) {
     self notify("killanimscript");
     self zombie_utility::reset_attack_spot();
     return true;
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     level zm_spawner::zombie_death_points(self.origin, smeansofdeath, shitloc, eattacker, self);
     self notify("killanimscript");
     self zombie_utility::reset_attack_spot();
@@ -1518,13 +1518,13 @@ function tomb_get_path_length_to_tank() {
   tank_back = level.vh_tank function_1db98f69("window_left_rear_jmp_jnt");
   path_length_1 = pathdistance(self.origin, tank_front, 1, self, level.pathdist_type);
   path_length_2 = pathdistance(self.origin, tank_back, 1, self, level.pathdist_type);
-  if(!isDefined(path_length_1) && isDefined(path_length_2)) {
+  if(!isdefined(path_length_1) && isdefined(path_length_2)) {
     return path_length_2;
   }
-  if(isDefined(path_length_1) && !isDefined(path_length_2)) {
+  if(isdefined(path_length_1) && !isdefined(path_length_2)) {
     return path_length_1;
   }
-  if(!isDefined(path_length_1) && !isDefined(path_length_2)) {
+  if(!isdefined(path_length_1) && !isdefined(path_length_2)) {
     return undefined;
   }
   if(path_length_1 < path_length_2) {

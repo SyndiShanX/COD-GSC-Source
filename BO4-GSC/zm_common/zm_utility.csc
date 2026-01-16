@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_utility;
 
 autoexec __init__system__() {
@@ -20,7 +21,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
+  level._effect[#"zm_zone_edge_marker"] = #"hash_3002526b7ff53cbf";
   clientfield::register("scriptmover", "zm_zone_edge_marker_count", 1, getminbitcountfornum(15), "int", &zm_zone_edge_marker_count, 0, 0);
   clientfield::register("toplayer", "zm_zone_out_of_bounds", 1, 1, "int", &zm_zone_out_of_bounds, 0, 0);
   clientfield::register("actor", "flame_corpse_fx", 1, 1, "int", &flame_corpse_fx, 0, 0);
@@ -109,7 +110,7 @@ spawn_buildkit_weapon_model(localclientnum, weapon, camo, origin, angles) {
 is_classic() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zclassic") {
+  if(str_gametype == #"zclassic") {
     return true;
   }
 
@@ -119,7 +120,7 @@ is_classic() {
 is_standard() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zstandard") {
+  if(str_gametype == #"zstandard") {
     return true;
   }
 
@@ -129,7 +130,7 @@ is_standard() {
 is_trials() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztrials" || level flag::exists(#"ztrial")) {
+  if(str_gametype == #"ztrials" || level flag::exists(#"ztrial")) {
     return true;
   }
 
@@ -139,7 +140,7 @@ is_trials() {
 is_tutorial() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztutorial") {
+  if(str_gametype == #"ztutorial") {
     return true;
   }
 
@@ -149,7 +150,7 @@ is_tutorial() {
 is_grief() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zgrief") {
+  if(str_gametype == #"zgrief") {
     return true;
   }
 
@@ -219,25 +220,25 @@ drawcylinder(pos, rad, height, color) {
   }
 }
 
-function umbra_fix_logic(localclientnum) {
-  self endon(#"disconnect");
-  self endon(#"death");
-  umbra_settometrigger(localclientnum, "");
+  function umbra_fix_logic(localclientnum) {
+    self endon(#"disconnect");
+    self endon(#"death");
+    umbra_settometrigger(localclientnum, "");
 
-  while(true) {
-    in_fix_area = 0;
+    while(true) {
+      in_fix_area = 0;
 
-    if(isDefined(level.custom_umbra_hotfix)) {
-      in_fix_area = self thread[[level.custom_umbra_hotfix]](localclientnum);
+      if(isDefined(level.custom_umbra_hotfix)) {
+        in_fix_area = self thread[[level.custom_umbra_hotfix]](localclientnum);
+      }
+
+      if(in_fix_area == 0) {
+        umbra_settometrigger(localclientnum, "");
+      }
+
+      waitframe(1);
     }
-
-    if(in_fix_area == 0) {
-      umbra_settometrigger(localclientnum, "");
-    }
-
-    waitframe(1);
   }
-}
 
 umbra_fix_trigger(localclientnum, pos, height, radius, umbra_name) {
   bottomy = pos[2];
@@ -249,13 +250,13 @@ umbra_fix_trigger(localclientnum, pos, height, radius, umbra_name) {
 
       drawcylinder(pos, radius, height, (0, 1, 0));
 
-      return true;
+        return true;
     }
   }
 
   drawcylinder(pos, radius, height, (1, 0, 0));
 
-  return false;
+    return false;
 }
 
 function_f8796df3(localclientnum) {
@@ -290,13 +291,13 @@ function_467efa7b(var_9f3fb329 = 0) {
   }
 
   switch (self.archetype) {
-    case # "stoker":
-    case # "catalyst":
-    case # "gladiator":
-    case # "nova_crawler":
-    case # "zombie":
-    case # "ghost":
-    case # "brutus":
+    case #"stoker":
+    case #"catalyst":
+    case #"gladiator":
+    case #"nova_crawler":
+    case #"zombie":
+    case #"ghost":
+    case #"brutus":
       if(var_9f3fb329) {
         str_tag = "j_spine4";
       } else {
@@ -304,9 +305,9 @@ function_467efa7b(var_9f3fb329 = 0) {
       }
 
       break;
-    case # "blight_father":
-    case # "tiger":
-    case # "elephant":
+    case #"blight_father":
+    case #"tiger":
+    case #"elephant":
       str_tag = "j_head";
       break;
     default:
@@ -358,7 +359,7 @@ zm_zone_edge_marker_count(localclientnum, oldval, newval, bnewent, binitialsnap,
     self.origin += v_right * 6;
 
     for(i = 1; i <= newval; i++) {
-      var_a05a609b = playFX(localclientnum, level._effect[# "zm_zone_edge_marker"], self.origin + v_spacing, v_forward);
+      var_a05a609b = playFX(localclientnum, level._effect[#"zm_zone_edge_marker"], self.origin + v_spacing, v_forward);
 
       if(!isDefined(self.var_dd1709dd)) {
         self.var_dd1709dd = [];
@@ -411,8 +412,8 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       str_tag = "tag_origin";
     }
 
-    if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
-      self.var_71a7fc1c = util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_torso"], self, str_tag);
+    if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
+      self.var_71a7fc1c = util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_torso"], self, str_tag);
     }
 
     return;
@@ -427,12 +428,12 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 function_c599ed65() {
   if(get_story() == 1) {
     level.var_12b59dee = "rob_zm_eyes_yellow";
-    level._effect[# "eye_glow"] = # "hash_760112479afe6e2";
+    level._effect[#"eye_glow"] = #"hash_760112479afe6e2";
     return;
   }
 
   level.var_12b59dee = "rob_zm_eyes_orange";
-  level._effect[# "eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"eye_glow"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 function_beed5764(var_ee6bcd51, str_fx) {
@@ -441,7 +442,7 @@ function_beed5764(var_ee6bcd51, str_fx) {
   }
 
   if(isDefined(str_fx)) {
-    level._effect[# "eye_glow"] = str_fx;
+    level._effect[#"eye_glow"] = str_fx;
   }
 }
 
@@ -457,7 +458,7 @@ function_704f7c0e(localclientnum) {
   if(isDefined(self.var_3ec34470)) {
     str_fx = self.var_3ec34470;
   } else {
-    str_fx = level._effect[# "eye_glow"];
+    str_fx = level._effect[#"eye_glow"];
   }
 
   self function_fe127aaf(localclientnum, var_ee6bcd51, str_fx);

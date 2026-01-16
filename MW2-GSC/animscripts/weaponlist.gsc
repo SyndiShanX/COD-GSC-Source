@@ -17,7 +17,7 @@ usingSemiAutoWeapon() {
 
 autoShootAnimRate() {
   if(usingAutomaticWeapon()) {
-    // The auto fire animation fires 10 shots a second, so we divide the weapon's fire rate by
+    // The auto fire animation fires 10 shots a second, so we divide the weapon's fire rate by 
     // 10 to get the correct anim playback rate.
     //		return weaponFireTime( self.weapon ) * 10;
     return 0.1 / weaponFireTime(self.weapon);
@@ -41,8 +41,8 @@ waitAfterShot() {
 }
 
 shootAnimTime(semiAutoFire) {
-  if(!usingAutomaticWeapon() || (isDefined(semiAutofire) && (semiAutofire == true))) {
-    // We randomize the result a little from the real time, just to make things more
+  if(!usingAutomaticWeapon() || (isdefined(semiAutofire) && (semiAutofire == true))) {
+    // We randomize the result a little from the real time, just to make things more 
     // interesting.In reality, the 20Hz server is going to make this much less variable.
     rand = 0.5 + randomfloat(1); // 0.8 + 0.4
     return weaponFireTime(self.weapon) * rand;
@@ -61,14 +61,12 @@ RefillClip() {
   }
 
   if(weaponClass(self.weapon) == "rocketlauncher") {
-    if(!self.a.rocketVisible) {
+    if(!self.a.rocketVisible)
       self thread animscripts\combat_utility::showRocketWhenReloadIsDone();
-    }
     /*
     // TODO: proper rocket ammo tracking
-    if( self.a.rockets < 1 ) {
+    if( self.a.rockets < 1 )
     	self animscripts\shared::placeWeaponOn( self.secondaryweapon, "right" );
-    }
     */
   }
 
@@ -80,25 +78,21 @@ RefillClip() {
 
   assertEX(isDefined(self.bulletsInClip), "RefillClip failed");
 
-  if(self.bulletsInClip <= 0) {
+  if(self.bulletsInClip <= 0)
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 add_weapon(name, type, time, clipsize, anims) {
-  assert(isDefined(name));
-  assert(isDefined(type));
-  if(!isDefined(time)) {
+  assert(isdefined(name));
+  assert(isdefined(type));
+  if(!isdefined(time))
     time = 3.0;
-  }
-  if(!isDefined(clipsize)) {
+  if(!isdefined(clipsize))
     time = 1;
-  }
-  if(!isDefined(anims)) {
+  if(!isdefined(anims))
     anims = "rifle";
-  }
 
   name = tolower(name);
   anim.AIWeapon[name]["type"] = type;

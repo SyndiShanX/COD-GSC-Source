@@ -11,11 +11,10 @@ scriptstruct_debug_render() {
   while(true) {
     level waittill("liveupdate", selected_struct);
 
-    if(isDefined(selected_struct)) {
+    if(isDefined(selected_struct))
       level thread render_struct(selected_struct);
-    } else {
+    else
       level notify("stop_struct_render");
-    }
   }
 
 }

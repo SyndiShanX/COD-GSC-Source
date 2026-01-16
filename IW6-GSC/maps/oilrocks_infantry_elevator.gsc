@@ -29,9 +29,8 @@ main() {
     var_1 = 0;
 
     foreach(var_4 in var_2) {
-      if(distance(var_4.origin, var_0.origin) < var_0.radius) {
+      if(distance(var_4.origin, var_0.origin) < var_0.radius)
         var_1 = 1;
-      }
     }
 
     wait 0.05;
@@ -47,9 +46,8 @@ main() {
   var_8 = measure_shaft("shaft_measure");
   thread cleanup_infantry_area();
 
-  foreach(var_10, var_4 in level.infantry_guys) {
-    var_4 thread forceteleport_maintain(var_7[var_10].origin + (0, 0, var_8), (0, 0, 0));
-  }
+  foreach(var_10, var_4 in level.infantry_guys)
+  var_4 thread forceteleport_maintain(var_7[var_10].origin + (0, 0, var_8), (0, 0, 0));
 
   var_6.origin = var_6.origin + (0, 0, var_8);
   wait 0.5;
@@ -125,9 +123,8 @@ elevator_zoom() {
   var_7 = [];
 
   foreach(var_5 in var_3) {
-    if(!isDefined(var_5._animactive) || !var_5._animactive) {
+    if(!isDefined(var_5._animactive) || !var_5._animactive)
       var_7[var_7.size] = var_5;
-    }
   }
 
   maps\_utility::waittill_dead(var_7);
@@ -147,9 +144,8 @@ sensitive_chopper_in_players_view() {
     if(var_5 != "MOD_PROJECTILE") {
       continue;
     }
-    if(maps\_utility::within_fov_of_players(self.origin, 0.7) && sighttracepassed(level.player getEye(), self.origin, 0, self)) {
+    if(maps\_utility::within_fov_of_players(self.origin, 0.7) && sighttracepassed(level.player getEye(), self.origin, 0, self))
       maps\_vehicle::force_kill();
-    }
   }
 }
 

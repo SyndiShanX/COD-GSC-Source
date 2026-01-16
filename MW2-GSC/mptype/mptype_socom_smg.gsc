@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   switch (codescripts\character::get_random_character(6)) {
     case 0:
       character\mp_character_seal_socom_assault_a::main();

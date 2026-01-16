@@ -44,13 +44,15 @@ init() {
   level.lootBaseChance = 0.05;
   level.lootIdealTime = (15 * 60);
 
+  /#
   thread updateLootDvars();
+  # /
 
-  thread onPlayerConnect();
+    thread onPlayerConnect();
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player.pers["money"] = player maps\mp\gametypes\_persistence::statGet("money");
@@ -66,7 +68,7 @@ onPlayerConnect() {
 }
 
 onPlayerSpawned() {
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
     self thread trackLastLootTime();
@@ -87,7 +89,7 @@ trackLastLootTime() {
 
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     wait(1.0);
 
     self.timeSinceLastLoot += 1;
@@ -98,7 +100,7 @@ initLootDisplay() {
   self.totalMoney = createFontString("bigfixed", 0.8);
   self.totalMoney setPoint("TOPRIGHT");
   self.totalMoney setValue(self.pers["money"]);
-  self.totalMoney.label = &"MP_DOLLAR";
+  self.totalMoney.label = & "MP_DOLLAR";
   self.totalMoney.glowColor = (0.3, 0.8, 0.3);
   self.totalMoney.glowAlpha = 1;
   self.totalMoney.alpha = 0;
@@ -107,7 +109,7 @@ initLootDisplay() {
   self.earnedMoney setParent(self.totalMoney);
   self.earnedMoney setPoint("TOPRIGHT", "BOTTOMRIGHT", 0, 10);
   self.earnedMoney setValue(0);
-  self.earnedMoney.label = &"MP_PLUS";
+  self.earnedMoney.label = & "MP_PLUS";
   self.earnedMoney.glowColor = (0.3, 0.8, 0.3);
   self.earnedMoney.glowAlpha = 0.1;
   self.earnedMoney.alpha = 0;
@@ -116,7 +118,7 @@ initLootDisplay() {
 moMoney() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     wait(randomFloatRange(8.0, 10.0));
 
     self thread giveMoney("asdf", randomIntRange(100, 5000));
@@ -124,9 +126,8 @@ moMoney() {
 }
 
 giveMoney(type, amount) {
-  if(!self rankingEnabled()) {
+  if(!self rankingEnabled())
     return;
-  }
 
   self endon("disconnect");
   self notify("giveMoney");
@@ -150,7 +151,7 @@ giveMoney(type, amount) {
 
   increment = max(int(self.moneyUpdateTotal / 30), 1);
 
-  while(self.moneyUpdateTotal > 0) {
+  while (self.moneyUpdateTotal > 0) {
     addMoney = min(self.moneyUpdateTotal, increment);
     self.moneyUpdateTotal -= addMoney;
 
@@ -171,43 +172,42 @@ giveMoney(type, amount) {
 }
 
 updateLootDvars() {
-  if(getDvar("scr_loot_epicMin") == "") {
+  if(getDvar("scr_loot_epicMin") == "")
     setDvar("scr_loot_epicMin", level.lootMins["epic"]);
-  }
 
-  if(getDvar("scr_loot_rareMin") == "") {
+  if(getDvar("scr_loot_rareMin") == "")
     setDvar("scr_loot_rareMin", level.lootMins["rare"]);
-  }
 
   //if( getDvar( "scr_loot_commonMin" ) == "" )
   //	setDvar( "scr_loot_commonMin", level.lootMins["common"] );
 
-  if(getDvar("scr_loot_baseChance") == "") {
+  if(getDvar("scr_loot_baseChance") == "")
     setDvar("scr_loot_baseChance", level.lootBaseChance);
-  }
 
-  if(getDvar("scr_loot_idealTime") == "") {
+  if(getDvar("scr_loot_idealTime") == "")
     setDvar("scr_loot_idealTime", level.lootIdealTime);
-  }
 
-  if(getDvar("scr_forceloot") == "") {
+  /#
+  if(getDvar("scr_forceloot") == "")
     setDvar("scr_forceloot", "0");
-  }
+  # /
 
-  for(;;) {
-    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
-      setDvar("scr_loot_baseChance", 1);
+    for (;;) {
+      /#
+      if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
+        setDvar("scr_loot_baseChance", 1);
+      }
+      # /
+
+        level.lootMins["epic"] = getDvarFloat("scr_loot_epicMin");
+      level.lootMins["rare"] = getDvarFloat("scr_loot_rareMin");
+      //level.lootMins["common"] = getDvarFloat( "scr_loot_commonMin" );
+
+      level.lootBaseChance = getDvarFloat("scr_loot_baseChance");
+      level.lootIdealTime = getDvarFloat("scr_loot_idealTime");
+
+      wait(1.0);
     }
-
-    level.lootMins["epic"] = getDvarFloat("scr_loot_epicMin");
-    level.lootMins["rare"] = getDvarFloat("scr_loot_rareMin");
-    //level.lootMins["common"] = getDvarFloat( "scr_loot_commonMin" );
-
-    level.lootBaseChance = getDvarFloat("scr_loot_baseChance");
-    level.lootIdealTime = getDvarFloat("scr_loot_idealTime");
-
-    wait(1.0);
-  }
 }
 
 unlockedCaC() {
@@ -215,20 +215,17 @@ unlockedCaC() {
 }
 
 gotLoot() {
-  if(!self rankingEnabled()) {
+  if(!self rankingEnabled())
     return false;
-  }
 
   if(!self unlockedCaC()) {
     returnfalse = true;
-
-    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
+    /#
+    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0")
       returnfalse = false;
-    }
-
-    if(returnfalse) {
-      return false;
-    }
+    # /
+      if(returnfalse)
+        return false;
   }
 
   baseChance = level.lootBaseChance;
@@ -244,37 +241,32 @@ gotLoot() {
 }
 
 getLootTier(lootRoll) {
-  if(lootRoll >= level.lootMins["epic"]) {
+  if(lootRoll >= level.lootMins["epic"])
     return "epic";
-  } else if(lootRoll >= level.lootMins["rare"]) {
+  else if(lootRoll >= level.lootMins["rare"])
     return "rare";
-  } else {
+  else
     return "common";
-  }
 }
 
 getLootName(tier) {
-  if(!isDefined(self.droppedLootNames)) {
+  if(!isDefined(self.droppedLootNames))
     self.droppedLootNames = [];
-  }
 
-  for(
+  for (
     try = 0;
     try < 10;
     try ++) {
     lootName = self GetRandomLoot(tier);
-    if(!isDefined(lootName)) {
+    if(!isDefined(lootName))
       return undefined;
-    }
 
-    for(i = 0; i < self.droppedLootNames.size; i++) {
-      if(lootName == self.droppedLootNames[i]) {
+    for (i = 0; i < self.droppedLootNames.size; i++) {
+      if(lootName == self.droppedLootNames[i])
         break;
-      }
     }
-    if(i < self.droppedLootNames.size) {
+    if(i < self.droppedLootNames.size)
       continue;
-    }
 
     return lootName;
   }
@@ -283,18 +275,16 @@ getLootName(tier) {
 }
 
 giveLoot(victim) {
-  if(!gotLoot()) {
+  if(!gotLoot())
     return false;
-  }
 
   lootTier = getLootTier(randomFloat(100.0));
 
   tierInt = level.lootIndices[lootTier];
   lootName = self getLootName(tierInt);
 
-  if(!isDefined(lootName)) {
+  if(!isDefined(lootName))
     return false;
-  }
 
   self maps\mp\gametypes\_persistence::statSet("timeSinceLastLoot", 0);
   self.timeSinceLastLoot = 0;
@@ -337,12 +327,12 @@ showLootNotify(lootTier) {
 playMoneyFx(victim, attacker, sMeansOfDeath) {
   /*
   victim endon ( "disconnect" );
-  	
+	
   origin = victim getTagOrigin( "j_spine4" );
   victim.fxModel.origin = origin;
   wait ( 0.05 );
   */
-  //playFXOnTag( level._effect["money"], victim.fxModel, "tag_origin" );
+  //playFxOnTag( level._effect["money"], victim.fxModel, "tag_origin" );
   //playFxOnTagForClients	( level._effect["money"], victim.fxModel, "tag_origin", attacker );
 }
 
@@ -350,9 +340,8 @@ dropLoot(lootTier, lootName, dropEnt) {
   trace = playerPhysicsTrace(dropEnt.origin + (0, 0, 20), dropEnt.origin - (0, 0, 2000), false, dropEnt);
   angleTrace = bulletTrace(dropEnt.origin + (0, 0, 20), dropEnt.origin - (0, 0, 2000), false, dropEnt);
 
-  if(!isDefined(trace)) {
+  if(!isDefined(trace))
     return;
-  }
 
   println("dropping loot");
 
@@ -360,15 +349,14 @@ dropLoot(lootTier, lootName, dropEnt) {
 
   dropOrigin = trace;
 
-  assert(isDefined(self.droppedLootNames));
-
+  assert(isdefined(self.droppedLootNames));
+  /#
   foreach(droppedLootName in self.droppedLootNames) {
     assert(droppedLootName != lootName);
   }
-
-  if(lootName[0] != "$") {
-    self.droppedLootNames[self.droppedLootNames.size] = lootName;
-  }
+  # /
+    if(lootName[0] != "$")
+      self.droppedLootNames[self.droppedLootNames.size] = lootName;
 
   fxEnt = spawn("script_model", dropOrigin);
   //fxEnt.angles = (-90,0,0);
@@ -387,12 +375,12 @@ dropLoot(lootTier, lootName, dropEnt) {
 
   lootTrigger thread lootPickupWaiter(lootTier, lootName);
   lootTrigger thread lootDeleteOnDisconnect();
-
-  if(getdvarint("scr_lootdebug")) {
+  /#
+  if(getdvarint("scr_lootdebug"))
     lootTrigger thread lootDebugPrint(lootTier, lootName);
-  }
+  # /
 
-  lootTrigger endon("death");
+    lootTrigger endon("death");
 
   wait(0.05);
 
@@ -413,7 +401,7 @@ dropLoot(lootTier, lootName, dropEnt) {
 
 lootDebugPrint(lootTier, lootName) {
   self endon("death");
-  while(1) {
+  while (1) {
     print3d(self.origin, "(" + lootTier + ") " + lootName);
     wait .05;
   }
@@ -423,11 +411,10 @@ lootPickupWaiter(lootTier, lootName) {
   self endon("death");
   self.owner endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
-    if(player != self.owner) {
+    if(player != self.owner)
       continue;
-    }
 
     //self.owner playLocalSound( "loot_pickup_" + lootTier ); // need better sound
     self.owner playLocalSound("mp_last_stand");
@@ -466,13 +453,13 @@ pickupLoot(lootTier, lootName) {
   self CreateLootMail(lootName);
 
   if(lootName[0] != "$") {
-    for(i = 0; i < self.droppedLootNames.size; i++) {
+    for (i = 0; i < self.droppedLootNames.size; i++) {
       if(self.droppedLootNames[i] == lootName) {
         break;
       }
     }
     assert(i < self.droppedLootNames.size);
-    for(; i < self.droppedLootNames.size; i++) {
+    for (; i < self.droppedLootNames.size; i++) {
       self.droppedLootNames[i] = self.droppedLootNames[i + 1];
     }
   }
@@ -488,19 +475,20 @@ lootDeleteOnDisconnect() {
   self delete();
 }
 
+
 getRandomKillstreak(minKillCount) {
   killStreakNames = getArrayKeys(level.killstreakFuncs);
   killStreaks = [];
   foreach(streakName in killStreakNames) {
-    if(maps\mp\killstreaks\_killstreaks::getStreakCost(streakName) < minKillCount) {
+    if(maps\mp\killstreaks\_killstreaks::getStreakCost(streakName) < minKillCount)
       continue;
-    }
 
     killStreaks[killStreaks.size] = streakName;
   }
 
   return killStreaks[randomInt(killStreaks.size)];
 }
+
 
 randomKillstreakNotify(streakName) {
   self endon("disconnect");

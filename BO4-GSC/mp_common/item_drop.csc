@@ -10,6 +10,7 @@
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\item_world_util;
+
 #namespace item_drop;
 
 autoexec __init__system__() {
@@ -69,7 +70,7 @@ private function_b8f6e02f() {
 }
 
 private function_67189b6b(localclientnum, newval) {
-  stashitem = (newval & 4) != 0;
+  stashitem = (newval&4) != 0;
   newval &= -5;
 
   if(newval == 0) {
@@ -102,7 +103,7 @@ private function_67189b6b(localclientnum, newval) {
       self.itementry = function_b1702735(self.id).itementry;
       self function_1fe1281(localclientnum, clientfield::get("dynamic_item_drop_count"));
 
-      if(self.itementry.name == # "sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
+      if(self.itementry.name == #"sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
         level.var_5b2a8d88[self.networkid] = 1;
       }
     }
@@ -142,7 +143,7 @@ private function_1a45bc2a(item) {
     return false;
   }
 
-  if(!isDefined(item.type) || item.type != # "scriptmover" && item.type != # "missile") {
+  if(!isDefined(item.type) || item.type != #"scriptmover" && item.type != #"missile") {
     return false;
   }
 
@@ -169,7 +170,7 @@ function_1fe1281(localclientnum, newval) {
     return;
   }
 
-  if(self.itementry.itemtype === # "ammo" || self.itementry.itemtype === # "armor" || self.itementry.itemtype === # "weapon") {
+  if(self.itementry.itemtype === #"ammo" || self.itementry.itemtype === #"armor" || self.itementry.itemtype === #"weapon") {
     if(isDefined(self.amount) && newval !== self.amount) {
       item_inventory::function_31868137(localclientnum, self);
     }

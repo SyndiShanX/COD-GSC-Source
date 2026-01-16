@@ -45,7 +45,7 @@ init_tesla() {
   level thread on_player_connect();
 }
 on_player_connect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread tesla_network_choke();
     player thread tesla_discharge_mechanic();
@@ -53,7 +53,7 @@ on_player_connect() {
 }
 tesla_discharge_mechanic() {
   self endon("disconnect");
-  while(1) {
+  while (1) {
     self.tesla_discharge = 1;
     self waittill("tesla_discharged");
     self.tesla_discharge = 0;
@@ -61,20 +61,17 @@ tesla_discharge_mechanic() {
   }
 }
 tesla_ok_to_discharge(player) {
-  if(!isDefined(player.tesla_discharge)) {
+  if(!isDefined(player.tesla_discharge))
     return true;
-  }
-  if(player.tesla_discharge == 0) {
+  if(player.tesla_discharge == 0)
     return false;
-  }
   return true;
 }
 tesla_damage_init(player) {
   player endon("disconnect");
   player endon("death");
-  if(!tesla_ok_to_discharge(player)) {
+  if(!tesla_ok_to_discharge(player))
     return;
-  }
   if(isDefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
     return;
   }
@@ -83,7 +80,7 @@ tesla_damage_init(player) {
   player.tesla_powerup_dropped = false;
   player.tesla_arc_count = 0;
   player notify("tesla_discharged");
-  playFXOnTag(level._effect["tesla_contact"], self, "j_head");
+  PlayFxOnTag(level._effect["tesla_contact"], self, "j_head");
   if(isDefined(self.boss) && self.boss == true) {} else {
     self tesla_arc_damage(self, player, 1);
   }
@@ -98,7 +95,7 @@ tesla_arc_damage(source_enemy, player, arc_num) {
   enemies = tesla_get_enemies_in_area(self GetTagOrigin("j_head"), level.zombie_vars["tesla_radius_start"] - radius_decay, player);
   tesla_flag_hit(enemies, true);
   self thread tesla_do_damage(source_enemy, arc_num, player);
-  for(i = 0; i < enemies.size; i++) {
+  for (i = 0; i < enemies.size; i++) {
     if(enemies[i] == self) {
       continue;
     }
@@ -135,7 +132,7 @@ tesla_get_enemies_in_area(origin, distance, player) {
   }
   zombies = player.tesla_enemies;
   if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
+    for (i = 0; i < zombies.size; i++) {
       if(!isDefined(zombies[i])) {
         continue;
       }
@@ -159,7 +156,7 @@ tesla_flag_hit(enemy, hit) {
     return;
   }
   if(IsArray(enemy)) {
-    for(i = 0; i < enemy.size; i++) {
+    for (i = 0; i < enemy.size; i++) {
       enemy[i].zombie_tesla_hit = hit;
     }
   } else {
@@ -219,9 +216,11 @@ tesla_play_death_fx(arc_num) {
     fx = "tesla_shock_secondary";
   }
   network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[fx], self, tag);
-  self playSound("zmb_pwup_coco_impact");
+  self playsound("zmb_pwup_coco_impact");
   if(isDefined(self.tesla_head_gib_func)) {
-    [[self.tesla_head_gib_func]]();
+    [
+      [self.tesla_head_gib_func]
+    ]();
   }
 }
 tesla_play_arc_fx(target) {
@@ -243,9 +242,9 @@ tesla_play_arc_fx(target) {
   if(DistanceSquared(origin, target_origin) < distance_squared) {
     return;
   }
-  fxOrg = spawn("script_model", origin);
-  fxOrg setModel("tag_origin");
-  fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
+  fxOrg = Spawn("script_model", origin);
+  fxOrg SetModel("tag_origin");
+  fx = PlayFxOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("zmb_pwup_coco_bounce", fxOrg.origin);
   fxOrg MoveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
   fxOrg waittill("movedone");
@@ -262,7 +261,7 @@ tesla_pvp_thread() {
   self endon("disconnect");
   self endon("death");
   self waittill("spawned_player");
-  for(;;) {
+  for (;;) {
     self waittill("weapon_pvp_attack", attacker, weapon, damage, mod);
     if(self maps\_laststand::player_is_in_laststand()) {
       continue;
@@ -286,7 +285,7 @@ tesla_pvp_thread() {
     }
     self setelectrified(1.0);
     self shellshock("electrocution", 1.0);
-    self playSound("zmb_pwup_coco_bounce");
+    self playsound("zmb_pwup_coco_bounce");
   }
 }
 tesla_network_choke() {
@@ -294,7 +293,7 @@ tesla_network_choke() {
   self endon("death");
   self waittill("spawned_player");
   self.tesla_network_death_choke = 0;
-  for(;;) {
+  for (;;) {
     wait_network_frame();
     wait_network_frame();
     self.tesla_network_death_choke = 0;

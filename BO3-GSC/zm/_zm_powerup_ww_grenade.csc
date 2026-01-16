@@ -9,7 +9,7 @@
 #namespace zm_powerup_ww_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_ww_grenade", &__init__, undefined, undefined);
+  system::register("zm_powerup_ww_grenade", & __init__, undefined, undefined);
 }
 
 function __init__() {

@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setModel("c_usa_chloe_strikef_fb");
+  self setmodel("c_usa_chloe_strikef_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

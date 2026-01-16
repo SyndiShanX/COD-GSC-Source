@@ -8,17 +8,15 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   var_3 = var_2 == "script_vehicle_f18_lite";
 
-  if(!var_3) {
+  if(!var_3)
     maps\_vehicle::build_deathmodel("vehicle_f18_super_hornet");
-  }
 
   level._effect["engineeffect_f18"] = loadfx("vfx/gameplay/vehicles/f18/vfx_f18_engine");
   level._effect["afterburner_f18"] = loadfx("vfx/gameplay/vehicles/f18/vfx_f18_engine_afterburner");
   level._effect["contrail_f18"] = loadfx("fx/smoke/jet_contrail");
 
-  if(!var_3) {
+  if(!var_3)
     maps\_vehicle::build_deathfx("vfx/gameplay/vehicles/f18/vfx_f18_death", undefined, "explo_metal_rand", undefined, undefined, undefined, undefined, undefined, undefined, 0);
-  }
 
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_rumble("mig_rumble", 0.1, 0.2, 11300, 0.05, 0.05);
@@ -30,9 +28,8 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "tail_red", "TAG_RIGHT_TAIL", "fx/misc/aircraft_light_wingtip_red", "running", var_4);
   maps\_vehicle::build_light(var_2, "white_blink", "TAG_LIGHT_BELLY", "fx/misc/aircraft_light_white_blink", "running", var_4);
 
-  if(!var_3) {
+  if(!var_3)
     maps\_vehicle::build_light(var_2, "landing_light01", "TAG_LIGHT_LANDING01", "fx/misc/light_mig29_landing", "landing", 0.0);
-  }
 }
 
 init_local() {
@@ -59,9 +56,8 @@ landing_gear_up() {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++) {
+  for(var_1 = 0; var_1 < 1; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   return var_0;
 }
@@ -103,13 +99,11 @@ playafterburner() {
 handle_death() {
   self waittill("death");
 
-  if(isDefined(self.tag1)) {
+  if(isDefined(self.tag1))
     self.tag1 delete();
-  }
 
-  if(isDefined(self.tag2)) {
+  if(isDefined(self.tag2))
     self.tag2 delete();
-  }
 }
 
 playcontrail() {
@@ -149,38 +143,34 @@ add_contrail(var_0, var_1) {
 playerisclose(var_0) {
   var_1 = playerisinfront(var_0);
 
-  if(var_1) {
+  if(var_1)
     var_2 = 1;
-  } else {
+  else
     var_2 = -1;
-  }
 
   var_3 = common_scripts\utility::flat_origin(var_0.origin);
   var_4 = var_3 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_2 * 100000);
   var_5 = pointonsegmentnearesttopoint(var_3, var_4, level.player.origin);
   var_6 = distance(var_3, var_5);
 
-  if(var_6 < 3000) {
+  if(var_6 < 3000)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 playerisinfront(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
   var_1 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
   var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
   var_3 = vectordot(var_1, var_2);
 
-  if(var_3 > 0) {
+  if(var_3 > 0)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 plane_sound_node() {
@@ -189,9 +179,8 @@ plane_sound_node() {
   thread plane_sound_node();
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("veh_f15_dist_loop");
 
-  while(playerisinfront(var_0)) {
+  while(playerisinfront(var_0))
     wait 0.05;
-  }
 
   wait 0.5;
 
@@ -217,9 +206,8 @@ plane_bomb_node() {
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2++;
 
-    if(var_2 == 3) {
+    if(var_2 == 3)
       var_2 = 1;
-    }
 
     var_1[var_3] thread maps\_utility::play_sound_on_entity("airstrike_explosion_close");
     playFX(level._effect["plane_bomb_explosion" + var_2], var_1[var_3].origin);
@@ -243,9 +231,8 @@ plane_bomb_cluster() {
   var_4 = anglestoup(var_1.angles) * -0.2;
   var_5 = [];
 
-  for(var_6 = 0; var_6 < 3; var_6++) {
+  for(var_6 = 0; var_6 < 3; var_6++)
     var_5[var_6] = (var_3[var_6] + var_4[var_6]) / 2;
-  }
 
   var_5 = (var_5[0], var_5[1], var_5[2]);
   var_5 = var_5 * 7000;

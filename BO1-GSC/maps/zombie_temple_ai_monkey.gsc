@@ -112,7 +112,7 @@ ent_GatherValidBarriers(zoneOverride, ignoreOccupied, ignoreVisible) {
     monkeyZone = self _ent_GetZoneName();
   }
   if(isDefined(monkeyZone)) {
-    s = spawnStruct();
+    s = SpawnStruct();
     zoneNames = _getConnectedZoneNames(monkeyZone, s);
     players = get_players();
     for(i = 0; i < zoneNames.size; i++) {
@@ -186,7 +186,7 @@ _get_non_visible_barriers(barriers) {
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = anglesToForward(playerAngles);
+  playerForwardVec = AnglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetEyeApprox();
@@ -204,7 +204,7 @@ player_can_see_me(player) {
 }
 
 getBarrierAttackLocation(barrier) {
-  forward = anglesToForward(barrier.angles);
+  forward = AnglesToForward(barrier.angles);
   attack_location = barrier.origin + forward * 80.0;
   attack_location = (attack_location[0], attack_location[1], attack_location[2] - 30.0);
   return attack_location;
@@ -238,7 +238,7 @@ _setup_zone_info() {
   checkEnt = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.exterior_goals.size; i++) {
     goal = level.exterior_goals[i];
-    forward = anglesToForward(goal.angles);
+    forward = AnglesToForward(goal.angles);
     checkEnt.origin = goal.origin + forward * 100.0;
     zoneName = checkEnt _ent_GetZoneName();
     valid = isDefined(zoneName) && isDefined(level.zones[zoneName]);
@@ -268,7 +268,7 @@ _monkey_TempleThinkInternal(spawner) {
   self endon("death");
   spawner.count = 100;
   spawner.last_spawn_time = GetTime();
-  playFX(level._effect["monkey_death"], self.origin);
+  PlayFX(level._effect["monkey_death"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   self.deathFunction = ::_monkey_zombieTempleDeathCallback;
   self.spawnZone = spawner.script_noteworthy;
@@ -306,10 +306,9 @@ _monkey_zombieTempleDeathCallback() {
   self.grenadeAmmo = 0;
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
-  playFX(level._effect["monkey_death"], self.origin);
-  if(isDefined(self.attacker) && IsPlayer(self.attacker)) {
+  PlayFX(level._effect["monkey_death"], self.origin);
+  if(isDefined(self.attacker) && IsPlayer(self.attacker))
     self.attacker maps\_zombiemode_audio::create_and_play_dialog("kill", "thief");
-  }
   if(self.damagemod == "MOD_BURNED") {
     self thread animscripts\zombie_death::flame_death_fx();
   }
@@ -360,7 +359,7 @@ _monkey_DestroyBoards(barrier, chunk, location) {
   time = getAnimLength(perk_attack_anim);
   self animscripted("perk_attack_anim", location, self.angles, perk_attack_anim, "normal", % body, 1, 0.2);
   self thread maps\_zombiemode_ai_monkey::play_attack_impacts(time);
-  playFX(level._effect["wood_chunk_destory"], chunk.origin);
+  PlayFx(level._effect["wood_chunk_destory"], chunk.origin);
   if(chunk.script_noteworthy == "4" || chunk.script_noteworthy == "6") {
     chunk thread maps\_zombiemode_spawner::zombie_boardtear_offset_fx_horizontle(chunk, barrier);
   } else {
@@ -540,7 +539,7 @@ powerup_red(monkey) {
   self.fx_red = maps\_zombiemode_net::network_safe_spawn("monkey_red_powerup", 2, "script_model", self.origin);
   self.fx_red setModel("tag_origin");
   self.fx_red LinkTo(self);
-  playFXOnTag(level._effect["powerup_on_red"], self.fx_red, "tag_origin");
+  playfxontag(level._effect["powerup_on_red"], self.fx_red, "tag_origin");
 }
 
 _monkey_Escape() {
@@ -610,7 +609,7 @@ launch_monkey() {
     effectEnt endon("death");
     effectEnt setModel("tag_origin");
     effectEnt.angles = (90, 0, 0);
-    playFXOnTag(level._effect["monkey_launch"], effectEnt, "tag_origin");
+    PlayFXOnTag(level._effect["monkey_launch"], effectEnt, "tag_origin");
     launchTime = 6;
     effectEnt moveTo(effectEnt.origin + (0, 0, 2500), launchTime, 3);
     wait launchTime;
@@ -621,7 +620,7 @@ launch_monkey() {
 _monkey_CheckPlayableArea() {
   self endon("death");
   canDamage = true;
-  areas = getEntArray("player_volume", "script_noteworthy");
+  areas = getentarray("player_volume", "script_noteworthy");
   while(true) {
     inArea = false;
     for(i = 0; i < areas.size && !inArea; i++) {
@@ -690,7 +689,7 @@ _monkey_temple_dragons_breath_flame_death_fx() {
   if(!isDefined(level._effect) || !isDefined(level._effect["character_fire_death_sm"])) {
     return;
   }
-  playFXOnTag(level._effect["character_fire_death_sm"], self, "J_SpineLower");
+  PlayFxOnTag(level._effect["character_fire_death_sm"], self, "J_SpineLower");
   tagArray = [];
   if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "left_arm") {
     tagArray[tagArray.size] = "J_Elbow_LE";
@@ -709,7 +708,7 @@ _monkey_temple_dragons_breath_flame_death_fx() {
     tagArray[tagArray.size] = "J_Ankle_RI";
   }
   tagArray = array_randomize(tagArray);
-  playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
+  PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
 }
 
 _monkey_dropStolenPowerUp() {
@@ -846,9 +845,9 @@ _monkey_BindPowerup(powerup) {
 
 _monkey_gib() {
   if(is_mature()) {
-    playFX(level._effect["monkey_gib"], self.origin);
+    playfx(level._effect["monkey_gib"], self.origin);
   } else {
-    playFX(level._effect["monkey_gib_no_gore"], self.origin);
+    playfx(level._effect["monkey_gib_no_gore"], self.origin);
   }
   self hide();
 }
@@ -1122,7 +1121,7 @@ monkey_ambient_play_sound(soundName) {
     wait_network_frame();
   }
   level.monkey_ambient_sound_choke = true;
-  self playSound(soundname);
+  self playsound(soundname);
   wait_network_frame();
   level.monkey_ambient_sound_choke = false;
 }
@@ -1203,7 +1202,7 @@ monkey_zombie_grenade_pickup() {
     while(1) {
       self SetGoalPos(self.monkey_thrower.origin);
       target_dir = self.monkey_thrower.origin - self.origin;
-      monkey_dir = anglesToForward(self.angles);
+      monkey_dir = AnglesToForward(self.angles);
       dot = VectorDot(VectorNormalize(target_dir), VectorNormalize(monkey_dir));
       if(dot >= 0.5) {
         break;
@@ -1221,7 +1220,7 @@ monkey_zombie_grenade_throw_watcher(target, animname) {
   throw_angle = RandomIntRange(20, 30);
   dir = VectorToAngles(target.origin - self.origin);
   dir = (dir[0] - throw_angle, dir[1], dir[2]);
-  dir = anglesToForward(dir);
+  dir = AnglesToForward(dir);
   velocity = dir * 550;
   fuse = RandomFloatRange(1, 2);
   hand_pos = self GetTagOrigin("J_Thumb_RI_1");
@@ -1232,7 +1231,7 @@ monkey_zombie_grenade_throw_watcher(target, animname) {
 monkey_zombie_grenade_throw(target) {
   self endon("death");
   throw_anim = [];
-  forward = VectorNormalize(anglesToForward(self.angles));
+  forward = VectorNormalize(AnglesToForward(self.angles));
   end_pos = self.origin + vector_scale(forward, 96);
   if(BulletTracePassed(self.origin, end_pos, false, undefined)) {
     throw_anim[throw_anim.size] = % ai_zombie_monkey_grenade_throw_back_run_01;
@@ -1333,7 +1332,7 @@ monkey_obvious_vox() {
   self endon("death");
   self endon("end_monkey_attacks");
   while(1) {
-    self playSound("zmb_stealer_attack");
+    self playsound("zmb_stealer_attack");
     wait(randomfloatrange(2, 4));
   }
 }

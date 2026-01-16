@@ -39,8 +39,8 @@ castaway_on_player_land(localclientnum, player, ground_type, firstperson, quiet,
     v = vectordot(velocity, down);
 
     if(v > 0.2) {
-      trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 60.0), player.origin, 0, player);
-      playFX(localclientnum, level._effect["water_splash_sm"], trace["position"]);
+      trace = bullettrace(player.origin + vectorscale((0, 0, 1), 60.0), player.origin, 0, player);
+      playfx(localclientnum, level._effect["water_splash_sm"], trace["position"]);
     }
   }
 }

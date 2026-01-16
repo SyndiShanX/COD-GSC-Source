@@ -29,9 +29,8 @@ main() {
 
 remove_all_intel() {
   foreach(var_2, var_1 in level.intel_items) {
-    if(!isDefined(var_1.removed)) {
+    if(!isDefined(var_1.removed))
       var_1 remove_intel_item();
-    }
   }
 }
 
@@ -68,24 +67,21 @@ poll_for_found() {
   self endon("end_loop_thread");
 
   if(isDefined(self)) {
-    if(check_item_found()) {
+    if(check_item_found())
       remove_intel_item();
-    }
   } else
     return;
 
-  while(!check_item_found()) {
+  while(!check_item_found())
     wait 0.05;
-  }
 
   remove_intel_item();
 }
 
 check_item_found() {
   foreach(var_1 in level.players) {
-    if(!var_1 getplayerintelisfound(self.num)) {
+    if(!var_1 getplayerintelisfound(self.num))
       return 0;
-    }
   }
 
   return 1;
@@ -112,9 +108,8 @@ create_array_of_origins_from_table() {
     if(isDefined(var_3) && var_3 != "undefined") {
       var_4 = strtok(var_3, ",");
 
-      for(var_5 = 0; var_5 < var_4.size; var_5++) {
+      for(var_5 = 0; var_5 < var_4.size; var_5++)
         var_4[var_5] = int(var_4[var_5]);
-      }
 
       var_1[var_2] = (var_4[0], var_4[1], var_4[2]);
       continue;
@@ -172,9 +167,9 @@ hold_count_check() {
   self endon("stopped_pressing");
 
   while(isDefined(self) && isDefined(level.player)) {
-    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
+    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player))
       level.player.hold_count++;
-    } else {
+    else {
       setdvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
       self notify("stopped_pressing");
@@ -208,15 +203,13 @@ intel_upload_text(var_0, var_1) {
   var_4 = 0;
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
-    if(var_4 > var_3) {
+    if(var_4 > var_3)
       var_4 = 0;
-    }
 
-    if(var_4 < var_3 / 2) {
+    if(var_4 < var_3 / 2)
       var_0 settext(&"SCRIPT_INTELLIGENCE_UPLOADING");
-    } else {
+    else
       var_0 settext("");
-    }
 
     var_1.label = int(var_5 / var_2 * 100);
     var_1 settext(&"SCRIPT_INTELLIGENCE_PERCENT");
@@ -266,18 +259,17 @@ intel_feedback(var_0) {
     var_6 setpulsefx(60, var_1, var_2);
     var_7 = 0;
 
-    if(var_0 == var_5 && var_5 getplayerintelisfound(self.num)) {
-      var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
-    } else {
-      var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
+    if(var_0 == var_5 && var_5 getplayerintelisfound(self.num))
+      var_6.label = & "SCRIPT_RORKEFILE_PREV_FOUND";
+    else {
+      var_6.label = & "SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_5 give_point();
       var_7 = var_5 getlocalplayerprofiledata("cheatPoints");
       var_6 setvalue(var_7);
     }
 
-    if(var_7 == 18) {
+    if(var_7 == 18)
       var_5 maps\_utility::player_giveachievement_wrapper("EXT_1");
-    }
 
     var_6 common_scripts\utility::delaycall(var_3, ::destroy);
   }
@@ -301,9 +293,8 @@ assert_if_identical_origins() {
     var_2 = tablelookup("maps/_intel_items.csv", 0, var_1, 4);
     var_3 = strtok(var_2, ",");
 
-    for(var_1 = 0; var_1 < var_3.size; var_1++) {
+    for(var_1 = 0; var_1 < var_3.size; var_1++)
       var_3[var_1] = int(var_3[var_1]);
-    }
 
     var_0[var_1] = (var_3[0], var_3[1], var_3[2]);
   }
@@ -335,8 +326,7 @@ get_nums_from_origins(var_0) {
     if(!isDefined(level.table_origins[var_1])) {
       continue;
     }
-    if(distancesquared(var_0, level.table_origins[var_1]) < squared(75)) {
+    if(distancesquared(var_0, level.table_origins[var_1]) < squared(75))
       return var_1;
-    }
   }
 }

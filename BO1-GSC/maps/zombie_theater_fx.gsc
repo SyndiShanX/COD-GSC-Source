@@ -109,3 +109,4 @@ precachefx() {
   level._effect["fx_quad_roof_break_theater"] = loadfx("maps/zombie/fx_zombie_crawler_roof_theater");
   level._effect["fx_quad_dust_roof"] = loadfx("maps/zombie/fx_zombie_crawler_dust_roof");
 }
+

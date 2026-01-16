@@ -91,13 +91,13 @@ jump_pad_start(ent_player, endon_condition) {
   }
   if(isDefined(self.script_wait)) {
     if(self.script_wait < 1) {
-      self playSound("evt_jump_pad_charge_short");
+      self playsound("evt_jump_pad_charge_short");
     } else {
-      self playSound("evt_jump_pad_charge");
+      self playsound("evt_jump_pad_charge");
     }
     wait(self.script_wait);
   } else {
-    self playSound("evt_jump_pad_charge");
+    self playsound("evt_jump_pad_charge");
     wait(1.0);
   }
   if(isDefined(self.script_parameters) && isDefined(level._jump_pad_override[self.script_parameters])) {
@@ -161,8 +161,8 @@ jump_pad_start(ent_player, endon_condition) {
   }
   if(isDefined(self.script_start) && self.script_start == 1) {
     if(!is_true(ent_player._padded)) {
-      self playSound("evt_jump_pad_launch");
-      playFX(level._effect["jump_pad_jump"], self.origin);
+      self playsound("evt_jump_pad_launch");
+      playfx(level._effect["jump_pad_jump"], self.origin);
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot);
       if(isDefined(self.script_label)) {
         level notify(self.script_label);
@@ -170,8 +170,8 @@ jump_pad_start(ent_player, endon_condition) {
     }
   } else {
     if(ent_player IsOnGround() && !is_true(ent_player._padded)) {
-      self playSound("evt_jump_pad_launch");
-      playFX(level._effect["jump_pad_jump"], self.origin);
+      self playsound("evt_jump_pad_launch");
+      playfx(level._effect["jump_pad_jump"], self.origin);
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot);
       if(isDefined(self.script_label)) {
         level notify(self.script_label);

@@ -14,9 +14,8 @@ init() {
   level.shield_down_extension_dur = [5, 3, 2];
   load_ancestor_fx();
 
-  if(!isDefined(level.active_ancestors)) {
+  if(!isDefined(level.active_ancestors))
     level.active_ancestors = [];
-  }
 }
 
 init_attributes() {
@@ -53,18 +52,16 @@ load_ancestor_fx() {
 }
 
 getdefinitionvalue(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 2;
-  }
 
   var_2 = tablelookup("mp/alien/alien_ancestor_definition.csv", 0, var_0, var_1);
 
   if(!isstring(var_0)) {
-    if(!issubstr(var_2, ".")) {
+    if(!issubstr(var_2, "."))
       var_2 = int(var_2);
-    } else {
+    else
       var_2 = float(var_2);
-    }
   }
 
   return var_2;
@@ -73,9 +70,8 @@ getdefinitionvalue(var_0, var_1) {
 addancestoragent(var_0, var_1, var_2) {
   var_3 = maps\mp\agents\_agent_common::connectnewagent("ancestor", var_0);
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 thread[[var_3 maps\mp\agents\_agent_utility::agentfunc("spawn")]](var_1, var_2);
-  }
 
   return var_3;
 }
@@ -129,16 +125,14 @@ ancestor_shield() {
   for(;;) {
     raise_shield();
 
-    if(!maps\mp\alien\_utility::is_true(self.should_lower_shield) && !maps\mp\alien\_utility::is_true(self.force_shield_down)) {
+    if(!maps\mp\alien\_utility::is_true(self.should_lower_shield) && !maps\mp\alien\_utility::is_true(self.force_shield_down))
       self waittill("lower_shield");
-    }
 
     self.shield_down_time_extension_cnt = 0;
     lower_shield();
 
-    while(isDefined(self.shield_down_time_end) && gettime() < self.shield_down_time_end || maps\mp\alien\_utility::is_true(self.force_shield_down)) {
+    while(isDefined(self.shield_down_time_end) && gettime() < self.shield_down_time_end || maps\mp\alien\_utility::is_true(self.force_shield_down))
       wait 0.05;
-    }
 
     self.shield_down_time_end = undefined;
     self.shield_down_time_extension_cnt = undefined;
@@ -162,9 +156,8 @@ listen_for_shield_damage() {
       continue;
     }
 
-    if(isDefined(var_9) && var_9 == "iw6_aliendlc43_mp") {
+    if(isDefined(var_9) && var_9 == "iw6_aliendlc43_mp")
       self notify("ancestor_disable_shield_grenade");
-    }
   }
 }
 
@@ -204,28 +197,25 @@ listen_for_shield_disable() {
     var_0 = common_scripts\utility::waittill_any_return("ancestor_disable_shield_weapon", "ancestor_disable_shield_grenade", "ancestor_disable_shield_blast", "ancestor_disable_shield_grab");
     var_1 = 0;
 
-    if(var_0 == "ancestor_disable_shield_weapon") {
+    if(var_0 == "ancestor_disable_shield_weapon")
       var_1 = 7;
-    } else if(var_0 == "ancestor_disable_shield_grenade") {
+    else if(var_0 == "ancestor_disable_shield_grenade")
       var_1 = 9;
-    } else if(var_0 == "ancestor_disable_shield_blast") {
+    else if(var_0 == "ancestor_disable_shield_blast")
       var_1 = 1.8;
-    } else if(var_0 == "ancestor_disable_shield_grab") {
+    else if(var_0 == "ancestor_disable_shield_grab")
       var_1 = 1.8;
-    }
 
     if(!maps\mp\alien\_utility::is_true(self.force_shield_down) && (var_0 == "ancestor_disable_shield_blast" || var_0 == "ancestor_disable_shield_grab")) {
       continue;
     }
-    if(self.shield_state == 1 || self.shield_state == 2) {
+    if(self.shield_state == 1 || self.shield_state == 2)
       self.should_lower_shield = 1;
-    }
 
     var_2 = int(gettime() + var_1 * 1000);
 
-    if(!isDefined(self.shield_down_time_end) || var_2 > self.shield_down_time_end) {
+    if(!isDefined(self.shield_down_time_end) || var_2 > self.shield_down_time_end)
       self.shield_down_time_end = var_2;
-    }
 
     self notify("lower_shield");
   }
@@ -238,9 +228,8 @@ drop_shield_until_damaged() {
   var_1 = (self.maxhealth - 20000) * var_0;
   var_2 = 20;
 
-  if(isDefined(level.ancestor_shield_up_override)) {
+  if(isDefined(level.ancestor_shield_up_override))
     var_2 = level.ancestor_shield_up_override;
-  }
 
   wait 5;
   self.force_shield_down = 1;
@@ -282,9 +271,8 @@ extend_shield_down_time(var_0) {
   if(isshielddown()) {
     self.shield_down_time_extension_cnt++;
 
-    if(!isDefined(self.shield_down_time_end)) {
+    if(!isDefined(self.shield_down_time_end))
       self.shield_down_time_end = gettime();
-    }
 
     var_1 = self.shield_down_time_end + var_0;
     self.shield_down_time_end = var_1;
@@ -293,9 +281,8 @@ extend_shield_down_time(var_0) {
 
 ensure_shield_stays_down_until_time(var_0) {
   if(isshielddown()) {
-    if(isDefined(self.shield_down_time_end) && var_0 > self.shield_down_time_end) {
+    if(isDefined(self.shield_down_time_end) && var_0 > self.shield_down_time_end)
       self.shield_down_time_end = var_0;
-    }
   }
 }
 
@@ -357,9 +344,8 @@ gethealthscalar() {
 
 handleshielddamage(var_0) {
   if(isshieldup()) {
-    if(var_0 != "iw6_aliendlc42_mp" && var_0 != "iw6_aliendlc43_mp") {
+    if(var_0 != "iw6_aliendlc42_mp" && var_0 != "iw6_aliendlc43_mp")
       level notify("dlc_vo_notify", "ancestor_shield_up");
-    }
   } else if(isshielddown() && (var_0 == "iw6_aliendlc43_mp" || var_0 == "iw6_aliendlc42_mp")) {
     var_1 = self.shield_down_time_extension_cnt;
 
@@ -385,22 +371,20 @@ handleshieldstateforattack(var_0) {
       break;
   }
 
-  if(isshieldup()) {
+  if(isshieldup())
     self notify(var_2);
-  } else if(isshielddown()) {
+  else if(isshielddown()) {
     var_3 = gettime() + var_1;
     ensure_shield_stays_down_until_time(var_3);
   }
 }
 
 ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!maps\mp\alien\_damage::is_alien_agent_damage_allowed(var_0, var_1, var_5, var_4)) {
+  if(!maps\mp\alien\_damage::is_alien_agent_damage_allowed(var_0, var_1, var_5, var_4))
     return 0;
-  }
 
-  if(var_2 <= 0) {
+  if(var_2 <= 0)
     return 0;
-  }
 
   if(isshieldup()) {
     var_10 = "hitalienarmor";
@@ -413,40 +397,34 @@ ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
 
   handleshielddamage(var_5);
 
-  if(var_5 == "iw6_alienminigun_mp" || var_5 == "iw6_alienminigun1_mp" || var_5 == "iw6_alienminigun2_mp" || var_5 == "iw6_alienminigun3_mp") {
+  if(var_5 == "iw6_alienminigun_mp" || var_5 == "iw6_alienminigun1_mp" || var_5 == "iw6_alienminigun2_mp" || var_5 == "iw6_alienminigun3_mp")
     var_2 = 27.5;
-  } else if(var_5 == "iw6_alienminigun4_mp") {
+  else if(var_5 == "iw6_alienminigun4_mp")
     var_2 = 37.5;
-  }
 
-  if(var_5 == "iw6_alienmk32_mp" || var_5 == "iw6_alienmk321_mp" || var_5 == "iw6_alienmk322_mp" || var_5 == "iw6_alienmk323_mp" || var_5 == "iw6_alienmk324_mp") {
+  if(var_5 == "iw6_alienmk32_mp" || var_5 == "iw6_alienmk321_mp" || var_5 == "iw6_alienmk322_mp" || var_5 == "iw6_alienmk323_mp" || var_5 == "iw6_alienmk324_mp")
     var_2 = var_2 * 0.5;
-  }
 
-  if(var_5 == "alien_manned_minigun_turret_mp" || var_5 == "alien_manned_minigun_turret1_mp" || var_5 == "alien_manned_minigun_turret2_mp" || var_5 == "alien_manned_minigun_turret3_mp" || var_5 == "alien_manned_minigun_turret4_mp") {
+  if(var_5 == "alien_manned_minigun_turret_mp" || var_5 == "alien_manned_minigun_turret1_mp" || var_5 == "alien_manned_minigun_turret2_mp" || var_5 == "alien_manned_minigun_turret3_mp" || var_5 == "alien_manned_minigun_turret4_mp")
     var_2 = var_2 * 0.5;
-  }
 
-  if(var_5 == "alien_manned_gl_turret_mp" || var_5 == "alien_manned_gl_turret1_mp" || var_5 == "alien_manned_gl_turret2_mp" || var_5 == "alien_manned_gl_turret3_mp" || var_5 == "alien_manned_gl_turret4_mp") {
+  if(var_5 == "alien_manned_gl_turret_mp" || var_5 == "alien_manned_gl_turret1_mp" || var_5 == "alien_manned_gl_turret2_mp" || var_5 == "alien_manned_gl_turret3_mp" || var_5 == "alien_manned_gl_turret4_mp")
     var_2 = var_2 * 0.5;
-  }
 
-  if(var_5 == "iw6_arkalienvks_mp_alienvksscope") {
+  if(var_5 == "iw6_arkalienvks_mp_alienvksscope")
     var_2 = var_2 * 1.15;
-  }
 
-  if(var_5 == "iw6_alienrgm_mp") {
+  if(var_5 == "iw6_alienrgm_mp")
     var_2 = var_2 * 1.15;
-  }
 
-  if(isDefined(level.custom_scale_alien_damage_func)) {
-    var_2 = [[level.custom_scale_alien_damage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
+  if(isDefined(level.custom_scale_alien_damage_func))
+    var_2 = [
+      [level.custom_scale_alien_damage_func]
+    ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
   if(var_5 == "alienthrowingknife_mp") {
-    if(isDefined(level.achievement_you_wish_cb) && isplayer(var_1)) {
+    if(isDefined(level.achievement_you_wish_cb) && isplayer(var_1))
       var_1[[level.achievement_you_wish_cb]]();
-    }
 
     var_2 = 0;
     var_0 delete();
@@ -462,16 +440,14 @@ ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   var_2 = int(var_2);
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isplayer(var_1.owner))
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    } else {
+    else
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    }
   }
 
-  if(var_2 <= 0) {
+  if(var_2 <= 0)
     return 0;
-  }
 
   if(getrealhealth() - var_2 <= 0) {
     if(isDefined(self.entityheadicons)) {
@@ -492,9 +468,8 @@ ondamagedfinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   var_3 = var_3 | level.idflags_no_knockback;
   self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, 0);
 
-  if(!isDefined(self.ancestor_destroyed)) {
+  if(!isDefined(self.ancestor_destroyed))
     self.ancestor_attacker = var_1;
-  }
 
   var_10 = getrealhealth();
 
@@ -506,9 +481,8 @@ ondamagedfinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 
   if(isDefined(var_1)) {
     if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
-      if(!var_11) {
+      if(!var_11)
         var_1 maps\mp\alien\_damage::check_for_special_damage(self, var_5, var_4);
-      }
     }
   }
 
@@ -524,9 +498,8 @@ ondamagedfinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   var_13 = int(getrealmaxhealth() * 0.1);
   var_14 = int(var_10 / var_13) + 1;
 
-  if(!isDefined(self.current_headicon)) {
+  if(!isDefined(self.current_headicon))
     self.current_headicon = var_14;
-  }
 
   if(var_14 == self.current_headicon) {
     return;
@@ -568,37 +541,29 @@ onkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   foreach(var_12 in level.players) {
     maps\mp\alien\_gamescore::givekillreward(var_12, 3500, "large");
 
-    if(!var_9) {
+    if(!var_9)
       maps\mp\alien\_gamescore::calculate_player_encounter_scores(var_12, ["ancestor_bonus"]);
-    }
 
-    if(!isDefined(var_12.ancestor_kills)) {
+    if(!isDefined(var_12.ancestor_kills))
       var_12.ancestor_kills = 0;
-    }
 
     var_12.ancestor_kills++;
 
     if(!maps\mp\alien\_utility::is_casual_mode()) {
-      if(isDefined(var_12.ancestor_kills) && var_12.ancestor_kills == 3) {
+      if(isDefined(var_12.ancestor_kills) && var_12.ancestor_kills == 3)
         var_12 maps\mp\alien\_persistence::give_player_tokens(1, 0);
-      }
 
-      if(isDefined(var_12.ancestor_kills) && var_12.ancestor_kills == 5) {
+      if(isDefined(var_12.ancestor_kills) && var_12.ancestor_kills == 5)
         var_12 maps\mp\alien\_persistence::give_player_tokens(1, 0);
-      }
     }
   }
 
-  if(!maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(!maps\mp\alien\_utility::is_hardcore_mode())
     maps\mp\mp_alien_last_progression::give_players_skill_points(1);
-  }
 
   if(var_9) {
-    if(isDefined(level.add_cortex_charge_func)) {
-      [
-        [level.add_cortex_charge_func]
-      ](10, 1);
-    }
+    if(isDefined(level.add_cortex_charge_func))
+      [[level.add_cortex_charge_func]](10, 1);
   }
 
   return;
@@ -616,21 +581,18 @@ playdeath() {
   level.active_ancestors = common_scripts\utility::array_remove(level.active_ancestors, self);
   level notify("dlc_vo_notify", "last_vo", "ancestor_killed");
 
-  if(isDefined(level.dead_ancestors)) {
+  if(isDefined(level.dead_ancestors))
     level.dead_ancestors++;
-  }
 
   level notify("ancestor_died");
   var_0 = 24;
   var_1 = 30;
 
-  if(!maps\mp\alien\_utility::is_normal_upright(anglestoup(self.angles))) {
+  if(!maps\mp\alien\_utility::is_normal_upright(anglestoup(self.angles)))
     maps\mp\alien\_death::move_away_from_surface(anglestoup(self.angles), var_0);
-  }
 
-  if(isDefined(self.apextraversaldeathvector)) {
+  if(isDefined(self.apextraversaldeathvector))
     maps\mp\alien\_death::move_away_from_surface(self.apextraversaldeathvector, var_1);
-  }
 
   self.ancestor_destroyed = 1;
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("death", undefined, "death_anim", "end", ::handledeathnotetracks);
@@ -642,11 +604,10 @@ ancestor_death_nuke_fx() {
   wait 0.5;
 
   foreach(var_1 in level.players) {
-    if(isDefined(level.shell_shock_override)) {
+    if(isDefined(level.shell_shock_override))
       var_1[[level.shell_shock_override]](0.5);
-    } else {
+    else
       var_1 shellshock("alien_spitter_gas_cloud", 0.5);
-    }
 
     var_1 playrumbleonentity("grenade_rumble");
   }

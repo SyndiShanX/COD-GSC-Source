@@ -18,10 +18,10 @@ setupclingtrigger() {
   enablecling();
   triggers = [];
   level.cling_triggers = [];
-  triggers = getEntArray("cling_trigger", "script_noteworthy");
+  triggers = getentarray("cling_trigger", "script_noteworthy");
 
   for(i = 0; i < triggers.size; i++) {
-    level.cling_triggers[i] = spawnStruct();
+    level.cling_triggers[i] = spawnstruct();
     level.cling_triggers[i].trigger = triggers[i];
     trigger = level.cling_triggers[i].trigger;
     trigger sethintstring("Hold [{+activate}] To Cling To The Bus.");
@@ -66,9 +66,8 @@ disablecling() {
 makevisibletoall(trigger) {
   players = get_players();
 
-  for(playerindex = 0; playerindex < players.size; playerindex++) {
+  for(playerindex = 0; playerindex < players.size; playerindex++)
     trigger setinvisibletoplayer(players[playerindex], 0);
-  }
 }
 
 clingtriggerusethink(positionindex) {
@@ -88,9 +87,8 @@ clingtriggerusethink(positionindex) {
       continue;
     }
     if(isDefined(level.cling_triggers[positionindex].player)) {
-      if(level.cling_triggers[positionindex].player == who) {
+      if(level.cling_triggers[positionindex].player == who)
         dettachplayerfrombus(who, positionindex);
-      }
 
       continue;
     }
@@ -147,11 +145,11 @@ attachplayertobus(player, positionindex) {
 
   level.cling_triggers[positionindex].player = player;
 
-  if(positionisbl(positionindex)) {
+  if(positionisbl(positionindex))
     player playerlinktodelta(level.cling_triggers[positionindex].position, "tag_origin", 1, 180, turn_angle, pitch_up, 120, 1);
-  } else if(positionisbr(positionindex)) {
+  else if(positionisbr(positionindex))
     player playerlinktodelta(level.cling_triggers[positionindex].position, "tag_origin", 1, turn_angle, 180, pitch_up, 120, 1);
-  } else {
+  else {
     level.cling_triggers[positionindex].player = undefined;
     return;
   }
@@ -228,38 +226,34 @@ enableplayerweapons(positionindex) {
   self allowprone(1);
 
   if(!positionisupgraded(positionindex)) {
-    if(!self.hadclingpistol) {
+    if(!self.hadclingpistol)
       self takeweapon("m1911_zm");
-    }
 
     self enableweaponcycling();
     self enableoffhandweapons();
     self allowcrouch(1);
 
-    if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm") {
+    if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm")
       self switchtoweapon(self.lastactiveweapon);
-    } else {
+    else {
       primaryweapons = self getweaponslistprimaries();
 
-      if(isDefined(primaryweapons) && primaryweapons.size > 0) {
+      if(isDefined(primaryweapons) && primaryweapons.size > 0)
         self switchtoweapon(primaryweapons[0]);
-      }
     }
   }
 }
 
 playerisclingingtobus() {
-  if(!isDefined(level.cling_triggers)) {
+  if(!isDefined(level.cling_triggers))
     return false;
-  }
 
   for(i = 0; i < level.cling_triggers.size; i++) {
     if(!isDefined(level.cling_triggers[i]) || !isDefined(level.cling_triggers[i].player)) {
       continue;
     }
-    if(level.cling_triggers[i].player == self) {
+    if(level.cling_triggers[i].player == self)
       return true;
-    }
   }
 
   return false;
@@ -269,9 +263,8 @@ _getnumplayersclinging() {
   num_clinging = 0;
 
   for(i = 0; i < level.cling_triggers.size; i++) {
-    if(isDefined(level.cling_triggers[i]) && isDefined(level.cling_triggers[i].player)) {
+    if(isDefined(level.cling_triggers[i]) && isDefined(level.cling_triggers[i].player))
       num_clinging++;
-    }
   }
 
   return num_clinging;

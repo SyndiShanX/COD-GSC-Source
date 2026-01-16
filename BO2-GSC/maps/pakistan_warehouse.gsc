@@ -27,7 +27,7 @@ skipto_warehouse() {
   level.vh_player_drone play_fx("drone_spotlight_cheap", level.vh_player_drone gettagorigin("tag_spotlight"), level.vh_player_drone gettagangles("tag_spotlight"), "remove_fx_cheap", 1, "tag_spotlight");
   level.vh_player_soct play_fx("soct_spotlight", level.vh_player_soct gettagorigin("tag_headlights"), level.vh_player_soct gettagangles("tag_headlights"), "remove_fx", 1, "tag_headlights");
   level.vh_player_soct thread watch_for_boost();
-  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
+  a_ai_targets = getentarray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   add_spawn_function_veh("boss_apache", ::apache_setup);
   level.vh_apache = spawn_vehicle_from_targetname("boss_apache");
@@ -58,9 +58,8 @@ warehouse_main() {
   level.vh_salazar_soct thread salazar_soct_end_chase_logic();
   setup_warehouse_super_soct();
 
-  if(isDefined(level.vh_apache.classname) && level.vh_apache.classname == "script_vehicle") {
+  if(isDefined(level.vh_apache.classname) && level.vh_apache.classname == "script_vehicle")
     level.vh_apache thread warehouse_apache_logic();
-  }
 
   level thread warehouse_effects_triggers();
   level thread player_drone_crashes_with_boss_chopper_update();
@@ -70,17 +69,15 @@ warehouse_main() {
   level thread warehouse_enter_left_path_soct_trigger("escape_done");
   level thread enemy_soct_stop_firing_at_end();
 
-  if(-1) {
+  if(-1)
     level thread pak3_new_ending();
-  }
 
   prepare_for_hangar();
 }
 
 setup_warehouse_super_soct() {
-  if(isDefined(level.vh_super_soct)) {
+  if(isDefined(level.vh_super_soct))
     pak3_kill_vehicle(level.vh_super_soct);
-  }
 
   level.vh_super_soct = spawn_vehicle_from_targetname("boss_soct");
   level.vh_super_soct.dontunloadonend = 1;
@@ -134,9 +131,8 @@ player_drone_crashes_with_boss_chopper_update() {
     level.warehouse_apache.delete_on_death = 1;
     level.warehouse_apache notify("death");
 
-    if(!isalive(level.warehouse_apache)) {
+    if(!isalive(level.warehouse_apache))
       level.warehouse_apache delete();
-    }
   }
 
   if(is_player_in_drone()) {
@@ -171,23 +167,20 @@ player_drone_crashes_with_boss_chopper_update() {
     level.vh_player_drone.delete_on_death = 1;
     level.vh_player_drone notify("death");
 
-    if(!isalive(level.vh_player_drone)) {
+    if(!isalive(level.vh_player_drone))
       level.vh_player_drone delete();
-    }
   }
 
-  playFX(level._effect["blockade_explosion"], e_heli.origin);
-  e_heli playSound("exp_veh_large");
+  playfx(level._effect["blockade_explosion"], e_heli.origin);
+  e_heli playsound("exp_veh_large");
   e_heli.delete_on_death = 1;
   e_heli notify("death");
 
-  if(!isalive(e_heli)) {
+  if(!isalive(e_heli))
     e_heli delete();
-  }
 
-  if(is_player_in_drone()) {
+  if(is_player_in_drone())
     earthquake(0.65, 1.0, level.vh_player_drone.origin, 512);
-  }
 
   wait 0.01;
   level thread chopper_crashes_into_pipes_anim(str_chopper_crash_scene);
@@ -212,9 +205,8 @@ chopper_crashes_into_pipes_anim(str_scene) {
   wait 0.1;
   e_chopper = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
-  if(isDefined(e_chopper)) {
-    playFXOnTag(level._effect["ending_helicopter_explosion"], e_chopper, "tag_origin");
-  }
+  if(isDefined(e_chopper))
+    playfxontag(level._effect["ending_helicopter_explosion"], e_chopper, "tag_origin");
 }
 
 get_collision_chopper_in_position(str_target_struct) {
@@ -223,11 +215,10 @@ get_collision_chopper_in_position(str_target_struct) {
   s_struct = getstruct(str_target_struct, "targetname");
   level.heli_collision_point = s_struct.origin;
 
-  if(is_player_in_drone()) {
+  if(is_player_in_drone())
     speed = 20;
-  } else {
+  else
     speed = 15;
-  }
 
   self setspeed(speed, 100, 100);
   self setvehgoalpos(level.heli_collision_point);
@@ -239,22 +230,21 @@ get_collision_chopper_in_position(str_target_struct) {
 player_soct_collision_ending_check() {
   level thread pak3_timescale(1.25, 2.25);
   wait 2.0;
-  level.player playSound("exp_veh_large");
+  level.player playsound("exp_veh_large");
   earthquake(0.65, 1.0, level.vh_player_drone.origin, 512);
   level notify("player_drone_fatal_collision");
 }
 
 chopper_crash_scene_starts_chain_reaction(str_chopper_crash_scene, wait_time) {
-  if(isDefined(wait_time) && wait_time > 0) {
+  if(isDefined(wait_time) && wait_time > 0)
     wait(wait_time);
-  }
 
   e_heli = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
   if(isDefined(e_heli)) {
-    playFX(level._effect["blockade_explosion"], e_heli.origin);
+    playfx(level._effect["blockade_explosion"], e_heli.origin);
     earthquake(0.65, 1.2, e_heli.origin, 2048);
-    e_heli playSound("exp_veh_large");
+    e_heli playsound("exp_veh_large");
   }
 
   delete_scene(str_chopper_crash_scene);
@@ -372,11 +362,10 @@ warehouse_apache_logic() {
 
 apache_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
   if(e_attacker != level.player) {
-    if(isDefined(e_attacker.vteam) && e_attacker.vteam == "allies") {
+    if(isDefined(e_attacker.vteam) && e_attacker.vteam == "allies")
       n_damage = 1;
-    } else {
+    else
       n_damage = 0;
-    }
   } else if(level.player.vehicle_state == 1)
     n_damage = 1;
 
@@ -443,7 +432,7 @@ pak3_new_ending() {
 
   for(i = 0; i < a_ents.size; i++) {
     e_ent = a_ents[i];
-    v_dir = anglesToForward(e_ent.angles);
+    v_dir = anglestoforward(e_ent.angles);
     v_new_pos = e_ent.origin - v_dir * 500;
     time = 1;
     e_ent moveto(v_new_pos, time);

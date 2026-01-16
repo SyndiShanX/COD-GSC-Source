@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\util;
+
 #namespace spawning;
 
 getteamstartspawnname(team, spawnpointnamebase) {
@@ -12,9 +13,9 @@ getteamstartspawnname(team, spawnpointnamebase) {
   spawn_point_team_name = util::function_6f4ff113(team);
 
   if(level.multiteam) {
-    if(team == # "axis") {
+    if(team == #"axis") {
       spawn_point_team_name = "team1";
-    } else if(team == # "allies") {
+    } else if(team == #"allies") {
       spawn_point_team_name = "team2";
     }
 

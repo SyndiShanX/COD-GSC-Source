@@ -22,13 +22,11 @@ init() {
   packages_avail = maps\_so_rts_catalog::package_generateavailable("allies", 1);
   center = level.rts.player.origin;
 
-  if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity)) {
+  if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity))
     center = level.rts.allied_base.entity.origin;
-  }
 
-  if(isDefined(level.rts.allied_center)) {
+  if(isDefined(level.rts.allied_center))
     center = level.rts.allied_center.origin;
-  }
 
   for(i = 0; i < packages_avail.size; i++) {
     if(packages_avail[i].delivery == "CODE") {
@@ -40,13 +38,11 @@ init() {
   center = undefined;
   packages_avail = maps\_so_rts_catalog::package_generateavailable("axis", 1);
 
-  if(isDefined(level.rts.enemy_base) && isDefined(level.rts.enemy_base.entity)) {
+  if(isDefined(level.rts.enemy_base) && isDefined(level.rts.enemy_base.entity))
     center = level.rts.enemy_base.entity.origin;
-  }
 
-  if(isDefined(level.rts.enemy_center)) {
+  if(isDefined(level.rts.enemy_center))
     center = level.rts.enemy_center.origin;
-  }
 
   assert(isDefined(center), "Enemy center not defined");
 
@@ -67,9 +63,8 @@ rallysquadtoloc(spot, id) {
 rts_is_pointok(point) {
   if(level.rts.trace_blockers.size > 0) {
     foreach(volume in level.rts.trace_blockers) {
-      if(maps\_utility::is_point_inside_volume(point, volume)) {
+      if(maps\_utility::is_point_inside_volume(point, volume))
         return false;
-      }
     }
   }
 
@@ -79,18 +74,17 @@ rts_is_pointok(point) {
 rts_move_squadstocursor(squadid, tracepoint) {
   if(!isDefined(tracepoint)) {
     direction = maps\_so_rts_support::get_player_angles();
-    direction_vec = anglesToForward(direction);
+    direction_vec = anglestoforward(direction);
     eye = level.rts.player.origin + vectorscale((0, 0, 1), 60.0);
-    trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
+    trace = bullettrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
     tracepoint = trace["position"];
   }
 
   thread maps\_so_rts_support::debug_sphere(tracepoint, 10, (0, 0, 1), 0.6, 60);
 
   if(isDefined(level.rts.squads[squadid].squad_nonodecheckonmove) && level.rts.squads[squadid].squad_nonodecheckonmove) {
-    if(rts_is_pointok(tracepoint)) {
+    if(rts_is_pointok(tracepoint))
       rallysquadtoloc(tracepoint, squadid);
-    }
 
     return;
   }
@@ -107,18 +101,16 @@ rts_move_squadstocursor(squadid, tracepoint) {
   }
 
   if(!isDefined(squadid)) {
-    if(isDefined(level.rts.player.ally)) {
+    if(isDefined(level.rts.player.ally))
       squadid = level.rts.player.ally.squadid;
-    } else {
+    else
       return;
-    }
   }
 
   for(i = 0; i < nodes.size; i++) {
     if(findpath(tracepoint, nodes[i].origin)) {
-      if(rts_is_pointok(nodes[i].origin)) {
+      if(rts_is_pointok(nodes[i].origin))
         rallysquadtoloc(tracepoint, squadid);
-      }
 
       return;
     }
@@ -128,9 +120,8 @@ rts_move_squadstocursor(squadid, tracepoint) {
     distsq = distancesquared(nodes[0].origin, tracepoint);
 
     if(distsq < 65536) {
-      if(rts_is_pointok(tracepoint)) {
+      if(rts_is_pointok(tracepoint))
         rallysquadtoloc(tracepoint, squadid);
-      }
     } else if(rts_is_pointok(nodes[0].origin))
       rallysquadtoloc(nodes[0].origin, squadid);
   } else {
@@ -144,51 +135,44 @@ rts_move_squadstocursor(squadid, tracepoint) {
 getnextvalidsquad(cursquad, direction) {
   validsquads = [];
 
-  if(!isDefined(cursquad)) {
+  if(!isDefined(cursquad))
     cursquad = 0;
-  } else {
-    if(cursquad < 0) {
+  else {
+    if(cursquad < 0)
       cursquad = level.rts.squads.size - 1;
-    }
 
-    if(cursquad > level.rts.squads.size - 1) {
+    if(cursquad > level.rts.squads.size - 1)
       cursquad = 0;
-    }
   }
 
   maps\_so_rts_squad::removedeadfromsquad(cursquad);
 
-  if(!isDefined(direction)) {
+  if(!isDefined(direction))
     direction = 1;
-  }
 
   assert(direction == 1 || direction == -1);
 
   for(i = 0; i < level.rts.squads.size; i++) {
-    if(level.rts.squads[i].team == "allies" && level.rts.squads[i].members.size > 0 && (isDefined(level.rts.squads[i].selectable) && level.rts.squads[i].selectable)) {
+    if(level.rts.squads[i].team == "allies" && level.rts.squads[i].members.size > 0 && (isDefined(level.rts.squads[i].selectable) && level.rts.squads[i].selectable))
       validsquads[validsquads.size] = level.rts.squads[i];
-    }
   }
 
-  if(validsquads.size == 0) {
+  if(validsquads.size == 0)
     return -1;
-  }
 
   lastsquad = validsquads.size - 1;
 
   for(i = 0; i < validsquads.size; i++) {
     if(validsquads[i].id == cursquad) {
       if(direction == 1) {
-        if(i + 1 < validsquads.size) {
+        if(i + 1 < validsquads.size)
           return validsquads[i + 1].id;
-        } else {
+        else
           return validsquads[0].id;
-        }
       }
 
-      if(direction == -1) {
+      if(direction == -1)
         return validsquads[lastsquad].id;
-      }
     }
 
     lastsquad = i;
@@ -204,27 +188,24 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
   if(isDefined(level.rts.player.ally) && isDefined(level.rts.player.ally.vehicle) && isDefined(nextsquad) && level.rts.squads[nextsquad].members.size == 1 && level.rts.squads[nextsquad].members[0] == level.rts.player.ally.vehicle) {
     return;
   }
-  if(isDefined(nextsquad) && level.rts.squads[nextsquad].members.size == 0) {
+  if(isDefined(nextsquad) && level.rts.squads[nextsquad].members.size == 0)
     nextsquad = undefined;
-  }
 
   level.rts.squadselectnext = 1;
   level notify("switch_and_takeover");
 
   if(!isDefined(nextsquad)) {
-    if(isDefined(level.rts.player.ally)) {
+    if(isDefined(level.rts.player.ally))
       cursquad = level.rts.player.ally.squadid;
-    } else {
+    else
       cursquad = undefined;
-    }
 
     nextsquad = getnextvalidsquad(cursquad);
   }
 
   if(nextsquad != -1) {
-    if(!maps\_so_rts_ai::ai_istakeoverpossible(targetent)) {
+    if(!maps\_so_rts_ai::ai_istakeoverpossible(targetent))
       targetent = undefined;
-    }
 
     if(!isDefined(targetent)) {
       maps\_so_rts_squad::removedeadfromsquad(nextsquad);
@@ -248,11 +229,10 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
       level.rts.player freezecontrols(1);
       level.rts.player enableinvulnerability();
 
-      if(isDefined(targetent.classname) && targetent.classname == "script_vehicle") {
+      if(isDefined(targetent.classname) && targetent.classname == "script_vehicle")
         targetent veh_magic_bullet_shield(1);
-      } else {
+      else
         targetent.takedamage = 0;
-      }
 
       maps\_so_rts_support::hide_player_hud();
       level clientnotify("chr_swtch_start");
@@ -263,9 +243,8 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
       level waittill("switch_fullstatic");
       luinotifyevent(&"hud_expand_ammo");
 
-      if(!isDefined(norestore)) {
+      if(!isDefined(norestore))
         level.rts.player maps\_so_rts_ai::restorereplacement();
-      }
 
       level.rts.player unlink();
       targetent = level.rts.player maps\_so_rts_ai::takeoverselected(targetent);
@@ -282,11 +261,10 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
       level.rts.player freezecontrols(0);
       maps\_so_rts_support::show_player_hud();
 
-      if(!(isDefined(targetent.classname) && targetent.classname == "script_vehicle")) {
+      if(!(isDefined(targetent.classname) && targetent.classname == "script_vehicle"))
         level.rts.player disableinvulnerability();
-      } else {
+      else
         targetent veh_magic_bullet_shield(0);
-      }
 
       level notify("takeover_complete");
     } else {
@@ -309,9 +287,8 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
 
 issquadalreadycreated(team, pkg_ref) {
   for(i = 0; i < level.rts.squads.size; i++) {
-    if(level.rts.squads[i].team == team && level.rts.squads[i].pkg_ref == pkg_ref) {
+    if(level.rts.squads[i].team == team && level.rts.squads[i].pkg_ref == pkg_ref)
       return level.rts.squads[i];
-    }
   }
 
   return undefined;
@@ -331,9 +308,8 @@ hassquadmakeupchanged(squadid) {
   chksum = 0;
 
   foreach(guy in squad.members) {
-    if(isDefined(guy) && (isDefined(guy.initialized) && guy.initialized)) {
+    if(isDefined(guy) && (isDefined(guy.initialized) && guy.initialized))
       chksum = chksum + guy getentitynumber();
-    }
   }
 
   changed = chksum == squad.lastsquadchecksum ? 0 : 1;
@@ -347,7 +323,7 @@ createsquad(center, team, pkg_ref) {
   if(!isDefined(squad)) {
     squadid = level.rts.nextsquadid;
     level.rts.nextsquadid = level.rts.nextsquadid + 1;
-    squad = spawnStruct();
+    squad = spawnstruct();
     squad.members = [];
     squad.state = 1;
     squad.laststate = 0;
@@ -362,7 +338,7 @@ createsquad(center, team, pkg_ref) {
 
     if(isDefined(pkg_ref.marker)) {
       squad.marker = spawn("script_model", center);
-      squad.marker setModel(pkg_ref.marker);
+      squad.marker setmodel(pkg_ref.marker);
       squad.marker hide();
       squad.marker.hidden = 1;
     }
@@ -378,23 +354,20 @@ createsquad(center, team, pkg_ref) {
 }
 
 squad_hideallsquadmarkers(removeall) {
-  if(!isDefined(removeall)) {
+  if(!isDefined(removeall))
     removeall = 0;
-  }
 
   foreach(squad in level.rts.squads) {
     luinotifyevent(&"rts_move_squad_marker", 1, squad.id);
 
-    if(removeall) {
+    if(removeall)
       luinotifyevent(&"rts_remove_squad", 1, squad.id);
-    }
   }
 }
 
 removesquadmarker(squadid, onempty) {
-  if(!isDefined(onempty)) {
+  if(!isDefined(onempty))
     onempty = 0;
-  }
 
   level notify("removeSquadMarker" + squadid);
   level endon("removeSquadMarker" + squadid);
@@ -422,34 +395,29 @@ removesquadmarker(squadid, onempty) {
 }
 
 movesquadmarker(squadid, hide, point) {
-  if(!isDefined(hide)) {
+  if(!isDefined(hide))
     hide = 0;
-  }
 
   if(!isDefined(level.rts.squads[squadid].marker)) {
     return;
   }
-  if(!isDefined(point)) {
+  if(!isDefined(point))
     point = level.rts.squads[squadid].centerpoint;
-  }
 
-  if(level.rts.squads[squadid].team == "axis") {
+  if(level.rts.squads[squadid].team == "axis")
     hide = 1;
-  }
 
-  if(isDefined(level.rts.squads[squadid].no_show_marker) && level.rts.squads[squadid].no_show_marker) {
+  if(isDefined(level.rts.squads[squadid].no_show_marker) && level.rts.squads[squadid].no_show_marker)
     hide = 1;
-  }
 
   level.rts.squads[squadid].marker.angles = (0, squadid * 70, 0);
   level.rts.squads[squadid].marker.origin = point;
   level.rts.squads[squadid].marker.hidden = hide;
 
-  if(isDefined(hide) && hide) {
+  if(isDefined(hide) && hide)
     luinotifyevent(&"rts_move_squad_marker", 1, squadid);
-  } else {
+  else
     luinotifyevent(&"rts_move_squad_marker", 4, squadid, int(point[0]), int(point[1]), int(point[2]));
-  }
 }
 
 squad_unloaded(squadid) {
@@ -460,9 +428,8 @@ squad_unloaded(squadid) {
       if(!(isDefined(guy.initialized) && guy.initialized)) {
         guy maps\_so_rts_ai::ai_initialize(guy.ai_ref, level.rts.squads[squadid].team, isDefined(guy.initnode) ? guy.initnode.origin : undefined, squadid, isDefined(guy.initnode) ? guy.initnode.angles : undefined, level.rts.squads[squadid].pkg_ref);
 
-        if(flag("rts_mode")) {
+        if(flag("rts_mode"))
           guy thread maps\_so_rts_support::perfect_aim_fortimeoruntilnotify(undefined, level.rts.game_rules.ally_perfect_aimtime);
-        }
       }
 
       guy maps\_so_rts_ai::ai_postinitialize();
@@ -470,9 +437,8 @@ squad_unloaded(squadid) {
     }
   }
 
-  if(level.rts.squads[squadid].team == "allies") {
+  if(level.rts.squads[squadid].team == "allies")
     maps\_so_rts_event::trigger_event("ack_" + level.rts.squads[squadid].pkg_ref.ref);
-  }
 
   level.rts.squads[squadid].selectable = 1;
   level notify("squad_unloaded", squadid);
@@ -519,9 +485,8 @@ removedeadfromsquad(squadid) {
     if(!isDefined(ai)) {
       continue;
     }
-    if(isalive(ai)) {
+    if(isalive(ai))
       alive[alive.size] = ai;
-    }
   }
 
   level.rts.squads[squadid].members = alive;
@@ -542,9 +507,8 @@ getsquadlistfromselected() {
       }
     }
 
-    if(!inalready) {
+    if(!inalready)
       squads[squads.size] = level.rts.squads[squadid];
-    }
   }
 
   return squads;
@@ -575,14 +539,12 @@ issquadmoving(squadid) {
 doessquadhaveanyspeciesoftype(squadid, speciestype) {
   squad = maps\_so_rts_squad::getsquad(squadid);
 
-  if(!isDefined(squad)) {
+  if(!isDefined(squad))
     return false;
-  }
 
   foreach(guy in squad.members) {
-    if(guy.ai_ref.species == speciestype) {
+    if(guy.ai_ref.species == speciestype)
       return true;
-    }
   }
 
   return false;
@@ -592,9 +554,8 @@ getteamsquads(team) {
   squads = [];
 
   foreach(squad in level.rts.squads) {
-    if(squad.team == team) {
+    if(squad.team == team)
       squads[squads.size] = squad;
-    }
   }
 
   return squads;
@@ -612,9 +573,8 @@ gotopoint(goal) {
     self.last_goalradius = undefined;
   }
 
-  if(!isDefined(self.goalradius)) {
+  if(!isDefined(self.goalradius))
     self.goalradius = 512;
-  }
 
   self.at_goal = undefined;
 
@@ -645,11 +605,10 @@ gotopoint(goal) {
         }
       }
 
-      if(goingtonode) {
+      if(goingtonode)
         self setgoalnode(goal);
-      } else {
+      else
         self setgoalpos(goal);
-      }
 
       self waittill("goal");
     } else {
@@ -676,16 +635,14 @@ gotopoint(goal) {
 }
 
 moveout() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self thread gotopoint(level.rts.squads[self.squadid].centerpoint);
-  }
 }
 
 squadmove(squadid) {
   if(hassquadmakeupchanged(squadid)) {
-    foreach(guy in level.rts.squads[squadid].members) {
-      guy thread moveout();
-    }
+    foreach(guy in level.rts.squads[squadid].members)
+    guy thread moveout();
   }
 }
 
@@ -702,9 +659,8 @@ executesquadmoveto(squadid) {
 }
 
 ordersquadmoveto(point, squadid) {
-  if(!isDefined(point)) {
+  if(!isDefined(point))
     point = maps\_so_rts_support::playerlinkobj_gettargetgroundpos();
-  }
 
   if(isDefined(squadid)) {
     if(isDefined(level.rts.squads[squadid].no_move_commands) && level.rts.squads[squadid].no_move_commands) {
@@ -729,20 +685,18 @@ ordersquadmoveto(point, squadid) {
 }
 
 ordersquaddefend(point, squadid, hidemarker) {
-  if(!isDefined(hidemarker)) {
+  if(!isDefined(hidemarker))
     hidemarker = 0;
-  }
 
   if(!isDefined(point)) {
     assert(flag("rts_mode"));
     point = maps\_so_rts_support::playerlinkobj_gettargetgroundpos();
   }
 
-  if(flag("fps_mode")) {
+  if(flag("fps_mode"))
     maps\_so_rts_event::trigger_event("squad_move_fps");
-  } else {
+  else
     maps\_so_rts_event::trigger_event("squad_move_cmd");
-  }
 
   if(isDefined(squadid)) {
     level.rts.squads[squadid].state = 1;
@@ -797,11 +751,10 @@ patrolpoint(point) {
 }
 
 patrol() {
-  if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
+  if(!(isDefined(self.classname) && self.classname == "script_vehicle"))
     self thread patrolpoint(level.rts.squads[self.squadid].centerpoint);
-  } else {
+  else
     self thread maps\_vehicle::defend(level.rts.squads[self.squadid].centerpoint, 512);
-  }
 }
 
 squadpatrol(squadid) {
@@ -828,9 +781,8 @@ executeordersquadpatrol(squadid) {
 }
 
 ordersquadpatrol(point, squadid) {
-  if(!isDefined(point)) {
+  if(!isDefined(point))
     point = maps\_so_rts_support::playerlinkobj_gettargetgroundpos();
-  }
 
   if(isDefined(squadid)) {
     level.rts.squads[squadid].state = 3;
@@ -857,11 +809,10 @@ attackorderwatcher(target) {
   self endon("targetOrderWatcher");
   self waittill("new_squad_orders");
 
-  if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
+  if(!(isDefined(self.classname) && self.classname == "script_vehicle"))
     self clearentitytarget();
-  } else if(issentient(self)) {
+  else if(issentient(self))
     self vehclearentitytarget();
-  }
 }
 
 targetwatcher(target) {
@@ -872,11 +823,10 @@ targetwatcher(target) {
   self endon("targetWatcher");
   target waittill("death");
 
-  if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
+  if(!(isDefined(self.classname) && self.classname == "script_vehicle"))
     self clearentitytarget();
-  } else if(issentient(self)) {
+  else if(issentient(self))
     self vehclearentitytarget();
-  }
 }
 
 attack() {
@@ -928,11 +878,10 @@ squadattacktarget(squadid) {
 
     target waittill("death");
 
-    if(isDefined(level.rts.squads[squadid].foltarget)) {
+    if(isDefined(level.rts.squads[squadid].foltarget))
       level thread ordersquadfollowai(squadid, level.rts.squads[squadid].foltarget, 0);
-    } else if(isDefined(level.rts.squads[squadid].lastknowntargetloc)) {
+    else if(isDefined(level.rts.squads[squadid].lastknowntargetloc))
       level thread ordersquaddefend(level.rts.squads[squadid].lastknowntargetloc, squadid);
-    }
   }
 }
 
@@ -955,9 +904,8 @@ executeordersquadattack(squadid) {
 }
 
 ordersquadattack(squadid, ent, allsquads, height) {
-  if(!isDefined(height)) {
+  if(!isDefined(height))
     height = 50;
-  }
 
   if(!isDefined(ent)) {
     level.rts.squads[squadid].nextstate = 1;
@@ -966,29 +914,26 @@ ordersquadattack(squadid, ent, allsquads, height) {
 
   level notify("squad_attack", ent);
 
-  if(flag("fps_mode")) {
+  if(flag("fps_mode"))
     maps\_so_rts_event::trigger_event("squad_attack_fps");
-  } else {
+  else
     maps\_so_rts_event::trigger_event("squad_attack_cmd");
-  }
 
   if(!(isDefined(allsquads) && allsquads)) {
     if(isDefined(squadid)) {
       level.rts.squads[squadid].nextstate = 4;
 
-      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent) {
+      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent)
         luinotifyevent(&"rts_squad_stop_attack", 2, squadid, level.rts.squads[squadid].target getentitynumber());
-      }
 
       level.rts.squads[squadid].target = ent;
       luinotifyevent(&"rts_squad_start_attack", 3, squadid, ent getentitynumber(), height);
 
       if(isDefined(ent.pkg_ref)) {
-        if(flag("fps_mode")) {
+        if(flag("fps_mode"))
           maps\_so_rts_event::trigger_event("targetfps_" + ent.pkg_ref.ref);
-        } else {
+        else
           maps\_so_rts_event::trigger_event("target_" + ent.pkg_ref.ref);
-        }
       }
     }
   } else {
@@ -1001,9 +946,8 @@ ordersquadattack(squadid, ent, allsquads, height) {
       squadid = squads[i].id;
       level.rts.squads[squadid].nextstate = 4;
 
-      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent) {
+      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent)
         luinotifyevent(&"rts_squad_stop_attack", 2, squadid, level.rts.squads[squadid].target getentitynumber());
-      }
 
       level.rts.squads[squadid].target = ent;
       luinotifyevent(&"rts_squad_start_attack", 3, squadid, ent getentitynumber(), height);
@@ -1040,11 +984,10 @@ movewithai(target) {
 
   while(true) {
     if(isDefined(self.rts_unloaded) && self.rts_unloaded && isDefined(target)) {
-      if(isDefined(self.classname) && self.classname == "script_vehicle") {
+      if(isDefined(self.classname) && self.classname == "script_vehicle")
         self thread vehgoalentity(target);
-      } else {
+      else
         self thread aigoalentity(target);
-      }
 
       return;
     }
@@ -1080,24 +1023,21 @@ executeordermovewithai(squadid) {
 }
 
 ordersquadfollowai(squadid, ent, allsquads, showmarker, height) {
-  if(!isDefined(showmarker)) {
+  if(!isDefined(showmarker))
     showmarker = 1;
-  }
 
-  if(!isDefined(height)) {
+  if(!isDefined(height))
     height = 60;
-  }
 
   if(!isDefined(ent)) {
     level.rts.squads[squadid].nextstate = 1;
     return;
   }
 
-  if(flag("fps_mode")) {
+  if(flag("fps_mode"))
     maps\_so_rts_event::trigger_event("squad_move_fps");
-  } else {
+  else
     maps\_so_rts_event::trigger_event("squad_move_cmd");
-  }
 
   if(!(isDefined(allsquads) && allsquads)) {
     if(isDefined(squadid)) {
@@ -1106,24 +1046,21 @@ ordersquadfollowai(squadid, ent, allsquads, showmarker, height) {
       if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent) {
         luinotifyevent(&"rts_squad_stop_attack", 2, squadid, level.rts.squads[squadid].target getentitynumber());
 
-        if(isDefined(level.rts.squads[squadid].foltarget) && ent == level.rts.squads[squadid].foltarget) {
+        if(isDefined(level.rts.squads[squadid].foltarget) && ent == level.rts.squads[squadid].foltarget)
           wait 0.1;
-        }
       }
 
       level.rts.squads[squadid].foltarget = ent;
       level.rts.squads[squadid].target = ent;
 
-      if(isDefined(showmarker) && showmarker) {
+      if(isDefined(showmarker) && showmarker)
         luinotifyevent(&"rts_squad_start_attack", 3, squadid, ent getentitynumber(), height);
-      }
 
       if(isDefined(ent.pkg_ref)) {
-        if(flag("fps_mode")) {
+        if(flag("fps_mode"))
           maps\_so_rts_event::trigger_event("followfps_" + ent.pkg_ref.ref);
-        } else {
+        else
           maps\_so_rts_event::trigger_event("follow_" + ent.pkg_ref.ref);
-        }
       }
     }
   } else {
@@ -1136,9 +1073,8 @@ ordersquadfollowai(squadid, ent, allsquads, showmarker, height) {
       squadid = squads[i].id;
       level.rts.squads[squadid].nextstate = 6;
 
-      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent) {
+      if(isDefined(level.rts.squads[squadid].target) && level.rts.squads[squadid].target != ent)
         luinotifyevent(&"rts_squad_stop_attack", 2, squadid, level.rts.squads[squadid].target getentitynumber());
-      }
 
       level.rts.squads[squadid].target = ent;
       level.rts.squads[squadid].foltarget = ent;
@@ -1180,21 +1116,19 @@ aigoalentity(entity) {
       }
     }
 
-    if(isDefined(self.enemy)) {
+    if(isDefined(self.enemy))
       self squaddebug("goalentity", self.enemy.origin, (1, 0, 0));
-    }
 
     goalradiussquared = self.goalradius * 1.0 * (self.goalradius * 1.0);
     outsidegoalradius = distancesquared(self.origin, entity.origin) > goalradiussquared;
     findnewnode = 1;
 
-    if(isDefined(self.node) && distancesquared(entity.origin, self.node.origin) < self.goalradius * self.goalradius) {
+    if(isDefined(self.node) && distancesquared(entity.origin, self.node.origin) < self.goalradius * self.goalradius)
       findnewnode = 0;
-    } else if(isDefined(self.fixednode) && self.fixednode) {
+    else if(isDefined(self.fixednode) && self.fixednode)
       findnewnode = 0;
-    } else if(self getpathlength() > 0) {
+    else if(self getpathlength() > 0)
       findnewnode = 0;
-    }
 
     if(findnewnode) {
       if(outsidegoalradius) {
@@ -1218,19 +1152,18 @@ movewithplayer() {
   while(true) {
     if(isDefined(self.rts_unloaded) && self.rts_unloaded) {
       if(flag("rts_mode")) {
-        if(self.ai_ref.species == "vehicle") {
+        if(self.ai_ref.species == "vehicle")
           self maps\_vehicle::defend(level.rts.lastfpspoint);
-        } else if(isDefined(level.rts.lastfpspoint)) {
+        else if(isDefined(level.rts.lastfpspoint)) {
           self squaddebug("moveWithPlayer", level.rts.lastfpspoint);
 
           self setgoalpos(level.rts.lastfpspoint);
         }
       } else if(isDefined(level.rts.player.ally)) {
-        if(isDefined(self.classname) && self.classname == "script_vehicle") {
+        if(isDefined(self.classname) && self.classname == "script_vehicle")
           self thread vehgoalentity(level.rts.player);
-        } else {
+        else
           self thread aigoalentity(level.rts.player);
-        }
 
         return;
       }
@@ -1263,12 +1196,12 @@ executeordermovewithplayer(squadid) {
   level.rts.squads[squadid].nextstate = 0;
 }
 
-squaddonothing(squadid) {}
+squaddonothing(squadid) {
+}
 
 ordersquadmanaged(squadid) {
-  if(isDefined(squadid)) {
+  if(isDefined(squadid))
     level.rts.squads[squadid].nextstate = 7;
-  }
 }
 
 executesquadmanaged(squadid) {
@@ -1285,9 +1218,8 @@ executesquadmanaged(squadid) {
 
 ordersquadfollowplayer(squadid, allsquads) {
   if(isDefined(level.rts.player.ally)) {
-    if(!isDefined(squadid)) {
+    if(!isDefined(squadid))
       squadid = level.rts.player.ally.squadid;
-    }
 
     if(allsquads) {
       foreach(squad in level.rts.squads) {
@@ -1321,9 +1253,8 @@ squadthink() {
       if(squad.team == level.rts.player.team && !(isDefined(squad.selectable) && squad.selectable)) {
         continue;
       }
-      if(squad.nextstate != 0 && squad.nextstate != squad.state) {
+      if(squad.nextstate != 0 && squad.nextstate != squad.state)
         squad.lastsquadchecksum = -1;
-      }
 
       if(isDefined(squad.squad_execute_cb)) {
         if([
@@ -1388,9 +1319,8 @@ squadthink() {
 }
 
 getsquadsbytype(type, team, onlywithmembers) {
-  if(!isDefined(onlywithmembers)) {
+  if(!isDefined(onlywithmembers))
     onlywithmembers = 0;
-  }
 
   squads = [];
 
@@ -1403,9 +1333,8 @@ getsquadsbytype(type, team, onlywithmembers) {
         continue;
       }
       if(isDefined(onlywithmembers) && onlywithmembers) {
-        if(!isDefined(squad.members) || squad.members.size == 0) {
+        if(!isDefined(squad.members) || squad.members.size == 0)
           continue;
-        }
       }
 
       maps\_so_rts_squad::removedeadfromsquad(squad.id);
@@ -1444,18 +1373,16 @@ getinactivesquads(team) {
   activesquads = [];
 
   foreach(squad in level.rts.squads) {
-    if(squad.team == team && squad.members.size == 0) {
+    if(squad.team == team && squad.members.size == 0)
       activesquads[activesquads.size] = squad;
-    }
   }
 
   return activesquads;
 }
 
 getsquad(squadid) {
-  if(isDefined(level.rts.squads[squadid])) {
+  if(isDefined(level.rts.squads[squadid]))
     return level.rts.squads[squadid];
-  }
 
   return undefined;
 }
@@ -1472,24 +1399,21 @@ getsquadcenter(squad) {
     }
   }
 
-  if(squadcount > 0) {
+  if(squadcount > 0)
     squadcenter = vectorscale(squadcenter, 1 / squadcount);
-  }
 
   return squadcenter;
 }
 
 squaddebug(text, origin, color) {
   if(getdvarint(#"_id_498EBD49")) {
-    if(!isDefined(color)) {
+    if(!isDefined(color))
       color = (0, 1, 0);
-    }
 
     recordenttext(text, self, color, "Script");
 
-    if(isDefined(origin)) {
+    if(isDefined(origin))
       recordline(self.origin, origin, color, "Script");
-    }
   }
 
 }

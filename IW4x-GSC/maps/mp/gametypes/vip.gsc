@@ -64,14 +64,14 @@ onPrecacheGameType() {
   precacheModel(game["flagmodels"]["neutral"]);
   precacheModel(game["flagmodels"]["allies"]);
   precacheModel(game["flagmodels"]["axis"]);
+
 }
 
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -80,18 +80,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", &"OBJECTIVES_VIP");
-  setObjectiveText("axis", &"OBJECTIVES_VIP");
+  setObjectiveText("allies", & "OBJECTIVES_VIP");
+  setObjectiveText("axis", & "OBJECTIVES_VIP");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_VIP");
-    setObjectiveScoreText("axis", &"OBJECTIVES_VIP");
+    setObjectiveScoreText("allies", & "OBJECTIVES_VIP");
+    setObjectiveScoreText("axis", & "OBJECTIVES_VIP");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_VIP_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_VIP_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_VIP_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_VIP_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_VIP_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_VIP_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_VIP_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_VIP_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -108,6 +108,7 @@ onStartGameType() {
   allowed[2] = "airdrop_pallet";
   allowed[3] = "gtnw";
   allowed[4] = "gtnw_zone";
+  //maps\mp\gametypes\_rank::registerScoreInfo( "capture", 200 );
 
   maps\mp\gametypes\_gameobjects::main(allowed);
 
@@ -131,7 +132,7 @@ waitToProcess() {
 skipWait() {
   self endon("graceComplete");
 
-  for(;;) {
+  for (;;) {
     if(level.players.size > 2) {
       break;
     }
@@ -145,9 +146,8 @@ skipWait() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -175,7 +175,7 @@ onNormalDeath(victim, attacker, lifeId) {
   team = victim.team;
 
   if(isDefined(victim.isVip) && victim.isVip) {
-    level thread vip_endGame(game["attackers"], &"MP_ELIMINATED_VIP");
+    level thread vip_endGame(game["attackers"], & "MP_ELIMINATED_VIP");
     attacker.finalKill = true;
   }
 }
@@ -210,9 +210,8 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update) {
+  if(update)
     maps\mp\gametypes\_spectating::updateSpectateSettings();
-  }
 }
 
 onDeadEvent(team) {
@@ -232,7 +231,7 @@ vipSelection() {
   potentialVIPs = [];
   abortTime = 0;
 
-  for(;;) {
+  for (;;) {
     if(level.players.size >= 2) {
       break;
     }
@@ -248,17 +247,15 @@ vipSelection() {
   }
 
   foreach(player in level.players) {
-    if(player.team == game["defenders"]) {
+    if(player.team == game["defenders"])
       potentialVIPs[potentialVIPs.size] = player;
-    }
   }
 
   selectedVIPNum = RandomIntRange(0, potentialVIPs.size);
   selectedPlayer = potentialVIPs[selectedVIPNum];
 
-  if(!isAlive(selectedPlayer) && !isSubStr(selectedPlayer.guid, "bot")) {
-    selectedPlayer forceVIPspawn();
-  }
+  if(!isAlive(selectedPlayer) && !isSubStr(selectedPlayer.guid, "bot"))
+    selectedPlayer forceVIPSpawn();
 
   setupVip(selectedPlayer);
 }
@@ -275,14 +272,17 @@ setupVip(vipPlayer) {
   vipPlayer giveWeapon("riotshield_mp");
   vipPlayer switchToWeapon("riotshield_mp");
 
+  // specialty_armorvest is missing from MW2
   vipPlayer _setPerk("specialty_finalstand");
 
   vipPlayer iPrintlnBold("You Are the VIP");
+  //TO DO: add defend icon on the VIP
 }
 
 extractionZone() {
   extractionZones = getEntArray("extraction_vip", "targetname");
 
+  // check to see if zone is available.
   if(!extractionZones.size) {
     println("WARNING: no extraction zone specified");
 
@@ -334,9 +334,8 @@ extractionZone() {
 
 setVIPUse() {
   foreach(player in level.players) {
-    if(!player.isVip) {
+    if(!player.isVip)
       self.trigger disablePlayerUse(player);
-    }
   }
 }
 
@@ -359,14 +358,17 @@ handleTimer(player) {
   setGameEndTime(int(getTime() + (level.extractionTime * 1000)));
   wait level.extractionTime;
 
-  level thread vip_endGame(game["defenders"], &"MP_DEFENDED_VIP");
+  //call the sentry airdrops
+  level thread vip_endGame(game["defenders"], & "MP_DEFENDED_VIP");
 }
 
 onEndUse(team, player, success) {
   println("End Use");
 }
 
-onCantUse(player) {}
+onCantUse(player) {
+  //	player iPrintLnBold( &"MP_CANT_PLANT_WITHOUT_BOMB" );
+}
 
 spawnFxDelay(fxid, pos, forward, right, delay) {
   wait delay;
@@ -374,7 +376,7 @@ spawnFxDelay(fxid, pos, forward, right, delay) {
   triggerFx(effect);
 }
 
-forceVIPspawn() {
+forceVIPSpawn() {
   self endon("death");
   self endon("disconnect");
   self endon("spawned");

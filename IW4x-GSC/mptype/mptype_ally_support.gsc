@@ -4,6 +4,7 @@
 ******************************************/
 
 main() {
+
   character\character_mp_usmc_support::main();
 }
 

@@ -12,7 +12,7 @@ zombie_monitor(clientNum) {
   self endon("zombie_off");
   while(1) {
     if(isDefined(self.zombifyFX)) {
-      playFX(clientNum, level._effect["zombie_grain"], self.origin);
+      playfx(clientNum, level._effect["zombie_grain"], self.origin);
     }
     realwait(0.1);
   }

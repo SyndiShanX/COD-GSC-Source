@@ -38,9 +38,9 @@ main() {
   level.zombiemode_using_sleightofhand_perk = 1;
   level.zombiemode_using_deadshot_perk = 1;
 
-  if(is_gametype_active("zclassic")) {
+  if(is_gametype_active("zclassic"))
     clientscripts\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
-  } else if(is_gametype_active("zgrief")) {
+  else if(is_gametype_active("zgrief")) {
     level.zombiemode_using_additionalprimaryweapon_perk = 1;
     level.zombiemode_using_divetonuke_perk = 1;
     clientscripts\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
@@ -84,15 +84,14 @@ splitscreen_optimize() {
 
   if(a_players.size > 2) {
     for(localclientnum = 0; localclientnum < a_players.size; localclientnum++) {
-      a_fxanim = getEntArray(localclientnum, "fxanim", "targetname");
+      a_fxanim = getentarray(localclientnum, "fxanim", "targetname");
 
       for(i = 0; i < a_fxanim.size; i++) {
         if(isDefined(a_fxanim[i].script_noteworthy) && a_fxanim[i].script_noteworthy == "no_delete") {
           continue;
         }
-        if(a_fxanim[i].model == "fxanim_zom_al_chain_short_hook_mod") {
+        if(a_fxanim[i].model == "fxanim_zom_al_chain_short_hook_mod")
           a_fxanim[i] delete();
-        }
       }
     }
   }
@@ -128,9 +127,9 @@ golden_gate_lighthouse() {
 
   for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
     m_light_house_fx = spawn(localclientnum, (-1848, 9006, 2467), "script_model");
-    m_light_house_fx setModel("tag_origin");
+    m_light_house_fx setmodel("tag_origin");
     m_light_house_fx.angles = (0, 0, 0);
-    playFXOnTag(localclientnum, level._effect["fx_alcatraz_lighthouse"], m_light_house_fx, "tag_origin");
+    playfxontag(localclientnum, level._effect["fx_alcatraz_lighthouse"], m_light_house_fx, "tag_origin");
     m_light_house_fx thread golden_gate_lighthouse_rotate();
   }
 }
@@ -290,9 +289,8 @@ entityspawned_alcatraz(localclientnum) {
     return;
   }
 
-  if(self.type == "player") {
+  if(self.type == "player")
     self thread playerspawned(localclientnum);
-  }
 
   if(self.type == "missile") {
     switch (self.weapon) {
@@ -443,61 +441,56 @@ setup_personality_character_exerts() {
 toggle_player_lightning(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self waittill_dobj(localclientnum);
 
-  if(!isDefined(self.b_lightning)) {
+  if(!isDefined(self.b_lightning))
     self.b_lightning = 0;
-  }
 
   if(newval == 1) {
-    if(isDefined(self.b_lightning) && !self.b_lightning) {
+    if(isDefined(self.b_lightning) && !self.b_lightning)
       self thread player_lightning(localclientnum);
-    }
   } else
     self.b_lightning = 0;
 }
 
 toggle_futz_on_world(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(level.sndsqfinalent)) {
+  if(!isDefined(level.sndsqfinalent))
     level.sndsqfinalent = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   if(newval == 1) {
     setglobalfutz("dlc_res_1", 0.0);
-    playSound(0, "zmb_sq_headset_start", (0, 0, 0));
-    level.sndsqfinalent playLoopSound("zmb_sq_headset_loop");
+    playsound(0, "zmb_sq_headset_start", (0, 0, 0));
+    level.sndsqfinalent playloopsound("zmb_sq_headset_loop");
   } else if(newval == 0) {
     setglobalfutz("no_gfutz", 0.0);
-    playSound(0, "zmb_sq_headset_stop", (0, 0, 0));
+    playsound(0, "zmb_sq_headset_stop", (0, 0, 0));
     level.sndsqfinalent stoploopsound(1);
   }
 }
 
 dryer_stage_notifies(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   m_dryer_prop = undefined;
-  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
 
   for(i = 0; i < fxanim_props.size; i++) {
     if(isDefined(fxanim_props[i].fxanim_waittill_1)) {
-      if(fxanim_props[i].fxanim_scene_1 == "dryer_start") {
+      if(fxanim_props[i].fxanim_scene_1 == "dryer_start")
         m_dryer_prop = fxanim_props[i];
-      }
     }
   }
 
   if(isDefined(m_dryer_prop)) {
-    if(isDefined(level.dryer_light)) {
+    if(isDefined(level.dryer_light))
       stopfx(localclientnum, level.dryer_light);
-    }
 
     switch (newval) {
       case 1:
-        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_red"], m_dryer_prop, "tag_light01");
+        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_red"], m_dryer_prop, "tag_light01");
         break;
       case 2:
-        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_yellow"], m_dryer_prop, "tag_light02");
+        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_yellow"], m_dryer_prop, "tag_light02");
         setworldfogactivebank(localclientnum, 2);
         break;
       case 3:
-        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_green"], m_dryer_prop, "tag_light03");
+        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_green"], m_dryer_prop, "tag_light03");
         setworldfogactivebank(localclientnum, 1);
         break;
     }
@@ -536,7 +529,7 @@ flicker_in_and_out(localclientnum) {
     }
     while(n_current_time < n_phase_in);
 
-    self playSound(0, "evt_perk_warp");
+    self playsound(0, "evt_perk_warp");
     s_timer reset_timer();
     n_phase_in = randomfloatrange(0.1, 0.3);
 
@@ -555,9 +548,9 @@ flicker_in_and_out(localclientnum) {
 toggle_perk_machine_power(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self mapshaderconstant(localclientnum, 1, "ScriptVector0");
 
-  if(newval == 2) {
+  if(newval == 2)
     self thread flicker_in_and_out(localclientnum);
-  } else if(newval == 1) {
+  else if(newval == 1) {
     self notify("stop_flicker");
     self setshaderconstant(localclientnum, 0, 0, 1, 0, 0);
   }
@@ -572,12 +565,12 @@ player_lightning(localclientnum) {
 
     while(isDefined(self.b_lightning) && self.b_lightning) {
       v_p_angles = self.angles;
-      v_forward = anglesToForward(self.angles) * 25000;
+      v_forward = anglestoforward(self.angles) * 25000;
       v_end_pos = self.origin + (v_forward[0], v_forward[1], 0);
       v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
       v_end_pos = v_end_pos + v_offset;
-      playFX(localclientnum, level._effect["lightning_flash"], v_end_pos);
-      playSound(0, "amb_thunder_clap_zm", v_end_pos);
+      playfx(localclientnum, level._effect["lightning_flash"], v_end_pos);
+      playsound(0, "amb_thunder_clap_zm", v_end_pos);
       serverwait(localclientnum, randomfloatrange(0.2, 0.3));
       n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
       n_level_exposure = getdvarfloat(#"r_exposureValue");
@@ -587,7 +580,7 @@ player_lightning(localclientnum) {
         serverwait(localclientnum, 0.1);
         n_blend_time = randomfloatrange(0.1, 0.35);
         setdvar("r_exposureTweak", 1);
-        playSound(0, "amb_thunder_flash_zm", v_end_pos);
+        playsound(0, "amb_thunder_flash_zm", v_end_pos);
         setdvar("r_exposureValue", randomfloatrange(-1, 1));
         level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time, undefined, localclientnum);
         setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
@@ -602,9 +595,8 @@ player_lightning(localclientnum) {
 }
 
 scripted_lightning_flash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     level thread scripted_player_lightning(localclientnum);
-  }
 }
 
 scripted_player_lightning(localclientnum) {
@@ -632,12 +624,12 @@ scripted_player_lightning_strike() {
     return;
   }
   v_p_angles = self.angles;
-  v_forward = anglesToForward(self.angles) * 25000;
+  v_forward = anglestoforward(self.angles) * 25000;
   v_end_pos = self.origin + (v_forward[0], v_forward[1], 0);
   v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
   v_end_pos = v_end_pos + v_offset;
-  playFX(localclientnum, level._effect["lightning_flash"], v_end_pos);
-  playSound(0, "amb_thunder_clap_zm", v_end_pos);
+  playfx(localclientnum, level._effect["lightning_flash"], v_end_pos);
+  playsound(0, "amb_thunder_clap_zm", v_end_pos);
   n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
   n_level_exposure = getdvarfloat(#"r_exposureValue");
   n_strikes = randomintrange(3, 5);
@@ -646,7 +638,7 @@ scripted_player_lightning_strike() {
     serverwait(localclientnum, 0.1);
     n_blend_time = randomfloatrange(0.05, 0.1);
     setdvar("r_exposureTweak", 1);
-    playSound(0, "amb_thunder_flash_zm", v_end_pos);
+    playsound(0, "amb_thunder_flash_zm", v_end_pos);
     setdvar("r_exposureValue", randomfloatrange(-1, 1));
     level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time, undefined, localclientnum);
     setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
@@ -657,11 +649,10 @@ scripted_player_lightning_strike() {
 }
 
 warden_fence_down(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 0) {
+  if(newval == 0)
     level notify("warden_fence_up");
-  } else if(newval == 1) {
+  else if(newval == 1)
     level notify("warden_fence_down");
-  }
 }
 
 master_key_is_lowered(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -669,11 +660,10 @@ master_key_is_lowered(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 fxanim_pulley_down_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     level notify("fxanim_west_pulley_down_start");
-  } else if(newval == 2) {
+  else if(newval == 2)
     level notify("fxanim_east_pulley_down_start");
-  }
 }
 
 lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
@@ -703,7 +693,7 @@ timer_increment_loop(localclientnum) {
 }
 
 new_timer(localclientnum) {
-  s_timer = spawnStruct();
+  s_timer = spawnstruct();
   s_timer.n_time_current = 0;
   s_timer thread timer_increment_loop(localclientnum);
   return s_timer;
@@ -788,7 +778,6 @@ rumble_door_open(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self endon("death");
   self endon("disconnect");
 
-  if(newval == 1) {
+  if(newval == 1)
     self playrumbleonentity(localclientnum, "damage_light");
-  }
 }

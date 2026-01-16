@@ -49,9 +49,8 @@ radial_init() {
         button_group[i + 1].start_angle = mid_angle;
       } else {
         mid_angle = getMidAngle(button_group[i].pos_angle, button_group[0].pos_angle) + 180;
-        if(mid_angle > 360) {
+        if(mid_angle > 360)
           mid_angle -= 360;
-        }
 
         button_group[i].end_angle = mid_angle;
         button_group[0].start_angle = mid_angle;
@@ -76,9 +75,8 @@ debug_toggle() {
     }
 
     button_reset = true;
-    while(!(level.observer buttonPressed("BUTTON_Y"))) {
+    while(!(level.observer buttonPressed("BUTTON_Y")))
       wait 0.05;
-    }
 
     level.observer playSound("mouse_click");
 
@@ -87,9 +85,8 @@ debug_toggle() {
       button_reset = false;
     }
 
-    while(level.observer buttonPressed("BUTTON_Y")) {
+    while(level.observer buttonPressed("BUTTON_Y"))
       wait 0.05;
-    }
   }
 }
 
@@ -114,11 +111,10 @@ onPlayerConnect() {
   player takeallweapons();
   setdvar("cg_draw2d", 0);
 
-  if(!isDefined(player)) {
+  if(!isDefined(player))
     return;
-  } else {
+  else
     level.observer = player;
-  }
 
   player thread get_right_stick_angle();
 
@@ -130,9 +126,8 @@ readyPlayer() {
 
   team = "autoassign";
 
-  while(!isDefined(self.pers["team"])) {
+  while(!isDefined(self.pers["team"]))
     wait .05;
-  }
 
   self notify("menuresponse", game["menu_team"], team);
   wait 0.5;
@@ -140,9 +135,8 @@ readyPlayer() {
   classes = getArrayKeys(level.classMap);
   okclasses = [];
   for(i = 0; i < classes.size; i++) {
-    if(!isSubStr(classes[i], "custom")) {
+    if(!isSubStr(classes[i], "custom"))
       okclasses[okclasses.size] = classes[i];
-    }
   }
 
   assert(okclasses.size);
@@ -170,9 +164,8 @@ get_right_stick_angle() {
 }
 
 newRadialButtonGroup(group_name, view_start, view_end) {
-  if(isDefined(level.radial_button_group) && level.radial_button_group.size) {
+  if(isDefined(level.radial_button_group) && level.radial_button_group.size)
     assertex(!isDefined(level.radial_button_group[group_name]), "Radial button group: " + group_name + " is already defined.");
-  }
 
   player_view_ent = getent(view_end, "targetname");
   assertex(isDefined(player_view_ent), "Missing player view entity, can not setup radial menu in space");
@@ -217,19 +210,17 @@ updateSelectedButton() {
     last_active_button = level.active_button;
 
     foreach(button in level.radial_button_group[level.radial_button_current_group]) {
-      if(isInRange(button.start_angle, button.end_angle)) {
+      if(isInRange(button.start_angle, button.end_angle))
         level.active_button = button;
-      } else {
+      else
         button.font_color = (0.5, 0.5, 1);
-      }
     }
 
     if(isDefined(level.active_button)) {
       level.active_button.font_color = (1, 1, 0.5);
 
-      if(isDefined(last_active_button) && last_active_button != level.active_button) {
+      if(isDefined(last_active_button) && last_active_button != level.active_button)
         level.observer playSound("mouse_over");
-      }
     }
 
     wait 0.05;
@@ -246,9 +237,8 @@ watchSelectButtonPress() {
     }
 
     button_reset = true;
-    while(!(level.observer buttonPressed("BUTTON_A"))) {
+    while(!(level.observer buttonPressed("BUTTON_A")))
       wait 0.05;
-    }
 
     level.observer playSound("mouse_click");
 
@@ -260,9 +250,8 @@ watchSelectButtonPress() {
       button_reset = false;
     }
 
-    while(level.observer buttonPressed("BUTTON_A")) {
+    while(level.observer buttonPressed("BUTTON_A"))
       wait 0.05;
-    }
   }
 }
 
@@ -276,9 +265,8 @@ watchBackButtonPress() {
     }
 
     button_reset = true;
-    while(!(level.observer buttonPressed("BUTTON_X"))) {
+    while(!(level.observer buttonPressed("BUTTON_X")))
       wait 0.05;
-    }
 
     level.observer playSound("mouse_click");
 
@@ -287,18 +275,16 @@ watchBackButtonPress() {
       button_reset = false;
     }
 
-    while(level.observer buttonPressed("BUTTON_X")) {
+    while(level.observer buttonPressed("BUTTON_X"))
       wait 0.05;
-    }
   }
 }
 
 sort_buttons_by_angle(button_group) {
   for(i = 0; i < button_group.size - 1; i++) {
     for(j = 0; j < button_group.size - 1 - i; j++) {
-      if(button_group[j + 1].pos_angle < button_group[j].pos_angle) {
+      if(button_group[j + 1].pos_angle < button_group[j].pos_angle)
         button_switch(button_group[j], button_group[j + 1]);
-      }
     }
   }
 }
@@ -324,9 +310,8 @@ button_switch(button1, button2) {
 }
 
 draw_radial_buttons(button_group) {
-  foreach(button in level.radial_button_group[button_group]) {
-    button thread draw_radial_button(button_group);
-  }
+  foreach(button in level.radial_button_group[button_group])
+  button thread draw_radial_button(button_group);
 }
 
 draw_radial_button(button_group) {
@@ -338,9 +323,8 @@ draw_radial_button(button_group) {
 
   while(1) {
     range_color = (1, 0, 0);
-    if(isInRange(self.start_angle, self.end_angle)) {
+    if(isInRange(self.start_angle, self.end_angle))
       range_color = (1, 1, 0);
-    }
 
     print3d(self.pos, self.label, self.font_color, 0.75, self.font_size, 1);
 
@@ -372,15 +356,13 @@ Zoom_To_Radial_Menu(button_group, reverse) {
     level.radial_button_current_group = "main";
   }
 
-  foreach(button in level.radial_button_group[level.radial_button_previous_group]) {
-    button notify("remove_button");
-  }
+  foreach(button in level.radial_button_group[level.radial_button_previous_group])
+  button notify("remove_button");
 
-  if(isDefined(reverse) && reverse) {
+  if(isDefined(reverse) && reverse)
     level.observer go_path_by_targetname_reverse(level.radial_button_group_info[level.radial_button_previous_group]["view_start"], button_group);
-  } else {
+  else
     level.observer go_path_by_targetname(level.radial_button_group_info[button_group]["view_start"]);
-  }
 
   level thread draw_radial_buttons(button_group);
   level.radial_button_current_group = button_group;
@@ -402,9 +384,8 @@ getRadialAngleFromEnt(button_group, ent) {
   projNorm = VectorNormalize(VectorFromLineToPoint(rPos, (rPos + rForward), ePos));
   radial_angle = Acos(VectorDot(projNorm, rUpwardNorm));
 
-  if(VectorDot(AnglesToRight(rAngle), projNorm) < 0) {
+  if(VectorDot(AnglesToRight(rAngle), projNorm) < 0)
     radial_angle = 360 - radial_angle;
-  }
 
   return radial_angle;
 }
@@ -427,21 +408,19 @@ isInRange(start_angle, end_angle) {
   inside_big_angle = (level.rs_angle > start_angle && level.rs_angle < 360);
   inside_small_angle = (level.rs_angle > 0 && level.rs_angle < end_angle);
 
-  if(start_angle > end_angle) {
+  if(start_angle > end_angle)
     in_range = (inside_big_angle || inside_small_angle);
-  } else {
+  else
     in_range = (level.rs_angle > start_angle && level.rs_angle < end_angle);
-  }
 
   return in_range;
 }
 
 action_back() {
-  if(isDefined(level.radial_button_current_group) && level.radial_button_current_group != "main") {
+  if(isDefined(level.radial_button_current_group) && level.radial_button_current_group != "main")
     zoom_to_radial_menu("main", true);
-  } else {
+  else
     return;
-  }
 }
 
 action_weapons_primary() {
@@ -512,16 +491,14 @@ go_path_by_targetname(path_name) {
   travel_speed = max(travel_speed, 0.1);
 
   blur_time = travel_speed;
-  if(!CONST_direct_travel) {
+  if(!CONST_direct_travel)
     blur_time *= travel_speed * (level.view_paths[path_name].size + 1);
-  }
   self thread blur_sine(CONST_blur_strength, blur_time);
 
   foreach(idx, node in level.view_paths[path_name]) {
     if(CONST_direct_travel) {
-      if(idx != level.view_paths[path_name].size - 1) {
+      if(idx != level.view_paths[path_name].size - 1)
         continue;
-      }
     }
 
     level.dummy_mover MoveTo(node.origin, travel_speed, travel_speed * 0.5, 0);
@@ -539,9 +516,8 @@ go_path_by_targetname_reverse(path_name, back_to_button_group) {
   travel_speed = max(travel_speed, 0.1);
 
   blur_time = travel_speed;
-  if(!CONST_direct_travel) {
+  if(!CONST_direct_travel)
     blur_time *= travel_speed * (level.view_paths[path_name].size + 1);
-  }
   self thread blur_sine(CONST_blur_strength, blur_time);
 
   if(!CONST_direct_travel) {

@@ -9,10 +9,11 @@
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_blood_debt;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_blood_debt", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_blood_debt", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -25,7 +26,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
 
   if(zm_utility::is_standard()) {
     self.var_d3df5e76 = array(2000);

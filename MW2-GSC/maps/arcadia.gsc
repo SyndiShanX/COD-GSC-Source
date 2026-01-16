@@ -12,7 +12,7 @@
 #using_animtree("generic_human");
 
 main() {
-  destructible_volumes = getEntArray("volume_second_half", "targetname");
+  destructible_volumes = getentarray("volume_second_half", "targetname");
   mask_destructibles_in_volumes(destructible_volumes);
   mask_interactives_in_volumes(destructible_volumes);
 
@@ -113,9 +113,8 @@ main() {
   all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
-    if(!isDefined(spawner.script_parameters)) {
+    if(!isdefined(spawner.script_parameters))
       continue;
-    }
     script_parameter_spawners[script_parameter_spawners.size] = spawner;
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
@@ -138,7 +137,7 @@ main() {
   level.stryker thread stryker_damage_monitor();
   level.stryker thread stryker_threats_eliminated_dialog_1();
   level.stryker thread stryker_threats_eliminated_dialog_2();
-  level.stryker setVehicleLookAtText("Honey Badger", &"");
+  level.stryker setVehicleLookAtText("Honey Badger", & "");
   level.stryker.missileAttractor = spawn("script_origin", level.stryker.origin + (0, 0, 70));
   level.stryker.missileAttractor LinkTo(level.stryker);
   missile_CreateAttractorEnt(level.stryker.missileAttractor, 10000, 3000);
@@ -163,8 +162,8 @@ main() {
   run_thread_on_noteworthy("checkpoing_clear_activate", ::force_trigger_on_flag, "checkpoint_enemies_dead");
   run_thread_on_noteworthy("checkpoing_clear_activate", ::undo_cull_dist);
 
-  add_hint_string("use_laser", &"ARCADIA_LASER_HINT", ::should_stop_laser_hint);
-  add_hint_string("use_laser_golf", &"ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
+  add_hint_string("use_laser", & "ARCADIA_LASER_HINT", ::should_stop_laser_hint);
+  add_hint_string("use_laser_golf", & "ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
 
   //--------------------------------
   // Level threads
@@ -200,9 +199,8 @@ main() {
   //--------------------------------
   wait 0.05;
   friendlies = getaiarray("allies");
-  foreach(friend in friendlies) {
-    friend.baseaccuracy = 0.4;
-  }
+  foreach(friend in friendlies)
+  friend.baseaccuracy = 0.4;
 
   after0 = get_golf_geo("golf_after", 0);
   assert(after0.size > 0);
@@ -363,7 +361,7 @@ startStreet() {
   thread dialog_enemies_apartments();
   thread get_off_streets_dialog();
 
-  array_thread(getEntArray("opening_rpg_location", "targetname"), ::opening_rpgs);
+  array_thread(getentarray("opening_rpg_location", "targetname"), ::opening_rpgs);
 
   level.stryker thread stryker_rpg_dialog();
 }
@@ -396,10 +394,9 @@ startGolf() {
   wait 0.05;
 
   allies = getaiarray("allies");
-  locations = getEntArray("start_golf_friendly_teleport", "targetname");
-  foreach(i, guy in allies) {
-    guy forceTeleport(locations[i].origin, locations[i].angles);
-  }
+  locations = getentarray("start_golf_friendly_teleport", "targetname");
+  foreach(i, guy in allies)
+  guy forceTeleport(locations[i].origin, locations[i].angles);
 
   trig = getent("start_golf_friendly_trigger", "script_noteworthy");
   trig notify("trigger", level.player);
@@ -425,7 +422,7 @@ startCrash() {
   level.stryker delete();
 
   allies = getaiarray("allies");
-  locations = getEntArray("start_crash_friendly_teleport", "targetname");
+  locations = getentarray("start_crash_friendly_teleport", "targetname");
   foreach(i, guy in allies) {
     guy forceTeleport(locations[i].origin, locations[i].angles);
     guy.goalradius = 32;
@@ -442,14 +439,13 @@ startCrash() {
 }
 
 objective_aa_guns() {
-  objective_add(0, "current", &"ARCADIA_OBJECTIVE_AA_GUNS");
+  objective_add(0, "current", & "ARCADIA_OBJECTIVE_AA_GUNS");
   objective_onentity(0, level.foley);
 }
 
 objective_laze_golfcourse() {
-  if(flag("objective_laze_golfcourse")) {
+  if(flag("objective_laze_golfcourse"))
     return;
-  }
   flag_set("objective_laze_golfcourse");
 
   level notify("objective_laze_golfcourse");
@@ -480,7 +476,7 @@ objective_brookmere_road() {
   thread brookmere_road_dialog();
 
   location = getent("objective_brookmere_location", "targetname");
-  objective_add(1, "current", &"ARCADIA_OBJECTIVE_BROOKMERE", location.origin);
+  objective_add(1, "current", & "ARCADIA_OBJECTIVE_BROOKMERE", location.origin);
 
   flag_wait("brookmere_house");
 
@@ -491,7 +487,7 @@ objective_brookmere_road() {
 
 objective_intel() {
   location = getent("objective_intel_location", "targetname");
-  objective_add(2, "current", &"ARCADIA_OBJECTIVE_INTEL", location.origin);
+  objective_add(2, "current", & "ARCADIA_OBJECTIVE_INTEL", location.origin);
 }
 
 brookmere_road_dialog() {
@@ -665,7 +661,7 @@ move_up_dialog() {
   }
 
   assert(isalive(guy));
-  assert(isDefined(anime));
+  assert(isdefined(anime));
 
   guy thread dialogue_queue(anime);
 }
@@ -705,20 +701,17 @@ checkpoint_cleared_dialog_ac130() {
   allies = getaiarray("allies");
   assert(allies.size >= 4);
   foreach(guy in allies) {
-    if(guy is_hero()) {
+    if(guy is_hero())
       continue;
-    }
-    if(!isDefined(marine1)) {
+    if(!isdefined(marine1))
       marine1 = guy;
-    } else {
+    else
       marine2 = guy;
-    }
-    if(isDefined(marine1) && isDefined(marine2)) {
+    if(isdefined(marine1) && isdefined(marine2))
       break;
-    }
   }
-  assert(isDefined(marine1));
-  assert(isDefined(marine2));
+  assert(isdefined(marine1));
+  assert(isdefined(marine2));
 
   marine1 endon("death");
   marine2 endon("death");
@@ -779,7 +772,7 @@ fridge_guy() {
   thread fridge_guy_death_wait(guy);
 
   fridge = getent("fridge", "targetname");
-  assert(isDefined(fridge));
+  assert(isdefined(fridge));
   fridge.animname = "fridge";
   fridge setAnimTree();
 
@@ -860,9 +853,8 @@ level_ending_sequence() {
   flavorbursts_off("axis");
 
   allies = getaiarray("allies");
-  foreach(friend in allies) {
-    friend.baseaccuracy = 100;
-  }
+  foreach(friend in allies)
+  friend.baseaccuracy = 100;
 
   housenode_foley = getnode("housenode_foley", "targetname");
   housenode_dunn = getnode("housenode_dunn", "targetname");
@@ -941,16 +933,16 @@ ending_sequence_dunn(node_dunn) {
 }
 
 ending_sequence_deadguy(spawner_targetname, node_targetname, animName, anime) {
-  assert(isDefined(spawner_targetname));
-  assert(isDefined(node_targetname));
-  assert(isDefined(animName));
-  assert(isDefined(anime));
+  assert(isdefined(spawner_targetname));
+  assert(isdefined(node_targetname));
+  assert(isdefined(animName));
+  assert(isdefined(anime));
 
   spawner = getent(spawner_targetname, "targetname");
-  assert(isDefined(spawner));
+  assert(isdefined(spawner));
 
   node = getent(node_targetname, "targetname");
-  assert(isDefined(node));
+  assert(isdefined(node));
 
   guy = ending_sequence_deadguy_create(spawner);
 
@@ -973,15 +965,15 @@ ending_sequence_deadguy(spawner_targetname, node_targetname, animName, anime) {
 
 ending_sequence_deadguy_create(spawner) {
   guy = spawner spawn_ai(true);
-  assert(isDefined(guy));
+  assert(isdefined(guy));
   guy gun_remove();
 
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
-  model setModel(guy.model);
+  model setmodel(guy.model);
 
   numAttached = guy getattachsize();
-  for(i = 0; i < numAttached; i++) {
+  for (i = 0; i < numAttached; i++) {
     modelname = guy getattachmodelname(i);
     tagname = guy getattachtagname(i);
     model attach(modelname, tagname, true);
@@ -1063,7 +1055,7 @@ player_picks_up_briefcase() {
 
   flag_wait("player_can_pick_up_briefcase");
 
-  briefcase setModel("com_metal_briefcase_opened_obj");
+  briefcase setmodel("com_metal_briefcase_opened_obj");
   use_trig trigger_on();
 
   use_trig waittill("trigger");

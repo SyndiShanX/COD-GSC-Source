@@ -14,12 +14,12 @@ function autoexec main() {
   destructibles = struct::get_script_bundles("destructiblecharacterdef");
   processedbundles = [];
   foreach(destructiblename, destructible in destructibles) {
-    destructbundle = spawnStruct();
+    destructbundle = spawnstruct();
     destructbundle.piececount = destructible.piececount;
     destructbundle.pieces = [];
     destructbundle.name = destructiblename;
-    for(index = 1; index <= destructbundle.piececount; index++) {
-      piecestruct = spawnStruct();
+    for (index = 1; index <= destructbundle.piececount; index++) {
+      piecestruct = spawnstruct();
       piecestruct.gibmodel = getstructfield(destructible, ("piece" + index) + "_gibmodel");
       piecestruct.gibtag = getstructfield(destructible, ("piece" + index) + "_gibtag");
       piecestruct.gibfx = getstructfield(destructible, ("piece" + index) + "_gibfx");
@@ -39,7 +39,7 @@ function autoexec main() {
 #namespace destructserverutils;
 
 function private _getdestructstate(entity) {
-  if(isDefined(entity._destruct_state)) {
+  if(isdefined(entity._destruct_state)) {
     return entity._destruct_state;
   }
   return 0;
@@ -57,11 +57,11 @@ function copydestructstate(originalentity, newentity) {
 }
 
 function destructhitlocpieces(entity, hitloc) {
-  if(isDefined(entity.destructibledef)) {
+  if(isdefined(entity.destructibledef)) {
     destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
-    for(index = 1; index <= destructbundle.pieces.size; index++) {
+    for (index = 1; index <= destructbundle.pieces.size; index++) {
       piece = destructbundle.pieces[index - 1];
-      if(isDefined(piece.hitlocation) && piece.hitlocation == hitloc) {
+      if(isdefined(piece.hitlocation) && piece.hitlocation == hitloc) {
         destructpiece(entity, index);
       }
     }
@@ -81,22 +81,22 @@ function destructleftlegpieces(entity) {
 }
 
 function destructpiece(entity, piecenumber) {
-  /
+  /# /
   #
   assert(1 <= piecenumber && piecenumber <= 20);
   if(isdestructed(entity, piecenumber)) {
     return;
   }
   _setdestructed(entity, 1 << piecenumber);
-  if(!isDefined(entity.destructibledef)) {
+  if(!isdefined(entity.destructibledef)) {
     return;
   }
   destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
   piece = destructbundle.pieces[piecenumber - 1];
-  if(isDefined(piece.hidetag) && entity haspart(piece.hidetag)) {
+  if(isdefined(piece.hidetag) && entity haspart(piece.hidetag)) {
     entity hidepart(piece.hidetag);
   }
-  if(isDefined(piece.detachmodel)) {
+  if(isdefined(piece.detachmodel)) {
     entity detach(piece.detachmodel, "");
   }
 }
@@ -107,7 +107,7 @@ function destructnumberrandompieces(entity, num_pieces_to_destruct = 0) {
   if(num_pieces_to_destruct == 0) {
     num_pieces_to_destruct = destructablepieces;
   }
-  for(i = 0; i < destructablepieces; i++) {
+  for (i = 0; i < destructablepieces; i++) {
     destructible_pieces_list[i] = i + 1;
   }
   destructible_pieces_list = array::randomize(destructible_pieces_list);
@@ -124,7 +124,7 @@ function destructnumberrandompieces(entity, num_pieces_to_destruct = 0) {
 
 function destructrandompieces(entity) {
   destructpieces = getpiececount(entity);
-  for(index = 0; index < destructpieces; index++) {
+  for (index = 0; index < destructpieces; index++) {
     if(math::cointoss()) {
       destructpiece(entity, index + 1);
     }
@@ -144,9 +144,9 @@ function destructrightlegpieces(entity) {
 }
 
 function getpiececount(entity) {
-  if(isDefined(entity.destructibledef)) {
+  if(isdefined(entity.destructibledef)) {
     destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
-    if(isDefined(destructbundle)) {
+    if(isdefined(destructbundle)) {
       return destructbundle.piececount;
     }
   }
@@ -155,10 +155,10 @@ function getpiececount(entity) {
 
 function handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
   entity = self;
-  if(isDefined(entity.skipdeath) && entity.skipdeath) {
+  if(isdefined(entity.skipdeath) && entity.skipdeath) {
     return idamage;
   }
-  if(isDefined(entity.var_132756fd) && entity.var_132756fd) {
+  if(isdefined(entity.var_132756fd) && entity.var_132756fd) {
     return idamage;
   }
   togglespawngibs(entity, 1);
@@ -167,36 +167,36 @@ function handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
 }
 
 function isdestructed(entity, piecenumber) {
-  /
+  /# /
   #
   assert(1 <= piecenumber && piecenumber <= 20);
-  return _getdestructstate(entity) &(1 << piecenumber);
+  return _getdestructstate(entity) & (1 << piecenumber);
 }
 
 function reapplydestructedpieces(entity) {
-  if(!isDefined(entity.destructibledef)) {
+  if(!isdefined(entity.destructibledef)) {
     return;
   }
   destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
-  for(index = 1; index <= destructbundle.pieces.size; index++) {
+  for (index = 1; index <= destructbundle.pieces.size; index++) {
     if(!isdestructed(entity, index)) {
       continue;
     }
     piece = destructbundle.pieces[index - 1];
-    if(isDefined(piece.hidetag) && entity haspart(piece.hidetag)) {
+    if(isdefined(piece.hidetag) && entity haspart(piece.hidetag)) {
       entity hidepart(piece.hidetag);
     }
   }
 }
 
 function showdestructedpieces(entity) {
-  if(!isDefined(entity.destructibledef)) {
+  if(!isdefined(entity.destructibledef)) {
     return;
   }
   destructbundle = struct::get_script_bundle("destructiblecharacterdef", entity.destructibledef);
-  for(index = 1; index <= destructbundle.pieces.size; index++) {
+  for (index = 1; index <= destructbundle.pieces.size; index++) {
     piece = destructbundle.pieces[index - 1];
-    if(isDefined(piece.hidetag) && entity haspart(piece.hidetag)) {
+    if(isdefined(piece.hidetag) && entity haspart(piece.hidetag)) {
       entity showpart(piece.hidetag);
     }
   }
@@ -206,7 +206,7 @@ function togglespawngibs(entity, shouldspawngibs) {
   if(shouldspawngibs) {
     entity._destruct_state = _getdestructstate(entity) | 1;
   } else {
-    entity._destruct_state = _getdestructstate(entity) &-2;
+    entity._destruct_state = _getdestructstate(entity) & -2;
   }
   entity clientfield::set("destructible_character_state", entity._destruct_state);
 }

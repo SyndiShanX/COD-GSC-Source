@@ -6,9 +6,8 @@
 #include maps\_utility;
 
 main(vehicletype) {
-  if(!isDefined(vehicletype)) {
+  if(!isDefined(vehicletype))
     return;
-  }
   level.vehicle_treads[vehicletype] = true;
   switch (vehicletype) {
     case "willys":
@@ -129,14 +128,12 @@ main(vehicletype) {
 }
 
 setvehiclefx(vehicletype, material, fx) {
-  if(!isDefined(level._vehicle_effect)) {
+  if(!isDefined(level._vehicle_effect))
     level._vehicle_effect = [];
-  }
-  if(!isDefined(fx)) {
+  if(!isDefined(fx))
     level._vehicle_effect[vehicletype][material] = -1;
-  } else {
+  else
     level._vehicle_effect[vehicletype][material] = loadfx(fx);
-  }
 }
 
 setallvehiclefx(vehicletype, fx) {

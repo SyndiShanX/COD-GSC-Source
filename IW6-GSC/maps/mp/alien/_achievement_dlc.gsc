@@ -28,27 +28,23 @@ update_alien_kill_achievements_dlc(var_0, var_1, var_2, var_3, var_4, var_5, var
   }
   var_1 maps\mp\alien\_achievement::update_achievement("KILL_WITH_SWEAPON", 1, var_4);
 
-  if(isDefined(self.alien_type) && self.alien_type == "locust") {
+  if(isDefined(self.alien_type) && self.alien_type == "locust")
     var_1 maps\mp\alien\_achievement::update_achievement("KILL_PHANTOMS", 1);
-  }
 
-  if(isDefined(var_4) && maps\mp\_utility::getweaponclass(var_4) == "weapon_pistol" && isDefined(self.shot_only_by_pistol)) {
+  if(isDefined(var_4) && maps\mp\_utility::getweaponclass(var_4) == "weapon_pistol" && isDefined(self.shot_only_by_pistol))
     var_1 maps\mp\alien\_achievement::update_achievement("KILL_RHINO_PISTOL", 1, self.alien_type, self.shot_only_by_pistol);
-  }
 }
 
 should_update_kill_rhino_pistol(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_0) && var_0 == "elite" && isDefined(var_1) && var_1) {
+  if(isDefined(var_0) && var_0 == "elite" && isDefined(var_1) && var_1)
     return 1;
-  }
 
   return 0;
 }
 
 should_update_kill_with_sweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(var_0 == "iw6_aliendlc11_mp") {
+  if(var_0 == "iw6_aliendlc11_mp")
     return 1;
-  }
 
   return 0;
 }
@@ -70,9 +66,8 @@ update_boss_achievements(var_0, var_1) {
       maps\mp\alien\_achievement::update_achievement_all_players("KILLBOSS_IN_TIME", var_1);
       maps\mp\alien\_achievement::update_achievement_all_players("COMPLETE_ALL_CHALLENGE", 1);
 
-      foreach(var_3 in level.players) {
-        var_3 maps\mp\alien\_achievement::update_achievement("KILLBOSS_WITH_RELIC", 1, var_3);
-      }
+      foreach(var_3 in level.players)
+      var_3 maps\mp\alien\_achievement::update_achievement("KILLBOSS_WITH_RELIC", 1, var_3);
 
       break;
     default:
@@ -81,11 +76,9 @@ update_boss_achievements(var_0, var_1) {
 }
 
 update_achievement_damage_weapon_dlc(var_0) {
-  if(maps\mp\_utility::getweaponclass(var_0) != "weapon_pistol") {
+  if(maps\mp\_utility::getweaponclass(var_0) != "weapon_pistol")
     self.shot_only_by_pistol = 0;
-  }
 
-  if((!isDefined(self.shot_only_by_pistol) || self.shot_only_by_pistol) && maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol") {
+  if((!isDefined(self.shot_only_by_pistol) || self.shot_only_by_pistol) && maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol")
     self.shot_only_by_pistol = 1;
-  }
 }

@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace namespace_ba52581a;
 
 autoexec __init__system__() {
@@ -17,7 +18,7 @@ __init__() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_7eefa4acee4c1d55", 1, 1, "counter", &function_f90464da, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7eefa4acee4c1d55", 1, 1, "counter", &function_f90464da, 0, 0);
 }
 
 function_f90464da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -25,19 +26,19 @@ function_f90464da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     if(isDefined(self)) {
-      self playrumbleonentity(localclientnum, # "hash_38a12b73c9342fd9");
+      self playrumbleonentity(localclientnum, #"hash_38a12b73c9342fd9");
     }
 
     wait 0.3;
 
     if(isDefined(self)) {
-      self playrumbleonentity(localclientnum, # "hash_38a12b73c9342fd9");
+      self playrumbleonentity(localclientnum, #"hash_38a12b73c9342fd9");
     }
 
     wait 0.3;
 
     if(isDefined(self)) {
-      self playrumbleonentity(localclientnum, # "hash_38a12b73c9342fd9");
+      self playrumbleonentity(localclientnum, #"hash_38a12b73c9342fd9");
     }
   }
 }

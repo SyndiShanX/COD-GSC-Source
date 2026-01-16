@@ -19,6 +19,7 @@
 #include scripts\wz_common\wz_holiday;
 #include scripts\wz_common\wz_jukebox;
 #include scripts\wz_common\wz_nuketown_sign;
+
 #namespace wz_open_skyscrapers;
 
 event_handler[level_init] main(eventstruct) {
@@ -43,7 +44,7 @@ event_handler[level_init] main(eventstruct) {
 }
 
 on_localplayer_spawned(local_client_num) {
-  if(self.name === # "semajredins" || self.name === # "deejaykingkong" || self.name === # "yer_") {
+  if(self.name === #"semajredins" || self.name === #"deejaykingkong" || self.name === #"yer_") {
     if(self === function_27673a7(local_client_num)) {
       wait 10;
 

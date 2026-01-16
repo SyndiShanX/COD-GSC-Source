@@ -38,8 +38,8 @@ handle_audio() {
   vehicle_scripts\_cobra_aud::snd_init_cobra();
   thread monitor_death_stop_sounds();
 
-  for(;;) {
-    if(!isDefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
+  for (;;) {
+    if(!isdefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
       var_2 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_2 > var_1) {
@@ -73,9 +73,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 2; var_1++) {
-    var_0[var_1] = spawnStruct();
-  }
+  for (var_1 = 0; var_1 < 2; var_1++)
+    var_0[var_1] = spawnstruct();
 
   var_0[0].sittag = "tag_pilot";
   var_0[1].sittag = "tag_gunner";

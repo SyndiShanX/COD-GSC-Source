@@ -16,24 +16,24 @@
 #namespace zm_bgb_phoenix_up;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_phoenix_up", &__init__, undefined, "bgb");
+  system::register("zm_bgb_phoenix_up", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_phoenix_up", "activated", 1, undefined, undefined, &validation, &activation);
-  bgb::register_lost_perk_override("zm_bgb_phoenix_up", &lost_perk_override, 1);
+  bgb::register("zm_bgb_phoenix_up", "activated", 1, undefined, undefined, & validation, & activation);
+  bgb::register_lost_perk_override("zm_bgb_phoenix_up", & lost_perk_override, 1);
 }
 
 function validation() {
   players = level.players;
   foreach(player in players) {
-    if(isDefined(player.var_df0decf1) && player.var_df0decf1) {
+    if(isdefined(player.var_df0decf1) && player.var_df0decf1) {
       return false;
     }
-    if(isDefined(level.var_11b06c2f) && self[[level.var_11b06c2f]](player, 1, 1)) {
+    if(isdefined(level.var_11b06c2f) && self[[level.var_11b06c2f]](player, 1, 1)) {
       return true;
     }
     if(self zm_laststand::can_revive(player, 1, 1)) {
@@ -48,7 +48,7 @@ function activation() {
   players = level.players;
   foreach(player in players) {
     can_revive = 0;
-    if(isDefined(level.var_11b06c2f) && self[[level.var_11b06c2f]](player, 1, 1)) {
+    if(isdefined(level.var_11b06c2f) && self[[level.var_11b06c2f]](player, 1, 1)) {
       can_revive = 1;
     } else if(self zm_laststand::can_revive(player, 1, 1)) {
       can_revive = 1;

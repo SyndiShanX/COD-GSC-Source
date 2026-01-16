@@ -28,17 +28,17 @@ main() {
 
 onStartGameType() {
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_TDM");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_TDM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_TDM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_TDM");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TDM");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TDM");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TDM_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TDM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TDM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TDM_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_TDM_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_TDM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_TDM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_TDM_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints("mp_tdm_spawn_allies_start");
@@ -51,9 +51,8 @@ onStartGameType() {
   level.mapCenter = maps\mp\gametypes\_spawnlogic::findBoxCenter(level.spawnMins, level.spawnMaxs);
   setMapCenter(level.mapCenter);
   allowed[0] = "tdm";
-  if(getDvarInt("scr_oldHardpoints") > 0) {
+  if(getDvarInt("scr_oldHardpoints") > 0)
     allowed[1] = "hardpoint";
-  }
   level.displayRoundEndText = false;
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
@@ -73,9 +72,8 @@ onSpawnPlayer() {
   self.usingObj = undefined;
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + self.pers["team"] + "_start");
-    if(!spawnPoints.size) {
+    if(!spawnPoints.size)
       spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_sab_spawn_" + self.pers["team"] + "_start");
-    }
     if(!spawnPoints.size) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(spawnPoints);
@@ -90,7 +88,8 @@ onSpawnPlayer() {
 }
 
 onEndGame(winningTeam) {
-  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis")) {
-    [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
-  }
+  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis"))
+    [[level._setTeamScore]](winningTeam, [
+      [level._getTeamScore]
+    ](winningTeam) + 1);
 }

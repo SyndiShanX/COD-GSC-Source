@@ -83,9 +83,8 @@ track_teargas() {
     var_0.origin = self.origin;
 
     foreach(var_2 in level.teargas_flush_volumes) {
-      if(var_0 istouching(var_2)) {
+      if(var_0 istouching(var_2))
         var_2 notify("teargas_touched");
-      }
     }
 
     wait 0.05;
@@ -118,13 +117,11 @@ handle_teargas_explode(var_0) {
     }
   }
 
-  if(!var_3) {
+  if(!var_3)
     playFX(level._effect["default_teargas_smoke"], var_1);
-  }
 
-  if(var_2 == 0) {
+  if(var_2 == 0)
     thread add_teargas_cloud_radius(300, var_1);
-  }
 
   var_0 delete();
 }
@@ -160,13 +157,12 @@ handle_teargas_volume(var_0) {
       var_5 = undefined;
       var_6 = getnodearray(self.target, "targetname");
 
-      if(isDefined(var_6) && var_6.size > 0) {
+      if(isDefined(var_6) && var_6.size > 0)
         var_4 = var_6[randomint(var_6.size)];
-      }
 
-      if(isDefined(var_4)) {
+      if(isDefined(var_4))
         var_3 thread ai_flee_from_teargas(var_4);
-      } else {
+      else {
         var_5 = getent(self.target, "targetname");
 
         if(isDefined(var_5)) {
@@ -190,9 +186,8 @@ add_teargas_cloud_radius(var_0, var_1, var_2) {
     var_8 = distancesquared(var_7.origin, var_1);
 
     if(var_5 > var_8) {
-      if(isDefined(var_7) && isalive(var_7) && !var_7 maps\_utility::doinglongdeath()) {
+      if(isDefined(var_7) && isalive(var_7) && !var_7 maps\_utility::doinglongdeath())
         var_7 thread ai_react_to_teargas(var_1, var_0);
-      }
     }
   }
 
@@ -210,27 +205,24 @@ add_teargas_cloud_radius(var_0, var_1, var_2) {
   if(!isDefined(level.disable_teargas_ally_badplaces) || level.disable_teargas_ally_badplaces == 0) {
     var_13 = "ally_teargas_bp" + maps\_utility::string(var_3);
 
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       badplace_brush(var_13, 15, var_2, "allies");
-    } else {
+    else
       badplace_cylinder(var_13, 15, var_1, var_0, 100, "allies");
-    }
   }
 
   wait 3;
   var_14 = "axis_teargas_bp" + maps\_utility::string(var_3);
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     badplace_brush(var_14, 15, var_2, "axis");
-  } else {
+  else
     badplace_cylinder(var_14, 15, var_1, var_0, 100, "axis");
-  }
 
   wait 12;
 
-  if(isDefined(var_13)) {
+  if(isDefined(var_13))
     badplace_delete(var_13);
-  }
 
   badplace_delete(var_14);
   level.teargas_scripted_guys = [];
@@ -277,19 +269,17 @@ ai_cough() {
     level.teargas_cough_count++;
     level.teargas_last_cough_sound = level.teargas_last_cough_sound + randomintrange(1, 4);
 
-    if(level.teargas_last_cough_sound >= level.teargas_cough_vo.size) {
+    if(level.teargas_last_cough_sound >= level.teargas_cough_vo.size)
       level.teargas_last_cough_sound = level.teargas_last_cough_sound - level.teargas_cough_vo.size;
-    }
 
     self playSound(level.teargas_cough_vo[level.teargas_last_cough_sound], "done_coughing");
     common_scripts\utility::waittill_any("done_coughing", "death", "pain_death");
 
     if(isDefined(self)) {
-      if(isalive(self)) {
+      if(isalive(self))
         self.teargas_coughing = undefined;
-      } else {
+      else
         self stopsounds();
-      }
     }
 
     level.teargas_cough_count--;
@@ -323,9 +313,8 @@ remove_other_gassed_nodes(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in level.active_teargas) {
-    if(isDefined(var_4) && isDefined(var_4.origin) && var_4.origin != var_1 && isDefined(var_4.nodes)) {
+    if(isDefined(var_4) && isDefined(var_4.origin) && var_4.origin != var_1 && isDefined(var_4.nodes))
       var_0 = common_scripts\utility::array_remove_array(var_0, var_4.nodes);
-    }
   }
 
   return var_0;
@@ -345,23 +334,20 @@ find_scripted_teargas_flee_node(var_0, var_1, var_2) {
     if(var_11 <= var_3 && var_11 < var_4) {
       var_12 = distancesquared(var_10.origin, level.player.origin);
 
-      if(var_12 < var_5) {
+      if(var_12 < var_5)
         var_7[var_7.size] = var_10;
-      }
     }
   }
 
-  if(var_7.size > 0) {
+  if(var_7.size > 0)
     var_8 = var_7[randomint(var_7.size)];
-  }
 
   return var_8;
 }
 
 find_teargas_free_node(var_0, var_1, var_2) {
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
   var_3 = getnodesinradius(var_0, var_1, var_2, 100, "Path");
   var_3 = remove_other_gassed_nodes(var_3, var_0);
@@ -394,20 +380,17 @@ ai_react_to_teargas(var_0, var_1) {
     wait(var_3);
     var_2 = distance2d(self.origin, var_0);
 
-    if(var_2 > var_1) {
+    if(var_2 > var_1)
       return;
-    }
   }
 
   var_4 = find_scripted_teargas_flee_node(var_0, var_1, 2000);
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = find_teargas_free_node(var_0, var_1 + 200, var_1);
-  }
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     ai_flee_from_teargas(var_4);
-  }
 }
 
 ai_flee_from_teargas(var_0, var_1) {
@@ -467,9 +450,8 @@ ai_flee_from_teargas(var_0, var_1) {
   maps\_utility::set_goalradius(var_3);
   var_5 = level.teargas_recover_anim[randomint(level.teargas_recover_anim.size)];
 
-  if(!isDefined(self.animname)) {
+  if(!isDefined(self.animname))
     self.animname = "generic";
-  }
 
   if(check_melee_interaction_active()) {
     cleanup_teargas_on_exit();
@@ -488,17 +470,15 @@ cleanup_teargas_on_exit() {
   self.badplaceawareness = self.tg_old_badplace_awareness;
   maps\_utility::set_ignoresuppression(0);
 
-  if(isDefined(self.animname) && self.animname == "generic") {
+  if(isDefined(self.animname) && self.animname == "generic")
     self.animname = self.tg_old_animname;
-  }
 
   self.teargassed = undefined;
 }
 
 check_melee_interaction_active() {
-  if(isDefined(self.dog_attacking_me) || isDefined(self.syncedmeleetarget) || isDefined(self.melee) && isDefined(self.melee.target)) {
+  if(isDefined(self.dog_attacking_me) || isDefined(self.syncedmeleetarget) || isDefined(self.melee) && isDefined(self.melee.target))
     return 1;
-  }
 
   return 0;
 }

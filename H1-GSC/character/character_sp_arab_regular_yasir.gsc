@@ -5,7 +5,7 @@
 *********************************************************/
 
 main() {
-  self setModel("body_sp_arab_regular_yasir");
+  self setmodel("body_sp_arab_regular_yasir");
   self attach("head_sp_arab_regular_mowrap", "", 1);
   self.headmodel = "head_sp_arab_regular_mowrap";
   self.voice = "arab";

@@ -27,9 +27,8 @@
 #include clientscripts\_empgrenade;
 
 levelnotifyhandler(clientnum, state, oldstate) {
-  if(state != "") {
+  if(state != "")
     level notify(state, clientnum);
-  }
 }
 
 end_last_stand(clientnum) {
@@ -37,15 +36,14 @@ end_last_stand(clientnum) {
 
   println("Last stand ending for client " + clientnum);
 
-  if(level.localplayers.size == 1) {
+  if(level.localplayers.size == 1)
     setbusstate("return_default");
-  }
 
   waitrealtime(0.7);
 
   println("Gasp.");
 
-  playSound(clientnum, "revive_gasp");
+  playsound(clientnum, "revive_gasp");
 }
 
 last_stand_thread(clientnum) {
@@ -64,24 +62,22 @@ last_stand_thread(clientnum) {
   vol = 0.5;
 
   while(true) {
-    id = playSound(clientnum, "chr_heart_beat");
+    id = playsound(clientnum, "chr_heart_beat");
     setsoundvolume(id, vol);
     waitrealtime(pause);
 
     if(pause < 2.0) {
       pause = pause * 1.05;
 
-      if(pause > 2.0) {
+      if(pause > 2.0)
         pause = 2.0;
-      }
     }
 
     if(vol < 1.0) {
       vol = vol * 1.05;
 
-      if(vol > 1.0) {
+      if(vol > 1.0)
         vol = 1.0;
-      }
     }
   }
 }
@@ -92,22 +88,19 @@ last_stand_monitor(clientnum, state, oldstate) {
 
   if(state == "1") {
     if(!level._laststand[clientnum]) {
-      if(!isDefined(level.lslooper)) {
+      if(!isDefined(level.lslooper))
         level.lslooper = spawn(0, player.origin, "script.origin");
-      }
 
       player thread last_stand_thread(clientnum);
 
-      if(players.size <= 1) {
-        level.lslooper playLoopSound("evt_laststand_loop", 0.3);
-      }
+      if(players.size <= 1)
+        level.lslooper playloopsound("evt_laststand_loop", 0.3);
 
       level._laststand[clientnum] = 1;
     }
   } else if(level._laststand[clientnum]) {
-    if(isDefined(level.lslooper)) {
+    if(isDefined(level.lslooper))
       level.lslooper stoploopsound(0.7);
-    }
 
     player notify("lastStandEnd");
     level._laststand[clientnum] = 0;
@@ -143,7 +136,8 @@ damage_visionset_think(local_client_num) {
   }
 }
 
-default_flag_change_handler(localclientnum, flag, set, newent) {}
+default_flag_change_handler(localclientnum, flag, set, newent) {
+}
 
 init_client_flags() {
   level.cf_player_underwater = 15;
@@ -220,9 +214,8 @@ main() {
   level.wiiu = getdvar(#"wiiuGame") == "true";
   level.console = level.xenon || level.ps3 || level.wiiu;
 
-  if(!isDefined(level.scr_anim)) {
+  if(!isDefined(level.scr_anim))
     level.scr_anim[0][0] = 0;
-  }
 
   setup_default_client_flag_callbacks();
   onplayerconnect_callback(::on_player_connect);
@@ -235,9 +228,8 @@ main() {
   clientscripts\_helicopter_sounds::init();
   clientscripts\_qrcode::init();
 
-  if(level.wiiu) {
+  if(level.wiiu)
     clientscripts\_wiiu_audio_optimizations::main();
-  }
 
   clientscripts\_radiant_live_update::main();
 

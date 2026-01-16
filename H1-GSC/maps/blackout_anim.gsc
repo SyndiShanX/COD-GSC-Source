@@ -59,9 +59,8 @@ main() {
     level.scr_anim["gaz"]["cliff_runin"] = % h1_blackout_gaz_cliff_runin;
     level.scr_anim["kamarov"]["cliff_prestart"] = % h1_blackout_kam_cliff_gunaway;
 
-    if(getdvarint("loc_language", 99) == 0) {
+    if(getdvarint("loc_language", 99) == 0)
       level.scr_face["kamarov"]["final_assault"] = % h1_blackout_kamarov_cliff_start_dialog_facial;
-    }
 
     level.scr_anim["price"]["cliff_start"] = % h1_blackout_price_cliff;
     level.scr_anim["kamarov"]["cliff_start"] = % h1_blackout_kam_cliff;
@@ -235,11 +234,10 @@ main() {
   level.scr_anim["gaz"]["captainpricebrief"] = % h1_blackout_captainpricebrief_gaz;
   level.scr_sound["price"]["expecting_us"] = "blackout_pri_halfaclick";
 
-  if(getdvarint("use_old_captainprice_briefing") == 1) {
+  if(getdvarint("use_old_captainprice_briefing") == 1)
     level.scr_face["price"]["expecting_us"] = % blackout_price_facial_moveout;
-  } else {
+  else
     maps\_anim::addnotetrack_dialogue("price", "dialog", "captainpricebrief", "blackout_pri_halfaclick");
-  }
 
   level.scr_sound["price"]["wont_shoot_us"] = "blackout_pri_shootatus";
   level.scr_sound["price"]["lets_get_to_it"] = "blackout_pri_gettoit";
@@ -358,9 +356,9 @@ player_rappel() {
   level.scr_model["player_rig"] = "worldbody_h1_sas_woodland";
   level.scr_anim["player_rig"]["rappel"] = % sniper_escape_player_rappel;
 
-  if(getdvarint("use_old_evac") == 1) {
+  if(getdvarint("use_old_evac") == 1)
     level.scr_anim["player_rig"]["player_evac"] = % blackout_bh_evac_player;
-  } else {
+  else {
     level.scr_animtree["evac_rig"] = #animtree;
     level.scr_model["evac_rig"] = "worldbody_h1_sas_woodland";
     level.scr_anim["evac_rig"]["player_evac"] = % h1_blackout_bh_evac_player;

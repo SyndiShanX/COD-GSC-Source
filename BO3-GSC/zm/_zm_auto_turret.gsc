@@ -18,30 +18,30 @@
 #namespace zm_auto_turret;
 
 function autoexec __init__sytem__() {
-  system::register("zm_auto_turret", &__init__, &__main__, undefined);
+  system::register("zm_auto_turret", & __init__, & __main__, undefined);
 }
 
 function __init__() {
   level._effect["auto_turret_light"] = "dlc4/genesis/fx_light_turret_auto";
-  zm_spawner::register_zombie_death_event_callback(&death_check_for_challenge_updates);
+  zm_spawner::register_zombie_death_event_callback( & death_check_for_challenge_updates);
 }
 
 function __main__() {
-  level.auto_turret_array = getEntArray("auto_turret_trigger", "script_noteworthy");
-  if(!isDefined(level.auto_turret_array)) {
+  level.auto_turret_array = getentarray("auto_turret_trigger", "script_noteworthy");
+  if(!isdefined(level.auto_turret_array)) {
     return;
   }
   level.curr_auto_turrets_active = 0;
-  if(!isDefined(level.max_auto_turrets_active)) {
+  if(!isdefined(level.max_auto_turrets_active)) {
     level.max_auto_turrets_active = 2;
   }
-  if(!isDefined(level.auto_turret_cost)) {
+  if(!isdefined(level.auto_turret_cost)) {
     level.auto_turret_cost = 1500;
   }
-  if(!isDefined(level.auto_turret_timeout)) {
+  if(!isdefined(level.auto_turret_timeout)) {
     level.auto_turret_timeout = 30;
   }
-  for(i = 0; i < level.auto_turret_array.size; i++) {
+  for (i = 0; i < level.auto_turret_array.size; i++) {
     level.auto_turret_array[i] setcursorhint("HINT_NOICON");
     level.auto_turret_array[i] sethintstring(&"ZOMBIE_NEED_POWER");
     level.auto_turret_array[i] usetriggerrequirelookat();
@@ -52,12 +52,12 @@ function __main__() {
 }
 
 function auto_turret_think() {
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target)) {
     return;
   }
-  turret_array = getEntArray(self.target, "targetname");
-  if(isDefined(self.target)) {
-    for(i = 0; i < turret_array.size; i++) {
+  turret_array = getentarray(self.target, "targetname");
+  if(isdefined(self.target)) {
+    for (i = 0; i < turret_array.size; i++) {
       if(turret_array[i].model == "zombie_zapper_handle") {
         self.handle = turret_array[i];
         continue;
@@ -69,17 +69,17 @@ function auto_turret_think() {
       }
     }
   }
-  if(!isDefined(self.turret)) {
+  if(!isdefined(self.turret)) {
     return;
   }
   self.turret.takedamage = 0;
   self.audio_origin = self.origin;
-  if(isDefined(level.var_774896e3)) {
+  if(isdefined(level.var_774896e3)) {
     level flag::wait_till(level.var_774896e3);
   } else {
     level flag::wait_till("power_on");
   }
-  for(;;) {
+  for (;;) {
     cost = level.auto_turret_cost;
     self sethintstring(&"ZOMBIE_AUTO_TURRET", cost);
     self waittill("trigger", player);
@@ -91,7 +91,7 @@ function auto_turret_think() {
       continue;
     }
     if(!player zm_score::can_player_purchase(cost)) {
-      self playSound("zmb_turret_deny");
+      self playsound("zmb_turret_deny");
       player thread play_no_money_turret_dialog();
       continue;
     }
@@ -101,7 +101,7 @@ function auto_turret_think() {
     var_736ddf4 = spawn("script_origin", self.origin);
     playsoundatposition("zmb_cha_ching", self.origin);
     playsoundatposition("zmb_turret_startup", self.origin);
-    var_736ddf4 playLoopSound("zmb_turret_loop");
+    var_736ddf4 playloopsound("zmb_turret_loop");
     self triggerenable(0);
     self waittill("turret_deactivated");
     var_736ddf4 stoploopsound();
@@ -112,9 +112,9 @@ function auto_turret_think() {
 }
 
 function activate_move_handle() {
-  if(isDefined(self.handle)) {
+  if(isdefined(self.handle)) {
     self.handle rotatepitch(160, 0.5);
-    self.handle playSound("amb_sparks_l_b");
+    self.handle playsound("amb_sparks_l_b");
     self.handle waittill("rotatedone");
     self notify("switch_activated");
     self waittill("turret_deactivated");
@@ -131,10 +131,10 @@ function auto_turret_activate() {
   if(level.max_auto_turrets_active <= 0) {
     return;
   }
-  while(level.curr_auto_turrets_active >= level.max_auto_turrets_active) {
+  while (level.curr_auto_turrets_active >= level.max_auto_turrets_active) {
     worst_turret = undefined;
     worst_turret_time = -1;
-    for(i = 0; i < level.auto_turret_array.size; i++) {
+    for (i = 0; i < level.auto_turret_array.size; i++) {
       if(level.auto_turret_array[i] == self) {
         continue;
       }
@@ -146,7 +146,7 @@ function auto_turret_activate() {
         worst_turret_time = level.auto_turret_array[i].curr_time;
       }
     }
-    if(isDefined(worst_turret)) {
+    if(isdefined(worst_turret)) {
       worst_turret auto_turret_deactivate();
     } else {
       assert(0, "");
@@ -155,8 +155,8 @@ function auto_turret_activate() {
   self.turret vehicle_ai::turnon();
   self.turret_active = 1;
   self.turret_fx = util::spawn_model("tag_origin", self.turret.origin, self.turret.angles);
-  playFXOnTag(level._effect["auto_turret_light"], self.turret_fx, "tag_origin");
-  if(isDefined(self.turret.activated_by_player)) {
+  playfxontag(level._effect["auto_turret_light"], self.turret_fx, "tag_origin");
+  if(isdefined(self.turret.activated_by_player)) {
     self.turret.activated_by_player thread zm_audio::create_and_play_dialog("auto_turret", "activated");
   }
   self.curr_time = level.auto_turret_timeout;
@@ -176,18 +176,18 @@ function auto_turret_deactivate() {
 
 function auto_turret_update_timeout() {
   self endon("turret_deactivated");
-  while(self.curr_time > 0) {
+  while (self.curr_time > 0) {
     wait(1);
     self.curr_time--;
   }
 }
 
 function death_check_for_challenge_updates(e_attacker) {
-  if(!isDefined(e_attacker)) {
+  if(!isdefined(e_attacker)) {
     return;
   }
   if(e_attacker._trap_type === "auto_turret") {
-    if(isDefined(e_attacker.activated_by_player)) {
+    if(isdefined(e_attacker.activated_by_player)) {
       e_attacker.activated_by_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
     }
   }

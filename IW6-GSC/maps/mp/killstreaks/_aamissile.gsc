@@ -22,9 +22,8 @@ tryUseAAMissile(lifeId, streakName) {
   self setUsingRemote("aamissile");
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak();
   if(result != "success") {
-    if(result != "disconnect") {
+    if(result != "disconnect")
       self clearUsingRemote();
-    }
 
     return false;
   }
@@ -40,25 +39,22 @@ getTargets() {
 
   if(isDefined(level.littleBirds) && level.littleBirds.size) {
     foreach(lb in level.littleBirds) {
-      if(lb.team != self.team) {
+      if(lb.team != self.team)
         lbTargets[lbTargets.size] = lb;
-      }
     }
   }
 
   if(isDefined(level.helis) && level.helis.size) {
     foreach(heli in level.helis) {
-      if(heli.team != self.team) {
+      if(heli.team != self.team)
         heliTargets[heliTargets.size] = heli;
-      }
     }
   }
 
-  if(isDefined(heliTargets) && heliTargets.size) {
+  if(isDefined(heliTargets) && heliTargets.size)
     return heliTargets[0];
-  } else if(isDefined(lbTargets) && lbTargets.size) {
+  else if(isDefined(lbTargets) && lbTargets.size)
     return lbTargets[0];
-  }
 }
 
 aa_missile_fire(lifeId, player) {
@@ -70,9 +66,9 @@ aa_missile_fire(lifeId, player) {
 
   bestTarget = player getTargets();
 
-  if(!isDefined(bestTarget)) {
+  if(!isDefined(bestTarget))
     targetPos = (0, 0, 0);
-  } else {
+  else {
     targetPos = bestTarget.origin;
     upVector = (0, 0, 1) * (targetPos) + (0, 0, 1000);
   }
@@ -110,22 +106,19 @@ MissileEyes(player, rocket) {
     player CameraLinkTo(rocket, "tag_origin");
     player ControlsLinkTo(rocket);
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       player setThirdPersonDOF(false);
-    }
 
     rocket waittill("death");
 
-    if(isDefined(rocket)) {
+    if(isDefined(rocket))
       player maps\mp\_matchdata::logKillstreakEvent("predator_missile", rocket.origin);
-    }
 
     player ControlsUnlink();
     player freezeControlsWrapper(true);
 
-    if(!level.gameEnded || isDefined(player.finalKill)) {
+    if(!level.gameEnded || isDefined(player.finalKill))
       player thread staticEffect(0.5);
-    }
 
     wait(0.5);
 
@@ -133,9 +126,8 @@ MissileEyes(player, rocket) {
 
     player CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       player setThirdPersonDOF(true);
-    }
 
   }
 
@@ -186,9 +178,8 @@ Player_CleanupOnTeamChange(rocket) {
     self ControlsUnlink();
     self CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson")) {
+    if(getDvarInt("camera_thirdPerson"))
       self setThirdPersonDOF(true);
-    }
   }
   self clearUsingRemote();
 
@@ -213,7 +204,6 @@ Player_CleanupOnGameEnded(rocket) {
   self ControlsUnlink();
   self CameraUnlink();
 
-  if(getDvarInt("camera_thirdPerson")) {
+  if(getDvarInt("camera_thirdPerson"))
     self setThirdPersonDOF(true);
-  }
 }

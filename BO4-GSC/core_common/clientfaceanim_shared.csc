@@ -8,6 +8,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace clientfaceanim;
 
 autoexec __init__system__() {
@@ -54,17 +55,17 @@ private on_player_shutdown(localclientnum) {
 buildandvalidatefacialanimationlist(localclientnum) {
   if(!isDefined(level.__clientfacialanimationslist)) {
     level.__clientfacialanimationslist = [];
-    level.__clientfacialanimationslist[# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", # "ai_t8_face_hero_generic_idle_2", # "ai_t8_face_hero_generic_idle_3");
-    level.__clientfacialanimationslist[# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", # "ai_t8_face_hero_aim_fire_2");
-    level.__clientfacialanimationslist[# "death"] = array(#"ai_t8_face_hero_dth_1", # "ai_t8_face_hero_dth_2", # "ai_t8_face_hero_dth_3");
-    level.__clientfacialanimationslist[# "melee"] = array(#"ai_t8_face_hero_melee_1");
-    level.__clientfacialanimationslist[# "pain"] = array(#"ai_t8_face_hero_pain_1");
-    level.__clientfacialanimationslist[# "swimming"] = array(#"mp_t8_face_hero_swim_idle_1");
-    level.__clientfacialanimationslist[# "jumping"] = array(#"mp_t8_face_hero_jump_idle_1");
-    level.__clientfacialanimationslist[# "sliding"] = array(#"mp_t8_face_hero_slides_1");
-    level.__clientfacialanimationslist[# "sprinting"] = array(#"mp_t8_face_hero_sprint_1");
-    level.__clientfacialanimationslist[# "wallrunning"] = array(#"mp_t8_face_hero_wall_run_1");
-    deathanims = level.__clientfacialanimationslist[# "death"];
+    level.__clientfacialanimationslist[#"combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
+    level.__clientfacialanimationslist[#"combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2");
+    level.__clientfacialanimationslist[#"death"] = array(#"ai_t8_face_hero_dth_1", #"ai_t8_face_hero_dth_2", #"ai_t8_face_hero_dth_3");
+    level.__clientfacialanimationslist[#"melee"] = array(#"ai_t8_face_hero_melee_1");
+    level.__clientfacialanimationslist[#"pain"] = array(#"ai_t8_face_hero_pain_1");
+    level.__clientfacialanimationslist[#"swimming"] = array(#"mp_t8_face_hero_swim_idle_1");
+    level.__clientfacialanimationslist[#"jumping"] = array(#"mp_t8_face_hero_jump_idle_1");
+    level.__clientfacialanimationslist[#"sliding"] = array(#"mp_t8_face_hero_slides_1");
+    level.__clientfacialanimationslist[#"sprinting"] = array(#"mp_t8_face_hero_sprint_1");
+    level.__clientfacialanimationslist[#"wallrunning"] = array(#"mp_t8_face_hero_wall_run_1");
+    deathanims = level.__clientfacialanimationslist[#"death"];
 
     foreach(deathanim in deathanims) {
       assert(!isanimlooping(localclientnum, deathanim), "<dev string:x38>" + deathanim + "<dev string:x60>");
@@ -123,7 +124,7 @@ private function_26ff990a(local_client_num) {
       continue;
     }
 
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       continue;
     }
 
@@ -188,21 +189,21 @@ private updatefacialanimforplayer(localclientnum, player) {
   }
 
   if(player isplayerdead()) {
-    nextfacestate = # "death";
+    nextfacestate = #"death";
   } else if(player isplayerfiring()) {
-    nextfacestate = # "combat_shoot";
+    nextfacestate = #"combat_shoot";
   } else if(player isplayersliding()) {
-    nextfacestate = # "sliding";
+    nextfacestate = #"sliding";
   } else if(player isplayerwallrunning()) {
-    nextfacestate = # "wallrunning";
+    nextfacestate = #"wallrunning";
   } else if(player isplayersprinting()) {
-    nextfacestate = # "sprinting";
+    nextfacestate = #"sprinting";
   } else if(player isplayerjumping() || player isplayerdoublejumping()) {
-    nextfacestate = # "jumping";
+    nextfacestate = #"jumping";
   } else if(player isplayerswimming()) {
-    nextfacestate = # "swimming";
+    nextfacestate = #"swimming";
   } else {
-    nextfacestate = # "combat";
+    nextfacestate = #"combat";
   }
 
   if(player._currentfacestate == "inactive" || currfacestate != nextfacestate) {
@@ -224,13 +225,13 @@ private applynewfaceanim(localclientnum, animation) {
 }
 
 private applydeathanim(localclientnum) {
-  if(isDefined(self._currentfacestate) && self._currentfacestate == # "death") {
+  if(isDefined(self._currentfacestate) && self._currentfacestate == #"death") {
     return;
   }
 
-  if(isDefined(self) && isDefined(level.__clientfacialanimationslist) && isDefined(level.__clientfacialanimationslist[# "death"])) {
-    self._currentfacestate = # "death";
-    applynewfaceanim(localclientnum, array::random(level.__clientfacialanimationslist[# "death"]));
+  if(isDefined(self) && isDefined(level.__clientfacialanimationslist) && isDefined(level.__clientfacialanimationslist[#"death"])) {
+    self._currentfacestate = #"death";
+    applynewfaceanim(localclientnum, array::random(level.__clientfacialanimationslist[#"death"]));
   }
 }
 

@@ -72,7 +72,7 @@ watch_fire_sale() {
 }
 
 turnLightGreen(name, playfx) {
-  zapper_lights = getEntArray(name, "script_noteworthy");
+  zapper_lights = getentarray(name, "script_noteworthy");
   for(i = 0; i < zapper_lights.size; i++) {
     if(isDefined(zapper_lights[i].fx)) {
       zapper_lights[i].fx delete();
@@ -82,14 +82,14 @@ turnLightGreen(name, playfx) {
       zapper_lights[i].fx = maps\_zombiemode_net::network_safe_spawn("trap_light_green", 2, "script_model", (zapper_lights[i].origin[0], zapper_lights[i].origin[1], zapper_lights[i].origin[2] - 10));
       zapper_lights[i].fx setModel("tag_origin");
       zapper_lights[i].fx.angles = zapper_lights[i].angles;
-      playFXOnTag(level._effect["boxlight_light_ready"], zapper_lights[i].fx, "tag_origin");
+      playfxontag(level._effect["boxlight_light_ready"], zapper_lights[i].fx, "tag_origin");
     } else
       zapper_lights[i] setModel("zombie_zapper_cagelight");
   }
 }
 
 turnLightRed(name, playfx) {
-  zapper_lights = getEntArray(name, "script_noteworthy");
+  zapper_lights = getentarray(name, "script_noteworthy");
   for(i = 0; i < zapper_lights.size; i++) {
     if(isDefined(zapper_lights[i].fx)) {
       zapper_lights[i].fx delete();
@@ -99,7 +99,7 @@ turnLightRed(name, playfx) {
       zapper_lights[i].fx = maps\_zombiemode_net::network_safe_spawn("trap_light_red", 2, "script_model", (zapper_lights[i].origin[0], zapper_lights[i].origin[1], zapper_lights[i].origin[2] - 10));
       zapper_lights[i].fx setModel("tag_origin");
       zapper_lights[i].fx.angles = zapper_lights[i].angles;
-      playFXOnTag(level._effect["boxlight_light_notready"], zapper_lights[i].fx, "tag_origin");
+      playfxontag(level._effect["boxlight_light_notready"], zapper_lights[i].fx, "tag_origin");
     } else
       zapper_lights[i] setModel("zombie_zapper_cagelight");
   }

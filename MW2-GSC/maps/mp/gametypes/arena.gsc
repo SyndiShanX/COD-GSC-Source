@@ -35,9 +35,8 @@ Axis players spawn away from enemies and near their team at one of these positio
 Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getdvar("mapname") == "mp_background")
     return;
-  }
 
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
@@ -65,15 +64,14 @@ main() {
 
   game["dialog"]["gametype"] = "arena";
 
-  if(getDvarInt("g_hardcore")) {
+  if(getDvarInt("g_hardcore"))
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("camera_thirdPerson")) {
+  else if(getDvarInt("camera_thirdPerson"))
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  } else if(getDvarInt("scr_diehard")) {
+  else if(getDvarInt("scr_diehard"))
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
 
-  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
 }
 
 onPrecacheGameType() {
@@ -84,14 +82,14 @@ onPrecacheGameType() {
   precacheShader("waypoint_captureneutral");
   precacheShader("waypoint_capture");
   precacheShader("waypoint_defend");
+
 }
 
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -100,18 +98,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", &"OBJECTIVES_ARENA");
-  setObjectiveText("axis", &"OBJECTIVES_ARENA");
+  setObjectiveText("allies", & "OBJECTIVES_ARENA");
+  setObjectiveText("axis", & "OBJECTIVES_ARENA");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_ARENA");
-    setObjectiveScoreText("axis", &"OBJECTIVES_ARENA");
+    setObjectiveScoreText("allies", & "OBJECTIVES_ARENA");
+    setObjectiveScoreText("axis", & "OBJECTIVES_ARENA");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_ARENA_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_ARENA_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_ARENA_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_ARENA_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_ARENA_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_ARENA_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_ARENA_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_ARENA_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -154,18 +152,18 @@ precacheFlag() {
   precacheString(&"MP_ENEMY_FLAG_CAPTURED_BY");
   precacheString(&"MP_NEUTRAL_FLAG_CAPTURED_BY");
   precacheString(&"MP_FRIENDLY_FLAG_CAPTURED_BY");
+
 }
 
 arenaTimeFlagWaiter() {
   level endon("down_to_one");
   level endon("game_end");
 
-  for(;;) {
+  for (;;) {
     timeLeft = maps\mp\gametypes\_gamelogic::getTimeRemaining();
 
-    if(timeLeft < 61000) {
+    if(timeLeft < 61000)
       break;
-    }
 
     wait(1);
   }
@@ -178,15 +176,14 @@ arenaFlagWaiter() {
   level endon("game_end");
   level endon("arena_flag_time");
 
-  for(;;) {
-    if(level.inGracePeriod == 0) {
+  for (;;) {
+    if(level.inGracePeriod == 0)
       break;
-    }
 
     wait(0.05);
   }
 
-  for(;;) {
+  for (;;) {
     if(getTeamPlayersAlive("axis") == 1) {
       thread arenaFlag();
       level notify("down_to_one");
@@ -204,9 +201,8 @@ arenaFlagWaiter() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -232,9 +228,8 @@ onNormalDeath(victim, attacker, lifeId) {
 
   team = victim.team;
 
-  if(game["state"] == "postgame") {
+  if(game["state"] == "postgame")
     attacker.finalKill = true;
-  }
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
@@ -267,9 +262,8 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update) {
+  if(update)
     maps\mp\gametypes\_spectating::updateSpectateSettings();
-  }
 }
 
 arenaFlag() {
@@ -341,7 +335,7 @@ arenaFlag() {
 }
 
 setupDomFlag(primaryFlags, secondaryFlags) {
-  for(index = 0; index < primaryFlags.size; index++) {
+  for (index = 0; index < primaryFlags.size; index++) {
     label = primaryFlags[index].script_label;
 
     if(label != "_b") {
@@ -371,7 +365,7 @@ giveFlagCaptureXP(touchList) {
   WaitTillSlowProcessAllowed();
 
   players = getArrayKeys(touchList);
-  for(index = 0; index < players.size; index++) {
+  for (index = 0; index < players.size; index++) {
     player = touchList[players[index]].player;
     player thread[[level.onXPEvent]]("capture");
     maps\mp\gametypes\_gamescore::givePlayerScore("capture", player);
@@ -397,17 +391,17 @@ onUse(player) {
 
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
+    thread printAndSoundOnEveryone(team, otherTeam, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
 
     statusDialog("captured_a", team);
     statusDialog("enemy_has_a", otherTeam);
   } else
-    thread printAndSoundOnEveryone(team, oldTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
+    thread printAndSoundOnEveryone(team, oldTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
 
   thread giveFlagCaptureXP(self.touchList[team]);
   player notify("objective", "captured");
 
-  thread flagCaptured(team, &"MP_DOM_NEUTRAL_FLAG_CAPTURED");
+  thread flagCaptured(team, & "MP_DOM_NEUTRAL_FLAG_CAPTURED");
 }
 
 onBeginUse(player) {
@@ -425,11 +419,10 @@ onBeginUse(player) {
     return;
   }
 
-  if(ownerTeam == "allies") {
+  if(ownerTeam == "allies")
     otherTeam = "axis";
-  } else {
+  else
     otherTeam = "allies";
-  }
 
   self.objPoints["allies"] thread maps\mp\gametypes\_objpoints::startFlashing();
   self.objPoints["axis"] thread maps\mp\gametypes\_objpoints::startFlashing();
@@ -453,9 +446,8 @@ onEndUse(team, player, success) {
 
 statusDialog(dialog, team) {
   time = getTime();
-  if(getTime() < level.lastStatus[team] + 6000) {
+  if(getTime() < level.lastStatus[team] + 6000)
     return;
-  }
 
   thread delayedLeaderDialog(dialog, team);
   level.lastStatus[team] = getTime();

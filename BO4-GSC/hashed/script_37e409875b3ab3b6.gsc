@@ -15,6 +15,7 @@
 #include scripts\zm_common\ai\planner_zm_generic_commander;
 #include scripts\zm_common\ai\planner_zm_generic_squad;
 #include scripts\zm_common\ai\planner_zm_squad_utility;
+
 #namespace namespace_4932f496;
 
 private _createcommanderplanner(team) {
@@ -28,7 +29,7 @@ private _createsquadplanner(team) {
 }
 
 createcommander() {
-  team = # "allies";
+  team = #"allies";
   commander = plannercommanderutility::createcommander(team, _createcommanderplanner(team), _createsquadplanner(team));
   plannergenericcommander::commanderdaemons(commander);
   plannercommanderutility::adddaemon(commander, "daemonZmBlockers");

@@ -7,9 +7,11 @@
 #include clientscripts\mp\createfx\mp_dockside_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_light_flour_dbl_oval_street_wrm"] = loadfx("light/fx_light_flour_dbl_oval_street_wrm");
@@ -65,7 +67,6 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

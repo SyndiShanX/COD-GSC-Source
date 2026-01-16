@@ -18,11 +18,10 @@ main() {
 }
 
 startflashbanged() {
-  if(isDefined(self.flashduration)) {
+  if(isDefined(self.flashduration))
     duration = self.flashduration;
-  } else {
+  else
     duration = self getflashbangedstrength() * 1000;
-  }
 
   self.flashendtime = gettime() + duration;
   self notify("flashed");

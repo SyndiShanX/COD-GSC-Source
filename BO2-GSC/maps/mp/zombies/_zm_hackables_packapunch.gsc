@@ -9,11 +9,11 @@
 #include maps\mp\zombies\_zm_equip_hacker;
 
 hack_packapunch() {
-  vending_weapon_upgrade_trigger = getEntArray("specialty_weapupgrade", "script_noteworthy");
+  vending_weapon_upgrade_trigger = getentarray("specialty_weapupgrade", "script_noteworthy");
   perk = getent(vending_weapon_upgrade_trigger[0].target, "targetname");
 
   if(isDefined(perk)) {
-    struct = spawnStruct();
+    struct = spawnstruct();
     struct.origin = perk.origin + anglestoright(perk.angles) * 26 + vectorscale((0, 0, 1), 48.0);
     struct.radius = 48;
     struct.height = 48;
@@ -33,9 +33,8 @@ pack_trigger_think() {
     flag_wait("enter_nml");
     self.script_int = -1000;
 
-    while(flag("enter_nml")) {
+    while(flag("enter_nml"))
       wait 1.0;
-    }
   }
 }
 

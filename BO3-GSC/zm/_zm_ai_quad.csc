@@ -9,7 +9,7 @@
 #namespace zm_ai_quad;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_quad", &__init__, undefined, undefined);
+  system::register("zm_ai_quad", & __init__, undefined, undefined);
 }
 
 function __init__() {

@@ -8,7 +8,8 @@
 #include clientscripts\mp\createfx\mp_dig_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_lf_mp_dig_sun1"] = loadfx("lens_flares/fx_lf_mp_dig_sun1");
@@ -66,7 +67,6 @@ main() {
   precache_fxanim_props_dlc4();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

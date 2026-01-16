@@ -6,6 +6,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\zm_common\callings\zm_callings;
 #include scripts\zm_common\zm_devgui;
+
 #namespace zm_callings_devgui;
 
 function_9f47471() {
@@ -16,7 +17,7 @@ function_9f47471() {
     return;
   }
 
-  var_94237d8 = array(#"hash_20deab97abbf7b12", # "hash_764a5fc3ba8820d2", # "hash_647ebc7d24425fee", # "tcmgoal");
+  var_94237d8 = array(#"hash_20deab97abbf7b12", #"hash_764a5fc3ba8820d2", #"hash_647ebc7d24425fee", #"tcmgoal");
   i = 0;
 
   foreach(var_acbd7392 in var_94237d8) {
@@ -119,3 +120,4 @@ function_6cbc14bb(cmd) {
     p function_1d4f22e4(cmd);
   }
 }
+

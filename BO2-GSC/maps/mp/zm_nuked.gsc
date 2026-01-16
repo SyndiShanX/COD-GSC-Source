@@ -41,9 +41,8 @@ survival_init() {
   level.force_team_characters = 1;
   level.should_use_cia = 0;
 
-  if(randomint(100) > 50) {
+  if(randomint(100) > 50)
     level.should_use_cia = 1;
-  }
 
   level.precachecustomcharacters = ::precache_team_characters;
   level.givecustomcharacters = ::give_team_characters;
@@ -55,12 +54,11 @@ zstandard_preinit() {
 }
 
 createfx_callback() {
-  ents = getEntArray();
+  ents = getentarray();
 
   for(i = 0; i < ents.size; i++) {
-    if(ents[i].classname != "info_player_start") {
+    if(ents[i].classname != "info_player_start")
       ents[i] delete();
-    }
   }
 }
 
@@ -125,7 +123,8 @@ main() {
   maps\mp\zm_nuked_perks::init_nuked_perks();
   maps\mp\zombies\_zm::init();
 
-  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {} else
+  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
+  } else
     level.custom_intermission = ::nuked_standard_intermission;
 
   level thread maps\mp\_sticky_grenade::init();
@@ -166,9 +165,8 @@ main() {
   level thread sndswitchannouncervox("sam");
   level thread sndgameend();
 
-  if(level.round_number == 1 && is_true(level.enable_magic) && level.gamedifficulty != 0) {
+  if(level.round_number == 1 && is_true(level.enable_magic) && level.gamedifficulty != 0)
     level thread sndmusiceastereggs();
-  }
 
   setdvar("zombiemode_path_minz_bias", 28);
   level.speed_change_round = 15;
@@ -179,9 +177,8 @@ main() {
 }
 
 door_powerup_drop(powerup_name, drop_spot, powerup_team, powerup_location) {
-  if(isDefined(level.door_powerup)) {
+  if(isDefined(level.door_powerup))
     level.door_powerup powerup_delete();
-  }
 
   powerup = maps\mp\zombies\_zm_net::network_safe_spawn("powerup", 1, "script_model", drop_spot + vectorscale((0, 0, 1), 40.0));
   level notify("powerup_dropped", powerup);
@@ -217,9 +214,8 @@ perks_behind_door() {
   while(true) {
     level waittill("nuke_clock_moved");
 
-    if(index == door_perk_drop_list.size) {
+    if(index == door_perk_drop_list.size)
       index = 0;
-    }
 
     perk_type = door_perk_drop_list[index];
     index++;
@@ -238,22 +234,21 @@ nuked_doomsday_clock_think() {
 }
 
 update_doomsday_clock(min_hand_model) {
-  while(is_true(min_hand_model.is_updating)) {
+  while(is_true(min_hand_model.is_updating))
     wait 0.05;
-  }
 
   min_hand_model.is_updating = 1;
 
   if(min_hand_model.position == 0) {
     min_hand_model.position = 3;
     min_hand_model rotatepitch(-90, 1);
-    min_hand_model playSound("zmb_clock_hand");
+    min_hand_model playsound("zmb_clock_hand");
     min_hand_model waittill("rotatedone");
-    min_hand_model playSound("zmb_clock_chime");
+    min_hand_model playsound("zmb_clock_chime");
   } else {
     min_hand_model.position--;
     min_hand_model rotatepitch(30, 1);
-    min_hand_model playSound("zmb_clock_hand");
+    min_hand_model playsound("zmb_clock_hand");
     min_hand_model waittill("rotatedone");
   }
 
@@ -295,9 +290,8 @@ fall_down(vdir, stance) {
 
   self freezecontrols(1);
 
-  if(falling) {
+  if(falling)
     linker waittill("movedone");
-  }
 
   self giveweapon("death_throe_zm");
   self switchtoweapon("death_throe_zm");
@@ -358,9 +352,8 @@ melee_miss_func() {
       dist_sq = distancesquared(self.enemy.origin, self.origin);
       melee_dist_sq = self.meleeattackdist * self.meleeattackdist;
 
-      if(dist_sq < melee_dist_sq) {
+      if(dist_sq < melee_dist_sq)
         self.enemy dodamage(self.meleedamage, self.origin, self, self, "none", "MOD_MELEE");
-      }
     }
   }
 }
@@ -368,29 +361,26 @@ melee_miss_func() {
 zombie_init_done() {
   self.allowpain = 0;
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "crater") {
+  if(isDefined(self.script_parameters) && self.script_parameters == "crater")
     self thread zombie_crater_locomotion();
-  }
 
   self setphysparams(15, 0, 48);
 }
 
 zombie_crater_locomotion() {
   self endon("death");
-  stand_trigger = getEntArray("zombie_crawler_standup", "targetname");
+  stand_trigger = getentarray("zombie_crawler_standup", "targetname");
 
-  while(is_true(self.needs_run_update)) {
+  while(is_true(self.needs_run_update))
     wait 0.1;
-  }
 
   self allowpitchangle(1);
   self setpitchorient();
 
-  if(self.zombie_move_speed == "sprint") {
+  if(self.zombie_move_speed == "sprint")
     self setanimstatefromasd("zm_move_sprint_crawl", 2);
-  } else {
+  else
     self setanimstatefromasd("zm_move_sprint_crawl", 1);
-  }
 
   touched = 0;
 
@@ -422,10 +412,10 @@ zombie_path_timer_override() {
 }
 
 nuked_update_traversals() {
-  level.yellow_awning_clip = getEntArray("yellow_awning_clip", "targetname");
-  level.yellow_patio_clip = getEntArray("yellow_patio_clip", "targetname");
-  level.green_awning_clip = getEntArray("green_awning_clip", "targetname");
-  level.green_patio_clip = getEntArray("green_patio_clip", "targetname");
+  level.yellow_awning_clip = getentarray("yellow_awning_clip", "targetname");
+  level.yellow_patio_clip = getentarray("yellow_patio_clip", "targetname");
+  level.green_awning_clip = getentarray("green_awning_clip", "targetname");
+  level.green_patio_clip = getentarray("green_patio_clip", "targetname");
   level.yellow_awning = 0;
   level.yellow_patio = 0;
   level.green_awning = 0;
@@ -561,7 +551,8 @@ setup_rex_starts() {
   add_gameloc("nuked", ::dummy, "nuked", ::dummy);
 }
 
-dummy() {}
+dummy() {
+}
 
 precache_team_characters() {
   precachemodel("c_zom_player_cdc_fb");
@@ -571,18 +562,20 @@ precache_team_characters() {
 }
 
 give_team_characters() {
-  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_suit_viewhands")) {
+  if(isDefined(level.hotjoin_player_setup) && [
+      [level.hotjoin_player_setup]
+    ]("c_zom_suit_viewhands")) {
     return;
   }
   self detachall();
   self set_player_is_female(0);
 
   if(isDefined(level.should_use_cia) && level.should_use_cia) {
-    self setModel("c_zom_player_cia_fb");
+    self setmodel("c_zom_player_cia_fb");
     self setviewmodel("c_zom_suit_viewhands");
     self.characterindex = 0;
   } else {
-    self setModel("c_zom_player_cdc_fb");
+    self setmodel("c_zom_player_cdc_fb");
     self setviewmodel("c_zom_hazmat_viewhands_light");
     self.characterindex = 1;
   }
@@ -598,9 +591,8 @@ initcharacterstartindex() {
 }
 
 selectcharacterindextouse() {
-  if(level.characterstartindex >= 4) {
+  if(level.characterstartindex >= 4)
     level.characterstartindex = 0;
-  }
 
   self.characterindex = level.characterstartindex;
   level.characterstartindex++;
@@ -639,9 +631,11 @@ include_powerups() {
   include_powerup("fire_sale");
 }
 
-include_perks() {}
+include_perks() {
+}
 
-include_equipment_for_level() {}
+include_equipment_for_level() {
+}
 
 include_weapons() {
   include_weapon("knife_zm", 0);
@@ -766,49 +760,48 @@ offhand_weapon_give_override(str_weapon) {
 }
 
 custom_add_weapons() {
-  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "", "", undefined);
-  add_zombie_weapon("python_zm", "python_upgraded_zm", &"ZOMBIE_WEAPON_PYTHON", 50, "wpck_python", "", undefined, 1);
-  add_zombie_weapon("judge_zm", "judge_upgraded_zm", &"ZOMBIE_WEAPON_JUDGE", 50, "wpck_judge", "", undefined, 1);
-  add_zombie_weapon("kard_zm", "kard_upgraded_zm", &"ZOMBIE_WEAPON_KARD", 50, "wpck_kap", "", undefined, 1);
-  add_zombie_weapon("fiveseven_zm", "fiveseven_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_57", "", undefined, 1);
-  add_zombie_weapon("beretta93r_zm", "beretta93r_upgraded_zm", &"ZOMBIE_WEAPON_BERETTA93r", 1000, "", "", undefined);
-  add_zombie_weapon("fivesevendw_zm", "fivesevendw_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_duel57", "", undefined, 1);
-  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", &"ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
-  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", &"ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
-  add_zombie_weapon("qcw05_zm", "qcw05_upgraded_zm", &"ZOMBIE_WEAPON_QCW05", 50, "wpck_chicom", "", undefined, 1);
-  add_zombie_weapon("870mcs_zm", "870mcs_upgraded_zm", &"ZOMBIE_WEAPON_870MCS", 1500, "shotgun", "", undefined);
-  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", &"ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
-  add_zombie_weapon("saiga12_zm", "saiga12_upgraded_zm", &"ZOMBIE_WEAPON_SAIGA12", 50, "wpck_saiga12", "", undefined, 1);
-  add_zombie_weapon("srm1216_zm", "srm1216_upgraded_zm", &"ZOMBIE_WEAPON_SRM1216", 50, "wpck_m1216", "", undefined, 1);
-  add_zombie_weapon("m14_zm", "m14_upgraded_zm", &"ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
-  add_zombie_weapon("saritch_zm", "saritch_upgraded_zm", &"ZOMBIE_WEAPON_SARITCH", 50, "wpck_sidr", "", undefined, 1);
-  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", &"ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
-  add_zombie_weapon("xm8_zm", "xm8_upgraded_zm", &"ZOMBIE_WEAPON_XM8", 50, "wpck_m8a1", "", undefined, 1);
-  add_zombie_weapon("type95_zm", "type95_upgraded_zm", &"ZOMBIE_WEAPON_TYPE95", 50, "wpck_type25", "", undefined, 1);
-  add_zombie_weapon("tar21_zm", "tar21_upgraded_zm", &"ZOMBIE_WEAPON_TAR21", 50, "wpck_x95l", "", undefined, 1);
-  add_zombie_weapon("galil_zm", "galil_upgraded_zm", &"ZOMBIE_WEAPON_GALIL", 50, "wpck_galil", "", undefined, 1);
-  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", &"ZOMBIE_WEAPON_FNFAL", 50, "wpck_fal", "", undefined, 1);
-  add_zombie_weapon("dsr50_zm", "dsr50_upgraded_zm", &"ZOMBIE_WEAPON_DR50", 50, "wpck_dsr50", "", undefined, 1);
-  add_zombie_weapon("barretm82_zm", "barretm82_upgraded_zm", &"ZOMBIE_WEAPON_BARRETM82", 50, "sniper", "", undefined);
-  add_zombie_weapon("rpd_zm", "rpd_upgraded_zm", &"ZOMBIE_WEAPON_RPD", 50, "wpck_rpd", "", undefined, 1);
-  add_zombie_weapon("hamr_zm", "hamr_upgraded_zm", &"ZOMBIE_WEAPON_HAMR", 50, "wpck_hamr", "", undefined, 1);
-  add_zombie_weapon("frag_grenade_zm", undefined, &"ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
-  add_zombie_weapon("sticky_grenade_zm", undefined, &"ZOMBIE_WEAPON_STICKY_GRENADE", 250, "grenade", "", 250);
-  add_zombie_weapon("claymore_zm", undefined, &"ZOMBIE_WEAPON_CLAYMORE", 1000, "grenade", "", undefined);
-  add_zombie_weapon("usrpg_zm", "usrpg_upgraded_zm", &"ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
-  add_zombie_weapon("m32_zm", "m32_upgraded_zm", &"ZOMBIE_WEAPON_M32", 50, "wpck_m32", "", undefined, 1);
-  add_zombie_weapon("cymbal_monkey_zm", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
-  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
-  add_zombie_weapon("knife_ballistic_zm", "knife_ballistic_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
-  add_zombie_weapon("knife_ballistic_bowie_zm", "knife_ballistic_bowie_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "wpck_knife", "", undefined, 1);
-  add_zombie_weapon("knife_ballistic_no_melee_zm", "knife_ballistic_no_melee_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
-  add_zombie_weapon("tazer_knuckles_zm", undefined, &"ZOMBIE_WEAPON_TAZER_KNUCKLES", 100, "tazerknuckles", "", undefined);
-  add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", &"ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
-  add_zombie_weapon("lsat_zm", "lsat_upgraded_zm", &"ZOMBIE_WEAPON_LSAT", 100, "", "", undefined);
+  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", & "ZOMBIE_WEAPON_M1911", 50, "", "", undefined);
+  add_zombie_weapon("python_zm", "python_upgraded_zm", & "ZOMBIE_WEAPON_PYTHON", 50, "wpck_python", "", undefined, 1);
+  add_zombie_weapon("judge_zm", "judge_upgraded_zm", & "ZOMBIE_WEAPON_JUDGE", 50, "wpck_judge", "", undefined, 1);
+  add_zombie_weapon("kard_zm", "kard_upgraded_zm", & "ZOMBIE_WEAPON_KARD", 50, "wpck_kap", "", undefined, 1);
+  add_zombie_weapon("fiveseven_zm", "fiveseven_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_57", "", undefined, 1);
+  add_zombie_weapon("beretta93r_zm", "beretta93r_upgraded_zm", & "ZOMBIE_WEAPON_BERETTA93r", 1000, "", "", undefined);
+  add_zombie_weapon("fivesevendw_zm", "fivesevendw_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_duel57", "", undefined, 1);
+  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", & "ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
+  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", & "ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
+  add_zombie_weapon("qcw05_zm", "qcw05_upgraded_zm", & "ZOMBIE_WEAPON_QCW05", 50, "wpck_chicom", "", undefined, 1);
+  add_zombie_weapon("870mcs_zm", "870mcs_upgraded_zm", & "ZOMBIE_WEAPON_870MCS", 1500, "shotgun", "", undefined);
+  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", & "ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
+  add_zombie_weapon("saiga12_zm", "saiga12_upgraded_zm", & "ZOMBIE_WEAPON_SAIGA12", 50, "wpck_saiga12", "", undefined, 1);
+  add_zombie_weapon("srm1216_zm", "srm1216_upgraded_zm", & "ZOMBIE_WEAPON_SRM1216", 50, "wpck_m1216", "", undefined, 1);
+  add_zombie_weapon("m14_zm", "m14_upgraded_zm", & "ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
+  add_zombie_weapon("saritch_zm", "saritch_upgraded_zm", & "ZOMBIE_WEAPON_SARITCH", 50, "wpck_sidr", "", undefined, 1);
+  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", & "ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
+  add_zombie_weapon("xm8_zm", "xm8_upgraded_zm", & "ZOMBIE_WEAPON_XM8", 50, "wpck_m8a1", "", undefined, 1);
+  add_zombie_weapon("type95_zm", "type95_upgraded_zm", & "ZOMBIE_WEAPON_TYPE95", 50, "wpck_type25", "", undefined, 1);
+  add_zombie_weapon("tar21_zm", "tar21_upgraded_zm", & "ZOMBIE_WEAPON_TAR21", 50, "wpck_x95l", "", undefined, 1);
+  add_zombie_weapon("galil_zm", "galil_upgraded_zm", & "ZOMBIE_WEAPON_GALIL", 50, "wpck_galil", "", undefined, 1);
+  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", & "ZOMBIE_WEAPON_FNFAL", 50, "wpck_fal", "", undefined, 1);
+  add_zombie_weapon("dsr50_zm", "dsr50_upgraded_zm", & "ZOMBIE_WEAPON_DR50", 50, "wpck_dsr50", "", undefined, 1);
+  add_zombie_weapon("barretm82_zm", "barretm82_upgraded_zm", & "ZOMBIE_WEAPON_BARRETM82", 50, "sniper", "", undefined);
+  add_zombie_weapon("rpd_zm", "rpd_upgraded_zm", & "ZOMBIE_WEAPON_RPD", 50, "wpck_rpd", "", undefined, 1);
+  add_zombie_weapon("hamr_zm", "hamr_upgraded_zm", & "ZOMBIE_WEAPON_HAMR", 50, "wpck_hamr", "", undefined, 1);
+  add_zombie_weapon("frag_grenade_zm", undefined, & "ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
+  add_zombie_weapon("sticky_grenade_zm", undefined, & "ZOMBIE_WEAPON_STICKY_GRENADE", 250, "grenade", "", 250);
+  add_zombie_weapon("claymore_zm", undefined, & "ZOMBIE_WEAPON_CLAYMORE", 1000, "grenade", "", undefined);
+  add_zombie_weapon("usrpg_zm", "usrpg_upgraded_zm", & "ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
+  add_zombie_weapon("m32_zm", "m32_upgraded_zm", & "ZOMBIE_WEAPON_M32", 50, "wpck_m32", "", undefined, 1);
+  add_zombie_weapon("cymbal_monkey_zm", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
+  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
+  add_zombie_weapon("knife_ballistic_zm", "knife_ballistic_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
+  add_zombie_weapon("knife_ballistic_bowie_zm", "knife_ballistic_bowie_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "wpck_knife", "", undefined, 1);
+  add_zombie_weapon("knife_ballistic_no_melee_zm", "knife_ballistic_no_melee_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
+  add_zombie_weapon("tazer_knuckles_zm", undefined, & "ZOMBIE_WEAPON_TAZER_KNUCKLES", 100, "tazerknuckles", "", undefined);
+  add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", & "ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
+  add_zombie_weapon("lsat_zm", "lsat_upgraded_zm", & "ZOMBIE_WEAPON_LSAT", 100, "", "", undefined);
 
-  if(isDefined(level.raygun2_included) && level.raygun2_included) {
-    add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
-  }
+  if(isDefined(level.raygun2_included) && level.raygun2_included)
+    add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
 nuked_population_sign_think() {
@@ -829,22 +822,20 @@ nuked_population_sign_think() {
       if(ones < 0) {
         ones = 9;
         tens_model rotateroll(0 - step, time);
-        tens_model playSound("zmb_counter_flip");
+        tens_model playsound("zmb_counter_flip");
         tens--;
       }
 
-      if(tens < 0) {
+      if(tens < 0)
         tens = 9;
-      }
 
       ones_model rotateroll(0 - step, time);
-      ones_model playSound("zmb_counter_flip");
+      ones_model playsound("zmb_counter_flip");
       ones_model waittill("rotatedone");
       level.population_count = ones + tens * 10;
 
-      if(level.population_count == 0 || level.population_count == 33 || level.population_count == 66 || level.population_count == 99) {
+      if(level.population_count == 0 || level.population_count == 33 || level.population_count == 66 || level.population_count == 99)
         level notify("update_doomsday_clock");
-      }
 
       local_zombies_killed++;
     }
@@ -868,15 +859,13 @@ assign_lowest_unused_character_index() {
     foreach(player in players) {
       if(isDefined(player.characterindex)) {
         if(player.characterindex == 0 || player.characterindex == 1) {
-          if(randomint(100) > 50) {
+          if(randomint(100) > 50)
             return 2;
-          }
 
           return 3;
         } else if(player.characterindex == 2 || player.characterindex == 3) {
-          if(randomint(100) > 50) {
+          if(randomint(100) > 50)
             return 0;
-          }
 
           return 1;
         }
@@ -884,14 +873,12 @@ assign_lowest_unused_character_index() {
     }
   } else {
     foreach(player in players) {
-      if(isDefined(player.characterindex)) {
+      if(isDefined(player.characterindex))
         arrayremovevalue(charindexarray, player.characterindex, 0);
-      }
     }
 
-    if(charindexarray.size > 0) {
+    if(charindexarray.size > 0)
       return charindexarray[0];
-    }
   }
 
   return 0;
@@ -900,7 +887,7 @@ assign_lowest_unused_character_index() {
 nuked_mannequin_init() {
   keep_count = 28;
   level.mannequin_count = 0;
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
   mannequins = nuked_mannequin_filter(destructibles);
 
   if(mannequins.size <= 0) {
@@ -941,9 +928,8 @@ nuked_mannequin_filter(destructibles) {
 custom_debris_function() {
   cost = 1000;
 
-  if(isDefined(self.zombie_cost)) {
+  if(isDefined(self.zombie_cost))
     cost = self.zombie_cost;
-  }
 
   while(true) {
     if(isDefined(self.script_noteworthy)) {
@@ -956,19 +942,20 @@ custom_debris_function() {
     self set_hint_string(self, "default_buy_door", cost);
     self waittill("trigger", who, force);
 
-    if(getdvarint(#"zombie_unlock_all") > 0 || is_true(force)) {} else {
+    if(getdvarint(#"zombie_unlock_all") > 0 || is_true(force)) {
+    } else {
       if(!who usebuttonpressed()) {
         continue;
       }
-      if(who in_revive_trigger()) {
+      if(who in_revive_trigger())
         continue;
-      }
     }
 
     if(is_player_valid(who)) {
       players = get_players();
 
-      if(getdvarint(#"zombie_unlock_all") > 0) {} else if(who.score >= self.zombie_cost)
+      if(getdvarint(#"zombie_unlock_all") > 0) {
+      } else if(who.score >= self.zombie_cost)
         who maps\mp\zombies\_zm_score::minus_to_player_score(self.zombie_cost);
       else {
         play_sound_at_pos("no_purchase", self.origin);
@@ -977,14 +964,13 @@ custom_debris_function() {
       }
 
       bbprint("zombie_uses", "playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type %s", who.name, who.score, level.round_number, self.zombie_cost, self.script_flag, self.origin, "door");
-      junk = getEntArray(self.target, "targetname");
+      junk = getentarray(self.target, "targetname");
 
       if(isDefined(self.script_flag)) {
         tokens = strtok(self.script_flag, ",");
 
-        for(i = 0; i < tokens.size; i++) {
+        for(i = 0; i < tokens.size; i++)
           flag_set(tokens[i]);
-        }
       }
 
       play_sound_at_pos("purchase", self.origin);
@@ -1019,16 +1005,14 @@ custom_debris_function() {
         junk[i] delete();
       }
 
-      all_trigs = getEntArray(self.target, "target");
+      all_trigs = getentarray(self.target, "target");
 
-      for(i = 0; i < all_trigs.size; i++) {
+      for(i = 0; i < all_trigs.size; i++)
         all_trigs[i] delete();
-      }
 
       if(isDefined(clip)) {
-        if(isDefined(move_ent)) {
+        if(isDefined(move_ent))
           move_ent waittill("movedone");
-        }
 
         clip delete();
       }
@@ -1054,9 +1038,8 @@ sndmusegg1() {
   level waittill("magic_door_power_up_grabbed");
   min_hand_model = getent("clock_min_hand", "targetname");
 
-  if(level.population_count == 15 && level.music_override == 0) {
+  if(level.population_count == 15 && level.music_override == 0)
     level thread sndmuseggplay(spawn("script_origin", (0, 0, 0)), "zmb_nuked_song_1", 88);
-  }
 }
 
 sndmusegg2() {
@@ -1067,32 +1050,30 @@ sndmusegg2() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++) {
+  for(i = 0; i < origins.size; i++)
     level thread sndmusegg2_wait(origins[i]);
-  }
 }
 
 sndmusegg2_wait(bear_origin) {
   temp_ent = spawn("script_origin", bear_origin);
-  temp_ent playLoopSound("zmb_meteor_loop");
+  temp_ent playloopsound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusegg2_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playSound("zmb_meteor_activate");
+  player playsound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
-  if(level.meteor_counter == 3) {
+  if(level.meteor_counter == 3)
     level thread sndmuseggplay(temp_ent, "zmb_nuked_song_2", 60);
-  } else {
+  else {
     wait 1.5;
     temp_ent delete();
   }
 }
 
 sndmusegg2_override() {
-  if(isDefined(level.music_override) && level.music_override) {
+  if(isDefined(level.music_override) && level.music_override)
     return false;
-  }
 
   return true;
 }
@@ -1106,9 +1087,8 @@ sndmusegg3_counter(event, attacker) {
   level.mannequin_count--;
 
   if(level.mannequin_count <= 0) {
-    while(isDefined(level.music_override) && level.music_override) {
+    while(isDefined(level.music_override) && level.music_override)
       wait 5;
-    }
 
     level thread sndmuseggplay(spawn("script_origin", (0, 0, 0)), "zmb_nuked_song_3", 80);
   }
@@ -1117,7 +1097,7 @@ sndmusegg3_counter(event, attacker) {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playSound(alias);
+  ent playsound(alias);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
   ent stopsounds();
@@ -1177,7 +1157,7 @@ moon_rocket_follow_path() {
   rocket.origin = rocket_start_struct.origin;
   camera = spawn("script_model", rocket_cam_start_struct.origin);
   camera.angles = rocket_cam_start_struct.angles;
-  camera setModel("tag_origin");
+  camera setmodel("tag_origin");
   exploder(676);
   players = get_players();
 
@@ -1195,8 +1175,8 @@ moon_rocket_follow_path() {
   rocket rotateto(rocket_end_struct.angles, 11);
   camera moveto(rocket_cam_end_struct.origin, 9);
   camera rotateto(rocket_cam_end_struct.angles, 8);
-  playFXOnTag(level._effect["rocket_entry"], rocket, "tag_fx");
-  playFXOnTag(level._effect["rocket_entry_light"], rocket, "tag_fx");
+  playfxontag(level._effect["rocket_entry"], rocket, "tag_fx");
+  playfxontag(level._effect["rocket_entry_light"], rocket, "tag_fx");
   wait 7.5;
   flag_set("rocket_hit_nuketown");
 }
@@ -1224,15 +1204,13 @@ player_rocket_rumble() {
 bus_taser_blocker() {
   trig = getent("bus_taser_trigger", "targetname");
 
-  if(isDefined(trig)) {
+  if(isDefined(trig))
     clip = getent(trig.target, "targetname");
-  }
 
   trig waittill("trigger");
 
-  if(isDefined(clip)) {
+  if(isDefined(clip))
     clip delete();
-  }
 }
 
 marlton_vo_inside_bunker() {
@@ -1262,9 +1240,8 @@ marlton_vo_inside_bunker() {
 }
 
 wait_for_next_round(current_round) {
-  while(level.round_number <= current_round) {
+  while(level.round_number <= current_round)
     wait 1;
-  }
 }
 
 moon_transmission_vo() {
@@ -1285,9 +1262,8 @@ moon_transmission_vo() {
 }
 
 wait_for_round_range(round) {
-  while(level.round_number < round) {
+  while(level.round_number < round)
     wait 1;
-  }
 }
 
 death_to_all_zombies() {
@@ -1297,13 +1273,11 @@ death_to_all_zombies() {
     if(!isalive(zombie)) {
       continue;
     }
-    if(isDefined(zombie)) {
+    if(isDefined(zombie))
       zombie dodamage(zombie.health + 666, zombie.origin);
-    }
 
-    if(index % 3 == 0) {
+    if(index % 3 == 0)
       wait_network_frame();
-    }
   }
 }
 
@@ -1311,11 +1285,10 @@ zombie_eye_glow_change() {
   flag_wait("moon_transmission_over");
   flag_clear("spawn_zombies");
   death_to_all_zombies();
-  level.zombie_spawners = getEntArray("zombie_spawner_beyes", "script_noteworthy");
+  level.zombie_spawners = getentarray("zombie_spawner_beyes", "script_noteworthy");
 
-  if(isDefined(level._game_module_custom_spawn_init_func)) {
+  if(isDefined(level._game_module_custom_spawn_init_func))
     [[level._game_module_custom_spawn_init_func]]();
-  }
 
   flag_set("spawn_zombies");
   level setclientfield("zombie_eye_change", 1);
@@ -1335,9 +1308,8 @@ bus_random_horn() {
 fake_lighting_cleanup() {
   ent = getent("nuke_reflection", "targetname");
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 nuked_collision_patch() {
@@ -1345,43 +1317,43 @@ nuked_collision_patch() {
   minimap_upperr.targetname = "minimap_corner";
   maps\mp\_compass::setupminimap("compass_map_zm_nuked");
   collision1 = spawn("script_model", (-48, -700, 100));
-  collision1 setModel("collision_wall_128x128x10_standard");
+  collision1 setmodel("collision_wall_128x128x10_standard");
   collision1.angles = (0, 0, 0);
   collision1 ghost();
   collision2 = spawn("script_model", (11, -759, 100));
-  collision2 setModel("collision_wall_128x128x10_standard");
+  collision2 setmodel("collision_wall_128x128x10_standard");
   collision2.angles = vectorscale((0, 1, 0), 270.0);
   collision2 ghost();
   collision3 = spawn("script_model", (-48, -818, 100));
-  collision3 setModel("collision_wall_128x128x10_standard");
+  collision3 setmodel("collision_wall_128x128x10_standard");
   collision3.angles = (0, 0, 0);
   collision3 ghost();
   collision4 = spawn("script_model", (-107, -759, 100));
-  collision4 setModel("collision_wall_128x128x10_standard");
+  collision4 setmodel("collision_wall_128x128x10_standard");
   collision4.angles = vectorscale((0, 1, 0), 270.0);
   collision4 ghost();
   collision5 = spawn("script_model", (-48, -759, 169));
-  collision5 setModel("collision_wall_128x128x10_standard");
+  collision5 setmodel("collision_wall_128x128x10_standard");
   collision5.angles = (0, 270, 90);
   collision5 ghost();
   collision6 = spawn("script_model", (-48, -759, 31));
-  collision6 setModel("collision_wall_128x128x10_standard");
+  collision6 setmodel("collision_wall_128x128x10_standard");
   collision6.angles = (0, 270, 90);
   collision6 ghost();
   collision7 = spawn("script_model", (-490, 963, 63));
-  collision7 setModel("collision_player_256x256x10");
+  collision7 setmodel("collision_player_256x256x10");
   collision7.angles = (0, 25.2, -90);
   collision7 ghost();
   collision8 = spawn("script_model", (752, 1079, 120));
-  collision8 setModel("collision_player_512x512x10");
+  collision8 setmodel("collision_player_512x512x10");
   collision8.angles = vectorscale((0, 0, -1), 90.0);
   collision8 ghost();
   collision9 = spawn("script_model", (-1349, 1016, 0));
-  collision9 setModel("collision_wall_128x128x10_standard");
+  collision9 setmodel("collision_wall_128x128x10_standard");
   collision9.angles = vectorscale((0, 1, 0), 339.8);
   collision9 ghost();
   collision10 = spawn("script_model", (132, 280, 25));
-  collision10 setModel("collision_wall_128x128x10_standard");
+  collision10 setmodel("collision_wall_128x128x10_standard");
   collision10.angles = vectorscale((0, 1, 0), 20.4);
   collision10 ghost();
 }
@@ -1389,19 +1361,16 @@ nuked_collision_patch() {
 nuked_special_weapon_magicbox_check(weapon) {
   if(isDefined(level.raygun2_included) && level.raygun2_included) {
     if(weapon == "ray_gun_zm") {
-      if(self has_weapon_or_upgrade("raygun_mark2_zm")) {
+      if(self has_weapon_or_upgrade("raygun_mark2_zm"))
         return false;
-      }
     }
 
     if(weapon == "raygun_mark2_zm") {
-      if(self has_weapon_or_upgrade("ray_gun_zm")) {
+      if(self has_weapon_or_upgrade("ray_gun_zm"))
         return false;
-      }
 
-      if(randomint(100) >= 33) {
+      if(randomint(100) >= 33)
         return false;
-      }
     }
   }
 

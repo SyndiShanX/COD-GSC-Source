@@ -42,13 +42,12 @@ precache_fx() {
 init() {
   init_phase_anims();
   init_regions();
-  level.avogadro_spawners = getEntArray("avogadro_zombie_spawner", "script_noteworthy");
+  level.avogadro_spawners = getentarray("avogadro_zombie_spawner", "script_noteworthy");
   array_thread(level.avogadro_spawners, ::add_spawn_function, maps\mp\zombies\_zm_ai_avogadro::avogadro_prespawn);
   level.zombie_ai_limit_avogadro = 1;
 
-  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_avogadro_electrified)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_avogadro_electrified))
     level.vsmgr_prio_overlay_zm_ai_avogadro_electrified = 75;
-  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_ai_avogadro_electrified", 1, level.vsmgr_prio_overlay_zm_ai_avogadro_electrified, 15, 1, maps\mp\_visionset_mgr::vsmgr_duration_lerp_thread_per_player, 0);
   maps\mp\zombies\_zm::register_player_damage_callback(::avogadro_player_damage_callback);
@@ -57,24 +56,24 @@ init() {
 
 init_phase_anims() {
   level.avogadro_phase = [];
-  level.avogadro_phase[0] = spawnStruct();
+  level.avogadro_phase[0] = spawnstruct();
   level.avogadro_phase[0].animstate = "zm_teleport_forward";
-  level.avogadro_phase[1] = spawnStruct();
+  level.avogadro_phase[1] = spawnstruct();
   level.avogadro_phase[1].animstate = "zm_teleport_left";
-  level.avogadro_phase[2] = spawnStruct();
+  level.avogadro_phase[2] = spawnstruct();
   level.avogadro_phase[2].animstate = "zm_teleport_right";
-  level.avogadro_phase[3] = spawnStruct();
+  level.avogadro_phase[3] = spawnstruct();
   level.avogadro_phase[3].animstate = "zm_teleport_back";
 }
 
 init_regions() {
   level.transit_region = [];
-  level.transit_region["bus"] = spawnStruct();
-  level.transit_region["diner"] = spawnStruct();
-  level.transit_region["farm"] = spawnStruct();
-  level.transit_region["cornfield"] = spawnStruct();
-  level.transit_region["power"] = spawnStruct();
-  level.transit_region["town"] = spawnStruct();
+  level.transit_region["bus"] = spawnstruct();
+  level.transit_region["diner"] = spawnstruct();
+  level.transit_region["farm"] = spawnstruct();
+  level.transit_region["cornfield"] = spawnstruct();
+  level.transit_region["power"] = spawnstruct();
+  level.transit_region["town"] = spawnstruct();
   level.transit_region["bus"].zones = [];
   level.transit_region["bus"].zones[0] = "zone_pri";
   level.transit_region["bus"].zones[1] = "zone_station_ext";
@@ -143,9 +142,8 @@ avogadro_prespawn() {
   self.core_model = getent("core_model", "targetname");
 
   if(isDefined(self.core_model)) {
-    if(!isDefined(self.core_model.angles)) {
+    if(!isDefined(self.core_model.angles))
       self.core_model.angles = (0, 0, 0);
-    }
 
     self forceteleport(self.core_model.origin, self.core_model.angles);
   }
@@ -302,7 +300,7 @@ player_look() {
 
   foreach(player in players) {
     vec_enemy = self.origin - player.origin;
-    vec_facing = anglesToForward(player.angles);
+    vec_facing = anglestoforward(player.angles);
     norm_facing = vectornormalize(vec_facing);
     norm_enemy = vectornormalize(vec_enemy);
     dot = vectordot(norm_facing, norm_enemy);
@@ -328,23 +326,20 @@ chase_player() {
 }
 
 chase_update() {
-  if(self check_bus_attack()) {
+  if(self check_bus_attack())
     self chase_bus();
-  } else if(self check_phase()) {
+  else if(self check_phase())
     self do_phase();
-  } else if(self check_range_attack()) {
+  else if(self check_range_attack())
     self range_attack();
-  }
 
-  if(self region_empty()) {
+  if(self region_empty())
     self avogadro_exit("exit_idle");
-  }
 }
 
 check_bus_attack() {
-  if(isDefined(self.favoriteenemy) && (isDefined(self.favoriteenemy.isonbus) && self.favoriteenemy.isonbus)) {
+  if(isDefined(self.favoriteenemy) && (isDefined(self.favoriteenemy.isonbus) && self.favoriteenemy.isonbus))
     return true;
-  }
 
   return false;
 }
@@ -402,25 +397,24 @@ chase_bus_update() {
 
   dist_sq = distancesquared(self.origin, tag_pos);
 
-  if(dist_sq < 14400) {
+  if(dist_sq < 14400)
     self bus_attack();
-  }
 }
 
 bus_attack() {
   self endon("stunned");
   self endon("stop_bus_attack");
   bus_attack_struct = [];
-  bus_attack_struct[0] = spawnStruct();
+  bus_attack_struct[0] = spawnstruct();
   bus_attack_struct[0].window_tag = "window_left_rear_jnt";
   bus_attack_struct[0].substate = "bus_attack_back";
-  bus_attack_struct[1] = spawnStruct();
+  bus_attack_struct[1] = spawnstruct();
   bus_attack_struct[1].window_tag = "window_right_front_jnt";
   bus_attack_struct[1].substate = "bus_attack_front";
-  bus_attack_struct[2] = spawnStruct();
+  bus_attack_struct[2] = spawnstruct();
   bus_attack_struct[2].window_tag = "window_left_2_jnt";
   bus_attack_struct[2].substate = "bus_attack_left";
-  bus_attack_struct[3] = spawnStruct();
+  bus_attack_struct[3] = spawnstruct();
   bus_attack_struct[3].window_tag = "window_right_3_jnt";
   bus_attack_struct[3].substate = "bus_attack_right";
   random_attack_struct = array_randomize(bus_attack_struct);
@@ -430,17 +424,15 @@ bus_attack() {
   self.ignoreall = 1;
 
   for(i = 0; i < 4; i++) {
-    while(isDefined(self.in_pain) && self.in_pain) {
+    while(isDefined(self.in_pain) && self.in_pain)
       wait 0.1;
-    }
 
     attack_struct = random_attack_struct[i];
 
     window = getdvarint(#"_id_5628DC9F");
 
-    if(window >= 0) {
+    if(window >= 0)
       attack_struct = bus_attack_struct[window];
-    }
 
     self bus_disable(attack_struct);
 
@@ -508,7 +500,7 @@ detach_from_bus() {
 
   avogadro_print("unlinking from bus window");
 
-  bus_forward = vectornormalize(anglesToForward(level.the_bus.angles));
+  bus_forward = vectornormalize(anglestoforward(level.the_bus.angles));
   unlink_pos = level.the_bus.origin + vectorscale(bus_forward, -144);
   unlink_pos = groundpos_ignore_water_new(unlink_pos + vectorscale((0, 0, 1), 60.0));
   self.shield = 1;
@@ -591,33 +583,32 @@ avogadro_exit(from) {
 
   if(isDefined(from)) {
     if(from == "bus") {
-      self playSound("zmb_avogadro_death_short");
-      playFX(level._effect["avogadro_ascend_aerial"], self.origin);
+      self playsound("zmb_avogadro_death_short");
+      playfx(level._effect["avogadro_ascend_aerial"], self.origin);
       self animscripted(self.origin, self.angles, "zm_bus_win");
       maps\mp\animscripts\zm_shared::donotetracks("bus_win_anim");
     } else if(from == "chamber") {
-      self playSound("zmb_avogadro_death_short");
-      playFX(level._effect["avogadro_ascend"], self.origin);
+      self playsound("zmb_avogadro_death_short");
+      playfx(level._effect["avogadro_ascend"], self.origin);
       self animscripted(self.origin, self.angles, "zm_chamber_out");
       wait 0.4;
       self ghost();
       stop_exploder(500);
     } else {
-      self playSound("zmb_avogadro_death");
-      playFX(level._effect["avogadro_ascend"], self.origin);
+      self playsound("zmb_avogadro_death");
+      playfx(level._effect["avogadro_ascend"], self.origin);
       self animscripted(self.origin, self.angles, "zm_exit");
       maps\mp\animscripts\zm_shared::donotetracks("exit_anim");
     }
   } else {
-    self playSound("zmb_avogadro_death");
-    playFX(level._effect["avogadro_ascend"], self.origin);
+    self playsound("zmb_avogadro_death");
+    playfx(level._effect["avogadro_ascend"], self.origin);
     self animscripted(self.origin, self.angles, "zm_exit");
     maps\mp\animscripts\zm_shared::donotetracks("exit_anim");
   }
 
-  if(!isDefined(from) || from != "chamber") {
+  if(!isDefined(from) || from != "chamber")
     level thread do_avogadro_flee_vo(self);
-  }
 
   self ghost();
   self.hit_by_melee = 0;
@@ -625,11 +616,10 @@ avogadro_exit(from) {
   self.anchor.angles = self.angles;
   self linkto(self.anchor);
 
-  if(isDefined(from) && from == "exit_idle") {
+  if(isDefined(from) && from == "exit_idle")
     self.return_round = level.round_number + 1;
-  } else {
+  else
     self.return_round = level.round_number + randomintrange(2, 5);
-  }
 
   level.next_avogadro_round = self.return_round;
   self.state = "cloud";
@@ -650,7 +640,7 @@ cloud_update_fx() {
 
   if(!isDefined(self.sndent)) {
     self.sndent = spawn("script_origin", (0, 0, 0));
-    self.sndent playLoopSound("zmb_avogadro_thunder_overhead");
+    self.sndent playloopsound("zmb_avogadro_thunder_overhead");
   }
 
   cloud_time = gettime();
@@ -665,15 +655,13 @@ cloud_update_fx() {
       rand_region = array_randomize(region);
       region_str = rand_region[0];
 
-      if(!isDefined(self.current_region)) {
+      if(!isDefined(self.current_region))
         region_str = region[4];
-      }
 
       idx = getdvarint(#"_id_FD251E42");
 
-      if(idx >= 0) {
+      if(idx >= 0)
         region_str = region[idx];
-      }
 
       avogadro_print("clouds in region " + region_str);
 
@@ -688,11 +676,10 @@ cloud_update_fx() {
       player = self get_player_in_region();
 
       if(isDefined(player)) {
-        if(isDefined(self._in_cloud) && self._in_cloud) {
+        if(isDefined(self._in_cloud) && self._in_cloud)
           player thread do_player_general_vox("general", "avogadro_above", 90, 10);
-        } else {
+        else
           player thread do_player_general_vox("general", "avogadro_arrive", 60, 40);
-        }
       } else
         level thread avogadro_storm_vox();
 
@@ -726,17 +713,16 @@ cloud_update() {
       self.sndent = undefined;
     }
 
-    if(!isDefined(new_origin)) {
+    if(!isDefined(new_origin))
       new_origin = maps\mp\zombies\_zm::check_for_valid_spawn_near_team();
-    }
 
     if(isDefined(new_origin)) {
       self thread avogadro_update_health();
       playsoundatposition("zmb_avogadro_spawn_3d", new_origin);
-      self.audio_loop_ent playLoopSound("zmb_avogadro_loop", 0.5);
+      self.audio_loop_ent playloopsound("zmb_avogadro_loop", 0.5);
       self unlink();
       ground_pos = groundpos_ignore_water_new(new_origin + vectorscale((0, 0, 1), 60.0));
-      playFX(level._effect["avogadro_descend"], ground_pos);
+      playfx(level._effect["avogadro_descend"], ground_pos);
       self animscripted(ground_pos, self.anchor.angles, "zm_arrival");
       maps\mp\animscripts\zm_shared::donotetracks("arrival_anim");
       self setfreecameralockonallowed(1);
@@ -784,9 +770,8 @@ get_player_in_region() {
   foreach(zone in zones) {
     if(level.zones[zone].is_occupied) {
       foreach(player in players) {
-        if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(zone)) {
+        if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(zone))
           return player;
-        }
       }
     }
   }
@@ -812,9 +797,8 @@ cloud_find_spawn() {
     if(level.zones[zone].is_enabled && level.zones[zone].is_spawning_allowed) {
       locations = level.zones[zone].avogadro_locations;
 
-      foreach(loc in locations) {
-        use_points[use_points.size] = loc;
-      }
+      foreach(loc in locations)
+      use_points[use_points.size] = loc;
     }
   }
 
@@ -836,13 +820,13 @@ avogadro_reveal(show_time) {
 avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
   self.is_teleport = 1;
   self.phase_fx = spawn("script_model", self.origin);
-  self.phase_fx setModel("tag_origin");
+  self.phase_fx setmodel("tag_origin");
   self.phase_fx linkto(self);
   wait 0.1;
-  playFXOnTag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
-  playFX(level._effect["avogadro_phasing"], self.origin);
+  playfxontag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
+  playfx(level._effect["avogadro_phasing"], self.origin);
   self avogadro_reveal(0.1);
-  self playSound("zmb_avogadro_warp_out");
+  self playsound("zmb_avogadro_warp_out");
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
   self linkto(self.anchor);
@@ -859,21 +843,19 @@ avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
   }
 
   self forceteleport(dest_pos, dest_angles);
-  playFX(level._effect["avogadro_phasing"], self.origin);
+  playfx(level._effect["avogadro_phasing"], self.origin);
 
-  if(isDefined(self.phase_fx)) {
+  if(isDefined(self.phase_fx))
     self.phase_fx delete();
-  }
 
   self avogadro_reveal(0.1);
-  self playSound("zmb_avogadro_warp_in");
+  self playsound("zmb_avogadro_warp_in");
   self.is_teleport = 0;
 }
 
 check_range_attack() {
-  if(getdvarint(#"_id_A40002E9")) {
+  if(getdvarint(#"_id_A40002E9"))
     return false;
-  }
 
   enemy = self.favoriteenemy;
 
@@ -882,19 +864,18 @@ check_range_attack() {
     dist_sq = lengthsquared(vec_enemy);
 
     if(dist_sq > 14400 && dist_sq < 360000) {
-      vec_facing = anglesToForward(self.angles);
+      vec_facing = anglestoforward(self.angles);
       norm_facing = vectornormalize(vec_facing);
       norm_enemy = vectornormalize(vec_enemy);
       dot = vectordot(norm_facing, norm_enemy);
 
       if(dot > 0.99) {
-        enemy_eye_pos = enemy getEye();
-        eye_pos = self getEye();
+        enemy_eye_pos = enemy geteye();
+        eye_pos = self geteye();
         passed = bullettracepassed(eye_pos, enemy_eye_pos, 0, undefined);
 
-        if(passed) {
+        if(passed)
           return true;
-        }
       }
     }
   }
@@ -937,12 +918,12 @@ shoot_bolt_wait(animname, enemy) {
 
 shoot_bolt(enemy) {
   source_pos = self gettagorigin("tag_weapon_right");
-  target_pos = enemy getEye();
+  target_pos = enemy geteye();
   bolt = spawn("script_model", source_pos);
-  bolt setModel("tag_origin");
+  bolt setmodel("tag_origin");
   wait 0.1;
-  self playSound("zmb_avogadro_attack");
-  fx = playFXOnTag(level._effect["avogadro_bolt"], bolt, "tag_origin");
+  self playsound("zmb_avogadro_attack");
+  fx = playfxontag(level._effect["avogadro_bolt"], bolt, "tag_origin");
   bolt moveto(target_pos, 0.2);
   bolt waittill("movedone");
   bolt.owner = self;
@@ -952,7 +933,7 @@ shoot_bolt(enemy) {
 
 check_bolt_impact(enemy) {
   if(is_player_valid(enemy)) {
-    enemy_eye_pos = enemy getEye();
+    enemy_eye_pos = enemy geteye();
     dist_sq = distancesquared(self.origin, enemy_eye_pos);
 
     if(dist_sq < 4096) {
@@ -1013,9 +994,8 @@ get_random_phase_state() {
 }
 
 check_phase() {
-  if(getdvarint(#"_id_CFB33742")) {
+  if(getdvarint(#"_id_CFB33742"))
     return false;
-  }
 
   if(gettime() > self.phase_time) {
     if(isDefined(self.is_traversing) && self.is_traversing) {
@@ -1027,9 +1007,8 @@ check_phase() {
     self.phase_substate = randomint(3);
     anim_id = self getanimfromasd(self.phase_state, self.phase_substate);
 
-    if(self maymovefrompointtopoint(self.origin, getanimendpos(anim_id))) {
+    if(self maymovefrompointtopoint(self.origin, getanimendpos(anim_id)))
       return true;
-    }
   }
 
   return false;
@@ -1054,21 +1033,21 @@ play_phase_anim() {
   self endon("death");
   self endon("phase_anim_done");
   self.phase_fx = spawn("script_model", self.origin);
-  self.phase_fx setModel("tag_origin");
+  self.phase_fx setmodel("tag_origin");
   self.phase_fx linkto(self);
   wait 0.05;
-  playFXOnTag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
-  playFX(level._effect["avogadro_phasing"], self.origin);
+  playfxontag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
+  playfx(level._effect["avogadro_phasing"], self.origin);
   self avogadro_reveal(0.1);
-  self playSound("zmb_avogadro_warp_out");
+  self playsound("zmb_avogadro_warp_out");
   self orientmode("face enemy");
   self setanimstatefromasd(self.phase_state, self.phase_substate);
   maps\mp\animscripts\zm_shared::donotetracks("teleport_anim");
   self.phase_fx delete();
-  playFX(level._effect["avogadro_phasing"], self.origin);
+  playfx(level._effect["avogadro_phasing"], self.origin);
   self avogadro_reveal(0.1);
   self orientmode("face default");
-  self playSound("zmb_avogadro_warp_in");
+  self playsound("zmb_avogadro_warp_in");
   self.phase_time = gettime() + 2000;
   self notify("phase_anim_done");
 }
@@ -1080,14 +1059,13 @@ phase_failsafe() {
   if(self.state == "phasing" || self.state == "chasing_bus") {
     avogadro_print("phasing too long, failsafe kicking in");
 
-    if(isDefined(self.phase_fx)) {
+    if(isDefined(self.phase_fx))
       self.phase_fx delete();
-    }
 
-    playFX(level._effect["avogadro_phasing"], self.origin);
+    playfx(level._effect["avogadro_phasing"], self.origin);
     self avogadro_reveal(0.1);
     self orientmode("face default");
-    self playSound("zmb_avogadro_warp_in");
+    self playsound("zmb_avogadro_warp_in");
     self.phase_time = gettime() + 2000;
     self notify("phase_anim_done");
   }
@@ -1122,7 +1100,7 @@ avogadro_pain_watcher() {
 avogadro_pain(einflictor) {
   self endon("melee_pain");
   self.in_pain = 1;
-  self playSound("zmb_avogadro_pain");
+  self playsound("zmb_avogadro_pain");
   self thread avogadro_pain_watcher();
   substate = 0;
   origin = self.origin;
@@ -1132,11 +1110,10 @@ avogadro_pain(einflictor) {
   if(self.state == "attacking_bus" || self.state == "stay_attached") {
     tag = self.bus_attack_struct.window_tag;
 
-    if(tag == "window_left_rear_jnt") {
+    if(tag == "window_left_rear_jnt")
       animstate = "zm_bus_back_pain";
-    } else {
+    else
       animstate = "zm_bus_pain";
-    }
 
     origin = level.the_bus gettagorigin(tag);
     angles = level.the_bus gettagangles(tag);
@@ -1149,9 +1126,8 @@ avogadro_pain(einflictor) {
     self ghost();
     self.phase_time = gettime() - 1;
 
-    if(self.state == "stay_attached") {
+    if(self.state == "stay_attached")
       self attach_to_bus();
-    }
   } else {
     self notify("stop_bus_attack");
     level notify("avogadro_defeated");
@@ -1174,25 +1150,21 @@ avogadro_pain(einflictor) {
       core_mover = getent("core_mover", "targetname");
       self linkto(core_mover, "tag_origin");
 
-      while(flag("power_on")) {
+      while(flag("power_on"))
         wait 0.1;
-      }
 
       self show();
       self.state = "chamber";
       self setanimstatefromasd("zm_chamber_idle");
     } else {
-      if(!flag("power_on")) {
+      if(!flag("power_on"))
         avogadro_print("no power");
-      }
 
-      if(!flag("switches_on")) {
+      if(!flag("switches_on"))
         avogadro_print("no switches");
-      }
 
-      if(!self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr")) {
+      if(!self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr"))
         avogadro_print("no zone");
-      }
 
       self show();
       self avogadro_exit();
@@ -1225,28 +1197,27 @@ avogadro_update_health_fx() {
     tag_angles = self gettagangles("J_SpineUpper");
     self.health_fx = spawn("script_model", tag_origin);
     self.health_fx.angles = tag_angles;
-    self.health_fx setModel("tag_origin");
+    self.health_fx setmodel("tag_origin");
     self.health_fx linkto(self);
     wait 0.1;
   }
 
-  if(self.hit_by_melee == 0) {
-    playFXOnTag(level._effect["avogadro_health_full"], self.health_fx, "tag_origin");
-  } else if(self.hit_by_melee <= 2) {
-    playFXOnTag(level._effect["avogadro_health_half"], self.health_fx, "tag_origin");
-  } else {
-    playFXOnTag(level._effect["avogadro_health_low"], self.health_fx, "tag_origin");
-  }
+  if(self.hit_by_melee == 0)
+    playfxontag(level._effect["avogadro_health_full"], self.health_fx, "tag_origin");
+  else if(self.hit_by_melee <= 2)
+    playfxontag(level._effect["avogadro_health_half"], self.health_fx, "tag_origin");
+  else
+    playfxontag(level._effect["avogadro_health_low"], self.health_fx, "tag_origin");
 }
 
 avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(self.state == "exiting" || self.state == "phasing") {
+  if(self.state == "exiting" || self.state == "phasing")
     return false;
-  }
 
   if(smeansofdeath == "MOD_MELEE") {
     if(isplayer(einflictor)) {
-      if(isDefined(einflictor.avogadro_melee_time)) {}
+      if(isDefined(einflictor.avogadro_melee_time)) {
+      }
 
       if(self.shield) {
         einflictor.avogadro_melee_time = gettime();
@@ -1265,11 +1236,10 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       self.shield = 1;
       self notify("melee_pain");
 
-      if(sweapon == "tazer_knuckles_zm") {
+      if(sweapon == "tazer_knuckles_zm")
         self.hit_by_melee = self.hit_by_melee + 2;
-      } else {
+      else
         self.hit_by_melee++;
-      }
 
       self thread avogadro_pain(einflictor);
 
@@ -1304,9 +1274,8 @@ update_damage_absorbed(damage) {
 }
 
 avogadro_non_attacker(damage, weapon) {
-  if(weapon == "zombie_bullet_crouch_zm") {
+  if(weapon == "zombie_bullet_crouch_zm")
     self update_damage_absorbed(damage);
-  }
 
   return false;
 }
@@ -1320,9 +1289,8 @@ stun_avogadro() {
   ignore_emp_states[4] = "cloud";
 
   foreach(state in ignore_emp_states) {
-    if(self.state == state) {
+    if(self.state == state)
       return;
-    }
   }
 
   if(self.hit_by_melee < 4) {
@@ -1336,9 +1304,11 @@ stun_avogadro() {
   }
 }
 
-fling_avogadro(player) {}
+fling_avogadro(player) {
+}
 
-drag_avogadro(vdir) {}
+drag_avogadro(vdir) {
+}
 
 avogadro_debug_axis() {
   self endon("death");
@@ -1346,7 +1316,7 @@ avogadro_debug_axis() {
   while(true) {
     if(!isDefined(self.debug_axis)) {
       self.debug_axis = spawn("script_model", self.origin);
-      self.debug_axis setModel("fx_axis_createfx");
+      self.debug_axis setmodel("fx_axis_createfx");
     } else {
       self.debug_axis.origin = self.origin;
       self.debug_axis.angles = self.angles;
@@ -1364,9 +1334,8 @@ avogadro_print(str) {
     if(isDefined(self.debug_msg)) {
       self.debug_msg[self.debug_msg.size] = str;
 
-      if(self.debug_msg.size > 64) {
+      if(self.debug_msg.size > 64)
         self.debug_msg = [];
-      }
     } else {
       self.debug_msg = [];
       self.debug_msg[self.debug_msg.size] = str;

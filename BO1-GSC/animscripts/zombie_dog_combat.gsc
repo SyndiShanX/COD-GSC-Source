@@ -22,13 +22,11 @@ main() {
 }
 
 handleMeleeBiteAttackNoteTracks(note) {
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return;
-  }
   assert(IsPlayer(self.enemy));
-  if(!IsAlive(self.enemy)) {
+  if(!IsAlive(self.enemy))
     return;
-  }
   player = self.enemy;
   switch (note) {
     case "dog_melee": {
@@ -44,7 +42,7 @@ handleMeleeBiteAttackNoteTracks(note) {
         level.dogMeleeBiteAttackTime = GetTime() - level.dogMeleeBiteAttackTimeStart;
         level.dogMeleeBiteAttackTime += 50;
       }
-      hitEnt = self melee(anglesToForward(self.angles));
+      hitEnt = self melee(AnglesToForward(self.angles));
       if(isDefined(hitEnt)) {
         if(IsPlayer(hitEnt)) {
           hitEnt ShellShock("dog_bite", 0.35);
@@ -135,9 +133,8 @@ doMeleeAfterWait(time) {
   wait(time);
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isplayer(hitEnt)) {
+    if(isplayer(hitEnt))
       hitEnt shellshock("dog_bite", 0.35);
-    }
   }
 }
 
@@ -147,9 +144,8 @@ dog_cant_kill_in_one_hit(player) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
+  if(getTime() - level.lastDogMeleePlayerTime > 8000)
     level.dogMeleePlayerCounter = 0;
-  }
   return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
     player.health > 25;
 }
@@ -202,7 +198,7 @@ use_low_attack(player) {
 }
 
 prepareAttackPlayer(player) {
-  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distanceToTarget = distance(self.origin, self.enemy.origin);
   targetHeight = Abs(self.enemy.origin[2] - self.origin[2]);
   self.enemy_attack_start_distance = distanceToTarget;

@@ -19,14 +19,14 @@ function main() {
 
 function register_clientfields() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("toplayer", "player_ee_cs_circle", 5000, n_bits, "int", &function_2a1f20f9, 0, 0);
-  clientfield::register("actor", "ghost_actor", 1, 1, "int", &ghost_actor, 0, 0);
-  clientfield::register("scriptmover", "channeling_stone_glow", 5000, 2, "int", &channeling_stone_glow, 0, 0);
-  clientfield::register("world", "flip_skybox", 5000, 1, "int", &flip_skybox, 0, 0);
-  clientfield::register("scriptmover", "pod_monitor_enable", 5000, 1, "int", &function_3c1114e8, 0, 0);
-  clientfield::register("world", "sndDeathRayToMoon", 5000, 1, "int", &snddeathraytomoon, 0, 0);
-  clientfield::register("toplayer", "outro_lighting_banks", 5000, 1, "int", &outro_lighting_banks, 0, 0);
-  clientfield::register("toplayer", "moon_explosion_bank", 5000, 1, "int", &moon_explosion_bank, 0, 0);
+  clientfield::register("toplayer", "player_ee_cs_circle", 5000, n_bits, "int", & function_2a1f20f9, 0, 0);
+  clientfield::register("actor", "ghost_actor", 1, 1, "int", & ghost_actor, 0, 0);
+  clientfield::register("scriptmover", "channeling_stone_glow", 5000, 2, "int", & channeling_stone_glow, 0, 0);
+  clientfield::register("world", "flip_skybox", 5000, 1, "int", & flip_skybox, 0, 0);
+  clientfield::register("scriptmover", "pod_monitor_enable", 5000, 1, "int", & function_3c1114e8, 0, 0);
+  clientfield::register("world", "sndDeathRayToMoon", 5000, 1, "int", & snddeathraytomoon, 0, 0);
+  clientfield::register("toplayer", "outro_lighting_banks", 5000, 1, "int", & outro_lighting_banks, 0, 0);
+  clientfield::register("toplayer", "moon_explosion_bank", 5000, 1, "int", & moon_explosion_bank, 0, 0);
 }
 
 function ghost_actor(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -37,22 +37,22 @@ function ghost_actor(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 function function_2a1f20f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     self thread postfx::playpostfxbundle("pstfx_arrow_demongate");
-    playSound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
+    playsound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
   } else {
     if(newval == 2) {
       self thread postfx::playpostfxbundle("pstfx_arrow_rune");
-      playSound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
+      playsound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
     } else {
       if(newval == 3) {
         self thread postfx::playpostfxbundle("pstfx_arrow_elemental");
-        playSound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
+        playsound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
       } else {
         if(newval == 4) {
           self thread postfx::playpostfxbundle("pstfx_arrow_wolf");
-          playSound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
+          playsound(0, "zmb_ee_resurrect_enter_circle", (0, 0, 0));
         } else {
           self thread postfx::stoppostfxbundle();
-          playSound(0, "zmb_ee_resurrect_leave_circle", (0, 0, 0));
+          playsound(0, "zmb_ee_resurrect_leave_circle", (0, 0, 0));
         }
       }
     }
@@ -69,7 +69,7 @@ function channeling_stone_glow(localclientnum, oldval, newval, bnewent, binitial
     var_c8a6e70a = 0;
     var_2be3abbd = 1;
     n_shader_value = 0;
-    while(true) {
+    while (true) {
       n_time = gettime();
       if(n_time >= var_b1382f05) {
         n_start_time = gettime();
@@ -102,13 +102,13 @@ function flip_skybox(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
 function snddeathraytomoon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playSound(0, "zmb_ee_rocketcrash_ray_start", (-271, 2196, 1338));
+    playsound(0, "zmb_ee_rocketcrash_ray_start", (-271, 2196, 1338));
     wait(0.05);
-    playSound(0, "zmb_ee_rocketcrash_ray_start", (552, 2201, 1344));
+    playsound(0, "zmb_ee_rocketcrash_ray_start", (552, 2201, 1344));
   } else {
-    playSound(0, "zmb_ee_rocketcrash_ray_end", (-271, 2196, 1348));
+    playsound(0, "zmb_ee_rocketcrash_ray_end", (-271, 2196, 1348));
     wait(0.05);
-    playSound(0, "zmb_ee_rocketcrash_ray_end", (552, 2201, 1344));
+    playsound(0, "zmb_ee_rocketcrash_ray_end", (552, 2201, 1344));
   }
 }
 

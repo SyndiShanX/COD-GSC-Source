@@ -51,9 +51,8 @@ infil() {
   thread maps\loki_fx::loki_infil_lighting();
   level thread infil_vignette();
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     setsaveddvar("r_mbEnable", 0);
-  }
 
   common_scripts\utility::flag_wait("infil_done");
 }
@@ -172,17 +171,14 @@ infil_push() {
   for(var_5 = 0; var_5 < var_1; var_5++) {
     setsaveddvar("player_swimWaterCurrent", (level.infil_ratex, level.infil_ratey, level.infil_ratez));
 
-    if(level.infil_ratex > 0) {
+    if(level.infil_ratex > 0)
       level.infil_ratex = level.infil_ratex - var_2;
-    }
 
-    if(level.infil_ratey > 0) {
+    if(level.infil_ratey > 0)
       level.infil_ratey = level.infil_ratey - var_3;
-    }
 
-    if(level.infil_ratez > 0) {
+    if(level.infil_ratez > 0)
       level.infil_ratez = level.infil_ratez - var_4;
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -231,17 +227,14 @@ infil_blend_push_out() {
   for(var_7 = 0; var_7 < var_3; var_7++) {
     setsaveddvar("player_swimWaterCurrent", (level.infil_ratex, level.infil_ratey, level.infil_ratez));
 
-    if(level.infil_ratex > 0) {
+    if(level.infil_ratex > 0)
       level.infil_ratex = level.infil_ratex - var_4;
-    }
 
-    if(level.infil_ratey > 0) {
+    if(level.infil_ratey > 0)
       level.infil_ratey = level.infil_ratey - var_5;
-    }
 
-    if(level.infil_ratez > 0) {
+    if(level.infil_ratez > 0)
       level.infil_ratez = level.infil_ratez - var_6;
-    }
 
     common_scripts\utility::waitframe();
   }
@@ -294,9 +287,8 @@ create_redshirts(var_0, var_1) {
   var_2[3].ignoreme = 1;
   level.redshirts = var_2;
 
-  foreach(var_4 in var_2) {
-    var_4 thread infil_redshirt(var_0, var_1);
-  }
+  foreach(var_4 in var_2)
+  var_4 thread infil_redshirt(var_0, var_1);
 }
 
 infil_redshirt(var_0, var_1) {
@@ -323,9 +315,8 @@ infil_redshirt(var_0, var_1) {
     }
   }
 
-  if(self.animname == "redshirt_3" || self.animname == "redshirt_0") {
+  if(self.animname == "redshirt_3" || self.animname == "redshirt_0")
     thread kill_after_vignette();
-  }
 }
 
 lights_on(var_0) {
@@ -342,9 +333,8 @@ kill_during_vignette(var_0) {
 kill_after_vignette() {
   self.deathfunction = maps\_space_ai::ai_space_death;
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self.script_noteworthy = "combat_one_cleanup";
   self.grenadeammo = 0;

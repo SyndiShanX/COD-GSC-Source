@@ -4,7 +4,7 @@
 *******************************************/
 
 main() {
-  self setModel("c_zom_cellbreaker_fb");
+  self setmodel("c_zom_cellbreaker_fb");
   self.hatmodel = "c_zom_cellbreaker_helmet";
   self attach(self.hatmodel);
   self.voice = "american";

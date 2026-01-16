@@ -7,10 +7,11 @@
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_ix_scarlett;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ix_scarlett", &__init__, undefined, # "character_unlock_ix_scarlett_fixup");
+  system::register(#"character_unlock_ix_scarlett", &__init__, undefined, #"character_unlock_ix_scarlett_fixup");
 }
 
 __init__() {
@@ -39,6 +40,6 @@ function_fcd28111(params) {
   }
 
   if(self.stash_type === 1) {
-    activator character_unlock::function_c8beca5e(#"ix_scarlett_unlock", # "hash_74fceff1a255277d", 1);
+    activator character_unlock::function_c8beca5e(#"ix_scarlett_unlock", #"hash_74fceff1a255277d", 1);
   }
 }

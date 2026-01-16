@@ -4,7 +4,7 @@
 ****************************************/
 
 main() {
-  self setModel("c_zom_player_handsome_fb");
+  self setmodel("c_zom_player_handsome_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

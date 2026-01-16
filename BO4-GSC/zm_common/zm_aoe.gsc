@@ -11,6 +11,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
+
 #namespace zm_aoe;
 
 class areaofeffect {
@@ -87,6 +88,7 @@ function_15dea507(aoeid, type, var_3a11a165, lifetime, var_f2cd3aad, damagemin, 
   level thread function_60bb02f3(type);
 
   level thread function_e39c0be4(var_508aaded);
+
 }
 
 function_371b4147(aoeid, type, position, userdata) {
@@ -258,7 +260,7 @@ private function_bea2e288(type) {
         damage = mapfloat(0, var_46f1b5eb.radius, var_46f1b5eb.damagemin, var_46f1b5eb.damagemax, dist);
         player dodamage(damage, aoe.entity.origin);
         player notify(#"aoe_damage", {
-          #str_source: aoe.type,
+          #str_source: aoe.type, 
           #origin: aoe.entity.origin
         });
       }
@@ -310,3 +312,4 @@ private function_e39c0be4(var_46f1b5eb) {
     waitframe(1);
   }
 }
+

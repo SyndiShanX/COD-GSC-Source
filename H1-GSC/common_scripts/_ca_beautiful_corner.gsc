@@ -28,18 +28,17 @@ activate() {
 }
 
 cleanup() {
-  var_0 = getEntArray("beautiful_guy", "targetname");
+  var_0 = getentarray("beautiful_guy", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 delete();
-  }
+  foreach(var_2 in var_0)
+  var_2 delete();
 }
 
 beautiful_player() {
   level.player takeallweapons();
   level.player disableoffhandweapons();
 
-  if(isDefined(level.beautiful_weapon)) {
+  if(isdefined(level.beautiful_weapon)) {
     level.player giveweapon(level.beautiful_weapon);
     level.player switchtoweapon(level.beautiful_weapon);
   }
@@ -54,27 +53,25 @@ beautiful_player_ammo() {
   self.maintain_stock = [];
 
   foreach(var_2 in var_0) {
-    if(!isDefined(self.maintain_stock[var_2])) {
+    if(!isdefined(self.maintain_stock[var_2]))
       self.maintain_stock[var_2] = self getweaponammostock(var_2);
-    }
   }
 
-  for(;;) {
-    foreach(var_2 in var_0) {
-      self setweaponammostock(var_2, self.maintain_stock[var_2]);
-    }
+  for (;;) {
+    foreach(var_2 in var_0)
+    self setweaponammostock(var_2, self.maintain_stock[var_2]);
 
     wait 1;
   }
 }
 
 beautiful_guys() {
-  var_0 = getEntArray("beautiful_guy", "targetname");
+  var_0 = getentarray("beautiful_guy", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2 maps\_shg_design_tools::actual_spawn();
 
-    if(!isDefined(var_3)) {
+    if(!isdefined(var_3)) {
       return;
     }
     var_3 maps\_utility::make_hero();
@@ -82,11 +79,10 @@ beautiful_guys() {
     var_3 maps\_utility::magic_bullet_shield();
     var_3.script_friendname = "none";
 
-    if(isDefined(level.beautiful_weapon)) {
+    if(isdefined(level.beautiful_weapon))
       var_3 maps\_utility::forceuseweapon(level.beautiful_weapon, "primary");
-    }
 
-    if(isDefined(var_2.script_noteworthy)) {
+    if(isdefined(var_2.script_noteworthy)) {
       var_3.animname = "beautiful_guy";
       var_3 thread maps\_anim::anim_loop_solo(var_3, var_2.script_noteworthy, undefined, "stop_idle");
     }
@@ -112,16 +108,16 @@ beautiful_view_origin_offsets() {
 }
 
 beautiful_offset_view_origin(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0)) {
     return;
   }
-  if(!isDefined(var_0.script_noteworthy)) {
+  if(!isdefined(var_0.script_noteworthy)) {
     return;
   }
   if(var_0.script_noteworthy != "view_pos") {
     return;
   }
-  var_2 = spawnStruct();
+  var_2 = spawnstruct();
   var_2.entity = var_0;
   var_2.forward = var_1[0];
   var_2.right = var_1[1];
@@ -154,10 +150,9 @@ beautiful_view_init() {
 }
 
 beautiful_view_move_request() {
-  for(;;) {
-    while(!(level.player buttonpressed("DPAD_UP") || level.player buttonpressed("HOME"))) {
+  for (;;) {
+    while (!(level.player buttonpressed("DPAD_UP") || level.player buttonpressed("HOME")))
       wait 0.05;
-    }
 
     if(!common_scripts\utility::flag("beautiful_view_transitioning")) {
       beautiful_view_get_next_position();
@@ -169,26 +164,23 @@ beautiful_view_move_request() {
 }
 
 beautiful_view_get_next_position() {
-  for(var_0 = undefined; !isDefined(var_0); var_0 = getent(var_1, "targetname")) {
+  for (var_0 = undefined; !isdefined(var_0); var_0 = getent(var_1, "targetname")) {
     level.beautiful_view_index++;
 
-    if(level.beautiful_view_index >= level.beautiful_views.size) {
+    if(level.beautiful_view_index >= level.beautiful_views.size)
       level.beautiful_view_index = 0;
-    }
 
     var_1 = level.beautiful_views[level.beautiful_view_index];
 
-    if(level.beautiful_view_static) {
+    if(level.beautiful_view_static)
       var_1 = var_1 + "_static";
-    }
   }
 }
 
 beautiful_view_state_request() {
-  for(;;) {
-    while(!(level.player buttonpressed("DPAD_DOWN") || level.player buttonpressed("END"))) {
+  for (;;) {
+    while (!(level.player buttonpressed("DPAD_DOWN") || level.player buttonpressed("END")))
       wait 0.05;
-    }
 
     if(!common_scripts\utility::flag("beautiful_view_transitioning")) {
       level.beautiful_view_static = !level.beautiful_view_static;
@@ -214,15 +206,13 @@ beautiful_view_fade_in() {
   level.black_overlay fadeovertime(0.3);
   level.black_overlay.alpha = 0;
 
-  if(!level.beautiful_view_static) {
+  if(!level.beautiful_view_static)
     level.player enableweapons();
-  }
 
   wait 0.3;
 
-  if(!level.beautiful_view_static) {
+  if(!level.beautiful_view_static)
     level.player freezecontrols(0);
-  }
 
   level.player hidehud();
 }
@@ -239,19 +229,16 @@ beautiful_view_fade_out() {
 }
 
 beautiful_view_position(var_0) {
-  if(level.beautiful_visions[var_0] != "") {
+  if(level.beautiful_visions[var_0] != "")
     maps\_utility::vision_set_fog_changes(level.beautiful_visions[var_0], 0);
-  }
 
-  if(level.beautiful_lightsets[var_0] != "") {
+  if(level.beautiful_lightsets[var_0] != "")
     level.player lightsetforplayer(level.beautiful_lightsets[var_0]);
-  }
 
-  if(level.beautiful_cluts[var_0] != "") {
+  if(level.beautiful_cluts[var_0] != "")
     level.player setclutforplayer(level.beautiful_cluts[var_0], 0);
-  }
 
-  if(level.beautiful_view_static && isDefined(level.beautiful_dof[var_0])) {
+  if(level.beautiful_view_static && isdefined(level.beautiful_dof[var_0])) {
     var_1 = level.beautiful_dof[var_0];
     level.player enablephysicaldepthoffieldscripting();
     level.player setphysicaldepthoffield(var_1["fstop"], var_1["focus_distance"], var_1["focus_speed"], var_1["aperture_speed"]);
@@ -260,18 +247,17 @@ beautiful_view_position(var_0) {
 
   level.player setstance("stand");
 
-  if(level.beautiful_view_static) {
+  if(level.beautiful_view_static)
     beautiful_view_position_static(var_0 + "_static");
-  } else {
+  else
     beautiful_view_position_dynamic(var_0);
-  }
 }
 
 beautiful_view_position_dynamic(var_0) {
   level.player unlink();
   var_1 = getent(var_0, "targetname");
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
   level.player setorigin(var_1.origin);
@@ -282,12 +268,11 @@ beautiful_view_position_static(var_0) {
   level.player unlink();
   var_1 = getent(var_0, "targetname");
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
-  if(!isDefined(level.beautiful_view_ent)) {
+  if(!isdefined(level.beautiful_view_ent))
     level.beautiful_view_ent = common_scripts\utility::spawn_tag_origin();
-  }
 
   level.beautiful_view_ent.origin = var_1.origin;
   level.beautiful_view_ent.angles = var_1.angles;

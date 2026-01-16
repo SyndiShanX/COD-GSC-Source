@@ -15,7 +15,7 @@ init() {
   level thread _update_spikemore_fires();
   PrecacheItem("spikemore_zm");
   PrecacheModel("t5_weapon_bamboo_spear_spikemore_small");
-  trigs = getEntArray("spikemore_purchase", "targetname");
+  trigs = getentarray("spikemore_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
     model = getEnt(trigs[i].target, "targetname");
     model hide();
@@ -29,7 +29,7 @@ init() {
   maps\_zombiemode_utility::register_placeable_mine_for_level("spikemore_zm");
   level._CF_SCRIPTMOVER_CLIENT_FLAG_SPIKEMORE = 5;
   level._spikeable_objects = [];
-  maps\_weaponobjects::create_retrievable_hint("spikemore", &"ZOMBIE_TEMPLE_WEAPON_SPIKEMORE_PICKUP");
+  maps\_weaponobjects::create_retrievable_hint("spikemore", & "ZOMBIE_TEMPLE_WEAPON_SPIKEMORE_PICKUP");
   level.create_level_specific_weaponobject_watchers = ::create_spikemore_watcher_zm;
 }
 
@@ -77,7 +77,7 @@ buy_spikemores() {
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.spikemores_triggered = true;
           }
-          trigs = getEntArray("spikemore_purchase", "targetname");
+          trigs = getentarray("spikemore_purchase", "targetname");
           for(i = 0; i < trigs.size; i++) {
             trigs[i] SetInvisibleToPlayer(who);
           }
@@ -93,7 +93,7 @@ buy_spikemores() {
 
 set_spikemore_visible() {
   players = getplayers();
-  trigs = getEntArray("spikemore_purchase", "targetname");
+  trigs = getentarray("spikemore_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
       if(!players[j] is_player_placeable_mine("spikemore_zm")) {
@@ -192,9 +192,8 @@ shouldAffectWeaponObject(object) {
   dirToPos = pos - object.origin;
   objectForward = anglesToForward(object.angles);
   dist = vectorDot(dirToPos, objectForward);
-  if(dist < level.spikemore_detectionMinDist) {
+  if(dist < level.spikemore_detectionMinDist)
     return false;
-  }
   dirToPos = vectornormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > level.spikemore_detectionDot);
@@ -214,24 +213,19 @@ spikemore_detonation() {
   damagearea enablelinkto();
   damagearea linkto(self);
   self thread delete_spikemores_on_death(damagearea);
-  if(!isDefined(level.spikemores)) {
+  if(!isDefined(level.spikemores))
     level.spikemores = [];
-  }
   level.spikemores = array_add(level.spikemores, self);
-  if(level.spikemores.size > 15 && getDvar(#"player_sustainAmmo") != "0") {
+  if(level.spikemores.size > 15 && getDvar(#"player_sustainAmmo") != "0")
     level.spikemores[0] delete();
-  }
   while(1) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner) {
+    if(isDefined(self.owner) && ent == self.owner)
       continue;
-    }
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow) {
+    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
       continue;
-    }
-    if(!ent shouldAffectWeaponObject(self)) {
+    if(!ent shouldAffectWeaponObject(self))
       continue;
-    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       self _spikemore_SmallSpearActivate();
       return;
@@ -243,9 +237,8 @@ delete_spikemores_on_death(ent) {
   self waittill("death");
   level.spikemores = array_remove_nokeys(level.spikemores, self);
   wait .05;
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 give_spikemores_after_rounds() {
@@ -288,9 +281,9 @@ show_spikemore_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "spikemore_purchased") {
-    text = &"ZOMBIE_TEMPLE_SPIKEMORE_HOWTO";
+    text = & "ZOMBIE_TEMPLE_SPIKEMORE_HOWTO";
   } else {
-    text = &"ZOMBIE_TEMPLE_SPIKEMORE_ALREADY_PURCHASED";
+    text = & "ZOMBIE_TEMPLE_SPIKEMORE_ALREADY_PURCHASED";
   }
   self setup_client_hintelem();
   self.hintelem setText(text);
@@ -320,7 +313,7 @@ _spikemore_TargetInFOV(target) {
   toTarget = target.origin - self.origin;
   toTarget = (toTarget[0], toTarget[1], 0.0);
   toTarget = VectorNormalize(toTarget);
-  forward = anglesToForward((0.0, self.angles[1], 0.0));
+  forward = AnglesToForward((0.0, self.angles[1], 0.0));
   dot = VectorDot(toTarget, forward);
   return dot >= level.spikemore_detectionDot;
 }
@@ -347,10 +340,10 @@ _spikemore_SmallSpearActivate() {
 }
 
 _spikemore_SmallSpearDetonate(targets) {
-  self playSound("claymore_activated_SP");
+  self playsound("claymore_activated_SP");
   wait 0.4;
   self SetClientFlag(level._CF_SCRIPTMOVER_CLIENT_FLAG_SPIKEMORE);
-  self playSound("wpn_spikemore_exp");
+  self playsound("wpn_spikemore_exp");
   for(i = 0; i < targets.size; i++) {
     if(IsAI(targets[i])) {
       targets[i] thread _spikemore_damage(self.origin, self.owner);

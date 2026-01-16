@@ -8,6 +8,7 @@
 #include scripts\core_common\bots\bot_action;
 #include scripts\core_common\bots\bot_chain;
 #include scripts\core_common\struct;
+
 #namespace bot_util;
 
 function_23cbc6c1(goal, b_force = 0, n_radius, n_height) {

@@ -21,9 +21,8 @@ setup_mpla() {
   if(!issubstr(tolower(self.classname), "mpla") && !issubstr(tolower(self.classname), "unita")) {
     return;
   }
-  if(usingrocketlauncher()) {
+  if(usingrocketlauncher())
     self.animtype = "default";
-  }
 
   machete_scripted = isDefined(self.script_noteworthy) && self.script_noteworthy == "machete_scripted" || isDefined(self.script_string) && self.script_string == "machete_scripted";
   machete_hunter = isDefined(self.script_noteworthy) && self.script_noteworthy == "machete_hunter";
@@ -57,13 +56,12 @@ make_default_mpla() {
 }
 
 make_machete_mpla(melee_machete) {
-  if(!is_true(melee_machete)) {
+  if(!is_true(melee_machete))
     self animscripts\shared::placeweaponon(self.weapon, "none");
-  }
 
   self.mpla_melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.mpla_melee_weapon.angles = self gettagangles("tag_weapon_right");
-  self.mpla_melee_weapon setModel("t6_wpn_machete_prop");
+  self.mpla_melee_weapon setmodel("t6_wpn_machete_prop");
   self.mpla_melee_weapon linkto(self, "tag_weapon_right");
   self.mpla_melee_weapon hide();
   self.meleechargedistsq = 129600;
@@ -75,9 +73,8 @@ make_machete_mpla(melee_machete) {
   self.special_knife_attack_fx_tag = "tag_blood_fx";
   self.melee_weapon_ent = self.mpla_melee_weapon;
 
-  if(!is_true(melee_machete)) {
+  if(!is_true(melee_machete))
     machete_mpla_get_ready_for_melee();
-  }
 }
 
 machete_mpla_get_ready_for_melee(melee_machete) {
@@ -113,9 +110,8 @@ machete_mpla_get_ready_for_melee(melee_machete) {
   self.a.disable120runngun = 1;
   self.a.shortcantseeenemywait = 1;
 
-  if(!is_true(melee_machete) && self.team != "allies") {
+  if(!is_true(melee_machete) && self.team != "allies")
     self thread mpla_hunt_immediately_behavior();
-  }
 
   self thread mpla_drop_baton_on_death();
 }
@@ -127,36 +123,32 @@ melee_mpla_pain_override() {
   painanim = undefined;
   self.blockingpain = 1;
 
-  if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE") {
+  if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE")
     return false;
-  }
 
   if(self.a.movement == "run" && !isDefined(self.melee)) {
     if(isDefined(self.damagelocation)) {
-      if(issubstr(self.damagelocation, "right")) {
+      if(issubstr(self.damagelocation, "right"))
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      } else if(issubstr(self.damagelocation, "left")) {
+      else if(issubstr(self.damagelocation, "left"))
         painanim = % ai_digbat_melee_run_f_stumble_l;
-      }
     }
 
     if(!isDefined(painanim)) {
-      if(cointoss()) {
+      if(cointoss())
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      } else {
+      else
         painanim = % ai_digbat_melee_run_f_stumble_l;
-      }
     }
 
     self setflaggedanimknoballrestart("meleepainanim", painanim, % body, 1, 0.1, 1.0);
     animlength = getanimlength(painanim);
     self animscripts\shared::donotetracksfortime(animlength - 0.2, "meleepainanim");
   } else {
-    if(cointoss()) {
+    if(cointoss())
       painanim = % ai_digbat_melee_idle_pain_01;
-    } else {
+    else
       painanim = % ai_digbat_melee_idle_pain_02;
-    }
 
     self setflaggedanimknoballrestart("meleepainanim", painanim, % body, 1, 0.1, 1.0);
     animlength = getanimlength(painanim);
@@ -218,9 +210,8 @@ mpla_drop_baton_on_death() {
   mpla_melee_weapon physicslaunch();
   wait 15;
 
-  if(isDefined(mpla_melee_weapon)) {
+  if(isDefined(mpla_melee_weapon))
     mpla_melee_weapon delete();
-  }
 }
 
 is_machete_mpla() {
@@ -234,19 +225,16 @@ is_rifle_mpla() {
 mpla_melee_aivsai(anglediff) {
   anglethreshold = 100;
 
-  if(self.melee.inprogress) {
+  if(self.melee.inprogress)
     anglethreshold = anglethreshold + 50;
-  }
 
-  if(abs(anglediff) < anglethreshold) {
+  if(abs(anglediff) < anglethreshold)
     return false;
-  }
 
   target = self.melee.target;
 
-  if(isDefined(target.magic_bullet_shield)) {
+  if(isDefined(target.magic_bullet_shield))
     return false;
-  }
 
   if(isDefined(target.meleealwayswin)) {
     assert(!isDefined(self.magic_bullet_shield));
@@ -270,9 +258,9 @@ mpla_melee_aivsai(anglediff) {
 
   if(is_machete_mpla() && target is_rifle_mpla()) {
     if(disttotarget >= 115600) {
-      if(cointoss()) {
+      if(cointoss())
         meleeseqs[meleeseqs.size] = "frontal_dodge_277";
-      } else {
+      else {
         meleeseqs[meleeseqs.size] = "frontal_dodge_210";
         meleeseqs[meleeseqs.size] = "frontal_dodge_140";
         meleeseqs[meleeseqs.size] = "frontal_dodge_70";
@@ -287,13 +275,11 @@ mpla_melee_aivsai(anglediff) {
     } else if(disttotarget >= 4900)
       meleeseqs[meleeseqs.size] = "frontal_dodge_70";
   } else if(is_rifle_mpla() && target is_machete_mpla()) {
-    if(disttotarget >= 19600) {
+    if(disttotarget >= 19600)
       meleeseqs[meleeseqs.size] = "rifle_machete_133";
-    }
   } else if(is_machete_mpla() && target is_machete_mpla()) {
-    if(disttotarget >= 115600) {
+    if(disttotarget >= 115600)
       meleeseqs[meleeseqs.size] = "machete_machete_314";
-    }
   }
 
   if(meleeseqs.size > 0) {
@@ -308,13 +294,12 @@ mpla_melee_aivsai(anglediff) {
 mpla_melee_aivsai_canexecute() {
   target = self.melee.target;
 
-  if(is_machete_mpla() && target is_rifle_mpla()) {
+  if(is_machete_mpla() && target is_rifle_mpla())
     return true;
-  } else if(is_rifle_mpla() && target is_machete_mpla()) {
+  else if(is_rifle_mpla() && target is_machete_mpla())
     return true;
-  } else if(is_machete_mpla() && target is_machete_mpla()) {
+  else if(is_machete_mpla() && target is_machete_mpla())
     return true;
-  }
 
   return false;
 }
@@ -397,9 +382,8 @@ mpla_melee_endfunc() {
       self.got_machete_attached = 1;
       self machete_mpla_get_ready_for_melee();
 
-      if(!is_true(self.hunting_player)) {
+      if(!is_true(self.hunting_player))
         self thread mpla_hunt_immediately_behavior();
-      }
     }
   }
 }

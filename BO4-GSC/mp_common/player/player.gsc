@@ -13,6 +13,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_utils;
+
 #namespace player;
 
 autoexec __init__() {
@@ -29,10 +30,10 @@ spectate_player_watcher() {
     }
   }
 
-  self.watchingactiveclient = 1;
+    self.watchingactiveclient = 1;
 
   while(true) {
-    if(self.pers[# "team"] != # "spectator" || level.gameended) {
+    if(self.pers[#"team"] != #"spectator" || level.gameended) {
       if(!(isDefined(level.inprematchperiod) && level.inprematchperiod)) {
         self val::reset(#"spectate", "freezecontrols");
         self val::reset(#"spectate", "disablegadgets");
@@ -45,7 +46,7 @@ spectate_player_watcher() {
     count = 0;
 
     for(i = 0; i < level.players.size; i++) {
-      if(level.players[i].team != # "spectator") {
+      if(level.players[i].team != #"spectator") {
         count++;
         break;
       }
@@ -61,7 +62,9 @@ spectate_player_watcher() {
       self.watchingactiveclient = 1;
     } else {
       if(self.watchingactiveclient) {
-        [[level.onspawnspectator]]();
+        [
+          [level.onspawnspectator]
+        ]();
         self val::set(#"spectate", "freezecontrols", 1);
         self val::set(#"spectate", "disablegadgets", 1);
       }
@@ -80,7 +83,7 @@ reset_doublexp_timer() {
 
 doublexp_timer() {
   self notify(#"doublexp_timer");
-  self endon(#"doublexp_timer", # "reset_doublexp_timer", # "end_game");
+  self endon(#"doublexp_timer", #"reset_doublexp_timer", #"end_game");
   level flagsys::wait_till("game_start_doublexp");
 
   if(!level.onlinegame) {

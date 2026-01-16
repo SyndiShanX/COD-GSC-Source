@@ -25,7 +25,7 @@
 #namespace zm_genesis_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_teleporter", &__init__, &__main__, undefined);
+  system::register("zm_genesis_teleporter", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -38,7 +38,7 @@ function __init__() {
   level.var_47f4765c = 0;
   level flag::init("genesis_teleporter_used");
   visionset_mgr::register_info("overlay", "zm_factory_teleport", 15000, 61, 1, 1);
-  visionset_mgr::register_info("overlay", "zm_genesis_transported", 15000, 20, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_genesis_transported", 15000, 20, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
   clientfield::register("toplayer", "player_shadowman_teleport_hijack_fx", 15000, 1, "int");
 }
 
@@ -48,22 +48,22 @@ function __main__() {
   level.var_7d7ca0ea thread function_b6d07c17();
   level.teleport_ae_funcs = [];
   if(!issplitscreen()) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
 }
 
 function function_b6d07c17() {
-  while(true) {
+  while (true) {
     self.var_d0866ff4 = [];
     foreach(e_player in level.activeplayers) {
       if(zombie_utility::is_player_valid(e_player) && self player_is_near_pad(e_player)) {
-        if(!isDefined(self.var_d0866ff4)) {
+        if(!isdefined(self.var_d0866ff4)) {
           self.var_d0866ff4 = [];
         } else if(!isarray(self.var_d0866ff4)) {
           self.var_d0866ff4 = array(self.var_d0866ff4);
@@ -80,7 +80,7 @@ function teleport_pad_think() {
   self sethintstring(&"");
   level waittill("sophia_at_teleporter");
   self thread teleport_pad_active_think();
-  while(true) {
+  while (true) {
     self sethintstring(&"");
     level flag::wait_till("teleporter_on");
     exploder::exploder("ee_teleporter_on");
@@ -93,7 +93,7 @@ function teleport_pad_think() {
 
 function teleport_pad_active_think() {
   level thread zm_genesis_vo::function_14ee80c6();
-  while(true) {
+  while (true) {
     self waittill("trigger", e_player);
     if(zm_utility::is_player_valid(e_player) && !level.var_18879020) {
       var_12b659cf = 0;
@@ -103,7 +103,7 @@ function teleport_pad_active_think() {
       if(!function_7ae798cc(e_player)) {
         continue;
       }
-      self playSound("evt_teleporter_warmup");
+      self playsound("evt_teleporter_warmup");
       self thread teleport_trigger_invisible(1);
       b_result = self function_264f93ff(var_12b659cf);
       self thread teleport_trigger_invisible(0);
@@ -166,7 +166,7 @@ function function_264f93ff(var_12b659cf = 0) {
   a_s_pos = struct::get_array(self.target, "targetname");
   var_221e828b = [];
   var_785e8821 = [];
-  for(i = 0; i < a_s_pos.size; i++) {
+  for (i = 0; i < a_s_pos.size; i++) {
     if(a_s_pos[i].script_noteworthy === "sams_room_pos") {
       array::add(var_221e828b, a_s_pos[i], 0);
       continue;
@@ -209,18 +209,18 @@ function player_is_near_pad(player) {
 }
 
 function function_f5a06c(n_duration) {
-  array::thread_all(level.activeplayers, &teleport_pad_player_fx, self, n_duration);
+  array::thread_all(level.activeplayers, & teleport_pad_player_fx, self, n_duration);
 }
 
 function teleport_pad_player_fx(var_7d7ca0ea, n_duration) {
   var_7d7ca0ea endon("fx_done");
   n_start_time = gettime();
   n_total_time = 0;
-  while(n_total_time < n_duration) {
+  while (n_total_time < n_duration) {
     if(array::contains(var_7d7ca0ea.var_d0866ff4, self)) {
       visionset_mgr::activate("overlay", "zm_trap_electric", self, 1.25, 1.25);
       self playrumbleonentity("zm_castle_pulsing_rumble");
-      while(n_total_time < n_duration && array::contains(var_7d7ca0ea.var_d0866ff4, self)) {
+      while (n_total_time < n_duration && array::contains(var_7d7ca0ea.var_d0866ff4, self)) {
         n_current_time = gettime();
         n_total_time = (n_current_time - n_start_time) / 1000;
         util::wait_network_frame();
@@ -262,10 +262,10 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
     var_6b55b1c4 = vectorscale((0, 0, 1), 20);
     var_3abe10e2 = (0, 0, 0);
     var_d9543609 = undefined;
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       e_player = level.players[i];
-      if(var_1bac7e2b || (!var_1bac7e2b && (isDefined(e_player.b_teleported) && e_player.b_teleported))) {
-        if(isDefined(var_a80e3914[i])) {
+      if(var_1bac7e2b || (!var_1bac7e2b && (isdefined(e_player.b_teleported) && e_player.b_teleported))) {
+        if(isdefined(var_a80e3914[i])) {
           e_player.b_teleporting = 1;
           visionset_mgr::deactivate("overlay", "zm_trap_electric", e_player);
           if(var_6bd63d0d) {
@@ -296,7 +296,7 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
           e_player.var_601ebf01.angles = var_a80e3914[i].angles;
           e_player freezecontrols(1);
           util::wait_network_frame();
-          if(isDefined(e_player)) {
+          if(isdefined(e_player)) {
             util::setclientsysstate("levelNotify", "black_box_start", e_player);
             e_player.var_601ebf01.angles = var_a80e3914[i].angles;
           }
@@ -310,13 +310,13 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
     }
     wait(level.n_teleport_delay);
     array::random(a_s_pos) thread teleport_nuke(undefined, 300);
-    for(i = 0; i < level.activeplayers.size; i++) {
+    for (i = 0; i < level.activeplayers.size; i++) {
       util::setclientsysstate("levelNotify", "black_box_end", level.activeplayers[i]);
     }
     util::wait_network_frame();
-    for(i = 0; i < var_19ff0dfb.size; i++) {
+    for (i = 0; i < var_19ff0dfb.size; i++) {
       e_player = var_19ff0dfb[i];
-      if(!isDefined(e_player)) {
+      if(!isdefined(e_player)) {
         continue;
       }
       e_player unlink();
@@ -331,7 +331,7 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
       } else {
         visionset_mgr::deactivate("overlay", "zm_factory_teleport", e_player);
       }
-      if(isDefined(var_d9543609)) {
+      if(isdefined(var_d9543609)) {
         var_d9543609 ball::reset_ball(0);
       }
       e_player enableweapons();
@@ -361,9 +361,9 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
 function teleport_nuke(n_max_zombies, n_range) {
   a_ai_zombies = getaiteamarray(level.zombie_team);
   a_ai_zombies = util::get_array_of_closest(self.origin, a_ai_zombies, undefined, n_max_zombies, n_range);
-  for(i = 0; i < a_ai_zombies.size; i++) {
+  for (i = 0; i < a_ai_zombies.size; i++) {
     wait(randomfloatrange(0.2, 0.3));
-    if(!isDefined(a_ai_zombies[i])) {
+    if(!isdefined(a_ai_zombies[i])) {
       continue;
     }
     if(zm_utility::is_magic_bullet_shield_enabled(a_ai_zombies[i])) {
@@ -382,10 +382,10 @@ function teleport_nuke(n_max_zombies, n_range) {
 
 function teleport_2d_audio() {
   self endon("fx_done");
-  while(true) {
+  while (true) {
     wait(1.7);
-    for(i = 0; i < level.players.size; i++) {
-      if(isDefined(level.players[i])) {
+    for (i = 0; i < level.players.size; i++) {
+      if(isdefined(level.players[i])) {
         if(array::contains(self.var_d0866ff4, level.players[i])) {
           util::setclientsysstate("levelNotify", "t2d", level.players[i]);
         }

@@ -4,9 +4,11 @@
 ********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_desc;
 
 class cct_shared_desc: cluielem {
+
   function set_state(localclientnum, state_name) {
     if(#"defaultstate" == state_name) {
       set_data(localclientnum, "_state", 0);
@@ -27,12 +29,12 @@ class cct_shared_desc: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "ct_shared_desc");
+    cluielem::open(localclientnum, #"ct_shared_desc");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
+    set_state(localclientnum, #"defaultstate");
   }
 
   function register_clientside(uid) {

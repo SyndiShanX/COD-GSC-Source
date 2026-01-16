@@ -3,8 +3,11 @@
  * Script: character\mp_character_delta_elite_assault_ba.gsc
 *************************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_delta_elite_assault_ba");
+  self setmodel("mp_body_delta_elite_assault_ba");
   codescripts\character::attachhead("alias_delta_elite_heads", xmodelalias\alias_delta_elite_heads::main());
   self setviewmodel("viewhands_delta");
   self.voice = "delta";

@@ -144,9 +144,8 @@ setup_ambush() {
   level.player.ignoreme = 1;
   maps\_utility::battlechatter_off();
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_ambush();
-  }
 
   thread spawn_ambush_vehicles();
   thread player_failcase_tunnel();
@@ -185,9 +184,8 @@ setup_checkpoint() {
   level.player.ignoreme = 1;
   maps\_utility::battlechatter_off();
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_checkpoint();
-  }
 
   thread intro_checkpoint_vo();
   thread obj_enterbase();
@@ -233,9 +231,8 @@ begin_intro() {
   maps\clockwork_code::spawn_allies();
   thread override_setup_headmodels_for_allies();
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_intro();
-  }
 
   foreach(var_1 in level.allies) {
     var_1.ignoreall = 1;
@@ -271,7 +268,7 @@ intro_display_introscreen() {
   level.player freezecontrols(1);
   take_away_offhands();
   thread maps\_utility::endondeath();
-  maps\_utility::intro_screen_create(&"CLOCKWORK_INTROSCREEN_LINE_1", &"CLOCKWORK_INTROSCREEN_LINE_2", &"CLOCKWORK_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"CLOCKWORK_INTROSCREEN_LINE_1", & "CLOCKWORK_INTROSCREEN_LINE_2", & "CLOCKWORK_INTROSCREEN_LINE_5");
   level.introscreen_complete_delay = 2;
   wait 1;
   level.intro_black = thread maps\clockwork_code::introscreen_generic_black_fade_in_on_flag("start_watch_anim", 2.5);
@@ -302,9 +299,8 @@ player_intro_anims(var_0, var_1, var_2, var_3) {
   level.player switchtoweapon("helmet_goggles");
   wait 2.467;
 
-  foreach(var_7 in var_3) {
-    level.player giveweapon(var_7);
-  }
+  foreach(var_7 in var_3)
+  level.player giveweapon(var_7);
 
   level.player switchtoweapon("gm6+scopegm6_sp+silencer03_sp");
   level.player takeweapon("helmet_goggles");
@@ -348,9 +344,8 @@ intro_anims() {
   var_0 maps\_anim::anim_first_frame_solo(var_1, "clock_prepare");
   var_2 = level.player getweaponslistprimaries();
 
-  foreach(var_4 in var_2) {
-    level.player takeweapon(var_4);
-  }
+  foreach(var_4 in var_2)
+  level.player takeweapon(var_4);
 
   wait 1.5;
   thread player_intro_anims(var_0, "watch_sync_intro", var_1, var_2);
@@ -360,18 +355,16 @@ intro_anims() {
   level.allies[1] thread handle_keegan_intro_anim(var_0);
   level.allies[2] thread handle_cipher_intro_anim(var_0);
 
-  foreach(var_7 in level.allies) {
-    var_7 maps\_utility::forceuseweapon("gm6+scopegm6_sp+silencer03_sp", "primary");
-  }
+  foreach(var_7 in level.allies)
+  var_7 maps\_utility::forceuseweapon("gm6+scopegm6_sp+silencer03_sp", "primary");
 
   wait 1;
   common_scripts\utility::flag_set("start_watch_anim");
   wait 8;
   common_scripts\utility::flag_set("FLAG_obj_enterbase");
 
-  foreach(var_7 in level.allies) {
-    var_7 maps\_utility::enable_cqbwalk();
-  }
+  foreach(var_7 in level.allies)
+  var_7 maps\_utility::enable_cqbwalk();
 
   wait 5;
   common_scripts\utility::flag_set("start_intro_convoy");
@@ -422,9 +415,8 @@ handle_cipher_intro_anim(var_0) {
 hide_at_end_anim(var_0) {
   level.allies[0] waittillmatch("single anim", "head_swap");
 
-  if(var_0.animname == "player_mask") {
+  if(var_0.animname == "player_mask")
     setup_disguise_for_allies();
-  }
 
   var_0 delete();
 }
@@ -479,9 +471,8 @@ handle_radiotower_guy() {
   thread delete_accessories_on_death(var_1, var_0);
   common_scripts\utility::flag_wait("start_enemies_provoked_early");
 
-  if(isDefined(level.introcp_guy_radio) && isalive(level.introcp_guy_radio)) {
+  if(isDefined(level.introcp_guy_radio) && isalive(level.introcp_guy_radio))
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), level.introcp_guy_radio gettagorigin("j_head"));
-  }
 }
 
 delete_accessories_on_death(var_0, var_1) {
@@ -524,9 +515,8 @@ intro_checkpoint_vo() {
   wait 1.5;
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_wevegot3on");
 
-  foreach(var_1 in level.introcp_guys_tower) {
-    var_1 thread handle_com_tower_kill();
-  }
+  foreach(var_1 in level.introcp_guys_tower)
+  var_1 thread handle_com_tower_kill();
 
   level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_letsdropemtogether");
   thread look_at_tower_vo();
@@ -603,9 +593,8 @@ cipher_approach_anims(var_0, var_1, var_2, var_3, var_4) {
 handle_ciper_approach_anims_end(var_0) {
   common_scripts\utility::flag_wait_any("intro_finished", "start_enemies_provoked_early");
 
-  if(common_scripts\utility::flag("start_enemies_provoked_early")) {
+  if(common_scripts\utility::flag("start_enemies_provoked_early"))
     maps\_utility::enable_ai_color();
-  }
 
   var_0 notify("stop_loop");
   maps\_utility::anim_stopanimscripted();
@@ -618,9 +607,8 @@ cipher_ambush_approach(var_0, var_1, var_2, var_3, var_4, var_5) {
   level notify("c_reached_ambush_anim");
   common_scripts\utility::flag_set("c_reached_ambush_anim");
 
-  if(!common_scripts\utility::flag("k_reached_ambush_anim")) {
+  if(!common_scripts\utility::flag("k_reached_ambush_anim"))
     var_5 thread maps\_anim::anim_loop_solo(var_0, var_4, "stop_loop");
-  }
 
   level waittill("k_reached_ambush_anim");
   var_5 notify("stop_loop");
@@ -649,9 +637,8 @@ radio_tower_guy_shot() {
     wait 1.5;
   }
 
-  if(!common_scripts\utility::flag("ok_shoot_radio")) {
+  if(!common_scripts\utility::flag("ok_shoot_radio"))
     common_scripts\utility::flag_set("start_enemies_provoked_early");
-  }
 }
 
 handle_checkpoint_end_condition() {
@@ -763,9 +750,8 @@ checkpoint_combat_failsafe() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.fake_dead)) {
+    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.fake_dead))
       var_2 thread alert_enemies_early();
-    }
   }
 
   var_4 = maps\_utility::get_ai_group_ai("intro_cp_radio");
@@ -788,9 +774,8 @@ handle_radio_tower_kill() {
   level endon("start_enemies_provoked_early");
   self waittill("damage", var_0, var_1);
 
-  if(var_1 == level.player) {
+  if(var_1 == level.player)
     level notify("player_shot_someone_on_radio");
-  }
 }
 
 handle_com_tower_kill() {
@@ -798,9 +783,8 @@ handle_com_tower_kill() {
   level endon("start_enemies_provoked_early");
   self waittill("damage", var_0, var_1);
 
-  if(var_1 == level.player) {
+  if(var_1 == level.player)
     level notify("player_shot_target_on_tower");
-  }
 }
 
 handle_remaining_kill() {
@@ -808,9 +792,8 @@ handle_remaining_kill() {
   level endon("start_enemies_provoked_early");
   self waittill("damage", var_0, var_1);
 
-  if(var_1 == level.player) {
+  if(var_1 == level.player)
     level notify("player_shot_someone_in_remaining");
-  }
 }
 
 cipher_keegan_tower_kill() {
@@ -835,15 +818,13 @@ remaining_kill() {
 force_kill_balcony_keeganguy() {
   wait 1;
 
-  if(isDefined(level.intro_balcony_guy) && isalive(level.intro_balcony_guy)) {
+  if(isDefined(level.intro_balcony_guy) && isalive(level.intro_balcony_guy))
     magicbullet(level.allies[0].weapon, level.allies[0] gettagorigin("tag_flash"), level.intro_balcony_guy gettagorigin("j_head"));
-  }
 
   wait 1.5;
 
-  if(isDefined(level.intro_keegandrag_guy) && isalive(level.intro_keegandrag_guy)) {
+  if(isDefined(level.intro_keegandrag_guy) && isalive(level.intro_keegandrag_guy))
     magicbullet(level.allies[1].weapon, level.allies[0] gettagorigin("tag_flash"), level.intro_keegandrag_guy gettagorigin("j_head"));
-  }
 }
 
 handle_radio_alert() {
@@ -866,13 +847,11 @@ handle_tower_alert() {
   self.disable_dive_whizby_react = 1;
   maps\_utility::gun_remove();
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "tower_player_target") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "tower_player_target")
     thread tower_tapglass_scene("tapglass_enemy_a");
-  }
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "tower_walkout_guy") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "tower_walkout_guy")
     thread tower_tapglass_scene("tapglass_enemy_b");
-  }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "leanrailguy") {
     self.allowdeath = 1;
@@ -941,40 +920,34 @@ handle_remaining_alert() {
 kill_crate_guy() {
   self waittill("damage");
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), self gettagorigin("j_head"));
-  }
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self kill();
-  }
 }
 
 kill_checkpointb_guy() {
   self waittill("damage");
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     magicbullet(level.allies[1].weapon, level.allies[1] gettagorigin("tag_flash"), self gettagorigin("j_head"));
-  }
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self kill();
-  }
 }
 
 kill_on_failsafe() {
   common_scripts\utility::flag_wait_any("start_enemies_provoked_early", "checkpoint_player_picks_target");
   wait(randomintrange(1, 2));
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), self gettagorigin("j_head"));
-  }
 
   wait 1;
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     self kill();
-  }
 }
 
 ammo_crate_failsafe(var_0, var_1, var_2) {
@@ -1181,20 +1154,17 @@ handle_baker_ambush_anims(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6[0].animname = "baker";
   var_6[1].animname = "baker_bag";
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_6 = common_scripts\utility::add_to_array(var_6, var_4);
-  }
 
   var_1 maps\clockwork_code::hide_dufflebag();
   var_0 maps\_anim::anim_single(var_6, "clock_intro");
 
-  if(var_4 == level.intro_balcony_guy) {
+  if(var_4 == level.intro_balcony_guy)
     level.intro_balcony_guy thread kill_guy_at_end_of_anim();
-  }
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     common_scripts\utility::flag_set(var_5);
-  }
 
   var_0 thread maps\_anim::anim_loop_solo(var_1, "clock_ambush_hut_wait", "stop_clock_ambush_hut_wait");
   common_scripts\utility::flag_wait("FLAG_baker_out_of_hut");
@@ -1219,15 +1189,13 @@ allies_reach_and_start_scene(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread maps\clockwork_audio::foley_pre_ambush();
   wait 0.05;
 
-  foreach(var_8 in var_1) {
-    var_8 maps\clockwork_code::hide_dufflebag();
-  }
+  foreach(var_8 in var_1)
+  var_8 maps\clockwork_code::hide_dufflebag();
 
   level.intro_keegandrag_guy thread kill_guy_at_end_of_anim();
 
-  foreach(var_11 in var_1) {
-    var_11 thread waittill_end_of_anim_for_loop(var_0, "clock_ambush_wait", "stop_clock_ambush_wait");
-  }
+  foreach(var_11 in var_1)
+  var_11 thread waittill_end_of_anim_for_loop(var_0, "clock_ambush_wait", "stop_clock_ambush_wait");
 }
 
 goto_anim_start_spot(var_0, var_1) {
@@ -1279,7 +1247,7 @@ kill_guy_at_end_of_anim() {
 obj_enterbase() {
   common_scripts\utility::flag_wait("FLAG_obj_enterbase");
   var_0 = maps\_utility::obj("enterbase");
-  objective_add(var_0, "active", &"CLOCKWORK_OBJ_INTO_BASE");
+  objective_add(var_0, "active", & "CLOCKWORK_OBJ_INTO_BASE");
   objective_current(var_0);
   common_scripts\utility::flag_wait("FLAG_obj_enterbase_complete");
   maps\_utility::objective_complete(var_0);
@@ -1289,14 +1257,13 @@ obj_bodydrag() {
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag");
   var_0 = maps\_utility::obj("CleanupCheckpoint");
   var_1 = getent("obj_dragbody", "targetname");
-  objective_add(var_0, "active", &"CLOCKWORK_OBJ_CHECKPOINT");
+  objective_add(var_0, "active", & "CLOCKWORK_OBJ_CHECKPOINT");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag_complete");
 
-  if(!common_scripts\utility::flag("destroy_player_ambush")) {
+  if(!common_scripts\utility::flag("destroy_player_ambush"))
     maps\_utility::objective_complete(var_0);
-  }
 }
 
 obj_getinjeep() {
@@ -1314,7 +1281,7 @@ obj_getinjeep() {
 obj_stabdriver() {
   var_0 = maps\_utility::obj("stab");
   var_1 = getent("obj_stabdriver", "targetname");
-  objective_add(var_0, "current", &"CLOCKWORK_OBJ_DRIVER");
+  objective_add(var_0, "current", & "CLOCKWORK_OBJ_DRIVER");
   objective_current(var_0);
   thread complete_stabdriver(var_0);
   wait 1.75;
@@ -1370,13 +1337,11 @@ ambush_jeep2_guy_wave(var_0) {
 }
 
 guy_silent_death(var_0) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     wait(var_0);
-  }
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self.a.nodeath = 1;
   maps\_utility::set_allowdeath(1);
@@ -1456,9 +1421,8 @@ handle_player_bodydrag_death() {
 
   wait 3;
 
-  if(isDefined(level.intro_bodydrag_guy) && isalive(level.intro_bodydrag_guy)) {
+  if(isDefined(level.intro_bodydrag_guy) && isalive(level.intro_bodydrag_guy))
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), level.intro_bodydrag_guy gettagorigin("j_head"));
-  }
 }
 
 key_failsafe(var_0) {
@@ -1485,9 +1449,8 @@ player_bodydrag_damage_watcher() {
   self.no_dog_target = 1;
   self waittill("damage");
 
-  if(!common_scripts\utility::flag("FLAG_take_the_rest")) {
+  if(!common_scripts\utility::flag("FLAG_take_the_rest"))
     common_scripts\utility::flag_set("start_enemies_provoked_early");
-  }
 
   thread handle_backpack_objective();
   self.dontevershoot = 1;
@@ -1533,9 +1496,8 @@ handle_keegandrag_death() {
 
   wait 2;
 
-  if(isDefined(level.intro_keegandrag_guy) && isalive(level.intro_keegandrag_guy)) {
+  if(isDefined(level.intro_keegandrag_guy) && isalive(level.intro_keegandrag_guy))
     magicbullet(level.allies[1].weapon, level.allies[1] gettagorigin("tag_flash"), level.intro_keegandrag_guy gettagorigin("j_head"));
-  }
 
   thread keegan_body_door_close();
 }
@@ -1561,9 +1523,8 @@ keegandrag_death_damage_watcher() {
   self.no_dog_target = 1;
   self waittill("damage");
 
-  if(!common_scripts\utility::flag("FLAG_take_the_rest")) {
+  if(!common_scripts\utility::flag("FLAG_take_the_rest"))
     common_scripts\utility::flag_set("start_enemies_provoked_early");
-  }
 
   self.dontevershoot = 1;
   self.ignoreme = 1;
@@ -1727,9 +1688,8 @@ player_stab_driver() {
 waittill_scene_over_enable_weapons() {
   var_0 = level common_scripts\utility::waittill_any_return("ambush_player_shot", "ambush_player_kill", "ambush_keegan_kill", "player_knifes_driver", "ambush_scene_start");
 
-  if(var_0 == "player_knifes_driver") {
+  if(var_0 == "player_knifes_driver")
     level waittill("ambush_scene_over");
-  }
 
   level.player enableweapons();
   level.player allowmelee(1);
@@ -1752,11 +1712,10 @@ player_looking_at_stabguy() {
     if(common_scripts\utility::flag("player_near_stab_guy")) {
       var_0 = common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, level.cosine["25"]);
 
-      if(var_0) {
+      if(var_0)
         common_scripts\utility::flag_set("player_looking_at_stab_guy");
-      } else {
+      else
         common_scripts\utility::flag_clear("player_looking_at_stab_guy");
-      }
 
       continue;
     }
@@ -1796,7 +1755,7 @@ stab_enemy_hint() {
   level endon("ambush_player_kill");
   level endon("ambush_keegan_kill");
   level endon("ambush_player_timeout");
-  var_0 = &"CLOCKWORK_PROMPT_STAB";
+  var_0 = & "CLOCKWORK_PROMPT_STAB";
   thread stab_enemy_hint_cleanup();
 
   while(!common_scripts\utility::flag("ambush_scene_stab")) {
@@ -1804,9 +1763,8 @@ stab_enemy_hint() {
     thread maps\_utility::hint(var_0);
     common_scripts\utility::flag_set("player_in_position_for_stab_kill");
 
-    while(common_scripts\utility::flag("player_looking_at_stab_guy")) {
+    while(common_scripts\utility::flag("player_looking_at_stab_guy"))
       wait 0.05;
-    }
 
     common_scripts\utility::flag_clear("player_in_position_for_stab_kill");
     thread maps\_utility::hint_fade();
@@ -1843,9 +1801,8 @@ handle_balcony_death() {
   level.intro_balcony_guy.ignoreall = 0;
   wait 4;
 
-  if(isDefined(level.intro_balcony_guy) && isalive(level.intro_balcony_guy)) {
+  if(isDefined(level.intro_balcony_guy) && isalive(level.intro_balcony_guy))
     magicbullet(level.allies[0].weapon, level.allies[0] gettagorigin("tag_flash"), level.intro_balcony_guy gettagorigin("j_head"));
-  }
 }
 
 balcony_death_damage_watcher() {
@@ -1862,9 +1819,8 @@ balcony_death_damage_watcher() {
   self.no_dog_target = 1;
   self waittill("damage");
 
-  if(!common_scripts\utility::flag("FLAG_take_the_rest")) {
+  if(!common_scripts\utility::flag("FLAG_take_the_rest"))
     common_scripts\utility::flag_set("start_enemies_provoked_early");
-  }
 
   self.dontevershoot = 1;
   self.ignoreme = 1;
@@ -1891,9 +1847,8 @@ start_ambush_scene() {
     level.allies[2].animname = "cipher";
     level waittill("enable_stab");
 
-    foreach(var_1 in level.ambush_enemies) {
-      var_1 thread ambush_notify_on_player_kill();
-    }
+    foreach(var_1 in level.ambush_enemies)
+    var_1 thread ambush_notify_on_player_kill();
 
     thread ambush_notify_on_player_shot();
     level common_scripts\utility::waittill_any("ambush_player_shot", "ambush_player_kill", "ambush_keegan_kill", "player_knifes_driver", "ambush_scene_start");
@@ -2000,21 +1955,18 @@ animate_ambush_scene_enemies() {
     var_1 unlink();
   }
 
-  foreach(var_4 in level.ambush_enemies) {
-    var_4 maps\_utility::anim_stopanimscripted();
-  }
+  foreach(var_4 in level.ambush_enemies)
+  var_4 maps\_utility::anim_stopanimscripted();
 
   level.jeep notify("stop_loop");
   level.pre_ambush_scene_org maps\_anim::anim_single(level.ambush_enemies, "clock_ambush_start_enemies");
   thread ambush_notify_on_player_timeout(12);
 
-  if(isDefined(level.ambush_enemies[0]) && isalive(level.ambush_enemies[0])) {
+  if(isDefined(level.ambush_enemies[0]) && isalive(level.ambush_enemies[0]))
     level.pre_ambush_scene_org thread maps\_anim::anim_loop_solo(level.ambush_enemies[0], "clock_ambush_wait", "stop_clock_ambush_wait");
-  }
 
-  if(isDefined(level.ambush_enemies[1]) && isalive(level.ambush_enemies[1])) {
+  if(isDefined(level.ambush_enemies[1]) && isalive(level.ambush_enemies[1]))
     level.pre_ambush_scene_org thread maps\_anim::anim_loop_solo(level.ambush_enemies[1], "clock_ambush_wait", "stop_clock_ambush_wait");
-  }
 }
 
 ambush_notify_on_player_timeout(var_0) {
@@ -2028,9 +1980,8 @@ ambush_notify_on_player_timeout(var_0) {
   level notify("ambush_scene_start");
   wait 1.5;
 
-  if(isDefined(level.ambush_jeep_driver) && isalive(level.ambush_jeep_driver)) {
+  if(isDefined(level.ambush_jeep_driver) && isalive(level.ambush_jeep_driver))
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), level.ambush_jeep_driver gettagorigin("j_head"));
-  }
 
   thread maps\clockwork_audio::ambush_kill_driver_cypher();
 }
@@ -2061,9 +2012,8 @@ ambush_notify_on_player_shot() {
 }
 
 ambush_kill_driver() {
-  if(!common_scripts\utility::flag("start_ambush_scene_enemies")) {
+  if(!common_scripts\utility::flag("start_ambush_scene_enemies"))
     wait 1;
-  }
 
   if(isDefined(level.ambush_jeep_driver) && isalive(level.ambush_jeep_driver)) {
     magicbullet(level.allies[2].weapon, level.allies[2] gettagorigin("tag_flash"), level.ambush_jeep_driver gettagorigin("j_head"));
@@ -2101,9 +2051,8 @@ vehicle_play_guy_anim(var_0, var_1, var_2, var_3, var_4) {
   var_1 maps\_anim::anim_single_solo(var_1, var_0);
 
   if(isDefined(var_3) && !var_3) {
-    if(isDefined(var_4) && var_4) {
+    if(isDefined(var_4) && var_4)
       self unlink();
-    }
 
     self notify("vehicle_play_guy_anim_complete");
     return;
@@ -2126,11 +2075,10 @@ intro_ambush_vo() {
   level endon("ambush_keegan_kill");
   level endon("destroy_player_ambush");
 
-  if(common_scripts\utility::flag("start_enemies_provoked_early")) {
+  if(common_scripts\utility::flag("start_enemies_provoked_early"))
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_beencleaner");
-  } else {
+  else
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_nicejob");
-  }
 
   common_scripts\utility::flag_wait("checkpoint_taken2");
   wait 0.5;
@@ -2205,9 +2153,8 @@ intro_drive() {
   thread spawn_enemy_road_jeep();
   thread entrance_drones();
 
-  foreach(var_4 in level.allies) {
-    var_4.alertlevel = "noncombat";
-  }
+  foreach(var_4 in level.allies)
+  var_4.alertlevel = "noncombat";
 
   level.gold_jeep_player_door delete();
   level.jeep_player_arms = maps\_utility::spawn_anim_model("player_rig");
@@ -2264,7 +2211,7 @@ intro_drive() {
   common_scripts\utility::flag_wait("start_watchsync_vo");
   maps\_utility::stop_exploder(2000);
   thread allies_jeep_sync_anim();
-  thread blackout_timer(70, &"CLOCKWORK_POWERDOWN", 1, 0);
+  thread blackout_timer(70, & "CLOCKWORK_POWERDOWN", 1, 0);
   thread maps\clockwork_interior_nvg::init_tunnel();
   wait 4;
   level.jeep thread vehicle_play_guy_anim("clockwork_jeep_lookout", level.allies[2], 3, 1);
@@ -2345,9 +2292,8 @@ exit_jeep_anims() {
     level.allies[2].get_out_override = % clockwork_garage_arrival_cypher;
     level.jeep maps\_vehicle::vehicle_unload();
   } else {
-    foreach(var_1 in level.allies) {
-      var_1 thread vehicle_play_guy_anim("clockwork_garage_arrival", var_1, 0, 0, 1);
-    }
+    foreach(var_1 in level.allies)
+    var_1 thread vehicle_play_guy_anim("clockwork_garage_arrival", var_1, 0, 0, 1);
   }
 
   common_scripts\utility::flag_set("introdrive_finished");
@@ -2356,16 +2302,14 @@ exit_jeep_anims() {
   level.allies[1].animname = "keegan";
   level.allies[2].animname = "cipher";
 
-  foreach(var_1 in level.allies) {
-    var_1 maps\_utility::gun_recall();
-  }
+  foreach(var_1 in level.allies)
+  var_1 maps\_utility::gun_recall();
 
   level.jeep.animname = "garage_arrival_jeep";
   thread vehicle_play_jeep_scripted_anim("clockwork_garage_arrival");
 
-  if(!isDefined(level.player_door)) {
+  if(!isDefined(level.player_door))
     level.player_door = maps\_utility::spawn_anim_model("jeep_left_door");
-  }
 
   level.player_door thread maps\_anim::anim_single_solo(level.player_door, "clockwork_garage_arrival");
 
@@ -2428,9 +2372,8 @@ player_exit_jeep() {
   level.jeep thread maps\_anim::anim_first_frame(var_2, "intro_jeep_exit_player");
   level.jeep thread maps\_anim::anim_single(var_2, "intro_jeep_exit_player");
 
-  if(!common_scripts\utility::flag("interior_start_point")) {
+  if(!common_scripts\utility::flag("interior_start_point"))
     level.player playerlinktoblend(level.player_rig, "tag_player", 1);
-  }
 
   level.player_rig waittillmatch("single anim", "end");
   level.player unlink();
@@ -2478,9 +2421,8 @@ damage_watcher_intro() {
 damage_watcher_ambush(var_0) {
   self endon("death");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     level endon(var_0);
-  }
 
   self waittill("damage", var_1, var_2);
 
@@ -2539,9 +2481,8 @@ destroy_player_ambush() {
   self.ignoreall = 0;
   level.player.ignoreme = 0;
 
-  foreach(var_1 in level.allies) {
-    var_1.ignoreme = 0;
-  }
+  foreach(var_1 in level.allies)
+  var_1.ignoreme = 0;
 
   if(self.vehicletype == "btr80") {
     if(common_scripts\utility::flag("btr_reverse_here")) {
@@ -2571,9 +2512,8 @@ destroy_player_ambush() {
   if(self.vehicletype == "humvee") {
     self vehicle_setspeed(0, 10, 12);
 
-    if(!common_scripts\utility::flag("start_ambush_scene_enemies")) {
+    if(!common_scripts\utility::flag("start_ambush_scene_enemies"))
       wait(randomintrange(1, 3));
-    }
 
     var_4 = maps\_vehicle::vehicle_unload("all");
 
@@ -2638,7 +2578,7 @@ notify_ambush_destroy_player_off() {
 }
 
 mission_failed_intro() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2715,9 +2655,8 @@ blackout_timer(var_0, var_1, var_2, var_3) {
       if(getdvar("notimer") == "1") {
         return;
       }
-      if(!isDefined(var_2)) {
+      if(!isDefined(var_2))
         var_2 = 0;
-      }
 
       level.hudtimerindex = 20;
       level.timer = maps\_hud_util::get_countdown_hud(-250);
@@ -2731,9 +2670,8 @@ blackout_timer(var_0, var_1, var_2, var_3) {
       if(getdvar("notimer") == "1") {
         return;
       }
-      if(!isDefined(var_2)) {
+      if(!isDefined(var_2))
         var_2 = 0;
-      }
 
       level.hudtimerindex = 20;
       level.timer = maps\_hud_util::get_countdown_hud(-250);
@@ -2768,9 +2706,8 @@ entrance_drones() {
   foreach(var_3 in var_0) {
     var_3.runanim = maps\_utility::getgenericanim("active_patrolwalk_gundown");
 
-    if(isDefined(self.animation)) {
+    if(isDefined(self.animation))
       var_3.idleanim = maps\_utility::getgenericanim(self.animation);
-    }
   }
 }
 
@@ -2787,7 +2724,7 @@ player_failcase_tunnel() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_tunnel")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+        setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -2802,7 +2739,7 @@ player_failcase_tunnel() {
 player_failcase_tunnel_overrun() {
   level endon("player_in_jeep");
   common_scripts\utility::flag_wait("FLAG_player_failcase_tunnel_overrun");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

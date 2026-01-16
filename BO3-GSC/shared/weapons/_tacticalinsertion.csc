@@ -13,22 +13,22 @@
 function init_shared() {
   level._effect["tacticalInsertionFriendly"] = "_t6/misc/fx_equip_tac_insert_light_grn";
   level._effect["tacticalInsertionEnemy"] = "_t6/misc/fx_equip_tac_insert_light_red";
-  clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", &spawned, 0, 0);
+  clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", & spawned, 0, 0);
   latlongstruct = struct::get("lat_long", "targetname");
-  if(isDefined(latlongstruct)) {
+  if(isdefined(latlongstruct)) {
     mapx = latlongstruct.origin[0];
     mapy = latlongstruct.origin[1];
     lat = latlongstruct.script_vector[0];
     long = latlongstruct.script_vector[1];
   } else {
-    if(isDefined(level.worldmapx) && isDefined(level.worldmapy)) {
+    if(isdefined(level.worldmapx) && isdefined(level.worldmapy)) {
       mapx = level.worldmapx;
       mapy = level.worldmapy;
     } else {
       mapx = 0;
       mapy = 0;
     }
-    if(isDefined(level.worldlat) && isDefined(level.worldlong)) {
+    if(isdefined(level.worldlat) && isdefined(level.worldlong)) {
       lat = level.worldlat;
       long = level.worldlong;
     } else {
@@ -50,9 +50,9 @@ function playflarefx(localclientnum) {
   self endon("entityshutdown");
   level endon("player_switch");
   if(util::friend_not_foe(localclientnum)) {
-    self.tacticalinsertionfx = playFXOnTag(localclientnum, level._effect["tacticalInsertionFriendly"], self, "tag_flash");
+    self.tacticalinsertionfx = playfxontag(localclientnum, level._effect["tacticalInsertionFriendly"], self, "tag_flash");
   } else {
-    self.tacticalinsertionfx = playFXOnTag(localclientnum, level._effect["tacticalInsertionEnemy"], self, "tag_flash");
+    self.tacticalinsertionfx = playfxontag(localclientnum, level._effect["tacticalInsertionEnemy"], self, "tag_flash");
   }
   self thread watchtacinsertshutdown(localclientnum, self.tacticalinsertionfx);
   looporigin = self.origin;
@@ -66,8 +66,8 @@ function watchtacinsertshutdown(localclientnum, fxhandle) {
 }
 
 function stopflareloopwatcher(looporigin) {
-  while(true) {
-    if(!isDefined(self) || !isDefined(self.tacticalinsertionfx)) {
+  while (true) {
+    if(!isdefined(self) || !isdefined(self.tacticalinsertionfx)) {
       audio::stoploopat("fly_tinsert_beep", looporigin);
       break;
     }
@@ -77,9 +77,9 @@ function stopflareloopwatcher(looporigin) {
 
 function checkforplayerswitch(localclientnum) {
   self endon("entityshutdown");
-  while(true) {
+  while (true) {
     level waittill("player_switch");
-    if(isDefined(self.tacticalinsertionfx)) {
+    if(isdefined(self.tacticalinsertionfx)) {
       stopfx(localclientnum, self.tacticalinsertionfx);
       self.tacticalinsertionfx = undefined;
     }

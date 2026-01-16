@@ -5,9 +5,11 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace ct_recon_enemy_reinforcement;
 
 class class_27e8fec4: cluielem {
+
   function close(player) {
     cluielem::close_luielem(player);
   }

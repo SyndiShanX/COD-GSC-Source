@@ -33,23 +33,23 @@ function default_onforfeit(team) {
   wait(10);
   announcement(game["strings"]["opponent_forfeiting_in"], 10, 0);
   wait(10);
-  endreason = &"";
+  endreason = & "";
   if(level.multiteam) {
     setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
     endreason = game["strings"]["other_teams_forfeited"];
     winner = team;
   } else {
-    if(!isDefined(team)) {
+    if(!isdefined(team)) {
       setdvar("ui_text_endreason", game["strings"]["players_forfeited"]);
       endreason = game["strings"]["players_forfeited"];
       winner = level.players[0];
     } else {
-      if(isDefined(level.teams[team])) {
+      if(isdefined(level.teams[team])) {
         endreason = game["strings"][team + "_forfeited"];
         setdvar("ui_text_endreason", endreason);
         winner = getwinningteamfromloser(team);
       } else {
-        assert(isDefined(team), "");
+        assert(isdefined(team), "");
         assert(0, ("" + team) + "");
         winner = "tie";
       }
@@ -65,7 +65,7 @@ function default_onforfeit(team) {
 }
 
 function default_ondeadevent(team) {
-  if(isDefined(level.teams[team])) {
+  if(isdefined(level.teams[team])) {
     eliminatedstring = game["strings"][team + "_eliminated"];
     iprintln(eliminatedstring);
     setdvar("ui_text_endreason", eliminatedstring);
@@ -84,7 +84,7 @@ function default_ondeadevent(team) {
 }
 
 function default_onlastteamaliveevent(team) {
-  if(isDefined(level.teams[team])) {
+  if(isdefined(level.teams[team])) {
     eliminatedstring = game["strings"]["enemies_eliminated"];
     iprintln(eliminatedstring);
     setdvar("ui_text_endreason", eliminatedstring);
@@ -109,8 +109,8 @@ function default_onroundendgame(winner) {
 }
 
 function default_determinewinner(roundwinner) {
-  if(isDefined(game["overtime_round"])) {
-    if(isDefined(level.doubleovertime) && level.doubleovertime && isDefined(roundwinner) && roundwinner != "tie") {
+  if(isdefined(game["overtime_round"])) {
+    if(isdefined(level.doubleovertime) && level.doubleovertime && isdefined(roundwinner) && roundwinner != "tie") {
       return roundwinner;
     }
     return globallogic::determineteamwinnerbygamestat("overtimeroundswon");
@@ -126,19 +126,19 @@ function default_determinewinner(roundwinner) {
 function default_ononeleftevent(team) {
   if(!level.teambased) {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
     }
-    thread globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
+    thread globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
   } else {
-    for(index = 0; index < level.players.size; index++) {
+    for (index = 0; index < level.players.size; index++) {
       player = level.players[index];
       if(!isalive(player)) {
         continue;
       }
-      if(!isDefined(player.pers["team"]) || player.pers["team"] != team) {
+      if(!isdefined(player.pers["team"]) || player.pers["team"] != team) {
         continue;
       }
       player globallogic_audio::leader_dialog_on_player("sudden_death");
@@ -153,7 +153,7 @@ function default_ontimelimit() {
     globallogic_utils::logteamwinstring("time limit", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -173,7 +173,7 @@ function default_onscorelimit() {
     globallogic_utils::logteamwinstring("scorelimit", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -191,7 +191,7 @@ function default_onroundscorelimit() {
     globallogic_utils::logteamwinstring("roundscorelimit", winner);
   } else {
     winner = globallogic_score::gethighestscoringplayer();
-    if(isDefined(winner)) {
+    if(isdefined(winner)) {
       print("" + winner.name);
     } else {
       print("");
@@ -203,7 +203,7 @@ function default_onroundscorelimit() {
 }
 
 function default_onspawnspectator(origin, angles) {
-  if(isDefined(origin) && isDefined(angles)) {
+  if(isdefined(origin) && isdefined(angles)) {
     self spawn(origin, angles);
     return;
   }
@@ -214,11 +214,11 @@ function default_onspawnspectator(origin, angles) {
 }
 
 function default_onspawnintermission(endgame) {
-  if(isDefined(endgame) && endgame) {
+  if(isdefined(endgame) && endgame) {
     return;
   }
   spawnpoint = spawnlogic::get_random_intermission_point();
-  if(isDefined(spawnpoint)) {
+  if(isdefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
   } else {
     util::error("");

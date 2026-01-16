@@ -14,7 +14,7 @@ main() {
 
   self thread lookAtTarget("attackIdle");
 
-  while(1) {
+  while (1) {
     if(shouldAttackIdle()) {
       self clearanim( % german_shepherd_idle, 0.2);
       self randomAttackIdle();
@@ -29,14 +29,13 @@ main() {
 }
 
 isFacingEnemy(toleranceCosAngle) {
-  assert(isDefined(self.enemy));
+  assert(isdefined(self.enemy));
 
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
 
-  if(distToEnemy < 1) {
+  if(distToEnemy < 1)
     return true;
-  }
 
   forward = anglesToForward(self.angles);
 
@@ -46,9 +45,8 @@ isFacingEnemy(toleranceCosAngle) {
 randomAttackIdle() {
   if(isFacingEnemy(-0.5)) // cos120
     self orientmode("face current");
-  else {
+  else
     self orientmode("face enemy");
-  }
 
   self clearanim( % german_shepherd_attackidle_knob, 0.1);
 
@@ -61,7 +59,7 @@ randomAttackIdle() {
   idleChance = 33;
   barkChance = 66;
 
-  if(isDefined(self.mode)) {
+  if(isdefined(self.mode)) {
     if(self.mode == "growl") {
       idleChance = 15;
       barkChance = 30;
@@ -72,26 +70,23 @@ randomAttackIdle() {
   }
 
   rand = randomInt(100);
-  if(rand < idleChance) {
+  if(rand < idleChance)
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
-  } else if(rand < barkChance) {
+  else if(rand < barkChance)
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
-  } else {
+  else
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
-  }
 }
 
 shouldAttackIdle() {
-  return (isDefined(self.enemy) && isalive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000);
+  return (isdefined(self.enemy) && isalive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000);
 }
 
 should_growl() {
-  if(isDefined(self.script_growl)) {
+  if(isdefined(self.script_growl))
     return true;
-  }
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return true;
-  }
   return !(self cansee(self.enemy));
 }
 
@@ -116,9 +111,10 @@ lookAtTarget(lookPoseSet) {
   self animscripts\shared::setAnimAimWeight(1, 0.2);
 
   /#	
-  assert(!isDefined(self.trackLoopThread));
+  assert(!isdefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "lookAtTarget";
+  # /
 
-  self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
+    self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
 }

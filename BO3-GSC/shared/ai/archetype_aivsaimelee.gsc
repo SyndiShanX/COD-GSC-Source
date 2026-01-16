@@ -19,15 +19,15 @@ function autoexec main() {
     defender_archetype = meleebundle.defenderarchetype;
     attacker_variant = meleebundle.attackervariant;
     defender_variant = meleebundle.defendervariant;
-    if(!isDefined(level._aivsai_meleebundles[attacker_archetype])) {
+    if(!isdefined(level._aivsai_meleebundles[attacker_archetype])) {
       level._aivsai_meleebundles[attacker_archetype] = [];
       level._aivsai_meleebundles[attacker_archetype][defender_archetype] = [];
       level._aivsai_meleebundles[attacker_archetype][defender_archetype][attacker_variant] = [];
     } else {
-      if(!isDefined(level._aivsai_meleebundles[attacker_archetype][defender_archetype])) {
+      if(!isdefined(level._aivsai_meleebundles[attacker_archetype][defender_archetype])) {
         level._aivsai_meleebundles[attacker_archetype][defender_archetype] = [];
         level._aivsai_meleebundles[attacker_archetype][defender_archetype][attacker_variant] = [];
-      } else if(!isDefined(level._aivsai_meleebundles[attacker_archetype][defender_archetype][attacker_variant])) {
+      } else if(!isdefined(level._aivsai_meleebundles[attacker_archetype][defender_archetype][attacker_variant])) {
         level._aivsai_meleebundles[attacker_archetype][defender_archetype][attacker_variant] = [];
       }
     }
@@ -36,14 +36,14 @@ function autoexec main() {
 }
 
 function registeraivsaimeleebehaviorfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAIvsAIEnemy", &hasaivsaienemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("decideInitiator", &decideinitiator);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInitiator", &isinitiator);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseAIvsAIEnemy", &hascloseaivsaienemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseAIvsAIMeleeAnimations", &chooseaivsaimeleeanimations);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isCloseEnoughForAIvsAIMelee", &iscloseenoughforaivsaimelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasPotentalAIvsAIMeleeEnemy", &haspotentalaivsaimeleeenemy);
-  behaviortreenetworkutility::registerbehaviortreeaction("AIvsAIMeleeAction", &aivsaimeleeinitialize, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAIvsAIEnemy", & hasaivsaienemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("decideInitiator", & decideinitiator);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInitiator", & isinitiator);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseAIvsAIEnemy", & hascloseaivsaienemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseAIvsAIMeleeAnimations", & chooseaivsaimeleeanimations);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isCloseEnoughForAIvsAIMelee", & iscloseenoughforaivsaimelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasPotentalAIvsAIMeleeEnemy", & haspotentalaivsaimeleeenemy);
+  behaviortreenetworkutility::registerbehaviortreeaction("AIvsAIMeleeAction", & aivsaimeleeinitialize, undefined, undefined);
 }
 
 function haspotentalaivsaimeleeenemy(behaviortreeentity) {
@@ -76,16 +76,16 @@ function private shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
   if(isplayer(behaviortreeentity.enemy)) {
     return false;
   }
-  if(!isDefined(behaviortreeentity.enemy)) {
+  if(!isdefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isDefined(behaviortreeentity.melee)) {
-    if(isDefined(behaviortreeentity.melee.enemy) && behaviortreeentity.melee.enemy == behaviortreeentity.enemy) {
+  if(isdefined(behaviortreeentity.melee)) {
+    if(isdefined(behaviortreeentity.melee.enemy) && behaviortreeentity.melee.enemy == behaviortreeentity.enemy) {
       return true;
     }
   }
-  if(isDefined(behaviortreeentity.enemy.melee)) {
-    if(isDefined(behaviortreeentity.enemy.melee.enemy) && behaviortreeentity.enemy.melee.enemy != behaviortreeentity) {
+  if(isdefined(behaviortreeentity.enemy.melee)) {
+    if(isdefined(behaviortreeentity.enemy.melee.enemy) && behaviortreeentity.enemy.melee.enemy != behaviortreeentity) {
       return false;
     }
   }
@@ -98,7 +98,7 @@ function private hasaivsaienemy(behaviortreeentity) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
-  if(!isDefined(enemy)) {
+  if(!isdefined(enemy)) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
@@ -110,7 +110,7 @@ function private hasaivsaienemy(behaviortreeentity) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
-  if(isDefined(enemy.archetype)) {
+  if(isdefined(enemy.archetype)) {
     if(sessionmodeiscampaignzombiesgame()) {
       if(enemy.archetype != "human" && enemy.archetype != "human_riotshield" && enemy.archetype != "robot" && enemy.archetype != "zombie") {
         record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
@@ -129,11 +129,11 @@ function private hasaivsaienemy(behaviortreeentity) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
-  if(isDefined(enemy.ignoreme) && enemy.ignoreme) {
+  if(isdefined(enemy.ignoreme) && enemy.ignoreme) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
-  if(isDefined(enemy._ai_melee_markeddead) && enemy._ai_melee_markeddead) {
+  if(isdefined(enemy._ai_melee_markeddead) && enemy._ai_melee_markeddead) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
@@ -154,7 +154,7 @@ function private hasaivsaienemy(behaviortreeentity) {
     behaviortreeentity._ai_melee_initiator = undefined;
     return false;
   }
-  forwardvec = vectornormalize(anglesToForward(behaviortreeentity.angles));
+  forwardvec = vectornormalize(anglestoforward(behaviortreeentity.angles));
   rightvec = vectornormalize(anglestoright(behaviortreeentity.angles));
   toenemyvec = vectornormalize(enemy.origin - behaviortreeentity.origin);
   fdot = vectordot(toenemyvec, forwardvec);
@@ -185,8 +185,8 @@ function private hasaivsaienemy(behaviortreeentity) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
-  if(isDefined(enemy.allowdeath) && !enemy.allowdeath) {
-    if(isDefined(behaviortreeentity.allowdeath) && !behaviortreeentity.allowdeath) {
+  if(isdefined(enemy.allowdeath) && !enemy.allowdeath) {
+    if(isdefined(behaviortreeentity.allowdeath) && !behaviortreeentity.allowdeath) {
       record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
       self notify("failed_melee_mbs", enemy);
       return false;
@@ -198,8 +198,8 @@ function private hasaivsaienemy(behaviortreeentity) {
 }
 
 function private decideinitiator(behaviortreeentity) {
-  if(!isDefined(behaviortreeentity._ai_melee_initiator)) {
-    if(!isDefined(behaviortreeentity.enemy._ai_melee_initiator)) {
+  if(!isdefined(behaviortreeentity._ai_melee_initiator)) {
+    if(!isdefined(behaviortreeentity.enemy._ai_melee_initiator)) {
       behaviortreeentity._ai_melee_initiator = 1;
       return true;
     }
@@ -208,14 +208,14 @@ function private decideinitiator(behaviortreeentity) {
 }
 
 function private isinitiator(behaviortreeentity) {
-  if(!(isDefined(behaviortreeentity._ai_melee_initiator) && behaviortreeentity._ai_melee_initiator)) {
+  if(!(isdefined(behaviortreeentity._ai_melee_initiator) && behaviortreeentity._ai_melee_initiator)) {
     return false;
   }
   return true;
 }
 
 function private hascloseaivsaienemy(behaviortreeentity) {
-  if(!(isDefined(behaviortreeentity._ai_melee_animname) && isDefined(behaviortreeentity.enemy._ai_melee_animname))) {
+  if(!(isdefined(behaviortreeentity._ai_melee_animname) && isdefined(behaviortreeentity.enemy._ai_melee_animname))) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     return false;
   }
@@ -253,40 +253,42 @@ function private chooseaivsaimeleeanimations(behaviortreeentity) {
     return false;
   }
   animbundle = level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype][attacker_variant][defender_variant];
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
   }
   foundanims = 0;
   possiblemelees = [];
   if(abs(yawtoenemy) > 120) {
-    if(isDefined(behaviortreeentity.__forceaiflipmelee)) {
-      possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontflipanimations;
+    if(isdefined(behaviortreeentity.__forceaiflipmelee)) {
+      possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontflipanimations;
     } else {
-      if(isDefined(behaviortreeentity.__forceaiwrestlemelee)) {
-        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontwrestleanimations;
+      if(isdefined(behaviortreeentity.__forceaiwrestlemelee)) {
+        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontwrestleanimations;
       } else {
-        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontflipanimations;
-        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontwrestleanimations;
+        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontflipanimations;
+        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontwrestleanimations;
       }
     }
   } else {
     if(abs(yawtoenemy) < 60) {
-      possiblemelees[possiblemelees.size] = &chooseaivsaimeleebackanimations;
+      possiblemelees[possiblemelees.size] = & chooseaivsaimeleebackanimations;
     } else {
       rightvec = vectornormalize(anglestoright(behaviortreeentity.enemy.angles));
       toattackervec = vectornormalize(behaviortreeentity.origin - behaviortreeentity.enemy.origin);
       rdot = vectordot(toattackervec, rightvec);
       if(rdot > 0) {
-        possiblemelees[possiblemelees.size] = &chooseaivsaimeleerightanimations;
+        possiblemelees[possiblemelees.size] = & chooseaivsaimeleerightanimations;
       } else {
-        possiblemelees[possiblemelees.size] = &chooseaivsaimeleeleftanimations;
+        possiblemelees[possiblemelees.size] = & chooseaivsaimeleeleftanimations;
       }
     }
   }
   if(possiblemelees.size > 0) {
-    [[possiblemelees[getarraykeys(possiblemelees)[randomint(getarraykeys(possiblemelees).size)]]]](behaviortreeentity, animbundle);
+    [
+      [possiblemelees[getarraykeys(possiblemelees)[randomint(getarraykeys(possiblemelees).size)]]]
+    ](behaviortreeentity, animbundle);
   }
-  if(isDefined(behaviortreeentity._ai_melee_animname)) {
+  if(isdefined(behaviortreeentity._ai_melee_animname)) {
     debug_chosenmeleeanimations(behaviortreeentity);
     return true;
   }
@@ -307,16 +309,16 @@ function private choosearchetypevariant(entity) {
 }
 
 function private aivsaimeleebundleexists(behaviortreeentity, attacker_variant, defender_variant) {
-  if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype])) {
+  if(!isdefined(level._aivsai_meleebundles[behaviortreeentity.archetype])) {
     return false;
   }
-  if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype])) {
+  if(!isdefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype])) {
     return false;
   }
-  if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype][attacker_variant])) {
+  if(!isdefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype][attacker_variant])) {
     return false;
   }
-  if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype][attacker_variant][defender_variant])) {
+  if(!isdefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype][attacker_variant][defender_variant])) {
     return false;
   }
   return true;
@@ -328,7 +330,7 @@ function aivsaimeleeinitialize(behaviortreeentity, asmstatename) {
   aiutility::meleeacquiremutex(behaviortreeentity);
   behaviortreeentity._ai_melee_opponent = behaviortreeentity.enemy;
   behaviortreeentity.enemy._ai_melee_opponent = behaviortreeentity;
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_markeddead = 1;
     behaviortreeentity.enemy thread playscriptedmeleeanimations();
   } else {
@@ -340,13 +342,13 @@ function aivsaimeleeinitialize(behaviortreeentity, asmstatename) {
 
 function playscriptedmeleeanimations() {
   self endon("death");
-  assert(isDefined(self._ai_melee_opponent));
+  assert(isdefined(self._ai_melee_opponent));
   opponent = self._ai_melee_opponent;
   if(!(isalive(self) && isalive(opponent))) {
     record3dtext("", self.origin, (1, 0.5, 0), "", self, 0.4);
     return false;
   }
-  if(isDefined(opponent._ai_melee_attacker_loser) && opponent._ai_melee_attacker_loser) {
+  if(isdefined(opponent._ai_melee_attacker_loser) && opponent._ai_melee_attacker_loser) {
     opponent animscripted("aivsaimeleeloser", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
     self animscripted("aivsaimeleewinner", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
     recordcircle(self gettagorigin(""), 2, (1, 0.5, 0), "");
@@ -368,7 +370,7 @@ function playscriptedmeleeanimations() {
   self waittillmatch("aivsaimeleewinner");
   self.fixedlinkyawonly = 0;
   aiutility::cleanupchargemeleeattack(self);
-  if(isDefined(self._ai_melee_attachedknife) && self._ai_melee_attachedknife) {
+  if(isdefined(self._ai_melee_attachedknife) && self._ai_melee_attachedknife) {
     self detach("t6_wpn_knife_melee", "TAG_WEAPON_LEFT");
     self._ai_melee_attachedknife = 0;
   }
@@ -380,8 +382,8 @@ function playscriptedmeleeanimations() {
 
 function private chooseaivsaimeleefrontflipanimations(behaviortreeentity, animbundle) {
   record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
-  assert(isDefined(animbundle));
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  assert(isdefined(animbundle));
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_animname = animbundle.attackerloserfrontanim;
     behaviortreeentity.enemy._ai_melee_animname = animbundle.defenderwinnerfrontanim;
   } else {
@@ -394,8 +396,8 @@ function private chooseaivsaimeleefrontflipanimations(behaviortreeentity, animbu
 
 function private chooseaivsaimeleefrontwrestleanimations(behaviortreeentity, animbundle) {
   record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
-  assert(isDefined(animbundle));
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  assert(isdefined(animbundle));
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_animname = animbundle.attackerloseralternatefrontanim;
     behaviortreeentity.enemy._ai_melee_animname = animbundle.defenderwinneralternatefrontanim;
   } else {
@@ -408,8 +410,8 @@ function private chooseaivsaimeleefrontwrestleanimations(behaviortreeentity, ani
 
 function private chooseaivsaimeleebackanimations(behaviortreeentity, animbundle) {
   record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
-  assert(isDefined(animbundle));
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  assert(isdefined(animbundle));
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_animname = animbundle.attackerloserbackanim;
     behaviortreeentity.enemy._ai_melee_animname = animbundle.defenderwinnerbackanim;
   } else {
@@ -422,8 +424,8 @@ function private chooseaivsaimeleebackanimations(behaviortreeentity, animbundle)
 
 function private chooseaivsaimeleerightanimations(behaviortreeentity, animbundle) {
   record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
-  assert(isDefined(animbundle));
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  assert(isdefined(animbundle));
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_animname = animbundle.attackerloserrightanim;
     behaviortreeentity.enemy._ai_melee_animname = animbundle.defenderwinnerrightanim;
   } else {
@@ -436,8 +438,8 @@ function private chooseaivsaimeleerightanimations(behaviortreeentity, animbundle
 
 function private chooseaivsaimeleeleftanimations(behaviortreeentity, animbundle) {
   record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
-  assert(isDefined(animbundle));
-  if(isDefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
+  assert(isdefined(animbundle));
+  if(isdefined(behaviortreeentity._ai_melee_attacker_loser) && behaviortreeentity._ai_melee_attacker_loser) {
     behaviortreeentity._ai_melee_animname = animbundle.attackerloserleftanim;
     behaviortreeentity.enemy._ai_melee_animname = animbundle.defenderwinnerleftanim;
   } else {
@@ -449,7 +451,7 @@ function private chooseaivsaimeleeleftanimations(behaviortreeentity, animbundle)
 }
 
 function private debug_chosenmeleeanimations(behaviortreeentity) {
-  if(isDefined(behaviortreeentity._ai_melee_animname) && isDefined(behaviortreeentity.enemy._ai_melee_animname)) {
+  if(isdefined(behaviortreeentity._ai_melee_animname) && isdefined(behaviortreeentity.enemy._ai_melee_animname)) {
     record3dtext("" + behaviortreeentity._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
     record3dtext("" + behaviortreeentity.enemy._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
   }
@@ -467,17 +469,17 @@ function handledeath(animationname, attacker) {
 
 function processinterrupteddeath() {
   self endon("meleecompleted");
-  assert(isDefined(self._ai_melee_opponent));
+  assert(isdefined(self._ai_melee_opponent));
   opponent = self._ai_melee_opponent;
-  if(!(isDefined(self.allowdeath) && self.allowdeath)) {
+  if(!(isdefined(self.allowdeath) && self.allowdeath)) {
     return;
   }
   self waittill("death");
-  if(isDefined(self) && (isDefined(self._ai_melee_attachedknife) && self._ai_melee_attachedknife)) {
+  if(isdefined(self) && (isdefined(self._ai_melee_attachedknife) && self._ai_melee_attachedknife)) {
     self detach("t6_wpn_knife_melee", "TAG_WEAPON_LEFT");
   }
   if(isalive(opponent)) {
-    if(isDefined(opponent._ai_melee_markeddead) && opponent._ai_melee_markeddead) {
+    if(isdefined(opponent._ai_melee_markeddead) && opponent._ai_melee_markeddead) {
       opponent.diedinscriptedanim = 1;
       opponent.skipdeath = 1;
       opponent notify("interrupteddeath");
@@ -497,7 +499,7 @@ function processinterrupteddeath() {
       opponent stopanimscripted();
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self.diedinscriptedanim = 1;
     self.skipdeath = 1;
     self notify("interrupteddeath");
@@ -508,11 +510,11 @@ function processinterrupteddeath() {
 }
 
 function killwrapper(attacker) {
-  if(isDefined(self.overrideactordamage)) {
+  if(isdefined(self.overrideactordamage)) {
     self.overrideactordamage = undefined;
   }
   self.tokubetsukogekita = undefined;
-  if(isDefined(attacker) && self.team != attacker.team) {
+  if(isdefined(attacker) && self.team != attacker.team) {
     self kill(self.origin, attacker);
   } else {
     self kill();

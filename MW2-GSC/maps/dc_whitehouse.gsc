@@ -44,7 +44,7 @@ global_inits() {
   precachemodel("mil_sandbag_plastic_white_single_bent");
   precachemodel("weapon_binocular");
 
-  add_hint_string("how_to_pop_flare", &"SCRIPT_PLATFORM_HINTSTR_POPFLARE", ::stop_flare_hint);
+  add_hint_string("how_to_pop_flare", & "SCRIPT_PLATFORM_HINTSTR_POPFLARE", ::stop_flare_hint);
 
   level.default_goalheight = 72;
 
@@ -73,7 +73,7 @@ global_inits() {
 
   delaythread(1, ::flavorbursts_off, "allies");
 
-  array_thread(getEntArray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
+  array_thread(getentarray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
 
   level thread music();
 }
@@ -195,13 +195,12 @@ tunnels_wave_guy() {
   lines[2] = "dcemp_ar3_movemove";
 
   index = 0;
-  while(!flag("whitehouse_init")) {
+  while (!flag("whitehouse_init")) {
     self generic_dialogue_queue(lines[index]);
     wait randomfloatrange(7, 10);
 
-    if(index == 2) {
+    if(index == 2)
       wait 10;
-    }
     index = (index + 1) % lines.size;
   }
 
@@ -275,18 +274,16 @@ whitehouse_spotlight_main() {
 
   flag_wait("whitehouse_entrance_init");
 
-  if(isDefined(wh_spotlight)) {
+  if(isdefined(wh_spotlight))
     wh_spotlight.damage_ent notify("damage", 1000, level.player);
-  }
 
   ww_spotlight = whitehouse_spotlight_create("westwing_spotlight", 600);
 
   flag_wait("whitehouse_radio_start");
   wait 30;
 
-  if(isDefined(ww_spotlight)) {
+  if(isdefined(ww_spotlight))
     ww_spotlight.damage_ent notify("damage", 1000, level.player);
-  }
 }
 
 whitehouse_spotlight_dunn() {
@@ -294,7 +291,7 @@ whitehouse_spotlight_dunn() {
   flag_wait("whitehouse_entrance_moveup");
   wait 8;
 
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     level.dunn SetEntityTarget(self);
     self waittill("death");
     level.dunn clearEntityTarget();
@@ -307,7 +304,7 @@ objectives() {
   switch (level.start_point) {
     default:
     case "tunnels":
-      Objective_Add(9, "current", &"DC_WHITEHOUSE_OBJ_WHISKEY_HOTEL");
+      Objective_Add(9, "current", & "DC_WHITEHOUSE_OBJ_WHISKEY_HOTEL");
       objective_onentity(9, level.foley, (0, 0, 70));
 
       flag_wait("whitehouse_moveout");
@@ -315,7 +312,7 @@ objectives() {
       Objective_state(9, "done");
 
       pos = getstruct("objective_entrance", "targetname");
-      Objective_Add(10, "current", &"DC_WHITEHOUSE_OBJ_BREACH_WH", pos.origin);
+      Objective_Add(10, "current", & "DC_WHITEHOUSE_OBJ_BREACH_WH", pos.origin);
 
       flag_wait("oval_office_scene");
       level thread dunn_objective_dvars();
@@ -326,7 +323,7 @@ objectives() {
       Objective_state(10, "done");
 
     case "flare":
-      Objective_Add(11, "current", &"DC_WHITEHOUSE_OBJ_DEPLOY_FLARE");
+      Objective_Add(11, "current", & "DC_WHITEHOUSE_OBJ_DEPLOY_FLARE");
       objective_onentity(11, level.foley, (0, 0, 70));
 
       flag_wait("whitehouse_flare_breach");
@@ -461,7 +458,7 @@ oval_office_door() {
 whitehouse_dialogue() {
   level thread whitehouse_nag();
 
-  // Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank!
+  // Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank! 
   level.marshall dialogue_queue("dcemp_cml_moremen");
 
   flag_wait("whitehouse_briefing_end");
@@ -478,12 +475,12 @@ whitehouse_dialogue() {
 
 westwing_dialogue() {
   flag_wait("whitehouse_entrance_clear");
-  //Ramirez, let's go!
+  //Ramirez, let's go! 
   level.foley dialogue_queue("dcemp_fly_ramirezgo");
 
   flag_wait("whitehouse_2min");
 
-  //Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em!
+  //Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em! 
   level.foley dialogue_queue("dcemp_fly_flattenthecity");
 
   //We got less than two minutes, let's go!
@@ -500,6 +497,7 @@ westwing_dialogue() {
   flag_wait("whitehouse_30sec");
   // 30 seconds! We gotta get to the roof now!! Go! Go!
   level.foley dialogue_queue("dcemp_fly_30seconds");
+
 }
 
 whitehouse_radio_broadcast(soundalias) {
@@ -511,33 +509,35 @@ whitehouse_radio_broadcast(soundalias) {
 
   current_radios = [];
 
+  /#
   level.radios = [];
+  # /
 
-  radio = undefined;
-  for(i = 0; i < radio_array.size; i++) {
+    radio = undefined;
+  for (i = 0; i < radio_array.size; i++) {
     // distance above or below player
-    dist = abs(level.player getEye()[2] - radio_array[i].origin[2]);
-    if(dist > 150) {
+    dist = abs(level.player geteye()[2] - radio_array[i].origin[2]);
+    if(dist > 150)
       continue;
-    }
 
     radio = radio_array[i];
-    radio playSound(soundalias, "sounddone");
+    radio PlaySound(soundalias, "sounddone");
 
     current_radios[current_radios.size] = radio;
 
     play_count--;
-    if(!play_count) {
+    if(!play_count)
       break;
-    }
   }
 
+  /#
   level.radios = current_radios;
+  # /
 
-  // sometimes no good radio is found.
-  foreach(radio in current_radios) {
-    radio add_wait(::waittill_msg, "sounddone");
-  }
+    // sometimes no good radio is found.
+    foreach(radio in current_radios) {
+      radio add_wait(::waittill_msg, "sounddone");
+    }
   do_wait();
 
   flag_clear("broadcast");
@@ -547,23 +547,23 @@ whitehouse_radio_loop() {
   level endon("broadcast_terminate");
   flag_wait("whitehouse_radio_start");
 
-  while(true) {
+  while (true) {
     flag_clear("broadcast_end");
 
     flag_waitopen("broadcast_pause");
-    // This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect.
+    // This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect. 
     whitehouse_radio_broadcast("dcemp_fp1_hammerdown");
 
     flag_waitopen("broadcast_pause");
-    // If you can receive this transmission, you are in a hardened high-value structure.
+    // If you can receive this transmission, you are in a hardened high-value structure. 
     whitehouse_radio_broadcast("dcemp_fp1_highvalue");
 
     flag_waitopen("broadcast_pause");
-    // Deploy green flares on the roof of this structure to indicate you are still combat effective.
+    // Deploy green flares on the roof of this structure to indicate you are still combat effective. 
     whitehouse_radio_broadcast("dcemp_fp1_greenflares");
 
     flag_waitopen("broadcast_pause");
-    // We will abort our mission on direct visual contact with this countersign.
+    // We will abort our mission on direct visual contact with this countersign. 
     whitehouse_radio_broadcast("dcemp_fp1_willabort");
 
     flag_set("broadcast_end");
@@ -587,13 +587,13 @@ countdown_timeout() {
 whitehouse_radio() {
   level endon("whitehouse_hammerdown");
 
-  level.radio_array = getEntArray("radio_origin", "targetname");
+  level.radio_array = getentarray("radio_origin", "targetname");
 
   flag_wait("whitehouse_radio_start");
 
   level.countdown_index = 0;
 
-  triggers = getEntArray("countdown_trigger", "targetname");
+  triggers = getentarray("countdown_trigger", "targetname");
   array_thread(triggers, ::countdown_trigger);
 
   countdown_line = [];
@@ -614,7 +614,7 @@ whitehouse_radio() {
 
   start_time = gettime();
 
-  while(true) {
+  while (true) {
     level.countdown_index++;
 
     flag_set("broadcast_pause");
@@ -632,9 +632,8 @@ whitehouse_radio() {
     // set countdown flags
     flag_set(countdown_flag[level.countdown_index - 1]);
 
-    if(level.countdown_index == 4) {
+    if(level.countdown_index == 4)
       break;
-    }
 
     level thread countdown_timeout();
     wait 6;
@@ -669,13 +668,14 @@ whitehouse_radio() {
   //Roger, weapons on safe! Aborting mission!
   //	whitehouse_radio_broadcast( "dcemp_fp4_abortingmission" );
 
-  // Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one.
+  // Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one. 
   //	whitehouse_radio_broadcast( "dcemp_fp1_closeone" );
   //We're sending word back to HQ, stay alive down there. Cujo 5-1 out.
   //	whitehouse_radio_broadcast( "dcemp_fp1_wordtohq" );
 
-  //Cujo 5-1 to friendly ground units - that was a close one. Stay alive down there. Cujo 5-1 out.
+  //Cujo 5-1 to friendly ground units - that was a close one. Stay alive down there. Cujo 5-1 out. 
   //	whitehouse_radio_broadcast( "dcemp_fp1_closeone2" );
+
 }
 
 whitehouse_hammerdown_jets() {
@@ -714,8 +714,8 @@ whitehouse_hammerdown_kill() {
   earthquake(0.6, 3, level.player.origin, 512);
   wait .75;
 
-  playFX(level._effect["carpetbomb"], level.player.origin);
-  level.player playSound("explo_metal_rand");
+  PlayFX(level._effect["carpetbomb"], level.player.origin);
+  level.player PlaySound("explo_metal_rand");
   wait 0.5;
 
   level.foley stop_magic_bullet_shield();
@@ -724,14 +724,14 @@ whitehouse_hammerdown_kill() {
   level.dunn stop_magic_bullet_shield();
   level.dunn kill();
 
-  if(isDefined(level.flare_guy)) {
+  if(isdefined(level.flare_guy)) {
     level.flare_guy stop_magic_bullet_shield();
     level.flare_guy kill();
   }
 
   level.player kill();
   waittillframeend;
-  setDvar("ui_deadquote", &"DC_WHITEHOUSE_FLARE_DEADQUOTE");
+  setDvar("ui_deadquote", & "DC_WHITEHOUSE_FLARE_DEADQUOTE");
 }
 
 whitehouse_nag() {
@@ -739,14 +739,14 @@ whitehouse_nag() {
 
   flag_wait("whitehouse_briefing_end");
 
-  while(true) {
+  while (true) {
     wait 30;
 
     //Work your way to the left!!
     level.foley dialogue_queue("dcemp_fly_workyourwayleft");
     wait 15;
 
-    //Ramirez, let's go!
+    //Ramirez, let's go! 
     level.foley dialogue_queue("dcemp_fly_ramirezgo");
     wait 20;
 
@@ -757,9 +757,8 @@ whitehouse_nag() {
 }
 
 whitehouse_team() {
-  if(self is_hero()) {
+  if(self is_hero())
     return;
-  }
 
   self endon("death");
 
@@ -852,6 +851,7 @@ oval_office_foley() {
 
   flag_set("oval_office_done");
   self enable_ai_color();
+
 }
 
 whitehouse_foley() {
@@ -859,7 +859,7 @@ whitehouse_foley() {
   self disable_ai_color();
 
   door = getent("whitehouse_kitchen_door", "targetname");
-  parts = getEntArray(door.target, "targetname");
+  parts = getentarray(door.target, "targetname");
   array_call(parts, ::linkto, door);
 
   // kick open kitchen door
@@ -952,7 +952,7 @@ oval_office_clear_axis(animent) {
   axis = SortByDistance(getaiarray("axis"), animent.origin);
 
   // kill three closest enemies.
-  for(i = 0; i < axis.size && i < 3; i++) {
+  for (i = 0; i < axis.size && i < 3; i++) {
     axis[i] kill(level.dunn.origin);
   }
 }
@@ -1043,9 +1043,8 @@ whitehouse_interior() {
 
   // if enough time is left auto save here.
   time_left = (level.hammerdown_time - gettime()) / 1000;
-  if(time_left > 70) {
+  if(time_left > 70)
     autosave_by_name("whitehouse_parlor");
-  }
 
   flag_wait("whitehouse_chandelier");
   source_ent = getent("chandelier_grenade_source", "targetname");
@@ -1060,18 +1059,16 @@ whitehouse_interior() {
 whitehouse_drone() {
   self endon("death");
 
-  if(!isDefined(level.whitehouse_drone_array)) {
+  if(!isdefined(level.whitehouse_drone_array))
     level.whitehouse_drone_array = [];
-  }
   level.whitehouse_drone_array[level.whitehouse_drone_array.size] = self;
 
   self.health = 10000;
 
   flag_wait("whitehouse_silhouette_ready");
 
-  if(isDefined(self.script_animation)) {
+  if(isdefined(self.script_animation))
     self.deathanim = level.drone_death_anims[self.script_animation];
-  }
 
   self.health = 200;
 }
@@ -1178,6 +1175,7 @@ flare_dialogue() {
   flag_set("whitehouse_completed");
   //When the time's right, Corporal. When the time's right.
   level.foley dialogue_queue("dcemp_fly_timeisright");
+
 }
 
 whitehouse_flare_breach() {
@@ -1263,7 +1261,7 @@ whitehouse_flare_guy() {
   flag_set("music_cue_endrun_ending");
 
   // play end anim
-  self playSound("scn_dcwhite_npc_flare_end");
+  self PlaySound("scn_dcwhite_npc_flare_end");
   animent anim_single_solo(self, "dcemp_flare_reshoot_end");
 
   // idle til end of time.
@@ -1275,14 +1273,13 @@ flare_spotted_think() {
   level endon("flare_spotted");
   level.flare_guy endon("death");
 
-  while(true) {
-    if(player_looking_at(level.flare_guy getEye(), 0.75)) {
+  while (true) {
+    if(player_looking_at(level.flare_guy geteye(), 0.75))
       flag_set("player_looking_at_flareguy");
-    } else if(flag("flareguy_force")) {
+    else if(flag("flareguy_force"))
       flag_set("player_looking_at_flareguy");
-    } else {
+    else
       flag_clear("player_looking_at_flareguy");
-    }
     wait 0.05;
   }
 }

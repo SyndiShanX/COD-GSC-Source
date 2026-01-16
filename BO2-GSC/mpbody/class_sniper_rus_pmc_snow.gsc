@@ -9,15 +9,14 @@ precache() {
   precachemodel("c_mul_mp_pmc_sniper_snw_fb");
   precachemodel("c_mul_mp_pmc_longsleeve_snw_viewhands");
 
-  if(level.multiteam) {
+  if(level.multiteam)
     game["set_player_model"]["team4"]["rifle"] = ::set_player_model;
-  } else {
+  else
     game["set_player_model"]["axis"]["rifle"] = ::set_player_model;
-  }
 }
 
 set_player_model() {
-  self setModel("c_mul_mp_pmc_sniper_snw_fb");
+  self setmodel("c_mul_mp_pmc_sniper_snw_fb");
   self setviewmodel("c_mul_mp_pmc_longsleeve_snw_viewhands");
   heads = [];
 }

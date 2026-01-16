@@ -5,7 +5,7 @@
 **************************************************************/
 
 main() {
-  self setModel("body_sas_woodland_soldier_02");
+  self setmodel("body_sas_woodland_soldier_02");
   self attach("head_sp_sas_woodland_zied", "", 1);
   self.headmodel = "head_sp_sas_woodland_zied";
   self.voice = "british";

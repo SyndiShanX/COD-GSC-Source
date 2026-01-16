@@ -33,11 +33,10 @@ vertigoplayerconnected(localclientnum) {
     }
   }
 
-  security_camera_balls = getEntArray(localclientnum, "security_camera_ball", "targetname");
+  security_camera_balls = getentarray(localclientnum, "security_camera_ball", "targetname");
 
-  foreach(cameraball in security_camera_balls) {
-    cameraball thread cameratrackplayer(localclientnum);
-  }
+  foreach(cameraball in security_camera_balls)
+  cameraball thread cameratrackplayer(localclientnum);
 }
 
 cameratrackplayer(localclientnum) {

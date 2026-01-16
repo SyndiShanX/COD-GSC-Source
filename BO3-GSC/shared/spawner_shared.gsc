@@ -18,7 +18,7 @@
 #namespace spawner;
 
 function autoexec __init__sytem__() {
-  system::register("spawner", &__init__, &__main__, undefined);
+  system::register("spawner", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -41,12 +41,12 @@ function __init__() {
   level.mg42_hide_distance = 1024;
   level.global_spawn_timer = 0;
   level.global_spawn_count = 0;
-  if(!isDefined(level.maxfriendlies)) {
+  if(!isdefined(level.maxfriendlies)) {
     level.maxfriendlies = 11;
   }
   level.ai_classname_in_level = [];
   spawners = getspawnerarray();
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     spawners[i] thread spawn_prethink();
   }
   thread process_deathflags();
@@ -54,19 +54,19 @@ function __init__() {
   goal_volume_init();
   level thread spawner_targets_init();
   level.ai = [];
-  add_global_spawn_function("axis", &global_ai_array);
-  add_global_spawn_function("allies", &global_ai_array);
-  add_global_spawn_function("team3", &global_ai_array);
+  add_global_spawn_function("axis", & global_ai_array);
+  add_global_spawn_function("allies", & global_ai_array);
+  add_global_spawn_function("team3", & global_ai_array);
   level thread update_nav_triggers();
 }
 
 function __main__() {
   waittillframeend();
   ai = getaispeciesarray("all");
-  array::thread_all(ai, &living_ai_prethink);
+  array::thread_all(ai, & living_ai_prethink);
   foreach(ai_guy in ai) {
     if(isalive(ai_guy)) {
-      ai_guy.overrideactorkilled = &callback_track_dead_npcs_by_type;
+      ai_guy.overrideactorkilled = & callback_track_dead_npcs_by_type;
       ai_guy thread spawn_think();
     }
   }
@@ -75,7 +75,7 @@ function __main__() {
 
 function update_nav_triggers() {
   level.valid_navmesh_positions = [];
-  a_nav_triggers = getEntArray("trigger_navmesh", "classname");
+  a_nav_triggers = getentarray("trigger_navmesh", "classname");
   if(!a_nav_triggers.size) {
     return;
   }
@@ -83,22 +83,22 @@ function update_nav_triggers() {
   foreach(trig in a_nav_triggers) {
     level.navmesh_zones[trig.targetname] = 0;
   }
-  while(true) {
+  while (true) {
     updatenavtriggers();
     level util::waittill_notify_or_timeout("update_nav_triggers", 1);
   }
 }
 
 function global_ai_array() {
-  if(!isDefined(level.ai[self.team])) {
+  if(!isdefined(level.ai[self.team])) {
     level.ai[self.team] = [];
   } else if(!isarray(level.ai[self.team])) {
     level.ai[self.team] = array(level.ai[self.team]);
   }
   level.ai[self.team][level.ai[self.team].size] = self;
   self waittill("death");
-  if(isDefined(self)) {
-    if(isDefined(level.ai) && isDefined(level.ai[self.team]) && isinarray(level.ai[self.team], self)) {
+  if(isdefined(self)) {
+    if(isdefined(level.ai) && isdefined(level.ai[self.team]) && isinarray(level.ai[self.team], self)) {
       arrayremovevalue(level.ai[self.team], self);
     } else {
       foreach(aiarray in level.ai) {
@@ -110,8 +110,8 @@ function global_ai_array() {
     }
   } else {
     foreach(array in level.ai) {
-      for(i = array.size - 1; i >= 0; i--) {
-        if(!isDefined(array[i])) {
+      for (i = array.size - 1; i >= 0; i--) {
+        if(!isdefined(array[i])) {
           arrayremoveindex(array, i);
         }
       }
@@ -120,7 +120,7 @@ function global_ai_array() {
 }
 
 function spawn_throttle_reset() {
-  while(true) {
+  while (true) {
     util::wait_network_frame();
     util::wait_network_frame();
     level.global_spawn_count = 0;
@@ -128,8 +128,8 @@ function spawn_throttle_reset() {
 }
 
 function global_spawn_throttle(n_count_per_network_frame) {
-  if(!(isDefined(level.first_frame) && level.first_frame)) {
-    while(level.global_spawn_count >= n_count_per_network_frame) {
+  if(!(isdefined(level.first_frame) && level.first_frame)) {
+    while (level.global_spawn_count >= n_count_per_network_frame) {
       wait(0.05);
     }
     level.global_spawn_count++;
@@ -139,15 +139,15 @@ function global_spawn_throttle(n_count_per_network_frame) {
 function callback_track_dead_npcs_by_type() {}
 
 function goal_volume_init() {
-  volumes = getEntArray("info_volume", "classname");
+  volumes = getentarray("info_volume", "classname");
   level.deathchain_goalvolume = [];
   level.goalvolumes = [];
-  for(i = 0; i < volumes.size; i++) {
+  for (i = 0; i < volumes.size; i++) {
     volume = volumes[i];
-    if(isDefined(volume.script_deathchain)) {
+    if(isdefined(volume.script_deathchain)) {
       level.deathchain_goalvolume[volume.script_deathchain] = volume;
     }
-    if(isDefined(volume.script_goalvolume)) {
+    if(isdefined(volume.script_goalvolume)) {
       level.goalvolumes[volume.script_goalvolume] = volume;
     }
   }
@@ -155,11 +155,11 @@ function goal_volume_init() {
 
 function precache_player_weapon_drops(weapon_names) {
   level.ai_classname_in_level_keys = getarraykeys(level.ai_classname_in_level);
-  for(i = 0; i < level.ai_classname_in_level_keys.size; i++) {
+  for (i = 0; i < level.ai_classname_in_level_keys.size; i++) {
     if(weapon_names.size <= 0) {
       break;
     }
-    for(j = 0; j < weapon_names.size; j++) {
+    for (j = 0; j < weapon_names.size; j++) {
       weaponname = weapon_names[j];
       if(!issubstr(tolower(level.ai_classname_in_level_keys[i]), weaponname)) {
         continue;
@@ -174,11 +174,11 @@ function precache_player_weapon_drops(weapon_names) {
 function process_deathflags() {
   keys = getarraykeys(level.deathflags);
   level.deathflags = [];
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     deathflag = keys[i];
     level.deathflags[deathflag] = [];
     level.deathflags[deathflag]["ai"] = [];
-    if(!isDefined(level.flag[deathflag])) {
+    if(!isdefined(level.flag[deathflag])) {
       level flag::init(deathflag);
     }
   }
@@ -190,24 +190,24 @@ function spawn_guys_until_death_or_no_count() {
 }
 
 function flood_spawner_scripted(spawners) {
-  assert(isDefined(spawners) && spawners.size, "");
-  array::thread_all(spawners, &flood_spawner_init);
-  array::thread_all(spawners, &flood_spawner_think);
+  assert(isdefined(spawners) && spawners.size, "");
+  array::thread_all(spawners, & flood_spawner_init);
+  array::thread_all(spawners, & flood_spawner_think);
 }
 
 function reincrement_count_if_deleted(spawner) {
   spawner endon("death");
   self waittill("death");
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     spawner.count++;
   }
 }
 
 function kill_trigger(trigger) {
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return;
   }
-  if(isDefined(trigger.targetname) && trigger.targetname != "flood_spawner") {
+  if(isdefined(trigger.targetname) && trigger.targetname != "flood_spawner") {
     return;
   }
   trigger delete();
@@ -221,16 +221,16 @@ function waittilldeathorpaindeath() {
 function drop_gear() {
   team = self.team;
   waittilldeathorpaindeath();
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(self.grenadeammo <= 0) {
     return;
   }
-  if(isDefined(self.dropweapon) && !self.dropweapon) {
+  if(isdefined(self.dropweapon) && !self.dropweapon) {
     return;
   }
-  if(!isDefined(level.nextgrenadedrop)) {
+  if(!isdefined(level.nextgrenadedrop)) {
     level.nextgrenadedrop = randomint(3);
   }
   level.nextgrenadedrop--;
@@ -242,13 +242,13 @@ function drop_gear() {
 }
 
 function spawn_grenade_bag(origin, angles, team) {
-  if(!isDefined(level.grenade_cache) || !isDefined(level.grenade_cache[team])) {
+  if(!isdefined(level.grenade_cache) || !isdefined(level.grenade_cache[team])) {
     level.grenade_cache_index[team] = 0;
     level.grenade_cache[team] = [];
   }
   index = level.grenade_cache_index[team];
   grenade = level.grenade_cache[team][index];
-  if(isDefined(grenade)) {
+  if(isdefined(grenade)) {
     grenade delete();
   }
   count = self.grenadeammo;
@@ -266,26 +266,26 @@ function spawn_prethink() {
     self.count = 0;
     return;
   }
-  if(isDefined(self.script_aigroup)) {
+  if(isdefined(self.script_aigroup)) {
     aigroup_init(self.script_aigroup, self);
   }
-  if(isDefined(self.script_delete)) {
+  if(isdefined(self.script_delete)) {
     array_size = 0;
-    if(isDefined(level._ai_delete)) {
-      if(isDefined(level._ai_delete[self.script_delete])) {
+    if(isdefined(level._ai_delete)) {
+      if(isdefined(level._ai_delete[self.script_delete])) {
         array_size = level._ai_delete[self.script_delete].size;
       }
     }
     level._ai_delete[self.script_delete][array_size] = self;
   }
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     crawl_through_targets_to_init_flags();
   }
 }
 
 function update_nav_triggers_for_actor() {
   level notify("update_nav_triggers");
-  while(isalive(self)) {
+  while (isalive(self)) {
     self util::waittill_either("death", "goal_changed");
     level notify("update_nav_triggers");
   }
@@ -293,7 +293,7 @@ function update_nav_triggers_for_actor() {
 
 function spawn_think(spawner) {
   self endon("death");
-  if(isDefined(self.spawn_think_thread_active)) {
+  if(isdefined(self.spawn_think_thread_active)) {
     return;
   }
   self.spawn_think_thread_active = 1;
@@ -307,20 +307,20 @@ function spawn_think(spawner) {
     self thread update_nav_triggers_for_actor();
   }
   self.script_animname = undefined;
-  if(isDefined(self.script_aigroup)) {
+  if(isdefined(self.script_aigroup)) {
     level flag::set(self.script_aigroup + "_spawning");
     self thread aigroup_think(level._ai_group[self.script_aigroup]);
   }
-  if(isDefined(spawner) && isDefined(spawner.script_dropammo)) {
+  if(isdefined(spawner) && isdefined(spawner.script_dropammo)) {
     self.disableammodrop = !spawner.script_dropammo;
   }
-  if(isDefined(spawner) && isDefined(spawner.spawn_funcs)) {
+  if(isdefined(spawner) && isdefined(spawner.spawn_funcs)) {
     self.spawn_funcs = spawner.spawn_funcs;
   }
   if(isai(self)) {
     spawn_think_action(spawner);
     assert(isalive(self));
-    assert(isDefined(self.team));
+    assert(isdefined(self.team));
   }
   self thread run_spawn_functions();
   self.finished_spawning = 1;
@@ -329,25 +329,25 @@ function spawn_think(spawner) {
 
 function run_spawn_functions() {
   self endon("death");
-  if(!isDefined(level.spawn_funcs)) {
+  if(!isdefined(level.spawn_funcs)) {
     return;
   }
-  if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype])) {
-    for(i = 0; i < level.spawn_funcs[self.archetype].size; i++) {
+  if(isdefined(self.archetype) && isdefined(level.spawn_funcs[self.archetype])) {
+    for (i = 0; i < level.spawn_funcs[self.archetype].size; i++) {
       func = level.spawn_funcs[self.archetype][i];
       util::single_thread(self, func["function"], func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
     }
   }
   waittillframeend();
   callback::callback("hash_f96ca9bc");
-  if(isDefined(level.spawn_funcs[self.team])) {
-    for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
+  if(isdefined(level.spawn_funcs[self.team])) {
+    for (i = 0; i < level.spawn_funcs[self.team].size; i++) {
       func = level.spawn_funcs[self.team][i];
       util::single_thread(self, func["function"], func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
     }
   }
-  if(isDefined(self.spawn_funcs)) {
-    for(i = 0; i < self.spawn_funcs.size; i++) {
+  if(isdefined(self.spawn_funcs)) {
+    for (i = 0; i < self.spawn_funcs.size; i++) {
       func = self.spawn_funcs[i];
       util::single_thread(self, func["function"], func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
     }
@@ -356,20 +356,20 @@ function run_spawn_functions() {
 }
 
 function living_ai_prethink() {
-  if(isDefined(self.script_deathflag)) {
+  if(isdefined(self.script_deathflag)) {
     level.deathflags[self.script_deathflag] = 1;
   }
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     crawl_through_targets_to_init_flags();
   }
 }
 
 function crawl_through_targets_to_init_flags() {
   array = get_node_funcs_based_on_target();
-  if(isDefined(array)) {
+  if(isdefined(array)) {
     targets = array["node"];
     get_func = array["get_target_func"];
-    for(i = 0; i < targets.size; i++) {
+    for (i = 0; i < targets.size; i++) {
       crawl_target_and_init_flags(targets[i], get_func);
     }
   }
@@ -381,94 +381,94 @@ function remove_spawner_values() {
 
 function spawn_think_action(spawner) {
   remove_spawner_values();
-  if(isDefined(level._use_faceanim) && level._use_faceanim) {
+  if(isdefined(level._use_faceanim) && level._use_faceanim) {
     self thread serverfaceanim::init_serverfaceanim();
   }
-  if(isDefined(spawner)) {
-    if(isDefined(spawner.targetname) && !isDefined(self.targetname)) {
+  if(isdefined(spawner)) {
+    if(isdefined(spawner.targetname) && !isdefined(self.targetname)) {
       self.targetname = spawner.targetname + "_ai";
     }
   }
-  if(isDefined(spawner) && isDefined(spawner.script_animname)) {
+  if(isdefined(spawner) && isdefined(spawner.script_animname)) {
     self.animname = spawner.script_animname;
-  } else if(isDefined(self.script_animname)) {
+  } else if(isdefined(self.script_animname)) {
     self.animname = self.script_animname;
   }
   thread show_bad_path();
-  if(isDefined(self.script_forcecolor)) {
+  if(isdefined(self.script_forcecolor)) {
     colors::set_force_color(self.script_forcecolor);
-    if(!isDefined(self.script_no_respawn) || self.script_no_respawn < 1 && !isDefined(level.no_color_respawners_sm)) {
+    if(!isdefined(self.script_no_respawn) || self.script_no_respawn < 1 && !isdefined(level.no_color_respawners_sm)) {
       self thread replace_on_death();
     }
   }
-  if(isDefined(self.script_moveoverride) && self.script_moveoverride == 1) {
+  if(isdefined(self.script_moveoverride) && self.script_moveoverride == 1) {
     override = 1;
   } else {
     override = 0;
   }
   self.heavy_machine_gunner = issubstr(self.classname, "mgportable");
   gameskill::grenadeawareness();
-  if(isDefined(self.script_ignoreme)) {
+  if(isdefined(self.script_ignoreme)) {
     assert(self.script_ignoreme == 1, "");
     self.ignoreme = 1;
   }
-  if(isDefined(self.script_hero)) {
+  if(isdefined(self.script_hero)) {
     assert(self.script_hero == 1, "");
   }
-  if(isDefined(self.script_ignoreall)) {
+  if(isdefined(self.script_ignoreall)) {
     assert(self.script_ignoreall == 1, "");
     self.ignoreall = 1;
   }
-  if(isDefined(self.script_sightrange)) {
+  if(isdefined(self.script_sightrange)) {
     self.maxsightdistsqrd = self.script_sightrange;
   } else if(self.weaponclass === "gas") {
     self.maxsightdistsqrd = 1048576;
   }
   if(self.team != "axis") {
-    if(isDefined(self.script_followmin)) {
+    if(isdefined(self.script_followmin)) {
       self.followmin = self.script_followmin;
     }
-    if(isDefined(self.script_followmax)) {
+    if(isdefined(self.script_followmax)) {
       self.followmax = self.script_followmax;
     }
   }
   if(self.team == "axis") {}
-  if(isDefined(self.script_fightdist)) {
+  if(isdefined(self.script_fightdist)) {
     self.pathenemyfightdist = self.script_fightdist;
   }
-  if(isDefined(self.script_maxdist)) {
+  if(isdefined(self.script_maxdist)) {
     self.pathenemylookahead = self.script_maxdist;
   }
-  if(isDefined(self.script_longdeath)) {
+  if(isdefined(self.script_longdeath)) {
     assert(!self.script_longdeath, "" + self.export);
     self.a.disablelongdeath = 1;
     assert(self.team != "", "" + self.export);
   }
-  if(isDefined(self.script_grenades)) {
+  if(isdefined(self.script_grenades)) {
     self.grenadeammo = self.script_grenades;
   }
-  if(isDefined(self.script_pacifist)) {
+  if(isdefined(self.script_pacifist)) {
     self.pacifist = 1;
   }
-  if(isDefined(self.script_startinghealth)) {
+  if(isdefined(self.script_startinghealth)) {
     self.health = self.script_startinghealth;
   }
-  if(isDefined(self.script_allowdeath)) {
+  if(isdefined(self.script_allowdeath)) {
     self.allowdeath = self.script_allowdeath;
   }
-  if(isDefined(self.script_forcegib)) {
+  if(isdefined(self.script_forcegib)) {
     self.force_gib = 1;
   }
-  if(isDefined(self.script_lights_on)) {
+  if(isdefined(self.script_lights_on)) {
     self.has_ir = 1;
   }
-  if(isDefined(self.script_patroller)) {
+  if(isdefined(self.script_patroller)) {
     return;
   }
-  if(isDefined(self.script_rusher) && self.script_rusher) {
+  if(isdefined(self.script_rusher) && self.script_rusher) {
     return;
   }
-  if(isDefined(self.used_an_mg42)) {
+  if(isdefined(self.used_an_mg42)) {
     return;
   }
   if(override) {
@@ -476,29 +476,29 @@ function spawn_think_action(spawner) {
     self setgoal(self.origin);
     return;
   }
-  if(isDefined(level.using_awareness) && level.using_awareness) {
+  if(isdefined(level.using_awareness) && level.using_awareness) {
     return;
   }
-  if(isDefined(self.vehicleclass) && self.vehicleclass == "artillery") {
+  if(isdefined(self.vehicleclass) && self.vehicleclass == "artillery") {
     return;
   }
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     e_goal = getent(self.target, "targetname");
-    if(isDefined(e_goal)) {
+    if(isdefined(e_goal)) {
       self setgoal(e_goal);
     } else {
       self thread go_to_node();
     }
   } else {
     self thread set_goalradius_based_on_settings();
-    if(isDefined(self.script_spawner_targets)) {
+    if(isdefined(self.script_spawner_targets)) {
       self thread go_to_spawner_target(strtok(self.script_spawner_targets, " "));
     }
   }
-  if(isDefined(self.script_goalvolume)) {
+  if(isdefined(self.script_goalvolume)) {
     self thread set_goal_volume();
   }
-  if(isDefined(self.script_turnrate)) {
+  if(isdefined(self.script_turnrate)) {
     self.turnrate = self.script_turnrate;
   }
 }
@@ -507,37 +507,37 @@ function set_goal_volume() {
   self endon("death");
   waittillframeend();
   volume = level.goalvolumes[self.script_goalvolume];
-  if(!isDefined(volume)) {
+  if(!isdefined(volume)) {
     return;
   }
-  if(isDefined(volume.target)) {
+  if(isdefined(volume.target)) {
     node = getnode(volume.target, "targetname");
     ent = getent(volume.target, "targetname");
     struct = struct::get(volume.target, "targetname");
     pos = undefined;
-    if(isDefined(node)) {
+    if(isdefined(node)) {
       pos = node;
       self setgoal(pos);
     } else {
-      if(isDefined(ent)) {
+      if(isdefined(ent)) {
         pos = ent;
         self setgoal(pos.origin);
-      } else if(isDefined(struct)) {
+      } else if(isdefined(struct)) {
         pos = struct;
         self setgoal(pos.origin);
       }
     }
-    if(isDefined(pos.radius) && pos.radius != 0) {
+    if(isdefined(pos.radius) && pos.radius != 0) {
       self.goalradius = pos.radius;
     }
-    if(isDefined(pos.goalheight) && pos.goalheight != 0) {
+    if(isdefined(pos.goalheight) && pos.goalheight != 0) {
       self.goalheight = pos.goalheight;
     }
   }
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     self setgoal(volume);
   } else {
-    if(isDefined(self.script_spawner_targets)) {
+    if(isdefined(self.script_spawner_targets)) {
       self waittill("spawner_target_set");
       self setgoal(volume);
     } else {
@@ -547,7 +547,7 @@ function set_goal_volume() {
 }
 
 function get_target_ents(target) {
-  return getEntArray(target, "targetname");
+  return getentarray(target, "targetname");
 }
 
 function get_target_nodes(target) {
@@ -559,7 +559,7 @@ function get_target_structs(target) {
 }
 
 function node_has_radius(node) {
-  return isDefined(node.radius) && node.radius != 0;
+  return isdefined(node.radius) && node.radius != 0;
 }
 
 function go_to_origin(node, optional_arrived_at_node_func) {
@@ -572,16 +572,16 @@ function go_to_struct(node, optional_arrived_at_node_func) {
 
 function go_to_node(node, goal_type, optional_arrived_at_node_func) {
   self endon("death");
-  if(isDefined(self.used_an_mg42)) {
+  if(isdefined(self.used_an_mg42)) {
     return;
   }
   array = get_node_funcs_based_on_target(node, goal_type);
-  if(!isDefined(array)) {
+  if(!isdefined(array)) {
     self notify("reached_path_end");
     return;
   }
-  if(!isDefined(optional_arrived_at_node_func)) {
-    optional_arrived_at_node_func = &util::empty;
+  if(!isdefined(optional_arrived_at_node_func)) {
+    optional_arrived_at_node_func = & util::empty;
   }
   go_to_node_using_funcs(array["node"], array["get_target_func"], array["set_goal_func_quits"], optional_arrived_at_node_func);
 }
@@ -589,8 +589,8 @@ function go_to_node(node, goal_type, optional_arrived_at_node_func) {
 function spawner_targets_init() {
   allnodes = getallnodes();
   level.script_spawner_targets_nodes = [];
-  for(i = 0; i < allnodes.size; i++) {
-    if(isDefined(allnodes[i].script_spawner_targets)) {
+  for (i = 0; i < allnodes.size; i++) {
+    if(isdefined(allnodes[i].script_spawner_targets)) {
       level.script_spawner_targets_nodes[level.script_spawner_targets_nodes.size] = allnodes[i];
     }
   }
@@ -603,14 +603,14 @@ function go_to_spawner_target(target_names) {
   nodes = [];
   a_nodes_unavailable = [];
   nodespresent = 0;
-  for(i = 0; i < target_names.size; i++) {
+  for (i = 0; i < target_names.size; i++) {
     target_nodes = get_spawner_target_nodes(target_names[i]);
     if(target_nodes.size > 0) {
       nodespresent = 1;
     }
     foreach(node in target_nodes) {
-      if(isnodeoccupied(node) || (isDefined(node.node_claimed) && node.node_claimed)) {
-        if(!isDefined(a_nodes_unavailable)) {
+      if(isnodeoccupied(node) || (isdefined(node.node_claimed) && node.node_claimed)) {
+        if(!isdefined(a_nodes_unavailable)) {
           a_nodes_unavailable = [];
         } else if(!isarray(a_nodes_unavailable)) {
           a_nodes_unavailable = array(a_nodes_unavailable);
@@ -618,8 +618,8 @@ function go_to_spawner_target(target_names) {
         a_nodes_unavailable[a_nodes_unavailable.size] = node;
         continue;
       }
-      if(isDefined(node.spawnflags) && (node.spawnflags & 512) == 512) {
-        if(!isDefined(a_nodes_unavailable)) {
+      if(isdefined(node.spawnflags) && (node.spawnflags & 512) == 512) {
+        if(!isdefined(a_nodes_unavailable)) {
           a_nodes_unavailable = [];
         } else if(!isarray(a_nodes_unavailable)) {
           a_nodes_unavailable = array(a_nodes_unavailable);
@@ -627,7 +627,7 @@ function go_to_spawner_target(target_names) {
         a_nodes_unavailable[a_nodes_unavailable.size] = node;
         continue;
       }
-      if(!isDefined(nodes)) {
+      if(!isdefined(nodes)) {
         nodes = [];
       } else if(!isarray(nodes)) {
         nodes = array(nodes);
@@ -636,10 +636,10 @@ function go_to_spawner_target(target_names) {
     }
   }
   if(nodes.size == 0) {
-    while(nodes.size == 0) {
+    while (nodes.size == 0) {
       foreach(node in a_nodes_unavailable) {
-        if(!isnodeoccupied(node) && (!(isDefined(node.node_claimed) && node.node_claimed)) && (!(isDefined(node.spawnflags) && (node.spawnflags & 512) == 512))) {
-          if(!isDefined(nodes)) {
+        if(!isnodeoccupied(node) && (!(isdefined(node.node_claimed) && node.node_claimed)) && (!(isdefined(node.spawnflags) && (node.spawnflags & 512) == 512))) {
+          if(!isdefined(nodes)) {
             nodes = [];
           } else if(!isarray(nodes)) {
             nodes = array(nodes);
@@ -656,8 +656,8 @@ function go_to_spawner_target(target_names) {
   if(nodes.size > 0) {
     goal = array::random(nodes);
   }
-  if(isDefined(goal)) {
-    if(isDefined(self.script_radius)) {
+  if(isdefined(goal)) {
+    if(isdefined(self.script_radius)) {
       self.goalradius = self.script_radius;
     } else {
       self.goalradius = 400;
@@ -681,9 +681,9 @@ function get_spawner_target_nodes(group) {
     return [];
   }
   nodes = [];
-  for(i = 0; i < level.script_spawner_targets_nodes.size; i++) {
+  for (i = 0; i < level.script_spawner_targets_nodes.size; i++) {
     groups = strtok(level.script_spawner_targets_nodes[i].script_spawner_targets, " ");
-    for(j = 0; j < groups.size; j++) {
+    for (j = 0; j < groups.size; j++) {
       if(groups[j] == group) {
         nodes[nodes.size] = level.script_spawner_targets_nodes[i];
       }
@@ -698,13 +698,13 @@ function get_least_used_from_array(array) {
     return array[0];
   }
   targetname = array[0].targetname;
-  if(!isDefined(level.go_to_node_arrays[targetname])) {
+  if(!isdefined(level.go_to_node_arrays[targetname])) {
     level.go_to_node_arrays[targetname] = array;
   }
   array = level.go_to_node_arrays[targetname];
   first = array[0];
   newarray = [];
-  for(i = 0; i < (array.size - 1); i++) {
+  for (i = 0; i < (array.size - 1); i++) {
     newarray[i] = array[i + 1];
   }
   newarray[array.size - 1] = array[0];
@@ -715,10 +715,10 @@ function get_least_used_from_array(array) {
 function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arrived_at_node_func, require_player_dist) {
   self endon("stop_going_to_node");
   self endon("death");
-  for(;;) {
+  for (;;) {
     node = get_least_used_from_array(node);
     player_wait_dist = require_player_dist;
-    if(isDefined(node.script_requires_player)) {
+    if(isdefined(node.script_requires_player)) {
       if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
       } else {
@@ -727,34 +727,38 @@ function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, opti
       node.script_requires_player = 0;
     }
     self set_goalradius_based_on_settings(node);
-    if(isDefined(node.height)) {
+    if(isdefined(node.height)) {
       self.goalheight = node.height;
     }
-    [[set_goal_func_quits]](node);
+    [
+      [set_goal_func_quits]
+    ](node);
     self waittill("goal");
-    [[optional_arrived_at_node_func]](node);
-    if(isDefined(node.script_flag_set)) {
+    [
+      [optional_arrived_at_node_func]
+    ](node);
+    if(isdefined(node.script_flag_set)) {
       level flag::set(node.script_flag_set);
     }
-    if(isDefined(node.script_flag_clear)) {
+    if(isdefined(node.script_flag_clear)) {
       level flag::set(node.script_flag_clear);
     }
-    if(isDefined(node.script_ent_flag_set)) {
+    if(isdefined(node.script_ent_flag_set)) {
       if(!self flag::exists(node.script_ent_flag_set)) {
         assertmsg(("" + node.script_ent_flag_set) + "");
       }
       self flag::set(node.script_ent_flag_set);
     }
-    if(isDefined(node.script_ent_flag_clear)) {
+    if(isdefined(node.script_ent_flag_clear)) {
       if(!self flag::exists(node.script_ent_flag_clear)) {
         assertmsg(("" + node.script_ent_flag_clear) + "");
       }
       self flag::clear(node.script_ent_flag_clear);
     }
-    if(isDefined(node.script_flag_wait)) {
+    if(isdefined(node.script_flag_wait)) {
       level flag::wait_till(node.script_flag_wait);
     }
-    while(isDefined(node.script_requires_player)) {
+    while (isdefined(node.script_requires_player)) {
       node.script_requires_player = 0;
       if(self go_to_node_wait_for_player(node, get_target_func, player_wait_dist)) {
         node.script_requires_player = 1;
@@ -763,11 +767,11 @@ function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, opti
       }
       wait(0.1);
     }
-    if(isDefined(node.script_aigroup)) {
+    if(isdefined(node.script_aigroup)) {
       waittill_ai_group_cleared(node.script_aigroup);
     }
     node util::script_delay();
-    if(!isDefined(node.target)) {
+    if(!isdefined(node.target)) {
       break;
     }
     nextnode_array = update_target_array(node.target);
@@ -776,11 +780,13 @@ function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, opti
     }
     node = nextnode_array;
   }
-  if(isDefined(self.arrived_at_end_node_func)) {
-    [[self.arrived_at_end_node_func]](node);
+  if(isdefined(self.arrived_at_end_node_func)) {
+    [
+      [self.arrived_at_end_node_func]
+    ](node);
   }
   self notify("reached_path_end");
-  if(isDefined(self.delete_on_path_end)) {
+  if(isdefined(self.delete_on_path_end)) {
     self delete();
   }
   self set_goalradius_based_on_settings(node);
@@ -788,36 +794,38 @@ function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, opti
 
 function go_to_node_wait_for_player(node, get_target_func, dist) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin)) {
       return true;
     }
   }
-  vec = anglesToForward(self.angles);
-  if(isDefined(node.target)) {
-    temp = [[get_target_func]](node.target);
+  vec = anglestoforward(self.angles);
+  if(isdefined(node.target)) {
+    temp = [
+      [get_target_func]
+    ](node.target);
     if(temp.size == 1) {
       vec = vectornormalize(temp[0].origin - node.origin);
-    } else if(isDefined(node.angles)) {
-      vec = anglesToForward(node.angles);
+    } else if(isdefined(node.angles)) {
+      vec = anglestoforward(node.angles);
     }
-  } else if(isDefined(node.angles)) {
-    vec = anglesToForward(node.angles);
+  } else if(isdefined(node.angles)) {
+    vec = anglestoforward(node.angles);
   }
   vec2 = [];
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     vec2[vec2.size] = vectornormalize(player.origin - self.origin);
   }
-  for(i = 0; i < vec2.size; i++) {
+  for (i = 0; i < vec2.size; i++) {
     value = vec2[i];
     if(vectordot(vec, value) > 0) {
       return true;
     }
   }
   dist2rd = dist * dist;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(distancesquared(player.origin, self.origin) < dist2rd) {
       return true;
@@ -836,7 +844,7 @@ function go_to_node_set_goal_node(node) {
 
 function remove_crawled(ent) {
   waittillframeend();
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     ent.crawled = undefined;
   }
 }
@@ -844,22 +852,24 @@ function remove_crawled(ent) {
 function crawl_target_and_init_flags(ent, get_func) {
   targets = [];
   index = 0;
-  for(;;) {
-    if(!isDefined(ent.crawled)) {
+  for (;;) {
+    if(!isdefined(ent.crawled)) {
       ent.crawled = 1;
       level thread remove_crawled(ent);
-      if(isDefined(ent.script_flag_set)) {
-        if(!isDefined(level.flag[ent.script_flag_set])) {
+      if(isdefined(ent.script_flag_set)) {
+        if(!isdefined(level.flag[ent.script_flag_set])) {
           level flag::init(ent.script_flag_set);
         }
       }
-      if(isDefined(ent.script_flag_wait)) {
-        if(!isDefined(level.flag[ent.script_flag_wait])) {
+      if(isdefined(ent.script_flag_wait)) {
+        if(!isdefined(level.flag[ent.script_flag_wait])) {
           level flag::init(ent.script_flag_wait);
         }
       }
-      if(isDefined(ent.target)) {
-        new_targets = [[get_func]](ent.target);
+      if(isdefined(ent.target)) {
+        new_targets = [
+          [get_func]
+        ](ent.target);
         array::add(targets, new_targets);
       }
     }
@@ -872,20 +882,20 @@ function crawl_target_and_init_flags(ent, get_func) {
 }
 
 function get_node_funcs_based_on_target(node, goal_type) {
-  get_target_func["origin"] = &get_target_ents;
-  get_target_func["node"] = &get_target_nodes;
-  get_target_func["struct"] = &get_target_structs;
-  set_goal_func_quits["origin"] = &go_to_node_set_goal_pos;
-  set_goal_func_quits["struct"] = &go_to_node_set_goal_pos;
-  set_goal_func_quits["node"] = &go_to_node_set_goal_node;
-  if(!isDefined(goal_type)) {
+  get_target_func["origin"] = & get_target_ents;
+  get_target_func["node"] = & get_target_nodes;
+  get_target_func["struct"] = & get_target_structs;
+  set_goal_func_quits["origin"] = & go_to_node_set_goal_pos;
+  set_goal_func_quits["struct"] = & go_to_node_set_goal_pos;
+  set_goal_func_quits["node"] = & go_to_node_set_goal_node;
+  if(!isdefined(goal_type)) {
     goal_type = "node";
   }
   array = [];
-  if(isDefined(node)) {
+  if(isdefined(node)) {
     array["node"][0] = node;
   } else {
-    node = getEntArray(self.target, "targetname");
+    node = getentarray(self.target, "targetname");
     if(node.size > 0) {
       goal_type = "origin";
     }
@@ -915,7 +925,7 @@ function update_target_array(str_target) {
   if(a_s_target.size) {
     return a_s_target;
   }
-  a_e_target = getEntArray(str_target, "targetname");
+  a_e_target = getentarray(str_target, "targetname");
   if(a_e_target.size) {
     return a_e_target;
   }
@@ -924,12 +934,12 @@ function update_target_array(str_target) {
 function set_goalradius_based_on_settings(node) {
   self endon("death");
   waittillframeend();
-  if(isDefined(self.script_radius)) {
+  if(isdefined(self.script_radius)) {
     self.goalradius = self.script_radius;
-  } else if(isDefined(node) && node_has_radius(node)) {
+  } else if(isdefined(node) && node_has_radius(node)) {
     self.goalradius = node.radius;
   }
-  if(isDefined(self.script_forcegoal) && self.script_forcegoal) {
+  if(isdefined(self.script_forcegoal) && self.script_forcegoal) {
     n_radius = (self.script_forcegoal > 1 ? self.script_forcegoal : undefined);
     self thread ai::force_goal(get_goal(self.target), n_radius);
   }
@@ -938,7 +948,7 @@ function set_goalradius_based_on_settings(node) {
 function get_goal(str_goal, str_key = "targetname") {
   a_goals = getnodearray(str_goal, str_key);
   if(!a_goals.size) {
-    a_goals = getEntArray(str_goal, str_key);
+    a_goals = getentarray(str_goal, str_key);
   }
   return array::random(a_goals);
 }
@@ -947,7 +957,7 @@ function fallback_spawner_think(num, node_array, ignorewhilefallingback) {
   self endon("death");
   level.max_fallbackers[num] = level.max_fallbackers[num] + self.count;
   firstspawn = 1;
-  while(self.count > 0) {
+  while (self.count > 0) {
     self waittill("spawned", spawn);
     if(firstspawn) {
       if(getdvarstring("") == "") {
@@ -973,16 +983,16 @@ function fallback_ai_think_death(ai, num) {
 }
 
 function fallback_ai_think(num, node_array, spawner, ignorewhilefallingback) {
-  if(!isDefined(self.fallback) || !isDefined(self.fallback[num])) {
+  if(!isdefined(self.fallback) || !isdefined(self.fallback[num])) {
     self.fallback[num] = 1;
   } else {
     return;
   }
   self.script_fallback = num;
-  if(!isDefined(spawner)) {
+  if(!isdefined(spawner)) {
     level.current_fallbackers[num]++;
   }
-  if(isDefined(node_array) && level.fallback_initiated[num]) {
+  if(isdefined(node_array) && level.fallback_initiated[num]) {
     self thread fallback_ai(num, node_array, ignorewhilefallingback);
   }
   level thread fallback_ai_think_death(self, num);
@@ -990,7 +1000,7 @@ function fallback_ai_think(num, node_array, spawner, ignorewhilefallingback) {
 
 function fallback_death(ai, num) {
   ai waittill("death");
-  if(isDefined(ai.fallback_node)) {
+  if(isdefined(ai.fallback_node)) {
     ai.fallback_node.fallback_occupied = 0;
   }
   level notify("fallback_reached_goal" + num);
@@ -999,7 +1009,7 @@ function fallback_death(ai, num) {
 function fallback_goal(ignorewhilefallingback) {
   self waittill("goal");
   self.ignoresuppression = 0;
-  if(isDefined(ignorewhilefallingback) && ignorewhilefallingback) {
+  if(isdefined(ignorewhilefallingback) && ignorewhilefallingback) {
     self.ignoreall = 0;
   }
   self notify("fallback_notify");
@@ -1013,7 +1023,7 @@ function fallback_interrupt() {
   self endon("hash_1f355ad7");
   self endon("fallback_notify");
   self endon("death");
-  while(true) {
+  while (true) {
     origin = self.origin;
     wait(2);
     if(self.origin == origin) {
@@ -1029,10 +1039,10 @@ function fallback_ai(num, node_array, ignorewhilefallingback) {
   self endon("hash_1f355ad7");
   self endon("death");
   node = undefined;
-  while(true) {
+  while (true) {
     assert(node_array.size >= level.current_fallbackers[num], ("" + num) + "");
     node = node_array[randomint(node_array.size)];
-    if(!isDefined(node.fallback_occupied) || !node.fallback_occupied) {
+    if(!isdefined(node.fallback_occupied) || !node.fallback_occupied) {
       node.fallback_occupied = 1;
       self.fallback_node = node;
       break;
@@ -1040,7 +1050,7 @@ function fallback_ai(num, node_array, ignorewhilefallingback) {
     wait(0.1);
   }
   self.ignoresuppression = 1;
-  if(self.ignoreall == 0 && isDefined(ignorewhilefallingback) && ignorewhilefallingback) {
+  if(self.ignoreall == 0 && isdefined(ignorewhilefallingback) && ignorewhilefallingback) {
     self.ignoreall = 1;
     self thread fallback_interrupt();
   }
@@ -1062,7 +1072,7 @@ function coverprint(org) {
   self endon("fallback_notify");
   self endon("stop_coverprint");
   self endon("death");
-  while(true) {
+  while (true) {
     line(self.origin + vectorscale((0, 0, 1), 35), org, (0.2, 0.5, 0.8), 0.5);
     print3d(self.origin + vectorscale((0, 0, 1), 70), "", (0.98, 0.4, 0.26), 0.85);
     wait(0.05);
@@ -1072,12 +1082,12 @@ function coverprint(org) {
 function fallback_overmind(num, group, ignorewhilefallingback, percent) {
   fallback_nodes = undefined;
   nodes = getallnodes();
-  for(i = 0; i < nodes.size; i++) {
-    if(isDefined(nodes[i].script_fallback) && nodes[i].script_fallback == num) {
+  for (i = 0; i < nodes.size; i++) {
+    if(isdefined(nodes[i].script_fallback) && nodes[i].script_fallback == num) {
       array::add(fallback_nodes, nodes[i]);
     }
   }
-  if(isDefined(fallback_nodes)) {
+  if(isdefined(fallback_nodes)) {
     level thread fallback_overmind_internal(num, group, fallback_nodes, ignorewhilefallingback, percent);
   }
 }
@@ -1088,8 +1098,8 @@ function fallback_overmind_internal(num, group, fallback_nodes, ignorewhilefalli
   level.spawner_fallbackers[num] = 0;
   level.fallback_initiated[num] = 0;
   spawners = getspawnerarray();
-  for(i = 0; i < spawners.size; i++) {
-    if(isDefined(spawners[i].script_fallback) && spawners[i].script_fallback == num) {
+  for (i = 0; i < spawners.size; i++) {
+    if(isdefined(spawners[i].script_fallback) && spawners[i].script_fallback == num) {
       if(spawners[i].count > 0) {
         spawners[i] thread fallback_spawner_think(num, fallback_nodes, ignorewhilefallingback);
         level.spawner_fallbackers[num]++;
@@ -1098,8 +1108,8 @@ function fallback_overmind_internal(num, group, fallback_nodes, ignorewhilefalli
   }
   assert(level.spawner_fallbackers[num] <= fallback_nodes.size, "" + num);
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_fallback) && ai[i].script_fallback == num) {
+  for (i = 0; i < ai.size; i++) {
+    if(isdefined(ai[i].script_fallback) && ai[i].script_fallback == num) {
       ai[i] thread fallback_ai_think(num, undefined, undefined, ignorewhilefallingback);
     }
   }
@@ -1117,16 +1127,16 @@ function fallback_overmind_internal(num, group, fallback_nodes, ignorewhilefalli
   level.fallback_initiated[num] = 1;
   fallback_ai = undefined;
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_fallback) && ai[i].script_fallback == num || (isDefined(ai[i].script_fallback_group) && isDefined(group) && ai[i].script_fallback_group == group)) {
+  for (i = 0; i < ai.size; i++) {
+    if(isdefined(ai[i].script_fallback) && ai[i].script_fallback == num || (isdefined(ai[i].script_fallback_group) && isdefined(group) && ai[i].script_fallback_group == group)) {
       array::add(fallback_ai, ai[i]);
     }
   }
   ai = undefined;
-  if(!isDefined(fallback_ai)) {
+  if(!isdefined(fallback_ai)) {
     return;
   }
-  if(!isDefined(percent)) {
+  if(!isdefined(percent)) {
     percent = 0.4;
   }
   first_half = fallback_ai.size * percent;
@@ -1134,18 +1144,18 @@ function fallback_overmind_internal(num, group, fallback_nodes, ignorewhilefalli
   level notify("fallback initiated " + num);
   fallback_text(fallback_ai, 0, first_half);
   first_half_ai = [];
-  for(i = 0; i < first_half; i++) {
+  for (i = 0; i < first_half; i++) {
     fallback_ai[i] thread fallback_ai(num, fallback_nodes, ignorewhilefallingback);
     first_half_ai[i] = fallback_ai[i];
   }
-  for(i = 0; i < first_half; i++) {
+  for (i = 0; i < first_half; i++) {
     level waittill("fallback_reached_goal" + num);
   }
   fallback_text(fallback_ai, first_half, fallback_ai.size);
-  for(i = 0; i < fallback_ai.size; i++) {
+  for (i = 0; i < fallback_ai.size; i++) {
     if(isalive(fallback_ai[i])) {
       set_fallback = 1;
-      for(p = 0; p < first_half_ai.size; p++) {
+      for (p = 0; p < first_half_ai.size; p++) {
         if(isalive(first_half_ai[p])) {
           if(fallback_ai[i] == first_half_ai[p]) {
             set_fallback = 0;
@@ -1163,7 +1173,7 @@ function fallback_text(fallbackers, start, end) {
   if(gettime() <= level._nextcoverprint) {
     return;
   }
-  for(i = start; i < end; i++) {
+  for (i = start; i < end; i++) {
     if(!isalive(fallbackers[i])) {
       continue;
     }
@@ -1177,7 +1187,7 @@ function fallback_wait(num, group, ignorewhilefallingback, percent) {
   if(getdvarstring("") == "") {
     println("", num);
   }
-  for(i = 0; i < level.spawner_fallbackers[num]; i++) {
+  for (i = 0; i < level.spawner_fallbackers[num]; i++) {
     if(getdvarstring("") == "") {
       println("", num, "", i);
     }
@@ -1187,13 +1197,13 @@ function fallback_wait(num, group, ignorewhilefallingback, percent) {
     println("", num, "", level.current_fallbackers[num]);
   }
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_fallback) && ai[i].script_fallback == num || (isDefined(ai[i].script_fallback_group) && isDefined(group) && ai[i].script_fallback_group == group)) {
+  for (i = 0; i < ai.size; i++) {
+    if(isdefined(ai[i].script_fallback) && ai[i].script_fallback == num || (isdefined(ai[i].script_fallback_group) && isdefined(group) && ai[i].script_fallback_group == group)) {
       ai[i] thread fallback_ai_think(num, undefined, undefined, ignorewhilefallingback);
     }
   }
   ai = undefined;
-  for(deadfallbackers = 0; deadfallbackers < (level.max_fallbackers[num] * percent); deadfallbackers++) {
+  for (deadfallbackers = 0; deadfallbackers < (level.max_fallbackers[num] * percent); deadfallbackers++) {
     if(getdvarstring("") == "") {
       println((("" + deadfallbackers) + "") + (level.max_fallbackers[num] * 0.5));
     }
@@ -1205,12 +1215,12 @@ function fallback_wait(num, group, ignorewhilefallingback, percent) {
 
 function fallback_think(trigger) {
   ignorewhilefallingback = 0;
-  if(isDefined(trigger.script_ignoreall) && trigger.script_ignoreall) {
+  if(isdefined(trigger.script_ignoreall) && trigger.script_ignoreall) {
     ignorewhilefallingback = 1;
   }
-  if(!isDefined(level.fallback) || !isDefined(level.fallback[trigger.script_fallback])) {
+  if(!isdefined(level.fallback) || !isdefined(level.fallback[trigger.script_fallback])) {
     percent = 0.5;
-    if(isDefined(trigger.script_percent)) {
+    if(isdefined(trigger.script_percent)) {
       percent = trigger.script_percent / 100;
     }
     level thread fallback_overmind(trigger.script_fallback, trigger.script_fallback_group, ignorewhilefallingback, percent);
@@ -1221,20 +1231,20 @@ function fallback_think(trigger) {
 }
 
 function fallback_add_previous_group(num, node_array) {
-  if(!isDefined(level.current_fallbackers[num - 1])) {
+  if(!isdefined(level.current_fallbackers[num - 1])) {
     return;
   }
-  for(i = 0; i < (level.current_fallbackers[num - 1]); i++) {
+  for (i = 0; i < (level.current_fallbackers[num - 1]); i++) {
     level.max_fallbackers[num]++;
   }
-  for(i = 0; i < (level.current_fallbackers[num - 1]); i++) {
+  for (i = 0; i < (level.current_fallbackers[num - 1]); i++) {
     level.current_fallbackers[num]++;
   }
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].script_fallback) && ai[i].script_fallback == (num - 1)) {
+  for (i = 0; i < ai.size; i++) {
+    if(isdefined(ai[i].script_fallback) && ai[i].script_fallback == (num - 1)) {
       ai[i].script_fallback++;
-      if(isDefined(ai[i].fallback_node)) {
+      if(isdefined(ai[i].fallback_node)) {
         ai[i].fallback_node.fallback_occupied = 0;
         ai[i].fallback_node = undefined;
       }
@@ -1243,24 +1253,24 @@ function fallback_add_previous_group(num, node_array) {
 }
 
 function aigroup_init(aigroup, spawner) {
-  if(!isDefined(level._ai_group[aigroup])) {
-    level._ai_group[aigroup] = spawnStruct();
+  if(!isdefined(level._ai_group[aigroup])) {
+    level._ai_group[aigroup] = spawnstruct();
     level._ai_group[aigroup].aigroup = aigroup;
     level._ai_group[aigroup].aicount = 0;
     level._ai_group[aigroup].killed_count = 0;
     level._ai_group[aigroup].ai = [];
     level._ai_group[aigroup].spawners = [];
     level._ai_group[aigroup].cleared_count = 0;
-    if(!isDefined(level.flag[aigroup + "_cleared"])) {
+    if(!isdefined(level.flag[aigroup + "_cleared"])) {
       level flag::init(aigroup + "_cleared");
     }
-    if(!isDefined(level.flag[aigroup + "_spawning"])) {
+    if(!isdefined(level.flag[aigroup + "_spawning"])) {
       level flag::init(aigroup + "_spawning");
     }
     level thread set_ai_group_cleared_flag(level._ai_group[aigroup]);
   }
-  if(isDefined(spawner)) {
-    if(!isDefined(level._ai_group[aigroup].spawners)) {
+  if(isdefined(spawner)) {
+    if(!isdefined(level._ai_group[aigroup].spawners)) {
       level._ai_group[aigroup].spawners = [];
     } else if(!isarray(level._ai_group[aigroup].spawners)) {
       level._ai_group[aigroup].spawners = array(level._ai_group[aigroup].spawners);
@@ -1279,7 +1289,7 @@ function aigroup_think(tracker) {
   tracker.aicount++;
   tracker.ai[tracker.ai.size] = self;
   tracker notify("update_aigroup");
-  if(isDefined(self.script_deathflag_longdeath)) {
+  if(isdefined(self.script_deathflag_longdeath)) {
     self waittilldeathorpaindeath();
   } else {
     self waittill("death");
@@ -1293,34 +1303,34 @@ function aigroup_think(tracker) {
 
 function set_ai_group_cleared_flag(tracker) {
   waittillframeend();
-  while((tracker.aicount + get_ai_group_spawner_count(tracker.aigroup)) > tracker.cleared_count) {
+  while ((tracker.aicount + get_ai_group_spawner_count(tracker.aigroup)) > tracker.cleared_count) {
     tracker waittill("update_aigroup");
   }
   level flag::set(tracker.aigroup + "_cleared");
 }
 
 function flood_trigger_think(trigger) {
-  assert(isDefined(trigger.target), ("" + trigger.origin) + "");
-  floodspawners = getEntArray(trigger.target, "targetname");
+  assert(isdefined(trigger.target), ("" + trigger.origin) + "");
+  floodspawners = getentarray(trigger.target, "targetname");
   assert(floodspawners.size, ("" + trigger.target) + "");
-  for(i = 0; i < floodspawners.size; i++) {
+  for (i = 0; i < floodspawners.size; i++) {
     floodspawners[i].script_trigger = trigger;
   }
-  array::thread_all(floodspawners, &flood_spawner_init);
+  array::thread_all(floodspawners, & flood_spawner_init);
   trigger waittill("trigger");
-  floodspawners = getEntArray(trigger.target, "targetname");
-  array::thread_all(floodspawners, &flood_spawner_think, trigger);
+  floodspawners = getentarray(trigger.target, "targetname");
+  array::thread_all(floodspawners, & flood_spawner_think, trigger);
 }
 
 function flood_spawner_init(spawner) {
-  assert(isDefined(self.spawnflags) && (self.spawnflags & 1) == 1, (("" + self.origin) + "") + self getorigin() + "");
+  assert(isdefined(self.spawnflags) && (self.spawnflags & 1) == 1, (("" + self.origin) + "") + self getorigin() + "");
 }
 
 function trigger_requires_player(trigger) {
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return 0;
   }
-  return isDefined(trigger.script_requires_player);
+  return isdefined(trigger.script_requires_player);
 }
 
 function flood_spawner_think(trigger) {
@@ -1329,9 +1339,9 @@ function flood_spawner_think(trigger) {
   self endon("hash_87140c16");
   requires_player = trigger_requires_player(trigger);
   util::script_delay();
-  while(self.count > 0) {
+  while (self.count > 0) {
     if(requires_player) {
-      while(!util::any_player_is_touching(trigger)) {
+      while (!util::any_player_is_touching(trigger)) {
         wait(0.5);
       }
     }
@@ -1345,7 +1355,7 @@ function flood_spawner_think(trigger) {
     if(!player_saw_kill(soldier, attacker)) {
       self.count++;
     }
-    if(!isDefined(soldier)) {
+    if(!isdefined(soldier)) {
       continue;
     }
     if(!util::script_wait(1)) {
@@ -1368,12 +1378,12 @@ function flood_spawner_think(trigger) {
 }
 
 function player_saw_kill(guy, attacker) {
-  if(isDefined(self.script_force_count)) {
+  if(isdefined(self.script_force_count)) {
     if(self.script_force_count) {
       return 1;
     }
   }
-  if(!isDefined(guy)) {
+  if(!isdefined(guy)) {
     return 0;
   }
   if(isalive(attacker)) {
@@ -1381,34 +1391,34 @@ function player_saw_kill(guy, attacker) {
       return 1;
     }
     players = getplayers();
-    for(q = 0; q < players.size; q++) {
+    for (q = 0; q < players.size; q++) {
       if(distancesquared(attacker.origin, players[q].origin) < 40000) {
         return 1;
       }
     }
-  } else if(isDefined(attacker)) {
+  } else if(isdefined(attacker)) {
     if(attacker.classname == "worldspawn") {
       return 0;
     }
     player = util::get_closest_player(attacker.origin);
-    if(isDefined(player) && distancesquared(attacker.origin, player.origin) < 40000) {
+    if(isdefined(player) && distancesquared(attacker.origin, player.origin) < 40000) {
       return 1;
     }
   }
   closest_player = util::get_closest_player(guy.origin);
-  if(isDefined(closest_player) && distancesquared(guy.origin, closest_player.origin) < 40000) {
+  if(isdefined(closest_player) && distancesquared(guy.origin, closest_player.origin) < 40000) {
     return 1;
   }
-  return bullettracepassed(closest_player getEye(), guy getEye(), 0, undefined);
+  return bullettracepassed(closest_player geteye(), guy geteye(), 0, undefined);
 }
 
 function show_bad_path() {
   self endon("death");
   last_bad_path_time = -5000;
   bad_path_count = 0;
-  for(;;) {
+  for (;;) {
     self waittill("bad_path", badpathpos);
-    if(!isDefined(level.debug_badpath) || !level.debug_badpath) {
+    if(!isdefined(level.debug_badpath) || !level.debug_badpath) {
       continue;
     }
     if((gettime() - last_bad_path_time) > 5000) {
@@ -1420,7 +1430,7 @@ function show_bad_path() {
     if(bad_path_count < 10) {
       continue;
     }
-    for(p = 0; p < 200; p++) {
+    for (p = 0; p < 200; p++) {
       line(self.origin, badpathpos, (1, 0.4, 0.1), 0, 200);
       wait(0.05);
     }
@@ -1432,8 +1442,10 @@ function watches_for_friendly_fire() {
 }
 
 function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
-  if(isDefined(level.overrideglobalspawnfunc) && self.team == "axis") {
-    return [[level.overrideglobalspawnfunc]](b_force, str_targetname, v_origin, v_angles);
+  if(isdefined(level.overrideglobalspawnfunc) && self.team == "axis") {
+    return [
+      [level.overrideglobalspawnfunc]
+    ](b_force, str_targetname, v_origin, v_angles);
   }
   e_spawned = undefined;
   force_spawn = 0;
@@ -1446,35 +1458,35 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
   if(!check_player_requirements()) {
     return;
   }
-  while(true) {
-    if(!(isDefined(bignorespawninglimit) && bignorespawninglimit) && (!(isDefined(self.ignorespawninglimit) && self.ignorespawninglimit))) {
+  while (true) {
+    if(!(isdefined(bignorespawninglimit) && bignorespawninglimit) && (!(isdefined(self.ignorespawninglimit) && self.ignorespawninglimit))) {
       global_spawn_throttle(1);
     }
-    if(sessionmodeiscampaignzombiesgame() && !isDefined(self)) {
+    if(sessionmodeiscampaignzombiesgame() && !isdefined(self)) {
       return;
     }
-    if(isDefined(self.lastspawntime) && self.lastspawntime >= gettime()) {
+    if(isdefined(self.lastspawntime) && self.lastspawntime >= gettime()) {
       wait(0.05);
       continue;
     }
     break;
   }
   if(isactorspawner(self)) {
-    if(isDefined(self.spawnflags) && (self.spawnflags & 2) == 2) {
+    if(isdefined(self.spawnflags) && (self.spawnflags & 2) == 2) {
       makeroom = 1;
     }
   } else if(isvehiclespawner(self)) {
-    if(isDefined(self.spawnflags) && (self.spawnflags & 8) == 8) {
+    if(isdefined(self.spawnflags) && (self.spawnflags & 8) == 8) {
       makeroom = 1;
     }
   }
-  if(b_force || (isDefined(self.spawnflags) && (self.spawnflags & 16) == 16) || isDefined(self.script_forcespawn)) {
+  if(b_force || (isdefined(self.spawnflags) && (self.spawnflags & 16) == 16) || isdefined(self.script_forcespawn)) {
     force_spawn = 1;
   }
-  if(isDefined(self.spawnflags) && (self.spawnflags & 64) == 64) {
+  if(isdefined(self.spawnflags) && (self.spawnflags & 64) == 64) {
     infinitespawn = 1;
   }
-  if(isDefined(level.archetype_spawners) && isarray(level.archetype_spawners)) {
+  if(isdefined(level.archetype_spawners) && isarray(level.archetype_spawners)) {
     archetype_spawner = undefined;
     if(self.team == "") {
       archetype = getdvarstring("");
@@ -1490,7 +1502,7 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
       archetype_spawner = level.archetype_spawners[archetype];
     }
     if(isspawner(archetype_spawner)) {
-      while(isDefined(archetype_spawner.lastspawntime) && archetype_spawner.lastspawntime >= gettime()) {
+      while (isdefined(archetype_spawner.lastspawntime) && archetype_spawner.lastspawntime >= gettime()) {
         wait(0.05);
       }
       originalorigin = archetype_spawner.origin;
@@ -1508,46 +1520,48 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
       archetype_spawner.targetname = originaltargetname;
       archetype_spawner.origin = originalorigin;
       archetype_spawner.angles = originalangles;
-      if(isDefined(archetype_spawner.spawnflags) && (archetype_spawner.spawnflags & 64) == 64) {
+      if(isdefined(archetype_spawner.spawnflags) && (archetype_spawner.spawnflags & 64) == 64) {
         archetype_spawner.count++;
       }
       archetype_spawner.lastspawntime = gettime();
     }
   }
-  if(!isDefined(e_spawned)) {
+  if(!isdefined(e_spawned)) {
     female_override = undefined;
     use_female = randomint(100) < level.female_percent;
     if(level.dont_use_female_replacements === 1) {
       use_female = 0;
     }
-    if(use_female && isDefined(self.aitypevariant)) {
+    if(use_female && isdefined(self.aitypevariant)) {
       e_spawned = self spawnfromspawner(str_targetname, force_spawn, makeroom, infinitespawn, "actor_" + self.aitypevariant);
     } else {
       override_aitype = undefined;
-      if(isDefined(level.override_spawned_aitype_func)) {
-        override_aitype = [[level.override_spawned_aitype_func]](self);
+      if(isdefined(level.override_spawned_aitype_func)) {
+        override_aitype = [
+          [level.override_spawned_aitype_func]
+        ](self);
       }
-      if(isDefined(override_aitype)) {
+      if(isdefined(override_aitype)) {
         e_spawned = self spawnfromspawner(str_targetname, force_spawn, makeroom, infinitespawn, override_aitype);
       } else {
         e_spawned = self spawnfromspawner(str_targetname, force_spawn, makeroom, infinitespawn);
       }
     }
   }
-  if(isDefined(e_spawned)) {
-    if(isDefined(level.run_custom_function_on_ai)) {
-      if(isDefined(archetype_spawner)) {
+  if(isdefined(e_spawned)) {
+    if(isdefined(level.run_custom_function_on_ai)) {
+      if(isdefined(archetype_spawner)) {
         e_spawned thread[[level.run_custom_function_on_ai]](archetype_spawner, str_targetname, force_spawn);
       } else {
         e_spawned thread[[level.run_custom_function_on_ai]](self, str_targetname, force_spawn);
       }
     }
-    if(isDefined(v_origin) || isDefined(v_angles)) {
+    if(isdefined(v_origin) || isdefined(v_angles)) {
       e_spawned teleport_spawned(v_origin, v_angles);
     }
     self.lastspawntime = gettime();
   }
-  if(deleteonzerocount || (isDefined(self.script_delete_on_zero) && self.script_delete_on_zero) && isDefined(self.count) && self.count <= 0) {
+  if(deleteonzerocount || (isdefined(self.script_delete_on_zero) && self.script_delete_on_zero) && isdefined(self.count) && self.count <= 0) {
     self delete();
   }
   if(issentient(e_spawned)) {
@@ -1569,24 +1583,24 @@ function teleport_spawned(v_origin = self.origin, v_angles = self.angles, b_rese
 }
 
 function check_player_requirements() {
-  if(isDefined(level.players) && level.players.size > 0) {
+  if(isdefined(level.players) && level.players.size > 0) {
     n_player_count = level.players.size;
   } else {
     n_player_count = getnumexpectedplayers();
   }
-  if(isDefined(self.script_minplayers)) {
+  if(isdefined(self.script_minplayers)) {
     if(n_player_count < self.script_minplayers) {
       self delete();
       return false;
     }
   }
-  if(isDefined(self.script_numplayers)) {
+  if(isdefined(self.script_numplayers)) {
     if(n_player_count < self.script_numplayers) {
       self delete();
       return false;
     }
   }
-  if(isDefined(self.script_maxplayers)) {
+  if(isdefined(self.script_maxplayers)) {
     if(n_player_count > self.script_maxplayers) {
       self delete();
       return false;
@@ -1597,7 +1611,7 @@ function check_player_requirements() {
 
 function spawn_failed(spawn) {
   if(isalive(spawn)) {
-    if(!isDefined(spawn.finished_spawning)) {
+    if(!isdefined(spawn.finished_spawning)) {
       spawn waittill("hash_f42b7e06");
     }
     waittillframeend();
@@ -1629,30 +1643,30 @@ function set_ai_group_cleared_count(aigroup, count) {
 }
 
 function waittill_ai_group_cleared(aigroup) {
-  assert(isDefined(level._ai_group[aigroup]), ("" + aigroup) + "");
+  assert(isdefined(level._ai_group[aigroup]), ("" + aigroup) + "");
   level flag::wait_till(aigroup + "_cleared");
 }
 
 function waittill_ai_group_count(aigroup, count) {
-  while((get_ai_group_spawner_count(aigroup) + level._ai_group[aigroup].aicount) > count) {
+  while ((get_ai_group_spawner_count(aigroup) + level._ai_group[aigroup].aicount) > count) {
     level._ai_group[aigroup] waittill("update_aigroup");
   }
 }
 
 function waittill_ai_group_ai_count(aigroup, count) {
-  while(level._ai_group[aigroup].aicount > count) {
+  while (level._ai_group[aigroup].aicount > count) {
     level._ai_group[aigroup] waittill("update_aigroup");
   }
 }
 
 function waittill_ai_group_spawner_count(aigroup, count) {
-  while(get_ai_group_spawner_count(aigroup) > count) {
+  while (get_ai_group_spawner_count(aigroup) > count) {
     level._ai_group[aigroup] waittill("update_aigroup");
   }
 }
 
 function waittill_ai_group_amount_killed(aigroup, amount_killed) {
-  while(level._ai_group[aigroup].killed_count < amount_killed) {
+  while (level._ai_group[aigroup].killed_count < amount_killed) {
     level._ai_group[aigroup] waittill("update_aigroup");
   }
 }
@@ -1668,7 +1682,7 @@ function get_ai_group_sentient_count(aigroup) {
 function get_ai_group_spawner_count(aigroup) {
   n_count = 0;
   foreach(sp in level._ai_group[aigroup].spawners) {
-    if(isDefined(sp)) {
+    if(isdefined(sp)) {
       n_count = n_count + sp.count;
     }
   }
@@ -1677,7 +1691,7 @@ function get_ai_group_spawner_count(aigroup) {
 
 function get_ai_group_ai(aigroup) {
   aiset = [];
-  for(index = 0; index < level._ai_group[aigroup].ai.size; index++) {
+  for (index = 0; index < level._ai_group[aigroup].ai.size; index++) {
     if(!isalive(level._ai_group[aigroup].ai[index])) {
       continue;
     }
@@ -1687,10 +1701,10 @@ function get_ai_group_ai(aigroup) {
 }
 
 function add_global_spawn_function(team, spawn_func, param1, param2, param3, param4, param5) {
-  if(!isDefined(level.spawn_funcs)) {
+  if(!isdefined(level.spawn_funcs)) {
     level.spawn_funcs = [];
   }
-  if(!isDefined(level.spawn_funcs[team])) {
+  if(!isdefined(level.spawn_funcs[team])) {
     level.spawn_funcs[team] = [];
   }
   func = [];
@@ -1700,7 +1714,7 @@ function add_global_spawn_function(team, spawn_func, param1, param2, param3, par
   func["param3"] = param3;
   func["param4"] = param4;
   func["param5"] = param5;
-  if(!isDefined(level.spawn_funcs[team])) {
+  if(!isdefined(level.spawn_funcs[team])) {
     level.spawn_funcs[team] = [];
   } else if(!isarray(level.spawn_funcs[team])) {
     level.spawn_funcs[team] = array(level.spawn_funcs[team]);
@@ -1709,10 +1723,10 @@ function add_global_spawn_function(team, spawn_func, param1, param2, param3, par
 }
 
 function add_archetype_spawn_function(archetype, spawn_func, param1, param2, param3, param4, param5) {
-  if(!isDefined(level.spawn_funcs)) {
+  if(!isdefined(level.spawn_funcs)) {
     level.spawn_funcs = [];
   }
-  if(!isDefined(level.spawn_funcs[archetype])) {
+  if(!isdefined(level.spawn_funcs[archetype])) {
     level.spawn_funcs[archetype] = [];
   }
   func = [];
@@ -1722,7 +1736,7 @@ function add_archetype_spawn_function(archetype, spawn_func, param1, param2, par
   func["param3"] = param3;
   func["param4"] = param4;
   func["param5"] = param5;
-  if(!isDefined(level.spawn_funcs[archetype])) {
+  if(!isdefined(level.spawn_funcs[archetype])) {
     level.spawn_funcs[archetype] = [];
   } else if(!isarray(level.spawn_funcs[archetype])) {
     level.spawn_funcs[archetype] = array(level.spawn_funcs[archetype]);
@@ -1731,9 +1745,9 @@ function add_archetype_spawn_function(archetype, spawn_func, param1, param2, par
 }
 
 function remove_global_spawn_function(team, func) {
-  if(isDefined(level.spawn_funcs) && isDefined(level.spawn_funcs[team])) {
+  if(isdefined(level.spawn_funcs) && isdefined(level.spawn_funcs[team])) {
     array = [];
-    for(i = 0; i < level.spawn_funcs[team].size; i++) {
+    for (i = 0; i < level.spawn_funcs[team].size; i++) {
       if(level.spawn_funcs[team][i]["function"] != func) {
         array[array.size] = level.spawn_funcs[team][i];
       }
@@ -1743,7 +1757,7 @@ function remove_global_spawn_function(team, func) {
 }
 
 function add_spawn_function(spawn_func, param1, param2, param3, param4, param5) {
-  assert(!isDefined(level._loadstarted) || !isalive(self), "");
+  assert(!isdefined(level._loadstarted) || !isalive(self), "");
   func = [];
   func["function"] = spawn_func;
   func["param1"] = param1;
@@ -1751,17 +1765,17 @@ function add_spawn_function(spawn_func, param1, param2, param3, param4, param5) 
   func["param3"] = param3;
   func["param4"] = param4;
   func["param5"] = param5;
-  if(!isDefined(self.spawn_funcs)) {
+  if(!isdefined(self.spawn_funcs)) {
     self.spawn_funcs = [];
   }
   self.spawn_funcs[self.spawn_funcs.size] = func;
 }
 
 function remove_spawn_function(func) {
-  assert(!isDefined(level._loadstarted) || !isalive(self), "");
-  if(isDefined(self.spawn_funcs)) {
+  assert(!isdefined(level._loadstarted) || !isalive(self), "");
+  if(isdefined(self.spawn_funcs)) {
     array = [];
-    for(i = 0; i < self.spawn_funcs.size; i++) {
+    for (i = 0; i < self.spawn_funcs.size; i++) {
       if(self.spawn_funcs[i]["function"] != func) {
         array[array.size] = self.spawn_funcs[i];
       }
@@ -1772,40 +1786,40 @@ function remove_spawn_function(func) {
 }
 
 function add_spawn_function_group(str_value, str_key = "targetname", func_spawn, param_1, param_2, param_3, param_4, param_5) {
-  assert(isDefined(str_value), "");
-  assert(isDefined(func_spawn), "");
+  assert(isdefined(str_value), "");
+  assert(isdefined(func_spawn), "");
   a_spawners = getspawnerarray(str_value, str_key);
-  array::run_all(a_spawners, &add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
+  array::run_all(a_spawners, & add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
 }
 
 function add_spawn_function_ai_group(str_aigroup, func_spawn, param_1, param_2, param_3, param_4, param_5) {
-  assert(isDefined(str_aigroup), "");
-  assert(isDefined(func_spawn), "");
+  assert(isdefined(str_aigroup), "");
+  assert(isdefined(func_spawn), "");
   a_spawners = getspawnerarray(str_aigroup, "script_aigroup");
-  array::run_all(a_spawners, &add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
+  array::run_all(a_spawners, & add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
 }
 
 function remove_spawn_function_ai_group(str_aigroup, func_spawn, param_1, param_2, param_3, param_4, param_5) {
-  assert(isDefined(str_aigroup), "");
-  assert(isDefined(func_spawn), "");
+  assert(isdefined(str_aigroup), "");
+  assert(isdefined(func_spawn), "");
   a_spawners = getspawnerarray(str_aigroup, "script_aigroup");
-  array::run_all(a_spawners, &remove_spawn_function, func_spawn);
+  array::run_all(a_spawners, & remove_spawn_function, func_spawn);
 }
 
 function simple_flood_spawn(name, spawn_func, spawn_func_2) {
-  spawners = getEntArray(name, "targetname");
+  spawners = getentarray(name, "targetname");
   assert(spawners.size, ("" + name) + "");
-  if(isDefined(spawn_func)) {
-    for(i = 0; i < spawners.size; i++) {
+  if(isdefined(spawn_func)) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func);
     }
   }
-  if(isDefined(spawn_func_2)) {
-    for(i = 0; i < spawners.size; i++) {
+  if(isdefined(spawn_func_2)) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func_2);
     }
   }
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     if(i % 2) {
       util::wait_network_frame();
     }
@@ -1817,10 +1831,10 @@ function simple_flood_spawn(name, spawn_func, spawn_func_2) {
 function simple_spawn(name_or_spawners, spawn_func, param1, param2, param3, param4, param5, bforce) {
   spawners = [];
   if(isstring(name_or_spawners)) {
-    spawners = getEntArray(name_or_spawners, "targetname");
+    spawners = getentarray(name_or_spawners, "targetname");
     assert(spawners.size, ("" + name_or_spawners) + "");
   } else {
-    if(!isDefined(name_or_spawners)) {
+    if(!isdefined(name_or_spawners)) {
       name_or_spawners = [];
     } else if(!isarray(name_or_spawners)) {
       name_or_spawners = array(name_or_spawners);
@@ -1830,11 +1844,11 @@ function simple_spawn(name_or_spawners, spawn_func, param1, param2, param3, para
   a_spawned = [];
   foreach(sp in spawners) {
     e_spawned = sp spawn(bforce);
-    if(isDefined(e_spawned)) {
-      if(isDefined(spawn_func)) {
+    if(isdefined(e_spawned)) {
+      if(isdefined(spawn_func)) {
         util::single_thread(e_spawned, spawn_func, param1, param2, param3, param4, param5);
       }
-      if(!isDefined(a_spawned)) {
+      if(!isdefined(a_spawned)) {
         a_spawned = [];
       } else if(!isarray(a_spawned)) {
         a_spawned = array(a_spawned);
@@ -1858,9 +1872,9 @@ function set_targets(spawner_targets) {
 }
 
 function getscoreinfoxp(type) {
-  if(isDefined(level.scoreinfo) && isDefined(level.scoreinfo[type])) {
+  if(isdefined(level.scoreinfo) && isdefined(level.scoreinfo[type])) {
     n_xp = level.scoreinfo[type][""];
-    if(isDefined(level.xpmodifiercallback) && isDefined(n_xp)) {
+    if(isdefined(level.xpmodifiercallback) && isdefined(n_xp)) {
       n_xp = [
         [level.xpmodifiercallback]
       ](type, n_xp);
@@ -1872,10 +1886,10 @@ function getscoreinfoxp(type) {
 function autoexec init_npcdeathtracking() {
   level.a_npcdeaths = [];
   level.str_killsoutput = "";
-  callback::add_callback("hash_8c38c12e", &track_npc_deaths);
-  callback::add_callback("hash_acb66515", &track_vehicle_deaths);
-  callback::add_callback("hash_7b543e98", &show_actor_damage);
-  callback::add_callback("hash_9bd1e27f", &show_vehicle_damage);
+  callback::add_callback("hash_8c38c12e", & track_npc_deaths);
+  callback::add_callback("hash_acb66515", & track_vehicle_deaths);
+  callback::add_callback("hash_7b543e98", & show_actor_damage);
+  callback::add_callback("hash_9bd1e27f", & show_vehicle_damage);
   setdvar("", 0);
   setdvar("", 0);
   setdvar("", 0);
@@ -1885,13 +1899,13 @@ function autoexec init_npcdeathtracking() {
 
 function track_vehicle_deaths(params) {
   b_killed_by_player = 0;
-  if(isDefined(params) && isplayer(params.eattacker)) {
+  if(isdefined(params) && isplayer(params.eattacker)) {
     b_killed_by_player = 1;
     if(getdvarint("")) {
       n_xp_value = getscoreinfoxp("" + self.scoretype);
       v_death_position = self.origin;
       n_print_height = 50;
-      if(isDefined(self.height)) {
+      if(isdefined(self.height)) {
         n_print_height = self.height;
       }
       v_death_position = v_death_position + (0, 0, n_print_height);
@@ -1909,7 +1923,7 @@ function track_npc_deaths(params) {
       n_xp_value = getscoreinfoxp("" + self.scoretype);
       v_death_position = self.origin;
       n_print_height = 72;
-      if(isDefined(self.goalheight)) {
+      if(isdefined(self.goalheight)) {
         n_print_height = self.goalheight - 12;
       }
       v_death_position = v_death_position + (0, 0, n_print_height);
@@ -1923,7 +1937,7 @@ function show_actor_damage(params) {
   v_print_pos = (0, 0, 0);
   n_damage_value = params.idamage;
   if(getdvarstring("") == "") {
-    if(isDefined(self gettagorigin(""))) {
+    if(isdefined(self gettagorigin(""))) {
       v_position = self gettagorigin("") + vectorscale((0, 0, 1), 18);
     } else {
       v_position = self getorigin() + vectorscale((0, 0, 1), 78);
@@ -1938,7 +1952,7 @@ function show_vehicle_damage(params) {
   if(getdvarstring("") == "") {
     v_print_pos = self.origin;
     n_print_height = 50;
-    if(isDefined(self.height)) {
+    if(isdefined(self.height)) {
       n_print_height = self.height;
     }
     v_print_pos = v_print_pos + (0, 0, n_print_height);
@@ -1954,7 +1968,7 @@ function show_number_popup(n_value, v_pos, string_prefix, string_suffix, color, 
   n_current_tick = 0;
   n_current_alpha = n_alpha;
   v_print_position = v_pos;
-  while(n_current_tick < 40) {
+  while (n_current_tick < 40) {
     v_print_position = v_print_position + (0, 0, 1.125);
     print3d(v_print_position, (string_prefix + n_value) + string_suffix, color, n_current_alpha, n_size, 1);
     if(n_current_tick >= 20) {
@@ -1967,24 +1981,24 @@ function show_number_popup(n_value, v_pos, string_prefix, string_suffix, color, 
 
 function get_xp_value_for_enemy(e_enemy) {
   n_xp_value = getscoreinfoxp("" + e_enemy.scoretype);
-  if(isDefined(n_xp_value)) {
+  if(isdefined(n_xp_value)) {
     return n_xp_value;
   }
   return 0;
 }
 
 function adddeadnpctolist(b_killed_by_player) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(self.team == "" || self.team == "") {
     bentryexists = 0;
-    for(i = 0; i < level.a_npcdeaths.size; i++) {
+    for (i = 0; i < level.a_npcdeaths.size; i++) {
       if(level.a_npcdeaths[i].strscoretype == self.scoretype) {
         level.a_npcdeaths[i].icount = level.a_npcdeaths[i].icount + 1;
         if(b_killed_by_player) {
           level.a_npcdeaths[i].ikilledbyplayercount = level.a_npcdeaths[i].ikilledbyplayercount + 1;
-          if(isDefined(level.a_npcdeaths[i].ixpvaluesum)) {
+          if(isdefined(level.a_npcdeaths[i].ixpvaluesum)) {
             level.a_npcdeaths[i].ixpvaluesum = level.a_npcdeaths[i].ixpvaluesum + get_xp_value_for_enemy(self);
           }
         }
@@ -1992,7 +2006,7 @@ function adddeadnpctolist(b_killed_by_player) {
       }
     }
     if(!bentryexists) {
-      s_npcdeath = spawnStruct();
+      s_npcdeath = spawnstruct();
       s_npcdeath.strscoretype = self.scoretype;
       s_npcdeath.icount = 1;
       s_npcdeath.ikilledbyplayercount = 0;
@@ -2008,10 +2022,10 @@ function adddeadnpctolist(b_killed_by_player) {
 }
 
 function listenfornpcdeaths() {
-  while(true) {
+  while (true) {
     checkfordeathtrackingreset();
     if(getdvarint("") == 1) {
-      if(!isDefined(level.npc_death_tracking_hud_text)) {
+      if(!isdefined(level.npc_death_tracking_hud_text)) {
         level.npc_death_tracking_hud_text = newhudelem();
         level.npc_death_tracking_hud_text.alignx = "";
         level.npc_death_tracking_hud_text.x = 50;
@@ -2033,7 +2047,7 @@ function listenfornpcdeaths() {
           level.npc_death_tracking_hud_text settext(level.s_killsoutput);
         }
       }
-    } else if(isDefined(level.npc_death_tracking_hud_text)) {
+    } else if(isdefined(level.npc_death_tracking_hud_text)) {
       level.npc_death_tracking_hud_text destroy();
       iprintlnbold("");
     }

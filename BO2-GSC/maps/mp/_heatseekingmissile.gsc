@@ -70,9 +70,8 @@ stingerfirednotify() {
     self waittill("missile_fire", missile, weap);
 
     if(maps\mp\gametypes\_weapon_utils::isguidedrocketlauncherweapon(weap)) {
-      if(isDefined(self.stingertarget) && self.stingerlockfinalized) {
+      if(isDefined(self.stingertarget) && self.stingerlockfinalized)
         self.stingertarget notify("stinger_fired_at_me", missile, weap, self);
-      }
 
       level notify("missile_fired", self, missile, self.stingertarget, self.stingerlockfinalized);
       self notify("stinger_fired", missile, weap);
@@ -105,9 +104,8 @@ stingertoggleloop() {
 
       self thread stingerirtloop();
 
-      while(self playerstingerads()) {
+      while(self playerstingerads())
         wait 0.05;
-      }
 
       self notify("stinger_IRT_off");
       self clearirtarget();
@@ -136,9 +134,8 @@ stingerirtloop() {
         continue;
       }
 
-      if(!self.stingertarget.locked_on) {
+      if(!self.stingertarget.locked_on)
         self.stingertarget notify("missile_lock", self);
-      }
 
       lockingon(self.stingertarget, 0);
       lockedon(self.stingertarget, 1);
@@ -199,9 +196,8 @@ stingerirtloop() {
 }
 
 destroylockoncanceledmessage() {
-  if(isDefined(self.lockoncanceledmessage)) {
+  if(isDefined(self.lockoncanceledmessage))
     self.lockoncanceledmessage destroy();
-  }
 }
 
 displaylockoncanceledmessage() {
@@ -230,37 +226,34 @@ getbeststingertarget() {
 
   for(idx = 0; idx < targetsall.size; idx++) {
     if(getdvar(#"scr_freelock") == "1") {
-      if(self insidestingerreticlenolock(targetsall[idx])) {
+      if(self insidestingerreticlenolock(targetsall[idx]))
         targetsvalid[targetsvalid.size] = targetsall[idx];
-      }
 
       continue;
     }
 
     if(level.teambased) {
       if(isDefined(targetsall[idx].team) && targetsall[idx].team != self.team) {
-        if(self insidestingerreticlenolock(targetsall[idx])) {
+        if(self insidestingerreticlenolock(targetsall[idx]))
           targetsvalid[targetsvalid.size] = targetsall[idx];
-        }
       }
 
       continue;
     }
 
     if(self insidestingerreticlenolock(targetsall[idx])) {
-      if(isDefined(targetsall[idx].owner) && self != targetsall[idx].owner) {
+      if(isDefined(targetsall[idx].owner) && self != targetsall[idx].owner)
         targetsvalid[targetsvalid.size] = targetsall[idx];
-      }
     }
   }
 
-  if(targetsvalid.size == 0) {
+  if(targetsvalid.size == 0)
     return undefined;
-  }
 
   chosenent = targetsvalid[0];
 
-  if(targetsvalid.size > 1) {}
+  if(targetsvalid.size > 1) {
+  }
 
   return chosenent;
 }
@@ -276,17 +269,14 @@ insidestingerreticlelocked(target) {
 }
 
 isstillvalidtarget(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
 
-  if(!target_istarget(ent)) {
+  if(!target_istarget(ent))
     return false;
-  }
 
-  if(!insidestingerreticlelocked(ent)) {
+  if(!insidestingerreticlelocked(ent))
     return false;
-  }
 
   return true;
 }
@@ -334,31 +324,27 @@ looplocallocksound(alias, interval) {
 }
 
 locksighttest(target) {
-  eyepos = self getEye();
+  eyepos = self geteye();
 
-  if(!isDefined(target)) {
+  if(!isDefined(target))
     return false;
-  }
 
   passed = bullettracepassed(eyepos, target.origin, 0, target);
 
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   front = target getpointinbounds(1, 0, 0);
   passed = bullettracepassed(eyepos, front, 0, target);
 
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   back = target getpointinbounds(-1, 0, 0);
   passed = bullettracepassed(eyepos, back, 0, target);
 
-  if(passed) {
+  if(passed)
     return true;
-  }
 
   return false;
 }
@@ -371,9 +357,8 @@ softsighttest() {
     return true;
   }
 
-  if(self.stingerlostsightlinetime == 0) {
+  if(self.stingerlostsightlinetime == 0)
     self.stingerlostsightlinetime = gettime();
-  }
 
   timepassed = gettime() - self.stingerlostsightlinetime;
 
@@ -403,7 +388,7 @@ lockingon(target, lock) {
     self thread watchclearlockingon(target, clientnum);
   } else {
     self notify("locking_on_cleared");
-    target.locking_on = target.locking_on &~(1 << clientnum);
+    target.locking_on = target.locking_on & ~(1 << clientnum);
   }
 }
 
@@ -411,7 +396,7 @@ watchclearlockingon(target, clientnum) {
   target endon("death");
   self endon("locking_on_cleared");
   self waittill_any("death", "disconnect");
-  target.locking_on = target.locking_on &~(1 << clientnum);
+  target.locking_on = target.locking_on & ~(1 << clientnum);
 }
 
 lockedon(target, lock) {
@@ -423,7 +408,7 @@ lockedon(target, lock) {
     self thread watchclearlockedon(target, clientnum);
   } else {
     self notify("locked_on_cleared");
-    target.locked_on = target.locked_on &~(1 << clientnum);
+    target.locked_on = target.locked_on & ~(1 << clientnum);
   }
 }
 
@@ -431,33 +416,30 @@ watchclearlockedon(target, clientnum) {
   self endon("locked_on_cleared");
   self waittill_any("death", "disconnect");
 
-  if(isDefined(target)) {
-    target.locked_on = target.locked_on &~(1 << clientnum);
-  }
+  if(isDefined(target))
+    target.locked_on = target.locked_on & ~(1 << clientnum);
 }
 
 missiletarget_lockonmonitor(player, endon1, endon2) {
   self endon("death");
 
-  if(isDefined(endon1)) {
+  if(isDefined(endon1))
     self endon(endon1);
-  }
 
-  if(isDefined(endon2)) {
+  if(isDefined(endon2))
     self endon(endon2);
-  }
 
   for(;;) {
-    if(target_istarget(self)) {}
+    if(target_istarget(self)) {
+    }
 
     wait 0.1;
   }
 }
 
 _incomingmissile(missile) {
-  if(!isDefined(self.incoming_missile)) {
+  if(!isDefined(self.incoming_missile))
     self.incoming_missile = 0;
-  }
 
   self.incoming_missile++;
   self thread _incomingmissiletracker(missile);
@@ -471,13 +453,11 @@ _incomingmissiletracker(missile) {
 }
 
 missiletarget_ismissileincoming() {
-  if(!isDefined(self.incoming_missile)) {
+  if(!isDefined(self.incoming_missile))
     return false;
-  }
 
-  if(self.incoming_missile) {
+  if(self.incoming_missile)
     return true;
-  }
 
   return false;
 }
@@ -486,23 +466,18 @@ missiletarget_handleincomingmissile(responsefunc, endon1, endon2) {
   level endon("game_ended");
   self endon("death");
 
-  if(isDefined(endon1)) {
+  if(isDefined(endon1))
     self endon(endon1);
-  }
 
-  if(isDefined(endon2)) {
+  if(isDefined(endon2))
     self endon(endon2);
-  }
 
   for(;;) {
     self waittill("stinger_fired_at_me", missile, weap, attacker);
     _incomingmissile(missile);
 
-    if(isDefined(responsefunc)) {
-      [
-        [responsefunc]
-      ](missile, attacker, weap, endon1, endon2);
-    }
+    if(isDefined(responsefunc))
+      [[responsefunc]](missile, attacker, weap, endon1, endon2);
   }
 }
 
@@ -523,24 +498,21 @@ missiletarget_proximitydetonate(missile, attacker, weapon, endon1, endon2) {
   level endon("game_ended");
   missile endon("death");
 
-  if(isDefined(endon1)) {
+  if(isDefined(endon1))
     self endon(endon1);
-  }
 
-  if(isDefined(endon2)) {
+  if(isDefined(endon2))
     self endon(endon2);
-  }
 
   mindist = distance(missile.origin, self.origin);
   lastcenter = self.origin;
   missile missile_settarget(self);
 
   for(;;) {
-    if(!isDefined(self)) {
+    if(!isDefined(self))
       center = lastcenter;
-    } else {
+    else
       center = self.origin;
-    }
 
     lastcenter = center;
     curdist = distance(missile.origin, center);
@@ -555,9 +527,8 @@ missiletarget_proximitydetonate(missile, attacker, weapon, endon1, endon2) {
       return;
     }
 
-    if(curdist < mindist) {
+    if(curdist < mindist)
       mindist = curdist;
-    }
 
     if(curdist > mindist) {
       if(curdist > 500) {
@@ -576,34 +547,30 @@ missiletarget_playflarefx() {
   }
   flare_fx = level.fx_flare;
 
-  if(isDefined(self.fx_flare)) {
+  if(isDefined(self.fx_flare))
     flare_fx = self.fx_flare;
-  }
 
-  if(isDefined(self.flare_ent)) {
-    playFXOnTag(flare_fx, self.flare_ent, "tag_origin");
-  } else {
-    playFXOnTag(flare_fx, self, "tag_origin");
-  }
+  if(isDefined(self.flare_ent))
+    playfxontag(flare_fx, self.flare_ent, "tag_origin");
+  else
+    playfxontag(flare_fx, self, "tag_origin");
 
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self playsoundtoplayer("veh_huey_chaff_drop_plr", self.owner);
-  }
 
-  self playSound("veh_huey_chaff_explo_npc");
+  self playsound("veh_huey_chaff_explo_npc");
 }
 
 missiletarget_deployflares(origin, angles) {
-  vec_toforward = anglesToForward(self.angles);
+  vec_toforward = anglestoforward(self.angles);
   vec_toright = anglestoright(self.angles);
-  vec_tomissileforward = anglesToForward(angles);
+  vec_tomissileforward = anglestoforward(angles);
   delta = self.origin - origin;
   dot = vectordot(vec_tomissileforward, vec_toright);
   sign = 1;
 
-  if(dot > 0) {
+  if(dot > 0)
     sign = -1;
-  }
 
   flare_dir = vectornormalize(vectorscale(vec_toforward, -0.5) + vectorscale(vec_toright, sign));
   velocity = vectorscale(flare_dir, randomintrange(200, 400));
@@ -612,13 +579,12 @@ missiletarget_deployflares(origin, angles) {
   flareorigin = flareorigin + vectorscale(flare_dir, randomintrange(500, 700));
   flareorigin = flareorigin + vectorscale((0, 0, 1), 500.0);
 
-  if(isDefined(self.flareoffset)) {
+  if(isDefined(self.flareoffset))
     flareorigin = flareorigin + self.flareoffset;
-  }
 
   flareobject = spawn("script_origin", flareorigin);
   flareobject.angles = self.angles;
-  flareobject setModel("tag_origin");
+  flareobject setmodel("tag_origin");
   flareobject movegravity(velocity, 5.0);
   flareobject thread deleteaftertime(5.0);
   self thread debug_tracker(flareobject);

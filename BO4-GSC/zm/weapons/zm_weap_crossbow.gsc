@@ -23,6 +23,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_crossbow;
 
 autoexec __init__system__() {
@@ -35,14 +36,14 @@ __init__() {
   level.w_crossbow_charged = getweapon(#"ww_crossbow_charged_t8");
   level.w_crossbow_charged_upgraded = getweapon(#"ww_crossbow_charged_t8_upgraded");
   level.var_7cfd8159 = [];
-  clientfield::register("missile", "" + # "hash_6308b5ed3cbd99e3", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_37c2ef99d645cf87", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_37c2ef99d645cf87", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_690509b9a2ec2ef3", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_290836b72f987780", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_faa2f4808c12f8d", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_6c3560ab45e186ec", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_b38c687db71dae", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_690509b9a2ec2ef3", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_6c3560ab45e186ec", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_b38c687db71dae", 1, 1, "int");
   callback::on_ai_damage(&function_615d8c38);
   callback::on_connect(&function_39ffd9fc);
   callback::on_connect(&function_89ec3604);
@@ -77,12 +78,12 @@ private function_89ec3604() {
         self.var_bcc8f4f0 = 0;
       }
 
-      self clientfield::set("" + # "hash_290836b72f987780", 1);
+      self clientfield::set("" + #"hash_290836b72f987780", 1);
       b_charged = 0;
 
       while(self attackbuttonpressed() && is_crossbow(w_current) && !self meleebuttonpressed() && !self laststand::player_is_in_laststand()) {
         if(!b_charged && is_crossbow_charged(w_current, self)) {
-          self clientfield::set("" + # "hash_290836b72f987780", 0);
+          self clientfield::set("" + #"hash_290836b72f987780", 0);
           b_charged = 1;
         }
 
@@ -90,7 +91,7 @@ private function_89ec3604() {
         waitframe(1);
       }
 
-      self clientfield::set("" + # "hash_290836b72f987780", 0);
+      self clientfield::set("" + #"hash_290836b72f987780", 0);
     } else if(is_crossbow(w_current) && !self isreloading() && !self function_8426ad52(w_current) && !self.var_bcc8f4f0) {
       self.var_bcc8f4f0 = 1;
     }
@@ -109,7 +110,7 @@ function_51f76fdb(inflictor, attacker, damage, flags, smeansofdeath, weapon, vpo
       return -1;
     }
 
-    if(isDefined(self.var_2c2980d3) && self.var_2c2980d3 || self.archetype == # "elephant_rider" || self.archetype == # "dust_ball") {
+    if(isDefined(self.var_2c2980d3) && self.var_2c2980d3 || self.archetype == #"elephant_rider" || self.archetype == #"dust_ball") {
       return -1;
     }
 
@@ -139,7 +140,7 @@ function_8426ad52(weapon) {
 
 crossbow_weapon_change(params) {
   if(is_crossbow(params.weapon) && !is_crossbow_charged(params.weapon)) {
-    self clientfield::set("" + # "hash_b38c687db71dae", 1);
+    self clientfield::set("" + #"hash_b38c687db71dae", 1);
     self thread function_7157628d();
     return;
   }
@@ -150,14 +151,14 @@ crossbow_weapon_change(params) {
 function_7157628d() {
   self notify("6e0a9e3b0455824");
   self endon("6e0a9e3b0455824");
-  self endoncallback(&function_a4d47b95, # "death", # "disconnect", # "hash_72be12bd6b55fdab");
+  self endoncallback(&function_a4d47b95, #"death", #"disconnect", #"hash_72be12bd6b55fdab");
   self.b_crossbow_charged = 0;
 
   while(true) {
     w_current = self getcurrentweapon();
 
     if(is_crossbow(w_current) && self ismeleeing()) {
-      self clientfield::set("" + # "hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"hash_b38c687db71dae", 0);
 
       while(self ismeleeing()) {
         waitframe(1);
@@ -166,15 +167,15 @@ function_7157628d() {
       w_current = self getcurrentweapon();
 
       if(is_crossbow(w_current)) {
-        self clientfield::set("" + # "hash_b38c687db71dae", 1);
+        self clientfield::set("" + #"hash_b38c687db71dae", 1);
       }
     } else if(is_crossbow(w_current) && function_8426ad52(w_current) && self.chargeshotlevel > 1 && !self.b_crossbow_charged && self attackbuttonpressed()) {
-      self clientfield::set("" + # "hash_faa2f4808c12f8d", 1);
-      self clientfield::set("" + # "hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"hash_faa2f4808c12f8d", 1);
+      self clientfield::set("" + #"hash_b38c687db71dae", 0);
       self.b_crossbow_charged = 1;
     } else if(self.b_crossbow_charged && (self.chargeshotlevel <= 1 || !self attackbuttonpressed())) {
-      self clientfield::set("" + # "hash_faa2f4808c12f8d", 0);
-      self clientfield::set("" + # "hash_b38c687db71dae", 1);
+      self clientfield::set("" + #"hash_faa2f4808c12f8d", 0);
+      self clientfield::set("" + #"hash_b38c687db71dae", 1);
       self.b_crossbow_charged = 0;
     }
 
@@ -183,7 +184,7 @@ function_7157628d() {
 }
 
 function_a4d47b95(str_notify) {
-  self clientfield::set("" + # "hash_b38c687db71dae", 0);
+  self clientfield::set("" + #"hash_b38c687db71dae", 0);
 }
 
 private function_39ffd9fc() {
@@ -230,22 +231,22 @@ function_615d8c38(params) {
   }
 
   switch (params.shitloc) {
-    case # "right_leg_upper":
-    case # "left_leg_lower":
-    case # "right_leg_lower":
-    case # "left_foot":
-    case # "right_foot":
-    case # "left_leg_upper":
+    case #"right_leg_upper":
+    case #"left_leg_lower":
+    case #"right_leg_lower":
+    case #"left_foot":
+    case #"right_foot":
+    case #"left_leg_upper":
       if(isalive(self)) {
-        if(self.archetype == # "zombie") {
+        if(self.archetype == #"zombie") {
           if(is_crossbow_charged(params.weapon) || self.missinglegs && !(isDefined(self.var_410503e) && self.var_410503e)) {
             self thread function_c805f2f9(params);
           } else {
             params.eattacker zm_score::player_add_points("crossbow_crawler", 20);
             self zombie_utility::makezombiecrawler(1);
             level notify(#"crawler_created", {
-              #zombie: self,
-              #player: params.eattacker,
+              #zombie: self, 
+              #player: params.eattacker, 
               #weapon: params.weapon
             });
             self thread function_6119da66();
@@ -275,14 +276,14 @@ function_6119da66() {
 function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   self endon(#"death");
   params = {
-    #eattacker: var_37fa9b04.attacker,
-    #einflictor: var_37fa9b04.inflictor,
-    #weapon: var_37fa9b04.weapon,
-    #smeansofdeath: var_37fa9b04.mod,
+    #eattacker: var_37fa9b04.attacker, 
+    #einflictor: var_37fa9b04.inflictor, 
+    #weapon: var_37fa9b04.weapon, 
+    #smeansofdeath: var_37fa9b04.mod, 
     #shitloc: "none"
   };
   self.var_2c2980d3 = 1;
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
 
   if(isDefined(str_scene)) {
     if(isDefined(str_shot)) {
@@ -295,7 +296,7 @@ function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   }
 
   self function_e1c4ab06(params);
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 0);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
   self.var_2c2980d3 = undefined;
 
   if(isDefined(str_scene)) {
@@ -334,7 +335,7 @@ function_c805f2f9(params) {
 
   player.var_7cfd8159 = array::remove_dead(player.var_7cfd8159);
 
-  if(isDefined(var_5ff12d5f.var_99100b64) && var_5ff12d5f.var_99100b64 || !is_crossbow_charged(w_crossbow) || isDefined(self.var_1df64653) && self.var_1df64653 || isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3 || params.smeansofdeath === "MOD_MELEE" || self.archetype == # "elephant_rider" || self.archetype == # "dust_ball") {
+  if(isDefined(var_5ff12d5f.var_99100b64) && var_5ff12d5f.var_99100b64 || !is_crossbow_charged(w_crossbow) || isDefined(self.var_1df64653) && self.var_1df64653 || isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3 || params.smeansofdeath === "MOD_MELEE" || self.archetype == #"elephant_rider" || self.archetype == #"dust_ball") {
     if(isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3) {
       return;
     }
@@ -346,7 +347,7 @@ function_c805f2f9(params) {
     if(isDefined(params.vdir) && self.health <= 0) {
       if(params.shitloc === "head" || params.shitloc === "helmet") {
         gibserverutils::gibhead(self);
-      } else if(self.archetype === # "zombie") {
+      } else if(self.archetype === #"zombie") {
         self zombie_utility::derive_damage_refs(params.vpoint);
       }
 
@@ -392,7 +393,7 @@ function_c805f2f9(params) {
   }
 
   player.var_7cfd8159[player.var_7cfd8159.size] = self;
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
   str_scene = self function_e43d1b24();
 
   if(isDefined(str_scene) && isalive(self)) {
@@ -432,9 +433,9 @@ function_c805f2f9(params) {
     self.var_2c2980d3 = undefined;
     self.var_427e5396 = undefined;
     self.instakill_func = undefined;
-    self clientfield::set("" + # "hash_37c2ef99d645cf87", 0);
+    self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
 
-    if(self.health <= 0 && self.archetype !== # "elephant") {
+    if(self.health <= 0 && self.archetype !== #"elephant") {
       self playSound("wpn_scorpion_zombie_explode");
       gibserverutils::annihilate(self);
       v_origin = self.origin;
@@ -540,12 +541,12 @@ function_e1c4ab06(params) {
     level.var_7cfd8159 = array::remove_dead(level.var_7cfd8159);
     a_zombies = array::exclude(getaiteamarray(level.zombie_team), level.var_7cfd8159);
 
-    if(self.archetype === # "elephant" && isDefined(self.ai) && isDefined(self.ai.riders)) {
+    if(self.archetype === #"elephant" && isDefined(self.ai) && isDefined(self.ai.riders)) {
       a_zombies = array::exclude(a_zombies, self.ai.riders);
     }
 
     foreach(ai in a_zombies) {
-      if(isalive(ai) && ai function_8a514a61(v_origin, w_crossbow) && ai.archetype !== # "dust_ball") {
+      if(isalive(ai) && ai function_8a514a61(v_origin, w_crossbow) && ai.archetype !== #"dust_ball") {
         if(!(isDefined(ai.var_427e5396) && ai.var_427e5396)) {
           if(isDefined(player)) {
             if(!isDefined(player.var_d382ba7a)) {
@@ -561,10 +562,10 @@ function_e1c4ab06(params) {
           ai.var_427e5396 = 1;
 
           if(is_crossbow_upgraded(w_crossbow)) {
-            ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 2);
+            ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 2);
             ai function_9fa5e527(10);
           } else {
-            ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 1);
+            ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 1);
             ai function_9fa5e527(5);
           }
 
@@ -575,16 +576,16 @@ function_e1c4ab06(params) {
           iprintlnbold("<dev string:x38>" + function_9e72a96(ai.archetype) + "<dev string:x62>");
         }
 
-        if(isalive(ai) && isDefined(ai.maxhealth)) {
-          if(var_832a6071) {
-            ai function_b261e2a0(int(ai.maxhealth * 0.2), player, v_origin, params);
-          } else {
-            ai function_b261e2a0(int(ai.maxhealth * 0.1), player, v_origin, params);
-          }
+          if(isalive(ai) && isDefined(ai.maxhealth)) {
+            if(var_832a6071) {
+              ai function_b261e2a0(int(ai.maxhealth * 0.2), player, v_origin, params);
+            } else {
+              ai function_b261e2a0(int(ai.maxhealth * 0.1), player, v_origin, params);
+            }
 
-          waitframe(1);
-          continue;
-        }
+            waitframe(1);
+            continue;
+          }
       }
     }
 
@@ -605,7 +606,7 @@ function_e1c4ab06(params) {
       }
 
       ai.var_427e5396 = undefined;
-      ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 0);
+      ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 0);
       ai function_43f61cad();
       util::wait_network_frame();
     }
@@ -614,16 +615,16 @@ function_e1c4ab06(params) {
 
 function_144a052b(archetype) {
   switch (archetype) {
-    case # "catalyst":
-    case # "zombie":
-      return # "hash_664a130410d3fd9a";
-    case # "tiger":
-      return # "hash_2607a6ffde83b4a7";
-    case # "stoker":
-    case # "gladiator":
-      return # "hash_3a067a5eb7a19857";
-    case # "blight_father":
-      return # "hash_280fa271c70412cd";
+    case #"catalyst":
+    case #"zombie":
+      return #"hash_664a130410d3fd9a";
+    case #"tiger":
+      return #"hash_2607a6ffde83b4a7";
+    case #"stoker":
+    case #"gladiator":
+      return #"hash_3a067a5eb7a19857";
+    case #"blight_father":
+      return #"hash_280fa271c70412cd";
   }
 }
 
@@ -631,8 +632,8 @@ function_9fa5e527(var_ad86fdba = 5) {
   var_bef9c0f = function_144a052b(self.archetype);
 
   switch (self.archetype) {
-    case # "catalyst":
-    case # "zombie":
+    case #"catalyst":
+    case #"zombie":
       self zombie_utility::set_zombie_run_cycle_override_value("walk");
       break;
   }
@@ -646,16 +647,16 @@ function_9fa5e527(var_ad86fdba = 5) {
 
 function_43f61cad() {
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       self zombie_utility::set_zombie_run_cycle_restore_from_override();
       break;
-    case # "catalyst":
-    case # "tiger":
+    case #"catalyst":
+    case #"tiger":
       self zombie_utility::set_zombie_run_cycle_restore_from_override();
       break;
-    case # "gladiator":
-    case # "blight_father":
-    case # "elephant":
+    case #"gladiator":
+    case #"blight_father":
+    case #"elephant":
       break;
   }
 
@@ -666,25 +667,25 @@ function_43f61cad() {
 
 function_e43d1b24() {
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       str_scene = "aib_t8_zm_zombie_base_dth_ww_xbow";
       break;
-    case # "tiger":
+    case #"tiger":
       str_scene = "aib_t8_zm_tiger_dth_ww_xbow";
       break;
-    case # "catalyst":
+    case #"catalyst":
       str_scene = "aib_t8_zm_zombie_base_dth_ww_xbow";
       break;
-    case # "stoker":
+    case #"stoker":
       str_scene = "aib_t8_zm_stoker_dth_ww_xbow";
       break;
-    case # "gladiator":
+    case #"gladiator":
       str_scene = "aib_t8_zm_gladiator_dth_ww_xbow";
       break;
-    case # "blight_father":
+    case #"blight_father":
       str_scene = "aib_t8_zm_blightfather_dth_ww_xbow";
       break;
-    case # "elephant":
+    case #"elephant":
       str_scene = undefined;
       break;
     default:
@@ -698,28 +699,28 @@ function_e43d1b24() {
 function_b3ac0cab(params) {
   if(!is_crossbow_upgraded(params.weapon)) {
     switch (self.archetype) {
-      case # "zombie":
+      case #"zombie":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "tiger":
+      case #"tiger":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "catalyst":
+      case #"catalyst":
         var_a3abe438 = 0.5;
         var_a7727af5 = 1;
         break;
-      case # "stoker":
-      case # "gladiator":
+      case #"stoker":
+      case #"gladiator":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "blight_father":
+      case #"blight_father":
         var_a3abe438 = 0.2;
         var_a7727af5 = 1;
         break;
-      case # "elephant":
+      case #"elephant":
         var_a3abe438 = 0.1;
         var_a7727af5 = 1;
         break;
@@ -730,28 +731,28 @@ function_b3ac0cab(params) {
     }
   } else {
     switch (self.archetype) {
-      case # "zombie":
+      case #"zombie":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "tiger":
+      case #"tiger":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "catalyst":
+      case #"catalyst":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "stoker":
-      case # "gladiator":
+      case #"stoker":
+      case #"gladiator":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "blight_father":
+      case #"blight_father":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "elephant":
+      case #"elephant":
         var_a3abe438 = 0.2;
         var_a7727af5 = 1;
         break;
@@ -766,7 +767,7 @@ function_b3ac0cab(params) {
     iprintlnbold("<dev string:x38>" + function_9e72a96(self.archetype) + "<dev string:x62>");
   }
 
-  n_damage = 0;
+    n_damage = 0;
 
   if(level.round_number <= 23 && isDefined(self.maxhealth)) {
     n_damage = int(self.maxhealth * var_a3abe438);
@@ -785,7 +786,7 @@ function_62d37304(weapon) {
   self endon(#"disconnect");
 
   if(is_crossbow_charged(weapon, self)) {
-    self clientfield::increment("" + # "hash_6c3560ab45e186ec");
+    self clientfield::increment("" + #"hash_6c3560ab45e186ec");
   }
 
   if(level flagsys::get(#"hash_cad6742c753621")) {
@@ -793,8 +794,8 @@ function_62d37304(weapon) {
     v_end = v_start + self getweaponforwarddir() * 1000;
     s_trace = bulletTrace(v_start, v_end, 0, self);
     level notify(#"xbow_hit", {
-      #player: self,
-      #position: s_trace[# "position"]
+      #player: self, 
+      #position: s_trace[#"position"]
     });
   }
 

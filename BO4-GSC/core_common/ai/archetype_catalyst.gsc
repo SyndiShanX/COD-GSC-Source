@@ -10,6 +10,7 @@
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\spawner_shared;
+
 #namespace archetypecatalyst;
 
 autoexec main() {
@@ -26,16 +27,16 @@ private registerbehaviorscriptfunctions() {
 }
 
 iscatalyst(entity) {
-  return self.archetype === # "catalyst";
+  return self.archetype === #"catalyst";
 }
 
 function_5608540a() {
   self.zombie_move_speed = "walk";
   var_9d3ec6f = [];
-  var_9d3ec6f[# "catalyst_corrosive"] = 1;
-  var_9d3ec6f[# "catalyst_electric"] = 3;
-  var_9d3ec6f[# "catalyst_plasma"] = 2;
-  var_9d3ec6f[# "catalyst_water"] = 4;
+  var_9d3ec6f[#"catalyst_corrosive"] = 1;
+  var_9d3ec6f[#"catalyst_electric"] = 3;
+  var_9d3ec6f[#"catalyst_plasma"] = 2;
+  var_9d3ec6f[#"catalyst_water"] = 4;
 
   if(isDefined(self.subarchetype) && isDefined(var_9d3ec6f[self.subarchetype])) {
     function_27c82a36(self, var_9d3ec6f[self.subarchetype]);

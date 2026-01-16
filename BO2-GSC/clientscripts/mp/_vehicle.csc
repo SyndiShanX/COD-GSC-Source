@@ -32,39 +32,33 @@ vehicle_rumble(localclientnum) {
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
 
-  if(!isDefined(self.rumbleon)) {
+  if(!isDefined(self.rumbleon))
     self.rumbleon = 1;
-  }
 
-  if(isDefined(rumblestruct.scale)) {
+  if(isDefined(rumblestruct.scale))
     self.rumble_scale = rumblestruct.scale;
-  } else {
+  else
     self.rumble_scale = 0.15;
-  }
 
-  if(isDefined(rumblestruct.duration)) {
+  if(isDefined(rumblestruct.duration))
     self.rumble_duration = rumblestruct.duration;
-  } else {
+  else
     self.rumble_duration = 4.5;
-  }
 
-  if(isDefined(rumblestruct.radius)) {
+  if(isDefined(rumblestruct.radius))
     self.rumble_radius = rumblestruct.radius;
-  } else {
+  else
     self.rumble_radius = 600;
-  }
 
-  if(isDefined(rumblestruct.basetime)) {
+  if(isDefined(rumblestruct.basetime))
     self.rumble_basetime = rumblestruct.basetime;
-  } else {
+  else
     self.rumble_basetime = 1;
-  }
 
-  if(isDefined(rumblestruct.randomaditionaltime)) {
+  if(isDefined(rumblestruct.randomaditionaltime))
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
-  } else {
+  else
     self.rumble_randomaditionaltime = 1;
-  }
 
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
@@ -82,18 +76,16 @@ vehicle_rumble(localclientnum) {
 
     self playrumblelooponentity(localclientnum, level.vehicle_rumble[type].rumble);
 
-    while(distancesquared(self.origin, level.localplayers[localclientnum].origin) < radius_squared && self getspeed() > 5) {
+    while(distancesquared(self.origin, level.localplayers[localclientnum].origin) < radius_squared && self getspeed() > 5)
       wait(self.rumble_basetime + randomfloat(self.rumble_randomaditionaltime));
-    }
 
     self stoprumble(localclientnum, level.vehicle_rumble[type].rumble);
   }
 }
 
 vehicle_treads(localclientnum) {
-  if(!isDefined(self.treadfx)) {
+  if(!isDefined(self.treadfx))
     self.treadfx = [];
-  }
 
   if(!isDefined(level.vehicles_inited)) {
     return;
@@ -126,11 +118,10 @@ tread(localclientnum, tagname, side, relativeoffset) {
     waittime = 1 / speed;
     waittime = waittime * 35;
 
-    if(waittime < 0.1) {
+    if(waittime < 0.1)
       waittime = 0.1;
-    } else if(waittime > 0.3) {
+    else if(waittime > 0.3)
       waittime = 0.3;
-    }
 
     wait(waittime);
     lastfx = treadfx;
@@ -138,10 +129,10 @@ tread(localclientnum, tagname, side, relativeoffset) {
 
     if(treadfx != -1) {
       ang = self gettagangles(tagname);
-      forwardvec = anglesToForward(ang);
+      forwardvec = anglestoforward(ang);
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -158,9 +149,8 @@ treadget(vehicle, side) {
 
   treadfx = vehicle.treadfx[surface];
 
-  if(!isDefined(treadfx)) {
+  if(!isDefined(treadfx))
     treadfx = -1;
-  }
 
   return treadfx;
 }
@@ -172,9 +162,9 @@ playtankexhaust(localclientnum) {
   exhaustdelay = 0.1;
 
   for(;;) {
-    if(!isDefined(self) || !self isalive()) {
+    if(!isDefined(self) || !self isalive())
       return;
-    } else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
+    else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
       println("clientside exhaustfx not set up for vehicle model: " + self.model);
 
       return;
@@ -184,12 +174,12 @@ playtankexhaust(localclientnum) {
     tag_left_angles = self gettagangles("tag_engine_left");
 
     if(self getspeed() > 0) {
-      playFX(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglesToForward(tag_left_angles));
+      playfx(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglestoforward(tag_left_angles));
 
       if(!level.vehicle_exhaust[self.model].one_exhaust) {
         tag_right_orig = self gettagorigin("tag_engine_right");
         tag_right_angles = self gettagangles("tag_engine_right");
-        playFX(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglesToForward(tag_right_angles));
+        playfx(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglestoforward(tag_right_angles));
       }
     }
 
@@ -200,27 +190,24 @@ playtankexhaust(localclientnum) {
 build_exhaust(model, effect, one_exhaust) {
   println("building exhaust for " + model);
 
-  if(!isDefined(level.vehicle_exhaust)) {
+  if(!isDefined(level.vehicle_exhaust))
     level.vehicle_exhaust = [];
-  }
 
-  level.vehicle_exhaust[model] = spawnStruct();
+  level.vehicle_exhaust[model] = spawnstruct();
   level.vehicle_exhaust[model].exhaust_fx = loadfx(effect);
 
-  if(isDefined(one_exhaust) && one_exhaust) {
+  if(isDefined(one_exhaust) && one_exhaust)
     level.vehicle_exhaust[model].one_exhaust = 1;
-  } else {
+  else
     level.vehicle_exhaust[model].one_exhaust = 0;
-  }
 }
 
 build_gear(vehicletype, model, tag) {
   index = 0;
 
   if(isDefined(level.vehiclegearmodels)) {
-    if(isDefined(level.vehiclegearmodels[vehicletype])) {
+    if(isDefined(level.vehiclegearmodels[vehicletype]))
       index = level.vehiclegearmodels[vehicletype].size;
-    }
   }
 
   level.vehiclegearmodels[vehicletype][index] = model;
@@ -228,18 +215,16 @@ build_gear(vehicletype, model, tag) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
 
-  if(isDefined(basetime)) {
+  if(isDefined(basetime))
     struct.basetime = basetime;
-  }
 
-  if(isDefined(randomaditionaltime)) {
+  if(isDefined(randomaditionaltime))
     struct.randomaditionaltime = randomaditionaltime;
-  }
 
   return struct;
 }
@@ -247,9 +232,8 @@ build_quake(scale, duration, radius, basetime, randomaditionaltime) {
 build_rumble(type, rumble, scale, duration, radius, basetime, randomaditionaltime) {
   println("*** Client : Building rumble for " + type);
 
-  if(!isDefined(level.vehicle_rumble)) {
+  if(!isDefined(level.vehicle_rumble))
     level.vehicle_rumble = [];
-  }
 
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
   assert(isDefined(rumble));
@@ -263,10 +247,10 @@ set_static_amount(staticamount) {
   if(isDefined(driverlocalclient)) {
     driver = getlocalplayer(driverlocalclient);
 
-    if(isDefined(driver)) {
+    if(isDefined(driver))
       driver set_filter_pass_constant(4, 0, 1, staticamount);
-    }
   }
 }
 
-vehicle_variants(localclientnum) {}
+vehicle_variants(localclientnum) {
+}

@@ -4,9 +4,11 @@
 *********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace lower_message;
 
 class clower_message: cluielem {
+
   function set_countdowntimeseconds(localclientnum, value) {
     set_data(localclientnum, "countdownTimeSeconds", value);
   }
@@ -35,13 +37,13 @@ class clower_message: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "lower_message");
+    cluielem::open(localclientnum, #"lower_message");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
-    set_data(localclientnum, "message", # "");
+    set_state(localclientnum, #"defaultstate");
+    set_data(localclientnum, "message", #"");
     set_data(localclientnum, "countdownTimeSeconds", 0);
   }
 

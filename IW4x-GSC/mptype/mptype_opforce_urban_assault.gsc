@@ -3,6 +3,9 @@
  * Script: mptype\mptype_opforce_urban_assault.gsc
 ***************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
   character\mp_character_opforce_urban_assault::main();
 }

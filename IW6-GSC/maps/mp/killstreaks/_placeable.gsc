@@ -194,11 +194,10 @@ onPlaced(streakName) {
   }
 
   foreach(player in level.players) {
-    if(player == owner) {
+    if(player == owner)
       self EnablePlayerUse(player);
-    } else {
+    else
       self DisablePlayerUse(player);
-    }
   }
 
   if(isDefined(self.shouldSplash)) {

@@ -17,7 +17,7 @@ initFlashed() {
 }
 
 randomizeFlashAnimArray() {
-  for(i = 0; i < anim.flashAnimArray.size; i++) {
+  for (i = 0; i < anim.flashAnimArray.size; i++) {
     switchwith = randomint(anim.flashAnimArray.size);
     temp = anim.flashAnimArray[i];
     anim.flashAnimArray[i] = anim.flashAnimArray[switchwith];
@@ -44,19 +44,17 @@ main() {
   assert(0);
   self endon("killanimscript");
   animscripts\utility::initialize("flashed");
-  if(self.a.pose == "prone") {
+  if(self.a.pose == "prone")
     self ExitProneWrapper(1);
-  }
   self.a.pose = "stand";
   self startFlashBanged();
   self animscripts\face::SayGenericDialogue("flashbang");
   self.allowdeath = true;
-  if(isDefined(self.flashedanim)) {
+  if(isDefined(self.flashedanim))
     self setanimknoball(self.flashedanim, % body);
-  } else {
+  else
     self thread flashBangAnim();
-  }
-  for(;;) {
+  for (;;) {
     time = gettime();
     if(time > self.flashendtime) {
       self notify("stop_flashbang_effect");

@@ -39,18 +39,18 @@ main() {
   prop5.angles = vectorscale((0, 1, 0), 270.0);
   prop6 = spawn("script_model", (-966, 484, 182));
   prop6.angles = vectorscale((0, 1, 0), 270.0);
-  prop1 setModel("dh_facilities_sign_08");
-  prop2 setModel("dh_facilities_sign_08");
-  prop3 setModel("dh_facilities_sign_08");
-  prop4 setModel("dh_facilities_sign_08");
-  prop5 setModel("dh_facilities_sign_08");
-  prop6 setModel("dh_facilities_sign_08");
+  prop1 setmodel("dh_facilities_sign_08");
+  prop2 setmodel("dh_facilities_sign_08");
+  prop3 setmodel("dh_facilities_sign_08");
+  prop4 setmodel("dh_facilities_sign_08");
+  prop5 setmodel("dh_facilities_sign_08");
+  prop6 setmodel("dh_facilities_sign_08");
   planter1 = spawn("script_model", (-1609, -827.405, 131.751));
   planter1.angles = (359.846, 90.58, 89.9993);
   planter2 = spawn("script_model", (-1609, -827.41, 81.75));
   planter2.angles = (359.846, 90.58, 89.9993);
-  planter1 setModel("p6_fro_concrete_planter");
-  planter2 setModel("p6_fro_concrete_planter");
+  planter1 setmodel("p6_fro_concrete_planter");
+  planter2 setmodel("p6_fro_concrete_planter");
   brick1 = spawn("script_model", (1129, 703, 95.75));
   brick1.angles = (90, 180, -90);
   brick2 = spawn("script_model", (1127.75, 712, 95.75));
@@ -67,14 +67,14 @@ main() {
   brick7.angles = (90, 180, -90);
   brick8 = spawn("script_model", (1129, 685, 47.75));
   brick8.angles = (90, 180, -90);
-  brick1 setModel("p6_fro_bookstore_window_trm");
-  brick2 setModel("p6_fro_bookstore_window_trm");
-  brick3 setModel("p6_fro_bookstore_window_trm");
-  brick4 setModel("p6_fro_bookstore_window_trm");
-  brick5 setModel("p6_fro_bookstore_window_trm");
-  brick6 setModel("p6_fro_bookstore_window_trm");
-  brick7 setModel("p6_fro_bookstore_window_trm");
-  brick8 setModel("p6_fro_bookstore_window_trm");
+  brick1 setmodel("p6_fro_bookstore_window_trm");
+  brick2 setmodel("p6_fro_bookstore_window_trm");
+  brick3 setmodel("p6_fro_bookstore_window_trm");
+  brick4 setmodel("p6_fro_bookstore_window_trm");
+  brick5 setmodel("p6_fro_bookstore_window_trm");
+  brick6 setmodel("p6_fro_bookstore_window_trm");
+  brick7 setmodel("p6_fro_bookstore_window_trm");
+  brick8 setmodel("p6_fro_bookstore_window_trm");
   spawncollision("collision_clip_256x256x10", "collider", (145, -1295.5, 115.5), vectorscale((0, 0, -1), 88.9));
   spawncollision("collision_clip_256x256x10", "collider", (28, -1295.5, 115.5), vectorscale((0, 0, -1), 88.9));
   spawncollision("collision_clip_256x256x10", "collider", (252.5, -1251.5, 114), (0, 45.1, -88.9));
@@ -93,11 +93,11 @@ main() {
   spawncollision("collision_mp_frost_kitchen_weap", "collider", (1994, -281.5, 16), (0, 0, 0));
   setdvar("compassmaxrange", "2100");
   visionsetnaked("mp_frostbite", 1);
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -120,16 +120,15 @@ on_player_killed(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, sh
 
     if(depth > 0) {
       origin = self.origin + (0, 0, depth + 5);
-      self playSound("mpl_splash_death");
-      playFX(level._effect["water_splash"], origin);
+      self playsound("mpl_splash_death");
+      playfx(level._effect["water_splash"], origin);
     }
   }
 }
 
 leveloverridetime(defaulttime) {
-  if(self.body depthinwater() > 0) {
+  if(self.body depthinwater() > 0)
     return 0.4;
-  }
 
   return defaulttime;
 }
@@ -143,7 +142,7 @@ glass_node_fix() {
 glass_node_think(node) {
   wait 0.25;
   ent = spawn("script_model", node.origin, 1);
-  ent setModel(level.deployedshieldmodel);
+  ent setmodel(level.deployedshieldmodel);
   ent hide();
   ent disconnectpaths();
   ent.origin = ent.origin - vectorscale((0, 0, 1), 64.0);

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace radiant_live_udpate;
 
 autoexec __init__system__() {
@@ -36,3 +37,4 @@ render_struct(selected_struct) {
     wait 0.01;
   }
 }
+

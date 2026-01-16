@@ -40,11 +40,10 @@ heli_gunner_vtol_state(localclientnum) {
     speed = self getspeed();
     anim_time = 0.5;
 
-    if(speed > 0) {
+    if(speed > 0)
       anim_time = anim_time - speed / 1200 * 0.5;
-    } else {
+    else
       anim_time = anim_time + speed * -1 / 1200 * 0.5;
-    }
 
     frame_delta_yaw = angleclamp180(self.angles[1] - prev_yaw) / 3;
     frame_delta_yaw = frame_delta_yaw < 0.1 ? 0 : frame_delta_yaw;
@@ -71,11 +70,10 @@ supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, binitials
   self endon("death");
   self useanimtree(#animtree);
 
-  if(newval == 1) {
+  if(newval == 1)
     self setanim( % o_drone_supply_care_idle, 1.0, 0.0, 1.0);
-  } else {
+  else
     self setanim( % o_drone_supply_care_drop, 1.0, 0.0, 0.3);
-  }
 }
 
 supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -83,11 +81,10 @@ supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, 
   self endon("death");
   self useanimtree(#animtree);
 
-  if(newval == 1) {
+  if(newval == 1)
     self setanim( % o_drone_supply_agr_idle, 1.0, 0.0, 1.0);
-  } else {
+  else
     self setanim( % o_drone_supply_agr_drop, 1.0, 0.0, 0.3);
-  }
 }
 
 warnmissilelocking(localclientnum, set) {
@@ -150,21 +147,18 @@ startfx(localclientnum) {
     if(self.vehicletype == "remote_mortar_vehicle_mp") {
       return;
     }
-    if(self.vehicletype == "vehicle_straferun_mp") {
+    if(self.vehicletype == "vehicle_straferun_mp")
       return;
-    }
   }
 
-  if(isDefined(self.exhaustfxname) && self.exhaustfxname != "") {
+  if(isDefined(self.exhaustfxname) && self.exhaustfxname != "")
     self.exhaustfx = loadfx(self.exhaustfxname);
-  }
 
   if(isDefined(self.exhaustfx)) {
-    self.exhaustleftfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_left");
+    self.exhaustleftfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_left");
 
-    if(!self.oneexhaust) {
-      self.exhaustrightfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_right");
-    }
+    if(!self.oneexhaust)
+      self.exhaustrightfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_right");
   } else {
     println("Client: _helicopter.csc - startfx() - exhaust rotor fx is not loaded");
 
@@ -179,8 +173,8 @@ startfx(localclientnum) {
         light_fx = "heli_comlink_light";
         break;
       case "heli_player_gunner_mp":
-        self.vtolleftfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
-        self.vtolrightfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
+        self.vtolleftfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
+        self.vtolrightfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
         self thread heli_gunner_vtol_state(localclientnum);
         light_fx = "heli_gunner_light";
         break;
@@ -193,16 +187,14 @@ startfx(localclientnum) {
     }
 
     if(isDefined(light_fx)) {
-      if(self friendnotfoe(localclientnum)) {
-        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
-      } else {
-        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
-      }
+      if(self friendnotfoe(localclientnum))
+        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
+      else
+        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
     }
 
-    if(isDefined(prop_fx) && !self islocalclientdriver(localclientnum)) {
-      self.propfxid = playFXOnTag(localclientnum, level._effect[prop_fx], self, "tag_origin");
-    }
+    if(isDefined(prop_fx) && !self islocalclientdriver(localclientnum))
+      self.propfxid = playfxontag(localclientnum, level._effect[prop_fx], self, "tag_origin");
   }
 
   self thread damage_fx_stages(localclientnum);
@@ -238,21 +230,18 @@ damage_fx_stages(localclientnum) {
   for(;;) {
     if(last_damage_state != self gethelidamagestate()) {
       if(self gethelidamagestate() == 2) {
-        if(isDefined(fx)) {
+        if(isDefined(fx))
           stopfx(localclientnum, fx);
-        }
 
         fx = trail_fx(localclientnum, level.chopper_fx["damage"]["light_smoke"], "tag_engine_left");
       } else if(self gethelidamagestate() == 1) {
-        if(isDefined(fx)) {
+        if(isDefined(fx))
           stopfx(localclientnum, fx);
-        }
 
         fx = trail_fx(localclientnum, level.chopper_fx["damage"]["heavy_smoke"], "tag_engine_left");
       } else {
-        if(isDefined(fx)) {
+        if(isDefined(fx))
           stopfx(localclientnum, fx);
-        }
 
         self notify("stop trail");
       }
@@ -265,6 +254,6 @@ damage_fx_stages(localclientnum) {
 }
 
 trail_fx(localclientnum, trail_fx, trail_tag) {
-  id = playFXOnTag(localclientnum, trail_fx, self, trail_tag);
+  id = playfxontag(localclientnum, trail_fx, self, trail_tag);
   return id;
 }

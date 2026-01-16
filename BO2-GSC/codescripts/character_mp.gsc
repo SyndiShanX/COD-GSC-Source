@@ -6,13 +6,12 @@
 #include codescripts\character;
 
 setmodelfromarray(a) {
-  self setModel(a[randomint(a.size)]);
+  self setmodel(a[randomint(a.size)]);
 }
 
 precachemodelarray(a) {
-  for(i = 0; i < a.size; i++) {
+  for(i = 0; i < a.size; i++)
     precachemodel(a[i]);
-  }
 }
 
 attachfromarray(a) {

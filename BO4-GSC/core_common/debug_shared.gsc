@@ -6,6 +6,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace debug;
 
 autoexec __init__system__() {
@@ -97,7 +98,7 @@ debug_key_value(str_key, n_time, n_scale) {
 
   level endon(#"debug_key_value");
   self notify(#"debug_key_value");
-  self endon(#"debug_key_value", # "death");
+  self endon(#"debug_key_value", #"death");
 
   if(isDefined(str_key)) {
     if(isDefined(n_time)) {
@@ -143,3 +144,4 @@ drawdebugline(frompoint, topoint, color, durationframes) {
 drawdebuglineenttoent(ent1, ent2, color, durationframes) {
   thread drawdebugenttoentinternal(ent1, ent2, color, durationframes);
 }
+

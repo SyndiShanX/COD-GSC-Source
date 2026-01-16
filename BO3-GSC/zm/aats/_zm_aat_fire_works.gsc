@@ -18,17 +18,17 @@
 #namespace zm_aat_fire_works;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_fire_works", &__init__, undefined, "aat");
+  system::register("zm_aat_fire_works", & __init__, undefined, "aat");
 }
 
 function __init__() {
-  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
+  if(!(isdefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_fire_works", 0.1, 0, 20, 10, 1, &result, "t7_hud_zm_aat_fireworks", "wpn_aat_fire_works_plr", &fire_works_zombie_validation);
+  aat::register("zm_aat_fire_works", 0.1, 0, 20, 10, 1, & result, "t7_hud_zm_aat_fireworks", "wpn_aat_fire_works_plr", & fire_works_zombie_validation);
   clientfield::register("scriptmover", "zm_aat_fire_works", 1, 1, "int");
-  zm_spawner::register_zombie_damage_callback(&zm_aat_fire_works_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback(&zm_aat_fire_works_death_callback);
+  zm_spawner::register_zombie_damage_callback( & zm_aat_fire_works_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback( & zm_aat_fire_works_death_callback);
 }
 
 function result(death, attacker, mod, weapon) {
@@ -36,16 +36,16 @@ function result(death, attacker, mod, weapon) {
 }
 
 function fire_works_zombie_validation() {
-  if(isDefined(self.barricade_enter) && self.barricade_enter) {
+  if(isdefined(self.barricade_enter) && self.barricade_enter) {
     return false;
   }
-  if(isDefined(self.is_traversing) && self.is_traversing) {
+  if(isdefined(self.is_traversing) && self.is_traversing) {
     return false;
   }
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && !isDefined(self.first_node)) {
+  if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && !isdefined(self.first_node)) {
     return false;
   }
-  if(isDefined(self.is_leaping) && self.is_leaping) {
+  if(isdefined(self.is_leaping) && self.is_leaping) {
     return false;
   }
   return true;
@@ -54,7 +54,7 @@ function fire_works_zombie_validation() {
 function fire_works_summon(e_player, w_weapon) {
   w_summoned_weapon = e_player getcurrentweapon();
   v_target_zombie_origin = self.origin;
-  if(!(isDefined(level.aat["zm_aat_fire_works"].immune_result_direct[self.archetype]) && level.aat["zm_aat_fire_works"].immune_result_direct[self.archetype])) {
+  if(!(isdefined(level.aat["zm_aat_fire_works"].immune_result_direct[self.archetype]) && level.aat["zm_aat_fire_works"].immune_result_direct[self.archetype])) {
     self thread zombie_death_gib(e_player, w_weapon, e_player);
   }
   v_firing_pos = v_target_zombie_origin + vectorscale((0, 0, 1), 56);
@@ -67,11 +67,11 @@ function fire_works_summon(e_player, w_weapon) {
   mdl_weapon thread clientfield::set("zm_aat_fire_works", 1);
   mdl_weapon moveto(v_firing_pos, 0.5);
   mdl_weapon waittill("movedone");
-  for(i = 0; i < 10; i++) {
+  for (i = 0; i < 10; i++) {
     zombie = mdl_weapon zm_aat_fire_works_get_target();
-    if(!isDefined(zombie)) {
+    if(!isdefined(zombie)) {
       v_curr_yaw = (0, randomintrange(0, 360), 0);
-      v_target_pos = mdl_weapon.origin + vectorscale(anglesToForward(v_curr_yaw), 40);
+      v_target_pos = mdl_weapon.origin + vectorscale(anglestoforward(v_curr_yaw), 40);
     } else {
       v_target_pos = zombie getcentroid();
     }
@@ -94,7 +94,7 @@ function fire_works_summon(e_player, w_weapon) {
 function zm_aat_fire_works_get_target() {
   a_ai_zombies = array::randomize(getaiteamarray("axis"));
   los_checks = 0;
-  for(i = 0; i < a_ai_zombies.size; i++) {
+  for (i = 0; i < a_ai_zombies.size; i++) {
     zombie = a_ai_zombies[i];
     test_origin = zombie getcentroid();
     if(distancesquared(self.origin, test_origin) > 360000) {
@@ -113,10 +113,10 @@ function zm_aat_fire_works_get_target() {
 }
 
 function zm_aat_fire_works_zombie_damage_response(str_mod, str_hit_location, v_hit_origin, e_attacker, n_amount, w_weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
-  if(isDefined(level.aat["zm_aat_fire_works"].immune_result_indirect[self.archetype]) && level.aat["zm_aat_fire_works"].immune_result_indirect[self.archetype]) {
+  if(isdefined(level.aat["zm_aat_fire_works"].immune_result_indirect[self.archetype]) && level.aat["zm_aat_fire_works"].immune_result_indirect[self.archetype]) {
     return false;
   }
-  if(isDefined(e_attacker.b_aat_fire_works_weapon) && e_attacker.b_aat_fire_works_weapon) {
+  if(isdefined(e_attacker.b_aat_fire_works_weapon) && e_attacker.b_aat_fire_works_weapon) {
     self thread zombie_death_gib(e_attacker, w_weapon, e_attacker.owner);
     return true;
   }
@@ -124,9 +124,9 @@ function zm_aat_fire_works_zombie_damage_response(str_mod, str_hit_location, v_h
 }
 
 function zm_aat_fire_works_death_callback(attacker) {
-  if(isDefined(attacker)) {
-    if(isDefined(attacker.b_aat_fire_works_weapon) && attacker.b_aat_fire_works_weapon) {
-      if(isDefined(attacker.owner)) {
+  if(isdefined(attacker)) {
+    if(isdefined(attacker.b_aat_fire_works_weapon) && attacker.b_aat_fire_works_weapon) {
+      if(isdefined(attacker.owner)) {
         e_attacking_player = attacker.owner;
       }
     }
@@ -142,7 +142,7 @@ function zombie_death_gib(e_attacker, w_weapon, e_owner) {
   }
   gibserverutils::giblegs(self);
   self dodamage(self.health, self.origin, e_attacker, w_weapon, "torso_upper");
-  if(isDefined(e_owner) && isplayer(e_owner)) {
+  if(isdefined(e_owner) && isplayer(e_owner)) {
     e_owner zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_FIRE_WORKS");
   }
 }

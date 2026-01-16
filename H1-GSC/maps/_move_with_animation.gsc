@@ -11,7 +11,7 @@ carrystart(var_0, var_1, var_2) {
   level.eplayerview.origin = level.player.origin;
   level.eplayerview.angles = level.player getplayerangles();
 
-  if(isDefined(var_2) && var_2) {
+  if(isdefined(var_2) && var_2) {
     level.player maps\_anim::anim_first_frame_solo(level.eplayerview, "carry_idle");
     level.player maps\_anim::anim_first_frame_solo(var_0, "carry_idle");
     wait 0.1;
@@ -40,7 +40,9 @@ carrymoveloop(var_0) {
   var_2 = 0;
   var_3 = 0;
 
-  while([[var_0]]()) {
+  while ([
+      [var_0]
+    ]()) {
     var_2 = level.player isonladder();
     var_4 = level.player getnormalizedmovement();
     var_5 = length(var_4);

@@ -46,8 +46,8 @@ func_position_player_get(lastPlayerOrigin) {
 Callback_PlayerConnect() {
   self waittill("begin");
 
-  if(!isDefined(level.player)) {
-    spawnpoints = getEntArray("mp_global_intermission", "classname");
+  if(!isdefined(level.player)) {
+    spawnpoints = getentarray("mp_global_intermission", "classname");
     self spawn(spawnpoints[0].origin, spawnpoints[0].angles);
     self maps\mp\gametypes\_playerlogic::updateSessionState("playing", "");
     self.maxhealth = 10000000;

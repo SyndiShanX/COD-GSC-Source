@@ -9,6 +9,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_damage_drains_points;
 
 autoexec __init__system__() {

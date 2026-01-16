@@ -13,6 +13,7 @@
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace vehicle;
 
 class class_358332cc {
@@ -298,15 +299,15 @@ private function_e84837df(ai, vehicle) {
   assert(isDefined(ai.archetype));
   assert(function_196797c9(vehicle));
 
-  if(ai.archetype == # "robot") {
+  if(ai.archetype == #"robot") {
     return vehicle get_robot_bundle();
   }
 
-  if(ai.archetype == # "warlord") {
+  if(ai.archetype == #"warlord") {
     return vehicle get_warlord_bundle();
   }
 
-  assert(ai.archetype == # "human", "<dev string:x13f>" + ai.archetype);
+  assert(ai.archetype == #"human", "<dev string:x13f>" + ai.archetype);
   return vehicle get_human_bundle();
 }
 
@@ -363,25 +364,25 @@ fill_riders(a_ai, vehicle, seat) {
   a_ai_remaining = arraycopy(a_ai);
 
   switch (seat) {
-    case # "driver":
+    case #"driver":
       if(get_in(a_ai[0], vehicle, "driver", 0)) {
         arrayremovevalue(a_ai_remaining, a_ai[0]);
       }
 
       break;
-    case # "passenger1":
+    case #"passenger1":
       if(get_in(a_ai[0], vehicle, "passenger1", 0)) {
         arrayremovevalue(a_ai_remaining, a_ai[0]);
       }
 
       break;
-    case # "gunner1":
+    case #"gunner1":
       if(get_in(a_ai[0], vehicle, "gunner1", 0)) {
         arrayremovevalue(a_ai_remaining, a_ai[0]);
       }
 
       break;
-    case # "crew":
+    case #"crew":
       foreach(ai in a_ai) {
         if(get_in(ai, vehicle, "crew", 0)) {
           arrayremovevalue(a_ai_remaining, ai);
@@ -389,7 +390,7 @@ fill_riders(a_ai, vehicle, seat) {
       }
 
       break;
-    case # "all":
+    case #"all":
       index = 0;
 
       if(get_in(a_ai[index], vehicle, "driver", 0)) {
@@ -453,16 +454,16 @@ unload(seat) {
   assert(var_4301b21d > 0);
 
   switch (seat) {
-    case # "driver":
+    case #"driver":
       function_114d7bd3(self);
       break;
-    case # "passenger1":
+    case #"passenger1":
       function_b56639f2(self);
       break;
-    case # "gunner1":
+    case #"gunner1":
       function_2ef91b74(self);
       break;
-    case # "crew":
+    case #"crew":
       function_2ca26543(self);
       break;
     default:
@@ -479,8 +480,8 @@ private function_114d7bd3(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[# "driver"]) && isalive(vehicle.var_761c973.riders[# "driver"])) {
-    ai = vehicle.var_761c973.riders[# "driver"];
+  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[#"driver"]) && isalive(vehicle.var_761c973.riders[#"driver"])) {
+    ai = vehicle.var_761c973.riders[#"driver"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -502,8 +503,8 @@ private function_b56639f2(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[# "passenger1"]) && isalive(vehicle.var_761c973.riders[# "passenger1"])) {
-    ai = vehicle.var_761c973.riders[# "passenger1"];
+  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[#"passenger1"]) && isalive(vehicle.var_761c973.riders[#"passenger1"])) {
+    ai = vehicle.var_761c973.riders[#"passenger1"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -525,8 +526,8 @@ private function_2ef91b74(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[# "gunner1"]) && isalive(vehicle.var_761c973.riders[# "gunner1"])) {
-    ai = vehicle.var_761c973.riders[# "gunner1"];
+  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[#"gunner1"]) && isalive(vehicle.var_761c973.riders[#"gunner1"])) {
+    ai = vehicle.var_761c973.riders[#"gunner1"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -611,16 +612,16 @@ get_out(vehicle, ai, seat) {
 
   if(isDefined(vehicle) && isalive(vehicle)) {
     switch (seat) {
-      case # "driver":
+      case #"driver":
         vehicle flag::clear("driver_occupied");
         break;
-      case # "passenger1":
+      case #"passenger1":
         vehicle flag::clear("passenger1_occupied");
         break;
-      case # "gunner1":
+      case #"gunner1":
         vehicle flag::clear("gunner1_occupied");
         break;
-      case # "crew":
+      case #"crew":
         seat = "crew" + seat;
         flag = seat + "_occupied";
         vehicle flag::clear(flag);
@@ -635,10 +636,10 @@ get_out(vehicle, ai, seat) {
   }
 
   switch (str_mode) {
-    case # "ground":
+    case #"ground":
       exit_ground(ai);
       break;
-    case # "variable":
+    case #"variable":
       exit_variable(ai);
       break;
     default:
@@ -784,7 +785,7 @@ exit_variable(ai) {
 }
 
 exit_high_loop_anim(e_parent) {
-  self endon(#"death", # "landing");
+  self endon(#"death", #"landing");
 
   while(true) {
     animation::play(self.var_ec30f5da.exithighloopanim, e_parent, "tag_origin");
@@ -794,9 +795,9 @@ exit_high_loop_anim(e_parent) {
 get_height(e_ignore = self) {
   trace = groundtrace(self.origin + (0, 0, 10), self.origin + (0, 0, -10000), 0, e_ignore, 0);
 
-  recordline(self.origin + (0, 0, 10), trace[# "position"], (1, 0.5, 0), "<dev string:x321>", self);
+  recordline(self.origin + (0, 0, 10), trace[#"position"], (1, 0.5, 0), "<dev string:x321>", self);
 
-  return distance(self.origin, trace[# "position"]);
+  return distance(self.origin, trace[#"position"]);
 }
 
 get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
@@ -820,7 +821,7 @@ get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
   assert(isDefined(seat) && (seat == "<dev string:x216>" || seat == "<dev string:x21f>" || seat == "<dev string:x22c>"));
 
   switch (seat) {
-    case # "driver":
+    case #"driver":
       if(vehicle.var_761c973.var_9e2a2132 && vehicle flag::get("driver_occupied")) {
         if(var_7c3e4d44) {
           assertmsg("<dev string:x32e>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x355>");
@@ -831,7 +832,7 @@ get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 
       init_rider(ai, vehicle, "driver");
       break;
-    case # "passenger1":
+    case #"passenger1":
       if(vehicle.var_761c973.var_709c0a6f && vehicle flag::get("passenger1_occupied")) {
         if(var_7c3e4d44) {
           assertmsg("<dev string:x381>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x3ab>");
@@ -842,7 +843,7 @@ get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 
       init_rider(ai, vehicle, "passenger1");
       break;
-    case # "gunner1":
+    case #"gunner1":
       if(vehicle.var_761c973.var_dad0959b && vehicle flag::get("gunner1_occupied")) {
         if(var_7c3e4d44) {
           assertmsg("<dev string:x3da>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x401>");
@@ -893,7 +894,7 @@ get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 }
 
 private handle_rider_death(ai, vehicle) {
-  ai endon(#"death", # "exiting_vehicle");
+  ai endon(#"death", #"exiting_vehicle");
   vehicle endon(#"death");
   assert(isDefined(ai.var_ec30f5da));
 

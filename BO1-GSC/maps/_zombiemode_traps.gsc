@@ -223,7 +223,7 @@ trap_lights_red() {
     light.fx = maps\_zombiemode_net::network_safe_spawn("trap_lights_red", 2, "script_model", light.origin);
     light.fx setModel("tag_origin");
     light.fx.angles = light.angles;
-    playFXOnTag(level._effect["zapper_light_notready"], light.fx, "tag_origin");
+    playfxontag(level._effect["zapper_light_notready"], light.fx, "tag_origin");
   }
 }
 
@@ -240,7 +240,7 @@ trap_lights_green() {
     light.fx = maps\_zombiemode_net::network_safe_spawn("trap_lights_green", 2, "script_model", light.origin);
     light.fx setModel("tag_origin");
     light.fx.angles = light.angles;
-    playFXOnTag(level._effect["zapper_light_ready"], light.fx, "tag_origin");
+    playfxontag(level._effect["zapper_light_ready"], light.fx, "tag_origin");
   }
 }
 
@@ -263,7 +263,7 @@ trap_move_switches() {
   self trap_lights_red();
   for(i = 0; i < self._trap_switches.size; i++) {
     self._trap_switches[i] rotatePitch(180, .5);
-    self._trap_switches[i] playSound("amb_sparks_l_b");
+    self._trap_switches[i] playsound("amb_sparks_l_b");
   }
   self._trap_switches[0] waittill("rotatedone");
   self notify("switch_activated");
@@ -353,19 +353,18 @@ trap_audio_fx(trap) {
   sound_origin = undefined;
   if(trap.script_noteworthy == "electric") {
     sound_origin = spawn("script_origin", self.origin);
-    sound_origin playSound("zmb_elec_start");
+    sound_origin playsound("zmb_elec_start");
     sound_origin playLoopSound("zmb_elec_loop");
     self thread play_electrical_sound(trap);
   } else if(trap.script_noteworthy == "fire") {
     sound_origin = spawn("script_origin", self.origin);
-    sound_origin playSound("zmb_firetrap_start");
+    sound_origin playsound("zmb_firetrap_start");
     sound_origin playLoopSound("zmb_firetrap_loop");
   }
   trap waittill_any_or_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
-    if(trap.script_noteworthy == "fire") {
+    if(trap.script_noteworthy == "fire")
       playsoundatposition("zmb_firetrap_end", sound_origin.origin);
-    }
     sound_origin stopLoopSound();
     wait(.05);
     sound_origin delete();
@@ -445,7 +444,7 @@ player_elec_damage() {
     self shellshock("electrocution", shocktime);
     if(level.elec_loop == 0) {
       elec_loop = 1;
-      self playSound("zmb_zombie_arc");
+      self playsound("zmb_zombie_arc");
     }
     if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
       radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
@@ -489,7 +488,7 @@ zombie_trap_death(trap, param) {
         if((param > 90) && (level.burning_zombies.size < 6)) {
           level.burning_zombies[level.burning_zombies.size] = self;
           self thread zombie_flame_watch();
-          self playSound("ignite");
+          self playsound("ignite");
           self thread animscripts\zombie_death::flame_death_fx();
           wait(randomfloat(1.25));
         } else {
@@ -509,7 +508,7 @@ zombie_trap_death(trap, param) {
             }
           }
           wait(randomfloat(1.25));
-          self playSound("zmb_zombie_arc");
+          self playsound("zmb_zombie_arc");
         }
       }
       if(isDefined(self.fire_damage_func)) {
@@ -564,8 +563,8 @@ electroctute_death_fx() {
     level.bcOnFireTime = gettime();
     level.bcOnFireOrg = self.origin;
   }
-  playFXOnTag(level._effect["elec_torso"], self, "J_SpineLower");
-  self playSound("zmb_elec_jib_zombie");
+  PlayFxOnTag(level._effect["elec_torso"], self, "J_SpineLower");
+  self playsound("zmb_elec_jib_zombie");
   wait 1;
   tagArray = [];
   tagArray[0] = "J_Elbow_LE";
@@ -573,10 +572,10 @@ electroctute_death_fx() {
   tagArray[2] = "J_Knee_RI";
   tagArray[3] = "J_Knee_LE";
   tagArray = array_randomize(tagArray);
-  playFXOnTag(level._effect["elec_md"], self, tagArray[0]);
-  self playSound("zmb_elec_jib_zombie");
+  PlayFxOnTag(level._effect["elec_md"], self, tagArray[0]);
+  self playsound("zmb_elec_jib_zombie");
   wait 1;
-  self playSound("zmb_elec_jib_zombie");
+  self playsound("zmb_elec_jib_zombie");
   tagArray[0] = "J_Wrist_RI";
   tagArray[1] = "J_Wrist_LE";
   if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
@@ -584,8 +583,8 @@ electroctute_death_fx() {
     tagArray[3] = "J_Ankle_LE";
   }
   tagArray = array_randomize(tagArray);
-  playFXOnTag(level._effect["elec_sm"], self, tagArray[0]);
-  playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
+  PlayFxOnTag(level._effect["elec_sm"], self, tagArray[0]);
+  PlayFxOnTag(level._effect["elec_sm"], self, tagArray[1]);
 }
 
 electrocute_timeout() {

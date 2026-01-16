@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
+
 #namespace mp_jungle2_scripted;
 
 autoexec __init__system__() {
@@ -22,9 +23,10 @@ __init__() {
 }
 
 __main__() {
+
   init_devgui();
 
-  function_2cdcf5c3();
+    function_2cdcf5c3();
 }
 
 on_game_playing() {
@@ -51,7 +53,7 @@ function_2cdcf5c3() {
     return;
   }
 
-  level.var_38bda94 = array(#"p8_fxanim_mp_seaside_parrots_orange_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_orange_flock_02_bundle", # "p8_fxanim_mp_seaside_parrots_scarlet_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_scarlet_flock_02_bundle", # "p8_fxanim_mp_seaside_parrots_yellow_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_yellow_flock_02_bundle");
+  level.var_38bda94 = array(#"p8_fxanim_mp_seaside_parrots_orange_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_orange_flock_02_bundle", #"p8_fxanim_mp_seaside_parrots_scarlet_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_scarlet_flock_02_bundle", #"p8_fxanim_mp_seaside_parrots_yellow_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_yellow_flock_02_bundle");
 
   if(util::isfirstround()) {
     foreach(scene in level.var_38bda94) {
@@ -74,11 +76,11 @@ function_2cdcf5c3() {
 }
 
 function_69a9563e(a_ents) {
-  while(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] waittill(#"napalm_rumble", # "death");
+  while(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] waittill(#"napalm_rumble", #"death");
 
-    if(isDefined(a_ents[# "prop 1"])) {
-      a_ents[# "prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
+    if(isDefined(a_ents[#"prop 1"])) {
+      a_ents[#"prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
     }
   }
 }
@@ -89,3 +91,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x87>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:xc6>");
 }
+

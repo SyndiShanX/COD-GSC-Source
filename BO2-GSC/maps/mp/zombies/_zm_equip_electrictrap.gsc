@@ -19,18 +19,17 @@ init() {
     return;
   }
   level.electrictrap_name = "equip_electrictrap_zm";
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_electrictrap_zm", &"ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_ELECTRICTRAP_HOWTO", "etrap_zm_icon", "electrictrap", undefined, ::transfertrap, ::droptrap, ::pickuptrap, ::placetrap);
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_electrictrap_zm", & "ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_ELECTRICTRAP_HOWTO", "etrap_zm_icon", "electrictrap", undefined, ::transfertrap, ::droptrap, ::pickuptrap, ::placetrap);
   maps\mp\zombies\_zm_equipment::add_placeable_equipment("equip_electrictrap_zm", "p6_anim_zm_buildable_etrap");
   level thread onplayerconnect();
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_electrictrap", &"ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_electrictrap", & "ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING");
   level._effect["etrap_on"] = loadfx("maps/zombie/fx_zmb_tranzit_electric_trap_on");
   thread wait_init_damage();
 }
 
 wait_init_damage() {
-  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"])) {
+  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"]))
     wait 1;
-  }
 
   level.etrap_damage = maps\mp\zombies\_zm::ai_zombie_health(50);
 }
@@ -112,9 +111,8 @@ placetrap(origin, angles) {
 droptrap() {
   item = self maps\mp\zombies\_zm_equipment::dropped_equipment_think("p6_anim_zm_buildable_etrap", "equip_electrictrap_zm", self.origin, self.angles);
 
-  if(isDefined(item)) {
+  if(isDefined(item))
     item.electrictrap_health = self.electrictrap_health;
-  }
 
   self.electrictrap_health = undefined;
   return item;
@@ -154,9 +152,8 @@ startelectrictrapdeploy(weapon) {
   self thread watchforcleanup();
   electricradius = 45;
 
-  if(!isDefined(self.electrictrap_health)) {
+  if(!isDefined(self.electrictrap_health))
     self.electrictrap_health = 60;
-  }
 
   if(isDefined(weapon)) {
     weapon thread debugelectrictrap(electricradius);
@@ -167,21 +164,19 @@ startelectrictrapdeploy(weapon) {
     } else
       weapon.power_on = 1;
 
-    if(!weapon.power_on) {
+    if(!weapon.power_on)
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
-    }
 
     self thread electrictrapthink(weapon, electricradius);
 
-    if(!(isDefined(level.equipment_etrap_needs_power) && level.equipment_etrap_needs_power)) {
+    if(!(isDefined(level.equipment_etrap_needs_power) && level.equipment_etrap_needs_power))
       self thread electrictrapdecay(weapon);
-    }
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
 
     if(isDefined(level.electrap_sound_ent)) {
-      level.electrap_sound_ent playSound("wpn_zmb_electrap_stop");
+      level.electrap_sound_ent playsound("wpn_zmb_electrap_stop");
       level.electrap_sound_ent delete();
       level.electrap_sound_ent = undefined;
     }
@@ -191,9 +186,8 @@ startelectrictrapdeploy(weapon) {
 }
 
 trap_in_range(delta, origin, radius) {
-  if(distancesquared(self.target.origin, origin) < radius * radius) {
+  if(distancesquared(self.target.origin, origin) < radius * radius)
     return true;
-  }
 
   return false;
 }
@@ -208,12 +202,11 @@ trap_power_on(origin, radius) {
   self.target.power_on_time = gettime();
   self.target notify("stop_attracting_zombies");
 
-  if(!isDefined(level.electrap_sound_ent)) {
+  if(!isDefined(level.electrap_sound_ent))
     level.electrap_sound_ent = spawn("script_origin", self.target.origin);
-  }
 
-  level.electrap_sound_ent playSound("wpn_zmb_electrap_start");
-  level.electrap_sound_ent playLoopSound("wpn_zmb_electrap_loop", 2);
+  level.electrap_sound_ent playsound("wpn_zmb_electrap_start");
+  level.electrap_sound_ent playloopsound("wpn_zmb_electrap_loop", 2);
   self.target thread trapfx();
 }
 
@@ -227,7 +220,7 @@ trap_power_off(origin, radius) {
   self.target thread item_attract_zombies();
 
   if(isDefined(level.electrap_sound_ent)) {
-    level.electrap_sound_ent playSound("wpn_zmb_electrap_stop");
+    level.electrap_sound_ent playsound("wpn_zmb_electrap_stop");
     level.electrap_sound_ent delete();
     level.electrap_sound_ent = undefined;
   }
@@ -237,15 +230,14 @@ trapfx() {
   self endon("disconnect");
 
   while(isDefined(self) && (isDefined(self.power_on) && self.power_on)) {
-    playFXOnTag(level._effect["etrap_on"], self, "tag_origin");
+    playfxontag(level._effect["etrap_on"], self, "tag_origin");
     wait 0.3;
   }
 }
 
 zombie_attacked_trap(zombie) {
-  if(isDefined(self.power_on) && self.power_on) {
+  if(isDefined(self.power_on) && self.power_on)
     self zap_zombie(zombie);
-  }
 }
 
 electrocution_lockout(time) {
@@ -264,7 +256,7 @@ zap_zombie(zombie) {
     return;
   }
 
-  self playSound("wpn_zmb_electrap_zap");
+  self playsound("wpn_zmb_electrap_zap");
 
   if(!(isDefined(level.electrocuting_zombie) && level.electrocuting_zombie)) {
     thread electrocution_lockout(2);
@@ -278,9 +270,8 @@ zap_zombie(zombie) {
 }
 
 etrap_choke() {
-  if(!isDefined(level.etrap_choke_count)) {
+  if(!isDefined(level.etrap_choke_count))
     level.etrap_choke_count = 0;
-  }
 
   level.etrap_choke_count++;
 
@@ -358,9 +349,8 @@ electrictrapdecay(weapon) {
 
 debugelectrictrap(radius) {
   while(isDefined(self)) {
-    if(getdvarint(#"_id_EB512CB7")) {
+    if(getdvarint(#"_id_EB512CB7"))
       circle(self.origin, radius, (1, 1, 1), 0, 1, 1);
-    }
 
     wait 0.05;
   }

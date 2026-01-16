@@ -13,9 +13,8 @@
 #include maps\mp\zombies\_zm_audio;
 
 main() {
-  if(!isDefined(level.weapon_locker_map)) {
+  if(!isDefined(level.weapon_locker_map))
     level.weapon_locker_map = level.script;
-  }
 
   level.weapon_locker_online = sessionmodeisonlinegame();
   weapon_lockers = getstructarray("weapons_locker", "targetname");
@@ -23,66 +22,58 @@ main() {
 }
 
 wl_has_stored_weapondata() {
-  if(level.weapon_locker_online) {
+  if(level.weapon_locker_online)
     return self has_stored_weapondata(level.weapon_locker_map);
-  } else {
+  else
     return isDefined(self.stored_weapon_data);
-  }
 }
 
 wl_get_stored_weapondata() {
-  if(level.weapon_locker_online) {
+  if(level.weapon_locker_online)
     return self get_stored_weapondata(level.weapon_locker_map);
-  } else {
+  else
     return self.stored_weapon_data;
-  }
 }
 
 wl_clear_stored_weapondata() {
-  if(level.weapon_locker_online) {
+  if(level.weapon_locker_online)
     self clear_stored_weapondata(level.weapon_locker_map);
-  } else {
+  else
     self.stored_weapon_data = undefined;
-  }
 }
 
 wl_set_stored_weapondata(weapondata) {
-  if(level.weapon_locker_online) {
+  if(level.weapon_locker_online)
     self set_stored_weapondata(weapondata, level.weapon_locker_map);
-  } else {
+  else
     self.stored_weapon_data = weapondata;
-  }
 }
 
 triggerweaponslockerwatch() {
-  unitrigger_stub = spawnStruct();
+  unitrigger_stub = spawnstruct();
   unitrigger_stub.origin = self.origin;
 
-  if(isDefined(self.script_angles)) {
+  if(isDefined(self.script_angles))
     unitrigger_stub.angles = self.script_angles;
-  } else {
+  else
     unitrigger_stub.angles = self.angles;
-  }
 
   unitrigger_stub.script_angles = unitrigger_stub.angles;
 
-  if(isDefined(self.script_length)) {
+  if(isDefined(self.script_length))
     unitrigger_stub.script_length = self.script_length;
-  } else {
+  else
     unitrigger_stub.script_length = 16;
-  }
 
-  if(isDefined(self.script_width)) {
+  if(isDefined(self.script_width))
     unitrigger_stub.script_width = self.script_width;
-  } else {
+  else
     unitrigger_stub.script_width = 32;
-  }
 
-  if(isDefined(self.script_height)) {
+  if(isDefined(self.script_height))
     unitrigger_stub.script_height = self.script_height;
-  } else {
+  else
     unitrigger_stub.script_height = 64;
-  }
 
   unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);
   unitrigger_stub.targetname = "weapon_locker";
@@ -97,13 +88,11 @@ triggerweaponslockerwatch() {
 triggerweaponslockerisvalidweapon(weaponname) {
   weaponname = get_base_weapon_name(weaponname, 1);
 
-  if(!is_weapon_included(weaponname)) {
+  if(!is_weapon_included(weaponname))
     return false;
-  }
 
-  if(is_offhand_weapon(weaponname) || is_limited_weapon(weaponname)) {
+  if(is_offhand_weapon(weaponname) || is_limited_weapon(weaponname))
     return false;
-  }
 
   return true;
 }
@@ -114,17 +103,15 @@ triggerweaponslockerisvalidweaponpromptupdate(player, weaponname) {
   if(!retrievingweapon) {
     weaponname = player get_nonalternate_weapon(weaponname);
 
-    if(!triggerweaponslockerisvalidweapon(weaponname)) {
+    if(!triggerweaponslockerisvalidweapon(weaponname))
       self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
-    } else {
+    else
       self sethintstring(&"ZOMBIE_WEAPON_LOCKER_STORE");
-    }
   } else {
     weapondata = player wl_get_stored_weapondata();
 
-    if(isDefined(level.remap_weapon_locker_weapons)) {
+    if(isDefined(level.remap_weapon_locker_weapons))
       weapondata = remap_weapon(weapondata, level.remap_weapon_locker_weapons);
-    }
 
     weapontogive = weapondata["name"];
     primaries = player getweaponslistprimaries();
@@ -167,11 +154,10 @@ triggerweaponslockerthink() {
       player takeweapon(curweapon);
       primaries = player getweaponslistprimaries();
 
-      if(isDefined(primaries[0])) {
+      if(isDefined(primaries[0]))
         player switchtoweapon(primaries[0]);
-      } else {
+      else
         player maps\mp\zombies\_zm_weapons::give_fallback_weapon();
-      }
 
       self triggerweaponslockerisvalidweaponpromptupdate(player, player getcurrentweapon());
       player playsoundtoplayer("evt_fridge_locker_close", player);
@@ -181,9 +167,8 @@ triggerweaponslockerthink() {
       primaries = player getweaponslistprimaries();
       weapondata = player wl_get_stored_weapondata();
 
-      if(isDefined(level.remap_weapon_locker_weapons)) {
+      if(isDefined(level.remap_weapon_locker_weapons))
         weapondata = remap_weapon(weapondata, level.remap_weapon_locker_weapons);
-      }
 
       weapontogive = weapondata["name"];
 
@@ -251,9 +236,8 @@ triggerweaponslockerweaponchangethink(trigger) {
 }
 
 add_weapon_locker_mapping(fromweapon, toweapon) {
-  if(!isDefined(level.remap_weapon_locker_weapons)) {
+  if(!isDefined(level.remap_weapon_locker_weapons))
     level.remap_weapon_locker_weapons = [];
-  }
 
   level.remap_weapon_locker_weapons[fromweapon] = toweapon;
 }
@@ -270,9 +254,8 @@ remap_weapon(weapondata, maptable) {
       if(isDefined(att) && weapon_supports_attachments(name)) {
         base = get_base_weapon_name(name, 1);
 
-        if(!weapon_supports_this_attachment(base, att)) {
+        if(!weapon_supports_this_attachment(base, att))
           att = random_attachment(base);
-        }
 
         weapondata["name"] = weapondata["name"] + "+" + att;
       } else if(weapon_supports_default_attachment(name)) {
@@ -292,9 +275,8 @@ remap_weapon(weapondata, maptable) {
     weapondata["stock"] = int(min(weapondata["stock"], weaponmaxammo(name)));
   }
 
-  if(dw_name != "none") {
+  if(dw_name != "none")
     weapondata["lh_clip"] = int(min(weapondata["lh_clip"], weaponclipsize(dw_name)));
-  }
 
   if(alt_name != "none") {
     weapondata["alt_clip"] = int(min(weapondata["alt_clip"], weaponclipsize(alt_name)));

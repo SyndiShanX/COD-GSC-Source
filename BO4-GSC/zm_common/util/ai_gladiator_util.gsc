@@ -18,10 +18,11 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
+
 #namespace zombie_gladiator_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_gladiator_util", &__init__, &__main__, # "zm_ai_gladiator");
+  system::register(#"zombie_gladiator_util", &__init__, &__main__, #"zm_ai_gladiator");
 }
 
 __init__() {
@@ -41,7 +42,7 @@ __main__() {
 private function_8c0ab720() {
   n_hp = zm_ai_utility::function_8d44707e(1) * (isDefined(level.var_1b0cc4f5) ? level.var_1b0cc4f5 : 1);
 
-  if(self.subarchetype == # "gladiator_marauder") {
+  if(self.subarchetype == #"gladiator_marauder") {
     n_hp *= 0.7;
     self.var_17a22c08 = 150;
     self playSound(#"zmb_ai_gladiator_spawn_mar");
@@ -55,9 +56,9 @@ private function_8c0ab720() {
   self zm_powerup_nuke::function_9a79647b(0.5);
   self zm_score::function_82732ced();
 
-  if(self.subarchetype == # "gladiator_destroyer") {
+  if(self.subarchetype == #"gladiator_destroyer") {
     namespace_81245006::initweakpoints(self, "c_t8_zmb_gladiator_dst_weakpoint_def");
-  } else if(self.subarchetype == # "gladiator_marauder") {
+  } else if(self.subarchetype == #"gladiator_marauder") {
     namespace_81245006::initweakpoints(self, "c_t8_zmb_gladiator_mar_weakpoint_def");
   }
 
@@ -117,10 +118,10 @@ function_c03b6f46(var_4e77d211, var_3551e3b9) {
 function_bfa79e98(sp_spawner = level.var_4d136b9a[0], s_spot, str_type, n_round) {
   if(isDefined(str_type)) {
     switch (str_type) {
-      case # "melee":
+      case #"melee":
         sp_spawner = level.var_735451fc[0];
         break;
-      case # "ranged":
+      case #"ranged":
         sp_spawner = level.var_fc0d2372[0];
         break;
     }
@@ -161,8 +162,8 @@ function_69f309b(n_to_spawn = 1, str_type, var_1fafa3fc, b_force_spawn = 0, var_
       s_spawn_loc = [
         [level.var_14961f90]
       ](var_7aad80fe);
-    } else if(isDefined(level.zm_loc_types[# "gladiator_location"]) && level.zm_loc_types[# "gladiator_location"].size) {
-      s_spawn_loc = array::random(level.zm_loc_types[# "gladiator_location"]);
+    } else if(isDefined(level.zm_loc_types[#"gladiator_location"]) && level.zm_loc_types[#"gladiator_location"].size) {
+      s_spawn_loc = array::random(level.zm_loc_types[#"gladiator_location"]);
     }
 
     if(!isDefined(s_spawn_loc)) {
@@ -199,8 +200,8 @@ function_2efc00db(b_force_spawn = 0, var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_14961f90)) {
     s_spawn_loc = [[level.var_14961f90]]();
-  } else if(isDefined(level.zm_loc_types[# "gladiator_location"]) && level.zm_loc_types[# "gladiator_location"].size) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "gladiator_location"]);
+  } else if(isDefined(level.zm_loc_types[#"gladiator_location"]) && level.zm_loc_types[#"gladiator_location"].size) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"gladiator_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -235,8 +236,8 @@ function_c9cd31(b_force_spawn = 0, var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_14961f90)) {
     s_spawn_loc = [[level.var_14961f90]]();
-  } else if(isDefined(level.zm_loc_types[# "gladiator_location"]) && level.zm_loc_types[# "gladiator_location"].size) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "gladiator_location"]);
+  } else if(isDefined(level.zm_loc_types[#"gladiator_location"]) && level.zm_loc_types[#"gladiator_location"].size) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"gladiator_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {

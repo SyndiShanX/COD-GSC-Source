@@ -4,7 +4,7 @@
 *******************************************/
 
 main() {
-  self setModel("c_chn_pla_body");
+  self setmodel("c_chn_pla_body");
   self.headmodel = "c_chn_pla_head1";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_chn_pla_gear1";

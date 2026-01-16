@@ -25,6 +25,7 @@
 #include scripts\mp_common\supplypod;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
+
 #namespace challenges;
 
 autoexec __init__system__() {
@@ -84,17 +85,17 @@ on_player_connect() {
 
 initchallengedata() {
   self.var_9cd2c51d = {};
-  self.pers[# "stickexplosivekill"] = 0;
-  self.pers[# "carepackagescalled"] = 0;
-  self.pers[# "challenge_destroyed_air"] = 0;
-  self.pers[# "challenge_destroyed_ground"] = 0;
-  self.pers[# "challenge_anteup_earn"] = 0;
-  self.pers[# "specialiststatabilityusage"] = 0;
-  self.pers[# "activekillstreaks"] = [];
-  self.pers[# "killnemesis"] = 0;
-  self.pers[# "killsfastmagext"] = 0;
-  self.pers[# "longshotsperlife"] = 0;
-  self.pers[# "specialiststatabilityusage"] = 0;
+  self.pers[#"stickexplosivekill"] = 0;
+  self.pers[#"carepackagescalled"] = 0;
+  self.pers[#"challenge_destroyed_air"] = 0;
+  self.pers[#"challenge_destroyed_ground"] = 0;
+  self.pers[#"challenge_anteup_earn"] = 0;
+  self.pers[#"specialiststatabilityusage"] = 0;
+  self.pers[#"activekillstreaks"] = [];
+  self.pers[#"killnemesis"] = 0;
+  self.pers[#"killsfastmagext"] = 0;
+  self.pers[#"longshotsperlife"] = 0;
+  self.pers[#"specialiststatabilityusage"] = 0;
   self.challenge_defenderkillcount = 0;
   self.challenge_offenderkillcount = 0;
   self.challenge_offenderprojectilemultikillcount = 0;
@@ -212,28 +213,28 @@ player_fully_healed() {
 }
 
 watchscavengelethal() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.challenge_scavengedcount = 0;
 
   for(;;) {
-    self waittill(#"scavenged_primary_grenade", # "disconnect");
+    self waittill(#"scavenged_primary_grenade", #"disconnect");
     self.challenge_scavengedcount++;
   }
 }
 
 watchjump() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.challenge_jump_begin = 0;
   self.challenge_jump_end = 0;
 
   for(;;) {
-    ret = self waittill(#"jump_begin", # "jump_end", # "disconnect");
+    ret = self waittill(#"jump_begin", #"jump_end", #"disconnect");
 
     switch (ret._notify) {
-      case # "jump_begin":
+      case #"jump_begin":
         self.challenge_jump_begin = gettime();
         break;
-      case # "jump_end":
+      case #"jump_end":
         self.challenge_jump_end = gettime();
         break;
     }
@@ -241,18 +242,18 @@ watchjump() {
 }
 
 watchswimming() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.challenge_swimming_begin = 0;
   self.challenge_swimming_end = 0;
 
   for(;;) {
-    ret = self waittill(#"swimming_begin", # "swimming_end", # "disconnect");
+    ret = self waittill(#"swimming_begin", #"swimming_end", #"disconnect");
 
     switch (ret._notify) {
-      case # "swimming_begin":
+      case #"swimming_begin":
         self.challenge_swimming_begin = gettime();
         break;
-      case # "swimming_end":
+      case #"swimming_end":
         self.challenge_swimming_end = gettime();
         break;
     }
@@ -260,18 +261,18 @@ watchswimming() {
 }
 
 watchslide() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.challenge_slide_begin = 0;
   self.challenge_slide_end = 0;
 
   for(;;) {
-    ret = self waittill(#"slide_begin", # "slide_end", # "disconnect");
+    ret = self waittill(#"slide_begin", #"slide_end", #"disconnect");
 
     switch (ret._notify) {
-      case # "slide_begin":
+      case #"slide_begin":
         self.challenge_slide_begin = gettime();
         break;
-      case # "slide_end":
+      case #"slide_end":
         self.challenge_slide_end = gettime();
         break;
     }
@@ -279,18 +280,18 @@ watchslide() {
 }
 
 watchsprint() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.challenge_sprint_begin = 0;
   self.challenge_sprint_end = 0;
 
   for(;;) {
-    ret = self waittill(#"sprint_begin", # "sprint_end", # "disconnect");
+    ret = self waittill(#"sprint_begin", #"sprint_end", #"disconnect");
 
     switch (ret._notify) {
-      case # "sprint_begin":
+      case #"sprint_begin":
         self.challenge_sprint_begin = gettime();
         break;
-      case # "sprint_end":
+      case #"sprint_end":
         self.challenge_sprint_end = gettime();
         break;
     }
@@ -335,27 +336,27 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       self.var_ea1458aa.ekia = [];
     }
 
-    if(!isDefined(self.var_ea1458aa.ekia[# "primary"])) {
-      self.var_ea1458aa.ekia[# "primary"] = 0;
+    if(!isDefined(self.var_ea1458aa.ekia[#"primary"])) {
+      self.var_ea1458aa.ekia[#"primary"] = 0;
     }
 
-    if(!isDefined(self.var_ea1458aa.ekia[# "secondary"])) {
-      self.var_ea1458aa.ekia[# "secondary"] = 0;
+    if(!isDefined(self.var_ea1458aa.ekia[#"secondary"])) {
+      self.var_ea1458aa.ekia[#"secondary"] = 0;
     }
 
     isprimaryweapon = weapon.name == self function_b958b70d(var_3cd641b, "primary");
     var_197329e6 = weapon.name == self function_b958b70d(var_3cd641b, "secondary");
 
     if(isprimaryweapon) {
-      self.var_ea1458aa.ekia[# "primary"]++;
+      self.var_ea1458aa.ekia[#"primary"]++;
     } else if(var_197329e6) {
-      self.var_ea1458aa.ekia[# "secondary"]++;
+      self.var_ea1458aa.ekia[#"secondary"]++;
     }
 
-    if(self.var_ea1458aa.ekia[# "primary"] > 0 && self.var_ea1458aa.ekia[# "secondary"] > 0) {
+    if(self.var_ea1458aa.ekia[#"primary"] > 0 && self.var_ea1458aa.ekia[#"secondary"] > 0) {
       var_95ac2e77 = 1;
-      self.var_ea1458aa.ekia[# "primary"]--;
-      self.var_ea1458aa.ekia[# "secondary"]--;
+      self.var_ea1458aa.ekia[#"primary"]--;
+      self.var_ea1458aa.ekia[#"secondary"]--;
     }
 
     scoreevents = globallogic_score::function_3cbc4c6c(weapon.var_2e4a8800);
@@ -430,12 +431,12 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
 
     var_70137a58 = structcopy(self.var_ea1458aa);
 
-    if(!isDefined(var_5afc3871[# "talent_resistance"])) {
+    if(!isDefined(var_5afc3871[#"talent_resistance"])) {
       var_2d4a24ea = self.var_ef9b6f0b === 1;
       var_6c5ba24c = self.lastflashedby === victim;
 
-      if(isDefined(self.var_121392a1) && isDefined(self.var_121392a1[# "shock_seeker_mine"])) {
-        if(self.var_121392a1[# "shock_seeker_mine"].var_4b22e697 === victim) {
+      if(isDefined(self.var_121392a1) && isDefined(self.var_121392a1[#"shock_seeker_mine"])) {
+        if(self.var_121392a1[#"shock_seeker_mine"].var_4b22e697 === victim) {
           var_ba9c5900 = 1;
         }
       }
@@ -469,10 +470,10 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
 
       if(var_95ac2e77 === 1) {
-        if(self function_db654c9(var_3cd641b, # "bonuscard_overkill")) {
+        if(self function_db654c9(var_3cd641b, #"bonuscard_overkill")) {
           self stats::function_dad108fa(#"hash_33dd7ef72b15e6ac", 1);
           self contracts::increment_contract(#"contract_mp_overkill");
-        } else if(self function_db654c9(var_3cd641b, # "bonuscard_underkill")) {
+        } else if(self function_db654c9(var_3cd641b, #"bonuscard_underkill")) {
           self stats::function_dad108fa(#"hash_9cb265b8b1483b0", 1);
         }
       }
@@ -480,36 +481,36 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       talents = self function_4a9f1384(var_3cd641b);
 
       if(isDefined(talents) && isarray(talents)) {
-        if(self function_db654c9(var_3cd641b, # "bonuscard_perk_1_greed")) {
-          if(isDefined(talents[0]) && talents[0] != # "weapon_null" && isDefined(talents[3]) && talents[3] != # "weapon_null") {
+        if(self function_db654c9(var_3cd641b, #"bonuscard_perk_1_greed")) {
+          if(isDefined(talents[0]) && talents[0] != #"weapon_null" && isDefined(talents[3]) && talents[3] != #"weapon_null") {
             self stats::function_dad108fa(#"ekia_perk1_greed", 1);
           }
         }
 
-        if(self function_db654c9(var_3cd641b, # "bonuscard_perk_2_greed")) {
-          if(isDefined(talents[1]) && talents[1] != # "weapon_null" && isDefined(talents[4]) && talents[4] != # "weapon_null") {
+        if(self function_db654c9(var_3cd641b, #"bonuscard_perk_2_greed")) {
+          if(isDefined(talents[1]) && talents[1] != #"weapon_null" && isDefined(talents[4]) && talents[4] != #"weapon_null") {
             self stats::function_dad108fa(#"ekia_perk2_greed", 1);
           }
         }
 
-        if(self function_db654c9(var_3cd641b, # "bonuscard_perk_3_greed")) {
-          if(isDefined(talents[2]) && talents[2] != # "weapon_null" && isDefined(talents[5]) && talents[5] != # "weapon_null") {
+        if(self function_db654c9(var_3cd641b, #"bonuscard_perk_3_greed")) {
+          if(isDefined(talents[2]) && talents[2] != #"weapon_null" && isDefined(talents[5]) && talents[5] != #"weapon_null") {
             self stats::function_dad108fa(#"ekia_perk3_greed", 1);
           }
         }
 
-        arrayremovevalue(talents, # "weapon_null");
+        arrayremovevalue(talents, #"weapon_null");
 
         if(talents.size > 2) {
           var_ee03db9e = 0;
 
-          if(self function_db654c9(var_3cd641b, # "bonuscard_perk_1_gluttony")) {
+          if(self function_db654c9(var_3cd641b, #"bonuscard_perk_1_gluttony")) {
             self stats::function_dad108fa(#"ekia_perk1_gluttony", 1);
             var_ee03db9e = 1;
-          } else if(self function_db654c9(var_3cd641b, # "bonuscard_perk_2_gluttony")) {
+          } else if(self function_db654c9(var_3cd641b, #"bonuscard_perk_2_gluttony")) {
             self stats::function_dad108fa(#"ekia_perk2_gluttony", 1);
             var_ee03db9e = 1;
-          } else if(self function_db654c9(var_3cd641b, # "bonuscard_perk_3_gluttony")) {
+          } else if(self function_db654c9(var_3cd641b, #"bonuscard_perk_3_gluttony")) {
             self stats::function_dad108fa(#"ekia_perk3_gluttony", 1);
             var_ee03db9e = 1;
           }
@@ -523,7 +524,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
           self contracts::increment_contract(#"contract_mp_class_5_perks");
         }
 
-        if(isDefined(var_5afc3871[# "talent_resistance"])) {
+        if(isDefined(var_5afc3871[#"talent_resistance"])) {
           if(var_6af452fc.var_5745c480 === 1) {
             self stats::function_dad108fa(#"ekia_stunned_slowed_irradiated_cuav_resistance", 1);
           } else if(isDefined(var_6af452fc.var_121392a1) && isarray(var_6af452fc.var_121392a1) && var_6af452fc.var_121392a1.size > 0) {
@@ -533,13 +534,13 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
               }
 
               switch (effect.var_3d1ed4bd.name) {
-                case # "ability_smart_cover":
-                case # "eq_swat_grenade":
-                case # "hash_3f62a872201cd1ce":
-                case # "eq_seeker_mine":
-                case # "eq_concertina_wire":
-                case # "eq_slow_grenade":
-                case # "gadget_radiation_field":
+                case #"ability_smart_cover":
+                case #"eq_swat_grenade":
+                case #"hash_3f62a872201cd1ce":
+                case #"eq_seeker_mine":
+                case #"eq_concertina_wire":
+                case #"eq_slow_grenade":
+                case #"gadget_radiation_field":
                   award = 1;
                   break;
                 default:
@@ -555,42 +556,42 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
         }
 
         if(var_6af452fc.var_53611a9c === 1) {
-          if(isDefined(var_5afc3871[# "talent_teamlink"])) {
+          if(isDefined(var_5afc3871[#"talent_teamlink"])) {
             self stats::function_dad108fa(#"ekia_minimap_teamlink", 1);
           }
 
-          if(isDefined(var_5afc3871[# "talent_tracker"])) {
+          if(isDefined(var_5afc3871[#"talent_tracker"])) {
             self stats::function_dad108fa(#"ekia_tracker", 1);
           }
-        } else if(isDefined(var_5afc3871[# "talent_teamlink"]) && var_6af452fc.var_ec93e5f2 === 1) {
+        } else if(isDefined(var_5afc3871[#"talent_teamlink"]) && var_6af452fc.var_ec93e5f2 === 1) {
           self stats::function_dad108fa(#"ekia_minimap_teamlink", 1);
         }
 
-        if(isDefined(var_5afc3871[# "talent_deadsilence"])) {
+        if(isDefined(var_5afc3871[#"talent_deadsilence"])) {
           self stats::function_dad108fa(#"ekia_deadsilence", 1);
         }
 
-        if(isDefined(var_5afc3871[# "talent_ghost"]) && (var_6af452fc.var_8e35fb71 === 1 || var_6af452fc.var_efc9cf4d === 1)) {
+        if(isDefined(var_5afc3871[#"talent_ghost"]) && (var_6af452fc.var_8e35fb71 === 1 || var_6af452fc.var_efc9cf4d === 1)) {
           self stats::function_dad108fa(#"ekia_enemy_uav_sensordart_ghost", 1);
         }
 
-        if(isDefined(var_5afc3871[# "talent_gungho"]) && var_6af452fc.var_e8072c8d === 1) {
+        if(isDefined(var_5afc3871[#"talent_gungho"]) && var_6af452fc.var_e8072c8d === 1) {
           self stats::function_dad108fa(#"hash_cdd16b48f26b85f", 1);
         }
 
-        if(isDefined(var_5afc3871[# "talent_dexterity"])) {
+        if(isDefined(var_5afc3871[#"talent_dexterity"])) {
           if(var_6af452fc.ismantling === 1 || var_6af452fc.var_bd77a1eb === 1 || var_6af452fc.isjumping === 1) {
             self stats::function_dad108fa(#"ekia_swap_weapon_jump_mantle_dexterity", 1);
           }
         }
 
-        if(isDefined(var_5afc3871[# "talent_scavenger"]) && var_6af452fc.var_54433d4b === 1) {
+        if(isDefined(var_5afc3871[#"talent_scavenger"]) && var_6af452fc.var_54433d4b === 1) {
           self stats::function_dad108fa(#"ekia_ammo_pickup_scavenger", 1);
         }
       }
 
       wildcards = self function_6f2c0492(var_3cd641b);
-      arrayremovevalue(wildcards, # "weapon_null");
+      arrayremovevalue(wildcards, #"weapon_null");
 
       if(wildcards.size > 1) {
         self stats::function_dad108fa(#"hash_3c794263f2d7e231", 1);
@@ -600,25 +601,25 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
 
       if(isDefined(gear)) {
         switch (gear) {
-          case # "gear_armor":
+          case #"gear_armor":
             if(var_6af452fc.var_d7bd6f9b === 1) {
               self stats::function_dad108fa(#"ekia_against_armor_damager", 1);
             }
 
             break;
-          case # "gear_awareness":
+          case #"gear_awareness":
             minimaprange = function_fd82b127() * 0.5;
 
             if(var_6af452fc.var_85997af0 < minimaprange * minimaprange) {
               self stats::function_dad108fa(#"ekia_minimap_awareness", 1);
 
-              if(isDefined(var_5afc3871[# "talent_tracker"]) && var_6af452fc.var_53611a9c === 1) {
+              if(isDefined(var_5afc3871[#"talent_tracker"]) && var_6af452fc.var_53611a9c === 1) {
                 self stats::function_dad108fa(#"ekia_minimap_awareness_tracker", 1);
               }
             }
 
             break;
-          case # "gear_equipmentcharge":
+          case #"gear_equipmentcharge":
             scoreevents = globallogic_score::function_3cbc4c6c(weapon.var_2e4a8800);
             baseweapon = weapons::getbaseweapon(weapon);
 
@@ -637,7 +638,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
             }
 
             break;
-          case # "gear_medicalinjectiongun":
+          case #"gear_medicalinjectiongun":
             if(var_6af452fc.var_46a82df0 === 1) {
               self stats::function_dad108fa(#"ekia_full_heal_medicalinjectiongun", 1);
 
@@ -647,14 +648,14 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
             }
 
             break;
-          case # "weapon_null":
+          case #"weapon_null":
           default:
             break;
         }
       }
     }
 
-    if(isDefined(level.gametype) && (level.gametype == # "tdm" || level.gametype == # "dm")) {
+    if(isDefined(level.gametype) && (level.gametype == #"tdm" || level.gametype == #"dm")) {
       if(level.hardcoremode) {
         self stats::function_dad108fa(#"ekia_hc_in_tdm_dm", 1);
       } else if(!level.arenamatch) {
@@ -718,7 +719,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
 
       if(self weaponhasattachmentandunlocked(weapon, "steadyaim")) {
         if(var_6af452fc.var_bd77a1eb === 1) {
-          if(isDefined(var_3cd641b) && isDefined(var_5afc3871[# "talent_dexterity"]) && self function_db654c9(var_3cd641b, # "bonuscard_overkill")) {
+          if(isDefined(var_3cd641b) && isDefined(var_5afc3871[#"talent_dexterity"]) && self function_db654c9(var_3cd641b, #"bonuscard_overkill")) {
             if(!isDefined(self.var_9cd2c51d.var_1a72ebf5)) {
               self.var_9cd2c51d.var_1a72ebf5 = 0;
             }
@@ -741,7 +742,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
 
       if(self weaponhasattachmentandunlocked(weapon, "damage")) {
-        if(weaponclass == # "weapon_launcher") {
+        if(weaponclass == #"weapon_launcher") {
           self stats::function_dad108fa(#"hash_4ad196e3eaceeb26", 1);
         }
 
@@ -751,7 +752,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
 
       if(self weaponhasattachmentandunlocked(weapon, "fmj")) {
-        if(isDefined(var_6af452fc.idflags) && var_6af452fc.idflags & 8) {
+        if(isDefined(var_6af452fc.idflags) && var_6af452fc.idflags&8) {
           self stats::function_dad108fa(#"ekia_enemy_through_wall_with_fmj", 1);
         }
 
@@ -763,7 +764,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       if(self weaponhasattachmentandunlocked(weapon, "fastreload")) {
         self stats::function_dad108fa(#"ekia_fastreload_mixclip", 1);
 
-        if(weaponclass == # "weapon_launcher") {
+        if(weaponclass == #"weapon_launcher") {
           self stats::function_dad108fa(#"hash_4b19afce40dfc918", 1);
         }
 
@@ -792,25 +793,25 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
         self stats::function_dad108fa(#"hash_6c36aa2d7d6f2b4", 1);
       }
 
-      if(weaponclass == # "weapon_launcher") {
+      if(weaponclass == #"weapon_launcher") {
         if(self weaponhasattachmentandunlocked(weapon, "supply")) {
           self stats::function_dad108fa(#"hash_403b2535e53d1991", 1);
         }
       } else if(self weaponhasattachmentandunlocked(weapon, "uber")) {
         switch (weapon.statname) {
-          case # "smg_capacity_t8":
-          case # "sniper_quickscope_t8":
-          case # "lmg_spray_t8":
+          case #"smg_capacity_t8":
+          case #"sniper_quickscope_t8":
+          case #"lmg_spray_t8":
             self stats::function_dad108fa(#"ekia_speedcenter_beltfed_sentrygrip", 1);
             break;
-          case # "pistol_revolver_t8":
-          case # "lmg_heavy_t8":
-          case # "shotgun_pump_t8":
+          case #"pistol_revolver_t8":
+          case #"lmg_heavy_t8":
+          case #"shotgun_pump_t8":
             self stats::function_dad108fa(#"ekia_dw_fatbarrel_skullsplitter_dragonbreath", 1);
             break;
-          case # "tr_midburst_t8":
-          case # "ar_fastfire_t8":
-          case # "smg_fastfire_t8":
+          case #"tr_midburst_t8":
+          case #"ar_fastfire_t8":
+          case #"smg_fastfire_t8":
             if(!isads && attachmentupgrades > 0 && self weaponhasattachmentandunlocked(weapon, "steadyaim2")) {
               velocity = self getvelocity();
               speedsq = lengthsquared(velocity);
@@ -822,19 +823,19 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
 
             self stats::function_dad108fa(#"ekia_burstaccelerator_wildfire_firingunit", 1);
             break;
-          case # "tr_longburst_t8":
-          case # "tr_powersemi_t8":
+          case #"tr_longburst_t8":
+          case #"tr_powersemi_t8":
             if(self weaponhasattachmentandunlocked(weapon, "extbarrel", "acog")) {
               if(var_6af452fc.var_85997af0 > scoreevents::get_distance_for_weapon(weapon, weaponclass)) {
                 self stats::function_dad108fa(#"hash_67c1416f36b6e6db", 1);
               }
             }
-          case # "smg_accurate_t8":
-          case # "sniper_fastrechamber_t8":
+          case #"smg_accurate_t8":
+          case #"sniper_fastrechamber_t8":
             self stats::function_dad108fa(#"hash_3e107dcbf6a27d6b", 1);
             break;
-          case # "lmg_standard_t8":
-          case # "shotgun_semiauto_t8":
+          case #"lmg_standard_t8":
+          case #"shotgun_semiauto_t8":
             self stats::function_dad108fa(#"ekia_strobeflash_suppressivebarrel", 1);
             break;
         }
@@ -845,7 +846,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       self stats::function_dad108fa(#"ekia_dw_fatbarrel_skullsplitter_dragonbreath", 1);
     }
 
-    if(isDefined(var_5018995b) && var_5018995b.statname == # "gadget_radiation_field" && (!isDefined(var_6af452fc.var_75c08813) || var_6af452fc.var_75c08813 < 1)) {
+    if(isDefined(var_5018995b) && var_5018995b.statname == #"gadget_radiation_field" && (!isDefined(var_6af452fc.var_75c08813) || var_6af452fc.var_75c08813 < 1)) {
       self stats::function_dad108fa(#"radiation_field_shutdown_ekia", 1);
     }
 
@@ -857,7 +858,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       self stats::function_dad108fa(#"kill_enemy_who_has_bonus_health", 1);
     }
 
-    if(!isDefined(var_5afc3871[# "talent_resistance"])) {
+    if(!isDefined(var_5afc3871[#"talent_resistance"])) {
       if(var_2d4a24ea) {
         if(var_6c5ba24c) {
           self stats::function_dad108fa(#"kill_enemy_who_stunned_you_during_stun", 1);
@@ -944,14 +945,14 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
         }
 
         switch (effect.var_3d1ed4bd.name) {
-          case # "shock_rifle":
-          case # "ability_smart_cover":
-          case # "eq_swat_grenade":
-          case # "hash_3f62a872201cd1ce":
-          case # "eq_seeker_mine":
-          case # "eq_concertina_wire":
-          case # "hero_flamethrower":
-          case # "gadget_radiation_field":
+          case #"shock_rifle":
+          case #"ability_smart_cover":
+          case #"eq_swat_grenade":
+          case #"hash_3f62a872201cd1ce":
+          case #"eq_seeker_mine":
+          case #"eq_concertina_wire":
+          case #"hero_flamethrower":
+          case #"gadget_radiation_field":
             award = 1;
             break;
           default:
@@ -970,7 +971,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
     }
 
     if(var_6af452fc.var_b535f1ea === self && isDefined(var_6af452fc.var_2acdce3e)) {
-      if(isDefined(var_6af452fc.var_2acdce3e[# "hash_1527a22d8a6fdc21"]) && var_6af452fc.var_2acdce3e[# "hash_1527a22d8a6fdc21"].endtime > time) {
+      if(isDefined(var_6af452fc.var_2acdce3e[#"hash_1527a22d8a6fdc21"]) && var_6af452fc.var_2acdce3e[#"hash_1527a22d8a6fdc21"].endtime > time) {
         if(self util::is_item_purchased(#"eq_slow_grenade")) {
           self stats::function_dad108fa(#"ekia_concussed_enemy", 1);
         }
@@ -986,7 +987,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
     self stats::function_dad108fa(#"ekia_counteruav", 1);
   }
 
-  if(killstreak === # "dog") {
+  if(killstreak === #"dog") {
     if(weapon.issignatureweapon) {
       self stats::function_dad108fa(#"ekia_specialized_weapons", 1);
     }
@@ -1099,9 +1100,9 @@ challengekills(data) {
     victimsupportindex = victim.entnum;
   }
 
-  if(meansofdeath == # "mod_head_shot" || meansofdeath == # "mod_pistol_bullet" || meansofdeath == # "mod_rifle_bullet") {
+  if(meansofdeath == #"mod_head_shot" || meansofdeath == #"mod_pistol_bullet" || meansofdeath == #"mod_rifle_bullet") {
     bulletkill = 1;
-  } else if(baseweapon == level.weaponflechette && (meansofdeath == # "mod_impact" || meansofdeath == # "mod_projectile" || meansofdeath == # "mod_projectile_splash")) {
+  } else if(baseweapon == level.weaponflechette && (meansofdeath == #"mod_impact" || meansofdeath == #"mod_projectile" || meansofdeath == #"mod_projectile_splash")) {
     bulletkill = 1;
   } else {
     bulletkill = 0;
@@ -1137,17 +1138,17 @@ challengekills(data) {
     player processspecialistchallenge("kills");
 
     if(weapon.isheavyweapon) {
-      if(!isDefined(player.pers[# "challenge_heroweaponkills"])) {
-        player.pers[# "challenge_heroweaponkills"] = 0;
+      if(!isDefined(player.pers[#"challenge_heroweaponkills"])) {
+        player.pers[#"challenge_heroweaponkills"] = 0;
       }
 
       player processspecialistchallenge("kills_weapon");
       player.heavyweaponkillsthisactivation++;
-      player.pers[# "challenge_heroweaponkills"]++;
+      player.pers[#"challenge_heroweaponkills"]++;
 
-      if(player.pers[# "challenge_heroweaponkills"] >= 6) {
+      if(player.pers[#"challenge_heroweaponkills"] >= 6) {
         player processspecialistchallenge("kill_one_game_weapon");
-        player.pers[# "challenge_heroweaponkills"] = 0;
+        player.pers[#"challenge_heroweaponkills"] = 0;
       }
     }
   } else {
@@ -1158,25 +1159,25 @@ challengekills(data) {
     player genericbulletkill(data, victim, weapon);
 
     if(weaponpurchased) {
-      if(weaponclass == # "weapon_sniper") {
+      if(weaponclass == #"weapon_sniper") {
         if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
           player stats::function_dad108fa(#"kill_enemy_one_bullet_sniper", 1);
-          player stats::function_e24eec31(weapon, # "kill_enemy_one_bullet_sniper", 1);
+          player stats::function_e24eec31(weapon, #"kill_enemy_one_bullet_sniper", 1);
 
-          if(!isDefined(player.pers[# "kill_enemy_one_bullet_sniper"])) {
-            player.pers[# "kill_enemy_one_bullet_sniper"] = 0;
+          if(!isDefined(player.pers[#"kill_enemy_one_bullet_sniper"])) {
+            player.pers[#"kill_enemy_one_bullet_sniper"] = 0;
           }
 
-          player.pers[# "kill_enemy_one_bullet_sniper"]++;
+          player.pers[#"kill_enemy_one_bullet_sniper"]++;
 
-          if(player.pers[# "kill_enemy_one_bullet_sniper"] % 10 == 0) {
+          if(player.pers[#"kill_enemy_one_bullet_sniper"] % 10 == 0) {
             player stats::function_dad108fa(#"hash_2ebd387ffb67e1dc", 1);
           }
         }
       } else if(weaponclass == "weapon_cqb") {
         if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
           player stats::function_dad108fa(#"kill_enemy_one_bullet_shotgun", 1);
-          player stats::function_e24eec31(weapon, # "kill_enemy_one_bullet_shotgun", 1);
+          player stats::function_e24eec31(weapon, #"kill_enemy_one_bullet_shotgun", 1);
         }
       }
     }
@@ -1184,12 +1185,12 @@ challengekills(data) {
     checkkillstreak5(baseweapon, player);
     function_b2b18857(player);
 
-    if(meansofdeath == # "mod_head_shot") {
+    if(meansofdeath == #"mod_head_shot") {
       if(isDefined(victim.var_ea1458aa) && isDefined(victim.var_ea1458aa.attackerdamage)) {
         var_d72bd991 = victim.var_ea1458aa.attackerdamage[player.clientid];
         gear = player function_b958b70d(player.class_num, "tacticalgear");
 
-        if(gear === # "gear_armor" && isDefined(var_d72bd991)) {
+        if(gear === #"gear_armor" && isDefined(var_d72bd991)) {
           if(var_d72bd991.var_d7bd6f9b === 1) {
             player stats::function_dad108fa(#"hash_2ed3de647f5090f1", 1);
           }
@@ -1197,7 +1198,7 @@ challengekills(data) {
       }
     }
 
-    if(isDefined(var_26aed950[# "talent_lightweight"])) {
+    if(isDefined(var_26aed950[#"talent_lightweight"])) {
       player stats::function_dad108fa(#"kill_lightweight", 1);
     }
 
@@ -1217,7 +1218,7 @@ challengekills(data) {
           player.attachmentkillsthisspawn[attachmentname]++;
 
           if(player.attachmentkillsthisspawn[attachmentname] == 5) {
-            player stats::function_e24eec31(weapon, # "killstreak_5_attachment", 1);
+            player stats::function_e24eec31(weapon, #"killstreak_5_attachment", 1);
           }
         } else {
           player.attachmentkillsthisspawn[attachmentname] = 1;
@@ -1242,7 +1243,7 @@ challengekills(data) {
             if(player util::is_looking_at(player.smokegrenadeposition) || distancesquared(player.origin, player.smokegrenadeposition) < 40000) {
               if(player weaponhasattachmentandunlocked(weapon, "ir")) {
                 player stats::function_dad108fa(#"kill_with_thermal_and_smoke_ads", 1);
-                player stats::function_e24eec31(weapon, # "kill_thermal_through_smoke", 1);
+                player stats::function_e24eec31(weapon, #"kill_thermal_through_smoke", 1);
               }
             }
           }
@@ -1265,22 +1266,22 @@ challengekills(data) {
         }
 
         if(player weaponhasattachmentandunlocked(weapon, "fastreload", "extclip")) {
-          player.pers[# "killsfastmagext"]++;
+          player.pers[#"killsfastmagext"]++;
 
-          if(player.pers[# "killsfastmagext"] > 4) {
+          if(player.pers[#"killsfastmagext"] > 4) {
             player stats::function_dad108fa(#"kills_one_life_fastmags_and_extclip", 1);
-            player.pers[# "killsfastmagext"] = 0;
+            player.pers[#"killsfastmagext"] = 0;
           }
         }
       }
 
       if(weapon.attachments.size > 2) {
-        if(meansofdeath == # "mod_head_shot") {
+        if(meansofdeath == #"mod_head_shot") {
           if(player weaponhasattachmentandunlocked(weapon, "fmj", "damage", "extbarrel")) {
             player stats::function_dad108fa(#"headshot_fmj_highcaliber_longbarrel", 1);
           }
 
-          if(weapon.statname == # "pistol_revolver_t8") {
+          if(weapon.statname == #"pistol_revolver_t8") {
             if(player weaponhasattachmentandunlocked(weapon, "uber", "extbarrel", "extbarrel2")) {
               player stats::function_dad108fa(#"hash_5465ee91c99dca6c", 1);
             }
@@ -1300,7 +1301,7 @@ challengekills(data) {
     }
 
     if(isDefined(victim.idflagstime) && victim.idflagstime == time) {
-      if(victim.idflags & 8) {
+      if(victim.idflags&8) {
         player stats::function_dad108fa(#"kill_enemy_through_wall", 1);
 
         if(player weaponhasattachmentandunlocked(weapon, "fmj")) {
@@ -1326,7 +1327,7 @@ challengekills(data) {
       player stats::function_dad108fa(#"kill_enemy_with_fists", 1);
     }
 
-    if(weapon.statname == # "ar_stealth_t8" || weapon.statname == # "pistol_standard_t8") {
+    if(weapon.statname == #"ar_stealth_t8" || weapon.statname == #"pistol_standard_t8") {
       if(player weaponhasattachmentandunlocked(weapon, "uber")) {
         player stats::function_dad108fa(#"kill_bayonet_tacknife", 1);
       }
@@ -1334,7 +1335,7 @@ challengekills(data) {
 
     checkkillstreak5(baseweapon, player);
   } else if(!isDefined(killstreak)) {
-    if(weaponclass == # "weapon_launcher") {
+    if(weaponclass == #"weapon_launcher") {
       player stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
     }
 
@@ -1355,7 +1356,7 @@ challengekills(data) {
       }
 
       if(isDefined(inflictoriscooked)) {
-        if(inflictoriscooked == 1 && weapon.statname == # "frag_grenade") {
+        if(inflictoriscooked == 1 && weapon.statname == #"frag_grenade") {
           player stats::function_dad108fa(#"kill_with_cooked_grenade", 1);
         }
       }
@@ -1369,7 +1370,7 @@ challengekills(data) {
       if(baseweapon.statname == level.weaponballisticknife.statname) {
         player function_80327323(data);
 
-        if(isDefined(var_26aed950[# "talent_lightweight"])) {
+        if(isDefined(var_26aed950[#"talent_lightweight"])) {
           player stats::function_dad108fa(#"kill_lightweight", 1);
         }
       }
@@ -1383,7 +1384,7 @@ challengekills(data) {
       if(baseweapon == level.weaponshotgunenergy) {
         if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
           player stats::function_dad108fa(#"kill_enemy_one_bullet_shotgun", 1);
-          player stats::function_e24eec31(weapon, # "kill_enemy_one_bullet_shotgun", 1);
+          player stats::function_e24eec31(weapon, #"kill_enemy_one_bullet_shotgun", 1);
         }
       }
     }
@@ -1452,9 +1453,9 @@ challengekills(data) {
   }
 
   if(level.teambased) {
-    if(!isDefined(player.pers[# "kill_every_enemy_with_specialist"]) && level.playercount[victim.pers[# "team"]] > 3 && player.pers[# "killed_players_with_specialist"].size >= level.playercount[victim.pers[# "team"]]) {
+    if(!isDefined(player.pers[#"kill_every_enemy_with_specialist"]) && level.playercount[victim.pers[#"team"]] > 3 && player.pers[#"killed_players_with_specialist"].size >= level.playercount[victim.pers[#"team"]]) {
       player stats::function_dad108fa(#"kill_every_enemy", 1);
-      player.pers[# "kill_every_enemy_with_specialist"] = 1;
+      player.pers[#"kill_every_enemy_with_specialist"] = 1;
     }
 
     if(isDefined(victimattackersthisspawn) && isarray(victimattackersthisspawn)) {
@@ -1577,10 +1578,10 @@ challengekills(data) {
           }
 
           switch (activestreak.killstreaktype) {
-            case # "drone_striked":
-            case # "uav":
-            case # "helicopter_comlink":
-            case # "sentinel":
+            case #"drone_striked":
+            case #"uav":
+            case #"helicopter_comlink":
+            case #"sentinel":
               player stats::function_dad108fa(#"kill_blindeye_ghost_aircraft", 1);
               awarded_kill_blindeye_ghost_aircraft = 1;
               break;
@@ -1761,7 +1762,7 @@ challengekills(data) {
         attacker stats::function_dad108fa(#"kill_before_specialist_weapon_use", 1);
       }
 
-      if(victimweapon.statname == # "sig_buckler_dw") {
+      if(victimweapon.statname == #"sig_buckler_dw") {
         if(!isDefined(killstreak) && bulletkill && vectordot(victimforward, playerorigin - victimorigin) < 0) {
           attacker stats::function_dad108fa(#"shutdown_ballisticshield_in_back", 1);
         }
@@ -1788,7 +1789,7 @@ challengekills(data) {
       attacker stats::function_dad108fa(#"kill_enemy_after_surviving_rcxd", 1);
     }
   } else {
-    if(weapon.name == # "supplydrop") {
+    if(weapon.name == #"supplydrop") {
       if(isDefined(inflictorplayerhasengineerperk)) {
         player stats::function_dad108fa(#"kill_booby_trap_engineer", 1);
       }
@@ -1797,7 +1798,7 @@ challengekills(data) {
     var_2cf35051 = globallogic_score::function_3cbc4c6c(victimweapon.var_2e4a8800);
 
     if(victimweapon.issignatureweapon === 1 || isDefined(var_2cf35051) && var_2cf35051.var_fcd2ff3a === 1) {
-      if(killstreak == # "dart" || killstreak == # "inventory_dart" || killstreak == # "recon_car" || killstreak == # "inventory_recon_car" || (killstreak == # "tank_robot" || killstreak == # "inventory_tank_robot") && var_911b9b40 === 1) {
+      if(killstreak == #"dart" || killstreak == #"inventory_dart" || killstreak == #"recon_car" || killstreak == #"inventory_recon_car" || (killstreak == #"tank_robot" || killstreak == #"inventory_tank_robot") && var_911b9b40 === 1) {
         attacker stats::function_dad108fa(#"shutdown_enemy_by_controlling_scorestreak", 1);
       }
     }
@@ -1817,11 +1818,11 @@ challengekills(data) {
     }
   }
 
-  if(victimweapon.statname == # "hero_flamethrower" && weapon.statname == # "eq_molotov") {
+  if(victimweapon.statname == #"hero_flamethrower" && weapon.statname == #"eq_molotov") {
     attacker stats::function_dad108fa(#"shutdown_purifier_with_molotov", 1);
   }
 
-  if(victimweapon.statname == # "hero_annihilator" && (weapon.statname == # "hero_annihilator" || weapon.statname == # "pistol_revolver_t8")) {
+  if(victimweapon.statname == #"hero_annihilator" && (weapon.statname == #"hero_annihilator" || weapon.statname == #"pistol_revolver_t8")) {
     attacker stats::function_dad108fa(#"shutdown_annihilator_with_revolver", 1);
   }
 }
@@ -1854,7 +1855,7 @@ force_challenge_stat(stat_name, stat_value) {
 }
 
 get_challenge_group_stat(group_name, stat_name) {
-  return self stats::get_stat(#"groupstats", group_name, # "stats", stat_name, # "challengevalue");
+  return self stats::get_stat(#"groupstats", group_name, #"stats", stat_name, #"challengevalue");
 }
 
 fix_challenge_stats_on_spawn() {
@@ -1907,18 +1908,18 @@ function_223ff464() {
   if(!(self stats::get_stat(#"extrabools", 0) === 1)) {
     self force_challenge_stat(#"mastery_marksman", 0);
     marksmanarray = [];
-    array::add(marksmanarray, # "hash_4075f20007923416");
-    array::add(marksmanarray, # "hash_72d1952fced05f40");
-    array::add(marksmanarray, # "hash_70cd6c54d1c07272");
-    array::add(marksmanarray, # "hash_6b828c2fcb0e8df5");
-    array::add(marksmanarray, # "hash_2ea8a6bab2364c58");
-    array::add(marksmanarray, # "hash_7ecfcae46143397c");
-    array::add(marksmanarray, # "hash_3b30f98820bc20cf");
-    array::add(marksmanarray, # "hash_18816731b999fbfb");
-    array::add(marksmanarray, # "hash_6c1c399dcbe1af97");
-    array::add(marksmanarray, # "hash_5630ec40181e1db3");
-    array::add(marksmanarray, # "hash_354bfe5c140365bf");
-    array::add(marksmanarray, # "hash_51eff59939399dc9");
+    array::add(marksmanarray, #"hash_4075f20007923416");
+    array::add(marksmanarray, #"hash_72d1952fced05f40");
+    array::add(marksmanarray, #"hash_70cd6c54d1c07272");
+    array::add(marksmanarray, #"hash_6b828c2fcb0e8df5");
+    array::add(marksmanarray, #"hash_2ea8a6bab2364c58");
+    array::add(marksmanarray, #"hash_7ecfcae46143397c");
+    array::add(marksmanarray, #"hash_3b30f98820bc20cf");
+    array::add(marksmanarray, #"hash_18816731b999fbfb");
+    array::add(marksmanarray, #"hash_6c1c399dcbe1af97");
+    array::add(marksmanarray, #"hash_5630ec40181e1db3");
+    array::add(marksmanarray, #"hash_354bfe5c140365bf");
+    array::add(marksmanarray, #"hash_51eff59939399dc9");
 
     for(index = 0; index < marksmanarray.size; index++) {
       if(self stats::function_af5584ca(marksmanarray[index]) === 1) {
@@ -1934,13 +1935,13 @@ function_bd5db926() {
   if(!(self stats::get_stat(#"extrabools", 1) === 1)) {
     var_5d157945 = self stats::get_stat_global(#"stats_rcxd_kill");
     recon_car = getweapon(#"hash_38ffd09564931482");
-    self stats::function_e24eec31(recon_car, # "kills", var_5d157945);
+    self stats::function_e24eec31(recon_car, #"kills", var_5d157945);
     self stats::set_stat(#"extrabools", 1, 1);
   }
 }
 
 function_f4106216() {
-  if(!(self stats::get_stat(#"playerstatslist", # "hash_195a18a5697c5c96") === 1)) {
+  if(!(self stats::get_stat(#"playerstatslist", #"hash_195a18a5697c5c96") === 1)) {
     challengetier = self stats::function_af5584ca("shutdown_gravslam_before_impact");
 
     if(!isDefined(challengetier)) {
@@ -1953,19 +1954,19 @@ function_f4106216() {
 
     challengevalue = self stats::get_stat_challenge("shutdown_gravslam_before_impact");
     self stats::set_stat_challenge("stats_gravity_slam_shutdown", challengevalue);
-    self stats::set_stat(#"playerstatslist", # "hash_195a18a5697c5c96", 1);
+    self stats::set_stat(#"playerstatslist", #"hash_195a18a5697c5c96", 1);
   }
 }
 
 function_34364901() {
   player = self;
-  var_fae27922 = player stats::get_stat(#"item_stats", # "sniper_locus_t8", # "challenges_tu", # "challengevalue");
+  var_fae27922 = player stats::get_stat(#"item_stats", #"sniper_locus_t8", #"challenges_tu", #"challengevalue");
 
   if(var_fae27922 === 6) {
-    player stats::set_stat(#"item_stats", # "sniper_locus_t8", # "challenges_tu", # "challengevalue", 5);
-    player stats::set_stat(#"item_stats", # "sniper_locus_t8", # "challenges_tu", # "statvalue", 5);
-    player stats::set_stat(#"item_stats", # "sniper_locus_t8", # "challenges_tu", # "challengetier", 0);
-    player addweaponstat(getweapon(#"sniper_locus_t8"), # "challenges_tu", 1);
+    player stats::set_stat(#"item_stats", #"sniper_locus_t8", #"challenges_tu", #"challengevalue", 5);
+    player stats::set_stat(#"item_stats", #"sniper_locus_t8", #"challenges_tu", #"statvalue", 5);
+    player stats::set_stat(#"item_stats", #"sniper_locus_t8", #"challenges_tu", #"challengetier", 0);
+    player addweaponstat(getweapon(#"sniper_locus_t8"), #"challenges_tu", 1);
   }
 }
 
@@ -2033,17 +2034,17 @@ tu7_fix_mastery_perk_2() {
   }
 
   perk_2_tally = 1;
-  perk_2_tally += player tally_completed_challenge(100, # "destroy_ai_scorestreak_coldblooded");
-  perk_2_tally += player tally_completed_challenge(100, # "kills_counteruav_emp_hardline");
-  perk_2_tally += player tally_completed_challenge(200, # "kill_after_resupply");
-  perk_2_tally += player tally_completed_challenge(100, # "kills_after_sprint_fasthands");
-  perk_2_tally += player tally_completed_challenge(200, # "kill_detect_tracker");
-  perk_2_tally += player tally_completed_challenge(10, # "earn_5_scorestreaks_anteup");
-  perk_2_tally += player tally_completed_challenge(25, # "kill_scavenger_tracker_resupply");
-  perk_2_tally += player tally_completed_challenge(25, # "kill_hardwired_coldblooded");
-  perk_2_tally += player tally_completed_challenge(25, # "kill_anteup_overclock_scorestreak_specialist");
-  perk_2_tally += player tally_completed_challenge(50, # "kill_fasthands_gungho_sprint");
-  perk_2_tally += player tally_completed_challenge(50, # "kill_tracker_sixthsense");
+  perk_2_tally += player tally_completed_challenge(100, #"destroy_ai_scorestreak_coldblooded");
+  perk_2_tally += player tally_completed_challenge(100, #"kills_counteruav_emp_hardline");
+  perk_2_tally += player tally_completed_challenge(200, #"kill_after_resupply");
+  perk_2_tally += player tally_completed_challenge(100, #"kills_after_sprint_fasthands");
+  perk_2_tally += player tally_completed_challenge(200, #"kill_detect_tracker");
+  perk_2_tally += player tally_completed_challenge(10, #"earn_5_scorestreaks_anteup");
+  perk_2_tally += player tally_completed_challenge(25, #"kill_scavenger_tracker_resupply");
+  perk_2_tally += player tally_completed_challenge(25, #"kill_hardwired_coldblooded");
+  perk_2_tally += player tally_completed_challenge(25, #"kill_anteup_overclock_scorestreak_specialist");
+  perk_2_tally += player tally_completed_challenge(50, #"kill_fasthands_gungho_sprint");
+  perk_2_tally += player tally_completed_challenge(50, #"kill_tracker_sixthsense");
 
   if(mastery_perk_2 < perk_2_tally) {
     player stats::function_dad108fa(#"mastery_perk_2", 1);
@@ -2069,7 +2070,7 @@ checkkillstreak5(baseweapon, player) {
     player.weaponkillsthisspawn[baseweapon]++;
 
     if(player.weaponkillsthisspawn[baseweapon] % 5 == 0) {
-      player stats::function_e24eec31(baseweapon, # "killstreak_5", 1);
+      player stats::function_e24eec31(baseweapon, #"killstreak_5", 1);
     }
 
     return;
@@ -2108,23 +2109,23 @@ challengegameendmp(data) {
   }
 
   if(level.teambased) {
-    winnerscore = game.stat[# "teamscores"][winner];
+    winnerscore = game.stat[#"teamscores"][winner];
     loserscore = getlosersteamscores(winner);
   }
 
   mostekiasleastdeaths = 1;
 
-  for(index = 0; index < level.placement[# "all"].size; index++) {
-    if(level.placement[# "all"][index].deaths < player.deaths) {
+  for(index = 0; index < level.placement[#"all"].size; index++) {
+    if(level.placement[#"all"][index].deaths < player.deaths) {
       mostekiasleastdeaths = 0;
     }
 
-    if(level.placement[# "all"][index].ekia > player.ekia) {
+    if(level.placement[#"all"][index].ekia > player.ekia) {
       mostekiasleastdeaths = 0;
     }
   }
 
-  if(mostekiasleastdeaths && player.ekia > 0 && level.placement[# "all"].size > 3) {
+  if(mostekiasleastdeaths && player.ekia > 0 && level.placement[#"all"].size > 3) {
     if(level.teambased) {
       playeriswinner = player.team === winner;
     } else {
@@ -2146,8 +2147,8 @@ challengegameendmp(data) {
   }
 
   switch (level.gametype) {
-    case # "tdm_hc":
-    case # "tdm":
+    case #"tdm_hc":
+    case #"tdm":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 25) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2156,11 +2157,11 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "dm":
-    case # "dm_hc":
+    case #"dm":
+    case #"dm_hc":
       if(player == winner) {
-        if(level.placement[# "all"].size >= 2) {
-          secondplace = level.placement[# "all"][1];
+        if(level.placement[#"all"].size >= 2) {
+          secondplace = level.placement[#"all"][1];
 
           if(player.kills >= secondplace.kills + 7) {
             player stats::function_d40764f3(#"crush", 1);
@@ -2170,8 +2171,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "ctf":
-    case # "ctf_hc":
+    case #"ctf":
+    case #"ctf_hc":
       if(player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"shut_out", 1);
@@ -2179,8 +2180,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "dom_hc":
-    case # "dom":
+    case #"dom_hc":
+    case #"dom":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2189,8 +2190,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "hq":
-    case # "hq_hc":
+    case #"hq":
+    case #"hq_hc":
       if(player.team == winner && winnerscore > 0) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2198,8 +2199,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "koth":
-    case # "koth_hc":
+    case #"koth":
+    case #"koth_hc":
       if(player.team == winner && winnerscore > 0) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2214,8 +2215,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "dem":
-    case # "dem_hc":
+    case #"dem":
+    case #"dem_hc":
       if(player.team == game.defenders && player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"shut_out", 1);
@@ -2223,12 +2224,12 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "control":
-    case # "sd":
-    case # "control_hc":
-    case # "bounty_hc":
-    case # "bounty":
-    case # "sd_hc":
+    case #"control":
+    case #"sd":
+    case #"control_hc":
+    case #"bounty_hc":
+    case #"bounty":
+    case #"sd_hc":
       if(player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2237,8 +2238,8 @@ challengegameendmp(data) {
       }
 
       break;
-    case # "conf":
-    case # "conf_hc":
+    case #"conf":
+    case #"conf_hc":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 25) {
           player stats::function_d40764f3(#"crush", 1);
@@ -2257,33 +2258,33 @@ function_ea966b4a(killstreak) {
   }
 
   switch (killstreak) {
-    case # "dart":
-    case # "remote_missile":
-    case # "inventory_planemortar":
-    case # "drone_squadron":
-    case # "inventory_drone_squadron":
-    case # "overwatch_helicopter":
-    case # "inventory_dart":
-    case # "inventory_straferun":
-    case # "inventory_ac130":
-    case # "inventory_remote_missile":
-    case # "straferun":
-    case # "ac130":
-    case # "helicopter_comlink":
-    case # "planemortar":
-    case # "inventory_overwatch_helicopter":
-    case # "inventory_helicopter_comlink":
+    case #"dart":
+    case #"remote_missile":
+    case #"inventory_planemortar":
+    case #"drone_squadron":
+    case #"inventory_drone_squadron":
+    case #"overwatch_helicopter":
+    case #"inventory_dart":
+    case #"inventory_straferun":
+    case #"inventory_ac130":
+    case #"inventory_remote_missile":
+    case #"straferun":
+    case #"ac130":
+    case #"helicopter_comlink":
+    case #"planemortar":
+    case #"inventory_overwatch_helicopter":
+    case #"inventory_helicopter_comlink":
       self stats::function_dad108fa(#"air_assault_total_kills", 1);
       self contracts::player_contract_event(#"air_assault_total_kills");
       break;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
-    case # "tank_robot":
-    case # "swat_team":
-    case # "recon_car":
-    case # "inventory_recon_car":
-    case # "inventory_tank_robot":
-    case # "inventory_swat_team":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
+    case #"tank_robot":
+    case #"swat_team":
+    case #"recon_car":
+    case #"inventory_recon_car":
+    case #"inventory_tank_robot":
+    case #"inventory_swat_team":
       self stats::function_dad108fa(#"hash_10b0c56ae630070d", 1);
       self contracts::player_contract_event(#"hash_10b0c56ae630070d");
       break;
@@ -2307,33 +2308,33 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "dart":
-      case # "remote_missile":
-      case # "inventory_planemortar":
-      case # "drone_squadron":
-      case # "inventory_drone_squadron":
-      case # "overwatch_helicopter":
-      case # "inventory_dart":
-      case # "inventory_straferun":
-      case # "inventory_ac130":
-      case # "inventory_remote_missile":
-      case # "straferun":
-      case # "ac130":
-      case # "helicopter_comlink":
-      case # "planemortar":
-      case # "inventory_overwatch_helicopter":
-      case # "inventory_helicopter_comlink":
+      case #"dart":
+      case #"remote_missile":
+      case #"inventory_planemortar":
+      case #"drone_squadron":
+      case #"inventory_drone_squadron":
+      case #"overwatch_helicopter":
+      case #"inventory_dart":
+      case #"inventory_straferun":
+      case #"inventory_ac130":
+      case #"inventory_remote_missile":
+      case #"straferun":
+      case #"ac130":
+      case #"helicopter_comlink":
+      case #"planemortar":
+      case #"inventory_overwatch_helicopter":
+      case #"inventory_helicopter_comlink":
         self stats::function_dad108fa(#"hash_55a5fc51678a4dde", 1);
         break;
-      case # "recon_car":
-      case # "inventory_recon_car":
+      case #"recon_car":
+      case #"inventory_recon_car":
         self stats::function_dad108fa(#"hash_7daf653f5e86b75", 1);
-      case # "ultimate_turret":
-      case # "inventory_ultimate_turret":
-      case # "tank_robot":
-      case # "swat_team":
-      case # "inventory_tank_robot":
-      case # "inventory_swat_team":
+      case #"ultimate_turret":
+      case #"inventory_ultimate_turret":
+      case #"tank_robot":
+      case #"swat_team":
+      case #"inventory_tank_robot":
+      case #"inventory_swat_team":
         self stats::function_dad108fa(#"hash_1efa6ab922134e1d", 1);
         break;
     }
@@ -2376,11 +2377,11 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
       var_d72bd991 = victim.var_ea1458aa.attackerdamage[self.clientid];
       gear = self function_b958b70d(var_d72bd991.class_num, "tacticalgear");
 
-      if(gear == # "gear_medicalinjectiongun") {
+      if(gear == #"gear_medicalinjectiongun") {
         if(var_d72bd991.var_46a82df0 === 1) {
           self stats::function_dad108fa(#"hash_47c5c8af0f105c71", 1);
         }
-      } else if(gear == # "gear_equipmentcharge") {
+      } else if(gear == #"gear_equipmentcharge") {
         if(var_8a4cfbd) {
           if(!isDefined(self.var_9cd2c51d.var_17ff6e52)) {
             self.var_9cd2c51d.var_17ff6e52 = 0;
@@ -2396,7 +2397,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
     }
 
     if(isDefined(victim.lastconcussedby) && victim.lastconcussedby == self && isDefined(victim.var_121392a1)) {
-      if(isDefined(victim.var_121392a1[# "hash_1527a22d8a6fdc21"]) && victim.var_121392a1[# "hash_1527a22d8a6fdc21"].endtime > gettime()) {
+      if(isDefined(victim.var_121392a1[#"hash_1527a22d8a6fdc21"]) && victim.var_121392a1[#"hash_1527a22d8a6fdc21"].endtime > gettime()) {
         if(self util::is_item_purchased(#"eq_slow_grenade")) {
           self stats::function_dad108fa(#"hash_1a02c128bae3a6a0", 1);
         }
@@ -2417,10 +2418,10 @@ function_82bb78f7(weapon) {
     return;
   }
 
-  self activecamo::function_896ac347(weapon, # "vanguard", 1);
+  self activecamo::function_896ac347(weapon, #"vanguard", 1);
 
   if(isDefined(self.var_aef7ad9) && self.var_aef7ad9 + int(5 * 1000) >= gettime()) {
-    self activecamo::function_896ac347(weapon, # "rapid_vanguard", 1);
+    self activecamo::function_896ac347(weapon, #"rapid_vanguard", 1);
   }
 
   self.var_aef7ad9 = gettime();
@@ -2479,33 +2480,33 @@ killedbaseoffender(objective, weapon, inflictor) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "remote_missile":
-      case # "inventory_planemortar":
-      case # "inventory_straferun":
-      case # "inventory_remote_missile":
-      case # "straferun":
-      case # "planemortar":
+      case #"remote_missile":
+      case #"inventory_planemortar":
+      case #"inventory_straferun":
+      case #"inventory_remote_missile":
+      case #"straferun":
+      case #"planemortar":
         self.challenge_offenderprojectilemultikillcount++;
         break;
-      case # "helicopter_comlink":
-      case # "inventory_helicopter_comlink":
+      case #"helicopter_comlink":
+      case #"inventory_helicopter_comlink":
         self.challenge_offendercomlinkkillcount++;
         break;
-      case # "combat_robot":
-      case # "inventory_combat_robot":
+      case #"combat_robot":
+      case #"inventory_combat_robot":
         self stats::function_dad108fa(#"kill_attacker_with_robot_or_tank", 1);
         break;
-      case # "autoturret":
-      case # "inventory_autoturret":
+      case #"autoturret":
+      case #"inventory_autoturret":
         self.challenge_offendersentryturretkillcount++;
         self stats::function_dad108fa(#"kill_attacker_with_robot_or_tank", 1);
         break;
-      case # "swat_team":
-      case # "inventory_swat_team":
+      case #"swat_team":
+      case #"inventory_swat_team":
         self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
         break;
-      case # "ultimate_turret":
-      case # "inventory_ultimate_turret":
+      case #"ultimate_turret":
+      case #"inventory_ultimate_turret":
         self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
 
         if(isDefined(inflictor)) {
@@ -2584,12 +2585,12 @@ killstreak_30_noscorestreaks() {
 heroabilityactivateneardeath() {
   if(isDefined(self.heroability)) {
     switch (self.heroability.name) {
-      case # "gadget_clone":
-      case # "gadget_vision_pulse":
-      case # "gadget_heat_wave":
-      case # "gadget_armor":
-      case # "gadget_speed_burst":
-      case # "gadget_camo":
+      case #"gadget_clone":
+      case #"gadget_vision_pulse":
+      case #"gadget_heat_wave":
+      case #"gadget_armor":
+      case #"gadget_speed_burst":
+      case #"gadget_camo":
         self thread checkforherosurvival();
         break;
     }
@@ -2597,8 +2598,8 @@ heroabilityactivateneardeath() {
 }
 
 checkforherosurvival() {
-  self endon(#"death", # "disconnect");
-  self waittilltimeout(8, # "challenge_survived_from_death", # "disconnect");
+  self endon(#"death", #"disconnect");
+  self waittilltimeout(8, #"challenge_survived_from_death", #"disconnect");
   self stats::function_dad108fa(#"death_dodger", 1);
 }
 
@@ -2614,24 +2615,24 @@ combat_robot_damage(eattacker, combatrobotowner) {
 
 trackkillstreaksupportkills(victim) {
   if(level.activeplayeruavs[self.entnum] > 0 && (!isDefined(level.forceradar) || level.forceradar == 0)) {
-    self stats::function_e24eec31(getweapon(#"uav"), # "kills_while_active", 1);
+    self stats::function_e24eec31(getweapon(#"uav"), #"kills_while_active", 1);
   }
 
   if(isDefined(level.activeplayersatellites) && level.activeplayersatellites[self.entnum] > 0) {
-    self stats::function_e24eec31(getweapon(#"satellite"), # "kills_while_active", 1);
+    self stats::function_e24eec31(getweapon(#"satellite"), #"kills_while_active", 1);
   }
 
   if(level.activeplayercounteruavs[self.entnum] > 0) {
-    self stats::function_e24eec31(getweapon(#"counteruav"), # "kills_while_active", 1);
+    self stats::function_e24eec31(getweapon(#"counteruav"), #"kills_while_active", 1);
   }
 
   if(isDefined(victim.lastmicrowavedby) && victim.lastmicrowavedby == self) {
-    self stats::function_e24eec31(getweapon(#"microwave_turret"), # "kills_while_active", 1);
+    self stats::function_e24eec31(getweapon(#"microwave_turret"), #"kills_while_active", 1);
   }
 }
 
 monitorreloads() {
-  self endon(#"disconnect", # "killmonitorreloads");
+  self endon(#"disconnect", #"killmonitorreloads");
 
   while(true) {
     self waittill(#"reload");
@@ -2656,7 +2657,7 @@ monitorreloads() {
 
 monitorgrenadefire() {
   self notify(#"grenadetrackingstart");
-  self endon(#"grenadetrackingstart", # "disconnect");
+  self endon(#"grenadetrackingstart", #"disconnect");
 
   for(;;) {
     waitresult = self waittill(#"grenade_fire");
@@ -2679,16 +2680,16 @@ monitorgrenadefire() {
 }
 
 watchweaponchangecomplete() {
-  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
 
   while(true) {
     self.heavyweaponkillsthisactivation = 0;
-    self waittill(#"weapon_change_complete", # "disconnect");
+    self waittill(#"weapon_change_complete", #"disconnect");
   }
 }
 
 longdistancekillmp(weapon, meansofdeath) {
-  self stats::function_e24eec31(weapon, # "longshot_kill", 1);
+  self stats::function_e24eec31(weapon, #"longshot_kill", 1);
 
   if(isDefined(weapon.attachments) && weapon.attachments.size > 1) {
     if(self weaponhasattachmentandunlocked(weapon, "extbarrel", "suppressed")) {

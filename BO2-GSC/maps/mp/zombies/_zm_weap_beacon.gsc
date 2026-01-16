@@ -46,21 +46,18 @@ player_handle_beacon() {
   self endon("starting_beacon_watch");
   attract_dist_diff = level.beacon_attract_dist_diff;
 
-  if(!isDefined(attract_dist_diff)) {
+  if(!isDefined(attract_dist_diff))
     attract_dist_diff = 45;
-  }
 
   num_attractors = level.num_beacon_attractors;
 
-  if(!isDefined(num_attractors)) {
+  if(!isDefined(num_attractors))
     num_attractors = 96;
-  }
 
   max_attract_dist = level.beacon_attract_dist;
 
-  if(!isDefined(max_attract_dist)) {
+  if(!isDefined(max_attract_dist))
     max_attract_dist = 1536;
-  }
 
   while(true) {
     grenade = get_thrown_beacon();
@@ -76,21 +73,17 @@ watch_for_dud(model, actor) {
   self.monk_scream_vox = 1;
   wait 3;
 
-  if(isDefined(model)) {
+  if(isDefined(model))
     model delete();
-  }
 
-  if(isDefined(actor)) {
+  if(isDefined(actor))
     actor delete();
-  }
 
-  if(isDefined(self.damagearea)) {
+  if(isDefined(self.damagearea))
     self.damagearea delete();
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 watch_for_emp(model, actor) {
@@ -109,9 +102,8 @@ watch_for_emp(model, actor) {
 
   self.stun_fx = 1;
 
-  if(isDefined(level._equipment_emp_destroy_fx)) {
-    playFX(level._equipment_emp_destroy_fx, self.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
-  }
+  if(isDefined(level._equipment_emp_destroy_fx))
+    playfx(level._equipment_emp_destroy_fx, self.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
   wait 0.15;
   self.attract_to_origin = 0;
@@ -120,21 +112,17 @@ watch_for_emp(model, actor) {
   self detonate();
   wait 1;
 
-  if(isDefined(model)) {
+  if(isDefined(model))
     model delete();
-  }
 
-  if(isDefined(actor)) {
+  if(isDefined(actor))
     actor delete();
-  }
 
-  if(isDefined(self.damagearea)) {
+  if(isDefined(self.damagearea))
     self.damagearea delete();
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 clone_player_angles(owner) {
@@ -190,9 +178,8 @@ hide_owner(owner) {
   owner setvisibletoallexceptteam(level.zombie_team);
   owner.hide_owner = 1;
 
-  if(isDefined(level._effect["human_disappears"])) {
-    playFX(level._effect["human_disappears"], owner.origin);
-  }
+  if(isDefined(level._effect["human_disappears"]))
+    playfx(level._effect["human_disappears"], owner.origin);
 
   self thread show_owner_on_attack(owner);
   evt = self waittill_any_return("explode", "death", "grenade_dud");
@@ -202,9 +189,8 @@ hide_owner(owner) {
   owner notify("show_owner");
   owner unsetperk("specialty_immunemms");
 
-  if(isDefined(level._effect["human_disappears"])) {
-    playFX(level._effect["human_disappears"], owner.origin);
-  }
+  if(isDefined(level._effect["human_disappears"]))
+    playfx(level._effect["human_disappears"], owner.origin);
 
   owner.no_burning_sfx = undefined;
   owner setvisibletoall();
@@ -235,22 +221,20 @@ proximity_detonate(owner) {
     if(isDefined(ent.team) && ent.team == owner.team) {
       continue;
     }
-    self playSound("wpn_claymore_alert");
+    self playsound("wpn_claymore_alert");
     dist = distance(self.origin, ent.origin);
     radiusdamage(self.origin + vectorscale((0, 0, 1), 12.0), explosionradius, 1, 1, owner, "MOD_GRENADE_SPLASH", "beacon_zm");
 
-    if(isDefined(owner)) {
+    if(isDefined(owner))
       self detonate(owner);
-    } else {
+    else
       self detonate(undefined);
-    }
 
     break;
   }
 
-  if(isDefined(damagearea)) {
+  if(isDefined(damagearea))
     damagearea delete();
-  }
 }
 
 player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff) {
@@ -261,9 +245,8 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
     grenade endon("death");
 
     if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
-      if(isDefined(grenade.damagearea)) {
+      if(isDefined(grenade.damagearea))
         grenade.damagearea delete();
-      }
 
       grenade delete();
       return;
@@ -272,7 +255,7 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
     grenade hide();
     model = spawn("script_model", grenade.origin);
     model endon("weapon_beacon_timeout");
-    model setModel("t6_wpn_zmb_homing_beacon_world");
+    model setmodel("t6_wpn_zmb_homing_beacon_world");
     model useanimtree(#animtree);
     model linkto(grenade);
     model.angles = grenade.angles;
@@ -291,14 +274,13 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
     }
 
     grenade thread watch_for_dud(model, clone);
-    info = spawnStruct();
+    info = spawnstruct();
     info.sound_attractors = [];
     grenade thread monitor_zombie_groans(info);
     grenade waittill("stationary");
 
-    if(isDefined(level.grenade_planted)) {
+    if(isDefined(level.grenade_planted))
       self thread[[level.grenade_planted]](grenade, model);
-    }
 
     if(isDefined(grenade)) {
       if(isDefined(model)) {
@@ -324,9 +306,8 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
       model setclientfield("play_beacon_fx", 1);
       valid_poi = check_point_in_enabled_zone(grenade.origin, undefined, undefined);
 
-      if(isDefined(level.check_valid_poi)) {
+      if(isDefined(level.check_valid_poi))
         valid_poi = grenade[[level.check_valid_poi]](valid_poi);
-      }
 
       if(valid_poi) {
         grenade create_zombie_point_of_interest(max_attract_dist, num_attractors, 10000);
@@ -342,11 +323,10 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
           continue;
         }
 
-        if(flag("three_robot_round") && flag("fire_link_enabled")) {
+        if(flag("three_robot_round") && flag("fire_link_enabled"))
           model thread start_artillery_launch_ee(grenade);
-        } else {
+        else
           model thread start_artillery_launch_normal(grenade);
-        }
 
         level.beacons[level.beacons.size] = grenade;
       } else {
@@ -374,39 +354,34 @@ grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
   direction = ent_model.origin;
   direction = (direction[1], direction[0], 0);
 
-  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0) {
+  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0)
     direction = (direction[0], direction[1] * -1, 0);
-  } else if(direction[0] < 0) {
+  else if(direction[0] < 0)
     direction = (direction[0] * -1, direction[1], 0);
-  }
 
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(isalive(players[i])) {
+    if(isalive(players[i]))
       players[i] playlocalsound(level.zmb_laugh_alias);
-    }
   }
 
-  playFXOnTag(level._effect["grenade_samantha_steal"], ent_model, "tag_origin");
+  playfxontag(level._effect["grenade_samantha_steal"], ent_model, "tag_origin");
   ent_model movez(60, 1.0, 0.25, 0.25);
   ent_model vibrate(direction, 1.5, 2.5, 1.0);
   ent_model waittill("movedone");
 
-  if(isDefined(self.damagearea)) {
+  if(isDefined(self.damagearea))
     self.damagearea delete();
-  }
 
   ent_model delete();
 
-  if(isDefined(ent_actor)) {
+  if(isDefined(ent_actor))
     ent_actor delete();
-  }
 
   if(isDefined(ent_grenade)) {
-    if(isDefined(ent_grenade.damagearea)) {
+    if(isDefined(ent_grenade.damagearea))
       ent_grenade.damagearea delete();
-    }
 
     ent_grenade delete();
   }
@@ -420,13 +395,11 @@ wait_for_attractor_positions_complete() {
 beacon_cleanup(parent) {
   while(true) {
     if(!isDefined(parent)) {
-      if(isDefined(self) && (isDefined(self.dud) && self.dud)) {
+      if(isDefined(self) && (isDefined(self.dud) && self.dud))
         wait 6;
-      }
 
-      if(isDefined(self.simulacrum)) {
+      if(isDefined(self.simulacrum))
         self.simulacrum delete();
-      }
 
       self_delete();
       return;
@@ -447,16 +420,14 @@ do_beacon_sound(model, info) {
   }
 
   if(!self.monk_scream_vox && level.music_override == 0) {
-    if(isDefined(level.beacon_dual_view) && level.beacon_dual_view) {
+    if(isDefined(level.beacon_dual_view) && level.beacon_dual_view)
       self playsoundtoteam("null", "allies");
-    } else {
-      self playSound("null");
-    }
+    else
+      self playsound("null");
   }
 
-  if(!self.monk_scream_vox) {
+  if(!self.monk_scream_vox)
     self thread play_delayed_explode_vox();
-  }
 
   self waittill("robot_artillery_barrage", position);
   level notify("grenade_exploded", position, 100, 5000, 450);
@@ -469,14 +440,12 @@ do_beacon_sound(model, info) {
     }
   }
 
-  if(beacon_index >= 0) {
+  if(beacon_index >= 0)
     arrayremoveindex(level.beacons, beacon_index);
-  }
 
   for(i = 0; i < info.sound_attractors.size; i++) {
-    if(isDefined(info.sound_attractors[i])) {
+    if(isDefined(info.sound_attractors[i]))
       info.sound_attractors[i] notify("beacon_blown_up");
-    }
   }
 
   self delete();
@@ -485,7 +454,8 @@ do_beacon_sound(model, info) {
 play_delayed_explode_vox() {
   wait 6.5;
 
-  if(isDefined(self)) {}
+  if(isDefined(self)) {
+  }
 }
 
 get_thrown_beacon() {
@@ -538,7 +508,7 @@ play_zombie_groans() {
 
   while(true) {
     if(isDefined(self)) {
-      self playSound("zmb_vox_zombie_groan");
+      self playsound("zmb_vox_zombie_groan");
       wait(randomfloatrange(2, 3));
     } else
       return;
@@ -554,9 +524,8 @@ wait_and_explode(grenade) {
   grenade waittill("explode", position);
   self notify("weapon_beacon_timeout");
 
-  if(isDefined(grenade)) {
+  if(isDefined(grenade))
     grenade notify("robot_artillery_barrage", self.origin);
-  }
 }
 
 start_artillery_launch_normal(grenade) {
@@ -639,14 +608,13 @@ artillery_fx_logic(sp_giant_robot, grenade) {
 
 artillery_fx_logic_ee(sp_giant_robot, grenade) {
   sp_giant_robot.weap_beacon_firing = 1;
-  sp_giant_robot playSound("zmb_homingbeacon_missiile_alarm");
+  sp_giant_robot playsound("zmb_homingbeacon_missiile_alarm");
   level setclientfield("play_launch_artillery_fx_robot_" + sp_giant_robot.giant_robot_id, 1);
   self thread homing_beacon_vo();
   wait 0.5;
 
-  if(isDefined(sp_giant_robot)) {
+  if(isDefined(sp_giant_robot))
     level setclientfield("play_launch_artillery_fx_robot_" + sp_giant_robot.giant_robot_id, 0);
-  }
 
   wait 1.0;
   sp_giant_robot.weap_beacon_firing = 0;
@@ -657,17 +625,15 @@ homing_beacon_vo() {
     n_time = gettime();
 
     if(isDefined(self.time_thrown)) {
-      if(n_time < self.time_thrown + 3000) {
+      if(n_time < self.time_thrown + 3000)
         self.owner maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "use_beacon");
-      }
     }
   }
 }
 
 artillery_barrage_logic(grenade, b_ee) {
-  if(!isDefined(b_ee)) {
+  if(!isDefined(b_ee))
     b_ee = 0;
-  }
 
   if(isDefined(b_ee) && b_ee) {
     a_v_land_offsets = self build_weap_beacon_landing_offsets_ee();
@@ -688,7 +654,7 @@ artillery_barrage_logic(grenade, b_ee) {
     self.a_v_start_spots[i] = self.origin + a_v_start_offsets[i];
     self.a_v_land_spots[i] = self.origin + a_v_land_offsets[i];
     v_start_trace = self.a_v_start_spots[i] - vectorscale((0, 0, 1), 5000.0);
-    trace = bulletTrace(v_start_trace, self.a_v_land_spots[i], 0, undefined);
+    trace = bullettrace(v_start_trace, self.a_v_land_spots[i], 0, undefined);
     self.a_v_land_spots[i] = trace["position"];
     wait 0.05;
   }
@@ -843,7 +809,9 @@ weapon_beacon_launch_ragdoll() {
   }
   level.n_weap_beacon_zombie_thrown_count++;
 
-  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
+  if(isDefined(level.ragdoll_limit_check) && ![
+      [level.ragdoll_limit_check]
+    ]()) {
     level thread weap_beacon_gib(self);
     return;
   }
@@ -852,13 +820,11 @@ weapon_beacon_launch_ragdoll() {
   n_x = randomintrange(50, 150);
   n_y = randomintrange(50, 150);
 
-  if(cointoss()) {
+  if(cointoss())
     n_x = n_x * -1;
-  }
 
-  if(cointoss()) {
+  if(cointoss())
     n_y = n_y * -1;
-  }
 
   v_launch = (n_x, n_y, randomintrange(75, 250));
   self launchragdoll(v_launch);
@@ -875,9 +841,8 @@ weap_beacon_rumble() {
 
   foreach(player in a_players) {
     if(isalive(player) && isDefined(player)) {
-      if(distance2dsquared(player.origin, self.origin) < 250000) {
+      if(distance2dsquared(player.origin, self.origin) < 250000)
         player thread execute_weap_beacon_rumble();
-      }
     }
   }
 }

@@ -102,9 +102,8 @@ audio_stereo_line_emitter(var_0, var_1, var_2) {
       var_3 moveto(var_13, 0.01);
 
     if(var_7 == 0) {
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         var_4 playLoopSound(var_2);
-      }
 
       var_3 playLoopSound(var_1);
       var_7 = 1;
@@ -270,30 +269,26 @@ mall_ext_sirens() {
 }
 
 start_sfx_dam_siren_ext(var_0, var_1) {
-  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int)) {
+  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int))
     setup_sfx_dam_siren();
-  }
 
   level.player setclienttriggeraudiozone("flood_streets_alarmoff", 0.1);
   level.player clearclienttriggeraudiozone(5);
 }
 
 stop_sfx_dam_siren_ext() {
-  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int)) {
+  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int))
     setup_sfx_dam_siren();
-  }
 }
 
 start_sfx_dam_siren_int() {
-  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int)) {
+  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int))
     setup_sfx_dam_siren();
-  }
 }
 
 stop_sfx_dam_siren_int() {
-  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int)) {
+  if(!isDefined(level.sirenorg_ext_l) || !isDefined(level.sirenorg_ext_r) || !isDefined(level.sirenorg_ext_s) || !isDefined(level.sirenorg_int))
     setup_sfx_dam_siren();
-  }
 }
 
 kill_sfx_dam_sirens() {
@@ -536,9 +531,8 @@ swept_away_scene(var_0) {
     wait 0.1;
     level.scene1emitter delete();
 
-    if(isDefined(level.prescene)) {
+    if(isDefined(level.prescene))
       level.prescene delete();
-    }
   }
 
   if(var_0 == "end") {
@@ -694,9 +688,8 @@ sfx_play_chopper_5(var_0) {
   level.destruc_chopper playSound("emt_flood_roof_heli_05");
   level waittill("swept_away");
 
-  if(isDefined(level.destruc_chopper)) {
+  if(isDefined(level.destruc_chopper))
     level.destruc_chopper stopsounds();
-  }
 }
 
 sfx_kill_chopper_sound() {
@@ -1023,33 +1016,26 @@ flood_convoy_attackheli02_sfx() {
 }
 
 flood_convoy_sfx(var_0) {
-  if(var_0 == 0) {
+  if(var_0 == 0)
     self playSound("scn_flood_convoypass_ss_01");
-  }
 
-  if(var_0 == 1) {
+  if(var_0 == 1)
     self playSound("scn_flood_convoypass_ss_02");
-  }
 
-  if(var_0 == 2) {
+  if(var_0 == 2)
     self playSound("scn_flood_convoypass_ss_03");
-  }
 
-  if(var_0 == 3) {
+  if(var_0 == 3)
     self playSound("scn_flood_convoypass_ss_04");
-  }
 
-  if(var_0 == 4) {
+  if(var_0 == 4)
     self playSound("scn_flood_convoypass_ss_05");
-  }
 
-  if(var_0 == 5) {
+  if(var_0 == 5)
     self playSound("scn_flood_convoypass_ss_06");
-  }
 
-  if(var_0 == 6) {
+  if(var_0 == 6)
     self playSound("scn_flood_convoypass_ss_07");
-  }
 }
 
 flood_convoy_exp_sfx() {
@@ -1153,9 +1139,8 @@ play_helicopter_leaving_sound() {
   level.ending_heli playSound("scn_flood_exfil_helicopter_intro");
   wait 2.0;
 
-  if(isDefined(level.rooftops_final_heli_idle_lp)) {
+  if(isDefined(level.rooftops_final_heli_idle_lp))
     level.rooftops_final_heli_idle_lp stoploopsound();
-  }
 }
 
 sfx_play_outofwater_sound() {
@@ -1240,9 +1225,8 @@ sfx_deathsdoor_end_underwater() {
     waittillframeend;
 
     if(!isDefined(level._audio.in_deathsdoor)) {
-      if(isDefined(level.swept_away) && level.swept_away == 0) {
+      if(isDefined(level.swept_away) && level.swept_away == 0)
         level.player setclienttriggeraudiozone("flood_underwater", 0);
-      }
 
       return;
     }

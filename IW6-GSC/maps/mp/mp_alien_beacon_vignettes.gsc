@@ -29,15 +29,13 @@ vignette_precache() {
 }
 
 hide_wall_pieces() {
-  while(!isDefined(level.drill)) {
+  while(!isDefined(level.drill))
     wait 0.05;
-  }
 
   level.wall_array_damaged = getEntArray("mini_boss_wall_damaged", "targetname");
 
-  foreach(var_1 in level.wall_array_damaged) {
-    var_1 hide();
-  }
+  foreach(var_1 in level.wall_array_damaged)
+  var_1 hide();
 
   var_3 = getent("miniboss_door_clip", "targetname");
   var_3 connectpaths();
@@ -53,15 +51,13 @@ hide_wall_pieces() {
   thread first_door_vo();
   var_7 = getEntArray("cross_wall_swap_in", "targetname");
 
-  foreach(var_9 in var_7) {
-    var_9 hide();
-  }
+  foreach(var_9 in var_7)
+  var_9 hide();
 }
 
 mini_boss() {
-  while(!isDefined(level.drill)) {
+  while(!isDefined(level.drill))
     wait 0.05;
-  }
 
   thread door_notify_check();
 
@@ -240,9 +236,8 @@ miniboss_wall_swap() {
     var_3 delete();
   }
 
-  foreach(var_3 in level.wall_array_damaged) {
-    var_3 show();
-  }
+  foreach(var_3 in level.wall_array_damaged)
+  var_3 show();
 
   foreach(var_3 in var_1) {
     var_8 = var_3.script_parameters;
@@ -267,22 +262,20 @@ miniboss_wall_knockback(var_0) {
   var_4 = (-1590, 528, -136);
 
   foreach(var_6 in level.players) {
-    if(distance2dsquared(var_6.origin, var_3) < var_2) {
+    if(distance2dsquared(var_6.origin, var_3) < var_2)
       var_7 = var_3;
-    } else if(distance2dsquared(var_6.origin, var_4) < var_2) {
+    else if(distance2dsquared(var_6.origin, var_4) < var_2)
       var_7 = var_4;
-    } else {
+    else
       continue;
-    }
 
     var_8 = var_6 getvelocity();
     var_9 = vectornormalize((var_6.origin - var_7) * (1, 1, 0)) * var_0;
     var_10 = (var_8 + var_9) * (1, 1, 0);
     var_11 = length(var_10);
 
-    if(var_11 >= var_1) {
+    if(var_11 >= var_1)
       var_10 = vectornormalize(var_10) * var_1;
-    }
 
     var_6 setvelocity(var_10);
   }
@@ -326,9 +319,8 @@ smashnotetrackhandler(var_0, var_1, var_2, var_3) {
       earthquake(0.4, 0.4, var_4, 1024);
 
       foreach(var_7 in level.players) {
-        if(!isDefined(self.laststand)) {
+        if(!isDefined(self.laststand))
           var_7 shellshock("alien_spitter_gas_cloud", 1);
-        }
       }
 
       playrumbleonposition("artillery_rumble", var_4);
@@ -354,9 +346,8 @@ smashnotetrackhandler(var_0, var_1, var_2, var_3) {
       earthquake(0.4, 0.4, var_4, 1024);
 
       foreach(var_7 in level.players) {
-        if(!isDefined(self.laststand)) {
+        if(!isDefined(self.laststand))
           var_7 shellshock("alien_spitter_gas_cloud", 1);
-        }
       }
 
       playrumbleonposition("artillery_rumble", var_4);
@@ -496,35 +487,30 @@ play_tentacle_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing")) {
+    if(!common_scripts\utility::flag("exfil_music_playing"))
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc2_tentacle");
-    }
   }
 }
 
 outlineprep() {
-  foreach(var_1 in level.players) {
-    var_1 thread miniboss_ountline_logic(self);
-  }
+  foreach(var_1 in level.players)
+  var_1 thread miniboss_ountline_logic(self);
 }
 
 miniboss_ountline_logic(var_0) {
   self endon("disconnect");
 
   while(!isDefined(level.miniboss_beaten)) {
-    while(!isDefined(self.isferal)) {
+    while(!isDefined(self.isferal))
       wait 0.1;
-    }
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       maps\mp\alien\_outline_proto::enable_outline_for_player(var_0, self, 4, 1, "high");
-    }
 
     self waittill("unset_adrenaline");
 
-    if(isDefined(var_0)) {
+    if(isDefined(var_0))
       maps\mp\alien\_outline_proto::disable_outline_for_player(var_0, self);
-    }
 
     wait 0.05;
   }
@@ -553,9 +539,8 @@ radial_damage(var_0) {
 }
 
 spawn_alien_from_miniboss(var_0) {
-  if(!isDefined(self.last_spawned)) {
+  if(!isDefined(self.last_spawned))
     self.last_spawned = "wave minion";
-  }
 
   if(isDefined(var_0)) {
     var_1 = [];
@@ -611,9 +596,8 @@ listen_and_lift_doors() {
         level thread lift_door_by_index(var_2);
         var_2++;
 
-        if(var_2 >= 3) {
+        if(var_2 >= 3)
           var_1 = 1;
-        }
       }
     }
 
@@ -642,9 +626,8 @@ lift_door_by_index(var_0) {
   }
 
   if(isDefined(var_1)) {
-    foreach(var_4, var_3 in var_1) {
-      var_3 thread lift_door();
-    }
+    foreach(var_4, var_3 in var_1)
+    var_3 thread lift_door();
   }
 }
 
@@ -672,15 +655,13 @@ setup_gas_encounter() {
   triggerfx(var_1);
   level thread players_use_gas_monitor(var_0);
 
-  while(!are_all_players_using_gas()) {
+  while(!are_all_players_using_gas())
     wait 0.05;
-  }
 
   level notify("all_players_using_gas");
 
-  foreach(var_3 in level.players) {
-    var_3 forceusehintoff(&"MP_ALIEN_BEACON_GAS_HINT");
-  }
+  foreach(var_3 in level.players)
+  var_3 forceusehintoff(&"MP_ALIEN_BEACON_GAS_HINT");
 
   thread gas_encounter_start_sfx();
   thread play_gas_chamber_fx();
@@ -694,9 +675,8 @@ players_use_gas_monitor(var_0) {
   level endon("game_ended");
   level endon("all_players_using_gas");
 
-  foreach(var_2 in level.players) {
-    var_2 thread watch_for_use_gas_trigger(var_0);
-  }
+  foreach(var_2 in level.players)
+  var_2 thread watch_for_use_gas_trigger(var_0);
 
   for(;;) {
     level waittill("connected", var_2);
@@ -708,9 +688,8 @@ are_all_players_using_gas() {
   var_0 = 1;
 
   foreach(var_2 in level.players) {
-    if(!isDefined(var_2.player_using_gas) || !var_2.player_using_gas) {
+    if(!isDefined(var_2.player_using_gas) || !var_2.player_using_gas)
       var_0 = 0;
-    }
   }
 
   return var_0;
@@ -723,13 +702,13 @@ watch_for_use_gas_trigger(var_0) {
   self notify("watch_for_use_gas");
   self endon("watch_for_use_gas");
   self.player_using_gas = 0;
-  var_1 = &"MP_ALIEN_BEACON_GAS_HINT";
+  var_1 = & "MP_ALIEN_BEACON_GAS_HINT";
   var_2 = 24336;
 
   for(;;) {
-    if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone") {
+    if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone")
       self forceusehintoff(var_1);
-    } else if(player_looking_at(var_0.origin, 0.6)) {
+    else if(player_looking_at(var_0.origin, 0.6)) {
       if(distancesquared(self getEye(), var_0.origin) < var_2) {
         self forceusehinton(var_1);
 
@@ -758,9 +737,8 @@ reset_gas_usage() {
 }
 
 player_looking_at(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0.8;
-  }
 
   var_2 = self getEye();
   var_3 = vectortoangles(var_0 - var_2);
@@ -769,9 +747,8 @@ player_looking_at(var_0, var_1) {
   var_6 = anglesToForward(var_5);
   var_7 = vectordot(var_4, var_6);
 
-  if(var_7 < var_1) {
+  if(var_7 < var_1)
     return 0;
-  }
 
   var_8 = bulletTrace(var_0, var_2, 0);
   return var_8["fraction"] == 1;
@@ -785,9 +762,8 @@ gas_exploit_fix() {
   var_1 = getent("deck_to_lab_door_linker", "targetname");
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && isDefined(var_1)) {
+    if(isDefined(var_3) && isDefined(var_1))
       var_3 linkto(var_1);
-    }
   }
 
   var_1 movez(-92, 1.5, 0.1, 0.4);
@@ -857,9 +833,8 @@ lab_gas_survival_encounter() {
     var_5 freeentitysentient();
   }
 
-  foreach(var_5 in level.gas_ents) {
-    var_5 delete();
-  }
+  foreach(var_5 in level.gas_ents)
+  var_5 delete();
 
   foreach(var_5 in level.gas_zones) {
     var_5 notify("gas_done");
@@ -875,9 +850,8 @@ lab_gas_survival_encounter() {
   var_11 = getEntArray("lab_area_main", "targetname");
   level.encounter_name = undefined;
 
-  foreach(var_13 in var_11) {
-    var_13 delete();
-  }
+  foreach(var_13 in var_11)
+  var_13 delete();
 }
 
 remove_back_wall(var_0) {
@@ -891,9 +865,8 @@ remove_back_wall(var_0) {
 
   var_5 = getEntArray("cross_wall_swap_in", "targetname");
 
-  foreach(var_3 in var_5) {
-    var_3 show();
-  }
+  foreach(var_3 in var_5)
+  var_3 show();
 }
 
 open_doors_to_map_room() {
@@ -923,9 +896,8 @@ cross_gas_anims() {
   var_1 delete();
   var_2 = getEntArray("cross_chair_piece", "targetname");
 
-  foreach(var_4 in var_2) {
-    var_4 delete();
-  }
+  foreach(var_4 in var_2)
+  var_4 delete();
 }
 
 gas_attak_point_logic() {
@@ -950,11 +922,10 @@ prevent_friendly_fire() {
       continue;
     }
 
-    if(self.origin[2] > 1350) {
+    if(self.origin[2] > 1350)
       level notify("dlc_vo_notify", "warn_pipes", "warn_pipes_upper");
-    } else {
+    else
       level notify("dlc_vo_notify", "warn_pipes", "warn_pipes_lower");
-    }
 
     self.progresshealth = self.progresshealth - var_0;
     playsoundatpos(self.origin, "scn_beacon_cross_gas_pipehit");
@@ -974,11 +945,11 @@ gas_point_health_monitor() {
       var_1 = 0;
       self.start_health = self.progresshealth;
 
-      if(self.progresshealth > var_0 * 0.75) {} else if(self.progresshealth > var_0 * 0.5) {
+      if(self.progresshealth > var_0 * 0.75) {} else if(self.progresshealth > var_0 * 0.5)
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 5, 1, "high");
-      } else if(self.progresshealth > var_0 * 0.25) {
+      else if(self.progresshealth > var_0 * 0.25)
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 4, 1, "high");
-      } else {
+      else {
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 1, 1, "high");
 
         if(self.alarmed == 0) {
@@ -1130,17 +1101,14 @@ timer(var_0) {
     wait(var_1);
     var_2 = var_2 + 1;
 
-    if(var_2 == 33) {
+    if(var_2 == 33)
       thread buildup_tentacle_sounds_and_shakes(0.15, 1);
-    }
 
-    if(var_2 == 66) {
+    if(var_2 == 66)
       thread buildup_tentacle_sounds_and_shakes2(0.2, 1.5);
-    }
 
-    if(var_2 == 92) {
+    if(var_2 == 92)
       thread play_cross_gas_music();
-    }
 
     if(var_2 == 97) {
       thread gas_finale_sfx_and_shakes();
@@ -1171,9 +1139,8 @@ gas_intro_sounds_and_shakes(var_0, var_1) {
   var_3 = spawn("script_origin", var_2);
   earthquake(var_0, var_1, var_2, 1800);
 
-  foreach(var_5 in level.players) {
-    playrumbleonposition("grenade_rumble", var_5.origin);
-  }
+  foreach(var_5 in level.players)
+  playrumbleonposition("grenade_rumble", var_5.origin);
 
   play_sound_on_player("scn_beacon_cross_gas_quake");
   wait(var_1);
@@ -1186,9 +1153,8 @@ buildup_tentacle_sounds_and_shakes(var_0, var_1) {
   earthquake(var_0, var_1, var_2, 1800);
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit1");
 
-  foreach(var_5 in level.players) {
-    playrumbleonposition("grenade_rumble", var_5.origin);
-  }
+  foreach(var_5 in level.players)
+  playrumbleonposition("grenade_rumble", var_5.origin);
 
   wait(var_1);
   var_3 delete();
@@ -1200,9 +1166,8 @@ buildup_tentacle_sounds_and_shakes2(var_0, var_1) {
   earthquake(var_0, var_1, var_2, 1800);
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit2");
 
-  foreach(var_5 in level.players) {
-    playrumbleonposition("grenade_rumble", var_5.origin);
-  }
+  foreach(var_5 in level.players)
+  playrumbleonposition("grenade_rumble", var_5.origin);
 
   wait(var_1);
   var_3 delete();
@@ -1216,18 +1181,16 @@ gas_finale_sfx_and_shakes() {
   earthquake(0.45, 1.5, var_0, 1800);
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit3");
 
-  foreach(var_3 in level.players) {
-    playrumbleonposition("artillery_rumble", var_3.origin);
-  }
+  foreach(var_3 in level.players)
+  playrumbleonposition("artillery_rumble", var_3.origin);
 
   wait 2.5;
   earthquake(0.85, 2.5, var_0, 1800);
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit4");
   thread create_smashedwall2_storm_sfx();
 
-  foreach(var_3 in level.players) {
-    playrumbleonposition("artillery_rumble", var_3.origin);
-  }
+  foreach(var_3 in level.players)
+  playrumbleonposition("artillery_rumble", var_3.origin);
 
   wait 2.5;
   var_1 delete();
@@ -1247,9 +1210,8 @@ play_cross_gas_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing")) {
+    if(!common_scripts\utility::flag("exfil_music_playing"))
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc2_cross");
-    }
   }
 }
 
@@ -1447,9 +1409,8 @@ check_door_name(var_0) {
   var_1 = ["door_hive_4", "door_hive_6", "cargo_area_main"];
 
   foreach(var_3 in var_1) {
-    if(var_3 == var_0) {
+    if(var_3 == var_0)
       return 0;
-    }
   }
 
   return 1;
@@ -1488,9 +1449,8 @@ cargo_room_use_ugv_vo() {
   var_0 waittill("trigger");
   level notify("stop_post_hive_vo");
 
-  while(common_scripts\utility::flag("delay_UGV_VO")) {
+  while(common_scripts\utility::flag("delay_UGV_VO"))
     wait 0.1;
-  }
 
   delay_vo_until_all_clear();
   wait 2;
@@ -1600,9 +1560,8 @@ gas_event_nag() {
 
   wait 15;
 
-  if(!isDefined(level.gas_event_active)) {
+  if(!isDefined(level.gas_event_active))
     level notify("dlc_vo_notify", "start_containment");
-  }
 }
 
 post_gas_event_vo() {
@@ -1681,27 +1640,22 @@ clean_up(var_0, var_1) {
   level notify(var_0);
   wait 0.05;
 
-  foreach(var_3 in var_1) {
-    var_3 delete();
-  }
+  foreach(var_3 in var_1)
+  var_3 delete();
 }
 
 play_vignette_vo(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "high";
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 30;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 0.25;
-  }
 
   foreach(var_6 in level.players) {
     var_6 maps\mp\alien\_music_and_dialog::play_vo_on_player(var_0, var_1, var_2, var_3, var_4);
@@ -1735,9 +1689,8 @@ watch_trigger_by_player() {
 }
 
 delay_vo_until_all_clear(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 30;
-  }
 
   var_1 = gettime() - var_0 * 1000;
   var_2 = gettime();
@@ -1792,9 +1745,9 @@ nag_bink_toggle() {
   level.no_more_binks_archer = undefined;
 
   while(!common_scripts\utility::flag("everyone_in_cargo_container")) {
-    if(common_scripts\utility::flag("is_crane_nags") || isDefined(level.no_more_binks_archer)) {
+    if(common_scripts\utility::flag("is_crane_nags") || isDefined(level.no_more_binks_archer))
       var_0 makeunusable();
-    } else {
+    else {
       var_0 makeusable();
       var_0 sethintstring(&"MP_ALIEN_BEACON_BINK_BUTTON");
     }
@@ -1808,9 +1761,8 @@ nag_bink_toggle() {
 init_cinematics(var_0, var_1) {
   level endon("crane_started");
 
-  if(!is_ps3_online_splitscreen()) {
+  if(!is_ps3_online_splitscreen())
     level thread watch_cinematic_use(var_0, "cinematic_preload", "cinematic_start", "cinematic_end");
-  }
 
   level notify("cinematic_preload");
   wait 1;
@@ -1824,15 +1776,13 @@ init_cinematics(var_0, var_1) {
     var_2 makeunusable();
   }
 
-  if(is_ps3_online_splitscreen()) {
+  if(is_ps3_online_splitscreen())
     level thread no_bink_nag();
-  }
 
   level notify("cinematic_start");
 
-  if(var_0 == "mp_beacon_archer_vig_nag_02") {
+  if(var_0 == "mp_beacon_archer_vig_nag_02")
     level.no_more_binks_archer = 1;
-  }
 
   common_scripts\utility::flag_set("is_crane_nags");
   common_scripts\utility::flag_set("no_ass_nag");
@@ -1845,16 +1795,14 @@ is_ps3_online_splitscreen() {
   var_0 = 0;
 
   foreach(var_2 in level.players) {
-    if(var_2 issplitscreenplayer()) {
+    if(var_2 issplitscreenplayer())
       var_0 = 1;
-    }
   }
 
-  if(var_0 && level.ps3 && level.onlinegame) {
+  if(var_0 && level.ps3 && level.onlinegame)
     return 1;
-  } else {
+  else
     return 0;
-  }
 }
 
 no_bink_nag() {

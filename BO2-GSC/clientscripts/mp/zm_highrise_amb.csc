@@ -141,11 +141,10 @@ snd_play_loopers() {
 }
 
 whoswhoaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1) {
+  if(newval == 1)
     activatewwaudio();
-  } else {
+  else
     deactivatewwaudio();
-  }
 }
 
 whoswhofilter(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -159,12 +158,11 @@ whoswhofilter(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 }
 
 activatewwaudio() {
-  if(!isDefined(level.sndwwent)) {
+  if(!isDefined(level.sndwwent))
     level.sndwwent = spawn(0, (0, 0, 0), "script_origin");
-  }
 
-  playSound(0, "evt_ww_activate", (0, 0, 0));
-  level.sndwwent playLoopSound("evt_ww_looper", 3);
+  playsound(0, "evt_ww_activate", (0, 0, 0));
+  level.sndwwent playloopsound("evt_ww_looper", 3);
   snd_set_snapshot("zmb_duck_ww");
 }
 
@@ -174,6 +172,6 @@ deactivatewwaudio() {
     level.sndwwent = undefined;
   }
 
-  playSound(0, "evt_ww_deactivate", (0, 0, 0));
+  playsound(0, "evt_ww_deactivate", (0, 0, 0));
   snd_set_snapshot("default");
 }

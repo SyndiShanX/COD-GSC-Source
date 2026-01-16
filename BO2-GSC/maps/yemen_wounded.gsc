@@ -18,29 +18,23 @@ autoexec _init_wounded_anims() {
   level._wounded_animnames = array("dead_male", "wounded_male", "dead_female");
   level._wounded_anims = [];
 
-  foreach(animation in level.scr_anim["dead_male"]["floor"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["dead_male"]["floor"])
+  level._wounded_anims[string(animation)] = animation;
 
-  foreach(animation in level.scr_anim["dead_male"]["misc"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["dead_male"]["misc"])
+  level._wounded_anims[string(animation)] = animation;
 
-  foreach(animation in level.scr_anim["wounded_male"]["floor"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["wounded_male"]["floor"])
+  level._wounded_anims[string(animation)] = animation;
 
-  foreach(animation in level.scr_anim["wounded_male"]["misc"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["wounded_male"]["misc"])
+  level._wounded_anims[string(animation)] = animation;
 
-  foreach(animation in level.scr_anim["dead_female"]["floor"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["dead_female"]["floor"])
+  level._wounded_anims[string(animation)] = animation;
 
-  foreach(animation in level.scr_anim["dead_female"]["misc"]) {
-    level._wounded_anims[string(animation)] = animation;
-  }
+  foreach(animation in level.scr_anim["dead_female"]["misc"])
+  level._wounded_anims[string(animation)] = animation;
 }
 
 autoexec _init_wounded() {
@@ -64,17 +58,16 @@ _process_structs(a_structs) {
 
   foreach(struct in a_structs) {
     if(isDefined(struct.script_animation)) {
-      if(isDefined(level._wounded_anims[struct.script_animation])) {
+      if(isDefined(level._wounded_anims[struct.script_animation]))
         struct.animation = level._wounded_anims[struct.script_animation];
-      } else {
+      else {
         a_toks = strtok(struct.script_animation, ", ");
 
         if(isinarray(level._wounded_animnames, a_toks[0])) {
           struct.animation = getanim_from_animname(a_toks[1], a_toks[0]);
 
-          if(isarray(struct.animation)) {
+          if(isarray(struct.animation))
             struct.animation = random(struct.animation);
-          }
         } else
           continue;
       }
@@ -108,37 +101,33 @@ _spawn_wounded_trigger_spawn(a_structs, b_sight_trace) {
 }
 
 spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targetname, do_phys_trace) {
-  if(!isDefined(v_ang)) {
+  if(!isDefined(v_ang))
     v_ang = (0, 0, 0);
-  }
 
-  if(!isDefined(do_phys_trace)) {
+  if(!isDefined(do_phys_trace))
     do_phys_trace = 1;
-  }
 
-  if(isDefined(str_anim_override)) {
+  if(isDefined(str_anim_override))
     animation = level._wounded_anims[str_anim_override];
-  } else {
+  else {
     animation = getanim_from_animname(str_scene, str_animname);
 
-    if(isarray(animation)) {
+    if(isarray(animation))
       animation = random(animation);
-    }
   }
 
   b_alive = 0;
 
-  if(issubstr(string(animation), "wounded")) {
+  if(issubstr(string(animation), "wounded"))
     b_alive = 1;
-  }
 
   e_wounded = self spawn_drone(1, str_targetname, 0, b_alive);
 
-  if(b_alive) {
+  if(b_alive)
     e_wounded.takedamage = 1;
-  } else {
+  else {
     e_wounded.takedamage = 0;
-    e_wounded setlookattext("", &"");
+    e_wounded setlookattext("", & "");
     e_wounded notify("no_friendly_fire");
   }
 
@@ -155,24 +144,21 @@ spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targ
 }
 
 spawn_wounded_at_struct(b_sight_trace) {
-  if(!isDefined(b_sight_trace)) {
+  if(!isDefined(b_sight_trace))
     b_sight_trace = 0;
-  }
 
   e_wounded = self.e_spawner spawn_wounded(self.origin, self.angles, self.str_animname, self.str_scene, self.animation, self.str_targetname, !(isDefined(self.b_trace_done) && self.b_trace_done));
 
-  if(isDefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy))
     e_wounded.script_noteworthy = self.script_noteworthy;
-  }
 
   if(b_sight_trace) {
     e_wounded hide();
 
-    if(e_wounded sightconetrace(level.player getEye(), level.player) < 0.05) {
+    if(e_wounded sightconetrace(level.player geteye(), level.player) < 0.05)
       e_wounded show();
-    } else {
+    else
       e_wounded delete();
-    }
   }
 }
 
@@ -185,9 +171,8 @@ _wounded_auto_delete_thread() {
   level notify("_wounded_auto_delete_thread");
   level endon("_wounded_auto_delete_thread");
 
-  if(!isDefined(level.n_max_wounded)) {
+  if(!isDefined(level.n_max_wounded))
     level.n_max_wounded = 10;
-  }
 
   while(true) {
     wait 0.05;
@@ -195,8 +180,8 @@ _wounded_auto_delete_thread() {
 
     if(n_kill > 0) {
       n_now = gettime();
-      v_eye = level.player getEye();
-      v_player_forward = anglesToForward(level.player getplayerangles());
+      v_eye = level.player geteye();
+      v_player_forward = anglestoforward(level.player getplayerangles());
       i = 0;
 
       while(n_kill > 0 && i < level.a_wounded.size) {

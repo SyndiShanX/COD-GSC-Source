@@ -9,11 +9,11 @@
 #namespace client_flag;
 
 function autoexec __init__sytem__() {
-  system::register("client_flag", &__init__, undefined, undefined);
+  system::register("client_flag", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "ctf_flag_away", 1, 1, "int", &setctfaway, 0, 0);
+  clientfield::register("scriptmover", "ctf_flag_away", 1, 1, "int", & setctfaway, 0, 0);
 }
 
 function setctfaway(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

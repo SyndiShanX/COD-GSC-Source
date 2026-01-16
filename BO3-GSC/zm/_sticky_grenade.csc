@@ -25,11 +25,11 @@ function fx_think(localclientnum) {
   self endon("light_disable");
   self util::waittill_dobj(localclientnum);
   interval = 0.3;
-  for(;;) {
+  for (;;) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playSound(localclientnum, "wpn_semtex_alert");
+    self playsound(localclientnum, "wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
     interval = math::clamp(interval / 1.2, 0.08, 0.3);
   }
@@ -37,11 +37,11 @@ function fx_think(localclientnum) {
 
 function start_light_fx(localclientnum) {
   player = getlocalplayer(localclientnum);
-  self.fx = playFXOnTag(localclientnum, level._effect["grenade_light"], self, "tag_fx");
+  self.fx = playfxontag(localclientnum, level._effect["grenade_light"], self, "tag_fx");
 }
 
 function stop_light_fx(localclientnum) {
-  if(isDefined(self.fx) && self.fx != 0) {
+  if(isdefined(self.fx) && self.fx != 0) {
     stopfx(localclientnum, self.fx);
     self.fx = undefined;
   }
@@ -49,7 +49,7 @@ function stop_light_fx(localclientnum) {
 
 function fullscreen_fx(localclientnum) {
   player = getlocalplayer(localclientnum);
-  if(isDefined(player)) {
+  if(isdefined(player)) {
     if(player getinkillcam(localclientnum)) {
       return;
     }
@@ -61,7 +61,7 @@ function fullscreen_fx(localclientnum) {
     return;
   }
   parent = self getparententity();
-  if(isDefined(parent) && parent == player) {
+  if(isdefined(parent) && parent == player) {
     parent playrumbleonentity(localclientnum, "buzz_high");
   }
 }

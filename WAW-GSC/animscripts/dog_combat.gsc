@@ -15,21 +15,20 @@ main() {
     combatIdle();
     return;
   }
-  if(IsPlayer(self.enemy)) {
+  if(IsPlayer(self.enemy))
     self meleeBiteAttackPlayer(self.enemy);
-  } else {
+  else
     self meleeStruggleVsAI();
-  }
 }
 
 killplayer(player) {
   self endon("pvd_melee_interrupted");
   player.specialDeath = true;
-  player setCanDamage(true);
+  player setcandamage(true);
   player.player_view hide();
   if(isDefined(player.player_view)) {
     tagPos = player.player_view gettagorigin("tag_torso");
-    playFX(level._effect["dog_bite_blood"], tagPos + (0, 0, 20), anglesToForward(player.angles), anglestoup(player.angles));
+    playfx(level._effect["dog_bite_blood"], tagPos + (0, 0, 20), anglestoforward(player.angles), anglestoup(player.angles));
   }
   wait 1;
   player enableHealthShield(false);
@@ -80,7 +79,7 @@ dog_deathquote(player) {
 attackMiss() {
   self clearanim( % root, 0.1);
   if(isDefined(self.enemy)) {
-    forward = anglesToForward(self.angles);
+    forward = anglestoforward(self.angles);
     dirToEnemy = self.enemy.origin - (self.origin + vectorscale(forward, 50));
     if(vectordot(dirToEnemy, forward) > 0) {
       self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss, 1, 0, 1);
@@ -88,11 +87,10 @@ attackMiss() {
     } else {
       self.skipStartMove = true;
       self thread attackMissTrackTargetThread();
-      if((dirToEnemy[0] * forward[1] - dirToEnemy[1] * forward[0]) > 0) {
+      if((dirToEnemy[0] * forward[1] - dirToEnemy[1] * forward[0]) > 0)
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnR, 1, 0, 1);
-      } else {
+      else
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnL, 1, 0, 1);
-      }
     }
   } else {
     self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss, 1, 0, 1);
@@ -112,9 +110,8 @@ handleMeleeBiteAttackNoteTracks(note) {
     case "dog_melee": {
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt)) {
-        if(isplayer(hitEnt)) {
+        if(isplayer(hitEnt))
           hitEnt shellshock("dog_bite", 1);
-        }
       } else {
         attackMiss();
         return true;
@@ -129,9 +126,8 @@ handleMeleeBiteAttackNoteTracks(note) {
 
 addSafetyHealth(player) {
   healthFrac = player getnormalhealth();
-  if(healthFrac == 0) {
+  if(healthFrac == 0)
     return false;
-  }
   if(healthFrac < 0.25) {
     player setnormalhealth(healthFrac + 0.25);
     return true;
@@ -141,11 +137,10 @@ addSafetyHealth(player) {
 
 removeSafetyHealth(player) {
   healthFrac = player getnormalhealth();
-  if(healthFrac > 0.25) {
+  if(healthFrac > 0.25)
     player setnormalhealth(healthFrac - 0.25);
-  } else {
+  else
     player setnormalhealth(0.01);
-  }
 }
 
 handleMeleeFinishAttackNoteTracks(note, player) {
@@ -154,26 +149,22 @@ handleMeleeFinishAttackNoteTracks(note, player) {
       healthAdded = addSafetyHealth(player);
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt) && isalive(player)) {
-        if(healthAdded) {
+        if(healthAdded)
           removeSafetyHealth(player);
-        }
         if(hitEnt == player) {
           if(isgodmode(player)) {
             println("Player in god mode, aborting dog attack");
             break;
           }
-          if(!isDefined(player.player_view)) {
-            player.player_view = PlayerView_spawn();
-          }
-          if(player.player_view PlayerView_StartSequence(self, player)) {
-            self setCanDamage(false);
-          }
+          if(!isDefined(player.player_view))
+            player.player_view = PlayerView_Spawn();
+          if(player.player_view PlayerView_StartSequence(self, player))
+            self setcandamage(false);
           break;
         }
       } else {
-        if(healthAdded) {
+        if(healthAdded)
           removeSafetyHealth(player);
-        }
         attackMiss();
         return true;
       }
@@ -195,9 +186,8 @@ handleMeleeFinishAttackNoteTracks(note, player) {
     case "dog_lunge":
       self setflaggedanim("meleeanim", % german_shepherd_attack_player, 1, 0.2, 1);
       self setflaggedanim("meleeanim", % german_shepherd_attack_player, 1, 0.2, 1);
-      if(!isDefined(player.player_view)) {
-        player.player_view = PlayerView_spawn();
-      }
+      if(!isDefined(player.player_view))
+        player.player_view = PlayerView_Spawn();
       player.player_view setflaggedanim("viewanim", get_player_view_dog_knock_down_anim(), 1, 0.2, 1);
       player.player_view setflaggedanim("viewanim", get_player_view_dog_knock_down_late_anim(), 1, 0.2, 1);
       break;
@@ -233,7 +223,7 @@ set_melee_timer(player) {
 meleeBiteAttackPlayer(player) {
   attackRangeBuffer = 30;
   meleeRange = self.meleeAttackDist + attackRangeBuffer;
-  for(;;) {
+  for (;;) {
     if(!isalive(self.enemy)) {
       break;
     }
@@ -257,9 +247,8 @@ meleeBiteAttackPlayer(player) {
     self clearanim( % root, 0.1);
     self clearpitchorient();
 
-    if(getdebugdvar("debug_dog_sound") != "") {
+    if(getdebugdvar("debug_dog_sound") != "")
       iprintln("dog " + (self getentnum()) + " attack player " + getTime());
-    }
     player setNextDogAttackAllowTime(500);
     if(dog_cant_kill_in_one_hit(player)) {
       level.lastDogMeleePlayerTime = getTime();
@@ -276,7 +265,7 @@ meleeBiteAttackPlayer(player) {
       self setanimlimited( % attack_player_late, 0.01, 0, 1);
       self animscripts\shared::DoNoteTracks("meleeanim", ::Handlemeleefinishattacknotetracks, undefined, player);
       self notify("dog_no_longer_melee_able");
-      self setCanDamage(true);
+      self setcandamage(true);
       self unlink();
     }
     self.safeToChangeScript = true;
@@ -298,9 +287,8 @@ dog_cant_kill_in_one_hit(player) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
+  if(getTime() - level.lastDogMeleePlayerTime > 8000)
     level.dogMeleePlayerCounter = 0;
-  }
   return level.dogMeleePlayerCounter < anim.dog_hits_before_kill &&
     player.health > 25;
 }
@@ -344,20 +332,19 @@ meleeStruggleVsAI() {
   }
   angles = vectorToAngles(self.origin - self.enemy.origin);
   self.originalTarget = self.enemy;
-  self setCanDamage(false);
+  self setcandamage(false);
   self clearanim(meleeSeqAnim[0], 0.1);
   self animrelative("meleeanim", self.enemy.origin, angles, meleeSeqAnim[1]);
   self animscripts\shared::DoNoteTracks("meleeanim", ::handleStartAIPart);
-  self setCanDamage(true);
+  self setcandamage(true);
   self animMode("zonly_physics");
-  for(meleeSeq = 1; meleeSeq < numMeleeStage; meleeSeq++) {
+  for (meleeSeq = 1; meleeSeq < numMeleeStage; meleeSeq++) {
     self clearanim(meleeSeqAnim[meleeSeq], 0);
     if(!inSyncMeleeWithTarget()) {
       break;
     }
-    if(!self.meleeKillTarget && meleeSeq + 1 == numMeleeStage) {
+    if(!self.meleeKillTarget && meleeSeq + 1 == numMeleeStage)
       self.health = 1;
-    }
     self setflaggedanimrestart("meleeanim", meleeSeqAnim[meleeSeq + 1], 1, 0, 1);
     self animscripts\shared::DoNoteTracks("meleeanim");
   }
@@ -384,7 +371,7 @@ combatIdle() {
 combatIdlePreventOverlappingPlayer() {
   self endon("killanimscript");
   self endon("combatIdleEnd");
-  while(1) {
+  while (1) {
     wait 0.1;
     if(!isDefined(self.enemy)) {
       continue;
@@ -398,9 +385,8 @@ combatIdlePreventOverlappingPlayer() {
     }
     offsetVec = (offsetVec[0], offsetVec[1], 0);
     offset = length(offsetVec);
-    if(offset < 1) {
-      offsetVec = anglesToForward(self.angles);
-    }
+    if(offset < 1)
+      offsetVec = anglestoforward(self.angles);
     if(offset < 30) {
       offsetVec = vectorscale(offsetVec, 3 / offset);
       self teleport(self.origin - offsetVec);
@@ -413,35 +399,29 @@ inSyncMeleeWithTarget() {
 }
 
 handleStartAIPart(note) {
-  if(note != "ai_attack_start") {
+  if(note != "ai_attack_start")
     return false;
-  }
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return true;
-  }
-  if(self.enemy != self.originalTarget) {
+  if(self.enemy != self.originalTarget)
     return true;
-  }
-  if(isDefined(self.enemy.syncedMeleeTarget)) {
+  if(isDefined(self.enemy.syncedMeleeTarget))
     return true;
-  }
   self.enemy.syncedMeleeTarget = self;
   self.enemy animcustom(::meleeStruggleVsDog);
 }
 
 checkEndCombat(meleeRange) {
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
   distToTargetSq = distanceSquared(self.origin, self.enemy.origin);
   return (distToTargetSq > meleeRange * meleeRange);
 }
 
 prepareAttackPlayer(player) {
-  if(!isDefined(player.player_view)) {
-    player.player_view = PlayerView_spawn(player);
-  }
-  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  if(!isDefined(player.player_view))
+    player.player_view = PlayerView_Spawn(player);
+  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distanceToTarget = distance(self.origin, self.enemy.origin);
   if(distanceToTarget > self.meleeAttackDist) {
     offset = self.enemy.origin - self.origin;
@@ -456,7 +436,7 @@ attackTeleportThread(offset) {
   self endon("killanimscript");
   reps = 5;
   increment = (offset[0] / reps, offset[1] / reps, offset[2] / reps);
-  for(i = 0; i < reps; i++) {
+  for (i = 0; i < reps; i++) {
     self teleport(self.origin + increment);
     wait(0.05);
   }
@@ -510,7 +490,7 @@ dog_melee_death(player) {
   pressed = false;
   press_time = anim.dog_presstime;
   self waittill("dog_early_notetrack");
-  for(;;) {
+  for (;;) {
     if(!pressed) {
       if(isDefined(level.dog_free_kill) && isDefined(self.melee_able_timer) && gettime() - self.melee_able_timer <= press_time) {
         player.player_view.custom_dog_save = "neck_snap";
@@ -518,7 +498,7 @@ dog_melee_death(player) {
         self setflaggedanimknobrestart("dog_death_anim", % german_shepherd_player_neck_snap, 1, 0.2, 1);
         self waittillmatch("dog_death_anim", "dog_death");
         self thread play_sound_in_space("dog_neckbreak", self gettagorigin("tag_eye"));
-        self setCanDamage(true);
+        self setcandamage(true);
         self.a.nodeath = true;
         self dodamage(self.health + 503, (0, 0, 0), player);
         self notify("killanimscript");
@@ -532,23 +512,23 @@ dog_melee_death(player) {
             self setflaggedanimknobrestart("dog_death_anim", % german_shepherd_player_neck_snap, 1, 0.2, 1);
             self waittillmatch("dog_death_anim", "dog_death");
             self thread play_sound_in_space("dog_neckbreak", self gettagorigin("tag_eye"));
-            self setCanDamage(true);
+            self setcandamage(true);
             self.a.nodeath = true;
             dif = player.origin - self.origin;
             dif = (dif[0], dif[1], 0);
             arcademode_assignpoints("arcademode_score_dog", player);
-            self dodamage(self.health + 503, self getEye() - dif, player);
+            self dodamage(self.health + 503, self geteye() - dif, player);
             self notify("killanimscript");
           } else {
             player.player_view setanimlimited(get_player_knockdown_knob(), 0.01, 0.2, 1);
             player.player_view setanimlimited(get_player_knockdown_late_knob(), 1, 0.2, 1);
             self setanimlimited( % attack_player, 0.01, 0.2, 1);
             self setanimlimited( % attack_player_late, 1, 0.2, 1);
-            level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
+            level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
           }
           return;
         }
-        level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
+        level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
         self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_neck_miss, 1, 0.2, 1);
         player.player_view setflaggedanimknobrestart("viewanim", get_player_dog_neck_miss_anim(), 1, 0.2, 1);
         return;
@@ -576,9 +556,8 @@ meleeStruggleVsDog() {
   self animMode("gravity");
   self.a.pose = "stand";
   self.a.special = "none";
-  if(usingSidearm()) {
+  if(usingSidearm())
     self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
-  }
   meleeSeqAnim = [];
   meleeSeqAnim[0] = % root;
   meleeSeqAnim[1] = % AI_attacked_german_shepherd_01_start_a;
@@ -599,12 +578,11 @@ meleeStruggleVsDog() {
   wait 0.15;
   self.syncedMeleeTarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   self waittillmatch("aianim", "end");
-  for(self.meleeSeq = 1; self.meleeSeq < numMeleeStage;) {
+  for (self.meleeSeq = 1; self.meleeSeq < numMeleeStage;) {
     self clearanim(meleeSeqAnim[self.meleeSeq], 0);
     self.meleeSeq++;
-    if(numMeleeStage == 3 && self.meleeSeq == 3) {
+    if(numMeleeStage == 3 && self.meleeSeq == 3)
       self setNextDogAttackAllowTime(getAnimLength(meleeSeqAnim[self.meleeSeq]) * 1000 - 1000);
-    }
     self setflaggedanimrestart("aianim", meleeSeqAnim[self.meleeSeq], 1, 0, 1);
     self animscripts\shared::DoNoteTracks("aianim");
     if(!isDefined(self.syncedMeleeTarget) || !isAlive(self.syncedMeleeTarget)) {
@@ -634,7 +612,7 @@ meleeStruggleVsDog_interruptedCheck() {
   if(self.syncedMeleeTarget.meleeKillTarget) {
     meleeSeqAnim[4] = % AI_attacked_german_shepherd_04_getup_a;
   }
-  while(1) {
+  while (1) {
     if(!isDefined(self.syncedMeleeTarget) || !isAlive(self.syncedMeleeTarget)) {
       break;
     }
@@ -662,7 +640,7 @@ meleeStruggleVsDog_End() {
 
 #using_animtree("player");
 
-PlayerView_spawn(player) {
+PlayerView_Spawn(player) {
   playerView = spawn("script_model", player.origin);
   playerView.angles = player.angles;
   playerView setModel(level.player_interactive_hands);
@@ -676,18 +654,18 @@ handlePlayerKnockDownNotetracks(note) {
     case "allow_player_save": {
       if(getdvar("friendlySaveFromDog") == "1" && isDefined(self.dog)) {
         wait 1;
-        self.dog setCanDamage(true);
+        self.dog setcandamage(true);
       }
     }
     break;
     case "blood_pool": {
       tagPos = self gettagorigin("tag_torso");
       tagAngles = self gettagangles("tag_torso");
-      forward = anglesToForward(tagAngles);
+      forward = anglestoforward(tagAngles);
       up = anglestoup(tagAngles);
       right = anglestoright(tagAngles);
       tagPos = tagPos + vectorScale(forward, -8.5) + vectorScale(up, 5) + vectorScale(right, 0);
-      playFX(level._effect["deathfx_bloodpool"], tagPos, forward, up);
+      playfx(level._effect["deathfx_bloodpool"], tagPos, forward, up);
     }
     break;
   }
@@ -719,14 +697,12 @@ PlayerView_CheckInterrupted(player) {
 }
 
 PlayerView_StartSequence(dog, player) {
-  if(isDefined(self.inSeq)) {
+  if(isDefined(self.inSeq))
     return false;
-  }
   player notify("dog_attacks_player");
   self.inSeq = true;
-  if(isalive(player)) {
+  if(isalive(player))
     setsaveddvar("hud_drawhud", 0);
-  }
   player allowStand(true);
   player setstance("stand");
   player.syncedMeleeTarget = dog;
@@ -747,13 +723,13 @@ PlayerView_StartSequence(dog, player) {
   player allowCrouch(false);
   player allowProne(false);
   player freezeControls(true);
-  player setCanDamage(false);
+  player setcandamage(false);
   return true;
 }
 
 SavedNotify(player) {
   wait 0.5;
-  player playSound("saved_from_dog");
+  player playsound("saved_from_dog");
 }
 
 player_gets_weapons_back(player) {
@@ -776,7 +752,7 @@ PlayerView_EndSequence(player) {
     }
     delaythread(3.0, ::player_gets_weapons_back, player);
     self animscripts\shared::DoNoteTracks("viewanim");
-    player setCanDamage(true);
+    player setcandamage(true);
     player notify("player_saved_from_dog");
     player unlink();
     player setOrigin(self.origin);

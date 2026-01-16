@@ -15,7 +15,7 @@ onFirstPlayerConnect() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerDisconnect();
     player thread onPlayerSpawned();
@@ -30,7 +30,7 @@ onPlayerDisconnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self.drone_avoid = false;
     self setthreatbiasgroup("players");
@@ -42,7 +42,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
   }
 }
@@ -51,7 +51,7 @@ AttachToTrain() {
   if(isDefined(level.players_linked_to_train) && level.players_linked_to_train) {
     index = 0;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] == self) {
         index = i;
         break;

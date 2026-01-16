@@ -139,17 +139,15 @@ play_signature_boat_fx_launch() {
 play_sig_splash_effect(guy) {
   boat = getent("small_sig_gunboat", "targetname");
 
-  if(isDefined(boat)) {
+  if(isDefined(boat))
     boat play_fx("splash_fx", boat.origin, boat.angles);
-  }
 }
 
 play_splash_effect(guy) {
   boat = getent("small_gunboat_anim", "targetname");
 
-  if(isDefined(boat)) {
+  if(isDefined(boat))
     boat play_fx("splash_fx", boat.origin, boat.angles);
-  }
 }
 
 hudson_ladders() {
@@ -166,9 +164,8 @@ gunboat_right_ram_fx(gunboat) {
   level.player playrumbleonentity("explosion_generic");
   level.main_barge play_fx("barge_water_right", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
-  if(isDefined(gunboat)) {
+  if(isDefined(gunboat))
     physicsexplosionsphere(gunboat.origin, 3000, 1000, 0.5);
-  }
 }
 
 gunboat_left_ram_fx(gunboat) {
@@ -178,9 +175,8 @@ gunboat_left_ram_fx(gunboat) {
   level.player playrumbleonentity("explosion_generic");
   level.main_barge play_fx("barge_water_left", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
-  if(isDefined(gunboat)) {
+  if(isDefined(gunboat))
     physicsexplosionsphere(gunboat.origin, 3000, 1000, 0.5);
-  }
 }
 
 #using_animtree("vehicles");
@@ -223,14 +219,13 @@ machete_blackscreen_start(guy) {
 }
 
 machete_blackscreen_end(guy) {
-  if(isDefined(level.machete_blackscreen_on)) {
+  if(isDefined(level.machete_blackscreen_on))
     level screen_fade_in(0);
-  }
 }
 
 machete_punch(guy) {
   ai_guy = get_ais_from_scene("machete_jump", "machete_dude");
-  playFXOnTag(getfx("punch_sweat"), ai_guy, "j_head");
+  playfxontag(getfx("punch_sweat"), ai_guy, "j_head");
   level.player playrumbleonentity("damage_light");
 }
 
@@ -287,9 +282,9 @@ hind_hit_run_scene(guy) {
   level.player takeallweapons();
   level.player playersetgroundreferenceent(undefined);
   level thread run_scene("heli_hit_by_missile");
-  playFXOnTag(getfx("intro_heli_smoke"), vh_heli, "tag_origin");
-  playFXOnTag(getfx("intro_heli_missle_exp"), vh_heli, "tag_origin");
-  playFXOnTag(getfx("intro_heli_damage"), vh_heli, "tag_origin");
+  playfxontag(getfx("intro_heli_smoke"), vh_heli, "tag_origin");
+  playfxontag(getfx("intro_heli_missle_exp"), vh_heli, "tag_origin");
+  playfxontag(getfx("intro_heli_damage"), vh_heli, "tag_origin");
   level notify("intro_heli_hit_by_missile");
 }
 
@@ -495,7 +490,7 @@ play_bubbles(ent) {
   level.player startcameratween(1);
   level.player shellshock("default", 2);
   earthquake(1, 2, level.player.origin, 128, level.player);
-  playFXOnTag(getfx("water_bubbles_player"), ent, "tag_camera");
+  playfxontag(getfx("water_bubbles_player"), ent, "tag_camera");
 }
 
 ignore_vo_notetracks(ent) {
@@ -524,7 +519,7 @@ backstroke_swim_fx(guy) {
 start_barge_sinking(guy) {
   level.main_barge notify("end_rotate_barge");
   level thread run_scene("barge_sinking");
-  a_cover = getEntArray("barge_cover_back", "targetname");
+  a_cover = getentarray("barge_cover_back", "targetname");
   array_delete(a_cover);
   m_barrel_parent = spawn_model("fxanim_angola_barge_barrels_side_mod", level.main_barge.origin, level.main_barge.angles);
   m_barrel_parent linkto(level.main_barge);
@@ -545,9 +540,8 @@ start_barge_sinking(guy) {
   level waittill("save_woods_swim_started");
   wait 1;
 
-  foreach(m_anim_model in a_actors) {
-    level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
-  }
+  foreach(m_anim_model in a_actors)
+  level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
 
   n_time = getanimlength(level.scr_anim["sinking_barge_barrels"]["barge_sink_fxanims"]);
   wait 2;
@@ -568,11 +562,11 @@ boat_explosive_death() {
 }
 
 play_woods_water_fx(guy) {
-  playFXOnTag(level._effect["woods_cough_water"], guy, "j_lip_top_ri");
+  playfxontag(level._effect["woods_cough_water"], guy, "j_lip_top_ri");
 }
 
 play_blood_on_machete_dude(guy) {
-  playFXOnTag(level._effect["head_blood"], guy, "J_neck");
+  playfxontag(level._effect["head_blood"], guy, "J_neck");
   level.player playrumbleonentity("angola_hind_ride");
   wait 8;
   level notify("machete_guy_dead");
@@ -841,10 +835,10 @@ village_anims() {
 
 player_shoots_menendez(guy) {
   pistol = get_model_or_models_from_scene("pistol_meatshield_part_2", "player_pistol");
-  playFXOnTag(level._effect["menendez_fight_muzzle_flash"], pistol, "TAG_FX");
+  playfxontag(level._effect["menendez_fight_muzzle_flash"], pistol, "TAG_FX");
   angles = pistol gettagangles("TAG_FX");
   fire_from = pistol gettagorigin("TAG_FX");
-  fire_at = anglesToForward(angles) * 10 + fire_from;
+  fire_at = anglestoforward(angles) * 10 + fire_from;
   magicbullet("browninghp_sp", fire_from, fire_at);
 
   if(is_mature()) {
@@ -863,7 +857,7 @@ slow_motion_off(guy) {
 }
 
 shoot_menendez_muzzle_flash(guy) {
-  playFXOnTag(level._effect["def_muzzle_flash"], level.mason_meatshield_weapon, "tag_fx");
+  playfxontag(level._effect["def_muzzle_flash"], level.mason_meatshield_weapon, "tag_fx");
 }
 
 meatshield_grenade_explosion(guy) {
@@ -907,7 +901,7 @@ barge_panel_anims() {
 }
 
 panel_fall_splash(m_panel) {
-  playFXOnTag(getfx("panel_splash"), m_panel, "tag_fx_splash");
+  playfxontag(getfx("panel_splash"), m_panel, "tag_fx_splash");
 }
 
 #using_animtree("player");
@@ -980,12 +974,12 @@ jungle_escape_anims() {
 }
 
 soldier_shoots_hudson(guy) {
-  playFXOnTag(getfx("hudson_shot_tracer"), guy, "tag_flash");
+  playfxontag(getfx("hudson_shot_tracer"), guy, "tag_flash");
 }
 
 woods_shoots_pistol_effect(guy) {
   ai = getent("hind_dummy_pilot_ai", "targetname");
-  playFXOnTag(level._effect["fx_ango_blood_outro"], ai, "J_spineUpper");
+  playfxontag(level._effect["fx_ango_blood_outro"], ai, "J_spineUpper");
   tag_origin = ai gettagorigin("J_spineUpper");
   tag_angles = ai gettagangles("J_spineUpper");
   ai play_fx("fx_ango_blood_outro", tag_origin, tag_angles, undefined, 1, "J_spineUpper");
@@ -1039,7 +1033,8 @@ woods_stealth_carry_anims() {
   level.scr_anim["generic"]["ai_beartrap_caught_loop"][0] = % ai_wounded_beartrap_pain_idle;
 }
 
-sndplayexplosionatposition(player) {}
+sndplayexplosionatposition(player) {
+}
 
 sndslowmosnapshoton(player) {
   rpc("clientscripts/angola_2_amb", "sndSlowMoSnapshotOn");

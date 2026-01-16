@@ -61,16 +61,15 @@ main() {
   level.ta_vaultfee = 100;
   level.ta_tellerfee = 100;
 
-  if(!isDefined(level.custom_ai_type)) {
+  if(!isDefined(level.custom_ai_type))
     level.custom_ai_type = [];
-  }
 
   level.custom_ai_type[level.custom_ai_type.size] = maps\mp\zombies\_zm_ai_screecher::init;
   level.custom_ai_type[level.custom_ai_type.size] = maps\mp\zombies\_zm_ai_avogadro::init;
   level.enemy_location_override_func = maps\mp\zm_transit_bus::enemy_location_override;
   level.adjust_enemyoverride_func = maps\mp\zm_transit_bus::adjust_enemyoverride;
   level.closest_player_override = ::closest_player_transit;
-  door_triggers = getEntArray("electric_door", "script_noteworthy");
+  door_triggers = getentarray("electric_door", "script_noteworthy");
 
   foreach(trigger in door_triggers) {
     if(isDefined(trigger.script_flag) && trigger.script_flag == "OnPowDoorWH") {
@@ -79,7 +78,7 @@ main() {
     trigger.power_door_ignore_flag_wait = 1;
   }
 
-  door_triggers = getEntArray("local_electric_door", "script_noteworthy");
+  door_triggers = getentarray("local_electric_door", "script_noteworthy");
 
   foreach(trigger in door_triggers) {
     if(isDefined(trigger.script_flag) && trigger.script_flag == "OnPowDoorWH") {
@@ -118,7 +117,8 @@ main() {
   level.zombie_vars["zombie_intermission_time"] = 12;
 }
 
-zm_traversal_override_ignores() {}
+zm_traversal_override_ignores() {
+}
 
 zm_traversal_override(traversealias) {
   suffix = "";
@@ -127,9 +127,8 @@ zm_traversal_override(traversealias) {
   sndchance = 0;
 
   if(!(isDefined(self.isscreecher) && self.isscreecher) && !(isDefined(self.is_avogadro) && self.is_avogadro)) {
-    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.script_string) && self.traversestartnode.script_string == "ignore_traverse_override") {
+    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.script_string) && self.traversestartnode.script_string == "ignore_traverse_override")
       return traversealias;
-    }
 
     switch (traversealias) {
       case "jump_down_48":
@@ -161,9 +160,8 @@ zm_traversal_override(traversealias) {
     }
 
     if(chance != 0 && randomint(100) <= chance) {
-      if(isDefined(sndalias) && randomint(100) <= sndchance) {
+      if(isDefined(sndalias) && randomint(100) <= sndchance)
         playsoundatposition(sndalias, self.origin);
-      }
 
       traversealias = traversealias + suffix;
     }
@@ -178,17 +176,16 @@ init_bus() {
 }
 
 closest_player_transit(origin, players) {
-  if(isDefined(level.the_bus) && level.the_bus.numaliveplayersridingbus > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)) {
+  if(isDefined(level.the_bus) && level.the_bus.numaliveplayersridingbus > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths))
     player = getclosest(origin, players);
-  } else {
+  else
     player = get_closest_player_using_paths(origin, players);
-  }
 
   return player;
 }
 
 transit_vault_breach_init() {
-  vault_doors = getEntArray("town_bunker_door", "targetname");
+  vault_doors = getentarray("town_bunker_door", "targetname");
   array_thread(vault_doors, ::transit_vault_breach);
 }
 
@@ -210,10 +207,10 @@ transit_vault_breach() {
 vault_breach_think() {
   level endon("intermission");
   self.health = 99999;
-  self setCanDamage(1);
+  self setcandamage(1);
   self.damage_state = 0;
   self.clip.health = 99999;
-  self.clip setCanDamage(1);
+  self.clip setcandamage(1);
 
   while(true) {
     self thread track_clip_damage();
@@ -226,21 +223,18 @@ vault_breach_think() {
       continue;
     }
     if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
-      if(self.damage_state == 0) {
+      if(self.damage_state == 0)
         self.damage_state = 1;
-      }
 
-      playFXOnTag(level._effect["def_explosion"], self, "tag_origin");
-      self playSound("exp_vault_explode");
+      playfxontag(level._effect["def_explosion"], self, "tag_origin");
+      self playsound("exp_vault_explode");
       self bunkerdoorrotate(1);
 
-      if(isDefined(self.script_flag)) {
+      if(isDefined(self.script_flag))
         flag_set(self.script_flag);
-      }
 
-      if(isDefined(self.clip)) {
+      if(isDefined(self.clip))
         self.clip connectpaths();
-      }
 
       wait 1;
       playsoundatposition("zmb_cha_ching_loud", self.origin);
@@ -256,15 +250,13 @@ track_clip_damage() {
 }
 
 bunkerdoorrotate(open, time) {
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 0.2;
-  }
 
   rotate = self.script_float;
 
-  if(!open) {
+  if(!open)
     rotate = rotate * -1;
-  }
 
   if(isDefined(self.script_angles)) {
     self notsolid();
@@ -280,21 +272,20 @@ collapsing_bridge_init() {
   if(!isDefined(trig)) {
     return;
   }
-  bridge = getEntArray(trig.target, "targetname");
+  bridge = getentarray(trig.target, "targetname");
 
   if(!isDefined(bridge)) {
     return;
   }
   trig waittill("trigger", who);
-  trig playSound("evt_bridge_collapse_start");
+  trig playsound("evt_bridge_collapse_start");
   trig thread play_delayed_sound(time);
 
   for(i = 0; i < bridge.size; i++) {
-    if(isDefined(bridge[i].script_angles)) {
+    if(isDefined(bridge[i].script_angles))
       rot_angle = bridge[i].script_angles;
-    } else {
+    else
       rot_angle = (0, 0, 0);
-    }
 
     earthquake(randomfloatrange(0.5, 1), 1.5, bridge[i].origin, 1000);
     exploder(150);
@@ -311,24 +302,24 @@ collapsing_bridge_init() {
 
 play_delayed_sound(time) {
   wait(time);
-  self playSound("evt_bridge_collapse_end");
+  self playsound("evt_bridge_collapse_end");
 }
 
 banking_and_weapon_locker_main() {
   flag_wait("start_zombie_round_logic");
-  weapon_locker = spawnStruct();
+  weapon_locker = spawnstruct();
   weapon_locker.origin = (8236, -6844, 144);
   weapon_locker.angles = vectorscale((0, 1, 0), 30.0);
   weapon_locker.script_length = 16;
   weapon_locker.script_width = 32;
   weapon_locker.script_height = 64;
-  deposit_spot = spawnStruct();
+  deposit_spot = spawnstruct();
   deposit_spot.origin = (588, 402, 6);
   deposit_spot.angles = (0, 0, 0);
   deposit_spot.targetname = "bank_deposit";
   deposit_spot.script_unitrigger_type = "unitrigger_radius_use";
   deposit_spot.radius = 32;
-  withdraw_spot = spawnStruct();
+  withdraw_spot = spawnstruct();
   withdraw_spot.origin = (588, 496, 6);
   withdraw_spot.angles = (0, 0, 0);
   withdraw_spot.targetname = "bank_withdraw";
@@ -342,7 +333,7 @@ banking_and_weapon_locker_main() {
 }
 
 bus_roof_damage_init() {
-  trigs = getEntArray("bus_knock_off", "targetname");
+  trigs = getentarray("bus_knock_off", "targetname");
   array_thread(trigs, ::bus_roof_damage);
 }
 
@@ -351,9 +342,8 @@ bus_roof_damage() {
     self waittill("trigger", who);
 
     if(isplayer(who)) {
-      if(who getstance() == "stand") {
+      if(who getstance() == "stand")
         who dodamage(1, who.origin);
-      }
     } else if(!(isDefined(who.marked_for_death) && who.marked_for_death) && (isDefined(who.has_legs) && who.has_legs)) {
       who dodamage(who.health + 100, who.origin);
       who.marked_for_death = 1;
@@ -385,15 +375,13 @@ diner_hatch_access() {
 inert_zombies_init() {
   inert_spawn_location = getstructarray("inert_location", "script_noteworthy");
 
-  if(isDefined(inert_spawn_location)) {
+  if(isDefined(inert_spawn_location))
     array_thread(inert_spawn_location, ::spawn_inert_zombies);
-  }
 }
 
 spawn_inert_zombies() {
-  if(!isDefined(self.angles)) {
+  if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
-  }
 
   wait 0.1;
 
@@ -409,35 +397,31 @@ spawn_inert_zombies() {
 }
 
 sparking_power_lines() {
-  lines = getEntArray("power_line_sparking", "targetname");
+  lines = getentarray("power_line_sparking", "targetname");
 }
 
 callback_spectator_respawn_custom_score() {
   difference = 1500 - self.score;
   money_required = 1;
 
-  if(difference >= 1000) {
+  if(difference >= 1000)
     money_required = 2;
-  }
 
   if(!sessionmodeisonlinegame()) {
-    if(!isDefined(self.account_val)) {
+    if(!isDefined(self.account_val))
       self.account_val = 0;
-    }
 
-    if(self.account_val >= money_required) {
+    if(self.account_val >= money_required)
       self.account_val = self.account_val - money_required;
-    } else {
+    else
       self.account_val = 0;
-    }
   } else {
     account_val = self maps\mp\zombies\_zm_stats::get_map_stat("depositBox");
 
-    if(account_val >= money_required) {
+    if(account_val >= money_required)
       self set_map_stat("depositBox", account_val - money_required);
-    } else {
+    else
       self set_map_stat("depositBox", 0);
-    }
   }
 }
 
@@ -446,9 +430,8 @@ transit_custom_deny_vox(door_buy) {
     case 0:
       alias = randomintrange(2, 5);
 
-      if(isDefined(door_buy) && door_buy) {
+      if(isDefined(door_buy) && door_buy)
         alias = undefined;
-      }
 
       self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "door_deny", undefined, alias);
       break;
@@ -461,22 +444,20 @@ transit_custom_deny_vox(door_buy) {
     case 3:
       x = randomint(100);
 
-      if(x > 66) {
+      if(x > 66)
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
-      } else if(x > 33) {
+      else if(x > 33)
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_box", undefined, 0);
-      } else {
+      else
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_weapon", undefined, 0);
-      }
 
       break;
   }
 }
 
 transit_custom_death_vox() {
-  if(self.characterindex != 2) {
+  if(self.characterindex != 2)
     return false;
-  }
 
   self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "pain_high");
   return true;
@@ -487,10 +468,9 @@ transit_custom_powerup_vo_response(powerup_player, powerup) {
   players = get_players();
 
   foreach(player in players) {
-    if(player == powerup_player) {
+    if(player == powerup_player)
       continue;
-    } else if(distancesquared(player.origin, powerup_player.origin) < dist) {
+    else if(distancesquared(player.origin, powerup_player.origin) < dist)
       player do_player_general_vox("general", "exert_laugh", 10, 5);
-    }
   }
 }

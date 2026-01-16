@@ -22,7 +22,7 @@
 #namespace zm_island_thrasher;
 
 function autoexec init() {
-  spawner::add_archetype_spawn_function("thrasher", &function_f8333089);
+  spawner::add_archetype_spawn_function("thrasher", & function_f8333089);
 }
 
 function private function_f8333089() {

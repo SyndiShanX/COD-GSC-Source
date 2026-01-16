@@ -4,9 +4,11 @@
 ********************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_revive_prompt;
 
 class cmp_revive_prompt: cluielem {
+
   function set_reviveprogress(localclientnum, value) {
     set_data(localclientnum, "reviveProgress", value);
   }
@@ -20,7 +22,7 @@ class cmp_revive_prompt: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "mp_revive_prompt");
+    cluielem::open(localclientnum, #"mp_revive_prompt");
   }
 
   function function_fa582112(localclientnum) {

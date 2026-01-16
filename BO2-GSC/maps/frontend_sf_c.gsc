@@ -15,9 +15,8 @@ get_num_territories_conquered() {
   num_completed = 0;
 
   foreach(name in map_names) {
-    if(rts_map_completed(name)) {
+    if(rts_map_completed(name))
       num_completed++;
-    }
   }
 
   return num_completed;
@@ -72,17 +71,15 @@ scene_pre_briefing_models(str_endon) {
   holo_table_exploder_switch(undefined);
   prop_base clearclientflag(15);
 
-  for(i = 0; i < prop_buildings.size; i++) {
+  for(i = 0; i < prop_buildings.size; i++)
     prop_buildings[i] clearclientflag(15);
-  }
 
   prop_rock clearclientflag(15);
   wait 2;
   prop_base delete();
 
-  for(i = 0; i < prop_buildings.size; i++) {
+  for(i = 0; i < prop_buildings.size; i++)
     prop_buildings[i] delete();
-  }
 
   prop_rock delete();
 }
@@ -192,9 +189,8 @@ scene_socotra_models() {
   holo_table_exploder_switch(115);
   wait 3.0;
 
-  foreach(building in prop_buildings) {
-    building thread holo_table_prop_blink_on();
-  }
+  foreach(building in prop_buildings)
+  building thread holo_table_prop_blink_on();
 
   level waittill("cliffs_up");
   prop_rock thread holo_table_prop_blink_on();
@@ -206,9 +202,8 @@ scene_socotra_models() {
   holo_table_exploder_switch(undefined);
   prop_base notify("stop_geo_fx");
 
-  foreach(prop in prop_buildings) {
-    prop clearclientflag(15);
-  }
+  foreach(prop in prop_buildings)
+  prop clearclientflag(15);
 
   prop_rock clearclientflag(15);
   prop_base clearclientflag(15);
@@ -242,11 +237,10 @@ scene_overflow_briefing() {
   player_body attach_data_glove();
   scene_wait("pakistan_briefing");
 
-  if(have_intel) {
+  if(have_intel)
     run_scene("pakistan_have_intel");
-  } else {
+  else
     run_scene("pakistan_no_intel");
-  }
 
   run_scene("pakistan_end");
 }

@@ -29,15 +29,13 @@ box_hacks() {
 }
 
 custom_check_firesale_loc_valid_func() {
-  if(isDefined(self.unitrigger_stub)) {
+  if(isDefined(self.unitrigger_stub))
     box = self.unitrigger_stub.trigger_target;
-  } else if(isDefined(self.stub)) {
+  else if(isDefined(self.stub))
     box = self.stub.trigger_target;
-  }
 
-  if(box.last_hacked_round >= level.round_number) {
+  if(box.last_hacked_round >= level.round_number)
     return false;
-  }
 
   return true;
 }
@@ -46,9 +44,8 @@ custom_box_move_logic() {
   num_hacked_locs = 0;
 
   for(i = 0; i < level.chests.size; i++) {
-    if(level.chests[i].last_hacked_round >= level.round_number) {
+    if(level.chests[i].last_hacked_round >= level.round_number)
       num_hacked_locs++;
-    }
   }
 
   if(num_hacked_locs == 0) {
@@ -62,15 +59,13 @@ custom_box_move_logic() {
   while(!found_loc) {
     level.chest_index++;
 
-    if(original_spot == level.chest_index) {
+    if(original_spot == level.chest_index)
       level.chest_index++;
-    }
 
     level.chest_index = level.chest_index % level.chests.size;
 
-    if(level.chests[level.chest_index].last_hacked_round < level.round_number) {
+    if(level.chests[level.chest_index].last_hacked_round < level.round_number)
       found_loc = 1;
-    }
   }
 }
 
@@ -97,7 +92,7 @@ init_box_respin(chest, player) {
 }
 
 box_respin_think(chest, player) {
-  respin_hack = spawnStruct();
+  respin_hack = spawnstruct();
   respin_hack.origin = self.origin + vectorscale((0, 0, 1), 24.0);
   respin_hack.radius = 48;
   respin_hack.height = 72;
@@ -112,9 +107,8 @@ box_respin_think(chest, player) {
 }
 
 respin_box_thread(hacker) {
-  if(isDefined(self.chest.zbarrier.weapon_model)) {
+  if(isDefined(self.chest.zbarrier.weapon_model))
     self.chest.zbarrier.weapon_model notify("kill_respin_think_thread");
-  }
 
   self.chest.no_fly_away = 1;
   self.chest.zbarrier notify("box_hacked_respin");
@@ -137,9 +131,8 @@ respin_box(hacker) {
 }
 
 hack_box_qualifier(player) {
-  if(player == self.chest.chest_user && isDefined(self.chest.weapon_out)) {
+  if(player == self.chest.chest_user && isDefined(self.chest.weapon_out))
     return true;
-  }
 
   return false;
 }
@@ -149,7 +142,7 @@ init_box_respin_respin(chest, player) {
 }
 
 box_respin_respin_think(chest, player) {
-  respin_hack = spawnStruct();
+  respin_hack = spawnstruct();
   respin_hack.origin = self.origin + vectorscale((0, 0, 1), 24.0);
   respin_hack.radius = 48;
   respin_hack.height = 72;
@@ -184,27 +177,25 @@ respin_respin_box(hacker) {
 
 fake_weapon_powerup_thread(weapon1, weapon2) {
   weapon1 endon("death");
-  playFXOnTag(level._effect["powerup_on_solo"], weapon1, "tag_origin");
+  playfxontag(level._effect["powerup_on_solo"], weapon1, "tag_origin");
   playsoundatposition("zmb_spawn_powerup", weapon1.origin);
-  weapon1 playLoopSound("zmb_spawn_powerup_loop");
+  weapon1 playloopsound("zmb_spawn_powerup_loop");
   self thread fake_weapon_powerup_timeout(weapon1, weapon2);
 
   while(isDefined(weapon1)) {
     waittime = randomfloatrange(2.5, 5);
     yaw = randomint(360);
 
-    if(yaw > 300) {
+    if(yaw > 300)
       yaw = 300;
-    } else if(yaw < 60) {
+    else if(yaw < 60)
       yaw = 60;
-    }
 
     yaw = weapon1.angles[1] + yaw;
     weapon1 rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
 
-    if(isDefined(weapon2)) {
+    if(isDefined(weapon2))
       weapon2 rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
-    }
 
     wait(randomfloat(waittime - 0.1));
   }
@@ -218,15 +209,13 @@ fake_weapon_powerup_timeout(weapon1, weapon2) {
     if(i % 2) {
       weapon1 hide();
 
-      if(isDefined(weapon2)) {
+      if(isDefined(weapon2))
         weapon2 hide();
-      }
     } else {
       weapon1 show();
 
-      if(isDefined(weapon2)) {
+      if(isDefined(weapon2))
         weapon2 hide();
-      }
     }
 
     if(i < 15) {
@@ -244,13 +233,11 @@ fake_weapon_powerup_timeout(weapon1, weapon2) {
 
   self.chest notify("trigger", level);
 
-  if(isDefined(weapon1)) {
+  if(isDefined(weapon1))
     weapon1 delete();
-  }
 
-  if(isDefined(weapon2)) {
+  if(isDefined(weapon2))
     weapon2 delete();
-  }
 }
 
 init_summon_hacks() {
@@ -269,7 +256,7 @@ init_summon_box(create) {
       self._summon_hack_struct = undefined;
     }
 
-    struct = spawnStruct();
+    struct = spawnstruct();
     struct.origin = self.chest_box.origin + vectorscale((0, 0, 1), 24.0);
     struct.radius = 48;
     struct.height = 72;
@@ -306,19 +293,16 @@ summon_box_thread(hacker) {
 summon_box(hacker) {
   self thread summon_box_thread(hacker);
 
-  if(isDefined(hacker)) {
+  if(isDefined(hacker))
     hacker thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "hack_box");
-  }
 }
 
 summon_box_qualifier(player) {
-  if(self.chest.last_hacked_round > level.round_number) {
+  if(self.chest.last_hacked_round > level.round_number)
     return false;
-  }
 
-  if(isDefined(self.chest.zbarrier.chest_moving) && self.chest.zbarrier.chest_moving) {
+  if(isDefined(self.chest.zbarrier.chest_moving) && self.chest.zbarrier.chest_moving)
     return false;
-  }
 
   return true;
 }

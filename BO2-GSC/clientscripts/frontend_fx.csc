@@ -7,9 +7,11 @@
 #include clientscripts\createfx\frontend_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_missing_effect"] = loadfx("misc/fx_missing_fx");
@@ -53,7 +55,6 @@ main() {
   clientscripts\_fx::reportnumeffects();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

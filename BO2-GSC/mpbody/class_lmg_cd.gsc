@@ -9,15 +9,14 @@ precache() {
   precachemodel("c_mul_mp_cordis_lmg_fb");
   precachemodel("c_mul_mp_cordis_lmg_viewhands");
 
-  if(level.multiteam) {
+  if(level.multiteam)
     game["set_player_model"]["team6"]["mg"] = ::set_player_model;
-  } else {
+  else
     game["set_player_model"]["axis"]["mg"] = ::set_player_model;
-  }
 }
 
 set_player_model() {
-  self setModel("c_mul_mp_cordis_lmg_fb");
+  self setmodel("c_mul_mp_cordis_lmg_fb");
   self setviewmodel("c_mul_mp_cordis_lmg_viewhands");
   heads = [];
 }

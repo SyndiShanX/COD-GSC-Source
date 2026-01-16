@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace wz_firing_range;
 
 init_targets(targetname) {

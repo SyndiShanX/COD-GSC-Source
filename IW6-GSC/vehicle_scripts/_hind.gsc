@@ -29,9 +29,8 @@ main(var_0, var_1, var_2, var_3) {
   var_5["vehicle_ny_harbor_hind"] = "fx/explosions/aerial_explosion_hind_chernobyl";
   var_5["payback_vehicle_hind"] = "fx/explosions/aerial_explosion_hind_chernobyl";
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     maps\_vehicle::build_turret("ny_harbor_hind_sideturret", "tag_doorgun", "weapon_dshk", undefined, "auto_ai", 0.5, 20, -14);
-  }
 
   maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
   var_6 = var_4[var_0];
@@ -67,9 +66,8 @@ init_local() {
 }
 
 set_vehicle_anims(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1].vehicle_getoutanim = % bh_idle;
-  }
 
   return var_0;
 }
@@ -91,9 +89,8 @@ setplayer_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 9; var_1++) {
+  for(var_1 = 0; var_1 < 9; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].idle[0] = % helicopter_pilot1_idle;
   var_0[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;
@@ -219,9 +216,8 @@ set_attached_models() {
   var_0["TAG_FastRope_RI"].dropanim = % bh_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     precachemodel(var_0[var_1[var_2]].model);
-  }
 
   return var_0;
 }

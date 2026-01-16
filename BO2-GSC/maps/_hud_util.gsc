@@ -11,18 +11,16 @@ setparent(element) {
   if(isDefined(self.parent) && self.parent == element) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removechild(self);
-  }
 
   self.parent = element;
   self.parent addchild(self);
 
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     self setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  } else {
+  else
     self setpoint("TOPLEFT");
-  }
 }
 
 getparent() {
@@ -47,70 +45,57 @@ removechild(element) {
 }
 
 setpoint(point, relativepoint, xoffset, yoffset, movetime) {
-  if(!isDefined(movetime)) {
+  if(!isDefined(movetime))
     movetime = 0;
-  }
 
   element = self getparent();
 
-  if(movetime) {
+  if(movetime)
     self moveovertime(movetime);
-  }
 
-  if(!isDefined(xoffset)) {
+  if(!isDefined(xoffset))
     xoffset = 0;
-  }
 
   self.xoffset = xoffset;
 
-  if(!isDefined(yoffset)) {
+  if(!isDefined(yoffset))
     yoffset = 0;
-  }
 
   self.yoffset = yoffset;
   self.point = point;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(point, "TOP")) {
+  if(issubstr(point, "TOP"))
     self.aligny = "top";
-  }
 
-  if(issubstr(point, "BOTTOM")) {
+  if(issubstr(point, "BOTTOM"))
     self.aligny = "bottom";
-  }
 
-  if(issubstr(point, "LEFT")) {
+  if(issubstr(point, "LEFT"))
     self.alignx = "left";
-  }
 
-  if(issubstr(point, "RIGHT")) {
+  if(issubstr(point, "RIGHT"))
     self.alignx = "right";
-  }
 
-  if(!isDefined(relativepoint)) {
+  if(!isDefined(relativepoint))
     relativepoint = point;
-  }
 
   self.relativepoint = relativepoint;
   relativex = "center";
   relativey = "middle";
 
-  if(issubstr(relativepoint, "TOP")) {
+  if(issubstr(relativepoint, "TOP"))
     relativey = "top";
-  }
 
-  if(issubstr(relativepoint, "BOTTOM")) {
+  if(issubstr(relativepoint, "BOTTOM"))
     relativey = "bottom";
-  }
 
-  if(issubstr(relativepoint, "LEFT")) {
+  if(issubstr(relativepoint, "LEFT"))
     relativex = "left";
-  }
 
-  if(issubstr(relativepoint, "RIGHT")) {
+  if(issubstr(relativepoint, "RIGHT"))
     relativex = "right";
-  }
 
   if(element == level.uiparent) {
     self.horzalign = relativex;
@@ -126,19 +111,17 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   } else if(relativex == "center" || element.alignx == "center") {
     offsetx = int(element.width / 2);
 
-    if(relativex == "left" || element.alignx == "right") {
+    if(relativex == "left" || element.alignx == "right")
       xfactor = -1;
-    } else {
+    else
       xfactor = 1;
-    }
   } else {
     offsetx = element.width;
 
-    if(relativex == "left") {
+    if(relativex == "left")
       xfactor = -1;
-    } else {
+    else
       xfactor = 1;
-    }
   }
 
   self.x = element.x + offsetx * xfactor;
@@ -149,19 +132,17 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   } else if(relativey == "middle" || element.aligny == "middle") {
     offsety = int(element.height / 2);
 
-    if(relativey == "top" || element.aligny == "bottom") {
+    if(relativey == "top" || element.aligny == "bottom")
       yfactor = -1;
-    } else {
+    else
       yfactor = 1;
-    }
   } else {
     offsety = element.height;
 
-    if(relativey == "top") {
+    if(relativey == "top")
       yfactor = -1;
-    } else {
+    else
       yfactor = 1;
-    }
   }
 
   self.y = element.y + offsety * yfactor;
@@ -184,35 +165,31 @@ setpointbar(point, relativepoint) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if(self.alignx == "left") {
+  if(self.alignx == "left")
     self.bar.x = self.x;
-  } else if(self.alignx == "right") {
+  else if(self.alignx == "right")
     self.bar.x = self.x - self.width;
-  } else {
+  else
     self.bar.x = self.x - int(self.width / 2);
-  }
 
-  if(self.aligny == "top") {
+  if(self.aligny == "top")
     self.bar.y = self.y;
-  } else if(self.aligny == "bottom") {
+  else if(self.aligny == "bottom")
     self.bar.y = self.y;
-  }
 
   self updatebar(self.bar.frac);
 }
 
 updatebar(barfrac, rateofchange) {
-  if(self.elemtype == "bar") {
+  if(self.elemtype == "bar")
     updatebarscale(barfrac, rateofchange);
-  }
 }
 
 updatebarscale(barfrac, rateofchange) {
   barwidth = int(self.width * barfrac + 0.5);
 
-  if(!barwidth) {
+  if(!barwidth)
     barwidth = 1;
-  }
 
   self.bar.frac = barfrac;
   self.bar setshader(self.bar.shader, barwidth, self.height);
@@ -233,11 +210,10 @@ updatebarscale(barfrac, rateofchange) {
 }
 
 createfontstring(font, fontscale, player) {
-  if(isDefined(player)) {
+  if(isDefined(player))
     fontelem = newclienthudelem(player);
-  } else {
+  else
     fontelem = newhudelem();
-  }
 
   fontelem.elemtype = "font";
   fontelem.font = font;
@@ -288,11 +264,10 @@ createservertimer(font, fontscale) {
 }
 
 createicon(shader, width, height, player) {
-  if(isDefined(player)) {
+  if(isDefined(player))
     iconelem = newclienthudelem(player);
-  } else {
+  else
     iconelem = newhudelem();
-  }
 
   iconelem.elemtype = "icon";
   iconelem.x = 0;
@@ -304,9 +279,8 @@ createicon(shader, width, height, player) {
   iconelem.children = [];
   iconelem setparent(level.uiparent);
 
-  if(isDefined(shader)) {
+  if(isDefined(shader))
     iconelem setshader(shader, width, height);
-  }
 
   return iconelem;
 }
@@ -322,9 +296,8 @@ createbar(color, width, height, flashfrac) {
   barelem setshader("white", width, height);
   barelem.hidden = 0;
 
-  if(isDefined(flashfrac)) {
+  if(isDefined(flashfrac))
     barelem.flashfrac = flashfrac;
-  }
 
   barelemframe = newclienthudelem(self);
   barelemframe.elemtype = "icon";
@@ -361,11 +334,10 @@ createbar(color, width, height, flashfrac) {
   barelembg.alpha = 0.5;
   barelembg setparent(level.uiparent);
 
-  if(!level.splitscreen) {
+  if(!level.splitscreen)
     barelembg setshader("black", width + 4, height + 4);
-  } else {
+  else
     barelembg setshader("black", width + 0, height + 0);
-  }
 
   barelembg.hidden = 0;
   return barelembg;
@@ -374,11 +346,10 @@ createbar(color, width, height, flashfrac) {
 createprimaryprogressbar() {
   bar = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     bar setpoint("TOP", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  } else {
+  else
     bar setpoint("CENTER", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  }
 
   return bar;
 }
@@ -386,20 +357,18 @@ createprimaryprogressbar() {
 createprimaryprogressbartext() {
   text = createfontstring("objective", level.primaryprogressbarfontsize, self);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     text setpoint("TOP", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  } else {
+  else
     text setpoint("CENTER", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  }
 
   text.sort = -1;
   return text;
 }
 
 hideelem() {
-  if(!isDefined(self.hidden)) {
+  if(!isDefined(self.hidden))
     self.hidden = 0;
-  }
 
   if(self.hidden) {
     return;
@@ -417,9 +386,8 @@ hideelem() {
 }
 
 showelem() {
-  if(!isDefined(self.hidden)) {
+  if(!isDefined(self.hidden))
     self.hidden = 0;
-  }
 
   if(!self.hidden) {
     return;
@@ -427,21 +395,18 @@ showelem() {
   self.hidden = 0;
 
   if(isDefined(self.elemtype) && (self.elemtype == "bar" || self.elemtype == "bar_shader")) {
-    if(self.alpha != 0.5) {
+    if(self.alpha != 0.5)
       self.alpha = 0.5;
-    }
 
     self.bar.hidden = 0;
 
-    if(self.bar.alpha != 1) {
+    if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-    }
 
     self.barframe.hidden = 0;
 
-    if(self.barframe.alpha != 1) {
+    if(self.barframe.alpha != 1)
       self.barframe.alpha = 1;
-    }
   } else
     self.alpha = self.oldalpha;
 }
@@ -469,14 +434,12 @@ destroyelem() {
   tempchildren = [];
 
   if(isDefined(self.children)) {
-    for(index = 0; index < self.children.size; index++) {
+    for(index = 0; index < self.children.size; index++)
       tempchildren[index] = self.children[index];
-    }
   }
 
-  for(index = 0; index < tempchildren.size; index++) {
+  for(index = 0; index < tempchildren.size; index++)
     tempchildren[index] setparent(self getparent());
-  }
 
   if(isDefined(self.elemtype) && self.elemtype == "bar") {
     self.bar destroy();
@@ -500,11 +463,10 @@ updatechildren() {
 get_countdown_hud(x) {
   xpos = undefined;
 
-  if(!isDefined(x)) {
+  if(!isDefined(x))
     xpos = -225;
-  } else {
+  else
     xpos = x;
-  }
 
   hudelem = newhudelem();
   hudelem.alignx = "left";
@@ -526,29 +488,25 @@ get_countdown_hud(x) {
 fade_over_time(target_alpha, fade_time) {
   assert(isDefined(target_alpha), "fade_over_time must be passed a target_alpha.");
 
-  if(isDefined(fade_time) && fade_time > 0) {
+  if(isDefined(fade_time) && fade_time > 0)
     self fadeovertime(fade_time);
-  }
 
   self.alpha = target_alpha;
 
-  if(isDefined(fade_time) && fade_time > 0) {
+  if(isDefined(fade_time) && fade_time > 0)
     wait(fade_time);
-  }
 }
 
 destroyhudelem(hudelem) {
-  if(isDefined(hudelem)) {
+  if(isDefined(hudelem))
     hudelem destroyelem();
-  }
 }
 
 fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime) {
   wait(startwait);
 
-  if(!isDefined(self.blackscreen)) {
+  if(!isDefined(self.blackscreen))
     self.blackscreen = newclienthudelem(self);
-  }
 
   self.blackscreen.x = 0;
   self.blackscreen.y = 0;
@@ -561,9 +519,8 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime) {
   self.blackscreen setshader("black", 640, 480);
   self.blackscreen.alpha = 0;
 
-  if(fadeintime > 0) {
+  if(fadeintime > 0)
     self.blackscreen fadeovertime(fadeintime);
-  }
 
   self.blackscreen.alpha = 1;
   wait(fadeintime);
@@ -576,9 +533,8 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime) {
   if(!isDefined(self.blackscreen)) {
     return;
   }
-  if(fadeouttime > 0) {
+  if(fadeouttime > 0)
     self.blackscreen fadeovertime(fadeouttime);
-  }
 
   self.blackscreen.alpha = 0;
   wait(fadeouttime);

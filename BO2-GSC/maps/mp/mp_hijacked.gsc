@@ -98,7 +98,7 @@ main() {
   level thread water_trigger_init();
 
   if(level.gametype == "koth") {
-    trigs = getEntArray("koth_zone_trigger", "targetname");
+    trigs = getentarray("koth_zone_trigger", "targetname");
 
     foreach(trigger in trigs) {
       if(trigger.origin == (-239, 86, -83)) {
@@ -126,7 +126,7 @@ levelspawndvars(reset_dvars) {
 
 water_trigger_init() {
   wait 3;
-  triggers = getEntArray("trigger_hurt", "classname");
+  triggers = getentarray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -135,32 +135,29 @@ water_trigger_init() {
     trigger thread water_trigger_think();
   }
 
-  triggers = getEntArray("water_killbrush", "targetname");
+  triggers = getentarray("water_killbrush", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger thread player_splash_think();
-  }
+  foreach(trigger in triggers)
+  trigger thread player_splash_think();
 }
 
 player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity)) {
+    if(isplayer(entity) && isalive(entity))
       self thread trigger_thread(entity, ::player_water_fx);
-    }
   }
 }
 
 player_water_fx(player, endon_condition) {
   maxs = self.origin + self getmaxs();
 
-  if(maxs[2] > 60) {
+  if(maxs[2] > 60)
     maxs = maxs + vectorscale((0, 0, 1), 10.0);
-  }
 
   origin = (player.origin[0], player.origin[1], maxs[2]);
-  playFX(level._effect["water_splash_sm"], origin);
+  playfx(level._effect["water_splash_sm"], origin);
 }
 
 water_trigger_think() {
@@ -168,16 +165,15 @@ water_trigger_think() {
     self waittill("trigger", entity);
 
     if(isplayer(entity)) {
-      entity playSound("mpl_splash_death");
-      playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
+      entity playsound("mpl_splash_death");
+      playfx(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }
   }
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater()) {
+  if(self isinwater())
     return 0.4;
-  }
 
   return defaulttime;
 }
@@ -187,15 +183,14 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getEntArray("trigger_hurt", "classname");
+  triggers = getentarray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger)) {
+    if(self istouching(trigger))
       return true;
-    }
   }
 
   return false;

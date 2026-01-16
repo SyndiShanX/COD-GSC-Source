@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_util;
 
 autoexec __init__system__() {
@@ -53,7 +54,7 @@ private on_localplayer_connect(localclientnum) {
 
 private finalize_clientfields(localclientnum) {
   clientfield::register("world", "ZMHudGlobal.trials.trialIndex", 1, getminbitcountfornum(15), "int", &function_741dae5b, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_6536ca4fb2858a9f", 16000, 1, "int", &function_ff287922, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_6536ca4fb2858a9f", 16000, 1, "int", &function_ff287922, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundNumber", 1, getminbitcountfornum(30), "int", &function_88806df3, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundSuccess", 1, getminbitcountfornum(1), "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.strikes", 1, getminbitcountfornum(3), "int", undefined, 0, 0);
@@ -145,7 +146,9 @@ private function_c3febfe1(local_client_num) {
       challenge = level.var_1420e3f6.challenges[i];
 
       if(isDefined(level.var_75e93a54[challenge.name]) && isDefined(level.var_75e93a54[challenge.name].var_c5dd8620)) {
-        [[level.var_75e93a54[challenge.name].var_c5dd8620]](local_client_num, challenge.params);
+        [
+          [level.var_75e93a54[challenge.name].var_c5dd8620]
+        ](local_client_num, challenge.params);
       }
     }
   }
@@ -159,7 +162,9 @@ private on_challenge_end(local_client_num) {
       challenge = level.var_1420e3f6.challenges[i];
 
       if(isDefined(level.var_75e93a54[challenge.name]) && isDefined(level.var_75e93a54[challenge.name].var_bbcdbff5)) {
-        [[level.var_75e93a54[challenge.name].var_bbcdbff5]](local_client_num);
+        [
+          [level.var_75e93a54[challenge.name].var_bbcdbff5]
+        ](local_client_num);
       }
     }
   }
@@ -167,8 +172,8 @@ private on_challenge_end(local_client_num) {
 
 private function_d59810a5() {
   assert(isDefined(level.var_a2859227));
-  setuimodelvalue(level.var_940b67bb, # "");
-  setuimodelvalue(level.var_63e5f17c, # "");
+  setuimodelvalue(level.var_940b67bb, #"");
+  setuimodelvalue(level.var_63e5f17c, #"");
 
   switch (level.var_a2859227) {
     default:
@@ -192,5 +197,5 @@ function_97444b02(localclientnum) {
   }
 
   level.var_e7295382 zm_trial_weapon_locked::function_1e74977(localclientnum);
-  self playSound(localclientnum, # "hash_17c7895c4b5180ce");
+  self playSound(localclientnum, #"hash_17c7895c4b5180ce");
 }

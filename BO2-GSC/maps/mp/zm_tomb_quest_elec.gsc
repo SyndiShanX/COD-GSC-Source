@@ -55,9 +55,8 @@ electric_puzzle_watch_staff() {
           a_players = getplayers();
 
           foreach(e_player in a_players) {
-            if(e_player hasweapon("staff_lightning_zm")) {
+            if(e_player hasweapon("staff_lightning_zm"))
               level notify("vo_try_puzzle_lightning1", e_player);
-            }
           }
         }
       }
@@ -82,9 +81,8 @@ piano_keys_stop() {
 }
 
 show_chord_debug(a_chord_notes) {
-  if(!isDefined(a_chord_notes)) {
+  if(!isDefined(a_chord_notes))
     a_chord_notes = [];
-  }
 
   a_piano_keys = getstructarray("piano_key", "script_noteworthy");
 
@@ -126,21 +124,19 @@ piano_run_chords() {
 
         foreach(played_note in level.a_piano_keys_playing) {
           foreach(requested_note in s_chord.notes) {
-            if(requested_note == played_note) {
+            if(requested_note == played_note)
               correct_notes_playing++;
-            }
           }
         }
 
-        if(correct_notes_playing == 3) {
+        if(correct_notes_playing == 3)
           chord_solved = 1;
-        } else {
+        else {
           a_players = getplayers();
 
           foreach(e_player in a_players) {
-            if(e_player hasweapon("staff_lightning_zm")) {
+            if(e_player hasweapon("staff_lightning_zm"))
               level notify("vo_puzzle_bad", e_player);
-            }
           }
         }
       }
@@ -149,9 +145,8 @@ piano_run_chords() {
     a_players = getplayers();
 
     foreach(e_player in a_players) {
-      if(e_player hasweapon("staff_lightning_zm")) {
+      if(e_player hasweapon("staff_lightning_zm"))
         level notify("vo_puzzle_good", e_player);
-      }
     }
 
     flag_set("piano_chord_ringing");
@@ -176,15 +171,14 @@ piano_key_run() {
     self waittill("piano_key_shot");
 
     if(!flag("piano_chord_ringing")) {
-      if(level.a_piano_keys_playing.size >= 3) {
+      if(level.a_piano_keys_playing.size >= 3)
         piano_keys_stop();
-      }
 
       self.e_fx = spawn("script_model", self.origin);
-      self.e_fx playLoopSound("zmb_kbd_" + piano_key_note);
+      self.e_fx playloopsound("zmb_kbd_" + piano_key_note);
       self.e_fx.angles = self.angles;
-      self.e_fx setModel("tag_origin");
-      playFXOnTag(level._effect["elec_piano_glow"], self.e_fx, "tag_origin");
+      self.e_fx setmodel("tag_origin");
+      playfxontag(level._effect["elec_piano_glow"], self.e_fx, "tag_origin");
       level.a_piano_keys_playing[level.a_piano_keys_playing.size] = piano_key_note;
       level notify("piano_key_played", self, piano_key_note);
       level waittill("piano_keys_stop");
@@ -195,18 +189,17 @@ piano_key_run() {
 
 electric_puzzle_2_init() {
   level.electric_relays = [];
-  level.electric_relays["bunker"] = spawnStruct();
-  level.electric_relays["tank_platform"] = spawnStruct();
-  level.electric_relays["start"] = spawnStruct();
-  level.electric_relays["elec"] = spawnStruct();
-  level.electric_relays["ruins"] = spawnStruct();
-  level.electric_relays["air"] = spawnStruct();
-  level.electric_relays["ice"] = spawnStruct();
-  level.electric_relays["village"] = spawnStruct();
+  level.electric_relays["bunker"] = spawnstruct();
+  level.electric_relays["tank_platform"] = spawnstruct();
+  level.electric_relays["start"] = spawnstruct();
+  level.electric_relays["elec"] = spawnstruct();
+  level.electric_relays["ruins"] = spawnstruct();
+  level.electric_relays["air"] = spawnstruct();
+  level.electric_relays["ice"] = spawnstruct();
+  level.electric_relays["village"] = spawnstruct();
 
-  foreach(s_relay in level.electric_relays) {
-    s_relay.connections = [];
-  }
+  foreach(s_relay in level.electric_relays)
+  s_relay.connections = [];
 
   level.electric_relays["tank_platform"].connections[0] = "ruins";
   level.electric_relays["start"].connections[1] = "tank_platform";
@@ -223,11 +216,10 @@ electric_puzzle_2_init() {
   level.electric_relays["air"].position = 0;
   level.electric_relays["ice"].position = 1;
   level.electric_relays["village"].position = 1;
-  a_switches = getEntArray("puzzle_relay_switch", "script_noteworthy");
+  a_switches = getentarray("puzzle_relay_switch", "script_noteworthy");
 
-  foreach(e_switch in a_switches) {
-    level.electric_relays[e_switch.script_string].e_switch = e_switch;
-  }
+  foreach(e_switch in a_switches)
+  level.electric_relays[e_switch.script_string].e_switch = e_switch;
 
   array_thread(level.electric_relays, ::relay_switch_run);
 }
@@ -238,17 +230,14 @@ electric_puzzle_2_run() {
 
 electric_puzzle_2_cleanup() {
   foreach(s_relay in level.electric_relays) {
-    if(isDefined(s_relay.trigger_stub)) {
+    if(isDefined(s_relay.trigger_stub))
       maps\mp\zombies\_zm_unitrigger::register_unitrigger(s_relay.trigger_stub);
-    }
 
-    if(isDefined(s_relay.e_switch)) {
+    if(isDefined(s_relay.e_switch))
       s_relay.e_switch stoploopsound(0.5);
-    }
 
-    if(isDefined(s_relay.e_fx)) {
+    if(isDefined(s_relay.e_fx))
       s_relay.e_fx delete();
-    }
   }
 }
 
@@ -290,11 +279,10 @@ update_relay_fx_and_sound() {
   }
   foreach(s_relay in level.electric_relays) {
     if(s_relay.sending_power) {
-      if(isDefined(s_relay.e_fx)) {
+      if(isDefined(s_relay.e_fx))
         s_relay.e_fx delete();
-      }
 
-      s_relay.e_switch playLoopSound("zmb_squest_elec_switch_hum", 1);
+      s_relay.e_switch playloopsound("zmb_squest_elec_switch_hum", 1);
       continue;
     }
 
@@ -303,17 +291,16 @@ update_relay_fx_and_sound() {
         v_offset = anglestoright(s_relay.e_switch.angles) * 1.0;
         s_relay.e_fx = spawn("script_model", s_relay.e_switch.origin + v_offset);
         s_relay.e_fx.angles = s_relay.e_switch.angles + vectorscale((0, 0, -1), 90.0);
-        s_relay.e_fx setModel("tag_origin");
-        playFXOnTag(level._effect["fx_tomb_sparks"], s_relay.e_fx, "tag_origin");
+        s_relay.e_fx setmodel("tag_origin");
+        playfxontag(level._effect["fx_tomb_sparks"], s_relay.e_fx, "tag_origin");
       }
 
-      s_relay.e_switch playLoopSound("zmb_squest_elec_switch_spark", 1);
+      s_relay.e_switch playloopsound("zmb_squest_elec_switch_spark", 1);
       continue;
     }
 
-    if(isDefined(s_relay.e_fx)) {
+    if(isDefined(s_relay.e_fx))
       s_relay.e_fx delete();
-    }
 
     s_relay.e_switch stoploopsound(1);
   }
@@ -321,7 +308,7 @@ update_relay_fx_and_sound() {
 
 update_relay_rotation() {
   self.e_switch rotateto((self.position * 90, self.e_switch.angles[1], self.e_switch.angles[2]), 0.1, 0, 0);
-  self.e_switch playSound("zmb_squest_elec_switch");
+  self.e_switch playsound("zmb_squest_elec_switch");
   self.e_switch waittill("rotatedone");
 }
 
@@ -332,7 +319,7 @@ update_relays() {
 
 relay_switch_run() {
   assert(isDefined(self.e_switch));
-  self.trigger_stub = spawnStruct();
+  self.trigger_stub = spawnstruct();
   self.trigger_stub.origin = self.e_switch.origin;
   self.trigger_stub.radius = 50;
   self.trigger_stub.cursor_hint = "HINT_NOICON";
@@ -352,14 +339,12 @@ relay_switch_run() {
     str_target_relay = self.connections[self.position];
 
     if(isDefined(str_target_relay)) {
-      if(str_target_relay == "village" || str_target_relay == "ruins") {
+      if(str_target_relay == "village" || str_target_relay == "ruins")
         level notify("vo_puzzle_good", e_user);
-      }
     } else if(n_tries % 8 == 0)
       level notify("vo_puzzle_confused", e_user);
-    else if(n_tries % 4 == 0) {
+    else if(n_tries % 4 == 0)
       level notify("vo_puzzle_bad", e_user);
-    }
 
     self update_relay_rotation();
     update_relays();

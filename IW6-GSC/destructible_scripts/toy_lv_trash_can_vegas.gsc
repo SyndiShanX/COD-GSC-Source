@@ -63,9 +63,8 @@ main_sp() {
   var_0.parts[1].hitfloorstate = 1;
   var_0.clipmovementtolerance = 8;
 
-  if(!isDefined(level._interactive)) {
+  if(!isDefined(level._interactive))
     level._interactive = [];
-  }
 
   level._interactive["lv_trash_can_vegas"] = var_0;
 }
@@ -89,13 +88,11 @@ interactive_fall_and_break(var_0) {
 
   foreach(var_4 in var_1.parts) {
     foreach(var_6 in var_4.states) {
-      if(isDefined(var_6.model)) {
+      if(isDefined(var_6.model))
         precachemodel(var_6.model);
-      }
 
-      if(isDefined(var_6.physicsmodel)) {
+      if(isDefined(var_6.physicsmodel))
         precachemodel(var_6.physicsmodel);
-      }
     }
   }
 
@@ -110,11 +107,10 @@ interactive_fall_and_break(var_0) {
     var_15 = destructible_modifydamagetype(var_15);
     var_11 = destructible_modifydamageamount(var_11, var_15, var_12);
 
-    if(isDefined(var_18)) {
+    if(isDefined(var_18))
       var_19 = fandb_findpartindex(var_0.type, var_18);
-    } else {
+    else
       var_19 = 0;
-    }
 
     fandb_dodamage(var_0, var_19, var_11, var_12, var_13, var_14, var_15);
   }
@@ -126,26 +122,23 @@ destructible_modifydamagetype(var_0) {
 }
 
 destructible_modifydamageamount(var_0, var_1, var_2) {
-  if(common_scripts\utility::issp()) {
+  if(common_scripts\utility::issp())
     var_0 = var_0 * 0.5;
-  } else {
+  else
     var_0 = var_0 * 1.0;
-  }
 
   if(common_scripts\_destructible::is_shotgun_damage(var_2, var_1)) {
-    if(common_scripts\utility::issp()) {
+    if(common_scripts\utility::issp())
       var_0 = var_0 * 8.0;
-    } else {
+    else
       var_0 = var_0 * 4.0;
-    }
   }
 
   if(var_1 == "splash") {
-    if(common_scripts\utility::issp()) {
+    if(common_scripts\utility::issp())
       var_0 = var_0 * 9.0;
-    } else {
+    else
       var_0 = var_0 * 13.0;
-    }
   }
 
   return var_0;
@@ -155,9 +148,8 @@ fandb_dodamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(var_6 == "splash") {
     var_8 = [];
 
-    for(var_9 = 0; var_9 < level._interactive[var_0.type].parts.size; var_9++) {
+    for(var_9 = 0; var_9 < level._interactive[var_0.type].parts.size; var_9++)
       var_8[var_9] = var_9;
-    }
   } else {
     var_8 = [];
     var_8[0] = var_1;
@@ -169,9 +161,8 @@ fandb_dodamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     while(var_13 > 0 && isDefined(var_12.states[var_0.partstates[var_11]])) {
       if(isDefined(var_12.states[var_0.partstates[var_11]].damagecallback)) {
-        foreach(var_15 in var_12.states[var_0.partstates[var_11]].damagecallback) {
-          var_0[[var_15]](var_2, var_3, var_4, var_5, var_6);
-        }
+        foreach(var_15 in var_12.states[var_0.partstates[var_11]].damagecallback)
+        var_0[[var_15]](var_2, var_3, var_4, var_5, var_6);
       }
 
       if(isDefined(var_0.parthealths[var_11])) {
@@ -189,9 +180,8 @@ fandb_dodamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_13 = 0;
     }
 
-    if(var_6 != "splash" && (isDefined(var_12.alsodamageparent) && var_12.alsodamageparent > 0) && (!isDefined(var_7) || var_12.parent != var_7)) {
+    if(var_6 != "splash" && (isDefined(var_12.alsodamageparent) && var_12.alsodamageparent > 0) && (!isDefined(var_7) || var_12.parent != var_7))
       fandb_dodamage(var_0, var_12.parent, var_2 * var_12.alsodamageparent, var_3, var_4, var_5, var_6, var_11);
-    }
   }
 }
 
@@ -206,9 +196,8 @@ fandb_gotostate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       self.parthealths[var_0] = var_7.states[self.partstates[var_0]].health;
       var_10 = var_7.states[self.partstates[var_0]];
 
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         var_2 = var_2 * var_10.physicsmultiply;
-      }
 
       self.obj fandb_throwphysicsmodel(var_10.physicsmodel, var_7.tag, var_10.physicspush, var_10.physicsdefaultdamagepush, var_2, var_4, var_5);
       self.obj fandb_fx(var_10.fx, var_10.fxtags);
@@ -222,16 +211,14 @@ fandb_gotostate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 fandb_hideshowtag(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     if(isDefined(var_0) && var_0) {
-      if(isDefined(var_2)) {
+      if(isDefined(var_2))
         self showpart(var_1, var_2);
-      } else {
+      else
         self showpart(var_1);
-      }
     } else if(isDefined(var_2))
       self hidepart(var_1, var_2);
-    else {
+    else
       self hidepart(var_1);
-    }
   }
 }
 
@@ -241,17 +228,15 @@ fandb_throwphysicsmodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7.angles = self gettagangles(var_1);
     var_7 setModel(var_0);
 
-    if(isDefined(var_5)) {
+    if(isDefined(var_5))
       var_8 = var_5;
-    } else {
+    else
       var_8 = var_7.origin;
-    }
 
-    if((!isDefined(var_6) || !isDefined(var_4)) && isDefined(var_3)) {
+    if((!isDefined(var_6) || !isDefined(var_4)) && isDefined(var_3))
       var_9 = var_3;
-    } else {
+    else
       var_9 = (0, 0, 0);
-    }
 
     if(isDefined(var_2)) {
       var_9 = var_9 + var_2;
@@ -263,9 +248,8 @@ fandb_throwphysicsmodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_12 = var_9[2] * anglestoup(var_7.angles);
     var_9 = var_10 + var_11 + var_12;
 
-    if(isDefined(var_6) && isDefined(var_4)) {
+    if(isDefined(var_6) && isDefined(var_4))
       var_9 = var_9 + var_6 * var_4;
-    }
 
     var_7 physicslaunchclient(var_8, var_9);
   }
@@ -284,18 +268,16 @@ fandb_fx(var_0, var_1) {
 }
 
 fandb_playSound(var_0, var_1) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     thread common_scripts\_destructible::play_sound(var_0, var_1);
-  }
 }
 
 fandb_findpartindex(var_0, var_1) {
   var_2 = level._interactive[var_0];
 
   for(var_3 = 0; var_3 < var_2.parts.size; var_3++) {
-    if(isDefined(var_2.parts[var_3].tag) && var_2.parts[var_3].tag == var_1) {
+    if(isDefined(var_2.parts[var_3].tag) && var_2.parts[var_3].tag == var_1)
       return var_3;
-    }
   }
 
   return 0;
@@ -307,20 +289,18 @@ serverphysicsobj(var_0, var_1, var_2, var_3, var_4) {
   var_5 setModel(self.obj.model);
   var_2 = vectornormalize(var_2);
 
-  if(var_4 != "splash") {
+  if(var_4 != "splash")
     var_0 = var_0 * 10;
-  } else {
+  else
     var_0 = var_0 * 2;
-  }
 
   var_5 physicslaunchserver(var_3, var_0 * var_2);
   self.obj delete();
   self.obj = var_5;
   self.obj setCanDamage(1);
 
-  for(var_6 = 0; var_6 < level._interactive[self.type].parts.size; var_6++) {
+  for(var_6 = 0; var_6 < level._interactive[self.type].parts.size; var_6++)
     fandb_gotostate(var_6, self.partstates[var_6]);
-  }
 }
 
 fandb_handles_collision_brushes() {
@@ -390,9 +370,8 @@ lv_trash_can_vegas_hitfloor_internal() {
           var_5 = "pending";
           var_6 = gettime();
         } else {
-          if(var_6 > gettime()) {
+          if(var_6 > gettime())
             var_6 = gettime() - 1000;
-          }
 
           if(gettime() - var_6 >= 1000) {
             var_5 = "deleted";
@@ -418,7 +397,6 @@ lv_trash_can_vegas_throwlid() {
   self.obj = var_1;
   self.obj setCanDamage(1);
 
-  for(var_2 = 0; var_2 < var_0.parts.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.parts.size; var_2++)
     fandb_gotostate(var_2, var_0.parts[var_2].hitfloorstate);
-  }
 }

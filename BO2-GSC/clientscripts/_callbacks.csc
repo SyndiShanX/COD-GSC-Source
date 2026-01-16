@@ -21,19 +21,17 @@
 #include clientscripts\_footsteps;
 
 statechange(clientnum, system, newstate) {
-  if(!isDefined(level._systemstates)) {
+  if(!isDefined(level._systemstates))
     level._systemstates = [];
-  }
 
-  if(!isDefined(level._systemstates[system])) {
-    level._systemstates[system] = spawnStruct();
-  }
+  if(!isDefined(level._systemstates[system]))
+    level._systemstates[system] = spawnstruct();
 
   level._systemstates[system].state = newstate;
 
-  if(isDefined(level._systemstates[system].callback)) {
+  if(isDefined(level._systemstates[system].callback))
     [[level._systemstates[system].callback]](clientnum, newstate);
-  } else {
+  else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
 
   }
@@ -63,9 +61,8 @@ init_fx(clientnum) {
 addcallback(event, func) {
   assert(isDefined(event), "Trying to set a callback on an undefined event.");
 
-  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
+  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event]))
     level._callbacks[event] = [];
-  }
 
   level._callbacks[event] = add_to_array(level._callbacks[event], func, 0);
 }
@@ -75,9 +72,8 @@ callback(event, clientnum) {
     for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
 
-      if(isDefined(callback)) {
+      if(isDefined(callback))
         self thread[[callback]](clientnum);
-      }
     }
   }
 }
@@ -92,9 +88,8 @@ localclientconnect(clientnum) {
     level.usetreadfx = 0;
   }
 
-  if(!isDefined(level._laststand)) {
+  if(!isDefined(level._laststand))
     level._laststand = [];
-  }
 
   level._laststand[clientnum] = 0;
   level notify("connected", clientnum);
@@ -102,9 +97,8 @@ localclientconnect(clientnum) {
 }
 
 localclientconnect_callback(clientnum) {
-  for(player = level.localplayers[clientnum]; !isDefined(player); player = level.localplayers[clientnum]) {
+  for(player = level.localplayers[clientnum]; !isDefined(player); player = level.localplayers[clientnum])
     wait 0.01;
-  }
 
   player callback("on_player_connect", clientnum);
 }
@@ -117,25 +111,21 @@ playerspawned(localclientnum) {
   self endon("entityshutdown");
   self thread clientscripts\_flamethrower_plight::play_pilot_light_fx(localclientnum);
 
-  if(isDefined(level._faceanimcbfunc)) {
+  if(isDefined(level._faceanimcbfunc))
     self thread[[level._faceanimcbfunc]](localclientnum);
-  }
 
-  if(isDefined(level._playercbfunc)) {
+  if(isDefined(level._playercbfunc))
     self thread[[level._playercbfunc]](localclientnum);
-  }
 }
 
 codecallback_gibevent(localclientnum, type, locations) {
-  if(isDefined(level._gibeventcbfunc)) {
+  if(isDefined(level._gibeventcbfunc))
     self thread[[level._gibeventcbfunc]](localclientnum, type, locations);
-  }
 }
 
 get_gib_def() {
-  if(!isDefined(level._gibbing_actor_models)) {
+  if(!isDefined(level._gibbing_actor_models))
     return -1;
-  }
 
   for(i = 0; i < level._gibbing_actor_models.size; i++) {
     if(self[[level._gibbing_actor_models[i].matches_me]]()) {
@@ -157,9 +147,8 @@ entityspawned(localclientnum) {
   }
 
   if(self.type == "missile") {
-    if(isdumbrocketlauncherweapon(self.weapon)) {
+    if(isdumbrocketlauncherweapon(self.weapon))
       self thread clientscripts\_audio::rpgwhizbywatcher();
-    }
 
     switch (self.weapon) {
       case "explosive_bolt_sp":
@@ -199,19 +188,16 @@ entityspawned(localclientnum) {
   }
 
   if(self.type == "vehicle") {
-    if(!isDefined(level.vehicles_inited)) {
+    if(!isDefined(level.vehicles_inited))
       clientscripts\_vehicle::init_vehicles();
-    }
 
     clientscripts\_treadfx::loadtreadfx(self);
 
-    if(isDefined(level._customvehiclecbfunc)) {
+    if(isDefined(level._customvehiclecbfunc))
       self thread[[level._customvehiclecbfunc]](localclientnum);
-    }
 
-    if(self is_4wheel()) {
+    if(self is_4wheel())
       self thread clientscripts\_audio::play_death_fire_loop();
-    }
 
     self thread vehicle_flag_toggle_exhaustfx_handler(localclientnum, self clientflag(8), 1);
     self thread vehicle_flag_toggle_lights_handler(localclientnum, self clientflag(10), 1);
@@ -234,18 +220,16 @@ entityspawned(localclientnum) {
     }
   }
 
-  if(self.type == "actor" && isDefined(level._faceanimcbfunc)) {
+  if(self.type == "actor" && isDefined(level._faceanimcbfunc))
     self thread[[level._faceanimcbfunc]](localclientnum);
-  }
 
   self.entity_spawned = 1;
   self notify("entity_spawned");
 }
 
 entityshutdown_callback(localclientnum, entity) {
-  if(isDefined(level._entityshutdowncbfunc)) {
+  if(isDefined(level._entityshutdowncbfunc))
     [[level._entityshutdowncbfunc]](localclientnum, entity);
-  }
 }
 
 localclientchanged_callback(localclientnum) {
@@ -324,9 +308,9 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
       break;
   }
 
-  if(type == "n") {
+  if(type == "n")
     clientscripts\_napalm::startnapalm(localclientnum, pos, yaw, teamfaction, team, owner, exittype);
-  } else {
+  else {
     println("");
     println("Unhandled airsupport type, only A (airstrike) and N (napalm) supported");
     println(type);
@@ -404,15 +388,14 @@ callback_deactivate_exploder(exploder_id) {
 
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playSound(client_num, "fly_dog_step_run_default");
+    entity playsound(client_num, "fly_dog_step_run_default");
     return true;
   }
 
   prefix = getsubstr(note, 0, 5);
 
-  if(prefix != "sound") {
+  if(prefix != "sound")
     return false;
-  }
 
   alias = "aml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
@@ -430,27 +413,25 @@ dog_sound_print(message) {
 play_dog_sound(localclientnum, sound, position) {
   dog_sound_print("SOUND " + sound);
 
-  if(isDefined(position)) {
-    return self playSound(localclientnum, sound, position);
-  }
+  if(isDefined(position))
+    return self playsound(localclientnum, sound, position);
 
-  return self playSound(localclientnum, sound);
+  return self playsound(localclientnum, sound);
 }
 
 client_flag_callback(localclientnum, flag, set, newent) {
-  if((self.type == "vehicle" || self.type == "actor" || self.type == "missle") && !isDefined(self.entity_spawned)) {
+  if((self.type == "vehicle" || self.type == "actor" || self.type == "missle") && !isDefined(self.entity_spawned))
     self waittill("entity_spawned");
-  }
 
-  if(isDefined(level._client_flag_callbacks) && isDefined(level._client_flag_callbacks[self.type]) && isDefined(level._client_flag_callbacks[self.type][flag])) {
+  if(isDefined(level._client_flag_callbacks) && isDefined(level._client_flag_callbacks[self.type]) && isDefined(level._client_flag_callbacks[self.type][flag]))
     self thread[[level._client_flag_callbacks[self.type][flag]]](localclientnum, set, newent);
-  } else {}
+  else {
+  }
 }
 
 client_flagasval_callback(localclientnum, val) {
-  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type])) {
+  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type]))
     self thread[[level._client_flagasval_callbacks[self.type]]](localclientnum, val);
-  }
 }
 
 codecallback_creatingcorpse(localclientnum, player) {
@@ -470,43 +451,39 @@ codecallback_playerfoliage(client_num, player, firstperson, quiet) {
 }
 
 addplayweapondeatheffectscallback(weaponname, func) {
-  if(!isDefined(level._playweapondeatheffectscallbacks)) {
+  if(!isDefined(level._playweapondeatheffectscallbacks))
     level._playweapondeatheffectscallbacks = [];
-  }
 
   level._playweapondeatheffectscallbacks[weaponname] = func;
 }
 
 codecallback_playweapondeatheffects(localclientnum, weaponname, userdata) {
-  if(isDefined(level._playweapondeatheffectscallbacks) && isDefined(level._playweapondeatheffectscallbacks[weaponname])) {
+  if(isDefined(level._playweapondeatheffectscallbacks) && isDefined(level._playweapondeatheffectscallbacks[weaponname]))
     self thread[[level._playweapondeatheffectscallbacks[weaponname]]](localclientnum, weaponname, userdata);
-  }
 }
 
 addplayweapondamageeffectscallback(weaponname, func) {
-  if(!isDefined(level._playweapondamageeffectscallbacks)) {
+  if(!isDefined(level._playweapondamageeffectscallbacks))
     level._playweapondamageeffectscallbacks = [];
-  }
 
   level._playweapondamageeffectscallbacks[weaponname] = func;
 }
 
 codecallback_playweapondamageeffects(localclientnum, weaponname, userdata) {
-  if(isDefined(level._playweapondamageeffectscallbacks) && isDefined(level._playweapondamageeffectscallbacks[weaponname])) {
+  if(isDefined(level._playweapondamageeffectscallbacks) && isDefined(level._playweapondamageeffectscallbacks[weaponname]))
     self thread[[level._playweapondamageeffectscallbacks[weaponname]]](localclientnum, weaponname, userdata);
-  }
 }
 
 codecallback_suimessage(localclientnum, param1, param2) {
-  if(isDefined(level.onsuimessage)) {
+  if(isDefined(level.onsuimessage))
     [[level.onsuimessage]](localclientnum, param1, param2);
-  }
 }
 
 codecallback_argusnotify(localclientnum, argusid, usertag, message) {
-  if(isDefined(level.onargusnotify)) {
-    return [[level.onargusnotify]](localclientnum, argusid, usertag, message);
-  }
+  if(isDefined(level.onargusnotify))
+    return [
+      [level.onargusnotify]
+    ](localclientnum, argusid, usertag, message);
 
   return 1;
 }

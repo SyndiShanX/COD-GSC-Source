@@ -23,32 +23,32 @@ function autoexec init() {
     return;
   }
   namespace_c8dba3e6::init_voice();
-  level.bzm_lotusdialogue1callback = &function_b3638a15;
-  level.bzm_lotusdialogue2callback = &function_d966047e;
-  level.bzm_lotusdialogue2_1callback = &function_7aa93e6e;
-  level.bzm_lotusdialogue2_2callback = &function_54a6c405;
-  level.bzm_lotusdialogue2_3callback = &function_2ea4499c;
-  level.bzm_lotusdialogue2_4callback = &function_8a1cf33;
-  level.bzm_lotusdialogue3callback = &function_ff687ee7;
-  level.bzm_lotusdialogue3_2callback = &function_cdf5cbb4;
-  level.bzm_lotusdialogue4callback = &function_f5572608;
-  level.bzm_lotusdialogue4_1callback = &function_b86427d4;
-  level.bzm_lotusdialogue4_2callback = &function_2a6b970f;
-  level.bzm_lotusdialogue6callback = &function_415c1ada;
-  level.bzm_lotusdialogue7callback = &function_675e9543;
-  level.bzm_lotusdialogue7_1callback = &function_d8e54d73;
-  level.bzm_lotusdialogue8callback = &function_5d4d3c64;
-  level.bzm_lotusdialogue9callback = &function_834fb6cd;
-  level.bzm_lotusdialogue10callback = &function_5a3b6b5f;
-  level.bzm_lotusdialogue11callback = &function_3438f0f6;
-  level.bzm_lotusdialogue12callback = &function_e36768d;
-  level.bzm_lotusdialogue13callback = &function_e833fc24;
-  level.bzm_lotusdialogue14callback = &function_c23181bb;
+  level.bzm_lotusdialogue1callback = & function_b3638a15;
+  level.bzm_lotusdialogue2callback = & function_d966047e;
+  level.bzm_lotusdialogue2_1callback = & function_7aa93e6e;
+  level.bzm_lotusdialogue2_2callback = & function_54a6c405;
+  level.bzm_lotusdialogue2_3callback = & function_2ea4499c;
+  level.bzm_lotusdialogue2_4callback = & function_8a1cf33;
+  level.bzm_lotusdialogue3callback = & function_ff687ee7;
+  level.bzm_lotusdialogue3_2callback = & function_cdf5cbb4;
+  level.bzm_lotusdialogue4callback = & function_f5572608;
+  level.bzm_lotusdialogue4_1callback = & function_b86427d4;
+  level.bzm_lotusdialogue4_2callback = & function_2a6b970f;
+  level.bzm_lotusdialogue6callback = & function_415c1ada;
+  level.bzm_lotusdialogue7callback = & function_675e9543;
+  level.bzm_lotusdialogue7_1callback = & function_d8e54d73;
+  level.bzm_lotusdialogue8callback = & function_5d4d3c64;
+  level.bzm_lotusdialogue9callback = & function_834fb6cd;
+  level.bzm_lotusdialogue10callback = & function_5a3b6b5f;
+  level.bzm_lotusdialogue11callback = & function_3438f0f6;
+  level.bzm_lotusdialogue12callback = & function_e36768d;
+  level.bzm_lotusdialogue13callback = & function_e833fc24;
+  level.bzm_lotusdialogue14callback = & function_c23181bb;
   function_91402721();
 }
 
 function private function_91402721() {
-  callback::on_spawned(&function_b89e0be4);
+  callback::on_spawned( & function_b89e0be4);
 }
 
 function function_b89e0be4() {}

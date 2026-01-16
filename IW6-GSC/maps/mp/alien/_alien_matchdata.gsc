@@ -37,17 +37,15 @@ get_alien_game_type() {
   CONST_CASUAL_MODE = "aliens ca";
   CONST_NORMAL_MODE = "aliens";
 
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     return CONST_CHAOS_MODE;
-  }
 
-  if(maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(maps\mp\alien\_utility::is_hardcore_mode())
     return CONST_HARDCORE_MODE;
-  } else if(maps\mp\alien\_utility::is_casual_mode()) {
+  else if(maps\mp\alien\_utility::is_casual_mode())
     return CONST_CASUAL_MODE;
-  } else {
+  else
     return CONST_NORMAL_MODE;
-  }
 }
 
 init() {
@@ -103,9 +101,8 @@ player_init() {
 }
 
 set_max_player_count() {
-  if(!isDefined(level.max_player_count)) {
+  if(!isDefined(level.max_player_count))
     level.max_player_count = 0;
-  }
 
   if((level.players.size + 1) > level.max_player_count) {
     level.max_player_count++;
@@ -118,15 +115,13 @@ set_split_screen() {
 }
 
 set_join_in_progress() {
-  if(prematch_over()) {
+  if(prematch_over())
     setMatchData("players", self.clientid, "aliensJIP", true);
-  }
 }
 
 prematch_over() {
-  if(isDefined(level.startTime)) {
+  if(isDefined(level.startTime))
     return true;
-  }
 
   return false;
 }
@@ -150,9 +145,8 @@ set_relics_selected() {
     }
   }
 
-  for(i = num_enabled_nerfs; i < level.nerf_list.size; i++) {
+  for(i = num_enabled_nerfs; i < level.nerf_list.size; i++)
     setMatchData("players", self.clientid, "aliensRelics", i, "none");
-  }
 }
 
 set_upgrades_purchased() {
@@ -165,9 +159,8 @@ set_upgrades_purchased() {
     }
   }
 
-  for(index = num_upgrade_purchased; index < MAX_NUM_UPGRADES; index++) {
+  for(index = num_upgrade_purchased; index < MAX_NUM_UPGRADES; index++)
     setMatchData("players", self.clientid, "aliensUpgradePurchased", index, "none");
-  }
 }
 
 set_upgrades_enabled() {
@@ -180,9 +173,8 @@ set_upgrades_enabled() {
     }
   }
 
-  for(index = num_upgrade_enabled; index < MAX_NUM_UPGRADES; index++) {
+  for(index = num_upgrade_enabled; index < MAX_NUM_UPGRADES; index++)
     setMatchData("players", self.clientid, "aliensUpgradeEnabled", index, "none");
-  }
 }
 
 inc_drill_heli_damages(damage_amt) {
@@ -224,9 +216,8 @@ inc_bleedout_counts() {
 }
 
 inc_lastStand_record(field_name) {
-  if(!isDefined(self.alien_matchData.lastStand_record[field_name][level.num_hive_destroyed])) {
+  if(!isDefined(self.alien_matchData.lastStand_record[field_name][level.num_hive_destroyed]))
     self.alien_matchData.lastStand_record[field_name][level.num_hive_destroyed] = 0;
-  }
 
   self.alien_matchData.lastStand_record[field_name][level.num_hive_destroyed]++;
 }
@@ -254,9 +245,8 @@ update_spending_type(amount_spent, spending_type) {
 EndGame(end_condition, play_time) {
   set_game_data(end_condition, play_time);
 
-  foreach(player in level.players) {
-    player set_player_game_data();
-  }
+  foreach(player in level.players)
+  player set_player_game_data();
 
   sendMatchData();
 }
@@ -296,16 +286,14 @@ copy_from_playerData() {
 }
 
 set_perk_upgraded() {
-  foreach(index, perk_name in self.alien_matchData.perk_upgraded) {
-    setMatchData("players", self.clientid, "aliensPerksBought", index, perk_name);
-  }
+  foreach(index, perk_name in self.alien_matchData.perk_upgraded)
+  setMatchData("players", self.clientid, "aliensPerksBought", index, perk_name);
 }
 
 set_lastStand_stats() {
   foreach(stat_type, info_array in self.alien_matchData.lastStand_record) {
-    foreach(hive_index, counts in info_array) {
-      setMatchData("players", self.clientid, stat_type, hive_index, validate_byte(counts));
-    }
+    foreach(hive_index, counts in info_array)
+    setMatchData("players", self.clientid, stat_type, hive_index, validate_byte(counts));
   }
 }
 

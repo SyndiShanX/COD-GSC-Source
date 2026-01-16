@@ -38,9 +38,8 @@ watchrewindableevents(localclientnum) {
           if(rewindwatcher.event[timekey].inprogress == 1) {
             continue;
           }
-          if(level.servertime >= timekey) {
+          if(level.servertime >= timekey)
             rewindwatcher thread startrewindableevent(localclientnum, timekey);
-          }
         }
       }
     }
@@ -94,14 +93,13 @@ createairstrikerewindwatcher(localclientnum) {
 createrewindwatcher(localclientnum, name) {
   player = getlocalplayer(localclientnum);
 
-  if(!isDefined(level.rewindwatcherarray[localclientnum])) {
+  if(!isDefined(level.rewindwatcherarray[localclientnum]))
     level.rewindwatcherarray[localclientnum] = [];
-  }
 
   rewindwatcher = getrewindwatcher(localclientnum, name);
 
   if(!isDefined(rewindwatcher)) {
-    rewindwatcher = spawnStruct();
+    rewindwatcher = spawnstruct();
     level.rewindwatcherarray[localclientnum][level.rewindwatcherarray[localclientnum].size] = rewindwatcher;
   }
 
@@ -117,9 +115,8 @@ resetondemojump(localclientnum) {
     self.inprogress = 0;
     timedfunctionkeys = getarraykeys(self.timedfunctions);
 
-    for(i = 0; i < timedfunctionkeys.size; i++) {
+    for(i = 0; i < timedfunctionkeys.size; i++)
       self.timedfunctions[timedfunctionkeys[i]].inprogress = 0;
-    }
 
     eventkeys = getarraykeys(self.event);
 
@@ -127,34 +124,30 @@ resetondemojump(localclientnum) {
       self.event[eventkeys[i]].inprogress = 0;
       timedfunctionkeys = getarraykeys(self.event[eventkeys[i]].timedfunction);
 
-      for(index = 0; index < timedfunctionkeys.size; index++) {
+      for(index = 0; index < timedfunctionkeys.size; index++)
         self.event[eventkeys[i]].timedfunction[timedfunctionkeys[index]] = 0;
-      }
     }
   }
 }
 
 addtimedfunction(name, function, relativestarttimeinsecs) {
-  if(!isDefined(self.timedfunctions)) {
+  if(!isDefined(self.timedfunctions))
     self.timedfunctions = [];
-  }
 
   assert(!isDefined(self.timedfunctions[name]));
-  self.timedfunctions[name] = spawnStruct();
+  self.timedfunctions[name] = spawnstruct();
   self.timedfunctions[name].inprogress = 0;
   self.timedfunctions[name].function = function;
   self.timedfunctions[name].starttimesec = relativestarttimeinsecs;
 }
 
 getrewindwatcher(localclientnum, name) {
-  if(!isDefined(level.rewindwatcherarray[localclientnum])) {
+  if(!isDefined(level.rewindwatcherarray[localclientnum]))
     return undefined;
-  }
 
   for(watcher = 0; watcher < level.rewindwatcherarray[localclientnum].size; watcher++) {
-    if(level.rewindwatcherarray[localclientnum][watcher].name == name) {
+    if(level.rewindwatcherarray[localclientnum][watcher].name == name)
       return level.rewindwatcherarray[localclientnum][watcher];
-    }
   }
 
   return undefined;
@@ -164,7 +157,7 @@ addrewindableeventtowatcher(starttime, data) {
   if(isDefined(self.event[starttime])) {
     return;
   }
-  self.event[starttime] = spawnStruct();
+  self.event[starttime] = spawnstruct();
   self.event[starttime].data = data;
   self.event[starttime].inprogress = 0;
 
@@ -185,9 +178,8 @@ servertimedmoveto(localclientnum, startpoint, endpoint, starttime, duration) {
   assert(duration > 0);
   dojump = 1;
 
-  if(timeelapsed < 0.02) {
+  if(timeelapsed < 0.02)
     dojump = 0;
-  }
 
   if(timeelapsed < duration) {
     movetime = duration - timeelapsed;
@@ -209,13 +201,11 @@ servertimedrotateto(localclientnum, angles, starttime, duration, timein, timeout
   level endon("demo_jump" + localclientnum);
   timeelapsed = (level.servertime - starttime) * 0.001;
 
-  if(!isDefined(timein)) {
+  if(!isDefined(timein))
     timein = 0;
-  }
 
-  if(!isDefined(timeout)) {
+  if(!isDefined(timeout))
     timeout = 0;
-  }
 
   assert(duration > 0);
 
@@ -230,9 +220,8 @@ servertimedrotateto(localclientnum, angles, starttime, duration, timein, timeout
 }
 
 waitforservertime(localclientnum, timefromstart) {
-  while(timefromstart > level.servertime) {
+  while(timefromstart > level.servertime)
     wait 0.01;
-  }
 }
 
 removecliententonjump(clientent, localclientnum) {

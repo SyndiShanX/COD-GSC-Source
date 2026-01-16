@@ -29,6 +29,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_loadout;
 
 autoexec __init__system__() {
@@ -66,10 +67,10 @@ event_handler[weapon_change] weapon_changed(eventstruct) {
 
 event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
   switch (eventstruct.event) {
-    case # "give_weapon":
+    case #"give_weapon":
       self function_54cb37a4(eventstruct.weapon);
       break;
-    case # "take_weapon":
+    case #"take_weapon":
       self function_ad4c1664(eventstruct.weapon);
       break;
   }
@@ -216,7 +217,7 @@ function_e884e095(slot, weapon) {
     weapon = getweapon(weapon);
   }
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
@@ -284,7 +285,7 @@ function_6519eea8(slot, weapon) {
 
   old_weapon = self function_8f85096(slot);
   self notify(#"hash_4078956b159dd0f3", {
-    #slot: slot,
+    #slot: slot, 
     #weapon: weapon
   });
   self notify("new_" + slot, {

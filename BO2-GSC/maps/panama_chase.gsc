@@ -94,8 +94,8 @@ noriega_rescue_event() {
   level thread noriega_rescue_timer();
   level thread marine_search_party();
   wait 0.05;
-  playFXOnTag(level._effect["flashlight"], getent("marine_searcher1_ai", "targetname"), "tag_flash");
-  playFXOnTag(level._effect["flashlight"], getent("marine_searcher2_ai", "targetname"), "tag_flash");
+  playfxontag(level._effect["flashlight"], getent("marine_searcher1_ai", "targetname"), "tag_flash");
+  playfxontag(level._effect["flashlight"], getent("marine_searcher2_ai", "targetname"), "tag_flash");
   stop_exploder(106);
   level.player allowsprint(1);
   wait 0.15;
@@ -120,7 +120,7 @@ noriega_rescue_event() {
   exploder(720);
   level thread run_scene("noriega_saved_irstrobe");
   strobe_model = get_model_or_models_from_scene("noriega_saved_irstrobe", "ir_strobe");
-  playFXOnTag(level._effect["irstrobe_ac130"], strobe_model, "tag_origin");
+  playfxontag(level._effect["irstrobe_ac130"], strobe_model, "tag_origin");
   delay_thread(22, ::autosave_now);
   level thread run_scene("noriega_saved_noriega");
   level thread run_scene("noriega_saved_mason");
@@ -139,7 +139,7 @@ marine_search_party() {
 }
 
 start_ac130_shooting() {
-  level.player playSound("evt_panama_chase_gunfire");
+  level.player playsound("evt_panama_chase_gunfire");
   level thread turn_fight_room_unsafe();
   exploder(730);
   level notify("fxanim_ceiling_01_start");
@@ -174,9 +174,8 @@ ac130_target_player() {
   level endon("player_moved");
   wait 5;
 
-  while(true) {
+  while(true)
     ac130_shoot(level.player.origin, 1);
-  }
 }
 
 check_for_friendly_fire() {
@@ -220,9 +219,9 @@ apache_jump_event() {
   little_bird setspeed(15);
   level.temp_flash_light = spawn("script_model", little_bird gettagorigin("tag_flash"));
   level.temp_flash_light.angles = little_bird gettagangles("tag_flash");
-  level.temp_flash_light setModel("tag_origin");
+  level.temp_flash_light setmodel("tag_origin");
   level.temp_flash_light linkto(little_bird);
-  playFXOnTag(level._effect["apache_spotlight_cheap"], level.temp_flash_light, "tag_origin");
+  playfxontag(level._effect["apache_spotlight_cheap"], level.temp_flash_light, "tag_origin");
   water_tower_origin = getent("litte_bird_water_tower_origin", "targetname");
   little_bird setvehgoalpos(water_tower_origin.origin, 1);
   little_bird thread look_at_water_tower();
@@ -266,11 +265,10 @@ prevent_player_damage_if_the_player_is_sprinting() {
   level endon("chase_jump_cleared");
 
   while(true) {
-    if(level.player sprintbuttonpressed()) {
+    if(level.player sprintbuttonpressed())
       level.player.overrideplayerdamage = ::player_damage_override_for_apache;
-    } else {
+    else
       level.player.overrideplayerdamage = undefined;
-    }
 
     wait 0.05;
   }
@@ -317,7 +315,7 @@ little_bird_investigate_water_tower() {
   target1 = getent("apache_spotlight_search_target1", "targetname");
   target2 = getent("apache_spotlight_search_target3", "targetname");
   lookat = spawn("script_model", target1.origin);
-  lookat setModel("tag_origin");
+  lookat setmodel("tag_origin");
   self setturrettargetent(lookat);
   lookat moveto(target2.origin, 2);
   lookat waittill("movedone");
@@ -334,9 +332,8 @@ little_bird_investigate_water_tower() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 move_little_bird_to_checkpoint() {
@@ -366,7 +363,7 @@ clinic_break_window_think() {
   s_chase_window_impulse_position = getstruct("chase_window_impulse_position", "targetname");
   ai_firing_soldier = getent("marine_struggler1_ai", "targetname");
   wait 0.75;
-  playFXOnTag(level._effect["soldier_impact_blood"], ai_firing_soldier, "j_clavicle_le");
+  playfxontag(level._effect["soldier_impact_blood"], ai_firing_soldier, "j_clavicle_le");
   wait 0.25;
   physicsexplosionsphere(s_chase_window_impulse_position.origin, 100, 1, 100);
   magicbullet("ak47_sp", s_chase_window_impulse_position.origin, s_chase_window_impulse_position.origin + vectorscale((0, -1, 0), 100.0));
@@ -426,9 +423,8 @@ apache_player_damage_callback(einflictor, eattacker, idamage, idflags, type, swe
     showdamage = 1;
   }
 
-  if(showdamage == 0) {
+  if(showdamage == 0)
     self cleardamageindicator();
-  }
 
   return idamage;
 }
@@ -470,11 +466,10 @@ checkpoint_event() {
   flag_set("checkpoint_reached");
   end_scene("mason_noreiga_wall_hug");
 
-  if(flag("player_not_looking")) {
+  if(flag("player_not_looking"))
     level thread run_scene("checkpoint_ally_walkout_noreach");
-  } else {
+  else
     level thread run_scene("checkpoint_ally_walkout", 1);
-  }
 
   level.mason attach("p6_anim_military_id_card", "tag_weapon_left");
   flag_wait("checkpoint_fade_now");
@@ -519,7 +514,7 @@ checkpoint_passthrough() {
 
 heli_path_manager() {
   e_apache = spawn_vehicle_from_targetname("attack_apache");
-  playFXOnTag(getfx("apache_exterior_lights"), e_apache, "tag_origin");
+  playfxontag(getfx("apache_exterior_lights"), e_apache, "tag_origin");
   s_apache_strafe_start = getstruct("apache_strafe_start", "targetname");
   e_apache godon();
   e_apache setspeed(20.0);
@@ -532,10 +527,10 @@ heli_path_manager() {
   wait 2.0;
   e_apache_barrel = spawn_model("tag_origin", e_apache gettagorigin("tag_barrel"), e_apache gettagangles("tag_barrel"));
   e_apache_barrel linkto(e_apache, "tag_barrel");
-  playFXOnTag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
+  playfxontag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
   e_apache thread heli_go_struct_path(s_apache_strafe_start);
   e_apache waittill("path_finished");
-  setdvar("ui_deadquote", &"PANAMA_APACHE_ESCAPE_FAIL");
+  setdvar("ui_deadquote", & "PANAMA_APACHE_ESCAPE_FAIL");
   level.player.overrideplayerdamage = ::apache_player_damage_callback;
   e_apache setlookatent(level.player);
   e_apache set_turret_target(level.player, undefined, 0);
@@ -586,7 +581,7 @@ heli_path_manager() {
   e_apache_barrel = spawn_model("tag_origin", e_apache gettagorigin("tag_barrel"), e_apache gettagangles("tag_barrel"));
   e_apache_barrel linkto(e_apache, "tag_barrel");
   trigger_wait("checkpoint_reached_trigger");
-  playFXOnTag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
+  playfxontag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
   wait 4.0;
   e_apache_barrel delete();
   e_apache clearlookatent();
@@ -609,7 +604,7 @@ heli_missile_damage_event_manager() {
   level notify("fxanim_water_tower_start");
   wait 0.05;
   water_tower = getent("ac130_water_tower", "targetname");
-  playFXOnTag(level._effect["fx_pan_water_tower_collapse"], water_tower, "base_jnt");
+  playfxontag(level._effect["fx_pan_water_tower_collapse"], water_tower, "base_jnt");
   activate_exploder(700);
 }
 
@@ -619,21 +614,18 @@ heli_go_struct_path(s_start) {
   self sethoverparams(10);
 
   while(self.is_pathing) {
-    if(isDefined(s_current.target)) {
+    if(isDefined(s_current.target))
       self setvehgoalpos(s_current.origin, 0, 0);
-    } else {
+    else
       self setvehgoalpos(s_current.origin, 1, 0);
-    }
 
-    if(isDefined(s_current.radius)) {
+    if(isDefined(s_current.radius))
       self setneargoalnotifydist(s_current.radius);
-    }
 
     self waittill("near_goal");
 
-    if(isDefined(s_current.speed)) {
+    if(isDefined(s_current.speed))
       self setspeed(s_current.speed);
-    }
 
     self waittill("goal");
 
@@ -653,20 +645,18 @@ set_pitch(n_start_pitch, n_end_pitch, n_time) {
   n_pitch_range = n_end_pitch - n_start_pitch;
   n_pitch_step = 0;
 
-  if(n_steps > 0) {
+  if(n_steps > 0)
     n_pitch_step = abs(n_pitch_range) / n_steps;
-  }
 
   n_current_pitch = n_start_pitch;
 
   while(n_current_pitch != n_end_pitch) {
     wait(n_step_time);
 
-    if(n_pitch_range > 0) {
+    if(n_pitch_range > 0)
       n_current_pitch = min(n_current_pitch + n_pitch_step, n_end_pitch);
-    } else if(n_pitch_range < 0) {
+    else if(n_pitch_range < 0)
       n_current_pitch = max(n_current_pitch - n_pitch_step, n_end_pitch);
-    }
 
     self setdefaultpitch(n_current_pitch);
   }

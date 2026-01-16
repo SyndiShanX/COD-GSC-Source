@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\rewindobjects;
+
 #namespace airsupport;
 
 planesounds(localclientnum, spawnsound, flybysound, flybysoundloop) {

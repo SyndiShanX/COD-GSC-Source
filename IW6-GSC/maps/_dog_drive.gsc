@@ -14,9 +14,8 @@ dog_drive_indirect(var_0) {
   setsaveddvar("ragdoll_max_life", 1500);
   setsaveddvar("ai_eventDistDeath", 200);
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
-  }
 
   var_0.oldname = var_0.name;
   var_0.name = "";
@@ -27,13 +26,11 @@ dog_drive_indirect(var_0) {
   var_0 maps\_utility::disable_ai_color();
   level.dog_flush_functions["jumpup"] = ::dog_jumpup;
 
-  if(var_0 maps\_utility::ent_flag_exist("pause_dog_command")) {
+  if(var_0 maps\_utility::ent_flag_exist("pause_dog_command"))
     var_0 maps\_utility::ent_flag_set("pause_dog_command");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("dogcam_acquire_targets")) {
+  if(!var_0 maps\_utility::ent_flag_exist("dogcam_acquire_targets"))
     var_0 maps\_utility::ent_flag_init("dogcam_acquire_targets");
-  }
 
   var_0 maps\_utility::ent_flag_set("dogcam_acquire_targets");
   var_0.controlling_dog = 1;
@@ -50,9 +47,8 @@ dog_drive_indirect(var_0) {
   self enableinvulnerability();
   var_1 = 0;
 
-  if(getdvarint("pete_mccabe", 0) == 1) {
+  if(getdvarint("pete_mccabe", 0) == 1)
     var_1 = 1;
-  }
 
   self.overlays = [];
 
@@ -173,9 +169,8 @@ dog_drive_indirect(var_0) {
   var_3 linkto(var_0, "tag_camera", (0, 0, 0), (0, 0, 0));
   var_0.camera_tag = var_3;
 
-  if(!var_1) {
+  if(!var_1)
     spawn_model_fx((0, 0, 0), (0, 0, 0), (0, 0, 0));
-  }
 
   self playerlinkweaponviewtodelta(var_0, "tag_player", 0, 180, 180, 35, 35, 1);
   self playerlinkedsetviewznear(0);
@@ -207,9 +202,8 @@ screen_blood(var_0) {
   for(;;) {
     var_0 waittill("screen_blood", var_1);
 
-    if(isDefined(self.screen_glitch_org)) {
+    if(isDefined(self.screen_glitch_org))
       playFXOnTag(common_scripts\utility::getfx("vfx_dog_screenblood"), self.screen_glitch_org, "tag_origin");
-    }
   }
 }
 
@@ -246,9 +240,8 @@ zoom_out_on_left_stick_movement() {
   for(;;) {
     var_0 = self getnormalizedmovement();
 
-    if(var_0[0] > 0.4 || var_0[1] > 0.4) {
+    if(var_0[0] > 0.4 || var_0[1] > 0.4)
       self notify("dog_moved");
-    }
 
     wait 0.05;
   }
@@ -280,24 +273,22 @@ nearby_enemy_tracking(var_0) {
   var_0 endon("death");
   var_1 = 0;
   var_2 = 0;
-  var_3 = &"NML_DOGCAM_TARGET";
-  var_4 = &"NML_DOGCAM_METERS";
+  var_3 = & "NML_DOGCAM_TARGET";
+  var_4 = & "NML_DOGCAM_METERS";
 
   for(;;) {
     var_5 = self getplayerangles();
     var_6 = undefined;
 
-    if(isDefined(var_0.closest_enemy_in_range)) {
+    if(isDefined(var_0.closest_enemy_in_range))
       var_6 = var_0.closest_enemy_in_range;
-    }
 
     var_7 = find_nearby_enemy(self.dog_track_range, var_5);
     var_0.closest_enemy_in_range = var_7;
 
     if(isDefined(var_6)) {
-      if(!isDefined(var_7) || var_7 != var_6) {
+      if(!isDefined(var_7) || var_7 != var_6)
         var_6 thread hud_outlineenable(0);
-      }
     }
 
     self.attack_indicator_off.alpha = 1;
@@ -310,9 +301,8 @@ nearby_enemy_tracking(var_0) {
       var_10 = strtok(var_9 + "", ".");
       var_11 = "0";
 
-      if(var_10.size > 1) {
+      if(var_10.size > 1)
         var_11 = var_10[1][0];
-      }
 
       self.hud_enemy_tracker_pre settext(var_3);
       self.hud_enemy_tracker_post settext(var_4);
@@ -341,9 +331,8 @@ nearby_enemy_tracking(var_0) {
         self.hud_enemy_tracker_range settext(&"NML_DOGCAM_OUTOFRANGE");
         var_1 = 0;
 
-        if(!var_2) {
+        if(!var_2)
           thread maps\_utility::play_sound_on_entity("scn_nml_camera_enemy_contact_on");
-        }
 
         var_2 = 1;
         var_7 thread hud_outlineenable(0);
@@ -356,9 +345,8 @@ nearby_enemy_tracking(var_0) {
       self.hud_enemy_tracker settext("");
       self.hud_enemy_tracker_range settext("");
 
-      if(var_2) {
+      if(var_2)
         thread maps\_utility::play_sound_on_entity("scn_nml_camera_enemy_contact_off");
-      }
 
       var_1 = 0;
       var_2 = 0;
@@ -376,9 +364,8 @@ lattitude_and_longitude(var_0) {
   self endon("stop_dog_drive");
   var_0 endon("death");
 
-  if(!isDefined(level.lat)) {
+  if(!isDefined(level.lat))
     level.lat = [32.8695, -117.102];
-  }
 
   for(;;) {
     var_1 = inches_to_lattitude(var_0.origin[0]) * 10;
@@ -461,22 +448,19 @@ time_countup() {
     var_5 = int(var_4 / 60000);
     var_4 = var_4 - var_5 * 60000;
 
-    if(var_5 < 10) {
+    if(var_5 < 10)
       var_1 = "0";
-    }
 
     var_6 = int(var_4 / 1000);
     var_4 = var_4 - var_6 * 1000;
 
-    if(var_6 < 10) {
+    if(var_6 < 10)
       var_2 = "0";
-    }
 
     var_7 = int(var_4 / 10);
 
-    if(var_7 < 10) {
+    if(var_7 < 10)
       var_3 = "0";
-    }
 
     self settext(var_1 + var_5 + " : " + var_2 + var_6 + " " + var_3 + var_7);
     wait 0.05;
@@ -499,9 +483,8 @@ screen_glitches() {
   self endon("disable_screen_glitch");
 
   for(;;) {
-    if(isDefined(level._effect["screen_glitch"]) && isDefined(self.screen_glitch_org)) {
+    if(isDefined(level._effect["screen_glitch"]) && isDefined(self.screen_glitch_org))
       playFXOnTag(common_scripts\utility::getfx("screen_glitch"), self.screen_glitch_org, "tag_origin");
-    }
 
     level.player thread maps\_utility::play_sound_on_entity("scn_nml_camera_flicker_short");
     common_scripts\utility::waittill_notify_or_timeout("do_screen_glitch", randomfloatrange(5, 8));
@@ -509,16 +492,14 @@ screen_glitches() {
 }
 
 constant_screen_glitches() {
-  if(isDefined(self.screen_glitch_org)) {
+  if(isDefined(self.screen_glitch_org))
     self.screen_glitch_org endon("death");
-  }
 
   self endon("stop_constant_glitch");
 
   for(;;) {
-    if(isDefined(level._effect["screen_glitch"]) && isDefined(self.screen_glitch_org)) {
+    if(isDefined(level._effect["screen_glitch"]) && isDefined(self.screen_glitch_org))
       playFXOnTag(common_scripts\utility::getfx("screen_glitch"), self.screen_glitch_org, "tag_origin");
-    }
 
     common_scripts\utility::waittill_notify_or_timeout("do_screen_glitch", 0.05);
   }
@@ -527,9 +508,8 @@ constant_screen_glitches() {
 dog_drive_indirect_disable(var_0) {
   setsaveddvar("ai_eventDistDeath", level.old_ai_eventdistdeath);
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 0);
-  }
 
   var_0 enabledogavoidance(1);
   var_0 setviewmodeldepth(0);
@@ -543,17 +523,15 @@ dog_drive_indirect_disable(var_0) {
   setsaveddvar("ragdoll_max_life", 4500);
   var_1 = getaiarray("axis");
 
-  foreach(var_3 in var_1) {
-    var_3 hudoutlinedisable();
-  }
+  foreach(var_3 in var_1)
+  var_3 hudoutlinedisable();
 
   var_0 setdogcommand("attack");
   var_0.controlling_dog = undefined;
   var_0.name = var_0.oldname;
 
-  if(var_0 maps\_utility::ent_flag_exist("pause_dog_command")) {
+  if(var_0 maps\_utility::ent_flag_exist("pause_dog_command"))
     var_0 maps\_utility::ent_flag_clear("pause_dog_command");
-  }
 
   self notify("stop_dog_drive");
   self stopshellshock();
@@ -568,17 +546,14 @@ dog_drive_indirect_disable(var_0) {
   self allowprone(1);
   self allowsprint(1);
 
-  foreach(var_6 in self.overlays) {
-    var_6 destroy();
-  }
+  foreach(var_6 in self.overlays)
+  var_6 destroy();
 
-  if(isDefined(self.crt_plane)) {
+  if(isDefined(self.crt_plane))
     self.crt_plane delete();
-  }
 
-  if(isDefined(self.screen_glitch_org)) {
+  if(isDefined(self.screen_glitch_org))
     self.screen_glitch_org delete();
-  }
 
   setsaveddvar("r_znear", 4);
   setsaveddvar("compass", 1);
@@ -631,11 +606,10 @@ detect_sprint_click(var_0) {
 sprint_check(var_0) {
   var_1 = getsticksconfig();
 
-  if(self usinggamepad() && var_1 == "thumbstick_legacy") {
+  if(self usinggamepad() && var_1 == "thumbstick_legacy")
     return var_0[0] >= 0.3;
-  } else {
+  else
     return var_0[0] >= 0.98;
-  }
 }
 
 dog_sprint_disable(var_0) {
@@ -649,15 +623,13 @@ dog_sprint_disable(var_0) {
       var_0.sprint = 0;
       var_0 setdogmaxdrivespeed(80);
 
-      if(getdvarint("jimmy", 0) == 0) {
+      if(getdvarint("jimmy", 0) == 0)
         var_0 setdogautoattackwhendriven(0);
-      }
 
       var_0.moveanimtype = "walk";
 
-      if(!var_0 dog_is_in_combat()) {
+      if(!var_0 dog_is_in_combat())
         default_dog_limits();
-      }
 
       return;
     }
@@ -687,18 +659,16 @@ sound_on_stick_movement(var_0, var_1) {
     var_7 = anglesToForward(var_0 gettagangles("TAG_CAMERA"));
     var_8 = vectordot(var_6, var_7);
 
-    if(distance2d(var_5, (0, 0, 0)) > 0.1 && abs(var_3 - var_8) > 0.0) {
+    if(distance2d(var_5, (0, 0, 0)) > 0.1 && abs(var_3 - var_8) > 0.0)
       var_4 = 1;
-    }
 
     var_3 = var_8;
 
     if(var_4 != var_2) {
-      if(var_4) {
+      if(var_4)
         var_1 playLoopSound("dog_cam_mvmnt");
-      } else {
+      else
         var_1 stoploopsound("dog_cam_mvmnt");
-      }
 
       var_2 = var_4;
       wait 0.1;
@@ -728,9 +698,8 @@ dog_wait_for_attack(var_0) {
     self waittill("attack_command");
 
     if(isDefined(var_0.closest_enemy_in_range)) {
-      if(isDefined(var_0.closest_enemy_in_range.dist_to_dog) && var_0.closest_enemy_in_range.dist_to_dog <= self.dog_attack_range) {
+      if(isDefined(var_0.closest_enemy_in_range.dist_to_dog) && var_0.closest_enemy_in_range.dist_to_dog <= self.dog_attack_range)
         thread dog_attack_command_internal(var_0);
-      }
     }
 
     wait 0.5;
@@ -772,9 +741,8 @@ lerp_on_attack(var_0) {
     level waittill("dog_attacks_ai", var_1, var_2);
 
     if(var_1 == var_0) {
-      if(maps\_utility::is_gen4()) {
+      if(maps\_utility::is_gen4())
         maps\_art::dof_enable_script(1, 1, 10, 50, 180, 3, 0.2);
-      }
 
       thread constant_screen_glitches();
       self lerpviewangleclamp(0.3, 0, 0.2, 0, 0, 0, 0);
@@ -799,13 +767,11 @@ dog_indirect_control_input(var_0) {
   self endon("stop_dog_drive");
   var_0 endon("death");
 
-  if(!var_0 maps\_utility::ent_flag_exist("dog_busy")) {
+  if(!var_0 maps\_utility::ent_flag_exist("dog_busy"))
     var_0 maps\_utility::ent_flag_init("dog_busy");
-  }
 
-  if(!var_0 maps\_utility::ent_flag_exist("running_command")) {
+  if(!var_0 maps\_utility::ent_flag_exist("running_command"))
     var_0 maps\_utility::ent_flag_init("running_command");
-  }
 
   var_0 maps\_utility::ent_flag_clear("dog_busy");
   var_0 maps\_utility::ent_flag_clear("running_command");
@@ -822,20 +788,18 @@ dog_indirect_control_input(var_0) {
       var_3 = distance2d((0, 0, 0), var_1);
       var_4 = max(abs(var_1[0]), abs(var_1[1]));
 
-      if(var_1[0] < 0.8) {
+      if(var_1[0] < 0.8)
         var_0.sprint = 0;
-      }
 
       if(abs(var_3 > 0.1)) {
         var_5 = var_4 / var_3;
         var_1 = var_1 * var_5;
         var_6 = distance((0, 0, 0), var_1);
 
-        if(self attackbuttonpressed() || var_0.sprint) {
+        if(self attackbuttonpressed() || var_0.sprint)
           var_7 = 1.5;
-        } else {
+        else
           var_7 = 1;
-        }
 
         thread do_goto_trace(var_0, var_6 * var_6 * var_7 + 0.05, var_1);
       } else if(var_0.script == "dog_move") {}
@@ -858,9 +822,8 @@ check_for_enemies(var_0, var_1, var_2) {
   var_5 = (var_0.angles[0], var_4[1] - var_3[1], 0);
 
   if(isDefined(var_0.enemy)) {
-    if(isDefined(var_0.enemy.syncedmeleetarget)) {
+    if(isDefined(var_0.enemy.syncedmeleetarget))
       return 1;
-    }
   }
 
   var_6 = find_nearby_enemy(100 * var_1 + 50, var_5);
@@ -899,9 +862,8 @@ do_goto_trace(var_0, var_1, var_2, var_3) {
   var_8 = var_4 + anglesToForward(var_7) * (100 * var_1 + 32);
 
   if(!isDefined(var_3)) {
-    if(check_for_enemies(var_0, var_1, var_2)) {
+    if(check_for_enemies(var_0, var_1, var_2))
       return;
-    }
   }
 
   var_0.moveplaybackrate = var_1 * 1;
@@ -939,9 +901,8 @@ get_reflected_point(var_0, var_1) {
   var_4 = var_0["normal"];
   var_5 = var_2 - var_3;
 
-  if(var_5 == (0, 0, 0)) {
+  if(var_5 == (0, 0, 0))
     return var_2;
-  }
 
   var_6 = vectordot(var_5, var_4);
   var_7 = var_1 / var_6;
@@ -964,9 +925,8 @@ dog_command_goto(var_0) {
   var_1 = var_0["position"];
   var_2 = var_0["normal"];
 
-  if(abs(var_2[2]) < 0.2 && var_0["fraction"] < 1) {
+  if(abs(var_2[2]) < 0.2 && var_0["fraction"] < 1)
     var_1 = get_reflected_point(var_0, 24);
-  }
 
   var_3 = var_1;
   var_4 = var_1 - (0, 0, 9000);
@@ -975,9 +935,9 @@ dog_command_goto(var_0) {
   self setgoalpos(var_1);
   wait 0.2;
 
-  if(isDefined(self.pathgoalpos)) {
+  if(isDefined(self.pathgoalpos))
     return;
-  } else if(distance2d(self.origin, var_1) > self.goalradius) {
+  else if(distance2d(self.origin, var_1) > self.goalradius) {
     var_5 = getnodesinradius(var_1, 96, 0, 96);
     var_5 = sortbydistance(var_5, self.origin);
 
@@ -1116,11 +1076,10 @@ find_nearby_enemy(var_0, var_1) {
   var_3 = sortbydistance(var_3, var_7.controlled_dog.origin);
 
   foreach(var_10 in var_3) {
-    if(!isDefined(var_10.do_not_acquire) && distance(var_10.origin, var_7.controlled_dog.origin) < 64) {
+    if(!isDefined(var_10.do_not_acquire) && distance(var_10.origin, var_7.controlled_dog.origin) < 64)
       return var_10;
-    } else {
+    else
       break;
-    }
   }
 
   foreach(var_10 in var_3) {
@@ -1131,18 +1090,16 @@ find_nearby_enemy(var_0, var_1) {
     var_17 = anglesToForward(var_16);
     var_18 = vectordot(var_15, var_17);
 
-    if(var_18 > var_6) {
+    if(var_18 > var_6)
       var_4 = common_scripts\utility::array_add(var_4, var_10);
-    }
   }
 
   if(var_4.size > 0) {
     var_4 = sortbydistance(var_4, var_8);
 
     foreach(var_10 in var_4) {
-      if(!isDefined(var_10.do_not_acquire) && maps\_dog_control::test_trace(var_10 getEye(), var_8, var_7.controlled_dog) && (!isDefined(var_0) || distance2d(var_8, var_10.origin) <= var_0)) {
+      if(!isDefined(var_10.do_not_acquire) && maps\_dog_control::test_trace(var_10 getEye(), var_8, var_7.controlled_dog) && (!isDefined(var_0) || distance2d(var_8, var_10.origin) <= var_0))
         return var_10;
-      }
     }
   }
 
@@ -1167,9 +1124,8 @@ find_nearby_enemy(var_0, var_1) {
 }
 
 hud_outlineenable(var_0) {
-  if(!isDefined(self.no_more_outlines)) {
+  if(!isDefined(self.no_more_outlines))
     self hudoutlineenable(var_0, 0);
-  }
 }
 
 dog_bark_think(var_0) {
@@ -1187,9 +1143,8 @@ dog_bark_think(var_0) {
       var_0 maps\_anim::anim_generic(var_0, "dog_bark");
       level notify("dog_barked", var_0);
 
-      if(!common_scripts\utility::flag("_stealth_spotted")) {
+      if(!common_scripts\utility::flag("_stealth_spotted"))
         var_0 attract_guys_to_dog();
-      }
     }
 
     wait 1;
@@ -1207,9 +1162,8 @@ attract_guys_to_dog() {
       if(var_3 < 1000) {
         var_2 maps\_stealth_visibility_enemy::enemy_event_awareness_notify("dog_bark", self);
 
-        if(var_3 < 200) {
+        if(var_3 < 200)
           var_2 getenemyinfo(level.dog);
-        }
 
         if(var_3 > 300) {
           break;
@@ -1235,9 +1189,8 @@ trim_decimal_points(var_0, var_1) {
       var_3 = var_2[1];
       var_2[1] = "";
 
-      for(var_4 = 0; var_4 < var_1; var_4++) {
+      for(var_4 = 0; var_4 < var_1; var_4++)
         var_2[1] = var_2[1] + var_3[var_4];
-      }
 
       var_1 = 0;
     } else
@@ -1245,9 +1198,8 @@ trim_decimal_points(var_0, var_1) {
   } else
     var_2[1] = "";
 
-  for(var_4 = 0; var_4 < var_1; var_4++) {
+  for(var_4 = 0; var_4 < var_1; var_4++)
     var_2[1] = var_2[1] + "0";
-  }
 
   return var_2[0] + "." + var_2[1];
 }
@@ -1256,31 +1208,29 @@ getdirectioncompass(var_0) {
   var_1 = getnorthyaw();
   var_0 = var_0 - var_1;
 
-  if(var_0 < 0) {
+  if(var_0 < 0)
     var_0 = var_0 + 360;
-  } else if(var_0 > 360) {
+  else if(var_0 > 360)
     var_0 = var_0 - 360;
-  }
 
-  if(var_0 < 22.5 || var_0 > 337.5) {
-    var_2 = &"NML_DOGCAM_NORTH";
-  } else if(var_0 < 67.5) {
-    var_2 = &"NML_DOGCAM_NORTHWEST";
-  } else if(var_0 < 112.5) {
-    var_2 = &"NML_DOGCAM_WEST";
-  } else if(var_0 < 157.5) {
-    var_2 = &"NML_DOGCAM_SOUTHWEST";
-  } else if(var_0 < 202.5) {
-    var_2 = &"NML_DOGCAM_SOUTH";
-  } else if(var_0 < 247.5) {
-    var_2 = &"NML_DOGCAM_SOUTHEAST";
-  } else if(var_0 < 292.5) {
-    var_2 = &"NML_DOGCAM_EAST";
-  } else if(var_0 < 337.5) {
-    var_2 = &"NML_DOGCAM_NORTHEAST";
-  } else {
+  if(var_0 < 22.5 || var_0 > 337.5)
+    var_2 = & "NML_DOGCAM_NORTH";
+  else if(var_0 < 67.5)
+    var_2 = & "NML_DOGCAM_NORTHWEST";
+  else if(var_0 < 112.5)
+    var_2 = & "NML_DOGCAM_WEST";
+  else if(var_0 < 157.5)
+    var_2 = & "NML_DOGCAM_SOUTHWEST";
+  else if(var_0 < 202.5)
+    var_2 = & "NML_DOGCAM_SOUTH";
+  else if(var_0 < 247.5)
+    var_2 = & "NML_DOGCAM_SOUTHEAST";
+  else if(var_0 < 292.5)
+    var_2 = & "NML_DOGCAM_EAST";
+  else if(var_0 < 337.5)
+    var_2 = & "NML_DOGCAM_NORTHEAST";
+  else
     var_2 = "";
-  }
 
   return var_2;
 }

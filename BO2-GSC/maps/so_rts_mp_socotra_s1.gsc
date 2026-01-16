@@ -181,15 +181,14 @@ socotra_orangeobjectivewatch() {
   }
   level.orange_outro_obj = spawn("script_model", spot.origin);
   level.orange_outro_obj.angles = isDefined(spot.angles) ? spot.angles : (0, 0, 0);
-  level.orange_outro_obj setModel("p6_socotra_evac_objective");
+  level.orange_outro_obj setmodel("p6_socotra_evac_objective");
   level.orange_outro_obj ignorecheapentityflag(1);
   level.orange_outro_obj maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 0);
 
-  if(flag("rts_mode")) {
+  if(flag("rts_mode"))
     level.orange_outro_obj show();
-  } else {
+  else
     level.orange_outro_obj hide();
-  }
 
   while(true) {
     level waittill("rts_ON");
@@ -200,19 +199,17 @@ socotra_orangeobjectivewatch() {
 }
 
 socotra_floorwatch() {
-  level.rts_floors = getEntArray("overwatch_floor", "targetname");
+  level.rts_floors = getentarray("overwatch_floor", "targetname");
   level.rts.trace_ents = level.rts_floors;
 
   while(true) {
-    foreach(floor in level.rts_floors) {
-      floor hide();
-    }
+    foreach(floor in level.rts_floors)
+    floor hide();
 
     level waittill("rts_ON");
 
-    foreach(floor in level.rts_floors) {
-      floor show();
-    }
+    foreach(floor in level.rts_floors)
+    floor show();
 
     level waittill("rts_OFF");
   }
@@ -228,20 +225,20 @@ socotrasafehousehighlightwatch() {
       spot = level.rts.safehouses[0];
       spot.bldg = spawn("script_model", spot.site.origin);
       spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-      spot.bldg setModel(spot.modelname);
+      spot.bldg setmodel(spot.modelname);
       spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       spot.bldg ignorecheapentityflag(1);
     } else if(isDefined(level.rts.karma_poi) && (isDefined(level.rts.karma_poi.discovered) && level.rts.karma_poi.discovered)) {
       level.rts.karma_poi.bldg = spawn("script_model", level.rts.karma_poi.site.origin);
       level.rts.karma_poi.bldg.angles = isDefined(level.rts.karma_poi.site.angles) ? level.rts.karma_poi.site.angles : (0, 0, 0);
-      level.rts.karma_poi.bldg setModel(level.rts.karma_poi.modelname);
+      level.rts.karma_poi.bldg setmodel(level.rts.karma_poi.modelname);
       level.rts.karma_poi.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       level.rts.karma_poi.bldg ignorecheapentityflag(1);
     } else {
       foreach(spot in level.rts.safehouses) {
         spot.bldg = spawn("script_model", spot.site.origin);
         spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-        spot.bldg setModel(spot.modelname);
+        spot.bldg setmodel(spot.modelname);
         spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 0);
         spot.bldg ignorecheapentityflag(1);
       }
@@ -250,9 +247,8 @@ socotrasafehousehighlightwatch() {
     level waittill("rts_OFF");
 
     foreach(spot in level.rts.safehouses) {
-      if(isDefined(spot.bldg)) {
+      if(isDefined(spot.bldg))
         spot.bldg delete();
-      }
     }
 
     if(isDefined(level.rts.karma_poi) && isDefined(level.rts.karma_poi.bldg)) {
@@ -265,13 +261,12 @@ socotrasafehousehighlightwatch() {
 socotra_player_oobwatch() {
   level endon("karma_outro_begin");
   level endon("socotra_mission_complete");
-  kill_trigs = getEntArray("kill_me", "targetname");
+  kill_trigs = getentarray("kill_me", "targetname");
 
   while(true) {
     foreach(trig in kill_trigs) {
-      if(level.rts.player istouching(trig)) {
+      if(level.rts.player istouching(trig))
         level.rts.player dodamage(level.rts.player.health + 9999, level.rts.player.origin, level.rts.player, 1, "suicide");
-      }
     }
 
     wait 0.15;
@@ -450,7 +445,7 @@ intro_fog_town(bomb) {
 gas_canister_attach_trail(bomb) {
   canister = level.rts.canisters[level.rts.canisterindex];
   canister setforcenocull();
-  playFXOnTag(level._effect["gas_canister_trail"], canister, "tag_fx");
+  playfxontag(level._effect["gas_canister_trail"], canister, "tag_fx");
   level.rts.canisterindex++;
 }
 
@@ -482,7 +477,7 @@ socotra_climbup_intro() {
 
   for(i = 0; i < 3; i++) {
     c = spawn("script_model", (0, 0, 0));
-    c setModel("projectile_hellfire_missile");
+    c setmodel("projectile_hellfire_missile");
     c.animname = "bomb" + (i + 1);
     level.rts.canisters[i] = c;
   }
@@ -530,9 +525,8 @@ intro_start_civ_anims(player) {
 intro_delete_canisters(canisters) {
   scene_wait("intro_canisters");
 
-  foreach(c in canisters) {
-    c delete();
-  }
+  foreach(c in canisters)
+  c delete();
 }
 
 resume_normal_ai(introsquad) {
@@ -588,11 +582,10 @@ enemyspawninit() {
     }
   }
 
-  level.rts.enemyspawnlocs = getEntArray("enemy_spawn_loc", "targetname");
+  level.rts.enemyspawnlocs = getentarray("enemy_spawn_loc", "targetname");
 
-  foreach(loc in level.rts.enemyspawnlocs) {
-    loc.timestamp = 0;
-  }
+  foreach(loc in level.rts.enemyspawnlocs)
+  loc.timestamp = 0;
 
   maps\_so_rts_catalog::setpkgqty("infantry_enemy_elite_pkg", "axis", -1);
   maps\_so_rts_catalog::setpkgqty("infantry_enemy_reg_pkg", "axis", -1);
@@ -614,9 +607,8 @@ socotraairsuperioritytakeoverwatch() {
     self waittill("taken_control_over");
     rpc("clientscripts/_so_rts", "holdSwitchStatic", 1);
 
-    if(isDefined(self.gunner)) {
+    if(isDefined(self.gunner))
       self.gunner delete();
-    }
 
     self waittill("enter_vehicle");
     level.rts.player.vtol = self;
@@ -657,9 +649,8 @@ socotraairheightclamp(squadid) {
       ret = 0;
   }
 
-  if(ret == 0) {
+  if(ret == 0)
     maps\_so_rts_squad::reissuesquadlastorders(squad.id);
-  }
 
   return ret;
 }
@@ -694,11 +685,10 @@ force_fire_turret_on_target_when_possible_with_vo(squad) {
     wait 1;
 
     while(!maps\_turret::is_target_in_turret_view(v_target, 1)) {
-      if(isDefined(squad.target)) {
+      if(isDefined(squad.target))
         v_target = squad.target.origin;
-      } else {
+      else
         v_target = squad.centerpoint;
-      }
 
       wait 0.2;
     }
@@ -715,17 +705,15 @@ circletarget(squad) {
   level endon("socotra_karma_rescued");
   level endon("socotra_mission_complete");
 
-  if(isDefined(squad.target)) {
+  if(isDefined(squad.target))
     vec_from_target = self.origin - squad.target.origin;
-  } else {
+  else
     vec_from_target = self.origin - squad.centerpoint;
-  }
 
   yaw = vectortoangles(vec_from_target)[1];
 
-  if(lengthsquared(vec_from_target) < 490000) {
+  if(lengthsquared(vec_from_target) < 490000)
     yaw = yaw + 180;
-  }
 
   while(isDefined(self)) {
     driver = self getseatoccupant(1);
@@ -735,7 +723,7 @@ circletarget(squad) {
       continue;
     }
 
-    offset = anglesToForward((0, yaw, 0));
+    offset = anglestoforward((0, yaw, 0));
 
     if(isDefined(squad.target)) {
       goal = squad.target.origin;
@@ -763,11 +751,10 @@ turretontargetfortime(squad, time) {
   target_array = [];
   enemies = arraycombine(getaiarray("axis"), getvehiclearray("axis"), 0, 0);
 
-  if(isDefined(squad.target)) {
+  if(isDefined(squad.target))
     center_pt = squad.target.origin;
-  } else {
+  else
     center_pt = squad.centerpoint;
-  }
 
   target_array = sortarraybyclosest(center_pt, enemies, 65536);
   self maps\_turret::set_turret_target_ent_array(target_array, 1);
@@ -847,9 +834,8 @@ socotraairsuperioritythink(squadid) {
   luinotifyevent(&"rts_add_friendly_ai", 4, vtol getentitynumber(), squadid, 0, squad.pkg_ref.idx);
   flag_set("vtol_is_ready_for_player");
 
-  while(isDefined(vtol)) {
+  while(isDefined(vtol))
     level waittill("new_squad_orders" + squadid);
-  }
 }
 
 socotraairsuperiorityplayermove() {
@@ -865,7 +851,7 @@ socotraairsuperiorityplayermove() {
     angles = (0, angles[1], angles[2]);
     angles = (angles[0], angleclamp180(angles[1]), angles[2]);
     angles = (angles[0], angles[1], 0);
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     right = anglestoright(angles);
 
     if(length(controller) > 0.1) {
@@ -896,9 +882,8 @@ socotraairsuperiorityhandlegunnertarget() {
   self waittill("death");
   targets = target_getarray();
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     target_remove(self);
-  }
 }
 
 socotraairsuperiorityspawn() {
@@ -911,9 +896,8 @@ largestcomparefunc(e1, e2, val) {
 }
 
 infantry_init(squadid) {
-  foreach(guy in level.rts.squads[squadid].members) {
-    guy.goalradius = 256;
-  }
+  foreach(guy in level.rts.squads[squadid].members)
+  guy.goalradius = 256;
 }
 
 socotragopath(delay) {
@@ -937,9 +921,8 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
       squadid = maps\_so_rts_squad::createsquad(level.rts.enemy_center.origin, team, pkg_ref);
       squad = level.rts.squads[squadid];
 
-      if(squad.members.size >= pkg_ref.max_axis) {
+      if(squad.members.size >= pkg_ref.max_axis)
         return -1;
-      }
 
       ai_ref = level.rts.ai["ai_spawner_quadrotor"];
       maps\_so_rts_squad::removedeadfromsquad(squadid);
@@ -957,14 +940,12 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
     locs = sortarraybyfurthest(level.rts.player.origin, level.rts.enemyspawnlocs, 490000);
 
     for(i = 0; i < locs.size; i++) {
-      if(time > locs[i].timestamp) {
+      if(time > locs[i].timestamp)
         acceptable[acceptable.size] = locs[i];
-      }
     }
 
-    if(acceptable.size == 0) {
+    if(acceptable.size == 0)
       return -1;
-    }
 
     valid = [];
 
@@ -980,25 +961,22 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
         }
         distsq = distancesquared(loc.origin, poi.entity.origin);
 
-        if(distsq < 262144) {
+        if(distsq < 262144)
           loc.poiscore = -1;
-        }
       }
 
       foreach(guy in allies) {
         distsq = distancesquared(loc.origin, guy.origin);
 
-        if(distsq < 360000) {
+        if(distsq < 360000)
           loc.allyscore = loc.allyscore - 1;
-        }
       }
 
       if(isDefined(level.rts.player.ally)) {
         distsq = distancesquared(loc.origin, level.rts.player.origin);
 
-        if(distsq < 360000) {
+        if(distsq < 360000)
           continue;
-        }
       }
 
       loc.score = loc.poiscore == -1 ? 0 : loc.distscore + loc.timescore + loc.allyscore;
@@ -1021,9 +999,8 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
     ai_ref = level.rts.ai["vtol_air_support_spawner"];
     squadid = maps\_so_rts_squad::createsquad(origin, team, pkg_ref);
 
-    if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
+    if(team == "allies" && isDefined(pkg_ref.hot_key_takeover))
       luinotifyevent(&"rts_add_squad", 3, squadid, pkg_ref.idx, 0);
-    }
 
     ai = maps\_so_rts_support::placevehicle(ai_ref.ref, origin, team);
     ai.ai_ref = ai_ref;
@@ -1034,14 +1011,12 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
     squad = issquadalreadycreated("allies", pkg_ref);
 
     if(isDefined(squad)) {
-      if(isDefined(squad.incodespawn) && squad.incodespawn) {
+      if(isDefined(squad.incodespawn) && squad.incodespawn)
         return -1;
-      }
 
       foreach(guy in squad.members) {
-        if(isDefined(guy)) {
+        if(isDefined(guy))
           guy.alreadyinsquad = 1;
-        }
       }
     }
 
@@ -1073,14 +1048,12 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
     squad = issquadalreadycreated("allies", pkg_ref);
 
     if(isDefined(squad)) {
-      if(isDefined(squad.incodespawn) && squad.incodespawn) {
+      if(isDefined(squad.incodespawn) && squad.incodespawn)
         return -1;
-      }
 
       foreach(guy in squad.members) {
-        if(isDefined(guy)) {
+        if(isDefined(guy))
           guy.alreadyinsquad = 1;
-        }
       }
     }
 
@@ -1108,24 +1081,21 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
 
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
   } else if(pkg_ref.ref == "quadrotor_pkg") {
-    if(!isDefined(level.rts.vtol)) {
+    if(!isDefined(level.rts.vtol))
       return -1;
-    }
 
     squad = maps\_so_rts_squad::getsquadbypkg("quadrotor_pkg", "allies");
     maps\_so_rts_squad::removedeadfromsquad(squad.id);
 
-    if(squad.members.size >= pkg_ref.max_friendly) {
+    if(squad.members.size >= pkg_ref.max_friendly)
       return -1;
-    }
 
     squadid = squad.id;
     level.rts.vtol thread maps\_so_rts_ai::chopper_unload_cargo_quad(pkg_ref, team, squadid, maps\_so_rts_squad::squad_unloaded);
   }
 
-  if(isDefined(callback)) {
+  if(isDefined(callback))
     thread[[callback]](squadid);
-  }
 
   return squadid;
 }
@@ -1145,9 +1115,8 @@ intro_wait(flag) {
     }
   }
 
-  if(everybodydone == 1) {
+  if(everybodydone == 1)
     level.rts.squads[self.squadid].incodespawn = undefined;
-  }
 }
 
 socoatra_ai_takeover_trigger(oob) {
@@ -1166,13 +1135,13 @@ socoatra_ai_takeover_trigger(oob) {
 
 socotra_ai_takeover_off() {
   level endon("rts_terminated");
-  triggers = getEntArray("rts_takeover_OFF", "targetname");
+  triggers = getentarray("rts_takeover_OFF", "targetname");
   array_thread(triggers, ::socoatra_ai_takeover_trigger, 1);
 }
 
 socotra_ai_takeover_on() {
   level endon("rts_terminated");
-  triggers = getEntArray("rts_takeover_ON", "targetname");
+  triggers = getentarray("rts_takeover_ON", "targetname");
   array_thread(triggers, ::socoatra_ai_takeover_trigger, 0);
 }
 
@@ -1196,9 +1165,8 @@ socotra_heavy_squad_spawned(squadid) {
     done = 1;
 
     foreach(guy in level.rts.squads[squadid].members) {
-      if(!(isDefined(guy.rts_unloaded) && guy.rts_unloaded)) {
+      if(!(isDefined(guy.rts_unloaded) && guy.rts_unloaded))
         done = 0;
-      }
     }
   }
 }
@@ -1242,9 +1210,9 @@ socotra_karma_damagewatch() {
 
     println("(" + gettime() + ")###$ KARMA Health:" + level.rts.karma.health + " Damage:" + amount);
 
-    if(level.rts.karma.health_slice > amount) {
+    if(level.rts.karma.health_slice > amount)
       level.rts.karma.health_slice = level.rts.karma.health_slice - amount;
-    } else {
+    else {
       rebatehp = int(amount - level.rts.karma.health_slice);
       amount = level.rts.karma.health_slice;
       level.rts.karma.health_slice = 0;
@@ -1256,11 +1224,10 @@ socotra_karma_damagewatch() {
 
     health = level.rts.karma.health - amount;
 
-    if(health < 0) {
+    if(health < 0)
       health = 0;
-    } else {
+    else
       health = int(health / level.rts.karma.health_max * 255);
-    }
 
     val = maps\_so_rts_support::make_gpr_opcode(2) + 65280 + health;
     level.rts.karma thread maps\_so_rts_support::set_gpr(val);
@@ -1323,9 +1290,8 @@ socotra_karama_spawnwatch() {
       level.rts.player takeweapon("tazer_knuckles_sp");
       level.rts.player giveweapon("knife_karma_sp");
 
-      if(level.rts.player hasweapon("frag_grenade_future_sp")) {
+      if(level.rts.player hasweapon("frag_grenade_future_sp"))
         level.rts.player takeweapon("frag_grenade_future_sp");
-      }
 
       level waittill("karma_restore", karma);
       level.rts.disabledelayeddeathbodydelete = undefined;
@@ -1359,9 +1325,8 @@ socotra_karma_roomspawninit(karma) {
     guy setgoalnode(nodes[i]);
     i++;
 
-    if(i >= nodes.size) {
+    if(i >= nodes.size)
       i = 0;
-    }
   }
 }
 
@@ -1424,7 +1389,7 @@ socotra_karama_bodyguardspawn(squadid) {
     if(nodes.size) {
       guy1node = undefined;
       guy2node = undefined;
-      forward = anglesToForward(level.rts.player.angles);
+      forward = anglestoforward(level.rts.player.angles);
 
       foreach(node in nodes) {
         dir = vectornormalize(node.origin - level.rts.player.origin);
@@ -1446,13 +1411,11 @@ socotra_karama_bodyguardspawn(squadid) {
       }
     }
 
-    if(isDefined(guy1node) && isDefined(guy1)) {
+    if(isDefined(guy1node) && isDefined(guy1))
       guy1 forceteleport(guy1node.origin, guy1.angles);
-    }
 
-    if(isDefined(guy2node) && isDefined(guy2)) {
+    if(isDefined(guy2node) && isDefined(guy2))
       guy2 forceteleport(guy2node.origin, guy2.angles);
-    }
   } else {
     origin = getstruct("rts_ally_squad_heavy_spawnLoc", "targetname").origin;
 
@@ -1483,9 +1446,8 @@ karma_located(origin) {
 
   level.rts.player waittill_player_looking_at(origin);
 
-  if(!flag("karma_rescue_player_started")) {
+  if(!flag("karma_rescue_player_started"))
     maps\_so_rts_event::trigger_event("dlg_room_hvt_located");
-  }
 }
 
 karma_sayswhoareyou() {
@@ -1526,23 +1488,21 @@ socotra_karma_spawn() {
   animalignnode.targetname = "karma_loc";
   level thread run_scene("karma_rescue_karma_idle");
   level.rts.karma thread karma_helpme(level.rts.karma.origin, 200);
-  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, &"SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
+  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, & "SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
   level waittill("socotra_karma_rescued");
   level thread karma_sayswhoareyou();
   level.rts.karma_poi.karma_trigger delete();
   flag_set("found_hvt");
   set_objective(level.obj_search, undefined, "done");
-  enemydefensespots = getEntArray("enemy_rally_loc", "targetname");
+  enemydefensespots = getentarray("enemy_rally_loc", "targetname");
 
   while(level.rts.enemy_units.size) {
-    if(randomint(100) < 30) {
+    if(randomint(100) < 30)
       unitdisperse(level.rts.enemy_units[0], enemydefensespots[randomint(enemydefensespots.size)].origin);
-    }
   }
 
-  foreach(unit in level.rts.enemy_units) {
-    unitdefend(unit, enemydefensespots[randomint(enemydefensespots.size)].origin);
-  }
+  foreach(unit in level.rts.enemy_units)
+  unitdefend(unit, enemydefensespots[randomint(enemydefensespots.size)].origin);
 
   level.rts.vtol.rts_unloaded = 0;
   maps\_so_rts_squad::removesquadmarker(level.rts.vtol.squadid, 0);
@@ -1590,17 +1550,15 @@ socotra_karma_spawn() {
     wait 0.1;
     luinotifyevent(&"rts_add_squad", 3, regsquad.id, regsquad.pkg_ref.idx, 0);
 
-    foreach(guy in regsquad.members) {
-      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
-    }
+    foreach(guy in regsquad.members)
+    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
 
     luinotifyevent(&"rts_add_squad", 3, karmasquad.id, karmasquad.pkg_ref.idx, 0);
     luinotifyevent(&"rts_add_friendly_human", 5, level.rts.karma getentitynumber(), karmasquad.id, 35, 0, karmasquad.pkg_ref.idx);
     luinotifyevent(&"rts_add_squad", 3, heavysquad.id, heavysquad.pkg_ref.idx, 0);
 
-    foreach(guy in heavysquad.members) {
-      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
-    }
+    foreach(guy in heavysquad.members)
+    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
 
     scene_wait("karma_rescue_player");
 
@@ -1625,17 +1583,15 @@ socotra_karma_spawn() {
     wait 0.1;
     luinotifyevent(&"rts_add_squad", 3, regsquad.id, regsquad.pkg_ref.idx, 0);
 
-    foreach(guy in regsquad.members) {
-      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
-    }
+    foreach(guy in regsquad.members)
+    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
 
     luinotifyevent(&"rts_add_squad", 3, karmasquad.id, karmasquad.pkg_ref.idx, 0);
     luinotifyevent(&"rts_add_friendly_human", 5, level.rts.karma getentitynumber(), karmasquad.id, 35, 0, karmasquad.pkg_ref.idx);
     luinotifyevent(&"rts_add_squad", 3, heavysquad.id, heavysquad.pkg_ref.idx, 0);
 
-    foreach(guy in heavysquad.members) {
-      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
-    }
+    foreach(guy in heavysquad.members)
+    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
   }
 
   maps\_so_rts_event::trigger_event("dlg_hvt_secure");
@@ -1664,23 +1620,20 @@ socotra_karma_spawn() {
   level.rts.squads[squadid].primary_ai_switchtarget = level.rts.karma;
   maps\_so_rts_squad::squad_unloaded(squadid);
 
-  foreach(dude in level.rts.squads[squadid].members) {
-    dude.goalradius = 128;
-  }
+  foreach(dude in level.rts.squads[squadid].members)
+  dude.goalradius = 128;
 
-  if(isDefined(level.rts.player.ally)) {
+  if(isDefined(level.rts.player.ally))
     maps\_so_rts_squad::ordersquadfollowai(squadid, level.rts.player);
-  } else {
+  else
     maps\_so_rts_squad::ordersquadfollowai(squadid, level.rts.karma);
-  }
 
   maps\_so_rts_catalog::setpkgqty("infantry_ally_reg2_pkg", "allies", 0);
   maps\_so_rts_catalog::setpkgqty("infantry_ally_reg_pkg", "allies", 0);
   allies = heavysquad.members.size + regsquad.members.size;
 
-  if(allies < 3) {
+  if(allies < 3)
     maps\_so_rts_catalog::setpkgqty("infantry_ally_reg2_pkg", "allies", 1);
-  }
 
   outro_spot = getent("karma_outro_spot", "targetname");
   flag_wait("vtol_at_outro");
@@ -1702,9 +1655,8 @@ vtol_move_away() {
   smoke_model = spawn_model("weapon_us_smoke_grenade_burnt", smoke_pos.origin, smoke_pos.angles);
   maps\_so_rts_event::trigger_event("fx_signal_smoke", smoke_model.origin);
 
-  if(isDefined(level.rts.vtol.gunner)) {
+  if(isDefined(level.rts.vtol.gunner))
     level.rts.vtol.gunner delete();
-  }
 
   level.rts.vtol setspeed(60, 25, 5);
   gotopoint = getent("vtol_outro_goto_loc", "targetname").origin;
@@ -1735,11 +1687,10 @@ karma_helpme(origin, radius) {
   maps\_so_rts_catalog::setpkgqty("infantry_enemy_reg_pkg", "axis", -1);
   level.rts.game_rules.num_nag_squads = 99;
 
-  if(who == level.rts.player) {
+  if(who == level.rts.player)
     squadid = level.rts.player.ally.squadid;
-  } else {
+  else
     squadid = who.squadid;
-  }
 
   maps\_so_rts_event::trigger_event("dlg_room_hvt_located");
   set_objective(level.obj_search, undefined, "done");
@@ -1753,16 +1704,15 @@ karma_helpme(origin, radius) {
   arrayremovevalue(level.rts.safehouses, level.rts.karma_poi);
   luinotifyevent(&"rts_del_poi", 1, level.rts.karma_poi getentitynumber());
 
-  while(level.rts.safehouses.size) {
+  while(level.rts.safehouses.size)
     safehouse_delete(level.rts.safehouses[0]);
-  }
 
   if(flag("rts_mode")) {
     if(!isDefined(level.rts.karma_poi.bldg)) {
       spot = level.rts.karma_poi;
       spot.bldg = spawn("script_model", spot.site.origin);
       spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-      spot.bldg setModel(spot.modelname);
+      spot.bldg setmodel(spot.modelname);
       spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       spot.bldg ignorecheapentityflag(1);
     } else
@@ -1783,11 +1733,10 @@ vehicle_set_team(team) {
   self.team = team;
   self setteam(team);
 
-  if(issubstr(self.vehicletype, "quadrotor")) {
+  if(issubstr(self.vehicletype, "quadrotor"))
     self thread maps\_quadrotor::quadrotor_set_team(team);
-  } else {
+  else
     self.vteam = team;
-  }
 }
 
 socotra_rooftopcleanup() {
@@ -1797,7 +1746,7 @@ socotra_rooftopcleanup() {
 }
 
 socotra_rooftopdeath() {
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   self startragdoll();
   self launchragdoll(vectorscale(forward, randomintrange(25, 35)), "tag_eye");
   self ragdoll_death();
@@ -1813,12 +1762,11 @@ socotra_rooftopinit() {
   pkg_ref.min_axis = 3;
   pkg_ref.max_axis = 5;
 
-  while(flag("rts_mode")) {
+  while(flag("rts_mode"))
     wait 0.05;
-  }
 
-  rallypoints = getEntArray("enemy_rally_loc", "targetname");
-  rooftoplocs = array_randomize(getEntArray("roofTopLoc", "targetname"));
+  rallypoints = getentarray("enemy_rally_loc", "targetname");
+  rooftoplocs = array_randomize(getentarray("roofTopLoc", "targetname"));
   enemycount = getaiarray("axis");
   tospawn = 0;
   locs = [];
@@ -1854,15 +1802,13 @@ socotra_rooftopinit() {
     case "hard":
       break;
     case "medium":
-      if(tospawn > 3) {
+      if(tospawn > 3)
         tospawn = 3;
-      }
 
       break;
     case "easy":
-      if(tospawn > 1) {
+      if(tospawn > 1)
         tospawn = 1;
-      }
 
       break;
   }
@@ -1902,9 +1848,8 @@ socotra_quad_spawn(squadid) {
       quad maps\_vehicle::defend(quad.origin, 128);
       i++;
 
-      if(i >= spawnloc.size) {
+      if(i >= spawnloc.size)
         i = 0;
-      }
     }
   }
 }
@@ -1937,9 +1882,8 @@ socotra_level_player_startfps() {
   flag_wait("intro_done");
 
   foreach(guy in level.rts.squads[nextsquad].members) {
-    if(isDefined(guy)) {
+    if(isDefined(guy))
       guy.allow_oob = undefined;
-    }
   }
 
   level.rts.player.ignoreme = 0;
@@ -1966,9 +1910,8 @@ socotra_mission_complete_s1(success, param) {
   level.rts.game_success = success;
   level notify("socotra_mission_complete");
 
-  while(isDefined(level.rts.switch_trans)) {
+  while(isDefined(level.rts.switch_trans))
     wait 0.05;
-  }
 
   screen_fade_out(0.5);
   wait 0.5;
@@ -1980,9 +1923,8 @@ socotra_mission_complete_s1(success, param) {
   }
 
   foreach(spot in level.rts.safehouses) {
-    if(isDefined(spot.bldg)) {
+    if(isDefined(spot.bldg))
       spot.bldg delete();
-    }
   }
 
   maps\_so_rts_poi::deleteallpoi();
@@ -1998,9 +1940,8 @@ socotra_mission_complete_s1(success, param) {
   allies = getaiarray("allies");
 
   foreach(ally in allies) {
-    if(isDefined(ally.ai_ref)) {
+    if(isDefined(ally.ai_ref))
       ally kill();
-    }
   }
 
   objective_state(level.obj_secure, success ? "done" : "failed");
@@ -2028,9 +1969,8 @@ socotra_mission_complete_s1(success, param) {
     level.player giveachievement_wrapper("SP_RTS_SOCOTRA");
     maps\_so_rts_support::missionsuccessmenu();
   } else {
-    if(isDefined(level.rts.vtol)) {
+    if(isDefined(level.rts.vtol))
       level.rts.vtol delete();
-    }
 
     maps\_so_rts_event::trigger_event("dlg_mission_fail");
     flag_clear("rts_event_ready");
@@ -2117,11 +2057,12 @@ populate_dead_bodies() {
   }
 }
 
-socotra_level_scenario_one_registerevents() {}
+socotra_level_scenario_one_registerevents() {
+}
 
 socotra_pick_safehouses() {
   level.rts.max_poi_infantry = 3;
-  safehouses = array_randomize(arraycombine(getEntArray("safe_house_a", "targetname"), getEntArray("safe_house_b", "targetname"), 0, 0));
+  safehouses = array_randomize(arraycombine(getentarray("safe_house_a", "targetname"), getentarray("safe_house_b", "targetname"), 0, 0));
   poinames = array_randomize(array("rts_poi_search1", "rts_poi_search2", "rts_poi_search3", "rts_poi_search4", "rts_poi_search5"));
   safeloc1 = safehouses[0];
   safeloc2 = safehouses[1];
@@ -2159,11 +2100,11 @@ socotra_pick_safehouses() {
   safehouse5.bldgid = safeloc5.script_parameters;
   safehouse5.trig = getent(safeloc5.target, "targetname");
   level.rts.safehouses = array(safehouse1, safehouse2, safehouse3, safehouse4, safehouse5);
-  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, &"rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, &"rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, &"rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, &"rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, & "rts_search_poi");
 
   foreach(spot in level.rts.safehouses) {
     target = "mp_socotra_bldg_0" + spot.bldgid;
@@ -2174,15 +2115,13 @@ socotra_pick_safehouses() {
   level.rts.safehouses_cleared = 0;
   set_objective(level.obj_search, undefined, "*", level.rts.safehouses_cleared);
 
-  foreach(house in level.rts.safehouses) {
-    house thread safehouse_capturewatch();
-  }
+  foreach(house in level.rts.safehouses)
+  house thread safehouse_capturewatch();
 }
 
 safehouse_delete(house, cleared) {
-  if(!isDefined(cleared)) {
+  if(!isDefined(cleared))
     cleared = 0;
-  }
 
   if(isDefined(house.bldg)) {
     house.bldg delete();
@@ -2218,18 +2157,16 @@ safehouse_capturewatch() {
   if(isDefined(level.rts.karma_poi) && self == level.rts.karma_poi && who != level.rts.player) {
     maps\_so_rts_squad::ordersquaddefend(level.rts.karma.origin, who.squadid);
 
-    foreach(guy in level.rts.squads[who.squadid].members) {
-      guy.goalradius = 128;
-    }
+    foreach(guy in level.rts.squads[who.squadid].members)
+    guy.goalradius = 128;
   }
 
   level notify("safehouse_clear");
 }
 
 socotra_poi_inf_spawn(squadid) {
-  foreach(guy in level.rts.squads[squadid].members) {
-    guy.goalradius = 256;
-  }
+  foreach(guy in level.rts.squads[squadid].members)
+  guy.goalradius = 256;
 }
 
 static_transition(player) {
@@ -2250,15 +2187,13 @@ socotra_outro_success(alignnode) {
   flag_set("block_input");
   maps\_so_rts_support::hide_player_hud();
 
-  if(!flag("screen_fade_out_end")) {
+  if(!flag("screen_fade_out_end"))
     thread screen_fade_out(0.2);
-  }
 
-  if(flag("fps_mode")) {
+  if(flag("fps_mode"))
     level.rts.player maps\_so_rts_ai::restorereplacement();
-  } else {
+  else
     level.rts.player clearclientflag(3);
-  }
 
   wait 0.2;
 
@@ -2267,9 +2202,8 @@ socotra_outro_success(alignnode) {
     level.rts.karma = undefined;
   }
 
-  if(isDefined(level.orange_outro_obj)) {
+  if(isDefined(level.orange_outro_obj))
     level.orange_outro_obj delete();
-  }
 
   exploder(955);
   level.rts.player enableinvulnerability();
@@ -2306,22 +2240,20 @@ socotra_outro_fail(alignnode) {
   wait 0.05;
   ent = getent("outro_fail_heli1", "targetname");
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 
   ent = getent("outro_fail_heli2", "targetname");
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 
   stop_exploder(950);
 }
 
 create_anim_model(pos, model_name, animname) {
   model = spawn("script_model", pos);
-  model setModel(model_name);
+  model setmodel(model_name);
   model.animname = animname;
   model hide();
   return model;
@@ -2389,9 +2321,8 @@ socotra_watch_devgui() {
 }
 
 socotravoxlist(team, unit) {
-  if(!isDefined(unit)) {
+  if(!isDefined(unit))
     unit = "";
-  }
 
   guys = [];
 
@@ -2409,9 +2340,8 @@ socotravoxlist(team, unit) {
   for(i = min; i <= max; i++) {
     voxid = "so" + i;
 
-    if(isDefined(level.rts.voxids["allies"][voxid])) {
+    if(isDefined(level.rts.voxids["allies"][voxid]))
       guys[guys.size] = level.rts.voxids["allies"][voxid];
-    }
   }
 
   return guys;
@@ -2420,13 +2350,12 @@ socotravoxlist(team, unit) {
 socotravoxalloc(entity) {
   pkg_ref = level.rts.squads[entity.squadid].pkg_ref.ref;
 
-  if(pkg_ref == "infantry_ally_reg_pkg") {
+  if(pkg_ref == "infantry_ally_reg_pkg")
     unit = "alpha";
-  } else if(pkg_ref == "infantry_ally_reg2_pkg") {
+  else if(pkg_ref == "infantry_ally_reg2_pkg")
     unit = "kilo";
-  } else {
+  else
     return;
-  }
 
   if(unit == "alpha") {
     min = 0;
@@ -2464,9 +2393,8 @@ socotra_nextavailunit(nextsquad, playerdied) {
       continue;
     }
     foreach(guy in allysquads[i].members) {
-      if(maps\_so_rts_ai::ai_istakeoverpossible(guy)) {
+      if(maps\_so_rts_ai::ai_istakeoverpossible(guy))
         possibles[possibles.size] = guy;
-      }
     }
   }
 
@@ -2474,19 +2402,18 @@ socotra_nextavailunit(nextsquad, playerdied) {
     best = getclosestinarray(level.rts.karma.origin, possibles);
     level thread squadselectnextaiandtakeover(best.squadid, playerdied, best);
   } else {
-    if(!isDefined(nextsquad)) {
+    if(!isDefined(nextsquad))
       nextsquad = maps\_so_rts_squad::getnextvalidsquad();
-    } else {
+    else {
       maps\_so_rts_squad::removedeadfromsquad(nextsquad);
 
-      if(!(isDefined(level.rts.squads[nextsquad].selectable) && level.rts.squads[nextsquad].selectable)) {
+      if(!(isDefined(level.rts.squads[nextsquad].selectable) && level.rts.squads[nextsquad].selectable))
         nextsquad = maps\_so_rts_squad::getnextvalidsquad();
-      }
     }
 
-    if(nextsquad != -1) {
+    if(nextsquad != -1)
       level thread squadselectnextaiandtakeover(nextsquad, playerdied);
-    } else {
+    else {
       maps\_so_rts_event::trigger_event("died_all_pkgs");
       level.rts.lastfpspoint = level.rts.player.origin;
       level thread player_eyeinthesky();
@@ -2498,18 +2425,17 @@ socotra_nextavailunit(nextsquad, playerdied) {
 watch_quad_death() {
   self waittill("death", attacker, param2, weapon, v_loc, v_dir, dmg_type, param7, param8, param9);
 
-  if(isplayer(attacker)) {
+  if(isplayer(attacker))
     level notify("player_killed_quad", level.player maps\_so_rts_support::get_player_rts_mode(), dmg_type);
-  } else if(self.team == "axis") {
+  else if(self.team == "axis")
     level notify("ally_killed_quad", self, attacker);
-  }
 }
 
 setup_challenges() {
   self thread maps\_so_rts_support::track_unit_type_usage();
   add_spawn_function_veh_by_type("heli_quadrotor_rts", ::watch_quad_death);
   level.callbackactorkilled = maps\_so_rts_challenges::global_actor_killed_challenges_callback;
-  level.rts.kill_stats = spawnStruct();
+  level.rts.kill_stats = spawnstruct();
   level.rts.kill_stats.total_kills = 0;
   level.rts.kill_stats.explosive_kills = 0;
   level.rts.kill_stats.headshot_kills = 0;
@@ -2549,9 +2475,8 @@ challenge_time_limit(str_notify) {
   play_time = gettime() - start_time;
   seconds_played = play_time / 1000;
 
-  if(seconds_played < 90) {
+  if(seconds_played < 90)
     self notify(str_notify);
-  }
 }
 
 challenge_extract_time_limit(str_notify) {
@@ -2565,7 +2490,6 @@ challenge_extract_time_limit(str_notify) {
   play_time = gettime() - start_time;
   seconds_played = play_time / 1000;
 
-  if(seconds_played < 60) {
+  if(seconds_played < 60)
     self notify(str_notify);
-  }
 }

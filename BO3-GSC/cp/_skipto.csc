@@ -16,7 +16,7 @@
 #namespace skipto;
 
 function autoexec __init__sytem__() {
-  system::register("skipto", &__init__, &__main__, undefined);
+  system::register("skipto", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -24,8 +24,8 @@ function __init__() {
   level flag::init("level_has_skiptos");
   level flag::init("level_has_skipto_branches");
   level.skipto_current_objective = [];
-  clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter", &catch_up_transition, 0, 0);
-  clientfield::register("world", "set_last_map_dvar", 1, 1, "counter", &set_last_map_dvar, 0, 0);
+  clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter", & catch_up_transition, 0, 0);
+  clientfield::register("world", "set_last_map_dvar", 1, 1, "counter", & set_last_map_dvar, 0, 0);
   add_internal("_default");
   add_internal("no_game");
   load_mission_table("gamedata/tables/cp/cp_mapmissions.csv", getdvarstring("mapname"));
@@ -43,25 +43,25 @@ function __main__() {
 }
 
 function add(skipto, func, loc_string, cleanup_func, launch_after, end_before) {
-  if(!isDefined(level.default_skipto)) {
+  if(!isdefined(level.default_skipto)) {
     level.default_skipto = skipto;
   }
   if(is_dev(skipto)) {
     errormsg("");
     return;
   }
-  if(isDefined(launch_after) || isDefined(end_before)) {
+  if(isdefined(launch_after) || isdefined(end_before)) {
     errormsg("");
     return;
   }
   if(level flag::get("level_has_skipto_branches")) {
     errormsg("");
   }
-  if(!isDefined(launch_after)) {
-    if(isDefined(level.last_skipto)) {
-      if(isDefined(level.skipto_settings[level.last_skipto])) {
-        if(!isDefined(level.skipto_settings[level.last_skipto].end_before) || level.skipto_settings[level.last_skipto].end_before.size < 1) {
-          if(!isDefined(level.skipto_settings[level.last_skipto].end_before)) {
+  if(!isdefined(launch_after)) {
+    if(isdefined(level.last_skipto)) {
+      if(isdefined(level.skipto_settings[level.last_skipto])) {
+        if(!isdefined(level.skipto_settings[level.last_skipto].end_before) || level.skipto_settings[level.last_skipto].end_before.size < 1) {
+          if(!isdefined(level.skipto_settings[level.last_skipto].end_before)) {
             level.skipto_settings[level.last_skipto].end_before = [];
           } else if(!isarray(level.skipto_settings[level.last_skipto].end_before)) {
             level.skipto_settings[level.last_skipto].end_before = array(level.skipto_settings[level.last_skipto].end_before);
@@ -70,13 +70,13 @@ function add(skipto, func, loc_string, cleanup_func, launch_after, end_before) {
         level.skipto_settings[level.last_skipto].end_before[level.skipto_settings[level.last_skipto].end_before.size] = skipto;
       }
     }
-    if(isDefined(level.last_skipto)) {
+    if(isdefined(level.last_skipto)) {
       launch_after = level.last_skipto;
     }
     level.last_skipto = skipto;
   }
-  if(!isDefined(func)) {
-    assert(isDefined(func), "");
+  if(!isdefined(func)) {
+    assert(isdefined(func), "");
   }
   struct = add_internal(skipto, func, loc_string, cleanup_func, launch_after, end_before);
   struct.public = 1;
@@ -84,22 +84,22 @@ function add(skipto, func, loc_string, cleanup_func, launch_after, end_before) {
 }
 
 function add_branch(skipto, func, loc_string, cleanup_func, launch_after, end_before) {
-  if(!isDefined(level.default_skipto)) {
+  if(!isdefined(level.default_skipto)) {
     level.default_skipto = skipto;
   }
   if(is_dev(skipto)) {
     errormsg("");
     return;
   }
-  if(!isDefined(launch_after) && !isDefined(end_before)) {
+  if(!isdefined(launch_after) && !isdefined(end_before)) {
     errormsg("");
     return;
   }
-  if(!isDefined(launch_after)) {
-    if(isDefined(level.last_skipto)) {
-      if(isDefined(level.skipto_settings[level.last_skipto])) {
-        if(!isDefined(level.skipto_settings[level.last_skipto].end_before) || level.skipto_settings[level.last_skipto].end_before.size < 1) {
-          if(!isDefined(level.skipto_settings[level.last_skipto].end_before)) {
+  if(!isdefined(launch_after)) {
+    if(isdefined(level.last_skipto)) {
+      if(isdefined(level.skipto_settings[level.last_skipto])) {
+        if(!isdefined(level.skipto_settings[level.last_skipto].end_before) || level.skipto_settings[level.last_skipto].end_before.size < 1) {
+          if(!isdefined(level.skipto_settings[level.last_skipto].end_before)) {
             level.skipto_settings[level.last_skipto].end_before = [];
           } else if(!isarray(level.skipto_settings[level.last_skipto].end_before)) {
             level.skipto_settings[level.last_skipto].end_before = array(level.skipto_settings[level.last_skipto].end_before);
@@ -108,13 +108,13 @@ function add_branch(skipto, func, loc_string, cleanup_func, launch_after, end_be
         level.skipto_settings[level.last_skipto].end_before[level.skipto_settings[level.last_skipto].end_before.size] = skipto;
       }
     }
-    if(isDefined(level.last_skipto)) {
+    if(isdefined(level.last_skipto)) {
       launch_after = level.last_skipto;
     }
     level.last_skipto = skipto;
   }
-  if(!isDefined(func)) {
-    assert(isDefined(func), "");
+  if(!isdefined(func)) {
+    assert(isdefined(func), "");
   }
   struct = add_internal(skipto, func, loc_string, cleanup_func, launch_after, end_before);
   struct.public = 1;
@@ -123,7 +123,7 @@ function add_branch(skipto, func, loc_string, cleanup_func, launch_after, end_be
 }
 
 function add_dev(skipto, func, loc_string, cleanup_func, launch_after, end_before) {
-  if(!isDefined(level.default_skipto)) {
+  if(!isdefined(level.default_skipto)) {
     level.default_skipto = skipto;
   }
   if(is_dev(skipto)) {
@@ -135,7 +135,7 @@ function add_dev(skipto, func, loc_string, cleanup_func, launch_after, end_befor
 }
 
 function add_internal(msg, func, loc_string, cleanup_func, launch_after, end_before) {
-  assert(!isDefined(level._loadstarted), "");
+  assert(!isdefined(level._loadstarted), "");
   msg = tolower(msg);
   struct = add_construct(msg, func, loc_string, cleanup_func, launch_after, end_before);
   level.skipto_settings[msg] = struct;
@@ -144,24 +144,24 @@ function add_internal(msg, func, loc_string, cleanup_func, launch_after, end_bef
 
 function change(msg, func, loc_string, cleanup_func, launch_after, end_before) {
   struct = level.skipto_settings[msg];
-  if(isDefined(func)) {
+  if(isdefined(func)) {
     struct.skipto_func = func;
   }
-  if(isDefined(loc_string)) {
+  if(isdefined(loc_string)) {
     struct.skipto_loc_string = loc_string;
   }
-  if(isDefined(cleanup_func)) {
+  if(isdefined(cleanup_func)) {
     struct.cleanup_func = cleanup_func;
   }
-  if(isDefined(launch_after)) {
-    if(!isDefined(struct.launch_after)) {
+  if(isdefined(launch_after)) {
+    if(!isdefined(struct.launch_after)) {
       struct.launch_after = [];
     } else if(!isarray(struct.launch_after)) {
       struct.launch_after = array(struct.launch_after);
     }
     struct.launch_after[struct.launch_after.size] = launch_after;
   }
-  if(isDefined(end_before)) {
+  if(isdefined(end_before)) {
     struct.end_before = strtok(end_before, ",");
     struct.next = struct.end_before;
   }
@@ -172,7 +172,7 @@ function set_skipto_cleanup_func(func) {
 }
 
 function add_construct(msg, func, loc_string, cleanup_func, launch_after, end_before) {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.name = msg;
   struct.skipto_func = func;
   struct.skipto_loc_string = loc_string;
@@ -181,8 +181,8 @@ function add_construct(msg, func, loc_string, cleanup_func, launch_after, end_be
   struct.prev = [];
   struct.completion_conditions = "";
   struct.launch_after = [];
-  if(isDefined(launch_after)) {
-    if(!isDefined(struct.launch_after)) {
+  if(isdefined(launch_after)) {
+    if(!isdefined(struct.launch_after)) {
       struct.launch_after = [];
     } else if(!isarray(struct.launch_after)) {
       struct.launch_after = array(struct.launch_after);
@@ -190,7 +190,7 @@ function add_construct(msg, func, loc_string, cleanup_func, launch_after, end_be
     struct.launch_after[struct.launch_after.size] = launch_after;
   }
   struct.end_before = [];
-  if(isDefined(end_before)) {
+  if(isdefined(end_before)) {
     struct.end_before = strtok(end_before, ",");
     struct.next = struct.end_before;
   }
@@ -200,12 +200,12 @@ function add_construct(msg, func, loc_string, cleanup_func, launch_after, end_be
 
 function build_objective_tree() {
   foreach(struct in level.skipto_settings) {
-    if(isDefined(struct.public) && struct.public) {
+    if(isdefined(struct.public) && struct.public) {
       if(struct.launch_after.size) {
         foreach(launch_after in struct.launch_after) {
-          if(isDefined(level.skipto_settings[launch_after])) {
+          if(isdefined(level.skipto_settings[launch_after])) {
             if(!isinarray(level.skipto_settings[launch_after].next, struct.name)) {
-              if(!isDefined(level.skipto_settings[launch_after].next)) {
+              if(!isdefined(level.skipto_settings[launch_after].next)) {
                 level.skipto_settings[launch_after].next = [];
               } else if(!isarray(level.skipto_settings[launch_after].next)) {
                 level.skipto_settings[launch_after].next = array(level.skipto_settings[launch_after].next);
@@ -214,7 +214,7 @@ function build_objective_tree() {
             }
             continue;
           }
-          if(!isDefined(level.skipto_settings["_default"].next)) {
+          if(!isdefined(level.skipto_settings["_default"].next)) {
             level.skipto_settings["_default"].next = [];
           } else if(!isarray(level.skipto_settings["_default"].next)) {
             level.skipto_settings["_default"].next = array(level.skipto_settings["_default"].next);
@@ -222,7 +222,7 @@ function build_objective_tree() {
           level.skipto_settings["_default"].next[level.skipto_settings["_default"].next.size] = struct.name;
         }
       } else {
-        if(!isDefined(level.skipto_settings["_default"].next)) {
+        if(!isdefined(level.skipto_settings["_default"].next)) {
           level.skipto_settings["_default"].next = [];
         } else if(!isarray(level.skipto_settings["_default"].next)) {
           level.skipto_settings["_default"].next = array(level.skipto_settings["_default"].next);
@@ -230,8 +230,8 @@ function build_objective_tree() {
         level.skipto_settings["_default"].next[level.skipto_settings["_default"].next.size] = struct.name;
       }
       foreach(end_before in struct.end_before) {
-        if(isDefined(level.skipto_settings[end_before])) {
-          if(!isDefined(level.skipto_settings[end_before].prev)) {
+        if(isdefined(level.skipto_settings[end_before])) {
+          if(!isdefined(level.skipto_settings[end_before].prev)) {
             level.skipto_settings[end_before].prev = [];
           } else if(!isarray(level.skipto_settings[end_before].prev)) {
             level.skipto_settings[end_before].prev = array(level.skipto_settings[end_before].prev);
@@ -242,9 +242,9 @@ function build_objective_tree() {
     }
   }
   foreach(struct in level.skipto_settings) {
-    if(isDefined(struct.public) && struct.public) {
+    if(isdefined(struct.public) && struct.public) {
       if(struct.next.size < 1) {
-        if(!isDefined(struct.next)) {
+        if(!isdefined(struct.next)) {
           struct.next = [];
         } else if(!isarray(struct.next)) {
           struct.next = array(struct.next);
@@ -279,7 +279,7 @@ function handle() {
   run_initial_logic();
   skiptos = get_current_skiptos();
   set_level_objective(skiptos, 1);
-  while(true) {
+  while (true) {
     level waittill("skiptos_changed");
     skiptos = get_current_skiptos();
     set_level_objective(skiptos, 0);
@@ -311,14 +311,14 @@ function convert_token(str, fromtok, totok) {
 function load_mission_table(table, levelname, sublevel = "") {
   index = 0;
   row = tablelookuprow(table, index);
-  while(isDefined(row)) {
+  while (isdefined(row)) {
     if(row[0] == levelname && row[1] == sublevel) {
       skipto = row[2];
       launch_after = row[3];
       end_before = row[4];
       end_before = convert_token(end_before, "+", ",");
       locstr = row[5];
-      add_branch(skipto, &load_mission_init, locstr, undefined, launch_after, end_before);
+      add_branch(skipto, & load_mission_init, locstr, undefined, launch_after, end_before);
     }
     index++;
     row = tablelookuprow(table, index);
@@ -335,7 +335,7 @@ function watch_players_connect() {
   if(!level flag::exists("skipto_player_connected")) {
     level flag::init("skipto_player_connected");
   }
-  callback::add_callback("hash_da8d7d74", &on_player_connect);
+  callback::add_callback("hash_da8d7d74", & on_player_connect);
 }
 
 function on_player_connect(localclientnum) {
@@ -346,18 +346,18 @@ function set_level_objective(objectives, starting) {
   clear_recursion();
   if(starting) {
     foreach(objective in objectives) {
-      if(isDefined(level.skipto_settings[objective])) {
+      if(isdefined(level.skipto_settings[objective])) {
         stop_objective_logic(level.skipto_settings[objective].prev, starting);
       }
     }
   } else {
     foreach(skipto in level.skipto_settings) {
-      if(isDefined(skipto.objective_running) && skipto.objective_running && !isinarray(objectives, skipto.name)) {
+      if(isdefined(skipto.objective_running) && skipto.objective_running && !isinarray(objectives, skipto.name)) {
         stop_objective_logic(skipto.name, starting);
       }
     }
   }
-  if(isDefined(level.func_skipto_cleanup)) {
+  if(isdefined(level.func_skipto_cleanup)) {
     foreach(name in objectives) {
       thread[[level.func_skipto_cleanup]](name);
     }
@@ -370,9 +370,9 @@ function set_level_objective(objectives, starting) {
 
 function run_initial_logic(objectives) {
   foreach(skipto in level.skipto_settings) {
-    if(!(isDefined(skipto.logic_running) && skipto.logic_running)) {
+    if(!(isdefined(skipto.logic_running) && skipto.logic_running)) {
       skipto.logic_running = 1;
-      if(isDefined(skipto.logic_func)) {
+      if(isdefined(skipto.logic_func)) {
         thread[[skipto.logic_func]](skipto.name);
       }
     }
@@ -384,10 +384,10 @@ function start_objective_logic(name, starting) {
     foreach(element in name) {
       start_objective_logic(element, starting);
     }
-  } else if(isDefined(level.skipto_settings[name])) {
-    if(!(isDefined(level.skipto_settings[name].objective_running) && level.skipto_settings[name].objective_running)) {
+  } else if(isdefined(level.skipto_settings[name])) {
+    if(!(isdefined(level.skipto_settings[name].objective_running) && level.skipto_settings[name].objective_running)) {
       if(!isinarray(level.skipto_current_objective, name)) {
-        if(!isDefined(level.skipto_current_objective)) {
+        if(!isdefined(level.skipto_current_objective)) {
           level.skipto_current_objective = [];
         } else if(!isarray(level.skipto_current_objective)) {
           level.skipto_current_objective = array(level.skipto_current_objective);
@@ -397,7 +397,7 @@ function start_objective_logic(name, starting) {
       level notify(name + "_init");
       level.skipto_settings[name].objective_running = 1;
       standard_objective_init(name, starting);
-      if(isDefined(level.skipto_settings[name].skipto_func)) {
+      if(isdefined(level.skipto_settings[name].skipto_func)) {
         thread[[level.skipto_settings[name].skipto_func]](name, starting);
       }
     }
@@ -415,25 +415,25 @@ function stop_objective_logic(name, starting) {
     foreach(element in name) {
       stop_objective_logic(element, starting);
     }
-  } else if(isDefined(level.skipto_settings[name])) {
+  } else if(isdefined(level.skipto_settings[name])) {
     cleaned = 0;
-    if(isDefined(level.skipto_settings[name].objective_running) && level.skipto_settings[name].objective_running) {
+    if(isdefined(level.skipto_settings[name].objective_running) && level.skipto_settings[name].objective_running) {
       cleaned = 1;
       level.skipto_settings[name].objective_running = 0;
       if(isinarray(level.skipto_current_objective, name)) {
         arrayremovevalue(level.skipto_current_objective, name);
       }
-      if(isDefined(level.skipto_settings[name].cleanup_func)) {
+      if(isdefined(level.skipto_settings[name].cleanup_func)) {
         thread[[level.skipto_settings[name].cleanup_func]](name, starting);
       }
       standard_objective_done(name, starting);
       level notify(name + "_terminate");
     }
-    if(starting && (!(isDefined(level.skipto_settings[name].cleanup_recursion) && level.skipto_settings[name].cleanup_recursion))) {
+    if(starting && (!(isdefined(level.skipto_settings[name].cleanup_recursion) && level.skipto_settings[name].cleanup_recursion))) {
       level.skipto_settings[name].cleanup_recursion = 1;
       stop_objective_logic(level.skipto_settings[name].prev, starting);
       if(!cleaned) {
-        if(isDefined(level.skipto_settings[name].cleanup_func)) {
+        if(isdefined(level.skipto_settings[name].cleanup_func)) {
           thread[[level.skipto_settings[name].cleanup_func]](name, starting);
         }
         standard_objective_done(name, starting);

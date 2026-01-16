@@ -8,6 +8,7 @@
 #include scripts\core_common\duplicaterender_mgr;
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
+
 #namespace escort;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -5,51 +5,46 @@
 
 init() {
   level.hostname = getdvar("sv_hostname");
-  if(level.hostname == "") {
+  if(level.hostname == "")
     level.hostname = "CoDWaWHost";
-  }
   setdvar("sv_hostname", level.hostname);
   setdvar("ui_hostname", level.hostname);
   makedvarserverinfo("ui_hostname", "CoDWaWHost");
   level.motd = getdvar("scr_motd");
-  if(level.motd == "") {
+  if(level.motd == "")
     level.motd = "";
-  }
   setdvar("scr_motd", level.motd);
   setdvar("ui_motd", level.motd);
   makedvarserverinfo("ui_motd", "");
   level.allowvote = getdvar("g_allowvote");
-  if(level.allowvote == "") {
+  if(level.allowvote == "")
     level.allowvote = "1";
-  }
   setdvar("g_allowvote", level.allowvote);
   setdvar("ui_allowvote", level.allowvote);
   makedvarserverinfo("ui_allowvote", "1");
   level.allow_teamchange = getdvar("g_allow_teamchange");
-  if(level.allow_teamchange == "") {
+  if(level.allow_teamchange == "")
     level.allow_teamchange = "1";
-  }
   setdvar("g_allow_teamchange", level.allow_teamchange);
   setdvar("ui_allow_teamchange", level.allow_teamchange);
   makedvarserverinfo("ui_allow_teamchange", "1");
   level.friendlyfire = maps\mp\gametypes\_tweakables::getTweakableValue("team", "fftype");
   setdvar("ui_friendlyfire", level.friendlyfire);
   makedvarserverinfo("ui_friendlyfire", "0");
-  if(getdvar("scr_mapsize") == "") {
+  if(getdvar("scr_mapsize") == "")
     setdvar("scr_mapsize", "64");
-  } else if(getdvarFloat("scr_mapsize") >= 64) {
+  else if(getdvarFloat("scr_mapsize") >= 64)
     setdvar("scr_mapsize", "64");
-  } else if(getdvarFloat("scr_mapsize") >= 32) {
+  else if(getdvarFloat("scr_mapsize") >= 32)
     setdvar("scr_mapsize", "32");
-  } else if(getdvarFloat("scr_mapsize") >= 16) {
+  else if(getdvarFloat("scr_mapsize") >= 16)
     setdvar("scr_mapsize", "16");
-  } else {
+  else
     setdvar("scr_mapsize", "8");
-  }
   level.mapsize = getdvarFloat("scr_mapsize");
   constrainGameType(getdvar("g_gametype"));
   constrainMapSize(level.mapsize);
-  for(;;) {
+  for (;;) {
     updateServerSettings();
     wait 5;
   }
@@ -84,8 +79,8 @@ updateServerSettings() {
 }
 
 constrainGameType(gametype) {
-  entities = getEntArray();
-  for(i = 0; i < entities.size; i++) {
+  entities = getentarray();
+  for (i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(gametype == "dm") {
       if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
@@ -116,8 +111,8 @@ constrainGameType(gametype) {
 }
 
 constrainMapSize(mapsize) {
-  entities = getEntArray();
-  for(i = 0; i < entities.size; i++) {
+  entities = getentarray();
+  for (i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(int(mapsize) == 8) {
       if(isDefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1") {

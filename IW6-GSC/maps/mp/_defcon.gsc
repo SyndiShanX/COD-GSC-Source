@@ -13,9 +13,8 @@ init() {
   if(!isDefined(level.defconMode) || level.defconMode == false) {
     return;
   }
-  if(!isDefined(game["defcon"])) {
+  if(!isDefined(game["defcon"]))
     game["defcon"] = 4;
-  }
 
   SetDvar("scr_defcon", game["defcon"]);
 
@@ -98,9 +97,8 @@ updateDefcon(newDefcon, changingPlayer, streakCount) {
 
   setDvar("scr_defcon", game["defcon"]);
 
-  if(isDefined(changingPlayer)) {
+  if(isDefined(changingPlayer))
     changingPlayer notify("changed_defcon");
-  }
 
   if(newDefcon == oldDefcon) {
     return;
@@ -113,9 +111,8 @@ updateDefcon(newDefcon, changingPlayer, streakCount) {
   foreach(player in level.players) {
     if(isAlive(player)) {
       player thread maps\mp\gametypes\_hud_message::defconSplashNotify(game["defcon"], newDefcon < oldDefcon);
-      if(isDefined(changingPlayer)) {
+      if(isDefined(changingPlayer))
         player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("changed_defcon", changingPlayer);
-      }
     }
   }
 }

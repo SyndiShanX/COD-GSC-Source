@@ -3,8 +3,11 @@
  * Script: character\mp_character_opforce_air_shotgun.gsc
 **********************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_russian_military_shotgun_a_airborne");
+  self setmodel("mp_body_russian_military_shotgun_a_airborne");
   self attach("head_russian_military_d", "", 1);
   self.headmodel = "head_russian_military_d";
   self setviewmodel("viewhands_russian_b");

@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace gibclientutils;
 
 autoexec main() {
@@ -174,7 +175,7 @@ private _annihilatecorpse() {
       cliententgibleftleg(localclientnum, body);
     }
 
-    if(isDefined(body) && _hasgibdef(body) && body.archetype == # "human") {
+    if(isDefined(body) && _hasgibdef(body) && body.archetype == #"human") {
       if(randomint(100) >= 50) {
         continue;
       }
@@ -216,8 +217,8 @@ private _getgibbedstate(localclientnum, entity) {
 
 private _getgibbedlegmodel(localclientnum, entity) {
   gibstate = _getgibbedstate(localclientnum, entity);
-  rightleggibbed = gibstate & 128;
-  leftleggibbed = gibstate & 256;
+  rightleggibbed = gibstate&128;
+  leftleggibbed = gibstate&256;
 
   if(rightleggibbed && leftleggibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.legdmg4 : entity.legdmg4);
@@ -244,8 +245,8 @@ private _getgibextramodel(localclientnumm, entity, gibflag) {
 
 private _getgibbedtorsomodel(localclientnum, entity) {
   gibstate = _getgibbedstate(localclientnum, entity);
-  rightarmgibbed = gibstate & 16;
-  leftarmgibbed = gibstate & 32;
+  rightarmgibbed = gibstate&16;
+  leftarmgibbed = gibstate&32;
 
   if(rightarmgibbed && leftarmgibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.torsodmg2 : entity.torsodmg2);
@@ -273,15 +274,15 @@ private _gibpiecetag(localclientnum, entity, gibflag) {
 private function_ba120c50(gibflags) {
   var_ec7623a6 = 0;
 
-  if(gibflags & 12) {
+  if(gibflags&12) {
     var_ec7623a6 |= 1;
   }
 
-  if(gibflags & 48) {
+  if(gibflags&48) {
     var_ec7623a6 |= 2;
   }
 
-  if(gibflags & 384) {
+  if(gibflags&384) {
     var_ec7623a6 |= 4;
   }
 
@@ -300,17 +301,17 @@ private _gibentity(localclientnum, gibflags, shouldspawngibs) {
   gibdirscale = undefined;
 
   if(isplayer(entity) || entity isplayercorpse()) {
-    yaw_bits = gibflags >> 9 & 8 - 1;
+    yaw_bits = gibflags >> 9&8 - 1;
     yaw = getanglefrombits(yaw_bits, 3);
     gibdir = anglesToForward((0, yaw, 0));
   }
 
   while(gibflags >= currentgibflag) {
-    if(gibflags &currentgibflag) {
+    if(gibflags&currentgibflag) {
       if(currentgibflag == 2) {
         if(isplayer(entity) || entity isplayercorpse()) {
           var_c0c9eae3 = entity function_4976d5ee();
-          _playgibfx(localclientnum, entity, var_c0c9eae3[# "fx"], var_c0c9eae3[# "tag"]);
+          _playgibfx(localclientnum, entity, var_c0c9eae3[#"fx"], var_c0c9eae3[#"tag"]);
         } else {
           gibpiece = function_69db754(entity, currentgibflag);
 
@@ -358,7 +359,7 @@ private _gibentity(localclientnum, gibflags, shouldspawngibs) {
 }
 
 private _setgibbed(localclientnum, entity, gibflag) {
-  gib_state = _getgibbedstate(localclientnum, entity) | gibflag & 512 - 1;
+  gib_state = _getgibbedstate(localclientnum, entity) | gibflag&512 - 1;
 
   if(isDefined(entity.gib_data)) {
     entity.gib_data.gib_state = gib_state;
@@ -447,7 +448,7 @@ private _gibhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, f
   }
 
   gibflags = oldvalue ^ newvalue;
-  shouldspawngibs = !(newvalue & 1);
+  shouldspawngibs = !(newvalue&1);
 
   if(bnewent) {
     gibflags = 0 ^ newvalue;
@@ -528,7 +529,7 @@ private _handlegibannihilate(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib_annihilate"
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibannihilate(localclientnum, entity);
 }
 
@@ -537,7 +538,7 @@ private _handlegibhead(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib = \"head\""
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibhead(localclientnum, entity);
 }
 
@@ -546,7 +547,7 @@ private _handlegibrightarm(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib = \"arm_right\""
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibrightarm(localclientnum, entity);
 }
 
@@ -555,7 +556,7 @@ private _handlegibleftarm(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib = \"arm_left\""
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibleftarm(localclientnum, entity);
 }
 
@@ -564,7 +565,7 @@ private _handlegibrightleg(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib = \"leg_right\""
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibrightleg(localclientnum, entity);
 }
 
@@ -573,7 +574,7 @@ private _handlegibleftleg(localclientnum) {
   entity endon(#"death");
   entity waittillmatch({
     #notetrack: "gib = \"leg_left\""
-  }, # "_anim_notify_");
+  }, #"_anim_notify_");
   cliententgibleftleg(localclientnum, entity);
 }
 
@@ -675,7 +676,7 @@ createscriptmodelofentity(localclientnum, entity) {
     clone setModel(entity.model);
   }
 
-  if(gibstate & 8) {
+  if(gibstate&8) {
     if(isDefined(isDefined(clone.gib_data) ? clone.gib_data.torsodmg5 : clone.torsodmg5)) {
       clone attach(isDefined(clone.gib_data) ? clone.gib_data.torsodmg5 : clone.torsodmg5, "");
     }
@@ -684,7 +685,7 @@ createscriptmodelofentity(localclientnum, entity) {
       clone attach(isDefined(clone.gib_data) ? clone.gib_data.head : clone.head, "");
     }
 
-    if(!(gibstate & 4) && isDefined(isDefined(clone.gib_data) ? clone.gib_data.hatmodel : clone.hatmodel)) {
+    if(!(gibstate&4) && isDefined(isDefined(clone.gib_data) ? clone.gib_data.hatmodel : clone.hatmodel)) {
       clone attach(isDefined(clone.gib_data) ? clone.gib_data.hatmodel : clone.hatmodel, "");
     }
   }
@@ -693,7 +694,7 @@ createscriptmodelofentity(localclientnum, entity) {
 }
 
 isgibbed(localclientnum, entity, gibflag) {
-  return _getgibbedstate(localclientnum, entity) &gibflag;
+  return _getgibbedstate(localclientnum, entity)&gibflag;
 }
 
 isundamaged(localclientnum, entity) {
@@ -702,7 +703,7 @@ isundamaged(localclientnum, entity) {
 
 gibentity(localclientnum, gibflags) {
   self _gibentity(localclientnum, gibflags, 1);
-  self.gib_state = _getgibbedstate(localclientnum, self) | gibflags & 512 - 1;
+  self.gib_state = _getgibbedstate(localclientnum, self) | gibflags&512 - 1;
 }
 
 handlegibnotetracks(localclientnum) {

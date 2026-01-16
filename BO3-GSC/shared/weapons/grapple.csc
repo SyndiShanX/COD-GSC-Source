@@ -14,7 +14,7 @@
 #namespace grapple;
 
 function autoexec __init__sytem__() {
-  system::register("grapple", &__init__, undefined, undefined);
+  system::register("grapple", & __init__, undefined, undefined);
 }
 
 function __init__() {}

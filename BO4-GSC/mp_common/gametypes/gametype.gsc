@@ -8,6 +8,7 @@
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
+
 #namespace gametype;
 
 init() {

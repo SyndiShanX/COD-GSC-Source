@@ -59,7 +59,7 @@ intro_blur_pre_h1() {
 }
 
 handle_church_explosion() {
-  for(;;) {
+  for (;;) {
     level waittill("church_explosion_player_screen_fx");
     level.player shellshock("scoutsniper_church_explo", 3);
   }

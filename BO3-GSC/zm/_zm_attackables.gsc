@@ -22,15 +22,15 @@
 #namespace zm_attackables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_attackables", &__init__, &__main__, undefined);
+  system::register("zm_attackables", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  level.attackablecallback = &attackable_callback;
+  level.attackablecallback = & attackable_callback;
   level.attackables = struct::get_array("scriptbundle_attackables", "classname");
   foreach(attackable in level.attackables) {
     attackable.bundle = struct::get_script_bundle("attackables", attackable.scriptbundlename);
-    if(isDefined(attackable.target)) {
+    if(isdefined(attackable.target)) {
       attackable.slot = struct::get_array(attackable.target, "targetname");
     }
     attackable.is_active = 0;
@@ -46,7 +46,7 @@ function __main__() {}
 
 function get_attackable() {
   foreach(attackable in level.attackables) {
-    if(!(isDefined(attackable.is_active) && attackable.is_active)) {
+    if(!(isdefined(attackable.is_active) && attackable.is_active)) {
       continue;
     }
     dist = distance(self.origin, attackable.origin);
@@ -67,7 +67,7 @@ function get_attackable() {
 function get_attackable_slot(entity) {
   self clear_slots();
   foreach(slot in self.slot) {
-    if(!isDefined(slot.entity)) {
+    if(!isdefined(slot.entity)) {
       slot.entity = entity;
       entity.attackable_slot = slot;
       return true;
@@ -82,7 +82,7 @@ function private clear_slots() {
       slot.entity = undefined;
       continue;
     }
-    if(isDefined(slot.entity.missinglegs) && slot.entity.missinglegs) {
+    if(isdefined(slot.entity.missinglegs) && slot.entity.missinglegs) {
       slot.entity = undefined;
     }
   }
@@ -104,7 +104,7 @@ function do_damage(damage) {
   self notify("attackable_damaged");
   if(self.health <= 0) {
     self notify("attackable_deactivated");
-    if(!(isDefined(self.b_deferred_deactivation) && self.b_deferred_deactivation)) {
+    if(!(isdefined(self.b_deferred_deactivation) && self.b_deferred_deactivation)) {
       self deactivate();
     }
   }

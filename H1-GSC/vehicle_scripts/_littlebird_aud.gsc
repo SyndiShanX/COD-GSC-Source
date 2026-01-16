@@ -11,19 +11,18 @@ handle_littlebird_audio() {
   if(issubstr(self.classname, "sentinel") || issubstr(self.classname, "armed") || issubstr(self.classname, "atlas_bench")) {
     var_0 = 0.25;
 
-    if(level.currentgen) {
+    if(level.currentgen)
       var_0 = 1.0;
-    }
 
     var_1 = 0;
     var_2 = 0;
-    var_3 = spawnStruct();
+    var_3 = spawnstruct();
     var_3.preset_name = "littlebird_sentinel";
     var_3.fadein_time = 3;
     var_3.fadeout_time = 3;
     soundscripts\_snd::snd_message("snd_register_vehicle", "littlebird_sentinel", ::littlebird_sentinel_constructor);
 
-    for(;;) {
+    for (;;) {
       var_4 = distance(self.origin, level.player.origin);
 
       if(!var_1 && var_4 < 5400) {
@@ -199,45 +198,60 @@ littlebird_sentinel_constructor() {
   var_56 = 500;
   var_57 = 6.0;
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_near_dist2vol", [[var_7, 1],
-    [var_8, 0]]);
+    [var_8, 0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_far_dist2vol", [[var_13, 0],
     [var_14, 1],
-    [var_15, 1]]);
+    [var_15, 1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_near_pch2vol", [[var_20, 0.2],
     [var_21, 1.0],
-    [var_22, 0.2]]);
+    [var_22, 0.2]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_far_pch2vol", [[var_20, 0.2],
     [var_21, 1.0],
-    [var_22, 0.2]]);
+    [var_22, 0.2]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_pitch_pch2vol", [[var_20, 1],
     [var_21, 0],
-    [var_22, 1]]);
+    [var_22, 1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_live_dist2vol", [[var_23, 1],
-    [var_24, 0]]);
+    [var_24, 0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_dist_far_dist2vol", [[var_32, 0.0],
     [var_33 * 0.333, 0.333],
-    [var_33, 0]]);
+    [var_33, 0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_live1_accel2pch", [[var_38, 0.9],
-    [var_39, 1.1]]);
+    [var_39, 1.1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_live1_accel2vol", [[var_38, 0],
-    [var_39, 1]]);
+    [var_39, 1]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_live1_dst2vol", [[var_41, var_44],
-    [var_42, var_43]]);
+    [var_42, var_43]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_flyby_vel2vol", [[var_3, var_50],
     [var_6 * 0.25, var_51 * 0.5],
-    [var_5, var_51]]);
+    [var_5, var_51]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_flyby_vel2pch", [[var_3, var_52],
-    [var_5, var_53]]);
+    [var_5, var_53]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_dplr2pch", [[0.0, 0.0],
-    [2.0, 2.0]]);
+    [2.0, 2.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_dplr2vol", [[var_29, var_27],
     [var_30, var_26],
-    [var_31, var_27]]);
+    [var_31, var_27]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("lbs_flyby_duck_envelope", [[0.0, 1.0],
     [0.4, 0.7],
     [0.6, 0.5],
     [0.8, 0.7],
-    [1.0, 1.0]]);
+    [1.0, 1.0]
+  ]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 
@@ -251,9 +265,8 @@ lbs_condition_callback_to_state_hover(var_0, var_1) {
   var_4 = var_0["distance2d"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_4);
 
-  if(var_3 <= 5.1 && var_5 < 100.0) {
+  if(var_3 <= 5.1 && var_5 < 100.0)
     var_2 = 1;
-  }
 
   return var_2;
 }
@@ -264,9 +277,8 @@ lbs_condition_callback_to_state_flying(var_0, var_1) {
   var_4 = var_0["distance2d"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_4);
 
-  if(var_3 > 5.1 && var_5 < 100.0) {
+  if(var_3 > 5.1 && var_5 < 100.0)
     var_2 = 1;
-  }
 
   return var_2;
 }
@@ -276,9 +288,8 @@ lbs_condition_callback_to_state_distant(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::units2yards(var_3);
 
-  if(var_4 >= 100.0) {
+  if(var_4 >= 100.0)
     var_2 = 1;
-  }
 
   return var_2;
 }
@@ -288,16 +299,15 @@ lbs_condition_callback_to_state_flyby(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::units2yards(var_3);
 
-  if(!isDefined(var_1.flyby)) {
-    var_1.flyby = spawnStruct();
+  if(!isdefined(var_1.flyby)) {
+    var_1.flyby = spawnstruct();
     var_1.flyby.prev_yards = var_4;
     var_1.flyby.prev_dx = 0;
   } else {
     var_5 = var_4 - var_1.flyby.prev_yards;
 
-    if(var_5 < 0 && var_4 < 6.0) {
+    if(var_5 < 0 && var_4 < 6.0)
       var_2 = 1;
-    }
 
     var_1.flyby.prev_yards = var_4;
     var_1.flyby.prev_dx = var_5;
@@ -312,9 +322,8 @@ lbs_condition_callback_to_state_flyover(var_0, var_1) {
   var_4 = var_0["relative_speed"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_3);
 
-  if(var_5 < 30) {
+  if(var_5 < 30)
     var_2 = 1;
-  }
 
   return var_2;
 }

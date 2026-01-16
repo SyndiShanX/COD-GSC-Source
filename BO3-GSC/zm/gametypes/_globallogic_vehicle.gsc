@@ -14,10 +14,10 @@
 #namespace globallogic_vehicle;
 
 function callback_vehiclespawned(spawner) {
-  if(isDefined(level.vehicle_main_callback)) {
-    if(isDefined(level.vehicle_main_callback[self.vehicletype])) {
+  if(isdefined(level.vehicle_main_callback)) {
+    if(isdefined(level.vehicle_main_callback[self.vehicletype])) {
       self thread[[level.vehicle_main_callback[self.vehicletype]]]();
-    } else if(isDefined(self.scriptvehicletype) && isDefined(level.vehicle_main_callback[self.scriptvehicletype])) {
+    } else if(isdefined(self.scriptvehicletype) && isdefined(level.vehicle_main_callback[self.scriptvehicletype])) {
       self thread[[level.vehicle_main_callback[self.scriptvehicletype]]]();
     }
   }
@@ -32,30 +32,30 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
   if(game["state"] == "postgame") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isdefined(eattacker) && isplayer(eattacker) && isdefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
-  if(!isDefined(vdir)) {
+  if(!isdefined(vdir)) {
     idflags = idflags | level.idflags_no_knockback;
   }
   friendly = 0;
-  if(isDefined(self.maxhealth) && self.health == self.maxhealth || !isDefined(self.attackers)) {
+  if(isdefined(self.maxhealth) && self.health == self.maxhealth || !isdefined(self.attackers)) {
     self.attackers = [];
     self.attackerdata = [];
     self.attackerdamage = [];
   }
-  if(weapon == level.weaponnone && isDefined(einflictor)) {
-    if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
+  if(weapon == level.weaponnone && isdefined(einflictor)) {
+    if(isdefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       weapon = getweapon("explodable_barrel");
-    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isdefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       weapon = getweapon("destructible_car");
     }
   }
-  if(!idflags &level.idflags_no_protection) {
+  if(!idflags & level.idflags_no_protection) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, weapon)) {
-      if(isDefined(self.overridevehicledamage)) {
+      if(isdefined(self.overridevehicledamage)) {
         idamage = self[[self.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
-      } else if(isDefined(level.overridevehicledamage)) {
+      } else if(isdefined(level.overridevehicledamage)) {
         idamage = self[[level.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
       }
       return;
@@ -79,16 +79,16 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
     if(isplayer(eattacker)) {
       eattacker.pers["participation"]++;
     }
-    if(!isDefined(self.maxhealth)) {
+    if(!isdefined(self.maxhealth)) {
       self.maxhealth = self.healthdefault;
     }
-    if(isDefined(self.overridevehicledamage)) {
+    if(isdefined(self.overridevehicledamage)) {
       idamage = self[[self.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
-    } else if(isDefined(level.overridevehicledamage)) {
+    } else if(isdefined(level.overridevehicledamage)) {
       idamage = self[[level.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
     }
     prevhealthratio = self.health / self.maxhealth;
-    if(isDefined(self.owner) && isplayer(self.owner)) {
+    if(isdefined(self.owner) && isplayer(self.owner)) {
       team = self.owner.pers["team"];
     } else {
       team = self vehicle::vehicle_get_occupant_team();
@@ -132,28 +132,28 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
       }
       friendly = 1;
     } else {
-      if(!level.teambased && isDefined(self.targetname) && self.targetname == "rcbomb") {} else if(isDefined(self.owner) && isDefined(eattacker) && self.owner == eattacker) {
+      if(!level.teambased && isdefined(self.targetname) && self.targetname == "rcbomb") {} else if(isdefined(self.owner) && isdefined(eattacker) && self.owner == eattacker) {
         return;
       }
-      if(idamage < 1 && (!(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
+      if(idamage < 1 && (!(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
         idamage = 1;
       }
-      if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor) && isDefined(einflictor.iscooked)) {
+      if(issubstr(smeansofdeath, "MOD_GRENADE") && isdefined(einflictor) && isdefined(einflictor.iscooked)) {
         self.wascooked = gettime();
       } else {
         self.wascooked = undefined;
       }
       attacker_seat = undefined;
-      if(isDefined(eattacker)) {
+      if(isdefined(eattacker)) {
         attacker_seat = self getoccupantseat(eattacker);
       }
-      self.lastdamagewasfromenemy = isDefined(eattacker) && !isDefined(attacker_seat);
+      self.lastdamagewasfromenemy = isdefined(eattacker) && !isdefined(attacker_seat);
       self finishvehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname, 0);
       if(level.gametype == "hack" && !weapon.isemp) {
         idamage = 0;
       }
     }
-    if(isDefined(eattacker) && eattacker != self) {
+    if(isdefined(eattacker) && eattacker != self) {
       if(damagefeedback::dodamagefeedback(weapon, einflictor)) {
         if(idamage > 0) {
           eattacker thread damagefeedback::update(smeansofdeath, einflictor);
@@ -189,17 +189,17 @@ function callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdama
   if(game["state"] == "postgame") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isdefined(eattacker) && isplayer(eattacker) && isdefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   friendly = 0;
-  if(!idflags &level.idflags_no_protection) {
+  if(!idflags & level.idflags_no_protection) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, weapon)) {
       return;
     }
-    if(isDefined(self.overridevehicleradiusdamage)) {
+    if(isdefined(self.overridevehicleradiusdamage)) {
       idamage = self[[self.overridevehicleradiusdamage]](einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, weapon, vpoint, fradius, fconeanglecos, vconedir, psoffsettime);
-    } else if(isDefined(level.overridevehicleradiusdamage)) {
+    } else if(isdefined(level.overridevehicleradiusdamage)) {
       idamage = self[[level.overridevehicleradiusdamage]](einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, weapon, vpoint, fradius, fconeanglecos, vconedir, psoffsettime);
     }
     if(smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_EXPLOSIVE") {
@@ -263,7 +263,7 @@ function callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdama
 }
 
 function callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  params = spawnStruct();
+  params = spawnstruct();
   params.einflictor = einflictor;
   params.eattacker = eattacker;
   params.idamage = idamage;
@@ -277,29 +277,29 @@ function callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, w
   if(game["state"] == "postgame") {
     return;
   }
-  if(isai(eattacker) && isDefined(eattacker.script_owner)) {
+  if(isai(eattacker) && isdefined(eattacker.script_owner)) {
     if(eattacker.script_owner.team != self.team) {
       eattacker = eattacker.script_owner;
     }
   }
-  if(isDefined(eattacker) && isDefined(eattacker.onkill)) {
+  if(isdefined(eattacker) && isdefined(eattacker.onkill)) {
     eattacker[[eattacker.onkill]](self);
   }
-  if(isDefined(einflictor)) {
+  if(isdefined(einflictor)) {
     self.damageinflictor = einflictor;
   }
   self callback::callback("hash_acb66515", params);
-  if(isDefined(self.overridevehiclekilled)) {
+  if(isdefined(self.overridevehiclekilled)) {
     self[[self.overridevehiclekilled]](einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime);
   }
 }
 
 function vehiclecrush() {
   self endon("disconnect");
-  if(isDefined(level._effect) && isDefined(level._effect["tanksquish"])) {
-    playFX(level._effect["tanksquish"], self.origin + vectorscale((0, 0, 1), 30));
+  if(isdefined(level._effect) && isdefined(level._effect["tanksquish"])) {
+    playfx(level._effect["tanksquish"], self.origin + vectorscale((0, 0, 1), 30));
   }
-  self playSound("chr_crunch");
+  self playsound("chr_crunch");
 }
 
 function getvehicleunderneathsplashscalar(weapon) {
@@ -313,8 +313,10 @@ function getvehicleunderneathsplashscalar(weapon) {
 }
 
 function allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
-  if(isDefined(self.allowfriendlyfiredamageoverride)) {
-    return [[self.allowfriendlyfiredamageoverride]](einflictor, eattacker, smeansofdeath, weapon);
+  if(isdefined(self.allowfriendlyfiredamageoverride)) {
+    return [
+      [self.allowfriendlyfiredamageoverride]
+    ](einflictor, eattacker, smeansofdeath, weapon);
   }
   return 0;
 }

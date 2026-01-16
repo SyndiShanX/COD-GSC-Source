@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   switch (codescripts\character::get_random_character(2)) {
     case 0:
       character\mp_character_tf_141_desert_assault_a::main();

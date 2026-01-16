@@ -15,7 +15,7 @@ get_playerone() {
 is_player() {
   playerFound = false;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] == self) {
       playerFound = true;
       break;
@@ -29,10 +29,10 @@ waittill_all_players_touching(trig) {
     ASSERTMSG("waittill_all_players_touching: the trigger is undefined! aborting...");
     return;
   }
-  while(1) {
+  while (1) {
     players = get_players();
     numThere = 0;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] IsTouching(trig)) {
         numThere++;
       }
@@ -51,10 +51,10 @@ waittill_any_player_touching(trig) {
     return;
   }
   foundOne = false;
-  while(!foundOne) {
+  while (!foundOne) {
     players = get_players();
     foundOne = false;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] IsTouching(trig)) {
         foundOne = true;
       }
@@ -87,7 +87,7 @@ generic_rumble_loop(duration, intensity) {
 }
 
 grab_starting_friends() {
-  startguys = getEntArray("starting_allies", "targetname");
+  startguys = GetEntArray("starting_allies", "targetname");
   ASSERT(isDefined(startguys) && startguys.size > 0, "grab_starting_guys(): can't find the starting guys!");
   return startguys;
 }
@@ -108,7 +108,7 @@ friend_follow_player(interval, followdist) {
   if(!isDefined(interval) || interval <= 0) {
     interval = 0.5;
   }
-  while(1) {
+  while (1) {
     if(isDefined(self) && IsAlive(self)) {
       if(DistanceSquared(level.player.origin, self.origin) > (followdist * followdist)) {
         self SetGoalPos(level.player.origin);
@@ -150,7 +150,7 @@ get_friends(includeSarge) {
     includeSarge = false;
   }
   friends = [];
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(is_active_ai(guy)) {
       if(!includeSarge && (guy == level.sarge)) {
@@ -165,7 +165,7 @@ get_friends(includeSarge) {
 
 get_friends_by_color(colorCode) {
   colorguys = [];
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(guy check_force_color(colorCode)) {
       colorguys[colorguys.size] = guy;
@@ -195,7 +195,7 @@ ignore_til_path_end_or_dmg() {
 ignore_til_path_end_interrupt() {
   self endon("death");
   self endon("reached_path_end");
-  while(1) {
+  while (1) {
     origin = self.origin;
     wait 2;
     if(self.origin == origin) {
@@ -213,7 +213,7 @@ disable_arrivalsandexits_til_lastnode() {
   self.disableExits = true;
   self thread disable_arrivalsandexits_dmg_watcher();
   node = GetNode(self.target, "targetname");
-  while(isDefined(node.target)) {
+  while (isDefined(node.target)) {
     self waittill("goal");
     node = GetNode(node.target, "targetname");
   }
@@ -231,7 +231,7 @@ disable_arrivalsandexits_dmg_watcher() {
 }
 
 get_spawners_and_spawn_group(spawnerVal, spawnerKey) {
-  spawners = getEntArray(spawnerVal, spawnerKey);
+  spawners = GetEntArray(spawnerVal, spawnerKey);
   if(!isDefined(spawners) || spawners.size <= 0) {
     ASSERTMSG("get_spawners_and_spawn_group(): couldn't find spawners with KVP of " + spawnerKey + "/" + spawnerVal);
     return;
@@ -245,7 +245,7 @@ spawn_group(spawners) {
     return;
   }
   guys = [];
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i])) {
       guy = spawn_guy(spawners[i]);
       if(isDefined(guy)) {
@@ -264,9 +264,9 @@ spawn_guy(spawner, spawn_func) {
     spawner add_spawn_function(spawn_func);
   }
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn > 0) {
-    ai = spawner Stalingradspawn();
+    ai = spawner StalingradSpawn();
   } else {
-    ai = spawner Dospawn();
+    ai = spawner DoSpawn();
   }
   spawn_failed(ai);
   if(isDefined(ai) && !isDefined(ai.targetname)) {
@@ -278,7 +278,7 @@ spawn_guy(spawner, spawn_func) {
 get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
   doExclude = isDefined(excludeMe);
   closest = undefined;
-  for(i = 0; i < group.size; i++) {
+  for (i = 0; i < group.size; i++) {
     if(!isDefined(group[i])) {
       continue;
     }
@@ -305,7 +305,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
   if(!isDefined(closest)) {
     if(isDefined(backup_spawner)) {
       spawner = getent(backup_spawner, "targetname");
-      spawnedGuy = spawner Stalingradspawn();
+      spawnedGuy = spawner StalingradSpawn();
       spawn_failed(spawnedGuy);
       return spawnedGuy;
     }
@@ -314,7 +314,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
 }
 
 get_randomfriend() {
-  while(1) {
+  while (1) {
     guy = level.friends[RandomInt(level.friends.size)];
     if(is_active_ai(guy)) {
       return guy;
@@ -326,7 +326,7 @@ get_randomfriend() {
 
 get_randomfriend_excluding(thisGuy) {
   newguy = thisGuy;
-  while(newguy == thisGuy) {
+  while (newguy == thisGuy) {
     newguy = get_randomfriend();
     if(newguy == thisGuy) {
       wait(0.05);
@@ -341,7 +341,7 @@ get_randomfriend_notsarge() {
 
 get_randomfriend_notsarge_excluding(thisGuy) {
   newguy = thisGuy;
-  while(newguy == thisGuy) {
+  while (newguy == thisGuy) {
     newguy = get_randomfriend_excluding(thisGuy);
     if(newguy == level.sarge) {
       newguy = thisGuy;
@@ -491,7 +491,7 @@ ais_wetness_change(wetness, changeTime, topDown, team) {
     }
   }
   spawners = GetSpawnerArray();
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     addSpawnFunc = false;
     if(isDefined(team)) {
       if(team == "allies" && IsSubStr(spawners[i].classname, "ally")) {
@@ -514,7 +514,7 @@ ais_wetness_change(wetness, changeTime, topDown, team) {
   } else {
     ais = GetAIArray();
   }
-  for(i = 0; i < ais.size; i++) {
+  for (i = 0; i < ais.size; i++) {
     if(is_active_ai(ais[i])) {
       ais[i] thread friendly_ai_getwet(wetness, changeTime, topDown);
       wait(RandomFloatRange(0.1, 0.35));
@@ -525,7 +525,7 @@ ais_wetness_change(wetness, changeTime, topDown, team) {
 ai_wetness_change_spawnfunc(wetness, changeTime, topDown) {
   self notify("kill_getwet_spawnfunc");
   self endon("kill_getwet_spawnfunc");
-  while(1) {
+  while (1) {
     self waittill("spawned", spawn);
     if(maps\_utility::spawn_failed(spawn)) {
       continue;
@@ -547,7 +547,7 @@ ai_wetness_change(wetness, changeTime, topDown) {
   self endon("death");
   targetWetness = wetness;
   if(!isDefined(self.wetness) || changeTime <= 0) {
-    waittill_okTospawn();
+    waittill_okToSpawn();
     self SetWetness(wetness, topDown);
     level._num_wetness++;
     self.wetness = wetness;
@@ -559,9 +559,9 @@ ai_wetness_change(wetness, changeTime, topDown) {
     }
     wetDiff = wetness - self.wetness;
     wetPerFrame = wetDiff / frames;
-    for(i = 0; i < frames; i++) {
+    for (i = 0; i < frames; i++) {
       self.wetness += wetPerFrame;
-      waittill_okTospawn();
+      waittill_okToSpawn();
       self SetWetness(self.wetness, topDown);
       level._num_wetness++;
       wait(frameTime);
@@ -569,7 +569,7 @@ ai_wetness_change(wetness, changeTime, topDown) {
   }
   if(self.wetness != targetWetness) {
     self.wetness = targetWetness;
-    waittill_okTospawn();
+    waittill_okToSpawn();
     self SetWetness(self.wetness, topDown);
     level._num_wetness++;
   }
@@ -577,15 +577,15 @@ ai_wetness_change(wetness, changeTime, topDown) {
 
 wetness_monitor() {
   level._num_wetness = 0;
-  while(1) {
+  while (1) {
     wait_network_frame();
     level._num_wetness = 0;
   }
 }
 
-waittill_okTospawn() {
+waittill_okToSpawn() {
   if(NumRemoteClients()) {
-    while(level._num_wetness > 1) {
+    while (level._num_wetness > 1) {
       wait(RandomFloatRange(0.05, 0.5));
     }
   }
@@ -603,7 +603,7 @@ schoolcircle(nodename, guys, leader, leaderWait) {
   level.schoolcircle_goals = 0;
   if(isDefined(leader)) {
     leaderNode = undefined;
-    for(i = 0; i < nodearray.size; i++) {
+    for (i = 0; i < nodearray.size; i++) {
       if(isDefined(nodearray[i].script_noteworthy) && nodearray[i].script_noteworthy == "leader") {
         leaderNode = nodearray[i];
         break;
@@ -621,10 +621,10 @@ schoolcircle(nodename, guys, leader, leaderWait) {
       wait(2.5);
     }
   }
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     guys[i] thread schoolcircle_nav(nodearray[i]);
   }
-  while(level.schoolcircle_goals < totalGuys) {
+  while (level.schoolcircle_goals < totalGuys) {
     wait(0.1);
   }
   level notify("schoolcircle_assembled");
@@ -685,13 +685,13 @@ waittill_triggerarea_clear(trig, team, maxWait) {
     println("waittill_triggerarea_clear(): trig is not defined! aborting.");
     return;
   }
-  while(1) {
+  while (1) {
     foundOne = false;
     ais = GetAiArray(team);
     if(ais.size <= 0) {
       return;
     }
-    for(i = 0; i < ais.size; i++) {
+    for (i = 0; i < ais.size; i++) {
       guy = ais[i];
       if(guy IsTouching(trig)) {
         foundOne = true;
@@ -720,11 +720,11 @@ wait_while_players_can_see(proxDist, checkInterval) {
   if(!isDefined(checkInterval)) {
     checkInterval = 5;
   }
-  while(is_active_ai(self)) {
+  while (is_active_ai(self)) {
     playerCanSee = false;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
-      if(SightTracePassed(players[i] getEye(), self getEye(), false, players[i]) || Distance(players[i].origin, self.origin) < proxDist) {
+    for (i = 0; i < players.size; i++) {
+      if(SightTracePassed(players[i] GetEye(), self GetEye(), false, players[i]) || Distance(players[i].origin, self.origin) < proxDist) {
         playerCanSee = true;
         break;
       }
@@ -755,12 +755,12 @@ waittill_group_dies(group, maxWait, amount, kill_rest) {
   }
   level.deathWaitTracker = group.size;
   println("^5Waiting for " + level.deathWaitTracker + " AI to die...");
-  for(i = 0; i < group.size; i++) {
+  for (i = 0; i < group.size; i++) {
     if(IsAlive(group[i])) {
       level thread death_wait(group[i], amount, kill_rest, group);
     }
   }
-  while(!level.groupIsDead && !level.groupTimerDone) {
+  while (!level.groupIsDead && !level.groupTimerDone) {
     wait(0.25);
   }
   return;
@@ -768,7 +768,7 @@ waittill_group_dies(group, maxWait, amount, kill_rest) {
 
 waittill_group_dies_timeout(timer) {
   startTime = GetTime();
-  while(!level.groupIsDead && ((GetTime() - startTime) < (timer * 1000))) {
+  while (!level.groupIsDead && ((GetTime() - startTime) < (timer * 1000))) {
     wait(0.25);
   }
   if(!level.groupIsDead) {
@@ -780,7 +780,7 @@ waittill_group_dies_timeout(timer) {
 }
 
 death_wait(ent, amount, kill_rest, group) {
-  while(IsAlive(ent)) {
+  while (IsAlive(ent)) {
     if(!level.groupTimerDone) {
       wait(0.25);
     } else {
@@ -793,7 +793,7 @@ death_wait(ent, amount, kill_rest, group) {
   }
   if(level.deathWaitTracker <= amount) {
     if(kill_rest) {
-      for(i = 0; i < group.size; i++) {
+      for (i = 0; i < group.size; i++) {
         guy = group[i];
         if(is_active_ai(guy)) {
           guy thread bloody_death(true, 3.0);
@@ -816,7 +816,7 @@ kill_all_axis(delay) {
   if(!isDefined(delay)) {
     delay = 0;
   }
-  for(i = 0; i < axis.size; i++) {
+  for (i = 0; i < axis.size; i++) {
     if(isDefined(axis[i])) {
       axis.health = 1;
       axis[i] thread bloody_death(true, delay);
@@ -872,7 +872,7 @@ bloody_death(die, delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for(i = 0; i < 3 + RandomInt(5); i++) {
+  for (i = 0; i < 3 + RandomInt(5); i++) {
     random = RandomIntRange(0, tags.size);
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
@@ -886,7 +886,7 @@ bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
-  playFXOnTag(fxName, self, tag);
+  PlayFxOnTag(fxName, self, tag);
 }
 
 is_active_ai(suspect) {
@@ -898,11 +898,10 @@ is_active_ai(suspect) {
 }
 
 is_group_dead(group) {
-  for(i = 0; i < group.size; i++) {
+  for (i = 0; i < group.size; i++) {
     if(isDefined(group[i])) {
-      if(IsAlive(group[i])) {
+      if(IsAlive(group[i]))
         return false;
-      }
     }
   }
   return true;
@@ -913,15 +912,15 @@ waittill_all_ais_touching(ais, trig) {
     ASSERTMSG("waittill_all_ais_touching: the trigger is undefined! aborting...");
     return;
   }
-  while(1) {
-    for(i = 0; i < ais.size; i++) {
+  while (1) {
+    for (i = 0; i < ais.size; i++) {
       guy = ais[i];
       if(!is_active_ai(guy)) {
         ASSERTMSG("waittill_all_ais_touching(): Found a non-AI in the AI array that was passed in.");
       }
     }
     numThere = 0;
-    for(i = 0; i < ais.size; i++) {
+    for (i = 0; i < ais.size; i++) {
       if(ais[i] IsTouching(trig)) {
         numThere++;
       }
@@ -964,9 +963,9 @@ notify_grenade_danger() {
   self endon("suppression");
   self endon("death");
   dangerDist = 256;
-  while(1) {
-    grenades = getEntArray("grenade", "classname");
-    for(i = 0; i < grenades.size; i++) {
+  while (1) {
+    grenades = GetEntArray("grenade", "classname");
+    for (i = 0; i < grenades.size; i++) {
       if(Distance(grenades[i].origin, self.origin) < dangerDist) {
         self notify("grenadedanger");
         return;
@@ -992,10 +991,10 @@ stop_ignoring_player_when_close(ignoreEnemy) {
   if(isDefined(self.proxAlertDist)) {
     alertDist = self.proxAlertDist;
   }
-  while(1) {
+  while (1) {
     players = get_players();
     foundOne = false;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(Distance(players[i].origin, self.origin) < alertDist) {
         foundOne = true;
         break;
@@ -1036,7 +1035,7 @@ guy_stay_on_turret(guy, turret, ender) {
   level thread maps\_mgturret::mg42_setdifficulty(turret, getdifficulty());
   turret setmode("auto_ai");
   turret SetTurretIgnoreGoals(true);
-  while(1) {
+  while (1) {
     if(!isDefined(guy GetTurret())) {
       guy UseTurret(turret);
     }
@@ -1045,7 +1044,7 @@ guy_stay_on_turret(guy, turret, ender) {
 }
 
 setup_eventname_triggers() {
-  trigs = getEntArray("trigger_eventname", "targetname");
+  trigs = GetEntArray("trigger_eventname", "targetname");
   if(isDefined(trigs) && trigs.size > 0) {
     array_thread(trigs, ::trigger_eventname_think);
   }
@@ -1071,8 +1070,8 @@ tags_debug_print(tags, ender) {
   if(isDefined(ender)) {
     level endon(ender);
   }
-  while(1) {
-    for(i = 0; i < tags.size; i++) {
+  while (1) {
+    for (i = 0; i < tags.size; i++) {
       tag = tags[i];
       Print3D(self GetTagOrigin(tag), tag, (1, 1, 1), 1, .3);
     }
@@ -1110,7 +1109,7 @@ debug_ai() {
   level.total_count.fontScale = fontScale;
   level.total_count.x = xPos;
   level.total_count.y = yPos;
-  while(1) {
+  while (1) {
     if(isDefined(level.friends)) {
       level.friends_count SetText("level.friends: " + level.friends.size);
     } else {
@@ -1137,12 +1136,12 @@ debug_ai() {
 }
 
 draw_sphere_at_origin(origin, radius, segments) {
-  drawOrg = spawn("script_origin", origin);
+  drawOrg = Spawn("script_origin", origin);
   drawOrg thread draw_sphere(radius, segments);
 }
 
 draw_sphere(radius, segments) {
-  while(1) {
+  while (1) {
     draw_sphere_axis(radius, segments, "pitch");
     draw_sphere_axis(radius, segments, "roll");
     draw_sphere_axis(radius, segments, "yaw");
@@ -1159,26 +1158,26 @@ draw_sphere_axis(radius, segments, axis) {
   add_angles = 360 / segments;
   angles = (0, 0, 0);
   if(axis == "pitch") {
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (add_angles, 0, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   } else if(axis == "roll") {
     angles = angles + (0, 90, 0);
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (add_angles, 0, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   } else {
-    for(i = 0; i < segments; i++) {
+    for (i = 0; i < segments; i++) {
       angles = angles + (0, add_angles, 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       points[i] = self.origin + VectorScale(forward, radius);
     }
   }
-  for(i = 0; i < points.size; i++) {
+  for (i = 0; i < points.size; i++) {
     if(i == (points.size - 1)) {
       Line(points[i], points[0], (1, 0, 0), 1);
     } else {
@@ -1244,7 +1243,7 @@ getvehiclenode_safe(value, key, debugName) {
 }
 
 array_contains_element(element) {
-  for(i = 0; i < self.size; i++) {
+  for (i = 0; i < self.size; i++) {
     if(self[i] == element) {
       return true;
     }
@@ -1263,7 +1262,7 @@ get_random_excluding(array, excluder, totalTries) {
   choice = get_random(array);
   numTries = 0;
   if(isDefined(excluder)) {
-    while(choice == excluder && numTries < totalTries) {
+    while (choice == excluder && numTries < totalTries) {
       choice = get_random(array);
       numTries++;
     }
@@ -1293,9 +1292,9 @@ waittill_player_within_range(testOrigin, playerdist, waitTime, drawRangeDebug) {
     thread draw_sphere_at_origin(testOrigin, playerdist, 32);
   }
   closeEnough = false;
-  while(!closeEnough) {
+  while (!closeEnough) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
       if(Distance(player.origin, testOrigin) <= playerdist) {
         closeEnough = true;
@@ -1311,9 +1310,9 @@ waittill_player_within_range(testOrigin, playerdist, waitTime, drawRangeDebug) {
 }
 
 trigger_setup() {
-  trigs = getEntArray("trigger_multiple", "classname");
-  trigs = array_combine(trigs, getEntArray("trigger_radius", "classname"));
-  for(i = 0; i < trigs.size; i++) {
+  trigs = GetEntArray("trigger_multiple", "classname");
+  trigs = array_combine(trigs, GetEntArray("trigger_radius", "classname"));
+  for (i = 0; i < trigs.size; i++) {
     if(isDefined(trigs[i])) {
       trigs[i] thread trigger_think();
     }
@@ -1348,7 +1347,7 @@ light_setintensity(newIntensity, time) {
   stepsPerSecond = 1 / stepTime;
   steps = time * stepsPerSecond;
   changePerStep = intensityChange / steps;
-  for(i = 0; i < steps; i++) {
+  for (i = 0; i < steps; i++) {
     reduceVal = self GetLightIntensity() + changePerStep;
     if(reduceVal >= 0) {
       self SetLightIntensity(reduceVal);
@@ -1380,7 +1379,7 @@ timescale_over_time(newTimescale, scaleTime, interval) {
   numIntervals = scaleTime / interval;
   scalePerIncrement = timescaleDiff / numIntervals;
   timescaleCurrent = ogTimescale;
-  for(i = 0; i < numIntervals; i++) {
+  for (i = 0; i < numIntervals; i++) {
     timescaleCurrent += scalePerIncrement;
     SetTimeScale(timescaleCurrent);
     wait(interval * timescaleCurrent);
@@ -1507,7 +1506,7 @@ tank_reset_turret(timeout) {
   if(!isDefined(timeout)) {
     timeout = 5;
   }
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   vec = vectorScale(forward, 1000);
   adjustedOrigin = self.origin + (0, 0, 82);
   self SetTurretTargetVec(adjustedOrigin + vec);
@@ -1516,7 +1515,7 @@ tank_reset_turret(timeout) {
 }
 
 kill_drones(val, key, minWait, maxWait) {
-  drones = getEntArray(val, key);
+  drones = GetEntArray(val, key);
   if(drones.size > 0) {
     array_thread(drones, ::kill_drone_random, minWait, maxWait);
   }

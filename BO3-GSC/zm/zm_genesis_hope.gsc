@@ -24,7 +24,7 @@
 #namespace zm_genesis_hope;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_hope", &__init__, &__main__, undefined);
+  system::register("zm_genesis_hope", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -55,7 +55,7 @@ function start() {
       var_dc163518 = (player zm_stats::get_global_stat(("DARKOPS_" + var_1493eda1) + "_SUPER_EE")) > 0;
       var_9d5e869 = isinarray(var_61d59a5a, var_1493eda1);
       if(var_dc163518 && !var_9d5e869) {
-        if(!isDefined(var_61d59a5a)) {
+        if(!isdefined(var_61d59a5a)) {
           var_61d59a5a = [];
         } else if(!isarray(var_61d59a5a)) {
           var_61d59a5a = array(var_61d59a5a);
@@ -72,14 +72,14 @@ function start() {
 }
 
 function function_bb1fbc7f() {
-  if(isDefined(level.var_e8bba4d1) && level.var_e8bba4d1) {
+  if(isdefined(level.var_e8bba4d1) && level.var_e8bba4d1) {
     return;
   }
   level.var_e8bba4d1 = 1;
   var_4ea80194 = struct::get("hope_spark", "targetname");
-  var_4ea80194 zm_unitrigger::create_unitrigger("", 64, &function_4903bec6, &function_ed25d0f2, "unitrigger_radius_use");
+  var_4ea80194 zm_unitrigger::create_unitrigger("", 64, & function_4903bec6, & function_ed25d0f2, "unitrigger_radius_use");
   var_8dc2ea89 = struct::get("special_box", "targetname");
-  var_8dc2ea89 zm_unitrigger::create_unitrigger("", 64, &function_2650d73f, &function_46cfcb01, "unitrigger_radius_use");
+  var_8dc2ea89 zm_unitrigger::create_unitrigger("", 64, & function_2650d73f, & function_46cfcb01, "unitrigger_radius_use");
 }
 
 function function_4903bec6(player) {
@@ -92,7 +92,7 @@ function function_4903bec6(player) {
 }
 
 function function_ed25d0f2() {
-  while(true) {
+  while (true) {
     self waittill("trigger", e_triggerer);
     if(e_triggerer zm_utility::in_revive_trigger()) {
       continue;
@@ -111,7 +111,7 @@ function function_ed25d0f2() {
 function function_b38baf01(e_triggerer) {
   level clientfield::set("hope_state", 2);
   e_triggerer thread function_ba9b0148();
-  e_triggerer playSound("zmb_overachiever_spark_pickup");
+  e_triggerer playsound("zmb_overachiever_spark_pickup");
 }
 
 function function_ba9b0148() {
@@ -121,7 +121,7 @@ function function_ba9b0148() {
   self waittill("damage");
   self clientfield::set_to_player("hope_spark", 0);
   self clientfield::set_player_uimodel("zmInventory.super_ee", 0);
-  self playSound("zmb_overachiever_spark_lose");
+  self playsound("zmb_overachiever_spark_lose");
   iprintlnbold("");
 }
 
@@ -143,7 +143,7 @@ function function_2650d73f(player) {
 }
 
 function function_46cfcb01() {
-  while(true) {
+  while (true) {
     self waittill("trigger", e_triggerer);
     if(e_triggerer zm_utility::in_revive_trigger()) {
       continue;
@@ -169,7 +169,7 @@ function function_6143b210(e_triggerer) {
   s_start = struct::get("hope_origin");
   var_8ccfc8c3 = util::spawn_model("tag_origin", s_start.origin, s_start.angles);
   util::wait_network_frame();
-  var_8ccfc8c3 playSound("zmb_overachiever_spark_spawn");
+  var_8ccfc8c3 playsound("zmb_overachiever_spark_spawn");
   var_8ccfc8c3 clientfield::set("hope_spark", 1);
   wait(2);
   s_target = struct::get(s_start.target);
@@ -181,11 +181,11 @@ function function_6143b210(e_triggerer) {
   level clientfield::set("hope_state", 3);
   level flag::set("hope_done");
   playsoundatposition("zmb_overachiever_spark_success", (0, 0, 0));
-  level.wallbuy_should_upgrade_weapon_override = &function_afddb902;
-  level.magicbox_should_upgrade_weapon_override = &function_7e7eb906;
+  level.wallbuy_should_upgrade_weapon_override = & function_afddb902;
+  level.magicbox_should_upgrade_weapon_override = & function_7e7eb906;
   zm_genesis_timer::function_cc8ae246(200);
-  level thread bgb::function_93da425("zm_bgb_crate_power", &function_f648c43);
-  level thread bgb::function_93da425("zm_bgb_wall_power", &function_f648c43);
+  level thread bgb::function_93da425("zm_bgb_crate_power", & function_f648c43);
+  level thread bgb::function_93da425("zm_bgb_wall_power", & function_f648c43);
 }
 
 function function_7e7eb906(e_player, w_weapon) {
@@ -201,10 +201,10 @@ function function_f648c43() {
 }
 
 function function_dfd4e9f8() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_7ecb414e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_3246e71d);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_3ff1131a);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_8070468);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_7ecb414e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_3246e71d);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_3ff1131a);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_8070468);
 }
 
 function function_3246e71d(n_val) {

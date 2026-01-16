@@ -21,11 +21,11 @@ init_clientfaceanim() {
   level._faceAnimCBFunc = clientscripts\_clientfaceanim::doFace;
 }
 doFace(localClientNum) {
-  while(true) {
+  while (true) {
     if(self IsPlayer()) {
       doFace_player(localClientNum);
       self waittill("respawn");
-      while(!isDefined(self)) {
+      while (!isDefined(self)) {
         wait(0.05);
       }
       self.face_death = false;
@@ -53,9 +53,8 @@ doFace_player(localClientNum) {
 do_corpse_face_hack(localClientNum) {
   if(isDefined(self) && isDefined(level.face_anim_tree) && isDefined(level.faceStates)) {
     numAnims = level.faceStates["face_death"]["animation"].size;
-    if(!isDefined(self)) {
+    if(!isDefined(self))
       return;
-    }
     self SetAnimKnob(level.faceStates["face_death"]["animation"][RandomInt(numAnims)], 1.0, 0.1, 1.0);
   }
 }

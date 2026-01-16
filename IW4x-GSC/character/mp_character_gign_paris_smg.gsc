@@ -3,8 +3,11 @@
  * Script: character\mp_character_gign_paris_smg.gsc
 *****************************************************/
 
+// IW5 GSC SOURCE
+// Decompiled by https://github.com/xensik/gsc-tool
+
 main() {
-  self setModel("mp_body_gign_paris_smg");
+  self setmodel("mp_body_gign_paris_smg");
   self attach("head_gign_saber_gasmask", "", 1);
   self.headmodel = "head_gign_saber_gasmask";
   self setviewmodel("viewhands_sas");

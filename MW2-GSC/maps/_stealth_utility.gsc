@@ -22,9 +22,8 @@
 stealth_default() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     return;
-  }
 
   switch (self.team) {
     case "axis":
@@ -46,7 +45,7 @@ stealth_default() {
 =============
 ///ScriptDocBegin
 "Name: stealth_set_default_stealth_function( <key> , <func> )"
-"Summary: sets the function in <func> to a key.The KEY is referenced in radient with script_stealth_function. any spawner
+"Summary: sets the function in <func> to a key.The KEY is referenced in radient with script_stealth_function. any spawner 
 with that key will run the function referenced here.This function should be similar in form to stealth_default "
 "Module: Stealth"
 "CallOn: "
@@ -74,14 +73,14 @@ stealth_set_default_stealth_function(key, func) {
 =============
 */
 stealth_plugin_basic(custom_state_funcs) {
-  assertex(isDefined(level._stealth.logic), "call maps\_stealth::main()");
+  assertex(isdefined(level._stealth.logic), "call maps\_stealth::main()");
 
   if(isplayer(self)) {
     self maps\_stealth_visibility_friendly::stealth_visibility_friendly_main();
     return;
   }
 
-  if(!isDefined(self._stealth) || !isDefined(self._stealth.plugins.basic)) {
+  if(!isdefined(self._stealth) || !isdefined(self._stealth.plugins.basic)) {
     switch (self.team) {
       case "allies":
         self maps\_stealth_visibility_friendly::stealth_visibility_friendly_main();
@@ -94,9 +93,8 @@ stealth_plugin_basic(custom_state_funcs) {
         break;
     }
   }
-  if(isDefined(custom_state_funcs)) {
+  if(isdefined(custom_state_funcs))
     self stealth_basic_states_custom(custom_state_funcs);
-  }
 
   self._stealth.plugins.basic = true;
 }
@@ -157,7 +155,7 @@ stealth_basic_states_default() {
 =============
 ///ScriptDocBegin
 "Name: stealth_pre_spotted_function_custom( <func> )"
-"Summary: replaces the default function for what an AI will do between the period he's realized there is a threat, and sets the flag for _stealth_spotted.
+"Summary: replaces the default function for what an AI will do between the period he's realized there is a threat, and sets the flag for _stealth_spotted. 
 Good for writing custom AI behavior like running to an alarm before alerting his buddies of _stealth_spotted"
 "Module: Stealth"
 "CallOn: An AI"
@@ -168,7 +166,7 @@ Good for writing custom AI behavior like running to an alarm before alerting his
 =============
 */
 stealth_pre_spotted_function_custom(func) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self maps\_stealth_visibility_enemy::enemy_alert_level_set_pre_spotted_func(func);
 }
@@ -186,7 +184,7 @@ stealth_pre_spotted_function_custom(func) {
 =============
 */
 stealth_pre_spotted_function_default() {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self maps\_stealth_visibility_enemy::enemy_alert_level_default_pre_spotted_func();
 }
@@ -195,7 +193,7 @@ stealth_pre_spotted_function_default() {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_threat( <custom_behavior_array> )"
-"Summary: Runs threat behavior logic on an AI -> basically all the 'huh, what was that, who's there' behavior.
+"Summary: Runs threat behavior logic on an AI -> basically all the 'huh, what was that, who's there' behavior. 
 stealth_plugin_basic() needs to be called on the AI before this"
 "Module: Stealth"
 "CallOn: An AI"
@@ -206,17 +204,15 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_threat(custom_behavior_array) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
   //this way scripters can just call this function to change the behavior array instead of remembering two functions
-  if(!isDefined(self._stealth.plugins.threat)) {
+  if(!isdefined(self._stealth.plugins.threat))
     self maps\_stealth_threat_enemy::stealth_threat_enemy_main();
-  }
 
-  if(isDefined(custom_behavior_array)) {
+  if(isdefined(custom_behavior_array))
     self stealth_threat_behavior_replace(custom_behavior_array);
-  }
 }
 
 /*
@@ -232,7 +228,7 @@ stealth_plugin_threat(custom_behavior_array) {
 =============
 */
 stealth_enable_seek_player_on_spotted() {
-  assertex(isDefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
+  assertex(isdefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
 
   self.script_stealth_dontseek = false;
 }
@@ -250,7 +246,7 @@ stealth_enable_seek_player_on_spotted() {
 =============
 */
 stealth_disable_seek_player_on_spotted() {
-  assertex(isDefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
+  assertex(isdefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
 
   self.script_stealth_dontseek = true;
 }
@@ -264,7 +260,7 @@ stealth_disable_seek_player_on_spotted() {
 "CallOn: An entity"
 "OptionalArg: <threat_array>: an array of functions which dictate the behavior for the AI based on their current state (which corrispond to the key values in the array)\n
 Valid key values are 'reset', 'normal' 'attack', 'warningX' where the X is a number between 1 and whatever.You can have as many warning behaviors as you like or none at all, but if you do have warnings they must start with warning1 and follow in consecutive numbers.\n
-You don't need to change all the behaviors, only the ones you want.But if you dont have any 'warningX' keys in the array then there will be NO WARNING behavior.
+You don't need to change all the behaviors, only the ones you want.But if you dont have any 'warningX' keys in the array then there will be NO WARNING behavior. 
 If you do not make 'reset', 'normal', or 'attack' entries in the array, the system will pick the default ones because those are mandatory behavior options.
 \n reset is the function that occurs if an ai attacked you, and then lost you (right now defaults to going back to normal)
 \n normal is the function that handles going back to original behavior from any of the other states
@@ -287,14 +283,12 @@ enemy stealth_threat_behavior_custom( custom_array )"
 =============
 */
 stealth_threat_behavior_custom(threat_array, anim_array) {
-  assertex(isDefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
+  assertex(isdefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
 
-  if(isDefined(threat_array)) {
+  if(isdefined(threat_array))
     self maps\_stealth_threat_enemy::enemy_set_threat_behavior(threat_array);
-  }
-  if(isDefined(anim_array)) {
+  if(isdefined(anim_array))
     self maps\_stealth_threat_enemy::enemy_set_threat_anim_behavior(anim_array);
-  }
 }
 
 /*
@@ -306,7 +300,7 @@ stealth_threat_behavior_custom(threat_array, anim_array) {
 "CallOn: An entity"
 "OptionalArg: <threat_array>: an array of functions which dictate the behavior for the AI based on their current state (which corrispond to the key values in the array)\n
 Valid key values are 'reset', 'normal' 'attack', 'warningX' where the X is a number between 1 and whatever.You can have as many warning behaviors as you like or none at all, but if you do have warnings they must start with warning1 and follow in consecutive numbers.\n
-You don't need to change all the behaviors, only the ones you want.unlike stealth_threat_behavior_custom, stealth_threat_behavior_replace will fill in any warning functions the ai already has.
+You don't need to change all the behaviors, only the ones you want.unlike stealth_threat_behavior_custom, stealth_threat_behavior_replace will fill in any warning functions the ai already has. 
 If you do not make 'reset', 'normal', or 'attack' entries in the array, the system will pick the default ones because those are mandatory behavior options.
 \n reset is the function that occurs if an ai attacked you, and then lost you (right now defaults to going back to normal)
 \n normal is the function that handles going back to original behavior from any of the other states
@@ -334,11 +328,10 @@ stealth_threat_behavior_replace(threat_array, anim_array) {
   num = 1;
   key = string + num;
 
-  if(isDefined(threat_array)) {
-    while(isDefined(self._stealth.behavior.ai_functions[name][key])) {
-      if(!isDefined(threat_array[key])) {
+  if(isdefined(threat_array)) {
+    while (isdefined(self._stealth.behavior.ai_functions[name][key])) {
+      if(!isdefined(threat_array[key]))
         threat_array[key] = maps\_stealth_shared_utilities::ai_get_behavior_function(name, key);
-      }
       num++;
       key = string + num;
     }
@@ -377,7 +370,7 @@ stealth_threat_behavior_default_no_warnings() {
 =============
 */
 stealth_threat_behavior_default() {
-  assertex(isDefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
+  assertex(isdefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
 
   self maps\_stealth_threat_enemy::enemy_default_threat_behavior();
   self maps\_stealth_threat_enemy::enemy_default_threat_anim_behavior();
@@ -404,7 +397,7 @@ stealth_alert_level_duration(time) {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_corpse( <custom_corpse_array> )"
-"Summary: Runs corpse behavior logic on an AI -> basically all the 'is that a body? hey guys i found a dead body!!' behavior.
+"Summary: Runs corpse behavior logic on an AI -> basically all the 'is that a body? hey guys i found a dead body!!' behavior. 
 stealth_plugin_basic() needs to be called on the AI before this"
 "Module: Stealth"
 "CallOn: An AI"
@@ -415,17 +408,15 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_corpse(custom_corpse_array) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
   //this way scripters can just call this function to change the behavior array instead of remembering two functions
-  if(!isDefined(self._stealth.plugins.corpse)) {
+  if(!isdefined(self._stealth.plugins.corpse))
     self maps\_stealth_corpse_enemy::stealth_corpse_enemy_main();
-  }
 
-  if(isDefined(custom_corpse_array)) {
+  if(isdefined(custom_corpse_array))
     self stealth_corpse_behavior_custom(custom_corpse_array);
-  }
 }
 
 /*
@@ -442,7 +433,7 @@ stealth_plugin_corpse(custom_corpse_array) {
 =============
 */
 stealth_corpse_behavior_custom(corpse_functions) {
-  assertex(isDefined(self._stealth.plugins.corpse), "call maps\_stealth_utility::stealth_plugin_corpse() on the AI first");
+  assertex(isdefined(self._stealth.plugins.corpse), "call maps\_stealth_utility::stealth_plugin_corpse() on the AI first");
 
   self maps\_stealth_corpse_enemy::enemy_custom_corpse_behavior(corpse_functions);
 }
@@ -459,7 +450,7 @@ stealth_corpse_behavior_custom(corpse_functions) {
 =============
 */
 stealth_corpse_behavior_default() {
-  assertex(isDefined(self._stealth.plugins.corpse), "call maps\_stealth_utility::stealth_plugin_corpse() on the AI first");
+  assertex(isdefined(self._stealth.plugins.corpse), "call maps\_stealth_utility::stealth_plugin_corpse() on the AI first");
 
   self maps\_stealth_corpse_enemy::enemy_default_corpse_behavior();
 }
@@ -544,31 +535,29 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_event_all(array) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self stealth_plugin_event_main();
   self maps\_stealth_event_enemy::stealth_event_mod_all();
 
-  if(isDefined(array)) {
-    foreach(key, value in array) {
-      self maps\_stealth_event_enemy::stealth_event_mod(key, value);
-    }
+  if(isdefined(array)) {
+    foreach(key, value in array)
+    self maps\_stealth_event_enemy::stealth_event_mod(key, value);
   }
 }
 
 stealth_plugin_event_main() {
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
-  if(!isDefined(self._stealth.plugins.event)) {
+  if(!isdefined(self._stealth.plugins.event))
     self maps\_stealth_event_enemy::stealth_event_enemy_main();
-  }
 }
 
 /*
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_event_heard_scream( <behavior_function>, <animation_function> )"
-"Summary:
+"Summary: 
 Runs the behavior for an AI in the event that his team mate yells out that he's found an enemy ( 'stealth_spotted' ).
 You can optionally pass in your own custom behavior and animation functions for this event if you want.
 Stealth_plugin_basic() needs to be called on the AI before this"
@@ -582,7 +571,7 @@ Stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_event_heard_scream(behavior_function, animation_function) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self stealth_plugin_event_main();
   self maps\_stealth_event_enemy::stealth_event_mod("heard_scream", behavior_function, animation_function);
@@ -592,7 +581,7 @@ stealth_plugin_event_heard_scream(behavior_function, animation_function) {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_event_flashbang( <behavior_function>, <animation_function> )"
-"Summary:
+"Summary: 
 Runs the behavior for an AI in the event that a flashbang goes off.
 You can optionally pass in your own custom behavior and animation functions for this event if you want.
 Stealth_plugin_basic() needs to be called on the AI before this"
@@ -606,7 +595,7 @@ Stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_event_flashbang(behavior_function, animation_function) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self stealth_plugin_event_main();
   self maps\_stealth_event_enemy::stealth_event_mod("doFlashBanged", behavior_function, animation_function);
@@ -616,7 +605,7 @@ stealth_plugin_event_flashbang(behavior_function, animation_function) {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_event_explosion( <behavior_function>, <animation_function> )"
-"Summary:
+"Summary: 
 Runs the behavior for an AI in the event that a distant explosion goes off.
 You can optionally pass in your own custom behavior and animation functions for this event if you want.
 Stealth_plugin_basic() needs to be called on the AI before this"
@@ -630,7 +619,7 @@ Stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_event_explosion(behavior_function, animation_function) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self stealth_plugin_event_main();
   self maps\_stealth_event_enemy::stealth_event_mod("explode", behavior_function, animation_function);
@@ -640,9 +629,9 @@ stealth_plugin_event_explosion(behavior_function, animation_function) {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_event_custom( <type> , <behavior_function> , <animation_function> , <bad_event> , <event_listener> )"
-"Summary:
+"Summary: 
 Runs behavior for an AI for a CUSTOM event type (one the scripter creates).
-the <event_listener> arguement toggles whether this new event type is a code driven event with a notify that has to be listened for.
+the <event_listener> arguement toggles whether this new event type is a code driven event with a notify that has to be listened for. 
 If not then you NEED TO MAKE SURE the AI is notified of the <type> for him to exhibit the behavior during the custom event. -> DEFAULTS to FALSE
 Stealth_plugin_basic() needs to be called on the AI before this."
 "Module: Stealth"
@@ -650,7 +639,7 @@ Stealth_plugin_basic() needs to be called on the AI before this."
 "MandatoryArg: <type>: the new type of event that the AI will be notified"
 "MandatoryArg: <behavior_function>: the behavior the AI should run when the event happens"
 "MandatoryArg: <animation_function>: the animation the AI should run when the event happens"
-"OptionalArg: <event_listener>: bool that toggles whether this new event type is a code driven event with a notify that has to be listened for.
+"OptionalArg: <event_listener>: bool that toggles whether this new event type is a code driven event with a notify that has to be listened for. 
 If not then you NEED TO MAKE SURE the AI is notified of the <type> for him to exhibit the behavior during the custom event. -> DEFAULTS to FALSE"
 "Example: enemy stealth_plugin_event_custom( "base_alarm", ::base_alarm_behavior, ::base_alarm_animation, true, false );"
 "SPMP: singleplayer"
@@ -658,7 +647,7 @@ If not then you NEED TO MAKE SURE the AI is notified of the <type> for him to ex
 =============
 */
 stealth_plugin_event_custom(type, behavior_function, animation_function, event_listener) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 
   self stealth_plugin_event_main();
   self maps\_stealth_event_enemy::stealth_event_mod(type, behavior_function, animation_function, event_listener);
@@ -668,7 +657,7 @@ stealth_plugin_event_custom(type, behavior_function, animation_function, event_l
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_aicolor( <custom_color_array> )"
-"Summary: Runs ai color state logic on an AI -> basically when stealth is hidden, ai color is off, when stealth is spotted ai color turns on.
+"Summary: Runs ai color state logic on an AI -> basically when stealth is hidden, ai color is off, when stealth is spotted ai color turns on. 
 Good way to set up a paths with color triggers/nodes for when stealth is broken that is seperate from paths based on stealth hidden.
 stealth_plugin_basic() needs to be called on the AI before this"
 "Module: Stealth"
@@ -680,17 +669,15 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_aicolor(custom_color_array) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self.team == "allies", "stealth_plugin_accuracy is a plugin for friendlies only");
 
   //this way scripters can just call this function to change the behavior array instead of remembering two functions
-  if(!isDefined(self._stealth.plugins.color_system)) {
+  if(!isdefined(self._stealth.plugins.color_system))
     self maps\_stealth_color_friendly::stealth_color_friendly_main();
-  }
 
-  if(isDefined(custom_color_array)) {
+  if(isdefined(custom_color_array))
     self stealth_color_state_custom(custom_color_array);
-  }
 }
 
 /*
@@ -707,7 +694,7 @@ stealth_plugin_aicolor(custom_color_array) {
 =============
 */
 stealth_color_state_custom(array) {
-  assertex(isDefined(self._stealth.plugins.color_system), "call maps\_stealth_utility::stealth_plugin_aicolor() on the AI first");
+  assertex(isdefined(self._stealth.plugins.color_system), "call maps\_stealth_utility::stealth_plugin_aicolor() on the AI first");
 
   self maps\_stealth_color_friendly::friendly_custom_color_behavior(array);
 }
@@ -725,7 +712,7 @@ stealth_color_state_custom(array) {
 =============
 */
 stealth_color_state_default() {
-  assertex(isDefined(self._stealth.plugins.color_system), "call maps\_stealth_utility::stealth_plugin_aicolor() on the AI first");
+  assertex(isdefined(self._stealth.plugins.color_system), "call maps\_stealth_utility::stealth_plugin_aicolor() on the AI first");
 
   self maps\_stealth_color_friendly::friendly_default_color_behavior();
 }
@@ -734,7 +721,7 @@ stealth_color_state_default() {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_accuracy( <custom_acc_array> )"
-"Summary: Runs accuracy state logic on an AI -> basically when stealth is hidden, ai accuracy is really high, when stealth is spotted ai accuracy is low.
+"Summary: Runs accuracy state logic on an AI -> basically when stealth is hidden, ai accuracy is really high, when stealth is spotted ai accuracy is low. 
 stealth_plugin_basic() needs to be called on the AI before this"
 "Module: Stealth"
 "CallOn: An AI"
@@ -745,17 +732,15 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_accuracy(custom_acc_array) {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self.team == "allies", "stealth_plugin_accuracy is a plugin for friendlies only");
 
   //this way scripters can just call this function to change the behavior array instead of remembering two functions
-  if(!isDefined(self._stealth.plugins.accaracy_mod)) {
+  if(!isdefined(self._stealth.plugins.accaracy_mod))
     self maps\_stealth_accuracy_friendly::stealth_accuracy_friendly_main();
-  }
 
-  if(isDefined(custom_acc_array)) {
+  if(isdefined(custom_acc_array))
     self stealth_accuracy_state_custom(custom_acc_array);
-  }
 }
 
 /*
@@ -772,7 +757,7 @@ stealth_plugin_accuracy(custom_acc_array) {
 =============
 */
 stealth_accuracy_state_custom(array) {
-  assertex(isDefined(self._stealth.plugins.accaracy_mod), "call maps\_stealth_utility::stealth_plugin_accuracy() on the AI first");
+  assertex(isdefined(self._stealth.plugins.accaracy_mod), "call maps\_stealth_utility::stealth_plugin_accuracy() on the AI first");
 
   self maps\_stealth_accuracy_friendly::friendly_custom_acc_behavior(array);
 }
@@ -790,7 +775,7 @@ stealth_accuracy_state_custom(array) {
 =============
 */
 stealth_accuracy_state_default() {
-  assertex(isDefined(self._stealth.plugins.accaracy_mod), "call maps\_stealth_utility::stealth_plugin_accuracy() on the AI first");
+  assertex(isdefined(self._stealth.plugins.accaracy_mod), "call maps\_stealth_utility::stealth_plugin_accuracy() on the AI first");
 
   self maps\_stealth_accuracy_friendly::friendly_default_acc_behavior();
 }
@@ -799,7 +784,7 @@ stealth_accuracy_state_default() {
 =============
 ///ScriptDocBegin
 "Name: stealth_plugin_smart_stance()"
-"Summary: Runs smart stance logic on a friendly, basically makes the AI look smart and change stances based on awareness of enemy positions.
+"Summary: Runs smart stance logic on a friendly, basically makes the AI look smart and change stances based on awareness of enemy positions. 
 Use enable_stealth_smart_stance() and disable_stealth_smart_stance() to dynamically turn on and off ( defaults to off ).
 stealth_plugin_basic() needs to be called on the AI before this"
 "Module: Stealth"
@@ -810,7 +795,7 @@ stealth_plugin_basic() needs to be called on the AI before this"
 =============
 */
 stealth_plugin_smart_stance() {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self.team == "allies", "stealth_plugin_accuracy is a plugin for friendlies only");
 
   self maps\_stealth_smartstance_friendly::stealth_smartstance_friendly_main();
@@ -830,7 +815,7 @@ stealth_plugin_basic() and stealth_plugin_smart_stance() needs to be called on t
 =============
 */
 enable_stealth_smart_stance() {
-  assertex(isDefined(self._stealth.plugins.smartstance), "call maps\_stealth_utility::stealth_plugin_smart_stance() on the AI first");
+  assertex(isdefined(self._stealth.plugins.smartstance), "call maps\_stealth_utility::stealth_plugin_smart_stance() on the AI first");
 
   self ent_flag_set("_stealth_stance_handler");
 }
@@ -849,10 +834,11 @@ stealth_plugin_basic() and stealth_plugin_smart_stance() needs to be called on t
 =============
 */
 disable_stealth_smart_stance() {
-  assertex(isDefined(self._stealth.plugins.smartstance), "call maps\_stealth_utility::stealth_plugin_smart_stance() on the AI first");
+  assertex(isdefined(self._stealth.plugins.smartstance), "call maps\_stealth_utility::stealth_plugin_smart_stance() on the AI first");
 
   self ent_flag_clear("_stealth_stance_handler");
 }
+
 
 /*
 =============
@@ -891,9 +877,8 @@ stealth_is_everything_normal() {
     ai = maps\_stealth_shared_utilities::group_get_ai_in_group(key);
 
     foreach(actor in ai) {
-      if(!actor ent_flag("_stealth_normal")) {
+      if(!actor ent_flag("_stealth_normal"))
         return false;
-      }
     }
   }
 
@@ -926,11 +911,11 @@ stealth_enemy_endon_alert() {
 ///ScriptDocBegin
 "Name: stealth_event_handler( <dialogue_array> , <ender_array> )"
 "Summary: Run this function to handle events that aren't about being spotted, such as explosions and corpses being found.
-When that happens the flag '_stealth_event' gets set, it gets cleared when all enemy ai go back to normal.If passed a
+When that happens the flag '_stealth_event' gets set, it gets cleared when all enemy ai go back to normal.If passed a 
 Dialogue array, then a random radio dialogue line will be played during such an event."
 "Module: Stealth"
 "CallOn:"
-"OptionalArg: <dialogue_array>: an array of strings that are radio dialogue lines to explain the situation.
+"OptionalArg: <dialogue_array>: an array of strings that are radio dialogue lines to explain the situation. 
 Things like, 'don't do something stupid' or 'they're not onto us yet'."
 "OptionalArg: <ender_array>: an array of strings that should kill this function on a level notify.They can be flags"
 "Example: stealth_event_handler();"
@@ -988,7 +973,7 @@ stealth_detect_ranges_default() {
 \n detect_dist: this is the max distance from a corpse that the ai automatically detect a corpse ->regardless of whether they are looking at it or not ( this is a small number )
 \n found_dist: this is the distance at which a stop running up to the corpse and start shouting out that they've found one
 \n found_dog_dist: same as found distance but for dogs "
-"Example:
+"Example: 
 array = [];
 array[ "sight_dist" ] = 512;
 stealth_corpse_ranges_custom( array )"
@@ -1165,7 +1150,7 @@ stealth_ai_clear_custom_react() {
 "Summary: this starts an AI in an idle animation defined by <idle_anim> and then plays the reaction animation defined by <reaction_anim> when appropriate."
 "Module: Stealth"
 "CallOn: reference node or ent"
-"MandatoryArg: <self>: the node or reference entity or self to play the animation off of"
+"MandatoryArg: <self>: the node or reference entity or self to play the animation off of" 
 "MandatoryArg: <guy> : the actor doing the animation"
 "MandatoryArg: <idle_anim> : the idle animation to play (setup so anim_generic can use)"
 "MandatoryArg: <reaction_anim> : the reaction animation to play (setup so anim_generic can use)"
@@ -1180,9 +1165,8 @@ stealth_ai_idle_and_react(guy, idle_anim, reaction_anim, tag) {
 
   spotted_flag = guy maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
 
-  if(flag(spotted_flag)) {
+  if(flag(spotted_flag))
     return;
-  }
 
   ender = "stop_loop";
 
@@ -1210,7 +1194,7 @@ do_wait_thread() {
 "Summary: this plays the reaction animation defined by <reaction_anim> when appropriate."
 "Module: Stealth"
 "CallOn: reference node or ent"
-"MandatoryArg: <self>: the node or reference entity or self to play the animation off of"
+"MandatoryArg: <self>: the node or reference entity or self to play the animation off of" 
 "MandatoryArg: <guy> : the actor doing the animation"
 "MandatoryArg: <reaction_anim> : the reaction animation to play (setup so anim_generic can use)"
 "OptionalArg: <tag>: the tag to play off of the <reference_ent>"
@@ -1231,7 +1215,7 @@ stealth_ai_react(guy, reaction_anim, tag) {
 "Summary: this has the ai reach his position and then start in an idle animation defined by <idle_anim> and then plays the reaction animation defined by <reaction_anim> when appropriate."
 "Module: Stealth"
 "CallOn: reference node or ent"
-"MandatoryArg: <self>: the node or reference entity or self to play the animation off of"
+"MandatoryArg: <self>: the node or reference entity or self to play the animation off of" 
 "MandatoryArg: <guy> : the actor doing the animation"
 "MandatoryArg: <reach_anim> : the reach animation to play..often times just a copy of the idle anim not setup in a 2d array (setup so anim_generic can use)"
 "MandatoryArg: <idle_anim> : the idle animation to play (setup so anim_generic can use)"
@@ -1265,7 +1249,7 @@ stealth_ai_reach_idle_and_react_proc(guy, reach_anim, idle_anim, reaction_anim, 
 "Summary: this has the ai reach his position with an arrival and then start in an idle animation defined by <idle_anim> and then plays the reaction animation defined by <reaction_anim> when appropriate."
 "Module: Stealth"
 "CallOn: reference node or ent"
-"MandatoryArg: <self>: the node or reference entity or self to play the animation off of"
+"MandatoryArg: <self>: the node or reference entity or self to play the animation off of" 
 "MandatoryArg: <guy> : the actor doing the animation"
 "MandatoryArg: <idle_anim> : the reach animation to play..often times just a copy of the idle anim not setup in a 2d array (setup so anim_generic can use)"
 "MandatoryArg: <idle_anim> : the idle animation to play (setup so anim_generic can use)"
@@ -1293,7 +1277,7 @@ stealth_ai_reach_and_arrive_idle_and_react_proc(guy, reach_anim, idle_anim, reac
 }
 
 stealth_insure_enabled() {
-  assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
+  assertex(isdefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
 }
 
 /*
@@ -1318,7 +1302,7 @@ stealth_group_return_groups_with_spotted_flag() {
 "Summary: returns an array of the names of the groups with this flag set"
 "Module: Stealth"
 "CallOn: "
-"MandatoryArg: <_flag>: the flag you with to check for( , "_stealth_event", "_stealth_found_corpse")"
+"MandatoryArg: <_flag>: the flag you with to check for ( , "_stealth_event", "_stealth_found_corpse")"
 "Example: stealth_group_return_groups_with_event_flag"
 ///ScriptDocEnd
 =============
@@ -1549,13 +1533,12 @@ stealth_set_group_default() {
 }
 
 stealth_set_group_proc(var) {
-  if(isDefined(self.script_stealthgroup)) {
+  if(isdefined(self.script_stealthgroup))
     level._stealth.group.groups[self.script_stealthgroup] = array_remove(level._stealth.group.groups[self.script_stealthgroup], self);
-  }
 
   self.script_stealthgroup = string(var);
 
-  if(isDefined(self._stealth.plugins.basic)) {
+  if(isdefined(self._stealth.plugins.basic)) {
     self maps\_stealth_shared_utilities::group_flag_init("_stealth_spotted");
     self maps\_stealth_shared_utilities::group_flag_init("_stealth_event");
     self maps\_stealth_shared_utilities::group_flag_init("_stealth_found_corpse");
@@ -1596,13 +1579,11 @@ stealth_get_group() {
 enable_stealth_system() {
   flag_set("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
-  foreach(key, value in ai) {
-    value enable_stealth_for_ai();
-  }
+  foreach(key, value in ai)
+  value enable_stealth_for_ai();
 
-  foreach(player in level.players) {
-    player maps\_stealth_visibility_friendly::friendly_visibility_logic();
-  }
+  foreach(player in level.players)
+  player maps\_stealth_visibility_friendly::friendly_visibility_logic();
 
   maps\_stealth_visibility_system::system_event_change("hidden");
 }
@@ -1624,16 +1605,14 @@ enable_stealth_system() {
 disable_stealth_system() {
   flag_clear("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
-  foreach(key, value in ai) {
-    value disable_stealth_for_ai();
-  }
+  foreach(key, value in ai)
+  value disable_stealth_for_ai();
 
   foreach(player in level.players) {
     player.maxVisibleDist = 8192;
 
-    if(player ent_flag_exist("_stealth_enabled")) {
+    if(player ent_flag_exist("_stealth_enabled"))
       player ent_flag_clear("_stealth_enabled");
-    }
   }
 
   maps\_stealth_visibility_system::system_event_change("spotted");
@@ -1654,13 +1633,11 @@ disable_stealth_system() {
 =============
 */
 enable_stealth_for_ai() {
-  if(self ent_flag_exist("_stealth_enabled")) {
+  if(self ent_flag_exist("_stealth_enabled"))
     self ent_flag_set("_stealth_enabled");
-  }
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self maps\_stealth_visibility_friendly::friendly_visibility_logic();
-  }
 }
 
 /*
@@ -1678,9 +1655,8 @@ enable_stealth_for_ai() {
 =============
 */
 disable_stealth_for_ai() {
-  if(self ent_flag_exist("_stealth_enabled")) {
+  if(self ent_flag_exist("_stealth_enabled"))
     self ent_flag_clear("_stealth_enabled");
-  }
 
   self.maxVisibleDist = 8192;
 }

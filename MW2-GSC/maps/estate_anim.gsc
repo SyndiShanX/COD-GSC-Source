@@ -62,38 +62,38 @@ breach_anims() {
   //NOT USED
 
   /*
-  	
+	
   level.scr_anim[ "generic" ][ "breach_react_desk_v1" ] = %breach_react_desk_v1;	//cool
   level.scr_anim[ "generic" ][ "breach_react_desk_v2" ] = %breach_react_desk_v2;
   level.scr_anim[ "generic" ][ "breach_react_desk_v3" ] = %breach_react_desk_v3;
   level.scr_anim[ "generic" ][ "breach_react_desk_v4" ] = %breach_react_desk_v4;	//cool
   level.scr_anim[ "generic" ][ "breach_react_desk_v7" ] = %breach_react_desk_v7;
-  	
+	
   level.scr_anim[ "generic" ][ "patrol_bored_react_walkstop" ] = %patrol_bored_react_walkstop;
-  	
+	
   level.scr_anim[ "generic" ][ "heat_stand_turn_R" ] = %heat_stand_turn_R;
-  	
+	
   level.scr_anim[ "generic" ][ "favela_chaotic_crouchcover_fireC" ] = %favela_chaotic_crouchcover_fireC;
-  	
+	
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireA" ] = %favela_chaotic_standcover_fireA;
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireB" ] = %favela_chaotic_standcover_fireB;
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireC" ] = %favela_chaotic_standcover_fireC;
-  	
+	
   level.scr_anim[ "generic" ][ "favela_chaotic_cornerL_mid90" ] = %favela_chaotic_cornerL_mid90;
-  	
+	
   level.scr_anim[ "generic" ][ "breach_react_guntoss_v2_guy1" ] = %breach_react_guntoss_v2_guy1;
   level.scr_anim[ "generic" ][ "breach_react_guntoss_v2_guy2" ] = %breach_react_guntoss_v2_guy2;
-  	
+	
   level.scr_anim[ "generic" ][ "breach_react_push_guy1" ] = %breach_react_push_guy1;
   level.scr_anim[ "generic" ][ "breach_react_push_guy2" ] = %breach_react_push_guy2;
-  	
+	
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1" ] = %breach_chair_hide_reaction_v1;
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1_death" ] = %covercrouch_death_1;
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1_death2" ] = %covercrouch_death_2;
-  	
+	
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v2" ] = %breach_chair_hide_reaction_v2;	//cool
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v2_death" ] = %breach_chair_hide_reaction_death_v2;
-  	
+	
   level.scr_anim[ "generic" ][ "takedown_room2A_soldier" ] = %takedown_room2A_soldier;
   level.scr_anim[ "generic" ][ "takedown_room2A_soldier_idle" ][ 0 ] = %takedown_room2A_soldier_end_idle;
   level.scr_anim[ "generic" ][ "takedown_room2B_soldier" ] = %takedown_room2B_soldier;
@@ -102,7 +102,7 @@ breach_anims() {
   level.scr_anim[ "generic" ][ "takedown_room1A_soldier_idle" ][ 0 ] = %takedown_room1A_soldier_idle;
   level.scr_anim[ "generic" ][ "takedown_room1B_soldier" ] = %takedown_room1B_soldier;
   level.scr_anim[ "generic" ][ "takedown_room1B_soldier_idle" ][ 0 ] = %takedown_room1B_soldier_idle;
-  	
+	
   */
 
 }
@@ -141,18 +141,19 @@ ending_anims() {
   addNotetrack_customFunction("gasolineGuy", "gas_drip_end", ::stop_gas_can_fx_drips);
   addNotetrack_customFunction("ghost_ending_dead", "bodyfall large", ::play_bodyimpact_fx);
   addNotetrack_customFunction("ghost_ending", "blood_splat", ::play_ghost_shot_fx);
+
 }
 
 play_ghost_shot_fx(ghost_ending) {
   //iprintlnbold( "ghost betrayed" );
-  playFXOnTag(getfx("flesh_hit_body_fatal_exit"), ghost_ending, "J_SpineUpper");
+  PlayFXOnTag(getfx("flesh_hit_body_fatal_exit"), ghost_ending, "J_SpineUpper");
 }
 
 play_gas_can_fx_splash(gasolineGuy) {
   self endon("gas_splash_end");
   //	iprintlnbold( "splash!" );
-  for(;;) {
-    playFXOnTag(getfx("gas_can_splash"), gasolineGuy, "TAG_FX");
+  for (;;) {
+    PlayFXOnTag(getfx("gas_can_splash"), gasolineGuy, "TAG_FX");
     wait(0.03);
   }
 }
@@ -160,8 +161,8 @@ play_gas_can_fx_splash(gasolineGuy) {
 play_gas_can_fx_drips(gasolineGuy) {
   self endon("gas_drip_end");
   //	iprintlnbold( "drip!" );
-  for(;;) {
-    playFXOnTag(getfx("gas_can_splash"), gasolineGuy, "TAG_FX");
+  for (;;) {
+    PlayFXOnTag(getfx("gas_can_splash"), gasolineGuy, "TAG_FX");
     wait(0.03);
   }
 }
@@ -178,7 +179,7 @@ stop_gas_can_fx_drips(gasolineGuy) {
 
 play_bodyimpact_fx(ghost_ending) {
   //iprintlnbold( "poof_ghost" );
-  playFXOnTag(getfx("bodydump_dust_large"), ghost_ending, "J_SpineLower");
+  PlayFXOnTag(getfx("bodydump_dust_large"), ghost_ending, "J_SpineLower");
 }
 
 sniper_anims() {
@@ -250,7 +251,7 @@ dialog() {
   // Archer: Be advised, we have not, I repeat, we have not spotted Makarov, and no one else has left the house. Those trucks may have been decoys.
   level.scr_radio["est_snp1_decoys"] = "est_snp1_decoys";
 
-  //Roger that, we're advancing on the house now!
+  //Roger that, we're advancing on the house now! 
   level.scr_sound["ghost"]["est_gst_advancingonhouse"] = "est_gst_advancingonhouse";
 
   //Clear the perimeter!
@@ -367,10 +368,10 @@ dialog() {
   //Roach, we're not leaving without those files. Start the transfer.
   level.scr_radio["est_gst_startdownload"] = "est_gst_startdownload";
 
-  //Sniper Team One to strike team, be advised, we got enemy helos approaching from the northwest and southeast.
+  //Sniper Team One to strike team, be advised, we got enemy helos approaching from the northwest and southeast. 
   level.scr_radio["est_snp1_mainroad"] = "est_snp1_mainroad";
 
-  //We got 60 seconds tops, over.
+  //We got 60 seconds tops, over. 
   level.scr_radio["est_snp1_60seconds"] = "est_snp1_60seconds";
 
   //Makarov's men are going to do whatever it takes to keep us from leaving with this intel. We need to protect the DSM until the transfer's done.
@@ -379,7 +380,7 @@ dialog() {
   //Use the weapons caches and set up your claymores if you've got any left. Defensive positions, let's go!
   level.scr_radio["est_gst_weaponscache"] = "est_gst_weaponscache";
 
-  //Enemy choppers in 15 seconds.
+  //Enemy choppers in 15 seconds. 
   level.scr_radio["est_snp1_15seconds"] = "est_snp1_15seconds";
 
   //Roger that, 15 seconds!
@@ -433,7 +434,7 @@ dialog() {
   //They're dropping in more troops west of the house!	
   level.scr_radio["est_snp1_troopswest"] = "est_snp1_troopswest";
 
-  //They must be by the boathouse! Cover the west approach!
+  //They must be by the boathouse! Cover the west approach! 
   level.scr_radio["est_gst_boathouse"] = "est_gst_boathouse";
 
   //We got 249s and RPGs at the dining room window, plus L86 machine guns.	
@@ -494,9 +495,7 @@ dialog() {
   //I'm displacing. You're gonna be without sniper support for thirty seconds, standby.	
   level.scr_radio["est_snp1_displacing"] = "est_snp1_displacing";
 
-  //********* RPG Components**********/
-
-  /
+  //********* RPG Components**********//
 
   //RPG team moving in from the east!!	
   level.scr_radio["est_snp1_rpgteameast"] = "est_snp1_rpgteameast";
@@ -516,9 +515,7 @@ dialog() {
   //Got it! RPG team moving in from the southwest!!	
   level.scr_radio["est_ozn_rpgteamsw"] = "est_ozn_rpgteamsw";
 
-  //********* FRIENDLY OBITUARIES***********/
-
-  /
+  //********* FRIENDLY OBITUARIES***********//
 
   //Aaagh! I'm hit!!! Need assis- (static hiss)	
   level.scr_radio["est_ozn_imhit"] = "est_ozn_imhit";
@@ -532,9 +529,7 @@ dialog() {
   //Scarecrow is down, I repeat Scarecrow is down!	
   level.scr_radio["est_snp1_scarecrowdown"] = "est_snp1_scarecrowdown";
 
-  //********* ABANDONMENT MECHANIC***********/
-
-  /
+  //********* ABANDONMENT MECHANIC***********//
 
   //Roach! Stay the close to the house!		
   level.scr_radio["est_gst_stayclose"] = "est_gst_stayclose";
@@ -554,9 +549,7 @@ dialog() {
   //Roach! They've destroyed the DSM!! They've destroyed-(static hiss)	
   level.scr_radio["est_gst_destroyedthedsm"] = "est_gst_destroyedthedsm";
 
-  //********* GET THE DSM***********/
-
-  /
+  //********* GET THE DSM***********//
 
   //Roach, the transfer's complete! I'll cover the main approach while you get the DSM! Move!	
   level.scr_radio["est_gst_dsmcomplete"] = "est_gst_dsmcomplete";
@@ -590,9 +583,7 @@ dialog() {
   //Go! Go!		
   level.scr_sound["ghost"]["est_gst_gogo"] = "est_gst_gogo";
 
-  //********* Ending - Player Drag*************/
-
-  /
+  //********* Ending - Player Drag*************//
 
   //I've got you Roach, hang on!
   level.scr_radio["est_gst_gotyouroach"] = "est_gst_gotyouroach";
@@ -615,9 +606,7 @@ dialog() {
   //Roach, hang in there!!!	
   level.scr_radio["est_gst_hanginthere"] = "est_gst_hanginthere";
 
-  //********* Ending - Final Walk*************/
-
-  /
+  //********* Ending - Final Walk*************//
 
   //Come on, get up!	
   level.scr_sound["ghost_ending"]["est_gst_comeongetup"] = "est_gst_comeongetup";
@@ -640,9 +629,7 @@ dialog() {
   //Gold Eagle is on the ground. Watch for snipers on thermal, over.	
   level.scr_radio["est_hp2_watchforsnipers"] = "est_hp2_watchforsnipers";
 
-  //********* Ending - Shepherd's Greeting*************/
-
-  /
+  //********* Ending - Shepherd's Greeting*************//
 
   //Do you have the DSM?	
   //level.scr_sound[ "shepherd_ending" ][ "est_shp_havethedsm" ]			= "est_shp_havethedsm";
@@ -665,9 +652,7 @@ dialog() {
   //Solid copy, no movement detected. Two-six going into holding pattern.	
   level.scr_radio["est_hp1_holdingpattern"] = "est_hp1_holdingpattern";
 
-  //********* Ending - Price on radio*************/
-
-  /
+  //********* Ending - Price on radio*************//
 
   //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
   level.scr_radio["est_pri_comein"] = "est_pri_comein";
@@ -714,11 +699,12 @@ ending_playerview_anims() {
   level.scr_anim["playerview"]["estate_ending_part2"] = % estate_body_toss_player;
 
   addNotetrack_customFunction("playerview", "bodyfall large", ::play_bodyimpact_fx_player);
+
 }
 
 play_bodyimpact_fx_player(playerview) {
   //iprintlnbold( "poof player" );
-  playFXOnTag(getfx("bodydump_dust_large"), playerview, "J_Wrist_RI");
+  PlayFXOnTag(getfx("bodydump_dust_large"), playerview, "J_Wrist_RI");
 }
 
 #using_animtree("vehicles");

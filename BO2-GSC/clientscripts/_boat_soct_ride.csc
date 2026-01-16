@@ -27,13 +27,11 @@ driving_anims() {
   while(true) {
     player = level.localplayers[0];
 
-    if(isDefined(player) && !self islocalclientdriver(player getlocalclientnumber())) {
+    if(isDefined(player) && !self islocalclientdriver(player getlocalclientnumber()))
       level waittill("enter_soct");
-    }
 
-    if(self islocalclientdriver(player getlocalclientnumber())) {
+    if(self islocalclientdriver(player getlocalclientnumber()))
       wait 0.5;
-    }
 
     player = level.localplayers[0];
     level.vh_player_soct = self;
@@ -45,7 +43,7 @@ driving_anims() {
 
     if(!isDefined(level.vh_player_soct.steering_wheel)) {
       level.vh_player_soct.steering_wheel = spawn(player getlocalclientnumber(), player getorigin() + vectorscale((0, 0, -1), 1000.0), "script_model");
-      level.vh_player_soct.steering_wheel setModel("veh_t6_mil_soc_t_steeringwheel");
+      level.vh_player_soct.steering_wheel setmodel("veh_t6_mil_soc_t_steeringwheel");
       level.vh_player_soct.steering_wheel linkto(level.vh_player_soct.viewarms, "tag_weapon");
     }
 
@@ -84,19 +82,17 @@ steering_loop(viewarms) {
     target_time = target_time * 0.5;
     delta_change = target_time - time;
 
-    if(delta_change > max_delta_t) {
+    if(delta_change > max_delta_t)
       delta_change = max_delta_t;
-    } else if(delta_change < max_delta_t * -1) {
+    else if(delta_change < max_delta_t * -1)
       delta_change = max_delta_t * -1;
-    }
 
     time = time + delta_change;
 
-    if(time > 1) {
+    if(time > 1)
       time = 1;
-    } else if(time < 0) {
+    else if(time < 0)
       time = 0;
-    }
 
     viewarms setanimtime(viewarms_anim, time);
     wait 0.01;
@@ -107,11 +103,10 @@ set_soct_boost(enable) {
   if(!isDefined(level.vh_player_soct) || !isDefined(level.vh_player_soct.viewarms)) {
     return;
   }
-  if(enable == 1) {
+  if(enable == 1)
     level.vh_player_soct.viewarms setanim( % int_boat_boost_press, 1, 0.1, 3);
-  } else {
+  else
     level.vh_player_soct.viewarms clearanim( % int_boat_boost_press, 0.1);
-  }
 }
 
 #using_animtree("vehicles");
@@ -149,16 +144,15 @@ update_splash(localclientnum) {
         self.in_water = 1;
         setdvar("src_player_soct_in_water", "1");
 
-        if(isDefined(level._effect["soct_water_splash"])) {
-          playFXOnTag(localclientnum, level._effect["soct_water_splash"], self, "tag_body");
-        }
+        if(isDefined(level._effect["soct_water_splash"]))
+          playfxontag(localclientnum, level._effect["soct_water_splash"], self, "tag_body");
 
-        if(isDefined(level.vh_player_soct) && self == level.vh_player_soct) {}
+        if(isDefined(level.vh_player_soct) && self == level.vh_player_soct) {
+        }
       }
     } else {
-      if(self.in_water == 1) {
+      if(self.in_water == 1)
         setdvar("src_player_soct_in_water", "0");
-      }
 
       self.in_water = 0;
     }

@@ -15,9 +15,9 @@ collectibles_checkpoint_restore() {
   if(host_options == 0 || host_options_enabled == 0) {
     return;
   }
-  if((host_options &(1 << maps\_collectibles::collectible_get_unlock_value("collectible_berserker"))) != 0) {
+  if((host_options & (1 << maps\_collectibles::collectible_get_unlock_value("collectible_berserker"))) != 0) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i] notify("berserker_end");
       setClientSysState("levelNotify", "berzerk_audio_off", players[i]);
       if(isDefined(self.weaponInventory)) {
@@ -52,7 +52,7 @@ vampire_main() {
   self.vampire_degen_rate = 6;
   self thread vampire_regen_damage();
   self thread vampire_regen_kill();
-  for(;;) {
+  for (;;) {
     wait(1);
     if(GetDvarInt("scr_health_debug") == 2) {
       iprintln("----\n");
@@ -75,11 +75,10 @@ vampire_main() {
 
 vampire_regen_health(health) {
   sav = self.maxhealth;
-  if((self.health + health) > self.maxhealth) {
+  if((self.health + health) > self.maxhealth)
     self.health = self.maxhealth;
-  } else {
+  else
     self.health = self.health + health;
-  }
   self.maxhealth = sav;
 }
 
@@ -87,15 +86,14 @@ vampire_regen_damage() {
   self endon("disconnect");
   self endon("death");
   self endon("vampire_end");
-  for(;;) {
+  for (;;) {
     self waittill("vampire_health_regen", damage);
     if(self maps\_laststand::player_is_in_laststand()) {
       continue;
     }
     regen = Int(damage / 3);
-    if(regen < 1) {
+    if(regen < 1)
       regen = 1;
-    }
     vampire_regen_health(regen);
   }
 }
@@ -104,7 +102,7 @@ vampire_regen_kill() {
   self endon("disconnect");
   self endon("death");
   self endon("vampire_end");
-  for(;;) {
+  for (;;) {
     self waittill("vampire_kill");
     if(self maps\_laststand::player_is_in_laststand()) {
       continue;
@@ -117,9 +115,8 @@ berserker_main(cheat) {
   self endon("disconnect");
   self endon("death");
   self endon("berserker_end");
-  if(!isDefined(cheat)) {
+  if(!isDefined(cheat))
     cheat = false;
-  }
   self SetClientDvar("cg_fov", 65);
   self VisionSetBerserker(0, 0);
   self SetClientDvar("cg_gun_x", "0");
@@ -128,7 +125,7 @@ berserker_main(cheat) {
   if(!maps\_collectibles::has_collectible("collectible_sticksstones")) {
     self DisableBerserker();
   }
-  for(;;) {
+  for (;;) {
     if(cheat == false) {
       self waittill("berserker_kill_streak");
       assert(self.berserker_kill_streak <= 3);
@@ -136,12 +133,11 @@ berserker_main(cheat) {
       if(self.berserker_kill_streak == 1) {
         self thread berserker_kill_timer();
       }
-      if(self.berserker_kill_streak < 3) {
+      if(self.berserker_kill_streak < 3)
         continue;
-      }
     }
     time = 0;
-    while(time < 5 && (self getcurrentweapon() == "mortar_round" || self getcurrentweapon() == "satchel_charge_new" || isDefined(self.disableBerserker))) {
+    while (time < 5 && (self getcurrentweapon() == "mortar_round" || self getcurrentweapon() == "satchel_charge_new" || isDefined(self.disableBerserker))) {
       time += 0.1;
       wait 0.1;
     }
@@ -211,9 +207,8 @@ berserker_think() {
   wait(0.2);
   self VisionSetBerserker(2, 0.6);
   pistol = "colt";
-  if(isDefined(level.laststandpistol)) {
+  if(isDefined(level.laststandpistol))
     pistol = level.laststandpistol;
-  }
   self GiveWeapon(pistol);
   self SwitchToWeapon(pistol);
   self SetClientDvar("cg_gun_x", "-7");
@@ -238,7 +233,7 @@ berserker_player_has_rocketbarrage() {
     return true;
   }
   weaponInventory = self GetWeaponsList();
-  for(i = 0; i < weaponInventory.size; i++) {
+  for (i = 0; i < weaponInventory.size; i++) {
     if("rocket_barrage" == weaponInventory[i]) {
       return true;
     }
@@ -251,7 +246,7 @@ berserker_lerp_fov_overtime(time, destfov) {
   incs = int(time / .05);
   incfov = (destfov - basefov) / incs;
   currentfov = basefov;
-  for(i = 0; i < incs; i++) {
+  for (i = 0; i < incs; i++) {
     currentfov += incfov;
     self setClientDvar("cg_fov", currentfov);
     wait .05;
@@ -263,7 +258,7 @@ berserker_take_player_weapons() {
   self.weaponInventory = self GetWeaponsList();
   self.lastActiveWeapon = self GetCurrentWeapon();
   self.weaponAmmo = [];
-  for(i = 0; i < self.weaponInventory.size; i++) {
+  for (i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     self.weaponAmmo[weapon]["clip"] = self GetWeaponAmmoClip(weapon);
     self.weaponAmmo[weapon]["stock"] = self GetWeaponAmmoStock(weapon);
@@ -273,7 +268,7 @@ berserker_take_player_weapons() {
 
 berserker_giveback_player_weapons() {
   ASSERTEX(isDefined(self.weaponInventory), "player.weaponInventory is not defined - did you run take_player_weapons() first?");
-  for(i = 0; i < self.weaponInventory.size; i++) {
+  for (i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     self GiveWeapon(weapon);
     self SetWeaponAmmoClip(weapon, self.weaponAmmo[weapon]["clip"]);
@@ -300,18 +295,16 @@ sticksstones_main() {
     wait(5);
   }
   self.health = self.maxhealth;
-  for(;;) {
+  for (;;) {
     if(self GetCurrentWeapon() == "rocket_barrage" || self GetCurrentWeapon() == "air_support" || self GetCurrentWeapon() == "satchel_charge_new") {} else if(self GetCurrentWeapon() == "russian_flag") {} else if(!self maps\_laststand::player_is_in_laststand()) {
       weaponInventory = self GetWeaponsList();
-      for(i = 0; i < weaponInventory.size; i++) {
-        if(weaponInventory[i] != "rocket_barrage" && weaponInventory[i] != "air_support" && weaponInventory[i] != "satchel_charge_new") {
+      for (i = 0; i < weaponInventory.size; i++) {
+        if(weaponInventory[i] != "rocket_barrage" && weaponInventory[i] != "air_support" && weaponInventory[i] != "satchel_charge_new")
           self TakeWeapon(weaponInventory[i]);
-        }
       }
       pistol = "colt";
-      if(isDefined(level.laststandpistol)) {
+      if(isDefined(level.laststandpistol))
         pistol = level.laststandpistol;
-      }
       self GiveWeapon(pistol);
       self SwitchToWeapon(pistol);
       offhand = "fraggrenade";
@@ -328,7 +321,7 @@ sticksstones_main() {
 
 zombie_health_regen() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     wait(1);
     if(self.health < self.maxhealth) {
       sav = self.maxhealth;
@@ -349,7 +342,7 @@ morphine_think() {
 morphine_shot_think() {
   self endon("disconnect");
   self endon("player_revived");
-  while(1) {
+  while (1) {
     self waittill("morphine_shot", attacker);
     self.bleedout_time += 1;
   }
@@ -358,7 +351,7 @@ morphine_shot_think() {
 morphine_revive_think() {
   self endon("disconnect");
   self endon("player_revived");
-  while(1) {
+  while (1) {
     self waittill("morphine_revive", attacker);
     self maps\_laststand::revive_force_revive(attacker);
   }

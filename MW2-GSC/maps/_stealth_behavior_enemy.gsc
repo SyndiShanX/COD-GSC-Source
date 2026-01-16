@@ -23,21 +23,18 @@ stealth_behavior_enemy_main() {
 }
 
 /************************************************************************************************************/
-
 /*												ENEMY LOGIC													*/
 /************************************************************************************************************/
-
 enemy_Animation_Loop() {
   self endon("death");
   self endon("pain_death");
   self endon("damage");
 
-  while(1) {
+  while (1) {
     self waittill("event_awareness", type);
 
-    if(!self ent_flag("_stealth_enabled")) {
+    if(!self ent_flag("_stealth_enabled"))
       continue;
-    }
 
     //put inside the loop so we can check every time
     wrapper_func = self._stealth.behavior.ai_functions["animation"]["wrapper"]; // enemy_animation_wrapper
@@ -54,9 +51,8 @@ enemy_state_hidden() {
   self.dontevershoot = true;
   self thread set_battlechatter(false);
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     return;
-  }
 
   self.dieQuietly = true;
   self clearenemy();
@@ -67,16 +63,15 @@ enemy_state_spotted(internal) {
   self.ignoreall = false;
   self.dontattackme = undefined;
   self.dontevershoot = undefined;
-  if(isDefined(self.oldfixednode)) {
+  if(isdefined(self.oldfixednode))
     self.fixednode = self.oldfixednode;
-  }
 
   self thread set_battlechatter(true);
 
   if(self.type != "dog") {
     self.dieQuietly = false;
 
-    if(!isDefined(internal)) {
+    if(!isdefined(internal)) {
       self clear_run_anim();
       self enemy_stop_current_behavior();
     }
@@ -85,23 +80,20 @@ enemy_state_spotted(internal) {
     self.script_nobark = undefined;
   }
 
-  if(isDefined(internal)) {
+  if(isdefined(internal))
     return;
-  }
 
   enemy = level._stealth.group.spotted_enemy[self.script_stealthgroup];
-  if(isDefined(enemy)) {
+  if(isdefined(enemy))
     self getEnemyInfo(enemy);
-  }
 }
 
 /************************************************************************************************************/
-
 /*													SETUP													*/
 /************************************************************************************************************/
 
 enemy_init() {
-  assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::enemy_init() on this AI first");
+  assertEX(isdefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::enemy_init() on this AI first");
 
   self ent_flag_init("_stealth_override_goalpos");
   self ent_flag_init("_stealth_enemy_alert_level_action");
@@ -112,7 +104,7 @@ enemy_init() {
   self ent_flag_init("_stealth_behavior_reaction_anim_in_progress");
 
   // this is our behavior struct inside of _stealth...everything we do will go in here.
-  self._stealth.behavior = spawnStruct();
+  self._stealth.behavior = spawnstruct();
 
   // to prevent AI doing melee right away
   self.a.noFirstFrameMelee = true;
@@ -123,31 +115,27 @@ enemy_init() {
   self enemy_default_state_behavior();
   self enemy_default_anim_behavior();
 
-  self._stealth.behavior.event = spawnStruct();
+  self._stealth.behavior.event = spawnstruct();
 
-  if(self.type == "dog") {
+  if(self.type == "dog")
     self enemy_dog_init();
-  }
 
-  self._stealth.plugins = spawnStruct();
+  self._stealth.plugins = spawnstruct();
 
   self thread ai_stealth_pause_handler();
 }
 
 enemy_dog_init() {
-  if(threatbiasgroupexists("dog")) {
+  if(threatbiasgroupexists("dog"))
     self setthreatbiasgroup("dog");
-  }
 
-  if(isDefined(self.enemy) || isDefined(self.favoriteenemy)) {
+  if(isdefined(self.enemy) || isdefined(self.favoriteenemy))
     return;
-  }
 
   self ent_flag_init("_stealth_behavior_asleep");
 
-  if(isDefined(self.script_pet) || isDefined(self.script_patroller)) {
+  if(isdefined(self.script_pet) || isdefined(self.script_patroller))
     return;
-  }
 
   self.ignoreme = true;
   self.ignoreall = true;
@@ -159,9 +147,8 @@ enemy_dog_init() {
 }
 
 enemy_custom_state_behavior(array) {
-  foreach(key, value in array) {
-    self ai_create_behavior_function("state", key, value);
-  }
+  foreach(key, value in array)
+  self ai_create_behavior_function("state", key, value);
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];
   self thread ai_message_handler_hidden(function, "enemy_behavior");

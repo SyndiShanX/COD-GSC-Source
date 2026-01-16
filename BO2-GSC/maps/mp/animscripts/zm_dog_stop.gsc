@@ -36,9 +36,9 @@ dogidlenotetracks(note) {
     if(isDefined(level._effect["dog_breath"])) {
       self.breath_fx = spawn("script_model", self gettagorigin("TAG_MOUTH_FX"));
       self.breath_fx.angles = self gettagangles("TAG_MOUTH_FX");
-      self.breath_fx setModel("tag_origin");
+      self.breath_fx setmodel("tag_origin");
       self.breath_fx linkto(self, "TAG_MOUTH_FX");
-      playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
+      playfxontag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }
 }
@@ -48,22 +48,20 @@ isfacingenemy(tolerancecosangle) {
   vectoenemy = self.enemy.origin - self.origin;
   disttoenemy = length(vectoenemy);
 
-  if(disttoenemy < 1) {
+  if(disttoenemy < 1)
     return true;
-  }
 
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   val1 = forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1];
   val2 = (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy;
   return (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy > tolerancecosangle;
 }
 
 randomattackidle() {
-  if(isfacingenemy(-0.5)) {
+  if(isfacingenemy(-0.5))
     self set_orient_mode("face current");
-  } else {
+  else
     self set_orient_mode("face enemy");
-  }
 
   if(should_growl()) {
     debug_anim_print("dog_stop::main() - Setting stop_attackidle_growl");
@@ -103,13 +101,11 @@ shouldattackidle() {
 }
 
 should_growl() {
-  if(isDefined(self.script_growl)) {
+  if(isDefined(self.script_growl))
     return 1;
-  }
 
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return 1;
-  }
 
   return !self cansee(self.enemy);
 }

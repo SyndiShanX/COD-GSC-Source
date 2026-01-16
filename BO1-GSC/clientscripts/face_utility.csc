@@ -37,22 +37,18 @@ addAnimToFaceState(face_state, animation) {
 isHigherPriority(new_state, old_state) {
   if(GetDvarInt(#"cg_debugFace") != 0) {
     PrintLn("newstate " + new_state + " oldstate " + old_state);
-    if(!isDefined(new_state)) {
+    if(!isDefined(new_state))
       PrintLn("new_state undefined\n");
-    }
-    if(!isDefined(level.faceStates)) {
+    if(!isDefined(level.faceStates))
       PrintLn("level.faceStates undefined\n");
-    }
-    if(!isDefined(level.faceStates)) {
+    if(!isDefined(level.faceStates))
       PrintLn("level.faceStates undefined\n");
-    }
-    if(!isDefined(level.faceStates[new_state])) {
+    if(!isDefined(level.faceStates[new_state]))
       PrintLn("level.faceStates[new_state] undefined\n");
-    }
     if(!isDefined(level.faceStates[new_state])) {
       faceStatesArray = getArrayKeys(level.faceStates);
       PrintLn(new_state + " undefined\n");
-      for(i = 0; i < faceStatesArray.size; i++) {
+      for (i = 0; i < faceStatesArray.size; i++) {
         println(i + ":");
         PrintLn(faceStatesArray[i] + "\n");
       }
@@ -77,7 +73,7 @@ waitForAnyPriorityReturn(prevState) {
   if(GetDvarInt(#"cg_debugFace") != 0) {
     PrintLn("Waiting for priority return for " + prevState);
   }
-  while(true) {
+  while (true) {
     self waittill("face", newState);
     if(isDefined(newState) && newState != prevState && isHigherPriority(newState, prevState)) {
       break;
@@ -92,7 +88,7 @@ waitForFaceEventRepeat(base_time) {
   self endon("new_face_event");
   self endon("face_timer_expired");
   state = self.face_curr_event;
-  while(true) {
+  while (true) {
     self waittill("face", newState);
     if(newState == state) {
       self.face_timer = base_time;
@@ -114,9 +110,8 @@ waitForFaceEventComplete(localClientNum) {
   if(GetDvarInt(#"cg_debugFace") != 0) {
     println("setAnimKnob Back To base");
   }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self SetAnimKnob(level.faceStates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
   self notify("face", "face_advance");
 }
@@ -132,39 +127,32 @@ processFaceEvents(localClientNum) {
   if(GetDvarInt(#"cg_debugFace") != 0) {
     println("setAnimKnobProcessFaceEvents");
   }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self SetAnimKnob(level.faceStates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.0, 1.0);
-  if(isDefined(self.face_disable) && self.face_disable) {
+  if(isDefined(self.face_disable) && self.face_disable)
     state = "face_disable";
-  } else if(isDefined(self.face_death) && self.face_death) {
+  else if(isDefined(self.face_death) && self.face_death)
     state = "face_death";
-  }
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self.face_state = state;
   self thread showState();
   self thread watchfor_death();
-  while(true) {
+  while (true) {
     if(GetDvarInt(#"cg_debugFace") != 0) {
-      if(!isDefined(state)) {
+      if(!isDefined(state))
         PrintLn("state undefined\n");
-      }
-      if(!isDefined(level.faceStates)) {
+      if(!isDefined(level.faceStates))
         PrintLn("level.faceStates undefined\n");
-      }
-      if(!isDefined(level.faceStates)) {
+      if(!isDefined(level.faceStates))
         PrintLn("level.faceStates undefined\n");
-      }
-      if(!isDefined(level.faceStates[state])) {
+      if(!isDefined(level.faceStates[state]))
         PrintLn("level.faceStates[state] undefined\n");
-      }
       if(!isDefined(level.faceStates[state])) {
         faceStatesArray = getArrayKeys(level.faceStates);
         PrintLn(state + " undefined\n");
-        for(i = 0; i < faceStatesArray.size; i++) {
+        for (i = 0; i < faceStatesArray.size; i++) {
           println(i + ":");
           PrintLn(faceStatesArray[i] + "\n");
         }
@@ -181,27 +169,23 @@ processFaceEvents(localClientNum) {
       setFaceState("face_disabled");
       self ClearAnim(level.faceStates["face_root"], 0);
       self notify("stop_face_anims");
-      while(self.face_disable) {
+      while (self.face_disable) {
         wait(0.05);
       }
     }
     if(GetDvarInt(#"cg_debugFace") != 0) {
-      if(!isDefined(state)) {
+      if(!isDefined(state))
         PrintLn("state undefined\n");
-      }
-      if(!isDefined(level.faceStates)) {
+      if(!isDefined(level.faceStates))
         PrintLn("level.faceStates undefined\n");
-      }
-      if(!isDefined(level.faceStates)) {
+      if(!isDefined(level.faceStates))
         PrintLn("level.faceStates undefined\n");
-      }
-      if(!isDefined(level.faceStates[state])) {
+      if(!isDefined(level.faceStates[state]))
         PrintLn("level.faceStates[state] undefined\n");
-      }
       if(!isDefined(level.faceStates[state])) {
         faceStatesArray = getArrayKeys(level.faceStates);
         PrintLn(state + " undefined\n");
-        for(i = 0; i < faceStatesArray.size; i++) {
+        for (i = 0; i < faceStatesArray.size; i++) {
           println(i + ":");
           PrintLn(faceStatesArray[i] + "\n");
         }
@@ -212,9 +196,8 @@ processFaceEvents(localClientNum) {
       if(GetDvarInt(#"cg_debugFace") != 0) {
         PrintLn("Exitstate found, returning, anim tree:" + level.face_anim_tree);
       }
-      if(!isDefined(self)) {
+      if(!isDefined(self))
         return;
-      }
       if(GetDvarInt(#"cg_debugFace") != 0) {
         println("setAnimKnob286");
       }
@@ -237,9 +220,8 @@ processFaceEvents(localClientNum) {
           if(GetDvarInt(#"cg_debugFace") != 0) {
             println("setAnimKnob310");
           }
-          if(!isDefined(self)) {
+          if(!isDefined(self))
             return;
-          }
           self SetAnimKnob(level.faceStates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
         }
       }
@@ -250,9 +232,8 @@ processFaceEvents(localClientNum) {
         if(GetDvarInt(#"cg_debugFace") != 0) {
           PrintLn("New face anim event " + self.face_curr_event + " anim # " + self.face_curr_event_idx);
         }
-        if(!isDefined(self)) {
+        if(!isDefined(self))
           return;
-        }
         self SetFlaggedAnimKnobRestart(self.face_curr_event, level.faceStates[self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
         self thread waitForFaceEventComplete(localClientNum);
       }
@@ -277,3 +258,4 @@ watchfor_death() {
     self.face_death = true;
   }
 }
+

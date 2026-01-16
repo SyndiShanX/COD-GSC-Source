@@ -13,18 +13,18 @@
 #namespace glaive;
 
 function autoexec main() {
-  clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int", &glaivebloodfxhandler, 0, 0);
+  clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int", & glaivebloodfxhandler, 0, 0);
 }
 
 function private glaivebloodfxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(isDefined(self.bloodfxhandle)) {
+  if(isdefined(self.bloodfxhandle)) {
     stopfx(localclientnum, self.bloodfxhandle);
     self.bloodfxhandle = undefined;
   }
   settings = struct::get_script_bundle("vehiclecustomsettings", "glaivesettings");
-  if(isDefined(settings)) {
+  if(isdefined(settings)) {
     if(newvalue) {
-      self.bloodfxhandle = playFXOnTag(localclientnum, settings.weakspotfx, self, "j_spineupper");
+      self.bloodfxhandle = playfxontag(localclientnum, settings.weakspotfx, self, "j_spineupper");
     }
   }
 }

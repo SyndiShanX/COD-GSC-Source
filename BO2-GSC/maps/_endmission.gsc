@@ -33,11 +33,10 @@ restartmissionlistener() {
     root_level = get_root_level(level.script);
     initchallengestats(level.script);
 
-    if(root_level == level.script) {
+    if(root_level == level.script)
       fastrestart();
-    } else {
+    else
       changelevel(root_level, 0, 0);
-    }
   }
 }
 
@@ -93,18 +92,16 @@ complete_level(cur_level, dostat) {
     players = get_players();
     players[0] giveachievement_wrapper(level_veteran_achievement);
 
-    if(check_other_veterancompletion(cur_level)) {
+    if(check_other_veterancompletion(cur_level))
       players[0] giveachievement_wrapper("SP_RTS_CARRIER");
-    }
   }
 
   level.posttutmission = getdvar(#"_id_D614D075");
   setdvar("ui_aarmapname", level.script);
 
   if(dostat != 0) {
-    if(getdvarint(#"_id_0F241E06") == 0) {
+    if(getdvarint(#"_id_0F241E06") == 0)
       setdvarint("ui_dofrontendsave", 1);
-    }
 
     if(!maps\_cheat::is_cheating() && !flag("has_cheated") && getdvar(#"_id_EB5692B2") != "1") {
       check_for_achievements(mission);
@@ -117,13 +114,11 @@ check_for_achievements(mission) {
   player = get_players()[0];
   cur_level_type = tablelookup("sp/levelLookup.csv", 2, mission, 8);
 
-  if(!player isstartingclassdefault(mission) && cur_level_type != "RTS" && cur_level_type != "TUT") {
+  if(!player isstartingclassdefault(mission) && cur_level_type != "RTS" && cur_level_type != "TUT")
     player giveachievement_wrapper("SP_MISC_WEAPONS");
-  }
 
-  if(!player isstartingclasseraappropriate() && cur_level_type != "RTS" && cur_level_type != "TUT") {
+  if(!player isstartingclasseraappropriate() && cur_level_type != "RTS" && cur_level_type != "TUT")
     player giveachievement_wrapper("SP_BACK_TO_FUTURE");
-  }
 }
 
 check_for_achievements_frontend(levelname) {
@@ -134,27 +129,23 @@ check_for_achievements_frontend(levelname) {
   if(cur_level_type == "TUT") {
     return;
   }
-  if(player areallmissionsatscore(10000)) {
+  if(player areallmissionsatscore(10000))
     player giveachievement_wrapper("SP_MISC_10K_SCORE_ALL");
-  }
 
   currchallenges = player getnumchallengescomplete(mission);
 
-  if(currchallenges > 0) {
+  if(currchallenges > 0)
     player giveachievement_wrapper("SP_ONE_CHALLENGE");
-  }
 
   if(currchallenges == 10) {
     player giveachievement_wrapper("SP_ALL_CHALLENGES_IN_LEVEL");
 
-    if(player hascompletedallgamechallenges()) {
+    if(player hascompletedallgamechallenges())
       player giveachievement_wrapper("SP_ALL_CHALLENGES_IN_GAME");
-    }
   }
 
-  if(player hasallintel() && cur_level_type != "RTS") {
+  if(player hasallintel() && cur_level_type != "RTS")
     player giveachievement_wrapper("SP_MISC_ALL_INTEL");
-  }
 }
 
 get_strikeforce_tokens_remaining() {
@@ -187,17 +178,15 @@ is_any_new_strikeforce_maps(cur_level) {
       start_index = int(tablelookup("sp/levelLookup.csv", 0, level_index, 13));
 
       if(cur_level == start_index + 1) {
-        if(!level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15))) {
+        if(!level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)))
           m_rts_map_list[m_rts_map_list.size] = tablelookup("sp/levelLookup.csv", 0, level_index, 1);
-        }
       }
 
       territory = tablelookup("sp/levelLookup.csv", 0, level_index, 18);
 
       if(territory != "") {
-        if(level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)) != 0) {
+        if(level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)) != 0)
           num_territories_claimed++;
-        }
       }
     }
 
@@ -206,17 +195,14 @@ is_any_new_strikeforce_maps(cur_level) {
 
   karma_captured = level.player get_story_stat("KARMA_CAPTURED");
 
-  if(karma_captured == 0) {
+  if(karma_captured == 0)
     arrayremovevalue(m_rts_map_list, "so_rts_mp_socotra");
-  }
 
-  if(num_territories_claimed < 3) {
+  if(num_territories_claimed < 3)
     arrayremovevalue(m_rts_map_list, "so_rts_mp_overflow");
-  }
 
-  if(m_rts_map_list.size > 0) {
+  if(m_rts_map_list.size > 0)
     return true;
-  }
 
   return false;
 }
@@ -231,9 +217,8 @@ get_strikeforce_available_level_list(cur_level) {
 
   tokens_remaining = get_strikeforce_tokens_remaining();
 
-  if(tokens_remaining <= 0) {
+  if(tokens_remaining <= 0)
     return level.m_rts_map_list;
-  }
 
   level_index = 1;
   max_index = int(tablelookup("sp/levelLookup.csv", 0, "map_count", 1));
@@ -251,36 +236,31 @@ get_strikeforce_available_level_list(cur_level) {
       }
 
       if(cur_level > start_index && cur_level < end_index) {
-        if(!level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15))) {
+        if(!level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)))
           level.m_rts_map_list[level.m_rts_map_list.size] = tablelookup("sp/levelLookup.csv", 0, level_index, 1);
-        }
       }
 
       territory = tablelookup("sp/levelLookup.csv", 0, level_index, 18);
 
       if(territory != "") {
-        if(level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)) != 0) {
+        if(level.player get_story_stat(tablelookup("sp/levelLookup.csv", 0, level_index, 15)) != 0)
           num_territories_claimed++;
-        }
       }
     }
 
     level_index++;
   }
 
-  if(is_true(level.m_strikeforce_open_all)) {
+  if(is_true(level.m_strikeforce_open_all))
     return level.m_rts_map_list;
-  }
 
   karma_captured = level.player get_story_stat("KARMA_CAPTURED");
 
-  if(karma_captured == 0) {
+  if(karma_captured == 0)
     arrayremovevalue(level.m_rts_map_list, "so_rts_mp_socotra");
-  }
 
-  if(num_territories_claimed < 3) {
+  if(num_territories_claimed < 3)
     arrayremovevalue(level.m_rts_map_list, "so_rts_mp_overflow");
-  }
 
   prev_map = tablelookup("sp/levelLookup.csv", 0, cur_level, 1);
 
@@ -306,23 +286,20 @@ get_strikeforce_available_level_list(cur_level) {
 set_next_level(cur_level, dostat) {
   curr_map_type = tablelookup("sp/levelLookup.csv", 0, cur_level, 8);
 
-  if(curr_map_type == "RTS") {
+  if(curr_map_type == "RTS")
     cur_level = level.player getdstat("PlayerStatsList", "HIGHESTLEVELCOMPLETED", "statValue");
-  }
 
   next_level = cur_level + 1;
   map_type = tablelookup("sp/levelLookup.csv", 0, next_level, 8);
 
-  if(map_type != "CMP" && map_type != "DEV") {
+  if(map_type != "CMP" && map_type != "DEV")
     next_level = cur_level;
-  }
 
   next_level_name = tablelookup("sp/levelLookup.csv", 0, next_level, 1);
   map_type = tablelookup("sp/levelLookup.csv", 0, next_level, 8);
 
-  if(map_type == "CMP" && curr_map_type != "RTS" && curr_map_type != "TUT" && getdvarint(#"_id_0F241E06") == 0) {
+  if(map_type == "CMP" && curr_map_type != "RTS" && curr_map_type != "TUT" && getdvarint(#"_id_0F241E06") == 0)
     strikeforce_increment_unit_tokens();
-  }
 
   rts_array = get_strikeforce_available_level_list(next_level);
 
@@ -342,9 +319,8 @@ set_next_level(cur_level, dostat) {
     changelevel("");
   } else if(map_type == "DEV")
     changelevel(next_level_name, !dostat);
-  else {
+  else
     changelevel("", !dostat);
-  }
 }
 
 get_level_completed(mission_name) {
@@ -382,9 +358,8 @@ check_other_haslevelveteranachievement(level_index) {
       if(!isDefined(mission_name) || mission_name == "") {
         continue;
       }
-      if(get_level_completed(mission_name) < 3) {
+      if(get_level_completed(mission_name) < 3)
         return false;
-      }
     }
   }
 
@@ -408,9 +383,8 @@ check_other_veterancompletion(level_index) {
     if(!isDefined(mission_name) || mission_name == "") {
       continue;
     }
-    if(get_level_completed(mission_name) < 3) {
+    if(get_level_completed(mission_name) < 3)
       return false;
-    }
   }
 
   return true;

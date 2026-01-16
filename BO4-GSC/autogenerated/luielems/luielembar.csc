@@ -4,9 +4,11 @@
 *************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace luielembar;
 
 class cluielembar: cluielem {
+
   function set_bar_percent(localclientnum, value) {
     set_data(localclientnum, "bar_percent", value);
   }
@@ -48,7 +50,7 @@ class cluielembar: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "luielembar");
+    cluielem::open(localclientnum, #"luielembar");
   }
 
   function function_fa582112(localclientnum) {

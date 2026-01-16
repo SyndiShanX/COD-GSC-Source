@@ -28,23 +28,19 @@ global_fx(targetname, fxname, fxfile, delay, soundalias) {
   if(ents.size <= 0) {
     return;
   }
-  for(i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++)
     ents[i] global_fx_create(fxname, fxfile, delay, soundalias);
-  }
 }
 
 global_fx_create(fxname, fxfile, delay, soundalias) {
-  if(!isDefined(level._effect)) {
+  if(!isDefined(level._effect))
     level._effect = [];
-  }
 
-  if(!isDefined(level._effect[fxname])) {
+  if(!isDefined(level._effect[fxname]))
     level._effect[fxname] = loadfx(fxfile);
-  }
 
-  if(!isDefined(self.angles)) {
+  if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
-  }
 
   ent = createoneshoteffect(fxname);
   ent.v["origin"] = self.origin;
@@ -52,7 +48,6 @@ global_fx_create(fxname, fxfile, delay, soundalias) {
   ent.v["fxid"] = fxname;
   ent.v["delay"] = delay;
 
-  if(isDefined(soundalias)) {
+  if(isDefined(soundalias))
     ent.v["soundalias"] = soundalias;
-  }
 }

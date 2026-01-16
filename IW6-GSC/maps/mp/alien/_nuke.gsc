@@ -62,9 +62,8 @@ nukeDeath() {
 nukeSoundIncoming() {
   level endon("nuke_cancelled");
 
-  if(isDefined(level.nuke_soundObject)) {
+  if(isDefined(level.nuke_soundObject))
     level.nuke_soundObject playSound("nuke_incoming");
-  }
 }
 
 nukeSoundExplosion() {
@@ -90,15 +89,13 @@ nukeEffects() {
 
     nukeLoc = player.origin + (playerForward * nukeDistance);
 
-    if(isDefined(level.nukeLoc)) {
+    if(isDefined(level.nukeLoc))
       nukeLoc = level.nukeLoc;
-    }
 
     nukeAngles = (0, (player.angles[1] + 180), 90);
 
-    if(isDefined(level.nukeAngles)) {
+    if(isDefined(level.nukeAngles))
       nukeAngles = level.nukeAngles;
-    }
 
     nukeEnt = spawn("script_model", nukeLoc);
     nukeEnt setModel("tag_origin");
@@ -135,20 +132,18 @@ nukeVision() {
     if(isDefined(player.sessionstate) && player.sessionstate == "spectator") {
       spectated_player = player GetSpectatingPlayer();
       if(isDefined(spectated_player)) {
-        if((isDefined(spectated_player.nuke_escaped) && spectated_player.nuke_escaped)) {
+        if((isDefined(spectated_player.nuke_escaped) && spectated_player.nuke_escaped))
           player set_vision_for_nuke_escaped(transition_time);
-        } else {
+        else
           player set_vision_for_nuke_failed(transition_time);
-        }
       } else {
         player set_vision_for_nuke_failed(transition_time);
       }
     } else {
-      if((isDefined(player.nuke_escaped) && player.nuke_escaped)) {
+      if((isDefined(player.nuke_escaped) && player.nuke_escaped))
         player set_vision_for_nuke_escaped(transition_time);
-      } else {
+      else
         player set_vision_for_nuke_failed(transition_time);
-      }
     }
   }
 
@@ -241,8 +236,7 @@ onPlayerSpawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if(isDefined(level.nukeDetonated)) {
+    if(isDefined(level.nukeDetonated))
       self VisionSetNakedForPlayer(level.nukeVisionSet, 0);
-    }
   }
 }

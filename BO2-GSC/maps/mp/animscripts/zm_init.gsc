@@ -11,7 +11,7 @@
 #include maps\mp\animscripts\zm_shared;
 
 main() {
-  self.a = spawnStruct();
+  self.a = spawnstruct();
   self.team = level.zombie_team;
   firstinit();
   self.a.pose = "stand";
@@ -38,9 +38,8 @@ main() {
   self thread deathnotify();
   self.baseaccuracy = self.accuracy;
 
-  if(!isDefined(self.script_accuracy)) {
+  if(!isDefined(self.script_accuracy))
     self.script_accuracy = 1;
-  }
 
   self.a.misstime = 0;
   self.a.yawtransition = "none";
@@ -57,23 +56,24 @@ main() {
   self.a.crouchpain = 0;
   self.a.nextstandinghitdying = 0;
 
-  if(!isDefined(self.script_forcegrenade)) {
+  if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
-  }
 
   self.a.lastdebugprint = "";
 
   self.lastenemysighttime = 0;
   self.combattime = 0;
   self.coveridleselecttime = -696969;
-  self.old = spawnStruct();
+  self.old = spawnstruct();
   self.reacquire_state = 0;
   self.a.allow_shooting = 0;
 }
 
-donothing() {}
+donothing() {
+}
 
-empty(one, two, three, whatever) {}
+empty(one, two, three, whatever) {
+}
 
 clearenemy() {
   self notify("stop waiting for enemy to die");
@@ -96,17 +96,14 @@ firstinit() {
   anim.notfirsttime = 1;
   anim.usefacialanims = 0;
 
-  if(!isDefined(anim.dog_health)) {
+  if(!isDefined(anim.dog_health))
     anim.dog_health = 1;
-  }
 
-  if(!isDefined(anim.dog_presstime)) {
+  if(!isDefined(anim.dog_presstime))
     anim.dog_presstime = 350;
-  }
 
-  if(!isDefined(anim.dog_hits_before_kill)) {
+  if(!isDefined(anim.dog_hits_before_kill))
     anim.dog_hits_before_kill = 1;
-  }
 
   level.nextgrenadedrop = randomint(3);
   level.lastplayersighted = 100;

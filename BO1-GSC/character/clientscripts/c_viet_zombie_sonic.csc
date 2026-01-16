@@ -13,7 +13,7 @@ register_gibs() {
   if(!isDefined(level._gibbing_actor_models)) {
     level._gibbing_actor_models = [];
   }
-  gib_spawn = spawnStruct();
+  gib_spawn = spawnstruct();
   gib_spawn.matches_me = ::matches_me;
   level._gibbing_actor_models[level._gibbing_actor_models.size] = gib_spawn;
 }

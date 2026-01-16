@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_perk_slider;
 
 autoexec __init__system__() {
@@ -29,9 +30,9 @@ __main__() {}
 
 enable_slider_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_phdflopper", # "perk_slider", 4000, # "hash_1434e75516b9654c", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), # "zmperksphdslider");
+    zm_perks::register_perk_basic_info(#"specialty_phdflopper", #"perk_slider", 4000, #"hash_1434e75516b9654c", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), #"zmperksphdslider");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_phdflopper", # "perk_slider", 4000, # "zombie/perk_slider", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), # "zmperksphdslider");
+    zm_perks::register_perk_basic_info(#"specialty_phdflopper", #"perk_slider", 4000, #"zombie/perk_slider", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), #"zmperksphdslider");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_phdflopper", &function_1781c013);
@@ -45,14 +46,14 @@ enable_slider_perk_for_level() {
 init_slider() {}
 
 function_1781c013() {
-  level.machine_assets[# "specialty_phdflopper"] = spawnStruct();
-  level.machine_assets[# "specialty_phdflopper"].weapon = getweapon("zombie_perk_bottle_slider");
-  level.machine_assets[# "specialty_phdflopper"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_phdflopper"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_phdflopper"] = spawnStruct();
+  level.machine_assets[#"specialty_phdflopper"].weapon = getweapon("zombie_perk_bottle_slider");
+  level.machine_assets[#"specialty_phdflopper"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_phdflopper"].on_model = "p7_zm_vending_nuke";
 }
 
 function_5ba17a72() {
-  clientfield::register("allplayers", "" + # "hash_7b8ad0ed3ef67813", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_7b8ad0ed3ef67813", 1, 1, "counter");
 }
 
 function_90f58801(state) {}
@@ -72,22 +73,22 @@ function_ef14badb(use_trigger, perk_machine, bump_trigger, collision) {
 
 function_1d4d3034() {
   n_slot = zm_perks::function_c1efcc57(#"specialty_phdflopper");
-  self zm_perks::function_f0ac059f(n_slot, 1, # "perk_slider");
-  self zm_perks::function_13880aa5(n_slot, 1, # "perk_slider");
-  self zm_perks::function_c8c7bc5(n_slot, 0, # "perk_slider");
+  self zm_perks::function_f0ac059f(n_slot, 1, #"perk_slider");
+  self zm_perks::function_13880aa5(n_slot, 1, #"perk_slider");
+  self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
   self thread function_dc9a257a(n_slot);
 }
 
 function_ae56fb1a(b_pause, str_perk, str_result, n_slot) {
   self notify(#"hash_6939dd7af68cec");
-  self zm_perks::function_f0ac059f(n_slot, 0, # "perk_slider");
-  self zm_perks::function_13880aa5(n_slot, 0, # "perk_slider");
-  self zm_perks::function_c8c7bc5(n_slot, 0, # "perk_slider");
+  self zm_perks::function_f0ac059f(n_slot, 0, #"perk_slider");
+  self zm_perks::function_13880aa5(n_slot, 0, #"perk_slider");
+  self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
 }
 
 function_dc9a257a(n_slot) {
   self notify(#"hash_6939dd7af68cec");
-  self endon(#"disconnect", # "hash_6939dd7af68cec");
+  self endon(#"disconnect", #"hash_6939dd7af68cec");
   self slide_explosion(n_slot);
   self.var_f354086e = 0;
 
@@ -97,7 +98,7 @@ function_dc9a257a(n_slot) {
     self waittill(#"slide_end");
     n_distance = distance(v_start_position, self.origin);
     self.var_f354086e += n_distance;
-    self zm_perks::function_13880aa5(n_slot, min(1, self.var_f354086e / 550), # "perk_slider");
+    self zm_perks::function_13880aa5(n_slot, min(1, self.var_f354086e / 550), #"perk_slider");
 
     if(!function_2772480a()) {
       continue;
@@ -113,13 +114,13 @@ function_dc9a257a(n_slot) {
 reset_charge() {
   if(self hasperk(#"specialty_phdflopper")) {
     n_slot = zm_perks::function_c1efcc57(#"specialty_phdflopper");
-    self zm_perks::function_13880aa5(n_slot, 1, # "perk_slider");
+    self zm_perks::function_13880aa5(n_slot, 1, #"perk_slider");
     self thread function_dc9a257a(n_slot);
   }
 }
 
 slide_explosion(n_slot) {
-  self zm_perks::function_c8c7bc5(n_slot, 1, # "perk_slider");
+  self zm_perks::function_c8c7bc5(n_slot, 1, #"perk_slider");
 
   while(true) {
     self waittill(#"slide_begin");
@@ -165,9 +166,9 @@ slide_explosion(n_slot) {
     if(isarray(var_1574e1cf) && var_1574e1cf.size) {
       a_ai = self getenemiesinradius(self.origin, 256);
       a_ai = arraysortclosest(a_ai, self.origin);
-      self clientfield::increment("" + # "hash_7b8ad0ed3ef67813");
-      self zm_perks::function_13880aa5(n_slot, 0.05, # "perk_slider");
-      self zm_perks::function_c8c7bc5(n_slot, 0, # "perk_slider");
+      self clientfield::increment("" + #"hash_7b8ad0ed3ef67813");
+      self zm_perks::function_13880aa5(n_slot, 0.05, #"perk_slider");
+      self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
       var_708c0444 = 0;
       n_kill_count = 0;
 
@@ -202,7 +203,7 @@ slide_explosion(n_slot) {
 
           self zm_challenges::debug_print("<dev string:x38>");
 
-          self zm_stats::increment_challenge_stat(#"perk_slider_kills");
+            self zm_stats::increment_challenge_stat(#"perk_slider_kills");
         }
       }
 
@@ -211,12 +212,12 @@ slide_explosion(n_slot) {
           ai dodamage(var_fd11502e, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, level.weaponnone);
 
           if(ai.health > 0) {
-            if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
+            if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
               ai ai::stun();
             } else {
               ai zombie_utility::setup_zombie_knockdown(self);
             }
-          } else if(ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced") {
+          } else if(ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced") {
             n_kill_count++;
             ai zm_spawner::zombie_explodes_intopieces(0);
           }
@@ -241,7 +242,7 @@ private function_2772480a() {
     return false;
   }
 
-  if(namespace_fcd611c3::is_active() && level.var_e91491fb !== # "slide") {
+  if(namespace_fcd611c3::is_active() && level.var_e91491fb !== #"slide") {
     return false;
   }
 

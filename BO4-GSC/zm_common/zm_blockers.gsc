@@ -28,6 +28,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_blockers;
 
 autoexec __init__system__() {
@@ -47,17 +48,17 @@ __init__() {
   if(isDefined(level.var_c621179)) {
     thread[[level.var_c621179]]();
   } else if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_buy_debris", # "hash_4b77c0a6bc72bc31");
+    zm_utility::add_zombie_hint("default_buy_debris", #"hash_4b77c0a6bc72bc31");
   } else {
-    zm_utility::add_zombie_hint("default_buy_debris", # "hash_1595dd9d4d64f37b");
+    zm_utility::add_zombie_hint("default_buy_debris", #"hash_1595dd9d4d64f37b");
   }
 
   if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_buy_door", # "hash_5483a959bcbbba41");
-    zm_utility::add_zombie_hint("default_buy_door_close", # "hash_4cf42029f734b45b");
+    zm_utility::add_zombie_hint("default_buy_door", #"hash_5483a959bcbbba41");
+    zm_utility::add_zombie_hint("default_buy_door_close", #"hash_4cf42029f734b45b");
   } else {
-    zm_utility::add_zombie_hint("default_buy_door", # "hash_456cd0f0d10be48b");
-    zm_utility::add_zombie_hint("default_buy_door_close", # "hash_261288d018c0e7e5");
+    zm_utility::add_zombie_hint("default_buy_door", #"hash_456cd0f0d10be48b");
+    zm_utility::add_zombie_hint("default_buy_door_close", #"hash_261288d018c0e7e5");
   }
 
   init_blockers();
@@ -201,7 +202,7 @@ door_classify(parent_trig) {
     }
 
     switch (self.script_string) {
-      case # "anim":
+      case #"anim":
         assert(isDefined(self.script_animname), "<dev string:x38>" + self.targetname);
         assert(isDefined(level.scr_anim[self.script_animname]), "<dev string:x70>" + self.script_animname);
         assert(isDefined(level.var_6ecb5c15), "<dev string:xb5>");
@@ -267,7 +268,7 @@ door_buy() {
       who zm_stats::increment_challenge_stat(#"survivalist_buy_door");
       who zm_stats::forced_attachment("boas_doors_purchased");
       who zm_stats::function_c0c6ab19(#"doorbuys", 1, 1);
-      who contracts::increment_zm_contract(#"contract_zm_doors", 1, # "zstandard");
+      who contracts::increment_zm_contract(#"contract_zm_doors", 1, #"zstandard");
       self.purchaser = who;
       who namespace_e38c57c1::function_c3f3716();
     } else {
@@ -278,7 +279,7 @@ door_buy() {
       } else if(isDefined(level.custom_generic_deny_vo_func)) {
         who thread[[level.custom_generic_deny_vo_func]](1);
       } else {
-        who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+        who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       }
 
       return false;
@@ -312,13 +313,13 @@ function_5989dd12(a_doors) {
 
 force_open_door(e_activator) {
   self notify(#"trigger", {
-    #activator: e_activator,
+    #activator: e_activator, 
     #is_forced: 1
   });
 }
 
 blocker_update_prompt_visibility() {
-  self endon(#"kill_door_think", # "kill_debris_prompt_thread", # "death");
+  self endon(#"kill_door_think", #"kill_debris_prompt_thread", #"death");
   dist = 16384;
 
   while(true) {
@@ -353,9 +354,10 @@ door_delay() {
   wait self.script_int;
 
   for(i = 0; i < self.script_int; i++) {
+
     iprintln(self.script_int - i);
 
-    wait 1;
+      wait 1;
   }
 }
 
@@ -430,7 +432,7 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
   }
 
   switch (self.script_string) {
-    case # "rotate":
+    case #"rotate":
       if(isDefined(self.script_angles)) {
         rot_angle = self.script_angles;
 
@@ -448,8 +450,8 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "move":
-    case # "slide_apart":
+    case #"move":
+    case #"slide_apart":
       if(isDefined(self.script_vector)) {
         vector = vectorscale(self.script_vector, scale);
 
@@ -468,16 +470,16 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "anim":
+    case #"anim":
       self[[level.var_6ecb5c15]](self.script_animname);
       self thread door_solid_thread_anim();
       wait randomfloat(0.15);
       break;
-    case # "physics":
+    case #"physics":
       self thread physics_launch_door(self);
       wait 0.1;
       break;
-    case # "zbarrier":
+    case #"zbarrier":
       self thread door_zbarrier_move();
       break;
   }
@@ -612,7 +614,7 @@ waittill_door_can_close() {
   a_trigs = getEntArray(self.target, "target");
 
   switch (self.script_noteworthy) {
-    case # "local_electric_door":
+    case #"local_electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_local_power_off(trigger, a_trigs);
         self thread kill_trapped_zombies(trigger);
@@ -624,7 +626,7 @@ waittill_door_can_close() {
       }
 
       return;
-    case # "electric_door":
+    case #"electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_global_power_off(trigger, a_trigs);
 
@@ -650,7 +652,7 @@ door_think() {
 
   while(true) {
     switch (self.script_noteworthy) {
-      case # "local_electric_door":
+      case #"local_electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -688,7 +690,7 @@ door_think() {
         self sethintstring(#"hash_671e980430950a22");
         wait 3;
         continue;
-      case # "electric_door":
+      case #"electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -730,7 +732,7 @@ door_think() {
         self thread function_dafd2e5a();
         wait 3;
         continue;
-      case # "electric_buyable_door":
+      case #"electric_buyable_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -746,7 +748,7 @@ door_think() {
         }
 
         break;
-      case # "delay_door":
+      case #"delay_door":
         if(!self door_buy()) {
           continue;
         }
@@ -847,7 +849,7 @@ door_opened(cost, quick_close) {
   }
 
   level notify(#"door_opened", {
-    #e_player: self.purchaser,
+    #e_player: self.purchaser, 
     #t_blocker: self
   });
 
@@ -890,7 +892,7 @@ door_opened(cost, quick_close) {
       zm_utility::play_sound_at_pos("purchase", self.origin);
 
       if(isplayer(self.purchaser)) {
-        self.purchaser util::delay(1.25, "death", &zm_audio::create_and_play_dialog, # "door", # "open");
+        self.purchaser util::delay(1.25, "death", &zm_audio::create_and_play_dialog, #"door", #"open");
       }
     }
   }
@@ -932,7 +934,7 @@ physics_launch_door(door_trig) {
 }
 
 door_solid_thread() {
-  self waittill(#"rotatedone", # "movedone", # "death");
+  self waittill(#"rotatedone", #"movedone", #"death");
 
   if(isDefined(self)) {
     self.door_moving = undefined;
@@ -961,7 +963,7 @@ door_solid_thread() {
 door_solid_thread_anim() {
   self waittillmatch({
     #notetrack: "end"
-  }, # "door_anim");
+  }, #"door_anim");
   self.door_moving = undefined;
 
   while(true) {
@@ -1110,11 +1112,11 @@ debris_think() {
         who zm_stats::increment_challenge_stat(#"survivalist_buy_door", undefined, 1);
         who zm_stats::forced_attachment("boas_doors_purchased");
         who zm_stats::function_c0c6ab19(#"doorbuys", 1, 1);
-        who contracts::increment_zm_contract(#"contract_zm_doors", 1, # "zstandard");
+        who contracts::increment_zm_contract(#"contract_zm_doors", 1, #"zstandard");
         who namespace_e38c57c1::function_c3f3716();
       } else {
         zm_utility::play_sound_at_pos("no_purchase", self.origin);
-        who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+        who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
         continue;
       }
 
@@ -1132,7 +1134,7 @@ debris_think() {
 
       zm_utility::play_sound_at_pos("purchase", self.origin);
       level notify(#"junk purchased", {
-        #e_player: who,
+        #e_player: who, 
         #t_blocker: self
       });
       move_ent = undefined;
@@ -1318,7 +1320,7 @@ debris_think() {
 
 debris_zbarrier_move() {
   if(self.script_noteworthy !== "skip_buy_fx") {
-    playFX(level._effect[# "poltergeist"], self.origin);
+    playFX(level._effect[#"poltergeist"], self.origin);
   }
 
   for(i = 0; i < self getnumzbarrierpieces(); i++) {
@@ -1437,20 +1439,20 @@ function_bf35870e() {
   util::wait_network_frame();
 
   switch (self.objectid) {
-    case # "symbol_front_power":
-    case # "symbol_back_power":
+    case #"symbol_front_power":
+    case #"symbol_back_power":
       self clientfield::set("power_door_ambient_fx", 1);
       return;
-    case # "symbol_front_power_debris":
-    case # "symbol_back_power_debris":
+    case #"symbol_front_power_debris":
+    case #"symbol_back_power_debris":
       self clientfield::set("power_debris_ambient_fx", 1);
       return;
-    case # "symbol_back_debris":
-    case # "symbol_front_debris":
+    case #"symbol_back_debris":
+    case #"symbol_front_debris":
       self clientfield::set("debrisbuy_ambient_fx", 1);
       return;
-    case # "symbol_back":
-    case # "symbol_front":
+    case #"symbol_back":
+    case #"symbol_front":
       self clientfield::set("doorbuy_ambient_fx", 1);
       return;
     default:
@@ -1464,26 +1466,26 @@ function_f2f6ce12() {
   foreach(var_6c61edec in var_ba3135be) {
     if(isDefined(var_6c61edec.objectid) && !var_6c61edec zm_utility::function_1a4d2910()) {
       switch (var_6c61edec.objectid) {
-        case # "symbol_front_power":
-        case # "symbol_back_power":
+        case #"symbol_front_power":
+        case #"symbol_back_power":
           var_6c61edec clientfield::set("power_door_ambient_fx", 0);
           var_6c61edec clientfield::set("power_door_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_front_power_debris":
-        case # "symbol_back_power_debris":
+        case #"symbol_front_power_debris":
+        case #"symbol_back_power_debris":
           var_6c61edec clientfield::set("power_debris_ambient_fx", 0);
           var_6c61edec clientfield::set("power_debris_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_back_debris":
-        case # "symbol_front_debris":
+        case #"symbol_back_debris":
+        case #"symbol_front_debris":
           var_6c61edec clientfield::set("debrisbuy_ambient_fx", 0);
           var_6c61edec clientfield::set("debrisbuy_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_back":
-        case # "symbol_front":
+        case #"symbol_back":
+        case #"symbol_front":
           var_6c61edec clientfield::set("doorbuy_ambient_fx", 0);
           var_6c61edec clientfield::set("doorbuy_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
@@ -1566,8 +1568,9 @@ blocker_init() {
           if(targets[j].script_noteworthy == "2" || targets[j].script_noteworthy == "3" || targets[j].script_noteworthy == "4" || targets[j].script_noteworthy == "5" || targets[j].script_noteworthy == "6") {
             targets[j] hide();
 
+  
             iprintlnbold("<dev string:x259>");
-
+  
           }
         }
       } else if(targets[j].script_parameters == "repair_board") {
@@ -1608,7 +1611,7 @@ blocker_init() {
   target_nodes = getnodearray(self.target, "targetname");
 
   for(j = 0; j < target_nodes.size; j++) {
-    if(target_nodes[j].type == # "begin") {
+    if(target_nodes[j].type == #"begin") {
       self.neg_start = target_nodes[j];
 
       if(isDefined(self.neg_start.target)) {
@@ -1748,6 +1751,7 @@ blocker_attack_spots() {
   self.attack_spots = spots;
 
   self thread zm_utility::debug_attack_spots_taken();
+
 }
 
 blocker_choke() {
@@ -1836,7 +1840,7 @@ has_blocker_affecting_perk() {
   has_perk = undefined;
 
   if(isDefined(self) && self hasperk(#"specialty_fastreload")) {
-    has_perk = # "specialty_fastreload";
+    has_perk = #"specialty_fastreload";
   }
 
   return has_perk;
@@ -1852,7 +1856,7 @@ handle_post_board_repair_rewards(cost, zbarrier) {
   self zm_stats::increment_client_stat("boards");
   self zm_stats::increment_player_stat("boards");
   self zm_stats::forced_attachment("boas_boards");
-  self thread zm_audio::create_and_play_dialog(#"general", # "rebuild_boards");
+  self thread zm_audio::create_and_play_dialog(#"general", #"rebuild_boards");
 
   if(!isDefined(self.rebuild_barrier_reward)) {
     self.rebuild_barrier_reward = 0;
@@ -1945,128 +1949,128 @@ blocker_trigger_think() {
     thread zm_utility::debug_blocker(trigger_pos, radius, height);
   }
 
-  while(true) {
-    waitresult = self waittill(#"trigger");
-    player = waitresult.activator;
-
-    if(isDefined(level.var_aef7f7d5) && level.var_aef7f7d5) {
-      if(isDefined(self.unitrigger_stub) && !isDefined(self.unitrigger_stub.var_88312f4)) {
-        self.unitrigger_stub.var_88312f4 = self.unitrigger_stub.hint_string;
-        self.unitrigger_stub.hint_string = isDefined(level.var_b0612462) ? level.var_b0612462 : # "";
-      }
-
-      continue;
-    } else if(isDefined(self.unitrigger_stub) && isDefined(self.unitrigger_stub.var_88312f4)) {
-      self.unitrigger_stub.hint_string = self.unitrigger_stub.var_88312f4;
-      self.unitrigger_stub.var_88312f4 = undefined;
-    }
-
-    has_perk = player has_blocker_affecting_perk();
-
-    if(zm_utility::all_chunks_intact(self, self.barrier_chunks)) {
-      self notify(#"all_boards_repaired");
-      return;
-    }
-
-    if(zm_utility::no_valid_repairable_boards(self, self.barrier_chunks)) {
-      self notify(#"no valid boards");
-      return;
-    }
-
-    if(isDefined(level._zm_blocker_trigger_think_return_override)) {
-      if(self[[level._zm_blocker_trigger_think_return_override]](player)) {
-        return;
-      }
-    }
-
     while(true) {
-      players = getplayers();
-      trigger = self.unitrigger_stub zm_unitrigger::unitrigger_trigger(player);
+      waitresult = self waittill(#"trigger");
+      player = waitresult.activator;
 
-      if(player_fails_blocker_repair_trigger_preamble(player, players, trigger, 0)) {
-        break;
-      }
-
-      player notify(#"boarding_window", self);
-
-      if(isDefined(self.zbarrier)) {
-        chunk = zm_utility::get_random_destroyed_chunk(self, self.barrier_chunks);
-        self thread replace_chunk(self, chunk, has_perk);
-      } else {
-        chunk = zm_utility::get_random_destroyed_chunk(self, self.barrier_chunks);
-
-        if(isDefined(chunk.script_parameter) && chunk.script_parameters == "repair_board" || chunk.script_parameters == "barricade_vents") {
-          if(isDefined(chunk.unbroken_section)) {
-            chunk show();
-            chunk solid();
-            chunk.unbroken_section zm_utility::self_delete();
-          }
-        } else {
-          chunk show();
+      if(isDefined(level.var_aef7f7d5) && level.var_aef7f7d5) {
+        if(isDefined(self.unitrigger_stub) && !isDefined(self.unitrigger_stub.var_88312f4)) {
+          self.unitrigger_stub.var_88312f4 = self.unitrigger_stub.hint_string;
+          self.unitrigger_stub.hint_string = isDefined(level.var_b0612462) ? level.var_b0612462 : #"";
         }
 
-        if(!isDefined(chunk.script_parameters) || chunk.script_parameters == "board" || chunk.script_parameters == "repair_board" || chunk.script_parameters == "barricade_vents") {
-          if(!(isDefined(level.use_clientside_board_fx) && level.use_clientside_board_fx)) {
-            if(!isDefined(chunk.material) || isDefined(chunk.material) && chunk.material != "rock") {
-              chunk zm_utility::play_sound_on_ent("rebuild_barrier_piece");
-            }
-
-            playsoundatposition(#"zmb_cha_ching", (0, 0, 0));
-          }
-        }
-
-        if(chunk.script_parameters == "bar") {
-          chunk zm_utility::play_sound_on_ent("rebuild_barrier_piece");
-          playsoundatposition(#"zmb_cha_ching", (0, 0, 0));
-        }
-
-        if(isDefined(chunk.script_parameters)) {
-          if(chunk.script_parameters == "bar") {
-            if(isDefined(chunk.script_noteworthy)) {
-              if(chunk.script_noteworthy == "5") {
-                chunk hide();
-              } else if(chunk.script_noteworthy == "3") {
-                chunk hide();
-              }
-            }
-          }
-        }
-
-        self thread replace_chunk(self, chunk, has_perk);
+        continue;
+      } else if(isDefined(self.unitrigger_stub) && isDefined(self.unitrigger_stub.var_88312f4)) {
+        self.unitrigger_stub.hint_string = self.unitrigger_stub.var_88312f4;
+        self.unitrigger_stub.var_88312f4 = undefined;
       }
 
-      if(isDefined(self.clip)) {
-        self.clip triggerenable(1);
-        self.clip disconnectpaths();
-      } else {
-        blocker_disconnect_paths(self.neg_start, self.neg_end);
-      }
-
-      self do_post_chunk_repair_delay(has_perk);
-
-      if(!zm_utility::is_player_valid(player)) {
-        break;
-      }
-
-      player handle_post_board_repair_rewards(cost, self);
-      level notify(#"board_repaired", {
-        #player: player,
-        #s_board: self
-      });
+      has_perk = player has_blocker_affecting_perk();
 
       if(zm_utility::all_chunks_intact(self, self.barrier_chunks)) {
         self notify(#"all_boards_repaired");
-        player increment_window_repaired();
         return;
       }
 
       if(zm_utility::no_valid_repairable_boards(self, self.barrier_chunks)) {
         self notify(#"no valid boards");
-        player increment_window_repaired(self);
         return;
       }
+
+      if(isDefined(level._zm_blocker_trigger_think_return_override)) {
+        if(self[[level._zm_blocker_trigger_think_return_override]](player)) {
+          return;
+        }
+      }
+
+      while(true) {
+        players = getplayers();
+        trigger = self.unitrigger_stub zm_unitrigger::unitrigger_trigger(player);
+
+        if(player_fails_blocker_repair_trigger_preamble(player, players, trigger, 0)) {
+          break;
+        }
+
+        player notify(#"boarding_window", self);
+
+        if(isDefined(self.zbarrier)) {
+          chunk = zm_utility::get_random_destroyed_chunk(self, self.barrier_chunks);
+          self thread replace_chunk(self, chunk, has_perk);
+        } else {
+          chunk = zm_utility::get_random_destroyed_chunk(self, self.barrier_chunks);
+
+          if(isDefined(chunk.script_parameter) && chunk.script_parameters == "repair_board" || chunk.script_parameters == "barricade_vents") {
+            if(isDefined(chunk.unbroken_section)) {
+              chunk show();
+              chunk solid();
+              chunk.unbroken_section zm_utility::self_delete();
+            }
+          } else {
+            chunk show();
+          }
+
+          if(!isDefined(chunk.script_parameters) || chunk.script_parameters == "board" || chunk.script_parameters == "repair_board" || chunk.script_parameters == "barricade_vents") {
+            if(!(isDefined(level.use_clientside_board_fx) && level.use_clientside_board_fx)) {
+              if(!isDefined(chunk.material) || isDefined(chunk.material) && chunk.material != "rock") {
+                chunk zm_utility::play_sound_on_ent("rebuild_barrier_piece");
+              }
+
+              playsoundatposition(#"zmb_cha_ching", (0, 0, 0));
+            }
+          }
+
+          if(chunk.script_parameters == "bar") {
+            chunk zm_utility::play_sound_on_ent("rebuild_barrier_piece");
+            playsoundatposition(#"zmb_cha_ching", (0, 0, 0));
+          }
+
+          if(isDefined(chunk.script_parameters)) {
+            if(chunk.script_parameters == "bar") {
+              if(isDefined(chunk.script_noteworthy)) {
+                if(chunk.script_noteworthy == "5") {
+                  chunk hide();
+                } else if(chunk.script_noteworthy == "3") {
+                  chunk hide();
+                }
+              }
+            }
+          }
+
+          self thread replace_chunk(self, chunk, has_perk);
+        }
+
+        if(isDefined(self.clip)) {
+          self.clip triggerenable(1);
+          self.clip disconnectpaths();
+        } else {
+          blocker_disconnect_paths(self.neg_start, self.neg_end);
+        }
+
+        self do_post_chunk_repair_delay(has_perk);
+
+        if(!zm_utility::is_player_valid(player)) {
+          break;
+        }
+
+        player handle_post_board_repair_rewards(cost, self);
+        level notify(#"board_repaired", {
+          #player: player, 
+          #s_board: self
+        });
+
+        if(zm_utility::all_chunks_intact(self, self.barrier_chunks)) {
+          self notify(#"all_boards_repaired");
+          player increment_window_repaired();
+          return;
+        }
+
+        if(zm_utility::no_valid_repairable_boards(self, self.barrier_chunks)) {
+          self notify(#"no valid boards");
+          player increment_window_repaired(self);
+          return;
+        }
+      }
     }
-  }
 }
 
 increment_window_repaired(s_barrier) {
@@ -2174,10 +2178,10 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       dest = ent.origin + anglesToForward(ent.angles) * dist;
       trace = bulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), 0, undefined);
 
-      if(trace[# "fraction"] == 1) {
+      if(trace[#"fraction"] == 1) {
         dest += (0, 0, -200);
       } else {
-        dest = trace[# "position"];
+        dest = trace[#"position"];
       }
 
       chunk linkto(ent);
@@ -2208,10 +2212,10 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       dest = ent.origin + anglesToForward(ent.angles) * dist;
       trace = bulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), 0, undefined);
 
-      if(trace[# "fraction"] == 1) {
+      if(trace[#"fraction"] == 1) {
         dest += (0, 0, -200);
       } else {
-        dest = trace[# "position"];
+        dest = trace[#"position"];
       }
 
       chunk linkto(ent);
@@ -2248,10 +2252,10 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
     dest = ent.origin + anglesToForward(ent.angles) * dist;
     trace = bulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), 0, undefined);
 
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       dest += (0, 0, -200);
     } else {
-      dest = trace[# "position"];
+      dest = trace[#"position"];
     }
 
     chunk linkto(ent);
@@ -2292,10 +2296,10 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       dest = ent.origin + anglesToForward(ent.angles) * dist;
       trace = bulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), 0, undefined);
 
-      if(trace[# "fraction"] == 1) {
+      if(trace[#"fraction"] == 1) {
         dest += (0, 0, -200);
       } else {
-        dest = trace[# "position"];
+        dest = trace[#"position"];
       }
 
       chunk linkto(ent);
@@ -2412,7 +2416,7 @@ replace_chunk(barrier, chunk, has_perk, via_powerup) {
   barrier.zbarrier.chunk_health[chunk] = 0;
   scalar = 1;
 
-  if(has_perk === # "specialty_fastreload") {
+  if(has_perk === #"specialty_fastreload") {
     scalar = 0.31;
   }
 
@@ -2557,41 +2561,41 @@ zombie_gratetear_audio_plus_fx_offset_repair_horizontal(chunk) {
 
   switch (randomint(9)) {
     case 0:
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       wait randomfloatrange(0, 0.3);
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       break;
     case 1:
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       wait randomfloatrange(0, 0.3);
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       break;
     case 2:
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       wait randomfloatrange(0, 0.3);
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       break;
     case 3:
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       wait randomfloatrange(0, 0.3);
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       break;
     case 4:
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       wait randomfloatrange(0, 0.3);
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       break;
     case 5:
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       break;
     case 6:
-      playFX(level._effect[# "fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break_lite"], chunk.origin + (-30, 0, 0));
       break;
     case 7:
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       break;
     case 8:
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin + (-30, 0, 0));
       break;
   }
 }
@@ -2602,41 +2606,41 @@ zombie_bartear_audio_plus_fx_offset_repair_horizontal(chunk) {
 
   switch (randomint(9)) {
     case 0:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
       break;
     case 1:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_left");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
       break;
     case 2:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
       break;
     case 3:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_left");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
       break;
     case 4:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
       break;
     case 5:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
       break;
     case 6:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
       break;
     case 7:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_left");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_left");
       break;
     case 8:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
       break;
   }
 }
@@ -2647,41 +2651,41 @@ zombie_bartear_audio_plus_fx_offset_repair_verticle(chunk) {
 
   switch (randomint(9)) {
     case 0:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
       break;
     case 1:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
       break;
     case 2:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
       break;
     case 3:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
       break;
     case 4:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
       wait randomfloatrange(0, 0.3);
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
       break;
     case 5:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
       break;
     case 6:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
       break;
     case 7:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
       break;
     case 8:
-      playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+      playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
       break;
   }
 }

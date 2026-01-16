@@ -7,6 +7,7 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\system_shared;
+
 #namespace aisquads;
 
 class squad {
@@ -45,7 +46,7 @@ class squad {
 
   function addaitosquad(ai) {
     if(!isinarray(squadmembers, ai)) {
-      if(ai.archetype == # "robot") {
+      if(ai.archetype == #"robot") {
         ai ai::set_behavior_attribute("move_mode", "squadmember");
       }
 

@@ -17,6 +17,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_ai_utility;
 
 autoexec __init__system__() {
@@ -75,9 +76,9 @@ private function_a19d7104(settingsbundle) {
     }
 
     level.var_532264f5[settingsbundle.name][var_e8d7c6d7.weaponid] = {
-      #var_c6cc6205: var_e8d7c6d7.damagescale,
-      #var_fff93f95: var_e8d7c6d7.weakpointdamagescale,
-      #var_8e22aa87: var_e8d7c6d7.instakilldamagescale,
+      #var_c6cc6205: var_e8d7c6d7.damagescale, 
+      #var_fff93f95: var_e8d7c6d7.weakpointdamagescale, 
+      #var_8e22aa87: var_e8d7c6d7.instakilldamagescale, 
       #var_fac896db: var_e8d7c6d7.var_97b22faa
     };
   }
@@ -133,7 +134,7 @@ function_594bb7bd(player) {
 
 get_pathnode_path(pathnode) {
   path_struct = {
-    #path: array(pathnode),
+    #path: array(pathnode), 
     #loops: 0
   };
   var_592eaf7 = pathnode;
@@ -176,7 +177,7 @@ stop_patrol(entity) {
 
 private update_patrol(entity, patrol_path, var_b90f0f49, var_73fcb9ff, var_572b1f58) {
   entity notify(#"stop_patrol");
-  entity endon(#"death", # "stop_patrol");
+  entity endon(#"death", #"stop_patrol");
 
   if(!entity ai::has_behavior_attribute("patrol")) {
     return;
@@ -239,7 +240,7 @@ function_db610082() {
     return false;
   }
 
-  if(self.archetype !== # "zombie") {
+  if(self.archetype !== #"zombie") {
     return false;
   }
 
@@ -291,7 +292,7 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   var_201ce857 = var_8d3f5b7d && attacker zm_powerups::is_insta_kill_active();
   var_84ed9a13 = function_de3dda83(var_5457dc44, hitloc, point, var_ebcb86d6);
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
 
   if(entity function_94d76123(weapon)) {
     var_532264f5 = entity function_86cb3728(weapon);
@@ -325,14 +326,14 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
       } else {
         var_b1c1c5cf *= 1.2;
       }
-    } else if(registerzombie_bgb_used_reinforce && var_84ed9a13.type == # "armor" && weaponhasattachment(weapon, "fmj2")) {
-      if(self.zm_ai_category == # "boss") {
+    } else if(registerzombie_bgb_used_reinforce && var_84ed9a13.type == #"armor" && weaponhasattachment(weapon, "fmj2")) {
+      if(self.zm_ai_category == #"boss") {
         var_b1c1c5cf *= 1.1;
       } else {
         var_b1c1c5cf = min(1, var_b1c1c5cf + 0.1);
       }
     } else if(has_weakpoints && !registerzombie_bgb_used_reinforce && weaponhasattachment(weapon, "fmj") && var_b1c1c5cf < 1) {
-      if(self.zm_ai_category == # "boss") {
+      if(self.zm_ai_category == #"boss") {
         var_b1c1c5cf *= 1.1;
       } else {
         var_b1c1c5cf = min(1, var_b1c1c5cf + 0.1);
@@ -341,9 +342,9 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   }
 
   return {
-    #damage_scale: var_b1c1c5cf,
-    #var_84ed9a13: var_84ed9a13,
-    #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce,
+    #damage_scale: var_b1c1c5cf, 
+    #var_84ed9a13: var_84ed9a13, 
+    #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce, 
     #var_201ce857: var_201ce857
   };
 }
@@ -396,18 +397,20 @@ function_a2e8fd7b(entity, player, var_3f120c4d = 4) {
 
 make_zombie_target(entity) {
   if(isinarray(level.zombie_targets, entity)) {
+
     iprintlnbold("<dev string:x9d>" + entity getentitynumber() + "<dev string:xa7>");
 
-    return false;
+      return false;
   }
 
   function_1eaaceab(level.zombie_targets);
   arrayremovevalue(level.zombie_targets, undefined);
 
   if(level.zombie_targets.size + 4 >= 16) {
+
     iprintlnbold("<dev string:xc5>" + entity getentitynumber() + "<dev string:xde>");
 
-    return false;
+      return false;
   }
 
   if(!isDefined(entity.am_i_valid)) {
@@ -430,9 +433,10 @@ is_zombie_target(entity) {
 
 remove_zombie_target(entity) {
   if(!isinarray(level.zombie_targets, entity)) {
+
     iprintlnbold("<dev string:x9d>" + entity getentitynumber() + "<dev string:x10a>");
 
-    return false;
+      return false;
   }
 
   arrayremovevalue(level.zombie_targets, entity);
@@ -465,7 +469,9 @@ function_991333ce(entity, ai_array) {
   foreach(enemy in enemies) {
     if(enemy.favoriteenemy === entity) {
       if(isDefined(enemy.var_ef1ed308)) {
-        [[enemy.var_ef1ed308]](enemy);
+        [
+          [enemy.var_ef1ed308]
+        ](enemy);
       } else {
         enemy.favoriteenemy = undefined;
       }
@@ -510,7 +516,7 @@ function_a8dc3363(s_location) {
     self.at_entrance_tear_spot = undefined;
     self.spawn_time = gettime();
 
-    if((self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") && s_location.script_noteworthy != "spawn_location" && s_location.script_noteworthy != "blight_father_location") {
+    if((self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") && s_location.script_noteworthy != "spawn_location" && s_location.script_noteworthy != "blight_father_location") {
       self.spawn_pos = undefined;
       self zm_utility::move_zombie_spawn_location(s_location);
     }

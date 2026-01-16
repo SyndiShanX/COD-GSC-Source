@@ -20,14 +20,14 @@
 #namespace namespace_64c6b720;
 
 function init() {
-  clientfield::register("world", "set_scoreHidden", 1, 1, "int", &function_7fe5e3f4, 0, 0);
-  for(i = 0; i < 4; i++) {
-    clientfield::register("world", "set_ui_gprDOA" + i, 1, 30, "int", &function_2db8b053, 0, 0);
-    clientfield::register("world", "set_ui_gpr2DOA" + i, 1, 30, "int", &function_b9397b2b, 0, 0);
-    clientfield::register("world", "set_ui_GlobalGPR" + i, 1, 30, "int", &function_e0f15ca4, 0, 0);
+  clientfield::register("world", "set_scoreHidden", 1, 1, "int", & function_7fe5e3f4, 0, 0);
+  for (i = 0; i < 4; i++) {
+    clientfield::register("world", "set_ui_gprDOA" + i, 1, 30, "int", & function_2db8b053, 0, 0);
+    clientfield::register("world", "set_ui_gpr2DOA" + i, 1, 30, "int", & function_b9397b2b, 0, 0);
+    clientfield::register("world", "set_ui_GlobalGPR" + i, 1, 30, "int", & function_e0f15ca4, 0, 0);
   }
-  clientfield::register("world", "startCountdown", 1, 3, "int", &function_75319a37, 0, 0);
-  callback::on_spawned(&on_player_spawn);
+  clientfield::register("world", "startCountdown", 1, 3, "int", & function_75319a37, 0, 0);
+  callback::on_spawned( & on_player_spawn);
   function_6fa6dee2();
 }
 
@@ -57,7 +57,7 @@ function function_6fa6dee2() {
   setuimodelvalue(createuimodel(level.var_7e2a814c, "changingLevel"), 0);
   level.var_b9d30140 = [];
   var_483f522 = createuimodel(globalmodel, "DeadOpsArcadePlayers");
-  for(i = 1; i <= 4; i++) {
+  for (i = 1; i <= 4; i++) {
     model = createuimodel(var_483f522, "player" + i);
     setuimodelvalue(createuimodel(model, "name"), "");
     setuimodelvalue(createuimodel(model, "lives"), 0);
@@ -81,8 +81,8 @@ function function_6fa6dee2() {
   level.var_c8a4d758 = 0;
   level.gpr = array(0, 0, 0, 0);
   level.var_29e6f519 = [];
-  for(i = 0; i < 4; i++) {
-    doa = spawnStruct();
+  for (i = 0; i < 4; i++) {
+    doa = spawnstruct();
     doa.ui_model = level.var_b9d30140[i];
     level.var_29e6f519[level.var_29e6f519.size] = doa;
     function_e06716c7(doa, i);
@@ -93,17 +93,17 @@ function function_6fa6dee2() {
 }
 
 function function_d3f117f9(doa, idx) {
-  if(!isDefined(doa)) {
+  if(!isdefined(doa)) {
     return;
   }
-  for(i = 0; i < level.var_29e6f519.size; i++) {
+  for (i = 0; i < level.var_29e6f519.size; i++) {
     if(level.var_29e6f519[i] == doa) {
       idx = i;
       break;
     }
   }
   loc_00001094:
-    txt = (("" + (isDefined(idx) ? idx : "")) + "") + (isDefined(doa.player) ? doa.player getentitynumber() : "");
+    txt = (("" + (isdefined(idx) ? idx : "")) + "") + (isdefined(doa.player) ? doa.player getentitynumber() : "");
   namespace_693feb87::debugmsg(txt);
   doa.score = 0;
   doa.var_db3637c0 = 0;
@@ -123,7 +123,7 @@ function function_d3f117f9(doa, idx) {
 
 function function_e06716c7(doa, idx) {
   function_d3f117f9(doa, idx);
-  if(isDefined(doa.ui_model) && isDefined(getuimodel(doa.ui_model, "name"))) {
+  if(isdefined(doa.ui_model) && isdefined(getuimodel(doa.ui_model, "name"))) {
     setuimodelvalue(getuimodel(doa.ui_model, "name"), doa.name);
     setuimodelvalue(getuimodel(doa.ui_model, "lives"), doa.lives);
     setuimodelvalue(getuimodel(doa.ui_model, "bombs"), doa.bombs);
@@ -147,7 +147,7 @@ function function_e06716c7(doa, idx) {
 function function_cdb6d911() {
   self notify("hash_cdb6d911");
   self endon("hash_cdb6d911");
-  while(true) {
+  while (true) {
     foreach(model in level.var_b9d30140) {
       setuimodelvalue(getuimodel(model, "ribbon"), 0);
     }
@@ -157,7 +157,7 @@ function function_cdb6d911() {
         var_324ecf57 = doa;
       }
     }
-    if(getplayers(0).size > 1 && isDefined(var_324ecf57)) {
+    if(getplayers(0).size > 1 && isdefined(var_324ecf57)) {
       setuimodelvalue(getuimodel(var_324ecf57.ui_model, "ribbon"), 1);
     }
     wait(1);
@@ -167,9 +167,9 @@ function function_cdb6d911() {
 function function_4d819138() {
   self notify("hash_4d819138");
   self endon("hash_4d819138");
-  while(true) {
+  while (true) {
     foreach(doa in level.var_29e6f519) {
-      if(!isDefined(doa.player)) {
+      if(!isdefined(doa.player)) {
         continue;
       }
       var_9c4a2a35 = doa.player.score + (doa.var_db3637c0 * int(4000000));
@@ -196,27 +196,27 @@ function function_4d819138() {
 function function_2c9a6a47() {
   self notify("hash_2c9a6a47");
   self endon("hash_2c9a6a47");
-  while(true) {
+  while (true) {
     wait(0.016);
     foreach(doa in level.var_29e6f519) {
       setuimodelvalue(getuimodel(doa.ui_model, "respawn"), "");
-      if(isDefined(level.var_c8a4d758) && level.var_c8a4d758) {
+      if(isdefined(level.var_c8a4d758) && level.var_c8a4d758) {
         setuimodelvalue(getuimodel(doa.ui_model, "name"), "");
         setuimodelvalue(getuimodel(doa.ui_model, "weaplevel1"), 0);
         setuimodelvalue(getuimodel(doa.ui_model, "weaplevel2"), 0);
       } else {
         name = "";
-        if(isDefined(doa.player) && isDefined(doa.player.name)) {
+        if(isdefined(doa.player) && isdefined(doa.player.name)) {
           name = doa.player.name;
         }
         setuimodelvalue(getuimodel(doa.ui_model, "name"), name);
-        if(isDefined(doa.var_c86225b5) && doa.var_c86225b5) {
+        if(isdefined(doa.var_c86225b5) && doa.var_c86225b5) {
           setuimodelvalue(createuimodel(doa.ui_model, "name"), istring("DOA_RESPAWNING"));
           val = "" + (int(ceil(doa.var_c4c3767e * 60)));
           setuimodelvalue(getuimodel(doa.ui_model, "respawn"), val);
         }
       }
-      if(isDefined(doa.player)) {
+      if(isdefined(doa.player)) {
         doa.lives = (doa.player.headshots & 61440) >> 12;
         doa.bombs = (doa.player.headshots & 3840) >> 8;
         doa.boosters = (doa.player.headshots & 240) >> 4;
@@ -227,7 +227,7 @@ function function_2c9a6a47() {
         doa.var_c86225b5 = doa.player.assists & 1;
         doa.var_db3637c0 = doa.player.assists >> 2;
         doa.var_c88a6593 = doa.player.revives & 3;
-        if(!isDefined(doa.player.var_8064cb04) || doa.player.var_8064cb04 != doa.var_c88a6593) {
+        if(!isdefined(doa.player.var_8064cb04) || doa.player.var_8064cb04 != doa.var_c88a6593) {
           level notify("hash_aae01d5a", doa.player.entnum, doa.var_c88a6593);
         }
       }
@@ -239,7 +239,7 @@ function function_2c9a6a47() {
       setuimodelvalue(getuimodel(doa.ui_model, "bulletbar"), doa.var_4d5a5848);
       setuimodelvalue(getuimodel(doa.ui_model, "weaplevel1"), 0);
       setuimodelvalue(getuimodel(doa.ui_model, "weaplevel2"), 0);
-      if(!(isDefined(level.var_c8a4d758) && level.var_c8a4d758)) {
+      if(!(isdefined(level.var_c8a4d758) && level.var_c8a4d758)) {
         switch (doa.var_4f0e30c) {
           case 0: {
             setuimodelvalue(getuimodel(doa.ui_model, "weaplevel1"), 0);
@@ -268,16 +268,16 @@ function function_2c9a6a47() {
 }
 
 function on_shutdown(localclientnum, ent) {
-  if(isDefined(ent) && self === ent) {
-    namespace_693feb87::debugmsg("" + (isDefined(self.name) ? self.name : self getentitynumber()));
-    if(isDefined(self.doa)) {
+  if(isdefined(ent) && self === ent) {
+    namespace_693feb87::debugmsg("" + (isdefined(self.name) ? self.name : self getentitynumber()));
+    if(isdefined(self.doa)) {
       function_e06716c7(self.doa);
     }
   }
 }
 
 function on_player_spawn(localclientnum) {
-  self callback::on_shutdown(&on_shutdown, self);
+  self callback::on_shutdown( & on_shutdown, self);
 }
 
 function function_7fe5e3f4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -312,7 +312,7 @@ function function_75319a37(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval == 0) {
     return;
   }
-  if(isDefined(level.var_b1ce5a88) && level.var_b1ce5a88) {
+  if(isdefined(level.var_b1ce5a88) && level.var_b1ce5a88) {
     return;
   }
   level thread function_56dd76b(newval);
@@ -322,7 +322,7 @@ function function_a08fe7c3(totaltime) {
   totaltime = totaltime * 1000;
   curtime = gettime();
   endtime = curtime + totaltime;
-  while(curtime < endtime) {
+  while (curtime < endtime) {
     curtime = gettime();
     diff = endtime - curtime;
     ratio = diff / totaltime;
@@ -338,9 +338,9 @@ function function_56dd76b(val) {
   level.var_b1ce5a88 = 1;
   startval = val;
   level thread function_a08fe7c3(startval * 1.1);
-  while(val > 0) {
+  while (val > 0) {
     setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), "" + val);
-    playSound(0, "evt_countdown", (0, 0, 0));
+    playsound(0, "evt_countdown", (0, 0, 0));
     wait(1.05);
     setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), "");
     wait(0.016);
@@ -348,8 +348,8 @@ function function_56dd76b(val) {
     level notify("countdown", val);
   }
   level notify("countdown", 0);
-  setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), &"CP_DOA_BO3_GO");
-  playSound(0, "evt_countdown_go", (0, 0, 0));
+  setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), & "CP_DOA_BO3_GO");
+  playsound(0, "evt_countdown_go", (0, 0, 0));
   wait(1.1);
   setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), "");
   level.var_b1ce5a88 = 0;

@@ -10,6 +10,7 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\auto_turret;
+
 #namespace guardian_turret;
 
 autoexec __init__system__() {
@@ -41,7 +42,7 @@ function_ab51fb9e(params) {
 
 function_21304ee6(params) {
   guardian = self;
-  guardian endon(#"death", # "change_state");
+  guardian endon(#"death", #"change_state");
 
   if(isDefined(guardian.enemy)) {
     auto_turret::sentry_turret_alert_sound();
@@ -83,7 +84,7 @@ stopmicrowave() {
 
 function_e341abb9(totalfiretime, enemy) {
   guardian = self;
-  guardian endon(#"death", # "change_state");
+  guardian endon(#"death", #"change_state");
   auto_turret::sentry_turret_alert_sound();
   wait 0.1;
   weapon = guardian seatgetweapon(0);

@@ -4,27 +4,25 @@
 *****************************************************/
 
 init() {
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _ingamemenus.gsc. Function: init()\n");
-  }
   level.xenon = (getdvar("xenonGame") == "true");
   level.consoleGame = (getdvar("consoleGame") == "true");
   precacheMenu("loadout_splitscreen");
   level thread onPlayerConnect();
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _ingamemenus.gsc. Function: init() - COMPLETE\n");
-  }
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onMenuResponse();
   }
 }
 
 onMenuResponse() {
-  for(;;) {
+  for (;;) {
     self waittill("menuresponse", menu, response);
     if(menu == "loadout_splitscreen") {
       self closeMenu();

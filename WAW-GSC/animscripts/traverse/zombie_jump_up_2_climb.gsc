@@ -54,17 +54,15 @@ handle_death(note) {
   if(self.health == 1) {
     self.a.nodeath = true;
     if(self.traverseDeath > 1) {
-      if(randomFloat(1) > 0.5) {
+      if(randomFloat(1) > 0.5)
         self setFlaggedAnimKnobAll("deathanim", % traverse40_death_end_2, % body, 1, .2, 1);
-      } else {
+      else
         self setFlaggedAnimKnobAll("deathanim", % traverse40_death_end, % body, 1, .2, 1);
-      }
     } else {
-      if(randomFloat(1) > 0.5) {
+      if(randomFloat(1) > 0.5)
         self setFlaggedAnimKnobAll("deathanim", % traverse40_death_start_2, % body, 1, .2, 1);
-      } else {
+      else
         self setFlaggedAnimKnobAll("deathanim", % traverse40_death_start, % body, 1, .2, 1);
-      }
     }
     self animscripts\face::SayGenericDialogue("death");
   }

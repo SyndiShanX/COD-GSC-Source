@@ -8,10 +8,11 @@
 #include scripts\core_common\infection;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace infection;
 
 autoexec __init__system__() {
-  system::register(#"wz_infection", &__init__, undefined, # "infection");
+  system::register(#"wz_infection", &__init__, undefined, #"infection");
 }
 
 private __init__() {
@@ -21,8 +22,8 @@ private __init__() {
 
   clientfield::register("toplayer", "infected", 21000, 1, "int", &_infected, 0, 0);
   callback::on_localclient_connect(&on_localclient_connect);
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
 }
 
 on_localclient_connect(localclientnum) {
@@ -42,10 +43,10 @@ private function_667d34b7(localclientnum) {
 
       if(infected === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        function_a837926b(localclientnum, # "hash_29b452119475ca86");
+        function_a837926b(localclientnum, #"hash_29b452119475ca86");
       } else if(infected === 0 && var_d5823792) {
         var_d5823792 = 0;
-        function_24cd4cfb(localclientnum, # "hash_29b452119475ca86");
+        function_24cd4cfb(localclientnum, #"hash_29b452119475ca86");
       }
     }
 
@@ -56,9 +57,9 @@ private function_667d34b7(localclientnum) {
 private _infected(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self thread function_325e85a2(localclientnum);
-    playSound(0, # "zmb_zombie_spawn", self.origin);
-    burst_fx = level._effect[# "rise_burst"];
-    billow_fx = level._effect[# "rise_billow"];
+    playSound(0, #"zmb_zombie_spawn", self.origin);
+    burst_fx = level._effect[#"rise_burst"];
+    billow_fx = level._effect[#"rise_billow"];
     self thread rise_dust_fx(localclientnum, billow_fx, burst_fx);
     return;
   }

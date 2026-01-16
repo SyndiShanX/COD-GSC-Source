@@ -72,15 +72,14 @@ init() {
   level.maxPrestige = int(tableLookup("mp/rankIconTable.csv", 0, "maxprestige", 1));
   pId = 0;
   rId = 0;
-  for(pId = 0; pId <= level.maxPrestige; pId++) {
-    for(rId = 0; rId <= level.maxRank; rId++) {
+  for (pId = 0; pId <= level.maxPrestige; pId++) {
+    for (rId = 0; rId <= level.maxRank; rId++)
       precacheShader(tableLookup("mp/rankIconTable.csv", 0, rId, pId + 1));
-    }
   }
   rankId = 0;
   rankName = tableLookup("mp/ranktable.csv", 0, rankId, 1);
   assert(isDefined(rankName) && rankName != "");
-  while(isDefined(rankName) && rankName != "") {
+  while (isDefined(rankName) && rankName != "") {
     level.rankTable[rankId][1] = tableLookup("mp/ranktable.csv", 0, rankId, 1);
     level.rankTable[rankId][2] = tableLookup("mp/ranktable.csv", 0, rankId, 2);
     level.rankTable[rankId][3] = tableLookup("mp/ranktable.csv", 0, rankId, 3);
@@ -108,22 +107,20 @@ getCodPointsCapped(inCodPoints) {
   return inCodPoints;
 }
 isRegisteredEvent(type) {
-  if(isDefined(level.scoreInfo[type])) {
+  if(isDefined(level.scoreInfo[type]))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 registerScoreInfo(type, value) {
   level.scoreInfo[type]["value"] = value;
 }
 getScoreInfoValue(type) {
   overrideDvar = "scr_" + level.gameType + "_score_" + type;
-  if(getDvar(overrideDvar) != "") {
+  if(getDvar(overrideDvar) != "")
     return getDvarInt(overrideDvar);
-  } else {
+  else
     return (level.scoreInfo[type]["value"]);
-  }
 }
 getScoreInfoLabel(type) {
   return (level.scoreInfo[type]["label"]);
@@ -184,7 +181,7 @@ getRankXpStat() {
   return rankXpCapped;
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player.pers["rankxp"] = player getRankXpStat();
     player.pers["codpoints"] = player getCodPointsStat();
@@ -196,9 +193,8 @@ onPlayerConnect() {
       kick(player getEntityNumber());
       continue;
     }
-    if(!isDefined(player.pers["participation"]) || !((level.gameType == "twar") && (0 < game["roundsplayed"]) && (0 < player.pers["participation"]))) {
+    if(!isDefined(player.pers["participation"]) || !((level.gameType == "twar") && (0 < game["roundsplayed"]) && (0 < player.pers["participation"])))
       player.pers["participation"] = 0;
-    }
     player.rankUpdateTotal = 0;
     player.cur_rankNum = rankId;
     assertex(isDefined(player.cur_rankNum), "rank: " + rankId + " does not have an index, check mp/ranktable.csv");
@@ -230,21 +226,21 @@ onPlayerConnect() {
 }
 onJoinedTeam() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_team");
     self thread removeRankHUD();
   }
 }
 onJoinedSpectators() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_spectators");
     self thread removeRankHUD();
   }
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     if(!isDefined(self.hud_rankscroreupdate)) {
       self.hud_rankscroreupdate = NewScoreHudElem(self);
@@ -253,11 +249,10 @@ onPlayerSpawned() {
       self.hud_rankscroreupdate.alignX = "center";
       self.hud_rankscroreupdate.alignY = "middle";
       self.hud_rankscroreupdate.x = 0;
-      if(self IsSplitscreen()) {
+      if(self IsSplitscreen())
         self.hud_rankscroreupdate.y = -15;
-      } else {
+      else
         self.hud_rankscroreupdate.y = -60;
-      }
       self.hud_rankscroreupdate.font = "default";
       self.hud_rankscroreupdate.fontscale = 2.0;
       self.hud_rankscroreupdate.archived = false;
@@ -270,12 +265,10 @@ onPlayerSpawned() {
   }
 }
 incCodPoints(amount) {
-  if(!isRankEnabled()) {
+  if(!isRankEnabled())
     return;
-  }
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
   if(self HasPerk("specialty_extramoney")) {
     multiplier = GetDvarFloat(#"perk_extraMoneyMultiplier");
     amount *= multiplier;
@@ -290,21 +283,17 @@ incCodPoints(amount) {
 }
 giveRankXP(type, value, devAdd) {
   self endon("disconnect");
-  if(level.teamBased && (!level.playerCount["allies"] || !level.playerCount["axis"]) && !isDefined(devAdd)) {
+  if(level.teamBased && (!level.playerCount["allies"] || !level.playerCount["axis"]) && !isDefined(devAdd))
     return;
-  } else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2) && !isDefined(devAdd)) {
+  else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2) && !isDefined(devAdd))
     return;
-  }
-  if(!isRankEnabled()) {
+  if(!isRankEnabled())
     return;
-  }
-  if(level.wagerMatch || !level.onlineGame || (GetDvarInt(#"xblive_privatematch") && !GetDvarInt(#"xblive_basictraining"))) {
+  if(level.wagerMatch || !level.onlineGame || (GetDvarInt(#"xblive_privatematch") && !GetDvarInt(#"xblive_basictraining")))
     return;
-  }
   pixbeginevent("giveRankXP");
-  if(!isDefined(value)) {
+  if(!isDefined(value))
     value = getScoreInfoValue(type);
-  }
   switch (type) {
     case "assist":
     case "assist_25":
@@ -320,9 +309,8 @@ giveRankXP(type, value, devAdd) {
       xpGain_type = type;
       break;
   }
-  if(!isDefined(self.xpGains[xpGain_type])) {
+  if(!isDefined(self.xpGains[xpGain_type]))
     self.xpGains[xpGain_type] = 0;
-  }
   if(level.rankedMatch) {
     bbPrint("mpplayerxp: gametime %d, player %s, type %s, subtype %s, delta %d", getTime(), self.name, xpGain_type, type, value);
   }
@@ -357,25 +345,22 @@ giveRankXP(type, value, devAdd) {
       value = int(value * level.xpScale);
       break;
     default:
-      if(level.xpScale == 0) {
+      if(level.xpScale == 0)
         value = 0;
-      }
       break;
   }
   self.xpGains[xpGain_type] += value;
   xpIncrease = self incRankXP(value);
-  if(level.rankedMatch && updateRank()) {
+  if(level.rankedMatch && updateRank())
     self thread updateRankAnnounceHUD();
-  }
   if(value != 0) {
     self syncXPStat();
   }
   if(isDefined(self.enableText) && self.enableText && !level.hardcoreMode) {
-    if(type == "teamkill") {
+    if(type == "teamkill")
       self thread updateRankScoreHUD(0 - getScoreInfoValue("kill"));
-    } else {
+    else
       self thread updateRankScoreHUD(value);
-    }
   }
   switch (type) {
     case "kill":
@@ -425,20 +410,18 @@ round_this_number(value) {
 }
 updateRank() {
   newRankId = self getRank();
-  if(newRankId == self.pers["rank"]) {
+  if(newRankId == self.pers["rank"])
     return false;
-  }
   oldRank = self.pers["rank"];
   rankId = self.pers["rank"];
   self.pers["rank"] = newRankId;
-  while(rankId <= newRankId) {
+  while (rankId <= newRankId) {
     self maps\mp\gametypes\_persistence::statSet("rank", rankId, false);
     self maps\mp\gametypes\_persistence::statSet("minxp", int(level.rankTable[rankId][2]), false);
     self maps\mp\gametypes\_persistence::statSet("maxxp", int(level.rankTable[rankId][7]), false);
     self.setPromotion = true;
-    if(level.rankedMatch && level.gameEnded && !self IsSplitscreen()) {
+    if(level.rankedMatch && level.gameEnded && !self IsSplitscreen())
       self setClientDvar("ui_lobbypopup", "promotion");
-    }
     if(rankId != oldRank) {
       codPointsEarnedForRank = getRankInfoCodPointsEarned(rankId);
       incCodPoints(codPointsEarnedForRank);
@@ -459,7 +442,7 @@ updateRank() {
 updateRankAnnounceHUD() {
   self endon("disconnect");
   size = self.rankNotifyQueue.size;
-  self.rankNotifyQueue[size] = spawnStruct();
+  self.rankNotifyQueue[size] = spawnstruct();
   display_rank_column = 14;
   self.rankNotifyQueue[size].rank = int(level.rankTable[self.pers["rank"]][display_rank_column]);
   self.rankNotifyQueue[size].prestige = self.pers["prestige"];
@@ -472,10 +455,10 @@ getItemIndex(refString) {
 }
 buildStatsMilestoneInfo() {
   level.statsMilestoneInfo = [];
-  for(tierNum = 1; tierNum <= level.numStatsMilestoneTiers; tierNum++) {
+  for (tierNum = 1; tierNum <= level.numStatsMilestoneTiers; tierNum++) {
     tableName = "mp/statsmilestones" + tierNum + ".csv";
     moveToNextTable = false;
-    for(idx = 0; idx < level.maxStatChallenges; idx++) {
+    for (idx = 0; idx < level.maxStatChallenges; idx++) {
       row = tableLookupRowNum(tableName, 0, idx);
       if(row > -1) {
         statType = tableLookupColumnForRow(tableName, row, 3);
@@ -507,19 +490,18 @@ updateRankScoreHUD(amount) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  if(amount == 0) {
+  if(amount == 0)
     return;
-  }
   self notify("update_score");
   self endon("update_score");
   self.rankUpdateTotal += amount;
   wait(0.05);
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankUpdateTotal < 0) {
-      self.hud_rankscroreupdate.label = &"";
+      self.hud_rankscroreupdate.label = & "";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = &"MP_PLUS";
+      self.hud_rankscroreupdate.label = & "MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
@@ -532,33 +514,29 @@ updateRankScoreHUD(amount) {
   }
 }
 removeRankHUD() {
-  if(isDefined(self.hud_rankscroreupdate)) {
+  if(isDefined(self.hud_rankscroreupdate))
     self.hud_rankscroreupdate.alpha = 0;
-  }
 }
 getRank() {
   rankXp = getRankXPCapped(self.pers["rankxp"]);
   rankId = self.pers["rank"];
-  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
+  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)))
     return rankId;
-  } else {
+  else
     return self getRankForXp(rankXp);
-  }
 }
 getRankForXp(xpVal) {
   rankId = 0;
   rankName = level.rankTable[rankId][1];
   assert(isDefined(rankName));
-  while(isDefined(rankName) && rankName != "") {
-    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)) {
+  while (isDefined(rankName) && rankName != "") {
+    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
       return rankId;
-    }
     rankId++;
-    if(isDefined(level.rankTable[rankId])) {
+    if(isDefined(level.rankTable[rankId]))
       rankName = level.rankTable[rankId][1];
-    } else {
+    else
       rankName = undefined;
-    }
   }
   rankId--;
   return rankId;
@@ -574,14 +552,12 @@ getRankXP() {
   return getRankXPCapped(self.pers["rankxp"]);
 }
 incRankXP(amount) {
-  if(!level.rankedMatch) {
+  if(!level.rankedMatch)
     return 0;
-  }
   xp = self getRankXP();
   newXp = getRankXPCapped(xp + amount);
-  if(self.pers["rank"] == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank)) {
+  if(self.pers["rank"] == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank))
     newXp = getRankInfoMaxXP(level.maxRank);
-  }
   xpIncrease = getRankXPCapped(newXp) - self.pers["rankxp"];
   if(xpIncrease < 0) {
     xpIncrease = 0;

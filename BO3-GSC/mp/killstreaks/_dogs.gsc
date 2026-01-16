@@ -28,17 +28,17 @@ function init() {
   level.dog_targets[level.dog_targets.size] = "trigger_use_touch";
   level.dog_spawns = [];
   level thread devgui_dog_think();
-  level.dogsonflashdogs = &flash_dogs;
+  level.dogsonflashdogs = & flash_dogs;
 }
 
 function init_spawns() {
   spawns = getnodearray("spawn", "script_noteworthy");
-  if(!isDefined(spawns) || !spawns.size) {
+  if(!isdefined(spawns) || !spawns.size) {
     println("");
     return;
   }
   dog_spawner = getent("dog_spawner", "targetname");
-  if(!isDefined(dog_spawner)) {
+  if(!isdefined(dog_spawner)) {
     println("");
     return;
   }
@@ -46,7 +46,7 @@ function init_spawns() {
   dog = dog_spawner spawnfromspawner();
   foreach(spawn in spawns) {
     valid = arraysort(valid, spawn.origin, 0);
-    for(i = 0; i < 5; i++) {
+    for (i = 0; i < 5; i++) {
       if(dog findpath(spawn.origin, valid[i].origin, 1, 0)) {
         level.dog_spawns[level.dog_spawns.size] = spawn;
         break;
@@ -99,7 +99,7 @@ function ownerhadactivedogs() {
 
 function dog_killstreak_init() {
   dog_spawner = getent("dog_spawner", "targetname");
-  if(!isDefined(dog_spawner)) {
+  if(!isdefined(dog_spawner)) {
     println("");
     return false;
   }
@@ -117,7 +117,7 @@ function dog_killstreak_init() {
 }
 
 function dog_set_model() {
-  self setModel("german_shepherd_vest");
+  self setmodel("german_shepherd_vest");
   self setenemymodel("german_shepherd_vest_black");
 }
 
@@ -152,7 +152,7 @@ function get_score_for_spawn(origin, team) {
   players = getplayers();
   score = 0;
   foreach(player in players) {
-    if(!isDefined(player)) {
+    if(!isdefined(player)) {
       continue;
     }
     if(!isalive(player)) {
@@ -200,7 +200,7 @@ function dog_manager_spawn_dog(owner, team, spawn_node, requireddeathcount) {
 
 function monitor_dog_special_grenades() {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     if(weapon_utils::isflashorstunweapon(weapon)) {
       damage_area = spawn("trigger_radius", self.origin, 0, 128, 128);
@@ -218,12 +218,12 @@ function dog_manager_spawn_dogs(owner, deathcount, killstreak_id) {
   owner thread dog_manager_abort();
   level thread dog_manager_game_ended();
   count = 0;
-  while(count < 10) {
+  while (count < 10) {
     if(level.dog_abort) {
       break;
     }
     dogs = dog_manager_get_dogs();
-    while(dogs.size < 5 && count < 10 && !level.dog_abort) {
+    while (dogs.size < 5 && count < 10 && !level.dog_abort) {
       node = get_spawn_node(owner, team);
       level dog_manager_spawn_dog(owner, team, node, requireddeathcount);
       count++;
@@ -232,11 +232,11 @@ function dog_manager_spawn_dogs(owner, deathcount, killstreak_id) {
     }
     level waittill("dog_died");
   }
-  for(;;) {
+  for (;;) {
     dogs = dog_manager_get_dogs();
     if(dogs.size <= 0) {
       killstreakrules::killstreakstop("dogs", team, killstreak_id);
-      if(isDefined(owner)) {
+      if(isdefined(owner)) {
         owner notify("dogs_complete");
       }
       return;
@@ -283,18 +283,18 @@ function dog_leave() {
 function dog_patrol() {
   self endon("death");
   self endon("debug_patrol");
-  for(;;) {
+  for (;;) {
     if(level.dog_abort) {
       self dog_leave();
       return;
     }
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       wait(randomintrange(3, 5));
       continue;
     }
     nodes = [];
     objectives = dog_patrol_near_objective();
-    for(i = 0; i < objectives.size; i++) {
+    for (i = 0; i < objectives.size; i++) {
       objective = array::random(objectives);
       nodes = getnodesinradius(objective.origin, 256, 64, 512, "Path", 16);
       if(nodes.size) {
@@ -303,11 +303,11 @@ function dog_patrol() {
     }
     if(!nodes.size) {
       player = self dog_patrol_near_enemy();
-      if(isDefined(player)) {
+      if(isdefined(player)) {
         nodes = getnodesinradius(player.origin, 1024, 0, 128, "Path", 8);
       }
     }
-    if(!nodes.size && isDefined(self.script_owner)) {
+    if(!nodes.size && isdefined(self.script_owner)) {
       if(isalive(self.script_owner) && self.script_owner.sessionstate == "playing") {
         nodes = getnodesinradius(self.script_owner.origin, 512, 256, 512, "Path", 16);
       }
@@ -318,10 +318,10 @@ function dog_patrol() {
     if(nodes.size) {
       nodes = array::randomize(nodes);
       foreach(node in nodes) {
-        if(isDefined(node.script_noteworthy)) {
+        if(isdefined(node.script_noteworthy)) {
           continue;
         }
-        if(isDefined(node.dog_claimed) && isalive(node.dog_claimed)) {
+        if(isdefined(node.dog_claimed) && isalive(node.dog_claimed)) {
           continue;
         }
         self setgoal(node);
@@ -340,7 +340,7 @@ function dog_patrol() {
 }
 
 function dog_patrol_near_objective() {
-  if(!isDefined(level.dog_objectives)) {
+  if(!isdefined(level.dog_objectives)) {
     level.dog_objectives = [];
     level.dog_objective_next_update = 0;
   }
@@ -350,21 +350,21 @@ function dog_patrol_near_objective() {
   if(gettime() >= level.dog_objective_next_update) {
     level.dog_objectives = [];
     foreach(target in level.dog_targets) {
-      ents = getEntArray(target, "classname");
+      ents = getentarray(target, "classname");
       foreach(ent in ents) {
         if(level.gametype == "koth") {
-          if(isDefined(ent.targetname) && ent.targetname == "radiotrigger") {
+          if(isdefined(ent.targetname) && ent.targetname == "radiotrigger") {
             level.dog_objectives[level.dog_objectives.size] = ent;
           }
           continue;
         }
         if(level.gametype == "sd") {
-          if(isDefined(ent.targetname) && ent.targetname == "bombzone") {
+          if(isdefined(ent.targetname) && ent.targetname == "bombzone") {
             level.dog_objectives[level.dog_objectives.size] = ent;
           }
           continue;
         }
-        if(!isDefined(ent.script_gameobjectname)) {
+        if(!isdefined(ent.script_gameobjectname)) {
           continue;
         }
         if(!issubstr(ent.script_gameobjectname, level.gametype)) {
@@ -383,7 +383,7 @@ function dog_patrol_near_enemy() {
   closest = undefined;
   distsq = 99999999;
   foreach(player in players) {
-    if(!isDefined(player)) {
+    if(!isdefined(player)) {
       continue;
     }
     if(!isalive(player)) {
@@ -392,7 +392,7 @@ function dog_patrol_near_enemy() {
     if(player.sessionstate != "playing") {
       continue;
     }
-    if(isDefined(self.script_owner) && player == self.script_owner) {
+    if(isdefined(self.script_owner) && player == self.script_owner) {
       continue;
     }
     if(level.teambased) {
@@ -403,7 +403,7 @@ function dog_patrol_near_enemy() {
     if((gettime() - player.lastfiretime) > 3000) {
       continue;
     }
-    if(!isDefined(closest)) {
+    if(!isdefined(closest)) {
       closest = player;
       distsq = distancesquared(self.origin, player.origin);
       continue;
@@ -418,18 +418,18 @@ function dog_patrol_near_enemy() {
 }
 
 function dog_manager_get_dogs() {
-  dogs = getEntArray("attack_dog", "targetname");
+  dogs = getentarray("attack_dog", "targetname");
   return dogs;
 }
 
 function dog_owner_kills() {
-  if(!isDefined(self.script_owner)) {
+  if(!isdefined(self.script_owner)) {
     return;
   }
   self endon("clear_owner");
   self endon("death");
   self.script_owner endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("killed", player);
     self.script_owner notify("dog_handler");
   }
@@ -440,7 +440,7 @@ function dog_health_regen() {
   interval = 0.5;
   regen_interval = int((self.health / 5) * interval);
   regen_start = 2;
-  for(;;) {
+  for (;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
     self trackattackerdamage(attacker);
     self thread dog_health_regen_think(regen_start, interval, regen_interval);
@@ -448,18 +448,18 @@ function dog_health_regen() {
 }
 
 function trackattackerdamage(attacker) {
-  if(!isDefined(attacker) || !isplayer(attacker) || !isDefined(self.script_owner)) {
+  if(!isdefined(attacker) || !isplayer(attacker) || !isdefined(self.script_owner)) {
     return;
   }
   if(level.teambased && attacker.team == self.script_owner.team || attacker == self) {
     return;
   }
-  if(!isDefined(self.attackerdata) || !isDefined(self.attackers)) {
+  if(!isdefined(self.attackerdata) || !isdefined(self.attackers)) {
     self.attackerdata = [];
     self.attackers = [];
   }
-  if(!isDefined(self.attackerdata[attacker.clientid])) {
-    self.attackerclientid[attacker.clientid] = spawnStruct();
+  if(!isdefined(self.attackerdata[attacker.clientid])) {
+    self.attackerclientid[attacker.clientid] = spawnstruct();
     self.attackers[self.attackers.size] = attacker;
   }
 }
@@ -474,7 +474,7 @@ function dog_health_regen_think(delay, interval, regen_interval) {
   self endon("damage");
   wait(delay);
   step = 0;
-  while(step <= 5) {
+  while (step <= 5) {
     if(self.health >= 100) {
       break;
     }
@@ -488,14 +488,14 @@ function dog_health_regen_think(delay, interval, regen_interval) {
 
 function selfdefensechallenge() {
   self waittill("death", attacker);
-  if(isDefined(attacker) && isplayer(attacker)) {
-    if(isDefined(self.script_owner) && self.script_owner == attacker) {
+  if(isdefined(attacker) && isplayer(attacker)) {
+    if(isdefined(self.script_owner) && self.script_owner == attacker) {
       return;
     }
-    if(level.teambased && isDefined(self.script_owner) && self.script_owner.team == attacker.team) {
+    if(level.teambased && isdefined(self.script_owner) && self.script_owner.team == attacker.team) {
       return;
     }
-    if(isDefined(self.attackers)) {
+    if(isdefined(self.attackers)) {
       foreach(player in self.attackers) {
         if(player != attacker) {
           scoreevents::processscoreevent("killed_dog_assist", player);
@@ -523,11 +523,11 @@ function flash_dogs(area) {
       if(isplayer(self)) {
         if(level.teambased && dog.team == self.team) {
           do_flash = 0;
-        } else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
+        } else if(!level.teambased && isdefined(dog.script_owner) && self == dog.script_owner) {
           do_flash = 0;
         }
       }
-      if(isDefined(dog.lastflashed) && (dog.lastflashed + 1500) > gettime()) {
+      if(isdefined(dog.lastflashed) && (dog.lastflashed + 1500) > gettime()) {
         do_flash = 0;
       }
       if(do_flash) {
@@ -541,7 +541,7 @@ function flash_dogs(area) {
 function devgui_dog_think() {
   setdvar("", "");
   debug_patrol = 0;
-  for(;;) {
+  for (;;) {
     cmd = getdvarstring("");
     switch (cmd) {
       case "": {
@@ -599,16 +599,16 @@ function devgui_dog_spawn(team) {
   player = util::gethostplayer();
   dog_spawner = getent("", "");
   level.dog_abort = 0;
-  if(!isDefined(dog_spawner)) {
+  if(!isdefined(dog_spawner)) {
     iprintln("");
     return;
   }
   direction = player getplayerangles();
-  direction_vec = anglesToForward(direction);
-  eye = player getEye();
+  direction_vec = anglestoforward(direction);
+  eye = player geteye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
+  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
   nodes = getnodesinradius(trace[""], 256, 0, 128, "", 8);
   if(!nodes.size) {
     iprintln("");
@@ -626,7 +626,7 @@ function devgui_dog_spawn(team) {
 
 function devgui_dog_camera() {
   player = util::gethostplayer();
-  if(!isDefined(level.devgui_dog_camera)) {
+  if(!isdefined(level.devgui_dog_camera)) {
     level.devgui_dog_camera = 0;
   }
   dog = undefined;
@@ -636,16 +636,16 @@ function devgui_dog_camera() {
     player cameraactivate(0);
     return;
   }
-  for(i = 0; i < dogs.size; i++) {
+  for (i = 0; i < dogs.size; i++) {
     dog = dogs[i];
-    if(!isDefined(dog) || !isalive(dog)) {
+    if(!isdefined(dog) || !isalive(dog)) {
       dog = undefined;
       continue;
     }
-    if(!isDefined(dog.cam)) {
-      forward = anglesToForward(dog.angles);
+    if(!isdefined(dog.cam)) {
+      forward = anglestoforward(dog.angles);
       dog.cam = spawn("", (dog.origin + vectorscale((0, 0, 1), 50)) + (forward * -100));
-      dog.cam setModel("");
+      dog.cam setmodel("");
       dog.cam linkto(dog);
     }
     if(dog getentitynumber() <= level.devgui_dog_camera) {
@@ -654,7 +654,7 @@ function devgui_dog_camera() {
     }
     break;
   }
-  if(isDefined(dog)) {
+  if(isdefined(dog)) {
     level.devgui_dog_camera = dog getentitynumber();
     player camerasetposition(dog.cam);
     player camerasetlookat(dog);
@@ -668,27 +668,27 @@ function devgui_dog_camera() {
 function devgui_crate_spawn() {
   player = util::gethostplayer();
   direction = player getplayerangles();
-  direction_vec = anglesToForward(direction);
-  eye = player getEye();
+  direction_vec = anglestoforward(direction);
+  eye = player geteye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
+  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
   killcament = spawn("", player.origin);
   level thread supplydrop::dropcrate(trace[""] + vectorscale((0, 0, 1), 25), direction, "", player, player.team, killcament);
 }
 
 function devgui_crate_delete() {
-  if(!isDefined(level.devgui_crates)) {
+  if(!isdefined(level.devgui_crates)) {
     return;
   }
-  for(i = 0; i < level.devgui_crates.size; i++) {
+  for (i = 0; i < level.devgui_crates.size; i++) {
     level.devgui_crates[i] delete();
   }
   level.devgui_crates = [];
 }
 
 function devgui_spawn_show() {
-  if(!isDefined(level.dog_spawn_show)) {
+  if(!isdefined(level.dog_spawn_show)) {
     level.dog_spawn_show = 1;
   } else {
     level.dog_spawn_show = !level.dog_spawn_show;
@@ -699,13 +699,13 @@ function devgui_spawn_show() {
   }
   spawns = level.dog_spawns;
   color = (0, 1, 0);
-  for(i = 0; i < spawns.size; i++) {
+  for (i = 0; i < spawns.size; i++) {
     dev::showonespawnpoint(spawns[i], color, "", 32, "");
   }
 }
 
 function devgui_exit_show() {
-  if(!isDefined(level.dog_exit_show)) {
+  if(!isdefined(level.dog_exit_show)) {
     level.dog_exit_show = 1;
   } else {
     level.dog_exit_show = !level.dog_exit_show;
@@ -716,7 +716,7 @@ function devgui_exit_show() {
   }
   exits = getnodearray("", "");
   color = (1, 0, 0);
-  for(i = 0; i < exits.size; i++) {
+  for (i = 0; i < exits.size; i++) {
     dev::showonespawnpoint(exits[i], color, "", 32, "");
   }
 }
@@ -724,7 +724,7 @@ function devgui_exit_show() {
 function dog_debug_patrol(node1, node2) {
   self endon("death");
   self endon("debug_patrol");
-  for(;;) {
+  for (;;) {
     self setgoal(node1);
     self util::waittill_any("", "");
     wait(1);
@@ -737,13 +737,13 @@ function dog_debug_patrol(node1, node2) {
 function devgui_debug_route() {
   iprintln("");
   nodes = dev::dev_get_node_pair();
-  if(!isDefined(nodes)) {
+  if(!isdefined(nodes)) {
     iprintln("");
     return;
   }
   iprintln("");
   dogs = dog_manager_get_dogs();
-  if(isDefined(dogs[0])) {
+  if(isdefined(dogs[0])) {
     dogs[0] notify("debug_patrol");
     dogs[0] thread dog_debug_patrol(nodes[0], nodes[1]);
   }

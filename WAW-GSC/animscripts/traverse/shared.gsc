@@ -38,11 +38,10 @@ advancedTraverse(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animHasNotetrack(traverseAnim, "blend")) {
+    if(!animHasNotetrack(traverseAnim, "blend"))
       wait(gravityToBlendTime);
-    } else {
+    else
       self waittillmatch("traverse", "blend");
-    }
   }
   self.a.movement = self.old_anim_movement;
   self.a.alertness = self.old_anim_alertness;
@@ -58,7 +57,7 @@ teleportThread(verticalOffset) {
   self endon("endTeleportThread");
   reps = 5;
   offset = (0, 0, verticalOffset / reps);
-  for(i = 0; i < reps; i++) {
+  for (i = 0; i < reps; i++) {
     self teleport(self.origin + offset);
     wait .05;
   }
@@ -73,13 +72,12 @@ teleportThreadEx(verticalOffset, delay, frames) {
   }
   wait delay;
   amount = verticalOffset / frames;
-  if(amount > 10.0) {
+  if(amount > 10.0)
     amount = 10.0;
-  } else if(amount < -10.0) {
+  else if(amount < -10.0)
     amount = -10.0;
-  }
   offset = (0, 0, amount);
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     self teleport(self.origin + offset);
     wait .05;
   }
@@ -143,13 +141,12 @@ DoTraverse(traverseData) {
 }
 
 handleTraverseNotetracks(note) {
-  if(note == "traverse_death") {
+  if(note == "traverse_death")
     return handleTraverseDeathNotetrack();
-  } else if(note == "traverse_align") {
+  else if(note == "traverse_align")
     return handleTraverseAlignment();
-  } else if(note == "traverse_drop") {
+  else if(note == "traverse_drop")
     return handleTraverseDrop();
-  }
 }
 
 handleTraverseDeathNotetrack() {
@@ -174,7 +171,7 @@ handleTraverseAlignment() {
 
 handleTraverseDrop() {
   startpos = self.origin + (0, 0, 32);
-  trace = bulletTrace(startpos, self.origin + (0, 0, -512), false, undefined);
+  trace = bullettrace(startpos, self.origin + (0, 0, -512), false, undefined);
   endpos = trace["position"];
   dist = distance(startpos, endpos);
   realDropHeight = dist - 32 - 0.5;
@@ -193,7 +190,7 @@ handleTraverseDrop() {
 finishTraverseDrop(finalz) {
   self endon("killanimscript");
   finalz += 4.0;
-  while(1) {
+  while (1) {
     if(self.origin[2] < finalz) {
       self traverseMode("gravity");
       break;
@@ -209,9 +206,8 @@ doNothingFunc() {
 
 traverseDeath() {
   self notify("traverse_death");
-  if(!isDefined(self.triedTraverseRagdoll)) {
+  if(!isDefined(self.triedTraverseRagdoll))
     self animscripts\death::PlayDeathSound();
-  }
   deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
   deathAnim = deathAnimArray[randomint(deathAnimArray.size)];
   animscripts\death::play_death_anim(deathAnim);
@@ -243,7 +239,7 @@ TraverseRagdollDeathSimple() {
   deathAnim = animscripts\death::get_death_anim();
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
-    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
   wait 0.5;
   return true;
@@ -252,7 +248,7 @@ TraverseRagdollDeathSimple() {
 TraverseRagdollDeath(traverseAnim) {
   self endon("traverse_death");
   self endon("killanimscript");
-  while(1) {
+  while (1) {
     self waittill("damage");
     if(!self.delayedDeath) {
       continue;
@@ -260,16 +256,14 @@ TraverseRagdollDeath(traverseAnim) {
     scriptedDeathTimes = getNotetrackTimes(traverseAnim, "traverse_death");
     currentTime = self getAnimTime(traverseAnim);
     scriptedDeathTimes[scriptedDeathTimes.size] = 1.0;
-    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1) {
+    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1)
       scriptedDeathTimes = [];
-    }
-    for(i = 0; i < scriptedDeathTimes.size; i++) {
+    for (i = 0; i < scriptedDeathTimes.size; i++) {
       if(scriptedDeathTimes[i] > currentTime) {
         animLength = getAnimLength(traverseAnim);
         timeUntilScriptedDeath = (scriptedDeathTimes[i] - currentTime) * animLength;
-        if(timeUntilScriptedDeath < 0.5) {
+        if(timeUntilScriptedDeath < 0.5)
           return;
-        }
         break;
       }
     }
@@ -298,7 +292,7 @@ postTraverseDeathAnim() {
   deathAnim = animscripts\death::get_death_anim();
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
-    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
 }
 

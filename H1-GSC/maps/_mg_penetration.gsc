@@ -18,19 +18,18 @@ gunner_think(var_0) {
 
   self.last_enemy_sighting_position = undefined;
   thread record_enemy_sightings();
-  var_1 = anglesToForward(var_0.angles);
+  var_1 = anglestoforward(var_0.angles);
   var_2 = spawn("script_origin", (0, 0, 0));
   thread target_ent_cleanup(var_2);
   var_2.origin = var_0.origin + var_1 * 500;
 
-  if(isDefined(self.last_enemy_sighting_position)) {
+  if(isdefined(self.last_enemy_sighting_position))
     var_2.origin = self.last_enemy_sighting_position;
-  }
 
   var_0 settargetentity(var_2);
   var_3 = undefined;
 
-  for(;;) {
+  for (;;) {
     if(!isalive(self.current_enemy)) {
       stop_firing();
       self waittill("new_enemy");
@@ -60,18 +59,18 @@ shoot_enemy_until_he_hides_then_shoot_wall(var_0) {
   self.current_enemy endon("death");
   var_1 = self.current_enemy;
 
-  while(self cansee(var_1)) {
-    var_2 = vectortoangles(var_1 getEye() - var_0.origin);
-    var_2 = anglesToForward(var_2);
+  while (self cansee(var_1)) {
+    var_2 = vectortoangles(var_1 geteye() - var_0.origin);
+    var_2 = anglestoforward(var_2);
     var_0 moveto(var_0.origin + var_2 * 12, 0.1);
     wait 0.1;
   }
 
   if(isplayer(var_1)) {
     self endon("saw_enemy");
-    var_3 = var_1 getEye();
+    var_3 = var_1 geteye();
     var_2 = vectortoangles(var_3 - var_0.origin);
-    var_2 = anglesToForward(var_2);
+    var_2 = anglestoforward(var_2);
     var_4 = 150;
     var_5 = distance(var_0.origin, self.last_enemy_sighting_position) / var_4;
 
@@ -81,11 +80,10 @@ shoot_enemy_until_he_hides_then_shoot_wall(var_0) {
     }
 
     var_6 = var_0.origin + var_2 * 180;
-    var_7 = get_suppress_point(self getEye(), var_0.origin, var_6);
+    var_7 = get_suppress_point(self geteye(), var_0.origin, var_6);
 
-    if(!isDefined(var_7)) {
+    if(!isdefined(var_7))
       var_7 = var_0.origin;
-    }
 
     var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
@@ -100,9 +98,8 @@ set_firing(var_0) {
   if(var_0) {
     self.can_fire_turret = 1;
 
-    if(self.wants_to_fire) {
+    if(self.wants_to_fire)
       self.turret notify("startfiring");
-    }
   } else {
     self.can_fire_turret = 0;
     self.turret notify("stopfiring");
@@ -117,13 +114,12 @@ stop_firing() {
 start_firing() {
   self.wants_to_fire = 1;
 
-  if(self.can_fire_turret) {
+  if(self.can_fire_turret)
     self.turret notify("startfiring");
-  }
 }
 
 create_mg_team() {
-  if(isDefined(level.mg_gunner_team)) {
+  if(isdefined(level.mg_gunner_team)) {
     level.mg_gunner_team[level.mg_gunner_team.size] = self;
     return;
   }
@@ -131,13 +127,13 @@ create_mg_team() {
   level.mg_gunner_team = [];
   level.mg_gunner_team[level.mg_gunner_team.size] = self;
   waittillframeend;
-  var_0 = spawnStruct();
+  var_0 = spawnstruct();
   common_scripts\utility::array_thread(level.mg_gunner_team, ::mg_gunner_death_notify, var_0);
   var_1 = level.mg_gunner_team;
   level.mg_gunner_team = undefined;
   var_0 waittill("gunner_died");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
     if(!isalive(var_1[var_2])) {
       continue;
     }
@@ -156,7 +152,7 @@ mgteam_take_turns_firing(var_0) {
   level notify("new_mg_firing_team" + var_0[0].script_noteworthy);
   level endon("new_mg_firing_team" + var_0[0].script_noteworthy);
 
-  for(;;) {
+  for (;;) {
     dual_firing(var_0);
     solo_firing(var_0);
   }
@@ -165,7 +161,7 @@ mgteam_take_turns_firing(var_0) {
 solo_firing(var_0) {
   var_1 = undefined;
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+  for (var_2 = 0; var_2 < var_0.size; var_2++) {
     if(!isalive(var_0[var_2])) {
       continue;
     }
@@ -173,15 +169,14 @@ solo_firing(var_0) {
     break;
   }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     return;
-  }
 }
 
 solo_fires() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self.turret startfiring();
     wait(randomfloatrange(0.3, 0.7));
     self.turret stopfiring();
@@ -190,21 +185,18 @@ solo_fires() {
 }
 
 dual_firing(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+  for (var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] endon("death");
-  }
 
   var_2 = 0;
   var_3 = 1;
 
-  for(;;) {
-    if(isalive(var_0[var_2])) {
+  for (;;) {
+    if(isalive(var_0[var_2]))
       var_0[var_2] set_firing(1);
-    }
 
-    if(isalive(var_0[var_3])) {
+    if(isalive(var_0[var_3]))
       var_0[var_3] set_firing(0);
-    }
 
     var_4 = var_2;
     var_2 = var_3;
@@ -219,15 +211,15 @@ spotted_an_enemy(var_0, var_1) {
   self endon("new_enemy");
   var_1 endon("death");
 
-  while(self cansee(var_1)) {
-    var_2 = vectortoangles(var_1 getEye() - var_0.origin);
-    var_2 = anglesToForward(var_2);
+  while (self cansee(var_1)) {
+    var_2 = vectortoangles(var_1 geteye() - var_0.origin);
+    var_2 = anglestoforward(var_2);
     var_0 moveto(var_0.origin + var_2 * 10, 0.2);
     wait 0.2;
   }
 
-  var_2 = vectortoangles(var_1 getEye() - var_0.origin);
-  var_2 = anglesToForward(var_2);
+  var_2 = vectortoangles(var_1 geteye() - var_0.origin);
+  var_2 = anglestoforward(var_2);
   var_3 = 150;
   var_4 = distance(var_0.origin, self.last_enemy_sighting_position) / var_3;
   var_0 moveto(self.last_enemy_sighting_position, var_4);
@@ -243,21 +235,19 @@ spotted_an_enemy(var_0, var_1) {
 get_suppress_point(var_0, var_1, var_2) {
   var_3 = distance(var_1, var_2) * 0.05;
 
-  if(var_3 < 5) {
+  if(var_3 < 5)
     var_3 = 5;
-  }
 
-  if(var_3 > 20) {
+  if(var_3 > 20)
     var_3 = 20;
-  }
 
   var_4 = var_2 - var_1;
   var_4 = (var_4[0] / var_3, var_4[1] / var_3, var_4[2] / var_3);
   var_5 = (0, 0, 0);
   var_6 = undefined;
 
-  for(var_7 = 0; var_7 < var_3 + 2; var_7++) {
-    var_8 = bulletTrace(var_0, var_1 + var_5, 0, undefined);
+  for (var_7 = 0; var_7 < var_3 + 2; var_7++) {
+    var_8 = bullettrace(var_0, var_1 + var_5, 0, undefined);
 
     if(var_8["fraction"] < 1) {
       var_6 = var_8["position"];
@@ -275,7 +265,7 @@ record_enemy_sightings() {
   self endon("end_mg_behavior");
   self.current_enemy = undefined;
 
-  for(;;) {
+  for (;;) {
     record_sighting();
     wait 0.05;
   }
@@ -288,7 +278,7 @@ record_sighting() {
   if(!self cansee(self.enemy)) {
     return;
   }
-  self.last_enemy_sighting_position = self.enemy getEye();
+  self.last_enemy_sighting_position = self.enemy geteye();
   self notify("saw_enemy");
 
   if(!isalive(self.current_enemy) || self.current_enemy != self.enemy) {

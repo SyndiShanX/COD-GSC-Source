@@ -7,6 +7,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_disable_hud;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ private on_begin() {
 }
 
 function_afe4a356() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   wait 12;
   level.var_dc60105c = 1;
   level clientfield::set_world_uimodel("ZMHudGlobal.trials.hudDeactivated", 1);

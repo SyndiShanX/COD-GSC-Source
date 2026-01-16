@@ -9,32 +9,29 @@
 #include maps\mp\zombies\_zm_equip_hacker;
 
 hack_perks() {
-  vending_triggers = getEntArray("zombie_vending", "targetname");
+  vending_triggers = getentarray("zombie_vending", "targetname");
 
   for(i = 0; i < vending_triggers.size; i++) {
-    struct = spawnStruct();
+    struct = spawnstruct();
 
-    if(isDefined(vending_triggers[i].machine)) {
+    if(isDefined(vending_triggers[i].machine))
       machine[0] = vending_triggers[i].machine;
-    } else {
-      machine = getEntArray(vending_triggers[i].target, "targetname");
-    }
+    else
+      machine = getentarray(vending_triggers[i].target, "targetname");
 
     struct.origin = machine[0].origin + anglestoright(machine[0].angles) * 18 + vectorscale((0, 0, 1), 48.0);
     struct.radius = 48;
     struct.height = 64;
     struct.script_float = 5;
 
-    while(!isDefined(vending_triggers[i].cost)) {
+    while(!isDefined(vending_triggers[i].cost))
       wait 0.05;
-    }
 
     struct.script_int = int(vending_triggers[i].cost * -1);
     struct.perk = vending_triggers[i];
 
-    if(isDefined(level._hack_perks_override)) {
+    if(isDefined(level._hack_perks_override))
       struct = struct[[level._hack_perks_override]]();
-    }
 
     vending_triggers[i].hackable = struct;
     maps\mp\zombies\_zm_equip_hacker::register_pooled_hackable_struct(struct, ::perk_hack, ::perk_hack_qualifier);
@@ -51,23 +48,20 @@ solo_revive_expire_func() {
 }
 
 perk_hack_qualifier(player) {
-  if(isDefined(player._retain_perks)) {
+  if(isDefined(player._retain_perks))
     return false;
-  }
 
   if(isDefined(self.perk) && isDefined(self.perk.script_noteworthy)) {
-    if(player hasperk(self.perk.script_noteworthy)) {
+    if(player hasperk(self.perk.script_noteworthy))
       return true;
-    }
   }
 
   return false;
 }
 
 perk_hack(hacker) {
-  if(flag("solo_game") && self.perk.script_noteworthy == "specialty_quickrevive") {
+  if(flag("solo_game") && self.perk.script_noteworthy == "specialty_quickrevive")
     hacker.lives--;
-  }
 
   hacker notify(self.perk.script_noteworthy + "_stop");
   hacker playsoundtoplayer("evt_perk_throwup", hacker);
@@ -75,8 +69,7 @@ perk_hack(hacker) {
   if(isDefined(hacker.perk_hud)) {
     keys = getarraykeys(hacker.perk_hud);
 
-    for(i = 0; i < hacker.perk_hud.size; i++) {
+    for(i = 0; i < hacker.perk_hud.size; i++)
       hacker.perk_hud[keys[i]].x = i * 30;
-    }
   }
 }

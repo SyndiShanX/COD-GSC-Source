@@ -11,19 +11,17 @@
 MoveWalk() {
   // Decide what pose to use
   preferredPose = undefined;
-  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > 64 * 64) {
+  if(isdefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > 64 * 64)
     preferredPose = "stand";
-  }
 
   desiredPose = [[self.choosePoseFunc]](preferredPose);
 
   switch (desiredPose) {
     case "stand":
-      if(BeginStandWalk()) {
+      if(BeginStandWalk())
         return;
-      }
 
-      if(isDefined(self.walk_overrideanim)) {
+      if(isdefined(self.walk_overrideanim)) {
         animscripts\move::MoveStandMoveOverride(self.walk_overrideanim, self.walk_override_weights);
         return;
       }
@@ -32,18 +30,16 @@ MoveWalk() {
       break;
 
     case "crouch":
-      if(BeginCrouchWalk()) {
+      if(BeginCrouchWalk())
         return;
-      }
 
       DoWalkAnim(GetWalkAnim("crouch"));
       break;
 
     default:
       assert(desiredPose == "prone");
-      if(BeginProneWalk()) {
+      if(BeginProneWalk())
         return;
-      }
 
       self.a.movement = "walk";
       DoWalkAnim(GetWalkAnim("prone"));
@@ -57,11 +53,10 @@ DoWalkAnimOverride(walkAnim) {
   self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
-    if(isDefined(self.walk_override_weights)) {
+    if(isdefined(self.walk_override_weights))
       moveAnim = choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    } else {
+    else
       moveAnim = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
-    }
   } else {
     moveAnim = self.walk_overrideanim;
   }
@@ -71,17 +66,15 @@ DoWalkAnimOverride(walkAnim) {
 }
 
 GetWalkAnim(desiredAnim) {
-  if(self.stairsState == "up") {
+  if(self.stairsState == "up")
     return moveAnim("stairs_up");
-  } else if(self.stairsState == "down") {
+  else if(self.stairsState == "down")
     return moveAnim("stairs_down");
-  }
 
   walkAnim = moveAnim(desiredAnim);
 
-  if(isarray(walkAnim)) {
+  if(isarray(walkAnim))
     walkAnim = walkAnim[randomint(walkAnim.size)];
-  }
 
   return walkAnim;
 }
@@ -91,12 +84,11 @@ DoWalkAnim(walkAnim) {
 
   rate = self.moveplaybackrate;
 
-  if(self.stairsState != "none") {
+  if(self.stairsState != "none")
     rate *= 0.6;
-  }
 
   if(self.a.pose == "stand") {
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       self thread animscripts\cqb::CQBTracking();
       // (we don't use %body because that would reset the aiming knobs)
       self setFlaggedAnimKnobAll("walkanim", animscripts\cqb::DetermineCQBAnim(), % walk_and_run_loops, 1, 1, rate, true);

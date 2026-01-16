@@ -42,7 +42,7 @@ start_so_crossing_timed() {
   flag_init("so_obj_crossing_start");
   flag_init("so_obj_crossing_complete");
 
-  level.challenge_objective = &"SO_CROSSING_SO_BRIDGE_OBJECTIVE";
+  level.challenge_objective = & "SO_CROSSING_SO_BRIDGE_OBJECTIVE";
 
   switch (level.gameSkill) {
     case 0: // Easy
@@ -90,7 +90,7 @@ start_so_crossing_timed() {
 so_crossing_timed_setup_regular() {
   //	level.challenge_objective = &"SO_CROSSING_SO_BRIDGE_OBJ_REGULAR";
 
-  enemies = getEntArray("upper_level_enemies", "script_noteworthy");
+  enemies = getentarray("upper_level_enemies", "script_noteworthy");
   remove_enemies_with_weapons("actor_enemy_airborne_RPG", enemies);
   remove_enemies_with_weapons("actor_enemy_airborne_SHOTGUNAUTO", enemies);
   remove_enemies_with_weapons("actor_enemy_airborne_AR", enemies, 6);
@@ -99,7 +99,7 @@ so_crossing_timed_setup_regular() {
 so_crossing_timed_setup_hardened() {
   //	level.challenge_objective = &"SO_CROSSING_SO_BRIDGE_OBJ_HARDENED";
 
-  enemies = getEntArray("upper_level_enemies", "script_noteworthy");
+  enemies = getentarray("upper_level_enemies", "script_noteworthy");
   remove_enemies_with_weapons("actor_enemy_airborne_RPG", enemies);
   remove_enemies_with_weapons("actor_enemy_airborne_AR", enemies, 3);
 }
@@ -110,9 +110,8 @@ so_crossing_timed_setup_veteran() {
 
 remove_enemies_with_weapons(class, enemies, remove_count) {
   // Assume we want to remove them all if undefined.
-  if(!isDefined(remove_count)) {
+  if(!isdefined(remove_count))
     remove_count = 999;
-  }
 
   foreach(guy in enemies) {
     if((remove_count > 0) && (guy.classname == class)) {
@@ -179,7 +178,7 @@ enable_bridge_collapse() {
   dmg_trigger = GetEnt("so_bridge_damage_trigger", "targetname");
 
   count = 0;
-  while(1) {
+  while (1) {
     dmg_trigger waittill("trigger", other);
 
     if(other.code_classname == "script_vehicle") {

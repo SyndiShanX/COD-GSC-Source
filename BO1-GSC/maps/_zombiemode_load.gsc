@@ -187,7 +187,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   PreCacheShellShock("explosion");
   PreCacheShellShock("tank_mantle");
   if(isDefined(level._gamemode_precache)) {
-    [[level._gamemode_precache]]();
+    [
+      [level._gamemode_precache]
+    ]();
   }
   WaterSimEnable(false);
   level.createFX_enabled = (getDvar(#"createfx") != "");
@@ -224,16 +226,17 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   maps\_callbackglobal::init();
   maps\_callbacksetup::SetupCallbacks();
   if(isDefined(level._gamemode_initcallbacks)) {
-    [[level._gamemode_initcallbacks]]();
+    [
+      [level._gamemode_initcallbacks]
+    ]();
   }
   maps\_autosave::main();
   maps\_anim::init();
   maps\_busing::businit();
   maps\_music::music_init();
   maps\_dds::dds_init();
-  if(!isDefined(level.reviveFeature)) {
+  if(!isDefined(level.reviveFeature))
     level.reviveFeature = true;
-  }
   anim.useFacialAnims = false;
   if(!isDefined(level.missionfailed)) {
     level.missionfailed = false;
@@ -265,7 +268,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     }
     level.loadoutComplete = true;
     level notify("loadout complete");
-    [[level.zombiemode_precache_player_model_override]]();
+    [
+      [level.zombiemode_precache_player_model_override]
+    ]();
   } else {
     maps\_loadout::init_loadout();
   }
@@ -443,10 +448,14 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   }
   level notify("load main complete");
   if(level.zombie_anim_intro && isDefined(level.zombiemode_anim_intro_scenes) && isDefined(level.zombiemode_animated_intro)) {
-    [[level.zombiemode_animated_intro]](level.zombiemode_anim_intro_scenes);
+    [
+      [level.zombiemode_animated_intro]
+    ](level.zombiemode_anim_intro_scenes);
   }
   if(isDefined(level.zombiemode_sidequest_init)) {
-    [[level.zombiemode_sidequest_init]]();
+    [
+      [level.zombiemode_sidequest_init]
+    ]();
   }
   PrintLn("_LOAD END TIME = " + GetTime());
 }
@@ -461,7 +470,7 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
     if(!isDefined(player.a)) {
-      player.a = spawnStruct();
+      player.a = SpawnStruct();
     }
     player thread animscripts\zombie_init::onPlayerConnect();
     player thread onPlayerSpawned();
@@ -552,7 +561,9 @@ player_set_viewmodel(zm_random_solo_char) {
     self.entity_num = self getEntityNumber();
   }
   if(isDefined(level.zombiemode_player_set_viewmodel_override)) {
-    [[level.zombiemode_player_set_viewmodel_override]](self.entity_num);
+    [
+      [level.zombiemode_player_set_viewmodel_override]
+    ](self.entity_num);
   } else if(IsSubStr(level.script, "zombie_theater")) {
     switch (self.entity_num) {
       case 0:

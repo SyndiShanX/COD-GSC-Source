@@ -4,6 +4,7 @@
 ************************************************/
 
 #include scripts\core_common\scene_objects_shared;
+
 #namespace scene;
 
 class cscenevehicle: csceneobject {
@@ -15,7 +16,7 @@ class cscenevehicle: csceneobject {
   function function_d09b043() {
     self notify(#"hash_3451c0bca5c1ca69");
     self endon(#"hash_3451c0bca5c1ca69");
-    _o_scene endon(#"scene_done", # "scene_stop", # "scene_skip_completed", # "hash_3168dab591a18b9b");
+    _o_scene endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_3168dab591a18b9b");
     s_waitresult = _e waittill(#"death");
     var_1f97724a = 1;
     _e notify(#"hash_6e7fd8207fd988c6", {

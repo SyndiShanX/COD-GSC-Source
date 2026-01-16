@@ -7,6 +7,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace explosive_bolt;
 
 autoexec __init__system__() {
@@ -14,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "crossbow_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"crossbow_light"] = #"weapon/fx8_equip_light_os";
   callback::add_weapon_type(#"explosive_bolt", &spawned);
 }
 
@@ -36,13 +37,13 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playSound(localclientnum, # "wpn_semtex_alert");
+    self playSound(localclientnum, #"wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.016, "player_switch");
   }
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "crossbow_light"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"crossbow_light"], self, "tag_origin");
 }
 
 stop_light_fx(localclientnum) {

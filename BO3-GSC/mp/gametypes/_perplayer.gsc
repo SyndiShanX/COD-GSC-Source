@@ -7,7 +7,7 @@
 #namespace perplayer;
 
 function init(id, playerbegincallback, playerendcallback) {
-  handler = spawnStruct();
+  handler = spawnstruct();
   handler.id = id;
   handler.playerbegincallback = playerbegincallback;
   handler.playerendcallback = playerendcallback;
@@ -25,11 +25,11 @@ function enable(handler) {
   handler.enabled = 1;
   level.handlerglobalflagval++;
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;
   }
   players = handler.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].handlerflagval != level.handlerglobalflagval) {
       continue;
     }
@@ -46,11 +46,11 @@ function disable(handler) {
   handler.enabled = 0;
   level.handlerglobalflagval++;
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;
   }
   players = handler.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].handlerflagval != level.handlerglobalflagval) {
       continue;
     }
@@ -61,12 +61,12 @@ function disable(handler) {
 }
 
 function onplayerconnect(handler) {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
-    if(!isDefined(player.handlers)) {
+    if(!isdefined(player.handlers)) {
       player.handlers = [];
     }
-    player.handlers[handler.id] = spawnStruct();
+    player.handlers[handler.id] = spawnstruct();
     player.handlers[handler.id].ready = 0;
     player.handlers[handler.id].handled = 0;
     player.handlerflagval = -1;
@@ -82,7 +82,7 @@ function onplayerconnect(handler) {
 function onplayerdisconnect(handler) {
   self waittill("disconnect");
   newplayers = [];
-  for(i = 0; i < handler.players.size; i++) {
+  for (i = 0; i < handler.players.size; i++) {
     if(handler.players[i] != self) {
       newplayers[newplayers.size] = handler.players[i];
     }
@@ -93,7 +93,7 @@ function onplayerdisconnect(handler) {
 
 function onjoinedteam(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_team");
     self thread unhandleplayer(handler, 1, 0);
   }
@@ -101,7 +101,7 @@ function onjoinedteam(handler) {
 
 function onjoinedspectators(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_spectators");
     self thread unhandleplayer(handler, 1, 0);
   }
@@ -109,7 +109,7 @@ function onjoinedspectators(handler) {
 
 function onplayerspawned(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread handleplayer(handler);
   }
@@ -117,7 +117,7 @@ function onplayerspawned(handler) {
 
 function onplayerkilled(handler) {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
     self thread unhandleplayer(handler, 1, 0);
   }

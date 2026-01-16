@@ -23,9 +23,8 @@ main() {
   thread rooftop_fan_spin();
   maps\_utility::autosave_by_name("rooftop");
 
-  foreach(var_1 in level.squad) {
-    var_1.no_pistol_switch = 1;
-  }
+  foreach(var_1 in level.squad)
+  var_1.no_pistol_switch = 1;
 
   thread rooftop_win();
   level waittill("rooftop_door_kicked");
@@ -68,9 +67,8 @@ rooftop_pipes_cleanup() {
   var_0 = getEntArray("pipe_shootable", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2)) {
+    if(isDefined(var_2))
       var_2 delete();
-    }
   }
 }
 
@@ -90,9 +88,8 @@ rooftop_enemy_waves() {
 rooftop_enemy_wave_1() {
   var_0 = getEntArray("rooftop_enemy_spawner_wave_1", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 maps\_utility::spawn_ai(1);
-  }
+  foreach(var_2 in var_0)
+  var_2 maps\_utility::spawn_ai(1);
 }
 
 rooftop_enemy_wave_2_upper() {
@@ -120,24 +117,21 @@ rooftop_parking_lot_enemies() {
   maps\_spawner::flood_spawner_scripted(var_0);
   level waittill("here_comes_the_truck");
 
-  foreach(var_2 in var_0) {
-    var_2 notify("stop current floodspawner");
-  }
+  foreach(var_2 in var_0)
+  var_2 notify("stop current floodspawner");
 }
 
 rooftop_enemies_wait_to_attack() {
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0) {
-    var_2.dontevershoot = 1;
-  }
+  foreach(var_2 in var_0)
+  var_2.dontevershoot = 1;
 
   level waittill("rooftop_door_kicked");
   wait 1;
 
-  foreach(var_2 in var_0) {
-    var_2.dontevershoot = undefined;
-  }
+  foreach(var_2 in var_0)
+  var_2.dontevershoot = undefined;
 }
 
 rooftop_last_guys_rush() {
@@ -196,9 +190,8 @@ rooftop_staircase_threatbias() {
   maps\_utility::trigger_wait_targetname("rooftop_stair_flank_trigger");
   level.player.threatbias = -2000;
 
-  foreach(var_1 in level.squad) {
-    var_1 setthreatbiasgroup("squad");
-  }
+  foreach(var_1 in level.squad)
+  var_1 setthreatbiasgroup("squad");
 
   setthreatbias("axis", "squad", 1500);
 }
@@ -252,9 +245,8 @@ allies_jump_off_roof() {
   common_scripts\utility::flag_set("rooftop_heli_okay_to_depart");
   level.squad["ALLY_BRAVO"] ally_vignette_traversal("ally_bravo_jump_node", "factory_rooftop_jumpoff_ally02");
 
-  foreach(var_1 in level.squad) {
-    var_1 thread ally_color_node_hack();
-  }
+  foreach(var_1 in level.squad)
+  var_1 thread ally_color_node_hack();
 
   maps\factory_util::safe_trigger_by_targetname("r_ally_move_600");
 }
@@ -288,9 +280,8 @@ rooftop_ally_movement(var_0, var_1) {
   maps\factory_util::safe_trigger_by_targetname(var_1);
   waittillframeend;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 delete();
-  }
 }
 
 rooftop_door_breach() {
@@ -329,9 +320,8 @@ rooftop_door_breach() {
   var_6 delete();
   wait 1;
 
-  foreach(var_1 in level.squad) {
-    var_1 maps\_utility::enable_surprise();
-  }
+  foreach(var_1 in level.squad)
+  var_1 maps\_utility::enable_surprise();
 
   maps\_utility::battlechatter_on();
 }
@@ -340,9 +330,8 @@ rooftop_door_breach_sight_check() {
   level endon("player_near_rooftop_door");
   var_0 = getent("rooftop_door_lookat_check", "targetname");
 
-  while(!level.player maps\_utility::player_looking_at(var_0.origin)) {
+  while(!level.player maps\_utility::player_looking_at(var_0.origin))
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("player_near_rooftop_door");
 }
@@ -401,9 +390,8 @@ rooftop_dialog() {
   level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_mrk_onetwothree");
   wait 2;
 
-  if(!common_scripts\utility::flag("spotlight_off")) {
+  if(!common_scripts\utility::flag("spotlight_off"))
     level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_mrk_stayoutofthe");
-  }
 
   common_scripts\utility::flag_wait("factory_rooftop_wind_gust_moment");
   level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_mrk_moveandshootdo");
@@ -421,9 +409,8 @@ rooftop_dialog() {
 rooftop_enemy_dialog() {
   var_0 = maps\_utility::get_living_ai_array("rooftop_enemy", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2.animname = "enemy";
-  }
+  foreach(var_2 in var_0)
+  var_2.animname = "enemy";
 
   var_2 = common_scripts\utility::random(var_0);
   var_2 maps\_utility::smart_dialogue("factory_gs1_beenspotted");
@@ -443,9 +430,8 @@ rooftop_enemy_cleanup() {
   var_0 = maps\_utility::get_living_ai_array("rooftop_enemy", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.magic_bullet_shield)) {
+    if(isDefined(var_2.magic_bullet_shield))
       var_2 maps\_utility::stop_magic_bullet_shield();
-    }
 
     var_2 delete();
   }
@@ -467,9 +453,8 @@ rooftop_heli() {
   var_0 thread maps\factory_audio::rooftop_heli_engine_sfx();
   wait 2;
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     var_0 thread maps\factory_util::god_rays_from_moving_source(var_0, "tag_flash", "ambush_escape_clear", "spotlight_off", "factory_rooftop_floodlight", "factory_rooftop");
-  }
 
   var_0 sethoverparams(16, 10, 3);
   var_0 thread maps\factory_fx::fx_roof_heli_spotlight();
@@ -515,17 +500,14 @@ spotlight_heli_target_think() {
     var_8 = randomintrange(var_3, var_4);
     var_9 = randomintrange(var_5, var_6);
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_8 = var_8 * -1;
-    }
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_9 = var_9 * -1;
-    }
 
-    if(common_scripts\utility::cointoss()) {
+    if(common_scripts\utility::cointoss())
       var_7 = var_7 * -1;
-    }
 
     var_10 = spotlight_heli_target_choice();
     var_0.origin = var_10.origin + (var_7, var_8, var_9);
@@ -573,9 +555,8 @@ thermal_disables_spotlight(var_0, var_1) {
 spotlight_heli_target_choice() {
   var_0 = level.squad;
 
-  if(!common_scripts\utility::flag("rooftop_player_in_room")) {
+  if(!common_scripts\utility::flag("rooftop_player_in_room"))
     var_0[var_0.size] = level.player;
-  }
 
   var_1 = common_scripts\utility::getclosest(self.origin, var_0, 50000);
   return var_1;
@@ -609,18 +590,16 @@ spotlight_hitbox() {
   var_4 = level.squad;
   var_4[var_4.size] = level.player;
 
-  foreach(var_6 in var_4) {
-    var_6.attackeraccuracy = 0.6;
-  }
+  foreach(var_6 in var_4)
+  var_6.attackeraccuracy = 0.6;
 
   thread maps\factory_audio::rooftop_heli_speaker_destroy();
   thread spotlight_destroyed_fx();
   common_scripts\utility::flag_clear("ambush_thermal_flashed");
   wait 0.25;
 
-  if(common_scripts\utility::flag("rooftop_door_open")) {
+  if(common_scripts\utility::flag("rooftop_door_open"))
     level.squad["ALLY_ALPHA"] thread maps\_utility::smart_dialogue("factory_mrk_spotlightsouthitem");
-  }
 
   self notify("rooftop_spotlight_off");
 }
@@ -638,7 +617,7 @@ kill_backtrackers() {
   thread maps\_utility::smart_radio_dialogue("factory_mrk_adamgetbackhere");
   maps\_utility::trigger_wait_targetname("ambush_escape_backtrack_trigger");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", &"FACTORY_FAIL_BACKTRACKING");
+  setdvar("ui_deadquote", & "FACTORY_FAIL_BACKTRACKING");
   playFX(level._effect["101ton_bomb"], level.player.origin);
   level.player kill();
   maps\_utility::missionfailedwrapper();

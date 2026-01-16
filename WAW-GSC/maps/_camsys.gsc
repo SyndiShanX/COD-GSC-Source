@@ -11,7 +11,7 @@ camsys_init() {
 }
 
 create_cp(origin) {
-  cp = spawnStruct();
+  cp = SpawnStruct();
   cp.origin = origin;
   cp.attrib = [];
   cp.attrib["time"] = 1;
@@ -26,18 +26,18 @@ build_shot(shot_name, track_type, target_type, track_array, target_array) {
     assertmsg("shot_name of, '" + shot_name + "' already exists.");
     return;
   }
-  shot = spawnStruct();
-  track = spawnStruct();
+  shot = SpawnStruct();
+  track = SpawnStruct();
   track.type = track_type;
   track.cpoints = [];
-  for(i = 0; i < track_array.size; i++) {
+  for (i = 0; i < track_array.size; i++) {
     track.cpoints[track.cpoints.size] = track_array[i];
   }
   shot.cam_track = track;
-  target = spawnStruct();
+  target = SpawnStruct();
   target.type = target_type;
   target.cpoints = [];
-  for(i = 0; i < target_array.size; i++) {
+  for (i = 0; i < target_array.size; i++) {
     target.cpoints[target.cpoints.size] = target_array[i];
   }
   shot.cam_target = target;
@@ -46,7 +46,7 @@ build_shot(shot_name, track_type, target_type, track_array, target_array) {
 
 build_curve(cpoints) {
   curve_id = GetCurve();
-  for(i = 0; i < cpoints.size; i++) {
+  for (i = 0; i < cpoints.size; i++) {
     if(i == 0) {
       AddNodeToCurve(curve_id, cpoints[i].origin, 0);
     } else {
@@ -61,11 +61,11 @@ create_camera(origin) {
   if(!isDefined(origin)) {
     origin = (0, 0, 0);
   }
-  return spawn("script_camera", origin);
+  return Spawn("script_camera", origin);
 }
 
 create_scene(scene_name, shots) {
-  for(i = 0; i < shots.size; i++) {
+  for (i = 0; i < shots.size; i++) {
     create_scene_add_shot(scene_name, shots[i]);
   }
 }
@@ -78,7 +78,7 @@ play_scene(scene) {
   level.flags_lock["skip_igc_" + scene] = undefined;
   flag_init("skip_igc_" + scene);
   flag_clear("skip_igc_" + scene);
-  for(i = 0; i < level.cam_scenes[scene].shots.size; i++) {
+  for (i = 0; i < level.cam_scenes[scene].shots.size; i++) {
     if(flag("skip_igc_" + scene)) {
       break;
     }
@@ -99,9 +99,9 @@ skip_scene(scene) {
 catch_use_button() {
   level endon("igc_finished");
   wait(0.2);
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] UseButtonPressed()) {
         level notify("player_skip_igc");
         return;
@@ -116,7 +116,7 @@ create_scene_add_shot(name_of_scene, shot_name, shot_number) {
     level.cam_scenes = [];
   }
   if(!isDefined(level.cam_scenes[name_of_scene])) {
-    level.cam_scenes[name_of_scene] = spawnStruct();
+    level.cam_scenes[name_of_scene] = SpawnStruct();
   }
   if(!isDefined(level.cam_scenes[name_of_scene].shots)) {
     level.cam_scenes[name_of_scene].shots = [];
@@ -176,14 +176,14 @@ play_shot_internal(camera, track, target, end_on) {
 
 link_players_to_camera(camera) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] PlayerLinkToCamera(camera);
   }
 }
 
 unlink_players_from_camera(camera) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] Unlink();
   }
   camera Delete();
@@ -226,13 +226,15 @@ create_cam_node(scene_name, pos, angles, time, accel, deccel) {
       level.cam_models[scene_name] = [];
     }
     size = level.cam_models[scene_name].size;
-    level.cam_models[scene_name][size] = [[level.cam_model_func]](scene_name, pos, angles);
+    level.cam_models[scene_name][size] = [
+      [level.cam_model_func]
+    ](scene_name, pos, angles);
   }
 }
 
 playback_scene(option1, option2, option3) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] FreezeControls(true);
     players[i] EnableInvulnerability();
   }
@@ -257,7 +259,7 @@ playback_scene(option1, option2, option3) {
   temp_text.alpha = 1;
   wait(1.0);
   level notify("blacked out");
-  if(isDefined(option1) && !IsString(option1)) {
+  if(IsDefineD(option1) && !IsString(option1)) {
     wait(option1);
   } else {
     wait(3);
@@ -274,7 +276,7 @@ playback_scene(option1, option2, option3) {
   temp_text destroy();
   level notify("fade complete");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] FreezeControls(false);
     players[i] DisableInvulnerability();
   }
@@ -315,7 +317,7 @@ stop_drawing_all() {
 stop_drawing_tracks() {
   if(isDefined(level.drawn_tracks)) {
     keys = GetArrayKeys(level.drawn_tracks);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       if(IsString(level.drawn_tracks[keys[i]])) {
         level notify(level.drawn_tracks[keys[i]]);
       } else {
@@ -329,7 +331,7 @@ stop_drawing_tracks() {
 stop_drawing_targets() {
   if(isDefined(level.drawn_targets)) {
     keys = GetArrayKeys(level.drawn_targets);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       if(IsString(level.drawn_targets[keys[i]])) {
         level notify(level.drawn_targets[keys[i]]);
       } else {

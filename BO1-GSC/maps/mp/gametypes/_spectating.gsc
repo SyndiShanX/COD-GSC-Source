@@ -4,12 +4,12 @@
 *********************************************/
 
 init() {
-  level.spectateOverride["allies"] = spawnStruct();
-  level.spectateOverride["axis"] = spawnStruct();
+  level.spectateOverride["allies"] = spawnstruct();
+  level.spectateOverride["axis"] = spawnstruct();
   level thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onJoinedTeam();
     player thread onJoinedSpectators();
@@ -18,72 +18,62 @@ onPlayerConnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self setSpectatePermissions();
   }
 }
 onJoinedTeam() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_team");
     self setSpectatePermissionsForMachine();
   }
 }
 onJoinedSpectators() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("joined_spectators");
     self setSpectatePermissionsForMachine();
   }
 }
 updateSpectateSettings() {
   level endon("game_ended");
-  for(index = 0; index < level.players.size; index++) {
+  for (index = 0; index < level.players.size; index++)
     level.players[index] setSpectatePermissions();
-  }
 }
 getOtherTeam(team) {
-  if(team == "axis") {
+  if(team == "axis")
     return "allies";
-  } else if(team == "allies") {
+  else if(team == "allies")
     return "axis";
-  } else {
+  else
     return "none";
-  }
 }
 getSplitscreenTeam() {
-  for(index = 0; index < level.players.size; index++) {
-    if(!isDefined(level.players[index])) {
+  for (index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index]))
       continue;
-    }
-    if(level.players[index] == self) {
+    if(level.players[index] == self)
       continue;
-    }
-    if(!(self IsPlayerOnSameMachine(level.players[index]))) {
+    if(!(self IsPlayerOnSameMachine(level.players[index])))
       continue;
-    }
     team = level.players[index].sessionteam;
-    if(team != "spectator") {
+    if(team != "spectator")
       return team;
-    }
   }
   return self.sessionteam;
 }
 OtherLocalPlayerStillAlive() {
-  for(index = 0; index < level.players.size; index++) {
-    if(!isDefined(level.players[index])) {
+  for (index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index]))
       continue;
-    }
-    if(level.players[index] == self) {
+    if(level.players[index] == self)
       continue;
-    }
-    if(!(self IsPlayerOnSameMachine(level.players[index]))) {
+    if(!(self IsPlayerOnSameMachine(level.players[index])))
       continue;
-    }
-    if(IsAlive(level.players[index])) {
+    if(IsAlive(level.players[index]))
       return true;
-    }
   }
   return false;
 }
@@ -150,29 +140,23 @@ setSpectatePermissions() {
       break;
   }
   if(isDefined(team) && (team == "axis" || team == "allies")) {
-    if(isDefined(level.spectateOverride[team].allowFreeSpectate)) {
+    if(isDefined(level.spectateOverride[team].allowFreeSpectate))
       self allowSpectateTeam("freelook", true);
-    }
-    if(isDefined(level.spectateOverride[team].allowEnemySpectate)) {
+    if(isDefined(level.spectateOverride[team].allowEnemySpectate))
       self allowSpectateTeam(getOtherTeam(team), true);
-    }
   }
 }
 setSpectatePermissionsForMachine() {
   self setSpectatePermissions();
-  if(!self IsSplitScreen()) {
+  if(!self IsSplitScreen())
     return;
-  }
-  for(index = 0; index < level.players.size; index++) {
-    if(!isDefined(level.players[index])) {
+  for (index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index]))
       continue;
-    }
-    if(level.players[index] == self) {
+    if(level.players[index] == self)
       continue;
-    }
-    if(!(self IsPlayerOnSameMachine(level.players[index]))) {
+    if(!(self IsPlayerOnSameMachine(level.players[index])))
       continue;
-    }
     level.players[index] setSpectatePermissions();
   }
 }

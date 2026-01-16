@@ -4,9 +4,11 @@
 *******************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_prop_timer;
 
 class cmp_prop_timer: cluielem {
+
   function set_isprop(localclientnum, value) {
     set_data(localclientnum, "isProp", value);
   }
@@ -16,7 +18,7 @@ class cmp_prop_timer: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "mp_prop_timer");
+    cluielem::open(localclientnum, #"mp_prop_timer");
   }
 
   function function_fa582112(localclientnum) {

@@ -17,6 +17,7 @@ main() {
   level._effect["blood"] = loadfx("impacts/sniper_escape_blood");
   level._effect["blood_dashboard_splatter"] = loadfx("impacts/blood_dashboard_splatter_boneyard");
 
+  //Ambient FX
   level._effect["dust_wind_fast"] = loadfx("dust/dust_wind_fast");
   level._effect["dust_wind_fast_light"] = loadfx("dust/dust_wind_fast_light");
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");

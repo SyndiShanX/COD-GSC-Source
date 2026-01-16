@@ -11,7 +11,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread initNotifyMessage();
   }
@@ -88,41 +88,35 @@ showNotifyMessage(notifyData) {
   self endon("disconnect");
   self.doingNotify = true;
   waitRequireVisibility(0);
-  if(isDefined(notifyData.duration)) {
+  if(isDefined(notifyData.duration))
     duration = notifyData.duration;
-  } else if(level.gameEnded) {
+  else if(level.gameEnded)
     duration = 2.0;
-  } else {
+  else
     duration = 4.0;
-  }
   self thread resetOnCancel();
-  if(isDefined(notifyData.sound)) {
+  if(isDefined(notifyData.sound))
     self playLocalSound(notifyData.sound);
-  }
-  if(isDefined(notifyData.glowColor)) {
+  if(isDefined(notifyData.glowColor))
     glowColor = notifyData.glowColor;
-  } else {
+  else
     glowColor = (0.0, 0.0, 0.0);
-  }
   anchorElem = self.notifyTitle;
   if(isDefined(notifyData.titleText)) {
     if(level.splitScreen) {
-      if(isDefined(notifyData.titleLabel)) {
+      if(isDefined(notifyData.titleLabel))
         self iPrintLnBold(notifyData.titleLabel, notifyData.titleText);
-      } else {
+      else
         self iPrintLnBold(notifyData.titleText);
-      }
     } else {
-      if(isDefined(notifyData.titleLabel)) {
+      if(isDefined(notifyData.titleLabel))
         self.notifyTitle.label = notifyData.titleLabel;
-      } else {
-        self.notifyTitle.label = &"";
-      }
-      if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
+      else
+        self.notifyTitle.label = & "";
+      if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
         self.notifyTitle setValue(notifyData.titleText);
-      } else {
+      else
         self.notifyTitle setText(notifyData.titleText);
-      }
       self.notifyTitle setPulseFX(100, int(duration * 1000), 1000);
       self.notifyTitle.glowColor = glowColor;
       self.notifyTitle.alpha = 1;
@@ -130,22 +124,19 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.notifyText)) {
     if(level.splitScreen) {
-      if(isDefined(notifyData.textLabel)) {
+      if(isDefined(notifyData.textLabel))
         self iPrintLnBold(notifyData.textLabel, notifyData.notifyText);
-      } else {
+      else
         self iPrintLnBold(notifyData.notifyText);
-      }
     } else {
-      if(isDefined(notifyData.textLabel)) {
+      if(isDefined(notifyData.textLabel))
         self.notifyText.label = notifyData.textLabel;
-      } else {
-        self.notifyText.label = &"";
-      }
-      if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
+      else
+        self.notifyText.label = & "";
+      if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
         self.notifyText setValue(notifyData.notifyText);
-      } else {
+      else
         self.notifyText setText(notifyData.notifyText);
-      }
       self.notifyText setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText.glowColor = glowColor;
       self.notifyText.alpha = 1;
@@ -154,23 +145,20 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.notifyText2)) {
     if(level.splitScreen) {
-      if(isDefined(notifyData.text2Label)) {
+      if(isDefined(notifyData.text2Label))
         self iPrintLnBold(notifyData.text2Label, notifyData.notifyText2);
-      } else {
+      else
         self iPrintLnBold(notifyData.notifyText2);
-      }
     } else {
       self.notifyText2 setParent(anchorElem);
-      if(isDefined(notifyData.text2Label)) {
+      if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
-      } else {
-        self.notifyText2.label = &"";
-      }
-      if(isDefined(notifyData.text2Label) && !isDefined(notifyData.textIsString)) {
+      else
+        self.notifyText2.label = & "";
+      if(isDefined(notifyData.text2Label) && !isDefined(notifyData.textIsString))
         self.notifyText2 setValue(notifyData.notifyText2);
-      } else {
+      else
         self.notifyText2 setText(notifyData.notifyText2);
-      }
       self.notifyText2 setText(notifyData.notifyText2);
       self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText2.glowColor = glowColor;
@@ -180,23 +168,20 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.notifyText3)) {
     if(level.splitScreen) {
-      if(isDefined(notifyData.text3Label)) {
+      if(isDefined(notifyData.text3Label))
         self iPrintLnBold(notifyData.text3Label, notifyData.notifyText3);
-      } else {
+      else
         self iPrintLnBold(notifyData.notifyText3);
-      }
     } else {
       self.notifyText3 setParent(anchorElem);
-      if(isDefined(notifyData.text3Label)) {
+      if(isDefined(notifyData.text3Label))
         self.notifyText3.label = notifyData.text3Label;
-      } else {
-        self.notifyText3.label = &"";
-      }
-      if(isDefined(notifyData.text3Label) && !isDefined(notifyData.textIsString)) {
+      else
+        self.notifyText3.label = & "";
+      if(isDefined(notifyData.text3Label) && !isDefined(notifyData.textIsString))
         self.notifyText3 setValue(notifyData.notifyText3);
-      } else {
+      else
         self.notifyText3 setText(notifyData.notifyText3);
-      }
       self.notifyText3 setText(notifyData.notifyText3);
       self.notifyText3 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText3.glowColor = glowColor;
@@ -221,9 +206,8 @@ showNotifyMessage(notifyData) {
   if(self.notifyQueue.size > 0) {
     nextNotifyData = self.notifyQueue[0];
     newQueue = [];
-    for(i = 1; i < self.notifyQueue.size; i++) {
+    for (i = 1; i < self.notifyQueue.size; i++)
       self.notifyQueue[i - 1] = self.notifyQueue[i];
-    }
     self.notifyQueue[i - 1] = undefined;
     self thread showNotifyMessage(nextNotifyData);
   }
@@ -231,14 +215,12 @@ showNotifyMessage(notifyData) {
 
 waitRequireVisibility(waitTime) {
   interval = .05;
-  while(!self canReadText()) {
+  while (!self canReadText())
     wait interval;
-  }
-  while(waitTime > 0) {
+  while (waitTime > 0) {
     wait interval;
-    if(self canReadText()) {
+    if(self canReadText())
       waitTime -= interval;
-    }
   }
 }
 
@@ -277,9 +259,8 @@ lowerMessageThink() {
   self.lowerMessage setText("");
   self.lowerMessage.archived = false;
   timerFontSize = 1.5;
-  if(level.splitscreen) {
+  if(level.splitscreen)
     timerFontSize = 1.4;
-  }
   self.lowerTimer = createFontString("default", timerFontSize);
   self.lowerTimer setParent(self.lowerMessage);
   self.lowerTimer setPoint("TOP", "BOTTOM", 0, 0);
@@ -290,17 +271,16 @@ lowerMessageThink() {
 waitTillNotifiesDone() {
   pendingNotifies = true;
   timeWaited = 0;
-  while(pendingNotifies && timeWaited < 12) {
+  while (pendingNotifies && timeWaited < 12) {
     pendingNotifies = false;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isDefined(players[i].notifyQueue) && players[i].notifyQueue.size > 0) {
         pendingNotifies = true;
       }
     }
-    if(pendingNotifies) {
+    if(pendingNotifies)
       wait .2;
-    }
     timeWaited += .2;
   }
 }

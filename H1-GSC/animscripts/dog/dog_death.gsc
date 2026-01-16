@@ -9,11 +9,11 @@
 main() {
   self endon("killanimscript");
 
-  if(isDefined(self.a.nodeath)) {
+  if(isdefined(self.a.nodeath)) {
     wait 1.1;
     var_0 = self getdroptofloorposition();
 
-    if(isDefined(var_0)) {
+    if(isdefined(var_0)) {
       var_1 = common_scripts\utility::spawn_tag_origin();
       var_1.origin = self.origin;
       var_1.angles = self.angles;
@@ -30,9 +30,8 @@ main() {
 
   self unlink();
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
+  if(isdefined(self.enemy) && isdefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
     self.enemy.syncedmeleetarget = undefined;
-  }
 
   self clearanim( % root, 0.2);
   self setflaggedanimrestart("dog_anim", % german_shepherd_death_front, 1, 0.2, 1);

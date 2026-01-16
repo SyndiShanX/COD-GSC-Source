@@ -11,7 +11,8 @@ main() {
   setsaveddvar("disableLookAtEntityLogic", 1);
 }
 
-onprecachegametype() {}
+onprecachegametype() {
+}
 
 onstartgametype() {
   level._effect["powerup_on_caution"] = loadfx("misc/fx_zombie_powerup_on_blue");

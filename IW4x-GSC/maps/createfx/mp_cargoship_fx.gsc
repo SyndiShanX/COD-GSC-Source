@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_cargoship_fx.gsc
 *********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 153
   ent = createOneshotEffect("rain_heavy_mist");
   ent.v["origin"] = (2661.26, 7.93919, 681.971);
   ent.v["angles"] = (270, 0, 0);
@@ -610,4 +612,5 @@ main() {
   ent.v["origin"] = (961.769, 583.179, 123.125);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_rain_metal";
+
 }

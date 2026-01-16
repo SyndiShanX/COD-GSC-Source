@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\util;
+
 #namespace mp_casino_scripted;
 
 autoexec __init__system__() {
@@ -21,9 +22,10 @@ __init__() {
 }
 
 __main__() {
+
   init_devgui();
 
-  function_2cdcf5c3();
+    function_2cdcf5c3();
 }
 
 on_game_playing() {
@@ -67,3 +69,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x87>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:xc6>");
 }
+

@@ -30,9 +30,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++) {
+  for(var_1 = 0; var_1 < 1; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   return var_0;
 }

@@ -19,13 +19,13 @@ main() {
 
   // First, get on
   endnode = self getnegotiationendnode();
-  assert(isDefined(endnode));
+  assert(isdefined(endnode));
   endPos = endnode.origin;
-  //("ladder_down: about to start climbing.Height to climb: " + (endPos[2] - self.origin[2]) );
+  //("ladder_down: about to start climbing.Height to climb: " + (endPos[2] - self.origin[2]) );#/
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("climbanim", % ladder_climbon, % body, 1, .1, 1);
@@ -44,5 +44,5 @@ main() {
   self traverseMode("gravity");
   self.a.movement = "stop";
   self.a.pose = "stand";
-  //("ladder_down: all done");
+  //("ladder_down: all done");#/
 }

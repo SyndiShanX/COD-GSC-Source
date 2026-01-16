@@ -11,15 +11,13 @@ JUGGERNAUT_MUSIC_DISTANCE = 2500;
 
 // must be called before maps::\_load::main()
 main() {
-  if(isDefined(level.juggernaut_initialized)) {
+  if(isdefined(level.juggernaut_initialized))
     return;
-  }
 
   level.juggernaut_initialized = true;
 
-  if(!isDefined(level.subclass_spawn_functions)) {
+  if(!isdefined(level.subclass_spawn_functions))
     level.subclass_spawn_functions = [];
-  }
 
   level.subclass_spawn_functions["juggernaut"] = ::subclass_juggernaut;
   level.juggernaut_next_alert_time = 0;
@@ -53,9 +51,8 @@ subclass_juggernaut() {
   self add_damage_function(animscripts\pain::additive_pain);
   self add_damage_function(maps\_spawner::pain_resistance);
 
-  if(!self isBadGuy()) {
+  if(!self isBadGuy())
     return;
-  }
 
   self.bullet_resistance = 40;
   self add_damage_function(maps\_spawner::bullet_resistance);
@@ -68,7 +65,7 @@ subclass_juggernaut() {
 
   self waittill("death", attacker, type, weapon);
 
-  if(isDefined(self) && isDefined(self.noDrop)) {
+  if(isdefined(self) && isdefined(self.noDrop)) {
     positions = [];
     positions[positions.size] = "left";
     positions[positions.size] = "right";
@@ -80,9 +77,8 @@ subclass_juggernaut() {
     foreach(position in positions) {
       weapon = self.a.weaponPos[position];
 
-      if(weapon == "none") {
+      if(weapon == "none")
         continue;
-      }
 
       self.weaponInfo[weapon].position = "none";
       self.a.weaponPos[position] = "none";
@@ -94,15 +90,12 @@ subclass_juggernaut() {
 
   level notify("juggernaut_died");
 
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return; // deleted
-  }
-  if(!isDefined(attacker)) {
+  if(!isdefined(attacker))
     return;
-  }
-  if(!isplayer(attacker)) {
+  if(!isplayer(attacker))
     return;
-  }
 
   attacker player_giveachievement_wrapper("IM_THE_JUGGERNAUT");
 }
@@ -112,9 +105,9 @@ juggernaut_hunt_immediately_behavior() {
   self.useChokePoints = false;
 
   //small goal at the player so they can close in aggressively
-  while(1) {
+  while (1) {
     wait .5;
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
       self.goalradius = 128;
       self.goalheight = 81;
@@ -132,25 +125,22 @@ juggernaut_sound_when_player_close() {
     music_distance = 750;
   }
 
-  while(1) {
+  while (1) {
     wait 0.05;
 
-    if(gettime() < level.juggernaut_next_alert_time) {
+    if(gettime() < level.juggernaut_next_alert_time)
       continue;
-    }
 
     player = get_closest_player(self.origin);
 
-    if(!isalive(player)) {
+    if(!isalive(player))
       continue;
-    }
 
-    if(distance(player.origin, self.origin) > music_distance) {
+    if(distance(player.origin, self.origin) > music_distance)
       continue;
-    }
 
     if(level.pmc_alljuggernauts) {
-      if(!BulletTracePassed(self getEye(), player getEye(), false, undefined)) {
+      if(!BulletTracePassed(self getEye(), player geteye(), false, undefined)) {
         wait 0.25; // reduce the amount of traces to the rate it used to use
         continue;
       }

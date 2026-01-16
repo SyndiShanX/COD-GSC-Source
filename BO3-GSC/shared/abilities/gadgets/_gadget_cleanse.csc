@@ -17,11 +17,11 @@
 #namespace _gadget_cleanse;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_cleanse", &__init__, undefined, undefined);
+  system::register("gadget_cleanse", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "gadget_cleanse_on", 1, 1, "int", &has_cleanse_changed, 0, 1);
+  clientfield::register("allplayers", "gadget_cleanse_on", 1, 1, "int", & has_cleanse_changed, 0, 1);
   duplicate_render::set_dr_filter_offscreen("cleanse_pl", 50, "cleanse_player", undefined, 2, "mc/hud_outline_model_z_green");
 }
 

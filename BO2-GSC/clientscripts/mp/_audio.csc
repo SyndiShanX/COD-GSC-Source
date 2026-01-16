@@ -27,7 +27,9 @@ audio_init(localclientnum) {
 
 clientvoicesetup() {
   if(isDefined(level.clientvoicesetup)) {
-    [[level.clientvoicesetup]]();
+    [
+      [level.clientvoicesetup]
+    ]();
     return;
   }
 
@@ -44,7 +46,7 @@ sndvonotify(notifystring, dialog) {
   for(;;) {
     player waittill(notifystring);
     soundalias = player.teamclientprefix + "_" + dialog;
-    player playSound(0, soundalias);
+    player playsound(0, soundalias);
   }
 }
 
@@ -65,9 +67,8 @@ snd_set_snapshot(state) {
 
 snd_snapshot_think() {
   for(;;) {
-    if(level._sndactivesnapshot == level._sndnextsnapshot) {
+    if(level._sndactivesnapshot == level._sndnextsnapshot)
       level waittill("new_bus");
-    }
 
     if(level._sndactivesnapshot == level._sndnextsnapshot) {
       continue;
@@ -88,15 +89,14 @@ snd_mp_end_round() {
 }
 
 soundrandom_thread(localclientnum, randsound) {
-  if(!isDefined(randsound.script_wait_min)) {
+  if(!isDefined(randsound.script_wait_min))
     randsound.script_wait_min = 1;
-  }
 
-  if(!isDefined(randsound.script_wait_max)) {
+  if(!isDefined(randsound.script_wait_max))
     randsound.script_wait_max = 3;
-  }
 
-  if(getdvarint(#"_id_0AEB127D") > 0) {}
+  if(getdvarint(#"_id_0AEB127D") > 0) {
+  }
 
   if(!isDefined(randsound.script_scripted) && isDefined(randsound.script_sound)) {
     createsoundrandom(randsound.origin, randsound.script_sound, randsound.script_wait_min, randsound.script_wait_max);
@@ -106,12 +106,12 @@ soundrandom_thread(localclientnum, randsound) {
   while(true) {
     wait(randomfloatrange(randsound.script_wait_min, randsound.script_wait_max));
 
-    if(!isDefined(randsound.script_sound)) {} else
-      playSound(localclientnum, randsound.script_sound, randsound.origin);
+    if(!isDefined(randsound.script_sound)) {
+    } else
+      playsound(localclientnum, randsound.script_sound, randsound.origin);
 
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       print3d(randsound.origin, randsound.script_sound, vectorscale((0, 1, 0), 0.8), 1, 3, 45);
-    }
 
   }
 }
@@ -123,17 +123,16 @@ startsoundrandoms(localclientnum) {
     nscriptthreadedrandoms = 0;
 
     for(i = 0; i < randoms.size; i++) {
-      if(isDefined(randoms[i].script_scripted)) {
+      if(isDefined(randoms[i].script_scripted))
         nscriptthreadedrandoms++;
-      }
     }
 
     allocatesoundrandoms(randoms.size - nscriptthreadedrandoms);
 
-    for(i = 0; i < randoms.size; i++) {
+    for(i = 0; i < randoms.size; i++)
       thread soundrandom_thread(localclientnum, randoms[i]);
-    }
-  } else {}
+  } else {
+  }
 }
 
 soundloopthink() {
@@ -146,34 +145,31 @@ soundloopthink() {
   notifyname = "";
   assert(isDefined(notifyname));
 
-  if(isDefined(self.script_string)) {
+  if(isDefined(self.script_string))
     notifyname = self.script_string;
-  }
 
   assert(isDefined(notifyname));
   started = 1;
 
-  if(isDefined(self.script_int)) {
+  if(isDefined(self.script_int))
     started = self.script_int != 0;
-  }
 
-  if(started) {
+  if(started)
     soundloopemitter(self.script_sound, self.origin);
-  }
 
   if(notifyname != "") {
     for(;;) {
       level waittill(notifyname);
 
-      if(started) {
+      if(started)
         soundstoploopemitter(self.script_sound, self.origin);
-      } else {
+      else
         soundloopemitter(self.script_sound, self.origin);
-      }
 
       started = !started;
     }
-  } else {}
+  } else {
+  }
 }
 
 soundlinethink() {
@@ -187,33 +183,30 @@ soundlinethink() {
   }
   notifyname = "";
 
-  if(isDefined(self.script_string)) {
+  if(isDefined(self.script_string))
     notifyname = self.script_string;
-  }
 
   started = 1;
 
-  if(isDefined(self.script_int)) {
+  if(isDefined(self.script_int))
     started = self.script_int != 0;
-  }
 
-  if(started) {
+  if(started)
     soundlineemitter(self.script_sound, self.origin, target.origin);
-  }
 
   if(notifyname != "") {
     for(;;) {
       level waittill(notifyname);
 
-      if(started) {
+      if(started)
         soundstoplineemitter(self.script_sound, self.origin, target.origin);
-      } else {
+      else
         soundlineemitter(self.script_sound, self.origin, target.origin);
-      }
 
       started = !started;
     }
-  } else {}
+  } else {
+  }
 }
 
 startsoundloops() {
@@ -222,22 +215,19 @@ startsoundloops() {
   if(isDefined(loopers) && loopers.size > 0) {
     delay = 0;
 
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : Initialising looper sounds - " + loopers.size + " emitters.");
-    }
 
     for(i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
 
-      if(delay % 20 == 0) {
+      if(delay % 20 == 0)
         wait 0.01;
-      }
     }
   } else {
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : No looper sounds.");
-    }
 
   }
 }
@@ -248,30 +238,27 @@ startlineemitters() {
   if(isDefined(lineemitters) && lineemitters.size > 0) {
     delay = 0;
 
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : Initialising line emitter sounds - " + lineemitters.size + " emitters.");
-    }
 
     for(i = 0; i < lineemitters.size; i++) {
       lineemitters[i] thread soundlinethink();
       delay = delay + 1;
 
-      if(delay % 20 == 0) {
+      if(delay % 20 == 0)
         wait 0.01;
-      }
     }
   } else {
-    if(getdvarint(#"_id_0AEB127D") > 0) {
+    if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : No line emitter sounds.");
-    }
 
   }
 }
 
 init_audio_triggers(localclientnum) {
   waitforclient(localclientnum);
-  steptrigs = getEntArray(localclientnum, "audio_step_trigger", "targetname");
-  materialtrigs = getEntArray(localclientnum, "audio_material_trigger", "targetname");
+  steptrigs = getentarray(localclientnum, "audio_step_trigger", "targetname");
+  materialtrigs = getentarray(localclientnum, "audio_material_trigger", "targetname");
 
   if(getdvarint(#"_id_0AEB127D") > 0) {
     println("Client : " + steptrigs.size + " audio_step_triggers.");
@@ -299,9 +286,8 @@ audio_material_trigger(trig) {
 }
 
 trig_enter_audio_material_trigger(player) {
-  if(!isDefined(player.inmaterialoverridetrigger)) {
+  if(!isDefined(player.inmaterialoverridetrigger))
     player.inmaterialoverridetrigger = 0;
-  }
 
   if(isDefined(self.script_label)) {
     player.inmaterialoverridetrigger++;
@@ -326,9 +312,8 @@ trig_leave_audio_material_trigger(player) {
 trig_enter_audio_step_trigger(trigplayer) {
   localclientnum = self.localclientnum;
 
-  if(!isDefined(trigplayer.insteptrigger)) {
+  if(!isDefined(trigplayer.insteptrigger))
     trigplayer.insteptrigger = 0;
-  }
 
   if(isDefined(self.script_label)) {
     trigplayer.step_sound = self.script_label;
@@ -338,7 +323,7 @@ trig_enter_audio_step_trigger(trigplayer) {
 
   if(isDefined(self.script_sound) && trigplayer getmovementtype() == "sprint") {
     volume = get_vol_from_speed(trigplayer);
-    trigplayer playSound(localclientnum, self.script_sound, self.origin, volume);
+    trigplayer playsound(localclientnum, self.script_sound, self.origin, volume);
   }
 }
 
@@ -347,12 +332,11 @@ trig_leave_audio_step_trigger(trigplayer) {
 
   if(isDefined(self.script_noteworthy) && trigplayer getmovementtype() == "sprint") {
     volume = get_vol_from_speed(trigplayer);
-    trigplayer playSound(localclientnum, self.script_noteworthy, self.origin, volume);
+    trigplayer playsound(localclientnum, self.script_noteworthy, self.origin, volume);
   }
 
-  if(isDefined(self.script_label)) {
+  if(isDefined(self.script_label))
     trigplayer.insteptrigger = trigplayer.insteptrigger - 1;
-  }
 
   if(trigplayer.insteptrigger < 0) {
     println("AUDIO WARNING InStepTrigger less than 0. Should never be. setting to 0");
@@ -367,19 +351,17 @@ trig_leave_audio_step_trigger(trigplayer) {
 }
 
 bump_trigger_start(localclientnum) {
-  bump_trigs = getEntArray(localclientnum, "audio_bump_trigger", "targetname");
+  bump_trigs = getentarray(localclientnum, "audio_bump_trigger", "targetname");
 
-  for(i = 0; i < bump_trigs.size; i++) {
+  for(i = 0; i < bump_trigs.size; i++)
     bump_trigs[i] thread thread_bump_trigger(localclientnum);
-  }
 }
 
 thread_bump_trigger(localclientnum) {
   self thread bump_trigger_listener();
 
-  if(!isDefined(self.script_activated)) {
+  if(!isDefined(self.script_activated))
     self.script_activated = 1;
-  }
 
   self.localclientnum = localclientnum;
 
@@ -394,21 +376,19 @@ trig_enter_bump(ent) {
   volume = get_vol_from_speed(ent);
 
   if(isDefined(self.script_sound) && self.script_activated) {
-    if(isDefined(self.script_noteworthy) && isDefined(self.script_wait) && self.script_wait > volume) {
-      test_id = ent playSound(localclientnum, self.script_noteworthy, self.origin, volume);
-    }
+    if(isDefined(self.script_noteworthy) && isDefined(self.script_wait) && self.script_wait > volume)
+      test_id = ent playsound(localclientnum, self.script_noteworthy, self.origin, volume);
 
-    if(isDefined(self.script_parameters)) {
-      test_id = ent playSound(localclientnum, self.script_parameters, self.origin, volume);
-    }
+    if(isDefined(self.script_parameters))
+      test_id = ent playsound(localclientnum, self.script_parameters, self.origin, volume);
 
-    if(!isDefined(self.script_wait) || self.script_wait <= volume) {
-      test_id = ent playSound(localclientnum, self.script_sound, self.origin, volume);
-    }
+    if(!isDefined(self.script_wait) || self.script_wait <= volume)
+      test_id = ent playsound(localclientnum, self.script_sound, self.origin, volume);
   }
 }
 
-trig_leave_bump(ent) {}
+trig_leave_bump(ent) {
+}
 
 bump_trigger_listener() {
   if(isDefined(self.script_label)) {
@@ -418,13 +398,11 @@ bump_trigger_listener() {
 }
 
 scale_speed(x1, x2, y1, y2, z) {
-  if(z < x1) {
+  if(z < x1)
     z = x1;
-  }
 
-  if(z > x2) {
+  if(z > x2)
     z = x2;
-  }
 
   dx = x2 - x1;
   n = (z - x1) / dx;
@@ -440,9 +418,8 @@ get_vol_from_speed(player) {
   min_vol = 0.1;
   speed = player getspeed();
 
-  if(speed == 0) {
+  if(speed == 0)
     speed = 175;
-  }
 
   abs_speed = absolute_value(int(speed));
   volume = scale_speed(min_speed, max_speed, min_vol, max_vol, abs_speed);
@@ -450,11 +427,10 @@ get_vol_from_speed(player) {
 }
 
 absolute_value(fowd) {
-  if(fowd < 0) {
+  if(fowd < 0)
     return fowd * -1;
-  } else {
+  else
     return fowd;
-  }
 }
 
 closest_point_on_line_to_point(point, linestart, lineend) {
@@ -462,11 +438,11 @@ closest_point_on_line_to_point(point, linestart, lineend) {
   linemagsqrd = lengthsquared(lineend - linestart);
   t = ((point[0] - linestart[0]) * (lineend[0] - linestart[0]) + (point[1] - linestart[1]) * (lineend[1] - linestart[1]) + (point[2] - linestart[2]) * (lineend[2] - linestart[2])) / linemagsqrd;
 
-  if(t < 0.0) {
+  if(t < 0.0)
     self.origin = linestart;
-  } else if(t > 1.0) {
+  else if(t > 1.0)
     self.origin = lineend;
-  } else {
+  else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);
@@ -486,9 +462,8 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
 
     for(i = 0; i < level.createfxent.size; i++) {
       if(level.createfxent[i].v["fxid"] == fxid) {
-        if(isDefined(area)) {
+        if(isDefined(area))
           level.createfxent[i].soundentarea = area;
-        }
 
         a_fx_id[a_fx_id.size] = level.createfxent[i];
       }
@@ -578,7 +553,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
           y = y / a_temp_array.size;
           z = z / a_temp_array.size;
           n_new_array_index = a_fx_result_origin.size;
-          a_fx_result_origin[n_new_array_index] = spawnStruct();
+          a_fx_result_origin[n_new_array_index] = spawnstruct();
           a_fx_result_origin[n_new_array_index].origin = (x, y, z);
           a_fx_result_origin[n_new_array_index].alias_override = 1;
           continue;
@@ -586,7 +561,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
 
         for(k = 0; k < a_temp_array.size; k++) {
           n_new_array_index = a_fx_result_origin.size;
-          a_fx_result_origin[n_new_array_index] = spawnStruct();
+          a_fx_result_origin[n_new_array_index] = spawnstruct();
           a_fx_result_origin[n_new_array_index].origin = a_temp_array[k].v["origin"];
         }
       }
@@ -601,23 +576,20 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
     for(i = 0; i < a_fx_result_origin.size; i++) {
       v_origin = a_fx_result_origin[i].origin;
 
-      if(isDefined(offsetx) && offsetx != 0) {
+      if(isDefined(offsetx) && offsetx != 0)
         v_origin = v_origin + (offsetx, 0, 0);
-      }
 
-      if(isDefined(offsety) && offsety != 0) {
+      if(isDefined(offsety) && offsety != 0)
         v_origin = v_origin + (0, offsety, 0);
-      }
 
-      if(isDefined(offsetz) && offsetz != 0) {
+      if(isDefined(offsetz) && offsetz != 0)
         v_origin = v_origin + (0, 0, offsetz);
-      }
 
       if(isDefined(onground) && onground) {
         trace = undefined;
         d = undefined;
         v_fxorigin = v_origin;
-        trace = bulletTrace(v_fxorigin, v_fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
+        trace = bullettrace(v_fxorigin, v_fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
         d = distance(v_fxorigin, trace["position"]);
         v_origin = trace["position"];
       }
@@ -636,9 +608,8 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
 }
 
 snd_print_fx_id(fxid, type, ent) {
-  if(getdvarint(#"_id_0AEB127D") > 0) {
+  if(getdvarint(#"_id_0AEB127D") > 0)
     println("^5******* fxid; " + fxid + "^5 type; " + type);
-  }
 }
 
 debug_line_emitter() {
@@ -663,19 +634,17 @@ move_sound_along_line() {
   while(true) {
     self closest_point_on_line_to_point(getlocalclientpos(0), self.start, self.end);
 
-    if(isDefined(self.fake_ent)) {
+    if(isDefined(self.fake_ent))
       setfakeentorg(self.localclientnum, self.fake_ent, self.origin);
-    }
 
     closest_dist = distancesquared(getlocalclientpos(0), self.origin);
 
-    if(closest_dist > 1048576) {
+    if(closest_dist > 1048576)
       wait 2;
-    } else if(closest_dist > 262144) {
+    else if(closest_dist > 262144)
       wait 0.2;
-    } else {
+    else
       wait 0.05;
-    }
   }
 }
 
@@ -683,9 +652,9 @@ line_sound_player() {
   if(isDefined(self.script_looping)) {
     self.fake_ent = spawnfakeent(self.localclientnum);
     setfakeentorg(self.localclientnum, self.fake_ent, self.origin);
-    playLoopSound(self.localclientnum, self.fake_ent, self.script_sound);
+    playloopsound(self.localclientnum, self.fake_ent, self.script_sound);
   } else
-    playSound(self.localclientnum, self.script_sound, self.origin);
+    playsound(self.localclientnum, self.script_sound, self.origin);
 }
 
 playloopat(aliasname, origin) {
@@ -697,15 +666,14 @@ stoploopat(aliasname, origin) {
 }
 
 soundwait(id) {
-  while(soundplaying(id)) {
+  while(soundplaying(id))
     wait 0.1;
-  }
 }
 
 snd_final_killcam() {
   while(true) {
     level waittill("fkcb");
-    playSound(0, "mpl_final_kill_cam_sting");
+    playsound(0, "mpl_final_kill_cam_sting");
     activateambientroom(0, "final_kill_cam", 10);
     level waittill("fkce");
     wait 0.01;
@@ -731,11 +699,11 @@ waitfor_reaper_end() {
 emp_static() {
   while(true) {
     level waittill("empo");
-    playSound(0, "wpn_emp_bomb_static_start");
+    playsound(0, "wpn_emp_bomb_static_start");
     wait 0.7;
     soundloopemitter("wpn_emp_bomb_static_loop", (0, 0, 0));
     level waittill("empx");
-    playSound(0, "wpn_emp_bomb_static_stop");
+    playsound(0, "wpn_emp_bomb_static_stop");
     soundstoploopemitter("wpn_emp_bomb_static_loop", (0, 0, 0));
   }
 }
@@ -779,7 +747,7 @@ projectilewhizbydistancecheck(projectile, alais, distance) {
       projectiledistance = distancesquared(projectile.origin, players[0].origin);
 
       if(projectiledistance <= distance * distance) {
-        projectile playSound(0, alais);
+        projectile playsound(0, alais);
         return;
       }
     }
@@ -802,7 +770,7 @@ soundplayuidecodeloop(decodestring, playtimems) {
     fake_ent = spawn(0, (0, 0, 0), "script_origin");
 
     if(isDefined(fake_ent)) {
-      fake_ent playLoopSound("uin_notify_data_loop");
+      fake_ent playloopsound("uin_notify_data_loop");
       wait(playtimems / 1000);
       fake_ent stoploopsound();
     }

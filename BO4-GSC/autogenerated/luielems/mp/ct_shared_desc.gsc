@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_desc;
 
 class cct_shared_desc: cluielem {

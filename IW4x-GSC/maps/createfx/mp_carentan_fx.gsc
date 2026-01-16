@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_carentan_fx.gsc
 ********************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 238
   ent = createOneshotEffect("fog_ground_200_red");
   ent.v["origin"] = (471.128, 853.821, -8);
   ent.v["angles"] = (270, 0, 0);
@@ -1334,4 +1336,5 @@ main() {
   ent.v["angles"] = (0, 90, 0);
   ent.v["fxid"] = "chinese_lantern_FX";
   ent.v["delay"] = -16.319;
+
 }

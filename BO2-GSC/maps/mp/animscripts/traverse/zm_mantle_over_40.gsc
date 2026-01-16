@@ -29,9 +29,9 @@ main() {
         traversealias = "barrier_sprint";
         break;
       default:
-        if(isDefined(level.zm_mantle_over_40_move_speed_override)) {
+        if(isDefined(level.zm_mantle_over_40_move_speed_override))
           traversealias = self[[level.zm_mantle_over_40_move_speed_override]]();
-        } else {
+        else {
           assertmsg("Zombie '" + self.classname + "' move speed of '" + self.zombie_move_speed + "' is not supported for mantle_over_40.");
 
         }

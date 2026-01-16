@@ -18,18 +18,17 @@ electric_switch() {
   trig waittill("trigger", user);
   trig setinvisibletoall();
   master_switch rotateroll(-90, 0.3);
-  master_switch playSound("zmb_switch_flip");
-  master_switch playSound("zmb_poweron");
+  master_switch playsound("zmb_switch_flip");
+  master_switch playsound("zmb_poweron");
   level delay_thread(11.8, ::sndpoweronmusicstinger);
 
-  if(isDefined(user)) {
+  if(isDefined(user))
     user thread maps\mp\zombies\_zm_audio::create_and_play_dialog("power", "power_on");
-  }
 
   level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], master_switch.origin + (0, 12, -60), anglesToForward(master_switch.angles));
-  master_switch playSound("zmb_turn_on");
+  playfx(level._effect["switch_sparks"], master_switch.origin + (0, 12, -60), anglestoforward(master_switch.angles));
+  master_switch playsound("zmb_turn_on");
   level notify("electric_door");
   clientnotify("power_on");
   flag_set("power_on");

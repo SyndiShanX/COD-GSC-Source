@@ -171,7 +171,7 @@ drawOriginForever() {
 
 drawArrow(org, ang, opcolor) {
   scale = 50;
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   forwardFar = vector_scale(forward, scale);
   forwardClose = vector_scale(forward, (scale * 0.8));
   right = anglestoright(ang);
@@ -227,7 +227,7 @@ viewTag(type, tag) {
       ai[i] drawTag(tag);
     }
   } else {
-    vehicle = getEntArray("script_vehicle", "classname");
+    vehicle = getentarray("script_vehicle", "classname");
     for(i = 0; i < vehicle.size; i++) {
       vehicle[i] drawTag(tag);
     }
@@ -414,7 +414,7 @@ showDebugTrace() {
       start = level.traceStart;
     }
     if(!isDefined(endOverride)) {
-      end = players[0] getEye();
+      end = players[0] geteye();
     }
     trace = bulletTrace(start, end, false, undefined);
     line(start, trace["position"], (0.9, 0.5, 0.8), 0.5);
@@ -448,7 +448,7 @@ debug_nuke() {
 debug_missTime() {}
 camera() {
   wait(0.05);
-  cameras = getEntArray("camera", "targetname");
+  cameras = getentarray("camera", "targetname");
   for(i = 0; i < cameras.size; i++) {
     ent = getEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
@@ -567,7 +567,7 @@ updateMinimapSetting() {
       level.minimapheight = minimapheight;
       players = get_players();
       player = players[0];
-      corners = getEntArray("minimap_corner", "targetname");
+      corners = getentarray("minimap_corner", "targetname");
       if(corners.size == 2) {
         viewpos = (corners[0].origin + corners[1].origin);
         viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
@@ -650,7 +650,7 @@ updateMinimapSetting() {
 
 getchains() {
   chainarray = [];
-  chainarray = getEntArray("minimap_line", "script_noteworthy");
+  chainarray = getentarray("minimap_line", "script_noteworthy");
   array = [];
   for(i = 0; i < chainarray.size; i++) {
     array[i] = chainarray[i] getchain();
@@ -717,7 +717,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 }
 
 debug_vehiclesittags() {
-  vehicles = getEntArray("script_vehicle", "classname");
+  vehicles = getentarray("script_vehicle", "classname");
   type = "none";
   for(i = 0; i < vehicles.size; i++) {
     if(!isDefined(level.vehicle_aianims[vehicles[i].vehicletype])) {
@@ -741,7 +741,7 @@ islookingatorigin(origin) {
   normalvec = vectorNormalize(origin - self getShootAtPos());
   veccomp = vectorNormalize((origin - (0, 0, 24)) - self getShootAtPos());
   insidedot = vectordot(normalvec, veccomp);
-  anglevec = anglesToForward(self getplayerangles());
+  anglevec = anglestoforward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
@@ -1412,42 +1412,42 @@ engage_dist_debug_hud_destroy(hudArray, killNotify) {
 
 weapon_engage_dists_init() {
   level.engageDists = [];
-  genericPistol = spawnStruct();
+  genericPistol = spawnstruct();
   genericPistol.engageDistMin = 125;
   genericPistol.engageDistOptimal = 225;
   genericPistol.engageDistMulligan = 50;
   genericPistol.engageDistMax = 400;
-  shotty = spawnStruct();
+  shotty = spawnstruct();
   shotty.engageDistMin = 50;
   shotty.engageDistOptimal = 200;
   shotty.engageDistMulligan = 75;
   shotty.engageDistMax = 350;
-  genericSMG = spawnStruct();
+  genericSMG = spawnstruct();
   genericSMG.engageDistMin = 100;
   genericSMG.engageDistOptimal = 275;
   genericSMG.engageDistMulligan = 100;
   genericSMG.engageDistMax = 500;
-  genericLMG = spawnStruct();
+  genericLMG = spawnstruct();
   genericLMG.engageDistMin = 325;
   genericLMG.engageDistOptimal = 550;
   genericLMG.engageDistMulligan = 150;
   genericLMG.engageDistMax = 850;
-  genericRifleSA = spawnStruct();
+  genericRifleSA = spawnstruct();
   genericRifleSA.engageDistMin = 325;
   genericRifleSA.engageDistOptimal = 550;
   genericRifleSA.engageDistMulligan = 150;
   genericRifleSA.engageDistMax = 850;
-  genericRifleBolt = spawnStruct();
+  genericRifleBolt = spawnstruct();
   genericRifleBolt.engageDistMin = 350;
   genericRifleBolt.engageDistOptimal = 600;
   genericRifleBolt.engageDistMulligan = 150;
   genericRifleBolt.engageDistMax = 900;
-  genericHMG = spawnStruct();
+  genericHMG = spawnstruct();
   genericHMG.engageDistMin = 390;
   genericHMG.engageDistOptimal = 600;
   genericHMG.engageDistMulligan = 100;
   genericHMG.engageDistMax = 900;
-  genericSniper = spawnStruct();
+  genericSniper = spawnstruct();
   genericSniper.engageDistMin = 950;
   genericSniper.engageDistOptimal = 1700;
   genericSniper.engageDistMulligan = 300;
@@ -1513,9 +1513,9 @@ debug_realtime_engage_dist() {
   while(1) {
     lastTracePos = (0, 0, 0);
     direction = player GetPlayerAngles();
-    direction_vec = anglesToForward(direction);
-    eye = player getEye();
-    trace = bulletTrace(eye, eye + vector_scale(direction_vec, 10000), true, player);
+    direction_vec = AnglesToForward(direction);
+    eye = player GetEye();
+    trace = BulletTrace(eye, eye + vector_scale(direction_vec, 10000), true, player);
     tracePoint = trace["position"];
     traceNormal = trace["normal"];
     traceDist = int(Distance(eye, tracePoint));
@@ -1606,10 +1606,10 @@ debug_ai_engage_dist() {
   while(1) {
     axis = GetAIArray("axis");
     if(isDefined(axis) && axis.size > 0) {
-      playerEye = player getEye();
+      playerEye = player GetEye();
       for(i = 0; i < axis.size; i++) {
         ai = axis[i];
-        aiEye = ai getEye();
+        aiEye = ai GetEye();
         if(SightTracePassed(playerEye, aiEye, false, player)) {
           dist = Distance(playerEye, aiEye);
           drawColor = level.white;
@@ -1664,7 +1664,7 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
     radius = radius2;
     angletoplayer = vectortoangles(normal);
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
+      plotpoints[plotpoints.size] = origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     maps\_utility::plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -1732,7 +1732,7 @@ spawn_guy_placement(spawner) {
     direction = self getPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = self getEye();
-    trace = bulletTrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
+    trace = bullettrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
     dist = distance(eye, trace["position"]);
     position = eye + vector_scale(direction_vec, (dist - 64));
     spawner.origin = position;
@@ -1787,7 +1787,7 @@ ai_puppet_manager() {
             level.ai_puppet ClearEntityTarget();
             level.ai_puppet_target = undefined;
           } else {
-            self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
+            self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
             level.ai_puppet ClearEntityTarget();
             level.ai_puppet_target Delete();
           }
@@ -1803,7 +1803,7 @@ ai_puppet_manager() {
             level.ai_puppet_target = spawn("script_origin", level.playerCursor["position"]);
             level.ai_puppet_target_normal = level.playerCursor["normal"];
             level.ai_puppet SetEntityTarget(level.ai_puppet_target);
-            self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
+            self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
           }
           level.ai_puppet animscripts\weaponList::RefillClip();
         }
@@ -1828,7 +1828,7 @@ ai_puppet_manager() {
           angles = VectorToAngles(to_target);
           level.ai_puppet SetGoalPos(level.playerCursor["position"], angles);
           level.ai_puppet.goalradius = 8;
-          self thread ai_puppeteer_highlight_point(level.playerCursor["position"], level.playerCursor["normal"], anglesToForward(self getplayerangles()), (0, 1, 0));
+          self thread ai_puppeteer_highlight_point(level.playerCursor["position"], level.playerCursor["normal"], anglestoforward(self getplayerangles()), (0, 1, 0));
         }
       }
       wait(0.2);
@@ -1852,7 +1852,7 @@ ai_puppet_manager() {
         if(IsAi(level.ai_puppet.scriptenemy)) {
           ai_puppeteer_render_ai(level.ai_puppet.scriptenemy, (1, 0, 0));
         } else if(isDefined(level.ai_puppet_target)) {
-          self thread ai_puppeteer_render_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
+          self thread ai_puppeteer_render_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
         }
       }
     }
@@ -1880,9 +1880,9 @@ ai_puppet_cursor_tracker() {
   level endon("kill ai puppeteer");
   self endon("death");
   while(1) {
-    forward = anglesToForward(self getplayerangles());
+    forward = anglestoforward(self getplayerangles());
     forward_vector = vector_scale(forward, 4000);
-    level.playerCursor = bulletTrace(self getEye(), self getEye() + forward_vector, true, self);
+    level.playerCursor = bullettrace(self geteye(), self geteye() + forward_vector, true, self);
     level.playerCursorAi = undefined;
     level.playerCursorNode = undefined;
     cursorColor = (0, 1, 1);

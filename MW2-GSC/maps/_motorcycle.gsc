@@ -45,7 +45,9 @@ main(model, type) {
   build_aianims(::setanims, ::set_vehicle_anims);
 }
 
-init_local() {}
+init_local() {
+
+}
 
 set_vehicle_anims(positions) {
   return positions;
@@ -55,9 +57,8 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 1; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 1; i++)
+    positions[i] = spawnstruct();
   positions[0].sittag = "tag_body";
   positions[0].idle = % motorcycle_rider_pose_f;
 

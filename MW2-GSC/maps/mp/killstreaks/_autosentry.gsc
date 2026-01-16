@@ -52,18 +52,16 @@ init() {
 
 tryUseAutoSentry(lifeId) {
   result = self giveSentry("sentry_minigun");
-  if(result) {
+  if(result)
     self maps\mp\_matchdata::logKillstreakEvent("sentry", self.origin);
-  }
 
   return (result);
 }
 
 tryUseAutoGlSentry(lifeId) {
   result = self giveSentry("sentry_gun");
-  if(result) {
+  if(result)
     self maps\mp\_matchdata::logKillstreakEvent("sentry_gl", self.origin);
-  }
 
   return (result);
 }
@@ -76,11 +74,10 @@ giveSentry(sentryType) {
   self setCarryingSentry(sentryGun, true);
 
   // if we failed to place the sentry, it will have been deleted at this point
-  if(isDefined(sentryGun)) {
+  if(isDefined(sentryGun))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 /* ============================
@@ -100,22 +97,20 @@ setCarryingSentry(sentryGun, allowCancel) {
   self notifyOnPlayerCommand("place_sentry", "+attack");
   self notifyOnPlayerCommand("cancel_sentry", "+actionslot 4");
 
-  for(;;) {
+  for (;;) {
     result = waittill_any_return("place_sentry", "cancel_sentry");
 
     if(result == "cancel_sentry") {
-      if(!allowCancel) {
+      if(!allowCancel)
         continue;
-      }
 
       sentryGun sentry_setCancelled();
       self _enableWeapon();
       return false;
     }
 
-    if(!sentryGun.canBePlaced) {
+    if(!sentryGun.canBePlaced)
       continue;
-    }
 
     sentryGun sentry_setPlaced();
     self _enableWeapon();
@@ -173,7 +168,7 @@ sentry_handleDamage() {
   healthBuffer = 20000;
   self.health += healthbuffer;
 
-  while(self.health > 0) {
+  while (self.health > 0) {
     self waittill("damage", amount, attacker, dir, point, type);
 
     if(isDefined(attacker) && isPlayer(attacker) && attacker != self.owner && attacker isFriendlyToSentry(self) && !isDefined(level.nukeDetonated)) {
@@ -182,13 +177,11 @@ sentry_handleDamage() {
     }
 
     // 7x damage for explosives - GRENADES
-    if(isExplosiveDamage(type)) {
+    if(isExplosiveDamage(type))
       self.health -= (amount * 1);
-    }
 
-    if(type == "MOD_MELEE") {
+    if(type == "MOD_MELEE")
       self.health = 0;
-    }
 
     if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("sentry");
@@ -207,9 +200,8 @@ sentry_handleDamage() {
         attacker notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self.owner thread leaderDialogOnPlayer("sentry_destroyed");
-      }
 
       self notify("death");
       return;
@@ -226,9 +218,8 @@ sentry_handleDeath() {
 
   self removeFromTurretList(entNum);
   // this handles cases of deletion
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
 
   self setModel(level.sentrySettings[self.sentryType].modelDestroyed);
 
@@ -238,7 +229,7 @@ sentry_handleDeath() {
   self SetTurretMinimapVisible(false);
 
   self playSound("sentry_explode");
-  playFXOnTag(getFx("sentry_explode_mp"), self, "tag_aim");
+  playFxOnTag(getFx("sentry_explode_mp"), self, "tag_aim");
 
   // don't try to delete ourselves if we're deleted by other means
   self endon("death");
@@ -246,8 +237,8 @@ sentry_handleDeath() {
   wait(1.5);
 
   self playSound("sentry_explode_smoke");
-  for(smokeTime = 8; smokeTime > 0; smokeTime -= 0.4) {
-    playFXOnTag(getFx("sentry_smoke_mp"), self, "tag_aim");
+  for (smokeTime = 8; smokeTime > 0; smokeTime -= 0.4) {
+    playFxOnTag(getFx("sentry_smoke_mp"), self, "tag_aim");
     wait(0.4);
   }
 
@@ -258,15 +249,14 @@ sentry_handleUse() {
   self endon("death");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
 
     assert(player == self.owner);
     assert(!isDefined(self.carriedBy));
 
-    if(!isReallyAlive(player)) {
+    if(!isReallyAlive(player))
       continue;
-    }
 
     player setCarryingSentry(self, false);
   }
@@ -362,7 +352,7 @@ updateSentryPlacement(sentryGun) {
   sentryGun.canBePlaced = true;
   lastCanPlaceSentry = -1; // force initial update
 
-  for(;;) {
+  for (;;) {
     placement = self canPlayerPlaceSentry();
 
     sentryGun.origin = placement["origin"];
@@ -390,11 +380,10 @@ sentry_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced) {
+  if(self.canBePlaced)
     self sentry_setPlaced();
-  } else {
+  else
     self delete();
-  }
 }
 
 sentry_onCarrierDisconnect(carrier) {
@@ -424,29 +413,26 @@ sentry_setActive() {
   self makeUsable();
 
   foreach(player in level.players) {
-    if(player == self.owner) {
+    if(player == self.owner)
       self enablePlayerUse(player);
-    } else {
+    else
       self disablePlayerUse(player);
-    }
   }
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-  } else {
+  else
     self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, 65));
-  }
 }
 
 sentry_setInactive() {
   self setMode(SENTRY_MODE_OFF);
   self makeUnusable();
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
-  }
 }
 
 sentry_makeSolid() {
@@ -458,9 +444,8 @@ sentry_makeNotSolid() {
 }
 
 isFriendlyToSentry(sentryGun) {
-  if(level.teamBased && self.team == sentryGun.team) {
+  if(level.teamBased && self.team == sentryGun.team)
     return true;
-  }
 
   return false;
 }
@@ -487,7 +472,7 @@ sentry_attackTargets() {
 
   self thread sentry_heatMonitor();
 
-  for(;;) {
+  for (;;) {
     self waittill_either("turretstatechange", "cooled");
 
     if(self isFiringTurret()) {
@@ -505,18 +490,16 @@ sentry_timeOut() {
 
   lifeSpan = SENTRY_TIME_OUT;
 
-  while(lifeSpan) {
+  while (lifeSpan) {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       lifeSpan = max(0, lifeSpan - 1.0);
-    }
   }
 
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner thread leaderDialogOnPlayer("sentry_gone");
-  }
 
   self notify("death");
 }
@@ -534,7 +517,7 @@ sentry_targetLockSound() {
 sentry_spinUp() {
   self thread sentry_targetLockSound();
 
-  while(self.momentum < SENTRY_SPINUP_TIME) {
+  while (self.momentum < SENTRY_SPINUP_TIME) {
     self.momentum += 0.1;
 
     wait(0.1);
@@ -559,10 +542,10 @@ sentry_burstFireStart() {
   minPause = level.sentrySettings[self.sentryType].pauseMin;
   maxPause = level.sentrySettings[self.sentryType].pauseMax;
 
-  for(;;) {
+  for (;;) {
     numShots = randomIntRange(minShots, maxShots + 1);
 
-    for(i = 0; i < numShots && !self.overheated; i++) {
+    for (i = 0; i < numShots && !self.overheated; i++) {
       self shootTurret();
       self.heatLevel += fireTime;
       wait(fireTime);
@@ -584,18 +567,17 @@ sentry_heatMonitor() {
   lastHeatLevel = 0;
   lastFxTime = 0;
 
-  for(;;) {
-    if(self.heatLevel != lastHeatLevel) {
+  for (;;) {
+    if(self.heatLevel != lastHeatLevel)
       wait(fireTime);
-    } else {
+    else
       self.heatLevel = max(0, self.heatLevel - 0.05);
-    }
 
     if(self.heatLevel > SENTRY_OVERHEAT_TIME) {
       self.overheated = true;
       self thread PlayHeatFX();
 
-      while(self.heatLevel) {
+      while (self.heatLevel) {
         self.heatLevel = max(0, self.heatLevel - 0.1);
         wait(0.1);
       }
@@ -614,8 +596,8 @@ playHeatFX() {
   self endon("not_overheated");
   level endon("game_ended");
 
-  for(;;) {
-    playFXOnTag(getFx("sentry_overheat_mp"), self, "tag_flash");
+  for (;;) {
+    playFxOnTag(getFx("sentry_overheat_mp"), self, "tag_flash");
 
     wait(SENTRY_FX_TIME);
   }
@@ -625,11 +607,10 @@ sentry_beepSounds() {
   self endon("death");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     wait(3.0);
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       self playSound("sentry_gun_beep");
-    }
   }
 }

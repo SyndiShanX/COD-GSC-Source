@@ -9,7 +9,7 @@
 
 ber1_kill_group(group) {
   guys = get_ai_group_ai(group);
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && isAlive(guys[i])) {
       guys[i] dodamage(guys[i].health + 50, guys[i].origin);
     }
@@ -49,19 +49,19 @@ kill_mgs(value, key) {
 fire_shrecks(spawn_point, target, offset, alias, time) {
   shreck = spawn("script_model", spawn_point.origin);
   shreck.angles = target.angles;
-  shreck setModel("weapon_ger_panzershreck_rocket");
+  shreck setmodel("weapon_ger_panzershreck_rocket");
   dest = target.origin;
   if(isDefined(offset)) {
     dest = dest + offset;
   }
   shreck moveTo(dest, time);
-  shreck playSound("weap_pnzr_fire");
-  playFXOnTag(level._effect["shreck_trail"], shreck, "tag_fx");
-  shreck playLoopSound("weap_pnzr_fire_rocket");
+  shreck playsound("weap_pnzr_fire");
+  playFxOnTag(level._effect["shreck_trail"], shreck, "tag_fx");
+  shreck playloopsound("weap_pnzr_fire_rocket");
   wait(time);
   shreck stoploopsound();
   shreck hide();
-  playFX(level._effect["shreck_explode"], shreck.origin);
+  playfx(level._effect["shreck_explode"], shreck.origin);
   playSoundAtPosition("rpg_impact_boom", shreck.origin);
   radiusdamage(shreck.origin, 180, 300, 35);
   earthquake(0.5, 1.5, shreck.origin, 512);
@@ -127,7 +127,7 @@ drawline(pos1, vtag, vmodel, time, color) {
     color = (1, 1, 1);
   }
   timer = gettime() + (time * 1000);
-  while(getTime() < timer) {
+  while (getTime() < timer) {
     pos2 = vmodel getTagOrigin(vtag);
     line(pos1.origin, pos2, color);
     wait(0.05);
@@ -141,7 +141,7 @@ warp_players_underworld() {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetOrigin(underworld.origin);
   }
 }
@@ -150,7 +150,7 @@ warp_players(startValue, startKey) {
   starts = GetStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     players[i] setPlayerAngles(starts[i].angles);
   }
@@ -161,13 +161,13 @@ warp_friendlies(startValue, startKey) {
   friendly_squad = array_combine(friendly_squad, level.heroes);
   friendlyStarts = GetStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size >= friendly_squad.size, "warp_friendlies(): not enough friendly start points for friendlies!");
-  for(i = 0; i < friendly_squad.size; i++) {
+  for (i = 0; i < friendly_squad.size; i++) {
     friendly_squad[i] Teleport(groundpos(friendlyStarts[i].origin), friendlyStarts[i].angles);
   }
 }
 
 thin_out_friendlies(guys) {
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(isDefined(guys[i].script_no_respawn) && guys[i].script_no_respawn) {
       guys[i] dodamage(guys[i].health + 1, (0, 0, 0));
     }

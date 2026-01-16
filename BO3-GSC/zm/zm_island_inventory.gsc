@@ -45,7 +45,7 @@ function function_1a9a4375() {
   self endon("disconnect");
   self.var_df4182b1 = 0;
   self.var_4d1c77e5 = 0;
-  while(true) {
+  while (true) {
     self waittill("player_has_gasmask");
     self thread function_2cc6bcea();
     self playsoundtoplayer("zmb_gasmask_pickup", self);
@@ -53,7 +53,7 @@ function function_1a9a4375() {
     var_ba18d83c = 10;
     self thread zm_craftables::player_show_craftable_parts_ui(undefined, "zmInventory.gaskmask_gasmask_active", 0);
     self clientfield::set_to_player("gaskmask_gasmask_progress", var_ba18d83c);
-    while(isDefined(self.var_df4182b1) && self.var_df4182b1 && var_ba18d83c > 0) {
+    while (isdefined(self.var_df4182b1) && self.var_df4182b1 && var_ba18d83c > 0) {
       self waittill("hash_b56a74a8");
       self playsoundtoplayer("zmb_gasmask_use", self);
       var_ba18d83c = var_ba18d83c - 1;
@@ -85,12 +85,12 @@ function function_2cc6bcea() {
       break;
     }
   }
-  if(!(isDefined(self.var_4d1c77e5) && self.var_4d1c77e5)) {
+  if(!(isdefined(self.var_4d1c77e5) && self.var_4d1c77e5)) {
     self attach(("c_zom_dlc2_" + str_character) + "_head_gasmask");
     self.var_4d1c77e5 = 1;
   }
   self util::waittill_any("disconnect", "death", "player_lost_gasmask");
-  if(isDefined(self.var_4d1c77e5) && self.var_4d1c77e5) {
+  if(isdefined(self.var_4d1c77e5) && self.var_4d1c77e5) {
     self detach(("c_zom_dlc2_" + str_character) + "_head_gasmask");
     self.var_4d1c77e5 = 0;
   }

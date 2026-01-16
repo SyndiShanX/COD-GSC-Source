@@ -14,9 +14,9 @@
 #namespace zm_temple_amb;
 
 function main() {
-  level._audio_custom_weapon_check = &weapon_type_check_custom;
-  level._custom_intro_vox = &intro_vox_or_skit;
-  level._audio_alias_override = &audio_alias_override;
+  level._audio_custom_weapon_check = & weapon_type_check_custom;
+  level._custom_intro_vox = & intro_vox_or_skit;
+  level._audio_alias_override = & audio_alias_override;
   level thread setup_music_egg();
   level thread visual_trigger_vox("location_maze");
   level thread visual_trigger_vox("location_waterfall");
@@ -39,15 +39,15 @@ function endgame_vox() {
   wait(2);
   winner = undefined;
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i]._has_anti115) && players[i]._has_anti115 == 1) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(players[i]._has_anti115) && players[i]._has_anti115 == 1) {
       winner = players[i];
       break;
     }
   }
-  if(isDefined(winner)) {
+  if(isdefined(winner)) {
     num = winner.characterindex;
-    if(isDefined(winner.zm_random_char)) {
+    if(isdefined(winner.zm_random_char)) {
       num = winner.zm_random_char;
     }
     if(num == 3) {
@@ -91,11 +91,11 @@ function intro_vox_or_skit() {
 function visual_trigger_vox(place) {
   wait(3);
   struct = struct::get("vox_" + place, "targetname");
-  if(!isDefined(struct)) {
+  if(!isdefined(struct)) {
     return;
   }
   vox_trig = spawn("trigger_radius", struct.origin - vectorscale((0, 0, 1), 100), 0, 250, 200);
-  while(true) {
+  while (true) {
     vox_trig waittill("trigger", who);
     if(isplayer(who)) {
       who thread zm_audio::create_and_play_dialog("general", place);
@@ -110,14 +110,14 @@ function visual_trigger_vox(place) {
 }
 
 function function_45b4acf2() {
-  var_18d6690a = getEntArray("zhdsnd_pans", "targetname");
-  array::thread_all(var_18d6690a, &function_19277046);
+  var_18d6690a = getentarray("zhdsnd_pans", "targetname");
+  array::thread_all(var_18d6690a, & function_19277046);
   n_count = 0;
   var_6932cc13 = array(1, 1, 5);
   if(var_18d6690a.size <= 0) {
     return;
   }
-  while(true) {
+  while (true) {
     level waittill("hash_ab740a84", num);
     if(num == var_6932cc13[n_count]) {
       n_count++;
@@ -133,7 +133,7 @@ function function_45b4acf2() {
 
 function function_19277046() {
   level endon("snd_zhdegg_activate");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
     if(!level flag::get("gongs_resonating")) {
       continue;

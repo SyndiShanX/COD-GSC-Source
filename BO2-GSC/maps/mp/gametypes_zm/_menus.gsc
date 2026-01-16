@@ -21,9 +21,8 @@ init() {
   game["menu_changeclass_custom"] = "changeclass_custom";
   game["menu_changeclass_barebones"] = "changeclass_barebones";
 
-  foreach(team in level.teams) {
-    game["menu_changeclass_" + team] = "changeclass";
-  }
+  foreach(team in level.teams)
+  game["menu_changeclass_" + team] = "changeclass";
 
   game["menu_controls"] = "ingame_controls";
   game["menu_options"] = "ingame_options";
@@ -70,9 +69,8 @@ onmenuresponse() {
 
       if(level.console) {
         if(menu == game["menu_changeclass"] || menu == game["menu_changeclass_offline"] || menu == game["menu_team"] || menu == game["menu_controls"]) {
-          if(isDefined(level.teams[self.pers["team"]])) {
+          if(isDefined(level.teams[self.pers["team"]]))
             self openmenu(game["menu_class"]);
-          }
         }
       }
 
@@ -85,21 +83,18 @@ onmenuresponse() {
       self openmenu(game["menu_team"]);
     }
 
-    if(response == "changeclass_marines_splitscreen") {
+    if(response == "changeclass_marines_splitscreen")
       self openmenu("changeclass_marines_splitscreen");
-    }
 
-    if(response == "changeclass_opfor_splitscreen") {
+    if(response == "changeclass_opfor_splitscreen")
       self openmenu("changeclass_opfor_splitscreen");
-    }
 
     if(response == "endgame") {
       if(self issplitscreen()) {
         level.skipvote = 1;
 
-        if(!level.gameended) {
+        if(!level.gameended)
           level thread maps\mp\gametypes_zm\_globallogic::forceend();
-        }
       }
 
       continue;
@@ -111,9 +106,9 @@ onmenuresponse() {
     }
 
     if(response == "endround") {
-      if(!level.gameended) {
+      if(!level.gameended)
         level thread maps\mp\gametypes_zm\_globallogic::forceend();
-      } else {
+      else {
         self closemenu();
         self closeingamemenu();
         self iprintln(&"MP_HOST_ENDGAME_RESPONSE");
@@ -143,9 +138,8 @@ onmenuresponse() {
       self closeingamemenu();
 
       if(level.rankedmatch && issubstr(response, "custom")) {
-        if(self isitemlocked(maps\mp\gametypes_zm\_rank::getitemindex("feature_cac"))) {
+        if(self isitemlocked(maps\mp\gametypes_zm\_rank::getitemindex("feature_cac")))
           kick(self getentitynumber());
-        }
       }
 
       self.selectedclass = 1;
@@ -156,9 +150,8 @@ onmenuresponse() {
     if(menu == "spectate") {
       player = getplayerfromclientnum(int(response));
 
-      if(isDefined(player)) {
+      if(isDefined(player))
         self setcurrentspectatorclient(player);
-      }
     }
   }
 }

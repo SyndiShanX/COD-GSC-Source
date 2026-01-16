@@ -47,7 +47,7 @@ function main() {
   level flag::init("players_lost_ww");
   e_rock = getent("mdl_underwater_secretroom_rockwall", "targetname");
   e_rock clientfield::set("do_fade_material", 1);
-  callback::on_spawned(&function_598781a4);
+  callback::on_spawned( & function_598781a4);
   foreach(player in level.players) {
     player thread function_598781a4();
   }
@@ -81,10 +81,10 @@ function function_30d4f164() {
   level.var_97c56c3c = getent("wonder_weapon_display", "targetname");
   level.var_97c56c3c hidepart("tag_liquid");
   level.var_7cb81d3c = getent("wonder_weapon_up_display", "targetname");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_tp_door_open_bundle", &function_c9d8bea4, "init");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_low_down_bundle", &hatch_open, "play");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_low_up_bundle", &function_10877763, "play");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_hatch_open_bundle", &function_4ee53d8b, "init");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_tp_door_open_bundle", & function_c9d8bea4, "init");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_low_down_bundle", & hatch_open, "play");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_low_up_bundle", & function_10877763, "play");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_hatch_open_bundle", & function_4ee53d8b, "init");
   level thread scene::init("p7_fxanim_zm_island_cage_trap_tp_door_open_bundle");
   level thread scene::init("p7_fxanim_zm_island_cage_trap_hatch_open_bundle");
   var_db6efb17 = getent("venom_extractor", "targetname");
@@ -104,7 +104,7 @@ function register_clientfield() {
 }
 
 function function_11571878() {
-  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_5f3935a);
+  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_5f3935a);
   var_85b2b1ab = getent("ww_station", "targetname");
   v_pos = var_85b2b1ab gettagorigin("mirg_cent_gun_tag_jnt");
   v_ang = var_85b2b1ab gettagangles("mirg_cent_gun_tag_jnt");
@@ -117,7 +117,7 @@ function function_11571878() {
   level.var_97c56c3c waittill("movedone");
   level.var_97c56c3c.angles = v_ang;
   level.var_97c56c3c linkto(var_85b2b1ab, "mirg_cent_gun_tag_jnt");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(zm_utility::is_player_valid(player)) {
       if(level flag::get("ww1_found") && !level flag::get("wwup1_placed")) {
@@ -154,17 +154,17 @@ function function_11571878() {
 
 function private function_5f3935a(e_player) {
   if(level flag::get("ww1_found") && level flag::get("ww2_found") && level flag::get("ww3_found")) {
-    return &"ZM_ISLAND_WONDERWEAPON_AMMO";
+    return & "ZM_ISLAND_WONDERWEAPON_AMMO";
   }
   if(level.var_622692a9) {
-    return &"ZM_ISLAND_WONDERWEAPON_STATION";
+    return & "ZM_ISLAND_WONDERWEAPON_STATION";
   }
-  return &"ZOMBIE_BUILD_PIECE_MORE";
+  return & "ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function function_255b7efb() {
-  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_d23a4109);
-  while(true) {
+  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_d23a4109);
+  while (true) {
     self.trigger waittill("trigger", player);
     if(player zm_hero_weapon::is_hero_weapon_in_use()) {
       continue;
@@ -193,14 +193,14 @@ function private function_d23a4109(e_player) {
     return "";
   }
   if(!e_player zm_hero_weapon::is_hero_weapon_in_use()) {
-    return &"ZM_ISLAND_WONDERWEAPON_PICKUP";
+    return & "ZM_ISLAND_WONDERWEAPON_PICKUP";
   }
   return "";
 }
 
 function function_2578c564(str_flag) {
   self endon("death");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger", player);
     if(zm_utility::is_player_valid(player)) {
       level.var_622692a9++;
@@ -221,7 +221,7 @@ function function_2578c564(str_flag) {
 
 function function_3c6e89ad() {
   self scene::play("p7_fxanim_zm_island_venom_extractor_end_bundle", self);
-  self setModel("p7_fxanim_zm_island_venom_extractor_red_mod");
+  self setmodel("p7_fxanim_zm_island_venom_extractor_red_mod");
   self scene::init("p7_fxanim_zm_island_venom_extractor_red_bundle", self);
 }
 
@@ -239,14 +239,14 @@ function function_9279976b(player) {
   level clientfield::set("add_ww_to_box", 1);
   player.var_3599826c = 1;
   level.zombie_weapons[level.var_5e75629a].is_in_box = 1;
-  level.customrandomweaponweights = &function_659c2324;
+  level.customrandomweaponweights = & function_659c2324;
   level.var_2cb8e184 = 0;
   player thread function_9dd4723a();
   level flag::set("ww_obtained");
 }
 
 function function_9dd4723a() {
-  while(true) {
+  while (true) {
     self util::waittill_any("bled_out", "weapon_change", "disconnect");
     if(function_52193f1e() == 0) {
       level flag::set("players_lost_ww");
@@ -303,7 +303,7 @@ function function_97d5f905() {
       break;
     }
   }
-  if(!isDefined(var_1f4c3936)) {
+  if(!isdefined(var_1f4c3936)) {
     return;
   }
   self util::waittill_any_ents(self, "user_grabbed_weapon", var_1f4c3936, "chest_accessed", self, "disconnect", self, "bled_out");
@@ -339,10 +339,10 @@ function function_6590511d() {
   level flag::wait_till("power_on");
   level waittill("start_of_round");
   wait(randomintrange(5, 8));
-  while(true) {
+  while (true) {
     ai_carrier = function_1c683357();
     if(isalive(ai_carrier)) {
-      while(isalive(ai_carrier) && ai_carrier.completed_emerging_into_playable_area !== 1) {
+      while (isalive(ai_carrier) && ai_carrier.completed_emerging_into_playable_area !== 1) {
         util::wait_network_frame();
       }
       if(isalive(ai_carrier) && zm_utility::check_point_in_playable_area(ai_carrier.origin)) {
@@ -366,15 +366,15 @@ function function_1c683357() {
     str_zone = ai_zombie zm_utility::get_current_zone();
     if(zm_zonemgr::any_player_in_zone("zone_meteor_site") || zm_zonemgr::any_player_in_zone("zone_meteor_site_2") || zm_zonemgr::any_player_in_zone("zone_swamp_lab_underneath") || zm_zonemgr::any_player_in_zone("zone_swamp_lab_underneath_2") || zm_zonemgr::any_player_in_zone("zone_swamp_lab")) {
       if(str_zone === "zone_meteor_site" || str_zone === "zone_meteor_site_2" || str_zone === "zone_swamp_lab_underneath" || str_zone === "zone_swamp_lab_underneath_2") {
-        if(!isDefined(ai_zombie.completed_emerging_into_playable_area) && (!(isDefined(ai_zombie.b_is_spider) && ai_zombie.b_is_spider)) && (!(isDefined(ai_zombie.var_61f7b3a0) && ai_zombie.var_61f7b3a0)) && ai_zombie.archetype === "zombie") {
+        if(!isdefined(ai_zombie.completed_emerging_into_playable_area) && (!(isdefined(ai_zombie.b_is_spider) && ai_zombie.b_is_spider)) && (!(isdefined(ai_zombie.var_61f7b3a0) && ai_zombie.var_61f7b3a0)) && ai_zombie.archetype === "zombie") {
           array::add(var_2513c269, ai_zombie);
         }
       }
     }
   }
   ai_carrier = array::random(var_2513c269);
-  if(isDefined(ai_carrier) && !zm_island_util::any_player_looking_at(ai_carrier getcentroid(), 0.5, 1, ai_carrier)) {
-    ai_carrier setModel("c_zom_dlc2_jpn_zombies3a");
+  if(isdefined(ai_carrier) && !zm_island_util::any_player_looking_at(ai_carrier getcentroid(), 0.5, 1, ai_carrier)) {
+    ai_carrier setmodel("c_zom_dlc2_jpn_zombies3a");
     return ai_carrier;
   }
 }
@@ -387,8 +387,8 @@ function function_f5d430d7() {
   mdl_part = util::spawn_model("p7_cai_plant_sample_vial_01", self.origin + vectorscale((0, 0, 1), 16));
   mdl_part notsolid();
   mdl_part clientfield::set("play_vial_fx", 1);
-  mdl_part playLoopSound("zmb_vial_loop");
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
+  mdl_part playloopsound("zmb_vial_loop");
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
   mdl_part thread function_2578c564("ww1_found");
   mdl_part thread function_d7b19999();
   var_83e3a776 = level util::waittill_any_return("ww1_found", "ww1_timed_out");
@@ -409,7 +409,7 @@ function function_d7b19999() {
 
 function function_2fe542aa() {
   self endon("death");
-  for(i = 0; i < 40; i++) {
+  for (i = 0; i < 40; i++) {
     if(i % 2) {
       self ghost();
     } else {
@@ -431,15 +431,15 @@ function private function_9bd3096f(player) {
   if(level flag::get("ww_obtained")) {
     return "";
   }
-  return &"ZOMBIE_BUILD_PIECE_GRAB";
+  return & "ZOMBIE_BUILD_PIECE_GRAB";
 }
 
 function function_c3efae8e() {
   s_part = struct::get("ww_part_underwater", "script_noteworthy");
   mdl_part = util::spawn_model("p7_zm_isl_foliage_plant_underwater_01_red", s_part.origin);
   mdl_part clientfield::set("play_vial_fx", 1);
-  mdl_part playLoopSound("zmb_vial_loop");
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
+  mdl_part playloopsound("zmb_vial_loop");
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
   mdl_part thread function_2578c564("ww2_found");
 }
 
@@ -448,14 +448,14 @@ function function_7def4961() {
   level.var_90e478e7 = 0;
   level.var_67359403 = 0;
   level.var_48762d0c = 0;
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_spid_tp_open_bundle", &function_2020490f, "init");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_spid_tp_open_bundle", & function_2020490f, "init");
   level thread scene::init("p7_fxanim_zm_island_cage_trap_spid_tp_open_bundle");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_spid_hatch_open_bundle", &function_385c3ebb, "init");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_cage_trap_spid_hatch_open_bundle", & function_385c3ebb, "init");
   level thread scene::init("p7_fxanim_zm_island_cage_trap_spid_hatch_open_bundle");
   var_30c2448 = struct::get("vial_pos");
   var_f78dfee = struct::get("spider_cage_control");
   var_f78dfee thread function_9faff60c();
-  while(!level.var_1dbad94a) {
+  while (!level.var_1dbad94a) {
     wait(0.1);
   }
   level thread function_ebbb27ae();
@@ -476,10 +476,10 @@ function function_385c3ebb(a_ents) {
 }
 
 function function_9faff60c() {
-  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 16, 1, &function_a50aa078);
+  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 16, 1, & function_a50aa078);
   var_a78de5fc = getent("cage_entity", "targetname");
   var_c120c3f6 = getent("clip_jungle_door", "targetname");
-  while(true) {
+  while (true) {
     self.trigger waittill("trigger");
     if(!level.var_1dbad94a && !level flag::get("power_on")) {
       continue;
@@ -488,12 +488,12 @@ function function_9faff60c() {
       continue;
     }
     if(!level.var_90e478e7) {
-      if(isDefined(level.var_1deeff56) && level.var_1deeff56) {
+      if(isdefined(level.var_1deeff56) && level.var_1deeff56) {
         level thread function_429e7f8a(1);
         str_scene = "p7_fxanim_zm_island_cage_trap_spid_low_down_bundle";
         n_height = -344;
         level.var_3ef945d6 = 1;
-        if(isDefined(level.var_18ddef1f) && level.var_18ddef1f) {
+        if(isdefined(level.var_18ddef1f) && level.var_18ddef1f) {
           level.var_f5ad590f = 1;
         }
       } else {
@@ -501,11 +501,11 @@ function function_9faff60c() {
         n_height = -246;
       }
       b_state = 1;
-      var_1cdfa0f4 = &"ZM_ISLAND_CAGE_RAISE";
+      var_1cdfa0f4 = & "ZM_ISLAND_CAGE_RAISE";
       level thread zm_island_vo::function_3bf2d62a("lower_cage", 1, 0, 0);
       level thread function_baa845f4();
     } else {
-      if(isDefined(level.var_1deeff56) && level.var_1deeff56) {
+      if(isdefined(level.var_1deeff56) && level.var_1deeff56) {
         level thread function_429e7f8a(0);
         str_scene = "p7_fxanim_zm_island_cage_trap_spid_low_up_bundle";
         n_height = 344;
@@ -515,7 +515,7 @@ function function_9faff60c() {
         n_height = 246;
       }
       b_state = 0;
-      var_1cdfa0f4 = &"ZM_ISLAND_CAGE_LOWER";
+      var_1cdfa0f4 = & "ZM_ISLAND_CAGE_LOWER";
       level thread zm_island_vo::function_3bf2d62a("raise_cage", 1, 0, 0);
     }
     level.var_48762d0c = 1;
@@ -531,7 +531,7 @@ function function_9faff60c() {
         level.var_1a139831 clientfield::set("spider_bait", 1);
       }
       level.var_1a139831.mdl_clip disconnectpaths();
-      if(!(isDefined(level.var_1deeff56) && level.var_1deeff56)) {
+      if(!(isdefined(level.var_1deeff56) && level.var_1deeff56)) {
         level.var_1a139831 scene::play("p7_fxanim_zm_island_cage_trap_spid_down_open_bundle", level.var_1a139831);
         var_c120c3f6 movez(-100, 0.05);
         var_c120c3f6 waittill("movedone");
@@ -544,10 +544,10 @@ function function_9faff60c() {
       var_c120c3f6 waittill("movedone");
       var_c120c3f6 connectpaths();
     }
-    if(isDefined(level.var_90e478e7) && level.var_90e478e7 && (isDefined(level.var_1deeff56) && level.var_1deeff56)) {
+    if(isdefined(level.var_90e478e7) && level.var_90e478e7 && (isdefined(level.var_1deeff56) && level.var_1deeff56)) {
       namespace_1aa6bd0c::function_69f5a9c5(var_1cdfa0f4);
     }
-    if(!(isDefined(level.var_90e478e7) && level.var_90e478e7) && (isDefined(level.var_1deeff56) && level.var_1deeff56)) {
+    if(!(isdefined(level.var_90e478e7) && level.var_90e478e7) && (isdefined(level.var_1deeff56) && level.var_1deeff56)) {
       namespace_1aa6bd0c::function_c9e92f7b();
     }
   }
@@ -566,17 +566,17 @@ function private function_a50aa078(player) {
   if(level.var_1a139831.var_272ec8a1) {
     return "";
   }
-  if(isDefined(level.var_f5ad590f) && level.var_f5ad590f) {
+  if(isdefined(level.var_f5ad590f) && level.var_f5ad590f) {
     return "";
   }
   if(!level.var_1dbad94a && !level flag::get("power_on")) {
-    return &"ZOMBIE_NEED_POWER";
+    return & "ZOMBIE_NEED_POWER";
   }
   if(!level.var_90e478e7 && !level.var_48762d0c) {
-    return &"ZM_ISLAND_CAGE_LOWER";
+    return & "ZM_ISLAND_CAGE_LOWER";
   }
   if(level.var_90e478e7 && !level.var_48762d0c) {
-    return &"ZM_ISLAND_CAGE_RAISE";
+    return & "ZM_ISLAND_CAGE_RAISE";
   }
   return "";
 }
@@ -585,7 +585,7 @@ function function_ebbb27ae() {
   level endon("hash_d8d0f829");
   var_60532813 = getent("trigger_trap", "targetname");
   var_799520c1 = struct::get("trap_pos");
-  while(true) {
+  while (true) {
     var_60532813 waittill("trigger", ai_zombie);
     if(!ai_zombie.b_is_spider) {
       continue;
@@ -596,17 +596,17 @@ function function_ebbb27ae() {
     if(!level.var_90e478e7) {
       continue;
     }
-    if(isDefined(level.var_3ef945d6) && level.var_3ef945d6) {
+    if(isdefined(level.var_3ef945d6) && level.var_3ef945d6) {
       continue;
     }
     if(!any_player_is_touching(getent("trigger_cage_proximity", "targetname"))) {
       continue;
     }
-    if(level flag::get("ww3_venom_extractor_used") && (!(isDefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa))) {
+    if(level flag::get("ww3_venom_extractor_used") && (!(isdefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa))) {
       continue;
     }
     if(isalive(ai_zombie)) {
-      if(isDefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa) {
+      if(isdefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa) {
         var_60532813 thread namespace_1aa6bd0c::function_aa515242(ai_zombie);
       } else {
         ai_zombie thread function_cea70075();
@@ -627,11 +627,11 @@ function function_ebbb27ae() {
       var_c120c3f6 = getent("clip_jungle_door", "targetname");
       var_c120c3f6 notsolid();
       var_c120c3f6 connectpaths();
-      while(level.var_90e478e7) {
+      while (level.var_90e478e7) {
         wait(0.1);
       }
-      if(isalive(ai_zombie) && (!(isDefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa))) {
-        level.zm_override_ai_aftermath_powerup_drop = &function_cc8fe309;
+      if(isalive(ai_zombie) && (!(isdefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa))) {
+        level.zm_override_ai_aftermath_powerup_drop = & function_cc8fe309;
         level.var_1a139831.var_272ec8a1 = 1;
         var_db6efb17 = getent("venom_extractor", "targetname");
         var_db6efb17 thread scene::play("p7_fxanim_zm_island_venom_extractor_bundle", var_db6efb17);
@@ -649,8 +649,8 @@ function function_ebbb27ae() {
 }
 
 function function_cc8fe309(var_c79d3f71, var_18130313) {
-  if(isDefined(var_c79d3f71.var_41ff1b25) && var_c79d3f71.var_41ff1b25) {
-    level._powerup_timeout_custom_time = &namespace_1aa6bd0c::function_3321a018;
+  if(isdefined(var_c79d3f71.var_41ff1b25) && var_c79d3f71.var_41ff1b25) {
+    level._powerup_timeout_custom_time = & namespace_1aa6bd0c::function_3321a018;
     e_linkto = util::spawn_model("tag_origin", level.var_1a139831.origin, level.var_1a139831.angles);
     e_linkto linkto(level.var_1a139831);
     var_93eb638b = zm_powerups::specific_powerup_drop("full_ammo", var_18130313 + (vectorscale((0, 0, -1), 16)));
@@ -665,9 +665,9 @@ function function_cc8fe309(var_c79d3f71, var_18130313) {
 function function_23d17338(var_7afe5e99 = 1) {
   var_a2176993 = getent("jungle_lab_ee_control_panel_elf", "targetname");
   if(var_7afe5e99) {
-    var_a2176993 setModel("p7_zm_isl_control_panel_cage");
+    var_a2176993 setmodel("p7_zm_isl_control_panel_cage");
   } else {
-    var_a2176993 setModel("p7_zm_isl_control_panel_cage_off");
+    var_a2176993 setmodel("p7_zm_isl_control_panel_cage_off");
   }
 }
 
@@ -687,8 +687,8 @@ function function_4a13e10b() {
   level flag::set("pool_filled");
   var_bbcd41a3 = struct::get("vial_pos").origin;
   mdl_part = util::spawn_model("tag_origin", var_bbcd41a3);
-  mdl_part playLoopSound("zmb_vial_loop");
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
+  mdl_part playloopsound("zmb_vial_loop");
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
   mdl_part thread function_2578c564("ww3_found");
   level thread zm_island_vo::function_3bf2d62a("spider_venom", 1, 0, 0);
 }
@@ -718,10 +718,10 @@ function function_1228bd27() {
   v_moveto = undefined;
   v_org = (-1135, 367, -115);
   e_linkto = getent("cage_linkto", "targetname");
-  while(true) {
+  while (true) {
     foreach(player in level.activeplayers) {
       if(player istouching(self)) {
-        while(!isDefined(v_moveto)) {
+        while (!isdefined(v_moveto)) {
           v_moveto = getclosestpointonnavmesh(v_org, 48);
           wait(0.05);
         }
@@ -748,8 +748,8 @@ function function_cc882a46() {
   var_218752f9 hidepart("j_glow_purple");
   var_218752f9 hidepart("j_glow_red");
   level flag::wait_till("ww_obtained");
-  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_5521d6b5);
-  while(true) {
+  self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_5521d6b5);
+  while (true) {
     self.trigger waittill("trigger", player);
     if(level flag::get("wwup1_found")) {
       var_218752f9 showpart("j_glow_red");
@@ -796,17 +796,17 @@ function function_cc882a46() {
 
 function private function_5521d6b5(player) {
   if(level flag::get("wwup_ready") && !player zm_hero_weapon::is_hero_weapon_in_use()) {
-    return &"ZM_ISLAND_WONDERWEAPON_UP_PICKUP";
+    return & "ZM_ISLAND_WONDERWEAPON_UP_PICKUP";
   }
   if(level flag::get("wwup1_found") && level flag::get("wwup2_found") && level flag::get("wwup3_found") && player getcurrentweapon() == level.var_5e75629a) {
-    return &"ZM_ISLAND_WONDERWEAPON_AMMO";
+    return & "ZM_ISLAND_WONDERWEAPON_AMMO";
   }
   return "";
 }
 
 function function_9f93c407(player) {
   player endon("player_upgraded_ww");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(e_who == player && !e_who zm_hero_weapon::is_hero_weapon_in_use()) {
       if(player zm_utility::in_revive_trigger()) {
@@ -844,16 +844,16 @@ function function_598781a4() {
   self zm_island_util::function_7448e472(var_537f25a1);
   var_537f25a1 delete();
   e_rock = getent("mdl_underwater_secretroom_rockwall", "targetname");
-  if(isDefined(e_rock)) {
+  if(isdefined(e_rock)) {
     playsoundatposition("zmb_wpn_skullgun_discover", e_rock.origin);
     e_rock thread function_d5faaef8();
   }
-  callback::remove_on_spawned(&function_598781a4);
+  callback::remove_on_spawned( & function_598781a4);
   level notify("hash_5d5bf177");
 }
 
 function function_d5faaef8() {
-  if(!(isDefined(self.var_7a022fa0) && self.var_7a022fa0)) {
+  if(!(isdefined(self.var_7a022fa0) && self.var_7a022fa0)) {
     self.var_7a022fa0 = 1;
     self clientfield::set("do_fade_material", 0);
     exploder::exploder("fxexp_508");
@@ -913,14 +913,14 @@ function hatch_clip(b_connect) {
 function function_1dc42fdf(var_7afe5e99 = 1) {
   var_a2176993 = getent("swamp_lab_ee_control_panel_elf", "targetname");
   if(var_7afe5e99) {
-    var_a2176993 setModel("p7_zm_isl_control_panel_cage");
+    var_a2176993 setmodel("p7_zm_isl_control_panel_cage");
     if(level.var_f353ae68.is_down) {
       level.var_e48a6587 sethintstring(&"ZM_ISLAND_CAGE_RAISE");
     } else {
       level.var_e48a6587 sethintstring(&"ZM_ISLAND_CAGE_LOWER");
     }
   } else {
-    var_a2176993 setModel("p7_zm_isl_control_panel_cage_off");
+    var_a2176993 setmodel("p7_zm_isl_control_panel_cage_off");
     level.var_e48a6587 sethintstring(&"ZOMBIE_NEED_POWER");
   }
 }
@@ -940,18 +940,18 @@ function function_961485f0() {
   level.var_ac769486 = getent("clip_swamp_cage_door", "targetname");
   var_9620cdae = getent("clip_cage_swamp", "targetname");
   var_ac769486 = getent("clip_cage_swamp_door", "targetname");
-  while(!isDefined(level.var_f353ae68)) {
+  while (!isdefined(level.var_f353ae68)) {
     wait(0.5);
   }
   var_9620cdae linkto(level.var_f353ae68);
   var_ac769486 linkto(level.var_f353ae68);
   level thread function_871dbb3a();
-  while(!level.var_2e16e689) {
+  while (!level.var_2e16e689) {
     wait(0.1);
   }
   level.var_e48a6587 sethintstring(&"ZM_ISLAND_CAGE_LOWER");
-  while(true) {
-    while(level.var_f353ae68.is_moving) {
+  while (true) {
+    while (level.var_f353ae68.is_moving) {
       util::wait_network_frame();
     }
     level.var_e48a6587 waittill("trigger", player);
@@ -962,7 +962,7 @@ function function_961485f0() {
     if(!level.var_2e16e689 && !level flag::get("power_on")) {
       continue;
     }
-    while(isDefined(var_964b337d.var_3c8bdb5a) && var_964b337d.var_3c8bdb5a) {
+    while (isdefined(var_964b337d.var_3c8bdb5a) && var_964b337d.var_3c8bdb5a) {
       wait(0.05);
     }
     if(!level.var_f353ae68.is_down) {
@@ -987,7 +987,7 @@ function function_1d3366a8() {
 function function_871dbb3a() {
   level flag::wait_till("power_on");
   level.var_9fce15de setvisibletoall();
-  while(true) {
+  while (true) {
     level.var_9fce15de waittill("trigger", player);
     if(level.var_f353ae68.is_moving) {
       continue;
@@ -1005,7 +1005,7 @@ function function_871dbb3a() {
         level thread zm_island_vo::function_3bf2d62a("raise_cage", 0, 0, 1);
         player unlink();
       }
-      while(player istouching(level.var_9fce15de)) {
+      while (player istouching(level.var_9fce15de)) {
         wait(0.1);
       }
       level.var_9fce15de setvisibletoall();
@@ -1042,7 +1042,7 @@ function function_953bec10(str_state) {
     n_rotate = 45;
   }
   self rotateyaw(n_rotate, 2);
-  self playSound("evt_spider_gate_move");
+  self playsound("evt_spider_gate_move");
   self waittill("rotatedone");
   if(str_state == "close") {
     self.is_open = 0;
@@ -1059,7 +1059,7 @@ function function_3cd05ecf(str_direction) {
   level thread function_46d3d1b0(1);
   level.var_f353ae68.is_moving = 1;
   if(!level flag::get("solo_game")) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       if(level.players[i] istouching(level.var_9fce15de)) {
         level.players[i].var_90f735f8 = 1;
         function_d452a2ca(level.players[i]);
@@ -1106,7 +1106,7 @@ function function_3cd05ecf(str_direction) {
   if(!level.var_f353ae68.is_down) {
     level thread function_46d3d1b0(0);
     foreach(player in level.players) {
-      if(isDefined(player.var_90f735f8) && player.var_90f735f8) {
+      if(isdefined(player.var_90f735f8) && player.var_90f735f8) {
         player.var_90f735f8 = 0;
         player unlink();
       }
@@ -1123,7 +1123,7 @@ function function_46d3d1b0(var_9330a364) {
     }
   } else {
     foreach(player in level.players) {
-      if(isDefined(player.var_b0329be9) && player.var_b0329be9) {
+      if(isdefined(player.var_b0329be9) && player.var_b0329be9) {
         player.var_b0329be9 = 0;
       }
     }
@@ -1150,14 +1150,14 @@ function function_6a47d3d7() {
   v_moveto = undefined;
   v_org = (2671, 851, -687);
   e_linkto = getent("cage_linkto", "targetname");
-  while(true) {
+  while (true) {
     foreach(player in level.activeplayers) {
       if(player istouching(self) && !player islinkedto(e_linkto)) {
-        while(!isDefined(v_moveto)) {
+        while (!isdefined(v_moveto)) {
           v_moveto = getclosestpointonnavmesh(v_org, 48);
           wait(0.05);
         }
-        if(isDefined(player)) {
+        if(isdefined(player)) {
           player setorigin(v_moveto);
           player playrumbleonentity("damage_heavy");
           player dodamage(player.health, player.origin);
@@ -1170,12 +1170,12 @@ function function_6a47d3d7() {
 }
 
 function function_bc717528() {
-  self.var_1da52e7e = zm_island_util::spawn_trigger_radius(self gettagorigin("Tag_tooth_RI"), 50, 1, &function_2f27cb1);
+  self.var_1da52e7e = zm_island_util::spawn_trigger_radius(self gettagorigin("Tag_tooth_RI"), 50, 1, & function_2f27cb1);
   self thread function_72c5554a("wwup2_found");
 }
 
 function function_72c5554a(str_flag) {
-  while(true) {
+  while (true) {
     self.var_1da52e7e waittill("trigger", player);
     if(zm_utility::is_player_valid(player)) {
       player notify("player_got_ww_part");
@@ -1198,14 +1198,14 @@ function function_b7685b2e() {
   var_4b9ce062 = util::spawn_model("tag_origin", var_f96ad154.origin);
   level flag::wait_till("ww_upgrade_spawned_from_plant");
   util::wait_network_frame();
-  var_4b9ce062.trigger = zm_island_util::spawn_trigger_radius(var_4b9ce062.origin, 50, 1, &function_9bd3096f);
+  var_4b9ce062.trigger = zm_island_util::spawn_trigger_radius(var_4b9ce062.origin, 50, 1, & function_9bd3096f);
   var_4b9ce062 thread function_2578c564("wwup3_found");
 }
 
 function function_e2b90d40() {
   var_2c2cf2e6 = struct::get("wweapon_up_part_wwup1");
   var_babd6f9c = util::spawn_model("p7_zm_bgb_vial", var_2c2cf2e6.origin, var_2c2cf2e6.angles);
-  var_babd6f9c.trigger = zm_island_util::spawn_trigger_radius(var_babd6f9c.origin, 100, 1, &function_9bd3096f);
+  var_babd6f9c.trigger = zm_island_util::spawn_trigger_radius(var_babd6f9c.origin, 100, 1, & function_9bd3096f);
   var_babd6f9c thread function_2578c564("wwup1_found");
 }
 
@@ -1246,7 +1246,7 @@ function function_ce9a171c(str_flag) {
 }
 
 function function_982c97e5() {
-  zm_devgui::add_custom_devgui_callback(&function_efbc0e1);
+  zm_devgui::add_custom_devgui_callback( & function_efbc0e1);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

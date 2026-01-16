@@ -23,17 +23,15 @@ main_start() {
   level.roof_trig.targetname = "bus_roof_watch";
   old_roof_trig delete();
 
-  if(isDefined(level.use_swipe_protection)) {
+  if(isDefined(level.use_swipe_protection))
     onplayerconnect_callback(::claymore_watch_swipes);
-  }
 
-  powerdoors = getEntArray("local_electric_door", "script_noteworthy");
+  powerdoors = getentarray("local_electric_door", "script_noteworthy");
 
   foreach(door in powerdoors) {
     if(isDefined(door.door_hold_trigger) && door.door_hold_trigger == "zombie_door_hold_diner") {
-      if(isDefined(door.script_flag) && door.script_flag == "OnPriDoorYar") {
+      if(isDefined(door.script_flag) && door.script_flag == "OnPriDoorYar")
         door.script_flag = undefined;
-      }
     }
   }
 }
@@ -44,83 +42,83 @@ main_end() {
     location = level.scr_zm_map_start_location;
     type = level.scr_zm_ui_gametype;
     collision4 = spawn("script_model", (12240, 8480, -720));
-    collision4 setModel("collision_wall_64x64x10_standard");
+    collision4 setmodel("collision_wall_64x64x10_standard");
     collision4.angles = (0, 0, 0);
     collision4 ghost();
     collision5 = spawn("script_model", (8320, -6679, 362));
-    collision5 setModel("collision_wall_256x256x10_standard");
+    collision5 setmodel("collision_wall_256x256x10_standard");
     collision5.angles = vectorscale((0, 1, 0), 300.0);
     collision5 ghost();
     collision6 = spawn("script_model", (8340, -5018, 191));
-    collision6 setModel("collision_geo_32x32x10_standard");
+    collision6 setmodel("collision_geo_32x32x10_standard");
     collision6.angles = vectorscale((0, 1, 0), 270.0);
     collision6 ghost();
     collision7 = spawn("script_model", (8340, -5018, 219));
-    collision7 setModel("collision_geo_32x32x10_standard");
+    collision7 setmodel("collision_geo_32x32x10_standard");
     collision7.angles = vectorscale((0, 1, 0), 270.0);
     collision7 ghost();
     collision8 = spawn("script_model", (8044, -5018, 191));
-    collision8 setModel("collision_geo_32x32x10_standard");
+    collision8 setmodel("collision_geo_32x32x10_standard");
     collision8.angles = vectorscale((0, 1, 0), 270.0);
     collision8 ghost();
     collision9 = spawn("script_model", (8044, -5018, 219));
-    collision9 setModel("collision_geo_32x32x10_standard");
+    collision9 setmodel("collision_geo_32x32x10_standard");
     collision9.angles = vectorscale((0, 1, 0), 270.0);
     collision9 ghost();
 
     if(location == "town" && type == "zstandard") {
       collision10 = spawn("script_model", (1820, 126, 152));
-      collision10 setModel("collision_wall_128x128x10_standard");
+      collision10 setmodel("collision_wall_128x128x10_standard");
       collision10.angles = vectorscale((0, 1, 0), 262.0);
       collision10 ghost();
     }
 
     collision11 = spawn("script_model", (11216.3, 8188, -432));
-    collision11 setModel("collision_wall_128x128x10_standard");
+    collision11 setmodel("collision_wall_128x128x10_standard");
     collision11.angles = vectorscale((0, 0, 1), 180.0);
     collision11 ghost();
     collision12 = spawn("script_model", (-454, 620.25, -1.75));
-    collision12 setModel("collision_wall_128x128x10_standard");
+    collision12 setmodel("collision_wall_128x128x10_standard");
     collision12.angles = vectorscale((0, 1, 0), 330.0);
     collision12 ghost();
     collision13 = spawn("script_model", (11798, 8410, -734));
-    collision13 setModel("collision_wall_128x128x10_standard");
+    collision13 setmodel("collision_wall_128x128x10_standard");
     collision13.angles = (90, 260.589, -10.311);
     collision13 ghost();
     collision14 = spawn("script_model", (652, 240, 124));
-    collision14 setModel("collision_wall_128x128x10_standard");
+    collision14 setmodel("collision_wall_128x128x10_standard");
     collision14.angles = vectorscale((0, 1, 0), 105.0);
     collision14 ghost();
 
     if(location == "farm" && type == "zgrief") {
       collision15 = spawn("script_model", (8052, -5204, 380));
-      collision15 setModel("collision_wall_64x64x10_standard");
+      collision15 setmodel("collision_wall_64x64x10_standard");
       collision15.angles = vectorscale((0, 1, 0), 180.0);
       collision15 ghost();
     }
 
     collision16 = spawn("script_model", (-448, 328, 112));
-    collision16 setModel("collision_wall_512x512x10_standard");
+    collision16 setmodel("collision_wall_512x512x10_standard");
     collision16.angles = (270, 67.822, 22.1776);
     collision16 ghost();
     collision17 = spawn("script_model", (6040, -5744, 240));
-    collision17 setModel("collision_player_256x256x256");
+    collision17 setmodel("collision_player_256x256x256");
     collision17.angles = vectorscale((0, 0, 1), 90.0);
     collision17 ghost();
     collision18 = spawn("script_model", (-6744, 4184, 64));
-    collision18 setModel("collision_wall_128x128x10_standard");
+    collision18 setmodel("collision_wall_128x128x10_standard");
     collision18.angles = vectorscale((0, 0, 1), 90.0);
     collision18 ghost();
     collision19 = spawn("script_model", (-6328, -7168, 264));
-    collision19 setModel("collision_player_256x256x256");
+    collision19 setmodel("collision_player_256x256x256");
     collision19.angles = vectorscale((0, 0, 1), 90.0);
     collision19 ghost();
     collision20 = spawn("script_model", (9960, 7352, -136));
-    collision20 setModel("collision_player_256x256x256");
+    collision20 setmodel("collision_player_256x256x256");
     collision20.angles = vectorscale((0, 0, 1), 90.0);
     collision20 ghost();
     collision21 = spawn("script_model", (-4656, -7373, 0));
-    collision21 setModel("collision_player_32x32x128");
+    collision21 setmodel("collision_player_32x32x128");
     collision21.angles = vectorscale((0, 1, 0), 341.6);
     collision21 ghost();
   }
@@ -220,9 +218,8 @@ power_station_exploit() {
 equipment_safe_to_drop_ffotd(weapon) {
   for(i = 0; i < level.equipment_dead_zone_pos.size; i++) {
     if(distancesquared(level.equipment_dead_zone_pos[i], weapon.origin) < level.equipment_dead_zone_rad2[i]) {
-      if(!isDefined(level.equipment_dead_zone_type[i]) || !isDefined(weapon.model) || level.equipment_dead_zone_type[i] == weapon.model) {
+      if(!isDefined(level.equipment_dead_zone_type[i]) || !isDefined(weapon.model) || level.equipment_dead_zone_type[i] == weapon.model)
         return 0;
-      }
     }
   }
 
@@ -264,9 +261,8 @@ watch_melee_swipes(weapname) {
           self setweaponammoclip(weapname, ammo - 1);
           primaryweapons = self getweaponslistprimaries();
 
-          if(isDefined(primaryweapons[0])) {
+          if(isDefined(primaryweapons[0]))
             self switchtoweapon(primaryweapons[0]);
-          }
         }
       } else
         self takeweapon(weapname);

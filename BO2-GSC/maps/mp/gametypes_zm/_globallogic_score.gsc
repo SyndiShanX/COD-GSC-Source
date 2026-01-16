@@ -12,9 +12,11 @@
 #include maps\mp\_challenges;
 #include maps\mp\gametypes_zm\_globallogic_utils;
 
-updatematchbonusscores(winner) {}
+updatematchbonusscores(winner) {
+}
 
-givematchbonus(scoretype, score) {}
+givematchbonus(scoretype, score) {
+}
 
 doskillupdate(winner) {
   skillupdate(winner, level.teambased);
@@ -38,16 +40,14 @@ gethighestscoringplayer() {
       continue;
     }
 
-    if(players[i].score == winner.score) {
+    if(players[i].score == winner.score)
       tie = 1;
-    }
   }
 
-  if(tie || !isDefined(winner)) {
+  if(tie || !isDefined(winner))
     return undefined;
-  } else {
+  else
     return winner;
-  }
 }
 
 resetscorechain() {
@@ -69,11 +69,10 @@ scorechaintimer() {
 roundtonearestfive(score) {
   rounding = score % 5;
 
-  if(rounding <= 2) {
+  if(rounding <= 2)
     return score - rounding;
-  } else {
+  else
     return score + (5 - rounding);
-  }
 }
 
 giveplayermomentumnotification(score, label, descvalue, countstowardrampage) {
@@ -81,28 +80,24 @@ giveplayermomentumnotification(score, label, descvalue, countstowardrampage) {
 
   if(isDefined(level.usingrampage) && level.usingrampage) {
     if(countstowardrampage) {
-      if(!isDefined(self.scorechain)) {
+      if(!isDefined(self.scorechain))
         self.scorechain = 0;
-      }
 
       self.scorechain++;
       self thread scorechaintimer();
     }
 
-    if(isDefined(self.scorechain) && self.scorechain >= 999) {
+    if(isDefined(self.scorechain) && self.scorechain >= 999)
       rampagebonus = roundtonearestfive(int(score * level.rampagebonusscale + 0.5));
-    }
   }
 
-  if(score != 0) {
+  if(score != 0)
     self luinotifyevent(&"score_event", 3, label, score, rampagebonus);
-  }
 
   score = score + rampagebonus;
 
-  if(score > 0 && self hasperk("specialty_earnmoremomentum")) {
+  if(score > 0 && self hasperk("specialty_earnmoremomentum"))
     score = roundtonearestfive(int(score * getdvarfloat(#"perk_killstreakMomentumMultiplier") + 0.5));
-  }
 
   _setplayermomentum(self, self.pers["momentum"] + score);
 }
@@ -114,7 +109,8 @@ resetplayermomentumondeath() {
   }
 }
 
-giveplayermomentum(event, player, victim, weapon, descvalue) {}
+giveplayermomentum(event, player, victim, weapon, descvalue) {
+}
 
 giveplayerscore(event, player, victim, weapon, descvalue) {
   scorediff = 0;
@@ -122,9 +118,8 @@ giveplayerscore(event, player, victim, weapon, descvalue) {
   giveplayermomentum(event, player, victim, weapon, descvalue);
   newmomentum = player.pers["momentum"];
 
-  if(level.overrideplayerscore) {
+  if(level.overrideplayerscore)
     return 0;
-  }
 
   pixbeginevent("level.onPlayerScore");
   score = player.pers["score"];
@@ -134,26 +129,26 @@ giveplayerscore(event, player, victim, weapon, descvalue) {
   bbprint("mpplayerscore", "spawnid %d gametime %d type %s player %s delta %d deltamomentum %d team %s", getplayerspawnid(player), gettime(), event, player.name, newscore - score, newmomentum - momentum, player.team);
   player maps\mp\_bb::bbaddtostat("score", newscore - score);
 
-  if(score == newscore) {
+  if(score == newscore)
     return 0;
-  }
 
   pixbeginevent("givePlayerScore");
   recordplayerstats(player, "score", newscore);
   scorediff = newscore - score;
   player addplayerstatwithgametype("score", scorediff);
 
-  if(isDefined(player.pers["lastHighestScore"]) && newscore > player.pers["lastHighestScore"]) {
+  if(isDefined(player.pers["lastHighestScore"]) && newscore > player.pers["lastHighestScore"])
     player setdstat("HighestStats", "highest_score", newscore);
-  }
 
   pixendevent();
   return scorediff;
 }
 
-default_onplayerscore(event, player, victim) {}
+default_onplayerscore(event, player, victim) {
+}
 
-_setplayerscore(player, score) {}
+_setplayerscore(player, score) {
+}
 
 _getplayerscore(player) {
   return player.pers["score"];
@@ -178,7 +173,8 @@ _setplayermomentum(player, momentum) {
   player.momentum = player.pers["momentum"];
 }
 
-_giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
+_giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {
+}
 
 setplayermomentumdebug() {
   setdvar("sv_momentumPercent", 0.0);
@@ -193,9 +189,8 @@ setplayermomentumdebug() {
       if(!isDefined(player)) {
         return;
       }
-      if(isDefined(player.killstreak)) {
+      if(isDefined(player.killstreak))
         _setplayermomentum(player, int(2000 * (momentumpercent / 100)));
-      }
     }
   }
 
@@ -243,9 +238,8 @@ _setteamscore(team, teamscore) {
 
 resetteamscores() {
   if(!isDefined(level.roundscorecarry) || level.roundscorecarry == 0 || maps\mp\_utility::isfirstround()) {
-    foreach(team in level.teams) {
-      game["teamScores"][team] = 0;
-    }
+    foreach(team in level.teams)
+    game["teamScores"][team] = 0;
   }
 
   maps\mp\gametypes_zm\_globallogic_score::updateallteamscores();
@@ -262,9 +256,8 @@ resetplayerscores() {
   tie = 0;
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].pers["score"])) {
+    if(isDefined(players[i].pers["score"]))
       _setplayerscore(players[i], 0);
-    }
   }
 }
 
@@ -274,9 +267,8 @@ updateteamscores(team) {
 }
 
 updateallteamscores() {
-  foreach(team in level.teams) {
-    updateteamscores(team);
-  }
+  foreach(team in level.teams)
+  updateteamscores(team);
 }
 
 _getteamscore(team) {
@@ -295,23 +287,20 @@ gethighestteamscoreteam() {
       winning_teams = [];
     }
 
-    if(team_score == score) {
+    if(team_score == score)
       winning_teams[team] = team;
-    }
   }
 
   return winning_teams;
 }
 
 areteamarraysequal(teamsa, teamsb) {
-  if(teamsa.size != teamsb.size) {
+  if(teamsa.size != teamsb.size)
     return false;
-  }
 
   foreach(team in teamsa) {
-    if(!isDefined(teamsb[team])) {
+    if(!isDefined(teamsb[team]))
       return false;
-    }
   }
 
   return true;
@@ -320,9 +309,8 @@ areteamarraysequal(teamsa, teamsb) {
 onteamscore(score, team) {
   game["teamScores"][team] = game["teamScores"][team] + score;
 
-  if(level.scorelimit && game["teamScores"][team] > level.scorelimit) {
+  if(level.scorelimit && game["teamScores"][team] > level.scorelimit)
     game["teamScores"][team] = level.scorelimit;
-  }
 
   if(level.splitscreen) {
     return;
@@ -346,9 +334,8 @@ onteamscore(score, team) {
   if(iswinning.size == 1) {
     foreach(team in iswinning) {
       if(isDefined(level.waswinning[team])) {
-        if(level.waswinning.size == 1) {
+        if(level.waswinning.size == 1)
           continue;
-        }
       }
 
       maps\mp\gametypes_zm\_globallogic_audio::leaderdialog("lead_taken", team, "status");
@@ -361,9 +348,8 @@ onteamscore(score, team) {
         if(iswinning.size == 1) {
           continue;
         }
-        if(level.waswinning.size > 1) {
+        if(level.waswinning.size > 1)
           continue;
-        }
       }
 
       maps\mp\gametypes_zm\_globallogic_audio::leaderdialog("lead_lost", team, "status");
@@ -373,20 +359,18 @@ onteamscore(score, team) {
   level.waswinning = iswinning;
 }
 
-default_onteamscore(event, team) {}
+default_onteamscore(event, team) {
+}
 
 initpersstat(dataname, record_stats, init_to_stat_value) {
-  if(!isDefined(self.pers[dataname])) {
+  if(!isDefined(self.pers[dataname]))
     self.pers[dataname] = 0;
-  }
 
-  if(!isDefined(record_stats) || record_stats == 1) {
+  if(!isDefined(record_stats) || record_stats == 1)
     recordplayerstats(self, dataname, int(self.pers[dataname]));
-  }
 
-  if(isDefined(init_to_stat_value) && init_to_stat_value == 1) {
+  if(isDefined(init_to_stat_value) && init_to_stat_value == 1)
     self.pers[dataname] = self getdstat("PlayerStatsList", dataname, "StatValue");
-  }
 }
 
 getpersstat(dataname) {
@@ -397,15 +381,13 @@ incpersstat(dataname, increment, record_stats, includegametype) {
   pixbeginevent("incPersStat");
   self.pers[dataname] = self.pers[dataname] + increment;
 
-  if(isDefined(includegametype) && includegametype) {
+  if(isDefined(includegametype) && includegametype)
     self addplayerstatwithgametype(dataname, increment);
-  } else {
+  else
     self addplayerstat(dataname, increment);
-  }
 
-  if(!isDefined(record_stats) || record_stats == 1) {
+  if(!isDefined(record_stats) || record_stats == 1)
     self thread threadedrecordplayerstats(dataname);
-  }
 
   pixendevent();
 }
@@ -416,7 +398,8 @@ threadedrecordplayerstats(dataname) {
   recordplayerstats(self, dataname, self.pers[dataname]);
 }
 
-updatewinstats(winner) {}
+updatewinstats(winner) {
+}
 
 updatelossstats(loser) {
   loser addplayerstatwithgametype("losses", 1);
@@ -476,21 +459,21 @@ updatewinlossstats(winner) {
   }
 }
 
-backupandclearwinstreaks() {}
+backupandclearwinstreaks() {
+}
 
-restorewinstreaks(winner) {}
+restorewinstreaks(winner) {
+}
 
 inckillstreaktracker(sweapon) {
   self endon("disconnect");
   waittillframeend;
 
-  if(sweapon == "artillery_mp") {
+  if(sweapon == "artillery_mp")
     self.pers["artillery_kills"]++;
-  }
 
-  if(sweapon == "dog_bite_mp") {
+  if(sweapon == "dog_bite_mp")
     self.pers["dog_kills"]++;
-  }
 }
 
 trackattackerkill(name, rank, xp, prestige, xuid) {
@@ -499,25 +482,21 @@ trackattackerkill(name, rank, xp, prestige, xuid) {
   waittillframeend;
   pixbeginevent("trackAttackerKill");
 
-  if(!isDefined(attacker.pers["killed_players"][name])) {
+  if(!isDefined(attacker.pers["killed_players"][name]))
     attacker.pers["killed_players"][name] = 0;
-  }
 
-  if(!isDefined(attacker.killedplayerscurrent[name])) {
+  if(!isDefined(attacker.killedplayerscurrent[name]))
     attacker.killedplayerscurrent[name] = 0;
-  }
 
-  if(!isDefined(attacker.pers["nemesis_tracking"][name])) {
+  if(!isDefined(attacker.pers["nemesis_tracking"][name]))
     attacker.pers["nemesis_tracking"][name] = 0;
-  }
 
   attacker.pers["killed_players"][name]++;
   attacker.killedplayerscurrent[name]++;
   attacker.pers["nemesis_tracking"][name] = attacker.pers["nemesis_tracking"][name] + 1.0;
 
-  if(attacker.pers["nemesis_name"] == name) {
+  if(attacker.pers["nemesis_name"] == name)
     attacker maps\mp\_challenges::killednemesis();
-  }
 
   if(attacker.pers["nemesis_name"] == "" || attacker.pers["nemesis_tracking"][name] > attacker.pers["nemesis_tracking"][attacker.pers["nemesis_name"]]) {
     attacker.pers["nemesis_name"] = name;
@@ -538,15 +517,13 @@ trackattackeedeath(attackername, rank, xp, prestige, xuid) {
   waittillframeend;
   pixbeginevent("trackAttackeeDeath");
 
-  if(!isDefined(self.pers["killed_by"][attackername])) {
+  if(!isDefined(self.pers["killed_by"][attackername]))
     self.pers["killed_by"][attackername] = 0;
-  }
 
   self.pers["killed_by"][attackername]++;
 
-  if(!isDefined(self.pers["nemesis_tracking"][attackername])) {
+  if(!isDefined(self.pers["nemesis_tracking"][attackername]))
     self.pers["nemesis_tracking"][attackername] = 0;
-  }
 
   self.pers["nemesis_tracking"][attackername] = self.pers["nemesis_tracking"][attackername] + 1.5;
 
@@ -561,11 +538,10 @@ trackattackeedeath(attackername, rank, xp, prestige, xuid) {
     self.pers["nemesis_xp"] = xp;
   }
 
-  if(self.pers["nemesis_name"] == attackername && self.pers["nemesis_tracking"][attackername] >= 2) {
+  if(self.pers["nemesis_name"] == attackername && self.pers["nemesis_tracking"][attackername] >= 2)
     self setclientuivisibilityflag("killcam_nemesis", 1);
-  } else {
+  else
     self setclientuivisibilityflag("killcam_nemesis", 0);
-  }
 
   pixendevent();
 }
@@ -600,9 +576,8 @@ givekillstats(smeansofdeath, sweapon, evictim) {
 }
 
 inctotalkills(team) {
-  if(level.teambased && isDefined(level.teams[team])) {
+  if(level.teambased && isDefined(level.teams[team]))
     game["totalKillsTeam"][team]++;
-  }
 
   game["totalKills"]++;
 }
@@ -616,9 +591,8 @@ setinflictorstat(einflictor, eattacker, sweapon) {
     return;
   }
 
-  if(!isDefined(einflictor.playeraffectedarray)) {
+  if(!isDefined(einflictor.playeraffectedarray))
     einflictor.playeraffectedarray = [];
-  }
 
   foundnewplayer = 1;
 
@@ -632,9 +606,8 @@ setinflictorstat(einflictor, eattacker, sweapon) {
   if(foundnewplayer) {
     einflictor.playeraffectedarray[einflictor.playeraffectedarray.size] = self;
 
-    if(sweapon == "concussion_grenade_mp" || sweapon == "tabun_gas_mp") {
+    if(sweapon == "concussion_grenade_mp" || sweapon == "tabun_gas_mp")
       eattacker addweaponstat(sweapon, "used", 1);
-    }
 
     eattacker addweaponstat(sweapon, "hits", 1);
   }
@@ -677,11 +650,10 @@ processassist(killedplayer, damagedone, weapon) {
   assist_level = "assist";
   assist_level_value = int(ceil(damagedone / 25));
 
-  if(assist_level_value < 1) {
+  if(assist_level_value < 1)
     assist_level_value = 1;
-  } else if(assist_level_value > 3) {
+  else if(assist_level_value > 3)
     assist_level_value = 3;
-  }
 
   assist_level = assist_level + "_" + assist_level_value * 25;
   self maps\mp\gametypes_zm\_globallogic_score::incpersstat("assists", 1, 1, 1);
@@ -706,4 +678,5 @@ processassist(killedplayer, damagedone, weapon) {
   self maps\mp\_challenges::assisted();
 }
 
-xpratethread() {}
+xpratethread() {
+}

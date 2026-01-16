@@ -6,20 +6,19 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-init() {}
+init() {
+}
 
 wait_until_first_player() {
   players = get_players();
 
-  if(!isDefined(players[0])) {
+  if(!isDefined(players[0]))
     level waittill("first_player_ready");
-  }
 
   players = get_players();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     players[i] thread monitor_player_sprint();
-  }
 }
 
 stand_think(trig) {
@@ -29,9 +28,8 @@ stand_think(trig) {
   self endon(killtext);
 
   while(true) {
-    if(self.player_is_moving) {
-      trig playSound(trig.script_label);
-    }
+    if(self.player_is_moving)
+      trig playsound(trig.script_label);
 
     wait 1;
   }
@@ -59,11 +57,10 @@ monitor_player_movement() {
     org_2 = self.origin;
     distancemoved = distancesquared(org_1, org_2);
 
-    if(distancemoved > 4096) {
+    if(distancemoved > 4096)
       self.player_is_moving = 1;
-    } else {
+    else
       self.player_is_moving = 0;
-    }
   }
 }
 
@@ -72,51 +69,45 @@ thread_enter_exit_sound(trig) {
   self endon("disconnect");
   trig.touchingplayers[self getentitynumber()] = 1;
 
-  if(isDefined(trig.script_sound) && trig.script_activated && self._is_sprinting) {
-    self playSound(trig.script_sound);
-  }
+  if(isDefined(trig.script_sound) && trig.script_activated && self._is_sprinting)
+    self playsound(trig.script_sound);
 
   self thread stand_think(trig);
 
-  while(self istouching(trig)) {
+  while(self istouching(trig))
     wait 0.1;
-  }
 
   self notify("kill_stand_think" + trig getentitynumber());
-  self playSound(trig.script_noteworthy);
+  self playsound(trig.script_noteworthy);
   trig.touchingplayers[self getentitynumber()] = 0;
 }
 
 thread_step_trigger() {
-  if(!isDefined(self.script_activated)) {
+  if(!isDefined(self.script_activated))
     self.script_activated = 1;
-  }
 
   if(!isDefined(self.touchingplayers)) {
     self.touchingplayers = [];
 
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++)
       self.touchingplayers[i] = 0;
-    }
   }
 
   while(true) {
     self waittill("trigger", who);
 
-    if(self.touchingplayers[who getentitynumber()] == 0) {
+    if(self.touchingplayers[who getentitynumber()] == 0)
       who thread thread_enter_exit_sound(self);
-    }
   }
 }
 
 disable_bump_trigger(triggername) {
-  triggers = getEntArray("audio_bump_trigger", "targetname");
+  triggers = getentarray("audio_bump_trigger", "targetname");
 
   if(isDefined(triggers)) {
     for(i = 0; i < triggers.size; i++) {
-      if(isDefined(triggers[i].script_label) && triggers[i].script_label == triggername) {
+      if(isDefined(triggers[i].script_label) && triggers[i].script_label == triggername)
         triggers[i].script_activated = 0;
-      }
     }
   }
 }
@@ -125,9 +116,8 @@ get_player_index_number(player) {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i] == player) {
+    if(players[i] == player)
       return i;
-    }
   }
 
   return 1;

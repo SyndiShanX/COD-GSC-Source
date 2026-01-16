@@ -7,10 +7,11 @@
 #include scripts\core_common\struct;
 #include scripts\zm_common\gametypes\globallogic_score;
 #include scripts\zm_common\gametypes\hostmigration;
+
 #namespace globallogic_utils;
 
 testshock() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   for(;;) {
     wait 3;
@@ -25,7 +26,7 @@ testshock() {
 }
 
 testhps() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   hps = [];
   hps[hps.size] = "radar";
   hps[hps.size] = "artillery";
@@ -101,15 +102,15 @@ getvalueinrange(value, minvalue, maxvalue) {
 }
 
 assertproperplacement() {
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   for(i = 0; i < numplayers - 1; i++) {
-    if(isDefined(level.placement[# "all"][i]) && isDefined(level.placement[# "all"][i + 1])) {
-      if(level.placement[# "all"][i].score < level.placement[# "all"][i + 1].score) {
+    if(isDefined(level.placement[#"all"][i]) && isDefined(level.placement[#"all"][i + 1])) {
+      if(level.placement[#"all"][i].score < level.placement[#"all"][i + 1].score) {
         println("<dev string:x38>");
 
         for(i = 0; i < numplayers; i++) {
-          player = level.placement[# "all"][i];
+          player = level.placement[#"all"][i];
           println("<dev string:x4d>" + i + "<dev string:x52>" + player.name + "<dev string:x57>" + player.score);
         }
 
@@ -120,17 +121,17 @@ assertproperplacement() {
   }
 }
 
-function isvalidclass(vclass) {
-  if(level.oldschool || sessionmodeiszombiesgame()) {
-    assert(!isDefined(vclass));
-    return true;
+  function isvalidclass(vclass) {
+    if(level.oldschool || sessionmodeiszombiesgame()) {
+      assert(!isDefined(vclass));
+      return true;
+    }
+
+    return isDefined(vclass) && vclass != "";
   }
 
-  return isDefined(vclass) && vclass != "";
-}
-
 playtickingsound(gametype_tick_sound) {
-  self endon(#"death", # "stop_ticking");
+  self endon(#"death", #"stop_ticking");
   level endon(#"game_ended");
   time = level.bombtimer;
 
@@ -278,8 +279,8 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
   }
 
   switch (smeansofdeath) {
-    case # "mod_impact":
-    case # "mod_melee":
+    case #"mod_impact":
+    case #"mod_melee":
       return false;
   }
 
@@ -288,29 +289,29 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
 
 gethitlocheight(shitloc) {
   switch (shitloc) {
-    case # "head":
-    case # "helmet":
-    case # "neck":
+    case #"head":
+    case #"helmet":
+    case #"neck":
       return 60;
-    case # "left_arm_lower":
-    case # "left_arm_upper":
-    case # "torso_upper":
-    case # "right_arm_lower":
-    case # "left_hand":
-    case # "right_arm_upper":
-    case # "gun":
-    case # "right_hand":
+    case #"left_arm_lower":
+    case #"left_arm_upper":
+    case #"torso_upper":
+    case #"right_arm_lower":
+    case #"left_hand":
+    case #"right_arm_upper":
+    case #"gun":
+    case #"right_hand":
       return 48;
-    case # "torso_lower":
+    case #"torso_lower":
       return 40;
-    case # "right_leg_upper":
-    case # "left_leg_upper":
+    case #"right_leg_upper":
+    case #"left_leg_upper":
       return 32;
-    case # "left_leg_lower":
-    case # "right_leg_lower":
+    case #"left_leg_lower":
+    case #"right_leg_lower":
       return 10;
-    case # "left_foot":
-    case # "right_foot":
+    case #"left_foot":
+    case #"right_foot":
       return 5;
   }
 
@@ -324,15 +325,15 @@ debugline(start, end) {
   }
 }
 
-function isexcluded(entity, entitylist) {
-  for(index = 0; index < entitylist.size; index++) {
-    if(entity == entitylist[index]) {
-      return true;
+  function isexcluded(entity, entitylist) {
+    for(index = 0; index < entitylist.size; index++) {
+      if(entity == entitylist[index]) {
+        return true;
+      }
     }
-  }
 
-  return false;
-}
+    return false;
+  }
 
 logteamwinstring(wintype, winner) {
   log_string = wintype;
@@ -342,8 +343,9 @@ logteamwinstring(wintype, winner) {
   }
 
   foreach(team, str_team in level.teams) {
-    log_string = log_string + "<dev string:x90>" + str_team + "<dev string:x57>" + game.stat[# "teamscores"][team];
+    log_string = log_string + "<dev string:x90>" + str_team + "<dev string:x57>" + game.stat[#"teamscores"][team];
   }
 
   print(log_string);
 }
+

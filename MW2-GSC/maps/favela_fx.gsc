@@ -50,6 +50,7 @@ main() {
 }
 
 footstep_effects() {
+
   //Regular footstep fx
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("concrete", loadfx("impacts/footstep_dust"));
@@ -96,6 +97,7 @@ footstep_effects() {
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "asphalt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "mud", loadfx("impacts/footstep_mud"));
+
 }
 
 treadfx_override() {}

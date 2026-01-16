@@ -464,9 +464,8 @@ anim_chair() {
 #using_animtree("generic_human");
 
 play_idle_facial_anim(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = randomint(anim.facial["idle"].size);
-  }
 
   self setanimknoballrestart(anim.facial["idle"][var_0], % head, 1);
   self setanimlimited( % head, 1);
@@ -477,7 +476,7 @@ gaz_face_think(var_0) {
   level waittill("navigationTraining_end");
   level endon("out_of_firing_range");
 
-  for(;;) {
+  for (;;) {
     if(var_0.speaking == 1) {
       wait 0.1;
       var_0 setanimknoballlimited( % facial_idle_1, % head, 0.1, 0.1);
@@ -489,7 +488,7 @@ gaz_face_think(var_0) {
       var_0 setanimknoballlimitedrestart( % facial_idle_1, % head, 0.8);
       var_0 setanimlimited( % head, 0.8);
 
-      for(;;) {
+      for (;;) {
         if(var_0.speaking == 1) {
           break;
         } else
@@ -502,7 +501,7 @@ gaz_face_think(var_0) {
 newcastle_face_think(var_0) {
   level endon("explosivesTraining_end");
 
-  for(;;) {
+  for (;;) {
     if(var_0.speaking) {
       wait 0.4;
       var_0 setanimknoballlimited( % h1_killhouse_nwc_idle_facial, % newcastle_face, 0.1, 0.4);
@@ -513,7 +512,7 @@ newcastle_face_think(var_0) {
     var_0 setanimknoballlimitedrestart( % h1_killhouse_nwc_idle_facial, % newcastle_face, 0.8);
     var_0 setanimlimited( % newcastle_face, 0.8);
 
-    for(;;) {
+    for (;;) {
       if(var_0.speaking == 1) {
         break;
       }

@@ -72,10 +72,10 @@
 #namespace load;
 
 function main() {
-  /
+  /# /
   #
-  assert(isDefined(level.first_frame), "");
-  if(isDefined(level._loadstarted) && level._loadstarted) {
+  assert(isdefined(level.first_frame), "");
+  if(isdefined(level._loadstarted) && level._loadstarted) {
     return;
   }
   function_13c5b077();
@@ -100,8 +100,8 @@ function main() {
   system::wait_till("all");
   art_review();
   level flagsys::set("load_main_complete");
-  level.var_732e9c7d = &function_13aa782f;
-  if(isDefined(level.skipto_point) && isDefined(level.default_skipto)) {
+  level.var_732e9c7d = & function_13aa782f;
+  if(isdefined(level.skipto_point) && isdefined(level.default_skipto)) {
     if(level.skipto_point == level.default_skipto) {
       world.var_bf966ebd = undefined;
     }
@@ -124,7 +124,7 @@ function function_c32ba481(var_87423d00 = 0.5, v_color = (0, 0, 0)) {
     do {
       wait(0.05);
     }
-    while(isloadingcinematicplaying());
+    while (isloadingcinematicplaying());
   } else {
     wait(1);
   }
@@ -162,16 +162,16 @@ function function_dbd0026c(var_87423d00, v_color) {
   } else {
     wait(1);
   }
-  if(isDefined(level.var_75ba074a)) {
+  if(isdefined(level.var_75ba074a)) {
     wait(level.var_75ba074a);
   }
-  level util::delay(0.3, undefined, &flag::set, level.str_level_start_flag);
-  level util::delay(0.3, undefined, &lui::screen_fade_in, var_87423d00, v_color, "go_fade");
+  level util::delay(0.3, undefined, & flag::set, level.str_level_start_flag);
+  level util::delay(0.3, undefined, & lui::screen_fade_in, var_87423d00, v_color, "go_fade");
 }
 
 function function_f063419c() {
   if(isloadingcinematicplaying()) {
-    while(isloadingcinematicplaying()) {
+    while (isloadingcinematicplaying()) {
       wait(0.05);
     }
     level notify("loading_movie_done");
@@ -193,7 +193,7 @@ function function_13aa782f(player, target, weapon) {
 
 function player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   finaldamage = idamage;
-  if(isDefined(self.player_damage_override)) {
+  if(isdefined(self.player_damage_override)) {
     self thread[[self.player_damage_override]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime);
   }
   if(self laststand::player_is_in_laststand()) {
@@ -209,7 +209,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   }
   players = getplayers();
   count = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] == self || players[i] laststand::player_is_in_laststand() || players[i].sessionstate == "spectator") {
       count++;
     }
@@ -219,7 +219,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   if(solo_death || non_solo_death) {
     level notify("stop_suicide_trigger");
     self thread laststand::playerlaststand(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime);
-    if(!isDefined(vdir)) {
+    if(!isdefined(vdir)) {
       vdir = (1, 0, 0);
     }
     level notify("last_player_died");
@@ -260,9 +260,9 @@ function player_fake_death() {
 }
 
 function setfootstepeffect(name, fx) {
-  assert(isDefined(name), "");
-  assert(isDefined(fx), "");
-  if(!isDefined(anim.optionalstepeffects)) {
+  assert(isdefined(name), "");
+  assert(isdefined(fx), "");
+  if(!isdefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
   }
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
@@ -291,12 +291,12 @@ function footsteps() {
 
 function init_traverse() {
   point = getent(self.target, "targetname");
-  if(isDefined(point)) {
+  if(isdefined(point)) {
     self.traverse_height = point.origin[2];
     point delete();
   } else {
     point = struct::get(self.target, "targetname");
-    if(isDefined(point)) {
+    if(isdefined(point)) {
       self.traverse_height = point.origin[2];
     }
   }
@@ -304,7 +304,7 @@ function init_traverse() {
 
 function setup_traversals() {
   potential_traverse_nodes = getallnodes();
-  for(i = 0; i < potential_traverse_nodes.size; i++) {
+  for (i = 0; i < potential_traverse_nodes.size; i++) {
     node = potential_traverse_nodes[i];
     if(node.type == "Begin") {
       node init_traverse();
@@ -327,11 +327,11 @@ function end_game() {
   println("");
   util::clientnotify("zesn");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     util::setclientsysstate("lsm", "0", players[i]);
   }
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].revivetexthud)) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(players[i].revivetexthud)) {
       players[i].revivetexthud destroy();
     }
   }
@@ -345,8 +345,8 @@ function end_game() {
   foreach(player in players) {
     player closeingamemenu();
   }
-  if(!isDefined(level.gameenduicallback)) {
-    for(i = 0; i < players.size; i++) {
+  if(!isdefined(level.gameenduicallback)) {
+    for (i = 0; i < players.size; i++) {
       game_over[i] = newclienthudelem(players[i]);
       game_over[i].alignx = "center";
       game_over[i].aligny = "middle";
@@ -369,7 +369,7 @@ function end_game() {
   } else {
     level thread[[level.gameenduicallback]]("");
   }
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setclientuivisibilityflag("weapon_hud_visible", 0);
     players[i] setclientminiscoreboardhide(1);
   }
@@ -383,18 +383,20 @@ function end_game() {
     icon destroy();
   }
   level notify("round_end_done");
-  if(isDefined(level.intermission_override_func)) {
-    [[level.intermission_override_func]]();
+  if(isdefined(level.intermission_override_func)) {
+    [
+      [level.intermission_override_func]
+    ]();
     level.intermission_override_func = undefined;
   } else {
     intermission();
     wait(15);
     level notify("stop_intermission");
   }
-  array::thread_all(getplayers(), &player_exit_level);
+  array::thread_all(getplayers(), & player_exit_level);
   wait(1.5);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
   }
   exitlevel(0);
@@ -405,7 +407,7 @@ function intermission() {
   level.intermission = 1;
   level notify("intermission");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     util::setclientsysstate("levelNotify", "zi", players[i]);
     players[i] setclientthirdperson(0);
     players[i] resetfov();
@@ -415,7 +417,7 @@ function intermission() {
   }
   wait(0.25);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     util::setclientsysstate("lsm", "0", players[i]);
   }
 }
@@ -432,8 +434,8 @@ function player_intermission() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
   points = struct::get_array("intermission", "targetname");
-  if(!isDefined(points) || points.size == 0) {
-    points = getEntArray("info_intermission", "classname");
+  if(!isdefined(points) || points.size == 0) {
+    points = getentarray("info_intermission", "classname");
     if(points.size < 1) {
       println("");
       return;
@@ -445,28 +447,28 @@ function player_intermission() {
   self.game_over_bg setshader("black", 640, 480);
   self.game_over_bg.alpha = 1;
   org = undefined;
-  while(true) {
+  while (true) {
     points = array::randomize(points);
-    for(i = 0; i < points.size; i++) {
+    for (i = 0; i < points.size; i++) {
       point = points[i];
-      if(!isDefined(org)) {
+      if(!isdefined(org)) {
         self spawn(point.origin, point.angles);
       }
-      if(isDefined(points[i].target)) {
-        if(!isDefined(org)) {
+      if(isdefined(points[i].target)) {
+        if(!isdefined(org)) {
           org = spawn("script_model", self.origin + (vectorscale((0, 0, -1), 60)));
-          org setModel("tag_origin");
+          org setmodel("tag_origin");
         }
         org.origin = points[i].origin;
         org.angles = points[i].angles;
-        for(j = 0; j < getplayers().size; j++) {
+        for (j = 0; j < getplayers().size; j++) {
           player = getplayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
         }
         speed = 20;
-        if(isDefined(points[i].speed)) {
+        if(isdefined(points[i].speed)) {
           speed = points[i].speed;
         }
         target_point = struct::get(points[i].target, "targetname");
@@ -503,7 +505,7 @@ function player_exit_level() {
   self allowstand(1);
   self allowcrouch(0);
   self allowprone(0);
-  if(isDefined(self.game_over_bg)) {
+  if(isdefined(self.game_over_bg)) {
     self.game_over_bg.foreground = 1;
     self.game_over_bg.sort = 100;
     self.game_over_bg fadeovertime(1);
@@ -518,9 +520,9 @@ function disable_end_game_intermission(delay) {
 }
 
 function check_end_game_intermission_delay() {
-  if(isDefined(level.disable_intermission)) {
-    while(true) {
-      if(!isDefined(level.disable_intermission)) {
+  if(isdefined(level.disable_intermission)) {
+    while (true) {
+      if(!isdefined(level.disable_intermission)) {
         break;
       }
       wait(0.01);
@@ -537,14 +539,14 @@ function onallplayersready() {
     var_f862b7b1 = getnumconnectedplayers(0);
     var_91f98264 = getnumexpectedplayers();
     player_count_actual = 0;
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       if(level.players[i].sessionstate == "playing" || level.players[i].sessionstate == "spectator") {
         player_count_actual++;
       }
     }
     println((("" + getnumconnectedplayers()) + "") + getnumexpectedplayers());
   }
-  while(var_f862b7b1 < var_91f98264 || player_count_actual < var_91f98264);
+  while (var_f862b7b1 < var_91f98264 || player_count_actual < var_91f98264);
   setinitialplayersconnected();
   setdvar("all_players_are_connected", "1");
   printtoprightln("", (1, 1, 1));

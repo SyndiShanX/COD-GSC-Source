@@ -10,7 +10,7 @@
 function main() {
   precache_createfx_fx();
   disablefx = getdvarint("disable_fx");
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isdefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
   level thread perk_wire_fx("revive_on", "revive_electric_wire");
@@ -23,11 +23,11 @@ function main() {
 function function_dc095355(ent, localclientnum) {
   switchfx = struct::get("zapper_switch_fx_" + ent, "targetname");
   zapperfx = struct::get("zapper_fx_" + ent, "targetname");
-  switch_forward = anglesToForward(switchfx.angles);
+  switch_forward = anglestoforward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);
-  zapper_forward = anglesToForward(zapperfx.angles);
+  zapper_forward = anglestoforward(zapperfx.angles);
   zapper_up = anglestoup(zapperfx.angles);
-  if(isDefined(switchfx.loopfx)) {
+  if(isdefined(switchfx.loopfx)) {
     switchfx.loopfx delete();
     zapperfx.loopfx delete();
   }
@@ -40,7 +40,7 @@ function function_dc095355(ent, localclientnum) {
 function function_1c1a68e1(ent) {
   switchfx = struct::get("zapper_switch_fx_" + ent, "targetname");
   zapperfx = struct::get("zapper_fx_" + ent, "targetname");
-  if(isDefined(switchfx.loopfx)) {
+  if(isdefined(switchfx.loopfx)) {
     switchfx.loopfx delete();
     zapperfx.loopfx delete();
   }
@@ -49,13 +49,13 @@ function function_1c1a68e1(ent) {
 function perk_wire_fx(notify_wait, init_targetname) {
   level waittill(notify_wait);
   targ = struct::get(init_targetname, "targetname");
-  while(isDefined(targ)) {
+  while (isdefined(targ)) {
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
-      playFX(i, level._effect["electric_short_oneshot"], targ.origin);
+    for (i = 0; i < players.size; i++) {
+      playfx(i, level._effect["electric_short_oneshot"], targ.origin);
     }
     wait(0.075);
-    if(isDefined(targ.target)) {
+    if(isdefined(targ.target)) {
       targ = struct::get(targ.target, "targetname");
     } else {
       targ = undefined;
@@ -86,14 +86,14 @@ function function_4c17ba1b(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_46f37b91(str_side, localclientnum) {
   ent = struct::get("trap_wire_sparks_" + str_side, "targetname");
   ent.fx = 1;
-  while(isDefined(ent.fx)) {
+  while (isdefined(ent.fx)) {
     targ = struct::get(ent.target, "targetname");
-    while(isDefined(targ)) {
+    while (isdefined(targ)) {
       if(randomint(100) > 50) {
-        playFX(localclientnum, level._effect["electric_short_oneshot"], targ.origin);
+        playfx(localclientnum, level._effect["electric_short_oneshot"], targ.origin);
       }
       wait(0.075);
-      if(isDefined(targ.target)) {
+      if(isdefined(targ.target)) {
         targ = struct::get(targ.target, "targetname");
       } else {
         targ = undefined;

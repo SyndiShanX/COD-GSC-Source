@@ -21,12 +21,12 @@
 #namespace zm_tomb_ee_main_step_3;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_3", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_3", & init_stage, & stage_logic, & exit_stage);
 }
 
 function init_stage() {
   level._cur_stage_name = "step_3";
-  level.check_valid_poi = &mech_zombie_hole_valid;
+  level.check_valid_poi = & mech_zombie_hole_valid;
   create_buttons_and_triggers();
 }
 
@@ -42,7 +42,7 @@ function exit_stage(success) {
   level.check_valid_poi = undefined;
   level notify("fire_link_cooldown");
   level flag::set("fire_link_enabled");
-  a_buttons = getEntArray("fire_link_button", "targetname");
+  a_buttons = getentarray("fire_link_button", "targetname");
   array::delete_all(a_buttons);
   a_structs = struct::get_array("fire_link", "targetname");
   foreach(unitrigger_stub in a_structs) {
@@ -60,7 +60,7 @@ function create_buttons_and_triggers() {
     unitrigger_stub.cursor_hint = "HINT_NOICON";
     unitrigger_stub.require_look_at = 1;
     m_model = spawn("script_model", unitrigger_stub.origin);
-    m_model setModel("p7_zm_ori_button_alarm");
+    m_model setmodel("p7_zm_ori_button_alarm");
     m_model.angles = unitrigger_stub.angles;
     m_model.targetname = "fire_link_button";
     m_model thread ready_to_activate(unitrigger_stub);
@@ -75,14 +75,14 @@ function ready_to_activate(unitrigger_stub) {
   wait(0.5);
   self playsoundwithnotify("vox_maxi_robot_await_0", "ready_to_use");
   self waittill("ready_to_use");
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &activate_fire_link);
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & activate_fire_link);
 }
 
 function watch_for_triple_attack() {
   t_hole = getent("fire_link_damage", "targetname");
-  while(!level flag::get("ee_mech_zombie_hole_opened")) {
+  while (!level flag::get("ee_mech_zombie_hole_opened")) {
     t_hole waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon);
-    if(isDefined(weapon) && weapon.name == "beacon" && level flag::get("fire_link_enabled")) {
+    if(isdefined(weapon) && weapon.name == "beacon" && level flag::get("fire_link_enabled")) {
       playsoundatposition("zmb_squest_robot_floor_collapse", t_hole.origin);
       wait(3);
       m_floor = getent("easter_mechzombie_spawn", "targetname");
@@ -104,19 +104,19 @@ function mech_zombie_hole_valid(valid) {
 
 function activate_fire_link() {
   self endon("kill_trigger");
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
-    self playSound("zmb_squest_robot_button");
+    self playsound("zmb_squest_robot_button");
     if(level flag::get("three_robot_round")) {
       level thread fire_link_cooldown(self);
-      self playSound("zmb_squest_robot_button_activate");
-      self playLoopSound("zmb_squest_robot_button_timer", 0.5);
+      self playsound("zmb_squest_robot_button_activate");
+      self playloopsound("zmb_squest_robot_button_timer", 0.5);
       level flag::wait_till_clear("fire_link_enabled");
       self stoploopsound(0.5);
-      self playSound("zmb_squest_robot_button_deactivate");
+      self playsound("zmb_squest_robot_button_deactivate");
     } else {
-      self playSound("vox_maxi_robot_abort_0");
-      self playSound("zmb_squest_robot_button_deactivate");
+      self playsound("vox_maxi_robot_abort_0");
+      self playsound("zmb_squest_robot_button_deactivate");
       wait(3);
     }
   }
@@ -126,12 +126,12 @@ function fire_link_cooldown(t_button) {
   level notify("fire_link_cooldown");
   level endon("fire_link_cooldown");
   level flag::set("fire_link_enabled");
-  if(isDefined(t_button)) {
-    t_button playSound("vox_maxi_robot_activated_0");
+  if(isdefined(t_button)) {
+    t_button playsound("vox_maxi_robot_activated_0");
   }
   wait(35);
-  if(isDefined(t_button)) {
-    t_button playSound("vox_maxi_robot_deactivated_0");
+  if(isdefined(t_button)) {
+    t_button playsound("vox_maxi_robot_deactivated_0");
   }
   level flag::clear("fire_link_enabled");
 }

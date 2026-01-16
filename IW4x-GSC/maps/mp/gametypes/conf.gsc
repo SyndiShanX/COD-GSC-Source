@@ -44,9 +44,8 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isdefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -55,14 +54,14 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", &"OBJECTIVES_CONF");
-  setObjectiveText("axis", &"OBJECTIVES_CONF");
+  setObjectiveText("allies", & "OBJECTIVES_CONF");
+  setObjectiveText("axis", & "OBJECTIVES_CONF");
 
-  setObjectiveScoreText("allies", &"OBJECTIVES_CONF_SCORE");
-  setObjectiveScoreText("axis", &"OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("allies", & "OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("axis", & "OBJECTIVES_CONF_SCORE");
 
-  setObjectiveHintText("allies", &"OBJECTIVES_CONF_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_CONF_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -88,9 +87,8 @@ onStartGameType() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -106,14 +104,13 @@ getSpawnPoint() {
 onNormalDeath(victim, attacker, lifeId) {
   level thread spawnDogTags(victim, attacker);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
     attacker.finalKill = true;
-  }
 }
 
 spawnDogTags(victim, attacker) {
   if(isDefined(level.dogtags[victim.guid])) {
-    playFX(level.conf_fx["vanish"], level.dogtags[victim.guid].curOrigin);
+    PlayFx(level.conf_fx["vanish"], level.dogtags[victim.guid].curOrigin);
     level.dogtags[victim.guid] notify("reset");
   } else {
     visuals[0] = spawn("script_model", (0, 0, 0));
@@ -125,6 +122,7 @@ spawnDogTags(victim, attacker) {
 
     level.dogtags[victim.guid] = maps\mp\gametypes\_gameobjects::createUseObject("any", trigger, visuals, (0, 0, 16));
 
+    //	we don't need these
     _objective_delete(level.dogtags[victim.guid].objIDAllies);
     _objective_delete(level.dogtags[victim.guid].objIDAxis);
     maps\mp\gametypes\_objpoints::deleteObjPoint(level.dogtags[victim.guid].objPoints["allies"]);
@@ -155,9 +153,11 @@ spawnDogTags(victim, attacker) {
   level.dogtags[victim.guid].visuals[1] thread showToTeam(level.dogtags[victim.guid], victim.pers["team"]);
 
   level.dogtags[victim.guid].attacker = attacker;
+  //level.dogtags[victim.guid] thread timeOut( victim );
 
   objective_position(level.dogtags[victim.guid].objId, pos);
   objective_state(level.dogtags[victim.guid].objId, "active");
+  //objective_player( level.dogtags[victim.guid].objId, attacker getEntityNumber() );		
 
   playSoundAtPos(pos, "mp_killconfirm_tags_drop");
 
@@ -171,51 +171,51 @@ showToTeam(gameObject, team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == team) {
+    if(player.team == team)
       self ShowToPlayer(player);
-    }
   }
 
-  for(;;) {
+  for (;;) {
     level waittill("joined_team");
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == team) {
+      if(player.team == team)
         self ShowToPlayer(player);
-      }
 
-      if(gameObject.victimTeam == player.team && player == gameObject.attacker) {
+      if(gameObject.victimTeam == player.team && player == gameObject.attacker)
         objective_state(gameObject.objId, "invisible");
-      }
     }
   }
 }
 
 onUse(player) {
+  //	friendly pickup
   if(player.pers["team"] == self.victimTeam) {
     self.trigger playSound("mp_killconfirm_tags_deny");
 
     if(self.victim == player) {
       event = "tags_retrieved";
-      splash = &"SPLASHES_TAGS_RETRIEVED";
+      splash = & "SPLASHES_TAGS_RETRIEVED";
     } else {
       event = "kill_denied";
-      splash = &"SPLASHES_KILL_DENIED";
+      splash = & "SPLASHES_KILL_DENIED";
     }
 
-    if(isDefined(self.attacker)) {
+    //	tell the attacker their kill was denied
+    if(isDefined(self.attacker))
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
-    }
-  } else {
+  }
+  //	enemy pickup
+  else {
     self.trigger playSound("mp_killconfirm_tags_pickup");
 
     event = "kill_confirmed";
-    splash = &"SPLASHES_KILL_CONFIRMED";
+    splash = & "SPLASHES_KILL_CONFIRMED";
 
-    if(self.attacker != player) {
+    //	if not us, tell the attacker their kill was confirmed
+    if(self.attacker != player)
       self.attacker onPickup(event, splash);
-    }
 
     self.trigger playSoundToPlayer(game["voice"][player.pers["team"]] + "kill_confirmed", player);
 
@@ -224,6 +224,7 @@ onUse(player) {
 
   player onPickup(event, splash);
 
+  //	do all this at the end now so the location doesn't change before playing the sound on the entity
   self resetTags();
 }
 
@@ -256,7 +257,7 @@ bounce() {
   bottomPos = self.curOrigin;
   topPos = self.curOrigin + (0, 0, 12);
 
-  while(true) {
+  while (true) {
     self.visuals[0] moveTo(topPos, 0.5, 0.15, 0.15);
     self.visuals[0] rotateYaw(180, 0.5);
     self.visuals[1] moveTo(topPos, 0.5, 0.15, 0.15);
@@ -294,7 +295,7 @@ tagTeamUpdater(tags) {
   level endon("game_ended");
   self endon("disconnect");
 
-  while(true) {
+  while (true) {
     self waittill("joined_team");
 
     tags.victimTeam = self.pers["team"];
@@ -309,24 +310,28 @@ clearOnVictimDisconnect(victim) {
   victim waittill("disconnect");
 
   if(isDefined(level.dogtags[guid])) {
+    //	block further use
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-    if(isDefined(level.dogtags[guid].attacker)) {
+    //	tell the attacker their kill was denied
+    if(isDefined(level.dogtags[guid].attacker))
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
-    }
 
-    playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
+    //	play vanish effect, reset, and wait for reset to process
+    PlayFx(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
     wait(0.05);
 
+    //	sanity check before removal
     if(isDefined(level.dogtags[guid])) {
+      //	delete objective and visuals
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
+      for (i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
-      }
       level.dogtags[guid] notify("deleted");
 
+      //	remove from list
       level.dogtags[guid] = undefined;
     }
   }

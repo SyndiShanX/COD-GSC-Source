@@ -79,9 +79,8 @@ ai_push_player_on_double_stairs() {
 toggle_friendly_push(b_can_push) {
   a_guys = getaiarray("allies");
 
-  foreach(guy in a_guys) {
-    guy pushplayer(b_can_push);
-  }
+  foreach(guy in a_guys)
+  guy pushplayer(b_can_push);
 }
 
 clean_up_mason_lower_level() {
@@ -139,17 +138,15 @@ break_sensitive_windows() {
 }
 
 multipath_trigger_cleanup(str_trigger_name, str_key) {
-  if(!isDefined(str_key)) {
+  if(!isDefined(str_key))
     str_key = "targetname";
-  }
 
   trigger_wait(str_trigger_name, str_key);
   wait 0.5;
-  triggers = getEntArray(str_trigger_name, str_key);
+  triggers = getentarray(str_trigger_name, str_key);
 
-  foreach(trigger in triggers) {
-    trigger trigger_off();
-  }
+  foreach(trigger in triggers)
+  trigger trigger_off();
 }
 
 run_mason_security() {
@@ -300,18 +297,16 @@ clean_up_mason_cctv() {
 }
 
 cctv_console_bink_stop_playback(b_hide_console) {
-  if(!isDefined(b_hide_console)) {
+  if(!isDefined(b_hide_console))
     b_hide_console = 1;
-  }
 
   m_console_bink = get_ent("khan_screen_bink", "targetname", 1);
   m_console = get_ent("khan_screen_blank", "targetname", 1);
   m_console show();
   m_console_bink show();
 
-  if(isDefined(m_console_bink.n_bink_id)) {
+  if(isDefined(m_console_bink.n_bink_id))
     stop3dcinematic(m_console_bink.n_bink_id);
-  }
 }
 
 cctv_console_bink_toggle() {
@@ -340,9 +335,8 @@ save_restored_cctv_bink() {
   m_console hide();
   m_console_bink show();
 
-  if(!isDefined(level.streaming_binks_restored)) {
+  if(!isDefined(level.streaming_binks_restored))
     level.streaming_binks_restored = 0;
-  }
 
   if(!level.streaming_binks_restored) {
     level.streaming_binks_restored = 1;
@@ -424,7 +418,7 @@ notetrack_server_room_door_guy_torch_fx_stop(m_torch) {
 }
 
 notetrack_fade_to_menendez_section(m_player_body) {
-  level.player playSound("evt_cctv_transition_in");
+  level.player playsound("evt_cctv_transition_in");
   rpc("clientscripts/blackout_amb", "setMenTransSnap");
   screen_fade_out(1);
   wait 2;
@@ -613,12 +607,12 @@ briggs_pip_playbackrate() {
   n_time_left_on_briggs_anim = n_briggs_anim_length - (n_time_menendez_started - n_time_briggs_started) / 1000;
   n_playback_rate = n_time_left_on_briggs_anim / n_time_left_until_fade;
 
-  foreach(actor in a_actors) {
-    actor setanim(level.scr_anim[actor.animname]["briggs_pip"], 1, 0, n_playback_rate);
-  }
+  foreach(actor in a_actors)
+  actor setanim(level.scr_anim[actor.animname]["briggs_pip"], 1, 0, n_playback_rate);
 }
 
-init_doors() {}
+init_doors() {
+}
 
 init_flags() {
   flag_init("start_sensitive_room");

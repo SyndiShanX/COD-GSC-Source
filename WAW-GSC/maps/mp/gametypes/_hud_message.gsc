@@ -11,23 +11,23 @@ init() {
   precacheString(&"MP_SECONDPLACE_NAME");
   precacheString(&"MP_THIRDPLACE_NAME");
   precacheString(&"MP_MATCH_BONUS_IS");
-  game["strings"]["draw"] = &"MP_DRAW";
-  game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
-  game["strings"]["round_win"] = &"MP_ROUND_WIN";
-  game["strings"]["round_loss"] = &"MP_ROUND_LOSS";
-  game["strings"]["victory"] = &"MP_VICTORY";
-  game["strings"]["defeat"] = &"MP_DEFEAT";
-  game["strings"]["halftime"] = &"MP_HALFTIME";
-  game["strings"]["overtime"] = &"MP_OVERTIME";
-  game["strings"]["roundend"] = &"MP_ROUNDEND";
-  game["strings"]["intermission"] = &"MP_INTERMISSION";
-  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES";
-  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["draw"] = & "MP_DRAW";
+  game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
+  game["strings"]["round_win"] = & "MP_ROUND_WIN";
+  game["strings"]["round_loss"] = & "MP_ROUND_LOSS";
+  game["strings"]["victory"] = & "MP_VICTORY";
+  game["strings"]["defeat"] = & "MP_DEFEAT";
+  game["strings"]["halftime"] = & "MP_HALFTIME";
+  game["strings"]["overtime"] = & "MP_OVERTIME";
+  game["strings"]["roundend"] = & "MP_ROUNDEND";
+  game["strings"]["intermission"] = & "MP_INTERMISSION";
+  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES";
+  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
   level thread onPlayerConnect();
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread hintMessageDeathThink();
     player thread lowerMessageThink();
@@ -36,7 +36,7 @@ onPlayerConnect() {
 }
 
 hintMessage(hintText) {
-  notifyData = spawnStruct();
+  notifyData = spawnstruct();
   notifyData.notifyText = hintText;
   notifyMessage(notifyData);
 }
@@ -92,7 +92,7 @@ initNotifyMessage() {
 }
 
 oldNotifyMessage(titleText, notifyText, iconName, glowColor, sound, duration) {
-  notifyData = spawnStruct();
+  notifyData = spawnstruct();
   notifyData.titleText = titleText;
   notifyData.notifyText = notifyText;
   notifyData.iconName = iconName;
@@ -116,53 +116,45 @@ showNotifyMessage(notifyData) {
   self endon("disconnect");
   self.doingNotify = true;
   waitRequireVisibility(0);
-  if(isDefined(notifyData.duration)) {
+  if(isDefined(notifyData.duration))
     duration = notifyData.duration;
-  } else if(level.gameEnded) {
+  else if(level.gameEnded)
     duration = 2.0;
-  } else {
+  else
     duration = 4.0;
-  }
   self notify("notifyMessageBegin", duration);
   self thread resetOnCancel();
-  if(isDefined(notifyData.sound)) {
+  if(isDefined(notifyData.sound))
     self playLocalSound(notifyData.sound);
-  }
-  if(isDefined(notifyData.leaderSound)) {
+  if(isDefined(notifyData.leaderSound))
     self maps\mp\gametypes\_globallogic::leaderDialogOnPlayer(notifyData.leaderSound);
-  }
-  if(isDefined(notifyData.glowColor)) {
+  if(isDefined(notifyData.glowColor))
     glowColor = notifyData.glowColor;
-  } else {
+  else
     glowColor = (0.0, 0.0, 0.0);
-  }
   anchorElem = self.notifyTitle;
   if(isDefined(notifyData.titleText)) {
-    if(isDefined(notifyData.titleLabel)) {
+    if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
-    } else {
-      self.notifyTitle.label = &"";
-    }
-    if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
+    else
+      self.notifyTitle.label = & "";
+    if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
-    } else {
+    else
       self.notifyTitle setText(notifyData.titleText);
-    }
     self.notifyTitle setPulseFX(100, int(duration * 1000), 1000);
     self.notifyTitle.glowColor = glowColor;
     self.notifyTitle.alpha = 1;
   }
   if(isDefined(notifyData.notifyText)) {
-    if(isDefined(notifyData.textLabel)) {
+    if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
-    } else {
-      self.notifyText.label = &"";
-    }
-    if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
+    else
+      self.notifyText.label = & "";
+    if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
-    } else {
+    else
       self.notifyText setText(notifyData.notifyText);
-    }
     self.notifyText setPulseFX(100, int(duration * 1000), 1000);
     self.notifyText.glowColor = glowColor;
     self.notifyText.alpha = 1;
@@ -170,18 +162,16 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.notifyText2)) {
     if(level.splitScreen) {
-      if(isDefined(notifyData.text2Label)) {
+      if(isDefined(notifyData.text2Label))
         self iPrintLnBold(notifyData.text2Label, notifyData.notifyText2);
-      } else {
+      else
         self iPrintLnBold(notifyData.notifyText2);
-      }
     } else {
       self.notifyText2 setParent(anchorElem);
-      if(isDefined(notifyData.text2Label)) {
+      if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
-      } else {
-        self.notifyText2.label = &"";
-      }
+      else
+        self.notifyText2.label = & "";
       self.notifyText2 setText(notifyData.notifyText2);
       self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText2.glowColor = glowColor;
@@ -214,9 +204,8 @@ showNotifyMessage(notifyData) {
   if(self.notifyQueue.size > 0) {
     nextNotifyData = self.notifyQueue[0];
     newQueue = [];
-    for(i = 1; i < self.notifyQueue.size; i++) {
+    for (i = 1; i < self.notifyQueue.size; i++)
       self.notifyQueue[i - 1] = self.notifyQueue[i];
-    }
     self.notifyQueue[i - 1] = undefined;
     self thread showNotifyMessage(nextNotifyData);
   }
@@ -224,21 +213,18 @@ showNotifyMessage(notifyData) {
 
 waitRequireVisibility(waitTime) {
   interval = .05;
-  while(!self canReadText()) {
+  while (!self canReadText())
     wait interval;
-  }
-  while(waitTime > 0) {
+  while (waitTime > 0) {
     wait interval;
-    if(self canReadText()) {
+    if(self canReadText())
       waitTime -= interval;
-    }
   }
 }
 
 canReadText() {
-  if(self maps\mp\_flashgrenades::isFlashbanged()) {
+  if(self maps\mp\_flashgrenades::isFlashbanged())
     return false;
-  }
   return true;
 }
 
@@ -268,11 +254,10 @@ resetNotify() {
 
 hintMessageDeathThink() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("death");
-    if(isDefined(self.hintMessage)) {
+    if(isDefined(self.hintMessage))
       self.hintMessage destroyElem();
-    }
   }
 }
 
@@ -283,9 +268,8 @@ lowerMessageThink() {
   self.lowerMessage setText("");
   self.lowerMessage.archived = false;
   timerFontSize = 1.5;
-  if(level.splitscreen) {
+  if(level.splitscreen)
     timerFontSize = 1.4;
-  }
   self.lowerTimer = createFontString("default", timerFontSize);
   self.lowerTimer setParent(self.lowerMessage);
   self.lowerTimer setPoint("TOP", "BOTTOM", 0, 0);
@@ -297,12 +281,10 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
   team = self.pers["team"];
-  if(!isDefined(team) || (team != "allies" && team != "axis")) {
+  if(!isDefined(team) || (team != "allies" && team != "axis"))
     team = "allies";
-  }
-  while(self.doingNotify) {
+  while (self.doingNotify)
     wait 0.05;
-  }
   self endon("reset_outcome");
   if(level.splitscreen) {
     titleSize = 2.0;
@@ -346,26 +328,23 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle.color = (1, 1, 1);
     winner = "allies";
   } else if(winner == "tie") {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_draw"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["draw"]);
-    }
     outcomeTitle.color = (1, 1, 1);
     winner = "allies";
   } else if(isDefined(self.pers["team"]) && winner == team) {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_win"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["victory"]);
-    }
     outcomeTitle.color = (0.6, 0.9, 0.6);
   } else {
-    if(isRound) {
+    if(isRound)
       outcomeTitle setText(game["strings"]["round_loss"]);
-    } else {
+    else
       outcomeTitle setText(game["strings"]["defeat"]);
-    }
     outcomeTitle.color = (0.7, 0.3, 0.2);
   }
   outcomeText setText(endReasonText);
@@ -420,9 +399,8 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
 outcomeNotify(winner, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while(self.doingNotify) {
+  while (self.doingNotify)
     wait 0.05;
-  }
   self endon("reset_outcome");
   if(level.splitscreen) {
     titleSize = 2.0;
@@ -472,7 +450,7 @@ outcomeNotify(winner, endReasonText) {
   firstTitle.hideWhenInMenu = false;
   firstTitle.archived = false;
   if(isDefined(players[0])) {
-    firstTitle.label = &"MP_FIRSTPLACE_NAME";
+    firstTitle.label = & "MP_FIRSTPLACE_NAME";
     firstTitle setPlayerNameString(players[0]);
     firstTitle setPulseFX(100, duration, 1000);
   }
@@ -483,7 +461,7 @@ outcomeNotify(winner, endReasonText) {
   secondTitle.hideWhenInMenu = false;
   secondTitle.archived = false;
   if(isDefined(players[1])) {
-    secondTitle.label = &"MP_SECONDPLACE_NAME";
+    secondTitle.label = & "MP_SECONDPLACE_NAME";
     secondTitle setPlayerNameString(players[1]);
     secondTitle setPulseFX(100, duration, 1000);
   }
@@ -495,7 +473,7 @@ outcomeNotify(winner, endReasonText) {
   thirdTitle.hideWhenInMenu = false;
   thirdTitle.archived = false;
   if(isDefined(players[2])) {
-    thirdTitle.label = &"MP_THIRDPLACE_NAME";
+    thirdTitle.label = & "MP_THIRDPLACE_NAME";
     thirdTitle setPlayerNameString(players[2]);
     thirdTitle setPulseFX(100, duration, 1000);
   }
@@ -516,72 +494,56 @@ outcomeNotify(winner, endReasonText) {
 resetOutcomeNotify(outcomeTitle, outcomeText, firstTitle, secondTitle, thirdTitle, matchBonus) {
   self endon("disconnect");
   self waittill("reset_outcome");
-  if(isDefined(outcomeTitle)) {
+  if(isDefined(outcomeTitle))
     outcomeTitle destroyElem();
-  }
-  if(isDefined(outcomeText)) {
+  if(isDefined(outcomeText))
     outcomeText destroyElem();
-  }
-  if(isDefined(firstTitle)) {
+  if(isDefined(firstTitle))
     firstTitle destroyElem();
-  }
-  if(isDefined(secondTitle)) {
+  if(isDefined(secondTitle))
     secondTitle destroyElem();
-  }
-  if(isDefined(thirdTitle)) {
+  if(isDefined(thirdTitle))
     thirdTitle destroyElem();
-  }
-  if(isDefined(matchBonus)) {
+  if(isDefined(matchBonus))
     matchBonus destroyElem();
-  }
 }
 
 resetTeamOutcomeNotify(outcomeTitle, outcomeText, leftIcon, rightIcon, LeftScore, rightScore, matchBonus) {
   self endon("disconnect");
   self waittill("reset_outcome");
-  if(isDefined(outcomeTitle)) {
+  if(isDefined(outcomeTitle))
     outcomeTitle destroyElem();
-  }
-  if(isDefined(outcomeText)) {
+  if(isDefined(outcomeText))
     outcomeText destroyElem();
-  }
-  if(isDefined(leftIcon)) {
+  if(isDefined(leftIcon))
     leftIcon destroyElem();
-  }
-  if(isDefined(rightIcon)) {
+  if(isDefined(rightIcon))
     rightIcon destroyElem();
-  }
-  if(isDefined(leftScore)) {
+  if(isDefined(leftScore))
     leftScore destroyElem();
-  }
-  if(isDefined(rightScore)) {
+  if(isDefined(rightScore))
     rightScore destroyElem();
-  }
-  if(isDefined(matchBonus)) {
+  if(isDefined(matchBonus))
     matchBonus destroyElem();
-  }
 }
 
 updateOutcome(firstTitle, secondTitle, thirdTitle) {
   self endon("disconnect");
   self endon("reset_outcome");
-  while(true) {
+  while (true) {
     self waittill("update_outcome");
     players = level.placement["all"];
-    if(isDefined(firstTitle) && isDefined(players[0])) {
+    if(isDefined(firstTitle) && isDefined(players[0]))
       firstTitle setPlayerNameString(players[0]);
-    } else if(isDefined(firstTitle)) {
+    else if(isDefined(firstTitle))
       firstTitle.alpha = 0;
-    }
-    if(isDefined(secondTitle) && isDefined(players[1])) {
+    if(isDefined(secondTitle) && isDefined(players[1]))
       secondTitle setPlayerNameString(players[1]);
-    } else if(isDefined(secondTitle)) {
+    else if(isDefined(secondTitle))
       secondTitle.alpha = 0;
-    }
-    if(isDefined(thirdTitle) && isDefined(players[2])) {
+    if(isDefined(thirdTitle) && isDefined(players[2]))
       thirdTitle setPlayerNameString(players[2]);
-    } else if(isDefined(thirdTitle)) {
+    else if(isDefined(thirdTitle))
       thirdTitle.alpha = 0;
-    }
   }
 }

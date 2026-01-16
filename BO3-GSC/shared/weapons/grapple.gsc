@@ -15,15 +15,15 @@
 #namespace grapple;
 
 function autoexec __init__sytem__() {
-  system::register("grapple", &__init__, &__main__, undefined);
+  system::register("grapple", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  callback::on_spawned(&watch_for_grapple);
+  callback::on_spawned( & watch_for_grapple);
 }
 
 function __main__() {
-  grapple_targets = getEntArray("grapple_target", "targetname");
+  grapple_targets = getentarray("grapple_target", "targetname");
   foreach(target in grapple_targets) {
     target.grapple_type = 1;
     target setgrapplabletype(target.grapple_type);
@@ -34,7 +34,7 @@ function translate_notify_1(from_notify, to_notify) {
   self endon("disconnect");
   self endon("death");
   self endon("spawned_player");
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     self waittill(from_notify, param1, param2, param3);
     self notify(to_notify, from_notify, param1, param2, param3);
   }
@@ -47,9 +47,9 @@ function watch_for_grapple() {
   self endon("killreplaygunmonitor");
   self thread translate_notify_1("weapon_switch_started", "grapple_weapon_change");
   self thread translate_notify_1("weapon_change_complete", "grapple_weapon_change");
-  while(true) {
+  while (true) {
     self waittill("grapple_weapon_change", event, weapon);
-    if(isDefined(weapon.grappleweapon) && weapon.grappleweapon) {
+    if(isdefined(weapon.grappleweapon) && weapon.grappleweapon) {
       self thread watch_lockon(weapon);
     } else {
       self notify("grapple_unwield");
@@ -67,7 +67,7 @@ function watch_lockon(weapon) {
   self thread watch_lockon_angles(weapon);
   self thread clear_lockon_after_grapple(weapon);
   self.use_expensive_targeting = 1;
-  while(true) {
+  while (true) {
     wait(0.05);
     if(!self isgrappling()) {
       target = self get_a_target(weapon);
@@ -87,9 +87,9 @@ function clear_lockon_after_grapple(weapon) {
   self endon("grapple_unwield");
   self notify("clear_lockon_after_grapple");
   self endon("clear_lockon_after_grapple");
-  while(true) {
+  while (true) {
     self util::waittill_any("grapple_pulled", "grapple_landed");
-    if(isDefined(self.lockonentity)) {
+    if(isdefined(self.lockonentity)) {
       self.lockonentity = undefined;
       self.use_expensive_targeting = 1;
     }
@@ -103,10 +103,10 @@ function watch_lockon_angles(weapon) {
   self endon("grapple_unwield");
   self notify("watch_lockon_angles");
   self endon("watch_lockon_angles");
-  while(true) {
+  while (true) {
     wait(0.05);
     if(!self isgrappling()) {
-      if(isDefined(self.lockonentity)) {
+      if(isdefined(self.lockonentity)) {
         if(self.lockonentity === self.dummy_target) {
           self weaponlocktargettooclose(0);
         } else {
@@ -123,13 +123,13 @@ function watch_lockon_angles(weapon) {
 }
 
 function place_dummy_target(origin, forward, weapon) {
-  if(!isDefined(self.dummy_target)) {
+  if(!isdefined(self.dummy_target)) {
     self.dummy_target = spawn("script_origin", origin);
   }
   self.dummy_target setgrapplabletype(3);
   start = origin;
   distance = weapon.lockonmaxrange * 0.9;
-  if(isDefined(level.grapple_notarget_distance)) {
+  if(isdefined(level.grapple_notarget_distance)) {
     distance = level.grapple_notarget_distance;
   }
   end = origin + (forward * distance);
@@ -144,23 +144,23 @@ function place_dummy_target(origin, forward, weapon) {
 }
 
 function get_a_target(weapon) {
-  origin = self getEye();
+  origin = self geteye();
   forward = self getweaponforwarddir();
   targets = getgrappletargetarray();
-  if(!isDefined(targets)) {
+  if(!isdefined(targets)) {
     return undefined;
   }
-  if(!isDefined(weapon.lockonscreenradius) || weapon.lockonscreenradius < 1) {
+  if(!isdefined(weapon.lockonscreenradius) || weapon.lockonscreenradius < 1) {
     return undefined;
   }
   validtargets = [];
   should_wait = 0;
   should_wait_limit = 2;
-  if(isDefined(self.use_expensive_targeting) && self.use_expensive_targeting) {
+  if(isdefined(self.use_expensive_targeting) && self.use_expensive_targeting) {
     should_wait_limit = 4;
     self.use_expensive_targeting = 0;
   }
-  for(i = 0; i < targets.size; i++) {
+  for (i = 0; i < targets.size; i++) {
     if(should_wait >= should_wait_limit) {
       wait(0.05);
       origin = self getweaponmuzzlepoint();
@@ -191,8 +191,8 @@ function get_a_target(weapon) {
     }
   }
   best = pick_a_target_from(validtargets, origin, forward, weapon.lockonminrange, weapon.lockonmaxrange);
-  if(isDefined(level.grapple_notarget_enabled) && level.grapple_notarget_enabled) {
-    if(!isDefined(best) || best === self.dummy_target) {
+  if(isdefined(level.grapple_notarget_enabled) && level.grapple_notarget_enabled) {
+    if(!isdefined(best) || best === self.dummy_target) {
       best = place_dummy_target(origin, forward, weapon);
     }
   }
@@ -200,7 +200,7 @@ function get_a_target(weapon) {
 }
 
 function get_target_type_score(target) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return 0;
   }
   if(target === self.dummy_target) {
@@ -212,7 +212,7 @@ function get_target_type_score(target) {
   if(target.grapple_type === 2) {
     return 0.985;
   }
-  if(!isDefined(target.grapple_type)) {
+  if(!isdefined(target.grapple_type)) {
     return 0.9;
   }
   if(target.grapple_type === 3) {
@@ -222,7 +222,7 @@ function get_target_type_score(target) {
 }
 
 function get_target_score(target, origin, forward, min_range, max_range) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return -1;
   }
   if(target === self.dummy_target) {
@@ -241,16 +241,16 @@ function get_target_score(target, origin, forward, min_range, max_range) {
 }
 
 function pick_a_target_from(targets, origin, forward, min_range, max_range) {
-  if(!isDefined(targets)) {
+  if(!isdefined(targets)) {
     return undefined;
   }
   besttarget = undefined;
   bestscore = undefined;
-  for(i = 0; i < targets.size; i++) {
+  for (i = 0; i < targets.size; i++) {
     target = targets[i];
     if(is_valid_target(target)) {
       score = get_target_score(target, origin, forward, min_range, max_range);
-      if(!isDefined(besttarget) || !isDefined(bestscore)) {
+      if(!isdefined(besttarget) || !isdefined(bestscore)) {
         besttarget = target;
         bestscore = score;
         continue;
@@ -265,7 +265,7 @@ function pick_a_target_from(targets, origin, forward, min_range, max_range) {
 }
 
 function trace(from, to, target) {
-  trace = bulletTrace(from, to, 0, self, 1, 0, target);
+  trace = bullettrace(from, to, 0, self, 1, 0, target);
   return trace["position"];
 }
 
@@ -287,14 +287,14 @@ function can_see(target, target_origin, player_origin, player_forward, distance)
 }
 
 function is_valid_target(ent) {
-  if(isDefined(ent) && isDefined(level.grapple_valid_target_check)) {
+  if(isdefined(ent) && isdefined(level.grapple_valid_target_check)) {
     if(![
         [level.grapple_valid_target_check]
       ](ent)) {
       return 0;
     }
   }
-  return isDefined(ent) && (isalive(ent) || !issentient(ent));
+  return isdefined(ent) && (isalive(ent) || !issentient(ent));
 }
 
 function inside_screen_angles(testorigin, weapon, newtarget) {

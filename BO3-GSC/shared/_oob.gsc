@@ -11,7 +11,7 @@
 #namespace oob;
 
 function autoexec __init__sytem__() {
-  system::register("out_of_bounds", &__init__, undefined, undefined);
+  system::register("out_of_bounds", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,7 +31,7 @@ function __init__() {
     level.oob_time_remaining_before_black = getdvarint("oob_time_remaining_before_black", 1000);
   }
   level.oob_damage_interval_sec = level.oob_damage_interval_ms / 1000;
-  hurt_triggers = getEntArray("trigger_out_of_bounds", "classname");
+  hurt_triggers = getentarray("trigger_out_of_bounds", "classname");
   foreach(trigger in hurt_triggers) {
     trigger thread run_oob_trigger();
   }
@@ -40,7 +40,7 @@ function __init__() {
 
 function run_oob_trigger() {
   self.oob_players = [];
-  if(!isDefined(level.oob_triggers)) {
+  if(!isdefined(level.oob_triggers)) {
     level.oob_triggers = [];
   } else if(!isarray(level.oob_triggers)) {
     level.oob_triggers = array(level.oob_triggers);
@@ -51,7 +51,7 @@ function run_oob_trigger() {
 }
 
 function isoutofbounds() {
-  if(!isDefined(self.oob_start_time)) {
+  if(!isdefined(self.oob_start_time)) {
     return 0;
   }
   return self.oob_start_time != -1;
@@ -61,8 +61,8 @@ function istouchinganyoobtrigger() {
   triggers_to_remove = [];
   result = 0;
   foreach(trigger in level.oob_triggers) {
-    if(!isDefined(trigger)) {
-      if(!isDefined(triggers_to_remove)) {
+    if(!isdefined(trigger)) {
+      if(!isdefined(triggers_to_remove)) {
         triggers_to_remove = [];
       } else if(!isarray(triggers_to_remove)) {
         triggers_to_remove = array(triggers_to_remove);
@@ -92,14 +92,14 @@ function resetoobtimer(is_host_migrating, b_disable_timekeep) {
   self clientfield::set_to_player("out_of_bounds", 0);
   self util::show_hud(1);
   self.oob_start_time = -1;
-  if(isDefined(level.oob_timekeep_ms)) {
-    if(isDefined(b_disable_timekeep) && b_disable_timekeep) {
+  if(isdefined(level.oob_timekeep_ms)) {
+    if(isdefined(b_disable_timekeep) && b_disable_timekeep) {
       self.last_oob_timekeep_ms = undefined;
     } else {
       self.last_oob_timekeep_ms = gettime();
     }
   }
-  if(!(isDefined(is_host_migrating) && is_host_migrating)) {
+  if(!(isdefined(is_host_migrating) && is_host_migrating)) {
     self notify("oob_host_migration_exit");
   }
   self notify("oob_exit");
@@ -107,16 +107,16 @@ function resetoobtimer(is_host_migrating, b_disable_timekeep) {
 
 function waitforclonetouch() {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", clone);
-    if(isactor(clone) && isDefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimscripted()) {
+    if(isactor(clone) && isdefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimscripted()) {
       clone notify("clone_shutdown");
     }
   }
 }
 
 function getadjusedplayer(player) {
-  if(isDefined(player.hijacked_vehicle_entity) && isalive(player.hijacked_vehicle_entity)) {
+  if(isdefined(player.hijacked_vehicle_entity) && isalive(player.hijacked_vehicle_entity)) {
     return player.hijacked_vehicle_entity;
   }
   return player;
@@ -124,12 +124,12 @@ function getadjusedplayer(player) {
 
 function waitforplayertouch() {
   self endon("death");
-  while(true) {
+  while (true) {
     if(sessionmodeismultiplayergame()) {
       hostmigration::waittillhostmigrationdone();
     }
     self waittill("trigger", entity);
-    if(!isplayer(entity) && (!(isvehicle(entity) && (isDefined(entity.hijacked) && entity.hijacked) && isDefined(entity.owner) && isalive(entity)))) {
+    if(!isplayer(entity) && (!(isvehicle(entity) && (isdefined(entity.hijacked) && entity.hijacked) && isdefined(entity.owner) && isalive(entity)))) {
       continue;
     }
     if(isplayer(entity)) {
@@ -138,9 +138,9 @@ function waitforplayertouch() {
       vehicle = entity;
       player = vehicle.owner;
     }
-    if(!player isoutofbounds() && !player isplayinganimscripted() && (!(isDefined(player.oobdisabled) && player.oobdisabled))) {
+    if(!player isoutofbounds() && !player isplayinganimscripted() && (!(isdefined(player.oobdisabled) && player.oobdisabled))) {
       player notify("oob_enter");
-      if(isDefined(level.oob_timekeep_ms) && isDefined(player.last_oob_timekeep_ms) && isDefined(player.last_oob_duration_ms) && (gettime() - player.last_oob_timekeep_ms) < level.oob_timekeep_ms) {
+      if(isdefined(level.oob_timekeep_ms) && isdefined(player.last_oob_timekeep_ms) && isdefined(player.last_oob_duration_ms) && (gettime() - player.last_oob_timekeep_ms) < level.oob_timekeep_ms) {
         player.oob_start_time = gettime() - (level.oob_timelimit_ms - player.last_oob_duration_ms);
       } else {
         player.oob_start_time = gettime();
@@ -158,7 +158,7 @@ function waitforplayertouch() {
 }
 
 function getdistancefromlastvalidplayerloc(trigger, entity) {
-  if(isDefined(self.oob_lastvalidplayerdir) && self.oob_lastvalidplayerdir != (0, 0, 0)) {
+  if(isdefined(self.oob_lastvalidplayerdir) && self.oob_lastvalidplayerdir != (0, 0, 0)) {
     vectoplayerlocfromorigin = entity.origin - self.oob_lastvalidplayerloc;
     distance = vectordot(vectoplayerlocfromorigin, self.oob_lastvalidplayerdir);
   } else {
@@ -175,12 +175,12 @@ function getdistancefromlastvalidplayerloc(trigger, entity) {
 
 function updatevisualeffects(trigger, entity) {
   timeremaining = level.oob_timelimit_ms - (gettime() - self.oob_start_time);
-  if(isDefined(level.oob_timekeep_ms)) {
+  if(isdefined(level.oob_timekeep_ms)) {
     self.last_oob_duration_ms = timeremaining;
   }
   oob_effectvalue = 0;
   if(timeremaining <= level.oob_time_remaining_before_black) {
-    if(!isDefined(self.oob_lasteffectvalue)) {
+    if(!isdefined(self.oob_lasteffectvalue)) {
       self.oob_lasteffectvalue = getdistancefromlastvalidplayerloc(trigger, entity);
     }
     time_val = 1 - (timeremaining / level.oob_time_remaining_before_black);
@@ -205,7 +205,7 @@ function killentity(entity) {
   entity_to_kill = entity;
   if(isplayer(entity) && entity isinvehicle()) {
     vehicle = entity getvehicleoccupied();
-    if(isDefined(vehicle) && vehicle.is_oob_kill_target === 1) {
+    if(isdefined(vehicle) && vehicle.is_oob_kill_target === 1) {
       entity_to_kill = vehicle;
     }
   }
@@ -216,7 +216,7 @@ function killentity(entity) {
 function watchforleave(trigger, entity) {
   self endon("oob_exit");
   entity endon("death");
-  while(true) {
+  while (true) {
     if(entity istouchinganyoobtrigger()) {
       updatevisualeffects(trigger, entity);
       if((level.oob_timelimit_ms - (gettime() - self.oob_start_time)) <= 0) {
@@ -224,7 +224,7 @@ function watchforleave(trigger, entity) {
           entity disableinvulnerability();
           entity.ignoreme = 0;
           entity.laststand = undefined;
-          if(isDefined(entity.revivetrigger)) {
+          if(isdefined(entity.revivetrigger)) {
             entity.revivetrigger delete();
           }
         }

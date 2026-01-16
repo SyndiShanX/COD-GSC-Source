@@ -16,6 +16,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace sensor_dart;
 
 autoexec __init__system__() {
@@ -154,7 +155,7 @@ function_95c69960(player) {
 }
 
 function_f4970a20(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self endon(#"death");
   self weaponobjects::onspawnuseweaponobject(watcher, player);
@@ -174,9 +175,9 @@ function_f4970a20(watcher, player) {
   }
 
   player.sensor_darts[player.sensor_darts.size] = self;
-  waitresult = self waittilltimeout(5, # "stationary");
+  waitresult = self waittilltimeout(5, #"stationary");
 
-  if(waitresult._notify == # "timeout") {
+  if(waitresult._notify == #"timeout") {
     function_4db10465();
     return;
   }
@@ -185,7 +186,7 @@ function_f4970a20(watcher, player) {
     #dart: self
   });
   player clientfield::set_player_uimodel("hudItems.sensorDartCount", player.sensor_darts.size);
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self util::make_sentient();
   self thread function_cc9ab1fc();
   self thread function_cb672f03();
@@ -207,7 +208,7 @@ function_f4970a20(watcher, player) {
 
 private function_cb672f03() {
   owner = self.owner;
-  waitresult = self waittill(#"picked_up", # "death");
+  waitresult = self waittill(#"picked_up", #"death");
 
   if(isDefined(owner) && isDefined(owner.sensor_darts)) {
     arrayremovevalue(owner.sensor_darts, undefined);
@@ -307,7 +308,7 @@ function_55de888f(watcher) {
     profilestop();
 
     if(level.teambased && !sessionmodeiswarzonegame()) {
-      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }

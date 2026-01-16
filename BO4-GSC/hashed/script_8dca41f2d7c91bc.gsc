@@ -19,6 +19,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace namespace_8216831d;
 
 autoexec __init__system__() {
@@ -66,7 +67,7 @@ private function_2c0a7925(b_disable) {
 }
 
 private function_15c362c9() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   function_2c0a7925(1);
 
   foreach(player in getplayers()) {
@@ -75,7 +76,7 @@ private function_15c362c9() {
   }
 
   wait 12;
-  var_a3006a8a = array(#"air", # "death", # "earth", # "light");
+  var_a3006a8a = array(#"air", #"death", #"earth", #"light");
 
   foreach(player in getplayers()) {
     if(isDefined(self.var_7881756e)) {
@@ -86,17 +87,17 @@ private function_15c362c9() {
 
     arrayremovevalue(var_a3006a8a, var_32e3ef04, 1);
 
-    player thread function_d38bb58b(var_32e3ef04);
+      player thread function_d38bb58b(var_32e3ef04);
   }
 }
 
 private function_d38bb58b(var_32e3ef04) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "hash_6256990b4b694197");
+  level endon(#"hash_7646638df88a3656", #"hash_6256990b4b694197");
   self zm_trial_util::function_63060af4(0);
 
   if(self flag::get(#"ww_combat_active") || self flag::get(#"hash_3247dad158e8b329")) {
-    self flag::wait_till_clear_all(array(#"ww_combat_active", # "hash_3247dad158e8b329"));
+    self flag::wait_till_clear_all(array(#"ww_combat_active", #"hash_3247dad158e8b329"));
     wait 5;
   }
 
@@ -111,10 +112,10 @@ private function_d38bb58b(var_32e3ef04) {
 
   var_b4fb8b2a = level.var_d225ea18[var_32e3ef04];
   var_b4fb8b2a thread function_109ebdc3(self);
-  s_waitresult = self waittill(#"hash_11371635986ba290", # "death", # "player_downed", # "fake_death");
+  s_waitresult = self waittill(#"hash_11371635986ba290", #"death", #"player_downed", #"fake_death");
   var_b4fb8b2a thread function_c9e7bec4(self);
 
-  if(s_waitresult._notify == # "hash_11371635986ba290" && isDefined(s_waitresult.b_success) && s_waitresult.b_success) {
+  if(s_waitresult._notify == #"hash_11371635986ba290" && isDefined(s_waitresult.b_success) && s_waitresult.b_success) {
     self.var_be737ce7 = 1;
     self zm_trial_util::function_63060af4(1);
 
@@ -158,10 +159,10 @@ function_109ebdc3(e_player) {
   str_stance = e_player getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       wait 1;
       break;
   }
@@ -196,7 +197,7 @@ function_109ebdc3(e_player) {
     }
   }
 
-  level waittill(self.var_9bd3a2c6, # "round_reset");
+  level waittill(self.var_9bd3a2c6, #"round_reset");
 
   if(isDefined(self.var_f172b16e)) {
     e_player clientfield::set(self.var_f172b16e, 0);
@@ -213,7 +214,7 @@ function_109ebdc3(e_player) {
 private function_eee5f1e5(e_player) {
   e_player endon(#"disconnect");
   e_player start_timer(90);
-  level waittilltimeout(90, # "round_reset");
+  level waittilltimeout(90, #"round_reset");
   e_player stop_timer();
 
   if(level flag::get("round_reset")) {
@@ -228,8 +229,8 @@ private function_eee5f1e5(e_player) {
 }
 
 function_4ff0c5fd(e_player) {
-  level endon(#"end_game", # "hash_7646638df88a3656");
-  e_player endon(#"disconnect", # "hash_11371635986ba290");
+  level endon(#"end_game", #"hash_7646638df88a3656");
+  e_player endon(#"disconnect", #"hash_11371635986ba290");
   a_ai_spawned = [];
   var_1cda8410 = [];
   level thread zm_red_ww_quests::sndonoverride_no_();
@@ -245,7 +246,7 @@ function_4ff0c5fd(e_player) {
       var_1cda8410 = array::remove_dead(var_1cda8410);
       a_ai_spawned = array::remove_dead(a_ai_spawned);
 
-      if(self.targetname === # "earth") {
+      if(self.targetname === #"earth") {
         if(var_1cda8410.size < 6) {
           ai_zombie = zm_red_ww_quests::function_eeed4f2f(s_spawn);
           n_wait_time = 0.5;
@@ -258,7 +259,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "air") {
+      if(self.targetname === #"air") {
         if(var_1cda8410.size < 3) {
           s_spawn = array::random(a_s_spawns);
           ai_zombie = zombie_skeleton_util::function_1ea880bd(1, s_spawn, undefined, undefined, 1);
@@ -272,7 +273,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "light") {
+      if(self.targetname === #"light") {
         if(var_1cda8410.size < 1) {
           s_spawn = array::random(struct::get_array("s_ww_quest_light_spawn_gegenees"));
           ai_zombie = zombie_gegenees_util::spawn_single(1, s_spawn);
@@ -286,7 +287,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "death") {
+      if(self.targetname === #"death") {
         if(var_1cda8410.size < 1) {
           s_spawn = struct::get("s_ww_d_spawn_bl");
           ai_zombie = zm_red_ww_quests::function_7a15e228(s_spawn);
@@ -348,7 +349,7 @@ private start_timer(n_timer) {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, 1);
-    level.var_f995ece6 zm_trial_timer::set_timer_text(self, # "");
+    level.var_f995ece6 zm_trial_timer::set_timer_text(self, #"");
     self zm_trial_util::start_timer(n_timer);
   }
 }

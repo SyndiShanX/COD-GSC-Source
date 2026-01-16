@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;
 #include scripts\core_common\math_shared;
+
 #namespace archetype_mocomps_utility;
 
 autoexec registerdefaultanimationmocomps() {
@@ -283,7 +284,7 @@ calculatepivotoriginfromedge(entity, mantlenode, traversalstart) {
       }
     }
   } else {
-    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[#"position"];
   }
 
   recordline(mantleoriginproj, mantleendproj, (0, 0, 1), "<dev string:x38>", entity);
@@ -322,7 +323,7 @@ mocomptraversalproceduralinit(entity, mocompanim, mocompanimblendouttime, mocomp
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
     }
   }
 
@@ -374,7 +375,7 @@ mocomptraversalproceduralpivotinit(entity, mocompanim, mocompanimblendouttime, m
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
     }
   }
 

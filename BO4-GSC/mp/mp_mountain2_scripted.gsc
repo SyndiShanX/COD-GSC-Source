@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
+
 #namespace mp_mountain2_scripted;
 
 autoexec __init__system__() {
@@ -21,9 +22,10 @@ __init__() {
 }
 
 __main__() {
+
   init_devgui();
 
-  level thread function_2cdcf5c3();
+    level thread function_2cdcf5c3();
 }
 
 on_game_playing() {
@@ -63,3 +65,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:xc6>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x105>");
 }
+

@@ -4,6 +4,7 @@
 *************************************************/
 
 #include scripts\core_common\array_shared;
+
 #namespace aispawningutility;
 
 function_e312ad4d(str_team, var_f8de2ad5, var_82706add) {
@@ -33,17 +34,18 @@ function_e312ad4d(str_team, var_f8de2ad5, var_82706add) {
     }
 
     if(!var_9e81c42.size) {
+
       println("<dev string:x38>" + var_82706add + "<dev string:x5c>");
       iprintln("<dev string:x38>" + var_82706add + "<dev string:x5c>");
 
-      return undefined;
+        return undefined;
     }
 
     var_4765679a = [];
     var_4491b72a = [];
 
     foreach(var_faf91246 in var_9e81c42) {
-      if(var_faf91246.count > 0 || isDefined(var_faf91246.spawnflags) && (var_faf91246.spawnflags & 64) == 64) {
+      if(var_faf91246.count > 0 || isDefined(var_faf91246.spawnflags) && (var_faf91246.spawnflags&64) == 64) {
         if(!isDefined(var_4765679a)) {
           var_4765679a = [];
         } else if(!isarray(var_4765679a)) {
@@ -54,7 +56,7 @@ function_e312ad4d(str_team, var_f8de2ad5, var_82706add) {
           var_4765679a[var_4765679a.size] = var_faf91246;
         }
 
-        if(isDefined(var_faf91246.spawnflags) && (var_faf91246.spawnflags & 32) == 32) {
+        if(isDefined(var_faf91246.spawnflags) && (var_faf91246.spawnflags&32) == 32) {
           if(!isDefined(var_4491b72a)) {
             var_4491b72a = [];
           } else if(!isarray(var_4491b72a)) {
@@ -70,22 +72,22 @@ function_e312ad4d(str_team, var_f8de2ad5, var_82706add) {
 
     if(var_4491b72a.size) {
       spawner = array::random(var_4491b72a);
-      spawn_point[# "angles"] = spawner.angles;
-      spawn_point[# "origin"] = spawner.origin;
-      spawn_point[# "spawner"] = spawner;
+      spawn_point[#"angles"] = spawner.angles;
+      spawn_point[#"origin"] = spawner.origin;
+      spawn_point[#"spawner"] = spawner;
       return spawn_point;
     } else if(var_4765679a.size) {
       spawner = array::random(var_4765679a);
-      spawn_point[# "angles"] = spawner.angles;
-      spawn_point[# "origin"] = spawner.origin;
-      spawn_point[# "spawner"] = spawner;
+      spawn_point[#"angles"] = spawner.angles;
+      spawn_point[#"origin"] = spawner.origin;
+      spawn_point[#"spawner"] = spawner;
       return spawn_point;
     }
 
     println("<dev string:x60>" + var_82706add + "<dev string:x8b>" + str_team + "<dev string:x93>");
     iprintln("<dev string:x60>" + var_82706add + "<dev string:x8b>" + str_team + "<dev string:x93>");
 
-    return undefined;
+      return undefined;
   }
 
   return undefined;

@@ -11,6 +11,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace hawk_wz;
 
 autoexec __init__system__() {
@@ -23,9 +24,9 @@ __init__() {
   level.hawk_settings.bundle = getscriptbundle("hawk_settings_wz");
   level.var_ef287aa1 = [];
   level.var_eba5e1cc = [];
-  level.var_eba5e1cc[# "stand"] = (0, 0, 60);
-  level.var_eba5e1cc[# "crouch"] = (0, 0, 40);
-  level.var_eba5e1cc[# "prone"] = (0, 0, 12);
+  level.var_eba5e1cc[#"stand"] = (0, 0, 60);
+  level.var_eba5e1cc[#"crouch"] = (0, 0, 40);
+  level.var_eba5e1cc[#"prone"] = (0, 0, 12);
   level.var_aac98621 = [];
   level.var_8dfa7ed7 = [];
 
@@ -61,8 +62,8 @@ private function_f95544c4(team1, team2) {
 }
 
 private hawk_think(localclientnum) {
-  self endoncallback(&function_8bd7314c, # "death");
-  self.owner endoncallback(&function_8bd7314c, # "death", # "disconnect");
+  self endoncallback(&function_8bd7314c, #"death");
+  self.owner endoncallback(&function_8bd7314c, #"death", #"disconnect");
   array::add(level.var_ef287aa1, self, 0);
   self.var_704e7b07 = [];
   self.targets = [];
@@ -278,13 +279,13 @@ private function_9ace0fb6(localclientnum) {
     info.var_1fe906d8 = time;
     tagtime = int(bundle.tag_time * 1000);
 
-    if(target hasperk(localclientnum, # "specialty_nokillstreakreticle")) {
+    if(target hasperk(localclientnum, #"specialty_nokillstreakreticle")) {
       tagtime *= bundle.var_59b7880b;
     }
 
     if(info.var_1fe906d8 - info.first_visible > tagtime) {
       if(isDefined(self.owner) && target function_21c0fa55() && !info.var_aaf744fe && !function_f95544c4(self.owner.team, target.team)) {
-        target playSound(localclientnum, # "hash_4f43df2a649784d0");
+        target playSound(localclientnum, #"hash_4f43df2a649784d0");
       }
 
       info.state = 1;
@@ -431,7 +432,7 @@ private function_d53feb8c(localclientnum, targets) {
 }
 
 private function_a552c160(localclientnum) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.var_d32addbf = [];
   self.var_fad86c46 = [];
 
@@ -482,7 +483,7 @@ on_local_player_spawned(localclientnum) {
   vehicle = getplayervehicle(player);
   player function_a552c160(localclientnum);
 
-  if(isDefined(vehicle) && (vehicle.vehicletype == # "veh_hawk_player_wz" || vehicle.vehicletype == # "veh_hawk_player_far_range_wz")) {
+  if(isDefined(vehicle) && (vehicle.vehicletype == #"veh_hawk_player_wz" || vehicle.vehicletype == #"veh_hawk_player_far_range_wz")) {
     return;
   }
 
@@ -490,7 +491,7 @@ on_local_player_spawned(localclientnum) {
 }
 
 function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.vehicletype != # "veh_hawk_player_wz" && self.vehicletype != # "veh_hawk_player_far_range_wz") {
+  if(self.vehicletype != #"veh_hawk_player_wz" && self.vehicletype != #"veh_hawk_player_far_range_wz") {
     return;
   }
 
@@ -510,12 +511,12 @@ function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_775073e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    function_a837926b(localclientnum, # "hash_594d5293046135ff");
+  if(!function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    function_a837926b(localclientnum, #"hash_594d5293046135ff");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -526,12 +527,12 @@ function_775073e(localclientnum) {
 }
 
 function_6367489e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    function_a837926b(localclientnum, # "hash_63b0389eb9286669");
+  if(!function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    function_a837926b(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -542,12 +543,12 @@ function_6367489e(localclientnum) {
 }
 
 function_3759fcf(localclientnum, var_c5e2f09a) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -619,7 +620,7 @@ private function_8487fabe(localclientnum) {
     stance_offset = level.var_eba5e1cc[player getstance()];
 
     if(isDefined(vehicle)) {
-      stance_offset = level.var_eba5e1cc[# "crouch"];
+      stance_offset = level.var_eba5e1cc[#"crouch"];
     }
 
     toplayer = vectornormalize(player.origin + stance_offset - self.origin);
@@ -633,7 +634,7 @@ private function_8487fabe(localclientnum) {
       if(!in_sight && isDefined(vehicle)) {
         trace_result = bulletTrace(self.origin, player.origin + stance_offset, 0, self);
 
-        if(trace_result[# "fraction"] < 1 && trace_result[# "entity"] === vehicle) {
+        if(trace_result[#"fraction"] < 1 && trace_result[#"entity"] === vehicle) {
           in_sight = 1;
           bullet_traces_this_frame++;
         }

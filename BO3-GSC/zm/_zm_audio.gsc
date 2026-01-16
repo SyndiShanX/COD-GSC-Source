@@ -20,16 +20,16 @@
 #namespace zm_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio", &__init__, undefined, undefined);
+  system::register("zm_audio", & __init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "charindex", 1, 3, "int");
   clientfield::register("toplayer", "isspeaking", 1, 1, "int");
   println("");
-  level.audio_get_mod_type = &get_mod_type;
+  level.audio_get_mod_type = & get_mod_type;
   level zmbvox();
-  callback::on_connect(&init_audio_functions);
+  callback::on_connect( & init_audio_functions);
   level thread sndannouncer_init();
 }
 
@@ -39,15 +39,15 @@ function setexertvoice(exert_id) {
 }
 
 function playerexert(exert, notifywait = 0) {
-  if(isDefined(self.isspeaking) && self.isspeaking || (isDefined(self.isexerting) && self.isexerting)) {
+  if(isdefined(self.isspeaking) && self.isspeaking || (isdefined(self.isexerting) && self.isexerting)) {
     return;
   }
-  if(isDefined(self.beastmode) && self.beastmode) {
+  if(isdefined(self.beastmode) && self.beastmode) {
     return;
   }
   id = level.exert_sounds[0][exert];
-  if(isDefined(self.player_exert_id)) {
-    if(!isDefined(level.exert_sounds) || !isDefined(level.exert_sounds[self.player_exert_id]) || !isDefined(level.exert_sounds[self.player_exert_id][exert])) {
+  if(isdefined(self.player_exert_id)) {
+    if(!isdefined(level.exert_sounds) || !isdefined(level.exert_sounds[self.player_exert_id]) || !isdefined(level.exert_sounds[self.player_exert_id][exert])) {
       return;
     }
     if(isarray(level.exert_sounds[self.player_exert_id][exert])) {
@@ -56,7 +56,7 @@ function playerexert(exert, notifywait = 0) {
       id = level.exert_sounds[self.player_exert_id][exert];
     }
   }
-  if(isDefined(id)) {
+  if(isdefined(id)) {
     self.isexerting = 1;
     if(notifywait) {
       self playsoundwithnotify(id, "done_exerting");
@@ -64,7 +64,7 @@ function playerexert(exert, notifywait = 0) {
       self.isexerting = 0;
     } else {
       self thread exert_timer();
-      self playSound(id);
+      self playsound(id);
     }
   }
 }
@@ -78,10 +78,10 @@ function exert_timer() {
 function zmbvox() {
   level.votimer = [];
   level.vox = zmbvoxcreate();
-  if(isDefined(level._zmbvoxlevelspecific)) {
+  if(isdefined(level._zmbvoxlevelspecific)) {
     level thread[[level._zmbvoxlevelspecific]]();
   }
-  if(isDefined(level._zmbvoxgametypespecific)) {
+  if(isdefined(level._zmbvoxgametypespecific)) {
     level thread[[level._zmbvoxgametypespecific]]();
   }
   announcer_ent = spawn("script_origin", (0, 0, 0));
@@ -89,15 +89,17 @@ function zmbvox() {
   level.exert_sounds[0]["burp"] = "evt_belch";
   level.exert_sounds[0]["hitmed"] = "null";
   level.exert_sounds[0]["hitlrg"] = "null";
-  if(isDefined(level.setupcustomcharacterexerts)) {
-    [[level.setupcustomcharacterexerts]]();
+  if(isdefined(level.setupcustomcharacterexerts)) {
+    [
+      [level.setupcustomcharacterexerts]
+    ]();
   }
 }
 
 function init_audio_functions() {
   self thread zombie_behind_vox();
   self thread player_killstreak_timer();
-  if(isDefined(level._custom_zombie_oh_shit_vox_func)) {
+  if(isdefined(level._custom_zombie_oh_shit_vox_func)) {
     self thread[[level._custom_zombie_oh_shit_vox_func]]();
   } else {
     self thread oh_shit_vox();
@@ -107,11 +109,11 @@ function init_audio_functions() {
 function zombie_behind_vox() {
   level endon("unloaded");
   self endon("death_or_disconnect");
-  if(!isDefined(level._zbv_vox_last_update_time)) {
+  if(!isdefined(level._zbv_vox_last_update_time)) {
     level._zbv_vox_last_update_time = 0;
     level._audio_zbv_shared_ent_list = zombie_utility::get_zombie_array();
   }
-  while(true) {
+  while (true) {
     wait(1);
     t = gettime();
     if(t > (level._zbv_vox_last_update_time + 1000)) {
@@ -120,8 +122,8 @@ function zombie_behind_vox() {
     }
     zombs = level._audio_zbv_shared_ent_list;
     played_sound = 0;
-    for(i = 0; i < zombs.size; i++) {
-      if(!isDefined(zombs[i])) {
+    for (i = 0; i < zombs.size; i++) {
+      if(!isdefined(zombs[i])) {
         continue;
       }
       if(zombs[i].isdog) {
@@ -130,7 +132,7 @@ function zombie_behind_vox() {
       dist = 150;
       z_dist = 50;
       alias = level.vox_behind_zombie;
-      if(isDefined(zombs[i].zombie_move_speed)) {
+      if(isdefined(zombs[i].zombie_move_speed)) {
         switch (zombs[i].zombie_move_speed) {
           case "walk": {
             dist = 150;
@@ -164,14 +166,14 @@ function zombie_behind_vox() {
 
 function oh_shit_vox() {
   self endon("death_or_disconnect");
-  while(true) {
+  while (true) {
     wait(1);
     players = getplayers();
     zombs = zombie_utility::get_round_enemy_array();
     if(players.size >= 1) {
       close_zombs = 0;
-      for(i = 0; i < zombs.size; i++) {
-        if(isDefined(zombs[i].favoriteenemy) && zombs[i].favoriteenemy == self || !isDefined(zombs[i].favoriteenemy)) {
+      for (i = 0; i < zombs.size; i++) {
+        if(isdefined(zombs[i].favoriteenemy) && zombs[i].favoriteenemy == self || !isdefined(zombs[i].favoriteenemy)) {
           if(distancesquared(zombs[i].origin, self.origin) < 62500) {
             close_zombs++;
           }
@@ -196,16 +198,16 @@ function player_killstreak_timer() {
   }
   kills = getdvarint("zombie_kills");
   time = getdvarint("zombie_kill_timer");
-  if(!isDefined(self.timerisrunning)) {
+  if(!isdefined(self.timerisrunning)) {
     self.timerisrunning = 0;
     self.killcounter = 0;
   }
-  while(true) {
+  while (true) {
     self waittill("zom_kill", zomb);
-    if(isDefined(zomb._black_hole_bomb_collapse_death) && zomb._black_hole_bomb_collapse_death == 1) {
+    if(isdefined(zomb._black_hole_bomb_collapse_death) && zomb._black_hole_bomb_collapse_death == 1) {
       continue;
     }
-    if(isDefined(zomb.microwavegun_death) && zomb.microwavegun_death) {
+    if(isdefined(zomb.microwavegun_death) && zomb.microwavegun_death) {
       continue;
     }
     self.killcounter++;
@@ -219,26 +221,26 @@ function player_killstreak_timer() {
 function player_zombie_kill_vox(hit_location, player, mod, zombie) {
   weapon = player getcurrentweapon();
   dist = distancesquared(player.origin, zombie.origin);
-  if(!isDefined(level.zombie_vars[player.team]["zombie_insta_kill"])) {
+  if(!isdefined(level.zombie_vars[player.team]["zombie_insta_kill"])) {
     level.zombie_vars[player.team]["zombie_insta_kill"] = 0;
   }
   instakill = level.zombie_vars[player.team]["zombie_insta_kill"];
   death = [[level.audio_get_mod_type]](hit_location, mod, weapon, zombie, instakill, dist, player);
-  if(!isDefined(death)) {
+  if(!isdefined(death)) {
     return undefined;
   }
-  if(!(isDefined(player.force_wait_on_kill_line) && player.force_wait_on_kill_line)) {
+  if(!(isdefined(player.force_wait_on_kill_line) && player.force_wait_on_kill_line)) {
     player.force_wait_on_kill_line = 1;
     player create_and_play_dialog("kill", death);
     wait(2);
-    if(isDefined(player)) {
+    if(isdefined(player)) {
       player.force_wait_on_kill_line = 0;
     }
   }
 }
 
 function get_response_chance(event) {
-  if(!isDefined(level.response_chances[event])) {
+  if(!isdefined(level.response_chances[event])) {
     return 0;
   }
   return level.response_chances[event];
@@ -278,7 +280,7 @@ function get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     }
     return "melee_instakill";
   }
-  if(zm_utility::is_explosive_damage(mod) && weapon.name != "ray_gun" && (!(isDefined(zombie.is_on_fire) && zombie.is_on_fire))) {
+  if(zm_utility::is_explosive_damage(mod) && weapon.name != "ray_gun" && (!(isdefined(zombie.is_on_fire) && zombie.is_on_fire))) {
     if(!instakill) {
       return "explosive";
     }
@@ -290,7 +292,7 @@ function get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     }
     return "weapon_instakill";
   }
-  if(!isDefined(impact)) {
+  if(!isdefined(impact)) {
     impact = "";
   }
   if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
@@ -315,7 +317,7 @@ function timer_actual(kills, time) {
   self endon("disconnect");
   self endon("death");
   timer = gettime() + (time * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     if(self.killcounter > kills) {
       self create_and_play_dialog("kill", "streak");
       wait(1);
@@ -330,15 +332,15 @@ function timer_actual(kills, time) {
 }
 
 function zmbvoxcreate() {
-  vox = spawnStruct();
+  vox = spawnstruct();
   vox.speaker = [];
   return vox;
 }
 
 function zmbvoxinitspeaker(speaker, prefix, ent) {
   ent.zmbvoxid = speaker;
-  if(!isDefined(self.speaker[speaker])) {
-    self.speaker[speaker] = spawnStruct();
+  if(!isdefined(self.speaker[speaker])) {
+    self.speaker[speaker] = spawnstruct();
     self.speaker[speaker].alias = [];
   }
   self.speaker[speaker].prefix = prefix;
@@ -359,7 +361,7 @@ function loadplayervoicecategories(table) {
   level.sndplayervox = [];
   index = 0;
   row = tablelookuprow(table, index);
-  while(isDefined(row)) {
+  while (isdefined(row)) {
     category = checkstringvalid(row[0]);
     subcategory = checkstringvalid(row[1]);
     suffix = checkstringvalid(row[2]);
@@ -368,8 +370,8 @@ function loadplayervoicecategories(table) {
       percentage = 100;
     }
     response = checkstringtrue(row[4]);
-    if(isDefined(response) && response) {
-      for(i = 0; i < 4; i++) {
+    if(isdefined(response) && response) {
+      for (i = 0; i < 4; i++) {
         zmbvoxadd(category, (subcategory + "_resp_") + i, (suffix + "_resp_") + i, 50, 0);
       }
     }
@@ -388,7 +390,7 @@ function checkstringvalid(str) {
 }
 
 function checkstringtrue(str) {
-  if(!isDefined(str)) {
+  if(!isdefined(str)) {
     return false;
   }
   if(str != "") {
@@ -400,7 +402,7 @@ function checkstringtrue(str) {
 }
 
 function checkintvalid(value, defaultvalue = 0) {
-  if(!isDefined(value)) {
+  if(!isdefined(value)) {
     return defaultvalue;
   }
   if(value == "") {
@@ -410,17 +412,17 @@ function checkintvalid(value, defaultvalue = 0) {
 }
 
 function zmbvoxadd(category, subcategory, suffix, percentage, response, delaybeforeplayagain = 0) {
-  assert(isDefined(category));
-  assert(isDefined(subcategory));
-  assert(isDefined(suffix));
-  assert(isDefined(percentage));
-  assert(isDefined(response));
-  assert(isDefined(delaybeforeplayagain));
+  assert(isdefined(category));
+  assert(isdefined(subcategory));
+  assert(isdefined(suffix));
+  assert(isdefined(percentage));
+  assert(isdefined(response));
+  assert(isdefined(delaybeforeplayagain));
   vox = level.sndplayervox;
-  if(!isDefined(vox[category])) {
+  if(!isdefined(vox[category])) {
     vox[category] = [];
   }
-  vox[category][subcategory] = spawnStruct();
+  vox[category][subcategory] = spawnstruct();
   vox[category][subcategory].suffix = suffix;
   vox[category][subcategory].percentage = percentage;
   vox[category][subcategory].response = response;
@@ -429,29 +431,29 @@ function zmbvoxadd(category, subcategory, suffix, percentage, response, delaybef
 }
 
 function create_and_play_dialog(category, subcategory, force_variant) {
-  if(!isDefined(level.sndplayervox)) {
+  if(!isdefined(level.sndplayervox)) {
     return;
   }
-  if(!isDefined(level.sndplayervox[category])) {
+  if(!isdefined(level.sndplayervox[category])) {
     return;
   }
-  if(!isDefined(level.sndplayervox[category][subcategory])) {
+  if(!isdefined(level.sndplayervox[category][subcategory])) {
     if(getdvarint("") > 0) {
       println(((("" + category) + "") + subcategory) + "");
     }
     return;
   }
-  if(isDefined(level.sndvoxoverride) && level.sndvoxoverride || (isDefined(self.isspeaking) && self.isspeaking && (!(isDefined(self.b_wait_if_busy) && self.b_wait_if_busy)))) {
+  if(isdefined(level.sndvoxoverride) && level.sndvoxoverride || (isdefined(self.isspeaking) && self.isspeaking && (!(isdefined(self.b_wait_if_busy) && self.b_wait_if_busy)))) {
     return;
   }
   suffix = level.sndplayervox[category][subcategory].suffix;
   percentage = level.sndplayervox[category][subcategory].percentage;
   prefix = shouldplayerspeak(self, category, subcategory, percentage);
-  if(!isDefined(prefix)) {
+  if(!isdefined(prefix)) {
     return;
   }
   sound_to_play = self zmbvoxgetlinevariant(prefix, suffix, force_variant);
-  if(isDefined(sound_to_play)) {
+  if(isdefined(sound_to_play)) {
     self thread do_player_or_npc_playvox(sound_to_play, category, subcategory);
   } else {
     iprintln("");
@@ -464,21 +466,21 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
   if(self flag::exists("in_beastmode") && self flag::get("in_beastmode")) {
     return;
   }
-  if(!isDefined(self.isspeaking)) {
+  if(!isdefined(self.isspeaking)) {
     self.isspeaking = 0;
   }
   if(self.isspeaking) {
     return;
   }
   waittime = 1;
-  if(!self arenearbyspeakersactive() || (isDefined(self.ignorenearbyspkrs) && self.ignorenearbyspkrs)) {
+  if(!self arenearbyspeakersactive() || (isdefined(self.ignorenearbyspkrs) && self.ignorenearbyspkrs)) {
     self.speakingline = sound_to_play;
     self.isspeaking = 1;
     if(isplayer(self)) {
       self clientfield::set_to_player("isspeaking", 1);
     }
     playbacktime = soundgetplaybacktime(sound_to_play);
-    if(!isDefined(playbacktime)) {
+    if(!isdefined(playbacktime)) {
       return;
     }
     if(playbacktime >= 0) {
@@ -486,14 +488,14 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
     } else {
       playbacktime = 1;
     }
-    if(isDefined(level._do_player_or_npc_playvox_override)) {
+    if(isdefined(level._do_player_or_npc_playvox_override)) {
       self thread[[level._do_player_or_npc_playvox_override]](sound_to_play, playbacktime);
       wait(playbacktime);
     } else if(!self istestclient()) {
       self playsoundontag(sound_to_play, "J_Head");
       wait(playbacktime);
     }
-    if(isplayer(self) && isDefined(self.last_vo_played_time)) {
+    if(isplayer(self) && isdefined(self.last_vo_played_time)) {
       if(gettime() < (self.last_vo_played_time + 5000)) {
         self.last_vo_played_time = gettime();
         waittime = 7;
@@ -504,8 +506,8 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
     if(isplayer(self)) {
       self clientfield::set_to_player("isspeaking", 0);
     }
-    if(!level flag::get("solo_game") && (isDefined(level.sndplayervox[category][subcategory].response) && level.sndplayervox[category][subcategory].response)) {
-      if(isDefined(level.vox_response_override) && level.vox_response_override) {
+    if(!level flag::get("solo_game") && (isdefined(level.sndplayervox[category][subcategory].response) && level.sndplayervox[category][subcategory].response)) {
+      if(isdefined(level.vox_response_override) && level.vox_response_override) {
         level thread setup_response_line_override(self, category, subcategory);
       } else {
         level thread setup_response_line(self, category, subcategory);
@@ -515,7 +517,7 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
 }
 
 function setup_response_line_override(player, category, subcategory) {
-  if(isDefined(level._audio_custom_response_line)) {
+  if(isdefined(level._audio_custom_response_line)) {
     self thread[[level._audio_custom_response_line]](player, category, subcategory);
   } else {
     switch (player.characterindex) {
@@ -552,21 +554,21 @@ function setup_hero_rival(player, hero, rival, category, type) {
       rival_player = ent;
     }
   }
-  if(isDefined(hero_player) && isDefined(rival_player)) {
+  if(isdefined(hero_player) && isdefined(rival_player)) {
     if(randomint(100) > 50) {
       hero_player = undefined;
     } else {
       rival_player = undefined;
     }
   }
-  if(isDefined(hero_player) && distancesquared(player.origin, hero_player.origin) < 250000) {
-    if(isDefined(player.issamantha) && player.issamantha) {
+  if(isdefined(hero_player) && distancesquared(player.origin, hero_player.origin) < 250000) {
+    if(isdefined(player.issamantha) && player.issamantha) {
       hero_player create_and_play_dialog(category, type + "_s");
     } else {
       hero_player create_and_play_dialog(category, type + "_hr");
     }
-  } else if(isDefined(rival_player) && distancesquared(player.origin, rival_player.origin) < 250000) {
-    if(isDefined(player.issamantha) && player.issamantha) {
+  } else if(isdefined(rival_player) && distancesquared(player.origin, rival_player.origin) < 250000) {
+    if(isdefined(player.issamantha) && player.issamantha) {
       rival_player create_and_play_dialog(category, type + "_s");
     } else {
       rival_player create_and_play_dialog(category, type + "_riv");
@@ -587,7 +589,7 @@ function setup_response_line(player, category, subcategory) {
 }
 
 function shouldplayerspeak(player, category, subcategory, percentage) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return undefined;
   }
   if(!player zm_utility::is_player()) {
@@ -604,7 +606,7 @@ function shouldplayerspeak(player, category, subcategory, percentage) {
       return undefined;
     }
   }
-  if(isDefined(player.dontspeak) && player.dontspeak) {
+  if(isdefined(player.dontspeak) && player.dontspeak) {
     return undefined;
   }
   if(percentage < randomintrange(1, 101)) {
@@ -614,7 +616,7 @@ function shouldplayerspeak(player, category, subcategory, percentage) {
     return undefined;
   }
   index = zm_utility::get_player_index(player);
-  if(isDefined(player.issamantha) && player.issamantha) {
+  if(isdefined(player.issamantha) && player.issamantha) {
     index = 4;
   }
   return ("vox_plr_" + index) + "_";
@@ -625,10 +627,10 @@ function isvoxoncooldown(player, category, subcategory) {
     return false;
   }
   fullname = category + subcategory;
-  if(!isDefined(player.voxtimer)) {
+  if(!isdefined(player.voxtimer)) {
     player.voxtimer = [];
   }
-  if(!isDefined(player.voxtimer[fullname])) {
+  if(!isdefined(player.voxtimer[fullname])) {
     player.voxtimer[fullname] = gettime();
     return false;
   }
@@ -641,11 +643,11 @@ function isvoxoncooldown(player, category, subcategory) {
 }
 
 function zmbvoxgetlinevariant(prefix, suffix, force_variant) {
-  if(!isDefined(self.sound_dialog)) {
+  if(!isdefined(self.sound_dialog)) {
     self.sound_dialog = [];
     self.sound_dialog_available = [];
   }
-  if(!isDefined(self.sound_dialog[suffix])) {
+  if(!isdefined(self.sound_dialog[suffix])) {
     num_variants = zm_spawner::get_number_variants(prefix + suffix);
     if(num_variants <= 0) {
       if(getdvarint("") > 0) {
@@ -653,19 +655,19 @@ function zmbvoxgetlinevariant(prefix, suffix, force_variant) {
       }
       return undefined;
     }
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.sound_dialog[suffix][i] = i;
     }
     self.sound_dialog_available[suffix] = [];
   }
   if(self.sound_dialog_available[suffix].size <= 0) {
-    for(i = 0; i < self.sound_dialog[suffix].size; i++) {
+    for (i = 0; i < self.sound_dialog[suffix].size; i++) {
       self.sound_dialog_available[suffix][i] = self.sound_dialog[suffix][i];
     }
   }
   variation = array::random(self.sound_dialog_available[suffix]);
   arrayremovevalue(self.sound_dialog_available[suffix], variation);
-  if(isDefined(force_variant)) {
+  if(isdefined(force_variant)) {
     variation = force_variant;
   }
   return ((prefix + suffix) + "_") + variation;
@@ -686,7 +688,7 @@ function arenearbyspeakersactive(radius = 1000) {
         continue;
       }
     }
-    if(isDefined(person.isspeaking) && person.isspeaking && (!(isDefined(person.ignorenearbyspkrs) && person.ignorenearbyspkrs))) {
+    if(isdefined(person.isspeaking) && person.isspeaking && (!(isdefined(person.ignorenearbyspkrs) && person.ignorenearbyspkrs))) {
       if(distancesquared(self.origin, person.origin) < (radius * radius)) {
         nearbyspeakeractive = 1;
       }
@@ -696,39 +698,39 @@ function arenearbyspeakersactive(radius = 1000) {
 }
 
 function musicstate_create(statename, playtype = 1, musname1, musname2, musname3, musname4, musname5, musname6) {
-  if(!isDefined(level.musicsystem)) {
-    level.musicsystem = spawnStruct();
+  if(!isdefined(level.musicsystem)) {
+    level.musicsystem = spawnstruct();
     level.musicsystem.queue = 0;
     level.musicsystem.currentplaytype = 0;
     level.musicsystem.currentset = undefined;
     level.musicsystem.states = [];
   }
-  level.musicsystem.states[statename] = spawnStruct();
+  level.musicsystem.states[statename] = spawnstruct();
   level.musicsystem.states[statename].playtype = playtype;
   level.musicsystem.states[statename].musarray = array();
-  if(isDefined(musname1)) {
+  if(isdefined(musname1)) {
     array::add(level.musicsystem.states[statename].musarray, musname1);
   }
-  if(isDefined(musname2)) {
+  if(isdefined(musname2)) {
     array::add(level.musicsystem.states[statename].musarray, musname2);
   }
-  if(isDefined(musname3)) {
+  if(isdefined(musname3)) {
     array::add(level.musicsystem.states[statename].musarray, musname3);
   }
-  if(isDefined(musname4)) {
+  if(isdefined(musname4)) {
     array::add(level.musicsystem.states[statename].musarray, musname4);
   }
-  if(isDefined(musname5)) {
+  if(isdefined(musname5)) {
     array::add(level.musicsystem.states[statename].musarray, musname5);
   }
-  if(isDefined(musname6)) {
+  if(isdefined(musname6)) {
     array::add(level.musicsystem.states[statename].musarray, musname6);
   }
 }
 
 function sndmusicsystem_createstate(state, statename, playtype = 1, delay = 0) {
-  if(!isDefined(level.musicsystem)) {
-    level.musicsystem = spawnStruct();
+  if(!isdefined(level.musicsystem)) {
+    level.musicsystem = spawnstruct();
     level.musicsystem.ent = spawn("script_origin", (0, 0, 0));
     level.musicsystem.queue = 0;
     level.musicsystem.currentplaytype = 0;
@@ -736,8 +738,8 @@ function sndmusicsystem_createstate(state, statename, playtype = 1, delay = 0) {
     level.musicsystem.states = [];
   }
   m = level.musicsystem;
-  if(!isDefined(m.states[state])) {
-    m.states[state] = spawnStruct();
+  if(!isdefined(m.states[state])) {
+    m.states[state] = spawnstruct();
     m.states[state] = array();
   }
   m.states[state][m.states[state].size].statename = statename;
@@ -745,11 +747,11 @@ function sndmusicsystem_createstate(state, statename, playtype = 1, delay = 0) {
 }
 
 function sndmusicsystem_playstate(state) {
-  if(!isDefined(level.musicsystem)) {
+  if(!isdefined(level.musicsystem)) {
     return;
   }
   m = level.musicsystem;
-  if(!isDefined(m.states[state])) {
+  if(!isdefined(m.states[state])) {
     return;
   }
   s = level.musicsystem.states[state];
@@ -761,14 +763,14 @@ function sndmusicsystem_playstate(state) {
       if(playtype == 2) {
         level thread sndmusicsystem_queuestate(state);
       } else if(playtype > m.currentplaytype || (playtype == 3 && m.currentplaytype == 3)) {
-        if(isDefined(level.musicsystemoverride) && level.musicsystemoverride && playtype != 5) {
+        if(isdefined(level.musicsystemoverride) && level.musicsystemoverride && playtype != 5) {
           return;
         }
         level sndmusicsystem_stopandflush();
         level thread playstate(state);
       }
     }
-  } else if(!(isDefined(level.musicsystemoverride) && level.musicsystemoverride) || playtype == 5) {
+  } else if(!(isdefined(level.musicsystemoverride) && level.musicsystemoverride) || playtype == 5) {
     level thread playstate(state);
   }
 }
@@ -784,9 +786,9 @@ function playstate(state) {
   m.currentplaytype = m.states[state].playtype;
   m.currentstate = state;
   wait(0.1);
-  if(isDefined(level.sndplaystateoverride)) {
+  if(isdefined(level.sndplaystateoverride)) {
     perplayer = level[[level.sndplaystateoverride]](state);
-    if(!(isDefined(perplayer) && perplayer)) {
+    if(!(isdefined(perplayer) && perplayer)) {
       music::setmusicstate(mustoplay);
     }
   } else {
@@ -794,7 +796,7 @@ function playstate(state) {
   }
   aliasname = ("mus_" + mustoplay) + "_intro";
   playbacktime = soundgetplaybacktime(aliasname);
-  if(!isDefined(playbacktime) || playbacktime <= 0) {
+  if(!isdefined(playbacktime) || playbacktime <= 0) {
     waittime = 1;
   } else {
     waittime = playbacktime * 0.001;
@@ -808,11 +810,11 @@ function sndmusicsystem_queuestate(state) {
   level endon("sndqueueflush");
   m = level.musicsystem;
   count = 0;
-  if(isDefined(m.queue) && m.queue) {
+  if(isdefined(m.queue) && m.queue) {
     return;
   }
   m.queue = 1;
-  while(m.currentplaytype > 0) {
+  while (m.currentplaytype > 0) {
     wait(0.5);
     count++;
     if(count >= 25) {
@@ -833,10 +835,10 @@ function sndmusicsystem_stopandflush() {
 }
 
 function sndmusicsystem_isabletoplay() {
-  if(!isDefined(level.musicsystem)) {
+  if(!isdefined(level.musicsystem)) {
     return false;
   }
-  if(!isDefined(level.musicsystem.currentplaytype)) {
+  if(!isdefined(level.musicsystem.currentplaytype)) {
     return false;
   }
   if(level.musicsystem.currentplaytype >= 4) {
@@ -846,7 +848,7 @@ function sndmusicsystem_isabletoplay() {
 }
 
 function sndmusicsystem_locationsinit(locationarray) {
-  if(!isDefined(locationarray) || locationarray.size <= 0) {
+  if(!isdefined(locationarray) || locationarray.size <= 0) {
     return;
   }
   level.musicsystem.locationarray = locationarray;
@@ -857,7 +859,7 @@ function sndmusicsystem_locations(locationarray) {
   numcut = 0;
   level.sndlastzone = undefined;
   m = level.musicsystem;
-  while(true) {
+  while (true) {
     level waittill("newzoneactive", activezone);
     wait(0.1);
     if(!sndlocationshouldplay(locationarray, activezone)) {
@@ -912,7 +914,7 @@ function sndcurrentlocationarray(current_array, activezone, numcut, num) {
 
 function sndlocationqueue(zone) {
   level endon("newzoneactive");
-  while(level.musicsystem.currentplaytype >= 3) {
+  while (level.musicsystem.currentplaytype >= 3) {
     wait(0.5);
   }
   level notify("newzoneactive", zone);
@@ -920,40 +922,40 @@ function sndlocationqueue(zone) {
 
 function sndmusicsystem_eesetup(state, origin1, origin2, origin3, origin4, origin5) {
   sndeearray = array();
-  if(isDefined(origin1)) {
-    if(!isDefined(sndeearray)) {
+  if(isdefined(origin1)) {
+    if(!isdefined(sndeearray)) {
       sndeearray = [];
     } else if(!isarray(sndeearray)) {
       sndeearray = array(sndeearray);
     }
   }
   sndeearray[sndeearray.size] = origin1;
-  if(isDefined(origin2)) {
-    if(!isDefined(sndeearray)) {
+  if(isdefined(origin2)) {
+    if(!isdefined(sndeearray)) {
       sndeearray = [];
     } else if(!isarray(sndeearray)) {
       sndeearray = array(sndeearray);
     }
   }
   sndeearray[sndeearray.size] = origin2;
-  if(isDefined(origin3)) {
-    if(!isDefined(sndeearray)) {
+  if(isdefined(origin3)) {
+    if(!isdefined(sndeearray)) {
       sndeearray = [];
     } else if(!isarray(sndeearray)) {
       sndeearray = array(sndeearray);
     }
   }
   sndeearray[sndeearray.size] = origin3;
-  if(isDefined(origin4)) {
-    if(!isDefined(sndeearray)) {
+  if(isdefined(origin4)) {
+    if(!isdefined(sndeearray)) {
       sndeearray = [];
     } else if(!isarray(sndeearray)) {
       sndeearray = array(sndeearray);
     }
   }
   sndeearray[sndeearray.size] = origin4;
-  if(isDefined(origin5)) {
-    if(!isDefined(sndeearray)) {
+  if(isdefined(origin5)) {
+    if(!isdefined(sndeearray)) {
       sndeearray = [];
     } else if(!isarray(sndeearray)) {
       sndeearray = array(sndeearray);
@@ -971,11 +973,11 @@ function sndmusicsystem_eesetup(state, origin1, origin2, origin3, origin4, origi
 
 function sndmusicsystem_eewait(origin, state) {
   temp_ent = spawn("script_origin", origin);
-  temp_ent playLoopSound("zmb_meteor_loop");
-  temp_ent thread secretuse("main_music_egg_hit", vectorscale((0, 1, 0), 255), &sndmusicsystem_eeoverride);
+  temp_ent playloopsound("zmb_meteor_loop");
+  temp_ent thread secretuse("main_music_egg_hit", vectorscale((0, 1, 0), 255), & sndmusicsystem_eeoverride);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playSound("zmb_meteor_activate");
+  player playsound("zmb_meteor_activate");
   level.sndeecount++;
   if(level.sndeecount >= level.sndeemax) {
     level notify("hash_a1b1dadb");
@@ -985,7 +987,7 @@ function sndmusicsystem_eewait(origin, state) {
 }
 
 function sndmusicsystem_eeoverride(arg1, arg2) {
-  if(isDefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4) {
+  if(isdefined(level.musicsystem.currentplaytype) && level.musicsystem.currentplaytype >= 4) {
     return false;
   }
   return true;
@@ -993,15 +995,15 @@ function sndmusicsystem_eeoverride(arg1, arg2) {
 
 function secretuse(notify_string, color, qualifier_func, arg1, arg2) {
   waittillframeend();
-  while(true) {
-    if(!isDefined(self)) {
+  while (true) {
+    if(!isdefined(self)) {
       return;
     }
     print3d(self.origin, "", color, 1);
     players = level.players;
     foreach(player in players) {
       qualifier_passed = 1;
-      if(isDefined(qualifier_func)) {
+      if(isdefined(qualifier_func)) {
         qualifier_passed = player[[qualifier_func]](arg1, arg2);
       }
       if(qualifier_passed && distancesquared(self.origin, player.origin) < 4096) {
@@ -1018,7 +1020,7 @@ function secretuse(notify_string, color, qualifier_func, arg1, arg2) {
 }
 
 function sndannouncer_init() {
-  if(!isDefined(level.zmannouncerprefix)) {
+  if(!isdefined(level.zmannouncerprefix)) {
     level.zmannouncerprefix = ("vox_" + "zmba") + "_";
   }
   sndannouncervoxadd("carpenter", "powerup_carpenter_0");
@@ -1033,20 +1035,20 @@ function sndannouncer_init() {
 }
 
 function sndannouncervoxadd(type, suffix) {
-  if(!isDefined(level.zmannouncervox)) {
+  if(!isdefined(level.zmannouncervox)) {
     level.zmannouncervox = array();
   }
   level.zmannouncervox[type] = suffix;
 }
 
 function sndannouncerplayvox(type, player) {
-  if(!isDefined(level.zmannouncervox[type])) {
+  if(!isdefined(level.zmannouncervox[type])) {
     return;
   }
   prefix = level.zmannouncerprefix;
   suffix = level.zmannouncervox[type];
-  if(!(isDefined(level.zmannouncertalking) && level.zmannouncertalking)) {
-    if(!isDefined(player)) {
+  if(!(isdefined(level.zmannouncertalking) && level.zmannouncertalking)) {
+    if(!isdefined(player)) {
       level.zmannouncertalking = 1;
       temp_ent = spawn("script_origin", (0, 0, 0));
       temp_ent playsoundwithnotify(prefix + suffix, (prefix + suffix) + "wait");
@@ -1066,7 +1068,7 @@ function zmbaivox_notifyconvert() {
   level endon("game_ended");
   self thread zmbaivox_playdeath();
   self thread zmbaivox_playelectrocution();
-  while(true) {
+  while (true) {
     self waittill("bhtn_action_notify", notify_string);
     switch (notify_string) {
       case "pain": {
@@ -1074,7 +1076,7 @@ function zmbaivox_notifyconvert() {
         break;
       }
       case "death": {
-        if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
+        if(isdefined(self.bgb_tone_death) && self.bgb_tone_death) {
           level thread zmbaivox_playvox(self, "death_whimsy", 1, 10);
         } else {
           level thread zmbaivox_playvox(self, notify_string, 1, 10);
@@ -1086,7 +1088,7 @@ function zmbaivox_notifyconvert() {
         break;
       }
       case "attack_melee": {
-        if(!isDefined(self.animname) || (self.animname != "zombie" && self.animname != "quad_zombie")) {
+        if(!isdefined(self.animname) || (self.animname != "zombie" && self.animname != "quad_zombie")) {
           level thread zmbaivox_playvox(self, notify_string, 1, 8, 1);
         }
         break;
@@ -1112,8 +1114,8 @@ function zmbaivox_notifyconvert() {
         break;
       }
       default: {
-        if(isDefined(level._zmbaivox_specialtype)) {
-          if(isDefined(level._zmbaivox_specialtype[notify_string])) {
+        if(isdefined(level._zmbaivox_specialtype)) {
+          if(isdefined(level._zmbaivox_specialtype[notify_string])) {
             level thread zmbaivox_playvox(self, notify_string, 0);
           }
         }
@@ -1125,22 +1127,22 @@ function zmbaivox_notifyconvert() {
 
 function zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0) {
   zombie endon("death");
-  if(!isDefined(zombie)) {
+  if(!isdefined(zombie)) {
     return;
   }
-  if(!isDefined(zombie.voiceprefix)) {
+  if(!isdefined(zombie.voiceprefix)) {
     return;
   }
-  if(!isDefined(priority)) {
+  if(!isdefined(priority)) {
     priority = 1;
   }
-  if(!isDefined(zombie.currentvoxpriority)) {
+  if(!isdefined(zombie.currentvoxpriority)) {
     zombie.currentvoxpriority = 1;
   }
-  if(!isDefined(self.delayambientvox)) {
+  if(!isdefined(self.delayambientvox)) {
     self.delayambientvox = 0;
   }
-  if(type == "ambient" || type == "sprint" || type == "crawler" && (isDefined(self.delayambientvox) && self.delayambientvox)) {
+  if(type == "ambient" || type == "sprint" || type == "crawler" && (isdefined(self.delayambientvox) && self.delayambientvox)) {
     return;
   }
   if(delayambientvox) {
@@ -1149,12 +1151,12 @@ function zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0)
   }
   alias = (("zmb_vocals_" + zombie.voiceprefix) + "_") + type;
   if(sndisnetworksafe()) {
-    if(isDefined(override) && override) {
-      if(isDefined(zombie.currentvox) && priority > zombie.currentvoxpriority) {
+    if(isdefined(override) && override) {
+      if(isdefined(zombie.currentvox) && priority > zombie.currentvoxpriority) {
         zombie stopsound(zombie.currentvox);
       }
       if(type == "death" || type == "death_whimsy") {
-        zombie playSound(alias);
+        zombie playsound(alias);
         return;
       }
     }
@@ -1169,7 +1171,7 @@ function zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0)
     zombie.currentvoxpriority = priority;
     zombie playsoundontag(alias, "j_head");
     playbacktime = soundgetplaybacktime(alias);
-    if(!isDefined(playbacktime)) {
+    if(!isdefined(playbacktime)) {
       playbacktime = 1;
     }
     if(playbacktime >= 0) {
@@ -1187,8 +1189,8 @@ function zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0)
 function zmbaivox_playdeath() {
   self endon("disconnect");
   self waittill("death", attacker, meansofdeath);
-  if(isDefined(self)) {
-    if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
+  if(isdefined(self)) {
+    if(isdefined(self.bgb_tone_death) && self.bgb_tone_death) {
       level thread zmbaivox_playvox(self, "death_whimsy", 1);
     } else {
       level thread zmbaivox_playvox(self, "death", 1);
@@ -1199,7 +1201,7 @@ function zmbaivox_playdeath() {
 function zmbaivox_playelectrocution() {
   self endon("disconnect");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("damage", amount, attacker, direction_vec, point, type, tagname, modelname, partname, weapon);
     if(weapon.name == "zombie_beast_lightning_dwl" || weapon.name == "zombie_beast_lightning_dwl2" || weapon.name == "zombie_beast_lightning_dwl3") {
       self notify("bhtn_action_notify", "electrocute");
@@ -1217,14 +1219,14 @@ function zmbaivox_ambientdelay() {
 }
 
 function networksafereset() {
-  while(true) {
+  while (true) {
     level._numzmbaivox = 0;
     util::wait_network_frame();
   }
 }
 
 function sndisnetworksafe() {
-  if(!isDefined(level._numzmbaivox)) {
+  if(!isdefined(level._numzmbaivox)) {
     level thread networksafereset();
   }
   if(level._numzmbaivox >= 2) {
@@ -1242,45 +1244,45 @@ function is_last_zombie() {
 }
 
 function sndradiosetup(alias_prefix, is_sequential = 0, origin1, origin2, origin3, origin4, origin5) {
-  radio = spawnStruct();
+  radio = spawnstruct();
   radio.counter = 1;
   radio.alias_prefix = alias_prefix;
   radio.isplaying = 0;
   radio.array = array();
-  if(isDefined(origin1)) {
-    if(!isDefined(radio.array)) {
+  if(isdefined(origin1)) {
+    if(!isdefined(radio.array)) {
       radio.array = [];
     } else if(!isarray(radio.array)) {
       radio.array = array(radio.array);
     }
   }
   radio.array[radio.array.size] = origin1;
-  if(isDefined(origin2)) {
-    if(!isDefined(radio.array)) {
+  if(isdefined(origin2)) {
+    if(!isdefined(radio.array)) {
       radio.array = [];
     } else if(!isarray(radio.array)) {
       radio.array = array(radio.array);
     }
   }
   radio.array[radio.array.size] = origin2;
-  if(isDefined(origin3)) {
-    if(!isDefined(radio.array)) {
+  if(isdefined(origin3)) {
+    if(!isdefined(radio.array)) {
       radio.array = [];
     } else if(!isarray(radio.array)) {
       radio.array = array(radio.array);
     }
   }
   radio.array[radio.array.size] = origin3;
-  if(isDefined(origin4)) {
-    if(!isDefined(radio.array)) {
+  if(isdefined(origin4)) {
+    if(!isdefined(radio.array)) {
       radio.array = [];
     } else if(!isarray(radio.array)) {
       radio.array = array(radio.array);
     }
   }
   radio.array[radio.array.size] = origin4;
-  if(isDefined(origin5)) {
-    if(!isDefined(radio.array)) {
+  if(isdefined(origin5)) {
+    if(!isdefined(radio.array)) {
       radio.array = [];
     } else if(!isarray(radio.array)) {
       radio.array = array(radio.array);
@@ -1288,7 +1290,7 @@ function sndradiosetup(alias_prefix, is_sequential = 0, origin1, origin2, origin
   }
   radio.array[radio.array.size] = origin5;
   if(radio.array.size > 0) {
-    for(i = 0; i < radio.array.size; i++) {
+    for (i = 0; i < radio.array.size; i++) {
       level thread sndradiowait(radio.array[i], radio, is_sequential, i + 1);
     }
   }
@@ -1296,9 +1298,9 @@ function sndradiosetup(alias_prefix, is_sequential = 0, origin1, origin2, origin
 
 function sndradiowait(origin, radio, is_sequential, num) {
   temp_ent = spawn("script_origin", origin);
-  temp_ent thread secretuse("sndRadioHit", vectorscale((0, 0, 1), 255), &sndradio_override, radio);
+  temp_ent thread secretuse("sndRadioHit", vectorscale((0, 0, 1), 255), & sndradio_override, radio);
   temp_ent waittill("sndradiohit", player);
-  if(!(isDefined(is_sequential) && is_sequential)) {
+  if(!(isdefined(is_sequential) && is_sequential)) {
     radionum = num;
   } else {
     radionum = radio.counter;
@@ -1307,10 +1309,10 @@ function sndradiowait(origin, radio, is_sequential, num) {
   radiolinecount = zm_spawner::get_number_variants(radioalias);
   if(radiolinecount > 0) {
     radio.isplaying = 1;
-    for(i = 0; i < radiolinecount; i++) {
-      temp_ent playSound((radioalias + "_") + i);
+    for (i = 0; i < radiolinecount; i++) {
+      temp_ent playsound((radioalias + "_") + i);
       playbacktime = soundgetplaybacktime((radioalias + "_") + i);
-      if(!isDefined(playbacktime)) {
+      if(!isdefined(playbacktime)) {
         playbacktime = 1;
       }
       if(playbacktime >= 0) {
@@ -1327,7 +1329,7 @@ function sndradiowait(origin, radio, is_sequential, num) {
 }
 
 function sndradio_override(arg1, arg2) {
-  if(isDefined(arg1) && arg1.isplaying == 1) {
+  if(isdefined(arg1) && arg1.isplaying == 1) {
     return false;
   }
   return true;
@@ -1335,12 +1337,12 @@ function sndradio_override(arg1, arg2) {
 
 function sndperksjingles_timer() {
   self endon("death");
-  if(isDefined(self.sndjinglecooldown)) {
+  if(isdefined(self.sndjinglecooldown)) {
     self.sndjinglecooldown = 0;
   }
-  while(true) {
+  while (true) {
     wait(randomfloatrange(30, 60));
-    if(randomintrange(0, 100) <= 10 && (!(isDefined(self.sndjinglecooldown) && self.sndjinglecooldown))) {
+    if(randomintrange(0, 100) <= 10 && (!(isdefined(self.sndjinglecooldown) && self.sndjinglecooldown))) {
       self thread sndperksjingles_player(0);
     }
   }
@@ -1348,22 +1350,22 @@ function sndperksjingles_timer() {
 
 function sndperksjingles_player(type) {
   self endon("death");
-  if(!isDefined(self.sndjingleactive)) {
+  if(!isdefined(self.sndjingleactive)) {
     self.sndjingleactive = 0;
   }
   alias = self.script_sound;
   if(type == 1) {
     alias = self.script_label;
   }
-  if(isDefined(level.musicsystem) && level.musicsystem.currentplaytype >= 4) {
+  if(isdefined(level.musicsystem) && level.musicsystem.currentplaytype >= 4) {
     return;
   }
   self.str_jingle_alias = alias;
-  if(!(isDefined(self.sndjingleactive) && self.sndjingleactive)) {
+  if(!(isdefined(self.sndjingleactive) && self.sndjingleactive)) {
     self.sndjingleactive = 1;
     self playsoundwithnotify(alias, "sndDone");
     playbacktime = soundgetplaybacktime(alias);
-    if(!isDefined(playbacktime) || playbacktime <= 0) {
+    if(!isdefined(playbacktime) || playbacktime <= 0) {
       waittime = 1;
     } else {
       waittime = playbacktime * 0.001;
@@ -1379,8 +1381,8 @@ function sndperksjingles_player(type) {
 
 function sndperksjingles_cooldown() {
   self endon("death");
-  if(isDefined(self.var_1afc1154)) {
-    while(isDefined(self.var_1afc1154) && self.var_1afc1154) {
+  if(isdefined(self.var_1afc1154)) {
+    while (isdefined(self.var_1afc1154) && self.var_1afc1154) {
       wait(1);
     }
   }
@@ -1389,37 +1391,37 @@ function sndperksjingles_cooldown() {
 }
 
 function sndconversation_init(name, specialendon = undefined) {
-  if(!isDefined(level.sndconversations)) {
+  if(!isdefined(level.sndconversations)) {
     level.sndconversations = array();
   }
-  level.sndconversations[name] = spawnStruct();
+  level.sndconversations[name] = spawnstruct();
   level.sndconversations[name].specialendon = specialendon;
 }
 
 function sndconversation_addline(name, line, player_or_random, ignoreplayer = 5) {
   thisconvo = level.sndconversations[name];
-  if(!isDefined(thisconvo.line)) {
+  if(!isdefined(thisconvo.line)) {
     thisconvo.line = array();
   }
-  if(!isDefined(thisconvo.player)) {
+  if(!isdefined(thisconvo.player)) {
     thisconvo.player = array();
   }
-  if(!isDefined(thisconvo.ignoreplayer)) {
+  if(!isdefined(thisconvo.ignoreplayer)) {
     thisconvo.ignoreplayer = array();
   }
-  if(!isDefined(thisconvo.line)) {
+  if(!isdefined(thisconvo.line)) {
     thisconvo.line = [];
   } else if(!isarray(thisconvo.line)) {
     thisconvo.line = array(thisconvo.line);
   }
   thisconvo.line[thisconvo.line.size] = line;
-  if(!isDefined(thisconvo.player)) {
+  if(!isdefined(thisconvo.player)) {
     thisconvo.player = [];
   } else if(!isarray(thisconvo.player)) {
     thisconvo.player = array(thisconvo.player);
   }
   thisconvo.player[thisconvo.player.size] = player_or_random;
-  if(!isDefined(thisconvo.ignoreplayer)) {
+  if(!isdefined(thisconvo.ignoreplayer)) {
     thisconvo.ignoreplayer = [];
   } else if(!isarray(thisconvo.ignoreplayer)) {
     thisconvo.ignoreplayer = array(thisconvo.ignoreplayer);
@@ -1430,28 +1432,28 @@ function sndconversation_addline(name, line, player_or_random, ignoreplayer = 5)
 function sndconversation_play(name) {
   thisconvo = level.sndconversations[name];
   level endon("sndconvointerrupt");
-  if(isDefined(thisconvo.specialendon)) {
+  if(isdefined(thisconvo.specialendon)) {
     level endon(thisconvo.specialendon);
   }
-  while(isanyonetalking()) {
+  while (isanyonetalking()) {
     wait(0.5);
   }
-  while(isDefined(level.sndvoxoverride) && level.sndvoxoverride) {
+  while (isdefined(level.sndvoxoverride) && level.sndvoxoverride) {
     wait(0.5);
   }
   level.sndvoxoverride = 1;
-  for(i = 0; i < thisconvo.line.size; i++) {
+  for (i = 0; i < thisconvo.line.size; i++) {
     if(thisconvo.player[i] == 4) {
       speaker = getrandomcharacter(thisconvo.ignoreplayer[i]);
     } else {
       speaker = getspecificcharacter(thisconvo.player[i]);
     }
-    if(!isDefined(speaker)) {
+    if(!isdefined(speaker)) {
       continue;
     }
     if(iscurrentspeakerabletotalk(speaker)) {
       level.currentconvoplayer = speaker;
-      if(isDefined(level.vox_name_complete)) {
+      if(isdefined(level.vox_name_complete)) {
         level.currentconvoline = thisconvo.line[i];
       } else {
         level.currentconvoline = (("vox_plr_" + speaker.characterindex) + "_") + thisconvo.line[i];
@@ -1472,7 +1474,7 @@ function sndconvostopcurrentconversation() {
   level notify("sndconvointerrupt");
   level notify("sndconversationdone");
   level.sndvoxoverride = 0;
-  if(isDefined(level.currentconvoplayer) && isDefined(level.currentconvoline)) {
+  if(isdefined(level.currentconvoplayer) && isdefined(level.currentconvoline)) {
     level.currentconvoplayer stopsound(level.currentconvoline);
     level.currentconvoline = undefined;
     level.currentconvoplayer = undefined;
@@ -1481,7 +1483,7 @@ function sndconvostopcurrentconversation() {
 
 function waitplaybacktime(alias) {
   playbacktime = soundgetplaybacktime(alias);
-  if(!isDefined(playbacktime)) {
+  if(!isdefined(playbacktime)) {
     playbacktime = 1;
   }
   if(playbacktime >= 0) {
@@ -1493,13 +1495,13 @@ function waitplaybacktime(alias) {
 }
 
 function iscurrentspeakerabletotalk(player) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return false;
   }
   if(player.sessionstate != "playing") {
     return false;
   }
-  if(isDefined(player.laststand) && player.laststand) {
+  if(isdefined(player.laststand) && player.laststand) {
     return false;
   }
   return true;
@@ -1528,7 +1530,7 @@ function getspecificcharacter(charindex) {
 
 function isanyonetalking() {
   foreach(player in level.players) {
-    if(isDefined(player.isspeaking) && player.isspeaking) {
+    if(isdefined(player.isspeaking) && player.isspeaking) {
       return true;
     }
   }
@@ -1537,8 +1539,8 @@ function isanyonetalking() {
 
 function sndconvointerrupt() {
   level endon("sndconvolinedone");
-  while(true) {
-    if(!isDefined(self)) {
+  while (true) {
+    if(!isdefined(self)) {
       return;
     }
     max_dist_squared = 0;
@@ -1567,7 +1569,7 @@ function water_vox() {
   self.voxunderwatertime = 0;
   self.voxemergebreath = 0;
   self.voxdrowning = 0;
-  while(true) {
+  while (true) {
     if(self isplayerunderwater()) {
       if(!self.voxunderwatertime && !self.voxemergebreath) {
         self vo_clear_underwater();
@@ -1619,13 +1621,13 @@ function vo_clear_underwater() {
       break;
     }
   }
-  if(isDefined(b_in_a_e_speakers) && b_in_a_e_speakers) {
+  if(isdefined(b_in_a_e_speakers) && b_in_a_e_speakers) {
     arrayremovevalue(level.a_e_speakers, self);
   }
 }
 
 function sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon) {
-  if(!(isDefined(level.sndzhdaudio) && level.sndzhdaudio)) {
+  if(!(isdefined(level.sndzhdaudio) && level.sndzhdaudio)) {
     return;
   }
   if(!isplayer(self)) {
@@ -1641,10 +1643,10 @@ function sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon) {
     return;
   }
   str_alias = "zmb_hit_alert";
-  self thread sndplayerhitalert_playSound(str_alias);
+  self thread sndplayerhitalert_playsound(str_alias);
 }
 
-function sndplayerhitalert_playSound(str_alias) {
+function sndplayerhitalert_playsound(str_alias) {
   self endon("disconnect");
   if(self.hitsoundtracker) {
     self.hitsoundtracker = 0;
@@ -1655,7 +1657,7 @@ function sndplayerhitalert_playSound(str_alias) {
 }
 
 function checkforvalidmod(str_meansofdeath) {
-  if(!isDefined(str_meansofdeath)) {
+  if(!isdefined(str_meansofdeath)) {
     return false;
   }
   switch (str_meansofdeath) {

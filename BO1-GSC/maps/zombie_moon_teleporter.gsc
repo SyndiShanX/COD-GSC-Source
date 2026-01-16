@@ -80,9 +80,8 @@ valid_players_teleport() {
   players = get_players();
   valid_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_teleport_valid(players[i])) {
+    if(is_player_teleport_valid(players[i]))
       valid_players += 1;
-    }
   }
   return valid_players;
 }
@@ -337,7 +336,7 @@ teleporter_to_nml_gate_move(open_it) {
   accel = time / 6.0;
   ent = level.teleporter_to_nml_gate_ent;
   ent2 = level.teleporter_to_nml_gate2_ent;
-  ent playSound("amb_teleporter_gate_start");
+  ent PlaySound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
   ent moveTo(pos, time, accel, accel);
@@ -462,7 +461,7 @@ teleporter_exit_nml_gate_move(open_it) {
   time = level.teleporter_gate_move_time;
   accel = time / 6.0;
   ent = level.teleporter_exit_nml_gate_ent;
-  ent playSound("amb_teleporter_gate_start");
+  ent PlaySound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
@@ -481,5 +480,5 @@ teleporter_exit_nml_gate_move(open_it) {
 play_stopmoving_sounds() {
   self waittill("movedone");
   self stopLoopSound(.5);
-  self playSound("amb_teleporter_gate_stop");
+  self playsound("amb_teleporter_gate_stop");
 }

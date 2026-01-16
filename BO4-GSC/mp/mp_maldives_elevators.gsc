@@ -11,6 +11,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
+
 #namespace mp_maldives_elevators;
 
 autoexec __init__system__() {
@@ -179,7 +180,7 @@ open_door(location) {
   open_to = self.open_to;
   self unlink();
   self moveto((open_to.origin[0], open_to.origin[1], self.origin[2]), 0.37);
-  self waittill(#"movedone", # "death");
+  self waittill(#"movedone", #"death");
 
   if(isDefined(self)) {
     self thread function_e0954c11();
@@ -190,7 +191,7 @@ close_door(elevator) {
   self.state = "closed";
   var_856b91cc = self.var_856b91cc;
   self moveto((var_856b91cc.origin[0], var_856b91cc.origin[1], self.origin[2]), 0.37);
-  self waittill(#"movedone", # "death");
+  self waittill(#"movedone", #"death");
 
   if(isDefined(self)) {
     self thread function_e0954c11();

@@ -17,9 +17,8 @@ init() {
 }
 
 sq_gl_setup_buildable_trig() {
-  while(!isDefined(level.sq_lamp_generator_unitrig)) {
+  while(!isDefined(level.sq_lamp_generator_unitrig))
     wait 1;
-  }
 
   level.sq_lamp_generator_unitrig.realorigin = level.sq_lamp_generator_unitrig.origin;
   level.sq_lamp_generator_unitrig.origin = level.sq_lamp_generator_unitrig.origin + vectorscale((0, 0, -1), 10000.0);
@@ -29,11 +28,10 @@ init_stage() {
   s_start = getstruct("sq_ghost_lamp_start", "script_noteworthy");
   gl_lantern_spawn(s_start);
 
-  if(flag("sq_is_max_tower_built")) {
+  if(flag("sq_is_max_tower_built"))
     level thread stage_vo_max();
-  } else {
+  else
     level thread stage_vo_ric();
-  }
 
   level._cur_stage_name = "gl";
   clientnotify("gl");
@@ -49,7 +47,8 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {}
+exit_stage(success) {
+}
 
 stage_vo_max() {
   level waittill("lantern_crashing");
@@ -67,31 +66,28 @@ gl_lantern_spawn(s_start) {
   level.vh_lantern makevehicleunusable();
   level.vh_lantern setneargoalnotifydist(128);
   level.vh_lantern.m_lantern = spawn("script_model", level.vh_lantern.origin);
-  level.vh_lantern.m_lantern setModel("p6_zm_bu_lantern_silver_on");
+  level.vh_lantern.m_lantern setmodel("p6_zm_bu_lantern_silver_on");
   level.vh_lantern.m_lantern linkto(level.vh_lantern, "tag_origin");
-  playFXOnTag(level._effect["sq_glow"], level.vh_lantern.m_lantern, "tag_origin");
-  level.vh_lantern.m_lantern playSound("zmb_sq_glantern_impact");
-  level.vh_lantern.m_lantern playLoopSound("zmb_sq_glantern_full_loop_3d");
+  playfxontag(level._effect["sq_glow"], level.vh_lantern.m_lantern, "tag_origin");
+  level.vh_lantern.m_lantern playsound("zmb_sq_glantern_impact");
+  level.vh_lantern.m_lantern playloopsound("zmb_sq_glantern_full_loop_3d");
   level.vh_lantern thread gl_lantern_damage_watcher();
   wait_network_frame();
 }
 
 gl_lantern_delete() {
   if(isDefined(level.vh_lantern)) {
-    if(isDefined(level.vh_lantern.m_lantern)) {
+    if(isDefined(level.vh_lantern.m_lantern))
       level.vh_lantern.m_lantern delete();
-    }
 
-    if(isDefined(level.vh_lantern.t_pickup)) {
+    if(isDefined(level.vh_lantern.t_pickup))
       level.vh_lantern.t_pickup delete();
-    }
 
     level.vh_lantern cancelaimove();
     level.vh_lantern clearvehgoalpos();
 
-    if(isDefined(level.vh_lantern.m_link)) {
+    if(isDefined(level.vh_lantern.m_link))
       level.vh_lantern.m_link delete();
-    }
 
     level.vh_lantern delete();
   }
@@ -104,9 +100,8 @@ gl_lantern_move(s_current) {
     s_current = gl_lantern_get_next_struct(s_current);
 
     if(flag("sq_is_max_tower_built")) {
-      if(randomint(100) < 50) {
+      if(randomint(100) < 50)
         s_current = level.vh_lantern gl_lantern_teleport();
-      }
     }
 
     level.vh_lantern gl_lantern_move_to_struct(s_current);
@@ -139,7 +134,7 @@ gl_lantern_move_to_struct(s_goto) {
 
 gl_lantern_teleport() {
   self notify("lantern_teleporting");
-  playFX(level._effect["fx_wisp_lg_m"], self.origin);
+  playfx(level._effect["fx_wisp_lg_m"], self.origin);
   playsoundatposition("zmb_sq_glantern_impact", self.origin);
   gl_lantern_delete();
   a_path_spots = getstructarray("sq_ghost_lamp_path", "script_noteworthy");
@@ -150,7 +145,7 @@ gl_lantern_teleport() {
 
 gl_lantern_damage_watcher() {
   self.m_lantern endon("delete");
-  self.m_lantern setCanDamage(1);
+  self.m_lantern setcandamage(1);
 
   while(true) {
     self.m_lantern waittill("damage", amount, attacker, dir, point, dmg_type);
@@ -160,7 +155,7 @@ gl_lantern_damage_watcher() {
     }
   }
 
-  self.m_lantern playSound("zmb_sq_glantern_impact");
+  self.m_lantern playsound("zmb_sq_glantern_impact");
   self gl_lantern_crash_movement();
   self thread gl_lantern_pickup_watch();
   self thread gl_lantern_stop_spin_on_land();
@@ -176,13 +171,12 @@ gl_lantern_damage_watcher() {
 gl_lantern_stop_spin_on_land() {
   self endon("delete");
 
-  while(isDefined(self) && length(self.velocity) > 3) {
+  while(isDefined(self) && length(self.velocity) > 3)
     wait 0.1;
-  }
 
   if(isDefined(self)) {
     self.m_link = spawn("script_model", self.origin);
-    self.m_link setModel("tag_origin");
+    self.m_link setmodel("tag_origin");
     self linkto(self.m_link);
   }
 }

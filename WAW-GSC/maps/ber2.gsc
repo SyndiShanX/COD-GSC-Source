@@ -44,15 +44,15 @@ main() {
 }
 
 build_starts() {
-  add_start("event1", maps\ber2_event1::event1_start, &"STARTS_BER2_EVENT1");
-  add_start("e1_start_action", maps\ber2_event1::event1_start_action, &"STARTS_BER2_EVENT1_ACTION");
-  add_start("apt2", maps\ber2_event1::event1_start_apt2, &"STARTS_BER2_APT2");
-  add_start("atrium", maps\ber2_event1::event1_start_atrium, &"STARTS_BER2_ATRIUM");
-  add_start("loadingdock", maps\ber2_event1::event1_start_loadingdock, &"STARTS_BER2_LOADINGDOCK");
-  add_start("e1_outside", maps\ber2_event1::event1_start_outside, &"STARTS_BER2_OUTSIDE");
-  add_start("street_regroup", maps\ber2_event1::event1_start_street_regroup, &"STARTS_BER2_STREET_REGROUP");
-  add_start("event2", maps\ber2_event2::event2_start, &"STARTS_BER2_EVENT2");
-  add_start("metrowave", maps\ber2_event2::event2_start_metrowave, &"STARTS_BER2_EVENT2_METROWAVE");
+  add_start("event1", maps\ber2_event1::event1_start, & "STARTS_BER2_EVENT1");
+  add_start("e1_start_action", maps\ber2_event1::event1_start_action, & "STARTS_BER2_EVENT1_ACTION");
+  add_start("apt2", maps\ber2_event1::event1_start_apt2, & "STARTS_BER2_APT2");
+  add_start("atrium", maps\ber2_event1::event1_start_atrium, & "STARTS_BER2_ATRIUM");
+  add_start("loadingdock", maps\ber2_event1::event1_start_loadingdock, & "STARTS_BER2_LOADINGDOCK");
+  add_start("e1_outside", maps\ber2_event1::event1_start_outside, & "STARTS_BER2_OUTSIDE");
+  add_start("street_regroup", maps\ber2_event1::event1_start_street_regroup, & "STARTS_BER2_STREET_REGROUP");
+  add_start("event2", maps\ber2_event2::event2_start, & "STARTS_BER2_EVENT2");
+  add_start("metrowave", maps\ber2_event2::event2_start_metrowave, & "STARTS_BER2_EVENT2_METROWAVE");
   default_start(level.start_functions["event1"]);
   start = tolower(GetDvar("start"));
   if(isDefined(start) && start != "" && start != "default" && start != "event1" && !IsSubStr(start, "**")) {
@@ -112,14 +112,14 @@ precache_assets() {
 }
 
 setup_strings() {
-  level.obj_clear_bldgs = &"BER2_OBJ_CLEAR_BLDGS";
-  level.obj_move_thru_street = &"BER2_OBJ_MOVE_THRU_STREET";
-  level.obj_stay_with_tank = &"BER2_OBJ_STAY_WITH_TANK";
-  level.obj_execute = &"BER2_OBJ_EXECUTE";
-  level.obj_regroup = &"BER2_OBJ_REGROUP";
-  level.obj_get_to_metro = &"BER2_OBJ_GET_TO_METRO";
-  level.obj_fight_thru_metro = &"BER2_OBJ_FIGHT_THRU_METRO";
-  level.obj_defend_sarge = &"BER2_OBJ_DEFEND_SARGE";
+  level.obj_clear_bldgs = & "BER2_OBJ_CLEAR_BLDGS";
+  level.obj_move_thru_street = & "BER2_OBJ_MOVE_THRU_STREET";
+  level.obj_stay_with_tank = & "BER2_OBJ_STAY_WITH_TANK";
+  level.obj_execute = & "BER2_OBJ_EXECUTE";
+  level.obj_regroup = & "BER2_OBJ_REGROUP";
+  level.obj_get_to_metro = & "BER2_OBJ_GET_TO_METRO";
+  level.obj_fight_thru_metro = & "BER2_OBJ_FIGHT_THRU_METRO";
+  level.obj_defend_sarge = & "BER2_OBJ_DEFEND_SARGE";
 }
 
 set_objective(num, origin) {
@@ -163,13 +163,13 @@ set_objective(num, origin) {
 }
 
 objectives_skip(numToSkipPast) {
-  for(i = 0; i <= numToSkipPast; i++) {
+  for (i = 0; i <= numToSkipPast; i++) {
     set_objective(i);
   }
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     if(flag("event1_fakefire_start")) {
       maps\_utility::setClientSysState("levelNotify", "e1fs", player);
@@ -187,7 +187,7 @@ warp_players_underworld() {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetOrigin(underworld.origin);
   }
 }
@@ -196,7 +196,7 @@ warp_players(startValue, startKey) {
   starts = GetStructArray(startValue, startKey);
   ASSERTEX(starts.size == 4, "warp_players(): there aren't 4 player start spots!");
   spStart = undefined;
-  for(i = 0; i < starts.size; i++) {
+  for (i = 0; i < starts.size; i++) {
     if(isDefined(starts[i].script_noteworthy) && starts[i].script_noteworthy == "1p_start") {
       spStart = starts[i];
     }
@@ -205,12 +205,12 @@ warp_players(startValue, startKey) {
     oldStarts = array_remove(starts, spStart);
     starts = [];
     starts[0] = spStart;
-    for(i = 0; i < oldStarts.size; i++) {
+    for (i = 0; i < oldStarts.size; i++) {
       starts[starts.size] = oldStarts[i];
     }
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     players[i] setPlayerAngles(starts[i].angles);
   }
@@ -218,11 +218,11 @@ warp_players(startValue, startKey) {
 }
 
 warp_player(startValue, startKey) {
-  starts = getEntArray(startValue, startKey);
+  starts = GetEntArray(startValue, startKey);
   ASSERT(starts.size == 4);
   players = get_players();
   index = players.size;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] == self) {
       index = i;
     }
@@ -236,7 +236,7 @@ setup_friendlies() {
   level.friendly_startup_thread = ::ber2_friendly_startup_thread;
   level.friends = grab_starting_friends();
   ASSERTEX(isDefined(level.friends) && level.friends.size > 0, "setup_friendlies(): can't find any friendlies!");
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     guy.followmin = -1;
     guy thread friend_remove_on_death();
@@ -264,7 +264,7 @@ warp_friendlies(startValue, startKey) {
   ASSERTEX(flag("friends_setup"), "warp_friendlies(): level.friends needs to be set up before this runs.");
   friendlyStarts = GetStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size >= 4, "warp_friendlies(): didn't find 4 or more friendly start points!");
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     level.friends[i] Teleport(groundpos(friendlyStarts[i].origin), friendlyStarts[i].angles);
   }
 }
@@ -281,7 +281,7 @@ drawline_from_player(ent) {
   self endon("kill_lines");
   ent endon("death");
   color = (0, 255, 0);
-  while(1) {
+  while (1) {
     if(isDefined(ent)) {
       player = get_players()[0];
       line(player.origin, ent.origin, color);
@@ -301,7 +301,7 @@ setup_threatbiases() {
   CreateThreatBiasGroup("street_groundlevel_germans");
   CreateThreatBiasGroup("street_groundlevel_russians");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetThreatBiasGroup("players");
   }
 }
@@ -325,7 +325,7 @@ coop_optimize() {
   delete_group(ents);
   flag_wait("friends_setup");
   redshirts = [];
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     if(level.friends[i] != level.sarge && level.friends[i] != level.hero1) {
       redshirts[redshirts.size] = level.friends[i];
     }
@@ -358,11 +358,11 @@ undead_ai_cleanup() {
 
 setup_spawn_functions() {
   group_add_spawn_function("spawner_roof_ambientrunner", maps\ber2_event1::roof_ambient_runner);
-  ignoreTilPathEnders = getEntArray("ignore_til_path_end", "script_noteworthy");
+  ignoreTilPathEnders = GetEntArray("ignore_til_path_end", "script_noteworthy");
   array_thread(ignoreTilPathEnders, ::add_spawn_function, maps\ber2_util::ignore_til_path_end);
-  bulletShielders = getEntArray("magic_bullet_shield", "script_noteworthy");
+  bulletShielders = GetEntArray("magic_bullet_shield", "script_noteworthy");
   array_thread(bulletShielders, ::add_spawn_function, maps\ber2_util::magic_bullet_shield_safe);
-  street_executioners = getEntArray("spawner_outside_russian_1", "targetname");
+  street_executioners = GetEntArray("spawner_outside_russian_1", "targetname");
   array_thread(street_executioners, ::add_spawn_function, ::magic_bullet_shield);
   balcony_mgSpawner = getent_safe("spawner_balcony_mg", "script_noteworthy");
   balcony_mgSpawner add_spawn_function(maps\ber2_event1::event1_balcony_mger);
@@ -374,9 +374,9 @@ setup_spawn_functions() {
 }
 
 group_add_spawn_function(groupTN, spawnFunc, param1, param2, param3) {
-  group = getEntArray(groupTN, "targetname");
+  group = GetEntArray(groupTN, "targetname");
   ASSERTEX(isDefined(group) && group.size > 0, "Couldn't find group with targetname of '" + groupTN + "'.");
-  for(i = 0; i < group.size; i++) {
+  for (i = 0; i < group.size; i++) {
     group[i] add_spawn_function(spawnFunc, param1, param2, param3);
   }
 }

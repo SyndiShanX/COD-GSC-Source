@@ -24,8 +24,8 @@ premain() {
 }
 
 teller_fx_setup(clientnum) {
-  playFX(clientnum, level._effect["fx_buried_key_glint"], (-300, -62, 55), (0, 0, 1));
-  playFX(clientnum, level._effect["fx_buried_key_glint"], (-300, -314, 55), (0, 0, 1));
+  playfx(clientnum, level._effect["fx_buried_key_glint"], (-300, -62, 55), (0, 0, 1));
+  playfx(clientnum, level._effect["fx_buried_key_glint"], (-300, -314, 55), (0, 0, 1));
 }
 
 #using_animtree("zm_buried_props");
@@ -34,6 +34,8 @@ init_jail_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-player_flashlight_test(localclientnum) {}
+player_flashlight_test(localclientnum) {
+}
 
-perk_vulture_custom_scripts() {}
+perk_vulture_custom_scripts() {
+}

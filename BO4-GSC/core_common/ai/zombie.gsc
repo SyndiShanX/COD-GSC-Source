@@ -23,6 +23,7 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
+
 #namespace zombiebehavior;
 
 autoexec init() {
@@ -365,7 +366,9 @@ zombietargetservice(entity) {
 
   if(!isDefined(player)) {
     if(isDefined(self.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [
+          [level._should_skip_ignore_player_logic]
+        ]()) {
         return 0;
       }
 
@@ -599,7 +602,7 @@ zombieshouldattackobject(entity) {
 }
 
 function_997f1224(entity) {
-  if(entity.archetype == # "zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(entity.archetype == #"zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
     if(entity.zombie_move_speed == "walk") {
       return (100 * 100);
     } else if(entity.zombie_move_speed == "run") {
@@ -914,11 +917,11 @@ zombiejuke(entity) {
         entity.jukedistance = "long";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 122;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 129;
             break;
         }
@@ -931,11 +934,11 @@ zombiejuke(entity) {
         entity.jukedistance = "short";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 127;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 148;
             break;
         }
@@ -1000,13 +1003,13 @@ zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompan
 
   if(isDefined(entity.zombie_move_speed)) {
     switch (entity.zombie_move_speed) {
-      case # "walk":
+      case #"walk":
         speed = 5;
         break;
-      case # "run":
+      case #"run":
         speed = 6;
         break;
-      case # "sprint":
+      case #"sprint":
         speed = 7;
         break;
     }
@@ -1148,7 +1151,7 @@ zombiemissinglegs(entity) {
 }
 
 zombieshouldproceduraltraverse(entity) {
-  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags & 1024 && entity.traverseendnode.spawnflags & 1024;
+  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags&1024 && entity.traverseendnode.spawnflags&1024;
 }
 
 zombieshouldmeleesuicide(entity) {
@@ -1202,7 +1205,7 @@ zombiemoveactionstart(entity, asmstatename) {
 
   if(isDefined(entity.stumble) && !isDefined(entity.move_anim_end_time)) {
     stumbleactionresult = entity astsearch(asmstatename);
-    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[# "animation"]);
+    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[#"animation"]);
     entity.move_anim_end_time = entity.movetime + getanimlength(stumbleactionanimation);
   }
 
@@ -1453,7 +1456,7 @@ zombiegravity(entity, attribute, oldvalue, value) {
 
     if(!isDefined(self.low_gravity_variant) && isDefined(level.var_d9ffddf4)) {
       if(isDefined(self.missinglegs) && self.missinglegs) {
-        self.low_gravity_variant = randomint(level.var_d9ffddf4[# "crawl"]);
+        self.low_gravity_variant = randomint(level.var_d9ffddf4[#"crawl"]);
       } else {
         self.low_gravity_variant = randomint(level.var_d9ffddf4[self.zombie_move_speed]);
       }

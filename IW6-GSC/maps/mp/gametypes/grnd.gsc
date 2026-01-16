@@ -20,7 +20,9 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [[level.initializeMatchRules]]();
+    [
+      [level.initializeMatchRules]
+    ]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -43,9 +45,8 @@ main() {
   level.getSpawnPoint = ::getSpawnPoint;
   level.onSpawnPlayer = ::onSpawnPlayer;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
-  }
 
   level.grnd_fx["smoke"] = loadFx("smoke/airdrop_flare_mp_effect_now");
   level.grnd_fx["flare"] = loadFx("smoke/signal_smoke_airdrop");
@@ -62,9 +63,8 @@ initializeMatchRules() {
 
   level.matchRules_dropTime = GetMatchRulesData("grndData", "dropTime");
   level.matchRules_zoneSwitchTime = 60 * GetMatchRulesData("grndData", "zoneSwitchTime");
-  if(level.matchRules_zoneSwitchTime < 60) {
+  if(level.matchRules_zoneSwitchTime < 60)
     level.matchRules_zoneSwitchTime = 60;
-  }
 
   SetDynamicDvar("scr_grnd_roundswitch", 0);
   registerRoundSwitchDvar("grnd", 0, 0, 9);
@@ -81,22 +81,21 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
-  }
 
-  setObjectiveText("allies", &"OBJECTIVES_GRND");
-  setObjectiveText("axis", &"OBJECTIVES_GRND");
+  setObjectiveText("allies", & "OBJECTIVES_GRND");
+  setObjectiveText("axis", & "OBJECTIVES_GRND");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", &"OBJECTIVES_GRND");
-    setObjectiveScoreText("axis", &"OBJECTIVES_GRND");
+    setObjectiveScoreText("allies", & "OBJECTIVES_GRND");
+    setObjectiveScoreText("axis", & "OBJECTIVES_GRND");
   } else {
-    setObjectiveScoreText("allies", &"OBJECTIVES_GRND_SCORE");
-    setObjectiveScoreText("axis", &"OBJECTIVES_GRND_SCORE");
+    setObjectiveScoreText("allies", & "OBJECTIVES_GRND_SCORE");
+    setObjectiveScoreText("axis", & "OBJECTIVES_GRND_SCORE");
   }
-  setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
-  setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -126,7 +125,7 @@ onStartGameType() {
   maps\mp\gametypes\_gameobjects::main(allowed);
 
   level.grnd_HUD["timerDisplay"] = createServerTimer("objective", 1.4);
-  level.grnd_HUD["timerDisplay"].label = &"MP_NEXT_DROP_ZONE_IN";
+  level.grnd_HUD["timerDisplay"].label = & "MP_NEXT_DROP_ZONE_IN";
 
   level.grnd_HUD["timerDisplay"] setPoint("BOTTOMCENTER", "BOTTOMCENTER", 0, -28);
 
@@ -216,9 +215,8 @@ initZones() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"]) {
+  if(game["switchedsides"])
     spawnteam = getOtherTeam(spawnteam);
-  }
 
   if(maps\mp\gametypes\_spawnlogic::shouldUseTeamStartspawn()) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -281,11 +279,10 @@ createHudInfo(elemName, font, fontSize, xPos, yPos, text, color) {
   hudElem = createFontString(font, fontSize);
   hudElem setText(text);
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     hudElem setPoint("TOPLEFT", "TOPLEFT", (xPos - 35), (yPos - 5));
-  } else {
+  else
     hudElem setPoint("TOPLEFT", "TOPLEFT", xPos, yPos);
-  }
 
   hudElem.alpha = 1;
   hudElem.color = color;
@@ -336,9 +333,8 @@ setPlayerMessages(player) {
     player.grnd_wasSpectator = true;
   }
 
-  if(!isAI(player)) {
+  if(!isAI(player))
     player thread grndTracking();
-  }
 }
 
 getNextZone() {
@@ -351,9 +347,8 @@ getNextZone() {
   if(isDefined(level.teleport_zone_current) && level.teleport_zone_current == "start") {
     sortedZonesByDistance = SortByDistance(level.grnd_dropZones1, level.grnd_zone.origin);
   } else if(isDefined(level.teleport_zone_current) && level.teleport_zone_current != "start") {
-    if(!isDefined(level.grnd_dropZones2) || !level.grnd_dropZones2.size) {
+    if(!isDefined(level.grnd_dropZones2) || !level.grnd_dropZones2.size)
       level initZones();
-    }
 
     sortedZonesByDistance = SortByDistance(level.grnd_dropZones2, level.grnd_zone.origin);
   } else {
@@ -397,11 +392,11 @@ cycleZones() {
       }
     }
 
-    if(isDefined(hitEntity) {
-      ) {}
+    if(isDefined(hitEntity)
+
+    ) {
       level.grnd_zone LinkTo(hitEntity);
-    }
-    else if(level.grnd_zone IsLinked()) {
+    } else if(level.grnd_zone IsLinked()) {
       level.grnd_zone Unlink();
     }
 
@@ -415,15 +410,13 @@ cycleZones() {
     wait(0.05);
     playFXOnTag(level.grnd_fx["smoke"], level.grnd_zone, "tag_fx");
 
-    foreach(player in level.players) {
-      player.grnd_fx_playing = true;
-    }
+    foreach(player in level.players)
+    player.grnd_fx_playing = true;
 
-    if(level.matchRules_dropTime) {
+    if(level.matchRules_dropTime)
       level thread randomDrops();
-    }
 
-    level.grnd_HUD["timerDisplay"].label = &"MP_NEXT_DROP_ZONE_IN";
+    level.grnd_HUD["timerDisplay"].label = & "MP_NEXT_DROP_ZONE_IN";
     level.grnd_HUD["timerDisplay"] setTimer(level.matchRules_zoneSwitchTime);
     level.grnd_HUD["timerDisplay"].alpha = 1;
     maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(level.matchRules_zoneSwitchTime);
@@ -432,17 +425,15 @@ cycleZones() {
     playSoundOnPlayers("mp_dropzone_obj_new");
 
     foreach(player in level.players) {
-      if(isAI(player)) {
+      if(isAI(player))
         player thread maps\mp\bots\_bots_gametype_grnd::bot_grnd_think();
-      }
     }
   }
 }
 
 spawnFxDelay(pos, forward, right, delay) {
-  if(isDefined(level.grnd_targetFX)) {
+  if(isDefined(level.grnd_targetFX))
     level.grnd_targetFX delete();
-  }
   wait delay;
   level.grnd_targetFX = spawnFx(level.grnd_targetFXID, pos, forward, right);
   triggerFx(level.grnd_targetFX);
@@ -469,9 +460,8 @@ grndTracking() {
     return;
   }
   while(true) {
-    if(!isDefined(self.grnd_wasSpectator)) {
+    if(!isDefined(self.grnd_wasSpectator))
       self.grnd_wasSpectator = false;
-    }
 
     if(!self.grnd_wasSpectator && self.pers["team"] == "spectator") {
       self.inGrindZone = false;
@@ -513,9 +503,8 @@ locationStatus() {
     level.grnd_numPlayers["allies"] = 0;
 
     foreach(player in level.players) {
-      if(isDefined(player.inGrindZone) && isReallyAlive(player) && player.pers["team"] != "spectator" && player isInGrindZone()) {
+      if(isDefined(player.inGrindZone) && isReallyAlive(player) && player.pers["team"] != "spectator" && player isInGrindZone())
         level.grnd_numPlayers[player.pers["team"]]++;
-      }
     }
 
     foreach(player in level.players) {
@@ -562,12 +551,10 @@ locationScoring() {
       }
     }
 
-    if(level.grnd_numPlayers["axis"]) {
+    if(level.grnd_numPlayers["axis"])
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("axis", score * level.grnd_numPlayers["axis"]);
-    }
-    if(level.grnd_numPlayers["allies"]) {
+    if(level.grnd_numPlayers["allies"])
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("allies", score * level.grnd_numPlayers["allies"]);
-    }
 
     maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(1.0);
   }
@@ -639,42 +626,37 @@ getDropZoneCrateType() {
       maxTries = 200;
       while(maxTries) {
         crateType = maps\mp\killstreaks\_airdrop::getRandomCrateType("airdrop_grnd");
-        if(isDefined(level.grnd_previousCrateTypes[crateType])) {
+        if(isDefined(level.grnd_previousCrateTypes[crateType]))
           crateType = undefined;
-        } else {
+        else
           break;
-        }
 
         maxTries--;
       }
     }
 
-    if(!isDefined(crateType)) {
+    if(!isDefined(crateType))
       crateType = maps\mp\killstreaks\_airdrop::getRandomCrateType("airdrop_grnd");
-    }
   }
 
   level.grnd_previousCrateTypes[crateType] = 1;
-  if(level.grnd_previousCrateTypes.size == 15) {
+  if(level.grnd_previousCrateTypes.size == 15)
     level.grnd_previousCrateTypes = [];
-  }
 
   return crateType;
 }
 
 isInGrindZone() {
-  if(distance2D(level.grnd_zone.origin, self.origin) < GRND_ZONE_TOUCH_RADIUS && (self.origin[2] > (level.grnd_zone.origin[2] - 50))) {
+  if(distance2D(level.grnd_zone.origin, self.origin) < GRND_ZONE_TOUCH_RADIUS && (self.origin[2] > (level.grnd_zone.origin[2] - 50)))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 hideHudElementOnGameEnd(hudElement) {
   level waittill("game_ended");
-  if(isDefined(hudElement)) {
+  if(isDefined(hudElement))
     hudElement.alpha = 0;
-  }
 }
 
 createZones() {
@@ -689,11 +671,10 @@ createZones() {
     zone1grnd_zones = [];
 
     foreach(zone in chestSpawns) {
-      if(zone.origin[2] > 10000) {
+      if(zone.origin[2] > 10000)
         level.grnd_dropZones2[level.grnd_dropZones2.size] = zone;
-      } else {
+      else
         level.grnd_dropZones1[level.grnd_dropZones1.size] = zone;
-      }
     }
   } else {
     foreach(zone in chestSpawns) {
@@ -714,25 +695,22 @@ adjustZones() {
 
   if(levelName == "mp_flooded") {
     foreach(zone in level.grnd_dropZones) {
-      if(zone.origin == (-1596.9, 1315.7, 374.1)) {
+      if(zone.origin == (-1596.9, 1315.7, 374.1))
         zone.origin = (-1561, 1278, 431);
-      }
     }
   }
 
   if(levelName == "mp_zebra") {
     foreach(zone in level.grnd_dropZones) {
-      if(zone.origin == (4008.3, -2066.3, 482.1)) {
+      if(zone.origin == (4008.3, -2066.3, 482.1))
         zone.origin = (4048, -1985, 539);
-      }
     }
   }
 
   if(isSubStr(levelName, "descent")) {
     foreach(zone in level.grnd_dropZones) {
-      if(zone.origin == (1101, 116, 5373.1)) {
+      if(zone.origin == (1101, 116, 5373.1))
         zone.origin = (1072, -80, 5378);
-      }
     }
   }
 

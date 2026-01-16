@@ -11,23 +11,23 @@
 #namespace margwa;
 
 function autoexec main() {
-  clientfield::register("actor", "margwa_head_left", 1, 2, "int", &margwaclientutils::margwaheadleftcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_mid", 1, 2, "int", &margwaclientutils::margwaheadmidcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_right", 1, 2, "int", &margwaclientutils::margwaheadrightcallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_in", 1, 1, "counter", &margwaclientutils::margwafxincallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_out", 1, 1, "counter", &margwaclientutils::margwafxoutcallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_spawn", 1, 1, "counter", &margwaclientutils::margwafxspawncallback, 0, 0);
-  clientfield::register("actor", "margwa_smash", 1, 1, "counter", &margwaclientutils::margwasmashcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_left_hit", 1, 1, "counter", &margwaclientutils::margwalefthitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_mid_hit", 1, 1, "counter", &margwaclientutils::margwamidhitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_right_hit", 1, 1, "counter", &margwaclientutils::margwarighthitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_killed", 1, 2, "int", &margwaclientutils::margwaheadkilledcallback, 0, 0);
-  clientfield::register("actor", "margwa_jaw", 1, 6, "int", &margwaclientutils::margwajawcallback, 0, 0);
-  clientfield::register("toplayer", "margwa_head_explosion", 1, 1, "counter", &margwaclientutils::margwaheadexplosion, 0, 0);
-  clientfield::register("scriptmover", "margwa_fx_travel", 1, 1, "int", &margwaclientutils::margwafxtravelcallback, 0, 0);
-  clientfield::register("scriptmover", "margwa_fx_travel_tell", 1, 1, "int", &margwaclientutils::margwafxtraveltellcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_left", 1, 2, "int", & margwaclientutils::margwaheadleftcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_mid", 1, 2, "int", & margwaclientutils::margwaheadmidcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_right", 1, 2, "int", & margwaclientutils::margwaheadrightcallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_in", 1, 1, "counter", & margwaclientutils::margwafxincallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_out", 1, 1, "counter", & margwaclientutils::margwafxoutcallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_spawn", 1, 1, "counter", & margwaclientutils::margwafxspawncallback, 0, 0);
+  clientfield::register("actor", "margwa_smash", 1, 1, "counter", & margwaclientutils::margwasmashcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_left_hit", 1, 1, "counter", & margwaclientutils::margwalefthitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_mid_hit", 1, 1, "counter", & margwaclientutils::margwamidhitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_right_hit", 1, 1, "counter", & margwaclientutils::margwarighthitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_killed", 1, 2, "int", & margwaclientutils::margwaheadkilledcallback, 0, 0);
+  clientfield::register("actor", "margwa_jaw", 1, 6, "int", & margwaclientutils::margwajawcallback, 0, 0);
+  clientfield::register("toplayer", "margwa_head_explosion", 1, 1, "counter", & margwaclientutils::margwaheadexplosion, 0, 0);
+  clientfield::register("scriptmover", "margwa_fx_travel", 1, 1, "int", & margwaclientutils::margwafxtravelcallback, 0, 0);
+  clientfield::register("scriptmover", "margwa_fx_travel_tell", 1, 1, "int", & margwaclientutils::margwafxtraveltellcallback, 0, 0);
   clientfield::register("actor", "supermargwa", 1, 1, "int", undefined, 0, 0);
-  ai::add_archetype_spawn_function("margwa", &margwaclientutils::margwaspawn);
+  ai::add_archetype_spawn_function("margwa", & margwaclientutils::margwaspawn);
   level._jaw = [];
   level._jaw[1] = "idle_1";
   level._jaw[3] = "idle_pain_head_l_explode";
@@ -66,40 +66,40 @@ function autoexec precache() {
 
 function private margwaspawn(localclientnum) {
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   self setanim("ai_margwa_head_l_closed_add", 1, 0.2, 1);
   self setanim("ai_margwa_head_m_closed_add", 1, 0.2, 1);
   self setanim("ai_margwa_head_r_closed_add", 1, 0.2, 1);
-  for(i = 1; i <= 7; i++) {
+  for (i = 1; i <= 7; i++) {
     lefttentacle = "ai_margwa_tentacle_l_0" + i;
     righttentacle = "ai_margwa_tentacle_r_0" + i;
     self setanim(lefttentacle, 1, 0.2, 1);
     self setanim(righttentacle, 1, 0.2, 1);
   }
-  level._footstepcbfuncs[self.archetype] = &margwaprocessfootstep;
+  level._footstepcbfuncs[self.archetype] = & margwaprocessfootstep;
   self.heads = [];
-  self.heads[1] = spawnStruct();
+  self.heads[1] = spawnstruct();
   self.heads[1].index = 1;
   self.heads[1].prevheadanim = "ai_margwa_head_l_closed_add";
   self.heads[1].jawbase = "ai_margwa_jaw_l_";
-  self.heads[2] = spawnStruct();
+  self.heads[2] = spawnstruct();
   self.heads[2].index = 2;
   self.heads[2].prevheadanim = "ai_margwa_head_m_closed_add";
   self.heads[2].jawbase = "ai_margwa_jaw_m_";
-  self.heads[3] = spawnStruct();
+  self.heads[3] = spawnstruct();
   self.heads[3].index = 3;
   self.heads[3].prevheadanim = "ai_margwa_head_r_closed_add";
   self.heads[3].jawbase = "ai_margwa_jaw_r_";
 }
 
 function private margwaheadleftcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(isDefined(self.leftglowfx)) {
+  if(isdefined(self.leftglowfx)) {
     stopfx(localclientnum, self.leftglowfx);
   }
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newvalue) {
@@ -108,13 +108,13 @@ function private margwaheadleftcallback(localclientnum, oldvalue, newvalue, bnew
       self setanim("ai_margwa_head_l_open_add", 1, 0.1, 1);
       self clearanim("ai_margwa_head_l_closed_add", 0.1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.leftglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
+        self.leftglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
       } else {
-        self.leftglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_left");
+        self.leftglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_left");
       }
       break;
     }
@@ -131,13 +131,13 @@ function private margwaheadleftcallback(localclientnum, oldvalue, newvalue, bnew
       self clearanim("ai_margwa_head_l_closed_add", 0.1);
       self setanimrestart("ai_margwa_head_l_smash_attack_1", 1, 0.1, 1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.leftglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
+        self.leftglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
       } else {
-        self.leftglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_left");
+        self.leftglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_left");
       }
       self thread margwastopsmashfx(localclientnum);
       break;
@@ -146,11 +146,11 @@ function private margwaheadleftcallback(localclientnum, oldvalue, newvalue, bnew
 }
 
 function private margwaheadmidcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(isDefined(self.midglowfx)) {
+  if(isdefined(self.midglowfx)) {
     stopfx(localclientnum, self.midglowfx);
   }
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newvalue) {
@@ -158,13 +158,13 @@ function private margwaheadmidcallback(localclientnum, oldvalue, newvalue, bnewe
       self setanim("ai_margwa_head_m_open_add", 1, 0.1, 1);
       self clearanim("ai_margwa_head_m_closed_add", 0.1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.midglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
+        self.midglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
       } else {
-        self.midglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_mid");
+        self.midglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_mid");
       }
       break;
     }
@@ -179,13 +179,13 @@ function private margwaheadmidcallback(localclientnum, oldvalue, newvalue, bnewe
       self clearanim("ai_margwa_head_m_closed_add", 0.1);
       self setanimrestart("ai_margwa_head_m_smash_attack_1", 1, 0.1, 1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.midglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
+        self.midglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
       } else {
-        self.midglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_mid");
+        self.midglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_mid");
       }
       self thread margwastopsmashfx(localclientnum);
       break;
@@ -194,11 +194,11 @@ function private margwaheadmidcallback(localclientnum, oldvalue, newvalue, bnewe
 }
 
 function private margwaheadrightcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(isDefined(self.rightglowfx)) {
+  if(isdefined(self.rightglowfx)) {
     stopfx(localclientnum, self.rightglowfx);
   }
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newvalue) {
@@ -206,13 +206,13 @@ function private margwaheadrightcallback(localclientnum, oldvalue, newvalue, bne
       self setanim("ai_margwa_head_r_open_add", 1, 0.1, 1);
       self clearanim("ai_margwa_head_r_closed_add", 0.1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.rightglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
+        self.rightglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
       } else {
-        self.rightglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_right");
+        self.rightglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_right");
       }
       break;
     }
@@ -227,13 +227,13 @@ function private margwaheadrightcallback(localclientnum, oldvalue, newvalue, bne
       self clearanim("ai_margwa_head_r_closed_add", 0.1);
       self setanimrestart("ai_margwa_head_r_smash_attack_1", 1, 0.1, 1);
       roar_effect = level._effect["fx_margwa_roar_zod_zmb"];
-      if(isDefined(self.margwa_roar_effect)) {
+      if(isdefined(self.margwa_roar_effect)) {
         roar_effect = self.margwa_roar_effect;
       }
       if(self clientfield::get("supermargwa")) {
-        self.rightglowfx = playFXOnTag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
+        self.rightglowfx = playfxontag(localclientnum, level._effect["fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
       } else {
-        self.rightglowfx = playFXOnTag(localclientnum, roar_effect, self, "tag_head_right");
+        self.rightglowfx = playfxontag(localclientnum, roar_effect, self, "tag_head_right");
       }
       self thread margwastopsmashfx(localclientnum);
       break;
@@ -244,27 +244,27 @@ function private margwaheadrightcallback(localclientnum, oldvalue, newvalue, bne
 function private margwastopsmashfx(localclientnum) {
   self endon("entityshutdown");
   wait(0.6);
-  if(isDefined(self.leftglowfx)) {
+  if(isdefined(self.leftglowfx)) {
     stopfx(localclientnum, self.leftglowfx);
   }
-  if(isDefined(self.midglowfx)) {
+  if(isdefined(self.midglowfx)) {
     stopfx(localclientnum, self.midglowfx);
   }
-  if(isDefined(self.rightglowfx)) {
+  if(isdefined(self.rightglowfx)) {
     stopfx(localclientnum, self.rightglowfx);
   }
 }
 
 function private margwafxincallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
-    self.teleportfxin = playFX(localclientnum, level._effect["fx_margwa_teleport_zod_zmb"], self gettagorigin("j_spine_1"));
+    self.teleportfxin = playfx(localclientnum, level._effect["fx_margwa_teleport_zod_zmb"], self gettagorigin("j_spine_1"));
   }
 }
 
 function private margwafxoutcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     tagpos = self gettagorigin("j_spine_1");
-    self.teleportfxout = playFX(localclientnum, level._effect["fx_margwa_teleport_zod_zmb"], tagpos);
+    self.teleportfxout = playfx(localclientnum, level._effect["fx_margwa_teleport_zod_zmb"], tagpos);
   }
 }
 
@@ -275,7 +275,7 @@ function private margwafxtravelcallback(localclientnum, oldvalue, newvalue, bnew
       break;
     }
     case 1: {
-      self.travelerfx = playFXOnTag(localclientnum, level._effect["fx_margwa_teleport_travel_zod_zmb"], self, "tag_origin");
+      self.travelerfx = playfxontag(localclientnum, level._effect["fx_margwa_teleport_travel_zod_zmb"], self, "tag_origin");
       break;
     }
   }
@@ -289,7 +289,7 @@ function private margwafxtraveltellcallback(localclientnum, oldvalue, newvalue, 
       break;
     }
     case 1: {
-      self.travelertellfx = playFXOnTag(localclientnum, level._effect["fx_margwa_teleport_tell_zod_zmb"], self, "tag_origin");
+      self.travelertellfx = playfxontag(localclientnum, level._effect["fx_margwa_teleport_tell_zod_zmb"], self, "tag_origin");
       self thread margwatraveltellupdate(localclientnum);
       break;
     }
@@ -301,8 +301,8 @@ function private margwatraveltellupdate(localclientnum) {
   self endon("stop_margwatraveltell");
   self endon("entityshutdown");
   player = getlocalplayer(localclientnum);
-  while(true) {
-    if(isDefined(player)) {
+  while (true) {
+    if(isdefined(player)) {
       dist_sq = distancesquared(player.origin, self.origin);
       if(dist_sq < 1000000) {
         player playrumbleonentity(localclientnum, "tank_rumble");
@@ -315,15 +315,15 @@ function private margwatraveltellupdate(localclientnum) {
 function private margwafxspawncallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     spawnfx = level._effect["fx_margwa_teleport_intro_zod_zmb"];
-    if(isDefined(self.margwa_spawn_effect)) {
+    if(isdefined(self.margwa_spawn_effect)) {
       spawnfx = self.margwa_spawn_effect;
     }
-    if(isDefined(self.margwa_play_spawn_effect)) {
+    if(isdefined(self.margwa_play_spawn_effect)) {
       self thread[[self.margwa_play_spawn_effect]](localclientnum);
     } else {
-      self.spawnfx = playFX(localclientnum, spawnfx, self gettagorigin("j_spine_1"));
+      self.spawnfx = playfx(localclientnum, spawnfx, self gettagorigin("j_spine_1"));
     }
-    playSound(0, "zmb_margwa_spawn", self gettagorigin("j_spine_1"));
+    playsound(0, "zmb_margwa_spawn", self gettagorigin("j_spine_1"));
   }
 }
 
@@ -364,7 +364,7 @@ function margwaprocessfootstep(localclientnum, pos, surface, notetrack, bone) {
 function private margwasmashcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     e_player = getlocalplayer(localclientnum);
-    smashpos = self.origin + vectorscale(anglesToForward(self.angles), 60);
+    smashpos = self.origin + vectorscale(anglestoforward(self.angles), 60);
     distsq = distancesquared(smashpos, e_player.origin);
     if(distsq < 20736) {
       e_player earthquake(0.7, 0.25, e_player.origin, 3000);
@@ -379,30 +379,30 @@ function private margwasmashcallback(localclientnum, oldvalue, newvalue, bnewent
 function private margwalefthitcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     effect = level._effect["fx_margwa_head_shot_zod_zmb"];
-    if(isDefined(self.margwa_head_hit_fx)) {
+    if(isdefined(self.margwa_head_hit_fx)) {
       effect = self.margwa_head_hit_fx;
     }
-    self.lefthitfx = playFXOnTag(localclientnum, effect, self, "tag_head_left");
+    self.lefthitfx = playfxontag(localclientnum, effect, self, "tag_head_left");
   }
 }
 
 function private margwamidhitcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     effect = level._effect["fx_margwa_head_shot_zod_zmb"];
-    if(isDefined(self.margwa_head_hit_fx)) {
+    if(isdefined(self.margwa_head_hit_fx)) {
       effect = self.margwa_head_hit_fx;
     }
-    self.midhitfx = playFXOnTag(localclientnum, effect, self, "tag_head_mid");
+    self.midhitfx = playfxontag(localclientnum, effect, self, "tag_head_mid");
   }
 }
 
 function private margwarighthitcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     effect = level._effect["fx_margwa_head_shot_zod_zmb"];
-    if(isDefined(self.margwa_head_hit_fx)) {
+    if(isdefined(self.margwa_head_hit_fx)) {
       effect = self.margwa_head_hit_fx;
     }
-    self.righthitfx = playFXOnTag(localclientnum, effect, self, "tag_head_right");
+    self.righthitfx = playfxontag(localclientnum, effect, self, "tag_head_right");
   }
 }
 
@@ -415,11 +415,11 @@ function private margwaheadkilledcallback(localclientnum, oldvalue, newvalue, bn
 function private margwajawcallback(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     foreach(head in self.heads) {
-      if(isDefined(head.killed) && head.killed) {
-        if(isDefined(head.prevjawanim)) {
+      if(isdefined(head.killed) && head.killed) {
+        if(isdefined(head.prevjawanim)) {
           self clearanim(head.prevjawanim, 0.2);
         }
-        if(isDefined(head.prevheadanim)) {
+        if(isdefined(head.prevheadanim)) {
           self clearanim(head.prevheadanim, 0.1);
         }
         jawanim = head.jawbase + level._jaw[newvalue];

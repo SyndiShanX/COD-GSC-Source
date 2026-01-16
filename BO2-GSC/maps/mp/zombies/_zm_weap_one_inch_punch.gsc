@@ -32,9 +32,8 @@ one_inch_punch_melee_attack() {
   self endon("disconnect");
   self endon("stop_one_inch_punch_attack");
 
-  if(!(isDefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init)) {
+  if(!(isDefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init))
     self ent_flag_init("melee_punch_cooldown");
-  }
 
   self.one_inch_punch_flag_has_been_init = 1;
   current_melee_weapon = self get_player_melee_weapon();
@@ -90,9 +89,8 @@ monitor_melee_swipe() {
   self endon("bled_out");
 
   while(true) {
-    while(!self ismeleeing()) {
+    while(!self ismeleeing())
       wait 0.05;
-    }
 
     if(self getcurrentweapon() == level.riotshield_name) {
       wait 0.1;
@@ -103,12 +101,11 @@ monitor_melee_swipe() {
     self setclientfield("oneinchpunch_impact", 1);
     wait_network_frame();
     self setclientfield("oneinchpunch_impact", 0);
-    v_punch_effect_fwd = anglesToForward(self getplayerangles());
+    v_punch_effect_fwd = anglestoforward(self getplayerangles());
     v_punch_yaw = get2dyaw((0, 0, 0), v_punch_effect_fwd);
 
-    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air") {
+    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air")
       range_mod = range_mod * 2;
-    }
 
     a_zombies = getaispeciesarray(level.zombie_team, "all");
     a_zombies = get_array_of_closest(self.origin, a_zombies, undefined, undefined, 100);
@@ -119,14 +116,12 @@ monitor_melee_swipe() {
         continue;
       }
 
-      if(self is_player_facing(zombie, v_punch_yaw)) {
+      if(self is_player_facing(zombie, v_punch_yaw))
         self thread zombie_punch_damage(zombie, 0.5);
-      }
     }
 
-    while(self ismeleeing()) {
+    while(self ismeleeing())
       wait 0.05;
-    }
 
     wait 0.05;
   }
@@ -136,15 +131,13 @@ is_player_facing(zombie, v_punch_yaw) {
   v_player_to_zombie_yaw = get2dyaw(self.origin, zombie.origin);
   yaw_diff = v_player_to_zombie_yaw - v_punch_yaw;
 
-  if(yaw_diff < 0) {
+  if(yaw_diff < 0)
     yaw_diff = yaw_diff * -1;
-  }
 
-  if(yaw_diff < 35) {
+  if(yaw_diff < 35)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 is_oneinch_punch_damage() {
@@ -166,11 +159,10 @@ zombie_punch_damage(ai_zombie, n_mod) {
   ai_zombie.punch_handle_pain_notetracks = ::handle_punch_pain_notetracks;
 
   if(isDefined(n_mod)) {
-    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
+    if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded)
       n_base_damage = 11275;
-    } else {
+    else
       n_base_damage = 2250;
-    }
 
     n_damage = int(n_base_damage * n_mod);
 
@@ -226,7 +218,9 @@ zombie_punch_damage(ai_zombie, n_mod) {
 zombie_punch_death(ai_zombie) {
   ai_zombie thread gib_zombies_head(self);
 
-  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
+  if(isDefined(level.ragdoll_limit_check) && ![
+      [level.ragdoll_limit_check]
+    ]()) {
     return;
   }
   if(isDefined(ai_zombie)) {
@@ -236,15 +230,13 @@ zombie_punch_death(ai_zombie) {
 
   wait_network_frame();
 
-  if(isDefined(ai_zombie)) {
+  if(isDefined(ai_zombie))
     ai_zombie setclientfield("oneinchpunch_physics_launchragdoll", 0);
-  }
 }
 
 handle_punch_pain_notetracks(note) {
-  if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect["punch_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  }
+  if(note == "zombie_knockdown_ground_impact")
+    playfx(level._effect["punch_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
 }
 
 knockdown_zombie_animate() {
@@ -261,20 +253,18 @@ knockdown_zombie_animate() {
   animation_legs = "";
   animation_side = undefined;
   animation_duration = "_default";
-  v_forward = vectordot(anglesToForward(self.angles), vectornormalize(self.v_punched_from - self.origin));
+  v_forward = vectordot(anglestoforward(self.angles), vectornormalize(self.v_punched_from - self.origin));
 
   if(v_forward > 0.6) {
     animation_direction = "back";
 
-    if(!(isDefined(self.has_legs) && self.has_legs)) {
+    if(!(isDefined(self.has_legs) && self.has_legs))
       animation_legs = "_crawl";
-    }
 
-    if(randomint(100) > 75) {
+    if(randomint(100) > 75)
       animation_side = "belly";
-    } else {
+    else
       animation_side = "back";
-    }
   } else if(self.damageyaw > 75 && self.damageyaw < 135) {
     animation_direction = "left";
     animation_side = "belly";
@@ -294,11 +284,10 @@ knockdown_zombie_animate() {
     return;
   }
   if(isDefined(self.a.gib_ref)) {
-    if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75) {
+    if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75)
       animation_duration = "_late";
-    } else if(randomint(100) > 75) {
+    else if(randomint(100) > 75)
       animation_duration = "_early";
-    }
   } else if(randomint(100) > 25)
     animation_duration = "_early";
 

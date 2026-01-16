@@ -12,8 +12,8 @@
 init() {
   level._zombiemode_special_powerup_setup = ::temple_special_powerup_setup;
   level._zombiemode_powerup_grab = ::temple_powerup_grab;
-  maps\_zombiemode_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", &"ZOMBIE_POWERUP_MONKEY_SWARM");
-  level.playable_area = getEntArray("player_volume", "script_noteworthy");
+  maps\_zombiemode_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", & "ZOMBIE_POWERUP_MONKEY_SWARM");
+  level.playable_area = getentarray("player_volume", "script_noteworthy");
   level._effect["zombie_kill"] = LoadFX("impacts/fx_flesh_hit_body_fatal_lg_exit_mp");
 }
 
@@ -71,7 +71,7 @@ player_monkey_think(numMonkeys) {
     }
     bloodFX = false;
     angles = (0, RandomFloat(360.0), 0);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     spawnLoc = self.origin + spawnRadius * forward;
     spawnAngles = self.angles;
     if(isDefined(zombie)) {
@@ -109,9 +109,9 @@ player_monkey_think(numMonkeys) {
     monkey maps\_zombiemode_ai_monkey::monkey_prespawn();
     monkey ForceTeleport(spawnLoc, spawnAngles);
     if(bloodFX) {
-      playFX(level._effect["zombie_kill"], spawnLoc);
+      PlayFX(level._effect["zombie_kill"], spawnLoc);
     }
-    playFX(level._effect["monkey_death"], spawnLoc);
+    PlayFX(level._effect["monkey_death"], spawnLoc);
     playsoundatposition("zmb_bolt", spawnLoc);
     monkey magic_bullet_shield();
     monkey disable_pain();
@@ -130,7 +130,7 @@ monkey_powerup_timeout() {
   if(isDefined(self.zombie)) {
     self.zombie.monkey_claimed = false;
   }
-  playFX(level._effect["monkey_death"], self.origin);
+  PlayFX(level._effect["monkey_death"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   self notify("timeout");
   self Delete();
@@ -190,7 +190,7 @@ monkey_attack_zombie(zombie) {
   zombie_anim = % ai_zombie_taunts_9;
   zombie notify("stop_find_flesh");
   zombie animscripted("zombie_react", zombie.origin, zombie.angles, zombie_anim, "normal", % body, 1, 0.2);
-  forward = anglesToForward(zombie.angles);
+  forward = AnglesToForward(zombie.angles);
   perk_attack_anim = % ai_zombie_monkey_attack_perks_front;
   time = getAnimLength(perk_attack_anim);
   self maps\_zombiemode_audio::do_zombies_playvocals("attack", "monkey_zombie");

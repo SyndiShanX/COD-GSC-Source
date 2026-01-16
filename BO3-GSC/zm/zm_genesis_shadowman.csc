@@ -22,40 +22,40 @@
 #namespace zm_genesis_shadowman;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_shadowman", &__init__, undefined, undefined);
+  system::register("zm_genesis_shadowman", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "shadowman_fx", 15000, 3, "int", &shadowman_fx, 0, 0);
+  clientfield::register("scriptmover", "shadowman_fx", 15000, 3, "int", & shadowman_fx, 0, 0);
 }
 
 function shadowman_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.var_6067fcbe)) {
+  if(isdefined(self.var_6067fcbe)) {
     stopfx(localclientnum, self.var_6067fcbe);
   }
-  if(isDefined(self.var_8eb9fdc0)) {
+  if(isdefined(self.var_8eb9fdc0)) {
     stopfx(localclientnum, self.var_8eb9fdc0);
   }
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   switch (newval) {
     case 1: {
-      playFXOnTag(localclientnum, level._effect["shadowman_teleport"], self, "j_spinelower");
-      self.var_8741354e = playFXOnTag(localclientnum, level._effect["shadowman_light"], self, "j_spineupper");
-      self.vfx_smoke = playFXOnTag(localclientnum, level._effect["shadowman_smoke"], self, "tag_origin");
+      playfxontag(localclientnum, level._effect["shadowman_teleport"], self, "j_spinelower");
+      self.var_8741354e = playfxontag(localclientnum, level._effect["shadowman_light"], self, "j_spineupper");
+      self.vfx_smoke = playfxontag(localclientnum, level._effect["shadowman_smoke"], self, "tag_origin");
       break;
     }
     case 2: {
-      if(isDefined(self.var_8741354e)) {
+      if(isdefined(self.var_8741354e)) {
         stopfx(localclientnum, self.var_8741354e);
       }
-      if(isDefined(self.vfx_smoke)) {
+      if(isdefined(self.vfx_smoke)) {
         stopfx(localclientnum, self.vfx_smoke);
       }
       var_87c8152d = level clientfield::get("circle_challenge_identity");
-      if(isDefined(self.var_b0063e15) && var_87c8152d === 4) {
+      if(isdefined(self.var_b0063e15) && var_87c8152d === 4) {
         killfx(localclientnum, self.var_b0063e15);
       }
       v_origin = self gettagorigin("j_spinelower");
@@ -64,16 +64,16 @@ function shadowman_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
       break;
     }
     case 3: {
-      self.var_6067fcbe = playFXOnTag(localclientnum, level._effect["shadowman_hover_charge"], self, "j_spinelower");
-      self.var_8eb9fdc0 = playFXOnTag(localclientnum, level._effect["shadowman_energy_ball_charge"], self, "tag_weapon_right");
+      self.var_6067fcbe = playfxontag(localclientnum, level._effect["shadowman_hover_charge"], self, "j_spinelower");
+      self.var_8eb9fdc0 = playfxontag(localclientnum, level._effect["shadowman_energy_ball_charge"], self, "tag_weapon_right");
       break;
     }
     case 4: {
-      self.var_8eb9fdc0 = playFXOnTag(localclientnum, level._effect["shadowman_energy_ball"], self, "tag_weapon_right");
+      self.var_8eb9fdc0 = playfxontag(localclientnum, level._effect["shadowman_energy_ball"], self, "tag_weapon_right");
       break;
     }
     case 5: {
-      self.var_8eb9fdc0 = playFXOnTag(localclientnum, level._effect["shadowman_energy_ball_explosion"], self, "tag_weapon_right");
+      self.var_8eb9fdc0 = playfxontag(localclientnum, level._effect["shadowman_energy_ball_explosion"], self, "tag_weapon_right");
       break;
     }
     case 6: {
@@ -83,7 +83,7 @@ function shadowman_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 function function_705b696b(localclientnum, str_fx, v_origin, n_seconds) {
-  fx_id = playFX(localclientnum, str_fx, v_origin);
+  fx_id = playfx(localclientnum, str_fx, v_origin);
   wait(n_seconds);
   stopfx(localclientnum, fx_id);
 }

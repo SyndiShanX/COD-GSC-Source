@@ -40,12 +40,11 @@ minigun_think() {
   self assign_animtree();
   self thread minigun_used();
 
-  for(;;) {
-    for(;;) {
+  for (;;) {
+    for (;;) {
       // wait for the player to get on the turret
-      if(self player_on_minigun()) {
+      if(self player_on_minigun())
         break;
-      }
       wait(0.05);
     }
 
@@ -54,10 +53,9 @@ minigun_think() {
     flag_clear("player_off_minigun");
     flag_set("player_on_minigun");
 
-    for(;;) {
-      if(!self player_on_minigun()) {
+    for (;;) {
+      if(!self player_on_minigun())
         break;
-      }
       wait(0.05);
     }
     flag_clear("player_on_minigun");
@@ -78,22 +76,19 @@ player_on_minigun() {
   //self ==> either the turret or the script_vehicle with the turret
   self endon("death");
   owner = undefined;
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return false;
-  }
   if(self.classname == "script_vehicle") {
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner)) {
+    if(isdefined(owner) && isplayer(owner))
       return true;
-    } else {
+    else
       return false;
-    }
   } else {
-    if(isDefined(self getturretowner())) {
+    if(isdefined(self getturretowner()))
       return true;
-    } else {
+    else
       return false;
-    }
   }
 }
 
@@ -107,13 +102,13 @@ minigun_rumble() {
 
   self.rumble_ent = spawn("script_origin", self.minigunUser.origin);
   self.rumble_ent linkto(self.minigunUser);
-  while(flag("player_on_minigun")) {
+  while (flag("player_on_minigun")) {
     wait .05;
     if(self.momentum <= 0 || !flag("player_on_minigun")) {
       continue;
     }
-    //org = level.player getEye() + vector_multiply( vectornormalize(anglesToForward( level.player getplayerangles() ) ), fardist - ( between * self.momentum ) );
-    self.rumble_ent.origin = self.minigunUser getEye() + (0, 0, fardist - (between * self.momentum));
+    //org = level.player geteye() + vector_multiply( vectornormalize(anglestoforward( level.player getplayerangles() ) ), fardist - ( between * self.momentum ) );
+    self.rumble_ent.origin = self.minigunUser geteye() + (0, 0, fardist - (between * self.momentum));
     self.rumble_ent PlayRumbleOnentity("minigun_rumble");
   }
   self.rumble_ent delete();
@@ -122,12 +117,11 @@ minigun_rumble() {
 minigun_fire_sounds() {
   self endon("death");
   //Only need this logic for vehicle mounted miniguns
-  if(self.classname != "script_vehicle") {
+  if(self.classname != "script_vehicle")
     return;
-  }
   level endon("player_off_minigun");
   self.playingLoopSound = false;
-  while(flag("player_on_minigun")) {
+  while (flag("player_on_minigun")) {
     wait(0.05);
     if((self.minigunUser attackbuttonpressed()) && (self.allowedToFire == true)) {
       self thread minigun_fire_loop();
@@ -150,24 +144,21 @@ minigun_fire_loop() {
 }
 
 waittill_player_not_holding_fire_trigger_or_overheat() {
-  while((self.minigunUser attackbuttonpressed()) && (self.allowedToFire == true)) {
+  while ((self.minigunUser attackbuttonpressed()) && (self.allowedToFire == true))
     wait(0.05);
-  }
 }
 
 minigun_fire() {
   self endon("death");
   //Only need this logic for vehicle mounted miniguns
-  if(self.classname != "script_vehicle") {
+  if(self.classname != "script_vehicle")
     return;
-  }
 
   level endon("player_off_minigun");
-  while(flag("player_on_minigun")) {
+  while (flag("player_on_minigun")) {
     self waittill("turret_fire");
-    if(self.allowedToFire == false) {
+    if(self.allowedToFire == false)
       continue;
-    }
     self fireWeapon();
     earthquake(0.25, .13, self GetTagOrigin("tag_turret"), 200);
     wait(0.01);
@@ -180,11 +171,10 @@ minigun_used() {
 
   //Tweakable values	
 
-  if(level.console) {
+  if(level.console)
     overheat_time = 6; // full usage to overheat( original 8 )
-  } else {
+  else
     overheat_time = 10;
-  }
 
   cooldown_time = 4; // time to cool down from max heat back to 0 if not operated during this time( original 4 )
   penalty_time = 7; // hold inoperative for this amount of time
@@ -216,7 +206,7 @@ minigun_used() {
   //thread minigun_rumble();
   self thread minigun_fire();
   self thread minigun_fire_sounds();
-  for(;;) {
+  for (;;) {
     level.normframes++;
     if(flag("player_on_minigun")) {
       if(!level.inuse) {
@@ -310,6 +300,9 @@ minigun_used() {
 
     //-----making max always true and commenting out rest to get rid of having to spin up
 
+
+
+
     //		if( firing && !overheated )
     //		{
     //			level.frames++ ;
@@ -327,7 +320,7 @@ minigun_used() {
     //		level.heat = heat;
     //
     //		level.turret_heat_status = int( heat * 114 );
-    //		if( isDefined( level.overheat_status2 ) )
+    //		if( isdefined( level.overheat_status2 ) )
     //			thread overheat_hud_update();
     //
     //		if( ( heat >= max ) && ( heat <= max ) && ( ( oldheat < max ) || ( oldheat > max ) ) )
@@ -343,10 +336,10 @@ minigun_used() {
     //		{
     //			self disable_turret_fire();
     //			firing = false;
-    //			//playFXOnTag( getfx( "_minigun_overheat_haze" ), self, "tag_flash");
+    //			//playfxOnTag( getfx( "_minigun_overheat_haze" ), self, "tag_flash");
     //			if( gettime() > next_overheat_fx )
     //			{
-    //				playFXOnTag( getfx( "_minigun_overheat_smoke" ), self, "tag_flash" );
+    //				playfxOnTag( getfx( "_minigun_overheat_smoke" ), self, "tag_flash" );
     //				next_overheat_fx = gettime() + overheat_fx_rate * 1000;
     //			}
     //		}
@@ -358,17 +351,17 @@ minigun_used() {
 disable_turret_fire() {
   //self ==> the turret entity or the script_vehicle with the turret
   self.allowedToFire = false;
-  if(self.classname != "script_vehicle") {
+  if(self.classname != "script_vehicle")
     self TurretFireDisable();
-  }
+
 }
 
 enable_turret_fire() {
   //self ==> the turret entity or the script_vehicle with the turret
   self.allowedToFire = true;
-  if(self.classname != "script_vehicle") {
+  if(self.classname != "script_vehicle")
     self TurretFireEnable();
-  }
+
 }
 
 minigun_sound_spinup() {
@@ -385,31 +378,31 @@ minigun_sound_spinup() {
   */
 
   if(self.momentum < 0.25) {
-    self playSound("minigun_heli_gatling_spinup1");
+    self playsound("minigun_heli_gatling_spinup1");
     wait 0.6;
-    self playSound("minigun_heli_gatling_spinup2");
+    self playsound("minigun_heli_gatling_spinup2");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spinup3");
+    self playsound("minigun_heli_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spinup4");
+    self playsound("minigun_heli_gatling_spinup4");
     wait 0.5;
   } else
   if(self.momentum < 0.5) {
-    self playSound("minigun_heli_gatling_spinup2");
+    self playsound("minigun_heli_gatling_spinup2");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spinup3");
+    self playsound("minigun_heli_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spinup4");
+    self playsound("minigun_heli_gatling_spinup4");
     wait 0.5;
   } else
   if(self.momentum < 0.75) {
-    self playSound("minigun_heli_gatling_spinup3");
+    self playsound("minigun_heli_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spinup4");
+    self playsound("minigun_heli_gatling_spinup4");
     wait 0.5;
   } else
   if(self.momentum < 1) {
-    self playSound("minigun_heli_gatling_spinup4");
+    self playsound("minigun_heli_gatling_spinup4");
     wait 0.5;
   }
 
@@ -423,8 +416,8 @@ minigun_sound_spinloop() {
   level notify("stopMinigunSound");
   level endon("stopMinigunSound");
 
-  while(1) {
-    self playSound("minigun_heli_gatling_spin");
+  while (1) {
+    self playsound("minigun_heli_gatling_spin");
     wait 2.5;
   }
 }
@@ -444,30 +437,30 @@ minigun_sound_spindown() {
 
   if(self.momentum > 0.75) {
     self stopsounds();
-    self playSound("minigun_heli_gatling_spindown4");
+    self playsound("minigun_heli_gatling_spindown4");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown3");
+    self playsound("minigun_heli_gatling_spindown3");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown2");
+    self playsound("minigun_heli_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown1");
+    self playsound("minigun_heli_gatling_spindown1");
     wait 0.65;
   } else
   if(self.momentum > 0.5) {
-    self playSound("minigun_heli_gatling_spindown3");
+    self playsound("minigun_heli_gatling_spindown3");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown2");
+    self playsound("minigun_heli_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown1");
+    self playsound("minigun_heli_gatling_spindown1");
     wait 0.65;
   } else
   if(self.momentum > 0.25) {
-    self playSound("minigun_heli_gatling_spindown2");
+    self playsound("minigun_heli_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_heli_gatling_spindown1");
+    self playsound("minigun_heli_gatling_spindown1");
     wait 0.65;
   } else {
-    self playSound("minigun_heli_gatling_spindown1");
+    self playsound("minigun_heli_gatling_spindown1");
     wait 0.65;
   }
 }
@@ -492,13 +485,13 @@ minigun_sound_spindown() {
 //
 //	waittillframeend;
 //
-//	if( isDefined( level.overheat_bg ) )
+//	if( isdefined( level.overheat_bg ) )
 //		level.overheat_bg destroy();
-//	if( isDefined( level.overheat_status ) )
+//	if( isdefined( level.overheat_status ) )
 //		level.overheat_status destroy();
-//	if( isDefined( level.overheat_status2 ) )
+//	if( isdefined( level.overheat_status2 ) )
 //		level.overheat_status2 destroy();
-//	if( isDefined( level.overheat_flashing ) )
+//	if( isdefined( level.overheat_flashing ) )
 //		level.overheat_flashing destroy();
 //}
 //
@@ -507,7 +500,7 @@ minigun_sound_spindown() {
 //	//Draw the temperature gauge and filler bar components
 //
 //	level endon( "disable_overheat" );
-//	if( !isDefined( level.overheat_bg ) )
+//	if( !isdefined( level.overheat_bg ) )
 //	{
 //		level.overheat_bg = newhudelem();
 //		level.overheat_bg.alignX = "right";
@@ -524,7 +517,7 @@ minigun_sound_spindown() {
 //	barY = -152;
 //
 //	//status bar
-//	if( !isDefined( level.overheat_status ) )
+//	if( !isdefined( level.overheat_status ) )
 //	{
 //		level.overheat_status = newhudelem();
 //		level.overheat_status.alignX = "right";
@@ -541,7 +534,7 @@ minigun_sound_spindown() {
 //
 //	//draw fake bar to cover up a hitch
 //
-//	if( !isDefined( level.overheat_status2 ) )
+//	if( !isdefined( level.overheat_status2 ) )
 //	{
 //		level.overheat_status2 = newhudelem();
 //		level.overheat_status2.alignX = "right";
@@ -556,7 +549,7 @@ minigun_sound_spindown() {
 //		level.overheat_status.sort = 2;
 //	}
 //
-//	if( !isDefined( level.overheat_flashing ) )
+//	if( !isdefined( level.overheat_flashing ) )
 //	{
 //		level.overheat_flashing = newhudelem();
 //		level.overheat_flashing.alignX = "right";
@@ -590,7 +583,7 @@ minigun_sound_spindown() {
 //		level.turret_heat_status = level.turret_heat_max;
 //		thread overheat_hud_update();
 //
-//		for( i = 0;i < 4;i++ )
+//		for ( i = 0;i < 4;i++ )
 //		{
 //			level.overheat_flashing fadeovertime( 0.5 );
 //			level.overheat_flashing.alpha = 0.5;
@@ -623,7 +616,7 @@ minigun_sound_spindown() {
 //		level.overheat_status fadeovertime( 0.25 );
 //	}
 //
-//	if( isDefined( level.overheat_status2 ) && level.turret_heat_status > 1 )
+//	if( isdefined( level.overheat_status2 ) && level.turret_heat_status > 1 )
 //	{
 //		level.overheat_status2.alpha = 1;
 //		level.overheat_status2 setShader( "white", 10, int( level.turret_heat_status ) );
@@ -639,9 +632,9 @@ minigun_sound_spindown() {
 //	overheat_setColor( level.turret_heat_status );
 //
 //	wait 0.05;
-//	if( isDefined( level.overheat_status2 ) )
+//	if( isdefined( level.overheat_status2 ) )
 //		level.overheat_status2.alpha = 0;
-//	if( isDefined( level.overheat_status ) && level.turret_heat_status < level.turret_heat_max )
+//	if( isdefined( level.overheat_status ) && level.turret_heat_status < level.turret_heat_max )
 //		thread overheat_hud_drain();
 //}
 //
@@ -681,7 +674,7 @@ minigun_sound_spindown() {
 //	if( ( value > cold ) && ( value <= warm ) )
 //	{
 //		iPercentage = int( value * ( 100 / warm ) );
-//		for( colorIndex = 0 ; colorIndex < SetValue.size ; colorIndex++ )
+//		for ( colorIndex = 0 ; colorIndex < SetValue.size ; colorIndex++ )
 //		{
 //			difference = ( color_warm[ colorIndex ] - color_cold[ colorIndex ] );
 //			increment = ( difference / 100 );
@@ -691,7 +684,7 @@ minigun_sound_spindown() {
 //	else if( ( value > warm ) && ( value <= hot ) )
 //	{
 //		iPercentage = int( ( value - warm ) * ( 100 / ( hot - warm ) ) );
-//		for( colorIndex = 0 ; colorIndex < SetValue.size ; colorIndex++ )
+//		for ( colorIndex = 0 ; colorIndex < SetValue.size ; colorIndex++ )
 //		{
 //			difference = ( color_hot[ colorIndex ] - color_warm[ colorIndex ] );
 //			increment = ( difference / 100 );
@@ -699,13 +692,13 @@ minigun_sound_spindown() {
 //		}
 //	}
 //
-//	if( isDefined( fadeTime ) )
+//	if( isdefined( fadeTime ) )
 //		level.overheat_status fadeOverTime( fadeTime );
 //
-//	if( isDefined( level.overheat_status.color ) )
+//	if( isdefined( level.overheat_status.color ) )
 //		level.overheat_status.color = ( SetValue[ 0 ], SetValue[ 1 ], SetValue[ 2 ] );
 //
-//	if( isDefined( level.overheat_status2.color ) )
+//	if( isdefined( level.overheat_status2.color ) )
 //		level.overheat_status2.color = ( SetValue[ 0 ], SetValue[ 1 ], SetValue[ 2 ] );
 //}
 //
@@ -715,7 +708,7 @@ minigun_sound_spindown() {
 //	level endon( "stop_overheat_drain" );
 //
 //	waitTime = 1.0;
-//	for( ;; )
+//	for ( ;; )
 //	{
 //		if( level.turret_heat_status > 1 )
 //			level.overheat_status.alpha = 1;
@@ -728,10 +721,10 @@ minigun_sound_spindown() {
 //		overheat_setColor( level.turret_heat_status, waitTime );
 //		wait waitTime;
 //
-//		if( isDefined( level.overheat_status ) && level.turret_heat_status <= 1 )
+//		if( isdefined( level.overheat_status ) && level.turret_heat_status <= 1 )
 //			level.overheat_status.alpha = 0;
 //
-//		if( isDefined( level.overheat_status2 ) && level.turret_heat_status <= 1 )
+//		if( isdefined( level.overheat_status2 ) && level.turret_heat_status <= 1 )
 //			level.overheat_status2.alpha = 0;
 //	}
 //}
@@ -745,7 +738,7 @@ minigun_sound_spindown() {
 //	difference = ( level.turret_heat_status - targetvalue );
 //	frame_difference = ( difference / frames );
 //
-//	for( i = 0; i < frames; i++ )
+//	for ( i = 0; i < frames; i++ )
 //	{
 //		level.turret_heat_status -= frame_difference;
 //		if( level.turret_heat_status < 1 )
@@ -791,6 +784,7 @@ minigun_hints_on() {
 }
 
 minigun_hints_off() {
+
   level.minigunHintFire fadeovertime(.5);
   level.minigunHintFire.alpha = 0;
   level.minigunHintSpin fadeovertime(.5);

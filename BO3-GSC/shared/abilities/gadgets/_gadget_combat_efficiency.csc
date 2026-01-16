@@ -17,7 +17,7 @@
 #namespace _gadget_combat_efficiency;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_combat_efficiency", &__init__, undefined, undefined);
+  system::register("gadget_combat_efficiency", & __init__, undefined, undefined);
 }
 
 function __init__() {}

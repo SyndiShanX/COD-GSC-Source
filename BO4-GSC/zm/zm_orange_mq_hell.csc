@@ -9,30 +9,31 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_sq_modules;
+
 #namespace zm_orange_mq_hell;
 
 preload() {
-  level._effect[# "lantern_moving"] = # "hash_73e8d2cf76175901";
-  level._effect[# "lantern_waiting"] = # "hash_4f1f3e18228ac0a0";
-  level._effect[# "lantern_charging"] = # "hash_7af8fa2d13abeeb1";
-  level._effect[# "lantern_explode"] = # "hash_306c49d67fca8485";
-  level._effect[# "lantern_soul"] = # "hash_59977c4c851916e0";
-  level._effect[# "hash_7336b7a4cc9d2581"] = # "hash_1a06427eff8dfe13";
-  clientfield::register("scriptmover", "" + # "hash_6aaf03a4358f45f5", 24000, 1, "counter", &function_f1749965, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6a4317183d0ca452", 24000, 1, "counter", &function_44aa40e0, 0, 0);
-  clientfield::register("world", "" + # "lava_init", 24000, 1, "int", &lava_init, 0, 0);
-  clientfield::register("world", "" + # "lava_control", 24000, 2, "int", &lava_control, 0, 0);
-  clientfield::register("world", "" + # "hash_72b5b0359ca48427", 24000, 1, "int", &function_bd0807f3, 0, 0);
-  clientfield::register("world", "" + # "hash_5e69ee96304ec40b", 24000, 1, "int", &function_eb481d38, 0, 0);
-  clientfield::register("vehicle", "" + # "lantern_fx", 24000, 2, "int", &function_f490f0e5, 0, 0);
-  clientfield::register("vehicle", "" + # "lantern_explode_fx", 24000, 1, "counter", &play_lantern_explode_fx, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_78b8d89d34b32241", 24000, 2, "int", &function_19f2f0f2, 0, 0);
-  clientfield::register("scriptmover", "" + # "lantern_outline", 24000, 1, "int", &function_cbc22c9d, 0, 0);
-  zm_sq_modules::function_d8383812(#"sc_lantern_1", 24000, "sc_lantern_1", 400, level._effect[# "lantern_soul"], level._effect[# "hash_7336b7a4cc9d2581"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lantern_2", 24000, "sc_lantern_2", 400, level._effect[# "lantern_soul"], level._effect[# "hash_7336b7a4cc9d2581"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lantern_3", 24000, "sc_lantern_3", 400, level._effect[# "lantern_soul"], level._effect[# "hash_7336b7a4cc9d2581"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lantern_4", 24000, "sc_lantern_4", 400, level._effect[# "lantern_soul"], level._effect[# "hash_7336b7a4cc9d2581"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lantern_end", 24000, "sc_lantern_end", 400, level._effect[# "lantern_soul"], level._effect[# "hash_7336b7a4cc9d2581"], undefined, undefined, 1);
+  level._effect[#"lantern_moving"] = #"hash_73e8d2cf76175901";
+  level._effect[#"lantern_waiting"] = #"hash_4f1f3e18228ac0a0";
+  level._effect[#"lantern_charging"] = #"hash_7af8fa2d13abeeb1";
+  level._effect[#"lantern_explode"] = #"hash_306c49d67fca8485";
+  level._effect[#"lantern_soul"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_7336b7a4cc9d2581"] = #"hash_1a06427eff8dfe13";
+  clientfield::register("scriptmover", "" + #"hash_6aaf03a4358f45f5", 24000, 1, "counter", &function_f1749965, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6a4317183d0ca452", 24000, 1, "counter", &function_44aa40e0, 0, 0);
+  clientfield::register("world", "" + #"lava_init", 24000, 1, "int", &lava_init, 0, 0);
+  clientfield::register("world", "" + #"lava_control", 24000, 2, "int", &lava_control, 0, 0);
+  clientfield::register("world", "" + #"hash_72b5b0359ca48427", 24000, 1, "int", &function_bd0807f3, 0, 0);
+  clientfield::register("world", "" + #"hash_5e69ee96304ec40b", 24000, 1, "int", &function_eb481d38, 0, 0);
+  clientfield::register("vehicle", "" + #"lantern_fx", 24000, 2, "int", &function_f490f0e5, 0, 0);
+  clientfield::register("vehicle", "" + #"lantern_explode_fx", 24000, 1, "counter", &play_lantern_explode_fx, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_78b8d89d34b32241", 24000, 2, "int", &function_19f2f0f2, 0, 0);
+  clientfield::register("scriptmover", "" + #"lantern_outline", 24000, 1, "int", &function_cbc22c9d, 0, 0);
+  zm_sq_modules::function_d8383812(#"sc_lantern_1", 24000, "sc_lantern_1", 400, level._effect[#"lantern_soul"], level._effect[#"hash_7336b7a4cc9d2581"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lantern_2", 24000, "sc_lantern_2", 400, level._effect[#"lantern_soul"], level._effect[#"hash_7336b7a4cc9d2581"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lantern_3", 24000, "sc_lantern_3", 400, level._effect[#"lantern_soul"], level._effect[#"hash_7336b7a4cc9d2581"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lantern_4", 24000, "sc_lantern_4", 400, level._effect[#"lantern_soul"], level._effect[#"hash_7336b7a4cc9d2581"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lantern_end", 24000, "sc_lantern_end", 400, level._effect[#"lantern_soul"], level._effect[#"hash_7336b7a4cc9d2581"], undefined, undefined, 1);
 }
 
 function_f1749965(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -96,17 +97,17 @@ function_f490f0e5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    util::playFXOnTag(localclientnum, level._effect[# "lantern_moving"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"lantern_moving"], self, "tag_origin");
     return;
   }
 
   if(newval == 2) {
-    util::playFXOnTag(localclientnum, level._effect[# "lantern_waiting"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"lantern_waiting"], self, "tag_origin");
     return;
   }
 
   if(newval == 3) {
-    util::playFXOnTag(localclientnum, level._effect[# "lantern_charging"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"lantern_charging"], self, "tag_origin");
   }
 }
 
@@ -142,7 +143,7 @@ function_cbc22c9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 play_lantern_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "lantern_explode"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"lantern_explode"], self, "tag_origin");
 }
 
 function_bd0807f3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

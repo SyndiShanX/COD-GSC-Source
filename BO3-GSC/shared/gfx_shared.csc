@@ -13,7 +13,7 @@
 
 function setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, setconstants) {
   num_consts = getstructfieldorzero(bundle, stageprefix + "num_consts");
-  for(constidx = 0; constidx < num_consts; constidx++) {
+  for (constidx = 0; constidx < num_consts; constidx++) {
     constprefix = stageprefix + "c";
     if(constidx < 10) {
       constprefix = constprefix + "0";
@@ -26,10 +26,10 @@ function setstage(localclientnum, bundle, filterid, stageprefix, stagelength, ac
     iscolor = isstring(channels) && (channels == "color" || channels == ("color+alpha"));
     animname = getstructfield(bundle, constprefix + "anm");
     values = [];
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
       values[i] = 0;
     }
-    for(chanidx = 0; chanidx < startvalue.size; chanidx++) {
+    for (chanidx = 0; chanidx < startvalue.size; chanidx++) {
       delaytime = delays[(iscolor ? 0 : chanidx)] * 1000;
       if(accumtime > delaytime && stagelength > delaytime) {
         timeratio = (accumtime - delaytime) / (stagelength - delaytime);
@@ -89,7 +89,9 @@ function setstage(localclientnum, bundle, filterid, stageprefix, stagelength, ac
       }
       values[chanidx] = startvalue[chanidx];
     }
-    [[setconstants]](localclientnum, getstructfield(bundle, constprefix + "name"), filterid, values);
+    [
+      [setconstants]
+    ](localclientnum, getstructfield(bundle, constprefix + "name"), filterid, values);
   }
   stageconstants = [];
   stageconstants[0] = totalaccumtime;
@@ -151,7 +153,7 @@ function getshaderconstantvalue(bundle, constprefix, constname, delay) {
 
 function getstructfieldorzero(bundle, field) {
   ret = getstructfield(bundle, field);
-  if(!isDefined(ret)) {
+  if(!isdefined(ret)) {
     ret = 0;
   }
   return ret;

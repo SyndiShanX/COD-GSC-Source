@@ -17,11 +17,10 @@ init() {
 
 turbine_activated_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval & 1) {
-    if(newval & 2) {
+    if(newval & 2)
       self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["turbine_low"], "tag_animate");
-    } else {
+    else
       self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["turbine_on"], "tag_animate");
-    }
   } else if(newval & 2)
     self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["turbine_med"], "tag_animate");
 
@@ -35,9 +34,8 @@ turbine_activated_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     playsound = 1;
   }
 
-  if(playsound) {
-    self playSound(0, "zmb_turbine_pulse");
-  }
+  if(playsound)
+    self playsound(0, "zmb_turbine_pulse");
 }
 
 #using_animtree("zombie_turbine");

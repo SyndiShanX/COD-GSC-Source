@@ -17,17 +17,16 @@ opticsthermal_think() {
   self.orbitalthermalmode = 0;
   self.has_opticsthermal = 0;
 
-  for(;;) {
+  for (;;) {
     var_1 = !self.has_opticsthermal;
     var_1 = var_1 | (self.has_opticsthermal && self playerads() < var_0);
     var_1 = var_1 | self isusingturret();
     var_1 = var_1 | self.orbitalthermalmode;
 
-    if(var_1) {
+    if(var_1)
       opticsthermal_blur_off(self);
-    } else {
+    else
       opticsthermal_blur(self, 0.05);
-    }
 
     wait 0.05;
   }

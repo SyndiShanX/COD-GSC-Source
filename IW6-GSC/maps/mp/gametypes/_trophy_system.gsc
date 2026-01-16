@@ -63,13 +63,12 @@ trophyUsed(grenade) {
   trophy.owner = self;
   trophy.isTallForWaterChecks = true;
 
-  if(isDefined(self.trophyRemainingAmmo) && self.trophyRemainingAmmo > 0) {
+  if(isDefined(self.trophyRemainingAmmo) && self.trophyRemainingAmmo > 0)
     trophy.ammo = self.trophyRemainingAmmo;
-  } else if(is_aliens()) {
+  else if(is_aliens())
     trophy.ammo = 5;
-  } else {
+  else
     trophy.ammo = 2;
-  }
 
   offset_magnitude = 16;
   offset_vector = AnglesToUp(trophy.angles);
@@ -91,11 +90,10 @@ trophyUsed(grenade) {
   trophy maps\mp\gametypes\_weapons::makeExplosiveTargetableByAI(true);
   trophy maps\mp\gametypes\_weapons::explosiveHandleMovers(placement["entity"], true);
 
-  if(level.teamBased) {
+  if(level.teamBased)
     trophy maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-  } else {
+  else
     trophy maps\mp\_entityheadicons::setPlayerHeadIcon(self, (0, 0, 65));
-  }
 
   self onTacticalEquipmentPlanted(trophy);
 
@@ -105,9 +103,8 @@ trophyUsed(grenade) {
     waitframe();
     grenade Delete();
   }
-  if(is_aliens()) {
+  if(is_aliens())
     self TakeWeapon("alientrophy_mp");
-  }
 }
 
 trophyUseListener(owner) {
@@ -136,7 +133,7 @@ trophyUseListener(owner) {
           ](offhandweapon))) {
           ammo_count = owner GetAmmoCount(offhandweapon);
           if(ammo_count > 0) {
-            owner setLowerMessage("slots_full", &"ALIEN_COLLECTIBLES_TACTICAL_FULL", 3);
+            owner setLowerMessage("slots_full", & "ALIEN_COLLECTIBLES_TACTICAL_FULL", 3);
             cannot_pick_up = true;
             break;
           }
@@ -185,29 +182,25 @@ trophyActive(owner) {
   owner endon("disconnect");
   self endon("death");
 
-  if(is_aliens() && self.model == "mp_weapon_alien_crate") {
+  if(is_aliens() && self.model == "mp_weapon_alien_crate")
     position = self.origin;
-  } else {
+  else
     position = self GetTagOrigin("camera_jnt");
-  }
 
-  if(isDefined(self.cameraOffset)) {
+  if(isDefined(self.cameraOffset))
     self.cameraOffsetVector = (0, 0, self.cameraOffset);
-  } else {
+  else
     self.cameraOffsetVector = position - self.origin;
-  }
   normalProtectionDistanceSquared = 256 * 256;
   specialProtectionDistanceSquared = 384 * 384;
 
   self.killCamEnt = spawn("script_model", position + (0, 0, 5));
   self.killCamEnt LinkTo(self);
 
-  if(!isDefined(level.grenades)) {
+  if(!isDefined(level.grenades))
     level.grenades = [];
-  }
-  if(!isDefined(level.missiles)) {
+  if(!isDefined(level.missiles))
     level.missiles = [];
-  }
 
   for(;;) {
     if(isDefined(self.disabled) ||
@@ -249,16 +242,14 @@ trophyActive(owner) {
         }
       }
 
-      if(!isDefined(grenade.owner)) {
+      if(!isDefined(grenade.owner))
         grenade.owner = GetMissileOwner(grenade);
-      }
 
       if(isDefined(grenade.owner) && !(owner isEnemy(grenade.owner))) {
         continue;
       }
-      if(isDefined(self.cameraOffsetVector)) {
+      if(isDefined(self.cameraOffsetVector))
         position = self.origin + self.cameraOffsetVector;
-      }
 
       grenadeDistanceSquared = DistanceSquared(grenade.origin, position);
 
@@ -278,12 +269,10 @@ trophyActive(owner) {
               owner notify("destroyed_killstreak", "trophy_mp");
             }
 
-            if(isDefined(level.chopper_fx["explode"]["medium"])) {
+            if(isDefined(level.chopper_fx["explode"]["medium"]))
               playFX(level.chopper_fx["explode"]["medium"], grenade.origin);
-            }
-            if(isDefined(level.barrelExpSound)) {
+            if(isDefined(level.barrelExpSound))
               grenade playSound(level.barrelExpSound);
-            }
           }
 
           owner thread projectileExplode(grenade, self);
@@ -406,9 +395,8 @@ trophyWaitForDetonation() {
   wait(3);
 
   if(isDefined(self)) {
-    if(isDefined(self.killCamEnt)) {
+    if(isDefined(self.killCamEnt))
       self.killCamEnt delete();
-    }
 
     self equipmentDeleteVfx();
 

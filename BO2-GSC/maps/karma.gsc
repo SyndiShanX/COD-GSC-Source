@@ -49,11 +49,10 @@ main() {
   level thread maps\karma_civilians::civ_init();
   maps\_civilians::init_civilians();
   level thread maps\createart\karma_art::main();
-  a_m_clips = getEntArray("compile_paths_clips", "targetname");
+  a_m_clips = getentarray("compile_paths_clips", "targetname");
 
-  foreach(m_clip in a_m_clips) {
-    m_clip delete();
-  }
+  foreach(m_clip in a_m_clips)
+  m_clip delete();
 }
 
 on_player_connect() {
@@ -158,9 +157,8 @@ spawn_func_harper() {
   level.ai_harper = self;
   flag_wait("level.player");
 
-  if(level.player get_story_stat("HARPER_SCARRED")) {
-    self setModel("c_usa_unioninsp_harper_scar_cin_fb");
-  }
+  if(level.player get_story_stat("HARPER_SCARRED"))
+    self setmodel("c_usa_unioninsp_harper_scar_cin_fb");
 }
 
 spawn_func_salazar() {
@@ -196,13 +194,12 @@ skipto_karma_2() {
 }
 
 load_gumps_karma() {
-  if(is_after_skipto("construction")) {
+  if(is_after_skipto("construction"))
     load_gump("karma_gump_club");
-  } else if(is_after_skipto("dropdown")) {
+  else if(is_after_skipto("dropdown"))
     load_gump("karma_gump_construction");
-  } else {
+  else
     load_gump("karma_gump_checkin");
-  }
 }
 
 skipto_cleanup() {

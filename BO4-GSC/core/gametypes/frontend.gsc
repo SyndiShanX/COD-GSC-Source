@@ -10,6 +10,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\util_shared;
+
 #namespace frontend;
 
 callback_void() {}
@@ -337,3 +338,4 @@ function_9eac333e() {
   row = getdvarint(#"hash_7cc425fc91c8c499", 0);
   luinotifyevent(#"hash_405727f8a59698b1", 2, tablenum - 1, row);
 }
+

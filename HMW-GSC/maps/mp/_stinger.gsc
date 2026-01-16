@@ -7,7 +7,7 @@ initstingerusage() {
 }
 
 resetstingerlocking() {
-  if(!isDefined(self.stingeruseentered)) {
+  if(!isdefined(self.stingeruseentered)) {
     return;
   }
   self.stingeruseentered = undefined;
@@ -23,24 +23,21 @@ resetstingerlockingondeath() {
   self endon("ResetStingerLockingOnDeath");
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     self waittill("death");
     resetstingerlocking();
   }
 }
 
 stillvalidstingerlock(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return 0;
-  }
 
-  if(!self worldpointinreticle_circle(var_0.origin, 65, 85)) {
+  if(!self worldpointinreticle_circle(var_0.origin, 65, 85))
     return 0;
-  }
 
-  if(isDefined(level.ac130) && self.stingertarget == level.ac130.planemodel && !isDefined(level.ac130player)) {
+  if(isdefined(level.ac130) && self.stingertarget == level.ac130.planemodel && !isdefined(level.ac130player))
     return 0;
-  }
 
   return 1;
 }
@@ -50,14 +47,12 @@ loopstingerlockingfeedback() {
   self endon("stop_javelin_locking_feedback");
   level endon("game_ended");
 
-  for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingertarget) && self.stingertarget == level.chopper.gunner) {
+  for (;;) {
+    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
       level.chopper.gunner playlocalsound("missile_locking");
-    }
 
-    if(isDefined(level.ac130player) && isDefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel) {
+    if(isdefined(level.ac130player) && isdefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
       level.ac130player playlocalsound("missile_locking");
-    }
 
     self playlocalsound("h2_stinger_locking");
     self playrumbleonentity("ac130_25mm_fire");
@@ -70,14 +65,12 @@ loopstingerlockedfeedback() {
   self endon("stop_javelin_locked_feedback");
   level endon("game_ended");
 
-  for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingertarget) && self.stingertarget == level.chopper.gunner) {
+  for (;;) {
+    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
       level.chopper.gunner playlocalsound("missile_locking");
-    }
 
-    if(isDefined(level.ac130player) && isDefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel) {
+    if(isdefined(level.ac130player) && isdefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
       level.ac130player playlocalsound("missile_locking");
-    }
 
     self playlocalsound("h2_stinger_locked");
     self playrumbleonentity("ac130_25mm_fire");
@@ -86,36 +79,34 @@ loopstingerlockedfeedback() {
 }
 
 locksighttest(var_0) {
-  var_1 = self getEye();
+  var_1 = self geteye();
 
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     return 0;
-  }
 
   var_2 = sighttracepassed(var_1, var_0.origin, 0, var_0);
 
-  if(var_2) {
+  if(var_2)
     return 1;
-  }
 
   var_3 = var_0 getpointinbounds(1, 0, 0);
   var_2 = sighttracepassed(var_1, var_3, 0, var_0);
 
-  if(var_2) {
+  if(var_2)
     return 1;
-  }
 
   var_4 = var_0 getpointinbounds(-1, 0, 0);
   var_2 = sighttracepassed(var_1, var_4, 0, var_0);
 
-  if(var_2) {
+  if(var_2)
     return 1;
-  }
 
   return 0;
 }
 
-stingerdebugdraw(var_0) {}
+stingerdebugdraw(var_0) {
+
+}
 
 softsighttest() {
   var_0 = 500;
@@ -125,9 +116,8 @@ softsighttest() {
     return 1;
   }
 
-  if(self.stingerlostsightlinetime == 0) {
+  if(self.stingerlostsightlinetime == 0)
     self.stingerlostsightlinetime = gettime();
-  }
 
   var_1 = gettime() - self.stingerlostsightlinetime;
 
@@ -142,31 +132,26 @@ softsighttest() {
 GetTargetList() {
   targets = [];
 
-  if(maps\mp\_utility::invirtuallobby()) {
+  if(maps\mp\_utility::invirtuallobby())
     return targets;
-  }
 
   if(level.teamBased) {
-    if(isDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self)) {
+    if(IsDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self))
       targets[targets.size] = level.chopper;
-    }
 
-    if(isDefined(level.ac130player) && level.ac130player.team != self.team) {
+    if(isDefined(level.ac130player) && level.ac130player.team != self.team)
       targets[targets.size] = level.ac130.planemodel;
-    }
 
     if(isDefined(level.harriers)) {
       foreach(harrier in level.harriers) {
-        if(isDefined(harrier) && (harrier.team != self.team || (isDefined(harrier.owner) && harrier.owner == self))) {
+        if(isDefined(harrier) && (harrier.team != self.team || (isDefined(harrier.owner) && harrier.owner == self)))
           targets[targets.size] = harrier;
-        }
       }
     }
 
     if(level.UAVModels[level.otherTeam[self.team]].size) {
-      foreach(UAV in level.UAVModels[level.otherTeam[self.team]]) {
-        targets[targets.size] = UAV;
-      }
+      foreach(UAV in level.UAVModels[level.otherTeam[self.team]])
+      targets[targets.size] = UAV;
     }
 
     if(isDefined(level.littleBird)) {
@@ -174,25 +159,22 @@ GetTargetList() {
         if(!isDefined(bird)) {
           continue;
         }
-        if(self.team != bird.owner.team || self == bird.owner) {
+        if(self.team != bird.owner.team || self == bird.owner)
           targets[targets.size] = bird;
-        }
       }
     }
 
   } else {
-    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(IsDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
       targets[targets.size] = level.chopper;
 
-    if(isDefined(level.ac130player)) {
+    if(isDefined(level.ac130player))
       targets[targets.size] = level.ac130.planemodel;
-    }
 
     if(isDefined(level.harriers)) {
       foreach(harrier in level.harriers) {
-        if(isDefined(harrier)) {
+        if(isDefined(harrier))
           targets[targets.size] = harrier;
-        }
       }
     }
 
@@ -221,7 +203,7 @@ stingerusageloop() {
   var_0 = 1000;
   initstingerusage();
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(self playerads() < 0.95) {
@@ -241,9 +223,8 @@ stingerusageloop() {
 
     self.stingeruseentered = 1;
 
-    if(!isDefined(self.stingerstage)) {
+    if(!isdefined(self.stingerstage))
       self.stingerstage = 0;
-    }
 
     stingerdebugdraw(self.stingertarget);
 
@@ -256,14 +237,13 @@ stingerusageloop() {
       var_3 = [];
 
       foreach(var_5 in var_2) {
-        if(!isDefined(var_5)) {
+        if(!isdefined(var_5)) {
           continue;
         }
         var_6 = self worldpointinreticle_circle(var_5.origin, 65, 75);
 
-        if(var_6) {
+        if(var_6)
           var_3[var_3.size] = var_5;
-        }
       }
 
       if(var_3.size == 0) {
@@ -295,9 +275,8 @@ stingerusageloop() {
       var_10 = gettime() - self.stingerlockstarttime;
 
       if(maps\mp\_utility::_hasperk("specialty_fasterlockon")) {
-        if(var_10 < var_0 * 0.5) {
+        if(var_10 < var_0 * 0.5)
           continue;
-        }
       } else if(var_10 < var_0) {
         continue;
       }

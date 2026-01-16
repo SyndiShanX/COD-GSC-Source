@@ -40,9 +40,8 @@ skipto_hangar() {
   level.player_soct_test_for_water = 1;
   flag_set("player_drone_crashes_chain_reaction");
 
-  if(-1) {
+  if(-1)
     level thread maps\pakistan_warehouse::pak3_new_ending();
-  }
 }
 
 hangar_main() {
@@ -77,18 +76,16 @@ warehouse_cleanup() {
 hangar_approach_swap_to_soct() {
   wait 0.1;
 
-  if(isDefined(level.harper)) {
+  if(isDefined(level.harper))
     level.harper thread say_dialog("harp_dammit_we_lost_the_0", 1);
-  }
 
   if(level.player.vehicle_state == 2) {
     flag_set("vehicle_can_switch");
     level.override_player_scot_node = "scot_swapto_node_at_end";
     level.player.viewlockedentity notify("change_seat");
 
-    while(level.player.vehicle_state == 2) {
+    while(level.player.vehicle_state == 2)
       wait 0.05;
-    }
 
     flag_clear("vehicle_can_switch");
     pak3_kill_vehicle(level.vh_player_drone);
@@ -98,19 +95,16 @@ hangar_approach_swap_to_soct() {
   level notify("end_player_in_soct_fail");
   level notify("hanger_chase_started");
 
-  if(-1) {
+  if(-1)
     level thread collision_chain_reaction_hanger_effects_new_version();
-  }
 
   level.vh_player_soct set_turret_target_flags(0, 1);
 
-  if(isDefined(level.vh_salazar_soct)) {
+  if(isDefined(level.vh_salazar_soct))
     level.vh_salazar_soct set_turret_target_flags(0, 1);
-  }
 
-  if(does_super_soct_exist()) {
+  if(does_super_soct_exist())
     level.vh_super_soct set_turret_target_flags(0, 1);
-  }
 }
 
 hanger_wait_for_player_to_enter() {
@@ -172,17 +166,14 @@ player_enters_hanger() {
   level.vh_player_soct waittill("near_goal");
   level.player freezecontrols(0);
 
-  if(isDefined(level.harper)) {
+  if(isDefined(level.harper))
     level.harper delete();
-  }
 
-  if(isDefined(level.salazar)) {
+  if(isDefined(level.salazar))
     level.salazar delete();
-  }
 
-  if(isDefined(level.han)) {
+  if(isDefined(level.han))
     level.han delete();
-  }
 
   level clientnotify("end_lvl");
   setmusicstate("PAKISTAN_BURNED");
@@ -197,9 +188,8 @@ player_enters_hanger() {
   level thread maps\pakistan_evac::assign_spotlight_to_end_scene(8);
   level thread hide_harper(0, undefined);
 
-  if(does_super_soct_exist()) {
+  if(does_super_soct_exist())
     pak3_kill_vehicle(level.vh_super_soct);
-  }
 
   level clientnotify("exit_vehicle");
 
@@ -258,11 +248,10 @@ player_enters_hanger() {
   level.vh_player_soct notify("remove_fx");
   level.vh_player_soct lights_off();
 
-  if(level.harper_face_burn == 1) {
+  if(level.harper_face_burn == 1)
     level.harper force_goal(v_harper_idle_pos, 16, 0);
-  } else {
+  else
     level.harper force_goal(v_harper_idle_pos, 16, 0);
-  }
 
   level thread maps\createart\pakistan_3_art::standoff();
   wait 1000;
@@ -282,9 +271,8 @@ set_objective_when_player_ready(delay, str_player_scene) {
 burned_dialog(str_player, str_harper) {
   level.player say_dialog(str_player);
 
-  if(isDefined(str_harper)) {
+  if(isDefined(str_harper))
     level.harper say_dialog(str_harper);
-  }
 }
 
 attach_steering_wheel() {
@@ -377,22 +365,19 @@ collision_chain_reaction_hanger_effects_new_version() {
 chain_reaction_vo() {
   wait 2;
 
-  if(isDefined(level.harper)) {
+  if(isDefined(level.harper))
     level.harper thread say_dialog("harp_collision_s_started_0");
-  }
 
   wait 2;
   level.player thread say_dialog("sect_evac_point_s_up_ahea_0");
 }
 
 avoid_flames_dialog(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
-  if(isDefined(level.harper)) {
+  if(isDefined(level.harper))
     level.harper thread say_dialog("harp_avoid_the_flames_0", delay);
-  }
 }
 
 explode_pipes(wait_time) {
@@ -432,13 +417,11 @@ standoff() {
 }
 
 assign_spotlight_to_end_scene(delay) {
-  if(isDefined(delay)) {
+  if(isDefined(delay))
     wait(delay);
-  }
 
-  if(isDefined(level.vh_player_soct)) {
+  if(isDefined(level.vh_player_soct))
     level.vh_player_soct notify("remove_fx");
-  }
 
   wait 0.1;
   exploder(799);
@@ -451,9 +434,8 @@ hide_scene_names(str_main_scene) {
     for(i = 0; i < a_ai.size; i++) {
       e_ent = a_ai[i];
 
-      if(isDefined(e_ent.name)) {
+      if(isDefined(e_ent.name))
         e_ent.name = "";
-      }
     }
   }
 }
@@ -504,7 +486,8 @@ standoff_ai_setup() {
   level notify("standoff_ai_setup_done");
 }
 
-soldier_stance(str_suffix, str_align_targetname) {}
+soldier_stance(str_suffix, str_align_targetname) {
+}
 
 standoff_aim_chinese() {
   self endon("death");
@@ -533,27 +516,23 @@ standoff_aim_seal() {
 does_super_soct_exist() {
   b_super_soct_exists = 0;
 
-  if(isDefined(level.vh_super_soct) && (isDefined(level.vh_super_soct.classname) && level.vh_super_soct.classname == "script_vehicle")) {
+  if(isDefined(level.vh_super_soct) && (isDefined(level.vh_super_soct.classname) && level.vh_super_soct.classname == "script_vehicle"))
     b_super_soct_exists = 1;
-  }
 
   return b_super_soct_exists;
 }
 
 salazar_and_han_run_to_evac_point(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 
-  if(isDefined(level.salazar) && isalive(level.salazar)) {
+  if(isDefined(level.salazar) && isalive(level.salazar))
     level.salazar delete();
-  }
 
   level.salazar = init_hero("salazar");
 
-  if(isDefined(level.han) && isalive(level.han)) {
+  if(isDefined(level.han) && isalive(level.han))
     level.han delete();
-  }
 
   level.han = init_hero("han");
   a_ents = [];

@@ -12,9 +12,8 @@ init() {
 }
 
 add_vehicletype_callback(vehicletype, callback) {
-  if(!isDefined(level.vehicletypecallbackarray)) {
+  if(!isDefined(level.vehicletypecallbackarray))
     init();
-  }
 
   level.vehicletypecallbackarray[vehicletype] = callback;
 }
@@ -22,9 +21,8 @@ add_vehicletype_callback(vehicletype, callback) {
 vehicle_spawned_callback(localclientnum) {
   vehicletype = self.vehicletype;
 
-  if(isDefined(level.vehicletypecallbackarray[vehicletype])) {
+  if(isDefined(level.vehicletypecallbackarray[vehicletype]))
     self thread[[level.vehicletypecallbackarray[vehicletype]]](localclientnum);
-  }
 }
 
 dirt_overlay_control(localclientnum) {
@@ -55,13 +53,11 @@ correct_surface_type_for_screen_fx() {
   right_rear = self getwheelsurface("back_right");
   left_rear = self getwheelsurface("back_left");
 
-  if(dirt_surface_type(right_rear)) {
+  if(dirt_surface_type(right_rear))
     return "dirt";
-  }
 
-  if(dirt_surface_type(left_rear)) {
+  if(dirt_surface_type(left_rear))
     return "dirt";
-  }
 
   return "dust";
 }
@@ -69,29 +65,27 @@ correct_surface_type_for_screen_fx() {
 play_screen_fx_dirt(localclientnum) {
   pick_one = randomintrange(0, 4);
 
-  if(pick_one == 0) {
+  if(pick_one == 0)
     animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
-  } else if(pick_one == 1) {
+  else if(pick_one == 1)
     animateui(localclientnum, "fullscreen_dirt", "dirt_right_splash", "in", 0);
-  } else if(pick_one == 2) {
+  else if(pick_one == 2)
     animateui(localclientnum, "fullscreen_dirt", "dirt_left_splash", "in", 0);
-  } else {
+  else
     animateui(localclientnum, "fullscreen_dirt", "blurred_dirt_random", "in", 0);
-  }
 }
 
 play_screen_fx_dust(localclientnum) {
   pick_one = randomintrange(0, 4);
 
-  if(pick_one == 0) {
+  if(pick_one == 0)
     animateui(localclientnum, "fullscreen_dust", "dust", "in", 0);
-  } else if(pick_one == 1) {
+  else if(pick_one == 1)
     animateui(localclientnum, "fullscreen_dust", "dust_right_splash", "in", 0);
-  } else if(pick_one == 2) {
+  else if(pick_one == 2)
     animateui(localclientnum, "fullscreen_dust", "dust_left_splash", "in", 0);
-  } else {
+  else
     animateui(localclientnum, "fullscreen_dust", "blurred_dust_random", "in", 0);
-  }
 }
 
 play_driving_fx_firstperson(localclientnum, speed, speed_fraction) {
@@ -102,18 +96,16 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction) {
     if(pitch > -10.0) {
       current_additional_time = 0;
 
-      if(pitch < 10.0) {
+      if(pitch < 10.0)
         current_additional_time = 1000 * ((pitch - 10.0) / (-10.0 - 10.0));
-      }
 
       if(self.last_screen_dirt + self.screen_dirt_delay + current_additional_time < getrealtime()) {
         screen_fx_type = self correct_surface_type_for_screen_fx();
 
-        if(screen_fx_type == "dirt") {
+        if(screen_fx_type == "dirt")
           play_screen_fx_dirt(localclientnum);
-        } else {
+        else
           play_screen_fx_dust(localclientnum);
-        }
 
         self.last_screen_dirt = getrealtime();
         self.screen_dirt_delay = randomintrange(250, 500);
@@ -132,20 +124,17 @@ play_driving_fx(localclientnum) {
     speed = self getspeed();
     maxspeed = self getmaxspeed();
 
-    if(speed < 0) {
+    if(speed < 0)
       maxspeed = self getmaxreversespeed();
-    }
 
-    if(maxspeed > 0) {
+    if(maxspeed > 0)
       speed_fraction = abs(speed) / maxspeed;
-    } else {
+    else
       speed_fraction = 0;
-    }
 
     if(self iswheelcolliding("back_left") || self iswheelcolliding("back_right")) {
-      if(self islocalclientdriver(localclientnum)) {
+      if(self islocalclientdriver(localclientnum))
         play_driving_fx_firstperson(localclientnum, speed, speed_fraction);
-      }
     }
 
     wait 0.1;
@@ -164,12 +153,12 @@ collision_thread(localclientnum) {
       if(isDefined(player)) {
         if(hit_intensity > 15) {
           volume = get_impact_vol_from_speed();
-          id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
+          id = playsound(0, "veh_suspension_lg_hd", self.origin, volume);
           player earthquake(0.5, 0.5, player.origin, 200);
           player playrumbleonentity(localclientnum, "damage_heavy");
         } else {
           volume = get_impact_vol_from_speed();
-          id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
+          id = playsound(0, "veh_suspension_lg_lt", self.origin, volume);
           player earthquake(0.3, 0.3, player.origin, 200);
           player playrumbleonentity(localclientnum, "damage_light");
         }
@@ -189,7 +178,7 @@ jump_landing_thread(localclientnum) {
 
       if(isDefined(player)) {
         volume = get_impact_vol_from_speed();
-        id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
+        id = playsound(0, "veh_suspension_lg_hd", self.origin, volume);
         player earthquake(0.7, 1.2, player.origin, 200);
         player playrumbleonentity(localclientnum, "damage_heavy");
       }
@@ -208,7 +197,7 @@ suspension_thread(localclientnum) {
 
       if(isDefined(player)) {
         volume = get_impact_vol_from_speed();
-        id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
+        id = playsound(0, "veh_suspension_lg_lt", self.origin, volume);
         player playrumbleonentity(localclientnum, "damage_light");
       }
     }

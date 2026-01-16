@@ -8,12 +8,12 @@
 #include maps\mp\_ambientpackage;
 
 main() {
-  array_thread(getEntArray("advertisement", "targetname"), ::advertisements);
+  array_thread(getentarray("advertisement", "targetname"), ::advertisements);
 }
 
 advertisements() {
-  self playLoopSound("amb_" + self.script_noteworthy + "_ad");
+  self playloopsound("amb_" + self.script_noteworthy + "_ad");
   self waittill("damage");
   self stoploopsound();
-  self playLoopSound("amb_" + self.script_noteworthy + "_damaged_ad");
+  self playloopsound("amb_" + self.script_noteworthy + "_damaged_ad");
 }

@@ -55,20 +55,20 @@ init_powerups() {
   if(!isDefined(level.zombie_special_drop_array)) {
     level.zombie_special_drop_array = [];
   }
-  add_zombie_powerup("nuke", "zombie_bomb", &"ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
-  add_zombie_powerup("insta_kill", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL");
-  add_zombie_powerup("double_points", "zombie_x2_icon", &"ZOMBIE_POWERUP_DOUBLE_POINTS");
-  add_zombie_powerup("full_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("nuke", "zombie_bomb", & "ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
+  add_zombie_powerup("insta_kill", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL");
+  add_zombie_powerup("double_points", "zombie_x2_icon", & "ZOMBIE_POWERUP_DOUBLE_POINTS");
+  add_zombie_powerup("full_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO");
   if(!level.mutators["mutator_noBoards"]) {
-    add_zombie_powerup("carpenter", "zombie_carpenter", &"ZOMBIE_POWERUP_MAX_AMMO");
+    add_zombie_powerup("carpenter", "zombie_carpenter", & "ZOMBIE_POWERUP_MAX_AMMO");
   }
   if(!level.mutators["mutator_noMagicBox"]) {
-    add_zombie_powerup("fire_sale", "zombie_firesale", &"ZOMBIE_POWERUP_MAX_AMMO");
+    add_zombie_powerup("fire_sale", "zombie_firesale", & "ZOMBIE_POWERUP_MAX_AMMO");
   }
-  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", &"ZOMBIE_POWERUP_MAX_AMMO");
-  add_zombie_powerup("all_revive", "zombie_revive", &"ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", & "ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("all_revive", "zombie_revive", & "ZOMBIE_POWERUP_MAX_AMMO");
   add_zombie_special_drop("dog");
-  add_zombie_powerup("minigun", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", level._effect["minigun_pickup"]);
+  add_zombie_powerup("minigun", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", level._effect["minigun_pickup"]);
   randomize_powerups();
   level.zombie_powerup_index = 0;
   randomize_powerups();
@@ -279,7 +279,7 @@ add_zombie_powerup(powerup_name, model_name, hint, fx) {
   }
   PrecacheModel(model_name);
   PrecacheString(hint);
-  struct = spawnStruct();
+  struct = SpawnStruct();
   if(!isDefined(level.zombie_powerups)) {
     level.zombie_powerups = [];
   }
@@ -332,7 +332,7 @@ powerup_drop(drop_point) {
   } else {
     debug = "random";
   }
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   level.powerup_drop_count++;
   powerup = maps\_zombiemode_net::network_safe_spawn("powerup", 1, "script_model", drop_point + (0, 0, 40));
   valid_drop = false;
@@ -384,7 +384,7 @@ special_powerup_drop(drop_point) {
     return;
   }
   powerup = spawn("script_model", drop_point + (0, 0, 40));
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   valid_drop = false;
   for(i = 0; i < playable_area.size; i++) {
     if(powerup istouching(playable_area[i])) {
@@ -451,7 +451,7 @@ special_drop_setup() {
       break;
     default:
       is_powerup = false;
-      playFX(level._effect["lightning_dog_spawn"], self.origin);
+      Playfx(level._effect["lightning_dog_spawn"], self.origin);
       playsoundatposition("pre_spawn", self.origin);
       wait(1.5);
       playsoundatposition("zmb_bolt", self.origin);
@@ -463,7 +463,7 @@ special_drop_setup() {
       self Delete();
   }
   if(is_powerup) {
-    playFX(level._effect["lightning_dog_spawn"], self.origin);
+    Playfx(level._effect["lightning_dog_spawn"], self.origin);
     playsoundatposition("pre_spawn", self.origin);
     wait(1.5);
     playsoundatposition("zmb_bolt", self.origin);
@@ -496,11 +496,11 @@ powerup_grab() {
       }
       if(distance(players[i].origin, self.origin) < 64) {
         if(isDefined(self.powerup_name) && self.powerup_name == "minigun") {
-          playFX(level._effect["powerup_grabbed_solo"], self.origin);
+          playfx(level._effect["powerup_grabbed_solo"], self.origin);
         } else {
-          playFX(level._effect["powerup_grabbed"], self.origin);
+          playfx(level._effect["powerup_grabbed"], self.origin);
         }
-        playFX(level._effect["powerup_grabbed_wave"], self.origin);
+        playfx(level._effect["powerup_grabbed_wave"], self.origin);
         if(isDefined(level.zombie_powerup_grab_func)) {
           level thread[[level.zombie_powerup_grab_func]]();
         } else {
@@ -611,7 +611,7 @@ start_bonfire_sale(item) {
   level notify("bonfire_sale_off");
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] playSound("zmb_points_loop_off");
+    players[i] playsound("zmb_points_loop_off");
   }
   temp_ent Delete();
 }
@@ -625,7 +625,7 @@ start_carpenter(origin) {
     windows = get_closest_window_repair(window_boards, origin);
     if(!isDefined(windows)) {
       carp_ent stopLoopSound(1);
-      carp_ent playSound("evt_carpenter_end", "sound_done");
+      carp_ent playsound("evt_carpenter_end", "sound_done");
       carp_ent waittill("sound_done");
       break;
     } else
@@ -657,9 +657,8 @@ get_closest_window_repair(windows, origin) {
   current_window = undefined;
   shortest_distance = undefined;
   for(i = 0; i < windows.size; i++) {
-    if(all_chunks_intact(windows[i].barrier_chunks)) {
+    if(all_chunks_intact(windows[i].barrier_chunks))
       continue;
-    }
     if(!isDefined(current_window)) {
       current_window = windows[i];
       shortest_distance = distanceSquared(current_window.origin, origin);
@@ -685,9 +684,9 @@ powerup_wobble() {
   self endon("powerup_timedout");
   if(isDefined(self)) {
     if(isDefined(self.powerup_name) && self.powerup_name == "minigun") {
-      playFXOnTag(level._effect["powerup_on_solo"], self, "tag_origin");
+      playfxontag(level._effect["powerup_on_solo"], self, "tag_origin");
     } else {
-      playFXOnTag(level._effect["powerup_on"], self, "tag_origin");
+      playfxontag(level._effect["powerup_on"], self, "tag_origin");
     }
   }
   while(isDefined(self)) {
@@ -728,7 +727,7 @@ powerup_timeout() {
 nuke_powerup(drop_item) {
   zombies = getaispeciesarray("axis");
   location = drop_item.origin;
-  playFX(drop_item.fx, location);
+  PlayFx(drop_item.fx, location);
   level thread nuke_flash();
   wait(0.5);
   zombies = get_array_of_closest(location, zombies);
@@ -758,11 +757,11 @@ nuke_powerup(drop_item) {
     }
     if(i < 5 && !(zombies_nuked[i].isdog)) {
       zombies_nuked[i] thread animscripts\zombie_death::flame_death_fx();
-      zombies_nuked[i] playSound("evt_nuked");
+      zombies_nuked[i] playsound("evt_nuked");
     }
     if(!(zombies_nuked[i].isdog)) {
       zombies_nuked[i] maps\_zombiemode_spawner::zombie_head_gib();
-      zombies_nuked[i] playSound("evt_nuked");
+      zombies_nuked[i] playsound("evt_nuked");
     }
     zombies_nuked[i] dodamage(zombies_nuked[i].health + 666, zombies_nuked[i].origin);
   }
@@ -877,7 +876,7 @@ time_remaning_on_insta_kill_powerup() {
   }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] playSound("zmb_insta_kill");
+    players[i] playsound("zmb_insta_kill");
   }
   temp_enta stopLoopSound(2);
   level.zombie_vars["zombie_powerup_insta_kill_on"] = false;
@@ -905,7 +904,7 @@ time_remaining_on_point_doubler_powerup() {
   level.zombie_vars["zombie_powerup_point_doubler_on"] = false;
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] playSound("zmb_points_loop_off");
+    players[i] playsound("zmb_points_loop_off");
   }
   temp_ent stopLoopSound(2);
   level.zombie_vars["zombie_powerup_point_doubler_time"] = 30;
@@ -967,9 +966,9 @@ remove_temp_chest(chest_index) {
   while(isDefined(level.chests[chest_index].chest_user) || (isDefined(level.chests[chest_index]._box_open) && level.chests[chest_index]._box_open == true)) {
     wait_network_frame();
   }
-  playFX(level._effect["poltergeist"], level.chests[chest_index].orig_origin);
-  level.chests[chest_index] playSound("zmb_box_poof_land");
-  level.chests[chest_index] playSound("zmb_couch_slam");
+  playfx(level._effect["poltergeist"], level.chests[chest_index].orig_origin);
+  level.chests[chest_index] playsound("zmb_box_poof_land");
+  level.chests[chest_index] playsound("zmb_couch_slam");
   level.chests[chest_index] maps\_zombiemode_weapons::hide_chest();
   level.chests[chest_index] maps\_zombiemode_weapons::show_rubble();
 }
@@ -993,7 +992,7 @@ full_ammo_on_hud(drop_item) {
 full_ammo_move_hud() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] playSound("zmb_full_ammo");
+    players[i] playsound("zmb_full_ammo");
   }
   wait 0.5;
   move_fade_time = 1.5;
@@ -1014,7 +1013,7 @@ check_for_rare_drop_override(pos) {
 
 setup_firesale_audio() {
   wait(2);
-  intercom = getEntArray("intercom", "targetname");
+  intercom = getentarray("intercom", "targetname");
   while(1) {
     while(level.zombie_vars["zombie_powerup_fire_sale_on"] == false) {
       wait(0.2);
@@ -1037,7 +1036,7 @@ play_firesale_audio() {
 
 setup_bonfiresale_audio() {
   wait(2);
-  intercom = getEntArray("intercom", "targetname");
+  intercom = getentarray("intercom", "targetname");
   while(1) {
     while(level.zombie_vars["zombie_powerup_fire_sale_on"] == false) {
       wait(0.2);

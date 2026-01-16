@@ -21,10 +21,8 @@ CONST_ELEV_CABLE_HEIGHT = 94;
 CONST_ELEV_CABLE_CLOSE = 2;
 
 /************************************************************************************************************/
-
 /*												INTRO ELEVATOR												*/
 /************************************************************************************************************/
-
 elevator_setup(doors) {
   doors["left"].close_pos = doors["left"].origin;
   doors["right"].close_pos = doors["right"].origin;
@@ -36,14 +34,13 @@ elevator_setup(doors) {
 }
 
 elevator_close_doors(doors, snd, speed) {
-  snd playSound("elev_door_close");
+  snd PlaySound("elev_door_close");
 
   doors["left"] DisconnectPaths();
   doors["right"] DisconnectPaths();
 
-  if(!isDefined(speed)) {
+  if(!isdefined(speed))
     speed = 14;
-  }
 
   closed_pos = doors["left"].close_pos;
   dist = abs(Distance(doors["left"].open_pos, closed_pos));
@@ -56,7 +53,7 @@ elevator_close_doors(doors, snd, speed) {
 }
 
 elevator_open_doors(doors, snd) {
-  snd playSound("elev_door_open");
+  snd PlaySound("elev_door_open");
 
   doors["left"] ConnectPaths();
   doors["right"] ConnectPaths();
@@ -73,46 +70,40 @@ elevator_open_doors(doors, snd) {
 }
 
 /************************************************************************************************************/
-
 /*													INTRO													*/
 /************************************************************************************************************/
-
 blend_movespeedscale_custom(percent, time) {
   player = self;
-  if(!isplayer(player)) {
+  if(!isplayer(player))
     player = level.player;
-  }
 
   player notify("blend_movespeedscale_custom");
   player endon("blend_movespeedscale_custom");
 
-  if(!isDefined(player.baseline_speed)) {
+  if(!isdefined(player.baseline_speed))
     player.baseline_speed = 1.0;
-  }
 
   goalspeed = percent * .01;
   currspeed = player.baseline_speed;
 
-  if(isDefined(time)) {
+  if(IsDefined(time)) {
     range = goalspeed - currspeed;
     interval = .05;
     numcycles = time / interval;
     fraction = range / numcycles;
 
-    while(abs(goalspeed - currspeed) > abs(fraction * 1.1)) {
+    while (abs(goalspeed - currspeed) > abs(fraction * 1.1)) {
       currspeed += fraction;
       player.baseline_speed = currspeed;
-      if(!flag("player_dynamic_move_speed")) {
+      if(!flag("player_dynamic_move_speed"))
         level.player SetMoveSpeedScale(player.baseline_speed);
-      }
       wait interval;
     }
   }
 
   player.baseline_speed = goalspeed;
-  if(!flag("player_dynamic_move_speed")) {
+  if(!flag("player_dynamic_move_speed"))
     level.player SetMoveSpeedScale(player.baseline_speed);
-  }
 }
 
 player_dynamic_move_speed() {
@@ -124,15 +115,14 @@ player_dynamic_move_speed() {
   current = 1;
   actor = undefined;
 
-  foreach(member in level.team) {
-    member.plane_origin = spawnStruct();
-  }
+  foreach(member in level.team)
+  member.plane_origin = SpawnStruct();
 
   SetDvarIfUninitialized("debug_playerDMS", 0);
 
-  while(flag("player_dynamic_move_speed")) {
+  while (flag("player_dynamic_move_speed")) {
     //if we're close enough to an actor to be significant - then just use him
-    //otherwise go through a series of complicated steps to figure out where
+    //otherwise go through a series of complicated steps to figure out where 
     //we are in relation to the whole team
     guy = getClosest(level.player.origin, level.team);
     ahead = false;
@@ -148,22 +138,20 @@ player_dynamic_move_speed() {
 
       actor = guy.plane_origin;
 
-      if(GetDvarInt("debug_playerDMS")) {
+      /#
+      if(GetDvarInt("debug_playerDMS"))
         Line(actor.origin, level.player.origin, (1, 0, 0), 1);
-      }
-
+      # /
     } else {
       //calculate if we are ahead of anyone
       foreach(member in level.team) {
-        //for this level, this function is so aggressive that we'll never get this far
+        //for this level, this function is so aggressive that we'll never get this far 
         //ahead of someone - so don't count it
-        if(DistanceSquared(level.player.origin, member.origin) > squared(500)) {
+        if(DistanceSquared(level.player.origin, member.origin) > squared(500))
           continue;
-        }
         ahead = member player_DMS_ahead_test();
-        if(ahead) {
+        if(ahead)
           break;
-        }
       }
       //calculate a facing plane based on everyone's angles, then get the closest point on the closest
       //plane to us - and use that point to decide how close we are to the average of the group
@@ -176,79 +164,70 @@ player_dynamic_move_speed() {
 
       actor = getClosest(level.player.origin, planes);
 
-      if(GetDvarInt("debug_playerDMS")) {
+      /#
+      if(GetDvarInt("debug_playerDMS"))
         Line(actor.origin, level.player.origin, (0, 1, 0), 1);
-      }
-
+      # /
     }
-
-    if(GetDvarInt("debug_playerDMS")) {
+    /#
+    if(GetDvarInt("debug_playerDMS"))
       Print3d(actor.origin, "dist: " + Distance(level.player.origin, actor.origin), (1, 1, 1), 1);
-    }
-
-    //if he's wait out in front - really slow him down
-    if(DistanceSquared(level.player.origin, actor.origin) > squared(100) && ahead) {
-      if(GetDvarInt("debug_playerDMS")) {
-        PrintLn("TOOO FAR AHEAD!!!!!!!!!!!");
+    # /
+      //if he's wait out in front - really slow him down
+      if(DistanceSquared(level.player.origin, actor.origin) > squared(100) && ahead) {
+        /#
+        if(GetDvarInt("debug_playerDMS"))
+          PrintLn("TOOO FAR AHEAD!!!!!!!!!!!");
+        # /
+          if(current > .55)
+            current -= .015;
       }
-
-      if(current > .55) {
-        current -= .015;
-      }
-    }
     //if he's too close - take him as much as 20% under his baseline
-    else {
-      if(DistanceSquared(level.player.origin, actor.origin) < squared(50) || ahead) {}
-      if(current < .78) {
+    else
+    if(DistanceSquared(level.player.origin, actor.origin) < squared(50) || ahead) {
+      if(current < .78)
         current += .015;
-      }
 
-      if(current > .8) {
+      if(current > .8)
         current -= .015;
-      }
     }
     //if he's REALLY far away - take him as much as 75% over his baseline ( as long as total speed doesn't reach 110%, capped below )
-    else {
-      if(DistanceSquared(level.player.origin, actor.origin) > squared(300)) {}
-      if(current < 1.75) {
+    else
+    if(DistanceSquared(level.player.origin, actor.origin) > squared(300)) {
+      if(current < 1.75)
         current += .02;
-      }
     }
     //if he's far away - take him as much as 35% over his baseline
-    else {
-      if(DistanceSquared(level.player.origin, actor.origin) > squared(100)) {}
-      if(current < 1.35) {
+    else
+    if(DistanceSquared(level.player.origin, actor.origin) > squared(100)) {
+      if(current < 1.35)
         current += .01;
-      }
     }
     //if he's in range - take him back to his baseline
-    else {
-      if(DistanceSquared(level.player.origin, actor.origin) < squared(85)) {}
-      if(current > 1.0) {
+    else
+    if(DistanceSquared(level.player.origin, actor.origin) < squared(85)) {
+      if(current > 1.0)
         current -= .01;
-      }
-      if(current < 1.0) {
+      if(current < 1.0)
         current += .01;
-      }
     }
 
-    if(current > 1.65 || flag("player_DMS_allow_sprint")) {
+    if(current > 1.65 || flag("player_DMS_allow_sprint"))
       level.player AllowSprint(true);
-    } else {
+    else
       level.player AllowSprint(false);
-    }
 
     //set his speed based on baseline and this ratio
     level.player.adjusted_baseline = level.player.baseline_speed * current;
-    if(level.player.adjusted_baseline > 1.1) {
+    if(level.player.adjusted_baseline > 1.1)
       level.player.adjusted_baseline = 1.1;
-    }
 
-    if(GetDvarInt("debug_playerDMS")) {
+    /#
+    if(GetDvarInt("debug_playerDMS"))
       PrintLn("baseline: " + level.player.baseline_speed + ", 	adjusted: " + level.player.adjusted_baseline);
-    }
+    # /
 
-    level.player SetMoveSpeedScale((level.player.adjusted_baseline));
+      level.player SetMoveSpeedScale((level.player.adjusted_baseline));
     wait .05;
   }
 }
@@ -257,22 +236,20 @@ player_DMS_get_plane() {
   P = level.player.origin;
   A = self.origin + vector_multiply(AnglesToRight(self.angles), -5000);
   B = self.origin + vector_multiply(AnglesToRight(self.angles), 5000);
-
-  if(GetDvarInt("debug_playerDMS")) {
+  /#
+  if(GetDvarInt("debug_playerDMS"))
     Line(A, B, (0, 0, 1), 1);
-  }
-
-  return PointOnSegmentNearestToPoint(A, B, P);
+  # /
+    return PointOnSegmentNearestToPoint(A, B, P);
 }
 
 player_DMS_ahead_test() {
   ahead = false;
   //this is a test to see if we're closer to their goal than they are
-  if(isDefined(self.last_set_goalent)) {
+  if(IsDefined(self.last_set_goalent))
     ahead = self[[level.drs_ahead_test]](self.last_set_goalent, 50);
-  } else if(isDefined(self.last_set_goalnode)) {
+  else if(IsDefined(self.last_set_goalnode))
     ahead = self[[level.drs_ahead_test]](self.last_set_goalnode, 50);
-  }
 
   return ahead;
 }
@@ -284,7 +261,7 @@ lobby_sign() {
   time2 = 1;
   time3 = .5;
 
-  playFX(getfx("sign_fx"), sign.origin + (0, 120, 5));
+  PlayFX(getfx("sign_fx"), sign.origin + (0, 120, 5));
 
   sign RotatePitch(-135, time1, time1 * .65, time1 * .35);
   wait time1;
@@ -293,18 +270,17 @@ lobby_sign() {
   sign RotatePitch(-45, time2, time2 * .5, time2 * .5);
   wait time2 * .5;
 
-  playFX(getfx("sign_fx"), sign.origin);
+  PlayFX(getfx("sign_fx"), sign.origin);
 
   sign PhysicsLaunchClient(sign.origin + (0, 5, -25), (1000, 5000, .1));
 }
 
 elevator_floor_indicator() {
   //setup
-  temp = getEntArray("elev_num", "targetname");
+  temp = GetEntArray("elev_num", "targetname");
   lights = [];
-  foreach(item in temp) {
-    lights[item.script_noteworthy] = item;
-  }
+  foreach(item in temp)
+  lights[item.script_noteworthy] = item;
 
   lights["down"] Hide();
   lights["2"] Hide();
@@ -316,24 +292,24 @@ elevator_floor_indicator() {
   doors["right"] = GetEnt("intro_elevator_door_right", "targetname");
   elevator_setup(doors);
 
-  snd = spawn("script_origin", doors["left"].close_pos);
-  snd2 = spawn("script_origin", doors["left"].close_pos);
+  snd = Spawn("script_origin", doors["left"].close_pos);
+  snd2 = Spawn("script_origin", doors["left"].close_pos);
 
   //sounds
-  snd playSound("elev_run_start");
-  snd2 playLoopSound("elev_run_loop");
+  snd PlaySound("elev_run_start");
+  snd2 PlayLoopSound("elev_run_loop");
   thread play_sound_in_space("scn_airport_elevator_opening_long", level.player.origin + (0, 0, 70));
 
   wait 5.5;
 
   wait 4.5; // 5.5	 - > M 	 - > 1st before click
-  snd playSound("elevator_pass_floor_beep");
+  snd PlaySound("elevator_pass_floor_beep");
 
   wait 6.5; // 11	 - > L1	 - > 2nd after click
-  snd playSound("elevator_pass_floor_beep");
+  snd PlaySound("elevator_pass_floor_beep");
 
   wait 4.5; // 15.5	 - > 1	 - > 3rd after cough
-  snd playSound("elevator_pass_floor_beep");
+  snd PlaySound("elevator_pass_floor_beep");
 
   wait 2; // 18
   level.team["makarov"] thread dialogue_queue("airport_mkv_snamibog");
@@ -346,7 +322,7 @@ elevator_floor_indicator() {
   wait 1; // 21	 - > 2
 
   //level.makarov dialogue_queue( "airport_mkv_noruss" );
-  snd playSound("elev_bell_ding");
+  snd PlaySound("elev_bell_ding");
 
   lights["1"] Hide();
   lights["2"] Show();
@@ -426,9 +402,8 @@ lobby_people_create(data) {
     drone.script_delay = actor["delay"];
     drone._deathanim = actor["deathanim"];
     drone.deathtime = actor["deathtime"];
-    if(isDefined(actor["deleteme"])) {
+    if(IsDefined(actor["deleteme"]))
       drone.deleteme = actor["deleteme"];
-    }
 
     drone.dontdonotetracks = 1;
     drone.nocorpsedelete = 1;
@@ -445,7 +420,7 @@ lobby_security_intro() {
 
   self gun_remove();
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.angles = self.angles;
   node.origin = self.origin;
 
@@ -481,9 +456,8 @@ lobby_people_logic() {
 
   self thread lobby_people_cleanup();
 
-  if(!isDefined(level.lobby_people_animating)) {
+  if(!isdefined(level.lobby_people_animating))
     level.lobby_people_animating = 0;
-  }
   level.lobby_people_animating++;
 
   node = self.ref_node;
@@ -502,7 +476,7 @@ lobby_people_logic() {
   self thread do_blood_notetracks();
   self.health = 1000000;
 
-  if(isDefined(self._deathanim)) {
+  if(IsDefined(self._deathanim)) {
     node thread anim_generic(self, self.anime);
 
     wait self.deathtime;
@@ -511,13 +485,14 @@ lobby_people_logic() {
     self anim_generic(self, self._deathanim);
   } else
   if(self.anime == "airport_civ_in_line_6_C") {
+
     node thread anim_generic(self, self.anime);
 
     length = GetAnimLength(self getGenericAnim(self.anime));
     length -= .2;
     wait length;
 
-    node = spawnStruct();
+    node = SpawnStruct();
     node.origin = self.origin;
     node.angles = self.angles + (0, 180, 0);
     node anim_generic(self, "run_death3");
@@ -527,53 +502,46 @@ lobby_people_logic() {
   self.noragdoll = 1;
   self.skipdeathanim = 1;
 
-  if(isDefined(self.deleteme)) {
+  if(IsDefined(self.deleteme))
     self Delete();
-  } else {
+  else
     self Kill();
-  }
 }
 
 lobby_people_cleanup() {
   self waittill("death");
 
   level.lobby_people_animating--;
-  if(!level.lobby_people_animating) {
+  if(!level.lobby_people_animating)
     flag_set("lobby_to_stairs_go");
-  }
 }
 
 lobby_drone_logic() {
   self lobby_generic_logic();
 
-  if(isDefined(self)) {
+  if(IsDefined(self))
     self notify("move");
-  }
 
-  while(!flag("player_set_speed_stairs")) {
+  while (!flag("player_set_speed_stairs")) {
     wait .2;
 
-    if(!isDefined(self)) {
+    if(!isdefined(self))
       break;
-    }
     /*-----------------------
     KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
     -------------------------*/
-    if(DistanceSquared(self.origin, level.player.origin) < squared(2048)) {
+    if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
-    }
-    if(player_looking_at(self.origin + (0, 0, 48))) {
+    if(player_looking_at(self.origin + (0, 0, 48)))
       continue;
-    }
     /*-----------------------
     ALL TESTS PASSED, DELETE THE BASTARD
     -------------------------*/
     break;
   }
 
-  if(isDefined(self)) {
+  if(IsDefined(self))
     self Delete();
-  }
 }
 
 lobby_generic_logic() {
@@ -583,28 +551,25 @@ lobby_generic_logic() {
   self.health = 1;
   self.ignoreExplosionEvents = true;
   self.ignoreme = true;
-  if(IsSentient(self)) {
+  if(IsSentient(self))
     self.IgnoreRandomBulletDamage = true;
-  } else {
+  else
     self enable_ignorerandombulletdamage_drone();
-  }
   self.grenadeawareness = 0;
   self disable_surprise();
 
   anime = self.script_animation;
 
-  if(!isDefined(anime)) {
+  if(!isdefined(anime))
     anime = "civilian_stand_idle";
-  }
 
   self set_allowdeath(true);
   self delayThread(RandomFloatRange(0, 3), ::anim_generic_loop, self, anime);
 
-  if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "crawler" || self.script_noteworthy == "crawler2")) {
+  if(IsDefined(self.script_noteworthy) && (self.script_noteworthy == "crawler" || self.script_noteworthy == "crawler2"))
     self lobby_generic_logic_crawlers();
-  } else {
+  else
     self lobby_generic_non_crawlers();
-  }
 }
 
 lobby_generic_non_crawlers() {
@@ -626,9 +591,8 @@ lobby_generic_logic_crawlers() {
     self.oldcontents = self SetContents(0);
     self force_crawling_death(180, 5);
   } else
-  if(self.script_noteworthy == "crawler2") {
+  if(self.script_noteworthy == "crawler2")
     self force_crawling_death(110, 3, level.scr_anim["crawl_death_1"]);
-  }
 
   flag_wait("lobby_open_fire");
 
@@ -663,12 +627,12 @@ stair_top_terror() {
   wait 11; // "lobby_cleanup"
 
   org = GetEnt("upperdeck_terror", "targetname");
-  org playLoopSound("scn_airport_crowd_stairs_loop");
+  org PlayLoopSound("scn_airport_crowd_stairs_loop");
 
   flag_wait_or_timeout("stairs_top_open_fire", 16.5);
 
   org StopLoopSound();
-  org playSound("scn_airport_crowd_stairs_end");
+  org PlaySound("scn_airport_crowd_stairs_end");
 }
 
 lobby_to_stairs_flow_spawner() {
@@ -697,9 +661,8 @@ lobby_to_stairs_flow() {
   self.interval = 50;
   self.health = 1;
 
-  if(!isDefined(level.lobby_to_stairs_flow)) {
+  if(!isdefined(level.lobby_to_stairs_flow))
     level.lobby_to_stairs_flow = [];
-  }
 
   level.lobby_to_stairs_flow[level.lobby_to_stairs_flow.size] = self;
 
@@ -711,18 +674,16 @@ lobby_to_stairs_flow() {
   self add_call(::Delete);
   self thread do_wait();
 
-  while(!flag("stairs_top_open_fire")) {
+  while (!flag("stairs_top_open_fire")) {
     wait .2;
 
     /*-----------------------
     KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
     -------------------------*/
-    if(DistanceSquared(self.origin, level.player.origin) < squared(2048)) {
+    if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
-    }
-    if(player_looking_at(self.origin + (0, 0, 48))) {
+    if(player_looking_at(self.origin + (0, 0, 48)))
       continue;
-    }
 
     /*-----------------------
     ALL TESTS PASSED, DELETE THE BASTARD
@@ -748,13 +709,13 @@ lobby_to_stairs_flow_stairsanim() {
 running_civ_soundscape(array, alias) {
   array = array_removeDead(array);
   origin = get_average_origin(array);
-  obj = spawn("script_origin", origin + (0, 0, 64));
-  //obj setModel( "weapon_us_smoke_grenade" );
-  obj playSound(alias);
+  obj = Spawn("script_origin", origin + (0, 0, 64));
+  //obj SetModel( "weapon_us_smoke_grenade" );
+  obj PlaySound(alias);
 
   time = .1;
 
-  while(array.size) {
+  while (array.size) {
     origin = get_average_origin(array);
     obj MoveTo(origin + (0, 0, 64), time);
 
@@ -815,9 +776,8 @@ intro_security_run_die() {
 
   node anim_generic_reach(self, self.script_animation);
 
-  if(self.script_animation == "airport_security_guard_4") {
+  if(self.script_animation == "airport_security_guard_4")
     thread intro_security_run_explosion();
-  }
 
   self.a.nodeath = true;
   self.noragdoll = true;
@@ -829,13 +789,11 @@ intro_security_run_die() {
 
     door delayThread(.8, ::_rotateyaw, 60, .5, .05, .35);
   }
-  if(self.script_animation == "airport_security_guard_4") {
+  if(self.script_animation == "airport_security_guard_4")
     self forceUseWeapon(self.sidearm, "primary");
-  }
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
   self.a.nodeath = false;
   self.noragdoll = undefined;
   self.a.disablePain = false;
@@ -859,11 +817,10 @@ intro_security_run_explosion() {
 intro_security_run_wait_die() {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self waittill("damage", amt, attacker);
-    if(IsPlayer(attacker)) {
+    if(IsPlayer(attacker))
       break;
-    }
   }
 
   self.allowdeath = true;
@@ -875,27 +832,24 @@ lobby_ai_logic() {
 
   self lobby_generic_logic();
 
-  if(!isDefined(level.lobby_ai_peeps)) {
+  if(!isdefined(level.lobby_ai_peeps))
     level.lobby_ai_peeps = 0;
-  }
   level.lobby_ai_peeps++;
 
   self thread lobby_ai_logic_death();
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "new_lobby_people") {
+  if(IsDefined(self.script_noteworthy) && self.script_noteworthy == "new_lobby_people")
     self thread lobby_ai_new();
-  } else {
+  else
     self thread lobby_ai_run();
-  }
 }
 
 lobby_ai_logic_death() {
   self waittill("death");
   level.lobby_ai_peeps--;
 
-  if(level.lobby_ai_peeps == 0) {
+  if(level.lobby_ai_peeps == 0)
     flag_set("lobby_ai_peeps_dead");
-  }
 }
 
 lobby_ai_new() {
@@ -903,9 +857,8 @@ lobby_ai_new() {
 
   wait .5;
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self endon("death");
 
@@ -983,23 +936,20 @@ lobby_ai_new() {
 }
 
 instant_ragdoll() {
-  if(getdvarint("ragdoll_enable")) {
+  if(getdvarint("ragdoll_enable"))
     self.a.nodeath = true;
-  }
 
   self waittill("damage");
 
-  if(getdvarint("ragdoll_enable")) {
+  if(getdvarint("ragdoll_enable"))
     self StartRagdoll();
-  } else {
+  else
     self kill();
-  }
 }
 
 lobby_ai_run() {
-  if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "crawler" || self.script_noteworthy == "crawler2")) {
+  if(IsDefined(self.script_noteworthy) && (self.script_noteworthy == "crawler" || self.script_noteworthy == "crawler2"))
     return;
-  }
 
   self endon("death");
 
@@ -1197,9 +1147,8 @@ lobby_moveout_to_stairs_makarov(node) {
   self notify("stop_spray_and_pray");
 
   self lobby_moveout_to_stairs_post();
-  if(flag("player_set_speed_stairs")) {
+  if(flag("player_set_speed_stairs"))
     return;
-  }
 
   level endon("player_set_speed_stairs");
 
@@ -1280,9 +1229,8 @@ lobby_moveout_to_stairs_saw(node) {
   wait .5;
 
   self lobby_moveout_to_stairs_post();
-  if(flag("player_set_speed_stairs")) {
+  if(flag("player_set_speed_stairs"))
     return;
-  }
 
   self set_generic_run_anim("casual_killer_jog_A");
 }
@@ -1320,9 +1268,8 @@ lobby_moveout_to_stairs_m4(node) {
   }
 
   self lobby_moveout_to_stairs_post();
-  if(flag("player_set_speed_stairs")) {
+  if(flag("player_set_speed_stairs"))
     return;
-  }
 
   self set_generic_run_anim("casual_killer_jog_A");
 }
@@ -1369,9 +1316,8 @@ lobby_moveout_to_stairs_shotgun(node) {
   }
 
   self lobby_moveout_to_stairs_post();
-  if(flag("player_set_speed_stairs")) {
+  if(flag("player_set_speed_stairs"))
     return;
-  }
 
   self set_generic_run_anim("casual_killer_jog_A");
 }
@@ -1385,15 +1331,13 @@ lobby_moveout_to_stairs_post() {
   level.lobby_cleanup++;
 
   if(level.lobby_cleanup == 4) {
-    if(!flag("player_set_speed_stairs")) {
+    if(!flag("player_set_speed_stairs"))
       thread flag_set_delayed("stairs_go_up", 1);
-    } else {
+    else
       flag_set("stairs_go_up");
-    }
   }
-  if(flag("player_set_speed_stairs")) {
+  if(flag("player_set_speed_stairs"))
     self clear_run_anim();
-  }
 }
 
 lobby_moveout_to_stairs(node) {
@@ -1408,9 +1352,8 @@ lobby_moveout_to_stairs(node) {
 }
 
 lobby_prestairs_nodes_behavior(node) {
-  if(self != level.makarov) {
+  if(self != level.makarov)
     return;
-  }
 
   self endon("death");
   flag_waitopen("friendly_fire_warning");
@@ -1426,10 +1369,8 @@ lobby_prestairs_nodes_behavior(node) {
 }
 
 /************************************************************************************************************/
-
 /*												UPPERDECK													*/
 /************************************************************************************************************/
-
 stairs_team_at_top(node) {
   self endon("death");
   flag_waitopen("friendly_fire_warning");
@@ -1497,9 +1438,8 @@ stairs_team_at_top(node) {
 
   flag_set("stairs_top_open_fire");
   self ent_flag_set("stairs_at_top");
-  if(flag("stairs_upperdeck_civs_dead")) {
+  if(flag("stairs_upperdeck_civs_dead"))
     return;
-  }
   speed = undefined;
   delay = undefined;
   forward = undefined;
@@ -1551,9 +1491,8 @@ upperdeck_team_moveup(node) {
       break;
   }
 
-  if(self.script_noteworthy == "makarov") {
+  if(self.script_noteworthy == "makarov")
     return;
-  }
 
   self follow_path(node, 5000);
 
@@ -1573,9 +1512,8 @@ upperdeck_makarov_moveup(node) {
   wait .2;
 
   self enable_exits();
-  if(flag("massacre_rentacop_stop")) {
+  if(flag("massacre_rentacop_stop"))
     return;
-  }
 
   self set_moveplaybackrate(.9, 2);
 
@@ -1610,9 +1548,8 @@ upperdeck_makarov_moveup(node) {
   self thread follow_path(node);
   node waittill("trigger");
 
-  if(flag("massacre_rentacop_stop")) {
+  if(flag("massacre_rentacop_stop"))
     return;
-  }
 
   self disable_exits();
   self disable_dynamic_run_speed();
@@ -1631,9 +1568,8 @@ upperdeck_makarov_moveup(node) {
 upperdeck_turn_on_arrival() {
   self waittill("trigger", actor);
 
-  if(actor == level.makarov) {
+  if(actor == level.makarov)
     return;
-  }
 
   actor enable_arrivals();
 }
@@ -1652,21 +1588,20 @@ stairs_cop() {
   wait time;
   wait 1.5;
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self.IgnoreRandomBulletDamage = false;
   level.team["saw"] ClearEntityTarget();
   level.team["shotgun"] ClearEntityTarget();
 
   origin = self.origin + (0, 0, 40);
-  vec = anglesToForward(self.angles);
+  vec = AnglesToForward(self.angles);
   origin = origin + vector_multiply(vec, 20);
 
-  //	target = spawn( "script_model", origin );
-  //	target setModel( "weapon_us_smoke_grenade" );
-  target = spawn("script_origin", origin);
+  //	target = Spawn( "script_model", origin );
+  //	target SetModel( "weapon_us_smoke_grenade" );
+  target = Spawn("script_origin", origin);
   target.health = 100;
   //	target LinkTo( self );
   level.team["saw"] SetEntityTarget(target);
@@ -1676,13 +1611,11 @@ stairs_cop() {
 
   wait 1;
 
-  if(isDefined(level.team["saw"].spraypray_target)) {
+  if(IsDefined(level.team["saw"].spraypray_target))
     level.team["saw"] SetEntityTarget(level.team["saw"].spraypray_target);
-  }
 
-  if(isDefined(level.team["shotgun"].spraypray_target)) {
+  if(IsDefined(level.team["shotgun"].spraypray_target))
     level.team["shotgun"] SetEntityTarget(level.team["shotgun"].spraypray_target);
-  }
 
   target Delete();
 }
@@ -1738,18 +1671,17 @@ upperdeck_crawler() {
 
   //self.diequietly = false;
 
-  if(isDefined(self.script_parameters)) {
+  if(IsDefined(self.script_parameters)) {
     actor = level.team[self.script_parameters];
-    while(Distance(self.origin, actor.origin) > 250) {
+    while (Distance(self.origin, actor.origin) > 250)
       wait .1;
-    }
     self.script_delay = 1.5;
     actor thread upperdeck_canned_deaths_execute(self, "down");
 
     wait .5;
     self.IgnoreRandomBulletDamage = false;
     wait 1.5;
-    MagicBullet(actor.weapon, actor GetTagOrigin("tag_flash"), self getEye());
+    MagicBullet(actor.weapon, actor GetTagOrigin("tag_flash"), self GetEye());
   }
 }
 
@@ -1783,7 +1715,7 @@ upperdeck_runners3() {
   self.useChokePoints = false;
   flag_set("upperdeck_flow3");
 
-  if(!isDefined(level.upperdeck_flow3)) {
+  if(!isdefined(level.upperdeck_flow3)) {
     level.upperdeck_flow3 = [];
     level.upperdeck_flow3[level.upperdeck_flow3.size] = self;
     wait .1;
@@ -1816,38 +1748,33 @@ upperdeck_runners_setup() {
   self set_generic_run_anim_array("civ_run_array");
   self notify("killanimscript");
 
-  if(IsSubStr(self.classname, "female")) {
+  if(IsSubStr(self.classname, "female"))
     self.animname = "female_civ_" + RandomIntRange(1, 2);
-  } else {
+  else
     self.animname = "male_civ_" + RandomIntRange(1, 2);
-  }
 
-  if(self.script_animation == "airport_civ_cellphone_hide") {
+  if(self.script_animation == "airport_civ_cellphone_hide")
     self thread anim_generic_first_frame(self, self.script_animation);
-  } else {
+  else
     self thread anim_generic_loop(self, self.script_animation);
-  }
 }
 
 upperdeck_runners_go() {
   self.health = 1;
 
-  if(self.script_animation != "null") {
+  if(self.script_animation != "null")
     wait RandomFloat(1);
-  }
 
   self notify("stop_loop");
   self StopAnimScripted();
 
-  if(self.script_animation == "airport_civ_cellphone_hide") {
+  if(self.script_animation == "airport_civ_cellphone_hide")
     self thread anim_generic_run(self, "crouch_2run_L");
-  }
 
   node = GetNode("upperdeck_escape_node", "targetname");
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target))
     node = GetNode(self.target, "targetname");
-  }
 
   self follow_path(node);
 
@@ -1858,7 +1785,7 @@ upperdeck_runners_go() {
 }
 
 upperdeck_canned_deaths_setup(_flag) {
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     mate = GetEnt(self.target, "targetname");
     mate thread upperdeck_canned_deaths_setup(_flag);
   }
@@ -1867,15 +1794,14 @@ upperdeck_canned_deaths_setup(_flag) {
 
   flag_wait(_flag);
 
-  if(IsSpawner(self)) {
+  if(IsSpawner(self))
     drone = spawn_ai(true);
-  } else {
+  else {
     name = undefined;
-    if(IsSubStr(self.model, "female")) {
+    if(IsSubStr(self.model, "female"))
       name = "civilian_female_suit";
-    } else {
+    else
       name = "civilian_male_suit";
-    }
 
     spawner = GetEnt(name, "targetname");
     spawner.count = 1;
@@ -1904,29 +1830,25 @@ upperdeck_canned_deaths_grab_info(node) {
   self.script_parameters = node.script_parameters;
   self.health = 1;
 
-  if(IsSentient(self)) {
+  if(IsSentient(self))
     self.IgnoreRandomBulletDamage = true;
-  } else {
+  else
     self enable_ignorerandombulletdamage_drone();
-  }
 
-  if(isDefined(node.script_wait)) {
+  if(IsDefined(node.script_wait))
     self.script_wait = node.script_wait;
-  } else {
+  else
     self.script_wait = 0;
-  }
 
-  if(isDefined(node.target)) {
+  if(IsDefined(node.target))
     self.target = node.target + "_drone";
-  }
 
-  if(isDefined(node.script_delay)) {
+  if(IsDefined(node.script_delay))
     self.script_delay = node.script_delay;
-  } else {
+  else
     self.script_delay = GetAnimLength(getGenericAnim(node.animation)) - .5;
-  }
 
-  if(isDefined(node.script_flag_set)) {
+  if(IsDefined(node.script_flag_set)) {
     self.script_flag_set = node.script_flag_set;
     flag_init(self.script_flag_set);
 
@@ -1970,9 +1892,8 @@ upperdeck_canned_deaths() {
       self upperdeck_canned_deaths_cowercrouch();
       break;
     case "airport_civ_dying_groupA_lean":
-      if(self.enode.targetname == "upperdeck_canned_deaths") {
+      if(self.enode.targetname == "upperdeck_canned_deaths")
         self upperdeck_canned_deaths_groupA_lean();
-      }
       break;
     case "civilian_leaning_death":
       self upperdeck_canned_deaths_leaning();
@@ -2063,25 +1984,21 @@ upperdeck_canned_deaths_group(mate, type) {
 
   //wait to animate
   killers = self upperdeck_canned_deaths_wait_animate();
-  if(killers.size) {
+  if(killers.size)
     array_thread(killers, ::upperdeck_canned_deaths_execute, self, type);
-  }
 
-  if(IsSentient(self)) {
+  if(IsSentient(self))
     self.IgnoreRandomBulletDamage = false;
-  } else {
+  else
     self disable_ignorerandombulletdamage_drone();
-  }
   mate disable_ignorerandombulletdamage_drone();
 
   //animate
-  if(isDefined(self.script_soundalias)) {
+  if(IsDefined(self.script_soundalias))
     self delayThread(self.script_wait, ::play_sound_on_tag_endon_death, self.script_soundalias);
-  }
   if(mate.health > 0) {
-    if(isDefined(mate.script_soundalias)) {
+    if(IsDefined(mate.script_soundalias))
       mate delayThread(mate.script_wait, ::play_sound_on_tag_endon_death, mate.script_soundalias);
-    }
 
     self.enode add_wait(::anim_generic, mate, mate.enode.animation);
     mate add_abort(::waittill_msg, "death");
@@ -2089,9 +2006,8 @@ upperdeck_canned_deaths_group(mate, type) {
     thread do_wait();
   }
 
-  if(self.enode.animation == "airport_civ_dying_groupA_kneel") {
+  if(self.enode.animation == "airport_civ_dying_groupA_kneel")
     self delayThread(3.25, ::set_deathanim, "airport_civ_dying_groupA_kneel_death");
-  }
   self.enode anim_generic(self, self.enode.animation);
 
   if(IsSentient(self)) {
@@ -2131,20 +2047,17 @@ upperdeck_canned_deaths_single(type) {
 
   //wait to animate
   killers = self upperdeck_canned_deaths_wait_animate();
-  if(killers.size) {
+  if(killers.size)
     array_thread(killers, ::upperdeck_canned_deaths_execute, self, type);
-  }
 
-  if(IsSentient(self)) {
+  if(IsSentient(self))
     self.IgnoreRandomBulletDamage = false;
-  } else {
+  else
     self disable_ignorerandombulletdamage_drone();
-  }
 
   //animate
-  if(isDefined(self.script_soundalias)) {
+  if(IsDefined(self.script_soundalias))
     self delayThread(self.script_wait, ::play_sound_on_tag_endon_death, self.script_soundalias);
-  }
   self.enode anim_generic(self, self.enode.animation);
 
   if(IsSentient(self)) {
@@ -2167,23 +2080,20 @@ upperdeck_canned_deaths_wait_animate() {
   actors = [];
   array = StrTok(self.script_noteworthy, ", ");
   foreach(key, token in array) {
-    if(IsAlive(level.team[token])) {
+    if(IsAlive(level.team[token]))
       actors[actors.size] = level.team[token];
-    }
   }
 
-  if(!actors.size) {
+  if(!actors.size)
     return actors;
-  }
 
   flag_wait("upperdeck_flow1");
 
-  while(actors.size) {
+  while (actors.size) {
     //the first guy in the list or the only guy is what we test against
     actor = actors[0];
-    if(Distance(actor.origin, self.origin) < self.radius) {
+    if(Distance(actor.origin, self.origin) < self.radius)
       return actors;
-    }
 
     wait .1;
 
@@ -2196,10 +2106,9 @@ upperdeck_canned_deaths_wait_animate() {
 upperdeck_canned_deaths_wait_player_close() {
   level.player endon("death");
 
-  while(1) {
-    if(Distance(level.player.origin, self.origin) < 600) {
+  while (1) {
+    if(Distance(level.player.origin, self.origin) < 600)
       return;
-    }
 
     wait .1;
   }
@@ -2208,12 +2117,11 @@ upperdeck_canned_deaths_wait_player_close() {
 upperdeck_canned_deaths_wait_player_see() {
   level.player endon("death");
 
-  while(1) {
+  while (1) {
     self waittill_player_lookat(undefined, .25, undefined, undefined, self);
 
-    if(Distance(level.player.origin, self.origin) < 800) {
+    if(Distance(level.player.origin, self.origin) < 800)
       return;
-    }
 
     wait .1;
   }
@@ -2224,9 +2132,8 @@ upperdeck_canned_deaths_execute_wait(enemy) {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  if(flag("massacre_rentacop_stop")) {
+  if(flag("massacre_rentacop_stop"))
     return;
-  }
   level endon("massacre_rentacop_stop");
 
   flag_wait_or_timeout("stairs_upperdeck_civs_dead", 2);
@@ -2234,17 +2141,15 @@ upperdeck_canned_deaths_execute_wait(enemy) {
   origin = enemy.origin;
   msg = "enemy at " + origin + "ready to execute";
   aimtime = enemy.script_delay - 2;
-  if(aimtime < 0) {
+  if(aimtime < 0)
     return;
-  }
 
   self endon(msg);
   self thread notify_delay(msg, aimtime);
 
-  while(enemy.health > 0) {
-    if(Distance(enemy.origin, self.origin) < 200) {
+  while (enemy.health > 0) {
+    if(Distance(enemy.origin, self.origin) < 200)
       return;
-    }
     wait .1;
   }
 }
@@ -2254,23 +2159,20 @@ upperdeck_canned_deaths_execute_fire(enemy) {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  if(flag("massacre_rentacop_stop")) {
+  if(flag("massacre_rentacop_stop"))
     return;
-  }
   level endon("massacre_rentacop_stop");
 
   self endon("upperdeck_canned_deaths_execute_fire");
 
   targets = enemy get_linked_structs();
-  foreach(obj in targets) {
-    delayThread(RandomFloat(.25), ::_radiusdamage, obj.origin, 8, 1000, 1000);
-  }
+  foreach(obj in targets)
+  delayThread(RandomFloat(.25), ::_radiusdamage, obj.origin, 8, 1000, 1000);
 
   time = .1;
 
-  if(self == level.team["shotgun"]) {
+  if(self == level.team["shotgun"])
     time = .25;
-  }
   self fire_full_auto(time, "upperdeck_canned_deaths_execute_fire");
 }
 
@@ -2288,7 +2190,7 @@ fire_full_auto(interval, msg) {
   self add_call(::clearanim, fireAnim, .2);
   self thread do_wait();
 
-  while(1) {
+  while (1) {
     self Shoot();
     wait interval;
   }
@@ -2297,14 +2199,12 @@ fire_full_auto(interval, msg) {
 upperdeck_canned_deaths_execute(enemy, type) {
   self endon("death");
 
-  if(flag("massacre_rentacop_stop")) {
+  if(flag("massacre_rentacop_stop"))
     return;
-  }
   level endon("massacre_rentacop_stop");
 
-  if(enemy.health <= 0) {
+  if(enemy.health <= 0)
     return;
-  }
 
   //set dont ever shoot at the right time if enemy is alive	
   self add_wait(::_wait, enemy.script_delay);
@@ -2319,24 +2219,22 @@ upperdeck_canned_deaths_execute(enemy, type) {
   self.dontEverShoot = true;
   self disable_dynamic_run_speed();
   self ent_flag_set("aiming_at_civ");
-  if(isDefined(enemy.script_flag_set)) {
+  if(IsDefined(enemy.script_flag_set))
     flag_set(enemy.script_flag_set);
-  }
 
   self.upperdeck_enemies++;
 
-  target = spawn("script_origin", enemy GetTagOrigin("tag_eye"));
-  //	target = spawn( "script_model", enemy GetTagOrigin( "tag_eye" ) );
-  //	target setModel( "weapon_us_smoke_grenade" );
+  target = Spawn("script_origin", enemy GetTagOrigin("tag_eye"));
+  //	target = Spawn( "script_model", enemy GetTagOrigin( "tag_eye" ) );
+  //	target SetModel( "weapon_us_smoke_grenade" );
   target.health = 100;
 
   self thread upperdeck_canned_deaths_execute_fake_target(enemy, target);
 
   wait .5;
 
-  if(isDefined(enemy) && isDefined(enemy.health) && enemy.health > 0) {
+  if(IsDefined(enemy) && IsDefined(enemy.health) && enemy.health > 0)
     enemy waittill("death");
-  }
 
   self.upperdeck_enemies--;
 
@@ -2346,9 +2244,8 @@ upperdeck_canned_deaths_execute(enemy, type) {
 
   target Delete();
 
-  if(self.upperdeck_enemies) {
+  if(self.upperdeck_enemies)
     return;
-  }
 
   self ClearEntityTarget();
 
@@ -2363,7 +2260,7 @@ upperdeck_canned_deaths_execute_fake_target(enemy, target) {
 
   self SetEntityTarget(target);
 
-  while(1) {
+  while (1) {
     start = self GetTagOrigin("j_elbow_ri");
     end = enemy GetTagOrigin("tag_eye");
     vec = VectorNormalize(end - start);
@@ -2382,10 +2279,10 @@ upperdeck_canned_deaths_cleanup() {
 
   node = self.enode;
   self waittill("death");
-  if(isDefined(self)) // check for deletion not death
+  if(IsDefined(self)) // check for deletion not death
   {
     self bodyshot("killshot");
-    self playSound("generic_death_russian_" + RandomIntRange(1, 8));
+    self PlaySound("generic_death_russian_" + RandomIntRange(1, 8));
   }
 
   node Delete();
@@ -2396,11 +2293,11 @@ upperdeck_fakesound() {
 
   node = GetEnt(self.target, "targetname");
 
-  forward = anglesToForward(node.angles);
+  forward = AnglesToForward(node.angles);
   end = node.origin + vector_multiply(forward, 512);
   time = 8;
 
-  node playSound(self.script_soundalias);
+  node PlaySound(self.script_soundalias);
   node MoveTo(end, time);
 
   wait time;
@@ -2409,10 +2306,8 @@ upperdeck_fakesound() {
 }
 
 /************************************************************************************************************/
-
 /*													MASSACRE												*/
 /************************************************************************************************************/
-
 massacre_rentacop_stop() {
   flag_set("massacre_rentacop_stop");
 
@@ -2442,20 +2337,17 @@ cop_function(_flag, time) {
   self gun_remove();
   animscripts\shared::placeWeaponOn(self.sidearm, "right");
 
-  if(isDefined(_flag) || isDefined(time)) {
+  if(IsDefined(_flag) || IsDefined(time)) {
     self anim_generic_first_frame(self, self.animation);
-    if(isDefined(_flag)) {
+    if(IsDefined(_flag))
       flag_wait(_flag);
-    }
-    if(isDefined(time)) {
+    if(IsDefined(time))
       wait time;
-    }
   }
-  if(self.animation == "airport_security_guard_pillar_react_L") {
+  if(self.animation == "airport_security_guard_pillar_react_L")
     self.deathanim = % airport_security_guard_pillar_death_L;
-  } else {
+  else
     self.deathanim = % airport_security_guard_pillar_death_R;
-  }
 
   self thread play_sound_on_tag_endon_death("airport_rac_freeze");
   self anim_generic(self, self.animation);
@@ -2519,14 +2411,12 @@ massacre_rentacop_rush_guy() {
   self.ignoreme = true;
   self.health = 1;
 
-  if(!isDefined(level.massacre_rush)) {
+  if(!isdefined(level.massacre_rush))
     level.massacre_rush = [];
-  }
   level.massacre_rush[self.script_noteworthy] = self;
 
-  if(level.massacre_rush.size == 4) {
+  if(level.massacre_rush.size == 4)
     flag_set("massacre_rentacop_rush");
-  }
 
   node = getstruct(self.target, "targetname");
 
@@ -2535,19 +2425,19 @@ massacre_rentacop_rush_guy() {
       node anim_generic_first_frame(self, "airport_security_civ_rush_guard");
       break;
     case "male1":
-      temp = spawnStruct();
+      temp = SpawnStruct();
       temp.origin = GetStartOrigin(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civA"));
       temp.angles = GetStartAngles(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civA"));
       temp thread anim_generic_loop(self, "CornerCrR_alert_idle");
       break;
     case "fem":
-      temp = spawnStruct();
+      temp = SpawnStruct();
       temp.origin = GetStartOrigin(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civB"));
       temp.angles = GetStartAngles(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civB"));
       temp thread anim_generic_loop(self, "CornerCrR_alert_idle");
       break;
     case "male2":
-      temp = spawnStruct();
+      temp = SpawnStruct();
       temp.origin = GetStartOrigin(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civC"));
       temp.angles = GetStartAngles(node.origin, node.angles, getanim_generic("airport_security_civ_rush_civC"));
       temp thread anim_generic_loop(self, "CornerCrR_alert_idle");
@@ -2565,7 +2455,7 @@ massacre_rentacop_runaway_guy() {
   self.allowdeath = 1;
 
   node = getstruct(self.target, "targetname");
-  temp = spawnStruct();
+  temp = SpawnStruct();
   temp.origin = GetStartOrigin(node.origin, node.angles, getanim_generic("airport_security_guard_4"));
   temp.angles = GetStartAngles(node.origin, node.angles, getanim_generic("airport_security_guard_4"));
 
@@ -2627,7 +2517,7 @@ massacre_rentacop_row1_fighter() {
   //	if( cointoss() )
   deathanim = "death_explosion_run_L_v2";
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.angles = self.angles + (0, 0, 15);
   node.origin = self.origin;
   self thread grenade_death_scripted(node, deathanim, .6);
@@ -2670,11 +2560,10 @@ massacre_rentacop_row1_runner() {
   level.makarov waittill("m79_shot");
 
   deathanim = "death_explosion_run_R_v1";
-  if(cointoss()) {
+  if(cointoss())
     deathanim = "death_explosion_run_R_v2";
-  }
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.angles = self.angles + (0, 0, -20);
   node.origin = self.origin;
   self thread grenade_death_scripted(node, deathanim);
@@ -2720,16 +2609,14 @@ massacre_rentacop_row1_defender() {
   level.makarov waittill("m79_shot2");
 
   origin = getstruct("massacre_m79_impact_2", "targetname");
-  if(DistanceSquared(self.origin, origin.origin) > squared(100)) {
+  if(DistanceSquared(self.origin, origin.origin) > squared(100))
     return;
-  }
 
   deathanim = "death_explosion_run_B_v1";
-  if(cointoss()) {
+  if(cointoss())
     deathanim = "death_explosion_run_B_v2";
-  }
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.angles = VectorToAngles(origin.origin - self.origin) + (5, 0, 0);
   node.origin = self.origin;
   self thread grenade_death_scripted(node, deathanim, GetAnimLength(level.scr_anim["generic"][deathanim]) - .75);
@@ -2750,11 +2637,10 @@ massacre_rentacops_rambo() {
   //	self thread play_sound_on_tag_endon_death( "airport_rac_freeze" );
   anime = undefined;
 
-  if(cointoss()) {
+  if(cointoss())
     anime = "corner_standL_rambo_jam";
-  } else {
+  else
     anime = "corner_standL_rambo_set";
-  }
 
   self thread anim_generic(self, anime);
 
@@ -2845,7 +2731,7 @@ massacre_rentacops_rear() {
       break;
   }
 
-  node = spawn("script_origin", self.origin);
+  node = Spawn("script_origin", self.origin);
   node.angles = (0, angle, 0);
 
   node thread anim_generic(self, anime);
@@ -2883,9 +2769,8 @@ grenade_death_scripted(node, deathanim, ragtime) {
   self animscripts\shared::DropAllAIWeapons();
   self delayThread(.05, ::_kill);
 
-  if(!isDefined(ragtime)) {
+  if(!isdefined(ragtime))
     ragtime = GetAnimLength(getGenericAnim(deathanim)) - .2;
-  }
   wait ragtime;
   self StartRagdoll();
 }
@@ -2894,7 +2779,7 @@ massacre_rentacops_blindfire() {
   self endon("stop_blindfire");
   self endon("death");
 
-  while(1) {
+  while (1) {
     wait RandomFloatRange(1.5, 3);
 
     self notify("stop_loop");
@@ -2980,7 +2865,7 @@ massacre_rentacops_elevator_1() {
   self.allowdeath = true;
   node notify("stop_loop");
   self StopAnimScripted();
-  self playSound("airport_rmc2_scream1");
+  self PlaySound("airport_rmc2_scream1");
   node thread anim_generic(self, "corner_standL_explosion_B");
 
   wait 1;
@@ -3030,21 +2915,21 @@ massacre_rentacops_elevator_2() {
   self notify("stop_loop");
   self StopAnimScripted();
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.origin = self.origin;
   node.angles = (0, 100, 0);
 
   self gun_remove();
 
   node thread anim_generic(self, "unarmed_cowerstand_react");
-  self playSound("airport_rmc2_scream3");
+  self PlaySound("airport_rmc2_scream3");
 
   flag_wait("massacre_elevator_grenade_exp");
 
   node.origin = self.origin;
 
   self thread grenade_death_scripted(node, "death_explosion_stand_B_v1", GetAnimLength(getGenericAnim("death_explosion_stand_B_v1")) - .5);
-  playFXOnTag(getfx("glass_dust_trail"), self, "J_SpineLower");
+  PlayFXOnTag(getfx("glass_dust_trail"), self, "J_SpineLower");
 }
 
 massacre_rentacops_elevator_3() {
@@ -3082,7 +2967,7 @@ massacre_rentacops_elevator_3() {
 
   flag_wait("massacre_elevator_grenade_throw");
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.origin = self.origin;
   node.angles = (0, 90, 0);
 
@@ -3097,9 +2982,8 @@ massacre_rentacops_elevator_3() {
 
   node.origin = self.origin;
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self set_allowdeath(false);
   self.noragdoll = true;
@@ -3108,9 +2992,8 @@ massacre_rentacops_elevator_3() {
 
   wait 1.55;
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
   self StartRagdoll();
   self Kill();
@@ -3146,21 +3029,21 @@ massacre_elevator() {
   flag_set("massacre_elevator_at_top");
 
   flag_wait("massacre_elevator_grenade_exp");
-  elevator.e["housing"]["mainframe"][0] playSound("elevator_shake_groan");
+  elevator.e["housing"]["mainframe"][0] PlaySound("elevator_shake_groan");
 
   wait .05;
   //array_thread( level.players, ::playLocalSoundWrapper, "_juggernaut_attack" );
   exploder(1);
   struct = getstruct("elevator_pick", "targetname");
-  array = getEntArray("elevator_casing_glass", "targetname");
+  array = GetEntArray("elevator_casing_glass", "targetname");
   glass = getClosest(struct.origin, array);
   glass Delete();
-  array = getEntArray("elevator_housing_glass", "script_noteworthy");
+  array = GetEntArray("elevator_housing_glass", "script_noteworthy");
   glass = getClosest(struct.origin, array);
   glass Delete();
 
   wait .5;
-  //elevator.e[ "housing" ][ "mainframe" ][ 0 ] playSound( "elavator_rumble" );
+  //elevator.e[ "housing" ][ "mainframe" ][ 0 ] PlaySound( "elavator_rumble" );
 
   velF = (0, 0, 1000);
   velR = (0, 0, -1000);
@@ -3181,7 +3064,7 @@ massacre_elevator() {
   elevator.e["housing"]["mainframe"][0] MoveGravity((0, 0, 0), 1);
 
   wait 1;
-  elevator.e["housing"]["mainframe"][0] playSound("elevator_crash");
+  elevator.e["housing"]["mainframe"][0] PlaySound("elevator_crash");
   exploder(2);
   //temp
   left_door Delete();
@@ -3232,7 +3115,7 @@ massacre_runners1() {
   self.IgnoreRandomBulletDamage = false;
   self.useChokePoints = false;
 
-  if(!isDefined(level.massacre_runners1)) {
+  if(!isdefined(level.massacre_runners1)) {
     level.massacre_runners1 = [];
     level.massacre_runners1[level.massacre_runners1.size] = self;
     wait .1;
@@ -3242,7 +3125,7 @@ massacre_runners1() {
 
   thread massacre_runners_m79_death();
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     if(self.target == "massacre_civ_runner_node") {
       self thread anim_generic_loop(self, self.animation);
       self.IgnoreRandomBulletDamage = true;
@@ -3273,7 +3156,7 @@ massacre_runners2(scream) {
   self thread anim_generic_loop(self, self.animation);
   self.IgnoreRandomBulletDamage = true;
 
-  if(!isDefined(level.massacre_runners2)) {
+  if(!isdefined(level.massacre_runners2)) {
     level.massacre_runners2 = [];
     level.massacre_runners2[level.massacre_runners2.size] = self;
     wait .1;
@@ -3288,7 +3171,7 @@ massacre_runners2(scream) {
   self.IgnoreRandomBulletDamage = false;
   self.useChokePoints = false;
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     node = GetNode(self.target, "targetname");
     self follow_path(node);
   }
@@ -3302,51 +3185,46 @@ massacre_runners_m79_death() {
   level.makarov waittill("m79_shot2");
 
   origin = getstruct("massacre_m79_impact_2", "targetname");
-  if(DistanceSquared(self.origin, origin.origin) > squared(100)) {
+  if(DistanceSquared(self.origin, origin.origin) > squared(100))
     return;
-  }
 
   deathanim = undefined;
   vec = origin.origin - self.origin;
-  dot = VectorDot(vec, anglesToForward(self.angles));
+  dot = VectorDot(vec, AnglesToForward(self.angles));
   dot2 = VectorDot(vec, AnglesToRight(self.angles));
   angles = (0, 0, 0);
   //in front
   if(dot > .5) {
     deathanim = "death_explosion_run_B_v1";
-    if(cointoss()) {
+    if(cointoss())
       deathanim = "death_explosion_run_B_v2";
-    }
 
     angles = (10, 0, 0);
   }
   //in back
   else if(dot < -.5) {
     deathanim = "death_explosion_run_F_v1";
-    if(cointoss()) {
+    if(cointoss())
       deathanim = "death_explosion_run_F_v2";
-    }
 
     angles = (-10, 0, 0);
   }
   //to the right
   else if(dot2 > .6) {
     deathanim = "death_explosion_run_L_v1";
-    if(cointoss()) {
+    if(cointoss())
       deathanim = "death_explosion_run_L_v2";
-    }
 
     angles = (0, 0, 10);
   } else {
     deathanim = "death_explosion_run_R_v1";
-    if(cointoss()) {
+    if(cointoss())
       deathanim = "death_explosion_run_R_v2";
-    }
 
     angles = (0, 0, -10);
   }
 
-  node = spawnStruct();
+  node = SpawnStruct();
   node.angles = self.angles;
   node.origin = self.origin;
   self thread grenade_death_scripted(node, deathanim, .5);
@@ -3419,9 +3297,8 @@ massacre_civ_die() {
 
   flag_wait("massacre_civ_animate");
 
-  if(IsAlive(level.team["m4"])) {
+  if(IsAlive(level.team["m4"]))
     level.team["m4"] ent_flag_wait("massacre_firing_into_crowd");
-  }
 
   timing_node = getstruct("massacre_random_timing", "targetname");
   timing_node.origin = (2570, 3777, 144);
@@ -3432,9 +3309,8 @@ massacre_civ_die() {
   value = 1 - (dist2rd - dist) / dist2rd;
 
   time = .25 * (value);
-  if(DistanceSquared(timing_node.origin, group_node.origin) < squared(128)) {
+  if(DistanceSquared(timing_node.origin, group_node.origin) < squared(128))
     time = .1 * (value);
-  }
 
   wait(time);
 
@@ -3455,9 +3331,8 @@ massacre_civ_die() {
   node Delete();
 
   level.massacre_delete_or_die++;
-  if(level.massacre_delete_or_die > 2) {
+  if(level.massacre_delete_or_die > 2)
     level.massacre_delete_or_die = 0;
-  }
 
   self Kill();
 
@@ -3493,9 +3368,8 @@ massacre_team_dialogue() {
 massacre_node_flag(node) {
   self ent_flag_init("massacre_node_end");
 
-  while(isDefined(node.target)) {
+  while (IsDefined(node.target))
     node = getstruct(node.target, "targetname");
-  }
 
   node waittill("trigger");
 
@@ -3522,19 +3396,17 @@ massacre_killers(node) {
   flag_wait("massacre_rentacop_stop_dead");
   self enable_dontevershoot();
 
-  if(self.script_noteworthy == "m4") {
+  if(self.script_noteworthy == "m4")
     self ent_flag_set("massacre_ready");
-  } else {
-    foreach(member in level.team) {
-      member ent_flag_wait("massacre_ready");
-    }
+  else {
+    foreach(member in level.team)
+    member ent_flag_wait("massacre_ready");
 
     delayThread(4, ::activate_trigger, "massacre_rentacop_rush_guy", "target");
   }
 
-  if(self.script_noteworthy == "makarov") {
+  if(self.script_noteworthy == "makarov")
     self thread massacre_node_flag(node);
-  }
 
   self thread follow_path(node);
   self disable_arrivals();
@@ -3569,13 +3441,11 @@ massacre_killers(node) {
 massacre_killers_kill_rush(interval) {
   flag_wait("massacre_kill_rush");
 
-  if(flag("massacre_rentacop_rush_dead")) {
+  if(flag("massacre_rentacop_rush_dead"))
     return;
-  }
 
-  if(!isDefined(interval)) {
+  if(!isdefined(interval))
     interval = .1;
-  }
 
   ai = get_living_ai("cop", "script_noteworthy");
   if(IsAlive(ai)) {
@@ -3592,13 +3462,11 @@ massacre_killers_kill_runaway(interval) {
 
   wait 2;
 
-  if(flag("massacre_rentacop_runaway_dead")) {
+  if(flag("massacre_rentacop_runaway_dead"))
     return;
-  }
 
-  if(!isDefined(interval)) {
+  if(!isdefined(interval))
     interval = .1;
-  }
 
   ai = get_living_ai("massacre_rentacop_runaway_guy", "script_noteworthy");
   if(IsAlive(ai)) {
@@ -3613,13 +3481,11 @@ massacre_killers_kill_runaway(interval) {
 massacre_killers_kill_rambo(interval) {
   flag_wait_any("massacre_rentacop_rambo_dead", "massacre_rentacop_rambo");
 
-  if(flag("massacre_rentacop_rambo_dead")) {
+  if(flag("massacre_rentacop_rambo_dead"))
     return;
-  }
 
-  if(!isDefined(interval)) {
+  if(!isdefined(interval))
     interval = .1;
-  }
 
   self thread fire_full_auto(interval, "stop_spray_and_pray");
   self notify_delay("stop_spray_and_pray", .5);
@@ -3663,15 +3529,14 @@ massacre_killers_m4() {
 
   wait 1;
 
-  while(abs(self.angles[1] - node.angles[1]) > 5) {
+  while (abs(self.angles[1] - node.angles[1]) > 5) {
     //overzealous application ( because code/animscripts love to fuck with orientmode all the time and he may never turn to this angle )
     self OrientMode("face angle", node.angles[1]);
     wait .1;
   }
 
-  if(flag("massacre_runners1_dead") && flag("massacre_runners2_dead") && flag("massacre_runners3_dead")) {
+  if(flag("massacre_runners1_dead") && flag("massacre_runners2_dead") && flag("massacre_runners3_dead"))
     return;
-  }
 
   self thread spray_and_pray(0, .25, true);
 
@@ -3810,9 +3675,8 @@ massacre_killers_saw2() {
   self ClearEntityTarget();
   self disable_dontevershoot();
 
-  if(flag("massacre_runners1_dead") && flag("massacre_runners2_dead") && flag("massacre_runners3_dead")) {
+  if(flag("massacre_runners1_dead") && flag("massacre_runners2_dead") && flag("massacre_runners3_dead"))
     return;
-  }
 
   self thread spray_and_pray(0, .5, true, undefined, 2);
 
@@ -3882,13 +3746,12 @@ massacre_killers_shotgun(node) {
 massacre_restaurant_destroy() {
   roof = GetEnt("massacre_post_roof", "script_noteworthy");
 
-  poles = getEntArray("massacre_post_post_exp", "targetname");
+  poles = GetEntArray("massacre_post_post_exp", "targetname");
   foreach(pole in poles) {
-    pieces = getEntArray(pole.target, "targetname");
+    pieces = GetEntArray(pole.target, "targetname");
 
-    foreach(piece in pieces) {
-      piece Hide();
-    }
+    foreach(piece in pieces)
+    piece Hide();
 
     pole Hide();
   }
@@ -3896,9 +3759,9 @@ massacre_restaurant_destroy() {
   wait .05;
 
   //poles
-  poles = getEntArray("massacre_post_post_exp", "targetname");
+  poles = GetEntArray("massacre_post_post_exp", "targetname");
   foreach(pole in poles) {
-    pieces = getEntArray(pole.target, "targetname");
+    pieces = GetEntArray(pole.target, "targetname");
 
     foreach(piece in pieces) {
       piece Show();
@@ -3908,9 +3771,8 @@ massacre_restaurant_destroy() {
     pole Show();
 
     angle = 10;
-    if(isDefined(pole.script_noteworthy)) {
+    if(IsDefined(pole.script_noteworthy))
       angle = -10;
-    }
 
     time = .1;
     pole RotatePitch(angle, time, 0, time);
@@ -3921,21 +3783,21 @@ massacre_restaurant_destroy() {
   pole Delete();
 
   //glass
-  vec = anglesToForward((0, 180, 0));
+  vec = AnglesToForward((0, 180, 0));
   vec = vec * 500;
   glass = GetGlassArray("massacre_glass_exp_1");
   array_levelcall(glass, ::destroyglass, vec);
 
-  roof playSound("storefront_glass_pane_blowout");
+  roof PlaySound("storefront_glass_pane_blowout");
   pole = GetEnt("massacre_post_top", "script_noteworthy");
-  pole playSound("storefront_wood_break");
+  pole PlaySound("storefront_wood_break");
 
   //sign
   sign = GetEnt("massacre_sign", "script_noteworthy");
   sign PhysicsLaunchClient(sign.origin + (0, 50, 5), (50, 500, -100));
 
   wait 1;
-  roof playSound("storefront_wood_collapse");
+  roof PlaySound("storefront_wood_collapse");
   pole LinkTo(roof);
 
   //angles = (-2.912, 2.421, -2.40804);
@@ -3945,9 +3807,8 @@ massacre_restaurant_destroy() {
   roof RotateTo(angles, time, time);
 
   foreach(pole in poles) {
-    if(isDefined(pole.script_noteworthy)) {
+    if(IsDefined(pole.script_noteworthy))
       continue;
-    }
 
     timex = .25;
     pole RotateRoll(-4, timex, 0, timex);
@@ -4053,7 +3914,7 @@ massacre_killers_makarov(node) {
 
 fire_thumper(node, height) {
   MagicBullet(self.secondaryweapon, self GetTagOrigin("tag_flash"), node.origin + height);
-  playFXOnTag(getfx("m79_muzzleflash"), self, "tag_flash");
+  PlayFXOnTag(getfx("m79_muzzleflash"), self, "tag_flash");
 
   fireAnim = % pistol_stand_fire_A;
   self SetAnimKnobRestart(fireAnim, 1, .2, 1.0);
@@ -4140,9 +4001,8 @@ aim_dir() {
   self SetAnimLimited(anime, weight, time);
   self SetFlaggedAnimKnob("runanim", % run_n_gun, 1, time);
 
-  while(1) {
+  while (1)
     wait 1;
-  }
 }
 
 aim_stop() {
@@ -4152,9 +4012,8 @@ aim_stop() {
   anime = self.aim_anime;
   time = self.aim_time;
 
-  if(!isDefined(time)) {
+  if(!isdefined(time))
     time = .25;
-  }
 
   //self ClearAnim( %run_n_gun, 0.2 );	
   self SetAnimLimited( % casual_killer_walk_shoot_F, 1, time);
@@ -4175,9 +4034,8 @@ massacre_killers_go_nader(node) {
 
   flag_set("massacre_elevator_grenade_ready");
 
-  if(flag("massacre_rentacops_stairs_dead")) {
+  if(flag("massacre_rentacops_stairs_dead"))
     return;
-  }
 
   node anim_generic(self, "exposed_grenadeThrowB");
 }
@@ -4196,7 +4054,7 @@ massacre_killers_attack_civs(node) {
   animset_stand = anim.animsets.defaultStand;
   animset_crouch = anim.animsets.defaultCrouch;
 
-  while(abs(self.angles[1] - node.angles[1]) > 5) {
+  while (abs(self.angles[1] - node.angles[1]) > 5) {
     //overzealous application ( because code/animscripts love to fuck with orientmode all the time and he may never turn to this angle )
     self OrientMode("face angle", 180);
     wait .1;
@@ -4232,7 +4090,7 @@ massacre_killers_attack_civs_burst_fire() {
   self endon("stop_spray_and_pray");
   self endon("stop_burst_fire");
 
-  while(1) {
+  while (1) {
     self thread fire_full_auto(.1, "stop_fire_full_auto");
     wait RandomFloatRange(2, 3);
     self notify("stop_fire_full_auto");
@@ -4255,10 +4113,8 @@ massacre_lean_shoot_anims() {
 }
 
 /************************************************************************************************************/
-
 /*													GATE													*/
 /************************************************************************************************************/
-
 gate_moveout(node) {
   self ent_flag_wait("gate_ready_to_go");
   waittillframeend;
@@ -4339,9 +4195,8 @@ gate_do_jog(node) {
 
   wait .5;
 
-  if(self.script_noteworthy != "m4") {
+  if(self.script_noteworthy != "m4")
     self set_generic_run_anim("casual_killer_jog_A");
-  }
 
   switch (self.script_noteworthy) {
     case "makarov":
@@ -4366,11 +4221,10 @@ gate_do_jog2() {
   node waittill("trigger");
 
   self set_generic_run_anim("casual_killer_jog_A");
-  if(self.script_noteworthy == "saw") {
+  if(self.script_noteworthy == "saw")
     self.moveplaybackrate = 1.1;
-  } else {
+  else
     self.moveplaybackrate = 1.0;
-  }
 
   self.bulletsinclip = WeaponClipSize(self.weapon);
 
@@ -4404,9 +4258,8 @@ gate_moveout_makarov(node) {
 gate_canned_deaths_execute(enemy, type) {
   self endon("death");
 
-  if(enemy.health <= 0) {
+  if(enemy.health <= 0)
     return;
-  }
 
   //set dont ever shoot at the right time if enemy is alive	
   self add_wait(::_wait, enemy.script_delay);
@@ -4425,10 +4278,10 @@ gate_canned_deaths_execute(enemy, type) {
   target = enemy;
 
   if(IsAI(enemy)) {
-    target = spawn("script_origin", enemy.origin + (0, 0, 35));
+    target = Spawn("script_origin", enemy.origin + (0, 0, 35));
     target.health = 100;
-    //target = spawn( "script_model", enemy GetTagOrigin( "j_ankle_ri" ) + (0,0,10) );
-    //target setModel( "weapon_us_smoke_grenade" );
+    //target = Spawn( "script_model", enemy GetTagOrigin( "j_ankle_ri" ) + (0,0,10) );
+    //target SetModel( "weapon_us_smoke_grenade" );
     target LinkTo(enemy);
   }
 
@@ -4436,18 +4289,16 @@ gate_canned_deaths_execute(enemy, type) {
 
   wait .5;
 
-  if(enemy.health > 0) {
+  if(enemy.health > 0)
     enemy waittill("death");
-  }
 
   wait .25;
   self notify("upperdeck_canned_deaths_execute_fire");
   wait .25;
   self ClearEntityTarget();
 
-  if(target != enemy) {
+  if(target != enemy)
     target Delete();
-  }
   self disable_dontevershoot();
 
   self enable_dynamic_run_speed(undefined, undefined, undefined, undefined, level.team, true);
@@ -4459,9 +4310,8 @@ gate_canned_deaths_execute(enemy, type) {
 
 gate_drs_ahead_test(node, dist) {
   foreach(player in level.players) {
-    if(DistanceSquared(player.origin, self.origin) < squared(dist)) {
+    if(DistanceSquared(player.origin, self.origin) < squared(dist))
       return true;
-    }
   }
 
   //ok guess he's not here yet	
@@ -4526,7 +4376,7 @@ gate_runners1() {
 
   gate_runners_setup();
 
-  if(!isDefined(level.massacre_runners2)) {
+  if(!isdefined(level.massacre_runners2)) {
     level.massacre_runners2 = [];
     level.massacre_runners2[level.massacre_runners2.size] = self;
     wait .1;
@@ -4594,21 +4444,19 @@ gate_departures_status() {
 
   wait 1;
 
-  snds = getEntArray("snd_departure_board", "targetname");
-  foreach(member in snds) {
-    member playSound(member.script_soundalias);
-  }
+  snds = GetEntArray("snd_departure_board", "targetname");
+  foreach(member in snds)
+  member PlaySound(member.script_soundalias);
 
   array = array_randomize(level.departure_status_array);
-  foreach(index, value in array) {
-    value delayThread((index * .1), ::sign_departure_status_flip_to, "delayed");
-  }
+  foreach(index, value in array)
+  value delayThread((index * .1), ::sign_departure_status_flip_to, "delayed");
 }
 
 gate_klaxon_rotate() {
   wait RandomFloat(.5);
   time = RandomFloatRange(1, 1.15);
-  while(1) {
+  while (1) {
     self RotateYaw(360, time);
     self waittill("rotatedone");
   }
@@ -4634,7 +4482,7 @@ gate_close_gate() {
   gate1 MoveZ(dist * -1, time);
   gate2 MoveZ(dist * -2, time * 2);
 
-  gate1 playSound("scn_airport_sec_gate_close");
+  gate1 PlaySound("scn_airport_sec_gate_close");
 
   wait time * 2;
   gate2 DisconnectPaths();
@@ -4662,10 +4510,8 @@ gate_stairs_player_allow_sprint() {
 }
 
 /************************************************************************************************************/
-
 /*													BASEMENT												*/
 /************************************************************************************************************/
-
 basement_drop_chop_guys() {
   self endon("death");
 
@@ -4752,26 +4598,24 @@ basement_pre_moveout() {
 
   wait 1;
 
-  if(self.script_noteworthy == "makarov") {
+  if(self.script_noteworthy == "makarov")
     flag_set("basement_mak_speach");
-  }
 
   self enable_exits();
   self clear_run_anim();
 }
 
 basement_moveup() {
-  foreach(member in level.team) {
-    member enable_cqbwalk();
-  }
+  foreach(member in level.team)
+  member enable_cqbwalk();
 
   //4 to beginning of hallway
   nodes = GetNodeArray("basement_moveup2", "targetname");
   foreach(node in nodes) {
     name = node.script_noteworthy;
-    if(name == "makarov") {
+    if(name == "makarov")
       level.team[name] thread follow_path(node);
-    } else if(name == "saw") {
+    else if(name == "saw") {
       level.team[name].noDodgeMove = true;
       level.team[name] delayThread(.75, ::follow_path, node);
     } else
@@ -4788,21 +4632,18 @@ basement_moveup() {
 basement_flicker_light() {
   intensity = self GetLightIntensity();
 
-  while(1) {
+  while (1) {
     self SetLightIntensity(intensity * RandomFloatRange(.5, 1.25));
     wait .1;
   }
 }
 
 /************************************************************************************************************/
-
 /*													TARMAC													*/
 /************************************************************************************************************/
-
 tarmac_difficulty_mod() {
-  if(isDefined(self.script_drone)) {
+  if(IsDefined(self.script_drone))
     return;
-  }
 
   type = maps\_gameskill::get_skill_from_index(level.player.gameskill);
 
@@ -4831,11 +4672,10 @@ tarmac_van_guys(_flag) {
   self.ignoreme = false;
   self.ignoreall = false;
 
-  if(isDefined(self.script_noteworthy) && IsSubStr(self.script_noteworthy, "tarmac_van_riotshield_guys")) {
+  if(IsDefined(self.script_noteworthy) && IsSubStr(self.script_noteworthy, "tarmac_van_riotshield_guys"))
     return;
-  }
 
-  if(isDefined(self.target)) {
+  if(IsDefined(self.target)) {
     node = GetNode(self.target, "targetname");
     self SetGoalNode(node);
     self.goalradius = node.radius;
@@ -4877,15 +4717,14 @@ tarmac_riotshield_group_van(_flag, vanname, name) {
     return;
   }
   node = getstruct(team[0].target, "targetname");
-  dir = anglesToForward(node.angles);
+  dir = AnglesToForward(node.angles);
 
   group = group_create(team);
   group thread tarmac_riotshield_group_van_handle_break(team);
   group endon("break_group");
 
-  foreach(member in team) {
-    member disable_exits();
-  }
+  foreach(member in team)
+  member disable_exits();
   group group_sprint_on();
   group group_lock_angles(dir);
   group group_initialize_formation(dir);
@@ -4894,9 +4733,8 @@ tarmac_riotshield_group_van(_flag, vanname, name) {
   group waittill("goal");
 
   group group_sprint_off();
-  foreach(member in team) {
-    member enable_exits();
-  }
+  foreach(member in team)
+  member enable_exits();
 
   level notify("tarmac_riotshield_group_van_ready");
 }
@@ -4914,21 +4752,19 @@ tarmac_riotshield_group_van_combine() {
   team = array_combine(team, get_living_ai_array("riotshield_group_3", "script_noteworthy"));
 
   group = group_create(team);
-  if(group.ai_array.size < 9) {
+  if(group.ai_array.size < 9)
     group.fleethreshold = 2;
-  } else {
+  else
     group.fleethreshold = floor(group.ai_array.size * .25);
-  }
   group thread tarmac_riotshield_group_handle_break(team);
   group endon("break_group");
 
   group group_sprint_off();
-  foreach(member in team) {
-    member enable_exits();
-  }
+  foreach(member in team)
+  member enable_exits();
 
   node = getstruct("tarmac_riot_node_retreat1_group_van", "targetname");
-  dir = anglesToForward(node.angles);
+  dir = AnglesToForward(node.angles);
 
   group group_lock_angles(dir);
   group group_initialize_formation(dir);
@@ -4970,13 +4806,11 @@ tarmac_riotshield_group_last_stand() {
 
   trigger_wait("tarmac_retreat6", "targetname");
 
-  if(!isDefined(groups)) {
+  if(!isdefined(groups))
     return;
-  }
 
-  foreach(group in groups) {
-    group.fleethreshold = 10;
-  }
+  foreach(group in groups)
+  group.fleethreshold = 10;
 }
 
 tarmac_riotshield_group_last_stand_proc(actors, nodes) {
@@ -4987,9 +4821,8 @@ tarmac_riotshield_group_last_stand_proc(actors, nodes) {
 
   newarray = [];
   foreach(member in actors) {
-    if(member.combatMode != "no_cover") {
+    if(member.combatMode != "no_cover")
       continue; // means they lost their shield or were never a riotshield guy
-    }
     newarray[newarray.size] = member;
   }
 
@@ -5023,15 +4856,13 @@ tarmac_riotshield_group_last_stand_proc(actors, nodes) {
 
   groups = [];
   foreach(key, team in teams) {
-    foreach(member in team) {
-      member enable_exits();
-    }
+    foreach(member in team)
+    member enable_exits();
     node = nodes[key];
-    dir = anglesToForward(node.angles);
+    dir = AnglesToForward(node.angles);
     group = group_create(team);
-    if(group.ai_array.size > 3) {
+    if(group.ai_array.size > 3)
       group.fleethreshold = 2;
-    }
     group thread tarmac_riotshield_group_handle_break(team);
     group group_sprint_off();
     group group_lock_angles(dir);
@@ -5068,19 +4899,17 @@ tarmac_move_through_smoke() {
   wait 1.3;
 
   node = GetNode(self.target, "targetname");
-  if(!isDefined(node)) {
+  if(!isdefined(node))
     node = getstruct(self.target, "targetname");
-  }
 
   goal_type = undefined;
   //only nodes and structs dont have classnames - ents do
-  if(!isDefined(node.classname)) {
+  if(!isdefined(node.classname)) {
     //only structs don't have types, nodes do
-    if(!isDefined(node.type)) {
+    if(!isdefined(node.type))
       goal_type = "struct";
-    } else {
+    else
       goal_type = "node";
-    }
   } else
     goal_type = "origin";
 
@@ -5114,11 +4943,10 @@ tarmac_enemies_wave1() {
 
   self.dontEverShoot = undefined;
 
-  if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "riotshield_group")) {
+  if(!isdefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "riotshield_group"))
     self.goalradius = 1500;
-  } else {
+  else
     return; // dont want riotshield guys going blue just yet
-  }
 
   trigger_wait_targetname("tarmac_retreat1");
   self set_force_color("blue");
@@ -5142,17 +4970,15 @@ tarmac_riotshield_group(name) {
   level endon("redoing_riot_groups");
 
   wait .05;
-  dir = anglesToForward((0, 360, 0));
+  dir = AnglesToForward((0, 360, 0));
 
   team = get_living_ai_array(name, "script_noteworthy");
-  foreach(member in team) {
-    member riotshield_lock_orientation(360);
-  }
+  foreach(member in team)
+  member riotshield_lock_orientation(360);
 
   group = group_create(team);
-  if(group.ai_array.size > 3) {
+  if(group.ai_array.size > 3)
     group.fleethreshold = 2;
-  }
   group group_initialize_formation(dir);
   group endon("break_group");
 
@@ -5193,10 +5019,10 @@ tarmac_riotshield_group(name) {
 }
 
 tarmac_retreat_logic() {
+
   team = array_removeDead(self.ai_array);
-  if(!team.size) {
+  if(!team.size)
     return;
-  }
 
   self group_fastwalk_on();
 
@@ -5220,9 +5046,8 @@ tarmac_riotshield_group_handle_break(team) {
   self waittill("break_group");
 
   team = array_removeDead(team);
-  foreach(member in team) {
-    member set_force_color("blue");
-  }
+  foreach(member in team)
+  member set_force_color("blue");
 }
 
 tarmac_riotshield_group_3() {
@@ -5234,13 +5059,13 @@ tarmac_riotshield_group_3() {
 
   wait .05;
 
-  dir = anglesToForward(node.angles);
+  dir = AnglesToForward(node.angles);
 
   team = get_living_ai_array("riotshield_group_3", "script_noteworthy");
 
   group = group_create(team);
   group.fleethreshold = 2;
-  group group_lock_angles(anglesToForward((0, 360, 0)));
+  group group_lock_angles(AnglesToForward((0, 360, 0)));
   group group_initialize_formation(dir);
 
   group thread tarmac_riotshield_group3_handle_break(team);
@@ -5271,7 +5096,7 @@ tarmac_riotshield_group_3() {
   flag_wait("tarmac_advance4");
 
   node = getstruct("tarmac_riot_node_group3_retreat1", "targetname");
-  dir = anglesToForward(node.angles);
+  dir = AnglesToForward(node.angles);
   group group_lock_angles(dir);
   group group_initialize_formation(dir);
   group group_move(node.origin, dir);
@@ -5323,7 +5148,7 @@ tarmac_enemies_2ndfloor() {
 
   node = GetNode(self.target, "targetname");
 
-  if(isDefined(node.script_noteworthy) && node.script_noteworthy == "flash_throw") {
+  if(IsDefined(node.script_noteworthy) && node.script_noteworthy == "flash_throw") {
     waittillframeend; // so that the large goal radius will be set
     self.goalradius = 8;
     self.ignoreall = true;
@@ -5331,11 +5156,10 @@ tarmac_enemies_2ndfloor() {
     wait RandomFloatRange(.5, 1);
 
     self.allowdeath = true;
-    if(cointoss()) {
+    if(cointoss())
       self anim_generic(self, "coverstand_grenadeA");
-    } else {
+    else
       self anim_generic(self, "coverstand_grenadeB");
-    }
 
     self.goalradius = 512;
     self.ignoreall = false;
@@ -5353,9 +5177,8 @@ tarmac_enemies_2ndfloor() {
 
   nodes = GetNodeArray("floor2_covernodes2", "targetname");
   foreach(node in nodes) {
-    if(isDefined(node.taken)) {
+    if(IsDefined(node.taken))
       continue;
-    }
 
     self.goalradius = 8;
     node.taken = self;
@@ -5383,21 +5206,20 @@ tarmac_enemies_2ndfloor() {
 tarmac_van_stuff(snd, value) {
   level notify("spawned" + value);
 
-  self playSound(snd);
+  self PlaySound(snd);
 }
 
 tarmac_van_fake(value) {
-  model = spawn("script_model", self.origin);
+  model = Spawn("script_model", self.origin);
   model.angles = self.angles;
 
-  model setModel(self.model);
+  model SetModel(self.model);
 
   level waittill("spawned" + value);
   model Delete();
 }
 
 /************************************************************************************************************/
-
 /*											TARMAC OUTTER EDGE												*/
 /************************************************************************************************************/
 
@@ -5405,7 +5227,7 @@ tarmac_security_backup() {
   self waittill("drone_spawned", guy);
   guy waittill("death");
 
-  while(1) {
+  while (1) {
     wait 8;
 
     self.count = 1;
@@ -5427,22 +5249,21 @@ tarmac_security() {
   self add_func(::flag_set, "tarmac_killed_security");
   thread do_wait();
 
-  //self.target_obj = spawnStruct();
+  //self.target_obj = SpawnStruct();
   //self.target_obj.origin = ( 512, 2592, -32 );
   self.target_obj = level.player;
 
-  self.ref = spawn("script_origin", self.origin);
+  self.ref = Spawn("script_origin", self.origin);
   self add_wait(::waittill_msg, "death");
   self.ref add_call(::Delete);
   thread do_wait();
 
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy))
     self thread tarmac_sec_node_behavior_loop();
-  } else {
+  else
     self thread tarmac_sec_node_simple_loop();
-  }
 
-  while(1) {
+  while (1) {
     self notify("tarmac_police_fire");
 
     flag_wait_either("tarmac_too_far", "tarmac_killed_security");
@@ -5462,7 +5283,7 @@ tarmac_sec_node_simple_loop() {
 
   self tarmac_sec_node_stand_idle();
 
-  while(1) {
+  while (1) {
     tarmac_sec_node_stand_update();
 
     wait .1;
@@ -5482,11 +5303,10 @@ tarmac_sec_node_behavior_loop() {
   node = getstruct(self.target, "targetname");
   name = "walk";
 
-  while(1) {
+  while (1) {
     //if the next node is stand - move there first with the last movement type
-    if(node.script_noteworthy == "stand") {
+    if(node.script_noteworthy == "stand")
       tarmac_sec_do_this_node(node, name);
-    }
 
     //otherwise do movement code to the next node
     name = node.script_noteworthy;
@@ -5502,7 +5322,7 @@ tarmac_sec_node_logic_stand(node) {
   interval = .1;
   count = RandomFloatRange(5, 10);
 
-  while(count > 0) {
+  while (count > 0) {
     tarmac_sec_node_stand_update();
 
     wait interval;
@@ -5539,21 +5359,17 @@ tarmac_sec_node_logic_walk(node) {
   vec3 = (node.origin - self.origin);
 
   //front
-  if(VectorDot(vec1, vec3) > .4) {
+  if(VectorDot(vec1, vec3) > .4)
     self.run_anim = "pistol_walk";
-  }
   //right
-  else if(VectorDot(vec2, vec3) >= .6) {
+  else if(VectorDot(vec2, vec3) >= .6)
     self.run_anim = "pistol_walk_left";
-  }
   //left
-  else if(VectorDot(vec2, vec3) <= .6) {
+  else if(VectorDot(vec2, vec3) <= .6)
     self.run_anim = "pistol_walk_right";
-  }
   //back
-  else {
+  else
     self.run_anim = "pistol_walk_back";
-  }
 
   self.run_rate = 1.0;
 
@@ -5593,7 +5409,7 @@ tarmac_sec_run_cycle(node) {
   self RotateTo(angles, .2);
   wait .2;
 
-  while(1) {
+  while (1) {
     angles = tarmac_sec_find_move_angles(node);
 
     self RotateTo(angles, .2);
@@ -5626,18 +5442,18 @@ tarmac_sec_find_move_angles(node) {
 //wait till goal
 tarmac_sec_node_goal(node) {
   self ent_flag_set("moving");
-  while(DistanceSquared(self.origin, node.origin) > squared(self.radius)) {
+  while (DistanceSquared(self.origin, node.origin) > squared(self.radius))
     wait .05;
-  }
   self ent_flag_clear("moving");
   self notify("goal");
 }
 
 //run the proper logic on this node
 tarmac_sec_do_this_node(node, name) {
+  /#
   //self thread tarmac_sec_debug_node( node );
-
-  func = self.tarmac_sec_node_funcs[name];
+  # /
+    func = self.tarmac_sec_node_funcs[name];
   self[[func]](node);
 }
 
@@ -5663,7 +5479,7 @@ tarmac_littlebird_sniper() {
   self.ignoreme = true;
   self.favoriteenemy = level.player;
 
-  while(1) {
+  while (1) {
     self.dontevershoot = true;
     self notify("tarmac_sniper_fire");
 
@@ -5692,10 +5508,9 @@ tarmac_sniper_fire() {
   self endon("death");
   self endon("tarmac_sniper_fire");
 
-  while(1) {
-    if(self CanSee(level.player)) {
+  while (1) {
+    if(self CanSee(level.player))
       self fake_fire();
-    }
     wait RandomFloatRange(1.4, 3);
   }
 }
@@ -5704,10 +5519,9 @@ tarmac_police_fire() {
   self endon("tarmac_police_fire");
   self endon("death");
 
-  while(1) {
-    if(!self ent_flag("moving")) {
+  while (1) {
+    if(!self ent_flag("moving"))
       self fake_fire();
-    }
     wait RandomFloatRange(.3, .5);
   }
 }
@@ -5720,16 +5534,15 @@ fake_fire() {
     fireAnim = % pistol_stand_fire_A;
     self SetAnimKnobRestart(fireAnim, 1, .2, 1.0);
     self delayCall(.25, ::clearAnim, fireAnim, 0);
-    playFXOnTag(getfx("pistol_muzzleflash"), self, "tag_flash");
+    PlayFXOnTag(getfx("pistol_muzzleflash"), self, "tag_flash");
   }
 
   type = maps\_gameskill::get_skill_from_index(level.player.gameskill);
 
-  if(type == "easy") {
-    MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player getEye() + (RandomFloat(32), RandomFloat(32), RandomFloat(32)));
-  } else {
-    MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player getEye() + (RandomFloat(64), RandomFloat(64), RandomFloat(64)));
-  }
+  if(type == "easy")
+    MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player GetEye() + (RandomFloat(32), RandomFloat(32), RandomFloat(32)));
+  else
+    MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player GetEye() + (RandomFloat(64), RandomFloat(64), RandomFloat(64)));
 }
 
 tarmac_handle_player_too_far() {
@@ -5738,18 +5551,17 @@ tarmac_handle_player_too_far() {
 
   trigger = GetEnt("tarmac_player_too_far", "targetname");
 
-  while(1) {
+  while (1) {
     trigger waittill("trigger");
 
     flag_set("tarmac_too_far");
     oldstring = level.fail_string;
     // The police barricade has too much fire power to confront.
-    level.fail_string = &"AIRPORT_FAIL_POLICE_BARRICADE";
+    level.fail_string = & "AIRPORT_FAIL_POLICE_BARRICADE";
     thread tarmac_handle_player_too_far_death();
 
-    while(level.player IsTouching(trigger)) {
+    while (level.player IsTouching(trigger))
       wait .1;
-    }
 
     flag_clear("tarmac_too_far");
     level.fail_string = oldstring;
@@ -5767,10 +5579,8 @@ tarmac_handle_player_too_far_death() {
 }
 
 /************************************************************************************************************/
-
 /*										TARMAC FRIENDLY LOGIC												*/
 /************************************************************************************************************/
-
 tarmac_moveout(node) {
   self endon("death");
   flag_waitopen("friendly_fire_warning");
@@ -5833,9 +5643,8 @@ tarmac_kill_friendly() {
   self thread tarmac_kill_friendly_bsc();
 
   self unmake_hero();
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
 
   self.maxhealth = 250;
   self.health = 250;
@@ -5857,9 +5666,8 @@ tarmac_kill_friendly_bsc() {
 
   wait RandomFloat(.1);
 
-  if(flag("tarmac_kill_friendly_bsc")) {
+  if(flag("tarmac_kill_friendly_bsc"))
     return;
-  }
   flag_set("tarmac_kill_friendly_bsc");
 
   flag_set("tarmac_bcs");
@@ -5869,15 +5677,14 @@ tarmac_kill_friendly_bsc() {
 }
 
 tarmac_kill_friendly_kill() {
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
 
   self Kill();
 }
 
 handle_tarmac_threat_bias() {
-  while(1) {
+  while (1) {
     self waittill("trigger", guy);
 
     guy SetThreatBiasGroup("underpass_guys");
@@ -5888,14 +5695,12 @@ handle_tarmac_threat_bias() {
 handle_tarmac_threat_bias_guy(trigger) {
   self endon("death");
 
-  if(isDefined(self.handle_tarmac_threat_bias_guy)) {
+  if(IsDefined(self.handle_tarmac_threat_bias_guy))
     return;
-  }
   self.handle_tarmac_threat_bias_guy = true;
 
-  while(self IsTouching(trigger)) {
+  while (self IsTouching(trigger))
     wait .1;
-  }
 
   self.handle_tarmac_threat_bias_guy = undefined;
   self SetThreatBiasGroup();
@@ -5919,24 +5724,20 @@ tarmac_autosaves_wait() {
   add_func(::autosave_or_timeout, "tarmac_left_underpass", 4);
   thread do_wait();
 
-  if(!flag("do_not_save")) {
+  if(!flag("do_not_save"))
     thread autosave_by_name("tarmac_heat_fight");
-  }
 
   trigger_wait("tarmac_enemies_wave2", "target");
-  if(!flag("do_not_save")) {
+  if(!flag("do_not_save"))
     thread autosave_or_timeout("tarmac_wave2launch", 4);
-  }
 
   trigger_wait("tarmac_advance5", "targetname");
-  if(!flag("do_not_save")) {
+  if(!flag("do_not_save"))
     thread autosave_or_timeout("tarmac_at_underpass", 4);
-  }
 
   trigger_wait("tarmac_advance8", "targetname");
-  if(!flag("do_not_save")) {
+  if(!flag("do_not_save"))
     thread autosave_or_timeout("tarmac_left_underpass", 4);
-  }
 }
 
 tarmac_escape_music() {
@@ -5948,9 +5749,8 @@ tarmac_escape_music() {
   remove = array_combine(remove, get_living_ai_array("tarmac_littlebird_sniper2", "script_noteworthy"));
   ai = array_remove_array(ai, remove);
 
-  if(ai.size > 4) {
+  if(ai.size > 4)
     waittill_dead_or_dying(ai, ai.size - 4);
-  }
 
   flag_set("tarmac_clear_out_2nd_floor");
   music_escape();
@@ -5967,9 +5767,8 @@ tarmac_makarov_last_node() {
   remove = array_combine(remove, get_living_ai_array("tarmac_littlebird_sniper2", "script_noteworthy"));
   ai = array_remove_array(ai, remove);
 
-  if(ai.size > 3) {
+  if(ai.size > 3)
     waittill_dead_or_dying(ai, ai.size - 3);
-  }
 
   level.makarov disable_ai_color();
   level.makarov SetGoalNode(node);
@@ -5977,7 +5776,7 @@ tarmac_makarov_last_node() {
 }
 
 tarmac_hide_elevator() {
-  elevator_house = getEntArray("elevator_housing", "targetname");
+  elevator_house = GetEntArray("elevator_housing", "targetname");
   foreach(member in elevator_house) {
     member Hide();
     member NotSolid();
@@ -5995,15 +5794,13 @@ tarmac_get_enemies() {
 }
 
 /************************************************************************************************************/
-
 /*											TARMAC VAN LOGIC												*/
 /************************************************************************************************************/
-
 tarmac_van_setup(name) {
   van_hack = GetEnt(name, "targetname");
 
   tarmac_van_create();
-  array_thread(getEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
+  array_thread(GetEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
 
   van_hack Delete();
 
@@ -6015,13 +5812,12 @@ tarmac_van_setup(name) {
 }
 
 tarmac_van_attach_guy(van) {
-  if(isDefined(self.script_startingposition) && van.seats[self.script_startingposition]["free"]) {
+  if(IsDefined(self.script_startingposition) && van.seats[self.script_startingposition]["free"])
     self tarmac_van_guy_take_seat(van, self.script_startingposition);
-  } else {
+  else {
     foreach(index, seat in van.seats) {
-      if(!seat["free"]) {
+      if(!seat["free"])
         continue;
-      }
 
       self tarmac_van_guy_take_seat(van, index);
       return;
@@ -6033,11 +5829,10 @@ tarmac_van_guy_take_seat(van, index) {
   van.seats[index]["free"] = false;
   self LinkTo(van.seats[index]["node"]);
 
-  if(index == 0) {
+  if(index == 0)
     van.seats[index]["node"] thread anim_generic_loop(self, "bm21_driver_idle");
-  } else {
+  else
     van.seats[index]["node"] thread anim_generic_loop(self, "riotshield_idle");
-  }
   van.seats[index]["guy"] = self;
   self.van_seat = van.seats[index]["node"];
 }
@@ -6046,9 +5841,8 @@ tarmac_van_wait_unload() {
   self waittill("hack_unload");
 
   foreach(index, seat in self.seats) {
-    if(IsAlive(seat["guy"])) {
+    if(IsAlive(seat["guy"]))
       self thread tarmac_van_unload_guy(index, seat);
-    }
   }
 }
 
@@ -6059,7 +5853,7 @@ tarmac_van_unload_guy(index, seat) {
 
   guy endon("death");
 
-  if(isDefined(guy.nounload)) {
+  if(IsDefined(guy.nounload)) {
     wait .1;
     guy notify("hack_unloaded");
     return;
@@ -6105,7 +5899,7 @@ tarmac_van_unload_guy(index, seat) {
   length = GetAnimLength(getGenericAnim(animation));
 
   if(index == 0) {
-    movenode = spawn("script_origin", node.origin);
+    movenode = Spawn("script_origin", node.origin);
     movenode.angles = self.angles;
     guy LinkTo(movenode);
 
@@ -6113,9 +5907,9 @@ tarmac_van_unload_guy(index, seat) {
     wait .25;
     movenode MoveZ(8, .25);
   } else {
-    forward = anglesToForward(node.angles);
+    forward = AnglesToForward(node.angles);
 
-    movenode = spawn("script_origin", node.origin + vector_multiply(forward, 16));
+    movenode = Spawn("script_origin", node.origin + vector_multiply(forward, 16));
     movenode.angles = self.angles;
     guy LinkTo(movenode);
 
@@ -6135,6 +5929,7 @@ tarmac_van_unload_guy(index, seat) {
   movenode Delete();
 
   guy notify("hack_unloaded");
+
 }
 
 tarmac_van_unload_check(index, guy) {
@@ -6143,9 +5938,8 @@ tarmac_van_unload_check(index, guy) {
   self.seats[index]["free"] = true;
 
   foreach(seat in self.seats) {
-    if(!self.seats[index]["free"]) {
+    if(!self.seats[index]["free"])
       return;
-    }
   }
 
   self notify("finished_unloading");
@@ -6153,7 +5947,7 @@ tarmac_van_unload_check(index, guy) {
 
 tarmac_van_create() {
   van = self;
-  forward = anglesToForward(van.angles);
+  forward = AnglesToForward(van.angles);
   right = AnglesToRight(van.angles);
   angles = VectorToAngles(vector_multiply(forward, -1));
   height = (0, 0, 28);
@@ -6163,7 +5957,7 @@ tarmac_van_create() {
   i = 0;
   origin = van.origin + vector_multiply(forward, 44) + vector_multiply(right, -24) + (0, 0, 48);
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = van.angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6171,7 +5965,7 @@ tarmac_van_create() {
   i = 1;
   origin = van.origin + vector_multiply(forward, -88) + vector_multiply(right, -16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6179,7 +5973,7 @@ tarmac_van_create() {
   i = 2;
   origin = van.origin + vector_multiply(forward, -88) + vector_multiply(right, 16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6187,7 +5981,7 @@ tarmac_van_create() {
   i = 3;
   origin = van.origin + vector_multiply(forward, -56) + vector_multiply(right, -16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6195,7 +5989,7 @@ tarmac_van_create() {
   i = 4;
   origin = van.origin + vector_multiply(forward, -56) + vector_multiply(right, 16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6203,7 +5997,7 @@ tarmac_van_create() {
   i = 5;
   origin = van.origin + vector_multiply(forward, -24) + vector_multiply(right, -16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6211,7 +6005,7 @@ tarmac_van_create() {
   i = 6;
   origin = van.origin + vector_multiply(forward, -24) + vector_multiply(right, 16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6219,7 +6013,7 @@ tarmac_van_create() {
   i = 7;
   origin = van.origin + vector_multiply(forward, 8) + vector_multiply(right, -16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6227,7 +6021,7 @@ tarmac_van_create() {
   i = 8;
   origin = van.origin + vector_multiply(forward, 8) + vector_multiply(right, 16) + height;
   van.seats[i] = [];
-  van.seats[i]["node"] = spawn("script_origin", origin);
+  van.seats[i]["node"] = Spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
   van.seats[i]["node"] LinkTo(van);
   van.seats[i]["free"] = true;
@@ -6240,53 +6034,46 @@ tarmac_smoke_nodes() {
 }
 
 tarmac_bcs_enemy() {
-  if(!flag_exist("tarmac_bcs_enemy")) {
+  if(!flag_exist("tarmac_bcs_enemy"))
     flag_init("tarmac_bcs_enemy");
-  }
 
-  if(!flag_exist("bsc_nade")) {
+  if(!flag_exist("bsc_nade"))
     flag_init("bsc_nade");
-  }
 
   level endon("escape_main");
 
   flag_wait("tarmac_open_fire");
   wait 2;
 
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
 
-    if(flag("tarmac_bcs_enemy")) {
+    if(flag("tarmac_bcs_enemy"))
       continue;
-    }
-    if(flag("tarmac_bcs")) {
+    if(flag("tarmac_bcs"))
       continue;
-    }
-    if(flag("bsc_nade")) {
+    if(flag("bsc_nade"))
       continue;
-    }
 
-    if(!isDefined(other)) {
+    if(!isdefined(other)) {
       //	AssertMsg( "*** COME GRAB MO RIGHT NOW *** other should be defined from a BCS trigger set to only trigger from AI." );
       continue;
     }
-    if(!isDefined(other.origin)) {
+    if(!isdefined(other.origin)) {
       //	AssertMsg( "*** COME GRAB MO RIGHT NOW *** other.origin should be defined from a BCS trigger set to only trigger from AI." );
       continue;
     }
 
-    if(DistanceSquared(other.origin, level.player.origin) > squared(1024)) {
+    if(DistanceSquared(other.origin, level.player.origin) > squared(1024))
       continue;
-    }
 
     flag_set("tarmac_bcs_enemy");
     flag_set("tarmac_bcs");
 
-    if((cointoss() && self.script_soundalias != "enemy_bus") || self.script_soundalias == "enemy_underplane") {
+    if((cointoss() && self.script_soundalias != "enemy_bus") || self.script_soundalias == "enemy_underplane")
       level.makarov dialogue_queue(self.script_soundalias);
-    } else {
+    else
       level.team["m4"] dialogue_queue(self.script_soundalias);
-    }
 
     flag_clear("tarmac_bcs");
 
@@ -6299,10 +6086,8 @@ tarmac_bcs_enemy() {
 }
 
 /************************************************************************************************************/
-
 /*													ESCAPE													*/
 /************************************************************************************************************/
-
 escape_van_driver() {
   self.nounload = true;
   self thread friendly_fire_watch_player();
@@ -6337,7 +6122,7 @@ escape_van_setup(name) {
   van_hack = GetEnt(name, "targetname");
 
   self tarmac_van_create();
-  array_thread(getEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
+  array_thread(GetEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
 
   van_hack Delete();
 
@@ -6350,16 +6135,14 @@ escape_relax() {
   self endon("escape_enter_van");
   self endon("death");
 
-  if(flag("escape_sequence_go")) {
+  if(flag("escape_sequence_go"))
     return;
-  }
   level endon("escape_sequence_go");
 
   self waittill("anim_reach_complete");
 
-  if(self == level.makarov) {
+  if(self == level.makarov)
     self waittill("stand_exposed_wave_halt_v2");
-  }
 
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
@@ -6404,9 +6187,8 @@ escape_setup_variables() {
 
 escape_survivors_follow_path(nodes, dist) {
   foreach(node in nodes) {
-    if(!isalive(level.survivors[node.script_noteworthy])) {
+    if(!isalive(level.survivors[node.script_noteworthy]))
       continue;
-    }
 
     time = Int(node.script_noteworthy);
     level.survivors[node.script_noteworthy] delayThread(time, ::follow_path, node, dist);
@@ -6418,9 +6200,8 @@ escape_create_survivors() {
 
   index = 0;
   foreach(member in level.team) {
-    if(member == level.makarov) {
+    if(member == level.makarov)
       continue;
-    }
     index++;
     level.survivors[string(index)] = member;
   }
@@ -6429,7 +6210,7 @@ escape_create_survivors() {
 
 escape_player_disable_jump_n_weapon() {
   /*	level endon( "escape_player_is_in" );
-  	while( 1 )
+  	while ( 1 )
   	{
   		self waittill( "trigger" );*/
 
@@ -6440,7 +6221,7 @@ escape_player_disable_jump_n_weapon() {
   store_current_weapon(weapon);
   level.player enablePlayerWeapons(false);
 
-  /*	while( level.player IsTouching( self ) )
+  /*	while ( level.player IsTouching( self ) )
   		wait .05;
 
   	level.player AllowJump( true );
@@ -6459,17 +6240,15 @@ get_correct_weapon() {
   if(WeaponClass(self GetCurrentWeapon()) == "pistol") {
     list = self GetWeaponsListPrimaries();
     foreach(gun in list) {
-      if(WeaponClass(gun) == "pistol") {
+      if(WeaponClass(gun) == "pistol")
         continue;
-      }
       weapon = gun;
     }
   } else
     weapon = self GetCurrentWeapon();
 
-  if(!isDefined(weapon) || weapon == "riotshield") {
+  if(!isdefined(weapon) || weapon == "riotshield")
     weapon = "m4_grenadier";
-  }
 
   return weapon;
 }
@@ -6487,9 +6266,8 @@ get_player_ending_position() {
 }
 
 player_ready_for_ending(origin) {
-  if(!player_would_see_ending()) {
+  if(!player_would_see_ending())
     return false;
-  }
 
   return Distance(origin, level.player.origin) < 45;
 }
@@ -6502,10 +6280,9 @@ grab_player_if_he_gets_close() {
   origin = get_player_ending_position();
   interval = 0.05;
 
-  for(;;) {
-    if(player_ready_for_ending(origin)) {
+  for (;;) {
+    if(player_ready_for_ending(origin))
       break;
-    }
     wait(0.05);
   }
 
@@ -6516,7 +6293,7 @@ grab_player_if_he_gets_close() {
 }
 
 player_loses_speed() {
-  for(i = 100; i >= 0; i -= 10) {
+  for (i = 100; i >= 0; i -= 10) {
     speed = i * 0.01;
     level.player setmovespeedscale(speed);
     wait(0.05);
@@ -6526,7 +6303,7 @@ player_loses_speed() {
 escape_end_wait_until_player_is_in_position() {
   origin = get_player_ending_position();
 
-  while(Distance(origin, level.player.origin) > 350) {
+  while (Distance(origin, level.player.origin) > 350) {
     wait(0.05);
   }
 }
@@ -6569,9 +6346,9 @@ escape_animate_player_death() {
 
 escape_mak_dialogue() {
   self waittillmatch("single anim", "dialog");
-  self playSound("airport_mkv_nomessage");
+  self PlaySound("airport_mkv_nomessage");
   self waittillmatch("single anim", "dialog");
-  //self playSound( "airport_mkv_thiswill" );
+  //self PlaySound( "airport_mkv_thiswill" );
 }
 
 makarov_shoot_player() {
@@ -6612,7 +6389,7 @@ escape_animate_player_death2() {
 
   ent = getstruct("escape_ending_node", "targetname");
   origin = (level.player.origin[0], level.player.origin[1], ent.origin[2]) + (0, 0, 4.5);
-  node = spawn("script_origin", origin);
+  node = Spawn("script_origin", origin);
   node.angles = level.player.angles;
 
   // this is the model the player will attach to for the ride sequence
@@ -6642,12 +6419,12 @@ escape_draw_blood() {
   wait 1;
   tagPos = self GetTagOrigin("tag_torso"); // rough tag to play fx on
 
-  model = spawn("script_model", tagPos + (-15, 10, -7.5));
+  model = Spawn("script_model", tagPos + (-15, 10, -7.5));
   model.angles = (-90, 225 - 90, 0);
-  model setModel("tag_origin");
+  model SetModel("tag_origin");
   model Hide();
 
-  playFXOnTag(getfx("deathfx_bloodpool"), model, "tag_origin");
+  PlayFXOnTag(getfx("deathfx_bloodpool"), model, "tag_origin");
 }
 
 player_would_see_ending() {
@@ -6659,7 +6436,7 @@ player_would_see_ending() {
   og1 = (van.origin[0], van.origin[1], 0);
   og2 = (level.player.origin[0], level.player.origin[1], 0);
 
-  vec1 = anglesToForward(angles);
+  vec1 = AnglesToForward(angles);
   vec2 = VectorNormalize(og1 - og2);
 
   dot = VectorDot(vec1, vec2) > 0.75;
@@ -6697,11 +6474,10 @@ escape_final_guys2() {
   self clear_run_anim();
   self thread follow_path(node);
 
-  if(self.animation != "patrol_jog_orders_once") {
+  if(self.animation != "patrol_jog_orders_once")
     return;
-  }
 
-  self playSound("airport_fsbr_servicetunnels");
+  self PlaySound("airport_fsbr_servicetunnels");
 
   self disable_exits();
   self disable_arrivals();
@@ -6714,10 +6490,9 @@ escape_final_guys2() {
     self notify("_utility::follow_path");
     self SetGoalPos(level.player.origin + (0, 0, 64));
 
-    while(DistanceSquared(self.origin, level.player.origin) > squared(145)) {
+    while (DistanceSquared(self.origin, level.player.origin) > squared(145))
       wait .05;
-    }
-    node = spawnStruct();
+    node = SpawnStruct();
     node.origin = self.origin;
     node.angles = VectorToAngles(level.player.origin - self.origin);
     node thread anim_generic_gravity(self, "patrol_boredrun_find");
@@ -6741,10 +6516,8 @@ escape_police_car_guys() {
 }
 
 /************************************************************************************************************/
-
 /*												INITIALIZATIONS												*/
 /************************************************************************************************************/
-
 player_init() {
   blend_movespeedscale_custom(15);
   level.player AllowSprint(false);
@@ -6769,22 +6542,20 @@ team_init() {
   self pathrandompercent_zero();
   self walkdist_zero();
 
-  node = spawn("script_origin", self.origin);
+  node = Spawn("script_origin", self.origin);
   node.angles = self.angles;
   self.ref_node = node;
   self.upperdeck_enemies = 0;
 
-  if(!isDefined(level.team)) {
+  if(!isdefined(level.team))
     level.team = [];
-  }
   level.team[self.script_noteworthy] = self;
 
   self.animname = self.script_noteworthy;
   self.targetname = self.script_noteworthy;
 
-  if(self.script_noteworthy == "makarov") {
+  if(self.script_noteworthy == "makarov")
     level.makarov = self;
-  }
 
   self waittill("death");
 
@@ -6792,10 +6563,8 @@ team_init() {
 }
 
 /************************************************************************************************************/
-
 /*											DEPARTURES SIGN													*/
 /************************************************************************************************************/
-
 sign_departure_status_init() {
   array = sign_departure_status_system_setup();
   array_thread(array, ::sign_departure_status_tab_setup);
@@ -6804,7 +6573,7 @@ sign_departure_status_init() {
 }
 
 sign_departure_status_system_setup() {
-  pieces = getEntArray("sign_departure_status", "targetname");
+  pieces = GetEntArray("sign_departure_status", "targetname");
   array = [];
 
   foreach(tab in pieces) {
@@ -6812,20 +6581,18 @@ sign_departure_status_system_setup() {
     origin = tab.origin;
 
     foreach(member in array) {
-      if(member.origin != origin) {
+      if(member.origin != origin)
         continue;
-      }
 
       makenew = false;
       member.tabs[tab.script_noteworthy] = tab;
       break;
     }
 
-    if(!makenew) {
+    if(!makenew)
       continue;
-    }
 
-    newtab = spawnStruct();
+    newtab = SpawnStruct();
     newtab.origin = origin;
     newtab.tabs = [];
     newtab.tabs[tab.script_noteworthy] = tab;
@@ -6874,7 +6641,7 @@ sign_departure_status_tab_setup() {
 
 sign_departure_status_flip_to(state) {
   time = .20;
-  while(self.current_state != state) {
+  while (self.current_state != state) {
     next_state = self.status["order"][self.current_state];
     topname = self.status[self.current_state]["top"];
     bottomname = self.status[self.current_state]["bottom"];
@@ -6900,7 +6667,6 @@ sign_departure_status_flip_to(state) {
 }
 
 /************************************************************************************************************/
-
 /*													MISC													*/
 /************************************************************************************************************/
 
@@ -6915,14 +6681,13 @@ delete_glass() {
 do_lobby_player_fire() {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self waittill("damage", amt, attacker, vec, point, type);
 
-    if(!isplayer(attacker)) {
+    if(!isplayer(attacker))
       continue;
-    }
 
-    playFX(getfx("killshot"), point);
+    PlayFX(getfx("killshot"), point);
   }
 }
 
@@ -6931,7 +6696,7 @@ do_blood_notetracks() {
 
   notetrack = "empty";
 
-  while(notetrack != "end") {
+  while (notetrack != "end") {
     self waittill("single anim", notetrack);
 
     switch (notetrack) {
@@ -6948,7 +6713,7 @@ do_blood_notetracks() {
         enemy = random(level.team);
         vec = VectorNormalize(origin - enemy.origin);
 
-        playFX(getfx("headshot"), origin, vec);
+        PlayFX(getfx("headshot"), origin, vec);
         break;
     }
   }
@@ -6960,15 +6725,15 @@ bodyshot(fx) {
   vec = VectorNormalize(enemy.origin - origin);
   vec = vector_multiply(vec, 10);
 
-  playFX(getfx(fx), origin + vec);
+  PlayFX(getfx(fx), origin + vec);
 }
 
 scream_track(node, alias, speed) {
-  obj = spawn("script_origin", node.origin);
-  //obj setModel( "projectile_us_smoke_grenade" );
-  obj playSound(alias);
+  obj = Spawn("script_origin", node.origin);
+  //obj SetModel( "projectile_us_smoke_grenade" );
+  obj PlaySound(alias);
 
-  while(isDefined(node.target)) {
+  while (IsDefined(node.target)) {
     next = getstruct(node.target, "targetname");
     dist = Distance(node.origin, next.origin);
     time = dist / speed;
@@ -6987,15 +6752,12 @@ explode_targets(targets, radius, rangemin, rangemax) {
   level endon("stop_explode_targets");
 
   targets = array_randomize(targets);
-  if(!isDefined(radius)) {
+  if(!isdefined(radius))
     radius = 4;
-  }
-  if(!isDefined(rangemin)) {
+  if(!isdefined(rangemin))
     rangemin = .75;
-  }
-  if(!isDefined(rangemax)) {
+  if(!isdefined(rangemax))
     rangemax = rangemin + .75;
-  }
 
   foreach(target in targets) {
     RadiusDamage(target.origin, radius, 500, 500);
@@ -7043,28 +6805,28 @@ spray_and_pray(delay, speed_scaler, forward, height, angle, dist) {
   self.no_pistol_switch = true;
 
   self spray_and_pray_move_target(array);
+
 }
 
 spray_and_pray_move_target(array) {
-  while(1) {
+  while (1) {
     dist = Distance(array["node_origin"], array["target"].origin);
     time = dist / array["speed"];
 
     array["target"] MoveTo(array["node_origin"], time, time * .1, time * .1);
     wait time;
 
-    if(array["node_origin"] == array["start_origin"]) {
+    if(array["node_origin"] == array["start_origin"])
       array["node_origin"] = array["end_origin"];
-    } else {
+    else
       array["node_origin"] = array["start_origin"];
-    }
   }
 }
 
 spray_and_pray_move_target_node(array) {
   node = array["node"];
 
-  while(1) {
+  while (1) {
     node = getstruct(node.target, "targetname");
 
     dist = Distance(node.origin, array["target"].origin);
@@ -7078,45 +6840,37 @@ spray_and_pray_move_target_node(array) {
 spray_and_pray_get_target_node(delay, speed_scaler, node) {
   array = [];
 
-  if(!isDefined(delay)) {
+  if(!isdefined(delay))
     delay = .05;
-  }
-  if(!isDefined(speed_scaler)) {
+  if(!isdefined(speed_scaler))
     speed_scaler = 1;
-  }
 
   wait delay;
 
   array["speed"] = 50 * speed_scaler;
   array["node"] = node;
 
-  array["target"] = spawn("script_origin", node.origin);
-  //	array[ "target" ] = spawn( "script_model", node.origin );
-  //	array[ "target" ] setModel( "weapon_us_smoke_grenade" );
+  array["target"] = Spawn("script_origin", node.origin);
+  //	array[ "target" ] = Spawn( "script_model", node.origin );
+  //	array[ "target" ] SetModel( "weapon_us_smoke_grenade" );
   return array;
 }
 
 spray_and_pray_get_target(delay, speed_scaler, forward, height, angle, dist) {
   array = [];
 
-  if(!isDefined(delay)) {
+  if(!isdefined(delay))
     delay = .05;
-  }
-  if(!isDefined(speed_scaler)) {
+  if(!isdefined(speed_scaler))
     speed_scaler = 1;
-  }
-  if(!isDefined(forward)) {
+  if(!isdefined(forward))
     forward = true;
-  }
-  if(!isDefined(height)) {
+  if(!isdefined(height))
     height = 0;
-  }
-  if(!isDefined(angle)) {
+  if(!isdefined(angle))
     angle = 38;
-  }
-  if(!isDefined(dist)) {
+  if(!isdefined(dist))
     dist = 64;
-  }
 
   wait delay;
 
@@ -7124,19 +6878,18 @@ spray_and_pray_get_target(delay, speed_scaler, forward, height, angle, dist) {
   array["speed"] = 50 * speed_scaler;
   start = (self.origin[0], self.origin[1], muzzle[2]);
 
-  origin = start + (vector_multiply(anglesToForward(self.angles), dist)) + (0, 0, height);
-  array["start_origin"] = start + (vector_multiply(anglesToForward(self.angles + (0, angle, 0)), dist)) + (0, 0, height);
-  array["end_origin"] = start + (vector_multiply(anglesToForward(self.angles + (0, (angle * -1), 0)), dist)) + (0, 0, height);
+  origin = start + (vector_multiply(AnglesToForward(self.angles), dist)) + (0, 0, height);
+  array["start_origin"] = start + (vector_multiply(AnglesToForward(self.angles + (0, angle, 0)), dist)) + (0, 0, height);
+  array["end_origin"] = start + (vector_multiply(AnglesToForward(self.angles + (0, (angle * -1), 0)), dist)) + (0, 0, height);
 
-  if(forward) {
+  if(forward)
     array["node_origin"] = array["end_origin"];
-  } else {
+  else
     array["node_origin"] = array["start_origin"];
-  }
 
-  array["target"] = spawn("script_origin", origin);
-  //	array[ "target" ] = spawn( "script_model", origin );
-  //	array[ "target" ] setModel( "weapon_us_smoke_grenade" );
+  array["target"] = Spawn("script_origin", origin);
+  //	array[ "target" ] = Spawn( "script_model", origin );
+  //	array[ "target" ] SetModel( "weapon_us_smoke_grenade" );
   return array;
 }
 
@@ -7149,17 +6902,15 @@ stop_spray_and_pray_cleanup(target, msg) {
 }
 
 ap_teleport_player(name) {
-  if(!isDefined(name)) {
+  if(!isdefined(name))
     name = level.start_point;
-  }
 
   array = getstructarray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
-    if(ent.script_noteworthy != name) {
+    if(ent.script_noteworthy != name)
       continue;
-    }
 
     nodes[nodes.size] = ent;
   }
@@ -7171,9 +6922,8 @@ ap_teleport_team(nodes) {
   flag_wait("team_initialized");
 
   foreach(node in nodes) {
-    if(!isalive(level.team[node.script_noteworthy])) {
+    if(!isalive(level.team[node.script_noteworthy]))
       continue;
-    }
 
     actor = level.team[node.script_noteworthy];
     actor thread teleport_actor(node);
@@ -7181,14 +6931,13 @@ ap_teleport_team(nodes) {
 }
 
 teleport_actor(node) {
-  link = spawn("script_origin", self.origin);
+  link = Spawn("script_origin", self.origin);
   link.angles = self.angles;
   self LinkTo(link);
 
   link MoveTo(node.origin, .05);
-  if(isDefined(node.angles)) {
+  if(IsDefined(node.angles))
     link RotateTo(node.angles, .05);
-  }
 
   link waittill("movedone");
   wait .05;
@@ -7224,14 +6973,13 @@ side_step(anime, angles) {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  if(!(self ent_flag_exist("side_step"))) {
+  if(!(self ent_flag_exist("side_step")))
     self ent_flag_init("side_step");
-  }
 
   self ent_flag_set("side_step");
   self.sidestep = true;
 
-  while(self.sidestep) {
+  while (self.sidestep) {
     self.ref_node.origin = self.origin;
     self.ref_node.angles = angles;
     self.ref_node anim_generic(self, anime);
@@ -7253,20 +7001,19 @@ kill_player() {
 }
 
 good_save_handler() {
-  while(1) {
+  while (1) {
     flag_wait_any("friendly_fire_dist_check", "friendly_fire_kill_check", "friendly_fire_warning");
 
     level.savehere = false;
     flag_set("do_not_save");
 
-    while(flag("do_not_save")) {
+    while (flag("do_not_save")) {
       flag_waitopen("friendly_fire_dist_check");
       flag_waitopen("friendly_fire_kill_check");
       flag_waitopen("friendly_fire_warning");
 
-      if(flag("friendly_fire_dist_check") || flag("friendly_fire_kill_check") || flag("friendly_fire_warning")) {
+      if(flag("friendly_fire_dist_check") || flag("friendly_fire_kill_check") || flag("friendly_fire_warning"))
         continue;
-      }
 
       flag_clear("do_not_save");
     }
@@ -7295,24 +7042,23 @@ intro_phys_push() {
       break;
   }
 
-  self PhysicsLaunchClient(self.origin + (0, 0, 32), vector_multiply(anglesToForward(self.angles), 1000));
+  self PhysicsLaunchClient(self.origin + (0, 0, 32), vector_multiply(AnglesToForward(self.angles), 1000));
 }
 
 player_line_of_fire(_flag, team) {
   min = .8 / team.size;
   max = 1.6 / team.size;
-  while(!flag(_flag)) {
+  while (!flag(_flag)) {
     if(Distance(self.origin, level.player.origin) < self.radius) {
       guy = random(team);
       foreach(member in team) {
-        vec1a = anglesToForward(guy GetTagAngles("tag_flash"));
-        vec2a = anglesToForward(member GetTagAngles("tag_flash"));
+        vec1a = AnglesToForward(guy GetTagAngles("tag_flash"));
+        vec2a = AnglesToForward(member GetTagAngles("tag_flash"));
         vec1b = VectorNormalize(level.player.origin - guy.origin);
         vec2b = VectorNormalize(level.player.origin - member.origin);
 
-        if(VectorDot(vec1a, vec1b) < VectorDot(vec2a, vec2b)) {
+        if(VectorDot(vec1a, vec1b) < VectorDot(vec2a, vec2b))
           guy = member;
-        }
       }
       MagicBullet(guy.weapon, guy GetTagOrigin("tag_flash"), level.player.origin + (0, 0, 12));
     }
@@ -7322,9 +7068,8 @@ player_line_of_fire(_flag, team) {
 
 #using_animtree("generic_human");
 enable_calm_combat() {
-  if(isDefined(self.calm_combat)) {
+  if(IsDefined(self.calm_combat))
     return;
-  }
 
   self.calm_combat = 1;
   self.oldinterval = self.interval;
@@ -7344,9 +7089,8 @@ enable_calm_combat() {
 }
 
 disable_calm_combat() {
-  if(!isDefined(self.calm_combat)) {
+  if(!isdefined(self.calm_combat))
     return;
-  }
   self.calm_combat = undefined;
 
   self.accuracy = self.oldaccuracy;
@@ -7358,10 +7102,8 @@ disable_calm_combat() {
 }
 
 /************************************************************************************************************/
-
 /*											FRIENDLY FIRE													*/
 /************************************************************************************************************/
-
 friendly_fire() {
   level.player endon("death");
 
@@ -7413,9 +7155,8 @@ friendly_fire() {
   flag_wait("friendly_fire_warning");
 
   // You blew your cover... don't fire on Makarov's squad.
-  if(!isDefined(level.fail_string)) {
-    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
-  }
+  if(!isdefined(level.fail_string))
+    level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
 
   thread friendly_fire_player_death();
   level thread notify_delay("friendly_fire_watch_player", .1);
@@ -7463,10 +7204,10 @@ friendly_fire_wander_away() {
   flag_init(_flag);
   self thread friendly_fire_distance_check(_flag);
 
-  while(level.ff_data["no_dist_line_num"] < 4) {
+  while (level.ff_data["no_dist_line_num"] < 4) {
     flag_wait(_flag);
 
-    while(level.ff_data["no_dist_line_num"] < 4) {
+    while (level.ff_data["no_dist_line_num"] < 4) {
       flag_waitopen_or_timeout(_flag, CONST_FF_WANDER_TIME);
 
       if(flag(_flag)) {
@@ -7474,34 +7215,30 @@ friendly_fire_wander_away() {
         level.makarov thread radio_dialogue(level.ff_data["no_dist_line"][num]);
         level.ff_data["no_dist_line_num"]++;
 
-        if(level.ff_data["no_dist_line_num"] == 3) {
+        if(level.ff_data["no_dist_line_num"] == 3)
           flag_set("friendly_fire_dist_check");
-        }
       } else
         break;
     }
 
     flag_clear("friendly_fire_dist_check");
-    if(level.ff_data["no_dist_line_num"] == 3) {
+    if(level.ff_data["no_dist_line_num"] == 3)
       level.ff_data["no_dist_line_num"] = 2;
-    }
   }
 
   // You blew your cover... Convince Makarov you're loyal to the cause.
-  level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
+  level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
 
 friendly_fire_distance_check(_flag) {
-  while(1) {
+  while (1) {
     if(Distance(level.team_origin, self.origin) > CONST_FF_WANDER_DIST) {
-      if(!flag(_flag)) {
+      if(!flag(_flag))
         flag_set(_flag);
-      }
     } else {
-      if(flag(_flag)) {
+      if(flag(_flag))
         flag_clear(_flag);
-      }
     }
     wait .25;
   }
@@ -7516,7 +7253,7 @@ friendly_fire_notpartofteam() {
   flag_init(_flag);
   self thread friendly_fire_is_attacking_check(_flag);
 
-  while(level.ff_data["no_kill_line_num"] < 4) {
+  while (level.ff_data["no_kill_line_num"] < 4) {
     flag_wait_or_timeout(_flag, CONST_FF_FIRE_TIME);
 
     if(flag("gate_main")) {
@@ -7526,9 +7263,8 @@ friendly_fire_notpartofteam() {
     }
 
     if(flag(_flag)) {
-      if(level.ff_data["no_kill_line_num"] == 3) {
+      if(level.ff_data["no_kill_line_num"] == 3)
         level.ff_data["no_kill_line_num"] = 2;
-      }
       flag_clear(_flag);
       flag_clear("friendly_fire_kill_check");
       thread flag_clear_delayed("friendly_fire_no_kill_line", 5);
@@ -7538,14 +7274,13 @@ friendly_fire_notpartofteam() {
       level.ff_data["no_kill_line_num"]++;
       flag_set("friendly_fire_no_kill_line");
 
-      if(level.ff_data["no_kill_line_num"] == 3) {
+      if(level.ff_data["no_kill_line_num"] == 3)
         flag_set("friendly_fire_kill_check");
-      }
     }
   }
 
   // You blew your cover... Convince Makarov you're loyal to the cause.
-  level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
+  level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
 
@@ -7559,7 +7294,7 @@ friendly_fire_is_attacking_check(_flag) {
   NotifyOnCommand("attack", "+frag");
   NotifyOnCommand("attack", "+attack");
 
-  while(1) {
+  while (1) {
     self waittill("attack");
     flag_set(_flag);
     flag_waitopen(_flag);
@@ -7569,7 +7304,7 @@ friendly_fire_is_attacking_check(_flag) {
 friendly_fire_nade_throw() {
   self endon("death");
 
-  while(1) {
+  while (1) {
     self waittill("grenade_fire", grenade);
     grenade.owener = self;
   }
@@ -7578,9 +7313,8 @@ friendly_fire_nade_throw() {
 friendly_fire_player_death() {
   level.player waittill("death");
 
-  if(isDefined(level.fail_string)) {
+  if(IsDefined(level.fail_string))
     SetDvar("ui_deadquote", level.fail_string);
-  }
   missionFailedWrapper();
 }
 
@@ -7591,46 +7325,40 @@ friendly_fire_decrement_aggressive_num() {
 
 friendly_fire_handle_aggrissive_num() {
   level.friendly_fire_aggressive_num++;
-  if(level.friendly_fire_aggressive_num >= CONST_FF_AGGRISSIVE_NUM) {
+  if(level.friendly_fire_aggressive_num >= CONST_FF_AGGRISSIVE_NUM)
     flag_set("friendly_fire_warning");
-  } else {
+  else
     thread friendly_fire_decrement_aggressive_num();
-  }
 }
 
 friendly_fire_watch_player_nade() {
   level endon("friendly_fire_watch_player");
   self endon("friendly_fire_new_watch_cycle");
 
-  while(1) {
+  while (1) {
     self waittill("ai_event", type, nade);
     waittillframeend;
 
-    if(flag("friendly_fire_pause_flash")) {
+    if(flag("friendly_fire_pause_flash"))
       continue;
-    }
 
-    if(type != "grenade danger") {
+    if(type != "grenade danger")
       continue;
-    }
 
-    if(!isDefined(nade.owener)) {
+    if(!isdefined(nade.owener))
       continue;
-    }
 
-    if(!isDefined(self.grenade)) {
+    if(!isdefined(self.grenade))
       continue;
-    }
 
     self.ff_attacker = nade.owener;
 
-    if(!isplayer(self.ff_attacker)) {
+    if(!isplayer(self.ff_attacker))
       continue;
-    }
 
     flag_set("friendly_fire_warning");
     // You blew your cover... don't fire on Makarov's squad.
-    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
+    level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
 }
@@ -7639,25 +7367,22 @@ friendly_fire_watch_player_flash() {
   level endon("friendly_fire_watch_player");
   self endon("friendly_fire_new_watch_cycle");
 
-  while(1) {
+  while (1) {
     self waittill("flashbang", origin, amount_distance, amount_angle, attacker, attackerteam);
     waittillframeend;
 
-    if(flag("friendly_fire_pause_flash")) {
+    if(flag("friendly_fire_pause_flash"))
       continue;
-    }
 
     self.ff_attacker = attacker;
 
-    if(!isplayer(self.ff_attacker)) {
+    if(!isplayer(self.ff_attacker))
       continue;
-    }
 
     friendly_fire_handle_aggrissive_num();
-    if(flag("friendly_fire_warning")) {
+    if(flag("friendly_fire_warning"))
       // You blew your cover... don't fire on Makarov's squad.
-    }
-    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
+      level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
 }
@@ -7674,10 +7399,9 @@ friendly_fire_watch_player_fire() {
   if(IsPlayer(self.ff_attacker) && !flag("friendly_fire_pause_fire")) {
     friendly_fire_handle_aggrissive_num();
 
-    if(flag("friendly_fire_warning")) {
+    if(flag("friendly_fire_warning"))
       // You blew your cover... don't fire on Makarov's squad.
-    }
-    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
+      level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
   }
 }
 
@@ -7689,7 +7413,7 @@ friendly_fire_watch_player() {
   amt = 0;
   self AddAIEventListener("grenade danger");
 
-  while(1) {
+  while (1) {
     self notify("friendly_fire_new_watch_cycle");
     self add_wait(::friendly_fire_watch_player_fire);
     self add_wait(::friendly_fire_watch_player_flash);
@@ -7711,30 +7435,26 @@ friendly_fire_watch_player() {
       } else {
         if(cointoss()) {
           level.makarov StopSounds();
-          if(cointoss()) {
+          if(cointoss())
             level.makarov thread dialogue_queue("check_fire1");
-          } else {
+          else
             level.makarov thread dialogue_queue("check_fire2");
-          }
         } else {
           level.team["m4"] StopSounds();
-          if(cointoss()) {
+          if(cointoss())
             level.team["m4"] thread dialogue_queue("check_fire1");
-          } else {
+          else
             level.team["m4"] thread dialogue_queue("check_fire2");
-          }
         }
       }
     }
   }
 
-  if(amt < 80 || self.script_noteworthy == "makarov") {
+  if(amt < 80 || self.script_noteworthy == "makarov")
     return;
-  }
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(IsDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  }
   self Kill();
 }
 
@@ -7767,14 +7487,12 @@ friendly_fire_kill_player() {
   self setFlashbangImmunity(true);
 
   if(self.script_noteworthy != "makarov") {
-    if(isDefined(self.magic_bullet_shield)) {
+    if(IsDefined(self.magic_bullet_shield))
       self stop_magic_bullet_shield();
-    }
     self.maxhealth = 300;
 
-    if(self.health > 300) {
+    if(self.health > 300)
       self.health = 300;
-    }
   } else {
     self.a.disablePain = 1;
     self.primaryweapon = "m4_grunt";
@@ -7782,7 +7500,7 @@ friendly_fire_kill_player() {
   }
 
   self.goalradius = 400;
-  while(1) {
+  while (1) {
     self SetGoalEntity(level.player);
 
     wait 1;
@@ -7790,21 +7508,18 @@ friendly_fire_kill_player() {
 }
 
 friendly_fire_good_kill() {
-  if(flag("friendly_fire_warning")) {
+  if(flag("friendly_fire_warning"))
     return;
-  }
   level endon("friendly_fire_warning");
 
-  if(flag("tarmac_moveout")) {
+  if(flag("tarmac_moveout"))
     return;
-  }
   level endon("tarmac_moveout");
 
   self waittill("death", attacker);
 
-  if(!isplayer(attacker)) {
+  if(!isplayer(attacker))
     return;
-  }
 
   if(flag("friendly_fire_no_kill_line") && !flag("friendly_fire_good_kill_line")) {
     flag_set("friendly_fire_good_kill_line");
@@ -7822,14 +7537,13 @@ friendly_fire_good_kill() {
 }
 
 friendly_fire_update_team_origin() {
-  while(!flag("escape_player_get_in")) {
+  while (!flag("escape_player_get_in")) {
     origin = (0, 0, 0);
     num = 0;
 
     foreach(member in level.team) {
-      if(!isalive(member)) {
+      if(!isalive(member))
         continue;
-      }
       num++;
       origin += member.origin;
     }
@@ -7841,7 +7555,6 @@ friendly_fire_update_team_origin() {
 }
 
 /************************************************************************************************************/
-
 /*												VISION SETS													*/
 /************************************************************************************************************/
 
@@ -7882,12 +7595,10 @@ airport_vision_elevator_black(node, angles) {
   introblack.foreground = true;
   introblack SetShader("black", 640, 480);
 
-  if(getdvar("alt_intro") == "") {
+  if(getdvar("alt_intro") == "")
     setdvar("alt_intro", "");
-  }
-  if(!isDefined(getdvar("alt_intro"))) {
+  if(!isdefined(getdvar("alt_intro")))
     setdvar("alt_intro", "");
-  }
 
   if(getdvar("alt_intro") != "") {
     delaythread(4.25, ::airport_elev_black_shuffle1, introblack, node, angles);
@@ -7964,9 +7675,8 @@ airport_elev_black_cough(introblack, node, angles) {
 }
 
 airport_vision_intro(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     trigger_wait("intro_vision_set", "targetname");
-  }
 
   time = 6;
   maps\_utility::set_vision_set("airport_intro", time);
@@ -7974,9 +7684,8 @@ airport_vision_intro(dontwait) {
 }
 
 airport_vision_stairs(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     flag_wait("player_set_speed_stairs");
-  }
 
   time = 2;
   maps\_utility::set_vision_set("airport_stairs", time);
@@ -7984,9 +7693,8 @@ airport_vision_stairs(dontwait) {
 }
 
 airport_vision_exterior(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     flag_wait("tarmac_hear_fsb");
-  }
 
   time = 12;
   //	maps\_utility::set_vision_set( "airport_exterior", time );
@@ -7994,9 +7702,8 @@ airport_vision_exterior(dontwait) {
 }
 
 airport_vision_basement(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     flag_wait("basement_set_vision");
-  }
 
   time = 5;
   maps\_utility::set_vision_set("airport", time);
@@ -8004,9 +7711,8 @@ airport_vision_basement(dontwait) {
 }
 
 airport_vision_escape(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     trigger_wait("escape_vision_set", "targetname");
-  }
 
   time = 3.0;
   maps\_utility::set_vision_set("airport_intro", time);
@@ -8014,16 +7720,14 @@ airport_vision_escape(dontwait) {
 }
 
 airport_vision_makarov(dontwait) {
-  if(!isDefined(dontwait)) {
+  if(!isdefined(dontwait))
     flag_wait("escape_mak_grab_hand");
-  }
 
   time = 1.0;
   maps\_utility::set_vision_set("airport_intro", time);
 }
 
 /************************************************************************************************************/
-
 /*												JET ENGINES													*/
 /************************************************************************************************************/
 
@@ -8036,7 +7740,7 @@ jet_engine() {
 
   self thread jet_engine_bcs();
 
-  while(1) {
+  while (1) {
     self waittill("took_damage", amount);
 
     self.script_health -= amount;
@@ -8050,20 +7754,17 @@ jet_engine() {
 
 jet_engine_state_check() {
   state = "idle";
-  if(self.script_health < 0) {
+  if(self.script_health < 0)
     state = "death";
-  } else {
-    if(self.script_health < self.max_health * .8)
-  }
-  state = "burning";
-  else {
-    if(self.script_health < self.max_health)
-  }
-  state = "damaged";
+  else
+  if(self.script_health < self.max_health * .8)
+    state = "burning";
+  else
+  if(self.script_health < self.max_health)
+    state = "damaged";
 
-  if(state == self.state) {
+  if(state == self.state)
     return;
-  }
   self.state = state;
 
   self thread jet_engine_do_state();
@@ -8072,9 +7773,8 @@ jet_engine_state_check() {
 jet_engine_bcs() {
   self endon("death");
 
-  while(DistanceSquared(level.player.origin, self.origin) > squared(500) || self.script_health > self.max_health * .5) {
+  while (DistanceSquared(level.player.origin, self.origin) > squared(500) || self.script_health > self.max_health * .5)
     wait .1;
-  }
 
   flag_waitopen("tarmac_bcs");
 
@@ -8090,14 +7790,14 @@ jet_engine_do_state() {
   switch (self.state) {
     case "idle":
       self jet_engine_fx_idle();
-      self playLoopSound("dst_jet_engine_close");
+      self PlayLoopSound("dst_jet_engine_close");
       break;
     case "burning":
       self.idle_org Delete();
       self jet_engine_fx_burn();
       self jet_engine_suck_setup();
       self StopLoopSound();
-      self playLoopSound("dst_jet_engine_burn");
+      self PlayLoopSound("dst_jet_engine_burn");
       self thread jet_engine_health_drain();
       break;
 
@@ -8108,7 +7808,7 @@ jet_engine_do_state() {
       PhysicsExplosionSphere(self.fx.origin, range, 0, range * .01); // similar to destructibles
       self StopLoopSound();
       self StopSounds();
-      self playSound("dst_jet_engine_explosion");
+      self PlaySound("dst_jet_engine_explosion");
       self.burn_org Delete();
       self.new Delete();
       self.des Show();
@@ -8119,54 +7819,54 @@ jet_engine_do_state() {
 }
 
 jet_engine_fx_idle() {
-  self.idle_org = spawn("script_model", self.fx.origin);
+  self.idle_org = Spawn("script_model", self.fx.origin);
 
-  vec = anglesToForward(self.fx.angles);
+  vec = AnglesToForward(self.fx.angles);
   vec = vector_multiply(vec, 135.5);
   self.idle_org.origin += vec;
 
-  self.idle_org setModel("tag_origin");
+  self.idle_org SetModel("tag_origin");
   self.idle_org Hide();
   self.idle_org.angles = self.fx.angles;
-  playFXOnTag(getfx("jet_engine_737"), self.idle_org, "tag_origin");
+  PlayFXOnTag(getfx("jet_engine_737"), self.idle_org, "tag_origin");
 }
 
 jet_engine_fx_burn() {
-  self.burn_org = spawn("script_model", self.fx.origin);
+  self.burn_org = Spawn("script_model", self.fx.origin);
 
-  vec = anglesToForward(self.fx.angles);
+  vec = AnglesToForward(self.fx.angles);
   vec = vector_multiply(vec, 31);
   self.burn_org.origin += vec;
 
-  self.burn_org setModel("tag_origin");
+  self.burn_org SetModel("tag_origin");
   self.burn_org Hide();
   self.burn_org.angles = self.fx.angles;
-  playFXOnTag(getfx("jet_fire"), self.burn_org, "tag_origin");
+  PlayFXOnTag(getfx("jet_fire"), self.burn_org, "tag_origin");
 }
 
 jet_engine_fx_explode() {
-  self.exp_org = spawn("script_model", self.fx.origin);
+  self.exp_org = Spawn("script_model", self.fx.origin);
 
-  vec = anglesToForward(self.fx.angles);
+  vec = AnglesToForward(self.fx.angles);
   vec = vector_multiply(vec, 31);
   self.exp_org.origin += vec;
 
-  self.exp_org setModel("tag_origin");
+  self.exp_org SetModel("tag_origin");
   self.exp_org Hide();
   self.exp_org.angles = self.fx.angles;
-  playFXOnTag(getfx("jet_explosion"), self.exp_org, "tag_origin");
+  PlayFXOnTag(getfx("jet_explosion"), self.exp_org, "tag_origin");
   self.exp_org delayCall(1, ::Delete);
 }
 
 jet_engine_suck_setup() {
-  self.suck_org = spawnStruct();
+  self.suck_org = SpawnStruct();
 
-  vec = anglesToForward(self.fx.angles);
+  vec = AnglesToForward(self.fx.angles);
   vec = vector_multiply(vec, -31);
   self.suck_org.origin = self.fx.origin + vec;
   self.suck_org.angles = self.fx.angles + (0, 180, 0);
 
-  array_thread(getEntArray("jet_engine_debri", "targetname"), ::jet_engine_suck_debris, self);
+  array_thread(GetEntArray("jet_engine_debri", "targetname"), ::jet_engine_suck_debris, self);
 }
 
 jet_engine_suck_debris(engine) {
@@ -8185,30 +7885,26 @@ jet_engine_suck_debris(engine) {
   org2 = (self.origin[0], self.origin[1], org1[2]);
 
   vec = VectorNormalize(self.origin - engine.suck_org.origin);
-  if(VectorDot(vec, anglesToForward(engine.suck_org.angles)) < .4) {
+  if(VectorDot(vec, AnglesToForward(engine.suck_org.angles)) < .4)
     return;
-  }
 
-  if(DistanceSquared(engine.suck_org.origin, self.origin) < min) {
+  if(DistanceSquared(engine.suck_org.origin, self.origin) < min)
     return;
-  }
 
-  if(DistanceSquared(engine.suck_org.origin, self.origin) > max) {
+  if(DistanceSquared(engine.suck_org.origin, self.origin) > max)
     return;
-  }
 
-  while(DistanceSquared(engine.suck_org.origin, self.origin) > squared(effectrange)) {
+  while (DistanceSquared(engine.suck_org.origin, self.origin) > squared(effectrange)) {
     effectrange += 3;
     wait .1;
   }
 
   dir = VectorNormalize(org1 - org2);
   scale = 1;
-  while(DistanceSquared(engine.suck_org.origin, self.origin) > pull) {
+  while (DistanceSquared(engine.suck_org.origin, self.origin) > pull) {
     scale *= 1.5;
-    if(scale > 40) {
+    if(scale > 40)
       scale = 40;
-    }
 
     vec = vector_multiply(dir, scale);
     self MoveTo((self.origin + vec), .1);
@@ -8227,7 +7923,7 @@ jet_engine_suck_debris_final(engine) {
 
   wait time;
 
-  playFX(getfx("jet_engine_fire_debris"), self.origin, anglesToForward(engine.suck_org.angles), AnglesToUp(engine.suck_org.angles));
+  PlayFX(getfx("jet_engine_fire_debris"), self.origin, AnglesToForward(engine.suck_org.angles), AnglesToUp(engine.suck_org.angles));
 
   self Delete();
 }
@@ -8237,7 +7933,7 @@ jet_engine_health_drain() {
 
   dmg = Int(self.script_health / 60); // this will make it blow up in 60 seconds
 
-  while(1) {
+  while (1) {
     self notify("damage", dmg);
     BadPlace_Cylinder("jet_engine_burn" + self.fx.targetname, 1, self.fx.origin + (0, 0, -76), 190, 150, "allies", "axis", "neutral");
     wait 1;
@@ -8247,13 +7943,13 @@ jet_engine_health_drain() {
 jet_engine_take_damage(parent) {
   parent endon("death");
 
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(isDefined(type) && type == "MOD_CRUSH") {
+    if(IsDefined(type) && type == "MOD_CRUSH") {
       wait .1;
       continue;
     }
-    if(isDefined(attacker) && !isplayer(attacker) && DistanceSquared(level.player.origin, self GetOrigin()) < 1500) {
+    if(IsDefined(attacker) && !isplayer(attacker) && DistanceSquared(level.player.origin, self GetOrigin()) < 1500) {
       wait .1;
       continue;
     }
@@ -8269,7 +7965,7 @@ jet_engine_setup() {
 
   //setup the parts
   self.new = GetEnt(self.target, "targetname");
-  self.new setCanDamage(true);
+  self.new SetCanDamage(true);
 
   self.des = GetEnt(self.new.target, "targetname");
   self.des.destructible_type = "jet_engine";
@@ -8289,21 +7985,17 @@ jet_engine_death_print() {
 
   level.player waittill("death", attacker, cause, weaponName);
 
-  if(cause != "MOD_EXPLOSIVE") {
+  if(cause != "MOD_EXPLOSIVE")
     return;
-  }
 
-  if(!isDefined(attacker)) {
+  if(!isdefined(attacker))
     return;
-  }
 
-  if(!isDefined(attacker.destructible_type)) {
+  if(!isdefined(attacker.destructible_type))
     return;
-  }
 
-  if(attacker.destructible_type != "jet_engine") {
+  if(attacker.destructible_type != "jet_engine")
     return;
-  }
 
   thread maps\_load::special_death_indicator_hudelement("hud_burningjetengineicon", 64, 64);
 
@@ -8312,16 +8004,16 @@ jet_engine_death_print() {
 }
 
 glass_elevator_setup() {
-  elevator_glass = getEntArray("elevator_housing_glass", "script_noteworthy");
-  elevator_model = getEntArray("airport_glass_elevator", "script_noteworthy");
-  elevator_door_models = getEntArray("airport_glass_elevator_door", "script_noteworthy");
+  elevator_glass = GetEntArray("elevator_housing_glass", "script_noteworthy");
+  elevator_model = GetEntArray("airport_glass_elevator", "script_noteworthy");
+  elevator_door_models = GetEntArray("airport_glass_elevator_door", "script_noteworthy");
 
-  elevator_doors = getEntArray("elevator_doors", "script_noteworthy");
-  elevator_house = getEntArray("elevator_housing", "targetname");
+  elevator_doors = GetEntArray("elevator_doors", "script_noteworthy");
+  elevator_house = GetEntArray("elevator_housing", "targetname");
 
-  elevator_cables = getEntArray("elevator_cable", "targetname");
+  elevator_cables = GetEntArray("elevator_cable", "targetname");
 
-  elevator_wheels = getEntArray("elevator_wheels", "targetname");
+  elevator_wheels = GetEntArray("elevator_wheels", "targetname");
 
   foreach(piece in elevator_glass) {
     house = getClosest(piece GetOrigin(), elevator_house);
@@ -8347,7 +8039,7 @@ glass_elevator_setup() {
     wheels = get_array_of_closest(housing GetOrigin(), elevator_wheels, undefined, 2);
     cable.wheels = [];
     foreach(item in wheels) {
-      anchor = spawn("script_origin", item.origin);
+      anchor = Spawn("script_origin", item.origin);
       item LinkTo(anchor);
       cable.wheels[item.script_noteworthy] = anchor;
     }
@@ -8359,7 +8051,7 @@ glass_elevator_setup() {
 glass_elevator_cable() {
   cable = self;
 
-  while(isDefined(cable.target)) {
+  while (IsDefined(cable.target)) {
     cable = GetEnt(cable.target, "targetname");
     cable Hide();
   }
@@ -8382,7 +8074,7 @@ glass_elevator_cable() {
   dist = abs(Distance(elevator.e["floor" + floor_num + "_pos"], mainframe.origin));
   moveTime = dist / speed;
 
-  while(1) {
+  while (1) {
     //start at the top
     //moving down
     elevator waittill("elevator_moving");
@@ -8423,13 +8115,11 @@ glass_elevator_cable_down(housing, elevator) {
 
   elevator endon("elevator_moved");
 
-  while(DistanceSquared(self.og, self GetOrigin()) < squared(level.ELEV_CABLE_HEIGHT)) {
+  while (DistanceSquared(self.og, self GetOrigin()) < squared(level.ELEV_CABLE_HEIGHT))
     wait .05;
-  }
 
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target))
     return;
-  }
 
   next_cable = GetEnt(self.target, "targetname");
   next_cable thread glass_elevator_cable_down(housing, elevator);
@@ -8440,9 +8130,8 @@ attach_housing(housing) {
   self LinkTo(housing);
   housing.last_cable = self;
 
-  if(!isDefined(self.target)) {
+  if(!isdefined(self.target))
     return;
-  }
 
   next_cable = GetEnt(self.target, "targetname");
   next_cable Show();
@@ -8451,24 +8140,21 @@ attach_housing(housing) {
 glass_elevator_cable_up(housing, elevator) {
   elevator endon("elevator_moved");
 
-  while(DistanceSquared(self.og, self GetOrigin()) > squared(CONST_ELEV_CABLE_CLOSE)) {
+  while (DistanceSquared(self.og, self GetOrigin()) > squared(CONST_ELEV_CABLE_CLOSE))
     wait .05;
-  }
 
   self thread detach_housing(housing);
 
-  if(self.targetname == "elevator_cable") {
+  if(self.targetname == "elevator_cable")
     return;
-  }
 
   prev_cable = GetEnt(self.targetname, "target");
   prev_cable thread glass_elevator_cable_up(housing, elevator);
 }
 
 detach_housing(housing) {
-  if(self.targetname == "elevator_cable") {
+  if(self.targetname == "elevator_cable")
     return;
-  }
   self Unlink();
   time = .5;
   self MoveTo(self.og, time);
@@ -8477,38 +8163,33 @@ detach_housing(housing) {
 }
 
 GrenadeDangerbsc() {
-  if(!flag_exist("bsc_nade")) {
+  if(!flag_exist("bsc_nade"))
     flag_init("bsc_nade");
-  }
 
   level endon("escape_main");
 
-  while(1) {
+  while (1) {
     self waittill("grenade danger", grenade);
 
-    if(flag("bsc_nade")) {
+    if(flag("bsc_nade"))
       continue;
-    }
 
-    if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
+    if(!isdefined(grenade) || grenade.model != "projectile_m67fraggrenade")
       continue;
-    }
 
     if(Distance(grenade.origin, level.player.origin) < 512) // grenade radius is 220
     {
       flag_set("bsc_nade");
 
       guy = level.makarov;
-      if(cointoss()) {
+      if(cointoss())
         guy = level.team["m4"];
-      }
 
       guy StopSounds();
-      if(cointoss()) {
+      if(cointoss())
         guy dialogue_queue("grenade1");
-      } else {
+      else
         guy dialogue_queue("grenade2");
-      }
 
       wait 4;
 
@@ -8521,10 +8202,9 @@ m203_hint() {
   interval = .1;
   time = 5;
 
-  while(time > 0) {
-    if(should_break_m203_hint()) {
+  while (time > 0) {
+    if(should_break_m203_hint())
       return;
-    }
 
     time -= interval;
     wait interval;
@@ -8540,20 +8220,17 @@ should_break_m203_hint(nothing) {
   // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();
   prefix = GetSubStr(weapon, 0, 4);
-  if(prefix == "m203") {
+  if(prefix == "m203")
     return true;
-  }
 
   // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     ammo = player GetWeaponAmmoClip(weapon);
-    if(!issubstr(weapon, "m203")) {
+    if(!issubstr(weapon, "m203"))
       continue;
-    }
-    if(ammo > 0) {
+    if(ammo > 0)
       return false;
-    }
   }
 
   return true;
@@ -8564,7 +8241,7 @@ van_opendoors() {
   self UseAnimTree(#animtree);
   self SetAnim( % airport_ending_open_doors);
   sndent = GetEnt("escape_amb_door_snd", "targetname");
-  sndent playSound("scn_ambulance_doors_open");
+  sndent PlaySound("scn_ambulance_doors_open");
 }
 
 van_closedoors() {
@@ -8582,15 +8259,15 @@ music_sfx_to_music(alias, time, fade, timesfx) {
 
   snd = spawn("script_origin", level.player.origin);
   snd linkto(level.player);
-  snd playSound(alias + "_sfx");
+  snd playsound(alias + "_sfx");
 
   snd thread music_sfx_to_music_kill();
 
   wait timesfx;
-
+  /#
   println(" *** switching from sfx to music *** ");
-
-  music_loop(alias, time, fade);
+  # /
+    music_loop(alias, time, fade);
   wait .1;
   snd delete();
 }

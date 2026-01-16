@@ -10,15 +10,17 @@
 // Picks up a grenade from 32 units in front of the character, and throws it.
 
 main() {
-  if(getdvar("scr_forcegrenadecower") == "on" && isDefined(self.grenade)) {
+  /#
+  if(getdvar("scr_forcegrenadecower") == "on" && isdefined(self.grenade)) {
     self OrientMode("face angle", randomfloat(360));
     self animmode("gravity");
     wait .2;
     animscripts\grenade_cower::main();
     return;
   }
+  # /
 
-  self orientMode("face default");
+    self orientMode("face default");
   self endon("killanimscript");
 
   animscripts\utility::initialize("grenade_return_throw");
@@ -28,9 +30,8 @@ main() {
   throwAnim = undefined;
 
   throwDist = 1000;
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy))
     throwDist = distance(self.origin, self.enemy.origin);
-  }
 
   // unused: grenade_return_running_kick_forward_1; kicks don't read well to player
   // unused: grenade_return_running_kick_forward_2
@@ -57,6 +58,7 @@ main() {
   assert(animArray.size);
   throwAnim = animArray[randomint(animArray.size)];
 
+  /#
   if(getdvar("scr_grenadereturnanim") != "") {
     val = getdvar("scr_grenadereturnanim");
     //if( val == "kick1")
@@ -64,19 +66,18 @@ main() {
     //else if( val == "kick2")
     //	throwAnim = %grenade_return_running_kick_forward_2;
     //else
-    if(val == "throw1") {
+    if(val == "throw1")
       throwAnim = % grenade_return_running_throw_forward;
-    } else if(val == "throw2") {
+    else if(val == "throw2")
       throwAnim = % grenade_return_standing_throw_forward_1;
-    }
     //else if( val == "throw3")
     //	throwAnim = %grenade_return_standing_throw_forward_2;
-    else if(val == "throw4") {
+    else if(val == "throw4")
       throwAnim = % grenade_return_standing_throw_overhand_forward;
-    }
   }
+  # /
 
-  assert(isDefined(throwAnim));
+    assert(isdefined(throwAnim));
   self setFlaggedAnimKnoballRestart("throwanim", throwAnim, % body, 1, .3);
 
   hasPickup = (animHasNotetrack(throwAnim, "grenade_left") || animHasNotetrack(throwAnim, "grenade_right"));

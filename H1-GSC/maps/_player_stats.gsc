@@ -30,13 +30,11 @@ init_stats() {
 }
 
 was_headshot() {
-  if(isDefined(self.died_of_headshot) && self.died_of_headshot) {
+  if(isdefined(self.died_of_headshot) && self.died_of_headshot)
     return 1;
-  }
 
-  if(!isDefined(self.damagelocation)) {
+  if(!isdefined(self.damagelocation))
     return 0;
-  }
 
   return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
@@ -44,9 +42,8 @@ was_headshot() {
 register_difficulty(var_0, var_1) {
   var_2 = self;
 
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner))
     var_2 = self.owner;
-  }
 
   if(!isplayer(var_2)) {
     return;
@@ -63,9 +60,8 @@ register_difficulty(var_0, var_1) {
 register_level_name(var_0) {
   var_1 = self;
 
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner))
     var_1 = self.owner;
-  }
 
   if(!isplayer(var_1)) {
     return;
@@ -77,16 +73,14 @@ register_level_name(var_0) {
 toggle_register_kills_for_vehicle_occupants(var_0) {
   var_1 = self;
 
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner))
     var_1 = self.owner;
-  }
 
   if(!isplayer(var_1)) {
     return;
   }
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 1;
-  }
 
   var_1.stats["register_kills_for_vehicle_occupants"] = var_0;
 }
@@ -94,17 +88,14 @@ toggle_register_kills_for_vehicle_occupants(var_0) {
 should_register_kills_for_vehicle_occupants() {
   var_0 = self;
 
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner))
     var_0 = self.owner;
-  }
 
-  if(!isplayer(var_0)) {
+  if(!isplayer(var_0))
     return 1;
-  }
 
-  if(isDefined(var_0.stats["register_kills_for_vehicle_occupants"]) && var_0.stats["register_kills_for_vehicle_occupants"]) {
+  if(isdefined(var_0.stats["register_kills_for_vehicle_occupants"]) && var_0.stats["register_kills_for_vehicle_occupants"])
     return 1;
-  }
 
   return 0;
 }
@@ -113,59 +104,53 @@ register_kill(var_0, var_1, var_2, var_3) {
   var_4 = self;
   var_5 = 0;
 
-  if(isDefined(self.owner)) {
+  if(isdefined(self.owner))
     var_4 = self.owner;
-  }
 
   if(!isplayer(var_4)) {
-    if(isDefined(level.pmc_match) && level.pmc_match) {
+    if(isdefined(level.pmc_match) && level.pmc_match)
       var_4 = level.players[randomint(level.players.size)];
-    }
   }
 
   if(!isplayer(var_4)) {
     return;
   }
-  if(isDefined(level.skip_pilot_kill_count) && isDefined(var_0.drivingvehicle) && var_0.drivingvehicle) {
+  if(isdefined(level.skip_pilot_kill_count) && isdefined(var_0.drivingvehicle) && var_0.drivingvehicle) {
     return;
   }
   var_4.stats["kills"]++;
   var_4 career_stat_increment("kills", 1);
   var_6 = level.player getplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "kills_total");
 
-  if(isDefined(var_6)) {
+  if(isdefined(var_6))
     level.player setplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "kills_total", var_6 + 1);
-  }
 
-  if(maps\_utility::is_specialop()) {
+  if(maps\_utility::is_specialop())
     level notify("specops_player_kill", var_4, var_0, var_2, var_3);
-  }
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0)) {
     if(var_0 was_headshot() && var_1 != "MOD_MELEE" && var_1 != "MOD_MELEE_ALT") {
       var_4.stats["headshots"]++;
       var_4 career_stat_increment("headshots", 1);
       var_5 = 1;
     }
 
-    if(isDefined(var_0.juggernaut)) {
+    if(isdefined(var_0.juggernaut)) {
       var_4.stats["kills_juggernaut"]++;
       var_4 career_stat_increment("kills_juggernaut", 1);
     }
 
-    if(isDefined(var_0.issentrygun)) {
+    if(isdefined(var_0.issentrygun))
       var_4.stats["kills_sentry"]++;
-    }
 
     if(var_0.code_classname == "script_vehicle") {
       var_4.stats["kills_vehicle"]++;
 
       if(var_4 should_register_kills_for_vehicle_occupants()) {
-        if(isDefined(var_0.riders)) {
+        if(isdefined(var_0.riders)) {
           foreach(var_8 in var_0.riders) {
-            if(isDefined(var_8)) {
+            if(isdefined(var_8))
               var_4 register_kill(var_8, var_1, var_2, var_3);
-            }
           }
         }
       }
@@ -179,65 +164,58 @@ register_kill(var_0, var_1, var_2, var_3) {
     var_10 = 1;
   }
 
-  if(cause_is_grenade(var_1, var_2) && (!isDefined(var_4.mechdata) || !isDefined(var_4.mechdata.active) || !var_4.mechdata.active)) {
+  if(cause_is_grenade(var_1, var_2) && (!isdefined(var_4.mechdata) || !isdefined(var_4.mechdata.active) || !var_4.mechdata.active)) {
     var_4.stats["kills_grenades"]++;
     var_4 stat_notify("kills_grenades", 1);
     var_10 = 1;
   }
 
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = var_4 getcurrentweapon();
-  }
 
   if(issubstr(tolower(var_1), "melee")) {
     var_4.stats["kills_melee"]++;
 
-    if(weaponinventorytype(var_2) == "primary") {
+    if(weaponinventorytype(var_2) == "primary")
       return;
-    }
   }
 
-  if(var_4 is_new_weapon(var_2)) {
+  if(var_4 is_new_weapon(var_2))
     var_4 register_new_weapon(var_2);
-  }
 
   var_4.stats["weapon"][var_2].kills++;
   var_4.stats["career_kills_total"]++;
 
-  if(!var_10) {
+  if(!var_10)
     maps\_sp_matchdata::increment_kill(var_2, var_5);
-  }
 }
 
 stat_notify_register_func(var_0) {
-  if(!isDefined(self.stat_notify_func)) {
+  if(!isdefined(self.stat_notify_func))
     self.stat_notify_func = [];
-  }
 
   self.stat_notify_func[self.stat_notify_func.size] = var_0;
 }
 
 stat_notify(var_0, var_1) {
-  if(isDefined(self.stat_notify_func)) {
-    foreach(var_3 in self.stat_notify_func) {
-      self[[var_3]](var_0, var_1);
-    }
+  if(isdefined(self.stat_notify_func)) {
+    foreach(var_3 in self.stat_notify_func)
+    self[[var_3]](var_0, var_1);
   }
 }
 
 career_stat_increment(var_0, var_1) {
   stat_notify(var_0, var_1);
 
-  if(!maps\_utility::is_specialop()) {
+  if(!maps\_utility::is_specialop())
     return;
-  }
 }
 
 register_shot_hit() {
   if(!isplayer(self)) {
     return;
   }
-  if(isDefined(self.registeringshothit)) {
+  if(isdefined(self.registeringshothit)) {
     return;
   }
   self.registeringshothit = 1;
@@ -245,9 +223,8 @@ register_shot_hit() {
   career_stat_increment("bullets_hit", 1);
   var_0 = self getcurrentweapon();
 
-  if(is_new_weapon(var_0)) {
+  if(is_new_weapon(var_0))
     register_new_weapon(var_0);
-  }
 
   self.stats["weapon"][var_0].shots_hit++;
   thread maps\_sp_matchdata::increment_hit(var_0);
@@ -258,19 +235,18 @@ register_shot_hit() {
 shots_fired_recorder() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     self waittill("weapon_fired");
     var_0 = self getcurrentweapon();
 
-    if(!isDefined(var_0) || !maps\_utility::isprimaryweapon(var_0)) {
+    if(!isdefined(var_0) || !maps\_utility::isprimaryweapon(var_0)) {
       continue;
     }
     self.stats["shots_fired"]++;
     career_stat_increment("bullets_fired", 1);
 
-    if(is_new_weapon(var_0)) {
+    if(is_new_weapon(var_0))
       register_new_weapon(var_0);
-    }
 
     self.stats["weapon"][var_0].shots_fired++;
     thread maps\_sp_matchdata::shots_fired(var_0);
@@ -278,9 +254,8 @@ shots_fired_recorder() {
 }
 
 is_new_weapon(var_0) {
-  if(isDefined(self.stats["weapon"][var_0])) {
+  if(isdefined(self.stats["weapon"][var_0]))
     return 0;
-  }
 
   return 1;
 }
@@ -308,15 +283,13 @@ cause_is_grenade(var_0, var_1) {
 
   switch (var_0) {
     case "emp_grenade":
-      if(isDefined(var_1) && var_1 == "emp_grenade_var") {
+      if(isdefined(var_1) && var_1 == "emp_grenade_var")
         return 1;
-      }
 
       break;
     case "mod_projectile_splash":
-      if(isDefined(var_1) && var_1 == "iw5_microdronelauncher_sp") {
+      if(isdefined(var_1) && var_1 == "iw5_microdronelauncher_sp")
         return 1;
-      }
 
       break;
     case "mod_grenade_splash":
@@ -330,7 +303,7 @@ cause_is_grenade(var_0, var_1) {
 }
 
 register_new_weapon(var_0) {
-  self.stats["weapon"][var_0] = spawnStruct();
+  self.stats["weapon"][var_0] = spawnstruct();
   self.stats["weapon"][var_0].name = var_0;
   self.stats["weapon"][var_0].shots_fired = 0;
   self.stats["weapon"][var_0].shots_hit = 0;
@@ -352,20 +325,19 @@ set_stat_dvars() {
     foreach(var_5 in var_3) {
       var_5.accuracy = 0;
 
-      if(var_5.shots_fired > 0) {
+      if(var_5.shots_fired > 0)
         var_5.accuracy = int(var_5.shots_hit / var_5.shots_fired * 100);
-      }
     }
 
-    for(var_7 = 1; var_7 < 6; var_7++) {
+    for (var_7 = 1; var_7 < 6; var_7++) {
       setdvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
       setdvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
       setdvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
       setdvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
     }
 
-    for(var_7 = 0; var_7 < var_3.size; var_7++) {
-      if(!isDefined(var_3[var_7])) {
+    for (var_7 = 0; var_7 < var_3.size; var_7++) {
+      if(!isdefined(var_3[var_7])) {
         break;
       }
 
@@ -382,17 +354,15 @@ set_stat_dvars() {
 get_best_weapons(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0; var_2++) {
+  for (var_2 = 0; var_2 < var_0; var_2++)
     var_1[var_2] = get_weapon_with_most_kills(var_1);
-  }
 
   return var_1;
 }
 
 get_weapon_with_most_kills(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = [];
-  }
 
   var_1 = undefined;
 
@@ -409,14 +379,13 @@ get_weapon_with_most_kills(var_0) {
     if(var_4) {
       continue;
     }
-    if(!isDefined(var_1)) {
+    if(!isdefined(var_1)) {
       var_1 = var_3;
       continue;
     }
 
-    if(var_3.kills > var_1.kills) {
+    if(var_3.kills > var_1.kills)
       var_1 = var_3;
-    }
   }
 
   return var_1;

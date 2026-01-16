@@ -23,26 +23,26 @@
 #namespace zm_genesis_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_portals", &__init__, undefined, undefined);
+  system::register("zm_genesis_portals", & __init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_overlay_info_style_transported("zm_zod", 15000, 15, 2);
-  clientfield::register("toplayer", "player_stargate_fx", 15000, 1, "int", &player_stargate_fx, 0, 0);
-  clientfield::register("toplayer", "player_light_exploder", 15000, 4, "int", &player_light_exploder, 0, 0);
-  clientfield::register("world", "genesis_light_exposure", 15000, 1, "int", &genesis_light_exposure, 0, 0);
-  clientfield::register("world", "power_pad_sheffield", 15000, 1, "int", &function_7e1ae25a, 0, 0);
-  clientfield::register("world", "power_pad_prison", 15000, 1, "int", &function_7e1ae25a, 0, 0);
-  clientfield::register("world", "power_pad_asylum", 15000, 1, "int", &function_7e1ae25a, 0, 0);
-  clientfield::register("world", "power_pad_temple", 15000, 1, "int", &function_7e1ae25a, 0, 0);
-  clientfield::register("toplayer", "hint_verruckt_portal_top", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_verruckt_portal_bottom", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_temple_portal_top", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_temple_portal_bottom", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_sheffield_portal_top", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_sheffield_portal_bottom", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_prison_portal_top", 15000, 1, "int", &function_44c843d5, 0, 0);
-  clientfield::register("toplayer", "hint_prison_portal_bottom", 15000, 1, "int", &function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "player_stargate_fx", 15000, 1, "int", & player_stargate_fx, 0, 0);
+  clientfield::register("toplayer", "player_light_exploder", 15000, 4, "int", & player_light_exploder, 0, 0);
+  clientfield::register("world", "genesis_light_exposure", 15000, 1, "int", & genesis_light_exposure, 0, 0);
+  clientfield::register("world", "power_pad_sheffield", 15000, 1, "int", & function_7e1ae25a, 0, 0);
+  clientfield::register("world", "power_pad_prison", 15000, 1, "int", & function_7e1ae25a, 0, 0);
+  clientfield::register("world", "power_pad_asylum", 15000, 1, "int", & function_7e1ae25a, 0, 0);
+  clientfield::register("world", "power_pad_temple", 15000, 1, "int", & function_7e1ae25a, 0, 0);
+  clientfield::register("toplayer", "hint_verruckt_portal_top", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_verruckt_portal_bottom", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_temple_portal_top", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_temple_portal_bottom", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_sheffield_portal_top", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_sheffield_portal_bottom", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_prison_portal_top", 15000, 1, "int", & function_44c843d5, 0, 0);
+  clientfield::register("toplayer", "hint_prison_portal_bottom", 15000, 1, "int", & function_44c843d5, 0, 0);
 }
 
 function player_stargate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

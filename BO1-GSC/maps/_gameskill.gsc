@@ -30,10 +30,10 @@ setSkill(reset, skill_override) {
     level.difficultyType[1] = "normal";
     level.difficultyType[2] = "hardened";
     level.difficultyType[3] = "veteran";
-    level.difficultyString["easy"] = &"GAMESKILL_EASY";
-    level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
-    level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
-    level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
+    level.difficultyString["easy"] = & "GAMESKILL_EASY";
+    level.difficultyString["normal"] = & "GAMESKILL_NORMAL";
+    level.difficultyString["hardened"] = & "GAMESKILL_HARDENED";
+    level.difficultyString["veteran"] = & "GAMESKILL_VETERAN";
     level thread update_skill_on_change();
   }
   if(!isDefined(level.invulTime_onShield_multiplier)) {
@@ -359,7 +359,9 @@ apply_threat_bias_to_all_players(difficulty_func, current_frac) {
   flag_wait("all_players_connected");
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i].threatbias = int([[difficulty_func]]("threatbias", current_frac));
+    players[i].threatbias = int([
+      [difficulty_func]
+    ]("threatbias", current_frac));
   }
 }
 
@@ -374,9 +376,13 @@ coop_damage_and_accuracy_scaling(difficulty_func, current_frac) {
   players = get_players();
   coop_healthscalar = getCoopValue("coopPlayerDifficultyHealth", players.size);
   if(getDvar(#"g_gametype") != "vs") {
-    setsaveddvar("player_damageMultiplier", 100 / ([[difficulty_func]]("playerDifficultyHealth", current_frac) * coop_healthscalar));
+    setsaveddvar("player_damageMultiplier", 100 / ([
+      [difficulty_func]
+    ]("playerDifficultyHealth", current_frac) * coop_healthscalar));
     coop_invuln_remover = getCoopValue("coopPlayer_deathInvulnerableTime", players.size);
-    setsaveddvar("player_deathInvulnerableTime", int([[difficulty_func]]("player_deathInvulnerableTime", current_frac) * coop_invuln_remover));
+    setsaveddvar("player_deathInvulnerableTime", int([
+      [difficulty_func]
+    ]("player_deathInvulnerableTime", current_frac) * coop_invuln_remover));
   }
 }
 
@@ -596,7 +602,7 @@ playerHurtcheck() {
     self.damageAttacker = attacker;
     if(isDefined(mod) && mod == "MOD_BURNED") {
       self setburn(0.5);
-      self playSound("chr_burn");
+      self PlaySound("chr_burn");
     }
   }
 }
@@ -711,9 +717,8 @@ playerHealthRegen() {
     if(!invulWorthyHealthDrop || playerInvulTimeScale <= 0.0) {
       continue;
     }
-    if(self player_flag("player_is_invulnerable")) {
+    if(self player_flag("player_is_invulnerable"))
       continue;
-    }
     self player_flag_set("player_is_invulnerable");
     level notify("player_becoming_invulnerable");
     if(playerJustGotRedFlashing) {
@@ -956,8 +961,8 @@ old_style_health_overlay() {
   overlay.vertAlign = "fullscreen";
   overlay.alpha = 0;
   wait(0.05);
-  level.strings["take_cover"] = spawnStruct();
-  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
+  level.strings["take_cover"] = spawnstruct();
+  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
   self thread healthOverlay_remove(overlay);
   pulseTime = 0.8;
   for(;;) {
@@ -1003,7 +1008,7 @@ new_style_health_overlay() {
     } else if((targetDamageAlpha == 0) && (overlay.alpha != 0)) {
       overlay FadeOverTime(timeToFadeOut);
       overlay.alpha = 0;
-      self playSound("chr_breathing_better");
+      self playsound("chr_breathing_better");
     }
   }
 }
@@ -1410,7 +1415,9 @@ return_false(attacker) {
 }
 
 player_attacker(attacker) {
-  if([[level.custom_player_attacker]](attacker)) {
+  if([
+      [level.custom_player_attacker]
+    ](attacker)) {
     return true;
   }
   if(IsPlayer(attacker)) {
@@ -1477,9 +1484,13 @@ auto_adjust_enemy_died(ai, amount, attacker, type, point) {
     }
   }
   if(arcadeMode()) {
-    [[level.global_kill_func]](type, damage_location, point, attacker, ai, attacker.arcademode_bonus["uberKillingMachineStreak"]);
+    [
+      [level.global_kill_func]
+    ](type, damage_location, point, attacker, ai, attacker.arcademode_bonus["uberKillingMachineStreak"]);
   } else {
-    [[level.global_kill_func]](type, damage_location, point, attacker);
+    [
+      [level.global_kill_func]
+    ](type, damage_location, point, attacker);
   }
   aa_add_event("aa_player_kills", 1);
 }
@@ -1518,11 +1529,15 @@ aa_player_attacks_enemy_with_ads(player, amount, type, point) {
     self.attackerData[player getEntityNumber()] = false;
   }
   if(!isADS(player)) {
-    [[level.global_damage_func]](type, self.damagelocation, point, player, amount);
+    [
+      [level.global_damage_func]
+    ](type, self.damagelocation, point, player, amount);
     return false;
   }
   if(!bullet_attack(type)) {
-    [[level.global_damage_func]](type, self.damagelocation, point, player, amount);
+    [
+      [level.global_damage_func]
+    ](type, self.damagelocation, point, player, amount);
     return false;
   }
   [[level.global_damage_func_ads]](type, self.damagelocation, point, player, amount);
@@ -1554,9 +1569,8 @@ update_skill_on_change() {
   for(;;) {
     lowest_current_skill = GetDvarInt(#"saved_gameskill");
     gameskill = GetDvarInt(#"g_gameskill");
-    if(gameskill < lowest_current_skill) {
+    if(gameskill < lowest_current_skill)
       lowest_current_skill = gameskill;
-    }
     if(lowest_current_skill < level.gameskill) {
       setSkill(true, lowest_current_skill);
     }
@@ -1642,7 +1656,7 @@ coop_spawner_count_adjuster() {
   players = get_players("allies");
   for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i].targetname)) {
-      possible_trig = getEntArray(spawners[i].targetname, "target");
+      possible_trig = getentarray(spawners[i].targetname, "target");
       if(isDefined(possible_trig[0])) {
         if(isDefined(possible_trig[0].targetname)) {
           if(possible_trig[0].targetname == "flood_spawner") {

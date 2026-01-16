@@ -22,7 +22,7 @@ civilian_init() {
   self pushplayer(0);
   self.a.reacttobulletchance = 1;
 
-  if(!isDefined(level.initialized_civilian_animations)) {
+  if(!isdefined(level.initialized_civilian_animations)) {
     level.initialized_civilian_animations = 1;
     level.scr_anim["default_civilian"]["run_combat"][0] = % civilian_run_upright;
     level.scr_anim["default_civilian"]["run_hunched_combat"][0] = % civilian_run_hunched_a;
@@ -47,7 +47,7 @@ civilian_init() {
 
   var_1 = undefined;
 
-  if(isDefined(self.civilian_walk_animation)) {
+  if(isdefined(self.civilian_walk_animation)) {
     self.animname = self.civilian_walk_animation;
     attachprops(self.civilian_walk_animation);
     self.alertlevel = "noncombat";
@@ -65,13 +65,13 @@ civilian_init() {
 }
 
 attachprops(var_0) {
-  if(isDefined(self.hasattachedprops)) {
+  if(isdefined(self.hasattachedprops)) {
     return;
   }
   initcivilianprops();
   var_1 = anim.civilianprops[var_0];
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1)) {
     self.attachedpropmodel = var_1;
     self.attachedproptag = "tag_inhand";
     self attach(self.attachedpropmodel, self.attachedproptag, 1);
@@ -80,11 +80,11 @@ attachprops(var_0) {
 }
 
 detachprops() {
-  if(isDefined(self.hasattachedprops)) {
+  if(isdefined(self.hasattachedprops)) {
     self detach(self.attachedpropmodel, self.attachedproptag);
     var_0 = spawn("script_model", self gettagorigin(self.attachedproptag));
     var_0.angles = self gettagangles(self.attachedproptag);
-    var_0 setModel(self.attachedpropmodel);
+    var_0 setmodel(self.attachedpropmodel);
     var_0 physicslaunchclient();
     var_0 thread waitforcleanup();
     self.hasattachedprops = undefined;
@@ -99,7 +99,7 @@ waitforcleanup() {
 }
 
 initcivilianprops() {
-  if(isDefined(anim.civilianprops)) {
+  if(isdefined(anim.civilianprops)) {
     return;
   }
   anim.civilianprops = [];
@@ -122,22 +122,20 @@ initcivilianprops() {
 startnoncombat() {
   self.turnrate = 0.2;
 
-  if(isDefined(self.civilian_walk_animation)) {
+  if(isdefined(self.civilian_walk_animation)) {
     var_0 = % civilian_briefcase_walk_dodge_l;
     var_1 = % civilian_briefcase_walk_dodge_r;
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_left"])) {
+    if(isdefined(level.scr_anim[self.animname]["dodge_left"]))
       var_0 = level.scr_anim[self.animname]["dodge_left"];
-    }
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_right"])) {
+    if(isdefined(level.scr_anim[self.animname]["dodge_right"]))
       var_1 = level.scr_anim[self.animname]["dodge_right"];
-    }
 
     animscripts\move::setdodgeanims(var_0, var_1);
   }
 
-  if(isDefined(level.scr_anim[self.animname]["turn_left_90"])) {
+  if(isdefined(level.scr_anim[self.animname]["turn_left_90"])) {
     self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_noncombatmoveturn;
     self.pathturnanimblendtime = 0.1;
     maps\_utility::enable_turnanims();
@@ -162,11 +160,10 @@ startcombat() {
   self.turnrate = 0.3;
   var_0 = randomint(3) < 1;
 
-  if(isDefined(self.force_civilian_stand_run)) {
+  if(isdefined(self.force_civilian_stand_run))
     var_0 = 1;
-  } else if(isDefined(self.force_civilian_hunched_run)) {
+  else if(isdefined(self.force_civilian_hunched_run))
     var_0 = 0;
-  }
 
   if(var_0) {
     self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_combatmoveturn;
@@ -189,14 +186,13 @@ checkcombatstate() {
   self endon("disable_combat_state_check");
   var_0 = self.alertlevelint > 1;
 
-  for(;;) {
+  for (;;) {
     var_1 = self.alertlevelint > 1;
 
-    if(var_0 && !var_1) {
+    if(var_0 && !var_1)
       startnoncombat();
-    } else if(!var_0 && var_1) {
+    else if(!var_0 && var_1)
       startcombat();
-    }
 
     var_0 = var_1;
     wait 0.05;

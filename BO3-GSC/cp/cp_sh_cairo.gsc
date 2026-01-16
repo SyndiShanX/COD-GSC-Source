@@ -35,7 +35,7 @@ function main() {
 }
 
 function setup_skiptos() {
-  skipto::add_dev("dev_no_bunk", &function_d525a88c, "No Bunk Start");
+  skipto::add_dev("dev_no_bunk", & function_d525a88c, "No Bunk Start");
 }
 
 function function_d525a88c(str_objective, b_starting) {
@@ -68,7 +68,7 @@ function set_ambient_state() {
 
 function start_ambient_background_vtols() {
   a_sp_vtols = getvehiclespawnerarray("ambient_vtol", "targetname");
-  while(true) {
+  while (true) {
     a_sp_vtols = array::randomize(a_sp_vtols);
     foreach(sp_vtol in a_sp_vtols) {
       sp_vtol.count++;
@@ -83,43 +83,43 @@ function start_ambient_background_vtols() {
 
 function setup_vignettes() {
   a_str_scenes = [];
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_repair_3dprinter";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_tech_bunk";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_tech_inspect";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_tech_diagnostics";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_tech_firerange";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_tech_datavault";
-  if(!isDefined(a_str_scenes)) {
+  if(!isdefined(a_str_scenes)) {
     a_str_scenes = [];
   } else if(!isarray(a_str_scenes)) {
     a_str_scenes = array(a_str_scenes);
@@ -127,7 +127,7 @@ function setup_vignettes() {
   a_str_scenes[a_str_scenes.size] = "cin_saf_ram_armory_vign_supply_box";
   a_str_scenes = array::randomize(a_str_scenes);
   n_vign_total = randomintrange(4, 6);
-  for(n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
+  for (n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {
     str_scene = a_str_scenes[n_vign_index];
     level thread scene::play(str_scene);
   }

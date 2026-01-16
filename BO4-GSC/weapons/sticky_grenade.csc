@@ -7,6 +7,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace sticky_grenade;
 
 autoexec __init__system__() {
@@ -14,8 +15,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "grenade_light"] = # "weapon/fx8_equip_light_os";
-  level._effect[# "hash_61fd92df093ebdb4"] = # "hash_44b0fea08babccac";
+  level._effect[#"grenade_light"] = #"weapon/fx8_equip_light_os";
+  level._effect[#"hash_61fd92df093ebdb4"] = #"hash_44b0fea08babccac";
   callback::add_weapon_type(#"sticky_grenade", &spawned);
   callback::add_weapon_type(#"eq_sticky_grenade", &spawned);
   callback::add_weapon_type(#"hash_4b92b1a2aa3037f5", &spawned);
@@ -61,7 +62,7 @@ function_117f61b8(localclientnum) {
     return;
   }
 
-  handle = self playSound(localclientnum, # "wpn_semtex_countdown");
+  handle = self playSound(localclientnum, #"wpn_semtex_countdown");
   self thread stop_sound_on_ent_shutdown(handle);
 }
 
@@ -75,7 +76,7 @@ fx_think(localclientnum, var_1e60ee48) {
   self endon(#"light_disable");
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
-  handle = self playSound(localclientnum, # "wpn_semtex_countdown");
+  handle = self playSound(localclientnum, #"wpn_semtex_countdown");
   self thread stop_sound_on_ent_shutdown(handle);
 
   for(interval = 0.3; isDefined(self); interval = math::clamp(interval / 1.2, 0.08, 0.3)) {
@@ -87,7 +88,7 @@ fx_think(localclientnum, var_1e60ee48) {
     }
 
     if(!localplayer isentitylinkedtotag(self, "j_head") && !localplayer isentitylinkedtotag(self, "j_elbow_le") && !localplayer isentitylinkedtotag(self, "j_spineupper")) {
-      self start_light_fx(localclientnum, level._effect[# "grenade_light"]);
+      self start_light_fx(localclientnum, level._effect[#"grenade_light"]);
     }
 
     self fullscreen_fx(localclientnum, var_1e60ee48);
@@ -116,7 +117,7 @@ function_c879d0fd(localclientnum) {
 
   for(interval = 0.3;; interval = math::clamp(interval / 1.2, 0.08, 0.3)) {
     self stop_light_fx(localclientnum);
-    self start_light_fx(localclientnum, level._effect[# "hash_61fd92df093ebdb4"]);
+    self start_light_fx(localclientnum, level._effect[#"hash_61fd92df093ebdb4"]);
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
     self util::waittill_dobj(localclientnum);
   }

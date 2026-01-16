@@ -38,9 +38,8 @@ main() {
       break;
   }
 
-  if(var_0 == gettime()) {
+  if(var_0 == gettime())
     wait 0.05;
-  }
 
   self notify("melee_complete");
 }
@@ -49,9 +48,8 @@ endscript() {
   self.performing_melee = undefined;
   self.spawning = undefined;
 
-  if(isDefined(self.spawn_count) && self.spawn_count > 0) {
+  if(isDefined(self.spawn_count) && self.spawn_count > 0)
     maps\mp\alien\_spawn_director::release_custom_spawn_space(self.spawn_count);
-  }
 }
 
 emerge() {
@@ -132,9 +130,8 @@ getsmashanimlength(var_0) {
 getsmashanimname(var_0) {
   var_0 = var_0 + "_";
 
-  if(isDefined(level.kraken.anim_state_modifier)) {
+  if(isDefined(level.kraken.anim_state_modifier))
     var_0 = var_0 + (level.kraken.anim_state_modifier + "_");
-  }
 
   var_1 = getsideanimstate(var_0);
   return var_1;
@@ -146,15 +143,13 @@ smash() {
 }
 
 getsmashtriggerorigin() {
-  if(!isDefined(self.smash_trigger) || !isDefined(self.smash_trigger.target)) {
+  if(!isDefined(self.smash_trigger) || !isDefined(self.smash_trigger.target))
     return undefined;
-  }
 
   var_0 = common_scripts\utility::getstruct(self.smash_trigger.target, "targetname");
 
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return undefined;
-  }
 
   return var_0.origin;
 }
@@ -234,9 +229,8 @@ dosmash(var_0) {
       var_5 = (var_3.origin - var_1) * (1, 1, 0);
       var_6 = length(var_5);
 
-      if(var_6 > var_4) {
+      if(var_6 > var_4)
         var_5 = vectornormalize(var_5) * var_4;
-      }
 
       var_7 = level.alien_types["kraken"].attributes[self.tentacle_name]["anim_index"];
       var_8 = self getanimentry(var_0, var_7);
@@ -306,9 +300,8 @@ smashplayersback() {
     var_11 = (var_9 + var_10) * (1, 1, 0);
     var_12 = length(var_11);
 
-    if(var_12 >= var_0) {
+    if(var_12 >= var_0)
       var_11 = vectornormalize(var_11) * var_0;
-    }
 
     var_8 setvelocity(var_11);
     var_8 shellshock("alien_kraken_emp", 2.0);
@@ -344,9 +337,8 @@ buildspawnwave() {
     } else
       var_6 = var_4;
 
-    for(var_7 = 0; var_7 < var_6; var_7++) {
+    for(var_7 = 0; var_7 < var_6; var_7++)
       self.current_spawn_wave[self.current_spawn_wave.size] = var_3[0];
-    }
   }
 }
 
@@ -415,15 +407,13 @@ getsideanimstate(var_0) {
 }
 
 playanim(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     self endon(var_1);
-  }
 
   var_4 = level.alien_types["kraken"].attributes[self.tentacle_name]["anim_index"];
 
-  if(!isDefined(var_3) || var_3) {
+  if(!isDefined(var_3) || var_3)
     self scragentsetanimmode("anim deltas");
-  }
 
   self scragentsetorientmode("face angle abs", self.angles);
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_0, var_4, var_0, "end", var_2);

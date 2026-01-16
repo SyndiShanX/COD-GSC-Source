@@ -9,7 +9,7 @@
 
 hackangle() {
   self endon("killanimscript");
-  for(;;) {
+  for (;;) {
     enemyAngle = animscripts\utility::GetYawToEnemy();
     self OrientMode("face angle", enemyAngle);
     wait .05;
@@ -24,30 +24,28 @@ main() {
   self trackScriptState("l33t truckride combat", "becauseisaidso");
   thread hackangle();
   self OrientMode("face enemy");
-  if(randomint(100) > 50) {
+  if(randomint(100) > 50)
     nextaction = ("stand");
-  } else {
+  else
     nextaction = ("crouch");
-  }
-  for(;;) {
+  for (;;) {
     self SetPoseMovement("", "stop");
     Reload(0);
     if(nextaction == ("stand")) {
       timer = gettime() + randomint(2000) + 2000;
-      while(timer > gettime()) {
+      while (timer > gettime()) {
         self SetPoseMovement("stand", "stop");
         success = LocalShootVolley(0);
         nextaction = ("crouch");
       }
     } else if(nextaction == ("crouch")) {
       timer = gettime() + randomint(2000) + 2000;
-      while(timer > gettime()) {
+      while (timer > gettime()) {
         thread[[anim.println]]("ExposedCombat - Crouched combat");
         self SetPoseMovement("crouch", "stop");
         success = ShootVolley();
-        if(!success) {
+        if(!success)
           continue;
-        }
         nextaction = ("stand");
       }
     }
@@ -78,12 +76,12 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     numShots = randomint(8) + 6;
     enemyAngle = animscripts\utility::AbsYawToEnemy();
     thread[[anim.locspam]]("c16a");
-    for(i = 0;
+    for (i = 0;
       (i < numShots && self.bulletsInClip > 0 && enemyAngle < 20); i++) {
       self waittillmatch("shootdone", "fire");
       if(isDefined(posOverrideEntity)) {
         if(isSentient(posOverrideEntity)) {
-          pos = posOverrideEntity getEye();
+          pos = posOverrideEntity GetEye();
         } else {
           pos = posOverrideEntity.origin;
         }
@@ -93,31 +91,28 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
       self.bulletsInClip--;
       enemyAngle = animscripts\utility::AbsYawToEnemy();
     }
-    if(completeLastShot) {
+    if(completeLastShot)
       wait animscripts\weaponList::waitAfterShot();
-    }
     self notify("stopautofireFace");
   } else if(animscripts\weaponList::usingSemiAutoWeapon()) {
     self animscripts\face::SetIdleFace(anim.aimface);
     self setanimknob(anim_semiautofire, 1, .15, 0);
     wait 0.2;
     rand = randomint(2) + 2;
-    for(i = 0;
+    for (i = 0;
       (i < rand && self.bulletsInClip > 0); i++) {
       self setFlaggedAnimKnobRestart("shootdone", anim_semiautofire, 1, 0, 1);
-      if(isDefined(posOverrideEntity)) {
+      if(isDefined(posOverrideEntity))
         self shoot(1, posOverrideEntity.origin);
-      } else {
+      else
         self shoot();
-      }
       self.bulletsInClip--;
       thread[[anim.locspam]]("c17.1b");
       shootTime = animscripts\weaponList::shootAnimTime();
       quickTime = animscripts\weaponList::waitAfterShot();
       wait quickTime;
-      if(((completeLastShot) || (i < rand - 1)) && shootTime > quickTime) {
+      if(((completeLastShot) || (i < rand - 1)) && shootTime > quickTime)
         wait shootTime - quickTime;
-      }
     }
   } else {
     Rechamber();
@@ -125,11 +120,10 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     self setanimknob(anim_boltfire, 1, .15, 0);
     wait 0.2;
     self setFlaggedAnimKnobRestart("shootdone", anim_boltfire, 1, 0, 1);
-    if(isDefined(posOverrideEntity)) {
+    if(isDefined(posOverrideEntity))
       self shoot(1, posOverrideEntity.origin);
-    } else {
+    else
       self shoot();
-    }
     self.a.needsToRechamber = 1;
     self.bulletsInClip--;
     shootTime = animscripts\weaponList::shootAnimTime();

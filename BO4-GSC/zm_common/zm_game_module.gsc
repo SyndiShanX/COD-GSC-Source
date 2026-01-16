@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_game_module;
 
 register_game_module(index, module_name, pre_init_func, post_init_func, pre_init_zombie_spawn_func, post_init_zombie_spawn_func, hub_start_func) {
@@ -193,7 +194,7 @@ fireworks_launch(launch_spot) {
   firework = spawn("script_model", launch_spot.origin + (randomintrange(-60, 60), randomintrange(-60, 60), 0));
   firework setModel(#"tag_origin");
   util::wait_network_frame();
-  playFXOnTag(level._effect[# "fw_trail_cheap"], firework, "tag_origin");
+  playFXOnTag(level._effect[#"fw_trail_cheap"], firework, "tag_origin");
   firework playLoopSound(#"zmb_souls_loop", 0.75);
   dest = launch_spot;
 
@@ -209,6 +210,6 @@ fireworks_launch(launch_spot) {
   }
 
   firework playSound(#"zmb_souls_end");
-  playFX(level._effect[# "fw_pre_burst"], firework.origin);
+  playFX(level._effect[#"fw_pre_burst"], firework.origin);
   firework delete();
 }

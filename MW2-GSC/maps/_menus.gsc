@@ -40,7 +40,7 @@ init() {
   action = setupAction(::loadMap, "cqb_1");
   description = spawnStruct();
   // 1st pass
-  description.display = &"MENU_1ST_PASS";
+  description.display = & "MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   // CQB Test
@@ -49,7 +49,7 @@ init() {
   action = setupAction(::loadMap, "descent");
   description = spawnStruct();
   // 1st pass
-  description.display = &"MENU_1ST_PASS";
+  description.display = & "MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   // Bunker
@@ -58,7 +58,7 @@ init() {
   action = setupAction(::loadMap, "aftermath");
   description = spawnStruct();
   // 100% initial geo
-  description.display = &"MENU_100_INITIAL_GEO";
+  description.display = & "MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Aftermath
@@ -67,7 +67,7 @@ init() {
   action = setupAction(::loadMap, "chechnya_escape");
   description = spawnStruct();
   // 40% initial geo
-  description.display = &"MENU_40_INITIAL_GEO";
+  description.display = & "MENU_40_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Chechnya Escape
@@ -76,7 +76,7 @@ init() {
   action = setupAction(::loadMap, "marksman");
   description = spawnStruct();
   // 25% scripted
-  description.display = &"MENU_25_SCRIPTED";
+  description.display = & "MENU_25_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Marksman
@@ -85,7 +85,7 @@ init() {
   action = setupAction(::loadMap, "seaknight_defend");
   description = spawnStruct();
   // Prototype Level, 30% scripted
-  description.display = &"MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
+  description.display = & "MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Seaknight Defend
@@ -94,7 +94,7 @@ init() {
   action = setupAction(::loadMap, "wetwork");
   description = spawnStruct();
   // 100% initial geo
-  description.display = &"MENU_100_INITIAL_GEO";
+  description.display = & "MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Wetwork
@@ -103,7 +103,7 @@ init() {
   action = setupAction(::loadMap, "cargoship");
   description = spawnStruct();
   // 10% scripted
-  description.display = &"MENU_10_SCRIPTED";
+  description.display = & "MENU_10_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Cargoship
@@ -112,7 +112,7 @@ init() {
   action = setupAction(::loadMap, "bog");
   description = spawnStruct();
   // 35% initial geo
-  description.display = &"MENU_35_INITIAL_GEO";
+  description.display = & "MENU_35_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Bog
@@ -121,7 +121,7 @@ init() {
   action = setupAction(::loadMap, "training");
   description = spawnStruct();
   // 5% scripted
-  description.display = &"MENU_5_SCRIPTED";
+  description.display = & "MENU_5_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Training
@@ -130,7 +130,7 @@ init() {
   action = setupAction(::loadMap, "ac130");
   description = spawnStruct();
   // 30%
-  description.display = &"MENU_30";
+  description.display = & "MENU_30";
   description.xPos = 240;
   description.yPos = 100;
   // AC130
@@ -139,7 +139,7 @@ init() {
   action = setupAction(::loadMap, "seaknight_assault");
   description = spawnStruct();
   // Initial geo in progress
-  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   // Seaknight Assault
@@ -148,7 +148,7 @@ init() {
   action = setupAction(::loadMap, "pilotcobra");
   description = spawnStruct();
   // Initial geo in progress
-  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   // Pilot Cobra
@@ -230,14 +230,14 @@ init() {
   // Controls
   // Subtitles
   // Save Device
-  //optionsMenu addItem(&"MENU_SAVE_DEVICE", ::void );
+  //optionsMenu addItem( &"MENU_SAVE_DEVICE", ::void );
 
   mainMenu = createMenu("main");
   action = setupAction(::pushMenu, levelMenu);
   // Select Level
   mainMenu addItem(&"MENU_SELECT_LEVEL", action, "openmenu_levels");
   // Options
-  subMenu = mainMenu addSubMenu("options", &"MENU_OPTIONS");
+  subMenu = mainMenu addSubMenu("options", & "MENU_OPTIONS");
   action = setupAction(::pushMenu, controlsMenu);
   // Controls
   subMenu addItem(&"MENU_CONTROLS", action);
@@ -274,9 +274,8 @@ pushMenu(menuDef) {
   level.curMenu = menuDef;
 
   if(menuDef.menuType == "fullScreen") {
-    if(isDefined(oldMenu)) {
+    if(isDefined(oldMenu))
       oldMenu thread hideMenu(0.2, true);
-    }
 
     menuDef thread showMenu(0.2, true);
     level notify("open_menu", level.curMenu.name);
@@ -284,13 +283,12 @@ pushMenu(menuDef) {
     menuDef thread expandMenu(0.2);
   }
 
-  level.player playSound("mouse_click");
+  level.player playsound("mouse_click");
 }
 
 popMenu() {
-  if(level.menuStack.size == 1) {
+  if(level.menuStack.size == 1)
     return;
-  }
 
   level.menuStack[level.menuStack.size - 1] = undefined;
   oldMenu = level.curMenu;
@@ -305,7 +303,7 @@ popMenu() {
     level notify("close_menu", level.menuStack.size);
   }
 
-  level.player playSound("mouse_click");
+  level.player playsound("mouse_click");
 }
 
 createMenu(name) {
@@ -437,7 +435,7 @@ createItemElems() {
     self.caretIcon.sort = 100;
   }
 
-  if(isDefined(self.description)) {
+  if(isdefined(self.description)) {
     self.descriptionValue = createFontString("default", 1.5);
     self.descriptionValue.alpha = 0;
     self.descriptionValue.sort = 100;
@@ -446,17 +444,14 @@ createItemElems() {
 }
 
 destroyItemElems() {
-  if(self.itemType == "subMenu") {
+  if(self.itemType == "subMenu")
     self.caretIcon destroyElem();
-  }
 
-  if(self.itemType == "settingMenu") {
+  if(self.itemType == "settingMenu")
     self.settingValue destroyElem();
-  }
 
-  if(isDefined(self.descriptionValue)) {
+  if(isdefined(self.descriptionValue))
     self.descriptionValue destroyElem();
-  }
 
   self.bgIcon destroyElem();
   self.fontString destroyElem();
@@ -475,7 +470,7 @@ setElemPoints(point, relativePoint, xPos, yPos, transTime) {
     self.settingValue setPoint("TOPRIGHT", relativePoint, xPos + xOffset + 400, yPos, transTime);
   }
 
-  if(isDefined(self.descriptionValue)) {
+  if(isdefined(self.descriptionValue)) {
     self.descriptionValue setPoint("TOPLEFT", relativePoint, self.description.xPos, self.description.yPos, transTime);
   }
 
@@ -484,7 +479,7 @@ setElemPoints(point, relativePoint, xPos, yPos, transTime) {
 
 showMenu(transTime, isNew) {
   yOffset = 0;
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     itemDef createItemElems();
@@ -506,16 +501,15 @@ showMenu(transTime, isNew) {
     }
   }
 
-  if(self.menuType == "subMenu") {
+  if(self.menuType == "subMenu")
     self.parentDef showMenu(transTime, isNew);
-  }
 
   self updateMenu(transTime, true);
 }
 
 hideMenu(transTime, isNew) {
   yOffset = 0;
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     xOffset = -1 * self.itemWidth;
@@ -565,13 +559,12 @@ hideMenu(transTime, isNew) {
     }
   }
 
-  if(self.menuType == "subMenu") {
+  if(self.menuType == "subMenu")
     self.parentDef thread hideMenu(transTime, isNew);
-  }
 
   wait transTime;
 
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
     itemDef destroyItemElems();
   }
@@ -582,7 +575,7 @@ collapseMenu(transTime) {
   self.caretIcon setShader("menu_caret_closed", self.parentDef.itemHeight, self.parentDef.itemHeight);
 
   yOffset = 0;
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     itemDef setElemPoints("TOPLEFT", "TOPLEFT", self.xPos, self.yPos, transTime);
@@ -602,15 +595,14 @@ collapseMenu(transTime) {
 
   wait transTime;
 
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     itemDef.bgIcon destroyElem();
     itemDef.fontString destroyElem();
 
-    if(itemDef.itemType == "subMenu") {
+    if(itemDef.itemType == "subMenu")
       itemDef.caretIcon destroyElem();
-    }
   }
 
 }
@@ -618,7 +610,7 @@ collapseMenu(transTime) {
 expandMenu(transTime) {
   self.isExpanded = true;
   self.caretIcon setShader("menu_caret_open", self.parentDef.itemHeight, self.parentDef.itemHeight);
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     itemDef createItemElems();
@@ -634,7 +626,7 @@ expandMenu(transTime) {
 updateMenu(transTime, forceRedraw) {
   xOffset = self.xOffset;
   yOffset = self.yOffset;
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
     itemDef setSelected(transTime, index == self.selectedIndex);
 
@@ -656,65 +648,54 @@ updateMenu(transTime, forceRedraw) {
     }
   }
 
-  if(isDefined(self.parentDef)) {
+  if(isDefined(self.parentDef))
     self.parentDef thread updateMenu(transTime, forceRedraw);
-  }
 }
 
 setSelected(transTime, isSelected) {
   self.bgIcon fadeOverTime(transTime);
   self.fontString fadeOverTime(transTime);
 
-  if(isDefined(self.settingValue)) {
+  if(isdefined(self.settingValue))
     self.settingValue fadeOverTime(transTime);
-  }
 
-  if(isDefined(self.descriptionValue)) {
+  if(isdefined(self.descriptionValue))
     self.descriptionValue fadeOverTime(transTime);
-  }
 
   /*
   self setElemAlpha( 0.85 );
   if( isSelected )
   {
-  	if( self.parentDef == level.curMenu ) {
+  	if( self.parentDef == level.curMenu )
   		self setElemColor( (1,1,1) );
-  	}
-  	else {
+  	else
   		self setElemColor( (0.85,0.85,0.85) );
-  	}
   }
   else
   {
-  	if( self.parentDef == level.curMenu ) {
+  	if( self.parentDef == level.curMenu )
   		self setElemColor( (0.75,0.75,0.75) );
-  	}
-  	else {
+  	else
   		self setElemColor( (0.5,0.5,0.5) );
-  	}
   }
   */
 
   if(isSelected) {
-    if(self.parentDef == level.curMenu) {
+    if(self.parentDef == level.curMenu)
       self setElemAlpha(1);
-    } else {
+    else
       self setElemAlpha(0.5);
-    }
 
-    if(isDefined(self.descriptionValue)) {
+    if(isdefined(self.descriptionValue))
       self.descriptionValue.alpha = 1;
-    }
   } else {
-    if(self.parentDef == level.curMenu) {
+    if(self.parentDef == level.curMenu)
       self setElemAlpha(0.5);
-    } else {
+    else
       self setElemAlpha(0.25);
-    }
 
-    if(isDefined(self.descriptionValue)) {
+    if(isdefined(self.descriptionValue))
       self.descriptionValue.alpha = 0;
-    }
   }
 }
 
@@ -722,13 +703,11 @@ setElemAlpha(alpha) {
   self.bgIcon.alpha = alpha;
   self.fontString.alpha = alpha;
 
-  if(self.itemType == "settingMenu") {
+  if(self.itemType == "settingMenu")
     self.settingValue.alpha = alpha;
-  }
 
-  if(self.itemType == "subMenu") {
+  if(self.itemType == "subMenu")
     self.caretIcon.alpha = alpha;
-  }
 
   //	if( isdefined ( self.descriptionValue ) )
   //		self.descriptionValue.alpha = alpha;
@@ -740,13 +719,12 @@ setElemColor(color) {
 
 getMenuHeight() {
   menuHeight = 0;
-  for(index = 0; index < self.itemDefs.size; index++) {
+  for (index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
 
     menuHeight += (self.itemHeight + self.itemPadding);
-    if(itemDef.itemType == "subMenu" && itemDef.isExpanded) {
+    if(itemDef.itemType == "subMenu" && itemDef.isExpanded)
       menuHeight += itemDef getMenuHeight();
-    }
   }
 
   return menuHeight;
@@ -755,25 +733,23 @@ getMenuHeight() {
 onDPadUp() {
   self.selectedIndex--;
 
-  if(self.selectedIndex < 0) {
+  if(self.selectedIndex < 0)
     self.selectedIndex = self.itemDefs.size - 1;
-  }
 
   self updateMenu(0.1, false);
 
-  level.player playSound("mouse_over");
+  level.player playsound("mouse_over");
 }
 
 onDPadDown() {
   self.selectedIndex++;
 
-  if(self.selectedIndex >= self.itemDefs.size) {
+  if(self.selectedIndex >= self.itemDefs.size)
     self.selectedIndex = 0;
-  }
 
   self updateMenu(0.1, false);
 
-  level.player playSound("mouse_over");
+  level.player playsound("mouse_over");
 }
 
 onButtonB() {
@@ -783,17 +759,16 @@ onButtonB() {
 onButtonA() {
   focusedItem = self.itemDefs[self.selectedIndex];
 
-  if(focusedItem.itemType == "subMenu") {
+  if(focusedItem.itemType == "subMenu")
     pushMenu(focusedItem);
-  } else if(focusedItem.itemType == "item") {
-    /*		if( isDefined( focusedItem.argument ) )
+  else if(focusedItem.itemType == "item") {
+    /*		if( isdefined( focusedItem.argument ) )
     			level thread [[focusedItem.callback]]( focusedItem.argument );
-    		else {
+    		else
     			level thread [[focusedItem.callback]]();*/
-  }
 
-  focusedItem thread runAction();
-}
+    focusedItem thread runAction();
+  }
 }
 
 onDPadLeft() {
@@ -804,12 +779,11 @@ onDPadLeft() {
     dvarValues = focusedItem.setting.value;
 
     indexNew = 0;
-    for(i = 0; i < dvarValues.size; i++) {
+    for (i = 0; i < dvarValues.size; i++) {
       dvarValue = dvarValues[i];
 
-      if(dvarValue != dvarCurrent) {
+      if(dvarValue != dvarCurrent)
         continue;
-      }
 
       indexNew = i - 1;
 
@@ -819,7 +793,7 @@ onDPadLeft() {
         setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
-        level.player playSound("mouse_over");
+        level.player playsound("mouse_over");
       }
 
       break;
@@ -835,12 +809,11 @@ onDPadRight() {
     dvarValues = focusedItem.setting.value;
 
     indexNew = 0;
-    for(i = 0; i < dvarValues.size; i++) {
+    for (i = 0; i < dvarValues.size; i++) {
       dvarValue = dvarValues[i];
 
-      if(dvarValue != dvarCurrent) {
+      if(dvarValue != dvarCurrent)
         continue;
-      }
 
       indexNew = i + 1;
 
@@ -849,7 +822,7 @@ onDPadRight() {
 
         setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
-        level.player playSound("mouse_over");
+        level.player playsound("mouse_over");
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
       }
 
@@ -896,29 +869,25 @@ setupAction(name, arg1, arg2) {
   action = spawnStruct();
   action.name = name;
 
-  if(isDefined(arg1)) {
+  if(isdefined(arg1))
     action.arg1 = arg1;
-  }
 
-  if(isDefined(arg2)) {
+  if(isdefined(arg2))
     action.arg2 = arg2;
-  }
 
   return action;
 }
 
 runAction() {
-  if(isDefined(self.action)) {
-    if(isDefined(self.action.arg1)) {
+  if(isdefined(self.action)) {
+    if(isdefined(self.action.arg1))
       thread[[self.action.name]](self.action.arg1);
-    } else {
+    else
       thread[[self.action.name]]();
-    }
   }
 
-  if(isDefined(self.event)) {
+  if(isdefined(self.event))
     level notify(self.event);
-  }
 }
 
 testAction() {
@@ -927,8 +896,9 @@ testAction() {
   thread maps\_vehicle::gopath(level.camera);
 }
 
+
 menuResponse() {
-  for(;;) {
+  for (;;) {
     self waittill("menuresponse", menu, response);
     println(response);
 

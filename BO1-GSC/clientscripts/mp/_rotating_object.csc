@@ -6,7 +6,7 @@
 #include clientscripts\mp\_utility;
 
 init(localClientNum) {
-  rotating_objects = getEntArray(localClientNum, "rotating_object", "targetname");
+  rotating_objects = GetEntArray(localClientNum, "rotating_object", "targetname");
   array_thread(rotating_objects, ::rotating_object_think);
 }
 rotating_object_think() {
@@ -17,7 +17,7 @@ rotating_object_think() {
   } else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "pitch") {
     change_spin = 2;
   }
-  while(1) {
+  while (1) {
     rotate_time = GetDvarFloat(#"scr_rotating_objects_secs");
     if(rotate_time == 0) {
       rotate_time = 12;

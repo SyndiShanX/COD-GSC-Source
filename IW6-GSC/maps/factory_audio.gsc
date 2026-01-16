@@ -26,9 +26,8 @@ audio_main() {
   thread sfx_create_movingcover2_line_emitters();
   thread start_movingcover2_sfx_loops();
 
-  if(level.start_point == "intro" || level.start_point == "intro_train" || level.start_point == "default" || level.start_point == "factory_ingress") {
+  if(level.start_point == "intro" || level.start_point == "intro_train" || level.start_point == "default" || level.start_point == "factory_ingress")
     thread audio_sfx_truck_idle_loop_start();
-  }
 
   level.rollingloop = "emt_movingcover2_rolling1_loop";
   level.jump_to_amb_alias = undefined;
@@ -53,21 +52,18 @@ sfx_hall_trigger() {
     self waittill("trigger");
 
     if(common_scripts\utility::flag("trigger_sat_room")) {
-      if(!common_scripts\utility::flag("mix_tunnel_open")) {
+      if(!common_scripts\utility::flag("mix_tunnel_open"))
         common_scripts\utility::flag_set("mix_tunnel_open");
-      }
 
       common_scripts\utility::flag_clear("trigger_sat_room");
       level.player setclienttriggeraudiozone("factory_wh1_tunnel_open_2", 0);
     }
 
-    if(!common_scripts\utility::flag("trigger_hall")) {
+    if(!common_scripts\utility::flag("trigger_hall"))
       common_scripts\utility::flag_set("trigger_hall");
-    }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
   }
 }
 
@@ -75,21 +71,18 @@ sfx_sat_trigger() {
   for(;;) {
     self waittill("trigger");
 
-    if(common_scripts\utility::flag("trigger_hall")) {
+    if(common_scripts\utility::flag("trigger_hall"))
       common_scripts\utility::flag_clear("trigger_hall");
-    }
 
     if(!common_scripts\utility::flag("trigger_sat_room")) {
       common_scripts\utility::flag_set("trigger_sat_room");
 
-      if(common_scripts\utility::flag("mix_tunnel_open")) {
+      if(common_scripts\utility::flag("mix_tunnel_open"))
         level.player clearclienttriggeraudiozone(0.7);
-      }
     }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
   }
 }
 
@@ -175,9 +168,8 @@ mission_music() {
   jump_to_music_flag_setup();
   level.special_amb_is_playing = 0;
 
-  if(isDefined(level.jump_to_amb_alias)) {
+  if(isDefined(level.jump_to_amb_alias))
     wait 0.01;
-  }
 
   switch (level.start_point) {
     case "default":
@@ -186,9 +178,8 @@ mission_music() {
     case "powerstealth":
     case "factory_ingress":
     case "intro_train":
-      if(getdvar("music_enable") == "1") {
+      if(getdvar("music_enable") == "1")
         maps\_utility::music_play("mus_factory_powerstealth");
-      }
 
       common_scripts\utility::flag_wait("powerstealth_end");
       maps\_utility::music_stop(30);
@@ -290,9 +281,8 @@ jump_to_music_flag_setup() {
   }
   common_scripts\utility::flag_set("music_chk_crash");
 
-  if(level.start_point == "face_off") {
+  if(level.start_point == "face_off")
     return;
-  }
 }
 
 aud_binoculars_foley() {
@@ -378,9 +368,8 @@ sfx_crate_trigger() {
 sfx_mud_trigger() {
   self waittill("trigger");
 
-  if(!common_scripts\utility::flag("sfx_landed_crate")) {
+  if(!common_scripts\utility::flag("sfx_landed_crate"))
     level.player playSound("scn_factory_intro_land_ground");
-  }
 }
 
 sfx_land_crate() {}
@@ -418,9 +407,8 @@ start_jungle_line_emitter() {
 }
 
 start_truckyard_line_emitter() {
-  if(!common_scripts\utility::flag("audio_notrain")) {
+  if(!common_scripts\utility::flag("audio_notrain"))
     common_scripts\utility::flag_wait("trig_intro_vignette");
-  }
 
   wait 2;
   thread play_truckyard_pa();
@@ -470,9 +458,8 @@ start_movingcover2_sfx_loops() {
 }
 
 play_linear_sfx_conveyor(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     self endon(var_2);
-  }
 
   var_3 = spawn("script_origin", (0, 0, 0));
   var_4 = undefined;
@@ -518,9 +505,8 @@ audio_sfx_truck_idle_loop_start() {
   level.truckidlesfx linkto(var_0);
   common_scripts\utility::flag_wait("music_stealth_intro");
 
-  if(!common_scripts\utility::flag("music_chk_powerstealth")) {
+  if(!common_scripts\utility::flag("music_chk_powerstealth"))
     wait 3;
-  }
 
   waittillframeend;
   common_scripts\utility::flag_wait("player_entered_awning");
@@ -559,45 +545,38 @@ audio_sfx_truck_chatter(var_0, var_1) {
   var_4 = maps\_utility::get_living_ai("entrance_enemy_03", "script_noteworthy");
   wait 1;
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_2 playSound("factory_vs1_holdon");
-  }
 
   wait 6;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 playSound("factory_vs2_heavyload");
-  }
 
   wait 4;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_4 playSound("factory_vs3_expectingyou");
-  }
 
   wait 7.5;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 playSound("factory_vs2_seethat");
-  }
 
   wait 5.8;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_4 playSound("factory_vs3_yeahsorry");
-  }
 
   wait 4;
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_3 playSound("factory_vs2_secretaccount");
-  }
 
   wait 5;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_4 playSound("factory_vs3_doubleworkload");
-  }
 }
 
 audio_factory_search_body() {
@@ -615,11 +594,10 @@ audio_sfx_factory_distant_loop_start() {
 audio_sfx_truck_idle_loop_stop() {}
 
 audio_sfx_alternate_rolling_loop_alias() {
-  if(level.rollingloop == "emt_movingcover2_rolling1_loop") {
+  if(level.rollingloop == "emt_movingcover2_rolling1_loop")
     level.rollingloop = "emt_movingcover2_rolling2_loop";
-  } else {
+  else
     level.rollingloop = "emt_movingcover2_rolling1_loop";
-  }
 }
 
 audio_sfx_car_chase_sequence() {}
@@ -654,9 +632,8 @@ audio_factory_ambient_switch_to_ext() {
       }
     }
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
   }
 }
 
@@ -666,9 +643,8 @@ audio_factory_ambient_switch_to_int() {
 
     if(common_scripts\utility::flag("music_factory_reveal")) {}
 
-    while(level.player istouching(self)) {
+    while(level.player istouching(self))
       wait 0.1;
-    }
   }
 }
 
@@ -680,9 +656,8 @@ audio_start_positional_fake_int_amb(var_0) {
   wait 0.1;
 
   if(isDefined(var_0)) {
-    if(var_0 == "TRUE") {
+    if(var_0 == "TRUE")
       return;
-    }
   }
 }
 
@@ -795,17 +770,14 @@ audio_train_individual_click_clack(var_0, var_1, var_2, var_3) {
   var_5 = 0.874;
   var_6 = -900;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_4 = var_4 + var_1;
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_5 = var_2;
-  }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     var_6 = var_3;
-  }
 
   var_7 = spawn("script_origin", (var_4, 5200, 375));
   var_7 playSound(var_0, "donewiththissound");
@@ -946,9 +918,8 @@ ambush_line_emitter_create() {
 }
 
 ambush_line_emitter_logic(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     self endon(var_2);
-  }
 
   var_3 = spawn("script_origin", (0, 0, 0));
   var_4 = undefined;
@@ -1389,9 +1360,8 @@ moving_platform_warning_beeps_sfx(var_0) {
 }
 
 moving_platform_movement_loop_sfx(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 30;
-  }
 
   var_2 = spawn("script_origin", var_0);
   var_2 linkto(self);
@@ -1430,9 +1400,8 @@ stealth_kill_table_left_sfx() {
 }
 
 stealth_kill_table_right_sfx() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self playSound("scn_factory_stealth_kill_table_right");
-  }
 }
 
 stealth_kill_table_alert_left_sfx() {
@@ -1443,9 +1412,8 @@ stealth_kill_table_alert_left_sfx() {
 }
 
 stealth_kill_table_alert_right_sfx() {
-  if(isDefined(self)) {
+  if(isDefined(self))
     self playSound("scn_factory_stealth_kill_table_alert_right");
-  }
 }
 
 stealth_kill_railing_sfx() {
@@ -1457,9 +1425,8 @@ stealth_kill_railing_sfx() {
 }
 
 stealth_kill_console_sfx(var_0) {
-  if(!isDefined(self.knocked_over)) {
+  if(!isDefined(self.knocked_over))
     self playSound("scn_factory_stealth_kill_console");
-  }
 }
 
 stealth_kill_console_chair_sfx() {
@@ -1509,9 +1476,8 @@ rooftop_heli_speaker_vo_watcher(var_0) {
   self waittill("rooftop_spotlight_off");
   level.sfx_heli_spkr_vo_playing = 0;
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 thread rooftop_heli_speaker_vo_cleanup(0.1);
-  }
 }
 
 rooftop_heli_speaker_vo_cleanup(var_0) {

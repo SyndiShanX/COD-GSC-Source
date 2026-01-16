@@ -28,9 +28,8 @@ setentityheadicon(team, owner, offset, icon, constant_size) {
   if(!level.teambased && !isDefined(owner)) {
     return;
   }
-  if(!isDefined(constant_size)) {
+  if(!isDefined(constant_size))
     constant_size = 0;
-  }
 
   if(!isDefined(self.entityheadiconteam)) {
     self.entityheadiconteam = "none";
@@ -44,26 +43,23 @@ setentityheadicon(team, owner, offset, icon, constant_size) {
     self.entityheadiconteam = team;
   }
 
-  if(isDefined(offset)) {
+  if(isDefined(offset))
     self.entityheadiconoffset = offset;
-  } else {
+  else
     self.entityheadiconoffset = (0, 0, 0);
-  }
 
   if(isDefined(self.entityheadicons)) {
     for(i = 0; i < self.entityheadicons.size; i++) {
-      if(isDefined(self.entityheadicons[i])) {
+      if(isDefined(self.entityheadicons[i]))
         self.entityheadicons[i] destroy();
-      }
     }
   }
 
   self.entityheadicons = [];
   self notify("kill_entity_headicon_thread");
 
-  if(!isDefined(icon)) {
+  if(!isDefined(icon))
     icon = game["entity_headicon_" + team];
-  }
 
   if(isDefined(owner) && !level.teambased) {
     if(!isplayer(owner)) {
@@ -108,18 +104,16 @@ destroyheadiconsondeath() {
   self waittill_any("death", "hacked");
 
   for(i = 0; i < self.entityheadicons.size; i++) {
-    if(isDefined(self.entityheadicons[i])) {
+    if(isDefined(self.entityheadicons[i]))
       self.entityheadicons[i] destroy();
-    }
   }
 }
 
 destroyentityheadicons() {
   if(isDefined(self.entityheadicons)) {
     for(i = 0; i < self.entityheadicons.size; i++) {
-      if(isDefined(self.entityheadicons[i])) {
+      if(isDefined(self.entityheadicons[i]))
         self.entityheadicons[i] destroy();
-      }
     }
   }
 }

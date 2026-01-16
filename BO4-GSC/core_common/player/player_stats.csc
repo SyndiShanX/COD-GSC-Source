@@ -21,22 +21,22 @@ function_d92cb558(result, vararg) {
   }
 }
 
-function get_stat(localclientnum, ...) {
-  result = readstat(localclientnum, currentsessionmode(), vararg);
+  function get_stat(localclientnum, ...) {
+    result = readstat(localclientnum, currentsessionmode(), vararg);
 
-  function_d92cb558(result, vararg);
+    function_d92cb558(result, vararg);
 
-  return result;
-}
+      return result;
+  }
 
 function_842e069e(localclientnum, sessionmode, ...) {
   result = readstat(localclientnum, sessionmode, vararg);
 
   function_d92cb558(result, vararg);
 
-  return result;
+    return result;
 }
 
 get_stat_global(localclientnum, statname) {
-  return get_stat(localclientnum, # "playerstatslist", statname, # "statvalue");
+  return get_stat(localclientnum, #"playerstatslist", statname, #"statvalue");
 }

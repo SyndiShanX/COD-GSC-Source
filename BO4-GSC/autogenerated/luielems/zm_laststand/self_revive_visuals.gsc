@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace self_revive_visuals;
 
 class cself_revive_visuals: cluielem {

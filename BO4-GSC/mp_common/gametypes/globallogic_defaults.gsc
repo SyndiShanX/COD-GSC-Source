@@ -21,6 +21,7 @@
 #include scripts\mp_common\gametypes\round;
 #include scripts\mp_common\teams\platoons;
 #include scripts\mp_common\util;
+
 #namespace globallogic_defaults;
 
 getwinningteamfromloser(losing_team) {
@@ -34,11 +35,11 @@ getwinningteamfromloser(losing_team) {
 default_onforfeit(params) {
   level.gameforfeited = 1;
   level notify(#"forfeit in progress");
-  level endon(#"forfeit in progress", # "abort forfeit");
+  level endon(#"forfeit in progress", #"abort forfeit");
   forfeit_delay = 20;
-  announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;
-  announcement(game.strings[# "opponent_forfeiting_in"], 10, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], 10, 0);
   wait 10;
 
   if(!isDefined(params)) {
@@ -61,7 +62,7 @@ default_onforfeit(params) {
 default_ondeadevent(team) {
   current_winner = round::get_winner();
 
-  if(isDefined(current_winner) && current_winner != # "free") {
+  if(isDefined(current_winner) && current_winner != #"free") {
     return;
   }
 
@@ -119,7 +120,7 @@ default_ononeleftevent(team) {
       continue;
     }
 
-    if(!isDefined(player.pers[# "team"]) || player.pers[# "team"] != team) {
+    if(!isDefined(player.pers[#"team"]) || player.pers[#"team"] != team) {
       continue;
     }
 
@@ -174,14 +175,16 @@ default_onspawnintermission(endgame) {
   }
 
   util::error("<dev string:x94>");
+
 }
 
 default_gettimelimit() {
+
   if(getdvarfloat(#"timelimit_override", -1) != -1) {
     return math::clamp(getdvarfloat(#"timelimit_override", -1), level.timelimitmin, level.timelimitmax);
   }
 
-  return math::clamp(getgametypesetting(#"timelimit"), level.timelimitmin, level.timelimitmax);
+    return math::clamp(getgametypesetting(#"timelimit"), level.timelimitmin, level.timelimitmax);
 }
 
 default_getteamkillpenalty(einflictor, attacker, smeansofdeath, weapon) {

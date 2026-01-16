@@ -5,14 +5,15 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_nikolai_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_nikolai_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_nikolai_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"nikolai_unlock", # "hash_1d718be46a94371f", # "cu16_item", &function_d95e620c, # "hash_6a5c9e02cc60e87e");
+  character_unlock_fixup::register_character_unlock(#"nikolai_unlock", #"hash_1d718be46a94371f", #"cu16_item", &function_d95e620c, #"hash_6a5c9e02cc60e87e");
 }
 
 function_d95e620c() {

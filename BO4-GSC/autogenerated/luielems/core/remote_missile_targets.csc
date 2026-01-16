@@ -4,9 +4,11 @@
 ******************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace remote_missile_targets;
 
 class cremote_missile_targets: cluielem {
+
   function set_extra_target_3(localclientnum, value) {
     set_data(localclientnum, "extra_target_3", value);
   }
@@ -24,7 +26,7 @@ class cremote_missile_targets: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "remote_missile_targets");
+    cluielem::open(localclientnum, #"remote_missile_targets");
   }
 
   function function_fa582112(localclientnum) {

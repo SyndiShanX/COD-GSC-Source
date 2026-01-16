@@ -14,14 +14,14 @@ init() {
   thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
   }
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self ClearIRTarget();
     thread StingerToggleLoop();
@@ -52,7 +52,7 @@ ClearIRTarget() {
 StingerFiredNotify() {
   self endon("disconnect");
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("missile_fire", missile, weap);
     switch (weap) {
       case "strela_mp":
@@ -71,14 +71,12 @@ StingerFiredNotify() {
 StingerToggleLoop() {
   self endon("disconnect");
   self endon("death");
-  for(;;) {
-    while(!self PlayerStingerAds()) {
+  for (;;) {
+    while (!self PlayerStingerAds())
       wait 0.05;
-    }
     self thread StingerIRTLoop();
-    while(self PlayerStingerAds()) {
+    while (self PlayerStingerAds())
       wait 0.05;
-    }
     self notify("stinger_IRT_off");
     self ClearIRTarget();
   }
@@ -88,13 +86,12 @@ StingerIRTLoop() {
   self endon("death");
   self endon("stinger_IRT_off");
   lockLength = self getLockOnSpeed();
-  for(;;) {
+  for (;;) {
     wait 0.05;
     if(self.stingerLockFinalized) {
       passed = SoftSightTest();
-      if(!passed) {
+      if(!passed)
         continue;
-      }
       if(!IsStillValidTarget(self.stingerTarget)) {
         self ClearIRTarget();
         continue;
@@ -115,13 +112,11 @@ StingerIRTLoop() {
       LockingOn(self.stingerTarget, true);
       LockedOn(self.stingerTarget, false);
       passed = SoftSightTest();
-      if(!passed) {
+      if(!passed)
         continue;
-      }
       timePassed = getTime() - self.stingerLockStartTime;
-      if(timePassed < lockLength) {
+      if(timePassed < lockLength)
         continue;
-      }
       assert(isDefined(self.stingerTarget));
       self notify("stop_lockon_sound");
       self.stingerLockFinalized = true;
@@ -151,14 +146,12 @@ StingerIRTLoop() {
   }
 }
 DestroyLockOnCanceledMessage() {
-  if(isDefined(self.LockOnCanceledMessage)) {
+  if(isDefined(self.LockOnCanceledMessage))
     self.LockOnCanceledMessage destroy();
-  }
 }
 DisplayLockOnCanceledMessage() {
-  if(isDefined(self.LockOnCanceledMessage)) {
+  if(isDefined(self.LockOnCanceledMessage))
     return;
-  }
   self.LockOnCanceledMessage = newclienthudelem(self);
   self.LockOnCanceledMessage.fontScale = 1.25;
   self.LockOnCanceledMessage.x = 0;
@@ -177,7 +170,7 @@ DisplayLockOnCanceledMessage() {
 GetBestStingerTarget() {
   targetsAll = target_getArray();
   targetsValid = [];
-  for(idx = 0; idx < targetsAll.size; idx++) {
+  for (idx = 0; idx < targetsAll.size; idx++) {
     if(level.teamBased) {
       if(isDefined(targetsAll[idx].team) && targetsAll[idx].team != self.team) {
         if(self InsideStingerReticleNoLock(targetsAll[idx])) {
@@ -192,9 +185,8 @@ GetBestStingerTarget() {
       }
     }
   }
-  if(targetsValid.size == 0) {
+  if(targetsValid.size == 0)
     return undefined;
-  }
   chosenEnt = targetsValid[0];
   if(targetsValid.size > 1) {}
   return chosenEnt;
@@ -208,15 +200,12 @@ InsideStingerReticleLocked(target) {
   return target_isincircle(target, self, 65, radius);
 }
 IsStillValidTarget(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
-  if(!target_isTarget(ent)) {
+  if(!target_isTarget(ent))
     return false;
-  }
-  if(!InsideStingerReticleLocked(ent)) {
+  if(!InsideStingerReticleLocked(ent))
     return false;
-  }
   return true;
 }
 PlayerStingerAds() {
@@ -237,7 +226,7 @@ LoopLocalSeekSound(alias, interval) {
   self endon("stop_lockon_sound");
   self endon("disconnect");
   self endon("death");
-  for(;;) {
+  for (;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval;
@@ -247,11 +236,10 @@ LoopLocalLockSound(alias, interval) {
   self endon("stop_locked_sound");
   self endon("disconnect");
   self endon("death");
-  if(isDefined(self.stingerlocksound)) {
+  if(isDefined(self.stingerlocksound))
     return;
-  }
   self.stingerlocksound = true;
-  for(;;) {
+  for (;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;
@@ -266,24 +254,20 @@ LoopLocalLockSound(alias, interval) {
   self.stingerlocksound = undefined;
 }
 LockSightTest(target) {
-  eyePos = self getEye();
-  if(!isDefined(target)) {
+  eyePos = self GetEye();
+  if(!isDefined(target))
     return false;
-  }
   passed = BulletTracePassed(eyePos, target.origin, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
   front = target GetPointInBounds(1, 0, 0);
   passed = BulletTracePassed(eyePos, front, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
   back = target GetPointInBounds(-1, 0, 0);
   passed = BulletTracePassed(eyePos, back, false, target);
-  if(passed) {
+  if(passed)
     return true;
-  }
   return false;
 }
 SoftSightTest() {
@@ -292,9 +276,8 @@ SoftSightTest() {
     self.stingerLostSightlineTime = 0;
     return true;
   }
-  if(self.stingerLostSightlineTime == 0) {
+  if(self.stingerLostSightlineTime == 0)
     self.stingerLostSightlineTime = getTime();
-  }
   timePassed = GetTime() - self.stingerLostSightlineTime;
   if(timePassed >= LOST_SIGHT_LIMIT) {
     self ClearIRTarget();
@@ -303,9 +286,8 @@ SoftSightTest() {
   return true;
 }
 InitLockField(target) {
-  if(isDefined(target.locking_on)) {
+  if(isDefined(target.locking_on))
     return;
-  }
   target.locking_on = 0;
   target.locked_on = 0;
 }

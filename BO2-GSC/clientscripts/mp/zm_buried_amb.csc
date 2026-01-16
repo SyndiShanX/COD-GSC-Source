@@ -128,30 +128,27 @@ init_audio_snapshot_clientfields() {
 }
 
 audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
+  if(newval)
     playloopat(fieldname, (0, 0, 0));
-  } else {
+  else
     stoploopat(fieldname, (0, 0, 0));
-  }
 }
 
 add_fxanim_stop_loop(fieldname, soundname, origin, start_sound_on_register) {
-  if(!isDefined(start_sound_on_register)) {
+  if(!isDefined(start_sound_on_register))
     start_sound_on_register = 1;
-  }
 
-  s = spawnStruct();
+  s = spawnstruct();
   s.soundname = soundname;
   s.origin = origin;
   level.fxanim_stop_loops[fieldname] = s;
 
-  if(start_sound_on_register) {
+  if(start_sound_on_register)
     playloopat(s.soundname, s.origin);
-  }
 }
 
 add_fxanim_start_loop(fieldname, soundname, origin) {
-  s = spawnStruct();
+  s = spawnstruct();
   s.soundname = soundname;
   s.origin = origin;
   level.fxanim_start_loops[fieldname] = s;
@@ -161,19 +158,17 @@ fxanim_loop_audio(fieldname, val) {
   if(isDefined(level.fxanim_stop_loops[fieldname])) {
     s = level.fxanim_stop_loops[fieldname];
 
-    if(val) {
+    if(val)
       stoploopat(s.soundname, s.origin);
-    } else {
+    else
       playloopat(s.soundname, s.origin);
-    }
   } else if(isDefined(level.fxanim_start_loops[fieldname])) {
     s = level.fxanim_start_loops[fieldname];
 
-    if(val) {
+    if(val)
       playloopat(s.soundname, s.origin);
-    } else {
+    else
       stoploopat(s.soundname, s.origin);
-    }
   }
 }
 
@@ -206,11 +201,11 @@ sndslidetrigger() {
 }
 
 sndslidetriggeraudio(trig) {
-  self playSound(0, "zmb_slide_start");
+  self playsound(0, "zmb_slide_start");
   ent = spawn(0, self.origin, "script_origin");
   ent thread cleanup_on_spectate();
   ent linkto(self);
-  ent playLoopSound("zmb_slide_loop", 0.25);
+  ent playloopsound("zmb_slide_loop", 0.25);
 
   while(self istouching(trig)) {
     wait 0.1;
@@ -236,7 +231,7 @@ sndslidetriggeraudio(trig) {
     }
   }
 
-  self playSound(0, "zmb_slide_end");
+  self playsound(0, "zmb_slide_end");
   self.issliding = 0;
   ent delete();
   wait 1;
@@ -257,9 +252,8 @@ sndslidewoodaudio(calling_trig) {
   trig = getent(0, "sndWoodStop", "targetname");
   trig waittill("trigger", who);
 
-  if(who == self) {
-    self playSound(0, "zmb_slide_woodstop");
-  }
+  if(who == self)
+    self playsound(0, "zmb_slide_woodstop");
 }
 
 snd_play_loopers() {
@@ -321,9 +315,8 @@ snd_start_autofx_audio() {
 }
 
 sndbackgroundtrack(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(self.sndbackgroundtrack)) {
+  if(!isDefined(self.sndbackgroundtrack))
     self.sndbackgroundtrack = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   if(newval == oldval) {
     return;
@@ -354,5 +347,5 @@ sndbackgroundtrackplay(alias) {
   self endon("death");
   self stoploopsound(2);
   wait 2;
-  self playLoopSound(alias, 2);
+  self playloopsound(alias, 2);
 }

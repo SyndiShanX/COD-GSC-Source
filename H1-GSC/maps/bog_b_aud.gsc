@@ -63,7 +63,8 @@ create_level_envelop_arrays() {
     [0.238, 0.736],
     [0.408, 0.844],
     [0.756, 0.953],
-    [1.0, 1.0]];
+    [1.0, 1.0]
+  ];
 }
 
 precache_presets() {}
@@ -89,11 +90,10 @@ zone_handler(var_0, var_1) {
   var_2 = "";
   var_3 = "";
 
-  if(getsubstr(var_0, 0, 6) == "enter_") {
+  if(getsubstr(var_0, 0, 6) == "enter_")
     var_2 = var_1;
-  } else if(getsubstr(var_0, 0, 5) == "exit_") {
+  else if(getsubstr(var_0, 0, 5) == "exit_")
     var_3 = var_1;
-  }
 }
 
 music_handler(var_0, var_1) {}
@@ -199,11 +199,10 @@ handle_single_mi17_sequence_mix() {
   var_0 = common_scripts\utility::waittill_any_return("unloaded", "death");
   wait 4;
 
-  if(!common_scripts\utility::flag("first_mi17_gone")) {
+  if(!common_scripts\utility::flag("first_mi17_gone"))
     common_scripts\utility::flag_set("first_mi17_gone");
-  } else {
+  else
     soundscripts\_audio_mix_manager::mm_clear_submix("mix_mi17_reinforcement");
-  }
 }
 
 abrams_audio_node() {
@@ -261,10 +260,10 @@ abrams_audio_node() {
 }
 
 play_abrams_idle_sound(var_0) {
-  if(isDefined(self.gateopen) && !self.gateopen) {
+  if(isdefined(self.gateopen) && !self.gateopen) {
     var_0 thread common_scripts\utility::play_loop_sound_on_entity("bog_b_m1a1_tank_idle");
 
-    for(;;) {
+    for (;;) {
       if(self.gateopen) {
         break;
       }

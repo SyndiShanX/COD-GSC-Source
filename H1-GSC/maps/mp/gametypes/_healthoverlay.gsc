@@ -15,7 +15,7 @@ init() {
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -24,7 +24,7 @@ onplayerconnect() {
 onplayerspawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     thread playerhealthregen();
   }
@@ -46,7 +46,7 @@ playerhealthregen() {
   var_1 = 0;
   thread playerpainbreathingsound();
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
     if(self.health <= 0) {
@@ -55,21 +55,19 @@ playerhealthregen() {
     var_1 = gettime();
     var_7 = self.health / self.maxhealth;
 
-    if(!isDefined(self.healthregenlevel)) {
+    if(!isdefined(self.healthregenlevel))
       self.regenspeed = 1;
-    } else if(self.healthregenlevel == 0.33) {
+    else if(self.healthregenlevel == 0.33)
       self.regenspeed = 0.75;
-    } else if(self.healthregenlevel == 0.66) {
+    else if(self.healthregenlevel == 0.66)
       self.regenspeed = 0.5;
-    } else if(self.healthregenlevel == 0.99) {
+    else if(self.healthregenlevel == 0.99)
       self.regenspeed = 0.3;
-    } else {
+    else
       self.regenspeed = 1;
-    }
 
-    if(var_7 <= level.healthoverlaycutoff) {
+    if(var_7 <= level.healthoverlaycutoff)
       self.atbrinkofdeath = 1;
-    }
 
     thread healthregeneration(var_1, var_7);
     thread breathingmanager(var_1, var_7, var_2, var_6);
@@ -91,14 +89,13 @@ breathingmanager(var_0, var_1, var_2, var_3) {
   if(!isplayer(self)) {
     return;
   }
-  if(isDefined(var_3) && var_3 != "MOD_FALLING" || isDefined(var_2) && var_2 > 1) {
+  if(isdefined(var_3) && var_3 != "MOD_FALLING" || isdefined(var_2) && var_2 > 1)
     playdamagesound(var_0);
-  }
 
-  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+  if(isdefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
-  if(isDefined(level.playerdobreathing) && !self[[level.playerdobreathing]]()) {
+  if(isdefined(level.playerdobreathing) && !self[[level.playerdobreathing]]()) {
     return;
   }
   if(level.mw1_health_regen) {
@@ -109,40 +106,38 @@ breathingmanager(var_0, var_1, var_2, var_3) {
   self.breathingstoptime = var_0 + 3000 * self.regenspeed;
   wait(7 * self.regenspeed);
 
-  if(!level.gameended && isDefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
-    if(self hasfemalecustomizationmodel()) {
+  if(!level.gameended && isdefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
+    if(self hasfemalecustomizationmodel())
       self playlocalsound("deaths_door_exit_female");
-    } else {
+    else
       self playlocalsound("deaths_door_exit");
-    }
 
     self.atbrinkofdeath = 0;
   }
 }
 
 playdamagesound(var_0) {
-  if(isDefined(level.customplaydamagesound)) {
+  if(isdefined(level.customplaydamagesound))
     self thread[[level.customplaydamagesound]](var_0);
-  } else {
-    if(isDefined(self.damage_sound_time) && self.damage_sound_time + 5000 > var_0) {
+  else {
+    if(isdefined(self.damage_sound_time) && self.damage_sound_time + 5000 > var_0) {
       return;
     }
     self.damage_sound_time = var_0;
     var_1 = randomintrange(1, 8);
 
     if(self.team == "axis") {
-      if(self hasfemalecustomizationmodel()) {
-        self playSound("generic_pain_enemy_fm_" + var_1);
-      } else {
-        self playSound("generic_pain_enemy_" + var_1);
-      }
+      if(self hasfemalecustomizationmodel())
+        self playsound("generic_pain_enemy_fm_" + var_1);
+      else
+        self playsound("generic_pain_enemy_" + var_1);
     } else {
       if(self hasfemalecustomizationmodel()) {
-        self playSound("generic_pain_friendly_fm_" + var_1);
+        self playsound("generic_pain_friendly_fm_" + var_1);
         return;
       }
 
-      self playSound("generic_pain_friendly_" + var_1);
+      self playsound("generic_pain_friendly_" + var_1);
     }
   }
 }
@@ -160,66 +155,57 @@ healthregeneration(var_0, var_1) {
   if(level.healthregendisabled) {
     return;
   }
-  if(!isDefined(self.ignoreregendelay)) {
+  if(!isdefined(self.ignoreregendelay))
     self.ignoreregendelay = 0;
-  }
 
-  if(self.ignoreregendelay == 0) {
+  if(self.ignoreregendelay == 0)
     wait(level.playerhealth_regularregendelay / 1000 * self.regenspeed);
-  } else {
+  else
     self.ignoreregendelay = 0;
-  }
 
-  if(var_1 < 0.55) {
+  if(var_1 < 0.55)
     var_2 = 1;
-  } else {
+  else
     var_2 = 0;
-  }
 
-  for(;;) {
+  for (;;) {
     if(level.mw1_health_regen && !var_2) {
-      if(level.mw1_health_regen) {
+      if(level.mw1_health_regen)
         wait 0.05;
-      }
 
       self.health = self.maxhealth;
       break;
     } else if(self.regenspeed == 0.75) {
       wait 0.2;
 
-      if(self.health < self.maxhealth) {
+      if(self.health < self.maxhealth)
         self.health = self.health + 5;
-      } else {
+      else
         break;
-      }
     } else if(self.regenspeed == 0.5) {
       wait 0.05;
 
-      if(self.health < self.maxhealth) {
+      if(self.health < self.maxhealth)
         self.health = self.health + 2;
-      } else {
+      else
         break;
-      }
     } else if(self.regenspeed == 0.3) {
       wait 0.15;
 
-      if(self.health < self.maxhealth) {
+      if(self.health < self.maxhealth)
         self.health = self.health + 40;
-      } else {
+      else
         break;
-      }
-    } else if(!isDefined(self.regenspeed) || self.regenspeed == 1) {
-      if(!level.mw1_health_regen) {
+    } else if(!isdefined(self.regenspeed) || self.regenspeed == 1) {
+      if(!level.mw1_health_regen)
         wait 0.05;
-      }
 
       if(self.health < self.maxhealth) {
         if(level.mw1_health_regen) {
           self.health = self.health + 10;
 
-          if(self.health > self.maxhealth) {
+          if(self.health > self.maxhealth)
             self.health = self.maxhealth;
-          }
 
           wait 0.05;
         } else
@@ -228,9 +214,8 @@ healthregeneration(var_0, var_1) {
         break;
     }
 
-    if(self.health > self.maxhealth) {
+    if(self.health > self.maxhealth)
       self.health = self.maxhealth;
-    }
   }
 
   maps\mp\gametypes\_damage::resetattackerlist();
@@ -259,12 +244,12 @@ playerpainbreathingsound() {
   if(!isplayer(self)) {
     return;
   }
-  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+  if(isdefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   wait 3;
 
-  for(;;) {
+  for (;;) {
     wait 0.2;
 
     if(self.health <= 0) {
@@ -279,11 +264,10 @@ playerpainbreathingsound() {
     if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
       continue;
     }
-    if(self hasfemalecustomizationmodel()) {
+    if(self hasfemalecustomizationmodel())
       self playlocalsound("deaths_door_mp_female");
-    } else {
+    else
       self playlocalsound("deaths_door_mp_male");
-    }
 
     wait 1.284;
     wait(0.1 + randomfloat(0.8));

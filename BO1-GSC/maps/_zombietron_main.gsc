@@ -192,9 +192,8 @@ mini_boss_spawn_think() {
     time = randomFloatRange(level.zombie_vars["mini_boss_interval_min"], level.zombie_vars["mini_boss_interval_max"]);
     time = time / GetPlayers().size;
     time -= (level.round_number / 10);
-    if(time < 1) {
+    if(time < 1)
       time = 1;
-    }
     wait(time);
     if(randomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * GetPlayers().size))) {
       spawn_locations = level.current_spawners[level.current_wave.spawn_side];
@@ -222,9 +221,8 @@ wave_spawn(current_wave) {
           ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.spawner_secondary_type);
         }
       }
-      if(!isDefined(ai)) {
+      if(!isDefined(ai))
         ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.type);
-      }
     } else {
       ai = spawn_zombie(spawn_point);
     }
@@ -328,18 +326,14 @@ get_all_the_map_spawners() {
 }
 
 get_opposite_side(side) {
-  if(side == "top") {
+  if(side == "top")
     return "bottom";
-  }
-  if(side == "bottom") {
+  if(side == "bottom")
     return "top";
-  }
-  if(side == "left") {
+  if(side == "left")
     return "right";
-  }
-  if(side == "right") {
+  if(side == "right")
     return "left";
-  }
   assertex(0, "side parameter was not handled");
 }
 
@@ -357,7 +351,7 @@ get_random_side() {
 }
 
 create_spawn_group(wave_number) {
-  wave = spawnStruct();
+  wave = SpawnStruct();
   wave.type = "zombies";
   wave.spawn_duration = 1 + RandomFloatRange(0, 1 + wave_number * .3) + RandomFloatRange(0, 1 + level.round_number * .2);
   wave.spawn_delay = .6;
@@ -728,7 +722,7 @@ life_link(source, dest) {
   level endon("end_the_game");
   orb = spawn("script_model", self.origin + (0, 0, 50));
   orb setModel("tag_origin");
-  playFXOnTag(level._effect["life_force"], orb, "tag_origin");
+  PlayFxOnTag(level._effect["life_force"], orb, "tag_origin");
   orb thread destroy_me_on_player_notify(source, "disconnect");
   orb thread destroy_me_on_player_notify(dest, "disconnect");
   orb thread destroy_me_on_player_notify(source, "end_life_link");
@@ -752,15 +746,12 @@ steal_life_cooldown(time) {
 steal_life_from(source, dest) {
   self endon("disconnect");
   level endon("end_the_game");
-  if(!isDefined(source) || source.lives < 1) {
+  if(!isDefined(source) || source.lives < 1)
     return;
-  }
-  if(isDefined(source.stealing)) {
+  if(isDefined(source.stealing))
     return;
-  }
-  if(isDefined(dest.stealing)) {
+  if(isDefined(dest.stealing))
     return;
-  }
   source thread steal_life_cooldown(10);
   dest thread steal_life_cooldown(level.zombie_vars["auto_respawn_timeout"] + 5);
   source thread life_link(source, dest);
@@ -773,7 +764,7 @@ steal_life_from(source, dest) {
   pickup = spawn("script_model", origin);
   pickup.angles = source.angles;
   pickup setModel(level.extra_life_model);
-  playFXOnTag(level._effect[source.light_playFX], pickup, "tag_origin");
+  PlayFxOnTag(level._effect[source.light_playFX], pickup, "tag_origin");
   source thread maps\_zombietron_pickups::turn_shield_on(true);
   pickup moveTo(dest.origin, 1, 0, 0);
   pickup playLoopSound("zmb_pickup_life_shimmer");
@@ -862,8 +853,8 @@ player_steal_life() {
 
 player_respawn_now() {
   self maps\_zombietron_score::update_hud();
-  self playSound("zmb_player_respawn");
-  playFX(level._effect["respawn"], self.origin, anglesToForward(self.angles));
+  self PlaySound("zmb_player_respawn");
+  PlayFx(level._effect["respawn"], self.origin, AnglesToForward(self.angles));
   RadiusDamage(self.origin, 200, 10000, 10000, self);
   self spawn(self.origin, (0, 0, 0));
   self thread maps\_zombietron_pickups::turn_shield_on();
@@ -882,12 +873,10 @@ player_respawn_now() {
 
 player_respawn() {
   wait 2;
-  if(self.lives < 1 && !isDefined(self.stolen_life)) {
+  if(self.lives < 1 && !isDefined(self.stolen_life))
     return;
-  }
-  if(level.gameEnded) {
+  if(level.gameEnded)
     return;
-  }
   if(!isDefined(self.stolen_life)) {
     self.lives--;
     if(self.lives < 0) {
@@ -938,7 +927,7 @@ open_exit(trigger, objective_id) {
   blocker.origin -= (0, 0, 500);
   trigger.exit_open = true;
   trigger thread exit_cleanup();
-  objective_add(objective_id, "active", &"EXIT", trigger.origin);
+  objective_add(objective_id, "active", & "EXIT", trigger.origin);
   objective_set3d(objective_id, true, "default", "*");
   objective_current(objective_id);
   trigger waittill("trigger");
@@ -960,7 +949,7 @@ open_exits(specific) {
   level.survived_msg.hidewheninmenu = true;
   level.survived_msg.alpha = 0;
   if(level.magical_exit_taken) {
-    if(isDefined(level.magical_exit_armory)) {
+    if(isDefineD(level.magical_exit_armory)) {
       level.survived_msg SetText(&"ZOMBIETRON_ARMORY");
     } else {
       level.survived_msg SetText(&"ZOMBIETRON_BONUS");
@@ -1065,27 +1054,27 @@ spawn_teleporter(boss_battle) {
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
     lights[next] thread fake_linkto(teleporter, (0, 0, 50));
-    playFXOnTag(level._effect["white_light"], lights[next], "tag_origin");
+    playfxontag(level._effect["white_light"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
     lights[next] thread fake_linkto(teleporter, (0, 72, 50));
-    playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
+    playfxontag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
     lights[next] thread fake_linkto(teleporter, (72, 0, 50));
-    playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
+    playfxontag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
     lights[next] thread fake_linkto(teleporter, (0, -72, 50));
-    playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
+    playfxontag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
     lights[next] thread fake_linkto(teleporter, (-72, 0, 50));
-    playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
+    playfxontag(level._effect["coconut"], lights[next], "tag_origin");
   }
   teleporter moveTo(dest_point + (0, 0, 5), 3, 0, 0);
   teleporter thread Rotate();
@@ -1137,18 +1126,18 @@ setup_random_environment() {
   level.weatherFx = [];
   weather_chance = randomInt(3);
   if(level.arena_round_number == 3) {
-    fog = getEntArray("fog_fx", "targetname");
+    fog = getentarray("fog_fx", "targetname");
     for(i = 0; i < fog.size; i++) {
       level.weatherFx[level.weatherFx.size] = SpawnFx(level._effect["fog_amb"], fog[i].origin);
       TriggerFx(level.weatherFx[level.weatherFx.size - 1]);
     }
   } else if(level.arena_round_number == 4) {
-    rainfall_fx = getEntArray("rain_fx", "targetname");
+    rainfall_fx = getentarray("rain_fx", "targetname");
     for(i = 0; i < rainfall_fx.size; i++) {
       level.weatherFx[level.weatherFx.size] = SpawnFx(level._effect["rainfall"], rainfall_fx[i].origin);
       TriggerFx(level.weatherFx[level.weatherFx.size - 1]);
     }
-    snow = getEntArray("snow_fx", "targetname");
+    snow = getentarray("snow_fx", "targetname");
     for(i = 0; i < snow.size; i++) {
       level.weatherFx[level.weatherFx.size] = SpawnFx(level._effect["snowfall"], snow[i].origin);
       TriggerFx(level.weatherFx[level.weatherFx.size - 1]);
@@ -1181,7 +1170,7 @@ show_model() {
 
 setup_script_models() {
   for(i = 0; i < level.zombie_vars["zombie_arena_rounds"]; i++) {
-    models = getEntArray("round" + i, "targetname");
+    models = getentarray("round" + i, "targetname");
     if(level.arena_round_number == i) {
       for(j = 0; j < models.size; j++) {
         models[j] show_model();
@@ -1197,11 +1186,11 @@ setup_script_models() {
 setup_ambient_fx() {
   vespa_smoke = getEnt("vespa_1", "targetname");
   assertex(isDefined(vespa_smoke), "vespa_smoke is missing");
-  playFX(level._effect["vespa_smoke_fx"], vespa_smoke.origin);
-  capacitors = getEntArray("capacitor", "targetname");
+  playfx(level._effect["vespa_smoke_fx"], vespa_smoke.origin);
+  capacitors = getentarray("capacitor", "targetname");
   assertex((capacitors.size > 0), "capacitors are missing!");
   for(i = 0; i < capacitors.size; i++) {
-    playFX(level._effect["capacitor_light"], capacitors[i].origin);
+    playfx(level._effect["capacitor_light"], capacitors[i].origin);
   }
 }
 
@@ -1306,25 +1295,22 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime) {
-  if(!isDefined(self) || !isDefined(attacker)) {
+  if(!isDefined(self) || !isDefined(attacker))
     return damage;
-  }
-  if(!isplayer(attacker) && !isplayer(self)) {
+  if(!isplayer(attacker) && !isplayer(self))
     return damage;
-  }
-  if(!isDefined(damage) || !isDefined(meansofdeath)) {
+  if(!isDefined(damage) || !isDefined(meansofdeath))
     return damage;
-  }
-  if(meansofdeath == "") {
+  if(meansofdeath == "")
     return damage;
-  }
   final_damage = damage;
   if(isDefined(self.actor_damage_func)) {
-    final_damage = [[self.actor_damage_func]](weapon, final_damage);
+    final_damage = [
+      [self.actor_damage_func]
+    ](weapon, final_damage);
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
     attacker = attacker.owner;
-  }
   return int(final_damage);
 }
 
@@ -1335,7 +1321,7 @@ zombiemode_melee_miss() {
 }
 
 Callback_PlayerKilledZT(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
-  self playSound("zmb_player_death");
+  self PlaySound("zmb_player_death");
   self notify("player_died");
   self.headshots = 0;
   self SetPlayerCollision(0);
@@ -1410,17 +1396,15 @@ detect_and_change_music_states() {
 
 zombietron_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1) {
+  if(level.players_playing == 1)
     playersRank = 4;
-  } else if(level.players_playing == 2) {
+  else if(level.players_playing == 2)
     playersRank = 3;
-  } else if(level.players_playing == 3) {
+  else if(level.players_playing == 3)
     playersRank = 2;
-  }
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
+  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points"))
     return;
-  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
@@ -1451,26 +1435,22 @@ zombietron_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map]))
     return 0;
-  }
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     return 0;
-  }
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
+  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
-  }
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
     assertMsg("Unknown stat variable " + variable + " for map " + map);
-  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
 
@@ -1504,19 +1484,17 @@ zombietron_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400) {
+  if(time > 86400)
     time = 86400;
-  }
   padding = "";
-  if(10 > time) {
+  if(10 > time)
     padding += "0000";
-  } else if(100 > time) {
+  else if(100 > time)
     padding += "000";
-  } else if(1000 > time) {
+  else if(1000 > time)
     padding += "00";
-  } else if(10000 > time) {
+  else if(10000 > time)
     padding += "0";
-  }
   rank = wave + "" + players + padding + time;
   return rank;
 }

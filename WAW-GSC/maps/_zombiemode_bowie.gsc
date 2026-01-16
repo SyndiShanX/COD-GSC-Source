@@ -9,8 +9,8 @@
 
 bowie_init() {
   PrecacheItem("zombie_bowie_flourish");
-  bowie_triggers = getEntArray("bowie_upgrade", "targetname");
-  for(i = 0; i < bowie_triggers.size; i++) {
+  bowie_triggers = GetEntArray("bowie_upgrade", "targetname");
+  for (i = 0; i < bowie_triggers.size; i++) {
     knife_model = GetEnt(bowie_triggers[i].target, "targetname");
     knife_model hide();
     bowie_triggers[i] thread bowie_think();
@@ -27,7 +27,7 @@ bowie_think() {
     cost = 3000;
   }
   self.first_time_triggered = false;
-  for(;;) {
+  for (;;) {
     self waittill("trigger", player);
     if(!is_player_valid(player)) {
       player thread ignore_triggers(0.5);
@@ -150,7 +150,7 @@ bowie_show(player) {
     yaw = weapon_yaw + 90;
   }
   self.og_origin = self.origin;
-  self.origin = self.origin + (anglesToForward((0, yaw, 0)) * 8);
+  self.origin = self.origin + (AnglesToForward((0, yaw, 0)) * 8);
   wait(0.05);
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);
@@ -163,7 +163,7 @@ play_bowie_pickup_dialog(player_index) {
   if(!isDefined(self.vox_bowie)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_bowie");
     self.vox_bowie = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       self.vox_bowie[self.vox_bowie.size] = "vox_bowie_" + i;
     }
     self.vox_bowie_available = self.vox_bowie;

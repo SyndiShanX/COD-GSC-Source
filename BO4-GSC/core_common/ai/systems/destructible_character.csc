@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace destructclientutils;
 
 autoexec __init__system__() {
@@ -77,7 +78,7 @@ private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsn
 
   entity = self;
   destructflags = oldvalue ^ newvalue;
-  shouldspawngibs = newvalue & 1;
+  shouldspawngibs = newvalue&1;
 
   if(bnewent) {
     destructflags = 0 ^ newvalue;
@@ -90,7 +91,7 @@ private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsn
   currentdestructflag = 2;
 
   for(piecenumber = 1; destructflags >= currentdestructflag; piecenumber++) {
-    if(destructflags &currentdestructflag) {
+    if(destructflags&currentdestructflag) {
       _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs);
     }
 
@@ -133,7 +134,9 @@ private _handledestructcallbacks(localclientnum, entity, piecenumber) {
   if(isDefined(entity._destructcallbacks) && isDefined(entity._destructcallbacks[piecenumber])) {
     foreach(callback in entity._destructcallbacks[piecenumber]) {
       if(isfunctionptr(callback)) {
-        [[callback]](localclientnum, entity, piecenumber);
+        [
+          [callback]
+        ](localclientnum, entity, piecenumber);
       }
     }
   }
@@ -156,5 +159,5 @@ adddestructpiececallback(localclientnum, entity, piecenumber, callbackfunction) 
 }
 
 ispiecedestructed(localclientnum, entity, piecenumber) {
-  return _getdestructstate(localclientnum, entity) & 1 << piecenumber;
+  return _getdestructstate(localclientnum, entity)&1 << piecenumber;
 }

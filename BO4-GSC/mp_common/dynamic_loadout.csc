@@ -5,10 +5,11 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace dynamic_loadout;
 
 autoexec __init__system__() {
-  system::register(#"dynamic_loadout", &__init__, undefined, # "weapons");
+  system::register(#"dynamic_loadout", &__init__, undefined, #"weapons");
 }
 
 private __init__() {

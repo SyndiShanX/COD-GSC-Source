@@ -43,7 +43,7 @@
 #namespace zm_genesis_round_bosses;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_round_bosses", &__init__, undefined, undefined);
+  system::register("zm_genesis_round_bosses", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -54,7 +54,7 @@ function __init__() {
 function function_755b4548() {
   level.var_b32a2aa0 = 0;
   level.var_ba0d6d40 = randomintrange(11, 13);
-  while(true) {
+  while (true) {
     level waittill("between_round_over");
     if(level.round_number > level.var_ba0d6d40) {
       level.var_ba0d6d40 = level.round_number + 1;
@@ -138,7 +138,7 @@ function function_c68599fd() {
           }
         }
       }
-      for(i = 0; i < var_b3c4bbcc; i++) {
+      for (i = 0; i < var_b3c4bbcc; i++) {
         if(math::cointoss()) {
           spawn_boss("margwa");
         } else {
@@ -153,7 +153,7 @@ function function_c68599fd() {
 
 function spawn_boss(str_enemy, v_pos) {
   s_loc = function_830cdf99();
-  if(!isDefined(s_loc)) {
+  if(!isdefined(s_loc)) {
     return;
   }
   level thread zm_genesis_vo::function_79eeee03(str_enemy);
@@ -163,25 +163,25 @@ function spawn_boss(str_enemy, v_pos) {
     } else {
       var_33504256 = zm_ai_margwa_elemental::function_26efbc37(undefined, s_loc);
     }
-    var_33504256.var_26f9f957 = &function_26f9f957;
+    var_33504256.var_26f9f957 = & function_26f9f957;
     level.var_95981590 = var_33504256;
     level notify("hash_c484afcb");
-    if(isDefined(var_33504256)) {
+    if(isdefined(var_33504256)) {
       var_33504256.b_ignore_cleanup = 1;
       n_health = (level.round_number * 100) + 100;
       var_33504256 margwaserverutils::margwasetheadhealth(n_health);
     }
   } else if(str_enemy == "mechz") {
-    if(isDefined(s_loc.script_string) && s_loc.script_string == "exterior") {
+    if(isdefined(s_loc.script_string) && s_loc.script_string == "exterior") {
       var_33504256 = zm_ai_mechz::spawn_mechz(s_loc, 1);
     } else {
       var_33504256 = zm_ai_mechz::spawn_mechz(s_loc, 0);
     }
   }
-  if(!isDefined(var_33504256.maxhealth)) {
+  if(!isdefined(var_33504256.maxhealth)) {
     var_33504256.maxhealth = var_33504256.health;
   }
-  if(isDefined(v_pos)) {
+  if(isdefined(v_pos)) {
     var_33504256 forceteleport(v_pos, var_33504256.angles);
   }
   var_33504256.var_953b581c = 1;
@@ -191,18 +191,18 @@ function spawn_boss(str_enemy, v_pos) {
 function function_830cdf99() {
   var_fffe05f0 = array::randomize(level.margwa_locations);
   a_spawn_locs = [];
-  for(i = 0; i < var_fffe05f0.size; i++) {
+  for (i = 0; i < var_fffe05f0.size; i++) {
     s_loc = var_fffe05f0[i];
     str_zone = zm_zonemgr::get_zone_from_position(s_loc.origin, 1);
-    if(isDefined(str_zone) && level.zones[str_zone].is_occupied) {
+    if(isdefined(str_zone) && level.zones[str_zone].is_occupied) {
       a_spawn_locs[a_spawn_locs.size] = s_loc;
     }
   }
   if(a_spawn_locs.size == 0) {
-    for(i = 0; i < var_fffe05f0.size; i++) {
+    for (i = 0; i < var_fffe05f0.size; i++) {
       s_loc = var_fffe05f0[i];
       str_zone = zm_zonemgr::get_zone_from_position(s_loc.origin, 1);
-      if(isDefined(str_zone) && level.zones[str_zone].is_active) {
+      if(isdefined(str_zone) && level.zones[str_zone].is_active) {
         a_spawn_locs[a_spawn_locs.size] = s_loc;
       }
     }

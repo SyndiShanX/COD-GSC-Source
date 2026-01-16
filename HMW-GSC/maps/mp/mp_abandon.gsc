@@ -1,4 +1,5 @@
 main() {
+
   maps\mp\mp_abandon_precache::main();
   maps\createart\mp_abandon_art::main();
   maps\createart\mp_abandon_fog::main();
@@ -10,6 +11,7 @@ main() {
   //maps\mp\_destructible_dlc2::main(); // call before _load
   //maps\mp\_destructible_dlc::main(); // call before _load
   maps\mp\_load::main();
+
 
   ambientPlay("ambient_mp_abandon");
 
@@ -43,6 +45,7 @@ main() {
   setdvar("r_veil", 1);
   setdvar("r_veilStrength", 0.180);
   setdvar("r_veilBackgroundStrength", 0.850);
+
 
   setdvar("compassmaxrange", "2000");
 

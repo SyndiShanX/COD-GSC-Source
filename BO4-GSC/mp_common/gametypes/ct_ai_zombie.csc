@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace mp_ai_zombie;
 
 autoexec __init__system__() {
@@ -15,9 +16,9 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 1, 1);
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 0);
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"eye_glow"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -25,9 +26,9 @@ handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn", self.origin);
-    burst_fx = level._effect[# "rise_burst"];
-    billow_fx = level._effect[# "rise_billow"];
+    playSound(0, #"zmb_zombie_spawn", self.origin);
+    burst_fx = level._effect[#"rise_burst"];
+    billow_fx = level._effect[#"rise_billow"];
 
     for(i = 0; i < localplayers.size; i++) {
       self thread rise_dust_fx(localclientnum, billow_fx, burst_fx);

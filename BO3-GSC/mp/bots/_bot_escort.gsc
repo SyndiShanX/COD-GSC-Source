@@ -18,7 +18,7 @@
 #namespace namespace_ebd80b8b;
 
 function init() {
-  level.botidle = &bot_idle;
+  level.botidle = & bot_idle;
 }
 
 function bot_idle() {
@@ -30,7 +30,7 @@ function bot_idle() {
 }
 
 function function_69879c50() {
-  if(isDefined(level.moveobject) && (level.robot.active || level.rebootplayers > 0)) {
+  if(isdefined(level.moveobject) && (level.robot.active || level.rebootplayers > 0)) {
     if(!level.robot.moving || math::cointoss()) {
       self bot::path_to_point_in_trigger(level.moveobject.trigger);
     } else {
@@ -43,7 +43,7 @@ function function_69879c50() {
 }
 
 function function_16ce4b24() {
-  if(isDefined(level.moveobject) && level.robot.active) {
+  if(isdefined(level.moveobject) && level.robot.active) {
     self bot::approach_point(level.moveobject.trigger.origin, 160, 400);
     self bot::sprint_to_goal();
     return;

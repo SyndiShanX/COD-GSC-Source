@@ -18,6 +18,7 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_ruin;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -38,7 +39,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_e31c5d7a = &ct_bots::function_e31c5d7a;
   callback::on_game_playing(&ct_core::function_1e84c767);
   globallogic_spawn::addsupportedspawnpointtype("ct");
-  ct_utils::function_6046a5e3(#"ar_fastfire_t8", array(#"steadyaim", # "steadyaim2", # "stalker", # "uber"));
+  ct_utils::function_6046a5e3(#"ar_fastfire_t8", array(#"steadyaim", #"steadyaim2", #"stalker", #"uber"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level.var_d6d98fbe = 0;
   level.var_9b517372 = 0;
@@ -78,7 +79,7 @@ function_39002b98(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     var_d0df641a = spawning::get_spawnpoint_array("mp_t8_spawn_point");
     spawn_pt = arraygetclosest(self.last_valid_position, var_d0df641a);
     self.var_6b6241ac = spawn_pt.origin;
@@ -87,8 +88,8 @@ function_39002b98(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(level.var_9b517372 == 1) {
-    if(self.team == # "axis") {
-      if(isDefined(weapon) && weapon.name == # "eq_gravityslam") {
+    if(self.team == #"axis") {
+      if(isDefined(weapon) && weapon.name == #"eq_gravityslam") {
         if(!(isDefined(level.var_1aa75661) && level.var_1aa75661)) {
           level.var_1aa75661 = 1;
           level thread function_d999dbe2(undefined);
@@ -173,18 +174,18 @@ function_872c9404(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 55000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 48000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 42000;
-  var_e7cc5e43[# "mp_offshore"][1] = 55000;
-  var_e7cc5e43[# "mp_offshore"][2] = 48000;
-  var_e7cc5e43[# "mp_offshore"][3] = 42000;
-  var_e7cc5e43[# "mp_seaside"][1] = 52000;
-  var_e7cc5e43[# "mp_seaside"][2] = 46000;
-  var_e7cc5e43[# "mp_seaside"][3] = 40000;
-  var_e7cc5e43[# "mp_silo"][1] = 55000;
-  var_e7cc5e43[# "mp_silo"][2] = 48000;
-  var_e7cc5e43[# "mp_silo"][3] = 42000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 55000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 48000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 42000;
+  var_e7cc5e43[#"mp_offshore"][1] = 55000;
+  var_e7cc5e43[#"mp_offshore"][2] = 48000;
+  var_e7cc5e43[#"mp_offshore"][3] = 42000;
+  var_e7cc5e43[#"mp_seaside"][1] = 52000;
+  var_e7cc5e43[#"mp_seaside"][2] = 46000;
+  var_e7cc5e43[#"mp_seaside"][3] = 40000;
+  var_e7cc5e43[#"mp_silo"][1] = 55000;
+  var_e7cc5e43[#"mp_silo"][2] = 48000;
+  var_e7cc5e43[#"mp_silo"][3] = 42000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(0, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -244,7 +245,7 @@ function_926fcb2f(b_success) {
 }
 
 function_ecd8cc50() {
-  waypointname = # "hash_3489718f227fba3";
+  waypointname = #"hash_3489718f227fba3";
   var_69bc8821 = spawn("script_model", self.origin);
   var_69bc8821.objectiveid = gameobjects::get_next_obj_id();
   var_69bc8821.curorigin = self.origin;
@@ -298,8 +299,8 @@ j_fore_le_01() {
 }
 
 function_4b5c96a0() {
-  self endon(#"death", # "target_destroyed");
-  level endon(#"ct_ruin_end", # "hash_42057c28bd084d77");
+  self endon(#"death", #"target_destroyed");
+  level endon(#"ct_ruin_end", #"hash_42057c28bd084d77");
   self.waypoint gameobjects::set_visible_team(#"any");
   b_keyline = 0;
 
@@ -308,7 +309,7 @@ function_4b5c96a0() {
     n_bomb_timer = int(gettime() + 1000 + int(40 * 1000));
     setbombtimer("A", n_bomb_timer);
     setmatchflag("bomb_timer_a", 1);
-    level thread ct_bots::activate_bots(15, # "axis");
+    level thread ct_bots::activate_bots(15, #"axis");
     level.var_9b517372 = 1;
     level.var_ebad4ea8 = gettime();
     level thread function_a3e6f3d();
@@ -327,7 +328,7 @@ function_4b5c96a0() {
     e_attacker = s_notify.attacker;
     e_weapon = s_notify.weapon;
 
-    if(isDefined(e_attacker) && isDefined(e_weapon) && e_weapon.name == # "eq_gravityslam") {
+    if(isDefined(e_attacker) && isDefined(e_weapon) && e_weapon.name == #"eq_gravityslam") {
       level.var_b5529824--;
       e_attacker thread ct_utils::function_785eb2ca();
       level thread ct_utils::function_bfa522d1(0);

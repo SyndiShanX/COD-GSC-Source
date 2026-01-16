@@ -86,7 +86,7 @@ wait_for_staircase_trig() {
 }
 
 staircase_floodspawn_func() {
-  trig = getEntArray("staircase_wave2_trig", "targetname");
+  trig = getentarray("staircase_wave2_trig", "targetname");
   trig_1 = trig[0];
   trig_2 = trig[1];
   trig_1 thread wait_for_wave2_trig();
@@ -104,7 +104,7 @@ hero_chain_start() {
   hero_chain_trig = getent("go_upstairs", "script_noteworthy");
   hero_chain_trig waittill("trigger");
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     allies[i] set_force_color("g");
   }
   set_color_heroes("o");
@@ -176,8 +176,8 @@ mg_gunner_behavior() {
 
 mg_shooting() {
   self endon("death");
-  mg_targets = getEntArray("mg_targets", "targetname");
-  for(i = 0; i < mg_targets.size; i++) {
+  mg_targets = getentarray("mg_targets", "targetname");
+  for (i = 0; i < mg_targets.size; i++) {
     self SetEntityTarget(mg_targets[randomint(mg_targets.size)], 0.5);
   }
 }
@@ -279,7 +279,7 @@ roof_panzer_guy() {
   earthquake_trig waittill("trigger");
   touch_trig = getent("earthquake_touch_trig", "targetname");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && players[i] IsTouching(touch_trig)) {
       PlayRumbleOnPosition("grenade_rumble", players[i].origin);
     }
@@ -329,7 +329,7 @@ window_panzer() {
   earthquake_trig_2 waittill("trigger");
   touch_trig = getent("earthquake_touch_trig", "targetname");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && players[i] IsTouching(touch_trig)) {
       PlayRumbleOnPosition("grenade_rumble", players[i].origin);
     }
@@ -460,7 +460,7 @@ bathroom_ambush() {
 begin_ambush_early() {
   level waittill("start_ambush");
   level notify("ambush_started");
-  ambush_guys = getEntArray("shower_ambush", "script_noteworthy");
+  ambush_guys = getentarray("shower_ambush", "script_noteworthy");
   array_thread(ambush_guys, ::begin_ambush);
   simple_floodspawn("bathroom_spawners");
   simple_spawn("backup_germs");
@@ -524,7 +524,7 @@ rooftop_germ_behaviour() {
 damage_check_ragdoll() {
   self waittill("damage");
   self.skipdeathanim = true;
-  self setCanDamage(true);
+  self setcandamage(true);
   self startragdoll();
 }
 
@@ -628,7 +628,7 @@ runner_behaviour() {
 
 event2_rejoin_squad() {
   aidudes = getAIArray("allies");
-  for(i = 0; i < aidudes.size; i++) {
+  for (i = 0; i < aidudes.size; i++) {
     if(i % 2 == 0) {
       aidudes[i] set_force_color("g");
     } else {
@@ -657,20 +657,20 @@ atrium_crows() {
   level thread crow8_atrium();
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow1_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow1_outro", undefined, crow_spot);
   crow delete();
@@ -679,20 +679,20 @@ atrium_crows() {
 crow2_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow2_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow2_outro", undefined, crow_spot);
   crow delete();
@@ -701,20 +701,20 @@ crow2_atrium() {
 crow3_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow3_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow3_outro", undefined, crow_spot);
   crow delete();
@@ -723,20 +723,20 @@ crow3_atrium() {
 crow4_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow4_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow4_outro", undefined, crow_spot);
   crow delete();
@@ -745,20 +745,20 @@ crow4_atrium() {
 crow5_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow5_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow5_outro", undefined, crow_spot);
   crow delete();
@@ -767,20 +767,20 @@ crow5_atrium() {
 crow6_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow6_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow6_outro", undefined, crow_spot);
   crow delete();
@@ -789,20 +789,20 @@ crow6_atrium() {
 crow7_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow7_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow7_outro", undefined, crow_spot);
   crow delete();
@@ -811,20 +811,20 @@ crow7_atrium() {
 crow8_atrium() {
   crow_spot = getnode("atrium_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "crow8_loop", undefined, undefined, crow_spot);
   flag_wait("fly_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "crow8_outro", undefined, crow_spot);
   crow delete();
@@ -842,20 +842,20 @@ indoor_crows() {
   level thread indoor_crow4();
   crow_spot = getnode("hole_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "indoor_crow1_loop", undefined, undefined, crow_spot);
   flag_wait("indoor_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "indoor_crow1_outro", undefined, crow_spot);
   crow delete();
@@ -864,20 +864,20 @@ indoor_crows() {
 indoor_crow2() {
   crow_spot = getnode("hole_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "indoor_crow2_loop", undefined, undefined, crow_spot);
   flag_wait("indoor_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "indoor_crow2_outro", undefined, crow_spot);
   crow delete();
@@ -886,20 +886,20 @@ indoor_crow2() {
 indoor_crow3() {
   crow_spot = getnode("hole_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "indoor_crow3_loop", undefined, undefined, crow_spot);
   flag_wait("indoor_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "indoor_crow3_outro", undefined, crow_spot);
   crow delete();
@@ -908,20 +908,20 @@ indoor_crow3() {
 indoor_crow4() {
   crow_spot = getnode("hole_crow_spot", "targetname");
   crow = spawn("script_model", crow_spot.origin);
-  crow setModel("anim_berlin_crow");
+  crow setmodel("anim_berlin_crow");
   crow UseAnimTree(#animtree);
   crow.animname = "crow";
   level thread anim_loop_solo(crow, "indoor_crow4_loop", undefined, undefined, crow_spot);
   flag_wait("indoor_crow_fly");
   rand = randomintrange(1, 3);
   if(rand == 1) {
-    crow playSound("raven_fly_away_a");
+    crow playsound("raven_fly_away_a");
   }
   if(rand == 2) {
-    crow playSound("raven_fly_away_b");
+    crow playsound("raven_fly_away_b");
   }
   if(rand == 3) {
-    crow playSound("raven_fly_away_c");
+    crow playsound("raven_fly_away_c");
   }
   anim_single_solo(crow, "indoor_crow4_outro", undefined, crow_spot);
   crow delete();
@@ -933,7 +933,7 @@ kill_off_rooftop_germans() {
   kill_trig = getent("kill_off_rooftop_germans", "targetname");
   kill_trig waittill("trigger");
   rooftop_germans = get_ai_group_ai("rooftop_germans");
-  for(i = 0; i < rooftop_germans.size; i++) {
+  for (i = 0; i < rooftop_germans.size; i++) {
     if(isDefined(rooftop_germans[i]) && Isalive(rooftop_germans[i])) {
       rooftop_germans[i] thread bloody_death();
     }
@@ -956,7 +956,7 @@ fallingdebris_think() {
   trig waittill("trigger");
   level thread second_floor_threads();
   ASSERTEX(isDefined(trig.target), "falling debris target not found for trigger at origin " + trig.origin);
-  debrisGroup = getEntArray(trig.target, "targetname");
+  debrisGroup = GetEntArray(trig.target, "targetname");
   if(!isDefined(debrisGroup) || debrisGroup.size <= 0) {
     ASSERTMSG("falling debris not found for trigger at origin " + trig.origin);
     return;
@@ -973,7 +973,7 @@ fallingdebris_drop() {
   } else {
     wait(0.10);
   }
-  playFX(level._effect["fallingboards_fire"], self.origin);
+  PlayFX(level._effect["fallingboards_fire"], self.origin);
   self NotSolid();
   self PhysicsLaunch((RandomInt(50), RandomInt(50), RandomInt(50)), (0, 0, -15));
 }

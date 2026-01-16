@@ -34,8 +34,8 @@ function init_shared() {
   level.proximitygrenadeprotectedtime = getdvarfloat("scr_proximityGrenadeProtectedTime", 0.45);
   level.poisonfxduration = 6;
   level thread register();
-  callback::on_spawned(&on_player_spawned);
-  callback::add_weapon_damage(getweapon("proximity_grenade"), &on_damage);
+  callback::on_spawned( & on_player_spawned);
+  callback::add_weapon_damage(getweapon("proximity_grenade"), & on_damage);
   level thread updatedvars();
 }
 
@@ -44,7 +44,7 @@ function register() {
 }
 
 function updatedvars() {
-  while(true) {
+  while (true) {
     level.proximitygrenadedetectionradius = getdvarint("scr_proximityGrenadeDetectionRadius", level.proximitygrenadedetectionradius);
     level.proximitygrenadeduration = getdvarfloat("scr_proximityGrenadeDuration", 1.5);
     level.proximitygrenadegraceperiod = getdvarfloat("scr_proximityGrenadeGracePeriod", level.proximitygrenadegraceperiod);
@@ -74,13 +74,13 @@ function createproximitygrenadewatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.proximitygrenadegraceperiod;
   watcher.detonateradius = level.proximitygrenadedetectionradius;
-  watcher.onstun = &weaponobjects::weaponstun;
+  watcher.onstun = & weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = &proximitydetonate;
+  watcher.ondetonatecallback = & proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
-  watcher.onspawn = &onspawnproximitygrenadeweaponobject;
+  watcher.onspawn = & onspawnproximitygrenadeweaponobject;
 }
 
 function creategadgetproximitygrenadewatcher() {
@@ -96,18 +96,18 @@ function creategadgetproximitygrenadewatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.proximitygrenadegraceperiod;
   watcher.detonateradius = level.proximitygrenadedetectionradius;
-  watcher.onstun = &weaponobjects::weaponstun;
+  watcher.onstun = & weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = &proximitydetonate;
+  watcher.ondetonatecallback = & proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
   watcher.activatesound = "wpn_claymore_alert";
-  watcher.onspawn = &onspawnproximitygrenadeweaponobject;
+  watcher.onspawn = & onspawnproximitygrenadeweaponobject;
 }
 
 function onspawnproximitygrenadeweaponobject(watcher, owner) {
   self thread setupkillcament();
   owner addweaponstat(self.weapon, "used", 1);
-  if(isDefined(self.weapon) && self.weapon.proximitydetonation > 0) {
+  if(isdefined(self.weapon) && self.weapon.proximitydetonation > 0) {
     watcher.detonateradius = self.weapon.proximitydetonation;
   }
   weaponobjects::onspawnproximityweaponobject(watcher, owner);
@@ -116,10 +116,10 @@ function onspawnproximitygrenadeweaponobject(watcher, owner) {
 
 function trackonowner(owner) {
   if(level.trackproximitygrenadesonowner === 1) {
-    if(!isDefined(owner)) {
+    if(!isdefined(owner)) {
       return;
     }
-    if(!isDefined(owner.activeproximitygrenades)) {
+    if(!isdefined(owner.activeproximitygrenades)) {
       owner.activeproximitygrenades = [];
     } else {
       arrayremovevalue(owner.activeproximitygrenades, undefined);
@@ -141,8 +141,8 @@ function cleanupkillcamentondeath() {
 }
 
 function proximitydetonate(attacker, weapon, target) {
-  if(isDefined(weapon) && weapon.isvalid) {
-    if(isDefined(attacker)) {
+  if(isdefined(weapon) && weapon.isvalid) {
+    if(isdefined(attacker)) {
       if(self.owner util::isenemyplayer(attacker)) {
         attacker challenges::destroyedexplosive(weapon);
         scoreevents::processscoreevent("destroyed_proxy", attacker, self.owner, weapon);
@@ -160,7 +160,7 @@ function proximitygrenadedamageplayer(eattacker, einflictor, killcament, weapon,
 }
 
 function getproximitychain() {
-  if(!isDefined(level.proximitychains)) {
+  if(!isdefined(level.proximitychains)) {
     level.proximitychains = [];
   }
   foreach(chain in level.proximitychains) {
@@ -168,13 +168,13 @@ function getproximitychain() {
       return chain;
     }
   }
-  chain = spawnStruct();
+  chain = spawnstruct();
   level.proximitychains[level.proximitychains.size] = chain;
   return chain;
 }
 
 function chainisactive(chain) {
-  if(isDefined(chain.activeendtime) && chain.activeendtime > gettime()) {
+  if(isdefined(chain.activeendtime) && chain.activeendtime > gettime()) {
     return true;
   }
   return false;
@@ -183,9 +183,9 @@ function chainisactive(chain) {
 function cleanupproximitychainent() {
   self.cleanup = 1;
   any_active = 1;
-  while(any_active) {
+  while (any_active) {
     wait(1);
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
     any_active = 0;
@@ -196,14 +196,14 @@ function cleanupproximitychainent() {
       }
     }
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
 
 function isinchain(player) {
   player_num = player getentitynumber();
-  return isDefined(self.chain_players[player_num]);
+  return isdefined(self.chain_players[player_num]);
 }
 
 function addplayertochain(player) {
@@ -215,10 +215,10 @@ function proximitygrenadechain(eattacker, einflictor, killcament, weapon, meanso
   self endon("disconnect");
   self endon("death");
   eattacker endon("disconnect");
-  if(!isDefined(proximitychain)) {
+  if(!isdefined(proximitychain)) {
     proximitychain = getproximitychain();
     proximitychain.chaineventnum = 0;
-    if(!isDefined(einflictor.proximitychainent)) {
+    if(!isdefined(einflictor.proximitychainent)) {
       einflictor.proximitychainent = spawn("script_origin", self.origin);
       einflictor.proximitychainent.chains = [];
       einflictor.proximitychainent.chain_players = [];
@@ -237,10 +237,10 @@ function proximitygrenadechain(eattacker, einflictor, killcament, weapon, meanso
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(proximitychain.proximitychainent.cleanup)) {
+  if(!isdefined(proximitychain.proximitychainent.cleanup)) {
     proximitychain.proximitychainent thread cleanupproximitychainent();
   }
-  while(true) {
+  while (true) {
     currenttime = gettime();
     if(endtime < currenttime) {
       return;
@@ -251,7 +251,7 @@ function proximitygrenadechain(eattacker, einflictor, killcament, weapon, meanso
       if(proximitychain.chaineventnum >= weapon.chaineventmax) {
         return;
       }
-      if(!isDefined(player) || !isalive(player) || player == self) {
+      if(!isdefined(player) || !isalive(player) || player == self) {
         continue;
       }
       if(player.sessionstate != "playing") {
@@ -294,7 +294,7 @@ function chainplayer(eattacker, killcament, weapon, meansofdeath, damage, proxim
 }
 
 function tesla_play_arc_fx(target, waittime) {
-  if(!isDefined(self) || !isDefined(target)) {
+  if(!isdefined(self) || !isdefined(target)) {
     return;
   }
   tag = "J_SpineUpper";
@@ -306,8 +306,8 @@ function tesla_play_arc_fx(target, waittime) {
     return;
   }
   fxorg = spawn("script_model", origin);
-  fxorg setModel("tag_origin");
-  fx = playFXOnTag(level._effect["prox_grenade_chain_bolt"], fxorg, "tag_origin");
+  fxorg setmodel("tag_origin");
+  fx = playfxontag(level._effect["prox_grenade_chain_bolt"], fxorg, "tag_origin");
   playsoundatposition("wpn_tesla_bounce", fxorg.origin);
   fxorg moveto(target_origin, waittime);
   fxorg waittill("movedone");
@@ -322,9 +322,9 @@ function watchproximitygrenadehitplayer(owner) {
   self endon("death");
   self setowner(owner);
   self setteam(owner.team);
-  while(true) {
+  while (true) {
     self waittill("grenade_bounce", pos, normal, ent, surface);
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+    if(isdefined(ent) && isplayer(ent) && surface != "riotshield") {
       if(level.teambased && ent.team == self.owner.team) {
         continue;
       }
@@ -335,7 +335,7 @@ function watchproximitygrenadehitplayer(owner) {
 }
 
 function performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
+  forwardvec = vectornormalize(anglestoforward(self.angles));
   rightvec = vectornormalize(anglestoright(self.angles));
   explosionvec = vectornormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
@@ -350,7 +350,7 @@ function damageplayerinradius(position, eattacker, killcament) {
   self endon("disconnect");
   self endon("death");
   eattacker endon("disconnect");
-  playFXOnTag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
+  playfxontag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
   g_time = gettime();
   if(self util::mayapplyscreeneffect()) {
     if(!self hasperk("specialty_proximityprotection")) {
@@ -361,10 +361,10 @@ function damageplayerinradius(position, eattacker, killcament) {
     self clientfield::set_to_player("tazered", 1);
   }
   self playrumbleonentity("proximity_grenade");
-  self playSound("wpn_taser_mine_zap");
+  self playsound("wpn_taser_mine_zap");
   if(!self hasperk("specialty_proximityprotection")) {
     self thread watch_death();
-    if(!isDefined(killcament)) {
+    if(!isdefined(killcament)) {
       killcament = spawn("script_model", position + vectorscale((0, 0, 1), 8));
     }
     killcament.soundmod = "taser_spike";
@@ -374,9 +374,9 @@ function damageplayerinradius(position, eattacker, killcament) {
     if(level.hardcoremode) {
       damage = level.proximitygrenadedotdamageamounthardcore;
     }
-    for(i = 0; i < level.proximitygrenadedotdamageinstances; i++) {
-      assert(isDefined(eattacker));
-      if(!isDefined(killcament)) {
+    for (i = 0; i < level.proximitygrenadedotdamageinstances; i++) {
+      assert(isdefined(eattacker));
+      if(!isdefined(killcament)) {
         killcament = spawn("script_model", position + vectorscale((0, 0, 1), 8));
         killcament.soundmod = "taser_spike";
         killcament util::deleteaftertime(3 + (level.proximitygrenadedotdamagetime * (level.proximitygrenadedotdamageinstances - i)));
@@ -441,7 +441,7 @@ function begin_other_grenade_tracking() {
   self endon("disconnect");
   self notify("proximitytrackingstart");
   self endon("proximitytrackingstart");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon, cooktime);
     if(grenade util::ishacked()) {
       continue;

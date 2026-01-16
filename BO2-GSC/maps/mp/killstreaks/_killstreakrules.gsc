@@ -125,12 +125,11 @@ init() {
 
 createrule(rule, maxallowable, maxallowableperteam) {
   if(!level.teambased) {
-    if(maxallowable > maxallowableperteam) {
+    if(maxallowable > maxallowableperteam)
       maxallowable = maxallowableperteam;
-    }
   }
 
-  level.killstreakrules[rule] = spawnStruct();
+  level.killstreakrules[rule] = spawnstruct();
   level.killstreakrules[rule].cur = 0;
   level.killstreakrules[rule].curteam = [];
   level.killstreakrules[rule].max = maxallowable;
@@ -138,16 +137,14 @@ createrule(rule, maxallowable, maxallowableperteam) {
 }
 
 addkillstreaktorule(hardpointtype, rule, counttowards, checkagainst) {
-  if(!isDefined(level.killstreaktype[hardpointtype])) {
+  if(!isDefined(level.killstreaktype[hardpointtype]))
     level.killstreaktype[hardpointtype] = [];
-  }
 
   keys = getarraykeys(level.killstreaktype[hardpointtype]);
   assert(isDefined(level.killstreakrules[rule]));
 
-  if(!isDefined(level.killstreaktype[hardpointtype][rule])) {
-    level.killstreaktype[hardpointtype][rule] = spawnStruct();
-  }
+  if(!isDefined(level.killstreaktype[hardpointtype][rule]))
+    level.killstreaktype[hardpointtype][rule] = spawnstruct();
 
   level.killstreaktype[hardpointtype][rule].counts = counttowards;
   level.killstreaktype[hardpointtype][rule].checks = checkagainst;
@@ -156,24 +153,20 @@ addkillstreaktorule(hardpointtype, rule, counttowards, checkagainst) {
 killstreakstart(hardpointtype, team, hacked, displayteammessage) {
   assert(isDefined(team), "team needs to be defined");
 
-  if(self iskillstreakallowed(hardpointtype, team) == 0) {
+  if(self iskillstreakallowed(hardpointtype, team) == 0)
     return -1;
-  }
 
   assert(isDefined(hardpointtype));
 
-  if(!isDefined(hacked)) {
+  if(!isDefined(hacked))
     hacked = 0;
-  }
 
-  if(!isDefined(displayteammessage)) {
+  if(!isDefined(displayteammessage))
     displayteammessage = 1;
-  }
 
   if(displayteammessage == 1) {
-    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext) && !hacked) {
+    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext) && !hacked)
       level thread maps\mp\_popups::displaykillstreakteammessagetoall(hardpointtype, self);
-    }
   }
 
   keys = getarraykeys(level.killstreaktype[hardpointtype]);
@@ -186,9 +179,8 @@ killstreakstart(hardpointtype, team, hacked, displayteammessage) {
     level.killstreakrules[key].cur++;
 
     if(level.teambased) {
-      if(!isDefined(level.killstreakrules[key].curteam[team])) {
+      if(!isDefined(level.killstreakrules[key].curteam[team]))
         level.killstreakrules[key].curteam[team] = 0;
-      }
 
       level.killstreakrules[key].curteam[team]++;
     }
@@ -248,11 +240,10 @@ killstreakstop(hardpointtype, team, id) {
     recordstreakindex = level.killstreakindices[level.killstreaks[hardpointtype].menuname];
 
     if(isDefined(recordstreakindex)) {
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self.owner recordkillstreakendevent(recordstreakindex);
-      } else if(isplayer(self)) {
+      else if(isplayer(self))
         self recordkillstreakendevent(recordstreakindex);
-      }
     }
   }
 }
@@ -277,9 +268,8 @@ iskillstreakallowed(hardpointtype, team) {
     }
 
     if(level.teambased && level.killstreakrules[key].maxperteam != 0) {
-      if(!isDefined(level.killstreakrules[key].curteam[team])) {
+      if(!isDefined(level.killstreakrules[key].curteam[team]))
         level.killstreakrules[key].curteam[team] = 0;
-      }
 
       if(level.killstreakrules[key].curteam[team] >= level.killstreakrules[key].maxperteam) {
         isallowed = 0;
@@ -333,11 +323,10 @@ killstreak_debug_text(text) {
   level.killstreak_rule_debug = getdvarintdefault("scr_killstreak_rule_debug", 0);
 
   if(isDefined(level.killstreak_rule_debug)) {
-    if(level.killstreak_rule_debug == 1.0) {
+    if(level.killstreak_rule_debug == 1.0)
       iprintln("KSR: " + text + "\\n");
-    } else if(level.killstreak_rule_debug == 2.0) {
+    else if(level.killstreak_rule_debug == 2.0)
       iprintlnbold("KSR: " + text);
-    }
   }
 
 }

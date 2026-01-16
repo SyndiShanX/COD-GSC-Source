@@ -14,30 +14,30 @@ init() {
 
 init_blockers() {
   level.exterior_goals = getstructarray("exterior_goal", "targetname");
-  for(i = 0; i < level.exterior_goals.size; i++) {
+  for (i = 0; i < level.exterior_goals.size; i++) {
     level.exterior_goals[i] thread blocker_init();
   }
-  zombie_doors = getEntArray("zombie_door", "targetname");
-  for(i = 0; i < zombie_doors.size; i++) {
+  zombie_doors = GetEntArray("zombie_door", "targetname");
+  for (i = 0; i < zombie_doors.size; i++) {
     zombie_doors[i] thread door_init();
   }
-  zombie_debris = getEntArray("zombie_debris", "targetname");
-  for(i = 0; i < zombie_debris.size; i++) {
+  zombie_debris = GetEntArray("zombie_debris", "targetname");
+  for (i = 0; i < zombie_debris.size; i++) {
     zombie_debris[i] thread debris_init();
   }
-  flag_blockers = getEntArray("flag_blocker", "targetname");
-  for(i = 0; i < flag_blockers.size; i++) {
+  flag_blockers = GetEntArray("flag_blocker", "targetname");
+  for (i = 0; i < flag_blockers.size; i++) {
     flag_blockers[i] thread flag_blocker();
   }
 }
 
 door_init() {
   self.type = undefined;
-  targets = getEntArray(self.target, "targetname");
+  targets = GetEntArray(self.target, "targetname");
   if(isDefined(self.script_flag) && !isDefined(level.flag[self.script_flag])) {
     flag_init(self.script_flag);
   }
-  for(i = 0; i < targets.size; i++) {
+  for (i = 0; i < targets.size; i++) {
     targets[i] disconnectpaths();
     if(isDefined(targets[i].script_noteworthy) && targets[i].script_noteworthy == "clip") {
       self.clip = targets[i];
@@ -74,7 +74,7 @@ door_init() {
 }
 
 door_think() {
-  while(1) {
+  while (1) {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "electric_door") {
       flag_wait("electricity_on");
     } else {
@@ -98,7 +98,7 @@ door_think() {
         }
       }
     }
-    for(i = 0; i < self.doors.size; i++) {
+    for (i = 0; i < self.doors.size; i++) {
       self.doors[i] NotSolid();
       self.doors[i] connectpaths();
       if(isDefined(self.doors[i].door_moving)) {
@@ -152,8 +152,8 @@ door_think() {
     if(isDefined(self.script_flag)) {
       flag_set(self.script_flag);
     }
-    all_trigs = getEntArray(self.target, "target");
-    for(i = 0; i < all_trigs.size; i++) {
+    all_trigs = getentarray(self.target, "target");
+    for (i = 0; i < all_trigs.size; i++) {
       all_trigs[i] trigger_off();
     }
     break;
@@ -162,10 +162,10 @@ door_think() {
 
 door_solid_thread() {
   self waittill_either("rotatedone", "movedone");
-  while(1) {
+  while (1) {
     players = get_players();
     player_touching = false;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] IsTouching(self)) {
         player_touching = true;
         break;
@@ -181,10 +181,10 @@ door_solid_thread() {
 
 door_solid_thread_anim() {
   self waittillmatch("door_anim", "end");
-  while(1) {
+  while (1) {
     players = get_players();
     player_touching = false;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] IsTouching(self)) {
         player_touching = true;
         break;
@@ -219,14 +219,14 @@ debris_init() {
 
 debris_think() {
   if(level.script == "nazi_zombie_asylum") {
-    ents = getEntArray(self.target, "targetname");
-    for(i = 0; i < ents.size; i++) {
+    ents = getentarray(self.target, "targetname");
+    for (i = 0; i < ents.size; i++) {
       if(isDefined(ents[i].script_linkTo)) {
         ents[i] notsolid();
       }
     }
   }
-  while(1) {
+  while (1) {
     self waittill("trigger", who);
     if(!who UseButtonPressed()) {
       continue;
@@ -241,14 +241,14 @@ debris_think() {
           level[[level.achievement_notify_func]]("DLC3_ZOMBIE_ALL_DOORS");
         }
         bbPrint("zombie_uses: playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type debris", who.playername, who.score, level.round_number, self.zombie_cost, self.target, self.origin);
-        junk = getEntArray(self.target, "targetname");
+        junk = getentarray(self.target, "targetname");
         if(isDefined(self.script_flag)) {
           flag_set(self.script_flag);
         }
         play_sound_at_pos("purchase", self.origin);
         move_ent = undefined;
         clip = undefined;
-        for(i = 0; i < junk.size; i++) {
+        for (i = 0; i < junk.size; i++) {
           junk[i] connectpaths();
           junk[i] add_new_zombie_spawners();
           level notify("junk purchased");
@@ -271,8 +271,8 @@ debris_think() {
             junk[i] Delete();
           }
         }
-        all_trigs = getEntArray(self.target, "target");
-        for(i = 0; i < all_trigs.size; i++) {
+        all_trigs = getentarray(self.target, "target");
+        for (i = 0; i < all_trigs.size; i++) {
           all_trigs[i] delete();
         }
         if(isDefined(clip)) {
@@ -296,13 +296,13 @@ debris_move(struct) {
   self play_sound_on_ent("debris_move");
   playsoundatposition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
-    playFX(level._effect[self.script_firefx], self.origin);
+    PlayFX(level._effect[self.script_firefx], self.origin);
   }
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "jiggle") {
       num = RandomIntRange(3, 5);
       og_angles = self.angles;
-      for(i = 0; i < num; i++) {
+      for (i = 0; i < num; i++) {
         angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
         time = RandomFloatRange(0.1, 0.4);
         self Rotateto(angles, time);
@@ -319,7 +319,7 @@ debris_move(struct) {
   self waittill("movedone");
   self play_sound_on_entity("couch_slam");
   if(isDefined(self.script_fxid)) {
-    playFX(level._effect[self.script_fxid], self.origin);
+    PlayFX(level._effect[self.script_fxid], self.origin);
     playsoundatposition("zombie_spawn", self.origin);
   }
   self Delete();
@@ -329,9 +329,9 @@ blocker_init() {
   if(!isDefined(self.target)) {
     return;
   }
-  targets = getEntArray(self.target, "targetname");
+  targets = GetEntArray(self.target, "targetname");
   self.barrier_chunks = [];
-  for(j = 0; j < targets.size; j++) {
+  for (j = 0; j < targets.size; j++) {
     if(isDefined(targets[j].script_noteworthy)) {
       if(targets[j].script_noteworthy == "clip") {
         self.clip = targets[j];
@@ -353,11 +353,11 @@ blocker_attack_spots() {
   chunk = getClosest(self.origin, self.barrier_chunks);
   dist = Distance2d(self.origin, chunk.origin) - 36;
   spots = [];
-  spots[0] = groundpos(self.origin + (anglesToForward(self.angles) * dist) + (0, 0, 60));
+  spots[0] = groundpos(self.origin + (AnglesToForward(self.angles) * dist) + (0, 0, 60));
   spots[spots.size] = groundpos(spots[0] + (AnglesToRight(self.angles) * 28) + (0, 0, 60));
   spots[spots.size] = groundpos(spots[0] + (AnglesToRight(self.angles) * -28) + (0, 0, 60));
   taken = [];
-  for(i = 0; i < spots.size; i++) {
+  for (i = 0; i < spots.size; i++) {
     taken[i] = false;
   }
   self.attack_spots_taken = taken;
@@ -366,7 +366,7 @@ blocker_attack_spots() {
 }
 
 blocker_think() {
-  while(1) {
+  while (1) {
     wait(0.5);
     if(all_chunks_intact(self.barrier_chunks)) {
       continue;
@@ -395,7 +395,7 @@ blocker_trigger_think() {
     height = trigger_location.height;
   }
   trigger_pos = groundpos(trigger_location.origin) + (0, 0, 4);
-  trigger = spawn("trigger_radius", trigger_pos, 0, radius, height);
+  trigger = Spawn("trigger_radius", trigger_pos, 0, radius, height);
   trigger thread trigger_delete_on_repair();
   if(GetDvarInt("zombie_debug") > 0) {
     thread debug_blocker(trigger_pos, radius, height);
@@ -406,7 +406,7 @@ blocker_trigger_think() {
     cost = original_cost * 2;
   }
   trigger SetCursorHint("HINT_NOICON");
-  while(1) {
+  while (1) {
     trigger waittill("trigger", player);
     if(player hasperk("specialty_fastreload")) {
       has_perk = true;
@@ -417,7 +417,7 @@ blocker_trigger_think() {
       trigger notify("all_boards_repaired");
       return;
     }
-    while(1) {
+    while (1) {
       if(!player IsTouching(trigger)) {
         break;
       }
@@ -467,7 +467,7 @@ blocker_trigger_think() {
 }
 
 trigger_delete_on_repair() {
-  while(isDefined(self)) {
+  while (isDefined(self)) {
     self waittill("all_boards_repaired");
     self delete();
     break;
@@ -477,7 +477,7 @@ trigger_delete_on_repair() {
 blocker_doubler_hint(hint, original_cost) {
   self endon("death");
   doubler_status = level.zombie_vars["zombie_powerup_point_doubler_on"];
-  while(1) {
+  while (1) {
     wait(0.5);
     if(doubler_status != level.zombie_vars["zombie_powerup_point_doubler_on"]) {
       doubler_status = level.zombie_vars["zombie_powerup_point_doubler_on"];
@@ -501,15 +501,15 @@ remove_chunk(chunk, node, destroy_immediately) {
   if(isDefined(self.script_fxid)) {
     fx = self.script_fxid;
   }
-  playFX(level._effect[fx], chunk.origin);
+  playfx(level._effect[fx], chunk.origin);
   if(isDefined(chunk.script_moveoverride) && chunk.script_moveoverride) {
     chunk Hide();
   } else {
-    ent = spawn("script_origin", chunk.origin);
+    ent = Spawn("script_origin", chunk.origin);
     ent.angles = node.angles + (0, 180, 0);
     dist = 100 + RandomInt(100);
-    dest = ent.origin + (anglesToForward(ent.angles) * dist);
-    trace = bulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), false, undefined);
+    dest = ent.origin + (AnglesToForward(ent.angles) * dist);
+    trace = BulletTrace(dest + (0, 0, 16), dest + (0, 0, -200), false, undefined);
     if(trace["fraction"] == 1) {
       dest = dest + (0, 0, -200);
     } else {
@@ -538,7 +538,7 @@ remove_chunk(chunk, node, destroy_immediately) {
       wait(0.05);
       node.clip disable_trigger();
     } else {
-      for(i = 0; i < node.barrier_chunks.size; i++) {
+      for (i = 0; i < node.barrier_chunks.size; i++) {
         node.barrier_chunks[i] ConnectPaths();
       }
     }
@@ -595,7 +595,7 @@ replace_chunk(chunk, has_perk, via_powerup) {
   }
   if(!isDefined(via_powerup)) {
     play_sound_at_pos(sound, chunk.origin);
-    playFX(level._effect[fx], chunk.origin);
+    playfx(level._effect[fx], chunk.origin);
   }
   if(!isDefined(self.clip)) {
     chunk Disconnectpaths();
@@ -604,17 +604,17 @@ replace_chunk(chunk, has_perk, via_powerup) {
 
 add_new_zombie_spawners() {
   if(isDefined(self.target)) {
-    self.possible_spawners = getEntArray(self.target, "targetname");
+    self.possible_spawners = getentarray(self.target, "targetname");
   }
   if(isDefined(self.script_string)) {
-    spawners = getEntArray(self.script_string, "targetname");
+    spawners = getentarray(self.script_string, "targetname");
     self.possible_spawners = array_combine(self.possible_spawners, spawners);
   }
   if(!isDefined(self.possible_spawners)) {
     return;
   }
   zombies_to_add = self.possible_spawners;
-  for(i = 0; i < self.possible_spawners.size; i++) {
+  for (i = 0; i < self.possible_spawners.size; i++) {
     self.possible_spawners[i].locked_spawner = false;
     add_spawner(self.possible_spawners[i]);
   }

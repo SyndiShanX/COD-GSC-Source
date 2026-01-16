@@ -7,6 +7,7 @@
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace spawnlogic;
 
 autoexec __init__system__() {
@@ -18,6 +19,7 @@ __init__() {
 }
 
 main() {
+
   if(getdvarstring(#"scr_recordspawndata") == "<dev string:x38>") {
     setdvar(#"scr_recordspawndata", 0);
   }
@@ -34,7 +36,7 @@ main() {
 
   thread loopbotspawns();
 
-  level.spawnlogic_deaths = [];
+    level.spawnlogic_deaths = [];
   level.spawnlogic_spawnkills = [];
   level.players = [];
   level.grenades = [];
@@ -65,6 +67,7 @@ main() {
 
   thread watchspawnprofile();
   thread spawngraphcheck();
+
 }
 
 findboxcenter(mins, maxs) {
@@ -174,12 +177,12 @@ placespawnpoints(spawnpointname) {
     level.extraspawnpointsused = [];
   }
 
-  if(!spawnpoints.size) {
-    println("<dev string:x69>" + spawnpointname + "<dev string:x4a>");
-    callback::abort_level();
-    wait 1;
-    return;
-  }
+    if(!spawnpoints.size) {
+      println("<dev string:x69>" + spawnpointname + "<dev string:x4a>");
+      callback::abort_level();
+      wait 1;
+      return;
+    }
 
   for(index = 0; index < spawnpoints.size; index++) {
     spawnpoints[index] spawnpointinit();
@@ -304,7 +307,7 @@ getspawnpoint_final(spawnpoints, useweights) {
 
   self storespawndata(spawnpoints, useweights, bestspawnpoint);
 
-  return bestspawnpoint;
+    return bestspawnpoint;
 }
 
 finalizespawnpointchoice(spawnpoint) {
@@ -368,7 +371,7 @@ getbestweightedspawnpoint(spawnpoints) {
       bestspawnpoint.spawndata[bestspawnpoint.spawndata.size] = "<dev string:x71>" + penalty;
     }
 
-    bestspawnpoint.weight -= penalty;
+      bestspawnpoint.weight -= penalty;
     bestspawnpoint.lastsighttracetime = gettime();
   }
 }
@@ -773,20 +776,20 @@ strtovec(str) {
   return (int(parts[0]), int(parts[1]), int(parts[2]));
 }
 
-function getspawnpoint_random(spawnpoints) {
-  if(!isDefined(spawnpoints)) {
-    return undefined;
-  }
+  function getspawnpoint_random(spawnpoints) {
+    if(!isDefined(spawnpoints)) {
+      return undefined;
+    }
 
-  for(i = 0; i < spawnpoints.size; i++) {
-    j = randomint(spawnpoints.size);
-    spawnpoint = spawnpoints[i];
-    spawnpoints[i] = spawnpoints[j];
-    spawnpoints[j] = spawnpoint;
-  }
+    for(i = 0; i < spawnpoints.size; i++) {
+      j = randomint(spawnpoints.size);
+      spawnpoint = spawnpoints[i];
+      spawnpoints[i] = spawnpoints[j];
+      spawnpoints[j] = spawnpoint;
+    }
 
-  return getspawnpoint_final(spawnpoints, 0);
-}
+    return getspawnpoint_final(spawnpoints, 0);
+  }
 
 getallotherplayers() {
   aliveplayers = [];
@@ -803,7 +806,9 @@ getallotherplayers() {
     }
 
     if(isDefined(level.customalivecheck)) {
-      if(![[level.customalivecheck]](player)) {
+      if(![
+          [level.customalivecheck]
+        ](player)) {
         continue;
       }
     }
@@ -887,7 +892,9 @@ spawnpointupdate_zm(spawnpoint) {
     }
 
     if(isDefined(level.customalivecheck)) {
-      if(![[level.customalivecheck]](player)) {
+      if(![
+          [level.customalivecheck]
+        ](player)) {
         continue;
       }
     }
@@ -912,9 +919,9 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistanceweight,
     return getspawnpoint_random(spawnpoints);
   }
 
-  if(getdvarint(#"scr_spawnsimple", 0) > 0) {
-    return getspawnpoint_random(spawnpoints);
-  }
+    if(getdvarint(#"scr_spawnsimple", 0) > 0) {
+      return getspawnpoint_random(spawnpoints);
+    }
 
   spawnlogic_begin();
   k_favored_spawn_point_bonus = 25000;
@@ -953,7 +960,7 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistanceweight,
         spawnpoint.spawndata[spawnpoint.spawndata.size] = "<dev string:x184>" + int(spawnpoint.weight) + "<dev string:x194>" + enemydistanceweight + "<dev string:x19b>" + int(enemydistsum) + "<dev string:x19f>" + allieddistanceweight + "<dev string:x19b>" + int(allydistsum) + "<dev string:x1a5>" + spawnpoint.numplayersatlastupdate;
       }
 
-      continue;
+        continue;
     }
 
     spawnpoint.weight = 0;
@@ -985,7 +992,7 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistanceweight,
     checkbad(result);
   }
 
-  return result;
+    return result;
 }
 
 getspawnpoint_dm(spawnpoints) {
@@ -1095,8 +1102,10 @@ getspawnpoint_turned(spawnpoints, idealdist, baddist, idealdistteam, baddistteam
 }
 
 spawnlogic_begin() {
+
   level.storespawndata = getdvarint(#"scr_recordspawndata", 0);
   level.debugspawning = getdvarint(#"scr_spawnpointdebug", 0) > 0;
+
 }
 
 watchspawnprofile() {
@@ -1432,17 +1441,17 @@ showdeathsdebug() {
   }
 }
 
-function updatedeathinfodebug() {
-  while(true) {
-    if(!getdvarint(#"scr_spawnpointdebug", 0)) {
-      wait 3;
-      continue;
-    }
+  function updatedeathinfodebug() {
+    while(true) {
+      if(!getdvarint(#"scr_spawnpointdebug", 0)) {
+        wait 3;
+        continue;
+      }
 
-    updatedeathinfo();
-    wait 3;
+      updatedeathinfo();
+      wait 3;
+    }
   }
-}
 
 spawnweightdebug(spawnpoints) {
   level notify(#"stop_spawn_weight_debug");
@@ -1534,7 +1543,8 @@ debugnearbyplayers(players, origin) {
   }
 }
 
-function deathoccured(dier, killer) {}
+  function deathoccured(dier, killer) {
+  }
 
 checkforsimilardeaths(deathinfo) {
   for(i = 0; i < level.spawnlogic_deaths.size; i++) {
@@ -1670,7 +1680,7 @@ spawnpointupdate(spawnpoint) {
     }
   } else {
     spawnpoint.enemysights = 0;
-    spawnpoint.nearbyplayers[# "all"] = [];
+    spawnpoint.nearbyplayers[#"all"] = [];
   }
 
   spawnpointdir = spawnpoint.forward;
@@ -1678,11 +1688,11 @@ spawnpointupdate(spawnpoint) {
 
   debug = getdvarint(#"scr_spawnpointdebug", 0) > 0;
 
-  mindist = [];
+    mindist = [];
   distsum = [];
 
   if(!level.teambased) {
-    mindist[# "all"] = 9999999;
+    mindist[#"all"] = 9999999;
   }
 
   foreach(team, _ in level.teams) {
@@ -1754,9 +1764,9 @@ spawnpointupdate(spawnpoint) {
     return;
   }
 
-  spawnpoint.distsum[# "all"] = distsum[# "all"];
-  spawnpoint.enemydistsum[# "all"] = distsum[# "all"];
-  spawnpoint.minenemydist[# "all"] = mindist[# "all"];
+  spawnpoint.distsum[#"all"] = distsum[#"all"];
+  spawnpoint.enemydistsum[#"all"] = distsum[#"all"];
+  spawnpoint.minenemydist[#"all"] = mindist[#"all"];
 }
 
 getlospenalty() {
@@ -1979,7 +1989,7 @@ avoidsamespawn(spawnpoints) {
         spawnpoints[i].spawndata[spawnpoints[i].spawndata.size] = "<dev string:x2dc>";
       }
 
-      break;
+        break;
     }
   }
 }

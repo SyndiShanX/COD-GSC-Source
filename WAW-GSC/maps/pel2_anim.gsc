@@ -273,7 +273,7 @@ flamebunker_death_shoot(guy) {
 
 flamebunker_death_fx(guy) {
   if(is_mature()) {
-    playFXOnTag(level._effect["flamer_gunned_down"], guy, "J_SpineUpper");
+    playfxontag(level._effect["flamer_gunned_down"], guy, "J_SpineUpper");
   }
 }
 
@@ -300,7 +300,7 @@ mangrove_throw_grenade(guy) {
 pacing_attach_radio(guy) {
   goal_node = getent("node_end_vigenette", "targetname");
   radio_model = spawn("script_model", guy.origin);
-  radio_model setModel("char_usa_marine_radiohandset");
+  radio_model setmodel("char_usa_marine_radiohandset");
   radio_model linkto(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   radio_model UseAnimTree(#animtree);
   radio_model.animname = "airfield";
@@ -313,7 +313,7 @@ smoke_grenade_fake_model(guy) {
   angles = guy gettagangles("tag_weapon_left");
   smoke_grenade = spawn("script_model", orig);
   smoke_grenade.angles = angles;
-  smoke_grenade setModel("projectile_us_smoke_grenade");
+  smoke_grenade setmodel("projectile_us_smoke_grenade");
   wait(3);
   smoke_grenade delete();
 }
@@ -327,10 +327,10 @@ pacing_throw_smoke(guy) {
   }
   target_pos = getstruct("orig_pacing_smoke", "targetname").origin;
   temp_loop_orig = spawn("script_origin", target_pos);
-  temp_loop_orig playLoopSound("flare_loop");
+  temp_loop_orig playloopsound("flare_loop");
   playsoundatposition("flare_ignite", temp_loop_orig.origin);
-  while(1) {
-    playFXOnTag(level._effect["target_smoke"], level.polonsky, "tag_weapon_left");
+  while (1) {
+    playfxontag(level._effect["target_smoke"], level.polonsky, "tag_weapon_left");
     if(NumRemoteClients()) {
       wait_network_frame();
     } else {
@@ -343,33 +343,33 @@ pacing_throw_smoke(guy) {
   }
   count = 0;
   if(NumRemoteClients()) {
-    while(1) {
+    while (1) {
       if(count < 30) {
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.1);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.1);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait_network_frame();
       } else {
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.25);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.4);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.15);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.7);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.4);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         break;
       }
       count++;
     }
   } else {
-    while(1) {
-      playFX(level._effect["target_smoke"], target_pos);
+    while (1) {
+      playfx(level._effect["target_smoke"], target_pos);
       count++;
       if(count < 500) {
         wait(0.05);
@@ -378,17 +378,17 @@ pacing_throw_smoke(guy) {
       } else if(count < 630) {
         wait(0.2);
       } else {
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.25);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.4);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.15);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.7);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         wait(0.4);
-        playFX(level._effect["target_smoke"], target_pos);
+        playfx(level._effect["target_smoke"], target_pos);
         break;
       }
     }
@@ -399,7 +399,7 @@ pacing_throw_smoke(guy) {
 
 telepole_spark_fx_1(plane) {
   orig = getstruct("orig_pole_fx_1", "targetname");
-  playFX(level._effect["telepole_spark"], orig.origin);
+  playfx(level._effect["telepole_spark"], orig.origin);
 }
 
 #using_animtree("pel2_truck_crash");

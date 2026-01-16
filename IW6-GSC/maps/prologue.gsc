@@ -103,14 +103,12 @@ prologue_transition_back_to_youngblood() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("space_particulate_player_mov"));
 
   foreach(var_2 in var_0) {
-    if(common_scripts\utility::fxexists(var_2)) {
+    if(common_scripts\utility::fxexists(var_2))
       var_2 common_scripts\utility::pauseeffect();
-    }
   }
 
-  if(isDefined(level.ally)) {
+  if(isDefined(level.ally))
     level.ally delete();
-  }
 
   level.player takeallweapons();
   level.player unlink();
@@ -121,9 +119,8 @@ prologue_transition_back_to_youngblood() {
   common_scripts\utility::flag_clear("enable_player_thruster_audio");
   level notify("kill_thrusters");
 
-  if(isDefined(level.sunflare)) {
+  if(isDefined(level.sunflare))
     stopFXOnTag(level._effect["sun_lens_flare"], level.sunflare, "tag_origin");
-  }
 
   thread maps\_utility::transient_switch("prologue_transient_odin_tr", "prologue_transient_ground_tr");
   maps\_utility::delaythread(2.95, maps\_utility::smart_radio_dialogue, "youngblood_hsh_readypush2");
@@ -132,18 +129,16 @@ prologue_transition_back_to_youngblood() {
     level.player setclienttriggeraudiozone("youngblood_slomo_impact", 0.2);
     level.player common_scripts\utility::delaycall(0.2, ::setorigin, level.pre_odin_pos);
 
-    if(isDefined(level.pre_odin_ang)) {
+    if(isDefined(level.pre_odin_ang))
       level.player common_scripts\utility::delaycall(0.2, ::setplayerangles, level.pre_odin_ang);
-    }
   }
 
   wait 6.4;
   level.pre_odin_pos = undefined;
   level.pre_odin_ang = undefined;
 
-  if(isDefined(level.sunflare)) {
+  if(isDefined(level.sunflare))
     level.sunflare delete();
-  }
 
   common_scripts\utility::flag_wait("prologue_transient_ground_tr_loaded");
   level.player showhud();
@@ -184,9 +179,8 @@ delete_beginning_ents() {
       if(isDefined(var_3.origin)) {
         level.mover_object.origin = var_3.origin;
 
-        if(level.mover_object istouching(var_1)) {
+        if(level.mover_object istouching(var_1))
           var_3 delete();
-        }
       }
     }
   }

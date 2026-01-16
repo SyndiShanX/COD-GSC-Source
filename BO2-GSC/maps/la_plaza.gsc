@@ -26,20 +26,18 @@ autoexec init_plaza() {
   add_spawn_function_group("plaza_balcony_sniper0", "script_noteworthy", ::init_balcony_ai);
   add_spawn_function_group("plaza_gunner", "targetname", ::plaza_gunner);
   a_prop = getent("plaza_cart_1", "targetname");
-  a_prop_links = getEntArray("plaza_cart_1_link", "targetname");
+  a_prop_links = getentarray("plaza_cart_1_link", "targetname");
   level thread cart_1_watcher();
 
-  foreach(m_prop_link in a_prop_links) {
-    m_prop_link linkto(a_prop);
-  }
+  foreach(m_prop_link in a_prop_links)
+  m_prop_link linkto(a_prop);
 
   a_prop = getent("plaza_cart_2", "targetname");
-  a_prop_links = getEntArray("plaza_cart_2_link", "targetname");
+  a_prop_links = getentarray("plaza_cart_2_link", "targetname");
   level thread cart_2_watcher();
 
-  foreach(m_prop_link in a_prop_links) {
-    m_prop_link linkto(a_prop);
-  }
+  foreach(m_prop_link in a_prop_links)
+  m_prop_link linkto(a_prop);
 }
 
 cart_1_watcher() {
@@ -93,9 +91,8 @@ plaza_gunner() {
   self waittill("death");
   flag_set("plaza_gunner_dead");
 
-  if(!flag("harper_dead")) {
+  if(!flag("harper_dead"))
     level.harper queue_dialog("harp_mg_s_down_move_up_0");
-  }
 
   queue_dialog_enemy("pmc3_we_ve_lost_the_mg_0");
 }
@@ -207,9 +204,8 @@ plaza_vo() {
   level.player queue_dialog("ande_section_the_mercs_0");
   do_pip2();
 
-  if(flag("player_has_bruteforce") && !flag("brute_force_player_started")) {
+  if(flag("player_has_bruteforce") && !flag("brute_force_player_started"))
     level.player queue_dialog("our_iav_is_on_fire_003", 0, "near_bruteforce_cougar", "plaza_enter");
-  }
 
   flag_wait("plaza_enter");
   queue_dialog_enemy("pmc3_here_they_come_0");
@@ -262,9 +258,8 @@ monitor_planter_scene() {
   if(isDefined(ai_guy)) {
     ai_guy waittill("death");
 
-    if(!flag("plaza_planter_done") && !flag("planter_roll")) {
+    if(!flag("plaza_planter_done") && !flag("planter_roll"))
       end_scene("plaza_planter");
-    }
   }
 }
 
@@ -316,9 +311,8 @@ right_path_vo() {
   level endon("player_reached_intersection");
   flag_wait_either("plaza_right_path", "plaza_middle_right_path");
 
-  if(!flag("harper_dead")) {
+  if(!flag("harper_dead"))
     level.harper queue_dialog("harp_1st_floor_right_sid_0", 0);
-  }
 
   flag_set("do_plaza_anderson_convo");
   level waittill("continue_path");
@@ -408,29 +402,25 @@ plaza_shop_ai_anims() {
 handle_shop_guy_1_nodes() {
   nodes = getnodearray("plaza_shop_guy_1_nodes", "script_noteworthy");
 
-  foreach(node in nodes) {
-    setenablenode(node, 0);
-  }
+  foreach(node in nodes)
+  setenablenode(node, 0);
 
   scene_wait("plaza_shopguy01");
 
-  foreach(node in nodes) {
-    setenablenode(node, 1);
-  }
+  foreach(node in nodes)
+  setenablenode(node, 1);
 }
 
 handle_shop_guy_2_nodes() {
   nodes = getnodearray("plaza_shop_guy_2_nodes", "script_noteworthy");
 
-  foreach(node in nodes) {
-    setenablenode(node, 0);
-  }
+  foreach(node in nodes)
+  setenablenode(node, 0);
 
   scene_wait("plaza_shopguy02");
 
-  foreach(node in nodes) {
-    setenablenode(node, 1);
-  }
+  foreach(node in nodes)
+  setenablenode(node, 1);
 }
 
 clear_behind() {
@@ -452,7 +442,7 @@ clear_behind() {
       if(level.player.origin[1] - ai_enemy.origin[1] < 512) {
         continue;
       }
-      a_nearest_friendly = spawnStruct();
+      a_nearest_friendly = spawnstruct();
       a_nearest_friendly.dist_sq = 262144;
 
       foreach(ai_friendly in a_friendlies) {
@@ -473,9 +463,8 @@ clear_behind() {
         continue;
       }
 
-      if(!level.player is_player_looking_at(ai_enemy.origin, 0)) {
+      if(!level.player is_player_looking_at(ai_enemy.origin, 0))
         ai_enemy bloody_death();
-      }
     }
 
     wait 0.1;
@@ -494,18 +483,16 @@ brake_van() {
   self.overridevehicledamage = ::van_damage_override;
   self waittill("brake");
 
-  while(self getspeedmph() > 0) {
+  while(self getspeedmph() > 0)
     wait 0.05;
-  }
 
   self notify("unload");
   level notify(self.targetname + "_unload");
 }
 
 van_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(str_means_of_death == "MOD_PROJECTILE_SPLASH" || str_means_of_death == "MOD_PROJECTILE") {
+  if(str_means_of_death == "MOD_PROJECTILE_SPLASH" || str_means_of_death == "MOD_PROJECTILE")
     n_damage = self.health;
-  }
 
   return n_damage;
 }
@@ -535,11 +522,10 @@ plaza_harper_movement_left() {
   level endon("delete_plaza_left_color");
   trigger_wait("color_plaza_left_0");
   level notify("delete_plaza_right_color");
-  a_plaza_right_color = getEntArray("plaza_right_color", "script_noteworthy");
+  a_plaza_right_color = getentarray("plaza_right_color", "script_noteworthy");
 
-  foreach(t_plaza_right_color in a_plaza_right_color) {
-    t_plaza_right_color delete();
-  }
+  foreach(t_plaza_right_color in a_plaza_right_color)
+  t_plaza_right_color delete();
 
   level.harper.plaza_right = 0;
 }
@@ -548,11 +534,10 @@ plaza_harper_movement_right() {
   level endon("delete_plaza_right_color");
   trigger_wait("sm_plaza_right_0");
   level notify("delete_plaza_left_color");
-  a_plaza_left_color = getEntArray("plaza_left_color", "script_noteworthy");
+  a_plaza_left_color = getentarray("plaza_left_color", "script_noteworthy");
 
-  foreach(t_plaza_left_color in a_plaza_left_color) {
-    t_plaza_left_color delete();
-  }
+  foreach(t_plaza_left_color in a_plaza_left_color)
+  t_plaza_left_color delete();
 
   level.harper.plaza_right = 1;
 }
@@ -594,18 +579,16 @@ f35_crash() {
   trig = trigger_wait("t_f35_crash");
   level thread f35_crash_sound();
 
-  if(!flag("harper_dead") && (isDefined(level.harper.plaza_right) && level.harper.plaza_right)) {
+  if(!flag("harper_dead") && (isDefined(level.harper.plaza_right) && level.harper.plaza_right))
     level notify("plaza_right_color_2");
-  }
 
   flag_set("f35_la_plaza_crash_start");
   wait 3.5;
   m_clip solid();
   m_clip disconnectpaths();
 
-  if(level.player istouching(m_clip)) {
+  if(level.player istouching(m_clip))
     level.player suicide();
-  }
 
   flag_set("f35_la_plaza_crash_end");
 }
@@ -623,10 +606,10 @@ f35_crash_fx(m_f35) {
 
 f35_crash_sound() {
   temp_ent = spawn("script_origin", (12331, -440, 657));
-  temp_ent playSound("evt_f35_crash_incoming");
+  temp_ent playsound("evt_f35_crash_incoming");
   wait 2;
   clientnotify("snd_f35_crash");
-  level.player playSound("evt_f35_crash_impact");
+  level.player playsound("evt_f35_crash_impact");
   level.player playrumbleonentity("artillery_rumble");
   earthquake(0.5, 4.0, level.player.origin, 100);
   temp_ent delete();
@@ -637,22 +620,20 @@ f35_crash_sound() {
 kill_player_if_run_over(str_scene_name) {
   level endon(str_scene_name + "_done");
 
-  while(!level.player istouching(self)) {
+  while(!level.player istouching(self))
     wait 0.05;
-  }
 
   level.player suicide();
 }
 
 cleanup_street() {
-  a_fxanim_models = getEntArray("fxanim", "script_noteworthy");
+  a_fxanim_models = getentarray("fxanim", "script_noteworthy");
 
   foreach(ent in a_fxanim_models) {
     e_linked = ent getlinkedent();
 
-    if(isDefined(e_linked) && (!isDefined(e_linked.model) && !isDefined("fxanim_la_apartment_mod") || isDefined(e_linked.model) && isDefined("fxanim_la_apartment_mod") && e_linked.model == "fxanim_la_apartment_mod")) {
+    if(isDefined(e_linked) && (!isDefined(e_linked.model) && !isDefined("fxanim_la_apartment_mod") || isDefined(e_linked.model) && isDefined("fxanim_la_apartment_mod") && e_linked.model == "fxanim_la_apartment_mod"))
       ent unlink();
-    }
   }
 }
 
@@ -718,7 +699,8 @@ lockbreaker() {
   level thread intruder_sam();
 }
 
-lockbreaker_planted(m_player) {}
+lockbreaker_planted(m_player) {
+}
 
 lockbreaker_door_open(m_player) {
   m_left_org = getent("lockbreaker_left", "targetname");
@@ -741,9 +723,8 @@ intruder_sam() {
   level thread fxanim_drones();
   level thread intruder_sam_timer();
 
-  if(maps\_fire_direction::is_fire_direction_active()) {
+  if(maps\_fire_direction::is_fire_direction_active())
     level.player maps\_fire_direction::_fire_direction_disable();
-  }
 
   run_scene("sam_in");
   flag_set("rooftop_sam_in");
@@ -766,15 +747,14 @@ intruder_sam() {
   flag_clear("rooftop_sam_in");
   level notify("rooftop_drone_killed");
 
-  if(vh_sam.health > 0) {
+  if(vh_sam.health > 0)
     vh_sam useby(level.player);
-  }
 
   vh_sam show_sam_turret();
 
-  if(level.b_sam_success) {
+  if(level.b_sam_success)
     run_scene("sam_out");
-  } else {
+  else {
     vh_sam dodamage(10000, vh_sam.origin, undefined, undefined, "explosive");
     run_scene("sam_thrown_out");
   }
@@ -785,9 +765,8 @@ intruder_sam() {
   level.player setclientdvar("aim_assist_min_target_distance", level.player.old_aim_assist_min_target_distance);
   level.player.ignoreme = 0;
 
-  if(maps\_fire_direction::is_fire_direction_active()) {
+  if(maps\_fire_direction::is_fire_direction_active())
     level.player maps\_fire_direction::_fire_direction_enable();
-  }
 }
 
 drone_sam_attack() {
@@ -809,17 +788,15 @@ drone_sam_attack() {
     level notify("drones_spawned");
     array_wait(a_drones, "death");
 
-    if(level.n_drone_wave == 14) {
+    if(level.n_drone_wave == 14)
       flag_set("start_sam_end_vo");
-    }
 
     level notify("good_shot");
   }
 
   foreach(vh_drone in a_drones) {
-    if(isDefined(vh_drone.deathmodel_pieces)) {
+    if(isDefined(vh_drone.deathmodel_pieces))
       array_delete(vh_drone.deathmodel_pieces);
-    }
   }
 }
 
@@ -833,7 +810,7 @@ update_drone_sam_attack_score() {
 }
 
 fxanim_drones() {
-  a_fxanim_drones = getEntArray("fxanim_ambient_drone", "targetname");
+  a_fxanim_drones = getentarray("fxanim_ambient_drone", "targetname");
   level.is_player_in_sam = 1;
 
   foreach(m_drone in a_fxanim_drones) {
@@ -866,9 +843,8 @@ intruder_sam_drone_end() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 intruder_sam_drone_score_watcher() {
@@ -886,9 +862,8 @@ intruder_sam_drone_score_watcher() {
 }
 
 sam_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(n_damage < 11) {
+  if(n_damage < 11)
     level.player dodamage(1, e_attacker.origin);
-  }
 
   return n_damage * 3;
 }

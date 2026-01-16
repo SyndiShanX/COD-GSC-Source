@@ -54,7 +54,7 @@ main() {
   maps\_utility::add_start("end_beach", ::start_end_beach, "end_beach", ::main_end_beach, "skyway_outro_tr");
   maps\_utility::add_start("end_beach_final", ::start_end_beach, "end_beach_final", ::main_end_beach, "skyway_outro_tr");
   mission_precache();
-  maps\_utility::intro_screen_create(&"SKYWAY_INTROSCREEN_TITLE", &"SKYWAY_INTROSCREEN_TIME", &"SKYWAY_INTROSCREEN_LOC", &"SKYWAY_INTROSCREEN_NAME");
+  maps\_utility::intro_screen_create(&"SKYWAY_INTROSCREEN_TITLE", & "SKYWAY_INTROSCREEN_TIME", & "SKYWAY_INTROSCREEN_LOC", & "SKYWAY_INTROSCREEN_NAME");
   maps\_utility::intro_screen_custom_func(::introscreen);
   maps\_utility::transient_init("skyway_intro_tr");
   maps\_utility::transient_init("skyway_outro_tr");
@@ -77,9 +77,8 @@ main() {
     thread enable_mb_scripted_ents();
   }
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     thread level_motionblur_changes();
-  }
 
   maps\skyway_audio::main();
   thread maps\skyway_util::player_sway();
@@ -90,9 +89,8 @@ main() {
   level._train = maps\skyway_util::train_build(var_0, "player_train_new_anim");
   level._train thread train_pathing();
 
-  if(!level.credits_only) {
+  if(!level.credits_only)
     thread objectives();
-  }
 
   level.player maps\skyway_util::create_view_particle_source();
   maps\_utility::add_extra_autosave_check("fallen_cant_get_up", maps\skyway_util::fall_check, "player not on train -- possibly falling off");
@@ -104,11 +102,10 @@ main() {
   maps\skyway_ambient_a10::a10_spawn_funcs();
   maps\skyway_util::spawn_allies("spawner_allies");
 
-  if(maps\skyway_util::start_point_is_after("end_swim")) {
+  if(maps\skyway_util::start_point_is_after("end_swim"))
     maps\skyway_util::spawn_boss("actor_boss_injured");
-  } else {
+  else
     maps\skyway_util::spawn_boss();
-  }
 
   mission_post_inits();
   thread vision_sets();
@@ -135,7 +132,7 @@ mission_precache() {
   maps\skyway_end_swim::section_precache();
   maps\skyway_endbeach::section_precache();
   maps\skyway_precache::main();
-  maps\_utility::add_hint_string("15_mins_before", &"SKYWAY_INTROSCREEN_TIMEBEFORE", ::introscreen_hint);
+  maps\_utility::add_hint_string("15_mins_before", & "SKYWAY_INTROSCREEN_TIMEBEFORE", ::introscreen_hint);
   precachemodel("viewhands_gs_stealth");
   precachemodel("viewhands_player_gs_stealth");
   precacheitem("fads");
@@ -189,9 +186,8 @@ mission_global_inits() {
 vision_sets() {}
 
 start_hangar() {
-  if(!level.credits_only) {
+  if(!level.credits_only)
     thread maps\skyway_audio::level_start_amb();
-  }
 
   maps\skyway_hangar_intro::start();
 }
@@ -341,25 +337,24 @@ objectives() {
     case "hangar_nomove":
     case "hangar":
       level waittill("stop_chyron");
-      objective_add(maps\_utility::obj("obj_find_boss"), "current", &"SKYWAY_OBJ_FINDBOSS");
+      objective_add(maps\_utility::obj("obj_find_boss"), "current", & "SKYWAY_OBJ_FINDBOSS");
     case "sat1":
     case "sat1_nomove":
       common_scripts\utility::flag_wait("flag_sat2_end");
-      objective_add(maps\_utility::obj("obj_get_to_roof"), "current", &"SKYWAY_OBJ_GETTOROOF");
+      objective_add(maps\_utility::obj("obj_get_to_roof"), "current", & "SKYWAY_OBJ_GETTOROOF");
       common_scripts\utility::flag_wait("flag_rooftops_start");
       maps\_utility::objective_complete(maps\_utility::obj("obj_get_to_roof"));
     case "rooftops":
     case "rooftops_nomove":
       common_scripts\utility::flag_wait("flag_helo_start");
       wait 3;
-      objective_add(maps\_utility::obj("obj_take_out_helos"), "current", &"SKYWAY_OBJ_TAKEOUTHELOS");
+      objective_add(maps\_utility::obj("obj_take_out_helos"), "current", & "SKYWAY_OBJ_TAKEOUTHELOS");
       common_scripts\utility::flag_wait("flag_helo_end");
 
-      if(!common_scripts\utility::flag("flag_helo_fail")) {
+      if(!common_scripts\utility::flag("flag_helo_fail"))
         maps\_utility::objective_complete(maps\_utility::obj("obj_take_out_helos"));
-      } else {
+      else
         objective_state(maps\_utility::obj("obj_take_out_helos"), "failed");
-      }
     case "locomotive":
     case "rooftop_combat":
     case "locomotive_nomove":
@@ -426,9 +421,8 @@ track_show_hide() {
   var_0["canyon_to_tunnel"] = getEntArray("model_hide_canyon_to_tunnel", "targetname");
   var_0["end"] = getEntArray("model_hide_end", "targetname");
 
-  foreach(var_2 in var_0) {
-    common_scripts\utility::array_call(var_2, ::hide);
-  }
+  foreach(var_2 in var_0)
+  common_scripts\utility::array_call(var_2, ::hide);
 
   thread fake_teleport_notify();
 
@@ -536,7 +530,6 @@ level_scripted_visionsets() {
 enable_mb_scripted_ents() {
   var_0 = getEntArray("has_mblur", "script_noteworthy");
 
-  foreach(var_2 in var_0) {
-    var_2 motionblurhqenable();
-  }
+  foreach(var_2 in var_0)
+  var_2 motionblurhqenable();
 }

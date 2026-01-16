@@ -20,7 +20,8 @@ init_flags() {
   flag_init("kill_rocket_hall_vo");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_terrorist_hunt() {
   load_gump("yemen_gump_speech");
@@ -28,11 +29,10 @@ skipto_terrorist_hunt() {
   level thread maps\yemen::meet_menendez_objectives();
   dead_stat = level.player get_story_stat("DEFALCO_DEAD_IN_KARMA");
 
-  if(dead_stat == 0) {
+  if(dead_stat == 0)
     level.is_defalco_alive = 1;
-  } else {
+  else
     level.is_defalco_alive = 0;
-  }
 }
 
 main() {
@@ -187,16 +187,15 @@ rocket_hall_american_destruction() {
   s_grenade_2 = getstruct("rocket_hall_grenade_2", "targetname");
   a_zone_ai = get_ai_array("rocket_hall_actors", "script_noteworthy");
 
-  if(isDefined(a_zone_ai[0]) && isalive(a_zone_ai[0])) {
+  if(isDefined(a_zone_ai[0]) && isalive(a_zone_ai[0]))
     a_zone_ai[0] magicgrenade(s_grenade_1.origin + vectorscale((0, 0, 1), 16.0), s_grenade_1.origin, 1);
-  }
 
-  if(isDefined(a_zone_ai[0]) && isalive(a_zone_ai[0])) {
+  if(isDefined(a_zone_ai[0]) && isalive(a_zone_ai[0]))
     a_zone_ai[0] magicgrenade(s_grenade_2.origin + vectorscale((0, 0, 1), 16.0), s_grenade_2.origin, 1);
-  }
 }
 
-rocket_hall_rpgs() {}
+rocket_hall_rpgs() {
+}
 
 rocket_hall_rpg_fire(str_start_struct) {
   s_rpg_start = getstruct(str_start_struct, "targetname");
@@ -231,9 +230,9 @@ rocket_hall_terrorist_spawnfunc() {
   self disableaimassist();
   str_notify = level waittill_any_return("rocket_hall_zone_hit", "rocket_hall_bypassed", "rocket_hall_switch_team");
 
-  if(str_notify == "rocket_hall_bypassed") {
+  if(str_notify == "rocket_hall_bypassed")
     self bloody_death(undefined, 4);
-  } else {
+  else {
     self.team = "axis";
     self enableaimassist();
   }
@@ -246,9 +245,8 @@ rocket_hall_terrorist_switch_team() {
   while(self.team == "allies") {
     self waittill("damage", damage, e_attacker);
 
-    if(isplayer(e_attacker)) {
+    if(isplayer(e_attacker))
       level notify("rocket_hall_switch_team");
-    }
   }
 }
 
@@ -269,7 +267,6 @@ rocket_hall_cleanup() {
   level waittill("rocket_hall_bypassed");
   vh_quadrotor = getent("rocket_hall_quadrotor", "targetname");
 
-  if(isDefined(vh_quadrotor)) {
+  if(isDefined(vh_quadrotor))
     vh_quadrotor delete();
-  }
 }

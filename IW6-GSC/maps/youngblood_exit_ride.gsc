@@ -10,11 +10,10 @@ exit_ride_setup() {
   var_1 = getdvarint("awesome", 1);
   var_2 = getdvarint("scr_art_tweak", 0);
 
-  if(!var_1) {
+  if(!var_1)
     var_3 = getvehiclenode("start_truck_part3", "script_noteworthy");
-  } else {
+  else
     var_3 = getvehiclenode("start_truck_part3_2", "script_noteworthy");
-  }
 
   level.truck attachpath(var_3);
   level.truck thread maps\_vehicle::vehicle_paths(var_3);
@@ -35,9 +34,8 @@ exit_ride_setup() {
   level.player thread maps\youngblood_code::vfx_on_player_location_to_odin();
   wait 1.5;
 
-  if(var_1) {
+  if(var_1)
     maps\_utility::delaythread(0, maps\_utility::vision_set_fog_changes, "", 2.3);
-  }
 
   level thread maps\_hud_util::fade_in(0.6);
   level.player setblurforplayer(0, 3.0);

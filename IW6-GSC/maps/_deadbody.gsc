@@ -19,11 +19,10 @@ main() {
   level.dead_body_count = 1;
   var_0 = getdvarint("ragdoll_max_simulating") - 6;
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     level.max_number_of_dead_bodies = var_0;
-  } else {
+  else
     level.max_number_of_dead_bodies = 0;
-  }
 
   var_1 = spawnStruct();
   var_1.bodies = [];
@@ -46,14 +45,13 @@ spawn_dead_body(var_0) {
   }
   var_1 = undefined;
 
-  if(isDefined(self.script_index)) {
+  if(isDefined(self.script_index))
     var_1 = self.script_index;
-  } else {
+  else {
     level.dead_body_count++;
 
-    if(level.dead_body_count > 3) {
+    if(level.dead_body_count > 3)
       level.dead_body_count = 1;
-    }
 
     var_1 = level.dead_body_count;
   }
@@ -74,9 +72,8 @@ spawn_dead_body(var_0) {
   var_2 setflaggedanim("flag", var_2 maps\_utility::getanim(self.script_noteworthy), 1, 0, 1);
   var_2 waittillmatch("flag", "end");
 
-  if(!isDefined(self.script_start)) {
+  if(!isDefined(self.script_start))
     var_2 startragdoll();
-  }
 }
 
 que_body(var_0) {

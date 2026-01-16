@@ -66,22 +66,22 @@ function levelnotifyhandler(clientnum, state, oldstate) {
 }
 
 function main() {
-  /
+  /# /
   #
-  assert(isDefined(level.first_frame), "");
-  if(isDefined(level._loadstarted) && level._loadstarted) {
+  assert(isdefined(level.first_frame), "");
+  if(isdefined(level._loadstarted) && level._loadstarted) {
     return;
   }
   level._loadstarted = 1;
   level thread util::servertime();
   level thread util::init_utility();
   level thread register_clientfields();
-  util::registersystem("levelNotify", &levelnotifyhandler);
+  util::registersystem("levelNotify", & levelnotifyhandler);
   level.createfx_disable_fx = getdvarint("disable_fx") == 1;
   level thread _claymore::init();
   level thread _explosive_bolt::main();
-  callback::add_callback("hash_da8d7d74", &basic_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::add_callback("hash_da8d7d74", & basic_player_connect);
+  callback::on_spawned( & on_player_spawned);
   system::wait_till("all");
   art_review();
   level flagsys::set("load_main_complete");
@@ -89,7 +89,7 @@ function main() {
 }
 
 function basic_player_connect(localclientnum) {
-  if(!isDefined(level._laststand)) {
+  if(!isdefined(level._laststand)) {
     level._laststand = [];
   }
   level._laststand[localclientnum] = 0;
@@ -102,7 +102,7 @@ function on_player_spawned(localclientnum) {
 
 function force_update_player_clientfields(localclientnum) {
   self endon("entityshutdown");
-  while(!clienthassnapshot(localclientnum)) {
+  while (!clienthassnapshot(localclientnum)) {
     wait(0.25);
   }
   wait(0.25);
@@ -110,5 +110,5 @@ function force_update_player_clientfields(localclientnum) {
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "sndHealth", 1, 2, "int", &audio::sndhealthsystem, 0, 0);
+  clientfield::register("toplayer", "sndHealth", 1, 2, "int", & audio::sndhealthsystem, 0, 0);
 }

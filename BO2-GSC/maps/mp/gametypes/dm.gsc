@@ -40,19 +40,19 @@ main() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  setobjectivetext("allies", &"OBJECTIVES_DM");
-  setobjectivetext("axis", &"OBJECTIVES_DM");
+  setobjectivetext("allies", & "OBJECTIVES_DM");
+  setobjectivetext("axis", & "OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", &"OBJECTIVES_DM");
-    setobjectivescoretext("axis", &"OBJECTIVES_DM");
+    setobjectivescoretext("allies", & "OBJECTIVES_DM");
+    setobjectivescoretext("axis", & "OBJECTIVES_DM");
   } else {
-    setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
-    setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
   }
 
-  setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
-  setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
+  setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
+  setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
   allowed[0] = "dm";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
@@ -69,9 +69,8 @@ onstartgametype() {
   level.displayroundendtext = 0;
   level thread onscoreclosemusic();
 
-  if(!isoneround()) {
+  if(!isoneround())
     level.displayroundendtext = 1;
-  }
 }
 
 onspawnplayerunified() {
@@ -82,17 +81,15 @@ onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn) {
+  if(predictedspawn)
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  } else {
+  else
     self spawn(spawnpoint.origin, spawnpoint.angles, "dm");
-  }
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
+  if(isDefined(winningplayer) && isplayer(winningplayer))
     [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
-  }
 }
 
 onscoreclosemusic() {
@@ -123,7 +120,6 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperkill);
   self maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperdeath * -1);
 
-  if(smeansofdeath == "MOD_HEAD_SHOT") {
+  if(smeansofdeath == "MOD_HEAD_SHOT")
     attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperheadshot);
-  }
 }

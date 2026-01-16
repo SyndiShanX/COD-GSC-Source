@@ -47,11 +47,8 @@ bot_killstreak_setup() {
 
     bot_register_killstreak_func("airdrop_assault", ::bot_killstreak_drop_outside);
 
-    if(isDefined(level.mapCustomBotKillstreakFunc)) {
-      [
-        [level.mapCustomBotKillstreakFunc]
-      ]();
-    }
+    if(isDefined(level.mapCustomBotKillstreakFunc))
+      [[level.mapCustomBotKillstreakFunc]]();
 
     if(!is_aliens()) {
       bot_validate_killstreak_funcs();
@@ -63,27 +60,23 @@ bot_killstreak_setup() {
 }
 
 bot_register_killstreak_func(name, func, can_use, optionalParam) {
-  if(!isDefined(level.killstreak_botfunc)) {
+  if(!isDefined(level.killstreak_botfunc))
     level.killstreak_botfunc = [];
-  }
 
   level.killstreak_botfunc[name] = func;
 
-  if(!isDefined(level.killstreak_botcanuse)) {
+  if(!isDefined(level.killstreak_botcanuse))
     level.killstreak_botcanuse = [];
-  }
 
   level.killstreak_botcanuse[name] = can_use;
 
-  if(!isDefined(level.killstreak_botparm)) {
+  if(!isDefined(level.killstreak_botparm))
     level.killstreak_botparm = [];
-  }
 
   level.killstreak_botparm[name] = optionalParam;
 
-  if(!isDefined(level.bot_supported_killstreaks)) {
+  if(!isDefined(level.bot_supported_killstreaks))
     level.bot_supported_killstreaks = [];
-  }
   level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = name;
 }
 
@@ -113,9 +106,8 @@ bot_validate_killstreak_funcs() {
     temp = level.killstreakFuncs;
     level.killStreakFuncs = [];
     foreach(streakName in temp) {
-      if(!array_contains(errors, streakName)) {
+      if(!array_contains(errors, streakName))
         level.killStreakFuncs[streakName] = temp[streakName];
-      }
     }
   }
 }
@@ -149,9 +141,8 @@ bot_killstreak_valid_for_specific_streakType(streakName, streakType, assertIt) {
 bot_killstreak_is_valid_internal(streakName, who_to_check, optional_bot, optional_streak_type) {
   streakTypeSubStr = undefined;
 
-  if(streakName == "specialist") {
+  if(streakName == "specialist")
     return true;
-  }
 
   if(!bot_killstreak_is_valid_single(streakName, who_to_check)) {
     return false;
@@ -162,19 +153,16 @@ bot_killstreak_is_valid_internal(streakName, who_to_check, optional_bot, optiona
 
     switch (streakTypeSubStr) {
       case "assault":
-        if(!isAssaultKillstreak(streakName)) {
+        if(!isAssaultKillstreak(streakName))
           return false;
-        }
         break;
       case "support":
-        if(!isSupportKillstreak(streakName)) {
+        if(!isSupportKillstreak(streakName))
           return false;
-        }
         break;
       case "specialist":
-        if(!isSpecialistKillstreak(streakName)) {
+        if(!isSpecialistKillstreak(streakName))
           return false;
-        }
         break;
     }
   }
@@ -200,9 +188,8 @@ bot_think_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.killstreak_botfunc)) {
+  while(!isDefined(level.killstreak_botfunc))
     wait(0.05);
-  }
 
   self childthread bot_start_aa_launcher_tracking();
 
@@ -224,11 +211,10 @@ bot_think_killstreak() {
               continue;
             }
             if(isSpecialistKillstreak(killstreak_info.streakName)) {
-              if(!killstreak_info.earned) {
+              if(!killstreak_info.earned)
                 tableName = "specialist";
-              } else {
+              else
                 continue;
-              }
             }
 
             killstreak_info.weapon = getKillstreakWeapon(killstreak_info.streakName);
@@ -245,9 +231,8 @@ bot_think_killstreak() {
             if(isDefined(bot_killstreak_func)) {
               result = self[[bot_killstreak_func]](killstreak_info, killstreaks_array, can_use_killstreak_function, level.killstreak_botparm[killstreak_info.streakName]);
               if(!isDefined(result) || result == false) {
-                if(!isDefined(self.bot_killstreak_wait)) {
+                if(!isDefined(self.bot_killstreak_wait))
                   self.bot_killstreak_wait = [];
-                }
                 self.bot_killstreak_wait[killstreak_info.streakName] = GetTime() + 5000;
               }
             } else {
@@ -291,29 +276,25 @@ bot_killstreak_never_use() {
 }
 
 bot_can_use_air_superiority() {
-  if(!self aerial_vehicle_allowed()) {
+  if(!self aerial_vehicle_allowed())
     return false;
-  }
 
   possible_targets = maps\mp\killstreaks\_air_superiority::findAllTargets(self, self.team);
   cur_time = GetTime();
   foreach(target in possible_targets) {
-    if(cur_time - target.birthtime > 5000) {
+    if(cur_time - target.birthtime > 5000)
       return true;
-    }
   }
 
   return false;
 }
 
 aerial_vehicle_allowed() {
-  if(self isAirDenied()) {
+  if(self isAirDenied())
     return false;
-  }
 
-  if(vehicle_would_exceed_limit()) {
+  if(vehicle_would_exceed_limit())
     return false;
-  }
 
   return true;
 }
@@ -323,34 +304,28 @@ vehicle_would_exceed_limit() {
 }
 
 bot_can_use_emp() {
-  if(isDefined(level.empPlayer)) {
+  if(isDefined(level.empPlayer))
     return false;
-  }
 
   otherTeam = level.otherTeam[self.team];
-  if(isDefined(level.teamEMPed) && isDefined(level.teamEMPed[otherTeam]) && level.teamEMPed[otherTeam]) {
+  if(isDefined(level.teamEMPed) && isDefined(level.teamEMPed[otherTeam]) && level.teamEMPed[otherTeam])
     return false;
-  }
 
   return true;
 }
 
 bot_can_use_ball_drone() {
-  if(self isUsingRemote()) {
+  if(self isUsingRemote())
     return false;
-  }
 
-  if(maps\mp\killstreaks\_ball_drone::exceededMaxBallDrones()) {
+  if(maps\mp\killstreaks\_ball_drone::exceededMaxBallDrones())
     return false;
-  }
 
-  if(vehicle_would_exceed_limit()) {
+  if(vehicle_would_exceed_limit())
     return false;
-  }
 
-  if(isDefined(self.ballDrone)) {
+  if(isDefined(self.ballDrone))
     return false;
-  }
 
   return true;
 }
@@ -364,9 +339,8 @@ bot_killstreak_simple_use(killstreak_info, killstreaks_array, canUseFunc, option
     return true;
   }
 
-  if(isDefined(canUseFunc) && !self[[canUseFunc]]()) {
+  if(isDefined(canUseFunc) && !self[[canUseFunc]]())
     return false;
-  }
 
   bot_switch_to_killstreak_weapon(killstreak_info, killstreaks_array, killstreak_info.weapon);
 
@@ -390,24 +364,21 @@ bot_killstreak_drop(killstreak_info, killstreaks_array, canUseFunc, optional_par
 
   wait(RandomIntRange(2, 4));
 
-  if(!isDefined(drop_where)) {
+  if(!isDefined(drop_where))
     drop_where = "anywhere";
-  }
 
   if(!self bot_allowed_to_use_killstreaks()) {
     return true;
   }
 
-  if(isDefined(canUseFunc) && !self[[canUseFunc]]()) {
+  if(isDefined(canUseFunc) && !self[[canUseFunc]]())
     return false;
-  }
 
   ammo = self GetWeaponAmmoClip(killstreak_info.weapon) + self GetWeaponAmmoStock(killstreak_info.weapon);
   if(ammo == 0) {
     foreach(streak in killstreaks_array) {
-      if(isDefined(streak.streakName) && streak.streakName == killstreak_info.streakName) {
+      if(isDefined(streak.streakName) && streak.streakName == killstreak_info.streakName)
         streak.available = 0;
-      }
     }
     self maps\mp\killstreaks\_killstreaks::updateKillstreaks(false);
     return true;
@@ -418,18 +389,16 @@ bot_killstreak_drop(killstreak_info, killstreaks_array, canUseFunc, optional_par
     outside_nodes = [];
     nodes_in_cone = self bot_get_nodes_in_cone(750, 0.6, true);
     foreach(node in nodes_in_cone) {
-      if(NodeExposedToSky(node)) {
+      if(NodeExposedToSky(node))
         outside_nodes = array_add(outside_nodes, node);
-      }
     }
 
     if((nodes_in_cone.size > 5) && (outside_nodes.size > nodes_in_cone.size * 0.6)) {
       outside_nodes_sorted = get_array_of_closest(self.origin, outside_nodes, undefined, undefined, undefined, 150);
-      if(outside_nodes_sorted.size > 0) {
+      if(outside_nodes_sorted.size > 0)
         node_target = random(outside_nodes_sorted);
-      } else {
+      else
         node_target = random(outside_nodes);
-      }
     }
   } else if(drop_where == "hidden") {
     nodes_in_radius = GetNodesInRadius(self.origin, 256, 0, 40);
@@ -437,9 +406,8 @@ bot_killstreak_drop(killstreak_info, killstreaks_array, canUseFunc, optional_par
     if(isDefined(node_nearest_bot)) {
       visible_nodes_in_radius = [];
       foreach(node in nodes_in_radius) {
-        if(NodesVisible(node_nearest_bot, node, true)) {
+        if(NodesVisible(node_nearest_bot, node, true))
           visible_nodes_in_radius = array_add(visible_nodes_in_radius, node);
-        }
       }
 
       node_target = self BotNodePick(visible_nodes_in_radius, 1, "node_hide");
@@ -449,9 +417,8 @@ bot_killstreak_drop(killstreak_info, killstreaks_array, canUseFunc, optional_par
   if(isDefined(node_target) || drop_where == "anywhere") {
     self BotSetFlag("disable_movement", true);
 
-    if(isDefined(node_target)) {
+    if(isDefined(node_target))
       self BotLookAtPoint(node_target.origin, 1.5 + 0.95, "script_forced");
-    }
 
     bot_switch_to_killstreak_weapon(killstreak_info, killstreaks_array, killstreak_info.weapon);
     wait(2.0);
@@ -507,11 +474,10 @@ bot_killstreak_choose_loc_enemies(killstreak_info, killstreaks_array, canUseFunc
   possible_fallback_zones = [];
   iterate_backwards = RandomFloat(100) > 50;
   for(z = 0; z < zone_count; z++) {
-    if(iterate_backwards) {
+    if(iterate_backwards)
       zone = zone_count - 1 - z;
-    } else {
+    else
       zone = z;
-    }
 
     if((zone != zone_nearest_bot) && (BotZoneGetIndoorPercent(zone) < 0.25)) {
       enemies_in_zone = BotZoneGetCount(zone, self.team, "enemy_predict");
@@ -524,13 +490,12 @@ bot_killstreak_choose_loc_enemies(killstreak_info, killstreaks_array, canUseFunc
     }
   }
 
-  if(best_zone >= 0) {
+  if(best_zone >= 0)
     zoneCenter = GetZoneOrigin(best_zone);
-  } else if(possible_fallback_zones.size > 0) {
+  else if(possible_fallback_zones.size > 0)
     zoneCenter = GetZoneOrigin(random(possible_fallback_zones));
-  } else {
+  else
     zoneCenter = GetZoneOrigin(RandomInt(level.zoneCount));
-  }
 
   randomOffset = (RandomFloatRange(-500, 500), RandomFloatRange(-500, 500), 0);
 
@@ -551,9 +516,8 @@ bot_think_watch_aerial_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(level.last_global_badplace_time)) {
+  if(!isDefined(level.last_global_badplace_time))
     level.last_global_badplace_time = -10000;
-  }
 
   level.killstreak_global_bp_exists_for["allies"] = [];
   level.killstreak_global_bp_exists_for["axis"] = [];
@@ -574,17 +538,14 @@ bot_think_watch_aerial_killstreak() {
     }
     needs_to_hide = false;
 
-    if(isDefined(level.chopper) && level.chopper.team != self.team) {
+    if(isDefined(level.chopper) && level.chopper.team != self.team)
       needs_to_hide = true;
-    }
 
-    if(isDefined(level.lbSniper) && level.lbSniper.team != self.team) {
+    if(isDefined(level.lbSniper) && level.lbSniper.team != self.team)
       needs_to_hide = true;
-    }
 
-    if(isDefined(level.heli_pilot[get_enemy_team(self.team)])) {
+    if(isDefined(level.heli_pilot[get_enemy_team(self.team)]))
       needs_to_hide = true;
-    }
 
     if(enemy_mortar_strike_exists(self.team)) {
       needs_to_hide = true;
@@ -605,9 +566,8 @@ bot_think_watch_aerial_killstreak() {
     if(isDefined(enemy_vanguard)) {
       botEye = self getEye();
       if(within_fov(botEye, self GetPlayerAngles(), enemy_vanguard.attackArrow.origin, self BotGetFovDot())) {
-        if(SightTracePassed(botEye, enemy_vanguard.attackArrow.origin, false, self, enemy_vanguard.attackArrow)) {
+        if(SightTracePassed(botEye, enemy_vanguard.attackArrow.origin, false, self, enemy_vanguard.attackArrow))
           BadPlace_Cylinder("vanguard_" + enemy_vanguard GetEntityNumber(), next_wait_time + 0.5, enemy_vanguard.attackArrow.origin, 200, 100, self.team);
-        }
       }
     }
 
@@ -623,9 +583,8 @@ bot_think_watch_aerial_killstreak() {
 }
 
 try_place_global_badplace(killstreak_unique_name, killstreak_exists_func) {
-  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][killstreak_unique_name])) {
+  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][killstreak_unique_name]))
     level.killstreak_global_bp_exists_for[self.team][killstreak_unique_name] = false;
-  }
 
   if(!level.killstreak_global_bp_exists_for[self.team][killstreak_unique_name]) {
     level.killstreak_global_bp_exists_for[self.team][killstreak_unique_name] = true;
@@ -636,7 +595,9 @@ try_place_global_badplace(killstreak_unique_name, killstreak_exists_func) {
 monitor_enemy_dangerous_killstreak(my_team, killstreak_unique_name, killstreak_exists_func) {
   Assert(SCR_CONST_GLOBAL_BP_DURATION_S > (SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS / 1000));
   wait_time = (SCR_CONST_GLOBAL_BP_DURATION_S - (SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS / 1000)) * 0.5;
-  while([[killstreak_exists_func]](my_team)) {
+  while([
+      [killstreak_exists_func]
+    ](my_team)) {
     if(GetTime() > level.last_global_badplace_time + SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS) {
       BadPlace_Global("", SCR_CONST_GLOBAL_BP_DURATION_S, my_team, "only_sky");
       level.last_global_badplace_time = GetTime();
@@ -650,9 +611,8 @@ monitor_enemy_dangerous_killstreak(my_team, killstreak_unique_name, killstreak_e
 
 enemy_mortar_strike_exists(my_team) {
   if(isDefined(level.air_raid_active) && level.air_raid_active) {
-    if(my_team != level.air_raid_team_called) {
+    if(my_team != level.air_raid_team_called)
       return true;
-    }
   }
 
   return false;
@@ -661,9 +621,8 @@ enemy_mortar_strike_exists(my_team) {
 enemy_switchblade_exists(my_team) {
   if(isDefined(level.remoteMissileInProgress)) {
     foreach(rocket in level.rockets) {
-      if(isDefined(rocket.type) && rocket.type == "remote" && rocket.team != my_team) {
+      if(isDefined(rocket.type) && rocket.type == "remote" && rocket.team != my_team)
         return true;
-      }
     }
   }
 
@@ -673,9 +632,8 @@ enemy_switchblade_exists(my_team) {
 enemy_odin_assault_exists(my_team) {
   foreach(player in level.players) {
     if(!level.teamBased || (isDefined(player.team) && my_team != player.team)) {
-      if(isDefined(player.odin) && player.odin.odinType == "odin_assault" && GetTime() - player.odin.birthtime > 3000) {
+      if(isDefined(player.odin) && player.odin.odinType == "odin_assault" && GetTime() - player.odin.birthtime > 3000)
         return true;
-      }
     }
   }
 
@@ -685,9 +643,8 @@ enemy_odin_assault_exists(my_team) {
 get_enemy_vanguard() {
   foreach(player in level.players) {
     if(!level.teamBased || (isDefined(player.team) && self.team != player.team)) {
-      if(isDefined(player.remoteUAV) && player.remoteUAV.helitype == "remote_uav") {
+      if(isDefined(player.remoteUAV) && player.remoteUAV.helitype == "remote_uav")
         return player.remoteUAV;
-      }
     }
   }
 

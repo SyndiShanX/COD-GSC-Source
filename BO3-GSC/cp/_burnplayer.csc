@@ -11,7 +11,7 @@ function initflamefx() {}
 
 function corpseflamefx(localclientnum) {
   self util::waittill_dobj(localclientnum);
-  if(!isDefined(level._effect["character_fire_death_torso"])) {
+  if(!isdefined(level._effect["character_fire_death_torso"])) {
     initflamefx();
   }
   tagarray = [];
@@ -23,10 +23,10 @@ function corpseflamefx(localclientnum) {
   tagarray[tagarray.size] = "J_Knee_LE";
   tagarray[tagarray.size] = "J_Ankle_RI";
   tagarray[tagarray.size] = "J_Ankle_LE";
-  if(isDefined(level._effect["character_fire_death_sm"])) {
-    for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
-      playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
+  if(isdefined(level._effect["character_fire_death_sm"])) {
+    for (arrayindex = 0; arrayindex < tagarray.size; arrayindex++) {
+      playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
     }
   }
-  playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  playfxontag(localclientnum, level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }

@@ -12,6 +12,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace blackmarket;
 
 autoexec __init__system__() {
@@ -37,7 +38,7 @@ function_78a5c895(localclientnum, menu_data) {
 
 function_8aff1931(localclientnum, menu_data) {
   level notify(#"hash_1a6765b456dde230");
-  level endon(#"hash_1a6765b456dde230", # "blackmarket_closed");
+  level endon(#"hash_1a6765b456dde230", #"blackmarket_closed");
 
   while(true) {
     waitresult = level waittill(#"blackjackreserve");
@@ -48,27 +49,27 @@ function_8aff1931(localclientnum, menu_data) {
     }
 
     switch (waitresult.status) {
-      case # "opencrate":
+      case #"opencrate":
         if(waitresult.result) {
           switch (hash(waitresult.crateid)) {
-            case # "1000":
+            case #"1000":
               level thread function_f559e439(localclientnum, menu_data, "loot_case");
               break;
-            case # "1001":
+            case #"1001":
               level thread function_f559e439(localclientnum, menu_data, "loot_crate");
               break;
           }
         }
 
         break;
-      case # "playsound":
+      case #"playsound":
         level.var_ca61b442 = playSound(localclientnum, waitresult.soundalias);
         break;
-      case # "stopplaysound":
+      case #"stopplaysound":
         stopsound(level.var_ca61b442);
         level.var_ca61b442 = playSound(localclientnum, waitresult.soundalias);
         break;
-      case # "stopsound":
+      case #"stopsound":
         stopsound(level.var_ca61b442);
         level.var_ca61b442 = undefined;
         break;
@@ -89,7 +90,7 @@ function_631642bd(localclientnum, menu_data) {
   forcestreambundle(#"scene_frontend_blackjack_crate");
   level scene::init(#"scene_frontend_blackjack_reserves");
   s_align = struct::get(#"tag_align_blackjack_reserves");
-  playmaincamxcam(localclientnum, # "ui_cam_blackjack_character", 0, "", "", s_align.origin, s_align.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_blackjack_character", 0, "", "", s_align.origin, s_align.angles);
   level.s_blackmarket = spawnStruct();
   level.s_blackmarket.localclientnum = localclientnum;
 }
@@ -120,7 +121,7 @@ function_f559e439(localclientnum, menu_data, state) {
     return;
   }
 
-  var_6b569619 = # "scene_frontend_blackjack_reserves";
+  var_6b569619 = #"scene_frontend_blackjack_reserves";
   var_f56984dc = undefined;
   var_ce1b87cf = undefined;
   var_61de15c5 = undefined;
@@ -128,18 +129,18 @@ function_f559e439(localclientnum, menu_data, state) {
   level.s_blackmarket.var_5a133766 = 0;
 
   switch (hash(state)) {
-    case # "welcome_case_multi":
-    case # "welcome_empty":
-    case # "welcome_case_avail":
-    case # "welcome_case_special":
-    case # "welcome_case_notavail":
+    case #"welcome_case_multi":
+    case #"welcome_empty":
+    case #"welcome_case_avail":
+    case #"welcome_case_special":
+    case #"welcome_case_notavail":
       level.s_blackmarket.var_5a133766 = 1;
-      level.s_blackmarket.var_46d8e7d1 = hash(state) != # "welcome_empty";
+      level.s_blackmarket.var_46d8e7d1 = hash(state) != #"welcome_empty";
       var_f56984dc = "idle";
       break;
-    case # "loot_case_open":
-    case # "loot_case":
-      var_ce1b87cf = # "scene_frontend_blackjack_case";
+    case #"loot_case_open":
+    case #"loot_case":
+      var_ce1b87cf = #"scene_frontend_blackjack_case";
 
       if(state == "loot_case_open") {
         var_f56984dc = "crateidle";
@@ -150,13 +151,13 @@ function_f559e439(localclientnum, menu_data, state) {
         }
 
         level.s_blackmarket.lastcontainer = "loot_case";
-        var_ac97b37c = # "loot_case";
+        var_ac97b37c = #"loot_case";
       }
 
       break;
-    case # "loot_crate":
-    case # "loot_crate_open":
-      var_ce1b87cf = # "scene_frontend_blackjack_crate";
+    case #"loot_crate":
+    case #"loot_crate_open":
+      var_ce1b87cf = #"scene_frontend_blackjack_crate";
 
       if(state == "loot_crate_open") {
         var_f56984dc = "crateidle";
@@ -167,7 +168,7 @@ function_f559e439(localclientnum, menu_data, state) {
         }
 
         level.s_blackmarket.lastcontainer = "loot_crate";
-        var_ac97b37c = # "loot_crate";
+        var_ac97b37c = #"loot_crate";
       }
 
       break;
@@ -192,10 +193,10 @@ function_f559e439(localclientnum, menu_data, state) {
 
     if(isDefined(var_f56984dc) && var_f56984dc == "crate") {
       if(isDefined(level.s_blackmarket.var_760cf00) && level.s_blackmarket.var_760cf00) {
-        playSound(localclientnum, # "hash_33e04aad46568336");
+        playSound(localclientnum, #"hash_33e04aad46568336");
       }
 
-      playSound(localclientnum, # "hash_548f0d33e630e71a");
+      playSound(localclientnum, #"hash_548f0d33e630e71a");
     }
   } else {
     level.s_blackmarket.var_6b569619 = undefined;
@@ -236,23 +237,23 @@ function_fa73161a(localclientnum, menu_data, state) {
   }
 
   level notify(#"hash_6cbadb6c7bbdc5f");
-  level endoncallback(&function_c3fc514, # "hash_6cbadb6c7bbdc5f", # "hash_7440f3772cbdc5b1");
+  level endoncallback(&function_c3fc514, #"hash_6cbadb6c7bbdc5f", #"hash_7440f3772cbdc5b1");
   level scene_stop(level.s_blackmarket.var_82406a05, 1, localclientnum);
 
   if(isDefined(level.s_blackmarket.var_46d8e7d1) && level.s_blackmarket.var_46d8e7d1) {
     if(!(isDefined(level.s_blackmarket.var_760cf00) && level.s_blackmarket.var_760cf00)) {
       switch (hash(state)) {
         default:
-          level.s_blackmarket.var_82406a05 = # "cin_black_market_greeting";
+          level.s_blackmarket.var_82406a05 = #"cin_black_market_greeting";
           break;
-        case # "welcome_case_avail":
-          level.s_blackmarket.var_82406a05 = # "cin_black_market_case_avail";
+        case #"welcome_case_avail":
+          level.s_blackmarket.var_82406a05 = #"cin_black_market_case_avail";
           break;
-        case # "welcome_case_multi":
-          level.s_blackmarket.var_82406a05 = # "cin_black_market_mult_case";
+        case #"welcome_case_multi":
+          level.s_blackmarket.var_82406a05 = #"cin_black_market_mult_case";
           break;
-        case # "welcome_case_special":
-          level.s_blackmarket.var_82406a05 = # "cin_black_market_spec_offer";
+        case #"welcome_case_special":
+          level.s_blackmarket.var_82406a05 = #"cin_black_market_spec_offer";
           break;
       }
 
@@ -262,9 +263,9 @@ function_fa73161a(localclientnum, menu_data, state) {
       level.s_blackmarket.var_760cf00 = 1;
     }
 
-    level.s_blackmarket.var_82406a05 = # "cin_black_market_welcome";
+    level.s_blackmarket.var_82406a05 = #"cin_black_market_welcome";
   } else {
-    level.s_blackmarket.var_82406a05 = # "cin_black_market_not_welcome";
+    level.s_blackmarket.var_82406a05 = #"cin_black_market_not_welcome";
   }
 
   while(true) {
@@ -290,7 +291,7 @@ function_feaafe07(localclientnum, state) {
   var_24282d8c = [];
 
   switch (hash(state)) {
-    case # "loot_case":
+    case #"loot_case":
       if(!isDefined(var_24282d8c)) {
         var_24282d8c = [];
       } else if(!isarray(var_24282d8c)) {
@@ -302,7 +303,7 @@ function_feaafe07(localclientnum, state) {
       }
 
       break;
-    case # "loot_crate":
+    case #"loot_crate":
       if(!isDefined(var_24282d8c)) {
         var_24282d8c = [];
       } else if(!isarray(var_24282d8c)) {
@@ -341,10 +342,10 @@ function_2f3c1d65(localclientnum, menu_data, state) {
   }
 
   switch (hash(state)) {
-    case # "loot_case":
+    case #"loot_case":
       function_f559e439(localclientnum, menu_data, "loot_case_open");
       break;
-    case # "loot_crate":
+    case #"loot_crate":
       function_f559e439(localclientnum, menu_data, "loot_crate_open");
       break;
   }

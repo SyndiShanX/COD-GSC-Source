@@ -18,7 +18,7 @@
 #namespace zm_weap_shrink_ray;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_shrink_ray", &__init__, &__main__, undefined);
+  system::register("zm_weap_shrink_ray", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -30,16 +30,18 @@ function __init__() {
   level._effect["shrink_ray_stepped_on_no_gore"] = "dlc5/temple/fx_ztem_monkey_shrink";
   level._effect["shrink"] = "dlc5/zmb_weapon/fx_shrink_ray_zombie_shrink";
   level._effect["unshrink"] = "dlc5/zmb_weapon/fx_shrink_ray_zombie_unshrink";
-  callback::on_spawned(&function_37ce705e);
+  callback::on_spawned( & function_37ce705e);
   level.var_c50bd012 = [];
   level.w_shrink_ray = getweapon("shrink_ray");
   level.w_shrink_ray_upgraded = getweapon("shrink_ray_upgraded");
-  zm::register_player_damage_callback(&function_19171a77);
+  zm::register_player_damage_callback( & function_19171a77);
 }
 
 function __main__() {
-  if(isDefined(level.shrink_ray_model_mapping_func)) {
-    [[level.shrink_ray_model_mapping_func]]();
+  if(isdefined(level.shrink_ray_model_mapping_func)) {
+    [
+      [level.shrink_ray_model_mapping_func]
+    ]();
   }
 }
 
@@ -52,7 +54,7 @@ function remove_shrinkable_object(ent) {
 }
 
 function function_ebf92008() {
-  while(true) {
+  while (true) {
     level.var_1b24c8b0 = 0;
     util::wait_network_frame();
   }
@@ -60,7 +62,7 @@ function function_ebf92008() {
 
 function function_37ce705e() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("weapon_fired");
     currentweapon = self getcurrentweapon();
     if(currentweapon == level.w_shrink_ray || currentweapon == level.w_shrink_ray_upgraded) {
@@ -70,8 +72,8 @@ function function_37ce705e() {
 }
 
 function function_19171a77(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, w_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(isDefined(e_inflictor)) {
-    if(isDefined(e_inflictor.shrinked) && e_inflictor.shrinked) {
+  if(isdefined(e_inflictor)) {
+    if(isdefined(e_inflictor.shrinked) && e_inflictor.shrinked) {
       return 5;
     }
   }
@@ -83,7 +85,7 @@ function function_fe7a4182(upgraded) {
   objects = function_66ab6f95(upgraded, 1);
   zombies = arraycombine(zombies, objects, 1, 0);
   var_744b41f1 = 1000;
-  for(i = 0; i < zombies.size && i < var_744b41f1; i++) {
+  for (i = 0; i < zombies.size && i < var_744b41f1; i++) {
     if(isai(zombies[i])) {
       zombies[i] thread shrink_zombie(upgraded, self);
       continue;
@@ -99,31 +101,31 @@ function function_20c24bab(upgraded, player) {
 }
 
 function function_9af5d92d(upgraded, attacker) {
-  if(isDefined(self.shrinked) && self.shrinked) {
+  if(isdefined(self.shrinked) && self.shrinked) {
     return;
   }
   self.shrinked = 1;
   var_36333499 = self getattachsize();
-  for(i = var_36333499 - 1; i >= 0; i--) {
+  for (i = var_36333499 - 1; i >= 0; i--) {
     model = self getattachmodelname(i);
     self detach(model);
     var_89a773f5 = level.shrink_models[model];
-    if(isDefined(var_89a773f5)) {
+    if(isdefined(var_89a773f5)) {
       self attach(var_89a773f5);
     }
   }
   var_87aa5c26 = level.shrink_models[self.model];
-  if(isDefined(var_87aa5c26)) {
-    self setModel(var_87aa5c26);
+  if(isdefined(var_87aa5c26)) {
+    self setmodel(var_87aa5c26);
   }
 }
 
 function shrink_zombie(upgraded, attacker) {
   self endon("death");
-  if(isDefined(self.shrinked) && self.shrinked) {
+  if(isdefined(self.shrinked) && self.shrinked) {
     return;
   }
-  if(!isDefined(self.var_bb09c29a)) {
+  if(!isdefined(self.var_bb09c29a)) {
     self.var_bb09c29a = 0;
   }
   var_50d1f39 = 2.5;
@@ -165,17 +167,17 @@ function shrink_zombie(upgraded, attacker) {
   self.shrinked = 1;
   self.var_2209ea1b = attacker;
   self.kill_on_wine_coccon = 1;
-  if(!isDefined(attacker.shrinked_zombies)) {
+  if(!isdefined(attacker.shrinked_zombies)) {
     attacker.shrinked_zombies = [];
   }
-  if(!isDefined(attacker.shrinked_zombies[self.animname])) {
+  if(!isdefined(attacker.shrinked_zombies[self.animname])) {
     attacker.shrinked_zombies[self.animname] = 0;
   }
   attacker.shrinked_zombies[self.animname]++;
   var_cd13f0ff = self.model;
   health = self.health;
-  if(isDefined(self.animname) && self.animname == "monkey_zombie") {
-    if(isDefined(self.shrink_ray_fling)) {
+  if(isdefined(self.animname) && self.animname == "monkey_zombie") {
+    if(isdefined(self.shrink_ray_fling)) {
       self[[self.shrink_ray_fling]](attacker);
     } else {
       fling_range_squared = level.zombie_vars["shrink_ray_fling_range"] * level.zombie_vars["shrink_ray_fling_range"];
@@ -194,7 +196,7 @@ function shrink_zombie(upgraded, attacker) {
     if(self function_f23d2379()) {
       self function_6140a171(attacker);
     } else {
-      self playSound("evt_shrink");
+      self playsound("evt_shrink");
       self.var_2209ea1b thread zm_audio::create_and_play_dialog("kill", "shrink");
       self thread function_259d2f7a("shrink", "J_MainRoot");
       var_939fbc94 = self.meleedamage;
@@ -205,10 +207,10 @@ function shrink_zombie(upgraded, attacker) {
       attachedtags = [];
       hatmodel = self.hatmodel;
       var_36333499 = self getattachsize();
-      for(i = var_36333499 - 1; i >= 0; i--) {
+      for (i = var_36333499 - 1; i >= 0; i--) {
         model = self getattachmodelname(i);
         tag = self getattachtagname(i);
-        var_4f32ff14 = isDefined(self.hatmodel) && self.hatmodel == model;
+        var_4f32ff14 = isdefined(self.hatmodel) && self.hatmodel == model;
         if(var_4f32ff14) {
           self.hatmodel = undefined;
         }
@@ -216,7 +218,7 @@ function shrink_zombie(upgraded, attacker) {
         attachedtags[attachedtags.size] = tag;
         self detach(model);
         var_89a773f5 = level.shrink_models[model];
-        if(isDefined(var_89a773f5)) {
+        if(isdefined(var_89a773f5)) {
           self attach(var_89a773f5);
           if(var_4f32ff14) {
             self.hatmodel = var_89a773f5;
@@ -224,8 +226,8 @@ function shrink_zombie(upgraded, attacker) {
         }
       }
       var_87aa5c26 = level.shrink_models[self.model];
-      if(isDefined(var_87aa5c26)) {
-        self setModel(var_87aa5c26);
+      if(isdefined(var_87aa5c26)) {
+        self setmodel(var_87aa5c26);
       }
       if(!self.missinglegs) {
         self setphysparams(8, -2, 32);
@@ -239,29 +241,29 @@ function shrink_zombie(upgraded, attacker) {
       self thread function_6d284e94();
       self thread function_643fa9c8();
       self thread watch_for_death();
-      self.zombie_board_tear_down_callback = &function_8b44a1f8;
-      if(isDefined(self._zombie_shrink_callback)) {
+      self.zombie_board_tear_down_callback = & function_8b44a1f8;
+      if(isdefined(self._zombie_shrink_callback)) {
         self[[self._zombie_shrink_callback]]();
       }
       wait(var_50d1f39);
-      self playSound("evt_unshrink");
+      self playsound("evt_unshrink");
       self thread function_259d2f7a("unshrink", "J_MainRoot");
       wait(0.5);
       self.zombie_board_tear_down_callback = undefined;
-      if(isDefined(self._zombie_unshrink_callback)) {
+      if(isdefined(self._zombie_unshrink_callback)) {
         self[[self._zombie_unshrink_callback]]();
       }
       var_36333499 = self getattachsize();
-      for(i = var_36333499 - 1; i >= 0; i--) {
+      for (i = var_36333499 - 1; i >= 0; i--) {
         model = self getattachmodelname(i);
         tag = self getattachtagname(i);
         self detach(model);
       }
       self.hatmodel = hatmodel;
-      for(i = 0; i < attachedmodels.size; i++) {
+      for (i = 0; i < attachedmodels.size; i++) {
         self attach(attachedmodels[i]);
       }
-      self setModel(var_cd13f0ff);
+      self setmodel(var_cd13f0ff);
       if(!self.missinglegs) {
         self setphysparams(15, 0, 72);
       } else {
@@ -284,13 +286,13 @@ function shrink_zombie(upgraded, attacker) {
 }
 
 function function_f23d2379() {
-  if(isDefined(self getlinkedent())) {
+  if(isdefined(self getlinkedent())) {
     return true;
   }
-  if(isDefined(self.sliding) && self.sliding) {
+  if(isdefined(self.sliding) && self.sliding) {
     return true;
   }
-  if(isDefined(self.in_the_ceiling) && self.in_the_ceiling) {
+  if(isdefined(self.in_the_ceiling) && self.in_the_ceiling) {
     return true;
   }
   return false;
@@ -302,14 +304,14 @@ function function_6d284e94() {
   self endon("kicked");
   self endon("death");
   wait(randomfloatrange(0.2, 0.5));
-  while(true) {
-    self playSound("zmb_mini_ambient");
+  while (true) {
+    self playsound("zmb_mini_ambient");
     wait(randomfloatrange(1, 2.25));
   }
 }
 
 function function_259d2f7a(fxname, jointname, offset) {
-  playFXOnTag(level._effect[fxname], self, "tag_origin");
+  playfxontag(level._effect[fxname], self, "tag_origin");
 }
 
 function function_206493fd(alias) {
@@ -328,15 +330,15 @@ function function_643fa9c8() {
   self.var_f0dec186 linkto(self);
   self.var_f0dec186 thread function_2c318bd(self);
   self.var_f0dec186 endon("death");
-  while(true) {
+  while (true) {
     self.var_f0dec186 waittill("trigger", who);
     if(!isplayer(who)) {
       continue;
     }
-    if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
+    if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
       continue;
     }
-    if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+    if(isdefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
       continue;
     }
     movement = who getnormalizedmovement();
@@ -346,7 +348,7 @@ function function_643fa9c8() {
     toenemy = self.origin - who.origin;
     toenemy = (toenemy[0], toenemy[1], 0);
     toenemy = vectornormalize(toenemy);
-    forward_view_angles = anglesToForward(who.angles);
+    forward_view_angles = anglestoforward(who.angles);
     var_884fd8ec = vectordot(forward_view_angles, toenemy);
     if(var_884fd8ec > 0.5 && movement[0] > 0) {
       self notify("kicked");
@@ -374,7 +376,7 @@ function watch_for_death() {
 }
 
 function function_12c1fddf(v_launch) {
-  if(!isDefined(level.var_6d0abb4c)) {
+  if(!isdefined(level.var_6d0abb4c)) {
     level.var_6d0abb4c = 0;
   }
   if(level.var_6d0abb4c < 5) {
@@ -392,7 +394,7 @@ function function_867ec02b(killer) {
   self thread function_9ac50518();
   kickangles = killer.angles;
   kickangles = kickangles + (randomfloatrange(-30, -20), randomfloatrange(-5, 5), 0);
-  launchdir = anglesToForward(kickangles);
+  launchdir = anglestoforward(kickangles);
   if(killer issprinting()) {
     launchforce = randomfloatrange(350, 400);
   } else {
@@ -406,13 +408,13 @@ function function_867ec02b(killer) {
   util::wait_network_frame();
   killer thread zm_audio::create_and_play_dialog("kill", "shrunken");
   self dodamage(self.health + 666, self.origin, killer);
-  if(isDefined(self.var_f0dec186)) {
+  if(isdefined(self.var_f0dec186)) {
     self.var_f0dec186 delete();
   }
 }
 
 function function_9ac50518() {
-  if(!isDefined(level.var_1b24c8b0)) {
+  if(!isdefined(level.var_1b24c8b0)) {
     level thread function_ebf92008();
   }
   if(level.var_1b24c8b0 > 3) {
@@ -427,12 +429,12 @@ function function_6140a171(killer) {
   if(level flag::get("world_is_paused")) {
     self setignorepauseworld(1);
   }
-  playFX(level._effect["shrink_ray_stepped_on_no_gore"], self.origin);
+  playfx(level._effect["shrink_ray_stepped_on_no_gore"], self.origin);
   self thread zombie_utility::zombie_eye_glow_stop();
   util::wait_network_frame();
   self hide();
   self dodamage(self.health + 666, self.origin, killer);
-  if(isDefined(self.var_f0dec186)) {
+  if(isdefined(self.var_f0dec186)) {
     self.var_f0dec186 delete();
   }
 }
@@ -454,7 +456,7 @@ function function_66ab6f95(upgraded, var_5eafa9ab) {
     test_list = getaispeciesarray(level.zombie_team, "all");
   }
   zombies = util::get_array_of_closest(view_pos, test_list, undefined, undefined, range * 1.1);
-  if(!isDefined(zombies)) {
+  if(!isdefined(zombies)) {
     return;
   }
   range_squared = range * range;
@@ -467,15 +469,15 @@ function function_66ab6f95(upgraded, var_5eafa9ab) {
     line(near_circle_pos, end_pos, (0, 0, 1), 1, 0, 100);
     circle(end_pos, radius, (1, 0, 0), 0, 0, 100);
   }
-  for(i = 0; i < zombies.size; i++) {
-    if(!isDefined(zombies[i]) || (isai(zombies[i]) && !isalive(zombies[i]))) {
+  for (i = 0; i < zombies.size; i++) {
+    if(!isdefined(zombies[i]) || (isai(zombies[i]) && !isalive(zombies[i]))) {
       continue;
     }
-    if(isDefined(zombies[i].shrinked) && zombies[i].shrinked) {
+    if(isdefined(zombies[i].shrinked) && zombies[i].shrinked) {
       zombies[i] function_9ae4cf1b("shrinked", (1, 0, 0));
       continue;
     }
-    if(isDefined(zombies[i].no_shrink) && zombies[i].no_shrink) {
+    if(isdefined(zombies[i].no_shrink) && zombies[i].no_shrink) {
       zombies[i] function_9ae4cf1b("no_shrink", (1, 0, 0));
       continue;
     }
@@ -509,7 +511,7 @@ function function_9ae4cf1b(msg, color) {
   if(!getdvarint("")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
   print3d(self.origin + vectorscale((0, 0, 1), 60), msg, color, 1, 1, 40);
@@ -518,7 +520,7 @@ function function_9ae4cf1b(msg, color) {
 function function_8b44a1f8() {
   self endon("death");
   self endon("unshrink");
-  while(true) {
+  while (true) {
     taunt_anim = array::random(level._zombie_board_taunt["zombie"]);
   }
 }

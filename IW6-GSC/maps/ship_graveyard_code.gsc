@@ -62,17 +62,16 @@ tutorial_player_recover() {
     wait 2;
     thread maps\ship_graveyard_util::track_hint_down();
 
-    if(level.console || level.player usinggamepad()) {
+    if(level.console || level.player usinggamepad())
       thread maps\_utility::display_hint_timeout("hint_down_gamepad", 4);
-    } else if(maps\_utility::is_command_bound("+togglecrouch")) {
+    else if(maps\_utility::is_command_bound("+togglecrouch"))
       thread maps\_utility::display_hint_timeout("hint_down_crouch", 4);
-    } else if(maps\_utility::is_command_bound("+stance")) {
+    else if(maps\_utility::is_command_bound("+stance"))
       thread maps\_utility::display_hint_timeout("hint_down_stance", 4);
-    } else if(maps\_utility::is_command_bound("+movedown")) {
+    else if(maps\_utility::is_command_bound("+movedown"))
       thread maps\_utility::display_hint_timeout("hint_down_hold_crouch", 4);
-    } else {
+    else
       thread maps\_utility::display_hint_timeout("hint_down_crouch", 4);
-    }
   }
 
   maps\_utility::trigger_wait_targetname("exit_tiny_cave");
@@ -371,9 +370,9 @@ a1_patrol_1_setup() {
   self endon("death");
   self endon("_stealth_spotted");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "jumper") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "jumper")
     self waittill("done_jumping_in");
-  } else {
+  else {
     thread maps\ship_graveyard_util::paired_death_think(level.baker);
     maps\ship_graveyard_util::teleport_to_target();
     return;
@@ -391,9 +390,8 @@ a1_patrol_1_setup() {
     maps\_utility::follow_path_and_animate(var_0, 0);
     wait 2;
 
-    while(level.player maps\_utility::player_looking_at(self.origin + (0, 0, 50), 0.7)) {
+    while(level.player maps\_utility::player_looking_at(self.origin + (0, 0, 50), 0.7))
       common_scripts\utility::waitframe();
-    }
 
     self delete();
   } else {
@@ -507,11 +505,10 @@ wreck_hint_up() {
   }
   thread maps\ship_graveyard_util::track_hint_up();
 
-  if(level.console || level.player usinggamepad()) {
+  if(level.console || level.player usinggamepad())
     thread maps\_utility::display_hint_timeout("hint_up_gamepad", 4);
-  } else {
+  else
     thread maps\_utility::display_hint_timeout("hint_up_stand", 4);
-  }
 }
 
 wreck_spotted_reaction() {
@@ -519,23 +516,20 @@ wreck_spotted_reaction() {
   level endon("stop_for_e3");
   common_scripts\utility::flag_wait("_stealth_spotted");
 
-  if(!common_scripts\utility::flag("spotted_at_wreck")) {
+  if(!common_scripts\utility::flag("spotted_at_wreck"))
     thread maps\_utility::smart_radio_dialogue_interrupt("shipg_bkr_ontous");
-  }
 
   level.baker stopanimscripted();
   level.baker notify("stop_loop");
 
-  if(isDefined(level.baker.my_animnode)) {
+  if(isDefined(level.baker.my_animnode))
     level.baker.my_animnode notify("stop_loop");
-  }
 
   common_scripts\utility::flag_waitopen("_stealth_spotted");
   common_scripts\utility::flag_set("move_to_stealth_1");
 
-  if(maps\ship_graveyard_util::greenlight_check()) {
+  if(maps\ship_graveyard_util::greenlight_check())
     greenlight_skip();
-  }
 
   maps\_utility::smart_radio_dialogue("shipg_bkr_areaclear");
   wait 0.5;
@@ -637,9 +631,8 @@ baker_quip_on_death() {
   if(!maps\ship_graveyard_util::greenlight_check()) {
     level.baker.baseaccuracy = level.baker.oldbaseaccuracy;
 
-    if(isDefined(self)) {
+    if(isDefined(self))
       wait 1.5;
-    }
 
     var_1 = getaiarray("axis");
 
@@ -660,11 +653,10 @@ delete_on_path_end() {
   self waittill("path_end_reached");
   var_0 = level.player maps\_utility::player_looking_at(self.origin + (0, 0, -100), 0.7);
 
-  if(!var_0) {
+  if(!var_0)
     self delete();
-  } else {
+  else
     self notify("kill_me");
-  }
 
   common_scripts\utility::flag_set("move_to_stealth_1");
 }
@@ -691,9 +683,8 @@ stealth_1_encounter() {
   var_0 = common_scripts\utility::array_add(var_0, var_1);
   level endon("start_stealth_area_2");
 
-  while(getaiarray("axis").size > 0) {
+  while(getaiarray("axis").size > 0)
     wait 0.05;
-  }
 
   level notify("stealth_1_done");
   wait 1;
@@ -757,9 +748,8 @@ stealth_1_spotted_cleanup() {
   var_1 = getaiarray("axis");
 
   foreach(var_3 in var_1) {
-    if(distance2d(var_3.origin, var_0) < 700) {
+    if(distance2d(var_3.origin, var_0) < 700)
       var_3 kill();
-    }
   }
 }
 
@@ -814,9 +804,8 @@ stealth_2_encounter() {
   wait 0.5;
   thread stealth_2_movement();
 
-  while(getaiarray("axis").size > 0) {
+  while(getaiarray("axis").size > 0)
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("clear_to_enter_cave");
   wait 2;
@@ -867,9 +856,8 @@ stealth_2_spotted() {
   maps\_utility::delaythread(3, maps\_utility::smart_radio_dialogue_interrupt, "shipg_bkr_knowwerehere");
   maps\_utility::array_spawn_targetname("stealth_2_backup");
 
-  while(getaiarray("axis").size > 2) {
+  while(getaiarray("axis").size > 2)
     wait 0.05;
-  }
 
   var_0 = getaiarray("axis");
   common_scripts\utility::array_call(var_0, ::setgoalentity, level.player);
@@ -908,9 +896,8 @@ delay_drop_boat() {
 
   if(!common_scripts\utility::flag("clear_to_enter_cave")) {
     foreach(var_1 in level.middle_boat.balloons) {
-      if(isDefined(var_1) && isDefined(var_1.collision)) {
+      if(isDefined(var_1) && isDefined(var_1.collision))
         var_1.collision notify("pop");
-      }
     }
   }
 }
@@ -931,9 +918,8 @@ stealth_2_middle_boat_think() {
       continue;
     }
 
-    if(var_6.script_parameters == "target_pos") {
+    if(var_6.script_parameters == "target_pos")
       var_3 = var_6;
-    }
   }
 
   level.middle_boat.balloons = var_2;
@@ -948,9 +934,8 @@ stealth_2_middle_boat_think() {
   if(!common_scripts\utility::flag("_stealth_spotted")) {
     var_9 = getaiarray("axis");
 
-    foreach(var_11 in var_9) {
-      var_11.favoriteenemy = level.player;
-    }
+    foreach(var_11 in var_9)
+    var_11.favoriteenemy = level.player;
   }
 
   var_0 connectpaths();
@@ -976,14 +961,12 @@ middle_boat_balloon_think(var_0) {
   var_1 = self.collision common_scripts\utility::waittill_any_return("damage", "pop");
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && isDefined(var_3.collision)) {
+    if(isDefined(var_3) && isDefined(var_3.collision))
       var_3.collision notify("pop");
-    }
   }
 
-  if(isDefined(var_1) && var_1 != "damage") {
+  if(isDefined(var_1) && var_1 != "damage")
     wait(randomfloatrange(0.2, 0.4));
-  }
 
   playFX(common_scripts\utility::getfx("shpg_underwater_bubble_explo"), self.origin);
   level notify("middle_boat_pop");
@@ -1075,9 +1058,8 @@ cave_dialogue_2() {
   maps\_utility::smart_radio_dialogue("shipg_bkr_wilco");
   wait 1;
 
-  while(distance(level.baker.origin, level.weld_use_trigger.origin) > 1000) {
+  while(distance(level.baker.origin, level.weld_use_trigger.origin) > 1000)
     wait 0.25;
-  }
 
   maps\_utility::smart_radio_dialogue("shipg_hsh_aintnowaywe");
   wait 0.5;
@@ -1113,16 +1095,14 @@ cave_shake(var_0, var_1, var_2) {
   wait 0.2;
   earthquake(var_0, randomfloatrange(0.5, 1), level.player.origin, 1024);
 
-  if(isDefined(var_2) && var_1.size > 0) {
+  if(isDefined(var_2) && var_1.size > 0)
     thread common_scripts\utility::play_sound_in_space(var_2, var_1[0].origin);
-  }
 
   foreach(var_5 in var_1) {
     if(maps\_utility::within_fov_2d(level.player.origin, level.player.angles, var_5.origin, 0.6)) {
       if(common_scripts\utility::cointoss()) {
-        if(!isDefined(var_5.script_fxid)) {
+        if(!isDefined(var_5.script_fxid))
           var_5.script_fxid = "cave_ceiling_silt_knockoff";
-        }
 
         var_6 = randomfloatrange(0, 2.5);
         maps\_utility::delaythread(var_6, common_scripts\utility::play_sound_in_space, "cave_debris", var_5.origin);
@@ -1223,9 +1203,8 @@ baker_weld_door() {
   var_1 maps\_anim::anim_first_frame(var_7, "weld_breach");
   common_scripts\utility::flag_wait("end_of_cave_path");
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     thread maps\_utility::lerp_saveddvar("r_tessellationFactor", 15, 8);
-  }
 
   var_1 maps\_anim::anim_reach_solo(level.baker, "weld_approach");
   level.baker notify("start_weld");
@@ -1255,9 +1234,9 @@ baker_weld_door() {
   var_17 thread maps\ship_graveyard_fx::weld_breach_fx(var_14, "_npc");
   maps\_utility::delaythread(1, ::player_approach_weld, var_1, var_11, var_12, var_2, var_13, var_15);
 
-  if(!maps\ship_graveyard_util::greenlight_check()) {
+  if(!maps\ship_graveyard_util::greenlight_check())
     var_1 maps\_anim::anim_single([level.baker, var_3, var_2, var_14, var_5], "weld_approach");
-  } else {
+  else {
     var_18 = level.baker maps\_utility::getanim("weld_approach");
     var_19 = var_3 maps\_utility::getanim("weld_approach");
     var_20 = var_2 maps\_utility::getanim("weld_approach");
@@ -1293,9 +1272,8 @@ baker_weld_door() {
   var_4 thread door_l_modelswap(var_2);
   var_1 maps\_anim::anim_single([var_3, var_2, var_11, var_15, var_14], "weld_breach");
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     thread maps\_utility::lerp_saveddvar("r_tessellationFactor", 60, 8);
-  }
 
   common_scripts\utility::flag_set("welding_done");
   level.player unlink();
@@ -1311,24 +1289,20 @@ baker_weld_door() {
   maps\_utility::autosave_by_name("sonar");
   common_scripts\utility::flag_wait("start_new_trench");
 
-  foreach(var_10 in var_2.brushes) {
-    var_10 delete();
-  }
+  foreach(var_10 in var_2.brushes)
+  var_10 delete();
 
-  foreach(var_10 in var_3.brushes) {
-    var_10 delete();
-  }
+  foreach(var_10 in var_3.brushes)
+  var_10 delete();
 
   var_2 delete();
   var_3 delete();
 
-  foreach(var_10 in var_8) {
-    var_10 delete();
-  }
+  foreach(var_10 in var_8)
+  var_10 delete();
 
-  foreach(var_10 in var_7) {
-    var_10 delete();
-  }
+  foreach(var_10 in var_7)
+  var_10 delete();
 
   var_7 = undefined;
   var_4 delete();
@@ -1439,9 +1413,8 @@ first_sonar_ping() {
   level.player allowsprint(1);
   thread maps\ship_graveyard_util::track_hint_sprint();
 
-  if(!maps\ship_graveyard_util::greenlight_check()) {
+  if(!maps\ship_graveyard_util::greenlight_check())
     thread maps\_utility::display_hint_timeout("hint_sprint", 4);
-  }
 
   common_scripts\utility::flag_set("start_sonar_pings");
 }
@@ -1492,9 +1465,8 @@ baker_sonar_path_dialogue() {
   maps\_utility::smart_radio_dialogue("shipg_bkr_gettocover");
   wait 5;
 
-  if(player_safe_from_sonar()) {
+  if(player_safe_from_sonar())
     maps\_utility::autosave_by_name("sonar");
-  }
 
   maps\_utility::smart_radio_dialogue("shipg_bkr_cannotengage");
   wait 0.7;
@@ -1556,9 +1528,8 @@ weaponized_sonar_pings() {
     level.player shellshock("sonar_ping", 6);
     var_1 = 200;
 
-    if(level.gameskill > 1) {
+    if(level.gameskill > 1)
       var_1 = 100;
-    }
 
     level.player dodamage(var_1, level.player.origin);
 
@@ -1569,25 +1540,22 @@ weaponized_sonar_pings() {
 
     level.sonar_times_hit++;
 
-    if(level.sonar_times_hit > 1) {
+    if(level.sonar_times_hit > 1)
       level.player kill();
-    }
 
     wait 4;
   }
 }
 
 player_safe_from_sonar() {
-  if(common_scripts\utility::flag("torpedo_out")) {
+  if(common_scripts\utility::flag("torpedo_out"))
     return 1;
-  }
 
   var_0 = getEntArray("sonar_safe_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-    if(level.player istouching(var_2)) {
+    if(level.player istouching(var_2))
       return 1;
-    }
   }
 
   return 0;
@@ -1597,9 +1565,8 @@ sonar_safe_trigger_think() {
   for(;;) {
     self waittill("trigger");
 
-    if(isDefined(self.script_index)) {
+    if(isDefined(self.script_index))
       level.sonar_exploder = self.script_index;
-    }
 
     wait 0.5;
   }
@@ -1614,9 +1581,8 @@ sonar_fire_trigger_think() {
 sonar_movers() {
   var_0 = getEntArray("sonar_ping_mover", "targetname");
 
-  foreach(var_2 in var_0) {
-    var_2 thread sonar_mover_think();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread sonar_mover_think();
 }
 
 sonar_wreck_think() {
@@ -1625,15 +1591,13 @@ sonar_wreck_think() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_3 = getglassarray("lighthouse_glass");
 
-  foreach(var_5 in var_3) {
-    deleteglass(var_5);
-  }
+  foreach(var_5 in var_3)
+  deleteglass(var_5);
 
   var_7 = getEntArray("sonar_big_wreck_d", "targetname");
 
-  foreach(var_9 in var_7) {
-    var_9 linkto(var_1);
-  }
+  foreach(var_9 in var_7)
+  var_9 linkto(var_1);
 
   var_2.target = "sonar_wreck_move";
   var_2.origin = var_0.origin;
@@ -1654,9 +1618,8 @@ sonar_wreck_think() {
   level.sonar_wreck.mover = var_2;
   var_11 = [];
 
-  for(var_12 = 0; var_12 < var_7.size; var_12++) {
+  for(var_12 = 0; var_12 < var_7.size; var_12++)
     var_11[var_12] = [];
-  }
 
   foreach(var_9 in var_7) {
     var_11[var_9.script_index] = common_scripts\utility::array_add(var_11[var_9.script_index], var_9);
@@ -1748,30 +1711,26 @@ sonar_mover_think() {
     common_scripts\utility::array_call(self.linked, ::linkto, self);
     self.done_linking = 1;
 
-    if(!isDefined(self.script_wait)) {
+    if(!isDefined(self.script_wait))
       self.script_wait = 0.75;
-    }
 
-    if(!isDefined(self.script_radius)) {
+    if(!isDefined(self.script_radius))
       self.script_radius = 400;
-    }
   }
 
   maps\_utility::script_delay();
   var_0 = common_scripts\utility::get_target_ent();
   var_1 = var_0;
 
-  if(isDefined(var_0.target)) {
+  if(isDefined(var_0.target))
     var_1 = var_0 common_scripts\utility::get_target_ent();
-  }
 
   var_2 = self.origin;
   var_3 = self.angles;
   var_4 = self.script_wait;
 
-  if(var_1 != var_0) {
+  if(var_1 != var_0)
     thread common_scripts\utility::play_sound_in_space(var_1.script_sound, var_1.origin);
-  }
 
   thread common_scripts\utility::play_sound_in_space("metal_sonar_hit", self.origin);
   self moveto(var_0.origin, var_4, 0, var_4);
@@ -1904,9 +1863,8 @@ sonar_boat_audio(var_0) {
   var_5 playLoopSound("scn_sub_prop_r_lp");
   thread scale_lcs_audio_fade(var_1, var_2, var_3, var_4, var_5);
 
-  while(!isDefined(level.sonar_boat)) {
+  while(!isDefined(level.sonar_boat))
     wait 0.1;
-  }
 
   level.sonar_boat vehicle_turnengineoff();
   var_1 linkto(level.sonar_boat, "tag_splash_front", (0, 0, 0), (0, 0, 0));
@@ -1988,9 +1946,8 @@ sonar_boat_audio_e3(var_0) {
   if(level.start_point != "start_sonar" && level.start_point != "start_sonar_mines" && level.start_point != "e3") {
     return;
   }
-  while(!isDefined(level.sonar_boat)) {
+  while(!isDefined(level.sonar_boat))
     common_scripts\utility::waitframe();
-  }
 
   self vehicle_turnengineoff();
   var_1 = common_scripts\utility::spawn_tag_origin();
@@ -2159,9 +2116,8 @@ torpedo_the_ship() {
   wait(var_7);
   var_1 notify("stop_loop");
 
-  while(getdvarint("debug_torpedo", 0)) {
+  while(getdvarint("debug_torpedo", 0))
     wait 0.05;
-  }
 
   level notify("fire_torpedo");
   level waittill("exit_torpedo", var_8);
@@ -2179,9 +2135,8 @@ torpedo_the_ship() {
     wait 1.772;
     thread maps\_utility::smart_radio_dialogue_interrupt("shipg_bkr_nicework");
 
-    if(getdvarint("shpg_torpedo_tries", 0) == 0) {
+    if(getdvarint("shpg_torpedo_tries", 0) == 0)
       level.player maps\_utility::player_giveachievement_wrapper("LEVEL_12A");
-    }
   } else {
     wait 0.5;
     maps\ship_graveyard_util::force_deathquote(&"SHIP_GRAVEYARD_HINT_TORPEDO");
@@ -2196,15 +2151,13 @@ watch_if_used() {
 }
 
 torpedo_drillbit_audio() {
-  while(level.player.disabledweapon) {
+  while(level.player.disabledweapon)
     common_scripts\utility::waitframe();
-  }
 
   var_0 = 68;
 
-  for(var_1 = 0; var_1 < var_0; var_1++) {
+  for(var_1 = 0; var_1 < var_0; var_1++)
     common_scripts\utility::waitframe();
-  }
 
   level.sound_torpedo_ent = spawn("script_origin", level.player getEye());
   level.sound_torpedo_ent playLoopSound("scn_shipg_torpedo_drillbit_loop");
@@ -2265,9 +2218,8 @@ mine_explode_think() {
   self waittill("explode");
   playFX(common_scripts\utility::getfx("shpg_underwater_explosion_med_a"), self.origin + (0, 0, 646));
 
-  if(level.water_level_z - 120 - 686 - self.origin[2] < 10) {
+  if(level.water_level_z - 120 - 686 - self.origin[2] < 10)
     playFX(common_scripts\utility::getfx("underwater_surface_splash"), self.origin + (0, 0, 646));
-  }
 
   playFX(common_scripts\utility::getfx("shpg_underwater_explosion_med_a"), self.origin + (0, 0, 646));
   thread common_scripts\utility::play_sound_in_space("underwater_explosion", self.origin + (0, 0, 646));
@@ -2548,9 +2500,8 @@ depth_charges() {
   common_scripts\utility::flag_wait("depth_charge_run_start");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0) {
-    var_2.baseaccuracy = 0.01;
-  }
+  foreach(var_2 in var_0)
+  var_2.baseaccuracy = 0.01;
 
   maps\_utility::delaythread(2, ::depth_charges_near_player);
   thread depth_charge_dialogue();
@@ -2575,9 +2526,8 @@ depth_charges() {
   level.baker maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("baker_enter_big_wreck"), 0);
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0) {
-    var_2 kill();
-  }
+  foreach(var_2 in var_0)
+  var_2 kill();
 
   level.baker maps\ship_graveyard_util::dyn_swimspeed_disable();
   level.baker.moveplaybackrate = 1;
@@ -2605,9 +2555,8 @@ depth_charge_enemy_check() {
     var_0 = getaiarray("axis");
 
     foreach(var_3 in var_0) {
-      if(distance(var_3.origin, level.player.origin) < 1024) {
+      if(distance(var_3.origin, level.player.origin) < 1024)
         var_5 = var_5 + 1;
-      }
     }
 
     if(var_5 > 0) {
@@ -2653,9 +2602,8 @@ depth_charge_death() {
       thread maps\_utility::smart_radio_dialogue("shipg_bkr_takecover");
       wait 5;
 
-      if(distance(level.player.origin, level.baker.origin) > 600) {
+      if(distance(level.player.origin, level.baker.origin) > 600)
         depth_charge_death_trig_kill();
-      }
     }
   }
 }
@@ -2776,9 +2724,8 @@ big_wreck_shark_baker_teleport() {
     if(!level.player maps\_utility::player_looking_at(level.baker.origin, 0.7)) {
       var_1 = common_scripts\utility::get_target_ent("big_wreck_shark_teleport");
 
-      if(!level.player maps\_utility::player_looking_at(var_1.origin, 0.7, 0)) {
+      if(!level.player maps\_utility::player_looking_at(var_1.origin, 0.7, 0))
         level.baker forceteleport(var_1.origin, var_1.angles);
-      }
     }
   }
 }
@@ -2863,9 +2810,8 @@ shark_room() {
   if(maps\ship_graveyard_util::greenlight_check() && (isDefined(level.start_point) && level.start_point != "fallon")) {
     return;
   }
-  while(!common_scripts\utility::flag("shark_a_clear") || !common_scripts\utility::flag("shark_b_clear")) {
+  while(!common_scripts\utility::flag("shark_a_clear") || !common_scripts\utility::flag("shark_b_clear"))
     wait 0.05;
-  }
 
   common_scripts\utility::flag_set("shark_room_player_can_go");
   level.baker.goalradius = 256;
@@ -2925,9 +2871,9 @@ shark_room_end() {
   common_scripts\utility::flag_waitopen("shark_eating_player");
   common_scripts\utility::flag_wait_either("player_warp_hesh", "baker_past_sharks");
 
-  if(common_scripts\utility::flag("baker_past_sharks")) {
+  if(common_scripts\utility::flag("baker_past_sharks"))
     level.baker thread maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("baker_wreck_stealth_path_4"), 250);
-  } else if(common_scripts\utility::flag("player_warp_hesh")) {
+  else if(common_scripts\utility::flag("player_warp_hesh")) {
     level.baker notify("stop_loop");
     level.baker stopanimscripted();
     level.baker.moveplaybackrate = 1;
@@ -2951,9 +2897,8 @@ shark_room_end() {
 shark_safe_autosave() {
   level endon("trying_new_autosave");
 
-  while(common_scripts\utility::flag("player_near_shark")) {
+  while(common_scripts\utility::flag("player_near_shark"))
     wait 0.05;
-  }
 
   thread maps\_utility::autosave_stealth();
 }
@@ -2962,9 +2907,8 @@ player_shoots_sharks() {
   var_0 = common_scripts\utility::get_target_ent("shark_room_trig");
   common_scripts\utility::flag_wait("shark_eating_player");
 
-  if(isDefined(level.baker.my_animnode)) {
+  if(isDefined(level.baker.my_animnode))
     level.baker.my_animnode notify("stop_loop");
-  }
 
   level.baker stopanimscripted();
   var_1 = 1;
@@ -3054,9 +2998,8 @@ shark_room_baker_first_dialogue() {
   maps\_utility::smart_radio_dialogue("shipg_bkr_gofirst");
   wait 1.5;
 
-  if(!maps\ship_graveyard_util::greenlight_check()) {
+  if(!maps\ship_graveyard_util::greenlight_check())
     maps\_utility::smart_radio_dialogue("shipg_bkr_stayhere");
-  }
 
   wait 2;
 }
@@ -3122,9 +3065,8 @@ big_wreck_encounter() {
   var_0 = getaiarray("axis");
 
   if(var_0.size > 0) {
-    foreach(var_2 in var_0) {
-      var_2 setgoalentity(level.player);
-    }
+    foreach(var_2 in var_0)
+    var_2 setgoalentity(level.player);
   }
 }
 
@@ -3398,9 +3340,8 @@ end_surface() {
   setsaveddvar("sm_sunsamplesizeNear", 1);
   maps\_art::dof_set_base(1, 1, 4.5, 500, 500, 0.05, 0);
 
-  if(isDefined(level.distorg)) {
+  if(isDefined(level.distorg))
     level.distorg delete();
-  }
 
   var_1 = common_scripts\utility::get_target_ent("baker_end");
   level.baker_end = var_1 maps\_utility::spawn_ai(1);

@@ -26,7 +26,8 @@ init_flags() {
   flag_init("karma_killed");
 }
 
-init_spawn_funcs() {}
+init_spawn_funcs() {
+}
 
 skipto_confrontation() {
   skipto_teleport("skipto_the_end");
@@ -59,13 +60,11 @@ main() {
 
 run_escape_scene() {
   if(!flag("escape_ending_started") && !flag("defalco_stopped")) {
-    if(isDefined(level.ai_defalco_escort1)) {
+    if(isDefined(level.ai_defalco_escort1))
       level.ai_defalco_escort1 delete();
-    }
 
-    if(isDefined(level.ai_defalco_escort2)) {
+    if(isDefined(level.ai_defalco_escort2))
       level.ai_defalco_escort2 delete();
-    }
 
     flag_waitopen("glasses_bink_playing");
     wait 0.5;
@@ -109,9 +108,8 @@ defalco_death() {
     wait 1.8;
   }
 
-  if(isalive(level.ai_defalco_escort2)) {
+  if(isalive(level.ai_defalco_escort2))
     level.ai_defalco_escort2 bloody_death();
-  }
 
   kill_all_enemies();
   setmusicstate("KARMA_DEFALCO_DEAD");
@@ -119,7 +117,7 @@ defalco_death() {
   screen_fade_out(1.5);
   wait 2;
   ent = spawn("script_origin", (-306, 7410, -2767));
-  ent playLoopSound("veh_end_osp_steady", 2);
+  ent playloopsound("veh_end_osp_steady", 2);
   level.player thread maps\createart\karma_2_art::vision_set_change("sp_karma2_defalco_walk");
   level thread run_scene("defalco_dead_ending");
   wait 0.2;
@@ -145,12 +143,11 @@ player_detected() {
   self endon("death");
 
   while(true) {
-    if(abs(level.player.origin[2] - self.origin[2]) < 2 && self sightconetrace(level.player getEye(), level.player) > 0.9) {
+    if(abs(level.player.origin[2] - self.origin[2]) < 2 && self sightconetrace(level.player geteye(), level.player) > 0.9) {
       n_dist = distance2d(level.player.origin, self.origin);
 
-      if(n_dist < 300) {
+      if(n_dist < 300)
         level.too_close_for_zoom = 1;
-      }
 
       self notify("player_detected");
       wait 0.05;
@@ -165,7 +162,7 @@ player_detected() {
 defalco_reaches_end() {
   level endon("escape_ending_started");
   flag_wait("defalco_reached_end");
-  v_eye = level.player getEye();
+  v_eye = level.player geteye();
 
   foreach(ent in array(level.ai_defalco, level.ai_karma)) {
     if(isalive(ent) && ent sightconetrace(v_eye, level.player) > 0.1) {
@@ -177,11 +174,10 @@ defalco_reaches_end() {
   if(!flag("defalco_stopped")) {
     run_scene_first_frame("escape_ending");
 
-    if(!flag("cancel_helipad_pip")) {
+    if(!flag("cancel_helipad_pip"))
       level thread defalco_helipad_pip();
-    }
 
-    set_objective(level.obj_stop_defalco, level.ai_defalco, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+    set_objective(level.obj_stop_defalco, level.ai_defalco, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
     exploder(2);
   }
 }
@@ -201,18 +197,17 @@ defalco_escape_defalco() {
   self.moveplaybackrate = 1.8;
   self.a.movement = "run";
   self thread follow_path("defalco_end_path", 1);
-  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
+  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
   self waittill_any_array_endon(array("damage", "player_detected"), level, "defalco_stopped");
   flag_set("defalco_stopped");
   self waittill("player_detected");
   self thread kill_me_timer(level.player, 240);
 
-  if(!(isDefined(level.too_close_for_zoom) && level.too_close_for_zoom)) {
+  if(!(isDefined(level.too_close_for_zoom) && level.too_close_for_zoom))
     level thread defalco_zoom(self);
-  }
 
   level notify("stop_naglines");
-  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
+  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
   self.has_ir = 1;
   self.moveplaybackrate = 1;
   self.anim_defalco_react = % ch_karma_11_ending_defalco_reaction;
@@ -226,11 +221,10 @@ defalco_escape_defalco() {
   a_good_nodes = get_array_of_closest(self.origin, a_nodes, a_bad_nodes);
   self.goalradius = 1000;
 
-  if(a_good_nodes.size > 0) {
+  if(a_good_nodes.size > 0)
     force_goal(a_good_nodes[0]);
-  } else {
+  else
     set_goal_pos(self.origin);
-  }
 
   wait 3;
   player_seek(1);
@@ -246,7 +240,7 @@ defalco_zoom(ai_defalco) {
   self.bulletcam_death = 0;
   level.player.ignoreme = 1;
   level.player.v_player_before_zoom_ang = level.player getplayerangles();
-  level.player.v_player_before_zoom_eye = level.player getEye();
+  level.player.v_player_before_zoom_eye = level.player geteye();
   level.player.v_player_before_zoom_org = level.player.origin;
   level.player_pos_ent = spawn("script_origin", level.player.v_player_before_zoom_eye);
   level.player hideviewmodel();
@@ -258,7 +252,7 @@ defalco_zoom(ai_defalco) {
   e_cam = spawn_model("p_glo_bullet_tip", level.player.v_player_before_zoom_eye, level.player.angles);
   e_cam hide();
   sndent = spawn("script_origin", (0, 0, 0));
-  sndent playLoopSound("evt_timeslow_loop", 0.25);
+  sndent playloopsound("evt_timeslow_loop", 0.25);
   level.player disableclientlinkto();
   level.player playerlinktoabsolute(e_cam, "tag_origin");
   e_cam zoom_in(1, 0.5, 0.2, 0.3);
@@ -290,9 +284,8 @@ delete_sndent(ent) {
 }
 
 zoom_in(n_step, n_fraction, n_timescale, n_hold_time, v_offset) {
-  if(!isDefined(v_offset)) {
+  if(!isDefined(v_offset))
     v_offset = (0, 0, 0);
-  }
 
   settimescale(1);
   rpc("clientscripts/karma_utility", "screen_flash");
@@ -310,13 +303,13 @@ set_react_anim_time() {
   while(true) {
     level waittill("zoom_in", n_step);
 
-    if(n_step == 1) {
+    if(n_step == 1)
       self setanimtime(self.anim_defalco_react, 0);
-    } else if(n_step == 2) {
+    else if(n_step == 2)
       self setanimtime(self.anim_defalco_react, 0.2);
-    } else if(n_step == 3) {
+    else if(n_step == 3)
       self setanimtime(self.anim_defalco_react, 0.5);
-    } else if(n_step == 4) {
+    else if(n_step == 4) {
       self setflaggedanimknoball("defalco_react", self.anim_defalco_react, % root, 1, 0.3, 0.2);
       self setanimtime(self.anim_defalco_react, 0.7);
     } else if(n_step == 5) {
@@ -341,9 +334,8 @@ kill_all_enemies() {
   kill_spawnernum(53);
   kill_spawnernum(80);
 
-  foreach(ai in getaiarray("axis")) {
-    ai thread bloody_death(undefined, randomfloat(2));
-  }
+  foreach(ai in getaiarray("axis"))
+  ai thread bloody_death(undefined, randomfloat(2));
 
   level.player.ignoreme = 1;
   level.ai_harper.ignoreme = 1;
@@ -397,7 +389,7 @@ escort_react() {
   disable_react();
   disable_pain();
   v_to_player = level.player.origin - self.origin;
-  n_dot_to_player = vectordot(vectornormalize(v_to_player), anglesToForward(self.angles));
+  n_dot_to_player = vectordot(vectornormalize(v_to_player), anglestoforward(self.angles));
 
   if(n_dot_to_player < -0.3) {
     v_goal_angles = vectortoangles(v_to_player * -1);
@@ -434,17 +426,15 @@ lerp_position(v_goal_pos, v_goal_angles, n_lerp_time) {
   do {
     n_time = timer timer_wait(0.05);
 
-    if(isDefined(v_goal_pos)) {
+    if(isDefined(v_goal_pos))
       v_new_pos = lerpvector(v_start_pos, v_goal_pos, n_time / n_lerp_time);
-    } else {
+    else
       v_new_pos = self.origin;
-    }
 
-    if(isDefined(v_goal_angles)) {
+    if(isDefined(v_goal_angles))
       v_new_ang = (anglelerp(v_start_ang[0], v_goal_angles[0], n_time / n_lerp_time), anglelerp(v_start_ang[1], v_goal_angles[1], n_time / n_lerp_time), anglelerp(v_start_ang[2], v_goal_angles[2], n_time / n_lerp_time));
-    } else {
+    else
       v_new_ang = self.angles;
-    }
 
     self forceteleport(v_new_pos, v_new_ang);
   }
@@ -486,18 +476,15 @@ karma_death() {
 waittill_any_array_endon(a_notifies, e_ent, str_endon, e_ent2, str_endon2) {
   assert(isDefined(a_notifies[0]), "At least the first element has to be defined for waittill_any_array.");
 
-  if(isDefined(e_ent) && isDefined(str_endon)) {
+  if(isDefined(e_ent) && isDefined(str_endon))
     e_ent endon(str_endon);
-  }
 
-  if(isDefined(e_ent2) && isDefined(str_endon2)) {
+  if(isDefined(e_ent2) && isDefined(str_endon2))
     e_ent2 endon(str_endon2);
-  }
 
   for(i = 1; i < a_notifies.size; i++) {
-    if(isDefined(a_notifies[i])) {
+    if(isDefined(a_notifies[i]))
       self endon(a_notifies[i]);
-    }
   }
 
   self waittill(a_notifies[0]);
@@ -516,9 +503,8 @@ player_has_weapon(str_weapon) {
   a_weapons = self getweaponslist();
 
   foreach(weapon in a_weapons) {
-    if(weapon == str_weapon) {
+    if(weapon == str_weapon)
       b_has_weapon = 1;
-    }
   }
 
   return b_has_weapon;
@@ -545,16 +531,14 @@ launch_escape_vehicle(delay) {
 }
 
 do_vtol_escape(ent) {
-  if(!flag("escape_scene_teleport_friends")) {
+  if(!flag("escape_scene_teleport_friends"))
     level thread pip_karma_event("pip_helipad");
-  }
 
   level.vh_vtol = getent("defalco_osprey", "targetname");
   level.vh_vtol endon("death");
 
-  if(isDefined(level.ai_defalco_escort2)) {
+  if(isDefined(level.ai_defalco_escort2))
     level.ai_defalco_escort2 delete();
-  }
 
   level thread setup_ambience();
   wait 1;
@@ -581,15 +565,14 @@ defalco_helipad_pip(str_structname, str_scene_name) {
 
 set_objective_on_vtol() {
   level.ai_defalco waittill("death");
-  set_objective(level.obj_stop_defalco, level.vh_vtol, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+  set_objective(level.obj_stop_defalco, level.vh_vtol, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
 }
 
 defalco_escape_vehicle_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(issubstr(tolower(type), "bullet")) {
+  if(issubstr(tolower(type), "bullet"))
     idamage = 0;
-  } else if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE") {
+  else if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE")
     idamage = 99999;
-  }
 
   return idamage;
 }
@@ -605,14 +588,13 @@ setup_ambience() {
 setup_cagelight_fx(str_light_targetname) {
   a_cagelights = get_ent_array(str_light_targetname, "targetname");
 
-  foreach(m_light in a_cagelights) {
-    m_light thread delay_cagelight_fx();
-  }
+  foreach(m_light in a_cagelights)
+  m_light thread delay_cagelight_fx();
 }
 
 delay_cagelight_fx() {
   self script_delay();
-  playFXOnTag(level._effect["light_caution_red_flash"], self, "tag_origin");
+  playfxontag(level._effect["light_caution_red_flash"], self, "tag_origin");
 }
 
 setup_vtol_escape_amb() {
@@ -623,7 +605,7 @@ setup_vtol_escape_amb() {
       vtol = maps\_vehicle::spawn_vehicle_from_targetname("e10_vtol_escape_spawner");
       vtol thread go_path(nd_v_start_array[i]);
       vtol thread delete_on_end_node();
-      playFXOnTag(level._effect["vtol_exhaust"], vtol, "tag_origin");
+      playfxontag(level._effect["vtol_exhaust"], vtol, "tag_origin");
       wait(randomintrange(2, 5));
     }
 

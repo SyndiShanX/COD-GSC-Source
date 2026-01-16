@@ -17,11 +17,11 @@
 #namespace wasp;
 
 function autoexec __init__sytem__() {
-  system::register("wasp", &__init__, undefined, undefined);
+  system::register("wasp", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("wasp", &wasp_initialize);
+  vehicle::add_main_callback("wasp", & wasp_initialize);
   clientfield::register("vehicle", "rocket_wasp_hijacked", 1, 1, "int");
 }
 
@@ -36,7 +36,7 @@ function wasp_initialize() {
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
   self.vehaircraftcollisionenabled = 1;
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self.goalradius = 999999;
   self.goalheight = 999999;
@@ -45,11 +45,13 @@ function wasp_initialize() {
   if(issubstr(self.vehicletype, "rocket")) {
     self.variant = "rocket";
   }
-  self.overridevehicledamage = &drone_callback_damage;
-  self.allowfriendlyfiredamageoverride = &drone_allowfriendlyfiredamage;
+  self.overridevehicledamage = & drone_callback_damage;
+  self.allowfriendlyfiredamageoverride = & drone_allowfriendlyfiredamage;
   self thread vehicle_ai::nudge_collision();
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   if(self.variant === "rocket") {
     self.ignorefirefly = 1;
@@ -61,13 +63,13 @@ function wasp_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = &wasp_driving;
-  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
-  self vehicle_ai::add_state("guard", &state_guard_enter, &state_guard_update, &state_guard_exit);
-  vehicle_ai::add_utility_connection("combat", "guard", &state_guard_can_enter);
+  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = & wasp_driving;
+  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
+  self vehicle_ai::add_state("guard", & state_guard_enter, & state_guard_update, & state_guard_exit);
+  vehicle_ai::add_utility_connection("combat", "guard", & state_guard_can_enter);
   vehicle_ai::add_utility_connection("guard", "combat");
   vehicle_ai::add_interrupt_connection("guard", "emped", "emped");
   vehicle_ai::add_interrupt_connection("guard", "surge", "surge");
@@ -81,17 +83,17 @@ function state_death_update(params) {
   self endon("death");
   if(isarray(self.followers)) {
     foreach(follower in self.followers) {
-      if(isDefined(follower)) {
+      if(isdefined(follower)) {
         follower.leader = undefined;
       }
     }
   }
   death_type = vehicle_ai::get_death_type(params);
-  if(!isDefined(death_type) && isDefined(params)) {
-    if(isDefined(params.weapon)) {
+  if(!isdefined(death_type) && isdefined(params)) {
+    if(isdefined(params.weapon)) {
       if(params.weapon.doannihilate) {
         death_type = "gibbed";
-      } else if(params.weapon.dogibbing && isDefined(params.attacker)) {
+      } else if(params.weapon.dogibbing && isdefined(params.attacker)) {
         dist = distance(self.origin, params.attacker.origin);
         if(dist < params.weapon.maxgibdistance) {
           gib_chance = 1 - (dist / params.weapon.maxgibdistance);
@@ -101,14 +103,14 @@ function state_death_update(params) {
         }
       }
     }
-    if(isDefined(params.meansofdeath)) {
+    if(isdefined(params.meansofdeath)) {
       meansofdeath = params.meansofdeath;
       if(meansofdeath === "MOD_EXPLOSIVE" || meansofdeath === "MOD_GRENADE_SPLASH" || meansofdeath === "MOD_PROJECTILE_SPLASH" || meansofdeath === "MOD_PROJECTILE") {
         death_type = "gibbed";
       }
     }
   }
-  if(!isDefined(death_type)) {
+  if(!isdefined(death_type)) {
     crash_style = randomint(3);
     switch (crash_style) {
       case 0: {
@@ -142,7 +144,7 @@ function state_emped_update(params) {
   gravity = 400;
   self notify("end_nudge_collision");
   empdowntime = params.notify_param[0];
-  assert(isDefined(empdowntime));
+  assert(isdefined(empdowntime));
   vehicle_ai::cooldown("emped_timer", empdowntime);
   wait(randomfloat(0.2));
   ang_vel = self getangularvelocity();
@@ -165,7 +167,7 @@ function state_emped_update(params) {
   self setvehvelocity((0, 0, 0));
   self setphysacceleration((0, 0, (gravity * -1) * 0.1));
   self setangularvelocity((0, 0, 0));
-  while(!vehicle_ai::iscooldownready("emped_timer")) {
+  while (!vehicle_ai::iscooldownready("emped_timer")) {
     timeleft = max(vehicle_ai::getcooldownleft("emped_timer"), 0.5);
     wait(timeleft);
   }
@@ -173,7 +175,7 @@ function state_emped_update(params) {
   self vehicle::toggle_emp_fx(0);
   self vehicle_ai::emp_startup_fx();
   bootup_timer = 1.6;
-  while(bootup_timer > 0) {
+  while (bootup_timer > 0) {
     self vehicle::lights_on();
     wait(0.4);
     self vehicle::lights_off();
@@ -181,19 +183,19 @@ function state_emped_update(params) {
     bootup_timer = bootup_timer - 0.8;
   }
   self vehicle::lights_on();
-  if(isDefined(self.position_before_fall)) {
+  if(isdefined(self.position_before_fall)) {
     originoffset = vectorscale((0, 0, 1), 5);
     goalpoint = self getclosestpointonnavvolume(self.origin + originoffset, 50);
-    if(isDefined(goalpoint) && sighttracepassed(self.origin + originoffset, goalpoint, 0, self)) {
+    if(isdefined(goalpoint) && sighttracepassed(self.origin + originoffset, goalpoint, 0, self)) {
       self setvehgoalpos(goalpoint, 0, 0);
       self util::waittill_any_timeout(0.3, "near_goal", "goal", "change_state", "death");
-      if(isDefined(self.enemy)) {
+      if(isdefined(self.enemy)) {
         self setlookatent(self.enemy);
       }
       starttime = gettime();
       self.current_pathto_pos = self.position_before_fall;
       foundgoal = self setvehgoalpos(self.current_pathto_pos, 1, 1);
-      while(!foundgoal && vehicle_ai::timesince(starttime) < 3) {
+      while (!foundgoal && vehicle_ai::timesince(starttime) < 3) {
         foundgoal = self setvehgoalpos(self.current_pathto_pos, 1, 1);
         wait(0.3);
       }
@@ -222,12 +224,12 @@ function fall_and_bounce(killonimpact_speed, killonimpact_time) {
   anglesstablizeinitialscale = 0.6;
   anglesstablizeincrement = 0.2;
   fallstart = gettime();
-  while(bouncedtime < maxbouncetime && lengthsquared(self.velocity) > (10 * 10)) {
+  while (bouncedtime < maxbouncetime && lengthsquared(self.velocity) > (10 * 10)) {
     self waittill("veh_collision", impact_vel, normal);
     if(lengthsquared(impact_vel) > (killonimpact_speed * killonimpact_speed) || (vehicle_ai::timesince(fallstart) > killonimpact_time && lengthsquared(impact_vel) > (killonimpact_speed * 0.8) * (killonimpact_speed * 0.8))) {
       self kill();
     } else {
-      if(!isDefined(self.position_before_fall)) {
+      if(!isdefined(self.position_before_fall)) {
         self kill();
       } else {
         fallstart = gettime();
@@ -271,31 +273,31 @@ function fall_and_bounce(killonimpact_speed, killonimpact_time) {
 
 function init_guard_points() {
   self._guard_points = [];
-  if(!isDefined(self._guard_points)) {
+  if(!isdefined(self._guard_points)) {
     self._guard_points = [];
   } else if(!isarray(self._guard_points)) {
     self._guard_points = array(self._guard_points);
   }
   self._guard_points[self._guard_points.size] = (150, -110, 110);
-  if(!isDefined(self._guard_points)) {
+  if(!isdefined(self._guard_points)) {
     self._guard_points = [];
   } else if(!isarray(self._guard_points)) {
     self._guard_points = array(self._guard_points);
   }
   self._guard_points[self._guard_points.size] = (150, 110, 110);
-  if(!isDefined(self._guard_points)) {
+  if(!isdefined(self._guard_points)) {
     self._guard_points = [];
   } else if(!isarray(self._guard_points)) {
     self._guard_points = array(self._guard_points);
   }
   self._guard_points[self._guard_points.size] = (120, -110, 80);
-  if(!isDefined(self._guard_points)) {
+  if(!isdefined(self._guard_points)) {
     self._guard_points = [];
   } else if(!isarray(self._guard_points)) {
     self._guard_points = array(self._guard_points);
   }
   self._guard_points[self._guard_points.size] = (120, 110, 80);
-  if(!isDefined(self._guard_points)) {
+  if(!isdefined(self._guard_points)) {
     self._guard_points = [];
   } else if(!isarray(self._guard_points)) {
     self._guard_points = array(self._guard_points);
@@ -309,7 +311,7 @@ function guard_points_debug() {
     return;
   }
   self.isdebugdrawing = 1;
-  while(true) {
+  while (true) {
     foreach(point in self.debugpointsarray) {
       color = (1, 0, 0);
       if(ispointinnavvolume(point, "")) {
@@ -328,7 +330,7 @@ function get_guard_points(owner) {
     offset = rotatepoint(point, owner.angles);
     worldpoint = (offset + owner.origin) + (owner getvelocity() * 0.5);
     if(ispointinnavvolume(worldpoint, "navvolume_small")) {
-      if(!isDefined(points_array)) {
+      if(!isdefined(points_array)) {
         points_array = [];
       } else if(!isarray(points_array)) {
         points_array = array(points_array);
@@ -341,7 +343,7 @@ function get_guard_points(owner) {
     positionquery_filter_sight(queryresult, owner.origin + vectorscale((0, 0, 1), 10), (0, 0, 0), self, 3);
     foreach(point in queryresult.data) {
       if(point.visibility === 1 && bullettracepassed(owner.origin + vectorscale((0, 0, 1), 10), point.origin, 0, self, self, 0, 1)) {
-        if(!isDefined(points_array)) {
+        if(!isdefined(points_array)) {
           points_array = [];
         } else if(!isarray(points_array)) {
           points_array = array(points_array);
@@ -354,10 +356,10 @@ function get_guard_points(owner) {
 }
 
 function state_guard_can_enter(from_state, to_state, connection) {
-  if(self.enable_guard !== 1 || !isDefined(self.owner)) {
+  if(self.enable_guard !== 1 || !isdefined(self.owner)) {
     return false;
   }
-  if(!isDefined(self.enemy) || !self vehseenrecently(self.enemy, 3)) {
+  if(!isdefined(self.enemy) || !self vehseenrecently(self.enemy, 3)) {
     return true;
   }
   if(distancesquared(self.owner.origin, self.enemy.origin) > (1200 * 1200) && distancesquared(self.origin, self.enemy.origin) > (300 * 300)) {
@@ -377,13 +379,13 @@ function state_guard_enter(params) {
 }
 
 function update_main_guard() {
-  if(isDefined(self.owner) && !isalive(self.owner.main_guard) || self.owner.main_guard.owner !== self.owner) {
+  if(isdefined(self.owner) && !isalive(self.owner.main_guard) || self.owner.main_guard.owner !== self.owner) {
     self.owner.main_guard = self;
   }
 }
 
 function state_guard_exit(params) {
-  if(isDefined(self.owner) && self.owner.main_guard === self) {
+  if(isdefined(self.owner) && self.owner.main_guard === self) {
     self.owner.main_guard = undefined;
   }
 }
@@ -419,13 +421,13 @@ function state_guard_update(params) {
   timenotatgoal = gettime();
   pointindex = 0;
   stuckcount = 0;
-  while(true) {
-    if(isDefined(self.enemy) && distancesquared(self.owner.origin, self.enemy.origin) < (1000 * 1000) && self vehseenrecently(self.enemy, 1) && ispointinnavvolume(self.origin, "navvolume_small")) {
+  while (true) {
+    if(isdefined(self.enemy) && distancesquared(self.owner.origin, self.enemy.origin) < (1000 * 1000) && self vehseenrecently(self.enemy, 1) && ispointinnavvolume(self.origin, "navvolume_small")) {
       self vehicle_ai::evaluate_connections();
       wait(1);
     } else {
       owner = self.owner;
-      if(!isDefined(owner)) {
+      if(!isdefined(owner)) {
         wait(1);
         continue;
       }
@@ -434,20 +436,20 @@ function state_guard_update(params) {
       if(!onnavvolume) {
         getbackpoint = undefined;
         pointonnavvolume = self getclosestpointonnavvolume(self.origin, 500);
-        if(isDefined(pointonnavvolume)) {
+        if(isdefined(pointonnavvolume)) {
           if(test_get_back_point(pointonnavvolume) == 1) {
             getbackpoint = pointonnavvolume;
           }
         }
-        if(!isDefined(getbackpoint)) {
+        if(!isdefined(getbackpoint)) {
           queryresult = positionquery_source_navigation(self.origin, 0, 1500, 200, 80, self);
           getbackpoint = test_get_back_queryresult(queryresult);
         }
-        if(!isDefined(getbackpoint)) {
+        if(!isdefined(getbackpoint)) {
           queryresult = positionquery_source_navigation(self.origin, 0, 300, 700, 30, self);
           getbackpoint = test_get_back_queryresult(queryresult);
         }
-        if(isDefined(getbackpoint)) {
+        if(isdefined(getbackpoint)) {
           if(distancesquared(getbackpoint, self.origin) > (20 * 20)) {
             self.current_pathto_pos = getbackpoint;
             usepathfinding = 0;
@@ -460,13 +462,13 @@ function state_guard_update(params) {
           if(stuckcount == 1) {
             stucklocation = self.origin;
           } else if(stuckcount > 10) {
-            /
+            /# /
             #
             assert(0, "" + self.origin);
             v_box_min = (self.radius * -1, self.radius * -1, self.radius * -1);
             v_box_max = (self.radius, self.radius, self.radius);
             box(self.origin, v_box_min, v_box_max, self.angles[1], (1, 0, 0), 1, 0, 1000000);
-            if(isDefined(stucklocation)) {
+            if(isdefined(stucklocation)) {
               line(stucklocation, self.origin, (1, 0, 0), 1, 1, 1000000);
             }
             self kill();
@@ -490,7 +492,7 @@ function state_guard_update(params) {
           self.current_pathto_pos = guardpoints[pointindex];
         } else {
           main_guard = owner.main_guard;
-          if(isalive(main_guard) && isDefined(main_guard.current_pathto_pos)) {
+          if(isalive(main_guard) && isdefined(main_guard.current_pathto_pos)) {
             query_position = main_guard.current_pathto_pos;
             queryresult = positionquery_source_navigation(query_position, 20, 140, 100, 20, self, 15);
             if(queryresult.data.size > 0) {
@@ -499,7 +501,7 @@ function state_guard_update(params) {
           }
         }
       }
-      if(isDefined(self.current_pathto_pos)) {
+      if(isdefined(self.current_pathto_pos)) {
         distancetogoalsq = distancesquared(self.current_pathto_pos, self.origin);
         if(!onnavvolume || distancetogoalsq > (60 * 60)) {
           if(distancetogoalsq > (600 * 600)) {
@@ -521,7 +523,7 @@ function state_guard_update(params) {
           continue;
         }
         if(self setvehgoalpos(self.current_pathto_pos, 1, usepathfinding)) {
-          self playSound("veh_wasp_direction");
+          self playsound("veh_wasp_direction");
           self clearlookatent();
           self notify("fire_stop");
           self thread path_update_interrupt();
@@ -544,7 +546,7 @@ function state_combat_enter(params) {
   if(self.enable_target_laser === 1) {
     self laseron();
   }
-  if(isDefined(self.owner) && isDefined(self.owner.enemy)) {
+  if(isdefined(self.owner) && isdefined(self.owner.enemy)) {
     self.favoriteenemy = self.owner.enemy;
   }
   self thread turretfireupdate();
@@ -554,8 +556,8 @@ function turretfireupdate() {
   self endon("death");
   self endon("change_state");
   isrockettype = self.variant === "rocket";
-  while(true) {
-    if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
+  while (true) {
+    if(isdefined(self.enemy) && self vehcansee(self.enemy)) {
       if(distancesquared(self.enemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
         self setlookatent(self.enemy);
         if(isrockettype) {
@@ -564,12 +566,12 @@ function turretfireupdate() {
           self setturrettargetent(self.enemy, (vehicle_ai::gettargeteyeoffset(self.enemy) * -1) * 0.3);
         }
         startaim = gettime();
-        while(!self.turretontarget && vehicle_ai::timesince(startaim) < 3) {
+        while (!self.turretontarget && vehicle_ai::timesince(startaim) < 3) {
           wait(0.2);
         }
-        if(isDefined(self.enemy) && self.turretontarget && self.noshoot !== 1) {
+        if(isdefined(self.enemy) && self.turretontarget && self.noshoot !== 1) {
           if(isrockettype) {
-            for(i = 0; i < 2 && isDefined(self.enemy); i++) {
+            for (i = 0; i < 2 && isdefined(self.enemy); i++) {
               self fireweapon(0, self.enemy);
               fired = 1;
               wait(0.25);
@@ -577,25 +579,25 @@ function turretfireupdate() {
           } else {
             self vehicle_ai::fire_for_time(randomfloatrange(self.settings.turret_fire_burst_min, self.settings.turret_fire_burst_max), 0, self.enemy);
           }
-          if(isDefined(self.settings.turret_cooldown_max)) {
-            if(!isDefined(self.settings.turret_cooldown_min)) {
+          if(isdefined(self.settings.turret_cooldown_max)) {
+            if(!isdefined(self.settings.turret_cooldown_min)) {
               self.settings.turret_cooldown_min = 0;
             }
             wait(randomfloatrange(self.settings.turret_cooldown_min, self.settings.turret_cooldown_max));
           }
-        } else if(isDefined(self.settings.turret_enemy_detect_freq)) {
+        } else if(isdefined(self.settings.turret_enemy_detect_freq)) {
           wait(self.settings.turret_enemy_detect_freq);
         }
         self setturrettargetrelativeangles(vectorscale((1, 0, 0), 15), 0);
       }
       if(isrockettype) {
-        if(isDefined(self.enemy) && isai(self.enemy)) {
+        if(isdefined(self.enemy) && isai(self.enemy)) {
           wait(randomfloatrange(4, 7));
         } else {
           wait(randomfloatrange(3, 5));
         }
       } else {
-        if(isDefined(self.enemy) && isai(self.enemy)) {
+        if(isdefined(self.enemy) && isai(self.enemy)) {
           wait(randomfloatrange(2, 2.5));
         } else {
           wait(randomfloatrange(0.5, 1.5));
@@ -614,19 +616,19 @@ function path_update_interrupt() {
   self endon("reached_end_node");
   old_enemy = self.enemy;
   wait(1);
-  while(true) {
-    if(isDefined(self.current_pathto_pos)) {
+  while (true) {
+    if(isdefined(self.current_pathto_pos)) {
       if(distance2dsquared(self.current_pathto_pos, self.goalpos) > (self.goalradius * self.goalradius)) {
         wait(0.2);
         self notify("near_goal");
       }
     }
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       if(self.noshoot !== 1 && self vehcansee(self.enemy)) {
         self setturrettargetent(self.enemy);
         self setlookatent(self.enemy);
       }
-      if(!isDefined(old_enemy)) {
+      if(!isdefined(old_enemy)) {
         self notify("near_goal");
       } else if(self.enemy != old_enemy) {
         self notify("near_goal");
@@ -645,13 +647,13 @@ function wait_till_something_happens(timeout) {
   wait(0.1);
   time = timeout;
   cant_see_count = 0;
-  while(time > 0) {
-    if(isDefined(self.current_pathto_pos)) {
+  while (time > 0) {
+    if(isdefined(self.current_pathto_pos)) {
       if(distancesquared(self.current_pathto_pos, self.goalpos) > (self.goalradius * self.goalradius)) {
         break;
       }
     }
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       if(!self vehcansee(self.enemy)) {
         cant_see_count++;
         if(cant_see_count >= 3) {
@@ -676,7 +678,7 @@ function wait_till_something_happens(timeout) {
         break;
       }
     }
-    if(isDefined(self.leader) && isDefined(self.leader.current_pathto_pos)) {
+    if(isdefined(self.leader) && isdefined(self.leader.current_pathto_pos)) {
       if(distancesquared(self.origin, self.leader.current_pathto_pos) > (165 * 165)) {
         break;
       }
@@ -687,20 +689,20 @@ function wait_till_something_happens(timeout) {
 }
 
 function drop_leader() {
-  if(isDefined(self.leader)) {
+  if(isdefined(self.leader)) {
     arrayremovevalue(self.leader.followers, self);
     self.leader = undefined;
   }
 }
 
 function update_leader() {
-  if(isDefined(self.no_group) && self.no_group == 1) {
+  if(isdefined(self.no_group) && self.no_group == 1) {
     return;
   }
-  if(isDefined(self.leader)) {
+  if(isdefined(self.leader)) {
     return;
   }
-  if(isDefined(self.followers)) {
+  if(isdefined(self.followers)) {
     self.followers = array::remove_dead(self.followers, 0);
     if(self.followers.size > 0) {
       return;
@@ -708,8 +710,8 @@ function update_leader() {
   }
   team_mates = getaiteamarray(self.team);
   foreach(guy in team_mates) {
-    if(isDefined(guy.archetype) && guy.archetype == "wasp") {
-      if(isDefined(guy.leader)) {
+    if(isdefined(guy.archetype) && guy.archetype == "wasp") {
+      if(isdefined(guy.leader)) {
         continue;
       }
       if(guy == self) {
@@ -718,7 +720,7 @@ function update_leader() {
       if(distancesquared(self.origin, guy.origin) > (700 * 700)) {
         continue;
       }
-      if(!isDefined(guy.followers)) {
+      if(!isdefined(guy.followers)) {
         guy.followers = [];
       }
       if(guy.followers.size >= 2) {
@@ -738,7 +740,7 @@ function should_fly_forward(distancetogoalsq) {
   if(distancetogoalsq < (250 * 250)) {
     return 0;
   }
-  if(isDefined(self.enemy)) {
+  if(isdefined(self.enemy)) {
     to_goal = vectornormalize(self.current_pathto_pos - self.origin);
     to_enemy = vectornormalize(self.enemy.origin - self.origin);
     dot = vectordot(to_goal, to_enemy);
@@ -757,22 +759,22 @@ function state_combat_update(params) {
   self endon("death");
   wait(0.1);
   stuckcount = 0;
-  for(;;) {
+  for (;;) {
     self setspeed(self.settings.defaultmovespeed);
     self update_leader();
-    if(isDefined(self.inpain) && self.inpain) {
+    if(isdefined(self.inpain) && self.inpain) {
       wait(0.1);
       continue;
     }
     if(self.enable_guard === 1) {
       self vehicle_ai::evaluate_connections();
     }
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       self setturrettargetent(self.enemy);
       self setlookatent(self.enemy);
       self wait_till_something_happens(randomfloatrange(2, 5));
     }
-    if(!isDefined(self.enemy)) {
+    if(!isdefined(self.enemy)) {
       self clearlookatent();
       aiarray = getaiteamarray("all");
       foreach(ai in aiarray) {
@@ -792,12 +794,12 @@ function state_combat_update(params) {
         self vehicle_ai::evaluate_connections();
       }
       pointonnavvolume = self getclosestpointonnavvolume(self.origin, 100);
-      if(isDefined(pointonnavvolume)) {
+      if(isdefined(pointonnavvolume)) {
         if(sighttracepassed(self.origin, pointonnavvolume, 0, self)) {
           getbackpoint = pointonnavvolume;
         }
       }
-      if(!isDefined(getbackpoint)) {
+      if(!isdefined(getbackpoint)) {
         queryresult = positionquery_source_navigation(self.origin, 0, 200, 100, 2 * self.radius, self);
         positionquery_filter_sight(queryresult, self.origin, (0, 0, 0), self, 1);
         getbackpoint = undefined;
@@ -808,7 +810,7 @@ function state_combat_update(params) {
           }
         }
       }
-      if(isDefined(getbackpoint)) {
+      if(isdefined(getbackpoint)) {
         self.current_pathto_pos = getbackpoint;
         usepathfinding = 0;
       } else {
@@ -816,13 +818,13 @@ function state_combat_update(params) {
         if(stuckcount == 1) {
           stucklocation = self.origin;
         } else if(stuckcount > 10) {
-          /
+          /# /
           #
           assert(0, "" + self.origin);
           v_box_min = (self.radius * -1, self.radius * -1, self.radius * -1);
           v_box_max = (self.radius, self.radius, self.radius);
           box(self.origin, v_box_min, v_box_max, self.angles[1], (1, 0, 0), 1, 0, 1000000);
-          if(isDefined(stucklocation)) {
+          if(isdefined(stucklocation)) {
             line(stucklocation, self.origin, (1, 0, 0), 1, 1, 1000000);
           }
           self kill();
@@ -832,7 +834,7 @@ function state_combat_update(params) {
       stuckcount = 0;
       if(self.goalforced) {
         goalpos = self getclosestpointonnavvolume(self.goalpos, 100);
-        if(isDefined(goalpos)) {
+        if(isdefined(goalpos)) {
           self.current_pathto_pos = goalpos;
           usepathfinding = 1;
         } else {
@@ -840,7 +842,7 @@ function state_combat_update(params) {
           usepathfinding = 0;
         }
       } else {
-        if(isDefined(self.enemy)) {
+        if(isdefined(self.enemy)) {
           self.current_pathto_pos = getnextmoveposition_tactical();
           usepathfinding = 1;
         } else {
@@ -849,17 +851,17 @@ function state_combat_update(params) {
         }
       }
     }
-    if(isDefined(self.current_pathto_pos)) {
+    if(isdefined(self.current_pathto_pos)) {
       distancetogoalsq = distancesquared(self.current_pathto_pos, self.origin);
       if(!onnavvolume || distancetogoalsq > (75 * 75)) {
         if(distancetogoalsq > (2000 * 2000)) {
           self setspeed(self.settings.defaultmovespeed * 2);
         }
         if(self setvehgoalpos(self.current_pathto_pos, 1, usepathfinding)) {
-          if(isDefined(self.enemy)) {
-            self playSound("veh_wasp_direction");
+          if(isdefined(self.enemy)) {
+            self playsound("veh_wasp_direction");
           } else {
-            self playSound("veh_wasp_vox");
+            self playsound("veh_wasp_vox");
           }
           if(should_fly_forward(distancetogoalsq)) {
             self clearlookatent();
@@ -887,7 +889,7 @@ function getnextmoveposition_wander() {
     randomscore = randomfloatrange(0, 100);
     disttooriginscore = point.disttoorigin2d * 0.2;
     point.score = point.score + (randomscore + disttooriginscore);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = disttooriginscore;
@@ -898,14 +900,14 @@ function getnextmoveposition_wander() {
     }
   }
   self vehicle_ai::positionquery_debugscores(queryresult);
-  if(!isDefined(best_point)) {
+  if(!isdefined(best_point)) {
     return undefined;
   }
   return best_point.origin;
 }
 
 function getnextmoveposition_tactical() {
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return self getnextmoveposition_wander();
   }
   selfdisttotarget = distance2d(self.origin, self.enemy.origin);
@@ -917,27 +919,27 @@ function getnextmoveposition_tactical() {
   randomness = 30;
   avoid_locations = [];
   avoid_radius = 50;
-  if(isalive(self.leader) && isDefined(self.leader.current_pathto_pos)) {
+  if(isalive(self.leader) && isdefined(self.leader.current_pathto_pos)) {
     query_position = self.leader.current_pathto_pos;
     queryresult = positionquery_source_navigation(query_position, 0, 140, 100, 35, self, 25);
   } else {
     if(isalive(self.owner) && self.enable_guard === 1) {
       ownerorigin = self getclosestpointonnavvolume(self.owner.origin + vectorscale((0, 0, 1), 40), 50);
-      if(isDefined(ownerorigin)) {
+      if(isdefined(ownerorigin)) {
         queryresult = positionquery_source_navigation(ownerorigin, 0, 500 * min(querymultiplier, 1.5), 130, 3 * self.radius, self);
-        if(isDefined(queryresult) && isDefined(queryresult.data)) {
-          positionquery_filter_sight(queryresult, self.owner getEye(), (0, 0, 0), self, 5, self, "visowner");
-          positionquery_filter_sight(queryresult, self.enemy getEye(), (0, 0, 0), self, 5, self, "visenemy");
+        if(isdefined(queryresult) && isdefined(queryresult.data)) {
+          positionquery_filter_sight(queryresult, self.owner geteye(), (0, 0, 0), self, 5, self, "visowner");
+          positionquery_filter_sight(queryresult, self.enemy geteye(), (0, 0, 0), self, 5, self, "visenemy");
           foreach(point in queryresult.data) {
             if(point.visowner === 1) {
-              if(!isDefined(point._scoredebug)) {
+              if(!isdefined(point._scoredebug)) {
                 point._scoredebug = [];
               }
               point._scoredebug[""] = 300;
               point.score = point.score + 300;
             }
             if(point.visenemy === 1) {
-              if(!isDefined(point._scoredebug)) {
+              if(!isdefined(point._scoredebug)) {
                 point._scoredebug = [];
               }
               point._scoredebug[""] = 300;
@@ -951,9 +953,9 @@ function getnextmoveposition_tactical() {
       team_mates = getaiteamarray(self.team);
       avoid_radius = 140;
       foreach(guy in team_mates) {
-        if(isDefined(guy.archetype) && guy.archetype == "wasp") {
-          if(isDefined(guy.followers) && guy.followers.size > 0 && guy != self) {
-            if(isDefined(guy.current_pathto_pos)) {
+        if(isdefined(guy.archetype) && guy.archetype == "wasp") {
+          if(isdefined(guy.followers) && guy.followers.size > 0 && guy != self) {
+            if(isdefined(guy.current_pathto_pos)) {
               avoid_locations[avoid_locations.size] = guy.current_pathto_pos;
             }
           }
@@ -961,7 +963,7 @@ function getnextmoveposition_tactical() {
       }
     }
   }
-  if(!isDefined(queryresult) || !isDefined(queryresult.data) || queryresult.data.size == 0) {
+  if(!isdefined(queryresult) || !isdefined(queryresult.data) || queryresult.data.size == 0) {
     return undefined;
   }
   positionquery_filter_distancetogoal(queryresult, self);
@@ -972,23 +974,23 @@ function getnextmoveposition_tactical() {
   best_point = undefined;
   best_score = -999999;
   foreach(point in queryresult.data) {
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, randomness);
     point.score = point.score + randomfloatrange(0, randomness);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = point.distawayfromengagementarea * -1;
     point.score = point.score + (point.distawayfromengagementarea * -1);
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = (point.distengagementheight * -1) * 1.4;
     point.score = point.score + ((point.distengagementheight * -1) * 1.4);
     if(point.disttoorigin2d < 120) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = (120 - point.disttoorigin2d) * -1.5;
@@ -996,7 +998,7 @@ function getnextmoveposition_tactical() {
     }
     foreach(location in avoid_locations) {
       if(distancesquared(point.origin, location) < (avoid_radius * avoid_radius)) {
-        if(!isDefined(point._scoredebug)) {
+        if(!isdefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = avoid_radius * -1;
@@ -1004,7 +1006,7 @@ function getnextmoveposition_tactical() {
       }
     }
     if(point.inclaimedlocation) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = -500;
@@ -1016,10 +1018,10 @@ function getnextmoveposition_tactical() {
     }
   }
   self vehicle_ai::positionquery_debugscores(queryresult);
-  if(!isDefined(best_point)) {
+  if(!isdefined(best_point)) {
     return undefined;
   }
-  if(isDefined(getdvarint("")) && getdvarint("")) {
+  if(isdefined(getdvarint("")) && getdvarint("")) {
     recordline(self.origin, best_point.origin, (0.3, 1, 0));
     recordline(self.origin, self.enemy.origin, (1, 0, 0.4));
   }
@@ -1032,7 +1034,7 @@ function drone_callback_damage(einflictor, eattacker, idamage, idflags, smeansof
 }
 
 function drone_allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == "wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isdefined(eattacker) && isdefined(eattacker.archetype) && isdefined(smeansofdeath) && eattacker.archetype == "wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
   return false;
@@ -1044,7 +1046,7 @@ function wasp_driving(params) {
   if(isplayer(driver)) {
     clientfield::set("rocket_wasp_hijacked", 1);
   }
-  if(isplayer(driver) && isDefined(self.playerdrivenversion)) {
+  if(isplayer(driver) && isdefined(self.playerdrivenversion)) {
     self thread wasp_manage_camera_swaps();
   }
 }

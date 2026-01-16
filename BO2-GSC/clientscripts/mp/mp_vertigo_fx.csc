@@ -8,7 +8,8 @@
 #include clientscripts\mp\_fx;
 #include clientscripts\mp\_fxanim_dlc;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_vertigo_tube_cloud"] = loadfx("maps/mp_maps/fx_mp_vertigo_tube_cloud");
@@ -57,9 +58,8 @@ main() {
   precache_fxanim_props_dlc();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }
 
 #using_animtree("fxanim_props");
@@ -96,12 +96,11 @@ fxanim_init(localclientnum) {
     }
   }
 
-  fxanims = getEntArray(localclientnum, "fxanim_level", "targetname");
+  fxanims = getentarray(localclientnum, "fxanim_level", "targetname");
 
   foreach(fxanim in fxanims) {
-    if(isDefined(fxanim.fxanim_scene_1) && fxanim.fxanim_scene_1 == "blinds_impact") {
+    if(isDefined(fxanim.fxanim_scene_1) && fxanim.fxanim_scene_1 == "blinds_impact")
       fxanim thread blind_animate();
-    }
   }
 }
 

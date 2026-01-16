@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace collapsegrenade;
 
 autoexec __init__system__() {
@@ -85,7 +86,7 @@ function_5df80e43(watcher, player) {
 }
 
 function_adc9aab9(var_5ff47c38) {
-  self waittill(#"explode", # "death");
+  self waittill(#"explode", #"death");
   a_players = getplayers();
 
   foreach(player in a_players) {

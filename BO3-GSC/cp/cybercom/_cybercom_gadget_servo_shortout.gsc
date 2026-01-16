@@ -32,15 +32,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(0, 2);
-  level.cybercom.servo_shortout = spawnStruct();
-  level.cybercom.servo_shortout._is_flickering = &_is_flickering;
-  level.cybercom.servo_shortout._on_flicker = &_on_flicker;
-  level.cybercom.servo_shortout._on_give = &_on_give;
-  level.cybercom.servo_shortout._on_take = &_on_take;
-  level.cybercom.servo_shortout._on_connect = &_on_connect;
-  level.cybercom.servo_shortout._on = &_on;
-  level.cybercom.servo_shortout._off = &_off;
-  level.cybercom.servo_shortout._is_primed = &_is_primed;
+  level.cybercom.servo_shortout = spawnstruct();
+  level.cybercom.servo_shortout._is_flickering = & _is_flickering;
+  level.cybercom.servo_shortout._on_flicker = & _on_flicker;
+  level.cybercom.servo_shortout._on_give = & _on_give;
+  level.cybercom.servo_shortout._on_take = & _on_take;
+  level.cybercom.servo_shortout._on_connect = & _on_connect;
+  level.cybercom.servo_shortout._on = & _on;
+  level.cybercom.servo_shortout._off = & _off;
+  level.cybercom.servo_shortout._is_primed = & _is_primed;
   level.cybercom.servo_shortout.gibcounter = 0;
 }
 
@@ -53,8 +53,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_servoshortout") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_servo_shortout_upgraded_count", 3);
   }
-  self.cybercom.targetlockcb = &_get_valid_targets;
-  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.targetlockcb = & _get_valid_targets;
+  self.cybercom.targetlockrequirementcb = & _lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -77,7 +77,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -89,15 +89,15 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isDefined(target.hijacked) && target.hijacked) {
+  if(isdefined(target.hijacked) && target.hijacked) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isDefined(target.is_disabled) && target.is_disabled) {
+  if(isdefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
-  if(!isDefined(target.archetype)) {
+  if(!isdefined(target.archetype)) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
@@ -128,7 +128,7 @@ function private _activate_servo_shortout(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
+    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -155,7 +155,7 @@ function private _activate_servo_shortout(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_servoshortout");
-    if(isDefined(itemindex)) {
+    if(isdefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -175,13 +175,13 @@ function servo_shortoutvehicle(attacker, upgraded, weapon) {
   if(issubstr(self.vehicletype, "wasp")) {
     if(isalive(self)) {
       self.death_type = "gibbed";
-      self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+      self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     }
   } else {
     if(issubstr(self.vehicletype, "raps")) {
       self.servershortout = 1;
       self thread function_a61788ff();
-      self dodamage(1, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_ELECTROCUTED");
+      self dodamage(1, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_ELECTROCUTED");
     } else {
       if(issubstr(self.vehicletype, "amws")) {
         if(isalive(self)) {
@@ -189,7 +189,7 @@ function servo_shortoutvehicle(attacker, upgraded, weapon) {
         }
       } else {
         dmg = int(self.healthdefault * 0.1);
-        self dodamage(dmg, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_GRENADE_SPLASH", 0, getweapon("emp_grenade"), -1, 1);
+        self dodamage(dmg, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_GRENADE_SPLASH", 0, getweapon("emp_grenade"), -1, 1);
       }
     }
   }
@@ -209,24 +209,24 @@ function servo_shortout(attacker, weapon = getweapon("gadget_servo_shortout"), u
   assert(self.archetype == "");
   self clientfield::set("cybercom_shortout", 1);
   if(!cybercom::function_76e3026d(self)) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   wait(randomfloatrange(0, 0.35));
   self.is_disabled = 1;
-  self dodamage(damage, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+  self dodamage(damage, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
   time = randomfloatrange(0.8, 2.1);
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     destructserverutils::destructnumberrandompieces(self, randomintrange(1, 3));
     wait(time / 3);
   }
   if(isalive(self)) {
-    if(isDefined(var_66a2f0cf) && var_66a2f0cf) {
-      self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
+    if(isdefined(var_66a2f0cf) && var_66a2f0cf) {
+      self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
     } else {
       self clientfield::set("cybercom_shortout", 2);
       self ai::set_behavior_attribute("force_crawler", "gib_legs");
@@ -236,7 +236,7 @@ function servo_shortout(attacker, weapon = getweapon("gadget_servo_shortout"), u
 }
 
 function ai_activateservoshortout(target, var_9bc2efcb = 1) {
-  if(!isDefined(target)) {
+  if(!isdefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -256,7 +256,7 @@ function ai_activateservoshortout(target, var_9bc2efcb = 1) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");

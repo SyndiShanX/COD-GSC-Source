@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace name;
 
 setup() {
@@ -33,7 +34,7 @@ initialize_nationality(str_nationality) {
 
 add_nationality_names(str_nationality) {
   switch (str_nationality) {
-    case # "american":
+    case #"american":
       american_names();
       break;
     default:
@@ -362,22 +363,22 @@ getrankfromname(name) {
   shortrank = tokens[0];
 
   switch (shortrank) {
-    case # "hash_61c7340e20b9c509":
+    case #"hash_61c7340e20b9c509":
       self.airank = "private";
       break;
-    case # "hash_5827a20dd30caea2":
+    case #"hash_5827a20dd30caea2":
       self.airank = "private";
       break;
-    case # "hash_2116fd90943206f0":
+    case #"hash_2116fd90943206f0":
       self.airank = "corporal";
       break;
-    case # "sgt.":
+    case #"sgt.":
       self.airank = "sergeant";
       break;
-    case # "lt.":
+    case #"lt.":
       self.airank = "lieutenant";
       break;
-    case # "hash_21327d909449a828":
+    case #"hash_21327d909449a828":
       self.airank = "captain";
       break;
     default:

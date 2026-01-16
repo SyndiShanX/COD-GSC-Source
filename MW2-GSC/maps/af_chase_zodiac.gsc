@@ -11,16 +11,14 @@
 #include maps\_vehicle_spline_zodiac;
 
 /************************************************************************************************************/
-
 /*													zodiac												*/
 /************************************************************************************************************/
 
 clear_all_ai_grenades() {
   add_global_spawn_function("axis", ::no_grenades);
   ai = getaiarray("axis");
-  foreach(guy in ai) {
-    guy no_grenades();
-  }
+  foreach(guy in ai)
+  guy no_grenades();
 }
 
 no_grenades() {
@@ -33,18 +31,18 @@ zodiac_main() {
   init_vehicle_splines();
 
   // I need to do this too. because the use hint for mounting the zodiac happens to late.
-  //	zodiac_triggers = getEntArray( "zodiac_trigger", "targetname" );
-  //	array_call( zodiac_triggers, ::setHintString, "Press && 1 to mount" );
+  //	zodiac_triggers = getentarray( "zodiac_trigger", "targetname" );
+  //	array_call( zodiac_triggers, ::setHintString, "Press &&1 to mount" );
 
   clear_all_ai_grenades();
 
   level.enemy_snowmobiles_max = 1;
 
-  //	kill_enemy_zodiacs = getEntArray( "kill_enemy_zodiac", "targetname" );
+  //	kill_enemy_zodiacs = getentarray( "kill_enemy_zodiac", "targetname" );
   //	array_thread( kill_enemy_zodiacs, ::kill_enemy_zodiac_think );
 
   // think this is what I might use to put the zodiac in position to kill the helicopter at the end.
-  //	player_path_triggers = getEntArray( "player_path_trigger", "targetname" );
+  //	player_path_triggers = getentarray( "player_path_trigger", "targetname" );
   //	array_thread( player_path_triggers, ::player_path_trigger_think );
 
   flag_wait("player_on_boat");
@@ -53,12 +51,11 @@ zodiac_main() {
   level.longRegenTime = 2000;
 
   // a little extra invul time for the harder difs
-  if(level.player.deathInvulnerableTime > 2000) {
+  if(level.player.deathInvulnerableTime > 2000)
     level.player.deathInvulnerableTime = 2000;
-  }
 
   zodiac = level.players_boat;
-  assert(isDefined(zodiac));
+  assert(isdefined(zodiac));
 
   level.player thread track_player_progress(zodiac.origin);
   //	flag_set( "player_gets_on_zodiac" );
@@ -89,19 +86,17 @@ player_path_trigger_think() {
 }
 
 enemy_zodiacs_spawn_and_attack() {
-  if(flag("enemy_zodiacs_wipe_out")) {
+  if(flag("enemy_zodiacs_wipe_out"))
     return;
-  }
   level endon("enemy_zodiacs_wipe_out");
   wait_time = 3;
   wait(2);
-  for(;;) {
+  for (;;) {
     thread spawn_enemy_bike();
     wait(wait_time);
     wait_time -= 0.5;
-    if(wait_time < 0.5) {
+    if(wait_time < 0.5)
       wait_time = 0.5;
-    }
     //wait( randomfloatrange( 2, 3 ) );		
   }
 }
@@ -121,8 +116,7 @@ enemy_zodiacs_wipe_out() {
 wipeout_soon() {
   self endon("death");
   wait(randomfloatrange(2, 4));
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   self.wipeout = true;
 }

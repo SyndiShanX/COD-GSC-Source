@@ -25,14 +25,15 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zodt8_pap_quest;
 
 init() {
-  level._effect[# "hash_711cbb6b36694a2a"] = # "hash_76b535da68eacfe5";
-  level._effect[# "hash_2ad6c6017f084d7a"] = # "hash_4e58e9dad90ada6d";
-  level._effect[# "hash_23bb6df1e8d8a032"] = # "hash_4f8332385445d967";
-  level._effect[# "hash_14d2dc2c31e6dab9"] = # "hash_37e114058b86991a";
-  level._effect[# "hash_79b06b6af34ac1ab"] = # "hash_1e30126e06b4956";
+  level._effect[#"hash_711cbb6b36694a2a"] = #"hash_76b535da68eacfe5";
+  level._effect[#"hash_2ad6c6017f084d7a"] = #"hash_4e58e9dad90ada6d";
+  level._effect[#"hash_23bb6df1e8d8a032"] = #"hash_4f8332385445d967";
+  level._effect[#"hash_14d2dc2c31e6dab9"] = #"hash_37e114058b86991a";
+  level._effect[#"hash_79b06b6af34ac1ab"] = #"hash_1e30126e06b4956";
   clientfield::register("zbarrier", "pap_chunk_small_rune", 1, getminbitcountfornum(16), "int", &pap_chunk_small_rune, 0, 0);
   clientfield::register("zbarrier", "pap_chunk_big_rune", 1, getminbitcountfornum(5), "int", &pap_chunk_big_rune, 0, 0);
   clientfield::register("zbarrier", "pap_machine_rune", 1, getminbitcountfornum(5), "int", &pap_machine_rune, 0, 0);
@@ -52,19 +53,19 @@ pap_chunk_big_rune(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   switch (newval) {
     case 2:
-      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[# "hash_711cbb6b36694a2a"], self.origin, v_forward);
+      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[#"hash_711cbb6b36694a2a"], self.origin, v_forward);
       audio::playloopat("zmb_pap_plinth_symbol_lp", self.origin + (0, 0, 70));
       break;
     case 3:
-      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[# "hash_2ad6c6017f084d7a"], self.origin, v_forward);
+      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[#"hash_2ad6c6017f084d7a"], self.origin, v_forward);
       audio::playloopat("zmb_pap_plinth_symbol_lp", self.origin + (0, 0, 70));
       break;
     case 4:
-      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[# "hash_23bb6df1e8d8a032"], self.origin, v_forward);
+      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[#"hash_23bb6df1e8d8a032"], self.origin, v_forward);
       audio::playloopat("zmb_pap_plinth_symbol_lp", self.origin + (0, 0, 70));
       break;
     case 5:
-      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[# "hash_14d2dc2c31e6dab9"], self.origin, v_forward);
+      self.var_86adf17d[localclientnum] = playFX(localclientnum, level._effect[#"hash_14d2dc2c31e6dab9"], self.origin, v_forward);
       audio::playloopat("zmb_pap_plinth_symbol_lp", self.origin + (0, 0, 70));
       break;
     case 1:
@@ -73,7 +74,7 @@ pap_chunk_big_rune(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
       if(isDefined(self.var_86adf17d[localclientnum])) {
         killfx(localclientnum, self.var_86adf17d[localclientnum]);
         self.var_86adf17d[localclientnum] = undefined;
-        playFX(localclientnum, level._effect[# "hash_79b06b6af34ac1ab"], self.origin, v_forward);
+        playFX(localclientnum, level._effect[#"hash_79b06b6af34ac1ab"], self.origin, v_forward);
       }
 
       break;
@@ -90,7 +91,7 @@ pap_chunk_small_rune(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       var_d7b20a11 function_a2c01e49(localclientnum, 1, 1);
       var_d7b20a11 function_a2c01e49(localclientnum, 2, 1);
       var_d7b20a11 function_a2c01e49(localclientnum, 3, 1);
-      playSound(localclientnum, # "hash_3e22cef1a7b16893", var_d7b20a11 gettagorigin("j_map_rune_004"));
+      playSound(localclientnum, #"hash_3e22cef1a7b16893", var_d7b20a11 gettagorigin("j_map_rune_004"));
       break;
     case 2:
       var_d7b20a11 function_a2c01e49(localclientnum, 0, 0);
@@ -185,7 +186,7 @@ pap_chunk_small_rune(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(newval != 1) {
-    playSound(localclientnum, # "hash_291ff1a1ce5cc02f", sndorigin);
+    playSound(localclientnum, #"hash_291ff1a1ce5cc02f", sndorigin);
   }
 }
 

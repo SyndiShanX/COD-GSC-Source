@@ -89,7 +89,7 @@ see1_intro() {
   spawn_trigger = getent("opening_vig_start", "targetname");
   spawn_trigger trigger_off();
   all_friends_hold_fire();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetDoubleVision(5, 0.05);
     players[i] SetBlur(2, 0.05);
   }
@@ -183,7 +183,7 @@ see1_intro() {
   level thread intro_achievement_detection();
   opening_knife = spawn("script_model", german_3 gettagorigin("TAG_WEAPON_LEFT"));
   opening_knife.angles = german_3 gettagangles("TAG_WEAPON_LEFT");
-  opening_knife setModel("static_berlin_ger_knife");
+  opening_knife setmodel("static_berlin_ger_knife");
   opening_knife linkto(german_3, "TAG_WEAPON_LEFT");
   level thread opening_timing();
   animSpot thread anim_single(guys, "intro");
@@ -192,12 +192,12 @@ see1_intro() {
   lerp_nodes[1] = getnode("opening_player2_start", "script_noteworthy");
   lerp_nodes[2] = getnode("opening_player3_start", "script_noteworthy");
   lerp_nodes[3] = getnode("opening_player4_start", "script_noteworthy");
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     level thread play_player_anim_intro(i, players[i], animSpot, lerp_nodes[i]);
   }
   russian_1 thread opening_attach_detach_player_weapon(russian_2);
   wait(4);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetDoubleVision(0, 2);
     players[i] SetBlur(0, 2);
   }
@@ -217,7 +217,7 @@ wii_show_hide_weapon_1() {
   wait(11);
   temp_gun = spawn("script_model", self gettagorigin("tag_weapon_right"));
   temp_gun.angles = self gettagangles("tag_weapon_right");
-  temp_gun setModel("weapon_ger_g43_rifle");
+  temp_gun setmodel("weapon_ger_g43_rifle");
   self Detach(GetWeaponModel(my_weapon), "tag_weapon_right");
   level waittill("kick_face");
   self Attach(GetWeaponModel(my_weapon), "tag_weapon_right");
@@ -259,7 +259,7 @@ test_tanks() {
 
 opening_fake_german() {
   spawner = getent("opening_fake_german", "targetname");
-  spawned = spawner stalingradspawn(true);
+  spawned = spawner stalingradSpawn(true);
   if(spawn_failed(spawned)) {
     return;
   }
@@ -283,7 +283,7 @@ waking_up() {
   overlay.sort = 1;
   level.ground_ref_ent = spawn("script_model", (0, 0, 0));
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] playerSetGroundReferenceEnt(level.ground_ref_ent);
   }
   level.ground_ref_ent rotateto((-50, 30, 10), .2, 0.1, 0.1);
@@ -325,13 +325,13 @@ intro_russian_1_death(guy) {
   guy waittillmatch("single anim", "end");
   animspot = getent("intro_anim_node", "targetname");
   level thread anim_loop_solo(level.russian_corpse, "intro_death", undefined, "stop_death_loop", animspot);
-  while(1) {
+  while (1) {
     players = get_players();
     still_too_close = false;
     if(!isDefined(level.russian_corpse)) {
       return;
     }
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distance(players[i].origin, level.russian_corpse.origin) < 3000) {
         still_too_close = true;
       } else if(distance(players[i].origin, level.russian_corpse.origin) > 10000) {
@@ -358,13 +358,13 @@ intro_german_1_death(guy) {
 
 intro_german_2_injured_loop(animspot, guy) {
   level endon("event_1_ends");
-  guy setCanDamage(true);
+  guy setcandamage(true);
   guy waittillmatch("single anim", "end");
   guy.health = 1;
   guy.nodeathragdoll = true;
   guy.deathanim = % ch_seelow1_intro_german2_dead;
   level thread intro_german_end_anim_at_damage(guy, "opening_german1_killed");
-  while(isalive(guy)) {
+  while (isalive(guy)) {
     animspot thread anim_single_solo(guy, "intro_loop");
     guy waittill("single anim");
   }
@@ -372,13 +372,13 @@ intro_german_2_injured_loop(animspot, guy) {
 
 intro_german_3_injured_loop(animspot, guy) {
   level endon("event_1_ends");
-  guy setCanDamage(true);
+  guy setcandamage(true);
   guy waittillmatch("single anim", "end");
   guy.health = 1;
   guy.nodeathragdoll = true;
   guy.deathanim = % ch_seelow1_intro_german3_dead;
   level thread intro_german_end_anim_at_damage(guy, "opening_german2_killed");
-  while(isalive(guy)) {
+  while (isalive(guy)) {
     animspot thread anim_single_solo(guy, "intro_loop");
     guy waittill("single anim");
   }
@@ -406,7 +406,7 @@ intro_achievement_detection() {
 opening_attach_watch(guy) {
   level.opening_watch = spawn("script_model", guy gettagorigin("TAG_WEAPON_LEFT"));
   level.opening_watch.angles = guy gettagangles("TAG_WEAPON_LEFT");
-  level.opening_watch setModel("anim_seelow_pocketwatch");
+  level.opening_watch setmodel("anim_seelow_pocketwatch");
   level.opening_watch linkto(guy, "TAG_WEAPON_LEFT");
 }
 
@@ -431,7 +431,7 @@ opening_player_straight(guy) {
 opening_kick_face(guy) {
   level notify("kick_face");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] dodamage(players[i].health * 0.1, (1509, -6516, -560));
   }
 }
@@ -439,7 +439,7 @@ opening_kick_face(guy) {
 opening_punch_face(guy) {
   level notify("punch_face");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] dodamage(players[i].health * 0.1, (1509, -6516, -560));
   }
 }
@@ -476,22 +476,22 @@ intro_german_end_anim_at_damage(guy, flag_name) {
 }
 
 opening_zeitzev_gunshotFX(guy) {
-  playFXOnTag(level._effect["rifleflash"], guy, "tag_flash");
+  PlayFxOnTag(level._effect["rifleflash"], guy, "tag_flash");
   wait(0.2);
-  playFXOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
+  PlayFxOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
 }
 
 opening_zeitzev_explosion(guy) {
   exploder(99);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] PlayRumbleOnEntity("artillery_rumble");
   }
   level notify("opening_house_explosion");
   book_struct = getstruct("opening_fake_book", "targetname");
   level.opening_book = spawn("script_model", book_struct.origin);
   level.opening_book.angles = book_struct.angles;
-  level.opening_book setModel("static_berlin_books_diary");
+  level.opening_book setmodel("static_berlin_books_diary");
   level.hero1 show();
   level.hero2 show();
 }
@@ -575,15 +575,15 @@ track_knockdown(russian) {
   self thread track_punches();
   wait(8);
   self.deathanim = % ch_berlin1_E3vignette3_german_death;
-  self playSound("fall_body");
+  self playsound("fall_body");
   wait(1);
   if(isalive(russian)) {
-    playFXOnTag(level._effect["rifleflash"], russian, "tag_flash");
-    russian playSound("weap_mosinnagant_fire");
+    PlayFxOnTag(level._effect["rifleflash"], russian, "tag_flash");
+    russian playsound("weap_mosinnagant_fire");
   }
   wait(0.2);
   if(isalive(russian)) {
-    playFXOnTag(level._effect["rifle_shelleject"], russian, "tag_brass");
+    PlayFxOnTag(level._effect["rifle_shelleject"], russian, "tag_brass");
   }
 }
 
@@ -595,11 +595,11 @@ track_punches() {
 track_punches_single(time) {
   self endon("death");
   wait(time);
-  self playSound("ber3b_gun_impct");
+  self playsound("ber3b_gun_impct");
 }
 
 killed_by_player_only() {
-  while(1) {
+  while (1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
     if(isplayer(attacker)) {
       self dodamage(self.health + 100, (0, 0, 0), attacker, attacker);
@@ -657,9 +657,9 @@ melee_comabt_2_vignette() {
 
 opening_spawn_germans() {
   level waittill("player_exits_house");
-  spawners = getEntArray("opening_german_retreating", "targetname");
+  spawners = getentarray("opening_german_retreating", "targetname");
   array_thread(spawners, ::add_spawn_function, ::opening_spawn_germans_think);
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     german = spawners[i] stalingradspawn();
     if(i % 4 == 0) {
       wait_network_frame();
@@ -767,10 +767,10 @@ fake_throw_molotov() {
   self endon("death");
   molotov = spawn("script_model", self gettagorigin("tag_weapon_left"));
   molotov.angles = self gettagangles("tag_weapon_left");
-  molotov setModel("weapon_rus_molotov_grenade");
+  molotov setmodel("weapon_rus_molotov_grenade");
   molotov linkto(self, "tag_weapon_left");
   wait(3.5);
-  playFXOnTag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
+  playfxontag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
   wait(2.2);
   molotov unlink();
   molotov_target = getstruct(self.script_noteworthy, "targetname");
@@ -778,7 +778,7 @@ fake_throw_molotov() {
   velocities = forward * 12000;
   molotov physicslaunch((molotov.origin), velocities);
   wait(1.2);
-  playFX(level._effect["molotov_explosion"], molotov_target.origin);
+  playfx(level._effect["molotov_explosion"], molotov_target.origin);
   playsoundatposition("weap_molotov_impact", molotov.origin);
   level thread start_spreading_fire(molotov_target.origin, 0.2);
   molotov delete();
@@ -786,7 +786,7 @@ fake_throw_molotov() {
 
 opening_react_to_tank_fire() {
   self endon("death");
-  while(1) {
+  while (1) {
     level waittill("tank_fires");
     if(isDefined(level.tank_fire_pos) && isDefined(level.tank_fire_target)) {
       nearestPoint = PointOnSegmentNearestToPoint(level.tank_fire_pos, level.tank_fire_target, self.origin);
@@ -822,7 +822,7 @@ opening_react_to_tank_fire() {
 
 start_spreading_fire(pos, wait_time) {
   wait(wait_time);
-  playFX(level._effect["wheat_fire_medium"], pos);
+  playfx(level._effect["wheat_fire_medium"], pos);
   SetClientSysState("levelNotify", "wheat_fire");
 }
 
@@ -848,7 +848,7 @@ opening_loop_fire_at_target(target_ent, fire_msg, end_msg) {
   self SetTurretTargetEnt(target_ent);
   max_fires = 10;
   current_fires = 0;
-  while(1) {
+  while (1) {
     if(current_fires > max_fires) {
       return;
     }
@@ -860,10 +860,10 @@ opening_loop_fire_at_target(target_ent, fire_msg, end_msg) {
         level.tank_fire_target = target_ent.origin;
         wait(0.3);
         self FireWeapon();
-        playFX(level._effect["tank_fire_dust"], self.origin);
+        playfx(level._effect["tank_fire_dust"], self.origin);
         current_fires++;
         if(target_ent.targetname == "opening_tank_1_target_2" || target_ent.targetname == "opening_tank_2_target_2") {
-          playFX(level._effect["wheat_blow_up"], target_ent.origin + (200, 0, 20));
+          playfx(level._effect["wheat_blow_up"], target_ent.origin + (200, 0, 20));
         }
         play_puddle_fx(self.origin, target_ent.origin);
       }
@@ -878,7 +878,7 @@ play_puddle_fx(tank_origin, target_origin) {
   puddle_origins = getstructarray("opening_puddle", "targetname");
   nearest_puddle = puddle_origins[0];
   nearest_puddle_dist = distance(nearest_puddle.origin, tank_origin);
-  for(i = 0; i < puddle_origins.size; i++) {
+  for (i = 0; i < puddle_origins.size; i++) {
     if(distance(puddle_origins[i].origin, tank_origin) < nearest_puddle_dist) {
       nearest_puddle = puddle_origins[i];
       nearest_puddle_dist = distance(nearest_puddle.origin, tank_origin);
@@ -887,7 +887,7 @@ play_puddle_fx(tank_origin, target_origin) {
   nearestPoint = PointOnSegmentNearestToPoint(tank_origin, target_origin, nearest_puddle.origin);
   dist = distance(nearestPoint, nearest_puddle.origin);
   if(dist <= 300) {
-    playFX(level._effect["puddle"], nearest_puddle.origin + (0, 0, 4));
+    playfx(level._effect["puddle"], nearest_puddle.origin + (0, 0, 4));
   }
 }
 
@@ -969,7 +969,7 @@ opening_tank_2_wait() {
   self waittill("reached_wait_node");
   if(level.house_blown_up == false) {
     self setspeed(0, 5);
-    while(level.house_blown_up == false) {
+    while (level.house_blown_up == false) {
       wait(0.05);
     }
     self resumespeed(5);
@@ -983,7 +983,7 @@ opening_spawn_more_tanks() {
   trigger waittill("trigger");
   start_node = getvehiclenode("opening_tank_3_start", "targetname");
   count = 0;
-  while(1) {
+  while (1) {
     if(get_players()[0] istouching(trigger)) {
       level thread opening_spawn_move_tank(start_node);
       wait(randomint(17) + 12);
@@ -1013,27 +1013,27 @@ opening_spawn_move_tank(start_node) {
 additional_fires() {
   flag_wait("molotov_tossed");
   structs = getstructarray("opening_burning_field_points", "targetname");
-  for(i = 0; i < structs.size; i++) {
+  for (i = 0; i < structs.size; i++) {
     if(isDefined(structs[i].script_noteworthy) && structs[i].script_noteworthy == "temp_disable") {
       continue;
     } else {
       wait(0.05);
-      playFX(level._effect["wheat_fire_medium"], structs[i].origin);
+      playfx(level._effect["wheat_fire_medium"], structs[i].origin);
     }
   }
   structs2 = getstructarray("opening_burning_field_points_large", "targetname");
-  for(i = 0; i < structs2.size; i++) {
+  for (i = 0; i < structs2.size; i++) {
     if(isDefined(structs2[i].script_noteworthy) && structs2[i].script_noteworthy == "temp_disable") {
       continue;
     } else {
       wait(0.05);
-      playFX(level._effect["wheat_fire_large"], structs2[i].origin + (0, 0, 30));
+      playfx(level._effect["wheat_fire_large"], structs2[i].origin + (0, 0, 30));
     }
   }
   structs3 = getstructarray("opening_burning_field_points_smoke", "targetname");
-  for(i = 0; i < structs3.size; i++) {
+  for (i = 0; i < structs3.size; i++) {
     wait(0.05);
-    playFX(level._effect["wheat_smoke"], structs3[i].origin);
+    playfx(level._effect["wheat_smoke"], structs3[i].origin);
   }
 }
 
@@ -1082,7 +1082,7 @@ spawn_func_running_and_dying() {
     self thread animscripts\death::flame_death_fx();
   }
   wait(2);
-  while(distance(self.origin, self.goalpos) > 100) {
+  while (distance(self.origin, self.goalpos) > 100) {
     wait(0.1);
   }
   if(is_german_build() == false) {
@@ -1095,14 +1095,14 @@ spawn_func_running_and_dying() {
     tags[5] = "j_elbow_ri";
     tags[6] = "j_clavicle_le";
     tags[7] = "j_clavicle_ri";
-    for(i = 0; i < 2; i++) {
+    for (i = 0; i < 2; i++) {
       random = randomintrange(0, tags.size);
       BulletTracer((2051, -5465, -666) + (randomint(50) - 25, 0, 0), self gettagorigin(tags[random]));
       if(random == 2) {
-        playFXOnTag(level._effect["headshot_hit"], self, tags[random]);
+        playfxontag(level._effect["headshot_hit"], self, tags[random]);
         break;
       } else {
-        playFXOnTag(level._effect["flesh_hit"], self, tags[random]);
+        playfxontag(level._effect["flesh_hit"], self, tags[random]);
         wait(randomfloat(0.1));
       }
     }
@@ -1131,7 +1131,7 @@ spawn_func_running_and_dying_to_end() {
   self.accuracy = 0.01;
   self thread goal_die_to_player();
   wait(2);
-  while(distance(self.origin, self.goalpos) > 100) {
+  while (distance(self.origin, self.goalpos) > 100) {
     wait(0.1);
   }
   if(is_german_build() == false) {
@@ -1144,14 +1144,14 @@ spawn_func_running_and_dying_to_end() {
     tags[5] = "j_elbow_ri";
     tags[6] = "j_clavicle_le";
     tags[7] = "j_clavicle_ri";
-    for(i = 0; i < 2 + randomint(3); i++) {
+    for (i = 0; i < 2 + randomint(3); i++) {
       random = randomintrange(0, tags.size);
       BulletTracer((2051, -5465, -666) + (randomint(50) - 25, 0, 0), self gettagorigin(tags[random]));
       if(random == 2) {
-        playFXOnTag(level._effect["headshot_hit"], self, tags[random]);
+        playfxontag(level._effect["headshot_hit"], self, tags[random]);
         break;
       } else {
-        playFXOnTag(level._effect["flesh_hit"], self, tags[random]);
+        playfxontag(level._effect["flesh_hit"], self, tags[random]);
         wait(randomfloat(0.2));
       }
     }
@@ -1162,9 +1162,9 @@ spawn_func_running_and_dying_to_end() {
 goal_die_to_player() {
   self endon("death");
   self endon("goal");
-  while(1) {
+  while (1) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distance(players[i].origin, self.origin) < 80) {
         self notify("ready_to_die_already");
         tags = [];
@@ -1176,14 +1176,14 @@ goal_die_to_player() {
         tags[5] = "j_elbow_ri";
         tags[6] = "j_clavicle_le";
         tags[7] = "j_clavicle_ri";
-        for(i = 0; i < 2 + randomint(3); i++) {
+        for (i = 0; i < 2 + randomint(3); i++) {
           random = randomintrange(0, tags.size);
           BulletTracer((2051, -5465, -666) + (randomint(50) - 25, 0, 0), self gettagorigin(tags[random]));
           if(random == 2) {
-            playFXOnTag(level._effect["headshot_hit"], self, tags[random]);
+            playfxontag(level._effect["headshot_hit"], self, tags[random]);
             break;
           } else {
-            playFXOnTag(level._effect["flesh_hit"], self, tags[random]);
+            playfxontag(level._effect["flesh_hit"], self, tags[random]);
             wait(randomfloat(0.2));
           }
         }
@@ -1198,7 +1198,7 @@ goal_die_to_player() {
 spawn_flaming_guys() {}
 running_on_fire_1_vignette() {
   spawner = getent("opening_fire_runner_1_death", "targetname");
-  german = spawner Stalingradspawn();
+  german = spawner StalingradSpawn();
   spawn_failed(german);
   german.animname = "german";
   german thread animscripts\death::flame_death_fx();
@@ -1210,7 +1210,7 @@ running_on_fire_1_vignette() {
 
 running_on_fire_2_vignette() {
   spawner = getent("opening_fire_runner_1_death", "targetname");
-  german = spawner Stalingradspawn();
+  german = spawner StalingradSpawn();
   spawn_failed(german);
   german.animname = "german";
   german thread animscripts\death::flame_death_fx();
@@ -1231,8 +1231,8 @@ spawn_flaming_guys_side() {
   trigger waittill("trigger");
   pos1 = getstruct("opening_fire_hole_target", "targetname");
   pos2 = getstruct("opening_fire_hole_target_2", "targetname");
-  playFX(level._effect["molotov_explosion"], pos1.origin);
-  playFX(level._effect["molotov_explosion"], pos2.origin);
+  playfx(level._effect["molotov_explosion"], pos1.origin);
+  playfx(level._effect["molotov_explosion"], pos2.origin);
   if(is_german_build() == false) {
     level thread running_on_fire_3_vignette();
     wait(0.5);
@@ -1242,7 +1242,7 @@ spawn_flaming_guys_side() {
 
 running_on_fire_3_vignette() {
   spawner = getent("opening_fire_runner_1_death", "targetname");
-  german = spawner Stalingradspawn();
+  german = spawner StalingradSpawn();
   spawn_failed(german);
   german hold_fire();
   german.animname = "german";
@@ -1267,7 +1267,7 @@ running_on_fire_4_vignette() {
 
 running_on_fire_5_vignette() {
   spawner = getent("opening_fire_runner_2_death", "targetname");
-  german = spawner Stalingradspawn();
+  german = spawner StalingradSpawn();
   spawn_failed(german);
   german hold_fire();
   german.animname = "german";
@@ -1295,7 +1295,7 @@ opening_plane_flash() {
     start_node.angles);
   plane attachPath(start_node);
   plane startpath();
-  plane playSound("fly_by");
+  plane playsound("fly_by");
   wait(3);
   plane waittill("reached_end_node");
   plane notify("stop_firing");
@@ -1307,10 +1307,10 @@ opening_flashes() {
   flash_points2 = getstruct("opening_flash_2_new", "targetname");
   flash_points3 = getstruct("opening_flash_3", "targetname");
   wait(5);
-  playFX(level._effect["napalm"], flash_points1.origin);
+  playfx(level._effect["napalm"], flash_points1.origin);
   playsoundatposition("bomb1L", flash_points1.origin);
   wait(0.7);
-  playFX(level._effect["napalm"], flash_points2.origin);
+  playfx(level._effect["napalm"], flash_points2.origin);
   playsoundatposition("bomb2L", flash_points2.origin);
 }
 
@@ -1333,7 +1333,7 @@ dialog_player_into_wheat_field() {
   level.hero2 say_dialogue_wait("chernov", "stay_out");
   level.hero2 say_dialogue_wait("chernov", "soon_ashes");
   if(isDefined(trigger) && any_player_touching(trigger)) {
-    while(1) {
+    while (1) {
       if(!isDefined(trigger)) {
         return;
       }

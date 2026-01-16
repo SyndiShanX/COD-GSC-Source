@@ -13,7 +13,7 @@ init() {
 }
 
 onplayerconnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", var_0);
     var_0.selfdeathicons = [];
   }
@@ -25,7 +25,7 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!level.teambased) {
     return;
   }
-  if(isDefined(var_4) && isplayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
+  if(isdefined(var_4) && isplayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
     return;
   }
   var_6 = var_0.origin;
@@ -43,9 +43,8 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(level.hardcoremode) {
     return;
   }
-  if(isDefined(self.lastdeathicon)) {
+  if(isdefined(self.lastdeathicon))
     self.lastdeathicon destroy();
-  }
 
   var_7 = newteamhudelem(var_2);
   var_7.x = var_6[0];
@@ -54,11 +53,10 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7.alpha = 0.61;
   var_7.archived = 1;
 
-  if(level.splitscreen) {
+  if(level.splitscreen)
     var_7 setshader("headicon_dead", 14, 14);
-  } else {
+  else
     var_7 setshader("headicon_dead", 7, 7);
-  }
 
   var_7 setwaypoint(0);
   self.lastdeathicon = var_7;

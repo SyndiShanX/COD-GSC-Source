@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace events;
 
 add_timed_event(seconds, notify_string, client_notify_string) {
@@ -63,7 +64,7 @@ add_round_score_event(score, notify_string, client_notify_string) {
 
 any_team_reach_score(score) {
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= score) {
+    if(game.stat[#"teamscores"][team] >= score) {
       return true;
     }
   }

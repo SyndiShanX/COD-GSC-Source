@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_stats;
+
 #namespace zgrief;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -52,15 +53,15 @@ onstartgametype() {
 ontimelimit() {
   winner = globallogic::determineteamwinnerbygamestat("teamScores");
   globallogic_utils::logteamwinstring("time limit", winner);
-  setdvar(#"ui_text_endreason", game.strings[# "time_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "time_limit_reached"]);
+  setdvar(#"ui_text_endreason", game.strings[#"time_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"time_limit_reached"]);
 }
 
 onscorelimit() {
   winner = globallogic::determineteamwinnerbygamestat("teamScores");
   globallogic_utils::logteamwinstring("scorelimit", winner);
-  setdvar(#"ui_text_endreason", game.strings[# "score_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "score_limit_reached"]);
+  setdvar(#"ui_text_endreason", game.strings[#"score_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"score_limit_reached"]);
 }
 
 playerdamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {

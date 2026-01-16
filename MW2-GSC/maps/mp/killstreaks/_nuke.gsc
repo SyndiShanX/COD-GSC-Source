@@ -17,7 +17,7 @@ init() {
   level._effect["nuke_flash"] = loadfx("explosions/player_death_nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("dust/nuke_aftermath_mp");
 
-  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE";
+  game["strings"]["nuclear_strike"] = & "MP_TACTICAL_NUKE";
 
   level.killstreakFuncs["nuke"] = ::tryUseNuke;
 
@@ -27,9 +27,11 @@ init() {
   level.nukeTimer = getDvarInt("scr_nukeTimer");
   level.cancelMode = getDvarInt("scr_nukeCancelMode");
 
+  /#
   setDevDvarIfUninitialized("scr_nukeDistance", 5000);
   setDevDvarIfUninitialized("scr_nukeEndsGame", true);
   setDevDvarIfUninitialized("scr_nukeDebugPosition", false);
+  # /
 }
 
 tryUseNuke(lifeId, allowCancel) {
@@ -38,13 +40,11 @@ tryUseNuke(lifeId, allowCancel) {
     return false;
   }
 
-  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw)) {
+  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw))
     return false;
-  }
 
-  if(!isDefined(allowCancel)) {
+  if(!isDefined(allowCancel))
     allowCancel = true;
-  }
 
   self thread doNuke(allowCancel);
   self notify("used_nuke");
@@ -78,22 +78,20 @@ doNuke(allowCancel) {
     thread teamPlayerCardSplash("used_nuke", self, self.team);
     /*
     players = level.players;
-    		
+		
     foreach( player in level.players )
     {
     	playerteam = player.pers["team"];
-    	if( isDefined( playerteam ) )
+    	if( isdefined( playerteam ) )
     	{
-    		if( playerteam == self.pers["team"] ) {
-    			player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
-    		}
+    		if( playerteam == self.pers["team"] )
+    			player iprintln( &"MP_TACTICAL_NUKE_CALLED", self );
     	}
     }
     */
   } else {
-    if(!level.hardcoreMode) {
+    if(!level.hardcoreMode)
       self iprintlnbold(&"MP_FRIENDLY_TACTICAL_NUKE");
-    }
   }
 
   level thread delaythread_nuke((level.nukeTimer - 3.3), ::nukeSoundIncoming);
@@ -105,15 +103,14 @@ doNuke(allowCancel) {
   level thread delaythread_nuke((level.nukeTimer + 1.5), ::nukeEarthquake);
   level thread nukeAftermathEffect();
 
-  if(level.cancelMode && allowCancel) {
+  if(level.cancelMode && allowCancel)
     level thread cancelNukeOnDeath(self);
-  }
 
   // leaks if lots of nukes are called due to endon above.
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
-  while(!isDefined(level.nukeDetonated)) {
+  while (!isDefined(level.nukeDetonated)) {
     clockObject playSound("ui_mp_nukebomb_timer");
     wait(1.0);
   }
@@ -122,9 +119,8 @@ doNuke(allowCancel) {
 cancelNukeOnDeath(player) {
   player waittill_any("death", "disconnect");
 
-  if(isDefined(player) && level.cancelMode == 2) {
+  if(isDefined(player) && level.cancelMode == 2)
     player thread maps\mp\killstreaks\_emp::EMP_Use(0, 0);
-  }
 
   maps\mp\gametypes\_gamelogic::resumeTimer();
   level.timeLimitOverride = false;
@@ -137,9 +133,8 @@ cancelNukeOnDeath(player) {
 nukeSoundIncoming() {
   level endon("nuke_cancelled");
 
-  foreach(player in level.players) {
-    player playlocalsound("nuke_incoming");
-  }
+  foreach(player in level.players)
+  player playlocalsound("nuke_incoming");
 }
 
 nukeSoundExplosion() {
@@ -161,23 +156,25 @@ nukeEffects() {
   level maps\mp\killstreaks\_emp::destroyActiveVehicles(level.nukeInfo.player);
 
   foreach(player in level.players) {
-    playerForward = anglesToForward(player.angles);
+    playerForward = anglestoforward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     nukeDistance = 5000;
-    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	
+    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	#/
 
-    nukeEnt = spawn("script_model", player.origin + Vector_Multiply(playerForward, nukeDistance));
+    nukeEnt = Spawn("script_model", player.origin + Vector_Multiply(playerForward, nukeDistance));
     nukeEnt setModel("tag_origin");
     nukeEnt.angles = (0, (player.angles[1] + 180), 90);
 
+    /#
     if(getDvarInt("scr_nukeDebugPosition")) {
       lineTop = (nukeEnt.origin[0], nukeEnt.origin[1], (nukeEnt.origin[2] + 500));
       thread draw_line_for_time(nukeEnt.origin, lineTop, 1, 0, 0, 10);
     }
+    # /
 
-    nukeEnt thread nukeEffect(player);
+      nukeEnt thread nukeEffect(player);
     player.nuked = true;
   }
 }
@@ -201,7 +198,7 @@ nukeAftermathEffect() {
   up = anglestoup(afermathEnt.angles);
   right = anglestoright(afermathEnt.angles);
 
-  playFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
+  PlayFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
 }
 
 nukeSlowMo() {
@@ -236,23 +233,21 @@ nukeDeath() {
   AmbientStop(1);
 
   foreach(player in level.players) {
-    if(isAlive(player)) {
+    if(isAlive(player))
       player thread maps\mp\gametypes\_damage::finishPlayerDamageWrapper(level.nukeInfo.player, level.nukeInfo.player, 999999, 0, "MOD_EXPLOSIVE", "nuke_mp", player.origin, player.origin, "none", 0, 0);
-    }
   }
 
   level.postRoundTime = 10;
 
   nukeEndsGame = true;
 
-  if(level.teamBased) {
+  if(level.teamBased)
     thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.team, game["strings"]["nuclear_strike"], true);
-  } else {
-    if(isDefined(level.nukeInfo.player)) {
+  else {
+    if(isDefined(level.nukeInfo.player))
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.player, game["strings"]["nuclear_strike"], true);
-    } else {
+    else
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo, game["strings"]["nuclear_strike"], true);
-    }
   }
 }
 

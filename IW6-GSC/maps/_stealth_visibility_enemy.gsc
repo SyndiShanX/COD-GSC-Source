@@ -23,9 +23,8 @@ enemy_threat_logic() {
       continue;
     }
     if(!maps\_stealth_utility::stealth_group_spotted_flag()) {
-      if(!enemy_alert_level_logic(self.enemy)) {
+      if(!enemy_alert_level_logic(self.enemy))
         continue;
-      }
     } else
       maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
 
@@ -52,9 +51,8 @@ enemy_threat_logic() {
     }
     maps\_utility::ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
 
-    if(isDefined(self.enemy)) {
+    if(isDefined(self.enemy))
       maps\_stealth_shared_utilities::enemy_alert_level_forget(self.enemy, 0);
-    }
 
     self clearenemy();
     maps\_stealth_threat_enemy::enemy_alert_level_change("reset");
@@ -71,20 +69,17 @@ enemy_alert_level_logic_start_attacking(var_0) {
 }
 
 enemy_alert_level_logic(var_0) {
-  if(!isDefined(var_0._stealth)) {
+  if(!isDefined(var_0._stealth))
     return 1;
-  }
 
-  if(!isDefined(var_0._stealth.logic.spotted_list[self.unique_id])) {
+  if(!isDefined(var_0._stealth.logic.spotted_list[self.unique_id]))
     var_0._stealth.logic.spotted_list[self.unique_id] = 0;
-  }
 
   for(;;) {
     var_0._stealth.logic.spotted_list[self.unique_id]++;
 
-    if(enemy_alert_level_logic_start_attacking(var_0)) {
+    if(enemy_alert_level_logic_start_attacking(var_0))
       return 1;
-    }
 
     var_1 = var_0._stealth.logic.spotted_list[self.unique_id];
     maps\_stealth_threat_enemy::enemy_alert_level_change("warning" + var_1);
@@ -108,9 +103,8 @@ enemy_threat_set_spotted() {
   if(isDefined(var_0)) {
     level._stealth.group.spotted_enemy[self.script_stealthgroup] = var_0;
 
-    if(isDefined(var_0._stealth)) {
+    if(isDefined(var_0._stealth))
       var_0 maps\_stealth_shared_utilities::group_flag_set("_stealth_spotted");
-    }
   }
 
   maps\_stealth_shared_utilities::group_flag_set("_stealth_spotted");
@@ -182,9 +176,8 @@ enemy_event_category_awareness(var_0) {
         if(!isDefined(self._stealth.logic.event.aware_aievents[var_1])) {
           continue;
         }
-        if(var_1 == "bulletwhizby" && (!isDefined(var_2.team) || var_2.team == self.team)) {
+        if(var_1 == "bulletwhizby" && (!isDefined(var_2.team) || var_2.team == self.team))
           continue;
-        }
       default:
         maps\_stealth_shared_utilities::group_flag_set("_stealth_event");
         level thread enemy_event_handle_clear(self.script_stealthgroup);
@@ -245,15 +238,13 @@ event_awareness_waitclear_ai_proc() {
   waittillframeend;
   var_0 = 0;
 
-  if(isDefined(self.ent_flag["_stealth_behavior_first_reaction"])) {
+  if(isDefined(self.ent_flag["_stealth_behavior_first_reaction"]))
     var_0 = maps\_utility::ent_flag("_stealth_behavior_first_reaction");
-  }
 
   var_1 = 0;
 
-  if(isDefined(self.ent_flag["_stealth_behavior_reaction_anim"])) {
+  if(isDefined(self.ent_flag["_stealth_behavior_reaction_anim"]))
     var_0 = maps\_utility::ent_flag("_stealth_behavior_reaction_anim");
-  }
 
   if(!var_0 && !var_1) {
     return;
@@ -348,9 +339,8 @@ enemy_init() {
   maps\_stealth_shared_utilities::group_flag_init("_stealth_found_corpse");
   maps\_stealth_shared_utilities::group_add_to_global_list();
 
-  if(!isDefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup])) {
+  if(!isDefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup]))
     level._stealth.behavior.sound["spotted"][self.script_stealthgroup] = 0;
-  }
 
   self._stealth.logic.alert_level = spawnStruct();
   self._stealth.logic.alert_level.max_warnings = 0;

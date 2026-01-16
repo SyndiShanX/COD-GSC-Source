@@ -13,6 +13,7 @@
 #include scripts\mp\mp_urban_fx;
 #include scripts\mp\mp_urban_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_urban;
 
 event_handler[level_init] main(eventstruct) {
@@ -25,7 +26,7 @@ event_handler[level_init] main(eventstruct) {
 
   init_devgui();
 
-  load::main();
+    load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((1152, 0, 200), (-1238, 68, 136), (-256, 2014, 72), (-922, -2198, 8), (1152, 1368, 72));
   level spawnkilltrigger();
@@ -105,7 +106,7 @@ on_end_game() {
 
 function_2cdcf5c3() {
   if(getdvarint(#"hash_1ee1f013d124a26a", 1)) {
-    level util::delay(0.3, undefined, &scene::play, # "p8_fxanim_mp_urban_vehicle_testing_bundle", "Shot 1");
+    level util::delay(0.3, undefined, &scene::play, #"p8_fxanim_mp_urban_vehicle_testing_bundle", "Shot 1");
 
     if(util::isfirstround()) {
       level thread scene::play(#"p8_fxanim_mp_urban_building_open_bundle");
@@ -184,3 +185,4 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x83>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:xc4>");
 }
+

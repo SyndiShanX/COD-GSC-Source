@@ -20,9 +20,9 @@
 
 function init() {
   level flag::init("meteor_impact");
-  zm_sidequests::declare_sidequest_stage("sq", "LGS", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "LGS", & init_stage, & stage_logic, & exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "LGS", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "LGS", "sq_lgs_crystal", &lgs_crystal);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "LGS", "sq_lgs_crystal", & lgs_crystal);
 }
 
 function init_stage() {
@@ -52,9 +52,9 @@ function play_nikolai_farting() {
   level endon("sq_lgs_over");
   wait(2);
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].characterindex == 1) {
-      players[i] playSound("evt_sq_lgs_fart");
+      players[i] playsound("evt_sq_lgs_fart");
       return;
     }
   }
@@ -69,7 +69,7 @@ function play_intro_audio() {
 function first_damage() {
   self endon("death");
   self endon("first_damage_done");
-  while(true) {
+  while (true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered");
@@ -85,9 +85,9 @@ function first_damage() {
 function wait_for_player_to_get_close() {
   self endon("death");
   self endon("first_damage_done");
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(distancesquared(self.origin, players[i].origin) <= 250000) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest3", 0);
         return;
@@ -100,7 +100,7 @@ function wait_for_player_to_get_close() {
 function report_melee_early() {
   self endon("death");
   self endon("shrunk");
-  while(true) {
+  while (true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest3", 3);
@@ -111,7 +111,7 @@ function report_melee_early() {
 
 function wait_for_melee() {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
       self.owner_ent notify("triggered");
@@ -125,18 +125,18 @@ function check_for_closed_slide(ent) {
   if(!level flag::get("waterslide_open")) {
     self endon("death");
     self endon("reached_end_node");
-    while(true) {
+    while (true) {
       self waittill("reached_node", node);
-      if(isDefined(node.script_noteworthy) && node.script_noteworthy == "pre_gate") {
+      if(isdefined(node.script_noteworthy) && node.script_noteworthy == "pre_gate") {
         if(!level flag::get("waterslide_open")) {
           players = getplayers();
-          for(i = 0; i < players.size; i++) {
+          for (i = 0; i < players.size; i++) {
             if(distancesquared(self.origin, players[i].origin) <= 250000) {
               players[i] thread zm_audio::create_and_play_dialog("eggs", "quest3", 7);
             }
           }
           self._crystal stopanimscripted();
-          while(!level flag::get("waterslide_open")) {
+          while (!level flag::get("waterslide_open")) {
             self setspeedimmediate(0);
             wait(0.05);
           }
@@ -152,9 +152,9 @@ function check_for_closed_slide(ent) {
 
 function water_trail(ent) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("reached_node", node);
-    if(isDefined(node.script_int)) {
+    if(isdefined(node.script_int)) {
       if(node.script_int == 1) {
         ent clientfield::set("watertrail", 1);
       } else if(node.script_int == 0) {
@@ -192,42 +192,42 @@ function lgs_crystal() {
   self waittill("triggered");
   self.trigger notify("first_damage_done");
   exploder::stop_exploder("fxexp_602");
-  self playSound("evt_sq_lgs_crystal_pry");
+  self playsound("evt_sq_lgs_crystal_pry");
   target = self.target;
-  while(isDefined(target)) {
+  while (isdefined(target)) {
     struct = struct::get(target, "targetname");
-    if(isDefined(struct.script_parameters)) {
+    if(isdefined(struct.script_parameters)) {
       time = float(struct.script_parameters);
     } else {
       time = 1;
     }
     self moveto(struct.origin, time, time / 10);
     self waittill("movedone");
-    self playSound("evt_sq_lgs_crystal_hit1");
+    self playsound("evt_sq_lgs_crystal_hit1");
     target = struct.target;
   }
-  self playSound("evt_sq_lgs_crystal_land");
+  self playsound("evt_sq_lgs_crystal_land");
   self.trigger.origin = self.origin;
   self.trigger thread report_melee_early();
   zm_weap_shrink_ray::add_shrinkable_object(self);
   self waittill("shrunk");
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     currentweapon = players[i] getcurrentweapon();
     if(currentweapon == level.w_shrink_ray || currentweapon == level.w_shrink_ray_upgraded) {
       players[i] thread zm_audio::create_and_play_dialog("eggs", "quest3", 4);
     }
   }
-  self playSound("evt_sq_lgs_crystal_shrink");
-  self setModel("p7_fxanim_zm_sha_crystal_sml_mod");
+  self playsound("evt_sq_lgs_crystal_shrink");
+  self setmodel("p7_fxanim_zm_sha_crystal_sml_mod");
   vn = getvehiclenode("sq_lgs_node_start", "targetname");
   self.origin = vn.origin;
   self.trigger notify("shrunk");
   zm_weap_shrink_ray::remove_shrinkable_object(self);
   self.trigger thread wait_for_melee();
   self waittill("triggered");
-  self playSound("evt_sq_lgs_crystal_knife");
-  self playLoopSound("evt_sq_lgs_crystal_roll", 2);
+  self playsound("evt_sq_lgs_crystal_knife");
+  self playloopsound("evt_sq_lgs_crystal_roll", 2);
   self.trigger.origin = self.trigger.var_d5784b10;
   self.trigger notsolid();
   self.trigger.takedamage = 0;
@@ -252,7 +252,7 @@ function lgs_crystal() {
   self stopanimscripted();
   self unlink();
   self stoploopsound();
-  self playSound("evt_sq_lgs_crystal_land_2");
+  self playsound("evt_sq_lgs_crystal_land_2");
   vehicle delete();
   origin_animate delete();
   self thread crystal_bobble();
@@ -269,11 +269,11 @@ function lgs_crystal() {
   wait(2);
   holder = getent("empty_holder", "script_noteworthy");
   self.origin = (holder.origin[0], holder.origin[1], self.origin[2]);
-  self setModel("p7_zm_sha_crystal");
+  self setmodel("p7_zm_sha_crystal");
   playsoundatposition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
   self moveto((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
   self waittill("movedone");
-  self playSound("evt_sq_lgs_crystal_landinholder");
+  self playsound("evt_sq_lgs_crystal_landinholder");
   players = getplayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest3", 8);
   level notify("crystal_dropped");
@@ -285,7 +285,7 @@ function lgs_crystal() {
 function crystal_spin() {
   self endon("death");
   self endon("kill_bobble");
-  while(true) {
+  while (true) {
     t = randomfloatrange(0.2, 0.8);
     self rotateto((180 + randomfloat(180), 300 + randomfloat(60), 180 + randomfloat(180)), t);
     wait(t);
@@ -299,7 +299,7 @@ function crystal_bobble() {
   node = getvehiclenode("crystal_end", "script_noteworthy");
   bottom_pos = node.origin + vectorscale((0, 0, 1), 4);
   top_pos = bottom_pos + vectorscale((0, 0, 1), 3);
-  while(true) {
+  while (true) {
     self moveto(top_pos + (0, 0, randomfloat(3)), 0.2 + randomfloat(0.1), 0.1);
     self waittill("movedone");
     self moveto(bottom_pos + (0, 0, randomfloat(5)), 0.05 + randomfloat(0.07), 0, 0.03);
@@ -310,15 +310,15 @@ function crystal_bobble() {
 function stage_logic() {}
 
 function exit_stage(success) {
-  if(isDefined(level._lgs_veh)) {
-    if(isDefined(level._lgs_veh._origin_animate)) {
+  if(isdefined(level._lgs_veh)) {
+    if(isdefined(level._lgs_veh._origin_animate)) {
       level._lgs_veh._origin_animate delete();
     }
     level._lgs_veh delete();
   }
   level._lgs_veh = undefined;
   if(success) {
-    zm_temple_sq_brock::create_radio(4, &zm_temple_sq_brock::radio4_override);
+    zm_temple_sq_brock::create_radio(4, & zm_temple_sq_brock::radio4_override);
   } else {
     zm_temple_sq_brock::create_radio(3);
     level thread zm_temple_sq_skits::fail_skit();

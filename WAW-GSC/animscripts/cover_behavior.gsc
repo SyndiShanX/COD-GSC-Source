@@ -34,24 +34,22 @@ main(behaviorCallbacks) {
   self thread watchSuppression();
   desynched = (gettime() > 2500);
   correctAngles = self.coverNode.angles;
-  if(self.coverNode.type == "Cover Left" || self.coverNode.type == "Cover Left Wide") {
+  if(self.coverNode.type == "Cover Left" || self.coverNode.type == "Cover Left Wide")
     correctAngles = (correctAngles[0], correctAngles[1] + 90, correctAngles[2]);
-  } else if(self.coverNode.type == "Cover Right" || self.coverNode.type == "Cover Right Wide") {
+  else if(self.coverNode.type == "Cover Right" || self.coverNode.type == "Cover Right Wide")
     correctAngles = (correctAngles[0], correctAngles[1] - 90, correctAngles[2]);
-  }
   if(getdvar("scr_coveridle") == "1") {
     self.coverNode.script_onlyidle = true;
   }
-  for(;;) {
+  for (;;) {
     if(isDefined(behaviorCallbacks.mainLoopStart)) {
       startTime = gettime();
       self thread endIdleAtFrameEnd();
       [
         [behaviorCallbacks.mainLoopStart]
       ]();
-      if(gettime() == startTime) {
+      if(gettime() == startTime)
         self notify("dont_end_idle");
-      }
     }
     self teleport(self.covernode.origin, correctAngles);
     if(isDefined(self.coverNode.script_onlyidle)) {
@@ -65,9 +63,8 @@ main(behaviorCallbacks) {
       continue;
     }
     if(suppressedBehavior(behaviorCallbacks)) {
-      if(isEnemyVisibleFromExposed()) {
+      if(isEnemyVisibleFromExposed())
         resetSeekOutEnemyTime();
-      }
       self.a.lastEncounterTime = gettime();
       continue;
     }
@@ -82,7 +79,7 @@ main(behaviorCallbacks) {
     }
     if(isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
       players = GetPlayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {
             continue;
@@ -111,22 +108,19 @@ main(behaviorCallbacks) {
       if(suppressableEnemy) {
         permutation = getPermutation(2);
         done = false;
-        for(i = 0; i < permutation.size && !done; i++) {
+        for (i = 0; i < permutation.size && !done; i++) {
           switch (i) {
             case 0:
               if(self.provideCoveringFire || gettime() >= nextAllowedSuppressTime) {
                 preferredActivity = "suppress";
-                if(!self.provideCoveringFire && (gettime() - self.lastSuppressionTime) > 5000 && randomint(3) < 2) {
+                if(!self.provideCoveringFire && (gettime() - self.lastSuppressionTime) > 5000 && randomint(3) < 2)
                   preferredActivity = "ambush";
-                }
-                if(!self animscripts\shoot_behavior::shouldSuppress()) {
+                if(!self animscripts\shoot_behavior::shouldSuppress())
                   preferredActivity = "ambush";
-                }
                 if(leaveCoverAndShoot(behaviorCallbacks, preferredActivity)) {
                   nextAllowedSuppressTime = gettime() + randomintrange(3000, 20000);
-                  if(isEnemyVisibleFromExposed()) {
+                  if(isEnemyVisibleFromExposed())
                     self.a.lastEncounterTime = gettime();
-                  }
                   done = true;
                 }
               }
@@ -154,9 +148,8 @@ main(behaviorCallbacks) {
         if(self.team == "axis" && self weaponAnims() != "rocketlauncher") {
           if(leaveCoverAndShoot(behaviorCallbacks, "ambush")) {
             nextAllowedSuppressTime = gettime() + randomintrange(3000, 20000);
-            if(isEnemyVisibleFromExposed()) {
+            if(isEnemyVisibleFromExposed())
               self.a.lastEncounterTime = gettime();
-            }
             continue;
           }
         }
@@ -173,9 +166,8 @@ main(behaviorCallbacks) {
         }
         if(gettime() >= nextAllowedSuppressTime && isValidEnemy(self.enemy)) {
           if(leaveCoverAndShoot(behaviorCallbacks, "ambush")) {
-            if(isEnemyVisibleFromExposed()) {
+            if(isEnemyVisibleFromExposed())
               resetSeekOutEnemyTime();
-            }
             self.a.lastEncounterTime = gettime();
             nextAllowedSuppressTime = gettime() + randomintrange(6000, 20000);
             continue;
@@ -188,23 +180,20 @@ main(behaviorCallbacks) {
 }
 
 isEnemyVisibleFromExposed() {
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
-  if(distanceSquared(self.enemy.origin, self.couldntSeeEnemyPos) < 16 * 16) {
+  if(distanceSquared(self.enemy.origin, self.couldntSeeEnemyPos) < 16 * 16)
     return false;
-  } else {
+  else
     return canSeeEnemyFromExposed();
-  }
 }
 
 suppressedBehavior(behaviorCallbacks) {
-  if(!isSuppressedWrapper()) {
+  if(!isSuppressedWrapper())
     return false;
-  }
   nextAllowedBlindfireTime = gettime();
   justlooked = true;
-  while(isSuppressedWrapper()) {
+  while (isSuppressedWrapper()) {
     justlooked = false;
     self teleport(self.coverNode.origin);
     if(tryToGetOutOfDangerousSituation()) {
@@ -217,7 +206,7 @@ suppressedBehavior(behaviorCallbacks) {
     }
     if(canThrowGrenade && isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
       players = GetPlayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {
             continue;
@@ -230,7 +219,7 @@ suppressedBehavior(behaviorCallbacks) {
     }
     permutation = getPermutation(2);
     done = false;
-    for(i = 0; i < permutation.size && !done; i++) {
+    for (i = 0; i < permutation.size && !done; i++) {
       switch (i) {
         case 0:
           if(self.team != "allies" && gettime() >= nextAllowedBlindfireTime) {
@@ -256,9 +245,8 @@ suppressedBehavior(behaviorCallbacks) {
     }
     idle(behaviorCallbacks);
   }
-  if(!justlooked && randomint(2) == 0) {
+  if(!justlooked && randomint(2) == 0)
     lookfast(behaviorCallbacks);
-  }
   return true;
 }
 
@@ -271,10 +259,9 @@ getPermutation(n) {
     permutation[0] = randomint(2);
     permutation[1] = 1 - permutation[0];
   } else {
-    for(i = 0; i < n; i++) {
+    for (i = 0; i < n; i++)
       permutation[i] = i;
-    }
-    for(i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
       switchIndex = i + randomint(n - i);
       temp = permutation[switchIndex];
       permutation[SwitchIndex] = permutation[i];
@@ -285,30 +272,34 @@ getPermutation(n) {
 }
 
 callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
-  if(!isDefined(callback)) {
+  if(!isDefined(callback))
     return false;
-  }
   self thread endIdleAtFrameEnd();
   starttime = gettime();
   val = undefined;
-  if(isDefined(arg3)) {
-    val = [[callback]](arg, arg2, arg3);
-  } else if(isDefined(arg2)) {
-    val = [[callback]](arg, arg2);
-  } else if(isDefined(arg)) {
-    val = [[callback]](arg);
-  } else {
-    val = [[callback]]();
-  }
+  if(isDefined(arg3))
+    val = [
+      [callback]
+    ](arg, arg2, arg3);
+  else if(isDefined(arg2))
+    val = [
+      [callback]
+    ](arg, arg2);
+  else if(isDefined(arg))
+    val = [
+      [callback]
+    ](arg);
+  else
+    val = [
+      [callback]
+    ]();
   assert(isDefined(val) && (val == true || val == false));
-  if(val) {
+  if(val)
     assert(gettime() != starttime);
-  } else {
+  else
     assert(gettime() == starttime);
-  }
-  if(!val) {
+  if(!val)
     self notify("dont_end_idle");
-  }
   return val;
 }
 
@@ -316,20 +307,18 @@ watchSuppression() {
   self endon("killanimscript");
   self.lastSuppressionTime = gettime() - 100000;
   self.suppressionStart = self.lastSuppressionTime;
-  while(1) {
+  while (1) {
     self waittill("suppression");
     time = gettime();
-    if(self.lastSuppressionTime < time - 700) {
+    if(self.lastSuppressionTime < time - 700)
       self.suppressionStart = time;
-    }
     self.lastSuppressionTime = time;
   }
 }
 
 coverReload(behaviorCallbacks, threshold) {
-  if(self.bulletsInClip > weaponClipSize(self.weapon) * threshold) {
+  if(self.bulletsInClip > weaponClipSize(self.weapon) * threshold)
     return false;
-  }
   self.isreloading = true;
   result = callOptionalBehaviorCallback(behaviorCallbacks.reload);
   self.isreloading = false;
@@ -338,18 +327,16 @@ coverReload(behaviorCallbacks, threshold) {
 
 leaveCoverAndShoot(behaviorCallbacks, initialGoal) {
   self thread animscripts\shoot_behavior::decideWhatAndHowToShoot(initialGoal);
-  if(!self.fixedNode) {
+  if(!self.fixedNode)
     self thread breakOutOfShootingIfWantToMoveUp();
-  }
   val = callOptionalBehaviorCallback(behaviorCallbacks.leaveCoverAndShoot);
   self notify("stop_deciding_how_to_shoot");
   return val;
 }
 
 lookForEnemy(behaviorCallbacks) {
-  if(self.a.atConcealmentNode && self canSeeEnemy()) {
+  if(self.a.atConcealmentNode && self canSeeEnemy())
     return false;
-  }
   if(self.a.lastEncounterTime + 6000 > gettime()) {
     return lookfast(behaviorCallbacks);
   } else {
@@ -358,18 +345,16 @@ lookForEnemy(behaviorCallbacks) {
     } else {
       result = callOptionalBehaviorCallback(behaviorCallbacks.look, 2 + randomfloat(2));
     }
-    if(result) {
+    if(result)
       return true;
-    }
     return callOptionalBehaviorCallback(behaviorCallbacks.fastlook);
   }
 }
 
 lookfast(behaviorCallbacks) {
   result = callOptionalBehaviorCallback(behaviorCallbacks.fastlook);
-  if(result) {
+  if(result)
     return true;
-  }
   return callOptionalBehaviorCallback(behaviorCallbacks.look, 0);
 }
 
@@ -377,7 +362,9 @@ idle(behaviorCallbacks, howLong) {
   self.flinching = false;
   if(isDefined(behaviorCallbacks.flinch)) {
     if(!self.a.idlingAtCover && gettime() - self.suppressionStart < 600) {
-      if([[behaviorCallbacks.flinch]]())
+      if([
+          [behaviorCallbacks.flinch]
+        ]())
         return true;
     } else {
       self thread flinchWhenSuppressed(behaviorCallbacks);
@@ -388,14 +375,12 @@ idle(behaviorCallbacks, howLong) {
     self thread idleThread(behaviorCallbacks.idle);
     self.a.idlingAtCover = true;
   }
-  if(isDefined(howLong)) {
+  if(isDefined(howLong))
     self idleWait(howLong);
-  } else {
+  else
     self idleWaitABit();
-  }
-  if(self.flinching) {
+  if(self.flinching)
     self waittill("flinch_done");
-  }
   self notify("stop_waiting_to_flinch");
 }
 
@@ -419,7 +404,7 @@ flinchWhenSuppressed(behaviorCallbacks) {
   self endon("killanimscript");
   self endon("stop_waiting_to_flinch");
   lastSuppressionTime = self.lastSuppressionTime;
-  while(1) {
+  while (1) {
     self waittill("suppression");
     time = gettime();
     if(lastSuppressionTime < time - 2000) {
@@ -431,9 +416,8 @@ flinchWhenSuppressed(behaviorCallbacks) {
   self thread endIdleAtFrameEnd();
   assert(isDefined(behaviorCallbacks.flinch));
   val = [[behaviorCallbacks.flinch]]();
-  if(!val) {
+  if(!val)
     self notify("dont_end_idle");
-  }
   self.flinching = false;
   self notify("flinch_done");
 }
@@ -455,16 +439,15 @@ tryThrowingGrenade(behaviorCallbacks, throwAt) {
 }
 
 blindfire(behaviorCallbacks) {
-  if(!canBlindFire()) {
+  if(!canBlindFire())
     return false;
-  }
   return callOptionalBehaviorCallback(behaviorCallbacks.blindfire);
 }
 
 breakOutOfShootingIfWantToMoveUp() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
-  while(1) {
+  while (1) {
     if(self.fixedNode) {
       return;
     }
@@ -473,49 +456,40 @@ breakOutOfShootingIfWantToMoveUp() {
       continue;
     }
     if(enemyIsHiding()) {
-      if(advanceOnHidingEnemy()) {
+      if(advanceOnHidingEnemy())
         return;
-      }
     }
     if(!self canSeeEnemy() && !self canSuppressEnemy()) {
       if(gettime() > self.a.getBoredOfThisNodeTime) {
-        if(cantFindAnythingToDo()) {
+        if(cantFindAnythingToDo())
           return;
-        }
       }
     }
   }
 }
 
 enemyIsHiding() {
-  if(!isDefined(self.enemy)) {
+  if(!isDefined(self.enemy))
     return false;
-  }
-  if(self.enemy isFlashed()) {
+  if(self.enemy isFlashed())
     return true;
-  }
   if(isplayer(self.enemy)) {
-    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth) {
+    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
       return true;
-    }
   } else {
-    if(issentient(self.enemy) && self.enemy isSuppressedWrapper()) {
+    if(issentient(self.enemy) && self.enemy isSuppressedWrapper())
       return true;
-    }
   }
-  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading) {
+  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading)
     return true;
-  }
   return false;
 }
 
 wouldBeSmartForMyAITypeToSeekOutEnemy() {
-  if(self weaponAnims() == "rocketlauncher") {
+  if(self weaponAnims() == "rocketlauncher")
     return false;
-  }
-  if(self isSniper()) {
+  if(self isSniper())
     return false;
-  }
   return true;
 }
 
@@ -529,9 +503,8 @@ cantFindAnythingToDo() {
 
 advanceOnHidingEnemy() {
   foundBetterCover = false;
-  if(!isValidEnemy(self.enemy) || !self.enemy isFlashed()) {
+  if(!isValidEnemy(self.enemy) || !self.enemy isFlashed())
     foundBetterCover = lookForBetterCover();
-  }
   if(!foundBetterCover && isValidEnemy(self.enemy) && wouldBeSmartForMyAITypeToSeekOutEnemy() && !self canSeeEnemyFromExposed()) {
     if(gettime() >= self.seekOutEnemyTime || self.enemy isFlashed()) {
       return tryRunningToEnemy(false);

@@ -13,19 +13,19 @@
 #namespace drown;
 
 function autoexec __init__sytem__() {
-  system::register("drown", &__init__, undefined, undefined);
+  system::register("drown", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned( & on_player_spawned);
   level.drown_damage = getdvarfloat("player_swimDamage");
   level.drown_damage_interval = getdvarfloat("player_swimDamagerInterval") * 1000;
   level.drown_damage_after_time = getdvarfloat("player_swimTime") * 1000;
   level.drown_pre_damage_stage_time = 2000;
-  if(!isDefined(level.vsmgr_prio_overlay_drown_blur)) {
+  if(!isdefined(level.vsmgr_prio_overlay_drown_blur)) {
     level.vsmgr_prio_overlay_drown_blur = 10;
   }
-  visionset_mgr::register_info("overlay", "drown_blur", 1, level.vsmgr_prio_overlay_drown_blur, 1, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "drown_blur", 1, level.vsmgr_prio_overlay_drown_blur, 1, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
   clientfield::register("toplayer", "drown_stage", 1, 3, "int");
 }
 
@@ -38,7 +38,7 @@ function activate_player_health_visionset() {
 }
 
 function deactivate_player_health_visionset() {
-  if(!isDefined(self.drown_vision_set) || self.drown_vision_set) {
+  if(!isdefined(self.drown_vision_set) || self.drown_vision_set) {
     visionset_mgr::deactivate("overlay", "drown_blur", self);
     self.drown_vision_set = 0;
   }
@@ -58,13 +58,13 @@ function watch_player_drowning() {
   self.lastwaterdamagetime = self getlastoutwatertime();
   self.drownstage = 0;
   self clientfield::set_to_player("drown_stage", 0);
-  if(!isDefined(self.drown_damage_after_time)) {
+  if(!isdefined(self.drown_damage_after_time)) {
     self.drown_damage_after_time = level.drown_damage_after_time;
   }
-  if(isDefined(self.var_d1d70226) && self.var_d1d70226) {
+  if(isdefined(self.var_d1d70226) && self.var_d1d70226) {
     return;
   }
-  while(true) {
+  while (true) {
     if(self isplayerunderwater() && self isplayerswimming()) {
       if((gettime() - self.lastwaterdamagetime) > (self.drown_damage_after_time - level.drown_pre_damage_stage_time) && self.drownstage == 0) {
         self.drownstage++;
@@ -110,7 +110,7 @@ function watch_game_ended() {
 
 function is_player_drowning() {
   drowning = 1;
-  if(!isDefined(self.drownstage) || self.drownstage == 0) {
+  if(!isdefined(self.drownstage) || self.drownstage == 0) {
     drowning = 0;
   }
   return drowning;

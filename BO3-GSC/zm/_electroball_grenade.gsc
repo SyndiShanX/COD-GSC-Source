@@ -17,7 +17,7 @@
 #namespace electroball_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("electroball_grenade", &__init__, undefined, undefined);
+  system::register("electroball_grenade", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -30,12 +30,12 @@ function __init__() {
   level.proximitygrenadeactivationtime = getdvarfloat("scr_proximityGrenadeActivationTime", 0.1);
   level.proximitygrenadeprotectedtime = getdvarfloat("scr_proximityGrenadeProtectedTime", 0.45);
   level thread register();
-  if(!isDefined(level.spawnprotectiontimems)) {
+  if(!isdefined(level.spawnprotectiontimems)) {
     level.spawnprotectiontimems = 0;
   }
-  callback::on_spawned(&on_player_spawned);
-  callback::on_ai_spawned(&on_ai_spawned);
-  zm::register_actor_damage_callback(&function_f338543f);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_ai_spawned( & on_ai_spawned);
+  zm::register_actor_damage_callback( & function_f338543f);
 }
 
 function register() {
@@ -63,13 +63,13 @@ function function_b0f1e452() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = 0.05;
   watcher.detonateradius = 64;
-  watcher.onstun = &weaponobjects::weaponstun;
+  watcher.onstun = & weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = &proximitydetonate;
+  watcher.ondetonatecallback = & proximitydetonate;
   watcher.activationdelay = 0.05;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
-  watcher.onspawn = &function_f424c33d;
+  watcher.onspawn = & function_f424c33d;
 }
 
 function function_f424c33d(watcher, owner) {
@@ -77,7 +77,7 @@ function function_f424c33d(watcher, owner) {
   if(isplayer(owner)) {
     owner addweaponstat(self.weapon, "used", 1);
   }
-  if(isDefined(self.weapon) && self.weapon.proximitydetonation > 0) {
+  if(isdefined(self.weapon) && self.weapon.proximitydetonation > 0) {
     watcher.detonateradius = self.weapon.proximitydetonation;
   }
   weaponobjects::onspawnproximityweaponobject(watcher, owner);
@@ -104,9 +104,9 @@ function proximitydetonate(attacker, weapon, target) {
 function watchproximitygrenadehitplayer(owner) {
   self endon("death");
   self setteam(owner.team);
-  while(true) {
+  while (true) {
     self waittill("grenade_bounce", pos, normal, ent, surface);
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+    if(isdefined(ent) && isplayer(ent) && surface != "riotshield") {
       if(level.teambased && ent.team == self.owner.team) {
         continue;
       }
@@ -117,7 +117,7 @@ function watchproximitygrenadehitplayer(owner) {
 }
 
 function performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
+  forwardvec = vectornormalize(anglestoforward(self.angles));
   rightvec = vectornormalize(anglestoright(self.angles));
   explosionvec = vectornormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
@@ -129,7 +129,7 @@ function performhudeffects(position, distancetogrenade) {
 function function_62ffcc2c() {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("damage", damage, eattacker, dir, point, type, model, tag, part, weapon, flags);
     if(weapon.name == "electroball_grenade") {
       self damageplayerinradius(eattacker);
@@ -153,7 +153,7 @@ function damageplayerinradius(eattacker) {
     self clientfield::set_to_player("tazered", 1);
   }
   self playrumbleonentity("proximity_grenade");
-  self playSound("wpn_taser_mine_zap");
+  self playsound("wpn_taser_mine_zap");
   if(!self hasperk("specialty_proximityprotection")) {
     self thread watch_death();
     self util::show_hud(0);
@@ -223,7 +223,7 @@ function begin_other_grenade_tracking() {
   self endon("disconnect");
   self notify("proximitytrackingstart");
   self endon("proximitytrackingstart");
-  for(;;) {
+  for (;;) {
     self waittill("grenade_fire", grenade, weapon, cooktime);
     if(weapon.rootweapon.name == "electroball_grenade") {
       grenade thread watchproximitygrenadehitplayer(self);
@@ -236,12 +236,12 @@ function function_cb55123a() {
   self endon("disconnect");
   self endon("delete");
   self waittill("grenade_bounce");
-  while(true) {
+  while (true) {
     var_82aacc64 = zm_elemental_zombie::function_d41418b8();
     var_82aacc64 = arraysortclosest(var_82aacc64, self.origin);
     var_199ecc3a = zm_elemental_zombie::function_4aeed0a5("sparky");
-    if(!isDefined(level.var_1ae26ca5) || var_199ecc3a < level.var_1ae26ca5) {
-      if(!isDefined(level.var_a9284ac8) || (gettime() - level.var_a9284ac8) >= 0.5) {
+    if(!isdefined(level.var_1ae26ca5) || var_199ecc3a < level.var_1ae26ca5) {
+      if(!isdefined(level.var_a9284ac8) || (gettime() - level.var_a9284ac8) >= 0.5) {
         foreach(ai_zombie in var_82aacc64) {
           dist_sq = distancesquared(self.origin, ai_zombie.origin);
           if(dist_sq <= 9216 && ai_zombie.is_elemental_zombie !== 1 && ai_zombie.var_3531cf2b !== 1) {
@@ -263,17 +263,17 @@ function function_658aacad() {
   self endon("delete");
   self waittill("grenade_bounce");
   self clientfield::set("electroball_stop_trail", 1);
-  self setModel("tag_origin");
+  self setmodel("tag_origin");
   self clientfield::set("electroball_play_landed_fx", 1);
-  if(!isDefined(level.a_electroball_grenades)) {
+  if(!isdefined(level.a_electroball_grenades)) {
     level.a_electroball_grenades = [];
   }
   array::add(level.a_electroball_grenades, self);
 }
 
 function function_f338543f(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(weapon) && weapon.rootweapon.name === "electroball_grenade") {
-    if(isDefined(attacker) && self.team === attacker.team) {
+  if(isdefined(weapon) && weapon.rootweapon.name === "electroball_grenade") {
+    if(isdefined(attacker) && self.team === attacker.team) {
       return 0;
     }
     if(self.var_3531cf2b === 1) {

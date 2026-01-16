@@ -6,9 +6,8 @@
 #include maps\mp\_utility;
 
 init() {
-  if(!level.teambased) {
+  if(!level.teambased)
     return;
-  }
 
   precacheShader("headicon_dead");
 
@@ -16,7 +15,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
 
     player.selfDeathIcons = []; // icons that other people see which point to this player when he's dead
@@ -29,9 +28,8 @@ updateDeathIconsEnabled() {
 }
 
 addDeathIcon(entity, dyingplayer, team, timeout) {
-  if(!level.teambased) {
+  if(!level.teambased)
     return;
-  }
 
   iconOrg = entity.origin;
 
@@ -43,16 +41,13 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
 
   assert(team == "allies" || team == "axis");
 
-  if(getDvar("ui_hud_showdeathicons") == "0") {
+  if(getDvar("ui_hud_showdeathicons") == "0")
     return;
-  }
-  if(level.hardcoreMode) {
+  if(level.hardcoreMode)
     return;
-  }
 
-  if(isDefined(self.lastDeathIcon)) {
+  if(isdefined(self.lastDeathIcon))
     self.lastDeathIcon destroy();
-  }
 
   newdeathicon = newTeamHudElem(team);
   newdeathicon.x = iconOrg[0];
@@ -60,11 +55,10 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
   newdeathicon.z = iconOrg[2] + 54;
   newdeathicon.alpha = .61;
   newdeathicon.archived = true;
-  if(level.splitscreen) {
+  if(level.splitscreen)
     newdeathicon setShader("headicon_dead", 14, 14);
-  } else {
+  else
     newdeathicon setShader("headicon_dead", 7, 7);
-  }
   newdeathicon setwaypoint(true, false);
 
   self.lastDeathIcon = newdeathicon;

@@ -39,9 +39,8 @@ main() {
   self animscripts\shared::donotetracks("coverArrival");
   self maps\_dds::dds_threat_notify(self.team != "allies");
 
-  if(isDefined(newstance)) {
+  if(isDefined(newstance))
     self.a.pose = newstance;
-  }
 
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
@@ -81,9 +80,8 @@ setupaapproachnodepreconditions() {
 setupapproachnode(firsttime) {
   self endon("killanimscript");
 
-  if(firsttime) {
+  if(firsttime)
     self.requestarrivalnotify = 1;
-  }
 
   self.a.arrivaltype = undefined;
   self thread dolastminuteexposedapproachwrapper();
@@ -106,17 +104,17 @@ setupapproachnode(firsttime) {
 
       if(approachtype == "stand_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -32.545) - vectorscale(right, 6.899);
       } else if(approachtype == "crouch_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -32.545) - vectorscale(right, 6.899);
       } else if(approachtype == "prone_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -37.36) - vectorscale(right, 13.279);
       } else
@@ -157,7 +155,7 @@ startcornerapproachconditions(approachpoint, approachtype, approachnumber, appro
     return false;
   }
 
-  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.6) {
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglestoforward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.6) {
     if(distancesquared(self.origin, self.enemy.origin) < 262144) {
       debug_arrival("approach aborted at last minute: facing enemy instead of current motion angle");
 
@@ -175,7 +173,7 @@ startcornerapproachconditions(approachpoint, approachtype, approachnumber, appro
 
   if(absangleclamp180(requiredyaw - self.angles[1]) > 30) {
     if(isvalidenemy(self.enemy) && self cansee(self.enemy)) {
-      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0) {
+      if(vectordot(anglestoforward(self.angles), self.enemy.origin - self.origin) > 0) {
         debug_arrival("aborting approach at last minute: don't want to turn back to nearby enemy");
 
         return false;
@@ -197,9 +195,8 @@ approachwaittillclose(node, checkdist) {
     return;
   }
   while(true) {
-    if(!isDefined(self.pathgoalpos)) {
+    if(!isDefined(self.pathgoalpos))
       self waitforpathgoalpos();
-    }
 
     dist = distance(self.origin, self.pathgoalpos);
 
@@ -209,18 +206,16 @@ approachwaittillclose(node, checkdist) {
 
     waittime = (dist - checkdist) / 250 - 0.1;
 
-    if(waittime < 0.05) {
+    if(waittime < 0.05)
       waittime = 0.05;
-    }
 
     wait(waittime);
   }
 }
 
 getapproachent() {
-  if(isDefined(self.node)) {
+  if(isDefined(self.node))
     return self.node;
-  }
 
   return undefined;
 }
@@ -238,19 +233,17 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
   excludedir = result.excludedir;
   approachnumber = -1;
   node = getapproachent();
-  arrivalfromfront = vectordot(approach_dir, anglesToForward(node.angles)) >= 0;
-  arrivalfromfront = arrivalfromfront && vectordot(vectornormalize(self.origin - node.origin), anglesToForward(node.angles)) <= 0;
+  arrivalfromfront = vectordot(approach_dir, anglestoforward(node.angles)) >= 0;
+  arrivalfromfront = arrivalfromfront && vectordot(vectornormalize(self.origin - node.origin), anglestoforward(node.angles)) <= 0;
   doingcqbapproach = shoulddocqbtransition(self.node, approachtype, 1, forcecqb);
 
-  if(doingcqbapproach) {
+  if(doingcqbapproach)
     approachtype = approachtype + "_cqb";
-  }
 
   result = self checkarrivalenterpositions(approachpoint, approachfinalyaw, approachtype, approach_dir, maxdirections, excludedir, arrivalfromfront);
 
-  for(i = 0; i < result.data.size; i++) {
+  for(i = 0; i < result.data.size; i++)
     debug_arrival(result.data[i]);
-  }
 
   if(result.approachnumber < 0) {
     if(!doingcqbapproach && candocqbtransition(self.node, approachtype, 1)) {
@@ -270,9 +263,8 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
 
   debug_arrival("approach success: dir " + approachnumber);
 
-  if(isDefined(result.approachpoint)) {
+  if(isDefined(result.approachpoint))
     self.coverenterpos = result.approachpoint;
-  }
 
   if(approachnumber <= 6 && arrivalfromfront) {
     self endon("goal_changed");
@@ -280,19 +272,16 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
     approachwaittillclose(node, self.arrivalstartdist + 8);
     dirtonode = vectornormalize(approachpoint - self.origin);
 
-    if(approachnumber == 4) {
+    if(approachnumber == 4)
       excludedir = 7;
-    }
 
-    if(approachnumber == 6) {
+    if(approachnumber == 6)
       excludedir = 9;
-    }
 
     result = self checkarrivalenterpositions(approachpoint, approachfinalyaw, approachtype, dirtonode, maxdirections, excludedir, arrivalfromfront);
 
-    if(result.approachnumber != -1 && result.approachnumber != approachnumber) {
+    if(result.approachnumber != -1 && result.approachnumber != approachnumber)
       approachnumber = result.approachnumber;
-    }
 
     self thread watchgoalchangedwhileapproaching();
     thread debug_arrival_line(self.origin, self.coverenterpos, level.color_debug["red"], 5);
@@ -329,9 +318,8 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
     self waittill("runto_arrived");
     requiredyaw = approachfinalyaw - angledeltaarray("arrive_" + approachtype)[approachnumber];
 
-    if(!self startcornerapproachconditions(approachpoint, approachtype, approachnumber, approachfinalyaw)) {
+    if(!self startcornerapproachconditions(approachpoint, approachtype, approachnumber, approachfinalyaw))
       return;
-    }
   }
 
   self.approachnumber = approachnumber;
@@ -348,10 +336,10 @@ watchgoalchangedwhileapproaching() {
 }
 
 checkarrivalenterpositions(approachpoint, approachyaw, approachtype, approach_dir, maxdirections, excludedir, arrivalfromfront) {
-  angledataobj = spawnStruct();
+  angledataobj = spawnstruct();
   calculatenodetransitionangles(angledataobj, approachtype, 1, approachyaw, approach_dir, maxdirections, excludedir);
   sortnodetransitionangles(angledataobj, maxdirections);
-  resultobj = spawnStruct();
+  resultobj = spawnstruct();
 
   resultobj.data = [];
 
@@ -360,9 +348,8 @@ checkarrivalenterpositions(approachpoint, approachyaw, approachtype, approach_di
   resultobj.approachpoint = undefined;
   numattempts = 2;
 
-  if(approachtype == "exposed" || approachtype == "exposed_cqb") {
+  if(approachtype == "exposed" || approachtype == "exposed_cqb")
     numattempts = 1;
-  }
 
   for(i = 1; i <= numattempts; i++) {
     assert(angledataobj.transindex[i] != excludedir);
@@ -418,12 +405,11 @@ checkarrivalenterpositions(approachpoint, approachyaw, approachtype, approach_di
 }
 
 checkcoverenterpos(arrivalpoint, arrivalyaw, approachtype, approachnumber, arrivalfromfront) {
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     debug_arrival("checkCoverEnterPos() checking for arrive_" + approachtype + "_" + approachnumber);
-  }
 
   angle = (0, arrivalyaw - angledeltaarray("arrive_" + approachtype)[approachnumber], 0);
-  forwarddir = anglesToForward(angle);
+  forwarddir = anglestoforward(angle);
   rightdir = anglestoright(angle);
   movedeltaarray = movedeltaarray("arrive_" + approachtype);
   forward = vectorscale(forwarddir, movedeltaarray[approachnumber][0]);
@@ -431,21 +417,17 @@ checkcoverenterpos(arrivalpoint, arrivalyaw, approachtype, approachnumber, arriv
   enterpos = arrivalpoint - forward + right;
   self.coverenterpos = enterpos;
 
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     thread debug_arrival_line(enterpos, arrivalpoint, level.color_debug["cyan"], 1.5);
-  }
 
-  if(approachnumber <= 6 && arrivalfromfront) {
+  if(approachnumber <= 6 && arrivalfromfront)
     return 1;
-  }
 
-  if(!self maymovefrompointtopoint(enterpos, arrivalpoint)) {
+  if(!self maymovefrompointtopoint(enterpos, arrivalpoint))
     return 0;
-  }
 
-  if(approachnumber <= 6 || issubstr(tolower(approachtype), "exposed")) {
+  if(approachnumber <= 6 || issubstr(tolower(approachtype), "exposed"))
     return 1;
-  }
 
   assert(approachtype == "left" || approachtype == "left_crouch" || approachtype == "right" || approachtype == "right_crouch" || approachtype == "left_cqb" || approachtype == "left_crouch_cqb" || approachtype == "right_cqb" || approachtype == "right_crouch_cqb" || approachtype == "pillar" || approachtype == "pillar_crouch");
   premovedeltaarray = premovedeltaarray("arrive_" + approachtype);
@@ -454,9 +436,8 @@ checkcoverenterpos(arrivalpoint, arrivalyaw, approachtype, approachnumber, arriv
   originalenterpos = enterpos - forward + right;
   self.coverenterpos = originalenterpos;
 
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     thread debug_arrival_line(originalenterpos, enterpos, level.color_debug["cyan"], 1.5);
-  }
 
   return self maymovefrompointtopoint(originalenterpos, enterpos);
 }
@@ -493,9 +474,8 @@ watchgoalchanged() {
 }
 
 dolastminuteexposedapproachpreconditions() {
-  if(isDefined(self getnegotiationstartnode())) {
+  if(isDefined(self getnegotiationstartnode()))
     return false;
-  }
 
   if(isDefined(self.disablearrivals) && self.disablearrivals) {
     debug_arrival("Aborting exposed approach because self.disableArrivals is true");
@@ -568,39 +548,32 @@ determineexposedapproachtype(node) {
   type = "exposed";
   stance = node gethighestnodestance();
 
-  if(stance == "prone") {
+  if(stance == "prone")
     stance = "crouch";
-  }
 
-  if(stance == "crouch") {
+  if(stance == "crouch")
     type = "exposed_crouch";
-  } else {
+  else
     type = "exposed";
-  }
 
-  if(self shoulddocqbtransition(node, type)) {
+  if(self shoulddocqbtransition(node, type))
     type = type + "_cqb";
-  }
 
   return type;
 }
 
 faceenemyatendofapproach(node) {
-  if(!isvalidenemy(self.enemy)) {
+  if(!isvalidenemy(self.enemy))
     return 0;
-  }
 
-  if(self.combatmode == "exposed_nodes_only") {
+  if(self.combatmode == "exposed_nodes_only")
     return 1;
-  }
 
-  if(isDefined(self.heat) && self.heat && isDefined(node)) {
+  if(isDefined(self.heat) && self.heat && isDefined(node))
     return 0;
-  }
 
-  if(self.combatmode == "cover" && issentient(self.enemy) && gettime() - self lastknowntime(self.enemy) > 15000) {
+  if(self.combatmode == "cover" && issentient(self.enemy) && gettime() - self lastknowntime(self.enemy) > 15000)
     return 0;
-  }
 
   return sighttracepassed(self.enemy getshootatpos(), self.pathgoalpos + vectorscale((0, 0, 1), 60.0), 0, undefined);
 }
@@ -619,47 +592,42 @@ dolastminuteexposedapproach() {
   approachtype = "exposed";
   goalmatchesnode = 0;
 
-  if(isDefined(self.node) && isDefined(self.pathgoalpos)) {
+  if(isDefined(self.node) && isDefined(self.pathgoalpos))
     goalmatchesnode = distancesquared(self.pathgoalpos, self.node.origin) < 1;
-  }
 
-  if(goalmatchesnode) {
+  if(goalmatchesnode)
     approachtype = determineexposedapproachtype(self.node);
-  }
 
   approachdir = vectornormalize(self.pathgoalpos - self.origin);
   desiredfacingyaw = vectortoangles(approachdir)[1];
 
-  if(faceenemyatendofapproach(self.node)) {
+  if(faceenemyatendofapproach(self.node))
     desiredfacingyaw = vectortoangles(self.enemy.origin - self.pathgoalpos)[1];
-  } else {
+  else {
     facenodeangle = isDefined(self.node) && goalmatchesnode;
     facenodeangle = facenodeangle && self.node.type != "Path" && (self.node.type != "ambush" || !recentlysawenemy());
 
-    if(facenodeangle) {
+    if(facenodeangle)
       desiredfacingyaw = getnodeforwardyaw(self.node);
-    } else {
+    else {
       likelyenemydir = self getanglestolikelyenemypath();
 
-      if(isDefined(likelyenemydir)) {
+      if(isDefined(likelyenemydir))
         desiredfacingyaw = likelyenemydir[1];
-      }
     }
   }
 
-  angledataobj = spawnStruct();
+  angledataobj = spawnstruct();
   calculatenodetransitionangles(angledataobj, approachtype, 1, desiredfacingyaw, approachdir, 9, -1);
   best = 1;
 
   for(i = 2; i <= 9; i++) {
-    if(angledataobj.transitions[i] > angledataobj.transitions[best]) {
+    if(angledataobj.transitions[i] > angledataobj.transitions[best])
       best = i;
-    }
   }
 
-  if(!issubstr(approachtype, "_cqb") && shoulddocqbtransition(undefined, approachtype)) {
+  if(!issubstr(approachtype, "_cqb") && shoulddocqbtransition(undefined, approachtype))
     approachtype = approachtype + "_cqb";
-  }
 
   self.approachnumber = angledataobj.transindex[best];
   self.approachtype = approachtype;
@@ -668,9 +636,8 @@ dolastminuteexposedapproach() {
   requireddistsq = animdist + 8;
   requireddistsq = requireddistsq * requireddistsq;
 
-  while(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > requireddistsq) {
+  while(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > requireddistsq)
     wait 0.05;
-  }
 
   if(isDefined(self.arrivalstartdist) && self.arrivalstartdist < animdist + 8) {
     debug_arrival("Aborting exposed approach because cover arrival dist is shorter");
@@ -714,9 +681,8 @@ dolastminuteexposedapproach() {
 
 exposedapproachwaittillclose() {
   while(true) {
-    if(!isDefined(self.pathgoalpos)) {
+    if(!isDefined(self.pathgoalpos))
       self waitforpathgoalpos();
-    }
 
     dist = distance(self.origin, self.pathgoalpos);
 
@@ -726,9 +692,8 @@ exposedapproachwaittillclose() {
 
     waittime = (dist - longestexposedapproachdist()) / 200 - 0.1;
 
-    if(waittime < 0.05) {
+    if(waittime < 0.05)
       waittime = 0.05;
-    }
 
     wait(waittime);
   }
@@ -779,9 +744,8 @@ aligntonodeangles() {
   startyaw = self.angles[1];
   targetyaw = self.node.angles[1];
 
-  if(isDefined(self.node.approachtype)) {
+  if(isDefined(self.node.approachtype))
     targetyaw = targetyaw + getnodestanceyawoffset(self.node.approachtype);
-  }
 
   targetyaw = startyaw + angleclamp180(targetyaw - startyaw);
   self thread resetorientmodeongoalchange();
@@ -875,7 +839,7 @@ startmovetransitionmidconditions(exitnode, exittype) {
 startmovetransitionfinalconditions(exittype, approachnumber) {
   if(exittype == "exposed" && approachnumber < 4) {
     if(isvalidenemy(self.enemy)) {
-      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0.707) {
+      if(vectordot(anglestoforward(self.angles), self.enemy.origin - self.origin) > 0.707) {
         if(self canseeenemyfromexposed() && distancesquared(self.origin, self.enemy.origin) < 40000) {
           debug_arrival("aborting exit in dir" + approachnumber + ": don't want to turn back to nearby enemy");
 
@@ -899,11 +863,10 @@ startmovetransition() {
   exittype = "exposed";
   exitnode = undefined;
 
-  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 225) {
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 225)
     exitnode = self.node;
-  } else if(isDefined(self.prevnode)) {
+  else if(isDefined(self.prevnode))
     exitnode = self.prevnode;
-  }
 
   if(isDefined(exitnode)) {
     determinenodeexittype(exitnode);
@@ -926,9 +889,8 @@ startmovetransition() {
     return;
   }
   if(exittype == "exposed") {
-    if(self.a.pose == "crouch") {
+    if(self.a.pose == "crouch")
       exittype = "exposed_crouch";
-    }
   }
 
   leavedir = (-1 * self.lookaheaddir[0], -1 * self.lookaheaddir[1], 0);
@@ -937,19 +899,17 @@ startmovetransition() {
   excludedir = result.excludedir;
   exityaw = exityaw + getnodestanceyawoffset(exittype);
 
-  if(shoulddocqbtransition(exitnode, exittype)) {
+  if(shoulddocqbtransition(exitnode, exittype))
     exittype = exittype + "_cqb";
-  }
 
-  angledataobj = spawnStruct();
+  angledataobj = spawnstruct();
   calculatenodetransitionangles(angledataobj, exittype, 0, exityaw, leavedir, maxdirections, excludedir);
   sortnodetransitionangles(angledataobj, maxdirections);
   approachnumber = -1;
   numattempts = 2;
 
-  if(issubstr(exittype, "exposed")) {
+  if(issubstr(exittype, "exposed"))
     numattempts = 1;
-  }
 
   for(i = 1; i <= numattempts; i++) {
     assert(angledataobj.transindex[i] != excludedir);
@@ -990,7 +950,7 @@ startmovetransition() {
 
 checkcoverexitpos(exitpoint, exityaw, exittype, approachnumber, checkwithpath) {
   angle = (0, exityaw, 0);
-  forwarddir = anglesToForward(angle);
+  forwarddir = anglestoforward(angle);
   rightdir = anglestoright(angle);
   movedeltaarray = movedeltaarray("exit_" + exittype);
   forward = vectorscale(forwarddir, movedeltaarray[approachnumber][0]);
@@ -1000,9 +960,8 @@ checkcoverexitpos(exitpoint, exityaw, exittype, approachnumber, checkwithpath) {
   isexposedapproach = exittype == "exposed" || exittype == "exposed_crouch";
   isexposedapproach = isexposedapproach || (exittype == "exposed_cqb" || exittype == "exposed_crouch_cqb");
 
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     thread debug_arrival_line(self.origin, exitpos, level.color_debug["green"], 1.5);
-  }
 
   if(!isexposedapproach && checkwithpath && !self checkcoverexitposwithpath(exitpos)) {
     debug_arrival("cover exit " + approachnumber + " path check failed");
@@ -1010,13 +969,11 @@ checkcoverexitpos(exitpoint, exityaw, exittype, approachnumber, checkwithpath) {
     return 0;
   }
 
-  if(!self maymovefrompointtopoint(self.origin, exitpos)) {
+  if(!self maymovefrompointtopoint(self.origin, exitpos))
     return 0;
-  }
 
-  if(approachnumber <= 6 || isexposedapproach) {
+  if(approachnumber <= 6 || isexposedapproach)
     return 1;
-  }
 
   assert(exittype == "left" || exittype == "left_crouch" || exittype == "right" || exittype == "right_crouch" || exittype == "left_cqb" || exittype == "left_crouch_cqb" || exittype == "right_cqb" || exittype == "right_crouch_cqb" || exittype == "pillar" || exittype == "pillar_crouch");
   postmovedeltaarray = postmovedeltaarray("exit_" + exittype);
@@ -1025,9 +982,8 @@ checkcoverexitpos(exitpoint, exityaw, exittype, approachnumber, checkwithpath) {
   finalexitpos = exitpos + forward - right;
   self.coverexitpos = finalexitpos;
 
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     thread debug_arrival_line(exitpos, finalexitpos, level.color_debug["green"], 1.5);
-  }
 
   return self maymovefrompointtopoint(exitpos, finalexitpos);
 }
@@ -1056,9 +1012,8 @@ docoverexitanimation(exittype, approachnumber) {
   animstarttime = gettime();
   hasexitalign = animhasnotetrack(leaveanim, "exit_align");
 
-  if(!hasexitalign) {
+  if(!hasexitalign)
     debug_arrival("^1Animation exit_" + exittype + "[" + approachnumber + "] has no \"exit_align\" notetrack");
-  }
 
   self thread donotetracksforexit("coverexit", hasexitalign);
   self waittillmatch("coverexit", "exit_align");
@@ -1071,7 +1026,7 @@ docoverexitanimation(exittype, approachnumber) {
     remainingmovedelta = getmovedelta(leaveanim, curfrac, 1);
     remainingangledelta = getangledelta(leaveanim, curfrac, 1);
     faceyaw = lookaheadangles[1] - remainingangledelta;
-    forward = anglesToForward((0, faceyaw, 0));
+    forward = anglestoforward((0, faceyaw, 0));
     right = anglestoright((0, faceyaw, 0));
     endpoint = self.origin + vectorscale(forward, remainingmovedelta[0]) - vectorscale(right, remainingmovedelta[1]);
 
@@ -1090,9 +1045,8 @@ docoverexitanimation(exittype, approachnumber) {
       break;
     }
 
-    if(timeleft > 0.4) {
+    if(timeleft > 0.4)
       timeleft = 0.4;
-    }
 
     wait(timeleft);
   }
@@ -1104,11 +1058,10 @@ docoverexitanimation(exittype, approachnumber) {
     current_anim_time = getanimlength(leaveanim) * curfrac;
 
     if(absolute_code_move_time > current_anim_time + 0.05) {
-      if(absolute_code_move_time + 0.15 > getanimlength(leaveanim)) {
+      if(absolute_code_move_time + 0.15 > getanimlength(leaveanim))
         wait(getanimlength(leaveanim) - absolute_code_move_time);
-      } else {
+      else
         self waittillmatch("coverexit", "code_move");
-      }
     }
 
     self orientmode("face motion");
@@ -1119,9 +1072,8 @@ docoverexitanimation(exittype, approachnumber) {
   timepassed = (gettime() - animstarttime) / 1000;
   timeleft = totalanimtime - timepassed - 0.15;
 
-  if(timeleft > 0) {
+  if(timeleft > 0)
     wait(timeleft);
-  }
 
   self clearanim( % root, 0.15);
   self orientmode("face default");
@@ -1134,9 +1086,8 @@ donotetracksforexit(animname, hasexitalign) {
   self endon("killanimscript");
   self animscripts\shared::donotetracks(animname);
 
-  if(!hasexitalign) {
+  if(!hasexitalign)
     self notify(animname, "exit_align");
-  }
 }
 
 getnewstance() {
@@ -1179,63 +1130,54 @@ getnewstance() {
 }
 
 getnodestanceyawoffset(approachtype) {
-  if(approachtype == "left" || approachtype == "left_crouch") {
+  if(approachtype == "left" || approachtype == "left_crouch")
     return 90.0;
-  } else if(approachtype == "right" || approachtype == "right_crouch") {
+  else if(approachtype == "right" || approachtype == "right_crouch")
     return -90.0;
-  } else if(approachtype == "pillar" || approachtype == "pillar_crouch") {
+  else if(approachtype == "pillar" || approachtype == "pillar_crouch")
     return 180.0;
-  }
 
   return 0;
 }
 
 canusesawapproach(node) {
-  if(self.weapon != "saw" && self.weapon != "rpd" && self.weapon != "dp28" && self.weapon != "dp28_bipod" && self.weapon != "bren" && self.weapon != "bren_bipod" && self.weapon != "30cal" && self.weapon != "30cal_bipod" && self.weapon != "bar" && self.weapon != "bar_bipod" && self.weapon != "mg42" && self.weapon != "mg42_bipod" && self.weapon != "fg42" && self.weapon != "fg42_bipod" && self.weapon != "type99_lmg" && self.weapon != "type99_lmg_bipod") {
+  if(self.weapon != "saw" && self.weapon != "rpd" && self.weapon != "dp28" && self.weapon != "dp28_bipod" && self.weapon != "bren" && self.weapon != "bren_bipod" && self.weapon != "30cal" && self.weapon != "30cal_bipod" && self.weapon != "bar" && self.weapon != "bar_bipod" && self.weapon != "mg42" && self.weapon != "mg42_bipod" && self.weapon != "fg42" && self.weapon != "fg42_bipod" && self.weapon != "type99_lmg" && self.weapon != "type99_lmg_bipod")
     return false;
-  }
 
-  if(!isDefined(node.turretinfo)) {
+  if(!isDefined(node.turretinfo))
     return false;
-  }
 
-  if(node.type != "Cover Stand" && node.type != "Cover Prone" && node.type != "Cover Crouch") {
+  if(node.type != "Cover Stand" && node.type != "Cover Prone" && node.type != "Cover Crouch")
     return false;
-  }
 
-  if(isDefined(self.enemy) && distancesquared(self.enemy.origin, node.origin) < 65536) {
+  if(isDefined(self.enemy) && distancesquared(self.enemy.origin, node.origin) < 65536)
     return false;
-  }
 
-  if(getnodeyawtoenemy() > 40 || getnodeyawtoenemy() < -40) {
+  if(getnodeyawtoenemy() > 40 || getnodeyawtoenemy() < -40)
     return false;
-  }
 
   return true;
 }
 
 determinenodeapproachtype(node) {
   if(canusesawapproach(node)) {
-    if(node.type == "Cover Stand") {
+    if(node.type == "Cover Stand")
       node.approachtype = "stand_saw";
-    }
 
-    if(node.type == "Cover Crouch") {
+    if(node.type == "Cover Crouch")
       node.approachtype = "crouch_saw";
-    } else if(node.type == "Cover Prone") {
+    else if(node.type == "Cover Prone")
       node.approachtype = "prone_saw";
-    }
 
     assert(isDefined(node.approachtype));
     return;
   }
 
   if(self is_heavy_machine_gun()) {
-    if(node.type == "Path") {
+    if(node.type == "Path")
       self.disablearrivals = 1;
-    } else {
+    else
       self.disablearrivals = 0;
-    }
   }
 
   if(!isDefined(anim.approach_types[node.type])) {
@@ -1244,11 +1186,10 @@ determinenodeapproachtype(node) {
   nodetype = node.type;
 
   if(nodetype == "Cover Pillar" && usingpistol()) {
-    if(node has_spawnflag(1024)) {
+    if(node has_spawnflag(1024))
       nodetype = "Cover Right";
-    } else {
+    else
       nodetype = "Cover Left";
-    }
   }
 
   stance = node has_spawnflag(4) && !node has_spawnflag(8);
@@ -1257,15 +1198,13 @@ determinenodeapproachtype(node) {
 
 determinenodeexittype(node) {
   if(canusesawapproach(node)) {
-    if(node.type == "Cover Stand") {
+    if(node.type == "Cover Stand")
       node.approachtype = "stand_saw";
-    }
 
-    if(node.type == "Cover Crouch") {
+    if(node.type == "Cover Crouch")
       node.approachtype = "crouch_saw";
-    } else if(node.type == "Cover Prone") {
+    else if(node.type == "Cover Prone")
       node.approachtype = "prone_saw";
-    }
 
     assert(isDefined(node.approachtype));
     return;
@@ -1277,22 +1216,20 @@ determinenodeexittype(node) {
   nodetype = node.type;
 
   if(nodetype == "Cover Pillar" && usingpistol()) {
-    if(node has_spawnflag(1024)) {
+    if(node has_spawnflag(1024))
       nodetype = "Cover Right";
-    } else {
+    else
       nodetype = "Cover Left";
-    }
   }
 
-  if(self.a.pose == "stand") {
+  if(self.a.pose == "stand")
     node.approachtype = anim.approach_types[nodetype][0];
-  } else {
+  else
     node.approachtype = anim.approach_types[nodetype][1];
-  }
 }
 
 getmaxdirectionsandexcludedirfromapproachtype(approachtype) {
-  returnobj = spawnStruct();
+  returnobj = spawnstruct();
 
   if(approachtype == "left" || approachtype == "left_crouch") {
     returnobj.maxdirections = 9;
@@ -1343,7 +1280,7 @@ calculatenodetransitionangles(angledataobj, approachtype, isarrival, arrivalyaw,
     }
 
     angles = (0, arrivalyaw + sign * anglearray[i] + offset, 0);
-    dir = vectornormalize(anglesToForward(angles));
+    dir = vectornormalize(anglestoforward(angles));
     angledataobj.transitions[i] = vectordot(approach_dir, dir);
   }
 }
@@ -1366,39 +1303,33 @@ sortnodetransitionangles(angledataobj, maxdirections) {
 }
 
 shoulddocqbtransition(node, type, isexit, forcecqb) {
-  if((!isDefined(forcecqb) || !forcecqb) && (isDefined(self.heat) && self.heat)) {
+  if((!isDefined(forcecqb) || !forcecqb) && (isDefined(self.heat) && self.heat))
     return 0;
-  }
 
   if(!animscripts\cqb::shouldcqb()) {
-    if(!isDefined(forcecqb) || !forcecqb) {
+    if(!isDefined(forcecqb) || !forcecqb)
       return 0;
-    }
   }
 
   return candocqbtransition(node, type, isexit);
 }
 
 candocqbtransition(node, type, isexit) {
-  if(aihasonlypistol()) {
+  if(aihasonlypistol())
     return false;
-  }
 
-  if(issubstr(type, "_cqb") && !issubstr(tolower(type), "pillar") || type == "exposed" || type == "exposed_crouch") {
+  if(issubstr(type, "_cqb") && !issubstr(tolower(type), "pillar") || type == "exposed" || type == "exposed_crouch")
     return true;
-  }
 
   if(isDefined(isexit) && isexit) {
     assert(isDefined(type));
 
-    if(type == "left" || type == "right") {
+    if(type == "left" || type == "right")
       return true;
-    }
   }
 
-  if(isDefined(node) && (node.type == "Cover Left" || node.type == "Cover Right") && !issubstr(tolower(type), "pillar")) {
+  if(isDefined(node) && (node.type == "Cover Left" || node.type == "Cover Right") && !issubstr(tolower(type), "pillar"))
     return true;
-  }
 
   return false;
 }
@@ -1408,11 +1339,10 @@ startmovetransitiondebug(exittype, exityaw) {
   debug_arrival("lookaheaddir = (" + self.lookaheaddir[0] + ", " + self.lookaheaddir[1] + ", " + self.lookaheaddir[2] + ")");
   angle = angleclamp180(vectortoangles(self.lookaheaddir)[1] - exityaw);
 
-  if(angle < 0) {
+  if(angle < 0)
     debug_arrival(" (Angle of " + (0 - angle) + " right from node forward.)");
-  } else {
+  else
     debug_arrival(" (Angle of " + angle + " left from node forward.)");
-  }
 }
 
 setupapproachnodedebug(approachtype, approach_dir, approachnodeyaw) {
@@ -1420,28 +1350,25 @@ setupapproachnodedebug(approachtype, approach_dir, approachnodeyaw) {
   debug_arrival(" approach_dir = (" + approach_dir[0] + ", " + approach_dir[1] + ", " + approach_dir[2] + ")");
   angle = angleclamp180(vectortoangles(approach_dir)[1] - approachnodeyaw + 180);
 
-  if(angle < 0) {
+  if(angle < 0)
     debug_arrival(" (Angle of " + (0 - angle) + " right from node forward.)");
-  } else {
+  else
     debug_arrival(" (Angle of " + angle + " left from node forward.)");
-  }
 
   if(approachtype == "exposed") {
     if(isDefined(self.node)) {
-      if(isDefined(self.node.approachtype)) {
+      if(isDefined(self.node.approachtype))
         debug_arrival("Aborting cover approach: node approach type was " + self.node.approachtype);
-      } else {
+      else
         debug_arrival("Aborting cover approach: node approach type was undefined");
-      }
     } else
       debug_arrival("Aborting cover approach: self.node is undefined");
 
     return;
   }
 
-  if(debug_arrivals_on_actor()) {
+  if(debug_arrivals_on_actor())
     thread drawapproachvec(approach_dir);
-  }
 }
 
 drawapproachvec(approach_dir) {
@@ -1462,17 +1389,14 @@ drawapproachvec(approach_dir) {
 debug_arrivals_on_actor() {
   dvar = getdvarint(#"_id_3F886B38");
 
-  if(dvar == 0) {
+  if(dvar == 0)
     return false;
-  }
 
-  if(dvar == 1) {
+  if(dvar == 1)
     return true;
-  }
 
-  if(int(dvar) == self getentnum()) {
+  if(int(dvar) == self getentnum())
     return true;
-  }
 
   return false;
 }
@@ -1504,9 +1428,8 @@ debug_arrival_line(start, end, color, duration) {
   if(!debug_arrivals_on_actor()) {
     return;
   }
-  if(isDefined(self)) {
+  if(isDefined(self))
     recordline(start, end, color, "Cover", self);
-  }
 
   debugline(start, end, color, duration);
 }
@@ -1529,9 +1452,8 @@ fakeailogic() {
   self animmode("nogravity");
   self forceteleport(get_players()[0].origin + vectorscale((0, 0, -1), 1000.0), self.origin);
 
-  while(isDefined(self) && isalive(self)) {
+  while(isDefined(self) && isalive(self))
     wait 0.05;
-  }
 }
 
 coverarrivaldebugtool() {
@@ -1701,9 +1623,8 @@ coverarrivaldebugtool() {
   while(true) {
     tool = getdvarint(#"_id_57FCCA16");
 
-    if(tool <= 0 && isDefined(level.nodedrone) && isDefined(level.nodedrone.currentnode)) {
+    if(tool <= 0 && isDefined(level.nodedrone) && isDefined(level.nodedrone.currentnode))
       tool = 1;
-    }
 
     if(tool <= 0) {
       if(isDefined(fakeai)) {
@@ -1773,29 +1694,26 @@ coverarrivaldebugtool() {
     shownodes = getdvarint(#"_id_8FA91890");
     totalnodes = 1;
 
-    if(shownodes > 0 || nodes.size == 0) {
+    if(shownodes > 0 || nodes.size == 0)
       totalnodes = nodes.size;
-    }
 
     fakeai.cqb = 0;
     fakeai.weapon = "ak47_sp";
     fakeai.heat = 0;
     tooltype = getdvarint(#"_id_3F219298");
 
-    if(tooltype == 1) {
+    if(tooltype == 1)
       fakeai.cqb = 1;
-    } else if(tooltype == 2) {
+    else if(tooltype == 2)
       fakeai.weapon = "m1911_sp";
-    }
 
     allai = entsearch(level.contents_actor, player.origin, 10000);
     numai = allai.size;
 
-    if(numai < 5) {
+    if(numai < 5)
       numai = 5;
-    } else if(numai > 15) {
+    else if(numai > 15)
       numai = 15;
-    }
 
     maxnodesperframe = (numai - 5) / (15 - 5);
     maxnodesperframe = (1 - maxnodesperframe) * (30 - 5) + 5;
@@ -1827,15 +1745,14 @@ coverarrivaldebugtool() {
       }
 
       if(isDefined(node.lastcheckedtime) && gettime() - node.lastcheckedtime < 50 * frameinterval) {
-        if(node.lastratio == 0) {
+        if(node.lastratio == 0)
           numbad++;
-        } else if(node.lastratio < 0.5) {
+        else if(node.lastratio < 0.5)
           numpoor++;
-        } else if(node.lastratio < 1.0) {
+        else if(node.lastratio < 1.0)
           numok++;
-        } else {
+        else
           numgood++;
-        }
 
         continue;
       }
@@ -1846,15 +1763,13 @@ coverarrivaldebugtool() {
       testai = fakeai;
       nearaiarray = entsearch(level.contents_actor, node.origin, 16);
 
-      if(nearaiarray.size > 0) {
+      if(nearaiarray.size > 0)
         testai = nearaiarray[0];
-      }
 
       rendernode = 1;
 
-      if(distancesquared(node.origin, player.origin) > 640000) {
+      if(distancesquared(node.origin, player.origin) > 640000)
         rendernode = 0;
-      }
 
       nodecolor = nodecolors["Good"];
       stance = node has_spawnflag(4) && !node has_spawnflag(8);
@@ -1863,17 +1778,14 @@ coverarrivaldebugtool() {
       validtransitions = 0;
       animname = "arrive_" + transtype;
 
-      if(tool == 2) {
+      if(tool == 2)
         animname = "exit_" + transtype;
-      }
 
-      if(fakeai shoulddocqbtransition(node, transtype)) {
+      if(fakeai shoulddocqbtransition(node, transtype))
         animname = animname + "_cqb";
-      }
 
-      if(!isDefined(node.angledeltaarray)) {
+      if(!isDefined(node.angledeltaarray))
         node.angledeltaarray = fakeai angledeltaarray(animname, "move");
-      }
 
       for(j = 1; j <= 9; j++) {
         if(isDefined(node.angledeltaarray[j])) {
@@ -1884,51 +1796,45 @@ coverarrivaldebugtool() {
           approachfinalyaw = node.angles[1] + animscripts\cover_arrival::getnodestanceyawoffset(transtype);
           angle = (0, approachfinalyaw - node.angledeltaarray[j], 0);
 
-          if(tool == 2) {
+          if(tool == 2)
             angle = (0, approachfinalyaw, 0);
-          }
 
-          forwarddir = anglesToForward(angle);
+          forwarddir = anglestoforward(angle);
           rightdir = anglestoright(angle);
 
-          if(!isDefined(node.movedeltaarray)) {
+          if(!isDefined(node.movedeltaarray))
             node.movedeltaarray = fakeai movedeltaarray(animname, "move");
-          }
 
           enterpos = node.origin;
           forward = vectorscale(forwarddir, node.movedeltaarray[j][0]);
           right = vectorscale(rightdir, node.movedeltaarray[j][1]);
 
-          if(tool == 1) {
+          if(tool == 1)
             enterpos = node.origin - forward + right;
-          } else {
+          else
             enterpos = node.origin + forward - right;
-          }
 
           if(testai maymovefrompointtopoint(node.origin, enterpos)) {
             approachisgood = 1;
             linecolor = vectorscale((0, 1, 0), 0.75);
           }
 
-          if(rendernode) {
+          if(rendernode)
             line(node.origin, enterpos, linecolor, 1, 1, frameinterval);
-          }
 
           if(approachisgood && j >= 7 && !issubstr(transtype, "exposed")) {
             originalenterpos = enterpos;
 
             if(tool == 1) {
-              if(!isDefined(node.premovedeltaarray)) {
+              if(!isDefined(node.premovedeltaarray))
                 node.premovedeltaarray = fakeai premovedeltaarray(animname, "move");
-              }
 
               forward = vectorscale(forwarddir, node.premovedeltaarray[j][0]);
               right = vectorscale(rightdir, node.premovedeltaarray[j][1]);
               originalenterpos = enterpos - forward + right;
             } else {
-              if(!isDefined(node.postmovedeltaarray)) {
+              if(!isDefined(node.postmovedeltaarray))
                 node.postmovedeltaarray = fakeai postmovedeltaarray(animname, "move");
-              }
 
               forward = vectorscale(forwarddir, node.postmovedeltaarray[j][0]);
               right = vectorscale(rightdir, node.postmovedeltaarray[j][1]);
@@ -1947,9 +1853,8 @@ coverarrivaldebugtool() {
           } else if(rendernode)
             print3d(enterpos, j + " (" + distance2d(node.origin, enterpos) + ")", linecolor, 1, 0.2, frameinterval);
 
-          if(approachisgood) {
+          if(approachisgood)
             validtransitions++;
-          }
 
           tracesthisframe++;
         }
@@ -1973,7 +1878,7 @@ coverarrivaldebugtool() {
       if(rendernode) {
         print3d(node.origin, node.type + " (" + transtype + ")", nodecolor, 1, 0.35, frameinterval);
         box(node.origin, vectorscale((-1, -1, 0), 16.0), vectorscale((1, 1, 1), 16.0), node.angles[1], nodecolor, 1, 1, frameinterval);
-        nodeforward = anglesToForward(node.angles);
+        nodeforward = anglestoforward(node.angles);
         nodeforward = vectorscale(nodeforward, 8);
         line(node.origin, node.origin + nodeforward, nodecolor, 1, 1, frameinterval);
         renderedthisframe++;

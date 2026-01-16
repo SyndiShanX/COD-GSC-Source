@@ -5,7 +5,7 @@
 ************************************************/
 
 main() {
-  self setModel("body_usmc_desert_assault_mark");
+  self setmodel("body_usmc_desert_assault_mark");
   self attach("head_usmc_marine_griggs", "", 1);
   self.headmodel = "head_usmc_marine_griggs";
   self.voice = "american";

@@ -10,6 +10,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_vo;
+
 #namespace namespace_c8efdadc;
 
 init() {
@@ -27,7 +28,7 @@ function_29bff3c6() {
   level.var_d5ba7324 = util::spawn_model(#"tag_origin", level.s_apollo_bowl.origin, level.s_apollo_bowl.angles);
   waitframe(1);
   level.var_705db276 = 1;
-  level.var_d5ba7324 clientfield::set("" + # "hash_74fc30de57a0657a", level.var_705db276);
+  level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", level.var_705db276);
   a_players = getplayers();
   level.var_6a1bdc96 = 16 * a_players.size;
   level.var_ba3adfd9 = [];
@@ -59,7 +60,7 @@ function_9c8540b4(e_player, n_amount) {
         }
       }
 
-      level.var_d5ba7324 clientfield::set("" + # "hash_74fc30de57a0657a", level.var_705db276);
+      level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", level.var_705db276);
     }
 
     if(level.var_705db276 == 5) {
@@ -83,11 +84,11 @@ function_e71df7b6() {
 
 function_f4472adf(a_ents) {
   level.var_bb7822b7 = [];
-  level.var_bb7822b7[0] = a_ents[# "prop 1"];
-  level.var_bb7822b7[1] = a_ents[# "prop 2"];
-  level.var_bb7822b7[2] = a_ents[# "prop 3"];
-  level.var_bb7822b7[3] = a_ents[# "prop 4"];
-  level.var_bb7822b7[4] = a_ents[# "prop 5"];
+  level.var_bb7822b7[0] = a_ents[#"prop 1"];
+  level.var_bb7822b7[1] = a_ents[#"prop 2"];
+  level.var_bb7822b7[2] = a_ents[#"prop 3"];
+  level.var_bb7822b7[3] = a_ents[#"prop 4"];
+  level.var_bb7822b7[4] = a_ents[#"prop 5"];
 }
 
 function_53bac096(b_hide) {
@@ -118,5 +119,5 @@ function_407b2b88() {
   level flag::wait_till("all_players_connected");
   level flag::wait_till("power_on");
   level.var_483180c5 = getent("coal_brazier_apollo", "targetname");
-  level.var_483180c5 clientfield::set("" + # "rob_coals", 1);
+  level.var_483180c5 clientfield::set("" + #"rob_coals", 1);
 }

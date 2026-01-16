@@ -79,9 +79,8 @@ run_mason_hangar() {
   deck_turn_off_cells();
   level thread sea_cowbell();
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     level.harper change_movemode("cqb_run");
-  }
 
   trigger_use("control_room_color_start");
   spawn_salazar_guards();
@@ -109,11 +108,10 @@ objective_breadcrumb_to_salazar() {
     set_objective(level.obj_find_salazar, t_current, "breadcrumb");
     t_current waittill("trigger");
 
-    if(isDefined(t_current.target)) {
+    if(isDefined(t_current.target))
       t_current = getent(t_current.target, "targetname");
-    } else {
+    else
       t_current = undefined;
-    }
   }
 
   set_objective(level.obj_find_salazar, level.salazar, "breadcrumb");
@@ -203,9 +201,8 @@ mason_elevator() {
   delay_thread(15, ::elevator_jetpacks_land);
   m_mason_elevator movez(576, 25, 3, 3);
 
-  if(-1) {
+  if(-1)
     level thread maps\blackout_deck::setup_claw_bigdog();
-  }
 
   wait 23.8;
   flag_set("reached_top_elevator");
@@ -249,9 +246,8 @@ elevator_waittill_squad_boarded() {
     b_all_boarded = 1;
 
     foreach(ai in a_elevator_squad) {
-      if(!ai istouching(t_elevator)) {
+      if(!ai istouching(t_elevator))
         b_all_boarded = 0;
-      }
     }
 
     wait 0.5;
@@ -282,11 +278,11 @@ elevator_rumble() {
 elevator_audio() {
   playsoundatposition("evt_elev_alarm", (815, -2177, -400));
   wait 1;
-  self playSound("evt_elev_start");
+  self playsound("evt_elev_start");
   wait 1;
-  self playLoopSound("evt_elev_loop", 2);
+  self playloopsound("evt_elev_loop", 2);
   self waittill("movedone");
-  self playSound("evt_elev_stop");
+  self playsound("evt_elev_stop");
   wait 0.5;
   self stoploopsound(0.3);
 }
@@ -300,9 +296,8 @@ menendez_riding_elevator() {
   menendez_elevator = getent("menendez_elevator", "targetname");
   landing_gears = getent("landing_gear_hanger", "targetname");
 
-  if(isDefined(landing_gears)) {
+  if(isDefined(landing_gears))
     landing_gears delete();
-  }
 
   menendez_elevator movez(200, 1, 0.5, 0.5);
   wait 1;
@@ -363,10 +358,10 @@ fxanim_debris_fx() {
   wait 0.05;
   earthquake(0.3, 1.5, level.player.origin, 128);
   fxanim_model = getent("black_elevator_debris", "targetname");
-  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_3"), fxanim_model, "link_cockpit_debris_jnt");
-  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_l_debris_jnt");
-  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_r_debris_jnt");
-  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail"), fxanim_model, "link_engine_debris_jnt");
+  playfxontag(getfx("fx_com_elev_fa38_debri_trail_3"), fxanim_model, "link_cockpit_debris_jnt");
+  playfxontag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_l_debris_jnt");
+  playfxontag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_r_debris_jnt");
+  playfxontag(getfx("fx_com_elev_fa38_debri_trail"), fxanim_model, "link_engine_debris_jnt");
   wait 2;
   earthquake(0.3, 1.5, level.player.origin, 128);
   trigger_use("color_trigger_hangar");
@@ -378,9 +373,8 @@ fxanim_debris_fx() {
 move_ai_to_pre_elevator_positions() {
   t_color_moveup = get_ent("pre_elevator_color_trigger", "targetname");
 
-  if(isDefined(t_color_moveup)) {
+  if(isDefined(t_color_moveup))
     t_color_moveup trigger_use();
-  }
 }
 
 ambient_fire_on_deck() {
@@ -395,7 +389,7 @@ ambient_fire_on_deck() {
 }
 
 delete_and_create_runway_jets() {
-  runway_array = getEntArray("runway_jet_delete", "targetname");
+  runway_array = getentarray("runway_jet_delete", "targetname");
   array_delete(runway_array);
   spawn_vehicle_from_targetname("defend_f38_1");
   spawn_vehicle_from_targetname("defend_f38_2");
@@ -409,9 +403,8 @@ gas_mask_remove() {
 }
 
 run_to_node(str_targetname, str_delay_flag) {
-  if(isDefined(str_delay_flag)) {
+  if(isDefined(str_delay_flag))
     flag_wait(str_delay_flag);
-  }
 
   nd_goal = getnode(str_targetname, "targetname");
   self set_goal_node(nd_goal);
@@ -437,9 +430,8 @@ run_mason_salazar_caught() {
   set_light_flicker_fx_area(71100);
   level.salazar = init_hero("salazar", ::clear_force_color);
 
-  if(scene_exists("betrayal_surrender_sal_idle_loop")) {
+  if(scene_exists("betrayal_surrender_sal_idle_loop"))
     level thread run_scene_and_delete("betrayal_surrender_sal_idle_loop");
-  }
 
   level thread friendly_fire_fail_during_surrender();
 
@@ -508,9 +500,8 @@ friendly_fire_fail_during_surrender() {
   ai_captor friendly_fire_instant_fail_add();
   flag_wait("betrayal_speech_done");
 
-  if(level.is_harper_alive) {
+  if(level.is_harper_alive)
     ai_captor friendly_fire_instant_fail_remove();
-  }
 }
 
 notetrack_harper_uses_pistol(ai_harper) {
@@ -527,11 +518,11 @@ notetrack_harper_shoots_salazar(m_origin) {
   exploder(1028);
   v_start = m_origin gettagorigin("origin_animate_jnt");
   v_angles = m_origin gettagangles("origin_animate_jnt");
-  v_end = v_start + anglesToForward(v_angles) * 200;
+  v_end = v_start + anglestoforward(v_angles) * 200;
   magicbullet("fiveseven_sp", v_start, v_end);
-  playFXOnTag(level._effect["super_kill_muzzle_flash"], m_origin, "origin_animate_jnt");
+  playfxontag(level._effect["super_kill_muzzle_flash"], m_origin, "origin_animate_jnt");
   ai_salazar = get_ent("salazar_ai", "targetname", 1);
-  playFXOnTag(level._effect["harper_shoots_salazar"], ai_salazar, "J_Head");
+  playfxontag(level._effect["harper_shoots_salazar"], ai_salazar, "J_Head");
 }
 
 mason_hangar_ambience() {

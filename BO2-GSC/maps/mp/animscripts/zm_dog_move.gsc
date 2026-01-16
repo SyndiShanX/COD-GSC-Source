@@ -10,8 +10,8 @@
 #include maps\mp\animscripts\zm_utility;
 
 setup_sound_variables() {
-  level.dog_sounds["far"] = spawnStruct();
-  level.dog_sounds["close"] = spawnStruct();
+  level.dog_sounds["far"] = spawnstruct();
+  level.dog_sounds["close"] = spawnstruct();
   level.dog_sounds["close"].minrange = 0;
   level.dog_sounds["close"].maxrange = 500;
   level.dog_sounds["close"].sound = "aml_dog_bark_close";
@@ -36,13 +36,11 @@ main() {
   self setaimanimweights(0, 0);
   do_movement = 1;
 
-  if(!debug_allow_movement()) {
+  if(!debug_allow_movement())
     do_movement = 0;
-  }
 
-  if(isDefined(level.hostmigrationtimer)) {
+  if(isDefined(level.hostmigrationtimer))
     do_movement = 0;
-  }
 
   if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && do_movement) {
     self startmove();
@@ -72,9 +70,8 @@ main() {
     self moveloop();
 
     if(self.a.movement == "run") {
-      if(self.disablearrivals == 0) {
+      if(self.disablearrivals == 0)
         self thread stopmove();
-      }
 
       self waittill("run");
     }
@@ -88,13 +85,11 @@ moveloop() {
   while(true) {
     do_movement = 1;
 
-    if(!debug_allow_movement()) {
+    if(!debug_allow_movement())
       do_movement = 0;
-    }
 
-    if(isDefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer))
       do_movement = 0;
-    }
 
     if(!do_movement) {
       self setaimanimweights(0, 0);
@@ -103,11 +98,10 @@ moveloop() {
       continue;
     }
 
-    if(self.disablearrivals) {
+    if(self.disablearrivals)
       self.stopanimdistsq = 0;
-    } else {
+    else
       self.stopanimdistsq = level.dogstoppingdistsq;
-    }
 
     if(self.a.movement == "run") {
       debug_anim_print("dog_move::moveLoop() - Setting move_run");
@@ -158,9 +152,8 @@ stopmove() {
 }
 
 getenemydistancesqr() {
-  if(isDefined(self.enemy)) {
+  if(isDefined(self.enemy))
     return distancesquared(self.origin, self.enemy.origin);
-  }
 
   return 100000000;
 }
@@ -195,45 +188,37 @@ need_to_run() {
   run_pitch = 30;
   run_height = 64;
 
-  if(self.a.movement != "walk") {
+  if(self.a.movement != "walk")
     return false;
-  }
 
-  if(self.health < self.maxhealth) {
+  if(self.health < self.maxhealth)
     return true;
-  }
 
-  if(!isDefined(self.enemy) || !isalive(self.enemy)) {
+  if(!isDefined(self.enemy) || !isalive(self.enemy))
     return false;
-  }
 
-  if(!self cansee(self.enemy)) {
+  if(!self cansee(self.enemy))
     return false;
-  }
 
   dist = distancesquared(self.origin, self.enemy.origin);
 
-  if(dist > run_dist_squared) {
+  if(dist > run_dist_squared)
     return false;
-  }
 
   height = self.origin[2] - self.enemy.origin[2];
 
-  if(abs(height) > run_height) {
+  if(abs(height) > run_height)
     return false;
-  }
 
   yaw = self maps\mp\animscripts\zm_utility::absyawtoenemy();
 
-  if(yaw > run_yaw) {
+  if(yaw > run_yaw)
     return false;
-  }
 
   pitch = angleclamp180(vectortoangles(self.origin - self.enemy.origin)[0]);
 
-  if(abs(pitch) > run_pitch) {
+  if(abs(pitch) > run_pitch)
     return false;
-  }
 
   return true;
 }

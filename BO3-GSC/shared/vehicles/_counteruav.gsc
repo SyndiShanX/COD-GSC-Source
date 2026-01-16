@@ -17,11 +17,11 @@
 #namespace counteruav;
 
 function autoexec __init__sytem__() {
-  system::register("counteruav", &__init__, undefined, undefined);
+  system::register("counteruav", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("counteruav", &counteruav_initialize);
+  vehicle::add_main_callback("counteruav", & counteruav_initialize);
 }
 
 function counteruav_initialize() {
@@ -32,14 +32,16 @@ function counteruav_initialize() {
   self setvehicleavoidance(1);
   self sethoverparams(50, 100, 100);
   self.vehaircraftcollisionenabled = 1;
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self.goalradius = 999999;
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = &drone_callback_damage;
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  self.overridevehicledamage = & drone_callback_damage;
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
 }
 

@@ -13,17 +13,14 @@
 zombie_tracking_init() {
   level.zombie_respawned_health = [];
 
-  if(!isDefined(level.zombie_tracking_dist)) {
+  if(!isDefined(level.zombie_tracking_dist))
     level.zombie_tracking_dist = 1600;
-  }
 
-  if(!isDefined(level.zombie_tracking_high)) {
+  if(!isDefined(level.zombie_tracking_high))
     level.zombie_tracking_high = 600;
-  }
 
-  if(!isDefined(level.zombie_tracking_wait)) {
+  if(!isDefined(level.zombie_tracking_wait))
     level.zombie_tracking_wait = 0.4;
-  }
 
   while(true) {
     zombies = get_round_enemy_array();
@@ -33,9 +30,8 @@ zombie_tracking_init() {
       continue;
     } else {
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i]) && !(isDefined(zombies[i].ignore_distance_tracking) && zombies[i].ignore_distance_tracking) && (isDefined(zombies[i].ignoreall) && !zombies[i].ignoreall)) {
+        if(isDefined(zombies[i]) && !(isDefined(zombies[i].ignore_distance_tracking) && zombies[i].ignore_distance_tracking) && (isDefined(zombies[i].ignoreall) && !zombies[i].ignoreall))
           zombies[i] thread delete_zombie_noone_looking(level.zombie_tracking_dist, level.zombie_tracking_high);
-        }
       }
     }
 
@@ -50,25 +46,21 @@ delete_zombie_noone_looking(how_close, how_high) {
     self.inview = 0;
     self.player_close = 0;
   } else {
-    if(!isDefined(how_close)) {
+    if(!isDefined(how_close))
       how_close = 1000;
-    }
 
-    if(!isDefined(how_high)) {
+    if(!isDefined(how_high))
       how_high = 500;
-    }
 
-    if(!(isDefined(self.has_legs) && self.has_legs)) {
+    if(!(isDefined(self.has_legs) && self.has_legs))
       how_close = how_close * 1.5;
-    }
 
     distance_squared_check = how_close * how_close;
     height_squared_check = how_high * how_high;
     too_far_dist = distance_squared_check * 3;
 
-    if(isDefined(level.zombie_tracking_too_far_dist)) {
+    if(isDefined(level.zombie_tracking_too_far_dist))
       too_far_dist = level.zombie_tracking_too_far_dist * level.zombie_tracking_too_far_dist;
-    }
 
     self.inview = 0;
     self.player_close = 0;
@@ -87,21 +79,18 @@ delete_zombie_noone_looking(how_close, how_high) {
       }
 
       if(isDefined(level.only_track_targeted_players)) {
-        if(!isDefined(self.favoriteenemy) || self.favoriteenemy != player) {
+        if(!isDefined(self.favoriteenemy) || self.favoriteenemy != player)
           continue;
-        }
       }
 
       can_be_seen = self player_can_see_me(player);
       distance_squared = distancesquared(self.origin, player.origin);
 
-      if(can_be_seen && distance_squared < too_far_dist) {
+      if(can_be_seen && distance_squared < too_far_dist)
         self.inview++;
-      }
 
-      if(distance_squared < distance_squared_check && abs(self.origin[2] - player.origin[2]) < how_high) {
+      if(distance_squared < distance_squared_check && abs(self.origin[2] - player.origin[2]) < how_high)
         self.player_close++;
-      }
     }
   }
 
@@ -120,18 +109,16 @@ delete_zombie_noone_looking(how_close, how_high) {
       if(!(isDefined(self.exclude_distance_cleanup_adding_to_total) && self.exclude_distance_cleanup_adding_to_total) && !(isDefined(self.isscreecher) && self.isscreecher)) {
         level.zombie_total++;
 
-        if(self.health < level.zombie_health) {
+        if(self.health < level.zombie_health)
           level.zombie_respawned_health[level.zombie_respawned_health.size] = self.health;
-        }
       }
     }
 
     self maps\mp\zombies\_zm_spawner::reset_attack_spot();
     self notify("zombie_delete");
 
-    if(isDefined(self.anchor)) {
+    if(isDefined(self.anchor))
       self.anchor delete();
-    }
 
     self delete();
     recalc_zombie_array();
@@ -140,7 +127,7 @@ delete_zombie_noone_looking(how_close, how_high) {
 
 player_can_see_me(player) {
   playerangles = player getplayerangles();
-  playerforwardvec = anglesToForward(playerangles);
+  playerforwardvec = anglestoforward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
@@ -148,33 +135,29 @@ player_can_see_me(player) {
   playertobanzaiunitvec = vectornormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
 
-  if(forwarddotbanzai >= 1) {
+  if(forwarddotbanzai >= 1)
     anglefromcenter = 0;
-  } else if(forwarddotbanzai <= -1) {
+  else if(forwarddotbanzai <= -1)
     anglefromcenter = 180;
-  } else {
+  else
     anglefromcenter = acos(forwarddotbanzai);
-  }
 
   playerfov = getdvarfloat(#"cg_fov");
   banzaivsplayerfovbuffer = getdvarfloat(#"_id_BCB625CF");
 
-  if(banzaivsplayerfovbuffer <= 0) {
+  if(banzaivsplayerfovbuffer <= 0)
     banzaivsplayerfovbuffer = 0.2;
-  }
 
   playercanseeme = anglefromcenter <= playerfov * 0.5 * (1 - banzaivsplayerfovbuffer);
   return playercanseeme;
 }
 
 can_be_deleted_from_buried_special_zones() {
-  if(self can_be_deleted_from_start_area()) {
+  if(self can_be_deleted_from_start_area())
     return true;
-  }
 
-  if(self can_be_deleted_from_maze_area()) {
+  if(self can_be_deleted_from_maze_area())
     return true;
-  }
 
   return false;
 }
@@ -198,18 +181,15 @@ can_be_deleted_from_area(zone_names) {
   self_in_zone = 0;
 
   foreach(zone_name in zone_names) {
-    if(isDefined(level.zones[zone_name]) && (isDefined(level.zones[zone_name].is_occupied) && level.zones[zone_name].is_occupied)) {
+    if(isDefined(level.zones[zone_name]) && (isDefined(level.zones[zone_name].is_occupied) && level.zones[zone_name].is_occupied))
       return false;
-    }
 
-    if(!self_in_zone && self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone_name)) {
+    if(!self_in_zone && self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone_name))
       self_in_zone = 1;
-    }
   }
 
-  if(self_in_zone) {
+  if(self_in_zone)
     return true;
-  }
 
   return false;
 }
@@ -219,9 +199,8 @@ escaped_zombies_cleanup_init() {
   self.zombie_path_bad = 0;
 
   while(true) {
-    if(!self.zombie_path_bad) {
+    if(!self.zombie_path_bad)
       self waittill("bad_path");
-    }
 
     found_player = undefined;
     players = get_players();
@@ -262,9 +241,8 @@ escaped_zombies_cleanup() {
   self.zombie_path_bad = !can_zombie_path_to_any_player();
   wait 0.1;
 
-  if(!self.zombie_path_bad) {
+  if(!self.zombie_path_bad)
     self thread maps\mp\zombies\_zm_ai_basic::find_flesh();
-  }
 }
 
 get_escape_position() {
@@ -308,9 +286,8 @@ can_zombie_path_to_any_player() {
     if(is_true(a_players[i].is_in_ghost_zone)) {
       continue;
     }
-    if(findpath(self.origin, a_players[i].origin)) {
+    if(findpath(self.origin, a_players[i].origin))
       return true;
-    }
   }
 
   return false;
@@ -325,13 +302,11 @@ can_zombie_see_any_player() {
     }
     path_length = 0;
 
-    if(!is_true(a_players[i].is_in_ghost_zone)) {
+    if(!is_true(a_players[i].is_in_ghost_zone))
       path_length = self calcpathlength(a_players[i].origin);
-    }
 
-    if(self maymovetopoint(a_players[i].origin, 1) || path_length != 0) {
+    if(self maymovetopoint(a_players[i].origin, 1) || path_length != 0)
       return true;
-    }
   }
 
   return false;
@@ -343,9 +318,8 @@ get_adjacencies_to_zone(str_zone) {
   a_adjacent_zones = getarraykeys(level.zones[str_zone].adjacent_zones);
 
   for(i = 0; i < a_adjacent_zones.size; i++) {
-    if(level.zones[str_zone].adjacent_zones[a_adjacent_zones[i]].is_connected) {
+    if(level.zones[str_zone].adjacent_zones[a_adjacent_zones[i]].is_connected)
       a_adjacencies[a_adjacencies.size] = a_adjacent_zones[i];
-    }
   }
 
   return a_adjacencies;
@@ -354,9 +328,8 @@ get_adjacencies_to_zone(str_zone) {
 get_dog_locations_in_zones(a_zones) {
   a_dog_locations = [];
 
-  foreach(zone in a_zones) {
-    a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
-  }
+  foreach(zone in a_zones)
+  a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
 
   return a_dog_locations;
 }

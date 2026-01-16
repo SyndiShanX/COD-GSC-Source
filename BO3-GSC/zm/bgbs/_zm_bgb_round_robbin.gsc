@@ -15,14 +15,14 @@
 #namespace zm_bgb_round_robbin;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_round_robbin", &__init__, undefined, "bgb");
+  system::register("zm_bgb_round_robbin", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_round_robbin", "activated", 1, undefined, undefined, &validation, &activation);
+  bgb::register("zm_bgb_round_robbin", "activated", 1, undefined, undefined, & validation, & activation);
 }
 
 function validation() {
@@ -30,17 +30,17 @@ function validation() {
     return false;
   }
   zombies = getaiteamarray(level.zombie_team);
-  if(!isDefined(zombies) || zombies.size < 1) {
+  if(!isdefined(zombies) || zombies.size < 1) {
     return false;
   }
-  if(isDefined(level.var_35efa94c)) {
+  if(isdefined(level.var_35efa94c)) {
     if(![
         [level.var_35efa94c]
       ]()) {
       return false;
     }
   }
-  if(isDefined(level.var_dfd95560) && level.var_dfd95560) {
+  if(isdefined(level.var_dfd95560) && level.var_dfd95560) {
     return false;
   }
   return true;
@@ -58,10 +58,10 @@ function activation() {
 }
 
 function function_b10a9b0c(zombie) {
-  if(!isDefined(zombie)) {
+  if(!isdefined(zombie)) {
     return false;
   }
-  if(isDefined(zombie.ignore_round_robbin_death) && zombie.ignore_round_robbin_death || (isDefined(zombie.marked_for_death) && zombie.marked_for_death) || zm_utility::is_magic_bullet_shield_enabled(zombie)) {
+  if(isdefined(zombie.ignore_round_robbin_death) && zombie.ignore_round_robbin_death || (isdefined(zombie.marked_for_death) && zombie.marked_for_death) || zm_utility::is_magic_bullet_shield_enabled(zombie)) {
     return false;
   }
   return true;
@@ -78,25 +78,25 @@ function function_8824774d(target_round) {
   playsoundatposition("zmb_bgb_round_robbin", (0, 0, 0));
   wait(0.1);
   zombies = getaiteamarray(level.zombie_team);
-  for(i = 0; i < zombies.size; i++) {
-    if(isDefined(zombies[i].ignore_round_robbin_death) && zombies[i].ignore_round_robbin_death) {
+  for (i = 0; i < zombies.size; i++) {
+    if(isdefined(zombies[i].ignore_round_robbin_death) && zombies[i].ignore_round_robbin_death) {
       arrayremovevalue(zombies, zombies[i]);
     }
   }
-  if(isDefined(zombies)) {
+  if(isdefined(zombies)) {
     e_last = undefined;
     foreach(zombie in zombies) {
       if(function_b10a9b0c(zombie)) {
         e_last = zombie;
       }
     }
-    if(isDefined(e_last)) {
+    if(isdefined(e_last)) {
       level.last_ai_origin = e_last.origin;
       level notify("last_ai_down", e_last);
     }
   }
   util::wait_network_frame();
-  if(isDefined(zombies)) {
+  if(isdefined(zombies)) {
     foreach(zombie in zombies) {
       if(!function_b10a9b0c(zombie)) {
         continue;

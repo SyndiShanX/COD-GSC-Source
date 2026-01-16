@@ -200,9 +200,11 @@ tesla_play_death_fx(arc_num) {
     fx = "tesla_shock_secondary";
   }
   network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[fx], self, tag);
-  self playSound("wpn_imp_tesla");
+  self playsound("wpn_imp_tesla");
   if(isDefined(self.tesla_head_gib_func)) {
-    [[self.tesla_head_gib_func]]();
+    [
+      [self.tesla_head_gib_func]
+    ]();
   }
 }
 
@@ -228,7 +230,7 @@ tesla_play_arc_fx(target) {
   }
   fxOrg = spawn("script_model", origin);
   fxOrg setModel("tag_origin");
-  fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
+  fx = PlayFxOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("wpn_tesla_bounce", fxOrg.origin);
   fxOrg moveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
   fxOrg waittill("movedone");
@@ -307,7 +309,7 @@ tesla_pvp_thread() {
     }
     self setelectrified(1.0);
     self shellshock("electrocution", 1.0);
-    self playSound("wpn_tesla_bounce");
+    self playsound("wpn_tesla_bounce");
   }
 }
 
@@ -322,7 +324,7 @@ play_tesla_sound(emotion) {
     level.one_emo_at_a_time = 1;
     org = spawn("script_origin", self.origin);
     org LinkTo(self);
-    org playSound(emotion, "sound_complete" + "_" + level.var_counter);
+    org playsound(emotion, "sound_complete" + "_" + level.var_counter);
     org waittill("sound_complete" + "_" + level.var_counter);
     org delete();
     level.one_emo_at_a_time = 0;

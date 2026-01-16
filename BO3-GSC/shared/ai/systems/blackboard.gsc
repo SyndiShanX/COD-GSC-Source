@@ -6,13 +6,13 @@
 #namespace blackboard;
 
 function registerblackboardattribute(entity, attributename, defaultattributevalue, getterfunction) {
-  assert(isDefined(entity.__blackboard), "");
-  assert(!isDefined(entity.__blackboard[attributename]), ("" + attributename) + "");
-  if(isDefined(getterfunction)) {
+  assert(isdefined(entity.__blackboard), "");
+  assert(!isdefined(entity.__blackboard[attributename]), ("" + attributename) + "");
+  if(isdefined(getterfunction)) {
     assert(isfunctionptr(getterfunction));
     entity.__blackboard[attributename] = getterfunction;
   } else {
-    if(!isDefined(defaultattributevalue)) {
+    if(!isdefined(defaultattributevalue)) {
       defaultattributevalue = undefined;
     }
     entity.__blackboard[attributename] = defaultattributevalue;
@@ -35,8 +35,8 @@ function getblackboardattribute(entity, attributename) {
 }
 
 function setblackboardattribute(entity, attributename, attributevalue) {
-  if(isDefined(entity.__blackboard[attributename])) {
-    if(!isDefined(attributevalue) && isfunctionptr(entity.__blackboard[attributename])) {
+  if(isdefined(entity.__blackboard[attributename])) {
+    if(!isdefined(attributevalue) && isfunctionptr(entity.__blackboard[attributename])) {
       return;
     }
     assert(!isfunctionptr(entity.__blackboard[attributename]), "");
@@ -48,10 +48,10 @@ function setblackboardattribute(entity, attributename, attributevalue) {
 }
 
 function createblackboardforentity(entity) {
-  if(!isDefined(entity.__blackboard)) {
+  if(!isdefined(entity.__blackboard)) {
     entity.__blackboard = [];
   }
-  if(!isDefined(level._setblackboardattributefunc)) {
-    level._setblackboardattributefunc = &setblackboardattribute;
+  if(!isdefined(level._setblackboardattributefunc)) {
+    level._setblackboardattributefunc = & setblackboardattribute;
   }
 }

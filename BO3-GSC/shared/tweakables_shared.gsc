@@ -7,7 +7,7 @@
 #namespace tweakables;
 
 function autoexec __init__sytem__() {
-  system::register("tweakables", &__init__, undefined, undefined);
+  system::register("tweakables", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -87,7 +87,7 @@ function gettweakabledvarvalue(category, name) {
       break;
     }
   }
-  assert(isDefined(dvar));
+  assert(isdefined(dvar));
   value = getdvarint(dvar);
   return value;
 }
@@ -131,7 +131,7 @@ function gettweakabledvar(category, name) {
       break;
     }
   }
-  assert(isDefined(value));
+  assert(isdefined(value));
   return value;
 }
 
@@ -178,7 +178,7 @@ function gettweakablevalue(category, name) {
   if(getdvarstring(overridedvar) != "") {
     return getdvarint(overridedvar);
   }
-  assert(isDefined(value));
+  assert(isdefined(value));
   return value;
 }
 
@@ -221,7 +221,7 @@ function gettweakablelastvalue(category, name) {
       break;
     }
   }
-  assert(isDefined(value));
+  assert(isdefined(value));
   return value;
 }
 
@@ -323,8 +323,8 @@ function registertweakable(category, name, dvar, value) {
   }
   switch (category) {
     case "rule": {
-      if(!isDefined(level.rules[name])) {
-        level.rules[name] = spawnStruct();
+      if(!isdefined(level.rules[name])) {
+        level.rules[name] = spawnstruct();
       }
       level.rules[name].value = value;
       level.rules[name].lastvalue = value;
@@ -332,8 +332,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "game": {
-      if(!isDefined(level.gametweaks[name])) {
-        level.gametweaks[name] = spawnStruct();
+      if(!isdefined(level.gametweaks[name])) {
+        level.gametweaks[name] = spawnstruct();
       }
       level.gametweaks[name].value = value;
       level.gametweaks[name].lastvalue = value;
@@ -341,8 +341,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "team": {
-      if(!isDefined(level.teamtweaks[name])) {
-        level.teamtweaks[name] = spawnStruct();
+      if(!isdefined(level.teamtweaks[name])) {
+        level.teamtweaks[name] = spawnstruct();
       }
       level.teamtweaks[name].value = value;
       level.teamtweaks[name].lastvalue = value;
@@ -350,8 +350,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "player": {
-      if(!isDefined(level.playertweaks[name])) {
-        level.playertweaks[name] = spawnStruct();
+      if(!isdefined(level.playertweaks[name])) {
+        level.playertweaks[name] = spawnstruct();
       }
       level.playertweaks[name].value = value;
       level.playertweaks[name].lastvalue = value;
@@ -359,8 +359,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "class": {
-      if(!isDefined(level.classtweaks[name])) {
-        level.classtweaks[name] = spawnStruct();
+      if(!isdefined(level.classtweaks[name])) {
+        level.classtweaks[name] = spawnstruct();
       }
       level.classtweaks[name].value = value;
       level.classtweaks[name].lastvalue = value;
@@ -368,8 +368,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "weapon": {
-      if(!isDefined(level.weapontweaks[name])) {
-        level.weapontweaks[name] = spawnStruct();
+      if(!isdefined(level.weapontweaks[name])) {
+        level.weapontweaks[name] = spawnstruct();
       }
       level.weapontweaks[name].value = value;
       level.weapontweaks[name].lastvalue = value;
@@ -377,8 +377,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "killstreak": {
-      if(!isDefined(level.hardpointtweaks[name])) {
-        level.hardpointtweaks[name] = spawnStruct();
+      if(!isdefined(level.hardpointtweaks[name])) {
+        level.hardpointtweaks[name] = spawnstruct();
       }
       level.hardpointtweaks[name].value = value;
       level.hardpointtweaks[name].lastvalue = value;
@@ -386,8 +386,8 @@ function registertweakable(category, name, dvar, value) {
       break;
     }
     case "hud": {
-      if(!isDefined(level.hudtweaks[name])) {
-        level.hudtweaks[name] = spawnStruct();
+      if(!isdefined(level.hudtweaks[name])) {
+        level.hudtweaks[name] = spawnstruct();
       }
       level.hudtweaks[name].value = value;
       level.hudtweaks[name].lastvalue = value;
@@ -403,7 +403,7 @@ function setclienttweakable(category, name) {
 
 function updateuitweakables(debug_refresh) {
   do {
-    for(index = 0; index < level.clienttweakables.size; index++) {
+    for (index = 0; index < level.clienttweakables.size; index++) {
       clienttweakable = level.clienttweakables[index];
       curvalue = gettweakabledvarvalue("hud", clienttweakable);
       lastvalue = gettweakablelastvalue("hud", clienttweakable);
@@ -414,7 +414,7 @@ function updateuitweakables(debug_refresh) {
     }
     wait(randomfloatrange(0.9, 1.1));
   }
-  while(isDefined(debug_refresh));
+  while (isdefined(debug_refresh));
 }
 
 function updateserverdvar(dvar, value) {}

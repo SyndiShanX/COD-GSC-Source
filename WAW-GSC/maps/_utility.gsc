@@ -10,31 +10,27 @@ set_vision_set(visionset, transition_time) {
   if(init_vision_set(visionset)) {
     return;
   }
-  if(!isDefined(transition_time)) {
+  if(!isDefined(transition_time))
     transition_time = 1;
-  }
   visionSetNaked(visionset, transition_time);
 }
 
 set_nvg_vision(visionset, transition_time) {
-  if(!isDefined(transition_time)) {
+  if(!isDefined(transition_time))
     transition_time = 1;
-  }
   visionSetNight(visionset, transition_time);
 }
 
 sun_light_fade(startSunColor, endSunColor, fTime) {
   fTime = int(fTime * 20);
   increment = [];
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++)
     increment[i] = (startSunColor[i] - endSunColor[i]) / fTime;
-  }
   newSunColor = [];
-  for(i = 0; i < fTime; i++) {
+  for (i = 0; i < fTime; i++) {
     wait(0.05);
-    for(j = 0; j < 3; j++) {
+    for (j = 0; j < 3; j++)
       newSunColor[j] = startSunColor[j] - (increment[j] * i);
-    }
     setSunLight(newSunColor[0], newSunColor[1], newSunColor[2]);
   }
   setSunLight(endSunColor[0], endSunColor[1], endSunColor[2]);
@@ -42,17 +38,15 @@ sun_light_fade(startSunColor, endSunColor, fTime) {
 
 ent_flag_wait(msg) {
   self endon("death");
-  while(!self.ent_flag[msg]) {
+  while (!self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_wait_either(flag1, flag2) {
   self endon("death");
-  for(;;) {
-    if(ent_flag(flag1)) {
+  for (;;) {
+    if(ent_flag(flag1))
       return;
-    }
     if(ent_flag(flag2)) {
       return;
     }
@@ -63,7 +57,7 @@ ent_flag_wait_either(flag1, flag2) {
 ent_flag_wait_or_timeout(flagname, timer) {
   self endon("death");
   start_time = gettime();
-  for(;;) {
+  for (;;) {
     if(self.ent_flag[flagname]) {
       break;
     }
@@ -76,9 +70,8 @@ ent_flag_wait_or_timeout(flagname, timer) {
 
 ent_flag_waitopen(msg) {
   self endon("death");
-  while(self.ent_flag[msg]) {
+  while (self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_assert(msg) {
@@ -90,9 +83,8 @@ ent_flag_init(message) {
     self.ent_flag = [];
     self.ent_flags_lock = [];
   }
-  if(!isDefined(level.first_frame)) {
+  if(!isDefined(level.first_frame))
     assertEx(!isDefined(self.ent_flag[message]), "Attempt to reinitialize existing message: " + message + " on entity at position " + self.origin);
-  }
   self.ent_flag[message] = false;
   self.ent_flags_lock[message] = false;
 }
@@ -131,9 +123,8 @@ ent_flag(message) {
   assertEx(isalive(self), "Attempt to check a flag on entity that is not alive or removed");
   assertEx(isDefined(message), "Tried to check flag but the flag was not defined.");
   assertEx(isDefined(self.ent_flag[message]), "Tried to check flag " + message + " but the flag was not initialized, on entity at position " + self.origin);
-  if(!self.ent_flag[message]) {
+  if(!self.ent_flag[message])
     return false;
-  }
   return true;
 }
 
@@ -141,7 +132,7 @@ ent_flag_init_ai_standards() {
   message_array = [];
   message_array[message_array.size] = "goal";
   message_array[message_array.size] = "damage";
-  for(i = 0; i < message_array.size; i++) {
+  for (i = 0; i < message_array.size; i++) {
     self ent_flag_init(message_array[i]);
     self thread ent_flag_wait_ai_standards(message_array[i]);
   }
@@ -154,10 +145,9 @@ ent_flag_wait_ai_standards(message) {
 }
 
 flag_wait_either(flag1, flag2) {
-  for(;;) {
-    if(flag(flag1)) {
+  for (;;) {
+    if(flag(flag1))
       return;
-    }
     if(flag(flag2)) {
       return;
     }
@@ -183,34 +173,29 @@ flag_wait_any(flag1, flag2, flag3, flag4) {
     assertmsg("flag_wait_any() needs at least 2 flags passed to it");
     return;
   }
-  for(;;) {
-    for(i = 0; i < array.size; i++) {
-      if(flag(array[i])) {
+  for (;;) {
+    for (i = 0; i < array.size; i++) {
+      if(flag(array[i]))
         return;
-      }
     }
     level waittill_any(flag1, flag2, flag3, flag4);
   }
 }
 
 flag_wait_all(flag1, flag2, flag3, flag4) {
-  if(isDefined(flag1)) {
+  if(isDefined(flag1))
     flag_wait(flag1);
-  }
-  if(isDefined(flag2)) {
+  if(isDefined(flag2))
     flag_wait(flag2);
-  }
-  if(isDefined(flag3)) {
+  if(isDefined(flag3))
     flag_wait(flag3);
-  }
-  if(isDefined(flag4)) {
+  if(isDefined(flag4))
     flag_wait(flag4);
-  }
 }
 
 flag_wait_or_timeout(flagname, timer) {
   start_time = gettime();
-  for(;;) {
+  for (;;) {
     if(level.flag[flagname]) {
       break;
     }
@@ -223,7 +208,7 @@ flag_wait_or_timeout(flagname, timer) {
 
 flag_waitopen_or_timeout(flagname, timer) {
   start_time = gettime();
-  for(;;) {
+  for (;;) {
     if(!level.flag[flagname]) {
       break;
     }
@@ -236,9 +221,8 @@ flag_waitopen_or_timeout(flagname, timer) {
 
 flag_trigger_init(message, trigger, continuous) {
   flag_init(message);
-  if(!isDefined(continuous)) {
+  if(!isDefined(continuous))
     continuous = false;
-  }
   assert(isSubStr(trigger.classname, "trigger"));
   trigger thread _flag_wait_trigger(message, continuous);
   return trigger;
@@ -246,10 +230,9 @@ flag_trigger_init(message, trigger, continuous) {
 
 flag_triggers_init(message, triggers, all) {
   flag_init(message);
-  if(!isDefined(all)) {
+  if(!isDefined(all))
     all = false;
-  }
-  for(index = 0; index < triggers.size; index++) {
+  for (index = 0; index < triggers.size; index++) {
     assert(isSubStr(triggers[index].classname, "trigger"));
     triggers[index] thread _flag_wait_trigger(message, false);
   }
@@ -272,15 +255,14 @@ flag_clear_delayed(message, delay) {
 
 _flag_wait_trigger(message, continuous) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("trigger", other);
     flag_set(message);
     if(!continuous) {
       return;
     }
-    while(other isTouching(self)) {
+    while (other isTouching(self))
       wait(0.05);
-    }
     flag_clear(message);
   }
 }
@@ -298,7 +280,7 @@ level_end_save() {
   }
   flag_set("game_saving");
   imagename = "levelshots / autosave / autosave_" + level.script + "end";
-  saveGame("levelend", &"AUTOSAVE_AUTOSAVE", imagename, true);
+  saveGame("levelend", & "AUTOSAVE_AUTOSAVE", imagename, true);
   flag_clear("game_saving");
 }
 
@@ -324,41 +306,35 @@ autosave_or_timeout(name, timeout) {
 error(message) {
   println("^c * ERROR * ", message);
   wait 0.05;
-  if(GetDebugDvar("debug") != "1") {
+  if(GetDebugDvar("debug") != "1")
     assertmsg("This is a forced error - attach the log file");
-  }
 }
 
 array_levelthread(array, process, var1, var2, var3) {
   keys = getArrayKeys(array);
   if(isDefined(var3)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       thread[[process]](array[keys[i]], var1, var2, var3);
-    }
     return;
   }
   if(isDefined(var2)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       thread[[process]](array[keys[i]], var1, var2);
-    }
     return;
   }
   if(isDefined(var1)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++)
       thread[[process]](array[keys[i]], var1);
-    }
     return;
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++)
     thread[[process]](array[keys[i]]);
-  }
 }
 
 debug_message(message, origin, duration) {
-  if(!isDefined(duration)) {
+  if(!isDefined(duration))
     duration = 5;
-  }
-  for(time = 0; time < (duration * 20); time++) {
+  for (time = 0; time < (duration * 20); time++) {
     print3d((origin + (0, 0, 45)), message, (0.48, 9.4, 0.76), 0.85);
     wait 0.05;
   }
@@ -372,54 +348,49 @@ debug_message_clear(message, origin, duration, extraEndon) {
     level notify(message);
     level endon(message);
   }
-  if(!isDefined(duration)) {
+  if(!isDefined(duration))
     duration = 5;
-  }
-  for(time = 0; time < (duration * 20); time++) {
+  for (time = 0; time < (duration * 20); time++) {
     print3d((origin + (0, 0, 45)), message, (0.48, 9.4, 0.76), 0.85);
     wait 0.05;
   }
 }
 
 chain_off(chain) {
-  trigs = getEntArray("trigger_friendlychain", "classname");
-  for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
-    if(isDefined(trigs[i].oldorigin)) {
-      trigs[i].origin = trigs[i].oldorigin;
-    } else {
-      trigs[i].oldorigin = trigs[i].origin;
+  trigs = GetEntArray("trigger_friendlychain", "classname");
+  for (i = 0; i < trigs.size; i++)
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
+      if(isDefined(trigs[i].oldorigin))
+        trigs[i].origin = trigs[i].oldorigin;
+      else
+        trigs[i].oldorigin = trigs[i].origin;
+      trigs[i].origin = trigs[i].origin + (0, 0, -5000);
     }
-    trigs[i].origin = trigs[i].origin + (0, 0, -5000);
-  }
 }
 
 chain_on(chain) {
-  trigs = getEntArray("trigger_friendlychain", "classname");
-  for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
-    if(isDefined(trigs[i].oldorigin)) {
-      trigs[i].origin = trigs[i].oldorigin;
+  trigs = GetEntArray("trigger_friendlychain", "classname");
+  for (i = 0; i < trigs.size; i++)
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
+      if(isDefined(trigs[i].oldorigin))
+        trigs[i].origin = trigs[i].oldorigin;
     }
-  }
 }
 
 precache(model) {
   ent = spawn("script_model", (0, 0, 0));
   ent.origin = level.player getorigin();
-  ent setModel(model);
+  ent setmodel(model);
   ent delete();
 }
 
 add_to_array(array, ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return array;
-  }
-  if(!isDefined(array)) {
+  if(!isDefined(array))
     array[0] = ent;
-  } else {
+  else
     array[array.size] = ent;
-  }
   return array;
 }
 
@@ -444,15 +415,16 @@ getFarthest(org, array, dist) {
 }
 
 compareSizesFx(org, array, dist, compareFunc) {
-  if(!array.size) {
+  if(!array.size)
     return undefined;
-  }
   if(isDefined(dist)) {
     struct = undefined;
     keys = getArrayKeys(array);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].v["origin"], org);
-      if([[compareFunc]](newDist, dist))
+      if([
+          [compareFunc]
+        ](newDist, dist))
         continue;
       dist = newdist;
       struct = array[keys[i]];
@@ -462,7 +434,7 @@ compareSizesFx(org, array, dist, compareFunc) {
   keys = getArrayKeys(array);
   struct = array[keys[0]];
   dist = distance(struct.v["origin"], org);
-  for(i = 1; i < keys.size; i++) {
+  for (i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].v["origin"], org);
     if([
         [compareFunc]
@@ -475,15 +447,16 @@ compareSizesFx(org, array, dist, compareFunc) {
 }
 
 compareSizes(org, array, dist, compareFunc) {
-  if(!array.size) {
+  if(!array.size)
     return undefined;
-  }
   if(isDefined(dist)) {
     ent = undefined;
     keys = GetArrayKeys(array);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].origin, org);
-      if([[compareFunc]](newDist, dist))
+      if([
+          [compareFunc]
+        ](newDist, dist))
         continue;
       dist = newdist;
       ent = array[keys[i]];
@@ -493,7 +466,7 @@ compareSizes(org, array, dist, compareFunc) {
   keys = GetArrayKeys(array);
   ent = array[keys[0]];
   dist = Distance(ent.origin, org);
-  for(i = 1; i < keys.size; i++) {
+  for (i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].origin, org);
     if([
         [compareFunc]
@@ -509,7 +482,7 @@ get_closest_point(origin, points, maxDist) {
   assert(points.size);
   closestPoint = points[0];
   dist = Distance(origin, closestPoint);
-  for(index = 0; index < points.size; index++) {
+  for (index = 0; index < points.size; index++) {
     testDist = distance(origin, points[index]);
     if(testDist >= dist) {
       continue;
@@ -517,48 +490,41 @@ get_closest_point(origin, points, maxDist) {
     dist = testDist;
     closestPoint = points[index];
   }
-  if(!isDefined(maxDist) || dist <= maxDist) {
+  if(!isDefined(maxDist) || dist <= maxDist)
     return closestPoint;
-  }
   return undefined;
 }
 
 get_within_range(org, array, dist) {
   guys = [];
-  for(i = 0; i < array.size; i++) {
-    if(distance(array[i].origin, org) <= dist) {
+  for (i = 0; i < array.size; i++) {
+    if(distance(array[i].origin, org) <= dist)
       guys[guys.size] = array[i];
-    }
   }
   return guys;
 }
 
 get_outside_range(org, array, dist) {
   guys = [];
-  for(i = 0; i < array.size; i++) {
-    if(distance(array[i].origin, org) > dist) {
+  for (i = 0; i < array.size; i++) {
+    if(distance(array[i].origin, org) > dist)
       guys[guys.size] = array[i];
-    }
   }
   return guys;
 }
 
 get_closest_living(org, array, dist) {
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
-  if(array.size < 1) {
+  if(array.size < 1)
     return;
-  }
   ent = undefined;
-  for(i = 0; i < array.size; i++) {
-    if(!isalive(array[i])) {
+  for (i = 0; i < array.size; i++) {
+    if(!isalive(array[i]))
       continue;
-    }
     newdist = distance(array[i].origin, org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     ent = array[i];
   }
@@ -571,15 +537,14 @@ get_highest_dot(start, end, array) {
   }
   ent = undefined;
   angles = VectorToAngles(end - start);
-  dotforward = anglesToForward(angles);
+  dotforward = AnglesToForward(angles);
   dot = -1;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     angles = vectorToAngles(array[i].origin - start);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     newdot = VectorDot(dotforward, forward);
-    if(newdot < dot) {
+    if(newdot < dot)
       continue;
-    }
     dot = newdot;
     ent = array[i];
   }
@@ -587,18 +552,15 @@ get_highest_dot(start, end, array) {
 }
 
 get_closest_index(org, array, dist) {
-  if(!isDefined(dist)) {
+  if(!isDefined(dist))
     dist = 9999999;
-  }
-  if(array.size < 1) {
+  if(array.size < 1)
     return;
-  }
   index = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     newdist = distance(array[i].origin, org);
-    if(newdist >= dist) {
+    if(newdist >= dist)
       continue;
-    }
     dist = newdist;
     index = i;
   }
@@ -611,7 +573,7 @@ get_farthest(org, array) {
   }
   dist = Distance(array[0].origin, org);
   ent = array[0];
-  for(i = 1; i < array.size; i++) {
+  for (i = 1; i < array.size; i++) {
     newdist = Distance(array[i].origin, org);
     if(newdist <= dist) {
       continue;
@@ -623,96 +585,83 @@ get_farthest(org, array) {
 }
 
 get_closest_exclude(org, ents, excluders) {
-  if(!isDefined(ents)) {
+  if(!isDefined(ents))
     return undefined;
-  }
   range = 0;
   if(isDefined(excluders) && excluders.size) {
     exclude = [];
-    for(i = 0; i < ents.size; i++) {
+    for (i = 0; i < ents.size; i++)
       exclude[i] = false;
-    }
-    for(i = 0; i < ents.size; i++) {
-      for(p = 0; p < excluders.size; p++)
-    }
-    if(ents[i] == excluders[p]) {
-      exclude[i] = true;
-    }
+    for (i = 0; i < ents.size; i++)
+      for (p = 0; p < excluders.size; p++)
+        if(ents[i] == excluders[p])
+          exclude[i] = true;
     found_unexcluded = false;
-    for(i = 0; i < ents.size; i++) {
-      if((!exclude[i]) && (isDefined(ents[i]))) {}
-      found_unexcluded = true;
-      range = distance(org, ents[i].origin);
-      ent = i;
-      i = ents.size + 1;
-    }
-    if(!found_unexcluded) {
+    for (i = 0; i < ents.size; i++)
+      if((!exclude[i]) && (isDefined(ents[i]))) {
+        found_unexcluded = true;
+        range = distance(org, ents[i].origin);
+        ent = i;
+        i = ents.size + 1;
+      }
+    if(!found_unexcluded)
       return (undefined);
-    }
   } else {
-    for(i = 0; i < ents.size; i++) {
-      if(isDefined(ents[i])) {}
-      range = distance(org, ents[0].origin);
-      ent = i;
-      i = ents.size + 1;
-    }
+    for (i = 0; i < ents.size; i++)
+      if(isDefined(ents[i])) {
+        range = distance(org, ents[0].origin);
+        ent = i;
+        i = ents.size + 1;
+      }
   }
   ent = undefined;
-  for(i = 0; i < ents.size; i++) {
-    if(isDefined(ents[i])) {}
-    exclude = false;
-    if(isDefined(excluders)) {
-      for(p = 0; p < excluders.size; p++) {
-        if(ents[i] == excluders[p])
+  for (i = 0; i < ents.size; i++)
+    if(isDefined(ents[i])) {
+      exclude = false;
+      if(isDefined(excluders)) {
+        for (p = 0; p < excluders.size; p++)
+          if(ents[i] == excluders[p])
+            exclude = true;
       }
-      exclude = true;
-    }
-    if(!exclude) {
-      newrange = distance(org, ents[i].origin);
-      if(newrange <= range) {
-        range = newrange;
-        ent = i;
+      if(!exclude) {
+        newrange = distance(org, ents[i].origin);
+        if(newrange <= range) {
+          range = newrange;
+          ent = i;
+        }
       }
     }
-  }
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     return ents[ent];
-  } else {
+  else
     return undefined;
-  }
 }
 
 get_closest_ai(org, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     ents = GetAiArray(team);
-  } else {
+  else
     ents = GetAiArray();
-  }
-  if(ents.size == 0) {
+  if(ents.size == 0)
     return undefined;
-  }
   return getClosest(org, ents);
 }
 
 get_array_of_closest(org, array, excluders, max, maxdist) {
-  if(!isDefined(max)) {
+  if(!isDefined(max))
     max = array.size;
-  }
-  if(!isDefined(excluders)) {
+  if(!isDefined(excluders))
     excluders = [];
-  }
   maxdists2rd = undefined;
-  if(isDefined(maxdist)) {
+  if(isDefined(maxdist))
     maxdists2rd = maxdist * maxdist;
-  }
   dist = [];
   index = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     excluded = false;
-    for(p = 0; p < excluders.size; p++) {
-      if(array[i] != excluders[p]) {
+    for (p = 0; p < excluders.size; p++) {
+      if(array[i] != excluders[p])
         continue;
-      }
       excluded = true;
       break;
     }
@@ -726,12 +675,11 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
     dist[dist.size] = length;
     index[index.size] = i;
   }
-  for(;;) {
+  for (;;) {
     change = false;
-    for(i = 0; i < dist.size - 1; i++) {
-      if(dist[i] <= dist[i + 1]) {
+    for (i = 0; i < dist.size - 1; i++) {
+      if(dist[i] <= dist[i + 1])
         continue;
-      }
       change = true;
       temp = dist[i];
       dist[i] = dist[i + 1];
@@ -745,24 +693,20 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
     }
   }
   newArray = [];
-  if(max > dist.size) {
+  if(max > dist.size)
     max = dist.size;
-  }
-  for(i = 0; i < max; i++) {
+  for (i = 0; i < max; i++)
     newArray[i] = array[index[i]];
-  }
   return newArray;
 }
 
 get_closest_ai_exclude(org, team, excluders) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     ents = GetAiArray(team);
-  } else {
+  else
     ents = GetAiArray();
-  }
-  if(ents.size == 0) {
+  if(ents.size == 0)
     return undefined;
-  }
   return get_closest_exclude(org, ents, excluders);
 }
 
@@ -794,12 +738,10 @@ magic_bullet_shield(health, time, oldhealth, maxhealth_modifier, no_death_detect
   }
   self endon("internal_stop_magic_bullet_shield");
   assertex(!isDefined(self.magic_bullet_shield), "Can't call magic bullet shield on a character twice. Use make_hero and remove_heroes_from_array so that you don't end up with shielded guys in your logic.");
-  if(!isDefined(maxhealth_modifier)) {
+  if(!isDefined(maxhealth_modifier))
     maxhealth_modifier = 1;
-  }
-  if(!isDefined(oldhealth)) {
+  if(!isDefined(oldhealth))
     oldhealth = self.health;
-  }
   self.mbs_oldhealth = oldhealth;
   if(IsAI(self)) {
     self.mbs_anim_nextStandingHitDying = self.a.nextStandingHitDying;
@@ -807,21 +749,18 @@ magic_bullet_shield(health, time, oldhealth, maxhealth_modifier, no_death_detect
     self.a.disableLongDeath = true;
     self.a.nextStandingHitDying = false;
   }
-  if(!isDefined(no_death_detection)) {
+  if(!isDefined(no_death_detection))
     thread magic_bullet_death_detection();
-  } else {
+  else
     assertex(no_death_detection, "no_death_detection must be undefined or true");
-  }
   self.magic_bullet_shield = true;
-  if(!isDefined(time)) {
+  if(!isDefined(time))
     time = 0;
-  }
-  if(!isDefined(health)) {
+  if(!isDefined(health))
     health = 100000000;
-  }
   assertex(health >= 5000, "MagicBulletShield shouldnt be set with low health amounts like < 5000");
   self BloodImpact(false);
-  while(1) {
+  while (1) {
     self.health = health;
     self.maxhealth = (self.health * maxhealth_modifier);
     oldHealth = self.health;
@@ -830,9 +769,8 @@ magic_bullet_shield(health, time, oldhealth, maxhealth_modifier, no_death_detect
       continue;
     }
     assertex(self.health > 1000, "Magic bullet shield guy got impossibly low health");
-    if(time > 0) {
+    if(time > 0)
       self thread ignore_me_timer(time);
-    }
     self thread turret_ignore_me_timer(5);
   }
 }
@@ -875,18 +813,15 @@ set_pacifist(val) {
 }
 
 ignore_me_timer(time) {
-  if(!isDefined(self.ignore_me_timer_prev_value)) {
+  if(!isDefined(self.ignore_me_timer_prev_value))
     self.ignore_me_timer_prev_value = self.ignoreme;
-  }
   ai = GetAiArray("axis");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     guy = ai[i];
-    if(!IsAlive(guy.enemy)) {
+    if(!IsAlive(guy.enemy))
       continue;
-    }
-    if(guy.enemy != self) {
+    if(guy.enemy != self)
       continue;
-    }
     guy notify("enemy");
   }
   self endon("death");
@@ -908,7 +843,7 @@ turret_ignore_me_timer(time) {
 }
 
 array_randomize(array) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     j = RandomInt(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -919,23 +854,20 @@ array_randomize(array) {
 
 array_reverse(array) {
   array2 = [];
-  for(i = array.size - 1; i >= 0; i--) {
+  for (i = array.size - 1; i >= 0; i--)
     array2[array2.size] = array[i];
-  }
   return array2;
 }
 
 exploder_damage() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     delay = self.v["delay"];
-  } else {
+  else
     delay = 0;
-  }
-  if(isDefined(self.v["damage_radius"])) {
+  if(isDefined(self.v["damage_radius"]))
     radius = self.v["damage_radius"];
-  } else {
+  else
     radius = 128;
-  }
   damage = self.v["damage"];
   origin = self.v["origin"];
   wait(delay);
@@ -985,7 +917,7 @@ activate_exploder(num) {
   num = int(num);
   client_send = true;
   prof_begin("activate_exploder");
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent)) {
       continue;
@@ -1019,7 +951,7 @@ stop_exploder(num) {
       delete_exploder_on_clients(num);
     }
   }
-  for(i = 0; i < level.createFXent.size; i++) {
+  for (i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent)) {
       continue;
@@ -1042,38 +974,32 @@ stop_exploder(num) {
 
 activate_individual_exploder() {
   if(level.createFX_enabled || !level.clientScripts || !isDefined(level._exploder_ids[int(self.v["exploder"])]) || isDefined(self.exploder_server)) {
+
     println("Exploder " + self.v["exploder"] + " created on server.");
-    if(isDefined(self.v["firefx"])) {
+    if(isDefined(self.v["firefx"]))
       self thread fire_effect();
-    }
-    if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
+    if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
       self thread cannon_effect();
-    } else {
-      if(isDefined(self.v["soundalias"]))
-    }
-    self thread sound_effect();
-    if(isDefined(self.v["earthquake"])) {
+    else
+    if(isDefined(self.v["soundalias"]))
+      self thread sound_effect();
+    if(isDefined(self.v["earthquake"]))
       self thread exploder_earthquake();
-    }
-    if(isDefined(self.v["rumble"])) {
+    if(isDefined(self.v["rumble"]))
       self thread exploder_rumble();
-    }
   }
   if(isDefined(self.v["trailfx"])) {
     self thread trail_effect();
   }
-  if(isDefined(self.v["damage"])) {
+  if(isDefined(self.v["damage"]))
     self thread exploder_damage();
-  }
-  if(self.v["exploder_type"] == "exploder") {
+  if(self.v["exploder_type"] == "exploder")
     self thread brush_show();
-  } else {
-    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
-  }
-  self thread brush_throw();
-  else {
+  else
+  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
+    self thread brush_throw();
+  else
     self thread brush_delete();
-  }
 }
 
 loop_sound_Delete(ender, ent) {
@@ -1083,13 +1009,13 @@ loop_sound_Delete(ender, ent) {
 }
 
 loop_fx_sound(alias, origin, ender, timeout) {
-  org = spawn("script_origin", (0, 0, 0));
+  org = Spawn("script_origin", (0, 0, 0));
   if(isDefined(ender)) {
     thread loop_sound_Delete(ender, org);
     self endon(ender);
   }
   org.origin = origin;
-  org playLoopSound(alias);
+  org PlayLoopSound(alias);
   if(!isDefined(timeout)) {
     return;
   }
@@ -1098,18 +1024,16 @@ loop_fx_sound(alias, origin, ender, timeout) {
 
 brush_Delete() {
   num = self.v["exploder"];
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  } else {
+  else
     wait(.05);
-  }
   if(!isDefined(self.model)) {
     return;
   }
   assert(isDefined(self.model));
-  if(self.model.spawnflags & 1) {
+  if(self.model.spawnflags & 1)
     self.model ConnectPaths();
-  }
   if(level.createFX_enabled) {
     if(isDefined(self.exploded)) {
       return;
@@ -1123,26 +1047,23 @@ brush_Delete() {
     self.model Solid();
     return;
   }
-  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
     self.v["exploder"] = undefined;
-  }
   waittillframeend;
   self.model Delete();
 }
 
 brush_Show() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  }
   assert(isDefined(self.model));
   self.model Show();
   self.model Solid();
   if(self.model.spawnflags & 1) {
-    if(!isDefined(self.model.disconnect_paths)) {
+    if(!isDefined(self.model.disconnect_paths))
       self.model ConnectPaths();
-    } else {
+    else
       self.model DisconnectPaths();
-    }
   }
   if(level.createFX_enabled) {
     if(isDefined(self.exploded)) {
@@ -1157,13 +1078,11 @@ brush_Show() {
 }
 
 brush_throw() {
-  if(isDefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
-  }
   ent = undefined;
-  if(isDefined(self.v["target"])) {
+  if(isDefined(self.v["target"]))
     ent = getent(self.v["target"], "targetname");
-  }
   if(!isDefined(ent)) {
     ent = GetStruct(self.v["target"], "targetname");
     if(!isDefined(ent)) {
@@ -1182,9 +1101,8 @@ brush_throw() {
   physics = isDefined(self.v["physics"]);
   if(physics) {
     target = undefined;
-    if(isDefined(ent.target)) {
+    if(isDefined(ent.target))
       target = getent(ent.target, "targetname");
-    }
     if(!isDefined(target)) {
       contact_point = startorg;
       throw_vec = ent.origin;
@@ -1215,7 +1133,7 @@ brush_throw() {
   self.model Delete();
 }
 
-flood_spawn(spawners) {
+flood_Spawn(spawners) {
   maps\_spawner::flood_spawner_scripted(spawners);
 }
 
@@ -1238,8 +1156,8 @@ random(array) {
 
 get_friendly_chain_node(chainstring) {
   chain = undefined;
-  trigger = getEntArray("trigger_friendlychain", "classname");
-  for(i = 0; i < trigger.size; i++) {
+  trigger = GetEntArray("trigger_friendlychain", "classname");
+  for (i = 0; i < trigger.size; i++) {
     if((isDefined(trigger[i].script_chain)) && (trigger[i].script_chain == chainstring)) {
       chain = trigger[i];
       break;
@@ -1259,7 +1177,7 @@ shock_onpain() {
   if(GetDvar("blurpain") == "") {
     SetDvar("blurpain", "on");
   }
-  while(1) {
+  while (1) {
     oldhealth = self.health;
     self waittill("damage", damage, attacker, direction_vec, point, mod);
     if(isDefined(level.shock_onpain) && !level.shock_onpain) {
@@ -1320,18 +1238,16 @@ shock_ondeath() {
 delete_on_death(ent) {
   ent endon("death");
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 delete_on_death_wait_sound(ent, sounddone) {
   ent endon("death");
   self waittill("death");
   if(isDefined(ent)) {
-    if(ent iswaitingonsound()) {
+    if(ent iswaitingonsound())
       ent waittill(sounddone);
-    }
     ent Delete();
   }
 }
@@ -1344,23 +1260,22 @@ play_sound_on_tag(alias, tag, ends_on_death) {
   if(is_dead_sentient()) {
     return;
   }
-  org = spawn("script_origin", (0, 0, 0));
+  org = Spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread delete_on_death_wait_sound(org, "sounddone");
-  if(isDefined(tag)) {
+  if(isDefined(tag))
     org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
-  } else {
+  else {
     org.origin = self.origin;
     org.angles = self.angles;
     org LinkTo(self);
   }
-  org playSound(alias, "sounddone");
+  org PlaySound(alias, "sounddone");
   if(isDefined(ends_on_death)) {
     assertex(ends_on_death, "ends_on_death must be true or undefined");
     wait_for_sounddone_or_death(org);
-    if(is_dead_sentient()) {
+    if(is_dead_sentient())
       org StopSounds();
-    }
     wait(0.05);
   } else {
     org waittill("sounddone");
@@ -1377,22 +1292,20 @@ play_sound_on_entity(alias) {
 }
 
 play_loop_sound_on_tag(alias, tag, bStopSoundOnDeath) {
-  org = spawn("script_origin", (0, 0, 0));
+  org = Spawn("script_origin", (0, 0, 0));
   org endon("death");
-  if(!isDefined(bStopSoundOnDeath)) {
+  if(!isDefined(bStopSoundOnDeath))
     bStopSoundOnDeath = true;
-  }
-  if(bStopSoundOnDeath) {
+  if(bStopSoundOnDeath)
     thread delete_on_death(org);
-  }
-  if(isDefined(tag)) {
+  if(isDefined(tag))
     org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
-  } else {
+  else {
     org.origin = self.origin;
     org.angles = self.angles;
     org LinkTo(self);
   }
-  org playLoopSound(alias);
+  org PlayLoopSound(alias);
   self waittill("stop sound" + alias);
   org StopLoopSound(alias);
   org Delete();
@@ -1403,7 +1316,7 @@ stop_loop_sound_on_entity(alias) {
 }
 
 play_loop_sound_on_entity(alias, offset) {
-  org = spawn("script_origin", (0, 0, 0));
+  org = Spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread delete_on_death(org);
   if(isDefined(offset)) {
@@ -1415,23 +1328,21 @@ play_loop_sound_on_entity(alias, offset) {
     org.angles = self.angles;
     org LinkTo(self);
   }
-  org playLoopSound(alias);
+  org PlayLoopSound(alias);
   self waittill("stop sound" + alias);
   org StopLoopSound(alias);
   org Delete();
 }
 
 play_sound_in_space(alias, origin, master) {
-  org = spawn("script_origin", (0, 0, 1));
-  if(!isDefined(origin)) {
+  org = Spawn("script_origin", (0, 0, 1));
+  if(!isDefined(origin))
     origin = self.origin;
-  }
   org.origin = origin;
-  if(isDefined(master) && master) {
+  if(isDefined(master) && master)
     org PlaySoundAsMaster(alias, "sounddone");
-  } else {
-    org playSound(alias, "sounddone");
-  }
+  else
+    org PlaySound(alias, "sounddone");
   org waittill("sounddone");
   if(isDefined(org)) {
     org Delete();
@@ -1439,16 +1350,15 @@ play_sound_in_space(alias, origin, master) {
 }
 
 lookat(ent, timer) {
-  if(!isDefined(timer)) {
+  if(!isDefined(timer))
     timer = 10000;
-  }
   self animscripts\shared::lookatentity(ent, timer, "alert");
 }
 
 save_friendlies() {
   ai = GetAiArray("allies");
   game_characters = 0;
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_friendname)) {
       continue;
     }
@@ -1459,15 +1369,12 @@ save_friendlies() {
 }
 
 spawn_failed(spawn) {
-  if(!IsAlive(spawn)) {
+  if(!IsAlive(spawn))
     return true;
-  }
-  if(!isDefined(spawn.finished_spawning)) {
+  if(!isDefined(spawn.finished_spawning))
     spawn waittill("finished spawning");
-  }
-  if(IsAlive(spawn)) {
+  if(IsAlive(spawn))
     return false;
-  }
   return true;
 }
 
@@ -1491,22 +1398,20 @@ view_tag(tag) {
 }
 
 assign_animtree(animname) {
-  if(isDefined(animname)) {
+  if(isDefined(animname))
     self.animname = animname;
-  }
   assertEx(isDefined(level.scr_animtree[self.animname]), "There is no level.scr_animtree for animname " + self.animname);
   self UseAnimTree(level.scr_animtree[self.animname]);
 }
 
 assign_model() {
   assertEx(isDefined(level.scr_model[self.animname]), "There is no level.scr_model for animname " + self.animname);
-  self setModel(level.scr_model[self.animname]);
+  self setmodel(level.scr_model[self.animname]);
 }
 
 spawn_anim_model(animname, origin) {
-  if(!isDefined(origin)) {
+  if(!isDefined(origin))
     origin = (0, 0, 0);
-  }
   model = spawn("script_model", origin);
   model.animname = animname;
   model assign_animtree();
@@ -1555,54 +1460,48 @@ set_flag_on_targetname_trigger(msg) {
 }
 
 is_in_array(aeCollection, eFindee) {
-  for(i = 0; i < aeCollection.size; i++) {
-    if(aeCollection[i] == eFindee) {
+  for (i = 0; i < aeCollection.size; i++) {
+    if(aeCollection[i] == eFindee)
       return (true);
-    }
   }
   return (false);
 }
 
 waittill_dead(guys, num, timeoutLength) {
   allAlive = true;
-  for(i = 0; i < guys.size; i++) {
-    if(isalive(guys[i])) {
+  for (i = 0; i < guys.size; i++) {
+    if(isalive(guys[i]))
       continue;
-    }
     allAlive = false;
     break;
   }
   assertex(allAlive, "Waittill_Dead was called with dead or removed AI in the array, meaning it will never pass.");
   if(!allAlive) {
     newArray = [];
-    for(i = 0; i < guys.size; i++) {
-      if(isalive(guys[i])) {
+    for (i = 0; i < guys.size; i++) {
+      if(isalive(guys[i]))
         newArray[newArray.size] = guys[i];
-      }
     }
     guys = newArray;
   }
-  ent = spawnStruct();
+  ent = SpawnStruct();
   if(isDefined(timeoutLength)) {
     ent endon("thread_timed_out");
     ent thread waittill_dead_timeout(timeoutLength);
   }
   ent.count = guys.size;
-  if(isDefined(num) && num < ent.count) {
+  if(isDefined(num) && num < ent.count)
     ent.count = num;
-  }
   array_thread(guys, ::waittill_dead_thread, ent);
-  while(ent.count > 0) {
+  while (ent.count > 0)
     ent waittill("waittill_dead guy died");
-  }
 }
 
 waittill_dead_or_dying(guys, num, timeoutLength) {
   newArray = [];
-  for(i = 0; i < guys.size; i++) {
-    if(isalive(guys[i]) && !guys[i].ignoreForFixedNodeSafeCheck) {
+  for (i = 0; i < guys.size; i++) {
+    if(isalive(guys[i]) && !guys[i].ignoreForFixedNodeSafeCheck)
       newArray[newArray.size] = guys[i];
-    }
   }
   guys = newArray;
   ent = spawnStruct();
@@ -1611,13 +1510,11 @@ waittill_dead_or_dying(guys, num, timeoutLength) {
     ent thread waittill_dead_timeout(timeoutLength);
   }
   ent.count = guys.size;
-  if(isDefined(num) && num < ent.count) {
+  if(isDefined(num) && num < ent.count)
     ent.count = num;
-  }
   array_thread(guys, ::waittill_dead_or_dying_thread, ent);
-  while(ent.count > 0) {
+  while (ent.count > 0)
     ent waittill("waittill_dead_guy_dead_or_dying");
-  }
 }
 
 waittill_dead_thread(ent) {
@@ -1638,15 +1535,13 @@ waittill_dead_timeout(timeoutLength) {
 }
 
 waittill_aigroupcleared(aigroup) {
-  while(level._ai_group[aigroup].spawnercount || level._ai_group[aigroup].aicount) {
+  while (level._ai_group[aigroup].spawnercount || level._ai_group[aigroup].aicount)
     wait(0.25);
-  }
 }
 
 waittill_aigroupcount(aigroup, count) {
-  while(level._ai_group[aigroup].spawnercount + level._ai_group[aigroup].aicount > count) {
+  while (level._ai_group[aigroup].spawnercount + level._ai_group[aigroup].aicount > count)
     wait(0.25);
-  }
 }
 
 get_ai_group_count(aigroup) {
@@ -1659,7 +1554,7 @@ get_ai_group_sentient_count(aigroup) {
 
 get_ai_group_ai(aigroup) {
   aiSet = [];
-  for(index = 0; index < level._ai_group[aigroup].ai.size; index++) {
+  for (index = 0; index < level._ai_group[aigroup].ai.size; index++) {
     if(!isAlive(level._ai_group[aigroup].ai[index])) {
       continue;
     }
@@ -1681,24 +1576,21 @@ get_living_ai_array(name, type) {
   ai = getaiarray("allies");
   ai = array_combine(ai, getaiarray("axis"));
   array = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     switch (type) {
       case "targetname": {
-        if(isDefined(ai[i].targetname) && ai[i].targetname == name) {
+        if(isDefined(ai[i].targetname) && ai[i].targetname == name)
           array[array.size] = ai[i];
-        }
       }
       break;
       case "script_noteworthy": {
-        if(isDefined(ai[i].script_noteworthy) && ai[i].script_noteworthy == name) {
+        if(isDefined(ai[i].script_noteworthy) && ai[i].script_noteworthy == name)
           array[array.size] = ai[i];
-        }
       }
       break;
       case "classname": {
-        if(isDefined(ai[i].classname) && ai[i].classname == name) {
+        if(isDefined(ai[i].classname) && ai[i].classname == name)
           array[array.size] = ai[i];
-        }
       }
       break;
     }
@@ -1716,24 +1608,21 @@ get_living_aispecies(name, type, breed) {
 }
 
 get_living_aispecies_array(name, type, breed) {
-  if(!isDefined(breed)) {
+  if(!isDefined(breed))
     breed = "all";
-  }
   ai = getaispeciesarray("allies", breed);
   ai = array_combine(ai, getaispeciesarray("axis", breed));
   array = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     switch (type) {
       case "targetname": {
-        if(isDefined(ai[i].targetname) && ai[i].targetname == name) {
+        if(isDefined(ai[i].targetname) && ai[i].targetname == name)
           array[array.size] = ai[i];
-        }
       }
       break;
       case "script_noteworthy": {
-        if(isDefined(ai[i].script_noteworthy) && ai[i].script_noteworthy == name) {
+        if(isDefined(ai[i].script_noteworthy) && ai[i].script_noteworthy == name)
           array[array.size] = ai[i];
-        }
       }
       break;
     }
@@ -1745,24 +1634,21 @@ gather_delay_proc(msg, delay) {
   if(isDefined(level.gather_delay[msg])) {
     if(level.gather_delay[msg]) {
       wait(0.05);
-      if(IsAlive(self)) {
+      if(IsAlive(self))
         self notify("gather_delay_finished" + msg + delay);
-      }
       return;
     }
     level waittill(msg);
-    if(IsAlive(self)) {
+    if(IsAlive(self))
       self notify("gather_delay_finished" + msg + delay);
-    }
     return;
   }
   level.gather_delay[msg] = false;
   wait(delay);
   level.gather_delay[msg] = true;
   level notify(msg);
-  if(IsAlive(self)) {
+  if(IsAlive(self))
     self notify("gather_delay_finished" + msg + delay);
-  }
 }
 
 gather_delay(msg, delay) {
@@ -1780,36 +1666,26 @@ death_waiter(notifyString) {
 }
 
 getchar(num) {
-  if(num == 0) {
+  if(num == 0)
     return "0";
-  }
-  if(num == 1) {
+  if(num == 1)
     return "1";
-  }
-  if(num == 2) {
+  if(num == 2)
     return "2";
-  }
-  if(num == 3) {
+  if(num == 3)
     return "3";
-  }
-  if(num == 4) {
+  if(num == 4)
     return "4";
-  }
-  if(num == 5) {
+  if(num == 5)
     return "5";
-  }
-  if(num == 6) {
+  if(num == 6)
     return "6";
-  }
-  if(num == 7) {
+  if(num == 7)
     return "7";
-  }
-  if(num == 8) {
+  if(num == 8)
     return "8";
-  }
-  if(num == 9) {
+  if(num == 9)
     return "9";
-  }
 }
 
 waittill_either(msg1, msg2) {
@@ -1819,37 +1695,32 @@ waittill_either(msg1, msg2) {
 
 getlinks_array(array, linkMap) {
   ents = [];
-  for(j = 0; j < array.size; j++) {
+  for (j = 0; j < array.size; j++) {
     node = array[j];
     script_linkname = node.script_linkname;
-    if(!isDefined(script_linkname)) {
+    if(!isDefined(script_linkname))
       continue;
-    }
-    if(!isDefined(linkMap[script_linkname])) {
+    if(!isDefined(linkMap[script_linkname]))
       continue;
-    }
     ents[ents.size] = node;
   }
   return ents;
 }
 
 array_merge_links(array1, array2) {
-  if(!array1.size) {
+  if(!array1.size)
     return array2;
-  }
-  if(!array2.size) {
+  if(!array2.size)
     return array1;
-  }
   linkMap = [];
-  for(i = 0; i < array1.size; i++) {
+  for (i = 0; i < array1.size; i++) {
     node = array1[i];
     linkMap[node.script_linkname] = true;
   }
-  for(i = 0; i < array2.size; i++) {
+  for (i = 0; i < array2.size; i++) {
     node = array2[i];
-    if(isDefined(linkMap[node.script_linkname])) {
+    if(isDefined(linkMap[node.script_linkname]))
       continue;
-    }
     linkMap[node.script_linkname] = true;
     array1[array1.size] = node;
   }
@@ -1857,17 +1728,16 @@ array_merge_links(array1, array2) {
 }
 
 array_combine(array1, array2) {
-  if(!array1.size) {
+  if(!array1.size)
     return array2;
-  }
   array3 = [];
   keys = getarraykeys(array1);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
     array3[array3.size] = array1[key];
   }
   keys = getarraykeys(array2);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
     array3[array3.size] = array2[key];
   }
@@ -1875,35 +1745,31 @@ array_combine(array1, array2) {
 }
 
 array_merge(array1, array2) {
-  if(array1.size == 0) {
+  if(array1.size == 0)
     return array2;
-  }
-  if(array2.size == 0) {
+  if(array2.size == 0)
     return array1;
-  }
   newarray = array1;
-  for(i = 0; i < array2.size; i++) {
+  for (i = 0; i < array2.size; i++) {
     foundmatch = false;
-    for(j = 0; j < array1.size; j++) {
-      if(array2[i] == array1[j]) {}
-      foundmatch = true;
-      break;
-    }
-    if(foundmatch) {
+    for (j = 0; j < array1.size; j++)
+      if(array2[i] == array1[j]) {
+        foundmatch = true;
+        break;
+      }
+    if(foundmatch)
       continue;
-    } else {
+    else
       newarray[newarray.size] = array2[i];
-    }
   }
   return newarray;
 }
 
 array_exclude(array, arrayExclude) {
   newarray = array;
-  for(i = 0; i < arrayExclude.size; i++) {
-    if(is_in_array(array, arrayExclude[i])) {
+  for (i = 0; i < arrayExclude.size; i++) {
+    if(is_in_array(array, arrayExclude[i]))
       newarray = array_remove(newarray, arrayExclude[i]);
-    }
   }
   return newarray;
 }
@@ -1920,19 +1786,15 @@ flat_origin(org) {
 
 plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isDefined(r)) {
+  if(!isDefined(r))
     r = 1;
-  }
-  if(!isDefined(g)) {
+  if(!isDefined(g))
     g = 1;
-  }
-  if(!isDefined(b)) {
+  if(!isDefined(b))
     b = 1;
-  }
-  if(!isDefined(timer)) {
+  if(!isDefined(timer))
     timer = 0.05;
-  }
-  for(i = 1; i < plotpoints.size; i++) {
+  for (i = 1; i < plotpoints.size; i++) {
     thread draw_line_for_time(lastpoint, plotpoints[i], r, g, b, timer);
     lastpoint = plotpoints[i];
   }
@@ -1940,7 +1802,7 @@ plot_points(plotpoints, r, g, b, timer) {
 
 draw_line_for_time(org1, org2, r, g, b, timer) {
   timer = gettime() + (timer * 1000);
-  while(GetTime() < timer) {
+  while (GetTime() < timer) {
     line(org1, org2, (r, g, b), 1);
     wait .05;
   }
@@ -1948,7 +1810,7 @@ draw_line_for_time(org1, org2, r, g, b, timer) {
 
 draw_line_to_ent_for_time(org1, ent, r, g, b, timer) {
   timer = gettime() + (timer * 1000);
-  while(GetTime() < timer) {
+  while (GetTime() < timer) {
     line(org1, ent.origin, (r, g, b), 1);
     wait .05;
   }
@@ -1962,7 +1824,7 @@ draw_line_from_ent_to_ent_for_time(ent1, ent2, r, g, b, timer) {
   ent1 endon("death");
   ent2 endon("death");
   timer = gettime() + (timer * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     line(ent1.origin, ent2.origin, (r, g, b), 1);
     wait .05;
   }
@@ -1974,7 +1836,7 @@ draw_line_from_ent_to_ent_until_notify(ent1, ent2, r, g, b, notifyEnt, notifyStr
   ent1 endon("death");
   ent2 endon("death");
   notifyEnt endon(notifyString);
-  while(1) {
+  while (1) {
     line(ent1.origin, ent2.origin, (r, g, b), 0.05);
     wait .05;
   }
@@ -1984,7 +1846,7 @@ draw_line_until_notify(org1, org2, r, g, b, notifyEnt, notifyString) {
   assert(isDefined(notifyEnt));
   assert(isDefined(notifyString));
   notifyEnt endon(notifyString);
-  while(1) {
+  while (1) {
     draw_line_for_time(org1, org2, r, g, b, 0.05);
   }
 }
@@ -1994,7 +1856,7 @@ draw_arrow_time(start, end, color, duration) {
   pts = [];
   angles = VectorToAngles(start - end);
   right = AnglesToRight(angles);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
   dist = Distance(start, end);
   arrow = [];
@@ -2019,7 +1881,7 @@ draw_arrow(start, end, color) {
   pts = [];
   angles = VectorToAngles(start - end);
   right = AnglesToRight(angles);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   dist = Distance(start, end);
   arrow = [];
   range = 0.05;
@@ -2027,11 +1889,10 @@ draw_arrow(start, end, color) {
   arrow[1] = start + vectorScale(right, dist * (range)) + vectorScale(forward, dist * -0.2);
   arrow[2] = end;
   arrow[3] = start + vectorScale(right, dist * (-1 * range)) + vectorScale(forward, dist * -0.2);
-  for(p = 0; p < 4; p++) {
+  for (p = 0; p < 4; p++) {
     nextpoint = p + 1;
-    if(nextpoint >= 4) {
+    if(nextpoint >= 4)
       nextpoint = 0;
-    }
     line(arrow[p], arrow[nextpoint], color, 1.0);
   }
 }
@@ -2060,13 +1921,12 @@ battlechatter_off(team) {
   if(!isDefined(anim.chatInitialized) || !anim.chatInitialized) {
     return;
   }
-  for(index = 0; index < soldiers.size; index++) {
-    if(!isDefined(team) || soldiers[index].team == team) {
+  for (index = 0; index < soldiers.size; index++) {
+    if(!isDefined(team) || soldiers[index].team == team)
       soldiers[index].battlechatter = false;
-    }
   }
   had_to_wait = false;
-  for(index = 0; index < soldiers.size; index++) {
+  for (index = 0; index < soldiers.size; index++) {
     soldier = soldiers[index];
     if(!IsAlive(soldier)) {
       continue;
@@ -2120,9 +1980,8 @@ battlechatter_on_thread(team) {
     level.battlechatter["neutral"] = true;
     soldiers = GetAiArray();
   }
-  for(index = 0; index < soldiers.size; index++) {
+  for (index = 0; index < soldiers.size; index++)
     soldiers[index] set_battlechatter(true);
-  }
 }
 
 set_battlechatter(state) {
@@ -2133,16 +1992,14 @@ set_battlechatter(state) {
     return;
   }
   if(state) {
-    if(isDefined(self.script_bcdialog) && !self.script_bcdialog) {
+    if(isDefined(self.script_bcdialog) && !self.script_bcdialog)
       self.battlechatter = false;
-    } else {
+    else
       self.battlechatter = true;
-    }
   } else {
     self.battlechatter = false;
-    while(isDefined(self.isSpeaking) && self.isSpeaking) {
+    while (isDefined(self.isSpeaking) && self.isSpeaking)
       wait(.05);
-    }
   }
 }
 
@@ -2152,20 +2009,18 @@ set_friendly_chain_wrapper(node) {
 }
 
 get_obj_origin(msg) {
-  objOrigins = getEntArray("objective", "targetname");
-  for(i = 0; i < objOrigins.size; i++) {
-    if(objOrigins[i].script_noteworthy == msg) {
+  objOrigins = GetEntArray("objective", "targetname");
+  for (i = 0; i < objOrigins.size; i++) {
+    if(objOrigins[i].script_noteworthy == msg)
       return objOrigins[i].origin;
-    }
   }
 }
 
 get_obj_event(msg) {
-  objEvents = getEntArray("objective_event", "targetname");
-  for(i = 0; i < objEvents.size; i++) {
-    if(objEvents[i].script_noteworthy == msg) {
+  objEvents = GetEntArray("objective_event", "targetname");
+  for (i = 0; i < objEvents.size; i++) {
+    if(objEvents[i].script_noteworthy == msg)
       return objEvents[i];
-    }
   }
 }
 
@@ -2185,8 +2040,8 @@ debugorigin() {
   self notify("Debug origin");
   self endon("Debug origin");
   self endon("death");
-  for(;;) {
-    forward = anglesToForward(self.angles);
+  for (;;) {
+    forward = AnglesToForward(self.angles);
     forwardFar = vectorScale(forward, 30);
     forwardClose = vectorScale(forward, 20);
     right = AnglesToRight(self.angles);
@@ -2207,7 +2062,7 @@ get_linked_ents() {
   array = [];
   if(isDefined(self.script_linkto)) {
     linknames = get_links();
-    for(i = 0; i < linknames.size; i++) {
+    for (i = 0; i < linknames.size; i++) {
       ent = getent(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
@@ -2221,7 +2076,7 @@ get_linked_structs() {
   array = [];
   if(isDefined(self.script_linkto)) {
     linknames = get_links();
-    for(i = 0; i < linknames.size; i++) {
+    for (i = 0; i < linknames.size; i++) {
       ent = getstruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
@@ -2233,7 +2088,7 @@ get_linked_structs() {
 
 get_last_ent_in_chain(sEntityType) {
   ePathpoint = self;
-  while(isDefined(ePathpoint.target)) {
+  while (isDefined(ePathpoint.target)) {
     wait(0.05);
     if(isDefined(ePathpoint.target)) {
       switch (sEntityType) {
@@ -2293,11 +2148,10 @@ array_add(array, ent) {
 array_removeDead_keepkeys(array) {
   newArray = [];
   keys = getarraykeys(array);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
-    if(!isalive(array[key])) {
+    if(!isalive(array[key]))
       continue;
-    }
     newArray[key] = array[key];
   }
   return newArray;
@@ -2305,10 +2159,9 @@ array_removeDead_keepkeys(array) {
 
 array_removeDead(array) {
   newArray = [];
-  for(i = 0; i < array.size; i++) {
-    if(!isalive(array[i])) {
+  for (i = 0; i < array.size; i++) {
+    if(!isalive(array[i]))
       continue;
-    }
     newArray[newArray.size] = array[i];
   }
   return newArray;
@@ -2316,10 +2169,9 @@ array_removeDead(array) {
 
 array_removeUndefined(array) {
   newArray = [];
-  for(i = 0; i < array.size; i++) {
-    if(!isDefined(array[i])) {
+  for (i = 0; i < array.size; i++) {
+    if(!isDefined(array[i]))
       continue;
-    }
     newArray[newArray.size] = array[i];
   }
   return newArray;
@@ -2333,7 +2185,7 @@ array_insert(array, object, index) {
   }
   temp = [];
   offset = 0;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     if(i == index) {
       temp[i] = object;
       offset = 1;
@@ -2347,49 +2199,44 @@ array_remove(ents, remover, keepArrayKeys) {
   newents = [];
   keys = getArrayKeys(ents);
   if(isDefined(keepArrayKeys)) {
-    for(i = keys.size - 1; i >= 0; i--) {
-      if(ents[keys[i]] != remover) {
+    for (i = keys.size - 1; i >= 0; i--) {
+      if(ents[keys[i]] != remover)
         newents[keys[i]] = ents[keys[i]];
-      }
     }
     return newents;
   }
-  for(i = keys.size - 1; i >= 0; i--) {
-    if(ents[keys[i]] != remover) {
+  for (i = keys.size - 1; i >= 0; i--) {
+    if(ents[keys[i]] != remover)
       newents[newents.size] = ents[keys[i]];
-    }
   }
   return newents;
 }
 
 array_remove_nokeys(ents, remover) {
   newents = [];
-  for(i = 0; i < ents.size; i++) {
+  for (i = 0; i < ents.size; i++)
     if(ents[i] != remover)
-  }
-  newents[newents.size] = ents[i];
+      newents[newents.size] = ents[i];
   return newents;
 }
 
 array_remove_index(array, index) {
   newArray = [];
   keys = getArrayKeys(array);
-  for(i = (keys.size - 1); i >= 0; i--) {
-    if(keys[i] != index) {
+  for (i = (keys.size - 1); i >= 0; i--) {
+    if(keys[i] != index)
       newArray[newArray.size] = array[keys[i]];
-    }
   }
   return newArray;
 }
 
 array_notify(ents, notifier) {
-  for(i = 0; i < ents.size; i++) {
+  for (i = 0; i < ents.size; i++)
     ents[i] notify(notifier);
-  }
 }
 
 array_check_for_dupes(array, single) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     if(array[i] == single) {
       return false;
     }
@@ -2418,8 +2265,8 @@ getstruct(name, type) {
   return array[0];
 }
 
-struct_arrayspawn() {
-  struct = spawnStruct();
+struct_arraySpawn() {
+  struct = SpawnStruct();
   struct.array = [];
   struct.lastindex = 0;
   return struct;
@@ -2443,16 +2290,14 @@ structarray_swaptolast(struct, object) {
 }
 
 structarray_shuffle(struct, shuffle) {
-  for(i = 0; i < shuffle; i++) {
+  for (i = 0; i < shuffle; i++)
     struct structarray_swap(struct.array[i], struct.array[randomint(struct.lastindex)]);
-  }
 }
 
 set_ambient_alias(ambient, alias) {
   level.ambient_modifier[ambient] = alias;
-  if(level.ambient == ambient) {
+  if(level.ambient == ambient)
     maps\_ambient::activateAmbient(ambient);
-  }
 }
 
 get_use_key() {
@@ -2467,35 +2312,31 @@ custom_battlechatter(string) {
   excluders = [];
   excluders[0] = self;
   buddy = get_closest_ai_exclude(self.origin, self.team, excluders);
-  if(isDefined(buddy) && Distance(buddy.origin, self.origin) > 384) {
+  if(isDefined(buddy) && Distance(buddy.origin, self.origin) > 384)
     buddy = undefined;
-  }
   self animscripts\battlechatter_ai::beginCustomEvent();
   tokens = Strtok(string, "_");
   if(!tokens.size) {
     return;
   }
   if(tokens[0] == "move") {
-    if(tokens.size > 1) {
+    if(tokens.size > 1)
       modifier = tokens[1];
-    } else {
+    else
       modifier = "generic";
-    }
     self animscripts\battlechatter_ai::addGenericAliasEx("order", "move", modifier);
   } else if(tokens[0] == "infantry") {
     self animscripts\battlechatter_ai::addGenericAliasEx("threat", "infantry", tokens[1]);
-    if(tokens.size > 2 && tokens[2] != "inbound") {
+    if(tokens.size > 2 && tokens[2] != "inbound")
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "relative", tokens[2]);
-    } else if(tokens.size > 2) {
+    else if(tokens.size > 2)
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "inbound", tokens[3]);
-    }
   } else if(tokens[0] == "vehicle") {
     self animscripts\battlechatter_ai::addGenericAliasEx("threat", "vehicle", tokens[1]);
-    if(tokens.size > 2 && tokens[2] != "inbound") {
+    if(tokens.size > 2 && tokens[2] != "inbound")
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "relative", tokens[2]);
-    } else if(tokens.size > 2) {
+    else if(tokens.size > 2)
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "inbound", tokens[3]);
-    }
   }
   self animscripts\battlechatter_ai::endCustomEvent(2000);
 }
@@ -2507,63 +2348,55 @@ force_custom_battlechatter(string, targetAI) {
     return;
   }
   if(isDefined(targetAI) && (isDefined(targetAI.bcName) || isDefined(targetAI.bcRank))) {
-    if(isDefined(targetAI.bcName)) {
+    if(isDefined(targetAI.bcName))
       nameAlias = self buildBCAlias("name", targetAI.bcName);
-    } else {
+    else
       nameAlias = self buildBCAlias("rank", targetAI.bcRank);
-    }
-    if(SoundExists(nameAlias)) {
+    if(SoundExists(nameAlias))
       soundAliases[soundAliases.size] = nameAlias;
-    }
   }
   if(tokens[0] == "move") {
-    if(tokens.size > 1) {
+    if(tokens.size > 1)
       modifier = tokens[1];
-    } else {
+    else
       modifier = "generic";
-    }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "move", modifier);
   } else if(tokens[0] == "infantry") {
     soundAliases[soundAliases.size] = self buildBCAlias("threat", "infantry", tokens[1]);
-    if(tokens.size > 2 && tokens[2] != "inbound") {
+    if(tokens.size > 2 && tokens[2] != "inbound")
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "relative", tokens[2]);
-    } else if(tokens.size > 2) {
+    else if(tokens.size > 2)
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "inbound", tokens[3]);
-    }
   } else if(tokens[0] == "vehicle") {
     soundAliases[soundAliases.size] = self buildBCAlias("threat", "vehicle", tokens[1]);
-    if(tokens.size > 2 && tokens[2] != "inbound") {
+    if(tokens.size > 2 && tokens[2] != "inbound")
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "relative", tokens[2]);
-    } else if(tokens.size > 2) {
+    else if(tokens.size > 2)
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "inbound", tokens[3]);
-    }
   } else if(tokens[0] == "order") {
-    if(tokens.size > 1) {
+    if(tokens.size > 1)
       modifier = tokens[1];
-    } else {
+    else
       modifier = "generic";
-    }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "action", modifier);
   } else if(tokens[0] == "cover") {
-    if(tokens.size > 1) {
+    if(tokens.size > 1)
       modifier = tokens[1];
-    } else {
+    else
       modifier = "generic";
-    }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "cover", modifier);
   }
-  for(index = 0; index < soundAliases.size; index++) {
+  for (index = 0; index < soundAliases.size; index++) {
     self playSound(soundAliases[index], soundAliases[index], true);
     self waittill(soundAliases[index]);
   }
 }
 
 buildBCAlias(action, type, modifier) {
-  if(isDefined(modifier)) {
+  if(isDefined(modifier))
     return (self.countryID + "_" + self.npcID + "_" + action + "_" + type + "_" + modifier);
-  } else {
+  else
     return (self.countryID + "_" + self.npcID + "_" + action + "_" + type);
-  }
 }
 
 get_stop_watch(time, othertime) {
@@ -2579,21 +2412,19 @@ get_stop_watch(time, othertime) {
   watch.aligny = "middle";
   watch.horzAlign = "left";
   watch.vertAlign = "middle";
-  if(isDefined(othertime)) {
+  if(isDefined(othertime))
     timer = othertime;
-  } else {
+  else
     timer = level.explosiveplanttime;
-  }
   watch setClock(timer, time, "hudStopwatch", 64, 64);
   return watch;
 }
 
 objective_is_active(msg) {
   active = false;
-  for(i = 0; i < level.active_objective.size; i++) {
-    if(level.active_objective[i] != msg) {
+  for (i = 0; i < level.active_objective.size; i++) {
+    if(level.active_objective[i] != msg)
       continue;
-    }
     active = true;
     break;
   }
@@ -2602,10 +2433,9 @@ objective_is_active(msg) {
 
 objective_is_inactive(msg) {
   inactive = false;
-  for(i = 0; i < level.inactive_objective.size; i++) {
-    if(level.inactive_objective[i] != msg) {
+  for (i = 0; i < level.inactive_objective.size; i++) {
+    if(level.inactive_objective[i] != msg)
       continue;
-    }
     inactive = true;
     break;
   }
@@ -2614,53 +2444,45 @@ objective_is_inactive(msg) {
 
 set_objective_inactive(msg) {
   array = [];
-  for(i = 0; i < level.active_objective.size; i++) {
-    if(level.active_objective[i] == msg) {
+  for (i = 0; i < level.active_objective.size; i++) {
+    if(level.active_objective[i] == msg)
       continue;
-    }
     array[array.size] = level.active_objective[i];
   }
   level.active_objective = array;
   exists = false;
-  for(i = 0; i < level.inactive_objective.size; i++) {
-    if(level.inactive_objective[i] != msg) {
+  for (i = 0; i < level.inactive_objective.size; i++) {
+    if(level.inactive_objective[i] != msg)
       continue;
-    }
     exists = true;
   }
-  if(!exists) {
+  if(!exists)
     level.inactive_objective[level.inactive_objective.size] = msg;
-  }
-  for(i = 0; i < level.active_objective.size; i++) {
-    for(p = 0; p < level.inactive_objective.size; p++) {
+  for (i = 0; i < level.active_objective.size; i++) {
+    for (p = 0; p < level.inactive_objective.size; p++)
       assertEx(level.active_objective[i] != level.inactive_objective[p], "Objective is both inactive and active");
-    }
   }
 }
 
 set_objective_active(msg) {
   array = [];
-  for(i = 0; i < level.inactive_objective.size; i++) {
-    if(level.inactive_objective[i] == msg) {
+  for (i = 0; i < level.inactive_objective.size; i++) {
+    if(level.inactive_objective[i] == msg)
       continue;
-    }
     array[array.size] = level.inactive_objective[i];
   }
   level.inactive_objective = array;
   exists = false;
-  for(i = 0; i < level.active_objective.size; i++) {
-    if(level.active_objective[i] != msg) {
+  for (i = 0; i < level.active_objective.size; i++) {
+    if(level.active_objective[i] != msg)
       continue;
-    }
     exists = true;
   }
-  if(!exists) {
+  if(!exists)
     level.active_objective[level.active_objective.size] = msg;
-  }
-  for(i = 0; i < level.active_objective.size; i++) {
-    for(p = 0; p < level.inactive_objective.size; p++) {
+  for (i = 0; i < level.active_objective.size; i++) {
+    for (p = 0; p < level.inactive_objective.size; p++)
       assertEx(level.active_objective[i] != level.inactive_objective[p], "Objective is both inactive and active");
-    }
   }
 }
 
@@ -2713,9 +2535,8 @@ script_wait(called_from_spawner) {
   startTime = GetTime();
   if(isDefined(self.script_wait)) {
     wait(self.script_wait * coop_scalar);
-    if(isDefined(self.script_wait_add)) {
+    if(isDefined(self.script_wait_add))
       self.script_wait += self.script_wait_add;
-    }
   } else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     wait(RandomFloatrange(self.script_wait_min, self.script_wait_max) * coop_scalar);
     if(isDefined(self.script_wait_add)) {
@@ -2741,14 +2562,13 @@ guy_runtovehicle_load(guy, vehicle) {
 get_force_color_guys(team, color) {
   ai = GetAiArray(team);
   guys = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     guy = ai[i];
     if(!isDefined(guy.script_forceColor)) {
       continue;
     }
-    if(guy.script_forceColor != color) {
+    if(guy.script_forceColor != color)
       continue;
-    }
     guys[guys.size] = guy;
   }
   return guys;
@@ -2757,20 +2577,18 @@ get_force_color_guys(team, color) {
 get_all_force_color_friendlies() {
   ai = GetAiArray("allies");
   guys = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     guy = ai[i];
-    if(!isDefined(guy.script_forceColor)) {
+    if(!isDefined(guy.script_forceColor))
       continue;
-    }
     guys[guys.size] = guy;
   }
   return guys;
 }
 
 enable_ai_color() {
-  if(isDefined(self.script_forceColor)) {
+  if(isDefined(self.script_forceColor))
     return;
-  }
   if(!isDefined(self.old_forceColor)) {
     return;
   }
@@ -2802,11 +2620,10 @@ clear_force_color() {
 
 check_force_color(_color) {
   color = level.colorCheckList[tolower(_color)];
-  if(isDefined(self.script_forcecolor) && color == self.script_forcecolor) {
+  if(isDefined(self.script_forcecolor) && color == self.script_forcecolor)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 get_force_color() {
@@ -2853,53 +2670,45 @@ issue_color_orders(color_team, team) {
   colorCodes = Strtok(color_team, " ");
   colors = [];
   colorCodesByColorIndex = [];
-  for(i = 0; i < colorCodes.size; i++) {
+  for (i = 0; i < colorCodes.size; i++) {
     color = undefined;
-    if(issubstr(colorCodes[i], "r")) {
+    if(issubstr(colorCodes[i], "r"))
       color = "r";
-    } else {
-      if(issubstr(colorCodes[i], "b"))
-    }
-    color = "b";
-    else {
-      if(issubstr(colorCodes[i], "y"))
-    }
-    color = "y";
-    else {
-      if(issubstr(colorCodes[i], "c"))
-    }
-    color = "c";
-    else {
-      if(issubstr(colorCodes[i], "g"))
-    }
-    color = "g";
-    else {
-      if(issubstr(colorCodes[i], "p"))
-    }
-    color = "p";
-    else {
-      if(issubstr(colorCodes[i], "o"))
-    }
-    color = "o";
-    else {
+    else
+    if(issubstr(colorCodes[i], "b"))
+      color = "b";
+    else
+    if(issubstr(colorCodes[i], "y"))
+      color = "y";
+    else
+    if(issubstr(colorCodes[i], "c"))
+      color = "c";
+    else
+    if(issubstr(colorCodes[i], "g"))
+      color = "g";
+    else
+    if(issubstr(colorCodes[i], "p"))
+      color = "p";
+    else
+    if(issubstr(colorCodes[i], "o"))
+      color = "o";
+    else
       assertEx(0, "Trigger at origin " + self getorigin() + " had strange color index " + colorCodes[i]);
-    }
     colorCodesByColorIndex[color] = colorCodes[i];
     colors[colors.size] = color;
   }
   assert(colors.size == colorCodes.size);
-  for(i = 0; i < colorCodes.size; i++) {
+  for (i = 0; i < colorCodes.size; i++) {
     level.arrays_of_colorCoded_spawners[team][colorCodes[i]] = array_removeUndefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]]);
     assertex(isDefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]]), "Trigger refer to a color# that does not exist in any node for this team.");
-    for(p = 0; p < level.arrays_of_colorCoded_spawners[team][colorCodes[i]].size; p++) {
+    for (p = 0; p < level.arrays_of_colorCoded_spawners[team][colorCodes[i]].size; p++)
       level.arrays_of_colorCoded_spawners[team][colorCodes[i]][p].currentColorCode = colorCodes[i];
-    }
   }
-  for(i = 0; i < colors.size; i++) {
+  for (i = 0; i < colors.size; i++) {
     level.arrays_of_colorForced_ai[team][colors[i]] = array_removeDead(level.arrays_of_colorForced_ai[team][colors[i]]);
     level.currentColorForced[team][colors[i]] = colorCodesByColorIndex[colors[i]];
   }
-  for(i = 0; i < colorCodes.size; i++) {
+  for (i = 0; i < colorCodes.size; i++) {
     ai_array = [];
     ai_array = maps\_colors::issue_leave_node_order_to_ai_and_get_ai(colorCodes[i], colors[i], team);
     maps\_colors::issue_color_order_to_ai(colorCodes[i], colors[i], team, ai_array);
@@ -2908,7 +2717,7 @@ issue_color_orders(color_team, team) {
 
 flashRumbleLoop(duration) {
   goalTime = GetTime() + duration * 1000;
-  while(GetTime() < goalTime) {
+  while (GetTime() < goalTime) {
     self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
@@ -2916,63 +2725,57 @@ flashRumbleLoop(duration) {
 
 flashMonitor() {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self waittill("flashbang", percent_distance, percent_angle, attacker, team);
     if("1" == GetDvar("noflash")) {
       continue;
     }
     frac = (percent_distance - 0.75) / (1 - 0.75);
-    if(frac > percent_angle) {
+    if(frac > percent_angle)
       percent_angle = frac;
-    }
     if(percent_angle < 0.5) {
       percent_angle = 0.5;
     } else if(percent_angle > 0.8) {
       percent_angle = 1;
     }
     minamountdist = 0.2;
-    if(percent_distance > 1 - minamountdist) {
+    if(percent_distance > 1 - minamountdist)
       percent_distance = 1.0;
-    } else {
+    else
       percent_distance = percent_distance / (1 - minamountdist);
-    }
-    if(team == "axis") {
+    if(team == "axis")
       seconds = percent_distance * percent_angle * 6.0;
-    } else {
+    else
       seconds = percent_distance * percent_angle * 3.0;
-    }
     if(seconds < 0.25) {
       continue;
     }
-    if(isDefined(self.maxflashedseconds) && seconds > self.maxflashedseconds) {
+    if(isDefined(self.maxflashedseconds) && seconds > self.maxflashedseconds)
       seconds = self.maxflashedseconds;
-    }
     self.flashingTeam = team;
     self notify("flashed");
     self.flashendtime = gettime() + seconds * 1000;
     self shellshock("flashbang", seconds);
     flag_set("player_flashed");
     thread unflash_flag(seconds);
-    if(seconds > 2) {
+    if(seconds > 2)
       thread flashRumbleLoop(0.75);
-    } else {
+    else
       thread flashRumbleLoop(0.25);
-    }
-    if(team != "allies") {
+    if(team != "allies")
       self thread flashNearbyAllies(seconds, team);
-    }
   }
 }
 
 flashNearbyAllies(baseDuration, team) {
   wait .05;
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(distanceSquared(allies[i].origin, self.origin) < 350 * 350) {
       duration = baseDuration + randomfloatrange(-1000, 1500);
-      if(duration > 4.5) {
+      if(duration > 4.5)
         duration = 4.5;
-      } else if(duration < 0.25) {
+      else if(duration < 0.25) {
         continue;
       }
       newendtime = gettime() + duration * 1000;
@@ -3006,7 +2809,7 @@ reportExploderIds() {
   }
   keys = GetArrayKeys(level._exploder_ids);
   println("Server Exploder dictionary : ");
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     println(keys[i] + " : " + level._exploder_ids[keys[i]]);
   }
 }
@@ -3032,10 +2835,9 @@ createExploder(fxid) {
 
 getfxarraybyID(fxid) {
   array = [];
-  for(i = 0; i < level.createFXent.size; i++) {
-    if(level.createFXent[i].v["fxid"] == fxid) {
+  for (i = 0; i < level.createFXent.size; i++) {
+    if(level.createFXent[i].v["fxid"] == fxid)
       array[array.size] = level.createFXent[i];
-    }
   }
   return array;
 }
@@ -3059,11 +2861,10 @@ ignoreAllEnemies(qTrue) {
     assertex(self.team != "neutral", "Why are you making a guy have team neutral? And also, why is he doing anim_reach?");
     ai = getaiarray(teams[self.team]);
     groups = [];
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++)
       groups[ai[i] getthreatbiasgroup()] = true;
-    }
     keys = GetArrayKeys(groups);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       println("entity: " + num + "ignoreAllEnemies TRUE");
       println("entity: " + num + " setthreatbias( " + keys[i] + ", ignore_everybody, 0 )");
       setthreatbias(keys[i], "ignore_everybody", 0);
@@ -3104,7 +2905,7 @@ vehicle_dynamicpath(node, bwaitforstart) {
 }
 
 groundpos(origin) {
-  return bulletTrace(origin, (origin + (0, 0, -100000)), 0, self)["position"];
+  return bullettrace(origin, (origin + (0, 0, -100000)), 0, self)["position"];
 }
 
 playergroundpos(origin) {
@@ -3114,9 +2915,8 @@ playergroundpos(origin) {
 change_player_health_packets(num) {
   level.player_health_packets += num;
   level notify("update_health_packets");
-  if(level.player_health_packets >= 3) {
+  if(level.player_health_packets >= 3)
     level.player_health_packets = 3;
-  }
 }
 
 getvehiclespawner(targetname) {
@@ -3125,7 +2925,7 @@ getvehiclespawner(targetname) {
 }
 
 getvehiclespawnerarray(targetname) {
-  spawner = getEntArray(targetname + "_vehiclespawner", "targetname");
+  spawner = getentarray(targetname + "_vehiclespawner", "targetname");
   return spawner;
 }
 
@@ -3133,7 +2933,7 @@ player_fudge_moveto(dest, moverate) {
   if(!isDefined(moverate)) {
     moverate = 200;
   }
-  org = spawn("script_origin", self.origin);
+  org = Spawn("script_origin", self.origin);
   org.origin = self.origin;
   self LinkTo(org);
   dist = Distance(self.origin, dest);
@@ -3146,16 +2946,15 @@ player_fudge_moveto(dest, moverate) {
 
 add_start(msg, func, loc_string) {
   assertex(!isDefined(level._loadStarted), "Can't create starts after _load");
-  if(!isDefined(level.start_functions)) {
+  if(!isDefined(level.start_functions))
     level.start_functions = [];
-  }
   msg = tolower(msg);
   level.start_functions[msg] = func;
   if(isDefined(loc_string)) {
     precachestring(loc_string);
     level.start_loc_string[msg] = loc_string;
   } else {
-    level.start_loc_string[msg] = &"MISSING_LOC_STRING";
+    level.start_loc_string[msg] = & "MISSING_LOC_STRING";
   }
 }
 
@@ -3169,7 +2968,7 @@ linetime(start, end, color, timer) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = AnglesToForward(start_angles);
   dot = VectorDot(forward, normal);
   return dot >= fov;
 }
@@ -3224,9 +3023,8 @@ radio_dialogue(msg) {
 }
 
 radio_dialogue_stop() {
-  if(!isDefined(level.player_radio_emitter)) {
+  if(!isDefined(level.player_radio_emitter))
     return;
-  }
   level.player_radio_emitter delete();
 }
 
@@ -3235,10 +3033,9 @@ radio_dialogue_queue(msg) {
 }
 
 hint_create(text, background, backgroundAlpha) {
-  struct = spawnStruct();
-  if(isDefined(background) && background == true) {
+  struct = SpawnStruct();
+  if(isDefined(background) && background == true)
     struct.bg = NewHudElem();
-  }
   struct.elm = NewHudElem();
   struct hint_position_internal(backgroundAlpha);
   struct.elm SetText(text);
@@ -3247,20 +3044,17 @@ hint_create(text, background, backgroundAlpha) {
 
 hint_Delete() {
   self notify("death");
-  if(isDefined(self.elm)) {
+  if(isDefined(self.elm))
     self.elm Destroy();
-  }
-  if(isDefined(self.bg)) {
+  if(isDefined(self.bg))
     self.bg Destroy();
-  }
 }
 
 hint_position_internal(bgAlpha) {
-  if(level.console) {
+  if(level.console)
     self.elm.fontScale = 2;
-  } else {
+  else
     self.elm.fontScale = 1.6;
-  }
   self.elm.x = 0;
   self.elm.y = -40;
   self.elm.alignX = "center";
@@ -3279,14 +3073,12 @@ hint_position_internal(bgAlpha) {
   self.bg.horzAlign = "center";
   self.bg.vertAlign = "middle";
   self.bg.sort = -1;
-  if(level.console) {
+  if(level.console)
     self.bg SetShader("popmenu_bg", 650, 52);
-  } else {
+  else
     self.bg SetShader("popmenu_bg", 650, 42);
-  }
-  if(!isDefined(bgAlpha)) {
+  if(!isDefined(bgAlpha))
     bgAlpha = 0.5;
-  }
   self.bg.alpha = bgAlpha;
 }
 
@@ -3314,7 +3106,7 @@ add_global_spawn_function(team, function, param1, param2, param3) {
 remove_global_spawn_function(team, function) {
   assertEx(isDefined(level.spawn_funcs), "Tried to remove_global_spawn_function before calling _load");
   array = [];
-  for(i = 0; i < level.spawn_funcs[team].size; i++) {
+  for (i = 0; i < level.spawn_funcs[team].size; i++) {
     if(level.spawn_funcs[team][i]["function"] != function) {
       array[array.size] = level.spawn_funcs[team][i];
     }
@@ -3336,19 +3128,19 @@ add_spawn_function(function, param1, param2, param3, param4) {
 }
 
 array_Delete(array) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     array[i] delete();
   }
 }
 
 PlayerUnlimitedAmmoThread() {
-  while(1) {
+  while (1) {
     wait(5);
     if(getdvar("UnlimitedAmmoOff") == "1") {
       continue;
     }
     players = get_players();
-    for(q = 0; q < players.size; q++) {
+    for (q = 0; q < players.size; q++) {
       currentWeapon = players[q] GetCurrentWeapon();
       if(currentWeapon == "none") {
         continue;
@@ -3433,17 +3225,16 @@ unmake_hero() {
 get_heroes() {
   array = [];
   ai = GetAiArray("allies");
-  for(i = 0; i < ai.size; i++) {
-    if(ai[i] is_hero()) {
+  for (i = 0; i < ai.size; i++) {
+    if(ai[i] is_hero())
       array[array.size] = ai[i];
-    }
   }
   return array;
 }
 
 set_team_pacifist(team, val) {
   ai = GetAiArray(team);
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     ai[i].pacifist = val;
   }
 }
@@ -3467,9 +3258,8 @@ set_promotion_order(deadguy, replacer) {
   deadguy = shortenColor(deadguy);
   replacer = shortenColor(replacer);
   level.current_color_order[deadguy] = replacer;
-  if(!isDefined(level.current_color_order[replacer])) {
+  if(!isDefined(level.current_color_order[replacer]))
     set_empty_promotion_order(replacer);
-  }
 }
 
 set_empty_promotion_order(deadguy) {
@@ -3481,10 +3271,9 @@ set_empty_promotion_order(deadguy) {
 
 remove_dead_from_array(array) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
-    if(!isalive(array[i])) {
+  for (i = 0; i < array.size; i++) {
+    if(!isalive(array[i]))
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -3492,10 +3281,9 @@ remove_dead_from_array(array) {
 
 remove_heroes_from_array(array) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
-    if(array[i] is_hero()) {
+  for (i = 0; i < array.size; i++) {
+    if(array[i] is_hero())
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -3503,10 +3291,9 @@ remove_heroes_from_array(array) {
 
 remove_all_animnamed_guys_from_array(array) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
-    if(isDefined(array[i].animname)) {
+  for (i = 0; i < array.size; i++) {
+    if(isDefined(array[i].animname))
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -3514,14 +3301,12 @@ remove_all_animnamed_guys_from_array(array) {
 
 remove_color_from_array(array, color) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     guy = array[i];
-    if(!isDefined(guy.script_forceColor)) {
+    if(!isDefined(guy.script_forceColor))
       continue;
-    }
-    if(guy.script_forceColor == color) {
+    if(guy.script_forceColor == color)
       continue;
-    }
     newarray[newarray.size] = guy;
   }
   return newarray;
@@ -3529,14 +3314,12 @@ remove_color_from_array(array, color) {
 
 remove_noteworthy_from_array(array, noteworthy) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     guy = array[i];
-    if(!isDefined(guy.script_noteworthy)) {
+    if(!isDefined(guy.script_noteworthy))
       continue;
-    }
-    if(guy.script_noteworthy == noteworthy) {
+    if(guy.script_noteworthy == noteworthy)
       continue;
-    }
     newarray[newarray.size] = guy;
   }
   return newarray;
@@ -3556,10 +3339,9 @@ get_closest_colored_friendly(color, origin) {
 
 remove_without_classname(array, classname) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
-    if(!issubstr(array[i].classname, classname)) {
+  for (i = 0; i < array.size; i++) {
+    if(!issubstr(array[i].classname, classname))
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -3567,10 +3349,9 @@ remove_without_classname(array, classname) {
 
 remove_without_model(array, model) {
   newarray = [];
-  for(i = 0; i < array.size; i++) {
-    if(!issubstr(array[i].model, model)) {
+  for (i = 0; i < array.size; i++) {
+    if(!issubstr(array[i].model, model))
       continue;
-    }
     newarray[newarray.size] = array[i];
   }
   return newarray;
@@ -3590,7 +3371,7 @@ get_closest_colored_friendly_with_classname(color, classname, origin) {
 }
 
 promote_nearest_friendly(colorFrom, colorTo) {
-  for(;;) {
+  for (;;) {
     friendly = get_closest_colored_friendly(colorFrom);
     if(!IsAlive(friendly)) {
       wait(1);
@@ -3602,7 +3383,7 @@ promote_nearest_friendly(colorFrom, colorTo) {
 }
 
 instantly_promote_nearest_friendly(colorFrom, colorTo) {
-  for(;;) {
+  for (;;) {
     friendly = get_closest_colored_friendly(colorFrom);
     if(!IsAlive(friendly)) {
       assertex(0, "Instant promotion from " + colorFrom + " to " + colorTo + " failed!");
@@ -3614,7 +3395,7 @@ instantly_promote_nearest_friendly(colorFrom, colorTo) {
 }
 
 instantly_promote_nearest_friendly_with_classname(colorFrom, colorTo, classname) {
-  for(;;) {
+  for (;;) {
     friendly = get_closest_colored_friendly_with_classname(colorFrom, classname);
     if(!IsAlive(friendly)) {
       assertex(0, "Instant promotion from " + colorFrom + " to " + colorTo + " failed!");
@@ -3626,7 +3407,7 @@ instantly_promote_nearest_friendly_with_classname(colorFrom, colorTo, classname)
 }
 
 promote_nearest_friendly_with_classname(colorFrom, colorTo, classname) {
-  for(;;) {
+  for (;;) {
     friendly = get_closest_colored_friendly_with_classname(colorFrom, classname);
     if(!isalive(friendly)) {
       wait(1);
@@ -3640,7 +3421,7 @@ promote_nearest_friendly_with_classname(colorFrom, colorTo, classname) {
 instantly_set_color_from_array_with_classname(array, color, classname) {
   foundGuy = false;
   newArray = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     guy = array[i];
     if(foundGuy || !isSubstr(guy.classname, classname)) {
       newArray[newArray.size] = guy;
@@ -3655,7 +3436,7 @@ instantly_set_color_from_array_with_classname(array, color, classname) {
 instantly_set_color_from_array(array, color) {
   foundGuy = false;
   newArray = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     guy = array[i];
     if(foundGuy) {
       newArray[newArray.size] = guy;
@@ -3679,25 +3460,25 @@ wait_for_flag_or_timeout(msg, timer) {
   if(flag(msg)) {
     return;
   }
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread ent_waits_for_level_notify(msg);
   ent thread ent_times_out(timer);
   ent waittill("done");
 }
 
 wait_for_trigger_or_timeout(timer) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread ent_waits_for_trigger(self);
   ent thread ent_times_out(timer);
   ent waittill("done");
 }
 
 wait_for_either_trigger(msg1, msg2) {
-  ent = spawnStruct();
+  ent = SpawnStruct();
   array = [];
-  array = array_combine(array, getEntArray(msg1, "targetname"));
-  array = array_combine(array, getEntArray(msg2, "targetname"));
-  for(i = 0; i < array.size; i++) {
+  array = array_combine(array, GetEntArray(msg1, "targetname"));
+  array = array_combine(array, GetEntArray(msg2, "targetname"));
+  for (i = 0; i < array.size; i++) {
     ent thread ent_waits_for_trigger(array[i]);
   }
   ent waittill("done");
@@ -3725,10 +3506,9 @@ get_trigger_flag() {
 
 isSpawner() {
   spawners = GetSpawnerArray();
-  for(i = 0; i < spawners.size; i++) {
-    if(spawners[i] == self) {
+  for (i = 0; i < spawners.size; i++) {
+    if(spawners[i] == self)
       return true;
-    }
   }
   return false;
 }
@@ -3772,9 +3552,8 @@ cqb_aim(the_target) {
     self.cqb_target = undefined;
   } else {
     self.cqb_target = the_target;
-    if(!isDefined(the_target.origin)) {
+    if(!isDefined(the_target.origin))
       assertmsg("target passed into cqb_aim does not have an origin!");
-    }
   }
 }
 
@@ -3790,16 +3569,18 @@ waittill_notify_or_timeout(msg, timer) {
 }
 
 do_in_order(func1, param1, func2, param2) {
-  if(isDefined(param1)) {
+  if(isDefined(param1))
     [[func1]](param1);
-  } else {
-    [[func1]]();
-  }
-  if(isDefined(param2)) {
+  else
+    [
+      [func1]
+    ]();
+  if(isDefined(param2))
     [[func2]](param2);
-  } else {
-    [[func2]]();
-  }
+  else
+    [
+      [func2]
+    ]();
 }
 
 scrub() {
@@ -3851,8 +3632,8 @@ fire_radius(origin, radius) {
   if(level.createFX_enabled) {
     return;
   }
-  trigger = spawn("trigger_radius", origin, 0, radius, 48);
-  for(;;) {
+  trigger = Spawn("trigger_radius", origin, 0, radius, 48);
+  for (;;) {
     trigger waittill("trigger", other);
     assertex(IsPlayer(other), "Tried to burn a non player in a fire");
     other DoDamage(5, origin);
@@ -3873,7 +3654,7 @@ ThrowGrenadeAtPlayerASAP() {
   if(players.size > 0) {
     best_target = undefined;
     closest_dist = 99999999;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         dist = DistanceSquared(self.origin, players[i].origin);
         if(dist < closest_dist) {
@@ -3933,16 +3714,13 @@ sg_getanimtree(animtree) {
 }
 
 sg_precacheanim(animation, animtree) {
-  if(!isDefined(animtree)) {
+  if(!isDefined(animtree))
     animtree = "generic_human";
-  }
   sg_csv_addtype("xanim", animation);
-  if(!isDefined(level.sg_precacheanims)) {
+  if(!isDefined(level.sg_precacheanims))
     level.sg_precacheanims = [];
-  }
-  if(!isDefined(level.sg_precacheanims[animtree])) {
+  if(!isDefined(level.sg_precacheanims[animtree]))
     level.sg_precacheanims[animtree] = [];
-  }
   level.sg_precacheanims[animtree][animation] = true;
 }
 
@@ -3982,13 +3760,11 @@ sg_csv_addtype(type, string) {
 }
 
 array_combine_keys(array1, array2) {
-  if(!array1.size) {
+  if(!array1.size)
     return array2;
-  }
   keys = getarraykeys(array2);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++)
     array1[keys[i]] = array2[keys[i]];
-  }
   return array1;
 }
 
@@ -4002,7 +3778,7 @@ set_goalradius(radius) {
 
 try_forever_spawn() {
   export = self.export;
-  for(;;) {
+  for (;;) {
     assertEx(isDefined(self), "Spawner with export " +
       export +" was deleted.");
     guy = self dospawn();
@@ -4022,11 +3798,10 @@ set_run_anim(anime, alwaysRunForward) {
   assertEx(isDefined(anime), "Tried to set run anim but didn't specify which animation to ues");
   assertEx(isDefined(self.animname), "Tried to set run anim on a guy that had no anim name");
   assertEx(isDefined(level.scr_anim[self.animname][anime]), "Tried to set run anim but the anim was not defined in the maps _anim file");
-  if(isDefined(alwaysRunForward)) {
+  if(isDefined(alwaysRunForward))
     self.alwaysRunForward = alwaysRunForward;
-  } else {
+  else
     self.alwaysRunForward = true;
-  }
   self.a.combatrunanim = level.scr_anim[self.animname][anime];
   self.run_noncombatanim = self.a.combatrunanim;
   self.walk_combatanim = self.a.combatrunanim;
@@ -4038,11 +3813,10 @@ set_generic_run_anim(anime, alwaysRunForward) {
   assertEx(isDefined(anime), "Tried to set generic run anim but didn't specify which animation to ues");
   assertEx(isDefined(level.scr_anim["generic"][anime]), "Tried to set generic run anim but the anim was not defined in the maps _anim file");
   if(isDefined(alwaysRunForward)) {
-    if(alwaysRunForward) {
+    if(alwaysRunForward)
       self.alwaysRunForward = alwaysRunForward;
-    } else {
+    else
       self.alwaysRunForward = undefined;
-    }
   } else
     self.alwaysRunForward = true;
   self.a.combatrunanim = level.scr_anim["generic"][anime];
@@ -4079,7 +3853,7 @@ physicsjolt_proximity(outer_radius, inner_radius, force) {
   fade_distance = outer_radius * outer_radius;
   fade_speed = 3;
   base_force = force;
-  while(true) {
+  while (true) {
     wait 0.1;
     force = base_force;
     if(self.classname == "script_vehicle") {
@@ -4091,9 +3865,8 @@ physicsjolt_proximity(outer_radius, inner_radius, force) {
     }
     dist = distancesquared(self.origin, level.player.origin);
     scale = fade_distance / dist;
-    if(scale > 1) {
+    if(scale > 1)
       scale = 1;
-    }
     force = vector_multiply(force, scale);
     total_force = force[0] + force[1] + force[2];
   }
@@ -4128,11 +3901,10 @@ self_delete() {
 
 remove_noColor_from_array(ai) {
   newarray = [];
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     guy = ai[i];
-    if(guy has_color()) {
+    if(guy has_color())
       newarray[newarray.size] = guy;
-    }
   }
   return newarray;
 }
@@ -4178,9 +3950,8 @@ notify_delay(sNotifyString, fDelay) {
   assert(fDelay > 0);
   self endon("death");
   wait fDelay;
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return;
-  }
   self notify(sNotifyString);
 }
 
@@ -4280,7 +4051,7 @@ lerp_player_view_to_moving_position_oldstyle(ent, tag, lerptime, fraction, right
   }
   max_count = lerptime / 0.0167;
   count = 0;
-  while(count < max_count) {
+  while (count < max_count) {
     origin = ent gettagorigin(tag);
     angles = ent gettagangles(tag);
     linker moveto(origin, 0.0167 * (max_count - count));
@@ -4296,7 +4067,7 @@ timer(time) {
 }
 
 waittill_either_function(func1, parm1, func2, parm2) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   thread waittill_either_function_internal(ent, func1, parm1);
   thread waittill_either_function_internal(ent, func2, parm2);
   ent waittill("done");
@@ -4358,15 +4129,14 @@ set_fixednode_false() {
 }
 
 spawn_ai() {
-  if(isDefined(self.script_forcespawn)) {
-    return self stalingradspawn();
-  }
-  return self dospawn();
+  if(isDefined(self.script_forcespawn))
+    return self stalingradSpawn();
+  return self doSpawn();
 }
 
 function_stack(func, param1, param2, param3, param4) {
   self endon("death");
-  localentity = spawnStruct();
+  localentity = spawnstruct();
   localentity thread function_stack_proc(self, func, param1, param2, param3, param4);
   localentity waittill_either("function_done", "death");
 }
@@ -4418,22 +4188,20 @@ objective_complete(obj) {
 }
 
 run_thread_on_targetname(msg, func, param1, param2, param3) {
-  array = getEntArray(msg, "targetname");
+  array = getentarray(msg, "targetname");
   array_thread(array, func, param1, param2, param3);
 }
 
 run_thread_on_noteworthy(msg, func, param1, param2, param3) {
-  array = getEntArray(msg, "script_noteworthy");
+  array = getentarray(msg, "script_noteworthy");
   array_thread(array, func, param1, param2, param3);
 }
 
 handsignal(xanim, ender, waiter) {
-  if(isDefined(ender)) {
+  if(isDefined(ender))
     level endon(ender);
-  }
-  if(isDefined(waiter)) {
+  if(isDefined(waiter))
     level waittill(waiter);
-  }
   switch (xanim) {
     case "go":
       self setanimrestart(getGenericAnim("signal_go"), 1, 0, 1.1);
@@ -4451,28 +4219,28 @@ handsignal(xanim, ender, waiter) {
 }
 
 get_guy_with_script_noteworthy_from_spawner(script_noteworthy) {
-  spawner = getEntArray(script_noteworthy, "script_noteworthy");
+  spawner = getentarray(script_noteworthy, "script_noteworthy");
   assertex(spawner.size == 1, "Tried to get guy from spawner but there were zero or multiple spawners");
   guys = array_spawn(spawner);
   return guys[0];
 }
 
 get_guy_with_targetname_from_spawner(targetname) {
-  spawner = getEntArray(targetname, "targetname");
+  spawner = getentarray(targetname, "targetname");
   assertex(spawner.size == 1, "Tried to get guy from spawner but there were zero or multiple spawners");
   guys = array_spawn(spawner);
   return guys[0];
 }
 
 get_guys_with_targetname_from_spawner(targetname) {
-  spawners = getEntArray(targetname, "targetname");
+  spawners = getentarray(targetname, "targetname");
   assertex(spawners.size > 0, "Tried to get guy from spawner but there were zero spawners");
   return array_spawn(spawners);
 }
 
 array_spawn(spawners) {
   guys = [];
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     spawner = spawners[i];
     spawner.count = 1;
     guy = spawner spawn_ai();
@@ -4491,7 +4259,7 @@ add_dialogue_line(name, msg) {
   if(!isDefined(level.dialogue_huds)) {
     level.dialogue_huds = [];
   }
-  for(index = 0;; index++) {
+  for (index = 0;; index++) {
     if(!isDefined(level.dialogue_huds[index])) {
       break;
     }
@@ -4514,7 +4282,7 @@ add_dialogue_line(name, msg) {
   timer = 2 * 20;
   hudelem fadeOverTime(6);
   hudelem.alpha = 0;
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     hudelem.color = (1, 1, 1 / (timer - i));
     wait(0.05);
   }
@@ -4524,13 +4292,12 @@ add_dialogue_line(name, msg) {
 }
 
 alphabetize(array) {
-  if(array.size <= 1) {
+  if(array.size <= 1)
     return array;
-  }
   count = 0;
-  for(;;) {
+  for (;;) {
     changed = false;
-    for(i = 0; i < array.size - 1; i++) {
+    for (i = 0; i < array.size - 1; i++) {
       if(is_later_in_alphabet(array[i], array[i + 1])) {
         val = array[i];
         array[i] = array[i + 1];
@@ -4543,9 +4310,8 @@ alphabetize(array) {
         }
       }
     }
-    if(!changed) {
+    if(!changed)
       return array;
-    }
   }
   return array;
 }
@@ -4570,22 +4336,18 @@ set_baseaccuracy(val) {
 }
 
 set_console_status() {
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _utility.gsc. Function: set_console_status()\n");
-  }
-  if(!isDefined(level.Console)) {
+  if(!isDefined(level.Console))
     level.Console = getdvar("consoleGame") == "true";
-  } else {
+  else
     assertex(level.Console == (getdvar("consoleGame") == "true"), "Level.console got set incorrectly.");
-  }
-  if(!isDefined(level.Consolexenon)) {
+  if(!isDefined(level.Consolexenon))
     level.xenon = getdvar("xenonGame") == "true";
-  } else {
+  else
     assertex(level.xenon == (getdvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
-  }
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _utility.gsc. Function: set_console_status() - COMPLETE\n");
-  }
 }
 
 autosave_now(optional_useless_string, suppress_print) {
@@ -4606,11 +4368,10 @@ clear_deathanim() {
 
 hunted_style_door_open(soundalias) {
   wait(1.75);
-  if(isDefined(soundalias)) {
-    self playSound(soundalias);
-  } else {
-    self playSound("door_wood_slow_open");
-  }
+  if(isDefined(soundalias))
+    self playsound(soundalias);
+  else
+    self playsound("door_wood_slow_open");
   self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
   self connectpaths();
   self waittill("rotatedone");
@@ -4619,11 +4380,10 @@ hunted_style_door_open(soundalias) {
 
 palm_style_door_open(soundalias) {
   wait(1.35);
-  if(isDefined(soundalias)) {
-    self playSound(soundalias);
-  } else {
-    self playSound("door_wood_slow_open");
-  }
+  if(isDefined(soundalias))
+    self playsound(soundalias);
+  else
+    self playsound("door_wood_slow_open");
   self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
   self connectpaths();
   self waittill("rotatedone");
@@ -4635,7 +4395,7 @@ lerp_fov_overtime(time, destfov) {
   incs = int(time / .05);
   incfov = (destfov - basefov) / incs;
   currentfov = basefov;
-  for(i = 0; i < incs; i++) {
+  for (i = 0; i < incs; i++) {
     currentfov += incfov;
     setsaveddvar("cg_fov", currentfov);
     wait .05;
@@ -4679,7 +4439,7 @@ _delete() {
 disable_oneshotfx_with_noteworthy(noteworthy) {
   assertex(isDefined(level._global_fx_ents[noteworthy]), "No _global_fx ents have noteworthy " + noteworthy);
   keys = getarraykeys(level._global_fx_ents[noteworthy]);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     level._global_fx_ents[noteworthy][keys[i]].looper delete();
     level._global_fx_ents[noteworthy][keys[i]] = undefined;
   }
@@ -4708,20 +4468,19 @@ _linkto(targ, tag, org, angles) {
 array_wait(array, msg, timeout) {
   keys = getarraykeys(array);
   structs = [];
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnStruct();
+    structs[key] = spawnstruct();
     structs[key]._array_wait = true;
     structs[key] thread array_waitlogic1(array[key], msg, timeout);
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
-    if(isDefined(array[key]) && structs[key]._array_wait) {
+    if(isDefined(array[key]) && structs[key]._array_wait)
       structs[key] waittill("_array_wait");
-    }
   }
 }
 
@@ -4764,28 +4523,24 @@ disable_replace_on_death() {
 }
 
 waittill_player_lookat(dot, timer, dot_only) {
-  if(!isDefined(dot)) {
+  if(!isDefined(dot))
     dot = 0.92;
-  }
-  if(!isDefined(timer)) {
+  if(!isDefined(timer))
     timer = 0;
-  }
   base_time = int(timer * 20);
   count = base_time;
   self endon("death");
   ai_guy = isai(self);
   org = undefined;
-  for(;;) {
-    if(ai_guy) {
-      org = self getEye();
-    } else {
+  for (;;) {
+    if(ai_guy)
+      org = self geteye();
+    else
       org = self.origin;
-    }
     if(player_looking_at(org, dot, dot_only)) {
       count--;
-      if(count <= 0) {
+      if(count <= 0)
         return true;
-      }
     } else {
       count = base_time;
     }
@@ -4799,7 +4554,7 @@ waittill_player_lookat_for_time(timer, dot, dot_only) {
 }
 
 player_looking_at(start, dot, dot_only) {
-  end = level.player getEye();
+  end = level.player geteye();
   angles = vectorToAngles(start - end);
   forward = anglesToForward(angles);
   player_angles = level.player getplayerangles();
@@ -4812,12 +4567,12 @@ player_looking_at(start, dot, dot_only) {
     assertex(dot_only, "dot_only must be true or undefined");
     return true;
   }
-  trace = bulletTrace(start, end, false, undefined);
+  trace = bullettrace(start, end, false, undefined);
   return trace["fraction"] == 1;
 }
 
 add_wait(func, parm1, parm2, parm3) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.caller = self;
   ent.func = func;
   ent.parms = [];
@@ -4834,7 +4589,7 @@ add_wait(func, parm1, parm2, parm3) {
 }
 
 add_func(func, parm1, parm2, parm3) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.caller = self;
   ent.func = func;
   ent.parms = [];
@@ -4851,7 +4606,7 @@ add_func(func, parm1, parm2, parm3) {
 }
 
 add_endon(name) {
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.caller = self;
   ent.ender = name;
   level.do_wait_endons_array[level.do_wait_endons_array.size] = ent;
@@ -4864,11 +4619,10 @@ do_wait_any() {
 }
 
 do_wait(count_to_reach) {
-  if(!isDefined(count_to_reach)) {
+  if(!isDefined(count_to_reach))
     count_to_reach = 0;
-  }
   assertex(isDefined(level.wait_any_func_array), "Tried to do a do_wait without addings funcs first");
-  ent = spawnStruct();
+  ent = spawnstruct();
   array = level.wait_any_func_array;
   endons = level.do_wait_endons_array;
   after_array = level.run_func_after_wait_array;
@@ -4877,7 +4631,7 @@ do_wait(count_to_reach) {
   level.do_wait_endons_array = [];
   ent.count = array.size;
   ent array_levelthread(array, ::waittill_func_ends, endons);
-  for(;;) {
+  for (;;) {
     if(ent.count <= count_to_reach) {
       break;
     }
@@ -4900,11 +4654,11 @@ waterfx(endflag) {
     flag_assert(endflag);
     level endon(endflag);
   }
-  for(;;) {
+  for (;;) {
     wait(randomfloatrange(0.15, 0.3));
     start = self.origin + (0, 0, 150);
     end = self.origin - (0, 0, 150);
-    trace = bulletTrace(start, end, false, undefined);
+    trace = BulletTrace(start, end, false, undefined);
     if(trace["surfacetype"] != "water") {
       continue;
     }
@@ -4917,13 +4671,13 @@ waterfx(endflag) {
     if(isDefined(level._effect["water_" + self.a.movement])) {
       fx = "water_" + self.a.movement;
     }
-    playFX(getfx(fx), trace["position"], trace["normal"]);
+    playfx(getfx(fx), trace["position"], trace["normal"]);
   }
 }
 
 mix_up(sound) {
   timer = 3 * 20;
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     self SetSoundBlend(sound, sound + "_off", (timer - i) / timer);
     wait(0.05);
   }
@@ -4931,7 +4685,7 @@ mix_up(sound) {
 
 mix_down(sound) {
   timer = 3 * 20;
-  for(i = 0; i < timer; i++) {
+  for (i = 0; i < timer; i++) {
     self SetSoundBlend(sound, sound + "_off", i / timer);
     wait(0.05);
   }
@@ -4943,7 +4697,7 @@ manual_linkto(entity, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  for(;;) {
+  for (;;) {
     self.origin = entity.origin + offset;
     self.angles = entity.angles;
     wait(0.05);
@@ -4986,7 +4740,7 @@ normal_friendly_fire_penalty() {
 getPlayerClaymores() {
   heldweapons = level.player getweaponslist();
   stored_ammo = [];
-  for(i = 0; i < heldweapons.size; i++) {
+  for (i = 0; i < heldweapons.size; i++) {
     weapon = heldweapons[i];
     stored_ammo[weapon] = level.player getWeaponAmmoClip(weapon);
   }
@@ -5000,7 +4754,7 @@ getPlayerClaymores() {
 getPlayerC4() {
   heldweapons = level.player getweaponslist();
   stored_ammo = [];
-  for(i = 0; i < heldweapons.size; i++) {
+  for (i = 0; i < heldweapons.size; i++) {
     weapon = heldweapons[i];
     stored_ammo[weapon] = level.player getWeaponAmmoClip(weapon);
   }
@@ -5029,7 +4783,7 @@ giveachievement_wrapper(achievement, all_players) {
   if(!(maps\_cheat::is_cheating()) && !(flag("has_cheated"))) {
     if(isDefined(all_players) && all_players) {
       players = get_players();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] GiveAchievement(achievement);
       }
     } else {
@@ -5043,10 +4797,9 @@ giveachievement_wrapper(achievement, all_players) {
 }
 
 delete_on_not_defined() {
-  for(;;) {
-    if(!isDefined(self)) {
+  for (;;) {
+    if(!isDefined(self))
       return;
-    }
     wait(0.05);
   }
 }
@@ -5109,20 +4862,17 @@ add_earthquake(name, mag, duration, radius) {
 }
 
 arcademode_assignpoints(amountDvar, player) {
-  if(getdvar("arcademode") != "1") {
+  if(getdvar("arcademode") != "1")
     return;
-  }
   thread maps\_arcademode::arcademode_assignpoints_toplayer(amountDvar, player);
 }
 
 arcadeMode() {
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _utility.gsc. Function: arcadeMode()\n");
-  }
   isArcadeMode = getdvar("arcademode") == "1";
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _utility.gsc. Function: arcadeMode() - COMPLETE\n");
-  }
   return isArcadeMode;
 }
 
@@ -5138,7 +4888,7 @@ collectible_corpse_spawn(origin_target, enemy_char_model_function) {
     ASSERTMSG("collectible_corpse: couldn't GetStruct: '" + origin_target + "'");
   }
   orig.origin = groundpos(orig.origin);
-  corpse = spawn("script_model", orig.origin);
+  corpse = Spawn("script_model", orig.origin);
   corpse.angles = orig.angles;
   corpse[[enemy_char_model_function]]();
   corpse Detach(corpse.gearModel);
@@ -5155,22 +4905,20 @@ collectible_corpse_spawn(origin_target, enemy_char_model_function) {
 MusicPlayWrapper(song, timescale, overrideCheat) {
   level.last_song = song;
   if(!arcadeMode()) {
-    if(!isDefined(timescale)) {
+    if(!isDefined(timescale))
       timescale = true;
-    }
-    if(!isDefined(overrideCheat)) {
+    if(!isDefined(overrideCheat))
       overrideCheat = false;
-    }
     MusicPlay(song, timescale, overrideCheat);
   }
 }
 
 player_is_near_live_grenade() {
-  grenades = getEntArray("grenade", "classname");
-  for(i = 0; i < grenades.size; i++) {
+  grenades = getentarray("grenade", "classname");
+  for (i = 0; i < grenades.size; i++) {
     grenade = grenades[i];
     players = get_players();
-    for(j = 0; j < players.size; j++) {
+    for (j = 0; j < players.size; j++) {
       if(DistanceSquared(grenade.origin, players[j].origin) < 250 * 250) {
         maps\_autosave::auto_save_print("autosave failed: live grenade too close to player " + j);
         return true;
@@ -5188,7 +4936,7 @@ lerp_dvar_value(dvar, value, time) {
   steps = time * 20;
   curr_value = GetDvarFloat(dvar);
   diff = (curr_value - value) / steps;
-  for(i = 0; i < steps; i++) {
+  for (i = 0; i < steps; i++) {
     curr_value = curr_value - diff;
     SetSavedDvar(dvar, curr_value);
     wait(0.05);
@@ -5261,7 +5009,7 @@ get_players() {
 
 get_host() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] GetEntityNumber() == 0) {
       return players[i];
     }
@@ -5278,7 +5026,7 @@ is_coop() {
 
 any_player_IsTouching(ent) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(IsAlive(players[i]) && players[i] IsTouching(ent)) {
       return true;
     }
@@ -5288,7 +5036,7 @@ any_player_IsTouching(ent) {
 
 get_player_touching(ent) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(IsAlive(players[i]) && players[i] IsTouching(ent)) {
       return players[i];
     }
@@ -5321,7 +5069,7 @@ freezecontrols_all(toggle, delay) {
     wait(delay);
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] FreezeControls(toggle);
   }
 }
@@ -5336,7 +5084,7 @@ set_all_players_blur(amount, time) {
   wait_for_first_player();
   flag_wait("all_players_connected");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetBlur(amount, time);
   }
 }
@@ -5345,7 +5093,7 @@ set_all_players_double_vision(amount, time) {
   wait_for_first_player();
   flag_wait("all_players_connected");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetDoubleVision(amount, time);
   }
 }
@@ -5354,7 +5102,7 @@ set_all_players_shock(shellshock_file, time) {
   wait_for_first_player();
   flag_wait("all_players_connected");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] Shellshock(shellshock_file, time);
   }
 }
@@ -5363,14 +5111,14 @@ set_all_players_visionset(vision_file, time) {
   wait_for_first_player();
   flag_wait("all_players_connected");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] VisionSetNaked(vision_file, time);
   }
 }
 
 hide_all_player_models() {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] Hide();
   }
 }
@@ -5378,19 +5126,19 @@ hide_all_player_models() {
 show_all_player_models() {
   flag_wait("all_players_connected");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] Show();
   }
 }
 
 player_flag_wait(msg) {
-  while(!self.flag[msg]) {
+  while (!self.flag[msg]) {
     self waittill(msg);
   }
 }
 
 player_flag_wait_either(flag1, flag2) {
-  for(;;) {
+  for (;;) {
     if(flag(flag1)) {
       return;
     }
@@ -5402,7 +5150,7 @@ player_flag_wait_either(flag1, flag2) {
 }
 
 player_flag_waitopen(msg) {
-  while(self.flag[msg]) {
+  while (self.flag[msg]) {
     self waittill(msg);
   }
 }
@@ -5501,7 +5249,7 @@ getAIarrayTouchingVolume(sTeamName, sVolumeName, eVolume) {
     aTeam = getaiarray(sTeamName);
   }
   aGuysTouchingVolume = [];
-  for(i = 0; i < aTeam.size; i++) {
+  for (i = 0; i < aTeam.size; i++) {
     if(aTeam[i] isTouching(eVolume)) {
       aGuysTouchingVolume[aGuysTouchingVolume.size] = aTeam[i];
     }
@@ -5521,7 +5269,7 @@ registerClientSys(sSysName) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._clientSys[sSysName] = spawnStruct();
+    level._clientSys[sSysName] = spawnstruct();
     level._clientSys[sSysName].sysID = ClientSysRegister(sSysName);
     println("registered client system " + sSysName + " to id " + level._clientSys[sSysName].sysID);
   }
@@ -5578,7 +5326,7 @@ russian_diary_event(outcome) {
 wait_network_frame() {
   snapshot_ids = getsnapshotindexarray();
   acked = undefined;
-  while(!isDefined(acked)) {
+  while (!isDefined(acked)) {
     level waittill("snapacknowledged");
     acked = snapshotacknowledged(snapshot_ids);
   }
@@ -5593,11 +5341,11 @@ clientNotify(event) {
 ok_to_spawn(max_wait_seconds) {
   if(isDefined(max_wait_seconds)) {
     timer = GetTime() + max_wait_seconds * 1000;
-    while(GetTime() < timer && !OkTospawn()) {
+    while (GetTime() < timer && !OkToSpawn()) {
       wait(0.05);
     }
   } else {
-    while(!OkTospawn()) {
+    while (!OkToSpawn()) {
       wait(0.05);
     }
   }
@@ -5608,8 +5356,8 @@ set_breadcrumbs(starts) {
   if(!isDefined(level._player_breadcrumbs)) {
     maps\_callbackglobal::Player_BreadCrumb_Reset((0, 0, 0));
   }
-  for(i = 0; i < 4; i++) {
-    for(j = 0; j < 4; j++) {
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
       level._player_breadcrumbs[i][j].pos = starts[j].origin;
       if(isDefined(starts[j].angles)) {
         level._player_breadcrumbs[i][j].ang = starts[j].angles;
@@ -5625,7 +5373,7 @@ set_breadcrumbs_player_positions() {
     maps\_callbackglobal::Player_BreadCrumb_Reset((0, 0, 0));
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     level._player_breadcrumbs[i][0].pos = players[i].origin;
     level._player_breadcrumbs[i][0].ang = players[i].angles;
   }
@@ -5639,7 +5387,7 @@ trigger_coop_warp(trigger) {
   structs = getstructarray(trigger.target, "targetname");
   structs = array_randomize(structs);
   if(isDefined(trigger.script_linkto)) {
-    for(i = 0; i < structs.size; i++) {
+    for (i = 0; i < structs.size; i++) {
       structs[i].script_linkto = trigger.script_linkto;
     }
   }
@@ -5661,7 +5409,7 @@ trigger_coop_warp(trigger) {
   if(!isDefined(trigger.touchedby)) {
     trigger.touchedby = toucher;
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] == toucher || players[i] IsTouching(safe_trigger)) {
         continue;
       }
@@ -5674,13 +5422,13 @@ trigger_coop_warp(trigger) {
     all_ai = GetAiArray();
     players = get_players();
     avoid_ents = array_combine(all_ai, players);
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(!isDefined(players[i].warp_start) || players[i].warp_start == false) {
         players[i].warp_start = undefined;
         continue;
       }
       warp_struct = undefined;
-      for(q = 0; q < structs.size; q++) {
+      for (q = 0; q < structs.size; q++) {
         if(warp_spot_is_safe(structs[q], avoid_ents)) {
           warp_struct = structs[q];
           warp_struct.used = true;
@@ -5696,18 +5444,17 @@ trigger_coop_warp(trigger) {
       }
     }
     retries = 30;
-    while(retries) {
+    while (retries) {
       players = get_players();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(!isDefined(players[i].no_warp) || players[i] IsTouching(safe_trigger)) {
           players[i].no_warp = undefined;
           continue;
         }
-        if(retries == 1) {
+        if(retries == 1)
           avoid_ents = [];
-        }
         warp_struct = undefined;
-        for(q = 0; q < structs.size; q++) {
+        for (q = 0; q < structs.size; q++) {
           if(warp_spot_is_safe(structs[q], avoid_ents)) {
             warp_struct = structs[q];
             warp_struct.used = true;
@@ -5723,7 +5470,7 @@ trigger_coop_warp(trigger) {
         }
       }
       dudes_needing_warps = players.size;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(!isDefined(players[i].no_warp)) {
           dudes_needing_warps--;
         }
@@ -5735,7 +5482,7 @@ trigger_coop_warp(trigger) {
       retries--;
     }
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       assert(!isDefined(players[i].no_warp));
     }
   }
@@ -5744,12 +5491,12 @@ trigger_coop_warp(trigger) {
 coop_warp_player(struct) {
   pos = playergroundpos(struct.origin);
   if(isDefined(level._effect["warp_fx"])) {
-    playFX(level._effect["warp_fx"], pos + (0, 0, 72));
+    PlayFx(level._effect["warp_fx"], pos + (0, 0, 72));
   }
-  mg42s = getEntArray("misc_mg42", "classname");
-  turrets = getEntArray("misc_turret", "classname");
+  mg42s = GetEntArray("misc_mg42", "classname");
+  turrets = GetEntArray("misc_turret", "classname");
   turrets = array_combine(mg42s, turrets);
-  for(i = 0; i < turrets.size; i++) {
+  for (i = 0; i < turrets.size; i++) {
     ent = turrets[i] getturretowner();
     if(isDefined(ent)) {
       if(ent == self) {
@@ -5782,12 +5529,11 @@ warp_player_start(fade_time) {
   if(!isDefined(self.warp_text)) {
     self EnableInvulnerability();
     self DisableWeapons();
-    hudString = &"GAME_COOP_WARP_PLAYER_HINT";
-    if(GetDvarInt("splitscreen") && !GetDvarInt("hidef")) {
+    hudString = & "GAME_COOP_WARP_PLAYER_HINT";
+    if(GetDvarInt("splitscreen") && !GetDvarInt("hidef"))
       fontScale = 2.5;
-    } else {
+    else
       fontScale = 1.75;
-    }
     self.warp_text = newClientHudElem(self);
     self.warp_text.y = 100;
     self.warp_text.alignX = "center";
@@ -5837,7 +5583,7 @@ warp_spot_is_safe(struct, avoid_ents) {
     return false;
   }
   dist = 40;
-  for(i = 0; i < avoid_ents.size; i++) {
+  for (i = 0; i < avoid_ents.size; i++) {
     if(DistanceSquared(avoid_ents[i].origin, struct.origin) < dist * dist) {
       return false;
     }
@@ -5853,7 +5599,7 @@ warp_a_player(warp_point) {
 }
 
 debug_warp_point() {
-  while(1) {
+  while (1) {
     print3d(self.origin, "+", (0.0, 1.0, 0.0), 1);
     print3d(groundpos(self.origin), "+", (1.0, 0.0, 0.0), 1);
     print3d(playergroundpos(self.origin), "+", (0.0, 0.0, 1.0), 1);
@@ -5864,27 +5610,27 @@ debug_warp_point() {
 spread_array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
   if(isDefined(var3)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1, var2, var3);
       wait_network_frame();
     }
     return;
   }
   if(isDefined(var2)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1, var2);
       wait_network_frame();
     }
     return;
   }
   if(isDefined(var1)) {
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1);
       wait_network_frame();
     }
     return;
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     entities[keys[i]] thread[[process]]();
     wait_network_frame();
   }

@@ -16,8 +16,8 @@ premain() {
 }
 
 teller_fx_setup(localclientnum) {
-  playFX(localclientnum, level._effect["elevator_glint"], (2232.68, 569.287, 1312), (0, 0, 1));
-  playFX(localclientnum, level._effect["elevator_glint"], (2264.36, 623.991, 1312), (0, 0, 1));
+  playfx(localclientnum, level._effect["elevator_glint"], (2232.68, 569.287, 1312), (0, 0, 1));
+  playfx(localclientnum, level._effect["elevator_glint"], (2264.36, 623.991, 1312), (0, 0, 1));
 }
 
 #using_animtree("zombie_perk_elevator");
@@ -35,11 +35,10 @@ floor_indicators(localclientnum) {
   floors = array("3d", "3b", "3", "3c", "1d", "1c", "1b");
 
   foreach(floor in floors) {
-    indicators = getEntArray(localclientnum, "elevator_bldg" + floor + "_indicator", "targetname");
+    indicators = getentarray(localclientnum, "elevator_bldg" + floor + "_indicator", "targetname");
 
-    if(isDefined(indicators) && indicators.size > 0) {
+    if(isDefined(indicators) && indicators.size > 0)
       level thread floor_indicator(localclientnum, indicators, floor);
-    }
   }
 }
 
@@ -47,12 +46,11 @@ floor_indicators_remove(localclientnum) {
   floors = array("3d", "3b", "3", "3c", "1d", "1c", "1b");
 
   foreach(floor in floors) {
-    indicators = getEntArray(localclientnum, "elevator_bldg" + floor + "_indicator", "targetname");
+    indicators = getentarray(localclientnum, "elevator_bldg" + floor + "_indicator", "targetname");
     level notify("kill_floor_indicators_" + localclientnum);
 
-    foreach(indicator in indicators) {
-      indicator delete();
-    }
+    foreach(indicator in indicators)
+    indicator delete();
   }
 }
 
@@ -65,16 +63,14 @@ floor_indicator(clientnum, indicators, floorname) {
     new_indicators = [];
     floor_fx = level._effect["perk_elevator_indicator_down"];
 
-    if(event == floorname + "_u") {
+    if(event == floorname + "_u")
       floor_fx = level._effect["perk_elevator_indicator_up"];
-    }
 
     foreach(indicator in indicators) {
-      if(isDefined(indicator.arrow_fx)) {
+      if(isDefined(indicator.arrow_fx))
         stopfx(clientnum, indicator.arrow_fx);
-      }
 
-      indicator.arrow_fx = playFXOnTag(clientnum, floor_fx, indicator, "tag_origin");
+      indicator.arrow_fx = playfxontag(clientnum, floor_fx, indicator, "tag_origin");
     }
   }
 }
@@ -88,39 +84,35 @@ init_escape_elevators_animtree() {
 escape_pod_tell_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("escape_pod_tell_fx called on local client " + localclientnum);
 
-  if(newval == 1) {
-    self.tell_fx = playFXOnTag(localclientnum, level._effect["elevator_tell"], self, "tag_origin");
-  } else if(isDefined(self.tell_fx)) {
+  if(newval == 1)
+    self.tell_fx = playfxontag(localclientnum, level._effect["elevator_tell"], self, "tag_origin");
+  else if(isDefined(self.tell_fx))
     stopfx(localclientnum, self.tell_fx);
-  }
 }
 
 escape_pod_sparks_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("escape_pod_sparks_fx called on local client " + localclientnum);
 
-  if(newval == 1) {
-    self.sparks_fx = playFXOnTag(localclientnum, level._effect["elevator_sparks"], self, "tag_origin");
-  } else if(isDefined(self.sparks_fx)) {
+  if(newval == 1)
+    self.sparks_fx = playfxontag(localclientnum, level._effect["elevator_sparks"], self, "tag_origin");
+  else if(isDefined(self.sparks_fx))
     stopfx(localclientnum, self.sparks_fx);
-  }
 }
 
 escape_pod_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("escape_pod_impact_fx called on local client " + localclientnum);
 
-  if(newval == 1) {
-    self.impact_fx = playFXOnTag(localclientnum, level._effect["elevator_impact"], self, "tag_origin");
-  } else if(isDefined(self.impact_fx)) {
+  if(newval == 1)
+    self.impact_fx = playfxontag(localclientnum, level._effect["elevator_impact"], self, "tag_origin");
+  else if(isDefined(self.impact_fx))
     stopfx(localclientnum, self.impact_fx);
-  }
 }
 
 escape_pod_light_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("escape_pod_light_fx called on local client " + localclientnum);
 
-  if(newval == 1) {
-    self.light_fx = playFXOnTag(localclientnum, level._effect["elevator_light"], self, "tag_animate");
-  } else if(isDefined(self.light_fx)) {
+  if(newval == 1)
+    self.light_fx = playfxontag(localclientnum, level._effect["elevator_light"], self, "tag_animate");
+  else if(isDefined(self.light_fx))
     stopfx(localclientnum, self.light_fx);
-  }
 }

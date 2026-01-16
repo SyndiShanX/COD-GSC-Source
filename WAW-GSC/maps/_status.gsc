@@ -172,7 +172,7 @@ task(type, name, main_task, sub_task, days, percent, note) {
   if(isDefined(main_task)) {
     if(isDefined(sub_task)) {
       size = level._tasks[type][main_task]["sub_tasks"].size;
-      for(i = 0; i < size; i++) {
+      for (i = 0; i < size; i++) {
         if(level._tasks[type][main_task]["sub_tasks"][i]["name"] == sub_task) {
           size2 = level._tasks[type][main_task]["sub_tasks"][i]["sub_tasks"].size;
           array["days"] = -1;
@@ -208,7 +208,7 @@ update_percent(type, main_task, sub_task) {
   if(isDefined(sub_task)) {
     index = undefined;
     size = level._tasks[type][main_task]["sub_tasks"].size;
-    for(i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
       if(level._tasks[type][main_task]["sub_tasks"][i]["name"] == sub_task) {
         index = i;
         break;
@@ -216,7 +216,7 @@ update_percent(type, main_task, sub_task) {
     }
     size = level._tasks[type][main_task]["sub_tasks"][index]["sub_tasks"].size;
     accum = 0;
-    for(i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
       accum += level._tasks[type][main_task]["sub_tasks"][index]["sub_tasks"][i]["percent"];
     }
     percent = accum / size;
@@ -225,7 +225,7 @@ update_percent(type, main_task, sub_task) {
   }
   size = level._tasks[type][main_task]["sub_tasks"].size;
   accum = 0;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     accum += level._tasks[type][main_task]["sub_tasks"][i]["percent"];
   }
   percent = accum / size;
@@ -236,7 +236,7 @@ update_percent(type, main_task, sub_task) {
 update_days(type, main_task) {
   size = level._tasks[type][main_task]["sub_tasks"].size;
   accum = 0;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     accum += level._tasks[type][main_task]["sub_tasks"][i]["days"];
   }
   level._tasks[type][main_task]["days"] = accum;
@@ -250,7 +250,7 @@ set_start_day(type, main_task) {
   index = -1;
   if(isDefined(level._tasks[type]["all_tasks"])) {
     size = level._tasks[type]["all_tasks"].size;
-    for(i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
       if(level._tasks[type]["all_tasks"][i] == main_task) {
         index = i;
         break;
@@ -260,7 +260,7 @@ set_start_day(type, main_task) {
   if(index > 0) {
     previous_name = level._tasks[type]["all_tasks"][index - 1];
     level._tasks[type][main_task]["start_day"] = date_to_day(level._tasks[type][previous_name]["due_date"]) + 1;
-    while(is_day_off(level._tasks[type][main_task]["start_day"])) {
+    while (is_day_off(level._tasks[type][main_task]["start_day"])) {
       level._tasks[type][main_task]["start_day"]++;
     }
   } else {
@@ -287,7 +287,7 @@ show_task_thread(name) {
   }
   old_type = "none";
   old_dvar = "none";
-  while(1) {
+  while (1) {
     if(old_type != GetDvar("status_show")) {
       type = GetDvar("status_show");
       if(type != "off") {
@@ -388,7 +388,7 @@ date_to_day(date) {
   new_str = "";
   i_start = 0;
   count = 0;
-  for(i = 0; i < date.size; i++) {
+  for (i = 0; i < date.size; i++) {
     if(date[i] == " ") {
       count++;
       if(count == 2) {
@@ -403,7 +403,7 @@ date_to_day(date) {
   day_num = int(new_str);
   month_num = get_month_number(date);
   year_day = 0;
-  for(i = 1; i < month_num; i++) {
+  for (i = 1; i < month_num; i++) {
     year_day += month_days(i);
   }
   year_day += day_num;
@@ -412,7 +412,7 @@ date_to_day(date) {
 
 get_due_day(start_day, days) {
   due_day = start_day + (days - 1);
-  for(i = 0; i < days; i++) {
+  for (i = 0; i < days; i++) {
     if(is_day_off(start_day + i)) {
       due_day += 1;
       days += 1;
@@ -443,7 +443,7 @@ day_to_date(day, just_day_number) {
     just_day_number = false;
   }
   year = get_year();
-  while(1) {
+  while (1) {
     if(day > days_in_year(year)) {
       day = day - days_in_year(year);
       year++;
@@ -453,7 +453,7 @@ day_to_date(day, just_day_number) {
   }
   date = 1;
   date_string = "";
-  for(i = 1; i < 13; i++) {
+  for (i = 1; i < 13; i++) {
     if(day > days_in_year(get_year())) {
       date_string = date_string + get_month_string(i) + " " + day + " " + year;
     } else {
@@ -474,7 +474,7 @@ day_to_date(day, just_day_number) {
 
 get_month_number(date) {
   new_str = "";
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     new_str = new_str + date[i];
   }
   num = -1;
@@ -585,7 +585,7 @@ get_year() {
   date = GetDate();
   new_str = "";
   count = 2;
-  for(i = 0; i < date.size; i++) {
+  for (i = 0; i < date.size; i++) {
     if(date[i] == " " && count > 0) {
       count--;
       continue;
@@ -600,7 +600,7 @@ get_year() {
 show_subtasks(hud_name, sub_tasks, x) {
   x += 25;
   if(isDefined(sub_tasks) && sub_tasks.size > 0) {
-    for(i = 0; i < sub_tasks.size; i++) {
+    for (i = 0; i < sub_tasks.size; i++) {
       level._status_y += 12;
       new_hud(hud_name, sub_tasks[i]["display"], x, level._status_y, undefined, hud_color(sub_tasks[i]["percent"]));
       show_subtasks(hud_name, sub_tasks[i]["sub_tasks"], x);
@@ -636,7 +636,7 @@ remove_hud(hud_name) {
     return;
   }
   huds = level.hud_array[hud_name];
-  for(i = 0; i < huds.size; i++) {
+  for (i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
   }
   level.hud_array[hud_name] = undefined;
@@ -678,7 +678,7 @@ set_hudelem(text, x, y, scale, alpha, color) {
 
 export_status_thread() {
   SetDvar("status_export", "none");
-  while(1) {
+  while (1) {
     dvar = GetDvar("status_export");
     if(dvar == "none") {
       wait(1);
@@ -754,12 +754,12 @@ write_gantt_chart(file) {
   tab = "";
   size = level._task_types.size;
   use_odd = true;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     type = level._task_types[i];
     write_gantt_chart_header(file, type);
     tasks = level._tasks[type]["all_tasks"].size;
     task_num = 0;
-    for(q = 0; q < tasks; q++) {
+    for (q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
       if(use_odd) {
         use_odd = false;
@@ -788,20 +788,20 @@ write_gantt_chart(file) {
     fprintln(file, tab + tab + tab + tab + tab + "<table style= \"width: " + overall_width + "px; cellspacing=\"0\" cellpadding=\"0\" border=\"1\">");
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"header\" align=\"left\">");
     weeks = int(days / 7);
-    for(i = 0; i < weeks; i++) {
+    for (i = 0; i < weeks; i++) {
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th align=\"center\" colspan=\"5\">" + "Week #" + (i + 1) + "</th>");
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th colspan=\"2\"></th>");
     }
     fprintln(file, tab + tab + tab + tab + tab + tab + "</tr>");
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"header\" align=\"left\">");
     start = date_to_day(level._task_start_date);
-    for(i = 0; i < days; i++) {
+    for (i = 0; i < days; i++) {
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th class=\"gantt-day-header\" align=\"center\">" + day_to_date(start + i, true) + "</th>");
     }
     fprintln(file, tab + tab + tab + tab + tab + tab + "</tr>");
     use_odd = true;
     columns = days;
-    for(q = 0; q < tasks; q++) {
+    for (q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
       if(use_odd) {
         use_odd = false;
@@ -917,12 +917,12 @@ write_tasks(file) {
   tab = "";
   size = level._task_types.size;
   use_odd = true;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     type = level._task_types[i];
     write_task_header(file, type);
     tasks = level._tasks[type]["all_tasks"].size;
     task_num = 0;
-    for(q = 0; q < tasks; q++) {
+    for (q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
       if(use_odd) {
         use_odd = false;
@@ -933,7 +933,7 @@ write_tasks(file) {
       task_num++;
       level._tasks[type][main_task]["quote"] = get_status_quote(type, main_task);
       write_task_row(file, level._tasks[type][main_task], task_num, use_odd, 0, sub_tasks > 0);
-      for(m = 0; m < sub_tasks; m++) {
+      for (m = 0; m < sub_tasks; m++) {
         if(use_odd) {
           use_odd = false;
         } else {
@@ -942,7 +942,7 @@ write_tasks(file) {
         micro_tasks = level._tasks[type][main_task]["sub_tasks"][m]["sub_tasks"].size;
         task_num++;
         write_task_row(file, level._tasks[type][main_task]["sub_tasks"][m], task_num, use_odd, 18, micro_tasks > 0);
-        for(t = 0; t < micro_tasks; t++) {
+        for (t = 0; t < micro_tasks; t++) {
           if(use_odd) {
             use_odd = false;
           } else {
@@ -1266,7 +1266,7 @@ save_complete(msg) {
 }
 
 check_for_dupes(array, single) {
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     if(array[i] == single) {
       return false;
     }

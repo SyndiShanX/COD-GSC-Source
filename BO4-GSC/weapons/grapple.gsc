@@ -9,6 +9,7 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace grapple;
 
 autoexec __init__system__() {
@@ -45,7 +46,7 @@ function_8fa5ff65() {
 }
 
 function_9dd08ccf() {
-  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "changed_specialist");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist");
 
   while(isDefined(self)) {
     self waittill(#"grapple_cancel");

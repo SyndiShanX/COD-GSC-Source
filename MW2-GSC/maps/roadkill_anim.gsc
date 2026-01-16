@@ -60,6 +60,10 @@ main() {
   level.scr_anim["shepherd"]["angry_walk"] = % roadkill_shepherd_walk;
   level.scr_anim["shepherd"]["angry_wander"] = % roadkill_shepherd_shout_sequence;
 
+
+
+
+
   //level.scr_anim[ "shepherd" ][ "walk" ] 							= %civilian_walk_hurried_2;
 
   // Gentlemen, good work on taking the town!	
@@ -190,6 +194,7 @@ main() {
   level.scr_anim["generic"]["killhouse_gaz_idleB_solo"] = % killhouse_gaz_idleB;
   level.scr_anim["generic"]["killhouse_sas_price_idle_solo"] = % killhouse_sas_price_idle;
 
+
   /*
   level.scr_anim[ "generic" ][ "step_idle" ][ 0 ]		 = %unarmed_waving_startidle;
   level.scr_anim[ "generic" ][ "step_out" ]			 = %unarmed_waving_stepout;
@@ -220,6 +225,7 @@ main() {
   level.scr_anim["generic"]["humvee_turret_flinchA"] = % humvee_turret_flinchA;
   level.scr_anim["generic"]["humvee_turret_flinchB"] = % humvee_turret_flinchB;
   level.scr_anim["generic"]["humvee_turret_rechamber"] = % humvee_turret_rechamber;
+
 }
 
 enable_lookat(guy) {
@@ -231,18 +237,16 @@ disable_lookat(guy) {
 }
 
 detach_binoc(guy) {
-  if(!isDefined(guy.binoc)) {
+  if(!isdefined(guy.binoc))
     return;
-  }
 
   guy Detach("weapon_binocular", "tag_inhand");
   guy.binoc = undefined;
 }
 
 attach_binoc(guy) {
-  if(isDefined(guy.binoc)) {
+  if(IsDefined(guy.binoc))
     return;
-  }
 
   guy Attach("weapon_binocular", "tag_inhand");
   guy.binoc = true;
@@ -267,14 +271,14 @@ shepherd_points_at_player() {
   right_anim = self getanim("ending_additive_right");
   range = 45;
 
-  for(;;) {
+  for (;;) {
     animation = self getanim("ending");
     //self SetAnim( animation, 1, 0, 0.1 );
 
     right = AnglesToRight(self.angles);
     othervec = VectorNormalize(level.player.origin - self.origin);
 
-    forward = anglesToForward(self.angles);
+    forward = AnglesToForward(self.angles);
     right = AnglesToRight(self.angles);
 
     forward_dot = VectorDot(forward, othervec);
@@ -290,25 +294,23 @@ shepherd_points_at_player() {
 
     weight = 0;
     if(right_dot > 0) {
-      if(degrees > range) {
+      if(degrees > range)
         degrees = range;
-      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 0, 0.2, 1);
       self SetAnim(right_anim, 1, 0.2, 1);
     } else {
       degrees += 10;
-      if(degrees > range) {
+      if(degrees > range)
         degrees = range;
-      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 1, 0.2, 1);
       self SetAnim(right_anim, 0, 0.2, 1);
     }
 
-    if(isDefined(self.pointing)) {
+    if(isdefined(self.pointing)) {
       if(abs(weight) >= 1) {
         self SetLookAtEntity(level.player);
         //iprintln( 1 );
@@ -319,7 +321,7 @@ shepherd_points_at_player() {
 
     self SetAnim(controller, weight, 0.2, 1);
 
-    //forward = anglesToForward( self.angles );
+    //forward = AnglesToForward( self.angles );
     //Line( self.origin, self.origin + forward * 150, (1,0,0) );
     //Line( self.origin, level.player.origin, (1,1,1) );
     //Print3d( self.origin, degrees, (1,1,0), 1, 1 );
@@ -349,7 +351,7 @@ foley_m203(foley) {
   start = foley GetTagOrigin("tag_flash");
   angles = foley GetTagAngles("tag_flash");
 
-  playFXOnTag(effect, foley, "tag_flash");
+  PlayFXOnTag(effect, foley, "tag_flash");
   //shootpos = foley.enemy GetShootAtPos() + ( 0, 0, 190 );
   shootpos = (-1734, -1205, 740);
   MagicBullet("m203", start, shootpos);
@@ -371,6 +373,7 @@ roadkill_player_anims() {
   level.scr_model["player_rig"] = "viewhands_player_us_army";
 
   level.scr_anim["player_rig"]["player_shep_intro"] = % roadkill_intro_pickup_player;
+
 }
 
 #using_animtree("vehicles");
@@ -396,6 +399,7 @@ bridge_layer() {
 
   level.scr_anim["technical"]["technical_pushed"] = % roadkill_pickup_technical_pushed;
   level.scr_animtree["technical"] = #animtree;
+
 }
 
 intro_explosion(foley) {
@@ -407,9 +411,9 @@ roadkill_dialogue() {
   /*
   Shepherd: I don't care how many rpgs they have. The time line dictates that we cross this river in 4 minutes, and we will be on time.
   Foley: Yes sir. (Foley whistles up at the bridge and signals for them to start).
-  	
+	
   Foley: Hunter two! Keep the pressure on the rpg teams. If the bridge layer gets hit, shepherd will make us swim.
-  	
+	
   Foley: Up there! They're making a push for the bridge layer! Beat them back!
   Foley: They're retreating, keep hitting them!
   Foley: Hunter two! The bridge is finished, we're oscar mike! Move out!
@@ -418,20 +422,20 @@ roadkill_dialogue() {
   Dunn: Weren't you listening? Shepherd called in a major fire mission.
   AR3: Won't that be danger close for the task force?
   Dunn: Since when does Shepherd care about danger close?
-  	
+	
   <Coughing sounds>
-  	
+	
   later at the end of the ride:
   Straight ahead, top floor, he's got an RPG!
 
   in school:
   Hunter 2-3, We're in the school. Heavy resistance.
   Copy that hunter 2-1.
-  	
+	
   Upstairs:
   "I'm cutting through history class."
   "Roger that."
-  	
+	
   */
 
   /*
@@ -441,13 +445,13 @@ roadkill_dialogue() {
 
   // Brodsky, use your Javelin to take out the armor!	
   level.scr_sound[ "generic" ][ "roadkill_fly_takeoutarmor" ] = "roadkill_fly_takeoutarmor";
-  	
+	
   // Brodsky, switch to your Javelin!	
   level.scr_sound[ "generic" ][ "roadkill_fly_switchtojavelin" ] = "roadkill_fly_switchtojavelin";
-  	
+	
   // Engage that armored vehicle across the river! 	
   level.scr_sound[ "generic" ][ "roadkill_fly_acrossriver" ] = "roadkill_fly_acrossriver";
-  	
+	
   // Target that armored vehicle with your Javelin!	
   level.scr_sound[ "generic" ][ "roadkill_fly_targetvehicle" ] = "roadkill_fly_targetvehicle";
 
@@ -457,41 +461,41 @@ roadkill_dialogue() {
   // Brodsky - good job on taking out the enemy armor. Now let's get over there and take that town.	
   level.scr_sound[ "generic" ][ "roadkill_shp_taketown" ] = "roadkill_shp_taketown";
 
-  	
+	
   // Hu-ahh!! What was that, a 1000 pounder?	
   level.scr_sound[ "generic" ][ "roadkill_ar3_whatwasthat" ] = "roadkill_ar3_whatwasthat";
-  	
+	
   // I dunno but damn that was kick ass, huah?	
   level.scr_sound[ "generic" ][ "roadkill_ar4_idunno" ] = "roadkill_ar4_idunno";
-  	
+	
   // Goliath Actual to Hunter 2-1, what's going on out there, over?	
   level.scr_radio[ "roadkill_ar3_goingon" ] = "roadkill_ar3_goingon";
-  	
+	
   // Hunter 2-1 to Goliath Actual, we took fire and were separated from Hunter 2-3! We're working our way back around, over!	
   level.scr_sound[ "generic" ][ "roadkill_fly_tookfire" ] = "roadkill_fly_tookfire";
-  	
+	
   // Goliath Actual solid copy.	
   level.scr_radio[ "roadkill_ar3_solidcopy" ] = "roadkill_ar3_solidcopy";
-  	
+	
 
   // Wonder what's got him all worked up?	
   level.scr_sound[ "generic" ][ "roadkill_cpd_allworkedup" ] = "roadkill_cpd_allworkedup";
-  	
+	
   // Stop stop stop!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_stopstopstop" ] = "roadkill_cpd_stopstopstop";
 
   // What's going on?	
   level.scr_sound[ "generic" ][ "roadkill_fly_whatsgoingon" ] = "roadkill_fly_whatsgoingon";
-  	
+	
   // We're being shot at!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_beingshotat" ] = "roadkill_cpd_beingshotat";
-  	
+	
   // Quick, he's getting away!	
   level.scr_sound[ "generic" ][ "roadkill_ar1_gettingaway" ] = "roadkill_ar1_gettingaway";
-  	
+	
   // You got him you got him!	
   level.scr_sound[ "generic" ][ "roadkill_ar1_yougothim" ] = "roadkill_ar1_yougothim";
-  	
+	
   // Nice, nice!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_nicenice" ] = "roadkill_cpd_nicenice";
 
@@ -500,8 +504,8 @@ roadkill_dialogue() {
 
   // Nevermind, Allen handled it	
   level.scr_sound[ "generic" ][ "roadkill_cpd_handledit" ] = "roadkill_cpd_handledit";
-  	
-  	
+	
+	
   */
 
   // Allen! Switch to your M203!			
@@ -512,6 +516,7 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_fly_10oclockhigh"] = "roadkill_fly_10oclockhigh";
   // Up there on the bridge!!!				
   level.scr_sound["generic"]["roadkill_fly_onthebridge"] = "roadkill_fly_onthebridge";
+
 
   // I don't care how many rpgs they have - the time line dictates that we cross this river in four minutes, and we will be on time.	
   level.scr_sound["generic"]["roadkill_shp_dontcare"] = "roadkill_shp_dontcare";
@@ -532,14 +537,17 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_fly_bridgecomplete"] = "roadkill_fly_bridgecomplete";
   level.scr_face["generic"]["roadkill_fly_bridgecomplete"] = % roadkill_fly_bridgecomplete;
 
-  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white,
+
+
+
+  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white, 
   // twelve story apartment building occupied by hostile forces, over!
   level.scr_sound["generic"]["roadkill_cpd_airstrike"] = "roadkill_cpd_airstrike";
 
   // Hunter 2-1, this is Warlord, solid copy, uh, I have Devil 1-1, flight of two F-15s, on the line, standby for relay.	
   level.scr_radio["roadkill_auc_ontheline"] = "roadkill_auc_ontheline";
 
-  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes,
+  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes, 
   // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
   level.scr_radio["roadkill_fp1_devil11"] = "roadkill_fp1_devil11";
 
@@ -572,6 +580,8 @@ roadkill_dialogue() {
 
   // Since when does Shepherd care about danger close?	
   level.scr_sound["generic"]["roadkill_cpd_sincewhen"] = "roadkill_cpd_sincewhen";
+
+
 
   // Huah!! Get some!	
   level.scr_sound["generic"]["roadkill_cpd_getsome"] = "roadkill_cpd_getsome";
@@ -607,6 +617,7 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_gar_cough4"] = "roadkill_gar_cough4";
   level.scr_sound["generic"]["roadkill_gar_cough5"] = "roadkill_gar_cough5";
   level.scr_sound["generic"]["roadkill_gar_cough6"] = "roadkill_gar_cough6";
+
 
   // We're movin' out!!	
   level.scr_sound["generic"]["roadkill_cpd_movinout"] = "roadkill_cpd_movinout";
@@ -647,6 +658,7 @@ roadkill_dialogue() {
   // Brodsky, move your ass, let's go!	
   level.scr_sound["generic"]["roadkill_fly_moveletsgo"] = "roadkill_fly_moveletsgo";
 
+
   // Hunter two breaking away.	
   level.scr_sound["generic"]["roadkill_fly_breakingaway"] = "roadkill_fly_breakingaway";
 
@@ -671,6 +683,8 @@ roadkill_dialogue() {
   // Doesn’t mean you can shoot him.	
   level.scr_sound["generic"]["roadkill_fly_doesntmean"] = "roadkill_fly_doesntmean";
 
+
+
   // Allen, what are you shooting at, there's nothing there! Cease fire!	
   level.scr_sound["generic"]["roadkill_fly_nothingthere"] = "roadkill_fly_nothingthere";
 
@@ -679,6 +693,9 @@ roadkill_dialogue() {
 
   // Allen! Cease fire!	
   level.scr_sound["generic"]["roadkill_fly_ceasefire"] = "roadkill_fly_ceasefire";
+
+
+
 
   // Watch your sector!	
   level.scr_sound["generic"]["roadkill_fly_watchsector"] = "roadkill_fly_watchsector";
@@ -689,13 +706,17 @@ roadkill_dialogue() {
   // Stay frosty!	
   level.scr_sound["generic"]["roadkill_fly_stayfrosty"] = "roadkill_fly_stayfrosty";
 
+
   //school_convert_color_trigger
+
 
   // Eyes forward, Allen. Look alive.	
   level.scr_sound["generic"]["roadkill_fly_eyesforward"] = "roadkill_fly_eyesforward";
 
   // Watch the alleys.	
   level.scr_sound["generic"]["roadkill_fly_watchalleys"] = "roadkill_fly_watchalleys";
+
+
 
   // Contact 12 o clock!	
   level.scr_sound["generic"]["roadkill_cpd_contact12"] = "roadkill_cpd_contact12";
@@ -732,6 +753,7 @@ roadkill_dialogue() {
   // We need to get off the street!	
   level.scr_sound["generic"]["roadkill_fly_getoffstreet"] = "roadkill_fly_getoffstreet";
 
+
   // Follow me let's go!	
   level.scr_sound["generic"]["roadkill_fly_followme"] = "roadkill_fly_followme";
 
@@ -756,6 +778,8 @@ roadkill_dialogue() {
   // Keep it together 2-3! We're on the way! 2-1 out!		
   level.scr_sound["generic"]["roadkill_fly_keepittogether"] = "roadkill_fly_keepittogether";
 
+
+
   // Hunter 2-3, Hunter 2-1, we're in the school. Heavy resistance.	
   level.scr_sound["generic"]["roadkill_fly_intheschool"] = "roadkill_fly_intheschool";
 
@@ -777,8 +801,10 @@ roadkill_dialogue() {
   // Taaargeets, front of the school!! Take 'em out!!!	
   level.scr_sound["generic"]["roadkill_cpd_frontofschool"] = "roadkill_cpd_frontofschool";
 
+
   // Watch it! Some of 'em just went in that classroom on the right!	
   level.scr_sound["generic"]["roadkill_cpd_classonright"] = "roadkill_cpd_classonright";
+
 
   // Hunter 2-1 this is Hunter 2-3, thanks for the assist! We're leaving on Hunter Three's humvee, over!
   level.scr_sound["generic"]["roadkill_shp_thanksforassist"] = "roadkill_shp_thanksforassist";
@@ -786,6 +812,7 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_fly_allthewaysir"] = "roadkill_fly_allthewaysir";
   // We'll see you on the flipside Hunter 2-1, 2-3 out.				
   level.scr_sound["generic"]["roadkill_shp_alltheway"] = "roadkill_shp_alltheway";
+
 
   // Keep moving! General Shepherd's on board Hunter 2-3! We need to take the pressure off those humvees!	
   level.scr_sound["generic"]["roadkill_fly_pressureoff"] = "roadkill_fly_pressureoff";
@@ -830,6 +857,7 @@ roadkill_dialogue() {
   // Private Allen, you'll be taking orders from me from now on. I'll brief you on the chopper. Let's go.	
   level.scr_sound["generic"]["roadkill_shp_specialop"] = "roadkill_shp_specialop";
 
+
   // Anybody got a spare MRE?	
   level.scr_sound["generic"]["roadkill_ar1_sparemre"] = "roadkill_ar1_sparemre";
 
@@ -842,8 +870,12 @@ roadkill_dialogue() {
   // I want that Mark 19 up and running in five mikes!	
   level.scr_sound["generic"]["roadkill_ar4_upandrunning"] = "roadkill_ar4_upandrunning";
 
+
+
   // Private Allen! Get on the line! Rangers lead the way!	
   level.scr_sound["generic"]["roadkill_shp_ontheline"] = "roadkill_shp_ontheline";
+
+
 
   // Which building is it sir?	
   level.scr_sound["generic"]["roadkill_ar1_whichbuilding"] = "roadkill_ar1_whichbuilding";
@@ -995,43 +1027,43 @@ roadkill_dialogue() {
   /*
   // Shot. Nine o'clock. Three hundred twenty six meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Twelve o'clock. One hundred fifteen meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Three o'clock. Three hundred fifty seven meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Six o'clock. Three hundred eighty one meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Seven o'clock. One hundred ten meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Six o'clock. Four hundred twenty three meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Eleven o'clock. One hundred eight meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Twelve o'clock. Eighty six meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Nine o'clock. Two hundred eighty five meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Six o'clock. Five hundred sixty meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Seven o'clock. Two hundred fifty two meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Nine o'clock. Three hundred eighty one meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Nine o'clock. Three hundred thirty two meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-  	
+	
   // Shot. Three o'clock. Two hundred seventy seven meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
   */
@@ -1080,6 +1112,7 @@ roadkill_dialogue() {
 
   // Get us outta here! Drive!	
   level.scr_sound["generic"]["roadkill_cpd_outtahere"] = "roadkill_cpd_outtahere";
+
 
   // Shot. Nine o'clock. Three hundred twenty six meters.	
   level.scr_sound["generic"]["roadkill_bmr_9_326"] = "roadkill_bmr_9_326";
@@ -1135,6 +1168,7 @@ roadkill_dialogue() {
   // They're going for the bridge-layer!!		
   level.scr_sound["generic"]["roadkill_cpd_bridgelayer"] = "roadkill_cpd_bridgelayer";
 
+
   // Look! Look! The building's goin' down! (ad lib)	
   level.scr_sound["generic"]["roadkill_cpd_looklook"] = "roadkill_cpd_looklook";
   // Yeahhhh..haha...it's down man...damnnn (ad lib)		
@@ -1154,88 +1188,93 @@ roadkill_dialogue() {
   // Get a flashbang in there!	
   level.scr_sound["generic"]["roadkill_fly_getflashbang"] = "roadkill_fly_getflashbang";
 
+
   /*
-  	
-  	
-  	
-  	
-  	
-  	
-  	hold your dispersion
-  	hitman 2 says alpha cleared this town under heavy fire
-  	no causies were reported
-  	bro why'd they shoot at us
-  	contact right
-  	here we go boys
-  	yeah, happy birthday
-  	try not to get shot in the face
-  	
-  	2nd floor balcony, shoot that mfucker
-  	I'm losing her
-  	don't leave me
-  	shoot that fucking gunner
-  	hit that building
-  	
-  	increase the rate of fire
-  	get some get some
-  	gogogogogo
-  	
-  	slow down
-  	fuck mark nineteen's down
-  	I got one, saw his knee explode
-  	
-  	
-  	
-  	contact 12 o clock!
+	
+	
+	
+	
+	
+	
+	hold your dispersion
+	hitman 2 says alpha cleared this town under heavy fire
+	no causies were reported
+	bro why'd they shoot at us
+	contact right
+	here we go boys
+	yeah, happy birthday
+	try not to get shot in the face
+	
+	2nd floor balcony, shoot that mfucker
+	I'm losing her
+	don't leave me
+	shoot that fucking gunner
+	hit that building
+	
+	increase the rate of fire
+	get some get some
+	gogogogogo
+	
+	slow down
+	fuck mark nineteen's down
+	I got one, saw his knee explode
+	
+	
+	
+	contact 12 o clock!
 
-  	//Here we go boys!
-  	Floor it, we're sitting ducks out here!
-  	
-  	Slow down, we're getting strung out!
-  	
-  	Hitman 2, this is Hitman-3 interrogative, our humvee got shot up and we're cut off from you, over.
-  	
-  	Solid copy hitman-3, hang tight, we'll make our way back to you, over.
-  	
-  	Hitman 2 solid copy.
-  	
-  	Assassin Actual to hitman 2, what's going on out there?
-  	
-  	Hitman 2 to Assassin Actual, we took fire got separated from hitman 3. We're working our way back around, over.
-  	
-  	Assassin 2 solid copy.
-  	
-  	We're cut off! (Enemy technical rams into the convoy)
-  	Push through!
-  	
-  	
-  	
-  	Hitman 3, this is hitman 2, give me a sitrep over.
-  	
-  	Hitman 3 copies, we're taking cover behind our disabled vehicles, over.
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	Hitman 2 to Assassin Actual, over.
-  	This is Assassin Actual, send traffic over.
-  	Interrogative, we're taking small arms fire from multiple targets over.
-  	
+	//Here we go boys!
+	Floor it, we're sitting ducks out here!
+	
+	Slow down, we're getting strung out!
+	
+	Hitman 2, this is Hitman-3 interrogative, our humvee got shot up and we're cut off from you, over.
+	
+	Solid copy hitman-3, hang tight, we'll make our way back to you, over.
+	
+	Hitman 2 solid copy.
+	
+	Assassin Actual to hitman 2, what's going on out there?
+	
+	Hitman 2 to Assassin Actual, we took fire got separated from hitman 3. We're working our way back around, over.
+	
+	Assassin 2 solid copy.
+	
+	We're cut off! (Enemy technical rams into the convoy)
+	Push through!
+	
+	
+	
+	Hitman 3, this is hitman 2, give me a sitrep over.
+	
+	Hitman 3 copies, we're taking cover behind our disabled vehicles, over.
+	
+	
+	
+	
+	
+	
+	
+	Hitman 2 to Assassin Actual, over.
+	This is Assassin Actual, send traffic over.
+	Interrogative, we're taking small arms fire from multiple targets over.
+	
 
-  After first jav kill:
-  Good work Brodsky. Keep it up, there are two more armored vehicles moving in.
 
-  After second jav kill:
-  Nice one Brodsky.
 
-  Last jav kill:
-  That's the last of the armored vehicles sir.
+After first jav kill:
+Good work Brodsky. Keep it up, there are two more armored vehicles moving in. 
 
-  They called in a 1000 pounder!
+After second jav kill:
+Nice one Brodsky.
 
-  		
-  	*/
+Last jav kill:
+That's the last of the armored vehicles sir.
+
+
+They called in a 1000 pounder!
+
+
+		
+	*/
 }

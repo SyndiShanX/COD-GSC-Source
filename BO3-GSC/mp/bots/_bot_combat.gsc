@@ -44,10 +44,10 @@ function mp_pre_combat() {
 }
 
 function mp_post_combat() {
-  if(!isDefined(level.dogtags)) {
+  if(!isdefined(level.dogtags)) {
     return;
   }
-  if(isDefined(self.bot.goaltag)) {
+  if(isdefined(self.bot.goaltag)) {
     if(!self.bot.goaltag gameobjects::can_interact_with(self)) {
       self.bot.goaltag = undefined;
       if(!self has_threat() && self botgoalset()) {
@@ -58,23 +58,23 @@ function mp_post_combat() {
     }
   } else if(!self botgoalset()) {
     closesttag = self get_closest_tag();
-    if(isDefined(closesttag)) {
+    if(isdefined(closesttag)) {
       self set_goal_tag(closesttag);
     }
   }
 }
 
 function threat_requires_launcher(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy)) {
+  if(!isdefined(enemy) || isplayer(enemy)) {
     return false;
   }
   killstreaktype = undefined;
-  if(isDefined(enemy.killstreaktype)) {
+  if(isdefined(enemy.killstreaktype)) {
     killstreaktype = enemy.killstreaktype;
-  } else if(isDefined(enemy.parentstruct) && isDefined(enemy.parentstruct.killstreaktype)) {
+  } else if(isdefined(enemy.parentstruct) && isdefined(enemy.parentstruct.killstreaktype)) {
     killstreaktype = enemy.parentstruct.killstreaktype;
   }
-  if(!isDefined(killstreaktype)) {
+  if(!isdefined(killstreaktype)) {
     return false;
   }
   switch (killstreaktype) {
@@ -120,7 +120,7 @@ function get_closest_tag() {
       continue;
     }
     distsq = distancesquared(self.origin, tag.origin);
-    if(!isDefined(closesttag) || distsq < closesttagdistsq) {
+    if(!isdefined(closesttag) || distsq < closesttagdistsq) {
       closesttag = tag;
       closesttagdistsq = distsq;
     }
@@ -132,7 +132,7 @@ function set_goal_tag(tag) {
   self.bot.goaltag = tag;
   tracestart = tag.origin;
   traceend = tag.origin + (vectorscale((0, 0, -1), 64));
-  trace = bulletTrace(tracestart, traceend, 0, undefined);
+  trace = bullettrace(tracestart, traceend, 0, undefined);
   self.bot.goaltagonground = trace["fraction"] < 1;
   self bot::path_to_trigger(tag.trigger);
   self bot::sprint_to_goal();

@@ -71,9 +71,8 @@ sam_give_control() {
     self playerlinktodelta(level.sam_launchers[level.sam_launcher_index], "tag_origin", 1, 0, 0, 0, 0);
     self playerlinkedoffsetenable();
 
-    if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
+    if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
       self enablemousesteer(1);
-    }
 
     level.sam_launchers[level.sam_launcher_index].old_contents = level.sam_launchers[level.sam_launcher_index] setcontents(0);
     clear_sam_missiles();
@@ -91,9 +90,8 @@ sam_give_control() {
     level.sam_damage_dummy thread sam_monitor_damage();
 
     foreach(var_1 in getaiarray("allies")) {
-      if(!isDefined(var_1.magic_bullet_shield)) {
+      if(!isDefined(var_1.magic_bullet_shield))
         var_1 maps\_utility::magic_bullet_shield(1);
-      }
     }
   }
 }
@@ -144,9 +142,8 @@ sam_exit() {
   setsaveddvar("hud_showstance", 1);
   self.using_sam = 0;
 
-  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
+  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
     self enablemousesteer(0);
-  }
 
   level.sam_launchers[0] show();
   level.sam_launchers[0] setcontents(level.sam_launchers[0].old_contents);
@@ -156,9 +153,8 @@ sam_exit() {
   level.sam_damage_dummy = undefined;
 
   foreach(var_5 in getaiarray("allies")) {
-    if(isDefined(var_5.magic_bullet_shield) && isDefined(var_5.script_noteworthy) && var_5.script_noteworthy != "hesh") {
+    if(isDefined(var_5.magic_bullet_shield) && isDefined(var_5.script_noteworthy) && var_5.script_noteworthy != "hesh")
       var_5 maps\_utility::stop_magic_bullet_shield();
-    }
   }
 }
 
@@ -169,9 +165,8 @@ sam_remove_control() {
   level.player enablemousesteer(0);
   self setweaponhudiconoverride("actionslot4", "");
 
-  if(isDefined(self.using_sam) && self.using_sam) {
+  if(isDefined(self.using_sam) && self.using_sam)
     sam_exit();
-  }
 
   level.sam_targets = [];
 }
@@ -405,27 +400,23 @@ sam_update_time() {
   for(;;) {
     var_4 = "";
 
-    if(var_0 < 10) {
+    if(var_0 < 10)
       var_4 = "0";
-    }
 
     var_4 = var_4 + (var_0 + ":");
 
-    if(var_1 < 10) {
+    if(var_1 < 10)
       var_4 = var_4 + "0";
-    }
 
     var_4 = var_4 + (var_1 + ":");
 
-    if(var_2 < 10) {
+    if(var_2 < 10)
       var_4 = var_4 + "0";
-    }
 
     var_4 = var_4 + (var_2 + ":");
 
-    if(var_3 < 10) {
+    if(var_3 < 10)
       var_4 = var_4 + "0";
-    }
 
     var_4 = var_4 + var_3;
     self.sam_hud_elements["time"] settext(var_4);
@@ -444,9 +435,8 @@ sam_update_time() {
           var_1 = 0;
           var_0++;
 
-          if(var_0 >= 24) {
+          if(var_0 >= 24)
             var_0 = 0;
-          }
         }
       }
     }
@@ -492,9 +482,8 @@ sam_update_radar() {
       }
     }
 
-    for(var_11 = var_0; var_11 < self.sam_hud_radar_elements.size; var_11++) {
+    for(var_11 = var_0; var_11 < self.sam_hud_radar_elements.size; var_11++)
       self.sam_hud_radar_elements[var_11].alpha = 0;
-    }
 
     wait 0.05;
   }
@@ -548,31 +537,29 @@ sam_update_compass() {
       self.sam_hud_elements["compass_tick_mark_" + var_10].x = var_12 + var_10 * var_9;
 
       if(maps\carrier_code::modulus(var_13, var_1) == 0) {
-        if(var_13 >= 360) {
+        if(var_13 >= 360)
           var_13 = var_13 - 360;
-        } else if(var_13 < 0) {
+        else if(var_13 < 0)
           var_13 = var_13 + 360;
-        }
 
         var_15 = "";
 
-        if(var_13 == 0) {
-          var_15 = &"ENEMY_HQ_NORTH";
-        } else if(var_13 == 45) {
-          var_15 = &"ENEMY_HQ_NORTHEAST";
-        } else if(var_13 == 90) {
-          var_15 = &"ENEMY_HQ_EAST";
-        } else if(var_13 == 135) {
-          var_15 = &"ENEMY_HQ_SOUTHEAST";
-        } else if(var_13 == 180) {
-          var_15 = &"ENEMY_HQ_SOUTH";
-        } else if(var_13 == 225) {
-          var_15 = &"ENEMY_HQ_SOUTHWEST";
-        } else if(var_13 == 270) {
-          var_15 = &"ENEMY_HQ_WEST";
-        } else if(var_13 == 315) {
-          var_15 = &"ENEMY_HQ_NORTHWEST";
-        }
+        if(var_13 == 0)
+          var_15 = & "ENEMY_HQ_NORTH";
+        else if(var_13 == 45)
+          var_15 = & "ENEMY_HQ_NORTHEAST";
+        else if(var_13 == 90)
+          var_15 = & "ENEMY_HQ_EAST";
+        else if(var_13 == 135)
+          var_15 = & "ENEMY_HQ_SOUTHEAST";
+        else if(var_13 == 180)
+          var_15 = & "ENEMY_HQ_SOUTH";
+        else if(var_13 == 225)
+          var_15 = & "ENEMY_HQ_SOUTHWEST";
+        else if(var_13 == 270)
+          var_15 = & "ENEMY_HQ_WEST";
+        else if(var_13 == 315)
+          var_15 = & "ENEMY_HQ_NORTHWEST";
 
         self.sam_hud_elements["compass_label_mark_" + var_14].x = var_12 + var_10 * var_9;
         self.sam_hud_elements["compass_label_mark_" + var_14] settext(var_15);
@@ -611,11 +598,10 @@ sam_monitor_damage() {
       level.player playrumbleonentity("heavy_2s");
       var_0++;
 
-      if(var_0 == 1) {
+      if(var_0 == 1)
         common_scripts\utility::exploder(5515);
-      } else if(var_0 == 2) {
+      else if(var_0 == 2)
         common_scripts\utility::exploder(5525);
-      }
     }
 
     if(var_6 >= 1) {
@@ -649,9 +635,8 @@ sam_control() {
   self endon("death");
   sam_hud();
 
-  if(!isDefined(self.lockon_sequence_active)) {
+  if(!isDefined(self.lockon_sequence_active))
     self.lockon_sequence_active = 0;
-  }
 
   wait 0.25;
   level.sam_launchers[level.sam_launcher_index].angles = vectortoangles(level.ac_130.origin - self getEye()) + (randomfloatrange(-30, 30), randomfloatrange(-30, 30), 0);
@@ -659,17 +644,14 @@ sam_control() {
   for(;;) {
     var_0 = self getnormalizedcameramovement();
 
-    if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
+    if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
       var_0 = (var_0[0], var_0[1] * -1, 0);
-    }
 
-    if(abs(var_0[0]) < 0.1) {
+    if(abs(var_0[0]) < 0.1)
       var_0 = (0.0, var_0[1], var_0[1]);
-    }
 
-    if(abs(var_0[1]) < 0.1) {
+    if(abs(var_0[1]) < 0.1)
       var_0 = (var_0[0], 0.0, var_0[1]);
-    }
 
     level.sam_launchers[level.sam_launcher_index].angles = level.sam_launchers[level.sam_launcher_index].angles - (var_0[0] * common_scripts\utility::ter_op(getdvarfloat("cg_fov") >= 65, 3.75, 1.0625) * common_scripts\utility::ter_op(self.lockon_sequence_active, 0.5, 1.0), var_0[1] * common_scripts\utility::ter_op(getdvarfloat("cg_fov") >= 65, 3.75, 1.0625) * common_scripts\utility::ter_op(self.lockon_sequence_active, 0.5, 1.0), 0);
     level.sam_launchers[level.sam_launcher_index].angles = (clamp(angleclamp180(level.sam_launchers[level.sam_launcher_index].angles[0]), -30, 30), clamp(level.sam_launchers[level.sam_launcher_index].angles[1], -65, 100), level.sam_launchers[level.sam_launcher_index].angles[2]);
@@ -689,9 +671,8 @@ sam_use_auto_lock_on() {
     self.lockon_sequence_active = 0;
     thread sam_start_missile_lockon();
 
-    while(level.sam_lockon_targets.size == 0) {
+    while(level.sam_lockon_targets.size == 0)
       self waittill("fire_missiles");
-    }
 
     self notify("sam_missile_lockon_end");
 
@@ -714,17 +695,15 @@ sam_ads() {
   self.sam_ads = 0;
 
   for(;;) {
-    if(!self adsbuttonpressed()) {
+    if(!self adsbuttonpressed())
       self waittill("ads_on");
-    }
 
     self lerpfov(15, 0.25);
     self.sam_ads = 1;
     wait 0.25;
 
-    if(self adsbuttonpressed()) {
+    if(self adsbuttonpressed())
       self waittill("ads_off");
-    }
 
     self lerpfov(65, 0.25);
     self.sam_ads = 0;
@@ -746,9 +725,8 @@ sam_start_missile_lockon() {
   var_6 = 784000000;
   self.lockon_sequence_active = 0;
 
-  if(!isDefined(level.sam_targets)) {
+  if(!isDefined(level.sam_targets))
     level.sam_targets = [];
-  }
 
   for(;;) {
     if(isDefined(level.sam_lockon_targets) && level.sam_lockon_targets.size < 1) {
@@ -772,11 +750,10 @@ sam_start_missile_lockon() {
         var_0 = var_7;
 
         if(isDefined(var_0)) {
-          if(var_0.classname == "script_vehicle_y_8_gunship") {
+          if(var_0.classname == "script_vehicle_y_8_gunship")
             var_1 = 0.75;
-          } else {
+          else
             var_1 = 0.25;
-          }
 
           var_2 = 0.0;
           var_3 = 0;
@@ -856,11 +833,10 @@ sam_start_missile_lockon() {
           var_2 = 0.0;
           var_3 = !var_3;
 
-          if(var_3) {
+          if(var_3)
             target_showtoplayer(var_0, self);
-          } else {
+          else
             target_hidefromplayer(var_0, self);
-          }
         }
       }
     }
@@ -874,9 +850,8 @@ sam_break_lockon(var_0, var_1, var_2) {
   self endon("lockon_broken");
   var_0 endon("death");
 
-  while(target_isinrect(var_0, self, getdvarfloat("cg_fov"), var_1 * 1.25, var_2 * 1.25)) {
+  while(target_isinrect(var_0, self, getdvarfloat("cg_fov"), var_1 * 1.25, var_2 * 1.25))
     wait 0.05;
-  }
 
   target_hidefromplayer(var_0, self);
   target_drawcornersonly(var_0, 1);
@@ -919,17 +894,14 @@ sam_fire_missiles() {
         var_2.attacked_this_run = 1;
         var_3 = anglesToForward(var_2.angles) * 256 + (0, 0, 64);
 
-        if(!isDefined(var_2.left_missile_target)) {
+        if(!isDefined(var_2.left_missile_target))
           var_2.left_missile_target = spawn("script_origin", var_2.origin);
-        }
 
-        if(!isDefined(var_2.right_missile_target)) {
+        if(!isDefined(var_2.right_missile_target))
           var_2.right_missile_target = spawn("script_origin", var_2.origin);
-        }
 
-        if(!isDefined(var_2.bottom_missile_target)) {
+        if(!isDefined(var_2.bottom_missile_target))
           var_2.bottom_missile_target = spawn("script_origin", var_2.origin);
-        }
 
         var_2.left_missile_target.origin = var_2.origin + var_3 - anglestoright(self getplayerangles()) * 5000;
         var_2.right_missile_target.origin = var_2.origin + var_3 + anglestoright(self getplayerangles()) * 5000;
@@ -1039,9 +1011,8 @@ clear_sam_missiles() {
 }
 
 sam_add_target() {
-  if(!isDefined(level.sam_targets)) {
+  if(!isDefined(level.sam_targets))
     level.sam_targets = [];
-  }
 
   if(!common_scripts\utility::array_contains(level.sam_targets, self)) {
     level.sam_targets[level.sam_targets.size] = self;
@@ -1049,9 +1020,8 @@ sam_add_target() {
   }
 
   foreach(var_1 in level.sam_targets) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 thread remove_sam_target_on_death();
-    }
   }
 }
 
@@ -1076,18 +1046,15 @@ remove_sam_target_on_death() {
     target_remove(self);
     level.sam_targets = common_scripts\utility::array_remove(level.sam_targets, self);
 
-    if(isDefined(level.sam_lockon_targets)) {
+    if(isDefined(level.sam_lockon_targets))
       level.sam_lockon_targets = common_scripts\utility::array_remove(level.sam_lockon_targets, self);
-    }
   }
 
-  if(isDefined(level.sam_targets)) {
+  if(isDefined(level.sam_targets))
     level.sam_targets = common_scripts\utility::array_removeundefined(level.sam_targets);
-  }
 
-  if(isDefined(level.sam_lockon_targets)) {
+  if(isDefined(level.sam_lockon_targets))
     level.sam_lockon_targets = common_scripts\utility::array_removeundefined(level.sam_lockon_targets);
-  }
 }
 
 sam_missile_lockon(var_0) {
@@ -1097,19 +1064,17 @@ sam_missile_lockon(var_0) {
   if(isDefined(var_0)) {
     var_1 = (0, 0, 0);
 
-    if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter()) {
+    if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter())
       var_1 = (0, 0, -80);
-    } else if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::isairplane()) {
+    else if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::isairplane())
       var_1 = (0, 0, 64);
-    } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_y_8_gunship") {
+    else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_y_8_gunship")
       var_1 = anglesToForward(var_0.angles) * 256 + (0, 0, 64);
-    } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
+    else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6")
       var_1 = (0, 0, 20);
-    }
 
-    if(isDefined(self) && isvalidmissile(self)) {
+    if(isDefined(self) && isvalidmissile(self))
       self missile_settargetent(var_0, var_1);
-    }
   }
 
   var_2 = 10;
@@ -1145,9 +1110,8 @@ missile_life(var_0, var_1) {
   var_0 common_scripts\utility::waittill_any_timeout(var_1, "missile_hit");
   self notify("missile_timer_ran_out");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 kill_target(var_0) {
@@ -1155,9 +1119,8 @@ kill_target(var_0) {
   self waittill("death");
   var_0 notify("missile_hit");
 
-  if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter()) {
+  if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter())
     var_0 kill();
-  } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
+  else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6")
     var_0 notify("sparrow_hit_zodiac");
-  }
 }

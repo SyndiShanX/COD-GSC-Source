@@ -28,7 +28,7 @@ main() {
   init_level_flags();
   maps\_utility::transient_init("las_vegas_transient_hotel_tr");
   maps\_utility::transient_init("las_vegas_transient_crasharea_tr");
-  maps\_utility::intro_screen_create(&"LAS_VEGAS_INTROSCREEN_TITLE", &"LAS_VEGAS_INTROSCREEN_DATE", &"LAS_VEGAS_INTROSCREEN_LOCATION");
+  maps\_utility::intro_screen_create(&"LAS_VEGAS_INTROSCREEN_TITLE", & "LAS_VEGAS_INTROSCREEN_DATE", & "LAS_VEGAS_INTROSCREEN_LOCATION");
   maps\_utility::intro_screen_custom_func(::chryon);
   common_scripts\utility::add_destructible_type_transient("toy_lv_slot_machine", "las_vegas_transient_hotel_tr");
   common_scripts\utility::add_destructible_type_transient("toy_lv_slot_machine_flicker", "las_vegas_transient_hotel_tr");
@@ -38,9 +38,8 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 7);
 
-  if(level.xenon) {
+  if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
-  }
 
   maps\las_vegas_audio::main();
   maps\las_vegas_anim::main();
@@ -273,9 +272,8 @@ achievement() {
 achievement_thread() {
   thread draw_slot_machine();
 
-  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded")) {
+  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded"))
     common_scripts\utility::flag_wait("las_vegas_transient_hotel_tr_loaded");
-  }
 
   if(!maps\las_vegas_code::is_start_point_before("entrance")) {
     return;
@@ -288,9 +286,8 @@ achievement_thread() {
   self notify("__destroyed");
   level.slot_machine_count--;
 
-  if(level.slot_machine_count == level.slot_machine_total) {
+  if(level.slot_machine_count == level.slot_machine_total)
     level.player maps\_utility::player_giveachievement_wrapper("LEVEL_14A");
-  }
 }
 
 draw_slot_machine() {
@@ -299,7 +296,6 @@ draw_slot_machine() {
   }
   self endon("__destroyed");
 
-  for(;;) {
+  for(;;)
     wait 0.05;
-  }
 }

@@ -3152,4 +3152,5 @@ main() {
   ent.v["delay"] = 0;
   ent.v["exploder"] = "333";
   ent.v["soundalias"] = "explo_diner";
+
 }

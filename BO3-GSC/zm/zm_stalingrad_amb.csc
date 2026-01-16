@@ -28,12 +28,12 @@ function main() {
 
 function function_d19cb2f8() {
   loopers = struct::get_array("exterior_goal", "targetname");
-  if(isDefined(loopers) && loopers.size > 0) {
+  if(isdefined(loopers) && loopers.size > 0) {
     delay = 0;
     if(getdvarint("") > 0) {
       println(("" + loopers.size) + "");
     }
-    for(i = 0; i < loopers.size; i++) {
+    for (i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
       if((delay % 20) == 0) {
@@ -47,27 +47,27 @@ function function_d19cb2f8() {
 }
 
 function soundloopthink() {
-  if(!isDefined(self.origin)) {
+  if(!isdefined(self.origin)) {
     return;
   }
-  if(!isDefined(self.script_sound)) {
+  if(!isdefined(self.script_sound)) {
     self.script_sound = "zmb_spawn_walla";
   }
   notifyname = "";
-  assert(isDefined(notifyname));
-  if(isDefined(self.script_string)) {
+  assert(isdefined(notifyname));
+  if(isdefined(self.script_string)) {
     notifyname = self.script_string;
   }
-  assert(isDefined(notifyname));
+  assert(isdefined(notifyname));
   started = 1;
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     started = self.script_int != 0;
   }
   if(started) {
     soundloopemitter(self.script_sound, self.origin);
   }
   if(notifyname != "") {
-    for(;;) {
+    for (;;) {
       level waittill(notifyname);
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);
@@ -84,12 +84,12 @@ function function_bab3ea62() {
   level.var_98f2b64e = "pavlov";
   level thread function_8620d917();
   level thread function_53b9afad();
-  var_29085ef = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_29085ef, &sndmusictrig);
+  var_29085ef = getentarray(0, "sndMusicTrig", "targetname");
+  array::thread_all(var_29085ef, & sndmusictrig);
 }
 
 function sndmusictrig() {
-  while(true) {
+  while (true) {
     self waittill("trigger", trigplayer);
     if(trigplayer islocalplayer()) {
       if(self.script_sound == "pavlov") {
@@ -97,7 +97,7 @@ function sndmusictrig() {
       } else {
         level notify("hash_51d7bc7c", self.script_sound);
       }
-      while(isDefined(trigplayer) && trigplayer istouching(self)) {
+      while (isdefined(trigplayer) && trigplayer istouching(self)) {
         wait(0.016);
       }
     } else {
@@ -110,8 +110,8 @@ function function_53b9afad() {
   level.var_b6342abd = "mus_stalingrad_underscore_outdoor";
   level.var_6d9d81aa = "mus_stalingrad_underscore_outdoor";
   level.var_eb526c90 = spawn(0, (0, 0, 0), "script_origin");
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(level.var_b6342abd, 2);
-  while(true) {
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(level.var_b6342abd, 2);
+  while (true) {
     level waittill("hash_51d7bc7c", location);
     level.var_6d9d81aa = "mus_stalingrad_underscore_" + location;
     if(level.var_6d9d81aa != level.var_b6342abd) {
@@ -125,11 +125,11 @@ function function_51d7bc7c(var_6d9d81aa) {
   level endon("hash_51d7bc7c");
   level.var_eb526c90 stopallloopsounds(2);
   wait(1);
-  level.var_9433cf5a = level.var_eb526c90 playLoopSound(var_6d9d81aa, 2);
+  level.var_9433cf5a = level.var_eb526c90 playloopsound(var_6d9d81aa, 2);
 }
 
 function function_8620d917() {
-  while(true) {
+  while (true) {
     level waittill("sndpd");
     if(level.var_98f2b64e == "pavlov") {
       level.var_98f2b64e = "pavlov_defend";
@@ -143,7 +143,7 @@ function function_8620d917() {
 }
 
 function function_a2a905a5() {
-  while(true) {
+  while (true) {
     level waittill("sndeed");
     if(level.var_98f2b64e == "pavlov" || level.var_98f2b64e == "pavlov_defend") {
       level.var_98f2b64e = "pavlov_ee_koth";
@@ -155,9 +155,9 @@ function function_a2a905a5() {
 }
 
 function function_b21d9845() {
-  while(true) {
+  while (true) {
     wait(randomintrange(4, 10));
-    playSound(0, "amb_comp_sweets", (-3157, 21574, -85));
+    playsound(0, "amb_comp_sweets", (-3157, 21574, -85));
   }
 }
 
@@ -168,34 +168,34 @@ function function_d4a3f122() {
 }
 
 function function_daa9b420() {
-  while(true) {
+  while (true) {
     wait(randomintrange(10, 40));
-    playSound(0, "amb_banging", (-3319, 21151, -103));
+    playsound(0, "amb_banging", (-3319, 21151, -103));
   }
 }
 
 function play_flux_whispers() {
-  while(true) {
+  while (true) {
     wait(randomintrange(4, 10));
-    playSound(0, "amb_whispers", (-3414, 21402, 63));
-    playSound(0, "amb_whispers", (-2639, 21161, -90));
-    playSound(0, "amb_whispers", (-3004, 22547, 44));
+    playsound(0, "amb_whispers", (-3414, 21402, 63));
+    playsound(0, "amb_whispers", (-2639, 21161, -90));
+    playsound(0, "amb_whispers", (-3004, 22547, 44));
   }
 }
 
 function function_157aa38() {
   level waittill("power_on_level");
-  playSound(0, "amb_sophia_boot", (300, 4862, 296));
+  playsound(0, "amb_sophia_boot", (300, 4862, 296));
   audio::playloopat("amb_sophia_computer_screen_lp", (-404, 4764, 223));
   wait(8);
   audio::playloopat("amb_sophia_loop", (300, 4862, 296));
 }
 
 function function_1e68a892() {
-  while(true) {
+  while (true) {
     wait(randomintrange(1, 2));
-    playSound(0, "amb_light_flicker_flour", (-2956, 21337, 125));
-    playSound(0, "amb_light_flicker_flour", (-3037, 21457, -39));
-    playSound(0, "amb_light_flicker_flour", (-3223, 21912, -47));
+    playsound(0, "amb_light_flicker_flour", (-2956, 21337, 125));
+    playsound(0, "amb_light_flicker_flour", (-3037, 21457, -39));
+    playsound(0, "amb_light_flicker_flour", (-3223, 21912, -47));
   }
 }

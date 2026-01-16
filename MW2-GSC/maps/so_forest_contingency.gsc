@@ -11,9 +11,9 @@
 #include maps\_stealth_utility;
 #include maps\_stealth_shared_utilities;
 
-CONST_regular_obj = &"SO_FOREST_CONTINGENCY_OBJ_REGULAR";
-CONST_hardened_obj = &"SO_FOREST_CONTINGENCY_OBJ_HARDENED";
-CONST_veteran_obj = &"SO_FOREST_CONTINGENCY_OBJ_VETERAN";
+CONST_regular_obj = & "SO_FOREST_CONTINGENCY_OBJ_REGULAR";
+CONST_hardened_obj = & "SO_FOREST_CONTINGENCY_OBJ_HARDENED";
+CONST_veteran_obj = & "SO_FOREST_CONTINGENCY_OBJ_VETERAN";
 
 //	penalty seconds per kill
 CONST_kill_penalty = 10;
@@ -115,28 +115,25 @@ stealth_achievement_end() {
   flag_wait("forest_success");
 
   if(!flag("broke_stealth") && !flag("enemy_killed")) {
-    foreach(player in level.players) {
-      player maps\_utility::player_giveachievement_wrapper("SPECTER");
-    }
+    foreach(player in level.players)
+    player maps\_utility::player_giveachievement_wrapper("SPECTER");
   }
 }
 
 remove_extra_vehicles() {
-  remove_ents = getEntArray("cargo1_group2", "targetname");
-  remove_ents = array_merge(remove_ents, getEntArray("cargo2_group2", "targetname"));
-  remove_ents = array_merge(remove_ents, getEntArray("cargo3_group2", "targetname"));
-  foreach(ent in remove_ents) {
-    ent Delete();
-  }
+  remove_ents = getentarray("cargo1_group2", "targetname");
+  remove_ents = array_merge(remove_ents, getentarray("cargo2_group2", "targetname"));
+  remove_ents = array_merge(remove_ents, getentarray("cargo3_group2", "targetname"));
+  foreach(ent in remove_ents)
+  ent Delete();
 }
 
 remove_dead_trees() {
-  dead_trees = getEntArray("destroyable_tree_base", "script_noteworthy");
+  dead_trees = getentarray("destroyable_tree_base", "script_noteworthy");
   foreach(dead_tree in dead_trees) {
-    dead_parts = getEntArray(dead_tree.target, "targetname");
-    if(isDefined(dead_parts)) {
+    dead_parts = getentarray(dead_tree.target, "targetname");
+    if(isdefined(dead_parts))
       foreach(part in dead_parts) part delete();
-    }
   }
 }
 
@@ -148,19 +145,18 @@ so_setup_regular() {
   // noteworthy: cqb_patrol - remove two with targetname first_patrol_cqb.
   // noteworthy: regular_remove - remove
 
-  spawner_array = getEntArray("two_on_right", "script_noteworthy");
-  spawner_array = array_combine(spawner_array, getEntArray("regular_remove", "script_noteworthy"));
+  spawner_array = getentarray("two_on_right", "script_noteworthy");
+  spawner_array = array_combine(spawner_array, getentarray("regular_remove", "script_noteworthy"));
 
-  array = getEntArray("cqb_patrol", "script_noteworthy");
+  array = getentarray("cqb_patrol", "script_noteworthy");
   add_count = 0;
   foreach(spawner in array) {
     if(spawner.targetname == "first_patrol_cqb") {
       spawner_array = array_add(spawner_array, spawner);
       add_count++;
     }
-    if(add_count >= 2) {
+    if(add_count >= 2)
       break;
-    }
   }
 
   foreach(spawner in spawner_array) {
@@ -174,9 +170,8 @@ so_setup_regular() {
 
   	foreach( spawner in spawners )
   	{
-  		if( isDefined( spawner.script_pet ) ) {
+  		if( isdefined( spawner.script_pet ) )
   			continue;
-  		}
   		if( first_third )
   		{
   			spawner.count = 0;
@@ -219,7 +214,7 @@ so_forest_init() {
 
   level.enemies_killed = 0;
 
-  assert(isDefined(level.gameskill));
+  assert(isdefined(level.gameskill));
   switch (level.gameSkill) {
     case 0: // Easy
     case 1:
@@ -352,15 +347,13 @@ woods_second_dog_patrol() {
 
   flag_wait("dialog_woods_second_dog_patrol");
 
-  if(flag("someone_became_alert")) {
+  if(flag("someone_became_alert"))
     return;
-  }
 
-  end_patrol = getEntArray("end_patrol", "targetname");
+  end_patrol = getentarray("end_patrol", "targetname");
   foreach(guy in end_patrol) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy.threatbias = 10000;
-    }
   }
 }
 
@@ -368,24 +361,21 @@ woods_first_patrol_cqb() {
   level endon("special_op_terminated");
 
   flag_wait("first_patrol_cqb");
-  first_patrol_cqb = getEntArray("first_patrol_cqb", "targetname");
-  foreach(guy in first_patrol_cqb) {
-    guy spawn_ai();
-  }
+  first_patrol_cqb = getentarray("first_patrol_cqb", "targetname");
+  foreach(guy in first_patrol_cqb)
+  guy spawn_ai();
 }
 
 stealth_woods() {
   level endon("special_op_terminated");
 
-  if(!isDefined(level.woods_enemy_count)) {
+  if(!isdefined(level.woods_enemy_count))
     level.woods_enemy_count = 0;
-  }
 
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isplayer(self))
     return;
-  }
 
   switch (self.team) {
     case "axis":
@@ -396,8 +386,8 @@ stealth_woods() {
         level.woods_enemy_count++;
         self thread maps\contingency::attach_flashlight();
       }
-      if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "cqb_patrol")) {
-        if(isDefined(self.script_patroller)) {
+      if(isdefined(self.script_noteworthy) && (self.script_noteworthy == "cqb_patrol")) {
+        if(isdefined(self.script_patroller)) {
           wait .05;
           self clear_run_anim();
         }
@@ -443,16 +433,15 @@ Small_Goal_Attack_Behavior() {
 
   self ent_flag_set("_stealth_override_goalpos");
 
-  while(isDefined(self.enemy) && self ent_flag("_stealth_enabled")) {
+  while (isdefined(self.enemy) && self ent_flag("_stealth_enabled")) {
     self setgoalpos(self.enemy.origin);
 
     wait 4;
   }
 
   player_to_pursue = get_closest_player_healthy(self.origin);
-  if(isDefined(player_to_pursue)) {
+  if(isdefined(player_to_pursue))
     self setgoalpos(player_to_pursue.origin);
-  }
 }
 
 woods_prespotted_func() {
@@ -474,9 +463,8 @@ woods_prespotted_func() {
 monitor_stealth_kills() {
   self waittill("death", killer);
 
-  if(!isDefined(killer)) {
+  if(!isdefined(killer))
     return;
-  }
 
   if(isplayer(killer)) {
     level.enemies_killed++;
@@ -488,21 +476,18 @@ monitor_stealth_kills() {
 }
 
 dialog_player_kill() {
-  if(flag("_stealth_spotted")) {
+  if(flag("_stealth_spotted"))
     return;
-  }
 
   wait 3;
 
-  if(!stealth_is_everything_normal()) {
+  if(!stealth_is_everything_normal())
     return;
-  }
-  if(!isDefined(level.good_kill_dialog_time)) {
+  if(!isdefined(level.good_kill_dialog_time)) {
     level.good_kill_dialog_time = gettime();
   } else {
-    if(gettime() < (level.good_kill_dialog_time + (15 * 1000))) {
+    if(gettime() < (level.good_kill_dialog_time + (15 * 1000)))
       return;
-    }
   }
   level.good_kill_dialog_time = gettime();
 
@@ -516,16 +501,15 @@ stealth_music_control() {
   //DEFINE_ESCAPE_MUSIC_TIME 	 = 136;
   //DEFINE_SPOTTED_MUSIC_TIME 	 = 117;
 
-  if(flag("stop_stealth_music")) {
+  if(flag("stop_stealth_music"))
     return;
-  }
   level endon("stop_stealth_music");
 
   //flag_wait( "first_two_guys_in_sight" );
 
   //thread test_stealth_spotted();
 
-  while(1) {
+  while (1) {
     thread stealth_music_hidden_loop();
 
     flag_wait("_stealth_spotted");
@@ -544,15 +528,13 @@ stealth_music_control() {
 /*
 test_stealth_spotted()
 {
-	while( 1 )
+	while ( 1 )
 	{
 		level waittill( "_stealth_spotted" );
-		if( flag( "_stealth_spotted" ) ) {
+		if( flag( "_stealth_spotted" ) )
 			iprintln( "SPOTTED!" );
-		}
-		else {
+		else
 			iprintln( "HIDDEN!" );	
-		}
 	}
 }
 */
@@ -566,9 +548,8 @@ stealth_music_hidden_loop() {
   	//level endon( "player_in_hanger" );
   	level endon( "_stealth_spotted" );
   	
-  	if( flag( "stop_stealth_music" ) ) {
+  	if( flag( "stop_stealth_music" ) )
   		return;
-  	}
   	level endon ( "stop_stealth_music" );
   	
   	while( 1 )
@@ -589,9 +570,8 @@ stealth_music_busted_loop() {
   	cliffhanger_stealth_busted_music_TIME = 154;
   	//level endon( "player_in_hanger" );
   	level endon( "_stealth_spotted" );
-  	if( flag( "stop_stealth_music" ) ) {
+  	if( flag( "stop_stealth_music" ) )
   		return;
-  	}
   	level endon ( "stop_stealth_music" );
   	while( 1 )
   	{
@@ -624,16 +604,15 @@ dialog_unsilenced_weapons() {
 
   old_weapon_list = self GetWeaponsListPrimaries();
 
-  while(true) {
+  while (true) {
     self waittill("weapon_change");
 
     current_weapon_list = self GetWeaponsListPrimaries();
 
     state = false;
     foreach(weapon in current_weapon_list) {
-      if(!array_contains(old_weapon_list, weapon)) {
+      if(!array_contains(old_weapon_list, weapon))
         state = true;
-      }
     }
 
     if(state) {

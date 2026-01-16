@@ -20,13 +20,13 @@ function main() {
   setdvar("phys_ragdoll_buoyancy", 1);
   load::main();
   util::waitforclient(0);
-  callback::on_localplayer_spawned(&player_rain);
+  callback::on_localplayer_spawned( & player_rain);
 }
 
 function player_rain(localclientnum) {
   self.e_link = spawn(localclientnum, self.origin, "script_model");
-  self.e_link setModel("tag_origin");
+  self.e_link setmodel("tag_origin");
   self.e_link.angles = self.angles;
   self.e_link linkto(self);
-  self.var_88aec2ed = playFXOnTag(localclientnum, level._effect["blood_rain"], self.e_link, "tag_origin");
+  self.var_88aec2ed = playfxontag(localclientnum, level._effect["blood_rain"], self.e_link, "tag_origin");
 }

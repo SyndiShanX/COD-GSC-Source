@@ -13,17 +13,15 @@ humvee_turret_init(var_0, var_1) {
   self.a.usingturret = var_0;
   self.ignoreme = 1;
 
-  if(isDefined(self.minigun_ignoreme)) {
+  if(isDefined(self.minigun_ignoreme))
     self.ignoreme = self.minigun_ignoreme;
-  }
 
   self.iscustomanimating = 0;
   self setturretanim(self.primaryturretanim);
   self setanimknobrestart(self.primaryturretanim, 1, 0.2, 1);
 
-  if(isDefined(self.weapon)) {
+  if(isDefined(self.weapon))
     animscripts\shared::placeweaponon(self.weapon, "none");
-  }
 
   self.onrotatingvehicleturret = 1;
   self.getoffvehiclefunc = ::turret_cleanup_on_unload;
@@ -44,9 +42,8 @@ humvee_turret_init(var_0, var_1) {
   thread firedirector(var_0);
   wait 0.05;
 
-  if(isalive(self)) {
+  if(isalive(self))
     thread gunner_turning_anims(var_0);
-  }
 }
 
 gunner_pain_init() {
@@ -116,9 +113,8 @@ turret_cleanup_on_unload() {
     self.getoffvehiclefunc = undefined;
     self stopuseturret();
 
-    if(isDefined(self.weapon)) {
+    if(isDefined(self.weapon))
       animscripts\shared::placeweaponon(self.weapon, "right");
-    }
   }
 
   level thread turret_cleanup(self, var_0);
@@ -147,9 +143,8 @@ turret_cleanup(var_0, var_1) {
   var_1.aiowner = undefined;
   var_1.firetime = undefined;
 
-  if(isDefined(var_1.specialcleanupfunc)) {
+  if(isDefined(var_1.specialcleanupfunc))
     level[[var_1.specialcleanupfunc]](var_0, var_1);
-  }
 }
 
 turret_track_rotatedirection(var_0) {
@@ -167,13 +162,12 @@ turret_track_rotatedirection(var_0) {
     var_5 = anglesToForward(var_3);
     var_6 = vectordot(var_4, var_5);
 
-    if(var_6 == 0) {
+    if(var_6 == 0)
       turret_update_rotatedirection("none");
-    } else if(var_6 > 0) {
+    else if(var_6 > 0)
       turret_update_rotatedirection("right");
-    } else {
+    else
       turret_update_rotatedirection("left");
-    }
 
     var_2 = self gettagangles(var_1);
     wait 0.05;
@@ -181,9 +175,8 @@ turret_track_rotatedirection(var_0) {
 }
 
 turret_update_rotatedirection(var_0) {
-  if(!isDefined(self.rotatedirection) || self.rotatedirection != var_0) {
+  if(!isDefined(self.rotatedirection) || self.rotatedirection != var_0)
     self.rotatedirection = var_0;
-  }
 }
 
 gunner_turning_anims(var_0) {
@@ -204,11 +197,10 @@ gunner_turning_anims(var_0) {
     var_3 = undefined;
 
     if(!var_0 turret_aiming_near_target(var_0.firetarget, var_0.closeenoughaimdegrees)) {
-      if(var_0.rotatedirection == "right") {
+      if(var_0.rotatedirection == "right")
         var_3 = self.additiveturretrotateright;
-      } else if(var_0.rotatedirection == "left") {
+      else if(var_0.rotatedirection == "left")
         var_3 = self.additiveturretrotateleft;
-      }
 
       if(isDefined(var_3)) {
         self setanimlimited(self.additiverotateroot, 1, var_1, 1);
@@ -249,9 +241,8 @@ guy_gets_on_turret(var_0, var_1, var_2, var_3) {
   self.no_ai = 1;
   var_3 = % humvee_passenger_2_turret;
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = self.passenger_2_turret_anim;
-  }
 
   var_4 = maps\_vehicle_aianim::anim_pos(var_0, var_1);
   var_5 = var_0 gettagorigin(var_4.sittag);
@@ -302,38 +293,31 @@ firedirector(var_0) {
       wait 0.05;
     }
 
-    if(var_0 target_confirm(var_1) && !self.ignoreall) {
+    if(var_0 target_confirm(var_1) && !self.ignoreall)
       var_0.dofiring = 1;
-    }
 
-    while(var_0 target_confirm(var_1) && !self.ignoreall && !self.iscustomanimating) {
+    while(var_0 target_confirm(var_1) && !self.ignoreall && !self.iscustomanimating)
       wait 0.05;
-    }
 
-    if(var_0.dofiring || self.ignoreall) {
+    if(var_0.dofiring || self.ignoreall)
       var_0.dofiring = 0;
-    }
 
     wait 0.05;
   }
 }
 
 target_confirm(var_0) {
-  if(isDefined(self.dontshoot)) {
+  if(isDefined(self.dontshoot))
     return 0;
-  }
 
-  if(!isDefined(self.firetarget)) {
+  if(!isDefined(self.firetarget))
     return 0;
-  }
 
-  if(!turret_target_validate(var_0)) {
+  if(!turret_target_validate(var_0))
     return 0;
-  }
 
-  if(var_0 != self.firetarget) {
+  if(var_0 != self.firetarget)
     return 0;
-  }
 
   return 1;
 }
@@ -352,13 +336,12 @@ turret_target_updater(var_0) {
     var_3 = 0;
 
     if(turret_target_validate(var_1) || !isDefined(var_1)) {
-      if(!isDefined(var_1) && isDefined(var_2)) {
+      if(!isDefined(var_1) && isDefined(var_2))
         var_3 = 1;
-      } else if(isDefined(var_1) && !isDefined(var_2)) {
+      else if(isDefined(var_1) && !isDefined(var_2))
         var_3 = 1;
-      } else if(isDefined(var_1) && var_1 != var_2) {
+      else if(isDefined(var_1) && var_1 != var_2)
         var_3 = 1;
-      }
 
       if(var_3) {
         self.firetarget = var_1;
@@ -372,17 +355,14 @@ turret_target_updater(var_0) {
 }
 
 turret_target_validate(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
-  if(isDefined(var_0.ignoreme) && var_0.ignoreme) {
+  if(isDefined(var_0.ignoreme) && var_0.ignoreme)
     return 0;
-  }
 
-  if(issubstr(var_0.code_classname, "actor") && !isalive(var_0)) {
+  if(issubstr(var_0.code_classname, "actor") && !isalive(var_0))
     return 0;
-  }
 
   return 1;
 }
@@ -391,9 +371,8 @@ set_manual_target(var_0, var_1, var_2, var_3) {
   self endon("turret_cleanup");
   var_4 = self getmode();
 
-  if(var_4 != "manual") {
+  if(var_4 != "manual")
     self setmode("manual");
-  }
 
   if(!isDefined(var_1) && !isDefined(var_2)) {
     var_1 = 1.5;
@@ -404,20 +383,18 @@ set_manual_target(var_0, var_1, var_2, var_3) {
   self settargetentity(var_0);
   self waittill("turret_on_target");
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     self waittill(var_3);
-  } else if(isDefined(var_2)) {
+  else if(isDefined(var_2))
     wait(randomfloatrange(var_1, var_2));
-  } else {
+  else
     wait(var_1);
-  }
 
   custom_anim_wait();
   self cleartargetentity(var_0);
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     self setmode(var_4);
-  }
 }
 
 doshoot(var_0) {
@@ -483,9 +460,8 @@ turret_gunner_custom_anim(var_0, var_1, var_2) {
   var_4 = var_0 reload_disable_safe();
   docustomanim(var_0, var_3, var_2);
 
-  if(var_4) {
+  if(var_4)
     var_0 reload_enable();
-  }
 }
 
 reload_disable_safe() {
@@ -512,9 +488,8 @@ doreload(var_0) {
   self endon("dismount");
   self endon("jumping_out");
 
-  if(anim.chatinitialized) {
+  if(anim.chatinitialized)
     thread maps\_utility::custom_battlechatter("inform_reloading");
-  }
 
   docustomanim(var_0, self.turretreloadanim, 1);
 }
@@ -527,16 +502,14 @@ docustomanim(var_0, var_1, var_2) {
   var_0.turretstate = "customanim";
   var_0 turretfiredisable();
 
-  if(var_0 getbarrelspinrate() > 0) {
+  if(var_0 getbarrelspinrate() > 0)
     var_0 stopbarrelspin();
-  }
 
   var_0 notify("kill_fireController");
   self notify("custom_anim");
 
-  if(isDefined(var_2) && var_2) {
+  if(isDefined(var_2) && var_2)
     var_0 turret_aim_straight();
-  }
 
   self setanimknoblimitedrestart(self.turretspecialanimsroot, 1, 0.2);
   self setflaggedanimknobrestart("special_anim", var_1, 1, 0, 1);
@@ -553,9 +526,8 @@ docustomanim(var_0, var_1, var_2) {
   self setanimlimited(self.primaryturretanim, 1);
   self setanimlimited(self.additiveusegunroot, 1);
 
-  if(isDefined(var_2) && var_2) {
+  if(isDefined(var_2) && var_2)
     var_0 turret_aim_restore();
-  }
 
   self.customanim = undefined;
   self.iscustomanimating = 0;
@@ -569,9 +541,8 @@ custom_anim_wait() {
   if(!isDefined(self.iscustomanimating)) {
     return;
   }
-  while(self.iscustomanimating) {
+  while(self.iscustomanimating)
     wait 0.05;
-  }
 }
 
 turret_aim_straight(var_0) {
@@ -613,9 +584,8 @@ turret_aim_restore() {
 turret_aiming_near_target(var_0, var_1) {
   var_2 = turret_get_angle_to_target(var_0);
 
-  if(var_2 <= var_1) {
+  if(var_2 <= var_1)
     return 1;
-  }
 
   return 0;
 }

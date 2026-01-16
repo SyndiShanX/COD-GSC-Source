@@ -6,23 +6,19 @@
 #include maps\mp\_utility;
 
 updateMatchBonusScores(winner) {
-  if(!game["timepassed"]) {
+  if(!game["timepassed"])
     return;
-  }
-  if(!level.rankedMatch) {
+  if(!level.rankedMatch)
     return;
-  }
   if(level.teamBased && isDefined(winner)) {
-    if(winner == "endregulation") {
+    if(winner == "endregulation")
       return;
-    }
   }
   if(!level.timeLimit || level.forcedEnd) {
     gameLength = maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000;
     gameLength = min(gameLength, 1200);
-    if(level.gameType == "twar" && game["roundsplayed"] > 0) {
+    if(level.gameType == "twar" && game["roundsplayed"] > 0)
       gameLength += level.timeLimit * 60;
-    }
   } else {
     gameLength = level.timeLimit * 60;
   }
@@ -45,7 +41,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -55,12 +51,10 @@ updateMatchBonusScores(winner) {
       if(totalTimePlayed > gameLength) {
         totalTimePlayed = gameLength;
       }
-      if(level.hostForcedEnd && player IsHost()) {
+      if(level.hostForcedEnd && player IsHost())
         continue;
-      }
-      if(player.pers["score"] < 0) {
+      if(player.pers["score"] < 0)
         continue;
-      }
       spm = player maps\mp\gametypes\_rank::getSPM();
       if(winningTeam == "tie") {
         playerScore = int((winnerScale * ((gameLength / 60) * spm)) * (totalTimePlayed / gameLength));
@@ -85,7 +79,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -97,10 +91,9 @@ updateMatchBonusScores(winner) {
       }
       spm = player maps\mp\gametypes\_rank::getSPM();
       isWinner = false;
-      for(pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
-        if(level.placement["all"][pIdx] != player) {
+      for (pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
+        if(level.placement["all"][pIdx] != player)
           continue;
-        }
         isWinner = true;
       }
       if(isWinner) {
@@ -124,17 +117,15 @@ giveMatchBonus(scoreType, score) {
 }
 setXenonRanks(winner) {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isDefined(player.score) || !isDefined(player.pers["team"])) {
+    if(!isDefined(player.score) || !isDefined(player.pers["team"]))
       continue;
-    }
   }
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isDefined(player.score) || !isDefined(player.pers["team"])) {
+    if(!isDefined(player.score) || !isDefined(player.pers["team"]))
       continue;
-    }
     setPlayerTeamRank(player, i, player.score - 5 * player.deaths);
     player logString("team: score " + player.pers["team"] + ":" + player.score);
   }
@@ -144,13 +135,11 @@ getHighestScoringPlayer() {
   players = level.players;
   winner = undefined;
   tie = false;
-  for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].score)) {
+  for (i = 0; i < players.size; i++) {
+    if(!isDefined(players[i].score))
       continue;
-    }
-    if(players[i].score < 1) {
+    if(players[i].score < 1)
       continue;
-    }
     if(!isDefined(winner) || players[i].score > winner.score) {
       winner = players[i];
       tie = false;
@@ -158,28 +147,25 @@ getHighestScoringPlayer() {
       tie = true;
     }
   }
-  if(tie || !isDefined(winner)) {
+  if(tie || !isDefined(winner))
     return undefined;
-  } else {
+  else
     return winner;
-  }
 }
 onXPEvent(event) {
   self maps\mp\gametypes\_rank::giveRankXP(event);
 }
 givePlayerScore(event, player, victim) {
-  if(level.overridePlayerScore) {
+  if(level.overridePlayerScore)
     return;
-  }
   pixbeginevent("level.onPlayerScore");
   score = player.pers["score"];
   [[level.onPlayerScore]](event, player, victim);
   newScore = player.pers["score"];
   pixendevent();
   bbPrint("mpplayerscore: gametime %d type %s player %s delta %d", getTime(), event, player.name, newScore - score);
-  if(score == newScore) {
+  if(score == newScore)
     return;
-  }
   pixbeginevent("givePlayerScore");
   recordPlayerStats(player, "score", newScore);
   if(level.rankedMatch || level.wagerMatch) {
@@ -204,9 +190,8 @@ default_onPlayerScore(event, player, victim) {
   _setPlayerScore(player, player.pers["score"] + score);
 }
 _setPlayerScore(player, score) {
-  if(score == player.pers["score"]) {
+  if(score == player.pers["score"])
     return;
-  }
   if(!level.onlineGame || (GetDvarInt(#"xblive_privatematch") && !GetDvarInt(#"xblive_basictraining"))) {
     player thread maps\mp\gametypes\_rank::updateRankScoreHUD(score - player.pers["score"]);
   }
@@ -214,9 +199,8 @@ _setPlayerScore(player, score) {
   player.score = player.pers["score"];
   recordPlayerStats(player, "score", player.pers["score"]);
   player notify("update_playerscore_hud");
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     player thread maps\mp\gametypes\_wager::playerScored();
-  }
   player thread maps\mp\gametypes\_globallogic::checkScoreLimit();
   player thread maps\mp\gametypes\_globallogic::checkPlayerScoreLimitSoon();
 }
@@ -224,25 +208,22 @@ _getPlayerScore(player) {
   return player.pers["score"];
 }
 giveTeamScore(event, team, player, victim) {
-  if(level.overrideTeamScore) {
+  if(level.overrideTeamScore)
     return;
-  }
   pixbeginevent("level.onTeamScore");
   teamScore = game["teamScores"][team];
   [[level.onTeamScore]](event, team, player, victim);
   pixendevent();
   newScore = game["teamScores"][team];
   bbPrint("mpteamscores: gametime %d event %s team %d diff %d score %d", getTime(), event, team, newScore - teamScore, newScore);
-  if(teamScore == newScore) {
+  if(teamScore == newScore)
     return;
-  }
   updateTeamScores(team);
   thread maps\mp\gametypes\_globallogic::checkScoreLimit();
 }
 _setTeamScore(team, teamScore) {
-  if(teamScore == game["teamScores"][team]) {
+  if(teamScore == game["teamScores"][team])
     return;
-  }
   game["teamScores"][team] = teamScore;
   updateTeamScores(team);
   thread maps\mp\gametypes\_globallogic::checkScoreLimit();
@@ -260,10 +241,9 @@ resetPlayerScores() {
   players = level.players;
   winner = undefined;
   tie = false;
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].pers["score"])) {
+  for (i = 0; i < players.size; i++) {
+    if(isDefined(players[i].pers["score"]))
       _setPlayerScore(players[i], 0);
-    }
   }
 }
 updateTeamScores(team1, team2) {
@@ -279,28 +259,24 @@ _getTeamScore(team) {
 }
 onTeamScore(score, team, player, victim) {
   otherTeam = level.otherTeam[team];
-  if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
+  if(game["teamScores"][team] > game["teamScores"][otherTeam])
     level.wasWinning = team;
-  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  else if(game["teamScores"][otherTeam] > game["teamScores"][team])
     level.wasWinning = otherTeam;
-  }
   game["teamScores"][team] += score;
   isWinning = "none";
-  if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
+  if(game["teamScores"][team] > game["teamScores"][otherTeam])
     isWinning = team;
-  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  else if(game["teamScores"][otherTeam] > game["teamScores"][team])
     isWinning = otherTeam;
-  }
   if(!level.splitScreen && isWinning != "none" && isWinning != level.wasWinning && getTime() - level.lastStatusTime > 5000) {
     level.lastStatusTime = getTime();
     maps\mp\gametypes\_globallogic_audio::leaderDialog("lead_taken", isWinning, "status");
-    if(level.wasWinning != "none") {
+    if(level.wasWinning != "none")
       maps\mp\gametypes\_globallogic_audio::leaderDialog("lead_lost", level.wasWinning, "status");
-    }
   }
-  if(isWinning != "none") {
+  if(isWinning != "none")
     level.wasWinning = isWinning;
-  }
 }
 default_onTeamScore(event, team, player, victim) {
   score = maps\mp\gametypes\_rank::getScoreInfoValue(event);
@@ -336,15 +312,13 @@ updatePersRatio(ratio, num, denom) {
   pixbeginevent("updatePersRatio");
   numValue = self maps\mp\gametypes\_persistence::statGet(num);
   denomValue = self maps\mp\gametypes\_persistence::statGet(denom);
-  if(denomValue == 0) {
+  if(denomValue == 0)
     denomValue = 1;
-  }
   self maps\mp\gametypes\_persistence::statSet(ratio, int((numValue * 1000) / denomValue));
   numValue = self maps\mp\gametypes\_persistence::statGetWithGameType(num);
   denomValue = self maps\mp\gametypes\_persistence::statGetWithGameType(denom);
-  if(denomValue == 0) {
+  if(denomValue == 0)
     denomValue = 1;
-  }
   self maps\mp\gametypes\_persistence::statSetWithGameType(ratio, int((numValue * 1000) / denomValue));
   if(ratio == "kdratio" && !level.wagerMatch) {
     self maps\mp\gametypes\_persistence::setRecentStat(true, 0, "kills", self.kills);
@@ -383,40 +357,33 @@ updateTieStats(loser) {
   loser notify("tie");
 }
 updateWinLossStats(winner) {
-  if(!wasLastRound() && !level.hostForcedEnd) {
+  if(!wasLastRound() && !level.hostForcedEnd)
     return;
-  }
   players = level.players;
   if(!isDefined(winner) || (isDefined(winner) && !isPlayer(winner) && winner == "tie")) {
-    for(i = 0; i < players.size; i++) {
-      if(!isDefined(players[i].pers["team"])) {
+    for (i = 0; i < players.size; i++) {
+      if(!isDefined(players[i].pers["team"]))
         continue;
-      }
-      if(level.hostForcedEnd && players[i] IsHost()) {
+      if(level.hostForcedEnd && players[i] IsHost())
         continue;
-      }
       updateTieStats(players[i]);
     }
   } else if(isPlayer(winner)) {
-    if(level.hostForcedEnd && winner IsHost()) {
+    if(level.hostForcedEnd && winner IsHost())
       return;
-    }
     updateWinStats(winner);
   } else {
-    for(i = 0; i < players.size; i++) {
-      if(!isDefined(players[i].pers["team"])) {
+    for (i = 0; i < players.size; i++) {
+      if(!isDefined(players[i].pers["team"]))
         continue;
-      }
-      if(level.hostForcedEnd && players[i] IsHost()) {
+      if(level.hostForcedEnd && players[i] IsHost())
         continue;
-      }
-      if(winner == "tie") {
+      if(winner == "tie")
         updateTieStats(players[i]);
-      } else if(players[i].pers["team"] == winner) {
+      else if(players[i].pers["team"] == winner)
         updateWinStats(players[i]);
-      } else {
+      else
         players[i] maps\mp\gametypes\_persistence::statSet("cur_win_streak", 0);
-      }
     }
   }
 }
@@ -436,12 +403,10 @@ getGameScore(team) {
 incKillstreakTracker(sWeapon) {
   self endon("disconnect");
   waittillframeend;
-  if(sWeapon == "artillery_mp") {
+  if(sWeapon == "artillery_mp")
     self.pers["artillery_kills"]++;
-  }
-  if(sWeapon == "dog_bite_mp") {
+  if(sWeapon == "dog_bite_mp")
     self.pers["dog_kills"]++;
-  }
 }
 trackLeaderBoardDeathStats(sWeapon, sMeansOfDeath) {
   self thread threadedSetWeaponStatByName(sWeapon, 1, "deaths");
@@ -464,15 +429,12 @@ trackAttackerKill(name, rank, xp, prestige, xuid) {
   attacker = self;
   waittillframeend;
   pixbeginevent("trackAttackerKill");
-  if(!isDefined(attacker.pers["killed_players"][name])) {
+  if(!isDefined(attacker.pers["killed_players"][name]))
     attacker.pers["killed_players"][name] = 0;
-  }
-  if(!isDefined(attacker.killedPlayersCurrent[name])) {
+  if(!isDefined(attacker.killedPlayersCurrent[name]))
     attacker.killedPlayersCurrent[name] = 0;
-  }
-  if(!isDefined(attacker.pers["nemesis_tracking"][name])) {
+  if(!isDefined(attacker.pers["nemesis_tracking"][name]))
     attacker.pers["nemesis_tracking"][name] = 0;
-  }
   attacker.pers["killed_players"][name]++;
   attacker.killedPlayersCurrent[name]++;
   attacker.pers["nemesis_tracking"][name] += 1.0;
@@ -492,13 +454,11 @@ trackAttackeeDeath(attackerName, rank, xp, prestige, xuid) {
   self endon("disconnect");
   waittillframeend;
   pixbeginevent("trackAttackeeDeath");
-  if(!isDefined(self.pers["killed_by"][attackerName])) {
+  if(!isDefined(self.pers["killed_by"][attackerName]))
     self.pers["killed_by"][attackerName] = 0;
-  }
   self.pers["killed_by"][attackerName]++;
-  if(!isDefined(self.pers["nemesis_tracking"][attackerName])) {
+  if(!isDefined(self.pers["nemesis_tracking"][attackerName]))
     self.pers["nemesis_tracking"][attackerName] = 0;
-  }
   self.pers["nemesis_tracking"][attackerName] += 1.5;
   if(self.pers["nemesis_name"] == "" || self.pers["nemesis_tracking"][attackerName] > self.pers["nemesis_tracking"][self.pers["nemesis_name"]]) {
     self.pers["nemesis_name"] = attackerName;
@@ -510,11 +470,10 @@ trackAttackeeDeath(attackerName, rank, xp, prestige, xuid) {
     self.pers["nemesis_rank"] = rank;
     self.pers["nemesis_xp"] = xp;
   }
-  if(self.pers["nemesis_name"] == attackerName && self.pers["nemesis_tracking"][attackerName] >= 2) {
+  if(self.pers["nemesis_name"] == attackerName && self.pers["nemesis_tracking"][attackerName] >= 2)
     self setClientUIVisibilityFlag("killcam_nemesis", 1);
-  } else {
+  else
     self setClientUIVisibilityFlag("killcam_nemesis", 0);
-  }
   pixendevent();
 }
 default_isKillBoosting() {
@@ -549,9 +508,8 @@ incTotalKills(team) {
   game["totalKills"]++;
 }
 incItemStatByReference(reference, incValue, statName) {
-  if(level.wagerMatch) {
+  if(level.wagerMatch)
     return;
-  }
   itemIndex = maps\mp\gametypes\_rank::getItemIndex(reference);
   self incItemStatByIndex(itemIndex, incValue, statName);
 }
@@ -578,7 +536,7 @@ setAttachmentStat(name, incValue, statName) {
       if(!numAttachments) {
         return;
       }
-      for(currentAttachment = 0; currentAttachment < numAttachments; currentAttachment++) {
+      for (currentAttachment = 0; currentAttachment < numAttachments; currentAttachment++) {
         attachmentName = self.currentAttachments[currentAttachment]["name"];
         if((!isDefined(self.currentAttachments[currentAttachment]["owned"])) || (!self.currentAttachments[currentAttachment]["owned"])) {
           continue;
@@ -596,12 +554,10 @@ setAttachmentStat(name, incValue, statName) {
   }
 }
 setWeaponStat(name, incValue, statName) {
-  if(incValue && statName == "kills" && maps\mp\_medals::isMedal(name + "_kills")) {
+  if(incValue && statName == "kills" && maps\mp\_medals::isMedal(name + "_kills"))
     self thread maps\mp\_medals::giveMedal(name + "_kills");
-  }
-  if(!incValue) {
+  if(!incValue)
     return;
-  }
   if(level.wagerMatch) {
     self maps\mp\gametypes\_wager::trackWagerWeaponUsage(name, incValue, statName);
     return;
@@ -618,26 +574,23 @@ setWeaponStat(name, incValue, statName) {
   }
   if(weaponItemIndex) {
     contractsToProcess = self maps\mp\gametypes\_persistence::getContractsToProcess("weapon", toLower(statName));
-    if(contractsToProcess.size) {
+    if(contractsToProcess.size)
       self maps\mp\gametypes\_persistence::processContracts(contractsToProcess, "weapon", statName, incValue, name);
-    }
     incItemStatByIndex(weaponItemIndex, incValue, statName);
   }
   pixendevent();
 }
 setInflictorStat(eInflictor, eAttacker, sWeapon) {
-  if(!isDefined(eAttacker)) {
+  if(!isDefined(eAttacker))
     return;
-  }
   if(!isDefined(eInflictor)) {
     eAttacker setWeaponStat(sWeapon, 1, "hits");
     return;
   }
-  if(!isDefined(eInflictor.playerAffectedArray)) {
+  if(!isDefined(eInflictor.playerAffectedArray))
     eInflictor.playerAffectedArray = [];
-  }
   foundNewPlayer = true;
-  for(i = 0; i < eInflictor.playerAffectedArray.size; i++) {
+  for (i = 0; i < eInflictor.playerAffectedArray.size; i++) {
     if(eInflictor.playerAffectedArray[i] == self) {
       foundNewPlayer = false;
       break;
@@ -661,15 +614,12 @@ processAssist(killedplayer, damagedone) {
   killedplayer endon("disconnect");
   wait .05;
   maps\mp\gametypes\_globallogic_utils::WaitTillSlowProcessAllowed();
-  if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
+  if(self.pers["team"] != "axis" && self.pers["team"] != "allies")
     return;
-  }
-  if(self.pers["team"] == killedplayer.pers["team"]) {
+  if(self.pers["team"] == killedplayer.pers["team"])
     return;
-  }
-  if(!level.teambased) {
+  if(!level.teambased)
     return;
-  }
   assist_level = "assist";
   assist_level_value = int(floor(damagedone / 25));
   if(assist_level_value > 0) {
@@ -698,15 +648,14 @@ processAssist(killedplayer, damagedone) {
   self thread maps\mp\gametypes\_missions::playerAssist();
 }
 logXPGains() {
-  if(!isDefined(self.xpGains)) {
+  if(!isDefined(self.xpGains))
     return;
-  }
   xpTypes = getArrayKeys(self.xpGains);
-  for(index = 0; index < xpTypes.size; index++) {
+  for (index = 0; index < xpTypes.size; index++) {
     gain = self.xpGains[xpTypes[index]];
-    if(!gain) {
+    if(!gain)
       continue;
-    }
     self logString("xp " + xpTypes[index] + ": " + gain);
   }
 }
+

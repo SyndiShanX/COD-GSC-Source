@@ -14,18 +14,18 @@
 #namespace zm_bgb_reign_drops;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_reign_drops", &__init__, undefined, "bgb");
+  system::register("zm_bgb_reign_drops", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_reign_drops", "activated", 2, undefined, undefined, &validation, &activation);
+  bgb::register("zm_bgb_reign_drops", "activated", 2, undefined, undefined, & validation, & activation);
 }
 
 function validation() {
-  if(isDefined(self.var_b90dda44) && self.var_b90dda44) {
+  if(isdefined(self.var_b90dda44) && self.var_b90dda44) {
     return false;
   }
   return true;
@@ -51,7 +51,7 @@ function function_7892610e() {
   wait(0.05);
   n_start_time = gettime();
   n_total_time = 0;
-  while(isDefined(level.active_powerups) && level.active_powerups.size) {
+  while (isdefined(level.active_powerups) && level.active_powerups.size) {
     wait(0.5);
     n_current_time = gettime();
     n_total_time = (n_current_time - n_start_time) / 1000;
@@ -65,8 +65,8 @@ function function_7892610e() {
 function function_ed573cc2(n_position) {
   v_powerup = self bgb::get_player_dropped_powerup_origin();
   v_up = vectorscale((0, 0, 1), 5);
-  var_8e2dcc47 = (v_powerup + (anglesToForward(self.angles) * 60)) + v_up;
-  var_682b51de = (var_8e2dcc47 + (anglesToForward(self.angles) * 60)) + v_up;
+  var_8e2dcc47 = (v_powerup + (anglestoforward(self.angles) * 60)) + v_up;
+  var_682b51de = (var_8e2dcc47 + (anglestoforward(self.angles) * 60)) + v_up;
   switch (n_position) {
     case 1: {
       v_origin = (v_powerup + (anglestoright(self.angles) * -60)) + v_up;

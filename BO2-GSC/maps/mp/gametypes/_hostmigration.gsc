@@ -39,7 +39,8 @@ updatetimerpausedness() {
   }
 }
 
-callback_hostmigrationsave() {}
+callback_hostmigrationsave() {
+}
 
 pausetimer() {
   level.migrationtimerpausetime = gettime();
@@ -57,9 +58,8 @@ locktimer() {
     currtime = gettime();
     wait 0.05;
 
-    if(!level.timerstopped && isDefined(level.discardtime)) {
+    if(!level.timerstopped && isDefined(level.discardtime))
       level.discardtime = level.discardtime + (gettime() - currtime);
-    }
   }
 }
 
@@ -68,9 +68,8 @@ callback_hostmigration() {
   makedvarserverinfo("ui_guncycle", 0);
   level.hostmigrationreturnedplayercount = 0;
 
-  if(level.inprematchperiod) {
+  if(level.inprematchperiod)
     level waittill("prematch_over");
-  }
 
   if(level.gameended) {
     println("Migration starting at time " + gettime() + ", but game has ended, so no countdown.");
@@ -112,9 +111,8 @@ matchstarttimerconsole_internal(counttime, matchstarttimer) {
     wait(matchstarttimer.inframes * 0.05);
     matchstarttimer setvalue(counttime);
 
-    if(counttime == 2) {
+    if(counttime == 2)
       visionsetnaked(getdvar(#"mapname"), 3.0);
-    }
 
     counttime--;
     wait(1 - matchstarttimer.inframes * 0.05);
@@ -184,9 +182,8 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_end");
   self.hostmigrationcontrolsfrozen = 0;
 
-  while(!isalive(self)) {
+  while(!isalive(self))
     self waittill("spawned");
-  }
 
   self.hostmigrationcontrolsfrozen = 1;
   self freezecontrols(1);
@@ -198,15 +195,13 @@ hostmigrationtimerthink() {
   level endon("host_migration_begin");
   hostmigrationtimerthink_internal();
 
-  if(self.hostmigrationcontrolsfrozen) {
+  if(self.hostmigrationcontrolsfrozen)
     self freezecontrols(0);
-  }
 }
 
 waittillhostmigrationdone() {
-  if(!isDefined(level.hostmigrationtimer)) {
+  if(!isDefined(level.hostmigrationtimer))
     return 0;
-  }
 
   starttime = gettime();
   level waittill("host_migration_end");
@@ -238,9 +233,8 @@ waitlongdurationwithhostmigrationpause(duration) {
     }
   }
 
-  if(gettime() != endtime) {
+  if(gettime() != endtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-  }
 
   waittillhostmigrationdone();
   return gettime() - starttime;
@@ -261,15 +255,13 @@ waitlongdurationwithhostmigrationpauseemp(duration) {
     if(isDefined(level.hostmigrationtimer)) {
       timepassed = waittillhostmigrationdone();
 
-      if(isDefined(empendtime)) {
+      if(isDefined(empendtime))
         empendtime = empendtime + timepassed;
-      }
     }
   }
 
-  if(gettime() != empendtime) {
+  if(gettime() != empendtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO empendtime = " + empendtime);
-  }
 
   waittillhostmigrationdone();
   level.empendtime = undefined;
@@ -294,9 +286,8 @@ waitlongdurationwithgameendtimeupdate(duration) {
     }
   }
 
-  if(gettime() != endtime) {
+  if(gettime() != endtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-  }
 
   while(isDefined(level.hostmigrationtimer)) {
     endtime = endtime + 1000;

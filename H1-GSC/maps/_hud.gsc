@@ -5,7 +5,7 @@
 ********************************/
 
 init() {
-  level.uiparent = spawnStruct();
+  level.uiparent = spawnstruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";
@@ -16,9 +16,8 @@ init() {
   level.uiparent.height = 0;
   level.uiparent.children = [];
 
-  if(level.console) {
+  if(level.console)
     level.fontheight = 12;
-  } else {
+  else
     level.fontheight = 12;
-  }
 }

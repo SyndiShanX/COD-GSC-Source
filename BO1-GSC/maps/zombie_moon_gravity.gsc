@@ -163,7 +163,7 @@ gravity_zombie_death_response() {
 }
 
 zombie_moon_is_low_gravity_zone(zone_name) {
-  zone = getEntArray(zone_name, "targetname");
+  zone = getentarray(zone_name, "targetname");
   if(isDefined(zone[0].script_string) && zone[0].script_string == "lowgravity") {
     return true;
   }
@@ -318,7 +318,7 @@ reset_zombie_anim() {
 zombie_moon_update_player_gravity() {
   flag_wait("all_players_connected");
   LOW_G = 136;
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   while(1) {
     players = getplayers();
     for(i = 0; i < player_zones.size; i++) {
@@ -525,7 +525,7 @@ airless_vox_without_repeat() {
 
 update_zombie_locomotion() {
   flag_wait("power_on");
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   zombies = GetAIArray("axis");
   for(i = 0; i < player_zones.size; i++) {
     volume = player_zones[i];
@@ -579,7 +579,7 @@ player_throw_grenade() {
 watch_grenade_gravity() {
   self endon("death");
   self endon("explode");
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   while(1) {
     if(is_true(level.on_the_moon) && !flag("power_on")) {
       if(isDefined(self) && isalive(self)) {
@@ -630,7 +630,7 @@ zombie_airlock_think() {
       continue;
     }
     if(isDefined(self.script_parameters)) {
-      zone = getEntArray(self.script_parameters, "targetname");
+      zone = getentarray(self.script_parameters, "targetname");
       in_airlock = false;
       for(i = 0; i < zone.size; i++) {
         if(who istouching(zone[i])) {
@@ -645,7 +645,7 @@ zombie_airlock_think() {
     }
     if(self.script_string == "inside") {
       if(isDefined(self.doors[0].script_noteworthy)) {
-        _zones = getEntArray(self.doors[0].script_noteworthy, "targetname");
+        _zones = getentarray(self.doors[0].script_noteworthy, "targetname");
         if(_zones[0].script_string == "lowgravity") {
           who maps\zombie_moon_gravity::gravity_zombie_update(1);
           self.script_string = "outside";
@@ -662,7 +662,7 @@ zombie_airlock_think() {
 }
 
 zone_breached(zone_name) {
-  zones = getEntArray(zone_name, "targetname");
+  zones = getentarray(zone_name, "targetname");
   zombies = GetAIArray("axis");
   throttle = 0;
   for(i = 0; i < zombies.size; i++) {
@@ -684,7 +684,7 @@ zone_breached(zone_name) {
 }
 
 zombie_moon_crawl_anim_override() {
-  player_volumes = getEntArray("player_volume", "script_noteworthy");
+  player_volumes = getentarray("player_volume", "script_noteworthy");
   if(!is_true(level.on_the_moon)) {
     return;
   }

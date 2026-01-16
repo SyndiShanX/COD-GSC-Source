@@ -52,7 +52,7 @@ wait_for_thundergun_fired() {
       self thread thundergun_fired();
       view_pos = self GetTagOrigin("tag_flash") - self GetPlayerViewHeight();
       view_angles = self GetTagAngles("tag_flash");
-      playFX(level._effect["thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), AnglesToUp(view_angles));
+      playfx(level._effect["thundergun_smoke_cloud"], view_pos, AnglesToForward(view_angles), AnglesToUp(view_angles));
     }
   }
 }
@@ -183,8 +183,8 @@ thundergun_knockdown_zombie(player, gib) {
 
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect["thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), AnglesToUp(self.angles));
-    self playSound("fly_thundergun_forcehit");
+    playfx(level._effect["thundergun_knockdown_ground"], self.origin, AnglesToForward(self.angles), AnglesToUp(self.angles));
+    self playsound("fly_thundergun_forcehit");
   }
 }
 

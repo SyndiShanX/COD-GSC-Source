@@ -73,9 +73,9 @@ setup_drones() {
 }
 
 build_starts() {
-  add_start("intro", maps\ber3_event_intro::event_intro_start, &"BER3_WARP_INTRO");
-  add_start("plaza", maps\ber3_event_plaza::event_plaza_start, &"BER3_WARP_PLAZA");
-  add_start("reich", maps\ber3_event_steps::event_reich_start, &"BER3_WARP_REICH");
+  add_start("intro", maps\ber3_event_intro::event_intro_start, & "BER3_WARP_INTRO");
+  add_start("plaza", maps\ber3_event_plaza::event_plaza_start, & "BER3_WARP_PLAZA");
+  add_start("reich", maps\ber3_event_steps::event_reich_start, & "BER3_WARP_REICH");
   add_start("default", level.start_functions["intro"]);
   default_start(level.start_functions["intro"]);
   start = tolower(GetDvar("start"));
@@ -90,7 +90,7 @@ build_threatbias_groups() {
   createthreatbiasgroup("player_group");
   setignoremegroup("player_group", "panzer_group");
   setthreatbias("player_group", "mg42_group", -1000);
-  spawners = getEntArray("mg42_ai", "script_noteworthy");
+  spawners = getentarray("mg42_ai", "script_noteworthy");
   array_thread(spawners, ::add_spawn_function, ::mg42_set_threatgroup);
 }
 
@@ -105,7 +105,7 @@ init_flags() {
 setup_strings() {}
 set_objective(num) {}
 objectives_skip(numToSkipPast) {
-  for(i = 1; i <= numToSkipPast; i++) {
+  for (i = 1; i <= numToSkipPast; i++) {
     set_objective(i);
   }
 }
@@ -113,7 +113,7 @@ objectives_skip(numToSkipPast) {
 objective_follow_ent(objectiveNum, ent) {
   ent endon("death");
   level endon("objective_stop_following_ent");
-  while(1) {
+  while (1) {
     if(isDefined(ent)) {
       objective_position(objectiveNum, ent.origin);
     }
@@ -125,7 +125,7 @@ warp_players(startValue, startKey) {
   starts = GetStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     players[i] setPlayerAngles(starts[i].angles);
     players[i] setthreatbiasgroup("player_group");
@@ -140,7 +140,7 @@ warp_players_underworld() {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetOrigin(underworld.origin);
   }
 }
@@ -180,7 +180,7 @@ setup_friendlies() {
 warp_friendlies(startValue, startKey) {
   friendlyStarts = GetStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size > 0, "warp_friendlies(): didn't find enough friendly start points!");
-  for(i = 0; i < level.friends.size; i++) {
+  for (i = 0; i < level.friends.size; i++) {
     level.friends[i] Teleport(groundpos(friendlyStarts[i].origin), friendlyStarts[i].angles);
   }
 }
@@ -197,7 +197,7 @@ hangguy() {
 hangguy_with_ragdoll(bonename, length) {
   sign = spawn("script_model", self getTagOrigin("J_SpineUpper"));
   sign.angles = self getTagAngles("J_SpineUpper");
-  sign setModel("char_ger_traitorsign");
+  sign setmodel("char_ger_traitorsign");
   sign linkto(self, "J_SpineUpper", (3, 7, 0), (-90, 0, 180));
   start = self.origin + (0, 0, length + 22);
   end = (0, 0, 0);
@@ -214,7 +214,7 @@ move_tank_on_trigger(pathname, trigname) {
 }
 
 spawn_tank(tank_type, start_node, kill_tank) {
-  while(!OkTospawn()) {
+  while (!OkToSpawn()) {
     wait_network_frame();
   }
   tank = spawnvehicle(tank_type, "tank", "t34", start_node.origin, start_node.angles);
@@ -232,15 +232,15 @@ spawn_tank(tank_type, start_node, kill_tank) {
 }
 
 spawn_plane(plane_type, start_node) {
-  while(!OkTospawn()) {
+  while (!OkToSpawn()) {
     wait_network_frame();
   }
   plane = spawnvehicle(plane_type, "plane", "stuka", start_node.origin, start_node.angles);
   plane attachPath(start_node);
   plane startpath();
-  plane playSound("fly_by");
+  plane playsound("fly_by");
   wait(3.5);
-  plane playSound("fly_by_shoot");
+  plane playsound("fly_by_shoot");
   plane waittill("reached_end_node");
   plane delete();
 }
@@ -265,9 +265,9 @@ satchel_setup(charge_trig, target_ent) {
   ASSERTEX(isDefined(charge), "Charge trigger should be pointing to a sachel charge");
   ASSERTEX(isDefined(charge.script_noteworthy), "Charge should have a swap model specified as script_noteworthy");
   charge_trig waittill("trigger", user);
-  charge setModel("weapon_usa_explosive_russian");
-  charge playSound("satchel_plant");
-  charge playLoopSound("satchel_timer");
+  charge setmodel("weapon_usa_explosive_russian");
+  charge playsound("satchel_plant");
+  charge playloopsound("satchel_timer");
   charge_trig delete();
   wait(5);
   charge stoploopsound();
@@ -309,12 +309,12 @@ simple_floodspawn(spawn_func) {
     return undefined;
   }
   if(isDefined(spawn_func)) {
-    for(i = 0; i < spawners.size; i++) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func);
     }
   }
-  for(i = 0; i < spawners.size; i++) {
-    while(!OkTospawn()) {
+  for (i = 0; i < spawners.size; i++) {
+    while (!OkToSpawn()) {
       wait_network_frame();
     }
     if(isDefined(spawners[i])) {
@@ -331,19 +331,19 @@ simple_spawn(spawn_func) {
     return undefined;
   }
   if(isDefined(spawn_func)) {
-    for(i = 0; i < spawners.size; i++) {
+    for (i = 0; i < spawners.size; i++) {
       spawners[i] add_spawn_function(spawn_func);
     }
   }
   ai_array = [];
-  for(i = 0; i < spawners.size; i++) {
-    while(!OkTospawn()) {
+  for (i = 0; i < spawners.size; i++) {
+    while (!OkToSpawn()) {
       wait_network_frame();
     }
     if(isDefined(spawners[i].script_forcespawn)) {
-      ai = spawners[i] Stalingradspawn();
+      ai = spawners[i] StalingradSpawn();
     } else {
-      ai = spawners[i] Dospawn();
+      ai = spawners[i] DoSpawn();
     }
     spawn_failed(ai);
     ai_array = add_to_array(ai_array, ai);
@@ -353,12 +353,12 @@ simple_spawn(spawn_func) {
 }
 
 simple_spawners_level_init() {
-  flood_spawner_trigs = getEntArray("ber3_flood_spawner", "targetname");
-  spawner_trigs = getEntArray("ber3_spawner", "targetname");
-  for(i = 0; i < flood_spawner_trigs.size; i++) {
+  flood_spawner_trigs = getentarray("ber3_flood_spawner", "targetname");
+  spawner_trigs = getentarray("ber3_spawner", "targetname");
+  for (i = 0; i < flood_spawner_trigs.size; i++) {
     flood_spawner_trigs[i] thread simple_floodspawn();
   }
-  for(i = 0; i < spawner_trigs.size; i++) {
+  for (i = 0; i < spawner_trigs.size; i++) {
     spawner_trigs[i] thread simple_spawn();
   }
 }
@@ -400,22 +400,22 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
   reloadTimeMax = 3.0;
   burst_area = (1250, 8250, 1000);
   traceDist = 10000;
-  orig_target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+  orig_target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
   target_org = spawn("script_origin", orig_target);
   println("org" + target_org.origin);
   println("BA" + burst_area);
-  while(1) {
+  while (1) {
     burst = RandomIntRange(burstMin, burstMax);
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]),
       (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]),
       (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
-    for(i = 0; i < burst; i++) {
+    for (i = 0; i < burst; i++) {
       target = target_org.origin;
       fx_angles = VectorNormalize(target - self.origin);
-      playFX(muzzleFlash, self.origin, fx_angles);
+      PlayFX(muzzleFlash, self.origin, fx_angles);
       if(i % 4 == 0) {
-        playFX(fake_tracer, self.origin, fx_angles);
+        PlayFX(fake_tracer, self.origin, fx_angles);
       }
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
@@ -425,7 +425,7 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
 
 rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);

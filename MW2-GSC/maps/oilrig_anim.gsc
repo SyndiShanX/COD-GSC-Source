@@ -32,9 +32,11 @@ idle_c4_drone_anims() {
   //	level.dronedeathanims[ 7 ] = %exposed_death_02;
   //	level.dronedeathanims[ 8 ] = %exposed_death;
   //	level.dronedeathanims[ 9 ] = %exposed_death;
+
 }
 
 friendly_anims() {
+
   /*-----------------------
   HOSTAGES
   -------------------------*/
@@ -253,6 +255,7 @@ anims() {
   level.scr_anim["generic"]["takedown_room2B_soldier_idle"][0] = % takedown_room2B_soldier_idle;
   level.scr_anim["generic"]["takedown_room1Alt_soldier"] = % takedown_room1Alt_soldier;
   level.scr_anim["generic"]["takedown_room1Alt_soldier_idle"][0] = % takedown_room1Alt_soldier_idle;
+
 }
 
 dialogue() {
@@ -348,7 +351,7 @@ dialogue() {
   //MERC 1 (in German): This sea air makes me sick. Prefered the last job. Private security in a limo all day.
   level.scr_sound["hostile_stealthkill_friendly"]["oilrig_mrc1_limoallday"] = "oilrig_mrc1_limoallday";
 
-  //MERC 2 (in German): You complain too much.
+  //MERC 2 (in German): You complain too much. 
   level.scr_sound["hostile_stealthkill_player"]["oilrig_mrc2_complain"] = "oilrig_mrc2_complain";
 
   //MERC 1 (in German): yeah, well, not as much as the Italians. Who hired those lazy fucks anyways? Did you see that one guy the other day? Didn't even know how to clean his gun.
@@ -463,6 +466,8 @@ dialogue() {
   //"Seal Leader: Get into position."
   level.scr_radio["oilrig_nsl_intopostion"] = "oilrig_nsl_intopostion";
 
+
+
   //SEAL COMMANDER (radio): Get a frame charge on the door. We'll hit the room from both sides.
   //radio_dialogue( "oilrig_nsl_framecharge" );
   level.scr_radio["breach_nag_00"] = "oilrig_nsl_framecharge";
@@ -477,6 +482,8 @@ dialogue() {
 
   //"Seal Leader: Get into position."
   level.scr_radio["breach_nag_03"] = "oilrig_nsl_intopostion";
+
+
 
   //"Navy Seal 1: In position."
   //radio_dialogue( "oilrig_ns1_inposition" );
@@ -787,7 +794,7 @@ dialogue() {
   //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."
   level.scr_radio["oilrig_nsl_coverblown"] = "oilrig_nsl_coverblown";
 
-  //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck.
+  //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck. 
   //radio_dialogue( "oilrig_sbc_possibleexpl" );
   level.scr_radio["oilrig_sbc_possibleexpl"] = "oilrig_sbc_possibleexpl";
 
@@ -1104,6 +1111,8 @@ dialogue() {
   //Watch your corners.	
   level.scr_sound["oilrig_merc_chatter_20"] = "oilrig_mrc3_watchcorners";
 
+
+
   /*-----------------------
   NOT USED
   -------------------------*/
@@ -1212,6 +1221,7 @@ scuba_gear_prop_anims() {
   level.scr_animtree["rebreather_off_oilrig_seal_surface_rebreather_off_guy2"] = #animtree;
   level.scr_anim["rebreather_off_oilrig_seal_surface_rebreather_off_guy2"]["oilrig_seal_surface_rebreather_off_guy2_prop"] = % oilrig_seal_surface_rebreather_off_guy2_prop;
   level.scr_model["rebreather_off_oilrig_seal_surface_rebreather_off_guy2"] = "prop_seal_udt_draeger";
+
 }
 scuba_gear_removal(sAnimName, sAnimScene, eNodeEntity, flagName) {
   //Call when cooresponding AI animation is called

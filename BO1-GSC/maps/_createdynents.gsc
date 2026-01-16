@@ -160,7 +160,7 @@ check_for_dupes(array, single) {
 
 setup_menus() {
   level.menu_sys = [];
-  level.menu_sys["current_menu"] = spawnStruct();
+  level.menu_sys["current_menu"] = SpawnStruct();
   add_menu("choose_mode", "Choose Mode:");
   add_menuoptions("choose_mode", "Dyn Ents Mode");
   add_menuoptions("choose_mode", "Destructibles Mode");
@@ -251,7 +251,7 @@ add_menu(menu_name, title) {
     println("^1level.menu_sys[" + menu_name + "] already exists, change the menu_name");
     return;
   }
-  level.menu_sys[menu_name] = spawnStruct();
+  level.menu_sys[menu_name] = SpawnStruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
@@ -452,9 +452,8 @@ force_menu_back() {
   keys[7] = "7";
   keys[8] = "8";
   keys[9] = "9";
-  if(key > 0 && key < 10) {
+  if(key > 0 && key < 10)
     key = keys[key];
-  }
   level notify("menu_button_pressed", key);
 }
 
@@ -598,9 +597,9 @@ hud_font_scaler(mult) {
 update_selected_object_position() {
   object = level.selected_object;
   if(isDefined(object)) {
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
-    vector = level.debug_player getEye() + vector_scale(forward, 5000);
-    trace = bulletTrace(level.debug_player getEye(), vector, false, self);
+    forward = AnglesToforward(level.debug_player GetPlayerAngles());
+    vector = level.debug_player GetEye() + vector_scale(forward, 5000);
+    trace = BulletTrace(level.debug_player GetEye(), vector, false, self);
     if(trace["fraction"] != 1) {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
       if(vector != object.origin) {
@@ -622,10 +621,10 @@ move_selected_object(with_trace) {
     with_trace = false;
   }
   while(true) {
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
+    forward = AnglesToforward(level.debug_player GetPlayerAngles());
     if(with_trace) {
-      vector = level.debug_player getEye() + vector_scale(forward, 5000);
-      trace = bulletTrace(level.debug_player getEye(), vector, false, self);
+      vector = level.debug_player GetEye() + vector_scale(forward, 5000);
+      trace = BulletTrace(level.debug_player GetEye(), vector, false, self);
       if(trace["fraction"] == 1) {
         wait(0.1);
         continue;
@@ -634,7 +633,7 @@ move_selected_object(with_trace) {
       }
       vector = vector + (0, 0, level.selected_object_z_offset);
     } else {
-      vector = level.debug_player getEye() + vector_scale(forward, level.selected_object_dist);
+      vector = level.debug_player GetEye() + vector_scale(forward, level.selected_object_dist);
     }
     if(vector != self.origin) {
       self moveTo(vector, 0.1);
@@ -731,8 +730,8 @@ spray_model() {
 }
 
 do_spray_model() {
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  vector = level.debug_player getEye() + vector_scale(forward, 48);
+  forward = AnglesToForward(level.debug_player GetPlayerAngles());
+  vector = level.debug_player GetEye() + vector_scale(forward, 48);
   object = spawn("script_model", vector);
   object setModel(level.spray["model"]);
   velocity = vector_scale(forward, level.spray["power"]);
@@ -749,10 +748,10 @@ spray_trajectory() {
   og_time_inc = time_inc;
   while(1) {
     time_inc = og_time_inc;
-    forward = anglesToForward(level.debug_player GetPlayerAngles());
+    forward = AnglesToForward(level.debug_player GetPlayerAngles());
     velocity = vector_scale(forward, level.spray["power"]);
     sub_vel = vector_scale(velocity, time_inc);
-    start_pos = level.debug_player getEye() + vector_scale(forward, 48);;
+    start_pos = level.debug_player GetEye() + vector_scale(forward, 48);;
     gravity = GetDvarInt(#"bg_gravity");
     for(i = 1; i < segments + 1; i++) {
       pos = start_pos + vector_scale(sub_vel, i);
@@ -926,7 +925,7 @@ object_highlight(objects) {
   level endon("stop_select_model");
   dot = 0.85;
   highlighted_object = undefined;
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
+  forward = AnglesToForward(level.debug_player GetPlayerAngles());
   for(i = 0; i < objects.size; i++) {
     if(!isDefined(objects[i].select_scale)) {
       objects[i] select_icon_think();
@@ -1186,9 +1185,8 @@ xform_input_handler() {
   while(1) {
     level waittill("xform_button_pressed", key);
     object = level.selected_object;
-    if(!isDefined(object)) {
+    if(!isDefined(object))
       object = level.highlighted_object;
-    }
     if(!level.debug_player ButtonPressed("button_ltrig")) {
       if(key == "button_rshldr") {
         level.selected_object_z_offset += 4;
@@ -1295,8 +1293,8 @@ spawn_selected_object(model_name, with_trace, type) {
   if(isDefined(level.selected_object)) {
     level.selected_object Delete();
   }
-  forward = anglesToForward(level.debug_player GetPlayerAngles());
-  vector = level.debug_player getEye() + vector_scale(forward, level.selected_object_dist);
+  forward = AnglesToforward(level.debug_player GetPlayerAngles());
+  vector = level.debug_player GetEye() + vector_scale(forward, level.selected_object_dist);
   if(isDefined(type) && type == "destructible") {
     level.selected_object = Codespawn("script_model", vector, 0, 0, 0, model_name);
   } else {
@@ -1603,9 +1601,8 @@ save_buttons() {
 }
 
 quit() {
-  if(level.xform_hud_active) {
+  if(level.xform_hud_active)
     toggle_xform_hud();
-  }
   level.hud_selector Destroy();
   disable_menu("current_menu");
   level.menu_sys = [];

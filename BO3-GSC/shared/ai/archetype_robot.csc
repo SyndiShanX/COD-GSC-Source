@@ -13,7 +13,7 @@
 #namespace archetype_robot;
 
 function autoexec __init__sytem__() {
-  system::register("robot", &__init__, undefined, undefined);
+  system::register("robot", & __init__, undefined, undefined);
 }
 
 function autoexec precache() {
@@ -23,12 +23,12 @@ function autoexec precache() {
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("robot")) {
-    clientfield::register("actor", "robot_mind_control", 1, 2, "int", &robotclientutils::robotmindcontrolhandler, 0, 1);
-    clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int", &robotclientutils::robotmindcontrolexplosionhandler, 0, 0);
-    clientfield::register("actor", "robot_lights", 1, 3, "int", &robotclientutils::robotlightshandler, 0, 0);
-    clientfield::register("actor", "robot_EMP", 1, 1, "int", &robotclientutils::robotemphandler, 0, 0);
+    clientfield::register("actor", "robot_mind_control", 1, 2, "int", & robotclientutils::robotmindcontrolhandler, 0, 1);
+    clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int", & robotclientutils::robotmindcontrolexplosionhandler, 0, 0);
+    clientfield::register("actor", "robot_lights", 1, 3, "int", & robotclientutils::robotlightshandler, 0, 0);
+    clientfield::register("actor", "robot_EMP", 1, 1, "int", & robotclientutils::robotemphandler, 0, 0);
   }
-  ai::add_archetype_spawn_function("robot", &robotclientutils::robotsoldierspawnsetup);
+  ai::add_archetype_spawn_function("robot", & robotclientutils::robotsoldierspawnsetup);
 }
 
 #namespace robotclientutils;
@@ -57,7 +57,7 @@ function private robotlighting(localclientnum, entity, flicker, mindcontrolstate
         fxclientutils::playfxbundle(localclientnum, entity, entity.altfxdef1);
       }
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, "fly_bot_ctrl_lvl_01_start", entity.origin);
+        entity playsound(localclientnum, "fly_bot_ctrl_lvl_01_start", entity.origin);
       }
       break;
     }
@@ -70,7 +70,7 @@ function private robotlighting(localclientnum, entity, flicker, mindcontrolstate
         fxclientutils::playfxbundle(localclientnum, entity, entity.altfxdef1);
       }
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, "fly_bot_ctrl_lvl_02_start", entity.origin);
+        entity playsound(localclientnum, "fly_bot_ctrl_lvl_02_start", entity.origin);
       }
       break;
     }
@@ -82,7 +82,7 @@ function private robotlighting(localclientnum, entity, flicker, mindcontrolstate
       } else {
         fxclientutils::playfxbundle(localclientnum, entity, entity.altfxdef2);
       }
-      entity playSound(localclientnum, "fly_bot_ctrl_lvl_03_start", entity.origin);
+      entity playsound(localclientnum, "fly_bot_ctrl_lvl_03_start", entity.origin);
       break;
     }
   }
@@ -90,7 +90,7 @@ function private robotlighting(localclientnum, entity, flicker, mindcontrolstate
 
 function private robotlightshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(!isDefined(entity) || !entity isai() || (isDefined(entity.archetype) && entity.archetype != "robot")) {
+  if(!isdefined(entity) || !entity isai() || (isdefined(entity.archetype) && entity.archetype != "robot")) {
     return;
   }
   fxclientutils::stopallfxbundles(localclientnum, entity);
@@ -104,10 +104,10 @@ function private robotlightshandler(localclientnum, oldvalue, newvalue, bnewent,
 
 function private robotemphandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(!isDefined(entity) || !entity isai() || (isDefined(entity.archetype) && entity.archetype != "robot")) {
+  if(!isdefined(entity) || !entity isai() || (isdefined(entity.archetype) && entity.archetype != "robot")) {
     return;
   }
-  if(isDefined(entity.empfx)) {
+  if(isdefined(entity.empfx)) {
     stopfx(localclientnum, entity.empfx);
   }
   switch (newvalue) {
@@ -115,7 +115,7 @@ function private robotemphandler(localclientnum, oldvalue, newvalue, bnewent, bi
       break;
     }
     case 1: {
-      entity.empfx = playFXOnTag(localclientnum, level._effect["fx_ability_elec_surge_short_robot"], entity, "j_spine4");
+      entity.empfx = playfxontag(localclientnum, level._effect["fx_ability_elec_surge_short_robot"], entity, "j_spine4");
       break;
     }
   }
@@ -123,7 +123,7 @@ function private robotemphandler(localclientnum, oldvalue, newvalue, bnewent, bi
 
 function private robotmindcontrolhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(!isDefined(entity) || !entity isai() || (isDefined(entity.archetype) && entity.archetype != "robot")) {
+  if(!isdefined(entity) || !entity isai() || (isdefined(entity.archetype) && entity.archetype != "robot")) {
     return;
   }
   lights = clientfield::get("robot_lights");
@@ -135,12 +135,12 @@ function private robotmindcontrolhandler(localclientnum, oldvalue, newvalue, bne
 
 function robotmindcontrolexplosionhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(!isDefined(entity) || !entity isai() || (isDefined(entity.archetype) && entity.archetype != "robot")) {
+  if(!isdefined(entity) || !entity isai() || (isdefined(entity.archetype) && entity.archetype != "robot")) {
     return;
   }
   switch (newvalue) {
     case 1: {
-      entity.explosionfx = playFXOnTag(localclientnum, level._effect["fx_exp_robot_stage3_evb"], entity, "j_spineupper");
+      entity.explosionfx = playfxontag(localclientnum, level._effect["fx_exp_robot_stage3_evb"], entity, "j_spineupper");
       break;
     }
   }

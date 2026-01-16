@@ -173,9 +173,8 @@ onFreecam() {
 updateSpectateSettings() {
   level endon("game_ended");
 
-  for(index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++)
     level.players[index] setSpectatePermissions();
-  }
 }
 
 setSpectatePermissions() {
@@ -269,12 +268,10 @@ setSpectatePermissions() {
   }
 
   if(isDefined(team) && (team == "axis" || team == "allies")) {
-    if(isDefined(level.spectateOverride[team].allowFreeSpectate)) {
+    if(isDefined(level.spectateOverride[team].allowFreeSpectate))
       self allowSpectateTeam("freelook", true);
-    }
 
-    if(isDefined(level.spectateOverride[team].allowEnemySpectate)) {
+    if(isDefined(level.spectateOverride[team].allowEnemySpectate))
       self allowSpectateTeam(getOtherTeam(team), true);
-    }
   }
 }

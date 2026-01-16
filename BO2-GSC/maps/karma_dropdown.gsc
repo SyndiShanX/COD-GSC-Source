@@ -57,10 +57,9 @@ main() {
   level thread run_scene_and_delete("elevator_encounter1");
   level thread run_scene_and_delete("elevator_encounter2");
 
-  foreach(guy in getEntArray("dropdown_patrol_ai", "targetname")) {
-    if(guy.animname == "dropdown_guard1") {
+  foreach(guy in getentarray("dropdown_patrol_ai", "targetname")) {
+    if(guy.animname == "dropdown_guard1")
       level.dropdown_guy = guy;
-    }
   }
 
   run_scene_and_delete("tower_elevator_open");
@@ -79,9 +78,8 @@ main() {
   scene_wait("elevator_encounter1");
   wait 1.0;
 
-  if(!flag("elevator_encounter2_done")) {
+  if(!flag("elevator_encounter2_done"))
     end_scene("elevator_encounter2");
-  }
 
   flag_set("ambush_attack");
   waittill_ai_group_ai_count("dropdown_patrol", 0);
@@ -95,7 +93,7 @@ main() {
   level thread run_scene_and_delete("tower_elevator_close");
   getent("duffle_bag", "targetname") delete();
   flag_set("setup_spiderbot");
-  level.player playSound("evt_spiderbot_intro");
+  level.player playsound("evt_spiderbot_intro");
   level thread run_scene_and_delete("set_spiderbot_player");
   wait 1.0;
   level thread run_scene_and_delete("set_spiderbot_salazar");
@@ -186,9 +184,8 @@ salazar_vent_wait() {
   level.ai_salazar set_blend_in_out_times(0.2);
   run_scene_and_delete("salazar_go_inside_spiderbot");
 
-  if(!flag("set_spiderbot_player_started")) {
+  if(!flag("set_spiderbot_player_started"))
     run_scene_and_delete("salazar_wait_vent_spiderbot");
-  }
 
   level.ai_salazar set_blend_in_out_times(0);
   level.ai_salazar thread run_scene_and_delete("salazar_wait");

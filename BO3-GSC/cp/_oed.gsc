@@ -17,7 +17,7 @@
 #namespace oed;
 
 function autoexec __init__sytem__() {
-  system::register("oed", &__init__, &__main__, undefined);
+  system::register("oed", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -35,18 +35,18 @@ function __init__() {
   clientfield::register("scriptmover", "thermal_active", 1, 1, "int");
   clientfield::register("scriptmover", "sitrep_material", 1, 1, "int");
   clientfield::register("item", "sitrep_material", 1, 1, "int");
-  if(!isDefined(level.vsmgr_prio_visionset_tmode)) {
+  if(!isdefined(level.vsmgr_prio_visionset_tmode)) {
     level.vsmgr_prio_visionset_tmode = 50;
   }
-  visionset_mgr::register_info("visionset", "tac_mode", 1, level.vsmgr_prio_visionset_tmode, 15, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
-  callback::on_spawned(&on_player_spawned);
-  spawner::add_global_spawn_function("axis", &enable_thermal_on_spawned);
-  spawner::add_global_spawn_function("allies", &enable_thermal_on_spawned);
+  visionset_mgr::register_info("visionset", "tac_mode", 1, level.vsmgr_prio_visionset_tmode, 15, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  callback::on_spawned( & on_player_spawned);
+  spawner::add_global_spawn_function("axis", & enable_thermal_on_spawned);
+  spawner::add_global_spawn_function("allies", & enable_thermal_on_spawned);
   level.b_enhanced_vision_enabled = 1;
   level.b_tactical_mode_enabled = 1;
   level.b_player_scene_active = 0;
-  level.enable_thermal = &enable_thermal;
-  level.disable_thermal = &disable_thermal;
+  level.enable_thermal = & enable_thermal;
+  level.disable_thermal = & disable_thermal;
 }
 
 function __main__() {
@@ -56,7 +56,7 @@ function __main__() {
 function keyline_weapons() {
   waittillframeend();
   if(level.b_tactical_mode_enabled) {
-    array::thread_all(util::query_ents(associativearray("classname", "weapon_"), 1, [], 1, 1), &enable_keyline);
+    array::thread_all(util::query_ents(associativearray("classname", "weapon_"), 1, [], 1, 1), & enable_keyline);
   }
 }
 
@@ -68,7 +68,7 @@ function on_player_spawned() {
   self.tmode_state = 0;
   b_playsound = 0;
   if(!sessionmodeiscampaignzombiesgame()) {
-    if(isDefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn")) {
+    if(isdefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn")) {
       self.tmode_state = 1;
       b_playsound = 0;
     }
@@ -82,24 +82,24 @@ function on_player_spawned() {
 function function_cec8e852() {
   self endon("death");
   self endon("killoedmonitor");
-  while(true) {
+  while (true) {
     level flagsys::wait_till_clear("");
     if(level.b_enhanced_vision_enabled && self.b_enhanced_vision_enabled && self actionslotonebuttonpressed()) {
       if(!scene::is_igc_active()) {
-        self.ev_state = !(isDefined(self.ev_state) && self.ev_state);
+        self.ev_state = !(isdefined(self.ev_state) && self.ev_state);
         self ev_activate_on_player(self.ev_state);
-        while(self actionslotonebuttonpressed()) {
+        while (self actionslotonebuttonpressed()) {
           wait(0.05);
         }
       }
     }
     if(!sessionmodeiscampaignzombiesgame() && level.b_tactical_mode_enabled && self.b_tactical_mode_enabled && self actionslotfourbuttonpressed()) {
       if(!scene::is_igc_active()) {
-        self.tmode_state = !(isDefined(self.tmode_state) && self.tmode_state);
+        self.tmode_state = !(isdefined(self.tmode_state) && self.tmode_state);
         self tmode_activate_on_player(self.tmode_state);
         visionset_mgr::activate("visionset", "tac_mode", self, 0.05, 0, 0.8);
         wait(0.85);
-        while(self actionslotfourbuttonpressed()) {
+        while (self actionslotfourbuttonpressed()) {
           wait(0.05);
         }
       }
@@ -120,7 +120,7 @@ function enable_thermal(str_disable) {
   self endon("death");
   self clientfield::set("thermal_active", 1);
   self thread disable_thermal_on_death();
-  if(isDefined(str_disable)) {
+  if(isdefined(str_disable)) {
     level waittill(str_disable);
     self disable_thermal();
   }
@@ -129,7 +129,7 @@ function enable_thermal(str_disable) {
 function disable_thermal_on_death() {
   self endon("disable_thermal");
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self disable_thermal();
   }
 }
@@ -156,7 +156,7 @@ function enable_ev(b_enabled = 1) {
 function enable_tac_mode(b_enabled = 1) {
   self.b_tactical_mode_enabled = b_enabled;
   if(b_enabled) {
-    if(!sessionmodeiscampaignzombiesgame() && (isDefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn"))) {
+    if(!sessionmodeiscampaignzombiesgame() && (isdefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn"))) {
       self tmode_activate_on_player(1, 0);
     }
   } else {
@@ -171,7 +171,7 @@ function set_player_ev(b_enabled = 1) {
 function ev_activate_on_player(b_enabled = 1) {
   self.ev_state = b_enabled;
   if(self.ev_state) {
-    if(isDefined(self.tmode_state) && self.tmode_state) {
+    if(isdefined(self.tmode_state) && self.tmode_state) {
       self.tmode_state_before_ev = 1;
     } else {
       self.tmode_state_before_ev = 0;
@@ -185,8 +185,8 @@ function ev_activate_on_player(b_enabled = 1) {
   }
   self clientfield::set_to_player("ev_toggle", self.ev_state);
   if(!self.ev_state) {
-    if(isDefined(self.tmode_state_before_ev) && self.tmode_state_before_ev) {
-      if(!sessionmodeiscampaignzombiesgame() && (isDefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn"))) {
+    if(isdefined(self.tmode_state_before_ev) && self.tmode_state_before_ev) {
+      if(!sessionmodeiscampaignzombiesgame() && (isdefined(getlocalprofileint("tacticalModeAutoOn")) && getlocalprofileint("tacticalModeAutoOn"))) {
         self tmode_activate_on_player(1, 0, 0);
       }
     }
@@ -205,7 +205,7 @@ function tmode_activate_on_player(b_enabled = 1, b_playsound = 1, b_turnoffev = 
   }
   self tmodesetserveruser(self.tmode_state);
   code = 0;
-  if(!isDefined(self.tmode_count)) {
+  if(!isdefined(self.tmode_count)) {
     self.tmode_count = 0;
   }
   self.tmode_count++;
@@ -222,9 +222,9 @@ function tmode_activate_on_player(b_enabled = 1, b_playsound = 1, b_turnoffev = 
 }
 
 function init_heroes() {
-  a_e_heroes = getEntArray();
+  a_e_heroes = getentarray();
   foreach(e_hero in a_e_heroes) {
-    if(isDefined(e_hero.is_hero) && e_hero.is_hero) {
+    if(isdefined(e_hero.is_hero) && e_hero.is_hero) {
       e_hero thread enable_thermal();
     }
   }
@@ -246,7 +246,7 @@ function enable_keyline(b_interact = 0, str_disable) {
   self endon("death");
   self clientfield::set("sitrep_material", 1);
   self thread disable_on_death();
-  if(isDefined(str_disable)) {
+  if(isdefined(str_disable)) {
     level waittill(str_disable);
     self disable_keyline();
   }
@@ -254,7 +254,7 @@ function enable_keyline(b_interact = 0, str_disable) {
 
 function disable_on_death() {
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self disable_keyline();
   }
 }
@@ -265,18 +265,18 @@ function disable_keyline() {
 
 function toggle_sitrep_for_players(b_active = 1) {
   foreach(player in level.players) {
-    player.sitrep_active = !(isDefined(player.sitrep_active) && player.sitrep_active);
+    player.sitrep_active = !(isdefined(player.sitrep_active) && player.sitrep_active);
     player clientfield::set_to_player("sitrep_toggle", player.sitrep_active);
   }
 }
 
 function init_sitrep_model() {
-  if(!isDefined(self.angles)) {
+  if(!isdefined(self.angles)) {
     self.angles = (0, 0, 0);
   }
   s_sitrep_bundle = level.scriptbundles["sitrep"][self.scriptbundlename];
   e_sitrep = util::spawn_model(s_sitrep_bundle.model, self.origin, self.angles);
-  if(isDefined(s_sitrep_bundle.sitrep_interact)) {
+  if(isdefined(s_sitrep_bundle.sitrep_interact)) {
     e_sitrep.script_sitrep_id = s_sitrep_bundle.sitrep_interact;
   } else {
     e_sitrep.script_sitrep_id = 0;

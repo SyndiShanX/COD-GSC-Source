@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_nuketown_sign;
 
 autoexec __init__system__() {
@@ -29,7 +30,7 @@ nuked_population_sign_think(localclientnum) {
 
   level thread function_102a701c(tens_model, ones_model);
 
-  step = 36;
+    step = 36;
   ones = 0;
   tens = 0;
   tens_model rotateroll(step, 0.05);
@@ -112,3 +113,4 @@ function_102a701c(tens, ones) {
     wait 2;
   }
 }
+

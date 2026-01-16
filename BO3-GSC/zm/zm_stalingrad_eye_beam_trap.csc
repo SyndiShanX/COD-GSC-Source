@@ -12,13 +12,13 @@
 #namespace zm_stalingrad_eye_beam_trap;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_eye_beam_trap", &__init__, undefined, undefined);
+  system::register("zm_stalingrad_eye_beam_trap", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "eye_beam_trap_postfx", 12000, 1, "int", &function_822dbe7f, 0, 0);
-  clientfield::register("world", "eye_beam_rumble_factory", 12000, 1, "int", &function_3d1860f, 0, 0);
-  clientfield::register("world", "eye_beam_rumble_library", 12000, 1, "int", &function_ea1e41d4, 0, 0);
+  clientfield::register("toplayer", "eye_beam_trap_postfx", 12000, 1, "int", & function_822dbe7f, 0, 0);
+  clientfield::register("world", "eye_beam_rumble_factory", 12000, 1, "int", & function_3d1860f, 0, 0);
+  clientfield::register("world", "eye_beam_rumble_library", 12000, 1, "int", & function_ea1e41d4, 0, 0);
 }
 
 function function_822dbe7f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -33,7 +33,7 @@ function function_3d1860f(localclientnum, oldval, newval, bnewent, binitialsnap,
   e_player = getlocalplayer(localclientnum);
   if(newval) {
     e_player.var_ce79a8bf = function_3975127(localclientnum, "factory");
-  } else if(isDefined(e_player.var_ce79a8bf)) {
+  } else if(isdefined(e_player.var_ce79a8bf)) {
     e_player.var_ce79a8bf stoprumble(localclientnum, "zm_stalingrad_eye_beam_rumble");
     e_player.var_ce79a8bf delete();
   }
@@ -43,7 +43,7 @@ function function_ea1e41d4(localclientnum, oldval, newval, bnewent, binitialsnap
   e_player = getlocalplayer(localclientnum);
   if(newval) {
     e_player.var_5082384e = function_3975127(localclientnum, "library");
-  } else if(isDefined(e_player.var_5082384e)) {
+  } else if(isdefined(e_player.var_5082384e)) {
     e_player.var_5082384e stoprumble(localclientnum, "zm_stalingrad_eye_beam_rumble");
     e_player.var_5082384e delete();
   }

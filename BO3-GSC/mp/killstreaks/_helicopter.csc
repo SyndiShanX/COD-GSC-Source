@@ -17,7 +17,7 @@
 #namespace helicopter;
 
 function autoexec __init__sytem__() {
-  system::register("helicopter", &__init__, undefined, undefined);
+  system::register("helicopter", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,39 +31,39 @@ function __init__() {
   level._effect["heli_gunner_light"]["enemy"] = "killstreaks/fx_vtol_lights_red";
   level._effect["heli_gunner"]["vtol_fx"] = "killstreaks/fx_vtol_thruster";
   level._effect["heli_gunner"]["vtol_fx_ft"] = "killstreaks/fx_vtol_thruster";
-  clientfield::register("helicopter", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
-  clientfield::register("helicopter", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
-  clientfield::register("helicopter", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
-  clientfield::register("helicopter", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
-  clientfield::register("helicopter", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
-  clientfield::register("helicopter", "heli_comlink_bootup_anim", 1, 1, "int", &heli_comlink_bootup_anim, 0, 0);
-  clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
-  clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
-  clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
-  clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
-  clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
-  clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int", &heli_comlink_bootup_anim, 0, 0);
+  clientfield::register("helicopter", "heli_warn_targeted", 1, 1, "int", & warnmissilelocking, 0, 0);
+  clientfield::register("helicopter", "heli_warn_locked", 1, 1, "int", & warnmissilelocked, 0, 0);
+  clientfield::register("helicopter", "heli_warn_fired", 1, 1, "int", & warnmissilefired, 0, 0);
+  clientfield::register("helicopter", "supplydrop_care_package_state", 1, 1, "int", & supplydrop_care_package_state, 0, 0);
+  clientfield::register("helicopter", "supplydrop_ai_tank_state", 1, 1, "int", & supplydrop_ai_tank_state, 0, 0);
+  clientfield::register("helicopter", "heli_comlink_bootup_anim", 1, 1, "int", & heli_comlink_bootup_anim, 0, 0);
+  clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", & warnmissilelocking, 0, 0);
+  clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", & warnmissilelocked, 0, 0);
+  clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", & warnmissilefired, 0, 0);
+  clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", & supplydrop_care_package_state, 0, 0);
+  clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", & supplydrop_ai_tank_state, 0, 0);
+  clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int", & heli_comlink_bootup_anim, 0, 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_scorestreak", 90, "active_camo_on", "", 0, "mc/hud_outline_predator_camo_active_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_flicker_scorestreak", 80, "active_camo_flicker", "", 0, "mc/hud_outline_predator_camo_disruption_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("active_camo_reveal_scorestreak_dr", 90, "active_camo_reveal", "hide_model", 1, "mc/hud_outline_predator_camo_active_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_reveal_scorestreak", 80, "active_camo_reveal,hide_model", "", 0, "mc/hud_outline_predator_scorestreak", 0);
-  clientfield::register("helicopter", "active_camo", 1, 3, "int", &active_camo_changed, 0, 0);
-  clientfield::register("vehicle", "active_camo", 1, 3, "int", &active_camo_changed, 0, 0);
-  clientfield::register("toplayer", "marker_state", 1, 2, "int", &marker_state_changed, 0, 0);
-  clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int", &setsupplydropthrustersstate, 0, 0);
-  clientfield::register("scriptmover", "aitank_thrusters_state", 1, 1, "int", &setaitankhrustersstate, 0, 0);
-  clientfield::register("vehicle", "mothership", 1, 1, "int", &mothership_cb, 0, 0);
-  callback::on_spawned(&on_player_spawned);
+  clientfield::register("helicopter", "active_camo", 1, 3, "int", & active_camo_changed, 0, 0);
+  clientfield::register("vehicle", "active_camo", 1, 3, "int", & active_camo_changed, 0, 0);
+  clientfield::register("toplayer", "marker_state", 1, 2, "int", & marker_state_changed, 0, 0);
+  clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int", & setsupplydropthrustersstate, 0, 0);
+  clientfield::register("scriptmover", "aitank_thrusters_state", 1, 1, "int", & setaitankhrustersstate, 0, 0);
+  clientfield::register("vehicle", "mothership", 1, 1, "int", & mothership_cb, 0, 0);
+  callback::on_spawned( & on_player_spawned);
 }
 
 function on_player_spawned(localclientnum) {
   player = self;
   player waittill("entityshutdown");
   player.markerfx = undefined;
-  if(isDefined(player.markerobj)) {
+  if(isdefined(player.markerobj)) {
     player.markerobj delete();
   }
-  if(isDefined(player.markerfxhandle)) {
+  if(isdefined(player.markerfxhandle)) {
     killfx(localclientnum, player.markerfxhandle);
     player.markerfxhandle = undefined;
   }
@@ -105,7 +105,7 @@ function doreveal(local_client_num, direction) {
     endval = 0;
   }
   priorvalue = startval;
-  while(startval >= 0 && startval <= 1) {
+  while (startval >= 0 && startval <= 1) {
     self mapshaderconstant(local_client_num, 0, "scriptVector0", startval, 0, 0, 0);
     if(direction) {
       startval = startval + 0.032;
@@ -182,27 +182,27 @@ function warnmissilefired(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function heli_deletefx(localclientnum) {
-  if(isDefined(self.exhaustleftfxhandle)) {
+  if(isdefined(self.exhaustleftfxhandle)) {
     deletefx(localclientnum, self.exhaustleftfxhandle);
     self.exhaustleftfxhandle = undefined;
   }
-  if(isDefined(self.exhaustrightfxhandlee)) {
+  if(isdefined(self.exhaustrightfxhandlee)) {
     deletefx(localclientnum, self.exhaustrightfxhandle);
     self.exhaustrightfxhandle = undefined;
   }
-  if(isDefined(self.lightfxid)) {
+  if(isdefined(self.lightfxid)) {
     deletefx(localclientnum, self.lightfxid);
     self.lightfxid = undefined;
   }
-  if(isDefined(self.propfxid)) {
+  if(isdefined(self.propfxid)) {
     deletefx(localclientnum, self.propfxid);
     self.propfxid = undefined;
   }
-  if(isDefined(self.vtolleftfxid)) {
+  if(isdefined(self.vtolleftfxid)) {
     deletefx(localclientnum, self.vtolleftfxid);
     self.vtolleftfxid = undefined;
   }
-  if(isDefined(self.vtolrightfxid)) {
+  if(isdefined(self.vtolrightfxid)) {
     deletefx(localclientnum, self.vtolrightfxid);
     self.vtolrightfxid = undefined;
   }
@@ -210,7 +210,7 @@ function heli_deletefx(localclientnum) {
 
 function startfx(localclientnum) {
   self endon("entityshutdown");
-  if(isDefined(self.vehicletype)) {
+  if(isdefined(self.vehicletype)) {
     if(self.vehicletype == "remote_mortar_vehicle_mp") {
       return;
     }
@@ -218,18 +218,18 @@ function startfx(localclientnum) {
       return;
     }
   }
-  if(isDefined(self.exhaustfxname) && self.exhaustfxname != "") {
+  if(isdefined(self.exhaustfxname) && self.exhaustfxname != "") {
     self.exhaustfx = self.exhaustfxname;
   }
-  if(isDefined(self.exhaustfx)) {
-    self.exhaustleftfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_left");
-    if(!(isDefined(self.oneexhaust) && self.oneexhaust)) {
-      self.exhaustrightfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_right");
+  if(isdefined(self.exhaustfx)) {
+    self.exhaustleftfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_left");
+    if(!(isdefined(self.oneexhaust) && self.oneexhaust)) {
+      self.exhaustrightfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_right");
     }
   } else {
     println("");
   }
-  if(isDefined(self.vehicletype)) {
+  if(isdefined(self.vehicletype)) {
     light_fx = undefined;
     prop_fx = undefined;
     switch (self.vehicletype) {
@@ -238,8 +238,8 @@ function startfx(localclientnum) {
         break;
       }
       case "heli_player_gunner_mp": {
-        self.vtolleftfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
-        self.vtolrightfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
+        self.vtolleftfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
+        self.vtolrightfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
         light_fx = "heli_gunner_light";
         break;
       }
@@ -252,15 +252,15 @@ function startfx(localclientnum) {
         break;
       }
     }
-    if(isDefined(light_fx)) {
+    if(isdefined(light_fx)) {
       if(self util::friend_not_foe(localclientnum)) {
-        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
+        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
       } else {
-        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
+        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
       }
     }
-    if(isDefined(prop_fx) && !self islocalclientdriver(localclientnum)) {
-      self.propfxid = playFXOnTag(localclientnum, level._effect[prop_fx], self, "tag_origin");
+    if(isdefined(prop_fx) && !self islocalclientdriver(localclientnum)) {
+      self.propfxid = playfxontag(localclientnum, level._effect[prop_fx], self, "tag_origin");
     }
   }
   self damage_fx_stages(localclientnum);
@@ -272,7 +272,7 @@ function startfx_loop(localclientnum) {
   startfx(localclientnum);
   servertime = getservertime(0);
   lastservertime = servertime;
-  while(isDefined(self)) {
+  while (isdefined(self)) {
     if(servertime < lastservertime) {
       heli_deletefx(localclientnum);
       startfx(localclientnum);
@@ -287,21 +287,21 @@ function damage_fx_stages(localclientnum) {
   self endon("entityshutdown");
   last_damage_state = self gethelidamagestate();
   fx = undefined;
-  for(;;) {
+  for (;;) {
     if(last_damage_state != self gethelidamagestate()) {
       if(self gethelidamagestate() == 2) {
-        if(isDefined(fx)) {
+        if(isdefined(fx)) {
           stopfx(localclientnum, fx);
         }
         fx = trail_fx(localclientnum, level.chopper_fx["damage"]["light_smoke"], "tag_engine_left");
       } else {
         if(self gethelidamagestate() == 1) {
-          if(isDefined(fx)) {
+          if(isdefined(fx)) {
             stopfx(localclientnum, fx);
           }
           fx = trail_fx(localclientnum, level.chopper_fx["damage"]["heavy_smoke"], "tag_engine_left");
         } else {
-          if(isDefined(fx)) {
+          if(isdefined(fx)) {
             stopfx(localclientnum, fx);
           }
           self notify("hash_f6285749");
@@ -314,7 +314,7 @@ function damage_fx_stages(localclientnum) {
 }
 
 function trail_fx(localclientnum, trail_fx, trail_tag) {
-  id = playFXOnTag(localclientnum, trail_fx, self, trail_tag);
+  id = playfxontag(localclientnum, trail_fx, self, trail_tag);
   return id;
 }
 
@@ -326,15 +326,15 @@ function heli_comlink_lights_on_after_wait(localclientnum, wait_time) {
 }
 
 function heli_comlink_lights_on(localclientnum) {
-  if(!isDefined(self.light_fx_handles_heli_comlink)) {
+  if(!isdefined(self.light_fx_handles_heli_comlink)) {
     self.light_fx_handles_heli_comlink = [];
   }
-  self.light_fx_handles_heli_comlink[0] = playFXOnTag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_light_left");
-  self.light_fx_handles_heli_comlink[1] = playFXOnTag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_light_right");
-  self.light_fx_handles_heli_comlink[2] = playFXOnTag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_tail");
-  self.light_fx_handles_heli_comlink[3] = playFXOnTag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_scanner");
-  if(isDefined(self.team)) {
-    for(i = 0; i < self.light_fx_handles_heli_comlink.size; i++) {
+  self.light_fx_handles_heli_comlink[0] = playfxontag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_light_left");
+  self.light_fx_handles_heli_comlink[1] = playfxontag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_light_right");
+  self.light_fx_handles_heli_comlink[2] = playfxontag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_tail");
+  self.light_fx_handles_heli_comlink[3] = playfxontag(localclientnum, level._effect["heli_comlink_light"]["common"], self, "tag_fx_scanner");
+  if(isdefined(self.team)) {
+    for (i = 0; i < self.light_fx_handles_heli_comlink.size; i++) {
       setfxteam(localclientnum, self.light_fx_handles_heli_comlink[i], self.owner.team);
     }
   }
@@ -342,9 +342,9 @@ function heli_comlink_lights_on(localclientnum) {
 
 function heli_comlink_lights_off(localclientnum) {
   self notify("heli_comlink_lights_off");
-  if(isDefined(self.light_fx_handles_heli_comlink)) {
-    for(i = 0; i < self.light_fx_handles_heli_comlink.size; i++) {
-      if(isDefined(self.light_fx_handles_heli_comlink[i])) {
+  if(isdefined(self.light_fx_handles_heli_comlink)) {
+    for (i = 0; i < self.light_fx_handles_heli_comlink.size; i++) {
+      if(isdefined(self.light_fx_handles_heli_comlink[i])) {
         deletefx(localclientnum, self.light_fx_handles_heli_comlink[i]);
       }
     }
@@ -356,10 +356,10 @@ function updatemarkerthread(localclientnum) {
   self endon("entityshutdown");
   player = self;
   killstreakcorebundle = struct::get_script_bundle("killstreak", "killstreak_core");
-  while(isDefined(player.markerobj)) {
+  while (isdefined(player.markerobj)) {
     viewangles = getlocalclientangles(localclientnum);
-    forwardvector = vectorscale(anglesToForward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
-    results = bulletTrace(player getEye(), player getEye() + forwardvector, 0, player);
+    forwardvector = vectorscale(anglestoforward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
+    results = bullettrace(player geteye(), player geteye() + forwardvector, 0, player);
     player.markerobj.origin = results["position"];
     wait(0.016);
   }
@@ -367,16 +367,16 @@ function updatemarkerthread(localclientnum) {
 
 function stopcrateeffects(localclientnum) {
   crate = self;
-  if(isDefined(crate.thrusterfxhandle0)) {
+  if(isdefined(crate.thrusterfxhandle0)) {
     stopfx(localclientnum, crate.thrusterfxhandle0);
   }
-  if(isDefined(crate.thrusterfxhandle1)) {
+  if(isdefined(crate.thrusterfxhandle1)) {
     stopfx(localclientnum, crate.thrusterfxhandle1);
   }
-  if(isDefined(crate.thrusterfxhandle2)) {
+  if(isdefined(crate.thrusterfxhandle2)) {
     stopfx(localclientnum, crate.thrusterfxhandle2);
   }
-  if(isDefined(crate.thrusterfxhandle3)) {
+  if(isdefined(crate.thrusterfxhandle3)) {
     stopfx(localclientnum, crate.thrusterfxhandle3);
   }
   crate.thrusterfxhandle0 = undefined;
@@ -396,13 +396,13 @@ function cleanupthrustersthread(localclientnum) {
 function setsupplydropthrustersstate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   crate = self;
   params = struct::get_script_bundle("killstreak", "killstreak_supply_drop");
-  if(newval != oldval && isDefined(params.ksthrusterfx)) {
+  if(newval != oldval && isdefined(params.ksthrusterfx)) {
     if(newval == 1) {
       crate stopcrateeffects(localclientnum);
-      crate.thrusterfxhandle0 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_01");
-      crate.thrusterfxhandle1 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_02");
-      crate.thrusterfxhandle2 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_03");
-      crate.thrusterfxhandle3 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_04");
+      crate.thrusterfxhandle0 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_01");
+      crate.thrusterfxhandle1 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_02");
+      crate.thrusterfxhandle2 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_03");
+      crate.thrusterfxhandle3 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_04");
       crate thread cleanupthrustersthread(localclientnum);
     } else {
       crate stopcrateeffects(localclientnum);
@@ -415,13 +415,13 @@ function mothership_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function setaitankhrustersstate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   crate = self;
   params = struct::get_script_bundle("killstreak", "killstreak_ai_tank_drop");
-  if(newval != oldval && isDefined(params.ksthrusterfx)) {
+  if(newval != oldval && isdefined(params.ksthrusterfx)) {
     if(newval == 1) {
       crate stopcrateeffects(localclientnum);
-      crate.thrusterfxhandle0 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_01");
-      crate.thrusterfxhandle1 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_02");
-      crate.thrusterfxhandle2 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_03");
-      crate.thrusterfxhandle3 = playFXOnTag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_04");
+      crate.thrusterfxhandle0 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_01");
+      crate.thrusterfxhandle1 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_02");
+      crate.thrusterfxhandle2 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_03");
+      crate.thrusterfxhandle3 = playfxontag(localclientnum, params.ksthrusterfx, crate, "tag_thruster_fx_04");
       crate thread cleanupthrustersthread(localclientnum);
     } else {
       crate stopcrateeffects(localclientnum);
@@ -442,23 +442,23 @@ function marker_state_changed(localclientnum, oldval, newval, bnewent, binitials
       player.markerfx = undefined;
     }
   }
-  if(isDefined(player.markerobj) && !player.markerobj hasdobj(localclientnum)) {
+  if(isdefined(player.markerobj) && !player.markerobj hasdobj(localclientnum)) {
     return;
   }
-  if(isDefined(player.markerfxhandle)) {
+  if(isdefined(player.markerfxhandle)) {
     killfx(localclientnum, player.markerfxhandle);
     player.markerfxhandle = undefined;
   }
-  if(isDefined(player.markerfx)) {
-    if(!isDefined(player.markerobj)) {
+  if(isdefined(player.markerfx)) {
+    if(!isdefined(player.markerobj)) {
       player.markerobj = spawn(localclientnum, (0, 0, 0), "script_model");
       player.markerobj.angles = vectorscale((1, 0, 0), 270);
-      player.markerobj setModel("wpn_t7_none_world");
+      player.markerobj setmodel("wpn_t7_none_world");
       player.markerobj util::waittill_dobj(localclientnum);
       player thread updatemarkerthread(localclientnum);
     }
-    player.markerfxhandle = playFXOnTag(localclientnum, player.markerfx, player.markerobj, "tag_origin");
-  } else if(isDefined(player.markerobj)) {
+    player.markerfxhandle = playfxontag(localclientnum, player.markerfx, player.markerobj, "tag_origin");
+  } else if(isdefined(player.markerobj)) {
     player.markerobj delete();
   }
 }

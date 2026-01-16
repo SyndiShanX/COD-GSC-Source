@@ -22,9 +22,8 @@ main(var_0, var_1, var_2) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++) {
+  for(var_1 = 0; var_1 < 1; var_1++)
     var_0[var_1] = spawnStruct();
-  }
 
   var_0[0].sittag = "tag_gunner";
   var_0[0].idle = % artemis_idle;

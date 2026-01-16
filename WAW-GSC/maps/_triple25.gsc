@@ -30,7 +30,7 @@ init_local() {
   self.triple25_gunner = [];
   triple25_targets = 0;
   if(isDefined(self.target)) {
-    triple25_targets = getEntArray(self.target, "targetname");
+    triple25_targets = getentarray(self.target, "targetname");
   }
   triple25_triggers = [];
   triple25_gunner_spawner = [];
@@ -38,7 +38,7 @@ init_local() {
   self.triple25_aim = undefined;
   self.client_side_fire = false;
   if(isDefined(self.target)) {
-    for(j = 0; j < triple25_targets.size; j++) {
+    for (j = 0; j < triple25_targets.size; j++) {
       triple25_target = triple25_targets[j];
       if(issubstr(triple25_target.classname, "actor")) {
         triple25_gunner_spawner[triple25_gunner_spawner.size] = triple25_target;
@@ -52,7 +52,7 @@ init_local() {
     }
   }
   loopPacket = [];
-  for(i = 0; i < triple25_gunner_spawner.size; i++) {
+  for (i = 0; i < triple25_gunner_spawner.size; i++) {
     self.triple25_gunner[self.triple25_gunner.size] = triple25_gunner_spawner[i] spawn_gunner();
     self.triple25_gunner[i] linkto(self, "tag_driver" + (i + 1), (0, 0, 0), (0, 0, 0));
     self.triple25_gunner[i].position = i;
@@ -65,7 +65,7 @@ init_local() {
     self thread triple25_shoot(self.triple25_aim);
   }
   if(isDefined(triple25_dismount_trig)) {
-    for(i = 0; i < self.crewsize; i++) {
+    for (i = 0; i < self.crewsize; i++) {
       thread dismount_think(triple25_dismount_trig, self.triple25_gunner[i], self);
       thread death_think(self.triple25_gunner[i], self);
     }
@@ -98,9 +98,8 @@ set_vehicle_anims(positions) {
 setanims() {
   max_positions = 2;
   positions = [];
-  for(i = 0; i < max_positions; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < max_positions; i++)
+    positions[i] = spawnstruct();
   positions[0].sittag = "tag_driver1";
   positions[1].sittag = "tag_driver2";
   positions[0].idle = % crew_flak1_tag1_idle_1;
@@ -145,7 +144,7 @@ load_triple25_gunner_anims() {
 }
 
 spawn_gunner() {
-  while(!OkTospawn()) {
+  while (!OkTospawn()) {
     wait(0.05);
   }
   spawn = self spawn_ai();
@@ -192,9 +191,8 @@ monitor_gunner(triple25, trig) {
 }
 
 waittill_trigger_array(triggers) {
-  for(k = 1; k < triggers.size; k++) {
+  for (k = 1; k < triggers.size; k++)
     triggers[k] endon("trigger");
-  }
   triggers[0] waittill("trigger");
 }
 
@@ -245,11 +243,11 @@ triple25_shoot(targetent) {
   self thread death_monitor("crew dead");
   self setturrettargetent(targetent);
   wait 2;
-  while(1) {
+  while (1) {
     num_shots = randomintrange(5, 15);
     waittime = randomfloatrange(0.5, 2);
     if(self.client_side_fire == false) {
-      for(i = 0; i < num_shots; i++) {
+      for (i = 0; i < num_shots; i++) {
         self fireweapon();
         wait 0.1;
       }

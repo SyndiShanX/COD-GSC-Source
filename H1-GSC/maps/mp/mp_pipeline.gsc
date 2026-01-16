@@ -33,23 +33,23 @@ fix_sab_bomb() {
 }
 
 replace_turrets() {
-  var_0 = getEntArray("misc_turret", "classname");
+  var_0 = getentarray("misc_turret", "classname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2.origin;
     var_4 = var_2.angles;
     var_2 delete();
     var_5 = spawnturret("misc_turret", var_3, "saw_bipod_crouch_mp", 0);
-    var_5 setModel("weapon_saw_MG_setup");
+    var_5 setmodel("weapon_saw_MG_setup");
     var_5.angles = var_4;
   }
 }
 
 delete_botconnect_clip() {
-  for(;;) {
+  for (;;) {
     var_0 = getent("botconnect_delete_on_load", "targetname");
 
-    if(isDefined(var_0)) {
+    if(isdefined(var_0)) {
       var_0 delete();
       break;
     }
@@ -59,15 +59,15 @@ delete_botconnect_clip() {
 }
 
 misc_rotate_ceilingfans() {
-  common_scripts\utility::array_thread(getEntArray("fan_spin", "targetname"), ::ceilingfan_rotate_custom);
-  common_scripts\utility::array_thread(getEntArray("fan_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
+  common_scripts\utility::array_thread(getentarray("fan_spin", "targetname"), ::ceilingfan_rotate_custom);
+  common_scripts\utility::array_thread(getentarray("fan_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
 }
 
 ceilingfan_rotate_custom() {
   var_0 = 600;
   var_1 = 20000;
 
-  for(;;) {
+  for (;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }
@@ -77,7 +77,7 @@ ceilingfan_rotate_slow_custom() {
   var_0 = 50;
   var_1 = 20000;
 
-  for(;;) {
+  for (;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }

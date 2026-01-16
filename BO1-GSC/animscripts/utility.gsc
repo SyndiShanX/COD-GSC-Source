@@ -67,7 +67,9 @@ initialize(animscript) {
   if(isDefined(self.a.postScriptFunc)) {
     scriptFunc = self.a.postScriptFunc;
     self.a.postScriptFunc = undefined;
-    [[scriptFunc]](animscript);
+    [
+      [scriptFunc]
+    ](animscript);
   }
   if(animscript != "combat" && animscript != "pain" && animscript != "death" && usingSidearm() && (!isDefined(self.forceSideArm) || !self.forceSideArm)) {
     self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
@@ -116,7 +118,7 @@ badplacer(time, org, radius) {
   for(i = 0; i < time * 20; i++) {
     for(p = 0; p < 10; p++) {
       angles = (0, randomInt(360), 0);
-      forward = anglesToForward(angles);
+      forward = AnglesToForward(angles);
       scale = vector_scale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
     }
@@ -253,7 +255,7 @@ canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
   }
   if(isDefined(posOverrideEntity)) {
     if(IsSentient(posOverrideEntity)) {
-      eye = posOverrideEntity getEye();
+      eye = posOverrideEntity GetEye();
       chest = eye + (0, 0, -20);
     } else {
       eye = posOverrideEntity.origin;
@@ -315,9 +317,9 @@ GetNodeYawToEnemy() {
     pos = self.enemy.origin;
   } else {
     if(isDefined(self.node)) {
-      forward = anglesToForward(self.node.angles);
+      forward = AnglesToForward(self.node.angles);
     } else {
-      forward = anglesToForward(self.angles);
+      forward = AnglesToForward(self.angles);
     }
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
@@ -336,7 +338,7 @@ GetCoverNodeYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
+    forward = AnglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
   }
@@ -357,7 +359,7 @@ GetYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.angles);
+    forward = AnglesToForward(self.angles);
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
   }
@@ -567,9 +569,8 @@ WeaponAnims() {
   class = weaponClass(self.weapon);
   switch (class) {
     case "smg":
-      if(is_true(level.supportsPistolAnimations) && self holdingWeapon()) {
+      if(is_true(level.supportsPistolAnimations) && self holdingWeapon())
         return "pistol";
-      }
       return "rifle";
     case "mg":
     case "rifle":
@@ -611,9 +612,9 @@ GetNodeDirection() {
 GetNodeForward() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
-    return anglesToForward(myNode.angles);
+    return AnglesToForward(myNode.angles);
   }
-  return anglesToForward(self.angles);
+  return AnglesToForward(self.angles);
 }
 
 GetNodeOrigin() {
@@ -742,7 +743,7 @@ debugPosInternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent thread debugTimeout();
   ent endon("timeout");
   if(self.enemy.team == "allies") {
@@ -791,9 +792,13 @@ showDebugLine(fromPoint, toPoint, color, printTime) {
 
 shootEnemyWrapper() {
   if(self usingGasWeapon()) {
-    [[anim.shootFlameThrowerWrapper_func]]();
+    [
+      [anim.shootFlameThrowerWrapper_func]
+    ]();
   } else {
-    [[anim.shootEnemyWrapper_func]]();
+    [
+      [anim.shootEnemyWrapper_func]
+    ]();
   }
 }
 
@@ -852,7 +857,7 @@ PersonalColdBreath() {
   self endon("stop personal effect");
   for(;;) {
     if(self.a.movement != "run") {
-      playFXOnTag(level._effect["cold_breath"], self, tag);
+      playfxOnTag(level._effect["cold_breath"], self, tag);
       wait(2.5 + RandomFloat(3));
     } else {
       wait(0.5);
@@ -915,7 +920,7 @@ getNodeOffset(node) {
   cornernode = false;
   nodeOffset = (0, 0, 0);
   right = AnglesToRight(node.angles);
-  forward = anglesToForward(node.angles);
+  forward = AnglesToForward(node.angles);
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide":
@@ -956,7 +961,7 @@ canSeeEnemy() {
   if(!isValidEnemy(self.enemy)) {
     return false;
   }
-  if((self canSee(self.enemy) && checkPitchVisibility(self getEye(), self.enemy GetShootAtPos())) ||
+  if((self canSee(self.enemy) && checkPitchVisibility(self geteye(), self.enemy GetShootAtPos())) ||
     (isDefined(self.cansee_override) && self.cansee_override)) {
     self.goodShootPosValid = true;
     self.goodShootPos = GetEnemyEyePos();
@@ -1014,7 +1019,7 @@ canSeePointFromExposedAtNode(point, node) {
       nodeOffsets = array_swap(nodeOffsets, 0, 1);
     }
     right = AnglesToRight(node.angles);
-    forward = anglesToForward(node.angles);
+    forward = AnglesToForward(node.angles);
     for(i = 0; i < nodeOffsets.size; i++) {
       nodeOffset = calculateNodeOffset(right, forward, nodeOffsets[i]);
       lookFromPoint = node.origin + nodeOffset;
@@ -1095,7 +1100,7 @@ aiSuppressAI() {
     return false;
   }
   if(self.a.script == "combat") {
-    if(!sighttracepassed(self getEye(), self GetTagOrigin("tag_flash"), false, undefined)) {
+    if(!sighttracepassed(self geteye(), self GetTagOrigin("tag_flash"), false, undefined)) {
       return false;
     }
   }
@@ -1135,9 +1140,8 @@ canSuppressEnemy() {
     return false;
   }
   hasTagFlash = self GetTagOrigin("tag_flash");
-  if(!isDefined(hasTagFlash)) {
+  if(!isDefined(hasTagFlash))
     return false;
-  }
   if(!IsPlayer(self.enemy)) {
     return aiSuppressAI();
   }
@@ -1198,7 +1202,7 @@ findGoodSuppressSpot(startOffset) {
   self.lastEnemySightPosSelfOrigin = self.origin;
   self.lastEnemySightPosOld = self.lastEnemySightPos;
   currentEnemyPos = GetEnemyEyePos();
-  trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
+  trace = bullettrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
   startTracesAt = trace["position"];
   percievedMovementVector = self.lastEnemySightPos - startTracesAt;
   lookVector = VectorNormalize(self.lastEnemySightPos - startOffset);
@@ -1726,7 +1730,7 @@ IsOkToLookAtEntity() {
 }
 
 entityInFront(origin) {
-  forward = anglesToForward(self.angles);
+  forward = AnglesToForward(self.angles);
   dot = VectorDot(forward, VectorNormalize(origin - self.origin));
   return (dot > 0.3);
 }

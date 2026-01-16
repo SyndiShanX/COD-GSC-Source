@@ -24,13 +24,11 @@ agent_player_mugger_think() {
 }
 
 agent_squadmember_mugger_think() {
-  if(!isDefined(self.tags_seen_by_owner)) {
+  if(!isDefined(self.tags_seen_by_owner))
     self.tags_seen_by_owner = [];
-  }
 
-  if(!isDefined(self.next_time_check_tags)) {
+  if(!isDefined(self.next_time_check_tags))
     self.next_time_check_tags = GetTime() + 500;
-  }
 
   if(GetTime() > self.next_time_check_tags) {
     self.next_time_check_tags = GetTime() + 500;

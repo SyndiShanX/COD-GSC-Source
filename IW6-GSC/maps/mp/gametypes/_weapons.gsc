@@ -13,11 +13,10 @@ kNineBangEffectTime = 8.0;
 kNineBangCookInterval = 875;
 
 attachmentGroup(attachmentName) {
-  if(is_aliens()) {
+  if(is_aliens())
     return tableLookup("mp/alien/alien_attachmentTable.csv", 4, attachmentName, 2);
-  } else {
+  else
     return tableLookup("mp/attachmentTable.csv", 4, attachmentName, 2);
-  }
 }
 
 init() {
@@ -105,9 +104,8 @@ init() {
           level.weaponList[level.weaponList.size] = weapon_name + "_" + attachmentName + "_mp";
           attachments[attachments.size] = attachmentName;
 
-          if(getDvar("scr_dump_weapon_assets") != "") {
+          if(getDvar("scr_dump_weapon_assets") != "")
             println("weapon,mp/" + weapon_name + "_" + attachmentName + "_mp");
-          }
 
         }
 
@@ -122,28 +120,25 @@ init() {
           }
         }
 
-        if(getDvar("scr_dump_weapon_assets") != "" && attachmentCombos.size) {
+        if(getDvar("scr_dump_weapon_assets") != "" && attachmentCombos.size)
           println("
-          }
 
-          foreach(combo in attachmentCombos) {
-            if(getDvar("scr_dump_weapon_assets") != "") {
-              println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
+            foreach(combo in attachmentCombos) {
+              if(getDvar("scr_dump_weapon_assets") != "")
+                println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
+
+              level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
             }
 
-            level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
           }
-
-        }
 
         foreach(weaponName in level.weaponList) {
           precacheItem(weaponName);
 
           if(getDvar("scr_dump_weapon_assets") != "") {
             altWeapon = weaponAltWeaponName(weaponName);
-            if(altWeapon != "none") {
+            if(altWeapon != "none")
               println("weapon,mp/" + altWeapon);
-            }
           }
 
         }
@@ -165,9 +160,8 @@ init() {
 
         level.weaponConfigs = [];
 
-        if(!isDefined(level.weaponDropFunction)) {
+        if(!isDefined(level.weaponDropFunction))
           level.weaponDropFunction = ::dropWeaponForDeath;
-        }
 
         claymoreDetectionConeAngle = 70;
         level.claymoreDetectionDot = cos(claymoreDetectionConeAngle);
@@ -348,9 +342,8 @@ init() {
         for(;;) {
           missile = self waittill_missile_fire();
 
-          if(missile.weapon_name == "iw6_mk32_mp") {
+          if(missile.weapon_name == "iw6_mk32_mp")
             missile thread createBombSquadModel("projectile_semtex_grenade_bombsquad", "tag_weapon", self);
-          }
         }
       }
 
@@ -371,9 +364,8 @@ init() {
 
         self waittill_any("death", "trap_death");
 
-        if(isDefined(self.trigger)) {
+        if(isDefined(self.trigger))
           self.trigger delete();
-        }
 
         bombSquadModel delete();
       }
@@ -406,13 +398,11 @@ init() {
               continue;
             }
             if(level.teamBased) {
-              if(player.team == "spectator" || player.team == teamName) {
+              if(player.team == "spectator" || player.team == teamName)
                 continue;
-              }
             } else {
-              if(isDefined(owner) && player == owner) {
+              if(isDefined(owner) && player == owner)
                 continue;
-              }
             }
 
             self ShowToPlayer(player);
@@ -475,9 +465,8 @@ init() {
 
           self thread watchSentryUsage();
 
-          if(!is_aliens()) {
+          if(!is_aliens())
             self thread maps\mp\gametypes\_class::trackRiotShield();
-          }
           self thread stanceRecoilAdjuster();
 
           self.lastHitTime = [];
@@ -714,9 +703,8 @@ init() {
 
         weaponName = self GetCurrentWeapon();
 
-        if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName])) {
+        if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName]))
           self.hitsThisMag[weaponName] = weaponClipSize(weaponName);
-        }
 
         while(1) {
           self waittill("weapon_change", weaponName);
@@ -749,22 +737,19 @@ init() {
             weaponName = weaponTokens[0];
 
           if(weaponName != "none" && weaponTokens[0] != "iw5" && weaponTokens[0] != "iw6") {
-            if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName + "_mp"])) {
+            if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName + "_mp"]))
               self.hitsThisMag[weaponName + "_mp"] = weaponClipSize(weaponName + "_mp");
-            }
           } else if(weaponName != "none" && (weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6")) {
-            if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName])) {
+            if(isCACPrimaryWeapon(weaponName) && !isDefined(self.hitsThisMag[weaponName]))
               self.hitsThisMag[weaponName] = weaponClipSize(weaponName);
-            }
           }
 
           self.changingWeapon = undefined;
 
-          if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6") {
+          if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6")
             self.lastDroppableWeapon = weaponName;
-          } else if(weaponName != "none" && mayDropWeapon(weaponName + "_mp")) {
+          else if(weaponName != "none" && mayDropWeapon(weaponName + "_mp"))
             self.lastDroppableWeapon = weaponName + "_mp";
-          }
 
         }
       }
@@ -778,9 +763,8 @@ init() {
 
         self thread watchSniperBoltActionKills_onDeath();
 
-        if(!isDefined(self.pers["recoilReduceKills"])) {
+        if(!isDefined(self.pers["recoilReduceKills"]))
           self.pers["recoilReduceKills"] = 0;
-        }
 
         self SetClientOmnvar("weap_sniper_display_state", self.pers["recoilReduceKills"]);
 
@@ -813,9 +797,8 @@ init() {
       }
 
       isRecoilReducingWeapon(weapon) {
-        if(!isDefined(weapon) || weapon == "none") {
+        if(!isDefined(weapon) || weapon == "none")
           return false;
-        }
 
         result = false;
 
@@ -830,9 +813,8 @@ init() {
       }
 
       getRecoilReductionValue() {
-        if(!isDefined(self.pers["recoilReduceKills"])) {
+        if(!isDefined(self.pers["recoilReduceKills"]))
           self.pers["recoilReduceKills"] = 0;
-        }
 
         return self.pers["recoilReduceKills"] * SCOPE_RECOIL_REDUCTION_PER_KILL;
       }
@@ -850,9 +832,8 @@ init() {
           self.changingWeapon = newWeapon;
 
           if(newWeapon == "none" && isDefined(self.isCapturingCrate) && self.isCapturingCrate) {
-            while(self.isCapturingCrate) {
+            while(self.isCapturingCrate)
               wait(0.05);
-            }
 
             self.changingWeapon = undefined;
           }
@@ -875,37 +856,30 @@ init() {
       }
 
       isHackWeapon(weapon) {
-        if(weapon == "radar_mp" || weapon == "airstrike_mp" || weapon == "helicopter_mp") {
+        if(weapon == "radar_mp" || weapon == "airstrike_mp" || weapon == "helicopter_mp")
           return true;
-        }
-        if(weapon == "briefcase_bomb_mp") {
+        if(weapon == "briefcase_bomb_mp")
           return true;
-        }
         return false;
       }
 
       mayDropWeapon(weapon) {
-        if(weapon == "none") {
+        if(weapon == "none")
           return false;
-        }
 
-        if(isSubStr(weapon, "ac130")) {
+        if(isSubStr(weapon, "ac130"))
           return false;
-        }
 
-        if(isSubStr(weapon, "uav")) {
+        if(isSubStr(weapon, "uav"))
           return false;
-        }
 
-        if(isSubStr(weapon, "killstreak")) {
+        if(isSubStr(weapon, "killstreak"))
           return false;
-        }
 
         invType = WeaponInventoryType(weapon);
 
-        if(invType != "primary") {
+        if(invType != "primary")
           return false;
-        }
 
         return true;
       }
@@ -922,25 +896,22 @@ init() {
         }
         weapon = self.lastDroppableWeapon;
         if(!isDefined(weapon)) {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getdvar("scr_dropdebug") == "1")
             println("didn't drop weapon: not defined");
-          }
 
           return;
         }
 
         if(weapon == "none") {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getdvar("scr_dropdebug") == "1")
             println("didn't drop weapon: weapon == none");
-          }
 
           return;
         }
 
         if(!(self hasWeapon(weapon))) {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getdvar("scr_dropdebug") == "1")
             println("didn't drop weapon: don't have it anymore (" + weapon + ")");
-          }
 
           return;
         }
@@ -955,9 +926,8 @@ init() {
 
         if(tokens[0] == "alt") {
           for(i = 1; i < tokens.size; i++) {
-            if(i > 1) {
+            if(i > 1)
               weapon += "_";
-            }
 
             weapon += tokens[i];
           }
@@ -976,9 +946,8 @@ init() {
 
           stockAmmo = self GetWeaponAmmoStock(weapon);
           stockMax = WeaponMaxAmmo(weapon);
-          if(stockAmmo > stockMax) {
+          if(stockAmmo > stockMax)
             stockAmmo = stockMax;
-          }
 
           item = self dropItem(weapon);
           if(!isDefined(item)) {
@@ -987,9 +956,8 @@ init() {
           item ItemWeaponSetAmmo(clipAmmoR, stockAmmo, clipAmmoL);
         } else {
           item = self dropItem(weapon);
-          if(!isDefined(item)) {
+          if(!isDefined(item))
             return;
-          }
           item ItemWeaponSetAmmo(1, 1, 0);
         }
 
@@ -1067,20 +1035,17 @@ init() {
 
         }
 
-        if(getdvar("scr_dropdebug") == "1") {
+        if(getdvar("scr_dropdebug") == "1")
           println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
-        }
 
         assert(isDefined(player.tookWeaponFrom));
 
         droppedWeaponName = droppedItem getItemWeaponName();
 
-        if(isDefined(player.primaryWeapon) && player.primaryWeapon == droppedWeaponName) {
+        if(isDefined(player.primaryWeapon) && player.primaryWeapon == droppedWeaponName)
           player.primaryWeapon = weapname;
-        }
-        if(isDefined(player.secondaryWeapon) && player.secondaryWeapon == droppedWeaponName) {
+        if(isDefined(player.secondaryWeapon) && player.secondaryWeapon == droppedWeaponName)
           player.secondaryWeapon = weapname;
-        }
 
         if(isDefined(player.tookWeaponFrom[droppedWeaponName])) {
           droppedItem.owner = player.tookWeaponFrom[droppedWeaponName];
@@ -1174,11 +1139,8 @@ init() {
         dropBag = self DropScavengerBag("scavenger_bag_mp");
         dropBag thread handleScavengerBagPickup(self);
 
-        if(isDefined(level.bot_funcs["bots_add_scavenger_bag"])) {
-          [
-            [level.bot_funcs["bots_add_scavenger_bag"]]
-          ](dropBag);
-        }
+        if(isDefined(level.bot_funcs["bots_add_scavenger_bag"]))
+          [[level.bot_funcs["bots_add_scavenger_bag"]]](dropBag);
       }
 
       setWeaponStat(name, incValue, statName) {
@@ -1207,9 +1169,8 @@ init() {
           if(!isCACPrimaryWeapon(weaponName) && !isCACSecondaryWeapon(weaponName)) {
             continue;
           }
-          if(isDefined(self.hitsThisMag[weaponName])) {
+          if(isDefined(self.hitsThisMag[weaponName]))
             self thread updateMagShots(weaponName);
-          }
 
           totalShots = self maps\mp\gametypes\_persistence::statGetBuffered("totalShots") + 1;
           hits = self maps\mp\gametypes\_persistence::statGetBuffered("hits");
@@ -1317,13 +1278,11 @@ init() {
 
         waittillframeend;
 
-        if(isDefined(self.hitsThisMag[weaponName])) {
+        if(isDefined(self.hitsThisMag[weaponName]))
           self thread checkHitsThisMag(weaponName);
-        }
 
-        if(!isDefined(self.lastHitTime[weaponName])) {
+        if(!isDefined(self.lastHitTime[weaponName]))
           self.lastHitTime[weaponName] = 0;
-        }
 
         if(self.lastHitTime[weaponName] == GetTime()) {
           return;
@@ -1349,36 +1308,30 @@ init() {
       }
 
       friendlyFireCheck(owner, attacker, forcedFriendlyFireRule) {
-        if(!isDefined(owner)) {
+        if(!isDefined(owner))
           return true;
-        }
 
-        if(!level.teamBased) {
+        if(!level.teamBased)
           return true;
-        }
 
         attackerTeam = attacker.team;
 
         friendlyFireRule = level.friendlyfire;
-        if(isDefined(forcedFriendlyFireRule)) {
+        if(isDefined(forcedFriendlyFireRule))
           friendlyFireRule = forcedFriendlyFireRule;
-        }
 
-        if(friendlyFireRule != 0) {
+        if(friendlyFireRule != 0)
           return true;
-        }
 
         if(attacker == owner) {
           return (!is_aliens());
         }
 
-        if(!isDefined(attackerTeam)) {
+        if(!isDefined(attackerTeam))
           return true;
-        }
 
-        if(attackerTeam != owner.team) {
+        if(attackerTeam != owner.team)
           return true;
-        }
 
         return false;
       }
@@ -1421,9 +1374,8 @@ init() {
           self.throwingGrenade = weaponName;
           self.gotPullbackNotify = true;
 
-          if(weaponName == "c4_mp") {
+          if(weaponName == "c4_mp")
             self thread beginC4Tracking();
-          }
 
           self beginGrenadeTracking();
 
@@ -1438,24 +1390,21 @@ init() {
         startTime = GetTime();
 
         grenade = self waittill_grenade_fire();
-        if(!isDefined(grenade)) {
+        if(!isDefined(grenade))
           return;
-        }
         if(!isDefined(grenade.weapon_name)) {
           return;
         }
         self.changingWeapon = undefined;
 
-        if(isDefined(level.bomb_squad[grenade.weapon_name])) {
+        if(isDefined(level.bomb_squad[grenade.weapon_name]))
           grenade thread createBombSquadModel(level.bomb_squad[grenade.weapon_name].model, level.bomb_squad[grenade.weapon_name].tag, self);
-        }
 
         switch (grenade.weapon_name) {
           case "frag_grenade_mp":
           case "thermobaric_grenade_mp":
-            if(GetTime() - startTime > 1000) {
+            if(GetTime() - startTime > 1000)
               grenade.isCooked = true;
-            }
             grenade thread maps\mp\gametypes\_shellshock::grenade_earthQuake();
             grenade.originalOwner = self;
             break;
@@ -1547,9 +1496,8 @@ init() {
 
           player_has_extra_lethal_perk = player _hasPerk("specialty_extra_deadly");
 
-          if(player_has_extra_lethal_perk && currentClipAmmo == 2) {
+          if(player_has_extra_lethal_perk && currentClipAmmo == 2)
             continue;
-          }
           if(!player_has_extra_lethal_perk && currentClipAmmo == 1) {
             continue;
           }
@@ -1572,9 +1520,8 @@ init() {
 
       watchGrenadeDeath() {
         self waittill("death");
-        if(isDefined(self.knife_trigger)) {
+        if(isDefined(self.knife_trigger))
           self.knife_trigger delete();
-        }
       }
 
       watchOffhandCancel() {
@@ -1585,9 +1532,8 @@ init() {
 
         self waittill("offhand_end");
 
-        if(isDefined(self.changingWeapon) && self.changingWeapon != self GetCurrentWeapon()) {
+        if(isDefined(self.changingWeapon) && self.changingWeapon != self GetCurrentWeapon())
           self.changingWeapon = undefined;
-        }
       }
 
       watchSmokeExplode() {
@@ -1614,11 +1560,10 @@ init() {
             if(level.teamBased && player.team == owner.team) {
               continue;
             }
-            if(DistanceSquared(player.origin, position) < smokeRadius * smokeRadius) {
+            if(DistanceSquared(player.origin, position) < smokeRadius * smokeRadius)
               player.inPlayerSmokeScreen = owner;
-            } else {
+            else
               player.inPlayerSmokeScreen = undefined;
-            }
           }
 
           wait(0.05);
@@ -1642,37 +1587,32 @@ init() {
         targets = [];
 
         if(level.teamBased) {
-          if(isDefined(level.chopper) && (level.chopper.team != self.team || (isDefined(level.chopper.owner) && level.chopper.owner == self))) {
+          if(isDefined(level.chopper) && (level.chopper.team != self.team || (isDefined(level.chopper.owner) && level.chopper.owner == self)))
             targets[targets.size] = level.chopper;
-          }
 
           if(isDefined(level.littleBirds)) {
             foreach(lb in level.littleBirds) {
-              if(isDefined(lb) && (lb.team != self.team || (isDefined(lb.owner) && lb.owner == self))) {
+              if(isDefined(lb) && (lb.team != self.team || (isDefined(lb.owner) && lb.owner == self)))
                 targets[targets.size] = lb;
-              }
             }
           }
 
           if(isDefined(level.ballDrones)) {
             foreach(bd in level.ballDrones) {
-              if(isDefined(bd) && (bd.team != self.team || (isDefined(bd.owner) && bd.owner == self))) {
+              if(isDefined(bd) && (bd.team != self.team || (isDefined(bd.owner) && bd.owner == self)))
                 targets[targets.size] = bd;
-              }
             }
           }
 
           if(isDefined(level.harriers)) {
             foreach(harrier in level.harriers) {
-              if(isDefined(harrier) && (harrier.team != self.team || (isDefined(harrier.owner) && harrier.owner == self))) {
+              if(isDefined(harrier) && (harrier.team != self.team || (isDefined(harrier.owner) && harrier.owner == self)))
                 targets[targets.size] = harrier;
-              }
             }
           }
         } else {
-          if(isDefined(level.chopper)) {
+          if(isDefined(level.chopper))
             targets[targets.size] = level.chopper;
-          }
 
           if(isDefined(level.littleBirds)) {
             foreach(lb in level.littleBirds) {
@@ -1799,9 +1739,8 @@ init() {
           self.body LinkTo(missile);
           self.body SetContents(0);
 
-          if(!isDefined(self.switching_teams)) {
+          if(!isDefined(self.switching_teams))
             thread maps\mp\gametypes\_deathicons::addDeathicon(self.body, self, self.team, 5.0);
-          }
 
           self PlayerHide();
 
@@ -1818,15 +1757,13 @@ init() {
 
           self CameraLinkTo(eye_pos, "tag_origin");
 
-          if(drag_player_time_seconds > durationSec) {
+          if(drag_player_time_seconds > durationSec)
             drag_player_time_seconds = durationSec;
-          }
 
           value = missile waittill_notify_or_timeout_return("death", drag_player_time_seconds);
 
-          if(isDefined(value) && value == "timeout" && isDefined(missile)) {
+          if(isDefined(value) && value == "timeout" && isDefined(missile))
             missile Detonate();
-          }
 
           self notify("final_rocket_corpse_death");
 
@@ -1887,9 +1824,8 @@ init() {
 
       pitcherCheck(player, numTicks) {
         if(player _hasPerk("specialty_pitcher")) {
-          if(numTicks >= 4) {
+          if(numTicks >= 4)
             return true;
-          }
         }
 
         return false;
@@ -1920,11 +1856,10 @@ init() {
             if(!BulletTracePassed(pos, viewOrigin, false, player)) {
               continue;
             }
-            if(dist <= config.radius_min_sq) {
+            if(dist <= config.radius_min_sq)
               percent_distance = 1.0;
-            } else {
+            else
               percent_distance = 1.0 - (dist - config.radius_min_sq) / (config.radius_max_sq - config.radius_min_sq);
-            }
 
             forward = anglesToForward(player GetPlayerAngles());
 
@@ -1998,9 +1933,8 @@ init() {
         self thread watchC4Detonation();
         self thread watchC4AltDetonation();
 
-        if(!self.plantedLethalEquip.size) {
+        if(!self.plantedLethalEquip.size)
           self thread watchC4AltDetonate();
-        }
 
         grenade SetOtherEnt(self);
         grenade.activated = false;
@@ -2134,17 +2068,14 @@ init() {
           }
           if(getdvarint("scr_minesKillOwner") != 1) {
             if(isDefined(self.owner)) {
-              if(player == self.owner) {
+              if(player == self.owner)
                 continue;
-              }
-              if(isDefined(player.owner) && player.owner == self.owner) {
+              if(isDefined(player.owner) && player.owner == self.owner)
                 continue;
-              }
             }
 
-            if(!friendlyFireCheck(self.owner, player, 0)) {
+            if(!friendlyFireCheck(self.owner, player, 0))
               continue;
-            }
           }
 
           if(lengthsquared(player getEntityVelocity()) < 10) {
@@ -2199,11 +2130,10 @@ init() {
       setClaymoreTeamHeadIcon(team, offset) {
         self endon("death");
         wait .05;
-        if(level.teamBased) {
+        if(level.teamBased)
           self maps\mp\_entityheadicons::setTeamHeadIcon(team, (0, 0, offset));
-        } else if(isDefined(self.owner)) {
+        else if(isDefined(self.owner))
           self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, offset));
-        }
       }
 
       claymoreUsed(grenade) {
@@ -2359,9 +2289,8 @@ init() {
           if(isDefined(self) && isDefined(self.trigger)) {
             self.trigger.origin = self.origin + self getExplosiveUsableOffset();
 
-            if(isDefined(self.bombSquadModel)) {
+            if(isDefined(self.bombSquadModel))
               self.bombSquadModel.origin = self.origin;
-            }
           } else {
             return;
           }
@@ -2419,16 +2348,13 @@ init() {
 
           if(getdvarint("scr_claymoredebug") != 1) {
             if(isDefined(self.owner)) {
-              if(player == self.owner) {
+              if(player == self.owner)
                 continue;
-              }
-              if(isDefined(player.owner) && player.owner == self.owner) {
+              if(isDefined(player.owner) && player.owner == self.owner)
                 continue;
-              }
             }
-            if(!friendlyFireCheck(self.owner, player, 0)) {
+            if(!friendlyFireCheck(self.owner, player, 0))
               continue;
-            }
           }
           if(lengthsquared(player getEntityVelocity()) < 10) {
             continue;
@@ -2450,17 +2376,15 @@ init() {
 
         self explosiveTrigger(player, level.claymoreDetectionGracePeriod, "claymore");
 
-        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func)) {
+        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func))
           self.owner thread[[level.leaderDialogOnPlayer_func]]("claymore_destroyed", undefined, undefined, self.origin);
-        }
 
         self notify("detonateExplosive");
       }
 
       shouldAffectClaymore(claymore) {
-        if(isDefined(claymore.disabled)) {
+        if(isDefined(claymore.disabled))
           return false;
-        }
 
         pos = self.origin + (0, 0, 32);
 
@@ -2468,9 +2392,8 @@ init() {
         claymoreForward = anglesToForward(claymore.angles);
 
         dist = vectorDot(dirToPos, claymoreForward);
-        if(dist < level.claymoreDetectionMinDist) {
+        if(dist < level.claymoreDetectionMinDist)
           return false;
-        }
 
         dirToPos = vectornormalize(dirToPos);
 
@@ -2483,9 +2406,8 @@ init() {
         wait .05;
 
         if(isDefined(ent)) {
-          if(isDefined(ent.trigger)) {
+          if(isDefined(ent.trigger))
             ent.trigger delete();
-          }
 
           ent delete();
         }
@@ -2565,9 +2487,8 @@ init() {
 
       c4DetonateAllCharges() {
         foreach(c4 in self.plantedLethalEquip) {
-          if(isDefined(c4)) {
+          if(isDefined(c4))
             c4 thread waitAndDetonate(0.1);
-          }
         }
         self.plantedLethalEquip = [];
 
@@ -2613,11 +2534,10 @@ init() {
           break;
         }
 
-        if(level.c4explodethisframe) {
+        if(level.c4explodethisframe)
           wait .1 + randomfloat(.4);
-        } else {
+        else
           wait .05;
-        }
 
         if(!isDefined(self)) {
           return;
@@ -2626,19 +2546,16 @@ init() {
 
         thread resetC4ExplodeThisFrame();
 
-        if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE"))) {
+        if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
           self.wasChained = true;
-        }
 
-        if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+        if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
           self.wasDamagedFromBulletPenetration = true;
-        }
 
         self.wasDamaged = true;
 
-        if(isDefined(attacker)) {
+        if(isDefined(attacker))
           self.damagedBy = attacker;
-        }
 
         if(isPlayer(attacker)) {
           attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("c4");
@@ -2648,14 +2565,12 @@ init() {
           if(isDefined(attacker) && isDefined(self.owner)) {
             attacker_pers_team = attacker.pers["team"];
             self_owner_pers_team = self.owner.pers["team"];
-            if(isDefined(attacker_pers_team) && isDefined(self_owner_pers_team) && attacker_pers_team != self_owner_pers_team) {
+            if(isDefined(attacker_pers_team) && isDefined(self_owner_pers_team) && attacker_pers_team != self_owner_pers_team)
               attacker notify("destroyed_equipment");
-            }
           }
         } else {
-          if(isDefined(self.owner) && isDefined(attacker) && attacker != self.owner) {
+          if(isDefined(self.owner) && isDefined(attacker) && attacker != self.owner)
             attacker notify("destroyed_equipment");
-          }
         }
 
         self notify("detonateExplosive", attacker);
@@ -2693,9 +2608,8 @@ init() {
         self waittill("death");
         trigger notify("end_detection");
 
-        if(isDefined(trigger.bombSquadIcon)) {
+        if(isDefined(trigger.bombSquadIcon))
           trigger.bombSquadIcon destroy();
-        }
 
         trigger delete();
       }
@@ -2711,9 +2625,8 @@ init() {
         self waittill("death");
         trigger notify("end_detection");
 
-        if(isDefined(trigger.bombSquadIcon)) {
+        if(isDefined(trigger.bombSquadIcon))
           trigger.bombSquadIcon destroy();
-        }
 
         trigger delete();
       }
@@ -2728,9 +2641,9 @@ init() {
           if(!player.detectExplosives) {
             continue;
           }
-          if(level.teamBased && player.team != detectTeam) {
+          if(level.teamBased && player.team != detectTeam)
             continue;
-          } else if(!level.teamBased && player == self.owner.owner) {
+          else if(!level.teamBased && player == self.owner.owner) {
             continue;
           }
           if(isDefined(player.bombSquadIds[self.detectId])) {
@@ -2802,21 +2715,17 @@ init() {
       }
 
       cleanupEquipment(equipNum, equipKillCamEnt, equipTrigger, equipSensor) {
-        if(isDefined(equipNum)) {
+        if(isDefined(equipNum))
           level.mines[equipNum] = undefined;
-        }
 
-        if(isDefined(equipKillCamEnt)) {
+        if(isDefined(equipKillCamEnt))
           equipKillCamEnt Delete();
-        }
 
-        if(isDefined(equipTrigger)) {
+        if(isDefined(equipTrigger))
           equipTrigger Delete();
-        }
 
-        if(isDefined(equipSensor)) {
+        if(isDefined(equipSensor))
           equipSensor Delete();
-        }
       }
 
       deleteExplosive() {
@@ -2877,9 +2786,8 @@ init() {
 
       makeExplosiveTargetableByAI(nonLethal) {
         self make_entity_sentient_mp(self.owner.team);
-        if(!isDefined(nonLethal) || !nonLethal) {
+        if(!isDefined(nonLethal) || !nonLethal)
           self MakeEntityNoMeleeTarget();
-        }
         if(IsSentient(self)) {
           self SetThreatBiasGroup("DogsDontAttack");
         }
@@ -2922,9 +2830,8 @@ init() {
             self.bombSquadIcons[index].detectId = "";
           }
         } else if(!self.detectExplosives) {
-          for(index = 0; index < self.bombSquadIcons.size; index++) {
+          for(index = 0; index < self.bombSquadIcons.size; index++)
             self.bombSquadIcons[index] destroy();
-          }
 
           self.bombSquadIcons = [];
         }
@@ -2939,9 +2846,8 @@ init() {
           if(detectId == triggerDetectId) {
             return;
           }
-          if(detectId == "") {
+          if(detectId == "")
             useId = index;
-          }
         }
 
         if(useId < 0) {
@@ -2957,9 +2863,8 @@ init() {
         self.bombSquadIcons[useId].alpha = 1;
         self.bombSquadIcons[useId].detectId = trigger.detectId;
 
-        while(isAlive(self) && isDefined(trigger) && self isTouching(trigger)) {
+        while(isAlive(self) && isDefined(trigger) && self isTouching(trigger))
           wait(0.05);
-        }
 
         if(!isDefined(self)) {
           return;
@@ -2973,13 +2878,11 @@ init() {
       getDamageableEnts(pos, radius, doLOS, startRadius) {
         ents = [];
 
-        if(!isDefined(doLOS)) {
+        if(!isDefined(doLOS))
           doLOS = false;
-        }
 
-        if(!isDefined(startRadius)) {
+        if(!isDefined(startRadius))
           startRadius = 0;
-        }
 
         radiusSq = radius * radius;
 
@@ -3056,9 +2959,8 @@ init() {
           }
           entpos = mine.origin + (0, 0, 32);
           distSq = distanceSquared(pos, entpos);
-          if(distSq < radiusSq && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, mine))) {
+          if(distSq < radiusSq && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, mine)))
             ents[ents.size] = get_damageable_mine(mine, entpos);
-          }
         }
 
         return ents;
@@ -3067,58 +2969,49 @@ init() {
       getEMPDamageEnts(pos, radius, doLOS, startRadius) {
         ents = [];
 
-        if(!isDefined(doLOS)) {
+        if(!isDefined(doLOS))
           doLOS = false;
-        }
 
-        if(!isDefined(startRadius)) {
+        if(!isDefined(startRadius))
           startRadius = 0;
-        }
 
         radiusSq = radius * radius;
 
         level.mines = array_removeUndefined(level.mines);
         foreach(targetEnt in level.mines) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         turrets = getEntArray("misc_turret", "classname");
         foreach(targetEnt in turrets) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         foreach(targetEnt in level.uplinks) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         foreach(targetEnt in level.remote_uav) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         foreach(targetEnt in level.ballDrones) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         foreach(targetEnt in level.placedIMS) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         foreach(targetEnt in level.players) {
-          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius)) {
+          if(empCanDamage(targetEnt, pos, radiusSq, doLOS, startRadius))
             ents[ents.size] = targetEnt;
-          }
         }
 
         return ents;
@@ -3135,9 +3028,8 @@ init() {
         midpos = undefined;
 
         diff = to - from;
-        if(lengthsquared(diff) < startRadius * startRadius) {
+        if(lengthsquared(diff) < startRadius * startRadius)
           return true;
-        }
 
         dir = vectornormalize(diff);
         midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
@@ -3146,11 +3038,10 @@ init() {
 
         if(getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
           thread debugprint(from, ".dmg");
-          if(isDefined(ent)) {
+          if(isDefined(ent))
             thread debugprint(to, "." + ent.classname);
-          } else {
+          else
             thread debugprint(to, ".undefined");
-          }
           if(trace["fraction"] == 1) {
             thread debugline(midpos, to, (1, 1, 1));
           } else {
@@ -3193,9 +3084,8 @@ init() {
       }
 
       debugcircle(center, radius, color, segments) {
-        if(!isDefined(segments)) {
+        if(!isDefined(segments))
           segments = 16;
-        }
 
         angleFrac = 360 / segments;
         circlepoints = [];
@@ -3212,11 +3102,10 @@ init() {
 
         for(i = 0; i < circlepoints.size; i++) {
           start = circlepoints[i];
-          if(i + 1 >= circlepoints.size) {
+          if(i + 1 >= circlepoints.size)
             end = circlepoints[0];
-          } else {
+          else
             end = circlepoints[i + 1];
-          }
 
           thread debugline(start, end, color);
         }
@@ -3236,22 +3125,20 @@ init() {
         switch (sWeapon) {
           case "concussion_grenade_mp":
 
-            if(!isDefined(eInflictor)) {
+            if(!isDefined(eInflictor))
               return;
-            } else if(meansOfDeath == "MOD_IMPACT") {
+            else if(meansOfDeath == "MOD_IMPACT") {
               return;
             }
             giveFeedback = true;
-            if(isDefined(eInflictor.owner) && eInflictor.owner == eAttacker) {
+            if(isDefined(eInflictor.owner) && eInflictor.owner == eAttacker)
               giveFeedback = false;
-            }
 
             radius = 512;
             scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
 
-            if(scale < 0) {
+            if(scale < 0)
               scale = 0;
-            }
 
             time = 2 + (4 * scale);
 
@@ -3260,14 +3147,12 @@ init() {
             wait(0.05);
             eAttacker notify("stun_hit");
             self notify("concussed", eAttacker);
-            if(eAttacker != self) {
+            if(eAttacker != self)
               eAttacker maps\mp\gametypes\_missions::processChallenge("ch_alittleconcussed");
-            }
             self shellShock("concussion_grenade_mp", time);
             self.concussionEndTime = GetTime() + (time * 1000);
-            if(giveFeedback) {
+            if(giveFeedback)
               eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback("stun");
-            }
             break;
 
           case "weapon_cobra_mk19_mp":
@@ -3283,13 +3168,11 @@ init() {
       }
 
       isPrimaryWeapon(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
-        if(weaponInventoryType(weapName) != "primary") {
+        if(weaponInventoryType(weapName) != "primary")
           return false;
-        }
 
         switch (weaponClass(weapName)) {
           case "rifle":
@@ -3307,9 +3190,8 @@ init() {
       }
 
       isBulletWeapon(weapName) {
-        if(weapName == "none" || isRiotShield(weapName) || isKnifeOnly(weapName)) {
+        if(weapName == "none" || isRiotShield(weapName) || isKnifeOnly(weapName))
           return false;
-        }
 
         switch (weaponClass(weapName)) {
           case "rifle":
@@ -3330,45 +3212,39 @@ init() {
       }
 
       isAltModeWeapon(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
         return (weaponInventoryType(weapName) == "altmode");
       }
 
       isInventoryWeapon(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
         return (weaponInventoryType(weapName) == "item");
       }
 
       isRiotShield(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
         return (WeaponType(weapName) == "riotshield");
       }
 
       isOffhandWeapon(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
         return (weaponInventoryType(weapName) == "offhand");
       }
 
       isSideArm(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
-        if(weaponInventoryType(weapName) != "primary") {
+        if(weaponInventoryType(weapName) != "primary")
           return false;
-        }
 
         return (weaponClass(weapName) == "pistol");
       }
@@ -3377,21 +3253,18 @@ init() {
         weapClass = weaponClass(weapName);
         weapType = weaponInventoryType(weapName);
 
-        if(weapClass != "grenade") {
+        if(weapClass != "grenade")
           return false;
-        }
 
-        if(weapType != "offhand") {
+        if(weapType != "offhand")
           return false;
-        }
 
         return true;
       }
 
       isThrowingKnife(weapName) {
-        if(weapName == "none") {
+        if(weapName == "none")
           return false;
-        }
 
         return (IsSubStr(weapName, "throwingknife"));
       }
@@ -3407,9 +3280,8 @@ init() {
         self endon("faux_spawn");
 
         currentWeapon = self.currentWeaponAtSpawn;
-        if(isDefined(self.saved_lastWeaponHack)) {
+        if(isDefined(self.saved_lastWeaponHack))
           currentWeapon = self.saved_lastWeaponHack;
-        }
 
         self.saved_lastWeapon = currentWeapon;
 
@@ -3525,9 +3397,8 @@ init() {
           } else {
             weaponWeight = getWeaponWeight(weapon);
 
-            if(!isDefined(weaponWeight) || weaponWeight == 0) {
+            if(!isDefined(weaponWeight) || weaponWeight == 0)
               weaponWeight = 10;
-            }
 
             weaponWeight = clampWeaponWeightValue(weaponWeight);
           }
@@ -3723,9 +3594,8 @@ init() {
       }
 
       semtexUsed(grenade) {
-        if(!isDefined(grenade)) {
+        if(!isDefined(grenade))
           return;
-        }
         if(!isDefined(grenade.weapon_name)) {
           return;
         }
@@ -3748,9 +3618,8 @@ init() {
             grenade.isStuck = "enemy";
             grenade.stuckEnemyEntity = stuckTo;
 
-            if(IsPlayer(stuckTo)) {
+            if(IsPlayer(stuckTo))
               stuckTo maps\mp\gametypes\_hud_message::playerCardSplashNotify("semtex_stuck", self);
-            }
 
             self thread maps\mp\gametypes\_hud_message::splashNotify("stuck_semtex", 100);
 
@@ -3783,9 +3652,8 @@ init() {
       spawnMine(origin, owner, weaponName, angles) {
         Assert(isDefined(owner));
 
-        if(!isDefined(angles)) {
+        if(!isDefined(angles))
           angles = (0, RandomFloat(360), 0);
-        }
 
         config = level.weaponConfigs[weaponName];
         Assert(isDefined(config));
@@ -3839,9 +3707,8 @@ init() {
       spawnMotionSensor(origin, owner, weaponName, angles) {
         Assert(isDefined(owner));
 
-        if(!isDefined(angles)) {
+        if(!isDefined(angles))
           angles = (0, RandomFloat(360), 0);
-        }
 
         config = level.weaponConfigs[weaponName];
         Assert(isDefined(config));
@@ -3920,19 +3787,16 @@ init() {
 
         self notify("mine_destroyed");
 
-        if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE"))) {
+        if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
           self.wasChained = true;
-        }
 
-        if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+        if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
           self.wasDamagedFromBulletPenetration = true;
-        }
 
         self.wasDamaged = true;
 
-        if(isDefined(attacker)) {
+        if(isDefined(attacker))
           self.damagedBy = attacker;
-        }
 
         if(isPlayer(attacker)) {
           attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("bouncing_betty");
@@ -3941,14 +3805,12 @@ init() {
         if(!is_Aliens()) {
           if(level.teamBased) {
             if(isDefined(attacker) && isDefined(attacker.pers["team"]) && isDefined(self.owner) && isDefined(self.owner.pers["team"])) {
-              if(attacker.pers["team"] != self.owner.pers["team"]) {
+              if(attacker.pers["team"] != self.owner.pers["team"])
                 attacker notify("destroyed_equipment");
-              }
             }
           } else {
-            if(isDefined(self.owner) && isDefined(attacker) && attacker != self.owner) {
+            if(isDefined(self.owner) && isDefined(attacker) && attacker != self.owner)
               attacker notify("destroyed_equipment");
-            }
           }
         }
 
@@ -3956,9 +3818,8 @@ init() {
       }
 
       is_hive_explosion(attacker, type) {
-        if(!isDefined(attacker) || !isDefined(attacker.classname)) {
+        if(!isDefined(attacker) || !isDefined(attacker.classname))
           return false;
-        }
 
         return (attacker.classname == "scriptable" && type == "MOD_EXPLOSIVE");
       }
@@ -3996,17 +3857,14 @@ init() {
           }
           if(getdvarint("scr_minesKillOwner") != 1) {
             if(isDefined(self.owner)) {
-              if(player == self.owner) {
+              if(player == self.owner)
                 continue;
-              }
-              if(isDefined(player.owner) && player.owner == self.owner) {
+              if(isDefined(player.owner) && player.owner == self.owner)
                 continue;
-              }
             }
 
-            if(!friendlyFireCheck(self.owner, player, 0)) {
+            if(!friendlyFireCheck(self.owner, player, 0))
               continue;
-            }
           }
 
           if(lengthsquared(player getEntityVelocity()) < 10) {
@@ -4029,9 +3887,8 @@ init() {
       mineDeleteTrigger(trigger) {
         self waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
 
-        if(isDefined(trigger)) {
+        if(isDefined(trigger))
           trigger delete();
-        }
       }
 
       motionSensorEMPDamage() {
@@ -4043,9 +3900,8 @@ init() {
 
           self equipmentEmpStunVfx();
           self stopBlinkingLight();
-          if(isDefined(self.damagearea)) {
+          if(isDefined(self.damagearea))
             self.damagearea Delete();
-          }
 
           self.disabled = true;
           self notify("disabled");
@@ -4077,9 +3933,8 @@ init() {
         self playSound(self.config.onLaunchSfx);
         playFX(level.mine_launch, self.origin);
 
-        if(isDefined(self.trigger)) {
+        if(isDefined(self.trigger))
           self.trigger delete();
-        }
 
         explodePos = self.origin + (0, 0, 64);
         self MoveTo(explodePos, 0.7, 0, .65);
@@ -4102,9 +3957,8 @@ init() {
         if(!isDefined(self) || !isDefined(self.owner)) {
           return;
         }
-        if(!isDefined(attacker)) {
+        if(!isDefined(attacker))
           attacker = self.owner;
-        }
 
         self playSound(self.config.onExplodeSfx);
 
@@ -4120,9 +3974,8 @@ init() {
 
         self RadiusDamage(self.origin, level.mineDamageRadius, level.mineDamageMax, level.mineDamageMin, attacker, "MOD_EXPLOSIVE", self.weapon_name);
 
-        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func)) {
+        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func))
           self.owner thread[[level.leaderDialogOnPlayer_func]]("mine_destroyed", undefined, undefined, self.origin);
-        }
 
         wait(0.2);
 
@@ -4134,9 +3987,8 @@ init() {
 
         playFX(self.config.launchVfx, self.origin);
 
-        if(isDefined(self.trigger)) {
+        if(isDefined(self.trigger))
           self.trigger delete();
-        }
 
         self HidePart("tag_sensor");
 
@@ -4173,9 +4025,8 @@ init() {
         if(!isDefined(self) || !isDefined(self.owner)) {
           return;
         }
-        if(!isDefined(attacker)) {
+        if(!isDefined(attacker))
           attacker = self.owner;
-        }
 
         self playSound(self.config.onExplodeSfx);
 
@@ -4212,9 +4063,8 @@ init() {
           if(character _hasPerk("specialty_heartbreaker")) {
             continue;
           }
-          if(Distance2D(self.origin, character.origin) < 300) {
+          if(Distance2D(self.origin, character.origin) < 300)
             markedPlayers[markedPlayers.size] = character;
-          }
         }
 
         foreach(player in markedPlayers) {
@@ -4228,9 +4078,8 @@ init() {
           self.owner thread maps\mp\gametypes\_gamelogic::threadedSetWeaponStatByName("motion_sensor", 1, "hits");
         }
 
-        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func)) {
+        if(isDefined(self.owner) && isDefined(level.leaderDialogOnPlayer_func))
           self.owner thread[[level.leaderDialogOnPlayer_func]]("mine_destroyed", undefined, undefined, self.origin);
-        }
 
         wait(0.2);
 
@@ -4284,9 +4133,9 @@ init() {
           return;
         }
         self.taggedAssist = true;
-        if(isDefined(victim)) {
+        if(isDefined(victim))
           self thread maps\mp\gametypes\_gamescore::processAssist(victim);
-        } else {
+        else {
           maps\mp\gametypes\_gamescore::givePlayerScore("assist", self, undefined, true);
           self thread maps\mp\gametypes\_rank::giveRankXP("assist");
         }
@@ -4313,42 +4162,38 @@ init() {
         color[0] = (1, 0, 0);
         color[1] = (0, 1, 0);
 
-        if(recieverCenter[2] < damageBottom) {
+        if(recieverCenter[2] < damageBottom)
           pass = false;
-        } else {
+        else
           pass = true;
-        }
 
         damageBottomOrigin = (damageCenter[0], damageCenter[1], damageBottom);
         recieverBottomOrigin = (recieverCenter[0], recieverCenter[1], damageBottom);
         thread debugcircle(damageBottomOrigin, level.mineDamageRadius, color[pass], 32);
 
         distSq = distanceSquared(damageCenter, recieverCenter);
-        if(distSq > radiusSq) {
+        if(distSq > radiusSq)
           pass = false;
-        } else {
+        else
           pass = true;
-        }
 
         thread debugline(damageBottomOrigin, recieverBottomOrigin, color[pass]);
       }
 
       mineDamageHeightPassed(mine, victim) {
-        if(isPlayer(victim) && isAlive(victim) && victim.sessionstate == "playing") {
+        if(isPlayer(victim) && isAlive(victim) && victim.sessionstate == "playing")
           victimPos = victim getStanceCenter();
-        } else if(victim.classname == "misc_turret") {
+        else if(victim.classname == "misc_turret")
           victimPos = victim.origin + (0, 0, 32);
-        } else {
+        else
           victimPos = victim.origin;
-        }
 
         tempZOffset = 0;
         damageTop = mine.origin[2] + tempZOffset + level.mineDamageHalfHeight;
         damageBottom = mine.origin[2] + tempZOffset - level.mineDamageHalfHeight;
 
-        if(victimPos[2] > damageTop || victimPos[2] < damageBottom) {
+        if(victimPos[2] > damageTop || victimPos[2] < damageBottom)
           return false;
-        }
 
         return true;
       }
@@ -4384,7 +4229,9 @@ init() {
         plantAngles = vectortoangles(normal);
         plantAngles += (90, 0, 0);
 
-        mine = [[spawnFunc]](pos, owner, weaponName, plantAngles);
+        mine = [
+          [spawnFunc]
+        ](pos, owner, weaponName, plantAngles);
 
         mine makeExplosiveUsable();
         mine thread mineDamageMonitor();
@@ -4414,13 +4261,11 @@ init() {
       transfer_grenade_ownership(newOwner) {
         newOwner delete_all_grenades();
 
-        if(isDefined(self.plantedLethalEquip)) {
+        if(isDefined(self.plantedLethalEquip))
           newOwner.plantedLethalEquip = array_removeUndefined(self.plantedLethalEquip);
-        }
 
-        if(isDefined(self.plantedTacticalEquip)) {
+        if(isDefined(self.plantedTacticalEquip))
           newOwner.plantedTacticalEquip = array_removeUndefined(self.plantedTacticalEquip);
-        }
 
         if(isDefined(newOwner.plantedLethalEquip)) {
           foreach(equip in newOwner.plantedLethalEquip) {

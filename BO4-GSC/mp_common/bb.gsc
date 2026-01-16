@@ -6,6 +6,7 @@
 #include scripts\core_common\bb_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
+
 #namespace bb;
 
 autoexec __init__system__() {
@@ -19,11 +20,11 @@ __init__() {
 
 on_player_spawned() {
   self._bbdata = [];
-  self._bbdata[# "score"] = 0;
-  self._bbdata[# "momentum"] = 0;
-  self._bbdata[# "spawntime"] = gettime();
-  self._bbdata[# "shots"] = 0;
-  self._bbdata[# "hits"] = 0;
+  self._bbdata[#"score"] = 0;
+  self._bbdata[#"momentum"] = 0;
+  self._bbdata[#"spawntime"] = gettime();
+  self._bbdata[#"shots"] = 0;
+  self._bbdata[#"hits"] = 0;
   callback::on_death(&on_player_death);
 }
 
@@ -50,13 +51,13 @@ function_95a5b5c2(obj_type, label, team, origin, player) {
     var_cfad67d4 = ishash(team) ? team : hash(team);
     clientid = isDefined(player) && isDefined(player.clientid) ? player.clientid : -1;
     function_92d1707f(#"hash_d424efe4db1dff7", {
-      #gametime: function_f8d53445(),
-      #objtype: obj_type,
-      #label: label,
-      #team: var_cfad67d4,
-      #playerx: origin[0],
-      #playery: origin[1],
-      #playerz: origin[2],
+      #gametime: function_f8d53445(), 
+      #objtype: obj_type, 
+      #label: label, 
+      #team: var_cfad67d4, 
+      #playerx: origin[0], 
+      #playery: origin[1], 
+      #playerz: origin[2], 
       #clientid: clientid
     });
   }
@@ -178,7 +179,7 @@ function_6661621a() {
 
   mploadout.var_9911e1f2 = var_c0f05cbb.name;
   mploadout.specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
-  function_92d1707f(#"hash_30b542620e21966d", # "mploadouts", mploadout);
+  function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
 }
 
 commit_spawn_data() {
@@ -198,12 +199,12 @@ commit_spawn_data() {
 
   specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
   mpplayerlives = {
-    #gametime: function_f8d53445(),
-    #spawnid: getplayerspawnid(self),
-    #lifescore: self._bbdata[# "score"],
-    #lifemomentum: self._bbdata[# "momentum"],
-    #lifetime: gettime() - self._bbdata[# "spawntime"],
-    #name: self.name,
+    #gametime: function_f8d53445(), 
+    #spawnid: getplayerspawnid(self), 
+    #lifescore: self._bbdata[#"score"], 
+    #lifemomentum: self._bbdata[#"momentum"], 
+    #lifetime: gettime() - self._bbdata[#"spawntime"], 
+    #name: self.name, 
     #specialist: specialistindex
   };
   function_92d1707f(#"hash_6fc210ad5f081ce8", mpplayerlives);

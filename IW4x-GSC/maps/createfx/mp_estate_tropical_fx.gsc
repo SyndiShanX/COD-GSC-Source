@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_estate_tropical_fx.gsc
 ***************************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 191
   ent = createLoopSound();
   ent.v["origin"] = (-1498.94, -2254.46, 59.7567);
   ent.v["angles"] = (270, 0, 0);
@@ -1164,4 +1166,5 @@ main() {
   ent.v["angles"] = (282.772, 289.962, -18.3823);
   ent.v["fxid"] = "leaves_fall_gentlewind_codo";
   ent.v["delay"] = -15;
+
 }

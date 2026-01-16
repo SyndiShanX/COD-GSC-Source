@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace contracts;
 
 autoexec __init__system__() {
@@ -78,7 +79,7 @@ function_74872db6() {
   if(level.round_number == 20) {
     foreach(e_player in getplayers()) {
       if(!(isDefined(e_player.var_bd1368a8) && e_player.var_bd1368a8)) {
-        e_player increment_zm_contract(#"contract_zm_no_pap", 1, # "zstandard");
+        e_player increment_zm_contract(#"contract_zm_no_pap", 1, #"zstandard");
       }
     }
 
@@ -87,7 +88,7 @@ function_74872db6() {
 
   if(level.round_number == 30) {
     foreach(e_player in getplayers()) {
-      e_player increment_zm_contract(#"contract_zm_rounds", 1, # "zstandard");
+      e_player increment_zm_contract(#"contract_zm_rounds", 1, #"zstandard");
     }
 
     callback::function_50fdac80(&function_74872db6);
@@ -96,38 +97,38 @@ function_74872db6() {
 
 on_round_end() {
   switch (level.script) {
-    case # "zm_zodt8":
-      var_c5440c34 = # "contract_zm_zodt8_rounds";
+    case #"zm_zodt8":
+      var_c5440c34 = #"contract_zm_zodt8_rounds";
       break;
-    case # "zm_towers":
-      var_c5440c34 = # "contract_zm_towers_rounds";
+    case #"zm_towers":
+      var_c5440c34 = #"contract_zm_towers_rounds";
       break;
-    case # "zm_escape":
-      var_c5440c34 = # "contract_zm_escape_rounds";
+    case #"zm_escape":
+      var_c5440c34 = #"contract_zm_escape_rounds";
       break;
-    case # "zm_office":
-      var_c5440c34 = # "contract_zm_office_rounds";
+    case #"zm_office":
+      var_c5440c34 = #"contract_zm_office_rounds";
       break;
-    case # "zm_mansion":
-      var_c5440c34 = # "contract_zm_mansion_rounds";
+    case #"zm_mansion":
+      var_c5440c34 = #"contract_zm_mansion_rounds";
       break;
-    case # "zm_red":
-      var_c5440c34 = # "contract_zm_red_rounds";
+    case #"zm_red":
+      var_c5440c34 = #"contract_zm_red_rounds";
       break;
-    case # "zm_white":
-      var_c5440c34 = # "contract_zm_white_rounds";
+    case #"zm_white":
+      var_c5440c34 = #"contract_zm_white_rounds";
       break;
-    case # "zm_orange":
-      var_c5440c34 = # "contract_zm_orange_rounds";
+    case #"zm_orange":
+      var_c5440c34 = #"contract_zm_orange_rounds";
       break;
   }
 
   switch (level.var_837aa533) {
-    case # "zclassic":
-      var_fc80b645 = # "contract_zm_classic_rounds";
+    case #"zclassic":
+      var_fc80b645 = #"contract_zm_classic_rounds";
       break;
-    case # "ztrials":
-      var_fc80b645 = # "contract_zm_gauntlet_rounds";
+    case #"ztrials":
+      var_fc80b645 = #"contract_zm_gauntlet_rounds";
 
       if(level flag::get("round_reset")) {
         return;
@@ -138,7 +139,7 @@ on_round_end() {
 
   foreach(e_player in getplayers()) {
     if(isDefined(var_c5440c34)) {
-      e_player increment_zm_contract(var_c5440c34, 1, # "zstandard");
+      e_player increment_zm_contract(var_c5440c34, 1, #"zstandard");
     }
 
     if(isDefined(var_fc80b645)) {
@@ -160,9 +161,9 @@ can_process_contracts() {
     return true;
   }
 
-  if(!level.onlinegame || isDefined(level.var_aa2d5655) && level.var_aa2d5655) {
-    return false;
-  }
+    if(!level.onlinegame || isDefined(level.var_aa2d5655) && level.var_aa2d5655) {
+      return false;
+    }
 
   if(util::get_game_type() == "ztutorial") {
     return false;
@@ -194,16 +195,17 @@ increment_zm_contract(var_38280f2f, delta = 1, var_86024473) {
 }
 
 private function_902ef0de(var_38280f2f, delta) {
+
   if(getdvarint(#"scr_contract_debug_multiplier", 0) > 0) {
     delta *= getdvarint(#"scr_contract_debug_multiplier", 1);
   }
 
-  if(delta <= 0) {
-    return;
-  }
+    if(delta <= 0) {
+      return;
+    }
 
-  target_value = self.pers[# "contracts"][var_38280f2f].target_value;
-  old_progress = isDefined(self.pers[# "contracts"][var_38280f2f].current_value) ? self.pers[# "contracts"][var_38280f2f].current_value : self.pers[# "contracts"][var_38280f2f].var_59cb904f;
+  target_value = self.pers[#"contracts"][var_38280f2f].target_value;
+  old_progress = isDefined(self.pers[#"contracts"][var_38280f2f].current_value) ? self.pers[#"contracts"][var_38280f2f].current_value : self.pers[#"contracts"][var_38280f2f].var_59cb904f;
 
   if(old_progress == target_value) {
     return;
@@ -216,7 +218,7 @@ private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(new_progress != old_progress) {
-    self.pers[# "contracts"][var_38280f2f].current_value = new_progress;
+    self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
@@ -224,7 +226,7 @@ private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(old_progress < target_value && target_value <= new_progress) {
-    self.pers[# "contracts"][var_38280f2f].var_be5bf249 = self.pers[# "time_played_total"];
+    self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self.pers[#"time_played_total"];
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       zm_stats::function_ea5b4947(0);
@@ -298,7 +300,7 @@ function_677a89c8() {
 }
 
 function_30dc9a23() {
-  self endoncallback(&function_1729afac, # "disconnect", # "perk_vapor_lost");
+  self endoncallback(&function_1729afac, #"disconnect", #"perk_vapor_lost");
   var_c16ab86f = 0;
 
   while(true) {
@@ -334,7 +336,7 @@ function_1729afac(var_c34665fc) {
 }
 
 function_9d5cd9ee() {
-  self endoncallback(&function_1395d508, # "disconnect", # "destroy_riotshield");
+  self endoncallback(&function_1395d508, #"disconnect", #"destroy_riotshield");
   var_c16ab86f = 0;
 
   while(true) {
@@ -397,7 +399,7 @@ function_51db541e() {
 }
 
 function_1d4fae71() {
-  self endon(#"disconnect", # "hash_4bf9f2755fe74a0d");
+  self endon(#"disconnect", #"hash_4bf9f2755fe74a0d");
 
   while(true) {
     if(!isalive(self) || self.var_42a6fc40 != self.var_5417136) {
@@ -484,3 +486,4 @@ function_295a8005(var_1d89ece6) {
   util::function_3f749abc(var_86418430 + "<dev string:xa3f>", var_c8d599b5 + "<dev string:xa50>");
   util::function_3f749abc(var_86418430 + "<dev string:xa67>", var_c8d599b5 + "<dev string:xa75>");
 }
+

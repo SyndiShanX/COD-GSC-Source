@@ -91,6 +91,8 @@ main() {
   ent.maxOpacity = 0.5;
   ent.transitionTime = 0;
 
+
+
   ent = maps\_utility::create_vision_set_fog("gulag_ending");
   ent.startDist = 174.6;
   ent.halfwayDist = 16288;
@@ -109,5 +111,8 @@ main() {
   ent.maxOpacity = 1;
   ent.transitionTime = 5;
 
+
+
   maps\_utility::vision_set_fog_changes("gulag_flyin", 0);
+
 }

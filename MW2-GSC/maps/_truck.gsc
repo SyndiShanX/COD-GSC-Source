@@ -56,6 +56,7 @@ main(model, type) {
   build_compassicon("automobile", false);
 
   build_radiusdamage((0, 0, 32), 200, 150, 0, false, 2);
+
 }
 
 init_local() {
@@ -64,6 +65,7 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
+
   positions[0].vehicle_getoutanim = % door_pickup_driver_climb_out;
   positions[1].vehicle_getoutanim = % door_pickup_passenger_climb_out;
   positions[2].vehicle_getoutanim = % door_pickup_passenger_RR_climb_out;
@@ -79,15 +81,15 @@ set_vehicle_anims(positions) {
   //positions[ 2 ].vehicle_getinanim = %door_pickup_driver_climb_in;
   //positions[ 3 ].vehicle_getinanim = %door_pickup_passenger_climb_in;
   return positions;
+
 }
 
 #using_animtree("generic_human");
 
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 6; i++)
+    positions[i] = spawnstruct();
 
   //	positions[ 0 ].getout_delete = true;
 
@@ -99,7 +101,7 @@ setanims() {
   pickup_passenger_RR_idle
   pickup_passenger_RR_climb_out
   technical_passenger_climb_out
-  	
+	
   */
 
   positions[0].sittag = "tag_driver";
@@ -155,6 +157,8 @@ unload_groups() {
 
   return unload_groups;
 }
+
+
 
 /*QUAKED script_vehicle_opfor_truck (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

@@ -12,7 +12,7 @@
 #namespace namespace_b2c57c5e;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_island_shield", &__init__, undefined, undefined);
+  system::register("zm_weap_island_shield", & __init__, undefined, undefined);
 }
 
 function __init__() {}

@@ -18,16 +18,14 @@ setposemovement(desiredpose, desiredmovement) {
   self animscripts\debug::debugpushstate("SetPoseMovement: " + desiredpose + " - " + desiredmovement);
 
   if(desiredpose == "") {
-    if(self.a.pose == "prone" && (desiredmovement == "walk" || desiredmovement == "run")) {
+    if(self.a.pose == "prone" && (desiredmovement == "walk" || desiredmovement == "run"))
       desiredpose = "crouch";
-    } else {
+    else
       desiredpose = self.a.pose;
-    }
   }
 
-  if(!isDefined(desiredmovement) || desiredmovement == "") {
+  if(!isDefined(desiredmovement) || desiredmovement == "")
     desiredmovement = self.a.movement;
-  }
 
   [[anim.setposemovementfnarray[desiredpose][desiredmovement]]]();
 
@@ -503,9 +501,8 @@ playblendtransition(transanim, crossblendtime, endpose, endmovement, endaiming) 
   self.a.movement = endmovement;
   waittime = (endtime - gettime()) / 1000;
 
-  if(waittime < 0.05) {
+  if(waittime < 0.05)
     waittime = 0.05;
-  }
 
   wait(waittime);
 
@@ -555,37 +552,34 @@ blendintostandrun() {
   if(shouldtacticalwalk) {
     self.a.movement = "run";
 
-    if(self.a.pose != "stand") {
+    if(self.a.pose != "stand")
       transitiontotacticalwalk("stand");
-    }
 
     return false;
   }
 
-  if(self animscripts\cqb::shouldcqb()) {
+  if(self animscripts\cqb::shouldcqb())
     playblendtransitionstandrun(animarray("start_cqb_run_f", "move"));
-  } else if(self animscripts\utility::isincombat() && isDefined(self.run_combatanim)) {
+  else if(self animscripts\utility::isincombat() && isDefined(self.run_combatanim))
     playblendtransitionstandrun(self.run_combatanim);
-  } else if(isDefined(self.run_noncombatanim)) {
+  else if(isDefined(self.run_noncombatanim))
     playblendtransitionstandrun(self.run_noncombatanim);
-  } else {
+  else {
     shouldshootwhilemoving = 0;
     runanimname = "start_stand_run_f";
     transitionanimparent = % combatrun;
     forwardrunanim = % combatrun_forward;
     runanimtranstime = 0.0;
 
-    if(self.a.movement != "stop") {
+    if(self.a.movement != "stop")
       runanimtranstime = 0.5;
-    }
 
     if(self.a.pose == "stand") {
       if(animscripts\move::mayshootwhilemoving() && self.bulletsinclip > 0 && isvalidenemy(self.enemy)) {
         shouldshootwhilemoving = 1;
 
-        if(self.a.pose == "stand") {
+        if(self.a.pose == "stand")
           runanimname = "run_n_gun_f";
-        }
       }
     }
 
@@ -593,11 +587,10 @@ blendintostandrun() {
     self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
     self setanimknoblimited(animarray(runanimname), 1, runanimtranstime, 1);
 
-    if(shouldshootwhilemoving && self.a.pose == "stand") {
+    if(shouldshootwhilemoving && self.a.pose == "stand")
       self thread animscripts\run::updaterunweights("BlendIntoStandRun", forwardrunanim, animarray("run_n_gun_b"));
-    } else {
+    else
       self thread animscripts\run::updaterunweights("BlendIntoStandRun", forwardrunanim, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
-    }
 
     playblendtransitionstandrun(transitionanimparent);
   }
@@ -606,17 +599,15 @@ blendintostandrun() {
 }
 
 playblendtransitionstandwalk(animname) {
-  if(self.a.movement != "stop") {
+  if(self.a.movement != "stop")
     self endon("movemode");
-  }
 
   playblendtransition(animname, 0.6, "stand", "walk", 1);
 }
 
 blendintostandwalk() {
-  if(self.a.movement != "stop") {
+  if(self.a.movement != "stop")
     self endon("movemode");
-  }
 
   self.a.pose = "stand";
   self.a.movement = "walk";
@@ -632,9 +623,9 @@ crouchtostand() {
     self.faststand = undefined;
   }
 
-  if(self animscripts\utility::weaponanims() == "pistol" || self animscripts\utility::weaponanims() == "none") {
+  if(self animscripts\utility::weaponanims() == "pistol" || self animscripts\utility::weaponanims() == "none")
     playtransitionanimation(animarray("crouch_2_stand"), "stand", "stop", standspeed);
-  } else {
+  else {
     self randomizeidleset();
     playtransitionanimation(animarray("crouch_2_stand"), "stand", "stop", standspeed);
   }
@@ -836,11 +827,10 @@ crouchruntoprone() {
   localdeltavector = getmovedelta(diveanim, 0, 1);
   endpoint = self localtoworldcoords(localdeltavector);
 
-  if(self maymovetopoint(endpoint)) {
+  if(self maymovetopoint(endpoint))
     playtransitionanimation(diveanim, "prone", "stop", 0.5);
-  } else {
+  else
     playtransitionanimation(animarray("run_2_prone_gunsupport", "move"), "prone", "stop", 0.5);
-  }
 }
 
 crouchruntopronewalk() {
@@ -864,9 +854,8 @@ playtransitionanimation(transanim, endpose, endmovement, endaiming, finalanim, r
 }
 
 playtransitionanimationfunc(transanim, endpose, endmovement, endaiming, finalanim, rate, waitsetstatesenabled) {
-  if(!isDefined(rate)) {
+  if(!isDefined(rate))
     rate = 1;
-  }
 
   if(getdebugdvar("debug_animpose") == "on") {
     if(endpose != self.a.pose) {
@@ -884,19 +873,16 @@ playtransitionanimationfunc(transanim, endpose, endmovement, endaiming, finalani
     }
   }
 
-  if(waitsetstatesenabled) {
+  if(waitsetstatesenabled)
     self thread waitsetstates(getanimlength(transanim) / 2.0, "killtimerscript", endpose);
-  }
 
   self setflaggedanimknoballrestart("transAnimDone2", transanim, % body, 1, 0.2, rate);
 
-  if(!isDefined(self.a.pose)) {
+  if(!isDefined(self.a.pose))
     self.pose = "undefined";
-  }
 
-  if(!isDefined(self.a.movement)) {
+  if(!isDefined(self.a.movement))
     self.movement = "undefined";
-  }
 
   debugidentifier = "";
 
@@ -908,9 +894,8 @@ playtransitionanimationfunc(transanim, endpose, endmovement, endaiming, finalani
   self notify("entered_pose" + endpose);
   self.a.movement = endmovement;
 
-  if(isDefined(finalanim)) {
+  if(isDefined(finalanim))
     self setanimknoball(finalanim, % body, 1, 0.3, rate);
-  }
 }
 
 waitsetstates(timetowait, killmestring, endpose) {
@@ -937,25 +922,22 @@ transitiontotacticalwalk(newpose) {
 
   transanim = animarray(self.a.pose + "_2_" + newpose, "combat");
 
-  if(newpose == "stand") {
+  if(newpose == "stand")
     rate = 2;
-  } else {
+  else
     rate = 1;
-  }
 
   self orientmode("face enemy");
 
-  if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\"")) {
+  if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\""))
     println("error: ^2 missing notetrack to set pose!", transanim);
-  }
 
   self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.3, rate);
   transtime = getanimlength(transanim) / rate;
   playtime = transtime - 0.2;
 
-  if(playtime < 0.2) {
+  if(playtime < 0.2)
     playtime = 0.2;
-  }
 
   self animscripts\shared::donotetracksfortime(playtime, "trans");
   self orientmode("face default");

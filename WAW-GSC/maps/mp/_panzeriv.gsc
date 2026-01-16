@@ -35,47 +35,47 @@ build_damage_states() {
     level.vehicles_damage_states[vehicle_name] = [];
     level.vehicles_damage_treadfx[vehicle_name] = [];
     {
-      level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].health_percentage = k_mild_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vdamage_ger_panzer4_mp01");
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].vehicle_tag = "tag_origin";
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].damage_effect_loop_time = 0.2;
     } {
-      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].health_percentage = k_moderate_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vdamage_ger_panzer4_mp02");
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].vehicle_tag = "tag_origin";
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].damage_effect_loop_time = 0.2;
     } {
-      level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].health_percentage = k_severe_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vdamage_ger_panzer4_mp03");
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].vehicle_tag = "tag_origin";
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].damage_effect_loop_time = 0.2;
     } {
-      level.vehicles_damage_states[vehicle_name][k_total_damage_index] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_total_damage_index] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].health_percentage = k_total_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vdamage_ger_panzer4_mp04");
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].vehicle_tag = "tag_origin";
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].damage_effect_loop_time = 0.2;
-      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[1] = spawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[1] = SpawnStruct();
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[1].damage_effect = loadFX("vehicle/vfire/fx_vexplode_ger_panzer4_mp");
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[1].sound_effect = "exp_suitcase_bomb_main";
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[1].vehicle_tag = "tag_origin";
     } {
-      default_husk_effects = spawnStruct();
+      default_husk_effects = SpawnStruct();
       default_husk_effects.damage_effect = undefined;
       default_husk_effects.sound_effect = undefined;
       default_husk_effects.vehicle_tag = "tag_origin";

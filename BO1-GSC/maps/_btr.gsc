@@ -20,7 +20,7 @@ setanims() {
   positions = [];
   num_positions = 4;
   for(i = 0; i < num_positions; i++) {
-    positions[i] = spawnStruct();
+    positions[i] = spawnstruct();
   }
   positions[0].sittag = "tag_gunner1";
   positions[1].sittag = "tag_driver";

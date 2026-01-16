@@ -18,7 +18,7 @@ player_seek_stages() {
   stages[1] = 1500;
   stages[2] = 1000;
 
-  if(isDefined(self.script_vehicleride)) {
+  if(IsDefined(self.script_vehicleride)) {
     self waittill("jumpedout");
     wait 0.5;
   }
@@ -45,11 +45,11 @@ ai_rappel_think(playerSeek) {
   wait(0.5);
   wait RandomFloat(4);
 
-  eRopeOrg = spawn("script_origin", reference.origin);
+  eRopeOrg = Spawn("script_origin", reference.origin);
   eRopeOrg.angles = reference.angles;
 
-  eRope = spawn("script_model", eRopeOrg.origin);
-  eRope setModel("coop_bridge_rappelrope");
+  eRope = Spawn("script_model", eRopeOrg.origin);
+  eRope SetModel("coop_bridge_rappelrope");
   eRope.animname = "rope";
   eRope assign_animtree();
 
@@ -68,7 +68,7 @@ ai_rappel_think(playerSeek) {
   self waittill("over_solid_ground");
 
   self.health = self.oldhealth;
-  if(isDefined(playerSeek) && playerSeek) {
+  if(IsDefined(playerSeek) && playerSeek) {
     self thread player_seek_stages();
   } else {
     self.goalradius = 500;
@@ -88,7 +88,7 @@ prevent_fall_overbridge() {
     x = 10106;
   }
 
-  while(1) {
+  while (1) {
     if(self.animation == "bridge_rappel_R") {
       self.allowdeath = self.origin[0] > x;
     } else {
@@ -133,29 +133,30 @@ prevent_fall_overrail() {
 }
 
 debug_draw_on_ent(msg) {
+  /#
   self notify("stop_draw_on_ent");
   self endon("stop_draw_on_ent");
   self endon("death");
 
   timer = GetTime() + 3000;
 
-  while(GetTime() < timer) {
+  while (GetTime() < timer) {
     Print3d(self.origin, msg, (0.8, 0.8, 0.2));
     wait(0.05);
   }
-
+  # /
 }
 
 ai_rappel_death() {
   self endon("over_solid_ground");
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
 
   self set_deathanim("fastrope_fall");
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(IsDefined(self)) {
     self thread play_sound_in_space("generic_death_falling");
   }
 }
@@ -171,9 +172,9 @@ ai_rappel_over_ground_death_anim(guy) {
 // ---------------------------------------------------------------------------------
 missile_taxi_moves() {
   // Remove the script_noteworthy from the ad sign on the taxi
-  ents = getEntArray("taxi_ad_clip", "targetname");
+  ents = GetEntArray("taxi_ad_clip", "targetname");
   foreach(ent in ents) {
-    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "missile_taxi") {
+    if(IsDefined(ent.script_noteworthy) && ent.script_noteworthy == "missile_taxi") {
       ent.script_noteworthy = undefined;
     }
   }
@@ -205,13 +206,13 @@ missile_taxi_moves() {
 missile_taxi_get_hit_by_hellfire() {
   self endon("taxi_moving");
 
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker);
-    if(!isDefined(attacker)) {
+    if(!isdefined(attacker)) {
       continue;
     }
 
-    if(!isDefined(attacker.classname)) {
+    if(!isdefined(attacker.classname)) {
       continue;
     }
 
@@ -221,6 +222,7 @@ missile_taxi_get_hit_by_hellfire() {
   }
 
   self notify("taxi_moving");
+
 }
 
 missile_taxi_get_exploded() {
@@ -238,7 +240,7 @@ attack_heli() {
   trigger_wait("attack_heli", "targetname");
   attack_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
   thread maps\_attack_heli::begin_attack_heli_behavior(attack_heli);
-  Assert(isDefined(attack_heli));
+  Assert(IsDefined(attack_heli));
   wait 2;
   radio_dialogue("so_bridge_hqr_enemy_helo");
 }
@@ -250,13 +252,13 @@ BRIDGE_COLLAPSE_SPEED = 1.0;
 
 collapsed_section_shakes() {
   trigger = GetEnt("collapsed_bridge_effects", "targetname");
-  targets = getEntArray(trigger.target, "targetname");
+  targets = GetEntArray(trigger.target, "targetname");
 
   trigger waittill("trigger");
 
   foreach(eTarget in targets) {
-    //playFX( <effect id >, <position of effect>, <forward vector>, <up vector> )
-    playFX(getfx("dust_ceiling_fall"), eTarget.origin);
+    //playfx( <effect id >, <position of effect>, <forward vector>, <up vector> )
+    PlayFX(getfx("dust_ceiling_fall"), eTarget.origin);
   }
 }
 
@@ -297,10 +299,10 @@ bridge_collapse_prep() {
 
   // start sound, needs 2 seconds to play before bridge comes down
   bridge_collapse_sound = GetEnt("bridge_collapse_sound", "targetname");
-  Assert(isDefined(bridge_collapse_sound));
+  Assert(IsDefined(bridge_collapse_sound));
   bridge_collapse_sound thread play_sound_on_entity("scn_bridge_collapse");
 
-  if(isDefined(level.player_sprint_scale)) {
+  if(IsDefined(level.player_sprint_scale)) {
     SetSavedDvar("player_sprintSpeedScale", level.default_sprint);
   }
 
@@ -314,7 +316,7 @@ bridge_collapse_prep() {
   wait 6 * BRIDGE_COLLAPSE_SPEED;
   //setblur( 0, 0.5 );
 
-  if(isDefined(level.player_sprint_scale)) {
+  if(IsDefined(level.player_sprint_scale)) {
     SetSavedDvar("player_sprintSpeedScale", level.player_sprint_scale);
   }
 }
@@ -343,14 +345,14 @@ bridge_collapse_earthquake() {
 
 reveal_details() {
   // bridge destroyed details that dont move, they just spawn in after the collapse and are hidden by the smoke
-  bridge_collapse_details = getEntArray("bridge_collapse_detail", "targetname");
+  bridge_collapse_details = GetEntArray("bridge_collapse_detail", "targetname");
   thread array_call(bridge_collapse_details, ::Hide);
 
   // these destroyed bridge details spawn in also but need to slide into position because they are less hidden by the smoke
   /*
   bridge_collapse_detail_slide_origin = GetEnt( "bridge_collapse_detail_slide_origin", "targetname" ).origin;
-  bridge_collapse_detail_slide = getEntArray( "bridge_collapse_detail_slide", "targetname" );
-  	
+  bridge_collapse_detail_slide = GetEntArray( "bridge_collapse_detail_slide", "targetname" );
+	
   foreach( part in bridge_collapse_detail_slide )
   {
   	part.finalOrigin = part.origin;
@@ -382,11 +384,11 @@ reveal_details_slide() {
 
 road_piece_1() {
   part = GetEnt("bridge_piece_1", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
-  details = getEntArray("road_piece_1_detail", "targetname");
+  details = GetEntArray("road_piece_1_detail", "targetname");
   thread array_call(details, ::Hide);
 
   part.origin += (0, 0, 280);
@@ -414,11 +416,11 @@ road_piece_1() {
 
 road_piece_2() {
   part = GetEnt("bridge_piece_2", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
-  details = getEntArray("road_piece_2_detail", "targetname");
+  details = GetEntArray("road_piece_2_detail", "targetname");
   thread array_call(details, ::Hide);
 
   part.origin += (0, 0, 130);
@@ -441,7 +443,7 @@ road_piece_3() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_3", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -467,7 +469,7 @@ road_piece_4() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_4", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -493,7 +495,7 @@ road_piece_5() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_5", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -519,7 +521,7 @@ road_piece_6() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_6", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -545,7 +547,7 @@ road_piece_7() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_7", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -571,7 +573,7 @@ road_piece_8() {
   PART_SPEED = 0.75;
 
   part = GetEnt("bridge_piece_8", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -595,7 +597,7 @@ road_piece_8() {
 
 bridge_collapse_van() {
   part = GetEnt("bridge_collapse_van", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -613,7 +615,7 @@ bridge_collapse_van() {
 
 bridge_collapse_suv() {
   part = GetEnt("bridge_collapse_suv", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -635,7 +637,7 @@ bridge_collapse_suv() {
 
 bridge_collapse_truck_1() {
   part = GetEnt("bridge_collapse_truck_1", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -660,7 +662,7 @@ bridge_collapse_truck_1() {
 
 bridge_collapse_truck_2() {
   part = GetEnt("bridge_collapse_truck_2", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
@@ -687,14 +689,14 @@ bridge_collapse_truck_2() {
 
 bridge_collapse_sedan_1() {
   part = GetEnt("bridge_collapse_sedan_1", "targetname");
-  Assert(isDefined(part));
+  Assert(IsDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
 
   part.origin += (-50, 180, 150);
   part.angles = (0, 330, 0); // 26 330 13
 
-  part setModel("vehicle_coupe_gold");
+  part SetModel("vehicle_coupe_gold");
 
   level waittill("bridge_collapse_start");
 
@@ -708,7 +710,7 @@ bridge_collapse_sedan_1() {
 
   wait 1.2 * BRIDGE_COLLAPSE_SPEED;
 
-  part setModel("vehicle_coupe_gold_destroyed");
+  part SetModel("vehicle_coupe_gold_destroyed");
 }
 
 part_rummble(finalOrg, finalAng) {
@@ -719,7 +721,7 @@ part_rummble(finalOrg, finalAng) {
 
   numMoves = RandomIntRange(3, 5);
 
-  for(i = 0; i < numMoves; i++) {
+  for (i = 0; i < numMoves; i++) {
     moveTime = RandomFloatRange(0.05, 0.2) * BRIDGE_COLLAPSE_SPEED;
     //accel_decel = RandomFloatRange( 0.0, moveTime / 2 );
     accel_decel = 0 * BRIDGE_COLLAPSE_SPEED;
@@ -744,9 +746,9 @@ part_rummble(finalOrg, finalAng) {
 
 view_tilt() {
   view_angle_controller_entity = GetEnt("view_angle_controller_entity", "targetname");
-  Assert(isDefined(view_angle_controller_entity));
+  Assert(IsDefined(view_angle_controller_entity));
   direction_ent = GetEnt(view_angle_controller_entity.target, "targetname");
-  Assert(isDefined(direction_ent));
+  Assert(IsDefined(direction_ent));
   gravity_vec = VectorNormalize(direction_ent.origin - view_angle_controller_entity.origin);
 
   //	level waittill( "bridge_collapse_start" );
@@ -787,7 +789,7 @@ view_tilt() {
 }
 
 car_slide(carName, startName) {
-  ents = getEntArray(carName, "script_noteworthy");
+  ents = GetEntArray(carName, "script_noteworthy");
   car = undefined;
   foreach(ent in ents) {
     if(ent.classname != "script_model") {
@@ -805,11 +807,11 @@ car_slide(carName, startName) {
 
   clip LinkTo(car);
 
-  Assert(isDefined(car));
+  Assert(IsDefined(car));
 
   start = GetEnt(startName, "script_noteworthy");
-  Assert(isDefined(car));
-  Assert(isDefined(start));
+  Assert(IsDefined(car));
+  Assert(IsDefined(start));
 
   d = Distance(car.origin, start.origin);
   moveTime = d / 50;

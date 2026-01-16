@@ -10,15 +10,13 @@
 init() {
   level.splitscreen = issplitscreen();
 
-  if(level.onlinegame || level.systemlink) {
+  if(level.onlinegame || level.systemlink)
     precachestring(&"GAME_HOST_ENDED_GAME");
-  } else {
+  else
     precachestring(&"GAME_ENDED_GAME");
-  }
 
-  if(!isDefined(game["state"])) {
+  if(!isDefined(game["state"]))
     game["state"] = "playing";
-  }
 
   level.gameended = 0;
   level.postroundtime = 4.0;
@@ -34,11 +32,10 @@ forceend() {
   level.forcedend = 1;
   level.hostforcedend = 1;
 
-  if(level.onlinegame || level.systemlink) {
-    endstring = &"GAME_HOST_ENDED_GAME";
-  } else {
+  if(level.onlinegame || level.systemlink)
+    endstring = & "GAME_HOST_ENDED_GAME";
+  else
     endstring = "";
-  }
 
   makedvarserverinfo("ui_text_endreason", endstring);
   setdvar("ui_text_endreason", endstring);
@@ -85,9 +82,8 @@ endgame(endreasontext) {
     player thread roundenddof();
     player setclientdvar("cg_everyoneHearsEveryone", "1");
 
-    if(isDefined(endreasontext)) {
+    if(isDefined(endreasontext))
       player endgamemessage(endreasontext);
-    }
   }
 
   level.intermission = 1;

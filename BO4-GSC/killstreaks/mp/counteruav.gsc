@@ -23,10 +23,11 @@
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\teams\teams;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace counteruav;
 
 autoexec __init__system__() {
-  system::register(#"counteruav", &__init__, undefined, # "killstreaks");
+  system::register(#"counteruav", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -70,7 +71,7 @@ fx_flesh_hit_neck_fatal(params) {
 
       if(isDefined(scoregiven)) {
         player challenges::earnedcuavassistscore(scoregiven);
-        killstreakindex = level.killstreakindices[# "counteruav"];
+        killstreakindex = level.killstreakindices[#"counteruav"];
         killstreaks::killstreak_assist(player, self, killstreakindex);
       }
     }
@@ -225,7 +226,7 @@ getfirstavailableoffsetindex() {
 
   util::warning("<dev string:x38>");
 
-  return 0;
+    return 0;
 }
 
 maintaincouteruaventities() {
@@ -250,29 +251,29 @@ debugdrawoffsetlist() {
   }
 }
 
-function buildoffsetlist(startoffset, depth, offset_x, offset_y) {
-  offsets = [];
+  function buildoffsetlist(startoffset, depth, offset_x, offset_y) {
+    offsets = [];
 
-  for(col = 0; col < depth; col++) {
-    itemcount = math::pow(2, col);
-    startingindex = itemcount - 1;
+    for(col = 0; col < depth; col++) {
+      itemcount = math::pow(2, col);
+      startingindex = itemcount - 1;
 
-    for(i = 0; i < itemcount; i++) {
-      x = offset_x * col;
-      y = 0;
+      for(i = 0; i < itemcount; i++) {
+        x = offset_x * col;
+        y = 0;
 
-      if(itemcount > 1) {
-        y = i * offset_y;
-        total_y = offset_y * startingindex;
-        y -= total_y / 2;
+        if(itemcount > 1) {
+          y = i * offset_y;
+          total_y = offset_y * startingindex;
+          y -= total_y / 2;
+        }
+
+        offsets[startingindex + i] = startoffset + (x, y, 0);
       }
-
-      offsets[startingindex + i] = startoffset + (x, y, 0);
     }
-  }
 
-  return offsets;
-}
+    return offsets;
+  }
 
 function_af281272() {
   self endon(#"delete");
@@ -314,7 +315,7 @@ activatecounteruav() {
   self killstreaks::play_killstreak_start_dialog("counteruav", self.team, killstreak_id);
   counteruav killstreaks::play_pilot_dialog_on_owner("arrive", "counteruav", killstreak_id);
   counteruav thread killstreaks::player_killstreak_threat_tracking("counteruav");
-  self stats::function_e24eec31(getweapon("counteruav"), # "used", 1);
+  self stats::function_e24eec31(getweapon("counteruav"), #"used", 1);
   return true;
 }
 
@@ -375,7 +376,7 @@ configureteampost(owner, ishacked) {
 }
 
 listenformove() {
-  self endon(#"death", # "leaving");
+  self endon(#"death", #"leaving");
 
   while(true) {
     self thread counteruavmove();
@@ -384,7 +385,7 @@ listenformove() {
 }
 
 counteruavmove() {
-  self endon(#"death", # "leaving");
+  self endon(#"death", #"leaving");
   level endon("counter_uav_move_" + self.team);
   destination = (0, 0, 0);
 
@@ -413,7 +414,7 @@ playFX(name) {
 
 onlowhealth(attacker, weapon) {
   self.is_damaged = 1;
-  params = level.killstreakbundle[# "counteruav"];
+  params = level.killstreakbundle[#"counteruav"];
 
   if(isDefined(params.fxlowhealth)) {
     playFXOnTag(params.fxlowhealth, self, "tag_origin");
@@ -466,7 +467,7 @@ destroycounteruav(attacker, weapon) {
     attacker battlechatter::function_dd6a6012("counteruav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
     self killstreaks::function_73566ec7(attacker, weapon, self.owner);
-    luinotifyevent(#"player_callout", 2, # "hash_3544b7c59fa5c59c", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_3544b7c59fa5c59c", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 
@@ -483,7 +484,7 @@ destroycounteruav(attacker, weapon) {
 
 deletecounteruav() {
   self notify(#"crashing");
-  params = level.killstreakbundle[# "counteruav"];
+  params = level.killstreakbundle[#"counteruav"];
 
   if(isDefined(params.ksexplosionfx)) {
     self thread playFX(params.ksexplosionfx);

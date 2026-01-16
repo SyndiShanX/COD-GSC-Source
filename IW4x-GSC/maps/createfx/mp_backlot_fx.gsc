@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_backlot_fx.gsc
 *******************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 100
   ent = createLoopSound();
   ent.v["origin"] = (-619.675, -2705.93, 331.715);
   ent.v["angles"] = (270, 0, 0);
@@ -295,4 +297,5 @@ main() {
   ent.v["origin"] = (-1161.45, -1156.13, 528.825);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_metal_rattle_squeak";
+
 }

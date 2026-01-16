@@ -36,19 +36,19 @@ flamethrower_fx_loop(localclientnum, str_tag) {
   sndorigin = self gettagorigin(str_tag);
   sndent = spawn(0, sndorigin, "script_origin");
   sndent linkto(self, str_tag);
-  sndent playSound(0, "zmb_tank_flame_start");
-  sndent playLoopSound("zmb_tank_flame_loop", 0.6);
+  sndent playsound(0, "zmb_tank_flame_start");
+  sndent playloopsound("zmb_tank_flame_loop", 0.6);
   self thread sndstopflamethrower(sndent);
 
   while(true) {
-    self.flame_fx = playFXOnTag(localclientnum, level._effect["mech_wpn_flamethrower"], self, str_tag);
+    self.flame_fx = playfxontag(localclientnum, level._effect["mech_wpn_flamethrower"], self, str_tag);
     wait 0.2;
   }
 }
 
 sndstopflamethrower(ent) {
   self waittill("stop_flamethrower");
-  ent playSound(0, "zmb_tank_flame_stop");
+  ent playsound(0, "zmb_tank_flame_stop");
   ent stoploopsound(0.25);
   wait 1;
   ent delete();
@@ -57,9 +57,8 @@ sndstopflamethrower(ent) {
 play_flamethrower_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self notify("stop_flamethrower");
 
-  if(!isDefined(self.sndflame)) {
+  if(!isDefined(self.sndflame))
     self.sndflame = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   if(newval == 0) {
     return;
@@ -86,18 +85,16 @@ play_exhaust_fx(localclientnum, is_overheat) {
   self endon("stop_exhaust_fx");
   fx_id = level._effect["tank_exhaust"];
 
-  if(is_overheat) {
+  if(is_overheat)
     fx_id = level._effect["tank_overheat"];
-  }
 
-  if(is_overheat) {
+  if(is_overheat)
     self thread sndplayoverheat(self.origin);
-  } else {
+  else
     self thread sndplayexhaust();
-  }
 
   while(true) {
-    playFXOnTag(localclientnum, fx_id, self, "tag_origin");
+    playfxontag(localclientnum, fx_id, self, "tag_origin");
     wait 0.1;
   }
 }
@@ -115,8 +112,8 @@ sndplayexhaust() {
   origin2 = self gettagorigin("tag_exhaust_2");
   ent2 = spawn(0, origin2, "script_origin");
   ent2 linkto(self, "tag_exhaust_2");
-  ent1 playLoopSound("zmb_tank_exhaust_pipe", 1);
-  ent2 playLoopSound("zmb_tank_exhaust_pipe", 1);
+  ent1 playloopsound("zmb_tank_exhaust_pipe", 1);
+  ent2 playloopsound("zmb_tank_exhaust_pipe", 1);
   self waittill("stop_exhaust_fx");
   ent1 delete();
   ent2 delete();
@@ -138,12 +135,12 @@ play_tank_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   switch (newval) {
     case 1:
       self thread play_exhaust_fx(localclientnum, 1);
-      self.light_fx1 = playFXOnTag(localclientnum, level._effect["tank_light_red"], self, "tag_light_left");
-      self.light_fx2 = playFXOnTag(localclientnum, level._effect["tank_light_red"], self, "tag_light_right");
+      self.light_fx1 = playfxontag(localclientnum, level._effect["tank_light_red"], self, "tag_light_left");
+      self.light_fx2 = playfxontag(localclientnum, level._effect["tank_light_red"], self, "tag_light_right");
       break;
     case 2:
-      self.light_fx1 = playFXOnTag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_left");
-      self.light_fx2 = playFXOnTag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_right");
+      self.light_fx1 = playfxontag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_left");
+      self.light_fx2 = playfxontag(localclientnum, level._effect["tank_light_grn"], self, "tag_light_right");
       break;
     case 0:
       self thread play_exhaust_fx(localclientnum, 0);
@@ -156,8 +153,8 @@ tread_fx_loop(localclientnum) {
   self thread sndplaymud();
 
   while(true) {
-    self.tread_fx_left = playFXOnTag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_left");
-    self.tread_fx_right = playFXOnTag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_right");
+    self.tread_fx_left = playfxontag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_left");
+    self.tread_fx_right = playfxontag(localclientnum, level._effect["tank_treads"], self, "tag_wheel_back_right");
     wait 0.5;
   }
 }
@@ -169,8 +166,8 @@ sndplaymud() {
   origin4 = self gettagorigin("tag_wheel_back_right");
   ent4 = spawn(0, origin4, "script_origin");
   ent4 linkto(self, "tag_wheel_back_right");
-  ent3 playLoopSound("zmb_tank_mud_tread", 1);
-  ent4 playLoopSound("zmb_tank_mud_tread", 1);
+  ent3 playloopsound("zmb_tank_mud_tread", 1);
+  ent4 playloopsound("zmb_tank_mud_tread", 1);
   self waittill("tread_fx_stop");
   ent3 delete();
   ent4 delete();

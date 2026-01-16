@@ -120,14 +120,14 @@ function precache_createfx_fx() {
 function trap_fx_monitor(name, loc, trap_type) {
   structs = struct::get_array(name, "targetname");
   points = [];
-  for(i = 0; i < structs.size; i++) {
-    if(!isDefined(structs[i].model)) {
+  for (i = 0; i < structs.size; i++) {
+    if(!isdefined(structs[i].model)) {
       points[points.size] = structs[i];
     }
   }
-  while(true) {
+  while (true) {
     level waittill(loc + "1");
-    for(i = 0; i < points.size; i++) {
+    for (i = 0; i < points.size; i++) {
       points[i] thread trap_play_fx(loc, trap_type);
     }
   }
@@ -135,15 +135,15 @@ function trap_fx_monitor(name, loc, trap_type) {
 
 function trap_play_fx(loc, trap_type) {
   ang = self.angles;
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   up = anglestoup(ang);
-  if(isDefined(self.loopfx)) {
-    for(i = 0; i < self.loopfx.size; i++) {
+  if(isdefined(self.loopfx)) {
+    for (i = 0; i < self.loopfx.size; i++) {
       self.loopfx[i] delete();
     }
     self.loopfx = [];
   }
-  if(!isDefined(self.loopfx)) {
+  if(!isdefined(self.loopfx)) {
     self.loopfx = [];
   }
   fx_name = "";
@@ -163,12 +163,12 @@ function trap_play_fx(loc, trap_type) {
     }
   }
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     self.loopfx[i] = spawnfx(i, level._effect[fx_name], self.origin, 0, forward, up);
     triggerfx(self.loopfx[i]);
   }
   level waittill(loc + "0");
-  for(i = 0; i < self.loopfx.size; i++) {
+  for (i = 0; i < self.loopfx.size; i++) {
     self.loopfx[i] delete();
   }
   self.loopfx = [];
@@ -177,10 +177,10 @@ function trap_play_fx(loc, trap_type) {
 function light_model_swap(name, model) {
   level waittill("pl1");
   players = getlocalplayers();
-  for(p = 0; p < players.size; p++) {
-    lamps = getEntArray(p, name, "targetname");
-    for(i = 0; i < lamps.size; i++) {
-      lamps[i] setModel(model);
+  for (p = 0; p < players.size; p++) {
+    lamps = getentarray(p, name, "targetname");
+    for (i = 0; i < lamps.size; i++) {
+      lamps[i] setmodel(model);
     }
   }
 }
@@ -189,14 +189,14 @@ function projector_screen_fx() {
   projector_struct = struct::get("struct_theater_projector_beam", "targetname");
   projector_ang = projector_struct.angles;
   projector_up = anglestoup(projector_ang);
-  projector_forward = anglesToForward(projector_ang);
+  projector_forward = anglestoforward(projector_ang);
   screen_struct = struct::get("struct_theater_screen", "targetname");
   screen_ang = screen_struct.angles;
   screen_up = anglestoup(screen_ang);
-  screen_forward = anglesToForward(screen_ang);
+  screen_forward = anglestoforward(screen_ang);
   projector_struct.screen_beam = [];
   projector_struct.vid = [];
-  if(!isDefined(screen_struct.script_string)) {
+  if(!isdefined(screen_struct.script_string)) {
     screen_struct.script_string = "ps0";
   }
   wait(0.016);
@@ -204,15 +204,15 @@ function projector_screen_fx() {
     level waittill("sip");
   }
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     projector_struct.screen_beam[i] = util::spawn_model(i, "tag_origin", projector_struct.origin, projector_struct.angles);
-    playFXOnTag(i, level._effect["theater_projector_beam"], projector_struct.screen_beam[i], "tag_origin");
+    playfxontag(i, level._effect["theater_projector_beam"], projector_struct.screen_beam[i], "tag_origin");
   }
   level.var_3cb13a71 = [];
   level.var_bcdc3660 = [];
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     projector_struct.vid[i] = util::spawn_model(i, "tag_origin", screen_struct.origin, screen_struct.angles);
-    var_b4808d98 = playFXOnTag(i, level._effect["projector_screen_0"], projector_struct.vid[i], "tag_origin");
+    var_b4808d98 = playfxontag(i, level._effect["projector_screen_0"], projector_struct.vid[i], "tag_origin");
     level.var_3cb13a71[i] = var_b4808d98;
     level.var_bcdc3660[i] = "projector_screen_0";
   }
@@ -228,11 +228,11 @@ function projector_reel_change_init(struct_projector) {
 function projector_reel_swap(struct_screen, str_clientnotify) {
   level waittill(str_clientnotify);
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(struct_screen.vid[i])) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(struct_screen.vid[i])) {
       stopfx(i, level.var_3cb13a71[i]);
       if(!level.extracamactive[i]) {
-        level.var_3cb13a71[i] = playFXOnTag(i, level._effect[str_clientnotify], struct_screen.vid[i], "tag_origin");
+        level.var_3cb13a71[i] = playfxontag(i, level._effect[str_clientnotify], struct_screen.vid[i], "tag_origin");
       }
       level.var_bcdc3660[i] = str_clientnotify;
     }
@@ -257,20 +257,20 @@ function function_e4b3e1ca(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function dog_start_monitor() {
-  while(true) {
+  while (true) {
     level waittill("dog_start");
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       setworldfogactivebank(i, 2);
     }
   }
 }
 
 function dog_stop_monitor() {
-  while(true) {
+  while (true) {
     level waittill("dog_stop");
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       setworldfogactivebank(i, 1);
     }
   }

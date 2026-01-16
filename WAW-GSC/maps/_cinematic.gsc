@@ -15,7 +15,7 @@ main(movie, next_level) {
   wait(0.05);
   wait_for_first_player();
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] FreezeControls(true);
   }
   play_movie(movie, next_level);
@@ -41,7 +41,7 @@ skip_movie_think() {
   player = players[0];
   wait(0.05);
   set_console_status();
-  for(;;) {
+  for (;;) {
     if(level.console) {
       if(player buttonPressed("BUTTON_A")) {
         level notify("movie_skip");

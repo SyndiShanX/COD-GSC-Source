@@ -65,9 +65,8 @@ motel_breach_main() {
   level.player disableweaponcycling();
   level.player setlowready(1);
 
-  if(level.player hasweapon("nightingale_dpad_sp")) {
+  if(level.player hasweapon("nightingale_dpad_sp"))
     level.player set_temp_stat(1, 1);
-  }
 
   run_scene("motel_scene");
   flag_set("motel_scene_end");
@@ -76,17 +75,16 @@ motel_breach_main() {
 clean_up_enemy_ai() {
   enemies = getaiarray("axis");
 
-  for(i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++)
     enemies[i] delete();
-  }
 }
 
 gun_raise(m_player_body) {
   m_player_body hide();
 
-  if(level.player hasweapon("minigun_sp") || level.player hasweapon("minigun80s_sp")) {
+  if(level.player hasweapon("minigun_sp") || level.player hasweapon("minigun80s_sp"))
     level.player disableweapons();
-  } else {
+  else {
     level.player enableweapons();
     level.player showviewmodel();
     level.player disableweaponfire();
@@ -140,11 +138,10 @@ motel_vo_nicaragua(ai_mason) {
 }
 
 next_mission(m_player_body) {
-  if(is_false(level.screen_faded)) {
+  if(is_false(level.screen_faded))
     screen_fade_out(0.5);
-  } else {
+  else
     wait 0.5;
-  }
 
   wait 0.5;
   nextmission();
@@ -154,7 +151,7 @@ player_breach_fake_fire() {
   while(flag("breach_gun_raised")) {
     if(level.player attackbuttonpressed()) {
       level.player playrumbleonentity("damage_heavy");
-      playFXOnTag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
+      playfxontag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
     }
 
     wait 0.05;
@@ -176,9 +173,11 @@ motel_tv_swap(guy) {
   m_motel_tv_broken show();
 }
 
-test_print(guy) {}
+test_print(guy) {
+}
 
-head_shot_bathroom_guy(guy) {}
+head_shot_bathroom_guy(guy) {
+}
 
 player_breach_button_press() {
   screen_message_create(&"PANAMA_MOTEL_BREACH");
@@ -198,7 +197,7 @@ player_breach_button_press() {
 open_motel_door() {
   m_motel_door = getent("motel_door", "targetname");
   m_motel_door rotateyaw(120, 0.3, 0.3, 0);
-  playFX(getfx("door_breach"), m_motel_door.origin);
+  playfx(getfx("door_breach"), m_motel_door.origin);
 }
 
 mason_breach() {
@@ -217,7 +216,7 @@ motel_fail_condition() {
   flag_wait("trig_mason_to_motel");
   trig_motel_fail trigger_on();
   trig_motel_fail waittill("trigger");
-  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
+  setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }

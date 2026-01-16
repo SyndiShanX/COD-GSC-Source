@@ -14,18 +14,18 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "sgen_test_chamber_pod_graphics", 1, 1, "int", &function_8d81452c, 0, 0);
-  clientfield::register("world", "sgen_test_chamber_time_lapse", 1, 1, "int", &callback_time_lapse, 0, 0);
-  clientfield::register("scriptmover", "sgen_test_guys_decay", 1, 1, "int", &callback_guys_decay, 0, 0);
-  clientfield::register("world", "fxanim_hive_cluster_break", 1, 1, "int", &fxanim_hive_cluster_break, 0, 0);
-  clientfield::register("world", "fxanim_time_lapse_objects", 1, 1, "int", &fxanim_time_lapse_objects, 0, 0);
+  clientfield::register("world", "sgen_test_chamber_pod_graphics", 1, 1, "int", & function_8d81452c, 0, 0);
+  clientfield::register("world", "sgen_test_chamber_time_lapse", 1, 1, "int", & callback_time_lapse, 0, 0);
+  clientfield::register("scriptmover", "sgen_test_guys_decay", 1, 1, "int", & callback_guys_decay, 0, 0);
+  clientfield::register("world", "fxanim_hive_cluster_break", 1, 1, "int", & fxanim_hive_cluster_break, 0, 0);
+  clientfield::register("world", "fxanim_time_lapse_objects", 1, 1, "int", & fxanim_time_lapse_objects, 0, 0);
 }
 
 function fxanim_hive_cluster_break(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     level thread scene::init("p7_fxanim_cp_infection_sgen_hive_drop_bundle");
   } else {
-    scene::add_scene_func("p7_fxanim_cp_infection_sgen_hive_drop_bundle", &callback_hive_remove, "play");
+    scene::add_scene_func("p7_fxanim_cp_infection_sgen_hive_drop_bundle", & callback_hive_remove, "play");
     level thread scene::play("p7_fxanim_cp_infection_sgen_hive_drop_bundle");
   }
 }
@@ -36,7 +36,7 @@ function callback_hive_remove(a_ent) {
 }
 
 function function_8d81452c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  testing_pod_ents = getEntArray(localclientnum, "dni_testing_pod", "targetname");
+  testing_pod_ents = getentarray(localclientnum, "dni_testing_pod", "targetname");
   if(oldval != newval) {
     if(newval == 1) {
       foreach(testing_pod_ent in testing_pod_ents) {
@@ -53,7 +53,7 @@ function function_8d81452c(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function callback_time_lapse(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  testing_pod_ents = getEntArray(localclientnum, "dni_testing_pod", "targetname");
+  testing_pod_ents = getentarray(localclientnum, "dni_testing_pod", "targetname");
   foreach(testing_pod_ent in testing_pod_ents) {
     testing_pod_ent thread time_lapse();
   }
@@ -64,7 +64,7 @@ function time_lapse() {
   n_growth_increment = 1 / 180;
   n_growth = 0;
   i = 0;
-  while(i <= 12) {
+  while (i <= 12) {
     self mapshaderconstant(0, 0, "scriptVector0", n_growth, 0, 0, 0);
     n_growth = n_growth + n_growth_increment;
     wait(n_wait_per_cycle);
@@ -83,8 +83,8 @@ function decaymanmaterial(localclientnum) {
   self endon("decaymanmaterial");
   var_9ef7f234 = 1 / 6.5;
   i = 0;
-  while(i <= 6.5) {
-    if(!isDefined(self)) {
+  while (i <= 6.5) {
+    if(!isdefined(self)) {
       return;
     }
     self mapshaderconstant(localclientnum, 0, "scriptVector0", i * var_9ef7f234, 0, 0, 0);

@@ -7,18 +7,16 @@ setparent(var_0) {
   if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removechild(self);
-  }
 
   self.parent = var_0;
   self.parent addchild(self);
 
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  } else {
+  else
     setpoint("TOPLEFT");
-  }
 }
 
 getparent() {
@@ -62,70 +60,57 @@ removechild(var_0) {
 }
 
 setpoint(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 0;
-  }
 
   var_5 = getparent();
 
-  if(var_4) {
+  if(var_4)
     self moveovertime(var_4);
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
   self.xoffset = var_2;
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   self.yoffset = var_3;
   self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var_0, "TOP")) {
+  if(issubstr(var_0, "TOP"))
     self.aligny = "top";
-  }
 
-  if(issubstr(var_0, "BOTTOM")) {
+  if(issubstr(var_0, "BOTTOM"))
     self.aligny = "bottom";
-  }
 
-  if(issubstr(var_0, "LEFT")) {
+  if(issubstr(var_0, "LEFT"))
     self.alignx = "left";
-  }
 
-  if(issubstr(var_0, "RIGHT")) {
+  if(issubstr(var_0, "RIGHT"))
     self.alignx = "right";
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = var_0;
-  }
 
   self.relativepoint = var_1;
   var_6 = "center";
   var_7 = "middle";
 
-  if(issubstr(var_1, "TOP")) {
+  if(issubstr(var_1, "TOP"))
     var_7 = "top";
-  }
 
-  if(issubstr(var_1, "BOTTOM")) {
+  if(issubstr(var_1, "BOTTOM"))
     var_7 = "bottom";
-  }
 
-  if(issubstr(var_1, "LEFT")) {
+  if(issubstr(var_1, "LEFT"))
     var_6 = "left";
-  }
 
-  if(issubstr(var_1, "RIGHT")) {
+  if(issubstr(var_1, "RIGHT"))
     var_6 = "right";
-  }
 
   if(var_5 == level.uiparent) {
     self.horzalign = var_6;
@@ -141,19 +126,17 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_6 == "center" || var_5.alignx == "center") {
     var_8 = int(var_5.width / 2);
 
-    if(var_6 == "left" || var_5.alignx == "right") {
+    if(var_6 == "left" || var_5.alignx == "right")
       var_9 = -1;
-    } else {
+    else
       var_9 = 1;
-    }
   } else {
     var_8 = var_5.width;
 
-    if(var_6 == "left") {
+    if(var_6 == "left")
       var_9 = -1;
-    } else {
+    else
       var_9 = 1;
-    }
   }
 
   self.x = var_5.x + var_8 * var_9;
@@ -164,19 +147,17 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_7 == "middle" || var_5.aligny == "middle") {
     var_10 = int(var_5.height / 2);
 
-    if(var_7 == "top" || var_5.aligny == "bottom") {
+    if(var_7 == "top" || var_5.aligny == "bottom")
       var_11 = -1;
-    } else {
+    else
       var_11 = 1;
-    }
   } else {
     var_10 = var_5.height;
 
-    if(var_7 == "top") {
+    if(var_7 == "top")
       var_11 = -1;
-    } else {
+    else
       var_11 = 1;
-    }
   }
 
   self.y = var_5.y + var_10 * var_11;
@@ -199,13 +180,12 @@ setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if(self.alignx == "left") {
+  if(self.alignx == "left")
     self.bar.x = self.x + self.xpadding;
-  } else if(self.alignx == "right") {
+  else if(self.alignx == "right")
     self.bar.x = self.x - (self.width - self.xpadding);
-  } else {
+  else
     self.bar.x = self.x - int((self.width - self.xpadding * 2) / 2);
-  }
 
   updatebar(self.bar.frac);
 }
@@ -213,9 +193,8 @@ setpointbar(var_0, var_1, var_2, var_3) {
 updatebar(var_0) {
   var_1 = int((self.width - self.xpadding * 2) * var_0);
 
-  if(!var_1) {
+  if(!var_1)
     var_1 = 1;
-  }
 
   self.bar.frac = var_0;
   self.bar setshader(self.bar.shader, var_1, self.height - self.ypadding * 2);
@@ -334,29 +313,24 @@ createicon_hudelem(var_0, var_1, var_2, var_3) {
   var_0.children = [];
   var_0 setparent(level.uiparent);
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_0 setshader(var_1, var_2, var_3);
-  }
 
   return var_0;
 }
 
 createbar(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "white";
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "black";
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 100;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 9;
-  }
 
   var_5 = newhudelem();
   var_5.x = 2;
@@ -404,13 +378,11 @@ createclientprogressbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
 }
 
 createclientbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_5)) {
+  if(!isDefined(var_5))
     var_5 = 2;
-  }
 
-  if(!isDefined(var_6)) {
+  if(!isDefined(var_6))
     var_6 = 2;
-  }
 
   var_7 = newclienthudelem(self);
   var_7.x = 0 - var_5;
@@ -449,15 +421,13 @@ setflashfrac(var_0) {
 }
 
 fade_over_time(var_0, var_1) {
-  if(isDefined(var_1) && var_1 > 0) {
+  if(isDefined(var_1) && var_1 > 0)
     self fadeovertime(var_1);
-  }
 
   self.alpha = var_0;
 
-  if(isDefined(var_1) && var_1 > 0) {
+  if(isDefined(var_1) && var_1 > 0)
     wait(var_1);
-  }
 }
 
 flashthread() {
@@ -484,18 +454,15 @@ destroyelem() {
   if(isDefined(self.children) && self.children.size) {
     var_0 = [];
 
-    for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    for(var_1 = 0; var_1 < self.children.size; var_1++)
       var_0[var_1] = self.children[var_1];
-    }
 
-    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++)
       var_0[var_1] setparent(getparent());
-    }
   }
 
-  if(isDefined(self.elemtype) && self.elemtype == "bar") {
+  if(isDefined(self.elemtype) && self.elemtype == "bar")
     self.bar destroy();
-  }
 
   self destroy();
 }
@@ -530,19 +497,17 @@ stance_carry_icon_enable(var_0) {
     return;
   }
 
-  if(isDefined(level.stance_carry)) {
+  if(isDefined(level.stance_carry))
     level.stance_carry destroy();
-  }
 
   setsaveddvar("hud_showStance", "0");
   level.stance_carry = newhudelem();
   level.stance_carry.x = -75;
 
-  if(level.console) {
+  if(level.console)
     level.stance_carry.y = -20;
-  } else {
+  else
     level.stance_carry.y = -10;
-  }
 
   level.stance_carry setshader("stance_carry", 64, 64);
   level.stance_carry.alignx = "right";
@@ -590,35 +555,30 @@ create_mantle() {
 }
 
 get_countdown_hud(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   var_4 = undefined;
 
-  if(!level.console) {
+  if(!level.console)
     var_4 = -250;
-  } else if(!isDefined(var_0)) {
+  else if(!isDefined(var_0))
     var_4 = -225;
-  } else {
+  else
     var_4 = var_0;
-  }
 
-  if(var_3) {
+  if(var_3)
     var_4 = var_0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_5 = 100;
-  } else {
+  else
     var_5 = var_1;
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_6 = newclienthudelem(var_2);
-  } else {
+  else
     var_6 = newhudelem();
-  }
 
   var_6.alignx = "left";
   var_6.aligny = "middle";
@@ -638,35 +598,30 @@ get_countdown_hud(var_0, var_1, var_2, var_3) {
 }
 
 get_download_state_hud(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   var_4 = undefined;
 
-  if(!level.console) {
+  if(!level.console)
     var_4 = -250;
-  } else if(!isDefined(var_0)) {
+  else if(!isDefined(var_0))
     var_4 = -170;
-  } else {
+  else
     var_4 = var_0;
-  }
 
-  if(var_3) {
+  if(var_3)
     var_4 = var_0;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_5 = 100;
-  } else {
+  else
     var_5 = var_1;
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_6 = newclienthudelem(var_2);
-  } else {
+  else
     var_6 = newhudelem();
-  }
 
   var_6.alignx = "right";
   var_6.aligny = "middle";
@@ -686,11 +641,10 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 }
 
 create_client_overlay(var_0, var_1, var_2) {
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     var_3 = newclienthudelem(var_2);
-  } else {
+  else
     var_3 = newhudelem();
-  }
 
   var_3.x = 0;
   var_3.y = 0;
@@ -709,17 +663,14 @@ create_client_overlay_custom_size(var_0, var_1, var_2, var_3, var_4) {
   var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 1;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = 0;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0;
-  }
 
   var_6.x = var_2;
   var_6.y = var_3;
@@ -738,9 +689,8 @@ create_client_overlay_fullscreen(var_0, var_1, var_2, var_3, var_4) {
   var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 1;
-  }
 
   var_6.x = var_2;
   var_6.y = var_3;
@@ -759,9 +709,8 @@ fade_in(var_0, var_1) {
   if(level.missionfailed) {
     return;
   }
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0.3;
-  }
 
   var_2 = get_optional_overlay(var_1);
   var_2 fadeovertime(var_0);
@@ -770,23 +719,20 @@ fade_in(var_0, var_1) {
 }
 
 get_optional_overlay(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = "black";
-  }
 
   return get_overlay(var_0);
 }
 
 fade_out(var_0, var_1) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 0.3;
-  }
 
   var_2 = get_optional_overlay(var_1);
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     var_2 fadeovertime(var_0);
-  }
 
   var_2.alpha = 1;
   wait(var_0);
@@ -798,19 +744,16 @@ start_overlay(var_0) {
 }
 
 get_overlay(var_0) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     var_1 = self;
-  } else {
+  else
     var_1 = level.player;
-  }
 
-  if(!isDefined(var_1.overlay)) {
+  if(!isDefined(var_1.overlay))
     var_1.overlay = [];
-  }
 
-  if(!isDefined(var_1.overlay[var_0])) {
+  if(!isDefined(var_1.overlay[var_0]))
     var_1.overlay[var_0] = create_client_overlay(var_0, 0, var_1);
-  }
 
   var_1.overlay[var_0].sort = 0;
   var_1.overlay[var_0].foreground = 1;

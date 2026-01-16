@@ -21,6 +21,7 @@ friendly_climb_anims() {
 
   level.scr_anim["generic"]["faux_player"] = % invasion_parachute_ground_detach_idle;
 
+
   level.scr_anim["price"]["climb_catch"] = % cliffhanger_gaz_bigjump;
 
   addNotetrack_customFunction("price", "catch", ::price_catches_player, "climb_catch");
@@ -52,9 +53,8 @@ friendly_climb_anims() {
 }
 
 price_catches_player(price) {
-  if(isDefined(level.rumble_ent)) {
+  if(isdefined(level.rumble_ent))
     level.rumble_ent delete();
-  }
 
   level.player PlayRumbleOnEntity("damage_light");
   flag_set("player_was_caught");
@@ -63,40 +63,40 @@ price_catches_player(price) {
 big_jump_grab_fx(price) {
   //iprintlnbold( "Exploder 4" );
   exploder(4);
+
 }
 
 ledge_scoot_fx_left(price) {
-  if(flag("reached_top")) {
+  if(flag("reached_top"))
     return;
-  }
 
   //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_LE", 5 );
-  playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_LE");
+  playfxontag(getfx("footstep_ice_climbing"), price, "J_Ankle_LE");
 }
 
 ledge_scoot_fx_right(price) {
-  if(flag("reached_top")) {
+  if(flag("reached_top"))
     return;
-  }
 
   //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_RI", 5 );
-  playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_RI");
+  playfxontag(getfx("footstep_ice_climbing"), price, "J_Ankle_RI");
 }
 
 pick_warning(warning) {
-  if(!getdvarint("debug_pickwarning")) {
+  /#
+  if(!getdvarint("debug_pickwarning"))
     return;
-  }
 
   if(level.price_last_climb_hit == warning) {
     iprintlnbold("Called same hit twice in a row (" + warning + ")");
   }
 
   level.price_last_climb_hit = warning;
+  # /
 }
 
 pick_left_hit(price) {
-  /# pick_warning( "left_in" );
+  /# pick_warning( "left_in" ); #/
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
@@ -112,7 +112,7 @@ pick_left_fx(price) {
 }
 
 pick_right_hit(price) {
-  /# pick_warning( "right_in" );
+  /# pick_warning( "right_in" ); #/
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_weapon_left");
@@ -121,7 +121,7 @@ pick_right_hit(price) {
 }
 
 pick_left_out(price) {
-  /# pick_warning( "left_out" );
+  /# pick_warning( "left_out" ); #/
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
@@ -130,7 +130,7 @@ pick_left_out(price) {
 }
 
 pick_right_out(price) {
-  /# pick_warning( "right_out" );
+  /# pick_warning( "right_out" ); #/
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_weapon_left");
   price traceFX_on_tag("ice_pick_out", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
@@ -138,9 +138,8 @@ pick_right_out(price) {
 }
 
 attach_pick(price) {
-  if(isDefined(price.picks)) {
+  if(isdefined(price.picks))
     return;
-  }
   price.picks = true;
   price anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
@@ -167,24 +166,24 @@ price_gun_recall(price) {
 }
 
 detach_picks() {
-  if(!isDefined(self.picks)) {
+  if(!isdefined(self.picks))
     return;
-  }
   self.picks = undefined;
   self Detach("weapon_ice_picker", "tag_weapon_left");
   self Detach("weapon_ice_picker", "tag_inhand");
 }
 
 price_exhales(price) {
-  playFXOnTag(getfx("cigar_exhale"), price, "tag_eye");
+  playfxOnTag(getfx("cigar_exhale"), price, "tag_eye");
   wait(6.5);
   price Detach("prop_price_cigar", "tag_inhand");
+
 }
 
 price_puffs(price) {
-  playFXOnTag(getfx("cigar_glow_puff"), price, "tag_cigarglow");
+  playfxOnTag(getfx("cigar_glow_puff"), price, "tag_cigarglow");
   wait(1);
-  playFXOnTag(getfx("cigar_smoke_puff"), price, "tag_eye");
+  playfxOnTag(getfx("cigar_smoke_puff"), price, "tag_eye");
 }
 
 right_stab_fx(player_model) {
@@ -249,6 +248,7 @@ player_animations() {
   addNotetrack_customFunction("player_rig", "stab", ::stab_fx_current, "climbing");
   addNotetrack_customFunction("player_rig", "stab_left", ::stab_fx_left, "climbing");
   addNotetrack_customFunction("player_rig", "stab_right", ::stab_fx_right, "climbing");
+
 }
 
 get_anims_for_climbing_direction(anims, dir, arm) {
@@ -362,10 +362,9 @@ climb_preview_anim() {
   self anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
   self anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
 
-  for(;;) {
-    if(distance(level.player.origin, self.origin) < 150) {
+  for (;;) {
+    if(distance(level.player.origin, self.origin) < 150)
       break;
-    }
     wait(0.05);
   }
   self delete();
@@ -373,7 +372,7 @@ climb_preview_anim() {
 
 climb_preview_animates(animation, origin, angles) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     self.origin = origin;
     self.angles = angles;
     self setflaggedanim("anim", animation, 1, 0, 1);

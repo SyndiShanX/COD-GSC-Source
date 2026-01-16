@@ -34,11 +34,10 @@ main(model, type) {
 
   build_drive( % BTR80_movement, % BTR80_movement_backwards, 10);
 
-  if(issubstr(model, "_snow")) {
+  if(issubstr(model, "_snow"))
     build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");
-  } else {
+  else
     build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun");
-  }
 
   build_radiusdamage((0, 0, 53), 512, 300, 20, false);
 
@@ -57,6 +56,7 @@ main(model, type) {
   build_bulletshield(true);
 
   build_grenadeshield(true);
+
 }
 
 init_local() {
@@ -67,7 +67,7 @@ init_local() {
 
 test_brake_lights() {
   self endon("death");
-  while(true) {
+  while (true) {
     wait 5;
     maps\_vehicle::lights_on("brake");
     wait 3;
@@ -76,6 +76,7 @@ test_brake_lights() {
 }
 
 set_vehicle_anims(positions) {
+
   // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
   // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
 
@@ -90,9 +91,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 4; i++)
+    positions[i] = spawnstruct();
 
   positions[0].sittag = "tag_detach";
   positions[1].sittag = "tag_detach";

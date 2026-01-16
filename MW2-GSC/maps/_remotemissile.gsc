@@ -11,7 +11,7 @@ init() {
   //should make hellfires no do friendly fire
   level.no_friendly_fire_splash_damage = true;
 
-  if(!isDefined(level.min_time_between_uav_launches)) {
+  if(!isdefined(level.min_time_between_uav_launches)) {
     level.min_time_between_uav_launches = 12 * 1000;
   }
 
@@ -33,11 +33,11 @@ init() {
   precacheString(&"HELLFIRE_FIRE");
 
   // Predator Drone has been destroyed.
-  add_hint_string("hint_predator_drone_destroyed", &"HELLFIRE_DESTROYED", ::should_break_destroyed);
+  add_hint_string("hint_predator_drone_destroyed", & "HELLFIRE_DESTROYED", ::should_break_destroyed);
   // Predator Drone is unavailable.
-  add_hint_string("hint_predator_drone_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
-  add_hint_string("hint_predator_drone_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
-  add_hint_string("hint_predator_drone_not_available", &"HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
+  add_hint_string("hint_predator_drone_4", & "HELLFIRE_USE_DRONE", ::should_break_use_drone);
+  add_hint_string("hint_predator_drone_2", & "HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
+  add_hint_string("hint_predator_drone_not_available", & "HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
 
   //	array_thread( level.players, ::RemoteMissileDetonatorNotify );
 
@@ -62,7 +62,7 @@ init() {
 
 should_break_use_drone() {
   break_hint = false;
-  if(isDefined(level.uav_is_destroyed)) {
+  if(isdefined(level.uav_is_destroyed)) {
     break_hint = true;
   }
 
@@ -70,7 +70,7 @@ should_break_use_drone() {
     break_hint = true;
   }
 
-  if(isDefined(self.is_flying_missile)) {
+  if(isdefined(self.is_flying_missile)) {
     break_hint = true;
   }
 
@@ -91,7 +91,7 @@ should_break_use_drone() {
 }
 
 init_radio_dialogue() {
-  if(!isDefined(level.scr_radio)) {
+  if(!IsDefined(level.scr_radio)) {
     level.scr_radio = [];
   }
 
@@ -129,27 +129,25 @@ init_radio_dialogue() {
 }
 
 is_radio_defined(alias) {
-  return isDefined(level.scr_radio[alias]) || isDefined(level.scr_radio[alias + "_variant"]);
+  return IsDefined(level.scr_radio[alias]) || IsDefined(level.scr_radio[alias + "_variant"]);
 }
 
 should_break_available() {
-  if(isDefined(level.uav_is_not_available)) {
+  if(IsDefined(level.uav_is_not_available))
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 should_break_destroyed() {
-  if(isDefined(level.uav_is_destroyed)) {
+  if(IsDefined(level.uav_is_destroyed))
     return false;
-  } else {
+  else
     return true;
-  }
 }
 
 enable_uav(do_radio, restore) {
-  if(!isDefined(do_radio)) {
+  if(!IsDefined(do_radio)) {
     do_radio = true;
   }
 
@@ -161,13 +159,13 @@ enable_uav(do_radio, restore) {
     }
   }
 
-  if(isDefined(restore)) {
+  if(IsDefined(restore)) {
     restore_uav_weapon(restore);
   }
 }
 
 disable_uav(do_radio, remove) {
-  if(!isDefined(do_radio)) {
+  if(!IsDefined(do_radio)) {
     do_radio = true;
   }
 
@@ -179,19 +177,19 @@ disable_uav(do_radio, remove) {
     }
   }
 
-  if(isDefined(remove)) {
+  if(IsDefined(remove)) {
     remove_uav_weapon();
   }
 }
 
 restore_uav_weapon(restore) {
-  if(isDefined(level.uav_is_destroyed)) {
+  if(IsDefined(level.uav_is_destroyed)) {
     return;
   }
 
   if(IsString(restore)) {
     weapon = restore;
-  } else if(isDefined(self.uav_weaponname)) {
+  } else if(IsDefined(self.uav_weaponname)) {
     weapon = self.uav_weaponname;
   } else {
     return;
@@ -211,7 +209,7 @@ remove_uav_weapon() {
 }
 
 is_remote_missile_weapon(weap) {
-  if(!isDefined(weap)) {
+  if(!IsDefined(weap)) {
     return false;
   }
 
@@ -245,20 +243,20 @@ set_remotemissile_actionslot() {
 }
 
 get_remotemissile_actionslot() {
-  AssertEx(isDefined(self.remotemissile_actionslot), "self.remotemissile_actionslot is undefined, you need to use the give_remotemissile_weapon() function in here to give the player the weapon properly.");
+  AssertEx(IsDefined(self.remotemissile_actionslot), "self.remotemissile_actionslot is undefined, you need to use the give_remotemissile_weapon() function in here to give the player the weapon properly.");
   return self.remotemissile_actionslot;
 }
 
 remotemissile_weapon_change() {
   self.using_uav = false;
 
-  while(1) {
+  while (1) {
     self waittill("weapon_change", weap);
 
     if(is_remote_missile_weapon(weap)) {
       self.using_uav = true;
 
-      if(isDefined(level.uav_is_destroyed)) {
+      if(IsDefined(level.uav_is_destroyed)) {
         thread remotemissile_offline(false, "uav_down");
         self SwitchToWeapon(self.last_weapon);
         self.using_uav = false;
@@ -274,8 +272,10 @@ remotemissile_weapon_change() {
       self.uav_weaponname = weap;
 
       self thread cancel_on_player_damage();
-      if(isDefined(level.remote_missile_hide_stuff_func)) {
-        [[level.remote_missile_hide_stuff_func]]();
+      if(IsDefined(level.remote_missile_hide_stuff_func)) {
+        [
+          [level.remote_missile_hide_stuff_func]
+        ]();
       }
 
       level.uav_user = self;
@@ -287,8 +287,10 @@ remotemissile_weapon_change() {
 
       self.using_uav = false;
 
-      if(isDefined(level.remote_missile_show_stuff_func)) {
-        [[level.remote_missile_show_stuff_func]]();
+      if(IsDefined(level.remote_missile_show_stuff_func)) {
+        [
+          [level.remote_missile_show_stuff_func]
+        ]();
       }
 
       thread remotemissile_reload();
@@ -301,7 +303,7 @@ RemoteMissileDetonatorNotify() {
   self NotifyOnPlayerCommand("switch_to_remotemissile", "+actionslot " + self get_remotemissile_actionslot());
   self thread remotemissile_weapon_change();
 
-  for(;;) {
+  for (;;) {
     self waittill("switch_to_remotemissile");
 
     if(self.using_uav) {
@@ -312,7 +314,7 @@ RemoteMissileDetonatorNotify() {
       self.last_weapon = self GetCurrentWeapon();
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       thread remotemissile_offline(false, "uav_down");
     } else if(flag("uav_reloading") || !flag("uav_enabled")) {
       thread remotemissile_offline(true);
@@ -321,7 +323,7 @@ RemoteMissileDetonatorNotify() {
 }
 
 remotemissile_offline(extra_check, alias) {
-  if(!isDefined(alias)) {
+  if(!IsDefined(alias)) {
     alias = "uav_offline";
   }
 
@@ -330,16 +332,16 @@ remotemissile_offline(extra_check, alias) {
   // Only use extra_check if you don't want the dialogue to happen just before the hellfire "online" is about to
   // play
   if(extra_check && ((level.last_uav_launch_time + level.min_time_between_uav_launches) - curr_time < 2000) || level.min_time_between_uav_launches < 5000) {
-    // These 2 checks are specific to levels.
+    // These 2 checks are specific to levels. 
     // SO_ROOFTOP_CONTINGENCY needs dialogue if out of ammo.
     // All other levels need uav_is_destroyed
-    if(!isDefined(level.uav_is_destroyed) && (isDefined(self.uav_weaponname) && self GetWeaponAmmoClip(self.uav_weaponname) > 0)) {
+    if(!IsDefined(level.uav_is_destroyed) && (IsDefined(self.uav_weaponname) && self GetWeaponAmmoClip(self.uav_weaponname) > 0)) {
       return;
     }
   }
 
   if(flag("uav_reloading")) {
-    if(isDefined(level.scr_radio["uav_reloading"])) {
+    if(isdefined(level.scr_radio["uav_reloading"])) {
       alias = "uav_reloading";
     }
   }
@@ -358,7 +360,7 @@ remotemissile_reload() {
 
   // Wait for reload
   if(flag("uav_reloading")) {
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return;
     }
 
@@ -369,7 +371,7 @@ remotemissile_reload() {
       play_kills_dialogue();
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return;
     }
 
@@ -388,7 +390,7 @@ remotemissile_reload() {
       level waittill("uav_reloading");
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return;
     }
 
@@ -415,14 +417,14 @@ remotemissile_radio_reminder() {
   level endon("starting_predator_drone_control");
   level endon("stop_remotemissile_radio_reminder");
 
-  while(1) {
+  while (1) {
     wait(7 + RandomInt(4));
 
     if(flag_exist("special_op_terminated") && flag("special_op_terminated")) {
       return;
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return;
     }
 
@@ -442,11 +444,11 @@ remotemissile_radio_reminder() {
       return;
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return;
     }
 
-    if(isDefined(level.no_remote_missile_reminders)) {
+    if(IsDefined(level.no_remote_missile_reminders)) {
       return;
     }
 
@@ -457,11 +459,10 @@ remotemissile_radio_reminder() {
 }
 
 play_kills_dialogue() {
-  if(isDefined(level.dont_use_global_uav_kill_dialog)) {
+  if(IsDefined(level.dont_use_global_uav_kill_dialog))
     return;
-  }
 
-  if(!isDefined(level.uav_radio_initialized)) {
+  if(!IsDefined(level.uav_radio_initialized)) {
     return;
   }
 
@@ -483,7 +484,7 @@ play_kills_dialogue() {
   ai_alias = undefined;
   ai_kills = 0;
 
-  if(isDefined(level.uav_killstats["ai"])) {
+  if(IsDefined(level.uav_killstats["ai"])) {
     ai_kills = level.uav_killstats["ai"];
   }
 
@@ -556,7 +557,7 @@ play_kills_dialogue() {
     }
   }
 
-  if(!isDefined(alias)) {
+  if(!IsDefined(alias)) {
     return;
   }
 
@@ -569,17 +570,17 @@ play_kills_dialogue() {
 }
 
 set_variant_remotemissile_radio(alias) {
-  if(isDefined(level.scr_radio[alias + "_variant"]) && IsArray(level.scr_radio[alias + "_variant"])) {
+  if(IsDefined(level.scr_radio[alias + "_variant"]) && IsArray(level.scr_radio[alias + "_variant"])) {
     level.scr_radio[alias] = level.scr_radio[alias + "_variant"][RandomInt(level.scr_radio[alias + "_variant"].size)];
   }
 }
 
 remotemissile_radio(alias) {
-  if(!isDefined(level.uav_radio_initialized)) {
+  if(!IsDefined(level.uav_radio_initialized)) {
     return;
   }
 
-  if(isDefined(level.uav_radio_disabled) && level.uav_radio_disabled) {
+  if(IsDefined(level.uav_radio_disabled) && level.uav_radio_disabled) {
     return;
   }
 
@@ -617,16 +618,15 @@ text_TitleFadeout() {
 }
 
 text_TitleDestroy() {
-  if(!isDefined(level.text1)) {
+  if(!IsDefined(level.text1))
     return;
-  }
   level.text1 Destroy();
   level.text1 = undefined;
 }
 
 display_wait_to_fire(time_till_reload) {
   text_NoticeDestroy();
-  // MISSILE RELOADED IN:
+  // MISSILE RELOADED IN: 
   self text_LabelCreate(&"HELLFIRE_RELOADING_WITH_TIME", time_till_reload);
   wait(1);
   text_NoticeDestroy();
@@ -650,29 +650,27 @@ text_NoticeCreate(text) {
 }
 
 text_NoticeFadeout() {
-  if(!isDefined(level.text2)) {
+  if(!IsDefined(level.text2))
     return;
-  }
   level.text2 FadeOverTime(0.25);
   level.text2.alpha = 0;
 }
 
 text_NoticeDestroy() {
-  if(!isDefined(level.text2)) {
+  if(!IsDefined(level.text2))
     return;
-  }
   level.text2 Destroy();
   level.text2 = undefined;
 }
 
 WaitWithAbortOnDamage(time) {
   finishTime = GetTime() + (time * 1000);
-  while(GetTime() < finishTime) {
+  while (GetTime() < finishTime) {
     if(self.took_damage) {
       return false;
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       return false;
     }
 
@@ -689,13 +687,13 @@ NotifyOnMissileDeath(missile) {
   timeWeFired = GetTime();
   level.remoteMissileFireTime = timeWeFired;
 
-  if(isDefined(missile)) {
+  if(IsDefined(missile)) {
     level.remoteMissile = missile;
     missile waittill("death");
   }
 
   //defensive check; make sure we're this is still the latest remote missile
-  if(isDefined(level.remoteMissileFireTime) && (level.remoteMissileFireTime == timeWeFired)) {
+  if(IsDefined(level.remoteMissileFireTime) && (level.remoteMissileFireTime == timeWeFired)) {
     level notify("remote_missile_exploded");
     level.remoteMissile = undefined;
   }
@@ -727,7 +725,7 @@ UAVRemoteLauncherSequence(player, weap) {
   return_to_uav_after_impact = false;
 
   level.VISION_BLACK = "black_bw";
-  if(!isDefined(level.VISION_UAV)) {
+  if(!isdefined(level.VISION_UAV)) {
     level.VISION_UAV = "ac130";
   }
 
@@ -749,11 +747,10 @@ UAVRemoteLauncherSequence(player, weap) {
   player VisionSetNakedForPlayer(level.VISION_BLACK, trans_time);
   player VisionSetThermalForPlayer(level.VISION_BLACK, trans_time);
   HudItemsHide();
-  if(isDefined(level.remote_missile_targets) && (level.remote_missile_targets.size > 0)) {
+  if(IsDefined(level.remote_missile_targets) && (level.remote_missile_targets.size > 0)) {
     foreach(thing in level.remote_missile_targets) {
-      if(!isalive(thing)) {
+      if(!isalive(thing))
         level.remote_missile_targets = array_remove(level.remote_missile_targets, thing);
-      }
     }
   }
 
@@ -765,7 +762,7 @@ UAVRemoteLauncherSequence(player, weap) {
 
   player.is_controlling_UAV = true;
   level notify("player_is_controlling_UAV");
-  if(isDefined(level.uav)) {
+  if(isdefined(level.uav)) {
     if(is_specialop()) {
       level.uav HideOnClient(self);
     } else {
@@ -836,9 +833,9 @@ UAVRemoteLauncherSequence(player, weap) {
   }
 
   thread DrawTargetsStart();
-  while(isDefined(level.remoteMissile)) {
+  while (IsDefined(level.remoteMissile)) {
     wait 0.05;
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       ExitFromCamera_Missile(player, true);
       return;
     }
@@ -854,7 +851,7 @@ UAVRemoteLauncherSequence(player, weap) {
     }
   }
 
-  if(!isDefined(level.uav)) {
+  if(!isdefined(level.uav)) {
     ExitFromCamera_Missile(player, false);
     return;
   }
@@ -934,32 +931,31 @@ missile_kills(player) {
 }
 
 missile_kill_ai(attacker) {
-  if(!isDefined(level.uav_radio_initialized)) {
+  if(!IsDefined(level.uav_radio_initialized)) {
     return;
   }
 
   self waittill("death", attacker, cause);
 
-  if(!isDefined(level.uav_user)) {
+  if(!IsDefined(level.uav_user)) {
     return;
   }
 
-  if(!isDefined(level.uav_killstats["ai"])) {
+  if(!IsDefined(level.uav_killstats["ai"])) {
     level.uav_killstats["ai"] = 0;
   }
 
-  if(isDefined(attacker) && isDefined(level.uav_user)) {
-    if(attacker == level.uav_user || (isDefined(attacker.attacker) && attacker.attacker == level.uav_user)) {
+  if(IsDefined(attacker) && IsDefined(level.uav_user)) {
+    if(attacker == level.uav_user || (IsDefined(attacker.attacker) && attacker.attacker == level.uav_user)) {
       level.uav_killstats["ai"]++;
-      if(isplayer(level.uav_user) && level.uav_killstats["ai"] == 10) {
+      if(isplayer(level.uav_user) && level.uav_killstats["ai"] == 10)
         level.uav_user player_giveachievement_wrapper("TEN_PLUS_FOOT_MOBILES");
-      }
     }
   }
 }
 
 missile_kill_vehicle(player) {
-  if(!isDefined(level.uav_radio_initialized)) {
+  if(!IsDefined(level.uav_radio_initialized)) {
     return;
   }
 
@@ -997,14 +993,14 @@ missile_kill_vehicle(player) {
       break;
   }
 
-  if(!isDefined(level.uav_killstats[type])) {
+  if(!IsDefined(level.uav_killstats[type])) {
     level.uav_killstats[type] = 0;
   }
 
   self waittill("death", attacker, cause);
 
-  if((type == "helo" || type == "btr") || isDefined(self.riders) && self.riders.size > 0) {
-    if(isDefined(attacker) && attacker == player) {
+  if((type == "helo" || type == "btr") || IsDefined(self.riders) && self.riders.size > 0) {
+    if(IsDefined(attacker) && attacker == player) {
       level.uav_killstats[type]++;
     }
   }
@@ -1015,9 +1011,8 @@ ExitFromCamera_Missile(player, reasonIsPain) {
   text_TitleDestroy();
   DrawTargetsEnd();
 
-  if(isDefined(level.uav_is_destroyed)) {
+  if(IsDefined(level.uav_is_destroyed))
     thread staticEffect(.5);
-  }
 
   player ControlsUnlink();
   player CameraUnlink();
@@ -1026,7 +1021,7 @@ ExitFromCamera_Missile(player, reasonIsPain) {
   player RemoteCameraSoundscapeOff();
   player VisionSetThermalForPlayer(level.visionThermalDefault, 0);
 
-  if(isDefined(level.uav)) {
+  if(IsDefined(level.uav)) {
     if(is_specialop()) {
       level.uav ShowOnClient(self);
     } else {
@@ -1073,9 +1068,8 @@ ExitFromCamera_UAV(player, reasonIsPain) {
   text_NoticeFadeout();
   player VisionSetNakedForPlayer(level.VISION_BLACK, 0.25);
   player VisionSetThermalForPlayer(level.VISION_BLACK, 0.25);
-  if(isDefined(level.uav_is_destroyed)) {
+  if(IsDefined(level.uav_is_destroyed))
     player thread staticEffect(.5);
-  }
   wait 0.15;
 
   wait 0.35;
@@ -1088,11 +1082,10 @@ ExitFromCamera_UAV(player, reasonIsPain) {
   maps\_load::thermal_EffectsOff();
   player ThermalVisionOff();
 
-  if(isDefined(player.fov_is_altered)) {
+  if(IsDefined(player.fov_is_altered))
     SetSavedDvar("cg_fov", 65);
-  }
 
-  if(isDefined(level.uav)) {
+  if(IsDefined(level.uav)) {
     if(is_specialop()) {
       level.uav ShowOnClient(self);
     } else {
@@ -1170,7 +1163,7 @@ wait_for_command_thread(msg, val) {
 wait_for_other() {
   self endon("remote_missile_attack");
 
-  for(;;) {
+  for (;;) {
     wait(0.05);
     if(self.took_damage) {
       break;
@@ -1180,7 +1173,7 @@ wait_for_other() {
       break;
     }
 
-    if(isDefined(level.uav_is_destroyed)) {
+    if(IsDefined(level.uav_is_destroyed)) {
       break;
     }
   }
@@ -1190,10 +1183,9 @@ wait_for_other() {
 
 HudItemsHide() {
   if(level.players.size > 0) {
-    for(i = 0; i < level.players.size; i++) {
-      if(isDefined(level.players[i].using_uav) && level.players[i].using_uav) {
+    for (i = 0; i < level.players.size; i++) {
+      if(isdefined(level.players[i].using_uav) && level.players[i].using_uav)
         setdvar("ui_remotemissile_playernum", (i + 1)); // 0 = no uav, 1 = player1, 2 = player2
-      }
     }
   } else {
     SetSavedDvar("compass", "0");
@@ -1217,19 +1209,18 @@ FireMissileFromUAVPlayer(player) {
 
   org = level.uavRig.origin;
   playerAngles = player GetPlayerAngles();
-  forward = anglesToForward(playerAngles);
+  forward = AnglesToForward(playerAngles);
   right = AnglesToRight(playerAngles);
   start = org + (right * 700.0) + (forward * -300.0);
   end = start + forward * 10.0;
 
-  if(isDefined(level.remote_missile_snow)) {
+  if(IsDefined(level.remote_missile_snow)) {
     missile = MagicBullet("remote_missile_snow", start, end, player);
   } else {
-    if(isDefined(level.remote_missile_invasion)) {
+    if(IsDefined(level.remote_missile_invasion))
       missile = MagicBullet("remote_missile_invasion", start, end, player);
-    } else {
+    else
       missile = MagicBullet("remote_missile", start, end, player);
-    }
   }
 
   thread NotifyOnMissileDeath(missile);
@@ -1237,23 +1228,20 @@ FireMissileFromUAVPlayer(player) {
 }
 
 setup_remote_missile_target() {
-  if(!isDefined(level.remote_missile_targets)) {
+  if(!isdefined(level.remote_missile_targets))
     level.remote_missile_targets = [];
-  }
 
   level.remote_missile_targets[level.remote_missile_targets.size] = self;
 
-  if(isDefined(level.player.draw_red_boxes) && !isDefined(level.uav_is_destroyed)) {
+  if(IsDefined(level.player.draw_red_boxes) && !isdefined(level.uav_is_destroyed))
     self draw_target();
-  }
 
   self waittill("death");
 
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
 
-  if(isDefined(self.has_target_shader)) {
+  if(IsDefined(self.has_target_shader)) {
     self.has_target_shader = undefined;
     Target_Remove(self);
   }
@@ -1269,9 +1257,8 @@ DrawTargetsStart() {
   targets_drawn = 0;
   time_between_updates = .05;
 
-  if(!isDefined(level.remote_missile_targets)) {
+  if(!isdefined(level.remote_missile_targets))
     return;
-  }
 
   foreach(tgt in level.remote_missile_targets) {
     if(IsAlive(tgt)) {
@@ -1290,7 +1277,7 @@ DrawTargetsStart() {
 draw_target() {
   self.has_target_shader = true;
 
-  if(isDefined(self.helicopter_predator_target_shader)) {
+  if(IsDefined(self.helicopter_predator_target_shader)) {
     Target_Set(self, (0, 0, -96));
   } else {
     Target_Set(self, (0, 0, 64));
@@ -1308,11 +1295,11 @@ draw_target() {
   // There is an order of execution issue, which is why this is commented out.
   // If player 2 ( level.players[ 1 ] ) runs the Target_ShowToPlayer() last, then player 1 will be able
   // to see the targets.
-  // So, the work around is to figure out who is controlling the UAV, then call to Target_ShowToPlayer()
+  // So, the work around is to figure out who is controlling the UAV, then call to Target_ShowToPlayer() 
   // before Target_HideFromPlayer()
   //	foreach( player in level.players )
   //	{
-  //		if( isDefined( player.is_controlling_UAV ) && player.is_controlling_UAV )
+  //		if( IsDefined( player.is_controlling_UAV ) && player.is_controlling_UAV )
   //			Target_ShowToPlayer( self, player );
   //		else
   //			Target_HideFromPlayer( self, player );
@@ -1322,7 +1309,7 @@ draw_target() {
   non_uav_controller = undefined;
 
   foreach(player in level.players) {
-    if(isDefined(player.is_controlling_UAV) && player.is_controlling_UAV) {
+    if(IsDefined(player.is_controlling_UAV) && player.is_controlling_UAV) {
       uav_controller = player;
     } else {
       non_uav_controller = player;
@@ -1331,7 +1318,7 @@ draw_target() {
 
   Target_ShowToPlayer(self, uav_controller);
 
-  if(isDefined(non_uav_controller)) {
+  if(IsDefined(non_uav_controller)) {
     Target_HideFromPlayer(self, non_uav_controller);
   }
 }
@@ -1341,13 +1328,13 @@ DrawTargetsEnd() {
   //level.player ThermalVisionFOFOverlayOff();
   waittillframeend; // was colliding with self waittill death which also removes the target
   level.player.draw_red_boxes = undefined;
-  if(isDefined(level.remote_missile_targets)) {
+  if(IsDefined(level.remote_missile_targets)) {
     foreach(tgt in level.remote_missile_targets) {
-      if(!isDefined(tgt)) {
+      if(!isdefined(tgt)) {
         level.remote_missile_targets = array_remove(level.remote_missile_targets, tgt);
       }
-      if(isDefined(tgt)) {
-        if(isDefined(tgt.has_target_shader)) {
+      if(IsDefined(tgt)) {
+        if(IsDefined(tgt.has_target_shader)) {
           tgt.has_target_shader = undefined;
           Target_Remove(tgt);
         }
@@ -1386,15 +1373,14 @@ SwitchBackToMainWeapon_internal(func) {
     }
   }
 
-  if(weapons.size > 0) {
+  if(weapons.size > 0)
     self[[func]](weapons[0]);
-  }
 }
 
 staticEffect(duration) {
-  org = spawn("script_origin", (0, 0, 1));
+  org = Spawn("script_origin", (0, 0, 1));
   org.origin = self.origin;
-  org playSound("predator_drone_static", "sounddone");
+  org PlaySound("predator_drone_static", "sounddone");
 
   static = NewClientHudElem(self);
   static.horzAlign = "fullscreen";

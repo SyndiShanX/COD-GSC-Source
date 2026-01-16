@@ -18,7 +18,7 @@ snd_get_current_timescale_preset_name() {
 }
 
 snd_load_timescale_presets() {
-  level._snd.timescale = spawnStruct();
+  level._snd.timescale = spawnstruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
   var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
@@ -28,18 +28,16 @@ snd_load_timescale_presets() {
 snd_set_timescale(var_0) {
   var_1 = snd_get_timescale_preset(var_0);
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     return;
   }
-  if(snd_get_current_timescale_preset_name() != var_0) {
+  if(snd_get_current_timescale_preset_name() != var_0)
     thread snd_set_timescale_threaded(var_1);
-  }
 }
 
 snd_get_timescale_preset(var_0) {
-  if(isDefined(level._snd.timescale.presets) && isDefined(level._snd.timescale.presets[var_0])) {
+  if(isdefined(level._snd.timescale.presets) && isdefined(level._snd.timescale.presets[var_0]))
     return level._snd.timescale.presets[var_0];
-  }
 
   return undefined;
 }

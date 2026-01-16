@@ -6,9 +6,8 @@
 main() {
   vignette_flag_init();
 
-  while(!isDefined(level.players)) {
+  while(!isDefined(level.players))
     wait 0.1;
-  }
 
   vo_vignette_logic();
 }
@@ -112,13 +111,11 @@ descent_cipher_nag() {
 }
 
 descent_vo_after_first_hive() {
-  if(!isDefined(level.first_hive_vo_done)) {
+  if(!isDefined(level.first_hive_vo_done))
     level waittill("drill_planted");
-  }
 
-  while(!isDefined(level.drill)) {
+  while(!isDefined(level.drill))
     wait 0.1;
-  }
 
   level.drill waittill("drill_complete");
   delay_vo_until_all_clear(15);
@@ -159,11 +156,10 @@ descent_vo_if_looking_at_ark() {
   level endon("area_2");
   level waittill("player_looking_ark");
 
-  if(randomint(2) == 0) {
+  if(randomint(2) == 0)
     var_0 = ["descent_gdf_cif1wevedetecteda"];
-  } else {
+  else
     var_0 = ["descent_gdf_cif1wevedetecteda2"];
-  }
 
   play_descent_vignette_vo(var_0);
 }
@@ -193,9 +189,8 @@ descent_vo_area_2_after_third_hive() {
 wait_until_hive_is_done() {
   level waittill("drill_planted");
 
-  while(!isDefined(level.drill)) {
+  while(!isDefined(level.drill))
     wait 0.1;
-  }
 
   level.drill waittill("drill_complete");
 }
@@ -225,17 +220,15 @@ descent_vo_area_3_post_hive() {
   delay_vo_until_all_clear(15);
   var_0 = ["descent_gdf_cif1theressomethingelse2"];
 
-  if(!common_scripts\utility::flag("area_3_done")) {
+  if(!common_scripts\utility::flag("area_3_done"))
     play_descent_vignette_vo(var_0);
-  }
 }
 
 descent_vo_area_3_end() {
   var_0 = ["descent_gdf_deadweight"];
 
-  if(!common_scripts\utility::flag("area_3_done")) {
+  if(!common_scripts\utility::flag("area_3_done"))
     play_descent_vignette_vo(var_0);
-  }
 }
 
 descent_vo_entering_ark() {
@@ -278,20 +271,17 @@ ark_intro_music() {
 
     common_scripts\utility::flag_set("alien_music_playing");
 
-    if(maps\mp\_utility::isreallyalive(var_1)) {
+    if(maps\mp\_utility::isreallyalive(var_1))
       var_1 playlocalsound("mus_alien_dlc3_ark_intro");
-    }
   }
 }
 
 play_archer_vo(var_0, var_1) {
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level endon(var_1);
-  }
 
-  while(!isDefined(level.archer)) {
+  while(!isDefined(level.archer))
     wait 0.1;
-  }
 
   if(soundexists(var_0)) {
     var_2 = lookupsoundlength(var_0);
@@ -333,9 +323,8 @@ descent_vo_ark_combat_end() {
   var_0 = ["descent_crs_thedoorsareopening"];
   play_descent_vignette_vo(var_0);
 
-  while(maps\mp\alien\_utility::is_true(level.archer_end_vo)) {
+  while(maps\mp\alien\_utility::is_true(level.archer_end_vo))
     wait 0.1;
-  }
 
   if(!common_scripts\utility::flag("ark_cortex_pickedup")) {
     var_0 = ["descent_crs_takethecortexyoull"];
@@ -388,9 +377,8 @@ descent_vo_archer_end_vignette() {
   var_0 = var_0 - 0.1;
   level.archer_end_vo = 0;
 
-  if(var_0 > 0) {
+  if(var_0 > 0)
     wait(var_0);
-  }
 
   level notify("archer_dialogue_3_done");
 }
@@ -444,9 +432,8 @@ descent_vo_escape_cortex_charge_50(var_0) {
   }
   var_1 = ["descent_crs_keepkilling"];
 
-  if(var_0 == 2) {
+  if(var_0 == 2)
     var_1 = ["descent_crs_halfwaycharged"];
-  }
 
   play_descent_vignette_vo(var_1);
 }
@@ -457,9 +444,8 @@ descent_vo_escape_cortex_ready(var_0) {
   }
   var_1 = ["descent_crs_triggerthecortex"];
 
-  if(var_0 == 2) {
+  if(var_0 == 2)
     var_1 = ["descent_crs_activatethecortex"];
-  }
 
   play_descent_vignette_vo(var_1);
 }
@@ -470,9 +456,8 @@ descent_vo_escape_barrier_down(var_0) {
   }
   var_1 = ["descent_crs_moveforward"];
 
-  if(var_0 == 2) {
+  if(var_0 == 2)
     var_1 = ["descent_gdf_cortexbacktosurface"];
-  }
 
   play_descent_vignette_vo(var_1);
 }
@@ -490,14 +475,12 @@ check_players_in_ark() {
     var_0 = 0;
 
     foreach(var_3 in level.players) {
-      if(distance(var_3.origin, (3564, 1887, 976)) < var_1) {
+      if(distance(var_3.origin, (3564, 1887, 976)) < var_1)
         var_0 = 1;
-      }
     }
 
-    if(isDefined(level.cortex) && distance(level.cortex.origin, (3564, 1887, 976)) < var_1) {
+    if(isDefined(level.cortex) && distance(level.cortex.origin, (3564, 1887, 976)) < var_1)
       var_0 = 1;
-    }
 
     wait 0.1;
   }
@@ -515,17 +498,15 @@ check_players_looking_at_ark() {
   var_5 = var_4 * var_4;
 
   while(!var_0) {
-    while(common_scripts\utility::flag("drill_drilling")) {
+    while(common_scripts\utility::flag("drill_drilling"))
       wait 0.25;
-    }
 
     foreach(var_7 in level.players) {
       if(distancesquared(var_7.origin, var_3) < var_5) {
         var_8 = var_7 getplayerangles();
 
-        if(common_scripts\utility::within_fov(var_7.origin, var_8, var_2, var_1)) {
+        if(common_scripts\utility::within_fov(var_7.origin, var_8, var_2, var_1))
           var_0 = 1;
-        }
       }
     }
 
@@ -549,9 +530,8 @@ play_descent_vignette_vo(var_0, var_1) {
       break;
     }
 
-    if(!maps\mp\alien\_utility::is_true(level.archer_end_vo)) {
+    if(!maps\mp\alien\_utility::is_true(level.archer_end_vo))
       maps\mp\mp_alien_dlc3::play_global_vo(var_3);
-    }
 
     var_4 = lookupsoundlength(var_3) / 1000;
     wait(var_4 + 0.1);
@@ -561,9 +541,8 @@ play_descent_vignette_vo(var_0, var_1) {
 }
 
 delay_vo_until_all_clear(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 30;
-  }
 
   var_1 = gettime() - var_0 * 1000;
   var_2 = gettime();
@@ -596,28 +575,24 @@ delay_vo_until_all_clear(var_0) {
 set_flag_on_notify(var_0, var_1) {
   self waittill(var_0);
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     common_scripts\utility::flag_set(var_1);
-  }
 }
 
 send_notify_on_players_in_radius(var_0, var_1, var_2) {
-  while(!common_scripts\utility::flag_exist("drill_drilling")) {
+  while(!common_scripts\utility::flag_exist("drill_drilling"))
     wait 0.25;
-  }
 
   var_3 = 0;
   var_4 = var_2 * var_2;
 
   while(!var_3) {
-    while(common_scripts\utility::flag("drill_drilling")) {
+    while(common_scripts\utility::flag("drill_drilling"))
       wait 0.25;
-    }
 
     foreach(var_6 in level.players) {
-      if(distancesquared(var_6.origin, var_1) < var_4) {
+      if(distancesquared(var_6.origin, var_1) < var_4)
         var_3 = 1;
-      }
     }
 
     wait 0.1;

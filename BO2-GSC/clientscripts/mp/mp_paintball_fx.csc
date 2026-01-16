@@ -8,7 +8,8 @@
 #include clientscripts\mp\createfx\mp_paintball_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_pntbll_light_ray_sun_wide_wndw"] = loadfx("light/fx_pntbll_light_ray_sun_wide_wndw");
@@ -83,7 +84,6 @@ main() {
   precache_fxanim_props_dlc3();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

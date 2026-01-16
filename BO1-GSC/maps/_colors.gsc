@@ -303,7 +303,7 @@ process_path_node(node, null) {
 
 prioritize_colorCoded_nodes(team, colorCode, color) {
   nodes = level.arrays_of_colorCoded_nodes[team][colorCode];
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent.path_nodes = [];
   ent.cover_nodes_first = [];
   ent.cover_nodes_last = [];
@@ -949,9 +949,8 @@ spawn_hidden_reinforcement(classname, fromColor) {
   spawn = undefined;
   for(;;) {
     if(!flag("respawn_friendlies")) {
-      if(!isDefined(level.friendly_respawn_vision_checker_thread)) {
+      if(!isDefined(level.friendly_respawn_vision_checker_thread))
         thread friendly_spawner_vision_checker();
-      }
       for(;;) {
         flag_wait_either("player_looks_away_from_spawner", "respawn_friendlies");
         flag_waitopen("friendly_spawner_locked");

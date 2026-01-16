@@ -9,9 +9,8 @@
 add_timed_event(seconds, notify_string, client_notify_string) {
   assert(seconds >= 0);
 
-  if(level.timelimit > 0) {
+  if(level.timelimit > 0)
     level thread timed_event_monitor(seconds, notify_string, client_notify_string);
-  }
 }
 
 timed_event_monitor(seconds, notify_string, client_notify_string) {
@@ -35,19 +34,17 @@ add_score_event(score, notify_string, client_notify_string) {
   assert(score >= 0);
 
   if(level.scorelimit > 0) {
-    if(level.teambased) {
+    if(level.teambased)
       level thread score_team_event_monitor(score, notify_string, client_notify_string);
-    } else {
+    else
       level thread score_event_monitor(score, notify_string, client_notify_string);
-    }
   }
 }
 
 any_team_reach_score(score) {
   foreach(team in level.teams) {
-    if(game["teamScores"][team] >= score) {
+    if(game["teamScores"][team] >= score)
       return true;
-    }
   }
 
   return false;
@@ -79,11 +76,9 @@ score_event_monitor(score, notify_string, client_notify_string) {
 }
 
 event_notify(notify_string, client_notify_string) {
-  if(isDefined(notify_string)) {
+  if(isDefined(notify_string))
     level notify(notify_string);
-  }
 
-  if(isDefined(client_notify_string)) {
+  if(isDefined(client_notify_string))
     clientnotify(client_notify_string);
-  }
 }

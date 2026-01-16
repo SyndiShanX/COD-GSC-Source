@@ -13,6 +13,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_white_mee;
 
 autoexec __init__system__() {
@@ -26,13 +27,13 @@ init() {
 function
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_2a3dbcaa79e8e3d6", 20000, 1, "int", &function_dc6960d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5e1264789183cde1", 20000, 1, "int", &play_spark, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_72a33f6d2cc925c5", 20000, 1, "int", &function_5850fbee, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1df297369e47699a", 20000, 1, "counter", &function_bb4b8cd2, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_7d631c764117de1e", 20000, 1, "counter", &function_670635f5, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_f2d0b920043dbbd", 20000, 1, "counter", &function_87d68f99, 0, 0);
-  clientfield::register("toplayer", "" + # "delete_model", 20000, 1, "counter", &delete_model, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2a3dbcaa79e8e3d6", 20000, 1, "int", &function_dc6960d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5e1264789183cde1", 20000, 1, "int", &play_spark, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_72a33f6d2cc925c5", 20000, 1, "int", &function_5850fbee, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1df297369e47699a", 20000, 1, "counter", &function_bb4b8cd2, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7d631c764117de1e", 20000, 1, "counter", &function_670635f5, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 20000, 1, "counter", &function_87d68f99, 0, 0);
+  clientfield::register("toplayer", "" + #"delete_model", 20000, 1, "counter", &delete_model, 0, 0);
 }
 
 function_dc6960d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -79,7 +80,7 @@ function_bb4b8cd2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(isDefined(self)) {
       self thread postfx::playpostfxbundle(#"hash_37d0c10f478e0376");
-      playSound(localclientnum, # "hash_50a56f17fc412b92", (0, 0, 0));
+      playSound(localclientnum, #"hash_50a56f17fc412b92", (0, 0, 0));
       waitframe(1);
     }
 
@@ -139,7 +140,7 @@ function_ce8e5280() {
 function_87d68f99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_37d0c00f478e01c3");
-    playSound(localclientnum, # "hash_750bc40787e0e29f", (0, 0, 0));
+    playSound(localclientnum, #"hash_750bc40787e0e29f", (0, 0, 0));
     waitframe(1);
 
     if(isDefined(self.var_fcf96ca0)) {

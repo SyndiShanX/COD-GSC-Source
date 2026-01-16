@@ -14,18 +14,16 @@
 #include maps\mp\gametypes_zm\_weaponobjects;
 
 init() {
-  if(!isDefined(level.claymores_max_per_player)) {
+  if(!isDefined(level.claymores_max_per_player))
     level.claymores_max_per_player = 12;
-  }
 
-  trigs = getEntArray("claymore_purchase", "targetname");
+  trigs = getentarray("claymore_purchase", "targetname");
 
   for(i = 0; i < trigs.size; i++) {
     model = getent(trigs[i].target, "targetname");
 
-    if(isDefined(model)) {
+    if(isDefined(model))
       model hide();
-    }
   }
 
   array_thread(trigs, ::buy_claymores);
@@ -47,9 +45,8 @@ buy_claymores() {
   if(!isDefined(self.stub)) {
     return;
   }
-  if(isDefined(self.stub) && !isDefined(self.stub.claymores_triggered)) {
+  if(isDefined(self.stub) && !isDefined(self.stub.claymores_triggered))
     self.stub.claymores_triggered = 0;
-  }
 
   self.claymores_triggered = self.stub.claymores_triggered;
 
@@ -73,31 +70,27 @@ buy_claymores() {
           who thread show_claymore_hint("claymore_purchased");
           who thread maps\mp\zombies\_zm_audio::create_and_play_dialog("weapon_pickup", "grenade");
 
-          if(isDefined(self.stub)) {
+          if(isDefined(self.stub))
             self.claymores_triggered = self.stub.claymores_triggered;
-          }
 
           if(self.claymores_triggered == 0) {
             model = getent(self.target, "targetname");
 
-            if(isDefined(model)) {
+            if(isDefined(model))
               model thread maps\mp\zombies\_zm_weapons::weapon_show(who);
-            } else if(isDefined(self.clientfieldname)) {
+            else if(isDefined(self.clientfieldname))
               level setclientfield(self.clientfieldname, 1);
-            }
 
             self.claymores_triggered = 1;
 
-            if(isDefined(self.stub)) {
+            if(isDefined(self.stub))
               self.stub.claymores_triggered = 1;
-            }
           }
 
-          trigs = getEntArray("claymore_purchase", "targetname");
+          trigs = getentarray("claymore_purchase", "targetname");
 
-          for(i = 0; i < trigs.size; i++) {
+          for(i = 0; i < trigs.size; i++)
             trigs[i] setinvisibletoplayer(who);
-          }
         } else
           who thread show_claymore_hint("already_purchased");
       } else {
@@ -122,14 +115,13 @@ claymore_unitrigger_update_prompt(player) {
 
 set_claymore_visible() {
   players = get_players();
-  trigs = getEntArray("claymore_purchase", "targetname");
+  trigs = getentarray("claymore_purchase", "targetname");
 
   while(true) {
     for(j = 0; j < players.size; j++) {
       if(!players[j] is_player_placeable_mine("claymore_zm")) {
-        for(i = 0; i < trigs.size; i++) {
+        for(i = 0; i < trigs.size; i++)
           trigs[i] setinvisibletoplayer(players[j], 0);
-        }
       }
     }
 
@@ -139,13 +131,11 @@ set_claymore_visible() {
 }
 
 claymore_safe_to_plant() {
-  if(self.owner.claymores.size >= level.claymores_max_per_player) {
+  if(self.owner.claymores.size >= level.claymores_max_per_player)
     return 0;
-  }
 
-  if(isDefined(level.claymore_safe_to_plant)) {
+  if(isDefined(level.claymore_safe_to_plant))
     return self[[level.claymore_safe_to_plant]]();
-  }
 
   return 1;
 }
@@ -169,9 +159,8 @@ claymore_watch() {
       self notify("zmb_enable_claymore_prompt");
 
       if(claymore claymore_safe_to_plant()) {
-        if(isDefined(level.claymore_planted)) {
+        if(isDefined(level.claymore_planted))
           self thread[[level.claymore_planted]](claymore);
-        }
 
         claymore thread claymore_detonation();
         claymore thread play_claymore_effects();
@@ -184,9 +173,8 @@ claymore_watch() {
 }
 
 claymore_setup() {
-  if(!isDefined(self.claymores)) {
+  if(!isDefined(self.claymores))
     self.claymores = [];
-  }
 
   self thread claymore_watch();
   self giveweapon("claymore_zm");
@@ -203,9 +191,8 @@ adjust_trigger_origin(origin) {
 on_spawn_retrieve_trigger(watcher, player) {
   self maps\mp\gametypes_zm\_weaponobjects::onspawnretrievableweaponobject(watcher, player);
 
-  if(isDefined(self.pickuptrigger)) {
+  if(isDefined(self.pickuptrigger))
     self.pickuptrigger sethintlowpriority(0);
-  }
 }
 
 pickup_claymores() {
@@ -233,9 +220,8 @@ pickup_claymores() {
   clip_ammo = player getweaponammoclip(self.name);
   clip_max_ammo = weaponclipsize(self.name);
 
-  if(clip_ammo >= clip_max_ammo) {
+  if(clip_ammo >= clip_max_ammo)
     player notify("zmb_disable_claymore_prompt");
-  }
 
   player maps\mp\zombies\_zm_stats::increment_client_stat("claymores_pickedup");
   player maps\mp\zombies\_zm_stats::increment_player_stat("claymores_pickedup");
@@ -279,12 +265,11 @@ pickup_claymores_trigger_listener_disable(trigger, player) {
 shouldaffectweaponobject(object) {
   pos = self.origin + vectorscale((0, 0, 1), 32.0);
   dirtopos = pos - object.origin;
-  objectforward = anglesToForward(object.angles);
+  objectforward = anglestoforward(object.angles);
   dist = vectordot(dirtopos, objectforward);
 
-  if(dist < level.claymore_detectionmindist) {
+  if(dist < level.claymore_detectionmindist)
     return false;
-  }
 
   dirtopos = vectornormalize(dirtopos);
   dot = vectordot(dirtopos, objectforward);
@@ -300,9 +285,8 @@ claymore_detonation() {
   damagearea enablelinkto();
   damagearea linkto(self);
 
-  if(is_true(self.isonbus)) {
+  if(is_true(self.isonbus))
     damagearea setmovingplatformenabled(1);
-  }
 
   self.damagearea = damagearea;
   self thread delete_claymores_on_death(self.owner, damagearea);
@@ -324,14 +308,13 @@ claymore_detonation() {
       continue;
     }
     if(ent damageconetrace(self.origin, self) > 0) {
-      self playSound("wpn_claymore_alert");
+      self playsound("wpn_claymore_alert");
       wait 0.4;
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self detonate(self.owner);
-      } else {
+      else
         self detonate(undefined);
-      }
 
       return;
     }
@@ -341,20 +324,18 @@ claymore_detonation() {
 delete_claymores_on_death(player, ent) {
   self waittill("death");
 
-  if(isDefined(player)) {
+  if(isDefined(player))
     arrayremovevalue(player.claymores, self);
-  }
 
   wait 0.05;
 
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 satchel_damage() {
   self endon("death");
-  self setCanDamage(1);
+  self setcandamage(1);
   self.health = 100000;
   self.maxhealth = self.health;
   attacker = undefined;
@@ -379,11 +360,10 @@ satchel_damage() {
     break;
   }
 
-  if(level.satchelexplodethisframe) {
+  if(level.satchelexplodethisframe)
     wait(0.1 + randomfloat(0.4));
-  } else {
+  else
     wait 0.05;
-  }
 
   if(!isDefined(self)) {
     return;
@@ -401,7 +381,7 @@ reset_satchel_explode_this_frame() {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
+  playfxontag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 give_claymores_after_rounds() {
@@ -427,11 +407,10 @@ show_claymore_hint(string) {
   self endon("death");
   self endon("disconnect");
 
-  if(string == "claymore_purchased") {
-    text = &"ZOMBIE_CLAYMORE_HOWTO";
-  } else {
-    text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
-  }
+  if(string == "claymore_purchased")
+    text = & "ZOMBIE_CLAYMORE_HOWTO";
+  else
+    text = & "ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
 
   show_equipment_hint_text(text);
 }

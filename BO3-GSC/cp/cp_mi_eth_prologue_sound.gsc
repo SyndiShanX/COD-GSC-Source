@@ -21,44 +21,44 @@ function main() {
 
 function function_b3c510e0() {
   soundstruct = getent("amb_garbled_screen", "targetname");
-  if(isDefined(soundstruct)) {
-    soundstruct playLoopSound("amb_garbled_voice");
+  if(isdefined(soundstruct)) {
+    soundstruct playloopsound("amb_garbled_voice");
   }
 }
 
 function function_96d9cac5() {
   sound_org = getent("amb_offices", "targetname");
-  if(isDefined(sound_org)) {
-    sound_org playLoopSound("amb_offices");
+  if(isdefined(sound_org)) {
+    sound_org playloopsound("amb_offices");
   }
   level waittill("hash_400d768d");
   level thread namespace_21b2c1f2::function_973b77f9();
-  if(isDefined(sound_org)) {
+  if(isdefined(sound_org)) {
     sound_org stoploopsound();
     playsoundatposition("amb_power_down", sound_org.origin);
   }
 }
 
 function function_8066773b() {
-  var_30031844 = getEntArray("amb_office_power_on", "targetname");
-  for(i = 0; i < var_30031844.size; i++) {
+  var_30031844 = getentarray("amb_office_power_on", "targetname");
+  for (i = 0; i < var_30031844.size; i++) {
     var_30031844[i] thread function_55f749fc();
   }
 }
 
 function function_55f749fc() {
-  self playLoopSound(self.script_sound);
+  self playloopsound(self.script_sound);
   level waittill("hash_400d768d");
   self stoploopsound();
   wait(randomfloatrange(0.2, 3.1));
-  self playSound("amb_spark_generic");
+  self playsound("amb_spark_generic");
 }
 
 function function_a4815b6c() {
   level endon("breech");
   level endon("game_ended");
   level waittill("siren");
-  while(true) {
+  while (true) {
     wait(2);
     playsoundatposition("amb_troop_alarm", (3529, 427, -334));
   }
@@ -68,7 +68,7 @@ function function_44ee5cb7() {
   level endon("breech");
   level endon("game_ended");
   level waittill("hash_5ea48ae9");
-  while(true) {
+  while (true) {
     wait(1);
     playsoundatposition("amb_troop_alarm", (5945, -2320, -119));
   }
@@ -77,7 +77,7 @@ function function_44ee5cb7() {
 function function_a4312bfe() {
   level endon("hash_f8e975b8");
   level waittill("hash_fc089399");
-  while(true) {
+  while (true) {
     wait(1);
     playsoundatposition("amb_phone_ring", (-1760, -1624, 384));
     wait(2);

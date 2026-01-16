@@ -16,9 +16,8 @@ main() {
   level.barrels_init = true;
 
   barrels = getEntArray("barrel_shootable", "targetname");
-  if(!barrels.size) {
+  if(!barrels.size)
     return;
-  }
   level._barrels = spawnStruct();
   level._barrels.num_barrel_fx = 0;
 
@@ -30,9 +29,8 @@ main() {
 
 post_load(barrels) {
   waittillframeend;
-  if(level.createFX_enabled) {
+  if(level.createFX_enabled)
     return;
-  }
   array_thread(barrels, ::barrelsetup);
 }
 
@@ -70,16 +68,14 @@ barrel_wait_loop() {
     self waittill("damage", damage, attacker, direction_vec, P, type);
 
     if(hasTakenDamage) {
-      if(randomint(100) <= level_barrel_fx_chance) {
+      if(randomint(100) <= level_barrel_fx_chance)
         continue;
-      }
     }
     hasTakenDamage = true;
 
     result = self barrel_logic(direction_vec, P, type, attacker);
-    if(result) {
+    if(result)
       remaining--;
-    }
 
     if(remaining <= 0) {
       break;
@@ -90,36 +86,30 @@ barrel_wait_loop() {
 }
 
 barrel_logic(direction_vec, P, type, damageOwner) {
-  if(level._barrels.num_barrel_fx > level_limit_barrel_fx) {
+  if(level._barrels.num_barrel_fx > level_limit_barrel_fx)
     return false;
-  }
 
-  if(!isDefined(level._barrels._barrel_methods[type])) {
+  if(!isDefined(level._barrels._barrel_methods[type]))
     P = self barrel_calc_nofx(P, type);
-  } else {
+  else
     P = self[[level._barrels._barrel_methods[type]]](P, type);
-  }
 
-  if(!isDefined(P)) {
+  if(!isDefined(P))
     return false;
-  }
 
-  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn") {
+  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
     return false;
-  }
 
   foreach(value in self.barrel_fx_array) {
-    if(DistanceSquared(P, value.origin) < 25) {
+    if(DistanceSquared(P, value.origin) < 25)
       return false;
-    }
   }
 
   E = undefined;
-  if(IsAI(damageOwner)) {
+  if(IsAI(damageOwner))
     E = damageOwner getEye();
-  } else {
+  else
     E = damageOwner.origin;
-  }
 
   temp_vec = P - E;
 
@@ -148,9 +138,8 @@ barrelfx(P, vec, damageOwner) {
   snd playLoopSound(loopsnd);
   self.barrel_fx_array[self.barrel_fx_array.size] = snd;
 
-  if(isSP()) {
+  if(isSP())
     self thread barrel_damage(P, vec, damageOwner, snd);
-  }
 
   efx_rot = spawn("script_model", P);
   efx_rot setModel("tag_origin");
@@ -204,13 +193,11 @@ barrel_damage(P, vec, damageOwner, fx) {
 }
 
 allow_barrel_damage() {
-  if(!isSP()) {
+  if(!isSP())
     return false;
-  }
 
-  if(!isDefined(level.barrelsDamage)) {
+  if(!isDefined(level.barrelsDamage))
     return false;
-  }
 
   return (level.barrelsDamage);
 }

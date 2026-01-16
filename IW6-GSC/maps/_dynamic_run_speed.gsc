@@ -9,9 +9,8 @@ main(var_0) {
   if(isDefined(var_0)) {
     level.dynamic_run_speed_dialogue = var_0;
 
-    foreach(var_2 in var_0) {
-      level.scr_radio[var_2] = var_2;
-    }
+    foreach(var_2 in var_0)
+    level.scr_radio[var_2] = var_2;
   }
 
   level.scr_anim["generic"]["DRS_sprint"] = % sprint1_loop;

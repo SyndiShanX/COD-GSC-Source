@@ -7,7 +7,8 @@
 #include clientscripts\mp\_rewindobjects;
 #include clientscripts\mp\_lights;
 
-disableallparticlefxinlevel() {}
+disableallparticlefxinlevel() {
+}
 
 fx_validate(fxid, origin) {
   if(level.createfx_enabled) {
@@ -21,11 +22,10 @@ fx_validate(fxid, origin) {
 }
 
 createloopsound() {
-  ent = spawnStruct();
+  ent = spawnstruct();
 
-  if(!isDefined(level.createfxent)) {
+  if(!isDefined(level.createfxent))
     level.createfxent = [];
-  }
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
@@ -39,11 +39,10 @@ createloopsound() {
 }
 
 createeffect(type, fxid) {
-  ent = spawnStruct();
+  ent = spawnstruct();
 
-  if(!isDefined(level.createfxent)) {
+  if(!isDefined(level.createfxent))
     level.createfxent = [];
-  }
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
@@ -76,19 +75,17 @@ createexploder(fxid) {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglesToForward(self.v["angles"]);
+  self.v["forward"] = anglestoforward(self.v["angles"]);
 }
 
 create_triggerfx(clientnum) {
   fx_validate(self.v["fxid"], self.v["origin"]);
 
-  if(getdvarint(#"_id_113D4769") > 0) {
+  if(getdvarint(#"_id_113D4769") > 0)
     println("self.v['fxid'] " + self.v["fxid"]);
-  }
 
-  if(!level.createfx_disable_fx) {
-    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
-  }
+  if(!level.createfx_disable_fx)
+    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
 
   create_loopsound(clientnum);
 }
@@ -103,20 +100,18 @@ loopfx(clientnum) {
     return;
   }
   fx_validate(self.v["fxid"], self.v["origin"]);
-  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
 
   while(true) {
     if(isDefined(self.v["delay"])) {
-      if(!serverwait(clientnum, self.v["delay"], 0.25)) {
+      if(!serverwait(clientnum, self.v["delay"], 0.25))
         continue;
-      }
     }
 
-    while(isfxplaying(clientnum, self.looperfx)) {
+    while(isfxplaying(clientnum, self.looperfx))
       wait 0.25;
-    }
 
-    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 
@@ -124,42 +119,35 @@ loopfxstop(clientnum, timeout) {
   self endon("death");
   wait(timeout);
 
-  if(isDefined(self.looper)) {
+  if(isDefined(self.looper))
     deletefx(clientnum, self.looper);
-  }
 
-  if(isDefined(self.loopfx)) {
+  if(isDefined(self.loopfx))
     deletefakeent(clientnum, self.loopfx);
-  }
 }
 
 loopfxthread(clientnum) {
-  if(isDefined(self.fxstart)) {
+  if(isDefined(self.fxstart))
     level waittill("start fx" + self.fxstart);
-  }
 
   while(true) {
     create_looper(clientnum);
 
-    if(isDefined(self.timeout)) {
+    if(isDefined(self.timeout))
       thread loopfxstop(clientnum, self.timeout);
-    }
 
-    if(isDefined(self.fxstop)) {
+    if(isDefined(self.fxstop))
       level waittill("stop fx" + self.fxstop);
-    } else {
+    else
       return;
-    }
 
-    if(isDefined(self.looper)) {
+    if(isDefined(self.looper))
       deletefx(clientnum, self.looper);
-    }
 
-    if(isDefined(self.fxstart)) {
+    if(isDefined(self.fxstart))
       level waittill("start fx" + self.fxstart);
-    } else {
+    else
       return;
-    }
   }
 }
 
@@ -176,15 +164,13 @@ playlightloopexploder(exploderindex) {
     for(i = 0; i < level.createfxexploders[num].size; i++) {
       ent = level.createfxexploders[num][i];
 
-      if(!isDefined(ent.looperfx)) {
+      if(!isDefined(ent.looperfx))
         ent.looperfx = [];
-      }
 
       for(clientnum = 0; clientnum < level.max_local_clients; clientnum++) {
         if(localclientactive(clientnum)) {
-          if(!isDefined(ent.looperfx[clientnum])) {
+          if(!isDefined(ent.looperfx[clientnum]))
             ent.looperfx[clientnum] = [];
-          }
 
           ent.looperfx[clientnum][ent.looperfx[clientnum].size] = ent playexploderfx(clientnum);
         }
@@ -203,16 +189,14 @@ stoplightloopexploder(exploderindex) {
     for(i = 0; i < level.createfxexploders[num].size; i++) {
       ent = level.createfxexploders[num][i];
 
-      if(!isDefined(ent.looperfx)) {
+      if(!isDefined(ent.looperfx))
         ent.looperfx = [];
-      }
 
       for(clientnum = 0; clientnum < level.max_local_clients; clientnum++) {
         if(localclientactive(clientnum)) {
           if(isDefined(ent.looperfx[clientnum])) {
-            for(looperfxcount = 0; looperfxcount < ent.looperfx[clientnum].size; looperfxcount++) {
+            for(looperfxcount = 0; looperfxcount < ent.looperfx[clientnum].size; looperfxcount++)
               deletefx(clientnum, ent.looperfx[clientnum][looperfxcount]);
-            }
           }
         }
 
@@ -225,9 +209,8 @@ stoplightloopexploder(exploderindex) {
 }
 
 oneshotfxthread(clientnum) {
-  if(self.v["delay"] > 0) {
+  if(self.v["delay"] > 0)
     wait(self.v["delay"]);
-  }
 
   create_triggerfx(clientnum);
 }
@@ -245,7 +228,7 @@ playexploderfx(clientnum) {
   if(level.createfx_disable_fx) {
     return;
   }
-  return playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+  return playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
 }
 
 create_loopsound(clientnum) {
@@ -255,11 +238,10 @@ create_loopsound(clientnum) {
   self notify("stop_loop");
 
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
-    if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
+    if(isDefined(self.v["stopable"]) && self.v["stopable"])
       thread clientscripts\mp\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"], "stop_loop");
-    } else {
+    else
       thread clientscripts\mp\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"]);
-    }
   }
 }
 
@@ -285,26 +267,21 @@ fx_init(clientnum) {
   for(i = 0; i < level.createfxent.size; i++) {
     ent = level.createfxent[i];
 
-    if(!isDefined(level._createfxforwardandupset)) {
+    if(!isDefined(level._createfxforwardandupset))
       ent set_forward_and_up_vectors();
-    }
 
-    if(ent.v["type"] == "loopfx") {
+    if(ent.v["type"] == "loopfx")
       ent thread loopfxthread(clientnum);
-    }
 
-    if(ent.v["type"] == "oneshotfx") {
+    if(ent.v["type"] == "oneshotfx")
       ent thread oneshotfxthread(clientnum);
-    }
 
-    if(ent.v["type"] == "soundfx") {
+    if(ent.v["type"] == "soundfx")
       ent thread create_loopsound(clientnum);
-    }
 
     if(creatingexploderarray && ent.v["type"] == "exploder") {
-      if(!isDefined(level.createfxexploders[ent.v["exploder"]])) {
+      if(!isDefined(level.createfxexploders[ent.v["exploder"]]))
         level.createfxexploders[ent.v["exploder"]] = [];
-      }
 
       ent.v["exploder_id"] = getexploderid(ent);
       level.createfxexploders[ent.v["exploder"]][level.createfxexploders[ent.v["exploder"]].size] = ent;
@@ -315,11 +292,10 @@ fx_init(clientnum) {
 }
 
 reportnumeffects() {
-  if(isDefined(level.createfxent)) {
+  if(isDefined(level.createfxent))
     println("*** ClientScripts : Added " + level.createfxent.size + " effects.");
-  } else {
+  else
     println("*** ClientScripts : Added no effects.");
-  }
 }
 
 spawnfx_wrapper(clientnum, fx_id, origin, delay, forward, up) {
@@ -342,11 +318,10 @@ blinky_light(localclientnum, tagname, friendlyfx, enemyfx) {
     }
 
     if(isDefined(self)) {
-      if(friendnotfoe(localclientnum)) {
-        self.blinkylightfx = playFXOnTag(localclientnum, friendlyfx, self, self.lighttagname);
-      } else {
-        self.blinkylightfx = playFXOnTag(localclientnum, enemyfx, self, self.lighttagname);
-      }
+      if(friendnotfoe(localclientnum))
+        self.blinkylightfx = playfxontag(localclientnum, friendlyfx, self, self.lighttagname);
+      else
+        self.blinkylightfx = playfxontag(localclientnum, enemyfx, self, self.lighttagname);
     }
 
     serverwait(localclientnum, 0.5, 0.01);
@@ -374,9 +349,8 @@ activate_exploder(num) {
   num = int(num);
 
   if(isDefined(level.createfxexploders) && isDefined(level.createfxexploders[num])) {
-    for(i = 0; i < level.createfxexploders[num].size; i++) {
+    for(i = 0; i < level.createfxexploders[num].size; i++)
       level.createfxexploders[num][i] activate_individual_exploder();
-    }
   }
 }
 
@@ -394,9 +368,8 @@ deactivate_exploder(num) {
 
       if(isDefined(ent.loopfx)) {
         for(j = 0; j < ent.loopfx.size; j++) {
-          if(isDefined(ent.loopfx[j])) {
+          if(isDefined(ent.loopfx[j]))
             stopfx(j, ent.loopfx[j]);
-          }
         }
 
         ent.loopfx = [];
@@ -415,17 +388,14 @@ activate_individual_exploder() {
     self set_forward_and_up_vectors();
   }
 
-  if(isDefined(self.v["firefx"])) {
+  if(isDefined(self.v["firefx"]))
     self thread fire_effect();
-  }
 
-  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
+  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
     self thread cannon_effect();
-  }
 
-  if(isDefined(self.v["earthquake"])) {
+  if(isDefined(self.v["earthquake"]))
     self thread exploder_earthquake();
-  }
 }
 
 fire_effect() {
@@ -436,31 +406,27 @@ fire_effect() {
   firefx = self.v["firefx"];
   ender = self.v["ender"];
 
-  if(!isDefined(ender)) {
+  if(!isDefined(ender))
     ender = "createfx_effectStopper";
-  }
 
   timeout = self.v["firefxtimeout"];
   firefxdelay = 0.5;
 
-  if(isDefined(self.v["firefxdelay"])) {
+  if(isDefined(self.v["firefxdelay"]))
     firefxdelay = self.v["firefxdelay"];
-  }
 
   self exploder_delay();
 
-  if(isDefined(firefxsound)) {
+  if(isDefined(firefxsound))
     level thread clientscripts\mp\_utility::loop_fx_sound(firefxsound, origin, ender, timeout);
-  }
 
   if(level.createfx_disable_fx) {
     return;
   }
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++) {
-    playFX(i, level._effect[firefx], self.v["origin"], forward, up);
-  }
+  for(i = 0; i < players.size; i++)
+    playfx(i, level._effect[firefx], self.v["origin"], forward, up);
 }
 
 cannon_effect() {
@@ -471,9 +437,8 @@ cannon_effect() {
     for(i = 0; i < self.v["repeat"]; i++) {
       players = getlocalplayers();
 
-      for(player = 0; player < players.size; player++) {
-        playFX(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
-      }
+      for(player = 0; player < players.size; player++)
+        playfx(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
 
       self exploder_delay();
     }
@@ -485,16 +450,14 @@ cannon_effect() {
   players = getlocalplayers();
 
   if(isDefined(self.loopfx)) {
-    for(i = 0; i < self.loopfx.size; i++) {
+    for(i = 0; i < self.loopfx.size; i++)
       stopfx(i, self.loopfx[i]);
-    }
 
     self.loopfx = [];
   }
 
-  if(!isDefined(self.loopfx)) {
+  if(!isDefined(self.loopfx))
     self.loopfx = [];
-  }
 
   if(!isDefined(level._effect[self.v["fxid"]])) {
     assertmsg("*** Client : Effect " + self.v["fxid"] + " not precached in level_fx.csc.");
@@ -503,45 +466,39 @@ cannon_effect() {
   }
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(self.v["fxid"])) {
-      self.loopfx[i] = playFX(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
-    }
+    if(isDefined(self.v["fxid"]))
+      self.loopfx[i] = playfx(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 
-  self exploder_playSound();
+  self exploder_playsound();
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"])) {
+  if(!isDefined(self.v["delay"]))
     self.v["delay"] = 0;
-  }
 
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
 
-  if(isDefined(self.v["delay_min"])) {
+  if(isDefined(self.v["delay_min"]))
     min_delay = self.v["delay_min"];
-  }
 
-  if(isDefined(self.v["delay_max"])) {
+  if(isDefined(self.v["delay_max"]))
     max_delay = self.v["delay_max"];
-  }
 
-  if(min_delay > 0) {
+  if(min_delay > 0)
     waitrealtime(randomfloatrange(min_delay, max_delay));
-  }
 }
 
 exploder_earthquake() {
   self exploder_delay();
   eq = level.earthquake[self.v["earthquake"]];
 
-  if(isDefined(eq)) {
+  if(isDefined(eq))
     getlocalplayers()[0] earthquake(eq["magnitude"], eq["duration"], self.v["origin"], eq["radius"]);
-  }
 }
 
-exploder_playSound() {
+exploder_playsound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }

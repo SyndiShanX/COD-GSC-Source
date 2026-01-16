@@ -28,13 +28,13 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_pod");
   prop1 = spawn("script_model", (517.264, -627.226, 323));
   prop1.angles = vectorscale((0, 1, 0), 116.6);
-  prop1 setModel("p_rus_door_white_frame_double");
+  prop1 setmodel("p_rus_door_white_frame_double");
   prop2 = spawn("script_model", (62.1517, -1647.78, 481.602));
   prop2.angles = vectorscale((0, 1, 0), 35.2);
-  prop2 setModel("p6_pak_old_plywood");
+  prop2 setmodel("p6_pak_old_plywood");
   prop3 = spawn("script_model", (25.9997, -1673.49, 479.903));
   prop3.angles = vectorscale((0, 1, 0), 35.2);
-  prop3 setModel("p6_pak_old_plywood");
+  prop3 setmodel("p6_pak_old_plywood");
   spawncollision("collision_clip_wall_32x32x10", "collider", (-1725, 2300, 514), (0, 0, 0));
   spawncollision("collision_clip_wall_32x32x10", "collider", (-473, -2482, 412), vectorscale((0, 0, 1), 14.0));
   spawncollision("collision_physics_wall_32x32x10", "collider", (-473, -2482, 412), vectorscale((0, 0, 1), 14.0));
@@ -48,11 +48,11 @@ main() {
   spawncollision("collision_clip_wall_64x64x10", "collider", (1423, -127, 349), (1.3883, 285.8, -4));
   spawncollision("collision_physics_256x256x256", "collider", (1218, -2232, 244), vectorscale((0, 1, 0), 30.0));
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -69,9 +69,8 @@ levelspawndvars(reset_dvars) {
 }
 
 killstreak_init() {
-  while(!isDefined(level.missile_swarm_flyheight)) {
+  while(!isDefined(level.missile_swarm_flyheight))
     wait 1;
-  }
 
   level.missile_swarm_flyheight = 6000;
 }

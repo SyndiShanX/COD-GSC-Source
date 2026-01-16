@@ -21,14 +21,12 @@ potted_plant() {
   pos = self.origin;
 
   trig = undefined;
-  if(isDefined(self.target)) {
+  if(isdefined(self.target))
     trig = getent(self.target, "targetname");
-  }
 
   self thread potted_plant_damage();
-  if(isDefined(trig)) {
+  if(isdefined(trig))
     self thread potted_plant_triggered(trig);
-  }
 
   self waittill("fall");
 
@@ -46,7 +44,7 @@ potted_plant() {
     default:
       assertmsg("Unknown potted plantmodel " + self.model);
   }
-  assert(isDefined(fx));
+  assert(isdefined(fx));
 
   self delete();
   playFX(fx, pos, forward, up);

@@ -8,7 +8,7 @@ init() {
   precacheshader("progress_bar_fg");
   precacheshader("progress_bar_fill");
   precacheshader("score_bar_bg");
-  level.uiparent = spawnStruct();
+  level.uiparent = spawnstruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";
@@ -20,9 +20,8 @@ init() {
   level.uiparent.children = [];
   level.fontheight = 12;
 
-  foreach(team in level.teams) {
-    level.hud[team] = spawnStruct();
-  }
+  foreach(team in level.teams)
+  level.hud[team] = spawnstruct();
 
   level.primaryprogressbary = -61;
   level.primaryprogressbarx = 0;
@@ -89,11 +88,10 @@ fontpulse(player) {
   player endon("joined_team");
   player endon("joined_spectators");
 
-  if(self.outframes == 0) {
+  if(self.outframes == 0)
     self.fontscale = 0.01;
-  } else {
+  else
     self.fontscale = self.fontscale;
-  }
 
   if(self.inframes > 0) {
     self changefontscaleovertime(self.inframes * 0.05);
@@ -118,9 +116,8 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime, shaderna
   if(!isDefined(self)) {
     return;
   }
-  if(!isDefined(self.blackscreen)) {
+  if(!isDefined(self.blackscreen))
     self.blackscreen = newclienthudelem(self);
-  }
 
   self.blackscreen.x = 0;
   self.blackscreen.y = 0;
@@ -132,17 +129,15 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime, shaderna
   self.blackscreen.immunetodemogamehudsettings = 1;
   self.blackscreen.sort = 50;
 
-  if(isDefined(shadername)) {
+  if(isDefined(shadername))
     self.blackscreen setshader(shadername, 640, 480);
-  } else {
+  else
     self.blackscreen setshader("black", 640, 480);
-  }
 
   self.blackscreen.alpha = 0;
 
-  if(fadeintime > 0) {
+  if(fadeintime > 0)
     self.blackscreen fadeovertime(fadeintime);
-  }
 
   self.blackscreen.alpha = 1;
   wait(fadeintime);
@@ -155,9 +150,8 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime, shaderna
   if(!isDefined(self.blackscreen)) {
     return;
   }
-  if(fadeouttime > 0) {
+  if(fadeouttime > 0)
     self.blackscreen fadeovertime(fadeouttime);
-  }
 
   self.blackscreen.alpha = 0;
   wait(fadeouttime);

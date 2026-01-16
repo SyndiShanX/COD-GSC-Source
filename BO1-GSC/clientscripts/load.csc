@@ -22,7 +22,7 @@ end_last_stand(clientNum) {
   }
   realwait(0.7);
   println("Gasp.");
-  playSound(clientNum, "revive_gasp");
+  playsound(clientNum, "revive_gasp");
 }
 last_stand_thread(clientNum) {
   self thread end_last_stand(clientNum);
@@ -41,8 +41,8 @@ last_stand_thread(clientNum) {
   maxPause = 2.0;
   pause = startPause;
   vol = startVol;
-  while(1) {
-    id = playSound(clientNum, "chr_heart_beat");
+  while (1) {
+    id = playsound(clientNum, "chr_heart_beat");
     setSoundVolume(id, vol);
     realWait(pause);
     if(pause < maxPause) {
@@ -75,7 +75,7 @@ last_stand_monitor(clientNum, state, oldState) {
       }
       player thread last_stand_thread(clientNum);
       if(players.size <= 1) {
-        level.lslooper playLoopSound("evt_laststand_loop", 0.3);
+        level.lslooper playloopsound("evt_laststand_loop", 0.3);
       }
       level._laststand[clientNum] = true;
     }
@@ -99,7 +99,7 @@ damage_visionset_think(local_client_num) {
   health_threshold_off = max_health;
   visionset = false;
   PrintLn("*** HTH " + health_threshold);
-  while(1) {
+  while (1) {
     health = GetLocalClientHealth(local_client_num);
     if(visionset == false) {
       if(health < health_threshold) {
@@ -219,9 +219,8 @@ main() {
   clientscripts\_utility::registerSystem("lsm", ::last_stand_monitor);
   level.createFX_enabled = (getdvar(#"createfx") != "");
   level.zombiemode = (GetDvar(#"zombiemode") == "1");
-  if(!isDefined(level.scr_anim)) {
+  if(!isDefined(level.scr_anim))
     level.scr_anim[0][0] = 0;
-  }
   setup_default_client_flag_callbacks();
   clientscripts\_global_fx::main();
   clientscripts\_busing::busInit();
@@ -236,7 +235,7 @@ main() {
   if(isDefined(level._uses_crossbow) && level._uses_crossbow == true) {
     level thread clientscripts\_explosive_bolt::main();
   }
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     level thread effects_init_thread(i, "effects_init_" + i);
   }
   add_listen_thread("rfo1", clientscripts\_utility::loop_sound_on_client, "chr_breathing_hurt", 0.3, 0.7, "rfo2");
@@ -248,3 +247,4 @@ main() {
 zombie_intermission() {
   level.zombie_intermission = true;
 }
+

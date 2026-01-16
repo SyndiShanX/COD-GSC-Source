@@ -203,9 +203,8 @@ setguns_stub() {
 }
 
 isdedicatedmeleeweapon_stub(var_0) {
-  if(var_0 == "h2_shovel_mp" || var_0 == "h2_karambit_mp" || var_0 == "h2_sickle_mp" || var_0 == "h2_hatchet_mp" || var_0 == "h2_icepick_mp") {
+  if(var_0 == "h2_shovel_mp" || var_0 == "h2_karambit_mp" || var_0 == "h2_sickle_mp" || var_0 == "h2_hatchet_mp" || var_0 == "h2_icepick_mp")
     return 1;
-  }
 
   return 0;
 }

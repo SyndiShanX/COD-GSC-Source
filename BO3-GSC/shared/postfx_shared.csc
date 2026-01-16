@@ -14,11 +14,11 @@
 #namespace postfx;
 
 function autoexec __init__sytem__() {
-  system::register("postfx_bundle", &__init__, undefined, undefined);
+  system::register("postfx_bundle", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned(&localplayer_postfx_bundle_init);
+  callback::on_localplayer_spawned( & localplayer_postfx_bundle_init);
 }
 
 function localplayer_postfx_bundle_init(localclientnum) {
@@ -26,7 +26,7 @@ function localplayer_postfx_bundle_init(localclientnum) {
 }
 
 function init_postfx_bundles() {
-  if(isDefined(self.postfxbundelsinited)) {
+  if(isdefined(self.postfxbundelsinited)) {
     return;
   }
   self.postfxbundelsinited = 1;
@@ -41,7 +41,7 @@ function postfxbundledebuglisten() {
   setdvar("", "");
   setdvar("", "");
   setdvar("", "");
-  while(true) {
+  while (true) {
     playbundlename = getdvarstring("");
     if(playbundlename != "") {
       self thread playpostfxbundle(playbundlename);
@@ -67,7 +67,7 @@ function playpostfxbundle(playbundlename) {
   init_postfx_bundles();
   stopplayingpostfxbundle();
   bundle = struct::get_script_bundle("postfxbundle", playbundlename);
-  if(!isDefined(bundle)) {
+  if(!isdefined(bundle)) {
     println(("" + playbundlename) + "");
     return;
   }
@@ -81,19 +81,19 @@ function playpostfxbundle(playbundlename) {
   exitstage = 0;
   finishlooponexit = 0;
   firstpersononly = 0;
-  if(isDefined(bundle.looping)) {
+  if(isdefined(bundle.looping)) {
     looping = bundle.looping;
   }
-  if(isDefined(bundle.enterstage)) {
+  if(isdefined(bundle.enterstage)) {
     enterstage = bundle.enterstage;
   }
-  if(isDefined(bundle.exitstage)) {
+  if(isdefined(bundle.exitstage)) {
     exitstage = bundle.exitstage;
   }
-  if(isDefined(bundle.finishlooponexit)) {
+  if(isdefined(bundle.finishlooponexit)) {
     finishlooponexit = bundle.finishlooponexit;
   }
-  if(isDefined(bundle.firstpersononly)) {
+  if(isdefined(bundle.firstpersononly)) {
     firstpersononly = bundle.firstpersononly;
   }
   if(looping) {
@@ -108,27 +108,27 @@ function playpostfxbundle(playbundlename) {
     num_stages = bundle.num_stages;
   }
   self.captureimagename = undefined;
-  if(isDefined(bundle.screencapture) && bundle.screencapture) {
+  if(isdefined(bundle.screencapture) && bundle.screencapture) {
     self.captureimagename = playbundlename;
     createscenecodeimage(localclientnum, self.captureimagename);
     captureframe(localclientnum, self.captureimagename);
     setfilterpasscodetexture(localclientnum, filterid, 0, 0, self.captureimagename);
   }
   self thread watchentityshutdown(localclientnum, filterid);
-  for(stageidx = 0; stageidx < num_stages && !self.forcestoppostfxbundle; stageidx++) {
+  for (stageidx = 0; stageidx < num_stages && !self.forcestoppostfxbundle; stageidx++) {
     stageprefix = "s";
     if(stageidx < 10) {
       stageprefix = stageprefix + "0";
     }
     stageprefix = stageprefix + (stageidx + "_");
     stagelength = getstructfield(bundle, stageprefix + "length");
-    if(!isDefined(stagelength)) {
+    if(!isdefined(stagelength)) {
       finishplayingpostfxbundle(localclientnum, stageprefix + "length not defined", filterid);
       return;
     }
     stagelength = stagelength * 1000;
     stagematerial = getstructfield(bundle, stageprefix + "material");
-    if(!isDefined(stagematerial)) {
+    if(!isdefined(stagematerial)) {
       finishplayingpostfxbundle(localclientnum, stageprefix + "material not defined", filterid);
       return;
     }
@@ -136,8 +136,8 @@ function playpostfxbundle(playbundlename) {
     setfilterpassmaterial(localclientnum, filterid, 0, filter::mapped_material_id(stagematerial));
     setfilterpassenabled(localclientnum, filterid, 0, 1, 0, firstpersononly);
     stagecapture = getstructfield(bundle, stageprefix + "screenCapture");
-    if(isDefined(stagecapture) && stagecapture) {
-      if(isDefined(self.captureimagename)) {
+    if(isdefined(stagecapture) && stagecapture) {
+      if(isdefined(self.captureimagename)) {
         freecodeimage(localclientnum, self.captureimagename);
         self.captureimagename = undefined;
         setfilterpasscodetexture(localclientnum, filterid, 0, 0, "");
@@ -148,18 +148,18 @@ function playpostfxbundle(playbundlename) {
       setfilterpasscodetexture(localclientnum, filterid, 0, 0, self.captureimagename);
     }
     stagesprite = getstructfield(bundle, stageprefix + "spriteFilter");
-    if(isDefined(stagesprite) && stagesprite) {
+    if(isdefined(stagesprite) && stagesprite) {
       setfilterpassquads(localclientnum, filterid, 0, 2048);
     } else {
       setfilterpassquads(localclientnum, filterid, 0, 0);
     }
     thermal = getstructfield(bundle, stageprefix + "thermal");
-    enablethermaldraw(localclientnum, isDefined(thermal) && thermal);
+    enablethermaldraw(localclientnum, isdefined(thermal) && thermal);
     loopingstage = looping && (!enterstage && stageidx == 0 || (enterstage && stageidx == 1));
     accumtime = 0;
     prevtime = self getclienttime();
-    while(loopingstage || accumtime < stagelength && !self.forcestoppostfxbundle) {
-      gfx::setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, &setfilterconstants);
+    while (loopingstage || accumtime < stagelength && !self.forcestoppostfxbundle) {
+      gfx::setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, & setfilterconstants);
       wait(0.016);
       currtime = self getclienttime();
       deltatime = currtime - prevtime;
@@ -167,7 +167,7 @@ function playpostfxbundle(playbundlename) {
       totalaccumtime = totalaccumtime + deltatime;
       prevtime = currtime;
       if(loopingstage) {
-        while(accumtime >= stagelength) {
+        while (accumtime >= stagelength) {
           accumtime = accumtime - stagelength;
         }
         if(self.exitpostfxbundle) {
@@ -197,10 +197,10 @@ function setfilterconstants(localclientnum, shaderconstantname, filterid, values
 }
 
 function finishplayingpostfxbundle(localclientnum, msg, filterid) {
-  if(isDefined(msg)) {
+  if(isdefined(msg)) {
     println(msg);
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self notify("finished_playing_postfx_bundle");
     self.forcestoppostfxbundle = 0;
     self.exitpostfxbundle = 0;
@@ -209,7 +209,7 @@ function finishplayingpostfxbundle(localclientnum, msg, filterid) {
   setfilterpassquads(localclientnum, filterid, 0, 0);
   setfilterpassenabled(localclientnum, filterid, 0, 0);
   enablethermaldraw(localclientnum, 0);
-  if(isDefined(self.captureimagename)) {
+  if(isdefined(self.captureimagename)) {
     setfilterpasscodetexture(localclientnum, filterid, 0, 0, "");
     freecodeimage(localclientnum, self.captureimagename);
     self.captureimagename = undefined;
@@ -225,11 +225,11 @@ function stopplayingpostfxbundle() {
 function stoppostfxbundle() {
   self notify("stoppostfxbundle_singleton");
   self endon("stoppostfxbundle_singleton");
-  if(isDefined(self.playingpostfxbundle) && self.playingpostfxbundle != "") {
+  if(isdefined(self.playingpostfxbundle) && self.playingpostfxbundle != "") {
     self.forcestoppostfxbundle = 1;
-    while(self.playingpostfxbundle != "") {
+    while (self.playingpostfxbundle != "") {
       wait(0.016);
-      if(!isDefined(self)) {
+      if(!isdefined(self)) {
         return;
       }
     }
@@ -237,16 +237,16 @@ function stoppostfxbundle() {
 }
 
 function exitpostfxbundle() {
-  if(!(isDefined(self.exitpostfxbundle) && self.exitpostfxbundle) && isDefined(self.playingpostfxbundle) && self.playingpostfxbundle != "") {
+  if(!(isdefined(self.exitpostfxbundle) && self.exitpostfxbundle) && isdefined(self.playingpostfxbundle) && self.playingpostfxbundle != "") {
     self.exitpostfxbundle = 1;
   }
 }
 
 function setfrontendstreamingoverlay(localclientnum, system, enabled) {
-  if(!isDefined(self.overlayclients)) {
+  if(!isdefined(self.overlayclients)) {
     self.overlayclients = [];
   }
-  if(!isDefined(self.overlayclients[localclientnum])) {
+  if(!isdefined(self.overlayclients[localclientnum])) {
     self.overlayclients[localclientnum] = [];
   }
   self.overlayclients[localclientnum][system] = enabled;

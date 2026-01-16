@@ -18,6 +18,7 @@
 #include scripts\mp\mp_geothermal_sound;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\load;
+
 #namespace mp_geothermal;
 
 event_handler[level_init] main(eventstruct) {
@@ -176,37 +177,38 @@ function_2301b50d() {
 }
 
 geyser_think() {
-  self.scene_ents[# "prop 1"] endon(#"death");
+  self.scene_ents[#"prop 1"] endon(#"death");
   self.t_geyser = getent(self.target, "targetname");
   self.t_geyser.s_scene = self;
   self.t_geyser callback::on_trigger(&function_da3ef83b);
 
   while(getdvarint(#"hash_235decda8742ffc6", 1)) {
+
     level thread function_a5242577(self, (0, 1, 0));
 
-    self thread scene::play(self.scriptbundlename, "Shot 1");
+      self thread scene::play(self.scriptbundlename, "Shot 1");
     self.var_b0902cc0 = "Shot 1";
     wait randomfloatrange(20, 30);
 
     level thread function_a5242577(self, (1, 1, 0));
 
-    self.var_b0902cc0 = "Shot 2";
+      self.var_b0902cc0 = "Shot 2";
     self scene::play(self.scriptbundlename, "Shot 2");
 
     level thread function_a5242577(self, (1, 0, 0));
 
-    self.var_b0902cc0 = "Shot 3";
+      self.var_b0902cc0 = "Shot 3";
     self thread function_dda9d732();
     self scene::play(self.scriptbundlename, "Shot 3");
   }
 }
 
 function_dda9d732() {
-  self.scene_ents[# "prop 1"] waittill(#"stop", # "death");
+  self.scene_ents[#"prop 1"] waittill(#"stop", #"death");
 
   level thread function_a5242577(self, (1, 1, 0));
 
-  self.var_b0902cc0 = "Shot 1";
+    self.var_b0902cc0 = "Shot 1";
 }
 
 function_da3ef83b(s_info) {
@@ -258,3 +260,4 @@ function_a5242577(struct, color) {
     waitframe(1);
   }
 }
+

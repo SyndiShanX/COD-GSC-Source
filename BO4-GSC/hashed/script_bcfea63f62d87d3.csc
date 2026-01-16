@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
+
 #namespace namespace_77b8863;
 
 autoexec main() {

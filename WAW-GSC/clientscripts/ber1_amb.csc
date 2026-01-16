@@ -82,16 +82,16 @@ train_ride() {
   fleft = getstruct("train_front_left", "targetname");
   fright = getstruct("train_front_right", "targetname");
   fcenter = getstruct("train_front_center", "targetname");
-  playSound(0, "train_rear_left", rleft.origin);
-  playSound(0, "train_rear_right", rright.origin);
-  playSound(0, "train_front_left", fleft.origin);
-  playSound(0, "train_front_right", fright.origin);
-  playSound(0, "train_front_center", fcenter.origin);
+  playsound(0, "train_rear_left", rleft.origin);
+  playsound(0, "train_rear_right", rright.origin);
+  playsound(0, "train_front_left", fleft.origin);
+  playsound(0, "train_front_right", fright.origin);
+  playsound(0, "train_front_center", fcenter.origin);
 }
 
 train_quake() {
   level waittill("train_quake");
-  playSound(0, "train_shake_front", (0, 0, 0));
+  playsound(0, "train_shake_front", (0, 0, 0));
 }
 
 elec_loop() {
@@ -105,7 +105,7 @@ elec_loop() {
 house_collapse() {
   level waittill("house1_collapse");
   roof = getstruct("introhouse_fx", "targetname");
-  playSound(0, "building_collapse2", roof.origin);
+  playsound(0, "building_collapse2", roof.origin);
 }
 
 fake_battle() {
@@ -122,8 +122,8 @@ fake_battle() {
 tank_wall_sound() {
   level waittill("tank_wall_sound");
   wall = getstruct("tank_wall_sound", "targetname");
-  playSound(0, "grenade_explode", wall.origin);
-  playSound(0, "grenade_explode_brick", wall.origin);
+  playsound(0, "grenade_explode", wall.origin);
+  playsound(0, "grenade_explode_brick", wall.origin);
   wait 1;
-  playSound(0, "tank_wall_sound", wall.origin);
+  playsound(0, "tank_wall_sound", wall.origin);
 }

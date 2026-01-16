@@ -20,9 +20,8 @@ skipto_mason_donkeykong() {
   set_objective(level.obj_mason_up_hill);
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes) {
-    setenablenode(node, 0);
-  }
+  foreach(node in a_nd_nodes)
+  setenablenode(node, 0);
 
   exploder(10);
   setsaveddvar("cg_aggressiveCullRadius", "500");
@@ -86,9 +85,8 @@ donkeykong_setup() {
   exploder(330);
   a_nd_nodes = getnodearray("mason_donkeykong_exposed_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes) {
-    setenablenode(node, 0);
-  }
+  foreach(node in a_nd_nodes)
+  setenablenode(node, 0);
 
   level thread run_scene("woods_freakout_doors");
 }
@@ -162,9 +160,8 @@ donkeykong_truck_spawn_occupants() {
   ai_gunner.deathfunction = ::donkeykong_truck_gunner_death;
   ai_gunner.script_noteworthy = "ai_gunner";
 
-  if(isalive(ai_gunner)) {
+  if(isalive(ai_gunner))
     ai_gunner set_ignoreme(1);
-  }
 
   ai_driver enter_vehicle(self, str_driver_tag);
   ai_gunner enter_vehicle(self, str_gunner_tag);
@@ -205,19 +202,17 @@ mason_donkeykong_player_uses_turret(vh_truck) {
   }
   a_nd_nodes = getnodearray("mason_donkeykong_exposed_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes) {
-    setenablenode(node, 1);
-  }
+  foreach(node in a_nd_nodes)
+  setenablenode(node, 1);
 
   spawn_manager_enable("donkeykong_turret_targets_sm");
   self waittill("exit_vehicle");
   spawn_manager_disable("donkeykong_turret_targets_sm");
-  a_s_spawner = getEntArray("donkeykong_turret_targets", "targetname");
+  a_s_spawner = getentarray("donkeykong_turret_targets", "targetname");
 
   foreach(spawner in a_s_spawner) {
-    if(isDefined(spawner)) {
+    if(isDefined(spawner))
       spawner.count = 0;
-    }
   }
 }
 
@@ -256,9 +251,8 @@ donkeykong_kill_off_balcony_cartel() {
   spawn_manager_disable("donkeykong_cartel_balcony2_sm");
   a_ai_cartel = get_ai_group_ai("donkeykong_balcony_cartel");
 
-  foreach(guy in a_ai_cartel) {
-    guy thread timebomb(0.25, 5.0);
-  }
+  foreach(guy in a_ai_cartel)
+  guy thread timebomb(0.25, 5.0);
 }
 
 donkeykong_colortriggers() {
@@ -283,9 +277,8 @@ donkeykong_spawn_house_enemies() {
   spawn_manager_enable("donkeykong_PDF_sm");
   a_ai_balcony_cartel = get_ai_array("donkeykong_cartel_balcony1_ai", "targetname");
 
-  if(a_ai_balcony_cartel.size < 3) {
+  if(a_ai_balcony_cartel.size < 3)
     spawn_manager_enable("donkeykong_cartel_balcony2_sm");
-  }
 }
 
 donkeykong_open_door() {
@@ -301,9 +294,8 @@ make_shotgunners_agressive() {
   a_ai_enemies = getaiarray("axis");
 
   foreach(guy in a_ai_enemies) {
-    if(issubstr(guy.classname, "Shotgun")) {
+    if(issubstr(guy.classname, "Shotgun"))
       self make_ai_aggressive();
-    }
   }
 }
 
@@ -318,11 +310,10 @@ donkeykong_vo() {
   trigger_wait("donkeykong_player_near_hill");
   level.hudson queue_dialog("huds_through_the_fire_k_0");
 
-  if(is_mature()) {
+  if(is_mature())
     level.woods queue_dialog("wood_shit_they_re_gonna_0");
-  } else {
+  else
     level.woods queue_dialog("wood_they_re_gonna_light_0");
-  }
 
   n_count = get_ai_group_sentient_count("donkeykong_balcony_cartel");
 
@@ -330,9 +321,8 @@ donkeykong_vo() {
     level.woods queue_dialog("wood_move_get_off_the_p_0", 2);
     n_count = get_ai_group_sentient_count("donkeykong_balcony_cartel");
 
-    if(n_count > 0) {
+    if(n_count > 0)
       level.hudson queue_dialog("huds_taking_fire_from_the_0", 2);
-    }
   }
 
   trigger_wait("donkeykong_house_entry");
@@ -351,41 +341,36 @@ donkeykong_cleanup() {
   a_ai_pdf = get_ai_group_ai("donkeykong_pdf");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(0.1, 2.0);
-    }
   }
 
   a_ai_cartel = get_ai_group_ai("donkeykong_cartel_wave1");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(0.1, 2.0);
-    }
   }
 
   a_ai_cartel = get_ai_group_ai("donkeykong_cartel_wave1_left");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(0.1, 2.0);
-    }
   }
 
   a_ai_cartel = get_ai_group_ai("donkeykong_balcony_cartel");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(0.1, 2.0);
-    }
   }
 
   a_ai_cartel = get_ai_group_ai("donkeykong_cartel");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy)) {
+    if(isalive(guy))
       guy thread timebomb(0.1, 2.0);
-    }
   }
 
   kill_spawnernum(13);

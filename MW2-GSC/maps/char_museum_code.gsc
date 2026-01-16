@@ -11,6 +11,8 @@
 #include maps\char_museum;
 #using_animtree("generic_human");
 
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
 ai_default_setup(array) {
@@ -18,12 +20,11 @@ ai_default_setup(array) {
 
   self.anim_speed = level.GLOBAL_ANIM_SPEED;
 
-  if(!isDefined(level.anim_ai[array])) {
+  if(!isdefined(level.anim_ai[array]))
     level.anim_ai[array] = [];
-  }
   level.anim_ai[array][level.anim_ai[array].size] = self;
   node = self;
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     node = getstruct(self.target, "targetname");
     self.animation = node.animation;
   }
@@ -37,11 +38,10 @@ ai_default_setup(array) {
 ai_death_track(array) {
   self waittill("death");
 
-  if(isDefined(self)) {
+  if(isdefined(self))
     level.anim_ai[array] = array_remove(level.anim_ai[array], self);
-  } else {
+  else
     level.anim_ai[array] = [];
-  }
 }
 
 drone_anim_first_frame(node) {
@@ -50,11 +50,10 @@ drone_anim_first_frame(node) {
 }
 
 ai_idle(animation) {
-  if(isai(self)) {
+  if(isai(self))
     self ai_idle_ai(animation);
-  } else {
+  else
     self ai_idle_drone(animation);
-  }
 }
 
 ai_idle_ai(animation) {
@@ -78,7 +77,7 @@ ai_idle_drone(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  while(1) {
+  while (1) {
     self ai_wait_current_anim();
 
     waittillframeend;
@@ -100,7 +99,7 @@ custom_ai_idle() {
 
   animation = self.anim_to_do;
 
-  while(1) {
+  while (1) {
     anime = self.current_anim;
     self ClearAnim(anime, 0);
     self animMode("nogravity");
@@ -112,11 +111,10 @@ custom_ai_idle() {
 }
 
 ai_loop_random(animation, array) {
-  if(isai(self)) {
+  if(isai(self))
     self ai_loop_random_ai(animation, array);
-  } else {
+  else
     self ai_loop_random_drone(animation, array);
-  }
 }
 
 ai_loop_random_ai(animation, array) {
@@ -141,7 +139,7 @@ ai_loop_random_drone(animation, array) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  while(1) {
+  while (1) {
     self ai_wait_current_anim();
 
     waittillframeend;
@@ -165,7 +163,7 @@ custom_ai_loop_random() {
   animation = self.anim_to_do;
   array = self.array_to_do;
 
-  while(1) {
+  while (1) {
     anime = self.current_anim;
     self.current_anim = random(level.scr_anim["generic"][array]);
     self ClearAnim(anime, 0);
@@ -178,40 +176,34 @@ custom_ai_loop_random() {
 }
 
 ai_wait_current_anim(percent, delay) {
-  if(!isDefined(self.current_anim)) {
+  if(!isdefined(self.current_anim))
     return;
-  }
 
-  if(!isDefined(delay)) {
+  if(!isdefined(delay))
     delay = 0;
-  }
 
   time = getanimlength(self.current_anim);
 
-  if(isDefined(percent) && isDefined(self.animtime)) {
+  if(isdefined(percent) && isdefined(self.animtime))
     time *= (percent - self.animtime);
-  } else {
-    if(isDefined(percent))
-  }
-  time *= percent;
-  else {
-    if(isDefined(self.animtime))
-  }
-  time *= (1.0 - self.animtime);
+  else
+  if(isdefined(percent))
+    time *= percent;
+  else
+  if(isdefined(self.animtime))
+    time *= (1.0 - self.animtime);
 
   final = (time / self.anim_speed) + delay;
 
-  if(final > 0) {
+  if(final > 0)
     wait final;
-  }
 }
 
 ai_next_anim(xanim, percent, delay) {
-  if(isai(self)) {
+  if(isai(self))
     self ai_next_anim_ai(xanim, percent, delay);
-  } else {
+  else
     self ai_next_anim_drone(xanim, percent, delay);
-  }
 }
 
 ai_next_anim_ai(xanim, percent, delay) {
@@ -252,15 +244,12 @@ custom_ai_next_anim() {
   xanim = undefined;
   percent = undefined;
   delay = undefined;
-  if(isDefined(self.anim_to_do)) {
+  if(isdefined(self.anim_to_do))
     xanim = self.anim_to_do;
-  }
-  if(isDefined(self.perc_to_do)) {
+  if(isdefined(self.perc_to_do))
     percent = self.perc_to_do;
-  }
-  if(isDefined(self.delay_to_do)) {
+  if(isdefined(self.delay_to_do))
     delay = self.delay_to_do;
-  }
 
   anime = self.current_anim;
   self.current_anim = xanim;
@@ -272,29 +261,26 @@ custom_ai_next_anim() {
 }
 
 ai_current_anim_stop() {
-  if(isai(self)) {
+  if(isai(self))
     self ai_current_anim_stop_ai();
-  } else {
+  else
     self ai_current_anim_stop_drone();
-  }
 }
 
 ai_current_anim_stop_ai() {
   self endon("panic_button");
   self endon("death");
 
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   self ent_flag_waitopen("do_anim");
   self AnimCustom(::custom_ai_current_anim_stop);
 }
 
 ai_current_anim_stop_drone() {
-  while(!self ent_flag_exist("do_anim")) {
+  while (!self ent_flag_exist("do_anim"))
     wait .05;
-  }
   self ent_flag_wait("do_anim");
   self ent_flag_waitopen("do_anim");
   self SetAnim(self.current_anim, 1, 0, 0);
@@ -313,11 +299,10 @@ custom_ai_current_anim_stop() {
 }
 
 _setanim(animation, weight, blend, rate) {
-  if(isai(self)) {
+  if(isai(self))
     self _setanim_ai(animation, weight, blend, rate);
-  } else {
+  else
     self _setanim_drone(animation, weight, blend, rate);
-  }
 }
 
 _setanim_ai(animation, weight, blend, rate) {
@@ -344,11 +329,10 @@ custom_setanim() {
   blend = self.blend_2_do;
   rate = self.rate_2_do;
 
-  if(isDefined(self.anim_mode)) {
+  if(isdefined(self.anim_mode))
     self animMode(self.anim_mode);
-  } else {
+  else
     self animMode("nogravity");
-  }
   self setanim(animation, weight, blend, rate);
 
   self waittill("new_custom_anim");
@@ -368,9 +352,9 @@ set_anim_time(node, time) {
 
   self SetAnimTime(getanim_generic(node.animation), self.animtime);
 
-  if(isai(self)) {
+  if(isai(self))
     self ForceTeleport(endPoint, ent.angles + (0, angles, 0));
-  } else {
+  else {
     self.origin = endPoint;
     self.angles = ent.angles + (0, angles, 0);
   }
@@ -389,33 +373,28 @@ camera_move(targetname, speed, acc, dec) {
 
   level.camera vehicle_setspeedimmediate(0, 1000, 1000);
 
-  if(!isDefined(speed)) {
+  if(!isdefined(speed))
     speed = 30; // units per second.
-  }
 
   dist = distance(level.camera.origin, old_camera.origin);
   time = dist / speed;
 
-  if(!isDefined(acc)) {
+  if(!isdefined(acc))
     acc = .25;
-  }
 
-  if(!isDefined(dec)) {
+  if(!isdefined(dec))
     dec = .25;
-  }
 
-  if(!acc && !dec) {
+  if(!acc && !dec)
     level.player playerlinktoblend(level.camera, undefined, time);
-  } else {
+  else
     level.player playerlinktoblend(level.camera, undefined, time, time * acc, time * dec);
-  }
 
-  if(time > .5 && time < 1.0) {
+  if(time > .5 && time < 1.0)
     wait time;
-  } else {
-    if(time > 1.0)
-  }
-  wait time - 1.0;
+  else
+  if(time > 1.0)
+    wait time - 1.0;
 
   old_camera delaycall(1.5, ::delete);
 }
@@ -442,9 +421,8 @@ set_civilian_ai() {
 }
 
 do_anim(name) {
-  foreach(ent in level.anim_ai[name]) {
-    ent ent_flag_set("do_anim");
-  }
+  foreach(ent in level.anim_ai[name])
+  ent ent_flag_set("do_anim");
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -462,14 +440,13 @@ civ_talkers() {
   wait .1; //let initiliazing functions run
 
   node = self;
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     node = getstruct(self.target, "targetname");
     self.animation = node.animation;
   }
 
-  if(node.animation == "civilian_texting_sitting") {
+  if(node.animation == "civilian_texting_sitting")
     self attach("electronics_pda", "TAG_INHAND");
-  }
 
   self set_allowdeath(true);
   node anim_generic_loop(self, node.animation);
@@ -479,10 +456,10 @@ bubbles() {
   self endon("death");
 
   fx = getfx("scuba_bubbles_friendly");
-  while(self ent_flag("do_anim")) {
+  while (self ent_flag("do_anim")) {
     count = randomint(3) + 1;
-    for(i = 0; i < count; i++) {
-      playFXOnTag(fx, self, "tag_eye");
+    for (i = 0; i < count; i++) {
+      PlayFXOnTag(fx, self, "tag_eye");
       wait(0.05);
     }
     wait(randomfloatrange(0.6, 2.5));
@@ -506,15 +483,15 @@ museum_player_setup() {
 
 spawner_trig_think() {
   room = self.script_noteworthy;
-  ASSERT(isDefined(room));
+  ASSERT(IsDefined(room));
 
-  while(1) {
+  while (1) {
     self waittill("trigger", other);
 
     if(IsPlayer(other) && level.activeRoom != room) {
       self spawn_museum_dudes();
 
-      while(other IsTouching(self)) {
+      while (other IsTouching(self)) {
         wait(0.05);
       }
     }
@@ -522,22 +499,20 @@ spawner_trig_think() {
 }
 
 spawn_museum_dudes() {
-  if(flag("panic_button")) {
+  if(flag("panic_button"))
     return;
-  }
 
   level.activeRoom = self.script_noteworthy;
 
-  if(level.level_mode == "free") {
+  if(level.level_mode == "free")
     level.guys = getaispeciesarray();
-  }
 
   foreach(guy in level.guys) {
-    if(isDefined(guy)) {
+    if(IsDefined(guy)) {
       guy Delete();
     }
   }
-  if(isDefined(level.rope)) {
+  if(isdefined(level.rope)) {
     level.rope delete();
     level.rope = undefined;
   }
@@ -546,11 +521,10 @@ spawn_museum_dudes() {
 
   wait(0.05); // let the guys delete to make room
 
-  if(level.activeRoom == "none") {
+  if(level.activeRoom == "none")
     return;
-  }
 
-  newspawners = getEntArray(self.script_noteworthy, "targetname");
+  newspawners = GetEntArray(self.script_noteworthy, "targetname");
   ASSERT(newspawners.size);
 
   if(level.level_mode == "free") {
@@ -604,7 +578,7 @@ museum_ai_think() {
 
   self pathrandompercent_zero();
 
-  if(isDefined(self.team) && self.team == "axis") {
+  if(IsDefined(self.team) && self.team == "axis") {
     self.team = "neutral";
   }
 
@@ -619,9 +593,8 @@ museum_ai_think() {
   self.alertlevel = "noncombat";
   //	self.alertlevelInt = 2;
 
-  if(isDefined(self.type) && self.type == "civilian") {
+  if(isdefined(self.type) && self.type == "civilian")
     return;
-  }
 
   level.guys[level.guys.size] = self;
 }
@@ -657,10 +630,9 @@ sign_departure_status() {
 
   flag_wait("looked_at_big_board");
 
-  snds = getEntArray("snd_departure_board", "targetname");
-  foreach(member in snds) {
-    member playSound(member.script_soundalias);
-  }
+  snds = getentarray("snd_departure_board", "targetname");
+  foreach(member in snds)
+  member playsound(member.script_soundalias);
 
   array = array_randomize(level.departure_status_array);
   foreach(value in array) {
@@ -670,7 +642,7 @@ sign_departure_status() {
 }
 
 sign_departure_status_system_setup() {
-  pieces = getEntArray("sign_departure_status", "targetname");
+  pieces = GetEntArray("sign_departure_status", "targetname");
   array = [];
 
   foreach(tab in pieces) {
@@ -678,20 +650,18 @@ sign_departure_status_system_setup() {
     origin = tab.origin;
 
     foreach(member in array) {
-      if(member.origin != origin) {
+      if(member.origin != origin)
         continue;
-      }
 
       makenew = false;
       member.tabs[tab.script_noteworthy] = tab;
       break;
     }
 
-    if(!makenew) {
+    if(!makenew)
       continue;
-    }
 
-    newtab = spawnStruct();
+    newtab = SpawnStruct();
     newtab.origin = origin;
     newtab.tabs = [];
     newtab.tabs[tab.script_noteworthy] = tab;
@@ -740,7 +710,7 @@ sign_departure_status_tab_setup() {
 
 sign_departure_status_flip_to(state) {
   time = .20;
-  while(self.current_state != state) {
+  while (self.current_state != state) {
     next_state = self.status["order"][self.current_state];
     topname = self.status[self.current_state]["top"];
     bottomname = self.status[self.current_state]["bottom"];
@@ -807,7 +777,7 @@ custom_ai_loop_dog() {
   animation = self.anim_to_do;
   array = self.array_to_do;
 
-  while(1) {
+  while (1) {
     anime = self.current_anim;
     self.current_anim = random(level.scr_anim["generic"][array]);
     self ClearAnim(anime, 0);
@@ -831,7 +801,7 @@ panic_button() {
   model ent_flag_init("ready");
   model ent_flag_set("ready");
 
-  while(1) {
+  while (1) {
     model ent_flag_wait("ready");
 
     self waittill("trigger");
@@ -840,16 +810,13 @@ panic_button() {
 
     ai = getaispeciesarray();
 
-    if(!ai.size) {
+    if(!ai.size)
       continue;
-    }
-    if(!test_ai(ai)) {
+    if(!test_ai(ai))
       continue;
-    }
 
-    if(flag("panic_button")) {
+    if(flag("panic_button"))
       continue;
-    }
     flag_set("panic_button");
 
     array_thread(level.players, ::playLocalSoundWrapper, "arcademode_kill_streak_lost");
@@ -866,12 +833,11 @@ panic_button() {
 
 panic_button_move(model) {
   model ent_flag_clear("ready");
-  if(!isDefined(self.trigger_off)) {
+  if(!isdefined(self.trigger_off))
     self trigger_off();
-  }
 
   model movez(-1, .1);
-  model playSound("detpack_trigger");
+  model playsound("detpack_trigger");
   wait 1;
   model movez(1, .1);
   wait .25;
@@ -879,27 +845,24 @@ panic_button_move(model) {
   model ent_flag_set("ready");
 
   flag_waitopen("panic_button");
-  if(isDefined(self.trigger_off)) {
+  if(isdefined(self.trigger_off))
     self trigger_on();
-  }
 }
 
 panic_trig_on_off() {
-  while(1) {
+  while (1) {
     flag_wait("panic_button");
-    if(!isDefined(self.trigger_off)) {
+    if(!isdefined(self.trigger_off))
       self trigger_off();
-    }
 
     flag_waitopen("panic_button");
-    if(isDefined(self.trigger_off)) {
+    if(isdefined(self.trigger_off))
       self trigger_on();
-    }
   }
 }
 
 panic_icon() {
-  trigger = spawn("trigger_radius", self.origin, 0, 50, 72);
+  trigger = Spawn("trigger_radius", self.origin, 0, 50, 72);
 
   icon = NewHudElem();
   icon SetShader("panic_button", 1, 1);
@@ -912,21 +875,19 @@ panic_icon() {
 
   wait(0.05);
 
-  while(true) {
+  while (true) {
     trigger waittill("trigger", other);
 
-    if(!isplayer(other)) {
+    if(!isplayer(other))
       continue;
-    }
 
-    while(other IsTouching(trigger)) {
+    while (other IsTouching(trigger)) {
       show = true;
 
-      if(player_looking_at(self.origin, 0.8, true) && show) {
+      if(player_looking_at(self.origin, 0.8, true) && show)
         icon_fade_in(icon);
-      } else {
+      else
         icon_fade_out(icon);
-      }
       wait 0.25;
     }
     icon_fade_out(icon);
@@ -934,9 +895,8 @@ panic_icon() {
 }
 
 icon_fade_in(icon) {
-  if(icon.alpha != 0) {
+  if(icon.alpha != 0)
     return;
-  }
 
   icon FadeOverTime(0.2);
   icon.alpha = .6;
@@ -944,9 +904,8 @@ icon_fade_in(icon) {
 }
 
 icon_fade_out(icon) {
-  if(icon.alpha == 0) {
+  if(icon.alpha == 0)
     return;
-  }
 
   icon FadeOverTime(0.2);
   icon.alpha = 0;
@@ -955,32 +914,27 @@ icon_fade_out(icon) {
 
 test_ai(ai) {
   foreach(guy in ai) {
-    if(guy test_ai_individual()) {
+    if(guy test_ai_individual())
       return true;
-    }
   }
 
   return false;
 }
 
 test_ai_individual() {
-  if(isDefined(self.current_anim) && (self.current_anim == % oilrig_sub_B_idle_3 || self.current_anim == % oilrig_sub_B_idle_4)) {
+  if(isdefined(self.current_anim) && (self.current_anim == % oilrig_sub_B_idle_3 || self.current_anim == % oilrig_sub_B_idle_4))
     return false;
-  }
-  if(isDefined(self.type) && self.type == "civilian") {
+  if(isdefined(self.type) && self.type == "civilian")
     return false;
-  }
   return true;
 }
 
 panic_ai_attack() {
-  if(!isalive(self)) {
+  if(!isalive(self))
     return;
-  }
 
-  if(!self test_ai_individual()) {
+  if(!self test_ai_individual())
     return;
-  }
 
   self notify("panic_button");
   self notify("stop_first_frame");
@@ -992,9 +946,8 @@ panic_ai_attack() {
     self forceTeleport(origin, self.angles);
   }
 
-  if(isDefined(self.gun_remove)) {
+  if(isdefined(self.gun_remove))
     self gun_recall();
-  }
 
   self thread panic_set_attack();
 
@@ -1009,11 +962,11 @@ panic_ai_attack() {
   self.health = 150;
   self.maxhealth = 150;
 
-  if(isDefined(self.juggernaut) && self.juggernaut == true) {
+  if(isdefined(self.juggernaut) && self.juggernaut == true) {
     self.health = 3600;
     self.maxhealth = 3600;
   }
-  if(isDefined(self.script_health)) {
+  if(isdefined(self.script_health)) {
     self.health = self.script_health;
     self.maxhealth = self.script_health;
   }
@@ -1031,9 +984,8 @@ panic_ai_attack() {
 
   wait .5;
 
-  if(level.panic_guys == 0) {
+  if(level.panic_guys == 0)
     flag_clear("panic_button");
-  }
 }
 
 panic_set_attack() {

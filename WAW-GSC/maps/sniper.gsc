@@ -57,19 +57,19 @@ main() {
     precacherumble("damage_light");
     stringrefs();
     default_start(maps\sniper_event1::event1_start);
-    add_start("event1b", maps\sniper_event1::event1_shooting_start, &"STARTS_SNIPER_EVENT1B");
-    add_start("event1c", maps\sniper_event1::event1_moveup_start, &"STARTS_SNIPER_EVENT1C");
-    add_start("event1d", maps\sniper_event1::event1d_start, &"STARTS_SNIPER_EVENT1D");
-    add_start("event2", maps\sniper_event2::event2_start, &"STARTS_SNIPER_EVENT2");
-    add_start("event2b", maps\sniper_event2::event2b_start, &"STARTS_SNIPER_EVENT2B");
-    add_start("event2c", maps\sniper_event2::event2c_start, &"STARTS_SNIPER_EVENT2C");
-    add_start("event2d", maps\sniper_event2::event2d_start, &"STARTS_SNIPER_EVENT2D");
-    add_start("event2e", maps\sniper_event2::event2e_start, &"STARTS_SNIPER_EVENT2E");
-    add_start("event3", maps\sniper_event3::event3_start, &"STARTS_SNIPER_EVENT3");
-    add_start("event3b", maps\sniper_event3::event3b_start, &"STARTS_SNIPER_EVENT3B");
-    add_start("event3c", maps\sniper_event3::event3c_start, &"STARTS_SNIPER_EVENT3C");
-    add_start("event4", maps\sniper_event4::event4_start, &"STARTS_SNIPER_EVENT4");
-    add_start("event5", maps\sniper_event4::event5_skipto, &"STARTS_SNIPER_EVENT5");
+    add_start("event1b", maps\sniper_event1::event1_shooting_start, & "STARTS_SNIPER_EVENT1B");
+    add_start("event1c", maps\sniper_event1::event1_moveup_start, & "STARTS_SNIPER_EVENT1C");
+    add_start("event1d", maps\sniper_event1::event1d_start, & "STARTS_SNIPER_EVENT1D");
+    add_start("event2", maps\sniper_event2::event2_start, & "STARTS_SNIPER_EVENT2");
+    add_start("event2b", maps\sniper_event2::event2b_start, & "STARTS_SNIPER_EVENT2B");
+    add_start("event2c", maps\sniper_event2::event2c_start, & "STARTS_SNIPER_EVENT2C");
+    add_start("event2d", maps\sniper_event2::event2d_start, & "STARTS_SNIPER_EVENT2D");
+    add_start("event2e", maps\sniper_event2::event2e_start, & "STARTS_SNIPER_EVENT2E");
+    add_start("event3", maps\sniper_event3::event3_start, & "STARTS_SNIPER_EVENT3");
+    add_start("event3b", maps\sniper_event3::event3b_start, & "STARTS_SNIPER_EVENT3B");
+    add_start("event3c", maps\sniper_event3::event3c_start, & "STARTS_SNIPER_EVENT3C");
+    add_start("event4", maps\sniper_event4::event4_start, & "STARTS_SNIPER_EVENT4");
+    add_start("event5", maps\sniper_event4::event5_skipto, & "STARTS_SNIPER_EVENT5");
     animscripts\dog_init::initDogAnimations();
     maps\sniper_anim::drone_custom_run_cycles();
     maps\_drones::init();
@@ -123,7 +123,7 @@ main() {
       level.hero allowedstances("stand", "crouch", "prone");
       players = get_players();
       event3_players_start = getstructarray(eventname + "_playerstart", "targetname");
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] setOrigin(event3_players_start[i].origin + (0, 0, -10000));
         players[i] setplayerangles(event3_players_start[i].angles);
       }
@@ -131,21 +131,21 @@ main() {
       hero_start_spot = getstruct(eventname + "_herostart", "targetname");
       level.hero teleport(hero_start_spot.origin, hero_start_spot.angles);
       wait 0.1;
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] setOrigin(event3_players_start[i].origin);
         players[i] setplayerangles(event3_players_start[i].angles);
       }
       VisionSetNaked("Sniper_default", 1);
       get_players()[0] giveweapon("mosin_rifle_scoped");
       get_players()[0] SwitchToWeapon("mosin_rifle_scoped");
-      guys = getEntArray("wounded_fountain_guys", "script_noteworthy");
-      for(i = 0; i < guys.size; i++) {
+      guys = getentarray("wounded_fountain_guys", "script_noteworthy");
+      for (i = 0; i < guys.size; i++) {
         guys[i] delete();
       }
     }
     guys_to_nodes(guys, nodes) {
       nodecounter = 0;
-      for(i = 0; i < guys.size; i++) {
+      for (i = 0; i < guys.size; i++) {
         if(isDefined(nodes[nodecounter])) {
           guys[i] thread ignore_and_run(nodes[nodecounter]);
           nodecounter++;
@@ -183,15 +183,15 @@ main() {
       self notify("goal");
     }
     reset_hero_run_anim_trigs() {
-      trigs = getEntArray("hero_runanim_trigs", "script_noteworthy");
+      trigs = getentarray("hero_runanim_trigs", "script_noteworthy");
       array_thread(trigs, ::trig_reset_hero_anim);
-      trigs = getEntArray("hero_downstairs_trigs", "script_noteworthy");
+      trigs = getentarray("hero_downstairs_trigs", "script_noteworthy");
       array_thread(trigs, ::downstairs_runanim);
-      trigs = getEntArray("hero_upstairs_trigs", "script_noteworthy");
+      trigs = getentarray("hero_upstairs_trigs", "script_noteworthy");
       array_thread(trigs, ::upstairs_runanim);
     }
     trig_reset_hero_anim() {
-      while(1) {
+      while (1) {
         self waittill("trigger", triggerer);
         if(triggerer == level.hero) {
           break;
@@ -203,7 +203,7 @@ main() {
       self delete();
     }
     downstairs_runanim() {
-      while(1) {
+      while (1) {
         self waittill("trigger", triggerer);
         if(triggerer == level.hero) {
           break;
@@ -215,7 +215,7 @@ main() {
       self delete();
     }
     upstairs_runanim() {
-      while(1) {
+      while (1) {
         self waittill("trigger", triggerer);
         if(triggerer == level.hero) {
           break;
@@ -228,7 +228,7 @@ main() {
     }
     count_teh_time() {
       level.tehtimecounter = 0;
-      while(1) {
+      while (1) {
         level.tehtimecounter = level.tehtimecounter + 0.05;
         wait 0.05;
       }
@@ -236,13 +236,13 @@ main() {
     fake_ppsh() {
       level.fake_ppsh = spawn("script_model", (112.834, 669.472, 2.01857));
       level.fake_ppsh.angles = (358.474, 359.958, -88.7951);
-      level.fake_ppsh setModel("weapon_rus_ppsh_smg");
+      level.fake_ppsh setmodel("weapon_rus_ppsh_smg");
     }
     stealth_checker() {
       level endon("stealthbreak");
       flag_clear("player_attacking");
       self thread action_attack_checker();
-      while(1) {
+      while (1) {
         if(self isfiring()) {
           wait 0.1;
           if(flag("player_attacking")) {
@@ -257,7 +257,7 @@ main() {
       }
     }
     grenadetoss_is_attacking() {
-      while(1) {
+      while (1) {
         if(self isthrowinggrenade()) {
           self notify("action_notify_attack");
         }
@@ -269,7 +269,7 @@ main() {
       lastclipcount = level.player getcurrentweaponclipammo();
       weap = level.player getcurrentweapon();
       lastammocount = level.player getammocount(weap);
-      while(1) {
+      while (1) {
         weap = level.player getcurrentweapon();
         clipcount = level.player getcurrentweaponclipammo();
         ammocount = level.player getammocount(weap);
@@ -302,9 +302,9 @@ main() {
         self setgoalentity(get_players()[0]);
       }
       self thread wait_and_chargeplayer(randomintrange(7, 40));
-      while(guys_areclose == 0) {
+      while (guys_areclose == 0) {
         axis = getaiarray("axis");
-        for(i = 0; i < axis.size; i++) {
+        for (i = 0; i < axis.size; i++) {
           dist = distance(level.hero.origin, axis[i].origin);
           if(dist < 250) {
             guys_areclose = 1;
@@ -327,7 +327,7 @@ main() {
       pa = stumble_angles[0];
       ra = stumble_angles[2];
       rv = anglestoright(level.player.angles);
-      fv = anglesToForward(level.player.angles);
+      fv = anglestoforward(level.player.angles);
       rva = (rv[0], 0, rv[1] * -1);
       fva = (fv[0], 0, fv[1] * -1);
       angles = vector_multiply(rva, pa);
@@ -335,7 +335,7 @@ main() {
       return angles + (0, stumble_angles[1], 0);
     }
     do_custom_introscreen() {
-      custom_introscreen(&"SNIPER_INTROSCREEN_TITLE", &"SNIPER_INTROSCREEN_DATE", &"SNIPER_INTROSCREEN_PLACE", &"SNIPER_INTROSCREEN_INFO", &"SNIPER_INTROSCREEN_INFO2");
+      custom_introscreen(&"SNIPER_INTROSCREEN_TITLE", & "SNIPER_INTROSCREEN_DATE", & "SNIPER_INTROSCREEN_PLACE", & "SNIPER_INTROSCREEN_INFO", & "SNIPER_INTROSCREEN_INFO2");
     }
     custom_introscreen(string1, string2, string3, string4, string5) {
       if(GetDvar("introscreen") == "0") {
@@ -406,13 +406,13 @@ main() {
       return spot2;
     }
     origin_counter() {
-      while(1) {
-        spots = getEntArray("script_origin", "classname");
-        trigs = getEntArray("trigger_radius", "classname");
-        trigs2 = getEntArray("trigger_multiple", "classname");
-        models = getEntArray("script_model", "classname");
-        brushes = getEntArray("script_brushmodel", "classname");
-        dest = getEntArray("destructible", "targetname");
+      while (1) {
+        spots = getentarray("script_origin", "classname");
+        trigs = getentarray("trigger_radius", "classname");
+        trigs2 = getentarray("trigger_multiple", "classname");
+        models = getentarray("script_model", "classname");
+        brushes = getentarray("script_brushmodel", "classname");
+        dest = getentarray("destructible", "targetname");
         angles = level.player getplayerangles();
         gun = getent("e3_cover_mg", "script_noteworthy");
         nades = level.player getweaponammostock("stick_grenade");
@@ -479,11 +479,11 @@ main() {
       bone[8] = "curt_r2_03";
       bone[9] = "curt_r3_03";
       counter = 0;
-      while(counter < 4) {
-        for(i = 0; i < bone.size; i++) {
+      while (counter < 4) {
+        for (i = 0; i < bone.size; i++) {
           toss = randomint(100);
           if(toss > 80 && counter < 5) {
-            playFXOnTag(level._effect["fire_debris_small"], self, bone[i]);
+            playfxontag(level._effect["fire_debris_small"], self, bone[i]);
             counter++;
           }
         }
@@ -491,7 +491,7 @@ main() {
     }
     e2_flamer_struct_movers() {
       self endon("death");
-      while(1) {
+      while (1) {
         xval = randomint(5);
         zval = randomint(3);
         pitchvar = randomint(10);
@@ -513,7 +513,7 @@ main() {
     }
     fire_hurts_trigs() {
       self endon("death");
-      while(1) {
+      while (1) {
         if(level.player istouching(self)) {
           level.player setburn(0.5);
           level.player dodamage(10, self.origin);
@@ -526,7 +526,7 @@ main() {
       flag_wait("friendlies_vignette_go");
       flag_clear("did_noscope");
       level endon("said_noscope");
-      while(1) {
+      while (1) {
         if(level.player AdsButtonPressed()) {
           flag_set("player_is_ads");
           wait 1;
@@ -588,7 +588,7 @@ main() {
       if(isDefined(line6)) {
         lines = array_add(lines, line6);
       }
-      while(1) {
+      while (1) {
         myline = lines[randomint(lines.size)];
         if(!isDefined(level.lastrandomline) || level.lastrandomline != myline) {
           level.lastrandomline = myline;
@@ -599,14 +599,14 @@ main() {
     }
     friendly_fire_check() {
       level.friendlyfirecount = 0;
-      while(1) {
+      while (1) {
         level.hero waittill("damage", damage, attacker);
         level thread friendly_fire_reset();
         if(attacker == level.player) {
           level.friendlyfirecount++;
         }
         if(level.friendlyfirecount > 1) {
-          SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+          SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
           missionfailed();
         }
       }

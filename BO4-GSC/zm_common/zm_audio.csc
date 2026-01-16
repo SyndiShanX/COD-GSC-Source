@@ -10,6 +10,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_audio;
 
 autoexec __init__system__() {
@@ -24,13 +25,13 @@ __init__() {
     level.exert_sounds = [];
   }
 
-  level.exert_sounds[0][# "playerbreathinsound"] = "vox_exert_generic_inhale";
-  level.exert_sounds[0][# "playerbreathoutsound"] = "vox_exert_generic_exhale";
-  level.exert_sounds[0][# "playerbreathgaspsound"] = "vox_exert_generic_exhale";
-  level.exert_sounds[0][# "falldamage"] = "vox_exert_generic_pain";
-  level.exert_sounds[0][# "mantlesoundplayer"] = "vox_exert_generic_mantle";
-  level.exert_sounds[0][# "meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
-  level.exert_sounds[0][# "dtplandsoundplayer"] = "vox_exert_generic_pain";
+  level.exert_sounds[0][#"playerbreathinsound"] = "vox_exert_generic_inhale";
+  level.exert_sounds[0][#"playerbreathoutsound"] = "vox_exert_generic_exhale";
+  level.exert_sounds[0][#"playerbreathgaspsound"] = "vox_exert_generic_exhale";
+  level.exert_sounds[0][#"falldamage"] = "vox_exert_generic_pain";
+  level.exert_sounds[0][#"mantlesoundplayer"] = "vox_exert_generic_mantle";
+  level.exert_sounds[0][#"meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
+  level.exert_sounds[0][#"dtplandsoundplayer"] = "vox_exert_generic_pain";
   callback::on_spawned(&on_player_spawned);
 }
 
@@ -68,7 +69,7 @@ isspeaking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 zmbmuslooper() {
   ent = spawn(0, (0, 0, 0), "script_origin");
-  playSound(0, # "mus_zmb_gamemode_start", (0, 0, 0));
+  playSound(0, #"mus_zmb_gamemode_start", (0, 0, 0));
   wait 10;
   ent playLoopSound(#"mus_zmb_gamemode_loop", 0.05);
   ent thread waitfor_music_stop();
@@ -77,7 +78,7 @@ zmbmuslooper() {
 waitfor_music_stop() {
   level waittill(#"stpm");
   self stopallloopsounds(0.1);
-  playSound(0, # "mus_zmb_gamemode_end", (0, 0, 0));
+  playSound(0, #"mus_zmb_gamemode_end", (0, 0, 0));
   wait 1;
   self delete();
 }
@@ -150,9 +151,9 @@ playerexert(localclientnum, exert) {
 function_42e50d5() {
   if(isDefined(self.weapon)) {
     switch (self.weapon.name) {
-      case # "hero_scepter_lv3":
-      case # "hero_scepter_lv2":
-      case # "hero_scepter_lv1":
+      case #"hero_scepter_lv3":
+      case #"hero_scepter_lv2":
+      case #"hero_scepter_lv1":
         return true;
     }
   }
@@ -183,31 +184,31 @@ sndmeleeswipe(localclientnum, notifystring) {
     }
 
     if(isDefined(self.is_player_zombie) && self.is_player_zombie) {
-      playSound(0, # "zmb_melee_whoosh_zmb_plr", self.origin);
+      playSound(0, #"zmb_melee_whoosh_zmb_plr", self.origin);
       continue;
     }
 
-    if(currentweapon.statname === # "bowie_knife") {
-      playSound(0, # "zmb_bowie_swing_plr", self.origin);
+    if(currentweapon.statname === #"bowie_knife") {
+      playSound(0, #"zmb_bowie_swing_plr", self.origin);
       continue;
     }
 
     if(currentweapon.name == "spoon_zm_alcatraz") {
-      playSound(0, # "zmb_spoon_swing_plr", self.origin);
+      playSound(0, #"zmb_spoon_swing_plr", self.origin);
       continue;
     }
 
     if(currentweapon.name == "spork_zm_alcatraz") {
-      playSound(0, # "zmb_spork_swing_plr", self.origin);
+      playSound(0, #"zmb_spork_swing_plr", self.origin);
       continue;
     }
 
-    playSound(0, # "zmb_melee_whoosh_plr", self.origin);
+    playSound(0, #"zmb_melee_whoosh_plr", self.origin);
   }
 }
 
 end_gameover_snapshot() {
-  level waittill(#"demo_jump", # "demo_player_switch", # "snd_clear_script_duck");
+  level waittill(#"demo_jump", #"demo_player_switch", #"snd_clear_script_duck");
   wait 1;
   audio::snd_set_snapshot("default");
   level thread gameover_snapshot();
@@ -221,14 +222,14 @@ gameover_snapshot() {
 
 sndzmblaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playSound(localclientnum, # "hash_5e980fdf2497d9a1", (0, 0, 0));
+    playSound(localclientnum, #"hash_5e980fdf2497d9a1", (0, 0, 0));
     self.var_63de16a = self playLoopSound(#"hash_7b41cf42e1b9847b");
     self.inlaststand = 1;
     return;
   }
 
   if(isDefined(self.inlaststand) && self.inlaststand) {
-    playSound(localclientnum, # "hash_1526662237d7780f", (0, 0, 0));
+    playSound(localclientnum, #"hash_1526662237d7780f", (0, 0, 0));
     self stoploopsound(self.var_63de16a);
     self.inlaststand = 0;
   }

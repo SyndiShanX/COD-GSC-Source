@@ -26,13 +26,13 @@
 
 function autoexec init() {
   function_e84ffe9c();
-  spawner::add_archetype_spawn_function("margwa", &function_57c223eb);
+  spawner::add_archetype_spawn_function("margwa", & function_57c223eb);
   margwabehavior::adddirecthitweapon("turret_zm_genesis");
   margwabehavior::adddirecthitweapon("shotgun_energy");
   margwabehavior::adddirecthitweapon("shotgun_energy_upgraded");
   margwabehavior::adddirecthitweapon("pistol_energy");
   margwabehavior::adddirecthitweapon("pistol_energy_upgraded");
-  if(!isDefined(level.var_fd47363)) {
+  if(!isdefined(level.var_fd47363)) {
     level.var_fd47363 = [];
     level.var_fd47363["head_le"] = "c_zom_dlc4_margwa_chunks_le";
     level.var_fd47363["head_mid"] = "c_zom_dlc4_margwa_chunks_mid";
@@ -47,20 +47,20 @@ function autoexec init() {
     level.margwa_gore_mid_model_override = level.var_fd47363["gore_mid"];
     level.margwa_gore_right_model_override = level.var_fd47363["gore_ri"];
   }
-  if(!isDefined(level.var_6b7244b4)) {
+  if(!isdefined(level.var_6b7244b4)) {
     level.var_6b7244b4 = 100;
   }
 }
 
 function private function_e84ffe9c() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaVortexService", &function_96a94112);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaSpiderService", &function_9f065361);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactStunTerminate", &function_a5e64246);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactIDGunTerminate", &function_a478da01);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaVortexService", & function_96a94112);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaSpiderService", & function_9f065361);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactStunTerminate", & function_a5e64246);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactIDGunTerminate", & function_a478da01);
 }
 
 function private function_96a94112(entity) {
-  if(isDefined(entity.var_28763934) && entity.var_28763934 < gettime()) {
+  if(isdefined(entity.var_28763934) && entity.var_28763934 < gettime()) {
     return zm_ai_margwa::function_6312be59(entity);
   }
   return 0;
@@ -89,12 +89,12 @@ function private function_a478da01(entity) {
 }
 
 function private function_57c223eb() {
-  self.var_5ffc5a7b = &function_c27412c6;
-  self.margwapainterminatecb = &function_cc95e566;
+  self.var_5ffc5a7b = & function_c27412c6;
+  self.margwapainterminatecb = & function_cc95e566;
   self thread function_e1f5236a();
-  self.idgun_damage_cb = &function_df77c1c3;
-  self.var_fbaea41d = &function_a8ffa66c;
-  self.var_c732138b = &function_f769285c;
+  self.idgun_damage_cb = & function_df77c1c3;
+  self.var_fbaea41d = & function_a8ffa66c;
+  self.var_c732138b = & function_f769285c;
   self.var_aa0a91dd = gettime();
   self.var_28763934 = gettime();
   self.var_15704e8d = gettime();
@@ -104,7 +104,7 @@ function private function_57c223eb() {
 function private function_9ba47060() {
   self endon("death");
   wait(0.1);
-  if(isDefined(self.traveler)) {
+  if(isdefined(self.traveler)) {
     self.traveler delete();
   }
 }
@@ -141,14 +141,14 @@ function private function_cc95e566() {
 }
 
 function private function_df77c1c3(inflictor, attacker) {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     foreach(head in self.head) {
       if(head.health > 0) {
         damage = self.headhealthmax * 0.5;
         head.health = head.health - damage;
         if(head.health <= 0) {
           player = undefined;
-          if(isDefined(self.vortex)) {
+          if(isdefined(self.vortex)) {
             player = self.vortex.attacker;
           }
           if(self margwaserverutils::margwakillhead(head.model, player)) {
@@ -162,7 +162,7 @@ function private function_df77c1c3(inflictor, attacker) {
 }
 
 function private function_a8ffa66c(player) {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     if(gettime() > self.var_15704e8d) {
       foreach(head in self.head) {
         if(head.health > 0) {
@@ -187,7 +187,7 @@ function private function_f769285c() {
 }
 
 function function_2a03f05f() {
-  if(isDefined(self.canstun) && self.canstun && self.var_aa0a91dd < gettime()) {
+  if(isdefined(self.canstun) && self.canstun && self.var_aa0a91dd < gettime()) {
     return true;
   }
   return false;

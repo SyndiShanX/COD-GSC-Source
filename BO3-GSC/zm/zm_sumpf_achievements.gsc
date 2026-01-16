@@ -19,13 +19,13 @@
 #namespace zm_prototype_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_achievements", &__init__, undefined, undefined);
+  system::register("zm_theater_achievements", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  level.achievement_sound_func = &achievement_sound_func;
-  zm_spawner::register_zombie_death_event_callback(&function_1abfde35);
-  callback::on_connect(&onplayerconnect);
+  level.achievement_sound_func = & achievement_sound_func;
+  zm_spawner::register_zombie_death_event_callback( & function_1abfde35);
+  callback::on_connect( & onplayerconnect);
 }
 
 function achievement_sound_func(achievement_name_lower) {
@@ -33,7 +33,7 @@ function achievement_sound_func(achievement_name_lower) {
   if(!sessionmodeisonlinegame()) {
     return;
   }
-  for(i = 0; i < (self getentitynumber() + 1); i++) {
+  for (i = 0; i < (self getentitynumber() + 1); i++) {
     util::wait_network_frame();
   }
   self thread zm_utility::do_player_general_vox("general", "achievement");
@@ -53,8 +53,8 @@ function function_2eb61ef5() {
   level endon("end_game");
   self endon("i_am_down");
   self endon("disconnect");
-  while(isDefined(self)) {
-    if(isDefined(level.round_number) && level.round_number == 5) {
+  while (isdefined(self)) {
+    if(isdefined(level.round_number) && level.round_number == 5) {
       self iprintln("");
       return;
     }
@@ -65,10 +65,10 @@ function function_2eb61ef5() {
 function function_94fa04f0() {
   level endon("end_game");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("nuke_triggered");
     wait(2);
-    if(isDefined(self.zombie_nuked) && self.zombie_nuked.size == 1) {
+    if(isdefined(self.zombie_nuked) && self.zombie_nuked.size == 1) {
       self iprintln("");
       return;
     }
@@ -79,7 +79,7 @@ function function_a634891() {
   level endon("end_game");
   self endon("disconnect");
   self.var_88c6ab10 = 0;
-  while(self.var_88c6ab10 < 10) {
+  while (self.var_88c6ab10 < 10) {
     self thread function_47ae7759();
     self function_a2ee1b6c();
   }
@@ -90,7 +90,7 @@ function function_a2ee1b6c() {
   level endon("end_game");
   level endon("end_of_round");
   self endon("disconnect");
-  while(self.var_88c6ab10 < 10) {
+  while (self.var_88c6ab10 < 10) {
     self waittill("hash_7a5eece4");
     self.var_88c6ab10++;
   }
@@ -107,7 +107,7 @@ function function_47ae7759() {
 function function_2a1b645a() {
   level endon("end_game");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     if(self.score_total >= 75000) {
       self iprintln("");
       return;
@@ -119,8 +119,8 @@ function function_2a1b645a() {
 function function_b44fefa1() {
   level endon("end_game");
   self endon("disconnect");
-  while(true) {
-    if(isDefined(self.perk_hud) && self.perk_hud.size == 4) {
+  while (true) {
+    if(isdefined(self.perk_hud) && self.perk_hud.size == 4) {
       self iprintln("");
       return;
     }
@@ -131,7 +131,7 @@ function function_b44fefa1() {
 function function_f67810a2() {
   level endon("end_game");
   self endon("disconnect");
-  for(self.var_dcd9b1e7 = 0; self.var_dcd9b1e7 >= 200; self.var_dcd9b1e7++) {
+  for (self.var_dcd9b1e7 = 0; self.var_dcd9b1e7 >= 200; self.var_dcd9b1e7++) {
     self waittill("hash_1d8b6c31");
   }
   self iprintln("");
@@ -155,7 +155,7 @@ function function_32909149() {
   do {
     self function_f8c272e8();
   }
-  while(self.var_59179d2c.size < 3);
+  while (self.var_59179d2c.size < 3);
   self iprintln("");
   self zm_utility::giveachievement_wrapper("DLC2_ZOMBIE_ALL_TRAPS", 0);
   self notify("hash_ea373971");
@@ -170,24 +170,24 @@ function function_f8c272e8() {
   do {
     self waittill("hash_f0c3517c");
   }
-  while(isDefined(self) && self.var_59179d2c.size < 3);
+  while (isdefined(self) && self.var_59179d2c.size < 3);
 }
 
 function function_1abfde35(e_attacker) {
-  if(!isDefined(e_attacker)) {
+  if(!isdefined(e_attacker)) {
     return;
   }
-  if(isDefined(self.var_9a9a0f55) && isDefined(self.var_aa99de67) && isplayer(self.var_aa99de67)) {
+  if(isdefined(self.var_9a9a0f55) && isdefined(self.var_aa99de67) && isplayer(self.var_aa99de67)) {
     e_player = self.var_aa99de67;
-    if(!(isDefined(isinarray(e_player.var_59179d2c, e_attacker)) && isinarray(e_player.var_59179d2c, e_attacker))) {
+    if(!(isdefined(isinarray(e_player.var_59179d2c, e_attacker)) && isinarray(e_player.var_59179d2c, e_attacker))) {
       array::add(e_player.var_59179d2c, e_attacker);
       e_player notify("hash_f0c3517c");
       return;
     }
   }
-  if(isDefined(e_attacker.activated_by_player) && e_attacker.targetname === "zombie_trap") {
+  if(isdefined(e_attacker.activated_by_player) && e_attacker.targetname === "zombie_trap") {
     e_player = e_attacker.activated_by_player;
-    if(!(isDefined(isinarray(e_player.var_59179d2c, e_attacker)) && isinarray(e_player.var_59179d2c, e_attacker))) {
+    if(!(isdefined(isinarray(e_player.var_59179d2c, e_attacker)) && isinarray(e_player.var_59179d2c, e_attacker))) {
       array::add(e_player.var_59179d2c, e_attacker);
       e_player notify("hash_f0c3517c");
       return;
@@ -200,12 +200,12 @@ function function_1abfde35(e_attacker) {
     e_attacker notify("hash_7a5eece4");
     return;
   }
-  if(isDefined(self.var_dcd9b1e7)) {
+  if(isdefined(self.var_dcd9b1e7)) {
     e_attacker notify("hash_1d8b6c31");
     return;
   }
-  if(isDefined(e_attacker.var_498c9df8) && self.archetype === "zombie" && isDefined(self.damageweapon) && isDefined(self.damagelocation) && isDefined(self.damagemod)) {
-    if(isDefined(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) && zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) {
+  if(isdefined(e_attacker.var_498c9df8) && self.archetype === "zombie" && isdefined(self.damageweapon) && isdefined(self.damagelocation) && isdefined(self.damagemod)) {
+    if(isdefined(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) && zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) {
       e_attacker notify("hash_cae861a8");
     }
   }

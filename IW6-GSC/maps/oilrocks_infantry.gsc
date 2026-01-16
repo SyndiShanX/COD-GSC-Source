@@ -62,7 +62,7 @@ hide_start_createfx() {}
 
 objective() {
   var_0 = maps\_utility::obj("find_rorke");
-  objective_add(var_0, "active", &"OILROCKS_FIND_RORKE");
+  objective_add(var_0, "active", & "OILROCKS_FIND_RORKE");
   objective_current(var_0);
 }
 
@@ -70,8 +70,7 @@ cleanup_at_landing_zone() {
   maps\_utility::array_delete(getcorpsearray());
 
   foreach(var_1 in getEntArray("script_vehicle_corpse", "classname")) {
-    if(distance(var_1.origin, level.player getEye()) > 10000) {
+    if(distance(var_1.origin, level.player getEye()) > 10000)
       var_1 delete();
-    }
   }
 }

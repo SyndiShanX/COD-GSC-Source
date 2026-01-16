@@ -120,16 +120,15 @@ scriptedFX() {
 chair_light() {
   lantern = getEnt("morgue_lamp", "script_noteworthy");
   lght = getEnt("lamp_light", "targetname");
-  if(!isDefined(lght)) {
+  if(!isDefined(lght))
     return;
-  }
   lght linkto(lantern);
   lght setlightintensity(2.1);
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
   mdl linkto(lantern);
-  playFXOnTag(level._effect["chair_light_fx"], mdl, "tag_origin");
+  playfxontag(level._effect["chair_light_fx"], mdl, "tag_origin");
   while(1) {
     wait(randomfloatrange(10, 15));
     lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));

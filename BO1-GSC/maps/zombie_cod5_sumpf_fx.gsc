@@ -103,7 +103,7 @@ precacheFX() {
 }
 
 post_lights() {
-  lanterns = getEntArray("post_lamp", "targetname");
+  lanterns = getentarray("post_lamp", "targetname");
   array_thread(lanterns, ::swing_lanterns);
 }
 

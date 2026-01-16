@@ -69,20 +69,18 @@ setup_interior() {
   level.allies[1].script_startingposition = 0;
   level.allies[2].script_startingposition = 3;
 
-  foreach(var_1 in level.allies) {
-    level.jeep thread maps\_vehicle_aianim::guy_enter(var_1);
-  }
+  foreach(var_1 in level.allies)
+  level.jeep thread maps\_vehicle_aianim::guy_enter(var_1);
 
-  if(level.woof) {
+  if(level.woof)
     maps\clockwork_code::link_dog_to_jeep(level.jeep);
-  }
 
   thread maps\clockwork_intro::exit_jeep_anims();
   common_scripts\utility::flag_set("FLAG_player_getout_jeep");
   common_scripts\utility::flag_set("interior_start_point");
   common_scripts\utility::flag_set("start_garage_ambience");
   common_scripts\utility::flag_set("jeep_intro_ride_done");
-  thread maps\clockwork_intro::blackout_timer(41, &"CLOCKWORK_POWERDOWN", 0, 1);
+  thread maps\clockwork_intro::blackout_timer(41, & "CLOCKWORK_POWERDOWN", 0, 1);
   maps\clockwork_audio::checkpoint_interior();
 
   if(level.woof) {
@@ -108,26 +106,22 @@ init_tunnel() {
   var_1 = undefined;
 
   foreach(var_3 in var_0) {
-    if(level.player istouching(var_3)) {
+    if(level.player istouching(var_3))
       var_1 = 1;
-    }
   }
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     thread mission_failed_garage();
-  }
 
   var_5 = undefined;
 
   foreach(var_3 in var_0) {
-    if(level.allies[0] istouching(var_3) || level.allies[1] istouching(var_3) || level.allies[2] istouching(var_3)) {
+    if(level.allies[0] istouching(var_3) || level.allies[1] istouching(var_3) || level.allies[2] istouching(var_3))
       var_5 = 1;
-    }
   }
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     thread mission_failed_garage();
-  }
 
   common_scripts\utility::flag_set("garage_fail_done");
 }
@@ -141,25 +135,22 @@ flag_set_turn_off_garage_failsafe() {
 cleanup_garage_guys() {
   if(isDefined(level.interior_guards)) {
     foreach(var_1 in level.interior_guards) {
-      if(isDefined(var_1) && isalive(var_1)) {
+      if(isDefined(var_1) && isalive(var_1))
         var_1 delete();
-      }
     }
   }
 
   if(isDefined(level.exterior_guards)) {
     foreach(var_1 in level.exterior_guards) {
-      if(isDefined(var_1) && isalive(var_1)) {
+      if(isDefined(var_1) && isalive(var_1))
         var_1 delete();
-      }
     }
   }
 
   var_1 = level.nvg_moment_guardsb[2];
 
-  if(isDefined(var_1) && isalive(var_1)) {
+  if(isDefined(var_1) && isalive(var_1))
     var_1 delete();
-  }
 }
 
 turn_on_vault_damage() {
@@ -178,12 +169,12 @@ disconnect_paths_at_end_anim(var_0) {
 }
 
 mission_failed_garage() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_KEEP_UP");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_KEEP_UP");
   maps\_utility::missionfailedwrapper();
 }
 
 mission_failed_garage_provoke() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -191,17 +182,15 @@ begin_interior() {
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
 
-  if(level.woof) {
+  if(level.woof)
     thread handle_dog_interior();
-  }
 
   var_0 = common_scripts\utility::array_combine(getEntArray("chaos_decals", "targetname"), getEntArray("chaos_decals1", "targetname"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals2", "targetname"));
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
-  foreach(var_2 in var_0) {
-    var_2 hide();
-  }
+  foreach(var_2 in var_0)
+  var_2 hide();
 
   thread handle_blackout();
   thread control_nvg_lightmodels();
@@ -403,9 +392,8 @@ handle_nvg_guards() {
   wait 0.75;
   maps\clockwork_code::safe_activate_trigger_with_targetname("nvg_go_go_go");
 
-  foreach(var_27 in level.allies) {
-    var_27 maps\_utility::enable_ai_color();
-  }
+  foreach(var_27 in level.allies)
+  var_27 maps\_utility::enable_ai_color();
 
   var_29 = common_scripts\utility::add_to_array(var_17, var_18);
   var_30 = common_scripts\utility::add_to_array(var_29, var_19);
@@ -426,9 +414,8 @@ handle_nvg_guards() {
   maps\clockwork_code::attack_targets(level.allies, var_31, 0.75, 1, 1);
   maps\clockwork_code::attack_targets(level.allies, var_25, 0.75, 1, 1);
 
-  foreach(var_27 in level.allies) {
-    var_27.ignoreall = 0;
-  }
+  foreach(var_27 in level.allies)
+  var_27.ignoreall = 0;
 
   common_scripts\utility::flag_wait("security_complete");
 
@@ -459,9 +446,8 @@ handle_lights_out_approach() {
   level.allies[1].animname = "keegan";
   level.allies[2].animname = "cipher";
 
-  foreach(var_2 in level.allies) {
-    var_2 maps\_utility::disable_ai_color();
-  }
+  foreach(var_2 in level.allies)
+  var_2 maps\_utility::disable_ai_color();
 
   level.allies[0] thread reach_and_play_anim("merrick_start_lights_out", var_0, 0.5);
   level.allies[1] thread reach_and_play_anim("keegan_start_lights_out", var_0, 1);
@@ -473,9 +459,8 @@ reach_and_play_anim(var_0, var_1, var_2) {
   level endon("garage_enemies_provoked");
   var_3 = common_scripts\utility::getstruct(var_0, "targetname");
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     maps\_utility::follow_path(var_3);
-  }
 
   var_1 maps\_anim::anim_reach_solo(self, "lights_out_approach");
   var_1 thread maps\_anim::anim_single_solo(self, "lights_out_approach");
@@ -519,21 +504,18 @@ nvg_animted_scene(var_0) {
   thread delete_wand_at_lights_out(var_8);
   common_scripts\utility::flag_wait("explosion_start");
 
-  if(isDefined(var_8)) {
+  if(isDefined(var_8))
     var_8 delete();
-  }
 
-  if(isDefined(var_6)) {
+  if(isDefined(var_6))
     var_6 delete();
-  }
 }
 
 delete_wand_at_lights_out(var_0) {
   common_scripts\utility::flag_wait("lights_out");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 }
 
 bin_failsafe(var_0, var_1) {
@@ -549,9 +531,8 @@ bin_failsafe(var_0, var_1) {
 }
 
 cool_walk_at_end_of_anim(var_0) {
-  foreach(var_2 in var_0) {
-    var_2 thread waittillend_of_anim_set_walk();
-  }
+  foreach(var_2 in var_0)
+  var_2 thread waittillend_of_anim_set_walk();
 }
 
 waittillend_of_anim_set_walk() {
@@ -586,13 +567,11 @@ nvg_blackout_anims(var_0) {
   self endon("death");
 
   if(isDefined(self) && isalive(self)) {
-    if(!isDefined(self.script_noteworthy)) {
+    if(!isDefined(self.script_noteworthy))
       common_scripts\utility::flag_wait(var_0);
-    }
 
-    if(isDefined(self.script_noteworthy) && !(self.script_noteworthy == "blackout_blind_fire_pistol")) {
+    if(isDefined(self.script_noteworthy) && !(self.script_noteworthy == "blackout_blind_fire_pistol"))
       common_scripts\utility::flag_wait(var_0);
-    }
   } else
     return;
 
@@ -602,11 +581,10 @@ nvg_blackout_anims(var_0) {
 
   if(isDefined(self) && isalive(self)) {
     if(isDefined(self.animation)) {
-      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "blackout_blind_fire_pistol") {
+      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "blackout_blind_fire_pistol")
         thread maps\_anim::anim_loop_solo(self, self.animation);
-      } else {
+      else
         thread maps\_anim::anim_generic(self, self.animation);
-      }
     }
 
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "blackout_blind_fire_pistol") {
@@ -614,9 +592,8 @@ nvg_blackout_anims(var_0) {
       thread shoot_loop();
     }
 
-    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "security_room_guys") {
+    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "security_room_guys")
       thread shoot_loop();
-    }
   }
 }
 
@@ -653,17 +630,15 @@ blackout_enemy1and2_react_anims(var_0, var_1) {
 delete_during_chaos(var_0) {
   common_scripts\utility::flag_wait("defend_finished");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_0 delete();
-  }
 }
 
 nvg_run_and_trip_guy(var_0) {
   wait 3;
 
-  if(isDefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self))
     var_0 thread maps\_anim::anim_single_solo(self, "clockwork_nvg_hallway_run_and_trip_enemy1");
-  }
 }
 
 nvg_wait_for_flags_or_timeout(var_0, var_1, var_2) {
@@ -694,9 +669,8 @@ blackout_enemy3() {
   var_4 linkto(var_3);
   common_scripts\utility::flag_wait_or_timeout("bo_buddies3_dead", 3);
 
-  if(isDefined(level.bo_enemy3) && isalive(level.bo_enemy3)) {
+  if(isDefined(level.bo_enemy3) && isalive(level.bo_enemy3))
     maps\clockwork_code::attack_targets(level.allies, maps\_utility::make_array(level.bo_enemy3), 0.3, 0.4, 1);
-  }
 }
 
 blackout_enemy45() {
@@ -714,13 +688,11 @@ blackout_enemy45() {
   var_0 thread maps\_anim::anim_single_solo(level.bo_enemy5, "clockwork_nvg_hallway_buddies_enemy5");
   common_scripts\utility::flag_wait_or_timeout("bo_buddies45_dead", 6);
 
-  if(isDefined(level.bo_enemy4) && isalive(level.bo_enemy4)) {
+  if(isDefined(level.bo_enemy4) && isalive(level.bo_enemy4))
     maps\clockwork_code::attack_targets(level.allies, maps\_utility::make_array(level.bo_enemy4), 0.3, 0.4, 1);
-  }
 
-  if(isDefined(level.bo_enemy5) && isalive(level.bo_enemy5)) {
+  if(isDefined(level.bo_enemy5) && isalive(level.bo_enemy5))
     maps\clockwork_code::attack_targets(level.allies, maps\_utility::make_array(level.bo_enemy5), 0.3, 0.4, 1);
-  }
 }
 
 shoot_loop() {
@@ -805,9 +777,8 @@ hacking_eyes_and_ears() {
   var_2 = getaiarray("axis");
   common_scripts\utility::array_thread(var_2, maps\clockwork_code::die_quietly);
 
-  foreach(var_4 in level.allies) {
-    var_4 maps\_utility::disable_cqbwalk();
-  }
+  foreach(var_4 in level.allies)
+  var_4 maps\_utility::disable_cqbwalk();
 
   thread maps\_utility::autosave_by_name("eyes_and_ears");
   var_6 = maps\_utility::spawn_anim_model("bug_device_joint", var_0.origin);
@@ -843,21 +814,17 @@ hacking_eyes_and_ears() {
   level.allies[0] maps\_utility::enable_ai_color();
   common_scripts\utility::flag_wait("explosion_start");
 
-  if(isDefined(var_7)) {
+  if(isDefined(var_7))
     var_7 delete();
-  }
 
-  if(isDefined(var_9)) {
+  if(isDefined(var_9))
     var_9 delete();
-  }
 
-  if(isDefined(var_6)) {
+  if(isDefined(var_6))
     var_6 delete();
-  }
 
-  if(isDefined(var_8)) {
+  if(isDefined(var_8))
     var_8 delete();
-  }
 }
 
 pip_vo() {
@@ -1015,9 +982,8 @@ failcase_blackout_early() {
   level endon("ready_nvgs");
   common_scripts\utility::flag_wait("nvg_enemies_provoked");
 
-  foreach(var_1 in level.allies) {
-    var_1.old_disablearrivals = 0;
-  }
+  foreach(var_1 in level.allies)
+  var_1.old_disablearrivals = 0;
 
   level notify("blackout_early");
   level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_damncutitnow");
@@ -1094,9 +1060,8 @@ failcase_garage(var_0) {
       if(var_2.type == "dog") {
         continue;
       }
-      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "tunnel_wave_guy" && isDefined(var_2.scene)) {
+      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "tunnel_wave_guy" && isDefined(var_2.scene))
         var_2.scene notify("stop_loop");
-      }
 
       var_2 notify("stop_loop");
       var_2 maps\_utility::anim_stopanimscripted();
@@ -1120,29 +1085,25 @@ player_inside_nvg_area() {
   thread failcase_blackout_early();
 
   foreach(var_1 in level.nvg_moment_guardsa) {
-    if(isDefined(var_1) && isalive(var_1)) {
+    if(isDefined(var_1) && isalive(var_1))
       var_1 thread nvg_alert_handle();
-    }
   }
 
   foreach(var_1 in level.nvg_moment_guardsb) {
-    if(isDefined(var_1) && isalive(var_1)) {
+    if(isDefined(var_1) && isalive(var_1))
       var_1 thread nvg_alert_handle();
-    }
   }
 }
 
 alert_inside_guys_early() {
   foreach(var_1 in level.nvg_moment_guardsa) {
-    if(isDefined(var_1) && isalive(var_1)) {
+    if(isDefined(var_1) && isalive(var_1))
       var_1 thread nvg_alert_handle();
-    }
   }
 
   foreach(var_1 in level.nvg_moment_guardsb) {
-    if(isDefined(var_1) && isalive(var_1)) {
+    if(isDefined(var_1) && isalive(var_1))
       var_1 thread nvg_alert_handle();
-    }
   }
 }
 
@@ -1159,9 +1120,8 @@ control_nvg_lightmodels() {
   common_scripts\utility::flag_wait("lights_on");
   control_nvg_staticscreens_on();
 
-  foreach(var_2 in var_0) {
-    var_2 setModel(var_2.on_version);
-  }
+  foreach(var_2 in var_0)
+  var_2 setModel(var_2.on_version);
 }
 
 control_nvg_staticscreens_off() {
@@ -1170,13 +1130,11 @@ control_nvg_staticscreens_off() {
   var_2 = getent("nvg_mapscreen", "targetname");
   var_3 = getent("nvg_mapscreen_light_accents", "targetname");
 
-  foreach(var_5 in var_0) {
-    var_5 hide();
-  }
+  foreach(var_5 in var_0)
+  var_5 hide();
 
-  foreach(var_5 in var_1) {
-    var_5 hide();
-  }
+  foreach(var_5 in var_1)
+  var_5 hide();
 
   var_2 hide();
   var_3 hide();
@@ -1188,13 +1146,11 @@ control_nvg_staticscreens_on() {
   var_2 = getent("nvg_mapscreen", "targetname");
   var_3 = getent("nvg_mapscreen_light_accents", "targetname");
 
-  foreach(var_5 in var_0) {
-    var_5 show();
-  }
+  foreach(var_5 in var_0)
+  var_5 show();
 
-  foreach(var_5 in var_1) {
-    var_5 show();
-  }
+  foreach(var_5 in var_1)
+  var_5 show();
 
   var_2 show();
   var_3 show();
@@ -1202,7 +1158,7 @@ control_nvg_staticscreens_on() {
 
 player_failcase_leave_garage() {
   common_scripts\utility::flag_wait("FLAG_player_leave_garage");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

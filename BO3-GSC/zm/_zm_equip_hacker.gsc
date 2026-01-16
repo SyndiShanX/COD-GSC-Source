@@ -17,15 +17,15 @@
 #namespace zm_equip_hacker;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_hacker", &__init__, &__main__, undefined);
+  system::register("zm_equip_hacker", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  zm_equipment::register("equip_hacker", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
+  zm_equipment::register("equip_hacker", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
-  callback::on_connect(&hacker_on_player_connect);
-  callback::on_spawned(&function_fa12cef4);
+  callback::on_connect( & hacker_on_player_connect);
+  callback::on_spawned( & function_fa12cef4);
   level thread hack_trigger_think();
   level thread hacker_trigger_pool_think();
   level thread hacker_round_reward();
@@ -46,13 +46,13 @@ function function_fa12cef4() {
 }
 
 function hacker_round_reward() {
-  while(true) {
+  while (true) {
     level waittill("end_of_round");
-    if(!isDefined(level._from_nml)) {
+    if(!isdefined(level._from_nml)) {
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
-        if(isDefined(players[i] zm_equipment::get_player_equipment()) && players[i] zm_equipment::get_player_equipment() == level.var_bbd4901d) {
-          if(isDefined(players[i].equipment_got_in_round[level.var_bbd4901d])) {
+      for (i = 0; i < players.size; i++) {
+        if(isdefined(players[i] zm_equipment::get_player_equipment()) && players[i] zm_equipment::get_player_equipment() == level.var_bbd4901d) {
+          if(isdefined(players[i].equipment_got_in_round[level.var_bbd4901d])) {
             got_in_round = players[i].equipment_got_in_round[level.var_bbd4901d];
             rounds_kept = level.round_number - got_in_round;
             rounds_kept = rounds_kept - 1;
@@ -71,13 +71,13 @@ function hacker_round_reward() {
 }
 
 function hacker_debug() {
-  while(true) {
-    for(i = 0; i < level._hackable_objects.size; i++) {
+  while (true) {
+    for (i = 0; i < level._hackable_objects.size; i++) {
       hackable = level._hackable_objects[i];
-      if(isDefined(hackable.pooled) && hackable.pooled) {
-        if(isDefined(hackable._trigger)) {
+      if(isdefined(hackable.pooled) && hackable.pooled) {
+        if(isdefined(hackable._trigger)) {
           col = vectorscale((0, 1, 0), 255);
-          if(isDefined(hackable.custom_debug_color)) {
+          if(isdefined(hackable.custom_debug_color)) {
             col = hackable.custom_debug_color;
           }
           print3d(hackable.origin, "", col, 1, 1);
@@ -93,12 +93,12 @@ function hacker_debug() {
 }
 
 function hacker_trigger_pool_think() {
-  if(!isDefined(level._zombie_hacker_trigger_pool_size)) {
+  if(!isdefined(level._zombie_hacker_trigger_pool_size)) {
     level._zombie_hacker_trigger_pool_size = 8;
   }
   pool_active = 0;
   level._hacker_pool = [];
-  while(true) {
+  while (true) {
     if(pool_active) {
       if(!any_hackers_active()) {
         destroy_pooled_items();
@@ -115,7 +115,7 @@ function hacker_trigger_pool_think() {
 
 function destroy_pooled_items() {
   pool_active = 0;
-  for(i = 0; i < level._hacker_pool.size; i++) {
+  for (i = 0; i < level._hacker_pool.size; i++) {
     level._hacker_pool[i]._trigger delete();
     level._hacker_pool[i]._trigger = undefined;
   }
@@ -124,12 +124,12 @@ function destroy_pooled_items() {
 
 function sweep_pooled_items() {
   new_hacker_pool = [];
-  for(i = 0; i < level._hacker_pool.size; i++) {
+  for (i = 0; i < level._hacker_pool.size; i++) {
     if(level._hacker_pool[i] should_pooled_object_exist()) {
       new_hacker_pool[new_hacker_pool.size] = level._hacker_pool[i];
       continue;
     }
-    if(isDefined(level._hacker_pool[i]._trigger)) {
+    if(isdefined(level._hacker_pool[i]._trigger)) {
       level._hacker_pool[i]._trigger delete();
     }
     level._hacker_pool[i]._trigger = undefined;
@@ -139,9 +139,9 @@ function sweep_pooled_items() {
 
 function should_pooled_object_exist() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] zm_equipment::hacker_active()) {
-      if(isDefined(self.entity)) {
+      if(isdefined(self.entity)) {
         if(self.entity != players[i]) {
           if(distance2dsquared(players[i].origin, self.entity.origin) <= (self.radius * self.radius)) {
             return true;
@@ -159,9 +159,9 @@ function should_pooled_object_exist() {
 
 function add_eligable_pooled_items() {
   candidates = [];
-  for(i = 0; i < level._hackable_objects.size; i++) {
+  for (i = 0; i < level._hackable_objects.size; i++) {
     hackable = level._hackable_objects[i];
-    if(isDefined(hackable.pooled) && hackable.pooled && !isDefined(hackable._trigger)) {
+    if(isdefined(hackable.pooled) && hackable.pooled && !isdefined(hackable._trigger)) {
       if(!isinarray(level._hacker_pool, hackable)) {
         if(hackable should_pooled_object_exist()) {
           candidates[candidates.size] = hackable;
@@ -169,14 +169,14 @@ function add_eligable_pooled_items() {
       }
     }
   }
-  for(i = 0; i < candidates.size; i++) {
+  for (i = 0; i < candidates.size; i++) {
     candidate = candidates[i];
     height = 72;
     radius = 32;
-    if(isDefined(candidate.radius)) {
+    if(isdefined(candidate.radius)) {
       radius = candidate.radius;
     }
-    if(isDefined(candidate.height)) {
+    if(isdefined(candidate.height)) {
       height = candidate.height;
     }
     trigger = spawn("trigger_radius_use", candidate.origin, 0, radius, height);
@@ -192,23 +192,23 @@ function add_eligable_pooled_items() {
 }
 
 function get_hackable_trigger() {
-  if(isDefined(self.door)) {
+  if(isdefined(self.door)) {
     return self.door;
   }
-  if(isDefined(self.perk)) {
+  if(isdefined(self.perk)) {
     return self.perk;
   }
-  if(isDefined(self.window)) {
+  if(isdefined(self.window)) {
     return self.window.unitrigger_stub.trigger;
   }
-  if(isDefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_") {
+  if(isdefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_") {
     return self;
   }
 }
 
 function any_hackers_active() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] zm_equipment::hacker_active()) {
       return true;
     }
@@ -218,20 +218,20 @@ function any_hackers_active() {
 
 function register_hackable(name, callback_func, qualifier_func) {
   structs = struct::get_array(name, "script_noteworthy");
-  if(!isDefined(structs)) {
+  if(!isdefined(structs)) {
     println(("" + name) + "");
     return;
   }
-  for(i = 0; i < structs.size; i++) {
+  for (i = 0; i < structs.size; i++) {
     if(!isinarray(level._hackable_objects, structs[i])) {
       structs[i]._hack_callback_func = callback_func;
       structs[i]._hack_qualifier_func = qualifier_func;
       structs[i].pooled = level._hacker_pooled;
-      if(isDefined(structs[i].targetname)) {
+      if(isdefined(structs[i].targetname)) {
         structs[i].hacker_target = getent(structs[i].targetname, "targetname");
       }
       level._hackable_objects[level._hackable_objects.size] = structs[i];
-      if(isDefined(level._hacker_pooled)) {
+      if(isdefined(level._hacker_pooled)) {
         level._pooled_hackable_objects[level._pooled_hackable_objects.size] = structs[i];
       }
       structs[i] thread hackable_object_thread();
@@ -245,11 +245,11 @@ function register_hackable_struct(struct, callback_func, qualifier_func) {
     struct._hack_callback_func = callback_func;
     struct._hack_qualifier_func = qualifier_func;
     struct.pooled = level._hacker_pooled;
-    if(isDefined(struct.targetname)) {
+    if(isdefined(struct.targetname)) {
       struct.hacker_target = getent(struct.targetname, "targetname");
     }
     level._hackable_objects[level._hackable_objects.size] = struct;
-    if(isDefined(level._hacker_pooled)) {
+    if(isdefined(level._hacker_pooled)) {
       level._pooled_hackable_objects[level._pooled_hackable_objects.size] = struct;
     }
     struct thread hackable_object_thread();
@@ -271,16 +271,16 @@ function register_pooled_hackable(name, callback_func, qualifier_func) {
 function deregister_hackable_struct(struct) {
   if(isinarray(level._hackable_objects, struct)) {
     new_list = [];
-    for(i = 0; i < level._hackable_objects.size; i++) {
+    for (i = 0; i < level._hackable_objects.size; i++) {
       if(level._hackable_objects[i] != struct) {
         new_list[new_list.size] = level._hackable_objects[i];
         continue;
       }
       level._hackable_objects[i] notify("hackable_deregistered");
-      if(isDefined(level._hackable_objects[i]._trigger)) {
+      if(isdefined(level._hackable_objects[i]._trigger)) {
         level._hackable_objects[i]._trigger delete();
       }
-      if(isDefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
+      if(isdefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
         arrayremovevalue(level._hacker_pool, level._hackable_objects[i]);
         arrayremovevalue(level._pooled_hackable_objects, level._hackable_objects[i]);
       }
@@ -291,16 +291,16 @@ function deregister_hackable_struct(struct) {
 
 function deregister_hackable(noteworthy) {
   new_list = [];
-  for(i = 0; i < level._hackable_objects.size; i++) {
-    if(!isDefined(level._hackable_objects[i].script_noteworthy) || level._hackable_objects[i].script_noteworthy != noteworthy) {
+  for (i = 0; i < level._hackable_objects.size; i++) {
+    if(!isdefined(level._hackable_objects[i].script_noteworthy) || level._hackable_objects[i].script_noteworthy != noteworthy) {
       new_list[new_list.size] = level._hackable_objects[i];
     } else {
       level._hackable_objects[i] notify("hackable_deregistered");
-      if(isDefined(level._hackable_objects[i]._trigger)) {
+      if(isdefined(level._hackable_objects[i]._trigger)) {
         level._hackable_objects[i]._trigger delete();
       }
     }
-    if(isDefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
+    if(isdefined(level._hackable_objects[i].pooled) && level._hackable_objects[i].pooled) {
       arrayremovevalue(level._hacker_pool, level._hackable_objects[i]);
     }
   }
@@ -308,15 +308,15 @@ function deregister_hackable(noteworthy) {
 }
 
 function hack_trigger_think() {
-  while(true) {
+  while (true) {
     players = getplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       player = players[i];
-      for(j = 0; j < level._hackable_objects.size; j++) {
+      for (j = 0; j < level._hackable_objects.size; j++) {
         hackable = level._hackable_objects[j];
-        if(isDefined(hackable._trigger)) {
+        if(isdefined(hackable._trigger)) {
           qualifier_passed = 1;
-          if(isDefined(hackable._hack_qualifier_func)) {
+          if(isdefined(hackable._hack_qualifier_func)) {
             qualifier_passed = hackable[[hackable._hack_qualifier_func]](player);
           }
           if(player zm_equipment::hacker_active() && qualifier_passed && !hackable._trigger.beinghacked) {
@@ -333,7 +333,7 @@ function hack_trigger_think() {
 
 function is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglesToForward(orientation);
+  forwardvec = anglestoforward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -341,7 +341,7 @@ function is_facing(facee) {
   unittofaceevec2d = vectornormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   dot_limit = 0.8;
-  if(isDefined(facee.dot_limit)) {
+  if(isdefined(facee.dot_limit)) {
     dot_limit = facee.dot_limit;
   }
   return dotproduct > dot_limit;
@@ -357,10 +357,10 @@ function can_hack(hackable) {
   if(!self zm_equipment::hacker_active()) {
     return false;
   }
-  if(!isDefined(hackable._trigger)) {
+  if(!isdefined(hackable._trigger)) {
     return false;
   }
-  if(isDefined(hackable.player)) {
+  if(isdefined(hackable.player)) {
     if(hackable.player != self) {
       return false;
     }
@@ -371,7 +371,7 @@ function can_hack(hackable) {
   if(self fragbuttonpressed()) {
     return false;
   }
-  if(isDefined(hackable._hack_qualifier_func)) {
+  if(isdefined(hackable._hack_qualifier_func)) {
     if(!hackable[[hackable._hack_qualifier_func]](self)) {
       return false;
     }
@@ -380,26 +380,26 @@ function can_hack(hackable) {
     return false;
   }
   radsquared = 1024;
-  if(isDefined(hackable.radius)) {
+  if(isdefined(hackable.radius)) {
     radsquared = hackable.radius * hackable.radius;
   }
   origin = hackable.origin;
-  if(isDefined(hackable.entity)) {
+  if(isdefined(hackable.entity)) {
     origin = hackable.entity.origin;
   }
   if(distance2dsquared(self.origin, origin) > radsquared) {
     return false;
   }
-  if(!isDefined(hackable.no_touch_check) && !self istouching(hackable._trigger)) {
+  if(!isdefined(hackable.no_touch_check) && !self istouching(hackable._trigger)) {
     return false;
   }
   if(!self is_facing(hackable)) {
     return false;
   }
-  if(!isDefined(hackable.no_sight_check) && !sighttracepassed(self.origin + vectorscale((0, 0, 1), 50), origin, 0, undefined)) {
+  if(!isdefined(hackable.no_sight_check) && !sighttracepassed(self.origin + vectorscale((0, 0, 1), 50), origin, 0, undefined)) {
     return false;
   }
-  if(!isDefined(hackable.no_bullet_trace) && !bullettracepassed(self.origin + vectorscale((0, 0, 1), 50), origin, 0, undefined)) {
+  if(!isdefined(hackable.no_bullet_trace) && !bullettracepassed(self.origin + vectorscale((0, 0, 1), 50), origin, 0, undefined)) {
     return false;
   }
   return true;
@@ -410,11 +410,11 @@ function is_hacking(hackable) {
 }
 
 function set_hack_hint_string() {
-  if(isDefined(self._trigger)) {
-    if(isDefined(self.custom_string)) {
+  if(isdefined(self._trigger)) {
+    if(isdefined(self.custom_string)) {
       self._trigger sethintstring(self.custom_string);
     } else {
-      if(!isDefined(self.script_int) || self.script_int <= 0) {
+      if(!isdefined(self.script_int) || self.script_int <= 0) {
         self._trigger sethintstring(&"ZOMBIE_HACK_NO_COST");
       } else {
         self._trigger sethintstring(&"ZOMBIE_HACK", self.script_int);
@@ -426,10 +426,10 @@ function set_hack_hint_string() {
 function tidy_on_deregister(hackable) {
   self endon("clean_up_tidy_up");
   hackable waittill("hackable_deregistered");
-  if(isDefined(self.hackerprogressbar)) {
+  if(isdefined(self.hackerprogressbar)) {
     self.hackerprogressbar hud::destroyelem();
   }
-  if(isDefined(self.hackertexthud)) {
+  if(isdefined(self.hackertexthud)) {
     self.hackertexthud destroy();
   }
 }
@@ -438,10 +438,10 @@ function hacker_do_hack(hackable) {
   timer = 0;
   hacked = 0;
   hackable._trigger.beinghacked = 1;
-  if(!isDefined(self.hackerprogressbar)) {
+  if(!isdefined(self.hackerprogressbar)) {
     self.hackerprogressbar = self hud::createprimaryprogressbar();
   }
-  if(!isDefined(self.hackertexthud)) {
+  if(!isdefined(self.hackertexthud)) {
     self.hackertexthud = newclienthudelem(self);
   }
   hack_duration = hackable.script_float;
@@ -465,8 +465,8 @@ function hacker_do_hack(hackable) {
   self.hackertexthud.alpha = 1;
   self.hackertexthud.color = (1, 1, 1);
   self.hackertexthud settext(&"ZOMBIE_HACKING");
-  self playLoopSound("zmb_progress_bar", 0.5);
-  while(self is_hacking(hackable)) {
+  self playloopsound("zmb_progress_bar", 0.5);
+  while (self is_hacking(hackable)) {
     wait(0.05);
     timer = timer + 0.05;
     if(self laststand::player_is_in_laststand()) {
@@ -479,18 +479,18 @@ function hacker_do_hack(hackable) {
   }
   self stoploopsound(0.5);
   if(hacked) {
-    self playSound("vox_mcomp_hack_success");
+    self playsound("vox_mcomp_hack_success");
   } else {
-    self playSound("vox_mcomp_hack_fail");
+    self playsound("vox_mcomp_hack_fail");
   }
-  if(isDefined(self.hackerprogressbar)) {
+  if(isdefined(self.hackerprogressbar)) {
     self.hackerprogressbar hud::destroyelem();
   }
-  if(isDefined(self.hackertexthud)) {
+  if(isdefined(self.hackertexthud)) {
     self.hackertexthud destroy();
   }
   hackable set_hack_hint_string();
-  if(isDefined(hackable._trigger)) {
+  if(isdefined(hackable._trigger)) {
     hackable._trigger.beinghacked = 0;
   }
   self notify("clean_up_tidy_up");
@@ -508,13 +508,13 @@ function hackable_object_thread() {
   self endon("hackable_deregistered");
   height = 72;
   radius = 64;
-  if(isDefined(self.radius)) {
+  if(isdefined(self.radius)) {
     radius = self.radius;
   }
-  if(isDefined(self.height)) {
+  if(isdefined(self.height)) {
     height = self.height;
   }
-  if(!isDefined(self.pooled)) {
+  if(!isdefined(self.pooled)) {
     trigger = spawn("trigger_radius_use", self.origin, 0, radius, height);
     trigger usetriggerrequirelookat();
     trigger setcursorhint("HINT_NOICON");
@@ -524,35 +524,35 @@ function hackable_object_thread() {
     self._trigger = trigger;
   }
   cost = 0;
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     cost = self.script_int;
   }
   duration = 1;
-  if(isDefined(self.script_float)) {
+  if(isdefined(self.script_float)) {
     duration = self.script_float;
   }
-  while(true) {
+  while (true) {
     wait(0.1);
-    if(!isDefined(self._trigger)) {
+    if(!isdefined(self._trigger)) {
       continue;
     }
     players = getplayers();
-    if(isDefined(self._trigger)) {
-      if(isDefined(self.entity)) {
+    if(isdefined(self._trigger)) {
+      if(isdefined(self.entity)) {
         self.origin = self.entity.origin;
         self._trigger.origin = self.entity.origin;
-        if(isDefined(self.trigger_offset)) {
+        if(isdefined(self.trigger_offset)) {
           self._trigger.origin = self._trigger.origin + self.trigger_offset;
         }
       }
     }
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] can_hack(self)) {
         self set_hack_hint_string();
         break;
       }
     }
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       hacker = players[i];
       if(!hacker is_hacking(self)) {
         continue;
@@ -562,10 +562,10 @@ function hackable_object_thread() {
         self thread lowreadywatcher(hacker);
         hack_success = hacker hacker_do_hack(self);
         self notify("kill_lowreadywatcher");
-        if(isDefined(hacker)) {
+        if(isdefined(hacker)) {
           hacker setlowready(0);
         }
-        if(isDefined(hacker) && hack_success) {
+        if(isdefined(hacker) && hack_success) {
           if(cost) {
             if(cost > 0) {
               hacker zm_score::minus_to_player_score(cost);
@@ -574,7 +574,7 @@ function hackable_object_thread() {
             }
           }
           hacker notify("successful_hack");
-          if(isDefined(self._hack_callback_func)) {
+          if(isdefined(self._hack_callback_func)) {
             self thread[[self._hack_callback_func]](hacker);
           }
         }
@@ -587,7 +587,7 @@ function hackable_object_thread() {
 }
 
 function hacker_on_player_connect() {
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.origin = self.origin;
   struct.radius = 48;
   struct.height = 64;
@@ -595,7 +595,7 @@ function hacker_on_player_connect() {
   struct.script_int = 500;
   struct.entity = self;
   struct.trigger_offset = vectorscale((0, 0, 1), 48);
-  register_pooled_hackable_struct(struct, &player_hack, &player_qualifier);
+  register_pooled_hackable_struct(struct, & player_hack, & player_qualifier);
   struct thread player_hack_disconnect_watcher(self);
 }
 
@@ -608,7 +608,7 @@ function function_b743c597() {
   self notify("hash_36caa6f");
   self endon("hash_36caa6f");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("player_given", equipment);
     if(equipment == level.var_bbd4901d) {
       self clientfield::set_player_uimodel("hudItems.showDpadDown_HackTool", 1);
@@ -620,17 +620,17 @@ function function_778301bd() {
   self notify("hash_b90a8375");
   self endon("hash_b90a8375");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("hash_e15d5390");
     self clientfield::set_player_uimodel("hudItems.showDpadDown_HackTool", 0);
   }
 }
 
 function player_hack(hacker) {
-  if(isDefined(self.entity)) {
+  if(isdefined(self.entity)) {
     self.entity zm_score::player_add_points("hacker_transfer", 500);
   }
-  if(isDefined(hacker)) {
+  if(isdefined(hacker)) {
     hacker thread zm_audio::create_and_play_dialog("general", "hack_plr");
   }
 }
@@ -645,7 +645,7 @@ function player_qualifier(player) {
   if(player laststand::player_is_in_laststand()) {
     return false;
   }
-  if(isDefined(self.entity.sessionstate == "spectator") && self.entity.sessionstate == "spectator") {
+  if(isdefined(self.entity.sessionstate == "spectator") && self.entity.sessionstate == "spectator") {
     return false;
   }
   return true;
@@ -653,13 +653,13 @@ function player_qualifier(player) {
 
 function hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_param) {
   invis_to_any = 0;
-  while(true) {
-    if(isDefined(custom_logic_func)) {
+  while (true) {
+    if(isdefined(custom_logic_func)) {
       self[[custom_logic_func]](custom_logic_func_param);
     }
     if(any_hackers_active()) {
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(players[i] zm_equipment::hacker_active()) {
           self setinvisibletoplayer(players[i], 1);
           invis_to_any = 1;
@@ -670,7 +670,7 @@ function hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_para
     } else if(invis_to_any) {
       invis_to_any = 0;
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         self setinvisibletoplayer(players[i], 0);
       }
     }
@@ -682,7 +682,7 @@ function hacker_debug_print(msg, color) {
   if(!getdvarint("")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
   print3d(self.origin + vectorscale((0, 0, 1), 60), msg, color, 1, 1, 40);

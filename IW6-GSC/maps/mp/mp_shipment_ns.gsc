@@ -98,9 +98,8 @@ manage_gates() {
   gates_side = getEntArray("doors_b", "targetname");
   gates_all = array_combine(gates_main, gates_side);
 
-  while(!isDefined(level.gametype)) {
+  while(!isDefined(level.gametype))
     wait 0.01;
-  }
 
   move_gate_array(gates_all, "open", 0);
 
@@ -115,9 +114,8 @@ manage_gates() {
 
   if(botAutoConnectValue == 0) {
     if(level.gametype == "dom" || level.gametype == "infect" || level.gametype == "grnd") {
-      while(!isDefined(level.bot_gametype_precaching_done)) {
+      while(!isDefined(level.bot_gametype_precaching_done))
         wait(0.05);
-      }
     }
 
     move_gate_array(gates_all, "close", 1, true);
@@ -125,9 +123,8 @@ manage_gates() {
     if(level.gametype != "dom" && level.gametype != "infect" && level.gametype != "grnd" && level.gameType != "blitz") {
       move_gate_array(gates_all, "close", 1, true);
     } else {
-      while(!isDefined(level.bot_gametype_precaching_done)) {
+      while(!isDefined(level.bot_gametype_precaching_done))
         wait(0.05);
-      }
 
       move_gate_array(gates_all, "close", 1, true);
     }
@@ -150,11 +147,10 @@ manage_gates() {
     case "dom":
 
       armory_windows = true;
-      if(GetMatchData("hasBots") == 1) {
+      if(GetMatchData("hasBots") == 1)
         OPEN_DELAY = 0;
-      } else {
+      else
         OPEN_DELAY = 45;
-      }
       break;
 
     case "infect":
@@ -183,9 +179,8 @@ manage_gates() {
 
     wait OPEN_DELAY;
 
-    if(armory_windows) {
+    if(armory_windows)
       remove_armored_shutters();
-    }
 
     thread sfx_gates_open();
     move_gate_array(gates, "open", 1, true);
@@ -236,11 +231,10 @@ move_gate(gate, direction, time, dynamic_path) {
   if(isDefined(dynamic_path)) {
     if(direction == "close") {
       if(isDefined(model)) {
-        if(time >= 1) {
+        if(time >= 1)
           model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
-        } else {
+        else
           model.origin = model.origin + (0, 0, 104);
-        }
       }
       gate MoveTo(gate.origin + (0, 0, 96), .1);
       wait .1;
@@ -250,11 +244,10 @@ move_gate(gate, direction, time, dynamic_path) {
       gate SetAISightLineVisible(false);
     } else {
       if(isDefined(model)) {
-        if(time >= 1) {
+        if(time >= 1)
           model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
-        } else {
+        else
           model.origin = model.origin - (0, 0, 104);
-        }
       }
       gate ConnectPaths();
       gate NotSolid();
@@ -266,19 +259,17 @@ move_gate(gate, direction, time, dynamic_path) {
   } else {
     if(direction == "close") {
       if(isDefined(model)) {
-        if(time >= 1) {
+        if(time >= 1)
           model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
-        } else {
+        else
           model.origin = model.origin + (0, 0, 104);
-        }
       }
     } else {
       if(isDefined(model)) {
-        if(time >= 1) {
+        if(time >= 1)
           model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
-        } else {
+        else
           model.origin = model.origin - (0, 0, 104);
-        }
       }
     }
   }
@@ -350,9 +341,8 @@ sort_spawn_points() {
   level.expanded_area_spawns = [];
   level.trap_1_area_spawns = [];
 
-  while(!isDefined(level.gametypestarted)) {
+  while(!isDefined(level.gametypestarted))
     wait(0.05);
-  }
 
   if(!isDefined(level.spawnpoints)) {
     return;
@@ -365,22 +355,19 @@ sort_spawn_points() {
     }
     params = StrTok(parameters, ";");
     foreach(param in params) {
-      if(param == "expanded_area_spawn") {
+      if(param == "expanded_area_spawn")
         level.expanded_area_spawns[level.expanded_area_spawns.size] = spawnpoint;
-      }
 
-      if(param == "trap_1_area_spawn") {
+      if(param == "trap_1_area_spawn")
         level.trap_1_area_spawns[level.trap_1_area_spawns.size] = spawnpoint;
-      }
     }
   }
 }
 
 is_in_array(aeCollection, eFindee) {
   for(i = 0; i < aeCollection.size; i++) {
-    if(aeCollection[i] == eFindee) {
+    if(aeCollection[i] == eFindee)
       return (true);
-    }
   }
 
   return (false);
@@ -574,9 +561,8 @@ set_up_announcer() {
   if(level.teambased && level.gametype != "siege" && level.gametype != "sr" && level.gametype != "sd") {
     thread determine_score_big_lead();
   }
-  if(!level.teamBased) {
+  if(!level.teamBased)
     thread determine_score_big_lead_noteam();
-  }
   thread determine_close_match();
   thread manage_announcements();
   thread announcement_time_incrementer();
@@ -630,11 +616,10 @@ manage_announcements() {
       continue;
     }
     if(!flag("ready_to_announce")) {
-      if(!isDefined(override)) {
+      if(!isDefined(override))
         continue;
-      } else {
+      else
         level waittill_notify_or_timeout("allow_override", 5);
-      }
     }
 
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
@@ -642,17 +627,17 @@ manage_announcements() {
     if(isDefined(gender)) {
       if(isDefined(team)) {
         if(gender == true) {
-          if(team == "axis") {
+          if(team == "axis")
             lines = level.announcements[type].lines[2];
-          } else {
+
+          else
             lines = level.announcements[type].lines[0];
-          }
         } else {
-          if(team == "axis") {
+          if(team == "axis")
             lines = level.announcements[type].lines[3];
-          } else {
+
+          else
             lines = level.announcements[type].lines[1];
-          }
         }
       } else {
         if(gender == true) {
@@ -684,11 +669,10 @@ manage_announcements() {
       flag_clear("ready_to_announce");
 
       thread allow_announcement_override(lines);
-      if(type == "generic_kill") {
+      if(type == "generic_kill")
         thread announcer_cooldown_manager(2);
-      } else {
+      else
         thread announcer_cooldown_manager(ANNOUNCER_COOLDOWN);
-      }
       level.announcements[type] thread announcement_cooldown();
     } else
       level endon("game_ended");
@@ -739,9 +723,8 @@ announcer_cooldown_manager(cooldown) {
 }
 
 intro_announcements() {
-  while(!isDefined(level.gametypestarted)) {
+  while(!isDefined(level.gametypestarted))
     wait(0.05);
-  }
   wait 18;
   level notify("announcement", "intro", undefined, undefined, true);
 }
@@ -755,11 +738,10 @@ kill_watcher() {
   isfemale = self hasFemaleCustomizationModel();
 
   while(1) {
-    if(level.gametype != "horde") {
+    if(level.gametype != "horde")
       self waittill("got_a_kill", victim, weapon, meansOfDeath);
-    } else {
+    else
       self waittill("horde_kill", victim, weapon, meansOfDeath);
-    }
 
     if(level.time_since_last_announcement > 18) {
       level notify("announcement", "generic_kill", undefined, undefined);
@@ -775,11 +757,10 @@ kill_watcher() {
       }
       if(meansOfDeath == "MOD_MELEE" && level.last_announcer_line != "mod_melee") {
         if(level.teamBased) {
-          if(cointoss()) {
+          if(cointoss())
             level notify("announcement", "melee_kill", self.team, undefined);
-          } else {
+          else
             level notify("announcement", "melee_kill_noteam", undefined, undefined);
-          }
         } else
           level notify("announcement", "melee_kill_noteam", undefined, undefined);
 
@@ -788,44 +769,40 @@ kill_watcher() {
         continue;
       }
       if(meansOfDeath == "MOD_HEAD_SHOT" && level.last_announcer_line != "mod_head_shot") {
-        if(level.teamBased) {
+        if(level.teamBased)
           level notify("announcement", "headshot", self.team, undefined);
-        } else {
+        else
           level notify("announcement", "headshot_noteam", undefined, undefined);
-        }
 
         level.last_announcer_line = "mod_head_shot";
 
         continue;
       }
       if(weapon == "guard_dog_mp" && level.last_announcer_line != "guard_dog_mp") {
-        if(level.teamBased) {
+        if(level.teamBased)
           level notify("announcement", "dog_kill", self.team, undefined);
-        } else {
+        else
           level notify("announcement", "dog_kill_noteam", undefined, undefined);
-        }
 
         level.last_announcer_line = "guard_dog_mp";
 
         continue;
       }
       if(maps\mp\_events::isLongShot(self, weapon, meansOfDeath, self.origin, victim) && level.last_announcer_line != "long_shot") {
-        if(level.teamBased) {
+        if(level.teamBased)
           level notify("announcement", "long_shot", self.team, undefined);
-        } else {
+        else
           level notify("announcement", "long_shot_noteam", undefined, undefined);
-        }
 
         level.last_announcer_line = "long_shot";
 
         continue;
       }
       if(self.recentKillCount == 2) {
-        if(level.teamBased) {
+        if(level.teamBased)
           level notify("announcement", "double_kill", self.team, undefined);
-        } else {
+        else
           level notify("announcement", "double_kill_noteam", undefined, undefined);
-        }
       }
       if(level.gameType != "horde") {
         if(self isBackShot(victim) && level.last_announcer_line != "back_shot") {
@@ -834,32 +811,29 @@ kill_watcher() {
           level.last_announcer_line = "back_shot";
         }
         if(self isSavior(victim, curTime) && level.last_announcer_line != "savior") {
-          if(level.teamBased) {
+          if(level.teamBased)
             level notify("announcement", "savior", self.team, undefined);
-          } else {
+          else
             level notify("announcement", "savior_noteam", undefined, undefined);
-          }
 
           level.last_announcer_line = "savior";
         }
         if(level.teamBased && curTime - victim.lastKillTime < 500 && level.last_announcer_line != "avenger") {
           if(victim.lastkilledplayer != self) {
-            if(level.teamBased) {
+            if(level.teamBased)
               level notify("announcement", "avenger", self.team, undefined);
-            } else {
+            else
               level notify("announcement", "avenger_noteam", undefined, undefined);
-            }
 
             level.last_announcer_line = "avenger";
           }
         }
       }
       if(self.recentKillCount == 3) {
-        if(level.teamBased) {
+        if(level.teamBased)
           level notify("announcement", "triple_kill", self.team, undefined);
-        } else {
+        else
           level notify("announcement", "triple_kill_noteam", undefined, undefined);
-        }
       }
       if(self.recentKillCount >= 4) {
         level notify("announcement", "multikill", undefined, undefined);
@@ -889,9 +863,8 @@ isSavior(victim, curTime) {
     if(guid == self.guid) {
       continue;
     }
-    if(level.teamBased && curTime - damageTime < 500) {
+    if(level.teamBased && curTime - damageTime < 500)
       return true;
-    }
   }
 
   return false;
@@ -901,9 +874,8 @@ determine_close_match() {
   timelimit = getTimeLimit() * 60;
   scorelimit = getScoreLimit();
 
-  if(level.gameType == "blitz") {
+  if(level.gameType == "blitz")
     scorelimit = getWatchedDvar("scorelimit");
-  }
 
   if(timelimit < 60 || scorelimit == 0) {
     return;
@@ -912,9 +884,8 @@ determine_close_match() {
   thread match_nearly_over(scorelimit);
 
   waittill_notify_or_timeout("score_limit_almost_reached", timelimit - 25);
-  if(abs(GetTeamScore("allies") - GetTeamScore("axis")) < threshold) {
+  if(abs(GetTeamScore("allies") - GetTeamScore("axis")) < threshold)
     level notify("announcement", "close_match");
-  }
 }
 
 match_nearly_over(scorelimit) {
@@ -936,9 +907,8 @@ determine_score_big_lead() {
   level endon("game_ended");
   scorelimit = getScoreLimit();
 
-  if(level.gameType == "blitz") {
+  if(level.gameType == "blitz")
     scorelimit = getWatchedDvar("scorelimit");
-  }
 
   if(scorelimit == 0) {
     return;
@@ -955,11 +925,11 @@ determine_score_big_lead() {
 
     time = GetTime();
 
-    if(ghosts_score == old_ghosts_score && federation_score == old_federation_score && time > 60000) {
+    if(ghosts_score == old_ghosts_score && federation_score == old_federation_score && time > 60000)
       time_since_score_changed++;
-    } else {
+
+    else
       time_since_score_changed = 0;
-    }
 
     if(time_since_score_changed > unchanged_threshold) {
       level notify("announcement", "score_unchanged");
@@ -986,9 +956,8 @@ determine_score_big_lead_noteam() {
   level endon("game_ended");
   scorelimit = getScoreLimit();
 
-  if(level.gameType == "blitz") {
+  if(level.gameType == "blitz")
     scorelimit = getWatchedDvar("scorelimit");
-  }
 
   if(scorelimit == 0) {
     return;
@@ -999,9 +968,9 @@ determine_score_big_lead_noteam() {
 
       players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
 
-      if(players_sorted_by_score.size >= 2) {
+      if(players_sorted_by_score.size >= 2)
+
         if(players_sorted_by_score[0].score - players_sorted_by_score[1].score > scorelimit / 2)
-      }
 
       {
         level notify("announcement", "big_spread_noteam");
@@ -1025,9 +994,8 @@ randomizer_get_no_repeat() {
   index = undefined;
   if(self.array.size > 1 && isDefined(self.last_index)) {
     index = RandomInt(self.array.size - 1);
-    if(index >= self.last_index) {
+    if(index >= self.last_index)
       index++;
-    }
   } else {
     index = RandomInt(self.array.size);
   }
@@ -1056,7 +1024,7 @@ CustomCrateFunc() {
   if(!level.allow_level_killstreak) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "slot_machine", KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_DLC_13_KILLSTREAK_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "slot_machine", KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_DLC_13_KILLSTREAK_PICKUP");
 
   level thread killstreak_watch_for_crate();
 }
@@ -1089,9 +1057,8 @@ watch_for_air_drop_death(dropCrate) {
 }
 
 killstreak_set_weight(WEIGHT) {
-  if(isDefined(game["player_holding_level_killstreak"]) && IsAlive(game["player_holding_level_killstreak"])) {
+  if(isDefined(game["player_holding_level_killstreak"]) && IsAlive(game["player_holding_level_killstreak"]))
     return false;
-  }
 
   maps\mp\killstreaks\_airdrop::changeCrateWeight("airdrop_assault", "slot_machine", WEIGHT);
 }
@@ -1139,18 +1106,16 @@ select_random_prize() {
     level notify("allow_override");
 
     if(!flag("killstreak_additional")) {
-      if(level.teamBased) {
+      if(level.teamBased)
         level notify("announcement", "ks_first", player.team, undefined, true);
-      } else {
+      else
         level notify("announcement", "ks_first_noteam", undefined, undefined, true);
-      }
       flag_set("killstreak_additional");
     } else {
-      if(level.teamBased) {
+      if(level.teamBased)
         level notify("announcement", "ks_additional", player.team, undefined, true);
-      } else {
+      else
         level notify("announcement", "ks_additional_noteam", undefined, undefined, true);
-      }
     }
 
     number = RandomIntRange(0, 100);
@@ -1158,29 +1123,22 @@ select_random_prize() {
     result = "null";
     result_name = "null";
 
-    if(number <= trap_1_range) {
+    if(number <= trap_1_range)
       result = "trap_1";
-    }
-    if(number >= trap_1_range && number <= all_traps_range) {
+    if(number >= trap_1_range && number <= all_traps_range)
       result = "all_traps";
-    }
-    if(number >= all_traps_range && number <= turrets_range) {
+    if(number >= all_traps_range && number <= turrets_range)
       result = "turrets";
-    }
-    if(number >= turrets_range && number <= care_strike_range) {
+    if(number >= turrets_range && number <= care_strike_range)
       result = "care_strike";
-    }
-    if(number >= care_strike_range && number <= kem_strike_range) {
+    if(number >= care_strike_range && number <= kem_strike_range)
       result = "kem_strike";
-    }
 
-    if((result == "care_strike" || result == "all_traps") && level.carePackages.size > 0) {
+    if((result == "care_strike" || result == "all_traps") && level.carePackages.size > 0)
       result = "trap_1";
-    }
 
-    if(flag("turrets_active") && (result == "all_traps" || result == "turrets")) {
+    if(flag("turrets_active") && (result == "all_traps" || result == "turrets"))
       result = "trap_1";
-    }
 
     switch (result) {
       case "trap_1":
@@ -1193,9 +1151,8 @@ select_random_prize() {
         thread play_slot_machine_sfx();
         jumbotron_play_slot_machine_bink("mp_shipment_ns_trap_1_prize", 5);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player thread trap_activate(level.trap_1, 25, 0, 1, 12, true);
-        }
         break;
       case "all_traps":
         result_name = "All Traps";
@@ -1207,9 +1164,8 @@ select_random_prize() {
         thread play_slot_machine_sfx(true);
         jumbotron_play_slot_machine_bink("mp_shipment_ns_all_traps_prize", 5);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player thread trap_activate(level.trap_1, 25, 0, 1, 12, true);
-        }
         wait 0.5;
         player thread multi_turret(15);
         wait 1.2;
@@ -1222,9 +1178,8 @@ select_random_prize() {
         thread play_slot_machine_sfx();
         jumbotron_play_slot_machine_bink("mp_shipment_ns_turret_prize", 5);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player thread multi_turret(15);
-        }
         break;
       case "care_strike":
         result_name = "Carestrike";
@@ -1233,9 +1188,8 @@ select_random_prize() {
         thread play_slot_machine_sfx();
         jumbotron_play_slot_machine_bink("mp_shipment_ns_care_prize", 5);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player thread carestrike_setup();
-        }
         break;
       case "kem_strike":
         result_name = "K.E.M. Strike";
@@ -1244,9 +1198,8 @@ select_random_prize() {
         thread play_slot_machine_sfx();
         jumbotron_play_slot_machine_bink("mp_shipment_ns_kem_prize", 5);
 
-        if(isDefined(player)) {
+        if(isDefined(player))
           player thread maps\mp\killstreaks\_nuke::doNuke();
-        }
         break;
     }
 
@@ -1328,9 +1281,8 @@ trap_init() {
 
 gas_visionset_cleanup() {
   wait 2.5;
-  while(level.players.size == 0) {
+  while(level.players.size == 0)
     wait .1;
-  }
 
   level.vision_set_stage = 0;
 
@@ -1360,14 +1312,12 @@ trap_activate(trap, character_damage, equipment_damage, frequency, duration, loo
   for(elapsed = 0; elapsed < duration; elapsed += frequency) {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(isDefined(loop_fx)) {
+    if(isDefined(loop_fx))
       exploder(trap.exploder);
-    }
 
     attacker = trap.player;
-    if(!isDefined(trap.player) || !IsPlayer(trap.player)) {
+    if(!isDefined(trap.player) || !IsPlayer(trap.player))
       attacker = undefined;
-    }
 
     thread damage_characters(trap, attacker, character_damage);
 
@@ -1423,9 +1373,8 @@ damage_characters(trap, attacker, damage) {
   victims = trap.volume GetIsTouchingEntities(level.characters);
 
   foreach(victim in victims) {
-    if(victim _hasPerk("_specialty_blastshield")) {
+    if(victim _hasPerk("_specialty_blastshield"))
       damage *= 1.6;
-    }
 
     if(can_kill_character(trap, victim) && isDefined(attacker)) {
       if(victim.team != trap.team || level.friendlyfire) {
@@ -1441,18 +1390,18 @@ damage_characters(trap, attacker, damage) {
 }
 
 can_kill_character(trap, victim) {
-  if(!isDefined(victim) || !isReallyAlive(victim)) {
+  if(!isDefined(victim) || !isReallyAlive(victim))
     return false;
-  }
 
   if(level.teambased) {
-    if(isDefined(trap.player) && victim == trap.player) {
+    if(isDefined(trap.player) && victim == trap.player)
       return true;
-    } else if(isDefined(trap.player) && isDefined(victim.owner) && victim.owner == trap.player) {
+
+    else if(isDefined(trap.player) && isDefined(victim.owner) && victim.owner == trap.player)
       return true;
-    } else if(isDefined(trap.team) && victim.team == trap.team && !level.friendlyfire) {
+
+    else if(isDefined(trap.team) && victim.team == trap.team && !level.friendlyfire)
       return false;
-    }
   }
 
   return true;
@@ -1474,9 +1423,10 @@ damage_targets(trap, attacker, array_targets, damage) {
     if(!isDefined(target)) {
       continue;
     }
-    if(isDefined(target.owner) && target.owner == trap.owner) {
+    if(isDefined(target.owner) && target.owner == trap.owner)
       target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
-    } else if(level.teamBased && isDefined(trap.team) && isDefined(target.team) && target.team == trap.team) {
+
+    else if(level.teamBased && isDefined(trap.team) && isDefined(target.team) && target.team == trap.team) {
       continue;
     }
     target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
@@ -1508,7 +1458,7 @@ set_up_multi_turret() {
   level.sentrySettings["multiturret"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["multiturret"].modelBombSquad = "weapon_sentry_chaingun_bombsquad";
   level.sentrySettings["multiturret"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["multiturret"].hintString = &"";
+  level.sentrySettings["multiturret"].hintString = & "";
   level.sentrySettings["multiturret"].headIcon = true;
   level.sentrySettings["multiturret"].teamSplash = "used_sentry";
   level.sentrySettings["multiturret"].shouldSplash = false;
@@ -1638,9 +1588,9 @@ careStrike(owner, spawn_location, dropSite, animation) {
   for(;;) {
     dist = Distance2D(airplane.origin, dropSite);
 
-    if(dist < minDist) {
+    if(dist < minDist)
       minDist = dist;
-    } else if(dist > minDist) {
+    else if(dist > minDist) {
       break;
     }
 
@@ -1710,9 +1660,8 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
   } else
     crateType = crateOverride;
 
-  if(!isDefined(dropImpulse)) {
+  if(!isDefined(dropImpulse))
     dropImpulse = (RandomInt(50), RandomInt(50), RandomInt(50));
-  }
 
   dropCrate = maps\mp\killstreaks\_airdrop::createAirDropCrate(self.owner, dropType, crateType, startPos, dropPoint);
 
@@ -1907,16 +1856,14 @@ box_kill_counter() {
     agents = array_combine(agents, level.remote_uav);
 
     foreach(agent in agents) {
-      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent))) {
+      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent)))
         agents = array_remove(agents, agent);
-      }
     }
 
     touchers = volume GetIsTouchingEntities(agents);
     foreach(toucher in touchers) {
-      if(isDefined(toucher.is_in_box)) {
+      if(isDefined(toucher.is_in_box))
         continue;
-      }
       toucher.is_in_box = true;
       if(isDefined(toucher.classname) && toucher.classname != "script_vehicle") {
         toucher thread watch_for_box_death(sign_on, sign_off);
@@ -1930,9 +1877,8 @@ box_kill_counter() {
 watch_for_leaving_box(volume) {
   self endon("death");
   self endon("disconnect");
-  while(self isTouching(volume)) {
+  while(self isTouching(volume))
     wait(0.05);
-  }
   self notify("left_the_box");
   self.is_in_box = undefined;
 }
@@ -1987,35 +1933,30 @@ box_kill_numbers() {
   }
 
   while(1) {
-    if(level.box_kill_counter == 99) {
+    if(level.box_kill_counter == 99)
       level notify("announcement", "puzzle_box_max", undefined, undefined, true);
-    } else if(level.box_kill_counter > 1 && level.box_kill_counter % 10 == 0) {
+    else if(level.box_kill_counter > 1 && level.box_kill_counter % 10 == 0)
       level notify("announcement", "puzzle_box", undefined, undefined, false);
-    }
 
-    if(level.box_kill_counter > 99) {
+    if(level.box_kill_counter > 99)
       box_counter = 99;
-    } else {
+    else
       box_counter = level.box_kill_counter;
-    }
 
     if(box_counter < 10) {
       counter_ones = GetSubStr(box_counter, 0, 1);
-      foreach(number in counter_ones_digit) {
-        number setModel("shns_score_num_" + counter_ones + "_small");
-      }
+      foreach(number in counter_ones_digit)
+      number setModel("shns_score_num_" + counter_ones + "_small");
     }
 
     if(box_counter > 9 && counter < 99) {
       counter_ones = GetSubStr(box_counter, 1, 2);
-      foreach(number in counter_ones_digit) {
-        number setModel("shns_score_num_" + counter_ones + "_small");
-      }
+      foreach(number in counter_ones_digit)
+      number setModel("shns_score_num_" + counter_ones + "_small");
 
       counter_tens = GetSubStr(box_counter, 0, 1);
-      foreach(number in counter_tens_digit) {
-        number setModel("shns_score_num_" + counter_tens + "_small");
-      }
+      foreach(number in counter_tens_digit)
+      number setModel("shns_score_num_" + counter_tens + "_small");
     }
     if(box_counter >= 50 && !flag("played_easter_egg_video")) {
       flag_set("played_easter_egg_video");
@@ -2047,11 +1988,10 @@ match_end_event() {
   levelFlagSet("post_game_level_event_active");
 
   result = RandomIntRange(1, 10);
-  if(result == 1) {
+  if(result == 1)
     level notify("announcement", "outro_rare", undefined, undefined, true);
-  } else {
+  else
     level notify("announcement", "outro", undefined, undefined, true);
-  }
 
   levelFlagClear("post_game_level_event_active");
 }
@@ -2059,33 +1999,33 @@ match_end_event() {
 get_highest_scoring_players() {
   top_scorers = [];
 
-  if(!level.teambased) {
+  if(!level.teambased)
     players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
-  } else {
+  else {
     ghosts_score = GetTeamScore("allies");
     federation_score = GetTeamScore("axis");
 
-    if(ghosts_score == federation_score) {
+    if(ghosts_score == federation_score)
       winning_team = undefined;
-    } else if(ghosts_score > federation_score) {
-      winning_team = "allies";
-    } else {
-      winning_team = "axis";
-    }
 
-    if(isDefined(winning_team)) {
+    else if(ghosts_score > federation_score)
+      winning_team = "allies";
+
+    else
+      winning_team = "axis";
+
+    if(isDefined(winning_team))
       players_sorted_by_score = array_sort_with_func(level.teamList[winning_team], ::is_score_a_greater_than_b);
-    } else {
+
+    else
       players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
-    }
   }
 
   for(i = 0; i < 3; i++) {
-    if(isDefined(players_sorted_by_score[i])) {
+    if(isDefined(players_sorted_by_score[i]))
       top_scorers[top_scorers.size] = players_sorted_by_score[i];
-    } else {
+    else
       break;
-    }
   }
 
   return top_scorers;
@@ -2127,9 +2067,8 @@ set_up_winners_podium(top_scorers) {
 
     player.custom_spawn_loc = location;
 
-    if(isRoundBased()) {
+    if(isRoundBased())
       player thread podium_scoreboard_sequence(location, camera_loc, "playing");
-    }
   }
 }
 
@@ -2148,9 +2087,8 @@ set_up_podium_spectator(spectators) {
       if(!IsBot(player)) {
         player thread spawn_custom_spectator(camera_loc);
 
-        if(isRoundBased()) {
+        if(isRoundBased())
           player thread podium_scoreboard_sequence(camera_loc, camera_loc, undefined);
-        }
       }
     }
   }
@@ -2322,18 +2260,14 @@ flashing_neon_sign() {
 
   }
 
-  foreach(letter in sign_on) {
-    letter Hide();
-  }
-  foreach(letter in sign_on_right) {
-    letter Hide();
-  }
-  foreach(letter in sign_off) {
-    letter Show();
-  }
-  foreach(letter in sign_off_right) {
-    letter Show();
-  }
+  foreach(letter in sign_on)
+  letter Hide();
+  foreach(letter in sign_on_right)
+  letter Hide();
+  foreach(letter in sign_off)
+  letter Show();
+  foreach(letter in sign_off_right)
+  letter Show();
 }
 
 get_neon_sign(name) {
@@ -2433,11 +2367,10 @@ looped_turret_light(ID, ID_enemy, player) {
   time = GetTime() + 15000;
 
   while(GetTime() < time) {
-    if(!player isInKillcam()) {
+    if(!player isInKillcam())
       ActivateClientExploder(ID, player);
-    } else {
+    else
       ActivateClientExploder(ID_enemy, player);
-    }
 
     wait 1.0;
   }

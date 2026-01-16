@@ -37,16 +37,14 @@ ar_target_think(targetid, entity, infostring, visibleradius, activateradius, off
   visible = 0;
   activated = 0;
 
-  if(!isDefined(offset)) {
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  }
 
   for(;;) {
     entityorigin = offset;
 
-    if(isDefined(entity)) {
+    if(isDefined(entity))
       entityorigin = entityorigin + entity.origin;
-    }
 
     sqdistance = distancesquared(self.origin, entityorigin);
 

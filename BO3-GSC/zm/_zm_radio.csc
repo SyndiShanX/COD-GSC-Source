@@ -8,7 +8,7 @@
 #namespace zm_radio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_radio", &__init__, &__main__, undefined);
+  system::register("zm_radio", & __init__, & __main__, undefined);
 }
 
 function __init__() {}
@@ -16,16 +16,16 @@ function __init__() {}
 function __main__() {}
 
 function next_song(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  assert(isDefined(level.var_f3006fa7));
-  assert(isDefined(level.var_c017e2d5));
-  assert(isDefined(level.n_radio_index));
+  assert(isdefined(level.var_f3006fa7));
+  assert(isdefined(level.var_c017e2d5));
+  assert(isdefined(level.n_radio_index));
   assert(level.var_c017e2d5.size > 0);
-  if(!isDefined(level.var_58522184)) {
+  if(!isdefined(level.var_58522184)) {
     level.var_58522184 = 0;
   }
   if(!level.var_58522184) {
     if(newval) {
-      playSound(0, "static", self.origin);
+      playsound(0, "static", self.origin);
       if(soundplaying(level.var_f3006fa7)) {
         fade(level.var_f3006fa7, 1);
       } else {
@@ -33,25 +33,25 @@ function next_song(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
       }
       if(level.n_radio_index < level.var_c017e2d5.size) {
         println("" + level.var_c017e2d5[level.n_radio_index]);
-        level.var_f3006fa7 = playSound(0, level.var_c017e2d5[level.n_radio_index], self.origin);
+        level.var_f3006fa7 = playsound(0, level.var_c017e2d5[level.n_radio_index], self.origin);
       } else {
         return;
       }
     }
-  } else if(isDefined(level.var_f3006fa7)) {
+  } else if(isdefined(level.var_f3006fa7)) {
     stopsound(level.var_f3006fa7);
   }
 }
 
 function add_song(song) {
-  if(!isDefined(level.var_c017e2d5)) {
+  if(!isdefined(level.var_c017e2d5)) {
     level.var_c017e2d5 = [];
   }
   level.var_c017e2d5[level.var_c017e2d5.size] = song;
 }
 
 function function_2b7f281d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  assert(isDefined(level.n_radio_index));
+  assert(isdefined(level.n_radio_index));
   level.n_radio_index = newval;
 }
 
@@ -67,7 +67,7 @@ function fade(n_id, n_time) {
 }
 
 function stop_radio_listener() {
-  while(true) {
+  while (true) {
     level waittill("ktr");
     level.var_58522184 = 1;
     level thread next_song();

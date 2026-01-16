@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace namespace_845b2e28;
 
 autoexec __init__system__() {
@@ -81,7 +82,7 @@ private on_end(round_reset) {
 }
 
 function_a2c43fea(var_d42c8aaa = 2000) {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
 
   while(true) {
     n_score_total = 0;
@@ -107,7 +108,7 @@ private function_ba517920(challenge) {
   level endon(#"hash_7646638df88a3656");
 
   while(challenge.var_3fd9ed88 < challenge.var_b49b94ed) {
-    level waittill(#"trap_kill", # "hash_528d7b7f7d6c51a1", # "hash_317f58ba0d580c27", # "hash_148b3ce521088846");
+    level waittill(#"trap_kill", #"hash_528d7b7f7d6c51a1", #"hash_317f58ba0d580c27", #"hash_148b3ce521088846");
     challenge.var_3fd9ed88++;
     zm_trial_util::function_dace284(challenge.var_3fd9ed88);
   }

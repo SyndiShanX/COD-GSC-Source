@@ -7,9 +7,11 @@
 #include clientscripts\createfx\so_rts_mp_socotra_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 #using_animtree("fxanim_props");
 
@@ -77,7 +79,7 @@ precache_createfx_fx() {
 }
 
 fxanim_init(localclientnum) {
-  fxanims = getEntArray(localclientnum, "fxanim_level", "targetname");
+  fxanims = getentarray(localclientnum, "fxanim_level", "targetname");
 
   if(!isDefined(level.fxanim_waits)) {
     level.fxanim_waits = [];
@@ -116,7 +118,7 @@ fxanim_wire_think(localclientnum, index, bone) {
 
   for(;;) {
     self waittill("wire_fx", note);
-    playFXOnTag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
+    playfxontag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
   }
 }
 
@@ -129,9 +131,8 @@ main() {
   wind_initial_setting();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }
 
 wind_initial_setting() {

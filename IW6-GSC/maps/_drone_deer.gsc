@@ -13,9 +13,8 @@ init() {
 }
 
 deer_dronespawn(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = self;
-  }
 
   var_0 maps\_utility::script_delay();
   var_1 = deer_dronespawn_internal(var_0);
@@ -50,9 +49,8 @@ deer_damage_fx() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var_7) && var_7 != "") {
+    if(isDefined(var_7) && var_7 != "")
       playFXOnTag(common_scripts\utility::getfx("melee_knife_ai"), self, var_7);
-    }
   }
 }
 
@@ -63,9 +61,8 @@ deer_drone_custom_idle() {
   var_1 = level.drone_anims["team3"]["stand"]["idle"];
 
   if(isarray(var_1)) {
-    if(var_1.size > 1) {
+    if(var_1.size > 1)
       var_0 = common_scripts\utility::random(var_1);
-    }
   } else
     var_0 = var_1;
 

@@ -10,10 +10,11 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_battery;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_battery", &__init__, undefined, # "character_unlock_battery_fixup");
+  system::register(#"character_unlock_battery", &__init__, undefined, #"character_unlock_battery_fixup");
 }
 
 __init__() {
@@ -41,7 +42,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "hero_pineapple_grenade" && weapon.name != # "hero_pineapplegun") {
+  if(weapon.name != #"hero_pineapple_grenade" && weapon.name != #"hero_pineapplegun") {
     return;
   }
 
@@ -60,7 +61,7 @@ on_player_killed() {
   attacker.var_28411f6f++;
 
   if(attacker.var_28411f6f == 2) {
-    attacker character_unlock::function_c8beca5e(#"battery_unlock", # "hash_c5713430b8fb888", 1);
+    attacker character_unlock::function_c8beca5e(#"battery_unlock", #"hash_c5713430b8fb888", 1);
   }
 }
 

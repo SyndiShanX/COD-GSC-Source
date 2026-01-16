@@ -15,11 +15,11 @@
 #namespace hacker_tool;
 
 function init_shared() {
-  clientfield::register("toplayer", "hacker_tool", 1, 2, "int", &player_hacking, 0, 0);
+  clientfield::register("toplayer", "hacker_tool", 1, 2, "int", & player_hacking, 0, 0);
   level.hackingsoundid = [];
   level.hackingsweetspotid = [];
   level.friendlyhackingsoundid = [];
-  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  callback::on_localplayer_spawned( & on_localplayer_spawned);
 }
 
 function on_localplayer_spawned(localclientnum) {
@@ -27,15 +27,15 @@ function on_localplayer_spawned(localclientnum) {
     return;
   }
   player = self;
-  if(isDefined(level.hackingsoundid[localclientnum])) {
+  if(isdefined(level.hackingsoundid[localclientnum])) {
     player stoploopsound(level.hackingsoundid[localclientnum]);
     level.hackingsoundid[localclientnum] = undefined;
   }
-  if(isDefined(level.hackingsweetspotid[localclientnum])) {
+  if(isdefined(level.hackingsweetspotid[localclientnum])) {
     player stoploopsound(level.hackingsweetspotid[localclientnum]);
     level.hackingsweetspotid[localclientnum] = undefined;
   }
-  if(isDefined(level.friendlyhackingsoundid[localclientnum])) {
+  if(isdefined(level.friendlyhackingsoundid[localclientnum])) {
     player stoploopsound(level.friendlyhackingsoundid[localclientnum]);
     level.friendlyhackingsoundid[localclientnum] = undefined;
   }
@@ -44,19 +44,19 @@ function on_localplayer_spawned(localclientnum) {
 function player_hacking(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self notify("player_hacking_callback");
   player = self;
-  if(isDefined(level.hackingsoundid[localclientnum])) {
+  if(isdefined(level.hackingsoundid[localclientnum])) {
     player stoploopsound(level.hackingsoundid[localclientnum]);
     level.hackingsoundid[localclientnum] = undefined;
   }
-  if(isDefined(level.hackingsweetspotid[localclientnum])) {
+  if(isdefined(level.hackingsweetspotid[localclientnum])) {
     player stoploopsound(level.hackingsweetspotid[localclientnum]);
     level.hackingsweetspotid[localclientnum] = undefined;
   }
-  if(isDefined(level.friendlyhackingsoundid[localclientnum])) {
+  if(isdefined(level.friendlyhackingsoundid[localclientnum])) {
     player stoploopsound(level.friendlyhackingsoundid[localclientnum]);
     level.friendlyhackingsoundid[localclientnum] = undefined;
   }
-  if(isDefined(player.targetent)) {
+  if(isdefined(player.targetent)) {
     player.targetent duplicate_render::set_hacker_tool_hacking(localclientnum, 0);
     player.targetent duplicate_render::set_hacker_tool_breaching(localclientnum, 0);
     player.targetent.isbreachingfirewall = 0;
@@ -88,7 +88,7 @@ function watchhackspeed(localclientnum, isbreachingfirewall) {
   self endon("entityshutdown");
   self endon("player_hacking_callback");
   player = self;
-  for(;;) {
+  for (;;) {
     targetentarray = self gettargetlockentityarray();
     if(targetentarray.size > 0) {
       targetent = targetentarray[0];
@@ -110,7 +110,7 @@ function watchtargethack(localclientnum, player, isbreachingfirewall) {
     targetent duplicate_render::set_hacker_tool_breaching(localclientnum, 1);
   }
   targetent thread watchhackerplayershutdown(localclientnum, player, targetent);
-  for(;;) {
+  for (;;) {
     distancefromcenter = targetent getdistancefromscreencenter(localclientnum);
     inverse = 40 - distancefromcenter;
     ratio = inverse / 40;
@@ -125,26 +125,26 @@ function watchtargethack(localclientnum, player, isbreachingfirewall) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.blackhat.offsetShaderValue"), ((horizontal + " ") + ratio) + " 0 0");
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.blackhat.perc"), heatval);
     if(ratio > 0.8) {
-      if(!isDefined(level.hackingsweetspotid[localclientnum])) {
-        level.hackingsweetspotid[localclientnum] = player playLoopSound("evt_hacker_hacking_sweet");
+      if(!isdefined(level.hackingsweetspotid[localclientnum])) {
+        level.hackingsweetspotid[localclientnum] = player playloopsound("evt_hacker_hacking_sweet");
       }
     } else {
-      if(isDefined(level.hackingsweetspotid[localclientnum])) {
+      if(isdefined(level.hackingsweetspotid[localclientnum])) {
         player stoploopsound(level.hackingsweetspotid[localclientnum]);
         level.hackingsweetspotid[localclientnum] = undefined;
       }
-      if(!isDefined(level.hackingsoundid[localclientnum])) {
-        level.hackingsoundid[localclientnum] = player playLoopSound("evt_hacker_hacking_loop");
+      if(!isdefined(level.hackingsoundid[localclientnum])) {
+        level.hackingsoundid[localclientnum] = player playloopsound("evt_hacker_hacking_loop");
       }
-      if(isDefined(level.hackingsoundid[localclientnum])) {
+      if(isdefined(level.hackingsoundid[localclientnum])) {
         setsoundpitch(level.hackingsoundid[localclientnum], ratio);
       }
     }
     if(!isbreachingfirewall) {
       friendlyhacking = weaponfriendlyhacking(localclientnum);
-      if(friendlyhacking && !isDefined(level.friendlyhackingsoundid[localclientnum])) {
-        level.friendlyhackingsoundid[localclientnum] = player playLoopSound("evt_hacker_hacking_loop_mult");
-      } else if(!friendlyhacking && isDefined(level.friendlyhackingsoundid[localclientnum])) {
+      if(friendlyhacking && !isdefined(level.friendlyhackingsoundid[localclientnum])) {
+        level.friendlyhackingsoundid[localclientnum] = player playloopsound("evt_hacker_hacking_loop_mult");
+      } else if(!friendlyhacking && isdefined(level.friendlyhackingsoundid[localclientnum])) {
         player stoploopsound(level.friendlyhackingsoundid[localclientnum]);
         level.friendlyhackingsoundid[localclientnum] = undefined;
       }
@@ -158,7 +158,7 @@ function watchhackerplayershutdown(localclientnum, hackerplayer, targetent) {
   killstreakentity = self;
   hackerplayer endon("player_hacking_callback");
   hackerplayer waittill("entityshutdown");
-  if(isDefined(targetent)) {
+  if(isdefined(targetent)) {
     targetent.isbreachingfirewall = 1;
   }
   killstreakentity duplicate_render::set_hacker_tool_hacking(localclientnum, 0);
@@ -168,7 +168,7 @@ function watchhackerplayershutdown(localclientnum, hackerplayer, targetent) {
 function watchforemp(localclientnum) {
   self endon("entityshutdown");
   self endon("player_hacking_callback");
-  while(true) {
+  while (true) {
     if(self isempjammed()) {
       setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.blackhat.status"), 3);
     } else {

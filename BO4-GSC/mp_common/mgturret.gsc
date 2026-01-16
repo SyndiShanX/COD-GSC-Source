@@ -25,16 +25,16 @@ set_difficulty(difficulty) {
   for(index = 0; index < turrets.size; index++) {
     if(isDefined(turrets[index].script_skilloverride)) {
       switch (turrets[index].script_skilloverride) {
-        case # "easy":
+        case #"easy":
           difficulty = "easy";
           break;
-        case # "medium":
+        case #"medium":
           difficulty = "medium";
           break;
-        case # "hard":
+        case #"hard":
           difficulty = "hard";
           break;
-        case # "fu":
+        case #"fu":
           difficulty = "fu";
           break;
         default:
@@ -47,38 +47,38 @@ set_difficulty(difficulty) {
 }
 
 init_turret_difficulty_settings() {
-  level.mgturretsettings[# "easy"][# "convergencetime"] = 2.5;
-  level.mgturretsettings[# "easy"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "easy"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "easy"][# "aispread"] = 2;
-  level.mgturretsettings[# "easy"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "medium"][# "convergencetime"] = 1.5;
-  level.mgturretsettings[# "medium"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "medium"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "medium"][# "aispread"] = 2;
-  level.mgturretsettings[# "medium"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "hard"][# "convergencetime"] = 0.8;
-  level.mgturretsettings[# "hard"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "hard"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "hard"][# "aispread"] = 2;
-  level.mgturretsettings[# "hard"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "fu"][# "convergencetime"] = 0.4;
-  level.mgturretsettings[# "fu"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "fu"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "fu"][# "aispread"] = 2;
-  level.mgturretsettings[# "fu"][# "playerspread"] = 0.5;
+  level.mgturretsettings[#"easy"][#"convergencetime"] = 2.5;
+  level.mgturretsettings[#"easy"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"easy"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"easy"][#"aispread"] = 2;
+  level.mgturretsettings[#"easy"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"medium"][#"convergencetime"] = 1.5;
+  level.mgturretsettings[#"medium"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"medium"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"medium"][#"aispread"] = 2;
+  level.mgturretsettings[#"medium"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"hard"][#"convergencetime"] = 0.8;
+  level.mgturretsettings[#"hard"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"hard"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"hard"][#"aispread"] = 2;
+  level.mgturretsettings[#"hard"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"fu"][#"convergencetime"] = 0.4;
+  level.mgturretsettings[#"fu"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"fu"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"fu"][#"aispread"] = 2;
+  level.mgturretsettings[#"fu"][#"playerspread"] = 0.5;
 }
 
 turret_set_difficulty(turret, difficulty) {
-  turret.convergencetime = level.mgturretsettings[difficulty][# "convergencetime"];
-  turret.suppressiontime = level.mgturretsettings[difficulty][# "suppressiontime"];
-  turret.accuracy = level.mgturretsettings[difficulty][# "accuracy"];
-  turret.aispread = level.mgturretsettings[difficulty][# "aispread"];
-  turret.playerspread = level.mgturretsettings[difficulty][# "playerspread"];
+  turret.convergencetime = level.mgturretsettings[difficulty][#"convergencetime"];
+  turret.suppressiontime = level.mgturretsettings[difficulty][#"suppressiontime"];
+  turret.accuracy = level.mgturretsettings[difficulty][#"accuracy"];
+  turret.aispread = level.mgturretsettings[difficulty][#"aispread"];
+  turret.playerspread = level.mgturretsettings[difficulty][#"playerspread"];
 }
 
 turret_suppression_fire(targets) {
-  self endon(#"death", # "stop_suppression_fire");
+  self endon(#"death", #"stop_suppression_fire");
 
   if(!isDefined(self.suppresionfire)) {
     self.suppresionfire = 1;
@@ -117,7 +117,7 @@ burst_fire_settings(setting) {
 }
 
 burst_fire(turret, manual_target) {
-  turret endon(#"death", # "stopfiring");
+  turret endon(#"death", #"stopfiring");
   self endon(#"stop_using_built_in_burst_fire");
 
   if(isDefined(turret.script_delay_min)) {
@@ -157,7 +157,7 @@ burst_fire(turret, manual_target) {
 
 burst_fire_unmanned() {
   self notify(#"stop_burst_fire_unmanned");
-  self endon(#"stop_burst_fire_unmanned", # "death", # "remote_start");
+  self endon(#"stop_burst_fire_unmanned", #"death", #"remote_start");
   level endon(#"game_ended");
 
   if(isDefined(self.controlled) && self.controlled) {
@@ -227,7 +227,7 @@ burst_fire_unmanned() {
 }
 
 do_shoot() {
-  self endon(#"death", # "turretstatechange");
+  self endon(#"death", #"turretstatechange");
 
   for(;;) {
     wait 0.112;
@@ -250,7 +250,7 @@ turret_timer(duration) {
 random_spread(ent) {
   self endon(#"death");
   self notify(#"stop random_spread");
-  self endon(#"stop random_spread", # "stopfiring");
+  self endon(#"stop random_spread", #"stopfiring");
   self turretsettarget(0, ent);
   self.manual_target = ent;
 

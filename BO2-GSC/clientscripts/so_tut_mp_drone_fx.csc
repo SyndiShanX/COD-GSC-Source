@@ -7,7 +7,8 @@
 #include clientscripts\createfx\so_tut_mp_drone_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_fxanim_props() {
   level.scr_anim["fxanim_props"] = [];
@@ -118,9 +119,8 @@ main() {
   wind_initial_setting();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }
 
 wind_initial_setting() {

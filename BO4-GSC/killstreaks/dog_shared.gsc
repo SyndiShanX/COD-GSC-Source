@@ -21,6 +21,7 @@
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace dog;
 
 init_shared() {
@@ -39,7 +40,7 @@ function_8d543b98() {
   corpses = getcorpsearray();
 
   foreach(corpse in corpses) {
-    if(isactorcorpse(corpse) && corpse.archetype === # "mp_dog") {
+    if(isactorcorpse(corpse) && corpse.archetype === #"mp_dog") {
       corpse delete();
     }
   }
@@ -48,8 +49,8 @@ function_8d543b98() {
 deployed_off(slot, weapon) {
   self gadgetpowerset(slot, 0);
 
-  if(isDefined(self.pers[# "held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[# "held_gadgets_power"][self._gadgets_player[slot]])) {
-    self.pers[# "held_gadgets_power"][self._gadgets_player[slot]] = 0;
+  if(isDefined(self.pers[#"held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[#"held_gadgets_power"][self._gadgets_player[slot]])) {
+    self.pers[#"held_gadgets_power"][self._gadgets_player[slot]] = 0;
   }
 }
 
@@ -148,7 +149,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
+        #origin: tacpoint.origin, 
         #angles: owner.angles
       };
     }
@@ -162,7 +163,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
+        #origin: tacpoint.origin, 
         #angles: owner.angles
       };
     }
@@ -176,7 +177,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
+        #origin: tacpoint.origin, 
         #angles: owner.angles
       };
     }
@@ -186,7 +187,7 @@ private function_fb11cc0f(owner) {
 
   if(isDefined(closest)) {
     return {
-      #origin: closest,
+      #origin: closest, 
       #angles: owner.angles
     };
   }
@@ -251,7 +252,7 @@ spawn_dog(bundle, owner) {
 
   owner.killstreak_dog = dog;
 
-  return dog;
+    return dog;
 }
 
 set_state(state, var_deeb4ee7) {
@@ -389,7 +390,7 @@ private function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
+        #origin: tacpoint.origin, 
         #angles: angles
       };
     }
@@ -407,7 +408,7 @@ private function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
+        #origin: tacpoint.origin, 
         #angles: angles
       };
     }
@@ -418,13 +419,13 @@ private function_e74b21de(owner) {
   if(isDefined(var_ead7a19) && var_ead7a19.size) {
     leavepoint = array::random(var_ead7a19);
     return {
-      #origin: leavepoint,
+      #origin: leavepoint, 
       #angles: self.angles
     };
   }
 
   return {
-    #origin: self.origin,
+    #origin: self.origin, 
     #angles: self.angles
   };
 }

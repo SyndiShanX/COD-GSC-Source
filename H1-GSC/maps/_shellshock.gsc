@@ -9,35 +9,30 @@ main(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 internalmain(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 12;
-  } else if(var_0 < 7) {
+  else if(var_0 < 7)
     var_0 = 7;
-  }
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1))
     var_1 = 150;
-  }
 
-  if(!isDefined(var_2)) {
+  if(!isdefined(var_2))
     var_2 = 100;
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isdefined(var_3))
     var_3 = 100;
-  }
 
-  if(!isDefined(var_5)) {
+  if(!isdefined(var_5))
     var_6 = "default";
-  } else {
+  else
     var_6 = var_5;
-  }
 
   var_7 = level.player getorigin() + (0, 8, 2);
   var_8 = 320;
   var_9 = var_1 + randomint(var_2);
   var_10 = var_3;
-  level.player playSound("weapons_rocket_explosion");
+  level.player playsound("weapons_rocket_explosion");
   wait 0.25;
   radiusdamage(var_7, var_8, var_9, var_10);
   earthquake(0.75, 2, var_7, 2250);
@@ -50,9 +45,8 @@ internalmain(var_0, var_1, var_2, var_3, var_4, var_5) {
     level.player viewkick(127, level.player.origin);
     level.player shellshock(var_6, var_0);
 
-    if(!isDefined(var_4)) {
+    if(!isdefined(var_4))
       level.player thread playerhitable(var_0);
-    }
 
     wait 1.5;
     level.player allowstand(1);

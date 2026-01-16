@@ -34,7 +34,7 @@ init() {
   level.sentrySettings["alien_sentry"].modelPlacement = "weapon_sentry_chaingun_obj";
   level.sentrySettings["alien_sentry"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["alien_sentry"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["alien_sentry"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["alien_sentry"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["alien_sentry"].headIcon = true;
   level.sentrySettings["alien_sentry"].teamSplash = "used_sentry";
   level.sentrySettings["alien_sentry"].shouldSplash = false;
@@ -61,7 +61,7 @@ init() {
   level.sentrySettings["alien_sentry_1"].modelPlacement = "weapon_sentry_chaingun_obj";
   level.sentrySettings["alien_sentry_1"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["alien_sentry_1"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["alien_sentry_1"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["alien_sentry_1"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["alien_sentry_1"].headIcon = true;
   level.sentrySettings["alien_sentry_1"].teamSplash = "used_sentry";
   level.sentrySettings["alien_sentry_1"].shouldSplash = false;
@@ -88,7 +88,7 @@ init() {
   level.sentrySettings["alien_sentry_2"].modelPlacement = "weapon_sentry_chaingun_obj";
   level.sentrySettings["alien_sentry_2"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["alien_sentry_2"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["alien_sentry_2"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["alien_sentry_2"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["alien_sentry_2"].headIcon = true;
   level.sentrySettings["alien_sentry_2"].teamSplash = "used_sentry";
   level.sentrySettings["alien_sentry_2"].shouldSplash = false;
@@ -115,7 +115,7 @@ init() {
   level.sentrySettings["alien_sentry_3"].modelPlacement = "weapon_sentry_chaingun_obj";
   level.sentrySettings["alien_sentry_3"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["alien_sentry_3"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["alien_sentry_3"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["alien_sentry_3"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["alien_sentry_3"].headIcon = true;
   level.sentrySettings["alien_sentry_3"].teamSplash = "used_sentry";
   level.sentrySettings["alien_sentry_3"].shouldSplash = false;
@@ -142,7 +142,7 @@ init() {
   level.sentrySettings["alien_sentry_4"].modelPlacement = "weapon_sentry_chaingun_obj";
   level.sentrySettings["alien_sentry_4"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["alien_sentry_4"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["alien_sentry_4"].hintString = &"SENTRY_PICKUP";
+  level.sentrySettings["alien_sentry_4"].hintString = & "SENTRY_PICKUP";
   level.sentrySettings["alien_sentry_4"].headIcon = true;
   level.sentrySettings["alien_sentry_4"].teamSplash = "used_sentry";
   level.sentrySettings["alien_sentry_4"].shouldSplash = false;
@@ -169,8 +169,8 @@ init() {
   level.sentrySettings["gl_turret"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["gl_turret"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["gl_turret"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["gl_turret"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["gl_turret"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["gl_turret"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["gl_turret"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["gl_turret"].headIcon = false;
   level.sentrySettings["gl_turret"].teamSplash = "used_gl_turret";
   level.sentrySettings["gl_turret"].shouldSplash = true;
@@ -197,8 +197,8 @@ init() {
   level.sentrySettings["gl_turret_1"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["gl_turret_1"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["gl_turret_1"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["gl_turret_1"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["gl_turret_1"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["gl_turret_1"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["gl_turret_1"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["gl_turret_1"].headIcon = false;
   level.sentrySettings["gl_turret_1"].teamSplash = "used_gl_turret";
   level.sentrySettings["gl_turret_1"].shouldSplash = true;
@@ -225,8 +225,8 @@ init() {
   level.sentrySettings["gl_turret_2"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["gl_turret_2"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["gl_turret_2"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["gl_turret_2"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["gl_turret_2"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["gl_turret_2"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["gl_turret_2"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["gl_turret_2"].headIcon = false;
   level.sentrySettings["gl_turret_2"].teamSplash = "used_gl_turret";
   level.sentrySettings["gl_turret_2"].shouldSplash = true;
@@ -253,8 +253,8 @@ init() {
   level.sentrySettings["gl_turret_3"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["gl_turret_3"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["gl_turret_3"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["gl_turret_3"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["gl_turret_3"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["gl_turret_3"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["gl_turret_3"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["gl_turret_3"].headIcon = false;
   level.sentrySettings["gl_turret_3"].teamSplash = "used_gl_turret";
   level.sentrySettings["gl_turret_3"].shouldSplash = true;
@@ -281,8 +281,8 @@ init() {
   level.sentrySettings["gl_turret_4"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["gl_turret_4"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["gl_turret_4"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["gl_turret_4"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["gl_turret_4"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["gl_turret_4"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["gl_turret_4"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["gl_turret_4"].headIcon = false;
   level.sentrySettings["gl_turret_4"].teamSplash = "used_gl_turret";
   level.sentrySettings["gl_turret_4"].shouldSplash = true;
@@ -309,8 +309,8 @@ init() {
   level.sentrySettings["minigun_turret"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["minigun_turret"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["minigun_turret"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["minigun_turret"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["minigun_turret"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["minigun_turret"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["minigun_turret"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["minigun_turret"].headIcon = false;
   level.sentrySettings["minigun_turret"].teamSplash = "used_minigun_turret";
   level.sentrySettings["minigun_turret"].shouldSplash = true;
@@ -337,8 +337,8 @@ init() {
   level.sentrySettings["minigun_turret_1"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["minigun_turret_1"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["minigun_turret_1"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["minigun_turret_1"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["minigun_turret_1"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["minigun_turret_1"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["minigun_turret_1"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["minigun_turret_1"].headIcon = false;
   level.sentrySettings["minigun_turret_1"].teamSplash = "used_minigun_turret";
   level.sentrySettings["minigun_turret_1"].shouldSplash = true;
@@ -365,8 +365,8 @@ init() {
   level.sentrySettings["minigun_turret_2"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["minigun_turret_2"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["minigun_turret_2"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["minigun_turret_2"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["minigun_turret_2"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["minigun_turret_2"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["minigun_turret_2"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["minigun_turret_2"].headIcon = false;
   level.sentrySettings["minigun_turret_2"].teamSplash = "used_minigun_turret";
   level.sentrySettings["minigun_turret_2"].shouldSplash = true;
@@ -393,8 +393,8 @@ init() {
   level.sentrySettings["minigun_turret_3"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["minigun_turret_3"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["minigun_turret_3"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["minigun_turret_3"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["minigun_turret_3"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["minigun_turret_3"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["minigun_turret_3"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["minigun_turret_3"].headIcon = false;
   level.sentrySettings["minigun_turret_3"].teamSplash = "used_minigun_turret";
   level.sentrySettings["minigun_turret_3"].shouldSplash = true;
@@ -421,8 +421,8 @@ init() {
   level.sentrySettings["minigun_turret_4"].modelPlacement = "weapon_standing_turret_grenade_launcher_obj";
   level.sentrySettings["minigun_turret_4"].modelPlacementFailed = "weapon_standing_turret_grenade_launcher_obj_red";
   level.sentrySettings["minigun_turret_4"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["minigun_turret_4"].hintString = &"ALIEN_COLLECTIBLES_USE_TURRET";
-  level.sentrySettings["minigun_turret_4"].ownerHintString = &"ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
+  level.sentrySettings["minigun_turret_4"].hintString = & "ALIEN_COLLECTIBLES_USE_TURRET";
+  level.sentrySettings["minigun_turret_4"].ownerHintString = & "ALIEN_COLLECTIBLES_DOUBLE_TAP_TO_CARRY";
   level.sentrySettings["minigun_turret_4"].headIcon = false;
   level.sentrySettings["minigun_turret_4"].teamSplash = "used_minigun_turret";
   level.sentrySettings["minigun_turret_4"].shouldSplash = true;
@@ -447,11 +447,10 @@ giveSentry(sentryType) {
 
   self.isCarrying = false;
 
-  if(isDefined(sentryGun)) {
+  if(isDefined(sentryGun))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 setCarryingSentry(sentryGun, allowCancel) {
@@ -654,13 +653,11 @@ sentry_handleDamage() {
     if(!maps\mp\gametypes\_weapons::friendlyFireCheck(self.owner, attacker, 0)) {
       continue;
     }
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
+    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
-    }
 
-    if(meansOfDeath == "MOD_MELEE") {
+    if(meansOfDeath == "MOD_MELEE")
       self.damageTaken += self.maxHealth;
-    }
 
     modifiedDamage = damage;
     if(isPlayer(attacker)) {
@@ -684,14 +681,12 @@ sentry_handleDamage() {
         attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 100, weapon, meansOfDeath);
         attacker notify("destroyed_killstreak");
 
-        if(isDefined(self.UAVRemoteMarkedBy) && self.UAVRemoteMarkedBy != attacker) {
+        if(isDefined(self.UAVRemoteMarkedBy) && self.UAVRemoteMarkedBy != attacker)
           self.UAVRemoteMarkedBy thread maps\mp\killstreaks\_remoteuav::remoteUAV_processTaggedAssist();
-        }
       }
 
-      if(isDefined(self.owner)) {
+      if(isDefined(self.owner))
         self.owner thread leaderDialogOnPlayer(level.sentrySettings[self.sentryType].voDestroyed, undefined, undefined, self.origin);
-      }
 
       self notify("death");
       return;
@@ -738,9 +733,8 @@ sentry_handleDeath() {
   self SetSentryOwner(undefined);
   self SetTurretMinimapVisible(false);
 
-  if(isDefined(self.ownerTrigger)) {
+  if(isDefined(self.ownerTrigger))
     self.ownerTrigger delete();
-  }
 
   self playSound("sentry_explode");
 
@@ -753,9 +747,8 @@ sentry_handleDeath() {
     default:
       break;
   }
-  if(isDefined(self)) {
+  if(isDefined(self))
     self thread sentry_deleteturret();
-  }
 }
 
 sentry_deleteturret() {
@@ -781,13 +774,11 @@ sentry_deleteturret() {
     self notify("deleting");
   }
 
-  if(isDefined(self.killCamEnt)) {
+  if(isDefined(self.killCamEnt))
     self.killCamEnt delete();
-  }
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 sentry_handleUse() {
@@ -910,37 +901,29 @@ turret_handlePickup_pc(turret) {
 }
 
 can_pickup_sentry(turret) {
-  if(!isReallyAlive(self)) {
+  if(!isReallyAlive(self))
     return false;
-  }
 
-  if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
+  if(isDefined(self.using_remote_turret) && self.using_remote_turret)
     return false;
-  }
 
-  if(self IsUsingTurret() || isDefined(turret.deleting)) {
+  if(self IsUsingTurret() || isDefined(turret.deleting))
     return false;
-  }
 
-  if(self is_holding_deployable()) {
+  if(self is_holding_deployable())
     return false;
-  }
 
-  if(is_true(self.isCarrying)) {
+  if(is_true(self.isCarrying))
     return false;
-  }
 
-  if(isDefined(turret.inUseBy)) {
+  if(isDefined(turret.inUseBy))
     return false;
-  }
 
-  if(isDefined(level.drill_carrier) && level.drill_carrier == self) {
+  if(isDefined(level.drill_carrier) && level.drill_carrier == self)
     return false;
-  }
 
-  if(isDefined(self.remoteUAV)) {
+  if(isDefined(self.remoteUAV))
     return false;
-  }
 
   return true;
 }
@@ -988,7 +971,7 @@ turret_handleUse() {
     playingHeatFX = false;
 
     submitted_overheat_value = 0;
-    player setLowerMessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
+    player setLowerMessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
 
     for(;;) {
       if(!isReallyAlive(player)) {
@@ -1011,11 +994,10 @@ turret_handleUse() {
         break;
       }
 
-      if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime) {
+      if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime)
         barFrac = 1;
-      } else {
+      else
         barFrac = self.heatLevel / level.sentrySettings[self.sentryType].overheatTime;
-      }
 
       throttle = 5;
       new_value = int(barFrac * 100);
@@ -1026,9 +1008,8 @@ turret_handleUse() {
         }
       }
 
-      if(string_starts_with(self.sentryType, "minigun_turret")) {
+      if(string_starts_with(self.sentryType, "minigun_turret"))
         minigun_turret = "minigun_turret";
-      }
 
       if(self.forceDisable || self.overheated) {
         self TurretFireDisable();
@@ -1080,9 +1061,8 @@ sentry_setOwner(owner) {
 sentry_setPlaced() {
   self setModel(level.sentrySettings[self.sentryType].modelBase);
 
-  if(self GetMode() == "manual") {
+  if(self GetMode() == "manual")
     self SetMode(level.sentrySettings[self.sentryType].sentryModeOff);
-  }
 
   self setSentryCarrier(undefined);
   self setCanDamage(true);
@@ -1101,21 +1081,19 @@ sentry_setPlaced() {
       self.angles = self.carriedBy.angles;
 
       if(IsAlive(self.originalOwner)) {
-        if(level.Console || self.originalOwner usinggamepad()) {
+        if(level.Console || self.originalOwner usinggamepad())
           self.originalOwner setLowerMessage("pickup_hint", level.sentrySettings[self.sentryType].ownerHintString, 3.0, undefined, undefined, undefined, undefined, undefined, true);
-        } else {
-          self.originalOwner setLowerMessage("pickup_hint", &"ALIENS_PATCH_PRESS_TO_CARRY", 3.0, undefined, undefined, undefined, undefined, undefined, true);
-        }
+        else
+          self.originalOwner setLowerMessage("pickup_hint", & "ALIENS_PATCH_PRESS_TO_CARRY", 3.0, undefined, undefined, undefined, undefined, undefined, true);
       }
 
       self.ownerTrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
       assert(isDefined(self.ownerTrigger));
 
-      if(level.Console || self.originalOwner usinggamepad()) {
+      if(level.Console || self.originalOwner usinggamepad())
         self.originalOwner thread turret_handlePickup(self);
-      } else {
+      else
         self.originalOwner thread turret_handlePickup_PC(self);
-      }
       self thread turret_handleUse();
       break;
     default:
@@ -1131,9 +1109,8 @@ sentry_setPlaced() {
 
   if(isDefined(self.owner)) {
     self.owner.isCarrying = false;
-    if(level.sentrySettings[self.sentryType].isSentient) {
+    if(level.sentrySettings[self.sentryType].isSentient)
       self make_entity_sentient_mp(self.owner.team);
-    }
     self.owner notify("new_sentry", self);
   }
 
@@ -1146,20 +1123,18 @@ sentry_setPlaced() {
 
 sentry_setCancelled() {
   self.carriedBy forceUseHintOff();
-  if(isDefined(self.owner)) {
+  if(isDefined(self.owner))
     self.owner.isCarrying = false;
-  }
 
   self delete();
 }
 
 sentry_setCarried(carrier) {
   assert(isPlayer(carrier));
-  if(isDefined(self.originalOwner)) {
+  if(isDefined(self.originalOwner))
     assertEx(carrier == self.originalOwner, "sentry_setCarried() specified carrier does not own this sentry");
-  } else {
+  else
     assertEx(carrier == self.owner, "sentry_setCarried() specified carrier does not own this sentry");
-  }
 
   self setModel(level.sentrySettings[self.sentryType].modelPlacement);
 
@@ -1228,11 +1203,10 @@ sentry_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced) {
+  if(self.canBePlaced)
     self sentry_setPlaced();
-  } else {
+  else
     self delete();
-  }
 }
 
 sentry_onCarrierDisconnect(carrier) {
@@ -1291,11 +1265,10 @@ sentry_setActive() {
         entNum = self GetEntityNumber();
         self addToTurretList(entNum);
 
-        if(player == self.owner) {
+        if(player == self.owner)
           self enablePlayerUse(player);
-        } else {
+        else
           self disablePlayerUse(player);
-        }
         break;
     }
   }
@@ -1321,11 +1294,10 @@ sentry_setInactive() {
       break;
   }
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  } else if(isDefined(self.owner)) {
+  else if(isDefined(self.owner))
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
-  }
 }
 
 sentry_makeSolid() {
@@ -1337,9 +1309,8 @@ sentry_makeNotSolid() {
 }
 
 isFriendlyToSentry(sentryGun) {
-  if(level.teamBased && self.team == sentryGun.team) {
+  if(level.teamBased && self.team == sentryGun.team)
     return true;
-  }
 
   return false;
 }
@@ -1384,9 +1355,8 @@ sentry_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       lifeSpan = max(0, lifeSpan - 1.0);
-    }
   }
 
   while(isDefined(self) && isDefined(self.inUseBy)) {
@@ -1480,11 +1450,10 @@ sentry_heatMonitor() {
   overheatCoolDown = level.sentrySettings[self.sentryType].cooldownTime;
 
   for(;;) {
-    if(self.heatLevel != lastHeatLevel) {
+    if(self.heatLevel != lastHeatLevel)
       wait(fireTime);
-    } else {
+    else
       self.heatLevel = max(0, self.heatLevel - 0.05);
-    }
 
     if(self.heatLevel > overheatTime) {
       self.overheated = true;
@@ -1596,9 +1565,8 @@ sentry_beepSounds() {
   for(;;) {
     wait(3.0);
 
-    if(!isDefined(self.carriedBy)) {
+    if(!isDefined(self.carriedBy))
       self playSound("sentry_gun_beep");
-    }
   }
 }
 

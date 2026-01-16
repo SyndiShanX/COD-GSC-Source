@@ -12,7 +12,8 @@ main(model, type) {
   self thread turret_sound_init();
 }
 
-init_audio_turret() {}
+init_audio_turret() {
+}
 
 turret_sound_init() {
   self.sound_org = spawn("script_origin", self.origin);

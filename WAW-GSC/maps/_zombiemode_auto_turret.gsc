@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  level.auto_turret_array = getEntArray("auto_turret_trigger", "script_noteworthy");
+  level.auto_turret_array = GetEntArray("auto_turret_trigger", "script_noteworthy");
   if(!isDefined(level.auto_turret_array)) {
     return;
   }
@@ -22,7 +22,7 @@ init() {
   if(!isDefined(level.auto_turret_timeout)) {
     level.auto_turret_timeout = 30;
   }
-  for(i = 0; i < level.auto_turret_array.size; i++) {
+  for (i = 0; i < level.auto_turret_array.size; i++) {
     level.auto_turret_array[i].curr_time = -1;
     level.auto_turret_array[i].turret_active = false;
     level.auto_turret_array[i] thread auto_turret_think();
@@ -39,7 +39,7 @@ auto_turret_think() {
   }
   self.turret SetTurretTeam("allies");
   self.turret MakeTurretUnusable();
-  for(;;) {
+  for (;;) {
     cost = level.auto_turret_cost;
     self SetHintString(&"ZOMBIE_AUTO_TURRET", cost);
     self SetCursorHint("HINT_NOICON");
@@ -52,7 +52,7 @@ auto_turret_think() {
       continue;
     }
     if(player.score < cost) {
-      self playSound("deny");
+      self playsound("deny");
       player thread play_no_money_turret_dialog();
       continue;
     }
@@ -70,10 +70,10 @@ auto_turret_activate() {
   if(level.max_auto_turrets_active <= 0) {
     return;
   }
-  while(level.curr_auto_turrets_active >= level.max_auto_turrets_active) {
+  while (level.curr_auto_turrets_active >= level.max_auto_turrets_active) {
     worst_turret = undefined;
     worst_turret_time = -1;
-    for(i = 0; i < level.auto_turret_array.size; i++) {
+    for (i = 0; i < level.auto_turret_array.size; i++) {
       if(level.auto_turret_array[i] == self) {
         continue;
       }
@@ -110,7 +110,7 @@ auto_turret_deactivate() {
 
 auto_turret_update_timeout() {
   self endon("turret_deactivated");
-  while(self.curr_time > 0) {
+  while (self.curr_time > 0) {
     wait(1);
     self.curr_time--;
   }

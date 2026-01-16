@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_powerup_bonfire_sale;
 
 autoexec __init__system__() {
@@ -26,7 +27,7 @@ __init__() {
   zm_powerups::register_powerup("bonfire_sale", &grab_bonfire_sale);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("bonfire_sale", "p8_zm_power_up_bonfire_sale", # "zombie/powerup_max_ammo", &zm_powerups::func_should_never_drop, 0, 0, 0, undefined, "powerup_bon_fire", "zombie_powerup_bonfire_sale_time", "zombie_powerup_bonfire_sale_on");
+    zm_powerups::add_zombie_powerup("bonfire_sale", "p8_zm_power_up_bonfire_sale", #"zombie/powerup_max_ammo", &zm_powerups::func_should_never_drop, 0, 0, 0, undefined, "powerup_bon_fire", "zombie_powerup_bonfire_sale_time", "zombie_powerup_bonfire_sale_on");
   }
 }
 

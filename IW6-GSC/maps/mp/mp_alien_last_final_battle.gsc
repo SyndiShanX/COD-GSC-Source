@@ -106,9 +106,8 @@ do_cross_vignette() {
   level.dr_cross waittill("ok_to_start_anim");
   level notify("shield_down");
 
-  foreach(var_1 in level.players) {
-    var_1 thread cross_vignette_unstuck();
-  }
+  foreach(var_1 in level.players)
+  var_1 thread cross_vignette_unstuck();
 
   level.dr_cross scriptmodelplayanimdeltamotion("alien_last_cross_vignette_scene");
   level.dr_cross.crosshead scriptmodelplayanim("alien_last_cross_vignette_scene");
@@ -158,9 +157,8 @@ handle_cross_vignette_aliens() {
   var_0 = common_scripts\utility::getstructarray("cross_vignette_spawners", "targetname");
   level.cross_aliens = [];
 
-  foreach(var_2 in var_0) {
-    thread spawn_single_vignette_alien(var_2);
-  }
+  foreach(var_2 in var_0)
+  thread spawn_single_vignette_alien(var_2);
 
   level waittill("cross_landing");
 
@@ -180,9 +178,8 @@ spawn_single_vignette_alien(var_0) {
   var_1 = "wave goon";
   var_2 = var_0.angles;
 
-  if(!isDefined(var_2)) {
+  if(!isDefined(var_2))
     var_2 = (0, 270, 0);
-  }
 
   wait(randomfloatrange(0.2, 1.0));
   var_3 = maps\mp\alien\_spawnlogic::spawnalien(var_0.origin, var_2, var_1);
@@ -198,9 +195,8 @@ spawn_single_vignette_alien(var_0) {
   maps\mp\alien\_outline_proto::enable_outline(var_3, 3, 1);
   playFXOnTag(level._effect["alien_uncloaking"], var_3, "j_neck");
 
-  if(isDefined(var_3.enemy)) {
+  if(isDefined(var_3.enemy))
     var_3.enemy.current_attackers = [];
-  }
 
   level.cross_aliens[level.cross_aliens.size] = var_3;
   return var_3;
@@ -241,9 +237,8 @@ wait_for_all_close_players() {
     var_1 = 0;
 
     foreach(var_3 in level.players) {
-      if(var_3 istouching(var_0)) {
+      if(var_3 istouching(var_0))
         var_1++;
-      }
     }
 
     if(var_1 >= level.players.size) {
@@ -285,7 +280,9 @@ start_final_battle() {
   foreach(var_1 in level.final_battle_lane_order) {
     maps\mp\alien\_gamescore::reset_encounter_performance();
     level.current_encounter_info.force_end_func = ::debug_beat_ancestor_encounter;
-    [[var_1]]();
+    [
+      [var_1]
+    ]();
     level.final_battle_stage = level.final_battle_stage + 1;
     wait 8;
   }
@@ -300,18 +297,16 @@ final_battle_left_ancestor() {
   var_0 = common_scripts\utility::getstruct("ancestor_left_lane", "targetname");
   level.left_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
-  if(level.left_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
+  if(level.left_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check"))
     level.left_ancestor maps\mp\alien\_utility::ent_flag_set("activate_shield_health_check");
-  }
 
   level thread left_ancestor_event();
   level thread start_trap_gen_sfx();
 
-  if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
+  if(!common_scripts\utility::flag("final_battle_start_vo_over"))
     level thread play_godfather_vo("last_gdf_inc_westgate", 5);
-  } else {
+  else
     level thread play_godfather_vo("last_gdf_inc_westgate");
-  }
 
   common_scripts\utility::waittill_any_timeout(240, "debug_beat_current_encounter");
   end_final_battle_encounter();
@@ -413,9 +408,8 @@ start_trap_gen_sfx() {
   level.trap_gen_sfx_lp linkto(var_0);
   wait 0.1;
 
-  if(isDefined(level.trap_gen_sfx_lp)) {
+  if(isDefined(level.trap_gen_sfx_lp))
     level.trap_gen_sfx_lp playLoopSound("alien_conduit_on_lp");
-  }
 }
 
 dmg_trap_gen_sfx() {
@@ -425,9 +419,8 @@ dmg_trap_gen_sfx() {
   level.trap_gen_dmg_sfx_lp linkto(var_0);
   wait 0.1;
 
-  if(isDefined(level.trap_gen_dmg_sfx_lp)) {
+  if(isDefined(level.trap_gen_dmg_sfx_lp))
     level.trap_gen_dmg_sfx_lp playLoopSound("alien_conduit_damaged_lp");
-  }
 }
 
 repair_trap_gen_sfx() {
@@ -436,9 +429,8 @@ repair_trap_gen_sfx() {
     level.trap_gen_dmg_sfx_lp delete();
   }
 
-  if(isDefined(level.trap_gen_sfx_lp)) {
+  if(isDefined(level.trap_gen_sfx_lp))
     level.trap_gen_sfx_lp playLoopSound("alien_conduit_on_lp");
-  }
 }
 
 stop_trap_gen_sfx() {
@@ -460,17 +452,15 @@ final_battle_middle_ancestor() {
   var_0 = common_scripts\utility::getstruct("ancestor_middle_lane", "targetname");
   level.middle_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
-  if(level.middle_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
+  if(level.middle_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check"))
     level.middle_ancestor maps\mp\alien\_utility::ent_flag_set("activate_shield_health_check");
-  }
 
   level thread middle_ancestor_event();
 
-  if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
+  if(!common_scripts\utility::flag("final_battle_start_vo_over"))
     level thread play_godfather_vo("last_gdf_inc_northgate", 5);
-  } else {
+  else
     level thread play_godfather_vo("last_gdf_inc_northgate");
-  }
 
   common_scripts\utility::waittill_any_timeout(240, "debug_beat_current_encounter");
   end_final_battle_encounter();
@@ -531,17 +521,15 @@ final_battle_right_ancestor() {
   var_0 = common_scripts\utility::getstruct("ancestor_right_lane", "targetname");
   level.right_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
-  if(level.right_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
+  if(level.right_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check"))
     level.right_ancestor maps\mp\alien\_utility::ent_flag_set("activate_shield_health_check");
-  }
 
   level thread right_ancestor_event();
 
-  if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
+  if(!common_scripts\utility::flag("final_battle_start_vo_over"))
     level thread play_godfather_vo("last_gdf_inc_eastgate", 4);
-  } else {
+  else
     level thread play_godfather_vo("last_gdf_inc_eastgate");
-  }
 
   common_scripts\utility::waittill_any_timeout(240, "debug_beat_current_encounter");
   end_final_battle_encounter();
@@ -604,9 +592,8 @@ start_last_stand() {
   if(common_scripts\utility::flag("cortex_detonated")) {
     return;
   }
-  if(isDefined(level.jump_to_final_battle) && level.jump_to_final_battle) {
+  if(isDefined(level.jump_to_final_battle) && level.jump_to_final_battle)
     wait 8;
-  }
 
   maps\mp\alien\_gamescore::reset_encounter_performance();
   wait 2.0;
@@ -652,9 +639,8 @@ left_ancestor_respawn() {
     wait 20;
     var_0++;
 
-    if(var_0 >= 2) {
+    if(var_0 >= 2)
       return;
-    }
   }
 
   var_1 = common_scripts\utility::getstruct("ancestor_left_lane", "targetname");
@@ -669,9 +655,8 @@ middle_ancestor_respawn() {
     wait 20;
     var_0++;
 
-    if(var_0 >= 2) {
+    if(var_0 >= 2)
       return;
-    }
   }
 
   var_1 = common_scripts\utility::getstruct("ancestor_middle_lane", "targetname");
@@ -686,9 +671,8 @@ right_ancestor_respawn() {
     wait 20;
     var_0++;
 
-    if(var_0 >= 2) {
+    if(var_0 >= 2)
       return;
-    }
   }
 
   var_1 = common_scripts\utility::getstruct("ancestor_right_lane", "targetname");
@@ -705,18 +689,16 @@ do_ending() {
   }
 
   foreach(var_4 in level.agentarray) {
-    if(isDefined(var_4) && isalive(var_4)) {
+    if(isDefined(var_4) && isalive(var_4))
       var_4 dodamage(100000, level.cortex_base_origin);
-    }
   }
 
   level.nuketimer = 3.35;
   level.players[0] thread maps\mp\alien\_nuke::donukesimple();
   thread medusa_100_state_fx();
 
-  foreach(var_1 in level.players) {
-    var_1 playrumbleonentity("heavy_3s");
-  }
+  foreach(var_1 in level.players)
+  var_1 playrumbleonentity("heavy_3s");
 
   var_8 = gettime() - level.final_battle_start_time;
   level waittill("nuke_death");
@@ -738,11 +720,10 @@ update_lb_aliensession_last_escape(var_0) {
 }
 
 get_lb_final_battle_rank(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     return solo_final_battle_rank(var_0);
-  } else {
+  else
     return coop_final_battle_rank(var_0);
-  }
 }
 
 solo_final_battle_rank(var_0) {
@@ -750,15 +731,14 @@ solo_final_battle_rank(var_0) {
   var_2 = 960000;
   var_3 = 1080000;
 
-  if(var_0 <= var_1) {
+  if(var_0 <= var_1)
     return 0;
-  } else if(var_0 <= var_2) {
+  else if(var_0 <= var_2)
     return 1;
-  } else if(var_0 <= var_3) {
+  else if(var_0 <= var_3)
     return 2;
-  } else {
+  else
     return 3;
-  }
 }
 
 coop_final_battle_rank(var_0) {
@@ -766,15 +746,14 @@ coop_final_battle_rank(var_0) {
   var_2 = 810000;
   var_3 = 870000;
 
-  if(var_0 <= var_1) {
+  if(var_0 <= var_1)
     return 0;
-  } else if(var_0 <= var_2) {
+  else if(var_0 <= var_2)
     return 1;
-  } else if(var_0 <= var_3) {
+  else if(var_0 <= var_3)
     return 2;
-  } else {
+  else
     return 3;
-  }
 }
 
 mp_alien_last_camera_fly() {
@@ -792,9 +771,8 @@ mp_alien_last_camera_fly() {
   var_0 = getent("cortex_base", "targetname");
   var_1 = 1;
 
-  if(self getEye()[0] > var_0.origin[0]) {
+  if(self getEye()[0] > var_0.origin[0])
     var_1 = -1;
-  }
 
   var_2 = common_scripts\utility::getstruct("fly_cam_init", "targetname");
   var_2.angles = (angleclamp180(var_2.angles[0]), angleclamp180(var_2.angles[1]), angleclamp180(var_2.angles[2]));
@@ -837,9 +815,8 @@ cubic_bezier_curve(var_0, var_1, var_2, var_3, var_4) {
 
 set_players_escaped() {
   foreach(var_1 in level.players) {
-    if(!maps\mp\alien\_utility::is_casual_mode()) {
+    if(!maps\mp\alien\_utility::is_casual_mode())
       var_1 maps\mp\alien\_persistence::set_player_escaped();
-    }
 
     var_1.dlc4_escaped = 1;
   }
@@ -848,9 +825,8 @@ set_players_escaped() {
 }
 
 give_players_completion_awards() {
-  foreach(var_1 in level.players) {
-    var_1 maps\mp\alien\_persistence::award_completion_tokens();
-  }
+  foreach(var_1 in level.players)
+  var_1 maps\mp\alien\_persistence::award_completion_tokens();
 }
 
 run_cortex_logic() {
@@ -859,9 +835,8 @@ run_cortex_logic() {
   level.cortex_sfx3 = spawn("script_origin", (398, -622, 77));
   level endon("game_ended");
 
-  while(common_scripts\utility::flag("outpost_encounter_running")) {
+  while(common_scripts\utility::flag("outpost_encounter_running"))
     wait 1.0;
-  }
 
   var_0 = getent("cortex_use_trigger", "targetname");
 
@@ -872,24 +847,21 @@ run_cortex_logic() {
     var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_cortex_activate", 1300);
     var_1 = getent("cortex_canister", "targetname");
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       maps\mp\alien\_outline_proto::add_to_outline_hive_watch_list(var_1);
-    }
 
     level thread players_use_cortex_monitor(var_0, "cortex_start_hint");
     wait_for_all_player_use();
 
-    foreach(var_3 in level.players) {
-      var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_START_HINT");
-    }
+    foreach(var_3 in level.players)
+    var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_START_HINT");
 
     common_scripts\utility::flag_set("cortex_started");
     thread cortex_sfx_on();
     var_0 maps\mp\alien\_hive::destroy_hive_icon();
 
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       maps\mp\alien\_outline_proto::remove_from_outline_hive_watch_list(var_1);
-    }
 
     wait 0.1;
     var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_defend", 1300);
@@ -937,9 +909,8 @@ run_cortex_logic() {
   var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_cortex_detonate", 1300);
   var_1 = getent("cortex_canister", "targetname");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     maps\mp\alien\_outline_proto::add_to_outline_hive_watch_list(var_1);
-  }
 
   level thread play_godfather_vo("last_gdf_detonatethecortex");
   var_8 = ["last_gdf_detonatethecortex"];
@@ -947,28 +918,24 @@ run_cortex_logic() {
   level thread players_use_cortex_monitor(var_0, "cortex_detonate_hint");
   wait_for_all_player_use();
 
-  foreach(var_3 in level.players) {
-    var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_DETONATE_HINT");
-  }
+  foreach(var_3 in level.players)
+  var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_DETONATE_HINT");
 
   setomnvar("ui_alien_boss_status", 0);
   setomnvar("ui_alien_boss_progression", 0);
 
-  if(isDefined(level.current_encounter_info) && isDefined(level.current_encounter_info.force_end_func)) {
+  if(isDefined(level.current_encounter_info) && isDefined(level.current_encounter_info.force_end_func))
     [[level.current_encounter_info.force_end_func]]();
-  }
 
-  if(!common_scripts\utility::flag("start_last_stand")) {
+  if(!common_scripts\utility::flag("start_last_stand"))
     common_scripts\utility::flag_set("start_last_stand");
-  }
 
   common_scripts\utility::flag_set("cortex_detonated");
   var_0 maps\mp\alien\_hive::destroy_hive_icon();
   var_0 sethintstring("");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     maps\mp\alien\_outline_proto::remove_from_outline_hive_watch_list(var_1);
-  }
 }
 
 add_cortex_charge(var_0, var_1) {
@@ -985,31 +952,27 @@ subtract_cortex_charge(var_0) {
 }
 
 get_cortex_charge_max(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = level.players.size;
-  }
 
-  if(var_0 == 0) {
+  if(var_0 == 0)
     var_0 = 1;
-  }
 
   var_1 = 55000;
 
-  if(var_0 == 1) {
+  if(var_0 == 1)
     var_1 = 38000;
-  } else if(var_0 == 2) {
+  else if(var_0 == 2)
     var_1 = 55000;
-  } else if(var_0 == 3) {
+  else if(var_0 == 3)
     var_1 = 88000;
-  } else if(var_0 == 4) {
+  else if(var_0 == 4)
     var_1 = 115000;
-  }
 
-  if(maps\mp\alien\_utility::is_hardcore_mode()) {
+  if(maps\mp\alien\_utility::is_hardcore_mode())
     return var_1 * 1.15;
-  } else {
+  else
     return var_1;
-  }
 }
 
 get_cortex_charge_percent() {
@@ -1066,13 +1029,13 @@ cortex_threat_think(var_0) {
 
     var_7 = var_2 / max(1, var_3);
 
-    if(maps\mp\alien\_utility::is_true(level.room_exploit_threat_active)) {
+    if(maps\mp\alien\_utility::is_true(level.room_exploit_threat_active))
       var_0.threatbias = int(-8000);
-    } else if(var_7 < 2500) {
+    else if(var_7 < 2500)
       var_0.threatbias = int(-3000);
-    } else if(var_7 > 5000) {
+    else if(var_7 > 5000)
       var_0.threatbias = int(-1200);
-    } else {
+    else {
       var_8 = 2500;
       var_9 = 1800;
       var_10 = (var_7 - 2500) / var_8;
@@ -1092,9 +1055,8 @@ cortex_monitor_health() {
     var_0 = 0;
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(isDefined(var_2.team) && var_2.team == "allies") {
+    if(isDefined(var_2.team) && var_2.team == "allies")
       var_0 = 1;
-    }
 
     if(!var_0 && level.cortex_charge > 0) {
       level notify("dlc_vo_notify", "cortex_attack");
@@ -1109,9 +1071,8 @@ cortex_monitor_health() {
 players_use_cortex_monitor(var_0, var_1) {
   level endon("all_players_using_cortex");
 
-  foreach(var_3 in level.players) {
-    var_3 thread watch_for_use_cortex_trigger(var_0, var_1);
-  }
+  foreach(var_3 in level.players)
+  var_3 thread watch_for_use_cortex_trigger(var_0, var_1);
 
   for(;;) {
     level waittill("connected", var_3);
@@ -1122,9 +1083,8 @@ players_use_cortex_monitor(var_0, var_1) {
 wait_for_all_player_use() {
   level endon("game_ended");
 
-  while(!are_all_players_using_cortex()) {
+  while(!are_all_players_using_cortex())
     wait 0.05;
-  }
 
   level notify("all_players_using_cortex");
 }
@@ -1133,9 +1093,8 @@ are_all_players_using_cortex() {
   var_0 = 1;
 
   foreach(var_2 in level.players) {
-    if(!isDefined(var_2.player_using_cortex) || !var_2.player_using_cortex) {
+    if(!isDefined(var_2.player_using_cortex) || !var_2.player_using_cortex)
       var_0 = 0;
-    }
   }
 
   return var_0;
@@ -1148,18 +1107,17 @@ watch_for_use_cortex_trigger(var_0, var_1) {
   self notify("watch_for_use_cortex");
   self endon("watch_for_use_cortex");
   self.player_using_cortex = 0;
-  var_2 = &"MP_ALIEN_LAST_CORTEX_START_HINT";
+  var_2 = & "MP_ALIEN_LAST_CORTEX_START_HINT";
 
-  if(var_1 == "cortex_detonate_hint") {
-    var_2 = &"MP_ALIEN_LAST_CORTEX_DETONATE_HINT";
-  }
+  if(var_1 == "cortex_detonate_hint")
+    var_2 = & "MP_ALIEN_LAST_CORTEX_DETONATE_HINT";
 
   var_3 = 16900;
 
   for(;;) {
-    if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone") {
+    if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone")
       self forceusehintoff(var_2);
-    } else if(player_looking_at(var_0.origin, 0.7) && player_in_front_of(var_0.origin)) {
+    else if(player_looking_at(var_0.origin, 0.7) && player_in_front_of(var_0.origin)) {
       if(distancesquared(self getEye(), var_0.origin) < var_3) {
         self forceusehinton(var_2);
 
@@ -1188,9 +1146,8 @@ reset_cortex_usage() {
 }
 
 player_looking_at(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0.8;
-  }
 
   var_2 = self getEye();
   var_3 = vectortoangles(var_0 - var_2);
@@ -1199,9 +1156,8 @@ player_looking_at(var_0, var_1) {
   var_6 = anglesToForward(var_5);
   var_7 = vectordot(var_4, var_6);
 
-  if(var_7 < var_1) {
+  if(var_7 < var_1)
     return 0;
-  }
 
   var_8 = bulletTrace(var_0, var_2, 0);
   return var_8["fraction"] == 1;
@@ -1228,29 +1184,25 @@ jump_to_ending() {}
 shut_base_gates() {
   var_0 = level.outposts["main_base"].outpost_encounters["transition_left"];
 
-  if(maps\mp\alien\_utility::is_true(var_0.completed)) {
+  if(maps\mp\alien\_utility::is_true(var_0.completed))
     thread maps\mp\mp_alien_last_progression::opener_slide(var_0, 1);
-  }
 
   var_1 = level.outposts["main_base"].outpost_encounters["transition_middle"];
 
-  if(maps\mp\alien\_utility::is_true(var_1.completed)) {
+  if(maps\mp\alien\_utility::is_true(var_1.completed))
     thread maps\mp\mp_alien_last_progression::opener_slide(var_1, 1, 1);
-  }
 
   var_2 = level.outposts["main_base"].outpost_encounters["transition_right"];
 
-  if(maps\mp\alien\_utility::is_true(var_2.completed)) {
+  if(maps\mp\alien\_utility::is_true(var_2.completed))
     thread maps\mp\mp_alien_last_progression::opener_slide(var_2, 1);
-  }
 
   destroy_equipment_near_base_gates();
   var_3 = getEntArray("garage_front_gate_model", "targetname");
   var_4 = getent("garage_front_gate_clip", "targetname");
 
-  foreach(var_6 in var_3) {
-    var_6 movez(-101, 2.0, 0.3, 0.1);
-  }
+  foreach(var_6 in var_3)
+  var_6 movez(-101, 2.0, 0.3, 0.1);
 
   var_4 movez(-101, 2.0, 0.3, 0.1);
   wait 2.2;
@@ -1311,30 +1263,26 @@ final_battle_vo() {
   maps\mp\mp_alien_last::play_last_vignette_vo(var_0);
   common_scripts\utility::flag_set("final_battle_start_vo_over");
 
-  while(get_cortex_charge_percent() < 25) {
+  while(get_cortex_charge_percent() < 25)
     wait 0.1;
-  }
 
   var_0 = ["last_gdf_powercellcharged"];
   maps\mp\mp_alien_last::play_last_vignette_vo(var_0);
 
-  while(get_cortex_charge_percent() < 50) {
+  while(get_cortex_charge_percent() < 50)
     wait 0.1;
-  }
 
   var_0 = ["last_gdf_onyourgo"];
   maps\mp\mp_alien_last::play_last_vignette_vo(var_0);
 
-  while(get_cortex_charge_percent() < 75) {
+  while(get_cortex_charge_percent() < 75)
     wait 0.1;
-  }
 
   var_0 = ["last_gdf_autosequence"];
   maps\mp\mp_alien_last::play_last_vignette_vo(var_0);
 
-  while(get_cortex_charge_percent() < 95) {
+  while(get_cortex_charge_percent() < 95)
     wait 0.1;
-  }
 
   var_0 = ["last_gdf_medusadetonation"];
   maps\mp\mp_alien_last::play_last_vignette_vo(var_0);
@@ -1359,9 +1307,8 @@ play_vo_on_final_ancestors_death() {
       continue;
     }
 
-    if(level.dead_ancestors == 3) {
+    if(level.dead_ancestors == 3)
       thread play_godfather_vo("last_gdf_allthreedown");
-    }
   }
 }
 
@@ -1369,9 +1316,8 @@ play_godfather_vo(var_0, var_1) {
   level endon("debug_beat_current_encounter");
   level endon("game_ended");
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     wait(var_1);
-  }
 
   if(!isDefined(var_0)) {
     return;
@@ -1379,15 +1325,13 @@ play_godfather_vo(var_0, var_1) {
   if(!soundexists(var_0)) {
     return;
   }
-  while(maps\mp\mp_alien_last::vo_system_is_paused()) {
+  while(maps\mp\mp_alien_last::vo_system_is_paused())
     wait 0.1;
-  }
 
   maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
 
-  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing()) {
+  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing())
     wait 0.1;
-  }
 
   wait 0.25;
   var_2 = lookupsoundlength(var_0) / 1000;
@@ -1488,9 +1432,8 @@ medusa_shock_behavior() {
       }
       var_8 = var_7.origin + (0, 0, 30);
 
-      if(var_7.alien_type == "elite") {
+      if(var_7.alien_type == "elite")
         var_8 = var_7 gettagorigin("tag_eye");
-      }
 
       if(distancesquared(var_3, var_8) > var_5) {
         continue;
@@ -1537,9 +1480,8 @@ destroy_equipment_near(var_0, var_1) {
     if(isDefined(var_4.carriedby)) {
       continue;
     }
-    if(distancesquared(var_0, var_4.origin) <= var_2) {
+    if(distancesquared(var_0, var_4.origin) <= var_2)
       var_4 notify("death");
-    }
   }
 }
 
@@ -1600,9 +1542,8 @@ play_cross_music() {
 
     wait 0.1;
 
-    if(!common_scripts\utility::flag("exfil_music_playing")) {
+    if(!common_scripts\utility::flag("exfil_music_playing"))
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc4_cross_scene");
-    }
   }
 }
 
@@ -1652,9 +1593,8 @@ last_end_music_sfx() {
 
     wait 0.1;
 
-    if(!common_scripts\utility::flag("exfil_music_playing")) {
+    if(!common_scripts\utility::flag("exfil_music_playing"))
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc4_end");
-    }
   }
 }
 
@@ -1672,9 +1612,8 @@ play_end_ancestor_music() {
         common_scripts\utility::flag_clear("alien_music_playing");
       }
 
-      if(maps\mp\_utility::isreallyalive(var_1)) {
+      if(maps\mp\_utility::isreallyalive(var_1))
         var_1 thread ancestor_music();
-      }
     }
   }
 }
@@ -1709,22 +1648,19 @@ check_for_room_exploit() {
     var_3 = 0;
 
     foreach(var_5 in level.players) {
-      if(var_5 istouching(var_2)) {
+      if(var_5 istouching(var_2))
         var_3++;
-      }
     }
 
-    if(var_0 == 0 && var_3 >= level.players.size * 0.75) {
+    if(var_0 == 0 && var_3 >= level.players.size * 0.75)
       var_0 = gettime();
-    } else if(var_3 < level.players.size * 0.75) {
+    else if(var_3 < level.players.size * 0.75)
       var_0 = 0;
-    }
 
-    if(var_0 != 0 && gettime() - var_0 > var_1) {
+    if(var_0 != 0 && gettime() - var_0 > var_1)
       level.room_exploit_threat_active = 1;
-    } else {
+    else
       level.room_exploit_threat_active = 0;
-    }
 
     wait 0.5;
   }
@@ -1755,7 +1691,6 @@ initial_entity_setup() {
 
   var_8 = getnodearray("main_gate_ramp_nodes", "targetname");
 
-  foreach(var_10 in var_8) {
-    var_10 disconnectnode();
-  }
+  foreach(var_10 in var_8)
+  var_10 disconnectnode();
 }

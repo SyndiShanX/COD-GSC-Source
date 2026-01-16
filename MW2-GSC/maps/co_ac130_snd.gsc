@@ -137,13 +137,13 @@ main() {
 }
 
 add_context_sensative_dialog(name1, name2, group, soundAlias) {
-  assert(isDefined(name1));
-  assert(isDefined(name2));
-  assert(isDefined(group));
-  assert(isDefined(soundAlias));
+  assert(isdefined(name1));
+  assert(isdefined(name2));
+  assert(isdefined(group));
+  assert(isdefined(soundAlias));
   assert(soundexists(soundAlias) == true);
 
-  if((!isDefined(level.scr_sound[name1])) || (!isDefined(level.scr_sound[name1][name2])) || (!isDefined(level.scr_sound[name1][name2][group]))) {
+  if((!isdefined(level.scr_sound[name1])) || (!isdefined(level.scr_sound[name1][name2])) || (!isdefined(level.scr_sound[name1][name2][group]))) {
     // creating group for the first time
     level.scr_sound[name1][name2][group] = spawnStruct();
     level.scr_sound[name1][name2][group].played = false;
@@ -156,21 +156,18 @@ add_context_sensative_dialog(name1, name2, group, soundAlias) {
 }
 
 add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
-  if(!isDefined(level.context_sensative_dialog_timeouts)) {
+  if(!isdefined(level.context_sensative_dialog_timeouts))
     level.context_sensative_dialog_timeouts = [];
-  }
 
   createStruct = false;
-  if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
+  if(!isdefined(level.context_sensative_dialog_timeouts[name1]))
     createStruct = true;
-  } else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
+  else if(!isdefined(level.context_sensative_dialog_timeouts[name1][name2]))
     createStruct = true;
-  }
-  if(createStruct) {
+  if(createStruct)
     level.context_sensative_dialog_timeouts[name1][name2] = spawnStruct();
-  }
 
-  if(isDefined(groupNum)) {
+  if(isdefined(groupNum)) {
     level.context_sensative_dialog_timeouts[name1][name2].groups = [];
     level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)] = spawnStruct();
     level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["timeoutDuration"] = timeoutDuration * 1000;

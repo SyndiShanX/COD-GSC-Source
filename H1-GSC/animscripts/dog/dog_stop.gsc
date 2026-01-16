@@ -13,7 +13,7 @@ main() {
   self clearanim( % german_shepherd_attackidle_knob, 0.2);
   thread lookattarget("attackIdle");
 
-  for(;;) {
+  for (;;) {
     if(shouldattackidle()) {
       self clearanim( % german_shepherd_idle, 0.2);
       randomattackidle();
@@ -25,7 +25,7 @@ main() {
 
     animscripts\shared::donotetracks("dog_idle");
 
-    if(isDefined(self.prevturnrate)) {
+    if(isdefined(self.prevturnrate)) {
       self.turnrate = self.prevturnrate;
       self.prevturnrate = undefined;
     }
@@ -36,21 +36,20 @@ isfacingenemy(var_0) {
   var_1 = self.enemy.origin - self.origin;
   var_2 = length(var_1);
 
-  if(var_2 < 1) {
+  if(var_2 < 1)
     return 1;
-  }
 
-  var_3 = anglesToForward(self.angles);
+  var_3 = anglestoforward(self.angles);
   return (var_3[0] * var_1[0] + var_3[1] * var_1[1]) / var_2 > var_0;
 }
 
 randomattackidle() {
   self clearanim( % german_shepherd_attackidle_knob, 0.1);
 
-  if(isfacingenemy(0.866)) {
+  if(isfacingenemy(0.866))
     self orientmode("face angle", self.angles[1]);
-  } else {
-    if(isDefined(self.enemy)) {
+  else {
+    if(isdefined(self.enemy)) {
       var_0 = vectortoyaw(self.enemy.origin - self.origin);
       var_1 = angleclamp180(var_0 - self.angles[1]);
 
@@ -59,11 +58,10 @@ randomattackidle() {
         self.prevturnrate = self.turnrate;
         self.turnrate = 0.3;
 
-        if(var_1 > 0) {
+        if(var_1 > 0)
           var_2 = % german_shepherd_rotate_ccw;
-        } else {
+        else
           var_2 = % german_shepherd_rotate_cw;
-        }
 
         self setflaggedanimrestart("dog_turn", var_2, 1, 0.2, 1.0);
         animscripts\shared::donotetracks("dog_turn");
@@ -77,13 +75,13 @@ randomattackidle() {
     self orientmode("face angle", self.angles[1]);
   }
 
-  if(should_growl()) {
+  if(should_growl())
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, 1);
-  } else {
+  else {
     var_3 = 33;
     var_4 = 66;
 
-    if(isDefined(self.mode)) {
+    if(isdefined(self.mode)) {
       if(self.mode == "growl") {
         var_3 = 15;
         var_4 = 30;
@@ -95,9 +93,9 @@ randomattackidle() {
 
     var_5 = randomint(100);
 
-    if(var_5 < var_3) {
+    if(var_5 < var_3)
       self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_b, 1, 0.2, self.animplaybackrate);
-    } else {
+    else {
       if(var_5 < var_4) {
         self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
         return;
@@ -109,17 +107,15 @@ randomattackidle() {
 }
 
 shouldattackidle() {
-  return isDefined(self.enemy) && isalive(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 1000000;
+  return isdefined(self.enemy) && isalive(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 1000000;
 }
 
 should_growl() {
-  if(isDefined(self.script_growl)) {
+  if(isdefined(self.script_growl))
     return 1;
-  }
 
-  if(!isalive(self.enemy)) {
+  if(!isalive(self.enemy))
     return 1;
-  }
 
   return !self cansee(self.enemy);
 }

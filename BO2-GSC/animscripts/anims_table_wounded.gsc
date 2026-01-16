@@ -23,9 +23,8 @@ setup_wounded_anims() {
 #using_animtree("generic_human");
 
 setup_default_wounded_anim_array() {
-  if(!isDefined(self.anim_array)) {
+  if(!isDefined(self.anim_array))
     self.anim_array = [];
-  }
 
   if(!isDefined(self.pre_move_delta_array)) {
     self.pre_move_delta_array = [];

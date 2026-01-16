@@ -89,15 +89,13 @@ pause_smoke_fx() {
   for(;;) {
     common_scripts\utility::flag_wait("pause_plane_fx");
 
-    foreach(var_2 in var_0) {
-      var_2 common_scripts\utility::pauseeffect();
-    }
+    foreach(var_2 in var_0)
+    var_2 common_scripts\utility::pauseeffect();
 
     common_scripts\utility::flag_waitopen("pause_plane_fx");
 
-    foreach(var_2 in var_0) {
-      var_2 maps\_utility::restarteffect();
-    }
+    foreach(var_2 in var_0)
+    var_2 maps\_utility::restarteffect();
   }
 }
 
@@ -108,9 +106,8 @@ physics_of_objects_in_plane() {
   level.orig_phys_gravity = getdvar("phys_gravity");
   var_0 = getEntArray("zerog_physics", "targetname");
 
-  foreach(var_2 in var_0) {
-    physicsexplosionsphere(var_2.origin, 64, 32, 0.01);
-  }
+  foreach(var_2 in var_0)
+  physicsexplosionsphere(var_2.origin, 64, 32, 0.01);
 
   setphysicsgravitydir((0, 0, -0.02));
   wait 0.3;
@@ -125,30 +122,25 @@ physics_of_objects_in_plane() {
     var_5 = randomfloatrange(1.3, 3.3);
     var_4++;
 
-    if(var_4 == 1) {
+    if(var_4 == 1)
       setphysicsgravitydir((-0.02, 0.03, 0.01));
-    }
 
-    if(var_4 == 2) {
+    if(var_4 == 2)
       setphysicsgravitydir((0, 0, -1));
-    }
 
-    if(var_4 == 3) {
+    if(var_4 == 3)
       setphysicsgravitydir((0, -0.01, 0.01));
-    }
 
-    if(var_4 == 4) {
+    if(var_4 == 4)
       setsaveddvar("phys_gravity", level.orig_phys_gravity);
-    }
 
     if(var_4 == 5) {
       var_4 = 0;
       setphysicsgravitydir((0.03, 0, 0.05));
     }
 
-    foreach(var_2 in var_0) {
-      physicsexplosionsphere(var_2.origin, 150, 75, 0.01);
-    }
+    foreach(var_2 in var_0)
+    physicsexplosionsphere(var_2.origin, 150, 75, 0.01);
 
     wait(var_5);
   }
@@ -166,16 +158,14 @@ pitch_and_roll() {
   var_1 = (0, 0, 0);
   var_2 = 20;
 
-  if(isDefined(var_0.script_max_left_angle)) {
+  if(isDefined(var_0.script_max_left_angle))
     var_2 = var_0.script_max_left_angle;
-  }
 
   var_3 = var_2 * 0.5;
   var_4 = 4;
 
-  if(isDefined(var_0.script_duration)) {
+  if(isDefined(var_0.script_duration))
     var_4 = var_0.script_duration;
-  }
 
   var_5 = var_4 * 0.5;
   var_0 = undefined;

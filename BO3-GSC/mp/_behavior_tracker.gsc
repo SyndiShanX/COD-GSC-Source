@@ -7,7 +7,7 @@
 #namespace behaviortracker;
 
 function setuptraits() {
-  if(isDefined(self.behaviortracker.traits)) {
+  if(isdefined(self.behaviortracker.traits)) {
     return;
   }
   self.behaviortracker.traits = [];
@@ -17,7 +17,7 @@ function setuptraits() {
   self.behaviortracker.traits["effectiveSlideCombat"] = 0.5;
   if(self.behaviortracker.version != 0) {
     traits = getarraykeys(self.behaviortracker.traits);
-    for(i = 0; i < traits.size; i++) {
+    for (i = 0; i < traits.size; i++) {
       trait = traits[i];
       self.behaviortracker.traits[trait] = float(self gettraitstatvalue(trait));
     }
@@ -25,16 +25,16 @@ function setuptraits() {
 }
 
 function initialize() {
-  if(isDefined(self.pers["isBot"])) {
+  if(isdefined(self.pers["isBot"])) {
     return;
   }
-  if(isDefined(self.behaviortracker)) {
+  if(isdefined(self.behaviortracker)) {
     return;
   }
-  if(isDefined(level.disablebehaviortracker) && level.disablebehaviortracker == 1) {
+  if(isdefined(level.disablebehaviortracker) && level.disablebehaviortracker == 1) {
     return;
   }
-  self.behaviortracker = spawnStruct();
+  self.behaviortracker = spawnstruct();
   self.behaviortracker.version = int(self gettraitstatvalue("version"));
   self.behaviortracker.numrecords = int(self gettraitstatvalue("numRecords")) + 1;
   self setuptraits();
@@ -50,16 +50,16 @@ function finalize() {
 }
 
 function isallowed() {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return false;
   }
-  if(!isDefined(self.behaviortracker)) {
+  if(!isdefined(self.behaviortracker)) {
     return false;
   }
   if(!self.behaviortracker.valid) {
     return false;
   }
-  if(isDefined(level.disablebehaviortracker) && level.disablebehaviortracker == 1) {
+  if(isdefined(level.disablebehaviortracker) && level.disablebehaviortracker == 1) {
     return false;
   }
   return true;
@@ -96,7 +96,7 @@ function updatetrait(trait, percent) {
 }
 
 function updateplayerdamage(attacker, victim, damage) {
-  if(isDefined(victim) && victim isallowed()) {
+  if(isdefined(victim) && victim isallowed()) {
     damageratio = float(damage) / float(victim.maxhealth);
     math::clamp(damageratio, 0, 1);
     damageratio = damageratio * -1;
@@ -111,7 +111,7 @@ function updateplayerdamage(attacker, victim, damage) {
       victim updatetrait("effectiveDoubleJumpCombat", damageratio);
     }
   }
-  if(isDefined(attacker) && attacker isallowed() && attacker != victim) {
+  if(isdefined(attacker) && attacker isallowed() && attacker != victim) {
     damageratio = float(damage) / float(attacker.maxhealth);
     math::clamp(damageratio, 0, 1);
     attacker updatetrait("effectiveCombat", damageratio);
@@ -128,7 +128,7 @@ function updateplayerdamage(attacker, victim, damage) {
 }
 
 function updateplayerkilled(attacker, victim) {
-  if(isDefined(victim) && victim isallowed()) {
+  if(isdefined(victim) && victim isallowed()) {
     victim updatetrait("effectiveCombat", -1);
     if(victim iswallrunning()) {
       victim updatetrait("effectiveWallRunCombat", -1);
@@ -140,7 +140,7 @@ function updateplayerkilled(attacker, victim) {
       victim updatetrait("effectiveDoubleJumpCombat", -1);
     }
   }
-  if(isDefined(attacker) && attacker isallowed() && attacker != victim) {
+  if(isdefined(attacker) && attacker isallowed() && attacker != victim) {
     attacker updatetrait("effectiveCombat", 1);
     if(attacker iswallrunning()) {
       attacker updatetrait("effectiveWallRunCombat", 1);
@@ -161,7 +161,7 @@ function settraitstats() {
   self.behaviortracker.numrecords = self.behaviortracker.numrecords + 1;
   self settraitstatvalue("numRecords", self.behaviortracker.numrecords);
   traits = getarraykeys(self.behaviortracker.traits);
-  for(i = 0; i < traits.size; i++) {
+  for (i = 0; i < traits.size; i++) {
     trait = traits[i];
     value = self.behaviortracker.traits[trait];
     self settraitstatvalue(trait, value);

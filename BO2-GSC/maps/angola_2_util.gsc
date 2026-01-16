@@ -53,9 +53,8 @@ skipto_setup() {
   if(skipto == "jungle_escape") {
     return;
   }
-  if(skipto == "jungle_ending") {
+  if(skipto == "jungle_ending")
     return;
-  }
 }
 
 setup_objectives() {
@@ -82,13 +81,11 @@ setup_objectives() {
 }
 
 add_cleanup_ent(str_category, e_add) {
-  if(!isDefined(level.a_e_cleanup)) {
+  if(!isDefined(level.a_e_cleanup))
     level.a_e_cleanup = [];
-  }
 
-  if(!isDefined(level.a_e_cleanup[str_category])) {
+  if(!isDefined(level.a_e_cleanup[str_category]))
     level.a_e_cleanup[str_category] = [];
-  }
 
   level.a_e_cleanup[str_category][level.a_e_cleanup[str_category].size] = e_add;
 }
@@ -96,9 +93,8 @@ add_cleanup_ent(str_category, e_add) {
 cleanup_ents(str_category) {
   if(isDefined(level.a_e_cleanup) && isDefined(level.a_e_cleanup[str_category])) {
     foreach(ent in level.a_e_cleanup[str_category]) {
-      if(isDefined(ent)) {
+      if(isDefined(ent))
         ent delete();
-      }
     }
 
     level.a_e_cleanup[str_category] = undefined;
@@ -110,11 +106,10 @@ spawner_set_cleanup_category(str_category) {
 }
 
 multiple_trigger_waits(str_trigger_name, str_trigger_notify) {
-  a_triggers = getEntArray(str_trigger_name, "targetname");
+  a_triggers = getentarray(str_trigger_name, "targetname");
 
-  for(i = 0; i < a_triggers.size; i++) {
+  for(i = 0; i < a_triggers.size; i++)
     a_triggers[i] thread multiple_trigger_wait(str_trigger_notify);
-  }
 }
 
 multiple_trigger_wait(str_trigger_notify) {
@@ -134,17 +129,14 @@ simple_spawn_script_delay(a_ents, spawn_fn, param1, param2, param3, param4, para
 
     e_ai = simple_spawn_single(e_ent, spawn_fn, param1, param2, param3, param4, param5, 1);
 
-    if(isDefined(e_ent.script_health)) {
+    if(isDefined(e_ent.script_health))
       e_ai.health = e_ent.script_health;
-    }
 
-    if(isDefined(e_ent.script_int)) {
+    if(isDefined(e_ent.script_int))
       e_ai thread ai_turn_of_hold_node_after_time(e_ent.script_int);
-    }
 
-    if(isDefined(e_ent.script_float)) {
+    if(isDefined(e_ent.script_float))
       e_ai.accuracy = e_ent.script_float;
-    }
   }
 }
 
@@ -153,17 +145,14 @@ spawn_with_delay(delay, e_ent, spawn_fn, param1, param2, param3, param4, param5)
   e_ai = simple_spawn_single(e_ent, spawn_fn, param1, param2, param3, param4, param5);
 
   if(isDefined(e_ai)) {
-    if(isDefined(e_ent.script_health)) {
+    if(isDefined(e_ent.script_health))
       e_ai.health = e_ent.script_health;
-    }
 
-    if(isDefined(e_ent.script_int)) {
+    if(isDefined(e_ent.script_int))
       e_ai thread ai_turn_of_hold_node_after_time(e_ent.script_int);
-    }
 
-    if(isDefined(e_ent.script_float)) {
+    if(isDefined(e_ent.script_float))
       e_ai.accuracy = e_ent.script_float;
-    }
   }
 }
 
@@ -176,18 +165,16 @@ ai_turn_of_hold_node_after_time(delay) {
 spawn_fn_ai_run_to_target(player_favourate_enemy, str_cleanup_category, aggressive_mode, disable_grenades, ignore_me) {
   self endon("death");
 
-  if(isDefined(ignore_me) && ignore_me == 1) {
+  if(isDefined(ignore_me) && ignore_me == 1)
     self.ignoreme = 1;
-  }
 
   if(isDefined(str_cleanup_category)) {
     spawner_set_cleanup_category(str_cleanup_category);
     str_cleanup_category = undefined;
   }
 
-  if(isDefined(level.jungle_escape_accuracy)) {
+  if(isDefined(level.jungle_escape_accuracy))
     self.script_accuracy = level.jungle_escape_accuracy;
-  }
 
   self.goalradius = 48;
   self.goalheight = 256;
@@ -198,48 +185,41 @@ spawn_fn_ai_run_to_target(player_favourate_enemy, str_cleanup_category, aggressi
 }
 
 entity_common_spawn_setup(player_favourate_enemy, str_cleanup_category, ignore_surpression, disable_grenades) {
-  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0) {
+  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0)
     self.favoriteenemy = level.player;
-  }
 
-  if(isDefined(str_cleanup_category)) {
+  if(isDefined(str_cleanup_category))
     spawner_set_cleanup_category(str_cleanup_category);
-  }
 
-  if(isDefined(ignore_surpression) && ignore_surpression != 0) {
+  if(isDefined(ignore_surpression) && ignore_surpression != 0)
     self.script_ignore_suppression = 1;
-  }
 
   if(isDefined(disable_grenades) && disable_grenades != 0) {
     self.grenadeammo = 0;
 
-    if(isDefined(level.jungle_escape_accuracy)) {
+    if(isDefined(level.jungle_escape_accuracy))
       self.script_accuracy = level.jungle_escape_accuracy;
-    } else {
+    else
       self.script_accuracy = 1.0;
-    }
   }
 
   self.overrideactordamage = ::enemy_damage_override;
 }
 
 spawn_fn_ai_run_to_holding_node(player_favourate_enemy, str_cleanup_category, break_hold_time, disable_grenades, ignore_me) {
-  if(isDefined(level.jungle_escape_accuracy)) {
+  if(isDefined(level.jungle_escape_accuracy))
     self.script_accuracy = level.jungle_escape_accuracy;
-  }
 
   self.goalradius = 48;
   self waittill("goal");
   self.fixednode = 1;
   self entity_common_spawn_setup(player_favourate_enemy, str_cleanup_category, 0, disable_grenades);
 
-  if(isDefined(ignore_me) && ignore_me == 1) {
+  if(isDefined(ignore_me) && ignore_me == 1)
     self.ignoreme = 1;
-  }
 
-  if(isDefined(break_hold_time)) {
+  if(isDefined(break_hold_time))
     self thread ai_break_holding_node_timer(break_hold_time);
-  }
 }
 
 ai_break_holding_node_timer(break_hold_time) {
@@ -288,15 +268,13 @@ spawn_fn_ai_run_to_node_and_die(player_favourate_enemy, str_cleanup_category, ig
 player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_damage_scale_breakoff, disable_pain) {
   self endon("death");
 
-  if(isDefined(delay)) {
+  if(isDefined(delay))
     wait(delay);
-  }
 
   self entity_common_spawn_setup(0, str_category, 1, 1);
 
-  if(isDefined(disable_pain) && disable_pain != 0) {
+  if(isDefined(disable_pain) && disable_pain != 0)
     self disable_pain();
-  }
 
   player = get_players()[0];
   self change_movemode("sprint");
@@ -325,9 +303,8 @@ player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_dama
 
 player_rusher_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(isDefined(self.npc_damage_scale)) {
-    if(isDefined(e_inflictor) && e_inflictor != level.player) {
+    if(isDefined(e_inflictor) && e_inflictor != level.player)
       n_damage = int(n_damage * self.npc_damage_scale);
-    }
   }
 
   return n_damage;
@@ -363,9 +340,8 @@ enemy_ai_disable_grenades(disable_grenades) {
         continue;
       }
 
-      if(isDefined(e_ent.temp_grenade_num)) {
+      if(isDefined(e_ent.temp_grenade_num))
         e_ent.grenadeammo = e_ent.temp_grenade_num;
-      }
     }
   }
 }
@@ -380,11 +356,10 @@ ai_set_enemy_fight_distance(e_enemy, path_distance, skip_launchers) {
       if(isDefined(skip_launchers) && skip_launchers == 1 && ent_is_launcher(e_ent)) {
         continue;
       }
-      if(isDefined(e_enemy)) {
+      if(isDefined(e_enemy))
         e_ent setgoalentity(e_enemy);
-      } else {
+      else
         e_ent setgoalentity(e_ent);
-      }
 
       e_ent.pathenemyfightdist = path_distance;
     }
@@ -393,9 +368,8 @@ ai_set_enemy_fight_distance(e_enemy, path_distance, skip_launchers) {
 
 ent_is_launcher(e_spawner) {
   if(isDefined(e_spawner.classname)) {
-    if(issubstr(e_spawner.classname, "_Launcher_")) {
+    if(issubstr(e_spawner.classname, "_Launcher_"))
       return true;
-    }
   }
 
   return false;
@@ -436,52 +410,45 @@ trigger_wait_or_time(trigger_targetname, time) {
 simple_spawn_rusher_single(str_rusher_spawner_targetname, str_category, rusher_distance) {
   sp_rusher = getent(str_rusher_spawner_targetname, "targetname");
 
-  if(isDefined(sp_rusher)) {
+  if(isDefined(sp_rusher))
     process_rusher_spawner(sp_rusher, str_category, rusher_distance);
-  }
 }
 
 simple_spawn_rusher(str_rusher_spawner_targetname, str_category, rusher_distance) {
-  a_sp_rusher = getEntArray(str_rusher_spawner_targetname, "targetname");
+  a_sp_rusher = getentarray(str_rusher_spawner_targetname, "targetname");
 
   if(isDefined(a_sp_rusher)) {
-    for(i = 0; i < a_sp_rusher.size; i++) {
+    for(i = 0; i < a_sp_rusher.size; i++)
       level thread process_rusher_spawner(a_sp_rusher[i], str_category, rusher_distance);
-    }
   }
 }
 
 process_rusher_spawner(sp_rusher, str_category, rusher_distance) {
-  if(isDefined(sp_rusher.script_delay)) {
+  if(isDefined(sp_rusher.script_delay))
     wait(sp_rusher.script_delay);
-  }
 
   e_ai = simple_spawn_single(sp_rusher);
 
-  if(isDefined(e_ai)) {
+  if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, rusher_distance, 0.02, 0.1, 1);
-  }
 }
 
 ai_run_along_node_array(str_ai_targetname, a_str_nodes, ignore_all, teleport_to_start_node, str_walk_mode) {
   level endon("stealth_broken");
   s_spawner = getent(str_ai_targetname, "targetname");
 
-  if(isDefined(s_spawner.script_delay)) {
+  if(isDefined(s_spawner.script_delay))
     delay = s_spawner.script_delay;
-  } else {
+  else
     delay = 0;
-  }
 
-  if(delay > 0) {
+  if(delay > 0)
     wait(delay);
-  }
 
   e_ai = simple_spawn_single(str_ai_targetname);
 
-  if(isDefined(ignore_all) && ignore_all == 1) {
+  if(isDefined(ignore_all) && ignore_all == 1)
     e_ai.ignoreall = 1;
-  }
 
   wait 0.1;
 
@@ -514,7 +481,7 @@ ai_run_along_node_array(str_ai_targetname, a_str_nodes, ignore_all, teleport_to_
 
 mission_fail_if_not_inside_info_volumes(str_info_targetname, str_end_notify, fail_mission_delay, fail_mission_flag, str_fail_enemy_spawners, b_kill_player) {
   level endon(str_end_notify);
-  a_volumes = getEntArray(str_info_targetname, "targetname");
+  a_volumes = getentarray(str_info_targetname, "targetname");
 
   if(!isDefined(a_volumes)) {
     return;
@@ -525,31 +492,27 @@ mission_fail_if_not_inside_info_volumes(str_info_targetname, str_end_notify, fai
     for(i = 0; i < a_volumes.size; i++) {
       e_vol = a_volumes[i];
 
-      if(level.player istouching(e_vol)) {
+      if(level.player istouching(e_vol))
         player_is_safe = 1;
-      }
     }
 
     if(player_is_safe == 0 || flag("js_player_fails_stealth")) {
       flag_set("js_player_fails_stealth");
       level notify("kill_in_cover_checks");
 
-      if(isDefined(fail_mission_flag)) {
+      if(isDefined(fail_mission_flag))
         flag_set(fail_mission_flag);
-      }
 
-      if(isDefined(str_fail_enemy_spawners)) {
+      if(isDefined(str_fail_enemy_spawners))
         level thread spawn_in_stealth_failure_guards(str_fail_enemy_spawners);
-      }
 
       if(isDefined(b_kill_player) && b_kill_player) {
         level.player disableinvulnerability();
         level.player enablehealthshield(1);
       }
 
-      if(isDefined(fail_mission_delay)) {
+      if(isDefined(fail_mission_delay))
         wait(fail_mission_delay);
-      }
 
       missionfailedwrapper(&"ANGOLA_2_PLAYER_COVER_BROKEN_SPOTTED");
       return;
@@ -568,13 +531,11 @@ kill_player_if_standing_inside_volume(str_volume, str_endon, fail_mission_delay,
       if(!is_mason_stealth_crouched()) {
         level notify("kill_in_cover_checks");
 
-        if(isDefined(str_fail_enemy_spawners)) {
+        if(isDefined(str_fail_enemy_spawners))
           level thread spawn_in_stealth_failure_guards(str_fail_enemy_spawners);
-        }
 
-        if(isDefined(fail_mission_delay)) {
+        if(isDefined(fail_mission_delay))
           wait(fail_mission_delay);
-        }
 
         missionfailedwrapper(&"ANGOLA_2_PLAYER_COVER_BROKEN_SPOTTED");
         return;
@@ -624,21 +585,19 @@ fail_mission_if_not_in_crouch_cover(str_endon_notify, delay_fail_time, allow_sta
 }
 
 spawn_in_stealth_failure_guards(str_fail_enemy_spawners) {
-  a_spawners = getEntArray(str_fail_enemy_spawners, "targetname");
+  a_spawners = getentarray(str_fail_enemy_spawners, "targetname");
 
   if(isDefined(a_spawners)) {
     for(i = 0; i < a_spawners.size; i++) {
       e_enemy = simple_spawn_single(a_spawners[i]);
 
-      if(isDefined(a_spawners[i].target)) {
+      if(isDefined(a_spawners[i].target))
         nd_node = getnode(a_spawners[i].target, "targetname");
-      } else {
+      else
         nd_node = undefined;
-      }
 
-      if(!issubstr(e_enemy.classname, "child")) {
+      if(!issubstr(e_enemy.classname, "child"))
         e_enemy thread ai_force_fire_at_target(undefined, level.player, undefined, undefined, nd_node);
-      }
     }
   }
 }
@@ -646,21 +605,17 @@ spawn_in_stealth_failure_guards(str_fail_enemy_spawners) {
 ai_force_fire_at_target(str_scene, e_target, fire_burst, fire_time, nd_node) {
   self endon("death");
 
-  if(isDefined(str_scene)) {
+  if(isDefined(str_scene))
     end_scene(str_scene);
-  }
 
-  if(!isDefined(e_target)) {
+  if(!isDefined(e_target))
     e_target = level.player;
-  }
 
-  if(!isDefined(fire_burst)) {
+  if(!isDefined(fire_burst))
     fire_burts = 0.2;
-  }
 
-  if(!isDefined(fire_time)) {
+  if(!isDefined(fire_time))
     fire_time = 10.0;
-  }
 
   self.ignoreall = 1;
   self.favoriteenemy = e_target;
@@ -700,7 +655,7 @@ fire_weapon_on_target(target) {
 play_damage_fx_on_chase_boat() {
   self endon("death");
   self waittill("damage");
-  playFXOnTag(level._effect["small_boat_damage_1"], self, "tag_origin");
+  playfxontag(level._effect["small_boat_damage_1"], self, "tag_origin");
 
   while(true) {
     if(self.health < 300) {
@@ -710,7 +665,7 @@ play_damage_fx_on_chase_boat() {
     wait 0.1;
   }
 
-  playFXOnTag(level._effect["small_boat_damage_2"], self, "tag_origin");
+  playfxontag(level._effect["small_boat_damage_2"], self, "tag_origin");
 }
 
 hmg_boat_challenge_tracking() {
@@ -723,9 +678,8 @@ hmg_boat_challenge_tracking() {
     boat_occupant = level.escort_boat getseatoccupant(2);
 
     if(isDefined(boat_occupant) && boat_occupant == level.player) {
-      if(!isDefined(level.challenge_hmg_boat_destroy)) {
+      if(!isDefined(level.challenge_hmg_boat_destroy))
         level.challenge_hmg_boat_destroy = 0;
-      }
 
       level.challenge_hmg_boat_destroy++;
     }
@@ -739,27 +693,24 @@ escort_boat_challenge_tracking() {
     return;
   }
   if(attacker == level.player) {
-    if(!isDefined(level.challenge_escort_boat_destroy)) {
+    if(!isDefined(level.challenge_escort_boat_destroy))
       level.challenge_escort_boat_destroy = 0;
-    }
 
     level.challenge_escort_boat_destroy++;
   }
 }
 
 helper_message(message, delay, str_abort_flag) {
-  if(isDefined(level.helper_message)) {
+  if(isDefined(level.helper_message))
     screen_message_delete();
-  }
 
   level notify("kill_helper_message");
   level endon("kill_helper_message");
   level.helper_message = message;
   screen_message_create(message);
 
-  if(!isDefined(delay)) {
+  if(!isDefined(delay))
     delay = 5;
-  }
 
   start_time = gettime();
 
@@ -778,9 +729,8 @@ helper_message(message, delay, str_abort_flag) {
     wait 0.01;
   }
 
-  if(isDefined(level.helper_message)) {
+  if(isDefined(level.helper_message))
     screen_message_delete();
-  }
 
   level.helper_message = undefined;
 }
@@ -816,13 +766,11 @@ hudson_throw_smoke_grenade(org_targetname, throw_at_pos) {
   maps\_anim::addnotetrack_customfunction(self.animname, "grenade_throw", maps\_grenade_toss::force_grenade_toss_internal, "ch_ang_10_01_smoke_throw_hudson");
   maps\_anim::addnotetrack_customfunction(self.animname, "grenade_throw", ::hudson_notify_grenade_throw, "ch_ang_10_01_smoke_throw_hudson");
 
-  if(isDefined(org_targetname)) {
+  if(isDefined(org_targetname))
     org = getstruct(org_targetname, "targetname");
-  }
 
-  if(!isDefined(org)) {
+  if(!isDefined(org))
     org = self;
-  }
 
   old_grenadeawareness = self.grenadeawareness;
   self set_ignoreall(1);
@@ -833,9 +781,8 @@ hudson_throw_smoke_grenade(org_targetname, throw_at_pos) {
   self.grenadeawareness = old_grenadeawareness;
   self notify("hudson_threw_smoke_grenade");
 
-  if(isDefined(og_grenadeweapon)) {
+  if(isDefined(og_grenadeweapon))
     self.grenadeweapon = og_grenadeweapon;
-  }
 }
 
 spawn_prop_grenade(guy) {
@@ -907,9 +854,9 @@ mason_protect_nag_think(nag_ent, nag_distance, nag1_time, nag2_time, nag3_time, 
 
 fire_angola_mortar(v_start, v_dest, speed_scale, height_scale, randomize_target_radius) {
   e_missile = spawn("script_model", v_start);
-  e_missile setModel("t6_wpn_mortar_shell_prop_view");
-  e_missile playSound("prj_mortar_launch");
-  playFXOnTag(level._effect["smoketrail"], e_missile, "tag_origin");
+  e_missile setmodel("t6_wpn_mortar_shell_prop_view");
+  e_missile playsound("prj_mortar_launch");
+  playfxontag(level._effect["smoketrail"], e_missile, "tag_origin");
 
   if(isDefined(randomize_target_radius)) {
     dx = randomfloatrange(-1 * randomize_target_radius, randomize_target_radius);
@@ -919,9 +866,8 @@ fire_angola_mortar(v_start, v_dest, speed_scale, height_scale, randomize_target_
 
   speed = 1680;
 
-  if(isDefined(speed_scale)) {
+  if(isDefined(speed_scale))
     speed = speed * speed_scale;
-  }
 
   min_height = 126;
   max_height = 1092;
@@ -929,20 +875,18 @@ fire_angola_mortar(v_start, v_dest, speed_scale, height_scale, randomize_target_
   dz = (e_missile.origin[2] - v_dest[2]) / 100;
   height = height - dz * 16;
 
-  if(height < min_height) {
+  if(height < min_height)
     height = min_height;
-  }
 
-  if(isDefined(height_scale)) {
+  if(isDefined(height_scale))
     height = height * height_scale;
-  }
 
   e_missile thread angola_mortor_move(v_dest, speed, height);
   e_missile waittill("mortor_strike");
-  playFX(level._effect["def_explosion"], e_missile.origin);
+  playfx(level._effect["def_explosion"], e_missile.origin);
   radiusdamage(e_missile.origin, 672, 15, 3);
   earthquake(0.6, 1.2, e_missile.origin, 3000);
-  e_missile playSound("exp_mortar");
+  e_missile playsound("exp_mortar");
   e_missile delete();
   level notify("angola_mortar_impact");
 }
@@ -972,9 +916,9 @@ angola_mortor_move(target_position, speed, height) {
     slow_amount = speed * 0.45;
     end_speedup = speed * 3.0;
 
-    if(last_frac < slow_start) {
+    if(last_frac < slow_start)
       current_speed = speed;
-    } else if(last_frac >= slow_start && last_frac <= slow_mid) {
+    else if(last_frac >= slow_start && last_frac <= slow_mid) {
       mag = slow_mid - slow_start;
       diff_frac = 1.0 - (slow_mid - last_frac) / mag;
       current_speed = speed - slow_amount * diff_frac;
@@ -996,9 +940,8 @@ angola_mortor_move(target_position, speed, height) {
     last_frac = frac;
     frac = dist_travelled / total_dist;
 
-    if(frac > 1.0) {
+    if(frac > 1.0)
       frac = 1.0;
-    }
 
     angle = 180 * frac;
     sinx = sin(angle);
@@ -1009,7 +952,7 @@ angola_mortor_move(target_position, speed, height) {
     last_pos = self.origin;
 
     if(!audio_incomming_played && frac > 0.8) {
-      self playSound("prj_mortar_incoming");
+      self playsound("prj_mortar_incoming");
       audio_incomming_played = 1;
     }
   }
@@ -1037,16 +980,14 @@ blackscreen(fadein, stay, fadeout) {
   blackscreen.vertalign = "fullscreen";
   blackscreen setshader("black", 640, 480);
 
-  if(fadein > 0) {
+  if(fadein > 0)
     blackscreen fadeovertime(fadein);
-  }
 
   blackscreen.alpha = 1;
   wait(stay);
 
-  if(fadeout > 0) {
+  if(fadeout > 0)
     blackscreen fadeovertime(fadeout);
-  }
 
   blackscreen.alpha = 0;
   blackscreen destroy();
@@ -1070,9 +1011,8 @@ make_all_enemy_aggressive(follow_player) {
 
 enemy_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(isDefined(self.npc_damage_scale)) {
-    if(isDefined(e_inflictor) && e_inflictor != level.player) {
+    if(isDefined(e_inflictor) && e_inflictor != level.player)
       n_damage = int(n_damage * self.npc_damage_scale);
-    }
   }
 
   return n_damage;
@@ -1086,23 +1026,21 @@ global_actor_killed_callback(e_inflictor, e_attacker, n_damage, str_means_of_dea
         a_string_tokens = strtok(str_weapon, "_");
 
         foreach(str_token in a_string_tokens) {
-          if(isinarray(a_sniper_rifle_names, str_token)) {
+          if(isinarray(a_sniper_rifle_names, str_token))
             level notify("sniper_tree_kill");
-          }
         }
       }
     }
   }
 
   if(e_attacker == level.player) {
-    if(str_weapon == "machete_sp") {
+    if(str_weapon == "machete_sp")
       level.player notify(level.machete_notify);
-    } else if(str_weapon == "mortar_shell_dpad_sp") {
+    else if(str_weapon == "mortar_shell_dpad_sp") {
       level.mortar_kills++;
 
-      if(level.mortar_kills == 1) {
+      if(level.mortar_kills == 1)
         level thread mortar_kill_timer();
-      }
     }
   }
 }
@@ -1110,11 +1048,10 @@ global_actor_killed_callback(e_inflictor, e_attacker, n_damage, str_means_of_dea
 mortar_kill_timer() {
   wait 0.3;
 
-  if(level.mortar_kills > 4) {
+  if(level.mortar_kills > 4)
     flag_set("mortar_challenge_complete");
-  } else {
+  else
     level.mortar_kills = 0;
-  }
 }
 
 linkto_trigger_on() {
@@ -1141,9 +1078,9 @@ lookat_trigger_while_not_in_trigger(triggername) {
 swap_to_primary_weapon(str_use_primary_if_none_exists) {
   primary_weapons = self getweaponslistprimaries();
 
-  if(isDefined(primary_weapons) && primary_weapons.size > 0) {
+  if(isDefined(primary_weapons) && primary_weapons.size > 0)
     self switchtoweapon(primary_weapons[0]);
-  } else if(isDefined(str_use_primary_if_none_exists)) {
+  else if(isDefined(str_use_primary_if_none_exists)) {
     self giveweapon(str_use_primary_if_none_exists);
     self switchtoweapon(str_use_primary_if_none_exists);
   }
@@ -1180,9 +1117,8 @@ stealth_safe_to_save() {
   failure_flags[6] = "player_failing_stealth";
 
   foreach(msg in failure_flags) {
-    if(flag(msg)) {
+    if(flag(msg))
       return false;
-    }
   }
 
   return true;
@@ -1200,13 +1136,11 @@ patroller_logic(str_start_node, use_cqb_walk, is_fxanim_grass_user) {
   self.script_noenemyinfo = 1;
   self.script_no_threat_on_spawn = 1;
 
-  if(isDefined(use_cqb_walk) && use_cqb_walk) {
+  if(isDefined(use_cqb_walk) && use_cqb_walk)
     self change_movemode("cqb_walk");
-  }
 
-  if(isDefined(is_fxanim_grass_user) && is_fxanim_grass_user) {
+  if(isDefined(is_fxanim_grass_user) && is_fxanim_grass_user)
     self thread fxanim_grass_enemy_logic();
-  }
 
   self thread maps\_stealth_logic::stealth_ai();
   self thread maps\_patrol::patrol(str_start_node);
@@ -1218,16 +1152,15 @@ fxanim_grass() {
   flag_init("start_fxanim_grass_house");
   flag_init("start_fxanim_grass_middle");
   flag_init("start_fxanim_grass_end");
-  a_fxanim_grass_house = getEntArray("fxanim_cattails_house", "targetname");
-  a_fxanim_grass_middle = getEntArray("fxanim_cattails", "targetname");
-  a_fxanim_grass_end = getEntArray("fxanim_cattails_end", "targetname");
+  a_fxanim_grass_house = getentarray("fxanim_cattails_house", "targetname");
+  a_fxanim_grass_middle = getentarray("fxanim_cattails", "targetname");
+  a_fxanim_grass_end = getentarray("fxanim_cattails_end", "targetname");
   a_grass_structs = [];
   a_fxanim_grass = arraycombine(a_fxanim_grass_house, a_fxanim_grass_middle, 0, 0);
   a_fxanim_grass = arraycombine(a_fxanim_grass, a_fxanim_grass_end, 0, 0);
 
-  foreach(m_grass in a_fxanim_grass) {
-    a_grass_structs[a_grass_structs.size] = fxanim_grass_delete_until_needed(m_grass);
-  }
+  foreach(m_grass in a_fxanim_grass)
+  a_grass_structs[a_grass_structs.size] = fxanim_grass_delete_until_needed(m_grass);
 
   flag_wait("fxanim_grass_spawn");
   level.a_grass_users = [];
@@ -1269,9 +1202,8 @@ trigger_flag_set_touching() {
 
   while(true) {
     if(level.player istouching(self)) {
-      if(!flag(msg)) {
+      if(!flag(msg))
         flag_set(msg);
-      }
     } else if(flag(msg))
       flag_clear(msg);
 
@@ -1287,9 +1219,8 @@ manage_fxanim_grass_animating(msg, a_grass) {
   while(true) {
     flag_wait(msg);
 
-    foreach(grass in a_grass) {
-      grass thread fxanim_grass_logic();
-    }
+    foreach(grass in a_grass)
+    grass thread fxanim_grass_logic();
 
     flag_waitopen(msg);
 
@@ -1318,7 +1249,7 @@ fxanim_grass_logic() {
 }
 
 fxanim_grass_delete_until_needed(m_grass) {
-  s_temp_grass = spawnStruct();
+  s_temp_grass = spawnstruct();
   m_grass maps\_fxanim::_fxanim_copy_kvps(s_temp_grass);
   m_grass delete();
   return s_temp_grass;
@@ -1360,28 +1291,24 @@ remove_from_users_array() {
 }
 
 fxanim_beach_grass_logic() {
-  a_beach_grass_fxanim = getEntArray("fxanim_beach_grass", "targetname");
+  a_beach_grass_fxanim = getentarray("fxanim_beach_grass", "targetname");
 
-  foreach(e_grass in a_beach_grass_fxanim) {
-    e_grass hide();
-  }
+  foreach(e_grass in a_beach_grass_fxanim)
+  e_grass hide();
 
-  a_beach_grass_static = getEntArray("beach_grass_static", "targetname");
+  a_beach_grass_static = getentarray("beach_grass_static", "targetname");
 
-  foreach(e_grass in a_beach_grass_static) {
-    e_grass setscale(randomfloatrange(0.27, 0.5));
-  }
+  foreach(e_grass in a_beach_grass_static)
+  e_grass setscale(randomfloatrange(0.27, 0.5));
 
   flag_wait("hind_attack_end_scene_started");
   wait 1;
 
-  foreach(e_grass in a_beach_grass_static) {
-    e_grass hide();
-  }
+  foreach(e_grass in a_beach_grass_static)
+  e_grass hide();
 
-  foreach(e_grass in a_beach_grass_fxanim) {
-    e_grass show();
-  }
+  foreach(e_grass in a_beach_grass_fxanim)
+  e_grass show();
 
   setsaveddvar("wind_global_vector", "440 96 0");
 }
@@ -1534,17 +1461,15 @@ jungle_stealth_log_skipto_clean_up() {
   sp_enemy delete();
   sp_enemy = getent("house_follow_path_and_die_spawner", "targetname");
   sp_enemy delete();
-  a_spawners = getEntArray("enemy_fail_beach", "targetname");
+  a_spawners = getentarray("enemy_fail_beach", "targetname");
 
-  foreach(sp_enemy in a_spawners) {
-    sp_enemy delete();
-  }
+  foreach(sp_enemy in a_spawners)
+  sp_enemy delete();
 
-  a_spawners = getEntArray("enemy_fail_before_log", "targetname");
+  a_spawners = getentarray("enemy_fail_before_log", "targetname");
 
-  foreach(sp_enemy in a_spawners) {
-    sp_enemy delete();
-  }
+  foreach(sp_enemy in a_spawners)
+  sp_enemy delete();
 }
 
 jungle_stealth_log_ent_clean_up() {
@@ -1560,11 +1485,10 @@ jungle_stealth_log_ent_clean_up() {
   e_to_be_deleted delete();
   e_to_be_deleted = getent("trig_hudson_in_house", "targetname");
   e_to_be_deleted delete();
-  a_ledge_clips = getEntArray("ledge_clip", "targetname");
+  a_ledge_clips = getentarray("ledge_clip", "targetname");
 
-  foreach(m_ledge_clip in a_ledge_clips) {
-    m_ledge_clip delete();
-  }
+  foreach(m_ledge_clip in a_ledge_clips)
+  m_ledge_clip delete();
 
   e_to_be_deleted = getent("trig_log_started", "targetname");
   e_to_be_deleted delete();
@@ -1596,15 +1520,13 @@ exploder_after_wait(n_exploder_index) {
 get_whole_number(num) {
   negative = 1;
 
-  if(num < 0) {
+  if(num < 0)
     negative = -1;
-  }
 
   num = abs(num);
 
-  for(count = 0; num >= 1; count = count + 1) {
+  for(count = 0; num >= 1; count = count + 1)
     num = num - 1;
-  }
 
   return count * negative;
 }
@@ -1620,22 +1542,19 @@ play_battle_convo_until_flag(str_team, a_str_aliases, min_delay, max_delay, str_
   while(!flag(str_flag)) {
     a_speakers = [];
 
-    if(!isDefined(b_do_not_randomize_lines) || !b_do_not_randomize_lines) {
+    if(!isDefined(b_do_not_randomize_lines) || !b_do_not_randomize_lines)
       a_str_aliases = array_randomize(a_str_aliases);
-    }
 
     for(i = 0; i < a_str_aliases.size; i++) {
       a_guys = getaiarray(str_team);
 
       foreach(guy in a_guys) {
-        if(guy is_hero()) {
+        if(guy is_hero())
           arrayremovevalue(a_guys, guy, 0);
-        }
       }
 
-      foreach(speaker in a_speakers) {
-        arrayremovevalue(a_guys, speaker, 0);
-      }
+      foreach(speaker in a_speakers)
+      arrayremovevalue(a_guys, speaker, 0);
 
       if(a_guys.size == 0) {
         wait 1.0;
@@ -1655,9 +1574,8 @@ play_specific_vo_on_notify(lines, str_notify, exclusion_timer, endon_str) {
 
   if(isDefined(endon_str)) {
     if(isarray(endon_str)) {
-      foreach(str in endon_str) {
-        level endon(str);
-      }
+      foreach(str in endon_str)
+      level endon(str);
     } else
       level endon(endon_str);
   }
@@ -1682,14 +1600,12 @@ play_battle_convo_from_array_until_flag(a_guys, a_str_aliases, min_delay, max_de
   while(!flag(str_flag)) {
     a_speakers = [];
 
-    if(!isDefined(b_do_not_randomize_lines) || !b_do_not_randomize_lines) {
+    if(!isDefined(b_do_not_randomize_lines) || !b_do_not_randomize_lines)
       a_str_aliases = array_randomize(a_str_aliases);
-    }
 
     for(i = 0; i < a_str_aliases.size; i++) {
-      foreach(speaker in a_speakers) {
-        arrayremovevalue(a_guys, speaker, 0);
-      }
+      foreach(speaker in a_speakers)
+      arrayremovevalue(a_guys, speaker, 0);
 
       if(a_guys.size == 0) {
         wait 1.0;

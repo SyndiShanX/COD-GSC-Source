@@ -5,11 +5,10 @@
 *********************************************/
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     animscripts\traverse\shared::dog_wall_and_window_hop("wallhop", 40);
-  } else {
+  else
     wall_hop_human();
-  }
 }
 
 #using_animtree("generic_human");
@@ -18,13 +17,12 @@ wall_hop_human() {
   var_0 = [];
   var_0["traverseAnim"] = % traverse_window_quick;
   var_0["traverseHeight"] = 40.0;
-  var_1 = isDefined(level.disallowlegswingwallhop) && level.disallowlegswingwallhop == 1;
+  var_1 = isdefined(level.disallowlegswingwallhop) && level.disallowlegswingwallhop == 1;
 
-  if(var_1 || randomint(100) < 30) {
+  if(var_1 || randomint(100) < 30)
     var_0["traverseAnim"] = % traverse_wallhop_3;
-  } else {
+  else
     var_0["traverseAnim"] = % traverse_wallhop;
-  }
 
   animscripts\traverse\shared::dotraverse(var_0);
 }

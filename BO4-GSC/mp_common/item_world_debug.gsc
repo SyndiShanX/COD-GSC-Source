@@ -11,10 +11,11 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\item_world_util;
+
 #namespace item_world_debug;
 
 autoexec __init__system__() {
-  system::register(#"item_world_debug", &__init__, undefined, # "item_world");
+  system::register(#"item_world_debug", &__init__, undefined, #"item_world");
 }
 
 private __init__() {
@@ -27,6 +28,7 @@ private __init__() {
   level thread function_cdd9b388();
 
   level thread function_91ef342();
+
 }
 
 private function_13d7bba(xoffset, yoffset) {
@@ -64,8 +66,8 @@ private function_bebe535() {
     }
   }
 
-  if(isDefined(level.var_2e96a450[# "paint_can_items"])) {
-    var_9243cc66 -= level.var_2e96a450[# "paint_can_items"];
+  if(isDefined(level.var_2e96a450[#"paint_can_items"])) {
+    var_9243cc66 -= level.var_2e96a450[#"paint_can_items"];
   }
 
   println("<dev string:xd7>" + n_total);
@@ -115,37 +117,37 @@ private function_b6ea080() {
 
         if(isDefined(the_item[0].itementry) && isDefined(the_item[0].itementry.itemtype)) {
           switch (the_item[0].itementry.itemtype) {
-            case # "ammo":
+            case #"ammo":
               type = "<dev string:x5e0>";
               break;
-            case # "weapon":
+            case #"weapon":
               type = "<dev string:x5e7>";
               break;
-            case # "health":
+            case #"health":
               type = "<dev string:x5f0>";
               break;
-            case # "armor":
+            case #"armor":
               type = "<dev string:x5f9>";
               break;
-            case # "equipment":
+            case #"equipment":
               type = "<dev string:x601>";
               break;
-            case # "backpack":
+            case #"backpack":
               type = "<dev string:x60d>";
               break;
-            case # "generic":
+            case #"generic":
               type = "<dev string:x618>";
               break;
-            case # "cash":
+            case #"cash":
               type = "<dev string:x622>";
               break;
-            case # "killstreak":
+            case #"killstreak":
               type = "<dev string:x629>";
               break;
-            case # "attachment":
+            case #"attachment":
               type = "<dev string:x636>";
               break;
-            case # "resource":
+            case #"resource":
               type = "<dev string:x643>";
               break;
             default:
@@ -199,22 +201,22 @@ private function_938d798a() {
     v_stand = getclosestpointonnavmesh(v_origin, 192);
 
     switch (var_4e94b449[2]) {
-      case # "overlaps":
+      case #"overlaps":
         var_e45e8f33 = (0, 0, 1);
         var_6f08946b = fgetarg(file, 3);
         var_dd52f0fe = fgetarg(file, 4);
         var_d8aec942 = (float(var_4e94b449[6]), float(var_6f08946b), float(var_dd52f0fe));
         break;
-      case # "is":
+      case #"is":
         var_e45e8f33 = (1, 0, 0);
         var_d8aec942 = undefined;
         break;
     }
 
     var_7099d03[var_7099d03.size] = {
-      #origin: v_origin,
-      #stand: v_stand,
-      #var_e45e8f33: var_e45e8f33,
+      #origin: v_origin, 
+      #stand: v_stand, 
+      #var_e45e8f33: var_e45e8f33, 
       #var_d8aec942: var_d8aec942
     };
   }
@@ -367,19 +369,19 @@ private function_f0d72128() {
 
 function_78931318(str_button) {
   switch (str_button) {
-    case # "down":
+    case #"down":
       str_btn = "<dev string:x89e>";
       var_7a00db94 = "<dev string:x8aa>";
       break;
-    case # "left":
+    case #"left":
       str_btn = "<dev string:x8b6>";
       var_7a00db94 = "<dev string:x8c2>";
       break;
-    case # "right":
+    case #"right":
       str_btn = "<dev string:x8ce>";
       var_7a00db94 = "<dev string:x8db>";
       break;
-    case # "up":
+    case #"up":
       str_btn = "<dev string:x8e8>";
       var_7a00db94 = "<dev string:x8f2>";
       break;
@@ -477,8 +479,8 @@ private function_cdd9b388() {
       }
 
       tab = "<dev string:x4e>";
-      level.var_f0d0335b settext("<dev string:x8fc>" + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) + "<dev string:x6d>" + int((isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0)) * 100) + "<dev string:x72>");
-      level.var_7f7d26cc settext("<dev string:x90d>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0));
+      level.var_f0d0335b settext("<dev string:x8fc>" + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) + "<dev string:x6d>" + int((isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0)) * 100) + "<dev string:x72>");
+      level.var_7f7d26cc settext("<dev string:x90d>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0));
       level.var_6deb23ed settext("<dev string:x921>" + level.var_66e56764 + tab + tab + "<dev string:x7b>" + level.var_136445c0 + tab + tab + "<dev string:x8c>" + level.var_5720c09a + tab + tab + "<dev string:x932>" + level.var_2850ef5);
       level.var_5c6c77b3 settext(function_11421106("<dev string:x94a>", "<dev string:x5e7>"));
       level.var_5471e557 settext(function_11421106("<dev string:x953>", "<dev string:x5f9>"));
@@ -822,16 +824,16 @@ private function_cdd9b388() {
             color = (1, 1, 1);
 
             switch (vehicle.scriptvehicletype) {
-              case # "player_atv":
+              case #"player_atv":
                 color = (0, 1, 1);
                 break;
-              case # "cargo_truck_wz":
+              case #"cargo_truck_wz":
                 color = (1, 1, 0);
                 break;
-              case # "tactical_raft_wz":
+              case #"tactical_raft_wz":
                 color = (1, 0.5, 0);
                 break;
-              case # "helicopter_light":
+              case #"helicopter_light":
                 color = (1, 0, 1);
                 break;
             }
@@ -858,13 +860,13 @@ private function_cdd9b388() {
 
             if(stash_items.size > 0) {
               switch (stash_items[0].targetname) {
-                case # "world_dynent_stash_health":
+                case #"world_dynent_stash_health":
                   color = (1, 0, 0);
                   break;
-                case # "world_dynent_stash_supply":
+                case #"world_dynent_stash_supply":
                   color = (0, 1, 0);
                   break;
-                case # "hash_ea6664e89a0bff6":
+                case #"hash_ea6664e89a0bff6":
                   color = (0.501961, 0.501961, 0);
                   break;
               }
@@ -902,16 +904,16 @@ private function_cdd9b388() {
         foreach(item in var_f4b807cb) {
           if(isDefined(item.itementry) && isDefined(item.itementry.rarity)) {
             switch (item.itementry.rarity) {
-              case # "common":
+              case #"common":
                 color = (0, 1, 0);
                 break;
-              case # "rare":
+              case #"rare":
                 color = (0, 0, 1);
                 break;
-              case # "legendary":
+              case #"legendary":
                 color = (1, 0, 1);
                 break;
-              case # "epic":
+              case #"epic":
                 color = (1, 0.5, 0);
                 break;
               default:
@@ -944,19 +946,19 @@ private function_cdd9b388() {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
             case 3:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "ammo") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"ammo") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 4:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "weapon") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"weapon") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 5:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
                 if(item.itementry.name == "<dev string:x9fc>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:xa10>") {
@@ -970,7 +972,7 @@ private function_cdd9b388() {
 
               break;
             case 6:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "armor") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"armor") {
                 if(item.itementry.name == "<dev string:xa39>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:xa4c>") {
@@ -984,49 +986,49 @@ private function_cdd9b388() {
 
               break;
             case 7:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 8:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "backpack") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"backpack") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 9:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "attachment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"attachment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 10:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "generic") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"generic") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 11:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "killstreak") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"killstreak") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 15:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "quest") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"quest") {
                 sphere(item.origin, radius, (1, 0.5, 0), 1, 0, 10, 20);
               }
 
               break;
             case 16:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "cash") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"cash") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 17:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "resource") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"resource") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
@@ -1096,7 +1098,7 @@ function_91ef342() {
     r = level waittill(#"devgui_bot");
 
     switch (r.args[0]) {
-      case # "hash_29f59f6b62fdbf94":
+      case #"hash_29f59f6b62fdbf94":
         function_c07eae4e();
         break;
     }
@@ -1138,3 +1140,4 @@ function_c07eae4e() {
     }
   }
 }
+

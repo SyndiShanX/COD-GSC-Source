@@ -34,16 +34,16 @@
 #namespace zm_zod_idgun_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_idgun_quest", &__init__, &__main__, undefined);
+  system::register("zm_zod_idgun_quest", & __init__, & __main__, undefined);
 }
 
 function __init__() {
-  callback::on_connect(&on_player_connect);
-  callback::on_spawned(&on_player_spawned);
+  callback::on_connect( & on_player_connect);
+  callback::on_spawned( & on_player_spawned);
   clientfield::register("world", "add_idgun_to_box", 1, 4, "int");
   clientfield::register("world", "remove_idgun_from_box", 1, 4, "int");
   level flag::init("second_idgun_time");
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     level flag::init(("idgun_cocoon_" + i) + "_found");
   }
   level thread idgun_devgui();
@@ -53,15 +53,15 @@ function __init__() {
 function __main__() {
   a_str_idgun_wpnnames = array("idgun_0", "idgun_1", "idgun_2", "idgun_3");
   level construct_idgun_weapon_array();
-  zm_spawner::register_zombie_death_event_callback(&idgun_zombie_death_watch);
-  for(i = 0; i < 2; i++) {
-    level.idgun[i] = spawnStruct();
+  zm_spawner::register_zombie_death_event_callback( & idgun_zombie_death_watch);
+  for (i = 0; i < 2; i++) {
+    level.idgun[i] = spawnstruct();
     level.idgun[i].kill_count = 0;
     level.idgun[i].n_gun_index = i;
     a_str_idgun_wpnnames = array::randomize(a_str_idgun_wpnnames);
     level.idgun[i].str_wpnname = array::pop_front(a_str_idgun_wpnnames);
     zm_weapons::add_limited_weapon(level.idgun[i].str_wpnname, 1);
-    for(j = 0; j < level.idgun_weapons.size; j++) {
+    for (j = 0; j < level.idgun_weapons.size; j++) {
       if(level.idgun[i].str_wpnname == level.idgun_weapons[j].name) {
         level.idgun[i].var_e787e99a = j;
         break;
@@ -73,7 +73,7 @@ function __main__() {
 
 function function_e1efbc50(var_9727e47e) {
   if(var_9727e47e != level.weaponnone) {
-    if(!isDefined(level.idgun_weapons)) {
+    if(!isdefined(level.idgun_weapons)) {
       level.idgun_weapons = [];
     } else if(!isarray(level.idgun_weapons)) {
       level.idgun_weapons = array(level.idgun_weapons);
@@ -108,7 +108,7 @@ function function_14e2eca6(params) {
   if(level flag::get("part_xenomatter" + "_found")) {
     return;
   }
-  if(isDefined(level.var_689ff92e) && level.var_689ff92e) {
+  if(isdefined(level.var_689ff92e) && level.var_689ff92e) {
     return;
   }
   if(!isplayer(params.eattacker)) {
@@ -143,11 +143,11 @@ function function_c3ffc175() {
 }
 
 function function_44e0f6b4() {
-  if(getdvarint("splitscreen_playerCount") > 2 && (!(isDefined(level.var_5fadf2ff) && level.var_5fadf2ff))) {
+  if(getdvarint("splitscreen_playerCount") > 2 && (!(isdefined(level.var_5fadf2ff) && level.var_5fadf2ff))) {
     function_6893c200();
     return;
   }
-  if(isDefined(level.var_359f6a1d) && level.var_359f6a1d) {
+  if(isdefined(level.var_359f6a1d) && level.var_359f6a1d) {
     return;
   }
   level.var_359f6a1d = 1;
@@ -179,7 +179,7 @@ function function_6baaa92e() {
   drop_point = self getorigin();
   drop_point = drop_point + vectorscale((0, 0, 1), 30);
   e_heart = spawn("script_model", drop_point);
-  e_heart setModel("p7_zm_zod_margwa_heart");
+  e_heart setmodel("p7_zm_zod_margwa_heart");
   function_a3712047(e_heart);
 }
 
@@ -187,7 +187,7 @@ function function_a3712047(e_heart) {
   width = 128;
   height = 128;
   length = 128;
-  e_heart.unitrigger_stub = spawnStruct();
+  e_heart.unitrigger_stub = spawnstruct();
   e_heart.unitrigger_stub.origin = e_heart.origin;
   e_heart.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   e_heart.unitrigger_stub.cursor_hint = "HINT_NOICON";
@@ -195,25 +195,25 @@ function function_a3712047(e_heart) {
   e_heart.unitrigger_stub.script_height = height;
   e_heart.unitrigger_stub.script_length = length;
   e_heart.unitrigger_stub.require_look_at = 0;
-  e_heart.unitrigger_stub.prompt_and_visibility_func = &function_12fffd19;
-  zm_unitrigger::register_static_unitrigger(e_heart.unitrigger_stub, &function_dd2f6fe3);
+  e_heart.unitrigger_stub.prompt_and_visibility_func = & function_12fffd19;
+  zm_unitrigger::register_static_unitrigger(e_heart.unitrigger_stub, & function_dd2f6fe3);
   wait(5);
   e_heart delete();
 }
 
 function function_12fffd19(player) {
-  b_is_invis = isDefined(player.beastmode) && player.beastmode;
+  b_is_invis = isdefined(player.beastmode) && player.beastmode;
   self setinvisibletoplayer(player, b_is_invis);
   return !b_is_invis;
 }
 
 function function_dd2f6fe3() {
   if(1) {
-    for(;;) {
+    for (;;) {
       self waittill("trigger", player);
     }
-    for(;;) {}
-    for(;;) {}
+    for (;;) {}
+    for (;;) {}
     if(player zm_utility::in_revive_trigger()) {}
     if(player.is_drinking > 0) {}
     if(!zm_utility::is_player_valid(player)) {}
@@ -238,9 +238,9 @@ function special_craftable_spawn(v_origin, str_part, var_1907d45e = 1, var_6a2f1
     mdl_part = level zm_craftables::get_craftable_piece_model("second_idgun", str_part);
   }
   mdl_part.origin = v_origin;
-  playable_area = getEntArray("player_volume", "script_noteworthy");
+  playable_area = getentarray("player_volume", "script_noteworthy");
   valid_drop = 0;
-  for(i = 0; i < playable_area.size; i++) {
+  for (i = 0; i < playable_area.size; i++) {
     if(mdl_part istouching(playable_area[i])) {
       valid_drop = 1;
     }
@@ -264,7 +264,7 @@ function idgun_part_blinks(mdl_part) {
   level notify("idgun_part_blinks");
   level endon("idgun_part_blinks");
   level endon("idgun_part_found");
-  while(true) {
+  while (true) {
     mdl_part setinvisibletoall();
     wait(0.5);
     mdl_part setvisibletoall();
@@ -273,20 +273,20 @@ function idgun_part_blinks(mdl_part) {
 }
 
 function idgun_vo(s_idgun) {
-  if(isDefined(s_idgun.is_speaking) && s_idgun.is_speaking) {
+  if(isdefined(s_idgun.is_speaking) && s_idgun.is_speaking) {
     return;
   }
 }
 
 function idgun_zombie_death_watch(attacker) {
-  for(i = 0; i < level.idgun_weapons.size; i++) {
+  for (i = 0; i < level.idgun_weapons.size; i++) {
     wpn = level.idgun_weapons[i];
-    if(!isDefined(self)) {
+    if(!isdefined(self)) {
       return;
     }
     if(self.damageweapon === wpn) {
       idgun = get_idgun_from_owner(self.attacker);
-      if(!isDefined(idgun)) {
+      if(!isdefined(idgun)) {
         return;
       }
       idgun.kill_count++;
@@ -302,7 +302,7 @@ function idgun_zombie_death_watch(attacker) {
 }
 
 function get_idgun_from_owner(player) {
-  for(i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
     if(level.idgun[i].owner === player) {
       return level.idgun[i];
     }
@@ -312,10 +312,10 @@ function get_idgun_from_owner(player) {
 function setup_idgun_upgrade_quest() {
   level flag::wait_till("second_idgun_time");
   var_ffcd34fb = struct::get_array("idgun_cocoon_point", "targetname");
-  if(!isDefined(level.var_a26610f1)) {
+  if(!isdefined(level.var_a26610f1)) {
     level.var_a26610f1 = [];
   }
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     switch (i) {
       case 0: {
         str_areaname = "theater";
@@ -333,20 +333,20 @@ function setup_idgun_upgrade_quest() {
         break;
       }
     }
-    var_c6a8002 = array::filter(var_ffcd34fb, 0, &filter_areaname, str_areaname);
+    var_c6a8002 = array::filter(var_ffcd34fb, 0, & filter_areaname, str_areaname);
     level.var_a26610f1[i] = array::random(var_c6a8002);
     mdl_cocoon = spawn("script_model", level.var_a26610f1[i].origin);
-    mdl_cocoon setModel("p7_zm_zod_cocoon");
-    mdl_cocoon setCanDamage(1);
+    mdl_cocoon setmodel("p7_zm_zod_cocoon");
+    mdl_cocoon setcandamage(1);
     mdl_cocoon thread function_47867b41(i, str_part);
-    if(isDefined(level.idgun[0].owner)) {
+    if(isdefined(level.idgun[0].owner)) {
       level.idgun[0].owner thread idgun_proximity_sensor(i);
     }
   }
 }
 
 function filter_areaname(e_entity, str_areaname) {
-  if(!isDefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
+  if(!isdefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
     return false;
   }
   return true;
@@ -356,7 +356,7 @@ function function_47867b41(var_3fbc06aa, str_part) {
   if(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type, tagname, modelname, partname, weapon);
     level flag::set(("idgun_cocoon_" + var_3fbc06aa) + "_found");
-    if((isDefined(zm::is_idgun_damage(weapon)) && zm::is_idgun_damage(weapon)) === 0) {
+    if((isdefined(zm::is_idgun_damage(weapon)) && zm::is_idgun_damage(weapon)) === 0) {
       return;
     }
     self show();
@@ -364,13 +364,13 @@ function function_47867b41(var_3fbc06aa, str_part) {
     direction_vec = (0, 0, -1);
     scale = 8000;
     direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-    trace = bulletTrace(v_origin, v_origin + direction_vec, 0, undefined);
+    trace = bullettrace(v_origin, v_origin + direction_vec, 0, undefined);
     drop_point = trace["position"];
     drop_point = drop_point + vectorscale((0, 0, 1), 10);
     self moveto(drop_point, 1);
     wait(1);
     self hide();
-    playFX(level._effect["idgun_cocoon_off"], self.origin);
+    playfx(level._effect["idgun_cocoon_off"], self.origin);
     special_craftable_spawn(drop_point, str_part, 0, 1);
     return;
   }
@@ -389,7 +389,7 @@ function idgun_proximity_sensor(var_3fbc06aa) {
   n_time_before_next_pulse = undefined;
   n_scale = undefined;
   var_887c2fcb = undefined;
-  while(true) {
+  while (true) {
     var_5cc8da3f = self getcurrentweapon();
     weapon_idgun = getweapon(level.idgun[0].str_wpnname);
     if(var_5cc8da3f !== weapon_idgun) {
@@ -401,7 +401,7 @@ function idgun_proximity_sensor(var_3fbc06aa) {
     if(n_dist_2 <= n_proximity_max_2) {
       n_time_before_next_pulse = 1;
       v_eye_origin = self getplayercamerapos();
-      v_eye_direction = anglesToForward(self getplayerangles());
+      v_eye_direction = anglestoforward(self getplayerangles());
       var_744d3805 = vectornormalize(var_e610614b - v_eye_origin);
       n_dot = vectordot(var_744d3805, v_eye_direction);
       if(n_dot > 0.9) {
@@ -428,7 +428,7 @@ function idgun_proximity_sensor(var_3fbc06aa) {
     if(level flag::get(("idgun_cocoon_" + var_3fbc06aa) + "_found")) {
       return;
     }
-    if(isDefined(n_time_before_next_pulse)) {
+    if(isdefined(n_time_before_next_pulse)) {
       wait(n_time_before_next_pulse);
       self zm_zod_util::set_rumble_to_player(2);
       util::wait_network_frame();
@@ -446,13 +446,13 @@ function give_idgun(n_idgun_level) {
     wpn_idgun = getweapon(level.idgun[0].str_wpnname);
     wpn_idgun = zm_weapons::get_upgrade_weapon(wpn_idgun, 0);
   }
-  assert(isDefined(wpn_idgun));
+  assert(isdefined(wpn_idgun));
   self zm_weapons::weapon_give(wpn_idgun, 0, 0);
   self switchtoweapon(wpn_idgun);
-  if(!isDefined(level.idgun[0].owner)) {
+  if(!isdefined(level.idgun[0].owner)) {
     var_6aa62cd2 = 0;
   } else {
-    if(!isDefined(level.idgun[1].owner)) {
+    if(!isdefined(level.idgun[1].owner)) {
       var_6aa62cd2 = 1;
     } else {
       return;
@@ -463,13 +463,13 @@ function give_idgun(n_idgun_level) {
 }
 
 function idgun_devgui() {
-  level thread zm_zod_util::setup_devgui_func("", "", 0, &devgui_idgun_give);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, &devgui_idgun_give);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_8c7ac1b9);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, & devgui_idgun_give);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, & devgui_idgun_give);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_8c7ac1b9);
 }
 
 function idgun_quest_devgui() {
-  level thread zm_zod_util::setup_devgui_func("", "", 0, &function_1f7b4ebf);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, & function_1f7b4ebf);
 }
 
 function devgui_idgun_give(n_value) {
@@ -484,7 +484,7 @@ function function_1f7b4ebf(n_val) {
 }
 
 function function_8c7ac1b9(n_value) {
-  if(isDefined(level.idgun_draw_debug)) {
+  if(isdefined(level.idgun_draw_debug)) {
     level.idgun_draw_debug = !level.idgun_draw_debug;
   } else {
     level.idgun_draw_debug = 1;

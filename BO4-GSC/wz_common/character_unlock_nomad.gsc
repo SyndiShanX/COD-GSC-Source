@@ -9,10 +9,11 @@
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_nomad;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_nomad", &__init__, undefined, # "character_unlock_nomad_fixup");
+  system::register(#"character_unlock_nomad", &__init__, undefined, #"character_unlock_nomad_fixup");
 }
 
 __init__() {
@@ -24,11 +25,11 @@ function_2613aeec(enabled) {
     callback::on_player_killed(&on_player_killed);
 
     if(isDefined(getgametypesetting(#"hash_17f17e92c2654659")) && getgametypesetting(#"hash_17f17e92c2654659")) {
-      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", # "supply_stash_cu07", 1);
+      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", #"supply_stash_cu07", 1);
       return;
     }
 
-    item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", # "supply_stash_cu07", 6);
+    item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", #"supply_stash_cu07", 6);
   }
 }
 
@@ -60,6 +61,6 @@ on_player_killed() {
   }
 
   if(attacker.var_520e7d03 >= 2) {
-    attacker character_unlock::function_c8beca5e(#"nomad_unlock", # "hash_7eb32c4c67ae13fe", 1);
+    attacker character_unlock::function_c8beca5e(#"nomad_unlock", #"hash_7eb32c4c67ae13fe", 1);
   }
 }

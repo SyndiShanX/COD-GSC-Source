@@ -80,10 +80,10 @@ function precache_createfx_fx() {
 }
 
 function trap_fx_monitor(name, side) {
-  while(true) {
+  while (true) {
     level waittill(name);
     fire_points = struct::get_array(name, "targetname");
-    for(i = 0; i < fire_points.size; i++) {
+    for (i = 0; i < fire_points.size; i++) {
       fire_points[i] thread electric_trap_fx(name, side);
     }
   }
@@ -91,24 +91,24 @@ function trap_fx_monitor(name, side) {
 
 function electric_trap_fx(name, side) {
   ang = self.angles;
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   up = anglestoup(ang);
-  if(isDefined(self.loopfx)) {
-    for(i = 0; i < self.loopfx.size; i++) {
+  if(isdefined(self.loopfx)) {
+    for (i = 0; i < self.loopfx.size; i++) {
       self.loopfx[i] delete();
     }
     self.loopfx = [];
   }
-  if(!isDefined(self.loopfx)) {
+  if(!isdefined(self.loopfx)) {
     self.loopfx = [];
   }
   players = getlocalplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     self.loopfx[i] = spawnfx(i, level._effect["zapper"], self.origin, 0, forward, up);
     triggerfx(self.loopfx[i]);
   }
   level waittill(side + "off");
-  for(i = 0; i < self.loopfx.size; i++) {
+  for (i = 0; i < self.loopfx.size; i++) {
     self.loopfx[i] delete();
   }
   self.loopfx = [];
@@ -117,33 +117,33 @@ function electric_trap_fx(name, side) {
 function zapper_switch_fx(ent) {
   switchfx = struct::get("zapper_switch_fx_" + ent, "targetname");
   zapperfx = struct::get("zapper_fx_" + ent, "targetname");
-  switch_forward = anglesToForward(switchfx.angles);
+  switch_forward = anglestoforward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);
-  zapper_forward = anglesToForward(zapperfx.angles);
+  zapper_forward = anglestoforward(zapperfx.angles);
   zapper_up = anglestoup(zapperfx.angles);
-  while(true) {
+  while (true) {
     level waittill(ent);
-    if(isDefined(switchfx.loopfx)) {
-      for(i = 0; i < switchfx.loopfx.size; i++) {
+    if(isdefined(switchfx.loopfx)) {
+      for (i = 0; i < switchfx.loopfx.size; i++) {
         switchfx.loopfx[i] delete();
         zapperfx.loopfx[i] delete();
       }
       switchfx.loopfx = [];
       zapperfx.loopfx = [];
     }
-    if(!isDefined(switchfx.loopfx)) {
+    if(!isdefined(switchfx.loopfx)) {
       switchfx.loopfx = [];
       zapperfx.loopfx = [];
     }
     players = getlocalplayers();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       switchfx.loopfx[i] = spawnfx(i, level._effect["zapper_wall"], switchfx.origin, 0, switch_forward, switch_up);
       triggerfx(switchfx.loopfx[i]);
       zapperfx.loopfx[i] = spawnfx(i, level._effect["zapper_fx"], zapperfx.origin, 0, zapper_forward, zapper_up);
       triggerfx(zapperfx.loopfx[i]);
     }
     wait(30);
-    for(i = 0; i < switchfx.loopfx.size; i++) {
+    for (i = 0; i < switchfx.loopfx.size; i++) {
       switchfx.loopfx[i] delete();
       zapperfx.loopfx[i] delete();
     }

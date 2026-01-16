@@ -14,9 +14,9 @@ bridge_deploy_main() {
   common_scripts\utility::flag_init("bridge_deploy_pre_end");
   level.player notify("remove_tow");
 
-  if(level.start_point == "bridge_deploy") {
+  if(level.start_point == "bridge_deploy")
     var_0 = common_scripts\utility::getstruct("bridge_deploy_player_in", "targetname");
-  } else {
+  else {
     level.player unlink();
     var_0 = level.player;
   }
@@ -35,9 +35,8 @@ tower_to_bridge_deploy_bink() {
   common_scripts\utility::waitframe();
   thread maps\satfarm_audio::overlord_trans2();
 
-  if(level.start_point == "bridge_deploy") {
+  if(level.start_point == "bridge_deploy")
     maps\_hud_util::fade_out(1);
-  }
 
   self freezecontrols(1);
   self enableinvulnerability();
@@ -118,20 +117,17 @@ tower_to_bridge_deploy() {
   var_11.origin = var_8.origin;
   var_11 moveto(var_9.origin, var_10);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::target_enable_sat_view(var_11, "ac130_hud_friendly_vehicle_diamond_s_w", (0, 1, 0));
-  }
 
   wait 0.5;
   var_12 = self worldpointtoscreenpos(var_11.origin + (var_9.origin - var_8.origin) * 0.65 / var_10, getdvarfloat("cg_fov"));
 
-  if(!isDefined(var_12)) {
+  if(!isDefined(var_12))
     var_12 = (0, 0, 0);
-  }
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_LOCATED", (1, 1, 1), "left", "top", 1);
-  }
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(var_12[0], var_12[1], undefined, undefined, 0.5);
   wait 0.75;
@@ -139,23 +135,20 @@ tower_to_bridge_deploy() {
   var_14 = var_13 - anglesToForward(var_4.angles) * (var_4.origin[2] - var_13[2]);
   var_4 moveto(var_14, 0.5);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_TRACKING", (1, 1, 1), "right", "top", 1);
-  }
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, undefined, undefined, 0.5);
   wait 0.5;
   var_4 linkto(var_11);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     level.player lerpfov(30, 0.25);
-  }
 
   thread maps\satfarm_satellite_view::satellite_view_zoom_in_sound(0.25);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
-    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("right", &"SATFARM_ADAM_RORKE", &"SATFARM_GHOST_ONE");
-  }
+  if(getdvar("debug_sat_view_pip", "1") != "2")
+    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("right", & "SATFARM_ADAM_RORKE", & "SATFARM_GHOST_ONE");
 
   wait 1;
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_hqr_theaagunswill");
@@ -175,9 +168,8 @@ tower_to_bridge_deploy() {
 
   wait 1;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_SWITCHING_FEEDS", (1, 1, 1), "left", "top", 1.5);
-  }
 
   thread spawn_a10s();
   wait 1;
@@ -202,24 +194,22 @@ tower_to_bridge_deploy() {
   wait 0.05;
   thread remove_bridge_deploy_tanks(var_7);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     target_remove(var_11);
-  }
 
   var_11 delete();
 
-  if(getdvar("debug_sat_view_pip", "1") == "1") {
+  if(getdvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
-  } else if(getdvar("debug_sat_view_pip", "1") == "2") {
+  else if(getdvar("debug_sat_view_pip", "1") == "2")
     level.player playerlinktoabsolute(var_4, "tag_origin");
-  }
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, 888, 500, 0);
   thread maps\satfarm_satellite_view::satellite_view_move_to_point(-10, 0, 240, 240, 0.5);
   thread mark_mantis_turrets(var_4);
 
   if(getdvar("debug_sat_view_pip", "1") != "2") {
-    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text_at_point(20, 20, &"SATFARM_OBJECTIVE", &"SATFARM_DESTROY_THE_LOKI", &"SATFARM_DEFENSE_SATELLITE");
+    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text_at_point(20, 20, & "SATFARM_OBJECTIVE", & "SATFARM_DESTROY_THE_LOKI", & "SATFARM_DEFENSE_SATELLITE");
     thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("left", "Missile Incoming", "Time: 5:51", undefined, "satellite_view_missile_wireframe");
   }
 
@@ -240,16 +230,14 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, 32, 32, 1);
   wait 1.5;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     level.player lerpfov(30, 0.25);
-  }
 
   thread maps\satfarm_satellite_view::satellite_view_zoom_in_sound(0.25);
   wait 0.5;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_ACQUIRING", (1, 1, 1), "left", "top", 2);
-  }
 
   thread bridge_deploy_enemy_a10_gun_dives();
   var_18 = 0;
@@ -263,24 +251,21 @@ tower_to_bridge_deploy() {
       wait 0.1;
 
       if(!var_21) {
-        if(getdvar("debug_sat_view_pip", "1") != "2") {
+        if(getdvar("debug_sat_view_pip", "1") != "2")
           maps\satfarm_satellite_view::satellite_view_reticle_color("red");
-        }
       }
 
       wait 0.1;
 
-      if(getdvar("debug_sat_view_pip", "1") != "2") {
+      if(getdvar("debug_sat_view_pip", "1") != "2")
         maps\satfarm_satellite_view::satellite_view_blink_corners(1, 0.1);
-      } else {
+      else
         wait 0.2;
-      }
 
       wait 0.2;
 
-      if(getdvar("debug_sat_view_pip", "1") != "2") {
+      if(getdvar("debug_sat_view_pip", "1") != "2")
         thread maps\satfarm_satellite_view::target_enable_sat_view(var_20, "satellite_view_enemy_target", (1, 0, 0));
-      }
 
       thread common_scripts\utility::play_sound_in_space("satf_satellite_blip_2", level.player.origin);
       var_18++;
@@ -295,16 +280,14 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_satellite_view::satellite_view_zoom_out_sound(0.25);
   level.player maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, undefined, undefined, 0.25);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     maps\satfarm_satellite_view::satellite_view_reticle_color("white");
-  }
 
   wait 2.5;
 
   foreach(var_24 in level.allyheli) {
-    if(getdvar("debug_sat_view_pip", "1") != "2") {
+    if(getdvar("debug_sat_view_pip", "1") != "2")
       thread maps\satfarm_satellite_view::target_enable_sat_view(var_24, "satellite_view_friendly_target", (0, 1, 0));
-    }
   }
 
   var_26 = spawn("script_model", level.allyheli[1] gettagorigin("tag_passenger") + anglesToForward(level.allyheli[1].angles) * level.allyheli[1].veh_speed * 0.75 * var_2);
@@ -314,9 +297,8 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_keepmovingbadgerone");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_weonlyhaveone");
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_text_at_point(&"SATFARM_SYNCING", (1, 1, 1), 320, 50, 0.75);
-  }
 
   wait 0.25;
   wait 0.5;
@@ -343,9 +325,8 @@ tower_to_bridge_deploy() {
   wait 0.2;
   common_scripts\utility::waitframe();
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getdvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::delete_temp_sat_view_targets();
-  }
 
   maps\satfarm_satellite_view::satellite_view_clear_hud();
   wait 0.11;
@@ -384,9 +365,8 @@ spawn_allies_deploy() {
   var_0 delete();
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3)) {
+    if(isDefined(var_3))
       var_3 delete();
-    }
   }
 }
 
@@ -397,9 +377,8 @@ bridge_deploy_enemy_tanks_setup() {
   common_scripts\utility::flag_wait("bridge_deploy_pre_end");
 
   foreach(var_1 in level.enemytanksbri1) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 delete();
-    }
   }
 }
 
@@ -411,9 +390,8 @@ bridge_deploy_enemy_a10_gun_dives() {
   wait 2;
 
   foreach(var_1 in level.enemytanksbri1) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 thread maps\satfarm_code::handle_tank_death();
-    }
 
     wait(randomfloatrange(0.1, 0.5));
   }
@@ -436,9 +414,8 @@ spawn_a10_gun_dive_entrance(var_0) {
   var_1 kill();
   wait 0.75;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_1 delete();
-  }
 }
 
 mark_mantis_turrets(var_0) {
@@ -455,11 +432,10 @@ mark_mantis_turrets(var_0) {
   var_7 linkto(var_6);
   var_6 rotateyaw(15, 5);
 
-  if(getdvar("debug_sat_view_pip", "1") == "1") {
+  if(getdvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_corner_pip(var_7, "tag_origin", 220, -145, 100, 100);
-  } else if(getdvar("debug_sat_view_pip", "1") == "2") {
+  else if(getdvar("debug_sat_view_pip", "1") == "2")
     level.player playerlinktoabsolute(var_7, "tag_origin");
-  }
 
   foreach(var_5 in var_1) {
     var_9 = level.player worldpointtoscreenpos(var_5.origin, getdvarfloat("cg_fov"));
@@ -467,9 +443,8 @@ mark_mantis_turrets(var_0) {
     if(!isDefined(var_9)) {
       continue;
     }
-    if(getdvar("debug_sat_view_pip", "1") != "2") {
+    if(getdvar("debug_sat_view_pip", "1") != "2")
       thread maps\satfarm_satellite_view::satellite_view_zoom_box(var_5.origin, 15, 2, 0.25, 2.5 - var_3 * var_4);
-    }
 
     var_2++;
 
@@ -482,11 +457,10 @@ mark_mantis_turrets(var_0) {
 
   wait 2.5;
 
-  if(getdvar("debug_sat_view_pip", "1") == "1") {
+  if(getdvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
-  } else {
+  else
     level.player playerlinktoabsolute(var_0, "tag_origin");
-  }
 
   var_7 unlink();
   var_7 delete();
@@ -506,8 +480,7 @@ kill_heli() {
   level.allyheli[2] delete();
 
   foreach(var_1 in level.allyhelis) {
-    if(isDefined(var_1)) {
+    if(isDefined(var_1))
       var_1 delete();
-    }
   }
 }

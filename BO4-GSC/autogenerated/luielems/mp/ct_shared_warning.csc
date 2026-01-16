@@ -4,9 +4,11 @@
 ***********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_warning;
 
 class cct_shared_warning: cluielem {
+
   function set_objpoints(localclientnum, value) {
     set_data(localclientnum, "objpoints", value);
   }
@@ -61,12 +63,12 @@ class cct_shared_warning: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "ct_shared_warning");
+    cluielem::open(localclientnum, #"ct_shared_warning");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
+    set_state(localclientnum, #"defaultstate");
     set_data(localclientnum, "objpoints", 0);
   }
 

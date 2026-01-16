@@ -39,7 +39,7 @@ function main() {
   setdvar("compassmaxrange", "2100");
   tree1 = spawn("script_model", (-1480, 692.274, 264.392));
   tree1.angles = (360, 296, 90);
-  tree1 setModel("p7_usa_bunker_roof_vent");
+  tree1 setmodel("p7_usa_bunker_roof_vent");
   level.cleandepositpoints = array((-448.776, -210.531, 45.5891), (1928.72, 191.469, 270.089), (570.724, -732.031, 165.589), (-1356.28, 58.969, 63.0891), (-955.276, -1142.53, 156.089));
   level spawnkilltrigger();
   function_9f6a9d3f();
@@ -73,7 +73,7 @@ function spawnkilltrigger() {
 function watchkilltrigger() {
   level endon("game_ended");
   trigger = self;
-  while(true) {
+  while (true) {
     trigger waittill("trigger", player);
     player dodamage(1000, trigger.origin + (0, 0, 0), trigger, trigger, "none", "MOD_SUICIDE", 0);
   }

@@ -31,8 +31,8 @@
 
 function autoexec init() {
   initrazbehaviorsandasm();
-  spawner::add_archetype_spawn_function("raz", &archetyperazblackboardinit);
-  spawner::add_archetype_spawn_function("raz", &razserverutils::razspawnsetup);
+  spawner::add_archetype_spawn_function("raz", & archetyperazblackboardinit);
+  spawner::add_archetype_spawn_function("raz", & razserverutils::razspawnsetup);
   clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 12000, 1, "int");
   clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 12000, 1, "int");
   clientfield::register("scriptmover", "raz_torpedo_play_trail", 12000, 1, "counter");
@@ -46,24 +46,24 @@ function autoexec init() {
 }
 
 function private initrazbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razTargetService", &raztargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razSprintService", &razsprintservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldMelee", &razshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowPain", &razshouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowSpecialPain", &razshouldshowspecialpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowShieldPain", &razshouldshowshieldpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShootGroundTorpedo", &razshouldshootgroundtorpedo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldGoBerserk", &razshouldgoberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldTraverseWindow", &razshouldtraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartMelee", &razstartmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishMelee", &razfinishmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishGroundTorpedo", &razfinishgroundtorpedo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razGoneBerserk", &razgoneberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartTraverseWindow", &razstarttraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishTraverseWindow", &razfinishtraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razTookPain", &raztookpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartDeath", &razstartdeath);
-  animationstatenetwork::registernotetrackhandlerfunction("mangler_fire", &raznotetrackshootgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razTargetService", & raztargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razSprintService", & razsprintservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldMelee", & razshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowPain", & razshouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowSpecialPain", & razshouldshowspecialpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowShieldPain", & razshouldshowshieldpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShootGroundTorpedo", & razshouldshootgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldGoBerserk", & razshouldgoberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldTraverseWindow", & razshouldtraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartMelee", & razstartmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishMelee", & razfinishmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishGroundTorpedo", & razfinishgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razGoneBerserk", & razgoneberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartTraverseWindow", & razstarttraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishTraverseWindow", & razfinishtraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razTookPain", & raztookpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartDeath", & razstartdeath);
+  animationstatenetwork::registernotetrackhandlerfunction("mangler_fire", & raznotetrackshootgroundtorpedo);
 }
 
 function private archetyperazblackboardinit() {
@@ -77,7 +77,7 @@ function private archetyperazblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -89,24 +89,24 @@ function private archetyperazblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = &archetyperazonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = & archetyperazonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
 function private archetyperazonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
   entity archetyperazblackboardinit();
-  if(isDefined(entity.started_running) && entity.started_running) {
+  if(isdefined(entity.started_running) && entity.started_running) {
     entity.invoke_sprint_time = undefined;
     blackboard::setblackboardattribute(entity, "_locomotion_speed", "locomotion_speed_sprint");
   }
-  if(!(isDefined(entity.razhasgunattached) && entity.razhasgunattached)) {
+  if(!(isdefined(entity.razhasgunattached) && entity.razhasgunattached)) {
     blackboard::setblackboardattribute(entity, "_gibbed_limbs", "right_arm");
   }
 }
 
 function private bb_getshouldturn() {
-  if(isDefined(self.should_turn) && self.should_turn) {
+  if(isdefined(self.should_turn) && self.should_turn) {
     return "should_turn";
   }
   return "should_not_turn";
@@ -115,22 +115,22 @@ function private bb_getshouldturn() {
 function findnodesservice(behaviortreeentity) {
   node = undefined;
   behaviortreeentity.entrance_nodes = [];
-  if(isDefined(behaviortreeentity.find_flesh_struct_string)) {
+  if(isdefined(behaviortreeentity.find_flesh_struct_string)) {
     if(behaviortreeentity.find_flesh_struct_string == "find_flesh") {
       return false;
     }
-    for(i = 0; i < level.exterior_goals.size; i++) {
-      if(isDefined(level.exterior_goals[i].script_string) && level.exterior_goals[i].script_string == behaviortreeentity.find_flesh_struct_string) {
+    for (i = 0; i < level.exterior_goals.size; i++) {
+      if(isdefined(level.exterior_goals[i].script_string) && level.exterior_goals[i].script_string == behaviortreeentity.find_flesh_struct_string) {
         node = level.exterior_goals[i];
         break;
       }
     }
     behaviortreeentity.entrance_nodes[behaviortreeentity.entrance_nodes.size] = node;
-    assert(isDefined(node), ("" + behaviortreeentity.find_flesh_struct_string) + "");
+    assert(isdefined(node), ("" + behaviortreeentity.find_flesh_struct_string) + "");
     behaviortreeentity.first_node = node;
     behaviortreeentity.goalradius = 80;
     behaviortreeentity.mocomp_barricade_offset = getdvarint("raz_node_origin_offset", -22);
-    node_origin = node.origin + (anglesToForward(node.angles) * behaviortreeentity.mocomp_barricade_offset);
+    node_origin = node.origin + (anglestoforward(node.angles) * behaviortreeentity.mocomp_barricade_offset);
     behaviortreeentity setgoal(node_origin);
     if(zm_behavior::zombieisatentrance(behaviortreeentity)) {
       behaviortreeentity.got_to_entrance = 1;
@@ -140,10 +140,10 @@ function findnodesservice(behaviortreeentity) {
 }
 
 function shouldskipteardown(entity) {
-  if(isDefined(entity.destroying_window) && entity.destroying_window) {
+  if(isdefined(entity.destroying_window) && entity.destroying_window) {
     return true;
   }
-  if(!isDefined(entity.script_string) || entity.script_string == "find_flesh") {
+  if(!isdefined(entity.script_string) || entity.script_string == "find_flesh") {
     return true;
   }
   return false;
@@ -151,23 +151,23 @@ function shouldskipteardown(entity) {
 
 function private razgetnondestroyedchuncks() {
   chunks = undefined;
-  if(isDefined(self.first_node)) {
+  if(isdefined(self.first_node)) {
     chunks = zm_utility::get_non_destroyed_chunks(self.first_node, self.first_node.barrier_chunks);
   }
   return chunks;
 }
 
 function private razdestroywindow(entity, b_destroy_actual_pieces) {
-  if(!(isDefined(b_destroy_actual_pieces) && b_destroy_actual_pieces)) {
+  if(!(isdefined(b_destroy_actual_pieces) && b_destroy_actual_pieces)) {
     entity.got_to_entrance = 0;
     entity.destroying_window = 1;
     entity forceteleport(entity.origin, entity.first_node.angles);
     chunks = entity razgetnondestroyedchuncks();
-    if(!isDefined(chunks) || chunks.size == 0) {
+    if(!isdefined(chunks) || chunks.size == 0) {
       entity.jump_through_window = 1;
       entity.jump_through_window_angle = entity.angles;
     } else {
-      if(isDefined(entity.razhasgunattached) && entity.razhasgunattached) {
+      if(isdefined(entity.razhasgunattached) && entity.razhasgunattached) {
         entity.destroy_window_by_torpedo = 1;
       } else {
         entity.destroy_window_by_melee = 1;
@@ -176,10 +176,10 @@ function private razdestroywindow(entity, b_destroy_actual_pieces) {
   } else {
     entity.jump_through_window = 1;
     entity.jump_through_window_angle = entity.angles;
-    if(isDefined(entity.first_node)) {
+    if(isdefined(entity.first_node)) {
       chunks = entity razgetnondestroyedchuncks();
-      if(isDefined(chunks)) {
-        for(i = 0; i < chunks.size; i++) {
+      if(isdefined(chunks)) {
+        for (i = 0; i < chunks.size; i++) {
           entity.first_node.zbarrier setzbarrierpiecestate(chunks[i], "opening", 0.2);
         }
       }
@@ -188,14 +188,14 @@ function private razdestroywindow(entity, b_destroy_actual_pieces) {
 }
 
 function private raztargetservice(entity) {
-  if(isDefined(entity.ignoreall) && entity.ignoreall) {
+  if(isdefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
-  if(isDefined(entity.jump_through_window) && entity.jump_through_window) {
+  if(isdefined(entity.jump_through_window) && entity.jump_through_window) {
     return false;
   }
   if(!zm_behavior::inplayablearea(entity) && !shouldskipteardown(entity)) {
-    if(isDefined(entity.got_to_entrance) && entity.got_to_entrance) {
+    if(isdefined(entity.got_to_entrance) && entity.got_to_entrance) {
       razdestroywindow(entity);
     } else {
       if(zm_behavior::zombieenteredplayable(entity)) {
@@ -207,11 +207,11 @@ function private raztargetservice(entity) {
   }
   if(level.zombie_poi_array.size > 0) {
     zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
-    if(isDefined(zombie_poi)) {
+    if(isdefined(zombie_poi)) {
       targetpos = getclosestpointonnavmesh(zombie_poi[0], 64, 30);
       entity.zombie_poi = zombie_poi;
       entity.enemyoverride = zombie_poi;
-      if(isDefined(targetpos)) {
+      if(isdefined(targetpos)) {
         self setgoal(targetpos);
       } else {
         self setgoal(zombie_poi[0]);
@@ -226,9 +226,11 @@ function private raztargetservice(entity) {
   }
   player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player, 1);
   entity.favoriteenemy = player;
-  if(!isDefined(player) || player isnotarget()) {
-    if(isDefined(self.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
+  if(!isdefined(player) || player isnotarget()) {
+    if(isdefined(self.ignore_player)) {
+      if(isdefined(level._should_skip_ignore_player_logic) && [
+          [level._should_skip_ignore_player_logic]
+        ]()) {
         return;
       }
       self.ignore_player = [];
@@ -237,7 +239,7 @@ function private raztargetservice(entity) {
     return false;
   }
   targetpos = getclosestpointonnavmesh(player.origin, 64, 30);
-  if(isDefined(targetpos)) {
+  if(isdefined(targetpos)) {
     entity setgoal(targetpos);
     return true;
   }
@@ -246,10 +248,10 @@ function private raztargetservice(entity) {
 }
 
 function private razsprintservice(entity) {
-  if(isDefined(entity.started_running) && entity.started_running) {
+  if(isdefined(entity.started_running) && entity.started_running) {
     return false;
   }
-  if(!isDefined(entity.invoke_sprint_time)) {
+  if(!isdefined(entity.invoke_sprint_time)) {
     return false;
   }
   if(gettime() > entity.invoke_sprint_time) {
@@ -262,10 +264,10 @@ function private razsprintservice(entity) {
 }
 
 function razshouldmelee(entity) {
-  if(isDefined(entity.destroy_window_by_melee) && entity.destroy_window_by_melee) {
+  if(isdefined(entity.destroy_window_by_melee) && entity.destroy_window_by_melee) {
     return true;
   }
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
   if(distancesquared(entity.origin, entity.enemy.origin) > 5625) {
@@ -279,7 +281,7 @@ function razshouldmelee(entity) {
 }
 
 function private razshouldshowpain(entity) {
-  if(isDefined(entity.berserk) && entity.berserk && (!(isDefined(entity.razhasgoneberserk) && entity.razhasgoneberserk))) {
+  if(isdefined(entity.berserk) && entity.berserk && (!(isdefined(entity.razhasgoneberserk) && entity.razhasgoneberserk))) {
     return false;
   }
   return true;
@@ -300,21 +302,21 @@ function private razshouldshowspecialpain(entity) {
 }
 
 function private razshouldshowshieldpain(entity) {
-  if(isDefined(entity.damageweapon) && isDefined(entity.damageweapon.name)) {
+  if(isdefined(entity.damageweapon) && isdefined(entity.damageweapon.name)) {
     return entity.damageweapon.name == "dragonshield";
   }
   return 0;
 }
 
 function private razshouldgoberserk(entity) {
-  if(isDefined(entity.berserk) && entity.berserk && (!(isDefined(entity.razhasgoneberserk) && entity.razhasgoneberserk))) {
+  if(isdefined(entity.berserk) && entity.berserk && (!(isdefined(entity.razhasgoneberserk) && entity.razhasgoneberserk))) {
     return true;
   }
   return false;
 }
 
 function private razshouldtraversewindow(entity) {
-  return isDefined(entity.jump_through_window) && entity.jump_through_window;
+  return isdefined(entity.jump_through_window) && entity.jump_through_window;
 }
 
 function private razgoneberserk(entity) {
@@ -322,7 +324,7 @@ function private razgoneberserk(entity) {
 }
 
 function private razstarttraversewindow(entity) {
-  raz_dir = anglesToForward(entity.first_node.angles);
+  raz_dir = anglestoforward(entity.first_node.angles);
   raz_dir = vectorscale(raz_dir, 100);
   entity setgoal(entity.origin + raz_dir);
 }
@@ -331,7 +333,7 @@ function private razfinishtraversewindow(entity) {
   entity setgoal(entity.origin);
   entity.jump_through_window = undefined;
   entity.first_node = undefined;
-  if(!(isDefined(entity.completed_emerging_into_playable_area) && entity.completed_emerging_into_playable_area)) {
+  if(!(isdefined(entity.completed_emerging_into_playable_area) && entity.completed_emerging_into_playable_area)) {
     entity zm_spawner::zombie_complete_emerging_into_playable_area();
   }
 }
@@ -342,24 +344,24 @@ function private raztookpain(entity) {
 
 function private razstartdeath(entity) {
   entity playsoundontag("zmb_raz_death", "tag_eye");
-  if(isDefined(entity.razhasgunattached) && entity.razhasgunattached) {
+  if(isdefined(entity.razhasgunattached) && entity.razhasgunattached) {
     entity clientfield::set("raz_detach_gun", 1);
     entity.razhasgunattached = 0;
     entity detach("c_zom_dlc3_raz_cannon_arm");
     entity hidepart("j_shouldertwist_ri_attach", "", 1);
     entity hidepart("j_shoulder_ri_attach");
     wait(0.05);
-    if(isDefined(entity)) {
+    if(isdefined(entity)) {
       entity razserverutils::razinvalidategibbedarmor();
     }
   }
-  if(isDefined(entity)) {
-    if(isDefined(entity.razhashelmet) && entity.razhashelmet) {
+  if(isdefined(entity)) {
+    if(isdefined(entity.razhashelmet) && entity.razhashelmet) {
       entity clientfield::set("raz_detach_helmet", 1);
       entity hidepart("j_head_attach", "", 1);
       entity.razhashelmet = 0;
     }
-    if(isDefined(entity.razhaschestarmor) && entity.razhaschestarmor) {
+    if(isdefined(entity.razhaschestarmor) && entity.razhaschestarmor) {
       entity clientfield::set("raz_detach_chest_armor", 1);
       entity hidepart("j_spine4_attach", "", 1);
       entity hidepart("j_spineupper_attach", "", 1);
@@ -369,20 +371,20 @@ function private razstartdeath(entity) {
       entity hidepart("j_clavicle_le_attachbp", "", 1);
       entity.razhaschestarmor = 0;
     }
-    if(isDefined(entity.razhasleftshoulderarmor) && entity.razhasleftshoulderarmor) {
+    if(isdefined(entity.razhasleftshoulderarmor) && entity.razhasleftshoulderarmor) {
       entity clientfield::set("raz_detach_l_shoulder_armor", 1);
       entity hidepart("j_shouldertwist_le_attach", "", 1);
       entity hidepart("j_shoulder_le_attach", "", 1);
       entity hidepart("j_clavicle_le_attach", "", 1);
       entity.razhasleftshoulderarmor = 0;
     }
-    if(isDefined(entity.razhasleftthigharmor) && entity.razhasleftthigharmor) {
+    if(isdefined(entity.razhasleftthigharmor) && entity.razhasleftthigharmor) {
       entity clientfield::set("raz_detach_l_thigh_armor", 1);
       entity hidepart("j_hiptwist_le_attach", "", 1);
       entity hidepart("j_hip_le_attach", "", 1);
       entity.razhasleftthigharmor = 0;
     }
-    if(isDefined(entity.razhasrightthigharmor) && entity.razhasrightthigharmor) {
+    if(isdefined(entity.razhasrightthigharmor) && entity.razhasrightthigharmor) {
       entity clientfield::set("raz_detach_r_thigh_armor", 1);
       entity hidepart("j_hiptwist_ri_attach", "", 1);
       entity hidepart("j_hip_ri_attach", "", 1);
@@ -392,13 +394,13 @@ function private razstartdeath(entity) {
 }
 
 function private razshouldshootgroundtorpedo(entity) {
-  if(isDefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo) {
+  if(isdefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo) {
     return true;
   }
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
-  if(!(isDefined(entity.razhasgunattached) && entity.razhasgunattached)) {
+  if(!(isdefined(entity.razhasgunattached) && entity.razhasgunattached)) {
     return false;
   }
   time = gettime();
@@ -409,8 +411,10 @@ function private razshouldshootgroundtorpedo(entity) {
   if(!(enemy_dist_sq >= 22500 && enemy_dist_sq <= 1440000 && entity razcanseetorpedotarget(entity.enemy))) {
     return false;
   }
-  if(isDefined(entity.check_point_in_enabled_zone)) {
-    in_enabled_zone = [[entity.check_point_in_enabled_zone]](entity.origin);
+  if(isdefined(entity.check_point_in_enabled_zone)) {
+    in_enabled_zone = [
+      [entity.check_point_in_enabled_zone]
+    ](entity.origin);
     if(!in_enabled_zone) {
       return false;
     }
@@ -422,7 +426,7 @@ function private razcanseetorpedotarget(enemy) {
   entity = self;
   origin_point = entity gettagorigin("tag_weapon_right");
   target_point = enemy.origin + vectorscale((0, 0, 1), 48);
-  forward_vect = anglesToForward(self.angles);
+  forward_vect = anglestoforward(self.angles);
   vect_to_enemy = target_point - origin_point;
   if(vectordot(forward_vect, vect_to_enemy) <= 0) {
     return false;
@@ -432,7 +436,7 @@ function private razcanseetorpedotarget(enemy) {
   if(abs(projected_distance) > 50) {
     return false;
   }
-  trace = bulletTrace(origin_point, target_point, 0, self);
+  trace = bullettrace(origin_point, target_point, 0, self);
   if(trace["position"] === target_point) {
     return true;
   }
@@ -440,7 +444,7 @@ function private razcanseetorpedotarget(enemy) {
 }
 
 function private razstartmelee(entity) {
-  if(isDefined(entity.destroy_window_by_melee) && entity.destroy_window_by_melee) {
+  if(isdefined(entity.destroy_window_by_melee) && entity.destroy_window_by_melee) {
     wait(1.1);
     razdestroywindow(entity, 1);
   }
@@ -456,13 +460,13 @@ function private razfinishgroundtorpedo(entity) {
 }
 
 function private raznotetrackshootgroundtorpedo(entity) {
-  if(!isDefined(entity.enemy) && (!(isDefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo))) {
+  if(!isdefined(entity.enemy) && (!(isdefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo))) {
     println("");
     return;
   }
-  if(isDefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo) {
+  if(isdefined(entity.destroy_window_by_torpedo) && entity.destroy_window_by_torpedo) {
     razdestroywindow(entity, 1);
-    raz_dir = anglesToForward(entity.first_node.angles);
+    raz_dir = anglestoforward(entity.first_node.angles);
     entity razshootgroundtorpedo(entity.first_node, vectorscale(raz_dir, 100) + vectorscale((0, 0, 1), 48));
   } else {
     entity razshootgroundtorpedo(entity.enemy, vectorscale((0, 0, 1), 48));
@@ -487,11 +491,11 @@ function private razshootgroundtorpedo(torpedo_target, torpedo_target_offset) {
   torpedo_pos = self gettagorigin("tag_weapon_right");
   torpedo_target_pos = torpedo_target.origin + torpedo_target_offset;
   torpedo = spawn("script_model", torpedo_pos);
-  torpedo setModel("tag_origin");
+  torpedo setmodel("tag_origin");
   torpedo clientfield::set("raz_torpedo_play_fx_on_self", 1);
   torpedo.torpedo_trail_iterations = 0;
   torpedo.raz_torpedo_owner = self;
-  vec_to_enemy = raztorpedolaunchdirection(anglesToForward(self.angles), torpedo_pos, torpedo_target_pos, 0.7);
+  vec_to_enemy = raztorpedolaunchdirection(anglestoforward(self.angles), torpedo_pos, torpedo_target_pos, 0.7);
   angles_to_enemy = vectortoangles(vec_to_enemy);
   torpedo.angles = angles_to_enemy;
   normal_vector = vectornormalize(vec_to_enemy);
@@ -501,8 +505,8 @@ function private razshootgroundtorpedo(torpedo_target, torpedo_target_offset) {
   max_trail_iterations = int(1200 / iteration_move_distance);
   torpedo thread raztorpedoknockdownzombies(torpedo_target);
   torpedo thread raztorpedodetonateifclosetotarget(torpedo_target, torpedo_target_offset);
-  while(isDefined(torpedo)) {
-    if(!isDefined(torpedo_target) || torpedo.torpedo_trail_iterations >= max_trail_iterations) {
+  while (isdefined(torpedo)) {
+    if(!isdefined(torpedo_target) || torpedo.torpedo_trail_iterations >= max_trail_iterations) {
       torpedo thread raztorpedodetonate(0);
     } else {
       torpedo raztorpedomovetotarget(torpedo_target);
@@ -516,7 +520,7 @@ function private raztorpedodetonateifclosetotarget(torpedo_target, torpedo_targe
   self endon("death");
   self endon("detonated");
   torpedo = self;
-  while(isDefined(torpedo) && isDefined(torpedo_target)) {
+  while (isdefined(torpedo) && isdefined(torpedo_target)) {
     torpedo_target_pos = torpedo_target.origin + torpedo_target_offset;
     if(distancesquared(torpedo.origin, torpedo_target_pos) <= 4096) {
       torpedo thread raztorpedodetonate(0);
@@ -528,11 +532,11 @@ function private raztorpedodetonateifclosetotarget(torpedo_target, torpedo_targe
 function private raztorpedomovetotarget(torpedo_target) {
   self endon("death");
   self endon("detonated");
-  if(!isDefined(self.torpedo_max_yaw_cos)) {
+  if(!isdefined(self.torpedo_max_yaw_cos)) {
     torpedo_yaw_per_interval = 13.5;
     self.torpedo_max_yaw_cos = cos(torpedo_yaw_per_interval);
   }
-  if(isDefined(self.torpedo_old_normal_vector)) {
+  if(isdefined(self.torpedo_old_normal_vector)) {
     torpedo_target_point = torpedo_target.origin + vectorscale((0, 0, 1), 48);
     if(isplayer(torpedo_target)) {
       torpedo_target_point = torpedo_target getplayercamerapos();
@@ -550,7 +554,7 @@ function private raztorpedomovetotarget(torpedo_target) {
     if(dot < self.torpedo_max_yaw_cos) {
       new_vector = normal_vector - self.torpedo_old_normal_vector;
       angle_between_vectors = acos(dot);
-      if(!isDefined(angle_between_vectors)) {
+      if(!isdefined(angle_between_vectors)) {
         angle_between_vectors = 180;
       }
       if(angle_between_vectors == 0) {
@@ -571,7 +575,7 @@ function private raztorpedomovetotarget(torpedo_target) {
   move_distance = 50;
   move_vector = move_distance * normal_vector;
   move_to_point = self.origin + move_vector;
-  trace = bulletTrace(self.origin, move_to_point, 0, self);
+  trace = bullettrace(self.origin, move_to_point, 0, self);
   if(trace["surfacetype"] !== "none") {
     detonate_point = trace["position"];
     dist_sq = distancesquared(detonate_point, self.origin);
@@ -589,7 +593,7 @@ function private raztorpedoplaytraileffect() {
   self endon("detonated");
   surface_check_offset = 26;
   if(self.torpedo_trail_iterations >= 1) {
-    trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 10), self.origin - (0, 0, surface_check_offset), 0, self);
+    trace = bullettrace(self.origin + vectorscale((0, 0, 1), 10), self.origin - (0, 0, surface_check_offset), 0, self);
     if(trace["surfacetype"] !== "none") {
       self clientfield::increment("raz_torpedo_play_trail", 1);
     }
@@ -598,15 +602,15 @@ function private raztorpedoplaytraileffect() {
 
 function private razknockdownzombies(target) {
   self endon("death");
-  while(isDefined(self)) {
-    if(isDefined(target)) {
+  while (isdefined(self)) {
+    if(isdefined(target)) {
       if(isplayer(target)) {
         torpedo_target_position = target.origin + vectorscale((0, 0, 1), 48);
       } else {
         torpedo_target_position = target.origin;
       }
       prediction_time = 0.3;
-      if(isDefined(self.knockdown_iterations) && self.knockdown_iterations < 3) {
+      if(isdefined(self.knockdown_iterations) && self.knockdown_iterations < 3) {
         if(self.knockdown_iterations == 0) {
           prediction_time = 0.075;
         }
@@ -632,10 +636,10 @@ function private razknockdownzombies(target) {
         move_vector = velocity * predict_time;
       }
     }
-    if(!isDefined(b_sprinting) || b_sprinting == 1) {
+    if(!isdefined(b_sprinting) || b_sprinting == 1) {
       predicted_pos = self.origin + move_vector;
       a_zombies = getaiarchetypearray("zombie");
-      a_filtered_zombies = array::filter(a_zombies, 0, &razzombieeligibleforknockdown, self, predicted_pos);
+      a_filtered_zombies = array::filter(a_zombies, 0, & razzombieeligibleforknockdown, self, predicted_pos);
     } else {
       wait(0.2);
       continue;
@@ -646,7 +650,7 @@ function private razknockdownzombies(target) {
         zombie.knockdown_type = "knockdown_shoved";
         zombie_to_target = self.origin - zombie.origin;
         zombie_to_target_2d = vectornormalize((zombie_to_target[0], zombie_to_target[1], 0));
-        zombie_forward = anglesToForward(zombie.angles);
+        zombie_forward = anglestoforward(zombie.angles);
         zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
         zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
@@ -699,7 +703,7 @@ function private raztorpedodetonate(delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self razapplyplayerdetonationeffects();
     w_weapon = getweapon("none");
     explosion_point = torpedo.origin;
@@ -708,10 +712,10 @@ function private raztorpedodetonate(delay) {
     razapplytorpedodetonationpushtoplayers(explosion_point + vectorscale((0, 0, 1), 18));
     self clientfield::set("raz_torpedo_play_fx_on_self", 0);
     wait(0.05);
-    if(isDefined(raz_torpedo_owner) && (isDefined(level.b_raz_ignore_mangler_cooldown) && level.b_raz_ignore_mangler_cooldown)) {
+    if(isdefined(raz_torpedo_owner) && (isdefined(level.b_raz_ignore_mangler_cooldown) && level.b_raz_ignore_mangler_cooldown)) {
       raz_torpedo_owner.next_torpedo_time = gettime();
     }
-    if(isDefined(self)) {
+    if(isdefined(self)) {
       self delete();
     }
   }
@@ -720,7 +724,7 @@ function private raztorpedodetonate(delay) {
 function private razapplytorpedodetonationpushtoplayers(torpedo_origin) {
   players = getplayers();
   v_length = 100 * 100;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(!isalive(player)) {
       continue;
@@ -731,7 +735,7 @@ function private razapplytorpedodetonationpushtoplayers(torpedo_origin) {
     if(player.sessionstate == "intermission") {
       continue;
     }
-    if(isDefined(player.ignoreme) && player.ignoreme) {
+    if(isdefined(player.ignoreme) && player.ignoreme) {
       continue;
     }
     if(player isnotarget()) {
@@ -758,7 +762,7 @@ function private razapplytorpedodetonationpushtoplayers(torpedo_origin) {
 
 function private razapplyplayerdetonationeffects() {
   earthquake(0.4, 0.8, self.origin, 300);
-  for(i = 0; i < level.activeplayers.size; i++) {
+  for (i = 0; i < level.activeplayers.size; i++) {
     distancesq = distancesquared(self.origin, level.activeplayers[i].origin + vectorscale((0, 0, 1), 48));
     if(distancesq > 4096) {
       continue;
@@ -786,7 +790,7 @@ function private razzombieeligibleforknockdown(zombie, target, predicted_pos) {
     return false;
   }
   origin = target.origin;
-  facing_vec = anglesToForward(target.angles);
+  facing_vec = anglestoforward(target.angles);
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
@@ -811,22 +815,22 @@ function private razspawnsetup() {
   self.razhasrightthigharmor = 1;
   self.razhasleftthigharmor = 1;
   self.razhasgoneberserk = 0;
-  if(!isDefined(level.razgunhealth)) {
+  if(!isdefined(level.razgunhealth)) {
     level.razgunhealth = 500;
   }
-  if(!isDefined(level.razmaxhealth)) {
+  if(!isdefined(level.razmaxhealth)) {
     level.razmaxhealth = self.health;
   }
-  if(!isDefined(level.razhelmethealth)) {
+  if(!isdefined(level.razhelmethealth)) {
     level.razhelmethealth = 100;
   }
-  if(!isDefined(level.razleftshoulderarmorhealth)) {
+  if(!isdefined(level.razleftshoulderarmorhealth)) {
     level.razleftshoulderarmorhealth = 100;
   }
-  if(!isDefined(level.razchestarmorhealth)) {
+  if(!isdefined(level.razchestarmorhealth)) {
     level.razchestarmorhealth = 100;
   }
-  if(!isDefined(level.razthigharmorhealth)) {
+  if(!isdefined(level.razthigharmorhealth)) {
     level.razthigharmorhealth = 100;
   }
   self.maxhealth = level.razmaxhealth;
@@ -839,18 +843,18 @@ function private razspawnsetup() {
   self.canbetargetedbyturnedzombies = 1;
   self.no_widows_wine = 1;
   self.flame_fx_timeout = 3;
-  aiutility::addaioverridedamagecallback(self, &razdamagecallback);
+  aiutility::addaioverridedamagecallback(self, & razdamagecallback);
   self thread razgibzombiesonmelee();
 }
 
 function private razgibzombiesonmelee() {
   self endon("death");
   self endon("disconnect");
-  while(true) {
+  while (true) {
     self waittill("melee_fire");
     a_zombies = getaiarchetypearray("zombie");
     foreach(zombie in a_zombies) {
-      if(isDefined(zombie.no_gib) && zombie.no_gib) {
+      if(isdefined(zombie.no_gib) && zombie.no_gib) {
         continue;
       }
       heightdiff = abs(zombie.origin[2] - self.origin[2]);
@@ -861,7 +865,7 @@ function private razgibzombiesonmelee() {
       if(distance2dsq > (90 * 90)) {
         continue;
       }
-      raz_forward = anglesToForward(self.angles);
+      raz_forward = anglestoforward(self.angles);
       vect_to_enemy = zombie.origin - self.origin;
       if(vectordot(raz_forward, vect_to_enemy) <= 0) {
         continue;
@@ -891,7 +895,7 @@ function private razgibzombiesonmelee() {
           b_gibbed = 1;
         }
       }
-      if(!(isDefined(b_gibbed) && b_gibbed)) {
+      if(!(isdefined(b_gibbed) && b_gibbed)) {
         if(!gibserverutils::isgibbed(zombie, 32)) {
           gibserverutils::gibrightarm(zombie);
           continue;
@@ -907,11 +911,11 @@ function private razgibzombiesonmelee() {
 }
 
 function private razinvalidategibbedarmor() {
-  if(!(isDefined(self.razhasgunattached) && self.razhasgunattached)) {
+  if(!(isdefined(self.razhasgunattached) && self.razhasgunattached)) {
     self hidepart("j_shouldertwist_ri_attach", "", 1);
     self hidepart("j_shoulder_ri_attach");
   }
-  if(!(isDefined(self.razhaschestarmor) && self.razhaschestarmor)) {
+  if(!(isdefined(self.razhaschestarmor) && self.razhaschestarmor)) {
     self hidepart("j_spine4_attach", "", 1);
     self hidepart("j_spineupper_attach", "", 1);
     self hidepart("j_spinelower_attach", "", 1);
@@ -919,20 +923,20 @@ function private razinvalidategibbedarmor() {
     self hidepart("j_clavicle_ri_attachbp", "", 1);
     self hidepart("j_clavicle_le_attachbp", "", 1);
   }
-  if(!(isDefined(self.razhasleftshoulderarmor) && self.razhasleftshoulderarmor)) {
+  if(!(isdefined(self.razhasleftshoulderarmor) && self.razhasleftshoulderarmor)) {
     self hidepart("j_shouldertwist_le_attach", "", 1);
     self hidepart("j_shoulder_le_attach", "", 1);
     self hidepart("j_clavicle_le_attach", "", 1);
   }
-  if(!(isDefined(self.razhasrightthigharmor) && self.razhasrightthigharmor)) {
+  if(!(isdefined(self.razhasrightthigharmor) && self.razhasrightthigharmor)) {
     self hidepart("j_hiptwist_ri_attach", "", 1);
     self hidepart("j_hip_ri_attach", "", 1);
   }
-  if(!(isDefined(self.razhasleftthigharmor) && self.razhasleftthigharmor)) {
+  if(!(isdefined(self.razhasleftthigharmor) && self.razhasleftthigharmor)) {
     self hidepart("j_hiptwist_le_attach", "", 1);
     self hidepart("j_hip_le_attach", "", 1);
   }
-  if(!(isDefined(self.razhashelmet) && self.razhashelmet)) {
+  if(!(isdefined(self.razhashelmet) && self.razhashelmet)) {
     self hidepart("j_head_attach", "", 1);
   }
 }
@@ -940,16 +944,16 @@ function private razinvalidategibbedarmor() {
 function private razdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
   entity.last_damage_hit_armor = 0;
-  if(isDefined(attacker) && attacker == entity) {
+  if(isdefined(attacker) && attacker == entity) {
     return 0;
   }
   if(mod !== "MOD_PROJECTILE_SPLASH") {
-    if(isDefined(entity.razhasgunattached) && entity.razhasgunattached) {
+    if(isdefined(entity.razhasgunattached) && entity.razhasgunattached) {
       b_hit_shoulder_weakpoint = raz_check_for_location_hit(entity, hitloc, point, "right_arm_upper", 81, "j_shouldertwist_ri_attach");
-      if(isDefined(b_hit_shoulder_weakpoint) && b_hit_shoulder_weakpoint) {
+      if(isdefined(b_hit_shoulder_weakpoint) && b_hit_shoulder_weakpoint) {
         entity raztrackgundamage(damage, attacker);
         damage = damage * 0.1;
-        if(!(isDefined(entity.razhasgunattached) && entity.razhasgunattached)) {
+        if(!(isdefined(entity.razhasgunattached) && entity.razhasgunattached)) {
           post_hit_health = entity.health - damage;
           gun_detach_damage = entity.maxhealth * 0.33;
           post_hit_health_percent = (post_hit_health - gun_detach_damage) / entity.maxhealth;
@@ -961,7 +965,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
         return damage;
       }
     }
-    if(isDefined(entity.razhaschestarmor) && entity.razhaschestarmor) {
+    if(isdefined(entity.razhaschestarmor) && entity.razhaschestarmor) {
       b_hit_chest = raz_check_for_location_hit(entity, hitloc, point, "torso_upper", 144, "j_spine4_attach");
       if(b_hit_chest || hitloc === "torso_lower" || hitloc === "torso_mid") {
         entity raztrackchestarmordamage(damage);
@@ -970,7 +974,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
         return damage;
       }
     }
-    if(isDefined(entity.razhasleftshoulderarmor) && entity.razhasleftshoulderarmor) {
+    if(isdefined(entity.razhasleftshoulderarmor) && entity.razhasleftshoulderarmor) {
       b_hit_l_shoulder_armor = raz_check_for_location_hit(entity, hitloc, point, "left_arm_upper", 81, "j_shouldertwist_le_attach");
       if(b_hit_l_shoulder_armor) {
         entity raztrackleftshoulderarmordamage(damage);
@@ -979,7 +983,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
         return damage;
       }
     }
-    if(isDefined(entity.razhasrightthigharmor) && entity.razhasrightthigharmor) {
+    if(isdefined(entity.razhasrightthigharmor) && entity.razhasrightthigharmor) {
       b_hit_r_thigh_armor = raz_check_for_location_hit(entity, hitloc, point, "right_leg_upper", 81, "j_hiptwist_ri_attach");
       if(b_hit_r_thigh_armor) {
         entity raztrackrightthigharmordamage(damage);
@@ -988,7 +992,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
         return damage;
       }
     }
-    if(isDefined(entity.razhasleftthigharmor) && entity.razhasleftthigharmor) {
+    if(isdefined(entity.razhasleftthigharmor) && entity.razhasleftthigharmor) {
       b_hit_l_thigh_armor = raz_check_for_location_hit(entity, hitloc, point, "left_leg_upper", 81, "j_hiptwist_le_attach");
       if(b_hit_l_thigh_armor) {
         entity raztrackleftthigharmordamage(damage);
@@ -997,7 +1001,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
         return damage;
       }
     }
-    if(isDefined(entity.razhashelmet) && entity.razhashelmet) {
+    if(isdefined(entity.razhashelmet) && entity.razhashelmet) {
       b_hit_head = raz_check_for_location_hit(entity, hitloc, point, "head", 121, "j_head");
       if(b_hit_head || hitloc === "neck" || hitloc === "helmet") {
         entity raztrackhelmetdamage(damage, attacker);
@@ -1012,7 +1016,7 @@ function private razdamagecallback(inflictor, attacker, damage, dflags, mod, wea
 
 function private raz_check_for_location_hit(entity, hitloc, point, location, hit_radius_sq, tag) {
   b_hit_location = 0;
-  if(isDefined(hitloc) && hitloc != "none") {
+  if(isdefined(hitloc) && hitloc != "none") {
     if(hitloc == location) {
       b_hit_location = 1;
     }

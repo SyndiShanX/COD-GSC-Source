@@ -11,7 +11,7 @@
 #namespace burnplayer;
 
 function autoexec __init__sytem__() {
-  system::register("burnplayer", &__init__, undefined, undefined);
+  system::register("burnplayer", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,11 +25,11 @@ function setplayerburning(duration, interval, damageperinterval, attacker, weapo
   self thread watchburndamage(interval, damageperinterval, attacker, weapon);
   self thread watchforwater();
   self thread watchburnfinished();
-  self playLoopSound("chr_burn_loop_overlay");
+  self playloopsound("chr_burn_loop_overlay");
 }
 
 function takingburndamage(eattacker, weapon, smeansofdeath) {
-  if(isDefined(self.doing_scripted_burn_damage)) {
+  if(isdefined(self.doing_scripted_burn_damage)) {
     self.doing_scripted_burn_damage = undefined;
     return;
   }
@@ -66,7 +66,7 @@ function watchburndamage(interval, damage, attacker, weapon) {
   self endon("death");
   self endon("burnplayer_watchburntimer");
   self endon("burn_finished");
-  while(true) {
+  while (true) {
     wait(interval);
     self.doing_scripted_burn_damage = 1;
     self dodamage(damage, self.origin, attacker, undefined, undefined, "MOD_BURNED", 0, weapon);
@@ -78,7 +78,7 @@ function watchforwater() {
   self endon("disconnect");
   self endon("death");
   self endon("burn_finished");
-  while(true) {
+  while (true) {
     if(self isplayerunderwater()) {
       self notify("burn_finished");
     }

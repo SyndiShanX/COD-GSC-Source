@@ -1334,4 +1334,5 @@ main() {
   ent.v["angles"] = (276, 76, 180);
   ent.v["fxid"] = "leaves_ground_gentlewind_dust";
   ent.v["delay"] = -15;
+
 }

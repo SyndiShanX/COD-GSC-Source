@@ -12,9 +12,9 @@
 #namespace armor;
 
 function setlightarmorhp(newvalue) {
-  if(isDefined(newvalue)) {
+  if(isdefined(newvalue)) {
     self.lightarmorhp = newvalue;
-    if(isplayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
+    if(isplayer(self) && isdefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
       lightarmorpercent = math::clamp(self.lightarmorhp / self.maxlightarmorhp, 0, 1);
       self setcontrolleruimodelvalue("hudItems.armorPercent", lightarmorpercent);
     }
@@ -27,12 +27,12 @@ function setlightarmorhp(newvalue) {
 
 function setlightarmor(optionalarmorvalue) {
   self notify("give_light_armor");
-  if(isDefined(self.lightarmorhp)) {
+  if(isdefined(self.lightarmorhp)) {
     unsetlightarmor();
   }
   self thread removelightarmorondeath();
   self thread removelightarmoronmatchend();
-  if(isDefined(optionalarmorvalue)) {
+  if(isdefined(optionalarmorvalue)) {
     self.maxlightarmorhp = optionalarmorvalue;
   } else {
     self.maxlightarmorhp = 150;
@@ -61,11 +61,11 @@ function removelightarmoronmatchend() {
 }
 
 function haslightarmor() {
-  return isDefined(self.lightarmorhp) && self.lightarmorhp > 0;
+  return isdefined(self.lightarmorhp) && self.lightarmorhp > 0;
 }
 
 function getarmor() {
-  if(isDefined(self.lightarmorhp)) {
+  if(isdefined(self.lightarmorhp)) {
     return self.lightarmorhp;
   }
   return 0;

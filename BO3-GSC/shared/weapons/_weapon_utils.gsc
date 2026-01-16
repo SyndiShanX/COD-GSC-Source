@@ -7,7 +7,7 @@
 #namespace weapon_utils;
 
 function ispistol(weapon) {
-  return isDefined(level.side_arm_array[weapon]);
+  return isdefined(level.side_arm_array[weapon]);
 }
 
 function isflashorstunweapon(weapon) {

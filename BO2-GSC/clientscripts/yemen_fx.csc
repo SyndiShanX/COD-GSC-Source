@@ -7,9 +7,11 @@
 #include clientscripts\createfx\yemen_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {}
+precache_util_fx() {
+}
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_balcony_explosion"] = loadfx("maps/yemen/fx_balcony_explosion01");
@@ -111,7 +113,6 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 }

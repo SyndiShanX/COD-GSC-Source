@@ -68,7 +68,7 @@ move_maze_wall(active) {
 }
 
 set_maze_trap_wall(localClientNum) {
-  walls = getEntArray(localClientNum, "maze_trap_wall", "targetname");
+  walls = GetEntArray(localClientNum, "maze_trap_wall", "targetname");
   bestWall = undefined;
   bestDist = undefined;
   for(i = 0; i < walls.size; i++) {
@@ -106,11 +106,11 @@ _maze_mover_move(goal, time) {
 
 _maze_mover_play_fx(fx_name, offset) {
   if(isDefined(fx_name)) {
-    vFwd = anglesToForward(self.angles);
+    vFwd = AnglesToForward(self.angles);
     org = self.origin;
     if(isDefined(offset)) {
       org += offset;
     }
-    playFX(self.client_num, fx_name, org, vFwd, (0, 0, 1));
+    PlayFX(self.client_num, fx_name, org, vFwd, (0, 0, 1));
   }
 }

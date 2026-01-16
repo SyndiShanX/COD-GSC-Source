@@ -21,9 +21,8 @@ init() {
   level.satellitetype = [];
   level.radartimers = [];
 
-  foreach(team in level.teams) {
-    level.radartimers[team] = gettime();
-  }
+  foreach(team in level.teams)
+  level.radartimers[team] = gettime();
 
   level.spyplaneviewtime = 25;
   level.counteruavviewtime = 30;
@@ -31,7 +30,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowradar")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("radar_mp", "radar_mp", "killstreak_spyplane", "uav_used", ::usekillstreakradar);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radar_mp", &"KILLSTREAK_EARNED_RADAR", &"KILLSTREAK_RADAR_NOT_AVAILABLE", &"KILLSTREAK_RADAR_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radar_mp", & "KILLSTREAK_EARNED_RADAR", & "KILLSTREAK_RADAR_NOT_AVAILABLE", & "KILLSTREAK_RADAR_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("radar_mp", "mpl_killstreak_radar", "kls_u2_used", "", "kls_u2_enemy", "", "kls_u2_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("radar_mp", "scr_giveradar");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("radar_mp");
@@ -39,7 +38,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowcounteruav")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("counteruav_mp", "counteruav_mp", "killstreak_counteruav", "counteruav_used", ::usekillstreakcounteruav);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("counteruav_mp", &"KILLSTREAK_EARNED_COUNTERUAV", &"KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", &"KILLSTREAK_COUNTERUAV_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("counteruav_mp", & "KILLSTREAK_EARNED_COUNTERUAV", & "KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", & "KILLSTREAK_COUNTERUAV_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("counteruav_mp", "mpl_killstreak_radar", "kls_cu2_used", "", "kls_cu2_enemy", "", "kls_cu2_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("counteruav_mp", "scr_givecounteruav");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("counteruav_mp");
@@ -47,7 +46,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowradardirection")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("radardirection_mp", "radardirection_mp", "killstreak_spyplane_direction", "uav_used", ::usekillstreaksatellite);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radardirection_mp", &"KILLSTREAK_EARNED_SATELLITE", &"KILLSTREAK_SATELLITE_NOT_AVAILABLE", &"KILLSTREAK_SATELLITE_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radardirection_mp", & "KILLSTREAK_EARNED_SATELLITE", & "KILLSTREAK_SATELLITE_NOT_AVAILABLE", & "KILLSTREAK_SATELLITE_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("radardirection_mp", "mpl_killstreak_satellite", "kls_sat_used", "", "kls_sat_enemy", "", "kls_sat_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("radardirection_mp", "scr_giveradardirection");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("radardirection_mp");
@@ -55,43 +54,37 @@ init() {
 }
 
 usekillstreakradar(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return 0;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return 0;
-  }
 
   return self maps\mp\killstreaks\_spyplane::callspyplane(hardpointtype, 0, killstreak_id);
 }
 
 usekillstreakcounteruav(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return 0;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return 0;
-  }
 
   return self maps\mp\killstreaks\_spyplane::callcounteruav(hardpointtype, 0, killstreak_id);
 }
 
 usekillstreaksatellite(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
     return 0;
-  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart(hardpointtype, self.team);
 
-  if(killstreak_id == -1) {
+  if(killstreak_id == -1)
     return 0;
-  }
 
   return self maps\mp\killstreaks\_spyplane::callsatellite(hardpointtype, 0, killstreak_id);
 }
@@ -110,27 +103,23 @@ useradaritem(hardpointtype, team, displaymessage) {
   self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog(hardpointtype, team);
 
   if(level.teambased) {
-    if(!isDefined(level.spyplane[team])) {
+    if(!isDefined(level.spyplane[team]))
       level.spyplanetype[team] = 0;
-    }
 
     currenttypespyplane = level.spyplanetype[team];
 
-    if(!isDefined(level.satellitetype[team])) {
+    if(!isDefined(level.satellitetype[team]))
       level.satellitetype[team] = 0;
-    }
 
     currenttypesatellite = level.satellitetype[team];
   } else {
-    if(!isDefined(self.pers["spyplaneType"])) {
+    if(!isDefined(self.pers["spyplaneType"]))
       self.pers["spyplaneType"] = 0;
-    }
 
     currenttypespyplane = self.pers["spyplaneType"];
 
-    if(!isDefined(self.pers["satelliteType"])) {
+    if(!isDefined(self.pers["satelliteType"]))
       self.pers["satelliteType"] = 0;
-    }
 
     currenttypesatellite = self.pers["satelliteType"];
   }
@@ -170,9 +159,8 @@ useradaritem(hardpointtype, team, displaymessage) {
   }
 
   if(displaymessage) {
-    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext)) {
+    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext))
       level thread maps\mp\_popups::displaykillstreakteammessagetoall(hardpointtype, self);
-    }
   }
 
   return viewtime;
@@ -191,17 +179,15 @@ resetsatellitetypeonend(type) {
 setteamspyplanewrapper(team, value) {
   setteamspyplane(team, value);
 
-  if(team == "allies") {
+  if(team == "allies")
     setmatchflag("radar_allies", value);
-  } else if(team == "axis") {
+  else if(team == "axis")
     setmatchflag("radar_axis", value);
-  }
 
   if(level.multiteam == 1) {
     foreach(player in level.players) {
-      if(player.team == team) {
+      if(player.team == team)
         player setclientuivisibilityflag("radar_client", value);
-      }
     }
   }
 
@@ -211,17 +197,15 @@ setteamspyplanewrapper(team, value) {
 setteamsatellitewrapper(team, value) {
   setteamsatellite(team, value);
 
-  if(team == "allies") {
+  if(team == "allies")
     setmatchflag("radar_allies", value);
-  } else if(team == "axis") {
+  else if(team == "axis")
     setmatchflag("radar_axis", value);
-  }
 
   if(level.multiteam == 1) {
     foreach(player in level.players) {
-      if(player.team == team) {
+      if(player.team == team)
         player setclientuivisibilityflag("radar_client", value);
-      }
     }
   }
 

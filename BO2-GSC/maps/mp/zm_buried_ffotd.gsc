@@ -74,11 +74,10 @@ jail_traversal_fix() {
           self setphysparams(25, 0, 72);
           wait 1;
 
-          if(is_true(self.has_legs)) {
+          if(is_true(self.has_legs))
             self setphysparams(15, 0, 72);
-          } else {
+          else
             self setphysparams(15, 0, 24);
-          }
         }
       }
     }
@@ -98,19 +97,17 @@ ghost_round_override_init() {
 }
 
 zgrief_mode_fix() {
-  speed_trigger = getEntArray("specialty_fastreload", "script_noteworthy");
+  speed_trigger = getentarray("specialty_fastreload", "script_noteworthy");
 
   foreach(trig in speed_trigger) {
     if(trig.origin == (-170.5, -328.25, 174)) {
       trig.origin = trig.origin + vectorscale((0, -1, 0), 32.0);
 
-      if(isDefined(trig.clip)) {
+      if(isDefined(trig.clip))
         trig.clip.origin = trig.clip.origin + vectorscale((0, -1, 0), 32.0);
-      }
 
-      if(isDefined(trig.machine)) {
+      if(isDefined(trig.machine))
         trig.machine.origin = trig.machine.origin + vectorscale((0, -1, 0), 32.0);
-      }
     }
   }
 }
@@ -133,18 +130,16 @@ zgrief_respawn_override(revivee, return_struct) {
   backup_group = undefined;
   backup_distance = 100000000;
 
-  if(spawn_points.size == 0) {
+  if(spawn_points.size == 0)
     return undefined;
-  }
 
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i], undefined, 1) && players[i] != self) {
       for(j = 0; j < spawn_points.size; j++) {
-        if(isDefined(spawn_points[j].script_int)) {
+        if(isDefined(spawn_points[j].script_int))
           ideal_distance = spawn_points[j].script_int;
-        } else {
+        else
           ideal_distance = 1000;
-        }
 
         if(spawn_points[j].locked == 0) {
           plyr_dist = distancesquared(players[i].origin, spawn_points[j].origin);
@@ -166,9 +161,8 @@ zgrief_respawn_override(revivee, return_struct) {
       }
     }
 
-    if(!isDefined(closest_group)) {
+    if(!isDefined(closest_group))
       closest_group = backup_group;
-    }
 
     if(isDefined(closest_group)) {
       spawn_location = maps\mp\zombies\_zm::get_valid_spawn_location(revivee, spawn_points, closest_group, return_struct);
@@ -218,9 +212,8 @@ spawned_slide_push_trigger() {
   while(true) {
     trig1 waittill("trigger", who);
 
-    if(who getstance() == "prone" && isplayer(who)) {
+    if(who getstance() == "prone" && isplayer(who))
       who setstance("crouch");
-    }
 
     trig1 thread slide_push_think(who);
     wait 0.1;
@@ -231,9 +224,8 @@ slide_push_think(who) {
   whopos = (0, 0, 0);
 
   while(who istouching(self)) {
-    if(who.origin == whopos) {
+    if(who.origin == whopos)
       who setvelocity(self get_push_vector());
-    }
 
     whopos = who.origin;
     wait 2.0;
@@ -241,9 +233,8 @@ slide_push_think(who) {
 }
 
 slide_push_in_trigger(player) {
-  if(!player is_player_using_thumbstick()) {
+  if(!player is_player_using_thumbstick())
     player setvelocity(self get_push_vector());
-  }
 }
 
 spawned_life_triggers() {
@@ -274,151 +265,151 @@ spawned_collision_ffotd() {
 
   if(!(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen)) {
     collision1 = spawn("script_model", (3731.5, 736, 6.5));
-    collision1 setModel("collision_geo_64x64x128_slick");
+    collision1 setmodel("collision_geo_64x64x128_slick");
     collision1.angles = (4.54625, 313.41, -4.78954);
     collision1 ghost();
     collision2 = spawn("script_model", (34, -1691, 375));
-    collision2 setModel("collision_geo_256x256x10_standard");
+    collision2 setmodel("collision_geo_256x256x10_standard");
     collision2.angles = vectorscale((0, 0, -1), 3.80002);
     collision2 ghost();
     collision3 = spawn("script_model", (641, 545, -1.21359));
-    collision3 setModel("collision_geo_64x64x128_slick");
+    collision3 setmodel("collision_geo_64x64x128_slick");
     collision3.angles = (1.27355, 320.806, -5.38137);
     collision3 ghost();
     saloon1 = spawn("script_model", (1032.22, -1744.09, 309));
-    saloon1 setModel("collision_geo_64x64x64_standard");
+    saloon1 setmodel("collision_geo_64x64x64_standard");
     saloon1.angles = vectorscale((0, 1, 0), 40.8);
     saloon1 ghost();
     saloon2 = spawn("script_model", (1005.78, -1766.91, 309));
-    saloon2 setModel("collision_geo_64x64x64_standard");
+    saloon2 setmodel("collision_geo_64x64x64_standard");
     saloon2.angles = vectorscale((0, 1, 0), 40.8);
     saloon2 ghost();
     gs1 = spawn("script_model", (118.001, -537.037, 236));
-    gs1 setModel("collision_geo_64x64x64_standard");
+    gs1 setmodel("collision_geo_64x64x64_standard");
     gs1.angles = vectorscale((0, 1, 0), 90.0);
     gs1 ghost();
     gs1 thread delete_upon_flag("general_store_porch_door1");
     gs2 = spawn("script_model", (117.999, -571.963, 236));
-    gs2 setModel("collision_geo_64x64x64_standard");
+    gs2 setmodel("collision_geo_64x64x64_standard");
     gs2.angles = vectorscale((0, 1, 0), 90.0);
     gs2 ghost();
     gs2 thread delete_upon_flag("general_store_porch_door1");
     collision4 = spawn("script_model", (1672, 692, 99));
-    collision4 setModel("collision_geo_128x128x10_slick");
+    collision4 setmodel("collision_geo_128x128x10_slick");
     collision4.angles = (280.6, 270, 86.6);
     collision4 ghost();
     cw1 = spawn("script_model", (320, -1988, 116));
-    cw1 setModel("collision_geo_128x128x128_standard");
+    cw1 setmodel("collision_geo_128x128x128_standard");
     cw1.angles = (0, 0, 0);
     cw1 ghost();
     rock1 = spawn("script_model", (311, -1945, 104));
-    rock1 setModel("p6_zm_bu_rock_strata_column_01");
+    rock1 setmodel("p6_zm_bu_rock_strata_column_01");
     rock1.angles = vectorscale((0, 0, 1), 90.0);
     st1 = spawn("script_model", (-736, -2, 25));
-    st1 setModel("collision_geo_128x128x10_standard");
+    st1 setmodel("collision_geo_128x128x10_standard");
     st1.angles = (270, 45, 0);
     st1 ghost();
     ml1 = spawn("script_model", (2831, 440, 405));
-    ml1 setModel("collision_geo_128x128x128_standard");
+    ml1 setmodel("collision_geo_128x128x128_standard");
     ml1.angles = (0, 0, 0);
     ml1 ghost();
     ml2 = spawn("script_model", (2831, 680, 420));
-    ml2 setModel("collision_geo_128x128x128_standard");
+    ml2 setmodel("collision_geo_128x128x128_standard");
     ml2.angles = (0, 0, 0);
     ml2 ghost();
     mr1 = spawn("script_model", (2380, 1123, 350));
-    mr1 setModel("collision_geo_256x256x10_standard");
+    mr1 setmodel("collision_geo_256x256x10_standard");
     mr1.angles = (0, 13.8, -90);
     mr1 ghost();
     th1 = spawn("script_model", (2072, 1168, 360));
-    th1 setModel("collision_geo_128x128x128_standard");
+    th1 setmodel("collision_geo_128x128x128_standard");
     th1.angles = (0, 0, 0);
     th1 ghost();
     th1a = spawn("script_model", (2296, 1088, 400));
-    th1a setModel("collision_geo_128x128x128_standard");
+    th1a setmodel("collision_geo_128x128x128_standard");
     th1a.angles = (0, 0, 0);
     th1a ghost();
     th2 = spawn("script_model", (-544, 510, 286));
-    th2 setModel("collision_geo_256x256x10_standard");
+    th2 setmodel("collision_geo_256x256x10_standard");
     th2.angles = (0, 7.2, -7.8);
     th2 ghost();
     th2a = spawn("script_model", (-296.95, 537.996, 312.557));
-    th2a setModel("collision_geo_256x256x10_standard");
+    th2a setmodel("collision_geo_256x256x10_standard");
     th2a.angles = (347.355, 6.47392, -7.41809);
     th2a ghost();
     th3 = spawn("script_model", (864, 872, 420));
-    th3 setModel("collision_geo_256x256x256_standard");
+    th3 setmodel("collision_geo_256x256x256_standard");
     th3.angles = (0, 0, 0);
     th3 ghost();
     th4 = spawn("script_model", (2361, 1056, 398));
-    th4 setModel("collision_geo_256x256x10_standard");
+    th4 setmodel("collision_geo_256x256x10_standard");
     th4.angles = vectorscale((1, 0, 0), 270.0);
     th4 ghost();
     ch1 = spawn("script_model", (1954, 1996, 222));
-    ch1 setModel("collision_geo_256x256x10_standard");
+    ch1 setmodel("collision_geo_256x256x10_standard");
     ch1.angles = (270, 340, 0.32);
     ch1 ghost();
     ch2 = spawn("script_model", (1945, 1972, 222));
-    ch2 setModel("collision_geo_256x256x10_standard");
+    ch2 setmodel("collision_geo_256x256x10_standard");
     ch2.angles = (270, 340, 0.32);
     ch2 ghost();
     rock1 = spawn("script_model", (3259.54, -189.38, 146.23));
-    rock1 setModel("p6_zm_bu_rock_strata_column_01");
+    rock1 setmodel("p6_zm_bu_rock_strata_column_01");
     rock1.angles = (7.87264, 94.015, 4.57899);
     rock2 = spawn("script_model", (3351.97, -254.58, 95));
-    rock2 setModel("p6_zm_bu_rock_strata_01");
+    rock2 setmodel("p6_zm_bu_rock_strata_01");
     rock2.angles = vectorscale((0, 1, 0), 169.1);
     yt1 = spawn("script_model", (671, -1412, 214));
-    yt1 setModel("collision_geo_64x64x10_slick");
+    yt1 setmodel("collision_geo_64x64x10_slick");
     yt1.angles = (62.8, 315, 0);
     yt1 ghost();
     yt2 = spawn("script_model", (676, -1407, 214));
-    yt2 setModel("collision_geo_64x64x10_slick");
+    yt2 setmodel("collision_geo_64x64x10_slick");
     yt2.angles = (62.8, 315, 0);
     yt2 ghost();
     stb1 = spawn("script_model", (-807, 59, 127));
-    stb1 setModel("collision_geo_64x64x10_standard");
+    stb1 setmodel("collision_geo_64x64x10_standard");
     stb1.angles = vectorscale((0, 0, -1), 90.0);
     stb1 ghost();
     stb2 = spawn("script_model", (-807, 59, 191));
-    stb2 setModel("collision_geo_64x64x10_standard");
+    stb2 setmodel("collision_geo_64x64x10_standard");
     stb2.angles = vectorscale((0, 0, -1), 90.0);
     stb2 ghost();
     stb3 = spawn("script_model", (-861, 59, 31));
-    stb3 setModel("collision_geo_128x128x10_standard");
+    stb3 setmodel("collision_geo_128x128x10_standard");
     stb3.angles = vectorscale((0, 0, -1), 90.0);
     stb3 ghost();
     j162 = spawn("script_model", (912, -936, 214));
-    j162 setModel("collision_geo_128x128x10_standard");
+    j162 setmodel("collision_geo_128x128x10_standard");
     j162.angles = (0, 0, 0);
     j162 ghost();
     j156 = spawn("script_model", (434, 1213, 184));
-    j156 setModel("collision_geo_128x128x10_standard");
+    j156 setmodel("collision_geo_128x128x10_standard");
     j156.angles = vectorscale((1, 0, 0), 273.0);
     j156 ghost();
     j163_1 = spawn("script_model", (1663, 68, 29));
-    j163_1 setModel("collision_geo_128x128x10_slick");
+    j163_1 setmodel("collision_geo_128x128x10_slick");
     j163_1.angles = vectorscale((1, 0, 0), 270.0);
     j163_1 ghost();
     j163_2 = spawn("script_model", (1663, 259, 29));
-    j163_2 setModel("collision_geo_128x128x10_slick");
+    j163_2 setmodel("collision_geo_128x128x10_slick");
     j163_2.angles = vectorscale((1, 0, 0), 270.0);
     j163_2 ghost();
     j125_1 = spawn("script_model", (2443.65, 1013.54, 236.213));
-    j125_1 setModel("p6_zm_bu_rock_strata_04");
+    j125_1 setmodel("p6_zm_bu_rock_strata_04");
     j125_1.angles = (13.345, 103.42, -13.4657);
     j125_3 = spawn("script_model", (2448.7, 852.791, 272.051));
-    j125_3 setModel("p6_zm_bu_wood_planks_106x171");
+    j125_3 setmodel("p6_zm_bu_wood_planks_106x171");
     j125_3.angles = (0, 270, 19.4);
     j125_4 = spawn("script_model", (2313.21, 872.54, 241.01));
-    j125_4 setModel("p6_zm_bu_wood_planks_106x171");
+    j125_4 setmodel("p6_zm_bu_wood_planks_106x171");
     j125_4.angles = (0, 0, 0);
     e72913 = spawn("script_model", (-862, -764, 207));
-    e72913 setModel("collision_geo_256x256x10_standard");
+    e72913 setmodel("collision_geo_256x256x10_standard");
     e72913.angles = (6.2, 0, -90);
     e72913 ghost();
     e2157 = spawn("script_model", (432, 648, 247));
-    e2157 setModel("collision_geo_128x128x10_standard");
+    e2157 setmodel("collision_geo_128x128x10_standard");
     e2157.angles = vectorscale((1, 0, 0), 270.0);
     e2157 ghost();
   }
@@ -433,7 +424,7 @@ init_push_triggers() {
   ghost_mansion_to_maze_push_trigger_left();
   ghost_mansion_to_maze_push_trigger_right();
   ghost_mansion_from_maze_push_trigger();
-  a_push_triggers = getEntArray("push_trigger", "script_noteworthy");
+  a_push_triggers = getentarray("push_trigger", "script_noteworthy");
   array_thread(a_push_triggers, ::push_players_standing_in_trigger_volumes);
 }
 
@@ -476,9 +467,8 @@ push_players_standing_in_trigger_volumes() {
   while(true) {
     self waittill("trigger", player);
 
-    if(!player is_player_using_thumbstick()) {
+    if(!player is_player_using_thumbstick())
       player setvelocity(self get_push_vector());
-    }
   }
 }
 
@@ -486,9 +476,8 @@ is_player_using_thumbstick() {
   b_using_thumbstick = 1;
   v_thumbstick = self getnormalizedmovement();
 
-  if(length(v_thumbstick) < 0.3) {
+  if(length(v_thumbstick) < 0.3)
     b_using_thumbstick = 0;
-  }
 
   return b_using_thumbstick;
 }
@@ -506,9 +495,8 @@ bar_spawner_fix() {
     if(isDefined(spawner.script_string) && spawner.script_string == "bar2") {
       dist = distancesquared(spawner.origin, bad_pos);
 
-      if(dist < dist_fix) {
+      if(dist < dist_fix)
         spawner.origin = (459.5, -2020, 84);
-      }
     }
   }
 }
@@ -517,27 +505,24 @@ player_respawn_fix() {
   maze_spawners = getstructarray("maze_spawn_points", "targetname");
 
   foreach(spawner in maze_spawners) {
-    if(spawner.origin == (3469, 1026, 20)) {
+    if(spawner.origin == (3469, 1026, 20))
       spawner.origin = (3509, 1032, 76);
-    }
   }
 }
 
 door_clip_fix() {
-  bank1 = getEntArray("pf728_auto2510", "targetname");
+  bank1 = getentarray("pf728_auto2510", "targetname");
 
   for(i = 0; i < bank1.size; i++) {
-    if(isDefined(bank1[i].script_noteworthy) && bank1[i].script_noteworthy == "clip") {
+    if(isDefined(bank1[i].script_noteworthy) && bank1[i].script_noteworthy == "clip")
       bank1[i] delete();
-    }
   }
 
-  bank2 = getEntArray("pf728_auto2507", "targetname");
+  bank2 = getentarray("pf728_auto2507", "targetname");
 
   for(i = 0; i < bank2.size; i++) {
-    if(isDefined(bank2[i].script_noteworthy) && bank2[i].script_noteworthy == "clip") {
+    if(isDefined(bank2[i].script_noteworthy) && bank2[i].script_noteworthy == "clip")
       bank2[i] delete();
-    }
   }
 }
 
@@ -578,9 +563,8 @@ time_bomb_takeaway() {
   while(true) {
     self waittill("new_tactical_grenade", new_weapon);
 
-    if((!isDefined(new_weapon) || new_weapon != "time_bomb_zm") && self hasweapon("time_bomb_detonator_zm")) {
+    if((!isDefined(new_weapon) || new_weapon != "time_bomb_zm") && self hasweapon("time_bomb_detonator_zm"))
       self takeweapon("time_bomb_detonator_zm");
-    }
   }
 }
 
@@ -592,7 +576,7 @@ init_dtp_triggers() {
   barn_hay_push_trigger();
   barn_rail_push_trigger();
   church_fence_push_trigger();
-  a_push_triggers = getEntArray("push_from_dtp", "script_noteworthy");
+  a_push_triggers = getentarray("push_from_dtp", "script_noteworthy");
   array_thread(a_push_triggers, ::dtp_push);
 }
 
@@ -636,9 +620,8 @@ dtp_push() {
     self waittill("trigger", player);
 
     if(pos == player.origin) {
-      if(player getstance() == "prone") {
+      if(player getstance() == "prone")
         player setstance("crouch");
-      }
 
       player setvelocity(self get_push_vector());
     }

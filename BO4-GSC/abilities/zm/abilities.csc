@@ -13,6 +13,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace abilities;
 
 autoexec __init__system__() {

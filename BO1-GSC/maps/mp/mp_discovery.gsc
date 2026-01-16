@@ -21,10 +21,10 @@ main() {
   spawncollision("collision_wall_128x128x10", "collider", (-1439, 1383, 150), (0, 0, 0));
   spawncollision("collision_wall_128x128x10", "collider", (-1384.63, 1392.93, 150), (0, 315, 0));
   spawncollision("collision_geo_sphere_64", "collider", (729.5, 1099, -5.5), (0, 348.4, 0));
-  icechunk1 = spawn("script_model", (-958.025, -1587.14, 179));
+  icechunk1 = Spawn("script_model", (-958.025, -1587.14, 179));
   if(isDefined(icechunk1)) {
     icechunk1.angles = (0, 129.067, 0);
-    icechunk1 setModel("p_rus_snow_chunk_04");
+    icechunk1 SetModel("p_rus_snow_chunk_04");
   }
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
   level thread dynamic_path_init();
@@ -32,9 +32,9 @@ main() {
 }
 dynamic_path_init() {
   level.destroyed_paths = [];
-  dynamic_path_triggers = getEntArray("dynamic_path", "targetname");
+  dynamic_path_triggers = GetEntArray("dynamic_path", "targetname");
   array_thread(dynamic_path_triggers, ::dynamic_path_think);
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player thread dynamic_path_delete();
   }
@@ -42,7 +42,7 @@ dynamic_path_init() {
 dynamic_path_delete() {
   self endon("disconnect");
   self wait_endon(5, "spawned");
-  for(i = 0; i < level.destroyed_paths.size; i++) {
+  for (i = 0; i < level.destroyed_paths.size; i++) {
     self ClientNotify(level.destroyed_paths[i]);
     wait(0.1);
   }
@@ -54,10 +54,10 @@ dynamic_path_think() {
   remove = true;
   if(isDefined(self.script_noteworthy)) {
     client_notify = self.script_noteworthy + "_anim";
-    player_collisions = getEntArray(self.script_noteworthy + "_collision", "targetname");
-    ai_collisions = getEntArray(self.script_noteworthy + "_ai_collision", "targetname");
+    player_collisions = GetEntArray(self.script_noteworthy + "_collision", "targetname");
+    ai_collisions = GetEntArray(self.script_noteworthy + "_ai_collision", "targetname");
   }
-  for(i = 0; i < ai_collisions.size; i++) {
+  for (i = 0; i < ai_collisions.size; i++) {
     ai_collisions[i] NotSolid();
     ai_collisions[i] ConnectPaths();
   }
@@ -65,7 +65,7 @@ dynamic_path_think() {
   self.fake_health = self.fake_health_max;
   self thread sound_small_think();
   self thread sound_heavy_think();
-  for(;;) {
+  for (;;) {
     self waittill("damage", amount, attacker, direction, point, type);
     if(!isDefined(type)) {
       continue;
@@ -88,11 +88,11 @@ dynamic_path_think() {
     level ClientNotify(client_notify);
     level.destroyed_paths[level.destroyed_paths.size] = client_notify + "_delete";
   }
-  for(i = 0; i < ai_collisions.size; i++) {
+  for (i = 0; i < ai_collisions.size; i++) {
     ai_collisions[i] Solid();
     ai_collisions[i] DisconnectPaths();
   }
-  for(i = 0; i < player_collisions.size; i++) {
+  for (i = 0; i < player_collisions.size; i++) {
     if(remove) {
       player_collisions[i] delete();
     } else {
@@ -112,7 +112,7 @@ dynamic_path_think() {
     level.sabBomb maps\mp\gametypes\_gameobjects::returnHome();
   }
   if(isDefined(level.flags)) {
-    for(i = 0; i < level.flags.size; i++) {
+    for (i = 0; i < level.flags.size; i++) {
       if(isDefined(level.flags[i].visuals) && level.flags[i].visuals[0] IsTouching(self)) {
         level.flags[i] maps\mp\gametypes\_gameobjects::returnHome();
       }
@@ -133,8 +133,8 @@ sound_heavy_think() {
   playsoundatposition("evt_glacier_crack_heavy", self.origin);
 }
 dynamic_path_destroy_equipment() {
-  grenades = getEntArray("grenade", "classname");
-  for(i = 0; i < grenades.size; i++) {
+  grenades = GetEntArray("grenade", "classname");
+  for (i = 0; i < grenades.size; i++) {
     item = grenades[i];
     if(!isDefined(item.name)) {
       continue;
@@ -162,7 +162,7 @@ getWatcherForWeapon(weapname) {
   if(!IsPlayer(self)) {
     return undefined;
   }
-  for(i = 0; i < self.weaponObjectWatcherArray.size; i++) {
+  for (i = 0; i < self.weaponObjectWatcherArray.size; i++) {
     if(self.weaponObjectWatcherArray[i].weapon != weapname) {
       continue;
     }
@@ -172,7 +172,7 @@ getWatcherForWeapon(weapname) {
 }
 trigger_killer(position, width, height) {
   kill_trig = spawn("trigger_radius", position, 0, width, height);
-  while(1) {
+  while (1) {
     kill_trig waittill("trigger", player);
     if(isplayer(player)) {
       player suicide();

@@ -9,7 +9,7 @@ onFirstPlayerConnect() {
 }
 
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerDisconnect();
     player thread onPlayerSpawned();
@@ -25,7 +25,7 @@ onPlayerDisconnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     self thread maps\oki2_fx::player_rain();
   }
@@ -33,7 +33,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for(;;) {
+  for (;;) {
     self waittill("killed_player");
   }
 }

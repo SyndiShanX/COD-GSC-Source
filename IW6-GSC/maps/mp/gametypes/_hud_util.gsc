@@ -9,18 +9,16 @@ setParent(element) {
   if(isDefined(self.parent) && self.parent == element) {
     return;
   }
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removeChild(self);
-  }
 
   self.parent = element;
   self.parent addChild(self);
 
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  } else {
+  else
     self setPoint("TOPLEFT");
-  }
 }
 
 getParent() {
@@ -65,24 +63,20 @@ removeChild(element) {
 }
 
 setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
-  if(!isDefined(moveTime)) {
+  if(!isDefined(moveTime))
     moveTime = 0;
-  }
 
   element = self getParent();
 
-  if(moveTime) {
+  if(moveTime)
     self moveOverTime(moveTime);
-  }
 
-  if(!isDefined(xOffset)) {
+  if(!isDefined(xOffset))
     xOffset = 0;
-  }
   self.xOffset = xOffset;
 
-  if(!isDefined(yOffset)) {
+  if(!isDefined(yOffset))
     yOffset = 0;
-  }
   self.yOffset = yOffset;
 
   self.point = point;
@@ -90,40 +84,31 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
   self.alignX = "center";
   self.alignY = "middle";
 
-  if(isSubStr(point, "TOP")) {
+  if(isSubStr(point, "TOP"))
     self.alignY = "top";
-  }
-  if(isSubStr(point, "BOTTOM")) {
+  if(isSubStr(point, "BOTTOM"))
     self.alignY = "bottom";
-  }
-  if(isSubStr(point, "LEFT")) {
+  if(isSubStr(point, "LEFT"))
     self.alignX = "left";
-  }
-  if(isSubStr(point, "RIGHT")) {
+  if(isSubStr(point, "RIGHT"))
     self.alignX = "right";
-  }
 
-  if(!isDefined(relativePoint)) {
+  if(!isDefined(relativePoint))
     relativePoint = point;
-  }
 
   self.relativePoint = relativePoint;
 
   relativeX = "center_adjustable";
   relativeY = "middle";
 
-  if(isSubStr(relativePoint, "TOP")) {
+  if(isSubStr(relativePoint, "TOP"))
     relativeY = "top_adjustable";
-  }
-  if(isSubStr(relativePoint, "BOTTOM")) {
+  if(isSubStr(relativePoint, "BOTTOM"))
     relativeY = "bottom_adjustable";
-  }
-  if(isSubStr(relativePoint, "LEFT")) {
+  if(isSubStr(relativePoint, "LEFT"))
     relativeX = "left_adjustable";
-  }
-  if(isSubStr(relativePoint, "RIGHT")) {
+  if(isSubStr(relativePoint, "RIGHT"))
     relativeX = "right_adjustable";
-  }
 
   if(element == level.uiParent) {
     self.horzAlign = relativeX;
@@ -138,18 +123,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     xFactor = 0;
   } else if(relativeX == "center" || element.alignX == "center") {
     offsetX = int(element.width / 2);
-    if(relativeX == "left_adjustable" || element.alignX == "right") {
+    if(relativeX == "left_adjustable" || element.alignX == "right")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   } else {
     offsetX = element.width;
-    if(relativeX == "left_adjustable") {
+    if(relativeX == "left_adjustable")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   }
   self.x = element.x + (offsetX * xFactor);
 
@@ -158,18 +141,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     yFactor = 0;
   } else if(relativeY == "middle" || element.alignY == "middle") {
     offsetY = int(element.height / 2);
-    if(relativeY == "top_adjustable" || element.alignY == "bottom") {
+    if(relativeY == "top_adjustable" || element.alignY == "bottom")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   } else {
     offsetY = element.height;
-    if(relativeY == "top_adjustable") {
+    if(relativeY == "top_adjustable")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   }
   self.y = element.y + (offsetY * yFactor);
 
@@ -193,35 +174,31 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.alignY = self.alignY;
   self.bar.y = self.y;
 
-  if(self.alignX == "left") {
+  if(self.alignX == "left")
     self.bar.x = self.x;
-  } else if(self.alignX == "right") {
+  else if(self.alignX == "right")
     self.bar.x = self.x - self.width;
-  } else {
+  else
     self.bar.x = self.x - int(self.width / 2);
-  }
 
-  if(self.alignY == "top") {
+  if(self.alignY == "top")
     self.bar.y = self.y;
-  } else if(self.alignY == "bottom") {
+  else if(self.alignY == "bottom")
     self.bar.y = self.y;
-  }
 
   self updateBar(self.bar.frac);
 }
 
 updateBar(barFrac, rateOfChange) {
-  if(self.elemType == "bar") {
+  if(self.elemType == "bar")
     updateBarScale(barFrac, rateOfChange);
-  }
 }
 
 updateBarScale(barFrac, rateOfChange) {
   barWidth = int(self.width * barFrac + 0.5);
 
-  if(!barWidth) {
+  if(!barWidth)
     barWidth = 1;
-  }
 
   self.bar.frac = barFrac;
   self.bar setShader(self.bar.shader, barWidth, self.height);
@@ -260,11 +237,10 @@ createFontString(font, fontScale) {
 }
 
 createServerFontString(font, fontScale, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     fontElem = newTeamHudElem(team);
-  } else {
+  else
     fontElem = newHudElem();
-  }
 
   fontElem.elemType = "font";
   fontElem.font = font;
@@ -284,11 +260,10 @@ createServerFontString(font, fontScale, team) {
 }
 
 createServerTimer(font, fontScale, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     timerElem = newTeamHudElem(team);
-  } else {
+  else
     timerElem = newHudElem();
-  }
   timerElem.elemType = "timer";
   timerElem.font = font;
   timerElem.fontScale = fontScale;
@@ -349,11 +324,10 @@ createIcon(shader, width, height) {
 }
 
 createServerIcon(shader, width, height, team) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     iconElem = newTeamHudElem(team);
-  } else {
+  else
     iconElem = newHudElem();
-  }
   iconElem.elemType = "icon";
   iconElem.x = 0;
   iconElem.y = 0;
@@ -376,11 +350,10 @@ createServerIcon(shader, width, height, team) {
 }
 
 createServerBar(color, width, height, flashFrac, team, selected) {
-  if(isDefined(team)) {
+  if(isDefined(team))
     barElem = newTeamHudElem(team);
-  } else {
+  else
     barElem = newHudElem();
-  }
   barElem.x = 0;
   barElem.y = 0;
   barElem.frac = 0;
@@ -394,11 +367,10 @@ createServerBar(color, width, height, flashFrac, team, selected) {
 
   }
 
-  if(isDefined(team)) {
+  if(isDefined(team))
     barElemBG = newTeamHudElem(team);
-  } else {
+  else
     barElemBG = newHudElem();
-  }
   barElemBG.elemType = "bar";
   barElemBG.x = 0;
   barElemBG.y = 0;
@@ -462,20 +434,16 @@ getCurrentFraction() {
 }
 
 createPrimaryProgressBar(xOffset, yOffset) {
-  if(IsAgent(self)) {
+  if(IsAgent(self))
     return undefined;
-  }
 
-  if(!isDefined(xOffset)) {
+  if(!isDefined(xOffset))
     xOffset = 0;
-  }
-  if(!isDefined(yOffset)) {
+  if(!isDefined(yOffset))
     yOffset = -25;
-  }
 
-  if(self isSplitscreenPlayer()) {
+  if(self isSplitscreenPlayer())
     yOffset += 20;
-  }
 
   bar = createBar((1, 1, 1), level.primaryProgressBarWidth, level.primaryProgressBarHeight);
   bar setPoint("CENTER", undefined, level.primaryProgressBarX + xOffset, level.primaryProgressBarY + yOffset);
@@ -483,31 +451,25 @@ createPrimaryProgressBar(xOffset, yOffset) {
   return bar;
 }
 createPrimaryProgressBarText(xOffset, yOffset, fontsize, usefont) {
-  if(IsAgent(self)) {
+  if(IsAgent(self))
     return undefined;
-  }
 
-  if(!isDefined(xOffset)) {
+  if(!isDefined(xOffset))
     xOffset = 0;
-  }
-  if(!isDefined(yOffset)) {
+  if(!isDefined(yOffset))
     yOffset = -25;
-  }
 
-  if(self isSplitscreenPlayer()) {
+  if(self isSplitscreenPlayer())
     yOffset += 20;
-  }
 
   font_size = level.primaryProgressBarFontSize;
   font = "default";
 
-  if(isDefined(fontsize)) {
+  if(isDefined(fontsize))
     font_size = fontsize;
-  }
 
-  if(isDefined(usefont)) {
+  if(isDefined(usefont))
     font = usefont;
-  }
 
   text = createFontString(font, font_size);
   text setPoint("CENTER", undefined, level.primaryProgressBarTextX + xOffset, level.primaryProgressBarTextY + yOffset);
@@ -536,15 +498,13 @@ hideElem() {
   }
   self.hidden = true;
 
-  if(self.alpha != 0) {
+  if(self.alpha != 0)
     self.alpha = 0;
-  }
 
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     self.bar.hidden = true;
-    if(self.bar.alpha != 0) {
+    if(self.bar.alpha != 0)
       self.bar.alpha = 0;
-    }
   }
 }
 
@@ -555,28 +515,24 @@ showElem() {
   self.hidden = false;
 
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
-    if(self.alpha != .5) {
+    if(self.alpha != .5)
       self.alpha = .5;
-    }
 
     self.bar.hidden = false;
-    if(self.bar.alpha != 1) {
+    if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-    }
 
   } else {
-    if(self.alpha != 1) {
+    if(self.alpha != 1)
       self.alpha = 1;
-    }
   }
 }
 
 flashThread() {
   self endon("death");
 
-  if(!self.hidden) {
+  if(!self.hidden)
     self.alpha = 1;
-  }
 
   while(1) {
     if(self.frac >= self.flashFrac) {
@@ -589,9 +545,8 @@ flashThread() {
       }
       wait(0.7);
     } else {
-      if(!self.hidden && self.alpha != 1) {
+      if(!self.hidden && self.alpha != 1)
         self.alpha = 1;
-      }
 
       wait(0.05);
     }
@@ -602,14 +557,12 @@ destroyElem() {
   tempChildren = [];
 
   for(index = 0; index < self.children.size; index++) {
-    if(isDefined(self.children[index])) {
+    if(isDefined(self.children[index]))
       tempChildren[tempChildren.size] = self.children[index];
-    }
   }
 
-  for(index = 0; index < tempChildren.size; index++) {
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
-  }
 
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     self.bar destroy();
@@ -658,7 +611,7 @@ transitionReset() {
   self.y = self.yOffset;
   if(self.elemType == "font") {
     self.fontScale = self.baseFontScale;
-    self.label = &"";
+    self.label = & "";
   } else if(self.elemType == "icon") {
     self setShader(self.shader, self.width, self.height);
   }
@@ -695,9 +648,8 @@ transitionPulseFXIn(inTime, duration) {
 }
 
 transitionSlideIn(duration, direction) {
-  if(!isDefined(direction)) {
+  if(!isDefined(direction))
     direction = "left";
-  }
 
   switch (direction) {
     case "left":
@@ -719,9 +671,8 @@ transitionSlideIn(duration, direction) {
 }
 
 transitionSlideOut(duration, direction) {
-  if(!isDefined(direction)) {
+  if(!isDefined(direction))
     direction = "left";
-  }
 
   gotoX = self.xOffset;
   gotoY = self.yOffset;
@@ -762,11 +713,10 @@ transitionZoomOut(duration) {
 
 transitionFadeIn(duration) {
   self fadeOverTime(duration);
-  if(isDefined(self.maxAlpha)) {
+  if(isDefined(self.maxAlpha))
     self.alpha = self.maxAlpha;
-  } else {
+  else
     self.alpha = 1;
-  }
 }
 
 transitionFadeOut(duration) {
@@ -779,9 +729,8 @@ getWeeklyRef(chRef) {
     weeklyId = self GetRankedPlayerData("weeklyChallengeId", chIndex);
     weeklyRef = tableLookupByRow("mp/weeklyChallengesTable.csv", weeklyId, 0);
 
-    if(weeklyRef == chRef) {
+    if(weeklyRef == chRef)
       return "ch_weekly_" + chIndex;
-    }
   }
 
   return "";
@@ -792,62 +741,56 @@ getDailyRef(chRef) {
     dailyId = self GetRankedPlayerData("dailyChallengeId", chIndex);
     dailyRef = tableLookupByRow("mp/dailyChallengesTable.csv", dailyId, 0);
 
-    if(dailyRef == chRef) {
+    if(dailyRef == chRef)
       return "ch_daily_" + chIndex;
-    }
   }
 
   return "";
 }
 
 ch_getProgress(refString) {
-  if(level.challengeInfo[refString]["type"] == 0) {
+  if(level.challengeInfo[refString]["type"] == 0)
     return self GetRankedPlayerData("challengeProgress", refString);
-  } else if(level.challengeInfo[refString]["type"] == 1) {
+  else if(level.challengeInfo[refString]["type"] == 1)
     return self GetRankedPlayerData("challengeProgress", getDailyRef(refString));
-  } else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return self GetRankedPlayerData("challengeProgress", getWeeklyRef(refString));
-  }
 }
 
 ch_getState(refString) {
-  if(level.challengeInfo[refString]["type"] == 0) {
+  if(level.challengeInfo[refString]["type"] == 0)
     return self GetRankedPlayerData("challengeState", refString);
-  } else if(level.challengeInfo[refString]["type"] == 1) {
+  else if(level.challengeInfo[refString]["type"] == 1)
     return self GetRankedPlayerData("challengeState", getDailyRef(refString));
-  } else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return self GetRankedPlayerData("challengeState", getWeeklyRef(refString));
-  }
 }
 
 ch_setProgress(refString, value) {
-  if(level.challengeInfo[refString]["type"] == 0) {
+  if(level.challengeInfo[refString]["type"] == 0)
     return self setRankedPlayerData("challengeProgress", refString, value);
-  } else if(level.challengeInfo[refString]["type"] == 1) {
+  else if(level.challengeInfo[refString]["type"] == 1)
     return self setRankedPlayerData("challengeProgress", getDailyRef(refString), value);
-  } else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return self setRankedPlayerData("challengeProgress", getWeeklyRef(refString), value);
-  }
 }
 
 ch_setState(refString, value) {
-  if(level.challengeInfo[refString]["type"] == 0) {
+  if(level.challengeInfo[refString]["type"] == 0)
     return self setRankedPlayerData("challengeState", refString, value);
-  } else if(level.challengeInfo[refString]["type"] == 1) {
+  else if(level.challengeInfo[refString]["type"] == 1)
     return self setRankedPlayerData("challengeState", getDailyRef(refString), value);
-  } else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return self setRankedPlayerData("challengeState", getWeeklyRef(refString), value);
-  }
 }
 
 ch_getTarget(refString, state) {
-  if(level.challengeInfo[refString]["type"] == 0) {
+  if(level.challengeInfo[refString]["type"] == 0)
     return int(tableLookup("mp/allChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
-  } else if(level.challengeInfo[refString]["type"] == 1) {
+  else if(level.challengeInfo[refString]["type"] == 1)
     return int(tableLookup("mp/dailyChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
-  } else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return int(tableLookup("mp/weeklyChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
-  }
 }
 
 ch_isActiveChallenge(refString) {
@@ -855,15 +798,13 @@ ch_isActiveChallenge(refString) {
   if(level.challengeInfo[refString]["type"] == 0) {
     for(i = 0; i < numActiveChallenges; i++) {
       activeCh = self GetRankedPlayerData("activeChallenges", i);
-      if(activeCh == refString) {
+      if(activeCh == refString)
         return true;
-      }
     }
   } else if(level.challengeInfo[refString]["type"] == 1)
     return true;
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  else if(level.challengeInfo[refString]["type"] == 2)
     return true;
-  }
 
   return false;
 }

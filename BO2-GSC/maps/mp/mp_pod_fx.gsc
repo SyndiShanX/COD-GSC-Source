@@ -14,7 +14,8 @@ main() {
   maps\mp\createfx\mp_pod_fx::main();
 }
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_pod_glass_drop_trail"] = loadfx("maps/mp_maps/fx_mp_pod_glass_drop_trail");

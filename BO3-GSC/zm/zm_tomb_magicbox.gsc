@@ -13,7 +13,7 @@
 #namespace tomb_magicbox;
 
 function autoexec __init__sytem__() {
-  system::register("tomb_magicbox", &__init__, undefined, undefined);
+  system::register("tomb_magicbox", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,14 +21,14 @@ function __init__() {
   clientfield::register("zbarrier", "magicbox_amb_fx", 21000, 2, "int");
   clientfield::register("zbarrier", "magicbox_open_fx", 21000, 1, "int");
   clientfield::register("zbarrier", "magicbox_leaving_fx", 21000, 1, "int");
-  level.chest_joker_custom_movement = &custom_joker_movement;
-  level.custom_magic_box_timer_til_despawn = &custom_magic_box_timer_til_despawn;
-  level.custom_magic_box_do_weapon_rise = &custom_magic_box_do_weapon_rise;
-  level.custom_magic_box_weapon_wait = &custom_magic_box_weapon_wait;
+  level.chest_joker_custom_movement = & custom_joker_movement;
+  level.custom_magic_box_timer_til_despawn = & custom_magic_box_timer_til_despawn;
+  level.custom_magic_box_do_weapon_rise = & custom_magic_box_do_weapon_rise;
+  level.custom_magic_box_weapon_wait = & custom_magic_box_weapon_wait;
   level.custom_magicbox_float_height = 50;
-  level.custom_magic_box_fx = &function_61903aae;
-  level.custom_treasure_chest_glowfx = &function_e4e60ea;
-  level.magic_box_zbarrier_state_func = &set_magic_box_zbarrier_state;
+  level.custom_magic_box_fx = & function_61903aae;
+  level.custom_treasure_chest_glowfx = & function_e4e60ea;
+  level.magic_box_zbarrier_state_func = & set_magic_box_zbarrier_state;
   level thread wait_then_create_base_magic_box_fx();
   level thread handle_fire_sale();
 }
@@ -41,13 +41,13 @@ function custom_joker_movement() {
   v_origin = self.weapon_model.origin - vectorscale((0, 0, 1), 5);
   self.weapon_model delete();
   m_lock = util::spawn_model(level.chest_joker_model, v_origin, self.angles);
-  m_lock playSound("zmb_hellbox_bear");
+  m_lock playsound("zmb_hellbox_bear");
   wait(0.5);
   level notify("weapon_fly_away_start");
   wait(1);
   m_lock rotateyaw(3000, 4, 4);
   wait(3);
-  v_angles = anglesToForward(self.angles - vectorscale((0, 1, 0), 90));
+  v_angles = anglestoforward(self.angles - vectorscale((0, 1, 0), 90));
   m_lock moveto(m_lock.origin + (20 * v_angles), 0.5, 0.5);
   m_lock waittill("movedone");
   m_lock moveto(m_lock.origin + -100 * v_angles, 0.5, 0.5);
@@ -60,10 +60,10 @@ function custom_joker_movement() {
 function custom_magic_box_timer_til_despawn(magic_box) {
   self endon("kill_weapon_movement");
   putbacktime = 12;
-  v_float = (anglesToForward(magic_box.angles - vectorscale((0, 1, 0), 90))) * 40;
+  v_float = (anglestoforward(magic_box.angles - vectorscale((0, 1, 0), 90))) * 40;
   self moveto(self.origin - (v_float * 0.25), putbacktime, putbacktime * 0.5);
   wait(putbacktime);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
@@ -73,10 +73,10 @@ function custom_magic_box_weapon_wait() {
 }
 
 function wait_then_create_base_magic_box_fx() {
-  while(!isDefined(level.chests)) {
+  while (!isdefined(level.chests)) {
     wait(0.5);
   }
-  while(!isDefined(level.chests[level.chests.size - 1].zbarrier)) {
+  while (!isdefined(level.chests[level.chests.size - 1].zbarrier)) {
     wait(0.5);
   }
   foreach(chest in level.chests) {
@@ -85,7 +85,7 @@ function wait_then_create_base_magic_box_fx() {
 }
 
 function set_magic_box_zbarrier_state(state) {
-  for(i = 0; i < self getnumzbarrierpieces(); i++) {
+  for (i = 0; i < self getnumzbarrierpieces(); i++) {
     self hidezbarrierpiece(i);
   }
   self notify("zbarrier_state_change");
@@ -105,7 +105,7 @@ function set_magic_box_zbarrier_state(state) {
     case "initial": {
       self showzbarrierpiece(1);
       self thread magic_box_initial();
-      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
       self.state = "close";
       break;
     }
@@ -129,7 +129,7 @@ function set_magic_box_zbarrier_state(state) {
       break;
     }
     default: {
-      if(isDefined(level.custom_magicbox_state_handler)) {
+      if(isdefined(level.custom_magicbox_state_handler)) {
         self[[level.custom_magicbox_state_handler]](state);
       }
       break;
@@ -146,13 +146,13 @@ function magic_box_initial() {
 function magic_box_arrives() {
   self clientfield::set("magicbox_leaving_fx", 0);
   self setzbarrierpiecestate(1, "opening");
-  while(self getzbarrierpiecestate(1) == "opening") {
+  while (self getzbarrierpiecestate(1) == "opening") {
     wait(0.05);
   }
   self notify("arrived");
   self.state = "close";
   s_zone_capture_area = level.zone_capture.zones[self.zone_capture_area];
-  if(isDefined(s_zone_capture_area)) {
+  if(isdefined(s_zone_capture_area)) {
     if(!s_zone_capture_area flag::get("player_controlled")) {
       self clientfield::set("magicbox_amb_fx", 1);
     } else {
@@ -166,20 +166,20 @@ function magic_box_leaves() {
   self clientfield::set("magicbox_leaving_fx", 1);
   self clientfield::set("magicbox_open_fx", 0);
   self setzbarrierpiecestate(1, "closing");
-  self playSound("zmb_hellbox_rise");
-  while(self getzbarrierpiecestate(1) == "closing") {
+  self playsound("zmb_hellbox_rise");
+  while (self getzbarrierpiecestate(1) == "closing") {
     wait(0.1);
   }
   self notify("left");
   s_zone_capture_area = level.zone_capture.zones[self.zone_capture_area];
-  if(isDefined(s_zone_capture_area)) {
+  if(isdefined(s_zone_capture_area)) {
     if(s_zone_capture_area flag::get("player_controlled")) {
       self clientfield::set("magicbox_amb_fx", 3);
     } else {
       self clientfield::set("magicbox_amb_fx", 0);
     }
   }
-  if(isDefined(level.dig_magic_box_moved) && !level.dig_magic_box_moved) {
+  if(isdefined(level.dig_magic_box_moved) && !level.dig_magic_box_moved) {
     level.dig_magic_box_moved = 1;
   }
 }
@@ -187,8 +187,8 @@ function magic_box_leaves() {
 function magic_box_opens() {
   self clientfield::set("magicbox_open_fx", 1);
   self setzbarrierpiecestate(2, "opening");
-  self playSound("zmb_hellbox_open");
-  while(self getzbarrierpiecestate(2) == "opening") {
+  self playsound("zmb_hellbox_open");
+  while (self getzbarrierpiecestate(2) == "opening") {
     wait(0.1);
   }
   self notify("opened");
@@ -199,9 +199,9 @@ function magic_box_open_idle() {
   self endon("stop_open_idle");
   self hidezbarrierpiece(2);
   self showzbarrierpiece(5);
-  while(true) {
+  while (true) {
     self setzbarrierpiecestate(5, "opening");
-    while(self getzbarrierpiecestate(5) != "open") {
+    while (self getzbarrierpiecestate(5) != "open") {
       wait(0.05);
     }
   }
@@ -212,9 +212,9 @@ function magic_box_closes() {
   self hidezbarrierpiece(5);
   self showzbarrierpiece(2);
   self setzbarrierpiecestate(2, "closing");
-  self playSound("zmb_hellbox_close");
+  self playsound("zmb_hellbox_close");
   self clientfield::set("magicbox_open_fx", 0);
-  while(self getzbarrierpiecestate(2) == "closing") {
+  while (self getzbarrierpiecestate(2) == "closing") {
     wait(0.1);
   }
   self notify("closed");
@@ -232,7 +232,7 @@ function custom_magic_box_do_weapon_rise() {
   self showzbarrierpiece(4);
   self setzbarrierpiecestate(3, "opening");
   self setzbarrierpiecestate(4, "opening");
-  while(self getzbarrierpiecestate(3) != "open") {
+  while (self getzbarrierpiecestate(3) != "open") {
     wait(0.5);
   }
   self hidezbarrierpiece(3);
@@ -240,11 +240,11 @@ function custom_magic_box_do_weapon_rise() {
 }
 
 function handle_fire_sale() {
-  while(true) {
+  while (true) {
     level waittill("fire_sale_off");
-    for(i = 0; i < level.chests.size; i++) {
-      if(level.chest_index != i && isDefined(level.chests[i].was_temp)) {
-        if(isDefined(level.chests[i].zbarrier.zone_capture_area) && level.zone_capture.zones[level.chests[i].zbarrier.zone_capture_area] flag::get("player_controlled")) {
+    for (i = 0; i < level.chests.size; i++) {
+      if(level.chest_index != i && isdefined(level.chests[i].was_temp)) {
+        if(isdefined(level.chests[i].zbarrier.zone_capture_area) && level.zone_capture.zones[level.chests[i].zbarrier.zone_capture_area] flag::get("player_controlled")) {
           level.chests[i].zbarrier clientfield::set("magicbox_amb_fx", 3);
           continue;
         }

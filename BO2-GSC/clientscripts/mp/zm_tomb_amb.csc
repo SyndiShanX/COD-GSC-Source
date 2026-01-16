@@ -73,9 +73,8 @@ sndweathertriggersetup() {
 sndupdateambienttrigger(name, is_default, reverb, context, inorout) {
   weather = "_default";
 
-  if(!isDefined(level.sndambweathernames)) {
+  if(!isDefined(level.sndambweathernames))
     level.sndambweathernames = [];
-  }
 
   level.sndambweathernames[level.sndambweathernames.size] = name;
   declareambientroom(name, is_default);
@@ -87,20 +86,19 @@ sndupdateambienttrigger(name, is_default, reverb, context, inorout) {
   while(true) {
     level waittill("sndWeatherUpdate");
 
-    if(is_true(level.sndweather.israin)) {
+    if(is_true(level.sndweather.israin))
       weather = "_rain";
-    } else if(is_true(level.sndweather.issnow)) {
+    else if(is_true(level.sndweather.issnow))
       weather = "_snow";
-    } else {
+    else
       weather = "_default";
-    }
 
     setambientroomtone(name, "amb_weather_2d" + weather + inorout, 0.5, 0.5);
   }
 }
 
 sndweathersetup() {
-  level.sndweather = spawnStruct();
+  level.sndweather = spawnstruct();
   level.sndweather.israin = 0;
   level.sndweather.issnow = 0;
 }
@@ -120,7 +118,7 @@ sndambientcontextonplayer(room, player) {
 }
 
 sndcapturezonetrigs() {
-  trigs = getEntArray(0, "sndCaptureZone", "targetname");
+  trigs = getentarray(0, "sndCaptureZone", "targetname");
 
   if(isDefined(trigs)) {
     foreach(trig in trigs) {
@@ -153,26 +151,24 @@ sndcapturezonetrig() {
 }
 
 sndcapturezonetrig_player(player) {
-  while(isDefined(self) && isDefined(player) && player istouching(self)) {
+  while(isDefined(self) && isDefined(player) && player istouching(self))
     wait 0.1;
-  }
 
   self.players--;
 
-  if(isDefined(player)) {
+  if(isDefined(player))
     player.sndincapzone = 0;
-  }
 
   self notify("player_left");
 }
 
 sndcapturezonetrig_activate() {
-  playSound(0, "zmb_zone_plate_down", self.origin);
-  self playLoopSound("zmb_zone_plate_loop", 2);
+  playsound(0, "zmb_zone_plate_down", self.origin);
+  self playloopsound("zmb_zone_plate_loop", 2);
   self waittill("zone_deactivate");
   self.active = 0;
   self stoploopsound(1);
-  playSound(0, "zmb_zone_plate_up", self.origin);
+  playsound(0, "zmb_zone_plate_up", self.origin);
 }
 
 sndcapturezonetrig_deactivate() {
@@ -198,23 +194,21 @@ init_audio_clientfields() {
 }
 
 audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
+  if(newval)
     playloopat(fieldname, (0, 0, 0));
-  } else {
+  else
     stoploopat(fieldname, (0, 0, 0));
-  }
 }
 
 sndchambermusic(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 3) {
+  if(newval == 3)
     level.sndchambermusoverride = "null";
-  } else if(newval == 2) {
+  else if(newval == 2)
     level.sndchambermusoverride = "mus_underscore_chamber_fight_2";
-  } else if(newval == 1) {
+  else if(newval == 1)
     level.sndchambermusoverride = "mus_underscore_chamber_fight_1";
-  } else {
+  else
     level.sndchambermusoverride = undefined;
-  }
 }
 
 sndstartambience() {
@@ -233,18 +227,17 @@ snd_start_autofx_audio() {
 
 flyovers() {
   while(true) {
-    playSound(0, "amb_flyover", (0, 0, 0));
+    playsound(0, "amb_flyover", (0, 0, 0));
     wait(randomintrange(2, 8));
   }
 }
 
 sndmudslow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isspectating(localclientnum, 0)) {
-    if(newval == 1) {
+    if(newval == 1)
       self thread sndactivatemudloop();
-    } else {
+    else
       self thread snddeactivatemudloop();
-    }
   }
 }
 
@@ -257,7 +250,7 @@ sndactivatemudloop() {
     self.sndwadeent linkto(self, "tag_origin");
   }
 
-  self.sndwadeent playLoopSound("zmb_tomb_slowed_movement_loop", 1);
+  self.sndwadeent playloopsound("zmb_tomb_slowed_movement_loop", 1);
 
   while(true) {
     if(!isDefined(self)) {
@@ -282,21 +275,18 @@ init() {
   init_heli_sound_values("qrdrone", "turbine_moving", 30, 0.0, 0.9, 20, 0.9, 1.1);
   init_heli_sound_values("qrdrone", "turn", 5, 0, 1, 1, 1, 1);
 
-  if(getdvar(#"_id_21D60E03") == "") {
+  if(getdvar(#"_id_21D60E03") == "")
     setdvar("helisounds", "");
-  }
 
   level thread command_parser();
 }
 
 init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, max_speed_pitch, min_pitch, max_pitch) {
-  if(!isDefined(level.helisoundvalues[heli_type])) {
+  if(!isDefined(level.helisoundvalues[heli_type]))
     level.helisoundvalues[heli_type] = [];
-  }
 
-  if(!isDefined(level.helisoundvalues[heli_type][part_type])) {
-    level.helisoundvalues[heli_type][part_type] = spawnStruct();
-  }
+  if(!isDefined(level.helisoundvalues[heli_type][part_type]))
+    level.helisoundvalues[heli_type][part_type] = spawnstruct();
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -327,20 +317,18 @@ command_parser() {
       tokens = strtok(command, " ");
 
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
-        if(isDefined(tokens[0])) {
+        if(isDefined(tokens[0]))
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        } else {
+        else
           println("helisounds Did not recognize helicopter type");
-        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
       } else if(!isDefined(tokens[1])) {
-        if(isDefined(tokens[1])) {
+        if(isDefined(tokens[1]))
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        } else {
+        else
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
-        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
@@ -406,15 +394,14 @@ init_heli_sounds_player_drone() {
 }
 
 sound_linkto(parent, tag) {
-  if(isDefined(tag)) {
+  if(isDefined(tag))
     self linkto(parent, tag);
-  } else {
+  else
     self linkto(parent, "tag_body");
-  }
 }
 
 setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
-  self.heli[bone_location] = spawnStruct();
+  self.heli[bone_location] = spawnstruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
   self.heli[bone_location].run sound_linkto(self, tag);
@@ -471,7 +458,7 @@ heli_linkto_sound_ents_delete(localclientnum, entity) {
 heli_sound_play(heli_bone) {
   switch (heli_bone.sound_type) {
     case "engine":
-      heli_bone.run playLoopSound(heli_bone.run.alias, 2);
+      heli_bone.run playloopsound(heli_bone.run.alias, 2);
       break;
     case "wind":
       break;
@@ -493,11 +480,10 @@ play_player_drone_sounds() {
 heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
   self endon("entityshutdown");
   heli_bone = self.heli[heli_part];
-  run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+  run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
 
-  if(!isDefined(wait_time)) {
+  if(!isDefined(wait_time))
     wait_time = 0.5;
-  }
 
   while(isDefined(self)) {
     if(!isDefined(level.helisoundvalues[heli_type]) || !isDefined(level.helisoundvalues[heli_type][heli_part])) {
@@ -518,9 +504,8 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
     run_pitch = scale_speed(self.idle_run_trans_speed, max_speed_pitch, min_pitch, max_pitch, self.cur_speed);
 
     if(isDefined(updown)) {
-      if(!isDefined(self.qrdrone_z_difference)) {
+      if(!isDefined(self.qrdrone_z_difference))
         self.qrdrone_z_difference = 0;
-      }
 
       run_volume_vertical = scale_speed(5, 50, 0, 1, abs(self.qrdrone_z_difference));
       run_volume = run_volume - run_volume_vertical;
@@ -546,9 +531,8 @@ get_heli_sound_ent(sound_ent) {
   if(!isDefined(sound_ent)) {
     tag = "tag_origin";
 
-    if(isDefined(self.warning_tag)) {
+    if(isDefined(self.warning_tag))
       tag = self.warning_tag;
-    }
 
     sound_ent = spawn(0, self gettagorigin(tag), "script_origin");
     sound_ent linkto(self, tag);
@@ -584,11 +568,11 @@ drone_up_down_transition() {
   qr_ent_down thread qr_ent_cleanup(self);
   qr_ent_either thread qr_ent_cleanup(self);
   self.qrdrone_z_difference = 0;
-  down = qr_ent_down playLoopSound("veh_qrdrone_move_down");
+  down = qr_ent_down playloopsound("veh_qrdrone_move_down");
   qr_ent_down setloopstate("veh_qrdrone_move_down", 0, 0);
-  up = qr_ent_up playLoopSound("veh_qrdrone_move_up");
+  up = qr_ent_up playloopsound("veh_qrdrone_move_up");
   qr_ent_up setloopstate("veh_qrdrone_move_up", 0, 0);
-  either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
+  either = qr_ent_either playloopsound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_body";
   qr_ent_up linkto(self, tag);
@@ -633,7 +617,7 @@ drone_rotate_angle(heli_type, heli_part) {
   volumerate = 2.5;
   qr_ent_angle = spawn(0, self.origin, "script_origin");
   qr_ent_angle thread qr_ent_cleanup(self);
-  angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
+  angle = qr_ent_angle playloopsound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_body";
   qr_ent_angle linkto(self, tag);
@@ -656,7 +640,7 @@ drone_button_watch() {
 
   while(true) {
     if(abs(self.qrdrone_z_difference) > 5 && return_to_zero) {
-      self playSound(0, "veh_qrdrone_move_start");
+      self playsound(0, "veh_qrdrone_move_start");
       return_to_zero = 0;
     } else if(abs(self.qrdrone_z_difference) < 5 && !return_to_zero)
       return_to_zero = 1;
@@ -666,117 +650,117 @@ drone_button_watch() {
 }
 
 snd_shake_hvy() {
-  playSound(0, "amb_interior_shake_hvy", (2725, 5338, -244));
+  playsound(0, "amb_interior_shake_hvy", (2725, 5338, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (1756, 4124, -244));
+  playsound(0, "amb_interior_shake_hvy", (1756, 4124, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (1262, 3917, -213));
+  playsound(0, "amb_interior_shake_hvy", (1262, 3917, -213));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-262, 4168, -250));
+  playsound(0, "amb_interior_shake_hvy", (-262, 4168, -250));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (1078, 4207, -224));
+  playsound(0, "amb_interior_shake_hvy", (1078, 4207, -224));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (1309, 2871, -114));
+  playsound(0, "amb_interior_shake_hvy", (1309, 2871, -114));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (452, 3472, -194));
+  playsound(0, "amb_interior_shake_hvy", (452, 3472, -194));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-686, 3432, -181));
+  playsound(0, "amb_interior_shake_hvy", (-686, 3432, -181));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-944, 2939, -142));
+  playsound(0, "amb_interior_shake_hvy", (-944, 2939, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-416, 2967, -140));
+  playsound(0, "amb_interior_shake_hvy", (-416, 2967, -140));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-477, 2452, -143));
+  playsound(0, "amb_interior_shake_hvy", (-477, 2452, -143));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-906, 2391, -141));
+  playsound(0, "amb_interior_shake_hvy", (-906, 2391, -141));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-751, 2668, -8));
+  playsound(0, "amb_interior_shake_hvy", (-751, 2668, -8));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-1, 23, 300));
+  playsound(0, "amb_interior_shake_hvy", (-1, 23, 300));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (701, 2693, -142));
+  playsound(0, "amb_interior_shake_hvy", (701, 2693, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (2181, 4785, -182));
+  playsound(0, "amb_interior_shake_hvy", (2181, 4785, -182));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (1701, 3312, -163));
+  playsound(0, "amb_interior_shake_hvy", (1701, 3312, -163));
   wait 0.05;
-  playSound(0, "amb_interior_shake_hvy", (-2575, 165, 214));
+  playsound(0, "amb_interior_shake_hvy", (-2575, 165, 214));
 }
 
 snd_shake_med() {
-  playSound(0, "amb_interior_shake_med", (2725, 5338, -244));
+  playsound(0, "amb_interior_shake_med", (2725, 5338, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (1756, 4124, -244));
+  playsound(0, "amb_interior_shake_med", (1756, 4124, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (1262, 3917, -213));
+  playsound(0, "amb_interior_shake_med", (1262, 3917, -213));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-262, 4168, -250));
+  playsound(0, "amb_interior_shake_med", (-262, 4168, -250));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (1078, 4207, -224));
+  playsound(0, "amb_interior_shake_med", (1078, 4207, -224));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (1309, 2871, -114));
+  playsound(0, "amb_interior_shake_med", (1309, 2871, -114));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (452, 3472, -194));
+  playsound(0, "amb_interior_shake_med", (452, 3472, -194));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-686, 3432, -181));
+  playsound(0, "amb_interior_shake_med", (-686, 3432, -181));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-944, 2939, -142));
+  playsound(0, "amb_interior_shake_med", (-944, 2939, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-416, 2967, -140));
+  playsound(0, "amb_interior_shake_med", (-416, 2967, -140));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-477, 2452, -143));
+  playsound(0, "amb_interior_shake_med", (-477, 2452, -143));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-906, 2391, -141));
+  playsound(0, "amb_interior_shake_med", (-906, 2391, -141));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-751, 2668, -8));
+  playsound(0, "amb_interior_shake_med", (-751, 2668, -8));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-1, 23, 300));
+  playsound(0, "amb_interior_shake_med", (-1, 23, 300));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (701, 2693, -142));
+  playsound(0, "amb_interior_shake_med", (701, 2693, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (2181, 4785, -182));
+  playsound(0, "amb_interior_shake_med", (2181, 4785, -182));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (1701, 3312, -163));
+  playsound(0, "amb_interior_shake_med", (1701, 3312, -163));
   wait 0.05;
-  playSound(0, "amb_interior_shake_med", (-2575, 165, 214));
+  playsound(0, "amb_interior_shake_med", (-2575, 165, 214));
 }
 
 snd_shake_lgt() {
-  playSound(0, "amb_interior_shake_lgt", (2725, 5338, -244));
+  playsound(0, "amb_interior_shake_lgt", (2725, 5338, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (1756, 4124, -244));
+  playsound(0, "amb_interior_shake_lgt", (1756, 4124, -244));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (1262, 3917, -213));
+  playsound(0, "amb_interior_shake_lgt", (1262, 3917, -213));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-262, 4168, -250));
+  playsound(0, "amb_interior_shake_lgt", (-262, 4168, -250));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (1078, 4207, -224));
+  playsound(0, "amb_interior_shake_lgt", (1078, 4207, -224));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (1309, 2871, -114));
+  playsound(0, "amb_interior_shake_lgt", (1309, 2871, -114));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (452, 3472, -194));
+  playsound(0, "amb_interior_shake_lgt", (452, 3472, -194));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-686, 3432, -181));
+  playsound(0, "amb_interior_shake_lgt", (-686, 3432, -181));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-944, 2939, -142));
+  playsound(0, "amb_interior_shake_lgt", (-944, 2939, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-416, 2967, -140));
+  playsound(0, "amb_interior_shake_lgt", (-416, 2967, -140));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-477, 2452, -143));
+  playsound(0, "amb_interior_shake_lgt", (-477, 2452, -143));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-906, 2391, -141));
+  playsound(0, "amb_interior_shake_lgt", (-906, 2391, -141));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-751, 2668, -8));
+  playsound(0, "amb_interior_shake_lgt", (-751, 2668, -8));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-1, 23, 300));
+  playsound(0, "amb_interior_shake_lgt", (-1, 23, 300));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (701, 2693, -142));
+  playsound(0, "amb_interior_shake_lgt", (701, 2693, -142));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (2181, 4785, -182));
+  playsound(0, "amb_interior_shake_lgt", (2181, 4785, -182));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (1701, 3312, -163));
+  playsound(0, "amb_interior_shake_lgt", (1701, 3312, -163));
   wait 0.05;
-  playSound(0, "amb_interior_shake_lgt", (-2575, 165, 214));
+  playsound(0, "amb_interior_shake_lgt", (-2575, 165, 214));
 }
 
 snd_play_loopers() {
@@ -826,25 +810,23 @@ snd_play_loopers() {
 sndchargeshot(localclientnum, weaponname, chargeshotlevel) {
   self.sndcurrentcharge = chargeshotlevel;
 
-  if(!isDefined(self.sndchargeloopent)) {
+  if(!isDefined(self.sndchargeloopent))
     self.sndchargeloopent = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   self thread sndstoploopent();
 
   if(!isDefined(self.sndlastcharge) || self.sndcurrentcharge != self.sndlastcharge) {
     alias = "wpn_firestaff_charge_";
 
-    if(weaponname == "staff_water_upgraded_zm") {
+    if(weaponname == "staff_water_upgraded_zm")
       alias = "wpn_waterstaff_charge_";
-    } else if(weaponname == "staff_lightning_upgraded_zm") {
+    else if(weaponname == "staff_lightning_upgraded_zm")
       alias = "wpn_lightningstaff_charge_";
-    } else if(weaponname == "staff_air_upgraded_zm") {
+    else if(weaponname == "staff_air_upgraded_zm")
       alias = "wpn_airstaff_charge_";
-    }
 
-    self.sndchargeloopent playLoopSound(alias + "loop", 1.5);
-    playSound(localclientnum, alias + self.sndcurrentcharge, (0, 0, 0));
+    self.sndchargeloopent playloopsound(alias + "loop", 1.5);
+    playsound(localclientnum, alias + self.sndcurrentcharge, (0, 0, 0));
     self.sndlastcharge = self.sndcurrentcharge;
   }
 }
@@ -859,11 +841,10 @@ sndstoploopent() {
 
 sndtombbgsetup() {
   waitforclient(0);
-  trigs = getEntArray(0, "sndBG", "targetname");
+  trigs = getentarray(0, "sndBG", "targetname");
 
-  foreach(trig in trigs) {
-    trig thread sndtombbgtriggers(0);
-  }
+  foreach(trig in trigs)
+  trig thread sndtombbgtriggers(0);
 
   player = getlocalplayers()[0];
   player thread sndtombbgplayers(0);
@@ -894,11 +875,10 @@ sndtombbgtriggers(localclientnum) {
     self waittill("trigger", who);
 
     if(isDefined(who) && who islocalplayer()) {
-      if(isDefined(level.sndchambermusoverride) && self.script_sound == "mus_underscore_chamber") {
+      if(isDefined(level.sndchambermusoverride) && self.script_sound == "mus_underscore_chamber")
         who.sndbgalias = level.sndchambermusoverride;
-      } else {
+      else
         who.sndbgalias = self.script_sound;
-      }
 
       who thread sndtombbgtrigger_timeout();
     }
@@ -913,9 +893,8 @@ sndtombbgtrigger_timeout() {
   self endon("sndBGTImeout");
   wait 4;
 
-  if(isDefined(self) && self islocalplayer()) {
+  if(isDefined(self) && self islocalplayer())
     self.sndbgalias = "mus_underscore_default";
-  }
 }
 
 sndtombbgmusic(alias) {
@@ -923,13 +902,12 @@ sndtombbgmusic(alias) {
   self endon("death");
   self stoploopsound(2);
   wait 2;
-  self playLoopSound(alias, 2);
+  self playloopsound(alias, 2);
 }
 
 sndmaelstrom(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(level.sndmaelstrom)) {
+  if(!isDefined(level.sndmaelstrom))
     level.sndmaelstrom = spawn(0, (0, 0, 0), "script_origin");
-  }
 
   players = getlocalplayers();
 
@@ -938,7 +916,7 @@ sndmaelstrom(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
     if(fn == fieldname) {
       if(newval == 1) {
-        level.sndmaelstrom playLoopSound("amb_maelstrom", 3);
+        level.sndmaelstrom playloopsound("amb_maelstrom", 3);
         continue;
       }
 

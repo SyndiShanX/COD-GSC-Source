@@ -7,6 +7,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_ruin_tutorial;
+
 #namespace ct_ruin;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -18,7 +19,7 @@ event_handler[gametype_init] main(eventstruct) {
 
 follow_path_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.fx = util::playFXOnTag(localclientnum, # "zombie/fx_trail_blood_soul_zmb", self, "tag_origin");
+    self.fx = util::playFXOnTag(localclientnum, #"zombie/fx_trail_blood_soul_zmb", self, "tag_origin");
     return;
   }
 

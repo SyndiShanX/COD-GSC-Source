@@ -21,11 +21,11 @@
 #namespace siegebot;
 
 function autoexec __init__sytem__() {
-  system::register("siegebot", &__init__, undefined, undefined);
+  system::register("siegebot", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("siegebot", &siegebot_initialize);
+  vehicle::add_main_callback("siegebot", & siegebot_initialize);
 }
 
 function siegebot_initialize() {
@@ -40,12 +40,12 @@ function siegebot_initialize() {
   self.fovcosine = 0.5;
   self.fovcosinebusy = 0.5;
   self.maxsightdistsqrd = 10000 * 10000;
-  assert(isDefined(self.scriptbundlesettings));
+  assert(isdefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   self.goalradius = 9999999;
   self.goalheight = 5000;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = &siegebot_callback_damage;
+  self.overridevehicledamage = & siegebot_callback_damage;
   self siegebot_update_difficulty();
   self setgunnerturretontargetrange(0, self.settings.gunner_turret_on_target_range);
   self asmrequestsubstate("locomotion@movement");
@@ -61,8 +61,10 @@ function siegebot_initialize() {
     self asmsetanimationrate(1.429);
   }
   self initjumpstruct();
-  if(isDefined(level.vehicle_initializer_cb)) {
-    [[level.vehicle_initializer_cb]](self);
+  if(isdefined(level.vehicle_initializer_cb)) {
+    [
+      [level.vehicle_initializer_cb]
+    ](self);
   }
   self.ignorefirefly = 1;
   self.ignoredecoy = 1;
@@ -83,19 +85,19 @@ function siegebot_update_difficulty() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_combat_exit;
-  self vehicle_ai::get_state_callbacks("driving").update_func = &siegebot_driving;
-  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
-  self vehicle_ai::get_state_callbacks("pain").update_func = &pain_update;
-  self vehicle_ai::get_state_callbacks("emped").enter_func = &emped_enter;
-  self vehicle_ai::get_state_callbacks("emped").update_func = &emped_update;
-  self vehicle_ai::get_state_callbacks("emped").exit_func = &emped_exit;
-  self vehicle_ai::get_state_callbacks("emped").reenter_func = &emped_reenter;
-  self vehicle_ai::add_state("jump", &state_jump_enter, &state_jump_update, &state_jump_exit);
-  vehicle_ai::add_utility_connection("combat", "jump", &state_jump_can_enter);
+  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_combat_exit;
+  self vehicle_ai::get_state_callbacks("driving").update_func = & siegebot_driving;
+  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("pain").update_func = & pain_update;
+  self vehicle_ai::get_state_callbacks("emped").enter_func = & emped_enter;
+  self vehicle_ai::get_state_callbacks("emped").update_func = & emped_update;
+  self vehicle_ai::get_state_callbacks("emped").exit_func = & emped_exit;
+  self vehicle_ai::get_state_callbacks("emped").reenter_func = & emped_reenter;
+  self vehicle_ai::add_state("jump", & state_jump_enter, & state_jump_update, & state_jump_exit);
+  vehicle_ai::add_utility_connection("combat", "jump", & state_jump_can_enter);
   vehicle_ai::add_utility_connection("jump", "combat");
-  self vehicle_ai::add_state("unaware", undefined, &state_unaware_update, undefined);
+  self vehicle_ai::add_state("unaware", undefined, & state_unaware_update, undefined);
   vehicle_ai::startinitialstate("combat");
 }
 
@@ -104,7 +106,7 @@ function state_death_update(params) {
   self endon("nodeath_thread");
   streamermodelhint(self.deathmodel, 6);
   death_type = vehicle_ai::get_death_type(params);
-  if(!isDefined(death_type)) {
+  if(!isdefined(death_type)) {
     params.death_type = "gibbed";
     death_type = params.death_type;
   }
@@ -112,7 +114,7 @@ function state_death_update(params) {
   self setturretspinning(0);
   self stopmovementandsetbrake();
   self vehicle::set_damage_fx_level(0);
-  self playSound("veh_quadtank_sparks");
+  self playsound("veh_quadtank_sparks");
   if(self.vehicletype === "spawner_enemy_boss_siegebot_zombietron") {
     self asmsetanimationrate(1);
   }
@@ -144,7 +146,7 @@ function siegebot_kill_on_tilting() {
   self endon("death");
   self endon("exit_vehicle");
   tilecount = 0;
-  while(true) {
+  while (true) {
     selfup = anglestoup(self.angles);
     worldup = (0, 0, 1);
     if(vectordot(selfup, worldup) < 0.64) {
@@ -167,7 +169,7 @@ function siegebot_player_fireupdate() {
   firetime = weapon.firetime;
   driver = self getseatoccupant(0);
   self thread siegebot_player_aimupdate();
-  while(true) {
+  while (true) {
     if(driver attackbuttonpressed()) {
       self fireweapon(2);
       wait(firetime);
@@ -180,15 +182,15 @@ function siegebot_player_fireupdate() {
 function siegebot_player_aimupdate() {
   self endon("death");
   self endon("exit_vehicle");
-  while(true) {
+  while (true) {
     self setgunnertargetvec(self getgunnertargetvec(0), 1);
     wait(0.05);
   }
 }
 
 function emped_enter(params) {
-  if(!isDefined(self.abnormal_status)) {
-    self.abnormal_status = spawnStruct();
+  if(!isdefined(self.abnormal_status)) {
+    self.abnormal_status = spawnstruct();
   }
   self.abnormal_status.emped = 1;
   self.abnormal_status.attacker = params.notify_param[1];
@@ -244,7 +246,7 @@ function state_unaware_update(params) {
   self setturrettargetrelativeangles(vectorscale((0, 1, 0), 90), 1);
   self setturrettargetrelativeangles(vectorscale((0, 1, 0), 90), 2);
   self thread movement_thread_unaware();
-  while(true) {
+  while (true) {
     self vehicle_ai::evaluate_connections();
     wait(1);
   }
@@ -255,7 +257,7 @@ function movement_thread_unaware() {
   self endon("change_state");
   self notify("end_movement_thread");
   self endon("end_movement_thread");
-  while(true) {
+  while (true) {
     self.current_pathto_pos = self getnextmoveposition_unaware();
     foundpath = self setvehgoalpos(self.current_pathto_pos, 0, 1);
     if(foundpath) {
@@ -284,9 +286,9 @@ function getnextmoveposition_unaware() {
   queryresult = positionquery_source_navigation(self.origin, minsearchradius, maxsearchradius, halfheight, spacing, self, spacing);
   positionquery_filter_distancetogoal(queryresult, self);
   vehicle_ai::positionquery_filter_outofgoalanchor(queryresult);
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   foreach(point in queryresult.data) {
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, 30);
@@ -294,7 +296,7 @@ function getnextmoveposition_unaware() {
     pointdirection = vectornormalize(point.origin - self.origin);
     factor = vectordot(pointdirection, forward);
     if(factor > 0.7) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = 600;
@@ -302,7 +304,7 @@ function getnextmoveposition_unaware() {
       continue;
     }
     if(factor > 0) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = 0;
@@ -310,14 +312,14 @@ function getnextmoveposition_unaware() {
       continue;
     }
     if(factor > -0.5) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = -600;
       point.score = point.score + -600;
       continue;
     }
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = -1200;
@@ -332,7 +334,7 @@ function getnextmoveposition_unaware() {
 }
 
 function clean_up_spawned() {
-  if(isDefined(self.jump) && isDefined(self.jump.linkent)) {
+  if(isdefined(self.jump) && isdefined(self.jump.linkent)) {
     self.jump.linkent delete();
   }
 }
@@ -344,12 +346,12 @@ function clean_up_spawnedondeath(enttowatch) {
 }
 
 function initjumpstruct() {
-  if(isDefined(self.jump)) {
+  if(isdefined(self.jump)) {
     self unlink();
     self.jump.linkent delete();
     self.jump delete();
   }
-  self.jump = spawnStruct();
+  self.jump = spawnstruct();
   self.jump.linkent = spawn("script_origin", self.origin);
   self.jump.linkent thread clean_up_spawnedondeath(self);
   self.jump.in_air = 0;
@@ -358,7 +360,7 @@ function initjumpstruct() {
 }
 
 function state_jump_can_enter(from_state, to_state, connection) {
-  if(isDefined(self.nojumping) && self.nojumping) {
+  if(isdefined(self.nojumping) && self.nojumping) {
     return 0;
   }
   return self.vehicletype === "spawner_enemy_boss_siegebot_zombietron";
@@ -414,7 +416,7 @@ function state_jump_update(params) {
   self vehicle::impact_fx(self.settings.startupfx1);
   self waittill("leave_ground");
   self vehicle::impact_fx(self.settings.takeofffx1);
-  while(true) {
+  while (true) {
     distancetogoal = distance2d(self.jump.linkent.origin, goal);
     antigravityscaleup = 1;
     antigravityscale = 1;
@@ -516,31 +518,31 @@ function getnextmoveposition_tactical() {
   queryresult = positionquery_source_navigation(self.origin, 0, maxsearchradius, halfheight, innerspacing, self, outerspacing);
   positionquery_filter_distancetogoal(queryresult, self);
   vehicle_ai::positionquery_filter_outofgoalanchor(queryresult);
-  if(isDefined(self.enemy)) {
-    positionquery_filter_sight(queryresult, self.enemy.origin, self getEye() - self.origin, self, 0, self.enemy);
+  if(isdefined(self.enemy)) {
+    positionquery_filter_sight(queryresult, self.enemy.origin, self geteye() - self.origin, self, 0, self.enemy);
     self vehicle_ai::positionquery_filter_engagementdist(queryresult, self.enemy, self.settings.engagementdistmin, self.settings.engagementdistmax);
   }
   foreach(point in queryresult.data) {
-    if(!isDefined(point._scoredebug)) {
+    if(!isdefined(point._scoredebug)) {
       point._scoredebug = [];
     }
     point._scoredebug[""] = randomfloatrange(0, 30);
     point.score = point.score + randomfloatrange(0, 30);
     if(point.disttoorigin2d < 120) {
-      if(!isDefined(point._scoredebug)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = (120 - point.disttoorigin2d) * -1.5;
       point.score = point.score + ((120 - point.disttoorigin2d) * -1.5);
     }
-    if(isDefined(self.enemy)) {
-      if(!isDefined(point._scoredebug)) {
+    if(isdefined(self.enemy)) {
+      if(!isdefined(point._scoredebug)) {
         point._scoredebug = [];
       }
       point._scoredebug[""] = point.distawayfromengagementarea * -1;
       point.score = point.score + (point.distawayfromengagementarea * -1);
       if(!point.visibility) {
-        if(!isDefined(point._scoredebug)) {
+        if(!isdefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = -600;
@@ -567,11 +569,11 @@ function path_update_interrupt() {
   old_origin = self.origin;
   move_dist = 300;
   wait(1.5);
-  while(true) {
+  while (true) {
     self setmaxspeedscale(1);
     self setmaxaccelerationscale(1);
     self setspeed(self.settings.defaultmovespeed);
-    if(isDefined(self.enemy)) {
+    if(isdefined(self.enemy)) {
       selfdisttotarget = distance2d(self.origin, self.enemy.origin);
       farengagementdist = self.settings.engagementdistmax + 150;
       closeengagementdist = self.settings.engagementdistmin - 150;
@@ -596,8 +598,8 @@ function path_update_interrupt() {
     } else {
       canseeenemycount = 0;
     }
-    if(isDefined(self.enemy)) {
-      if(!isDefined(old_enemy)) {
+    if(isdefined(self.enemy)) {
+      if(!isdefined(old_enemy)) {
         self notify("near_goal");
       } else if(self.enemy != old_enemy) {
         self notify("near_goal");
@@ -614,7 +616,7 @@ function weapon_doors_state(isopen, waittime = 0) {
   self endon("death");
   self notify("weapon_doors_state");
   self endon("weapon_doors_state");
-  if(isDefined(waittime) && waittime > 0) {
+  if(isdefined(waittime) && waittime > 0) {
     wait(waittime);
   }
   self vehicle::toggle_ambient_anim_group(1, isopen);
@@ -625,11 +627,11 @@ function movement_thread() {
   self endon("change_state");
   self notify("end_movement_thread");
   self endon("end_movement_thread");
-  while(true) {
+  while (true) {
     self.current_pathto_pos = self getnextmoveposition_tactical();
     if(self.vehicletype === "spawner_enemy_boss_siegebot_zombietron") {
       if(vehicle_ai::iscooldownready("jump")) {
-        params = spawnStruct();
+        params = spawnstruct();
         params.jumpgoal = self.current_pathto_pos;
         locomotion_start();
         wait(0.5);
@@ -639,7 +641,7 @@ function movement_thread() {
     }
     foundpath = self setvehgoalpos(self.current_pathto_pos, 0, 1);
     if(foundpath) {
-      if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
+      if(isdefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
         self setlookatent(self.enemy);
         self setturrettargetent(self.enemy);
       }
@@ -649,13 +651,13 @@ function movement_thread() {
       self notify("near_goal");
       self cancelaimove();
       self clearvehgoalpos();
-      if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 2)) {
+      if(isdefined(self.enemy) && self vehseenrecently(self.enemy, 2)) {
         self face_target(self.enemy.origin);
       }
     }
     wait(1);
     startadditionalwaiting = gettime();
-    while(isDefined(self.enemy) && self vehcansee(self.enemy) && vehicle_ai::timesince(startadditionalwaiting) < 1.5) {
+    while (isdefined(self.enemy) && self vehcansee(self.enemy) && vehicle_ai::timesince(startadditionalwaiting) < 1.5) {
       wait(0.4);
     }
   }
@@ -683,7 +685,7 @@ function face_target(position, targetanglediff = 30) {
   self setturrettargetvec(position);
   self locomotion_start();
   angleadjustingstart = gettime();
-  while(anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 4) {
+  while (anglediff > targetanglediff && vehicle_ai::timesince(angleadjustingstart) < 4) {
     anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
     wait(0.05);
   }
@@ -697,22 +699,22 @@ function scan() {
   angles = self gettagangles("tag_barrel");
   angles = (0, angles[1], 0);
   rotate = 360;
-  while(rotate > 0) {
+  while (rotate > 0) {
     angles = angles + vectorscale((0, 1, 0), 30);
     rotate = rotate - 30;
-    forward = anglesToForward(angles);
+    forward = anglestoforward(angles);
     aimpos = self.origin + (forward * 1000);
     self setturrettargetvec(aimpos);
     msg = self util::waittill_any_timeout(0.5, "turret_on_target");
     wait(0.1);
-    if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
+    if(isdefined(self.enemy) && self vehcansee(self.enemy)) {
       self setturrettargetent(self.enemy);
       self setlookatent(self.enemy);
       self face_target(self.enemy);
       return;
     }
   }
-  forward = anglesToForward(self.angles);
+  forward = anglestoforward(self.angles);
   aimpos = self.origin + (forward * 1000);
   self setturrettargetvec(aimpos);
   msg = self util::waittill_any_timeout(3, "turret_on_target");
@@ -727,8 +729,8 @@ function attack_thread_machinegun() {
   self endon("end_machinegun_attack_thread");
   self.turretrotscale = 1 * self.difficulty_scale_up;
   spinning = 0;
-  while(true) {
-    if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
+  while (true) {
+    if(isdefined(self.enemy) && self vehcansee(self.enemy)) {
       self setlookatent(self.enemy);
       self setturrettargetent(self.enemy);
       if(!spinning) {
@@ -740,7 +742,7 @@ function attack_thread_machinegun() {
       self setgunnertargetent(self.enemy, (0, 0, 0), 0);
       self setgunnertargetent(self.enemy, (0, 0, 0), 1);
       self vehicle_ai::fire_for_time(randomfloatrange(0.75, 1.5) * self.difficulty_scale_up, 1);
-      if(isDefined(self.enemy) && isai(self.enemy)) {
+      if(isdefined(self.enemy) && isai(self.enemy)) {
         wait(randomfloatrange(0.1, 0.2));
       } else {
         wait(randomfloatrange(0.2, 0.3) * self.difficulty_scale_down);
@@ -756,7 +758,7 @@ function attack_thread_machinegun() {
 }
 
 function attack_rocket(target) {
-  if(isDefined(target)) {
+  if(isdefined(target)) {
     self setturrettargetent(target);
     self setgunnertargetent(target, vectorscale((0, 0, -1), 10), 2);
     msg = self util::waittill_any_timeout(1, "turret_on_target");
@@ -772,17 +774,17 @@ function attack_thread_rocket() {
   self notify("end_rocket_attack_thread");
   self endon("end_rocket_attack_thread");
   vehicle_ai::cooldown("rocket", 3);
-  while(true) {
-    if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 3) && vehicle_ai::iscooldownready("rocket", 1.5)) {
+  while (true) {
+    if(isdefined(self.enemy) && self vehseenrecently(self.enemy, 3) && vehicle_ai::iscooldownready("rocket", 1.5)) {
       self setgunnertargetent(self.enemy, (0, 0, 0), 0);
       self setgunnertargetent(self.enemy, vectorscale((0, 0, -1), 10), 2);
       self thread weapon_doors_state(1);
       wait(1.5);
-      if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
+      if(isdefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
         vehicle_ai::cooldown("rocket", 5);
         attack_rocket(self.enemy);
         wait(1);
-        if(isDefined(self.enemy)) {
+        if(isdefined(self.enemy)) {
           attack_rocket(self.enemy);
         }
         self thread weapon_doors_state(0, 1);
@@ -808,7 +810,7 @@ function siegebot_callback_damage(einflictor, eattacker, idamage, idflags, smean
     maxempdowntime = 1.2 * self.settings.empdowntime;
     self notify("emped", randomfloatrange(minempdowntime, maxempdowntime), eattacker, einflictor);
   }
-  if(!isDefined(self.damagelevel)) {
+  if(!isdefined(self.damagelevel)) {
     self.damagelevel = 0;
     self.newdamagelevel = self.damagelevel;
   }
@@ -819,7 +821,7 @@ function siegebot_callback_damage(einflictor, eattacker, idamage, idflags, smean
   if(self.newdamagelevel > self.damagelevel) {
     self.damagelevel = self.newdamagelevel;
     driver = self getseatoccupant(0);
-    if(!isDefined(driver)) {
+    if(!isdefined(driver)) {
       self notify("pain");
     }
     vehicle::set_damage_fx_level(self.damagelevel);

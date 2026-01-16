@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_towers_challenges;
 
 autoexec __init__system__() {
@@ -15,7 +16,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + # "hash_2e38cc453c5ecb9c", 16000, 2, "int", &function_a45824f, 0, 0);
+  clientfield::register("world", "" + #"hash_2e38cc453c5ecb9c", 16000, 2, "int", &function_a45824f, 0, 0);
 }
 
 __main__() {}

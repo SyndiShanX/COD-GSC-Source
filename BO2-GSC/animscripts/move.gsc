@@ -43,29 +43,26 @@ main() {
     movecovertocoverfinish();
   }
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.blockingpain = 1;
-  }
 
   self animscripts\cover_arrival::startmovetransition();
   self thread animscripts\cover_arrival::setupapproachnode(1);
 
-  if(self.team == "allies") {
+  if(self.team == "allies")
     self.blockingpain = 0;
-  }
 
   moveinit();
   movemainloop();
 }
 
 moveinit() {
-  if((self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only" || self.combatmode == "exposed_nodes_only") && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 10000)) {
+  if((self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only" || self.combatmode == "exposed_nodes_only") && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 10000))
     self.tacticalwalkrate = 1.5;
-  } else if(self aihasonlypistolorsmg()) {
+  else if(self aihasonlypistolorsmg())
     self.tacticalwalkrate = 1.2 + randomfloat(0.3);
-  } else {
+  else
     self.tacticalwalkrate = 0.9 + randomfloat(0.4);
-  }
 
   self.tacticalwalkrate = self.tacticalwalkrate * self.moveplaybackrate;
   self.runngunrate = 0.8 + randomfloat(0.2);
@@ -76,7 +73,7 @@ moveinit() {
 }
 
 moveglobalsinit() {
-  anim.moveglobals = spawnStruct();
+  anim.moveglobals = spawnstruct();
   anim.moveglobals.max_distance_to_shoot_sq = 2250000;
   anim.moveglobals.motion_angle_offset = 60;
   anim.moveglobals.aim_yaw_threshold = 45;
@@ -103,9 +100,8 @@ getupifpronebeforemoving() {
       self animmode("zonly_physics", 0);
       rate = 1;
 
-      if(isDefined(self.grenade)) {
+      if(isDefined(self.grenade))
         rate = 2;
-      }
 
       self animscripts\cover_prone::proneto(newpose, rate);
       self animmode("none", 0);
@@ -137,34 +133,29 @@ movemainloop() {
 
     istacticalwalking = !self shouldfacemotion();
 
-    if(self.movemode == "run" || istacticalwalking || self.a.pose == "prone") {
+    if(self.movemode == "run" || istacticalwalking || self.a.pose == "prone")
       self animscripts\run::moverun();
-    } else {
+    else
       self animscripts\walk::movewalk();
-    }
 
     animscripts\rush::trysidestep();
   }
 }
 
 mayshootwhilemoving() {
-  if(self.weapon == "none") {
+  if(self.weapon == "none")
     return false;
-  }
 
   weapclass = self.weaponclass;
 
-  if(weapclass != "rifle" && weapclass != "smg" && weapclass != "spread" && weapclass != "mg" && weapclass != "grenade" && weapclass != "pistol") {
+  if(weapclass != "rifle" && weapclass != "smg" && weapclass != "spread" && weapclass != "mg" && weapclass != "grenade" && weapclass != "pistol")
     return false;
-  }
 
-  if(isvalidenemy(self.enemy) && distancesquared(self.origin, self.enemy.origin) > anim.moveglobals.max_distance_to_shoot_sq) {
+  if(isvalidenemy(self.enemy) && distancesquared(self.origin, self.enemy.origin) > anim.moveglobals.max_distance_to_shoot_sq)
     return false;
-  }
 
-  if((self issniper() || self aihasonlypistol()) && self shouldfacemotion()) {
+  if((self issniper() || self aihasonlypistol()) && self shouldfacemotion())
     return false;
-  }
 
   if(isDefined(self.dontshootwhilemoving)) {
     assert(self.dontshootwhilemoving);
@@ -184,9 +175,8 @@ shootwhilemoving() {
 
   while(true) {
     if(!self.bulletsinclip) {
-      if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self is_rusher()) {
+      if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self is_rusher())
         cheatammoifnecessary();
-      }
 
       if(!self.bulletsinclip) {
         wait 0.5;
@@ -205,9 +195,8 @@ meleeattackwhilemoving() {
 
   while(true) {
     if(isDefined(self.enemy)) {
-      if(abs(self getmotionangle()) <= 135) {
+      if(abs(self getmotionangle()) <= 135)
         animscripts\melee::melee_tryexecuting();
-      }
     }
 
     wait 0.1;
@@ -233,18 +222,17 @@ lookatpath() {
     if(shouldlookatpath()) {
       lookatpos = undefined;
 
-      if(isDefined(self.enemy) && self cansee(self.enemy)) {
+      if(isDefined(self.enemy) && self cansee(self.enemy))
         lookatpos = undefined;
-      } else if(self canseepathgoal()) {
+      else if(self canseepathgoal())
         lookatpos = self.pathgoalpos;
-      } else if(self.lookaheaddist > 100) {
+      else if(self.lookaheaddist > 100)
         lookatpos = self.origin + vectorscale(self.lookaheaddir, self.lookaheaddist) + (0, 0, 0);
-      } else {
+      else {
         currentlookahead = self calclookaheadpos(self.origin, 0);
 
-        if(isDefined(currentlookahead)) {
+        if(isDefined(currentlookahead))
           lookatpos = currentlookahead["node"] + (0, 0, 0);
-        }
       }
 
       if(isDefined(lookatpos) && getdvarint(#"_id_76D4E0FF")) {
@@ -264,9 +252,8 @@ lookatpath() {
 
 shouldlookatpath() {
   if(getdvarint(#"_id_F36C4D76")) {
-    if(!self.facemotion) {
+    if(!self.facemotion)
       return false;
-    }
 
     return true;
   }
@@ -277,9 +264,8 @@ shouldlookatpath() {
 stoplookatpathonkillanimscript() {
   self waittill("killanimscript");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self lookatpos();
-  }
 }
 
 waspreviouslyincover() {
@@ -318,21 +304,17 @@ canshuffletonode(node) {
 }
 
 isshuffledirectionvalid(startnode, endnode, shuffleleft) {
-  if(startnode.type == "Cover Left" && shuffleleft) {
+  if(startnode.type == "Cover Left" && shuffleleft)
     return false;
-  }
 
-  if(startnode.type == "Cover Right" && !shuffleleft) {
+  if(startnode.type == "Cover Right" && !shuffleleft)
     return false;
-  }
 
-  if(endnode.type == "Cover Left" && !shuffleleft) {
+  if(endnode.type == "Cover Left" && !shuffleleft)
     return false;
-  }
 
-  if(endnode.type == "Cover Right" && shuffleleft) {
+  if(endnode.type == "Cover Right" && shuffleleft)
     return false;
-  }
 
   return true;
 }
@@ -346,9 +328,8 @@ get_shuffle_to_corner_start_anim(shuffleleft, startnode) {
     return animarray("cornerR_shuffle_start");
   } else if(shuffleleft)
     return animarray("shuffleL_start");
-  else {
+  else
     return animarray("shuffleR_start");
-  }
 }
 
 movecovertocover_getshufflestartanim(shuffleleft, startnode, endnode) {
@@ -363,16 +344,14 @@ movecovertocover_getshufflestartanim(shuffleleft, startnode, endnode) {
     assert(!shuffleleft);
     shuffleanim = get_shuffle_to_corner_start_anim(shuffleleft, startnode);
   } else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
-    if(shuffleleft) {
+    if(shuffleleft)
       shuffleanim = animarray("coverStand_shuffleL_start");
-    } else {
+    else
       shuffleanim = animarray("coverStand_shuffleR_start");
-    }
   } else if(shuffleleft)
     shuffleanim = get_shuffle_to_corner_start_anim(shuffleleft, startnode);
-  else {
+  else
     shuffleanim = get_shuffle_to_corner_start_anim(shuffleleft, startnode);
-  }
 
   return shuffleanim;
 }
@@ -388,16 +367,14 @@ movecovertocover_getshuffleloopanim(shuffleleft, startnode, endnode) {
   } else if(endnode.type == "Cover Right")
     shuffleanim = animarray("shuffleR");
   else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
-    if(shuffleleft) {
+    if(shuffleleft)
       shuffleanim = animarray("coverStand_shuffleL");
-    } else {
+    else
       shuffleanim = animarray("coverStand_shuffleR");
-    }
   } else if(shuffleleft)
     shuffleanim = animarray("shuffleL");
-  else {
+  else
     shuffleanim = animarray("shuffleR");
-  }
 
   return shuffleanim;
 }
@@ -414,16 +391,14 @@ movecovertocover_getshuffleendanim(shuffleleft, startnode, endnode) {
     assert(!shuffleleft);
     shuffleanim = animarray("cornerR_shuffle_end");
   } else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
-    if(shuffleleft) {
+    if(shuffleleft)
       shuffleanim = animarray("coverStand_shuffleL_end");
-    } else {
+    else
       shuffleanim = animarray("coverStand_shuffleR_end");
-    }
   } else if(shuffleleft)
     shuffleanim = animarray("shuffleL_end");
-  else {
+  else
     shuffleanim = animarray("shuffleR_end");
-  }
 
   return shuffleanim;
 }
@@ -475,7 +450,7 @@ movecovertocover() {
     return;
   }
   movedir = vectornormalize(movedir);
-  forward = anglesToForward(node.angles);
+  forward = anglestoforward(node.angles);
   shuffleleft = forward[0] * movedir[1] - forward[1] * movedir[0] > 0;
 
   if(movedoorsidetoside(shuffleleft, startnode, node)) {
@@ -484,11 +459,10 @@ movecovertocover() {
   if(!isshuffledirectionvalid(startnode, node, shuffleleft)) {
     return;
   }
-  if(movecovertocover_checkstartpose(startnode, node)) {
+  if(movecovertocover_checkstartpose(startnode, node))
     blendtime = 0.1;
-  } else {
+  else
     blendtime = 0.4;
-  }
 
   self animmode("zonly_physics", 0);
   self clearanim( % body, blendtime);
@@ -496,11 +470,10 @@ movecovertocover() {
   shuffleanim = movecovertocover_getshuffleloopanim(shuffleleft, startnode, node);
   endanim = movecovertocover_getshuffleendanim(shuffleleft, startnode, node);
 
-  if(animhasnotetrack(startanim, "finish")) {
+  if(animhasnotetrack(startanim, "finish"))
     startendtime = getnotetracktimes(startanim, "finish")[0];
-  } else {
+  else
     startendtime = 1;
-  }
 
   startdist = length(getmovedelta(startanim, 0, startendtime));
   shuffledist = length(getmovedelta(shuffleanim, 0, 1));
@@ -533,9 +506,8 @@ movecovertocover() {
   for(i = 0; i < 2; i++) {
     remainingdist = distance(self.origin, node.origin);
 
-    if(playend) {
+    if(playend)
       remainingdist = remainingdist - enddist;
-    }
 
     if(remainingdist < 4) {
       break;
@@ -552,11 +524,10 @@ movecovertocover() {
   }
 
   if(playend) {
-    if(movecovertocover_checkendpose(node)) {
+    if(movecovertocover_checkendpose(node))
       blendtime = 0.2;
-    } else {
+    else
       blendtime = 0.4;
-    }
 
     self clearanim(shuffleanim, blendtime);
     self setflaggedanim("shuffle_end", endanim, 1, blendtime);
@@ -583,19 +554,16 @@ movecovertocoverfinish() {
 movedoorsidetoside(shuffleleft, startnode, endnode) {
   sidetosideanim = undefined;
 
-  if(startnode.type == "Cover Right" && endnode.type == "Cover Left" && !shuffleleft) {
+  if(startnode.type == "Cover Right" && endnode.type == "Cover Left" && !shuffleleft)
     sidetosideanim = animarray("corner_door_R2L");
-  } else if(startnode.type == "Cover Left" && endnode.type == "Cover Right" && shuffleleft) {
+  else if(startnode.type == "Cover Left" && endnode.type == "Cover Right" && shuffleleft)
     sidetosideanim = animarray("corner_door_L2R");
-  }
 
-  if(!isDefined(sidetosideanim)) {
+  if(!isDefined(sidetosideanim))
     return false;
-  }
 
-  if(distance2dsquared(startnode.origin, endnode.origin) > anim.moveglobals.shuffle_door_max_distsq) {
+  if(distance2dsquared(startnode.origin, endnode.origin) > anim.moveglobals.shuffle_door_max_distsq)
     return false;
-  }
 
   self animmode("zonly_physics", 0);
   self orientmode("face current");
@@ -630,9 +598,8 @@ movedoorsidetoside(shuffleleft, startnode, endnode) {
 }
 
 handlesidetosidenotetracks(note) {
-  if(note == "slide_start") {
+  if(note == "slide_start")
     return true;
-  }
 }
 
 slidefortime(slideincrement, slideframes) {

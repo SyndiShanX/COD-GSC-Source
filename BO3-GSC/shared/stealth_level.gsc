@@ -20,9 +20,9 @@
 #namespace stealth_level;
 
 function init() {
-  assert(!isDefined(self.stealth));
-  if(!isDefined(self.stealth)) {
-    self.stealth = spawnStruct();
+  assert(!isdefined(self.stealth));
+  if(!isdefined(self.stealth)) {
+    self.stealth = spawnstruct();
   }
   self.stealth.enabled_level = 1;
   self.stealth.enemies = [];
@@ -35,7 +35,7 @@ function init() {
   level flag::init("stealth_combat", 0);
   level flag::init("stealth_discovered", 0);
   init_parms();
-  spawner::add_global_spawn_function("axis", &stealth::agent_init);
+  spawner::add_global_spawn_function("axis", & stealth::agent_init);
   self stealth_vo::init();
   self thread function_7bf2f7ba();
   self thread update_thread();
@@ -59,11 +59,11 @@ function init() {
 }
 
 function stop() {
-  spawner::remove_global_spawn_function("axis", &stealth::agent_init);
+  spawner::remove_global_spawn_function("axis", & stealth::agent_init);
   level.using_awareness = 0;
   setdvar("ai_stumbleSightRange", 0);
   setdvar("ai_awarenessenabled", 0);
-  if(isDefined(level.stealth.music_ent)) {
+  if(isdefined(level.stealth.music_ent)) {
     foreach(ent in level.stealth.music_ent) {
       ent stoploopsound(1);
       ent util::deleteaftertime(1.5);
@@ -80,18 +80,18 @@ function reset() {
 }
 
 function enabled() {
-  return isDefined(self.stealth) && isDefined(self.stealth.enabled_level);
+  return isdefined(self.stealth) && isdefined(self.stealth.enabled_level);
 }
 
 function init_parms() {
   assert(self enabled());
-  if(!isDefined(self.stealth.parm)) {
-    self.stealth.parm = spawnStruct();
+  if(!isdefined(self.stealth.parm)) {
+    self.stealth.parm = spawnstruct();
   }
-  self.stealth.parm.awareness["unaware"] = spawnStruct();
-  self.stealth.parm.awareness["low_alert"] = spawnStruct();
-  self.stealth.parm.awareness["high_alert"] = spawnStruct();
-  self.stealth.parm.awareness["combat"] = spawnStruct();
+  self.stealth.parm.awareness["unaware"] = spawnstruct();
+  self.stealth.parm.awareness["low_alert"] = spawnstruct();
+  self.stealth.parm.awareness["high_alert"] = spawnstruct();
+  self.stealth.parm.awareness["combat"] = spawnstruct();
   vals = self.stealth.parm.awareness["unaware"];
   vals.fovcosine = cos(45);
   vals.fovcosinez = cos(10);
@@ -115,23 +115,23 @@ function init_parms() {
 }
 
 function get_parms(strawareness) {
-  assert(isDefined(level.stealth));
+  assert(isdefined(level.stealth));
   return level.stealth.parm.awareness[strawareness];
 }
 
 function function_7bf2f7ba() {
-  array::thread_all(getEntArray("_stealth_shadow", "targetname"), &stealth_shadow_volumes);
-  array::thread_all(getEntArray("stealth_shadow", "targetname"), &stealth_shadow_volumes);
+  array::thread_all(getentarray("_stealth_shadow", "targetname"), & stealth_shadow_volumes);
+  array::thread_all(getentarray("stealth_shadow", "targetname"), & stealth_shadow_volumes);
 }
 
 function stealth_shadow_volumes() {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", other);
     if(!isalive(other)) {
       continue;
     }
-    if(!isDefined(other.stealth) || (isDefined(other.stealth.in_shadow) && other.stealth.in_shadow)) {
+    if(!isdefined(other.stealth) || (isdefined(other.stealth.in_shadow) && other.stealth.in_shadow)) {
       continue;
     }
     other thread function_9f3c4fa(self);
@@ -140,11 +140,11 @@ function stealth_shadow_volumes() {
 
 function function_9f3c4fa(volume) {
   self endon("death");
-  if(!isDefined(self.stealth)) {
+  if(!isdefined(self.stealth)) {
     return;
   }
   self.stealth.in_shadow = 1;
-  while(isDefined(volume) && self istouching(volume)) {
+  while (isdefined(volume) && self istouching(volume)) {
     wait(0.05);
   }
   self.stealth.in_shadow = 0;
@@ -153,10 +153,10 @@ function function_9f3c4fa(volume) {
 function update_thread() {
   assert(self enabled());
   self endon("stop_stealth");
-  while(true) {
+  while (true) {
     self update_arrays();
     sentientevents = getdvarstring("stealth_events");
-    if(sentientevents != "" && (!isDefined(level.var_1e44252f) || level.var_1e44252f != sentientevents)) {
+    if(sentientevents != "" && (!isdefined(level.var_1e44252f) || level.var_1e44252f != sentientevents)) {
       loadsentienteventparameters(sentientevents);
     }
     level.var_1e44252f = sentientevents;
@@ -172,10 +172,10 @@ function update_arrays() {
   playerlist = getplayers();
   ailist = getaiarray();
   foreach(player in playerlist) {
-    if(!isDefined(player.stealth)) {
+    if(!isdefined(player.stealth)) {
       player stealth::agent_init();
     }
-    if(isDefined(player.ignoreme) && player.ignoreme) {
+    if(isdefined(player.ignoreme) && player.ignoreme) {
       continue;
     }
     if(player.team == "allies") {
@@ -188,14 +188,14 @@ function update_arrays() {
   level.combatcount = 0;
   level.stealth.var_e7ad9c1f = 0;
   foreach(ai in ailist) {
-    if(isDefined(ai.ignoreme) && ai.ignoreme) {
+    if(isdefined(ai.ignoreme) && ai.ignoreme) {
       continue;
     }
     entnum = ai getentitynumber();
     counted = 0;
-    if(isalive(ai) && ai stealth_aware::enabled() && (!(isDefined(ai.silenced) && ai.silenced))) {
-      var_96b139a9 = isactor(ai) && ai_sniper::is_firing(ai) && isDefined(ai.lase_ent) && isplayer(ai.lase_ent.lase_override);
-      if(!(isDefined(ai.ignoreall) && ai.ignoreall) && ai stealth_aware::get_awareness() != "unaware") {
+    if(isalive(ai) && ai stealth_aware::enabled() && (!(isdefined(ai.silenced) && ai.silenced))) {
+      var_96b139a9 = isactor(ai) && ai_sniper::is_firing(ai) && isdefined(ai.lase_ent) && isplayer(ai.lase_ent.lase_override);
+      if(!(isdefined(ai.ignoreall) && ai.ignoreall) && ai stealth_aware::get_awareness() != "unaware") {
         alertcount = alertcount + 1;
       }
       if(ai stealth_aware::get_awareness() == "combat" || var_96b139a9) {
@@ -203,17 +203,17 @@ function update_arrays() {
           ai.stealth.aware_combat[ai.lase_ent.lase_override getentitynumber()] = ai.lase_ent.lase_override;
         }
         counted = 0;
-        if(isDefined(ai.stealth.aware_combat)) {
+        if(isdefined(ai.stealth.aware_combat)) {
           foreach(combatant in ai.stealth.aware_combat) {
             if(!isalive(combatant)) {
               continue;
             }
             var_146dd427 = combatant getentitynumber();
-            if(!isDefined(self.stealth.seek[var_146dd427])) {
+            if(!isdefined(self.stealth.seek[var_146dd427])) {
               self.stealth.seek[var_146dd427] = combatant;
             }
             if(isplayer(combatant)) {
-              if(!counted && (!(isDefined(ai.ignoreall) && ai.ignoreall))) {
+              if(!counted && (!(isdefined(ai.ignoreall) && ai.ignoreall))) {
                 level.combatcount = level.combatcount + 1;
                 counted = 1;
               }
@@ -250,7 +250,7 @@ function update_arrays() {
 function function_a3cf57bf() {
   self endon("stop_stealth");
   grace_period = 6;
-  while(true) {
+  while (true) {
     level flag::wait_till("stealth_combat");
     if(level.stealth.var_e7ad9c1f == 0) {
       wait(0.05);
@@ -264,7 +264,7 @@ function function_a3cf57bf() {
       thread function_959a64c9();
     }
     level flag::wait_till_clear("stealth_combat");
-    if(isDefined(level.combatcount)) {
+    if(isdefined(level.combatcount)) {
       level.combatcount = 0;
     }
   }
@@ -274,12 +274,12 @@ function function_f8b0594a() {
   self notify("hash_f8b0594a");
   self endon("hash_f8b0594a");
   self endon("stop_stealth");
-  while(true) {
+  while (true) {
     level flag::wait_till("stealth_alert");
     level flag::wait_till_clear("stealth_alert");
     wait(randomfloatrange(1.5, 3));
-    var_c6d0ac06 = isDefined(level.stealth) && (isDefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6);
-    while(isDefined(level.stealth) && (isDefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6)) {
+    var_c6d0ac06 = isdefined(level.stealth) && (isdefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6);
+    while (isdefined(level.stealth) && (isdefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6)) {
       wait(0.05);
     }
     if(!level flag::get("stealth_alert") && !level flag::get("stealth_discovered") && !level flag::get("stealth_combat")) {
@@ -306,7 +306,7 @@ function function_959a64c9() {
       if(!isalive(enemy)) {
         continue;
       }
-      if(isDefined(enemy.stealth)) {
+      if(isdefined(enemy.stealth)) {
         enemy notify("hash_959a64c9");
         enemy notify("alert", "combat", enemy.origin, undefined, "wake_all");
         enemy stealth::stop();
@@ -315,7 +315,7 @@ function function_959a64c9() {
         enemy getperfectinfo(player, 1);
       }
       enemy stopanimscripted();
-      if(isDefined(enemy.patroller) && enemy.patroller) {
+      if(isdefined(enemy.patroller) && enemy.patroller) {
         enemy ai::end_and_clean_patrol_behaviors();
       }
       enemy ai_sniper::actor_lase_stop();
@@ -330,7 +330,7 @@ function function_959a64c9() {
 function stealth_music_thread() {
   self endon("stop_stealth");
   stealth::function_862e861f();
-  while(true) {
+  while (true) {
     if(!level flag::get("stealth_discovered")) {
       if(level flag::get("stealth_combat")) {
         stealth::function_e0319e51("combat");
@@ -356,11 +356,11 @@ function function_945a718() {
   foreach(ent in var_e3fe91b2) {
     ent stealth_vo::function_4970c8b8(ent.script_parameters);
   }
-  var_e3fe91b2 = getEntArray("stealth_callout", "targetname");
+  var_e3fe91b2 = getentarray("stealth_callout", "targetname");
   foreach(ent in var_e3fe91b2) {
     ent stealth_vo::function_4970c8b8(ent.script_parameters);
   }
-  var_e3fe91b2 = getEntArray("stealth_callout", "script_noteworthy");
+  var_e3fe91b2 = getentarray("stealth_callout", "script_noteworthy");
   foreach(ent in var_e3fe91b2) {
     ent stealth_vo::function_4970c8b8(ent.script_parameters);
   }

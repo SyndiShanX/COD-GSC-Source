@@ -4,6 +4,7 @@
 *********************************************/
 
 main() {
+  //ambient fx
   level._effect["moth_runner"] = loadfx("misc/moth_runner");
   level._effect["insect_trail_runner_icbm"] = loadfx("misc/insect_trail_runner_icbm");
   level._effect["leaves_ground_gentlewind_codo"] = loadfx("misc/leaves_ground_gentlewind_codo");
@@ -17,7 +18,7 @@ main() {
 
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_estate_tropical_fx::main();
-  }
+
 }

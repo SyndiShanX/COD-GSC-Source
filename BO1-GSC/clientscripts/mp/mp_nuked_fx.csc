@@ -29,7 +29,7 @@ precache_fx_prop_anims() {
   level.nuked_fx["fx_mp_sand_dust_devil"] = loadfx("maps/mp_maps/fx_mp_sand_dust_devil");
 }
 play_fx_prop_anims(localClientNum) {
-  fxanim_dustdevils = getEntArray(localClientNum, "fxanim_mp_dustdevil", "targetname");
+  fxanim_dustdevils = GetEntArray(localClientNum, "fxanim_mp_dustdevil", "targetname");
   array_thread(fxanim_dustdevils, ::fxanim_think, localClientNum);
 }
 fxanim_think(localClientNum) {
@@ -38,11 +38,11 @@ fxanim_think(localClientNum) {
   self endon("delete");
   wait(3);
   self UseAnimTree(#animtree);
-  for(;;) {
+  for (;;) {
     wait_time = RandomFloatRange(15, 30);
     wait(wait_time);
     self SetAnimRestart(level.nuked_fxanims["fxanim_mp_dustdevil_anim"], 1.0, 0.0, 1.0);
-    dust = playFXOnTag(localClientNum, level.nuked_fx["fx_mp_sand_dust_devil"], self, "dervish_jnt");
+    dust = PlayFxOnTag(localClientNum, level.nuked_fx["fx_mp_sand_dust_devil"], self, "dervish_jnt");
     wait(12);
     StopFx(localClientNum, dust);
   }
@@ -59,7 +59,7 @@ main() {
   precache_fx_prop_anims();
   waitforclient(0);
   players = GetLocalPlayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     play_fx_prop_anims(i);
   }
 }

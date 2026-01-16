@@ -29,9 +29,8 @@ getscoreeventcolumn(gametype) {
   columnoffset = getcolumnoffsetforgametype(gametype);
   assert(columnoffset >= 0);
 
-  if(columnoffset >= 0) {
+  if(columnoffset >= 0)
     columnoffset = columnoffset + 0;
-  }
 
   return columnoffset;
 }
@@ -40,9 +39,8 @@ getxpeventcolumn(gametype) {
   columnoffset = getcolumnoffsetforgametype(gametype);
   assert(columnoffset >= 0);
 
-  if(columnoffset >= 0) {
+  if(columnoffset >= 0)
     columnoffset = columnoffset + 1;
-  }
 
   return columnoffset;
 }
@@ -50,15 +48,13 @@ getxpeventcolumn(gametype) {
 getcolumnoffsetforgametype(gametype) {
   foundgamemode = 0;
 
-  if(!isDefined(level.scoreeventtableid)) {
+  if(!isDefined(level.scoreeventtableid))
     level.scoreeventtableid = getscoreeventtableid();
-  }
 
   assert(isDefined(level.scoreeventtableid));
 
-  if(!isDefined(level.scoreeventtableid)) {
+  if(!isDefined(level.scoreeventtableid))
     return -1;
-  }
 
   gamemodecolumn = 11;
 
@@ -86,30 +82,26 @@ getscoreeventtableid() {
   scoreinfotableloaded = 0;
   scoreinfotableid = tablelookupfindcoreasset("mp/scoreInfo.csv");
 
-  if(isDefined(scoreinfotableid)) {
+  if(isDefined(scoreinfotableid))
     scoreinfotableloaded = 1;
-  }
 
   assert(scoreinfotableloaded, "Score Event Table is not loaded: " + "mp/scoreInfo.csv");
   return scoreinfotableid;
 }
 
 isregisteredevent(type) {
-  if(isDefined(level.scoreinfo[type])) {
+  if(isDefined(level.scoreinfo[type]))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 shouldaddrankxp(player) {
-  if(!isDefined(level.rankcap) || level.rankcap == 0) {
+  if(!isDefined(level.rankcap) || level.rankcap == 0)
     return true;
-  }
 
-  if(player.pers["plevel"] > 0 || player.pers["rank"] > level.rankcap) {
+  if(player.pers["plevel"] > 0 || player.pers["rank"] > level.rankcap)
     return false;
-  }
 
   return true;
 }
@@ -129,11 +121,10 @@ processscoreevent(event, player, victim, weapon) {
   if(isregisteredevent(event)) {
     allowplayerscore = 0;
 
-    if(!isDefined(weapon) || maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon) == 0) {
+    if(!isDefined(weapon) || maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon) == 0)
       allowplayerscore = 1;
-    } else {
+    else
       allowplayerscore = maps\mp\gametypes\_rank::killstreakweaponsallowedscore(event);
-    }
 
     if(allowplayerscore) {
       scoregiven = maps\mp\gametypes\_globallogic_score::giveplayerscore(event, player, victim, weapon, undefined);
@@ -141,18 +132,16 @@ processscoreevent(event, player, victim, weapon) {
     }
   }
 
-  if(shouldaddrankxp(player)) {
+  if(shouldaddrankxp(player))
     player addrankxp(event, weapon, isscoreevent);
-  }
 
   pixendevent();
   return scoregiven;
 }
 
 registerscoreeventcallback(callback, func) {
-  if(!isDefined(level.scoreeventcallbacks[callback])) {
+  if(!isDefined(level.scoreeventcallbacks[callback]))
     level.scoreeventcallbacks[callback] = [];
-  }
 
   level.scoreeventcallbacks[callback][level.scoreeventcallbacks[callback].size] = func;
 }
@@ -178,9 +167,8 @@ scoreeventplayerkill(data, time) {
   victim.anglesondeath = victim getplayerangles();
 
   if(meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_EXPLOSIVE" || meansofdeath == "MOD_EXPLOSIVE_SPLASH" || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH") {
-    if(weapon == "none" && isDefined(data.victim.explosiveinfo["weapon"])) {
+    if(weapon == "none" && isDefined(data.victim.explosiveinfo["weapon"]))
       weapon = data.victim.explosiveinfo["weapon"];
-    }
   }
 
   if(level.teambased) {
@@ -235,29 +223,26 @@ scoreeventplayerkill(data, time) {
 
       break;
     case "knife_ballistic_mp":
-      if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_HEAD_SHOT") {
+      if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_HEAD_SHOT")
         processscoreevent("ballistic_knife_kill", attacker, victim, data.sweapon);
-      }
 
       attacker addweaponstat(weapon, "ballistic_knife_kill", 1);
       break;
     case "inventory_supplydrop_mp":
     case "supplydrop_mp":
-      if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH") {
+      if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH")
         processscoreevent("kill_enemy_with_care_package_crush", attacker, victim, weapon);
-      } else {
+      else
         processscoreevent("kill_enemy_with_hacked_care_package", attacker, victim, weapon);
-      }
 
       break;
   }
 
   if(isDefined(data.victimweapon)) {
-    if(data.victimweapon == "minigun_mp") {
+    if(data.victimweapon == "minigun_mp")
       processscoreevent("killed_death_machine_enemy", attacker, victim, weapon);
-    } else if(data.victimweapon == "m32_mp") {
+    else if(data.victimweapon == "m32_mp")
       processscoreevent("killed_multiple_grenade_launcher_enemy", attacker, victim, weapon);
-    }
   }
 
   attacker thread updatemultikills(weapon, weaponclass, killstreak);
@@ -285,18 +270,16 @@ scoreeventplayerkill(data, time) {
     if(isDefined(victim.lastmansd) && victim.lastmansd == 1) {
       processscoreevent("final_kill_elimination", attacker, victim, weapon);
 
-      if(isDefined(attacker.lastmansd) && attacker.lastmansd == 1) {
+      if(isDefined(attacker.lastmansd) && attacker.lastmansd == 1)
         processscoreevent("elimination_and_last_player_alive", attacker, victim, weapon);
-      }
     }
   }
 
   if(is_weapon_valid(meansofdeath, weapon, weaponclass)) {
-    if(isDefined(victim.vattackerorigin)) {
+    if(isDefined(victim.vattackerorigin))
       attackerorigin = victim.vattackerorigin;
-    } else {
+    else
       attackerorigin = attacker.origin;
-    }
 
     disttovictim = distancesquared(victim.origin, attackerorigin);
     weap_min_dmg_range = get_distance_for_weapon(weapon, weaponclass);
@@ -304,9 +287,8 @@ scoreeventplayerkill(data, time) {
     if(disttovictim > weap_min_dmg_range) {
       attacker maps\mp\_challenges::longdistancekill();
 
-      if(weapon == "hatchet_mp") {
+      if(weapon == "hatchet_mp")
         attacker maps\mp\_challenges::longdistancehatchetkill();
-      }
 
       processscoreevent("longshot_kill", attacker, victim, weapon);
       attacker addweaponstat(weapon, "longshot_kill", 1);
@@ -322,9 +304,8 @@ scoreeventplayerkill(data, time) {
       processscoreevent("kill_enemy_when_injured", attacker, victim, weapon);
       attacker addweaponstat(weapon, "kill_enemy_when_injured", 1);
 
-      if(attacker hasperk("specialty_bulletflinch")) {
+      if(attacker hasperk("specialty_bulletflinch"))
         attacker addplayerstat("perk_bulletflinch_kills", 1);
-      }
     }
   } else if(isDefined(attacker.deathtime) && attacker.deathtime + 800 < time && !attacker isinvehicle()) {
     level.globalafterlifes++;
@@ -342,9 +323,8 @@ scoreeventplayerkill(data, time) {
     if(victim.beingmicrowavedby != attacker && attacker isenemyplayer(victim.beingmicrowavedby) == 0) {
       scoregiven = processscoreevent("microwave_turret_assist", victim.beingmicrowavedby, victim, weapon);
 
-      if(isDefined(scoregiven) && isDefined(victim.beingmicrowavedby)) {
+      if(isDefined(scoregiven) && isDefined(victim.beingmicrowavedby))
         victim.beingmicrowavedby maps\mp\_challenges::earnedmicrowaveassistscore(scoregiven);
-      }
     } else
       attacker maps\mp\_challenges::killwhiledamagingwithhpm();
   }
@@ -379,33 +359,29 @@ scoreeventplayerkill(data, time) {
         attacker addweaponstat(weapon, "kill_enemy_with_their_weapon", 1);
 
         if(isDefined(pickedupweapon.sweapon) && isDefined(pickedupweapon.smeansofdeath)) {
-          if(pickedupweapon.sweapon == "knife_held_mp" && pickedupweapon.smeansofdeath == "MOD_MELEE") {
+          if(pickedupweapon.sweapon == "knife_held_mp" && pickedupweapon.smeansofdeath == "MOD_MELEE")
             attacker addweaponstat("knife_held_mp", "kill_enemy_with_their_weapon", 1);
-          }
         }
       }
     }
   }
 
-  if(wasdefusing) {
+  if(wasdefusing)
     processscoreevent("killed_bomb_defuser", attacker, victim, weapon);
-  } else if(wasplanting) {
+  else if(wasplanting)
     processscoreevent("killed_bomb_planter", attacker, victim, weapon);
-  }
 
   specificweaponkill(attacker, victim, weapon, killstreak);
 
   if(!isDefined(killstreak) && isDefined(attacker.dtptime) && attacker.dtptime + 5000 > time) {
     attacker.dtptime = 0;
 
-    if(attacker getstance() == "prone") {
+    if(attacker getstance() == "prone")
       processscoreevent("kill_enemy_recent_dive_prone", attacker, self, weapon);
-    }
   }
 
-  if(isDefined(killstreak)) {
+  if(isDefined(killstreak))
     victim recordkillmodifier("killstreak");
-  }
 
   attacker.cur_death_streak = 0;
   attacker disabledeathstreak();
@@ -414,18 +390,16 @@ scoreeventplayerkill(data, time) {
 specificweaponkill(attacker, victim, weapon, killstreak) {
   switchweapon = weapon;
 
-  if(isDefined(killstreak)) {
+  if(isDefined(killstreak))
     switchweapon = killstreak;
-  }
 
   switch (switchweapon) {
     case "crossbow_mp":
     case "explosive_bolt_mp":
-      if(isDefined(victim.explosiveinfo["stuckToPlayer"]) && victim.explosiveinfo["stuckToPlayer"] == victim) {
+      if(isDefined(victim.explosiveinfo["stuckToPlayer"]) && victim.explosiveinfo["stuckToPlayer"] == victim)
         event = "crossbow_kill";
-      } else {
+      else
         return;
-      }
 
       break;
     case "rcbomb_mp":
@@ -492,11 +466,10 @@ multikill(killcount, weapon) {
   assert(killcount > 1);
   self maps\mp\_challenges::multikill(killcount, weapon);
 
-  if(killcount > 8) {
+  if(killcount > 8)
     processscoreevent("multikill_more_than_8", self, undefined, weapon);
-  } else {
+  else
     processscoreevent("multikill_" + killcount, self, undefined, weapon);
-  }
 
   self recordmultikill(killcount);
 }
@@ -512,15 +485,14 @@ uninterruptedobitfeedkills(attacker, sweapon) {
 is_weapon_valid(meansofdeath, weapon, weaponclass) {
   valid_weapon = 0;
 
-  if(get_distance_for_weapon(weapon, weaponclass) == 0) {
+  if(get_distance_for_weapon(weapon, weaponclass) == 0)
     valid_weapon = 0;
-  } else if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET") {
+  else if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET")
     valid_weapon = 1;
-  } else if(meansofdeath == "MOD_HEAD_SHOT") {
+  else if(meansofdeath == "MOD_HEAD_SHOT")
     valid_weapon = 1;
-  } else if(weapon == "hatchet_mp" && meansofdeath == "MOD_IMPACT") {
+  else if(weapon == "hatchet_mp" && meansofdeath == "MOD_IMPACT")
     valid_weapon = 1;
-  }
 
   return valid_weapon;
 }
@@ -532,9 +504,8 @@ updatemultikills(weapon, weaponclass, killstreak) {
   self endon("updateRecentKills");
   baseweaponname = getreffromitemindex(getbaseweaponitemindex(weapon)) + "_mp";
 
-  if(!isDefined(self.recentkillcount)) {
+  if(!isDefined(self.recentkillcount))
     self.recentkillcount = 0;
-  }
 
   if(!isDefined(self.recentkillcountweapon) || self.recentkillcountweapon != baseweaponname) {
     self.recentkillcountsameweapon = 0;
@@ -546,35 +517,28 @@ updatemultikills(weapon, weaponclass, killstreak) {
     self.recentkillcount++;
   }
 
-  if(!isDefined(self.recent_lmg_smg_killcount)) {
+  if(!isDefined(self.recent_lmg_smg_killcount))
     self.recent_lmg_smg_killcount = 0;
-  }
 
-  if(!isDefined(self.recentremotemissilekillcount)) {
+  if(!isDefined(self.recentremotemissilekillcount))
     self.recentremotemissilekillcount = 0;
-  }
 
-  if(!isDefined(self.recentremotemissileattackerkillcount)) {
+  if(!isDefined(self.recentremotemissileattackerkillcount))
     self.recentremotemissileattackerkillcount = 0;
-  }
 
-  if(!isDefined(self.recentrcbombkillcount)) {
+  if(!isDefined(self.recentrcbombkillcount))
     self.recentrcbombkillcount = 0;
-  }
 
-  if(!isDefined(self.recentrcbombattackerkillcount)) {
+  if(!isDefined(self.recentrcbombattackerkillcount))
     self.recentrcbombattackerkillcount = 0;
-  }
 
-  if(!isDefined(self.recentmglkillcount)) {
+  if(!isDefined(self.recentmglkillcount))
     self.recentmglkillcount = 0;
-  }
 
   if(isDefined(weaponclass)) {
     if(weaponclass == "weapon_lmg" || weaponclass == "weapon_smg") {
-      if(self playerads() < 1.0) {
+      if(self playerads() < 1.0)
         self.recent_lmg_smg_killcount++;
-      }
     }
   }
 
@@ -593,33 +557,27 @@ updatemultikills(weapon, weaponclass, killstreak) {
     }
   }
 
-  if(self.recentkillcountsameweapon == 2) {
+  if(self.recentkillcountsameweapon == 2)
     self addweaponstat(weapon, "multikill_2", 1);
-  } else if(self.recentkillcountsameweapon == 3) {
+  else if(self.recentkillcountsameweapon == 3)
     self addweaponstat(weapon, "multikill_3", 1);
-  }
 
   self waittilltimeoutordeath(4.0);
 
-  if(self.recent_lmg_smg_killcount >= 3) {
+  if(self.recent_lmg_smg_killcount >= 3)
     self maps\mp\_challenges::multi_lmg_smg_kill();
-  }
 
-  if(self.recentrcbombkillcount >= 2) {
+  if(self.recentrcbombkillcount >= 2)
     self maps\mp\_challenges::multi_rcbomb_kill();
-  }
 
-  if(self.recentmglkillcount >= 3) {
+  if(self.recentmglkillcount >= 3)
     self maps\mp\_challenges::multi_mgl_kill();
-  }
 
-  if(self.recentremotemissilekillcount >= 3) {
+  if(self.recentremotemissilekillcount >= 3)
     self maps\mp\_challenges::multi_remotemissile_kill();
-  }
 
-  if(self.recentkillcount > 1) {
+  if(self.recentkillcount > 1)
     self multikill(self.recentkillcount, weapon);
-  }
 
   self.recentkillcount = 0;
   self.recentkillcountsameweapon = 0;
@@ -642,18 +600,16 @@ updateoneshotmultikills(victim, weapon, firsttimedamaged) {
   self notify("updateoneshotmultikills" + firsttimedamaged);
   self endon("updateoneshotmultikills" + firsttimedamaged);
 
-  if(!isDefined(self.oneshotmultikills)) {
+  if(!isDefined(self.oneshotmultikills))
     self.oneshotmultikills = 0;
-  }
 
   self.oneshotmultikills++;
   wait 1.0;
 
-  if(self.oneshotmultikills > 1) {
+  if(self.oneshotmultikills > 1)
     processscoreevent("kill_enemies_one_bullet", self, victim, weapon);
-  } else {
+  else
     processscoreevent("kill_enemy_one_bullet", self, victim, weapon);
-  }
 
   self.oneshotmultikills = 0;
 }
@@ -681,19 +637,17 @@ get_distance_for_weapon(weapon, weaponclass) {
       distance = 422500;
       break;
     case "weapon_special":
-      if(weapon == "knife_ballistic_mp") {
+      if(weapon == "knife_ballistic_mp")
         distance = 2250000;
-      } else if(weapon == "crossbow_mp") {
+      else if(weapon == "crossbow_mp")
         distance = 2250000;
-      } else if(weapon == "metalstorm_mp") {
+      else if(weapon == "metalstorm_mp")
         distance = 3062500;
-      }
 
       break;
     case "weapon_grenade":
-      if(weapon == "hatchet_mp") {
+      if(weapon == "hatchet_mp")
         distance = 6250000;
-      }
 
       break;
     default:

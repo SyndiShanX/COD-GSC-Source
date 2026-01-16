@@ -4,6 +4,7 @@
 ********************************************************/
 
 main() {
+
   character\mp_character_tf141_forest_sniper::main();
 }
 

@@ -12,13 +12,13 @@
 #namespace ball;
 
 function main() {
-  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", &player_ballcarrier_changed, 0, 1);
-  clientfield::register("allplayers", "passoption", 1, 1, "int", &player_passoption_changed, 0, 0);
-  clientfield::register("world", "ball_away", 1, 1, "int", &world_ball_away_changed, 0, 1);
-  clientfield::register("world", "ball_score_allies", 1, 1, "int", &world_ball_score_allies, 0, 1);
-  clientfield::register("world", "ball_score_axis", 1, 1, "int", &world_ball_score_axis, 0, 1);
-  callback::on_localclient_connect(&on_localclient_connect);
-  callback::on_spawned(&on_player_spawned);
+  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", & player_ballcarrier_changed, 0, 1);
+  clientfield::register("allplayers", "passoption", 1, 1, "int", & player_passoption_changed, 0, 0);
+  clientfield::register("world", "ball_away", 1, 1, "int", & world_ball_away_changed, 0, 1);
+  clientfield::register("world", "ball_score_allies", 1, 1, "int", & world_ball_score_allies, 0, 1);
+  clientfield::register("world", "ball_score_axis", 1, 1, "int", & world_ball_score_axis, 0, 1);
+  callback::on_localclient_connect( & on_localclient_connect);
+  callback::on_spawned( & on_player_spawned);
   if(!getdvarint("tu11_programaticallyColoredGameFX")) {
     level.effect_scriptbundles = [];
     level.effect_scriptbundles["goal"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal");
@@ -28,13 +28,13 @@ function main() {
 
 function on_localclient_connect(localclientnum) {
   objective_ids = [];
-  while(!isDefined(objective_ids["allies"])) {
+  while (!isdefined(objective_ids["allies"])) {
     objective_ids["allies"] = serverobjective_getobjective(localclientnum, "ball_goal_allies");
     objective_ids["axis"] = serverobjective_getobjective(localclientnum, "ball_goal_axis");
     wait(0.05);
   }
   foreach(key, objective in objective_ids) {
-    level.goals[key] = spawnStruct();
+    level.goals[key] = spawnstruct();
     level.goals[key].objectiveid = objective;
     setup_goal(localclientnum, level.goals[key]);
   }
@@ -53,17 +53,17 @@ function on_player_spawned(localclientnum) {
 function setup_goal(localclientnum, goal) {
   goal.origin = serverobjective_getobjectiveorigin(localclientnum, goal.objectiveid);
   goal_entity = serverobjective_getobjectiveentity(localclientnum, goal.objectiveid);
-  if(isDefined(goal_entity)) {
+  if(isdefined(goal_entity)) {
     goal.origin = goal_entity.origin;
   }
   goal.team = serverobjective_getobjectiveteam(localclientnum, goal.objectiveid);
 }
 
 function setup_goal_fx(localclientnum, goal, effects) {
-  if(isDefined(goal.base_fx)) {
+  if(isdefined(goal.base_fx)) {
     stopfx(localclientnum, goal.base_fx);
   }
-  goal.base_fx = playFX(localclientnum, effects[goal.team], goal.origin);
+  goal.base_fx = playfx(localclientnum, effects[goal.team], goal.origin);
   setfxteam(localclientnum, goal.base_fx, goal.team);
 }
 
@@ -100,7 +100,7 @@ function play_score_fx(localclientnum, goal) {
     effects["allies"] = "ui/fx_uplink_goal_marker_flash";
     effects["axis"] = "ui/fx_uplink_goal_marker_flash";
   }
-  fx_handle = playFX(localclientnum, effects[goal.team], goal.origin);
+  fx_handle = playfx(localclientnum, effects[goal.team], goal.origin);
   setfxteam(localclientnum, fx_handle, goal.team);
 }
 
@@ -133,7 +133,7 @@ function player_ballcarrier_changed(localclientnum, oldval, newval, bnewent, bin
   } else {
     self set_player_ball_carrier_dr(localclientnum, 0);
   }
-  if(isDefined(level.ball_carrier) && level.ball_carrier != self) {
+  if(isdefined(level.ball_carrier) && level.ball_carrier != self) {
     return;
   }
   level notify("watch_for_death");
@@ -149,12 +149,12 @@ function set_hud(localclientnum) {
   } else {
     friendly = self isfriendly(localclientnum);
   }
-  if(isDefined(self.name)) {
+  if(isdefined(self.name)) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), self.name);
   } else {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), "");
   }
-  if(isDefined(friendly)) {
+  if(isdefined(friendly)) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), friendly);
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), !friendly);
   } else {
@@ -167,7 +167,7 @@ function clear_hud(localclientnum) {
   level.ball_carrier = undefined;
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), 0);
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), 0);
-  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), &"MPUI_BALL_AWAY");
+  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), & "MPUI_BALL_AWAY");
 }
 
 function watch_for_death(localclientnum) {
@@ -178,7 +178,7 @@ function watch_for_death(localclientnum) {
 function player_passoption_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   localplayer = getlocalplayer(localclientnum);
   if(localplayer != self && self isfriendly(localclientnum)) {
-    if(isDefined(localplayer._hasball) && localplayer._hasball) {
+    if(isdefined(localplayer._hasball) && localplayer._hasball) {
       setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.passOption"), newval);
     }
   }
@@ -197,7 +197,7 @@ function set_player_pass_option_dr(localclientnum, on_off) {
 }
 
 function resetondemojump(localclientnum, goal, effects) {
-  for(;;) {
+  for (;;) {
     level waittill("demo_jump" + localclientnum);
     setup_goal_fx(localclientnum, goal, effects);
   }

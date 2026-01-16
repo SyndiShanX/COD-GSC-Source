@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setModel("c_mul_defalco_seal6_fb");
+  self setmodel("c_mul_defalco_seal6_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

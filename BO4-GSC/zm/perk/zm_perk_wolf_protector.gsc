@@ -20,6 +20,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_perk_wolf_protector;
 
 autoexec __init__system__() {
@@ -34,9 +35,9 @@ __init__() {
 
 function_27473e44() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", # "perk_wolf_protector", 3000, # "hash_4cacb949ec1378", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), # "zmperkswolfprotector");
+    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", #"perk_wolf_protector", 3000, #"hash_4cacb949ec1378", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), #"zmperkswolfprotector");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", # "perk_wolf_protector", 3000, # "hash_5b2099ef891bc954", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), # "zmperkswolfprotector");
+    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", #"perk_wolf_protector", 3000, #"hash_5b2099ef891bc954", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), #"zmperkswolfprotector");
   }
 
   zm_perks::register_perk_clientfields(#"specialty_wolf_protector", &register_clientfield, &set_clientfield);
@@ -54,11 +55,11 @@ register_clientfield() {
 set_clientfield(state) {}
 
 give_perk() {
-  self endon(#"disconnect", # "specialty_wolf_protector" + "_take");
+  self endon(#"disconnect", #"specialty_wolf_protector" + "_take");
   self.var_7d46fb46 = zm_perks::function_c1efcc57(#"specialty_wolf_protector");
 
   if(isDefined(self.var_6577c75d) && self.var_6577c75d && isDefined(self.var_7d46fb46)) {
-    self zm_perks::function_2ac7579(self.var_7d46fb46, 2, # "perk_wolf_protector");
+    self zm_perks::function_2ac7579(self.var_7d46fb46, 2, #"perk_wolf_protector");
   }
 
   if(!isDefined(self.var_6577c75d)) {
@@ -100,7 +101,7 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
   self function_6d80c359();
 
   if(isDefined(self.var_7d46fb46)) {
-    self zm_perks::function_13880aa5(self.var_7d46fb46, 0, # "perk_wolf_protector");
+    self zm_perks::function_13880aa5(self.var_7d46fb46, 0, #"perk_wolf_protector");
     self.var_7d46fb46 = undefined;
   }
 }
@@ -157,7 +158,7 @@ function_ce74ad2e() {
   self notify("7c799d117c563854");
   self endon("7c799d117c563854");
   level endon(#"end_game");
-  self endon(#"death", # "disconnect", # "wolf_protector_spawn");
+  self endon(#"death", #"disconnect", #"wolf_protector_spawn");
   self.var_669304d0 = 1;
   wait 4;
 
@@ -167,7 +168,7 @@ function_ce74ad2e() {
 }
 
 function_f3cd6eac() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self notify("695e9be7c8a2488a");
   self endon("695e9be7c8a2488a");
 
@@ -175,9 +176,10 @@ function_f3cd6eac() {
     waitframe(1);
 
     if((self.var_2dc0d63c >= level.zombie_health * 6 || self.var_841cdb3 >= 6) && !isDefined(self.var_5e8ff98e) && !self scene::is_igc_active()) {
+
       iprintlnbold("<dev string:x58>");
 
-      self playSound(#"hash_7c5128882f070d07");
+        self playSound(#"hash_7c5128882f070d07");
       self notify(#"wolf_protector_spawn");
       wait 1.5;
 
@@ -206,9 +208,10 @@ function_d0c6285a() {
   spawn_pos = function_562ade9e();
 
   if(!isDefined(spawn_pos)) {
+
     iprintlnbold("<dev string:x67>");
 
-    return;
+      return;
   }
 
   if(!isDefined(self.var_5e8ff98e)) {
@@ -294,14 +297,14 @@ function_d5b75a76(pos) {
 }
 
 function_163853f(var_e31f9259) {
-  self endon(#"disconnect", # "specialty_wolf_protector" + "_take");
+  self endon(#"disconnect", #"specialty_wolf_protector" + "_take");
 
   if(self hasperk(#"specialty_wolf_protector") && isDefined(self.var_7d46fb46)) {
-    self zm_perks::function_f0ac059f(self.var_7d46fb46, self.var_815af0c3, # "perk_wolf_protector");
+    self zm_perks::function_f0ac059f(self.var_7d46fb46, self.var_815af0c3, #"perk_wolf_protector");
   }
 
   self thread function_eb6d99d7(var_e31f9259);
-  self waittilltimeout(var_e31f9259, # "scene_igc_shot_started", # "fake_death");
+  self waittilltimeout(var_e31f9259, #"scene_igc_shot_started", #"fake_death");
   self function_6d80c359();
 }
 
@@ -309,7 +312,7 @@ function_6d80c359() {
   self.var_815af0c3 = 0;
 
   if(isDefined(self.var_5e8ff98e)) {
-    self zm_perks::function_f0ac059f(self.var_7d46fb46, self.var_815af0c3, # "perk_dying_wish");
+    self zm_perks::function_f0ac059f(self.var_7d46fb46, self.var_815af0c3, #"perk_dying_wish");
     self thread function_166fb685(self.var_9a054c95);
     self.var_5e8ff98e val::reset(#"wolf_protector", "takedamage");
     self.var_5e8ff98e clientfield::set("wolf_protector_fx", 0);
@@ -319,9 +322,9 @@ function_6d80c359() {
 }
 
 function_eb6d99d7(var_1483b30b) {
-  self endon(#"disconnect", # "specialty_wolf_protector" + "_take", # "scene_igc_shot_started");
+  self endon(#"disconnect", #"specialty_wolf_protector" + "_take", #"scene_igc_shot_started");
   n_time_left = var_1483b30b;
-  self zm_perks::function_13880aa5(self.var_7d46fb46, 1, # "perk_wolf_protector");
+  self zm_perks::function_13880aa5(self.var_7d46fb46, 1, #"perk_wolf_protector");
 
   while(n_time_left > 0) {
     wait 0.1;
@@ -331,17 +334,17 @@ function_eb6d99d7(var_1483b30b) {
     n_percentage = math::clamp(n_percentage, 0.02, var_1483b30b);
 
     if(self hasperk(#"specialty_wolf_protector") && isDefined(self.var_7d46fb46)) {
-      self zm_perks::function_13880aa5(self.var_7d46fb46, n_percentage, # "perk_wolf_protector");
+      self zm_perks::function_13880aa5(self.var_7d46fb46, n_percentage, #"perk_wolf_protector");
     }
   }
 }
 
 function_166fb685(var_85dcb56c) {
-  self endon(#"hash_7c5d9af32e10c147", # "disconnect");
+  self endon(#"hash_7c5d9af32e10c147", #"disconnect");
   self.var_6577c75d = 1;
 
   if(self hasperk(#"specialty_wolf_protector") && isDefined(self.var_7d46fb46)) {
-    self zm_perks::function_2ac7579(self.var_7d46fb46, 2, # "perk_wolf_protector");
+    self zm_perks::function_2ac7579(self.var_7d46fb46, 2, #"perk_wolf_protector");
   }
 
   self thread function_7d72c6f9(var_85dcb56c);
@@ -350,9 +353,9 @@ function_166fb685(var_85dcb56c) {
 }
 
 function_7d72c6f9(var_85dcb56c) {
-  self endon(#"disconnect", # "hash_7c5d9af32e10c147");
+  self endon(#"disconnect", #"hash_7c5d9af32e10c147");
   self.var_72c60d5 = var_85dcb56c;
-  self zm_perks::function_13880aa5(self.var_7d46fb46, 0, # "perk_wolf_protector");
+  self zm_perks::function_13880aa5(self.var_7d46fb46, 0, #"perk_wolf_protector");
 
   while(true) {
     wait 0.1;
@@ -362,7 +365,7 @@ function_7d72c6f9(var_85dcb56c) {
     n_percentage = math::clamp(n_percentage, 0.02, var_85dcb56c);
 
     if(self hasperk(#"specialty_wolf_protector") && isDefined(self.var_7d46fb46)) {
-      self zm_perks::function_13880aa5(self.var_7d46fb46, n_percentage, # "perk_wolf_protector");
+      self zm_perks::function_13880aa5(self.var_7d46fb46, n_percentage, #"perk_wolf_protector");
     }
   }
 }
@@ -375,8 +378,8 @@ reset_cooldown() {
     assert(isDefined(self.var_7d46fb46), "<dev string:x38>");
 
     if(isDefined(self.var_7d46fb46)) {
-      self zm_perks::function_2ac7579(self.var_7d46fb46, 1, # "perk_wolf_protector");
-      self zm_perks::function_13880aa5(self.var_7d46fb46, 1, # "perk_wolf_protector");
+      self zm_perks::function_2ac7579(self.var_7d46fb46, 1, #"perk_wolf_protector");
+      self zm_perks::function_13880aa5(self.var_7d46fb46, 1, #"perk_wolf_protector");
     }
   }
 }

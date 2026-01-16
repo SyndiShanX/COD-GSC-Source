@@ -4,11 +4,10 @@
 *****************************************************/
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     animscripts\traverse\shared::dog_jump_down(70.0, 5, "jump_down_70", 1);
-  } else {
+  else
     low_wall_human();
-  }
 }
 
 #using_animtree("generic_human");

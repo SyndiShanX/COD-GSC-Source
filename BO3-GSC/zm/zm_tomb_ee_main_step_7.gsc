@@ -17,7 +17,7 @@
 #namespace zm_tomb_ee_main_step_7;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_7", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_7", & init_stage, & stage_logic, & exit_stage);
 }
 
 function init_stage() {
@@ -38,7 +38,7 @@ function exit_stage(success) {
 }
 
 function ee_zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(isDefined(attacker) && isplayer(attacker) && zm_tomb_chamber::is_point_in_chamber(self.origin)) {
+  if(isdefined(attacker) && isplayer(attacker) && zm_tomb_chamber::is_point_in_chamber(self.origin)) {
     level.n_ee_portal_souls++;
     if(level.n_ee_portal_souls == 1) {
       level thread zm_tomb_ee_main::ee_samantha_say("vox_sam_generic_encourage_3");
@@ -59,12 +59,12 @@ function ee_zombie_killed_override(einflictor, attacker, idamage, smeansofdeath,
 }
 
 function monitor_puzzle_portal() {
-  if(isDefined(level.ee_debug) && level.ee_debug) {
+  if(isdefined(level.ee_debug) && level.ee_debug) {
     level flag::set("");
     level clientfield::set("", 1);
     return;
   }
-  while(!level flag::get("ee_souls_absorbed")) {
+  while (!level flag::get("ee_souls_absorbed")) {
     if(zm_tomb_ee_main::all_staffs_inserted_in_puzzle_room() && !level flag::get("ee_sam_portal_active")) {
       level flag::set("ee_sam_portal_active");
       level clientfield::set("ee_sam_portal", 1);

@@ -11,6 +11,7 @@ main() {
   level._effect["water_stop"] = LoadFX("misc/parabolic_water_stand");
   level._effect["water_movement"] = LoadFX("misc/parabolic_water_movement");
 
+  //Underground Exploders
   level._effect["sparks_e_sound"] = LoadFX("explosions/sparks_e_sound");
   level._effect["welding_small_extended"] = LoadFX("misc/welding_small_extended");
   level._effect["grenade_wood"] = LoadFX("explosions/grenadeExp_wood");
@@ -36,8 +37,11 @@ main() {
 
   level._effect["hallway_cavein_smoke_runner"] = LoadFX("smoke/hallway_cavein_smoke_runner");
 
+  //Player Footstep fx
   level._effect["footstep_snow_small"] = LoadFX("impacts/footstep_snow_small");
   level._effect["footstep_snow"] = LoadFX("impacts/footstep_snow");
+
+  //	
 
   level._effect["ceiling_collapse_dirt1"] = LoadFX("dust/ceiling_collapse_dirt1");
   level._effect["ceiling_collapse_dirt1_decal"] = LoadFX("dust/ceiling_collapse_dirt1_decal");
@@ -47,9 +51,11 @@ main() {
   level._effect["rock_falling_large"] = LoadFX("misc/rock_falling_large");
   level._effect["glass_falling"] = LoadFX("misc/glass_falling");
 
+  //Center Lightshaft
   level._effect["falling_debris_ring"] = LoadFX("misc/falling_debris_ring");
   level._effect["trash_paper_dropping"] = LoadFX("misc/trash_paper_dropping");
 
+  //Waterfall
   level._effect["waterfall_drainage"] = LoadFX("water/waterfall_drainage");
   level._effect["waterfall_drainage_short"] = LoadFX("water/waterfall_drainage_short");
   level._effect["waterfall_drainage_distortion"] = LoadFX("water/waterfall_drainage_distortion");
@@ -67,6 +73,7 @@ main() {
   level._effect["water_slide_splash"] = LoadFX("water/water_slide_splash");
   level._effect["water_slide_start"] = LoadFX("water/water_slide_start");
 
+  //Final Room
   level._effect["falling_water_trickle"] = LoadFX("water/falling_water_trickle");
   level._effect["wall_explosion_2"] = LoadFX("explosions/wall_explosion_2");
   level._effect["wall_explosion_2_short"] = LoadFX("explosions/wall_explosion_2_short");
@@ -77,10 +84,13 @@ main() {
   level._effect["debri_explosion"] = LoadFX("explosions/debri_explosion");
   level._effect["falling_debrigulag_evac"] = LoadFX("misc/falling_debris_gulag_evac");
 
+  //Scripted Lights & Stuff
   level._effect["dlight_blue"] = LoadFX("misc/dlight_blue");
   level._effect["dlight_blue_flicker"] = LoadFX("misc/dlight_blue_flicker");
   level._effect["dlight_red"] = LoadFX("misc/dlight_red");
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit_body_fatal_exit");
+
+  //Intro Fx
 
   level._effect["minigun_shell_eject"] = LoadFX("shellejects/20mm_mp");
   level._effect["f15_missile"] = LoadFX("smoke/smoke_geotrail_sidewinder");
@@ -114,6 +124,8 @@ main() {
   add_earthquake("boat_artillery", 0.35, 0.75, 4500);
   add_earthquake("ceiling_collapse", 0.4, 4, 4500);
 
+  //Ambient FX	
+
   level._effect["powerline_runner_10sec_line"] = LoadFX("explosions/powerline_runner_10sec_line");
   level._effect["amb_ash"] = LoadFX("smoke/amb_ash");
   level._effect["amb_smoke_blend"] = LoadFX("smoke/amb_smoke_blend");
@@ -134,6 +146,7 @@ main() {
   level._effect["drips_slow_infrequent"] = LoadFX("misc/drips_slow_infrequent");
   level._effect["fire_falling_runner_point"] = LoadFX("fire/fire_falling_runner_point");
 
+  // Cloud FX
   level._effect["cloud_bank_far_gulag"] = LoadFX("weather/cloud_bank_far_gulag");
   level._effect["cloud_bank_gulag"] = LoadFX("weather/cloud_bank_gulag");
   level._effect["cloud_bank_gulag_z_feather"] = LoadFX("weather/cloud_bank_gulag_z_feather");
@@ -147,13 +160,12 @@ main() {
   level._effect["cloud_bank_cloud_filler_light_gulag"] = LoadFX("weather/cloud_bank_cloud_filler_light_gulag");
   level._effect["gulag_clouds"] = LoadFX("weather/gulag_clouds");
 
-  if(!isDefined(level.script)) {
+  if(!isdefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
-  }
 
-  if(!getdvarint("r_reflectionProbeGenerate")) {
+  if(!getdvarint("r_reflectionProbeGenerate"))
     maps\createfx\gulag_fx::main();
-  }
 
   thread treadfx_override();
+
 }

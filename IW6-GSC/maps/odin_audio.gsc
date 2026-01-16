@@ -21,11 +21,10 @@ main() {
   level.play_shake_sound = 0;
   level.play_npc_deaths = 0;
 
-  if(isDefined(level.prologue) && level.prologue == 1) {
+  if(isDefined(level.prologue) && level.prologue == 1)
     level.space_breathing_enabled = 1;
-  } else {
+  else
     level.space_breathing_enabled = 1;
-  }
 
   level.player thread maps\_space_player::player_space_breathing();
   soundsettimescalefactor("music", 0);
@@ -51,11 +50,10 @@ audio_odin_pressurized_variable() {
 audio_set_initial_ambience() {
   wait 0.1;
 
-  if(level.start_point == "odin_intro") {
+  if(level.start_point == "odin_intro")
     level.player setclienttriggeraudiozone("odin_title", 3.0);
-  } else {
+  else
     level.player setclienttriggeraudiozone("odin_intro", 0);
-  }
 
   thread mission_music();
 
@@ -259,9 +257,8 @@ sfx_odin_decompress_explode() {
   level.player setclienttriggeraudiozone("odin_scuttle", 0.3);
   wait 0.3;
 
-  if(isDefined(level.creak_loop_sound)) {
+  if(isDefined(level.creak_loop_sound))
     level.creak_loop_sound stopsounds();
-  }
 
   wait 4.7;
   wait 8;
@@ -339,11 +336,10 @@ sfx_shaky_camera_moment() {
 
 sfx_dist_odin_fire() {
   if(!common_scripts\utility::flag("sfx_odin_ending")) {
-    if(level.play_shake_sound == 0) {
+    if(level.play_shake_sound == 0)
       thread common_scripts\utility::play_sound_in_space("scn_odin_dist_fire_moment", (108, 44645, -15751));
-    } else if(level.play_shake_sound == 3) {
+    else if(level.play_shake_sound == 3)
       thread common_scripts\utility::play_sound_in_space("scn_odin_dist_fire_moment", (-11686, 46111, -16126));
-    }
   }
 }
 
@@ -447,9 +443,8 @@ sfx_decomp_door() {
 }
 
 sfx_interior_door_open(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   wait(var_1);
 
@@ -462,18 +457,16 @@ sfx_interior_door_open(var_0, var_1) {
 }
 
 sfx_interior_door_close(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0;
-  }
 
   wait(var_1);
 
   if(isDefined(var_0) && !common_scripts\utility::flag("auto_door_closed")) {
     common_scripts\utility::flag_set("auto_door_closed");
 
-    if(var_0.door_name != "post_infil_auto_door") {
+    if(var_0.door_name != "post_infil_auto_door")
       var_0 playSound("scn_odin_auto_door_close");
-    }
 
     wait 2.2;
     common_scripts\utility::flag_clear("auto_door_closed");
@@ -616,9 +609,8 @@ sfx_rcs_spark(var_0) {
 }
 
 sfx_set_ending_flag() {
-  if(!common_scripts\utility::flag("sfx_odin_ending")) {
+  if(!common_scripts\utility::flag("sfx_odin_ending"))
     common_scripts\utility::flag_set("sfx_odin_ending");
-  }
 }
 
 sfx_rcs_destr(var_0, var_1, var_2) {
@@ -757,9 +749,8 @@ sfx_enemies_stop() {
 }
 
 sfx_rog_impact() {
-  if(level.no_impact == 0) {
+  if(level.no_impact == 0)
     thread common_scripts\utility::play_sound_in_space("scn_odin_ROG_impact_temp", (-10592, 29280, -12464));
-  }
 }
 
 sfx_scuttle_pre_decomp() {
@@ -810,9 +801,8 @@ sfx_escape_destruction_fire_puffs() {
   var_6 = spawn("script_origin", (1369.75, 46487.5, -15816.4));
   var_6 playLoopSound("emt_fire_puff_lp");
 
-  if(maps\_utility::is_gen4()) {
+  if(maps\_utility::is_gen4())
     thread sfx_gen4_fire_puff();
-  }
 
   common_scripts\utility::flag_wait("stop_music_pod_explo");
   var_0 stoploopsound();

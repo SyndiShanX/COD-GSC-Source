@@ -13,7 +13,7 @@ main() {
   // The spawner can also target a second spawner which will spawn a secondary mortar operator.
 
   anims();
-  array_thread(getEntArray("mortar_team", "targetname"), ::mortarTrigger);
+  array_thread(getentarray("mortar_team", "targetname"), ::mortarTrigger);
 }
 
 mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
@@ -21,7 +21,7 @@ mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
   ent = spawnStruct();
   ent.delay_base = delay_base;
   ent.delay_range = delay_range;
-  ent thread mortarTeamspawn(spawners, node, mortar_targets);
+  ent thread mortarTeamSpawn(spawners, node, mortar_targets);
   return ent;
 }
 
@@ -33,32 +33,30 @@ mortarTrigger() {
 }
 
 mortarSpawner(delayEnt) {
-  if(!isDefined(delayEnt)) {
+  if(!isdefined(delayEnt))
     delayEnt = self;
-  }
 
   // wrapper that interfaces with radiant to make mortar guys easier to setup
   spawners[0] = self;
 
   // Optionally target a spawner for an aimguy
   aimguySpawner = getent(self.target, "targetname");
-  if(isDefined(aimguySpawner)) {
+  if(isdefined(aimguySpawner))
     spawners[1] = aimGuySpawner;
-  }
 
   // required target of a destination node or nodes
   node = random(getnodearray(self.target, "targetname"));
-  assertEx(isDefined(node), "Mortar_team spawner at origin " + self.origin + " must target a node or nodes");
-  assertEx(isDefined(node.target), "Mortar node at origin " + node.origin + " must target script origins for mortar targetting");
+  assertEx(isdefined(node), "Mortar_team spawner at origin " + self.origin + " must target a node or nodes");
+  assertEx(isdefined(node.target), "Mortar node at origin " + node.origin + " must target script origins for mortar targetting");
 
-  mortar_targets = getEntArray(node.target, "targetname");
+  mortar_targets = getentarray(node.target, "targetname");
 
   delay_base = 0;
   delay_range = 0;
-  if(isDefined(delayEnt.script_delay)) {
+  if(isdefined(delayEnt.script_delay))
     delay_base = delayEnt.script_delay;
-  } else {
-    if(isDefined(delayEnt.script_delay_min)) {}
+  else
+  if(isdefined(delayEnt.script_delay_min)) {
     delay_base = delayEnt.script_delay_min;
     delay_range = delayEnt.script_delay_max - delayEnt.script_delay_min;
   }
@@ -67,30 +65,28 @@ mortarSpawner(delayEnt) {
   return ent;
 }
 
-mortarTeamspawn(spawners, node, mortar_targets) {
-  assertex(isDefined(level.scr_anim["loadguy"]), "Add maps\_mortarteam::anims(); to the top of your script");
-  assertex(isDefined(level.mortar), "Define the level.mortar effect that should be used");
+mortarTeamSpawn(spawners, node, mortar_targets) {
+  assertex(isdefined(level.scr_anim["loadguy"]), "Add maps\_mortarteam::anims(); to the top of your script");
+  assertex(isdefined(level.mortar), "Define the level.mortar effect that should be used");
   assertex(spawners.size <= 2, "Mortarteams can't support more than 2 spawners");
   assertex(spawners.size, "Mortarteams need at least 1 spawner");
   name[0] = "loadguy";
   name[1] = "aimguy";
 
-  if(!isDefined(node.mortarSetup)) {
+  if(!isdefined(node.mortarSetup))
     node.mortarSetup = false; // for making followup spawners not bring a mortar
-  }
   mortarThink[0] = ::loadGuy;
   mortarThink[1] = ::aimGuy;
 
   self.objectivePositionEntity = undefined;
   self.setup = false;
 
-  if(!isDefined(node.mortarTeamActive)) {
+  if(!isdefined(node.mortarTeamActive))
     node.mortarTeamActive = false;
-  }
   assertEx(!node.mortarTeamActive, "Mortarteam that runs to " + node.origin + " has multiple mortar teams active on it. Can only have 1 team at a time operating each unique mortar.");
 
   index = 0;
-  for(;;) {
+  for (;;) {
     spawners[index].count = 1;
     spawners[index].script_moveoverride = 1;
     spawn = spawners[index] dospawn();
@@ -103,14 +99,12 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
     self.guy[index] = spawn;
     spawn.animname = name[index];
-    if(spawn.health < 5000) {
+    if(spawn.health < 5000)
       spawn.health = 1;
-    }
     spawn thread[[mortarThink[index]]](self, node);
     index++;
-    if(index >= spawners.size) {
+    if(index >= spawners.size)
       break;
-    }
   }
 
   self waittill("loadguy_done");
@@ -125,22 +119,19 @@ mortarTeamspawn(spawners, node, mortar_targets) {
   node.mortarEnt endon("stop_mortar");
   self.node = node; // so we can externally refer to the node to make the scene stop
   node.mortar_targets = mortar_targets;
-  if(isalive(self.aimGuy)) {
+  if(isalive(self.aimGuy))
     self thread transferObjectivePositionEntity();
-  }
-  for(;;) {
+  for (;;) {
     if(isalive(self.loadGuy)) {
-      if(isalive(self.aimGuy) && self.aimGuy.ready) {
+      if(isalive(self.aimGuy) && self.aimGuy.ready)
         dualMortarUntilDeath(node);
-      } else {
+      else
         singleMortarOneRep(node);
-      }
     } else
-    if(isalive(self.aimGuy)) {
+    if(isalive(self.aimGuy))
       aimGuyMortarsUntilDeath(node);
-    } else {
+    else
       break;
-    }
   }
 
   node notify("stopIdle");
@@ -158,18 +149,16 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
 transferObjectivePositionEntity() {
   self.loadGuy waittill("death");
-  if(isalive(self.aimGuy)) {
+  if(isalive(self.aimGuy))
     self.objectivePositionEntity = self.aimGuy;
-  }
 }
 
 singleMortarOneRep(node) {
   // Make the loadguy fire the mortar once
   loadGuy = self.loadGuy;
   loadGuy endon("death");
-  if(loadGuy.health < 5000) {
+  if(loadGuy.health < 5000)
     loadGuy.health = 1;
-  }
 
   node notify("stopIdle"); // in case we broke abruptly from a previous loop to start this one
 
@@ -184,9 +173,8 @@ singleMortarOneRep(node) {
 aimGuyMortarsUntilDeath(node) {
   // make the aimguy fire the mortar until he dies
   aimGuy = self.aimGuy;
-  if(aimGuy.health < 5000) {
+  if(aimGuy.health < 5000)
     aimGuy.health = 1;
-  }
   aimGuy endon("death");
   aimGuy endon("stop_mortar");
 
@@ -194,7 +182,7 @@ aimGuyMortarsUntilDeath(node) {
   node anim_reach_solo(aimGuy, "pickup");
   aimGuy animscripts\shared::placeWeaponOn(self.weapon, "none");
   aimGuy.deathanim = % exposed_crouch_death_fetal;
-  for(;;) {
+  for (;;) {
     node notify("stopIdle"); // in case we broke abruptly from a previous loop to start this one
     node thread anim_loop_solo(aimGuy, "wait_idle", "stopIdle");
     wait(self.delay_base + randomfloat(self.delay_range));
@@ -209,12 +197,10 @@ dualMortarUntilDeath(node) {
   loadGuy = self.loadGuy;
   aimGuy = self.aimGuy;
   guy = self.guy;
-  if(loadGuy.health < 5000) {
+  if(loadGuy.health < 5000)
     loadGuy.health = 1;
-  }
-  if(aimGuy.health < 5000) {
+  if(aimGuy.health < 5000)
     aimGuy.health = 1;
-  }
 
   loadGuy endon("death");
   aimGuy endon("death");
@@ -229,7 +215,7 @@ dualMortarUntilDeath(node) {
   loadGuy animscripts\shared::placeWeaponOn(self.weapon, "none");
   aimGuy animscripts\shared::placeWeaponOn(self.weapon, "none");
   aimGuy.deathanim = % exposed_crouch_death_fetal;
-  for(;;) {
+  for (;;) {
     node thread anim_loop(guy, "wait_idle", "stopIdle");
     wait(self.delay_base + randomfloat(self.delay_range));
     node notify("stopIdle");
@@ -247,11 +233,10 @@ aimGuy(ent, node) {
 
   self.allowDeath = true;
   self setgoalnode(node);
-  if(node.radius > 0) {
+  if(node.radius > 0)
     self.goalradius = node.radius;
-  } else {
+  else
     self.goalradius = 350;
-  }
 
   self waittill("goal");
   self.ready = true;
@@ -299,16 +284,14 @@ loadGuy(ent, node) {
   setupAnim[2] = % mortar_loadguy_setup_right;
   setupString[2] = "setup_right";
   dist = undefined;
-  for(i = 0; i < setupAnim.size; i++) {
+  for (i = 0; i < setupAnim.size; i++)
     dist[i] = distance(self.origin, getstartorigin(node.origin, node.angles, setupAnim[i]));
-  }
 
   index = 0;
   current_dist = dist[0];
-  for(i = 1; i < dist.size; i++) {
-    if(dist[i] >= current_dist) {
+  for (i = 1; i < dist.size; i++) {
+    if(dist[i] >= current_dist)
       continue;
-    }
     index = i;
     current_dist = dist[i];
   }
@@ -319,16 +302,15 @@ loadGuy(ent, node) {
 
   node thread anim_single_solo(self, setupString[index]);
   self waittillmatch("single anim", "open_mortar");
-  if(soundexists("weapon_setup")) {
+  if(soundexists("weapon_setup"))
     thread play_sound_in_space("weapon_setup");
-  }
   self setanimknob( % mortar_open_setup, 1, 0, 1);
   node waittill(setupString[index]);
 
   mortar = spawn("script_model", (0, 0, 0));
   mortar.origin = self gettagorigin("TAG_WEAPON_LEFT");
   mortar.angles = self gettagangles("TAG_WEAPON_LEFT");
-  mortar setModel("prop_mortar");
+  mortar setmodel("prop_mortar");
 
   node.mortarSetup = true;
   ent.mortar = mortar;
@@ -340,9 +322,8 @@ loadGuy(ent, node) {
 }
 
 fire(guy) {
-  if(!isalive(guy)) {
+  if(!isalive(guy))
     return;
-  }
 
   mortarEnt = self.mortarEnt;
   mortar_targets = self.mortar_targets;
@@ -363,14 +344,13 @@ fire(guy) {
   }
   wait(0.4);
 
-  playFXOnTag(level._effect["mortar_flash"], mortar, "TAG_flash");
+  playfxontag(level._effect["mortar_flash"], mortar, "TAG_flash");
   target = random(mortar_targets);
 
-  if(isDefined(mortarEnt)) {
+  if(isdefined(mortarEnt))
     mortarEnt notify("mortar_fired");
-  }
 
-  if(isDefined(level.timetoimpact)) {
+  if(isdefined(level.timetoimpact)) {
     wait level.timetoimpact;
   } else {
     wait(distance(self.origin, target.origin) * 0.0008);
@@ -392,19 +372,17 @@ fire(guy) {
     wait 0.35;
   }
 
-  if(!isDefined(level.explosionhide)) {
+  if(!isdefined(level.explosionhide)) {
     thread play_sound_in_space("mortar_explosion", target.origin);
-    playFX(level.mortar, target.origin);
+    playfx(level.mortar, target.origin);
   }
 }
 
 attachMortar(guy) {
-  if(!isDefined(guy.mortarAmmo)) {
+  if(!isdefined(guy.mortarAmmo))
     guy.mortarAmmo = false;
-  }
-  if(!guy.mortarAmmo) {
+  if(!guy.mortarAmmo)
     guy attach("prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
-  }
   guy.mortarAmmo = true;
 }
 
@@ -418,12 +396,10 @@ detachMortar(guy) {
 
 detachMortarOnDeath() {
   self waittill("death");
-  if(!isDefined(self.mortarAmmo)) {
+  if(!isdefined(self.mortarAmmo))
     return;
-  }
-  if(!self.mortarAmmo) {
+  if(!self.mortarAmmo)
     return;
-  }
 
   self detach("prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
   self.mortarAmmo = false;

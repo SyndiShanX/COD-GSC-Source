@@ -7,11 +7,10 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr()) {
+  if(isusinghdr())
     maps\createart\mp_creek_fog_hdr::main();
-  } else {
+  else
     maps\createart\mp_creek_fog::main();
-  }
 
   visionsetnaked("mp_creek", 0);
 }

@@ -10,10 +10,11 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_crash;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_crash", &__init__, undefined, # "character_unlock_crash_fixup");
+  system::register(#"character_unlock_crash", &__init__, undefined, #"character_unlock_crash_fixup");
 }
 
 __init__() {
@@ -29,30 +30,30 @@ function_2613aeec(enabled) {
     callback::on_item_use(&on_item_use);
 
     if(isDefined(getgametypesetting(#"hash_17f17e92c2654659")) && getgametypesetting(#"hash_17f17e92c2654659")) {
-      item_world_fixup::function_e70fa91c(#"health_stash_parent", # "health_stash_cu03", 3);
+      item_world_fixup::function_e70fa91c(#"health_stash_parent", #"health_stash_cu03", 3);
       return;
     }
 
-    item_world_fixup::function_e70fa91c(#"health_stash_parent", # "health_stash_cu03", 10);
+    item_world_fixup::function_e70fa91c(#"health_stash_parent", #"health_stash_cu03", 10);
   }
 }
 
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu03_item") {
+  if(itementry.name === #"cu03_item") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
       if(var_4862d883 >= 15) {
-        self character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9c0240fd010e", 1);
+        self character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9c0240fd010e", 1);
       }
 
       var_c503939b = globallogic::function_e9e52d05();
 
       if(var_c503939b <= function_c816ea5b()) {
         if(self character_unlock::function_f0406288(#"crash_unlock")) {
-          self character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9b0240fcff5b", 1);
+          self character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9b0240fcff5b", 1);
         }
       }
     }
@@ -71,12 +72,12 @@ on_drop_item(params) {
     return;
   }
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
       if(var_4862d883 < 15) {
-        self character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9c0240fd010e", 0);
+        self character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9c0240fd010e", 0);
       }
     }
   }
@@ -85,12 +86,12 @@ on_drop_item(params) {
 on_item_pickup(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
       if(var_4862d883 >= 15) {
-        self character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9c0240fd010e", 1);
+        self character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9c0240fd010e", 1);
       }
     }
   }
@@ -99,12 +100,12 @@ on_item_pickup(params) {
 on_item_use(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
       if(var_4862d883 < 15) {
-        self character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9c0240fd010e", 0);
+        self character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9c0240fd010e", 0);
       }
     }
   }
@@ -115,7 +116,7 @@ private function_687146d() {
 
   if(isDefined(self.inventory) && isDefined(self.inventory.items)) {
     foreach(item in self.inventory.items) {
-      if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+      if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
         var_4862d883 += item.count;
       }
     }
@@ -138,7 +139,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"crash_unlock")) {
-            player character_unlock::function_c8beca5e(#"crash_unlock", # "hash_7ccc9b0240fcff5b", 1);
+            player character_unlock::function_c8beca5e(#"crash_unlock", #"hash_7ccc9b0240fcff5b", 1);
           }
         }
       }

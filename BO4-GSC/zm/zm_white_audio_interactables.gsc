@@ -17,6 +17,7 @@
 #include scripts\zm_common\zm_item_pickup;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_white_audio_interactables;
 
 init() {
@@ -58,7 +59,7 @@ function_c7d4845() {
     e_who playSound("evt_punch_card_pickup");
 
     if(math::cointoss()) {
-      e_who thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      e_who thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
     }
 
     level.var_389d1b12 += 1;
@@ -81,7 +82,7 @@ function_445e3d3d() {
 
       iprintlnbold("<dev string:x38>" + level.var_b53764f7);
 
-      zm_hms_util::function_e308175e(#"hash_6b6fadebd260d209" + level.var_b53764f7 + "_sfx", self.origin);
+        zm_hms_util::function_e308175e(#"hash_6b6fadebd260d209" + level.var_b53764f7 + "_sfx", self.origin);
 
       iprintlnbold("<dev string:x4e>");
 
@@ -132,7 +133,7 @@ function_9e497c58() {
     var_f711229a.var_808cd5ad = var_f711229a.var_8ace5ace;
     var_f711229a.scene scene::play("idle_off_" + var_f711229a.var_8ace5ace);
     var_f711229a.scene flagsys::wait_till(#"scene_ents_ready");
-    var_f711229a.scene_entity = var_f711229a.scene.scene_ents[# "prop 1"];
+    var_f711229a.scene_entity = var_f711229a.scene.scene_ents[#"prop 1"];
     var_f711229a.scene.var_eb397f67 = var_f711229a.scene_entity gettagorigin("tag_tuner_knob");
     level.var_96fdae0e[var_f711229a.script_int] = var_f711229a;
   }
@@ -283,7 +284,7 @@ function_8c80503() {
 
   iprintlnbold("<dev string:x87>" + self.var_614bfc5c);
 
-  self.var_b21e0263 = 0;
+    self.var_b21e0263 = 0;
 }
 
 function_d4c6dc0d() {
@@ -307,6 +308,7 @@ uin_kls_counteruavdefeated() {
   zm_hms_util::function_e308175e(#"hash_d065c4529d709fe" + self.var_614bfc5c + 1 + "_sfx", self.origin);
 
   iprintlnbold("<dev string:xa1>" + self.var_614bfc5c);
+
 }
 
 function_ac06ab3a() {
@@ -317,29 +319,29 @@ function_ac06ab3a() {
   var_51ba7b4a = array(#"hash_1a1854072d6b2453");
   var_68e586cf = array(#"hash_39204e32adbe7694");
   level.var_ea514bc4[0] = {
-    #var_8a821e1e: 0,
-    #in_inventory: 0,
+    #var_8a821e1e: 0, 
+    #in_inventory: 0, 
     #vo_line: var_1c8e90b4
   };
   level.var_ea514bc4[1] = {
-    #var_8a821e1e: 1,
-    #in_inventory: 0,
+    #var_8a821e1e: 1, 
+    #in_inventory: 0, 
     #vo_line: var_ab6a16ff
   };
   level.var_ea514bc4[2] = {
-    #var_8a821e1e: 2,
-    #in_inventory: 0,
-    #vo_line: var_e6c1fe70,
+    #var_8a821e1e: 2, 
+    #in_inventory: 0, 
+    #vo_line: var_e6c1fe70, 
     #var_46db68fd: 1
   };
   level.var_ea514bc4[3] = {
-    #var_8a821e1e: 3,
-    #in_inventory: 0,
+    #var_8a821e1e: 3, 
+    #in_inventory: 0, 
     #vo_line: var_51ba7b4a
   };
   level.var_ea514bc4[4] = {
-    #var_8a821e1e: 4,
-    #in_inventory: 0,
+    #var_8a821e1e: 4, 
+    #in_inventory: 0, 
     #vo_line: var_68e586cf
   };
   level.var_804a56e3 = 0;
@@ -362,7 +364,7 @@ function_1792ae3(e_item) {
     s_reel.in_inventory = 1;
 
     if(math::cointoss()) {
-      self thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      self thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
     }
 
     if(isDefined(e_item)) {
@@ -429,7 +431,7 @@ function_8352562a() {
 
       iprintlnbold("<dev string:xbc>" + s_reel.var_8a821e1e + "<dev string:xda>");
 
-      var_e578920c++;
+        var_e578920c++;
       level.var_94b00cff stoploopsound();
       level.var_94b00cff playSound(#"hash_1f5fc24563134758");
       exploder::stop_exploder("fxexp_script_projector_on");
@@ -682,11 +684,11 @@ function_35e95fba() {
 
 function_74174ce1(str_state) {
   switch (str_state) {
-    case # "screen_off":
+    case #"screen_off":
       self function_35e95fba();
       self showpart("tag_screen_on_play");
       break;
-    case # "screen_on":
+    case #"screen_on":
       self function_35e95fba();
       self showpart("tag_screen_on_noise");
       wait 30;
@@ -696,11 +698,11 @@ function_74174ce1(str_state) {
       self hidepart("tag_screen_on_tone");
       self showpart("tag_screen_off");
       break;
-    case # "screen_on_noise":
+    case #"screen_on_noise":
       self function_35e95fba();
       self showpart("tag_screen_on_noise");
       break;
-    case # "screen_on_tone":
+    case #"screen_on_tone":
       self function_35e95fba();
       self showpart("tag_screen_on_tone");
       break;

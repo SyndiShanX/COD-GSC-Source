@@ -115,23 +115,23 @@ function main() {
   level._num_overriden_models = 0;
   level._use_choke_weapon_hints = 1;
   level._use_choke_blockers = 1;
-  level._special_blackhole_bomb_structs = &blackhole_bomb_area_check;
+  level._special_blackhole_bomb_structs = & blackhole_bomb_area_check;
   level._limited_equipment = [];
   level._limited_equipment[level._limited_equipment.size] = level.var_bbd4901d;
-  level._override_blackhole_destination_logic = &get_blackholebomb_destination_point;
-  level._blackhole_bomb_valid_area_check = &blackhole_bomb_in_invalid_area;
-  level.quantum_bomb_prevent_player_getting_teleported = &quantum_bomb_prevent_player_getting_teleported_override;
-  level.func_magicbox_update_prompt_use_override = &func_magicbox_update_prompt_use_override;
-  level.func_jump_pad_pulse_override = &zm_moon_jump_pad::function_d4f0f4fe;
+  level._override_blackhole_destination_logic = & get_blackholebomb_destination_point;
+  level._blackhole_bomb_valid_area_check = & blackhole_bomb_in_invalid_area;
+  level.quantum_bomb_prevent_player_getting_teleported = & quantum_bomb_prevent_player_getting_teleported_override;
+  level.func_magicbox_update_prompt_use_override = & func_magicbox_update_prompt_use_override;
+  level.func_jump_pad_pulse_override = & zm_moon_jump_pad::function_d4f0f4fe;
   level.dont_unset_perk_when_machine_paused = 1;
   level._no_water_risers = 1;
   level.use_clientside_board_fx = 1;
   level.riser_fx_on_client = 1;
   level.risers_use_low_gravity_fx = 1;
   level.debug_astro = 1;
-  level._round_start_func = &zm::round_start;
-  callback::on_connect(&function_35a61719);
-  callback::on_spawned(&on_player_spawned);
+  level._round_start_func = & zm::round_start;
+  callback::on_connect( & function_35a61719);
+  callback::on_spawned( & on_player_spawned);
   zm_moon_fx::main();
   zm::init_fx();
   level.zombiemode = 1;
@@ -145,41 +145,41 @@ function main() {
   register_clientfields();
   zm_moon_sq::init_clientfields();
   level.player_out_of_playable_area_monitor = 1;
-  level.player_out_of_playable_area_monitor_callback = &zombie_moon_player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = & zombie_moon_player_out_of_playable_area_monitor_callback;
   level thread moon_create_life_trigs();
   level.traps = [];
-  level.round_think_func = &moon_round_think_func;
+  level.round_think_func = & moon_round_think_func;
   level.random_pandora_box_start = 1;
-  level.door_dialog_function = &zm::play_door_dialog;
+  level.door_dialog_function = & zm::play_door_dialog;
   level.quad_move_speed = 35;
   level.quad_explode = 1;
   level.dogs_enabled = 1;
   level.custom_ai_type = [];
-  if(!isDefined(level.custom_ai_type)) {
+  if(!isdefined(level.custom_ai_type)) {
     level.custom_ai_type = [];
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = &zm_ai_dogs::init;
-  spawner::add_archetype_spawn_function("zombie_dog", &function_6db62803);
-  spawner::add_archetype_spawn_function("astronaut", &function_ff7d3b7);
+  level.custom_ai_type[level.custom_ai_type.size] = & zm_ai_dogs::init;
+  spawner::add_archetype_spawn_function("zombie_dog", & function_6db62803);
+  spawner::add_archetype_spawn_function("astronaut", & function_ff7d3b7);
   level thread zm_moon_utility::hacker_location_random_init();
-  level._zombie_custom_add_weapons = &custom_add_weapons;
-  level.zombiemode_gasmask_reset_player_model = &gasmask_reset_player_model;
-  level.zombiemode_gasmask_reset_player_viewmodel = &gasmask_reset_player_set_viewmodel;
-  level.zombiemode_gasmask_change_player_headmodel = &gasmask_change_player_headmodel;
-  level.zombiemode_gasmask_set_player_model = &gasmask_set_player_model;
-  level.zombiemode_gasmask_set_player_viewmodel = &gasmask_set_player_viewmodel;
-  level.register_offhand_weapons_for_level_defaults_override = &moon_offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.zombiemode_gasmask_reset_player_model = & gasmask_reset_player_model;
+  level.zombiemode_gasmask_reset_player_viewmodel = & gasmask_reset_player_set_viewmodel;
+  level.zombiemode_gasmask_change_player_headmodel = & gasmask_change_player_headmodel;
+  level.zombiemode_gasmask_set_player_model = & gasmask_set_player_model;
+  level.zombiemode_gasmask_set_player_viewmodel = & gasmask_set_player_viewmodel;
+  level.register_offhand_weapons_for_level_defaults_override = & moon_offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
   level._allow_melee_weapon_switching = 1;
-  level._hack_perks_override = &function_9f47ebff;
-  level.givecustomcharacters = &givecustomcharacters;
+  level._hack_perks_override = & function_9f47ebff;
+  level.givecustomcharacters = & givecustomcharacters;
   initcharacterstartindex();
   level.use_zombie_heroes = 1;
   level.moon_startmap = 1;
-  level._zm_blocker_trigger_think_return_override = &function_d70e1ddb;
-  level._zm_build_trigger_from_unitrigger_stub_override = &function_89f86341;
+  level._zm_blocker_trigger_think_return_override = & function_d70e1ddb;
+  level._zm_build_trigger_from_unitrigger_stub_override = & function_89f86341;
   load::main();
   level.default_laststandpistol = getweapon("pistol_m1911");
   level.default_solo_laststandpistol = getweapon("pistol_m1911_upgraded");
@@ -189,15 +189,15 @@ function main() {
   zm_ai_quad::function_5af423f4();
   level thread zm_moon_sq::start_moon_sidequest();
   level thread function_54bf648f();
-  level.var_9aaae7ae = &function_869d6f66;
-  level.var_2d4e3645 = &function_d9e1ec4d;
-  level.var_35efa94c = &function_f97e7fed;
-  level.var_9f5c2c50 = &function_e36dbcf4;
-  level.var_4824bb2d = &function_69e4bd99;
+  level.var_9aaae7ae = & function_869d6f66;
+  level.var_2d4e3645 = & function_d9e1ec4d;
+  level.var_35efa94c = & function_f97e7fed;
+  level.var_9f5c2c50 = & function_e36dbcf4;
+  level.var_4824bb2d = & function_69e4bd99;
   level thread zm::register_sidequest("EOA", "ZOMBIE_TEMPLE_SIDEQUEST");
   level thread zm::register_sidequest("MOON", "ZOMBIE_MOON_SIDEQUEST_TOTAL");
   _zm_weap_bowie::init();
-  level.zone_manager_init_func = &moon_zone_init;
+  level.zone_manager_init_func = & moon_zone_init;
   init_zones[0] = "bridge_zone";
   init_zones[1] = "nml_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -220,8 +220,8 @@ function main() {
   level thread zm_moon_gravity::zombie_moon_update_player_float();
   level thread init_hackables();
   execdevgui("");
-  level.custom_devgui = &moon_devgui;
-  level.custom_intermission = &zm_moon_utility::moon_intermission;
+  level.custom_devgui = & moon_devgui;
+  level.custom_intermission = & zm_moon_utility::moon_intermission;
   level thread no_mans_land_power();
   level thread cliff_fall_death();
   level thread setup_fields();
@@ -229,18 +229,18 @@ function main() {
   level.tunnel_6_destroyed hide();
   level.tunnel_11_destroyed = getent("tunnel_11_destroyed", "targetname");
   level.tunnel_11_destroyed hide();
-  level.perk_lost_func = &moon_perk_lost;
-  level._black_hole_bomb_poi_override = &moon_black_hole_bomb_poi;
-  level.check_valid_spawn_override = &moon_respawn_override;
-  level._zombiemode_post_respawn_callback = &moon_post_respawn_callback;
-  level._poi_override = &moon_bhb_poi_control;
-  level._override_quad_explosion = &override_quad_explosion;
-  level.zombie_speed_up = &moon_speed_up;
-  level.ai_astro_explode = &moon_push_zombies_when_astro_explodes;
+  level.perk_lost_func = & moon_perk_lost;
+  level._black_hole_bomb_poi_override = & moon_black_hole_bomb_poi;
+  level.check_valid_spawn_override = & moon_respawn_override;
+  level._zombiemode_post_respawn_callback = & moon_post_respawn_callback;
+  level._poi_override = & moon_bhb_poi_control;
+  level._override_quad_explosion = & override_quad_explosion;
+  level.zombie_speed_up = & moon_speed_up;
+  level.ai_astro_explode = & moon_push_zombies_when_astro_explodes;
   level thread spare_change();
   setdvar("dlc5_get_client_weapon_from_entitystate", 1);
   setdvar("hkai_pathfindIterationLimit", 900);
-  scene::add_scene_func("cin_zmhd_sizzle_moon_cam", &cin_zmhd_sizzle_moon_cam, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_moon_cam", & cin_zmhd_sizzle_moon_cam, "play");
   level thread zm_moon_ffotd::main_end();
 }
 
@@ -249,7 +249,7 @@ function function_ff7d3b7() {
     var_1acd84fb = randomint(level.var_6225e4bb);
     var_1acd84fb = var_1acd84fb + 1;
   }
-  while(level.var_2c6ea600 === var_1acd84fb);
+  while (level.var_2c6ea600 === var_1acd84fb);
   level.var_2c6ea600 = var_1acd84fb;
   self clientfield::set("astro_name_index", var_1acd84fb);
   foreach(player in level.players) {
@@ -258,7 +258,7 @@ function function_ff7d3b7() {
       break;
     }
   }
-  if(!isDefined(owner)) {
+  if(!isdefined(owner)) {
     owner = level.players[0];
   }
   self setentityowner(owner);
@@ -267,9 +267,9 @@ function function_ff7d3b7() {
 
 function cin_zmhd_sizzle_moon_cam(a_ents) {
   level.disable_print3d_ent = 1;
-  var_3aa9d35a = getEntArray("airlock_bridge_zone", "script_parameters");
+  var_3aa9d35a = getentarray("airlock_bridge_zone", "script_parameters");
   foreach(var_1cec30db in var_3aa9d35a) {
-    var_7be3ca60 = getEntArray(var_1cec30db.target, "targetname");
+    var_7be3ca60 = getentarray(var_1cec30db.target, "targetname");
     foreach(mdl_door in var_7be3ca60) {
       mdl_door hide();
     }
@@ -291,7 +291,7 @@ function moon_push_zombies_when_astro_explodes(position) {
 }
 
 function function_869d6f66() {
-  if(!isDefined(self zm_bgb_anywhere_but_here::function_728dfe3())) {
+  if(!isdefined(self zm_bgb_anywhere_but_here::function_728dfe3())) {
     return false;
   }
   if(self.zone_name === "nml_zone") {
@@ -308,7 +308,7 @@ function function_f97e7fed() {
 }
 
 function function_e36dbcf4() {
-  if(isDefined(level.var_d8417111) && level.var_d8417111) {
+  if(isdefined(level.var_d8417111) && level.var_d8417111) {
     return false;
   }
   return true;
@@ -351,7 +351,7 @@ function setup_fields() {
   level.var_2f9ab492["cata_right_middle_zone"] = "fxexp_1013";
   level.var_2f9ab492["bridge_zone"] = "fxexp_1014";
   foreach(str_zone, str_exploder in level.var_2f9ab492) {
-    if(!isDefined(level.zones[str_zone].volumes[0].script_string) || level.zones[str_zone].volumes[0].script_string != "lowgravity") {
+    if(!isdefined(level.zones[str_zone].volumes[0].script_string) || level.zones[str_zone].volumes[0].script_string != "lowgravity") {
       exploder::exploder(level.var_2f9ab492[str_zone]);
     }
   }
@@ -365,15 +365,15 @@ function no_mans_land_power() {
 
 function turn_area51_perks_on() {
   wait(0.2);
-  machine = getEntArray("vending_sleight", "targetname");
-  for(i = 0; i < machine.size; i++) {
-    machine[i] setModel("p7_zm_vending_sleight");
+  machine = getentarray("vending_sleight", "targetname");
+  for (i = 0; i < machine.size; i++) {
+    machine[i] setmodel("p7_zm_vending_sleight");
   }
   level notify("specialty_fastreload_power_on");
-  machine2 = getEntArray("vending_jugg", "targetname");
-  for(i = 0; i < machine2.size; i++) {
-    machine2[i] setModel("p7_zm_vending_jugg");
-    machine2[i] playSound("zmb_perks_power_on");
+  machine2 = getentarray("vending_jugg", "targetname");
+  for (i = 0; i < machine2.size; i++) {
+    machine2[i] setmodel("p7_zm_vending_jugg");
+    machine2[i] playsound("zmb_perks_power_on");
   }
   level notify("specialty_armorvest_power_on");
 }
@@ -383,7 +383,7 @@ function init_hackables() {
   level thread zm_hackables_perks::hack_perks();
   level thread zm_hackables_packapunch::hack_packapunch();
   level thread zm_hackables_boards::hack_boards();
-  level thread zm_hackables_doors::hack_doors("zombie_airlock_buy", &zm_moon_utility::moon_door_opened);
+  level thread zm_hackables_doors::hack_doors("zombie_airlock_buy", & zm_moon_utility::moon_door_opened);
   level thread zm_hackables_doors::hack_doors();
   level thread zm_hackables_powerups::hack_powerups();
   level thread zm_hackables_box::box_hacks();
@@ -393,7 +393,7 @@ function init_hackables() {
 
 function function_d70e1ddb(player) {
   if(player zm_equipment::is_active(level.var_bbd4901d)) {
-    if(isDefined(self.unitrigger_stub.playertrigger)) {
+    if(isdefined(self.unitrigger_stub.playertrigger)) {
       zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
     }
     return true;
@@ -403,7 +403,7 @@ function function_d70e1ddb(player) {
 
 function function_89f86341(player) {
   if(player zm_equipment::is_active(level.var_bbd4901d)) {
-    if(isDefined(self.trigger_target)) {
+    if(isdefined(self.trigger_target)) {
       if(self.trigger_target.targetname == "exterior_goal") {
         return true;
       }
@@ -413,10 +413,10 @@ function function_89f86341(player) {
 }
 
 function zombie_moon_player_out_of_playable_area_monitor_callback() {
-  if(isDefined(self._padded) && self._padded) {
+  if(isdefined(self._padded) && self._padded) {
     return false;
   }
-  if(isDefined(self.insta_killed) && self.insta_killed) {
+  if(isdefined(self.insta_killed) && self.insta_killed) {
     return false;
   }
   return true;
@@ -427,24 +427,24 @@ function moon_create_life_trigs() {}
 function packapunch_hack_think() {
   level flag::init("packapunch_hacked");
   time = 30;
-  pack_gates = getEntArray("zombieland_gate", "targetname");
-  for(i = 0; i < pack_gates.size; i++) {
+  pack_gates = getentarray("zombieland_gate", "targetname");
+  for (i = 0; i < pack_gates.size; i++) {
     pack_gates[i].startpos = pack_gates[i].origin;
   }
-  while(true) {
+  while (true) {
     level waittill("packapunch_hacked");
     level flag::clear("packapunch_hacked");
-    array::thread_all(pack_gates, &pack_gate_activate);
+    array::thread_all(pack_gates, & pack_gate_activate);
     level thread pack_gate_poi_activate(time);
     wait(time);
     level flag::set("packapunch_hacked");
-    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, &zm_hackables_packapunch::packapunch_hack);
+    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, & zm_hackables_packapunch::packapunch_hack);
   }
 }
 
 function pack_gate_poi_init() {
-  pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
-  for(i = 0; i < pack_zombieland_poi.size; i++) {
+  pack_zombieland_poi = getentarray("zombieland_poi", "targetname");
+  for (i = 0; i < pack_zombieland_poi.size; i++) {
     pack_zombieland_poi[i] zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
     pack_zombieland_poi[i] thread zm_utility::create_zombie_point_of_interest_attractor_positions(4, 45);
   }
@@ -452,10 +452,10 @@ function pack_gate_poi_init() {
 
 function pack_gate_poi_activate(time) {
   pack_enclosure = getent("pack_enclosure", "targetname");
-  pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
+  pack_zombieland_poi = getentarray("zombieland_poi", "targetname");
   players = getplayers();
   num_players_inside = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] istouching(pack_enclosure)) {
       num_players_inside++;
     }
@@ -465,15 +465,15 @@ function pack_gate_poi_activate(time) {
   }
   level thread activate_zombieland_poi_positions(time);
   level thread watch_for_exit(pack_zombieland_poi);
-  while(!level flag::get("packapunch_hacked")) {
+  while (!level flag::get("packapunch_hacked")) {
     zombies = getaiarray();
-    for(i = 0; i < zombies.size; i++) {
+    for (i = 0; i < zombies.size; i++) {
       if(zombies[i] istouching(pack_enclosure)) {
         zombies[i].in_pack_enclosure = 1;
         zombies[i] thread moon_zombieland_ignore_poi();
         continue;
       }
-      if(!(isDefined(zombies[i]._poi_pack_set) && zombies[i]._poi_pack_set)) {
+      if(!(isdefined(zombies[i]._poi_pack_set) && zombies[i]._poi_pack_set)) {
         zombies[i] thread switch_between_zland_poi();
         zombies[i] thread moon_nml_bhb_present();
         zombies[i]._poi_pack_set = 1;
@@ -484,10 +484,10 @@ function pack_gate_poi_activate(time) {
   level flag::wait_till("packapunch_hacked");
   level notify("stop_pack_poi");
   zombies = getaiarray();
-  for(i = 0; i < zombies.size; i++) {
+  for (i = 0; i < zombies.size; i++) {
     zombies[i]._poi_pack_set = 0;
   }
-  for(i = 0; i < pack_zombieland_poi.size; i++) {
+  for (i = 0; i < pack_zombieland_poi.size; i++) {
     pack_zombieland_poi[i] function_47f0ea80();
   }
 }
@@ -496,15 +496,15 @@ function switch_between_zland_poi() {
   self endon("death");
   level endon("packapunch_hacked");
   self endon("nml_bhb");
-  poi_array = getEntArray("zombieland_poi", "targetname");
-  for(x = 0; x < poi_array.size; x++) {
-    if(isDefined(poi_array[x].poi_active) && poi_array[x].poi_active) {
+  poi_array = getentarray("zombieland_poi", "targetname");
+  for (x = 0; x < poi_array.size; x++) {
+    if(isdefined(poi_array[x].poi_active) && poi_array[x].poi_active) {
       self zm_utility::add_poi_to_ignore_list(poi_array[x]);
     }
   }
   poi_array = array::randomize(poi_array);
-  while(!level flag::get("packapunch_hacked")) {
-    for(i = 0; i < poi_array.size; i++) {
+  while (!level flag::get("packapunch_hacked")) {
+    for (i = 0; i < poi_array.size; i++) {
       self zm_utility::remove_poi_from_ignore_list(poi_array[i]);
       self util::waittill_any_ex(randomintrange(2, 5), "goal", "bad_path", "death", "nml_bhb", level, "packapunch_hacked");
       self zm_utility::add_poi_to_ignore_list(poi_array[i]);
@@ -518,7 +518,7 @@ function switch_between_zland_poi() {
 function remove_ignore_on_poi(poi_array) {
   self endon("death");
   level waittill("stop_pack_poi");
-  for(i = 0; i < poi_array.size; i++) {
+  for (i = 0; i < poi_array.size; i++) {
     self zm_utility::remove_poi_from_ignore_list(poi_array[i]);
   }
   self._poi_pack_set = 0;
@@ -526,8 +526,8 @@ function remove_ignore_on_poi(poi_array) {
 
 function activate_zombieland_poi_positions(time) {
   level endon("stop_pack_poi");
-  pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
-  for(i = 0; i < pack_zombieland_poi.size; i++) {
+  pack_zombieland_poi = getentarray("zombieland_poi", "targetname");
+  for (i = 0; i < pack_zombieland_poi.size; i++) {
     poi = pack_zombieland_poi[i];
     poi zm_utility::activate_zombie_point_of_interest();
   }
@@ -537,7 +537,7 @@ function function_47f0ea80() {
   if(self.script_noteworthy != "zombie_poi") {
     return;
   }
-  for(i = 0; i < self.attractor_array.size; i++) {
+  for (i = 0; i < self.attractor_array.size; i++) {
     self.attractor_array[i] notify("kill_poi");
   }
   self.attractor_array = [];
@@ -546,11 +546,11 @@ function function_47f0ea80() {
 }
 
 function watch_for_exit(poi_array) {
-  while(players_in_zombieland() && !level flag::get("packapunch_hacked")) {
+  while (players_in_zombieland() && !level flag::get("packapunch_hacked")) {
     wait(0.1);
   }
   level notify("stop_pack_poi");
-  for(i = 0; i < poi_array.size; i++) {
+  for (i = 0; i < poi_array.size; i++) {
     poi_array[i] function_47f0ea80();
   }
 }
@@ -559,7 +559,7 @@ function players_in_zombieland() {
   pack_enclosure = getent("pack_enclosure", "targetname");
   players = getplayers();
   num_players_inside = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i] istouching(pack_enclosure)) {
       num_players_inside++;
     }
@@ -571,7 +571,7 @@ function players_in_zombieland() {
 }
 
 function check_for_avoid_poi() {
-  if(isDefined(self.in_pack_enclosure) && self.in_pack_enclosure) {
+  if(isdefined(self.in_pack_enclosure) && self.in_pack_enclosure) {
     return true;
   }
   return false;
@@ -580,8 +580,8 @@ function check_for_avoid_poi() {
 function pack_gate_activate() {
   time = 1;
   self notsolid();
-  if(isDefined(self.script_vector)) {
-    self playSound("amb_teleporter_gate_start");
+  if(isdefined(self.script_vector)) {
+    self playsound("amb_teleporter_gate_start");
     self moveto(self.startpos + self.script_vector, time);
     self thread pack_gate_closed();
     level flag::wait_till("packapunch_hacked");
@@ -589,7 +589,7 @@ function pack_gate_activate() {
     if(self.classname == "script_brushmodel") {
       self connectpaths();
     }
-    self playSound("amb_teleporter_gate_start");
+    self playsound("amb_teleporter_gate_start");
     self moveto(self.startpos, time);
     self thread zm_blockers::door_solid_thread();
   }
@@ -598,10 +598,10 @@ function pack_gate_activate() {
 function pack_gate_closed() {
   self waittill("movedone");
   self.door_moving = undefined;
-  while(true) {
+  while (true) {
     players = getplayers();
     player_touching = 0;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       if(players[i] istouching(self)) {
         player_touching = 1;
         break;
@@ -619,12 +619,12 @@ function pack_gate_closed() {
 function moon_nml_bhb_present() {
   self endon("death");
   nml_bhb = undefined;
-  pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
+  pack_zombieland_poi = getentarray("zombieland_poi", "targetname");
   pack_enclosure = getent("pack_enclosure", "targetname");
-  while(!level flag::get("packapunch_hacked")) {
-    zombie_pois = getEntArray("zombie_poi", "script_noteworthy");
-    for(i = 0; i < zombie_pois.size; i++) {
-      if(isDefined(zombie_pois[i].targetname) && zombie_pois[i].targetname == "zm_bhb") {
+  while (!level flag::get("packapunch_hacked")) {
+    zombie_pois = getentarray("zombie_poi", "script_noteworthy");
+    for (i = 0; i < zombie_pois.size; i++) {
+      if(isdefined(zombie_pois[i].targetname) && zombie_pois[i].targetname == "zm_bhb") {
         if(moon_zmb_and_bhb_touching_trig(zombie_pois[i])) {
           nml_bhb = zombie_pois[i];
           self zm_utility::remove_poi_from_ignore_list(nml_bhb);
@@ -633,16 +633,16 @@ function moon_nml_bhb_present() {
         self zm_utility::add_poi_to_ignore_list(zombie_pois[i]);
       }
     }
-    if(isDefined(nml_bhb)) {
+    if(isdefined(nml_bhb)) {
       self notify("nml_bhb");
-      for(j = 0; j < pack_zombieland_poi.size; j++) {
+      for (j = 0; j < pack_zombieland_poi.size; j++) {
         self zm_utility::add_poi_to_ignore_list(pack_zombieland_poi[j]);
       }
     } else {
       wait(0.1);
       continue;
     }
-    while(isDefined(nml_bhb)) {
+    while (isdefined(nml_bhb)) {
       wait(0.1);
     }
     self thread switch_between_zland_poi();
@@ -653,14 +653,14 @@ function moon_nml_bhb_present() {
 
 function moon_zmb_and_bhb_touching_trig(ent_bhb) {
   self endon("death");
-  if(!isDefined(ent_bhb)) {
+  if(!isdefined(ent_bhb)) {
     return false;
   }
   pack_trig = getent("pack_enclosure", "targetname");
-  if(self istouching(pack_trig) && isDefined(ent_bhb) && ent_bhb istouching(pack_trig)) {
+  if(self istouching(pack_trig) && isdefined(ent_bhb) && ent_bhb istouching(pack_trig)) {
     return true;
   }
-  if(!self istouching(pack_trig) && isDefined(ent_bhb) && !ent_bhb istouching(pack_trig)) {
+  if(!self istouching(pack_trig) && isdefined(ent_bhb) && !ent_bhb istouching(pack_trig)) {
     return true;
   }
   return false;
@@ -668,18 +668,18 @@ function moon_zmb_and_bhb_touching_trig(ent_bhb) {
 
 function moon_zombieland_ignore_poi() {
   self endon("death");
-  nml_poi_array = getEntArray("zombieland_poi", "targetname");
-  if(isDefined(self._zmbl_ignore) && self._zmbl_ignore) {
+  nml_poi_array = getentarray("zombieland_poi", "targetname");
+  if(isdefined(self._zmbl_ignore) && self._zmbl_ignore) {
     return;
   }
   self._zmbl_ignore = 1;
-  for(i = 0; i < nml_poi_array.size; i++) {
+  for (i = 0; i < nml_poi_array.size; i++) {
     self zm_utility::add_poi_to_ignore_list(nml_poi_array[i]);
   }
-  while(!level flag::get("packapunch_hacked")) {
-    bhb_bomb = getEntArray("zm_bhb", "targetname");
-    if(isDefined(bhb_bomb)) {
-      for(w = 0; w < bhb_bomb.size; w++) {
+  while (!level flag::get("packapunch_hacked")) {
+    bhb_bomb = getentarray("zm_bhb", "targetname");
+    if(isdefined(bhb_bomb)) {
+      for (w = 0; w < bhb_bomb.size; w++) {
         if(!moon_zmb_and_bhb_touching_trig(bhb_bomb[w])) {
           self zm_utility::add_poi_to_ignore_list(bhb_bomb[w]);
         }
@@ -687,7 +687,7 @@ function moon_zombieland_ignore_poi() {
     }
     wait(0.1);
   }
-  for(x = 0; x < nml_poi_array.size; x++) {
+  for (x = 0; x < nml_poi_array.size; x++) {
     self zm_utility::remove_poi_from_ignore_list(nml_poi_array[x]);
   }
 }
@@ -715,13 +715,13 @@ function register_clientfields() {
   clientfield::register("world", "show_earth", 21000, 1, "counter");
   clientfield::register("world", "show_destroyed_earth", 21000, 1, "counter");
   clientfield::register("world", "hide_earth", 21000, 1, "counter");
-  if(isDefined(level.var_6225e4bb) && level.var_6225e4bb > 0) {
+  if(isdefined(level.var_6225e4bb) && level.var_6225e4bb > 0) {
     clientfield::register("actor", "astro_name_index", 21000, getminbitcountfornum(level.var_6225e4bb + 1), "int");
   }
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int");
   clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadDown_HackTool", 21000, 1, "int");
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++) {
     clientfield::register("world", ("player" + i) + "wearableItem", 21000, 1, "int");
   }
   clientfield::register("world", "BIO", 21000, 1, "int");
@@ -743,16 +743,16 @@ function register_clientfields() {
 function moon_round_think_func(restart = 0) {
   println("");
   level endon("end_round_think");
-  if(!(isDefined(restart) && restart)) {
-    if(isDefined(level.initial_round_wait_func)) {
+  if(!(isdefined(restart) && restart)) {
+    if(isdefined(level.initial_round_wait_func)) {
       [
         [level.initial_round_wait_func]
       ]();
     }
-    if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
+    if(!(isdefined(level.host_ended_game) && level.host_ended_game)) {
       players = getplayers();
       foreach(player in players) {
-        if(!(isDefined(player.hostmigrationcontrolsfrozen) && player.hostmigrationcontrolsfrozen)) {
+        if(!(isdefined(player.hostmigrationcontrolsfrozen) && player.hostmigrationcontrolsfrozen)) {
           player freezecontrols(0);
           println("");
         }
@@ -761,7 +761,7 @@ function moon_round_think_func(restart = 0) {
     }
   }
   setroundsplayed(level.round_number);
-  for(;;) {
+  for (;;) {
     maxreward = 50 * level.round_number;
     if(maxreward > 500) {
       maxreward = 500;
@@ -774,9 +774,9 @@ function moon_round_think_func(restart = 0) {
       level thread zm::play_level_start_vox_delayed();
       wait(3);
     } else {
-      if(!(isDefined(level.var_d2b6176f) && level.var_d2b6176f)) {
+      if(!(isdefined(level.var_d2b6176f) && level.var_d2b6176f)) {
         level.var_d2b6176f = 1;
-      } else if(isDefined(level.on_the_moon) && level.on_the_moon) {
+      } else if(isdefined(level.on_the_moon) && level.on_the_moon) {
         if(level.round_number <= 5) {
           level thread zm_audio::sndmusicsystem_playstate("round_start");
         } else {
@@ -786,19 +786,19 @@ function moon_round_think_func(restart = 0) {
     }
     zm::round_one_up();
     players = getplayers();
-    array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
-    if(!(isDefined(level.headshots_only) && level.headshots_only) && (!(isDefined(restart) && restart))) {
+    array::thread_all(players, & zm_blockers::rebuild_barrier_reward_reset);
+    if(!(isdefined(level.headshots_only) && level.headshots_only) && (!(isdefined(restart) && restart))) {
       if(!level flag::get("teleporter_used") || level.first_round == 1) {
         level thread zm::award_grenades_for_survivors();
       }
     }
     println((("" + level.round_number) + "") + players.size);
     level.round_start_time = gettime();
-    while(level.zm_loc_types["zombie_location"].size <= 0) {
+    while (level.zm_loc_types["zombie_location"].size <= 0) {
       wait(0.1);
     }
     zkeys = getarraykeys(level.zones);
-    for(i = 0; i < zkeys.size; i++) {
+    for (i = 0; i < zkeys.size; i++) {
       zonename = zkeys[i];
       level.zones[zonename].round_spawn_count = 0;
     }
@@ -807,10 +807,10 @@ function moon_round_think_func(restart = 0) {
     recordzombieroundstart();
     bb::logroundevent("start_of_round");
     players = getplayers();
-    for(index = 0; index < players.size; index++) {
+    for (index = 0; index < players.size; index++) {
       players[index] zm::recordroundstartstats();
     }
-    if(isDefined(level.round_start_custom_func)) {
+    if(isdefined(level.round_start_custom_func)) {
       [
         [level.round_start_custom_func]
       ]();
@@ -821,8 +821,10 @@ function moon_round_think_func(restart = 0) {
         level.zombie_total = level.prev_round_zombies;
       }
     }
-    [[level.round_wait_func]]();
-    if(level.on_the_moon && (!(isDefined(level._from_nml) && level._from_nml) || level.first_round)) {
+    [
+      [level.round_wait_func]
+    ]();
+    if(level.on_the_moon && (!(isdefined(level._from_nml) && level._from_nml) || level.first_round)) {
       zm_powerups::powerup_round_start();
     }
     level.first_round = 0;
@@ -832,17 +834,17 @@ function moon_round_think_func(restart = 0) {
     uploadstats();
     players = getplayers();
     if(!level flag::get("teleporter_used")) {
-      if(isDefined(level.on_the_moon) && level.on_the_moon) {
+      if(isdefined(level.on_the_moon) && level.on_the_moon) {
         level thread zm_audio::sndmusicsystem_playstate("round_end");
       }
-      if(isDefined(level.no_end_game_check) && level.no_end_game_check) {
+      if(isdefined(level.no_end_game_check) && level.no_end_game_check) {
         level thread zm::last_stand_revive();
         level thread zm::spectators_respawn();
       } else if(1 != players.size) {
         level thread zm::spectators_respawn();
       }
     }
-    if(isDefined(level.round_end_custom_logic)) {
+    if(isdefined(level.round_end_custom_logic)) {
       [
         [level.round_end_custom_logic]
       ]();
@@ -853,7 +855,7 @@ function moon_round_think_func(restart = 0) {
       }
     }
     players = getplayers();
-    array::thread_all(players, &zm_pers_upgrades_system::round_end);
+    array::thread_all(players, & zm_pers_upgrades_system::round_end);
     if(((int(level.round_number / 5)) * 5) == level.round_number) {
       level clientfield::set("round_complete_time", int(((level.time - level.n_gameplay_start_time) + 500) / 1000));
       level clientfield::set("round_complete_num", level.round_number);
@@ -883,10 +885,10 @@ function moon_round_think_func(restart = 0) {
       player zm_stats::set_global_stat("rounds", zm::get_round_number());
       player zm_stats::update_playing_utc_time(matchutctime);
       player zm_perks::perk_set_max_health_if_jugg("health_reboot", 1, 1);
-      for(i = 0; i < 4; i++) {
+      for (i = 0; i < 4; i++) {
         player.number_revives_per_round[i] = 0;
       }
-      if(isalive(player) && player.sessionstate != "spectator" && (!(isDefined(level.skip_alive_at_round_end_xp) && level.skip_alive_at_round_end_xp))) {
+      if(isalive(player) && player.sessionstate != "spectator" && (!(isdefined(level.skip_alive_at_round_end_xp) && level.skip_alive_at_round_end_xp))) {
         player zm_stats::increment_challenge_stat("SURVIVALIST_SURVIVE_ROUNDS");
         score_number = zm::get_round_number() - 1;
         if(score_number < 1) {
@@ -897,7 +899,7 @@ function moon_round_think_func(restart = 0) {
         scoreevents::processscoreevent("alive_at_round_end_" + score_number, player);
       }
     }
-    if(isDefined(level.check_quickrevive_hotjoin)) {
+    if(isdefined(level.check_quickrevive_hotjoin)) {
       [
         [level.check_quickrevive_hotjoin]
       ]();
@@ -958,11 +960,13 @@ function selectcharacterindextouse() {
 }
 
 function givecustomcharacters() {
-  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_farmgirl_viewhands")) {
+  if(isdefined(level.hotjoin_player_setup) && [
+      [level.hotjoin_player_setup]
+    ]("c_zom_farmgirl_viewhands")) {
     return;
   }
   self detachall();
-  if(!isDefined(self.characterindex)) {
+  if(!isdefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
   }
   self.favorite_wall_weapons_list = [];
@@ -1023,7 +1027,7 @@ function assign_lowest_unused_character_index() {
   }
   n_characters_defined = 0;
   foreach(player in players) {
-    if(isDefined(player.characterindex)) {
+    if(isdefined(player.characterindex)) {
       arrayremovevalue(charindexarray, player.characterindex, 0);
       n_characters_defined++;
     }
@@ -1036,7 +1040,7 @@ function assign_lowest_unused_character_index() {
 
 function function_5c35365f(players) {
   foreach(player in players) {
-    if(isDefined(player.characterindex) && player.characterindex == 2) {
+    if(isdefined(player.characterindex) && player.characterindex == 2) {
       return true;
     }
   }
@@ -1112,7 +1116,7 @@ function moon_offhand_weapon_overrride() {
 
 function offhand_weapon_give_override(str_weapon) {
   self endon("death");
-  if(zm_utility::is_tactical_grenade(str_weapon) && isDefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
+  if(zm_utility::is_tactical_grenade(str_weapon) && isdefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
     self setweaponammoclip(self zm_utility::get_player_tactical_grenade(), 0);
     self takeweapon(self zm_utility::get_player_tactical_grenade());
   }
@@ -1148,7 +1152,7 @@ function delayed_poweron_vox() {
   self endon("death");
   self endon("disconnect");
   wait(4);
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self thread zm_audio::create_and_play_dialog("general", "poweron");
   }
 }
@@ -1159,7 +1163,7 @@ function wait_for_power() {
   playsoundatposition("zmb_switch_flip", var_cf413835.origin);
   level notify("electric_door");
   level scene::play("power_switch", "targetname");
-  playFX(level._effect["switch_sparks"], struct::get("elec_switch_fx", "targetname").origin);
+  playfx(level._effect["switch_sparks"], struct::get("elec_switch_fx", "targetname").origin);
 }
 
 function moon_devgui(cmd) {
@@ -1167,9 +1171,9 @@ function moon_devgui(cmd) {
   switch (cmd_strings[0]) {
     case "": {
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         entnum = players[i].characterindex;
-        if(isDefined(players[i].zm_random_char)) {
+        if(isdefined(players[i].zm_random_char)) {
           entnum = players[i].zm_random_char;
         }
         if(entnum == 2) {
@@ -1188,7 +1192,7 @@ function moon_devgui(cmd) {
           player notify("starting_quantum_bomb");
         }
       }
-      array::thread_all(getplayers(), &zm_weap_black_hole_bomb::player_give_black_hole_bomb);
+      array::thread_all(getplayers(), & zm_weap_black_hole_bomb::player_give_black_hole_bomb);
       break;
     }
     case "": {
@@ -1200,12 +1204,12 @@ function moon_devgui(cmd) {
           player notify("starting_black_hole_bomb");
         }
       }
-      array::thread_all(getplayers(), &zm_weap_quantum_bomb::player_give_quantum_bomb);
+      array::thread_all(getplayers(), & zm_weap_quantum_bomb::player_give_quantum_bomb);
       break;
     }
     case "": {
       trigger = getent("", "");
-      if(!isDefined(trigger)) {
+      if(!isdefined(trigger)) {
         return;
       }
       iprintln("");
@@ -1215,7 +1219,7 @@ function moon_devgui(cmd) {
     case "": {
       players = getplayers();
       teleporter = getent("", "");
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] setorigin(teleporter.origin);
       }
       break;
@@ -1242,19 +1246,19 @@ function moon_devgui(cmd) {
       spawnername = undefined;
       spawnername = "";
       direction = player getplayerangles();
-      direction_vec = anglesToForward(direction);
-      eye = player getEye();
+      direction_vec = anglestoforward(direction);
+      eye = player geteye();
       scale = 8000;
       direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-      trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
+      trace = bullettrace(eye, eye + direction_vec, 0, undefined);
       guy = undefined;
-      spawners = getEntArray(spawnername, "");
+      spawners = getentarray(spawnername, "");
       spawner = spawners[0];
-      if(isDefined(level.astro_zombie_spawners)) {
+      if(isdefined(level.astro_zombie_spawners)) {
         spawner = level.astro_zombie_spawners[0];
       }
       guy = zombie_utility::spawn_zombie(spawner);
-      if(isDefined(guy)) {
+      if(isdefined(guy)) {
         guy.script_string = "";
         wait(0.5);
         guy forceteleport(trace[""], player.angles + vectorscale((0, 1, 0), 180));
@@ -1308,10 +1312,10 @@ function setup_water_physics() {
 
 function cliff_fall_death() {
   trig = getent("cliff_fall_death", "targetname");
-  if(isDefined(trig)) {
-    while(true) {
+  if(isdefined(trig)) {
+    while (true) {
       trig waittill("trigger", who);
-      if(!(isDefined(who.insta_killed) && who.insta_killed)) {
+      if(!(isdefined(who.insta_killed) && who.insta_killed)) {
         who thread insta_kill_player();
       }
     }
@@ -1320,7 +1324,7 @@ function cliff_fall_death() {
 
 function insta_kill_player() {
   self endon("disconnect");
-  if(isDefined(self.insta_killed) && self.insta_killed) {
+  if(isdefined(self.insta_killed) && self.insta_killed) {
     return;
   }
   if(is_player_killable(self)) {
@@ -1330,11 +1334,11 @@ function insta_kill_player() {
       in_last_stand = 1;
     }
     if(level flag::get("solo_game")) {
-      if(isDefined(self.lives) && self.lives > 0) {
+      if(isdefined(self.lives) && self.lives > 0) {
         self.waiting_to_revive = 1;
         if(level flag::get("both_tunnels_breached")) {
           point = moon_digger_respawn(self);
-          if(!isDefined(point)) {
+          if(!isdefined(point)) {
             points = struct::get("bridge_zone", "script_noteworthy");
             spawn_points = struct::get_array(points.target, "targetname");
             num = self.characterindex;
@@ -1376,7 +1380,7 @@ function insta_kill_player() {
 function moon_respawn_override(player) {
   if(level flag::get("both_tunnels_breached")) {
     point = moon_digger_respawn(player);
-    if(isDefined(point)) {
+    if(isdefined(point)) {
       self notify("one_giant_leap");
       return point;
     }
@@ -1387,7 +1391,7 @@ function moon_respawn_override(player) {
 }
 
 function is_player_killable(player, checkignoremeflag) {
-  if(!isDefined(player)) {
+  if(!isdefined(player)) {
     return false;
   }
   if(!isalive(player)) {
@@ -1405,7 +1409,7 @@ function is_player_killable(player, checkignoremeflag) {
   if(player isnotarget()) {
     return false;
   }
-  if(isDefined(checkignoremeflag) && player.ignoreme) {
+  if(isdefined(checkignoremeflag) && player.ignoreme) {
     return false;
   }
   return true;
@@ -1414,10 +1418,10 @@ function is_player_killable(player, checkignoremeflag) {
 function moon_digger_respawn(revivee) {
   spawn_points = struct::get_array("player_respawn_point", "targetname");
   if(level.zones["airlock_west2_zone"].is_enabled) {
-    for(i = 0; i < spawn_points.size; i++) {
+    for (i = 0; i < spawn_points.size; i++) {
       if(spawn_points[i].script_noteworthy == "airlock_west2_zone") {
         spawn_array = struct::get_array(spawn_points[i].target, "targetname");
-        for(j = 0; j < spawn_array.size; j++) {
+        for (j = 0; j < spawn_array.size; j++) {
           if(spawn_array[j].script_int == (revivee.entity_num + 1)) {
             return spawn_array[j];
           }
@@ -1426,10 +1430,10 @@ function moon_digger_respawn(revivee) {
       }
     }
   } else if(level.zones["airlock_east2_zone"].is_enabled) {
-    for(i = 0; i < spawn_points.size; i++) {
+    for (i = 0; i < spawn_points.size; i++) {
       if(spawn_points[i].script_noteworthy == "airlock_east2_zone") {
         spawn_array = struct::get_array(spawn_points[i].target, "targetname");
-        for(j = 0; j < spawn_array.size; j++) {
+        for (j = 0; j < spawn_array.size; j++) {
           if(spawn_array[j].script_int == (revivee.entity_num + 1)) {
             return spawn_array[j];
           }
@@ -1458,9 +1462,9 @@ function blackhole_bomb_area_check() {
       final_structs = black_hole_teleport_structs;
       discarded_zones = [];
       all_players = getplayers();
-      all_zones = getEntArray("player_volume", "script_noteworthy");
+      all_zones = getentarray("player_volume", "script_noteworthy");
       players_touching = 0;
-      for(x = 0; x < all_zones.size; x++) {
+      for (x = 0; x < all_zones.size; x++) {
         switch (all_zones[x].targetname) {
           case "airlock_bridge_zone":
           case "airlock_east_zone":
@@ -1471,10 +1475,10 @@ function blackhole_bomb_area_check() {
           case "cata_right_start_zone":
           case "water_zone": {
             discarded_zones[discarded_zones.size] = all_zones[x];
-            for(i = 0; i < all_players.size; i++) {
+            for (i = 0; i < all_players.size; i++) {
               player = all_players[i];
               equipment = player zm_equipment::get_player_equipment();
-              if(isDefined(equipment) && equipment == "equip_hacker_zm") {
+              if(isdefined(equipment) && equipment == "equip_hacker_zm") {
                 org delete();
                 return black_hole_teleport_structs;
                 continue;
@@ -1494,8 +1498,8 @@ function blackhole_bomb_area_check() {
         all_players_trapped = 1;
       }
       if(all_players_trapped) {
-        for(i = 0; i < black_hole_teleport_structs.size; i++) {
-          for(x = 0; x < discarded_zones.size; x++) {
+        for (i = 0; i < black_hole_teleport_structs.size; i++) {
+          for (x = 0; x < discarded_zones.size; x++) {
             org.origin = black_hole_teleport_structs[i].origin;
             if(org istouching(discarded_zones[x])) {
               arrayremovevalue(final_structs, black_hole_teleport_structs[i]);
@@ -1515,18 +1519,18 @@ function blackhole_bomb_area_check() {
 }
 
 function get_blackholebomb_destination_point(black_hole_teleport_structs, ent_player) {
-  player_zones = getEntArray("player_volume", "script_noteworthy");
+  player_zones = getentarray("player_volume", "script_noteworthy");
   valid_struct = undefined;
   scr_org = undefined;
-  for(x = 0; x < black_hole_teleport_structs.size; x++) {
-    if(!isDefined(scr_org)) {
+  for (x = 0; x < black_hole_teleport_structs.size; x++) {
+    if(!isdefined(scr_org)) {
       scr_org = spawn("script_origin", black_hole_teleport_structs[x].origin + vectorscale((0, 0, 1), 40));
     } else {
       scr_org.origin = black_hole_teleport_structs[x].origin + vectorscale((0, 0, 1), 40);
     }
-    for(i = 0; i < player_zones.size; i++) {
+    for (i = 0; i < player_zones.size; i++) {
       if(scr_org istouching(player_zones[i])) {
-        if(isDefined(level.zones[player_zones[i].targetname]) && (isDefined(level.zones[player_zones[i].targetname].is_enabled) && level.zones[player_zones[i].targetname].is_enabled)) {
+        if(isdefined(level.zones[player_zones[i].targetname]) && (isdefined(level.zones[player_zones[i].targetname].is_enabled) && level.zones[player_zones[i].targetname].is_enabled)) {
           if(level flag::get("enter_nml")) {
             valid_struct = black_hole_teleport_structs[x];
             scr_org delete();
@@ -1553,7 +1557,7 @@ function blackhole_bomb_in_invalid_area(grenade, model, player) {
 }
 
 function quantum_bomb_prevent_player_getting_teleported_override(position) {
-  if(isDefined(self._padded) && self._padded) {
+  if(isdefined(self._padded) && self._padded) {
     return true;
   }
   return false;
@@ -1565,20 +1569,20 @@ function moon_perk_lost(perk) {
 
 function moon_black_hole_bomb_poi() {
   astro = getent("astronaut_zombie_ai", "targetname");
-  if(isDefined(astro)) {
+  if(isdefined(astro)) {
     astro zm_utility::add_poi_to_ignore_list(self);
   }
 }
 
 function moon_bhb_poi_control() {
   self endon("death");
-  moon_pois = getEntArray("zombie_poi", "script_noteworthy");
+  moon_pois = getentarray("zombie_poi", "script_noteworthy");
   pack_enclosure = getent("pack_enclosure", "targetname");
-  if(!isDefined(moon_pois) || moon_pois.size == 0) {
+  if(!isdefined(moon_pois) || moon_pois.size == 0) {
     return undefined;
   }
-  for(i = 0; i < moon_pois.size; i++) {
-    if(isDefined(moon_pois[i].targetname) && moon_pois[i].targetname == "zm_bhb") {
+  for (i = 0; i < moon_pois.size; i++) {
+    if(isdefined(moon_pois[i].targetname) && moon_pois[i].targetname == "zm_bhb") {
       if(!level flag::get("packapunch_hacked")) {
         return undefined;
       }
@@ -1595,17 +1599,17 @@ function moon_bhb_choice(ent_poi) {
   bhb_position = [];
   bhb_position[0] = zm_utility::groundpos(ent_poi.origin + vectorscale((0, 0, 1), 100));
   bhb_position[1] = self;
-  if(isDefined(ent_poi.initial_attract_func)) {
+  if(isdefined(ent_poi.initial_attract_func)) {
     self thread[[ent_poi.initial_attract_func]](ent_poi);
   }
-  if(isDefined(ent_poi.arrival_attract_func)) {
+  if(isdefined(ent_poi.arrival_attract_func)) {
     self thread[[ent_poi.arrival_attract_func]](ent_poi);
   }
   return bhb_position;
 }
 
 function override_quad_explosion(quad) {
-  if(isDefined(quad.in_low_gravity) && quad.in_low_gravity == 1) {
+  if(isdefined(quad.in_low_gravity) && quad.in_low_gravity == 1) {
     quad.can_explode = 0;
   }
 }
@@ -1680,8 +1684,8 @@ function setupmusic() {
 }
 
 function function_35a61719() {
-  var_93997cd = getEntArray("airlock_biodome_zone", "script_parameters");
-  var_66cca975 = getEntArray("airlock_labs_2_biodome", "script_parameters");
+  var_93997cd = getentarray("airlock_biodome_zone", "script_parameters");
+  var_66cca975 = getentarray("airlock_labs_2_biodome", "script_parameters");
   var_93997cd = arraycombine(var_93997cd, var_66cca975, 0, 0);
   foreach(var_1cec30db in var_93997cd) {
     switch (var_1cec30db.script_int) {
@@ -1699,7 +1703,7 @@ function function_35a61719() {
 
 function function_cc87f235(player) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(e_who == player) {
       player clientfield::set_to_player("biodome_exploder", 1);
@@ -1710,7 +1714,7 @@ function function_cc87f235(player) {
 
 function function_ff7d5f3b(player) {
   self endon("death");
-  while(true) {
+  while (true) {
     self waittill("trigger", e_who);
     if(e_who == player) {
       player clientfield::set_to_player("biodome_exploder", 0);
@@ -1722,18 +1726,18 @@ function function_ff7d5f3b(player) {
 function function_54bf648f() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = &function_54da140a;
+  level.fn_custom_zombie_spawner_selection = & function_54da140a;
 }
 
 function function_54da140a() {
   var_6af221a2 = [];
   a_s_spots = level.zm_loc_types["zombie_location"];
-  if(isDefined(level.zm_loc_types["quad_location"])) {
+  if(isdefined(level.zm_loc_types["quad_location"])) {
     a_s_spots = arraycombine(a_s_spots, level.zm_loc_types["quad_location"], 0, 0);
   }
   a_s_spots = array::randomize(a_s_spots);
-  for(i = 0; i < a_s_spots.size; i++) {
-    if(!isDefined(a_s_spots[i].script_int)) {
+  for (i = 0; i < a_s_spots.size; i++) {
+    if(!isdefined(a_s_spots[i].script_int)) {
       var_343b1937 = 1;
     } else {
       var_343b1937 = a_s_spots[i].script_int;
@@ -1741,7 +1745,7 @@ function function_54da140a() {
     var_c15b2128 = [];
     foreach(sp_zombie in level.zombie_spawners) {
       if(sp_zombie.script_int == var_343b1937) {
-        if(!isDefined(var_c15b2128)) {
+        if(!isdefined(var_c15b2128)) {
           var_c15b2128 = [];
         } else if(!isarray(var_c15b2128)) {
           var_c15b2128 = array(var_c15b2128);
@@ -1754,11 +1758,11 @@ function function_54da140a() {
       return sp_zombie;
     }
   }
-  assert(isDefined(sp_zombie), "" + var_343b1937);
+  assert(isdefined(sp_zombie), "" + var_343b1937);
 }
 
 function spare_change() {
-  a_t_audio = getEntArray("audio_bump_trigger", "targetname");
+  a_t_audio = getentarray("audio_bump_trigger", "targetname");
   foreach(t_audio_bump in a_t_audio) {
     if(t_audio_bump.script_sound === "zmb_perks_bump_bottle" && t_audio_bump.script_string != "speedcola_perk") {
       t_audio_bump thread zm_perks::check_for_change();

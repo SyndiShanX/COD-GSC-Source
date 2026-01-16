@@ -25,14 +25,16 @@ main(model, type) {
   build_life(999, 500, 1500);
   build_team("allies");
   build_compassicon("automobile", false);
+
 }
 
 init_local() {
   model = spawn("script_model", (0, 0, 0));
-  model setModel("vehicle_m60a1_bridge");
+  model setmodel("vehicle_m60a1_bridge");
   model linkto(self, "tag_bridge_attach", (0, 0, 0), (0, 0, 0));
   self.bridge_model = model;
 }
+
 
 /*QUAKED script_vehicle_bridge_layer (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

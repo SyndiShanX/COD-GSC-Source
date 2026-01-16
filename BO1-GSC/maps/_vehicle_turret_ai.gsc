@@ -37,7 +37,7 @@ disable_turret(turret_index) {
 init_turret_info() {
   self.turret_ai_array = [];
   for(i = 0; i < 4; i++) {
-    self.turret_ai_array[i] = spawnStruct();
+    self.turret_ai_array[i] = spawnstruct();
     self.turret_ai_array[i].enabled = false;
     self.turret_ai_array[i].target_ent = undefined;
     fire_angles = undefined;
@@ -86,7 +86,7 @@ fire_turret_for_time(turret_index, time) {
     self.sound_ent Delete();
     self notify("stop_audio_delete");
     if(isDefined(alias2)) {
-      self playSound(alias2);
+      self playsound(alias2);
     }
   }
 }
@@ -238,7 +238,7 @@ burst_fire(turret_index, bullet_count, interval) {
 burst_fire_rebirthbtr(turret_index, bullet_count, interval) {
   for(i = 0; i < bullet_count; i++) {
     self fireGunnerWeapon(turret_index);
-    self playSound("wpn_china_lake_fire_npc");
+    self playsound("wpn_china_lake_fire_npc");
     wait interval;
   }
 }
@@ -286,9 +286,8 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
       best_target = undefined;
       fov = GetDvarFloat(#"cg_fov");
       for(i = 0; i < ai.size; i++) {
-        if(target_isincircle(ai[i], driver, fov, target_radius)) {
+        if(target_isincircle(ai[i], driver, fov, target_radius))
           best_target = ai[i];
-        }
       }
       if(isDefined(driver_turret)) {
         if(isDefined(best_target)) {

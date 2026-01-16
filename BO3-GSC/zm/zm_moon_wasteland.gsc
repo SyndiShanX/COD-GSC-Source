@@ -30,12 +30,12 @@ function init_no_mans_land() {
   level flag::init("start_supersprint");
   level flag::init("between_rounds");
   level flag::init("teleported_to_nml");
-  var_cd70fc20 = getEntArray("nml_area1_spawners", "targetname");
-  var_3f786b5b = getEntArray("nml_area2_spawners", "targetname");
-  array::thread_all(var_cd70fc20, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
-  array::thread_all(var_cd70fc20, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
-  array::thread_all(var_3f786b5b, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
-  array::thread_all(var_3f786b5b, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
+  var_cd70fc20 = getentarray("nml_area1_spawners", "targetname");
+  var_3f786b5b = getentarray("nml_area2_spawners", "targetname");
+  array::thread_all(var_cd70fc20, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
+  array::thread_all(var_cd70fc20, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
+  array::thread_all(var_3f786b5b, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
+  array::thread_all(var_3f786b5b, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
   level.on_the_moon = 0;
   level.ever_been_on_the_moon = 0;
   level.initial_spawn = 1;
@@ -72,7 +72,7 @@ function nml_dogs_init() {
 }
 
 function nml_setup_round_spawner() {
-  if(isDefined(level.round_number)) {
+  if(isdefined(level.round_number)) {
     if(level flag::get("between_rounds")) {
       level.nml_last_round = level.round_number + 1;
       level.prev_round_zombies = [
@@ -84,14 +84,14 @@ function nml_setup_round_spawner() {
   } else {
     level.nml_last_round = 1;
   }
-  level.round_spawn_func = &nml_round_manager;
+  level.round_spawn_func = & nml_round_manager;
   init_moon_nml_round(level.nml_last_round);
 }
 
 function num_players_touching_volume(volume) {
   players = getplayers();
   num_players_inside = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     ent = players[i];
     if(!isalive(ent) || !isplayer(ent) || ent.sessionstate == "spectator") {
       continue;
@@ -104,7 +104,7 @@ function num_players_touching_volume(volume) {
 }
 
 function check_players_in_nml_dogs_volume() {
-  while(true) {
+  while (true) {
     level.num_nml_dog_targets = num_players_touching_volume(self);
     wait(1.3);
   }
@@ -122,7 +122,7 @@ function init_hint_hudelem(x, y, alignx, aligny, fontscale, alpha) {
 
 function init_teleporter_message() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player.teleporter_message = function_25deb972(player);
     player.teleporter_message settext(&"NULL_EMPTY");
@@ -140,12 +140,12 @@ function set_teleporter_message(message) {}
 
 function init_moon_nml_round(target_round) {
   zombies = getaiarray();
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(isDefined(zombies[i].ignore_nml_delete) && zombies[i].ignore_nml_delete) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(isdefined(zombies[i].ignore_nml_delete) && zombies[i].ignore_nml_delete) {
         continue;
       }
-      if(isDefined(zombies[i].fx_quad_trail)) {
+      if(isdefined(zombies[i].fx_quad_trail)) {
         zombies[i].fx_quad_trail delete();
       }
       zombies[i] zombie_utility::reset_attack_spot();
@@ -165,8 +165,8 @@ function init_moon_nml_round(target_round) {
 
 function clear_nml_rounds() {
   level endon("restart_round");
-  while(isDefined(level.chalk_override)) {
-    if(isDefined(level.chalk_override)) {}
+  while (isdefined(level.chalk_override)) {
+    if(isdefined(level.chalk_override)) {}
     wait(1);
   }
 }
@@ -182,16 +182,16 @@ function resume_moon_rounds(target_round) {
   level notify("restart_round");
   level._from_nml = 1;
   zombies = getaispeciesarray(level.zombie_team, "all");
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(isDefined(zombies[i].ignore_nml_delete) && zombies[i].ignore_nml_delete) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(isdefined(zombies[i].ignore_nml_delete) && zombies[i].ignore_nml_delete) {
         continue;
       }
       if(zombies[i].isdog) {
         zombies[i] dodamage(zombies[i].health + 10, zombies[i].origin);
         continue;
       }
-      if(isDefined(zombies[i].fx_quad_trail)) {
+      if(isdefined(zombies[i].fx_quad_trail)) {
         zombies[i].fx_quad_trail delete();
       }
       zombies[i] zombie_utility::reset_attack_spot();
@@ -204,7 +204,7 @@ function resume_moon_rounds(target_round) {
 function nml_round_manager() {
   level endon("restart_round");
   level.dog_targets = getplayers();
-  for(i = 0; i < level.dog_targets.size; i++) {
+  for (i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
   }
   level.nml_start_time = gettime();
@@ -222,11 +222,11 @@ function nml_round_manager() {
   mode = "normal_spawning";
   area = 1;
   level thread nml_round_never_ends();
-  while(true) {
+  while (true) {
     current_time = gettime();
     wait_override = 0;
     zombies = getaispeciesarray(level.zombie_team, "all");
-    while(zombies.size >= max_zombies) {
+    while (zombies.size >= max_zombies) {
       zombies = getaispeciesarray(level.zombie_team, "all");
       wait(0.5);
     }
@@ -236,13 +236,13 @@ function nml_round_manager() {
           spawn_a_zombie(10, "nml_zone_spawner", 0.01, 1);
         } else {
           ai = spawn_a_zombie(max_zombies, "nml_zone_spawner", 0.01, 1);
-          if(isDefined(ai)) {
+          if(isdefined(ai)) {
             move_speed = "sprint";
             if(level flag::get("start_supersprint")) {
               move_speed = "super_sprint";
             }
             ai function_3eb8ebf9(move_speed);
-            if(isDefined(ai.pre_black_hole_bomb_run_combatanim)) {
+            if(isdefined(ai.pre_black_hole_bomb_run_combatanim)) {
               ai.pre_black_hole_bomb_run_combatanim = move_speed;
             }
           }
@@ -256,7 +256,7 @@ function nml_round_manager() {
       }
       case "preparing_spawn_wave": {
         zombies = getaispeciesarray(level.zombie_team);
-        for(i = 0; i < zombies.size; i++) {
+        for (i = 0; i < zombies.size; i++) {
           if(!zombies[i].missinglegs && zombies[i].animname == "zombie") {
             move_speed = "sprint";
             if(level flag::get("start_supersprint")) {
@@ -265,7 +265,7 @@ function nml_round_manager() {
             zombies[i] zombie_utility::set_zombie_run_cycle(move_speed);
             level.initial_spawn = 0;
             level notify("start_nml_ramp");
-            if(isDefined(zombies[i].pre_black_hole_bomb_run_combatanim)) {
+            if(isdefined(zombies[i].pre_black_hole_bomb_run_combatanim)) {
               zombies[i].pre_black_hole_bomb_run_combatanim = move_speed;
             }
           }
@@ -289,14 +289,14 @@ function nml_round_manager() {
         if(current_time < next_round_time) {
           if(randomfloatrange(0, 1) < 0.05) {
             ai = spawn_a_zombie(max_zombies, "nml_zone_spawner", 0.01, 1);
-            if(isDefined(ai)) {
+            if(isdefined(ai)) {
               ai.ignore_gravity = 1;
               move_speed = "sprint";
               if(level flag::get("start_supersprint")) {
                 move_speed = "super_sprint";
               }
               ai function_3eb8ebf9(move_speed);
-              if(isDefined(ai.pre_black_hole_bomb_run_combatanim)) {
+              if(isdefined(ai.pre_black_hole_bomb_run_combatanim)) {
                 ai.pre_black_hole_bomb_run_combatanim = move_speed;
               }
             }
@@ -340,8 +340,8 @@ function nml_round_manager() {
           if(dogs.size < num_dog_targets) {
             ai = zm_ai_dogs::special_dog_spawn();
             zombie_dogs = getaispeciesarray(level.zombie_team, "zombie_dog");
-            if(isDefined(zombie_dogs)) {
-              for(i = 0; i < zombie_dogs.size; i++) {
+            if(isdefined(zombie_dogs)) {
+              for (i = 0; i < zombie_dogs.size; i++) {
                 zombie_dogs[i].maxhealth = int(level.nml_dog_health);
                 zombie_dogs[i].health = int(level.nml_dog_health);
               }
@@ -361,8 +361,8 @@ function nml_round_manager() {
 function function_3eb8ebf9(move_speed) {
   self endon("death");
   time = gettime();
-  while(true) {
-    if(isDefined(self.zombie_init_done) && self.zombie_init_done) {
+  while (true) {
+    if(isdefined(self.zombie_init_done) && self.zombie_init_done) {
       break;
     }
     if(gettime() > (time + 500)) {
@@ -376,18 +376,18 @@ function function_3eb8ebf9(move_speed) {
 function nml_wave_attack(num_in_wave, var_c194e88d) {
   level endon("wave_attack_finished");
   level endon("restart_round");
-  while(true) {
+  while (true) {
     zombies = getaispeciesarray(level.zombie_team, "all");
     if(zombies.size < num_in_wave) {
       ai = spawn_a_zombie(num_in_wave, var_c194e88d, 0.01, 1);
-      if(isDefined(ai)) {
+      if(isdefined(ai)) {
         ai.ignore_gravity = 1;
         move_speed = "sprint";
         if(level flag::get("start_supersprint")) {
           move_speed = "super_sprint";
         }
         ai function_3eb8ebf9(move_speed);
-        if(isDefined(ai.pre_black_hole_bomb_run_combatanim)) {
+        if(isdefined(ai.pre_black_hole_bomb_run_combatanim)) {
           ai.pre_black_hole_bomb_run_combatanim = move_speed;
         }
       }
@@ -401,17 +401,17 @@ function spawn_a_zombie(max_zombies, var_c194e88d, wait_delay, ignoregravity) {
   if(zombies.size >= max_zombies) {
     return undefined;
   }
-  var_71aee853 = getEntArray("nml_zone_spawner", "targetname");
+  var_71aee853 = getentarray("nml_zone_spawner", "targetname");
   e_spawner = array::random(var_71aee853);
   var_50f2968b = struct::get_array(var_c194e88d, "targetname");
   s_spawn_loc = array::random(var_50f2968b);
   ai = zombie_utility::spawn_zombie(e_spawner, var_c194e88d, s_spawn_loc);
-  if(isDefined(ai)) {
-    if(isDefined(ignoregravity) && ignoregravity) {
+  if(isdefined(ai)) {
+    if(isdefined(ignoregravity) && ignoregravity) {
       ai.ignore_gravity = 1;
     }
-    if(isDefined(level.mp_side_step) && level.mp_side_step) {
-      ai.shouldsidestepfunc = &nml_shouldsidestep;
+    if(isdefined(level.mp_side_step) && level.mp_side_step) {
+      ai.shouldsidestepfunc = & nml_shouldsidestep;
       ai.sidestepanims = [];
     }
   }
@@ -422,7 +422,7 @@ function screen_shake_manager(next_round_time) {
   level endon("nml_attack_wave");
   level endon("restart_round");
   time = 0;
-  while(time < next_round_time) {
+  while (time < next_round_time) {
     level thread attack_wave_screen_shake();
     wait_time = randomfloatrange(0.25, 0.35);
     wait(wait_time);
@@ -434,7 +434,7 @@ function attack_wave_screen_shake() {
   num_valid = 0;
   players = getplayers();
   pos = (0, 0, 0);
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player)) {
       pos = pos + player.origin;
@@ -453,8 +453,8 @@ function attack_wave_screen_shake() {
 
 function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(high_rumble_range) && isdefined(low_rumble_range) && isdefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
@@ -478,11 +478,11 @@ function get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius)
   names[0] = vending_name;
   names[1] = "zombie_vending";
   ent_array = [];
-  for(i = 0; i < names.size; i++) {
-    ents = getEntArray(names[i], "targetname");
-    for(j = 0; j < ents.size; j++) {
+  for (i = 0; i < names.size; i++) {
+    ents = getentarray(names[i], "targetname");
+    for (j = 0; j < ents.size; j++) {
       ent = ents[j];
-      if(isDefined(ent.script_string) && ent.script_string == perk_script_string) {
+      if(isdefined(ent.script_string) && ent.script_string == perk_script_string) {
         if((abs(nml_pos[0] - ent.origin[0])) < nml_radius && (abs(nml_pos[1] - ent.origin[1])) < nml_radius && (abs(nml_pos[2] - ent.origin[2])) < nml_radius) {
           ent_array[ent_array.size] = ent;
         }
@@ -517,26 +517,26 @@ function perk_machines_hide(cola, jug, moving = 0) {
   if(moving) {
     level.speed_cola_ents[1] triggerenable(0);
     level.jugg_ents[1] triggerenable(0);
-    if(isDefined(level.speed_cola_ents[1].hackable)) {
+    if(isdefined(level.speed_cola_ents[1].hackable)) {
       zm_equip_hacker::deregister_hackable_struct(level.speed_cola_ents[1].hackable);
     }
-    if(isDefined(level.jugg_ents[1].hackable)) {
+    if(isdefined(level.jugg_ents[1].hackable)) {
       zm_equip_hacker::deregister_hackable_struct(level.jugg_ents[1].hackable);
     }
   } else {
     hackable = undefined;
     if(cola) {
       level.jugg_ents[1] triggerenable(1);
-      if(isDefined(level.jugg_ents[1].hackable)) {
+      if(isdefined(level.jugg_ents[1].hackable)) {
         hackable = level.jugg_ents[1].hackable;
       }
     } else {
       level.speed_cola_ents[1] triggerenable(1);
-      if(isDefined(level.speed_cola_ents[1].hackable)) {
+      if(isdefined(level.speed_cola_ents[1].hackable)) {
         hackable = level.speed_cola_ents[1].hackable;
       }
     }
-    zm_equip_hacker::register_pooled_hackable_struct(hackable, &zm_hackables_perks::perk_hack, &zm_hackables_perks::perk_hack_qualifier);
+    zm_equip_hacker::register_pooled_hackable_struct(hackable, & zm_hackables_perks::perk_hack, & zm_hackables_perks::perk_hack_qualifier);
   }
 }
 
@@ -566,7 +566,7 @@ function perk_machine_arrival_update() {
   wait(1);
   move_perk(top_height * -1, fall_time, 1.5);
   wait_step = fall_time / num_model_swaps;
-  for(i = 0; i < num_model_swaps; i++) {
+  for (i = 0; i < num_model_swaps; i++) {
     perk_machine_show_selected(perk_index, 1);
     wait(wait_step);
     perk_index++;
@@ -574,7 +574,7 @@ function perk_machine_arrival_update() {
       perk_index = 0;
     }
   }
-  while(perk_index == level.last_perk_index) {
+  while (perk_index == level.last_perk_index) {
     perk_index = randomintrange(0, 2);
   }
   level.last_perk_index = perk_index;
@@ -583,17 +583,17 @@ function perk_machine_arrival_update() {
 
 function perk_arrive_fx(pos) {
   wait(0.15);
-  playFX(level._effect["lightning_dog_spawn"], pos);
+  playfx(level._effect["lightning_dog_spawn"], pos);
   playsoundatposition("zmb_hellhound_bolt", pos);
   wait(1.1);
-  playFX(level._effect["lightning_dog_spawn"], pos);
+  playfx(level._effect["lightning_dog_spawn"], pos);
   playsoundatposition("zmb_hellhound_bolt", pos);
 }
 
 function nml_round_never_ends() {
   wait(2);
   level endon("restart_round");
-  while(level flag::get("enter_nml")) {
+  while (level flag::get("enter_nml")) {
     zombies = getaispeciesarray(level.zombie_team, "all");
     if(zombies.size >= 2) {
       level.zombie_total = 100;
@@ -613,31 +613,31 @@ function nml_ramp_up_zombies() {
   self endon("stop_ramp");
   level waittill("start_nml_ramp");
   level.nml_timer = level.nml_last_round;
-  while(level flag::get("enter_nml")) {
+  while (level flag::get("enter_nml")) {
     if(!level.on_the_moon) {
       level.nml_timer++;
       level thread zm_utility::play_sound_2d("evt_nomans_warning");
       zombies = getaispeciesarray(level.zombie_team, "zombie");
-      for(i = 0; i < zombies.size; i++) {
-        if(zombies[i].health != level.zombie_health || (isDefined(zombies[i].gibbed) && zombies[i].gibbed) || (isDefined(zombies[i].head_gibbed) && zombies[i].head_gibbed)) {
+      for (i = 0; i < zombies.size; i++) {
+        if(zombies[i].health != level.zombie_health || (isdefined(zombies[i].gibbed) && zombies[i].gibbed) || (isdefined(zombies[i].head_gibbed) && zombies[i].head_gibbed)) {
           arrayremovevalue(zombies, zombies[i]);
         }
       }
       zombie_utility::ai_calculate_health(level.nml_timer);
-      for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i].gibbed) && zombies[i].gibbed || (isDefined(zombies[i].head_gibbed) && zombies[i].head_gibbed)) {
+      for (i = 0; i < zombies.size; i++) {
+        if(isdefined(zombies[i].gibbed) && zombies[i].gibbed || (isdefined(zombies[i].head_gibbed) && zombies[i].head_gibbed)) {
           continue;
         }
         zombies[i].health = level.zombie_health;
-        if(isDefined(level.mp_side_step) && level.mp_side_step) {
-          zombies[i].shouldsidestepfunc = &nml_shouldsidestep;
+        if(isdefined(level.mp_side_step) && level.mp_side_step) {
+          zombies[i].shouldsidestepfunc = & nml_shouldsidestep;
           zombies[i].sidestepanims = [];
         }
       }
       level thread nml_dog_health_increase();
       zombie_dogs = getaispeciesarray(level.zombie_team, "zombie_dog");
-      if(isDefined(zombie_dogs)) {
-        for(i = 0; i < zombie_dogs.size; i++) {
+      if(isdefined(zombie_dogs)) {
+        for (i = 0; i < zombie_dogs.size; i++) {
           zombie_dogs[i].maxhealth = int(level.nml_dog_health);
           zombie_dogs[i].health = int(level.nml_dog_health);
         }
@@ -681,7 +681,7 @@ function nml_cansidestep() {
   if((gettime() - self.a.lastsidesteptime) < level.nml_reaction_interval) {
     return false;
   }
-  if(!isDefined(self.enemy)) {
+  if(!isdefined(self.enemy)) {
     return false;
   }
   if(self.a.pose != "stand") {
@@ -694,7 +694,7 @@ function nml_cansidestep() {
   if(distsqfromenemy > level.nml_max_reaction_dist_sq) {
     return false;
   }
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < level.nml_min_reaction_dist_sq) {
+  if(!isdefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < level.nml_min_reaction_dist_sq) {
     return false;
   }
   if(abs(self getmotionangle()) > 15) {

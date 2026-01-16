@@ -55,18 +55,17 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++) {
-    positions[i] = spawnStruct();
-  }
+  for (i = 0; i < 1; i++)
+    positions[i] = spawnstruct();
 
   return positions;
 }
 
 playJetTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
+  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as 
+  //one effect. It can't be played in a wait loop like other effects because a geo trail is one 
   //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
-  playFXOnTag(level._effect["jettrail"], self, "TAG_JET_TRAIL");
+  playfxontag(level._effect["jettrail"], self, "TAG_JET_TRAIL");
 }
 
 plane_sound_node() {
@@ -91,7 +90,6 @@ fire_missile_node() {
 
   // advance to the next missile tag for the next shot
   other.nextMissileTag++;
-  if(other.nextMissileTag >= other.missileTags.size) {
+  if(other.nextMissileTag >= other.missileTags.size)
     other.nextMissileTag = 0;
-  }
 }

@@ -14,7 +14,7 @@
 #namespace zm_zod_ffotd;
 
 function main_start() {
-  level.custom_umbra_hotfix = &function_36b03ba5;
+  level.custom_umbra_hotfix = & function_36b03ba5;
 }
 
 function function_36b03ba5(localclientnum) {

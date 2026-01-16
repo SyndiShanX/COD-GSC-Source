@@ -82,7 +82,7 @@ player_init() {
 
 onPlayerConnect() {
   self endon("arcademode_complete");
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
   }
@@ -91,7 +91,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
   self endon("arcademode_complete");
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
     if(!isDefined(self.hud_scoreplusupdate)) {
       self.hud_scoreplusupdate = newScoreHudElem(self);
@@ -148,7 +148,7 @@ arcadeMode_checkpoint_save() {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] pSetDvar("current_restorable_points", 0);
     players[i] pSetDvar("previous_restorable_points", 0);
   }
@@ -161,7 +161,7 @@ arcadeMode_checkpoint_restore() {
   setsaveddvar("missionsuccessbar", "0");
   setsaveddvar("bonusbackground", "0");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setClientDvars("ui_hud_hardcore", 0);
     players[i] thread arcademode_kill_streak_reset(true);
     players[i] notify("update_plus_score");
@@ -187,9 +187,9 @@ arcadeMode_checkpoint_restore() {
       player_suicides_total = players[i] pGetIntDvar("player_suicides_total");
       minimumAllowedSuicides = getdvarint("arcademode_minimumAllowedSuicides");
       if((player_suicides_total + 1 == minimumAllowedSuicides) && (players[i] getentitynumber() != 0)) {
-        players[i] thread show_warning_message(7.0, &"SCRIPT_AM_SUICIDE_ONE_LAST_GO", 0);
+        players[i] thread show_warning_message(7.0, & "SCRIPT_AM_SUICIDE_ONE_LAST_GO", 0);
       } else {
-        players[i] thread show_warning_message(7.0, &"SCRIPT_AM_SUICIDE_COMMITED", 0);
+        players[i] thread show_warning_message(7.0, & "SCRIPT_AM_SUICIDE_COMMITED", 0);
       }
       players[i] pSetDvar("player_committed_suicide", 0);
     }
@@ -255,7 +255,7 @@ show_warning_message(time, message, y, player) {
 reduceTeamKillsOverTime() {
   timePerOneTeamkillReduction = 20.0;
   reductionPerSecond = 1.0 / timePerOneTeamkillReduction;
-  while(1) {
+  while (1) {
     if(isAlive(self)) {
       player_suicides_total = self pGetIntDvar("player_suicides_total");
       player_suicides_total -= reductionPerSecond;
@@ -276,7 +276,7 @@ minimumScoreProcessing(player) {
     } else if(level.arcademode_minimumAllowedWarning >= player.score &&
       level.arcademode_minimumAllowedPoints < player.score &&
       player.arcademode_warningShown == false) {
-      player thread show_warning_message(7.0, &"SCRIPT_AM_LOW_SCORE_WARNING", 30);
+      player thread show_warning_message(7.0, & "SCRIPT_AM_LOW_SCORE_WARNING", 30);
       player.arcademode_warningShown = true;
     } else if(player.score <= level.arcademode_minimumAllowedPoints) {
       ban(player getentitynumber());
@@ -498,9 +498,8 @@ arcademode_death(mod, hit_location, hit_origin, player, enemy, uberKillingMachin
     println("Warning: arcadeMode_add_points called on a non-player");
     return;
   }
-  if(!isDefined(hit_location)) {
+  if(!isDefined(hit_location))
     hit_location = "none";
-  }
   death_type = level.arcadeMode_deathtypes[mod];
   if(!isDefined(death_type)) {
     death_type = "none";
@@ -586,7 +585,7 @@ updatePlayers() {
   players = get_players();
   highestScore = players[0].score;
   highestPlayer = players[0];
-  for(i = 1; i < players.size; i++) {
+  for (i = 1; i < players.size; i++) {
     if(players[i].score > highestPlayer.score) {
       highestPlayer = players[i];
     }
@@ -601,9 +600,8 @@ updatePlayers() {
 
 round_up_to_ten(score) {
   new_score = int(score) - int(score) % 10;
-  if(new_score < score) {
+  if(new_score < score)
     new_score += 10;
-  }
   return new_score;
 }
 
@@ -622,7 +620,7 @@ updatePlusScoreHUD(amount) {
       self.hud_scoreplusupdate setValue(self.arcademode_updatePlusTotal);
       self.hud_scoreplusupdate.alpha = 0.85;
       self.hud_scoreplusupdate thread fontPulse(self);
-      self.hud_scoreplusupdate.label = &"SCRIPT_PLUS";
+      self.hud_scoreplusupdate.label = & "SCRIPT_PLUS";
       wait 1;
       self.hud_scoreplusupdate fadeOverTime(0.75);
       self.hud_scoreplusupdate.alpha = 0;
@@ -670,7 +668,7 @@ updateMutliScoreHUD(multi) {
     self.hud_scoremulti setValue(multi);
     self.hud_scoremulti.alpha = 0.85;
     self.hud_scoremulti thread fontPulse(self);
-    self.hud_scoremulti.label = &"SCRIPT_AM_X";
+    self.hud_scoremulti.label = & "SCRIPT_AM_X";
     self.hud_scoremulti.color = level.arcadeMode_streak_color[multi - 1];
     wait 2;
     self.hud_scoremulti fadeOverTime(0.75);
@@ -681,7 +679,7 @@ updateMutliScoreHUD(multi) {
 killStreakMonitor() {
   self endon("disconnect");
   self endon("arcademode_complete");
-  while(true) {
+  while (true) {
     wait(0.2);
     if(self getScoreMultiplier() != 1 && self.arcademode_ks_ends < gettime()) {
       self thread arcademode_kill_streak_reset(false);
@@ -775,7 +773,7 @@ arcadeMode_init_kill_streak_colors() {
   level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0);
   level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0);
   level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0);
-  for(i = 0; i < level.arcadeMode_streak_color.size; i++) {
+  for (i = 0; i < level.arcadeMode_streak_color.size; i++) {
     level.arcadeMode_streak_glow[i] = (level.arcadeMode_streak_color[i][0] * 0.35, level.arcadeMode_streak_color[i][1] * 0.35, level.arcadeMode_streak_color[i][2] * 0.35);
   }
   level.arcadeMode_streak_color[0] = level.color_cool_green_glow;
@@ -803,31 +801,29 @@ fontPulse(player) {
     player endon("disconnect");
   }
   scaleRange = self.maxFontScale - self.baseFontScale;
-  while(self.fontScale < self.maxFontScale) {
+  while (self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
     wait 0.05;
   }
-  while(self.fontScale > self.baseFontScale) {
+  while (self.fontScale > self.baseFontScale) {
     self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
     wait 0.05;
   }
 }
 
 arcademode_complete() {
-  if(getdvar("arcademode") != "1") {
+  if(getdvar("arcademode") != "1")
     return false;
-  }
   return flag("arcademode_complete");
 }
 
 arcadeMode_ends(level_index) {
-  if(flag("arcademode_complete")) {
+  if(flag("arcademode_complete"))
     return;
-  }
   flag_set("arcademode_complete");
   level notify("arcademode_complete");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!isAlive(players[i])) {
       return;
     }
@@ -840,13 +836,13 @@ arcadeMode_ends(level_index) {
     return;
   }
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] notify("vampire_end");
   }
   clientNotify("vampire_end");
   setSavedDvar("cg_drawOverheadNames", 0);
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] notify("arcademode_complete");
     players[i].hud_scoreplusupdate notify("arcademode_complete");
     players[i].hud_scoreminusupdate notify("arcademode_complete");
@@ -873,13 +869,13 @@ arcadeMode_ends(level_index) {
   arcademode_upload_highscore();
   fadeToBlack FadeOverTime(2.0);
   fadeToBlack.alpha = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] spawnIntermission();
   }
   wait(6.0);
   setsaveddvar("missionsuccessbar", "0");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] setClientDvars("ui_hud_hardcore", 0);
   }
   flag_set("arcademode_ending_complete");
@@ -915,7 +911,7 @@ setSpawnVariables() {
 
 default_onSpawnIntermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getEntArray(spawnpointname, "classname");
+  spawnpoints = getentarray(spawnpointname, "classname");
   spawnpoint = spawnPoints[0];
   if(isDefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -954,7 +950,7 @@ arcademode_upload_highscore() {
   assertEx(mission >= 0 && mission < 13, mission);
   if(isDefined(mission)) {
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       previousHighscore = players[i] getcurrentarcadehighscore(mission);
       currentHighscore = players[i].score;
       if(currentHighscore > previousHighscore) {
@@ -975,7 +971,7 @@ compile_bonus() {
   mostHeadshotsNum = players[0].headshots;
   mostHeadshots = [];
   mostHeadshots[0] = 0;
-  for(i = 1; i < players.size; i++) {
+  for (i = 1; i < players.size; i++) {
     if(players[i].downs < hardest2killNum) {
       hardest2killNum = players[i].downs;
       hardest2kill = [];
@@ -998,20 +994,20 @@ compile_bonus() {
       mostHeadshots[mostHeadshots.size] = i;
     }
   }
-  for(i = 0; i < hardest2kill.size; i++) {
+  for (i = 0; i < hardest2kill.size; i++) {
     if(players[hardest2kill[i]].score > 0) {
       players[hardest2kill[i]].hardest2kill = true;
     }
   }
   if(mostRevivesNum > 0) {
-    for(i = 0; i < mostRevives.size; i++) {
+    for (i = 0; i < mostRevives.size; i++) {
       if(players[mostrevives[i]].score > 0) {
         players[mostrevives[i]].mostrevives = true;
       }
     }
   }
   if(mostHeadshotsNum > 0) {
-    for(i = 0; i < mostHeadshots.size; i++) {
+    for (i = 0; i < mostHeadshots.size; i++) {
       if(players[mostheadshots[i]].score > 0) {
         players[mostheadshots[i]].mostheadshots = true;
       }
@@ -1051,14 +1047,14 @@ mission_bonus(level_index) {
   hud_missionscore = new_levelend_hud("center", "left", 2.5, -125, missionScoreYpos, fade_in_time);
   hud_missionscore settext(&"SCRIPT_AM_MISSION_SCORE");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].hud_missionscorevalue = players[i] new_levelend_hud("center", "right", 2.5, 125, missionScoreYpos, fade_in_time, players[i]);
     players[i].hud_missionscorevalue.color = (1, 0.85, 0);
     players[i].hud_missionscorevalue setvalue(players[i].score);
     players[i].hud_missionscorevalue.score = players[i].score;
   }
   compile_bonus();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(players[i].score > 0) {
       if(level.script != "see2") {
         bonus = players[i] calculate_bonusforclient();
@@ -1075,12 +1071,12 @@ mission_bonus(level_index) {
     hud_missionroundbonus = new_levelend_hud("center", "left", 2.0, -125, bonusYpos, fade_in_time);
     hud_missionroundbonus settext(&"SCRIPT_AM_ROUND_BONUS");
     level.arcademode_progress2nextbonus = 0;
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i] thread progress2nextbonus_disconnect_threat(players[i], players.size);
       players[i] thread client_roundbonus(players.size, bonusYpos, fade_in_time);
     }
     flag_wait("arcademode_progress2nextbonus");
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i].hud_missionroundbonusvalue fadeOverTime(1.0);
       players[i].hud_missionroundbonusvalue.alpha = 0;
     }
@@ -1088,7 +1084,7 @@ mission_bonus(level_index) {
     hud_missionroundbonus.alpha = 0;
     wait(1.5);
     hud_missionroundbonus destroy();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i].hud_missionroundbonusvalue destroy();
     }
   }
@@ -1101,7 +1097,7 @@ mission_bonus(level_index) {
     hud_missiondifficultyvalue = new_levelend_hud("center", "right", 2.0, 125, difficultyYpos, fade_in_time);
     hud_missiondifficultyvalue.color = (1, 0.85, 0);
     hud_missiondifficultyvalue settext(&"SCRIPT_AM_DIFFICULTY_BONUS_X", skillmult);
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       players[i] thread progress2nextbonus_disconnect_threat(players[i], players.size);
       players[i] thread client_difficultybonus(players.size, difficultyYpos, fade_in_time);
     }
@@ -1116,13 +1112,13 @@ mission_bonus(level_index) {
   }
   hud_missionscore fadeOverTime(1.0);
   hud_missionscore.alpha = 0;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].hud_missionscorevalue fadeOverTime(1.0);
     players[i].hud_missionscorevalue.alpha = 0;
   }
   wait(1.5);
   hud_missionscore destroy();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i].hud_missionscorevalue destroy();
   }
   setsaveddvar("bonusbackground", "0");
@@ -1132,12 +1128,11 @@ combine_points(hud_mission, bonus) {
   self endon("disconnect");
   self playLoopSound("score_tally_loop");
   final_score = bonus + hud_mission.score;
-  for(;;) {
+  for (;;) {
     difference = final_score - hud_mission.score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15) {
+    if(difference <= 15)
       boost = 1;
-    }
     boost = int(boost);
     hud_mission.score += boost;
     if(hud_mission.score > final_score) {
@@ -1156,12 +1151,11 @@ combine_hudpoints(hud_mission, hud_bonus) {
   self endon("disconnect");
   self playLoopSound("score_tally_loop");
   final_score = hud_mission.score + hud_bonus.score;
-  for(;;) {
+  for (;;) {
     difference = final_score - hud_mission.score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15) {
+    if(difference <= 15)
       boost = 1;
-    }
     boost = int(boost);
     hud_mission.score += boost;
     hud_bonus.score -= boost;

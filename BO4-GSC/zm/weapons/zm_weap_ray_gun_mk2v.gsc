@@ -14,6 +14,7 @@
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_ray_gun_mk2v;
 
 autoexec __init__system__() {
@@ -37,12 +38,12 @@ __init__() {
   callback::add_weapon_fired(level.var_5bda3938, &on_weapon_fired);
   callback::function_4b58e5ab(&function_ae5c4e8b);
   callback::on_ai_killed(&on_ai_killed);
-  clientfield::register("allplayers", "" + # "ray_gun_mk2v_beam_fire", 20000, 2, "int");
-  clientfield::register("allplayers", "" + # "ray_gun_mk2v_beam_flash", 20000, 1, "int");
-  clientfield::register("actor", "" + # "hash_784061e6c2684e58", 20000, 1, "int");
-  clientfield::register("actor", "" + # "hash_3b193ae69f9f4fac", 20000, 1, "counter");
-  clientfield::register("actor", "" + # "ray_gun_mk2v_death", 20000, 1, "int");
-  clientfield::register("scriptmover", "" + # "ray_gun_mk2v_stun_arc", 20000, 1, "int");
+  clientfield::register("allplayers", "" + #"ray_gun_mk2v_beam_fire", 20000, 2, "int");
+  clientfield::register("allplayers", "" + #"ray_gun_mk2v_beam_flash", 20000, 1, "int");
+  clientfield::register("actor", "" + #"hash_784061e6c2684e58", 20000, 1, "int");
+  clientfield::register("actor", "" + #"hash_3b193ae69f9f4fac", 20000, 1, "counter");
+  clientfield::register("actor", "" + #"ray_gun_mk2v_death", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"ray_gun_mk2v_stun_arc", 20000, 1, "int");
 
   if(!isDefined(level.var_46a7950a)) {
     level.var_46a7950a = new throttle();
@@ -55,12 +56,12 @@ on_weapon_fired(weapon) {
     self.var_1de56cc8 = 1;
 
     if(weapon == level.var_5bda3938) {
-      self clientfield::set("" + # "ray_gun_mk2v_beam_fire", 2);
+      self clientfield::set("" + #"ray_gun_mk2v_beam_fire", 2);
     } else {
-      self clientfield::set("" + # "ray_gun_mk2v_beam_fire", 1);
+      self clientfield::set("" + #"ray_gun_mk2v_beam_fire", 1);
     }
 
-    self clientfield::set("" + # "ray_gun_mk2v_beam_flash", 1);
+    self clientfield::set("" + #"ray_gun_mk2v_beam_flash", 1);
     self thread function_8d93c592(weapon);
     self thread function_f8fdc6ad(weapon);
   }
@@ -68,7 +69,7 @@ on_weapon_fired(weapon) {
 
 on_ai_killed(s_params) {
   if(function_4e923311(s_params.weapon)) {
-    self clientfield::set("" + # "ray_gun_mk2v_death", 1);
+    self clientfield::set("" + #"ray_gun_mk2v_death", 1);
   }
 }
 
@@ -77,25 +78,25 @@ function_4e923311(weapon) {
 }
 
 function_8d93c592(w_curr) {
-  self endon(#"death", # "stop_damage");
+  self endon(#"death", #"stop_damage");
 
   while(true) {
     v_position = self getweaponmuzzlepoint();
     v_forward = self getweaponforwarddir();
     a_trace = beamtrace(v_position, v_position + v_forward * 20000, 1, self);
-    var_1c218ece = a_trace[# "position"];
+    var_1c218ece = a_trace[#"position"];
 
     function_7067b673(v_position, var_1c218ece, (1, 1, 0));
     render_debug_sphere(v_position, (1, 1, 0));
     render_debug_sphere(var_1c218ece, (1, 0, 0));
 
-    if(isDefined(a_trace[# "entity"])) {
-      e_last_target = a_trace[# "entity"];
+      if(isDefined(a_trace[#"entity"])) {
+        e_last_target = a_trace[#"entity"];
 
-      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies" || isDefined(e_last_target.male_head)) {
-        self thread function_5c035588(e_last_target, var_1c218ece, w_curr);
+        if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== #"allies" || isDefined(e_last_target.male_head)) {
+          self thread function_5c035588(e_last_target, var_1c218ece, w_curr);
+        }
       }
-    }
 
     e_last_target = undefined;
     waitframe(1);
@@ -103,7 +104,7 @@ function_8d93c592(w_curr) {
 }
 
 function_f8fdc6ad(w_curr) {
-  self endoncallback(&stop_beam, # "death");
+  self endoncallback(&stop_beam, #"death");
   wait 0.1;
 
   while(zm_utility::is_player_valid(self) && self isfiring() && self getweaponammoclip(w_curr) > 0 && !self ismeleeing() && !self isswitchingweapons()) {
@@ -114,8 +115,8 @@ function_f8fdc6ad(w_curr) {
 }
 
 stop_beam(s_notify) {
-  self clientfield::set("" + # "ray_gun_mk2v_beam_fire", 0);
-  self clientfield::set("" + # "ray_gun_mk2v_beam_flash", 0);
+  self clientfield::set("" + #"ray_gun_mk2v_beam_fire", 0);
+  self clientfield::set("" + #"ray_gun_mk2v_beam_flash", 0);
   self.var_1de56cc8 = undefined;
   self notify(#"stop_damage");
 }
@@ -167,7 +168,7 @@ private function_5c035588(e_target, v_target_pos, w_curr, b_launched = 0, var_9a
     [[level.var_46a7950a]] - > waitinqueue(e_target);
   }
 
-  if(e_target.archetype === # "zombie") {
+  if(e_target.archetype === #"zombie") {
     str_hitloc = "torso_lower";
     str_tag = e_target get_closest_tag(v_target_pos);
 
@@ -196,7 +197,7 @@ private function_5c035588(e_target, v_target_pos, w_curr, b_launched = 0, var_9a
     e_target dodamage(n_damage, v_target_pos, self, self, str_hitloc, "MOD_UNKNOWN", 0, w_curr);
   }
 
-  if(b_launched && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "enhanced")) {
+  if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
@@ -223,7 +224,7 @@ function_3ac73c92(e_player, b_upgraded) {
 
 function_3821f26e() {
   self notify(#"hash_3def847106434aab");
-  self endon(#"death", # "hash_3def847106434aab");
+  self endon(#"death", #"hash_3def847106434aab");
   wait 1;
   self.var_a8f3f795 = 0;
 }
@@ -236,7 +237,7 @@ function_58fb8f5e(e_player, b_upgraded = 0) {
   }
 
   if(isDefined(self)) {
-    self clientfield::increment("" + # "hash_3b193ae69f9f4fac", 1);
+    self clientfield::increment("" + #"hash_3b193ae69f9f4fac", 1);
   }
 
   if(!b_upgraded) {
@@ -274,7 +275,7 @@ function_2c08b6ac(e_player) {
 
 function_57f0555a(e_player) {
   self endon(#"death");
-  self clientfield::set("" + # "hash_784061e6c2684e58", 1);
+  self clientfield::set("" + #"hash_784061e6c2684e58", 1);
   self lightning_chain::arc_damage_ent(e_player, 2, level.var_f3d38af6);
   wait 6;
   self thread function_ae5c4e8b();
@@ -283,7 +284,7 @@ function_57f0555a(e_player) {
 function_ae5c4e8b() {
   if(self.var_6ee03e9a === 1) {
     self.var_6ee03e9a = 0;
-    self clientfield::set("" + # "hash_784061e6c2684e58", 0);
+    self clientfield::set("" + #"hash_784061e6c2684e58", 0);
   }
 }
 
@@ -294,7 +295,7 @@ function_6f9fb9d7(e_source, e_target) {
 
   if(distancesquared(v_source, v_target) >= 4096) {
     e_fx = util::spawn_model("tag_origin", v_source);
-    e_fx clientfield::set("" + # "ray_gun_mk2v_stun_arc", 1);
+    e_fx clientfield::set("" + #"ray_gun_mk2v_stun_arc", 1);
     e_fx moveto(v_target, 0.11);
     e_fx waittill(#"movedone");
     e_fx delete();
@@ -303,6 +304,7 @@ function_6f9fb9d7(e_source, e_target) {
 
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
+
     sphere(origin, 2, color, 0.75, 1, 10, 100);
 
   }
@@ -310,6 +312,7 @@ render_debug_sphere(origin, color) {
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
+
     line(origin1, origin2, color, 0.75, 1, 100);
 
   }

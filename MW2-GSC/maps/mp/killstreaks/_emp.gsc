@@ -13,19 +13,20 @@ init() {
   level.teamEMPed["axis"] = false;
   level.empPlayer = undefined;
 
-  if(level.teamBased) {
+  if(level.teamBased)
     level thread EMP_TeamTracker();
-  } else {
+  else
     level thread EMP_PlayerTracker();
-  }
 
   level.killstreakFuncs["emp"] = ::EMP_Use;
 
   level thread onPlayerConnect();
+
 }
 
+
 onPlayerConnect() {
-  for(;;) {
+  for (;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
@@ -34,30 +35,27 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for(;;) {
+  for (;;) {
     self waittill("spawned_player");
 
-    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self)) {
+    if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self))
       self setEMPJammed(true);
-    }
   }
 }
 
 EMP_Use(lifeId, delay) {
   assert(isDefined(self));
 
-  if(!isDefined(delay)) {
+  if(!isDefined(delay))
     delay = 5.0;
-  }
 
   myTeam = self.pers["team"];
   otherTeam = level.otherTeam[myTeam];
 
-  if(level.teamBased) {
+  if(level.teamBased)
     self thread EMP_JamTeam(otherTeam, 60.0, delay);
-  } else {
+  else
     self thread EMP_JamPlayers(self, 60.0, delay);
-  }
 
   self maps\mp\_matchdata::logKillstreakEvent("emp", self.origin);
   self notify("used_emp");
@@ -80,13 +78,11 @@ EMP_JamTeam(teamName, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("emp_activate");
 
-    if(player.team != teamName) {
+    if(player.team != teamName)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player RadarJamOff();
-    }
   }
 
   visionSetNaked("coup_sunblind", 0.1);
@@ -110,13 +106,11 @@ EMP_JamTeam(teamName, duration, delay) {
   level.teamEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team != teamName) {
+    if(player.team != teamName)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player RadarJamOn();
-    }
   }
 
   level notify("emp_update");
@@ -133,13 +127,11 @@ EMP_JamPlayers(owner, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("emp_activate");
 
-    if(player == owner) {
+    if(player == owner)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player RadarJamOff();
-    }
   }
 
   visionSetNaked("coup_sunblind", 0.1);
@@ -164,13 +156,11 @@ EMP_JamPlayers(owner, duration, delay) {
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(duration);
 
   foreach(player in level.players) {
-    if(player == owner) {
+    if(player == owner)
       continue;
-    }
 
-    if(player _hasPerk("specialty_localjammer")) {
+    if(player _hasPerk("specialty_localjammer"))
       player RadarJamOn();
-    }
   }
 
   level.empPlayer = undefined;
@@ -188,13 +178,13 @@ empPlayerFFADisconnect() {
 
 empEffects() {
   foreach(player in level.players) {
-    playerForward = anglesToForward(player.angles);
+    playerForward = anglestoforward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     empDistance = 20000;
 
-    empEnt = spawn("script_model", player.origin + (0, 0, 8000) + Vector_Multiply(playerForward, empDistance));
+    empEnt = Spawn("script_model", player.origin + (0, 0, 8000) + Vector_Multiply(playerForward, empDistance));
     empEnt setModel("tag_origin");
     empEnt.angles = empEnt.angles + (270, 0, 0);
     empEnt thread empEffect(player);
@@ -211,13 +201,12 @@ empEffect(player) {
 EMP_TeamTracker() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator") {
+      if(player.team == "spectator")
         continue;
-      }
 
       player setEMPJammed(level.teamEMPed[player.team]);
     }
@@ -227,91 +216,73 @@ EMP_TeamTracker() {
 EMP_PlayerTracker() {
   level endon("game_ended");
 
-  for(;;) {
+  for (;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator") {
+      if(player.team == "spectator")
         continue;
-      }
 
-      if(isDefined(level.empPlayer) && level.empPlayer != player) {
+      if(isDefined(level.empPlayer) && level.empPlayer != player)
         player setEMPJammed(true);
-      } else {
+      else
         player setEMPJammed(false);
-      }
     }
   }
 }
 
 destroyActiveVehicles(attacker) {
   if(isDefined(attacker)) {
-    foreach(heli in level.helis) {
-      radiusDamage(heli.origin, 384, 5000, 5000, attacker);
-    }
+    foreach(heli in level.helis)
+    radiusDamage(heli.origin, 384, 5000, 5000, attacker);
 
-    foreach(littleBird in level.littleBird) {
-      radiusDamage(littleBird.origin, 384, 5000, 5000, attacker);
-    }
+    foreach(littleBird in level.littleBird)
+    radiusDamage(littleBird.origin, 384, 5000, 5000, attacker);
 
-    foreach(turret in level.turrets) {
-      radiusDamage(turret.origin, 16, 5000, 5000, attacker);
-    }
+    foreach(turret in level.turrets)
+    radiusDamage(turret.origin, 16, 5000, 5000, attacker);
 
-    foreach(rocket in level.rockets) {
-      rocket notify("death");
-    }
+    foreach(rocket in level.rockets)
+    rocket notify("death");
 
     if(level.teamBased) {
-      foreach(uav in level.uavModels["allies"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000, attacker);
-      }
+      foreach(uav in level.uavModels["allies"])
+      radiusDamage(uav.origin, 384, 5000, 5000, attacker);
 
-      foreach(uav in level.uavModels["axis"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000, attacker);
-      }
+      foreach(uav in level.uavModels["axis"])
+      radiusDamage(uav.origin, 384, 5000, 5000, attacker);
     } else {
-      foreach(uav in level.uavModels) {
-        radiusDamage(uav.origin, 384, 5000, 5000, attacker);
-      }
+      foreach(uav in level.uavModels)
+      radiusDamage(uav.origin, 384, 5000, 5000, attacker);
     }
 
-    if(isDefined(level.ac130player)) {
+    if(isDefined(level.ac130player))
       radiusDamage(level.ac130.planeModel.origin + (0, 0, 10), 1000, 5000, 5000, attacker);
-    }
   } else {
-    foreach(heli in level.helis) {
-      radiusDamage(heli.origin, 384, 5000, 5000);
-    }
+    foreach(heli in level.helis)
+    radiusDamage(heli.origin, 384, 5000, 5000);
 
-    foreach(littleBird in level.littleBird) {
-      radiusDamage(littleBird.origin, 384, 5000, 5000);
-    }
+    foreach(littleBird in level.littleBird)
+    radiusDamage(littleBird.origin, 384, 5000, 5000);
 
-    foreach(turret in level.turrets) {
-      radiusDamage(turret.origin, 16, 5000, 5000);
-    }
+    foreach(turret in level.turrets)
+    radiusDamage(turret.origin, 16, 5000, 5000);
 
-    foreach(rocket in level.rockets) {
-      rocket notify("death");
-    }
+    foreach(rocket in level.rockets)
+    rocket notify("death");
 
     if(level.teamBased) {
-      foreach(uav in level.uavModels["allies"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels["allies"])
+      radiusDamage(uav.origin, 384, 5000, 5000);
 
-      foreach(uav in level.uavModels["axis"]) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels["axis"])
+      radiusDamage(uav.origin, 384, 5000, 5000);
     } else {
-      foreach(uav in level.uavModels) {
-        radiusDamage(uav.origin, 384, 5000, 5000);
-      }
+      foreach(uav in level.uavModels)
+      radiusDamage(uav.origin, 384, 5000, 5000);
     }
 
-    if(isDefined(level.ac130player)) {
+    if(isDefined(level.ac130player))
       radiusDamage(level.ac130.planeModel.origin + (0, 0, 10), 1000, 5000, 5000);
-    }
   }
 }

@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
   foreach(dest in destructibles) {
     if(dest.destructibledef == "veh_t6_dlc_electric_cart_destructible") {
@@ -21,7 +21,7 @@ cart_fire_think() {
     self waittill("broken", event);
 
     if(event == "destructible_car_fire") {
-      self playLoopSound("amb_fire_med");
+      self playloopsound("amb_fire_med");
       return;
     }
   }
@@ -29,5 +29,5 @@ cart_fire_think() {
 
 cart_death_think() {
   self waittill("car_dead");
-  self playSound("exp_barrel");
+  self playsound("exp_barrel");
 }

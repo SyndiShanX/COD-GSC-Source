@@ -15,8 +15,8 @@ init() {
   boxConfig.weaponInfo = "deployable_vest_marker_mp";
   boxConfig.modelBase = "prop_ballistic_vest_iw6";
   boxConfig.modelBombSquad = "prop_ballistic_vest_iw6_bombsquad";
-  boxConfig.hintString = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
-  boxConfig.capturingString = &"KILLSTREAKS_BOX_GETTING_VEST";
+  boxConfig.hintString = & "KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
+  boxConfig.capturingString = & "KILLSTREAKS_BOX_GETTING_VEST";
   boxConfig.event = "deployable_vest_taken";
   boxConfig.streakName = BOX_TYPE;
   boxConfig.splashName = "used_deployable_vest";

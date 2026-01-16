@@ -53,4 +53,5 @@ precache() {
   character\character_civilian_worker_hostage_a::precache();
   character\character_civilian_worker_hostage_b::precache();
   character\character_civilian_worker_hostage_c::precache();
+
 }

@@ -169,11 +169,10 @@ _start() {
   childthread vehicle_scripts\_chopper_missile_defense_utility::monitorenemymissilelockon(::hud_enemy_missile_lockon);
   childthread vehicle_scripts\_chopper_missile_defense_utility::monitorenemymissilefire();
 
-  if(!isDefined(self.flareauto) || self.flareauto) {
+  if(!isDefined(self.flareauto) || self.flareauto)
     childthread vehicle_scripts\_chopper_missile_defense_utility::monitorflarerelease_auto(::hud_makeused_flares, ::hud_makefree_flares);
-  } else {
+  else
     childthread vehicle_scripts\_chopper_missile_defense_utility::monitorflarerelease_input(::hud_makeused_flares, ::hud_makefree_flares);
-  }
 
   childthread vehicle_scripts\_chopper_missile_defense_utility::monitorflares();
   childthread monitorstateshud();
@@ -199,25 +198,22 @@ monitorstateshud() {
   for(;;) {
     waittillframeend;
 
-    if(vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
+    if(vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme())
       self.hud_currentstate = "incoming";
-    } else if(vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome() && !vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
+    else if(vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome() && !vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme())
       self.hud_currentstate = "warning";
-    } else {
+    else
       self.hud_currentstate = "none";
-    }
 
     if(self.hud_currentstate != self.hud_laststate) {
-      if(self.hud_laststate == "warning") {
+      if(self.hud_laststate == "warning")
         var_0 common_scripts\utility::stop_loop_sound_on_entity("missile_locking");
-      } else if(self.hud_laststate == "incoming") {
+      else if(self.hud_laststate == "incoming")
         var_0 common_scripts\utility::stop_loop_sound_on_entity("missile_incoming");
-      }
 
       if(self.hud_currentstate == "none") {
-        if(self.hud_laststate == "warning") {
+        if(self.hud_laststate == "warning")
           var_0 thread maps\_utility::play_sound_on_entity("missile_locking_failed");
-        }
 
         hud_turnoffmissilewarning();
       }
@@ -241,9 +237,8 @@ hud_enemy_missile_lockon(var_0) {
   var_0 common_scripts\utility::waittill_any("death", "deathspin", "LISTEN_missile_fire_self", "LISTEN_missile_lockOnFailed");
   self.lockedontome = common_scripts\utility::array_removeundefined(self.lockedontome);
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self.lockedontome = common_scripts\utility::array_remove(self.lockedontome, var_0);
-  }
 }
 
 hud_buttonhelp(var_0, var_1) {
@@ -268,9 +263,8 @@ hud_flashalpha(var_0, var_1, var_2) {
     self.alpha = 0;
     wait(var_1);
 
-    if(isDefined(var_2) && var_2 > 0) {
+    if(isDefined(var_2) && var_2 > 0)
       wait(var_2);
-    }
 
     self fadeovertime(var_1);
     self.alpha = var_0;
@@ -339,9 +333,8 @@ hud_makeused_flares() {
 }
 
 hud_makefree_flares(var_0) {
-  if(isDefined(var_0) && var_0 > 0) {
+  if(isDefined(var_0) && var_0 > 0)
     wait(var_0);
-  }
 
   var_1 = hud_countfree_flares();
   var_2 = var_1 < 2;
@@ -371,9 +364,8 @@ hud_countfree_flares() {
   var_0 = 0;
 
   foreach(var_2 in self.hud["flares"]["ammo"]) {
-    if(var_2.isavailable) {
+    if(var_2.isavailable)
       var_0++;
-    }
   }
 
   return var_0;

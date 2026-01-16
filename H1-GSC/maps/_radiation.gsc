@@ -12,7 +12,7 @@ main() {
   precacheshellshock("radiation_high");
 
   foreach(var_2, var_1 in level.players) {
-    var_1.radiation = spawnStruct();
+    var_1.radiation = spawnstruct();
     var_1.radiation.super_dose = 0;
     var_1.radiation.inside = 0;
     var_1 maps\_utility::ent_flag_init("_radiation_poisoning");
@@ -32,7 +32,7 @@ main() {
 updateradiationtriggers() {
   self.members = 0;
 
-  for(;;) {
+  for (;;) {
     self waittill("trigger", var_0);
     thread updateradiationtrigger_perplayer(var_0);
   }
@@ -45,9 +45,8 @@ updateradiationtrigger_perplayer(var_0) {
   var_0.radiation.inside = 1;
   var_0.radiation.triggers[var_0.radiation.triggers.size] = self;
 
-  while(var_0 istouching(self)) {
+  while (var_0 istouching(self))
     wait 0.05;
-  }
 
   var_0.radiation.inside = 0;
   var_0.radiation.triggers = common_scripts\utility::array_remove(var_0.radiation.triggers, self);
@@ -70,10 +69,10 @@ updateradiationdosage() {
   var_3 = 200000;
   var_4 = var_2 - var_1;
 
-  for(;;) {
+  for (;;) {
     var_5 = [];
 
-    for(var_6 = 0; var_6 < self.radiation.triggers.size; var_6++) {
+    for (var_6 = 0; var_6 < self.radiation.triggers.size; var_6++) {
       var_7 = self.radiation.triggers[var_6];
       var_8 = distance(self.origin, var_7.origin) - 15;
       var_5[var_6] = var_2 - var_2 / var_7.radius * var_8;
@@ -81,17 +80,14 @@ updateradiationdosage() {
 
     var_9 = 0;
 
-    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    for (var_6 = 0; var_6 < var_5.size; var_6++)
       var_9 = var_9 + var_5[var_6];
-    }
 
-    if(var_9 < var_1) {
+    if(var_9 < var_1)
       var_9 = var_1;
-    }
 
-    if(var_9 > var_2) {
+    if(var_9 > var_2)
       var_9 = var_2;
-    }
 
     self.radiation.rate = var_9;
     self.radiation.ratepercent = (var_9 - var_1) / var_4 * 100;
@@ -107,9 +103,8 @@ updateradiationdosage() {
     } else if(self.radiation.ratepercent < 1 && self.radiation.total > 0) {
       self.radiation.total = self.radiation.total - 1500;
 
-      if(self.radiation.total < 0) {
+      if(self.radiation.total < 0)
         self.radiation.total = 0;
-      }
 
       self.radiation.totalpercent = self.radiation.total / var_3 * 100;
     }
@@ -121,7 +116,7 @@ updateradiationdosage() {
 updateradiationshock() {
   var_0 = 1;
 
-  for(;;) {
+  for (;;) {
     if(self.radiation.ratepercent >= 75) {
       self shellshock("radiation_high", 5);
       soundscripts\_snd::snd_message("aud_radiation_shellshock", "radiation_high");
@@ -141,30 +136,28 @@ updateradiationshock() {
 updateradiationsound() {
   thread playradiationsound();
 
-  for(;;) {
-    if(self.radiation.ratepercent >= 75) {
+  for (;;) {
+    if(self.radiation.ratepercent >= 75)
       self.radiation.sound = "item_geigercouner_level4";
-    } else if(self.radiation.ratepercent >= 50) {
+    else if(self.radiation.ratepercent >= 50)
       self.radiation.sound = "item_geigercouner_level3";
-    } else if(self.radiation.ratepercent >= 25) {
+    else if(self.radiation.ratepercent >= 25)
       self.radiation.sound = "item_geigercouner_level2";
-    } else if(self.radiation.ratepercent > 0) {
+    else if(self.radiation.ratepercent > 0)
       self.radiation.sound = "item_geigercouner_level1";
-    } else {
+    else
       self.radiation.sound = "none";
-    }
 
     wait 0.05;
   }
 }
 
 updateradiationflag() {
-  for(;;) {
-    if(self.radiation.ratepercent > 25) {
+  for (;;) {
+    if(self.radiation.ratepercent > 25)
       maps\_utility::ent_flag_set("_radiation_poisoning");
-    } else {
+    else
       maps\_utility::ent_flag_clear("_radiation_poisoning");
-    }
 
     wait 0.05;
   }
@@ -178,13 +171,12 @@ playradiationsound() {
   var_0 linkto(self);
   var_1 = self.radiation.sound;
 
-  for(;;) {
+  for (;;) {
     if(var_1 != self.radiation.sound) {
       var_0 stoploopsound();
 
-      if(isDefined(self.radiation.sound) && self.radiation.sound != "none") {
-        var_0 playLoopSound(self.radiation.sound);
-      }
+      if(isdefined(self.radiation.sound) && self.radiation.sound != "none")
+        var_0 playloopsound(self.radiation.sound);
     }
 
     var_1 = self.radiation.sound;
@@ -202,7 +194,7 @@ updateradiationratepercent() {
   var_1.label = "";
   var_1.alpha = 0;
 
-  for(;;) {
+  for (;;) {
     var_1.label = self.radiation.ratepercent;
     wait(var_0);
   }
@@ -220,18 +212,17 @@ updateradiationdosimeter() {
   var_5.y = 360;
   var_5.alpha = 0;
   var_5.alignx = "right";
-  var_5.label = &"SCOUTSNIPER_MRHR";
+  var_5.label = & "SCOUTSNIPER_MRHR";
   var_5 thread updateradiationdosimetercolor(self);
 
-  for(;;) {
+  for (;;) {
     if(self.radiation.rate <= var_0) {
       var_6 = randomfloatrange(-0.001, 0.001);
       var_5 setvalue(var_0 + var_6);
     } else if(self.radiation.rate > var_1)
       var_5 setvalue(var_1);
-    else {
+    else
       var_5 setvalue(self.radiation.rate);
-    }
 
     wait(var_2);
   }
@@ -240,24 +231,21 @@ updateradiationdosimeter() {
 updateradiationdosimetercolor(var_0) {
   var_1 = 0.05;
 
-  for(;;) {
+  for (;;) {
     var_2 = 1;
     var_3 = 0.13;
 
-    while(var_0.radiation.rate >= 100) {
-      if(var_2 <= 0 || var_2 >= 1) {
+    while (var_0.radiation.rate >= 100) {
+      if(var_2 <= 0 || var_2 >= 1)
         var_3 = var_3 * -1;
-      }
 
       var_2 = var_2 + var_3;
 
-      if(var_2 <= 0) {
+      if(var_2 <= 0)
         var_2 = 0;
-      }
 
-      if(var_2 >= 1) {
+      if(var_2 >= 1)
         var_2 = 1;
-      }
 
       self.color = (1, var_2, var_2);
       wait(var_1);
@@ -288,16 +276,15 @@ updateradiationblackout() {
   var_6 = 100;
   var_7 = 0;
 
-  for(;;) {
-    while(self.radiation.totalpercent > 25 && self.radiation.ratepercent > 25) {
+  for (;;) {
+    while (self.radiation.totalpercent > 25 && self.radiation.ratepercent > 25) {
       var_8 = var_6 - var_5;
       var_7 = (self.radiation.totalpercent - var_5) / var_8;
 
-      if(var_7 < 0) {
+      if(var_7 < 0)
         var_7 = 0;
-      } else if(var_7 > 1) {
+      else if(var_7 > 1)
         var_7 = 1;
-      }
 
       var_9 = var_2 - var_1;
       var_10 = var_1 + var_9 * (1 - var_7);
@@ -321,9 +308,8 @@ updateradiationblackout() {
       break;
     }
 
-    if(var_0.alpha != 0) {
+    if(var_0.alpha != 0)
       var_0 fadeoutblackout(1, 0, 0, self);
-    }
 
     wait 0.05;
   }
@@ -341,7 +327,7 @@ radiation_kill() {
     return;
   }
   waittillframeend;
-  var_0 = &"SCRIPT_RADIATION_DEATH";
+  var_0 = & "SCRIPT_RADIATION_DEATH";
   setdvar("ui_deadquote", var_0);
 }
 
@@ -362,12 +348,11 @@ fadeoutblackout(var_0, var_1, var_2, var_3) {
 first_radiation_dialogue() {
   self endon("death");
 
-  for(;;) {
+  for (;;) {
     maps\_utility::ent_flag_wait("_radiation_poisoning");
 
-    if(level.script == "scoutsniper" || level.script == "co_scoutsniper") {
+    if(level.script == "scoutsniper" || level.script == "co_scoutsniper")
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_youdaft");
-    }
 
     level notify("radiation_warning");
     maps\_utility::ent_flag_waitopen("_radiation_poisoning");

@@ -39,7 +39,7 @@ function warning(msg) {
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglesToForward(start_angles);
+  forward = anglestoforward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -55,24 +55,24 @@ function isbulletimpactmod(smeansofdeath) {
 function waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while(self usebuttonpressed() != 1) {
+  while (self usebuttonpressed() != 1) {
     wait(0.05);
   }
 }
 
 function setlowermessage(text, time, combinemessageandtimer) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != (&"")) {
+  if(isdefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
   self.lowermessage settext(text);
-  if(isDefined(time) && time > 0) {
-    if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
-      self.lowertimer.label = &"";
+  if(isdefined(time) && time > 0) {
+    if(!isdefined(combinemessageandtimer) || !combinemessageandtimer) {
+      self.lowertimer.label = & "";
     } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -80,7 +80,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = &"";
+    self.lowertimer.label = & "";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -92,29 +92,29 @@ function setlowermessage(text, time, combinemessageandtimer) {
 }
 
 function setlowermessagevalue(text, value, combinemessage) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != (&"")) {
+  if(isdefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
-  if(!isDefined(combinemessage) || !combinemessage) {
+  if(!isdefined(combinemessage) || !combinemessage) {
     self.lowermessage settext(text);
   } else {
     self.lowermessage settext("");
   }
-  if(isDefined(value) && value > 0) {
-    if(!isDefined(combinemessage) || !combinemessage) {
-      self.lowertimer.label = &"";
+  if(isdefined(value) && value > 0) {
+    if(!isdefined(combinemessage) || !combinemessage) {
+      self.lowertimer.label = & "";
     } else {
       self.lowertimer.label = text;
     }
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = &"";
+    self.lowertimer.label = & "";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -126,11 +126,11 @@ function setlowermessagevalue(text, value, combinemessage) {
 }
 
 function clearlowermessage(fadetime) {
-  if(!isDefined(self.lowermessage)) {
+  if(!isdefined(self.lowermessage)) {
     return;
   }
   self notify("lower_message_set");
-  if(!isDefined(fadetime) || fadetime == 0) {
+  if(!isdefined(fadetime) || fadetime == 0) {
     setlowermessage(&"");
   } else {
     self endon("disconnect");
@@ -145,30 +145,30 @@ function clearlowermessage(fadetime) {
 }
 
 function printonteam(text, team) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintln(text);
     }
   }
 }
 
 function printboldonteam(text, team) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text);
     }
   }
 }
 
 function printboldonteamarg(text, team, arg) {
-  assert(isDefined(level.players));
-  for(i = 0; i < level.players.size; i++) {
+  assert(isdefined(level.players));
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -178,9 +178,9 @@ function printonteamarg(text, team, arg) {}
 
 function printonplayers(text, team) {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
-    if(isDefined(team)) {
-      if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
+  for (i = 0; i < players.size; i++) {
+    if(isdefined(team)) {
+      if(isdefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
         players[i] iprintln(text);
       }
       continue;
@@ -190,30 +190,30 @@ function printonplayers(text, team) {
 }
 
 function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendly, soundenemy, printarg) {
-  shoulddosounds = isDefined(soundfriendly);
+  shoulddosounds = isdefined(soundfriendly);
   shoulddoenemysounds = 0;
-  if(isDefined(soundenemy)) {
+  if(isdefined(soundenemy)) {
     assert(shoulddosounds);
     shoulddoenemysounds = 1;
   }
-  if(!isDefined(printarg)) {
+  if(!isdefined(printarg)) {
     printarg = "";
   }
   if(level.splitscreen || !shoulddosounds) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != (&"")) {
+      if(isdefined(playerteam)) {
+        if(playerteam == team && isdefined(printfriendly) && printfriendly != (&"")) {
           player iprintln(printfriendly, printarg);
           continue;
         }
-        if(isDefined(printenemy) && printenemy != (&"")) {
-          if(isDefined(enemyteam) && playerteam == enemyteam) {
+        if(isdefined(printenemy) && printenemy != (&"")) {
+          if(isdefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
           }
-          if(!isDefined(enemyteam) && playerteam != team) {
+          if(!isdefined(enemyteam) && playerteam != team) {
             player iprintln(printenemy, printarg);
           }
         }
@@ -226,19 +226,19 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
   } else {
     assert(shoulddosounds);
     if(shoulddoenemysounds) {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isDefined(playerteam)) {
+        if(isdefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != (&"")) {
+            if(isdefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isDefined(enemyteam) && playerteam == enemyteam || (!isDefined(enemyteam) && playerteam != team)) {
-            if(isDefined(printenemy) && printenemy != (&"")) {
+          if(isdefined(enemyteam) && playerteam == enemyteam || (!isdefined(enemyteam) && playerteam != team)) {
+            if(isdefined(printenemy) && printenemy != (&"")) {
               player iprintln(printenemy, printarg);
             }
             player playlocalsound(soundenemy);
@@ -246,23 +246,23 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
         }
       }
     } else {
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isDefined(playerteam)) {
+        if(isdefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != (&"")) {
+            if(isdefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isDefined(printenemy) && printenemy != (&"")) {
-            if(isDefined(enemyteam) && playerteam == enemyteam) {
+          if(isdefined(printenemy) && printenemy != (&"")) {
+            if(isdefined(enemyteam) && playerteam == enemyteam) {
               player iprintln(printenemy, printarg);
               continue;
             }
-            if(!isDefined(enemyteam) && playerteam != team) {
+            if(!isdefined(enemyteam) && playerteam != team) {
               player iprintln(printenemy, printarg);
             }
           }
@@ -290,7 +290,7 @@ function getotherteam(team) {
 }
 
 function getteammask(team) {
-  if(!level.teambased || !isDefined(team) || !isDefined(level.spawnsystem.ispawn_teammask[team])) {
+  if(!level.teambased || !isdefined(team) || !isdefined(level.spawnsystem.ispawn_teammask[team])) {
     return level.spawnsystem.ispawn_teammask_free;
   }
   return level.spawnsystem.ispawn_teammask[team];
@@ -310,14 +310,14 @@ function getotherteamsmask(skip_team) {
 function plot_points(plotpoints, r = 1, g = 1, b = 1, server_frames = 1) {
   lastpoint = plotpoints[0];
   server_frames = int(server_frames);
-  for(i = 1; i < plotpoints.size; i++) {
+  for (i = 1; i < plotpoints.size; i++) {
     line(lastpoint, plotpoints[i], (r, g, b), 1, server_frames);
     lastpoint = plotpoints[i];
   }
 }
 
 function getfx(fx) {
-  assert(isDefined(level._effect[fx]), ("" + fx) + "");
+  assert(isdefined(level._effect[fx]), ("" + fx) + "");
   return level._effect[fx];
 }
 
@@ -345,30 +345,30 @@ function set_dvar_int_if_unset(dvar, value, reset = 0) {
 }
 
 function add_trigger_to_ent(ent) {
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     ent._triggers = [];
   }
   ent._triggers[self getentitynumber()] = 1;
 }
 
 function remove_trigger_from_ent(ent) {
-  if(!isDefined(ent)) {
+  if(!isdefined(ent)) {
     return;
   }
-  if(!isDefined(ent._triggers)) {
+  if(!isdefined(ent._triggers)) {
     return;
   }
-  if(!isDefined(ent._triggers[self getentitynumber()])) {
+  if(!isdefined(ent._triggers[self getentitynumber()])) {
     return;
   }
   ent._triggers[self getentitynumber()] = 0;
 }
 
 function ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers)) {
+  if(!isdefined(self._triggers)) {
     return false;
   }
-  if(!isDefined(self._triggers[trig getentitynumber()])) {
+  if(!isdefined(self._triggers[trig getentitynumber()])) {
     return false;
   }
   if(!self._triggers[trig getentitynumber()]) {
@@ -393,17 +393,17 @@ function trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ender = (("end_trig_death_monitor" + self getentitynumber()) + " ") + ent getentitynumber();
   self thread trigger_thread_death_monitor(ent, ender);
   endon_condition = "leave_trigger_" + self getentitynumber();
-  if(isDefined(on_enter_payload)) {
+  if(isdefined(on_enter_payload)) {
     self thread[[on_enter_payload]](ent, endon_condition);
   }
-  while(isDefined(ent) && ent istouching(self)) {
+  while (isdefined(ent) && ent istouching(self)) {
     wait(0.01);
   }
   ent notify(endon_condition);
-  if(isDefined(ent) && isDefined(on_exit_payload)) {
+  if(isdefined(ent) && isdefined(on_exit_payload)) {
     self thread[[on_exit_payload]](ent);
   }
-  if(isDefined(ent)) {
+  if(isdefined(ent)) {
     self remove_trigger_from_ent(ent);
   }
   self notify(ender);
@@ -414,11 +414,11 @@ function isstrstart(string1, substr) {
 }
 
 function iskillstreaksenabled() {
-  return isDefined(level.killstreaksenabled) && level.killstreaksenabled;
+  return isdefined(level.killstreaksenabled) && level.killstreaksenabled;
 }
 
 function setusingremote(remotename) {
-  if(isDefined(self.carryicon)) {
+  if(isdefined(self.carryicon)) {
     self.carryicon.alpha = 0;
   }
   assert(!self isusingremote());
@@ -498,7 +498,7 @@ function getplayerfromclientnum(clientnum) {
   if(clientnum < 0) {
     return undefined;
   }
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     if(level.players[i] getentitynumber() == clientnum) {
       return level.players[i];
     }
@@ -508,41 +508,41 @@ function getplayerfromclientnum(clientnum) {
 
 function ispressbuild() {
   buildtype = getdvarstring("buildType");
-  if(isDefined(buildtype) && buildtype == "press") {
+  if(isdefined(buildtype) && buildtype == "press") {
     return true;
   }
   return false;
 }
 
 function isflashbanged() {
-  return isDefined(self.flashendtime) && gettime() < self.flashendtime;
+  return isdefined(self.flashendtime) && gettime() < self.flashendtime;
 }
 
 function isentstunned() {
   time = gettime();
-  if(isDefined(self.stunned) && self.stunned) {
+  if(isdefined(self.stunned) && self.stunned) {
     return true;
   }
   if(self isflashbanged()) {
     return true;
   }
-  if(isDefined(self.stun_fx)) {
+  if(isdefined(self.stun_fx)) {
     return true;
   }
-  if(isDefined(self.laststunnedtime) && (self.laststunnedtime + 5000) > time) {
+  if(isdefined(self.laststunnedtime) && (self.laststunnedtime + 5000) > time) {
     return true;
   }
-  if(isDefined(self.concussionendtime) && self.concussionendtime > time) {
+  if(isdefined(self.concussionendtime) && self.concussionendtime > time) {
     return true;
   }
   return false;
 }
 
 function domaxdamage(origin, attacker, inflictor, headshot, mod) {
-  if(isDefined(self.damagedtodeath) && self.damagedtodeath) {
+  if(isdefined(self.damagedtodeath) && self.damagedtodeath) {
     return;
   }
-  if(isDefined(self.maxhealth)) {
+  if(isdefined(self.maxhealth)) {
     damage = self.maxhealth + 1;
   } else {
     damage = self.health + 1;
@@ -552,7 +552,7 @@ function domaxdamage(origin, attacker, inflictor, headshot, mod) {
 }
 
 function self_delete() {
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self delete();
   }
 }
@@ -560,16 +560,16 @@ function self_delete() {
 function screen_message_create(string_message_1, string_message_2, string_message_3, n_offset_y, n_time) {
   level notify("screen_message_create");
   level endon("screen_message_create");
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isdefined(level.missionfailed) && level.missionfailed) {
     return;
   }
   if(getdvarint("hud_missionFailed") == 1) {
     return;
   }
-  if(!isDefined(n_offset_y)) {
+  if(!isdefined(n_offset_y)) {
     n_offset_y = 0;
   }
-  if(!isDefined(level._screen_message_1)) {
+  if(!isdefined(level._screen_message_1)) {
     level._screen_message_1 = newhudelem();
     level._screen_message_1.elemtype = "font";
     level._screen_message_1.font = "objective";
@@ -585,8 +585,8 @@ function screen_message_create(string_message_1, string_message_2, string_messag
     level._screen_message_1.hidewheninmenu = 1;
   }
   level._screen_message_1 settext(string_message_1);
-  if(isDefined(string_message_2)) {
-    if(!isDefined(level._screen_message_2)) {
+  if(isdefined(string_message_2)) {
+    if(!isdefined(level._screen_message_2)) {
       level._screen_message_2 = newhudelem();
       level._screen_message_2.elemtype = "font";
       level._screen_message_2.font = "objective";
@@ -602,11 +602,11 @@ function screen_message_create(string_message_1, string_message_2, string_messag
       level._screen_message_2.hidewheninmenu = 1;
     }
     level._screen_message_2 settext(string_message_2);
-  } else if(isDefined(level._screen_message_2)) {
+  } else if(isdefined(level._screen_message_2)) {
     level._screen_message_2 destroy();
   }
-  if(isDefined(string_message_3)) {
-    if(!isDefined(level._screen_message_3)) {
+  if(isdefined(string_message_3)) {
+    if(!isdefined(level._screen_message_3)) {
       level._screen_message_3 = newhudelem();
       level._screen_message_3.elemtype = "font";
       level._screen_message_3.font = "objective";
@@ -622,26 +622,26 @@ function screen_message_create(string_message_1, string_message_2, string_messag
       level._screen_message_3.hidewheninmenu = 1;
     }
     level._screen_message_3 settext(string_message_3);
-  } else if(isDefined(level._screen_message_3)) {
+  } else if(isdefined(level._screen_message_3)) {
     level._screen_message_3 destroy();
   }
-  if(isDefined(n_time) && n_time > 0) {
+  if(isdefined(n_time) && n_time > 0) {
     wait(n_time);
     screen_message_delete();
   }
 }
 
 function screen_message_delete(delay) {
-  if(isDefined(delay)) {
+  if(isdefined(delay)) {
     wait(delay);
   }
-  if(isDefined(level._screen_message_1)) {
+  if(isdefined(level._screen_message_1)) {
     level._screen_message_1 destroy();
   }
-  if(isDefined(level._screen_message_2)) {
+  if(isdefined(level._screen_message_2)) {
     level._screen_message_2 destroy();
   }
-  if(isDefined(level._screen_message_3)) {
+  if(isdefined(level._screen_message_3)) {
     level._screen_message_3 destroy();
   }
 }
@@ -650,16 +650,16 @@ function screen_message_create_client(string_message_1, string_message_2, string
   self notify("screen_message_create");
   self endon("screen_message_create");
   self endon("death");
-  if(isDefined(level.missionfailed) && level.missionfailed) {
+  if(isdefined(level.missionfailed) && level.missionfailed) {
     return;
   }
   if(getdvarint("hud_missionFailed") == 1) {
     return;
   }
-  if(!isDefined(n_offset_y)) {
+  if(!isdefined(n_offset_y)) {
     n_offset_y = 0;
   }
-  if(!isDefined(self._screen_message_1)) {
+  if(!isdefined(self._screen_message_1)) {
     self._screen_message_1 = newclienthudelem(self);
     self._screen_message_1.elemtype = "font";
     self._screen_message_1.font = "objective";
@@ -675,8 +675,8 @@ function screen_message_create_client(string_message_1, string_message_2, string
     self._screen_message_1.hidewheninmenu = 1;
   }
   self._screen_message_1 settext(string_message_1);
-  if(isDefined(string_message_2)) {
-    if(!isDefined(self._screen_message_2)) {
+  if(isdefined(string_message_2)) {
+    if(!isdefined(self._screen_message_2)) {
       self._screen_message_2 = newclienthudelem(self);
       self._screen_message_2.elemtype = "font";
       self._screen_message_2.font = "objective";
@@ -692,11 +692,11 @@ function screen_message_create_client(string_message_1, string_message_2, string
       self._screen_message_2.hidewheninmenu = 1;
     }
     self._screen_message_2 settext(string_message_2);
-  } else if(isDefined(self._screen_message_2)) {
+  } else if(isdefined(self._screen_message_2)) {
     self._screen_message_2 destroy();
   }
-  if(isDefined(string_message_3)) {
-    if(!isDefined(self._screen_message_3)) {
+  if(isdefined(string_message_3)) {
+    if(!isdefined(self._screen_message_3)) {
       self._screen_message_3 = newclienthudelem(self);
       self._screen_message_3.elemtype = "font";
       self._screen_message_3.font = "objective";
@@ -712,10 +712,10 @@ function screen_message_create_client(string_message_1, string_message_2, string
       self._screen_message_3.hidewheninmenu = 1;
     }
     self._screen_message_3 settext(string_message_3);
-  } else if(isDefined(self._screen_message_3)) {
+  } else if(isdefined(self._screen_message_3)) {
     self._screen_message_3 destroy();
   }
-  if(isDefined(n_time) && n_time > 0) {
+  if(isdefined(n_time) && n_time > 0) {
     wait(n_time);
     self screen_message_delete_client();
   }
@@ -723,16 +723,16 @@ function screen_message_create_client(string_message_1, string_message_2, string
 
 function screen_message_delete_client(delay) {
   self endon("death");
-  if(isDefined(delay)) {
+  if(isdefined(delay)) {
     wait(delay);
   }
-  if(isDefined(self._screen_message_1)) {
+  if(isdefined(self._screen_message_1)) {
     self._screen_message_1 destroy();
   }
-  if(isDefined(self._screen_message_2)) {
+  if(isdefined(self._screen_message_2)) {
     self._screen_message_2 destroy();
   }
-  if(isDefined(self._screen_message_3)) {
+  if(isdefined(self._screen_message_3)) {
     self._screen_message_3 destroy();
   }
 }
@@ -746,14 +746,14 @@ function screen_fade_in(n_time, str_shader, str_menu_id) {
 }
 
 function screen_fade_to_alpha_with_blur(n_alpha, n_fade_time, n_blur, str_shader) {
-  assert(isDefined(n_alpha), "");
+  assert(isdefined(n_alpha), "");
   assert(isplayer(self), "");
   level notify("_screen_fade");
   level endon("_screen_fade");
   hud_fade = get_fade_hud(str_shader);
   hud_fade fadeovertime(n_fade_time);
   hud_fade.alpha = n_alpha;
-  if(isDefined(n_blur) && n_blur >= 0) {
+  if(isdefined(n_blur) && n_blur >= 0) {
     self setblur(n_blur, n_fade_time);
   }
   wait(n_fade_time);
@@ -764,7 +764,7 @@ function screen_fade_to_alpha(n_alpha, n_fade_time, str_shader) {
 }
 
 function get_fade_hud(str_shader = "black") {
-  if(!isDefined(level.fade_hud)) {
+  if(!isdefined(level.fade_hud)) {
     level.fade_hud = newhudelem();
     level.fade_hud.x = 0;
     level.fade_hud.y = 0;
@@ -781,17 +781,17 @@ function missionfailedwrapper(fail_reason, fail_hint, shader, iwidth, iheight, f
   if(level.missionfailed) {
     return;
   }
-  if(isDefined(level.nextmission)) {
+  if(isdefined(level.nextmission)) {
     return;
   }
   if(getdvarstring("failure_disabled") == "1") {
     return;
   }
   screen_message_delete();
-  if(isDefined(fail_hint)) {
+  if(isdefined(fail_hint)) {
     setdvar("ui_deadquote", fail_hint);
   }
-  if(isDefined(shader)) {
+  if(isdefined(shader)) {
     getplayers()[0] thread load::special_death_indicator_hudelement(shader, iwidth, iheight, fdelay, x, y);
   }
   level.missionfailed = 1;
@@ -808,36 +808,36 @@ function helper_message(message, delay, str_abort_flag) {
   helper_message_delete();
   level.helper_message = message;
   screen_message_create(message);
-  if(!isDefined(delay)) {
+  if(!isdefined(delay)) {
     delay = 5;
   }
   start_time = gettime();
-  while(true) {
+  while (true) {
     time = gettime();
     dt = (time - start_time) / 1000;
     if(dt >= delay) {
       break;
     }
-    if(isDefined(str_abort_flag) && level flag::get(str_abort_flag) == 1) {
+    if(isdefined(str_abort_flag) && level flag::get(str_abort_flag) == 1) {
       break;
     }
     wait(0.01);
   }
-  if(isDefined(level.helper_message)) {
+  if(isdefined(level.helper_message)) {
     screen_message_delete();
   }
   level.helper_message = undefined;
 }
 
 function helper_message_delete() {
-  if(isDefined(level.helper_message)) {
+  if(isdefined(level.helper_message)) {
     screen_message_delete();
   }
   level.helper_message = undefined;
 }
 
 function show_hit_marker() {
-  if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
+  if(isdefined(self) && isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);
@@ -846,7 +846,7 @@ function show_hit_marker() {
 }
 
 function init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5, b_show_in_ev = 1) {
-  if(!isDefined(level.heroes)) {
+  if(!isdefined(level.heroes)) {
     level.heroes = [];
   }
   name = tolower(name);
@@ -855,10 +855,10 @@ function init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5, b_show_in_ev =
     ai_hero = getent(name, "targetname", 1);
     if(!isalive(ai_hero)) {
       spawner = getent(name, "targetname");
-      if(!(isDefined(spawner.spawning) && spawner.spawning)) {
+      if(!(isdefined(spawner.spawning) && spawner.spawning)) {
         spawner.count++;
         ai_hero = spawner::simple_spawn_single(spawner);
-        assert(isDefined(ai_hero), ("" + name) + "");
+        assert(isdefined(ai_hero), ("" + name) + "");
         spawner notify("hero_spawned", ai_hero);
       } else {
         spawner waittill("hero_spawned", ai_hero);
@@ -872,10 +872,10 @@ function init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5, b_show_in_ev =
   ai_hero settmodeprovider(1);
   ai_hero magic_bullet_shield();
   ai_hero thread _hero_death(name);
-  if(isDefined(func_init)) {
+  if(isdefined(func_init)) {
     single_thread(ai_hero, func_init, arg1, arg2, arg3, arg4, arg5);
   }
-  if(isDefined(level.customherospawn)) {
+  if(isdefined(level.customherospawn)) {
     ai_hero[[level.customherospawn]]();
   }
   if(b_show_in_ev) {
@@ -887,7 +887,7 @@ function init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5, b_show_in_ev =
 function init_heroes(a_hero_names, func, arg1, arg2, arg3, arg4, arg5) {
   a_heroes = [];
   foreach(str_hero in a_hero_names) {
-    if(!isDefined(a_heroes)) {
+    if(!isdefined(a_heroes)) {
       a_heroes = [];
     } else if(!isarray(a_heroes)) {
       a_heroes = array(a_heroes);
@@ -900,7 +900,7 @@ function init_heroes(a_hero_names, func, arg1, arg2, arg3, arg4, arg5) {
 function _hero_death(str_name) {
   self endon("unmake_hero");
   self waittill("death");
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     assertmsg(("" + str_name) + "");
   }
   unmake_hero(str_name);
@@ -921,17 +921,17 @@ function get_heroes() {
 }
 
 function get_hero(str_name) {
-  if(!isDefined(level.heroes)) {
+  if(!isdefined(level.heroes)) {
     level.heroes = [];
   }
-  if(isDefined(level.heroes[str_name])) {
+  if(isdefined(level.heroes[str_name])) {
     return level.heroes[str_name];
   }
   return init_hero(str_name);
 }
 
 function is_hero() {
-  return isDefined(self.is_hero) && self.is_hero;
+  return isdefined(self.is_hero) && self.is_hero;
 }
 
 function init_streamer_hints(number_of_zones) {
@@ -958,7 +958,7 @@ function _set_streamer_hint(n_zone, b_clear_previous = 1) {
     wait_network_frame();
   }
   level clientfield::set("force_streamer", n_zone);
-  if(!isDefined(level.b_wait_for_streamer_default)) {
+  if(!isdefined(level.b_wait_for_streamer_default)) {
     level.b_wait_for_streamer_default = 1;
     level.b_wait_for_streamer_default = 0;
   }
@@ -989,10 +989,10 @@ function teleport_players_igc(str_spots, coop_sort) {
   }
   a_spots = skipto::get_spots(str_spots, coop_sort);
   assert(a_spots.size >= (level.players.size - 1), "");
-  for(i = 0; i < (level.players.size - 1); i++) {
+  for (i = 0; i < (level.players.size - 1); i++) {
     level.players[i + 1] setorigin(a_spots[i].origin);
-    if(isDefined(a_spots[i].angles)) {
-      level.players[i + 1] delay_network_frames(2, "disconnect", &setplayerangles, a_spots[i].angles);
+    if(isdefined(a_spots[i].angles)) {
+      level.players[i + 1] delay_network_frames(2, "disconnect", & setplayerangles, a_spots[i].angles);
     }
   }
 }
@@ -1063,7 +1063,7 @@ function ai_frost_breath() {
 function show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notify = "notify_turn_off_hint_text", n_display_time = 4) {
   self endon("notify_turn_off_hint_text");
   self endon("hint_text_removed");
-  if(isDefined(self.hint_menu_handle)) {
+  if(isdefined(self.hint_menu_handle)) {
     hide_hint_text(0);
   }
   self.hint_menu_handle = self openluimenu("CPHintText");
@@ -1081,7 +1081,7 @@ function show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notif
 
 function hide_hint_text(b_fade_before_hiding = 1) {
   self endon("hint_text_removed");
-  if(isDefined(self.hint_menu_handle)) {
+  if(isdefined(self.hint_menu_handle)) {
     if(b_fade_before_hiding) {
       lui::play_animation(self.hint_menu_handle, "fadeout");
       waittill_any_timeout(0.75, "kill_hint_text", "death");
@@ -1114,10 +1114,10 @@ function show_event_message(player_handle, str_message) {
 function init_interactive_gameobject(trigger, str_objective, str_hint_text, func_on_use, a_keyline_objects) {
   trigger sethintstring(str_hint_text);
   trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
-  if(!isDefined(a_keyline_objects)) {
+  if(!isdefined(a_keyline_objects)) {
     a_keyline_objects = [];
   } else {
-    if(!isDefined(a_keyline_objects)) {
+    if(!isdefined(a_keyline_objects)) {
       a_keyline_objects = [];
     } else if(!isarray(a_keyline_objects)) {
       a_keyline_objects = array(a_keyline_objects);
@@ -1134,7 +1134,7 @@ function init_interactive_gameobject(trigger, str_objective, str_hint_text, func
   game_object.single_use = 0;
   game_object.origin = game_object.origin;
   game_object.angles = game_object.angles;
-  if(isDefined(func_on_use)) {
+  if(isdefined(func_on_use)) {
     game_object.onuse = func_on_use;
   }
   return game_object;

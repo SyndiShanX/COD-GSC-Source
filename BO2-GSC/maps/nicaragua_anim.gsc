@@ -175,7 +175,8 @@ door_death_started(ai_door_death) {
   ai_door_death notify("door_death_started");
 }
 
-village_heycart_animations() {}
+village_heycart_animations() {
+}
 
 #using_animtree("animated_props");
 #using_animtree("player");
@@ -333,15 +334,20 @@ balcony_throw() {
   add_actor_anim("balcony_throw_pdf", % ch_nic_03_02_balcony_throw_pdf, 0, 0, 0, 0, undefined, "generic_pdf");
 }
 
-stables_weapons_cache_anims() {}
+stables_weapons_cache_anims() {
+}
 
-stables_woman_attacked_anims_old() {}
+stables_woman_attacked_anims_old() {
+}
 
-stables_woman_attacked_anims() {}
+stables_woman_attacked_anims() {
+}
 
-stables_exit_cartel_ralley() {}
+stables_exit_cartel_ralley() {
+}
 
-mission_banister_jumpdown() {}
+mission_banister_jumpdown() {
+}
 
 #using_animtree("animated_props");
 #using_animtree("player");

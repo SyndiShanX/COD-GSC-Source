@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
+
 #namespace zclassic;
 
 event_handler[gametype_init] main(eventstruct) {

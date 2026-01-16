@@ -36,18 +36,18 @@ function init() {
   foreach(team in level.teams) {
     level.activeemps[team] = 0;
   }
-  level.enemyempactivefunc = &enemyempactive;
+  level.enemyempactivefunc = & enemyempactive;
   level thread emptracker();
-  killstreaks::register("emp", "emp", "killstreak_emp", "emp_used", &activateemp);
-  killstreaks::register_strings("emp", &"KILLSTREAK_EARNED_EMP", &"KILLSTREAK_EMP_NOT_AVAILABLE", &"KILLSTREAK_EMP_INBOUND", undefined, &"KILLSTREAK_EMP_HACKED", 0);
+  killstreaks::register("emp", "emp", "killstreak_emp", "emp_used", & activateemp);
+  killstreaks::register_strings("emp", & "KILLSTREAK_EARNED_EMP", & "KILLSTREAK_EMP_NOT_AVAILABLE", & "KILLSTREAK_EMP_INBOUND", undefined, & "KILLSTREAK_EMP_HACKED", 0);
   killstreaks::register_dialog("emp", "mpl_killstreak_emp_activate", "empDialogBundle", undefined, "friendlyEmp", "enemyEmp", "enemyEmpMultiple", "friendlyEmpHacked", "enemyEmpHacked", "requestEmp", "threatEmp");
   clientfield::register("scriptmover", "emp_turret_init", 1, 1, "int");
   clientfield::register("vehicle", "emp_turret_deploy", 1, 1, "int");
   spinanim = % mp_emp_power_core::o_turret_emp_core_spin;
   deployanim = % mp_emp_power_core::o_turret_emp_core_deploy;
-  callback::on_spawned(&onplayerspawned);
-  callback::on_connect(&onplayerconnect);
-  vehicle::add_main_callback("emp_turret", &initturretvehicle);
+  callback::on_spawned( & onplayerspawned);
+  callback::on_connect( & onplayerconnect);
+  vehicle::add_main_callback("emp_turret", & initturretvehicle);
 }
 
 function initturretvehicle() {
@@ -57,8 +57,8 @@ function initturretvehicle() {
   turretvehicle.health = turretvehicle.maxhealth;
   turretvehicle clientfield::set("enemyvehicle", 1);
   turretvehicle.soundmod = "drone_land";
-  turretvehicle.overridevehicledamage = &onturretdamage;
-  turretvehicle.overridevehicledeath = &onturretdeath;
+  turretvehicle.overridevehicledamage = & onturretdamage;
+  turretvehicle.overridevehicledeath = & onturretdeath;
   target_set(turretvehicle, vectorscale((0, 0, 1), 36));
 }
 
@@ -79,7 +79,7 @@ function activateemp() {
     return false;
   }
   bundle = level.empkillstreakbundle;
-  empbase = player placeables::spawnplaceable("emp", killstreakid, &onplaceemp, &oncancelplacement, undefined, &onshutdown, undefined, undefined, "wpn_t7_turret_emp_core", "wpn_t7_turret_emp_core_yellow", "wpn_t7_turret_emp_core_red", 1, "", undefined, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
+  empbase = player placeables::spawnplaceable("emp", killstreakid, & onplaceemp, & oncancelplacement, undefined, & onshutdown, undefined, undefined, "wpn_t7_turret_emp_core", "wpn_t7_turret_emp_core_yellow", "wpn_t7_turret_emp_core_red", 1, "", undefined, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
   empbase thread util::ghost_wait_show_to_player(player);
   empbase.othermodel thread util::ghost_wait_show_to_others(player);
   empbase clientfield::set("emp_turret_init", 1);
@@ -94,7 +94,7 @@ function activateemp() {
 function onplaceemp(emp) {
   player = self;
   assert(isplayer(player));
-  assert(!isDefined(emp.vehicle));
+  assert(!isdefined(emp.vehicle));
   emp.vehicle = spawnvehicle("emp_turret", emp.origin, emp.angles);
   emp.vehicle thread util::ghost_wait_show(0.05);
   emp.vehicle.killstreaktype = emp.killstreaktype;
@@ -107,8 +107,8 @@ function onplaceemp(emp) {
   player addweaponstat(getweapon("emp"), "used", 1);
   level thread popups::displaykillstreakteammessagetoall("emp", player);
   emp.vehicle killstreaks::configure_team("emp", emp.killstreakid, player);
-  emp.vehicle killstreak_hacking::enable_hacking("emp", &hackedcallbackpre, &hackedcallbackpost);
-  emp thread killstreaks::waitfortimeout("emp", 60000, &on_timeout, "death");
+  emp.vehicle killstreak_hacking::enable_hacking("emp", & hackedcallbackpre, & hackedcallbackpost);
+  emp thread killstreaks::waitfortimeout("emp", 60000, & on_timeout, "death");
   if(issentient(emp.vehicle) == 0) {
     emp.vehicle makesentient();
   }
@@ -128,7 +128,7 @@ function deployempturret(emp) {
   emp.vehicle clientfield::set("emp_turret_deploy", 1);
   wait(length * 0.75);
   emp.vehicle thread playempfx();
-  emp.vehicle playSound("mpl_emp_turret_activate");
+  emp.vehicle playsound("mpl_emp_turret_activate");
   emp.vehicle setanim( % mp_emp_power_core::o_turret_emp_core_spin, 1);
   player thread emp_jamenemies(emp, 0);
   wait(length * 0.25);
@@ -147,19 +147,19 @@ function hackedcallbackpost(hacker) {
 }
 
 function doneempfx(fxtagorigin) {
-  playFX("killstreaks/fx_emp_exp_death", fxtagorigin);
+  playfx("killstreaks/fx_emp_exp_death", fxtagorigin);
   playsoundatposition("mpl_emp_turret_deactivate", fxtagorigin);
 }
 
 function playempfx() {
   emp_vehicle = self;
-  emp_vehicle playLoopSound("mpl_emp_turret_loop_close");
+  emp_vehicle playloopsound("mpl_emp_turret_loop_close");
   wait(0.05);
 }
 
 function on_timeout() {
   emp = self;
-  if(isDefined(emp.vehicle)) {
+  if(isdefined(emp.vehicle)) {
     fxtagorigin = emp.vehicle gettagorigin("tag_fx");
     doneempfx(fxtagorigin);
   }
@@ -174,7 +174,7 @@ function onturretdamage(einflictor, attacker, idamage, idflags, smeansofdeath, w
   empdamage = 0;
   idamage = self killstreaks::ondamageperweapon("emp", attacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, undefined, self.maxhealth * 0.4, undefined, empdamage, undefined, 1, 1);
   self.damagetaken = self.damagetaken + idamage;
-  if(self.damagetaken > self.maxhealth && !isDefined(self.will_die)) {
+  if(self.damagetaken > self.maxhealth && !isdefined(self.will_die)) {
     self.will_die = 1;
     self thread ondeathafterframeend(attacker, weapon);
   }
@@ -187,7 +187,7 @@ function onturretdeath(inflictor, attacker, idamage, smeansofdeath, weapon, vdir
 
 function ondeathafterframeend(attacker, weapon) {
   waittillframeend();
-  if(isDefined(self)) {
+  if(isdefined(self)) {
     self ondeath(attacker, weapon);
   }
 }
@@ -196,15 +196,15 @@ function ondeath(attacker, weapon) {
   emp_vehicle = self;
   fxtagorigin = self gettagorigin("tag_fx");
   doneempfx(fxtagorigin);
-  if(isDefined(attacker) && isplayer(attacker) && (!isDefined(emp_vehicle.owner) || emp_vehicle.owner util::isenemyplayer(attacker))) {
+  if(isdefined(attacker) && isplayer(attacker) && (!isdefined(emp_vehicle.owner) || emp_vehicle.owner util::isenemyplayer(attacker))) {
     attacker challenges::destroyscorestreak(weapon, 0, 1, 0);
     attacker challenges::destroynonairscorestreak_poststatslock(weapon);
     attacker addplayerstat("destroy_turret", 1);
     attacker addweaponstat(weapon, "destroy_turret", 1);
     scoreevents::processscoreevent("destroyed_emp", attacker, emp_vehicle.owner, weapon);
-    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_EMP", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_EMP", attacker.entnum);
   }
-  if(isDefined(attacker) && isDefined(emp_vehicle.owner) && attacker != emp_vehicle.owner) {
+  if(isdefined(attacker) && isdefined(emp_vehicle.owner) && attacker != emp_vehicle.owner) {
     emp_vehicle killstreaks::play_destroyed_dialog_on_owner("emp", emp_vehicle.parentstruct.killstreakid);
   }
   shutdownemp(emp_vehicle.parentstruct);
@@ -215,21 +215,21 @@ function onshutdown(emp) {
 }
 
 function shutdownemp(emp) {
-  if(!isDefined(emp)) {
+  if(!isdefined(emp)) {
     return;
   }
-  if(isDefined(emp.already_shutdown)) {
+  if(isdefined(emp.already_shutdown)) {
     return;
   }
   emp.already_shutdown = 1;
-  if(isDefined(emp.vehicle)) {
+  if(isdefined(emp.vehicle)) {
     emp.vehicle clientfield::set("emp_turret_deploy", 0);
   }
   stopemp(emp.team, emp.ownerentnum, emp.originalteam, emp.killstreakid);
-  if(isDefined(emp.othermodel)) {
+  if(isdefined(emp.othermodel)) {
     emp.othermodel delete();
   }
-  if(isDefined(emp.vehicle)) {
+  if(isdefined(emp.vehicle)) {
     emp.vehicle delete();
   }
   emp delete();
@@ -314,7 +314,7 @@ function emp_jamenemies(empent, hacked) {
 
 function emptracker() {
   level endon("game_ended");
-  while(true) {
+  while (true) {
     level waittill("emp_updated");
     foreach(player in level.players) {
       player updateemp();

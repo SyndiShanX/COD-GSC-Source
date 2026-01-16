@@ -23,15 +23,14 @@ main() {
   self thread setLastStoppedTime();
   transitionedToIdle = gettime() < 3000;
   if(!transitionedToIdle) {
-    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
+    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
       transitionedToIdle = true;
-    } else if(self.weapon == "none") {
+    else if(self.weapon == "none")
       transitionedToIdle = true;
-    } else if(AngleClamp180(self getTagAngles("tag_weapon")[0]) > 20) {
+    else if(AngleClamp180(self getTagAngles("tag_weapon")[0]) > 20)
       transitionedToIdle = true;
-    }
   }
-  for(;;) {
+  for (;;) {
     desiredPose = getDesiredIdlePose();
     if(desiredPose == "prone") {
       transitionedToIdle = true;
@@ -161,7 +160,7 @@ ProneStill() {
 UpdateProneThread() {
   self endon("killanimscript");
   self endon("kill UpdateProneThread");
-  for(;;) {
+  for (;;) {
     self animscripts\cover_prone::UpdateProneWrapper(0.1);
     wait 0.1;
   }

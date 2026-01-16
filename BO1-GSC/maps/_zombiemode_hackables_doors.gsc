@@ -13,7 +13,7 @@ door_struct_debug() {
     origin = self.origin;
     point = origin;
     for(i = 1; i < 5; i++) {
-      point = origin + (anglesToForward(self.door.angles) * (i * 2));
+      point = origin + (AnglesToForward(self.door.angles) * (i * 2));
       passed = bullettracepassed(point, origin, false, undefined);
       color = (0, 255, 0);
       if(!passed) {
@@ -34,8 +34,8 @@ hack_doors(targetname, door_activate_func) {
   }
   for(i = 0; i < doors.size; i++) {
     door = doors[i];
-    struct = spawnStruct();
-    struct.origin = door.origin + (anglesToForward(door.angles) * 2);
+    struct = SpawnStruct();
+    struct.origin = door.origin + (AnglesToForward(door.angles) * 2);
     struct.radius = 48;
     struct.height = 72;
     struct.script_float = 32.7;

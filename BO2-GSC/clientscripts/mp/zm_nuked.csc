@@ -67,9 +67,11 @@ zombie_eye_clientfield(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   level._override_eye_fx = level._effect["blue_eyes"];
 }
 
-register_clientflags() {}
+register_clientflags() {
+}
 
-register_clientflag_callbacks() {}
+register_clientflag_callbacks() {
+}
 
 include_weapons() {
   include_weapon("knife_zm", 0);
@@ -163,7 +165,6 @@ intermission_settings() {
   level waittill("znfg");
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     setworldfogactivebank(i, 2);
-  }
 }

@@ -6,6 +6,7 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
+
 #namespace status_effect_shock;
 
 autoexec __init__system__() {
@@ -53,8 +54,8 @@ shock_end() {
 
 private shock_rumble_loop(duration) {
   self notify(#"shock_rumble_loop");
-  self endon(#"shock_rumble_loop", # "endstatuseffect");
-  self.owner endon(#"disconnect", # "death");
+  self endon(#"shock_rumble_loop", #"endstatuseffect");
+  self.owner endon(#"disconnect", #"death");
   goaltime = gettime() + int(duration * 1000);
 
   while(gettime() < goaltime && isDefined(self.owner)) {

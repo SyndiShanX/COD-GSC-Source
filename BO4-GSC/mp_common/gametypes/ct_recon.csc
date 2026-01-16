@@ -9,6 +9,7 @@
 #include scripts\mp_common\gametypes\ct_ai_blight_father;
 #include scripts\mp_common\gametypes\ct_ai_zombie;
 #include scripts\mp_common\gametypes\ct_core;
+
 #namespace ct_recon;
 
 event_handler[gametype_init] main(eventstruct) {

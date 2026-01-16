@@ -17,7 +17,7 @@ register_equipment(equipment_name, hint, howto_hint, equipmentVO, watcher_thread
     return;
   }
   PrecacheString(hint);
-  struct = spawnStruct();
+  struct = SpawnStruct();
   if(!isDefined(level.zombie_equipment)) {
     level.zombie_equipment = [];
   }

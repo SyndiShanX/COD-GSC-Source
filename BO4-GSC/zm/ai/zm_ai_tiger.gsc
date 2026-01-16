@@ -22,6 +22,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_tiger;
 
 autoexec __init__system__() {
@@ -29,7 +30,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hash_14c746e550d9f3ca", 1, 2, "counter");
+  clientfield::register("toplayer", "" + #"hash_14c746e550d9f3ca", 1, 2, "counter");
   function_d5ccdca1();
   zm_player::register_player_damage_callback(&function_9808e44f);
   spawner::add_archetype_spawn_function(#"tiger", &tiger_init);
@@ -62,7 +63,7 @@ private function_10687511(entity) {
     return 0;
   }
 
-  if(entity.team == # "allies") {
+  if(entity.team == #"allies") {
     entity function_cd6f239();
 
     if(isDefined(entity.favoriteenemy)) {
@@ -89,7 +90,7 @@ private function_10687511(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return entity zm_utility::function_64259898(wait_locations[0].origin, 128);
@@ -112,7 +113,7 @@ private function_10687511(entity) {
     return 0;
   }
 
-  var_eef1279d = 0;
+    var_eef1279d = 0;
 
   if(distancesquared(entity.origin, entity.favoriteenemy.origin) >= 400 * 400) {
     var_eef1279d = 1;
@@ -185,7 +186,7 @@ private function_4703be8a() {
 
       recordsphere(self.var_826049b6, 3, (0, 1, 0), "<dev string:x38>");
 
-      return true;
+        return true;
     }
   }
 
@@ -307,7 +308,7 @@ on_tiger_killed(params) {
 }
 
 function_9808e44f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "tiger" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"tiger" && eattacker.team != self.team) {
     if(isDefined(eattacker.var_d6c43d9b)) {
       self function_8fc19416(eattacker.var_d6c43d9b);
     }
@@ -318,11 +319,11 @@ function_9808e44f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
 function_8fc19416(notetrack) {
   switch (notetrack) {
-    case # "tiger_melee_left":
-      self clientfield::increment_to_player("" + # "hash_14c746e550d9f3ca", 2);
+    case #"tiger_melee_left":
+      self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 2);
       break;
-    case # "tiger_melee_right":
-      self clientfield::increment_to_player("" + # "hash_14c746e550d9f3ca", 1);
+    case #"tiger_melee_right":
+      self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 1);
       break;
   }
 }

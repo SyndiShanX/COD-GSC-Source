@@ -7,11 +7,10 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog") {
+  if(self.type == "dog")
     dog_wall_and_window_hop("wallhop", 40);
-  } else {
+  else
     self advancedWindowTraverse( % windowclimb, 35);
-  }
 }
 
 advancedWindowTraverse(traverseAnim, normalHeight) {
@@ -25,7 +24,7 @@ advancedWindowTraverse(traverseAnim, normalHeight) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isDefined(startnode));
+  assert(isdefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
 
@@ -42,4 +41,5 @@ advancedWindowTraverse(traverseAnim, normalHeight) {
   self traverseMode("gravity");
 
   self animscripts\shared::DoNoteTracks("traverse");
+
 }

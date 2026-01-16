@@ -14,46 +14,46 @@
 #namespace aiutility;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionBehaviorCondition", &locomotionbehaviorcondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionBehaviorCondition", &locomotionbehaviorcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("nonCombatLocomotionCondition", &noncombatlocomotioncondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceForMovement", &setdesiredstanceformovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("clearPathFromScript", &clearpathfromscript);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldPatrol", &locomotionshouldpatrol);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldPatrol", &locomotionshouldpatrol);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalWalk", &shouldtacticalwalk);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalk", &shouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAdjustStanceAtTacticalWalk", &shouldadjuststanceattacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("adjustStanceToFaceEnemyInitialize", &adjuststancetofaceenemyinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("adjustStanceToFaceEnemyTerminate", &adjuststancetofaceenemyterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tacticalWalkActionStart", &tacticalwalkactionstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkActionStart", &tacticalwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("clearArrivalPos", &cleararrivalpos);
-  behaviorstatemachine::registerbsmscriptapiinternal("clearArrivalPos", &cleararrivalpos);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStartArrival", &shouldstartarrivalcondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldStartArrival", &shouldstartarrivalcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldTraverse", &locomotionshouldtraverse);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldTraverse", &locomotionshouldtraverse);
-  behaviortreenetworkutility::registerbehaviortreeaction("traverseActionStart", &traverseactionstart, undefined, undefined);
-  behaviorstatemachine::registerbsmscriptapiinternal("traverseSetup", &traversesetup);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("disableRepath", &disablerepath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("enableRepath", &enablerepath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canJuke", &canjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseJukeDirection", &choosejukedirection);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionPainBehaviorCondition", &locomotionpainbehaviorcondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionIsOnStairs", &locomotionisonstairs);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldLoopOnStairs", &locomotionshouldlooponstairs);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldSkipStairs", &locomotionshouldskipstairs);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionStairsStart", &locomotionstairsstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionStairsEnd", &locomotionstairsend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("delayMovement", &delaymovement);
-  behaviorstatemachine::registerbsmscriptapiinternal("delayMovement", &delaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionBehaviorCondition", & locomotionbehaviorcondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionBehaviorCondition", & locomotionbehaviorcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("nonCombatLocomotionCondition", & noncombatlocomotioncondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceForMovement", & setdesiredstanceformovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("clearPathFromScript", & clearpathfromscript);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldPatrol", & locomotionshouldpatrol);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldPatrol", & locomotionshouldpatrol);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalWalk", & shouldtacticalwalk);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalk", & shouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAdjustStanceAtTacticalWalk", & shouldadjuststanceattacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("adjustStanceToFaceEnemyInitialize", & adjuststancetofaceenemyinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("adjustStanceToFaceEnemyTerminate", & adjuststancetofaceenemyterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tacticalWalkActionStart", & tacticalwalkactionstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkActionStart", & tacticalwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("clearArrivalPos", & cleararrivalpos);
+  behaviorstatemachine::registerbsmscriptapiinternal("clearArrivalPos", & cleararrivalpos);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStartArrival", & shouldstartarrivalcondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldStartArrival", & shouldstartarrivalcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldTraverse", & locomotionshouldtraverse);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldTraverse", & locomotionshouldtraverse);
+  behaviortreenetworkutility::registerbehaviortreeaction("traverseActionStart", & traverseactionstart, undefined, undefined);
+  behaviorstatemachine::registerbsmscriptapiinternal("traverseSetup", & traversesetup);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("disableRepath", & disablerepath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("enableRepath", & enablerepath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canJuke", & canjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseJukeDirection", & choosejukedirection);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionPainBehaviorCondition", & locomotionpainbehaviorcondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionIsOnStairs", & locomotionisonstairs);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldLoopOnStairs", & locomotionshouldlooponstairs);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldSkipStairs", & locomotionshouldskipstairs);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionStairsStart", & locomotionstairsstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionStairsEnd", & locomotionstairsend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("delayMovement", & delaymovement);
+  behaviorstatemachine::registerbsmscriptapiinternal("delayMovement", & delaymovement);
 }
 
 function private locomotionisonstairs(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
-  if(isDefined(startnode) && behaviortreeentity shouldstarttraversal()) {
-    if(isDefined(startnode.animscript) && issubstr(tolower(startnode.animscript), "stairs")) {
+  if(isdefined(startnode) && behaviortreeentity shouldstarttraversal()) {
+    if(isdefined(startnode.animscript) && issubstr(tolower(startnode.animscript), "stairs")) {
       return true;
     }
   }
@@ -61,7 +61,7 @@ function private locomotionisonstairs(behaviortreeentity) {
 }
 
 function private locomotionshouldskipstairs(behaviortreeentity) {
-  assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
+  assert(isdefined(behaviortreeentity._stairsstartnode) && isdefined(behaviortreeentity._stairsendnode));
   numtotalsteps = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_num_total_steps");
   stepssofar = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_num_steps");
   direction = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_direction");
@@ -81,7 +81,7 @@ function private locomotionshouldskipstairs(behaviortreeentity) {
 }
 
 function private locomotionshouldlooponstairs(behaviortreeentity) {
-  assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
+  assert(isdefined(behaviortreeentity._stairsstartnode) && isdefined(behaviortreeentity._stairsendnode));
   numtotalsteps = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_num_total_steps");
   stepssofar = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_num_steps");
   exittype = blackboard::getblackboardattribute(behaviortreeentity, "_staircase_exit_type");
@@ -111,7 +111,7 @@ function private locomotionshouldlooponstairs(behaviortreeentity) {
 function private locomotionstairsstart(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
   endnode = behaviortreeentity.traverseendnode;
-  assert(isDefined(startnode) && isDefined(endnode));
+  assert(isdefined(startnode) && isdefined(endnode));
   behaviortreeentity._stairsstartnode = startnode;
   behaviortreeentity._stairsendnode = endnode;
   if(startnode.type == "Begin") {
@@ -123,12 +123,12 @@ function private locomotionstairsstart(behaviortreeentity) {
   blackboard::setblackboardattribute(behaviortreeentity, "_staircase_state", "staircase_start");
   blackboard::setblackboardattribute(behaviortreeentity, "_staircase_direction", direction);
   numtotalsteps = undefined;
-  if(isDefined(startnode.script_int)) {
+  if(isdefined(startnode.script_int)) {
     numtotalsteps = int(endnode.script_int);
-  } else if(isDefined(endnode.script_int)) {
+  } else if(isdefined(endnode.script_int)) {
     numtotalsteps = int(endnode.script_int);
   }
-  assert(isDefined(numtotalsteps) && isint(numtotalsteps) && numtotalsteps > 0);
+  assert(isdefined(numtotalsteps) && isint(numtotalsteps) && numtotalsteps > 0);
   blackboard::setblackboardattribute(behaviortreeentity, "_staircase_num_total_steps", numtotalsteps);
   blackboard::setblackboardattribute(behaviortreeentity, "_staircase_num_steps", 0);
   exittype = undefined;
@@ -168,7 +168,7 @@ function private locomotionstairsstart(behaviortreeentity) {
 }
 
 function private locomotionstairloopstart(behaviortreeentity) {
-  assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
+  assert(isdefined(behaviortreeentity._stairsstartnode) && isdefined(behaviortreeentity._stairsendnode));
   blackboard::setblackboardattribute(behaviortreeentity, "_staircase_state", "staircase_loop");
 }
 
@@ -189,10 +189,10 @@ function private noncombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
+  if(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
     return true;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return false;
   }
   return true;
@@ -202,10 +202,10 @@ function private combatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
+  if(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
     return false;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return true;
   }
   return false;
@@ -223,7 +223,7 @@ function private setdesiredstanceformovement(behaviortreeentity) {
 
 function private locomotionshouldtraverse(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
-  if(isDefined(startnode) && behaviortreeentity shouldstarttraversal()) {
+  if(isdefined(startnode) && behaviortreeentity shouldstarttraversal()) {
     return true;
   }
   return false;
@@ -238,7 +238,7 @@ function traversesetup(behaviortreeentity) {
 function traverseactionstart(behaviortreeentity, asmstatename) {
   traversesetup(behaviortreeentity);
   animationresults = behaviortreeentity astsearch(istring(asmstatename));
-  assert(isDefined(animationresults[""]), ((((behaviortreeentity.archetype + "") + behaviortreeentity.traversestartnode.animscript) + "") + behaviortreeentity.traversestartnode.origin) + "");
+  assert(isdefined(animationresults[""]), ((((behaviortreeentity.archetype + "") + behaviortreeentity.traversestartnode.animscript) + "") + behaviortreeentity.traversestartnode.origin) + "");
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -259,7 +259,7 @@ function shouldstartarrivalcondition(behaviortreeentity) {
 }
 
 function cleararrivalpos(behaviortreeentity) {
-  if(!isDefined(behaviortreeentity.isarrivalpending) || (isDefined(behaviortreeentity.isarrivalpending) && behaviortreeentity.isarrivalpending)) {
+  if(!isdefined(behaviortreeentity.isarrivalpending) || (isdefined(behaviortreeentity.isarrivalpending) && behaviortreeentity.isarrivalpending)) {
     self clearuseposition();
   }
   return true;
@@ -304,7 +304,7 @@ function private validjukedirection(entity, entitynavmeshposition, forwardoffset
   backwardposition = (entity.origin + lateraloffset) - forwardoffset;
   forwardpositionvalid = ispointonnavmesh(forwardposition, entity) && tracepassedonnavmesh(entity.origin, forwardposition);
   backwardpositionvalid = ispointonnavmesh(backwardposition, entity) && tracepassedonnavmesh(entity.origin, backwardposition);
-  if(!isDefined(entity.ignorebackwardposition)) {
+  if(!isdefined(entity.ignorebackwardposition)) {
     return forwardpositionvalid && backwardpositionvalid;
   }
   return forwardpositionvalid;
@@ -313,17 +313,17 @@ function private validjukedirection(entity, entitynavmeshposition, forwardoffset
 function calculatejukedirection(entity, entityradius, jukedistance) {
   jukenavmeshthreshold = 6;
   defaultdirection = "forward";
-  if(isDefined(entity.defaultjukedirection)) {
+  if(isdefined(entity.defaultjukedirection)) {
     defaultdirection = entity.defaultjukedirection;
   }
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     navmeshposition = getclosestpointonnavmesh(entity.origin, jukenavmeshthreshold);
     if(!isvec(navmeshposition)) {
       return defaultdirection;
     }
     vectortoenemy = entity.enemy.origin - entity.origin;
     vectortoenemyangles = vectortoangles(vectortoenemy);
-    forwarddistance = anglesToForward(vectortoenemyangles) * entityradius;
+    forwarddistance = anglestoforward(vectortoenemyangles) * entityradius;
     rightjukedistance = anglestoright(vectortoenemyangles) * jukedistance;
     preferleft = undefined;
     if(entity haspath()) {
@@ -355,20 +355,20 @@ function calculatejukedirection(entity, entityradius, jukedistance) {
 function private calculatedefaultjukedirection(entity) {
   jukedistance = 30;
   entityradius = 15;
-  if(isDefined(entity.jukedistance)) {
+  if(isdefined(entity.jukedistance)) {
     jukedistance = entity.jukedistance;
   }
-  if(isDefined(entity.entityradius)) {
+  if(isdefined(entity.entityradius)) {
     entityradius = entity.entityradius;
   }
   return calculatejukedirection(entity, entityradius, jukedistance);
 }
 
 function canjuke(entity) {
-  if(isDefined(self.is_disabled) && self.is_disabled) {
+  if(isdefined(self.is_disabled) && self.is_disabled) {
     return 0;
   }
-  if(isDefined(entity.jukemaxdistance) && isDefined(entity.enemy)) {
+  if(isdefined(entity.jukemaxdistance) && isdefined(entity.enemy)) {
     maxdistsquared = entity.jukemaxdistance * entity.jukemaxdistance;
     if(distance2dsquared(entity.origin, entity.enemy.origin) > maxdistsquared) {
       return 0;

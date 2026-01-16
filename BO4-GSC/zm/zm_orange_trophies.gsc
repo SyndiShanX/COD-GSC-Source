@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_orange_trophies;
 
 init() {
@@ -59,7 +60,7 @@ function_ea67bd7c() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x4b>");
 
-  self zm_utility::giveachievement_wrapper("zm_orange_ascend", 1);
+    self zm_utility::giveachievement_wrapper("zm_orange_ascend", 1);
 }
 
 function_e12fb431() {
@@ -97,7 +98,7 @@ function_790e5d6() {
 
       iprintlnbold("<dev string:x38>" + "<dev string:x5e>");
 
-      self zm_utility::giveachievement_wrapper("zm_orange_bells", 0);
+        self zm_utility::giveachievement_wrapper("zm_orange_bells", 0);
       var_a3404ecb = 1;
       continue;
     }
@@ -131,9 +132,10 @@ function_b9f47977(e_zombie) {
   self.var_79447139 += 1;
 
   if(self.var_79447139 >= 10) {
+
     iprintlnbold("<dev string:x38>" + "<dev string:x70>");
 
-    self zm_utility::giveachievement_wrapper("zm_orange_freeze", 1);
+      self zm_utility::giveachievement_wrapper("zm_orange_freeze", 1);
     level flag::set(#"hash_e1ce5432989899");
     callback::remove_on_ai_killed(&function_c28621d7);
     self notify(#"hash_402140b7cdc4bca1");
@@ -152,13 +154,14 @@ function_e140ff5c() {
 }
 
 function_4ff2cfd9(s_result) {
-  if(self.archetype == # "zombie_dog" && zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && !level flag::get(#"hash_6046825f3ec27c48")) {
+  if(self.archetype == #"zombie_dog" && zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && !level flag::get(#"hash_6046825f3ec27c48")) {
     s_result.eattacker.var_59c409c3 += 1;
 
     if(s_result.eattacker.var_59c409c3 >= 5) {
+
       iprintlnbold("<dev string:x38>" + "<dev string:x83>");
 
-      s_result.eattacker zm_utility::giveachievement_wrapper("zm_orange_hounds", 0);
+        s_result.eattacker zm_utility::giveachievement_wrapper("zm_orange_hounds", 0);
       level flag::set(#"hash_6046825f3ec27c48");
       level callback::remove_on_ai_killed(&function_4ff2cfd9);
     }
@@ -172,7 +175,7 @@ function_6c88da5b() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x96>");
 
-  level zm_utility::giveachievement_wrapper("zm_orange_totems", 1);
+    level zm_utility::giveachievement_wrapper("zm_orange_totems", 1);
 }
 
 function_3202188() {
@@ -197,16 +200,17 @@ function_3202188() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:xa9>");
 
-  self zm_utility::giveachievement_wrapper("zm_orange_pack", 0);
+    self zm_utility::giveachievement_wrapper("zm_orange_pack", 0);
 }
 
 function_b0e59abe() {
   level flag::wait_till(#"edge_of_the_world_complete");
 
   if(isDefined(level.edge_player)) {
+
     iprintlnbold("<dev string:x38>" + "<dev string:xba>");
 
-    level.edge_player zm_utility::giveachievement_wrapper("zm_orange_secret", 0);
+      level.edge_player zm_utility::giveachievement_wrapper("zm_orange_secret", 0);
   }
 }
 
@@ -260,8 +264,8 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_38c97197db36afb7")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_38c97197db36afb7";
+  if(!isinarray(level.var_55b76576, #"hash_38c97197db36afb7")) {
+    level.var_55b76576[level.var_55b76576.size] = #"hash_38c97197db36afb7";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -360,8 +364,8 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_48e7d63b38c5e2da")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_48e7d63b38c5e2da";
+  if(!isinarray(level.var_55b76576, #"hash_48e7d63b38c5e2da")) {
+    level.var_55b76576[level.var_55b76576.size] = #"hash_48e7d63b38c5e2da";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -440,8 +444,8 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_52d967f4fc8b12fc")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_52d967f4fc8b12fc";
+  if(!isinarray(level.var_55b76576, #"hash_52d967f4fc8b12fc")) {
+    level.var_55b76576[level.var_55b76576.size] = #"hash_52d967f4fc8b12fc";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -450,8 +454,8 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_6f7fd3d4d070db87")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_6f7fd3d4d070db87";
+  if(!isinarray(level.var_55b76576, #"hash_6f7fd3d4d070db87")) {
+    level.var_55b76576[level.var_55b76576.size] = #"hash_6f7fd3d4d070db87";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -490,9 +494,10 @@ function_63522769() {
   level flag::set(#"hash_113f70c573aed94d");
 
   if(!level flag::get(#"power_on") && !level flag::get(#"power_on1") && !level flag::get(#"power_on2") && !level flag::get(#"power_on3")) {
+
     iprintlnbold("<dev string:x38>" + "<dev string:xcd>");
 
-    level zm_utility::giveachievement_wrapper("zm_orange_power", 1);
+      level zm_utility::giveachievement_wrapper("zm_orange_power", 1);
   }
 }
 
@@ -514,9 +519,10 @@ function_c7b3bfea() {
     }
 
     if(self.var_5fe30ecb.size >= 9) {
+
       iprintlnbold("<dev string:x38>" + "<dev string:xdf>");
 
-      self zm_utility::giveachievement_wrapper("zm_orange_ziplines", 0);
+        self zm_utility::giveachievement_wrapper("zm_orange_ziplines", 0);
     }
   }
 }
@@ -547,14 +553,14 @@ function_82947e72() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === # "pistol_standard_t8" || s_result.weapon.name === # "pistol_standard_t8_upgraded") {
+    if(s_result.weapon.name === #"pistol_standard_t8" || s_result.weapon.name === #"pistol_standard_t8_upgraded") {
       level exploder::exploder("fxexp_glass_jar_exp");
       self hide();
       self setCanDamage(0);
 
       iprintlnbold("<dev string:x38>" + "<dev string:xf4>");
 
-      s_result.attacker zm_utility::giveachievement_wrapper("zm_orange_jar", 0);
+        s_result.attacker zm_utility::giveachievement_wrapper("zm_orange_jar", 0);
       wait 3;
       self show();
       self setCanDamage(1);

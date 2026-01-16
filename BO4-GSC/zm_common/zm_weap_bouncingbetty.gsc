@@ -11,6 +11,7 @@
 #include scripts\weapons\weaponobjects;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_placeable_mine;
+
 #namespace bouncingbetty;
 
 autoexec __init__system__() {
@@ -20,7 +21,7 @@ autoexec __init__system__() {
 __init__() {
   level._proximityweaponobjectdetonation_override = &proximityweaponobjectdetonation_override;
   init_shared();
-  zm_placeable_mine::add_mine_type("bouncingbetty", # "zombie/betty_pickup");
+  zm_placeable_mine::add_mine_type("bouncingbetty", #"zombie/betty_pickup");
   level.bettyjumpheight = 55;
   level.bettydamagemax = 1000;
   level.bettydamagemin = 800;
@@ -29,10 +30,11 @@ __init__() {
   setdvar(#"betty_damage_max", level.bettydamagemax);
   setdvar(#"betty_damage_min", level.bettydamagemin);
   setdvar(#"betty_jump_height_onground", level.bettyjumpheight);
+
 }
 
 proximityweaponobjectdetonation_override(watcher) {
-  self endon(#"death", # "hacked", # "kill_target_detection");
+  self endon(#"death", #"hacked", #"kill_target_detection");
   weaponobjects::proximityweaponobject_activationdelay(watcher);
   damagearea = weaponobjects::proximityweaponobject_createdamagearea(watcher);
   up = anglestoup(self.angles);

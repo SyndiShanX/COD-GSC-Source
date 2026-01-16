@@ -17,7 +17,7 @@ build_bomb_explosions(type, quakepower, quaketime, quakeradius, range, min_damag
   AssertEx(isDefined(range), "_planeweapons::build_bomb_explosions(): no range specified!");
   AssertEx(isDefined(min_damage), "_planeweapons::build_bomb_explosions(): no min_damage specified!");
   AssertEx(isDefined(max_damage), "_planeweapons::build_bomb_explosions(): no max_damage specified!");
-  struct = spawnStruct();
+  struct = spawnstruct();
   struct.quakepower = quakepower;
   struct.quaketime = quaketime;
   struct.quakeradius = quakeradius;
@@ -72,7 +72,7 @@ bomb_init(bomb_count) {
 drop_bombs_waittill() {
   self endon("death");
   self endon("reached_end_node");
-  while(1) {
+  while (1) {
     self waittill("drop_bombs", amount, delay, delay_trace);
     drop_bombs(amount, delay, delay_trace);
   }
@@ -81,7 +81,7 @@ drop_bombs_waittill() {
 bomb_drop_end() {
   self waittill("reached_end_node");
   if(isDefined(self.bomb)) {
-    for(i = 0; i < self.bomb.size; i++) {
+    for (i = 0; i < self.bomb.size; i++) {
       if(isDefined(self.bomb[i]) && !self.bomb[i].dropped) {
         self.bomb[i] Delete();
       }
@@ -103,9 +103,9 @@ attach_bombs() {
     tag_r2 = "tag_bomb_right";
     tag_c = "tag_bomb_right";
   }
-  for(i = 0; i < self.bomb_count; i++) {
-    self.bomb[i] = spawn("script_model", (self.origin));
-    self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
+  for (i = 0; i < self.bomb_count; i++) {
+    self.bomb[i] = Spawn("script_model", (self.origin));
+    self.bomb[i] SetModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = false;
     if(i == 0) {
       self.bomb[i] LinkTo(self, tag_l1, (0, 0, -4), (-10, 0, 0));
@@ -143,20 +143,20 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     if(amount > self.bomb_count) {
       amount = self.bomb_count;
     }
-    for(i = 0; i < amount; i++) {
+    for (i = 0; i < amount; i++) {
       if(total_bomb_count <= 0) {
         println("^3_planeweapons::drop_bombs(): Plane at " + self.origin + " with targetname " + self.targetname + " has no more bombs to drop!");
         return;
       }
       if(isDefined(self.bomb[i]) && self.bomb[i].dropped) {
-        for(q = 0; q < self.bomb_count; q++) {
+        for (q = 0; q < self.bomb_count; q++) {
           if(isDefined(self.bomb[q]) && !self.bomb[q].dropped) {
             i = q;
             q = (self.bomb_count + 1);
           }
         }
       } else if(!isDefined(self.bomb[i])) {
-        for(q = 0; q < self.bomb_count; q++) {
+        for (q = 0; q < self.bomb_count; q++) {
           if(isDefined(self.bomb[q]) && !self.bomb[q].dropped) {
             i = q;
             q = (self.bomb_count + 1);
@@ -166,7 +166,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
       total_bomb_count--;
       self.bomb_count--;
       self.bomb[i].dropped = true;
-      forward = anglesToForward(self.angles);
+      forward = AnglesToForward(self.angles);
       vec = vectorScale(forward, self GetSpeed());
       vec_predict = self.bomb[i].origin + vectorScale(forward, (self GetSpeed() * 0.06));
       self.bomb[i] UnLink();
@@ -182,7 +182,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
       wait(delay);
     }
   } else {
-    for(i = 0; i < self.bomb.size; i++) {
+    for (i = 0; i < self.bomb.size; i++) {
       if(!isDefined(self.bomb[i]) || self.bomb[i].dropped) {
         continue;
       }
@@ -192,7 +192,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
       }
       total_bomb_count--;
       self.bomb_count--;
-      forward = anglesToForward(self.angles);
+      forward = AnglesToForward(self.angles);
       vec = vectorScale(forward, self GetSpeed());
       vec_predict = self.bomb[i].origin + vectorScale(forward, (self GetSpeed() * 0.06));
       vec = ((vec[0] + (-20 + RandomFloat(40))), (vec[1] + (-20 + RandomFloat(40))), vec[2]);
@@ -214,7 +214,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
 bomb_wiggle() {
   self endon("death");
   original_angles = self.angles;
-  while(1) {
+  while (1) {
     roll = 10 + RandomFloat(20);
     yaw = 4 + RandomFloat(3);
     time = 0.25 + RandomFloat(0.25);
@@ -252,11 +252,11 @@ bomb_trace(type, delay_trace, trace_dist) {
   if(!isDefined(trace_dist)) {
     trace_dist = 64;
   }
-  while(1) {
+  while (1) {
     vec1 = self.origin;
-    direction = anglesToForward((90, 0, 0));
+    direction = AnglesToForward((90, 0, 0));
     vec2 = vec1 + vectorScale(direction, 10000);
-    trace_result = bulletTrace(vec1, vec2, false, undefined);
+    trace_result = BulletTrace(vec1, vec2, false, undefined);
     dist = Distance(self.origin, trace_result["position"]);
     if(dist < trace_dist || dist >= 10000) {
       self thread bomb_explosion(type);
@@ -274,11 +274,11 @@ bomb_explosion(type) {
   damage_range = struct.range;
   max_damage = struct.mindamage;
   min_damage = struct.maxdamage;
-  sound_org = spawn("script_origin", self.origin);
-  sound_org playSound(level.plane_bomb_sound[type]);
+  sound_org = Spawn("script_origin", self.origin);
+  sound_org PlaySound(level.plane_bomb_sound[type]);
   sound_org thread bomb_sound_delete();
   println("^1plane bomb goes BOOM!!! ^7( Dmg Radius: ", damage_range, " | Max Dmg: ", max_damage, " | Min Dmg: ", min_damage, " )");
-  playFX(level.plane_bomb_fx[type], self.origin);
+  PlayFx(level.plane_bomb_fx[type], self.origin);
   Earthquake(quake_power, quake_time, self.origin, quake_radius);
   RadiusDamage(self.origin, damage_range, max_damage, min_damage);
   self Delete();

@@ -41,34 +41,28 @@ bookmark(type, time, clientent1, clientent2, eventpriority, inflictorent, overri
   actorentnum = undefined;
   scoreeventpriority = 0;
 
-  if(isDefined(clientent1)) {
+  if(isDefined(clientent1))
     client1 = clientent1 getentitynumber();
-  }
 
-  if(isDefined(clientent2)) {
+  if(isDefined(clientent2))
     client2 = clientent2 getentitynumber();
-  }
 
-  if(isDefined(eventpriority)) {
+  if(isDefined(eventpriority))
     scoreeventpriority = eventpriority;
-  }
 
   if(isDefined(inflictorent)) {
     inflictorentnum = inflictorent getentitynumber();
     inflictorenttype = inflictorent getentitytype();
 
-    if(isDefined(inflictorent.birthtime)) {
+    if(isDefined(inflictorent.birthtime))
       inflictorbirthtime = inflictorent.birthtime;
-    }
   }
 
-  if(!isDefined(overrideentitycamera)) {
+  if(!isDefined(overrideentitycamera))
     overrideentitycamera = 0;
-  }
 
-  if(isDefined(actorent)) {
+  if(isDefined(actorent))
     actorentnum = actorent getentitynumber();
-  }
 
   adddemobookmark(level.bookmark[type], time, client1, client2, scoreeventpriority, inflictorentnum, inflictorenttype, inflictorbirthtime, overrideentitycamera, actorentnum);
 }
@@ -84,13 +78,11 @@ gameresultbookmark(type, winningteamindex, losingteamindex) {
   overrideentitycamera = 0;
   actorentnum = undefined;
 
-  if(isDefined(winningteamindex)) {
+  if(isDefined(winningteamindex))
     client1 = winningteamindex;
-  }
 
-  if(isDefined(losingteamindex)) {
+  if(isDefined(losingteamindex))
     client2 = losingteamindex;
-  }
 
   adddemobookmark(level.bookmark[type], gettime(), client1, client2, scoreeventpriority, inflictorentnum, inflictorenttype, inflictorbirthtime, overrideentitycamera, actorentnum);
 }

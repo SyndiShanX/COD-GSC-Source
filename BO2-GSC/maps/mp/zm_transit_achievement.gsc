@@ -65,7 +65,7 @@ achievement_undead_mans_party_bus() {
 achievement_dont_fire_until_you_see() {
   level endon("end_game");
   self endon("burned");
-  zombie_doors = getEntArray("zombie_door", "targetname");
+  zombie_doors = getentarray("zombie_door", "targetname");
 
   while(true) {
     level waittill("door_opened");

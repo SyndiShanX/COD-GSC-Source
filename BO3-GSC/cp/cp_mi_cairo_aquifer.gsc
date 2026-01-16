@@ -62,15 +62,15 @@ function main() {
   namespace_1254c007::main();
   cp_mi_cairo_aquifer_aitest::init();
   thread cp_mi_cairo_aquifer_aitest::function_82230f12();
-  callback::on_finalize_initialization(&on_finalize_initialization);
-  callback::on_connect(&on_player_connected);
-  callback::on_disconnect(&on_player_disconnected);
-  callback::on_spawned(&on_player_spawned);
-  callback::on_loadout(&on_player_loadout);
-  callback::on_player_killed(&on_player_death);
-  level.overrideplayerdamage = &function_6d9a8286;
-  level.custombadplacethread = &function_48694c4a;
-  spawner::add_global_spawn_function("axis", &function_f141f41c);
+  callback::on_finalize_initialization( & on_finalize_initialization);
+  callback::on_connect( & on_player_connected);
+  callback::on_disconnect( & on_player_disconnected);
+  callback::on_spawned( & on_player_spawned);
+  callback::on_loadout( & on_player_loadout);
+  callback::on_player_killed( & on_player_death);
+  level.overrideplayerdamage = & function_6d9a8286;
+  level.custombadplacethread = & function_48694c4a;
+  spawner::add_global_spawn_function("axis", & function_f141f41c);
   compass::setupminimap("compass_map_cp_mi_cairo_aquifer");
   load::main();
   namespace_b5b83650::function_4d39a2af();
@@ -119,29 +119,29 @@ function function_4b0a421() {
 }
 
 function skipto_setup() {
-  skipto::add("level_long_fly_in", &aquifer_obj::skipto_level_long_fly_in_init, "Intro spawnvtol", &aquifer_obj::skipto_level_long_fly_in_done);
-  skipto::function_d68e678e("intro_dogfight", &aquifer_obj::function_9239cf5c, "Destroy Bogey spawnvtol", &aquifer_obj::function_b3635282);
-  skipto::function_d68e678e("destroy_defenses", &aquifer_obj::skipto_defenses_init, "Destroy AA defenses spawnvtol", &aquifer_obj::skipto_defenses_done);
-  skipto::function_d68e678e("hack_terminal_left", &aquifer_obj::skipto_hack_init, "Hack Left Defend checkkayneexist", &aquifer_obj::skipto_hack_done);
-  skipto::function_d68e678e("destroy_defenses_mid", &aquifer_obj::function_fb03103d, "Destroy Remaining AA spawnvtol", &aquifer_obj::function_46151925);
-  skipto::function_d68e678e("hack_terminal_right", &aquifer_obj::function_386c647b, "Hack Right Defend checkkayneexist", &aquifer_obj::function_ec898691);
-  skipto::add("water_room", &aquifer_obj::skipto_water_room_init, "Searching checkenteredwater", &aquifer_obj::skipto_water_room_done);
-  skipto::function_d68e678e("water_room_exit", &aquifer_obj::function_e2e38eb, "Exit Water", &aquifer_obj::function_829aa821);
-  skipto::function_d68e678e("post_water_room_dogfight", &aquifer_obj::function_5b113d76, "Destroy Bogey", &aquifer_obj::function_427463e0);
-  skipto::function_d68e678e("destroy_defenses2", &aquifer_obj::skipto_defenses_init2, "Support Egyptian Forces spawnvtol", &aquifer_obj::skipto_defenses_done2);
-  skipto::function_d68e678e("hack_terminals3", &aquifer_obj::skipto_hack_init3, "L Combat checkplayerlanded", &aquifer_obj::skipto_hack_done3);
-  skipto::function_d68e678e("breach_hangar", &aquifer_obj::skipto_breach_init, "Hangar Breach", &aquifer_obj::skipto_breach_done);
-  skipto::add("post_breach", &aquifer_obj::skipto_post_breach_init, "Post Breach", &aquifer_obj::skipto_post_breach_done);
-  skipto::function_d68e678e("sniper_boss_intro", &aquifer_obj::function_53d54ffb, "Hyperion Battle Intro", &aquifer_obj::function_7f27211);
-  skipto::add("sniper_boss", &aquifer_obj::skipto_boss_init, "Hyperion Battle", &aquifer_obj::skipto_boss_done);
-  skipto::function_d68e678e("hideout", &aquifer_obj::skipto_hideout_init, "Hyperion's hideout", &aquifer_obj::skipto_hideout_done);
-  skipto::add("run_out", &aquifer_obj::function_95463da0, "Flee From Aquifer", &aquifer_obj::function_fb8ad8d6);
-  skipto::add("exfil", &aquifer_obj::skipto_exfil_init, "Exfil", &aquifer_obj::skipto_exfil_done);
-  skipto::add_dev("", &aquifer_obj::function_3230f09a, "", &aquifer_obj::function_a02afda4);
+  skipto::add("level_long_fly_in", & aquifer_obj::skipto_level_long_fly_in_init, "Intro spawnvtol", & aquifer_obj::skipto_level_long_fly_in_done);
+  skipto::function_d68e678e("intro_dogfight", & aquifer_obj::function_9239cf5c, "Destroy Bogey spawnvtol", & aquifer_obj::function_b3635282);
+  skipto::function_d68e678e("destroy_defenses", & aquifer_obj::skipto_defenses_init, "Destroy AA defenses spawnvtol", & aquifer_obj::skipto_defenses_done);
+  skipto::function_d68e678e("hack_terminal_left", & aquifer_obj::skipto_hack_init, "Hack Left Defend checkkayneexist", & aquifer_obj::skipto_hack_done);
+  skipto::function_d68e678e("destroy_defenses_mid", & aquifer_obj::function_fb03103d, "Destroy Remaining AA spawnvtol", & aquifer_obj::function_46151925);
+  skipto::function_d68e678e("hack_terminal_right", & aquifer_obj::function_386c647b, "Hack Right Defend checkkayneexist", & aquifer_obj::function_ec898691);
+  skipto::add("water_room", & aquifer_obj::skipto_water_room_init, "Searching checkenteredwater", & aquifer_obj::skipto_water_room_done);
+  skipto::function_d68e678e("water_room_exit", & aquifer_obj::function_e2e38eb, "Exit Water", & aquifer_obj::function_829aa821);
+  skipto::function_d68e678e("post_water_room_dogfight", & aquifer_obj::function_5b113d76, "Destroy Bogey", & aquifer_obj::function_427463e0);
+  skipto::function_d68e678e("destroy_defenses2", & aquifer_obj::skipto_defenses_init2, "Support Egyptian Forces spawnvtol", & aquifer_obj::skipto_defenses_done2);
+  skipto::function_d68e678e("hack_terminals3", & aquifer_obj::skipto_hack_init3, "L Combat checkplayerlanded", & aquifer_obj::skipto_hack_done3);
+  skipto::function_d68e678e("breach_hangar", & aquifer_obj::skipto_breach_init, "Hangar Breach", & aquifer_obj::skipto_breach_done);
+  skipto::add("post_breach", & aquifer_obj::skipto_post_breach_init, "Post Breach", & aquifer_obj::skipto_post_breach_done);
+  skipto::function_d68e678e("sniper_boss_intro", & aquifer_obj::function_53d54ffb, "Hyperion Battle Intro", & aquifer_obj::function_7f27211);
+  skipto::add("sniper_boss", & aquifer_obj::skipto_boss_init, "Hyperion Battle", & aquifer_obj::skipto_boss_done);
+  skipto::function_d68e678e("hideout", & aquifer_obj::skipto_hideout_init, "Hyperion's hideout", & aquifer_obj::skipto_hideout_done);
+  skipto::add("run_out", & aquifer_obj::function_95463da0, "Flee From Aquifer", & aquifer_obj::function_fb8ad8d6);
+  skipto::add("exfil", & aquifer_obj::skipto_exfil_init, "Exfil", & aquifer_obj::skipto_exfil_done);
+  skipto::add_dev("", & aquifer_obj::function_3230f09a, "", & aquifer_obj::function_a02afda4);
   level.skipto_triggers = [];
-  a_trigs = getEntArray("objective", "targetname");
+  a_trigs = getentarray("objective", "targetname");
   foreach(trig in a_trigs) {
-    if(isDefined(trig.script_objective)) {
+    if(isdefined(trig.script_objective)) {
       level.skipto_triggers[trig.script_objective] = trig;
     }
   }
@@ -205,11 +205,11 @@ function precache() {
   level.var_f00df7e8 = 1;
   thread aquifer_util::setup_reusable_destructible();
   thread aquifer_util::function_a97555a0("enemy_vtol_riders", "zone3_vtol_dropoff");
-  thread vehicle_ai::register_custom_add_state_callback(&function_8f9628e0);
+  thread vehicle_ai::register_custom_add_state_callback( & function_8f9628e0);
 }
 
 function function_c2c4ea75() {
-  while(true) {
+  while (true) {
     level waittill("save_restore");
     foreach(player in level.players) {
       player clearplayergravity();
@@ -222,9 +222,9 @@ function on_finalize_initialization() {
 }
 
 function function_8f9628e0() {
-  if(isDefined(self.variant) && self.variant == "rocketpod") {
+  if(isdefined(self.variant) && self.variant == "rocketpod") {
     self.allow_movement = 0;
-    self vehicle_ai::get_state_callbacks("combat").update_func = &aquifer_util::function_11b961b7;
+    self vehicle_ai::get_state_callbacks("combat").update_func = & aquifer_util::function_11b961b7;
   }
 }
 
@@ -267,7 +267,7 @@ function function_47c53384() {
 }
 
 function on_player_disconnected() {
-  if(isDefined(self.pvtol)) {
+  if(isdefined(self.pvtol)) {
     self.pvtol delete();
   }
 }
@@ -275,7 +275,7 @@ function on_player_disconnected() {
 function on_player_spawned() {
   self clearplayergravity();
   if(self aquifer_util::function_c43fe5d3()) {
-    if(isDefined(level.var_4063f562) && (level.var_4063f562 == "scripted" || level.var_4063f562 == "piloted")) {
+    if(isdefined(level.var_4063f562) && (level.var_4063f562 == "scripted" || level.var_4063f562 == "piloted")) {
       self aquifer_util::function_22a0413d(level.var_4063f562);
     } else {
       self aquifer_util::function_22a0413d();
@@ -306,13 +306,13 @@ function on_player_death() {
 function function_48694c4a() {}
 
 function function_f141f41c() {
-  if(isDefined(self.propername)) {
+  if(isdefined(self.propername)) {
     self.propername = "";
   }
 }
 
 function function_6d9a8286(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(isDefined(self.var_cb4b9447) && self.var_cb4b9447 > gettime()) {
+  if(isdefined(self.var_cb4b9447) && self.var_cb4b9447 > gettime()) {
     return;
   }
   if(weapon.name == "vtol_fighter_player_missile_turret" || weapon.name == "vtol_fighter_player_turret") {

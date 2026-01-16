@@ -14,29 +14,29 @@
 #namespace archetype_human_locomotion;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForMovement", &prepareformovement);
-  behaviorstatemachine::registerbsmscriptapiinternal("prepareForMovement", &prepareformovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalArrive", &shouldtacticalarrivecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("humanShouldSprint", &humanshouldsprint);
-  behaviorstatemachine::registerbsmscriptapiinternal("planHumanArrivalAtCover", &planhumanarrivalatcover);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldPlanArrivalIntoCover", &shouldplanarrivalintocover);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldArriveExposed", &shouldarriveexposed);
-  behaviorstatemachine::registerbsmscriptapiinternal("nonCombatLocomotionUpdate", &noncombatlocomotionupdate);
-  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionStart", &combatlocomotionstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionUpdate", &combatlocomotionupdate);
-  behaviorstatemachine::registerbsmscriptapiinternal("humanNonCombatLocomotionCondition", &humannoncombatlocomotioncondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("humanCombatLocomotionCondition", &humancombatlocomotioncondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldSwitchToTacticalWalkFromRun", &shouldswitchtotacticalwalkfromrun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToStopNearEnemy", &preparetostopnearenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("prepareToStopNearEnemy", &preparetostopnearenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToMoveAwayFromNearByEnemy", &preparetomoveawayfromnearbyenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkPain", &shouldtacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("beginTacticalWalkPain", &begintacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldContinueTacticalWalkPain", &shouldcontinuetacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkScan", &shouldtacticalwalkscan);
-  behaviorstatemachine::registerbsmscriptapiinternal("continueTacticalWalkScan", &continuetacticalwalkscan);
-  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkScanTerminate", &tacticalwalkscanterminate);
-  behaviorstatemachine::registerbsmscriptapiinternal("BSMLocomotionHasValidPainInterrupt", &bsmlocomotionhasvalidpaininterrupt);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForMovement", & prepareformovement);
+  behaviorstatemachine::registerbsmscriptapiinternal("prepareForMovement", & prepareformovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalArrive", & shouldtacticalarrivecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("humanShouldSprint", & humanshouldsprint);
+  behaviorstatemachine::registerbsmscriptapiinternal("planHumanArrivalAtCover", & planhumanarrivalatcover);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldPlanArrivalIntoCover", & shouldplanarrivalintocover);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldArriveExposed", & shouldarriveexposed);
+  behaviorstatemachine::registerbsmscriptapiinternal("nonCombatLocomotionUpdate", & noncombatlocomotionupdate);
+  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionStart", & combatlocomotionstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionUpdate", & combatlocomotionupdate);
+  behaviorstatemachine::registerbsmscriptapiinternal("humanNonCombatLocomotionCondition", & humannoncombatlocomotioncondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("humanCombatLocomotionCondition", & humancombatlocomotioncondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldSwitchToTacticalWalkFromRun", & shouldswitchtotacticalwalkfromrun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToStopNearEnemy", & preparetostopnearenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("prepareToStopNearEnemy", & preparetostopnearenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToMoveAwayFromNearByEnemy", & preparetomoveawayfromnearbyenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkPain", & shouldtacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("beginTacticalWalkPain", & begintacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldContinueTacticalWalkPain", & shouldcontinuetacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkScan", & shouldtacticalwalkscan);
+  behaviorstatemachine::registerbsmscriptapiinternal("continueTacticalWalkScan", & continuetacticalwalkscan);
+  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkScanTerminate", & tacticalwalkscanterminate);
+  behaviorstatemachine::registerbsmscriptapiinternal("BSMLocomotionHasValidPainInterrupt", & bsmlocomotionhasvalidpaininterrupt);
 }
 
 function private tacticalwalkscanterminate(entity) {
@@ -45,13 +45,13 @@ function private tacticalwalkscanterminate(entity) {
 }
 
 function private shouldtacticalwalkscan(entity) {
-  if(isDefined(entity.lasttacticalscantime) && (entity.lasttacticalscantime + 2000) > gettime()) {
+  if(isdefined(entity.lasttacticalscantime) && (entity.lasttacticalscantime + 2000) > gettime()) {
     return 0;
   }
   if(!entity haspath()) {
     return 0;
   }
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     return 0;
   }
   if(entity shouldfacemotion()) {
@@ -60,7 +60,7 @@ function private shouldtacticalwalkscan(entity) {
     }
   }
   animation = entity asmgetcurrentdeltaanimation();
-  if(isDefined(animation)) {
+  if(isdefined(animation)) {
     animtime = entity getanimtime(animation);
     return animtime <= 0.05;
   }
@@ -71,7 +71,7 @@ function private continuetacticalwalkscan(entity) {
   if(!entity haspath()) {
     return 0;
   }
-  if(isDefined(entity.enemy)) {
+  if(isdefined(entity.enemy)) {
     return 0;
   }
   if(entity shouldfacemotion()) {
@@ -80,7 +80,7 @@ function private continuetacticalwalkscan(entity) {
     }
   }
   animation = entity asmgetcurrentdeltaanimation();
-  if(isDefined(animation)) {
+  if(isdefined(animation)) {
     animlength = getanimlength(animation);
     animtime = entity getanimtime(animation) * animlength;
     normalizedtime = (animtime + 0.2) / animlength;
@@ -90,7 +90,7 @@ function private continuetacticalwalkscan(entity) {
 }
 
 function private shouldtacticalwalkpain(entity) {
-  if(!isDefined(entity.startpaintime) || (entity.startpaintime + 3000) < gettime() && randomfloat(1) > 0.25) {
+  if(!isdefined(entity.startpaintime) || (entity.startpaintime + 3000) < gettime() && randomfloat(1) > 0.25) {
     return bsmlocomotionhasvalidpaininterrupt(entity);
   }
   return 0;
@@ -114,7 +114,7 @@ function private shouldarriveexposed(behaviortreeentity) {
     return false;
   }
   if(behaviortreeentity haspath()) {
-    if(isDefined(behaviortreeentity.node) && iscovernode(behaviortreeentity.node) && isDefined(behaviortreeentity.pathgoalpos) && distancesquared(behaviortreeentity.pathgoalpos, behaviortreeentity getnodeoffsetposition(behaviortreeentity.node)) < 8) {
+    if(isdefined(behaviortreeentity.node) && iscovernode(behaviortreeentity.node) && isdefined(behaviortreeentity.pathgoalpos) && distancesquared(behaviortreeentity.pathgoalpos, behaviortreeentity getnodeoffsetposition(behaviortreeentity.node)) < 8) {
       return false;
     }
   }
@@ -132,16 +132,16 @@ function private preparetomoveawayfromnearbyenemy(behaviortreeentity) {
 }
 
 function private shouldplanarrivalintocover(behaviortreeentity) {
-  goingtocovernode = isDefined(behaviortreeentity.node) && iscovernode(behaviortreeentity.node);
+  goingtocovernode = isdefined(behaviortreeentity.node) && iscovernode(behaviortreeentity.node);
   if(!goingtocovernode) {
     return false;
   }
-  if(isDefined(behaviortreeentity.pathgoalpos)) {
-    if(isDefined(behaviortreeentity.arrivalfinalpos)) {
+  if(isdefined(behaviortreeentity.pathgoalpos)) {
+    if(isdefined(behaviortreeentity.arrivalfinalpos)) {
       if(behaviortreeentity.arrivalfinalpos != behaviortreeentity.pathgoalpos) {
         return true;
       }
-      if(behaviortreeentity.replannedcoverarrival === 0 && isDefined(behaviortreeentity.exitpos) && isDefined(behaviortreeentity.predictedexitpos)) {
+      if(behaviortreeentity.replannedcoverarrival === 0 && isdefined(behaviortreeentity.exitpos) && isdefined(behaviortreeentity.predictedexitpos)) {
         behaviortreeentity.replannedcoverarrival = 1;
         exitdir = vectornormalize(behaviortreeentity.predictedexitpos - behaviortreeentity.exitpos);
         currentdir = vectornormalize(behaviortreeentity.origin - behaviortreeentity.exitpos);
@@ -163,12 +163,12 @@ function private shouldswitchtotacticalwalkfromrun(behaviortreeentity) {
     return true;
   }
   goalpos = undefined;
-  if(isDefined(behaviortreeentity.arrivalfinalpos)) {
+  if(isdefined(behaviortreeentity.arrivalfinalpos)) {
     goalpos = behaviortreeentity.arrivalfinalpos;
   } else {
     goalpos = behaviortreeentity.pathgoalpos;
   }
-  if(isDefined(behaviortreeentity.pathstartpos) && isDefined(goalpos)) {
+  if(isdefined(behaviortreeentity.pathstartpos) && isdefined(goalpos)) {
     pathdist = distancesquared(behaviortreeentity.pathstartpos, goalpos);
     if(pathdist < (250 * 250)) {
       return true;
@@ -184,13 +184,13 @@ function private humannoncombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
+  if(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
     return true;
   }
   if(behaviortreeentity humanshouldsprint()) {
     return true;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return false;
   }
   return true;
@@ -200,13 +200,13 @@ function private humancombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
+  if(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) {
     return false;
   }
   if(behaviortreeentity humanshouldsprint()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return true;
   }
   return false;
@@ -230,12 +230,12 @@ function private noncombatlocomotionupdate(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
-  if(isDefined(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) && !behaviortreeentity humanshouldsprint())) {
+  if(isdefined(behaviortreeentity.enemy) && (!(isdefined(behaviortreeentity.accuratefire) && behaviortreeentity.accuratefire) && !behaviortreeentity humanshouldsprint())) {
     return false;
   }
   if(!behaviortreeentity asmistransitionrunning()) {
     blackboard::setblackboardattribute(behaviortreeentity, "_stance", "stand");
-    if(!isDefined(behaviortreeentity.replannedcoverarrival)) {
+    if(!isdefined(behaviortreeentity.replannedcoverarrival)) {
       behaviortreeentity.replannedcoverarrival = 0;
     }
   } else {
@@ -253,13 +253,13 @@ function private combatlocomotionupdate(behaviortreeentity) {
   }
   if(!behaviortreeentity asmistransitionrunning()) {
     blackboard::setblackboardattribute(behaviortreeentity, "_stance", "stand");
-    if(!isDefined(behaviortreeentity.replannedcoverarrival)) {
+    if(!isdefined(behaviortreeentity.replannedcoverarrival)) {
       behaviortreeentity.replannedcoverarrival = 0;
     }
   } else {
     behaviortreeentity.replannedcoverarrival = undefined;
   }
-  if(isDefined(behaviortreeentity.enemy)) {
+  if(isdefined(behaviortreeentity.enemy)) {
     return true;
   }
   return false;
@@ -344,7 +344,7 @@ function private shouldtacticalarrivecondition(behaviortreeentity) {
   if(getdvarint("enableTacticalArrival") != 1) {
     return false;
   }
-  if(!isDefined(behaviortreeentity.node)) {
+  if(!isdefined(behaviortreeentity.node)) {
     return false;
   }
   if(!behaviortreeentity.node.type == "Cover Left") {
@@ -413,10 +413,10 @@ function private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
     return false;
   }
   blackboard::setblackboardattribute(behaviortreeentity, "_desired_stance", "stand");
-  if(!isDefined(arrivalanim)) {
+  if(!isdefined(arrivalanim)) {
     return false;
   }
-  if(isDefined(behaviortreeentity.node) && isDefined(behaviortreeentity.pathgoalpos)) {
+  if(isdefined(behaviortreeentity.node) && isdefined(behaviortreeentity.pathgoalpos)) {
     if(!iscovernode(behaviortreeentity.node)) {
       return false;
     }
@@ -424,14 +424,14 @@ function private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
     if(nodeoffsetposition != behaviortreeentity.pathgoalpos) {
       return false;
     }
-    if(isDefined(arrivalanim)) {
+    if(isdefined(arrivalanim)) {
       isright = behaviortreeentity.node.type == "Cover Right";
       splittime = getarrivalsplittime(arrivalanim, isright);
       issplitarrival = splittime < 1;
       nodeapproachyaw = behaviortreeentity getnodeoffsetangles(behaviortreeentity.node)[1];
       angle = (0, nodeapproachyaw - getangledelta(arrivalanim), 0);
       if(issplitarrival) {
-        forwarddir = anglesToForward(angle);
+        forwarddir = anglestoforward(angle);
         rightdir = anglestoright(angle);
         animlength = getanimlength(arrivalanim);
         movedelta = getmovedelta(arrivalanim, 0, (animlength - 0.2) / animlength);
@@ -453,7 +453,7 @@ function private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
           return false;
         }
       } else {
-        forwarddir = anglesToForward(angle);
+        forwarddir = anglestoforward(angle);
         rightdir = anglestoright(angle);
         movedeltaarray = getmovedelta(arrivalanim);
         forward = vectorscale(forwarddir, movedeltaarray[0]);
@@ -484,7 +484,7 @@ function private checkcoverarrivalconditions(coverenterpos, coverpos) {
     return false;
   }
   trace = groundtrace(coverenterpos + vectorscale((0, 0, 1), 72), coverenterpos + (vectorscale((0, 0, -1), 72)), 0, 0, 0);
-  if(isDefined(trace["position"]) && (abs(trace["position"][2] - coverpos[2])) > 30) {
+  if(isdefined(trace["position"]) && (abs(trace["position"][2] - coverpos[2])) > 30) {
     if(getdvarint("")) {
       recordcircle(coverenterpos, 1, (1, 0, 0), "");
       record3dtext("", coverenterpos, (1, 0, 0), "", undefined, 0.4);
@@ -499,10 +499,10 @@ function private checkcoverarrivalconditions(coverenterpos, coverpos) {
 }
 
 function private getarrivalsplittime(arrivalanim, isright) {
-  if(!isDefined(level.animarrivalsplittimes)) {
+  if(!isdefined(level.animarrivalsplittimes)) {
     level.animarrivalsplittimes = [];
   }
-  if(isDefined(level.animarrivalsplittimes[arrivalanim])) {
+  if(isdefined(level.animarrivalsplittimes[arrivalanim])) {
     return level.animarrivalsplittimes[arrivalanim];
   }
   bestsplit = -1;
@@ -516,7 +516,7 @@ function private getarrivalsplittime(arrivalanim, isright) {
     angledelta = getangledelta(arrivalanim, 0, normalizedlength);
     fulldelta = getmovedelta(arrivalanim, 0, normalizedlength);
     bestvalue = -100000000;
-    for(i = 0; i < 100; i++) {
+    for (i = 0; i < 100; i++) {
       splittime = (1 * i) / (100 - 1);
       delta = getmovedelta(arrivalanim, 0, splittime);
       delta = deltarotate(fulldelta - delta, 180 - angledelta);

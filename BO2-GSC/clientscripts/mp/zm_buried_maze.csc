@@ -29,7 +29,7 @@ maze_effects_thread(localclientnum, fieldname) {
 
   if(!isDefined(struct.loopfx_ids)) {
     struct.loopfx_ids = [];
-    struct.angles_to_foward = anglesToForward(struct.angles);
+    struct.angles_to_foward = anglestoforward(struct.angles);
     struct.angles_to_up = anglestoup(struct.angles);
   }
 }
@@ -44,13 +44,11 @@ kill_maze_effects_thread(localclientnum, struct) {
 }
 
 maze_effects(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(bwasdemojump) {
+  if(bwasdemojump)
     self notify("kill_maze_effects_thread");
-  }
 
-  if(newval) {
+  if(newval)
     self thread maze_effects_thread(localclientnum, fieldname);
-  } else {
+  else
     self notify("kill_maze_effects_thread");
-  }
 }

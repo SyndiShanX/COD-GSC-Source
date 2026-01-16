@@ -18,9 +18,8 @@ player_healthbar_update() {
 
     SetDvar("alien_player_health", self.health / self.maxhealth);
 
-    while(player_health_ratio == (self.health / self.maxhealth)) {
+    while(player_health_ratio == (self.health / self.maxhealth))
       wait 0.1;
-    }
 
   }
 }
@@ -86,18 +85,16 @@ set_vision_set_player(visionset, transition_time) {
   Assert(isDefined(self));
   Assert(level != self);
 
-  if(!isDefined(transition_time)) {
+  if(!isDefined(transition_time))
     transition_time = 1;
-  }
   self VisionSetNakedForPlayer(visionset, transition_time);
 }
 
 init_vision_set(visionset) {
   level.lvl_visionset = visionset;
 
-  if(!isDefined(level.vision_cheat_enabled)) {
+  if(!isDefined(level.vision_cheat_enabled))
     level.vision_cheat_enabled = false;
-  }
 
   return level.vision_cheat_enabled;
 }
@@ -131,28 +128,24 @@ restore_client_fog(transition_time) {
 }
 
 ent_flag_wait(msg) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     self endon("disconnect");
-  }
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
 
-  while(isDefined(self) && !self.ent_flag[msg]) {
+  while(isDefined(self) && !self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_wait_either(flag1, flag2) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     self endon("disconnect");
-  }
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
 
   while(isDefined(self)) {
-    if(ent_flag(flag1)) {
+    if(ent_flag(flag1))
       return;
-    }
     if(ent_flag(flag2)) {
       return;
     }
@@ -161,9 +154,8 @@ ent_flag_wait_either(flag1, flag2) {
 }
 
 ent_flag_wait_or_timeout(flagname, timer) {
-  if(isplayer(self)) {
+  if(isplayer(self))
     self endon("disconnect");
-  }
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
 
@@ -189,9 +181,8 @@ ent_wait_for_flag_or_time_elapses(flagname, timer) {
 ent_flag_waitopen(msg) {
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
 
-  while(isDefined(self) && self.ent_flag[msg]) {
+  while(isDefined(self) && self.ent_flag[msg])
     self waittill(msg);
-  }
 }
 
 ent_flag_assert(msg) {
@@ -202,9 +193,8 @@ ent_flag_waitopen_either(flag1, flag2) {
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
 
   while(isDefined(self)) {
-    if(!ent_flag(flag1)) {
+    if(!ent_flag(flag1))
       return;
-    }
     if(!ent_flag(flag2)) {
       return;
     }
@@ -218,9 +208,8 @@ ent_flag_init(message) {
     self.ent_flags_lock = [];
   }
 
-  if(isDefined(level.first_frame) && level.first_frame == -1) {
+  if(isDefined(level.first_frame) && level.first_frame == -1)
     AssertEx(!isDefined(self.ent_flag[message]), "Attempt to reinitialize existing message: " + message + " on entity.");
-  }
 
   self.ent_flag[message] = false;
 
@@ -228,9 +217,8 @@ ent_flag_init(message) {
 }
 
 ent_flag_exist(message) {
-  if(isDefined(self.ent_flag) && isDefined(self.ent_flag[message])) {
+  if(isDefined(self.ent_flag) && isDefined(self.ent_flag[message]))
     return true;
-  }
   return false;
 }
 
@@ -255,9 +243,8 @@ ent_flag_clear(message, remove) {
     self notify(message);
   }
 
-  if(isDefined(remove) && remove) {
+  if(isDefined(remove) && remove)
     self.ent_flag[message] = undefined;
-  }
 }
 
 ent_flag(message) {
@@ -270,13 +257,11 @@ ent_flag(message) {
 alien_mode_has(feature_str) {
   feature_str = toLower(feature_str);
 
-  if(!isDefined(level.alien_mode_feature)) {
+  if(!isDefined(level.alien_mode_feature))
     return false;
-  }
 
-  if(!isDefined(level.alien_mode_feature[feature_str])) {
+  if(!isDefined(level.alien_mode_feature[feature_str]))
     return false;
-  }
 
   return level.alien_mode_feature[feature_str];
 }
@@ -284,97 +269,78 @@ alien_mode_has(feature_str) {
 alien_mode_enable(str_1, str_2, str_3, str_4, str_5, str_6, str_7, str_8, str_9, str_10) {
   assertex(isDefined(str_1), "alien_mode_enable() called without parameters!");
 
-  if(!isDefined(level.alien_mode_feature)) {
+  if(!isDefined(level.alien_mode_feature))
     level.alien_mode_feature = [];
-  }
 
-  if(!isDefined(level.alien_mode_feature_strings)) {
+  if(!isDefined(level.alien_mode_feature_strings))
     level.alien_mode_feature_strings = ["kill_resource", "nogame", "airdrop", "loot", "wave", "lurker", "collectible", "mist", "pillage", "challenge", "outline", "scenes"];
-  }
 
   if(str_1 == "all") {
-    foreach(param in level.alien_mode_feature_strings) {
-      alien_mode_enable_raw(param);
-    }
+    foreach(param in level.alien_mode_feature_strings)
+    alien_mode_enable_raw(param);
 
     return;
   }
 
   combined_param = [];
 
-  if(isDefined(str_1)) {
+  if(isDefined(str_1))
     combined_param[combined_param.size] = toLower(str_1);
-  }
 
-  if(isDefined(str_2)) {
+  if(isDefined(str_2))
     combined_param[combined_param.size] = toLower(str_2);
-  }
 
-  if(isDefined(str_3)) {
+  if(isDefined(str_3))
     combined_param[combined_param.size] = toLower(str_3);
-  }
 
-  if(isDefined(str_4)) {
+  if(isDefined(str_4))
     combined_param[combined_param.size] = toLower(str_4);
-  }
 
-  if(isDefined(str_5)) {
+  if(isDefined(str_5))
     combined_param[combined_param.size] = toLower(str_5);
-  }
 
-  if(isDefined(str_6)) {
+  if(isDefined(str_6))
     combined_param[combined_param.size] = toLower(str_6);
-  }
 
-  if(isDefined(str_7)) {
+  if(isDefined(str_7))
     combined_param[combined_param.size] = toLower(str_7);
-  }
 
-  if(isDefined(str_8)) {
+  if(isDefined(str_8))
     combined_param[combined_param.size] = toLower(str_8);
-  }
 
-  if(isDefined(str_9)) {
+  if(isDefined(str_9))
     combined_param[combined_param.size] = toLower(str_9);
-  }
 
-  if(isDefined(str_10)) {
+  if(isDefined(str_10))
     combined_param[combined_param.size] = toLower(str_10);
-  }
 
   check_feature_dependencies(combined_param);
 
-  foreach(param in combined_param) {
-    alien_mode_enable_raw(param);
-  }
+  foreach(param in combined_param)
+  alien_mode_enable_raw(param);
 }
 
 check_feature_dependencies(combined_param) {
   foreach(param in combined_param) {
-    if(param == "loot" && !array_contains(combined_param, "collectible")) {
+    if(param == "loot" && !array_contains(combined_param, "collectible"))
       assertmsg("Feature [loot] requires [collectible]");
-    }
 
-    if(param == "airdrop" && !array_contains(combined_param, "wave")) {
+    if(param == "airdrop" && !array_contains(combined_param, "wave"))
       assertmsg("Feature [airdrop] requires feature [wave]");
-    }
 
-    if(param == "lurker" && !array_contains(combined_param, "wave")) {
+    if(param == "lurker" && !array_contains(combined_param, "wave"))
       assertmsg("Feature [lurker] requires feature [wave]");
-    }
 
-    if(param == "mist" && !array_contains(combined_param, "wave")) {
+    if(param == "mist" && !array_contains(combined_param, "wave"))
       assertmsg("Feature [mist] requires feature [wave]");
-    }
   }
 }
 
 alien_mode_enable_raw(feature_str) {
   if(!array_contains(level.alien_mode_feature_strings, feature_str)) {
     supported_mode_strings = "";
-    foreach(feature in level.alien_mode_feature_strings) {
-      supported_mode_strings = supported_mode_strings + feature + " ";
-    }
+    foreach(feature in level.alien_mode_feature_strings)
+    supported_mode_strings = supported_mode_strings + feature + " ";
 
     assertmsg(feature_str + " is not a supported feature. [ " + supported_mode_strings + "]");
   }
@@ -467,9 +433,8 @@ restore_weapons_status(inclusion_list) {
 
   WeaponToSwitch = self.copy_weapon_current;
 
-  if(!isDefined(weaponToSwitch) || WeaponToSwitch == "none") {
+  if(!isDefined(weaponToSwitch) || WeaponToSwitch == "none")
     WeaponToSwitch = self.copy_fullweaponlist[0];
-  }
 
   self SwitchToWeapon(WeaponToSwitch);
 
@@ -480,9 +445,8 @@ restore_weapons_status(inclusion_list) {
 }
 
 in_inclusion_list(inclusion_list, item_name) {
-  if(!isDefined(inclusion_list)) {
+  if(!isDefined(inclusion_list))
     return false;
-  }
 
   return array_contains(inclusion_list, item_name);
 }
@@ -544,21 +508,17 @@ pain_interval_monitor(anim_entry) {
 }
 
 is_pain_available(attacker, sMeansOfDeath) {
-  if(isDefined(self.pain_registered) && self.pain_registered) {
+  if(isDefined(self.pain_registered) && self.pain_registered)
     return false;
-  }
 
-  if(isDefined(self.oriented) && self.oriented) {
+  if(isDefined(self.oriented) && self.oriented)
     return false;
-  }
 
-  if(sMeansOfDeath == "MOD_MELEE") {
+  if(sMeansOfDeath == "MOD_MELEE")
     return true;
-  }
 
-  if(isDefined(attacker) && isPlayer(attacker) && attacker has_stun_ammo()) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker has_stun_ammo())
     return true;
-  }
 
   return true;
 }
@@ -567,19 +527,16 @@ mp_ents_clean_up() {
   wait 0.5;
 
   heli_start_nodes = getEntArray("heli_start", "targetname");
-  foreach(start_node in heli_start_nodes) {
-    get_linked_nodes_and_delete(start_node);
-  }
+  foreach(start_node in heli_start_nodes)
+  get_linked_nodes_and_delete(start_node);
 
   heli_loop_nodes = getEntArray("heli_loop_start", "targetname");
-  foreach(loop_node in heli_loop_nodes) {
-    get_linked_nodes_and_delete(loop_node);
-  }
+  foreach(loop_node in heli_loop_nodes)
+  get_linked_nodes_and_delete(loop_node);
 
   heli_crash_nodes = getEntArray("heli_crash_start", "targetname");
-  foreach(crash_node in heli_crash_nodes) {
-    get_linked_nodes_and_delete(crash_node);
-  }
+  foreach(crash_node in heli_crash_nodes)
+  get_linked_nodes_and_delete(crash_node);
 }
 
 get_linked_nodes_and_delete(start_node) {
@@ -595,9 +552,8 @@ get_linked_nodes_and_delete(start_node) {
     }
   }
 
-  if(isDefined(cur_node)) {
+  if(isDefined(cur_node))
     cur_node delete();
-  }
 }
 
 is_holding_deployable() {
@@ -870,11 +826,10 @@ player_has_specialized_ammo(special_ammo_weapon) {
 }
 
 has_stun_ammo(weapon_to_check) {
-  if(!isDefined(weapon_to_check)) {
+  if(!isDefined(weapon_to_check))
     weapon = self GetCurrentWeapon();
-  } else {
+  else
     weapon = weapon_to_check;
-  }
 
   if(weapon == "none") {
     weapon = self GetWeaponsListPrimaries()[0];
@@ -882,105 +837,91 @@ has_stun_ammo(weapon_to_check) {
 
   base_weapon = getRawBaseWeaponName(weapon);
 
-  if(is_chaos_mode() && self HasPerk("specialty_bulletdamage", true)) {
+  if(is_chaos_mode() && self HasPerk("specialty_bulletdamage", true))
     return true;
-  }
 
-  if(isDefined(self.special_ammocount) && isDefined(self.special_ammocount[base_weapon]) && self.special_ammocount[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount) && isDefined(self.special_ammocount[base_weapon]) && self.special_ammocount[base_weapon] > 0)
     return true;
-  }
 
-  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0)
     return true;
-  }
 
   return false;
 }
 
 has_ap_ammo(weapon_to_check) {
-  if(!isDefined(weapon_to_check)) {
+  if(!isDefined(weapon_to_check))
     weapon = self GetCurrentWeapon();
-  } else {
+  else
     weapon = weapon_to_check;
-  }
 
   if(weapon == "none") {
     weapon = self GetWeaponsListPrimaries()[0];
   }
 
   base_weapon = getRawBaseWeaponName(weapon);
-  if(isDefined(self.special_ammocount_ap) && isDefined(self.special_ammocount_ap[base_weapon]) && self.special_ammocount_ap[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_ap) && isDefined(self.special_ammocount_ap[base_weapon]) && self.special_ammocount_ap[base_weapon] > 0)
     return true;
-  }
 
-  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0)
     return true;
-  }
 
   return false;
 }
 
 has_explosive_ammo(weapon_to_check) {
-  if(!isDefined(weapon_to_check)) {
+  if(!isDefined(weapon_to_check))
     weapon = self GetCurrentWeapon();
-  } else {
+  else
     weapon = weapon_to_check;
-  }
 
   if(weapon == "none") {
     weapon = self GetWeaponsListPrimaries()[0];
   }
 
   base_weapon = getRawBaseWeaponName(weapon);
-  if(isDefined(self.special_ammocount_explo) && isDefined(self.special_ammocount_explo[base_weapon]) && self.special_ammocount_explo[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_explo) && isDefined(self.special_ammocount_explo[base_weapon]) && self.special_ammocount_explo[base_weapon] > 0)
     return true;
-  }
 
-  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0)
     return true;
-  }
 
   return false;
 }
 
 has_incendiary_ammo(weapon_to_check) {
-  if(!isDefined(weapon_to_check)) {
+  if(!isDefined(weapon_to_check))
     weapon = self GetCurrentWeapon();
-  } else {
+  else
     weapon = weapon_to_check;
-  }
 
   if(weapon == "none") {
     weapon = self GetWeaponsListPrimaries()[0];
   }
 
   base_weapon = getRawBaseWeaponName(weapon);
-  if(isDefined(self.special_ammocount_in) && isDefined(self.special_ammocount_in[base_weapon]) && self.special_ammocount_in[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_in) && isDefined(self.special_ammocount_in[base_weapon]) && self.special_ammocount_in[base_weapon] > 0)
     return true;
-  }
 
-  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0)
     return true;
-  }
 
   return false;
 }
 
 has_combined_ammo(weapon_to_check) {
-  if(!isDefined(weapon_to_check)) {
+  if(!isDefined(weapon_to_check))
     weapon = self GetCurrentWeapon();
-  } else {
+  else
     weapon = weapon_to_check;
-  }
 
   if(weapon == "none") {
     weapon = self GetWeaponsListPrimaries()[0];
   }
 
   base_weapon = getRawBaseWeaponName(weapon);
-  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0) {
+  if(isDefined(self.special_ammocount_comb) && isDefined(self.special_ammocount_comb[base_weapon]) && self.special_ammocount_comb[base_weapon] > 0)
     return true;
-  }
 
   return false;
 }
@@ -1071,9 +1012,8 @@ get_chaos_area() {
 
 deployable_box_onuse_message(boxent) {
   msg_text = "";
-  if(isDefined(boxEnt) && isDefined(boxEnt.boxType) && isDefined(level.boxSettings[boxEnt.boxtype].eventString)) {
+  if(isDefined(boxEnt) && isDefined(boxEnt.boxType) && isDefined(level.boxSettings[boxEnt.boxtype].eventString))
     msg_text = level.boxSettings[boxEnt.boxtype].eventString;
-  }
 
   self thread setLowerMessage("deployable_use", msg_text, 3);
 }
@@ -1108,17 +1048,14 @@ set_synch_attack_setup(synch_directions, type_specific, end_notifies, can_synch_
 }
 
 get_synch_direction_list(synch_enemy) {
-  if(!isDefined(self.synch_attack_setup)) {
+  if(!isDefined(self.synch_attack_setup))
     return [];
-  }
 
-  if(!isDefined(self.synch_attack_setup.synch_directions)) {
+  if(!isDefined(self.synch_attack_setup.synch_directions))
     return [];
-  }
 
-  if(!self.synch_attack_setup.type_specific) {
+  if(!self.synch_attack_setup.type_specific)
     return self.synch_attack_setup.synch_directions;
-  }
 
   alienType = synch_enemy get_alien_type();
 
@@ -1135,9 +1072,8 @@ is_alien_agent() {
 }
 
 isPlayingSolo() {
-  if(getDvarInt("sv_maxclients") == 1) {
+  if(getDvarInt("sv_maxclients") == 1)
     return true;
-  }
 
   return false;
 }
@@ -1159,34 +1095,28 @@ get_array_of_valid_players(sort_by_closest, sort_by_closest_org) {
   valid_players = [];
 
   foreach(player in level.players) {
-    if(player is_valid_player()) {
+    if(player is_valid_player())
       valid_players[valid_players.size] = player;
-    }
   }
 
-  if(!isDefined(sort_by_closest) || !sort_by_closest) {
+  if(!isDefined(sort_by_closest) || !sort_by_closest)
     return valid_players;
-  }
 
   return get_array_of_closest(sort_by_closest_org, valid_players);
 }
 
 is_valid_player() {
-  if(!isDefined(self)) {
+  if(!isDefined(self))
     return false;
-  }
 
-  if(self maps\mp\alien\_utility::is_in_laststand()) {
+  if(self maps\mp\alien\_utility::is_in_laststand())
     return false;
-  }
 
-  if(!isAlive(self)) {
+  if(!isAlive(self))
     return false;
-  }
 
-  if(self.sessionstate == "spectator") {
+  if(self.sessionstate == "spectator")
     return false;
-  }
 
   return true;
 }
@@ -1207,18 +1137,16 @@ get_in_world_area() {
   assertEx(isDefined(level.world_areas), "Register world area with alien_area_init()");
 
   foreach(area_name, area_volumn in level.world_areas) {
-    if(self isTouching(area_volumn)) {
+    if(self isTouching(area_volumn))
       return area_name;
-    }
   }
 
   return "none";
 }
 
 is_true(arg) {
-  if(isDefined(arg) && arg) {
+  if(isDefined(arg) && arg)
     return true;
-  }
 
   return false;
 }
@@ -1232,9 +1160,8 @@ is_akimbo_weapon(weapon) {
       return true;
   }
 
-  if(getWeaponClass(weapon) == "weapon_pistol") {
+  if(getWeaponClass(weapon) == "weapon_pistol")
     return issubstr(weapon, "akimbo");
-  }
 
   return false;
 }
@@ -1288,9 +1215,8 @@ special_ammo_weapon_change_monitor(special_ammo_type) {
     }
 
     if(is_true(has_special_ammo)) {
-      if(isDefined(perk)) {
+      if(isDefined(perk))
         self givePerk(perk, false);
-      }
 
       if(special_ammo_type == "combined") {
         self.has_incendiary_ammo = true;
@@ -1299,34 +1225,28 @@ special_ammo_weapon_change_monitor(special_ammo_type) {
         self giveperk("specialty_explosivebullets", false);
       }
 
-      if(special_ammo_type == "incendiary") {
+      if(special_ammo_type == "incendiary")
         self.has_incendiary_ammo = true;
-      }
 
       self SetClientOmnvar("ui_alien_specialammo", icon_index);
     } else {
       if(isDefined(perk)) {
-        if(self _hasPerk(perk)) {
+        if(self _hasPerk(perk))
           self _unsetPerk(perk);
-        }
       }
 
       if(special_ammo_type == "combined") {
         self.has_incendiary_ammo = undefined;
-        if(self _hasPerk("specialty_bulletdamage")) {
+        if(self _hasPerk("specialty_bulletdamage"))
           self _unsetPerk("specialty_bulletdamage");
-        }
-        if(self _hasPerk("specialty_armorpiercing")) {
+        if(self _hasPerk("specialty_armorpiercing"))
           self _unsetPerk("specialty_armorpiercing");
-        }
-        if(self _hasPerk("specialty_explosivebullets")) {
+        if(self _hasPerk("specialty_explosivebullets"))
           self _unsetPerk("specialty_explosivebullets");
-        }
       }
 
-      if(special_ammo_type == "incendiary") {
+      if(special_ammo_type == "incendiary")
         self.has_incendiary_ammo = undefined;
-      }
 
       self SetClientOmnvar("ui_alien_specialammo", -1);
     }
@@ -1408,27 +1328,22 @@ special_ammo_weapon_fire_monitor(special_ammo_type) {
         self SetClientOmnvar("ui_alien_specialammo", -1);
 
         if(isDefined(perk)) {
-          if(self _hasPerk(perk)) {
+          if(self _hasPerk(perk))
             self _unsetPerk(perk);
-          }
         }
 
         if(special_ammo_type == "combined") {
           self.has_incendiary_ammo = undefined;
-          if(self _hasPerk("specialty_bulletdamage")) {
+          if(self _hasPerk("specialty_bulletdamage"))
             self _unsetPerk("specialty_bulletdamage");
-          }
-          if(self _hasPerk("specialty_armorpiercing")) {
+          if(self _hasPerk("specialty_armorpiercing"))
             self _unsetPerk("specialty_armorpiercing");
-          }
-          if(self _hasPerk("specialty_explosivebullets")) {
+          if(self _hasPerk("specialty_explosivebullets"))
             self _unsetPerk("specialty_explosivebullets");
-          }
         }
 
-        if(special_ammo_type == "incendiary") {
+        if(special_ammo_type == "incendiary")
           self.has_incendiary_ammo = undefined;
-        }
 
         if(isDefined(self.stored_ammo[baseweaponName])) {
           self.stored_ammo[baseweaponName].ammoStock += self.stored_ammo[baseweaponName].clipammo;
@@ -1477,27 +1392,22 @@ disable_special_ammo() {
 
     if(isDefined(special_ammo_type)) {
       if(isDefined(perk)) {
-        if(self _hasPerk(perk)) {
+        if(self _hasPerk(perk))
           self _unsetPerk(perk);
-        }
       }
 
       if(special_ammo_type == "combined") {
         self.has_incendiary_ammo = undefined;
-        if(self _hasPerk("specialty_bulletdamage")) {
+        if(self _hasPerk("specialty_bulletdamage"))
           self _unsetPerk("specialty_bulletdamage");
-        }
-        if(self _hasPerk("specialty_armorpiercing")) {
+        if(self _hasPerk("specialty_armorpiercing"))
           self _unsetPerk("specialty_armorpiercing");
-        }
-        if(self _hasPerk("specialty_explosivebullets")) {
+        if(self _hasPerk("specialty_explosivebullets"))
           self _unsetPerk("specialty_explosivebullets");
-        }
       }
 
-      if(special_ammo_type == "incendiary") {
+      if(special_ammo_type == "incendiary")
         self.has_incendiary_ammo = undefined;
-      }
 
       self SetClientOmnvar("ui_alien_specialammo", -1);
 
@@ -1537,9 +1447,8 @@ enable_special_ammo() {
   }
 
   if(isDefined(special_ammo_type)) {
-    if(isDefined(perk)) {
+    if(isDefined(perk))
       self givePerk(perk, false);
-    }
 
     if(special_ammo_type == "combined") {
       self.has_incendiary_ammo = true;
@@ -1548,9 +1457,8 @@ enable_special_ammo() {
       self giveperk("specialty_explosivebullets", false);
     }
 
-    if(special_ammo_type == "incendiary") {
+    if(special_ammo_type == "incendiary")
       self.has_incendiary_ammo = true;
-    }
 
     self SetClientOmnvar("ui_alien_specialammo", icon_index);
 
@@ -1572,28 +1480,24 @@ set_turret_ammocount(ammo) {
 }
 
 add_hive_dependencies(hive, dependent_hives) {
-  if(!isDefined(level.hive_dependencies)) {
+  if(!isDefined(level.hive_dependencies))
     level.hive_dependencies = [];
-  }
 
   level.hive_dependencies[hive] = dependent_hives;
 }
 
 should_snare(player) {
-  if(!self is_alien_agent() || is_chaos_mode()) {
+  if(!self is_alien_agent() || is_chaos_mode())
     return false;
-  }
 
-  if(player maps\mp\alien\_persistence::is_upgrade_enabled("no_snare_upgrade")) {
+  if(player maps\mp\alien\_persistence::is_upgrade_enabled("no_snare_upgrade"))
     return false;
-  }
 
   type = self get_alien_type();
-  if(type == "brute" || type == "minion") {
+  if(type == "brute" || type == "minion")
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 buildAlienWeaponName(baseName, attachment1, attachment2, attachment3, attachment4, camo, reticle) {
@@ -1601,26 +1505,22 @@ buildAlienWeaponName(baseName, attachment1, attachment2, attachment3, attachment
     reticle = undefined;
   }
 
-  if(attachment1 == "alienvksscope") {
+  if(attachment1 == "alienvksscope")
     attachment1 = "scope";
-  } else if(attachment1 == "alienl115a3vzscope") {
+  else if(attachment1 == "alienl115a3vzscope")
     attachment1 = "vzscope";
-  }
-  if(attachment2 == "alienvksscope") {
+  if(attachment2 == "alienvksscope")
     attachment2 = "scope";
-  } else if(attachment2 == "alienl115a3vzscope") {
+  else if(attachment2 == "alienl115a3vzscope")
     attachment2 = "vzscope";
-  }
-  if(attachment3 == "alienvksscope") {
+  if(attachment3 == "alienvksscope")
     attachment3 = "scope";
-  } else if(attachment3 == "alienl115a3vzscope") {
+  else if(attachment3 == "alienl115a3vzscope")
     attachment3 = "vzscope";
-  }
-  if(attachment4 == "alienvksscope") {
+  if(attachment4 == "alienvksscope")
     attachment4 = "scope";
-  } else if(attachment4 == "alienl115a3vzscope") {
+  else if(attachment4 == "alienl115a3vzscope")
     attachment4 = "vzscope";
-  }
 
   attachment1 = attachmentMap_toUnique(attachment1, baseName);
   attachment2 = attachmentMap_toUnique(attachment2, baseName);
@@ -1642,21 +1542,17 @@ buildAlienWeaponName(baseName, attachment1, attachment2, attachment3, attachment
 
   attachments = [];
 
-  if(attachment1 != "none") {
+  if(attachment1 != "none")
     attachments[attachments.size] = attachment1;
-  }
 
-  if(attachment2 != "none") {
+  if(attachment2 != "none")
     attachments[attachments.size] = attachment2;
-  }
 
-  if(attachment3 != "none") {
+  if(attachment3 != "none")
     attachments[attachments.size] = attachment3;
-  }
 
-  if(attachment4 != "none") {
+  if(attachment4 != "none")
     attachments[attachments.size] = attachment4;
-  }
 
   if(needScope) {
     hasAttachRail = false;
@@ -1695,18 +1591,15 @@ buildAlienWeaponName(baseName, attachment1, attachment2, attachment3, attachment
 }
 
 buildALienWeaponNameCamo(weaponName, camo) {
-  if(!isDefined(camo)) {
+  if(!isDefined(camo))
     return weaponName;
-  }
-  if(camo <= 0) {
+  if(camo <= 0)
     return weaponName;
-  }
 
-  if(camo < 10) {
+  if(camo < 10)
     weaponName += "_camo0";
-  } else {
+  else
     weaponName += "_camo";
-  }
   weaponName += camo;
 
   return weaponName;
@@ -1733,14 +1626,12 @@ isValidAlienWeapon(refString) {
   if(!isDefined(level.weaponRefs)) {
     level.weaponRefs = [];
 
-    foreach(weaponRef in level.weaponList) {
-      level.weaponRefs[weaponRef] = true;
-    }
+    foreach(weaponRef in level.weaponList)
+    level.weaponRefs[weaponRef] = true;
   }
 
-  if(isDefined(level.weaponRefs[refString])) {
+  if(isDefined(level.weaponRefs[refString]))
     return true;
-  }
 
   assertMsg("Replacing invalid weapon/attachment combo: " + refString);
 
@@ -1816,11 +1707,10 @@ trackRiotShield() {
       Assert(self.hasRiotShield);
       self.hasRiotShield = self hasRiotShield();
 
-      if(self.hasRiotShield) {
+      if(self.hasRiotShield)
         self MoveShieldModel("weapon_riot_shield_iw6", "tag_weapon_right", "tag_shield_back");
-      } else {
+      else
         self DetachShieldModel("weapon_riot_shield_iw6", "tag_weapon_right");
-      }
 
       self.hasRiotShieldEquipped = false;
     } else if(self.hasRiotShield && !self hasRiotShield()) {
@@ -1834,11 +1724,10 @@ trackRiotShield() {
 }
 
 tryAttach(placement) {
-  if(!isDefined(placement) || placement != "back") {
+  if(!isDefined(placement) || placement != "back")
     tag = "tag_inhand";
-  } else {
+  else
     tag = "tag_shield_back";
-  }
 
   attachSize = self getAttachSize();
 
@@ -1949,25 +1838,20 @@ weapon_change_monitor() {
 }
 
 is_trap(ent) {
-  if(!isDefined(ent)) {
+  if(!isDefined(ent))
     return false;
-  }
 
-  if(isDefined(ent.tesla_type)) {
+  if(isDefined(ent.tesla_type))
     return true;
-  }
 
-  if(!isDefined(ent.script_noteworthy) && !isDefined(ent.targetname)) {
+  if(!isDefined(ent.script_noteworthy) && !isDefined(ent.targetname))
     return false;
-  }
 
-  if(isDefined(ent.targetname) && (ent.targetname == "fence_generator" || ent.targetname == "puddle_generator")) {
+  if(isDefined(ent.targetname) && (ent.targetname == "fence_generator" || ent.targetname == "puddle_generator"))
     return true;
-  }
 
-  if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "fire_trap") {
+  if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "fire_trap")
     return true;
-  }
 
   return false;
 }
@@ -1982,9 +1866,8 @@ zero_out_specialammo_clip(weapon) {
 }
 
 handle_existing_ammo(special_ammo_weapon, weapon, ammo_type) {
-  if(!isDefined(self.stored_ammo)) {
+  if(!isDefined(self.stored_ammo))
     self.stored_ammo = [];
-  }
 
   if(!isDefined(self.stored_ammo[special_ammo_weapon])) {
     self.stored_ammo[special_ammo_weapon] = spawnStruct();
@@ -2011,10 +1894,9 @@ wait_for_player_to_dismount_turret() {
   self endon("death");
   self endon("disconnect");
 
-  self setLowerMessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
-  while(self IsUsingTurret()) {
+  self setLowerMessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
+  while(self IsUsingTurret())
     wait .5;
-  }
 
   self clearLowerMessage("disengage_turret");
 }
@@ -2065,11 +1947,10 @@ array_remove_index(array, index, keepOriginalIndex) {
     if(arrayIndex == index) {
       continue;
     }
-    if(is_true(keepOriginalIndex)) {
+    if(is_true(keepOriginalIndex))
       newArray_index = arrayIndex;
-    } else {
+    else
       newArray_index = newArray.size;
-    }
 
     newArray[newArray_index] = value;
   }
@@ -2079,16 +1960,14 @@ array_remove_index(array, index, keepOriginalIndex) {
 
 GetRandomIndex(weights) {
   weightSum = 0;
-  foreach(weight in weights) {
-    weightSum += weight;
-  }
+  foreach(weight in weights)
+  weightSum += weight;
   randIndex = RandomIntRange(0, weightSum);
   weightSum = 0;
   foreach(i, weight in weights) {
     weightSum += weight;
-    if(randIndex <= weightSum) {
+    if(randIndex <= weightSum)
       return i;
-    }
   }
   assertmsg("should not get here.");
   return 0;
@@ -2104,9 +1983,8 @@ _enableAdditionalPrimaryWeapon() {
 
 is_incompatible_weapon(weapon) {
   if(isDefined(level.ammoIncompatibleWeaponsList)) {
-    if(array_contains(level.ammoIncompatibleWeaponsList, weapon)) {
+    if(array_contains(level.ammoIncompatibleWeaponsList, weapon))
       return true;
-    }
   }
 
   return false;
@@ -2123,9 +2001,8 @@ is_door_hive() {
 has_tag(model, tag) {
   partCount = GetNumParts(model);
   for(i = 0; i < partCount; i++) {
-    if(toLower(GetPartName(model, i)) == toLower(tag)) {
+    if(toLower(GetPartName(model, i)) == toLower(tag))
       return true;
-    }
   }
   return false;
 }
@@ -2142,41 +2019,35 @@ level_uses_MAAWS() {
 }
 
 is_flaming_stowed_riotshield_damage(sMeansOfDeath, sWeapon, eInflictor) {
-  if(isDefined(einflictor) && is_trap(eInflictor)) {
+  if(isDefined(einflictor) && is_trap(eInflictor))
     return false;
-  }
 
-  if(sMeansOfDeath == "MOD_UNKNOWN" && sWeapon != "none") {
+  if(sMeansOfDeath == "MOD_UNKNOWN" && sWeapon != "none")
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 ark_attachment_transfer_to_locker_weapon(fullweaponname, current_attachments, should_take_weapon) {
   has_ark_attachment = undefined;
 
   weaponAttachments = getWeaponAttachmentsBaseNames(fullweaponname);
-  if(isDefined(weaponAttachments[0])) {
+  if(isDefined(weaponAttachments[0]))
     attachment1 = weaponAttachments[0];
-  } else {
+  else
     attachment1 = "none";
-  }
-  if(isDefined(weaponAttachments[1])) {
+  if(isDefined(weaponAttachments[1]))
     attachment2 = weaponAttachments[1];
-  } else {
+  else
     attachment2 = "none";
-  }
-  if(isDefined(weaponAttachments[2])) {
+  if(isDefined(weaponAttachments[2]))
     attachment3 = weaponAttachments[2];
-  } else {
+  else
     attachment3 = "none";
-  }
-  if(isDefined(weaponAttachments[3])) {
+  if(isDefined(weaponAttachments[3]))
     attachment4 = weaponAttachments[3];
-  } else {
+  else
     attachment4 = "none";
-  }
 
   if(is_true(should_take_weapon)) {
     foreach(piece in current_attachments) {
@@ -2191,18 +2062,14 @@ ark_attachment_transfer_to_locker_weapon(fullweaponname, current_attachments, sh
 
       for(i = 0; i < locker_weapon_attachments.size; i++) {
         locker_weapon_attachments[i] = replace_barrelrange_with_ark(locker_weapon_attachments[i]);
-        if(i == 0) {
+        if(i == 0)
           attachment1 = attachmentMap_toBase(locker_weapon_attachments[i]);
-        }
-        if(i == 1) {
+        if(i == 1)
           attachment2 = attachmentMap_toBase(locker_weapon_attachments[i]);
-        }
-        if(i == 2) {
+        if(i == 2)
           attachment3 = attachmentMap_toBase(locker_weapon_attachments[i]);
-        }
-        if(i == 3) {
+        if(i == 3)
           attachment4 = attachmentMap_toBase(locker_weapon_attachments[i]);
-        }
       }
     }
   }
@@ -2248,20 +2115,18 @@ ark_attachment_transfer_to_locker_weapon(fullweaponname, current_attachments, sh
     attachment4 != "thermalsmg" &&
     baseweapon != "iw6_aliendlc23_mp")
     fullweaponname = maps\mp\alien\_utility::buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo, reticle);
-  else {
+  else
     fullweaponname = maps\mp\alien\_utility::buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo);
-  }
 
   self.locker_weapon = fullweaponname;
   return fullweaponname;
 }
 
 replace_barrelrange_with_ark(attachment) {
-  if(isDefined(attachment) && string_starts_with(attachment, "barrelrange")) {
+  if(isDefined(attachment) && string_starts_with(attachment, "barrelrange"))
     return "alienmuzzlebrake";
-  } else {
+  else
     return attachment;
-  }
 }
 
 return_weapon_with_like_attachments(fullweaponname, current_attachments) {
@@ -2280,28 +2145,23 @@ return_weapon_with_like_attachments(fullweaponname, current_attachments) {
     piece = attachmentMap_toBase(piece);
 
     if(array_contains(possible_attachments, piece)) {
-      if(player maps\mp\alien\_persistence::is_upgrade_enabled("keep_attachments_upgrade")) {
+      if(player maps\mp\alien\_persistence::is_upgrade_enabled("keep_attachments_upgrade"))
         valid_attachments = array_add(valid_attachments, piece);
-      } else if(piece == "alienmuzzlebrake") {
+      else if(piece == "alienmuzzlebrake")
         valid_attachments = array_add(valid_attachments, piece);
-      }
     }
   }
 
   if(valid_attachments.size > 0 && valid_attachments.size < 5) {
     for(i = 0; i < valid_attachments.size; i++) {
-      if(i == 0) {
+      if(i == 0)
         attachment1 = valid_attachments[i];
-      }
-      if(i == 1) {
+      if(i == 1)
         attachment2 = valid_attachments[i];
-      }
-      if(i == 2) {
+      if(i == 2)
         attachment3 = valid_attachments[i];
-      }
-      if(i == 3) {
+      if(i == 3)
         attachment4 = valid_attachments[i];
-      }
     }
   }
 
@@ -2351,9 +2211,8 @@ base_scope_weapon_attachment(weaponname) {
 }
 
 can_hypno(attacker, petTrapKill, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, inflictor) {
-  if(isDefined(self.cannotHypno) && self.cannotHypno) {
+  if(isDefined(self.cannotHypno) && self.cannotHypno)
     return false;
-  }
 
   switch (self.alien_type) {
     case "goon":
@@ -2363,20 +2222,18 @@ can_hypno(attacker, petTrapKill, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, 
     case "seeder":
       return true;
     case "elite":
-      if(attacker maps\mp\alien\_persistence::is_upgrade_enabled("hypno_rhino_upgrade") || petTrapKill) {
+      if(attacker maps\mp\alien\_persistence::is_upgrade_enabled("hypno_rhino_upgrade") || petTrapKill)
         return true;
-      }
     default:
       return false;
   }
 }
 
 has_fragile_relic_and_is_sprinting() {
-  if(self maps\mp\alien\_prestige::prestige_getSlowHealthRegenScalar() != 1.0 && self IsSprinting()) {
+  if(self maps\mp\alien\_prestige::prestige_getSlowHealthRegenScalar() != 1.0 && self IsSprinting())
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 update_player_initial_spawn_info(coordinate, angles) {
@@ -2395,11 +2252,10 @@ get_player_initial_spawn_angles() {
 }
 
 has_pistols_only_relic_and_no_deployables() {
-  if(selfmaps\mp\alien\_prestige::prestige_getPistolsOnly() == 1 && self maps\mp\alien\_prestige::prestige_getNoDeployables() == 1) {
+  if(selfmaps\mp\alien\_prestige::prestige_getPistolsOnly() == 1 && self maps\mp\alien\_prestige::prestige_getNoDeployables() == 1)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 get_current_pistol() {
@@ -2434,26 +2290,23 @@ weapon_has_alien_attachment(weaponName, achievement_flag, eAttacker) {
     return false;
   }
 
-  if(is_true(achievement_flag) && self is_holding_pistol(eAttacker)) {
+  if(is_true(achievement_flag) && self is_holding_pistol(eAttacker))
     return false;
-  }
 
   weaponAttachments = getWeaponAttachmentsBaseNames(weaponName);
   foreach(attachment in weaponAttachments) {
-    if(attachment == "alienmuzzlebrake" || attachment == "alienmuzzlebrakesg" || attachment == "alienmuzzlebrakesn") {
+    if(attachment == "alienmuzzlebrake" || attachment == "alienmuzzlebrakesg" || attachment == "alienmuzzlebrakesn")
       return true;
-    }
   }
   return false;
 }
 
 is_holding_pistol(eAttacker) {
   cur_weapon = eAttacker GetCurrentPrimaryWeapon();
-  if(getWeaponClass(cur_weapon) == "weapon_pistol") {
+  if(getWeaponClass(cur_weapon) == "weapon_pistol")
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 setup_class_nameplates() {
@@ -2476,7 +2329,6 @@ setup_class_nameplates() {
       material = "player_name_bg_mortal";
       break;
   }
-  if(isDefined(material)) {
+  if(isDefined(material))
     self SetNameplateMaterial(material, material);
-  }
 }

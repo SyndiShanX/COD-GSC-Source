@@ -55,7 +55,7 @@ generic_double_strobe() {
   linked_light_ents = [];
 
   if(isDefined(self.script_noteworthy)) {
-    linked_things = getEntArray(self.script_noteworthy, "targetname");
+    linked_things = getentarray(self.script_noteworthy, "targetname");
 
     for(i = 0; i < linked_things.size; i++) {
       if(linked_things[i].classname == "light") {
@@ -108,13 +108,12 @@ generic_double_strobe() {
 }
 
 getclosests_flickering_model(origin) {
-  array = getEntArray("light_flicker_model", "targetname");
+  array = getentarray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
 
-  if(isDefined(model)) {
+  if(isDefined(model))
     return_array[0] = model;
-  }
 
   return return_array;
 }
@@ -128,46 +127,38 @@ generic_flickering() {
   min_flickerless_time = 0.2;
   max_flickerless_time = 1.5;
 
-  if(isDefined(self.script_wait_min)) {
+  if(isDefined(self.script_wait_min))
     min_flickerless_time = self.script_wait_min;
-  }
 
-  if(isDefined(self.script_wait_max)) {
+  if(isDefined(self.script_wait_max))
     max_flickerless_time = self.script_wait_max;
-  }
 
   min_flicker_delay = 0.05;
   max_flicker_delay = 0.1;
 
-  if(isDefined(self.script_delay_min)) {
+  if(isDefined(self.script_delay_min))
     min_flicker_delay = self.script_delay_min;
-  }
 
-  if(isDefined(self.script_delay_max)) {
+  if(isDefined(self.script_delay_max))
     max_flicker_delay = self.script_delay_max;
-  }
 
   min_intensity = 0;
   max_intensity = 0.3;
 
-  if(isDefined(self.script_intensity_min)) {
+  if(isDefined(self.script_intensity_min))
     min_intensity = self.script_intensity_min;
-  }
 
-  if(isDefined(self.script_intensity_max)) {
+  if(isDefined(self.script_intensity_max))
     max_intensity = self.script_intensity_max;
-  }
 
   min_burst = 1;
   max_burst = 10;
 
-  if(isDefined(self.script_burst_min)) {
+  if(isDefined(self.script_burst_min))
     min_burst = self.script_burst_min;
-  }
 
-  if(isDefined(self.script_burst_max)) {
+  if(isDefined(self.script_burst_max))
     max_burst = self.script_burst_max;
-  }
 
   on = self getlightintensity();
   curr = on;
@@ -179,13 +170,11 @@ generic_flickering() {
   linked_light_ents = [];
   linked_things = [];
 
-  if(isDefined(self.script_noteworthy)) {
-    linked_things = getEntArray(self.script_noteworthy, "targetname");
-  }
+  if(isDefined(self.script_noteworthy))
+    linked_things = getentarray(self.script_noteworthy, "targetname");
 
-  if(!linked_things.size) {
+  if(!linked_things.size)
     linked_things = getclosests_flickering_model(self.origin);
-  }
 
   for(i = 0; i < linked_things.size; i++) {
     if(linked_things[i].classname == "light") {
@@ -223,18 +212,16 @@ generic_flickering() {
       self setlightintensity(curr);
 
       if(linked_lights) {
-        for(i = 0; i < linked_light_ents.size; i++) {
+        for(i = 0; i < linked_light_ents.size; i++)
           linked_light_ents[i] setlightintensity(curr);
-        }
       }
     }
 
     self setlightintensity(on);
 
     if(linked_lights) {
-      for(i = 0; i < linked_light_ents.size; i++) {
+      for(i = 0; i < linked_light_ents.size; i++)
         linked_light_ents[i] setlightintensity(on);
-      }
     }
 
     if(linked_models) {
@@ -253,24 +240,20 @@ fire_flicker() {
   min_delay = 0.1;
   max_delay = 0.5;
 
-  if(isDefined(self.script_delay_min)) {
+  if(isDefined(self.script_delay_min))
     min_delay = self.script_delay_min;
-  }
 
-  if(isDefined(self.script_delay_max)) {
+  if(isDefined(self.script_delay_max))
     max_delay = self.script_delay_max;
-  }
 
   min_intensity = 0.25;
   max_intensity = 1;
 
-  if(isDefined(self.script_intensity_min)) {
+  if(isDefined(self.script_intensity_min))
     min_intensity = self.script_intensity_min;
-  }
 
-  if(isDefined(self.script_intensity_max)) {
+  if(isDefined(self.script_intensity_max))
     max_intensity = self.script_intensity_max;
-  }
 
   intensity = self getlightintensity();
   curr_intensity = intensity;
@@ -284,9 +267,8 @@ fire_flicker() {
     for(i = 0; i < steps; i++) {
       curr_intensity = curr_intensity - div;
 
-      if(curr_intensity < 0) {
+      if(curr_intensity < 0)
         curr_intensity = 0;
-      }
 
       self setlightintensity(curr_intensity);
       wait 0.05;

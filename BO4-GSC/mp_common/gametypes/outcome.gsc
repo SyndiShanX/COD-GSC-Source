@@ -6,15 +6,16 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\globallogic_score;
+
 #namespace outcome;
 
 autoexec main() {
-  level.var_9b671c3c[# "tie"] = {
-    #flag: "tie",
+  level.var_9b671c3c[#"tie"] = {
+    #flag: "tie", 
     #code_flag: 1
   };
-  level.var_9b671c3c[# "overtime"] = {
-    #flag: "overtime",
+  level.var_9b671c3c[#"overtime"] = {
+    #flag: "overtime", 
     #code_flag: 2
   };
 }
@@ -23,13 +24,13 @@ function_a1a81955() {
   outcome = spawnStruct();
   outcome.flags = 0;
   outcome.var_c1e98979 = 0;
-  outcome.team = # "free";
+  outcome.team = #"free";
 
   foreach(team, _ in level.teams) {
     outcome.team_score[team] = 0;
   }
 
-  outcome.platoon = # "none";
+  outcome.platoon = #"none";
   outcome.players = [];
   outcome.players_score = [];
   return outcome;
@@ -92,7 +93,7 @@ get_winning_team(outcome) {
     return outcome.players[0].team;
   }
 
-  return # "free";
+  return #"free";
 }
 
 function_b5f4c9d8(outcome) {

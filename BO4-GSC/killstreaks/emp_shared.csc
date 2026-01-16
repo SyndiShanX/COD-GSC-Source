@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
+
 #namespace emp;
 
 init_shared() {
@@ -125,7 +126,7 @@ emp_turret_deploy(localclientnum) {
   wait length * 0.75;
   self useanimtree("generic");
   self setanim(#"o_turret_emp_core_spin", 1);
-  self.fxhandle = util::playFXOnTag(localclientnum, # "killstreaks/fx_emp_core", self, "tag_fx");
+  self.fxhandle = util::playFXOnTag(localclientnum, #"killstreaks/fx_emp_core", self, "tag_fx");
   self thread cleanup_fx_on_shutdown(localclientnum, self.fxhandle);
   wait length * 0.25;
   self setanim(#"o_turret_emp_core_deploy", 0);

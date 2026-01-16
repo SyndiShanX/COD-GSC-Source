@@ -31,20 +31,18 @@ init_mgTurretsettings() {
 }
 
 main() {
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _mgturret.gsc. Function: main()\n");
-  }
   if(GetDvar("mg42") == "") {
     SetDvar("mgTurret", "off");
   }
   level.magic_distance = 24;
   turretInfos = getEntArray("turretInfo", "targetname");
-  for(index = 0; index < turretInfos.size; index++) {
+  for (index = 0; index < turretInfos.size; index++) {
     turretInfos[index] Delete();
   }
-  if(getdebugdvar("replay_debug") == "1") {
+  if(getdebugdvar("replay_debug") == "1")
     println("File: _mgturret.gsc. Function: main() - COMPLETE\n");
-  }
 }
 
 portable_mg_behavior() {
@@ -68,14 +66,14 @@ mg42_trigger() {
 mgTurret_auto(trigger) {
   trigger waittill("trigger");
   ai = GetAiArray("axis");
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if((isDefined(ai[i].script_mg42auto)) && (trigger.script_mg42auto == ai[i].script_mg42auto)) {
       ai[i] notify("auto_ai");
       println("^a ai auto on!");
     }
   }
   spawners = GetSpawnerArray();
-  for(i = 0; i < spawners.size; i++) {
+  for (i = 0; i < spawners.size; i++) {
     if((isDefined(spawners[i].script_mg42auto)) && (trigger.script_mg42auto == spawners[i].script_mg42auto)) {
       spawners[i].ai_mode = "auto_ai";
       println("^aspawner ", i, " set to auto");
@@ -90,13 +88,13 @@ mg42_suppressionFire(targets) {
   if(!isDefined(self.suppresionFire)) {
     self.suppresionFire = true;
   }
-  for(;;) {
-    while(self.suppresionFire) {
+  for (;;) {
+    while (self.suppresionFire) {
       self SetTargetEntity(targets[RandomInt(targets.size)]);
       wait(2 + RandomFloat(2));
     }
     self ClearTargetEntity();
-    while(!self.suppresionFire) {
+    while (!self.suppresionFire) {
       wait(1);
     }
   }
@@ -147,7 +145,7 @@ burst_fire_unmanned() {
   pauseUntilTime = GetTime();
   turretState = "start";
   self.script_shooting = false;
-  for(;;) {
+  for (;;) {
     if(isDefined(self.manual_targets)) {
       self ClearTargetEntity();
       self SetTargetEntity(self.manual_targets[RandomInt(self.manual_targets.size)]);
@@ -178,7 +176,7 @@ burst_fire_unmanned() {
 DoShoot() {
   self endon("death");
   self endon("turretstatechange");
-  for(;;) {
+  for (;;) {
     self ShootTurret();
     wait(0.1);
   }
@@ -201,7 +199,7 @@ random_spread(ent) {
   self endon("stop random_spread");
   self endon("stopfiring");
   self SetTargetEntity(ent);
-  while(1) {
+  while (1) {
     if(IsPlayer(ent)) {
       ent.origin = self.manual_target GetOrigin();
     } else {
@@ -216,7 +214,7 @@ mg42_firing(mg42) {
   self notify("stop_using_built_in_burst_fire");
   self endon("stop_using_built_in_burst_fire");
   mg42 StopFiring();
-  while(1) {
+  while (1) {
     mg42 waittill("startfiring");
     self thread burst_fire(mg42);
     mg42 StartFiring();
@@ -249,7 +247,7 @@ burst_fire(mg42, manual_target) {
   } else {
     mg42_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
   }
-  while(1) {
+  while (1) {
     mg42 StartFiring();
     if(isDefined(manual_target)) {
       mg42 thread random_spread(manual_target);
@@ -279,7 +277,7 @@ _spawner_mg42_think() {
   }
   self.script_mg42 = node.script_mg42;
   first_run = true;
-  while(1) {
+  while (1) {
     if(first_run) {
       first_run = false;
       if((isDefined(node.targetname)) || (self.flagged_for_use)) {
@@ -292,11 +290,10 @@ _spawner_mg42_think() {
     }
     excluders = [];
     ai = GetAiArray();
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       excluded = true;
-      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42)) {
+      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42))
         excluded = false;
-      }
       if(isDefined(ai[i].used_an_mg42)) {
         excluded = true;
       }
@@ -332,15 +329,15 @@ kill_objects(owner, msg, temp1, temp2) {
 
 shoot_mg42_script_targets(targets) {
   self endon("death");
-  while(1) {
+  while (1) {
     targ_filled = [];
-    for(i = 0; i < targets.size; i++) {
+    for (i = 0; i < targets.size; i++) {
       targ_filled[i] = false;
     }
-    for(i = 0; i < targets.size; i++) {
+    for (i = 0; i < targets.size; i++) {
       self.gun_targ = RandomInt(targets.size);
       self waittill("next_target");
-      while(targ_filled[self.gun_targ]) {
+      while (targ_filled[self.gun_targ]) {
         self.gun_targ++;
         if(self.gun_targ >= targets.size) {
           self.gun_targ = 0;
@@ -371,7 +368,7 @@ temp_think(mg42, targ) {
     return;
   }
   self.targent = self;
-  while(1) {
+  while (1) {
     self.origin = targ.origin;
     line(self.origin, mg42.origin, (0.2, 0.5, 0.8), 0.5);
     wait(0.1);
@@ -389,10 +386,10 @@ turret_think(node) {
     mintime = turret.script_turret_reuse_max;
   }
   assert(maxtime >= mintime);
-  for(;;) {
+  for (;;) {
     turret waittill("turret_deactivate");
     wait(mintime + RandomFloat(maxtime - mintime));
-    while(!(IsTurretActive(turret))) {
+    while (!(IsTurretActive(turret))) {
       turret_find_user(node, turret);
       wait(1.0);
     }
@@ -401,7 +398,7 @@ turret_think(node) {
 
 turret_find_user(node, turret) {
   ai = GetAiArray();
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(ai[i] IsInGoal(node.origin) && ai[i] CanUSeturret(turret)) {
       savekeepclaimed = ai[i].keepClaimedNodeInGoal;
       ai[i].keepClaimedNodeInGoal = false;
@@ -414,9 +411,9 @@ turret_find_user(node, turret) {
 
 setDifficulty() {
   init_mgTurretsettings();
-  mg42s = getEntArray("misc_turret", "classname");
+  mg42s = GetEntArray("misc_turret", "classname");
   difficulty = GetDifficulty();
-  for(index = 0; index < mg42s.size; index++) {
+  for (index = 0; index < mg42s.size; index++) {
     if(isDefined(mg42s[index].script_skilloverride)) {
       switch (mg42s[index].script_skilloverride) {
         case "easy":
@@ -466,10 +463,10 @@ mg42_target_drones(nonai, team, fakeowner) {
   } else {
     waitfornewdrone = false;
   }
-  while(1) {
+  while (1) {
     if(fakeowner && !isDefined(self.fakeowner)) {
       self SetMode("manual");
-      while(!isDefined(self.fakeowner)) {
+      while (!isDefined(self.fakeowner)) {
         wait(.2);
       }
     } else if(nonai) {
@@ -505,7 +502,7 @@ mg42_target_drones(nonai, team, fakeowner) {
     } else {
       targetteam = "allies";
     }
-    while(level.drones[targetteam].lastindex) {
+    while (level.drones[targetteam].lastindex) {
       target = get_bestdrone(targetteam);
       if(!isDefined(self.script_fireondrones) || !self.script_fireondrones) {
         wait(.2);
@@ -552,7 +549,7 @@ drone_fail(drone, time) {
   self endon("death");
   drone endon("death");
   timer = GetTime() + (time * 1000);
-  while(timer > GetTime()) {
+  while (timer > GetTime()) {
     turrettarget = self GetTurretTarget();
     if(!SightTracePassed(self GetTagOrigin("tag_flash"), drone.origin + (0, 0, 40), 0, drone)) {
       self.dronefailed = true;
@@ -574,10 +571,10 @@ get_bestdrone(team) {
     return;
   }
   ent = undefined;
-  dotforward = anglesToForward(self.angles);
-  for(i = 0; i < level.drones[team].lastindex; i++) {
+  dotforward = AnglesToForward(self.angles);
+  for (i = 0; i < level.drones[team].lastindex; i++) {
     angles = VectorToAngles(level.drones[team].array[i].origin - self.origin);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     if(VectorDot(dotforward, forward) < .88) {
       continue;
     }
@@ -594,7 +591,7 @@ get_bestdrone(team) {
 saw_mgTurretLink(nodes) {
   possible_turrets = getEntArray("misc_turret", "classname");
   turrets = [];
-  for(i = 0; i < possible_turrets.size; i++) {
+  for (i = 0; i < possible_turrets.size; i++) {
     if(isDefined(possible_turrets[i].targetname)) {
       continue;
     }
@@ -607,20 +604,18 @@ saw_mgTurretLink(nodes) {
   if(!turrets.size) {
     return;
   }
-  for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
+  for (nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
-    if(node.type == "Path") {
+    if(node.type == "Path")
       continue;
-    }
-    if(node.type == "Begin") {
+    if(node.type == "Begin")
       continue;
-    }
     if(node.type == "End") {
       continue;
     }
     nodeForward = anglesToForward((0, node.angles[1], 0));
     keys = getArrayKeys(turrets);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       turret = turrets[keys[i]];
       if(distance(node.origin, turret.origin) > 75) {
         continue;
@@ -630,7 +625,7 @@ saw_mgTurretLink(nodes) {
       if(dot < 0.9) {
         continue;
       }
-      node.turretInfo = spawnStruct();
+      node.turretInfo = spawnstruct();
       node.turretInfo.origin = turret.origin;
       node.turretInfo.angles = turret.angles;
       node.turretInfo.node = node;
@@ -644,16 +639,16 @@ saw_mgTurretLink(nodes) {
     }
   }
   keys = getArrayKeys(turrets);
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     turret = turrets[keys[i]];
     println("^1!!!ERROR: turret at " + turret.origin + " could not link to any node! You need to make sure that a node is directly behind the mg42 and less than 50 units behind it.");
   }
 }
 
 auto_mgTurretLink(nodes) {
-  possible_turrets = getEntArray("misc_turret", "classname");
+  possible_turrets = GetEntArray("misc_turret", "classname");
   turrets = [];
-  for(i = 0; i < possible_turrets.size; i++) {
+  for (i = 0; i < possible_turrets.size; i++) {
     if(!isDefined(possible_turrets[i].targetname) || tolower(possible_turrets[i].targetname) != "auto_mgturret") {
       continue;
     }
@@ -667,7 +662,7 @@ auto_mgTurretLink(nodes) {
   if(!turrets.size) {
     return;
   }
-  for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
+  for (nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
     if(node.type == "Path") {
       continue;
@@ -678,14 +673,14 @@ auto_mgTurretLink(nodes) {
     if(node.type == "End") {
       continue;
     }
-    nodeForward = anglesToForward((0, node.angles[1], 0));
+    nodeForward = AnglesToForward((0, node.angles[1], 0));
     keys = GetArrayKeys(turrets);
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       turret = turrets[keys[i]];
       if(Distance(node.origin, turret.origin) > 70) {
         continue;
       }
-      turretForward = anglesToForward((0, turret.angles[1], 0));
+      turretForward = AnglesToForward((0, turret.angles[1], 0));
       dot = VectorDot(nodeForward, turretForward);
       if(dot < 0.9) {
         continue;
@@ -701,7 +696,7 @@ auto_mgTurretLink(nodes) {
   if(keys.size) {
     println("The turrets at the following origins were not auto-bound to a node_turret.");
     println("Set .script_dont_link_turret if you do not want a turret to use a node_turret.");
-    for(i = 0; i < keys.size; i++) {
+    for (i = 0; i < keys.size; i++) {
       println(keys[i]);
     }
     assertex(0, "Turrets failed to be linked to node_turrets, see list above.");
@@ -721,13 +716,13 @@ save_turret_sharing_info() {
   level.shared_portable_turrets[self.export] = self;
   if(isDefined(self.script_turret_share)) {
     strings = Strtok(self.script_turret_share, " ");
-    for(i = 0; i < strings.size; i++) {
+    for (i = 0; i < strings.size; i++) {
       self.shared_turrets["connected"][strings[i]] = true;
     }
   }
   if(isDefined(self.script_turret_ambush)) {
     strings = Strtok(self.script_turret_ambush, " ");
-    for(i = 0; i < strings.size; i++) {
+    for (i = 0; i < strings.size; i++) {
       self.shared_turrets["ambush"][strings[i]] = true;
     }
   }
@@ -746,11 +741,11 @@ dropTurret() {
 }
 
 dropTurretProc() {
-  turret = spawn("script_model", (0, 0, 0));
+  turret = Spawn("script_model", (0, 0, 0));
   turret.origin = self GetTagOrigin(level.portable_mg_gun_tag);
   turret.angles = self GetTagAngles(level.portable_mg_gun_tag);
-  turret setModel(self.turretModel);
-  forward = anglesToForward(self.angles);
+  turret SetModel(self.turretModel);
+  forward = AnglesToForward(self.angles);
   forward = vectorScale(forward, 100);
   turret MoveGravity(forward, 0.5);
   self Detach(self.turretModel, level.portable_mg_gun_tag);
@@ -791,7 +786,7 @@ update_enemy_target_pos_while_running(ent) {
   self endon("death");
   self endon("end_mg_behavior");
   self endon("stop_updating_enemy_target_pos");
-  for(;;) {
+  for (;;) {
     self waittill("saw_enemy");
     ent.origin = self.last_enemy_sighting_position;
   }
@@ -803,13 +798,13 @@ move_target_pos_to_new_turrets_visibility(ent, new_spot) {
   self endon("stop_updating_enemy_target_pos");
   old_turret_pos = self.turret.origin + (0, 0, 16);
   dest_pos = new_spot.origin + (0, 0, 16);
-  for(;;) {
+  for (;;) {
     wait(0.05);
     if(SightTracePassed(ent.origin, dest_pos, 0, undefined)) {
       continue;
     }
     angles = VectorToAngles(old_turret_pos - ent.origin);
-    forward = anglesToForward(angles);
+    forward = AnglesToForward(angles);
     forward = vectorscale(forward, 8);
     ent.origin = ent.origin + forward;
   }
@@ -820,7 +815,7 @@ record_bread_crumbs_for_ambush(ent) {
   self endon("end_mg_behavior");
   self endon("stop_updating_enemy_target_pos");
   ent.bread_crumbs = [];
-  for(;;) {
+  for (;;) {
     ent.bread_crumbs[ent.bread_crumbs.size] = self.origin + (0, 0, 50);
     wait(0.35);
   }
@@ -831,8 +826,8 @@ aim_turret_at_ambush_point_or_visible_enemy(turret, ent) {
     ent.origin = self.last_enemy_sighting_position;
     return;
   }
-  forward = anglesToForward(turret.angles);
-  for(i = ent.bread_crumbs.size - 3; i >= 0; i--) {
+  forward = AnglesToForward(turret.angles);
+  for (i = ent.bread_crumbs.size - 3; i >= 0; i--) {
     crumb = ent.bread_crumbs[i];
     normal = VectorNormalize(crumb - turret.origin);
     dot = VectorDot(forward, normal);
@@ -930,7 +925,7 @@ run_to_new_spot_and_setup_gun(spot) {
   self set_all_exceptions(animscripts\combat::exception_exposed_mg42_portable);
   clear_exception("move");
   set_exception("cover_crouch", ::hold_indefintely);
-  while(Distance(self.origin, org) > 16) {
+  while (Distance(self.origin, org) > 16) {
     self SetruntoPos(org);
     wait(0.05);
   }
@@ -983,7 +978,7 @@ turret_user_moves() {
   turret_node = self.node;
   if(!isDefined(turret_node) || !is_in_array(new_spots, turret_node)) {
     taken_nodes = getTakenNodes();
-    for(i = 0; i < new_spots.size; i++) {
+    for (i = 0; i < new_spots.size; i++) {
       turret_node = random(new_spots);
       if(isDefined(taken_nodes[turret_node.origin + ""])) {
         return;
@@ -1026,8 +1021,10 @@ get_portable_mg_spot(ent) {
   find_spot_funcs[find_spot_funcs.size] = ::find_different_way_to_attack_last_seen_position;
   find_spot_funcs[find_spot_funcs.size] = ::find_good_ambush_spot;
   find_spot_funcs = array_randomize(find_spot_funcs);
-  for(i = 0; i < find_spot_funcs.size; i++) {
-    array = [[find_spot_funcs[i]]](ent);
+  for (i = 0; i < find_spot_funcs.size; i++) {
+    array = [
+      [find_spot_funcs[i]]
+    ](ent);
     if(!isDefined(array["spots"])) {
       continue;
     }
@@ -1039,7 +1036,7 @@ get_portable_mg_spot(ent) {
 getTakenNodes() {
   array = [];
   ai = GetAiArray();
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(!isDefined(ai[i].node)) {
       continue;
     }
@@ -1054,14 +1051,14 @@ find_connected_turrets(connection_type) {
   spot_exports = GetArrayKeys(spots);
   taken_nodes = getTakenNodes();
   taken_nodes[self.node.origin + ""] = undefined;
-  for(i = 0; i < spot_exports.size; i++) {
+  for (i = 0; i < spot_exports.size; i++) {
     export = spot_exports[i];
     if(spots[
         export] == self.turret) {
       continue;
     }
     keys = GetArrayKeys(self.turret.shared_turrets[connection_type]);
-    for(p = 0; p < keys.size; p++) {
+    for (p = 0; p < keys.size; p++) {
       if(spots[
           export].export+"" != keys[p]) {
         continue;
@@ -1099,7 +1096,7 @@ find_different_way_to_attack_last_seen_position(ent) {
     return;
   }
   good_spot = [];
-  for(i = 0; i < usable_spots.size; i++) {
+  for (i = 0; i < usable_spots.size; i++) {
     if(!within_fov(usable_spots[i].origin, usable_spots[i].angles, ent.origin, 0.75)) {
       continue;
     }
@@ -1121,7 +1118,7 @@ portable_mg_spot() {
   if(isDefined(self.isvehicleattached)) {
     return;
   }
-  if(self.spawnflags &turret_preplaced) {
+  if(self.spawnflags & turret_preplaced) {
     return;
   }
   hide_turret();
@@ -1185,8 +1182,8 @@ link_turrets(turretArray) {
   if(!isDefined(turretArray) || turretArray.size <= 1) {
     return;
   }
-  while(1) {
-    for(i = 0; i < turretArray.size; i++) {
+  while (1) {
+    for (i = 0; i < turretArray.size; i++) {
       if(turretArray[i] IsFiringTurret()) {
         self link_turrets_fireall(turretArray[i], turretArray);
       }
@@ -1198,14 +1195,14 @@ link_turrets(turretArray) {
 link_turrets_fireall(leaderTurret, turretArray) {
   self endon("death");
   self.leadTurretState = 0;
-  for(i = 0; i < turretArray.size; i++) {
+  for (i = 0; i < turretArray.size; i++) {
     if(turretArray[i] != leaderTurret && !turretArray[i] IsFiringTurret()) {
       turretArray[i] SetMode("manual");
     }
   }
-  while(leaderTurret IsFiringTurret()) {
+  while (leaderTurret IsFiringTurret()) {
     if(leaderTurret.script_shooting) {
-      for(i = 0; i < turretArray.size; i++) {
+      for (i = 0; i < turretArray.size; i++) {
         if(turretArray[i] != leaderTurret && !turretArray[i] IsFiringTurret()) {
           turretArray[i] ShootTurret();
         }
@@ -1214,7 +1211,7 @@ link_turrets_fireall(leaderTurret, turretArray) {
     wait(0.1);
   }
   self notify("lead_turret_stopped");
-  for(i = 0; i < turretArray.size; i++) {
+  for (i = 0; i < turretArray.size; i++) {
     if(turretArray[i] != leaderTurret && !turretArray[i] IsFiringTurret()) {
       turretArray[i] SetMode("auto_nonai");
     }
@@ -1225,10 +1222,10 @@ init_mg_animent() {
   if(!isDefined(level.scr_anim)) {
     assertMsg("You must put \"init_mg_animent\" after " + tolower(GetDvar("mapname")) + "_anim::main() so the level.scr_anim is defined.");
   }
-  mg42s = getEntArray("misc_mg42", "classname");
-  turrets = getEntArray("misc_turret", "classname");
+  mg42s = GetEntArray("misc_mg42", "classname");
+  turrets = GetEntArray("misc_turret", "classname");
   turrets = array_combine(mg42s, turrets);
-  for(i = 0; i < turrets.size; i++) {
+  for (i = 0; i < turrets.size; i++) {
     if(isDefined(turrets[i].script_animent)) {
       turrets[i] thread mg_anim_ent();
     }
@@ -1251,7 +1248,7 @@ mg_anim_ent() {
   intro_time = GetAnimLength(level.scr_anim[anim_ent.animname]["intro"]) - delay;
   anim_ent maps\_anim::SetAnimTree();
   state = "outro";
-  for(;;) {
+  for (;;) {
     owner = self GetTurretOwner();
     if(!isDefined(owner)) {
       if(state != "outro") {

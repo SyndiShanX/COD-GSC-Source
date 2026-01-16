@@ -13,6 +13,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\smokegrenade;
+
 #namespace player;
 
 autoexec __init__system__() {
@@ -26,9 +27,9 @@ __init__() {
   callback::on_weapon_change(&function_585458);
   callback::on_localclient_connect(&shoutcaster::function_981be10f);
   level.var_15ab9bbd = 1;
-  renderoverridebundle::function_f72f089c(#"hash_27554b8df2b9e92b", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", &function_6803f977, undefined, undefined, 1);
-  renderoverridebundle::function_f72f089c(#"hash_757cb7d3be0afb26", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_7a8f0ff83c7ba2be", &function_972e0565);
-  renderoverridebundle::function_f72f089c(#"hash_2f86d28434166be7", # "hash_71fbf1094f57b910", &function_fac25f84);
+  renderoverridebundle::function_f72f089c(#"hash_27554b8df2b9e92b", sessionmodeiscampaigngame() ? #"hash_1cbf6d26721c59a7" : #"hash_1c90592671f4c6e9", &function_6803f977, undefined, undefined, 1);
+  renderoverridebundle::function_f72f089c(#"hash_757cb7d3be0afb26", sessionmodeiscampaigngame() ? #"hash_1cbf6d26721c59a7" : #"hash_7a8f0ff83c7ba2be", &function_972e0565);
+  renderoverridebundle::function_f72f089c(#"hash_2f86d28434166be7", #"hash_71fbf1094f57b910", &function_fac25f84);
 }
 
 function_972e0565(local_client_num, bundle) {
@@ -54,7 +55,7 @@ function_972e0565(local_client_num, bundle) {
 
 function_a25e8ff(localclientnum, var_21818d51) {
   if(!var_21818d51 && shoutcaster::is_shoutcaster(localclientnum)) {
-    self shoutcaster::function_a0b844f1(localclientnum, # "hash_2f86d28434166be7", # "hash_71fbf1094f57b910");
+    self shoutcaster::function_a0b844f1(localclientnum, #"hash_2f86d28434166be7", #"hash_71fbf1094f57b910");
     return;
   }
 
@@ -105,7 +106,7 @@ on_player_corpse(localclientnum, params) {
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
   self function_a25e8ff(localclientnum, 1);
-  self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", 0);
+  self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"hash_1cbf6d26721c59a7" : #"hash_1c90592671f4c6e9", 0);
 
   if(shoutcaster::is_shoutcaster(localclientnum)) {
     self stoprenderoverridebundle(#"hash_71fbf1094f57b910");
@@ -115,7 +116,7 @@ on_player_corpse(localclientnum, params) {
 function_585458(params) {
   if(self == level) {
     local_client_num = params.localclientnum;
-    var_a6426655 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+    var_a6426655 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
     if(var_a6426655) {
       localplayer = function_5c10bd79(local_client_num);
@@ -126,11 +127,11 @@ function_585458(params) {
 }
 
 function_3752300d(local_client_num) {
-  self renderoverridebundle::function_c8d97b8e(local_client_num, # "local", # "hash_757cb7d3be0afb26");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, #"local", #"hash_757cb7d3be0afb26");
 }
 
 function_bcc9c79c(local_client_num) {
-  self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_27554b8df2b9e92b");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_27554b8df2b9e92b");
 }
 
 function_fac25f84(local_client_num, bundle) {
@@ -152,7 +153,7 @@ function_fac25f84(local_client_num, bundle) {
 }
 
 function_6803f977(local_client_num, bundle) {
-  if(!function_2f9b4fe8(local_client_num, # "specialty_friendliesthroughwalls")) {
+  if(!function_2f9b4fe8(local_client_num, #"specialty_friendliesthroughwalls")) {
     return false;
   }
 

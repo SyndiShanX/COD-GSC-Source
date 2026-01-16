@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace player_insertion;
 
 autoexec __init__system__() {
@@ -64,11 +65,11 @@ on_localclient_connect(localclientnum) {
 }
 
 private function_a4c14f8c(value) {
-  return value & 1;
+  return value&1;
 }
 
 private function_ff16ec5f(value) {
-  return ~value & 1;
+  return ~value&1;
 }
 
 private function_76a4b21e(value) {
@@ -95,7 +96,7 @@ private function_6c4ae982(localclientnum) {
 
       if(wormhole_fx === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        playSound(localclientnum, # "hash_37244e4f8de40dd5");
+        playSound(localclientnum, #"hash_37244e4f8de40dd5");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_reveal");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_sprites");
       } else if(wormhole_fx === 0 && var_d5823792) {
@@ -121,7 +122,7 @@ function_ed1567cc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self function_d309e55a("tag_ramp_control_animate", 1);
     }
 
-    self playSound(0, # "hash_329be5a324e42ee1");
+    self playSound(0, #"hash_329be5a324e42ee1");
     level notify(#"hash_5975d5f569535c41");
     return;
   }
@@ -149,14 +150,14 @@ function_ba7d9848(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && oldval != newval) {
-    self playSound(0, # "hash_7ba1b4b83540b238");
+    self playSound(0, #"hash_7ba1b4b83540b238");
   }
 }
 
 function_ea3cc318(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self function_da43934d()) {
     if(newval == 1 && oldval != newval) {
-      self playSound(0, # "hash_783bdfd900c11eed");
+      self playSound(0, #"hash_783bdfd900c11eed");
     }
   }
 }
@@ -415,8 +416,8 @@ infil_compass(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 function_4da7bee9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   for(var_1e7db62f = 0; var_1e7db62f < 2; var_1e7db62f++) {
-    oldvalue = oldval & 1;
-    value = newval & 1;
+    oldvalue = oldval&1;
+    value = newval&1;
     newval >>= 1;
     oldval >>= 1;
 
@@ -459,7 +460,7 @@ private function_c9851cb(localclientnum, oldval, newval, bnewent, binitialsnap, 
 }
 
 private function_9767bbd8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFX(localclientnum, # "hash_3697b0b0d7cd6874", self.origin);
+  playFX(localclientnum, #"hash_3697b0b0d7cd6874", self.origin);
 }
 
 private function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -471,7 +472,7 @@ private function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap,
       stopfx(localclientnum, self.var_227361c6);
     }
 
-    self.var_227361c6 = playFX(localclientnum, # "hash_28b5c6ccaabb4afe", self.origin);
+    self.var_227361c6 = playFX(localclientnum, #"hash_28b5c6ccaabb4afe", self.origin);
     return;
   }
 
@@ -479,5 +480,5 @@ private function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap,
     stopfx(localclientnum, self.var_227361c6);
   }
 
-  self.var_227361c6 = playFX(localclientnum, # "hash_45086f1ffcabbf47", self.origin);
+  self.var_227361c6 = playFX(localclientnum, #"hash_45086f1ffcabbf47", self.origin);
 }

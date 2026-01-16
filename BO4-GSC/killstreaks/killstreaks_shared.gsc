@@ -33,6 +33,7 @@
 #include scripts\weapons\deployable;
 #include scripts\weapons\tacticalinsertion;
 #include scripts\weapons\weaponobjects;
+
 #namespace killstreaks;
 
 init_shared() {
@@ -134,12 +135,12 @@ killstreak_init(killstreak_type) {
 }
 
 register_weapon(killstreak_type, weapon) {
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
   assert(isDefined(killstreak_type), "<dev string:x77>");
-  assert(weapon.name != # "none");
+  assert(weapon.name != #"none");
   assert(!isDefined(level.killstreakweapons[weapon]), "<dev string:xd6>");
   level.killstreaks[killstreak_type].weapon = weapon;
   level.killstreakweapons[weapon] = killstreak_type;
@@ -228,20 +229,20 @@ private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function
 
   if(isDefined(level.cratetypes)) {
     if(isDefined(isinventoryweapon) && isinventoryweapon) {
-      if(isDefined(level.cratetypes[# "inventory_supplydrop"]) && isDefined(level.cratetypes[# "inventory_supplydrop"][type])) {
-        level.cratetypes[# "inventory_supplydrop"][type].hint = bundle.var_1d2a2ca4;
-        level.cratetypes[# "inventory_supplydrop"][type].hint_gambler = bundle.var_8c4d7906;
+      if(isDefined(level.cratetypes[#"inventory_supplydrop"]) && isDefined(level.cratetypes[#"inventory_supplydrop"][type])) {
+        level.cratetypes[#"inventory_supplydrop"][type].hint = bundle.var_1d2a2ca4;
+        level.cratetypes[#"inventory_supplydrop"][type].hint_gambler = bundle.var_8c4d7906;
       }
     } else {
-      if(isDefined(level.cratetypes[# "supplydrop"]) && isDefined(level.cratetypes[# "supplydrop"][type])) {
-        level.cratetypes[# "supplydrop"][type].hint = bundle.var_1d2a2ca4;
-        level.cratetypes[# "supplydrop"][type].hint_gambler = bundle.var_8c4d7906;
+      if(isDefined(level.cratetypes[#"supplydrop"]) && isDefined(level.cratetypes[#"supplydrop"][type])) {
+        level.cratetypes[#"supplydrop"][type].hint = bundle.var_1d2a2ca4;
+        level.cratetypes[#"supplydrop"][type].hint_gambler = bundle.var_8c4d7906;
         game.strings[type + "_hint"] = bundle.var_1d2a2ca4;
       }
 
-      if(isDefined(level.cratetypes[# "gambler"]) && isDefined(level.cratetypes[# "gambler"][type])) {
-        level.cratetypes[# "gambler"][type].hint = bundle.var_1d2a2ca4;
-        level.cratetypes[# "gambler"][type].hint_gambler = bundle.var_8c4d7906;
+      if(isDefined(level.cratetypes[#"gambler"]) && isDefined(level.cratetypes[#"gambler"][type])) {
+        level.cratetypes[#"gambler"][type].hint = bundle.var_1d2a2ca4;
+        level.cratetypes[#"gambler"][type].hint_gambler = bundle.var_8c4d7906;
       }
     }
   }
@@ -258,7 +259,7 @@ private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function
 register_bundle(bundle, killstreak_use_function) {
   function_e48aca4d(bundle.kstype, bundle, bundle.ksweapon, bundle.ksvehicle, killstreak_use_function, 0);
 
-  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != # "none") {
+  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != #"none") {
     function_e48aca4d("inventory_" + bundle.kstype, bundle, bundle.ksinventoryweapon, undefined, killstreak_use_function, 1);
   }
 }
@@ -327,7 +328,7 @@ function_181f96a6(killstreaktype, weapon) {
   assert(isDefined(killstreaktype), "<dev string:x77>");
   assert(isDefined(level.killstreaks[killstreaktype]), "<dev string:x1fd>");
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
@@ -396,6 +397,7 @@ is_remote_override_weapon(killstreaktype, weapon) {
 }
 
 register_dev_dvars(killstreaktype) {
+
   assert(isDefined(killstreaktype), "<dev string:x77>");
   assert(isDefined(level.killstreaks[killstreaktype]), "<dev string:x299>");
   level.killstreaks[killstreaktype].devdvar = "<dev string:x2df>" + killstreaktype + "<dev string:x2e6>";
@@ -403,6 +405,7 @@ register_dev_dvars(killstreaktype) {
   level.killstreaks[killstreaktype].devtimeoutdvar = "<dev string:x2df>" + killstreaktype + "<dev string:x2fb>";
   setdvar(level.killstreaks[killstreaktype].devtimeoutdvar, 0);
   level thread register_devgui(killstreaktype);
+
 }
 
 register_dev_debug_dvar(killstreaktype) {
@@ -441,20 +444,23 @@ devgui_scorestreak_command_debugdvar(killstreaktype, dvar) {
   devgui_scorestreak_dvar_toggle(killstreaktype, "<dev string:x33c>", dvar);
 }
 
-function devgui_scorestreak_dvar_toggle(killstreaktype, title, dvar) {
-  setdvar(dvar, 0);
-  devgui_scorestreak_command(killstreaktype, "Toggle " + title, "toggle " + dvar + " 1 0");
-}
+  function devgui_scorestreak_dvar_toggle(killstreaktype, title, dvar) {
+    setdvar(dvar, 0);
+    devgui_scorestreak_command(killstreaktype, "Toggle " + title, "toggle " + dvar + " 1 0");
+  }
 
 devgui_scorestreak_command(killstreaktype, title, command) {
+
   assert(isDefined(killstreaktype), "<dev string:x77>");
   assert(isDefined(level.killstreaks[killstreaktype]), "<dev string:x299>");
   root = "<dev string:x344>";
   user_name = level.killstreaks[killstreaktype].menuname;
   util::add_queued_debug_command(root + user_name + "<dev string:x363>" + killstreaktype + "<dev string:x368>" + title + "<dev string:x36d>" + command + "<dev string:x373>");
+
 }
 
 should_draw_debug(killstreak) {
+
   assert(isDefined(killstreak), "<dev string:x77>");
   function_2459bd2f();
 
@@ -462,20 +468,20 @@ should_draw_debug(killstreak) {
     return getdvarint(level.killstreaks[killstreak].devdebugdvar, 0);
   }
 
-  return 0;
+    return 0;
 }
 
 function_2459bd2f() {
   assert(isDefined(level.killstreaks), "<dev string:x379>");
 }
 
-function is_available(killstreak) {
-  if(isDefined(level.menureferenceforkillstreak[killstreak])) {
-    return 1;
-  }
+  function is_available(killstreak) {
+    if(isDefined(level.menureferenceforkillstreak[killstreak])) {
+      return 1;
+    }
 
-  return 0;
-}
+    return 0;
+  }
 
 get_by_menu_name(killstreak) {
   return level.menureferenceforkillstreak[killstreak];
@@ -517,9 +523,10 @@ give_if_streak_count_matches(index, killstreak, streakcount) {
     println("<dev string:x41d>");
   }
 
-  if(self.pers[# "killstreaksearnedthiskillstreak"] > index && util::isroundbased()) {
-    hasalreadyearnedkillstreak = 1;
-  } else {
+    if(self.pers[#"killstreaksearnedthiskillstreak"] > index && util::isroundbased()) {
+      hasalreadyearnedkillstreak = 1;
+    }
+  else {
     hasalreadyearnedkillstreak = 0;
   }
 
@@ -537,7 +544,7 @@ give_if_streak_count_matches(index, killstreak, streakcount) {
 
     if(killstreaklevel == streakcount) {
       self give(get_by_menu_name(killstreak), streakcount);
-      self.pers[# "killstreaksearnedthiskillstreak"] = index + 1;
+      self.pers[#"killstreaksearnedthiskillstreak"] = index + 1;
       pixendevent();
       return true;
     }
@@ -552,27 +559,27 @@ give_for_streak() {
     return;
   }
 
-  if(!isDefined(self.pers[# "totalkillstreakcount"])) {
-    self.pers[# "totalkillstreakcount"] = 0;
+  if(!isDefined(self.pers[#"totalkillstreakcount"])) {
+    self.pers[#"totalkillstreakcount"] = 0;
   }
 
   given = 0;
 
   for(i = 0; i < self.killstreak.size; i++) {
-    given |= give_if_streak_count_matches(i, self.killstreak[i], self.pers[# "cur_kill_streak"]);
+    given |= give_if_streak_count_matches(i, self.killstreak[i], self.pers[#"cur_kill_streak"]);
   }
 }
 
 is_an_a_killstreak() {
   onkillstreak = 0;
 
-  if(!isDefined(self.pers[# "kill_streak_before_death"])) {
-    self.pers[# "kill_streak_before_death"] = 0;
+  if(!isDefined(self.pers[#"kill_streak_before_death"])) {
+    self.pers[#"kill_streak_before_death"] = 0;
   }
 
-  streakplusone = self.pers[# "kill_streak_before_death"] + 1;
+  streakplusone = self.pers[#"kill_streak_before_death"] + 1;
 
-  if(self.pers[# "kill_streak_before_death"] >= 5) {
+  if(self.pers[#"kill_streak_before_death"] >= 5) {
     onkillstreak = 1;
   }
 
@@ -626,10 +633,10 @@ take(killstreak) {
 }
 
 remove_oldest() {
-  if(isDefined(self.pers[# "killstreaks"][0])) {
+  if(isDefined(self.pers[#"killstreaks"][0])) {
     currentweapon = self getcurrentweapon();
 
-    if(currentweapon == get_killstreak_weapon(self.pers[# "killstreaks"][0])) {
+    if(currentweapon == get_killstreak_weapon(self.pers[#"killstreaks"][0])) {
       primaries = self getweaponslistprimaries();
 
       if(primaries.size > 0) {
@@ -638,10 +645,10 @@ remove_oldest() {
     }
 
     self notify(#"oldest_killstreak_removed", {
-      #type: self.pers[# "killstreaks"][0],
-      #id: self.pers[# "killstreak_unique_id"][0]
+      #type: self.pers[#"killstreaks"][0], 
+      #id: self.pers[#"killstreak_unique_id"][0]
     });
-    self remove_used_killstreak(self.pers[# "killstreaks"][0], self.pers[# "killstreak_unique_id"][0], 0);
+    self remove_used_killstreak(self.pers[#"killstreaks"][0], self.pers[#"killstreak_unique_id"][0], 0);
   }
 }
 
@@ -660,47 +667,47 @@ give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom) {
     return false;
   }
 
-  if(!isDefined(self.pers[# "killstreaks"])) {
-    self.pers[# "killstreaks"] = [];
+  if(!isDefined(self.pers[#"killstreaks"])) {
+    self.pers[#"killstreaks"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_has_been_used"])) {
-    self.pers[# "killstreak_has_been_used"] = [];
+  if(!isDefined(self.pers[#"killstreak_has_been_used"])) {
+    self.pers[#"killstreak_has_been_used"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_unique_id"])) {
-    self.pers[# "killstreak_unique_id"] = [];
+  if(!isDefined(self.pers[#"killstreak_unique_id"])) {
+    self.pers[#"killstreak_unique_id"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_ammo_count"])) {
-    self.pers[# "killstreak_ammo_count"] = [];
+  if(!isDefined(self.pers[#"killstreak_ammo_count"])) {
+    self.pers[#"killstreak_ammo_count"] = [];
   }
 
   just_max_stack_removed_inventory_killstreak = undefined;
 
   if(isDefined(tobottom) && tobottom) {
-    size = self.pers[# "killstreaks"].size;
+    size = self.pers[#"killstreaks"].size;
 
-    if(self.pers[# "killstreaks"].size >= level.maxinventoryscorestreaks) {
+    if(self.pers[#"killstreaks"].size >= level.maxinventoryscorestreaks) {
       self remove_oldest();
       just_max_stack_removed_inventory_killstreak = self.just_removed_used_killstreak;
     }
 
     for(i = size; i > 0; i--) {
-      self.pers[# "killstreaks"][i] = self.pers[# "killstreaks"][i - 1];
-      self.pers[# "killstreak_has_been_used"][i] = self.pers[# "killstreak_has_been_used"][i - 1];
-      self.pers[# "killstreak_unique_id"][i] = self.pers[# "killstreak_unique_id"][i - 1];
-      self.pers[# "killstreak_ammo_count"][i] = self.pers[# "killstreak_ammo_count"][i - 1];
+      self.pers[#"killstreaks"][i] = self.pers[#"killstreaks"][i - 1];
+      self.pers[#"killstreak_has_been_used"][i] = self.pers[#"killstreak_has_been_used"][i - 1];
+      self.pers[#"killstreak_unique_id"][i] = self.pers[#"killstreak_unique_id"][i - 1];
+      self.pers[#"killstreak_ammo_count"][i] = self.pers[#"killstreak_ammo_count"][i - 1];
     }
 
-    self.pers[# "killstreaks"][0] = killstreaktype;
-    self.pers[# "killstreak_unique_id"][0] = level.killstreakcounter;
+    self.pers[#"killstreaks"][0] = killstreaktype;
+    self.pers[#"killstreak_unique_id"][0] = level.killstreakcounter;
     level.killstreakcounter++;
 
     if(isDefined(noxp)) {
-      self.pers[# "killstreak_has_been_used"][0] = noxp;
+      self.pers[#"killstreak_has_been_used"][0] = noxp;
     } else {
-      self.pers[# "killstreak_has_been_used"][0] = 0;
+      self.pers[#"killstreak_has_been_used"][0] = 0;
     }
 
     if(size == 0) {
@@ -708,19 +715,19 @@ give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom) {
       ammocount = give_weapon(weapon, 1);
     }
 
-    self.pers[# "killstreak_ammo_count"][0] = 0;
+    self.pers[#"killstreak_ammo_count"][0] = 0;
   } else {
     var_7b935486 = 0;
 
-    if(self.pers[# "killstreaks"].size && self.currentweapon === get_killstreak_weapon(self.pers[# "killstreaks"][self.pers[# "killstreaks"].size - 1])) {
+    if(self.pers[#"killstreaks"].size && self.currentweapon === get_killstreak_weapon(self.pers[#"killstreaks"][self.pers[#"killstreaks"].size - 1])) {
       var_7b935486 = 1;
     }
 
-    self.pers[# "killstreaks"][self.pers[# "killstreaks"].size] = killstreaktype;
-    self.pers[# "killstreak_unique_id"][self.pers[# "killstreak_unique_id"].size] = level.killstreakcounter;
+    self.pers[#"killstreaks"][self.pers[#"killstreaks"].size] = killstreaktype;
+    self.pers[#"killstreak_unique_id"][self.pers[#"killstreak_unique_id"].size] = level.killstreakcounter;
     level.killstreakcounter++;
 
-    if(self.pers[# "killstreaks"].size > level.maxinventoryscorestreaks) {
+    if(self.pers[#"killstreaks"].size > level.maxinventoryscorestreaks) {
       self remove_oldest();
       just_max_stack_removed_inventory_killstreak = self.just_removed_used_killstreak;
     }
@@ -729,26 +736,26 @@ give_internal(killstreaktype, do_not_update_death_count, noxp, tobottom) {
       noxp = 0;
     }
 
-    self.pers[# "killstreak_has_been_used"][self.pers[# "killstreak_has_been_used"].size] = noxp;
+    self.pers[#"killstreak_has_been_used"][self.pers[#"killstreak_has_been_used"].size] = noxp;
     weapon = get_killstreak_weapon(killstreaktype);
     ammocount = give_weapon(weapon, 1);
-    self.pers[# "killstreak_ammo_count"][self.pers[# "killstreak_ammo_count"].size] = ammocount;
+    self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size] = ammocount;
 
     if(var_7b935486) {
-      var_3522232f = self.pers[# "killstreaks"].size - 2;
-      var_a1312679 = self.pers[# "killstreaks"].size - 1;
-      var_3197d2aa = self.pers[# "killstreaks"][var_3522232f];
-      var_c72e250a = self.pers[# "killstreak_unique_id"][var_3522232f];
-      var_948e9ad0 = self.pers[# "killstreak_has_been_used"][var_3522232f];
-      var_80931fe9 = self.pers[# "killstreak_ammo_count"][var_3522232f];
-      self.pers[# "killstreaks"][var_3522232f] = self.pers[# "killstreaks"][var_a1312679];
-      self.pers[# "killstreak_unique_id"][var_3522232f] = self.pers[# "killstreak_unique_id"][var_a1312679];
-      self.pers[# "killstreak_has_been_used"][var_3522232f] = self.pers[# "killstreak_has_been_used"][var_a1312679];
-      self.pers[# "killstreak_ammo_count"][var_3522232f] = self.pers[# "killstreak_ammo_count"][var_a1312679];
-      self.pers[# "killstreaks"][var_a1312679] = var_3197d2aa;
-      self.pers[# "killstreak_unique_id"][var_a1312679] = var_c72e250a;
-      self.pers[# "killstreak_has_been_used"][var_a1312679] = var_948e9ad0;
-      self.pers[# "killstreak_ammo_count"][var_a1312679] = var_80931fe9;
+      var_3522232f = self.pers[#"killstreaks"].size - 2;
+      var_a1312679 = self.pers[#"killstreaks"].size - 1;
+      var_3197d2aa = self.pers[#"killstreaks"][var_3522232f];
+      var_c72e250a = self.pers[#"killstreak_unique_id"][var_3522232f];
+      var_948e9ad0 = self.pers[#"killstreak_has_been_used"][var_3522232f];
+      var_80931fe9 = self.pers[#"killstreak_ammo_count"][var_3522232f];
+      self.pers[#"killstreaks"][var_3522232f] = self.pers[#"killstreaks"][var_a1312679];
+      self.pers[#"killstreak_unique_id"][var_3522232f] = self.pers[#"killstreak_unique_id"][var_a1312679];
+      self.pers[#"killstreak_has_been_used"][var_3522232f] = self.pers[#"killstreak_has_been_used"][var_a1312679];
+      self.pers[#"killstreak_ammo_count"][var_3522232f] = self.pers[#"killstreak_ammo_count"][var_a1312679];
+      self.pers[#"killstreaks"][var_a1312679] = var_3197d2aa;
+      self.pers[#"killstreak_unique_id"][var_a1312679] = var_c72e250a;
+      self.pers[#"killstreak_has_been_used"][var_a1312679] = var_948e9ad0;
+      self.pers[#"killstreak_ammo_count"][var_a1312679] = var_80931fe9;
       self setinventoryweapon(get_killstreak_weapon(var_3197d2aa));
     }
   }
@@ -830,8 +837,8 @@ give_weapon(weapon, isinventory, usestoredammo) {
       }
 
       switch (carriedweapon.name) {
-        case # "m32":
-        case # "minigun":
+        case #"m32":
+        case #"minigun":
           continue;
       }
 
@@ -850,31 +857,31 @@ give_weapon(weapon, isinventory, usestoredammo) {
     self setinventoryweapon(weapon);
 
     if(weapon.iscarriedkillstreak) {
-      if(!isDefined(self.pers[# "held_killstreak_ammo_count"][weapon])) {
-        self.pers[# "held_killstreak_ammo_count"][weapon] = 0;
+      if(!isDefined(self.pers[#"held_killstreak_ammo_count"][weapon])) {
+        self.pers[#"held_killstreak_ammo_count"][weapon] = 0;
       }
 
-      if(!isDefined(self.pers[# "held_killstreak_clip_count"][weapon])) {
-        self.pers[# "held_killstreak_clip_count"][weapon] = weapon.clipsize;
+      if(!isDefined(self.pers[#"held_killstreak_clip_count"][weapon])) {
+        self.pers[#"held_killstreak_clip_count"][weapon] = weapon.clipsize;
       }
 
-      if(!isDefined(self.pers[# "killstreak_quantity"][weapon])) {
-        self.pers[# "killstreak_quantity"][weapon] = 0;
+      if(!isDefined(self.pers[#"killstreak_quantity"][weapon])) {
+        self.pers[#"killstreak_quantity"][weapon] = 0;
       }
 
       if(currentweapon == weapon && !isheldinventorykillstreakweapon(weapon)) {
         return weapon.maxammo;
-      } else if(isDefined(usestoredammo) && usestoredammo && self.pers[# "killstreak_ammo_count"][self.pers[# "killstreak_ammo_count"].size - 1] > 0) {
+      } else if(isDefined(usestoredammo) && usestoredammo && self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size - 1] > 0) {
         switch (weapon.name) {
-          case # "inventory_minigun":
+          case #"inventory_minigun":
             if(isDefined(self.minigunactive) && self.minigunactive) {
-              return self.pers[# "held_killstreak_ammo_count"][weapon];
+              return self.pers[#"held_killstreak_ammo_count"][weapon];
             }
 
             break;
-          case # "inventory_m32":
+          case #"inventory_m32":
             if(isDefined(self.m32active) && self.m32active) {
-              return self.pers[# "held_killstreak_ammo_count"][weapon];
+              return self.pers[#"held_killstreak_ammo_count"][weapon];
             }
 
             break;
@@ -882,37 +889,37 @@ give_weapon(weapon, isinventory, usestoredammo) {
             break;
         }
 
-        self.pers[# "held_killstreak_ammo_count"][weapon] = self.pers[# "killstreak_ammo_count"][self.pers[# "killstreak_ammo_count"].size - 1];
-        self loadout::function_3ba6ee5d(weapon, self.pers[# "killstreak_ammo_count"][self.pers[# "killstreak_ammo_count"].size - 1]);
+        self.pers[#"held_killstreak_ammo_count"][weapon] = self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size - 1];
+        self loadout::function_3ba6ee5d(weapon, self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size - 1]);
       } else {
-        self.pers[# "held_killstreak_ammo_count"][weapon] = weapon.maxammo;
-        self.pers[# "held_killstreak_clip_count"][weapon] = weapon.clipsize;
-        self loadout::function_3ba6ee5d(weapon, self.pers[# "held_killstreak_ammo_count"][weapon]);
+        self.pers[#"held_killstreak_ammo_count"][weapon] = weapon.maxammo;
+        self.pers[#"held_killstreak_clip_count"][weapon] = weapon.clipsize;
+        self loadout::function_3ba6ee5d(weapon, self.pers[#"held_killstreak_ammo_count"][weapon]);
       }
 
-      return self.pers[# "held_killstreak_ammo_count"][weapon];
+      return self.pers[#"held_killstreak_ammo_count"][weapon];
     } else {
       switch (weapon.statname) {
-        case # "dart":
-        case # "ultimate_turret":
-        case # "counteruav":
-        case # "combat_robot_marker":
-        case # "remote_missile":
-        case # "swat_team":
-        case # "supplydrop_marker":
-        case # "m32_drop":
-        case # "drone_squadron":
-        case # "overwatch_helicopter":
-        case # "straferun":
-        case # "recon_car":
-        case # "uav":
-        case # "ac130":
-        case # "helicopter_comlink":
-        case # "swat_helicopter":
-        case # "ai_tank_marker":
-        case # "planemortar":
-        case # "minigun_drop":
-        case # "missile_drone":
+        case #"dart":
+        case #"ultimate_turret":
+        case #"counteruav":
+        case #"combat_robot_marker":
+        case #"remote_missile":
+        case #"swat_team":
+        case #"supplydrop_marker":
+        case #"m32_drop":
+        case #"drone_squadron":
+        case #"overwatch_helicopter":
+        case #"straferun":
+        case #"recon_car":
+        case #"uav":
+        case #"ac130":
+        case #"helicopter_comlink":
+        case #"swat_helicopter":
+        case #"ai_tank_marker":
+        case #"planemortar":
+        case #"minigun_drop":
+        case #"missile_drone":
           delta = 1;
           break;
         default:
@@ -941,11 +948,11 @@ activate_next(do_not_update_death_count) {
     self setactionslot(4, "");
   }
 
-  if(!isDefined(self.pers[# "killstreaks"]) || self.pers[# "killstreaks"].size == 0) {
+  if(!isDefined(self.pers[#"killstreaks"]) || self.pers[#"killstreaks"].size == 0) {
     return false;
   }
 
-  killstreaktype = self.pers[# "killstreaks"][self.pers[# "killstreaks"].size - 1];
+  killstreaktype = self.pers[#"killstreaks"][self.pers[#"killstreaks"].size - 1];
 
   if(!isDefined(level.killstreaks[killstreaktype])) {
     return false;
@@ -963,8 +970,8 @@ activate_next(do_not_update_death_count) {
   ammocount = give_weapon(weapon, 0, 1);
 
   if(weapon.iscarriedkillstreak) {
-    self setweaponammoclip(weapon, self.pers[# "held_killstreak_clip_count"][weapon]);
-    self setweaponammostock(weapon, ammocount - self.pers[# "held_killstreak_clip_count"][weapon]);
+    self setweaponammoclip(weapon, self.pers[#"held_killstreak_clip_count"][weapon]);
+    self setweaponammostock(weapon, ammocount - self.pers[#"held_killstreak_clip_count"][weapon]);
   }
 
   if(!isDefined(do_not_update_death_count) || do_not_update_death_count != 0) {
@@ -975,30 +982,30 @@ activate_next(do_not_update_death_count) {
 }
 
 give_owned() {
-  if(!isDefined(self.pers[# "killstreaks"])) {
-    self.pers[# "killstreaks"] = [];
+  if(!isDefined(self.pers[#"killstreaks"])) {
+    self.pers[#"killstreaks"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_has_been_used"])) {
-    self.pers[# "killstreak_has_been_used"] = [];
+  if(!isDefined(self.pers[#"killstreak_has_been_used"])) {
+    self.pers[#"killstreak_has_been_used"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_unique_id"])) {
-    self.pers[# "killstreak_unique_id"] = [];
+  if(!isDefined(self.pers[#"killstreak_unique_id"])) {
+    self.pers[#"killstreak_unique_id"] = [];
   }
 
-  if(!isDefined(self.pers[# "killstreak_ammo_count"])) {
-    self.pers[# "killstreak_ammo_count"] = [];
+  if(!isDefined(self.pers[#"killstreak_ammo_count"])) {
+    self.pers[#"killstreak_ammo_count"] = [];
   }
 
-  if(self.pers[# "killstreaks"].size > 0) {
+  if(self.pers[#"killstreaks"].size > 0) {
     self activate_next(0);
   }
 
-  size = self.pers[# "killstreaks"].size;
+  size = self.pers[#"killstreaks"].size;
 
   if(size > 0) {
-    self thread play_killstreak_ready_dialog(self.pers[# "killstreaks"][size - 1]);
+    self thread play_killstreak_ready_dialog(self.pers[#"killstreaks"][size - 1]);
   }
 
   self.lastnonkillstreakweapon = isDefined(self.currentweapon) ? self.currentweapon : level.weaponnone;
@@ -1016,11 +1023,11 @@ give_owned() {
 }
 
 get_killstreak_quantity(killstreakweapon) {
-  if(!isDefined(self.pers[# "killstreak_quantity"])) {
+  if(!isDefined(self.pers[#"killstreak_quantity"])) {
     return 0;
   }
 
-  return isDefined(self.pers[# "killstreak_quantity"][killstreakweapon]) ? self.pers[# "killstreak_quantity"][killstreakweapon] : 0;
+  return isDefined(self.pers[#"killstreak_quantity"][killstreakweapon]) ? self.pers[#"killstreak_quantity"][killstreakweapon] : 0;
 }
 
 change_killstreak_quantity(killstreakweapon, delta) {
@@ -1042,7 +1049,7 @@ change_killstreak_quantity(killstreakweapon, delta) {
     self seteverhadweaponall(1);
   }
 
-  self.pers[# "killstreak_quantity"][killstreakweapon] = quantity;
+  self.pers[#"killstreak_quantity"][killstreakweapon] = quantity;
   self setweaponammoclip(killstreakweapon, quantity);
   self notify("killstreak_quantity_" + killstreakweapon.name);
   killstreaktype = get_killstreak_for_weapon(killstreakweapon);
@@ -1092,12 +1099,12 @@ has_killstreak_in_class(killstreakmenuname) {
 has_killstreak(killstreak) {
   player = self;
 
-  if(!isDefined(killstreak) || !isDefined(player.pers[# "killstreaks"])) {
+  if(!isDefined(killstreak) || !isDefined(player.pers[#"killstreaks"])) {
     return false;
   }
 
-  for(i = 0; i < self.pers[# "killstreaks"].size; i++) {
-    if(player.pers[# "killstreaks"][i] == killstreak) {
+  for(i = 0; i < self.pers[#"killstreaks"].size; i++) {
+    if(player.pers[#"killstreaks"][i] == killstreak) {
       return true;
     }
   }
@@ -1140,9 +1147,10 @@ remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
   killstreaktype = waitresult.kstype;
 
   if(waitresult.is_successful) {
+
     print("<dev string:x43a>" + get_menu_name(killstreak));
 
-    killstreak_weapon = get_killstreak_weapon(killstreak);
+      killstreak_weapon = get_killstreak_weapon(killstreak);
     recordstreakindex = undefined;
     var_d86010cb = get_killstreak_for_weapon_for_stats(killstreak_weapon);
 
@@ -1153,8 +1161,8 @@ remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
 
     if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
       var_ad8ae78f = {
-        #gametime: function_f8d53445(),
-        #killstreak: killstreak,
+        #gametime: function_f8d53445(), 
+        #killstreak: killstreak, 
         #activatedby: getplayerspawnid(self)
       };
       function_92d1707f(#"hash_1aa07f199266e0c7", var_ad8ae78f);
@@ -1249,24 +1257,24 @@ usekillstreak(killstreak, isfrominventory) {
 }
 
 function_2ea0382e() {
-  self.pers[# "killstreaks"] = [];
-  self.pers[# "killstreak_has_been_used"] = [];
-  self.pers[# "killstreak_unique_id"] = [];
-  self.pers[# "killstreak_ammo_count"] = [];
+  self.pers[#"killstreaks"] = [];
+  self.pers[#"killstreak_has_been_used"] = [];
+  self.pers[#"killstreak_unique_id"] = [];
+  self.pers[#"killstreak_ammo_count"] = [];
 }
 
 remove_used_killstreak(killstreak, killstreakid, take_weapon_after_use = 1) {
   self.just_removed_used_killstreak = undefined;
 
-  if(!isDefined(self.pers[# "killstreaks"])) {
+  if(!isDefined(self.pers[#"killstreaks"])) {
     return;
   }
 
   killstreakindex = undefined;
 
-  for(i = self.pers[# "killstreaks"].size - 1; i >= 0; i--) {
-    if(self.pers[# "killstreaks"][i] == killstreak) {
-      if(isDefined(killstreakid) && self.pers[# "killstreak_unique_id"][i] != killstreakid) {
+  for(i = self.pers[#"killstreaks"].size - 1; i >= 0; i--) {
+    if(self.pers[#"killstreaks"][i] == killstreak) {
+      if(isDefined(killstreakid) && self.pers[#"killstreak_unique_id"][i] != killstreakid) {
         continue;
       }
 
@@ -1285,24 +1293,24 @@ remove_used_killstreak(killstreak, killstreakid, take_weapon_after_use = 1) {
     self thread take_weapon_after_use(get_killstreak_weapon(killstreak));
   }
 
-  arraysize = self.pers[# "killstreaks"].size;
+  arraysize = self.pers[#"killstreaks"].size;
 
   for(i = killstreakindex; i < arraysize - 1; i++) {
-    self.pers[# "killstreaks"][i] = self.pers[# "killstreaks"][i + 1];
-    self.pers[# "killstreak_has_been_used"][i] = self.pers[# "killstreak_has_been_used"][i + 1];
-    self.pers[# "killstreak_unique_id"][i] = self.pers[# "killstreak_unique_id"][i + 1];
-    self.pers[# "killstreak_ammo_count"][i] = self.pers[# "killstreak_ammo_count"][i + 1];
+    self.pers[#"killstreaks"][i] = self.pers[#"killstreaks"][i + 1];
+    self.pers[#"killstreak_has_been_used"][i] = self.pers[#"killstreak_has_been_used"][i + 1];
+    self.pers[#"killstreak_unique_id"][i] = self.pers[#"killstreak_unique_id"][i + 1];
+    self.pers[#"killstreak_ammo_count"][i] = self.pers[#"killstreak_ammo_count"][i + 1];
   }
 
-  self.pers[# "killstreaks"][arraysize - 1] = undefined;
-  self.pers[# "killstreak_has_been_used"][arraysize - 1] = undefined;
-  self.pers[# "killstreak_unique_id"][arraysize - 1] = undefined;
-  self.pers[# "killstreak_ammo_count"][arraysize - 1] = undefined;
+  self.pers[#"killstreaks"][arraysize - 1] = undefined;
+  self.pers[#"killstreak_has_been_used"][arraysize - 1] = undefined;
+  self.pers[#"killstreak_unique_id"][arraysize - 1] = undefined;
+  self.pers[#"killstreak_ammo_count"][arraysize - 1] = undefined;
   return 1;
 }
 
 take_weapon_after_use(killstreakweapon) {
-  self endon(#"disconnect", # "death", # "joined_team", # "joined_spectators");
+  self endon(#"disconnect", #"death", #"joined_team", #"joined_spectators");
   self waittill(#"weapon_change");
   inventoryweapon = self getinventoryweapon();
 
@@ -1314,34 +1322,34 @@ take_weapon_after_use(killstreakweapon) {
 }
 
 get_top_killstreak() {
-  if(self.pers[# "killstreaks"].size == 0) {
+  if(self.pers[#"killstreaks"].size == 0) {
     return undefined;
   }
 
-  return self.pers[# "killstreaks"][self.pers[# "killstreaks"].size - 1];
+  return self.pers[#"killstreaks"][self.pers[#"killstreaks"].size - 1];
 }
 
 get_if_top_killstreak_has_been_used() {
   if(!(isDefined(level.usingmomentum) && level.usingmomentum)) {
-    if(self.pers[# "killstreak_has_been_used"].size == 0) {
+    if(self.pers[#"killstreak_has_been_used"].size == 0) {
       return undefined;
     }
 
-    return self.pers[# "killstreak_has_been_used"][self.pers[# "killstreak_has_been_used"].size - 1];
+    return self.pers[#"killstreak_has_been_used"][self.pers[#"killstreak_has_been_used"].size - 1];
   }
 }
 
 get_top_killstreak_unique_id() {
-  if(self.pers[# "killstreak_unique_id"].size == 0) {
+  if(self.pers[#"killstreak_unique_id"].size == 0) {
     return undefined;
   }
 
-  return self.pers[# "killstreak_unique_id"][self.pers[# "killstreak_unique_id"].size - 1];
+  return self.pers[#"killstreak_unique_id"][self.pers[#"killstreak_unique_id"].size - 1];
 }
 
 get_killstreak_index_by_id(killstreakid) {
-  for(index = self.pers[# "killstreak_unique_id"].size - 1; index >= 0; index--) {
-    if(self.pers[# "killstreak_unique_id"][index] == killstreakid) {
+  for(index = self.pers[#"killstreak_unique_id"].size - 1; index >= 0; index--) {
+    if(self.pers[#"killstreak_unique_id"][index] == killstreakid) {
       return index;
     }
   }
@@ -1386,7 +1394,7 @@ get_killstreak_team_kill_penalty_scale(weapon) {
 }
 
 wait_till_heavy_weapon_is_fully_on(weapon) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   slot = self gadgetgetslot(weapon);
 
   while(weapon == self getcurrentweapon()) {
@@ -1630,7 +1638,7 @@ display_unavailable_time() {
     timeleft = 1;
   }
 
-  self iprintlnbold(#"hash_55a79f95e07a10bc", " " + timeleft + " ", # "hash_79a58948c3b976f5");
+  self iprintlnbold(#"hash_55a79f95e07a10bc", " " + timeleft + " ", #"hash_79a58948c3b976f5");
 }
 
 trigger_killstreak(killstreaktype, isfrominventory) {
@@ -1657,7 +1665,7 @@ trigger_killstreak(killstreaktype, isfrominventory) {
         self.pers[level.killstreaks[killstreaktype].usagekey]++;
         self notify(#"killstreak_used", killstreaktype);
         self notify(#"killstreak_done", {
-          #is_successful: 1,
+          #is_successful: 1, 
           #kstype: killstreaktype
         });
         self.usingkillstreakfrominventory = undefined;
@@ -1670,7 +1678,7 @@ trigger_killstreak(killstreaktype, isfrominventory) {
   if(isDefined(self)) {
     self.usingkillstreakfrominventory = undefined;
     self notify(#"killstreak_done", {
-      #is_successful: 0,
+      #is_successful: 0, 
       #kstype: killstreaktype
     });
   }
@@ -1679,11 +1687,11 @@ trigger_killstreak(killstreaktype, isfrominventory) {
 }
 
 add_to_killstreak_count(weapon) {
-  if(!isDefined(self.pers[# "totalkillstreakcount"])) {
-    self.pers[# "totalkillstreakcount"] = 0;
+  if(!isDefined(self.pers[#"totalkillstreakcount"])) {
+    self.pers[#"totalkillstreakcount"] = 0;
   }
 
-  self.pers[# "totalkillstreakcount"]++;
+  self.pers[#"totalkillstreakcount"]++;
 }
 
 get_first_valid_killstreak_alt_weapon(killstreaktype) {
@@ -1727,7 +1735,7 @@ print_killstreak_start_text(killstreaktype, owner, team, targetpos, dangerradius
 
     if(!level.hardcoremode && isDefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
       for(i = 0; i < players.size; i++) {
-        if(isalive(players[i]) && isDefined(players[i].pers[# "team"]) && players[i].pers[# "team"] == team) {
+        if(isalive(players[i]) && isDefined(players[i].pers[#"team"]) && players[i].pers[#"team"] == team) {
           if(point_is_in_danger_area(players[i].origin, targetpos, dangerradius)) {
             players[i] iprintlnbold(level.killstreaks[killstreaktype].inboundnearplayertext);
           }
@@ -1738,7 +1746,7 @@ print_killstreak_start_text(killstreaktype, owner, team, targetpos, dangerradius
     if(isDefined(level.killstreaks[killstreaktype])) {
       for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
-        playerteam = player.pers[# "team"];
+        playerteam = player.pers[#"team"];
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
@@ -1761,40 +1769,40 @@ print_killstreak_start_text(killstreaktype, owner, team, targetpos, dangerradius
 play_killstreak_ready_sfx(killstreaktype) {
   if(!isDefined(level.gameended) || !level.gameended) {
     switch (killstreaktype) {
-      case # "uav":
+      case #"uav":
         var_426d4c5d = "uin_kls_uav";
         break;
-      case # "counteruav":
+      case #"counteruav":
         var_426d4c5d = "uin_kls_counteruav";
         break;
-      case # "remote_missile":
+      case #"remote_missile":
         var_426d4c5d = "uin_kls_remote_missile";
         break;
-      case # "ultimate_turret":
+      case #"ultimate_turret":
         var_426d4c5d = "uin_kls_ultimate_turret";
         break;
-      case # "helicopter_comlink":
+      case #"helicopter_comlink":
         var_426d4c5d = "uin_kls_helicopter_comlink";
         break;
-      case # "tank_robot":
+      case #"tank_robot":
         var_426d4c5d = "uin_kls_tank_robot";
         break;
-      case # "swat_team":
+      case #"swat_team":
         var_426d4c5d = "uin_kls_swat_team";
         break;
-      case # "ac130":
+      case #"ac130":
         var_426d4c5d = "uin_kls_ac130";
         break;
-      case # "recon_car":
+      case #"recon_car":
         var_426d4c5d = "uin_kls_rcbomb";
         break;
-      case # "supply_drop":
+      case #"supply_drop":
         var_426d4c5d = "uin_kls_supply_drop";
         break;
-      case # "planemortar":
+      case #"planemortar":
         var_426d4c5d = "uin_kls_airstrike";
         break;
-      case # "straferun":
+      case #"straferun":
         var_426d4c5d = "uin_kls_straferun";
         break;
     }
@@ -1869,7 +1877,7 @@ play_taacom_dialog_response(dialogkey, killstreaktype, killstreakid, pilotindex)
 
 player_killstreak_threat_tracking(killstreaktype) {
   assert(isDefined(killstreaktype));
-  self endon(#"death", # "delete", # "leaving");
+  self endon(#"death", #"delete", #"leaving");
   level endon(#"game_ended");
 
   while(true) {
@@ -1902,7 +1910,7 @@ player_killstreak_threat_tracking(killstreaktype) {
 
       traceresult = bulletTrace(eyepoint, self.origin, 1, player);
 
-      if(traceresult[# "fraction"] >= 1 || traceresult[# "entity"] === self) {
+      if(traceresult[#"fraction"] >= 1 || traceresult[#"entity"] === self) {
         if(dialog_shared::dialog_chance("killstreakSpotChance")) {
           player dialog_shared::play_killstreak_threat(killstreaktype);
         }
@@ -1954,24 +1962,24 @@ on_player_spawned() {
 on_joined_team(params) {
   self endon(#"disconnect");
   self setinventoryweapon(level.weaponnone);
-  self.pers[# "cur_kill_streak"] = 0;
-  self.pers[# "cur_total_kill_streak"] = 0;
+  self.pers[#"cur_kill_streak"] = 0;
+  self.pers[#"cur_total_kill_streak"] = 0;
   self setplayercurrentstreak(0);
-  self.pers[# "totalkillstreakcount"] = 0;
-  self.pers[# "killstreaks"] = [];
-  self.pers[# "killstreak_has_been_used"] = [];
-  self.pers[# "killstreak_unique_id"] = [];
-  self.pers[# "killstreak_ammo_count"] = [];
+  self.pers[#"totalkillstreakcount"] = 0;
+  self.pers[#"killstreaks"] = [];
+  self.pers[#"killstreak_has_been_used"] = [];
+  self.pers[#"killstreak_unique_id"] = [];
+  self.pers[#"killstreak_ammo_count"] = [];
 
   if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
-    self.pers[# "killstreak_quantity"] = [];
-    self.pers[# "held_killstreak_ammo_count"] = [];
-    self.pers[# "held_killstreak_clip_count"] = [];
+    self.pers[#"killstreak_quantity"] = [];
+    self.pers[#"held_killstreak_ammo_count"] = [];
+    self.pers[#"held_killstreak_clip_count"] = [];
   }
 }
 
 private initialspawnprotection() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self thread airsupport::monitorspeed(level.spawnprotectiontime);
 
   if(!isDefined(level.spawnprotectiontime) || level.spawnprotectiontime == 0) {
@@ -1994,7 +2002,7 @@ killstreak_debug_think() {
     cmd = getdvarstring(#"debug_killstreak");
 
     switch (cmd) {
-      case # "data_dump":
+      case #"data_dump":
         killstreak_data_dump();
         break;
     }
@@ -2060,13 +2068,13 @@ killstreak_data_dump() {
   println("<dev string:x55b>");
 }
 
-function function_2b6aa9e8(killstreak_ref, destroyed_callback, low_health_callback, emp_callback) {
-  self setCanDamage(1);
-  self thread monitordamage(killstreak_ref, killstreak_bundles::get_max_health(killstreak_ref), destroyed_callback, killstreak_bundles::get_low_health(killstreak_ref), low_health_callback, 0, emp_callback, 1);
-}
+  function function_2b6aa9e8(killstreak_ref, destroyed_callback, low_health_callback, emp_callback) {
+    self setCanDamage(1);
+    self thread monitordamage(killstreak_ref, killstreak_bundles::get_max_health(killstreak_ref), destroyed_callback, killstreak_bundles::get_low_health(killstreak_ref), low_health_callback, 0, emp_callback, 1);
+  }
 
 monitordamage(killstreak_ref, max_health, destroyed_callback, low_health, low_health_callback, emp_damage, emp_callback, allow_bullet_damage) {
-  self endon(#"death", # "delete");
+  self endon(#"death", #"delete");
   self setCanDamage(1);
   self setup_health(killstreak_ref, max_health, low_health);
   self.health = self.maxhealth;
@@ -2170,7 +2178,7 @@ monitordamage(killstreak_ref, max_health, destroyed_callback, low_health, low_he
 
     if(self.damagetaken > self.maxhealth) {
       level.globalkillstreaksdestroyed++;
-      attacker stats::function_e24eec31(getweapon(killstreak_ref), # "destroyed", 1);
+      attacker stats::function_e24eec31(getweapon(killstreak_ref), #"destroyed", 1);
       self function_73566ec7(attacker, weapon, self.owner);
 
       if(isDefined(destroyed_callback)) {
@@ -2328,8 +2336,8 @@ ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon, max_hea
 
 get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damage_scalar) {
   switch (type) {
-    case # "mod_rifle_bullet":
-    case # "mod_pistol_bullet":
+    case #"mod_rifle_bullet":
+    case #"mod_pistol_bullet":
       if(!allow_bullet_damage) {
         damage = 0;
         break;
@@ -2348,14 +2356,14 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
       }
 
       break;
-    case # "mod_explosive":
-    case # "mod_projectile":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_projectile":
+    case #"mod_projectile_splash":
       if(weapon.statindex == level.weaponpistolenergy.statindex || weapon.statindex != level.weaponshotgunenergy.statindex || weapon.statindex == level.weaponspecialcrossbow.statindex) {
         break;
       }
 
-      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == # "remote_missile_missile") {
+      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == #"remote_missile_missile") {
         damage = self.remotemissiledamage;
       } else if(isDefined(self.rocketdamage)) {
         damage = self.rocketdamage;
@@ -2371,8 +2379,8 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
 
 isheldinventorykillstreakweapon(killstreakweapon) {
   switch (killstreakweapon.name) {
-    case # "inventory_m32":
-    case # "inventory_minigun":
+    case #"inventory_m32":
+    case #"inventory_minigun":
       return true;
   }
 
@@ -2408,7 +2416,7 @@ emp_isempd() {
 }
 
 waittillemp(onempdcallback, arg) {
-  self endon(#"death", # "delete");
+  self endon(#"death", #"delete");
   waitresult = self waittill(#"emp_deployed");
 
   if(isDefined(onempdcallback)) {
@@ -2646,7 +2654,7 @@ destroyactivevehicles(attacker, team, weapon, radius) {
     if(robot.allowdeath !== 0 && robot.magic_bullet_shield !== 1 && isDefined(team) && !util::function_fbce7263(robot.team, team)) {
       if(isDefined(attacker) && (!isDefined(robot.owner) || robot.owner util::isenemyplayer(attacker))) {
         scoreevents::processscoreevent(#"destroyed_combat_robot", attacker, robot.owner, weapon);
-        luinotifyevent(#"player_callout", 2, # "hash_3b274c8c3c961f3", attacker.entnum);
+        luinotifyevent(#"player_callout", 2, #"hash_3b274c8c3c961f3", attacker.entnum);
       }
 
       robot kill();
@@ -2685,14 +2693,14 @@ destroyentities(entities, attacker, team, weapon, radius) {
 
     if(distancesquared(entity.origin, attacker.origin) < radiussq) {
       entity notify(#"damage", {
-        #amount: damage,
-        #attacker: attacker,
-        #direction: direction_vec,
-        #position: point,
-        #mod: meansofdeath,
-        #tag_name: tagname,
-        #model_name: modelname,
-        #part_name: partname,
+        #amount: damage, 
+        #attacker: attacker, 
+        #direction: direction_vec, 
+        #position: point, 
+        #mod: meansofdeath, 
+        #tag_name: tagname, 
+        #model_name: modelname, 
+        #part_name: partname, 
         #weapon: weapon
       });
     }
@@ -2812,7 +2820,7 @@ init_ride_killstreak_internal(streak, always_allow) {
     laptopwait = "timeout";
     var_5df1cb97 = getdvarfloat(#"hash_409036e81396b597", 0.075);
   } else {
-    laptopwait = self waittilltimeout(0.2, # "disconnect", # "death", # "weapon_switch_started");
+    laptopwait = self waittilltimeout(0.2, #"disconnect", #"death", #"weapon_switch_started");
     laptopwait = laptopwait._notify;
   }
 
@@ -2831,7 +2839,7 @@ init_ride_killstreak_internal(streak, always_allow) {
       return "disconnect";
     }
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
 
@@ -2848,14 +2856,14 @@ init_ride_killstreak_internal(streak, always_allow) {
 
   self thread hud::fade_to_black_for_x_sec(0, 0.2 + var_5df1cb97, 0.1, 0.1);
   self thread watch_for_remove_remote_weapon();
-  blackoutwait = self waittilltimeout(0.2, # "disconnect", # "death");
+  blackoutwait = self waittilltimeout(0.2, #"disconnect", #"death");
   self notify(#"endwatchforremoveremoteweapon");
   hostmigration::waittillhostmigrationdone();
 
   if(blackoutwait._notify != "disconnect") {
     self thread clear_ride_intro(1);
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
   }
@@ -2926,11 +2934,11 @@ get_random_pilot_index(killstreaktype) {
     return undefined;
   }
 
-  if(!isDefined(self.pers[# "mptaacom"])) {
+  if(!isDefined(self.pers[#"mptaacom"])) {
     return undefined;
   }
 
-  taacombundle = get_mpdialog_tacom_bundle(self.pers[# "mptaacom"]);
+  taacombundle = get_mpdialog_tacom_bundle(self.pers[#"mptaacom"]);
 
   if(!isDefined(taacombundle) || !isDefined(taacombundle.pilotbundles)) {
     return undefined;
@@ -3091,9 +3099,9 @@ trackactivekillstreak(killstreak) {
 
   if(isDefined(self) && isDefined(self.pers) && isDefined(killstreakindex)) {
     self endon(#"disconnect");
-    self.pers[# "activekillstreaks"][killstreakindex] = killstreak;
-    killstreak waittill(#"killstreak_hacked", # "death");
-    self.pers[# "activekillstreaks"][killstreakindex] = undefined;
+    self.pers[#"activekillstreaks"][killstreakindex] = killstreak;
+    killstreak waittill(#"killstreak_hacked", #"death");
+    self.pers[#"activekillstreaks"][killstreakindex] = undefined;
   }
 }
 
@@ -3325,12 +3333,13 @@ update_missile_dog_threat(dog) {
 
 function_fff56140(owner, var_4a025683) {
   self notify(#"hash_4363bc1bae999ad3");
-  self endon(#"hash_4363bc1bae999ad3", # "death");
-  res = owner waittill(#"joined_team", # "disconnect", # "joined_spectators", # "changed_specialist");
+  self endon(#"hash_4363bc1bae999ad3", #"death");
+  res = owner waittill(#"joined_team", #"disconnect", #"joined_spectators", #"changed_specialist");
   [[var_4a025683]]();
 }
 
 should_not_timeout(killstreak) {
+
   assert(isDefined(killstreak), "<dev string:x77>");
   assert(isDefined(level.killstreaks[killstreak]), "<dev string:x299>");
 
@@ -3342,15 +3351,16 @@ should_not_timeout(killstreak) {
     return getdvarint(level.killstreaks[killstreak].devtimeoutdvar, 0);
   }
 
-  return 0;
+    return 0;
 }
 
 waitfortimeout(killstreak, duration, callback, endcondition1, endcondition2, endcondition3) {
+
   if(should_not_timeout(killstreak)) {
     return;
   }
 
-  self endon(#"killstreak_hacked", # "cancel_timeout");
+    self endon(#"killstreak_hacked", #"cancel_timeout");
 
   if(isDefined(endcondition1)) {
     self endon(endcondition1);
@@ -3442,10 +3452,10 @@ function_975d45c3() {
   startheight = 200;
 
   switch (self getstance()) {
-    case # "crouch":
+    case #"crouch":
       startheight = 30;
       break;
-    case # "prone":
+    case #"prone":
       startheight = 15;
       break;
   }
@@ -3458,7 +3468,7 @@ set_killstreak_delay_killcam(killstreak_name) {
 }
 
 getactivekillstreaks() {
-  return self.pers[# "activekillstreaks"];
+  return self.pers[#"activekillstreaks"];
 }
 
 watchteamchange(teamchangenotify) {
@@ -3466,7 +3476,7 @@ watchteamchange(teamchangenotify) {
   self endon(teamchangenotify + "_Singleton");
   killstreak = self;
   killstreak endon(#"death", teamchangenotify);
-  killstreak.owner waittill(#"joined_team", # "disconnect", # "joined_spectators", # "emp_jammed");
+  killstreak.owner waittill(#"joined_team", #"disconnect", #"joined_spectators", #"emp_jammed");
   killstreak notify(teamchangenotify);
 }
 
@@ -3479,9 +3489,9 @@ add_ricochet_protection(killstreak_id, owner, origin, ricochet_distance) {
 
   testing = getdvarint(#"scr_ricochet_protection_debug", 0) == 2;
 
-  if(!level.hardcoremode && !testing) {
-    return;
-  }
+    if(!level.hardcoremode && !testing) {
+      return;
+    }
 
   if(!isDefined(ricochet_distance) || ricochet_distance == 0) {
     return;
@@ -3584,3 +3594,4 @@ debug_ricochet_protection() {
     }
   }
 }
+

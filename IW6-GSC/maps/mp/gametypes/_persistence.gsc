@@ -120,11 +120,10 @@ statAdd(dataName, value, optionalArrayInd) {
 }
 
 statGetChild(parent, child) {
-  if(parent == "round") {
+  if(parent == "round")
     return self getCommonPlayerData(parent, child);
-  } else {
+  else
     return self getRankedPlayerData(parent, child);
-  }
 }
 
 statSetChild(parent, child, value) {
@@ -134,11 +133,10 @@ statSetChild(parent, child, value) {
   if(!self rankingEnabled()) {
     return;
   }
-  if(parent == "round") {
+  if(parent == "round")
     self setCommonPlayerData(parent, child, value);
-  } else {
+  else
     self setRankedPlayerData(parent, child, value);
-  }
 }
 
 statAddChild(parent, child, value) {
@@ -152,9 +150,8 @@ statAddChild(parent, child, value) {
 }
 
 statGetChildBuffered(parent, child) {
-  if(!self rankingEnabled()) {
+  if(!self rankingEnabled())
     return 0;
-  }
 
   assert(isDefined(self.bufferedChildStats[parent][child]));
 
@@ -188,13 +185,11 @@ statAddBufferedWithMax(stat, value, max) {
 
   newValue = statGetBuffered(stat) + value;
 
-  if(newValue > max) {
+  if(newValue > max)
     newValue = max;
-  }
 
-  if(newValue < statGetBuffered(stat)) {
+  if(newValue < statGetBuffered(stat))
     newValue = max;
-  }
 
   statSetBuffered(stat, newValue);
 }
@@ -207,21 +202,18 @@ statAddChildBufferedWithMax(parent, child, value, max) {
 
   newValue = statGetChildBuffered(parent, child) + value;
 
-  if(newValue > max) {
+  if(newValue > max)
     newValue = max;
-  }
 
-  if(newValue < statGetChildBuffered(parent, child)) {
+  if(newValue < statGetChildBuffered(parent, child))
     newValue = max;
-  }
 
   statSetChildBuffered(parent, child, newValue);
 }
 
 statGetBuffered(dataName) {
-  if(!self rankingEnabled()) {
+  if(!self rankingEnabled())
     return 0;
-  }
 
   assert(isDefined(self.bufferedStats[dataName]));
 
@@ -229,9 +221,8 @@ statGetBuffered(dataName) {
 }
 
 statGetSquadBuffered(dataName) {
-  if(!self rankingEnabled()) {
+  if(!self rankingEnabled())
     return 0;
-  }
 
   assert(isDefined(self.SquadMemberBufferedStats[dataName]));
 
@@ -286,9 +277,8 @@ updateBufferedStats() {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
     nextToUpdate++;
-    if(nextToUpdate >= level.players.size) {
+    if(nextToUpdate >= level.players.size)
       nextToUpdate = 0;
-    }
 
     if(isDefined(level.players[nextToUpdate])) {
       level.players[nextToUpdate] writeBufferedStats();
@@ -321,11 +311,10 @@ writeBufferedStats() {
 
   foreach(statName, statVal in self.bufferedChildStats) {
     foreach(childStatName, childStatVal in statVal) {
-      if(statName == "round") {
+      if(statName == "round")
         self setCommonPlayerData(statName, childStatName, childStatVal);
-      } else if(rankingEnabled) {
+      else if(rankingEnabled)
         self setRankedPlayerData(statName, childStatName, childStatVal);
-      }
     }
   }
 }
@@ -365,11 +354,10 @@ incrementRankedReservedHistory(kills, deaths) {
 }
 
 incrementWeaponStat(weaponName, stat, incValue) {
-  if(weaponName == "iw6_pdwauto") {
+  if(weaponName == "iw6_pdwauto")
     weaponName = "iw6_pdw";
-  } else if(weaponName == "iw6_knifeonlyfast") {
+  else if(weaponName == "iw6_knifeonlyfast")
     weaponName = "iw6_knifeonly";
-  }
 
   if(isKillstreakWeapon(weaponName)) {
     return;
@@ -557,15 +545,12 @@ uploadGlobalStatCounters() {
   incrementCounter("global_suicides", totalSuicides);
   incrementCounter("global_games", 1);
 
-  if(!isDefined(level.assists_disabled)) {
+  if(!isDefined(level.assists_disabled))
     incrementCounter("global_assists", totalAssists);
-  }
 
-  if(!isDefined(level.isHorde)) {
+  if(!isDefined(level.isHorde))
     incrementCounter("global_kills", totalKills);
-  }
 
-  if(!isDefined(level.isHorde)) {
+  if(!isDefined(level.isHorde))
     incrementCounter("global_deaths", totalDeaths);
-  }
 }

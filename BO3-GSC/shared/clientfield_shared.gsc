@@ -33,7 +33,7 @@ function get_player_uimodel(str_field_name) {
 }
 
 function increment(str_field_name, n_increment_count = 1) {
-  for(i = 0; i < n_increment_count; i++) {
+  for (i = 0; i < n_increment_count; i++) {
     if(self == level) {
       codeincrementworldclientfield(str_field_name);
       continue;
@@ -45,19 +45,19 @@ function increment(str_field_name, n_increment_count = 1) {
 function increment_uimodel(str_field_name, n_increment_count = 1) {
   if(self == level) {
     foreach(player in level.players) {
-      for(i = 0; i < n_increment_count; i++) {
+      for (i = 0; i < n_increment_count; i++) {
         codeincrementuimodelclientfield(player, str_field_name);
       }
     }
   } else {
-    for(i = 0; i < n_increment_count; i++) {
+    for (i = 0; i < n_increment_count; i++) {
       codeincrementuimodelclientfield(self, str_field_name);
     }
   }
 }
 
 function increment_to_player(str_field_name, n_increment_count = 1) {
-  for(i = 0; i < n_increment_count; i++) {
+  for (i = 0; i < n_increment_count; i++) {
     codeincrementplayerstateclientfield(self, str_field_name);
   }
 }

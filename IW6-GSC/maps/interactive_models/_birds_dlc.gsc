@@ -274,9 +274,9 @@ birds_fly(start_perch) {
       landAnim = undefined;
       landAnim_mp = undefined;
     }
-    if(isDefined(info.rigmodel_pauseStart[birdpath.takeoffAnim])) {
+    if(isDefined(info.rigmodel_pauseStart[birdpath.takeoffAnim]))
       pauseStart = info.rigmodel_pauseStart[birdpath.takeoffAnim];
-    } else pauseStart = 0;
+    else pauseStart = 0;
     takeoffStartTime = 0;
     if(!self.landed) {
       if(isSP()) {
@@ -300,17 +300,16 @@ birds_fly(start_perch) {
         pauseStart = 0;
       }
     }
-    if(isDefined(landAnim) && isDefined(info.rigmodel_pauseEnd[birdpath.landAnim])) {
+    if(isDefined(landAnim) && isDefined(info.rigmodel_pauseEnd[birdpath.landAnim]))
       pauseEnd = info.rigmodel_pauseEnd[birdpath.landAnim];
-    } else pauseEnd = 0;
+    else pauseEnd = 0;
 
     accnFrame = info.accn / (20 * 20);
     pathLength = birdpath.Segments[birdpath.Segments.size - 1].endAt;
     topSpeedPossible = sqrt((accnFrame * pathLength) + (speed * speed / 2));
     topSpeedFrame = info.topSpeed / 20;
-    if(topSpeedPossible < topSpeedFrame) {
+    if(topSpeedPossible < topSpeedFrame)
       topSpeedFrame = topSpeedPossible;
-    }
 
     framesAccelerating = Int((topSpeedFrame - speed) / accnFrame);
     distanceAccelerating = (accnFrame * (framesAccelerating / 2) * (framesAccelerating + 1)) + (speed * framesAccelerating);
@@ -327,11 +326,10 @@ birds_fly(start_perch) {
     framesTopSpeed = (pathLength - (distanceAccelerating + distanceDecelerating)) / topSpeedFrame;
     pathTime = (framesTopSpeed + (framesAccelerating + framesDecelerating)) / 20;
     loopAnimTime = GetAnimLength(flyAnim);
-    if(isDefined(landAnim)) {
+    if(isDefined(landAnim))
       otherAnimTime = GetAnimLength(takeoffAnim) + GetAnimLength(landAnim) - (pauseStart + takeoffStartTime + pauseEnd);
-    } else {
+    else
       otherAnimTime = GetAnimLength(takeoffAnim) - (pauseStart + takeoffStartTime + pauseEnd);
-    }
     numLoops = Int(((pathTime - otherAnimTime) / loopAnimTime) + 0.5);
     animSpeed = ((numLoops * loopAnimTime) + otherAnimTime) / pathTime;
 
@@ -356,11 +354,10 @@ birds_fly(start_perch) {
       self thread flock_fly_anim(takeoffAnim, takeoffStartFrac, flyAnim, landAnim, animSpeed, numLoops, takeoffAnim_mp, flyAnim_mp, landAnim_mp);
       for(i = 1; i <= self.interactive_number; i++) {
         if(self.birdexists[i]) {
-          if(isSP()) {
+          if(isSP())
             waitTime = undefined;
-          } else {
+          else
             waitTime = RandomFloat(0.5);
-          }
           self.birds[i] thread bird_fly(self, ("tag_bird" + i), info.bird_model["fly"], info.bird_model["idle"],
             info.birdmodel_anims, ("land_" + i), waitTime);
         }
@@ -661,16 +658,14 @@ bird_waitfordamage(flock, number) {
       flock.perch.lastAIEventTrigger = GetTime();
     }
     if(isDefined(self.origin)) {
-      if(type == "MOD_GRENADE_SPLASH") {
+      if(type == "MOD_GRENADE_SPLASH")
         point = self.origin + (0, 0, 5);
-      }
       playFX(level._interactive[flock.interactive_type].death_effect, point);
       if(self.health <= 0) {
         flock.birdexists[number] = false;
         flock.numbirds--;
-        if(flock.numbirds == 0) {
+        if(flock.numbirds == 0)
           flock Delete();
-        }
         self Delete();
       }
     }
@@ -753,9 +748,8 @@ birds_perchDangerTrigger(radius, notifyStr, ender) {
   self thread delete_on_notify(self.trigger, "death", ender);
   self thread birds_perchTouchTrigger(self.trigger, notifyStr, ender);
   self thread birds_perchEventTrigger(radius, notifyStr, ender);
-  foreach(trigger in self.triggers) {
-    self thread birds_perchTouchTrigger(trigger, notifyStr, ender);
-  }
+  foreach(trigger in self.triggers)
+  self thread birds_perchTouchTrigger(trigger, notifyStr, ender);
 }
 
 birds_perchTouchTrigger(trigger, notifyStr, ender) {
@@ -819,13 +813,11 @@ birds_isPerchSafe(perch) {
       }
     }
 
-    if(perch.lastAIEventTrigger > GetTime()) {
+    if(perch.lastAIEventTrigger > GetTime())
       perch.lastAIEventTrigger = GetTime() - 500;
-    }
 
-    if(GetTime() - perch.lastAIEventTrigger < 500) {
+    if(GetTime() - perch.lastAIEventTrigger < 500)
       safeFromDmg = 0;
-    }
   }
   return (safeFromTouch && safeFromDmg);
 }
@@ -898,9 +890,8 @@ birds_saveToStruct() {
   struct.target = self.target;
   struct.origin = self.origin;
   struct.targetname = self.targetname;
-  if(isDefined(self.interactive_number)) {
+  if(isDefined(self.interactive_number))
     struct.interactive_number = self.interactive_number;
-  }
   struct.script_triggername = self.script_triggername;
   self birds_delete();
   return struct;
@@ -911,9 +902,8 @@ birds_loadFromStruct() {
   ent.interactive_type = self.interactive_type;
   ent.target = self.target;
   ent.origin = self.origin;
-  if(isDefined(self.interactive_number)) {
+  if(isDefined(self.interactive_number))
     ent.interactive_number = self.interactive_number;
-  }
   ent.script_triggername = self.script_triggername;
   ent.targetname = "interactive_birds";
   if(!isDefined(level._interactive["bird_perches"][self.target])) {

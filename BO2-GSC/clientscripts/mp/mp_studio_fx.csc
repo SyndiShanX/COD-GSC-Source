@@ -12,7 +12,8 @@ precache_scripted_fx() {
   level._effect["fx_mp_studio_robot_laser"] = loadfx("maps/mp_maps/fx_mp_studio_robot_laser");
 }
 
-precache_createfx_fx() {}
+precache_createfx_fx() {
+}
 
 main() {
   clientscripts\mp\createfx\mp_studio_fx::main();
@@ -22,9 +23,8 @@ main() {
   precache_fxanim_props_dlc();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0)
     precache_scripted_fx();
-  }
 
   level._effect["fx_mp_express_train_blow_dust"] = loadfx("maps/mp_maps/fx_mp_express_train_blow_dust");
   level._effect["fx_mp_village_grass"] = loadfx("maps/mp_maps/fx_mp_village_grass");
@@ -114,7 +114,8 @@ precache_fxanim_props() {
   level.fx_anim_level_init = ::fxanim_init;
 }
 
-precache_fxanim_props_dlc() {}
+precache_fxanim_props_dlc() {
+}
 
 fxanim_init(localclientnum) {
   level thread clientscripts\mp\_fxanim_dlc::fxanim_init_dlc(localclientnum);
@@ -188,7 +189,8 @@ t_rex_animate_fx(localclientnum, t_rex_head, t_rex_stand) {
       t_rex_stand clearanim(trexbaseanims[currentanim], 0.05);
     }
 
-    for(randomanim = randomint(trexanimssize); randomanim == currentanim; randomanim = randomint(trexanimssize)) {}
+    for(randomanim = randomint(trexanimssize); randomanim == currentanim; randomanim = randomint(trexanimssize)) {
+    }
 
     currentanim = randomanim;
     t_rex_head setanimrestart(trexanims[currentanim], 1.0, 0.0, 1.0);

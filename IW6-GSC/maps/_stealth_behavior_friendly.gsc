@@ -22,11 +22,10 @@ friendly_state_hidden() {
 friendly_state_spotted() {
   thread maps\_utility::set_battlechatter(1);
 
-  if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
+  if(isDefined(self._stealth.behavior.oldgrenadeammo))
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  } else {
+  else
     self.grenadeammo = 3;
-  }
 
   self.ignoreme = 0;
   self pushplayer(0);
@@ -34,9 +33,8 @@ friendly_state_spotted() {
   thread friendly_spotted_getup_from_prone();
   self allowedstances("prone", "crouch", "stand");
 
-  if(self.type != "dog" || !isDefined(self.in_melee) || !self.in_melee) {
+  if(self.type != "dog" || !isDefined(self.in_melee) || !self.in_melee)
     maps\_utility::anim_stopanimscripted();
-  }
 }
 
 friendly_spotted_getup_from_prone(var_0) {
@@ -48,9 +46,8 @@ friendly_spotted_getup_from_prone(var_0) {
   maps\_utility::ent_flag_set("_stealth_custom_anim");
   var_1 = "_stealth_prone_2_run_roll";
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     self orientmode("face angle", var_0[1] + 20);
-  }
 
   thread maps\_stealth_shared_utilities::stealth_anim_custom_animmode(self, "gravity", var_1);
   var_2 = getanimlength(maps\_utility::getanim_generic(var_1));
@@ -70,9 +67,8 @@ friendly_init() {
 }
 
 friendly_custom_state_behavior(var_0) {
-  foreach(var_3, var_2 in var_0) {
-    maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
-  }
+  foreach(var_3, var_2 in var_0)
+  maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
 
   var_4 = self._stealth.behavior.ai_functions["state"]["hidden"];
   thread maps\_stealth_shared_utilities::ai_message_handler_hidden(var_4, "friendly_behavior");

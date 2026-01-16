@@ -27,7 +27,7 @@
 #namespace zm_ai_sonic;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sonic", &__init__, &__main__, undefined);
+  system::register("zm_ai_sonic", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -50,24 +50,24 @@ function __main__() {
   level.sonicscreamattackdebouncemax = 9;
   level.sonicscreamattacknext = 0;
   level.sonichealthmultiplier = 2.5;
-  level.sonic_zombie_spawners = getEntArray("sonic_zombie_spawner", "script_noteworthy");
+  level.sonic_zombie_spawners = getentarray("sonic_zombie_spawner", "script_noteworthy");
   zombie_utility::set_zombie_var("thundergun_knockdown_damage", 15);
   level.thundergun_gib_refs = [];
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "guts";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "right_arm";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "left_arm";
-  array::thread_all(level.sonic_zombie_spawners, &spawner::add_spawn_function, &sonic_zombie_spawn);
-  array::thread_all(level.sonic_zombie_spawners, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
-  zm_spawner::register_zombie_damage_callback(&_sonic_damage_callback);
+  array::thread_all(level.sonic_zombie_spawners, & spawner::add_spawn_function, & sonic_zombie_spawn);
+  array::thread_all(level.sonic_zombie_spawners, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
+  zm_spawner::register_zombie_damage_callback( & _sonic_damage_callback);
   level thread function_1249f13c();
   println("" + level.nextsonicspawnround);
 }
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackInitialize", &sonicattackinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackTerminate", &sonicattackterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicCanAttack", &soniccanattack);
-  animationstatenetwork::registernotetrackhandlerfunction("sonic_fire", &function_cd107cf);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackInitialize", & sonicattackinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackTerminate", & sonicattackterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicCanAttack", & soniccanattack);
+  animationstatenetwork::registernotetrackhandlerfunction("sonic_fire", & function_cd107cf);
 }
 
 function init_clientfields() {
@@ -90,14 +90,14 @@ function function_1ebbce9b() {
 
 function function_1249f13c() {
   level waittill("start_of_round");
-  while(true) {
+  while (true) {
     if(function_89ce0aca()) {
       spawner_list = function_8b9e6756();
       location_list = function_1ebbce9b();
       spawner = array::random(spawner_list);
       location = array::random(location_list);
       ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, location);
-      if(isDefined(ai)) {
+      if(isdefined(ai)) {
         ai.spawn_point_override = location;
       }
     }
@@ -109,13 +109,13 @@ function function_56fe13df() {
   self endon("death");
   spot = self.spawn_point_override;
   self.spawn_point = spot;
-  if(isDefined(spot.target)) {
+  if(isdefined(spot.target)) {
     self.target = spot.target;
   }
-  if(isDefined(spot.zone_name)) {
+  if(isdefined(spot.zone_name)) {
     self.zone_name = spot.zone_name;
   }
-  if(isDefined(spot.script_parameters)) {
+  if(isdefined(spot.script_parameters)) {
     self.script_parameters = spot.script_parameters;
   }
   self thread zm_spawner::do_zombie_rise(spot);
@@ -143,7 +143,7 @@ function _sonic_initsounds() {
 }
 
 function _entity_in_zone(zone) {
-  for(i = 0; i < zone.volumes.size; i++) {
+  for (i = 0; i < zone.volumes.size; i++) {
     if(self istouching(zone.volumes[i])) {
       return true;
     }
@@ -152,10 +152,10 @@ function _entity_in_zone(zone) {
 }
 
 function function_89ce0aca() {
-  if(!isDefined(level.soniczombiesenabled) || level.soniczombiesenabled == 0 || level.sonic_zombie_spawners.size == 0) {
+  if(!isdefined(level.soniczombiesenabled) || level.soniczombiesenabled == 0 || level.sonic_zombie_spawners.size == 0) {
     return 0;
   }
-  if(isDefined(level.soniczombiecount) && level.soniczombiecount > 0) {
+  if(isdefined(level.soniczombiecount) && level.soniczombiecount > 0) {
     return 0;
   }
   if(getdvarint("") != 0) {
@@ -174,7 +174,7 @@ function function_89ce0aca() {
 }
 
 function sonic_zombie_spawn(animname_set) {
-  self.custom_location = &function_56fe13df;
+  self.custom_location = & function_56fe13df;
   zm_spawner::zombie_spawn_init(animname_set);
   level.var_57ecc1a3 = level.round_number;
   println("");
@@ -191,10 +191,10 @@ function sonic_zombie_spawn(animname_set) {
   self.death_fling_range = 240;
   self.death_scream_range = 480;
   self _updatenextscreamtime();
-  self.deathfunction = &sonic_zombie_death;
-  self._zombie_shrink_callback = &_sonic_shrink;
-  self._zombie_unshrink_callback = &_sonic_unshrink;
-  self.monkey_bolt_taunts = &sonic_monkey_bolt_taunts;
+  self.deathfunction = & sonic_zombie_death;
+  self._zombie_shrink_callback = & _sonic_shrink;
+  self._zombie_unshrink_callback = & _sonic_unshrink;
+  self.monkey_bolt_taunts = & sonic_monkey_bolt_taunts;
   self thread _zombie_runeffects();
   self thread _zombie_initsidestep();
   self thread _zombie_death_watch();
@@ -215,7 +215,7 @@ function _zombie_death_watch() {
 
 function _zombie_ambient_sounds() {
   self endon("death");
-  while(true) {}
+  while (true) {}
 }
 
 function _updatenextscreamtime() {
@@ -234,13 +234,13 @@ function private soniccanattack(entity) {
   if(entity.animname !== "sonic_zombie") {
     return false;
   }
-  if(!isDefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
+  if(!isdefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
     return false;
   }
-  hashead = !(isDefined(entity.head_gibbed) && entity.head_gibbed);
-  notmini = !(isDefined(entity.shrinked) && entity.shrinked);
+  hashead = !(isdefined(entity.head_gibbed) && entity.head_gibbed);
+  notmini = !(isdefined(entity.shrinked) && entity.shrinked);
   screamtime = level _canscreamnow() && entity _canscreamnow();
-  if(screamtime && !entity.ignoreall && (!(isDefined(entity.is_traversing) && entity.is_traversing)) && hashead && notmini) {
+  if(screamtime && !entity.ignoreall && (!(isdefined(entity.is_traversing) && entity.is_traversing)) && hashead && notmini) {
     blurplayers = entity _zombie_any_players_in_blur_area();
     if(blurplayers) {
       return true;
@@ -266,31 +266,31 @@ function private sonicattackterminate(entity, asmstatename) {
 }
 
 function _zombie_screamattack() {
-  self playSound("zmb_vocals_sonic_scream");
+  self playsound("zmb_vocals_sonic_scream");
   self thread _zombie_playscreamfx();
   players = getplayers();
-  array::thread_all(players, &_player_screamattackwatch, self);
+  array::thread_all(players, & _player_screamattackwatch, self);
 }
 
 function _zombie_scream_attack_done() {
   players = getplayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] notify("scream_watch_done");
   }
   self notify("scream_attack_done");
 }
 
 function _zombie_playscreamfx() {
-  if(isDefined(self.screamfx)) {
+  if(isdefined(self.screamfx)) {
     self.screamfx delete();
   }
   tag = "tag_eye";
   origin = self gettagorigin(tag);
   self.screamfx = spawn("script_model", origin);
-  self.screamfx setModel("tag_origin");
+  self.screamfx setmodel("tag_origin");
   self.screamfx.angles = self gettagangles(tag);
   self.screamfx linkto(self, tag);
-  playFXOnTag(level._effect["sonic_attack"], self.screamfx, "tag_origin");
+  playfxontag(level._effect["sonic_attack"], self.screamfx, "tag_origin");
   self util::waittill_any("death", "scream_attack_done", "shrink");
   self.screamfx delete();
 }
@@ -300,7 +300,7 @@ function _player_screamattackwatch(sonic_zombie) {
   self endon("scream_watch_done");
   sonic_zombie endon("death");
   self.screamattackblur = 0;
-  while(true) {
+  while (true) {
     if(self _player_in_blur_area(sonic_zombie)) {
       break;
     }
@@ -320,7 +320,7 @@ function _player_in_blur_area(sonic_zombie) {
   }
   dirtoplayer = self.origin - sonic_zombie.origin;
   dirtoplayer = vectornormalize(dirtoplayer);
-  sonicdir = anglesToForward(sonic_zombie.angles);
+  sonicdir = anglestoforward(sonic_zombie.angles);
   dot = vectordot(dirtoplayer, sonicdir);
   if(dot < 0.4) {
     return false;
@@ -329,11 +329,11 @@ function _player_in_blur_area(sonic_zombie) {
 }
 
 function _zombie_any_players_in_blur_area() {
-  if(isDefined(level.intermission) && level.intermission) {
+  if(isdefined(level.intermission) && level.intermission) {
     return false;
   }
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player) && player _player_in_blur_area(self)) {
       return true;
@@ -346,7 +346,7 @@ function _player_sonicblurvision(zombie) {
   self endon("disconnect");
   level endon("intermission");
   if(!self.screamattackblur) {
-    mini = isDefined(zombie) && (isDefined(zombie.shrinked) && zombie.shrinked);
+    mini = isdefined(zombie) && (isdefined(zombie.shrinked) && zombie.shrinked);
     self.screamattackblur = 1;
     if(mini) {
       self _player_screamattackdamage(1, 2, 0.2, "damage_light", zombie);
@@ -388,10 +388,10 @@ function _zombie_runeffects() {}
 function _zombie_setupfxonjoint(jointname, fxname) {
   origin = self gettagorigin(jointname);
   effectent = spawn("script_model", origin);
-  effectent setModel("tag_origin");
+  effectent setmodel("tag_origin");
   effectent.angles = self gettagangles(jointname);
   effectent linkto(self, jointname);
-  playFXOnTag(level._effect[fxname], effectent, "tag_origin");
+  playfxontag(level._effect[fxname], effectent, "tag_origin");
   return effectent;
 }
 
@@ -399,7 +399,7 @@ function _zombie_getnearbyplayers() {
   nearbyplayers = [];
   radiussqr = level.sonicscreamattackradius * level.sonicscreamattackradius;
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
       continue;
     }
@@ -416,11 +416,11 @@ function _zombie_getnearbyplayers() {
 }
 
 function sonic_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  self playSound("evt_sonic_explode");
-  if(isDefined(level._effect["sonic_explosion"])) {
-    playFXOnTag(level._effect["sonic_explosion"], self, "J_SpineLower");
+  self playsound("evt_sonic_explode");
+  if(isdefined(level._effect["sonic_explosion"])) {
+    playfxontag(level._effect["sonic_explosion"], self, "J_SpineLower");
   }
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isdefined(self.attacker) && isplayer(self.attacker)) {
     self.attacker thread zm_audio::create_and_play_dialog("kill", "sonic");
   }
   self thread _sonic_zombie_death_scream(self.attacker);
@@ -434,15 +434,15 @@ function zombie_sonic_scream_death(attacker) {
   wait(randomwait);
   self.no_powerups = 1;
   self zombie_utility::zombie_eye_glow_stop();
-  self playSound("evt_zombies_head_explode");
+  self playsound("evt_zombies_head_explode");
   self zombie_utility::zombie_head_gib();
   self dodamage(self.health + 666, self.origin, attacker);
 }
 
 function _sonic_zombie_death_scream(attacker) {
   zombies = _sonic_zombie_get_enemies_in_scream_range();
-  for(i = 0; i < zombies.size; i++) {
-    if(!isDefined(zombies[i])) {
+  for (i = 0; i < zombies.size; i++) {
+    if(!isdefined(zombies[i])) {
       continue;
     }
     if(zm_utility::is_magic_bullet_shield_enabled(zombies[i])) {
@@ -457,7 +457,7 @@ function _sonic_zombie_death_scream(attacker) {
 
 function _sonic_zombie_death_explode(attacker) {
   physicsexplosioncylinder(self.origin, 600, 240, 1);
-  if(!isDefined(level.soniczombie_knockdown_enemies)) {
+  if(!isdefined(level.soniczombie_knockdown_enemies)) {
     level.soniczombie_knockdown_enemies = [];
     level.soniczombie_knockdown_gib = [];
     level.soniczombie_fling_enemies = [];
@@ -465,10 +465,10 @@ function _sonic_zombie_death_explode(attacker) {
   }
   self _sonic_zombie_get_enemies_in_range();
   level.sonic_zombie_network_choke_count = 0;
-  for(i = 0; i < level.soniczombie_fling_enemies.size; i++) {
+  for (i = 0; i < level.soniczombie_fling_enemies.size; i++) {
     level.soniczombie_fling_enemies[i] thread _soniczombie_fling_zombie(attacker, level.soniczombie_fling_vecs[i], i);
   }
-  for(i = 0; i < level.soniczombie_knockdown_enemies.size; i++) {
+  for (i = 0; i < level.soniczombie_knockdown_enemies.size; i++) {
     level.soniczombie_knockdown_enemies[i] thread _soniczombie_knockdown_zombie(attacker, level.soniczombie_knockdown_gib[i]);
   }
   level.soniczombie_knockdown_enemies = [];
@@ -490,9 +490,9 @@ function _sonic_zombie_get_enemies_in_scream_range() {
   return_zombies = [];
   center = self getcentroid();
   zombies = array::get_all_closest(center, getaispeciesarray("axis", "all"), undefined, undefined, self.death_scream_range);
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
         continue;
       }
       test_origin = zombies[i] getcentroid();
@@ -508,14 +508,14 @@ function _sonic_zombie_get_enemies_in_scream_range() {
 function _sonic_zombie_get_enemies_in_range() {
   center = self getcentroid();
   zombies = array::get_all_closest(center, getaispeciesarray("axis", "all"), undefined, undefined, self.death_knockdown_range);
-  if(!isDefined(zombies)) {
+  if(!isdefined(zombies)) {
     return;
   }
   knockdown_range_squared = self.death_knockdown_range * self.death_knockdown_range;
   gib_range_squared = self.death_gib_range * self.death_gib_range;
   fling_range_squared = self.death_fling_range * self.death_fling_range;
-  for(i = 0; i < zombies.size; i++) {
-    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
+  for (i = 0; i < zombies.size; i++) {
+    if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
@@ -546,7 +546,7 @@ function _sonic_zombie_get_enemies_in_range() {
 }
 
 function _soniczombie_fling_zombie(player, fling_vec, index) {
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   self dodamage(self.health + 666, player.origin, player);
@@ -565,10 +565,10 @@ function _soniczombie_fling_zombie(player, fling_vec, index) {
 
 function _soniczombie_knockdown_zombie(player, gib) {
   self endon("death");
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.thundergun_knockdown_func)) {
+  if(isdefined(self.thundergun_knockdown_func)) {
     self.lander_knockdown = 1;
     self[[self.thundergun_knockdown_func]](player, gib);
   } else {
@@ -576,7 +576,7 @@ function _soniczombie_knockdown_zombie(player, gib) {
       self.a.gib_ref = array::random(level.thundergun_gib_refs);
       self thread zombie_death::do_gib();
     }
-    self.thundergun_handle_pain_notetracks = &zm_weap_thundergun::handle_thundergun_pain_notetracks;
+    self.thundergun_handle_pain_notetracks = & zm_weap_thundergun::handle_thundergun_pain_notetracks;
     self dodamage(20, player.origin, player);
   }
 }
@@ -586,30 +586,30 @@ function _sonic_shrink() {}
 function _sonic_unshrink() {}
 
 function sonic_zombie_count_watch() {
-  if(!isDefined(level.soniczombiecount)) {
+  if(!isdefined(level.soniczombiecount)) {
     level.soniczombiecount = 0;
   }
   level.soniczombiecount++;
   self waittill("death");
   level.soniczombiecount--;
-  if(isDefined(self.shrinked) && self.shrinked) {
+  if(isdefined(self.shrinked) && self.shrinked) {
     level.nextsonicspawnround = level.round_number + 1;
   } else {
     level.nextsonicspawnround = level.round_number + (randomintrange(level.soniczombieminroundwait, level.soniczombiemaxroundwait + 1));
   }
   println("" + level.nextsonicspawnround);
   attacker = self.attacker;
-  if(isDefined(attacker) && isplayer(attacker) && (isDefined(attacker.screamattackblur) && attacker.screamattackblur)) {
+  if(isdefined(attacker) && isplayer(attacker) && (isdefined(attacker.screamattackblur) && attacker.screamattackblur)) {
     attacker notify("blinded_by_the_fright_achieved");
   }
 }
 
 function _sonic_damage_callback(str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
-  if(isDefined(self.lander_knockdown) && self.lander_knockdown) {
+  if(isdefined(self.lander_knockdown) && self.lander_knockdown) {
     return false;
   }
   if(self.classname == "actor_spawner_zm_temple_sonic") {
-    if(!isDefined(self.damagecount)) {
+    if(!isdefined(self.damagecount)) {
       self.damagecount = 0;
     }
     if((self.damagecount % (int(getplayers().size * level.sonichealthmultiplier))) == 0) {
@@ -623,5 +623,5 @@ function _sonic_damage_callback(str_mod, str_hit_location, v_hit_origin, e_playe
 }
 
 function sonic_monkey_bolt_taunts(monkey_bolt) {
-  return isDefined(self.in_the_ground) && self.in_the_ground;
+  return isdefined(self.in_the_ground) && self.in_the_ground;
 }

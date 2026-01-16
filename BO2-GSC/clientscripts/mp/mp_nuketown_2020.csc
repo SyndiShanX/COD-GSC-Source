@@ -24,9 +24,8 @@ main() {
 }
 
 setupclientsideobjects(localclientnum) {
-  while(!clienthassnapshot(localclientnum)) {
+  while(!clienthassnapshot(localclientnum))
     wait 0.1;
-  }
 
   level thread flag_think(localclientnum);
   level thread nuked_energy_sign_think(localclientnum);
@@ -73,7 +72,7 @@ nuked_dome_explosion_think(localclientnum) {
 }
 
 flag_think(localclientnum) {
-  flags = getEntArray(localclientnum, "ending_flag", "targetname");
+  flags = getentarray(localclientnum, "ending_flag", "targetname");
   array_thread(flags, ::rotate_flags);
 }
 
@@ -116,8 +115,7 @@ waitfornotetrack(localclientnum) {
       break;
     }
 
-    if(note == "glass_shatter") {
+    if(note == "glass_shatter")
       clientscripts\mp\_fx::exploder(1005);
-    }
   }
 }

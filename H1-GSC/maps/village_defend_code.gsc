@@ -8,7 +8,7 @@ minigun_player_anims() {
   level.minigun_node = getent("minigun_anim_node", "targetname");
   maps\_anim::anim_first_frame_solo(self, "use");
 
-  for(;;) {
+  for (;;) {
     self waittill("turretownerchange");
     minigun_player_use();
     self waittill("turretownerchange");
@@ -45,7 +45,7 @@ minigun_player_drop() {
   var_0 = self gettagorigin("tag_flash");
   var_1 = self gettagangles("tag_flash");
   var_2 = anglestoaxis(var_1);
-  var_3 = level.player getEye();
+  var_3 = level.player geteye();
   var_4 = level.player getplayerviewheight();
   var_5 = var_3 - var_0;
   var_6 = (vectordot(var_5, var_2["forward"]), vectordot(var_5, var_2["right"]), vectordot(var_5, var_2["up"]));
@@ -61,7 +61,7 @@ minigun_player_drop() {
   level.eplayerview unlink();
   level.player enableweapons();
   var_7 = level.player getplayerangles();
-  var_8 = anglesToForward(var_7);
+  var_8 = anglestoforward(var_7);
   var_9 = level.player.origin + (0, 0, 20);
   var_9 = var_9 - var_8 * 20;
   var_10 = var_9 - (0, 0, 100);
@@ -85,9 +85,9 @@ minigun_think() {
   thread minigun_player_anims();
   thread minigun_used();
 
-  for(;;) {
-    for(;;) {
-      if(isDefined(self getturretowner())) {
+  for (;;) {
+    for (;;) {
+      if(isdefined(self getturretowner())) {
         break;
       }
 
@@ -97,8 +97,8 @@ minigun_think() {
     level thread overheat_enable();
     common_scripts\utility::flag_set("player_on_minigun");
 
-    for(;;) {
-      if(!isDefined(self getturretowner())) {
+    for (;;) {
+      if(!isdefined(self getturretowner())) {
         break;
       }
 
@@ -128,13 +128,13 @@ minigun_rumble() {
   var_2 = var_1 - var_0;
   self.rumble_ent = spawn("script_origin", self.origin);
 
-  for(;;) {
+  for (;;) {
     wait 0.05;
 
     if(self.momentum <= 0 || !common_scripts\utility::flag("player_on_minigun")) {
       continue;
     }
-    self.rumble_ent.origin = level.player getEye() + (0, 0, var_1 - var_2 * self.momentum);
+    self.rumble_ent.origin = level.player geteye() + (0, 0, var_1 - var_2 * self.momentum);
     self.rumble_ent playrumbleonentity("minigun_rumble");
   }
 }
@@ -142,21 +142,20 @@ minigun_rumble() {
 minigun_console_hint() {
   var_0 = getent("minigun", "targetname");
 
-  while(!common_scripts\utility::flag("minigun_lesson_learned")) {
+  while (!common_scripts\utility::flag("minigun_lesson_learned")) {
     wait 0.05;
     var_1 = var_0 getturretowner();
 
-    if(isDefined(var_1) && level.player != var_1 || !isDefined(var_1)) {
+    if(isdefined(var_1) && level.player != var_1 || !isdefined(var_1)) {
       continue;
     }
-    if(isDefined(level.minigun_console_hint_displayed)) {
+    if(isdefined(level.minigun_console_hint_displayed)) {
       continue;
     }
-    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
+    if(level.player common_scripts\utility::is_player_gamepad_enabled())
       level.player thread maps\_utility::display_hint("minigun_spin_left_trigger");
-    } else {
+    else
       level.player thread maps\_utility::display_hint("minigun_spin_keyboard");
-    }
 
     level.minigun_console_hint_displayed = 1;
   }
@@ -165,11 +164,10 @@ minigun_console_hint() {
 minigun_used() {
   common_scripts\utility::flag_wait("player_on_minigun");
 
-  if(level.console) {
+  if(level.console)
     var_0 = 6;
-  } else {
+  else
     var_0 = 10;
-  }
 
   var_1 = 4;
   var_2 = 7;
@@ -196,7 +194,7 @@ minigun_used() {
   var_19 = 0;
   thread minigun_rumble();
 
-  for(;;) {
+  for (;;) {
     level.normframes++;
 
     if(common_scripts\utility::flag("player_on_minigun")) {
@@ -230,9 +228,8 @@ minigun_used() {
         if(level.player adsbuttonpressed()) {
           var_6 = var_6 + 0.05;
 
-          if(var_6 >= 2.75) {
+          if(var_6 >= 2.75)
             common_scripts\utility::flag_set("minigun_lesson_learned");
-          }
         } else
           var_6 = 0;
       }
@@ -242,9 +239,8 @@ minigun_used() {
           var_13 = 1;
           var_17 = gettime();
 
-          if(!level.player common_scripts\utility::is_player_gamepad_enabled()) {
+          if(!level.player common_scripts\utility::is_player_gamepad_enabled())
             common_scripts\utility::flag_set("minigun_lesson_learned");
-          }
         } else if(level.player attackbuttonpressed() && var_15) {
           var_13 = 0;
           var_17 = undefined;
@@ -261,9 +257,8 @@ minigun_used() {
         }
       }
     } else {
-      if(var_13 || level.inuse == 1) {
+      if(var_13 || level.inuse == 1)
         thread minigun_sound_spindown();
-      }
 
       var_13 = 0;
       level.inuse = 0;
@@ -310,24 +305,20 @@ minigun_used() {
       var_10 = var_10 + var_7;
     }
 
-    if(gettime() > var_16 && !var_13) {
+    if(gettime() > var_16 && !var_13)
       var_10 = var_10 - var_8;
-    }
 
-    if(var_10 > var_11) {
+    if(var_10 > var_11)
       var_10 = var_11;
-    }
 
-    if(var_10 < 0) {
+    if(var_10 < 0)
       var_10 = 0;
-    }
 
     level.heat = var_10;
     level.turret_heat_status = int(var_10 * 114);
 
-    if(isDefined(level.overheat_status2)) {
+    if(isdefined(level.overheat_status2))
       thread overheat_hud_update();
-    }
 
     if(var_10 >= var_11 && var_10 <= var_11 && (var_18 < var_11 || var_18 > var_11)) {
       var_15 = 1;
@@ -343,7 +334,7 @@ minigun_used() {
       var_13 = 0;
 
       if(gettime() > var_19) {
-        playFXOnTag(common_scripts\utility::getfx("turret_overheat_smoke"), self, "tag_flash");
+        playfxontag(common_scripts\utility::getfx("turret_overheat_smoke"), self, "tag_flash");
         var_19 = gettime() + var_5 * 1000;
       }
     }
@@ -358,28 +349,28 @@ minigun_sound_spinup() {
   level endon("stopMinigunSound");
 
   if(self.momentum < 0.25) {
-    self playSound("minigun_gatling_spinup1");
+    self playsound("minigun_gatling_spinup1");
     wait 0.6;
-    self playSound("minigun_gatling_spinup2");
+    self playsound("minigun_gatling_spinup2");
     wait 0.5;
-    self playSound("minigun_gatling_spinup3");
+    self playsound("minigun_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_gatling_spinup4");
+    self playsound("minigun_gatling_spinup4");
     wait 0.5;
   } else if(self.momentum < 0.5) {
-    self playSound("minigun_gatling_spinup2");
+    self playsound("minigun_gatling_spinup2");
     wait 0.5;
-    self playSound("minigun_gatling_spinup3");
+    self playsound("minigun_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_gatling_spinup4");
+    self playsound("minigun_gatling_spinup4");
     wait 0.5;
   } else if(self.momentum < 0.75) {
-    self playSound("minigun_gatling_spinup3");
+    self playsound("minigun_gatling_spinup3");
     wait 0.5;
-    self playSound("minigun_gatling_spinup4");
+    self playsound("minigun_gatling_spinup4");
     wait 0.5;
   } else if(self.momentum < 1) {
-    self playSound("minigun_gatling_spinup4");
+    self playsound("minigun_gatling_spinup4");
     wait 0.5;
   }
 
@@ -397,28 +388,28 @@ minigun_sound_spindown() {
 
   if(self.momentum > 0.75) {
     self stopsounds();
-    self playSound("minigun_gatling_spindown4");
+    self playsound("minigun_gatling_spindown4");
     wait 0.5;
-    self playSound("minigun_gatling_spindown3");
+    self playsound("minigun_gatling_spindown3");
     wait 0.5;
-    self playSound("minigun_gatling_spindown2");
+    self playsound("minigun_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_gatling_spindown1");
+    self playsound("minigun_gatling_spindown1");
     wait 0.65;
   } else if(self.momentum > 0.5) {
-    self playSound("minigun_gatling_spindown3");
+    self playsound("minigun_gatling_spindown3");
     wait 0.5;
-    self playSound("minigun_gatling_spindown2");
+    self playsound("minigun_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_gatling_spindown1");
+    self playsound("minigun_gatling_spindown1");
     wait 0.65;
   } else if(self.momentum > 0.25) {
-    self playSound("minigun_gatling_spindown2");
+    self playsound("minigun_gatling_spindown2");
     wait 0.5;
-    self playSound("minigun_gatling_spindown1");
+    self playsound("minigun_gatling_spindown1");
     wait 0.65;
   } else {
-    self playSound("minigun_gatling_spindown1");
+    self playsound("minigun_gatling_spindown1");
     wait 0.65;
   }
 }
@@ -433,35 +424,29 @@ overheat_disable() {
   level.savehere = undefined;
   waittillframeend;
 
-  if(isDefined(level.overheat_bg)) {
+  if(isdefined(level.overheat_bg))
     level.overheat_bg destroy();
-  }
 
-  if(isDefined(level.overheat_bg_distort)) {
+  if(isdefined(level.overheat_bg_distort))
     level.overheat_bg_distort destroy();
-  }
 
-  if(isDefined(level.overheat_icon)) {
+  if(isdefined(level.overheat_icon))
     level.overheat_icon destroy();
-  }
 
-  if(isDefined(level.overheat_status)) {
+  if(isdefined(level.overheat_status))
     level.overheat_status destroy();
-  }
 
-  if(isDefined(level.overheat_status2)) {
+  if(isdefined(level.overheat_status2))
     level.overheat_status2 destroy();
-  }
 
-  if(isDefined(level.overheat_flashing)) {
+  if(isdefined(level.overheat_flashing))
     level.overheat_flashing destroy();
-  }
 }
 
 overheat_hud() {
   level endon("disable_overheat");
 
-  if(!isDefined(level.overheat_bg)) {
+  if(!isdefined(level.overheat_bg)) {
     level.overheat_bg = newhudelem();
     level.overheat_bg.alignx = "right";
     level.overheat_bg.aligny = "bottom";
@@ -474,7 +459,7 @@ overheat_hud() {
     level.overheat_bg.sort = 5;
   }
 
-  if(!isDefined(level.overheat_bg_distort)) {
+  if(!isdefined(level.overheat_bg_distort)) {
     level.overheat_bg_distort = newhudelem();
     level.overheat_bg_distort.alignx = "right";
     level.overheat_bg_distort.aligny = "bottom";
@@ -487,7 +472,7 @@ overheat_hud() {
     level.overheat_bg_distort.sort = 4;
   }
 
-  if(!isDefined(level.overheat_icon)) {
+  if(!isdefined(level.overheat_icon)) {
     level.overheat_icon = newhudelem();
     level.overheat_icon.alignx = "right";
     level.overheat_icon.aligny = "bottom";
@@ -502,7 +487,7 @@ overheat_hud() {
   var_0 = -31;
   var_1 = -149.5;
 
-  if(!isDefined(level.overheat_status)) {
+  if(!isdefined(level.overheat_status)) {
     level.overheat_status = newhudelem();
     level.overheat_status.alignx = "right";
     level.overheat_status.aligny = "bottom";
@@ -516,7 +501,7 @@ overheat_hud() {
     level.overheat_status.sort = 1;
   }
 
-  if(!isDefined(level.overheat_status2)) {
+  if(!isdefined(level.overheat_status2)) {
     level.overheat_status2 = newhudelem();
     level.overheat_status2.alignx = "right";
     level.overheat_status2.aligny = "bottom";
@@ -530,7 +515,7 @@ overheat_hud() {
     level.overheat_status2.sort = 2;
   }
 
-  if(!isDefined(level.overheat_flashing)) {
+  if(!isdefined(level.overheat_flashing)) {
     level.overheat_flashing = newhudelem();
     level.overheat_flashing.alignx = "right";
     level.overheat_flashing.aligny = "bottom";
@@ -558,7 +543,7 @@ overheat_overheated() {
     level.turret_heat_status = level.turret_heat_max;
     thread overheat_hud_update();
 
-    for(var_0 = 0; var_0 < 4; var_0++) {
+    for (var_0 = 0; var_0 < 4; var_0++) {
       level.overheat_flashing fadeovertime(0.5);
       level.overheat_flashing.alpha = 0.5;
       wait 0.5;
@@ -580,14 +565,14 @@ overheat_hud_update() {
   level endon("disable_overheat");
   level notify("stop_overheat_drain");
 
-  if(level.turret_heat_status > 1) {
+  if(level.turret_heat_status > 1)
     level.overheat_status.alpha = 1;
-  } else {
+  else {
     level.overheat_status.alpha = 0;
     level.overheat_status fadeovertime(0.25);
   }
 
-  if(isDefined(level.overheat_status2) && level.turret_heat_status > 1) {
+  if(isdefined(level.overheat_status2) && level.turret_heat_status > 1) {
     var_0 = int(level.turret_heat_status * (level.overheat_hud_height_max / level.turret_heat_max));
     level.overheat_status2.alpha = 1;
     level.overheat_status2 setshader("white", 10, int(var_0));
@@ -600,13 +585,11 @@ overheat_hud_update() {
   overheat_setcolor(level.turret_heat_status);
   wait 0.05;
 
-  if(isDefined(level.overheat_status2)) {
+  if(isdefined(level.overheat_status2))
     level.overheat_status2.alpha = 0;
-  }
 
-  if(isDefined(level.overheat_status) && level.turret_heat_status < level.turret_heat_max) {
+  if(isdefined(level.overheat_status) && level.turret_heat_status < level.turret_heat_max)
     thread overheat_hud_drain();
-  }
 }
 
 overheat_setcolor(var_0, var_1) {
@@ -637,7 +620,7 @@ overheat_setcolor(var_0, var_1) {
   if(var_0 > var_6 && var_0 <= var_7) {
     var_9 = int(var_0 * (100 / var_7));
 
-    for(var_12 = 0; var_12 < var_5.size; var_12++) {
+    for (var_12 = 0; var_12 < var_5.size; var_12++) {
       var_10 = var_3[var_12] - var_2[var_12];
       var_11 = var_10 / 100;
       var_5[var_12] = var_2[var_12] + var_11 * var_9;
@@ -645,24 +628,21 @@ overheat_setcolor(var_0, var_1) {
   } else if(var_0 > var_7 && var_0 <= var_8) {
     var_9 = int((var_0 - var_7) * (100 / (var_8 - var_7)));
 
-    for(var_12 = 0; var_12 < var_5.size; var_12++) {
+    for (var_12 = 0; var_12 < var_5.size; var_12++) {
       var_10 = var_4[var_12] - var_3[var_12];
       var_11 = var_10 / 100;
       var_5[var_12] = var_3[var_12] + var_11 * var_9;
     }
   }
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     level.overheat_status fadeovertime(var_1);
-  }
 
-  if(isDefined(level.overheat_status.color)) {
+  if(isdefined(level.overheat_status.color))
     level.overheat_status.color = (var_5[0], var_5[1], var_5[2]);
-  }
 
-  if(isDefined(level.overheat_status2.color)) {
+  if(isdefined(level.overheat_status2.color))
     level.overheat_status2.color = (var_5[0], var_5[1], var_5[2]);
-  }
 }
 
 overheat_hud_drain() {
@@ -670,28 +650,24 @@ overheat_hud_drain() {
   level endon("stop_overheat_drain");
   var_0 = 1.0;
 
-  for(;;) {
-    if(level.turret_heat_status > 1) {
+  for (;;) {
+    if(level.turret_heat_status > 1)
       level.overheat_status.alpha = 1;
-    }
 
     var_1 = (level.turret_heat_status - level.turret_cooldownrate) * (level.overheat_hud_height_max / level.turret_heat_max);
     thread overheat_status_rampdown(var_1, var_0);
 
-    if(var_1 < 1) {
+    if(var_1 < 1)
       var_1 = 1;
-    }
 
     overheat_setcolor(level.turret_heat_status, var_0);
     wait(var_0);
 
-    if(isDefined(level.overheat_status) && level.turret_heat_status <= 1) {
+    if(isdefined(level.overheat_status) && level.turret_heat_status <= 1)
       level.overheat_status.alpha = 0;
-    }
 
-    if(isDefined(level.overheat_status2) && level.turret_heat_status <= 1) {
+    if(isdefined(level.overheat_status2) && level.turret_heat_status <= 1)
       level.overheat_status2.alpha = 0;
-    }
   }
 }
 
@@ -702,7 +678,7 @@ overheat_status_rampdown(var_0, var_1) {
   var_3 = level.turret_heat_status - var_0;
   var_4 = var_3 / var_2;
 
-  for(var_5 = 0; var_5 < var_2; var_5++) {
+  for (var_5 = 0; var_5 < var_2; var_5++) {
     level.turret_heat_status = level.turret_heat_status - var_4;
 
     if(level.turret_heat_status < 1) {
@@ -716,23 +692,22 @@ overheat_status_rampdown(var_0, var_1) {
 
 seaknight() {
   level.seaknight1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("rescue_chopper");
-  level.seaknight1 setModel("vehicle_ch46e_opened_door_interior_a");
+  level.seaknight1 setmodel("vehicle_ch46e_opened_door_interior_a");
   var_0 = spawn("script_model", level.seaknight1 gettagorigin("body_animate_jnt"));
-  var_0 setModel("vehicle_ch46e_opened_door_interior_b");
+  var_0 setmodel("vehicle_ch46e_opened_door_interior_b");
   var_0.angles = level.seaknight1.angles;
   var_0 linkto(level.seaknight1, "body_animate_jnt");
   var_1 = spawn("script_model", level.seaknight1 gettagorigin("body_animate_jnt"));
-  var_1 setModel("vehicle_ch46e_wires");
+  var_1 setmodel("vehicle_ch46e_wires");
   var_1.angles = level.seaknight1.angles;
   var_1 linkto(level.seaknight1, "body_animate_jnt");
   maps\_wibble::wibble_add_heli_to_track(level.seaknight1);
   wait 0.05;
   var_2 = [];
 
-  for(var_3 = 0; var_3 < level.seaknight1.riders.size; var_3++) {
-    if(level.seaknight1.riders[var_3].classname != "actor_ally_pilot_zach_woodland") {
+  for (var_3 = 0; var_3 < level.seaknight1.riders.size; var_3++) {
+    if(level.seaknight1.riders[var_3].classname != "actor_ally_pilot_zach_woodland")
       var_2[var_2.size] = level.seaknight1.riders[var_3];
-    }
 
     if(level.seaknight1.riders[var_3].classname == "actor_ally_hero_mark_woodland") {
       level.griggs = level.seaknight1.riders[var_3];
@@ -742,16 +717,14 @@ seaknight() {
     level.seaknight1.riders[var_3] common_scripts\utility::hide_friendname_until_flag_or_notify("seaknight_show_names");
   }
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++)
     var_2[var_3] thread seaknightriders_standinplace();
-  }
 
   common_scripts\utility::flag_set("no_more_grenades");
   var_4 = getaiarray("axis");
 
-  for(var_3 = 0; var_3 < var_4.size; var_3++) {
+  for (var_3 = 0; var_3 < var_4.size; var_3++)
     var_4[var_3].grenadeammo = 0;
-  }
 
   common_scripts\utility::flag_wait("open_bay_doors");
   wait 11;
@@ -759,7 +732,7 @@ seaknight() {
   level.seaknight1.dontdisconnectpaths = 1;
   level.seaknight1 sethoverparams(0, 0, 0);
   level.seaknight1 setanim(maps\_utility::getanim_generic("ch46_doors_open"), 1);
-  level.seaknight1 playSound("seaknight_door_open");
+  level.seaknight1 playsound("seaknight_door_open");
   level.vehicle_aianims["script_vehicle_ch46e"][1].vehicle_getoutanim = undefined;
   level.vehicle_aianims["script_vehicle_ch46e"][2].getout = level.scr_anim["generic"]["ch46_unload_2"];
   level.vehicle_aianims["script_vehicle_ch46e"][3].getout = level.scr_anim["generic"]["ch46_unload_3"];
@@ -772,7 +745,7 @@ seaknight() {
   thread seaknight_griggs_speech();
   var_6 = 0;
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+  for (var_3 = 0; var_3 < var_2.size; var_3++) {
     var_6++;
     var_2[var_3] thread vehicle_seaknight_idle_and_load_think(var_6);
     var_2[var_3] thread seaknight_riders_erase();
@@ -800,9 +773,8 @@ seaknight() {
   level.price thread seaknight_sas_load();
   level.sasseaknightboarded++;
 
-  while(level.sasseaknightboarded > 0) {
+  while (level.sasseaknightboarded > 0)
     wait 0.1;
-  }
 
   common_scripts\utility::flag_set("all_real_friendlies_on_board");
   common_scripts\utility::flag_set("seaknight_guards_boarding");
@@ -813,19 +785,17 @@ seaknight_departure_sequence() {
   common_scripts\utility::flag_wait("seaknight_guards_boarding");
   wait 10;
 
-  if(!common_scripts\utility::flag("player_made_it")) {
+  if(!common_scripts\utility::flag("player_made_it"))
     wait 2;
-  }
 
   common_scripts\utility::flag_set("all_fake_friendlies_aboard");
 
-  if(!common_scripts\utility::flag("player_made_it")) {
+  if(!common_scripts\utility::flag("player_made_it"))
     wait 5;
-  }
 
   if(common_scripts\utility::flag("player_made_it")) {
     common_scripts\utility::flag_wait("all_real_friendlies_on_board");
-    level.player playSound("villagedef_grg_wereallaboard");
+    level.player playsound("villagedef_grg_wereallaboard");
     wait 1;
   } else {
     common_scripts\utility::flag_set("seaknight_unboardable");
@@ -852,18 +822,16 @@ seaknight_sas_load() {
   self waittill("goal");
   self.nododgemove = 1;
 
-  if(isDefined(var_0.radius)) {
+  if(isdefined(var_0.radius))
     self.goalradius = var_0.radius;
-  }
 
   var_1 = getnode("seaknight_fakeramp_end", "targetname");
   self setgoalnode(var_1);
   self waittill("goal");
   level.sasseaknightboarded--;
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isdefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self delete();
 }
@@ -871,11 +839,10 @@ seaknight_sas_load() {
 seaknight_griggs_speech() {
   common_scripts\utility::flag_wait("seaknight_can_be_boarded");
 
-  if(!common_scripts\utility::flag("lz_reached")) {
+  if(!common_scripts\utility::flag("lz_reached"))
     common_scripts\utility::flag_wait("lz_reached");
-  } else {
+  else
     wait 5.5;
-  }
 
   level.griggs maps\_anim::anim_single_queue(level.griggs, "needaride");
   wait 0.45;
@@ -901,15 +868,14 @@ vehicle_seaknight_idle_and_load_think(var_0) {
   common_scripts\utility::flag_wait("player_made_it");
   wait 1;
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isdefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self delete();
 }
 
 seaknight_riders_erase() {
-  if(isDefined(self.animname) && self.animname == "griggs") {
+  if(isdefined(self.animname) && self.animname == "griggs") {
     return;
   }
   self endon("death");
@@ -917,9 +883,8 @@ seaknight_riders_erase() {
   wait 1;
   common_scripts\utility::flag_wait("all_fake_friendlies_aboard");
 
-  if(isDefined(self.magic_bullet_shield)) {
+  if(isdefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
-  }
 
   self delete();
 }
@@ -948,13 +913,12 @@ seaknightriders_standinplace() {
 }
 
 friendly_pushplayer(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isdefined(var_0))
     var_0 = 0;
-  }
 
   var_1 = getaiarray("allies");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+  for (var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_0 == "on") {
       var_1[var_2] pushplayer(1);
       var_1[var_2].dontavoidplayer = 1;
@@ -971,17 +935,16 @@ friendly_pushplayer(var_0) {
 can_display_pvt_parity_name() {
   var_0 = 400;
 
-  if(distancesquared(level.player.origin, self.origin) > var_0 * var_0) {
+  if(distancesquared(level.player.origin, self.origin) > var_0 * var_0)
     return 0;
+
+  var_1 = level.player geteye() + 2000 * anglestoforward(level.player getplayerangles());
+  var_2 = bullettrace(level.player geteye(), var_1, 0, level.player);
+
+  if(isdefined(var_2["surfacetype"]) && issubstr(var_2["surfacetype"], "water")) {
+    var_3 = var_2["position"] + 2 * vectornormalize(anglestoforward(level.player getplayerangles()));
+    var_2 = bullettrace(var_3, var_1, 0, level.player);
   }
 
-  var_1 = level.player getEye() + 2000 * anglesToForward(level.player getplayerangles());
-  var_2 = bulletTrace(level.player getEye(), var_1, 0, level.player);
-
-  if(isDefined(var_2["surfacetype"]) && issubstr(var_2["surfacetype"], "water")) {
-    var_3 = var_2["position"] + 2 * vectornormalize(anglesToForward(level.player getplayerangles()));
-    var_2 = bulletTrace(var_3, var_1, 0, level.player);
-  }
-
-  return isDefined(var_2["entity"]) && var_2["entity"] == self;
+  return isdefined(var_2["entity"]) && var_2["entity"] == self;
 }

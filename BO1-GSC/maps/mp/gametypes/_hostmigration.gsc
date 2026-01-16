@@ -11,13 +11,12 @@ debug_script_structs() {
   if(isDefined(level.struct)) {
     println("*** Num structs " + level.struct.size);
     println("");
-    for(i = 0; i < level.struct.size; i++) {
+    for (i = 0; i < level.struct.size; i++) {
       struct = level.struct[i];
-      if(isDefined(struct.targetname)) {
+      if(isDefined(struct.targetname))
         println("---" + i + " : " + struct.targetname);
-      } else {
+      else
         println("---" + i + " : " + "NONE");
-      }
     }
   } else {
     println("*** No structs defined.");
@@ -43,21 +42,19 @@ resumeTimer() {
 lockTimer() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
-  for(;;) {
+  for (;;) {
     currTime = gettime();
     wait(0.05);
-    if(!level.timerStopped && isDefined(level.discardTime)) {
+    if(!level.timerStopped && isDefined(level.discardTime))
       level.discardTime += gettime() - currTime;
-    }
   }
 }
 Callback_HostMigration() {
   SetTimeScale(1.0, getTime());
   makedvarserverinfo("ui_guncycle", 0);
   level.hostMigrationReturnedPlayerCount = 0;
-  if(level.inPrematchPeriod) {
+  if(level.inPrematchPeriod)
     level waittill("prematch_over");
-  }
   if(level.gameEnded) {
     println("Migration starting at time " + gettime() + ", but game has ended, so no countdown.");
     return;
@@ -68,7 +65,7 @@ Callback_HostMigration() {
   level notify("host_migration_begin");
   thread lockTimer();
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     player = players[i];
     player thread hostMigrationTimerThink();
   }
@@ -83,13 +80,12 @@ matchStartTimerConsole_Internal(countTime, matchStartTimer) {
   waittillframeend;
   visionSetNaked("mpIntro", 0);
   level endon("match_start_timer_beginning");
-  while(countTime > 0 && !level.gameEnded) {
+  while (countTime > 0 && !level.gameEnded) {
     matchStartTimer thread maps\mp\gametypes\_hud::fontPulse(level);
     wait(matchStartTimer.inFrames * 0.05);
     matchStartTimer setValue(countTime);
-    if(countTime == 2) {
+    if(countTime == 2)
       visionSetNaked(getDvar("mapname"), 3.0);
-    }
     countTime--;
     wait(1 - (matchStartTimer.inFrames * 0.05));
   }
@@ -139,7 +135,7 @@ hostMigrationTimerThink_Internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
   self.hostMigrationControlsFrozen = false;
-  while(!isAlive(self)) {
+  while (!isAlive(self)) {
     self waittill("spawned");
   }
   self.hostMigrationControlsFrozen = true;
@@ -150,67 +146,61 @@ hostMigrationTimerThink() {
   self endon("disconnect");
   level endon("host_migration_begin");
   hostMigrationTimerThink_Internal();
-  if(self.hostMigrationControlsFrozen) {
+  if(self.hostMigrationControlsFrozen)
     self freezeControls(false);
-  }
 }
 waitTillHostMigrationDone() {
-  if(!isDefined(level.hostMigrationTimer)) {
+  if(!isDefined(level.hostMigrationTimer))
     return 0;
-  }
   starttime = gettime();
   level waittill("host_migration_end");
   return gettime() - starttime;
 }
 waitTillHostMigrationStarts(duration) {
-  if(isDefined(level.hostMigrationTimer)) {
+  if(isDefined(level.hostMigrationTimer))
     return;
-  }
   level endon("host_migration_begin");
   wait duration;
 }
 waitLongDurationWithHostMigrationPause(duration) {
-  if(duration == 0) {
+  if(duration == 0)
     return;
-  }
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + duration * 1000;
-  while(gettime() < endtime) {
+  while (gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
     if(isDefined(level.hostMigrationTimer)) {
       timePassed = waitTillHostMigrationDone();
       endtime += timePassed;
     }
   }
-  if(gettime() != endtime) {
+  if(gettime() != endtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-  }
   waitTillHostMigrationDone();
   return gettime() - starttime;
 }
 waitLongDurationWithGameEndTimeUpdate(duration) {
-  if(duration == 0) {
+  if(duration == 0)
     return;
-  }
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + duration * 1000;
-  while(gettime() < endtime) {
+  while (gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
-    while(isDefined(level.hostMigrationTimer)) {
+    while (isDefined(level.hostMigrationTimer)) {
       endTime += 1000;
       setGameEndTime(int(endTime));
       wait 1;
     }
   }
-  if(gettime() != endtime) {
+  if(gettime() != endtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-  }
-  while(isDefined(level.hostMigrationTimer)) {
+  while (isDefined(level.hostMigrationTimer)) {
     endTime += 1000;
     setGameEndTime(int(endTime));
     wait 1;
   }
   return gettime() - starttime;
 }
+

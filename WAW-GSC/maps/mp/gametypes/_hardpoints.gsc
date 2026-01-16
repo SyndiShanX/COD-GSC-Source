@@ -33,12 +33,12 @@ init() {
     level.hardpointItems["dogs_mp"] = priority;
     priority++;
   }
-  level.hardpointHints["radar_mp"] = &"MP_EARNED_RADAR";
-  level.hardpointHints["artillery_mp"] = &"MP_EARNED_ARTILLERY";
-  level.hardpointHints["dogs_mp"] = &"MP_EARNED_DOGS";
-  level.hardpointHints["radar_mp_not_available"] = &"MP_RADAR_NOT_AVAILABLE";
-  level.hardpointHints["artillery_mp_not_available"] = &"MP_ARTILLERY_NOT_AVAILABLE";
-  level.hardpointHints["dogs_mp_not_available"] = &"MP_DOGS_NOT_AVAILABLE";
+  level.hardpointHints["radar_mp"] = & "MP_EARNED_RADAR";
+  level.hardpointHints["artillery_mp"] = & "MP_EARNED_ARTILLERY";
+  level.hardpointHints["dogs_mp"] = & "MP_EARNED_DOGS";
+  level.hardpointHints["radar_mp_not_available"] = & "MP_RADAR_NOT_AVAILABLE";
+  level.hardpointHints["artillery_mp_not_available"] = & "MP_ARTILLERY_NOT_AVAILABLE";
+  level.hardpointHints["dogs_mp_not_available"] = & "MP_DOGS_NOT_AVAILABLE";
   level.hardpointInforms["radar_mp"] = "mp_killstreak_radar";
   level.hardpointInforms["artillery_mp"] = "mp_killstreak_jet";
   level.hardpointInforms["dogs_mp"] = "mp_killstreak_dogs";
@@ -63,9 +63,9 @@ init() {
   game["dialog"]["radar_mp"] = "radar";
   game["dialog"]["artillery_mp"] = "artillery";
   game["dialog"]["dogs_mp"] = "dogsupport";
-  if(getdvar("scr_dog_hardpoint_interval") != "") {
+  if(getdvar("scr_dog_hardpoint_interval") != "")
     level.dogsInterval = getdvarfloat("scr_dog_hardpoint_interval");
-  } else {
+  else {
     setdvar("scr_dog_hardpoint_interval", 180);
     level.dogsInterval = 180;
   }
@@ -97,36 +97,33 @@ teamHasRadar(team) {
 doAirstrike(origin, owner, team) {
   num = 17 + randomint(3);
   level.artilleryInProgress = true;
-  trace = bulletTrace(origin, origin + (0, 0, -10000), false, undefined);
+  trace = bullettrace(origin, origin + (0, 0, -10000), false, undefined);
   targetpos = trace["position"];
   yaw = getBestPlaneDirection(targetpos);
   if(level.teambased) {
     players = level.players;
     if(!level.hardcoreMode) {
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(isalive(players[i]) && (isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team)) {
-          if(pointIsInAirstrikeArea(players[i].origin, targetpos, yaw)) {
+          if(pointIsInAirstrikeArea(players[i].origin, targetpos, yaw))
             players[i] iprintlnbold(&"MP_WAR_ARTILLERY_INBOUND_NEAR_YOUR_POSITION");
-          }
         }
       }
     }
     maps\mp\gametypes\_globallogic::leaderDialog("artillery_inbound", team);
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team) {
+        if(playerteam == team)
           player iprintln(&"MP_WAR_ARTILLERY_INBOUND", owner);
-        }
       }
     }
   } else {
     owner maps\mp\gametypes\_globallogic::leaderDialogOnPlayer("artillery_inbound");
     if(!level.hardcoreMode) {
-      if(pointIsInAirstrikeArea(owner.origin, targetpos, yaw)) {
+      if(pointIsInAirstrikeArea(owner.origin, targetpos, yaw))
         owner iprintlnbold(&"MP_WAR_ARTILLERY_INBOUND_NEAR_YOUR_POSITION");
-      }
     }
   }
   wait 2;
@@ -135,7 +132,7 @@ doAirstrike(origin, owner, team) {
     return;
   }
   owner notify("begin_artillery");
-  dangerCenter = spawnStruct();
+  dangerCenter = spawnstruct();
   dangerCenter.origin = targetpos;
   dangerCenter.forward = anglesToForward((0, yaw, 0));
   level.artilleryDangerCenters[level.artilleryDangerCenters.size] = dangerCenter;
@@ -144,7 +141,7 @@ doAirstrike(origin, owner, team) {
   wait 8.5;
   found = false;
   newarray = [];
-  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+  for (i = 0; i < level.artilleryDangerCenters.size; i++) {
     if(!found && level.artilleryDangerCenters[i].origin == targetpos) {
       found = true;
       continue;
@@ -160,7 +157,7 @@ doAirstrike(origin, owner, team) {
 doArtillery(origin, owner, team, ownerDeathCount) {
   level.artilleryInProgress = true;
   self notify("artillery_status_change");
-  trace = bulletTrace(origin, origin + (0, 0, -10000), false, undefined);
+  trace = bullettrace(origin, origin + (0, 0, -10000), false, undefined);
   targetpos = trace["position"];
   if(targetpos[2] < origin[2] - 9999) {
     if(isDefined(owner)) {
@@ -176,15 +173,14 @@ doArtillery(origin, owner, team, ownerDeathCount) {
   yaw = getBestFlakDirection(targetpos, team);
   direction = (0, yaw, 0);
   flakDistance = 10000;
-  flakCenter = targetPos + vector_scale(anglesToForward(direction), -1 * flakDistance);
+  flakCenter = targetPos + vector_scale(anglestoforward(direction), -1 * flakDistance);
   if(level.teambased) {
     players = level.players;
     if(!level.hardcoreMode) {
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         if(isalive(players[i]) && (isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team)) {
-          if(pointIsInArtilleryArea(players[i].origin, targetpos)) {
+          if(pointIsInArtilleryArea(players[i].origin, targetpos))
             players[i] iprintlnbold(&"MP_WAR_ARTILLERY_INBOUND_NEAR_YOUR_POSITION");
-          }
         }
       }
     }
@@ -192,21 +188,19 @@ doArtillery(origin, owner, team, ownerDeathCount) {
     maps\mp\gametypes\_globallogic::leaderDialog("enemy_artillery_inbound", level.otherTeam[team]);
     thread maps\mp\gametypes\_battlechatter_mp::onKillstreakUsed("artillery", level.otherTeam[team]);
     thread air_raid_audio();
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team) {
+        if(playerteam == team)
           player iprintln(&"MP_WAR_ARTILLERY_INBOUND", owner);
-        }
       }
     }
   } else {
     owner maps\mp\gametypes\_globallogic::leaderDialogOnPlayer("artillery_inbound");
     if(!level.hardcoreMode) {
-      if(pointIsInArtilleryArea(owner.origin, targetpos)) {
+      if(pointIsInArtilleryArea(owner.origin, targetpos))
         owner iprintlnbold(&"MP_WAR_ARTILLERY_INBOUND_NEAR_YOUR_POSITION");
-      }
     }
   }
   if(!isDefined(owner)) {
@@ -216,7 +210,7 @@ doArtillery(origin, owner, team, ownerDeathCount) {
     return;
   }
   owner notify("begin_artillery");
-  dangerCenter = spawnStruct();
+  dangerCenter = spawnstruct();
   dangerCenter.origin = targetpos;
   dangerCenter.forward = (0, 0, 0);
   level.artilleryDangerCenters[level.artilleryDangerCenters.size] = dangerCenter;
@@ -226,12 +220,12 @@ doArtillery(origin, owner, team, ownerDeathCount) {
   owner thread artilleryImpactEffects();
   callArtilleryStrike(owner, targetpos, yaw, flakDistance, ownerDeathCount);
   max_safety_wait = gettime() + 45000;
-  while(level.artilleryShellsInAir && gettime() < max_safety_wait) {
+  while (level.artilleryShellsInAir && gettime() < max_safety_wait) {
     wait(0.1);
   }
   found = false;
   newarray = [];
-  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+  for (i = 0; i < level.artilleryDangerCenters.size; i++) {
     if(!found && level.artilleryDangerCenters[i].origin == targetpos) {
       found = true;
       continue;
@@ -252,14 +246,14 @@ debugArtilleryDangerCenters() {
   if(getdvar("scr_artillerydebug") != "1" && getdvar("scr_spawnpointdebug") == "0") {
     return;
   }
-  while(level.artilleryDangerCenters.size > 0) {
-    for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+  while (level.artilleryDangerCenters.size > 0) {
+    for (i = 0; i < level.artilleryDangerCenters.size; i++) {
       origin = level.artilleryDangerCenters[i].origin;
       forward = level.artilleryDangerCenters[i].forward;
       origin += forward * level.artilleryDangerForwardPush * level.artilleryDangerMaxRadius;
       previnnerpos = (0, 0, 0);
       prevouterpos = (0, 0, 0);
-      for(j = 0; j <= 40; j++) {
+      for (j = 0; j <= 40; j++) {
         frac = (j * 1.0) / 40;
         angle = frac * 360;
         dir = anglesToForward((0, angle, 0));
@@ -284,7 +278,7 @@ debugArtilleryDangerCenters() {
 
 getArtilleryDanger(point) {
   danger = 0;
-  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+  for (i = 0; i < level.artilleryDangerCenters.size; i++) {
     origin = level.artilleryDangerCenters[i].origin;
     forward = level.artilleryDangerCenters[i].forward;
     danger += getSingleArtilleryDanger(point, origin, forward);
@@ -299,12 +293,10 @@ getSingleArtilleryDanger(point, origin, forward) {
   perpendicularPart = diff - forwardPart;
   circlePos = perpendicularPart + forwardPart / level.artilleryDangerOvalScale;
   distsq = lengthSquared(circlePos);
-  if(distsq > level.artilleryDangerMaxRadius * level.artilleryDangerMaxRadius) {
+  if(distsq > level.artilleryDangerMaxRadius * level.artilleryDangerMaxRadius)
     return 0;
-  }
-  if(distsq < level.artilleryDangerMinRadius * level.artilleryDangerMinRadius) {
+  if(distsq < level.artilleryDangerMinRadius * level.artilleryDangerMinRadius)
     return 1;
-  }
   dist = sqrt(distsq);
   distFrac = (dist - level.artilleryDangerMinRadius) / (level.artilleryDangerMaxRadius - level.artilleryDangerMinRadius);
   assertEx(distFrac >= 0 && distFrac <= 1, distFrac);
@@ -321,7 +313,7 @@ pointIsInArtilleryArea(point, targetpos) {
 
 losRadiusDamage(pos, radius, max, min, owner, eInflictor) {
   ents = maps\mp\gametypes\_weapons::getDamageableEnts(pos, radius, true);
-  for(i = 0; i < ents.size; i++) {
+  for (i = 0; i < ents.size; i++) {
     if(ents[i].entity == self) {
       continue;
     }
@@ -332,9 +324,8 @@ losRadiusDamage(pos, radius, max, min, owner, eInflictor) {
         indoors = !maps\mp\gametypes\_weapons::weaponDamageTracePassed(ents[i].entity.origin + (0, 0, 130), pos + (0, 0, 130 - 16), 0, undefined);
         if(indoors) {
           dist *= 4;
-          if(dist > radius) {
+          if(dist > radius)
             continue;
-          }
         }
       }
     }
@@ -351,7 +342,7 @@ losRadiusDamage(pos, radius, max, min, owner, eInflictor) {
 artilleryDamageEntsThread() {
   self notify("artilleryDamageEntsThread");
   self endon("artilleryDamageEntsThread");
-  for(; level.artilleryDamagedEntsIndex < level.artilleryDamagedEntsCount; level.artilleryDamagedEntsIndex++) {
+  for (; level.artilleryDamagedEntsIndex < level.artilleryDamagedEntsCount; level.artilleryDamagedEntsIndex++) {
     if(!isDefined(level.artilleryDamagedEnts[level.artilleryDamagedEntsIndex])) {
       continue;
     }
@@ -370,9 +361,8 @@ artilleryDamageEntsThread() {
         vectornormalize(ent.damageCenter - ent.pos)
       );
       level.artilleryDamagedEnts[level.artilleryDamagedEntsIndex] = undefined;
-      if(ent.isPlayer) {
+      if(ent.isPlayer)
         wait(0.05);
-      }
     } else {
       level.artilleryDamagedEnts[level.artilleryDamagedEntsIndex] = undefined;
     }
@@ -381,7 +371,7 @@ artilleryDamageEntsThread() {
 
 radiusArtilleryShellshock(pos, radius, maxduration, minduration, owner) {
   players = level.players;
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(!isalive(players[i])) {
       continue;
     }
@@ -398,9 +388,8 @@ radiusArtilleryShellshock(pos, radius, maxduration, minduration, owner) {
 }
 
 artilleryShellshock(type, duration) {
-  if(isDefined(self.beingArtilleryShellshocked) && self.beingArtilleryShellshocked) {
+  if(isDefined(self.beingArtilleryShellshocked) && self.beingArtilleryShellshocked)
     return;
-  }
   self.beingArtilleryShellshocked = true;
   self shellshock(type, duration);
   wait(duration + 1);
@@ -410,7 +399,7 @@ artilleryShellshock(type, duration) {
 airstrikeLine(start, end, color, duration) {
   self endon("death");
   frames = duration * 20;
-  for(i = 0; i < frames; i++) {
+  for (i = 0; i < frames; i++) {
     line(start, end, color);
     wait .05;
   }
@@ -419,7 +408,7 @@ airstrikeLine(start, end, color, duration) {
 traceBomb() {
   self endon("death");
   prevpos = self.origin;
-  while(1) {
+  while (1) {
     thread airstrikeLine(prevpos, self.origin, (.5, 1, 0), 20);
     prevpos = self.origin;
     wait .2;
@@ -440,9 +429,8 @@ doPlaneStrike(owner, requiredDeathCount, bombsite, startPoint, endPoint, bombTim
   forward = anglesToForward(direction);
   plane thread playPlaneFx();
   plane moveTo(pathEnd, flyTime, 0, 0);
-  if(getdvar("scr_artillerydebug") == "1") {
+  if(getdvar("scr_artillerydebug") == "1")
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 10);
-  }
   thread callStrike_planeSound(plane, bombsite);
   thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount);
   wait flyTime;
@@ -454,7 +442,7 @@ doArtilleryStrike(owner, requiredDeathCount, bombsite, yaw, distance) {
     return;
   }
   fireAngle = (0, yaw, 0);
-  firePos = bombsite + vector_scale(anglesToForward(fireAngle), -1 * distance);
+  firePos = bombsite + vector_scale(anglestoforward(fireAngle), -1 * distance);
   pitch = getdvarfloat("scr_artilleryAngle");
   if(pitch != 0) {
     pitch *= -1;
@@ -473,7 +461,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   plane thread play_sound_in_space("veh_mig29_sonic_boom");
   planedir = anglesToForward(plane.angles);
   bomb = spawnbomb(plane.origin, plane.angles);
-  bomb moveGravity(vector_scale(anglesToForward(plane.angles), 7000 / 1.5), 3.0);
+  bomb moveGravity(vector_scale(anglestoforward(plane.angles), 7000 / 1.5), 3.0);
   bomb.ownerRequiredDeathCount = requiredDeathCount;
   killCamEnt = spawn("script_model", plane.origin + (0, 0, 100) - planedir * 200);
   bomb.killCamEnt = killCamEnt;
@@ -481,9 +469,8 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   killCamEnt thread deleteAfterTime(15.0);
   killCamEnt.angles = planedir;
   killCamEnt moveTo(pathEnd + (0, 0, 100), flyTime, 0, 0);
-  if(getdvar("scr_artillerydebug") == "1") {
+  if(getdvar("scr_artillerydebug") == "1")
     bomb thread traceBomb();
-  }
   wait .4;
   killCamEnt moveTo(killCamEnt.origin + planedir * 4000, 1, 0, 0);
   wait .45;
@@ -497,7 +484,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   wait(0.10);
   bombOrigin = newBomb.origin;
   bombAngles = newBomb.angles;
-  playFXOnTag(level.airstrikefx, newBomb, "tag_origin");
+  playfxontag(level.airstrikefx, newBomb, "tag_origin");
   wait .05;
   killCamEnt moveTo(killCamEnt.origin + (planedir + (0, 0, -.25)) * 2500, 2, 0, 0);
   wait .25;
@@ -509,15 +496,14 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   maxAngles = 55;
   angleDiff = (maxAngles - minAngles) / repeat;
   hitpos = (0, 0, 0);
-  for(i = 0; i < repeat; i++) {
+  for (i = 0; i < repeat; i++) {
     traceDir = anglesToForward(bombAngles + (maxAngles - (angleDiff * i), randomInt(10) - 5, 0));
     traceEnd = bombOrigin + vector_scale(traceDir, 10000);
     trace = bulletTrace(bombOrigin, traceEnd, false, undefined);
     traceHit = trace["position"];
     hitpos += traceHit;
-    if(getdvar("scr_artillerydebug") == "1") {
+    if(getdvar("scr_artillerydebug") == "1")
       thread airstrikeLine(bombOrigin, traceHit, (1, 0, 0), 20);
-    }
     thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb);
     if(i % 3 == 0) {
       thread playsoundinspace("artillery_impact", traceHit);
@@ -534,15 +520,14 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
 }
 
 callStrike_artilleryBombEffect(spawnPoint, bombdir, velocity, owner, requiredDeathCount, distance) {
-  bomb_velocity = vectorscale(anglesToForward(bombdir), velocity);
+  bomb_velocity = vectorscale(anglestoforward(bombdir), velocity);
   bomb = owner launchbomb("artillery_mp", spawnPoint, bomb_velocity);
   bomb.requiredDeathCount = requiredDeathCount;
   airTime = distance / (velocity * cos(bombdir[0]));
   bomb thread referenceCounter();
-  bombsite = spawnPoint + vector_scale(anglesToForward((0, bombdir[1], 0)), distance);
-  if(getdvar("scr_artillerydebug") == "1") {
+  bombsite = spawnPoint + vector_scale(anglestoforward((0, bombdir[1], 0)), distance);
+  if(getdvar("scr_artillerydebug") == "1")
     bomb thread traceBomb();
-  }
 }
 
 referenceCounter() {
@@ -553,7 +538,7 @@ referenceCounter() {
 artilleryImpactEffects() {
   self endon("disconnect");
   self endon("artillery_status_change");
-  while(level.artilleryShellsInAir) {
+  while (level.artilleryShellsInAir) {
     self waittill("projectile_impact", weapon, position, radius);
     if(weapon == "artillery_mp") {
       playRumbleOnPosition("artillery_rumble", position);
@@ -578,7 +563,7 @@ deleteAfterTime(time) {
 
 drawLine(start, end, timeSlice, color) {
   drawTime = int(timeSlice * 20);
-  for(time = 0; time < drawTime; time++) {
+  for (time = 0; time < drawTime; time++) {
     line(start, end, (1, 0, 0), false, 1);
     wait(0.05);
   }
@@ -598,34 +583,30 @@ getBestPlaneDirection(hitpos) {
   bestangle = randomfloat(360);
   bestanglefrac = 0;
   fullTraceResults = [];
-  for(i = 0; i < numChecks; i++) {
+  for (i = 0; i < numChecks; i++) {
     yaw = ((i * 1.0 + randomfloat(1)) / numChecks) * 360.0;
     angle = (checkPitch, yaw + 180, 0);
     dir = anglesToForward(angle);
     endpos = startpos + dir * 1500;
-    trace = bulletTrace(startpos, endpos, false, undefined);
-    if(getdvar("scr_artillerydebug") == "1") {
+    trace = bullettrace(startpos, endpos, false, undefined);
+    if(getdvar("scr_artillerydebug") == "1")
       thread airstrikeLine(startpos, trace["position"], (1, 1, 0), 20);
-    }
     if(trace["fraction"] > bestanglefrac) {
       bestanglefrac = trace["fraction"];
       bestangle = yaw;
-      if(trace["fraction"] >= 1) {
+      if(trace["fraction"] >= 1)
         fullTraceResults[fullTraceResults.size] = yaw;
-      }
     }
-    if(i % 3 == 0) {
+    if(i % 3 == 0)
       wait .05;
-    }
   }
-  if(fullTraceResults.size > 0) {
+  if(fullTraceResults.size > 0)
     return fullTraceResults[randomint(fullTraceResults.size)];
-  }
   return bestangle;
 }
 
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
-  result = spawnStruct();
+  result = spawnstruct();
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
   t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) +
       ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) +
@@ -642,7 +623,7 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
 
 get_origin_array(from_array) {
   origins = [];
-  for(i = 0; i < from_array.size; i++) {
+  for (i = 0; i < from_array.size; i++) {
     origins[origins.size] = from_array[i].origin;
   }
   return origins;
@@ -660,7 +641,7 @@ get_random_artillery_origins() {
     major_axis = 1;
     minor_axis = 0;
   }
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     major_value = mins[major_axis] - randomfloatrange(mins[major_axis], level.mapcenter[major_axis]) * (2.0);
     minor_value = randomfloatrange(mins[minor_axis], maxs[minor_axis]);
     if(major_axis == 0) {
@@ -681,7 +662,7 @@ get_random_artillery_origins() {
 
 getBestFlakDirection(hitpos, team) {
   targetname = "artillery_" + team;
-  spawns = getEntArray(targetname, "targetname");
+  spawns = getentarray(targetname, "targetname");
   if(!isDefined(spawns) || spawns.size == 0) {
     origins = get_random_artillery_origins();
   } else {
@@ -690,7 +671,7 @@ getBestFlakDirection(hitpos, team) {
   closest_dist = 99999999 * 99999999;
   closest_index = randomint(origins.size);
   negative_t = false;
-  for(i = 0; i < origins.size; i++) {
+  for (i = 0; i < origins.size; i++) {
     result = closest_point_on_line_to_point(hitpos, level.mapcenter, origins[i]);
     if(result.t > 0 && negative_t) {
       continue;
@@ -718,9 +699,9 @@ callAirStrike(owner, coord, yaw) {
   if(isDefined(level.airstrikeHeightScale)) {
     planeFlyHeight *= level.airstrikeHeightScale;
   }
-  startPoint = coord + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
+  startPoint = coord + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
   startPoint += (0, 0, planeFlyHeight);
-  endPoint = coord + vector_scale(anglesToForward(direction), planeHalfDistance);
+  endPoint = coord + vector_scale(anglestoforward(direction), planeHalfDistance);
   endPoint += (0, 0, planeFlyHeight);
   d = length(startPoint - endPoint);
   flyTime = (d / planeFlySpeed);
@@ -770,9 +751,9 @@ startArtilleryCanon(owner, coord, yaw, distance, initial_delay, ownerDeathCount)
   shellWaitMin = 2;
   shellWaitMax = 4;
   requiredDeathCount = ownerDeathCount;
-  for(volley = 0; volley < volleyCount; volley++) {
+  for (volley = 0; volley < volleyCount; volley++) {
     volleyCoord = randPointRadiusAway(coord, randomfloatrange(cannonAccuracyRadiusMin, cannonAccuracyRadiusMax));
-    for(shell = 0; shell < level.artilleryCanonShellCount; shell++) {
+    for (shell = 0; shell < level.artilleryCanonShellCount; shell++) {
       wait randomFloatRange(shellWaitMin, shellWaitMax);
       strikePos = randPointRadiusAway(volleyCoord, randomintrange(shellAccuracyRadiusMin, shellAccuracyRadiusMax));
       level thread doArtilleryStrike(owner, requiredDeathCount, strikePos, yaw, distance);
@@ -785,9 +766,9 @@ startArtilleryCanon(owner, coord, yaw, distance, initial_delay, ownerDeathCount)
 
 callStrike_bomb(bombTime, coord, repeat, owner) {
   accuracyRadius = 512;
-  for(i = 0; i < repeat; i++) {
+  for (i = 0; i < repeat; i++) {
     randVec = (0, randomint(360), 0);
-    bombPoint = coord + vector_scale(anglesToForward(randVec), accuracyRadius);
+    bombPoint = coord + vector_scale(anglestoforward(randVec), accuracyRadius);
     wait bombTime;
     thread playsoundinspace("artillery_impact", bombPoint);
     radiusArtilleryShellshock(bombPoint, 512, 8, 4);
@@ -797,7 +778,7 @@ callStrike_bomb(bombTime, coord, repeat, owner) {
 
 randPointRadiusAway(origin, accuracyRadius) {
   randVec = (0, randomint(360), 0);
-  newPoint = origin + vector_scale(anglesToForward(randVec), accuracyRadius);
+  newPoint = origin + vector_scale(anglestoforward(randVec), accuracyRadius);
   return newPoint;
 }
 
@@ -813,39 +794,35 @@ flat_angle(angle) {
 
 targetisclose(other, target) {
   infront = targetisinfront(other, target);
-  if(infront) {
+  if(infront)
     dir = 1;
-  } else {
+  else
     dir = -1;
-  }
   a = flat_origin(other.origin);
-  b = a + vector_scale(anglesToForward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_scale(anglestoforward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
-  if(dist < 3000) {
+  if(dist < 3000)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 targetisinfront(other, target) {
-  forwardvec = anglesToForward(flat_angle(other.angles));
+  forwardvec = anglestoforward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0) {
+  if(dot > 0)
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 delete_on_death(ent) {
   ent endon("death");
   self waittill("death");
-  if(isDefined(ent)) {
+  if(isDefined(ent))
     ent delete();
-  }
 }
 
 play_loop_sound_on_entity(alias, offset) {
@@ -861,7 +838,7 @@ play_loop_sound_on_entity(alias, offset) {
     org.angles = self.angles;
     org linkto(self);
   }
-  org playLoopSound(alias);
+  org playloopsound(alias);
   self waittill("stop sound" + alias);
   org delete();
 }
@@ -869,18 +846,15 @@ play_loop_sound_on_entity(alias, offset) {
 callStrike_planeSound(plane, bombsite) {
   plane endon("death");
   plane thread play_loop_sound_on_entity("veh_mig29_dist_loop");
-  while(!targetisclose(plane, bombsite)) {
+  while (!targetisclose(plane, bombsite))
     wait .05;
-  }
   plane notify("stop sound" + "veh_mig29_dist_loop");
   plane thread play_loop_sound_on_entity("veh_mig29_close_loop");
-  while(targetisinfront(plane, bombsite)) {
+  while (targetisinfront(plane, bombsite))
     wait .05;
-  }
   wait .5;
-  while(targetisclose(plane, bombsite)) {
+  while (targetisclose(plane, bombsite))
     wait .05;
-  }
   plane notify("stop sound" + "veh_mig29_close_loop");
   plane thread play_loop_sound_on_entity("veh_mig29_dist_loop");
   plane waittill("delete");
@@ -889,15 +863,13 @@ callStrike_planeSound(plane, bombsite) {
 
 playSoundinSpace(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
-  if(!isDefined(origin)) {
+  if(!isDefined(origin))
     origin = self.origin;
-  }
   org.origin = origin;
-  if(isDefined(master) && master) {
+  if(isDefined(master) && master)
     org playsoundasmaster(alias);
-  } else {
-    org playSound(alias);
-  }
+  else
+    org playsound(alias);
   wait(10.0);
   org delete();
 }
@@ -908,16 +880,15 @@ giveHardpointItemForStreak() {
     return;
   }
   if(!getDvarInt("scr_game_forceradar")) {
-    if(streak == 3) {
+    if(streak == 3)
       self giveHardpoint("radar_mp", streak);
-    } else if(streak == 5) {
+    else if(streak == 5)
       self giveHardpoint("artillery_mp", streak);
-    } else if(streak == 7) {
+    else if(streak == 7)
       self giveHardpoint("dogs_mp", streak);
-    } else if(streak >= 10) {
-      if((streak % 5) == 0) {
+    else if(streak >= 10) {
+      if((streak % 5) == 0)
         self streakNotify(streak);
-      }
     }
   } else {
     if(streak == 3) {
@@ -925,9 +896,8 @@ giveHardpointItemForStreak() {
     } else if(streak == 5) {
       self giveHardpoint("dogs_mp", streak);
     } else if(streak >= 10) {
-      if((streak % 5) == 0) {
+      if((streak % 5) == 0)
         self streakNotify(streak);
-      }
     }
   }
 }
@@ -937,7 +907,7 @@ streakNotify(streakVal) {
   self waittill("playerKilledChallengesProcessed");
   wait .05;
   notifyData = spawnStruct();
-  notifyData.titleLabel = &"MP_KILLSTREAK_N";
+  notifyData.titleLabel = & "MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   self maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
   iprintln(&"RANK_KILL_STREAK_N", self, streakVal);
@@ -963,7 +933,7 @@ hardpointNotify(hardpointType, streakVal, challenge_wait) {
   }
   wait .05;
   notifyData = spawnStruct();
-  notifyData.titleLabel = &"MP_KILLSTREAK_N";
+  notifyData.titleLabel = & "MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.notifyText = level.hardpointHints[hardpointType];
   notifyData.sound = level.hardpointInforms[hardpointType];
@@ -973,9 +943,8 @@ hardpointNotify(hardpointType, streakVal, challenge_wait) {
 
 hasHardpointItemEquipped() {
   currentWeapon = self getCurrentWeapon();
-  if(currentWeapon == "radar_mp" || currentWeapon == "artillery_mp" || currentWeapon == "dogs_mp") {
+  if(currentWeapon == "radar_mp" || currentWeapon == "artillery_mp" || currentWeapon == "dogs_mp")
     return true;
-  }
   return false;
 }
 
@@ -983,19 +952,15 @@ giveHardpointItem(hardpointType, do_not_update_death_count) {
   if(level.gameEnded) {
     return;
   }
-  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0) {
+  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0)
     return false;
-  }
-  if(isDefined(self.selectingLocation) && hasHardpointItemEquipped()) {
+  if(isDefined(self.selectingLocation) && hasHardpointItemEquipped())
     return false;
-  }
-  if(!isDefined(level.hardpointItems[hardpointType])) {
+  if(!isDefined(level.hardpointItems[hardpointType]))
     return false;
-  }
   if(isDefined(self.pers["hardPointItem"])) {
-    if(level.hardpointItems[hardpointType] < level.hardpointItems[self.pers["hardPointItem"]]) {
+    if(level.hardpointItems[hardpointType] < level.hardpointItems[self.pers["hardPointItem"]])
       return false;
-    }
   }
   self giveWeapon(hardpointType);
   self giveMaxAmmo(hardpointType);
@@ -1011,19 +976,15 @@ takeHardpointItem(hardpointType) {
   if(level.gameEnded) {
     return;
   }
-  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0) {
+  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0)
     return false;
-  }
-  if(isDefined(self.selectingLocation)) {
+  if(isDefined(self.selectingLocation))
     return false;
-  }
-  if(!isDefined(level.hardpointItems[hardpointType])) {
+  if(!isDefined(level.hardpointItems[hardpointType]))
     return false;
-  }
   if(isDefined(self.pers["hardPointItem"])) {
-    if(self.pers["hardPointItem"] != hardpointType) {
+    if(self.pers["hardPointItem"] != hardpointType)
       return false;
-    }
   }
   self takeWeapon(hardpointType);
   self setActionSlot(4, "");
@@ -1053,32 +1014,29 @@ upgradeHardpointItem() {
 
 getNextHardpointItem(hardpointType) {
   hardpoints = getArrayKeys(level.hardpointItems);
-  if(!isDefined(hardpointType)) {
+  if(!isDefined(hardpointType))
     return hardpoints[hardpoints.size - 1];
-  }
-  for(index = hardpoints.size - 1; index >= 0; index--) {
+  for (index = hardpoints.size - 1; index >= 0; index--) {
     if(hardpoints[index] != hardpointType) {
       continue;
     }
-    if(index != 0) {
+    if(index != 0)
       return hardpoints[index - 1];
-    } else {
+    else
       return hardpoints[index];
-    }
   }
 }
 
 giveOwnedHardpointItem() {
-  if(isDefined(self.pers["hardPointItem"])) {
+  if(isDefined(self.pers["hardPointItem"]))
     self giveHardpointItem(self.pers["hardPointItem"], false);
-  }
 }
 
 hardpointItemWaiter() {
   self endon("death_or_disconnect");
   lastWeapon = self getCurrentWeapon();
   self giveOwnedHardpointItem();
-  for(;;) {
+  for (;;) {
     self waittill("weapon_change");
     currentWeapon = self getCurrentWeapon();
     switch (currentWeapon) {
@@ -1093,9 +1051,8 @@ hardpointItemWaiter() {
           self setActionSlot(4, "");
           self.pers["hardPointItem"] = undefined;
         }
-        if(lastWeapon != "none") {
+        if(lastWeapon != "none")
           self switchToWeapon(lastWeapon);
-        }
         break;
       case "none":
         break;
@@ -1108,7 +1065,7 @@ hardpointItemWaiter() {
 
 artilleryWaiter() {
   self endon("death_or_disconnect");
-  while(1) {
+  while (1) {
     self waittill("artillery_status_change");
     if(!isDefined(level.artilleryInProgress)) {
       pos = (0, 0, 0);
@@ -1127,9 +1084,8 @@ triggerHardPoint(hardpointType) {
       return false;
     }
     result = self selectArtilleryLocation();
-    if(!isDefined(result) || !result) {
+    if(!isDefined(result) || !result)
       return false;
-    }
     self.pers["artillery_used"]++;
   } else if(hardpointType == "dogs_mp") {
     if(isDefined(level.dogs)) {
@@ -1142,13 +1098,12 @@ triggerHardPoint(hardpointType) {
       maps\mp\gametypes\_globallogic::leaderDialog("dogs_inbound", team);
       maps\mp\gametypes\_globallogic::leaderDialog("enemy_dogs_inbound", otherTeam);
       thread maps\mp\gametypes\_battlechatter_mp::onKillstreakUsed("dogs", otherTeam);
-      for(i = 0; i < level.players.size; i++) {
+      for (i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
-          if(playerteam == team) {
+          if(playerteam == team)
             player iprintln(&"MP_DOGS_INBOUND", self);
-          }
         }
       }
     } else {
@@ -1173,15 +1128,14 @@ RadarAcquiredPrintAndSound(team, otherteam, callingPlayer, numseconds) {
   soundFriendly = game["voice"][team] + game["dialog"]["radar_online"];
   soundEnemy = game["voice"][otherteam] + game["dialog"]["enemy_radar_online"];
   if(level.splitscreen) {
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team) {
+        if(playerteam == team)
           player iprintln(&"MP_WAR_RADAR_ACQUIRED", callingPlayer, numseconds);
-        } else if(playerteam == otherteam) {
+        else if(playerteam == otherteam)
           player iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", numseconds);
-        }
       }
     }
     assert(level.splitscreen);
@@ -1195,15 +1149,14 @@ RadarAcquiredPrintAndSound(team, otherteam, callingPlayer, numseconds) {
       callingPlayer maps\mp\gametypes\_globallogic::leaderDialogOnPlayer("radar_online", team);
     }
     thread maps\mp\gametypes\_battlechatter_mp::onKillstreakUsed("recon", otherTeam);
-    for(i = 0; i < level.players.size; i++) {
+    for (i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team) {
+        if(playerteam == team)
           player iprintln(&"MP_WAR_RADAR_ACQUIRED", callingPlayer, numseconds);
-        } else if(playerteam == otherteam) {
+        else if(playerteam == otherteam)
           player iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", numseconds);
-        }
       }
     }
   }
@@ -1212,9 +1165,8 @@ RadarAcquiredPrintAndSound(team, otherteam, callingPlayer, numseconds) {
 useRadarItem() {
   team = self.pers["team"];
   otherteam = "axis";
-  if(team == "axis") {
+  if(team == "axis")
     otherteam = "allies";
-  }
   assert(isDefined(level.players));
   if(level.teambased) {
     RadarAcquiredPrintAndSound(team, otherteam, self, level.radarViewTime);
@@ -1234,7 +1186,7 @@ useTeamRadar(team, otherteam) {
   setTeamRadarWrapper(team, true);
   wait level.radarViewTime;
   setTeamRadarWrapper(team, false);
-  printAndSoundOnEveryone(team, otherteam, &"MP_WAR_RADAR_EXPIRED", &"MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
+  printAndSoundOnEveryone(team, otherteam, & "MP_WAR_RADAR_EXPIRED", & "MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
 }
 
 usePlayerRadar(team, otherteam) {
@@ -1252,9 +1204,8 @@ usePlayerRadar(team, otherteam) {
 setTeamRadarWrapper(team, value) {
   setTeamRadar(team, value);
   dvarval = 0;
-  if(value) {
+  if(value)
     dvarval = 1;
-  }
   setDvar("ui_radar_" + team, dvarval);
   level notify("radar_status_change", team);
 }
@@ -1307,7 +1258,7 @@ stopHardpointLocationSelection(disconnected) {
 }
 
 useArtillery(pos) {
-  trace = bulletTrace(self.origin + (0, 0, 10000), self.origin, false, undefined);
+  trace = bullettrace(self.origin + (0, 0, 10000), self.origin, false, undefined);
   pos = (pos[0], pos[1], trace["position"][2] - 514);
   if(maps\mp\gametypes\_tweakables::getTweakableValue("team", "allowHardpointStreakAfterDeath")) {
     ownerDeathCount = self.deathCount;
@@ -1320,6 +1271,6 @@ useArtillery(pos) {
 air_raid_audio() {
   air_raid_1 = getent("air_raid_1", "targetname");
   if(isDefined(air_raid_1)) {
-    air_raid_1 playSound("air_raid_a");
+    air_raid_1 playsound("air_raid_a");
   }
 }

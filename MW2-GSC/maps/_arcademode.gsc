@@ -14,7 +14,7 @@ main() {
   precachestring(&"SCRIPT_TIME_REMAINING");
   // TOTAL SCORE:
   precachestring(&"SCRIPT_TOTAL_SCORE");
-  // EXTRA LIFE X
+  // EXTRA LIFE X 
   precachestring(&"SCRIPT_EXTRA_LIFE");
   // CHECKPOINT!
   precachestring(&"SCRIPT_CHECKPOINT");
@@ -69,7 +69,7 @@ main() {
   level.arcadeMode_kill_streak_multiplier_count = 3; // gotta kill these number of guys to get the multiplier
   arcadeMode_reset_kill_streak();
 
-  for(i = 0; i < level.arcadeMode_checkpoint_max; i++) {
+  for (i = 0; i < level.arcadeMode_checkpoint_max; i++) {
     setdvar("arcademode_checkpoint_" + i, "");
   }
 
@@ -132,7 +132,7 @@ main() {
 
   level.arcadeMode_multiKills = [];
   mods = getarraykeys(level.arcadeMode_weaponMultiplier);
-  for(i = 0; i < mods.size; i++) {
+  for (i = 0; i < mods.size; i++) {
     level.arcadeMode_multiKills[mods[i]] = [];
   }
   blank_array = level.arcadeMode_multiKills;
@@ -145,7 +145,7 @@ main() {
 
   arcademode_redraw_lives(lives); // lives
 
-  for(;;) {
+  for (;;) {
     wait(0.05);
 
     waittillframeend;
@@ -160,9 +160,8 @@ main() {
 
 arcademode_complete() {
   // for use with outside scripts because flag "arcademode_complete" may not be initialized
-  if(getdvar("arcademode") != "1") {
+  if(getdvar("arcademode") != "1")
     return false;
-  }
   return flag("arcademode_complete");
 }
 
@@ -220,9 +219,8 @@ arcademode_get_level_time() {
   }
   */
 
-  if(isDefined(timer[level.script])) {
+  if(isdefined(timer[level.script]))
     time_remaining = timer[level.script];
-  }
 
   /*
   if( getdvar( "arcademode_full" ) == "1" )
@@ -255,9 +253,8 @@ arcadeMode_death_detection() {
   lives = getdvarint("arcademode_lives");
 
   earned_lives = getdvarint("arcademode_earned_lives");
-  if(lives > earned_lives) {
+  if(lives > earned_lives)
     lives = earned_lives;
-  }
 
   lives -= 1;
 
@@ -271,7 +268,7 @@ arcadeMode_death_detection() {
   if(lives < 0) {
     wait 1.5;
     // GAME OVER
-    level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
+    level.arcadeMode_failureString = & "SCRIPT_GAME_OVER";
     thread arcademode_ends();
     return;
   }
@@ -310,7 +307,7 @@ arcademode_update_timer() {
   hud_time settimer(timer - .1);
   wait(timer);
   // TIME UP
-  level.arcadeMode_failureString = &"SCRIPT_TIME_UP";
+  level.arcadeMode_failureString = & "SCRIPT_TIME_UP";
   thread arcadeMode_ends();
 }
 
@@ -319,17 +316,17 @@ arcademode_update_lives() {
   level endon("missionfailed");
 
   level.arcadeMode_lives_hud = [];
-  for(i = 0; i < level.arcadeMode_maxlives; i++) {
+  for (i = 0; i < level.arcadeMode_maxlives; i++) {
     arcademode_add_life(i, 16, 78, -18, 64, level.arcadeMode_hud_sort);
   }
 
-  for(;;) {
+  for (;;) {
     change = getdvarint("arcademode_lives_changed");
     if(change != 0) {
       lives = getdvarint("arcademode_lives");
       if(lives < 0) {
         // GAME OVER
-        level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
+        level.arcadeMode_failureString = & "SCRIPT_GAME_OVER";
         thread arcadeMode_ends();
         return;
       }
@@ -360,9 +357,8 @@ arcademode_convert_extra_lives() {
   arcadeMode_lives = getdvarint("arcademode_lives");
   earned = getdvarint("arcademode_earned_lives");
 
-  if(arcadeMode_lives > earned) {
+  if(arcadeMode_lives > earned)
     thread extra_lives_display(arcadeMode_lives - earned);
-  }
 
   setdvar("arcademode_earned_lives", arcadeMode_lives);
   thread maps\_arcademode::arcademode_redraw_lives(arcadeMode_lives);
@@ -370,26 +366,25 @@ arcademode_convert_extra_lives() {
 }
 
 arcademode_checkpoint_print() {
-  if(!arcadeMode()) {
+  if(!arcadeMode())
     return;
-  }
 
   arcademode_convert_extra_lives();
 
   start_offset = 800;
   movetime = 0.8;
-  level.player thread play_sound_in_space("arcademode_checkpoint", level.player getEye());
+  level.player thread play_sound_in_space("arcademode_checkpoint", level.player geteye());
 
   thread maps\_arcademode::draw_checkpoint(start_offset, movetime, 1);
   thread maps\_arcademode::draw_checkpoint(start_offset, movetime, -1);
 }
 
+
 arcadeMode_redraw_life(index, earned_lives) {
-  if(index >= earned_lives) {
+  if(index >= earned_lives)
     self setshader("arcademode_life", 64, 64);
-  } else {
+  else
     self setshader("stance_stand", 64, 64);
-  }
 
   self fadeovertime(1);
   self.alpha = 1;
@@ -398,9 +393,8 @@ arcadeMode_redraw_life(index, earned_lives) {
 }
 
 arcadeMode_remove_life(index) {
-  if(self.alpha <= 0) {
+  if(self.alpha <= 0)
     return;
-  }
   self fadeovertime(1);
   self.alpha = 0;
   self.color = (1, 0, 0);
@@ -408,28 +402,25 @@ arcadeMode_remove_life(index) {
 }
 
 arcademode_redraw_lives(lives) {
-  if(lives > 10) {
+  if(lives > 10)
     lives = 10;
-  }
   earned_lives = getdvarint("arcademode_earned_lives");
-  for(i = 0; i < lives; i++) {
+  for (i = 0; i < lives; i++) {
     level.arcadeMode_lives_hud[i] arcadeMode_redraw_life(i, earned_lives);
   }
 
-  for(i = lives; i < level.arcadeMode_maxlives; i++) {
-    if(i < 0) {
+  for (i = lives; i < level.arcadeMode_maxlives; i++) {
+    if(i < 0)
       continue;
-    }
-    if(i >= 10) {
+    if(i >= 10)
       continue;
-    }
 
     level.arcadeMode_lives_hud[i] arcadeMode_remove_life(i);
   }
 }
 
 arcademode_update_streak_progress() {
-  for(;;) {
+  for (;;) {
     level waittill_either("arcademode_decrement_kill_streak", "arcademode_new_kill");
     waittillframeend; // for the new hud elem to be added to the array
     arcademode_redraw_streak_progress();
@@ -437,17 +428,16 @@ arcademode_update_streak_progress() {
 }
 
 arcademode_redraw_streak_progress() {
-  for(i = 0; i < level.arcadeMode_kill_streak_current_count; i++) {
-    if(i >= level.arcadeMode_kills_hud.size) {
+  for (i = 0; i < level.arcadeMode_kill_streak_current_count; i++) {
+    if(i >= level.arcadeMode_kills_hud.size)
       return;
-    }
 
     level.arcadeMode_kills_hud[i].color = level.arcadeMode_streak_color[level.arcadeMode_kill_streak_current_multiplier - 1];
     level.arcadeMode_kills_hud[i].glowColor = level.arcadeMode_streak_glow[level.arcadeMode_kill_streak_current_multiplier - 1];
   }
 
   count = 0;
-  for(;;) {
+  for (;;) {
     color = level.arcadeMode_kill_streak_current_multiplier + count;
     if(color >= level.arcadeMode_streak_color.size) {
       // go crazy would start here instead of this
@@ -455,10 +445,9 @@ arcademode_redraw_streak_progress() {
     }
 
     // sets the color of all the kill progression icons
-    for(i = level.arcadeMode_kill_streak_current_count + count * level.arcadeMode_kill_streak_multiplier_count; i < level.arcadeMode_kill_streak_current_count + (count + 1) * level.arcadeMode_kill_streak_multiplier_count; i++) {
-      if(i >= level.arcadeMode_kills_hud.size) {
+    for (i = level.arcadeMode_kill_streak_current_count + count * level.arcadeMode_kill_streak_multiplier_count; i < level.arcadeMode_kill_streak_current_count + (count + 1) * level.arcadeMode_kill_streak_multiplier_count; i++) {
+      if(i >= level.arcadeMode_kills_hud.size)
         return;
-      }
 
       level.arcadeMode_kills_hud[i].color = level.arcadeMode_streak_color[color];
       level.arcadeMode_kills_hud[i].glowColor = level.arcadeMode_streak_glow[color];
@@ -499,7 +488,7 @@ arcademode_add_kill(num, x, y, offset, scale, sort) {
     hud_kill.alpha = 1;
   }
 
-  for(;;) {
+  for (;;) {
     if(hud_kill.x == level.arcademode_kill_zero_x_location) {
       // all the way on the right
       decay_time = 4;
@@ -514,14 +503,13 @@ arcademode_add_kill(num, x, y, offset, scale, sort) {
       level notify("arcademode_decrement_kill_streak");
       hud_kill destroy();
 
-      for(i = 0; i < level.arcadeMode_kills_hud.size - 1; i++) {
+      for (i = 0; i < level.arcadeMode_kills_hud.size - 1; i++) {
         level.arcadeMode_kills_hud[i] = level.arcadeMode_kills_hud[i + 1];
       }
       level.arcadeMode_kills_hud[level.arcadeMode_kills_hud.size - 1] = undefined;
 
-      if(!level.arcadeMode_kills_hud.size) {
+      if(!level.arcadeMode_kills_hud.size)
         thread arcadeMode_reset_kill_streak();
-      }
       return;
     }
     level waittill("arcademode_decrement_kill_streak");
@@ -562,9 +550,8 @@ get_streak_hud(x, y, width, height) {
 }
 
 arcademode_add_kill_streak_time(timer) {
-  if(!level.arcadeMode_new_kill_streak_allowed) {
+  if(!level.arcadeMode_new_kill_streak_allowed)
     return;
-  }
 
   level notify("arcademode_new_kill_streak_time");
   level endon("arcademode_new_kill_streak_time");
@@ -576,7 +563,7 @@ arcademode_add_kill_streak_time(timer) {
   }
   waittillframeend;
 
-  if(isDefined(level.arcademode_hud_streak)) {
+  if(isdefined(level.arcademode_hud_streak)) {
     level.arcademode_hud_streak fadeovertime(0.05);
     level.arcademode_hud_streak.alpha = 1;
   }
@@ -588,17 +575,15 @@ arcademode_add_kill_streak_time(timer) {
   streak_hud_shadow = level.arcadeMode_streak_hud_shadow;
   width = level.arcademode_kill_streak_ends - gettime();
   width *= 0.001;
-  if(width > max_timer) {
+  if(width > max_timer)
     width = max_timer;
-  }
   width *= width_mult;
   width = int(width);
 
-  if(width > 980) {
+  if(width > 980)
     width = 980;
-  }
 
-  if(!isDefined(streak_hud)) {
+  if(!isdefined(streak_hud)) {
     streak_hud = get_streak_hud(0, 0, width, height);
     streak_hud_shadow = get_streak_hud(3, 3, width, height);
     streak_hud_shadow.sort = streak_hud_shadow.sort - 1;
@@ -624,13 +609,13 @@ arcademode_add_kill_streak_time(timer) {
     wait(timer - drawTimer);
   }
 
-  for(;;) {
+  for (;;) {
     width = level.arcademode_kill_streak_ends - gettime();
     width *= 0.001;
 
     time_remaining = width;
 
-    if(isDefined(level.arcademode_hud_streak)) {
+    if(isdefined(level.arcademode_hud_streak)) {
       // the 2x, 3x, etc fades out as it runs out
       level.arcademode_hud_streak fadeovertime(1);
       level.arcademode_hud_streak.alpha = (time_remaining - 1) / 5;
@@ -638,21 +623,18 @@ arcademode_add_kill_streak_time(timer) {
 
     width *= width_mult;
     width = int(width);
-    if(width <= 0) {
+    if(width <= 0)
       width = 1;
-    }
 
-    if(width > 980) {
+    if(width > 980)
       width = 980;
-    }
 
     streak_hud ScaleOverTime(1, width, height);
     streak_hud_shadow ScaleOverTime(1, width, height);
     wait(1);
 
-    if(width == 1) {
+    if(width == 1)
       break;
-    }
     //		streak_hud ScaleOverTime( drawTimer, 1, height );
     //		streak_hud_shadow ScaleOverTime( drawTimer, 1, height );
   }
@@ -661,9 +643,8 @@ arcademode_add_kill_streak_time(timer) {
 }
 
 arcademode_add_kill_streak() {
-  if(flag("arcadeMode_multiplier_maxed")) {
+  if(flag("arcadeMode_multiplier_maxed"))
     return;
-  }
   level endon("arcadeMode_multiplier_maxed");
   level endon("arcademode_stop_kill_streak");
 
@@ -683,8 +664,8 @@ arcademode_add_kill_streak() {
 
     if(old_mult != level.arcadeMode_kill_streak_current_multiplier) {
       level notify("arcademode_new_kill_streak");
-      // arcademode_2x arcademode_3x arcademode_4x arcademode_5x arcademode_6x arcademode_7x arcademode_8x
-      level.player playSound("arcademode_" + level.arcadeMode_kill_streak_current_multiplier + "x");
+      // arcademode_2x arcademode_3x arcademode_4x arcademode_5x arcademode_6x arcademode_7x arcademode_8x 
+      level.player playsound("arcademode_" + level.arcadeMode_kill_streak_current_multiplier + "x");
       thread arcademode_draw_multiplier();
     }
 
@@ -693,7 +674,7 @@ arcademode_add_kill_streak() {
   }
   level notify("arcademode_new_kill");
 
-  for(;;) {
+  for (;;) {
     if(level.arcadeMode_kills_hud.size < 10) {
       arcademode_add_kill_streak_time(5);
       //			thread arcademode_add_kill( level.arcadeMode_kills_hud.size, 	-46, 10, 	-26, 32, level.arcadeMode_hud_sort );
@@ -707,7 +688,7 @@ streak_timer_color_pulse() {
   waittillframeend; // gotta wait until the hud is definitely defined, in case you go from 0x to 8x in one frame.
   waittillframeend;
   level.arcadeMode_streak_hud endon("death");
-  for(;;) {
+  for (;;) {
     timer = randomfloatrange(0.1, 1.0);
     level.arcadeMode_streak_hud fadeovertime(timer);
     level.arcadeMode_streak_hud.color = (randomfloat(1), randomfloat(1), randomfloat(1));
@@ -717,9 +698,8 @@ streak_timer_color_pulse() {
 
 arcadeMode_multiplier_maxed() {
   waittillframeend; // so that the 8x hud stuff gets drawn
-  if(flag("arcadeMode_multiplier_maxed")) {
+  if(flag("arcadeMode_multiplier_maxed"))
     return;
-  }
   flag_set("arcadeMode_multiplier_maxed");
 
   streak_time = 20;
@@ -738,7 +718,7 @@ arcadeMode_multiplier_maxed() {
   thread arcadeMode_reset_kill_streak();
 
   MusicStop();
-  if(isDefined(level.last_song)) {
+  if(isdefined(level.last_song)) {
     wait(0.05);
     MusicPlay(level.last_song);
   }
@@ -750,12 +730,12 @@ arcademode_update_kills()
 	level.player endon( "death" );
 	
 	level.arcadeMode_lives_hud = [];
-	for( i = 0; i < level.arcadeMode_maxlives; i++ )	
+	for ( i = 0; i < level.arcadeMode_maxlives; i++ )	
 	{
 		arcademode_add_kill( i, 16, -8, -18, 64, level.arcadeMode_hud_sort );
 	}
 
-	for( ;; )
+	for ( ;; )
 	{
 		arcademode_redraw_kills( lives );
 		
@@ -766,11 +746,10 @@ arcademode_update_kills()
 arcademode_redraw_kills()
 {
 	kills = level.arcademode_kills.size;
-	if( kills > 10 ) {
+	if( kills > 10 )
 		kills = 10;
-	}
 		
-	for( i = 0; i < kills; i++ )	
+	for ( i = 0; i < kills; i++ )	
 	{
 		// turn them on up to a certain point
 		level.arcadeMode_kills_hud[ i ].alpha = 1;
@@ -778,15 +757,13 @@ arcademode_redraw_kills()
 		level.arcadeMode_kills_hud[ i ].color = level.color_cool_green;
 	}
 	
-	for( i = kills; i < level.arcadeMode_maxlives; i++ )	
+	for ( i = kills; i < level.arcadeMode_maxlives; i++ )	
 	{
 		// turn the rest off
-		if( i < 0 ) {
+		if( i < 0 )
 			continue;
-		}
-		if( i >= 10 ) {
+		if( i >= 10 )
 			continue;
-		}
 			
 		level.arcadeMode_kills_hud[ i ].alpha = 0;
 		level.arcadeMode_kills_hud[ i ].glowAlpha = 0;
@@ -821,7 +798,7 @@ arcademode_update_score() {
   level.arcademode_hud_digits = 10;
   level.arcademode_hud_scores = [];
 
-  for(i = 0; i < level.arcademode_hud_digits; i++) {
+  for (i = 0; i < level.arcademode_hud_digits; i++) {
     level.arcademode_hud_scores[level.arcademode_hud_scores.size] = get_hud_score();
     level.arcademode_hud_scores[level.arcademode_hud_scores.size - 1].x = i * -30;
   }
@@ -838,17 +815,16 @@ arcademode_update_score() {
   hud_combined_score setvalue( getdvarint( "arcademode_combined_score" ) );
   */
 
-  if(getdvarint("arcademode_full")) {
+  if(getdvarint("arcademode_full"))
     score = getdvarint("arcademode_combined_score");
-  } else {
+  else
     score = getdvarint("arcademode_score");
-  }
 
   hud_draw_score(score);
 
   level.arcadeMode_redraw_score = false;
 
-  for(;;) {
+  for (;;) {
     wait(0.05);
     UpdateScoreElemsOnce();
     if(level.arcadeMode_redraw_score) {
@@ -858,11 +834,10 @@ arcademode_update_score() {
 }
 
 UpdateScoreElemsOnce() {
-  if(getdvarint("arcademode_full")) {
+  if(getdvarint("arcademode_full"))
     hud_update_score("arcadeMode_combined_score");
-  } else {
+  else
     hud_update_score("arcademode_score");
-  }
   //hud_update_score( hud_combined_score, "arcademode_combined_score" );
 }
 
@@ -874,33 +849,29 @@ hud_update_score(score_dvar) {
     return;
   }
 
-  if(level.arcadeMode_ramping_score >= score) {
+  if(level.arcadeMode_ramping_score >= score)
     return;
-  }
 
   // score grew, so increase the displayed score
   difference = score - level.arcadeMode_ramping_score;
   boost = difference * 0.2 + 1;
-  if(difference <= 15) {
+  if(difference <= 15)
     boost = 1;
-  }
   level.arcadeMode_ramping_score += boost;
 
-  if(level.arcadeMode_ramping_score > score) {
+  if(level.arcadeMode_ramping_score > score)
     level.arcadeMode_ramping_score = score;
-  }
   hud_draw_score(int(level.arcadeMode_ramping_score));
 }
 
 get_digits_from_score(score) {
   digits = [];
   score = int(score);
-  for(;;) {
+  for (;;) {
     digits[digits.size] = score % 10;
     score = int(score * 0.1);
-    if(score <= 0) {
+    if(score <= 0)
       break;
-    }
   }
 
   return digits;
@@ -914,16 +885,15 @@ hud_draw_score_for_elements(score, elements) {
   // level.arcademode_hud_scores
   digits = get_digits_from_score(score);
 
-  for(i = 0; i < digits.size; i++) {
-    if(i >= elements.size - 1) {
+  for (i = 0; i < digits.size; i++) {
+    if(i >= elements.size - 1)
       break;
-    }
 
     elements[i] setvalue(digits[i]);
     elements[i].alpha = 1;
   }
 
-  for(i = digits.size; i < elements.size; i++) {
+  for (i = digits.size; i < elements.size; i++) {
     elements[i].alpha = 0;
   }
 
@@ -954,6 +924,7 @@ arcademode_add_life(num, x, y, offset, scale, sort) {
 }
 
 arcadeMode_define_damage_multipliers() {
+
   // multiplier for killing multiple guys with one attack
   /*
   damage_multipliers[ "MOD_MELEE" ] = 20;
@@ -1047,9 +1018,8 @@ arcadeMode_define_damage_multipliers() {
 
   // free points towards your first extra life
   extra_lives_base = [];
-  for(i = 0; i < 4; i++) {
+  for (i = 0; i < 4; i++)
     extra_lives_base[i] = extra_lives_range[i] * 0.15;
-  }
   level.arcadeMode_extra_lives_base = extra_lives_base;
 }
 
@@ -1085,14 +1055,15 @@ new_ending_hud(align, fade_in_time, x_off, y_off) {
   return hud_score;
 }
 
-extra_lives_display(num) {
-  //	level.player thread play_sound_in_space( "arcademode_extralife", level.player getEye() );
 
-  for(i = 0; i < 5; i++) {
+extra_lives_display(num) {
+  //	level.player thread play_sound_in_space( "arcademode_extralife", level.player geteye() );
+
+  for (i = 0; i < 5; i++) {
     thread extra_lives_sizzle();
   }
   extra_lives = new_ending_hud("center", 0.2, 0, -100);
-  // EXTRA LIFE X
+  // EXTRA LIFE X 
   extra_lives.label = (&"SCRIPT_EXTRA_LIFE");
   extra_lives setvalue(num);
   extra_lives SetPulseFX(5, 3000, 1000);
@@ -1111,7 +1082,7 @@ extra_lives_sizzle() {
   extra_lives = new_ending_hud("center", 0.2, 0, -100);
   extra_lives.alpha = randomfloatrange(0.1, 0.45);
   extra_lives.sort -= 1;
-  // EXTRA LIFE X
+  // EXTRA LIFE X 
   extra_lives settext(&"SCRIPT_EXTRA_LIFE");
   extra_lives delaythread(3, ::fade_out, 1);
   extra_lives endon("death");
@@ -1119,7 +1090,7 @@ extra_lives_sizzle() {
   y = extra_lives.y;
   range = 20;
 
-  for(;;) {
+  for (;;) {
     timer = randomfloatrange(0.1, 0.2);
     extra_lives moveovertime(timer);
     extra_lives.x = x + randomfloatrange(range * -1, range);
@@ -1130,20 +1101,17 @@ extra_lives_sizzle() {
 
 round_up_to_five(score) {
   new_score = score - score % 5;
-  if(new_score < score) {
+  if(new_score < score)
     new_score += 5;
-  }
   return new_score;
 }
 
 arcadeMode_add_points(origin, kill, type, value) {
-  if(value <= 0) {
+  if(value <= 0)
     return;
-  }
 
-  if(isDefined(level.arcadeMode_deathtypes[type])) {
+  if(isdefined(level.arcadeMode_deathtypes[type]))
     type = level.arcadeMode_deathtypes[type];
-  }
 
   value = int(value);
   value = round_up_to_five(value);
@@ -1162,9 +1130,8 @@ arcadeMode_add_points(origin, kill, type, value) {
   timer = 3 * 20;
   alpha = 1.5;
   scale = 0.9 + (value - 10) * 0.01;
-  if(scale > 1.4) {
+  if(scale > 1.4)
     scale = 1.4;
-  }
   color = (0.75, 0, 0);
   if(kill) {
     thread arcademode_add_kill_streak();
@@ -1173,7 +1140,7 @@ arcadeMode_add_points(origin, kill, type, value) {
     color = level.arcadeMode_killColors[type];
 
     //		if( gettime() > level.arcadeMode_last_multi_kill_sound )
-    //			level.player thread play_sound_in_space( "arcademode_kill", level.player getEye() );
+    //			level.player thread play_sound_in_space( "arcademode_kill", level.player geteye() );
   }
 
   level.player pointPulse(value);
@@ -1181,9 +1148,8 @@ arcadeMode_add_points(origin, kill, type, value) {
 
 arcademode_add_point_towards_extra_life() {
   level.arcademode_kills_until_next_extra_life -= 1;
-  if(level.arcademode_kills_until_next_extra_life > 0) {
+  if(level.arcademode_kills_until_next_extra_life > 0)
     return;
-  }
 
   //	if( score > level.arcademode_next_extra_life ) // getdvarint( "arcademode_next_extra_life" ) )
 
@@ -1211,18 +1177,16 @@ arcademode_set_origin_in_radius() {
     if(level.player.pointPulseIndex == 1) {
       side = randomint(1);
       level.player.thirdPointPulseSide = 1 - side;
-      if(side) {
+      if(side)
         theta = 45;
-      } else {
+      else
         theta = 135;
-      }
     } else if(level.player.pointPulseIndex == 2) {
       side = level.player.thirdPointPulseSide;
-      if(side) {
+      if(side)
         theta = 45;
-      } else {
+      else
         theta = 135;
-      }
     } else if(level.player.pointPulseIndex <= 4) {
       theta = randomfloatrange(0, 180);
       r = randomfloatrange(60, 120);
@@ -1240,11 +1204,10 @@ arcademode_set_origin_in_radius() {
 }
 
 pointPulse(amount) {
-  if(amount == 0) {
+  if(amount == 0)
     return;
-  }
 
-  if(!isDefined(level.player.pointPulseCount)) {
+  if(!isdefined(level.player.pointPulseCount)) {
     level.player.pointPulseCount = 0;
     level.player.pointPulseIndex = 0;
   }
@@ -1270,14 +1233,14 @@ pointPulse(amount) {
   wait(0.05);
 
   if(amount <= 0) {
-    // string not found for
-    hud_pointpulse.label = &"";
+    // string not found for 
+    hud_pointpulse.label = & "";
     hud_pointpulse.color = (1, 0, 0);
     hud_pointpulse.glowColor = (0, 0, 0);
     hud_pointpulse.glowAlpha = 0;
   } else {
     // +
-    hud_pointpulse.label = &"SCRIPT_PLUS";
+    hud_pointpulse.label = & "SCRIPT_PLUS";
     hud_pointpulse.color = (1, 1, 1);
     hud_pointpulse.glowColor = level.color_cool_green_glow;
     hud_pointpulse.glowAlpha = 1;
@@ -1307,9 +1270,8 @@ pointPulse(amount) {
   wait .5;
 
   level.player.pointPulseCount--;
-  if(level.player.pointPulseCount == 0) {
+  if(level.player.pointPulseCount == 0)
     level.player.pointPulseIndex = 0;
-  }
   hud_pointpulse destroy();
 }
 
@@ -1317,50 +1279,46 @@ set_circular_origin() {
   // get an origin in a circle around the crosshair
 
   base = 50;
-  for(;;) {
+  for (;;) {
     x = randomint(base);
     y = randomint(base);
-    if(distance((0, 0, 0), (x, y, 0)) < base) {
+    if(distance((0, 0, 0), (x, y, 0)) < base)
       break;
-    }
   }
 
-  if(cointoss()) {
+  if(cointoss())
     x *= -1;
-  }
-  if(cointoss()) {
+  if(cointoss())
     y *= -1;
-  }
   self.x = x;
   self.y = y;
 }
 
 arcadeMode_add_points_for_mod(mod) {
   // mod = method of death
-  for(i = 0; i < level.arcadeMode_multiKills[mod].size; i++) {
+  for (i = 0; i < level.arcadeMode_multiKills[mod].size; i++) {
     arcadeMode_add_points_for_individual_kill(level.arcadeMode_multiKills[mod][i], mod, level.arcadeMode_multiKills[mod].size);
   }
 }
 
 arcadeMode_add_points_for_individual_kill(mod_array, mod, kills) {
   // no location bonus for melee
-  if(mod_array["type"] != "melee") {
+  if(mod_array["type"] != "melee")
     base_points = level.arcadeMode_killBase + level.arcadeMode_locationKillBonus[mod_array["damage_location"]] + level.arcadeMode_weaponBonus[mod_array["type"]];
-  } else {
+  else
     base_points = level.arcadeMode_killBase + level.arcadeMode_weaponBonus[mod_array["type"]];
-  }
 
   /*
   if( kills > 1 )
   {
   	// multi kills get a bonus depending on weapon
-  	thread arcadeMode_add_points( mod_array[ "origin" ], true, mod,
+  	thread arcadeMode_add_points( mod_array[ "origin" ], true, mod, 
   	base_points + base_points * kills * level.arcadeMode_weaponMultiplier[ mod_array[ "type" ] ] );
   	
   	if( gettime() > level.arcadeMode_last_multi_kill_sound )
   	{
   		level.arcadeMode_last_multi_kill_sound = gettime();
-  		level.player thread play_sound_in_space( "arcademode_multikill", level.player getEye() );
+  		level.player thread play_sound_in_space( "arcademode_multikill", level.player geteye() );
   	}
 
   	return;
@@ -1371,12 +1329,11 @@ arcadeMode_add_points_for_individual_kill(mod_array, mod, kills) {
 }
 
 player_kill(type, location, point) {
-  if(!isDefined(location)) {
+  if(!isdefined(location))
     location = "none";
-  }
 
   death_type = level.arcadeMode_deathtypes[type];
-  if(!isDefined(death_type)) {
+  if(!isdefined(death_type)) {
     // no location bonus for melee
     base_points = level.arcadeMode_killBase;
     thread arcadeMode_add_points(point, true, "melee", base_points);
@@ -1386,9 +1343,8 @@ player_kill(type, location, point) {
   array["damage_location"] = location;
   array["type"] = death_type;
   array["origin"] = point;
-  if(death_type == "explosive") {
+  if(death_type == "explosive")
     array["origin"] = self.origin;
-  }
 
   level.arcadeMode_multiKills[death_type][level.arcadeMode_multiKills[death_type].size] = array;
 }
@@ -1406,7 +1362,7 @@ end_mission() {
   //setdvar( "ui_victoryquote", "@VICTORYQUOTE_IW_THANKS_FOR_PLAYING" );
 
   // hacky way of getting the player not dead so missionsuccess() works
-  for(i = 0; i < level.players.size; i++) {
+  for (i = 0; i < level.players.size; i++) {
     player = level.players[i];
     player.maxhealth = 0; // allows us to set .health even though it's already <= 0
     player.health = 1;
@@ -1418,7 +1374,7 @@ end_mission() {
 create_total_score_hud(offset, totalScoreYpos) {
   level.arcademode_hud_total_scores = [];
 
-  for(i = 0; i < level.arcademode_hud_digits; i++) {
+  for (i = 0; i < level.arcademode_hud_digits; i++) {
     hud_score = get_hud_score();
     level.arcademode_hud_total_scores[level.arcademode_hud_total_scores.size] = hud_score;
 
@@ -1438,9 +1394,8 @@ set_total_score_hud(score) {
 }
 
 arcadeMode_ends() {
-  if(flag("arcademode_complete")) {
+  if(flag("arcademode_complete"))
     return;
-  }
   flag_set("arcademode_complete");
   slowmo_setlerptime_out(.05);
   slowmo_lerp_out();
@@ -1448,13 +1403,12 @@ arcadeMode_ends() {
 
   if(level.arcadeMode_success) {
     // get your lives if you complete the level, in case there is no checkpoint at the end of the level
-    if(arcademode_convert_extra_lives()) {
+    if(arcademode_convert_extra_lives())
       wait(2);
-    }
   }
 
   stop_time = 0;
-  if(isDefined(level.arcademode_stoptime)) {
+  if(isdefined(level.arcademode_stoptime)) {
     // the amount of time that the timer was stopped, at the end of the level
     stop_time = gettime() - level.arcademode_stoptime;
     stop_time *= 0.001;
@@ -1466,9 +1420,8 @@ arcadeMode_ends() {
 
   timer = level.arcademode_time - time_elapsed;
   timer = int(timer);
-  if(timer == 0) {
+  if(timer == 0)
     timer++;
-  }
   assertex(timer >= 0, "Finished a level in arcademode with no time remaining");
 
   fade_time = 0.5;
@@ -1501,22 +1454,21 @@ arcadeMode_ends() {
 
   wait 1.0;
 
-  for(i = 0; i < level.arcadeMode_maxlives; i++) {
+  for (i = 0; i < level.arcadeMode_maxlives; i++) {
     level.arcadeMode_lives_hud[i] destroy();
   }
 
   offset = 130;
 
   level.arcadeMode_lives_hud = [];
-  for(i = 0; i < level.arcadeMode_maxlives; i++) {
+  for (i = 0; i < level.arcadeMode_maxlives; i++) {
     arcademode_add_life(i, -135 + offset, livesYpos, -30, 96, level.arcadeMode_hud_sort + 10);
   }
 
   lives = getdvarint("arcademode_lives");
   rewarded_lives = level.arcademode_rewarded_lives;
-  if(lives > rewarded_lives) {
+  if(lives > rewarded_lives)
     lives = rewarded_lives;
-  }
 
   arcademode_redraw_lives(lives); // lives
 
@@ -1539,7 +1491,7 @@ arcadeMode_ends() {
   // MISSION SCORE:
   hud_mission_score settext(&"SCRIPT_MISSION_SCORE");
 
-  for(i = 0; i < level.arcademode_hud_digits; i++) {
+  for (i = 0; i < level.arcademode_hud_digits; i++) {
     hud_score = level.arcademode_hud_scores[i];
     hud_score.x = i * -30 + -150 + offset;
     hud_score.y = missionScoreYpos;
@@ -1558,7 +1510,7 @@ arcadeMode_ends() {
   minutes = 0;
   seconds = 0;
 
-  while(timer >= 60) {
+  while (timer >= 60) {
     minutes++;
     timer -= 60;
   }
@@ -1589,18 +1541,16 @@ arcadeMode_ends() {
   base_score = combined_score;
 
   soundCount = 0;
-  for(;;) {
+  for (;;) {
     difference = final_score - score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15) {
+    if(difference <= 15)
       boost = 1;
-    }
     boost = int(boost);
     score += boost;
 
-    if(score > final_score) {
+    if(score > final_score)
       score = final_score;
-    }
 
     hud_draw_score(score);
 
@@ -1616,13 +1566,12 @@ arcadeMode_ends() {
     }
     */
 
-    if(score == final_score) {
+    if(score == final_score)
       break;
-    }
 
     soundCount--;
     if(soundCount <= 0) {
-      level.player thread play_sound_in_space("bullet_ap_dirt", level.player getEye());
+      level.player thread play_sound_in_space("bullet_ap_dirt", level.player geteye());
 
       soundCount = 3;
     }
@@ -1649,11 +1598,10 @@ arcadeMode_ends() {
     start_combined_score = combined_score;
     finish_combined_score = combined_score + final_time_bonus;
 
-    for(i = 1; i <= time_bonus_iterations; i++) {
+    for (i = 1; i <= time_bonus_iterations; i++) {
       bonus_fraction = (i * 1.0 / time_bonus_iterations);
-      if(i == time_bonus_iterations) {
+      if(i == time_bonus_iterations)
         bonus_fraction = 1;
-      }
 
       score = int(start_score * (1 - bonus_fraction) + finish_score * bonus_fraction);
 
@@ -1671,21 +1619,22 @@ arcadeMode_ends() {
 
       soundCount--;
       if(soundCount <= 0) {
-        level.player thread play_sound_in_space("bullet_ap_metal", level.player getEye());
+        level.player thread play_sound_in_space("bullet_ap_metal", level.player geteye());
         soundCount = 3;
       }
       wait(0.05);
     }
     ending_set_time(0, 0);
 
+    /#
     assert(score == finish_score);
-    if(getdvar("arcademode_full") == "1") {
+    if(getdvar("arcademode_full") == "1")
       assert(combined_score == finish_combined_score);
-    }
+    # /
 
-    wait(1);
+      wait(1);
 
-    for(;;) {
+    for (;;) {
       mult = 1;
       if(lives > 10) {
         remainder = lives % 10;
@@ -1695,15 +1644,13 @@ arcadeMode_ends() {
           mult = remainder;
         }
 
-        if(lives < 20) {
+        if(lives < 20)
           mult = remainder;
-        }
       }
 
       lives -= mult;
-      if(lives < 0) {
+      if(lives < 0)
         break;
-      }
 
       // life bonus, to discourage dying exploits			
       life_bonus = 1000;
@@ -1717,7 +1664,7 @@ arcadeMode_ends() {
       }
 
       score += boost;
-      level.player thread play_sound_in_space("mortar_explosion", level.player getEye());
+      level.player thread play_sound_in_space("mortar_explosion", level.player geteye());
 
       hud_draw_score(int(score));
       //			hud_score setvalue( int( score ) );
@@ -1731,7 +1678,7 @@ arcadeMode_ends() {
     if(getdvarint("arcademode_died") != 1 && level.gameskill >= 2) {
       boost = int(score);
       // ZERO DEATHS BONUS x2
-      arcademode_end_boost(score, combined_score, boost, &"SCRIPT_ZERO_DEATHS", "bullet_ap_bark", scoreBoostYpos, fade_in_time);
+      arcademode_end_boost(score, combined_score, boost, & "SCRIPT_ZERO_DEATHS", "bullet_ap_bark", scoreBoostYpos, fade_in_time);
       score += boost;
       combined_score += boost;
     }
@@ -1754,14 +1701,14 @@ arcadeMode_ends() {
   if(skillmult > 1) {
     if(skillmult == 1.5) {
       // DIFFICULTY BONUS x1.5
-      string = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
+      string = & "SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
     } else if(skillmult == 3) {
       // DIFFICULTY BONUS x3
-      string = &"SCRIPT_DIFFICULTY_BONUS_THREE";
+      string = & "SCRIPT_DIFFICULTY_BONUS_THREE";
     } else {
       assert(skillmult == 4);
       // DIFFICULTY BONUS x4
-      string = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
+      string = & "SCRIPT_DIFFICULTY_BONUS_FOUR";
     }
     boost = int(ceil(score * skillmult) - score);
     arcademode_end_boost(score, combined_score, boost, string, "bullet_ap_glass", scoreBoostYpos, fade_in_time);
@@ -1786,16 +1733,13 @@ arcadeMode_ends() {
       setdvar(dvar, score_string);
 
       finished = false;
-      if(!level.arcadeMode_success) {
+      if(!level.arcadeMode_success)
         finished = true;
-      }
-      if(level.script == "airplane") {
+      if(level.script == "airplane")
         finished = true;
-      }
 
-      if(finished) {
+      if(finished)
         gotNewHighScore = true;
-      }
     }
     level.player UploadScore("LB_FULL", getdvarint(dvar));
   } else {
@@ -1860,65 +1804,64 @@ arcadeMode_ends() {
   // we've already saved it
 
   if(gotNewHighScore) {
-    if(!level.arcadeMode_success) // otherwise, UpdateGamerProfile() will be called from _endmission::_nextmission() {
+    if(!level.arcadeMode_success) // otherwise, UpdateGamerProfile() will be called from _endmission::_nextmission()
       UpdateGamerProfile();
+
+    wait(1);
+
+    hud_newhighscore = new_ending_hud("center", fade_in_time, 0, scoreBoostYPos);
+    // NEW HIGH SCORE!
+    hud_newhighscore settext(&"SCRIPT_NEW_HIGH_SCORE");
+    hud_newhighscore.alpha = 1;
+    hud_newhighscore fadeovertime(0.05);
+    hud_newhighscore SetPulseFX(30, 3000, 1000);
+    wait(3.5);
+  }
+
+  wait(2);
+
+  hud_end_reason SetPulseFX(0, 0, 1000);
+  wait(0.5);
+
+  hud_mission_score SetPulseFX(0, 0, 1000);
+  for (i = 0; i < level.arcademode_hud_digits; i++) {
+    hud_score = level.arcademode_hud_scores[i];
+    hud_score SetPulseFX(0, 0, 1000);
+  }
+
+  if(getdvar("arcademode_full") == "1") {
+    hud_total_score SetPulseFX(0, 0, 1000);
+    for (i = 0; i < level.arcademode_hud_digits; i++) {
+      hud_score = level.arcademode_hud_total_scores[i];
+      hud_score SetPulseFX(0, 0, 1000);
+    }
+  }
+
+  if(level.arcadeMode_success) {
+    wait(0.5);
+    level.arcademode_hud_timer_seconds_ones SetPulseFX(0, 0, 1000);
+    level.arcademode_hud_timer_seconds_tens SetPulseFX(0, 0, 1000);
+    level.arcademode_hud_timer_minutes_ones SetPulseFX(0, 0, 1000);
+    level.arcademode_hud_timer_minutes_tens SetPulseFX(0, 0, 1000);
+    hud_timer_colon SetPulseFX(0, 0, 1000);
+    hud_time_remaining SetPulseFX(0, 0, 1000);
   }
 
   wait(1);
-
-  hud_newhighscore = new_ending_hud("center", fade_in_time, 0, scoreBoostYPos);
-  // NEW HIGH SCORE!
-  hud_newhighscore settext(&"SCRIPT_NEW_HIGH_SCORE");
-  hud_newhighscore.alpha = 1;
-  hud_newhighscore fadeovertime(0.05);
-  hud_newhighscore SetPulseFX(30, 3000, 1000);
-  wait(3.5);
-}
-
-wait(2);
-
-hud_end_reason SetPulseFX(0, 0, 1000);
-wait(0.5);
-
-hud_mission_score SetPulseFX(0, 0, 1000);
-for(i = 0; i < level.arcademode_hud_digits; i++) {
-  hud_score = level.arcademode_hud_scores[i];
-  hud_score SetPulseFX(0, 0, 1000);
-}
-
-if(getdvar("arcademode_full") == "1") {
-  hud_total_score SetPulseFX(0, 0, 1000);
-  for(i = 0; i < level.arcademode_hud_digits; i++) {
-    hud_score = level.arcademode_hud_total_scores[i];
-    hud_score SetPulseFX(0, 0, 1000);
+  if(getdvar("arcademode_full") == "1") {
+    logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + combined_score);
+  } else {
+    logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill);
   }
-}
 
-if(level.arcadeMode_success) {
-  wait(0.5);
-  level.arcademode_hud_timer_seconds_ones SetPulseFX(0, 0, 1000);
-  level.arcademode_hud_timer_seconds_tens SetPulseFX(0, 0, 1000);
-  level.arcademode_hud_timer_minutes_ones SetPulseFX(0, 0, 1000);
-  level.arcademode_hud_timer_minutes_tens SetPulseFX(0, 0, 1000);
-  hud_timer_colon SetPulseFX(0, 0, 1000);
-  hud_time_remaining SetPulseFX(0, 0, 1000);
-}
+  setdvar("arcademode_combined_score", combined_score);
+  if(!level.arcadeMode_success) {
+    setdvar("ui_arcade_lost", 1);
+    end_mission();
+  } else
+    setdvar("ui_arcade_lost", 0);
 
-wait(1);
-if(getdvar("arcademode_full") == "1") {
-  logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + combined_score);
-} else {
-  logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill);
-}
-
-setdvar("arcademode_combined_score", combined_score);
-if(!level.arcadeMode_success) {
-  setdvar("ui_arcade_lost", 1);
-  end_mission();
-} else
-  setdvar("ui_arcade_lost", 0);
-
-flag_set("arcademode_ending_complete");
+  flag_set("arcademode_ending_complete");
 }
 
 arcademode_end_boost(score, combined_score, boost, string, sound, ypos, fade_in_time) {
@@ -1934,38 +1877,34 @@ arcademode_end_boost(score, combined_score, boost, string, sound, ypos, fade_in_
 
   final_score = score + boost;
   final_combined_score = combined_score + boost;
-  for(;;) {
+  for (;;) {
     difference = final_score - score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15) {
+    if(difference <= 15)
       boost = 1;
-    }
     boost = int(boost);
     score += boost;
 
-    if(score > final_score) {
+    if(score > final_score)
       score = final_score;
-    }
 
     //		hud_score setvalue( score );
     hud_draw_score(score);
 
     if(getdvar("arcademode_full") == "1") {
       combined_score += boost;
-      if(combined_score > final_combined_score) {
+      if(combined_score > final_combined_score)
         combined_score = final_combined_score;
-      }
       //			hud_total_score_points setvalue( combined_score );
       set_total_score_hud(combined_score);
     }
 
-    if(score == final_score) {
+    if(score == final_score)
       break;
-    }
 
     soundCount--;
     if(soundCount <= 0) {
-      level.player thread play_sound_in_space(sound, level.player getEye());
+      level.player thread play_sound_in_space(sound, level.player geteye());
 
       soundCount = 3;
     }
@@ -1993,14 +1932,13 @@ black_background(fade_time) {
   overlay.sort = level.arcadeMode_hud_sort + 5;
   overlay.alpha = 0;
 
-  if(fade_time > 0) {
+  if(fade_time > 0)
     overlay fadeovertime(fade_time);
-  }
   overlay.alpha = 1;
 }
 
 player_invul_forever() {
-  for(;;) {
+  for (;;) {
     level.player EnableInvulnerability();
     level.player.deathInvulnerableTime = 70000;
     level.player.ignoreme = true;
@@ -2014,12 +1952,12 @@ ending_set_time(minutes, seconds) {
   minutes_tens = 0;
   seconds_tens = 0;
 
-  while(minutes >= 10) {
+  while (minutes >= 10) {
     minutes_tens++;
     minutes -= 10;
   }
 
-  while(seconds >= 10) {
+  while (seconds >= 10) {
     seconds_tens++;
     seconds -= 10;
   }
@@ -2047,10 +1985,9 @@ draw_checkpoint(start_offset, movetime, mult) {
 }
 
 arcademode_checkpoint_getid(unique_id) {
-  for(i = 0; i < level.arcadeMode_checkpoint_dvars.size; i++) {
-    if(level.arcadeMode_checkpoint_dvars[i] == unique_id) {
+  for (i = 0; i < level.arcadeMode_checkpoint_dvars.size; i++) {
+    if(level.arcadeMode_checkpoint_dvars[i] == unique_id)
       return i;
-    }
   }
 
   return undefined;
@@ -2069,7 +2006,7 @@ arcadeMode_init_kill_streak_colors() {
   level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 0.5); // 5
   level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0); // 8
 
-  for(i = 0; i < level.arcadeMode_streak_color.size; i++) {
+  for (i = 0; i < level.arcadeMode_streak_color.size; i++) {
     level.arcadeMode_streak_glow[i] = (level.arcadeMode_streak_color[i][0] * 0.35, level.arcadeMode_streak_color[i][1] * 0.35, level.arcadeMode_streak_color[i][2] * 0.35);
   }
 
@@ -2078,24 +2015,22 @@ arcadeMode_init_kill_streak_colors() {
 }
 
 arcadeMode_killstreak_complete_display() {
-  if(level.arcadeMode_kill_streak_current_multiplier == 1) {
+  if(level.arcadeMode_kill_streak_current_multiplier == 1)
     return;
-  }
 
-  if(flag("arcademode_complete")) {
+  if(flag("arcademode_complete"))
     return;
-  }
 
   kill_streak = new_ending_hud("right", 0.2, -10, -57);
   kill_streak SetPulseFX(5, 3000, 1000);
   kill_streak.fontScale = 2;
 
   if(level.arcadeMode_kill_streak_current_multiplier >= 8) {
-    level.player thread play_sound_in_space("arcademode_kill_streak_won", level.player getEye());
+    level.player thread play_sound_in_space("arcademode_kill_streak_won", level.player geteye());
     // -STREAK COMPLETE-
     kill_streak settext(&"SCRIPT_STREAK_COMPLETE");
   } else {
-    level.player thread play_sound_in_space("arcademode_kill_streak_lost", level.player getEye());
+    level.player thread play_sound_in_space("arcademode_kill_streak_lost", level.player geteye());
     // STREAK BONUS LOST
     kill_streak settext(&"SCRIPT_STREAK_BONUS_LOST");
   }
@@ -2105,14 +2040,14 @@ arcadeMode_killstreak_complete_display() {
 }
 
 arcadeMode_reset_kill_streak_art() {
-  if(isDefined(level.arcadeMode_streak_hud)) {
+  if(isdefined(level.arcadeMode_streak_hud)) {
     level.arcadeMode_streak_hud destroy();
     level.arcadeMode_streak_hud = undefined;
     level.arcadeMode_streak_hud_shadow destroy();
   }
 
   level notify("arcademode_stop_kill_streak_art");
-  for(i = 0; i < level.arcadeMode_kills_hud.size; i++) {
+  for (i = 0; i < level.arcadeMode_kills_hud.size; i++) {
     level.arcadeMode_kills_hud[i] destroy();
   }
   level.arcadeMode_kills_hud = [];
@@ -2151,7 +2086,7 @@ get_hud_multi() {
   hud_mult.sort = level.arcadeMode_hud_sort;
 
   // x
-  hud_mult.label = &"SCRIPT_X";
+  hud_mult.label = & "SCRIPT_X";
   hud_mult setvalue(level.arcadeMode_kill_streak_current_multiplier);
   hud_mult changeFontScaleOverTime(0.5);
   hud_mult.fontscale = 3;
@@ -2164,7 +2099,7 @@ get_hud_multi() {
 }
 
 arcademode_draw_multiplier() {
-  for(i = 0; i < 40; i++) {
+  for (i = 0; i < 40; i++) {
     hud_sizzle = get_hud_multi();
     hud_sizzle thread arcademode_draw_mult_sizzle();
   }
@@ -2202,7 +2137,7 @@ arcademode_draw_multiplier_kill() {
 
 get_score_string_from_digits(digits) {
   msg = "";
-  for(i = 0; i < digits.size; i++) {
+  for (i = 0; i < digits.size; i++) {
     msg = digits[i] + msg;
   }
   return msg;

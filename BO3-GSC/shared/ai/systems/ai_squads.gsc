@@ -16,16 +16,19 @@ class squad {
   var squadmembers;
   var squadbreadcrumb;
 
+
   constructor() {
     squadleader = 0;
     squadmembers = [];
     squadbreadcrumb = [];
   }
 
+
   destructor() {}
 
+
   function think() {
-    if(isint(squadleader) && squadleader == 0 || !isDefined(squadleader)) {
+    if(isint(squadleader) && squadleader == 0 || !isdefined(squadleader)) {
       if(squadmembers.size > 0) {
         squadleader = squadmembers[0];
         squadbreadcrumb = squadleader.origin;
@@ -36,6 +39,7 @@ class squad {
     return true;
   }
 
+
   function removeaifromsqaud(ai) {
     if(isinarray(squadmembers, ai)) {
       arrayremovevalue(squadmembers, ai, 0);
@@ -44,6 +48,7 @@ class squad {
       }
     }
   }
+
 
   function addaitosquad(ai) {
     if(!isinarray(squadmembers, ai)) {
@@ -54,17 +59,21 @@ class squad {
     }
   }
 
+
   function getmembers() {
     return squadmembers;
   }
+
 
   function getleader() {
     return squadleader;
   }
 
+
   function getsquadbreadcrumb() {
     return squadbreadcrumb;
   }
+
 
   function addsquadbreadcrumbs(ai) {
     assert(squadleader == ai);
@@ -79,13 +88,13 @@ class squad {
 #namespace aisquads;
 
 function autoexec __init__sytem__() {
-  system::register("ai_squads", &__init__, undefined, undefined);
+  system::register("ai_squads", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level._squads = [];
   actorspawnerarray = getactorspawnerteamarray("axis");
-  array::run_all(actorspawnerarray, &spawner::add_spawn_function, &squadmemberthink);
+  array::run_all(actorspawnerarray, & spawner::add_spawn_function, & squadmemberthink);
 }
 
 function private createsquad(squadname) {
@@ -94,7 +103,7 @@ function private createsquad(squadname) {
 }
 
 function private removesquad(squadname) {
-  if(isDefined(level._squads) && isDefined(level._squads[squadname])) {
+  if(isdefined(level._squads) && isdefined(level._squads[squadname])) {
     level._squads[squadname] = undefined;
   }
 }
@@ -104,7 +113,7 @@ function private getsquad(squadname) {
 }
 
 function private thinksquad(squadname) {
-  while(true) {
+  while (true) {
     if([
         [level._squads[squadname]]
       ] - > think()) {
@@ -118,40 +127,44 @@ function private thinksquad(squadname) {
 
 function private squadmemberdeath() {
   self waittill("death");
-  if(isDefined(self.squadname) && isDefined(level._squads[self.squadname])) {
-    [[level._squads[self.squadname]]] - > removeaifromsqaud(self);
+  if(isdefined(self.squadname) && isdefined(level._squads[self.squadname])) {
+    [
+      [level._squads[self.squadname]]
+    ] - > removeaifromsqaud(self);
   }
 }
 
 function private squadmemberthink() {
   self endon("death");
-  if(!isDefined(self.script_aisquadname)) {
+  if(!isdefined(self.script_aisquadname)) {
     return;
   }
   wait(0.5);
   self.squadname = self.script_aisquadname;
-  if(isDefined(self.squadname)) {
-    if(!isDefined(level._squads[self.squadname])) {
+  if(isdefined(self.squadname)) {
+    if(!isdefined(level._squads[self.squadname])) {
       squad = createsquad(self.squadname);
       newsquadcreated = 1;
     } else {
       squad = getsquad(self.squadname);
     }
-    [[squad]] - > addaitosquad(self);
+    [
+      [squad]
+    ] - > addaitosquad(self);
     self thread squadmemberdeath();
-    if(isDefined(newsquadcreated) && newsquadcreated) {
+    if(isdefined(newsquadcreated) && newsquadcreated) {
       level thread thinksquad(self.squadname);
     }
-    while(true) {
+    while (true) {
       squadleader = [
         [level._squads[self.squadname]]
       ] - > getleader();
-      if(isDefined(squadleader) && (!(isint(squadleader) && squadleader == 0))) {
+      if(isdefined(squadleader) && (!(isint(squadleader) && squadleader == 0))) {
         if(squadleader == self) {
           recordenttext(self.squadname + "", self, (0, 1, 0), "");
           recordenttext(self.squadname + "", self, (0, 1, 0), "");
           recordcircle(self.origin, 300, (1, 0.5, 0), "", self);
-          if(isDefined(self.enemy)) {
+          if(isdefined(self.enemy)) {
             self setgoal(self.enemy);
           }
           [
@@ -164,12 +177,12 @@ function private squadmemberthink() {
             [squad]
           ] - > getsquadbreadcrumb();
           followdistsq = distance2dsquared(self.goalpos, followposition);
-          if(isDefined(squadleader.enemy)) {
-            if(!isDefined(self.enemy) || (isDefined(self.enemy) && self.enemy != squadleader.enemy)) {
+          if(isdefined(squadleader.enemy)) {
+            if(!isdefined(self.enemy) || (isdefined(self.enemy) && self.enemy != squadleader.enemy)) {
               self setentitytarget(squadleader.enemy, 1);
             }
           }
-          if(isDefined(self.goalpos) && followdistsq >= 256) {
+          if(isdefined(self.goalpos) && followdistsq >= 256) {
             if(followdistsq >= 22500) {
               self ai::set_behavior_attribute("sprint", 1);
             } else {
@@ -190,7 +203,7 @@ function isfollowingsquadleader(ai) {
   }
   squadmember = issquadmember(ai);
   currentsquadleader = getsquadleader(ai);
-  isaisquadleader = isDefined(currentsquadleader) && currentsquadleader == ai;
+  isaisquadleader = isdefined(currentsquadleader) && currentsquadleader == ai;
   if(squadmember && !isaisquadleader) {
     return true;
   }
@@ -198,9 +211,9 @@ function isfollowingsquadleader(ai) {
 }
 
 function issquadmember(ai) {
-  if(isDefined(ai.squadname)) {
+  if(isdefined(ai.squadname)) {
     squad = getsquad(ai.squadname);
-    if(isDefined(squad)) {
+    if(isdefined(squad)) {
       return isinarray([
         [squad]
       ] - > getmembers(), ai);
@@ -210,22 +223,22 @@ function issquadmember(ai) {
 }
 
 function issquadleader(ai) {
-  if(isDefined(ai.squadname)) {
+  if(isdefined(ai.squadname)) {
     squad = getsquad(ai.squadname);
-    if(isDefined(squad)) {
+    if(isdefined(squad)) {
       squadleader = [
         [squad]
       ] - > getleader();
-      return isDefined(squadleader) && squadleader == ai;
+      return isdefined(squadleader) && squadleader == ai;
     }
   }
   return 0;
 }
 
 function getsquadleader(ai) {
-  if(isDefined(ai.squadname)) {
+  if(isdefined(ai.squadname)) {
     squad = getsquad(ai.squadname);
-    if(isDefined(squad)) {
+    if(isdefined(squad)) {
       return [
         [squad]
       ] - > getleader();

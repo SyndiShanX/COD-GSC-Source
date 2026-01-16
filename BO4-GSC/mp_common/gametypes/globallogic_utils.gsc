@@ -14,6 +14,7 @@
 #include scripts\mp_common\gametypes\hostmigration;
 #include scripts\mp_common\gametypes\hud_message;
 #include scripts\mp_common\gametypes\round;
+
 #namespace globallogic_utils;
 
 is_winner(outcome, team_or_player) {
@@ -33,7 +34,7 @@ is_winner(outcome, team_or_player) {
 }
 
 testshock() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   for(;;) {
     wait 3;
@@ -48,7 +49,7 @@ testshock() {
 }
 
 testhps() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   hps = [];
   hps[hps.size] = "radar";
   hps[hps.size] = "artillery";
@@ -125,15 +126,15 @@ getvalueinrange(value, minvalue, maxvalue) {
 }
 
 assertproperplacement() {
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   if(level.teambased) {
     for(i = 0; i < numplayers - 1; i++) {
-      if(level.placement[# "all"][i].score < level.placement[# "all"][i + 1].score) {
+      if(level.placement[#"all"][i].score < level.placement[#"all"][i + 1].score) {
         println("<dev string:x38>");
 
         for(j = 0; j < numplayers; j++) {
-          player = level.placement[# "all"][j];
+          player = level.placement[#"all"][j];
           println("<dev string:x4d>" + j + "<dev string:x52>" + player.name + "<dev string:x57>" + player.score);
         }
 
@@ -146,11 +147,11 @@ assertproperplacement() {
   }
 
   for(i = 0; i < numplayers - 1; i++) {
-    if(level.placement[# "all"][i].pointstowin < level.placement[# "all"][i + 1].pointstowin) {
+    if(level.placement[#"all"][i].pointstowin < level.placement[#"all"][i + 1].pointstowin) {
       println("<dev string:x38>");
 
       for(j = 0; j < numplayers; j++) {
-        player = level.placement[# "all"][j];
+        player = level.placement[#"all"][j];
         println("<dev string:x4d>" + j + "<dev string:x52>" + player.name + "<dev string:x57>" + player.pointstowin);
       }
 
@@ -160,12 +161,12 @@ assertproperplacement() {
   }
 }
 
-function isvalidclass(c) {
-  return isDefined(c) && c != "";
-}
+  function isvalidclass(c) {
+    return isDefined(c) && c != "";
+  }
 
 playtickingsound(gametype_tick_sound) {
-  self endon(#"death", # "stop_ticking");
+  self endon(#"death", #"stop_ticking");
   level endon(#"game_ended");
   time = level.bombtimer;
 
@@ -225,7 +226,7 @@ gametimer() {
 
 disableplayerroundstartdelay() {
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
 
   if(getroundstartdelay()) {
     wait getroundstartdelay();
@@ -245,7 +246,7 @@ getroundstartdelay() {
 }
 
 applyroundstartdelay() {
-  self endon(#"disconnect", # "joined_spectators", # "death");
+  self endon(#"disconnect", #"joined_spectators", #"death");
 
   if(game.state == "pregame") {
     level waittill(#"game_playing");
@@ -371,10 +372,10 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
   }
 
   switch (smeansofdeath) {
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
-    case # "mod_impact":
+    case #"mod_impact":
       baseweapon = weapons::getbaseweapon(weapon);
 
       if(!weapon.isballisticknife && baseweapon != level.weaponspecialcrossbow && baseweapon != level.weaponflechette) {
@@ -395,29 +396,29 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
 
 gethitlocheight(shitloc) {
   switch (shitloc) {
-    case # "head":
-    case # "helmet":
-    case # "neck":
+    case #"head":
+    case #"helmet":
+    case #"neck":
       return 60;
-    case # "left_arm_lower":
-    case # "left_arm_upper":
-    case # "torso_upper":
-    case # "right_arm_lower":
-    case # "left_hand":
-    case # "right_arm_upper":
-    case # "gun":
-    case # "right_hand":
+    case #"left_arm_lower":
+    case #"left_arm_upper":
+    case #"torso_upper":
+    case #"right_arm_lower":
+    case #"left_hand":
+    case #"right_arm_upper":
+    case #"gun":
+    case #"right_hand":
       return 48;
-    case # "torso_lower":
+    case #"torso_lower":
       return 40;
-    case # "right_leg_upper":
-    case # "left_leg_upper":
+    case #"right_leg_upper":
+    case #"left_leg_upper":
       return 32;
-    case # "left_leg_lower":
-    case # "right_leg_lower":
+    case #"left_leg_lower":
+    case #"right_leg_lower":
       return 10;
-    case # "left_foot":
-    case # "right_foot":
+    case #"left_foot":
+    case #"right_foot":
       return 5;
   }
 
@@ -431,19 +432,19 @@ debugline(start, end) {
   }
 }
 
-function isexcluded(entity, entitylist) {
-  if(!isarray(entitylist)) {
-    return (entity == entitylist);
-  }
-
-  for(index = 0; index < entitylist.size; index++) {
-    if(entity == entitylist[index]) {
-      return true;
+  function isexcluded(entity, entitylist) {
+    if(!isarray(entitylist)) {
+      return (entity == entitylist);
     }
-  }
 
-  return false;
-}
+    for(index = 0; index < entitylist.size; index++) {
+      if(entity == entitylist[index]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
 function_4aa8d809(index, string) {
   level.var_336c35f1[index] = string;
@@ -468,22 +469,23 @@ function_8d61a6c2(var_c1e98979) {
   }
 
   foreach(team, str_team in level.teams) {
-    log_string = log_string + "<dev string:xa9>" + str_team + "<dev string:x57>" + game.stat[# "teamscores"][team];
+    log_string = log_string + "<dev string:xa9>" + str_team + "<dev string:x57>" + game.stat[#"teamscores"][team];
   }
 
   print(log_string);
 }
 
-function add_map_error(msg) {
-  if(!isDefined(level.maperrors)) {
-    level.maperrors = [];
-  }
+  function add_map_error(msg) {
+    if(!isDefined(level.maperrors)) {
+      level.maperrors = [];
+    }
 
-  level.maperrors[level.maperrors.size] = msg;
-}
+    level.maperrors[level.maperrors.size] = msg;
+  }
 
 print_map_errors() {
   if(isDefined(level.maperrors) && level.maperrors.size > 0) {
+
     println("<dev string:xae>");
 
     for(i = 0; i < level.maperrors.size; i++) {
@@ -493,7 +495,7 @@ print_map_errors() {
     println("<dev string:xe1>");
     util::error("<dev string:x10a>");
 
-    callback::abort_level();
+      callback::abort_level();
     return true;
   }
 

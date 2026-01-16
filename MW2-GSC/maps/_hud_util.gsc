@@ -8,22 +8,19 @@
 #include common_scripts\utility;
 
 setParent(element) {
-  if(isDefined(self.parent) && self.parent == element) {
+  if(isDefined(self.parent) && self.parent == element)
     return;
-  }
 
-  if(isDefined(self.parent)) {
+  if(isDefined(self.parent))
     self.parent removeChild(self);
-  }
 
   self.parent = element;
   self.parent addChild(self);
 
-  if(isDefined(self.point)) {
+  if(isDefined(self.point))
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  } else {
+  else
     self setPoint("TOPLEFT");
-  }
 }
 
 getParent() {
@@ -48,24 +45,20 @@ removeChild(element) {
 }
 
 setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
-  if(!isDefined(moveTime)) {
+  if(!isDefined(moveTime))
     moveTime = 0;
-  }
 
   element = self getParent();
 
-  if(moveTime) {
+  if(moveTime)
     self moveOverTime(moveTime);
-  }
 
-  if(!isDefined(xOffset)) {
+  if(!isDefined(xOffset))
     xOffset = 0;
-  }
   self.xOffset = xOffset;
 
-  if(!isDefined(yOffset)) {
+  if(!isDefined(yOffset))
     yOffset = 0;
-  }
   self.yOffset = yOffset;
 
   self.point = point;
@@ -73,40 +66,31 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
   self.alignX = "center";
   self.alignY = "middle";
 
-  if(isSubStr(point, "TOP")) {
+  if(isSubStr(point, "TOP"))
     self.alignY = "top";
-  }
-  if(isSubStr(point, "BOTTOM")) {
+  if(isSubStr(point, "BOTTOM"))
     self.alignY = "bottom";
-  }
-  if(isSubStr(point, "LEFT")) {
+  if(isSubStr(point, "LEFT"))
     self.alignX = "left";
-  }
-  if(isSubStr(point, "RIGHT")) {
+  if(isSubStr(point, "RIGHT"))
     self.alignX = "right";
-  }
 
-  if(!isDefined(relativePoint)) {
+  if(!isDefined(relativePoint))
     relativePoint = point;
-  }
 
   self.relativePoint = relativePoint;
 
   relativeX = "center";
   relativeY = "middle";
 
-  if(isSubStr(relativePoint, "TOP")) {
+  if(isSubStr(relativePoint, "TOP"))
     relativeY = "top";
-  }
-  if(isSubStr(relativePoint, "BOTTOM")) {
+  if(isSubStr(relativePoint, "BOTTOM"))
     relativeY = "bottom";
-  }
-  if(isSubStr(relativePoint, "LEFT")) {
+  if(isSubStr(relativePoint, "LEFT"))
     relativeX = "left";
-  }
-  if(isSubStr(relativePoint, "RIGHT")) {
+  if(isSubStr(relativePoint, "RIGHT"))
     relativeX = "right";
-  }
 
   if(element == level.uiParent) {
     self.horzAlign = relativeX;
@@ -121,18 +105,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     xFactor = 0;
   } else if(relativeX == "center" || element.alignX == "center") {
     offsetX = int(element.width / 2);
-    if(relativeX == "left" || element.alignX == "right") {
+    if(relativeX == "left" || element.alignX == "right")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   } else {
     offsetX = element.width;
-    if(relativeX == "left") {
+    if(relativeX == "left")
       xFactor = -1;
-    } else {
+    else
       xFactor = 1;
-    }
   }
   self.x = element.x + (offsetX * xFactor);
 
@@ -141,18 +123,16 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     yFactor = 0;
   } else if(relativeY == "middle" || element.alignY == "middle") {
     offsetY = int(element.height / 2);
-    if(relativeY == "top" || element.alignY == "bottom") {
+    if(relativeY == "top" || element.alignY == "bottom")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   } else {
     offsetY = element.height;
-    if(relativeY == "top") {
+    if(relativeY == "top")
       yFactor = -1;
-    } else {
+    else
       yFactor = 1;
-    }
   }
   self.y = element.y + (offsetY * yFactor);
 
@@ -176,13 +156,12 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.alignY = self.alignY;
   self.bar.y = self.y;
 
-  if(self.alignX == "left") {
+  if(self.alignX == "left")
     self.bar.x = self.x + self.padding;
-  } else if(self.alignX == "right") {
+  else if(self.alignX == "right")
     self.bar.x = self.x - (self.width - self.padding);
-  } else {
+  else
     self.bar.x = self.x - int((self.width - self.padding) / 2);
-  }
 
   self updateBar(self.bar.frac);
 }
@@ -190,9 +169,8 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
 updateBar(barFrac) {
   barWidth = int((self.width - (self.padding * 2)) * barFrac);
 
-  if(!barWidth) {
+  if(!barWidth)
     barWidth = 1;
-  }
 
   self.bar.frac = barFrac;
   self.bar setShader(self.bar.shader, barWidth, self.height - (self.padding * 2));
@@ -336,29 +314,24 @@ createIcon_Hudelem(iconElem, shader, width, height) {
   iconElem.children = [];
   iconElem setParent(level.uiParent);
 
-  if(isDefined(shader)) {
+  if(isDefined(shader))
     iconElem setShader(shader, width, height);
-  }
 
   return iconElem;
 }
 
 createBar(shader, bgshader, width, height, flashFrac) {
-  if(!isDefined(shader)) {
+  if(!isdefined(shader))
     shader = "white";
-  }
 
-  if(!isDefined(bgshader)) {
+  if(!isdefined(bgshader))
     bgshader = "black";
-  }
 
-  if(!isDefined(width)) {
+  if(!isdefined(width))
     width = 100;
-  }
 
-  if(!isDefined(height)) {
+  if(!isdefined(height))
     height = 9;
-  }
 
   barElem = newHudElem();
   barElem.x = 0 + 2;
@@ -392,13 +365,11 @@ createBar(shader, bgshader, width, height, flashFrac) {
 }
 
 createClientProgressBar(player, offset) {
-  if(!isDefined(player)) {
+  if(!isdefined(player))
     player = level.player;
-  }
 
-  if(!isDefined(offset)) {
+  if(!isdefined(offset))
     offset = 90;
-  }
 
   bar = player createClientBar("white", "black", 100, 9);
   bar setPoint("CENTER", undefined, 0, offset);
@@ -466,7 +437,7 @@ flashThread() {
   self endon("death");
 
   self.alpha = 1;
-  while(1) {
+  while (1) {
     if(self.frac >= self.flashFrac) {
       self fadeOverTime(0.3);
       self.alpha = .2;
@@ -484,17 +455,14 @@ flashThread() {
 destroyElem() {
   tempChildren = [];
 
-  for(index = 0; index < self.children.size; index++) {
+  for (index = 0; index < self.children.size; index++)
     tempChildren[index] = self.children[index];
-  }
 
-  for(index = 0; index < tempChildren.size; index++) {
+  for (index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
-  }
 
-  if(self.elemType == "bar") {
+  if(self.elemType == "bar")
     self.bar destroy();
-  }
 
   self destroy();
 }
@@ -517,7 +485,7 @@ setSize(width, height) {
 }
 
 updateChildren() {
-  for(index = 0; index < self.children.size; index++) {
+  for (index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setPoint(child.point, child.relativePoint, child.xOffset, child.yOffset);
   }
@@ -525,28 +493,26 @@ updateChildren() {
 
 /*
 	thread stance_carry_icon_enable( bool );
-	Diasables all stance icons and replaces with an icon of
+	Diasables all stance icons and replaces with an icon of 
 	a person carrying another person on his back. True/false
 */
 stance_carry_icon_enable(bool) {
-  if(isDefined(bool) && bool == false) {
+  if(isdefined(bool) && bool == false) {
     stance_carry_icon_disable();
     return;
   }
 
-  if(isDefined(level.stance_carry)) {
+  if(isDefined(level.stance_carry))
     level.stance_carry destroy();
-  }
 
   SetSavedDvar("hud_showStance", "0");
 
   level.stance_carry = newHudElem();
   level.stance_carry.x = 100;
-  if(level.console) {
+  if(level.console)
     level.stance_carry.y = 20;
-  } else {
+  else
     level.stance_carry.y = 10;
-  }
   level.stance_carry setshader("stance_carry", 64, 64);
   level.stance_carry.alignX = "left";
   level.stance_carry.alignY = "bottom";
@@ -609,33 +575,28 @@ create_mantle() {
 }
 
 get_countdown_hud(x, y, player, forceXPos) {
-  if(!isDefined(forceXPos)) {
+  if(!isdefined(forceXPos))
     forceXPos = false;
-  }
   xPos = undefined;
-  if(!level.Console) {
+  if(!level.Console)
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  } else if(!isDefined(x)) {
+  else if(!isdefined(x))
     xPos = -225;
-  } else {
+  else
     xPos = x;
-  }
 
-  if(forceXPos) {
+  if(forceXPos)
     xPos = x;
-  }
 
-  if(!isDefined(y)) {
+  if(!isdefined(y))
     yPos = 100;
-  } else {
+  else
     yPos = y;
-  }
 
-  if(isDefined(player)) {
+  if(isdefined(player))
     hudelem = newClientHudElem(player);
-  } else {
+  else
     hudelem = newHudElem();
-  }
 
   hudelem.alignX = "left";
   hudelem.alignY = "middle";
@@ -655,34 +616,29 @@ get_countdown_hud(x, y, player, forceXPos) {
 }
 
 get_download_state_hud(x, y, player, forceXPos) {
-  if(!isDefined(forceXPos)) {
+  if(!isdefined(forceXPos))
     forceXPos = false;
-  }
 
   xPos = undefined;
-  if(!level.Console) {
+  if(!level.Console)
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  } else if(!isDefined(x)) {
+  else if(!isdefined(x))
     xPos = -170;
-  } else {
+  else
     xPos = x;
-  }
 
-  if(forceXPos) {
+  if(forceXPos)
     xPos = x;
-  }
 
-  if(!isDefined(y)) {
+  if(!isdefined(y))
     yPos = 100;
-  } else {
+  else
     yPos = y;
-  }
 
-  if(isDefined(player)) {
+  if(isdefined(player))
     hudelem = newClientHudElem(player);
-  } else {
+  else
     hudelem = newHudElem();
-  }
 
   hudelem.alignX = "right";
   hudelem.alignY = "middle";
@@ -716,11 +672,10 @@ get_download_state_hud(x, y, player, forceXPos) {
 =============
 */
 create_client_overlay(shader_name, start_alpha, player) {
-  if(isDefined(player)) {
+  if(isdefined(player))
     overlay = newClientHudElem(player);
-  } else {
+  else
     overlay = newHudElem();
-  }
   overlay.x = 0;
   overlay.y = 0;
   overlay setshader(shader_name, 640, 480);

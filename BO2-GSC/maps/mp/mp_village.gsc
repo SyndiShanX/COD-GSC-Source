@@ -21,12 +21,11 @@ main() {
   precachemodel("collision_clip_64x64x10");
   precachemodel("afr_corrugated_metal8x8");
   precachemodel("p6_pak_old_plywood");
-  destructibles = getEntArray("destructible", "targetname");
+  destructibles = getentarray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
-    if(destructible.destructibledef == "dest_propanetank_01") {
+    if(destructible.destructibledef == "dest_propanetank_01")
       destructible thread death_sound_think();
-    }
   }
 
   foreach(destructible in destructibles) {
@@ -39,11 +38,11 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_village_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_village");
-  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -64,16 +63,16 @@ main() {
   spawncollision("collision_physics_32x32x32", "collider", (-1335.5, -1676, 196), (0, 0, 0));
   metalsheet1 = spawn("script_model", (-1487, 1156, 10));
   metalsheet1.angles = vectorscale((0, 0, -1), 90.0);
-  metalsheet1 setModel("afr_corrugated_metal8x8");
+  metalsheet1 setmodel("afr_corrugated_metal8x8");
   metalsheet1 = spawn("script_model", (-1487, 1252, 10));
   metalsheet1.angles = vectorscale((0, 0, -1), 90.0);
-  metalsheet1 setModel("afr_corrugated_metal8x8");
+  metalsheet1 setmodel("afr_corrugated_metal8x8");
   metalsheet1 = spawn("script_model", (-1487, 1348, 10));
   metalsheet1.angles = vectorscale((0, 0, -1), 90.0);
-  metalsheet1 setModel("afr_corrugated_metal8x8");
+  metalsheet1 setmodel("afr_corrugated_metal8x8");
   metalsheet1 = spawn("script_model", (-1487, 1444, 10));
   metalsheet1.angles = vectorscale((0, 0, -1), 90.0);
-  metalsheet1 setModel("afr_corrugated_metal8x8");
+  metalsheet1 setmodel("afr_corrugated_metal8x8");
   spawncollision("collision_physics_32x32x32", "collider", (1095, 1482, 31), (0, 0, 0));
   spawncollision("collision_physics_32x32x32", "collider", (1095, 1519, 31), (0, 0, 0));
   spawncollision("collision_physics_32x32x32", "collider", (1054, 1552, 68), (0, 0, 0));
@@ -108,10 +107,10 @@ main() {
   spawncollision("collision_clip_64x64x10", "collider", (-94.7516, 1383.63, 135.54), (0, 0, 0));
   board1 = spawn("script_model", (-633.5, 646.2, 22.45));
   board1.angles = (0, 195.6, 90);
-  board1 setModel("p6_pak_old_plywood");
+  board1 setmodel("p6_pak_old_plywood");
   board2 = spawn("script_model", (-627.66, 646.19, 22.45));
   board2.angles = (0, 184.4, 90);
-  board2 setModel("p6_pak_old_plywood");
+  board2 setmodel("p6_pak_old_plywood");
 }
 
 levelspawndvars(reset_dvars) {
@@ -121,7 +120,7 @@ levelspawndvars(reset_dvars) {
 
 death_sound_think() {
   self waittill("destructible_base_piece_death");
-  self playSound("exp_barrel");
+  self playsound("exp_barrel");
 }
 
 spawnkilltrigger() {

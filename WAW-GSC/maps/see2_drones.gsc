@@ -39,7 +39,7 @@ custom_level_run_cycles() {
 }
 
 wait_for_kill_trigger(areaNum) {
-  while(1) {
+  while (1) {
     self waittill("trigger", guy);
     if(isPlayer(guy)) {
       break;
@@ -49,7 +49,7 @@ wait_for_kill_trigger(areaNum) {
 }
 
 wait_for_master_trigger(areaNum) {
-  while(1) {
+  while (1) {
     self waittill("trigger", guy);
     if(isPlayer(guy)) {
       break;
@@ -61,7 +61,7 @@ wait_for_master_trigger(areaNum) {
 start_drone_waves() {
   level.trigger_arrays = [];
   level.valid = [];
-  for(i = 1; i <= level.num_drone_areas; i++) {
+  for (i = 1; i <= level.num_drone_areas; i++) {
     level thread do_random_explosions(i);
     level thread do_random_smoke(i);
     master_trigger = getEnt("area " + i + " master drone trigger", "script_noteworthy");
@@ -77,21 +77,21 @@ start_drone_waves() {
   }
   min_time_between_waves = 1;
   max_time_between_waves = 4;
-  for(i = 1; i < level.num_drone_areas; i++) {
-    for(j = 0; j < level.trigger_arrays[i].size; j++) {
+  for (i = 1; i < level.num_drone_areas; i++) {
+    for (j = 0; j < level.trigger_arrays[i].size; j++) {
       level.trigger_arrays[i][j].cooldown_timer = 0;
       level.trigger_arrays[i][j] thread do_cooldown();
     }
   }
-  while(1) {
+  while (1) {
     players = get_players();
-    for(k = 1; k <= level.num_drone_areas; k++) {
+    for (k = 1; k <= level.num_drone_areas; k++) {
       if(!level.valid[k]) {
         continue;
       }
       loop_size = level.trigger_arrays[k].size;
       loop_size = level.trigger_arrays[k].size - 2;
-      for(m = 0; m < loop_size; m++) {
+      for (m = 0; m < loop_size; m++) {
         level.trigger_arrays[k][m] notify("trigger");
         wait_network_frame();
       }
@@ -102,7 +102,7 @@ start_drone_waves() {
 
 do_cooldown() {
   self endon("kill drones");
-  while(1) {
+  while (1) {
     if(isDefined(self.cooldown_timer) && self.cooldown_timer > 0) {
       self.cooldown_timer -= 0.05;
     }
@@ -116,7 +116,7 @@ find_best_drone_triggers(num) {
   worst_dist = 0;
   worst_trigger = undefined;
   return_array = [];
-  for(i = 0; i < level.drone_triggers.size; i++) {
+  for (i = 0; i < level.drone_triggers.size; i++) {
     if(!isDefined(level.drone_triggers[i].cooldown_timer) || level.drone_triggers[i].cooldown_timer <= 0) {
       dist = distanceSquared(level.drone_triggers[i].origin, level.centroid);
       if(dist < best_dist) {
@@ -145,7 +145,7 @@ find_best_drone_triggers(num) {
 get_worst_drone_trigger(array) {
   worst_dist = 0;
   worst_trigger = undefined;
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     dist = distanceSquared(array[i].origin, level.centroid) > worst_dist;
     if(dist) {
       worst_dist = dist;
@@ -157,12 +157,12 @@ get_worst_drone_trigger(array) {
 
 remove_drone_triggers(remove_id) {
   remove_list = [];
-  for(i = 0; i < level.drone_triggers.size; i++) {
+  for (i = 0; i < level.drone_triggers.size; i++) {
     if(level.drone_triggers[i].script_string == remove_id) {
       remove_list = array_add(remove_list, level.drone_triggers[i]);
     }
   }
-  for(j = 0; j < remove_list.size; j++) {
+  for (j = 0; j < remove_list.size; j++) {
     level.drone_triggers = array_remove(level.drone_triggers, remove_list[j]);
     remove_list[j] notify("kill drones");
     remove_list[j] delete();
@@ -172,7 +172,7 @@ remove_drone_triggers(remove_id) {
 do_random_explosions(wave) {
   level endon("stop wave " + wave);
   exploder_array = getEntArray("exploder wave" + wave, "script_noteworthy");
-  while(1) {
+  while (1) {
     if(!isDefined(exploder_array) || exploder_array.size < 1) {
       break;
     }
@@ -183,9 +183,9 @@ do_random_explosions(wave) {
     }
     rand = randomint(exploder_array.size - 1);
     if(exploder_array[rand].targetname == "dirt_exploder") {
-      playFX(level._effect["dirt_exploder"], exploder_array[rand].origin);
+      playfx(level._effect["dirt_exploder"], exploder_array[rand].origin);
     } else {
-      playFX(level._effect["water_exploder"], exploder_array[rand].origin);
+      playfx(level._effect["water_exploder"], exploder_array[rand].origin);
     }
     radiusDamage(exploder_array[rand].origin, 500, 500, 500);
   }
@@ -193,7 +193,7 @@ do_random_explosions(wave) {
 
 do_random_smoke(wave) {
   smoke_array = getEntArray("smoke wave" + wave, "script_noteworthy");
-  for(i = 0; i < smoke_array.size; i++) {
+  for (i = 0; i < smoke_array.size; i++) {
     smoke_array[i] thread do_smoke_at_intervals(wave);
   }
 }
@@ -201,9 +201,9 @@ do_random_smoke(wave) {
 do_smoke_at_intervals(wave) {
   level endon("stop wave " + wave);
   wait(randomintrange(1, 22));
-  while(1) {
+  while (1) {
     if(level.valid[wave]) {
-      playFX(level._effect["drone_smoke"], self.origin);
+      playfx(level._effect["drone_smoke"], self.origin);
     }
     rand = randomintrange(25, 30);
     wait(rand);
@@ -211,15 +211,15 @@ do_smoke_at_intervals(wave) {
 }
 
 do_dummy_vehicles(wave, model, maxTimeBeforeDestroy, minSpeed, maxSpeed, staggerAmt) {
-  level.vehicle_starts = getEntArray("wave" + wave + " tank start", "script_noteworthy");
+  level.vehicle_starts = GetEntArray("wave" + wave + " tank start", "script_noteworthy");
   level.valid_path = [];
-  for(i = 0; i < level.vehicle_starts.size; i++) {
+  for (i = 0; i < level.vehicle_starts.size; i++) {
     level.valid_path = array_add(level.valid_path, true);
     thread do_single_dummy_vehicle(i, model, maxTimeBeforeDestroy, minSpeed, maxSpeed, staggerAmt);
     wait_network_frame();
   }
-  level.static_vehicles = getEntArray("wave" + wave + " dummy tank", "script_noteworthy");
-  for(i = 0; i < level.static_vehicles.size; i++) {
+  level.static_vehicles = GetEntArray("wave" + wave + " dummy tank", "script_noteworthy");
+  for (i = 0; i < level.static_vehicles.size; i++) {
     level.static_vehicles[i] thread do_single_static_dummy_vehicle(model, maxTimeBeforeDestroy);
     wait_network_frame();
   }
@@ -231,9 +231,9 @@ do_single_static_dummy_vehicle(model, maxTimeBeforeDestroy) {
   myModel setModel(model);
   myModel.angles = self.angles;
   self thread wait_for_destroy(maxTimeBeforeDestroy, myModel);
-  while(1) {
+  while (1) {
     wait(randomint(6, 10));
-    playFXOnTag(level._effect["dummy_tank_fire"], myModel, "tag_flash");
+    playfxontag(level._effect["dummy_tank_fire"], myModel, "tag_flash");
   }
 }
 
@@ -242,7 +242,7 @@ wait_for_destroy(maxTimeBeforeDestroy, model) {
     maxTimeBeforeDestroy = 60;
   }
   wait(randomfloat(59, maxTimeBeforeDestroy));
-  playFX(level._effect["dummy_tank_explode"], model.origin);
+  playfx(level._effect["dummy_tank_explode"], model.origin);
   model setModel(model.model + "_dmg");
   self notify("destroy dummy vehicle");
 }
@@ -265,7 +265,7 @@ do_single_dummy_vehicle(pathnum, model, maxTimeBeforeDestroy, minSpeed, maxSpeed
   myModel play_vehicle_anim("tank_scan_straight");
   myModel thread do_fake_firing();
   self thread run_timer(time);
-  while(level.valid_path[pathnum]) {
+  while (level.valid_path[pathnum]) {
     if(isDefined(fromNode.target)) {
       toNode = GetEnt(fromNode.target, "targetname");
       if(isDefined(fromNode.script_string)) {
@@ -317,8 +317,8 @@ play_vehicle_anim(anime) {
 }
 
 do_fake_firing() {
-  while(isDefined(self)) {
-    playFXOnTag(level._effect["dummy_tank_fire"], self, "tag_flash");
+  while (isDefined(self)) {
+    playfxontag(level._effect["dummy_tank_fire"], self, "tag_flash");
     wait(randomint(6, 10));
   }
 }
@@ -326,7 +326,7 @@ do_fake_firing() {
 destroyDummyVehicle(pathnum, model, origin) {}
 smoothOrient(max_dev_per_frame) {
   self endon("stop lerping");
-  while(1) {
+  while (1) {
     if(self.angles == self.goalAngles) {
       wait(0.05);
       continue;
@@ -338,7 +338,7 @@ smoothOrient(max_dev_per_frame) {
       normAngles = (normAngles[0], normAngles[1], normAngles[2]);
       diff2 = normGoalAngles - normAngles;
       finalDiff = [];
-      for(i = 0; i < 3; i++) {
+      for (i = 0; i < 3; i++) {
         if(abs(diff1[i]) < abs(diff2[i])) {
           finalDiff = array_add(finalDiff, diff1[i]);
         } else {
@@ -383,7 +383,7 @@ lerpToPos(goalPos, speed, maxTime) {
   toVec = goalPos - self.origin;
   toVec = vectorNormalize(toVec);
   time = 0;
-  while(1) {
+  while (1) {
     scaled_move = (toVec[0] * speed * 0.05, toVec[1] * speed * 0.05, toVec[2] * speed * 0.05);
     self.origin += scaled_move;
     self.origin = groundpos(self.origin + (0, 0, 100));
@@ -416,7 +416,7 @@ run_timer(time) {
 
 angle_normalize180(angles) {
   retAngles = [];
-  for(i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
     scaledAngle = angles[i] * (1.0 / 360.0);
     if((scaledAngle + 0.5) > 1) {
       floor = 1;
@@ -456,7 +456,7 @@ see2_drone_death() {
   damage_type = self;
   damage_ori = self;
   death_index = 0;
-  while(isDefined(drone)) {
+  while (isDefined(drone)) {
     drone waittill("damage", amount, attacker, damage_dir, damage_ori, damage_type);
     if(drone.health <= 0) {
       break;
@@ -511,7 +511,7 @@ see2_drone_death() {
   drone stopAnimScripted();
   if(isDefined(drone.special_death_fx)) {
     drone.special_death_fx = "drone_burst";
-    playFXOnTag(level._effect[drone.special_death_fx], drone, "J_SpineLower");
+    PlayFXOnTag(level._effect[drone.special_death_fx], drone, "J_SpineLower");
   }
   drone.need_notetrack = true;
   drone maps\_drone::drone_play_anim(level.drone_anims["stand"]["death"][death_index]);
@@ -526,13 +526,13 @@ add_me_to_the_death_queue() {
 init_drone_manager() {
   MAX_DEAD_DRONES = 10;
   level.drone_death_queue = [];
-  while(1) {
+  while (1) {
     level waittill("drone_manager_process");
     if(level.drone_death_queue.size > MAX_DEAD_DRONES) {
-      while(level.drone_death_queue.size > MAX_DEAD_DRONES) {
+      while (level.drone_death_queue.size > MAX_DEAD_DRONES) {
         removed_guy = level.drone_death_queue[0];
         new_drone_queue = [];
-        for(i = 1; i < (level.drone_death_queue.size); i++) {
+        for (i = 1; i < (level.drone_death_queue.size); i++) {
           new_drone_queue[i - 1] = level.drone_death_queue[i];
         }
         if(isDefined(removed_guy)) {
@@ -555,11 +555,11 @@ torch_ai(delay) {
   tagArray[tagArray.size] = "J_Ankle_RI";
   tagArray[tagArray.size] = "J_Ankle_LE";
   tagArray = maps\_utility::array_randomize(tagArray);
-  for(i = 0; i < 3; i++) {
-    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[i]);
+  for (i = 0; i < 3; i++) {
+    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[i]);
     if(isDefined(delay)) {
       wait(delay);
     }
   }
-  playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }

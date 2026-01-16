@@ -48,6 +48,7 @@ class cpickupitem: cbaseinteractable {
   var a_carry_threads;
   var a_drop_funcs;
 
+
   constructor() {
     m_n_respawn_time = 1;
     m_n_respawn_rounds = 0;
@@ -61,21 +62,25 @@ class cpickupitem: cbaseinteractable {
     m_n_drop_offset = 0;
     m_iscarryable = 1;
     a_carry_threads = [];
-    a_carry_threads[0] = &carry_pickupitem;
+    a_carry_threads[0] = & carry_pickupitem;
     a_drop_funcs = [];
-    a_drop_funcs[0] = &drop_pickupitem;
+    a_drop_funcs[0] = & drop_pickupitem;
   }
 
+
   destructor() {}
+
 
   function drop_pickupitem(e_triggerer) {
     pickupitem_spawn(e_triggerer.origin, e_triggerer.angles);
   }
 
+
   function carry_pickupitem(e_triggerer) {
     m_e_model delete();
     m_e_body_trigger setinvisibletoall();
   }
+
 
   function pickupitem_respawn_delay() {
     if(m_n_respawn_rounds > 0) {} else if(m_n_respawn_time > 0) {
@@ -83,19 +88,22 @@ class cpickupitem: cbaseinteractable {
     }
   }
 
+
   function pickupitem_despawn() {
     self notify("respawn_pickupitem");
   }
 
+
   function debug_despawn_timer() {
     self endon("cancel_despawn");
     n_time_remaining = m_n_despawn_wait;
-    while(n_time_remaining >= 0 && isDefined(m_e_model)) {
+    while (n_time_remaining >= 0 && isdefined(m_e_model)) {
       print3d(m_e_model.origin + vectorscale((0, 0, 1), 15), n_time_remaining, (1, 0, 0), 1, 1, 20);
       wait(1);
       n_time_remaining = n_time_remaining - 1;
     }
   }
+
 
   function pickupitem_despawn_timer() {
     self endon("cancel_despawn");
@@ -104,7 +112,7 @@ class cpickupitem: cbaseinteractable {
     }
     self thread debug_despawn_timer();
     wait(m_n_despawn_wait);
-    if(isDefined(m_custom_despawn_func)) {
+    if(isdefined(m_custom_despawn_func)) {
       [
         [m_custom_despawn_func]
       ]();
@@ -113,16 +121,17 @@ class cpickupitem: cbaseinteractable {
     }
   }
 
+
   function pickupitem_spawn(v_pos, v_angles) {
-    if(!isDefined(m_e_model)) {
+    if(!isdefined(m_e_model)) {
       m_e_model = util::spawn_model(m_str_modelname, v_pos + (0, 0, m_n_drop_offset), v_angles);
       m_e_model notsolid();
-      if(isDefined(m_fx_glow)) {
-        playFXOnTag(m_fx_glow, m_e_model, "tag_origin");
+      if(isdefined(m_fx_glow)) {
+        playfxontag(m_fx_glow, m_e_model, "tag_origin");
       }
     }
     m_str_pickup_hintstring = ("Press and hold ^3[{+activate}]^7 to pick up ") + m_str_itemname;
-    if(!isDefined(m_e_body_trigger)) {
+    if(!isdefined(m_e_body_trigger)) {
       e_trigger = cbaseinteractable::spawn_body_trigger(v_pos);
       cbaseinteractable::set_body_trigger(e_trigger);
     }
@@ -132,7 +141,7 @@ class cpickupitem: cbaseinteractable {
     m_e_body_trigger notify("upgrade_trigger_enable", 1);
     m_e_body_trigger sethintstring(m_str_pickup_hintstring);
     m_e_body_trigger.str_itemname = m_str_itemname;
-    if(!isDefined(m_e_body_trigger.targetname)) {
+    if(!isdefined(m_e_body_trigger.targetname)) {
       m_str_targetname = "";
       m_a_str_targetname = strtok(tolower(m_str_itemname), " ");
       foreach(n_index, m_str_targetname_piece in m_a_str_targetname) {
@@ -148,10 +157,13 @@ class cpickupitem: cbaseinteractable {
     }
   }
 
+
   function respawn_loop(v_pos, v_angles) {
-    while(true) {
-      if(isDefined(m_custom_spawn_func)) {
-        [[m_custom_spawn_func]](v_pos, v_angles);
+    while (true) {
+      if(isdefined(m_custom_spawn_func)) {
+        [
+          [m_custom_spawn_func]
+        ](v_pos, v_angles);
       } else {
         m_str_holding_hintstring = ("Press ^3[{+usereload}]^7 to drop ") + m_str_itemname;
         pickupitem_spawn(v_pos, v_angles);
@@ -161,22 +173,25 @@ class cpickupitem: cbaseinteractable {
     }
   }
 
+
   function spawn_at_position(v_pos, v_angles) {
     respawn_loop(v_pos, v_angles);
   }
 
+
   function spawn_at_struct(str_struct) {
-    if(!isDefined(str_struct.angles)) {
+    if(!isdefined(str_struct.angles)) {
       str_struct.angles = (0, 0, 0);
     }
     respawn_loop(str_struct.origin, str_struct.angles);
   }
 
+
   function get_model() {
-    if(isDefined(m_e_carry_model)) {
+    if(isdefined(m_e_carry_model)) {
       return m_e_carry_model;
     }
-    if(isDefined(m_e_model)) {
+    if(isdefined(m_e_model)) {
       return m_e_model;
     }
     return undefined;
@@ -209,6 +224,7 @@ class cbaseinteractable {
   var m_isfunctional;
   var m_ishackable;
 
+
   constructor() {
     m_isfunctional = 1;
     m_ishackable = 0;
@@ -217,26 +233,29 @@ class cbaseinteractable {
     m_n_body_trigger_height = 128;
     m_n_repair_radius = 72;
     m_n_repair_height = 128;
-    m_repair_complete_func = &repair_completed;
+    m_repair_complete_func = & repair_completed;
     m_str_itemname = "Item";
   }
 
+
   destructor() {}
 
+
   function spawn_interact_trigger(v_origin, n_radius, n_height, str_hint) {
-    assert(isDefined(v_origin), "");
-    assert(isDefined(n_radius), "");
-    assert(isDefined(n_height), "");
+    assert(isdefined(v_origin), "");
+    assert(isdefined(n_radius), "");
+    assert(isdefined(n_height), "");
     e_trigger = spawn("trigger_radius", v_origin, 0, n_radius, n_height);
     e_trigger triggerignoreteam();
     e_trigger setvisibletoall();
     e_trigger setteamfortrigger("none");
     e_trigger setcursorhint("HINT_NOICON");
-    if(isDefined(str_hint)) {
+    if(isdefined(str_hint)) {
       e_trigger sethintstring(str_hint);
     }
     return e_trigger;
   }
+
 
   function spawn_body_trigger(v_origin) {
     e_trigger = spawn_interact_trigger(v_origin, m_n_body_trigger_radius, m_n_body_trigger_height, "");
@@ -244,26 +263,30 @@ class cbaseinteractable {
     return e_trigger;
   }
 
+
   function spawn_repair_trigger(v_origin) {
     e_repair_trigger = spawn_interact_trigger(v_origin, m_n_repair_radius, m_n_repair_height, "Bring Toolbox to repair");
     return e_repair_trigger;
   }
 
+
   function drop_on_death(e_triggerer) {
     self notify("drop_on_death");
     self endon("drop_on_death");
     e_triggerer util::waittill_any("player_downed", "death");
-    if(isDefined(m_e_player_currently_holding)) {
+    if(isdefined(m_e_player_currently_holding)) {
       drop(e_triggerer);
     }
   }
 
+
   function _wait_for_button_release() {
     self endon("player_downed");
-    while(self usebuttonpressed()) {
+    while (self usebuttonpressed()) {
       wait(0.05);
     }
   }
+
 
   function wait_for_button_release() {
     self endon("death_or_disconnect");
@@ -272,42 +295,48 @@ class cbaseinteractable {
     self.disable_object_pickup = undefined;
   }
 
+
   function destroy() {
-    if(isDefined(m_e_player_currently_holding)) {
+    if(isdefined(m_e_player_currently_holding)) {
       restore_player_controls_from_carry(m_e_player_currently_holding);
       m_e_player_currently_holding util::screen_message_delete_client();
     }
-    if(isDefined(m_e_carry_model)) {
+    if(isdefined(m_e_carry_model)) {
       m_e_carry_model delete();
     }
     m_e_player_currently_holding = undefined;
   }
 
+
   function remove(e_triggerer) {
     restore_player_controls_from_carry(e_triggerer);
     e_triggerer util::screen_message_delete_client();
-    if(isDefined(m_e_carry_model)) {
+    if(isdefined(m_e_carry_model)) {
       m_e_carry_model delete();
     }
     m_e_player_currently_holding = undefined;
     self notify("respawn_pickupitem");
   }
 
+
   function drop(e_triggerer) {
     restore_player_controls_from_carry(e_triggerer);
     e_triggerer util::screen_message_delete_client();
-    if(isDefined(m_e_carry_model)) {
+    if(isdefined(m_e_carry_model)) {
       m_e_carry_model delete();
     }
-    if(isDefined(a_drop_funcs)) {
+    if(isdefined(a_drop_funcs)) {
       foreach(drop_func in a_drop_funcs) {
-        [[drop_func]](e_triggerer);
+        [
+          [drop_func]
+        ](e_triggerer);
       }
     }
     m_e_player_currently_holding = undefined;
     self thread thread_allow_carry();
     e_triggerer thread wait_for_button_release();
   }
+
 
   function restore_player_controls_from_carry(e_triggerer) {
     e_triggerer endon("death");
@@ -321,18 +350,19 @@ class cbaseinteractable {
     e_triggerer allowjump(1);
   }
 
+
   function show_carry_model(e_triggerer) {
     e_triggerer endon("restore_player_controls_from_carry");
     e_triggerer endon("death");
     e_triggerer endon("player_downed");
-    v_eye_origin = e_triggerer getEye();
+    v_eye_origin = e_triggerer geteye();
     v_player_angles = e_triggerer getplayerangles();
     v_player_angles = v_player_angles + m_v_holding_offset_angle;
-    v_player_angles = anglesToForward(v_player_angles);
+    v_player_angles = anglestoforward(v_player_angles);
     v_angles = e_triggerer.angles + m_v_holding_angle;
     v_origin = v_eye_origin + (v_player_angles * m_n_holding_distance);
-    if(!isDefined(m_str_carry_model)) {
-      if(isDefined(m_str_modelname)) {
+    if(!isdefined(m_str_carry_model)) {
+      if(isdefined(m_str_modelname)) {
         m_str_carry_model = m_str_modelname;
       } else {
         m_str_carry_model = "script_origin";
@@ -340,53 +370,59 @@ class cbaseinteractable {
     }
     m_e_carry_model = util::spawn_model(m_str_carry_model, v_origin, v_angles);
     m_e_carry_model notsolid();
-    while(isDefined(m_e_carry_model)) {
-      v_eye_origin = e_triggerer getEye();
+    while (isdefined(m_e_carry_model)) {
+      v_eye_origin = e_triggerer geteye();
       v_player_angles = e_triggerer getplayerangles();
       v_player_angles = v_player_angles + m_v_holding_offset_angle;
-      v_player_angles = anglesToForward(v_player_angles);
+      v_player_angles = anglestoforward(v_player_angles);
       m_e_carry_model.angles = e_triggerer.angles + m_v_holding_angle;
       m_e_carry_model.origin = v_eye_origin + (v_player_angles * m_n_holding_distance);
       wait(0.05);
     }
   }
 
+
   function thread_allow_drop(e_triggerer) {
     e_triggerer endon("restore_player_controls_from_carry");
     e_triggerer endon("death");
     e_triggerer endon("player_downed");
     self thread drop_on_death(e_triggerer);
-    while(e_triggerer usebuttonpressed()) {
+    while (e_triggerer usebuttonpressed()) {
       wait(0.05);
     }
-    while(!e_triggerer usebuttonpressed()) {
+    while (!e_triggerer usebuttonpressed()) {
       wait(0.05);
     }
     self thread drop(e_triggerer);
   }
+
 
   function flash_drop_prompt_stop(player) {
     player notify("stop_flashing_drop_prompt");
     player util::screen_message_delete_client();
   }
 
+
   function flash_drop_prompt(player) {
     self endon("death");
     player endon("death");
     player endon("stop_flashing_drop_prompt");
-    while(true) {
+    while (true) {
       player util::screen_message_create_client(get_drop_prompt(), undefined, undefined, 0, 0.35);
       wait(0.35);
     }
   }
 
+
   function show_drop_prompt(player) {
     player util::screen_message_create_client(get_drop_prompt());
   }
 
+
   function get_drop_prompt() {
     return ("Press ^3[{+usereload}]^7 to drop ") + m_str_itemname;
   }
+
 
   function carry(e_triggerer) {
     e_triggerer endon("death");
@@ -397,7 +433,7 @@ class cbaseinteractable {
     self notify("cancel_despawn");
     e_triggerer disableweapons();
     wait(0.5);
-    if(isDefined(a_carry_threads)) {
+    if(isdefined(a_carry_threads)) {
       foreach(carry_thread in a_carry_threads) {
         self thread[[carry_thread]](e_triggerer);
       }
@@ -409,35 +445,38 @@ class cbaseinteractable {
     self thread thread_allow_drop(e_triggerer);
   }
 
+
   function thread_allow_carry() {
     self notify("thread_allow_carry");
     self endon("thread_allow_carry");
     self endon("unmake");
     if(1) {
-      for(;;) {
+      for (;;) {
         wait(0.05);
         return;
         m_e_body_trigger waittill("trigger", e_triggerer);
         m_e_body_trigger sethintstringforplayer(e_triggerer, "");
       }
-      for(;;) {}
-      for(;;) {}
-      for(;;) {}
-      for(;;) {}
-      for(;;) {
+      for (;;) {}
+      for (;;) {}
+      for (;;) {}
+      for (;;) {}
+      for (;;) {
         return;
       }
-      for(;;) {}
-      for(;;) {}
-      if(!isDefined(m_e_body_trigger)) {}
-      if(isDefined(e_triggerer.is_carrying_pickupitem) && e_triggerer.is_carrying_pickupitem) {}
+      for (;;) {}
+      for (;;) {}
+      if(!isdefined(m_e_body_trigger)) {}
+      if(isdefined(e_triggerer.is_carrying_pickupitem) && e_triggerer.is_carrying_pickupitem) {}
       if(!m_iscarryable) {}
-      if(isDefined(e_triggerer.disable_object_pickup) && e_triggerer.disable_object_pickup) {}
+      if(isdefined(e_triggerer.disable_object_pickup) && e_triggerer.disable_object_pickup) {}
       if(!e_triggerer util::use_button_held()) {}
-      if(isDefined(m_allow_carry_custom_conditions_func) && ![[m_allow_carry_custom_conditions_func]]()) {}
-      if(!isDefined(m_e_body_trigger)) {}
+      if(isdefined(m_allow_carry_custom_conditions_func) && ![
+          [m_allow_carry_custom_conditions_func]
+        ]()) {}
+      if(!isdefined(m_e_body_trigger)) {}
       if(!e_triggerer istouching(m_e_body_trigger)) {}
-      if(isDefined(e_triggerer.is_carrying_pickupitem) && e_triggerer.is_carrying_pickupitem) {}
+      if(isdefined(e_triggerer.is_carrying_pickupitem) && e_triggerer.is_carrying_pickupitem) {}
       if(e_triggerer laststand::player_is_in_laststand()) {}
       e_triggerer.is_carrying_pickupitem = 1;
       self thread carry(e_triggerer);
@@ -445,45 +484,55 @@ class cbaseinteractable {
     }
   }
 
+
   function disable_carry() {
     m_iscarryable = 0;
     self notify("thread_allow_carry");
   }
+
 
   function enable_carry() {
     m_iscarryable = 1;
     self thread thread_allow_carry();
   }
 
+
   function set_body_trigger(e_trigger) {
-    assert(!isDefined(m_e_body_trigger));
+    assert(!isdefined(m_e_body_trigger));
     m_e_body_trigger = e_trigger;
   }
 
+
   function repair_trigger() {
     self endon("unmake");
-    while(true) {
+    while (true) {
       m_e_body_trigger waittill("trigger", player);
-      if(isDefined(player.is_carrying_pickupitem) && player.is_carrying_pickupitem && player.o_pickupitem.m_str_itemname == "Toolbox") {
-        [[player.o_pickupitem]] - > remove(player);
-        [[m_repair_complete_func]](player);
+      if(isdefined(player.is_carrying_pickupitem) && player.is_carrying_pickupitem && player.o_pickupitem.m_str_itemname == "Toolbox") {
+        [
+          [player.o_pickupitem]
+        ] - > remove(player);
+        [
+          [m_repair_complete_func]
+        ](player);
       }
       wait(0.05);
     }
   }
 
+
   function repair_completed(player) {
     self notify("repair_completed");
-    if(isDefined(m_repair_custom_complete_func)) {
+    if(isdefined(m_repair_custom_complete_func)) {
       self thread[[m_repair_custom_complete_func]](player);
     }
   }
 
+
   function prompt_manager() {
-    if(isDefined(m_prompt_manager_custom_func)) {
+    if(isdefined(m_prompt_manager_custom_func)) {
       self thread[[m_prompt_manager_custom_func]]();
     } else {
-      while(isDefined(m_e_body_trigger)) {
+      while (isdefined(m_e_body_trigger)) {
         if(!m_isfunctional) {
           m_e_body_trigger sethintstring("Bring Toolbox to repair");
           wait(0.05);
@@ -493,6 +542,7 @@ class cbaseinteractable {
       }
     }
   }
+
 
   function get_player_currently_holding() {
     return m_e_player_currently_holding;

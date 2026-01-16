@@ -74,7 +74,7 @@ play_nicaragua_outro() {
 outro_wind_snd() {
   wait 2;
   wind_ent = spawn("script_origin", (0, 0, 0));
-  wind_ent playLoopSound("amb_nic_outro_wind", 8);
+  wind_ent playloopsound("amb_nic_outro_wind", 8);
 }
 
 mason_outro_helicopter() {

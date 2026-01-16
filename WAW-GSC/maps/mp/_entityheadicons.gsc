@@ -4,9 +4,8 @@
 *****************************************************/
 
 init() {
-  if(isDefined(level.initedEntityHeadIcons)) {
+  if(isDefined(level.initedEntityHeadIcons))
     return;
-  }
   level.initedEntityHeadIcons = true;
   switch (game["allies"]) {
     case "marines":
@@ -54,49 +53,41 @@ setEntityHeadIcon(team, offset) {
     return;
   }
   self.entityHeadIconTeam = team;
-  if(isDefined(offset)) {
+  if(isDefined(offset))
     self.entityHeadIconOffset = offset;
-  } else {
+  else
     self.entityHeadIconOffset = (0, 0, 0);
-  }
-  for(i = 0; i < self.entityHeadIcons.size; i++) {
+  for (i = 0; i < self.entityHeadIcons.size; i++)
     if(isDefined(self.entityHeadIcons[i]))
-  }
-  self.entityHeadIcons[i] destroy();
+      self.entityHeadIcons[i] destroy();
   self.entityHeadIcons = [];
   self notify("kill_entity_headicon_thread");
   if(team != "none") {
-    for(i = 0; i < level.playersViewingHeadIcons.size; i++) {
+    for (i = 0; i < level.playersViewingHeadIcons.size; i++)
       level.playersViewingHeadIcons[i] updateEntityHeadIcon(self);
-    }
   }
   newarray = [];
-  for(i = 0; i < level.entitiesWithHeadIcons.size; i++) {
-    if(level.entitiesWithHeadIcons[i] != self) {
+  for (i = 0; i < level.entitiesWithHeadIcons.size; i++) {
+    if(level.entitiesWithHeadIcons[i] != self)
       newarray[newarray.size] = level.entitiesWithHeadIcons[i];
-    }
   }
-  if(team != "none") {
+  if(team != "none")
     newarray[newarray.size] = self;
-  }
   level.entitiesWithHeadIcons = newarray;
   self thread keepEntityHeadIconsPositioned();
 }
 
 showAllEntityHeadIcons() {
-  if(!isDefined(self.entityHeadIcons)) {
+  if(!isDefined(self.entityHeadIcons))
     self.entityHeadIcons = [];
-  }
-  for(i = 0; i < level.entitiesWithHeadIcons.size; i++) {
-    if(isDefined(level.entitiesWithHeadIcons[i])) {
+  for (i = 0; i < level.entitiesWithHeadIcons.size; i++) {
+    if(isDefined(level.entitiesWithHeadIcons[i]))
       self updateEntityHeadIcon(level.entitiesWithHeadIcons[i]);
-    }
   }
   newarray = [];
-  for(i = 0; i < level.playersViewingHeadIcons.size; i++) {
-    if(level.playersViewingHeadIcons[i] != self) {
+  for (i = 0; i < level.playersViewingHeadIcons.size; i++) {
+    if(level.playersViewingHeadIcons[i] != self)
       newarray[newarray.size] = level.playersViewingHeadIcons[i];
-    }
   }
   newarray[newarray.size] = self;
   level.playersViewingHeadIcons = newarray;
@@ -104,18 +95,16 @@ showAllEntityHeadIcons() {
 
 hideAllEntityHeadIcons(disconnected) {
   if(!disconnected) {
-    for(i = 0; i < self.entityHeadIcons.size; i++) {
-      if(isDefined(self.entityHeadIcons[i])) {
+    for (i = 0; i < self.entityHeadIcons.size; i++) {
+      if(isDefined(self.entityHeadIcons[i]))
         self.entityHeadIcons[i] destroy();
-      }
     }
     self.entityHeadIcons = [];
   }
   newarray = [];
-  for(i = 0; i < level.playersViewingHeadIcons.size; i++) {
-    if(level.playersViewingHeadIcons[i] != self) {
+  for (i = 0; i < level.playersViewingHeadIcons.size; i++) {
+    if(level.playersViewingHeadIcons[i] != self)
       newarray[newarray.size] = level.playersViewingHeadIcons[i];
-    }
   }
   level.playersViewingHeadIcons = newarray;
 }
@@ -141,12 +130,11 @@ keepEntityHeadIconsPositioned() {
   self endon("death");
   self thread destroyHeadIconsOnDeath();
   pos = self.origin;
-  while(1) {
+  while (1) {
     if(pos != self.origin) {
-      for(i = 0; i < self.entityHeadIcons.size; i++) {
-        if(isDefined(self.entityHeadIcons[i])) {
+      for (i = 0; i < self.entityHeadIcons.size; i++) {
+        if(isDefined(self.entityHeadIcons[i]))
           self updateEntityHeadIconPos(self.entityHeadIcons[i]);
-        }
       }
       pos = self.origin;
     }
@@ -156,10 +144,9 @@ keepEntityHeadIconsPositioned() {
 
 destroyHeadIconsOnDeath() {
   self waittill("death");
-  for(i = 0; i < self.entityHeadIcons.size; i++) {
-    if(isDefined(self.entityHeadIcons[i])) {
+  for (i = 0; i < self.entityHeadIcons.size; i++) {
+    if(isDefined(self.entityHeadIcons[i]))
       self.entityHeadIcons[i] destroy();
-    }
   }
 }
 

@@ -7,7 +7,7 @@
 #namespace struct;
 
 function autoexec __init__() {
-  if(!isDefined(level.struct)) {
+  if(!isdefined(level.struct)) {
     init_structs();
   }
 }
@@ -37,15 +37,15 @@ function remove_unneeded_kvps(struct) {
 }
 
 function createstruct(struct, type, name) {
-  if(!isDefined(level.struct)) {
+  if(!isdefined(level.struct)) {
     init_structs();
   }
-  if(isDefined(type)) {
+  if(isdefined(type)) {
     isfrontend = getdvarstring("mapname") == "core_frontend";
-    if(!isDefined(level.scriptbundles[type])) {
+    if(!isdefined(level.scriptbundles[type])) {
       level.scriptbundles[type] = [];
     }
-    if(isDefined(level.scriptbundles[type][name])) {
+    if(isdefined(level.scriptbundles[type][name])) {
       return level.scriptbundles[type][name];
     }
     if(type == "scene") {
@@ -66,84 +66,84 @@ function createstruct(struct, type, name) {
 }
 
 function createscriptbundlelist(items, var_1578b6b3, name) {
-  if(!isDefined(level.struct)) {
+  if(!isdefined(level.struct)) {
     init_structs();
   }
   level.scriptbundlelists[var_1578b6b3][name] = items;
 }
 
 function init() {
-  if(!isDefined(level.struct)) {
+  if(!isdefined(level.struct)) {
     level.struct = [];
   } else if(!isarray(level.struct)) {
     level.struct = array(level.struct);
   }
   level.struct[level.struct.size] = self;
-  if(!isDefined(self.angles)) {
+  if(!isdefined(self.angles)) {
     self.angles = (0, 0, 0);
   }
-  if(isDefined(self.targetname)) {
-    if(!isDefined(level.struct_class_names["targetname"][self.targetname])) {
+  if(isdefined(self.targetname)) {
+    if(!isdefined(level.struct_class_names["targetname"][self.targetname])) {
       level.struct_class_names["targetname"][self.targetname] = [];
     } else if(!isarray(level.struct_class_names["targetname"][self.targetname])) {
       level.struct_class_names["targetname"][self.targetname] = array(level.struct_class_names["targetname"][self.targetname]);
     }
     level.struct_class_names["targetname"][self.targetname][level.struct_class_names["targetname"][self.targetname].size] = self;
   }
-  if(isDefined(self.target)) {
-    if(!isDefined(level.struct_class_names["target"][self.target])) {
+  if(isdefined(self.target)) {
+    if(!isdefined(level.struct_class_names["target"][self.target])) {
       level.struct_class_names["target"][self.target] = [];
     } else if(!isarray(level.struct_class_names["target"][self.target])) {
       level.struct_class_names["target"][self.target] = array(level.struct_class_names["target"][self.target]);
     }
     level.struct_class_names["target"][self.target][level.struct_class_names["target"][self.target].size] = self;
   }
-  if(isDefined(self.script_noteworthy)) {
-    if(!isDefined(level.struct_class_names["script_noteworthy"][self.script_noteworthy])) {
+  if(isdefined(self.script_noteworthy)) {
+    if(!isdefined(level.struct_class_names["script_noteworthy"][self.script_noteworthy])) {
       level.struct_class_names["script_noteworthy"][self.script_noteworthy] = [];
     } else if(!isarray(level.struct_class_names["script_noteworthy"][self.script_noteworthy])) {
       level.struct_class_names["script_noteworthy"][self.script_noteworthy] = array(level.struct_class_names["script_noteworthy"][self.script_noteworthy]);
     }
     level.struct_class_names["script_noteworthy"][self.script_noteworthy][level.struct_class_names["script_noteworthy"][self.script_noteworthy].size] = self;
   }
-  if(isDefined(self.script_linkname)) {
-    assert(!isDefined(level.struct_class_names[""][self.script_linkname]), "");
+  if(isdefined(self.script_linkname)) {
+    assert(!isdefined(level.struct_class_names[""][self.script_linkname]), "");
     level.struct_class_names["script_linkname"][self.script_linkname][0] = self;
   }
-  if(isDefined(self.script_label)) {
-    if(!isDefined(level.struct_class_names["script_label"][self.script_label])) {
+  if(isdefined(self.script_label)) {
+    if(!isdefined(level.struct_class_names["script_label"][self.script_label])) {
       level.struct_class_names["script_label"][self.script_label] = [];
     } else if(!isarray(level.struct_class_names["script_label"][self.script_label])) {
       level.struct_class_names["script_label"][self.script_label] = array(level.struct_class_names["script_label"][self.script_label]);
     }
     level.struct_class_names["script_label"][self.script_label][level.struct_class_names["script_label"][self.script_label].size] = self;
   }
-  if(isDefined(self.classname)) {
-    if(!isDefined(level.struct_class_names["classname"][self.classname])) {
+  if(isdefined(self.classname)) {
+    if(!isdefined(level.struct_class_names["classname"][self.classname])) {
       level.struct_class_names["classname"][self.classname] = [];
     } else if(!isarray(level.struct_class_names["classname"][self.classname])) {
       level.struct_class_names["classname"][self.classname] = array(level.struct_class_names["classname"][self.classname]);
     }
     level.struct_class_names["classname"][self.classname][level.struct_class_names["classname"][self.classname].size] = self;
   }
-  if(isDefined(self.script_unitrigger_type)) {
-    if(!isDefined(level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type])) {
+  if(isdefined(self.script_unitrigger_type)) {
+    if(!isdefined(level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type])) {
       level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type] = [];
     } else if(!isarray(level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type])) {
       level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type] = array(level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type]);
     }
     level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type][level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type].size] = self;
   }
-  if(isDefined(self.scriptbundlename)) {
-    if(!isDefined(level.struct_class_names["scriptbundlename"][self.scriptbundlename])) {
+  if(isdefined(self.scriptbundlename)) {
+    if(!isdefined(level.struct_class_names["scriptbundlename"][self.scriptbundlename])) {
       level.struct_class_names["scriptbundlename"][self.scriptbundlename] = [];
     } else if(!isarray(level.struct_class_names["scriptbundlename"][self.scriptbundlename])) {
       level.struct_class_names["scriptbundlename"][self.scriptbundlename] = array(level.struct_class_names["scriptbundlename"][self.scriptbundlename]);
     }
     level.struct_class_names["scriptbundlename"][self.scriptbundlename][level.struct_class_names["scriptbundlename"][self.scriptbundlename].size] = self;
   }
-  if(isDefined(self.prefabname)) {
-    if(!isDefined(level.struct_class_names["prefabname"][self.prefabname])) {
+  if(isdefined(self.prefabname)) {
+    if(!isdefined(level.struct_class_names["prefabname"][self.prefabname])) {
       level.struct_class_names["prefabname"][self.prefabname] = [];
     } else if(!isarray(level.struct_class_names["prefabname"][self.prefabname])) {
       level.struct_class_names["prefabname"][self.prefabname] = array(level.struct_class_names["prefabname"][self.prefabname]);
@@ -153,7 +153,7 @@ function init() {
 }
 
 function get(kvp_value, kvp_key = "targetname") {
-  if(isDefined(level.struct_class_names[kvp_key]) && isDefined(level.struct_class_names[kvp_key][kvp_value])) {
+  if(isdefined(level.struct_class_names[kvp_key]) && isdefined(level.struct_class_names[kvp_key][kvp_value])) {
     if(level.struct_class_names[kvp_key][kvp_value].size > 1) {
       assertmsg(((("" + kvp_key) + "") + kvp_value) + "");
       return undefined;
@@ -163,70 +163,70 @@ function get(kvp_value, kvp_key = "targetname") {
 }
 
 function spawn(v_origin = (0, 0, 0), v_angles = (0, 0, 0)) {
-  s = spawnStruct();
+  s = spawnstruct();
   s.origin = v_origin;
   s.angles = v_angles;
   return s;
 }
 
 function get_array(kvp_value, kvp_key = "targetname") {
-  if(isDefined(level.struct_class_names[kvp_key][kvp_value])) {
+  if(isdefined(level.struct_class_names[kvp_key][kvp_value])) {
     return arraycopy(level.struct_class_names[kvp_key][kvp_value]);
   }
   return [];
 }
 
 function delete() {
-  if(isDefined(self.target)) {
+  if(isdefined(self.target)) {
     arrayremovevalue(level.struct_class_names["target"][self.target], self);
   }
-  if(isDefined(self.targetname)) {
+  if(isdefined(self.targetname)) {
     arrayremovevalue(level.struct_class_names["targetname"][self.targetname], self);
   }
-  if(isDefined(self.script_noteworthy)) {
+  if(isdefined(self.script_noteworthy)) {
     arrayremovevalue(level.struct_class_names["script_noteworthy"][self.script_noteworthy], self);
   }
-  if(isDefined(self.script_linkname)) {
+  if(isdefined(self.script_linkname)) {
     arrayremovevalue(level.struct_class_names["script_linkname"][self.script_linkname], self);
   }
-  if(isDefined(self.script_label)) {
+  if(isdefined(self.script_label)) {
     arrayremovevalue(level.struct_class_names["script_label"][self.script_label], self);
   }
-  if(isDefined(self.classname)) {
+  if(isdefined(self.classname)) {
     arrayremovevalue(level.struct_class_names["classname"][self.classname], self);
   }
-  if(isDefined(self.script_unitrigger_type)) {
+  if(isdefined(self.script_unitrigger_type)) {
     arrayremovevalue(level.struct_class_names["script_unitrigger_type"][self.script_unitrigger_type], self);
   }
-  if(isDefined(self.scriptbundlename)) {
+  if(isdefined(self.scriptbundlename)) {
     arrayremovevalue(level.struct_class_names["scriptbundlename"][self.scriptbundlename], self);
   }
-  if(isDefined(self.prefabname)) {
+  if(isdefined(self.prefabname)) {
     arrayremovevalue(level.struct_class_names["prefabname"][self.prefabname], self);
   }
 }
 
 function get_script_bundle(str_type, str_name) {
-  if(isDefined(level.scriptbundles[str_type]) && isDefined(level.scriptbundles[str_type][str_name])) {
+  if(isdefined(level.scriptbundles[str_type]) && isdefined(level.scriptbundles[str_type][str_name])) {
     return level.scriptbundles[str_type][str_name];
   }
 }
 
 function delete_script_bundle(str_type, str_name) {
-  if(isDefined(level.scriptbundles[str_type]) && isDefined(level.scriptbundles[str_type][str_name])) {
+  if(isdefined(level.scriptbundles[str_type]) && isdefined(level.scriptbundles[str_type][str_name])) {
     level.scriptbundles[str_type][str_name] = undefined;
   }
 }
 
 function get_script_bundles(str_type) {
-  if(isDefined(level.scriptbundles) && isDefined(level.scriptbundles[str_type])) {
+  if(isdefined(level.scriptbundles) && isdefined(level.scriptbundles[str_type])) {
     return level.scriptbundles[str_type];
   }
   return [];
 }
 
 function get_script_bundle_list(str_type, str_name) {
-  if(isDefined(level.scriptbundlelists[str_type]) && isDefined(level.scriptbundlelists[str_type][str_name])) {
+  if(isdefined(level.scriptbundlelists[str_type]) && isdefined(level.scriptbundlelists[str_type][str_name])) {
     return level.scriptbundlelists[str_type][str_name];
   }
 }
@@ -255,7 +255,7 @@ function findstruct(param1, name, index) {
         }
       }
     }
-    if(isDefined(level.struct)) {
+    if(isdefined(level.struct)) {
       foreach(struct in level.struct) {
         if(distancesquared(struct.origin, position) < 1) {
           return struct;
@@ -264,15 +264,15 @@ function findstruct(param1, name, index) {
     }
   } else {
     s = get(param1);
-    if(isDefined(s)) {
+    if(isdefined(s)) {
       return s;
     }
     s = get_script_bundle(param1, name);
-    if(isDefined(s)) {
+    if(isdefined(s)) {
       if(index < 0) {
         return s;
       }
-      if(isDefined(s.objects)) {
+      if(isdefined(s.objects)) {
         return s.objects[index];
       }
     }

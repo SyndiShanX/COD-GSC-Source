@@ -41,7 +41,7 @@ monitortearusage() {
       num = prevammo - ammo;
 
       for(i = 0; i < num; i++) {
-        grenades = getEntArray("grenade", "classname");
+        grenades = getentarray("grenade", "classname");
         bestdist = undefined;
         bestg = undefined;
 
@@ -70,7 +70,7 @@ monitortearusage() {
 
 teargrenade_think(team) {
   wait(level.teargrenadetimer);
-  ent = spawnStruct();
+  ent = spawnstruct();
   ent thread tear(self.origin);
 }
 
@@ -106,9 +106,8 @@ tear(pos) {
     }
     player.teargasstarttime = gettime();
 
-    if(!isDefined(player.teargassuffering)) {
+    if(!isDefined(player.teargassuffering))
       player thread teargassuffering();
-    }
   }
 }
 
@@ -122,9 +121,8 @@ teargassuffering() {
   self endon("disconnect");
   self.teargassuffering = 1;
 
-  if(self mayapplyscreeneffect()) {
+  if(self mayapplyscreeneffect())
     self shellshock("teargas", 60);
-  }
 
   while(true) {
     if(gettime() - self.teargasstarttime > level.tearsufferingduration * 1000) {
@@ -136,9 +134,8 @@ teargassuffering() {
 
   self shellshock("teargas", 1);
 
-  if(self mayapplyscreeneffect()) {
+  if(self mayapplyscreeneffect())
     self.teargassuffering = undefined;
-  }
 }
 
 drawcylinder(pos, rad, height) {

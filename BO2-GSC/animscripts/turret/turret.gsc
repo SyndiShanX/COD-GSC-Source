@@ -10,13 +10,11 @@
 get_turret_anim(weapon_name, anim_name) {
   str_pose = self.desired_anim_pose;
 
-  if(!isDefined(str_pose)) {
+  if(!isDefined(str_pose))
     str_pose = self.a.pose;
-  }
 
-  if(issubstr(weapon_name, "bipod")) {
+  if(issubstr(weapon_name, "bipod"))
     weapon_name = "bipod";
-  }
 
   return anim.anim_array[self.animtype][self.a.movement][str_pose][weapon_name][anim_name];
 }
@@ -68,9 +66,8 @@ stop_using_turret_when_node_lost() {
   self endon("killanimscript");
 
   while(true) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096)
       self stopuseturret();
-    }
 
     wait 0.25;
   }
@@ -109,9 +106,8 @@ post_pain_func(animscript) {
     self.a.usingturret delete();
     self.a.usingturret = undefined;
 
-    if(isDefined(self.weapon) && self.weapon != "none") {
+    if(isDefined(self.weapon) && self.weapon != "none")
       self animscripts\shared::placeweaponon(self.weapon, "right");
-    }
   } else if(animscript != "saw")
     self.a.usingturret delete();
 }

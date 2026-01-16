@@ -7,7 +7,7 @@
 #include xmodelalias\c_zom_tomb_crusader_head_als;
 
 main() {
-  self setModel("c_zom_tomb_crusader_body_2b");
+  self setmodel("c_zom_tomb_crusader_body_2b");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_zom_tomb_crusader_head_als::main());
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_zom_tomb_crusader_hat_2";

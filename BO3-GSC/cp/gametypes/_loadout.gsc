@@ -24,14 +24,14 @@
 #namespace loadout;
 
 function autoexec __init__sytem__() {
-  system::register("loadout", &__init__, undefined, undefined);
+  system::register("loadout", & __init__, undefined, undefined);
 }
 
 function __init__() {
   level.player_interactive_model = "c_usa_cia_masonjr_viewbody";
-  callback::on_start_gametype(&init);
-  callback::on_connect(&on_connect);
-  callback::on_disconnect(&function_ef129246);
+  callback::on_start_gametype( & init);
+  callback::on_connect( & on_connect);
+  callback::on_disconnect( & function_ef129246);
   level thread function_adca0ced();
 }
 
@@ -103,25 +103,25 @@ function init() {
   level.grenade_array = [];
   level.inventory_array = [];
   max_weapon_num = 99;
-  for(i = 0; i < max_weapon_num; i++) {
-    if(!isDefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["group"] == "") {
+  for (i = 0; i < max_weapon_num; i++) {
+    if(!isdefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["group"] == "") {
       continue;
     }
-    if(!isDefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["reference"] == "") {
+    if(!isdefined(level.tbl_weaponids[i]) || level.tbl_weaponids[i]["reference"] == "") {
       continue;
     }
     weapon_type = level.tbl_weaponids[i]["group"];
     weapon = level.tbl_weaponids[i]["reference"];
     attachment = level.tbl_weaponids[i]["attachment"];
     weapon_class_register(weapon, weapon_type);
-    if(isDefined(attachment) && attachment != "") {
+    if(isdefined(attachment) && attachment != "") {
       attachment_tokens = strtok(attachment, " ");
-      if(isDefined(attachment_tokens)) {
+      if(isdefined(attachment_tokens)) {
         if(attachment_tokens.size == 0) {
           weapon_class_register((weapon + "_") + attachment, weapon_type);
           continue;
         }
-        for(k = 0; k < attachment_tokens.size; k++) {
+        for (k = 0; k < attachment_tokens.size; k++) {
           weapon_class_register((weapon + "_") + attachment_tokens[k], weapon_type);
         }
       }
@@ -150,12 +150,12 @@ function function_ef129246() {
 function create_class_exclusion_list() {
   currentdvar = 0;
   level.itemexclusions = [];
-  while(getdvarint("item_exclusion_" + currentdvar)) {
+  while (getdvarint("item_exclusion_" + currentdvar)) {
     level.itemexclusions[currentdvar] = getdvarint("item_exclusion_" + currentdvar);
     currentdvar++;
   }
   level.attachmentexclusions = [];
-  for(currentdvar = 0;
+  for (currentdvar = 0;
     (getdvarstring("attachment_exclusion_" + currentdvar)) != ""; currentdvar++) {
     level.attachmentexclusions[currentdvar] = getdvarstring("attachment_exclusion_" + currentdvar);
   }
@@ -163,7 +163,7 @@ function create_class_exclusion_list() {
 
 function is_attachment_excluded(attachment) {
   numexclusions = level.attachmentexclusions.size;
-  for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
+  for (exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
     if(attachment == level.attachmentexclusions[exclusionindex]) {
       return true;
     }
@@ -172,7 +172,7 @@ function is_attachment_excluded(attachment) {
 }
 
 function set_statstable_id() {
-  if(!isDefined(level.statstableid)) {
+  if(!isdefined(level.statstableid)) {
     level.statstableid = tablelookupfindcoreasset(util::getstatstablename());
   }
 }
@@ -227,7 +227,7 @@ function weapon_class_register(weaponname, weapon_type) {
 function cac_init() {
   level.tbl_weaponids = [];
   set_statstable_id();
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -244,7 +244,7 @@ function cac_init() {
     }
   }
   level.perknames = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -261,7 +261,7 @@ function cac_init() {
   level.killstreaknames = [];
   level.killstreakicons = [];
   level.killstreakindices = [];
-  for(i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -282,7 +282,7 @@ function cac_init() {
 }
 
 function getclasschoice(response) {
-  assert(isDefined(level.classmap[response]));
+  assert(isdefined(level.classmap[response]));
   return level.classmap[response];
 }
 
@@ -297,7 +297,7 @@ function getattachmentstring(weaponnum, attachmentnum) {
 }
 
 function getattachmentsdisabled() {
-  if(!isDefined(level.attachmentsdisabled)) {
+  if(!isdefined(level.attachmentsdisabled)) {
     return 0;
   }
   return level.attachmentsdisabled;
@@ -313,7 +313,7 @@ function getkillstreakindex(weaponclass, killstreaknum) {
 }
 
 function isperkgroup(perkname) {
-  return isDefined(perkname) && isstring(perkname);
+  return isdefined(perkname) && isstring(perkname);
 }
 
 function reset_specialty_slots(class_num) {
@@ -340,16 +340,16 @@ function isleagueitemrestricted(item) {
 
 function function_db96b564(var_dc236bc8) {
   if(level.gametype === "coop") {
-    self thread cybercom::function_674d724c(0, !(isDefined(var_dc236bc8) && var_dc236bc8));
+    self thread cybercom::function_674d724c(0, !(isdefined(var_dc236bc8) && var_dc236bc8));
   }
 }
 
 function giveloadoutlevelspecific(team, weaponclass) {
   pixbeginevent("giveLoadoutLevelSpecific");
-  if(isDefined(level.givecustomcharacters)) {
+  if(isdefined(level.givecustomcharacters)) {
     self[[level.givecustomcharacters]]();
   }
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     self[[level.givecustomloadout]]();
   }
   pixendevent();
@@ -375,7 +375,7 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
       class_num = 9;
     }
     self.class_num = class_num;
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       self.var_6f9a6c8e = 1;
     } else {
       self.var_6f9a6c8e = undefined;
@@ -387,9 +387,9 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
     pixendevent();
   } else {
     pixbeginevent("default class");
-    assert(isDefined(self.pers[""]), "");
+    assert(isdefined(self.pers[""]), "");
     class_num = level.classtoclassnum[weaponclass];
-    if(!isDefined(class_num)) {
+    if(!isdefined(class_num)) {
       if(self util::is_bot()) {
         class_num = array::random(level.classtoclassnum);
       } else {
@@ -404,7 +404,7 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   self giveweapon(level.weaponbasemelee, knifeweaponoptions);
   self.specialty = self getloadoutperks(class_num);
   if(level.leaguematch) {
-    for(i = 0; i < self.specialty.size; i++) {
+    for (i = 0; i < self.specialty.size; i++) {
       if(isleagueitemrestricted(self.specialty[i])) {
         arrayremoveindex(self.specialty, i);
         i--;
@@ -417,11 +417,11 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   self setactionslot(4, "");
   spawnweapon = "";
   initialweaponcount = 0;
-  if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != level.weaponnone && !self.pers["weapon"].iscarriedkillstreak) {
+  if(isdefined(self.pers["weapon"]) && self.pers["weapon"] != level.weaponnone && !self.pers["weapon"].iscarriedkillstreak) {
     primaryweapon = self.pers["weapon"];
   } else {
     primaryweapon = self getloadoutweapon(class_num, "primary");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       primaryweapon = altplayer getloadoutweapon(class_num, "primary");
     }
   }
@@ -429,7 +429,7 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
     primaryweapon = level.weaponnull;
   }
   sidearm = self getloadoutweapon(class_num, "secondary");
-  if(isDefined(altplayer)) {
+  if(isdefined(altplayer)) {
     sidearm = altplayer getloadoutweapon(class_num, "secondary");
   }
   if(sidearm.iscarriedkillstreak) {
@@ -439,19 +439,19 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   self.secondaryweaponkill = 0;
   if(sidearm != level.weaponnull) {
     secondaryweaponoptions = self calcweaponoptions(class_num, 1);
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       secondaryweaponoptions = altplayer calcweaponoptions(class_num, 1);
     }
     println(((("" + self.name) + "") + sidearm.name) + "");
     acvi = self getattachmentcosmeticvariantforweapon(class_num, "secondary");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       acvi = altplayer getattachmentcosmeticvariantforweapon(class_num, "secondary");
     }
     self giveweapon(sidearm, secondaryweaponoptions, acvi);
     self.secondaryloadoutweapon = sidearm;
     self.secondaryloadoutaltweapon = sidearm.altweapon;
     self.secondaryloadoutgunsmithvariantindex = self getloadoutgunsmithvariantindex(self.class_num, 1);
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       self.secondaryloadoutgunsmithvariantindex = altplayer getloadoutgunsmithvariantindex(self.class_num, 1);
     }
     self givemaxammo(sidearm);
@@ -461,26 +461,26 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   self.pers["primaryWeapon"] = primaryweapon;
   if(primaryweapon != level.weaponnull) {
     primaryweaponoptions = self calcweaponoptions(class_num, 0);
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       primaryweaponoptions = altplayer calcweaponoptions(class_num, 0);
     }
     println(((("" + self.name) + "") + primaryweapon.name) + "");
     acvi = self getattachmentcosmeticvariantforweapon(class_num, "primary");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       acvi = altplayer getattachmentcosmeticvariantforweapon(class_num, "primary");
     }
     self giveweapon(primaryweapon, primaryweaponoptions, acvi);
     self.primaryloadoutweapon = primaryweapon;
     self.primaryloadoutaltweapon = primaryweapon.altweapon;
     self.primaryloadoutgunsmithvariantindex = self getloadoutgunsmithvariantindex(self.class_num, 0);
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       self.primaryloadoutgunsmithvariantindex = altplayer getloadoutgunsmithvariantindex(self.class_num, 0);
     }
     self givemaxammo(primaryweapon);
     spawnweapon = primaryweapon;
     initialweaponcount++;
   }
-  if(isDefined(self.var_82325a18)) {
+  if(isdefined(self.var_82325a18)) {
     var_82325a18 = strtok(self.var_82325a18, ",");
     foreach(weaponname in var_82325a18) {
       heroweapon = getweapon(weaponname);
@@ -497,10 +497,10 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
       spawnweapon = level.weaponbasemeleeheld;
     }
   }
-  if(!isDefined(self.spawnweapon) && isDefined(self.pers["spawnWeapon"])) {
+  if(!isdefined(self.spawnweapon) && isdefined(self.pers["spawnWeapon"])) {
     self.spawnweapon = self.pers["spawnWeapon"];
   }
-  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"]) {
+  if(isdefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawnweapon) && !self.pers["changed_class"]) {
     spawnweapon = self.spawnweapon;
   }
   changedclass = self.pers["changed_class"];
@@ -522,19 +522,19 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   specialoffhandcount = 0;
   if(getdvarint("gadgetEnabled") == 1 || getdvarint("equipmentAsGadgets") == 1) {
     primaryoffhand = self getloadoutweapon(class_num, "primaryGadget");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       primaryoffhand = altplayer getloadoutweapon(class_num, "primaryGadget");
     }
     primaryoffhandcount = primaryoffhand.startammo;
   } else {
     primaryoffhandname = self getloadoutitemref(class_num, "primarygrenade");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       primaryoffhandname = altplayer getloadoutitemref(class_num, "primarygrenade");
     }
     if(primaryoffhandname != "" && primaryoffhandname != "weapon_null") {
       primaryoffhand = getweapon(primaryoffhand);
       primaryoffhandcount = self getloadoutitem(class_num, "primarygrenadecount");
-      if(isDefined(altplayer)) {
+      if(isdefined(altplayer)) {
         primaryoffhandcount = altplayer getloadoutitem(class_num, "primarygrenadecount");
       }
     }
@@ -558,19 +558,19 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   }
   if(getdvarint("gadgetEnabled") == 1 || getdvarint("equipmentAsGadgets") == 1) {
     secondaryoffhand = self getloadoutweapon(class_num, "secondaryGadget");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       secondaryoffhand = altplayer getloadoutweapon(class_num, "secondaryGadget");
     }
     secondaryoffhandcount = secondaryoffhand.startammo;
   } else {
     secondaryoffhandname = self getloadoutitemref(class_num, "specialgrenade");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       secondaryoffhandname = altplayer getloadoutitemref(class_num, "specialgrenade");
     }
     if(secondaryoffhandname != "" && secondaryoffhandname != "weapon_null") {
       secondaryoffhand = getweapon(secondaryoffhand);
       secondaryoffhandcount = self getloadoutitem(class_num, "specialgrenadecount");
-      if(isDefined(altplayer)) {
+      if(isdefined(altplayer)) {
         secondaryoffhandcount = altplayer getloadoutitem(class_num, "specialgrenadecount");
       }
     }
@@ -594,7 +594,7 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   }
   if(getdvarint("gadgetEnabled") == 1 || getdvarint("equipmentAsGadgets") == 1) {
     specialoffhand = self getloadoutweapon(class_num, "specialGadget");
-    if(isDefined(altplayer)) {
+    if(isdefined(altplayer)) {
       specialoffhand = altplayer getloadoutweapon(class_num, "specialGadget");
     }
     specialoffhandcount = specialoffhand.startammo;
@@ -617,11 +617,11 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
     self ability_util::gadget_reset(specialoffhand, changedclass, roundbased, firstround);
   }
   if(level.gametype === "coop") {
-    cybercom::function_4b8ac464(class_num, class_num_for_global_weapons, !(isDefined(var_dc236bc8) && var_dc236bc8), altplayer);
+    cybercom::function_4b8ac464(class_num, class_num_for_global_weapons, !(isdefined(var_dc236bc8) && var_dc236bc8), altplayer);
   }
   self bbclasschoice(class_num, primaryweapon, sidearm);
-  for(i = 0; i < 3; i++) {
-    if(level.loadoutkillstreaksenabled && isDefined(self.killstreak[i]) && isDefined(level.killstreakindices[self.killstreak[i]])) {
+  for (i = 0; i < 3; i++) {
+    if(level.loadoutkillstreaksenabled && isdefined(self.killstreak[i]) && isdefined(level.killstreakindices[self.killstreak[i]])) {
       killstreaks[i] = level.killstreakindices[self.killstreak[i]];
       continue;
     }
@@ -632,18 +632,18 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
   self initstaticweaponstime();
   self thread initweaponattachments(spawnweapon);
   self setplayerrenderoptions(playerrenderoptions);
-  if(isDefined(self.movementspeedmodifier)) {
+  if(isdefined(self.movementspeedmodifier)) {
     self setmovespeedscale(self.movementspeedmodifier * self getmovespeedscale());
   }
-  if(isDefined(level.givecustomloadout)) {
+  if(isdefined(level.givecustomloadout)) {
     spawnweapon = self[[level.givecustomloadout]]();
-    if(isDefined(spawnweapon)) {
+    if(isdefined(spawnweapon)) {
       self thread initweaponattachments(spawnweapon);
     }
   }
   self cac_selector();
-  if(!isDefined(self.firstspawn)) {
-    if(isDefined(spawnweapon)) {
+  if(!isdefined(self.firstspawn)) {
+    if(isdefined(spawnweapon)) {
       self initialweaponraise(spawnweapon);
     } else {
       self initialweaponraise(primaryweapon);
@@ -652,7 +652,7 @@ function giveloadout(team, weaponclass, var_dc236bc8, altplayer) {
     self seteverhadweaponall(1);
   }
   var_f0b98892 = self savegame::get_player_data("saved_weapon", undefined);
-  if(isDefined(var_f0b98892) && (!(isDefined(level.is_safehouse) && level.is_safehouse))) {
+  if(isdefined(var_f0b98892) && (!(isdefined(level.is_safehouse) && level.is_safehouse))) {
     self player::take_weapons();
     self._current_weapon = util::get_weapon_by_name(var_f0b98892);
     self._weapons = self savegame::get_player_data("saved_weapondata", undefined);
@@ -682,10 +682,10 @@ function setweaponammooverall(weapon, amount) {
 }
 
 function onplayerconnecting() {
-  for(;;) {
+  for (;;) {
     level waittill("connecting", player);
     if(!level.oldschool) {
-      if(!isDefined(player.pers["class"])) {
+      if(!isdefined(player.pers["class"])) {
         player.pers["class"] = "";
       }
       player.curclass = player.pers["class"];
@@ -721,7 +721,7 @@ function initperkdvars() {
 function cac_selector() {
   perks = self.specialty;
   self.detectexplosives = 0;
-  for(i = 0; i < perks.size; i++) {
+  for (i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_detectexplosive") {
       self.detectexplosives = 1;
@@ -732,7 +732,7 @@ function cac_selector() {
 function register_perks() {
   perks = self.specialty;
   self clearperks();
-  for(i = 0; i < perks.size; i++) {
+  for (i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_null" || issubstr(perk, "specialty_weapon_") || perk == "weapon_null") {
       continue;
@@ -747,10 +747,10 @@ function register_perks() {
 }
 
 function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isdefined(victim) || !isdefined(attacker) || !isplayer(attacker)) {
     return damage;
   }
-  if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon)) {
+  if(!isdefined(damage) || !isdefined(meansofdeath) || !isdefined(weapon)) {
     return damage;
   }
   old_damage = damage;
@@ -770,8 +770,8 @@ function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, wea
 }
 
 function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
-  assert(isDefined(victim));
-  assert(isDefined(attacker));
+  assert(isdefined(victim));
+  assert(isdefined(attacker));
   assert(isplayer(victim));
   if(damage <= 0) {
     return damage;
@@ -866,5 +866,5 @@ function isheaddamage(hitloc) {
 }
 
 function grenadestuck(inflictor) {
-  return isDefined(inflictor) && isDefined(inflictor.stucktoplayer) && inflictor.stucktoplayer == self;
+  return isdefined(inflictor) && isdefined(inflictor.stucktoplayer) && inflictor.stucktoplayer == self;
 }

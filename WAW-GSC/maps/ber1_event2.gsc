@@ -29,7 +29,7 @@ street_ambush() {
 street_battle() {
   maps\_debug::set_event_printname("Streets");
   redshirts = getaiarray("allies");
-  for(i = 0; i < redshirts.size; i++) {
+  for (i = 0; i < redshirts.size; i++) {
     if(isDefined(redshirts[i].script_forcecolor) && redshirts[i].script_forcecolor == "r") {
       redshirts[i] disable_replace_on_death();
       break;
@@ -117,7 +117,7 @@ street_asylum_roof_shreks_strat() {
   origins[origins.size] = getent("shrek_4_orig", "targetname");
   self.a.rockets = 7;
   self waittill("goal");
-  while(1) {
+  while (1) {
     if(flag("chain_street_left_1") || flag("chain_street_right_1")) {
       self SetEntityTarget(origins[randomint(origins.size)]);
     } else {
@@ -259,9 +259,9 @@ pub_bookcase_strat() {
   bookcase_clip_brush solid();
   self.a.pose = "crouch";
   flag_set("bookcase_push_starting");
-  self setCanDamage(false);
+  self setcandamage(false);
   anim_single_solo(self, "bookcase_push", undefined, anim_node);
-  self setCanDamage(true);
+  self setcandamage(true);
   flag_set("bookcase_pushed_over");
   goal_node = getnode("node_bookcase_goto", "targetname");
   self setgoalnode(goal_node);
@@ -290,13 +290,13 @@ cafe_wall_crumble() {
   waittillframeend;
   org_node = getNode("cafe_wall_node", "targetname");
   pieces = getEntArray("tank_wall", "targetname");
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     pieces[i] notsolid();
     pieces[i] connectpaths();
   }
   getent("delete_chunk", "targetname") connectpaths();
   getent("delete_chunk", "targetname") delete();
-  playFX(level._effect["tank_thru_cafe_wall"], org_node.origin + (0, 0, 54), anglesToForward(org_node.angles - (0, 90, 0)));
+  playfx(level._effect["tank_thru_cafe_wall"], org_node.origin + (0, 0, 54), anglestoforward(org_node.angles - (0, 90, 0)));
   SetClientSysState("levelNotify", "tank_wall_sound");
   level maps\_anim::anim_ents(pieces, "crumble", undefined, undefined, org_node, "cafe_wall");
   autosave_by_name("Ber1 cafe crumble");
@@ -324,7 +324,7 @@ panzershrek_hits_wall() {
   low_wall = getstruct("ps2_target", "targetname");
   level thread fire_shrecks(panzershrek_2_spawn, low_wall, undefined, "rpg_impact_boom", 1);
   wait(1);
-  playFX(level._effect["asylum_wall_explode"], low_wall.origin);
+  playfx(level._effect["asylum_wall_explode"], low_wall.origin);
   playSoundAtPosition("concrete_wall_explo", low_wall.origin);
   exploder(103);
 }
@@ -332,7 +332,7 @@ panzershrek_hits_wall() {
 event2_split_squad() {
   set_color_chain("courtyard_squad_split");
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(i % 2 == 0) {
       allies[i] set_force_color("r");
     } else {
@@ -353,11 +353,11 @@ save_asylum_entry() {
 
 spawn_street_pickup_weapons() {
   street_weapons = [];
-  street_weapons[0] = spawnStruct();
+  street_weapons[0] = spawnstruct();
   street_weapons[0].weapon_name = "weapon_panzerschrek";
   street_weapons[0].origin = (3169.9, 1566.6, -382.5);
   street_weapons[0].angles = (287.17, 355.56, -50.1497);
-  street_weapons[1] = spawnStruct();
+  street_weapons[1] = spawnstruct();
   street_weapons[1].weapon_name = "weapon_panzerschrek";
   street_weapons[1].origin = (3169.9, 1526.6, -382.5);
   street_weapons[1].angles = (287.17, 355.56, -50.1497);

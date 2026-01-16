@@ -10,12 +10,12 @@
 #include common_scripts\utility;
 
 main() {
-  add_start("ruins", ::start_ruins, &"STARTS_BER1_RUINS");
-  add_start("midruins", ::start_midruins, &"STARTS_BER1_RUINS_2");
-  add_start("execution", ::start_execution, &"STARTS_BER1_SURRENDER");
-  add_start("street", ::start_street, &"STARTS_BER1_STREET");
-  add_start("asylum", ::start_asylum, &"STARTS_BER1_ASYLUM");
-  add_start("tankride", ::start_tankride, &"STARTS_BER1_TANKRIDE");
+  add_start("ruins", ::start_ruins, & "STARTS_BER1_RUINS");
+  add_start("midruins", ::start_midruins, & "STARTS_BER1_RUINS_2");
+  add_start("execution", ::start_execution, & "STARTS_BER1_SURRENDER");
+  add_start("street", ::start_street, & "STARTS_BER1_STREET");
+  add_start("asylum", ::start_asylum, & "STARTS_BER1_ASYLUM");
+  add_start("tankride", ::start_tankride, & "STARTS_BER1_TANKRIDE");
   default_start(::ber1_main);
   do_precacheing();
   maps\_aircraft::main("vehicle_rus_airplane_il2", "stuka");
@@ -38,7 +38,7 @@ main() {
 ber1_main() {
   level.startskip = undefined;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     start = getent("player_train_start" + i, "targetname");
     players[i] setOrigin(start.origin);
     players[i] setPlayerAngles(start.angles);
@@ -93,7 +93,7 @@ start_midruins() {
   set_color_chain("colortrig_r3");
   simple_floodspawn("office_gunners", maps\ber1_event1::ruins_gunners_strat);
   simple_floodspawn("office_defend_spawners");
-  objective_string(2, &"BER1_CLEAR_CLOCKTOWER");
+  objective_string(2, & "BER1_CLEAR_CLOCKTOWER");
   objective_position(2, (944, -368, -229.6));
   maps\ber1_event1::spawn_tanks();
   wait(0.05);
@@ -112,7 +112,7 @@ start_midruins() {
   tank thread maps\_vehicle::mgoff();
   level thread maps\ber1_event1::tank2_part2(tank);
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(!isDefined(self.script_no_respawn)) {
       allies[i] thread replace_on_death();
     }
@@ -139,14 +139,14 @@ start_street() {
   friendlies = simple_spawn("start_guys");
   thin_out_friendlies(friendlies);
   pieces = getEntArray("tank_wall", "targetname");
-  for(i = 0; i < pieces.size; i++) {
+  for (i = 0; i < pieces.size; i++) {
     pieces[i] notsolid();
     pieces[i] connectpaths();
   }
   getent("delete_chunk", "targetname") connectpaths();
   getent("delete_chunk", "targetname") delete();
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(!isDefined(self.script_no_respawn)) {
       allies[i] thread replace_on_death();
     }
@@ -175,7 +175,7 @@ start_asylum() {
   warp_friendlies("asylum_start_ai", "targetname");
   warp_players("asylum_start_players", "targetname");
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(!isDefined(self.script_no_respawn)) {
       allies[i] thread replace_on_death();
     }
@@ -189,7 +189,7 @@ start_tankride() {
   friendlies = simple_spawn("start_guys");
   thin_out_friendlies(friendlies);
   allies = getaiarray("allies");
-  for(i = 0; i < allies.size; i++) {
+  for (i = 0; i < allies.size; i++) {
     if(!isDefined(self.script_no_respawn)) {
       allies[i] thread replace_on_death();
     }
@@ -337,25 +337,25 @@ setup_drones() {
 
 objectives() {
   flag_wait("train_has_stopped");
-  objective_add(1, "current", &"BER1_REGROUP_BERM", (-30, -5519, -511.7));
+  objective_add(1, "current", & "BER1_REGROUP_BERM", (-30, -5519, -511.7));
   flag_wait("calling_intro_barrage");
   objective_state(1, "done");
   flag_wait("objective_ruins");
-  objective_add(2, "current", &"BER1_CLEAR_RUINS", (930, -1985, -423.2));
+  objective_add(2, "current", & "BER1_CLEAR_RUINS", (930, -1985, -423.2));
   flag_wait("move_tanks_3");
   objective_state(2, "done");
   flag_wait("start_office_building");
-  objective_add(3, "current", &"BER1_CLEAR_OFFICE", (1338, -106, -168));
+  objective_add(3, "current", & "BER1_CLEAR_OFFICE", (1338, -106, -168));
   flag_wait("objective_office_2");
   objective_state(3, "done");
   flag_wait("objective_surrender");
-  objective_add(4, "current", &"BER1_ENTER_ASYLUM", (4590, 2762, -288));
+  objective_add(4, "current", & "BER1_ENTER_ASYLUM", (4590, 2762, -288));
   flag_wait("entered_asylum");
   objective_state(4, "done");
-  objective_add(5, "current", &"BER1_CLEAR_ASYLUM", (2608, 4386, -126));
+  objective_add(5, "current", & "BER1_CLEAR_ASYLUM", (2608, 4386, -126));
   flag_wait("asylum_exit");
   objective_state(5, "done");
-  objective_add(6, "current", &"BER1_PUSH_GERMANS", (1519.5, 7789.5, -413));
+  objective_add(6, "current", & "BER1_PUSH_GERMANS", (1519.5, 7789.5, -413));
   flag_wait("objective_end");
   objective_state(6, "done");
 }
@@ -387,7 +387,7 @@ setup_objectives_skip() {
       return;
   }
   obj_index = 1;
-  while(obj_index <= obj_complete) {
+  while (obj_index <= obj_complete) {
     if(obj_index == 1) {
       flag_set("train_has_stopped");
     } else if(obj_index == 2) {

@@ -15,14 +15,14 @@
 #namespace zm_bgb_secret_shopper;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_secret_shopper", &__init__, undefined, "bgb");
+  system::register("zm_bgb_secret_shopper", & __init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_secret_shopper", "time", 600, &enable, &disable, undefined, undefined);
+  bgb::register("zm_bgb_secret_shopper", "time", 600, & enable, & disable, undefined, undefined);
 }
 
 function enable() {
@@ -30,7 +30,7 @@ function enable() {
   self endon("bled_out");
   self endon("bgb_update");
   bgb::function_650ca64(7);
-  while(true) {
+  while (true) {
     self waittill("zm_bgb_secret_shopper", var_2757208f);
     var_2757208f thread function_127dc5ca(self);
   }
@@ -46,7 +46,7 @@ function function_127dc5ca(player) {
   self endon("kill_trigger");
   self endon("hash_a09e2c64");
   player endon("bgb_update");
-  while(true) {
+  while (true) {
     player waittill("bgb_activation_request");
     if(player.useholdent !== self) {
       continue;

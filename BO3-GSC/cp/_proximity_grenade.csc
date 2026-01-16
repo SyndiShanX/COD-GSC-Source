@@ -13,7 +13,7 @@
 #namespace proximity_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("proximity_grenade", &__init__, undefined, undefined);
+  system::register("proximity_grenade", & __init__, undefined, undefined);
 }
 
 function __init__() {

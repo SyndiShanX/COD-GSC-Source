@@ -7,18 +7,18 @@
 mus_init() {
   ams_init();
 
-  if(!isDefined(level._audio)) {
-    level._audio = spawnStruct();
-  }
+  if(!isdefined(level._audio))
+    level._audio = spawnstruct();
 
-  level._audio.music = spawnStruct();
+  level._audio.music = spawnstruct();
   level._audio.music.cue_cash = [];
   level._audio.music.curr_cue_name = "";
   level._audio.music.prev_cue_name = "";
   level._audio.music.enable_auto_mix = 0;
   level._audio.music.env_threat_to_vol = [[0.0, 0.5],
     [0.9, 1.0],
-    [1.0, 1.0]];
+    [1.0, 1.0]
+  ];
   thread musx_monitor_game_vars();
 }
 
@@ -31,27 +31,24 @@ mus_play(var_0, var_1, var_2, var_3, var_4) {
   var_7 = musx_construct_cue(var_0);
   var_8 = var_7["fade_in_time"];
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     var_8 = var_1;
-  }
 
   var_9 = 2.0;
 
-  if(isDefined(var_6)) {
-    if(isDefined(var_2)) {
+  if(isdefined(var_6)) {
+    if(isdefined(var_2))
       var_9 = var_2;
-    } else if(isDefined(var_1)) {
+    else if(isdefined(var_1))
       var_9 = var_1;
-    } else if(isDefined(var_6["fade_out_time"])) {
+    else if(isdefined(var_6["fade_out_time"]))
       var_9 = var_6["fade_out_time"];
-    }
   }
 
   var_10 = var_7["volume"];
 
-  if(isDefined(var_3)) {
+  if(isdefined(var_3))
     var_10 = var_3;
-  }
 
   musx_start_cue(var_7["name"], var_8, var_9, var_10, var_4);
 }
@@ -64,23 +61,21 @@ mus_stop(var_0) {
     var_1 = var_2["fade_out_time"];
   }
 
-  if(isDefined(var_0)) {
+  if(isdefined(var_0))
     var_1 = var_0;
-  }
 
   musx_stop_all_music(var_1);
 }
 
 mus_is_playing() {
-  return isDefined(level._audio.music.curr_cue_name) && level._audio.music.curr_cue_name != "";
+  return isdefined(level._audio.music.curr_cue_name) && level._audio.music.curr_cue_name != "";
 }
 
 mus_get_playing_cue_preset() {
   var_0 = undefined;
 
-  if(mus_is_playing()) {
+  if(mus_is_playing())
     var_0 = musx_get_cashed_cue(level._audio.music.curr_cue_name);
-  }
 
   return var_0;
 }
@@ -88,7 +83,7 @@ mus_get_playing_cue_preset() {
 musx_construct_cue(var_0) {
   var_1 = musx_get_cashed_cue(var_0);
 
-  if(!isDefined(var_1)) {
+  if(!isdefined(var_1)) {
     var_1 = [];
     var_1["alias"] = var_0;
     var_1["volume"] = 1.0;
@@ -105,13 +100,12 @@ musx_construct_cue(var_0) {
 musx_start_cue(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
-  if(isDefined(var_4)) {
+  if(isdefined(var_4))
     var_5 = var_4;
-  }
 
-  if(var_0 == level._audio.music.curr_cue_name && !var_5) {
+  if(var_0 == level._audio.music.curr_cue_name && !var_5)
     return;
-  } else {
+  else {
     var_6 = level._audio.music.prev_cue_name;
     var_7 = level._audio.music.curr_cue_name;
     level._audio.music.prev_cue_name = level._audio.music.curr_cue_name;
@@ -120,9 +114,8 @@ musx_start_cue(var_0, var_1, var_2, var_3, var_4) {
     var_9 = musx_get_cashed_cue(level._audio.music.prev_cue_name);
     var_10 = undefined;
 
-    if(isDefined(var_9)) {
+    if(isdefined(var_9))
       var_10 = var_9["alias"];
-    }
 
     soundscripts\_audio_stream_manager::sm_start_music(var_8["alias"], var_1, var_2, var_3, var_10);
   }
@@ -148,7 +141,7 @@ musx_monitor_game_vars() {
   if(musx_get_auto_mix()) {
     var_0 = 1.0;
 
-    for(;;) {
+    for (;;) {
       wait(var_0);
 
       if(musx_get_auto_mix()) {
@@ -160,7 +153,7 @@ musx_monitor_game_vars() {
 }
 
 ams_init() {
-  level._snd._ams = spawnStruct();
+  level._snd._ams = spawnstruct();
   level._snd._ams.curr_intensity = 0;
   level._snd._ams.curr_state = "";
   soundscripts\_snd::snd_register_message("ams_start", ::ams_start);
@@ -178,7 +171,7 @@ ams_start(var_0, var_1, var_2, var_3) {
   var_5 = 3;
   var_6 = 3;
 
-  if(isDefined(var_0) && !isstring(var_0)) {
+  if(isdefined(var_0) && !isstring(var_0)) {
     var_7 = var_0;
     var_0 = var_7.preset_name;
     var_1 = var_7.initial_state;
@@ -187,7 +180,7 @@ ams_start(var_0, var_1, var_2, var_3) {
   } else {}
 
   ams_set_state(var_1);
-  var_8 = spawnStruct();
+  var_8 = spawnstruct();
   var_8.preset_name = var_0;
   var_8.fadein_time = soundscripts\_audio::aud_get_optional_param(var_5, var_2);
   var_8.fadeout_time = soundscripts\_audio::aud_get_optional_param(var_6, var_3);
@@ -231,9 +224,8 @@ ams_proxy_vehicle_speed() {
   var_1 = soundscripts\_audio_vehicle_manager::avmx_get_vehicle_entity();
   var_2 = amsx_get_proxy_vehicle_ent();
 
-  if(isDefined(var_2)) {
+  if(isdefined(var_2))
     var_0 = var_2 vehicle_getspeed();
-  }
 
   return var_0;
 }
@@ -250,9 +242,8 @@ amsx_get_proxy_vehicle_ent() {
   var_0 = undefined;
   var_1 = amsx_get_proxy();
 
-  if(isDefined(var_1)) {
+  if(isdefined(var_1))
     var_0 = level._snd._ams.proxy.veh_ent;
-  }
 
   return var_0;
 }

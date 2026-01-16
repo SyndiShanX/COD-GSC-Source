@@ -13,6 +13,7 @@
 #include scripts\zm_common\trials\zm_trial_disable_hud;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace ztrials;
 
 event_handler[gametype_init] main(eventstruct) {

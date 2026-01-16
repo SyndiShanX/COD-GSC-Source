@@ -15,7 +15,7 @@
 #namespace scene;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,7 +32,7 @@ function __init__() {
 }
 
 function function_f69ab75e() {
-  while(true) {
+  while (true) {
     level flagsys::wait_till("");
     foreach(var_4d881e03 in function_c4a37ed9()) {
       var_4d881e03 thread debug_display();
@@ -51,10 +51,10 @@ function function_c4a37ed9() {
 
 function run_scene_tests() {
   level endon("run_scene_tests");
-  level.scene_test_struct = spawnStruct();
+  level.scene_test_struct = spawnstruct();
   level.scene_test_struct.origin = (0, 0, 0);
   level.scene_test_struct.angles = (0, 0, 0);
-  while(true) {
+  while (true) {
     str_scene = getdvarstring("");
     str_client_scene = getdvarstring("");
     str_mode = tolower(getdvarstring("", ""));
@@ -79,12 +79,12 @@ function run_scene_tests() {
         b_found = 0;
         a_scenes = struct::get_array(str_scene, "");
         foreach(s_instance in a_scenes) {
-          if(isDefined(s_instance)) {
+          if(isdefined(s_instance)) {
             b_found = 1;
             s_instance thread test_play(undefined, str_mode);
           }
         }
-        if(!b_found && isDefined(level.active_scenes[str_scene])) {
+        if(!b_found && isdefined(level.active_scenes[str_scene])) {
           foreach(s_instance in level.active_scenes[str_scene]) {
             b_found = 1;
             s_instance thread test_play(str_scene, str_mode);
@@ -107,7 +107,7 @@ function run_scene_tests() {
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
       foreach(s_instance in a_scenes) {
-        if(isDefined(s_instance)) {
+        if(isdefined(s_instance)) {
           b_found = 1;
           s_instance thread test_init();
         }
@@ -139,7 +139,7 @@ function capture_scene(str_scene, str_mode) {
 }
 
 function clear_old_ents(str_scene) {
-  foreach(ent in getEntArray(str_scene, "")) {
+  foreach(ent in getentarray(str_scene, "")) {
     if(ent.scene_spawned === str_scene) {
       ent delete();
     }
@@ -149,7 +149,7 @@ function clear_old_ents(str_scene) {
 function toggle_scene_menu() {
   setdvar("", 0);
   n_scene_menu_last = -1;
-  while(true) {
+  while (true) {
     n_scene_menu = getdvarstring("");
     if(n_scene_menu != "") {
       n_scene_menu = int(n_scene_menu);
@@ -198,7 +198,7 @@ function create_scene_hud(scene_name, index) {
 }
 
 function display_scene_menu(str_type) {
-  if(!isDefined(str_type)) {
+  if(!isdefined(str_type)) {
     str_type = "";
   }
   level notify("scene_menu_cleanup");
@@ -231,7 +231,7 @@ function display_scene_menu(str_type) {
   scene_list_settext(elems, names, selected);
   old_selected = selected;
   level thread scene_menu_cleanup(elems, title, hudelem);
-  while(true) {
+  while (true) {
     scene_list_settext(elems, names, selected);
     if(held) {
       wait(0.5);
@@ -283,12 +283,12 @@ function display_scene_menu(str_type) {
     if(names[selected] != "") {
       if(level.host buttonpressed("") || level.host buttonpressed("")) {
         level.host move_to_scene(names[selected]);
-        while(level.host buttonpressed("") || level.host buttonpressed("")) {
+        while (level.host buttonpressed("") || level.host buttonpressed("")) {
           wait(0.05);
         }
       } else if(level.host buttonpressed("") || level.host buttonpressed("")) {
         level.host move_to_scene(names[selected], 1);
-        while(level.host buttonpressed("") || level.host buttonpressed("")) {
+        while (level.host buttonpressed("") || level.host buttonpressed("")) {
           wait(0.05);
         }
       }
@@ -311,7 +311,7 @@ function display_scene_menu(str_type) {
           }
         }
       }
-      while(level.host buttonpressed("") || level.host buttonpressed("") || level.host buttonpressed("")) {
+      while (level.host buttonpressed("") || level.host buttonpressed("") || level.host buttonpressed("")) {
         wait(0.05);
       }
     }
@@ -324,7 +324,7 @@ function display_mode() {
   level.host setluimenudata(hudelem, "", 100);
   level.host setluimenudata(hudelem, "", 490);
   level.host setluimenudata(hudelem, "", 500);
-  while(level flagsys::get("")) {
+  while (level flagsys::get("")) {
     str_mode = tolower(getdvarstring("", ""));
     switch (str_mode) {
       case "": {
@@ -351,7 +351,7 @@ function display_mode() {
 
 function scene_list_menu() {
   hud_array = [];
-  for(i = 0; i < 22; i++) {
+  for (i = 0; i < 22; i++) {
     hud = create_scene_hud("", i);
     hud_array[hud_array.size] = hud;
   }
@@ -359,9 +359,9 @@ function scene_list_menu() {
 }
 
 function scene_list_settext(hud_array, strings, num) {
-  for(i = 0; i < hud_array.size; i++) {
+  for (i = 0; i < hud_array.size; i++) {
     index = i + (num - 5);
-    if(isDefined(strings[index])) {
+    if(isdefined(strings[index])) {
       text = strings[index];
     } else {
       text = "";
@@ -406,7 +406,7 @@ function is_scene_initialized(str_scene) {
 function scene_menu_cleanup(elems, title, hudelem) {
   level waittill("scene_menu_cleanup");
   level.host closeluimenu(title);
-  for(i = 0; i < elems.size; i++) {
+  for (i = 0; i < elems.size; i++) {
     level.host closeluimenu(elems[i]);
   }
   level.host closeluimenu(hudelem);
@@ -425,19 +425,25 @@ function debug_display() {
   self notify("hash_87671d41");
   self endon("hash_87671d41");
   level endon("kill_anim_debug");
-  while(true) {
+  while (true) {
     debug_frames = randomintrange(5, 15);
     debug_time = debug_frames / 20;
-    v_origin = (isDefined(self.origin) ? self.origin : (0, 0, 0));
+    v_origin = (isdefined(self.origin) ? self.origin : (0, 0, 0));
     sphere(v_origin, 1, (1, 1, 0), 1, 1, 8, debug_frames);
-    if(isDefined(self.scenes)) {
+    if(isdefined(self.scenes)) {
       foreach(i, o_scene in self.scenes) {
         n_offset = 15 * (i + 1);
-        print3d(v_origin - (0, 0, n_offset), [[o_scene]] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
-        print3d(v_origin - (0, 0, n_offset + 5), ("" + (isDefined([[o_scene]] - > get_state()) ? "" + ([[o_scene]] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
+        print3d(v_origin - (0, 0, n_offset), [
+          [o_scene]
+        ] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
+        print3d(v_origin - (0, 0, n_offset + 5), ("" + (isdefined([
+          [o_scene]
+        ] - > get_state()) ? "" + ([
+          [o_scene]
+        ] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
       }
     } else {
-      if(isDefined(self.scriptbundlename)) {
+      if(isdefined(self.scriptbundlename)) {
         print3d(v_origin - vectorscale((0, 0, 1), 15), self.scriptbundlename, (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
       } else {
         break;
@@ -448,7 +454,7 @@ function debug_display() {
 }
 
 function move_to_scene(str_scene, b_reverse_dir) {
-  if(!isDefined(b_reverse_dir)) {
+  if(!isdefined(b_reverse_dir)) {
     b_reverse_dir = 0;
   }
   if(!level.debug_current_scene_name === str_scene) {
@@ -470,9 +476,9 @@ function move_to_scene(str_scene, b_reverse_dir) {
   }
   if(level.debug_current_scene_instances.size == 0) {
     s_bundle = struct::get_script_bundle("", str_scene);
-    if(isDefined(s_bundle.aligntarget)) {
+    if(isdefined(s_bundle.aligntarget)) {
       e_align = get_existing_ent(s_bundle.aligntarget, 0, 1);
-      if(isDefined(e_align)) {
+      if(isdefined(e_align)) {
         level.host set_origin(e_align.origin);
       } else {
         scriptbundle::error_on_screen("");
@@ -494,9 +500,9 @@ function set_origin(v_origin) {
 }
 
 function toggle_postfx_igc_loop() {
-  while(true) {
+  while (true) {
     if(getdvarint("", 0)) {
-      array::run_all(level.activeplayers, &clientfield::increment_to_player, "", 1);
+      array::run_all(level.activeplayers, & clientfield::increment_to_player, "", 1);
       wait(4);
     }
     wait(1);

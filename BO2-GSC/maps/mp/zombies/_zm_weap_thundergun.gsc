@@ -82,7 +82,7 @@ wait_for_thundergun_fired() {
       self thread thundergun_fired();
       view_pos = self gettagorigin("tag_flash") - self getplayerviewheight();
       view_angles = self gettagangles("tag_flash");
-      playFX(level._effect["thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
+      playfx(level._effect["thundergun_smoke_cloud"], view_pos, anglestoforward(view_angles), anglestoup(view_angles));
     }
   }
 }
@@ -184,9 +184,8 @@ thundergun_get_enemies_in_range() {
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
       fling_vec = vectornormalize(test_origin - view_pos);
 
-      if(5000 < test_range_squared) {
+      if(5000 < test_range_squared)
         fling_vec = fling_vec + vectornormalize(test_origin - radial_origin);
-      }
 
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 100 + 100 * dist_mult);
@@ -212,9 +211,8 @@ thundergun_debug_print(msg, color) {
   if(!getdvarint(#"_id_AAC84AD6")) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (1, 1, 1);
-  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }
@@ -233,11 +231,10 @@ thundergun_fling_zombie(player, fling_vec, index) {
   if(self.health <= 0) {
     points = 10;
 
-    if(!index) {
+    if(!index)
       points = maps\mp\zombies\_zm_score::get_zombie_death_player_points();
-    } else if(1 == index) {
+    else if(1 == index)
       points = 30;
-    }
 
     player maps\mp\zombies\_zm_score::player_add_points("thundergun_fling", points);
     self startragdoll();
@@ -254,9 +251,9 @@ zombie_knockdown(player, gib) {
 
   damage = level.zombie_vars["thundergun_knockdown_damage"];
 
-  if(isDefined(level.override_thundergun_damage_func)) {
+  if(isDefined(level.override_thundergun_damage_func))
     self[[level.override_thundergun_damage_func]](player, gib);
-  } else {
+  else {
     self.thundergun_handle_pain_notetracks = ::handle_thundergun_pain_notetracks;
     self dodamage(damage, player.origin, player);
   }
@@ -270,11 +267,10 @@ thundergun_knockdown_zombie(player, gib) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.thundergun_knockdown_func)) {
+  if(isDefined(self.thundergun_knockdown_func))
     self[[self.thundergun_knockdown_func]](player, gib);
-  } else {
+  else
     self dodamage(level.zombie_vars["thundergun_knockdown_damage"], player.origin, player);
-  }
 
   if(gib) {
     self.a.gib_ref = random(level.thundergun_gib_refs);
@@ -283,13 +279,13 @@ thundergun_knockdown_zombie(player, gib) {
 
   self.thundergun_handle_pain_notetracks = ::handle_thundergun_pain_notetracks;
   self dodamage(level.zombie_vars["thundergun_knockdown_damage"], player.origin, player);
-  self playSound("fly_thundergun_forcehit");
+  self playsound("fly_thundergun_forcehit");
 }
 
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect["thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    self playSound("fly_thundergun_forcehit");
+    playfx(level._effect["thundergun_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+    self playsound("fly_thundergun_forcehit");
   }
 }
 
@@ -312,7 +308,7 @@ thundergun_sound_thread() {
       continue;
     }
     if((result == "weapon_change" || result == "grenade_fire") && self getcurrentweapon() == "thundergun_zm") {
-      self playLoopSound("tesla_idle", 0.25);
+      self playloopsound("tesla_idle", 0.25);
       continue;
     }
 
@@ -326,12 +322,12 @@ setup_thundergun_vox(player, fling, gib, knockdown) {
     return;
   }
   if(!fling && (gib || knockdown)) {
-    if(25 > randomintrange(1, 100)) {}
+    if(25 > randomintrange(1, 100)) {
+    }
   }
 
   if(fling) {
-    if(30 > randomintrange(1, 100)) {
+    if(30 > randomintrange(1, 100))
       player maps\mp\zombies\_zm_audio::create_and_play_dialog("kill", "thundergun");
-    }
   }
 }

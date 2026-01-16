@@ -30,8 +30,8 @@
 
 function autoexec init() {
   initmechzbehaviorsandasm();
-  spawner::add_archetype_spawn_function("mechz", &archetypemechzblackboardinit);
-  spawner::add_archetype_spawn_function("mechz", &mechzserverutils::mechzspawnsetup);
+  spawner::add_archetype_spawn_function("mechz", & archetypemechzblackboardinit);
+  spawner::add_archetype_spawn_function("mechz", & mechzserverutils::mechzspawnsetup);
   clientfield::register("actor", "mechz_ft", 5000, 1, "int");
   clientfield::register("actor", "mechz_faceplate_detached", 5000, 1, "int");
   clientfield::register("actor", "mechz_powercap_detached", 5000, 1, "int");
@@ -46,32 +46,32 @@ function autoexec init() {
 }
 
 function private initmechzbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzTargetService", &mechztargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzGrenadeService", &mechzgrenadeservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzBerserkKnockdownService", &mechzberserkknockdownservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldMelee", &mechzshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShowPain", &mechzshouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootGrenade", &mechzshouldshootgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlame", &mechzshouldshootflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlameSweep", &mechzshouldshootflamesweep);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldTurnBerserk", &mechzshouldturnberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStun", &mechzshouldstun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStumble", &mechzshouldstumble);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzStunLoop", &mechzstunstart, &mechzstunupdate, &mechzstunend);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", &mechzstumblestart, &mechzstumbleupdate, &mechzstumbleend);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", &mechzshootflameactionstart, &mechzshootflameactionupdate, &mechzshootflameactionend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootGrenade", &mechzshootgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootFlame", &mechzshootflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzUpdateFlame", &mechzupdateflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzStopFlame", &mechzstopflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPlayedBerserkIntro", &mechzplayedberserkintro);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzAttackStart", &mechzattackstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzDeathStart", &mechzdeathstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzIdleStart", &mechzidlestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainStart", &mechzpainstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainTerminate", &mechzpainterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", &mechznotetrackmelee);
-  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", &mechznotetrackshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzTargetService", & mechztargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzGrenadeService", & mechzgrenadeservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzBerserkKnockdownService", & mechzberserkknockdownservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldMelee", & mechzshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShowPain", & mechzshouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootGrenade", & mechzshouldshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlame", & mechzshouldshootflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlameSweep", & mechzshouldshootflamesweep);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldTurnBerserk", & mechzshouldturnberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStun", & mechzshouldstun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStumble", & mechzshouldstumble);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzStunLoop", & mechzstunstart, & mechzstunupdate, & mechzstunend);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", & mechzstumblestart, & mechzstumbleupdate, & mechzstumbleend);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", & mechzshootflameactionstart, & mechzshootflameactionupdate, & mechzshootflameactionend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootGrenade", & mechzshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootFlame", & mechzshootflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzUpdateFlame", & mechzupdateflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzStopFlame", & mechzstopflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPlayedBerserkIntro", & mechzplayedberserkintro);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzAttackStart", & mechzattackstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzDeathStart", & mechzdeathstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzIdleStart", & mechzidlestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainStart", & mechzpainstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainTerminate", & mechzpainterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", & mechznotetrackmelee);
+  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", & mechznotetrackshootgrenade);
 }
 
 function private archetypemechzblackboardinit() {
@@ -81,7 +81,7 @@ function private archetypemechzblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -93,7 +93,7 @@ function private archetypemechzblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = &archetypemechzonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = & archetypemechzonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -103,21 +103,21 @@ function private archetypemechzonanimscriptedcallback(entity) {
 }
 
 function private bb_getshouldturn() {
-  if(isDefined(self.should_turn) && self.should_turn) {
+  if(isdefined(self.should_turn) && self.should_turn) {
     return "should_turn";
   }
   return "should_not_turn";
 }
 
 function private mechznotetrackmelee(entity) {
-  if(isDefined(entity.mechz_melee_knockdown_function)) {
+  if(isdefined(entity.mechz_melee_knockdown_function)) {
     entity thread[[entity.mechz_melee_knockdown_function]]();
   }
   entity melee();
 }
 
 function private mechznotetrackshootgrenade(entity) {
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return;
   }
   base_target_pos = entity.enemy.origin;
@@ -127,7 +127,7 @@ function private mechznotetrackshootgrenade(entity) {
   target_pos_offset_y = math::randomsign() * randomint(32);
   target_pos = base_target_pos + (target_pos_offset_x, target_pos_offset_y, 0);
   dir = vectortoangles(target_pos - entity.origin);
-  dir = anglesToForward(dir);
+  dir = anglestoforward(dir);
   launch_offset = dir * 5;
   launch_pos = entity gettagorigin("tag_gun_barrel2") + launch_offset;
   dist = distance(launch_pos, target_pos);
@@ -144,26 +144,28 @@ function private mechznotetrackshootgrenade(entity) {
 }
 
 function mechztargetservice(entity) {
-  if(isDefined(entity.ignoreall) && entity.ignoreall) {
+  if(isdefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
-  if(isDefined(entity.destroy_octobomb)) {
+  if(isdefined(entity.destroy_octobomb)) {
     return false;
   }
   player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player);
   entity.favoriteenemy = player;
-  if(!isDefined(player) || player isnotarget()) {
-    if(isDefined(entity.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
+  if(!isdefined(player) || player isnotarget()) {
+    if(isdefined(entity.ignore_player)) {
+      if(isdefined(level._should_skip_ignore_player_logic) && [
+          [level._should_skip_ignore_player_logic]
+        ]()) {
         return;
       }
       entity.ignore_player = [];
     }
-    if(isDefined(level.b_mechz_true_ignore) && level.b_mechz_true_ignore) {
+    if(isdefined(level.b_mechz_true_ignore) && level.b_mechz_true_ignore) {
       entity setgoal(entity.origin);
       return false;
     }
-    if(isDefined(level.no_target_override)) {
+    if(isdefined(level.no_target_override)) {
       [
         [level.no_target_override]
       ](entity);
@@ -172,15 +174,17 @@ function mechztargetservice(entity) {
     }
     return false;
   }
-  if(isDefined(level.enemy_location_override_func)) {
-    enemy_ground_pos = [[level.enemy_location_override_func]](entity, player);
-    if(isDefined(enemy_ground_pos)) {
+  if(isdefined(level.enemy_location_override_func)) {
+    enemy_ground_pos = [
+      [level.enemy_location_override_func]
+    ](entity, player);
+    if(isdefined(enemy_ground_pos)) {
       entity setgoal(enemy_ground_pos);
       return true;
     }
   }
   targetpos = getclosestpointonnavmesh(player.origin, 64, 30);
-  if(isDefined(targetpos)) {
+  if(isdefined(targetpos)) {
     entity setgoal(targetpos);
     return true;
   }
@@ -189,7 +193,7 @@ function mechztargetservice(entity) {
 }
 
 function private mechzgrenadeservice(entity) {
-  if(!isDefined(entity.burstgrenadesfired)) {
+  if(!isdefined(entity.burstgrenadesfired)) {
     entity.burstgrenadesfired = 0;
   }
   if(entity.burstgrenadesfired >= 3) {
@@ -197,9 +201,9 @@ function private mechzgrenadeservice(entity) {
       entity.burstgrenadesfired = 0;
     }
   }
-  if(isDefined(level.a_electroball_grenades)) {
+  if(isdefined(level.a_electroball_grenades)) {
     level.a_electroball_grenades = array::remove_undefined(level.a_electroball_grenades);
-    a_active_grenades = array::filter(level.a_electroball_grenades, 0, &mechzfiltergrenadesbyowner, entity);
+    a_active_grenades = array::filter(level.a_electroball_grenades, 0, & mechzfiltergrenadesbyowner, entity);
     entity.activegrenades = a_active_grenades.size;
   } else {
     entity.activegrenades = 0;
@@ -221,14 +225,14 @@ function private mechzberserkknockdownservice(entity) {
   speed = move_dist_sq / predict_time;
   if(speed >= 10) {
     a_zombies = getaiarchetypearray("zombie");
-    a_filtered_zombies = array::filter(a_zombies, 0, &mechzzombieeligibleforberserkknockdown, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, & mechzzombieeligibleforberserkknockdown, entity, predicted_pos);
     if(a_filtered_zombies.size > 0) {
       foreach(zombie in a_filtered_zombies) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         zombie_to_mechz = entity.origin - zombie.origin;
         zombie_to_mechz_2d = vectornormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
-        zombie_forward = anglesToForward(zombie.angles);
+        zombie_forward = anglestoforward(zombie.angles);
         zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
         zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
@@ -273,7 +277,7 @@ function private mechzzombieeligibleforberserkknockdown(zombie, mechz, predicted
     return false;
   }
   origin = mechz.origin;
-  facing_vec = anglesToForward(mechz.angles);
+  facing_vec = anglestoforward(mechz.angles);
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
@@ -287,13 +291,13 @@ function private mechzzombieeligibleforberserkknockdown(zombie, mechz, predicted
 }
 
 function mechzshouldmelee(entity) {
-  if(!isDefined(entity.enemy)) {
+  if(!isdefined(entity.enemy)) {
     return false;
   }
   if(distancesquared(entity.origin, entity.enemy.origin) > 12544) {
     return false;
   }
-  if(isDefined(entity.enemy.usingvehicle) && entity.enemy.usingvehicle) {
+  if(isdefined(entity.enemy.usingvehicle) && entity.enemy.usingvehicle) {
     return true;
   }
   yaw = abs(zombie_utility::getyawtoenemy());
@@ -317,7 +321,7 @@ function private mechzshouldshootgrenade(entity) {
   if(entity.gun_attached !== 1) {
     return false;
   }
-  if(!isDefined(entity.favoriteenemy)) {
+  if(!isdefined(entity.favoriteenemy)) {
     return false;
   }
   if(entity.burstgrenadesfired >= 3) {
@@ -340,16 +344,16 @@ function private mechzshouldshootgrenade(entity) {
 }
 
 function private mechzshouldshootflame(entity) {
-  if(isDefined(entity.shoot_flame) && entity.shoot_flame) {
+  if(isdefined(entity.shoot_flame) && entity.shoot_flame) {
     return true;
   }
   if(entity.berserk === 1) {
     return false;
   }
-  if(isDefined(entity.isshootingflame) && entity.isshootingflame && gettime() < entity.stopshootingflametime) {
+  if(isdefined(entity.isshootingflame) && entity.isshootingflame && gettime() < entity.stopshootingflametime) {
     return true;
   }
-  if(!isDefined(entity.favoriteenemy)) {
+  if(!isdefined(entity.favoriteenemy)) {
     return false;
   }
   if(entity.isshootingflame === 1 && entity.stopshootingflametime <= gettime()) {
@@ -403,14 +407,14 @@ function private mechzshouldturnberserk(entity) {
 }
 
 function private mechzshouldstun(entity) {
-  if(isDefined(entity.stun) && entity.stun) {
+  if(isdefined(entity.stun) && entity.stun) {
     return true;
   }
   return false;
 }
 
 function private mechzshouldstumble(entity) {
-  if(isDefined(entity.stumble) && entity.stumble) {
+  if(isdefined(entity.stumble) && entity.stumble) {
     return true;
   }
   return false;
@@ -423,7 +427,7 @@ function private mechzshootgrenadeaction(entity, asmstatename) {
 }
 
 function private mechzshootgrenadeactionupdate(entity, asmstatename) {
-  if(!(isDefined(entity.shoot_grenade) && entity.shoot_grenade)) {
+  if(!(isdefined(entity.shoot_grenade) && entity.shoot_grenade)) {
     return 4;
   }
   return 5;
@@ -474,16 +478,16 @@ function mechzshootflameactionstart(entity, asmstatename) {
 }
 
 function mechzshootflameactionupdate(entity, asmstatename) {
-  if(isDefined(entity.berserk) && entity.berserk) {
+  if(isdefined(entity.berserk) && entity.berserk) {
     mechzstopflame(entity);
     return 4;
   }
-  if(isDefined(mechzshouldmelee(entity)) && mechzshouldmelee(entity)) {
+  if(isdefined(mechzshouldmelee(entity)) && mechzshouldmelee(entity)) {
     mechzstopflame(entity);
     return 4;
   }
-  if(isDefined(entity.isshootingflame) && entity.isshootingflame) {
-    if(isDefined(entity.stopshootingflametime) && gettime() > entity.stopshootingflametime) {
+  if(isdefined(entity.isshootingflame) && entity.isshootingflame) {
+    if(isdefined(entity.stopshootingflametime) && gettime() > entity.stopshootingflametime) {
       mechzstopflame(entity);
       return 4;
     }
@@ -519,14 +523,16 @@ function private mechzdelayflame() {
 }
 
 function private mechzupdateflame(entity) {
-  if(isDefined(level.mechz_flamethrower_player_callback)) {
-    [[level.mechz_flamethrower_player_callback]](entity);
+  if(isdefined(level.mechz_flamethrower_player_callback)) {
+    [
+      [level.mechz_flamethrower_player_callback]
+    ](entity);
   } else {
     players = getplayers();
     foreach(player in players) {
-      if(!(isDefined(player.is_burning) && player.is_burning)) {
+      if(!(isdefined(player.is_burning) && player.is_burning)) {
         if(player istouching(entity.flametrigger)) {
-          if(isDefined(entity.mechzflamedamage)) {
+          if(isdefined(entity.mechzflamedamage)) {
             player thread[[entity.mechzflamedamage]]();
             continue;
           }
@@ -535,15 +541,17 @@ function private mechzupdateflame(entity) {
       }
     }
   }
-  if(isDefined(level.mechz_flamethrower_ai_callback)) {
-    [[level.mechz_flamethrower_ai_callback]](entity);
+  if(isdefined(level.mechz_flamethrower_ai_callback)) {
+    [
+      [level.mechz_flamethrower_ai_callback]
+    ](entity);
   }
 }
 
 function playerflamedamage(mechz) {
   self endon("death");
   self endon("disconnect");
-  if(!(isDefined(self.is_burning) && self.is_burning) && zombie_utility::is_player_valid(self, 1)) {
+  if(!(isdefined(self.is_burning) && self.is_burning) && zombie_utility::is_player_valid(self, 1)) {
     self.is_burning = 1;
     if(!self hasperk("specialty_armorvest")) {
       self burnplayer::setplayerburning(1.5, 0.5, 30, mechz, undefined);
@@ -581,7 +589,7 @@ function private mechzplayedberserkintro(entity) {
 function private mechzendberserk() {
   self endon("death");
   self endon("disconnect");
-  while(self.berserk === 1) {
+  while (self.berserk === 1) {
     if(gettime() >= self.berserkendtime) {
       self.berserk = 0;
       self.hasturnedberserk = 0;
@@ -642,8 +650,8 @@ function private mechzspawnsetup() {
 
 function private mechzflamewatcher() {
   self endon("death");
-  while(true) {
-    if(isDefined(self.favoriteenemy)) {
+  while (true) {
+    if(isdefined(self.favoriteenemy)) {
       if(self.flametrigger istouching(self.favoriteenemy)) {
         printtoprightln("");
       }
@@ -673,62 +681,66 @@ function private mechzaddattachments() {
 }
 
 function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isDefined(self.b_flyin_done) && (!(isDefined(self.b_flyin_done) && self.b_flyin_done))) {
+  if(isdefined(self.b_flyin_done) && (!(isdefined(self.b_flyin_done) && self.b_flyin_done))) {
     return 0;
   }
-  if(isDefined(level.mechz_should_stun_override) && (!(isDefined(self.stun) && self.stun || (isDefined(self.stumble) && self.stumble)))) {
-    if(self.stumble_stun_cooldown_time < gettime() && (!(isDefined(self.berserk) && self.berserk))) {
+  if(isdefined(level.mechz_should_stun_override) && (!(isdefined(self.stun) && self.stun || (isdefined(self.stumble) && self.stumble)))) {
+    if(self.stumble_stun_cooldown_time < gettime() && (!(isdefined(self.berserk) && self.berserk))) {
       self[[level.mechz_should_stun_override]](inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
   }
-  if(issubstr(weapon.name, "elemental_bow") && isDefined(inflictor) && inflictor.classname === "rocket") {
+  if(issubstr(weapon.name, "elemental_bow") && isdefined(inflictor) && inflictor.classname === "rocket") {
     return 0;
   }
   damage = mechzweapondamagemodifier(damage, weapon);
-  if(isDefined(level.mechz_damage_override)) {
-    damage = [[level.mechz_damage_override]](attacker, damage);
+  if(isdefined(level.mechz_damage_override)) {
+    damage = [
+      [level.mechz_damage_override]
+    ](attacker, damage);
   }
-  if(!isDefined(self.next_pain_time) || gettime() >= self.next_pain_time) {
+  if(!isdefined(self.next_pain_time) || gettime() >= self.next_pain_time) {
     self thread mechz_play_pain_audio();
     self.next_pain_time = (gettime() + 250) + randomint(500);
   }
-  if(isDefined(self.damage_scoring_function)) {
+  if(isdefined(self.damage_scoring_function)) {
     self[[self.damage_scoring_function]](inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
   }
-  if(isDefined(level.mechz_staff_damage_override)) {
-    staffdamage = [[level.mechz_staff_damage_override]](inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
+  if(isdefined(level.mechz_staff_damage_override)) {
+    staffdamage = [
+      [level.mechz_staff_damage_override]
+    ](inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     if(staffdamage > 0) {
       n_mechz_damage_percent = 0.5;
-      if(!(isDefined(self.has_faceplate) && self.has_faceplate) && n_mechz_damage_percent < 1) {
+      if(!(isdefined(self.has_faceplate) && self.has_faceplate) && n_mechz_damage_percent < 1) {
         n_mechz_damage_percent = 1;
       }
       staffdamage = staffdamage * n_mechz_damage_percent;
-      if(isDefined(self.has_faceplate) && self.has_faceplate) {
+      if(isdefined(self.has_faceplate) && self.has_faceplate) {
         self mechz_track_faceplate_damage(staffdamage);
       }
       iprintlnbold((("" + staffdamage) + "") + (self.health - staffdamage));
-      if(!isDefined(self.explosive_dmg_taken)) {
+      if(!isdefined(self.explosive_dmg_taken)) {
         self.explosive_dmg_taken = 0;
       }
       self.explosive_dmg_taken = self.explosive_dmg_taken + staffdamage;
-      if(isDefined(level.mechz_explosive_damage_reaction_callback)) {
+      if(isdefined(level.mechz_explosive_damage_reaction_callback)) {
         self[[level.mechz_explosive_damage_reaction_callback]]();
       }
       return staffdamage;
     }
   }
-  if(isDefined(level.mechz_explosive_damage_reaction_callback)) {
-    if(isDefined(mod) && mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
+  if(isdefined(level.mechz_explosive_damage_reaction_callback)) {
+    if(isdefined(mod) && mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
       n_mechz_damage_percentage = 0.5;
-      if(isDefined(attacker) && isplayer(attacker) && isalive(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isDefined(attacker.personal_instakill) && attacker.personal_instakill))) {
+      if(isdefined(attacker) && isplayer(attacker) && isalive(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isdefined(attacker.personal_instakill) && attacker.personal_instakill))) {
         n_mechz_damage_percentage = 1;
       }
       explosive_damage = damage * n_mechz_damage_percentage;
-      if(!isDefined(self.explosive_dmg_taken)) {
+      if(!isdefined(self.explosive_dmg_taken)) {
         self.explosive_dmg_taken = 0;
       }
       self.explosive_dmg_taken = self.explosive_dmg_taken + explosive_damage;
-      if(isDefined(self.has_faceplate) && self.has_faceplate) {
+      if(isdefined(self.has_faceplate) && self.has_faceplate) {
         self mechz_track_faceplate_damage(explosive_damage);
       }
       self[[level.mechz_explosive_damage_reaction_callback]]();
@@ -809,7 +821,7 @@ function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, p
       case "left_arm_lower":
       case "left_arm_upper":
       case "left_hand": {
-        if(isDefined(level.mechz_left_arm_damage_callback)) {
+        if(isdefined(level.mechz_left_arm_damage_callback)) {
           self[[level.mechz_left_arm_damage_callback]]();
         }
         iprintlnbold((("" + (damage * 0.1)) + "") + (self.health - (damage * 0.1)));
@@ -899,7 +911,7 @@ function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, p
   if(mod == "MOD_PROJECTILE_SPLASH") {
     hit_damage = damage * 0.2;
     i_num_armor_pieces = 0;
-    if(isDefined(level.mechz_faceplate_damage_override)) {
+    if(isdefined(level.mechz_faceplate_damage_override)) {
       self[[level.mechz_faceplate_damage_override]](inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
     if(self.has_right_shoulder_armor === 1) {
@@ -952,7 +964,7 @@ function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, p
 }
 
 function private mechzweapondamagemodifier(damage, weapon) {
-  if(isDefined(weapon) && isDefined(weapon.name)) {
+  if(isdefined(weapon) && isdefined(weapon.name)) {
     if(issubstr(weapon.name, "shotgun_fullauto")) {
       return damage * 0.5;
     }
@@ -973,11 +985,11 @@ function private mechzweapondamagemodifier(damage, weapon) {
 }
 
 function mechz_play_pain_audio() {
-  self playSound("zmb_ai_mechz_destruction");
+  self playsound("zmb_ai_mechz_destruction");
 }
 
 function show_hit_marker() {
-  if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
+  if(isdefined(self) && isdefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);
@@ -1019,7 +1031,7 @@ function mechz_track_powercap_cover_damage(damage) {
 function mechz_track_powercap_damage(damage) {
   self.powercap_health = self.powercap_health - damage;
   if(self.powercap_health <= 0) {
-    if(isDefined(level.mechz_powercap_destroyed_callback)) {
+    if(isdefined(level.mechz_powercap_destroyed_callback)) {
       self[[level.mechz_powercap_destroyed_callback]]();
     }
     self hide_part("tag_gun_spin");
@@ -1077,15 +1089,15 @@ function mechz_track_lshoulder_armor_damage(damage) {
 function mechzcheckinarc(right_offset, aim_tag) {
   origin = self.origin;
   angles = self.angles;
-  if(isDefined(aim_tag)) {
+  if(isdefined(aim_tag)) {
     origin = self gettagorigin(aim_tag);
     angles = self gettagangles(aim_tag);
   }
-  if(isDefined(right_offset)) {
+  if(isdefined(right_offset)) {
     right_angle = anglestoright(angles);
     origin = origin + (right_angle * right_offset);
   }
-  facing_vec = anglesToForward(angles);
+  facing_vec = anglestoforward(angles);
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
@@ -1104,11 +1116,11 @@ function mechzcheckinarc(right_offset, aim_tag) {
 
 function private mechzgrenadecheckinarc(right_offset) {
   origin = self.origin;
-  if(isDefined(right_offset)) {
+  if(isdefined(right_offset)) {
     right_angle = anglestoright(self.angles);
     origin = origin + (right_angle * right_offset);
   }
-  facing_vec = anglesToForward(self.angles);
+  facing_vec = anglestoforward(self.angles);
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);

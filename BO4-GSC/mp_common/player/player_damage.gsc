@@ -38,6 +38,7 @@
 #include scripts\mp_common\vehicle;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace player;
 
 callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {
@@ -96,7 +97,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
     if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
       if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
         if(idamage > 0 && self.health > 0) {
-          perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags & 2048);
+          perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
         }
 
         eattacker thread damagefeedback::update(smeansofdeath, einflictor, perkfeedback, weapon, self, psoffsettime, shitloc, 0, idflags);
@@ -120,19 +121,19 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   idamage = armor_damage.idamage;
   idflags = armor_damage.idflags;
   idamage = function_74a5d514(eattacker, idamage, smeansofdeath, weapon, shitloc);
-  idamage = make_sure_damage_is_not_zero(idamage, idflags & 2048);
+  idamage = make_sure_damage_is_not_zero(idamage, idflags&2048);
   params = {
-    #einflictor: einflictor,
-    #eattacker: eattacker,
-    #idamage: idamage,
-    #smeansofdeath: smeansofdeath,
-    #weapon: weapon,
-    #vdir: vdir,
-    #shitloc: shitloc,
-    #idflags: idflags,
-    #vpoint: vpoint,
-    #vdamageorigin: vdamageorigin,
-    #boneindex: boneindex,
+    #einflictor: einflictor, 
+    #eattacker: eattacker, 
+    #idamage: idamage, 
+    #smeansofdeath: smeansofdeath, 
+    #weapon: weapon, 
+    #vdir: vdir, 
+    #shitloc: shitloc, 
+    #idflags: idflags, 
+    #vpoint: vpoint, 
+    #vdamageorigin: vdamageorigin, 
+    #boneindex: boneindex, 
     #vsurfacenormal: vsurfacenormal
   };
   self callback::callback(#"on_player_damage", params);
@@ -225,7 +226,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
     if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
       if(idamage > 0 && self.health > 0) {
-        perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags & 2048);
+        perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
       }
 
       eattacker thread damagefeedback::update(smeansofdeath, einflictor, perkfeedback, weapon, self, psoffsettime, shitloc, fatal, idflags);
@@ -245,7 +246,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   if(weapon.isemp && smeansofdeath == "MOD_GRENADE_SPLASH" && !isDefined(weapon.var_13600e25)) {
     if(!self hasperk(#"specialty_immuneemp")) {
       self notify(#"emp_grenaded", {
-        #attacker: eattacker,
+        #attacker: eattacker, 
         #position: vpoint
       });
     }
@@ -338,7 +339,7 @@ private function_a31ab50c(var_7c61c7a1) {
 private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {
   pixbeginevent(#"hash_161ca565ac88c256");
 
-  if(!level.console && idflags & 8 && isplayer(eattacker)) {
+  if(!level.console && idflags&8 && isplayer(eattacker)) {
     println("<dev string:x38>" + self getentitynumber() + "<dev string:x46>" + self.health + "<dev string:x51>" + eattacker.clientid + "<dev string:x5e>" + isplayer(einflictor) + "<dev string:x76>" + idamage + "<dev string:x81>" + shitloc);
     eattacker stats::function_dad108fa(#"penetration_shots", 1);
   }
@@ -399,7 +400,7 @@ private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath
       }
 
       eattacker.damagedone += damagedone;
-      eattacker.pers[# "damagedone"] = eattacker.damagedone;
+      eattacker.pers[#"damagedone"] = eattacker.damagedone;
       eattacker weapons::function_b1d41bd5(weapon, damagedone);
       eattacker contracts::player_contract_event(#"damagedone", damagedone);
       eattacker stats::function_bb7eedf0(#"total_damage", int(damagedone));
@@ -407,11 +408,11 @@ private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath
 
       if(!sessionmodeiswarzonegame()) {
         if(isarenamode()) {
-          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
-          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue", total_damage);
+          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
+          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue", total_damage);
         } else {
-          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
-          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue", total_damage);
+          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
+          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue", total_damage);
         }
       }
 
@@ -498,7 +499,7 @@ private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath
         self.var_ea1458aa.var_64ffda50[attackerentnum] = gettime();
       }
     } else if(weapon_utils::isexplosivedamage(smeansofdeath)) {
-      if(isDefined(einflictor) && isDefined(einflictor.weapon) && einflictor.weapon.statname == # "recon_car") {
+      if(isDefined(einflictor) && isDefined(einflictor.weapon) && einflictor.weapon.statname == #"recon_car") {
         if(!isDefined(self.var_ea1458aa.var_8f7ff7ed)) {
           self.var_ea1458aa.var_8f7ff7ed = [];
         }
@@ -509,7 +510,7 @@ private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath
     }
   }
 
-  if(level.competitivesettingsenabled && weapon.statname == # "launcher_standard_t8" && smeansofdeath == "MOD_PROJECTILE_SPLASH") {
+  if(level.competitivesettingsenabled && weapon.statname == #"launcher_standard_t8" && smeansofdeath == "MOD_PROJECTILE_SPLASH") {
     idamage = int(idamage * 0.25);
   }
 
@@ -540,43 +541,43 @@ private player_damage_log(einflictor, eattacker, idamage, idflags, smeansofdeath
     println("<dev string:x8c>" + self getentitynumber() + "<dev string:x46>" + self.health + "<dev string:x51>" + eattacker.clientid + "<dev string:x5e>" + isplayer(einflictor) + "<dev string:x76>" + idamage + "<dev string:x81>" + shitloc);
   }
 
-  if(self.sessionstate != "dead") {
-    lpselfnum = self getentitynumber();
-    lpselfname = self.name;
-    lpselfteam = self.team;
-    lpselfguid = self getguid();
-    lpattackerteam = "";
-    lpattackerorigin = (0, 0, 0);
-    victimspecialist = function_b14806c6(self player_role::get(), currentsessionmode());
+    if(self.sessionstate != "dead") {
+      lpselfnum = self getentitynumber();
+      lpselfname = self.name;
+      lpselfteam = self.team;
+      lpselfguid = self getguid();
+      lpattackerteam = "";
+      lpattackerorigin = (0, 0, 0);
+      victimspecialist = function_b14806c6(self player_role::get(), currentsessionmode());
 
-    if(isplayer(eattacker)) {
-      lpattacknum = eattacker getentitynumber();
-      var_c8fa9c41 = eattacker getxuid();
-      lpattackguid = eattacker getguid();
-      lpattackname = eattacker.name;
-      lpattackerteam = eattacker.team;
-      lpattackerorigin = eattacker.origin;
-      isusingheropower = 0;
-      attackerspecialist = function_b14806c6(eattacker player_role::get(), currentsessionmode());
+      if(isplayer(eattacker)) {
+        lpattacknum = eattacker getentitynumber();
+        var_c8fa9c41 = eattacker getxuid();
+        lpattackguid = eattacker getguid();
+        lpattackname = eattacker.name;
+        lpattackerteam = eattacker.team;
+        lpattackerorigin = eattacker.origin;
+        isusingheropower = 0;
+        attackerspecialist = function_b14806c6(eattacker player_role::get(), currentsessionmode());
 
-      if(eattacker ability_player::is_using_any_gadget()) {
-        isusingheropower = 1;
+        if(eattacker ability_player::is_using_any_gadget()) {
+          isusingheropower = 1;
+        }
+
+        if(isDefined(self.currentweapon)) {
+          name = self.currentweapon.name;
+        }
+
+        bb::function_c3b9e07f(eattacker, lpattackerorigin, attackerspecialist, weapon.name, self, self.origin, victimspecialist, name, idamage, smeansofdeath, shitloc, 0, isusingheropower, undefined);
+      } else {
+        lpattacknum = -1;
+        var_c8fa9c41 = 0;
+        lpattackguid = "";
+        lpattackname = "";
+        lpattackerteam = "world";
+        bb::function_c3b9e07f(undefined, undefined, undefined, weapon.name, self, self.origin, undefined, undefined, idamage, smeansofdeath, shitloc, 0, 0, undefined);
       }
-
-      if(isDefined(self.currentweapon)) {
-        name = self.currentweapon.name;
-      }
-
-      bb::function_c3b9e07f(eattacker, lpattackerorigin, attackerspecialist, weapon.name, self, self.origin, victimspecialist, name, idamage, smeansofdeath, shitloc, 0, isusingheropower, undefined);
-    } else {
-      lpattacknum = -1;
-      var_c8fa9c41 = 0;
-      lpattackguid = "";
-      lpattackname = "";
-      lpattackerteam = "world";
-      bb::function_c3b9e07f(undefined, undefined, undefined, weapon.name, self, self.origin, undefined, undefined, idamage, smeansofdeath, shitloc, 0, 0, undefined);
     }
-  }
 
   pixendevent();
 }
@@ -618,7 +619,7 @@ private function_b5dadafc(einflictor, eattacker, idamage, idflags, smeansofdeath
 
   if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
     if(idamage > 0) {
-      perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags & 2048);
+      perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
     }
 
     eattacker = figure_out_attacker(eattacker);
@@ -669,7 +670,7 @@ private function_e3242ae4(weapon, einflictor) {
 }
 
 private does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfire, attackerishittingself, smeansofdeath, vpoint, idamage, einflictor, eattacker) {
-  if(idflags & 8192) {
+  if(idflags&8192) {
     return idamage;
   }
 
@@ -682,7 +683,7 @@ private does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfi
   }
 
   if(shitloc == "riotshield") {
-    if(!(idflags & 160)) {
+    if(!(idflags&160)) {
       return 0;
     }
   }
@@ -690,7 +691,7 @@ private does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfi
   if(self.currentweapon === getweapon(#"sig_buckler_turret") && weapon != getweapon(#"remote_missile_missile") && (smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_EXPLOSIVE" || weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED"))) {
     angles = self getplayerangles();
     forward = anglesToForward((0, angles[1], 0));
-    var_587ddb7b = weapon.statname == # "hero_flamethrower" && weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED");
+    var_587ddb7b = weapon.statname == #"hero_flamethrower" && weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED");
 
     if(var_587ddb7b && isDefined(eattacker) && false) {
       vpoint = eattacker.origin;
@@ -756,7 +757,7 @@ function_56dc620b(einflictor, eattacker, idamage, weapon, customsettings) {
       score = rank::getscoreinfovalue("shield_blocked_damage");
 
       if(score > 0) {
-        self stats::function_e24eec31(level.weaponriotshield, # "score_from_blocked_damage", score);
+        self stats::function_e24eec31(level.weaponriotshield, #"score_from_blocked_damage", score);
       }
 
       scoreevents::processscoreevent(#"shield_blocked_damage", self, undefined, self.currentweapon);
@@ -812,7 +813,7 @@ private should_do_player_damage(eattacker, einflictor, weapon, smeansofdeath, id
     return 0;
   }
 
-  if(self.sessionteam == # "spectator") {
+  if(self.sessionteam == #"spectator") {
     return 0;
   }
 
@@ -870,7 +871,7 @@ private should_do_player_damage(eattacker, einflictor, weapon, smeansofdeath, id
     return 0;
   }
 
-  if(idflags & 8 && self is_spawn_protected()) {
+  if(idflags&8 && self is_spawn_protected()) {
     return 0;
   }
 
@@ -886,14 +887,14 @@ private apply_damage_to_armor(einflictor, eattacker, idamage, idflags, smeansofd
 
   if(friendlyfire && !function_1727a023(ignore_round_start_friendly_fire, eattacker)) {
     return {
-      #idflags: idflags,
+      #idflags: idflags, 
       #idamage: idamage
     };
   }
 
   if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == victim) {
     return {
-      #idflags: idflags,
+      #idflags: idflags, 
       #idamage: victim.health
     };
   }
@@ -918,7 +919,7 @@ private apply_damage_to_armor(einflictor, eattacker, idamage, idflags, smeansofd
   }
 
   return {
-    #idflags: idflags,
+    #idflags: idflags, 
     #idamage: idamage
   };
 }
@@ -1005,11 +1006,11 @@ private modify_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
   }
 
   if(shitloc == "riotshield") {
-    if(idflags & 32) {
-      if(!(idflags & 64)) {
+    if(idflags&32) {
+      if(!(idflags&64)) {
         idamage *= 0;
       }
-    } else if(idflags & 128) {
+    } else if(idflags&128) {
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self) {
         idamage = self.maxhealth + 1;
       }
@@ -1066,12 +1067,12 @@ private update_attacker(einflictor, eattacker, smeansofdeath) {
         }
 
         if(isDefined(eattacker.pers)) {
-          if(!isDefined(eattacker.pers[# "shotshit"])) {
-            eattacker.pers[# "shotshit"] = 0;
+          if(!isDefined(eattacker.pers[#"shotshit"])) {
+            eattacker.pers[#"shotshit"] = 0;
           }
 
-          eattacker.pers[# "shotshit"]++;
-          eattacker.shotshit = eattacker.pers[# "shotshit"];
+          eattacker.pers[#"shotshit"]++;
+          eattacker.shotshit = eattacker.pers[#"shotshit"];
         }
 
         eattacker.hits++;
@@ -1089,17 +1090,17 @@ private update_attacker(einflictor, eattacker, smeansofdeath) {
         eattacker.shotsmissed = shotsmissed;
 
         if(isDefined(eattacker.pers)) {
-          eattacker.pers[# "shotsmissed"] = shotsmissed;
+          eattacker.pers[#"shotsmissed"] = shotsmissed;
         }
       }
     }
 
     if(isDefined(eattacker.pers)) {
-      if(!isDefined(eattacker.pers[# "participation"])) {
-        eattacker.pers[# "participation"] = 0;
+      if(!isDefined(eattacker.pers[#"participation"])) {
+        eattacker.pers[#"participation"] = 0;
       }
 
-      eattacker.pers[# "participation"]++;
+      eattacker.pers[#"participation"]++;
     }
   }
 }
@@ -1155,30 +1156,30 @@ private function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath
 
   if(isDefined(einflictor) && (smeansofdeath == "MOD_GAS" || is_explosive_damage)) {
     self.explosiveinfo = [];
-    self.explosiveinfo[# "damagetime"] = gettime();
-    self.explosiveinfo[# "damageid"] = einflictor getentitynumber();
-    self.explosiveinfo[# "originalownerkill"] = 0;
-    self.explosiveinfo[# "bulletpenetrationkill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "damageexplosivekill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "cookedkill"] = 0;
-    self.explosiveinfo[# "weapon"] = weapon;
-    self.explosiveinfo[# "originalowner"] = einflictor.originalowner;
+    self.explosiveinfo[#"damagetime"] = gettime();
+    self.explosiveinfo[#"damageid"] = einflictor getentitynumber();
+    self.explosiveinfo[#"originalownerkill"] = 0;
+    self.explosiveinfo[#"bulletpenetrationkill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"damageexplosivekill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"cookedkill"] = 0;
+    self.explosiveinfo[#"weapon"] = weapon;
+    self.explosiveinfo[#"originalowner"] = einflictor.originalowner;
     isfrag = weapon.rootweapon.name == "frag_grenade";
 
     if(isDefined(eattacker) && eattacker != self) {
-      if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == # "satchel_charge" || weapon.name == # "claymore" || weapon.name == # "bouncingbetty")) {
-        self.explosiveinfo[# "originalownerkill"] = einflictor.owner == self;
-        self.explosiveinfo[# "damageexplosivekill"] = isDefined(einflictor.wasdamaged);
-        self.explosiveinfo[# "chainkill"] = isDefined(einflictor.waschained);
-        self.explosiveinfo[# "wasjustplanted"] = isDefined(einflictor.wasjustplanted);
-        self.explosiveinfo[# "bulletpenetrationkill"] = isDefined(einflictor.wasdamagedfrombulletpenetration);
-        self.explosiveinfo[# "cookedkill"] = 0;
+      if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == #"satchel_charge" || weapon.name == #"claymore" || weapon.name == #"bouncingbetty")) {
+        self.explosiveinfo[#"originalownerkill"] = einflictor.owner == self;
+        self.explosiveinfo[#"damageexplosivekill"] = isDefined(einflictor.wasdamaged);
+        self.explosiveinfo[#"chainkill"] = isDefined(einflictor.waschained);
+        self.explosiveinfo[#"wasjustplanted"] = isDefined(einflictor.wasjustplanted);
+        self.explosiveinfo[#"bulletpenetrationkill"] = isDefined(einflictor.wasdamagedfrombulletpenetration);
+        self.explosiveinfo[#"cookedkill"] = 0;
       }
 
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && weapon.projexplosiontype == "grenade") {
-        self.explosiveinfo[# "stucktoplayer"] = einflictor.stucktoplayer;
+        self.explosiveinfo[#"stucktoplayer"] = einflictor.stucktoplayer;
       }
 
       if(weapon.dostun) {
@@ -1187,15 +1188,15 @@ private function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath
       }
 
       if(isDefined(eattacker.lastgrenadesuicidetime) && eattacker.lastgrenadesuicidetime >= gettime() - 50 && isfrag) {
-        self.explosiveinfo[# "suicidegrenadekill"] = 1;
+        self.explosiveinfo[#"suicidegrenadekill"] = 1;
       } else {
-        self.explosiveinfo[# "suicidegrenadekill"] = 0;
+        self.explosiveinfo[#"suicidegrenadekill"] = 0;
       }
     }
 
     if(isfrag) {
-      self.explosiveinfo[# "cookedkill"] = isDefined(einflictor.iscooked);
-      self.explosiveinfo[# "throwbackkill"] = isDefined(einflictor.threwback);
+      self.explosiveinfo[#"cookedkill"] = isDefined(einflictor.iscooked);
+      self.explosiveinfo[#"throwbackkill"] = isDefined(einflictor.threwback);
     }
 
     if(isDefined(eattacker) && isplayer(eattacker) && eattacker != self) {
@@ -1209,7 +1210,7 @@ private function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath
     }
 
     if(weapon.rootweapon.name == "hatchet" && isDefined(einflictor)) {
-      self.explosiveinfo[# "projectile_bounced"] = isDefined(einflictor.bounced);
+      self.explosiveinfo[#"projectile_bounced"] = isDefined(einflictor.bounced);
     }
   }
 

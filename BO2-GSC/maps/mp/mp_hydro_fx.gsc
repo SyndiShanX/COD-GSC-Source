@@ -13,7 +13,8 @@ main() {
   maps\mp\createfx\mp_hydro_fx::main();
 }
 
-precache_scripted_fx() {}
+precache_scripted_fx() {
+}
 
 precache_createfx_fx() {
   level._effect["fx_mp_hydro_dam_water_bottom"] = loadfx("maps/mp_maps/fx_mp_hydro_dam_water_bottom");

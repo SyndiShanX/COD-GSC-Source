@@ -110,29 +110,28 @@ zombie_cosmodrome_player_out_of_playable_area_monitor_callback() {
 setup_water_physics() {
   flag_wait("all_players_connected");
   players = GetPlayers();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
 }
 fx_for_power_path() {
   self endon("power_on");
-  while(1) {
-    playFX(level._effect["dangling_wire"], (-1066, 1024, -72), (0, 0, 1));
+  while (1) {
+    PlayFX(level._effect["dangling_wire"], (-1066, 1024, -72), (0, 0, 1));
     wait(0.3 + RandomFloat(0.5));
-    playFX(level._effect["dangling_wire"], (-900, 1446, -96), (0, 0, 1));
+    PlayFX(level._effect["dangling_wire"], (-900, 1446, -96), (0, 0, 1));
     wait(0.3 + RandomFloat(0.5));
-    playFX(level._effect["dangling_wire"], (-895, 1442, -52), (0, 0, 1));
+    PlayFX(level._effect["dangling_wire"], (-895, 1442, -52), (0, 0, 1));
     wait(0.3 + RandomFloat(0.5));
   }
 }
 centrifuge_jumpup_fix() {
   jumpblocker = GetEnt("centrifuge_jumpup", "targetname");
-  if(!isDefined(jumpblocker)) {
+  if(!isDefined(jumpblocker))
     return;
-  }
   jump_pos = jumpblocker.origin;
   centrifuge_occupied = false;
-  while(true) {
+  while (true) {
     if(level.zones["centrifuge_zone"].is_occupied && centrifuge_occupied == false) {
       jumpblocker MoveX(jump_pos[0] + 64, 0.1);
       jumpblocker DisconnectPaths();
@@ -147,12 +146,11 @@ centrifuge_jumpup_fix() {
 }
 centrifuge_jumpdown_fix() {
   jumpblocker = GetEnt("centrifuge_jumpdown", "targetname");
-  if(!isDefined(jumpblocker)) {
+  if(!isDefined(jumpblocker))
     return;
-  }
   jump_pos = jumpblocker.origin;
   centrifuge2_occupied = true;
-  while(true) {
+  while (true) {
     if(level.zones["centrifuge_zone2"].is_occupied && centrifuge2_occupied == false) {
       jumpblocker MoveX(jump_pos[0] + 64, 0.1);
       jumpblocker DisconnectPaths();
@@ -260,7 +258,7 @@ magic_box_override() {
   players = get_players();
   level.chest_min_move_usage = players.size;
   chest = level.chests[level.chest_index];
-  while(level.chest_accessed < level.chest_min_move_usage) {
+  while (level.chest_accessed < level.chest_min_move_usage) {
     chest waittill("chest_accessed");
   }
   chest disable_trigger();
@@ -311,10 +309,10 @@ powercell_dropoff() {
   level.packBattery++;
   battery = GetEnt("pack_battery_0" + level.packBattery, "targetname");
   battery show();
-  battery.fx = spawn("script_model", battery.origin);
+  battery.fx = Spawn("script_model", battery.origin);
   battery.fx.angles = battery.angles;
-  battery.fx setModel("tag_origin");
-  playFXOnTag(level._effect["powercell"], battery.fx, "tag_origin");
+  battery.fx SetModel("tag_origin");
+  playfxontag(level._effect["powercell"], battery.fx, "tag_origin");
 }
 electric_switch() {
   trig = getent("use_elec_switch", "targetname");
@@ -333,7 +331,7 @@ wait_for_power() {
   flag_wait("power_on");
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_power_switch");
   master_switch rotateroll(-90, .3);
-  master_switch playSound("zmb_switch_flip");
+  master_switch playsound("zmb_switch_flip");
   flag_set("lander_power");
   level notify("revive_on");
   level notify("juggernog_on");
@@ -344,24 +342,24 @@ wait_for_power() {
   clientnotify("ZPO");
   exploder(5401);
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-  master_switch playSound("zmb_turn_on");
+  playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  master_switch playsound("zmb_turn_on");
   thread maps\zombie_cosmodrome_amb::power_clangs();
 }
 custom_pandora_show_func(anchor, anchorTarget, pieces) {
   level.pandora_light.angles = (-90, anchorTarget.angles[1] + 180, 0);
   level.pandora_light moveto(anchorTarget.origin, 0.05);
   wait(1);
-  playFX(level._effect["lght_marker_flare"], level.pandora_light.origin);
+  playfx(level._effect["lght_marker_flare"], level.pandora_light.origin);
 }
 custom_pandora_fx_func() {
   start_chest = GetEnt("start_chest", "script_noteworthy");
   anchor = GetEnt(start_chest.target, "targetname");
   anchorTarget = GetEnt(anchor.target, "targetname");
-  level.pandora_light = spawn("script_model", anchorTarget.origin);
+  level.pandora_light = Spawn("script_model", anchorTarget.origin);
   level.pandora_light.angles = anchorTarget.angles + (-90, 0, 0);
-  level.pandora_light setModel("tag_origin");
-  playFXOnTag(level._effect["lght_marker"], level.pandora_light, "tag_origin");
+  level.pandora_light SetModel("tag_origin");
+  playfxontag(level._effect["lght_marker"], level.pandora_light, "tag_origin");
 }
 centrifuge_init() {
   centrifuge = GetEnt("centrifuge", "targetname");
@@ -370,16 +368,16 @@ centrifuge_init() {
   }
 }
 link_centrifuge_pieces() {
-  pieces = getEntArray(self.target, "targetname");
+  pieces = getentarray(self.target, "targetname");
   if(isDefined(pieces)) {
-    for(i = 0; i < pieces.size; i++) {
+    for (i = 0; i < pieces.size; i++) {
       pieces[i] linkto(self);
     }
   }
   self thread centrifuge_rotate();
 }
 centrifuge_rotate() {
-  while(true) {
+  while (true) {
     self rotateyaw(360, 20);
     self waittill("rotatedone");
   }

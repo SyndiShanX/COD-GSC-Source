@@ -92,7 +92,7 @@ aud_wind_door_mix_manager() {
 }
 
 update_wind_mix() {
-  for(;;) {
+  for (;;) {
     self waittill("trigger", var_0);
 
     if(var_0 != level.player) {
@@ -100,9 +100,8 @@ update_wind_mix() {
     }
     aud_add_wind_door_mix();
 
-    while(self istouching(level.player)) {
+    while (self istouching(level.player))
       wait 0.05;
-    }
 
     aud_remove_wind_door_mix();
   }

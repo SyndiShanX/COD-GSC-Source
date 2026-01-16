@@ -16,17 +16,15 @@ hanging_light_off() {
   var_2 = (var_1[1], var_1[0], 0);
   var_1 = (var_1[0], -1 * var_1[1], 0);
 
-  if(isDefined(self.script_angles)) {
+  if(isDefined(self.script_angles))
     var_3 = (self.script_angles[2], self.script_angles[0], self.script_angles[1]);
-  } else {
+  else
     var_3 = (90, 90, 90);
-  }
 
-  if(isDefined(self.script_duration)) {
+  if(isDefined(self.script_duration))
     var_4 = self.script_duration / 6 * randomfloatrange(0.9, 1.1);
-  } else {
+  else
     var_4 = 0.4 * randomfloatrange(0.9, 1.1);
-  }
 
   var_4 = int(var_4 * 20) / 20;
 
@@ -70,9 +68,8 @@ hanging_light_swing(var_0, var_1, var_2, var_3) {
   var_5 = var_5 * var_2;
   var_5 = int(var_5 * 20) / 20;
 
-  if(var_5 < 0.1) {
+  if(var_5 < 0.1)
     var_5 = 0.1;
-  }
 
   self rotateto(var_4, var_5 * 3 / 2, 0, var_5);
   wait(var_5 * 3 / 2);
@@ -82,9 +79,8 @@ hanging_light_swing(var_0, var_1, var_2, var_3) {
   while(var_0[0] != 0 || var_0[1] != 0 || var_0[2] != 0) {
     var_7 = (var_6 * 0.9 - 0.5) / var_6;
 
-    if(var_7 < 0) {
+    if(var_7 < 0)
       var_7 = 0;
-    }
 
     var_6 = var_6 * var_7;
     var_0 = var_0 * (var_7 * -1);

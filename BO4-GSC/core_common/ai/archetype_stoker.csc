@@ -7,6 +7,7 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\footsteps_shared;
 #include scripts\core_common\system_shared;
+
 #namespace archetype_stoker;
 
 autoexec __init__system__() {

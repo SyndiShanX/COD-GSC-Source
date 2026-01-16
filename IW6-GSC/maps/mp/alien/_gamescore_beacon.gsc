@@ -60,11 +60,10 @@ init_kraken_score_component() {
 }
 
 init_kraken_score(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     var_0.max_score_kraken = 6000;
-  } else {
+  else
     var_0.max_score_kraken = 4500;
-  }
 
   var_0.team_encounter_performance["kraken_battle_time"] = 0;
   return var_0;
@@ -104,11 +103,10 @@ calculate_kraken_score(var_0) {
 }
 
 get_kraken_score_component_name_list() {
-  if(maps\mp\alien\_utility::isplayingsolo()) {
+  if(maps\mp\alien\_utility::isplayingsolo())
     return ["kraken", "kraken_personal"];
-  } else {
+  else
     return ["kraken", "kraken_team", "kraken_personal"];
-  }
 }
 
 init_tentacle_score_component() {
@@ -128,9 +126,8 @@ calculate_tentacle_score(var_0, var_1) {
 }
 
 get_tentacle_end_hp() {
-  if(!isDefined(level.miniboss.hp)) {
+  if(!isDefined(level.miniboss.hp))
     return 0;
-  }
 
   return max(0, level.miniboss.hp);
 }

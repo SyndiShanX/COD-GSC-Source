@@ -31,9 +31,8 @@ start_ambient_event_internal(var_0, var_1, var_2, var_3, var_4) {
   }
   level._audio.ambient.current_zone = var_1;
 
-  if(!level._audio.ambient.thread_active) {
+  if(!level._audio.ambient.thread_active)
     level thread ambient_event_thread();
-  }
 }
 
 stop_ambient_event_zone(var_0, var_1) {
@@ -58,9 +57,8 @@ stop_all_ambient_events() {
 }
 
 fade_ambient_elems(var_0, var_1) {
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 1;
-  }
 
   foreach(var_3 in level._audio.ambient.sound_ents) {
     if(!isDefined(var_3.ambient) || var_3.ambient != var_0) {
@@ -96,11 +94,10 @@ swap_ambient_event_zones(var_0, var_1, var_2, var_3) {
 
 swap_ambient_event_zone_internal(var_0, var_1) {
   if(isDefined(var_0) && var_0 != "" && var_0 != "none") {
-    if(var_1 == 0) {
+    if(var_1 == 0)
       stop_ambient_event_zone(var_0);
-    } else {
+    else
       start_ambient_event_zone(var_0);
-    }
   }
 }
 
@@ -117,15 +114,13 @@ ambient_event_thread() {
       var_3 = level._audio.ambient.cached_ambients[var_2];
 
       if(isDefined(var_3.serialized)) {
-        if(!isDefined(var_3.next_play_time)) {
+        if(!isDefined(var_3.next_play_time))
           var_3 set_next_play_time(1);
-        }
 
         if(var_3.next_play_time <= var_1) {
           if(var_3.events.size > 1) {
-            for(var_4 = var_3 get_random_event(); var_4.elem == var_0; var_4 = var_3 get_random_event()) {
+            for(var_4 = var_3 get_random_event(); var_4.elem == var_0; var_4 = var_3 get_random_event())
               wait 0.05;
-            }
           } else
             var_4 = var_3.events[0];
 
@@ -138,9 +133,8 @@ ambient_event_thread() {
         }
       } else {
         foreach(var_4 in var_3.events) {
-          if(!isDefined(var_4.next_play_time)) {
+          if(!isDefined(var_4.next_play_time))
             var_4 set_next_play_time();
-          }
 
           if(var_4.next_play_time <= var_1) {
             level thread play_ambient_elem(var_4, var_2);
@@ -189,22 +183,20 @@ get_elem_position(var_0) {
   var_1 = randomfloatrange(var_0["range"][0], var_0["range"][1]);
   var_2 = undefined;
 
-  if(isDefined(var_0["cone"])) {
+  if(isDefined(var_0["cone"]))
     var_2 = randomfloatrange(var_0["cone"][0], var_0["cone"][1]);
-  } else {
+  else
     var_2 = randomfloatrange(0, 360);
-  }
 
   var_3 = anglesToForward((0, var_2, 0)) * var_1;
   return (var_3[0], var_3[1], 0);
 }
 
 set_next_play_time(var_0) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     var_1 = level._audio.ambient.cached_ambients[level._audio.ambient.current_zone].data;
-  } else {
+  else
     var_1 = level._audio.ambient.cached_elems[self.elem];
-  }
 
   var_2 = randomfloatrange(var_1["time"][0], var_1["time"][1]);
   self.next_play_time = gettime() + var_2 * 1000;
@@ -213,9 +205,8 @@ set_next_play_time(var_0) {
 get_random_event() {
   var_0 = 0;
 
-  foreach(var_2 in self.events) {
-    var_0 = var_0 + var_2.weight;
-  }
+  foreach(var_2 in self.events)
+  var_0 = var_0 + var_2.weight;
 
   var_4 = randomfloat(var_0);
   var_5 = 0;
@@ -235,9 +226,8 @@ get_random_event() {
 
 get_sound_ent() {
   foreach(var_1 in level._audio.ambient.sound_ents) {
-    if(!var_1.is_playing) {
+    if(!var_1.is_playing)
       return var_1;
-    }
   }
 
   if(level._audio.ambient.sound_ents.size < level._audio.ambient.max_sound_ents) {

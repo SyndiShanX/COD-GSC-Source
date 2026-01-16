@@ -9,35 +9,31 @@ cull_distance_logic() {
     case "jungle_corridor":
     case "parachute":
     case "default":
-      if(game_is_ng()) {
+      if(game_is_ng())
         setculldist(5000);
-      } else {
+      else
         setculldist(5000);
-      }
 
       level.player waittill("start_falling_anim");
 
-      if(game_is_ng()) {
+      if(game_is_ng())
         setculldist(5000);
-      } else {
+      else
         setculldist(4500);
-      }
 
       common_scripts\utility::flag_wait("jungle_entrance");
 
-      if(game_is_ng()) {
+      if(game_is_ng())
         setculldist(6000);
-      } else {
+      else
         setculldist(4500);
-      }
 
       common_scripts\utility::flag_wait("hill_pos_1");
     case "jungle_hill":
-      if(game_is_ng()) {
+      if(game_is_ng())
         setculldist(19000);
-      } else {
+      else
         setculldist(15000);
-      }
 
       common_scripts\utility::flag_wait_any("waterfall_approach", "e3_warp");
       setculldist(0);
@@ -45,37 +41,30 @@ cull_distance_logic() {
 }
 
 game_is_pc() {
-  if(level.xenon) {
+  if(level.xenon)
     return 0;
-  }
 
-  if(level.ps3) {
+  if(level.ps3)
     return 0;
-  }
 
-  if(level.ps4) {
+  if(level.ps4)
     return 0;
-  }
 
-  if(level.xb3) {
+  if(level.xb3)
     return 0;
-  }
 
   return 1;
 }
 
 game_is_ng() {
-  if(game_is_pc()) {
+  if(game_is_pc())
     return 1;
-  }
 
-  if(level.ps4) {
+  if(level.ps4)
     return 1;
-  }
 
-  if(level.xb3) {
+  if(level.xb3)
     return 1;
-  }
 
   return 0;
 }
@@ -84,9 +73,8 @@ stream_waterfx(var_0, var_1) {
   self endon("death");
   var_2 = 0;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = 1;
-  }
 
   if(isDefined(var_0)) {
     common_scripts\utility::flag_assert(var_0);
@@ -105,9 +93,8 @@ stream_waterfx(var_0, var_1) {
     var_6 = "water_movement";
 
     if(isplayer(self)) {
-      if(distance(self getvelocity(), (0, 0, 0)) < 5) {
+      if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_6 = "water_stop";
-      }
     } else if(isDefined(level._effect["water_" + self.a.movement]))
       var_6 = "water_" + self.a.movement;
 
@@ -118,9 +105,8 @@ stream_waterfx(var_0, var_1) {
     var_10 = anglestoup(var_8);
     playFX(var_7, var_3, var_10, var_9);
 
-    if(var_6 != "water_stop" && var_2) {
+    if(var_6 != "water_stop" && var_2)
       thread common_scripts\utility::play_sound_in_space(var_1, var_3);
-    }
   }
 }
 
@@ -128,11 +114,10 @@ player_jump_watcher() {
   level endon("player_jump_watcher_stop");
   var_0 = "player_jumping";
 
-  if(!common_scripts\utility::flag_exist(var_0)) {
+  if(!common_scripts\utility::flag_exist(var_0))
     common_scripts\utility::flag_init(var_0);
-  } else {
+  else
     common_scripts\utility::flag_clear(var_0);
-  }
 
   notifyoncommand("playerjump", "+gostand");
   notifyoncommand("playerjump", "+moveup");
@@ -141,13 +126,11 @@ player_jump_watcher() {
     level.player waittill("playerjump");
     wait 0.1;
 
-    if(!level.player isonground()) {
+    if(!level.player isonground())
       common_scripts\utility::flag_set(var_0);
-    }
 
-    while(!level.player isonground()) {
+    while(!level.player isonground())
       wait 0.05;
-    }
 
     common_scripts\utility::flag_clear(var_0);
   }
@@ -169,21 +152,17 @@ do_bokeh(var_0, var_1, var_2, var_3, var_4) {
   level.player notify("stop_bokeh");
   level.player endon("stop_bokeh");
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     level endon(var_0);
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     level.player thread maps\_utility::notify_delay("stop_bokeh", var_2);
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 10;
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 30;
-  }
 
   if(!isDefined(level.player.bokeh_ent)) {
     var_5 = anglesToForward(level.player.angles);
@@ -194,9 +173,8 @@ do_bokeh(var_0, var_1, var_2, var_3, var_4) {
     level.player.bokeh_ent linktoplayerview(level.player, "tag_origin", (5, 0, 0), (0, 0, 0), 1);
   }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = "vfx_atmos_bokeh_jungle";
-  }
 
   for(;;) {
     playFXOnTag(common_scripts\utility::getfx(var_1), level.player.bokeh_ent, "tag_origin");
@@ -218,9 +196,8 @@ kill_me_from_closest_enemy() {
     }
   }
 
-  if(isalive(self)) {
+  if(isalive(self))
     maps\_utility::die();
-  }
 }
 
 stream_trig_logic() {
@@ -229,20 +206,18 @@ stream_trig_logic() {
   common_scripts\utility::flag_wait("jungle_entrance");
 
   for(;;) {
-    if(level.player istouching(self)) {
+    if(level.player istouching(self))
       level.player allowprone(0);
-    } else {
+    else
       level.player allowprone(1);
-    }
 
     wait 0.05;
   }
 }
 
 escape_earthquake_on_missile_impact() {
-  while(isDefined(self)) {
+  while(isDefined(self))
     wait 0.05;
-  }
 
   earthquake(0.3, 0.5, level.player.origin, 300);
   level.player playrumbleonentity("grenade_rumble");
@@ -255,17 +230,15 @@ set_flag_when_x_remain(var_0, var_1, var_2) {
     var_0 = maps\_utility::array_removedead_or_dying(var_0);
 
     if(var_0.size == 1) {
-      if(!isDefined(var_0[0].imminent_death)) {
+      if(!isDefined(var_0[0].imminent_death))
         var_0[0] thread timeout_death(10);
-      }
     }
 
     wait 1;
   }
 
-  if(!common_scripts\utility::flag(var_2)) {
+  if(!common_scripts\utility::flag(var_2))
     common_scripts\utility::flag_set(var_2);
-  }
 }
 
 set_flag_when_x_remain_custom_stream(var_0, var_1) {
@@ -275,17 +248,15 @@ set_flag_when_x_remain_custom_stream(var_0, var_1) {
     level.stream_baddies = maps\_utility::array_removedead_or_dying(level.stream_baddies);
 
     if(level.stream_baddies.size == 1) {
-      if(!isDefined(level.stream_baddies[0].imminent_death)) {
+      if(!isDefined(level.stream_baddies[0].imminent_death))
         level.stream_baddies[0] thread timeout_death(10);
-      }
     }
 
     wait 1;
   }
 
-  if(!common_scripts\utility::flag(var_1)) {
+  if(!common_scripts\utility::flag(var_1))
     common_scripts\utility::flag_set(var_1);
-  }
 }
 
 timeout_death(var_0) {
@@ -300,9 +271,8 @@ timeout_death(var_0) {
 }
 
 start_raining() {
-  if(!isDefined(level.rain_effect)) {
+  if(!isDefined(level.rain_effect))
     level.rain_effect = common_scripts\utility::getfx("rain_light");
-  }
 
   level endon("stop_rain");
   var_0 = 0;
@@ -348,9 +318,8 @@ do_lightning() {
 }
 
 manually_alert_me() {
-  if(isDefined(self.script_stealth)) {
+  if(isDefined(self.script_stealth))
     maps\_stealth_shared_utilities::group_flag_set("_stealth_spotted");
-  }
 }
 
 blend_wind_setting_internal(var_0, var_1) {
@@ -375,33 +344,27 @@ blend_wind_setting_internal(var_0, var_1) {
 }
 
 has_script_parameters(var_0) {
-  if(!isDefined(self.script_parameters)) {
+  if(!isDefined(self.script_parameters))
     return 0;
-  }
 
-  if(self.script_parameters != var_0) {
+  if(self.script_parameters != var_0)
     return 0;
-  }
 
   return 1;
 }
 
 adjust_moving_grass(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     setsaveddvar("r_reactiveMotionWindAreaScale", var_1);
-  }
 
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     thread blend_wind_setting_internal(var_0, "r_reactiveMotionWindStrength");
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     thread blend_wind_setting_internal(var_2, "r_reactiveMotionWindAmplitudeScale");
-  }
 
-  if(isDefined(var_3)) {
+  if(isDefined(var_3))
     thread blend_wind_setting_internal(var_3, "r_reactiveMotionWindFrequencyScale");
-  }
 }
 
 stealth_ai_idle(var_0, var_1, var_2, var_3) {
@@ -416,11 +379,10 @@ stealth_ai_idle(var_0, var_1, var_2, var_3) {
   var_5 = "stop_loop";
   var_0.allowdeath = 1;
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     thread maps\_anim::anim_generic_custom_animmode_loop(var_0, "gravity", var_1, var_2);
-  } else {
+  else
     thread maps\_anim::anim_generic_loop(var_0, var_1, var_2);
-  }
 
   maps\_utility::add_wait(maps\_utility::waittill_msg, "stop_idle_proc");
   maps\_utility::add_func(maps\_stealth_utility::stealth_ai_clear_custom_idle_and_react);
@@ -437,9 +399,8 @@ arm_player(var_0, var_1, var_2) {
 
   level.player switchtoweapon(var_0[0]);
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level.player giveweapon("fraggrenade");
-  }
 }
 
 move_player_to_start(var_0) {
@@ -448,23 +409,20 @@ move_player_to_start(var_0) {
   if(!isDefined(var_1)) {
     var_1 = getent(var_0, "targetname");
 
-    if(!isDefined(var_1)) {
+    if(!isDefined(var_1))
       return;
-    }
   }
 
   level.player setorigin(var_1.origin);
   var_2 = undefined;
 
-  if(isDefined(var_1.target)) {
+  if(isDefined(var_1.target))
     var_2 = getent(var_1.target, "targetname");
-  }
 
-  if(isDefined(var_2)) {
+  if(isDefined(var_2))
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  } else {
+  else
     level.player setplayerangles(var_1.angles);
-  }
 
   wait 0.1;
 }
@@ -472,9 +430,8 @@ move_player_to_start(var_0) {
 grenade_ammo_probability(var_0) {
   self endon("death");
 
-  if(randomint(100) > var_0) {
+  if(randomint(100) > var_0)
     self.grenadeammo = 0;
-  }
 }
 
 print3d_on_me(var_0) {}
@@ -491,15 +448,13 @@ fade_out_in(var_0, var_1, var_2, var_3) {
   var_4.alpha = 1;
   var_4.sort = -2;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     level waittill(var_1);
-  } else {
+  else
     wait(var_2);
-  }
 
-  if(!isDefined(var_3)) {
+  if(!isDefined(var_3))
     var_3 = 0.5;
-  }
 
   var_4 fadeovertime(var_3);
   var_4.alpha = 0;
@@ -514,11 +469,10 @@ play_hand_signal_for_player() {
   if(isDefined(self.did_handsignal)) {
     return;
   }
-  if(isDefined(level.doing_hand_signal) && level.doing_hand_signal) {
+  if(isDefined(level.doing_hand_signal) && level.doing_hand_signal)
     return;
-  } else {
+  else
     level.doing_hand_signal = 1;
-  }
 
   self.did_handsignal = 1;
   var_0 = getaiarray("allies");
@@ -538,48 +492,41 @@ do_hand_signal() {
   if(isDefined(self.node)) {
     var_0 = self.node.type;
 
-    if(tolower(var_0) == "cover right") {
+    if(tolower(var_0) == "cover right")
       var_1 = "signal_enemy_coverR";
-    } else if(tolower(var_0) == "cover left") {
+    else if(tolower(var_0) == "cover left")
       var_1 = "signal_moveout_coverL";
-    } else {
+    else
       var_1 = "signal_go";
-    }
   } else
     var_1 = "signal_onme_cqb";
 
   if(isDefined(self.animname)) {
-    if(self.animname != "generic") {
+    if(self.animname != "generic")
       self.old_animname = self.animname;
-    }
   }
 
   self.animname = "generic";
 
-  if(isDefined(self.old_animname)) {
+  if(isDefined(self.old_animname))
     self.animname = self.old_animname;
-  }
 }
 
 delete_ai_array_safe(var_0) {
-  if(isDefined(var_0)) {
+  if(isDefined(var_0))
     thread maps\_utility::ai_delete_when_out_of_sight(var_0, 800);
-  }
 }
 
 isdefined_and_alive(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     return 0;
-  }
 
-  if(!isalive(var_0)) {
+  if(!isalive(var_0))
     return 0;
-  }
 
   if(!var_0 maps\_vehicle::isvehicle()) {
-    if(var_0 maps\_utility::doinglongdeath()) {
+    if(var_0 maps\_utility::doinglongdeath())
       return 0;
-    }
   }
 
   return 1;
@@ -591,9 +538,8 @@ delete_if_player_cant_see_me() {
   if(!isdefined_and_alive(self)) {
     return;
   }
-  while(maps\_utility::player_can_see_ai(self)) {
+  while(maps\_utility::player_can_see_ai(self))
     wait 0.15;
-  }
 
   self delete();
 }
@@ -637,21 +583,17 @@ do_nags_til_flag(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = [];
   var_8[0] = var_3;
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_8[1] = var_4;
-  }
 
-  if(isDefined(var_5)) {
+  if(isDefined(var_5))
     var_8[2] = var_5;
-  }
 
-  if(isDefined(var_6)) {
+  if(isDefined(var_6))
     var_8[3] = var_6;
-  }
 
-  if(isDefined(var_7)) {
+  if(isDefined(var_7))
     var_8[4] = var_7;
-  }
 
   while(!common_scripts\utility::flag(var_0) && !common_scripts\utility::flag("waterfall_ambush_begin")) {
     foreach(var_10 in var_8) {
@@ -669,17 +611,15 @@ battle_chatter_controller_friendlies() {
   for(;;) {
     maps\_utility::battlechatter_off("allies");
 
-    if(!common_scripts\utility::flag("ambush_open_fire")) {
+    if(!common_scripts\utility::flag("ambush_open_fire"))
       common_scripts\utility::flag_wait_any("_stealth_spotted", "ambush_open_fire");
-    } else {
+    else
       common_scripts\utility::flag_wait("_stealth_spotted");
-    }
 
     maps\_utility::battlechatter_on("allies");
 
-    if(common_scripts\utility::flag("ambush_open_fire")) {
+    if(common_scripts\utility::flag("ambush_open_fire"))
       common_scripts\utility::flag_wait("field_entrance");
-    }
 
     common_scripts\utility::flag_waitopen("_stealth_spotted");
     common_scripts\utility::waitframe();
@@ -847,9 +787,8 @@ custom_waterfx(var_0, var_1) {
     level endon(var_0);
   }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = (0, 0, 0);
-  }
 
   for(;;) {
     wait(randomfloatrange(0.15, 0.3));
@@ -863,9 +802,8 @@ custom_waterfx(var_0, var_1) {
     var_5 = "water_movement";
 
     if(isplayer(self)) {
-      if(distance(self getvelocity(), (0, 0, 0)) < 5) {
+      if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_5 = "water_stop";
-      }
     } else if(isDefined(level._effect["water_" + self.a.movement]))
       var_5 = "water_" + self.a.movement;
 
@@ -903,9 +841,8 @@ ai_swim_sound() {
   for(;;) {
     self waittill("moveanim", var_0);
 
-    if(var_0 == "ps_scn_prague_swim_slow_npc" || var_0 == "end") {
+    if(var_0 == "ps_scn_prague_swim_slow_npc" || var_0 == "end")
       maps\_utility::play_sound_on_entity("scn_prague_swim_slow_npc");
-    }
 
     wait 0.2;
   }
@@ -917,9 +854,8 @@ ai_swim_sound_idle() {
   for(;;) {
     self waittill("Special_idle", var_0);
 
-    if(var_0 == "ps_scn_prague_swim_idle_npc" || var_0 == "end") {
+    if(var_0 == "ps_scn_prague_swim_idle_npc" || var_0 == "end")
       maps\_utility::play_sound_on_entity("scn_prague_swim_idle_npc");
-    }
 
     wait 0.2;
   }
@@ -946,16 +882,14 @@ pitch_and_roll() {
   var_1 = (0, var_0.angles[1], 0);
   var_2 = 20;
 
-  if(isDefined(var_0.script_max_left_angle)) {
+  if(isDefined(var_0.script_max_left_angle))
     var_2 = var_0.script_max_left_angle;
-  }
 
   var_3 = var_2 * 0.5;
   var_4 = 4;
 
-  if(isDefined(var_0.script_duration)) {
+  if(isDefined(var_0.script_duration))
     var_4 = var_0.script_duration;
-  }
 
   var_5 = var_4 * 0.5;
   var_0 = undefined;
@@ -1001,9 +935,8 @@ is_moving() {
   wait 0.2;
   var_1 = self.origin;
 
-  if(var_0 == var_1) {
+  if(var_0 == var_1)
     return 0;
-  }
 
   return 1;
 }
@@ -1025,15 +958,13 @@ hud_on(var_0) {
 }
 
 waittill_x_passed(var_0) {
-  while(level.player.origin[0] < var_0) {
+  while(level.player.origin[0] < var_0)
     common_scripts\utility::waitframe();
-  }
 }
 
 waittill_y_passed(var_0) {
-  while(level.player.origin[1] < var_0) {
+  while(level.player.origin[1] < var_0)
     common_scripts\utility::waitframe();
-  }
 }
 
 enemy_weapons_force_use_init() {
@@ -1091,11 +1022,10 @@ music_stealth_tension_loop() {
   for(;;) {
     var_0 = "mus_jungle_tension";
 
-    if(common_scripts\utility::flag("second_distant_sat_launch") && !common_scripts\utility::flag("to_grassy_field")) {
+    if(common_scripts\utility::flag("second_distant_sat_launch") && !common_scripts\utility::flag("to_grassy_field"))
       var_0 = "mus_jungle_stealth";
-    } else if(common_scripts\utility::flag("second_distant_sat_launch") && common_scripts\utility::flag("to_grassy_field")) {
+    else if(common_scripts\utility::flag("second_distant_sat_launch") && common_scripts\utility::flag("to_grassy_field"))
       var_0 = "mus_jungle_reveal";
-    }
 
     if(!common_scripts\utility::flag("jungle_entrance")) {
       common_scripts\utility::flag_wait("intro_lines");
@@ -1113,40 +1043,35 @@ music_stealth_broken() {
   level notify("stop_tension_music_jg");
   var_0 = "mus_jungle_stealthbreak1";
 
-  if(common_scripts\utility::cointoss()) {
+  if(common_scripts\utility::cointoss())
     var_0 = "mus_jungle_stealthbreak2";
-  }
 
   if(common_scripts\utility::flag("second_distant_sat_launch") && !common_scripts\utility::flag("to_grassy_field") && !common_scripts\utility::flag("player_in_ambush_position")) {
     maps\_utility::music_stop(2);
     var_0 = "mus_jungle_chopper_crash_battle";
 
-    if(common_scripts\utility::flag("smaw_target_detroyed")) {
+    if(common_scripts\utility::flag("smaw_target_detroyed"))
       wait 7;
-    }
   }
 
   var_1 = 0;
 
-  if(common_scripts\utility::flag("player_in_ambush_position")) {
+  if(common_scripts\utility::flag("player_in_ambush_position"))
     var_1 = 1;
-  }
 
   music_play_jg(var_0, 0.5, 1, 0, var_1);
 
   if(common_scripts\utility::flag("intro_lines")) {
-    while(common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("ambush_open_fire") && !common_scripts\utility::flag("field_halfway")) {
+    while(common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("ambush_open_fire") && !common_scripts\utility::flag("field_halfway"))
       wait 1;
-    }
   }
 
   thread music_stealth_tension_loop();
 }
 
 music_tall_grass() {
-  if(!common_scripts\utility::flag("_stealth_spotted")) {
+  if(!common_scripts\utility::flag("_stealth_spotted"))
     stop_music_jg(0);
-  }
 
   var_0 = "mus_jungle_tall_grass_intro";
   common_scripts\utility::flag_waitopen("_stealth_spotted");
@@ -1161,9 +1086,9 @@ music_escape_hot() {
 }
 
 music_end_jump_stinger() {
-  if(!common_scripts\utility::flag("choppers_saw_player")) {
+  if(!common_scripts\utility::flag("choppers_saw_player"))
     maps\_utility::music_stop(4);
-  } else {
+  else {
     if(level.start_point != "escape_river" && level.start_point != "underwater") {
       maps\_utility::music_crossfade("mus_jungle_end_stinger", 0.5);
       return;
@@ -1179,25 +1104,22 @@ music_play_jg(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 15;
   var_7 = 35;
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(var_1))
     var_1 = 0.5;
-  }
 
-  if(!isDefined(var_4)) {
+  if(!isDefined(var_4))
     var_4 = 0;
-  }
 
   if(isDefined(var_3) && var_3 && common_scripts\utility::flag("_stealth_spotted")) {
     return;
   }
   maps\_utility::music_play(var_0, var_1);
 
-  if(!isDefined(var_2) || !var_2 || var_4) {
+  if(!isDefined(var_2) || !var_2 || var_4)
     wait(randomfloatrange(var_5 + var_6, var_5 + var_7));
-  } else {
-    while(common_scripts\utility::flag("_stealth_spotted") || var_0 == "mus_jungle_chopper_crash_battle" && !common_scripts\utility::flag("stream_clear")) {
+  else {
+    while(common_scripts\utility::flag("_stealth_spotted") || var_0 == "mus_jungle_chopper_crash_battle" && !common_scripts\utility::flag("stream_clear"))
       wait 1;
-    }
 
     maps\_utility::music_stop(4);
     wait 8;
@@ -1209,9 +1131,8 @@ stop_music_jg(var_0) {
   level notify("stop_tension_music_jg");
   level notify("stop_stealth_music_jg");
 
-  if(var_0) {
+  if(var_0)
     maps\_utility::music_stop(4);
-  }
 }
 
 set_death_quote(var_0) {
@@ -1219,9 +1140,8 @@ set_death_quote(var_0) {
 }
 
 give_jg_achievement() {
-  if(!level.was_spotted) {
+  if(!level.was_spotted)
     level.player maps\_utility::player_giveachievement_wrapper("LEVEL_9A");
-  }
 }
 
 dialogue_stop() {

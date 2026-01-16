@@ -19,38 +19,38 @@
 #namespace contracts;
 
 function autoexec __init__sytem__() {
-  system::register("contracts", &__init__, undefined, undefined);
+  system::register("contracts", & __init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype(&start_gametype);
+  callback::on_start_gametype( & start_gametype);
   level thread watch_contract_debug();
 }
 
 function start_gametype() {
-  if(!isDefined(level.challengescallbacks)) {
+  if(!isdefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
   }
   util::init_player_contract_events();
   waittillframeend();
   if(can_process_contracts()) {
     execdevgui("");
-    challenges::registerchallengescallback("playerKilled", &contract_kills);
-    challenges::registerchallengescallback("gameEnd", &contract_game_ended);
-    globallogic_score::registercontractwinevent(&contract_win);
-    scoreevents::register_hero_ability_kill_event(&on_hero_ability_kill);
-    scoreevents::register_hero_ability_multikill_event(&on_hero_ability_multikill);
-    scoreevents::register_hero_weapon_multikill_event(&on_hero_weapon_multikill);
-    util::register_player_contract_event("score", &on_player_score, 1);
-    util::register_player_contract_event("killstreak_score", &on_killstreak_score, 2);
-    util::register_player_contract_event("offender_kill", &on_offender_kill);
-    util::register_player_contract_event("defender_kill", &on_defender_kill);
-    util::register_player_contract_event("headshot", &on_headshot_kill);
-    util::register_player_contract_event("killed_hero_ability_enemy", &on_killed_hero_ability_enemy);
-    util::register_player_contract_event("killed_hero_weapon_enemy", &on_killed_hero_weapon_enemy);
-    util::register_player_contract_event("earned_specialist_ability_medal", &on_hero_ability_medal);
+    challenges::registerchallengescallback("playerKilled", & contract_kills);
+    challenges::registerchallengescallback("gameEnd", & contract_game_ended);
+    globallogic_score::registercontractwinevent( & contract_win);
+    scoreevents::register_hero_ability_kill_event( & on_hero_ability_kill);
+    scoreevents::register_hero_ability_multikill_event( & on_hero_ability_multikill);
+    scoreevents::register_hero_weapon_multikill_event( & on_hero_weapon_multikill);
+    util::register_player_contract_event("score", & on_player_score, 1);
+    util::register_player_contract_event("killstreak_score", & on_killstreak_score, 2);
+    util::register_player_contract_event("offender_kill", & on_offender_kill);
+    util::register_player_contract_event("defender_kill", & on_defender_kill);
+    util::register_player_contract_event("headshot", & on_headshot_kill);
+    util::register_player_contract_event("killed_hero_ability_enemy", & on_killed_hero_ability_enemy);
+    util::register_player_contract_event("killed_hero_weapon_enemy", & on_killed_hero_weapon_enemy);
+    util::register_player_contract_event("earned_specialist_ability_medal", & on_hero_ability_medal);
   }
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
 }
 
 function on_killed_hero_ability_enemy() {
@@ -81,10 +81,10 @@ function setup_player_contracts() {
   if(player util::is_bot()) {
     return;
   }
-  for(slot = 0; slot < 10; slot++) {
+  for (slot = 0; slot < 10; slot++) {
     if(get_contract_stat(slot, "active") && !get_contract_stat(slot, "award_given")) {
       contract_index = get_contract_stat(slot, "index");
-      player.pers["contracts"][contract_index] = spawnStruct();
+      player.pers["contracts"][contract_index] = spawnstruct();
       player.pers["contracts"][contract_index].slot = slot;
       table_row = tablelookuprownum("gamedata/tables/mp/mp_contractTable.csv", 0, contract_index);
       player.pers["contracts"][contract_index].table_row = table_row;
@@ -100,18 +100,18 @@ function watch_contract_debug() {
   level notify("watch_contract_debug_singleton");
   level endon("watch_contract_debug_singleton");
   level endon("game_ended");
-  while(true) {
+  while (true) {
     if(getdvarint("") > 0) {
-      if(isDefined(level.players)) {
+      if(isdefined(level.players)) {
         new_index = getdvarint("", 0);
         foreach(player in level.players) {
-          if(!isDefined(player)) {
+          if(!isdefined(player)) {
             continue;
           }
           if(player util::is_bot()) {
             continue;
           }
-          for(slot = 0; slot < 10; slot++) {
+          for (slot = 0; slot < 10; slot++) {
             player set_contract_stat(slot, "", 0);
           }
           iprintln("" + player.name);
@@ -121,10 +121,10 @@ function watch_contract_debug() {
       setdvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
-      if(isDefined(level.players)) {
+      if(isdefined(level.players)) {
         new_index = getdvarint("", 0);
         foreach(player in level.players) {
-          if(!isDefined(player)) {
+          if(!isdefined(player)) {
             continue;
           }
           if(player util::is_bot()) {
@@ -142,11 +142,11 @@ function watch_contract_debug() {
       setdvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
-      if(isDefined(level.players)) {
+      if(isdefined(level.players)) {
         test_slot = getdvarint("", 9);
         iprintln("");
         foreach(player in level.players) {
-          if(!isDefined(player)) {
+          if(!isdefined(player)) {
             continue;
           }
           if(player util::is_bot()) {
@@ -179,10 +179,10 @@ function is_contract_active(challenge_index) {
   if(!isplayer(self)) {
     return false;
   }
-  if(!isDefined(self.pers["contracts"])) {
+  if(!isdefined(self.pers["contracts"])) {
     return false;
   }
-  if(!isDefined(self.pers["contracts"][challenge_index])) {
+  if(!isdefined(self.pers["contracts"][challenge_index])) {
     return false;
   }
   if(self.pers["contracts"][challenge_index].table_row == -1) {
@@ -193,14 +193,14 @@ function is_contract_active(challenge_index) {
 
 function on_hero_ability_kill(ability, victimability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
 }
 
 function on_hero_ability_medal() {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
   player add_stat(1013);
@@ -209,14 +209,14 @@ function on_hero_ability_medal() {
 
 function on_hero_ability_multikill(killcount, ability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
 }
 
 function on_hero_weapon_multikill(killcount, weapon) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
 }
@@ -238,10 +238,10 @@ function contract_kills(data) {
   player = attacker;
   weapon = data.weapon;
   time = data.time;
-  if(!isDefined(weapon) || weapon == level.weaponnone) {
+  if(!isdefined(weapon) || weapon == level.weaponnone) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isdefined(player) || !isplayer(player)) {
     return;
   }
   player add_stat(1015);
@@ -251,9 +251,11 @@ function contract_kills(data) {
     player add_stat(7);
     player add_stat(3006);
   }
-  iskillstreak = isDefined(data.einflictor) && isDefined(data.einflictor.killstreakid);
-  if(!iskillstreak && isDefined(level.iskillstreakweapon)) {
-    iskillstreakweapon = [[level.iskillstreakweapon]](weapon);
+  iskillstreak = isdefined(data.einflictor) && isdefined(data.einflictor.killstreakid);
+  if(!iskillstreak && isdefined(level.iskillstreakweapon)) {
+    iskillstreakweapon = [
+      [level.iskillstreakweapon]
+    ](weapon);
   }
   if(iskillstreak || iskillstreakweapon === 1) {
     player add_stat(1010);
@@ -330,10 +332,10 @@ function add_active_stat(contract_index, delta = 1) {
   just_completed = 0;
   if(old_progress < target_value && target_value <= new_progress) {
     just_completed = 1;
-    event = &"mp_weekly_challenge_complete";
+    event = & "mp_weekly_challenge_complete";
     display_rewards = 0;
     if(slot == 2) {
-      event = &"mp_daily_challenge_complete";
+      event = & "mp_daily_challenge_complete";
       display_rewards = 1;
       self award_loot_xp_due(award_daily_contract());
       self set_contract_stat(2, "award_given", 1);
@@ -355,7 +357,7 @@ function add_active_stat(contract_index, delta = 1) {
           }
         }
       } else if(slot == 3) {
-        event = &"mp_special_contract_complete";
+        event = & "mp_special_contract_complete";
         display_rewards = 1;
         absolute_stat_path = self.pers["contracts"][contract_index].absolute_stat_path;
         if(absolute_stat_path != "") {
@@ -375,7 +377,7 @@ function add_active_stat(contract_index, delta = 1) {
     test_slot = getdvarint("", 9);
     if(slot == test_slot) {
       if(contract_index >= 1000 && contract_index <= 2999) {
-        event = &"";
+        event = & "";
       }
       display_rewards = 1;
     }
@@ -466,22 +468,22 @@ function set_contract_award_stat_from_path(stat_path, stat_value) {
 }
 
 function award_loot_xp_due(amount) {
-  if(!isDefined(self)) {
+  if(!isdefined(self)) {
     return;
   }
   if(amount <= 0) {
     return;
   }
-  current_amount = (isDefined(self getdstat("mp_loot_xp_due")) ? self getdstat("mp_loot_xp_due") : 0);
+  current_amount = (isdefined(self getdstat("mp_loot_xp_due")) ? self getdstat("mp_loot_xp_due") : 0);
   new_amount = current_amount + amount;
   self setdstat("mp_loot_xp_due", new_amount);
 }
 
 function get_hero_weapon_mask(attacker, weapon) {
-  if(!isDefined(weapon)) {
+  if(!isdefined(weapon)) {
     return 0;
   }
-  if(isDefined(weapon.isheroweapon) && !weapon.isheroweapon) {
+  if(isdefined(weapon.isheroweapon) && !weapon.isheroweapon) {
     return 0;
   }
   switch (weapon.name) {
@@ -535,7 +537,7 @@ function get_hero_weapon_mask(attacker, weapon) {
 }
 
 function get_hero_ability_mask(ability) {
-  if(!isDefined(ability)) {
+  if(!isdefined(ability)) {
     return 0;
   }
   switch (ability.name) {
@@ -685,7 +687,7 @@ function on_headshot_kill() {
 
 function award_loot_xp() {
   player = self;
-  if(!isDefined(player.pers["contracts"])) {
+  if(!isdefined(player.pers["contracts"])) {
     return 0;
   }
   loot_xp = 0;
@@ -711,7 +713,7 @@ function award_loot_xp() {
 function contract_slot_met(slot) {
   player = self;
   contract_index = get_contract_stat(slot, "index");
-  if(!isDefined(player.pers["contracts"][contract_index])) {
+  if(!isdefined(player.pers["contracts"][contract_index])) {
     return 0;
   }
   progress = player get_contract_stat(slot, "progress");

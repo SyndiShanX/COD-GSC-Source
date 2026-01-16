@@ -306,9 +306,9 @@ event2_grenade_death_guy_explode(guy) {
 }
 
 hatch_guy_throw_grenade(guy) {
-  point = anglesToForward(guy.angles);
+  point = anglestoforward(guy.angles);
   point = vectorScale(point, 70);
-  orgs = getEntArray("grenadetosspoint", "targetname");
+  orgs = getentarray("grenadetosspoint", "targetname");
   point = maps\pel1::getClosestEnt(guy.origin, orgs);
   grenadeOrigin = guy GetTagOrigin("tag_inhand");
   guy MagicGrenadeManual(point.origin, (0, 0, 0), randomfloatrange(2, 3.5));
@@ -366,7 +366,7 @@ lvt_tipover() {
   top_arc = 10;
   bottom_arc = 10;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] playerlinktodelta(hands, "tag_player", fraction, right_arc, left_arc, top_arc, bottom_arc, false);
     players[i] hide();
     if(getdvar("start") != "off_lvt") {
@@ -379,7 +379,7 @@ lvt_tipover() {
   thread sullivan_pullout();
   hands waittillmatch("mantle_anim", "end");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] unlink();
     if(i == 1) {
       point = getstruct("post_lvt_warp1", "script_noteworthy");
@@ -399,7 +399,7 @@ lvt_tipover() {
   SetSavedDvar("compass", "1");
   level notify("done underwater");
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     if(i != 0) {
       players[i] thread set_player_after_sullivan_scene();
     } else {
@@ -417,7 +417,7 @@ lvt_tipover() {
   }
   wait 0.2;
   players = get_players();
-  for(i = 0; i < players.size; i++) {
+  for (i = 0; i < players.size; i++) {
     players[i] show();
   }
 }
@@ -455,11 +455,11 @@ sullivan_pullout() {
 
 pullout_dialog() {
   self waittillmatch("single anim", "dialog");
-  self playSound(level.scr_sound["sullivan"]["sullivan_pullout1"]);
+  self playsound(level.scr_sound["sullivan"]["sullivan_pullout1"]);
   self waittillmatch("single anim", "dialog");
-  self playSound(level.scr_sound["sullivan"]["sullivan_pullout2"]);
+  self playsound(level.scr_sound["sullivan"]["sullivan_pullout2"]);
   self waittillmatch("single anim", "dialog");
-  self playSound(level.scr_sound["sullivan"]["sullivan_pullout3"]);
+  self playsound(level.scr_sound["sullivan"]["sullivan_pullout3"]);
 }
 
 hands_notetrack_watcher() {
@@ -468,10 +468,10 @@ hands_notetrack_watcher() {
   self waittillmatch("mantle_anim", "splash");
   thread maps\pel1::rumble_all_players("damage_heavy");
   model = spawn("script_model", self.origin + (-20, 0, 20));
-  model setModel("tag_origin");
+  model setmodel("tag_origin");
   model linkto(self);
   model thread delete_in_a_bit(2.5);
-  playFXOnTag(level._effect["splash_bubbles"], model, "tag_origin");
+  playfxontag(level._effect["splash_bubbles"], model, "tag_origin");
   self waittillmatch("mantle_anim", "start_anim");
   thread maps\pel1_anim::guys_underwater_getting_shot();
   level notify("start_underwater_anim");
@@ -511,12 +511,12 @@ underwater_bubbles() {
   tags[2] = "j_wrist_ri";
   tags[3] = "j_ankle_ri";
   tags[4] = "j_ankle_le";
-  while(1) {
+  while (1) {
     tag = tags[randomint(tags.size)];
     if(issubstr("spine", tag)) {
-      playFX(level._effect["limb_bubbles"], self gettagorigin(tag));
+      playfx(level._effect["limb_bubbles"], self gettagorigin(tag));
     } else {
-      playFX(level._effect["torso_bubbles"], self gettagorigin(tag));
+      playfx(level._effect["torso_bubbles"], self gettagorigin(tag));
     }
     wait 1;
   }
@@ -563,18 +563,18 @@ underwater_notes2() {
 
 underwater_blood1() {
   wait 3;
-  playFXOnTag(level._effect["uw_blood"], self, "j_hip_ri");
+  playfxontag(level._effect["uw_blood"], self, "j_hip_ri");
   wait 2;
-  playFXOnTag(level._effect["uw_blood"], self, "j_spine4");
+  playfxontag(level._effect["uw_blood"], self, "j_spine4");
   wait 1.75;
-  playFXOnTag(level._effect["uw_blood"], self, "j_clavicle_ri");
+  playfxontag(level._effect["uw_blood"], self, "j_clavicle_ri");
 }
 
 underwater_blood2() {
   wait 2;
-  playFXOnTag(level._effect["uw_blood"], self, "j_spineupper");
+  playfxontag(level._effect["uw_blood"], self, "j_spineupper");
   wait 1.5;
-  playFXOnTag(level._effect["uw_blood"], self, "j_head");
+  playfxontag(level._effect["uw_blood"], self, "j_head");
   wait 2.5;
-  playFXOnTag(level._effect["uw_blood"], self, "j_elbow_le");
+  playfxontag(level._effect["uw_blood"], self, "j_elbow_le");
 }

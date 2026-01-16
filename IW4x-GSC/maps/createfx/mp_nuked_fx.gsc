@@ -3,10 +3,12 @@
  * Script: maps\createfx\mp_nuked_fx.gsc
 *****************************************/
 
+//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 
 main() {
+  // CreateFX entities placed: 137
   ent = createLoopEffect("fx_mp_nuked_glint");
   ent.v["origin"] = (1089.39, 140.735, -15.7909);
   ent.v["angles"] = (270, 0, 0);
@@ -444,4 +446,5 @@ main() {
   ent.v["angles"] = (344.111, 268.224, -2.13021);
   ent.v["fxid"] = "fx_mp_nuked_hose_spray";
   ent.v["delay"] = -15;
+
 }

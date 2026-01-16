@@ -84,9 +84,8 @@ watch_slowgun_fired() {
       continue;
     }
 
-    if(weapon == "slowgun_upgraded_zm") {
+    if(weapon == "slowgun_upgraded_zm")
       self slowgun_fired(1);
-    }
   }
 }
 
@@ -101,9 +100,8 @@ slowgun_fired(upgraded) {
   if(targets.size) {
     foreach(target in targets) {
       if(isplayer(target)) {
-        if(is_player_valid(target) && self != target) {
+        if(is_player_valid(target) && self != target)
           target thread player_paralyzed(self, upgraded);
-        }
 
         continue;
       }
@@ -119,9 +117,8 @@ slowgun_fired(upgraded) {
 
   dot = vectordot(forward, (0, 0, -1));
 
-  if(dot > 0.8) {
+  if(dot > 0.8)
     self thread player_paralyzed(self, upgraded);
-  }
 }
 
 slowgun_get_enemies_in_range(upgraded, position, forward, possible_targets) {
@@ -131,9 +128,8 @@ slowgun_get_enemies_in_range(upgraded, position, forward, possible_targets) {
   level.slowgun_enemies = [];
   view_pos = position;
 
-  if(!isDefined(possible_targets)) {
+  if(!isDefined(possible_targets))
     return level.slowgun_enemies;
-  }
 
   slowgun_inner_range_squared = inner_range * inner_range;
   slowgun_outer_range_squared = outer_range * outer_range;
@@ -192,9 +188,8 @@ get_targets_in_range(upgraded, position, forward) {
     possible_targets = getaispeciesarray(level.zombie_team, "all");
     possible_targets = arraycombine(possible_targets, get_players(), 1, 0);
 
-    if(isDefined(level.possible_slowgun_targets) && level.possible_slowgun_targets.size > 0) {
+    if(isDefined(level.possible_slowgun_targets) && level.possible_slowgun_targets.size > 0)
       possible_targets = arraycombine(possible_targets, level.possible_slowgun_targets, 1, 0);
-    }
 
     targets = slowgun_get_enemies_in_range(0, position, forward, possible_targets);
     self.slowgun_targets = targets;
@@ -214,17 +209,14 @@ slowgun_on_zombie_spawned() {
 }
 
 can_be_paralyzed(zombie) {
-  if(is_true(zombie.is_ghost)) {
+  if(is_true(zombie.is_ghost))
     return false;
-  }
 
-  if(is_true(zombie.guts_explosion)) {
+  if(is_true(zombie.guts_explosion))
     return false;
-  }
 
-  if(isDefined(zombie) && zombie.health > 0) {
+  if(isDefined(zombie) && zombie.health > 0)
     return true;
-  }
 
   return false;
 }
@@ -238,9 +230,8 @@ set_anim_rate(rate) {
       qrate = self getclientfield("anim_rate");
       self setentityanimrate(qrate);
 
-      if(isDefined(self.set_anim_rate)) {
+      if(isDefined(self.set_anim_rate))
         self[[self.set_anim_rate]](rate);
-      }
     }
   }
 }
@@ -270,63 +261,55 @@ reset_anim() {
 zombie_change_rate(time, newrate) {
   self set_anim_rate(newrate);
 
-  if(isDefined(self.reset_anim)) {
+  if(isDefined(self.reset_anim))
     self thread[[self.reset_anim]]();
-  } else {
+  else
     self thread reset_anim();
-  }
 
-  if(time > 0) {
+  if(time > 0)
     wait(time);
-  }
 }
 
 zombie_slow_for_time(time, multiplier) {
-  if(!isDefined(multiplier)) {
+  if(!isDefined(multiplier))
     multiplier = 2.0;
-  }
 
   paralyzer_time_per_frame = 0.1 * (1.0 + multiplier);
 
-  if(self.paralyzer_slowtime <= time) {
+  if(self.paralyzer_slowtime <= time)
     self.paralyzer_slowtime = time + paralyzer_time_per_frame;
-  } else {
+  else
     self.paralyzer_slowtime = self.paralyzer_slowtime + paralyzer_time_per_frame;
-  }
 
-  if(!isDefined(self.slowgun_anim_rate)) {
+  if(!isDefined(self.slowgun_anim_rate))
     self.slowgun_anim_rate = 1;
-  }
 
-  if(!isDefined(self.slowgun_desired_anim_rate)) {
+  if(!isDefined(self.slowgun_desired_anim_rate))
     self.slowgun_desired_anim_rate = 1;
-  }
 
-  if(self.slowgun_desired_anim_rate > 0.3) {
+  if(self.slowgun_desired_anim_rate > 0.3)
     self.slowgun_desired_anim_rate = self.slowgun_desired_anim_rate - 0.2;
-  } else {
+  else
     self.slowgun_desired_anim_rate = 0.05;
-  }
 
   if(is_true(self.slowing)) {
     return;
   }
   self.slowing = 1;
   self.preserve_asd_substates = 1;
-  self playLoopSound("wpn_paralyzer_slowed_loop", 0.1);
+  self playloopsound("wpn_paralyzer_slowed_loop", 0.1);
 
   while(self.paralyzer_slowtime > 0 && isalive(self)) {
-    if(self.paralyzer_slowtime < 0.1) {
+    if(self.paralyzer_slowtime < 0.1)
       self.slowgun_desired_anim_rate = 1;
-    } else if(self.paralyzer_slowtime < 2 * 0.1) {
+    else if(self.paralyzer_slowtime < 2 * 0.1)
       self.slowgun_desired_anim_rate = max(self.slowgun_desired_anim_rate, 0.8);
-    } else if(self.paralyzer_slowtime < 3 * 0.1) {
+    else if(self.paralyzer_slowtime < 3 * 0.1)
       self.slowgun_desired_anim_rate = max(self.slowgun_desired_anim_rate, 0.6);
-    } else if(self.paralyzer_slowtime < 4 * 0.1) {
+    else if(self.paralyzer_slowtime < 4 * 0.1)
       self.slowgun_desired_anim_rate = max(self.slowgun_desired_anim_rate, 0.4);
-    } else if(self.paralyzer_slowtime < 5 * 0.1) {
+    else if(self.paralyzer_slowtime < 5 * 0.1)
       self.slowgun_desired_anim_rate = max(self.slowgun_desired_anim_rate, 0.2);
-    }
 
     if(self.slowgun_desired_anim_rate == self.slowgun_anim_rate) {
       self.paralyzer_slowtime = self.paralyzer_slowtime - 0.1;
@@ -334,9 +317,8 @@ zombie_slow_for_time(time, multiplier) {
     } else if(self.slowgun_desired_anim_rate >= self.slowgun_anim_rate) {
       new_rate = self.slowgun_desired_anim_rate;
 
-      if(self.slowgun_desired_anim_rate - self.slowgun_anim_rate > 0.2) {
+      if(self.slowgun_desired_anim_rate - self.slowgun_anim_rate > 0.2)
         new_rate = self.slowgun_anim_rate + 0.2;
-      }
 
       self.paralyzer_slowtime = self.paralyzer_slowtime - 0.1;
       zombie_change_rate(0.1, new_rate);
@@ -344,18 +326,16 @@ zombie_slow_for_time(time, multiplier) {
     } else if(self.slowgun_desired_anim_rate <= self.slowgun_anim_rate) {
       new_rate = self.slowgun_desired_anim_rate;
 
-      if(self.slowgun_anim_rate - self.slowgun_desired_anim_rate > 0.2) {
+      if(self.slowgun_anim_rate - self.slowgun_desired_anim_rate > 0.2)
         new_rate = self.slowgun_anim_rate - 0.2;
-      }
 
       self.paralyzer_slowtime = self.paralyzer_slowtime - 0.25;
       zombie_change_rate(0.25, new_rate);
     }
   }
 
-  if(self.slowgun_anim_rate < 1) {
+  if(self.slowgun_anim_rate < 1)
     self zombie_change_rate(0, 1);
-  }
 
   self.preserve_asd_substates = 0;
   self.slowing = 0;
@@ -370,39 +350,33 @@ zombie_paralyzed(player, upgraded) {
   }
   insta = player maps\mp\zombies\_zm_powerups::is_insta_kill_active();
 
-  if(upgraded) {
+  if(upgraded)
     self setclientfield("slowgun_fx", 5);
-  } else {
+  else
     self setclientfield("slowgun_fx", 1);
-  }
 
   if(self.slowgun_anim_rate <= 0.1 || insta && self.slowgun_anim_rate <= 0.5) {
-    if(upgraded) {
+    if(upgraded)
       damage = level.slowgun_damage_ug;
-    } else {
+    else
       damage = level.slowgun_damage;
-    }
 
     damage = damage * randomfloatrange(0.667, 1.5);
     damage = damage * self.paralyzer_damaged_multiplier;
 
-    if(!isDefined(self.paralyzer_damage)) {
+    if(!isDefined(self.paralyzer_damage))
       self.paralyzer_damage = 0;
-    }
 
-    if(self.paralyzer_damage > 47073) {
+    if(self.paralyzer_damage > 47073)
       damage = damage * (47073 / self.paralyzer_damage);
-    }
 
     self.paralyzer_damage = self.paralyzer_damage + damage;
 
-    if(insta) {
+    if(insta)
       damage = self.health + 666;
-    }
 
-    if(isalive(self)) {
+    if(isalive(self))
       self dodamage(damage, player.origin, player, player, "none", level.slowgun_damage_mod, 0, "slowgun_zm");
-    }
 
     self.paralyzer_damaged_multiplier = self.paralyzer_damaged_multiplier * 1.15;
     self.paralyzer_damaged_multiplier = min(self.paralyzer_damaged_multiplier, 50);
@@ -423,13 +397,11 @@ slowgun_zombie_damage_response(mod, hit_location, hit_origin, player, amount) {
       extra_damage = get_extra_damage(amount, mod, self.slowgun_anim_rate);
 
       if(extra_damage > 0) {
-        if(isalive(self)) {
+        if(isalive(self))
           self dodamage(extra_damage, hit_origin, player, player, hit_location, level.slowgun_damage_mod, 0, "slowgun_zm");
-        }
 
-        if(!isalive(self)) {
+        if(!isalive(self))
           return true;
-        }
       }
     }
 
@@ -439,26 +411,22 @@ slowgun_zombie_damage_response(mod, hit_location, hit_origin, player, amount) {
   if(gettime() - self.paralyzer_score_time_ms >= 500) {
     self.paralyzer_score_time_ms = gettime();
 
-    if(self.paralyzer_damage < 47073) {
+    if(self.paralyzer_damage < 47073)
       player maps\mp\zombies\_zm_score::player_add_points("damage", mod, hit_location, self.isdog, level.zombie_team);
-    }
   }
 
-  if(player maps\mp\zombies\_zm_powerups::is_insta_kill_active()) {
+  if(player maps\mp\zombies\_zm_powerups::is_insta_kill_active())
     amount = self.health + 666;
-  }
 
-  if(isalive(self)) {
+  if(isalive(self))
     self dodamage(amount, hit_origin, player, player, hit_location, mod, 0, "slowgun_zm");
-  }
 
   return true;
 }
 
 explosion_choke() {
-  if(!isDefined(level.slowgun_explosion_time)) {
+  if(!isDefined(level.slowgun_explosion_time))
     level.slowgun_explosion_time = 0;
-  }
 
   if(level.slowgun_explosion_time != gettime()) {
     level.slowgun_explosion_count = 0;
@@ -483,20 +451,18 @@ explode_into_dust(player, upgraded) {
   }
   explosion_choke();
 
-  if(upgraded) {
+  if(upgraded)
     self setclientfield("slowgun_fx", 6);
-  } else {
+  else
     self setclientfield("slowgun_fx", 2);
-  }
 
   self.guts_explosion = 1;
   self ghost();
 }
 
 slowgun_zombie_death_response() {
-  if(!self is_slowgun_damage(self.damagemod, self.damageweapon)) {
+  if(!self is_slowgun_damage(self.damagemod, self.damageweapon))
     return false;
-  }
 
   level maps\mp\zombies\_zm_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   self thread explode_into_dust(self.attacker, self.damageweapon == "slowgun_upgraded_zm");
@@ -521,9 +487,8 @@ setjumpenabled(onoff) {
 get_ahead_ent() {
   velocity = self getvelocity();
 
-  if(lengthsquared(velocity) < 225) {
+  if(lengthsquared(velocity) < 225)
     return undefined;
-  }
 
   start = self geteyeapprox();
   end = start + velocity * 0.25;
@@ -531,11 +496,10 @@ get_ahead_ent() {
   maxs = (0, 0, 0);
   trace = physicstrace(start, end, vectorscale((-1, -1, 0), 15.0), vectorscale((1, 1, 0), 15.0), self, level.physicstracemaskclip);
 
-  if(isDefined(trace["entity"])) {
+  if(isDefined(trace["entity"]))
     return trace["entity"];
-  } else if(trace["fraction"] < 0.99 || trace["surfacetype"] != "none") {
+  else if(trace["fraction"] < 0.99 || trace["surfacetype"] != "none")
     return level;
-  }
 
   return undefined;
 }
@@ -557,9 +521,8 @@ player_fly_rumble() {
     ground = self getgroundent();
 
     if(isDefined(ground) != isDefined(last_ground) || ground != last_ground) {
-      if(isDefined(ground)) {
+      if(isDefined(ground))
         self bump();
-      }
     }
 
     if(isDefined(ground) && !self.slowgun_flying) {
@@ -569,9 +532,9 @@ player_fly_rumble() {
 
     last_ground = ground;
 
-    if(isDefined(ground)) {
+    if(isDefined(ground))
       last_ahead = undefined;
-    } else {
+    else {
       ahead = self get_ahead_ent();
 
       if(isDefined(ahead)) {
@@ -579,9 +542,8 @@ player_fly_rumble() {
           self playsoundtoplayer("zmb_invis_barrier_hit", self);
           chance = get_response_chance("invisible_collision");
 
-          if(chance > randomintrange(1, 100)) {
+          if(chance > randomintrange(1, 100))
             self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "invisible_collision");
-          }
 
           self bump();
         }
@@ -595,9 +557,8 @@ player_fly_rumble() {
 }
 
 dont_tread_on_z() {
-  if(!isDefined(level.ghost_head_damage)) {
+  if(!isDefined(level.ghost_head_damage))
     level.ghost_head_damage = 30;
-  }
 
   ground = self getgroundent();
 
@@ -614,11 +575,10 @@ dont_tread_on_z() {
         if(is_true(ground.is_ghost)) {
           level.ghost_head_damage = level.ghost_head_damage * 1.5;
 
-          if(self.score > 4000) {
+          if(self.score > 4000)
             self.score = self.score - 4000;
-          } else {
+          else
             self.score = 0;
-          }
         }
       } else
         self dodamage(level.ghost_head_damage, first_ground.origin, first_ground);
@@ -634,9 +594,8 @@ player_slow_for_time(time) {
   self endon("player_slow_for_time");
   self endon("disconnect");
 
-  if(!is_true(self.slowgun_flying)) {
+  if(!is_true(self.slowgun_flying))
     self thread player_fly_rumble();
-  }
 
   self setclientfieldtoplayer("slowgun_fx", 1);
   self set_anim_rate(0.05);
@@ -652,21 +611,18 @@ player_paralyzed(byplayer, upgraded) {
   self endon("death");
 
   if(isDefined(level.slowgun_allow_player_paralyze)) {
-    if(!self[[level.slowgun_allow_player_paralyze]]()) {
+    if(!self[[level.slowgun_allow_player_paralyze]]())
       return;
-    }
   }
 
   if(self != byplayer) {
     sizzle = "player_slowgun_sizzle";
 
-    if(upgraded) {
+    if(upgraded)
       sizzle = "player_slowgun_sizzle_ug";
-    }
 
-    if(isDefined(level._effect[sizzle])) {
-      playFXOnTag(level._effect[sizzle], self, "J_SpineLower");
-    }
+    if(isDefined(level._effect[sizzle]))
+      playfxontag(level._effect[sizzle], self, "J_SpineLower");
   }
 
   self thread player_slow_for_time(0.25);
@@ -676,9 +632,8 @@ slowgun_debug_print(msg, color) {
   if(getdvarint(#"_id_61A711C2") != 2) {
     return;
   }
-  if(!isDefined(color)) {
+  if(!isDefined(color))
     color = (1, 1, 1);
-  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }
@@ -702,11 +657,10 @@ show_slow_time(pos, dsquared, insta) {
   if(!isDefined(rate) || rate < 0.05) {
     return;
   }
-  if(self getentityanimrate() <= 0.1 || insta && self getentityanimrate() <= 0.5) {
+  if(self getentityanimrate() <= 0.1 || insta && self getentityanimrate() <= 0.5)
     color = (1, 0, 0);
-  } else {
+  else
     color = (0, 1, 0);
-  }
 
   text = "" + rate + "";
   print3d(self.origin + vectorscale((0, 0, 1), 50.0), text, color, 1, 0.5, 1);
@@ -720,29 +674,25 @@ show_anim_rates() {
       zombies = getaispeciesarray("all", "all");
 
       if(isDefined(zombies)) {
-        foreach(zombie in zombies) {
-          zombie show_slow_time(lp.origin, 360000, insta);
-        }
+        foreach(zombie in zombies)
+        zombie show_slow_time(lp.origin, 360000, insta);
       }
 
-      if(isDefined(level.sloth)) {
+      if(isDefined(level.sloth))
         level.sloth show_slow_time(lp.origin, 360000, 0);
-      }
     }
 
     if(getdvarint(#"_id_61A711C2") == 3) {
       lp = get_players()[0];
 
-      foreach(player in get_players()) {
-        player show_anim_rate(lp.origin, 360000);
-      }
+      foreach(player in get_players())
+      player show_anim_rate(lp.origin, 360000);
 
       zombies = getaispeciesarray("all", "all");
 
       if(isDefined(zombies)) {
-        foreach(zombie in zombies) {
-          zombie show_anim_rate(lp.origin, 360000);
-        }
+        foreach(zombie in zombies)
+        zombie show_anim_rate(lp.origin, 360000);
       }
     }
 

@@ -6,17 +6,17 @@
 #namespace name;
 
 function setup() {
-  assert(!isDefined(level.names));
+  assert(!isdefined(level.names));
   level.names = [];
   level.namesindex = [];
-  if(!isDefined(level.script)) {
+  if(!isdefined(level.script)) {
     level.script = tolower(getdvarstring("mapname"));
   }
   initialize_nationality("american");
 }
 
 function initialize_nationality(str_nationality) {
-  if(!isDefined(level.names[str_nationality])) {
+  if(!isdefined(level.names[str_nationality])) {
     level.names[str_nationality] = [];
     if(str_nationality != "civilian") {
       add_nationality_names(str_nationality);
@@ -476,7 +476,7 @@ function add_name(nationality, thename) {
 
 function randomize_name_list(nationality) {
   size = level.names[nationality].size;
-  for(i = 0; i < size; i++) {
+  for (i = 0; i < size; i++) {
     switchwith = randomint(size);
     temp = level.names[nationality][i];
     level.names[nationality][i] = level.names[nationality][switchwith];
@@ -485,12 +485,12 @@ function randomize_name_list(nationality) {
 }
 
 function get(override) {
-  if(!isDefined(override) && level.script == "credits") {
+  if(!isdefined(override) && level.script == "credits") {
     self.airank = "private";
     self notify("hash_47341e47");
     return;
   }
-  if(isDefined(self.script_friendname)) {
+  if(isdefined(self.script_friendname)) {
     if(self.script_friendname == "none") {
       self.propername = "";
     } else {
@@ -500,7 +500,7 @@ function get(override) {
     self notify("hash_47341e47");
     return;
   }
-  assert(isDefined(level.names));
+  assert(isdefined(level.names));
   str_classname = self get_ai_classname();
   str_nationality = "american";
   if(issubstr(str_classname, "_civilian_")) {
@@ -549,7 +549,7 @@ function get(override) {
 }
 
 function get_ai_classname() {
-  if(isDefined(self.dr_ai_classname)) {
+  if(isdefined(self.dr_ai_classname)) {
     str_classname = tolower(self.dr_ai_classname);
   } else {
     str_classname = tolower(self.classname);
@@ -558,17 +558,19 @@ function get_ai_classname() {
 }
 
 function add_override_name_func(nationality, func) {
-  if(!isDefined(level._override_name_funcs)) {
+  if(!isdefined(level._override_name_funcs)) {
     level._override_name_funcs = [];
   }
-  assert(!isDefined(level._override_name_funcs[nationality]), "");
+  assert(!isdefined(level._override_name_funcs[nationality]), "");
   level._override_name_funcs[nationality] = func;
 }
 
 function get_name_for_nationality(nationality) {
-  assert(isDefined(level.nameindex[nationality]), nationality);
-  if(isDefined(level._override_name_funcs) && isDefined(level._override_name_funcs[nationality])) {
-    self.propername = [[level._override_name_funcs[nationality]]]();
+  assert(isdefined(level.nameindex[nationality]), nationality);
+  if(isdefined(level._override_name_funcs) && isdefined(level._override_name_funcs[nationality])) {
+    self.propername = [
+      [level._override_name_funcs[nationality]]
+    ]();
     self.airank = "";
     return;
   }
@@ -578,13 +580,13 @@ function get_name_for_nationality(nationality) {
   }
   level.nameindex[nationality] = (level.nameindex[nationality] + 1) % level.names[nationality].size;
   lastname = level.names[nationality][level.nameindex[nationality]];
-  if(!isDefined(lastname)) {
+  if(!isdefined(lastname)) {
     lastname = "";
   }
-  if(isDefined(level._override_rank_func)) {
+  if(isdefined(level._override_rank_func)) {
     self[[level._override_rank_func]](lastname);
   } else {
-    if(isDefined(self.airank) && self.airank == "none") {
+    if(isdefined(self.airank) && self.airank == "none") {
       self.propername = lastname;
       return;
     }
@@ -690,7 +692,7 @@ function is_special_agent_member(str_classname) {
 }
 
 function getrankfromname(name) {
-  if(!isDefined(name)) {
+  if(!isdefined(name)) {
     self.airank = "private";
   }
   tokens = strtok(name, " ");

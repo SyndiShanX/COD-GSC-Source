@@ -54,9 +54,9 @@ function function_5e408c24(origin, region, minradius, maxradius) {
   nodes = getnodesinradius(origin, maxradius, minradius);
   var_54f3a637 = [];
   foreach(node in nodes) {
-    if(isDefined(region)) {
+    if(isdefined(region)) {
       var_dd83e145 = getnoderegion(node);
-      if(isDefined(var_dd83e145) && region == var_dd83e145) {
+      if(isdefined(var_dd83e145) && region == var_dd83e145) {
         array::add(var_54f3a637, node);
       }
       continue;
@@ -68,9 +68,9 @@ function function_5e408c24(origin, region, minradius, maxradius) {
 }
 
 function function_165bd27a(health) {
-  assert(isDefined(health));
+  assert(isdefined(health));
   scalar = 1;
-  if(isDefined(level.currentdifficulty)) {
+  if(isdefined(level.currentdifficulty)) {
     switch (level.currentdifficulty) {
       case "easy": {
         scalar = level.var_a9e78bf7["zombiehealthscale1"];
@@ -99,7 +99,7 @@ function function_165bd27a(health) {
 
 function function_5f2c4513() {
   scalar = 1;
-  if(isDefined(level.activeplayers)) {
+  if(isdefined(level.activeplayers)) {
     switch (level.activeplayers.size) {
       case 1: {
         scalar = level.var_a9e78bf7["extrazombiescale1"];
@@ -119,7 +119,7 @@ function function_5f2c4513() {
       }
     }
   }
-  assert(isDefined(level.var_a9e78bf7[""]));
+  assert(isdefined(level.var_a9e78bf7[""]));
   return int(level.var_a9e78bf7["extraspawns"] * scalar);
 }
 
@@ -144,13 +144,13 @@ function function_51828ce6() {
   if(!self isinscriptedstate()) {
     return false;
   }
-  if(isDefined(self.current_scene) && isstring(self.current_scene)) {
+  if(isdefined(self.current_scene) && isstring(self.current_scene)) {
     if(isinarray(level.var_3a7fa0a9, self.current_scene)) {
       return true;
     }
   }
   if(level.script === "cp_mi_sing_sgen") {
-    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.animscript) && isstring(self.traversestartnode.animscript)) {
+    if(isdefined(self.traversestartnode) && isdefined(self.traversestartnode.animscript) && isstring(self.traversestartnode.animscript)) {
       if(isinarray(level.var_3a7fa0a9, self.traversestartnode.animscript)) {
         return true;
       }
@@ -167,41 +167,41 @@ function function_ce6a97e6() {
 function function_d68296ac() {
   mapname = getdvarstring("mapname");
   if(mapname == "cp_mi_eth_prologue") {
-    if(isDefined(level.current_skipto) && level.current_skipto == "skipto_hangar") {
+    if(isdefined(level.current_skipto) && level.current_skipto == "skipto_hangar") {
       level flag::wait_till_all(array("plane_hangar_hendricks_ready_flag", "plane_hangar_khalil_ready_flag", "plane_hangar_minister_ready_flag"));
       wait(4);
     }
   }
   if(mapname == "cp_mi_cairo_ramses") {
-    if(isDefined(level.current_skipto) && level.current_skipto == "defend_ramses_station") {
+    if(isdefined(level.current_skipto) && level.current_skipto == "defend_ramses_station") {
       level flag::wait_till("raps_intro_done");
     }
   }
 }
 
 function function_ec036ed3(var_28b84d73, var_14e6a7e9, var_df4e4d0f) {
-  if(!isDefined(level.var_5e64ddb4)) {
+  if(!isdefined(level.var_5e64ddb4)) {
     level.var_5e64ddb4 = [];
     level.var_3494f35e = 0;
   }
   closestplayer = arraygetclosest(var_14e6a7e9, level.activeplayers);
-  if(!isDefined(closestplayer)) {
+  if(!isdefined(closestplayer)) {
     return var_14e6a7e9;
   }
-  playerforward = anglesToForward(closestplayer.angles);
+  playerforward = anglestoforward(closestplayer.angles);
   var_2d1236a = closestplayer.origin;
   var_2d1236a = getclosestpointonnavmesh(var_2d1236a, randomintrange(100, 300));
-  if(isDefined(var_2d1236a)) {
+  if(isdefined(var_2d1236a)) {
     queryresult = positionquery_source_navigation(var_2d1236a, 450, randomintrange(800, 1200), 70, randomintrange(80, 150), self);
   }
-  if(!isDefined(queryresult)) {
+  if(!isdefined(queryresult)) {
     var_2d1236a = closestplayer.origin;
-    if(isDefined(var_2d1236a)) {
+    if(isdefined(var_2d1236a)) {
       queryresult = positionquery_source_navigation(var_2d1236a, 150, randomintrange(800, 1200), 70, randomintrange(80, 150), self);
     }
   }
   var_59b020a9 = undefined;
-  if(isDefined(queryresult) && queryresult.data.size > 0) {
+  if(isdefined(queryresult) && queryresult.data.size > 0) {
     foreach(data in queryresult.data) {
       data.score = 0;
       var_dcf3b4e8 = function_1f637867(var_28b84d73, closestplayer, data);
@@ -212,7 +212,7 @@ function function_ec036ed3(var_28b84d73, var_14e6a7e9, var_df4e4d0f) {
       data.score = data.score + var_6a9c89c0;
       var_77f56330 = function_fb8e7615(var_28b84d73, closestplayer, data);
       data.score = data.score - var_77f56330;
-      if(!isDefined(var_59b020a9)) {
+      if(!isdefined(var_59b020a9)) {
         var_59b020a9 = data;
       }
       if(data.score > var_59b020a9.score) {
@@ -224,17 +224,17 @@ function function_ec036ed3(var_28b84d73, var_14e6a7e9, var_df4e4d0f) {
     }
   }
   function_4d084a77();
-  if(isDefined(var_59b020a9)) {
+  if(isdefined(var_59b020a9)) {
     record3dtext("" + var_59b020a9.score, var_59b020a9.origin + vectorscale((0, 0, 1), 20), (0, 1, 0), "");
     var_42322402 = var_59b020a9.origin;
   }
-  if(!isDefined(var_42322402)) {
+  if(!isdefined(var_42322402)) {
     gotonode = function_5e408c24(var_14e6a7e9, var_df4e4d0f, 100, randomintrange(600, 1000));
-    if(isDefined(gotonode)) {
+    if(isdefined(gotonode)) {
       var_42322402 = gotonode.origin;
     }
   }
-  if(!isDefined(var_42322402)) {
+  if(!isdefined(var_42322402)) {
     var_42322402 = var_14e6a7e9;
   }
   if(level.var_3494f35e > 10) {
@@ -261,7 +261,7 @@ function function_1f637867(var_28b84d73, closestplayer, data) {
 function function_ae0beba6(var_28b84d73, closestplayer, data) {
   score = 0;
   var_4d45bcdc = 0;
-  if(isDefined(closestplayer) && isDefined(closestplayer.v_current_active_breadcrumb)) {
+  if(isdefined(closestplayer) && isdefined(closestplayer.v_current_active_breadcrumb)) {
     var_c54cd263 = vectornormalize((closestplayer.v_current_active_breadcrumb[0], closestplayer.v_current_active_breadcrumb[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
     fov = cos(70);
     var_a9f2c7c7 = vectornormalize((data.origin[0], data.origin[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
@@ -274,7 +274,7 @@ function function_ae0beba6(var_28b84d73, closestplayer, data) {
 }
 
 function function_d789e857(var_28b84d73, closestplayer, data) {
-  assert(isDefined(var_28b84d73));
+  assert(isdefined(var_28b84d73));
   score = 1;
   if(var_28b84d73 isposinclaimedlocation(data.origin)) {
     score = 0;

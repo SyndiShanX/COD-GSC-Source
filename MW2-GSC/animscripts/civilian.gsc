@@ -14,28 +14,25 @@ cover() {
 
   self clearanim( % root, 0.2);
 
-  if(self animscripts\utility::IsInCombat()) {
+  if(self animscripts\utility::IsInCombat())
     situation = "idle_combat";
-  } else {
+  else
     situation = "idle_noncombat";
-  }
 
   idle_array = undefined;
-  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname])) {
+  if(isdefined(self.animname) && isdefined(level.scr_anim[self.animname]))
     idle_array = level.scr_anim[self.animname][situation];
-  }
 
-  if(!isDefined(idle_array)) {
-    if(!isDefined(level.scr_anim["default_civilian"])) {
+  if(!isdefined(idle_array)) {
+    if(!isdefined(level.scr_anim["default_civilian"]))
       return;
-    }
 
     idle_array = level.scr_anim["default_civilian"][situation];
   }
 
   thread move_check();
 
-  for(;;) {
+  for (;;) {
     self setflaggedanimknoball("idle", random(idle_array), % root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
@@ -44,7 +41,7 @@ cover() {
 move_check() {
   self endon("killanimscript");
 
-  while(!isDefined(self.champion)) {
+  while (!isdefined(self.champion)) {
     wait(1);
   }
 }

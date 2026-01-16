@@ -171,20 +171,17 @@ setup_footstep_fx() {
 }
 
 turn_effects_on(var_0, var_1) {
-  if(!isDefined(level.effect_monitors)) {
+  if(!isDefined(level.effect_monitors))
     level.effect_monitors = [];
-  }
 
-  if(!isDefined(level.effect_monitors[var_0 + var_1])) {
+  if(!isDefined(level.effect_monitors[var_0 + var_1]))
     level.effect_monitors[var_0 + var_1] = 0;
-  }
 
   if(level.effect_monitors[var_0 + var_1] == 0) {
     level.effect_monitors[var_0 + var_1] = 1;
 
-    if(!common_scripts\utility::flag_exist(var_0)) {
+    if(!common_scripts\utility::flag_exist(var_0))
       common_scripts\utility::flag_init(var_0);
-    }
 
     var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
     var_3 = [];
@@ -194,13 +191,11 @@ turn_effects_on(var_0, var_1) {
       var_7 = (0, 0, 0);
       var_8 = (0, 0, 0);
 
-      if(isDefined(var_6.origin)) {
+      if(isDefined(var_6.origin))
         var_8 = var_6.origin;
-      }
 
-      if(isDefined(var_6.angles)) {
+      if(isDefined(var_6.angles))
         var_7 = var_6.angles;
-      }
 
       var_9 = spawnfx(level._effect[var_1], var_8, anglesToForward(var_7), anglestoup(var_7));
       triggerfx(var_9);
@@ -210,9 +205,8 @@ turn_effects_on(var_0, var_1) {
 
     common_scripts\utility::flag_wait(var_0);
 
-    foreach(var_12 in var_3) {
-      var_12 delete();
-    }
+    foreach(var_12 in var_3)
+    var_12 delete();
 
     common_scripts\utility::flag_clear(var_0);
     level.effect_monitors[var_0 + var_1] = 0;
@@ -222,9 +216,8 @@ turn_effects_on(var_0, var_1) {
 fx_checkpoint_states() {
   var_0 = level.start_point;
 
-  if(var_0 == "start_ambush") {
+  if(var_0 == "start_ambush")
     common_scripts\utility::flag_set("snowmobile_headlight");
-  }
 
   if(var_0 == "interior") {
     common_scripts\utility::flag_set("snowmobile_headlight");

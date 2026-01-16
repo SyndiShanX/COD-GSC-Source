@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicleriders_shared;
+
 #namespace vehicle;
 
 autoexec __init__system__() {
@@ -427,18 +428,18 @@ aircraft_dustkick() {
     }
 
     trace = bulletTrace(self.origin, self.origin - (0, 0, 700 * 2), 0, self, 1);
-    distsqr = distancesquared(self.origin, trace[# "position"]);
+    distsqr = distancesquared(self.origin, trace[#"position"]);
 
-    if(trace[# "fraction"] < 0.01 || distsqr < 0 * 0) {
+    if(trace[#"fraction"] < 0.01 || distsqr < 0 * 0) {
       wait 0.2;
       continue;
-    } else if(trace[# "fraction"] >= 1 || distsqr > 700 * 700) {
+    } else if(trace[#"fraction"] >= 1 || distsqr > 700 * 700) {
       wait 1;
       continue;
     }
 
     if(0 * 0 < distsqr && distsqr < 700 * 700) {
-      surfacetype = trace[# "surfacetype"];
+      surfacetype = trace[#"surfacetype"];
 
       if(!isDefined(surfacetype)) {
         surfacetype = "dirt";
@@ -446,7 +447,7 @@ aircraft_dustkick() {
 
       if(isDefined(fxarray[surfacetype])) {
         forward = anglesToForward(self.angles);
-        playFX(0, fxarray[surfacetype], trace[# "position"], (0, 0, 1), forward);
+        playFX(0, fxarray[surfacetype], trace[#"position"], (0, 0, 1), forward);
       }
 
       velocity = self getvelocity();
@@ -1164,7 +1165,7 @@ set_static_postfxbundle(localclientnum, oldval, newval, bnewent, binitialsnap, f
     vehicle = getplayervehicle(player);
 
     if(isDefined(vehicle)) {
-      if(vehicle.vehicletype == # "veh_hawk_player_mp" || vehicle.vehicletype == # "veh_hawk_player_far_range_mp" || vehicle.vehicletype == # "veh_hawk_player_wz" || vehicle.vehicletype == # "veh_hawk_player_far_range_wz") {
+      if(vehicle.vehicletype == #"veh_hawk_player_mp" || vehicle.vehicletype == #"veh_hawk_player_far_range_mp" || vehicle.vehicletype == #"veh_hawk_player_wz" || vehicle.vehicletype == #"veh_hawk_player_far_range_wz") {
         if(player postfx::function_556665f2(#"hash_15d46f4ad6539103") == 0) {
           player thread postfx::playpostfxbundle(#"hash_15d46f4ad6539103");
         }
@@ -1316,15 +1317,15 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx_handles = [];
   }
 
-  if(!isDefined(self.fx_handles[# "malfunction"])) {
-    self.fx_handles[# "malfunction"] = [];
+  if(!isDefined(self.fx_handles[#"malfunction"])) {
+    self.fx_handles[#"malfunction"] = [];
   }
 
-  foreach(handle in self.fx_handles[# "malfunction"]) {
+  foreach(handle in self.fx_handles[#"malfunction"]) {
     stopfx(localclientnum, handle);
   }
 
-  self.fx_handles[# "malfunction"] = [];
+  self.fx_handles[#"malfunction"] = [];
 
   if(newval) {
     foreach(var_b5ddf091 in self.settings.malfunction_effects) {
@@ -1342,13 +1343,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.warning) && isDefined(var_b5ddf091.tag_warning)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.warning, self, var_b5ddf091.tag_warning);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1356,13 +1357,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.active) && isDefined(var_b5ddf091.var_2f451e59)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.active, self, var_b5ddf091.var_2f451e59);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1370,13 +1371,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.fatal) && isDefined(var_b5ddf091.var_ceeccc7a)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.fatal, self, var_b5ddf091.var_ceeccc7a);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1454,8 +1455,8 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "smolder"])) {
-      self.fx_handles[# "smolder"] = [];
+    if(!isDefined(self.fx_handles[#"smolder"])) {
+      self.fx_handles[#"smolder"] = [];
     }
 
     if(isDefined(self.var_8a037014) && self.var_8a037014 != "") {
@@ -1467,13 +1468,13 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "smolder"])) {
-        self.fx_handles[# "smolder"] = [];
-      } else if(!isarray(self.fx_handles[# "smolder"])) {
-        self.fx_handles[# "smolder"] = array(self.fx_handles[# "smolder"]);
+      if(!isDefined(self.fx_handles[#"smolder"])) {
+        self.fx_handles[#"smolder"] = [];
+      } else if(!isarray(self.fx_handles[#"smolder"])) {
+        self.fx_handles[#"smolder"] = array(self.fx_handles[#"smolder"]);
       }
 
-      self.fx_handles[# "smolder"][self.fx_handles[# "smolder"].size] = handle;
+      self.fx_handles[#"smolder"][self.fx_handles[#"smolder"].size] = handle;
     }
 
     if(isDefined(self.var_68f20b20) && self.var_68f20b20 != "") {
@@ -1485,19 +1486,19 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(isfxplaying(localclientnum, handle)) {
         stopfx(localclientnum, handle);
-        arrayremovevalue(self.fx_handles[# "smolder"], handle, 0);
+        arrayremovevalue(self.fx_handles[#"smolder"], handle, 0);
       }
     }
 
     return;
   }
 
-  if(isDefined(self.fx_handles) && isDefined(self.fx_handles[# "smolder"])) {
-    foreach(handle in self.fx_handles[# "smolder"]) {
+  if(isDefined(self.fx_handles) && isDefined(self.fx_handles[#"smolder"])) {
+    foreach(handle in self.fx_handles[#"smolder"]) {
       stopfx(localclientnum, handle);
     }
 
-    self.fx_handles[# "smolder"] = [];
+    self.fx_handles[#"smolder"] = [];
   }
 }
 
@@ -1510,8 +1511,8 @@ field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, 
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "death"])) {
-      self.fx_handles[# "death"] = [];
+    if(!isDefined(self.fx_handles[#"death"])) {
+      self.fx_handles[#"death"] = [];
     }
 
     if(isDefined(self.deathfxname)) {
@@ -1523,13 +1524,13 @@ field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "death"])) {
-        self.fx_handles[# "death"] = [];
-      } else if(!isarray(self.fx_handles[# "death"])) {
-        self.fx_handles[# "death"] = array(self.fx_handles[# "death"]);
+      if(!isDefined(self.fx_handles[#"death"])) {
+        self.fx_handles[#"death"] = [];
+      } else if(!isarray(self.fx_handles[#"death"])) {
+        self.fx_handles[#"death"] = array(self.fx_handles[#"death"]);
       }
 
-      self.fx_handles[# "death"][self.fx_handles[# "death"].size] = handle;
+      self.fx_handles[#"death"][self.fx_handles[#"death"].size] = handle;
     }
 
     self playSound(localclientnum, self.deathfxsound);
@@ -1562,8 +1563,8 @@ field_do_empdeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, field
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "empdeath"])) {
-      self.fx_handles[# "empdeath"] = [];
+    if(!isDefined(self.fx_handles[#"empdeath"])) {
+      self.fx_handles[#"empdeath"] = [];
     }
 
     s = self.settings;
@@ -1577,13 +1578,13 @@ field_do_empdeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "empdeath"])) {
-        self.fx_handles[# "empdeath"] = [];
-      } else if(!isarray(self.fx_handles[# "empdeath"])) {
-        self.fx_handles[# "empdeath"] = array(self.fx_handles[# "empdeath"]);
+      if(!isDefined(self.fx_handles[#"empdeath"])) {
+        self.fx_handles[#"empdeath"] = [];
+      } else if(!isarray(self.fx_handles[#"empdeath"])) {
+        self.fx_handles[#"empdeath"] = array(self.fx_handles[#"empdeath"]);
       }
 
-      self.fx_handles[# "empdeath"][self.fx_handles[# "empdeath"].size] = handle;
+      self.fx_handles[#"empdeath"][self.fx_handles[#"empdeath"].size] = handle;
     }
 
     self playSound(localclientnum, s.emp_death_sound_1);
@@ -1657,12 +1658,12 @@ field_toggle_lights_handler(localclientnum, oldval, newval, bnewent, binitialsna
   }
 
   if(newval == 2) {
-    self lights_on(localclientnum, # "allies");
+    self lights_on(localclientnum, #"allies");
     return;
   }
 
   if(newval == 3) {
-    self lights_on(localclientnum, # "axis");
+    self lights_on(localclientnum, #"axis");
     return;
   }
 
@@ -1713,9 +1714,9 @@ function_d7a2c2f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 start_stun_fx(localclientnum) {
-  stunfx = isDefined(self.global_zm_specialty_staminup_drankdie) ? self.global_zm_specialty_staminup_drankdie : # "killstreaks/fx_agr_emp_stun";
+  stunfx = isDefined(self.global_zm_specialty_staminup_drankdie) ? self.global_zm_specialty_staminup_drankdie : #"killstreaks/fx_agr_emp_stun";
   _exp_special_web_dissolve = isDefined(self.stunfxtag) ? self.stunfxtag : "tag_origin";
-  var_6dc7131c = isDefined(self.var_c254489e) ? self.var_c254489e : # "veh_talon_shutdown";
+  var_6dc7131c = isDefined(self.var_c254489e) ? self.var_c254489e : #"veh_talon_shutdown";
   self.stun_fx = util::playFXOnTag(localclientnum, stunfx, self, _exp_special_web_dissolve);
   playSound(localclientnum, var_6dc7131c, self.origin);
 }
@@ -1989,7 +1990,7 @@ function_9facca21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 play_flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_26fb93b4 = util::playFXOnTag(localclientnum, # "hash_3905863dd0908e4a", self, "tag_origin");
+    self.var_26fb93b4 = util::playFXOnTag(localclientnum, #"hash_3905863dd0908e4a", self, "tag_origin");
   }
 
   if(newval == 0) {
@@ -2002,7 +2003,7 @@ play_flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 play_flare_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_b4178826 = util::playFXOnTag(localclientnum, # "hash_1e747bdc27127b91", self, "tag_origin");
+    self.var_b4178826 = util::playFXOnTag(localclientnum, #"hash_1e747bdc27127b91", self, "tag_origin");
   }
 
   if(newval == 0) {

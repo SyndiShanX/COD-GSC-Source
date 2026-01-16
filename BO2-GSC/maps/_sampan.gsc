@@ -17,16 +17,15 @@ main() {
 delete_and_sink_fx() {
   self notify("nodeath_thread");
 
-  if(!isDefined(self.weapon_last_damage)) {
+  if(!isDefined(self.weapon_last_damage))
     self.weapon_last_damage = "hind_rockets";
-  }
 
   if(self.weapon_last_damage == "hind_rockets") {
-    playFX(level._effect["explo_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
-    self playSound("evt_sampan_explo");
+    playfx(level._effect["explo_fx" + self.vehicletype], self.origin, anglestoforward(self.angles));
+    self playsound("evt_sampan_explo");
   } else {
-    playFX(level._effect["sink_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
-    self playSound("evt_sampan_sink");
+    playfx(level._effect["sink_fx" + self.vehicletype], self.origin, anglestoforward(self.angles));
+    self playsound("evt_sampan_sink");
   }
 
   waittillframeend;

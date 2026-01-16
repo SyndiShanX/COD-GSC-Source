@@ -18,9 +18,8 @@ outline_disable() {
 outline_set_global_width(var_0) {
   var_1 = getdvarfloat("r_hudOutlineWidth");
 
-  if(var_1 != var_0) {
+  if(var_1 != var_0)
     setsaveddvar("r_hudOutlineWidth", var_0);
-  }
 }
 
 objective_outline_remove(var_0) {
@@ -31,9 +30,8 @@ objective_outline_add(var_0, var_1) {
   outline_enable();
   var_2 = 5;
 
-  if(isDefined(var_1)) {
+  if(isDefined(var_1))
     var_2 = var_1;
-  }
 
   var_0 hudoutlineenable(var_2, 1);
 }

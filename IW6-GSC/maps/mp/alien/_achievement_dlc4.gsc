@@ -48,9 +48,8 @@ update_timing_is_everything() {
     if(level.timing_is_everything_cnt == 3) {
       var_1 = gettime() - level.timing_is_everything_start_time;
 
-      if(var_1 < 10000) {
+      if(var_1 < 10000)
         maps\mp\alien\_achievement::update_achievement_all_players("TIMING_IS_EVERYTHING", 1);
-      }
     }
   }
 }
@@ -84,9 +83,8 @@ init_one_shot_kills() {
   level endon("game_ended");
   self endon("disconnect");
 
-  while(!isDefined(self.pers)) {
+  while(!isDefined(self.pers))
     wait 1;
-  }
 
   self.pers["one_shot_kills_tracker"] = spawnStruct();
   self.pers["one_shot_kills_tracker"].time = 0;
@@ -100,9 +98,8 @@ update_one_shot_kills() {
     if(var_0 == self.pers["one_shot_kills_tracker"].time) {
       self.pers["one_shot_kills_tracker"].cnt++;
 
-      if(self.pers["one_shot_kills_tracker"].cnt >= 3) {
+      if(self.pers["one_shot_kills_tracker"].cnt >= 3)
         maps\mp\alien\_achievement::update_achievement("HAT_TRICK", 1, self);
-      }
     } else {
       self.pers["one_shot_kills_tracker"].time = var_0;
       self.pers["one_shot_kills_tracker"].cnt = 1;
@@ -117,8 +114,7 @@ update_alien_kill_achievements_dlc4(var_0, var_1, var_2, var_3, var_4, var_5, va
   var_9 = isDefined(var_1) && isplayer(var_1);
 
   if(var_9) {
-    if(isDefined(var_4) && (var_4 == "iw6_aliendlc42_mp" || var_4 == "iw6_aliendlc41_mp")) {
+    if(isDefined(var_4) && (var_4 == "iw6_aliendlc42_mp" || var_4 == "iw6_aliendlc41_mp"))
       var_1 update_one_shot_kills();
-    }
   }
 }

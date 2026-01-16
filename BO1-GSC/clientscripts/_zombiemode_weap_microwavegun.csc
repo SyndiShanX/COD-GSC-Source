@@ -33,7 +33,7 @@ player_init() {
 
 microwavegun_create_hit_response_fx(localClientNum, tag, effect) {
   if(!isDefined(self._microwavegun_hit_response_fx[localClientNum][tag])) {
-    self._microwavegun_hit_response_fx[localClientNum][tag] = playFXOnTag(localClientNum, effect, self, tag);
+    self._microwavegun_hit_response_fx[localClientNum][tag] = PlayFxOnTag(localClientNum, effect, self, tag);
   }
 }
 
@@ -57,16 +57,14 @@ microwavegun_bloat(localClientNum) {
   while(1) {
     age = GetRealTime() - begin_time;
     bloat_fraction = age / durationMsec;
-    if(bloat_fraction > bloat_max_fraction) {
+    if(bloat_fraction > bloat_max_fraction)
       bloat_fraction = bloat_max_fraction;
-    }
     if(!isDefined(self)) {
       return;
     }
     self setshaderconstant(localClientNum, 0, (bloat_fraction * 4.0), 0, 0, 0);
-    if(bloat_fraction >= bloat_max_fraction) {
+    if(bloat_fraction >= bloat_max_fraction)
       break;
-    }
     realwait(0.05);
   }
 }
@@ -90,7 +88,7 @@ microwavegun_zombie_initial_hit_response(localClientNum, set, newEnt) {
     }
     if(set) {
       self microwavegun_create_hit_response_fx(i, "J_Eyeball_LE", level._effect["microwavegun_sizzle_blood_eyes"]);
-      playSound(0, "wpn_mgun_impact_zombie", self.origin);
+      playsound(0, "wpn_mgun_impact_zombie", self.origin);
     }
   }
 }
@@ -113,7 +111,7 @@ microwavegun_zombie_expand_response(localClientNum, set, newEnt) {
       self._microwavegun_hit_response_fx[i] = [];
     }
     if(set && initial_hit_occurred) {
-      playSound(0, "wpn_mgun_impact_zombie", self.origin);
+      playsound(0, "wpn_mgun_impact_zombie", self.origin);
       self thread microwavegun_bloat(i);
     } else {
       if(initial_hit_occurred) {
@@ -127,8 +125,8 @@ microwavegun_zombie_expand_response(localClientNum, set, newEnt) {
       if(isDefined(self.in_low_g) && self.in_low_g) {
         fx = level._effect["microwavegun_sizzle_death_mist_low_g"];
       }
-      playFX(i, fx, tag_pos);
-      playSound(0, "wpn_mgun_explode_zombie", self.origin);
+      playfx(i, fx, tag_pos);
+      playsound(0, "wpn_mgun_explode_zombie", self.origin);
     }
   }
 }

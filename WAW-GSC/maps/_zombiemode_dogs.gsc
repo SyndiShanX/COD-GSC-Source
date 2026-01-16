@@ -36,9 +36,9 @@ init() {
 
 dog_spawner_init() {
   dogs = getEntArray("zombie_dog_spawner", "script_noteworthy");
-  later_dogs = getEntArray("later_round_dog_spawners", "script_noteworthy");
+  later_dogs = getentarray("later_round_dog_spawners", "script_noteworthy");
   dogs = array_combine(dogs, later_dogs);
-  for(i = 0; i < dogs.size; i++) {
+  for (i = 0; i < dogs.size; i++) {
     if(maps\_zombiemode_spawner::is_spawner_targeted_by_blocker(dogs[i])) {
       dogs[i].locked_spawner = true;
     }
@@ -52,7 +52,7 @@ dog_spawner_init() {
 dog_round_spawning() {
   level endon("intermission");
   level.dog_targets = getplayers();
-  for(i = 0; i < level.dog_targets.size; i++) {
+  for (i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
   }
   assert(level.enemy_dog_spawns.size > 0);
@@ -79,9 +79,9 @@ dog_round_spawning() {
   level.zombie_total = max;
   dog_health_increase();
   count = 0;
-  while(count < max) {
+  while (count < max) {
     num_player_valid = get_number_of_valid_players();
-    while(get_enemy_count() >= num_player_valid * 2) {
+    while (get_enemy_count() >= num_player_valid * 2) {
       wait(2);
       num_player_valid = get_number_of_valid_players();
     }
@@ -117,10 +117,9 @@ waiting_for_next_dog_spawn(count, max) {
 get_number_of_valid_players() {
   players = get_players();
   num_player_valid = 0;
-  for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i])) {
+  for (i = 0; i < players.size; i++) {
+    if(is_player_valid(players[i]))
       num_player_valid += 1;
-    }
   }
   return num_player_valid;
 }
@@ -129,7 +128,7 @@ dog_round_aftermath() {
   level waittill("last_dog_down");
   power_up_origin = level.last_dog_origin;
   if(isDefined(power_up_origin)) {
-    for(i = 0; i < level.zombie_powerup_array.size; i++) {
+    for (i = 0; i < level.zombie_powerup_array.size; i++) {
       if(level.zombie_powerup_array[i] == "full_ammo") {
         level.zombie_powerup_index = i;
         break;
@@ -149,7 +148,7 @@ dog_round_aftermath() {
 dog_spawn_fx(ai) {
   ent = GetStruct(self.target, "targetname");
   if(isDefined(ent)) {
-    playFX(level._effect["lightning_dog_spawn"], ent.origin);
+    Playfx(level._effect["lightning_dog_spawn"], ent.origin);
     playsoundatposition("pre_spawn", ent.origin);
     wait(1.5);
     playsoundatposition("bolt", ent.origin);
@@ -167,10 +166,10 @@ dog_spawn_fx(ai) {
   ai zombie_setup_attack_properties_dog();
   ai stop_magic_bullet_shield();
   assert(isDefined(ai.fx_dog_eye));
-  playFXOnTag(level._effect["dog_eye_glow"], ai.fx_dog_eye, "tag_origin");
+  PlayFxOnTag(level._effect["dog_eye_glow"], ai.fx_dog_eye, "tag_origin");
   assert(isDefined(ai.fx_dog_trail));
-  playFXOnTag(ai.fx_dog_trail_type, ai.fx_dog_trail, "tag_origin");
-  ai playLoopSound(ai.fx_dog_trail_sound);
+  PlayFxOnTag(ai.fx_dog_trail_type, ai.fx_dog_trail, "tag_origin");
+  ai playloopsound(ai.fx_dog_trail_sound);
   wait(0.1);
   ai show();
 }
@@ -178,7 +177,7 @@ dog_spawn_fx(ai) {
 dog_spawn_sumpf_logic(dog_array, favorite_enemy) {
   assertex(dog_array.size > 0, "Dog Spawner array is empty.");
   dog_array = array_randomize(dog_array);
-  for(i = 0; i < dog_array.size; i++) {
+  for (i = 0; i < dog_array.size; i++) {
     if(isDefined(level.old_dog_spawn) && level.old_dog_spawn == dog_array[i]) {
       continue;
     }
@@ -197,7 +196,7 @@ dog_spawn_sumpf_logic(dog_array, favorite_enemy) {
 get_favorite_enemy() {
   dog_targets = getplayers();
   least_hunted = dog_targets[0];
-  for(i = 0; i < dog_targets.size; i++) {
+  for (i = 0; i < dog_targets.size; i++) {
     if(!is_player_valid(dog_targets[i])) {
       continue;
     }
@@ -232,7 +231,7 @@ dog_round_tracker() {
   level.dog_round_count = 1;
   next_dog_round = randomintrange(5, 8);
   sav_func = level.round_spawn_func;
-  while(1) {
+  while (1) {
     level waittill("between_round_over");
     if(GetDVarInt("force_dogs") > 0) {
       next_dog_round = level.round_number;
@@ -293,7 +292,7 @@ add_dog_dialog(player) {
   if(!isDefined(player.vox_dog_spawn)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_dog_spawn");
     player.vox_dog_spawn = [];
-    for(i = 0; i < num_variants; i++) {
+    for (i = 0; i < num_variants; i++) {
       player.vox_dog_spawn[player.vox_dog_spawn.size] = "vox_dog_spawn_" + i;
     }
     player.vox_dog_spawn_available = player.vox_dog_spawn;
@@ -342,10 +341,10 @@ dog_init() {
 }
 
 dog_fx_eye_glow() {
-  self.fx_dog_eye = spawn("script_model", self GetTagOrigin("J_EyeBall_LE"));
+  self.fx_dog_eye = Spawn("script_model", self GetTagOrigin("J_EyeBall_LE"));
   assert(isDefined(self.fx_dog_eye));
   self.fx_dog_eye.angles = self GetTagAngles("J_EyeBall_LE");
-  self.fx_dog_eye setModel("tag_origin");
+  self.fx_dog_eye SetModel("tag_origin");
   self.fx_dog_eye LinkTo(self, "J_EyeBall_LE");
 }
 
@@ -358,10 +357,10 @@ dog_fx_trail() {
     self.fx_dog_trail_type = level._effect["dog_trail_fire"];
     self.fx_dog_trail_sound = "dog_trail_fire";
   }
-  self.fx_dog_trail = spawn("script_model", self GetTagOrigin("tag_origin"));
+  self.fx_dog_trail = Spawn("script_model", self GetTagOrigin("tag_origin"));
   assert(isDefined(self.fx_dog_trail));
   self.fx_dog_trail.angles = self GetTagAngles("tag_origin");
-  self.fx_dog_trail setModel("tag_origin");
+  self.fx_dog_trail SetModel("tag_origin");
   self.fx_dog_trail LinkTo(self, "tag_origin");
 }
 
@@ -388,9 +387,9 @@ dog_death() {
 dog_explode_fx(origin) {
   fx = maps\_zombiemode_net::network_safe_spawn("script_model", origin);
   assert(isDefined(fx));
-  fx setModel("tag_origin");
-  playFXOnTag(level._effect["dog_gib"], fx, "tag_origin");
-  fx playSound("zombie_dog_death");
+  fx SetModel("tag_origin");
+  PlayFxOnTag(level._effect["dog_gib"], fx, "tag_origin");
+  fx playsound("zombie_dog_death");
   wait(5);
   fx delete();
 }
@@ -413,14 +412,14 @@ stop_dog_sound_on_death() {
 dog_behind_audio() {
   self thread stop_dog_sound_on_death();
   self endon("death");
-  while(1) {
+  while (1) {
     wait(.25);
     players = get_players();
-    for(i = 0; i < players.size; i++) {
+    for (i = 0; i < players.size; i++) {
       dogAngle = AngleClamp180(vectorToAngles(self.origin - players[i].origin)[1] - players[i].angles[1]);
       if(isAlive(players[i]) && !isDefined(players[i].revivetrigger)) {
         if((abs(dogAngle) > 90) && distance2d(self.origin, players[i].origin) > 100) {
-          self playSound("zdog_close");
+          self playsound("zdog_close");
         }
       }
     }

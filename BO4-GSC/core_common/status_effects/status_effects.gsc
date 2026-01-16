@@ -7,6 +7,7 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace status_effect;
 
 autoexec __init__system__() {
@@ -19,6 +20,7 @@ __init__() {
   callback::on_end_game(&on_end_game);
 
   level thread status_effects_init();
+
 }
 
 on_player_connect() {
@@ -27,10 +29,13 @@ on_player_connect() {
   }
 
   self thread status_effects_devgui_player_connect();
+
 }
 
 on_player_disconnect() {
+
   self thread status_effects_devgui_player_disconnect();
+
 }
 
 on_end_game() {
@@ -143,13 +148,13 @@ status_effects_devgui_think() {
     pid = getdvarint(#"scr_status_effects_devgui_player", 0);
 
     switch (cmd) {
-      case # "set_active":
+      case #"set_active":
         status_effects_set_active_effect(pid);
         break;
-      case # "give_grenade":
+      case #"give_grenade":
         status_effects_give_grenade(pid);
         break;
-      case # "clear_all":
+      case #"clear_all":
         function_64ba1c7e(pid);
       default:
         break;
@@ -209,3 +214,4 @@ status_effects_give_grenade(pid) {
     player giveweapon(weapon);
   }
 }
+

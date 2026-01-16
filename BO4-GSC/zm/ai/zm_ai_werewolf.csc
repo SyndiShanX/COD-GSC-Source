@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_werewolf;
 
 autoexec __init__system__() {
@@ -28,7 +29,7 @@ __init__() {
 function_d45ef8ea(localclientnum) {
   self.breath_fx = util::playFXOnTag(localclientnum, "zm_ai/fx8_werewolf_breath", self, "j_head");
   self.var_f87f8fa0 = "tag_eye";
-  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", # "hash_524decea28717b7c");
+  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", #"hash_524decea28717b7c");
   self callback::on_shutdown(&on_entity_shutdown);
   self playrenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
 }

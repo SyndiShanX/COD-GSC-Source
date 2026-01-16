@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
+
 #namespace zm_orange_ffotd;
 
 autoexec __init__system__() {

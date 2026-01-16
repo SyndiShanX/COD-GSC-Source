@@ -6,9 +6,8 @@
 catchup_function() {
   var_0 = ["apache_main_island_zpu"];
 
-  foreach(var_2 in var_0) {
-    maps\_utility::array_delete(getEntArray(var_2, "targetname"));
-  }
+  foreach(var_2 in var_0)
+  maps\_utility::array_delete(getEntArray(var_2, "targetname"));
 }
 
 start() {
@@ -37,7 +36,7 @@ move_apache_to_main_island() {
 
 enemies() {
   var_0 = maps\oilrocks_apache_code::spawn_vehicles_from_targetname_prunespawning("apache_main_island_zpu");
-  maps\oilrocks_apache_chain_objective::objectives("obj_main_island", "start_main_island_obj_chain", undefined, &"OILROCKS_CLEAR_THE_MAIN_ISLAND");
+  maps\oilrocks_apache_chain_objective::objectives("obj_main_island", "start_main_island_obj_chain", undefined, & "OILROCKS_CLEAR_THE_MAIN_ISLAND");
   var_1 = maps\oilrocks_code::array_remove_undefined_dead_or_dying(var_0);
   common_scripts\utility::array_thread(var_1, maps\oilrocks_apache_code::ai_clean_up, 0, 1);
 }

@@ -9,9 +9,8 @@
 #include maps\mp\zombies\_zm_perks;
 
 init() {
-  if(!isDefined(level.script)) {
+  if(!isDefined(level.script))
     level.script = tolower(getdvar(#"mapname"));
-  }
 
   precacheshader("overlay_low_health");
   level.global_damage_func_ads = ::empty_kill_func;
@@ -20,10 +19,10 @@ init() {
   level.difficultytype[1] = "normal";
   level.difficultytype[2] = "hardened";
   level.difficultytype[3] = "veteran";
-  level.difficultystring["easy"] = &"GAMESKILL_EASY";
-  level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
-  level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
-  level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
+  level.difficultystring["easy"] = & "GAMESKILL_EASY";
+  level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
+  level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
+  level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
 
   thread playerhealthdebug();
 
@@ -120,15 +119,13 @@ playerhealthregen() {
   lastinvulratio = 1;
   self thread playerhurtcheck();
 
-  if(!isDefined(self.veryhurt)) {
+  if(!isDefined(self.veryhurt))
     self.veryhurt = 0;
-  }
 
   self.bolthit = 0;
 
-  if(getdvar(#"_id_FCECE67E") == "") {
+  if(getdvar(#"_id_FCECE67E") == "")
     setdvar("scr_playerInvulTimeScale", 1.0);
-  }
 
   playerinvultimescale = getdvarfloat(#"_id_FCECE67E");
 
@@ -137,9 +134,8 @@ playerhealthregen() {
     waittillframeend;
 
     if(self.health == self.maxhealth) {
-      if(self player_flag("player_has_red_flashing_overlay")) {
+      if(self player_flag("player_has_red_flashing_overlay"))
         player_flag_clear("player_has_red_flashing_overlay");
-      }
 
       lastinvulratio = 1;
       playerjustgotredflashing = 0;
@@ -180,24 +176,21 @@ playerhealthregen() {
         self.veryhurt = 1;
         newhealth = health_ratio;
 
-        if(gettime() > hurttime + level.longregentime) {
+        if(gettime() > hurttime + level.longregentime)
           newhealth = newhealth + regenrate;
-        }
       } else {
         newhealth = 1;
         self.veryhurt = 0;
       }
 
-      if(newhealth > 1.0) {
+      if(newhealth > 1.0)
         newhealth = 1.0;
-      }
 
       if(newhealth <= 0) {
         return;
       }
-      if(newhealth > health_ratio) {
+      if(newhealth > health_ratio)
         logregen(newhealth);
-      }
 
       self setnormalhealth(newhealth);
       oldratio = self.health / self.maxhealth;
@@ -210,13 +203,11 @@ playerhealthregen() {
       self setnormalhealth(2 / self.maxhealth);
       invulworthyhealthdrop = 1;
 
-      if(!isDefined(level.player_deathinvulnerabletimeout)) {
+      if(!isDefined(level.player_deathinvulnerabletimeout))
         level.player_deathinvulnerabletimeout = 0;
-      }
 
-      if(level.player_deathinvulnerabletimeout < gettime()) {
+      if(level.player_deathinvulnerabletimeout < gettime())
         level.player_deathinvulnerabletimeout = gettime() + getdvarint(#"_id_4E44E32D");
-      }
 
     }
 
@@ -243,9 +234,8 @@ playerhealthregen() {
       playerjustgotredflashing = 0;
     } else if(veryhurt)
       invultime = level.invultime_postshield;
-    else {
+    else
       invultime = level.invultime_preshield;
-    }
 
     invultime = invultime * playerinvultimescale;
 
@@ -291,9 +281,8 @@ healthoverlay() {
   pulsetime = 0.8;
 
   for(;;) {
-    if(overlay.alpha > 0) {
+    if(overlay.alpha > 0)
       overlay fadeovertime(0.5);
-    }
 
     overlay.alpha = 0;
     self player_flag_wait("player_has_red_flashing_overlay");
@@ -311,9 +300,8 @@ fadefunc(overlay, severity, mult, hud_scaleonly) {
   remainingtime = pulsetime - fadeintime - stayfulltime - fadeouthalftime - fadeoutfulltime;
   assert(remainingtime >= -0.001);
 
-  if(remainingtime < 0) {
+  if(remainingtime < 0)
     remainingtime = 0;
-  }
 
   halfalpha = 0.8 + severity * 0.1;
   leastalpha = 0.5 + severity * 0.3;
@@ -353,14 +341,12 @@ redflashingoverlay(overlay) {
   if(!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && !(isDefined(self.is_zombie) && self.is_zombie)) {
     fadefunc(overlay, 1, 1, 0);
 
-    while(gettime() < self.stopflashingbadlytime && isalive(self) && (!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && !(isDefined(self.is_zombie) && self.is_zombie))) {
+    while(gettime() < self.stopflashingbadlytime && isalive(self) && (!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && !(isDefined(self.is_zombie) && self.is_zombie)))
       fadefunc(overlay, 0.9, 1, 0);
-    }
 
     if(!(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) && !(isDefined(self.is_zombie) && self.is_zombie)) {
-      if(isalive(self)) {
+      if(isalive(self))
         fadefunc(overlay, 0.65, 0.8, 0);
-      }
 
       fadefunc(overlay, 0, 0.6, 1);
     }
@@ -381,18 +367,21 @@ healthoverlay_remove(overlay) {
   overlay.alpha = 0;
 }
 
-empty_kill_func(type, loc, point, attacker, amount) {}
+empty_kill_func(type, loc, point, attacker, amount) {
+}
 
-loghit(newhealth, invultime) {}
+loghit(newhealth, invultime) {
+}
 
-logregen(newhealth) {}
+logregen(newhealth) {
+}
 
-showhitlog() {}
+showhitlog() {
+}
 
 playerhealthdebug() {
-  if(getdvar(#"scr_health_debug") == "") {
+  if(getdvar(#"scr_health_debug") == "")
     setdvar("scr_health_debug", "0");
-  }
 
   waittillframeend;
 
@@ -431,13 +420,11 @@ printhealthdebug() {
   level.healthbarkeys[1] = "No Hit Time";
   level.healthbarkeys[2] = "No Die Time";
 
-  if(!isDefined(level.playerinvultimeend)) {
+  if(!isDefined(level.playerinvultimeend))
     level.playerinvultimeend = 0;
-  }
 
-  if(!isDefined(level.player_deathinvulnerabletimeout)) {
+  if(!isDefined(level.player_deathinvulnerabletimeout))
     level.player_deathinvulnerabletimeout = 0;
-  }
 
   for(i = 0; i < level.healthbarkeys.size; i++) {
     key = level.healthbarkeys[i];
@@ -485,13 +472,12 @@ printhealthdebug() {
       player = players[0];
       width = 0;
 
-      if(i == 0) {
+      if(i == 0)
         width = player.health / player.maxhealth * 300;
-      } else if(i == 1) {
+      else if(i == 1)
         width = (level.playerinvultimeend - gettime()) / 1000 * 40;
-      } else if(i == 2) {
+      else if(i == 2)
         width = (level.player_deathinvulnerabletimeout - gettime()) / 1000 * 40;
-      }
 
       width = int(max(width, 1));
       width = int(min(width, 300));

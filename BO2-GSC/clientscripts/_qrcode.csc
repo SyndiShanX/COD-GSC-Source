@@ -3,7 +3,8 @@
  * Script: clientscripts\_qrcode.csc
 **************************************/
 
-init() {}
+init() {
+}
 
 setup_qr_code(mapname, slot, userrequest) {
   if(isDefined(mapname)) {
@@ -44,7 +45,6 @@ setup_qr_code(mapname, slot, userrequest) {
 setupmusiccodes(num) {
   level.music_tracks_qr = [];
 
-  for(i = 0; i < num; i++) {
+  for(i = 0; i < num; i++)
     level.music_tracks_qr[i] = "http://itunes/sales";
-  }
 }

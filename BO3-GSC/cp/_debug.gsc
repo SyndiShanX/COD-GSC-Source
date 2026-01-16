@@ -19,7 +19,7 @@
 #namespace debug;
 
 function autoexec __init__sytem__() {
-  system::register("", &__init__, undefined, undefined);
+  system::register("", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -36,7 +36,7 @@ function __init__() {
 
 function drawenttag(num) {
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(ai[i] getentnum() != num) {
       continue;
     }
@@ -52,28 +52,28 @@ function drawtag(tag, opcolor) {
 }
 
 function draworgforever(opcolor) {
-  for(;;) {
+  for (;;) {
     drawarrow(self.origin, self.angles, opcolor);
     wait(0.05);
   }
 }
 
 function drawarrowforever(org, ang) {
-  for(;;) {
+  for (;;) {
     drawarrow(org, ang);
     wait(0.05);
   }
 }
 
 function draworiginforever() {
-  for(;;) {
+  for (;;) {
     drawarrow(self.origin, self.angles);
     wait(0.05);
   }
 }
 
 function drawarrow(org, ang, opcolor) {
-  forward = anglesToForward(ang);
+  forward = anglestoforward(ang);
   forwardfar = vectorscale(forward, 50);
   forwardclose = vectorscale(forward, 50 * 0.8);
   right = anglestoright(ang);
@@ -85,7 +85,7 @@ function drawarrow(org, ang, opcolor) {
   red = (0.9, 0.2, 0.2);
   green = (0.2, 0.9, 0.2);
   blue = (0.2, 0.2, 0.9);
-  if(isDefined(opcolor)) {
+  if(isdefined(opcolor)) {
     red = opcolor;
     green = opcolor;
     blue = opcolor;
@@ -98,7 +98,7 @@ function drawarrow(org, ang, opcolor) {
 }
 
 function drawplayerviewforever() {
-  for(;;) {
+  for (;;) {
     drawarrow(level.player.origin, level.player getplayerangles(), (1, 1, 1));
     wait(0.05);
   }
@@ -106,15 +106,15 @@ function drawplayerviewforever() {
 
 function drawtagforever(tag, opcolor) {
   self endon("death");
-  for(;;) {
+  for (;;) {
     drawtag(tag, opcolor);
     wait(0.05);
   }
 }
 
 function dragtaguntildeath(tag) {
-  for(;;) {
-    if(!isDefined(self.origin)) {
+  for (;;) {
+    if(!isdefined(self.origin)) {
       break;
     }
     drawtag(tag);
@@ -125,12 +125,12 @@ function dragtaguntildeath(tag) {
 function viewtag(type, tag) {
   if(type == "") {
     ai = getaiarray();
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       ai[i] drawtag(tag);
     }
   } else {
-    vehicle = getEntArray("", "");
-    for(i = 0; i < vehicle.size; i++) {
+    vehicle = getentarray("", "");
+    for (i = 0; i < vehicle.size; i++) {
       vehicle[i] drawtag(tag);
     }
   }
@@ -138,7 +138,7 @@ function viewtag(type, tag) {
 
 function removeactivespawner(spawner) {
   newspawners = [];
-  for(p = 0; p < level.activenodes.size; p++) {
+  for (p = 0; p < level.activenodes.size; p++) {
     if(level.activenodes[p] == spawner) {
       continue;
     }
@@ -148,7 +148,7 @@ function removeactivespawner(spawner) {
 }
 
 function createline(org) {
-  for(;;) {
+  for (;;) {
     line(org + vectorscale((0, 0, 1), 35), org, (0.2, 0.5, 0.8), 0.5);
     wait(0.05);
   }
@@ -156,11 +156,11 @@ function createline(org) {
 
 function createlineconstantly(ent) {
   org = undefined;
-  while(isalive(ent)) {
+  while (isalive(ent)) {
     org = ent.origin;
     wait(0.05);
   }
-  for(;;) {
+  for (;;) {
     line(org + vectorscale((0, 0, 1), 35), org, (1, 0.2, 0.1), 0.5);
     wait(0.05);
   }
@@ -170,7 +170,7 @@ function debugmisstime() {
   self notify("stopdebugmisstime");
   self endon("stopdebugmisstime");
   self endon("death");
-  for(;;) {
+  for (;;) {
     if(self.a.misstime <= 0) {
       print3d(self gettagorigin("") + vectorscale((0, 0, 1), 15), "", (0.3, 1, 1), 1);
     } else {
@@ -185,7 +185,7 @@ function debugmisstimeoff() {
 }
 
 function setemptydvar(dvar, setting) {
-  /
+  /# /
   #
   if(getdvarstring(dvar) == "") {
     setdvar(dvar, setting);
@@ -194,7 +194,7 @@ function setemptydvar(dvar, setting) {
 
 function debugjump(num) {
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++) {
+  for (i = 0; i < ai.size; i++) {
     if(ai[i] getentnum() != num) {
       continue;
     }
@@ -285,7 +285,7 @@ function debugdvars() {
   if(getdvarstring("") == "") {
     setdvar("", "");
   }
-  for(i = 1; i <= level.animsound_hudlimit; i++) {
+  for (i = 1; i <= level.animsound_hudlimit; i++) {
     if((getdvarstring("" + i)) == "") {
       setdvar("" + i, "");
     }
@@ -313,7 +313,7 @@ function debugdvars() {
     setdvar("", "");
   }
   noanimscripts = getdvarstring("") == "";
-  for(;;) {
+  for (;;) {
     if(getdvarstring("") != "") {
       debugjump(getdvarstring(""));
     }
@@ -345,7 +345,7 @@ function debugdvars() {
     if(getdvarstring("") != "") {
       thread debug_animsoundtagselected();
     }
-    for(i = 1; i <= level.animsound_hudlimit; i++) {
+    for (i = 1; i <= level.animsound_hudlimit; i++) {
       if((getdvarstring("" + i)) != "") {
         thread debug_animsoundtag(i);
       }
@@ -358,10 +358,10 @@ function debugdvars() {
     }
     if(getdvarstring("") == "") {
       setdvar("", "");
-      array::thread_all(getaiarray(), &debugmisstime);
+      array::thread_all(getaiarray(), & debugmisstime);
     } else if(getdvarstring("") == "") {
       setdvar("", "");
-      array::thread_all(getaiarray(), &debugmisstimeoff);
+      array::thread_all(getaiarray(), & debugmisstimeoff);
     }
     if(getdvarstring("") == "") {
       thread deathspawnerpreview();
@@ -369,14 +369,14 @@ function debugdvars() {
     if(getdvarstring("") == "") {
       setdvar("", "");
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
       }
     }
     if(getdvarstring("") == "") {
       setdvar("", "");
       players = getplayers();
-      for(i = 0; i < players.size; i++) {
+      for (i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
       }
     }
@@ -391,22 +391,22 @@ function debugdvars() {
       noanimscripts = 1;
     }
     if(noanimscripts && getdvarstring("") == "") {
-      anim.defaultexception = &util::empty;
+      anim.defaultexception = & util::empty;
       anim notify("hash_9a6633d5");
       noanimscripts = 0;
     }
     if(getdvarstring("") == "") {
-      if(!isDefined(level.tracestart)) {
+      if(!isdefined(level.tracestart)) {
         thread showdebugtrace();
       }
       players = getplayers();
-      level.tracestart = players[0] getEye();
+      level.tracestart = players[0] geteye();
       setdvar("", "");
     }
-    if(getdvarstring("") == "" && (!isDefined(level.spawn_anywhere_active) || level.spawn_anywhere_active == 0)) {
+    if(getdvarstring("") == "" && (!isdefined(level.spawn_anywhere_active) || level.spawn_anywhere_active == 0)) {
       level.spawn_anywhere_active = 1;
       thread dynamic_ai_spawner();
-    } else if(getdvarstring("") == "" && isDefined(level.spawn_anywhere_active) && level.spawn_anywhere_active == 1) {
+    } else if(getdvarstring("") == "" && isdefined(level.spawn_anywhere_active) && level.spawn_anywhere_active == 1) {
       level.spawn_anywhere_active = 0;
       level notify("hash_d123a0a5");
     }
@@ -442,36 +442,36 @@ function showdebugtrace() {
   endoverride = undefined;
   startoverride = (15.1859, -12.2822, 4.071);
   endoverride = (947.2, -10918, 64.9514);
-  assert(!isDefined(level.traceend));
-  for(;;) {
+  assert(!isdefined(level.traceend));
+  for (;;) {
     players = getplayers();
     wait(0.05);
     start = startoverride;
     end = endoverride;
-    if(!isDefined(startoverride)) {
+    if(!isdefined(startoverride)) {
       start = level.tracestart;
     }
-    if(!isDefined(endoverride)) {
-      end = players[0] getEye();
+    if(!isdefined(endoverride)) {
+      end = players[0] geteye();
     }
-    trace = bulletTrace(start, end, 0, undefined);
+    trace = bullettrace(start, end, 0, undefined);
     line(start, trace[""], (0.9, 0.5, 0.8), 0.5);
   }
 }
 
 function hatmodel() {
-  for(;;) {
+  for (;;) {
     if(getdvarstring("") == "") {
       return;
     }
     nohat = [];
     ai = getaiarray();
-    for(i = 0; i < ai.size; i++) {
-      if(isDefined(ai[i].hatmodel)) {
+    for (i = 0; i < ai.size; i++) {
+      if(isdefined(ai[i].hatmodel)) {
         continue;
       }
       alreadyknown = 0;
-      for(p = 0; p < nohat.size; p++) {
+      for (p = 0; p < nohat.size; p++) {
         if(nohat[p] != ai[i].classname) {
           continue;
         }
@@ -485,7 +485,7 @@ function hatmodel() {
     if(nohat.size) {
       println("");
       println("");
-      for(i = 0; i < nohat.size; i++) {
+      for (i = 0; i < nohat.size; i++) {
         println("", nohat[i]);
       }
       println("");
@@ -500,10 +500,10 @@ function debug_nuke() {
   dvar = getdvarstring("");
   if(dvar == "") {
     ai = getaiteamarray("", "");
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       ignore = 0;
       classname = ai[i].classname;
-      if(isDefined(classname) && (issubstr(classname, "") || issubstr(classname, "") || issubstr(classname, ""))) {
+      if(isdefined(classname) && (issubstr(classname, "") || issubstr(classname, "") || issubstr(classname, ""))) {
         ignore = 1;
       }
       if(!ignore) {
@@ -513,12 +513,12 @@ function debug_nuke() {
   } else {
     if(dvar == "") {
       ai = getaiteamarray("");
-      for(i = 0; i < ai.size; i++) {
+      for (i = 0; i < ai.size; i++) {
         ai[i] dodamage(ai[i].health, (0, 0, 0), player);
       }
     } else if(dvar == "") {
       ai = getaispeciesarray("", "");
-      for(i = 0; i < ai.size; i++) {
+      for (i = 0; i < ai.size; i++) {
         ai[i] dodamage(ai[i].health, (0, 0, 0), player);
       }
     }
@@ -534,14 +534,14 @@ function freeplayer() {
 
 function deathspawnerpreview() {
   waittillframeend();
-  for(i = 0; i < 50; i++) {
-    if(!isDefined(level.deathspawnerents[i])) {
+  for (i = 0; i < 50; i++) {
+    if(!isdefined(level.deathspawnerents[i])) {
       continue;
     }
     array = level.deathspawnerents[i];
-    for(p = 0; p < array.size; p++) {
+    for (p = 0; p < array.size; p++) {
       ent = array[p];
-      if(isDefined(ent.truecount)) {
+      if(isdefined(ent.truecount)) {
         print3d(ent.origin, (i + "") + ent.truecount, (0, 0.8, 0.6), 5);
         continue;
       }
@@ -552,9 +552,9 @@ function deathspawnerpreview() {
 
 function getchains() {
   chainarray = [];
-  chainarray = getEntArray("", "");
+  chainarray = getentarray("", "");
   array = [];
-  for(i = 0; i < chainarray.size; i++) {
+  for (i = 0; i < chainarray.size; i++) {
     array[i] = chainarray[i] getchain();
   }
   return array;
@@ -563,19 +563,19 @@ function getchains() {
 function getchain() {
   array = [];
   ent = self;
-  while(isDefined(ent)) {
+  while (isdefined(ent)) {
     array[array.size] = ent;
-    if(!isDefined(ent) || !isDefined(ent.target)) {
+    if(!isdefined(ent) || !isdefined(ent.target)) {
       break;
     }
     ent = getent(ent.target, "");
-    if(isDefined(ent) && ent == array[0]) {
+    if(isdefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
     }
   }
   originarray = [];
-  for(i = 0; i < array.size; i++) {
+  for (i = 0; i < array.size; i++) {
     originarray[i] = array[i].origin;
   }
   return originarray;
@@ -589,7 +589,7 @@ function islookingatorigin(origin) {
   normalvec = vectornormalize(origin - self getshootatpos());
   veccomp = vectornormalize((origin - vectorscale((0, 0, 1), 24)) - self getshootatpos());
   insidedot = vectordot(normalvec, veccomp);
-  anglevec = anglesToForward(self getplayerangles());
+  anglevec = anglestoforward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
@@ -622,7 +622,7 @@ function debugthreatcalc() {
   if(entnum == 0) {
     entity = players[0];
   } else {
-    for(i = 0; i < ai.size; i++) {
+    for (i = 0; i < ai.size; i++) {
       if(entnum != ai[i] getentnum()) {
         continue;
       }
@@ -634,7 +634,7 @@ function debugthreatcalc() {
     return;
   }
   entitygroup = entity getthreatbiasgroup();
-  array::thread_all(ai, &displaythreat, entity, entitygroup);
+  array::thread_all(ai, & displaythreat, entity, entitygroup);
   players[0] thread displaythreat(entity, entitygroup);
 }
 
@@ -648,9 +648,9 @@ function displaythreat(entity, entitygroup) {
   threat = 0;
   threat = threat + entity.threatbias;
   mygroup = undefined;
-  if(isDefined(entitygroup)) {
+  if(isdefined(entitygroup)) {
     mygroup = self getthreatbiasgroup();
-    if(isDefined(mygroup)) {
+    if(isdefined(mygroup)) {
       threat = threat + getthreatbias(entitygroup, mygroup);
       selfthreat = selfthreat + getthreatbias(mygroup, entitygroup);
     }
@@ -665,15 +665,15 @@ function displaythreat(entity, entitygroup) {
   col = (1, 0.5, 0.2);
   col2 = (0.2, 0.5, 1);
   pacifist = self != players[0] && self.pacifist;
-  for(i = 0; i <= 20; i++) {
+  for (i = 0; i <= 20; i++) {
     print3d(self.origin + vectorscale((0, 0, 1), 65), "", col, 3);
     print3d(self.origin + vectorscale((0, 0, 1), 50), threat, col, 5);
-    if(isDefined(entitygroup)) {
+    if(isdefined(entitygroup)) {
       print3d(self.origin + vectorscale((0, 0, 1), 35), entitygroup, col, 2);
     }
     print3d(self.origin + vectorscale((0, 0, 1), 15), "", col2, 3);
     print3d(self.origin + (0, 0, 0), selfthreat, col2, 5);
-    if(isDefined(mygroup)) {
+    if(isdefined(mygroup)) {
       print3d(self.origin + (vectorscale((0, 0, -1), 15)), mygroup, col2, 2);
     }
     if(pacifist) {
@@ -689,26 +689,26 @@ function init_animsounds() {
   waittillframeend();
   waittillframeend();
   animnames = getarraykeys(level.scr_notetrack);
-  for(i = 0; i < animnames.size; i++) {
+  for (i = 0; i < animnames.size; i++) {
     init_notetracks_for_animname(animnames[i]);
   }
   animnames = getarraykeys(level.scr_animsound);
-  for(i = 0; i < animnames.size; i++) {
+  for (i = 0; i < animnames.size; i++) {
     init_animsounds_for_animname(animnames[i]);
   }
 }
 
 function init_notetracks_for_animname(animname) {
   notetracks = getarraykeys(level.scr_notetrack[animname]);
-  for(i = 0; i < notetracks.size; i++) {
+  for (i = 0; i < notetracks.size; i++) {
     soundalias = level.scr_notetrack[animname][i][""];
-    if(!isDefined(soundalias)) {
+    if(!isdefined(soundalias)) {
       continue;
     }
     anime = level.scr_notetrack[animname][i][""];
     notetrack = level.scr_notetrack[animname][i][""];
     level.animsound_aliases[animname][anime][notetrack][""] = soundalias;
-    if(isDefined(level.scr_notetrack[animname][i][""])) {
+    if(isdefined(level.scr_notetrack[animname][i][""])) {
       level.animsound_aliases[animname][anime][notetrack][""] = 1;
     }
   }
@@ -716,7 +716,7 @@ function init_notetracks_for_animname(animname) {
 
 function init_animsounds_for_animname(animname) {
   animes = getarraykeys(level.scr_animsound[animname]);
-  for(i = 0; i < animes.size; i++) {
+  for (i = 0; i < animes.size; i++) {
     anime = animes[i];
     soundalias = level.scr_animsound[animname][anime];
     level.animsound_aliases[animname][anime]["" + anime][""] = soundalias;
@@ -739,7 +739,7 @@ function add_hud_line(x, y, msg) {
 
 function debug_animsound() {
   enabled = getdvarstring("") == "";
-  if(!isDefined(level.animsound_hud)) {
+  if(!isdefined(level.animsound_hud)) {
     if(!enabled) {
       return;
     }
@@ -760,7 +760,7 @@ function debug_animsound() {
     add_hud_line(-30, 140, "");
     level.animsound_hud_locked = add_hud_line(-30, 170, "");
     level.animsound_hud_locked.alpha = 0;
-    for(i = 0; i < level.animsound_hudlimit; i++) {
+    for (i = 0; i < level.animsound_hudlimit; i++) {
       hudelm = newhudelem();
       hudelm.alignx = "";
       hudelm.aligny = "";
@@ -792,12 +792,12 @@ function debug_animsound() {
     level.animsound_hud[0].color = (1, 1, 0);
     level.animsound_hud_timer[0].color = (1, 1, 0);
   } else if(!enabled) {
-    for(i = 0; i < level.animsound_hudlimit; i++) {
+    for (i = 0; i < level.animsound_hudlimit; i++) {
       level.animsound_hud[i] destroy();
       level.animsound_hud_timer[i] destroy();
       level.animsound_hud_alias[i] destroy();
     }
-    for(i = 0; i < level.animsound_hud_extralines.size; i++) {
+    for (i = 0; i < level.animsound_hud_extralines.size; i++) {
       level.animsound_hud_extralines[i] destroy();
     }
     level.animsound_hud = undefined;
@@ -807,7 +807,7 @@ function debug_animsound() {
     level.animsounds = undefined;
     return;
   }
-  if(!isDefined(level.animsound_tagged)) {
+  if(!isdefined(level.animsound_tagged)) {
     level.animsound_locked = 0;
   }
   if(level.animsound_locked) {
@@ -815,22 +815,22 @@ function debug_animsound() {
   } else {
     level.animsound_hud_locked.alpha = 0;
   }
-  if(!isDefined(level.animsounds)) {
+  if(!isdefined(level.animsounds)) {
     init_animsounds();
   }
   level.animsounds_thisframe = [];
   arrayremovevalue(level.animsounds, undefined);
-  array::thread_all(level.animsounds, &display_animsound);
+  array::thread_all(level.animsounds, & display_animsound);
   players = getplayers();
   if(level.animsound_locked) {
-    for(i = 0; i < level.animsounds_thisframe.size; i++) {
+    for (i = 0; i < level.animsounds_thisframe.size; i++) {
       animsound = level.animsounds_thisframe[i];
       animsound.animsound_color = vectorscale((1, 1, 1), 0.5);
     }
   } else if(players.size > 0) {
     dot = 0.85;
-    forward = anglesToForward(players[0] getplayerangles());
-    for(i = 0; i < level.animsounds_thisframe.size; i++) {
+    forward = anglestoforward(players[0] getplayerangles());
+    for (i = 0; i < level.animsounds_thisframe.size; i++) {
       animsound = level.animsounds_thisframe[i];
       animsound.animsound_color = (0.25, 1, 0.5);
       difference = vectornormalize((animsound.origin + vectorscale((0, 0, 1), 40)) - (players[0].origin + vectorscale((0, 0, 1), 55)));
@@ -842,11 +842,11 @@ function debug_animsound() {
       level.animsound_tagged = animsound;
     }
   }
-  if(isDefined(level.animsound_tagged)) {
+  if(isdefined(level.animsound_tagged)) {
     level.animsound_tagged.animsound_color = (1, 1, 0);
   }
-  is_tagged = isDefined(level.animsound_tagged);
-  for(i = 0; i < level.animsounds_thisframe.size; i++) {
+  is_tagged = isdefined(level.animsound_tagged);
+  for (i = 0; i < level.animsounds_thisframe.size; i++) {
     animsound = level.animsounds_thisframe[i];
     msg = "";
     if(level.animsound_locked) {
@@ -863,7 +863,7 @@ function draw_animsounds_in_hud() {
   guy = level.animsound_tagged;
   animsounds = guy.animsounds;
   animname = "";
-  if(isDefined(guy.animname)) {
+  if(isdefined(guy.animname)) {
     animname = guy.animname;
   }
   level.animsound_hud_animname.label = "" + animname;
@@ -891,7 +891,7 @@ function draw_animsounds_in_hud() {
       level.animsound_input = "";
     }
   }
-  for(i = 0; i < level.animsound_hudlimit; i++) {
+  for (i = 0; i < level.animsound_hudlimit; i++) {
     hudelm = level.animsound_hud[i];
     hudelm.label = "";
     hudelm.color = (1, 1, 1);
@@ -904,7 +904,7 @@ function draw_animsounds_in_hud() {
   }
   keys = getarraykeys(animsounds);
   highest = -1;
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(keys[i] > highest) {
       highest = keys[i];
     }
@@ -918,8 +918,8 @@ function draw_animsounds_in_hud() {
   if(level.animsound_selected < 0) {
     level.animsound_selected = 0;
   }
-  for(;;) {
-    if(isDefined(animsounds[level.animsound_selected])) {
+  for (;;) {
+    if(isdefined(animsounds[level.animsound_selected])) {
       break;
     }
     level.animsound_selected--;
@@ -932,7 +932,7 @@ function draw_animsounds_in_hud() {
   level.animsound_hud_timer[level.animsound_selected].color = (1, 1, 0);
   level.animsound_hud_alias[level.animsound_selected].color = (1, 1, 0);
   time = gettime();
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     key = keys[i];
     animsound = animsounds[key];
     hudelm = level.animsound_hud[key];
@@ -940,7 +940,7 @@ function draw_animsounds_in_hud() {
     hudelm.label = ((key + 1) + "") + animsound.notetrack;
     hudelm = level.animsound_hud_timer[key];
     hudelm.label = int((time - (animsound.end_time - 60000)) * 0.001);
-    if(isDefined(soundalias)) {
+    if(isdefined(soundalias)) {
       hudelm = level.animsound_hud_alias[key];
       hudelm.label = soundalias;
       if(!is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
@@ -952,7 +952,7 @@ function draw_animsounds_in_hud() {
   if(players[0] buttonpressed("")) {
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
-    if(!isDefined(soundalias)) {
+    if(!isdefined(soundalias)) {
       return;
     }
     if(!is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
@@ -964,20 +964,20 @@ function draw_animsounds_in_hud() {
 }
 
 function get_alias_from_stored(animsound) {
-  if(!isDefined(level.animsound_aliases[animsound.animname])) {
+  if(!isdefined(level.animsound_aliases[animsound.animname])) {
     return;
   }
-  if(!isDefined(level.animsound_aliases[animsound.animname][animsound.anime])) {
+  if(!isdefined(level.animsound_aliases[animsound.animname][animsound.anime])) {
     return;
   }
-  if(!isDefined(level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack])) {
+  if(!isdefined(level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack])) {
     return;
   }
   return level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][""];
 }
 
 function is_from_animsound(animname, anime, notetrack) {
-  return isDefined(level.animsound_aliases[animname][anime][notetrack][""]);
+  return isdefined(level.animsound_aliases[animname][anime][notetrack][""]);
 }
 
 function display_animsound() {
@@ -1009,15 +1009,15 @@ function debug_animsoundtagselected() {
 }
 
 function tag_sound(tag, tagnum) {
-  if(!isDefined(level.animsound_tagged)) {
+  if(!isdefined(level.animsound_tagged)) {
     return;
   }
-  if(!isDefined(level.animsound_tagged.animsounds[tagnum])) {
+  if(!isdefined(level.animsound_tagged.animsounds[tagnum])) {
     return;
   }
   animsound = level.animsound_tagged.animsounds[tagnum];
   soundalias = get_alias_from_stored(animsound);
-  if(!isDefined(soundalias) || is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
+  if(!isdefined(soundalias) || is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
     level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][""] = tag;
     level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][""] = 1;
     debug_animsoundsave();
@@ -1050,12 +1050,12 @@ function print_aliases_to_file(file) {
   fprintln(file, "");
   fprintln(file, tab + "");
   animnames = getarraykeys(level.animsound_aliases);
-  for(i = 0; i < animnames.size; i++) {
+  for (i = 0; i < animnames.size; i++) {
     animes = getarraykeys(level.animsound_aliases[animnames[i]]);
-    for(p = 0; p < animes.size; p++) {
+    for (p = 0; p < animes.size; p++) {
       anime = animes[p];
       notetracks = getarraykeys(level.animsound_aliases[animnames[i]][anime]);
-      for(z = 0; z < notetracks.size; z++) {
+      for (z = 0; z < notetracks.size; z++) {
         notetrack = notetracks[z];
         if(!is_from_animsound(animnames[i], anime, notetrack)) {
           continue;
@@ -1075,7 +1075,7 @@ function print_aliases_to_file(file) {
 
 function function_2ceda325() {
   setdvar("", 0);
-  if(!isDefined(level.a_npcdeaths) || getdvarint("") != 1) {
+  if(!isdefined(level.a_npcdeaths) || getdvarint("") != 1) {
     return;
   }
   players = getplayers();
@@ -1085,7 +1085,7 @@ function function_2ceda325() {
     iprintlnbold(("" + filename) + "");
     return;
   }
-  if(isDefined(level.current_skipto)) {
+  if(isdefined(level.current_skipto)) {
     fprintln(file, ("" + level.current_skipto) + "");
   } else {
     fprintln(file, "");
@@ -1104,7 +1104,7 @@ function function_2ceda325() {
 
 function tostr(str) {
   newstr = "";
-  for(i = 0; i < str.size; i++) {
+  for (i = 0; i < str.size; i++) {
     if(str[i] == "") {
       newstr = newstr + "";
       newstr = newstr + "";
@@ -1117,7 +1117,7 @@ function tostr(str) {
 }
 
 function drawdebuglineinternal(frompoint, topoint, color, durationframes) {
-  for(i = 0; i < durationframes; i++) {
+  for (i = 0; i < durationframes; i++) {
     line(frompoint, topoint, color);
     wait(0.05);
   }
@@ -1128,8 +1128,8 @@ function drawdebugline(frompoint, topoint, color, durationframes) {
 }
 
 function drawdebugenttoentinternal(ent1, ent2, color, durationframes) {
-  for(i = 0; i < durationframes; i++) {
-    if(!isDefined(ent1) || !isDefined(ent2)) {
+  for (i = 0; i < durationframes; i++) {
+    if(!isdefined(ent1) || !isdefined(ent2)) {
       return;
     }
     line(ent1.origin, ent2.origin, color);
@@ -1142,10 +1142,10 @@ function drawdebuglineenttoent(ent1, ent2, color, durationframes) {
 }
 
 function new_hud(hud_name, msg, x, y, scale) {
-  if(!isDefined(level.hud_array)) {
+  if(!isdefined(level.hud_array)) {
     level.hud_array = [];
   }
-  if(!isDefined(level.hud_array[hud_name])) {
+  if(!isdefined(level.hud_array[hud_name])) {
     level.hud_array[hud_name] = [];
   }
   hud = debug_menu::set_hudelem(msg, x, y, scale);
@@ -1185,7 +1185,7 @@ function debug_show_viewpos() {
   hud_z setvalue(0);
   setdvar("", "");
   players = getplayers();
-  while(true) {
+  while (true) {
     if(getdvarint("") > 0) {
       hud_title.alpha = 1;
       hud_x.alpha = 1;
@@ -1214,7 +1214,7 @@ function debug_show_viewpos() {
 function number_before_decimal(num) {
   abs_num = abs(num);
   count = 0;
-  while(true) {
+  while (true) {
     abs_num = abs_num * 0.1;
     count = count + 1;
     if(abs_num < 1) {
@@ -1233,7 +1233,7 @@ function set_event_printname_thread(text, focus) {
   if(getdvarint("") > 0) {
     return;
   }
-  if(!isDefined(focus)) {
+  if(!isdefined(focus)) {
     focus = 0;
   }
   suffix = "";
@@ -1242,7 +1242,7 @@ function set_event_printname_thread(text, focus) {
   }
   setdvar("", text);
   text = ("" + text) + suffix;
-  if(!isDefined(level.event_hudelem)) {
+  if(!isdefined(level.event_hudelem)) {
     hud = newhudelem();
     hud.horzalign = "";
     hud.alignx = "";
@@ -1264,7 +1264,7 @@ function set_event_printname_thread(text, focus) {
   }
   level.event_hudelem settext(text);
   enabled = 1;
-  while(true) {
+  while (true) {
     toggle = 0;
     if(getdvarint("") < 1) {
       toggle = 1;
@@ -1289,7 +1289,7 @@ function get_playerone() {
 function engagement_distance_debug_toggle() {
   level endon("kill_engage_dist_debug_toggle_watcher");
   laststate = getdvarint("");
-  while(true) {
+  while (true) {
     currentstate = getdvarint("");
     if(dvar_turned_on(currentstate) && !dvar_turned_on(laststate)) {
       weapon_engage_dists_init();
@@ -1353,39 +1353,39 @@ function engagement_distance_debug_init(player) {
 
 function engage_dist_debug_hud_destroy(hudarray, killnotify) {
   level waittill(killnotify);
-  for(i = 0; i < hudarray.size; i++) {
+  for (i = 0; i < hudarray.size; i++) {
     hudarray[i] destroy();
   }
 }
 
 function weapon_engage_dists_init() {
   level.engagedists = [];
-  genericpistol = spawnStruct();
+  genericpistol = spawnstruct();
   genericpistol.engagedistmin = 125;
   genericpistol.engagedistoptimal = 400;
   genericpistol.engagedistmulligan = 100;
   genericpistol.engagedistmax = 600;
-  shotty = spawnStruct();
+  shotty = spawnstruct();
   shotty.engagedistmin = 0;
   shotty.engagedistoptimal = 300;
   shotty.engagedistmulligan = 100;
   shotty.engagedistmax = 600;
-  genericsmg = spawnStruct();
+  genericsmg = spawnstruct();
   genericsmg.engagedistmin = 100;
   genericsmg.engagedistoptimal = 500;
   genericsmg.engagedistmulligan = 150;
   genericsmg.engagedistmax = 1000;
-  genericriflesa = spawnStruct();
+  genericriflesa = spawnstruct();
   genericriflesa.engagedistmin = 325;
   genericriflesa.engagedistoptimal = 800;
   genericriflesa.engagedistmulligan = 300;
   genericriflesa.engagedistmax = 1600;
-  generichmg = spawnStruct();
+  generichmg = spawnstruct();
   generichmg.engagedistmin = 500;
   generichmg.engagedistoptimal = 700;
   generichmg.engagedistmulligan = 300;
   generichmg.engagedistmax = 1400;
-  genericsniper = spawnStruct();
+  genericsniper = spawnstruct();
   genericsniper.engagedistmin = 950;
   genericsniper.engagedistoptimal = 2000;
   genericsniper.engagedistmulligan = 500;
@@ -1403,7 +1403,7 @@ function engage_dists_add(weaponname, values) {
 }
 
 function get_engage_dists(weapon) {
-  if(isDefined(level.engagedists[weapon])) {
+  if(isdefined(level.engagedists[weapon])) {
     return level.engagedists[weapon];
   }
   return undefined;
@@ -1412,17 +1412,17 @@ function get_engage_dists(weapon) {
 function engage_dists_watcher() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_engage_dists_watcher");
-  while(true) {
+  while (true) {
     player = get_playerone();
     playerweapon = player getcurrentweapon();
-    if(!isDefined(player.lastweapon)) {
+    if(!isdefined(player.lastweapon)) {
       player.lastweapon = playerweapon;
     } else if(player.lastweapon == playerweapon) {
       wait(0.05);
       continue;
     }
     values = get_engage_dists(playerweapon.weapclass);
-    if(isDefined(values)) {
+    if(isdefined(values)) {
       level.weaponengagedistvalues = values;
     } else {
       level.weaponengagedistvalues = undefined;
@@ -1439,18 +1439,18 @@ function debug_realtime_engage_dist() {
   hudobjarray = engagement_distance_debug_init(player);
   level thread engage_dist_debug_hud_destroy(hudobjarray, "");
   level.debugrtengagedistcolor = (0, 1, 0);
-  while(true) {
+  while (true) {
     lasttracepos = (0, 0, 0);
     direction = player getplayerangles();
-    direction_vec = anglesToForward(direction);
-    eye = player getEye();
-    trace = bulletTrace(eye, eye + vectorscale(direction_vec, 10000), 1, player);
+    direction_vec = anglestoforward(direction);
+    eye = player geteye();
+    trace = bullettrace(eye, eye + vectorscale(direction_vec, 10000), 1, player);
     tracepoint = trace[""];
     tracenormal = trace[""];
     tracedist = int(distance(eye, tracepoint));
     if(tracepoint != lasttracepos) {
       lasttracepos = tracepoint;
-      if(!isDefined(level.weaponengagedistvalues)) {
+      if(!isdefined(level.weaponengagedistvalues)) {
         hudobj_changecolor(hudobjarray, (1, 1, 1));
         hudobjarray engagedist_hud_changetext("", tracedist);
       } else {
@@ -1484,7 +1484,7 @@ function debug_realtime_engage_dist() {
 }
 
 function hudobj_changecolor(hudobjarray, newcolor) {
-  for(i = 0; i < hudobjarray.size; i++) {
+  for (i = 0; i < hudobjarray.size; i++) {
     hudobj = hudobjarray[i];
     if(hudobj.color != newcolor) {
       hudobj.color = newcolor;
@@ -1494,7 +1494,7 @@ function hudobj_changecolor(hudobjarray, newcolor) {
 }
 
 function engagedist_hud_changetext(engagedisttype, units) {
-  if(!isDefined(level.lastdisttype)) {
+  if(!isdefined(level.lastdisttype)) {
     level.lastdisttype = "";
   }
   if(engagedisttype == "") {
@@ -1539,13 +1539,13 @@ function debug_ai_engage_dist() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_ai_engagement_distance_debug");
   player = get_playerone();
-  while(true) {
+  while (true) {
     axis = getaiteamarray("");
-    if(isDefined(axis) && axis.size > 0) {
-      playereye = player getEye();
-      for(i = 0; i < axis.size; i++) {
+    if(isdefined(axis) && axis.size > 0) {
+      playereye = player geteye();
+      for (i = 0; i < axis.size; i++) {
         ai = axis[i];
-        aieye = ai getEye();
+        aieye = ai geteye();
         if(sighttracepassed(playereye, aieye, 0, player) && !isvehicle(ai)) {
           dist = distance(playereye, aieye);
           drawcolor = (1, 1, 1);
@@ -1607,13 +1607,13 @@ function function_6a200458() {
 
 function debug_coop_bot_test() {
   adddebugcommand("");
-  while(!isDefined(level.players)) {
+  while (!isdefined(level.players)) {
     wait(0.5);
   }
   var_d49b0ff = 0;
-  while(true) {
+  while (true) {
     if(getdvarint("") > 0) {
-      while(getdvarint("") > 0) {
+      while (getdvarint("") > 0) {
         var_7e4baf07 = 4 - function_6a200458();
         botcount = bot_count();
         if(botcount > 0 && randomint(100) > 60) {
@@ -1631,7 +1631,7 @@ function debug_coop_bot_test() {
         wait(randomintrange(1, 3));
       }
     } else if(var_d49b0ff) {
-      while(bot_count() > 0) {
+      while (bot_count() > 0) {
         util::add_queued_debug_command("");
         wait(2);
         debugmsg("" + bot_count());
@@ -1643,16 +1643,16 @@ function debug_coop_bot_test() {
 }
 
 function debugmsg(str_txt) {
-  /
+  /# /
   #
   iprintlnbold(str_txt);
-  if(isDefined(level.name)) {
+  if(isdefined(level.name)) {
     println((("" + level.name) + "") + str_txt);
   }
 }
 
 function plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (0, 1, 0);
   }
   circleres = 6;
@@ -1662,24 +1662,24 @@ function plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
   rad = 0;
   radius = radius2;
   angletoplayer = vectortoangles(normal);
-  for(i = 0; i < circleres; i++) {
-    plotpoints[plotpoints.size] = origin + (vectorscale(anglesToForward(angletoplayer + (rad, 90, 0)), radius));
+  for (i = 0; i < circleres; i++) {
+    plotpoints[plotpoints.size] = origin + (vectorscale(anglestoforward(angletoplayer + (rad, 90, 0)), radius));
     rad = rad + circleinc;
   }
   plot_points(plotpoints, color[0], color[1], color[2], time);
 }
 
 function dynamic_ai_spawner() {
-  if(!isDefined(level.debug_dynamic_ai_spawner)) {
+  if(!isdefined(level.debug_dynamic_ai_spawner)) {
     dynamic_ai_spawner_find_spawners();
     level.debug_dynamic_ai_spawner = 1;
   }
   getplayers()[0] thread spawn_guy_placement();
   level waittill("hash_d123a0a5");
-  if(isDefined(level.dynamic_spawn_hud)) {
+  if(isdefined(level.dynamic_spawn_hud)) {
     level.dynamic_spawn_hud destroy();
   }
-  if(isDefined(level.dynamic_spawn_dummy_model)) {
+  if(isdefined(level.dynamic_spawn_dummy_model)) {
     level.dynamic_spawn_dummy_model delete();
   }
 }
@@ -1690,9 +1690,9 @@ function dynamic_ai_spawner_find_spawners() {
   level.aitype_index = 0;
   var_7b3173a8 = [];
   foreach(spawner in spawners) {
-    if(!isDefined(var_7b3173a8[spawner.classname])) {
+    if(!isdefined(var_7b3173a8[spawner.classname])) {
       var_7b3173a8[spawner.classname] = 1;
-      struct = spawnStruct();
+      struct = spawnstruct();
       classname = spawner.classname;
       vehicletype = spawner.vehicletype;
       if(issubstr(classname, "")) {
@@ -1710,7 +1710,7 @@ function dynamic_ai_spawner_find_spawners() {
 
 function spawn_guy_placement() {
   level endon("hash_d123a0a5");
-  assert(isDefined(level.aitypes) && level.aitypes.size > 0, "");
+  assert(isdefined(level.aitypes) && level.aitypes.size > 0, "");
   level.dynamic_spawn_hud = newclienthudelem(getplayers()[0]);
   level.dynamic_spawn_hud.alignx = "";
   level.dynamic_spawn_hud.x = 0;
@@ -1719,12 +1719,12 @@ function spawn_guy_placement() {
   level.dynamic_spawn_hud settext("");
   level.dynamic_spawn_dummy_model = spawn("", (0, 0, 0));
   wait(0.1);
-  while(true) {
+  while (true) {
     direction = self getplayerangles();
-    direction_vec = anglesToForward(direction);
-    eye = self getEye();
+    direction_vec = anglestoforward(direction);
+    eye = self geteye();
     trace_dist = 4000;
-    trace = bulletTrace(eye, eye + vectorscale(direction_vec, trace_dist), 0, level.dynamic_spawn_dummy_model);
+    trace = bullettrace(eye, eye + vectorscale(direction_vec, trace_dist), 0, level.dynamic_spawn_dummy_model);
     dist = distance(eye, trace[""]);
     position = eye + (vectorscale(direction_vec, dist - level.aitypes[level.aitype_index].radius));
     origin = position;
@@ -1733,7 +1733,7 @@ function spawn_guy_placement() {
     level.dynamic_spawn_dummy_model.angles = angles;
     level.dynamic_spawn_hud settext((((("" + level.aitype_index) + "") + level.aitypes.size) + "") + level.aitypes[level.aitype_index].classname);
     level.dynamic_spawn_dummy_model detachall();
-    level.dynamic_spawn_dummy_model setModel(level.aitypes[level.aitype_index].classname);
+    level.dynamic_spawn_dummy_model setmodel(level.aitypes[level.aitype_index].classname);
     level.dynamic_spawn_dummy_model show();
     level.dynamic_spawn_dummy_model notsolid();
     if(self usebuttonpressed()) {
@@ -1780,59 +1780,59 @@ function display_module_text() {
 
 function debug_goalradius() {
   guys = getaiarray();
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     if(guys[i].team == "") {
-      print3d(guys[i].origin + vectorscale((0, 0, 1), 70), (isDefined(guys[i].goalradius) ? "" + guys[i].goalradius : ""), (1, 0, 0), 1, 1, 1);
+      print3d(guys[i].origin + vectorscale((0, 0, 1), 70), (isdefined(guys[i].goalradius) ? "" + guys[i].goalradius : ""), (1, 0, 0), 1, 1, 1);
       record3dtext("" + guys[i].goalradius, guys[i].origin + vectorscale((0, 0, 1), 70), (1, 0, 0), "");
       continue;
     }
-    print3d(guys[i].origin + vectorscale((0, 0, 1), 70), (isDefined(guys[i].goalradius) ? "" + guys[i].goalradius : ""), (0, 1, 0), 1, 1, 1);
+    print3d(guys[i].origin + vectorscale((0, 0, 1), 70), (isdefined(guys[i].goalradius) ? "" + guys[i].goalradius : ""), (0, 1, 0), 1, 1, 1);
     record3dtext("" + guys[i].goalradius, guys[i].origin + vectorscale((0, 0, 1), 70), (0, 1, 0), "");
   }
 }
 
 function debug_maxvisibledist() {
   guys = getaiarray();
-  for(i = 0; i < guys.size; i++) {
-    recordenttext((isDefined(guys[i].maxvisibledist) ? "" + guys[i].maxvisibledist : ""), guys[i], level.debugteamcolors[guys[i].team], "");
+  for (i = 0; i < guys.size; i++) {
+    recordenttext((isdefined(guys[i].maxvisibledist) ? "" + guys[i].maxvisibledist : ""), guys[i], level.debugteamcolors[guys[i].team], "");
   }
-  recordenttext((isDefined(level.player.maxvisibledist) ? "" + level.player.maxvisibledist : ""), level.player, level.debugteamcolors[""], "");
+  recordenttext((isdefined(level.player.maxvisibledist) ? "" + level.player.maxvisibledist : ""), level.player, level.debugteamcolors[""], "");
 }
 
 function debug_health() {
   v_print_pos = (0, 0, 0);
   guys = getaiarray();
-  for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i] gettagorigin(""))) {
+  for (i = 0; i < guys.size; i++) {
+    if(isdefined(guys[i] gettagorigin(""))) {
       v_print_pos = guys[i] gettagorigin("") + vectorscale((0, 0, 1), 15);
     } else {
       v_print_pos = guys[i] getorigin() + vectorscale((0, 0, 1), 70);
     }
-    print3d(v_print_pos, (isDefined(guys[i].health) ? "" + guys[i].health : ""), level.debugteamcolors[guys[i].team], 1, 0.5);
-    recordenttext((isDefined(guys[i].health) ? "" + guys[i].health : ""), guys[i], level.debugteamcolors[guys[i].team], "");
+    print3d(v_print_pos, (isdefined(guys[i].health) ? "" + guys[i].health : ""), level.debugteamcolors[guys[i].team], 1, 0.5);
+    recordenttext((isdefined(guys[i].health) ? "" + guys[i].health : ""), guys[i], level.debugteamcolors[guys[i].team], "");
   }
   vehicles = getvehiclearray();
-  for(i = 0; i < vehicles.size; i++) {
-    recordenttext((isDefined(vehicles[i].health) ? "" + vehicles[i].health : ""), vehicles[i], level.debugteamcolors[vehicles[i].team], "");
+  for (i = 0; i < vehicles.size; i++) {
+    recordenttext((isdefined(vehicles[i].health) ? "" + vehicles[i].health : ""), vehicles[i], level.debugteamcolors[vehicles[i].team], "");
   }
-  if(isDefined(level.player)) {
-    recordenttext((isDefined(level.player.health) ? "" + level.player.health : ""), level.player, level.debugteamcolors[""], "");
+  if(isdefined(level.player)) {
+    recordenttext((isdefined(level.player.health) ? "" + level.player.health : ""), level.player, level.debugteamcolors[""], "");
   }
 }
 
 function debug_engagedist() {
   guys = getaiarray();
-  for(i = 0; i < guys.size; i++) {
+  for (i = 0; i < guys.size; i++) {
     diststring = (((((guys[i].engageminfalloffdist + "") + guys[i].engagemindist) + "") + guys[i].engagemaxdist) + "") + guys[i].engagemaxfalloffdist;
     recordenttext(diststring, guys[i], level.debugteamcolors[guys[i].team], "");
   }
 }
 
 function debug_sphere(origin, radius, color, alpha, time) {
-  if(!isDefined(time)) {
+  if(!isdefined(time)) {
     time = 1000;
   }
-  if(!isDefined(color)) {
+  if(!isdefined(color)) {
     color = (1, 1, 1);
   }
   sides = int(10 * (1 + (int(radius) % 100)));
@@ -1844,7 +1844,7 @@ function draw_arrow_time(start, end, color, frames) {
   pts = [];
   angles = vectortoangles(start - end);
   right = anglestoright(angles);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   up = anglestoup(angles);
   dist = distance(start, end);
   arrow = [];
@@ -1868,14 +1868,14 @@ function draw_arrow(start, end, color) {
   pts = [];
   angles = vectortoangles(start - end);
   right = anglestoright(angles);
-  forward = anglesToForward(angles);
+  forward = anglestoforward(angles);
   dist = distance(start, end);
   arrow = [];
   arrow[0] = start;
   arrow[1] = (start + (vectorscale(right, dist * 0.05))) + (vectorscale(forward, dist * -0.2));
   arrow[2] = end;
   arrow[3] = (start + (vectorscale(right, dist * -1 * 0.05))) + (vectorscale(forward, dist * -0.2));
-  for(p = 0; p < 4; p++) {
+  for (p = 0; p < 4; p++) {
     nextpoint = p + 1;
     if(nextpoint >= 4) {
       nextpoint = 0;
@@ -1888,8 +1888,8 @@ function debugorigin() {
   self notify("hash_707e044");
   self endon("hash_707e044");
   self endon("death");
-  for(;;) {
-    forward = anglesToForward(self.angles);
+  for (;;) {
+    forward = anglestoforward(self.angles);
     forwardfar = vectorscale(forward, 30);
     forwardclose = vectorscale(forward, 20);
     right = anglestoright(self.angles);
@@ -1904,19 +1904,19 @@ function debugorigin() {
 
 function plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isDefined(r)) {
+  if(!isdefined(r)) {
     r = 1;
   }
-  if(!isDefined(g)) {
+  if(!isdefined(g)) {
     g = 1;
   }
-  if(!isDefined(b)) {
+  if(!isdefined(b)) {
     b = 1;
   }
-  if(!isDefined(timer)) {
+  if(!isdefined(timer)) {
     timer = 0.05;
   }
-  for(i = 1; i < plotpoints.size; i++) {
+  for (i = 1; i < plotpoints.size; i++) {
     thread draw_line_for_time(lastpoint, plotpoints[i], r, g, b, timer);
     lastpoint = plotpoints[i];
   }
@@ -1924,7 +1924,7 @@ function plot_points(plotpoints, r, g, b, timer) {
 
 function draw_line_for_time(org1, org2, r, g, b, timer) {
   timer = gettime() + (timer * 1000);
-  while(gettime() < timer) {
+  while (gettime() < timer) {
     line(org1, org2, (r, g, b), 1);
     recordline(org1, org2, (1, 1, 1), "");
     wait(0.05);
@@ -1978,25 +1978,25 @@ function _get_debug_color(str_color) {
 }
 
 function debug_info_screen(text_array, time, fade_in_bg_time, fade_out_bg_time, fade_in_text_time, fade_out_text_time, font_size, show_black_background) {
-  if(!isDefined(time)) {
+  if(!isdefined(time)) {
     time = 3;
   }
-  if(!isDefined(fade_in_bg_time)) {
+  if(!isdefined(fade_in_bg_time)) {
     fade_in_bg_time = 0;
   }
-  if(!isDefined(fade_out_bg_time)) {
+  if(!isdefined(fade_out_bg_time)) {
     fade_out_bg_time = 2;
   }
-  if(!isDefined(fade_in_text_time)) {
+  if(!isdefined(fade_in_text_time)) {
     fade_in_text_time = 2;
   }
-  if(!isDefined(fade_out_text_time)) {
+  if(!isdefined(fade_out_text_time)) {
     fade_out_text_time = 2;
   }
-  if(!isDefined(font_size)) {
+  if(!isdefined(font_size)) {
     font_size = 2;
   }
-  if(!isDefined(show_black_background)) {
+  if(!isdefined(show_black_background)) {
     show_black_background = 1;
   }
   if(show_black_background) {

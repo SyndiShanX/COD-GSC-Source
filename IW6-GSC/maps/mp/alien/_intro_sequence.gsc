@@ -133,13 +133,11 @@ spawn_model(model_name, attach_to_entity, tag_name, spawn_angle_offset) {
 }
 
 intro_sequence_enabled() {
-  if(maps\mp\alien\_debug::StartPointEnabled()) {
+  if(maps\mp\alien\_debug::StartPointEnabled())
     return false;
-  }
 
-  if(maps\mp\alien\_utility::is_chaos_mode()) {
+  if(maps\mp\alien\_utility::is_chaos_mode())
     return false;
-  }
 
   return (getDvarInt("scr_alien_intro", 1) == 1);
 }

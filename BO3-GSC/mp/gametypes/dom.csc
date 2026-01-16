@@ -10,7 +10,7 @@
 #namespace dom;
 
 function main() {
-  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_localclient_connect( & on_localclient_connect);
   if(getgametypesetting("silentPlant") != 0) {
     setsoundcontext("bomb_plant", "silent");
   }
@@ -18,7 +18,7 @@ function main() {
 
 function on_localclient_connect(localclientnum) {
   self.domflags = [];
-  while(!isDefined(level.domflags["a"])) {
+  while (!isdefined(level.domflags["a"])) {
     self.domflags["a"] = serverobjective_getobjective(localclientnum, "dom_a");
     self.domflags["b"] = serverobjective_getobjective(localclientnum, "dom_b");
     self.domflags["c"] = serverobjective_getobjective(localclientnum, "dom_c");
@@ -30,23 +30,23 @@ function on_localclient_connect(localclientnum) {
 }
 
 function monitor_flag_fx(localclientnum, flag_objective, flag_name) {
-  if(!isDefined(flag_objective)) {
+  if(!isdefined(flag_objective)) {
     return;
   }
-  flag = spawnStruct();
+  flag = spawnstruct();
   flag.name = flag_name;
   flag.objectiveid = flag_objective;
   flag.origin = serverobjective_getobjectiveorigin(localclientnum, flag_objective);
   flag.angles = (0, 0, 0);
   flag_entity = serverobjective_getobjectiveentity(localclientnum, flag_objective);
-  if(isDefined(flag_entity)) {
+  if(isdefined(flag_entity)) {
     flag.origin = flag_entity.origin;
     flag.angles = flag_entity.angles;
   }
   fx_name = get_base_fx(flag, "neutral");
   play_base_fx(localclientnum, flag, fx_name, "neutral");
   flag.last_progress = 0;
-  while(true) {
+  while (true) {
     team = serverobjective_getobjectiveteam(localclientnum, flag_objective);
     if(team != flag.last_team) {
       flag update_base_fx(localclientnum, flag, team);
@@ -60,12 +60,12 @@ function monitor_flag_fx(localclientnum, flag_objective, flag_name) {
 }
 
 function play_base_fx(localclientnum, flag, fx_name, team) {
-  if(isDefined(flag.base_fx)) {
+  if(isdefined(flag.base_fx)) {
     stopfx(localclientnum, flag.base_fx);
   }
   up = anglestoup(flag.angles);
-  forward = anglesToForward(flag.angles);
-  flag.base_fx = playFX(localclientnum, fx_name, flag.origin, up, forward);
+  forward = anglestoforward(flag.angles);
+  flag.base_fx = playfx(localclientnum, fx_name, flag.origin, up, forward);
   setfxteam(localclientnum, flag.base_fx, team);
   flag.last_team = team;
 }
@@ -85,18 +85,18 @@ function update_base_fx(localclientnum, flag, team) {
 }
 
 function play_cap_fx(localclientnum, flag, fx_name, team) {
-  if(isDefined(flag.cap_fx)) {
+  if(isdefined(flag.cap_fx)) {
     killfx(localclientnum, flag.cap_fx);
   }
   up = anglestoup(flag.angles);
-  forward = anglesToForward(flag.angles);
-  flag.cap_fx = playFX(localclientnum, fx_name, flag.origin, up, forward);
+  forward = anglestoforward(flag.angles);
+  flag.cap_fx = playfx(localclientnum, fx_name, flag.origin, up, forward);
   setfxteam(localclientnum, flag.cap_fx, team);
 }
 
 function update_cap_fx(localclientnum, flag, team, progress) {
   if(progress == 0) {
-    if(isDefined(flag.cap_fx)) {
+    if(isdefined(flag.cap_fx)) {
       killfx(localclientnum, flag.cap_fx);
     }
     flag.last_progress = progress;
@@ -108,9 +108,11 @@ function update_cap_fx(localclientnum, flag, team, progress) {
 }
 
 function get_base_fx(flag, team) {
-  if(isDefined(level.domflagbasefxoverride)) {
-    fx = [[level.domflagbasefxoverride]](flag, team);
-    if(isDefined(fx)) {
+  if(isdefined(level.domflagbasefxoverride)) {
+    fx = [
+      [level.domflagbasefxoverride]
+    ](flag, team);
+    if(isdefined(fx)) {
       return fx;
     }
   }
@@ -121,9 +123,11 @@ function get_base_fx(flag, team) {
 }
 
 function get_cap_fx(flag, team) {
-  if(isDefined(level.domflagcapfxoverride)) {
-    fx = [[level.domflagcapfxoverride]](flag, team);
-    if(isDefined(fx)) {
+  if(isdefined(level.domflagcapfxoverride)) {
+    fx = [
+      [level.domflagcapfxoverride]
+    ](flag, team);
+    if(isdefined(fx)) {
       return fx;
     }
   }

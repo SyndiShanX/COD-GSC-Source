@@ -36,24 +36,21 @@ main() {
 
   self unlink();
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
     self.enemy.syncedmeleetarget = undefined;
-  }
 
   self clearanim( % body, 0.2);
   var_2 = getdogdeathanim("front");
 
-  if(isDefined(self.deathanim)) {
+  if(isDefined(self.deathanim))
     var_2 = self.deathanim;
-  }
 
-  if(isDefined(self.custom_deathsound)) {
+  if(isDefined(self.custom_deathsound))
     self playSound(self.custom_deathsound);
-  } else if(self isdogbeingdriven()) {
+  else if(self isdogbeingdriven())
     self playSound("anml_dog_shot_death_plr");
-  } else {
+  else
     self playSound("anml_dog_shot_death");
-  }
 
   self setflaggedanimrestart("dog_anim", var_2, 1, 0.2, 1);
   animscripts\shared::donotetracks("dog_anim");
@@ -62,9 +59,8 @@ main() {
 getdogdeathanim(var_0) {
   var_1 = animscripts\utility::lookupdoganim("death", var_0);
 
-  if(isarray(var_1)) {
+  if(isarray(var_1))
     return var_1[randomint(var_1.size)];
-  }
 
   return var_1;
 }

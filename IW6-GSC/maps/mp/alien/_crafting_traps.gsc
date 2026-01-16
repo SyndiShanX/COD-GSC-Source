@@ -22,9 +22,8 @@ init() {
   level._effect["actuator_idle"] = loadfx("vfx/moments/alien/alien_hypno_trap_ambient");
   level._effect["sticky_explode"] = loadfx("vfx/gameplay/alien/vfx_alien_pipebomb_exp_01");
 
-  if(!isDefined(level.alien_crafting_table)) {
+  if(!isDefined(level.alien_crafting_table))
     level.alien_crafting_table = "mp/alien/crafting_traps.csv";
-  }
 
   var_0 = 0;
   var_1 = 99;
@@ -50,10 +49,10 @@ init() {
     var_4.item_damage_rate = float(tablelookup(level.alien_crafting_table, 0, var_2, 8));
     var_4.item_damage_radius = int(tablelookup(level.alien_crafting_table, 0, var_2, 7));
     var_4.item_damage_falloff = int(tablelookup(level.alien_crafting_table, 0, var_2, 11));
-    var_4.hintstring = &"ALIEN_CRAFTING_PICKUP_CRAFTED_ITEM";
-    var_4.placestring = &"ALIEN_CRAFTING_PLACE_CRAFTED_ITEM";
-    var_4.cannotplacestring = &"ALIEN_CRAFTING_CANNOT_PLACE";
-    var_4.placestringnocancel = &"ALIEN_CRAFTING_PLACE_CRAFTED_ITEM_NOCANCEL";
+    var_4.hintstring = & "ALIEN_CRAFTING_PICKUP_CRAFTED_ITEM";
+    var_4.placestring = & "ALIEN_CRAFTING_PLACE_CRAFTED_ITEM";
+    var_4.cannotplacestring = & "ALIEN_CRAFTING_CANNOT_PLACE";
+    var_4.placestringnocancel = & "ALIEN_CRAFTING_PLACE_CRAFTED_ITEM_NOCANCEL";
     var_4.headiconheight = 75;
     var_4.splashname = "used_placeable_barrier";
     var_4.lifespan = int(tablelookup(level.alien_crafting_table, 0, var_2, 10));
@@ -74,9 +73,8 @@ init() {
     var_4.placementheighttolerance = 11.5;
     var_4.ingredientslist = strtok(var_4.streakname, "_");
 
-    if(var_4.streakname == "placeable_generator") {
+    if(var_4.streakname == "placeable_generator")
       var_4.placementoffsetz = 10;
-    }
 
     level.placeableconfigs[var_4.streakname] = var_4;
   }
@@ -111,9 +109,8 @@ oncarried(var_0) {
   if(!isDefined(level.connected_generators)) {
     return;
   }
-  if(common_scripts\utility::array_contains(level.connected_generators, self)) {
+  if(common_scripts\utility::array_contains(level.connected_generators, self))
     level.connected_generators = common_scripts\utility::array_remove(level.connected_generators, self);
-  }
 
   disconnect_tesla();
 
@@ -121,9 +118,8 @@ oncarried(var_0) {
     if(var_2 == self) {
       continue;
     }
-    if(isDefined(var_2.connected_teslas) && common_scripts\utility::array_contains(var_2.connected_teslas, self)) {
+    if(isDefined(var_2.connected_teslas) && common_scripts\utility::array_contains(var_2.connected_teslas, self))
       common_scripts\utility::array_remove(var_2.connected_teslas, self);
-    }
 
     remove_connections_to_this_tesla(var_2);
   }
@@ -163,9 +159,8 @@ ondeath(var_0) {
   disablecollision(var_0);
   var_1 = level.placeableconfigs[var_0];
 
-  if(isDefined(var_1.deathsfx)) {
+  if(isDefined(var_1.deathsfx))
     self playSound(var_1.deathsfx);
-  }
 
   disconnect_tesla();
 
@@ -176,17 +171,15 @@ ondeath(var_0) {
       if(var_3 == self) {
         continue;
       }
-      if(isDefined(var_3.connected_teslas) && common_scripts\utility::array_contains(var_3.connected_teslas, self)) {
+      if(isDefined(var_3.connected_teslas) && common_scripts\utility::array_contains(var_3.connected_teslas, self))
         common_scripts\utility::array_remove(var_3.connected_teslas, self);
-      }
 
       remove_connections_to_this_tesla(var_3);
     }
   }
 
-  if(var_1.item_class == "tesla") {
+  if(var_1.item_class == "tesla")
     playFXOnTag(level._effect["tesla_death"], self, "tag_fx_01");
-  }
 
   wait 0.5;
 }
@@ -227,9 +220,8 @@ craftable_tesla_generator(var_0) {
   if(isDefined(self.attack_bolt)) {
     wait 0.5;
 
-    if(isDefined(self.attack_bolt)) {
+    if(isDefined(self.attack_bolt))
       self.attack_bolt delete();
-    }
   }
 
   self.attack_bolt = spawn("script_model", self.origin + (0, 0, 30));
@@ -267,9 +259,8 @@ reset_attack_bolt() {
   self endon("carried");
   var_0 = (0, 0, 30);
 
-  if(isDefined(self.is_tesla_ball)) {
+  if(isDefined(self.is_tesla_ball))
     var_0 = (0, 0, 0);
-  }
 
   var_1 = 0;
 
@@ -277,9 +268,8 @@ reset_attack_bolt() {
     wait 0.1;
     var_1++;
 
-    if(var_1 > 15) {
+    if(var_1 > 15)
       self.attack_bolt delete();
-    }
   }
 
   self.attack_bolt = spawn("script_model", self.origin + var_0);
@@ -295,17 +285,14 @@ watch_for_nearby_generators(var_0) {
     level waittill("generator_placed", var_2);
 
     if(should_connect_teslas(var_0, var_2, var_1)) {
-      if(!isDefined(level.connected_generators)) {
+      if(!isDefined(level.connected_generators))
         level.connected_generators = [];
-      }
 
-      if(!common_scripts\utility::array_contains(level.connected_generators, var_0)) {
+      if(!common_scripts\utility::array_contains(level.connected_generators, var_0))
         level.connected_generators = common_scripts\utility::add_to_array(level.connected_generators, var_0);
-      }
 
-      if(!common_scripts\utility::array_contains(level.connected_generators, var_2)) {
+      if(!common_scripts\utility::array_contains(level.connected_generators, var_2))
         level.connected_generators = common_scripts\utility::add_to_array(level.connected_generators, var_2);
-      }
 
       level thread connect_tesla_generators(var_0, var_2);
     }
@@ -313,9 +300,8 @@ watch_for_nearby_generators(var_0) {
 }
 
 get_center_of_connected_teslas(var_0) {
-  if(!isDefined(var_0)) {
+  if(!isDefined(var_0))
     var_0 = 35;
-  }
 
   var_1 = 0;
   var_2 = 0;
@@ -355,11 +341,10 @@ get_center_of_alive_players() {
 
 should_connect_teslas(var_0, var_1, var_2) {
   if(distancesquared(var_0.origin, var_1.origin) <= var_2 && sighttracepassed(var_0.origin + (0, 0, 30), var_1.origin + (0, 0, 30), 0, var_0, var_1)) {
-    if(abs(var_0.origin[2] - var_1.origin[2]) >= 60) {
+    if(abs(var_0.origin[2] - var_1.origin[2]) >= 60)
       return 0;
-    } else {
+    else
       return 1;
-    }
   }
 
   return 0;
@@ -374,41 +359,35 @@ connect_tesla_generators(var_0, var_1) {
   var_2 = undefined;
   var_3 = distance(var_0.origin, var_1.origin);
 
-  if(var_3 <= 65) {
+  if(var_3 <= 65)
     var_2 = "tesla_connect_50";
-  } else if(var_3 <= 115) {
+  else if(var_3 <= 115)
     var_2 = "tesla_connect_100";
-  } else if(var_3 <= 165) {
+  else if(var_3 <= 165)
     var_2 = "tesla_connect_150";
-  } else if(var_3 <= 215) {
+  else if(var_3 <= 215)
     var_2 = "tesla_connect_200";
-  } else if(var_3 <= 260) {
+  else if(var_3 <= 260)
     var_2 = "tesla_connect_250";
-  }
 
-  if(!isDefined(var_0.connected_teslas)) {
+  if(!isDefined(var_0.connected_teslas))
     var_0.connected_teslas = [];
-  }
 
-  if(!isDefined(var_1.connected_teslas)) {
+  if(!isDefined(var_1.connected_teslas))
     var_1.connected_teslas = [];
-  }
 
-  if(!common_scripts\utility::array_contains(var_1.connected_teslas, var_0)) {
+  if(!common_scripts\utility::array_contains(var_1.connected_teslas, var_0))
     var_1.connected_teslas = common_scripts\utility::add_to_array(var_1.connected_teslas, var_0);
-  }
 
-  if(!common_scripts\utility::array_contains(var_0.connected_teslas, var_1)) {
+  if(!common_scripts\utility::array_contains(var_0.connected_teslas, var_1))
     var_0.connected_teslas = common_scripts\utility::add_to_array(var_0.connected_teslas, var_1);
-  }
 
   if(level.connected_generators.size >= 3 && !maps\mp\alien\_utility::is_true(level.beacon_easter_egg_active) && level.script == "mp_alien_beacon") {
     var_4 = 1;
 
     for(var_5 = 0; var_5 < level.connected_generators.size; var_5++) {
-      if(level.connected_generators[var_5].connected_teslas.size < 2) {
+      if(level.connected_generators[var_5].connected_teslas.size < 2)
         var_4 = 0;
-      }
     }
 
     if(var_4) {
@@ -418,13 +397,11 @@ connect_tesla_generators(var_0, var_1) {
     }
   }
 
-  if(!isDefined(var_0.fx)) {
+  if(!isDefined(var_0.fx))
     var_0.fx = [];
-  }
 
-  if(!isDefined(var_1.fx)) {
+  if(!isDefined(var_1.fx))
     var_1.fx = [];
-  }
 
   var_7 = spawnfx(level._effect[var_2], var_0.origin + (0, 0, 55), var_0.origin + (0, 0, 55) - (var_1.origin + (0, 0, 30)), anglestoup(var_0.angles));
   var_7.generator = var_0;
@@ -476,9 +453,8 @@ electric_ball_lightning_timeout(var_0) {
   level notify("tesla_ball_timeout");
   wait 1;
 
-  if(isDefined(var_0.attack_bolt)) {
+  if(isDefined(var_0.attack_bolt))
     var_0.attack_bolt delete();
-  }
 
   level.beacon_easter_egg_active = 0;
   var_0 stoploopsound();
@@ -580,13 +556,12 @@ tesla_bolt_death(var_0) {
   self playSound("tesla_shock");
   wait 0.05;
 
-  if(isDefined(var_0.attack_bolt)) {
+  if(isDefined(var_0.attack_bolt))
     var_0.attack_bolt delete();
-  }
 
-  if(isDefined(var_0.owner) && isalive(var_0.owner)) {
+  if(isDefined(var_0.owner) && isalive(var_0.owner))
     self dodamage(var_0.damage_amount, self.origin, var_0.owner, var_0, "MOD_UNKNOWN");
-  } else {
+  else {
     var_1 = undefined;
     var_2 = undefined;
     self dodamage(var_0.damage_amount, self.origin, var_1, var_2, "MOD_UNKNOWN");
@@ -650,17 +625,15 @@ craftable_pet_trap(var_0) {
   self endon("carried");
   wait 1;
 
-  if(!isDefined(self.enemy_trigger)) {
+  if(!isDefined(self.enemy_trigger))
     self.enemy_trigger = spawn("trigger_radius", self.origin, 1, 64, 64);
-  }
 
   self.enemy_trigger.origin = self.origin;
   thread pet_trap_idle_fx();
   self.is_pet_trap = 1;
 
-  if(!isDefined(self.ammocount)) {
+  if(!isDefined(self.ammocount))
     self.ammocount = 2;
-  }
 
   if(self.ammocount < 1) {
     self notify("stop_monitor");
@@ -671,9 +644,8 @@ craftable_pet_trap(var_0) {
 
   self.disabled = 0;
 
-  if(!maps\mp\alien\_utility::is_chaos_mode()) {
+  if(!maps\mp\alien\_utility::is_chaos_mode())
     level thread pet_trap_monitor(self);
-  }
 
   for(;;) {
     self.enemy_trigger waittill("trigger", var_1);
@@ -720,17 +692,14 @@ pet_trap_monitor(var_0) {
       killfxontag(level._effect["actuator_idle"], var_0, "tag_fx");
       var_0.disabled = 1;
 
-      if(isDefined(var_0.owner) && isalive(var_0.owner)) {
-        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", &"ALIEN_CRAFTING_PETTRAP_DISABLED", 3);
-      }
+      if(isDefined(var_0.owner) && isalive(var_0.owner))
+        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", & "ALIEN_CRAFTING_PETTRAP_DISABLED", 3);
 
-      while(maps\mp\alien\_pillage::check_for_existing_pet_bombs() > 1) {
+      while(maps\mp\alien\_pillage::check_for_existing_pet_bombs() > 1)
         wait 1;
-      }
 
-      if(isDefined(var_0.owner) && isalive(var_0.owner)) {
-        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", &"ALIEN_CRAFTING_PETTRAP_ENABLED", 3);
-      }
+      if(isDefined(var_0.owner) && isalive(var_0.owner))
+        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", & "ALIEN_CRAFTING_PETTRAP_ENABLED", 3);
 
       playFXOnTag(level._effect["actuator_idle"], var_0, "tag_fx");
       var_0.disabled = 0;
@@ -810,9 +779,8 @@ craftable_pipe_bomb(var_0) {
   self takeweapon("aliensemtex_mp");
   self takeweapon("iw6_aliendlc22_mp");
 
-  if(level.script == "mp_alien_last") {
+  if(level.script == "mp_alien_last")
     self takeweapon("iw6_aliendlc43_mp");
-  }
 
   self giveweapon("iw6_aliendlc22_mp");
   self setweaponammoclip("iw6_aliendlc22_mp", 5);
@@ -961,13 +929,11 @@ drop_pillagable_item(var_0, var_1, var_2, var_3, var_4) {
   var_5.pillage_trigger sethintstring(var_6);
   var_5.pillage_trigger makeusable();
 
-  if(isDefined(var_4)) {
+  if(isDefined(var_4))
     var_5.explosive_type = var_4;
-  }
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
+  if(maps\mp\alien\_utility::alien_mode_has("outline"))
     maps\mp\alien\_outline_proto::add_to_outline_pillage_watch_list(var_5.pillage_trigger, 0);
-  }
 
   var_5.enabled = 1;
   var_5.searched = 1;

@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace raps;
 
 autoexec __init__system__() {
@@ -21,12 +22,12 @@ adjust_side_death_dir_if_trace_fail(origin, side_dir, fxlength, up_dir) {
   end = origin + side_dir * fxlength;
   trace = bulletTrace(origin, end, 0, self);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     new_side_dir = vectornormalize(side_dir + up_dir);
     end = origin + new_side_dir * fxlength;
     new_trace = bulletTrace(origin, end, 0, self);
 
-    if(new_trace[# "fraction"] > trace[# "fraction"]) {
+    if(new_trace[#"fraction"] > trace[#"fraction"]) {
       side_dir = new_side_dir;
     }
   }

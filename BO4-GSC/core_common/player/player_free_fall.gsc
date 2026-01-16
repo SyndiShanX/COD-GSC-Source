@@ -8,6 +8,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace player_free_fall;
 
 autoexec __init__system__() {
@@ -21,6 +22,7 @@ __init__() {
   level.parachute_weapon = getweapon(#"parachute");
 
   level thread function_1fc427dc();
+
 }
 
 function_d2a1520c() {
@@ -82,7 +84,7 @@ private function_6aac1790(var_dbb94a) {
 
 private function_b6e83203(delay) {
   if(isDefined(delay)) {
-    self endon(#"death", # "disconnect");
+    self endon(#"death", #"disconnect");
     wait delay;
   }
 
@@ -131,3 +133,4 @@ private function_1fc427dc() {
   waitframe(1);
   adddebugcommand("<dev string:x17a>" + mapname + "<dev string:x18a>");
 }
+

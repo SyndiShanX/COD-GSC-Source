@@ -1387,4 +1387,5 @@ main() {
   ent.v["angles"] = (276, 24, 0);
   ent.v["fxid"] = "fog_ground_200_rundown";
   ent.v["delay"] = -15;
+
 }

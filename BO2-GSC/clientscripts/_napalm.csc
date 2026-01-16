@@ -9,15 +9,13 @@
 #include clientscripts\_airsupport;
 
 startnapalm(localclientnum, pos, yaw, teamfaction, team, owner, exittype) {
-  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != 1) {
+  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != 1)
     init_napalmstrike();
-  }
 
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++)
     callnapalmstrike(localclientnum, pos, yaw, teamfaction, team, owner, exittype);
-  }
 }
 
 init_napalmstrike() {
@@ -41,21 +39,20 @@ init_napalmstrike() {
 }
 
 playplanefx(localclientnum) {
-  playFXOnTag(localclientnum, level.fx_airstrike_afterburner, self, "tag_engine");
-  playFXOnTag(localclientnum, level.fx_jet_trail, self, "tag_right_wingtip");
-  playFXOnTag(localclientnum, level.fx_jet_trail, self, "tag_left_wingtip");
+  playfxontag(localclientnum, level.fx_airstrike_afterburner, self, "tag_engine");
+  playfxontag(localclientnum, level.fx_jet_trail, self, "tag_right_wingtip");
+  playfxontag(localclientnum, level.fx_jet_trail, self, "tag_left_wingtip");
 }
 
 callnapalmstrike(localclientnum, coord, yaw, teamfaction, team, owner, exittype) {
   direction = (0, yaw, 0);
   planeflyheight = 850;
 
-  if(isDefined(level.airsupportheightscale)) {
+  if(isDefined(level.airsupportheightscale))
     planeflyheight = planeflyheight * level.airsupportheightscale;
-  }
 
-  startpoint = coord + vectorscale(anglesToForward(direction), -1 * 24000);
-  endpoint = coord + vectorscale(anglesToForward(direction), 24000);
+  startpoint = coord + vectorscale(anglestoforward(direction), -1 * 24000);
+  endpoint = coord + vectorscale(anglestoforward(direction), 24000);
 
   if(isDefined(level.forceairsupportmapheight)) {
     startpoint = (startpoint[0], startpoint[1], level.forceairsupportmapheight);
@@ -133,7 +130,7 @@ releaseflare(localclientnum, owner, plane, startpoint, endpoint, direction) {
   }
   pathstart = startpoint;
   pathend = endpoint;
-  forward = anglesToForward(direction);
+  forward = anglestoforward(direction);
   thread debug_line(pathstart, pathend, (1, 1, 1), 10);
   thread callstrike_flareeffect(localclientnum, plane, pathend, owner);
 }
@@ -141,22 +138,20 @@ releaseflare(localclientnum, owner, plane, startpoint, endpoint, direction) {
 callstrike_flareeffect(localclientnum, plane, pathend, owner) {
   fxtimer = 0.15;
 
-  if(isDefined(level.airsupportfxtimer)) {
+  if(isDefined(level.airsupportfxtimer))
     fxtimer = level.airsupportfxtimer;
-  }
 
   fxtimer = getdvarfloatdefault("scr_fxTimer", fxtimer);
   bombwait = 2.35;
 
-  if(isDefined(level.airsupportbombtimer)) {
+  if(isDefined(level.airsupportbombtimer))
     bombwait = level.airsupportbombtimer;
-  }
 
   bombwait = getdvarfloatdefault("scr_napalmflareTimer", bombwait);
   wait(bombwait);
-  planedir = anglesToForward(plane.angles);
+  planedir = anglestoforward(plane.angles);
   flare = spawnflare(localclientnum, plane.origin, plane.angles);
-  flare movegravity(vectorscale(anglesToForward(plane.angles), 2333.33), fxtimer + 3.95);
+  flare movegravity(vectorscale(anglestoforward(plane.angles), 2333.33), fxtimer + 3.95);
   flare thread debug_draw_bomb_path();
   wait 1.0;
   wait(fxtimer);
@@ -165,22 +160,20 @@ callstrike_flareeffect(localclientnum, plane, pathend, owner) {
   minangle = 5;
   maxangle = 45;
 
-  if(isDefined(level.napalmflameminangle)) {
+  if(isDefined(level.napalmflameminangle))
     minangle = level.napalmflameminangle;
-  }
 
-  if(isDefined(level.napalmflamemaxangle)) {
+  if(isDefined(level.napalmflamemaxangle))
     maxangle = level.napalmflamemaxangle;
-  }
 
   maxangle = getdvarfloatdefault("scr_napalm_maxAngles", maxangle);
   hitpos = (0, 0, 0);
-  tracedir = anglesToForward(flareangles + (maxangle, 0, 0));
+  tracedir = anglestoforward(flareangles + (maxangle, 0, 0));
   traceend = flareorigin + vectorscale(tracedir, 10000);
-  trace = bulletTrace(flareorigin, traceend, 0, undefined);
+  trace = bullettrace(flareorigin, traceend, 0, undefined);
   tracehit = trace["position"];
   hitpos = hitpos + tracehit;
-  playFX(localclientnum, level.fx_napalm_marker, hitpos);
+  playfx(localclientnum, level.fx_napalm_marker, hitpos);
   debug_line(flareorigin, tracehit, (1, 0, 0), 20);
   debug_star(hitpos, (1, 0, 0), 20000);
   wait 4.0;
@@ -190,8 +183,9 @@ callstrike_flareeffect(localclientnum, plane, pathend, owner) {
 spawnflare(localclientnum, origin, angles) {
   flare = spawn(localclientnum, origin, "script_origin");
   flare.angles = angles;
-  flare setModel("projectile_cbu97_clusterbomb");
+  flare setmodel("projectile_cbu97_clusterbomb");
   return flare;
 }
 
-debug_draw_bomb_path(projectile) {}
+debug_draw_bomb_path(projectile) {
+}

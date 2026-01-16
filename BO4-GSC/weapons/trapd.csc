@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace trapd;
 
 autoexec __init__system__() {
@@ -37,7 +38,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "grenade_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"grenade_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

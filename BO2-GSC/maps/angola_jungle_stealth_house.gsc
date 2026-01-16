@@ -28,7 +28,7 @@ skipto_jungle_stealth_house() {
   level.ai_woods = init_hero("woods");
   level.ai_hudson = init_hero("hudson");
   level.ai_hudson.non_wet_model = level.ai_hudson.model;
-  level.ai_hudson setModel("c_usa_angola_hudson_wet_fb");
+  level.ai_hudson setmodel("c_usa_angola_hudson_wet_fb");
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
   level.ai_hudson set_force_color("r");
@@ -130,9 +130,8 @@ delete_after_stealth() {
   self endon("death");
   level waittill("end_house_fail");
 
-  if(isDefined(self)) {
+  if(isDefined(self))
     self delete();
-  }
 }
 
 tall_grass_stealth() {
@@ -150,18 +149,17 @@ tall_grass_stealth() {
 }
 
 fail_player_if_he_backtracks() {
-  triggers = getEntArray("trig_fail_backtrack_after_house", "targetname");
+  triggers = getentarray("trig_fail_backtrack_after_house", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger thread trig_fail_player_if_backtracks();
-  }
+  foreach(trigger in triggers)
+  trigger thread trig_fail_player_if_backtracks();
 }
 
 trig_fail_player_if_backtracks() {
   level.player endon("death");
   level endon("tall_grass_stealth_done");
   self trigger_wait();
-  spawners = getEntArray("fail_player_outside_house_spawners", "targetname");
+  spawners = getentarray("fail_player_outside_house_spawners", "targetname");
   array_thread(spawners, ::add_spawn_function, ::chase_after_target, level.player);
   trigger = getent("sm_fail_not_in_house", "targetname");
   trigger activate_trigger();
@@ -225,19 +223,17 @@ stop_tall_grass_stealth() {
   level thread clean_up_animated_grass();
 
   for(i = 0; i <= 6; i++) {
-    a_enemies = getEntArray("patroller_extra_" + i + "_ai", "targetname");
+    a_enemies = getentarray("patroller_extra_" + i + "_ai", "targetname");
 
-    foreach(ai_enemy in a_enemies) {
-      ai_enemy.ignoreall = 1;
-    }
+    foreach(ai_enemy in a_enemies)
+    ai_enemy.ignoreall = 1;
   }
 
   for(i = 0; i <= 3; i++) {
-    a_enemies = getEntArray("perimeter_patroller_" + i + "_ai", "targetname");
+    a_enemies = getentarray("perimeter_patroller_" + i + "_ai", "targetname");
 
-    foreach(ai_enemy in a_enemies) {
-      ai_enemy delete();
-    }
+    foreach(ai_enemy in a_enemies)
+    ai_enemy delete();
   }
 
   end_scene("perimeter_patrol");
@@ -253,7 +249,7 @@ setup_fxanim_grass_triggers() {
 }
 
 clean_up_animated_grass() {
-  a_fxanim_grass = getEntArray("fxanim_cattails", "targetname");
+  a_fxanim_grass = getentarray("fxanim_cattails", "targetname");
 
   foreach(grass in a_fxanim_grass) {
     grass notify("stop_grass_idle");
@@ -266,11 +262,11 @@ grass_delete_when_offscreen() {
   level.player endon("death");
   angle = 45;
   cos_angle = cos(angle);
-  forward = anglesToForward(level.player.angles);
+  forward = anglestoforward(level.player.angles);
   grass_to_player = vectornormalize(self.origin - level.player.origin);
 
   while(vectordot(forward, grass_to_player) >= cos_angle) {
-    forward = anglesToForward(level.player.angles);
+    forward = anglestoforward(level.player.angles);
     grass_to_player = vectornormalize(self.origin - level.player.origin);
     wait 0.1;
   }
@@ -331,9 +327,8 @@ perimeter_patroller_logic(str_trigger, str_waittill, str_spawner, n_wait) {
       if(!isDefined(e_patroller)) {
         continue;
       }
-      if(issubstr(e_patroller.classname, "child")) {
+      if(issubstr(e_patroller.classname, "child"))
         e_patroller thread delete_child_soldiers_when_player_drops_down();
-      }
 
       wait(n_wait);
     }
@@ -343,7 +338,7 @@ perimeter_patroller_logic(str_trigger, str_waittill, str_spawner, n_wait) {
 }
 
 set_up_right_path_blockers() {
-  spawners = getEntArray("stealth_right_path_blockers", "targetname");
+  spawners = getentarray("stealth_right_path_blockers", "targetname");
   array_thread(spawners, ::add_spawn_function, ::right_path_blocker_stealth_logic);
   array_thread(spawners, ::add_spawn_function, ::cleanup_path_blockers);
   simple_spawn(spawners);
@@ -371,11 +366,10 @@ right_path_blocker_stealth_logic() {
     self notify("stealth_broken");
     self anim_stopanimscripted();
 
-    if(!flag("tall_grass_moment_over")) {
+    if(!flag("tall_grass_moment_over"))
       flag_set("_stealth_spotted");
-    } else {
+    else
       level.player s3_player_fail(undefined, 3);
-    }
   }
 }
 
@@ -398,9 +392,8 @@ delete_child_soldiers_when_player_drops_down() {
 perimeter_guard_logic(str_spawner, str_align, str_trigger, delay) {
   level endon("tall_grass_stealth_done");
 
-  if(isDefined(delay)) {
+  if(isDefined(delay))
     wait(delay);
-  }
 
   ai_patroller = simple_spawn_single(str_spawner);
   ai_patroller thread stealth_ai();
@@ -417,17 +410,14 @@ perimeter_guard_logic(str_spawner, str_align, str_trigger, delay) {
 
 debug_stealth_loop() {
   while(true) {
-    if(flag("_stealth_hidden")) {
+    if(flag("_stealth_hidden"))
       iprintlnbold("hidden " + self getstance());
-    }
 
-    if(flag("_stealth_alert")) {
+    if(flag("_stealth_alert"))
       iprintlnbold("alert " + self getstance());
-    }
 
-    if(flag("_stealth_spotted")) {
+    if(flag("_stealth_spotted"))
       iprintlnbold("spotted " + self getstance());
-    }
 
     wait 1;
   }
@@ -452,11 +442,10 @@ tall_grass_stealth_vo() {
   level thread maps\angola_jungle_stealth::stealth_log_monitor_player_crouch();
 
   if(!is_mason_stealth_crouched()) {
-    if(!level.console && !level.player gamepadusedlast()) {
+    if(!level.console && !level.player gamepadusedlast())
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 3, str_crouch_flag);
-    } else {
+    else
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 3, str_crouch_flag);
-    }
   }
 
   wait 3;
@@ -481,20 +470,18 @@ tall_grass_stealth_vo() {
 }
 
 turn_on_mission_fail_volumes() {
-  volumes = getEntArray("vol_fail_post_grass_moment", "targetname");
+  volumes = getentarray("vol_fail_post_grass_moment", "targetname");
 
-  foreach(volume in volumes) {
-    volume thread monitor_player_failure_after_stealth();
-  }
+  foreach(volume in volumes)
+  volume thread monitor_player_failure_after_stealth();
 }
 
 monitor_player_failure_after_stealth() {
   level.player endon("death");
   level endon("tall_grass_stealth_done");
 
-  while(!level.player istouching(self)) {
+  while(!level.player istouching(self))
     wait 0.05;
-  }
 
   level.player s3_player_fail("post_grass", 3);
 }
@@ -552,7 +539,7 @@ patrol_b_logic() {
   wait 0.05;
   ai_patroller_b.ignoreall = 0;
   s_bird_fx_org = getstruct("birds_fx_patrol_b", "targetname");
-  playFX(level._effect["startled_birds"], s_bird_fx_org.origin);
+  playfx(level._effect["startled_birds"], s_bird_fx_org.origin);
   nd_patrol_b_special = getnode("patrol_b_special_anim", "targetname");
   nd_patrol_b_special waittill_notify_or_timeout("trigger", 9);
   ai_patroller_b1 = simple_spawn_single("patrol_b_1");
@@ -566,9 +553,8 @@ patrol_b_logic() {
   wait 13;
   flag_set("patrol_b_passed");
 
-  if(!flag("_stealth_spotted") && stealth_safe_to_save()) {
+  if(!flag("_stealth_spotted") && stealth_safe_to_save())
     autosave_by_name("patrol_b_passed");
-  }
 }
 
 check_safe_to_move(str_enemy, str_volume) {
@@ -578,13 +564,12 @@ check_safe_to_move(str_enemy, str_volume) {
   is_safe = 0;
 
   while(!is_safe) {
-    a_enemies = getEntArray(str_enemy, "targetname");
+    a_enemies = getentarray(str_enemy, "targetname");
     is_touching = 0;
 
     foreach(ai_enemy in a_enemies) {
-      if(ai_enemy istouching(e_safe_zone)) {
+      if(ai_enemy istouching(e_safe_zone))
         is_touching = 1;
-      }
     }
 
     if(!is_touching) {
@@ -603,7 +588,7 @@ check_safe_to_move(str_enemy, str_volume) {
 }
 
 clean_up_enemies_in_safe_zone(str_enemy, str_volume, use_cqb_walk) {
-  a_enemies = getEntArray(str_enemy, "targetname");
+  a_enemies = getentarray(str_enemy, "targetname");
 
   if(a_enemies.size > 0) {
     ai_enemy_closest = a_enemies[0];
@@ -611,9 +596,8 @@ clean_up_enemies_in_safe_zone(str_enemy, str_volume, use_cqb_walk) {
   }
 
   foreach(ai_enemy in a_enemies) {
-    if(isDefined(use_cqb_walk) && use_cqb_walk) {
+    if(isDefined(use_cqb_walk) && use_cqb_walk)
       ai_enemy change_movemode("cqb_walk");
-    }
 
     n_dist = distance2dsquared(ai_enemy.origin, level.player.origin);
 
@@ -627,9 +611,8 @@ clean_up_enemies_in_safe_zone(str_enemy, str_volume, use_cqb_walk) {
     a_possible_enemies_to_delete = [];
 
     foreach(ai_enemy in a_enemies) {
-      if(ai_enemy != ai_enemy_closest) {
+      if(ai_enemy != ai_enemy_closest)
         a_possible_enemies_to_delete[a_possible_enemies_to_delete.size] = ai_enemy;
-      }
     }
 
     foreach(ai_enemy in a_possible_enemies_to_delete) {
@@ -653,9 +636,8 @@ angola_stealth_house_objectives() {
   level.player playrumbleonentity("damage_light");
   flag_set("js_mason_in_position_in_dense_foliage_area");
 
-  if(stealth_safe_to_save()) {
+  if(stealth_safe_to_save())
     autosave_by_name("mason_reaches_stealth_event3");
-  }
 
   level waittill("at_certain_spot");
   set_objective(level.obj_tall_grass_stealth, s_rock, "remove");
@@ -671,9 +653,8 @@ angola_stealth_house_objectives() {
   set_objective(level.obj_dont_get_discovered, undefined, "delete");
   flag_set("js_mason_in_position_in_woods_drop_off_area");
 
-  if(stealth_safe_to_save()) {
+  if(stealth_safe_to_save())
     autosave_by_name("js_mason_in_position_in_woods_drop_off_area");
-  }
 
   flag_wait("js_mason_ready_to_enter_village");
   t_trigger = getent("objective_mason_goto_village_enterance_trigger", "targetname");
@@ -706,18 +687,16 @@ fail_player_if_not_exit_house(delay) {
   level.player endon("death");
   level endon("trig_player_out_of_house");
 
-  if(isDefined(delay)) {
+  if(isDefined(delay))
     wait(delay);
-  }
 
   flag_set("_stealth_spotted");
   level.player s3_player_fail("leave_house", 4);
 }
 
 exit_church_dialog(delay) {
-  if(isDefined(delay) && delay > 0) {
+  if(isDefined(delay) && delay > 0)
     wait(delay);
-  }
 }
 
 has_reach_the_end_of_tall_grass() {
@@ -733,9 +712,8 @@ tall_grass_nag() {
 }
 
 stealth_search_for_player(delay, str_spawnername, view_dot, vis_dist, a_nodes, fail_delay_time) {
-  if(isDefined(delay) &delay > 0) {
+  if(isDefined(delay) & delay > 0)
     wait(delay);
-  }
 
   e_spawner = getent(str_spawnername, "targetname");
   e_ai = simple_spawn_single(e_spawner);
@@ -758,9 +736,8 @@ stealth_search_for_player(delay, str_spawnername, view_dot, vis_dist, a_nodes, f
 }
 
 notify_if_patroller_has_pass_player() {
-  while(self.origin[1] > level.player.origin[1]) {
+  while(self.origin[1] > level.player.origin[1])
     wait 0.05;
-  }
 
   level.n_patroller_pass++;
   flag_set("tall_grass_patroller_pass_" + level.n_patroller_pass);
@@ -771,12 +748,12 @@ fail_mission_if_player_visible(view_dot, vis_dist, fail_delay_time) {
 
   while(true) {
     dist = distance(self.origin, level.player.origin);
-    v_forward = anglesToForward(self.angles);
+    v_forward = anglestoforward(self.angles);
     v_dir = vectornormalize(level.player.origin - self.origin);
     dot = vectordot(v_forward, v_dir);
 
     if(dist < vis_dist && dot > view_dot) {
-      v_forward = anglesToForward(level.player.angles);
+      v_forward = anglestoforward(level.player.angles);
       v_dir = vectornormalize(self.origin - level.player.origin);
       dot = vectordot(v_forward, v_dir);
 
@@ -786,7 +763,8 @@ fail_mission_if_player_visible(view_dot, vis_dist, fail_delay_time) {
         self thread shoot_at_target(level.player, undefined, 0.2, fail_delay_time + 1);
         wait(fail_delay_time);
         missionfailedwrapper(&"ANGOLA_2_PLAYER_COVER_BROKEN_SPOTTED");
-      } else {}
+      } else {
+      }
     }
 
     wait 0.01;
@@ -820,19 +798,17 @@ hudson_drops_off_woods_and_hudson_at_village_enterance() {
 }
 
 vo_hudson_woods_putdown() {
-  while(distance2dsquared(level.player.origin, getent("hudson_ai", "targetname").origin) < 14400) {
+  while(distance2dsquared(level.player.origin, getent("hudson_ai", "targetname").origin) < 14400)
     wait 0.1;
-  }
 
   level.ai_hudson thread say_dialog("huds_keep_low_or_they_ll_0");
 }
 
 turn_off_jungle_escape_spawn_triggers() {
-  triggers = getEntArray("player_escaping_village_trigger", "targetname");
+  triggers = getentarray("player_escaping_village_trigger", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger trigger_off();
-  }
+  foreach(trigger in triggers)
+  trigger trigger_off();
 }
 
 tall_grass_patrol_vo(leader, guy_1, guy_2) {

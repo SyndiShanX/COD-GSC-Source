@@ -21,8 +21,8 @@ function main() {
   level.uav_z_offset = 4500;
   level.satellite_spawn_from_angle_min = 10;
   level.satellite_spawn_from_angle_max = 11;
-  level.add_raps_omit_locations = &add_raps_omit_locations;
-  level.add_raps_drop_locations = &add_raps_drop_locations;
+  level.add_raps_omit_locations = & add_raps_omit_locations;
+  level.add_raps_drop_locations = & add_raps_drop_locations;
   level.remotemissile_kill_z = -800;
   namespace_5d379c9::main();
   namespace_83fbe97c::main();
@@ -68,32 +68,32 @@ function main() {
   spawncollision("collision_clip_wall_64x64x10", "collider", (978.797, -2917.56, -92.7345), (322, 223, 4));
   board1 = spawn("script_model", (-1098.37, 807.149, 77.9892));
   board1.angles = vectorscale((0, 1, 0), 232);
-  board1 setModel("p7_can_milk_vintage_metal_painted_white");
+  board1 setmodel("p7_can_milk_vintage_metal_painted_white");
   level.cleandepositpoints = array((-353.721, -175.155, 9), (563.775, -119.256, 84.125), (-654.231, -1578.36, -5.74457), (-1059.83, 1145.25, 80));
 }
 
 function precache() {}
 
-function add_raps_omit_locations(&omit_locations) {
-  if(!isDefined(omit_locations)) {
+function add_raps_omit_locations( & omit_locations) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (-990, 80, 72);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (-640, 1020, 93);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (1810, -517, 243);
-  if(!isDefined(omit_locations)) {
+  if(!isdefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
@@ -101,14 +101,14 @@ function add_raps_omit_locations(&omit_locations) {
   omit_locations[omit_locations.size] = (1139, -2779, -20);
 }
 
-function add_raps_drop_locations(&drop_candidate_array) {
-  if(!isDefined(drop_candidate_array)) {
+function add_raps_drop_locations( & drop_candidate_array) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
   }
   drop_candidate_array[drop_candidate_array.size] = (-350, 1050, 60);
-  if(!isDefined(drop_candidate_array)) {
+  if(!isdefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);

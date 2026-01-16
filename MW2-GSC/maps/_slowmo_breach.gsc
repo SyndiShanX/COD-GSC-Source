@@ -89,19 +89,19 @@ slowmo_breach_init() {
   create_slowmo_breaches_from_entities();
 
   // this trigger will show the breach icon on the door when you look at it
-  icon_triggers = getEntArray("trigger_multiple_breachIcon", "classname");
+  icon_triggers = GetEntArray("trigger_multiple_breachIcon", "classname");
   array_thread(icon_triggers, ::icon_trigger_setup);
 
   // entities that aren't meant to exist if a slowmo breach will happen
-  breach_deletables = getEntArray("breach_solid_delete", "targetname");
+  breach_deletables = GetEntArray("breach_solid_delete", "targetname");
   array_call(breach_deletables, ::ConnectPaths);
   array_thread(breach_deletables, ::self_delete);
 
   // entities that aren't meant to exist if a slowmo breach will happen
-  breach_deletables = getEntArray("breach_delete", "targetname");
+  breach_deletables = GetEntArray("breach_delete", "targetname");
   array_thread(breach_deletables, ::self_delete);
 
-  breach_fx = getEntArray("breach_fx", "targetname");
+  breach_fx = GetEntArray("breach_fx", "targetname");
   array_thread(breach_fx, ::breach_fx_setup);
 
   level.has_special_breach_anim["aa12"] = true;
@@ -357,32 +357,31 @@ slowmo_breach_init() {
 }
 
 check_missing_animation() {
-  if(!isDefined(self.animation)) {
+  if(!isdefined(self.animation))
     return;
-  }
 
   if(self will_be_manhandled() && self.script_noteworthy == "manhandled") {
-    AssertEx(isDefined(self.target), "Manhandled spawner with export " + self.export+" has no target.");
+    AssertEx(IsDefined(self.target), "Manhandled spawner with export " + self.export+" has no target.");
     spawner = GetEnt(self.target, "targetname");
-    AssertEx(isDefined(spawner) && IsSpawner(spawner), "Manhandled spawner with export " + self.export+" has no spawner.");
+    AssertEx(IsDefined(spawner) && IsSpawner(spawner), "Manhandled spawner with export " + self.export+" has no spawner.");
     level.manhandled_spawners[self.export] = spawner;
   }
 
   parms = self.script_parameters;
-  if(isDefined(parms)) {
+  if(IsDefined(parms)) {
     level.missing_animation_parameters[parms] = true;
   }
 
   level.missing_animations[self.animation] = true;
+
+
 }
 
 is_breach_anim_loop_setup(anime, index, animation) {
-  if(!isDefined(level.scr_anim["generic"][anime])) {
+  if(!isdefined(level.scr_anim["generic"][anime]))
     return false;
-  }
-  if(!isDefined(level.scr_anim["generic"][anime][index])) {
+  if(!isdefined(level.scr_anim["generic"][anime][index]))
     return false;
-  }
 
   //	if( level.scr_anim[ "generic" ][ anime ][ index ] != animation )
   //		return false;
@@ -392,9 +391,8 @@ is_breach_anim_loop_setup(anime, index, animation) {
 }
 
 is_breach_anim_single_setup(anime, animation) {
-  if(!isDefined(level.scr_anim["generic"][anime])) {
+  if(!isdefined(level.scr_anim["generic"][anime]))
     return false;
-  }
 
   //	if( level.scr_anim[ "generic" ][ anime ] != animation )
   //		return false;
@@ -404,9 +402,8 @@ is_breach_anim_single_setup(anime, animation) {
 }
 
 dump_missing_anims() {
-  if(!level.missing_animations.size) {
+  if(!level.missing_animations.size)
     return;
-  }
 
   PrintLn("^3Add these lines to the generic_human.atr section of " + level.script + "_anim.gsc:");
   PrintLn("	// _slowmo_breach anims");
@@ -436,42 +433,36 @@ dump_missing_anims() {
   foreach(anime, _ in level.missing_animations) {
     printed = false;
 
-    if(isDefined(level.scr_stub["generic"][anime])) {
+    if(IsDefined(level.scr_stub["generic"][anime])) {
       if(IsArray(level.scr_stub["generic"][anime])) {
         foreach(index, animation in level.scr_stub["generic"][anime]) {
-          if(!is_breach_anim_loop_setup(anime, index, animation)) {
+          if(!is_breach_anim_loop_setup(anime, index, animation))
             printed = true;
-          }
         }
       } else {
-        if(!is_breach_anim_single_setup(anime, level.scr_stub["generic"][anime])) {
+        if(!is_breach_anim_single_setup(anime, level.scr_stub["generic"][anime]))
           printed = true;
-        }
       }
     }
 
     foreach(add in adds) {
       check_anime = anime + add;
-      if(!isDefined(level.scr_stub["generic"][check_anime])) {
+      if(!isdefined(level.scr_stub["generic"][check_anime]))
         continue;
-      }
 
       if(IsArray(level.scr_stub["generic"][check_anime])) {
         foreach(index, animation in level.scr_stub["generic"][check_anime]) {
-          if(!is_breach_anim_loop_setup(check_anime, index, animation)) {
+          if(!is_breach_anim_loop_setup(check_anime, index, animation))
             printed = true;
-          }
         }
       } else {
-        if(!is_breach_anim_single_setup(check_anime, level.scr_stub["generic"][check_anime])) {
+        if(!is_breach_anim_single_setup(check_anime, level.scr_stub["generic"][check_anime]))
           printed = true;
-        }
       }
     }
 
-    if(printed) {
+    if(printed)
       level.missing_animations[anime] = undefined;
-    }
   }
 
   PrintLn(" ");
@@ -686,6 +677,7 @@ breach_anims() {
   // fallback anims
   level.scr_anim["generic"]["hostage_knees_loop"][0] = % hostage_knees_idle;
   level.scr_anim["generic"]["hostage_knees_loop"][1] = % hostage_knees_twitch;
+
 }
 
 friendly_animations() {
@@ -696,8 +688,8 @@ friendly_animations() {
 }
 
 breach_fx_setup() {
-  AssertEx(isDefined(self.script_fxid), "Breach_fx at " + self.origin + " has no script_fxid");
-  AssertEx(isDefined(self.script_slowmo_breach), "Breach_fx at " + self.origin + " has no script_slowmo_breach");
+  AssertEx(IsDefined(self.script_fxid), "Breach_fx at " + self.origin + " has no script_fxid");
+  AssertEx(IsDefined(self.script_slowmo_breach), "Breach_fx at " + self.origin + " has no script_slowmo_breach");
   fxid = self.script_fxid;
   index = self.script_slowmo_breach;
   ent = createExploder(fxid);
@@ -713,22 +705,23 @@ create_slowmo_breaches_from_entities() {
   // construct the slow mo breach scenes from breach entities in the level
   breaches = [];
 
-  left_door_posts = getEntArray("breach_left_org", "targetname");
-  right_door_posts = getEntArray("breach_right_org", "targetname");
-  breach_enemy_spawners = getEntArray("breach_enemy_spawner", "targetname");
-  breach_hostage_spawners = getEntArray("breach_hostage_spawner", "targetname");
-  breach_friendlyenemy_spawners = getEntArray("breach_friendlyenemy_spawner", "targetname");
-  breach_friendlyhostage_spawners = getEntArray("breach_friendlyhostage_spawner", "targetname");
-  breach_coopenemy_spawners = getEntArray("breach_coopenemy_spawner", "targetname"); // optional enemies for multi - door coop breaches for a door that neither player breaches
-  breach_coophostage_spawners = getEntArray("breach_coophostage_spawner", "targetname"); // optional hostages for multi - door coop breaches for a door that neither player breaches
-  breach_path_solids = getEntArray("breach_solid", "targetname");
-  breach_door_volumes = getEntArray("breach_door_volume", "targetname");
-  breach_safe_volumes = getEntArray("breach_safe_volume", "targetname");
-  breach_triggers = getEntArray("trigger_use_breach", "classname");
-  breach_lookat_triggers = getEntArray("trigger_multiple_breachIcon", "classname");
-  breach_start_triggers = getEntArray("trigger_use_breach", "classname");
-  breach_damage_trigger = getEntArray("breach_damage_trigger", "targetname");
+  left_door_posts = GetEntArray("breach_left_org", "targetname");
+  right_door_posts = GetEntArray("breach_right_org", "targetname");
+  breach_enemy_spawners = GetEntArray("breach_enemy_spawner", "targetname");
+  breach_hostage_spawners = GetEntArray("breach_hostage_spawner", "targetname");
+  breach_friendlyenemy_spawners = GetEntArray("breach_friendlyenemy_spawner", "targetname");
+  breach_friendlyhostage_spawners = GetEntArray("breach_friendlyhostage_spawner", "targetname");
+  breach_coopenemy_spawners = GetEntArray("breach_coopenemy_spawner", "targetname"); // optional enemies for multi - door coop breaches for a door that neither player breaches
+  breach_coophostage_spawners = GetEntArray("breach_coophostage_spawner", "targetname"); // optional hostages for multi - door coop breaches for a door that neither player breaches
+  breach_path_solids = GetEntArray("breach_solid", "targetname");
+  breach_door_volumes = GetEntArray("breach_door_volume", "targetname");
+  breach_safe_volumes = GetEntArray("breach_safe_volume", "targetname");
+  breach_triggers = GetEntArray("trigger_use_breach", "classname");
+  breach_lookat_triggers = GetEntArray("trigger_multiple_breachIcon", "classname");
+  breach_start_triggers = GetEntArray("trigger_use_breach", "classname");
+  breach_damage_trigger = GetEntArray("breach_damage_trigger", "targetname");
 
+  /#
   level.missing_animations = [];
   level.missing_animation_parameters = [];
   level.manhandled_spawners = [];
@@ -741,17 +734,17 @@ create_slowmo_breaches_from_entities() {
   array_thread(level.manhandled_spawners, ::check_missing_animation);
 
   dump_missing_anims();
-
-  level.scr_stub = undefined;
+  # /
+    level.scr_stub = undefined;
 
   foreach(post in left_door_posts) {
     index = post.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach door post at " + post.origin + " had no script_slowmo_breach");
-    AssertEx(!isDefined(breaches[index]), "Breach door post at " + post.origin + " used script_slowmo_breach " + index + " which is already in use elsewhere in the level. Each breach must have its own script_slowmo_breach.");
+    AssertEx(IsDefined(index), "Breach door post at " + post.origin + " had no script_slowmo_breach");
+    AssertEx(!isdefined(breaches[index]), "Breach door post at " + post.origin + " used script_slowmo_breach " + index + " which is already in use elsewhere in the level. Each breach must have its own script_slowmo_breach.");
 
     // set up door type - default is "wood"
     doorType = "wood";
-    if(isDefined(post.script_slowmo_breach_doortype)) {
+    if(IsDefined(post.script_slowmo_breach_doortype)) {
       switch (post.script_slowmo_breach_doortype) {
         case "wood":
         case "estate_wood":
@@ -766,7 +759,7 @@ create_slowmo_breaches_from_entities() {
       }
     }
 
-    ent = spawnStruct();
+    ent = SpawnStruct();
     ent.left_post = post;
     ent.doorType = doorType;
     ent.spawners = [];
@@ -788,17 +781,17 @@ create_slowmo_breaches_from_entities() {
 
   foreach(post in right_door_posts) {
     index = post.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach door post at " + post.origin + " had no script_slowmo_breach");
-    AssertEx(isDefined(breaches[index]), "Breach door post at " + post.origin + " used script_slowmo_breach " + index + " but there is no corrosponding left_door_post with that script_slowmo_breach.");
+    AssertEx(IsDefined(index), "Breach door post at " + post.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(breaches[index]), "Breach door post at " + post.origin + " used script_slowmo_breach " + index + " but there is no corrosponding left_door_post with that script_slowmo_breach.");
 
     breaches[index].right_post = post;
 
     //create animation entity for friendly breaches from right door post
-    anim_org = spawn("script_origin", post.origin);
+    anim_org = Spawn("script_origin", post.origin);
     anim_org.angles = post.angles;
 
     // translate the anim_ent into the proper position for the animations
-    ent = spawnStruct();
+    ent = SpawnStruct();
     ent.entity = anim_org;
     ent.yaw = -90;
     ent translate_local();
@@ -831,55 +824,54 @@ create_slowmo_breaches_from_entities() {
   AssertEx(breach_lookat_triggers.size, "No breach lookat trigger!");
   foreach(trigger in breach_lookat_triggers) {
     index = trigger.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach lookat trigger at " + trigger.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(index), "Breach lookat trigger at " + trigger.origin + " had no script_slowmo_breach");
     breaches[index].lookat_triggers[breaches[index].lookat_triggers.size] = trigger;
     AssertEx(breaches[index].lookat_triggers.size < 2, "You have more than one trigger_multiple_breachIcon associated with script_slowmo_breach number " + index + ". Only one lookat trigger is allowed per breach door");
 
-    //get the script origin targeted by lookat trig
+    //get the script origin targeted by lookat trig 
     trigger_org = GetEnt(trigger.target, "targetname");
     trigger.breach_origin = trigger_org.origin;
-    AssertEx(isDefined(trigger_org), "Breach_lookat_trigger at " + trigger.origin + " needs to target a script_origin to be used for the breach icon.");
+    AssertEx(IsDefined(trigger_org), "Breach_lookat_trigger at " + trigger.origin + " needs to target a script_origin to be used for the breach icon.");
 
     //get the room volume targeted by the look_at trigger's script_origin
     room_volume = GetEnt(trigger_org.target, "targetname");
-    AssertEx(isDefined(room_volume), "The script origin targeted by the breach_lookat_trigger at " + trigger_org.origin + " needs to target an info_volume that encompasses the room being breached.");
+    AssertEx(IsDefined(room_volume), "The script origin targeted by the breach_lookat_trigger at " + trigger_org.origin + " needs to target an info_volume that encompasses the room being breached.");
     room_volume.breached = false;
     breaches[index].room_volume = room_volume;
 
-    //Show icon on door origin
+    //Show icon on door origin 
     trigger_org thread breach_icon_think(trigger, index, room_volume);
 
     //initialize a flag for designer use (set when this room volume is breached and cleared)
     sFlagname = room_volume.script_flag;
-    AssertEx(isDefined(sFlagname), "Breach room volume at " + room_volume.origin + " needs to have a unique script_flag key to set a flag once it has been breached and cleared.");
+    AssertEx(IsDefined(sFlagname), "Breach room volume at " + room_volume.origin + " needs to have a unique script_flag key to set a flag once it has been breached and cleared.");
     flag_init(sFlagname);
   }
 
   foreach(trigger in breach_start_triggers) {
     trigger UseTriggerRequireLookAt();
     index = trigger.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach trigger at " + trigger.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(index), "Breach trigger at " + trigger.origin + " had no script_slowmo_breach");
     breaches[index].trigger = trigger;
-    if(isDefined(trigger.script_breachgroup)) {
+    if(IsDefined(trigger.script_breachgroup))
       trigger thread breach_group_trigger_think();
-    }
   }
 
   foreach(volume in breach_door_volumes) {
     index = volume.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach volume at " + volume.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(index), "Breach volume at " + volume.origin + " had no script_slowmo_breach");
     breaches[index].door_volume = volume;
   }
 
   foreach(volume in breach_safe_volumes) {
     index = volume.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach safe volume at " + volume.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(index), "Breach safe volume at " + volume.origin + " had no script_slowmo_breach");
     breaches[index].safe_volume = volume;
   }
 
   foreach(pathSolid in breach_path_solids) {
     index = pathSolid.script_slowmo_breach;
-    AssertEx(isDefined(index), "Breach path solid at " + pathSolid.origin + " had no script_slowmo_breach");
+    AssertEx(IsDefined(index), "Breach path solid at " + pathSolid.origin + " had no script_slowmo_breach");
     breaches[index].path_solids[breaches[index].path_solids.size] = pathSolid;
   }
 
@@ -889,7 +881,7 @@ create_slowmo_breaches_from_entities() {
 
   foreach(trigger in breach_damage_trigger) {
     index = trigger.script_slowmo_breach;
-    Assert(isDefined(index));
+    Assert(IsDefined(index));
     trigger thread slowmo_breach_damage_trigger_think(index);
   }
 
@@ -913,32 +905,31 @@ create_slowmo_breaches_from_entities() {
 =============
 */
 objective_breach(obj, breach_index1, breach_index2, breach_index3, breach_index4) {
-  Objective_SetPointerTextOverride(obj, &"SCRIPT_WAYPOINT_BREACH");
+  Objective_SetPointerTextOverride(obj, & "SCRIPT_WAYPOINT_BREACH");
   objective_position(obj, (0, 0, 0));
 
   breaches = [];
-  if(isDefined(breach_index1)) {
+  if(isdefined(breach_index1)) {
     breaches[breaches.size] = breach_index1;
   }
-  if(isDefined(breach_index2)) {
+  if(isdefined(breach_index2)) {
     breaches[breaches.size] = breach_index2;
   }
-  if(isDefined(breach_index3)) {
+  if(isdefined(breach_index3)) {
     breaches[breaches.size] = breach_index3;
   }
-  if(isDefined(breach_index4)) {
+  if(isdefined(breach_index4)) {
     breaches[breaches.size] = breach_index4;
   }
 
   count = 0;
 
   foreach(breach_index in breaches) {
-    assertex(isDefined(level.breach_groups[breach_index]), "No breach group " + breach_index);
+    assertex(isdefined(level.breach_groups[breach_index]), "No breach group " + breach_index);
 
     ent = level.breach_groups[breach_index].left_post;
-    if(!isDefined(ent)) {
+    if(!isdefined(ent))
       return;
-    }
 
     right = anglestoright(ent.angles);
     origin = ent.origin + right * -22.5 + (0, 0, 56);
@@ -953,17 +944,15 @@ assign_script_breachgroup_to_ents(breach_ents) {
     foreach(breach_index, breach_array in level.breach_groups) {
       foreach(trigger in breach_array.lookat_triggers) {
         // close enough?
-        if(distance(ent.origin, trigger.breach_origin) > 80) {
+        if(distance(ent.origin, trigger.breach_origin) > 80)
           continue;
-        }
 
         ent.script_slowmo_breach = breach_index;
         found_breach = true;
         break;
       }
-      if(found_breach) {
+      if(found_breach)
         break;
-      }
     }
     assertex(found_breach, "Didnt find breach for " + ent.targetname + " at " + ent.origin);
   }
@@ -984,9 +973,8 @@ slowmo_breach_damage_trigger_think(index) {
   ai = GetAIArray();
   ai = array_merge(ai, level.players);
   foreach(guy in ai) {
-    if(guy IsTouching(self)) {
+    if(guy IsTouching(self))
       return;
-    }
   }
   RadiusDamage(self.origin, self.radius, 500, 500);
   self Delete();
@@ -1011,19 +999,19 @@ breach_icon_think(trigger, index, room_volume) {
   icon SetWayPoint(true, true);
 
   // spawn a hidden charge model so it gets streamed in early
-  model = spawn("script_model", self.origin);
-  model setModel("mil_frame_charge");
+  model = Spawn("script_model", self.origin);
+  model SetModel("mil_frame_charge");
   model HidePart("j_frame_charge");
 
   wait(0.05);
   sFlag = "breach_door_icon_" + index;
   flag_wait(sFlag);
-  while(!room_volume.breached) {
+  while (!room_volume.breached) {
     /*
     // using objective marker for breaches now
     wait( 0.05 );
     icon FadeOverTime( 0.2 );
-    while( flag( sFlag ) )
+    while ( flag( sFlag ) )
     {
     	icon.alpha = 0.3;
     	wait( 0.05 );
@@ -1039,26 +1027,25 @@ breach_icon_think(trigger, index, room_volume) {
 
 breach_spawner_setup(breaches, type) {
   index = self.script_slowmo_breach;
-  AssertEx(isDefined(index), "Breach spawner at " + self.origin + " had no script_slowmo_breach");
+  AssertEx(IsDefined(index), "Breach spawner at " + self.origin + " had no script_slowmo_breach");
   group = 0;
-  if(isDefined(self.script_slowmo_breach_spawners)) {
+  if(IsDefined(self.script_slowmo_breach_spawners)) {
     if((type == "enemy") || (type == "hostage")) // randomized decisions of which .script_slowmo_breach_spawners group only is supported for anemies / hostages in the door breached by the player...not by frienlies or other atrrangements
       group = self.script_slowmo_breach_spawners;
   }
 
-  if(!isDefined(breaches[index].spawners[type][group])) {
+  if(!isdefined(breaches[index].spawners[type][group]))
     breaches[index].spawners[type][group] = [];
-  }
 
   array = breaches[index].spawners[type][group];
   array[array.size] = self;
   breaches[index].spawners[type][group] = array;
 
-  if(breaches.size) {
+  if(breaches.size)
     return breaches;
-  } else {
+  else
     return undefined;
-  }
+
 }
 
 slowmo_breach_think(breach_array, breach_index) {
@@ -1078,38 +1065,38 @@ slowmo_breach_think(breach_array, breach_index) {
   breach_coophostage_spawners = [];
 
   // I guess this was put in here to mitigate the error of LDs placing "script_slowmo_breach_spawners" numbers by mistake on groups of AI for friendlies (?) JK
-  if(isDefined(breach_array.spawners["friendlyenemy"][0])) {
+  if(IsDefined(breach_array.spawners["friendlyenemy"][0])) {
     breach_friendlyenemy_spawners = breach_array.spawners["friendlyenemy"][0];
     breach_array.spawners["friendlyenemy"] = breach_friendlyenemy_spawners;
   }
-  if(isDefined(breach_array.spawners["friendlyhostage"][0])) {
+  if(IsDefined(breach_array.spawners["friendlyhostage"][0])) {
     breach_friendlyhostage_spawners = breach_array.spawners["friendlyhostage"][0];
     breach_array.spawners["friendlyhostage"] = breach_friendlyhostage_spawners;
   }
-  if(isDefined(breach_array.spawners["coopenemy"][0])) {
+  if(IsDefined(breach_array.spawners["coopenemy"][0])) {
     breach_coopenemy_spawners = breach_array.spawners["coopenemy"][0];
     breach_array.spawners["coopenemy"] = breach_coopenemy_spawners;
   }
-  if(isDefined(breach_array.spawners["coophostage"][0])) {
+  if(IsDefined(breach_array.spawners["coophostage"][0])) {
     breach_coophostage_spawners = breach_array.spawners["coophostage"][0];
     breach_array.spawners["coophostage"] = breach_coophostage_spawners;
   }
 
   // translate the posts into the proper positions for the animations
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.entity = left_door_post;
   ent.forward = 5;
   ent.right = 6;
   ent.yaw = -90;
   ent translate_local();
 
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.entity = right_door_post;
   ent.right = -2;
   ent.yaw = 90;
   ent translate_local();
 
-  //	hostages = getEntArray( "hostage_delete", "script_noteworthy" );
+  //	hostages = GetEntArray( "hostage_delete", "script_noteworthy" );
   //	array_thread( hostages, maps\_utility::self_delete );
 
   // remove all but one random subset of the spawners
@@ -1124,17 +1111,15 @@ slowmo_breach_think(breach_array, breach_index) {
   //AssertEx( keys.size, "Slowmo breach set up with no spawners!" );
   if(keys.size) {
     random_key = random(keys);
-    if(isDefined(breach_enemy_spawners[random_key])) {
+    if(IsDefined(breach_enemy_spawners[random_key]))
       breach_enemy_spawners = breach_enemy_spawners[random_key];
-    } else {
+    else
       breach_enemy_spawners = [];
-    }
 
-    if(isDefined(breach_hostage_spawners[random_key])) {
+    if(IsDefined(breach_hostage_spawners[random_key]))
       breach_hostage_spawners = breach_hostage_spawners[random_key];
-    } else {
+    else
       breach_hostage_spawners = [];
-    }
   }
 
   breach_array.spawners["enemy"] = breach_enemy_spawners;
@@ -1148,11 +1133,10 @@ slowmo_breach_think(breach_array, breach_index) {
   array_thread(breach_coopenemy_spawners, ::add_spawn_function, ::breach_enemy_spawner_think);
   array_thread(breach_coophostage_spawners, ::add_spawn_function, ::breach_hostage_spawner_think);
 
-  // Hold && 1 to breach.
+  // Hold &&1 to breach.
   trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
-  if(!isDefined(level.breach_use_triggers)) {
+  if(!isdefined(level.breach_use_triggers))
     level.breach_use_triggers = [];
-  }
   level.breach_use_triggers = array_add(level.breach_use_triggers, trigger);
 
   // pick door type
@@ -1180,23 +1164,22 @@ slowmo_breach_think(breach_array, breach_index) {
   }
 
   door = spawn_anim_model(doorAnimModel);
-  Assert(isDefined(door));
-  if(breach_array.doorType == "none" || breach_array.doorType == "estate_wood_backwards") {
+  Assert(IsDefined(door));
+  if(breach_array.doorType == "none" || breach_array.doorType == "estate_wood_backwards")
     door Hide();
-  }
 
   level.breach_doors = [];
   level.breach_doors[breach_index] = door;
 
   charge = spawn_anim_model("breach_door_charge");
-  Assert(isDefined(charge));
+  Assert(IsDefined(charge));
   charge hide_notsolid();
 
   left_door_post.scene_models = [];
 
   left_door_post add_scene_model("active_breacher_rig");
   active_breacher_rig = left_door_post.scene_models["active_breacher_rig"];
-  Assert(isDefined(active_breacher_rig));
+  Assert(IsDefined(active_breacher_rig));
   AssertEx(IsSubStr(active_breacher_rig.model, "viewhands_player"), "View hands must be player world hands, not some random model.");
   active_breacher_rig Hide();
 
@@ -1204,7 +1187,7 @@ slowmo_breach_think(breach_array, breach_index) {
   if(is_coop()) {
     left_door_post add_coop_scene_models();
     passive_breacher_rig = left_door_post.scene_models["passive_breacher_rig"]; // only exists in coop
-    Assert(isDefined(passive_breacher_rig));
+    Assert(IsDefined(passive_breacher_rig));
     AssertEx(IsSubStr(passive_breacher_rig.model, "viewhands_player"), "View hands must be player world hands, not some random model.");
     passive_breacher_rig Hide();
   }
@@ -1217,41 +1200,32 @@ slowmo_breach_think(breach_array, breach_index) {
   left_door_post anim_first_frame_solo(door, "breach");
   left_door_post anim_first_frame_solo(charge, "breach");
   left_door_post anim_first_frame_solo(active_breacher_rig, "breach_player_anim");
-  if(is_coop()) {
+  if(is_coop())
     left_door_post anim_first_frame_solo(passive_breacher_rig, "breach_player_anim");
-  }
 
   left_door_post wait_for_breach_or_deletion(breach_array);
 
-  foreach(model in left_door_post.scene_models) {
-    model Delete();
-  }
+  foreach(model in left_door_post.scene_models)
+  model Delete();
 
-  if(isDefined(trigger)) {
+  if(IsDefined(trigger))
     trigger Delete();
-  }
-  if(isDefined(door)) {
+  if(IsDefined(door))
     door Delete();
-  }
-  if(isDefined(charge)) {
+  if(IsDefined(charge))
     charge Delete();
-  }
-  if(isDefined(left_door_post)) {
+  if(IsDefined(left_door_post))
     left_door_post Delete();
-  }
-  if(isDefined(right_door_post)) {
+  if(IsDefined(right_door_post))
     right_door_post Delete();
-  }
 }
 
 breach_should_be_skipped(script_slowmo_breach) {
-  if(!isDefined(level.skip_breach)) {
+  if(!isdefined(level.skip_breach))
     return false;
-  }
 
-  if(!isDefined(level.skip_breach[script_slowmo_breach])) {
+  if(!isdefined(level.skip_breach[script_slowmo_breach]))
     return false;
-  }
 
   return true;
 }
@@ -1260,23 +1234,22 @@ coop_player_touching_valid_door_volume(door_volume, other_player) {
   door_volumes = [];
   door_volumes[0] = door_volume;
 
-  if(isDefined(door_volume.script_breachgroup)) {
+  if(IsDefined(door_volume.script_breachgroup)) {
     door_volumes = get_door_volumes_from_breachgroup(door_volume.script_breachgroup);
   }
 
   foreach(volume in door_volumes) {
-    if(other_player IsTouching(volume)) {
+    if(other_player IsTouching(volume))
       return true;
-    }
   }
   return false;
 }
 
 get_door_volumes_from_breachgroup(breachgroup) {
   aArray = [];
-  aDoorVolumes = getEntArray("breach_door_volume", "targetname");
+  aDoorVolumes = GetEntArray("breach_door_volume", "targetname");
   foreach(volume in aDoorVolumes) {
-    if((isDefined(volume.script_breachgroup)) && (volume.script_breachgroup == breachgroup)) {
+    if((IsDefined(volume.script_breachgroup)) && (volume.script_breachgroup == breachgroup)) {
       aArray[aArray.size] = volume;
     }
   }
@@ -1289,74 +1262,65 @@ breach_participants_ready_to_proceed(player, breach_friendlies, door_volume) {
     /*		This might need to be revisited. Currently the script doesn't support players at two
     		breach points, thus being two active breachers. If we need it, we'll revisit the code
     		but until then simply requiring everyone to be in the same breach volume in co-op.
-    		if( !isDefined( breach_near_player( get_other_player( player ) ) ) ) {
+    		if( !isdefined( breach_near_player( get_other_player( player ) ) ) )
     			return false; */
-  }
 
-  other_player = get_other_player(player);
-  if(isDefined(other_player.coop_downed) && (other_player.coop_downed)) {
-    return false;
-  }
-  if(coop_player_touching_valid_door_volume(door_volume, other_player)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// Do we need to care about AI friendlies at all?
-if(breach_friendlies.size == 0) {
-  return true;
-}
-if(!room_has_multiple_doors(door_volume)) {
-  return true;
-}
-
-// Check if friendlies are ready to breach...
-if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
-  if(GetDvar("breach_requires_friendlies_in_position") == "1") {
-    if(!breachfriendlies_can_teleport(breach_friendlies, door_volume)) {
+    other_player = get_other_player(player);
+    if(IsDefined(other_player.coop_downed) && (other_player.coop_downed))
       return false;
+    if(coop_player_touching_valid_door_volume(door_volume, other_player))
+      return true;
+    else
+      return false;
+  }
+
+  // Do we need to care about AI friendlies at all?
+  if(breach_friendlies.size == 0)
+    return true;
+  if(!room_has_multiple_doors(door_volume))
+    return true;
+
+  // Check if friendlies are ready to breach...
+  if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
+    if(GetDvar("breach_requires_friendlies_in_position") == "1") {
+      if(!breachfriendlies_can_teleport(breach_friendlies, door_volume))
+        return false;
     }
   }
-}
 
-return true;
+  return true;
 }
 
 wait_for_breach_or_deletion(ent) {
   trigger = ent.trigger;
 
-  if(!isDefined(trigger)) {
+  if(!isdefined(trigger)) {
     return; // the breach was deleted
   }
 
   door_volume = ent.door_volume;
 
   trigger endon("death");
-  for(;;) {
+  for (;;) {
     trigger waittill("trigger", other, passive);
 
-    if(gettime() == level.breach_passive_time) {
+    if(gettime() == level.breach_passive_time)
       passive = level.breach_passive_player;
-    }
 
-    is_passive = isDefined(passive);
+    is_passive = isdefined(passive);
 
-    if(!ent.enabled) {
+    if(!ent.enabled)
       return;
-    }
 
     if(isalive(other) && !is_passive) {
-      if(breach_failed_to_start()) {
+      if(breach_failed_to_start())
         continue;
-      }
     }
 
     /*----------------------------------------------
     MAKE SURE THERE ARE NO ENEMIES, IF WE CARE
     ------------------------------------------------*/
-    if((isDefined(ent.safe_volume)) && (!is_specialop())) {
+    if((IsDefined(ent.safe_volume)) && (!is_specialop())) {
       if(IsPlayer(other) && IsAlive(other)) {
         enemies = ent.safe_volume get_ai_touching_volume("axis");
         if(enemies.size) {
@@ -1372,14 +1336,12 @@ wait_for_breach_or_deletion(ent) {
     breach_friendlies = get_available_breachfriendlies(door_volume);
 
     if(IsPlayer(other) && IsAlive(other)) {
-      if(breach_should_be_skipped(trigger.script_slowmo_breach)) {
+      if(breach_should_be_skipped(trigger.script_slowmo_breach))
         break;
-      }
 
       if(breach_participants_ready_to_proceed(other, breach_friendlies, door_volume)) {
-        if(player_breach(ent, other)) {
+        if(player_breach(ent, other))
           break;
-        }
       } else {
         thread breach_friendly_hint();
       }
@@ -1400,7 +1362,7 @@ breachfriendlies_can_teleport(breachFriendlies, door_volume) {
   player_volume = get_player_volume(door_volume);
 
   foreach(guy in breachFriendlies) {
-    if(isDefined(player_volume)) {
+    if(IsDefined(player_volume)) {
       if(guy goalpos_within_volume(player_volume)) {
         continue;
       }
@@ -1473,9 +1435,8 @@ breach_hint_create(message) {
   level endon("breach_hint_cleanup");
 
   hint_offset = 20;
-  if(issplitscreen()) {
+  if(issplitscreen())
     hint_offset = -23;
-  }
 
   thread hint(message, 3, hint_offset);
   thread breach_hint_cleanup();
@@ -1486,33 +1447,29 @@ breach_hint_cleanup() {
   level endon("breach_hint_cleanup");
 
   foreach(trigger in level.breach_use_triggers) {
-    if(isDefined(trigger)) {
+    if(isdefined(trigger))
       trigger SetHintString("");
-    }
   }
 
   level waittill_notify_or_timeout("breaching", 3);
   hint_fade();
 
   foreach(trigger in level.breach_use_triggers) {
-    if(isDefined(trigger)) {
+    if(isdefined(trigger))
       trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
-    }
   }
 }
 
 room_has_multiple_doors(door_volume) {
-  if(isDefined(door_volume.script_breachgroup)) {
+  if(IsDefined(door_volume.script_breachgroup))
     return true;
-  }
 
   return false;
 }
 
 breach_friendlies_take_grenades() {
-  if(!isDefined(level.breachfriendlies)) {
+  if(!isdefined(level.breachfriendlies))
     return;
-  }
 
   // This ensures that the friendlies were actually a part of *this* breach action later.
   level.breachfriendlies_grenades_empty = true;
@@ -1524,13 +1481,11 @@ breach_friendlies_take_grenades() {
 }
 
 breach_friendlies_restore_grenades() {
-  if(!isDefined(level.breachfriendlies)) {
+  if(!isdefined(level.breachfriendlies))
     return;
-  }
 
-  if(!isDefined(level.breachfriendlies_grenades_empty)) {
+  if(!isdefined(level.breachfriendlies_grenades_empty))
     return;
-  }
 
   foreach(guy in level.breachfriendlies) {
     guy.grenadeammo = guy.grenadeammo_prebreach;
@@ -1542,7 +1497,7 @@ breach_friendlies_restore_grenades() {
 
 breach_friendlies_ready_at_other_door(door_volume, teleportOk) {
   script_breachgroup = door_volume.script_breachgroup;
-  AssertEx(isDefined(script_breachgroup), "Breach door volume at " + door_volume.origin + " has no script_breachgroup assigned even though it is a multiple entry room");
+  AssertEx(IsDefined(script_breachgroup), "Breach door volume at " + door_volume.origin + " has no script_breachgroup assigned even though it is a multiple entry room");
 
   aDoorVolumes = get_door_volumes_from_breachgroup(door_volume.script_breachgroup);
 
@@ -1555,7 +1510,7 @@ breach_friendlies_ready_at_other_door(door_volume, teleportOk) {
   foreach(guy in level.breachfriendlies) {
     // if teleporting this guy, as long as he's on the way to the volume, we don't care
     //if he's not touching his volume if we can't see him
-    if(isDefined(teleportOk) && teleportOk) {
+    if(IsDefined(teleportOk) && teleportOk) {
       if(guy goalpos_within_volume(volume_to_check)) {
         if(guy friendly_can_teleport()) {
           return true;
@@ -1563,9 +1518,8 @@ breach_friendlies_ready_at_other_door(door_volume, teleportOk) {
       }
     }
 
-    if(guy IsTouching(volume_to_check)) {
+    if(guy IsTouching(volume_to_check))
       return true;
-    }
   }
 
   return false;
@@ -1586,9 +1540,8 @@ set_room_to_breached(trigger, room_volume) {
   room_volume.breached = true;
 
   breach_notify = get_breach_notify(trigger.script_breachgroup);
-  if(isDefined(trigger.script_breachgroup)) {
+  if(IsDefined(trigger.script_breachgroup))
     level notify(breach_notify);
-  }
 
   room_volume notify("breached");
   trigger trigger_off();
@@ -1608,7 +1561,7 @@ breachless_door_opens(breach_array) {
 
   array_call(solids, ::ConnectPaths);
   array_thread(solids, ::self_delete);
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.entity = door;
   ent.forward = 4;
   ent.right = 10;
@@ -1616,14 +1569,12 @@ breachless_door_opens(breach_array) {
   ent translate_local();
   charge Delete();
 
-  if(!is_coop()) {
+  if(!is_coop())
     return;
-  }
 
   //If CO-OP, wait for the room to be breached so we can spawn AI
-  while(!room_volume.breached) {
+  while (!room_volume.breached)
     wait(0.05);
-  }
 
   //spawn specific coop AI or the AI that would have spawned if the player had breached that door
   breach_enemy_spawners = undefined;
@@ -1637,13 +1588,11 @@ breachless_door_opens(breach_array) {
     breach_hostage_spawners = breach_array.spawners["hostage"];
   }
 
-  if(breach_enemy_spawners.size) {
+  if(breach_enemy_spawners.size)
     array_call(breach_enemy_spawners, ::StalingradSpawn);
-  }
 
-  if(breach_hostage_spawners.size) {
+  if(breach_hostage_spawners.size)
     array_call(breach_hostage_spawners, ::StalingradSpawn);
-  }
 }
 
 friendlies_breach(breach_array, aBreachFriendlies) {
@@ -1667,7 +1616,7 @@ friendlies_breach(breach_array, aBreachFriendlies) {
   breachRequiresFriendlies = (GetDvar("breach_requires_friendlies_in_position") == "1");
   if(!breachRequiresFriendlies) {
     // override teleport if they're already there and we can rely on normal breaching logic
-    if(isDefined(player_volume) && breach_friendlies_ready_at_other_door(player_volume)) {
+    if(IsDefined(player_volume) && breach_friendlies_ready_at_other_door(player_volume)) {
       // now that we are switching from teleport logic to regular logic, pare down the breachfriendlies array:
       //make sure that we restrict breaching only to guys who are in the door volume
       foreach(guy in aBreachFriendlies) {
@@ -1687,7 +1636,7 @@ friendlies_breach(breach_array, aBreachFriendlies) {
     breaching_friendly1 = get_teleport_optimized_breachfriendly(anim_ent.origin, door_volume, aBreachFriendlies, player_volume);
   }
 
-  AssertEx(isDefined(breaching_friendly1), "Can't get an AI to breach from position 1 (breaching_friendly1).");
+  AssertEx(IsDefined(breaching_friendly1), "Can't get an AI to breach from position 1 (breaching_friendly1).");
 
   aBreachFriendlies = array_remove(aBreachFriendlies, breaching_friendly1);
 
@@ -1696,9 +1645,8 @@ friendlies_breach(breach_array, aBreachFriendlies) {
     level.breachenemies = array_spawn(breach_friendlyenemy_spawners, true);
   }
 
-  if(breach_friendlyhostage_spawners.size) {
+  if(breach_friendlyhostage_spawners.size)
     array_call(breach_friendlyhostage_spawners, ::StalingradSpawn);
-  }
 
   array_call(solids, ::ConnectPaths);
   array_thread(solids, ::self_delete);
@@ -1715,7 +1663,7 @@ friendlies_breach(breach_array, aBreachFriendlies) {
     }
 
     // we don't HAVE to have a second breaching friendly
-    if(isDefined(breaching_friendly2)) {
+    if(IsDefined(breaching_friendly2)) {
       breaching_friendly2 thread friendly_breach(2, anim_ent, room_volume);
     } else {
       PrintLn("Second friendly breaching position couldn't be filled because all possible breach friendlies to teleport are visible to the player.");
@@ -1747,7 +1695,7 @@ get_teleport_optimized_breachfriendly(breachOrigin, door_volume, breachFriendlie
   // eliminate everyone the player can see and who's in the player breach volume
   sortedGuys = [];
   foreach(guy in breachFriendlies) {
-    if(isDefined(player_volume)) {
+    if(IsDefined(player_volume)) {
       if(guy goalpos_within_volume(player_volume)) {
         continue;
       }
@@ -1783,7 +1731,7 @@ get_teleport_optimized_breachfriendly(breachOrigin, door_volume, breachFriendlie
 }
 
 goalpos_within_volume(volume) {
-  if(isDefined(self.goalpos)) {
+  if(IsDefined(self.goalpos)) {
     // offset the goalpos vertically a bit to compensate for volume not touching ground
     if(origin_within_volume(self.goalpos + (0, 0, 40), volume)) {
       return true;
@@ -1794,7 +1742,7 @@ goalpos_within_volume(volume) {
 }
 
 origin_within_volume(origin, volume) {
-  testOrg = spawn("script_origin", origin);
+  testOrg = Spawn("script_origin", origin);
   returnVal = false;
 
   if(testOrg IsTouching(volume)) {
@@ -1809,9 +1757,9 @@ get_grouped_doorvolumes(doorVolume) {
   grouped_volumes = [];
   grouped_volumes[0] = doorVolume;
 
-  if(isDefined(doorVolume.script_breachgroup)) {
+  if(IsDefined(doorVolume.script_breachgroup)) {
     foreach(breach in level.breach_groups) {
-      if(!isDefined(breach.door_volume)) {
+      if(!IsDefined(breach.door_volume)) {
         continue;
       }
 
@@ -1819,11 +1767,11 @@ get_grouped_doorvolumes(doorVolume) {
         continue;
       }
 
-      if(!isDefined(breach.door_volume.script_breachgroup)) {
+      if(!IsDefined(breach.door_volume.script_breachgroup)) {
         continue;
       }
 
-      if(isDefined(breach.door_volume.script_breachgroup) && breach.door_volume.script_breachgroup == doorVolume.script_breachgroup) {
+      if(IsDefined(breach.door_volume.script_breachgroup) && breach.door_volume.script_breachgroup == doorVolume.script_breachgroup) {
         grouped_volumes[grouped_volumes.size] = breach.door_volume;
       }
     }
@@ -1847,8 +1795,8 @@ sort_breachers(ent, breach_players) {
 }
 
 player_breach(ent, player) {
-  AssertEx(isDefined(player), "player_breach() was called but player is undefined");
-  AssertEx(isDefined(ent), "player_breach() was called but ent is undefined");
+  AssertEx(IsDefined(player), "player_breach() was called but player is undefined");
+  AssertEx(IsDefined(ent), "player_breach() was called but ent is undefined");
 
   breach_players = [];
   breach_players["active"] = player;
@@ -1860,7 +1808,7 @@ player_breach(ent, player) {
     passive_breacher_rig = self.scene_models["passive_breacher_rig"];
 
     breach_array = breach_near_player(breach_players["passive"]);
-    AssertEx(isDefined(breach_array), "player_breach() was called in co-op but all players were not in position for breaching");
+    AssertEx(IsDefined(breach_array), "player_breach() was called in co-op but all players were not in position for breaching");
     if(breach_array == ent) {
       // Someone is breaching passively at this breach
       also_passive_breaching = true;
@@ -1877,12 +1825,11 @@ player_breach(ent, player) {
   }
 
   breach_players["active"] EnableBreaching();
-  if(also_passive_breaching) {
+  if(also_passive_breaching)
     breach_players["passive"] DisableWeapons();
-  }
 
   foreach(player in breach_players) {
-    if(!isDefined(level.slowmo_breach_disable_stancemod)) {
+    if(!isdefined(level.slowmo_breach_disable_stancemod)) {
       player EnableInvulnerability();
       player DisableWeaponSwitch();
       player DisableOffhandWeapons();
@@ -1894,9 +1841,8 @@ player_breach(ent, player) {
     player _disableUsability();
 
     //don't get a .prebreachCurrentWeapon twice by mistake during multiple entry point breaches
-    if(!isDefined(player.prebreachCurrentWeapon)) {
+    if(!isdefined(player.prebreachCurrentWeapon))
       player.prebreachCurrentWeapon = player GetCurrentWeapon();
-    }
   }
 
   level notify("breaching");
@@ -1909,7 +1855,7 @@ player_breach(ent, player) {
 
   // Time to set stuff based on whether or not primary breacher has a special breach anim	
   breach_sound_delay = undefined;
-  is_special_breach = isDefined(level.has_special_breach_anim[breach_players["active"].prebreachCurrentWeapon]);
+  is_special_breach = IsDefined(level.has_special_breach_anim[breach_players["active"].prebreachCurrentWeapon]);
   if(is_special_breach) {
     level.slowmo_breach_start_delay = 2.25;
     set_door_charge_anim_special();
@@ -1925,7 +1871,7 @@ player_breach(ent, player) {
 
   //need to reset these variables differently for coop, otherwise number of enemies is mis-calculated
   if(is_coop()) {
-    if(!isDefined(level.player_one_already_breached)) {
+    if(!isdefined(level.player_one_already_breached)) {
       level.breachEnemies_alive = 0;
       level.breachEnemies_active = 0;
       level.player_one_already_breached = true;
@@ -1947,22 +1893,19 @@ player_breach(ent, player) {
 
   // Smoothly hooks the player up to the animating tag
   breach_players["active"] PlayerLinkToBlend(active_breacher_rig, "tag_player", 0.2, 0.1, 0.1);
-  if(isDefined(breach_players["active"].dont_unlink_after_breach)) {
+  if(IsDefined(breach_players["active"].dont_unlink_after_breach))
     thread open_up_fov(0.2, active_breacher_rig, "tag_player", 45, 45, 90, 45);
-  }
 
   if(also_passive_breaching) {
     breach_players["passive"] PlayerLinkToBlend(passive_breacher_rig, "tag_player", 0.2, 0.1, 0.1);
-    if(isDefined(breach_players["passive"].dont_unlink_after_breach)) {
+    if(IsDefined(breach_players["passive"].dont_unlink_after_breach))
       thread open_up_fov(0.2, passive_breacher_rig, "tag_player", 45, 45, 90, 45);
-    }
   }
 
   breach_players["active"] thread take_prebreach_weapons();
 
-  if(!is_special_breach) {
+  if(!is_special_breach)
     wait(0.05);
-  }
 
   charge = self.charge;
   self thread anim_single_solo(charge, "breach");
@@ -1995,7 +1938,7 @@ player_breach(ent, player) {
   array_thread(solids, ::self_delete);
 
   foreach(player in breach_players) {
-    if(isDefined(player.dont_unlink_after_breach)) {
+    if(IsDefined(player.dont_unlink_after_breach)) {
       pause_breach_cleanup = true;
       special_gulag_adjustment();
     } else {
@@ -2014,7 +1957,7 @@ player_breach(ent, player) {
   // Otherwise you get the charge animation playing because that's the "raise weapon" anim during breaches.
   breach_players["active"] DisableBreaching();
   foreach(player in breach_players) {
-    if(!isDefined(level.slowmo_breach_disable_stancemod)) {
+    if(!isdefined(level.slowmo_breach_disable_stancemod)) {
       player DisableInvulnerability();
       player EnableWeaponSwitch();
       player EnableOffhandWeapons();
@@ -2033,7 +1976,7 @@ player_breach(ent, player) {
 play_detpack_plant_sound(breach_sound_delay) {
   self endon("death");
   wait(breach_sound_delay);
-  self playSound("detpack_wall_plant");
+  self playsound("detpack_wall_plant");
 }
 
 flag_set_when_room_cleared(room_volume) {
@@ -2047,14 +1990,13 @@ flag_set_when_room_cleared(room_volume) {
 }
 
 take_prebreach_weapons() {
-  // give the usp_scripted weapon, which plays the charge setting and breaching viewmodel &camera animation
+  // give the usp_scripted weapon, which plays the charge setting and breaching viewmodel & camera animation
   self GiveWeapon("usp_scripted");
   self SwitchToWeaponImmediate("usp_scripted");
 
   // must quick switch back to the weapon if it has a special breach anim
-  if(isDefined(level.has_special_breach_anim[self.prebreachCurrentWeapon])) {
+  if(IsDefined(level.has_special_breach_anim[self.prebreachCurrentWeapon]))
     self SwitchToWeaponImmediate(self.prebreachCurrentWeapon);
-  }
 }
 
 restore_prebreach_weapons() {
@@ -2062,16 +2004,15 @@ restore_prebreach_weapons() {
 
   self TakeWeapon("usp_scripted");
 
-  if(isDefined(self.prebreachCurrentWeapon)) {
+  if(IsDefined(self.prebreachCurrentWeapon)) {
     weapon = self.prebreachCurrentWeapon;
     self SwitchToWeapon(weapon);
 
     // if we're on easy/normal, make sure we have at least one magazine's worth of ammo for the active weapon
     if(self should_topoff_breach_weapon(weapon)) {
       clipSize = WeaponClipSize(weapon);
-      if(self GetWeaponAmmoClip(weapon) < clipSize) {
+      if(self GetWeaponAmmoClip(weapon) < clipSize)
         self SetWeaponAmmoClip(weapon, clipSize);
-      }
     }
 
     self.prebreachCurrentWeapon = undefined;
@@ -2088,7 +2029,7 @@ should_topoff_breach_weapon(weapon) {
     return false;
   }
 
-  if(!isDefined(self.prebreachCurrentWeapon)) {
+  if(!IsDefined(self.prebreachCurrentWeapon)) {
     return false;
   }
 
@@ -2112,7 +2053,7 @@ friendly_breach(stackPosition, anim_ent, room_volume) {
 
   self.breaching = true;
   invulnerableBeforeBreach = true;
-  if(!isDefined(self.magic_bullet_shield)) {
+  if(!isdefined(self.magic_bullet_shield)) {
     invulnerableBeforeBreach = false;
     self thread magic_bullet_shield();
   }
@@ -2134,37 +2075,32 @@ friendly_breach(stackPosition, anim_ent, room_volume) {
   flag_wait(sFlagName);
 
   //restore vulnerability (if they were vulnerable in the first place)
-  if(!invulnerableBeforeBreach) {
+  if(!invulnerableBeforeBreach)
     self stop_magic_bullet_shield();
-  }
 
   self.breaching = undefined;
 }
 
 friendlies_shoot_while_breaching(stackPosition) {
   //friendlies fire scripted bullets when weapons are lined up with breach enemies
-  if(stackPosition == 1) {
+  if(stackPosition == 1)
     wait(1);
-  } else {
+  else
     wait(2);
-  }
 
   level endon("friendlies_finished_breach");
   level endon("breach_room_has_been_cleared");
 
-  while(!isDefined(level.breachenemies)) {
+  while (!isdefined(level.breachenemies))
     wait(0.05);
-  }
-  while((isDefined(level.breachenemies)) && (level.breachenemies.size)) {
+  while ((IsDefined(level.breachenemies)) && (level.breachenemies.size)) {
     wait(0.05);
-    if(!isDefined(level.breachenemies)) {
+    if(!isdefined(level.breachenemies))
       break;
-    }
     level.breachenemies = remove_dead_from_array(level.breachenemies);
     foreach(enemy in level.breachenemies) {
-      if((!isalive(enemy)) || (!isDefined(enemy))) {
+      if((!isalive(enemy)) || (!isdefined(enemy)))
         continue;
-      }
 
       enemy_head_org = enemy GetTagOrigin("tag_eye");
       myGunPos = self GetMuzzlePos();
@@ -2181,7 +2117,7 @@ friendlies_shoot_while_breaching(stackPosition) {
 get_available_breachfriendlies(volume) {
   available_friendlies = [];
 
-  if(!isDefined(level.breachfriendlies)) {
+  if(!isdefined(level.breachfriendlies)) {
     return available_friendlies;
   }
 
@@ -2192,7 +2128,7 @@ get_available_breachfriendlies(volume) {
 
   foreach(guy in available_friendlies) {
     // remove him if he's already breaching
-    if((isDefined(guy.breaching)) && (guy.breaching == true)) {
+    if((IsDefined(guy.breaching)) && (guy.breaching == true)) {
       available_friendlies = array_remove(available_friendlies, guy);
       continue;
     }
@@ -2208,9 +2144,8 @@ get_available_breachfriendlies(volume) {
 }
 
 get_breach_notify(script_breachgroup) {
-  if(!isDefined(script_breachgroup)) {
+  if(!isdefined(script_breachgroup))
     script_breachgroup = "none";
-  }
   return "A door in breach group " + script_breachgroup + " has been activated.";
 }
 
@@ -2227,15 +2162,14 @@ breach_group_trigger_think() {
 slowmo_player_cleanup() {
   AssertEx(IsPlayer(self), "slowmo_player_cleanup() called on a non-player.");
 
-  if(isDefined(level.playerSpeed)) {
+  if(IsDefined(level.playerSpeed))
     self SetMoveSpeedScale(level.playerSpeed);
-  } else {
+  else
     self SetMoveSpeedScale(1);
-  }
 }
 
 slowmo_begins(rig) {
-  if((isDefined(level.breaching)) && (level.breaching == true)) {
+  if((IsDefined(level.breaching)) && (level.breaching == true)) {
     return;
   }
   level.breaching = true;
@@ -2248,15 +2182,14 @@ slowmo_begins(rig) {
   slomoLerpTime_out = 0.75;
 
   slomobreachplayerspeed = 0.2;
-  if(isDefined(level.slomobreachplayerspeed)) {
+  if(IsDefined(level.slomobreachplayerspeed)) {
     slomobreachplayerspeed = level.slomobreachplayerspeed;
   }
 
   player = level.player;
   other_player = undefined;
-  if(is_coop()) {
+  if(is_coop())
     other_player = get_other_player(player);
-  }
 
   player thread play_sound_on_entity("slomo_whoosh");
   player thread player_heartbeat();
@@ -2268,48 +2201,42 @@ slowmo_begins(rig) {
   slowmo_start();
 
   player thread set_breaching_variable();
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player thread set_breaching_variable();
-  }
 
   player AllowMelee(false); ///melee is useless and causes bugs during slomo
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player AllowMelee(false); ///melee is useless and causes bugs during slomo
-  }
 
   slowmo_setspeed_slow(0.25);
   slowmo_setlerptime_in(slomoLerpTime_in);
   slowmo_lerp_in();
 
   player SetMoveSpeedScale(slomobreachplayerspeed);
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player SetMoveSpeedScale(slomobreachplayerspeed);
-  }
 
   startTime = GetTime();
   endTime = startTime + (level.slomobreachduration * 1000);
 
   // Only worry about weapon status changes in single player.
-  if(!is_coop()) {
+  if(!is_coop())
     player thread catch_weapon_switch(); // called after the player weapons are force - changed, so this is cool to put here
-  }
 
   player thread catch_mission_failed();
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player thread catch_mission_failed();
-  }
 
   // be lenient about some slowmo-ending activities at the start of the slowmo period
   reloadIgnoreTime = 500; // ms
   switchWeaponIgnoreTime = 1000;
 
   // wait for slowmo timeout, or wait for conditions to be met that will interrupt the slowmo
-  for(;;) {
-    if(isDefined(level.forced_slowmo_breach_slowdown)) {
+  for (;;) {
+    if(IsDefined(level.forced_slowmo_breach_slowdown)) {
       if(!level.forced_slowmo_breach_slowdown) {
-        if(isDefined(level.forced_slowmo_breach_lerpout)) {
+        if(IsDefined(level.forced_slowmo_breach_lerpout))
           slomoLerpTime_out = level.forced_slowmo_breach_lerpout;
-        }
         break;
       }
 
@@ -2317,9 +2244,8 @@ slowmo_begins(rig) {
       continue;
     }
 
-    if(GetTime() >= endTime) {
+    if(GetTime() >= endTime)
       break;
-    }
 
     // is everyone dead?
     if(level.breachEnemies_active <= 0) {
@@ -2364,14 +2290,12 @@ slowmo_begins(rig) {
   slowmo_lerp_out();
 
   player AllowMelee(true); ///melee is useless and causes bugs during slomo
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player AllowMelee(true); ///melee is useless and causes bugs during slomo
-  }
 
   player delaythread(slomoLerpTime_out, ::clear_breaching_variable);
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player delaythread(slomoLerpTime_out, ::clear_breaching_variable);
-  }
 
   slowmo_end();
   flag_set("can_save");
@@ -2379,9 +2303,8 @@ slowmo_begins(rig) {
   level.player_one_already_breached = undefined;
 
   player slowmo_player_cleanup();
-  if(isDefined(other_player)) {
+  if(IsDefined(other_player))
     other_player slowmo_player_cleanup();
-  }
 
   level notify("slomo_breach_over");
   level.breaching = false;
@@ -2400,14 +2323,14 @@ set_breaching_variable() {
 
   self notifyonPlayercommand("player_shot_fired", "+attack");
 
-  while(isDefined(self.isbreaching)) {
+  while (isdefined(self.isbreaching)) {
     self waittill("player_shot_fired");
 
     self.breaching_shots_fired = ammo - self getcurrentweaponclipammo();
 
     wait .05;
 
-    while(self isFiring()) {
+    while (self isFiring()) {
       self.breaching_shots_fired = ammo - self getcurrentweaponclipammo();
       wait .05;
     }
@@ -2441,7 +2364,7 @@ slomo_difficulty_dvars() {
 }
 
 slomo_breach_vision_change(lerpTime_in, lerpTime_out) {
-  if(!isDefined(level.slomoBasevision)) {
+  if(!IsDefined(level.slomoBasevision)) {
     return;
   }
 
@@ -2450,7 +2373,7 @@ slomo_breach_vision_change(lerpTime_in, lerpTime_out) {
   level waittill("slowmo_breach_ending", newLerpTime);
 
   // maybe update the lerp time in case things changed in the main thread
-  if(isDefined(newLerpTime)) {
+  if(IsDefined(newLerpTime)) {
     lerpTime_out = newLerpTime;
   }
 
@@ -2460,7 +2383,7 @@ slomo_breach_vision_change(lerpTime_in, lerpTime_out) {
 
 player_heartbeat() {
   level endon("stop_player_heartbeat");
-  while(true) {
+  while (true) {
     self PlayLocalSound("breathing_heartbeat");
     wait .5;
   }
@@ -2496,9 +2419,9 @@ breach_enemy_spawner_think() {
 
   self.reference = reference;
   self anim_generic_first_frame(self, self.animation);
-  AssertEx(isDefined(level.scr_anim["generic"][self.animation]), "Have not defined level.scr_anim[ generic ] for anim " + self.animation);
+  AssertEx(IsDefined(level.scr_anim["generic"][self.animation]), "Have not defined level.scr_anim[ generic ] for anim " + self.animation);
 
-  if(isDefined(level._slowmo_functions[self.animation])) {
+  if(IsDefined(level._slowmo_functions[self.animation])) {
     // run a custom function for this animation set
     custom_function = level._slowmo_functions[self.animation];
     self thread[[custom_function]]();
@@ -2509,13 +2432,12 @@ breach_enemy_spawner_think() {
   self.health = 10;
   self.baseaccuracy = 5000;
 
-  if(isDefined(self.script_threatbias)) {
+  if(IsDefined(self.script_threatbias)) {
     self.threatbias = self.script_threatbias;
   }
 
-  if(isDefined(level.breach_death_anims[self.animation])) {
+  if(IsDefined(level.breach_death_anims[self.animation]))
     self.skipDeathAnim = true;
-  }
 
   wait(level.slowmo_breach_start_delay);
 
@@ -2527,15 +2449,12 @@ breach_enemy_spawner_think() {
 }
 
 record_last_player_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isalive(attacker)) {
+  if(!isalive(attacker))
     return;
-  }
-  if(!IsPlayer(attacker)) {
+  if(!IsPlayer(attacker))
     return;
-  }
-  if(!self IsBadGuy()) {
+  if(!self IsBadGuy())
     return;
-  }
 
   level.last_player_damage = GetTime();
 }
@@ -2545,13 +2464,11 @@ breach_enemy_ignored_by_friendlies() {
   //until slowmo is over. Any friendlies that are actually breaching
   //will fire their weapons anyway through anim notetracks
   self endon("death");
-  if(!flag("no_mercy")) {
+  if(!flag("no_mercy"))
     self.ignoreme = true;
-  }
   level waittill_either("slomo_breach_over", "friendlies_finished_breach");
-  if(isDefined(self)) {
+  if(IsDefined(self))
     self.ignoreme = false;
-  }
 }
 
 // immediately sends guys without custom death anims into ragdoll when they die
@@ -2580,7 +2497,7 @@ breach_enemy_cancel_ragdoll() {
 breach_enemy_track_status(enemy) {
   level.breachEnemies_active++;
 
-  ent = spawnStruct();
+  ent = SpawnStruct();
   ent.enemy = enemy;
 
   ent thread breach_enemy_waitfor_death(enemy);
@@ -2609,9 +2526,8 @@ breach_enemy_waitfor_death_counter(enemy) {
   enemy waittill("death");
 
   level.breachEnemies_alive--;
-  if(level.breachEnemies_alive <= 0) {
+  if(level.breachEnemies_alive <= 0)
     breach_friendlies_restore_grenades();
-  }
 
   level notify("breach_all_enemies_dead");
 }
@@ -2619,7 +2535,7 @@ breach_enemy_waitfor_death_counter(enemy) {
 breach_enemy_catch_exceptions(enemy) {
   self endon("breach_status_change");
 
-  while(IsAlive(enemy)) {
+  while (IsAlive(enemy)) {
     wait(0.05);
   }
 
@@ -2648,7 +2564,7 @@ breach_hostage_spawner_think() {
   self.IgnoreRandomBulletDamage = true; // don't get killed by stray bullets from friendlies or enemies
   wait(level.slowmo_breach_start_delay);
 
-  if(isDefined(level._slowmo_functions[self.animation])) {
+  if(IsDefined(level._slowmo_functions[self.animation])) {
     // run a custom function for this animation set
     custom_function = level._slowmo_functions[self.animation];
     self thread[[custom_function]]();
@@ -2659,13 +2575,12 @@ breach_hostage_spawner_think() {
 
   //self.IgnoreRandomBulletDamage = false;	//allow to be killed by stray bullets now that sequence is over
 
-  if(isDefined(self.skipEndingIdle)) {
+  if(IsDefined(self.skipEndingIdle))
     return;
-  }
 
-  if(anim_exists(self.animation + "_idle")) {
+  if(anim_exists(self.animation + "_idle"))
     thread anim_generic_loop(self, self.animation + "_idle", "stop_idle");
-  } else {
+  else {
     loop = "hostage_knees_loop";
     self thread anim_generic_loop(self, loop, "stop_idle");
   }
@@ -2676,14 +2591,14 @@ hostage_health_regen() {
   baseHealth = self.health;
   self endon("death");
   self endon("saved");
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     self waittill("damage", amount, attacker);
-    if(isDefined(attacker)) {
+    if(IsDefined(attacker)) {
       if(IsPlayer(attacker)) {
         //self DoDamage( self.health + 100, self.origin, level.player );
         self Kill(self.origin, level.player);
         break;
-      } else if((isDefined(attacker.team)) && (attacker.team == "allies"))
+      } else if((IsDefined(attacker.team)) && (attacker.team == "allies"))
         self.health = baseHealth;
 
     }
@@ -2695,24 +2610,22 @@ get_room_volume_from_slomo_breach_number(script_slomo_breach) {
 }
 
 hostage_mission_fail() {
-  if(is_specialop()) {
+  if(is_specialop())
     level endon("special_op_terminated");
-  }
 
   level endon("mission failed");
   baseHealth = self.health;
   missionFailedHostage = false;
   self thread hostage_health_regen();
   room_volume = get_room_volume_from_slomo_breach_number(self.script_slowmo_breach);
-  if(GetDvar("hostage_missionfail") == "0") {
+  if(GetDvar("hostage_missionfail") == "0")
     return;
-  }
 
-  while(isDefined(self)) {
+  while (IsDefined(self)) {
     self waittill("death", attacker);
     // Mission failed. A hostage was executed.
 
-    if(isDefined(attacker)) {
+    if(IsDefined(attacker)) {
       if(IsPlayer(attacker)) {
         level notify("player_shot_a_hostage");
         // Mission failed. You killed a hostage.
@@ -2720,10 +2633,10 @@ hostage_mission_fail() {
         //if( ( level.last_player_damage + 50 < GetTime() ) || ( level.last_player_damage == GetTime() ) )
         if(level.last_player_damage == GetTime()) {
           // Mission failed. You shot a hostage through an enemy.\nSome weapons have deep bullet penetration.
-          //breach_set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY" );
+          //breach_set_deadquote( &"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY" );
 
-          // Mission failed. You killed a hostage.
-          //(not doing bullet penetration anymore on any skill level, but will leave check here in case
+          // Mission failed. You killed a hostage. 
+          //(not doing bullet penetration anymore on any skill level, but will leave check here in case 
           //we want a message about shotguns, etc)
           breach_set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
         } else {
@@ -2732,7 +2645,7 @@ hostage_mission_fail() {
         }
 
         missionFailedHostage = true;
-      } else if((isDefined(attacker.team)) && (attacker.team == "allies") && (!IsPlayer(attacker))) {
+      } else if((IsDefined(attacker.team)) && (attacker.team == "allies") && (!IsPlayer(attacker))) {
         AssertMsg("hostage was accidentally killed by a friendly...need a script fix for this");
         // Mission failed. A hostage was executed.
         breach_set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
@@ -2759,27 +2672,23 @@ hostage_mission_fail() {
 
 // This is lame and ugly, but the cleanest for now.
 breach_set_deadquote(deadquote, so_deadquote) {
-  assert(isDefined(deadquote) && isDefined(so_deadquote));
+  assert(isdefined(deadquote) && isdefined(so_deadquote));
 
-  if(is_specialop()) {
+  if(is_specialop())
     maps\_specialops::so_force_deadquote(so_deadquote);
-  } else {
+  else
     setDvar("ui_deadquote", deadquote);
-  }
 }
 
 coop_breached_from_same_door_in_a_muliti_door_room(room_volume) {
-  if(!is_specialop()) {
+  if(!is_specialop())
     return false;
-  }
-  if(!is_coop()) {
+  if(!is_coop())
     return false;
-  }
-  if(isDefined(room_volume.has_passive_breacher)) {
+  if(IsDefined(room_volume.has_passive_breacher))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 #using_animtree("script_model");
@@ -2824,12 +2733,12 @@ set_door_charge_anim_special() {
   level.scr_anim["breach_door_charge"]["breach"] = % breach_player_frame_charge;
 }
 
+
 //#using_animtree( "player" );
 #using_animtree("multiplayer");
 player_animations() {
-  if(!isDefined(level.slowmo_viewhands)) {
+  if(!isdefined(level.slowmo_viewhands))
     level.slowmo_viewhands = "viewhands_player_sas_woodland";
-  }
 
   level.scr_animtree["active_breacher_rig"] = #animtree;
   level.scr_model["active_breacher_rig"] = level.slowmo_viewhands;
@@ -2862,11 +2771,13 @@ player_animations() {
 }
 
 add_breach_func(func) {
+  /#
   foreach(existing_func in level._slowmo_breach_funcs) {
     AssertEx(func != existing_func, "Breach func was added twice");
   }
+  # /
 
-  level._slowmo_breach_funcs[level._slowmo_breach_funcs.size] = func;
+    level._slowmo_breach_funcs[level._slowmo_breach_funcs.size] = func;
 }
 
 breach_functions(breach_rig) {
@@ -2909,33 +2820,33 @@ breach_explosion(breach_rig) {
       break;
   }
 
-  if(isDefined(expSound)) {
+  if(IsDefined(expSound))
     thread play_sound_in_space(expSound, self.charge.origin);
-  }
   exploder("breach_" + self.breach_index);
   thread breach_rumble(self.charge.origin);
   self.charge Delete();
 
   level notify("breach_explosion");
 
-  if(isDefined(destroyedModelAlias)) {
+  if(IsDefined(destroyedModelAlias)) {
     destroyedModel = spawn_anim_model(destroyedModelAlias);
     self.post thread anim_single_solo(destroyedModel, "breach");
   }
 
   wait(0.05);
 
-  if(isDefined(self.door)) {
+  if(IsDefined(self.door)) {
     self.door Delete();
   }
 }
 
 breach_rumble(org) {
-  dummy = spawn("script_origin", org);
+  dummy = Spawn("script_origin", org);
   dummy.origin = org;
   dummy PlayRumbleOnEntity("grenade_rumble");
   wait(4);
   dummy Delete();
+
 }
 
 // CUSTOM FUNCTIONS FOR SLOWMO BREACH GUYS
@@ -2959,9 +2870,8 @@ _slomo_breach_pistol_guy() {
 _slomo_breach_blowback_guy() {
   self endon("death");
   //self breach_enemy_cancel_ragdoll();
-  if(!flag("no_mercy")) {
+  if(!flag("no_mercy"))
     self.ignoreme = true;
-  }
   self.forceLongDeath = true;
   self waittill_notetrack_or_damage("bodyfall large");
   self waittill("finished_breach_start_anim");
@@ -2969,14 +2879,12 @@ _slomo_breach_blowback_guy() {
 }
 
 _slomo_breach_executed_guy() {
-  if((self.animation == "execution_knife_hostage") || (self.animation == "execution_knife2_hostage")) {
+  if((self.animation == "execution_knife_hostage") || (self.animation == "execution_knife2_hostage"))
     self thread _slomo_breach_knife_hostage_death();
-  }
 
   //Additional check to see if this hostage will be manhandled
-  if(self will_be_manhandled()) {
+  if(self will_be_manhandled())
     self thread get_manhandled();
-  }
 
   self.skipEndingIdle = true; // will skip the generic knees loop that most hostages go into
   self endon("death");
@@ -2984,9 +2892,8 @@ _slomo_breach_executed_guy() {
   self waittill("finished_breach_start_anim");
 
   //don't play end looping anim if we want to manhandle this hostage
-  if(isDefined(self.manhandled)) {
+  if(IsDefined(self.manhandled))
     return;
-  }
 
   if(anim_exists(self.animation + "_survives")) {
     self.reference anim_generic(self, self.animation + "_survives");
@@ -2997,28 +2904,25 @@ _slomo_breach_executed_guy() {
 
 _slomo_breach_hostage_react() {
   //Additional check to see if this hostage will be manhandled
-  if(self will_be_manhandled()) {
+  if(self will_be_manhandled())
     self thread get_manhandled();
-  }
 
   self.skipEndingIdle = true; // will skip the generic knees loop that most hostages go into
 
   self waittill("finished_breach_start_anim");
 
   //don't play end looping anim if we want to manhandle this hostage
-  if(isDefined(self.manhandled)) {
+  if(IsDefined(self.manhandled))
     return;
-  }
 
-  if(anim_exists(self.animation + "_idle")) {
+  if(anim_exists(self.animation + "_idle"))
     thread anim_generic_loop(self, self.animation + "_idle", "stop_idle");
-  }
   self.breachfinished = true;
 }
 
 _slomo_breach_c4_hostage() {
-  eChair = spawn("script_model", self.reference.origin);
-  eChair setModel("com_restaurantchair_2");
+  eChair = Spawn("script_model", self.reference.origin);
+  eChair SetModel("com_restaurantchair_2");
   eChair.angles = self.reference.angles + (0, 90, 0);
   eChair.origin = self.reference.origin;
 }
@@ -3026,8 +2930,8 @@ _slomo_breach_c4_hostage() {
 _slomo_breach_knife_hostage_death() {
   eKiller = get_closest_ai(self.origin, "bad_guys");
   self waittill("finished_breach_start_anim");
-  if((isDefined(eKiller)) && (IsAlive(eKiller))) {
-    playFXOnTag(getfx("breach_knife_execution"), self, "J_neck");
+  if((IsDefined(eKiller)) && (IsAlive(eKiller))) {
+    PlayFXOnTag(getfx("breach_knife_execution"), self, "J_neck");
     self thread play_sound_on_entity("melee_knife_hit_body");
     self Kill();
   }
@@ -3038,9 +2942,8 @@ _slomo_breach_executed_guy_pushed_to_floor() {
   self endon("death");
 
   //Additional check to see if this hostage will be manhandled
-  if(self will_be_manhandled()) {
+  if(self will_be_manhandled())
     self thread get_manhandled();
-  }
 
   self waittillmatch("single anim", "bodyfall large");
   self set_generic_deathanim(self.animation + "_death");
@@ -3048,9 +2951,8 @@ _slomo_breach_executed_guy_pushed_to_floor() {
   self anim_generic(self, self.animation + "_survives");
 
   //don't play end looping anim if we want to manhandle this hostage
-  if(isDefined(self.manhandled)) {
+  if(IsDefined(self.manhandled))
     return;
-  }
   self thread anim_generic_loop(self, "hostage_knees_loop", "stop_idle");
   self.breachfinished = true;
 }
@@ -3093,20 +2995,18 @@ knife_guy_stabs_player() {
 knife_guy_cleanup() {
   wait 0.5;
   self waittill_either("damage", "finished_breach_start_anim");
-  if(isDefined(self)) {
+  if(IsDefined(self))
     self Detach("weapon_parabolic_knife", "TAG_INHAND");
-  }
 }
 
 _slomo_breach_chair_guy_normal() {
   self endon("death");
   self breach_enemy_cancel_ragdoll();
   iRand = RandomIntRange(1, 3);
-  if(cointoss()) {
+  if(cointoss())
     self set_generic_deathanim(self.animation + "_death");
-  } else {
+  else
     self set_generic_deathanim(self.animation + "_death2");
-  }
 }
 
 _slomo_breach_chair_guy_animated() {
@@ -3119,13 +3019,13 @@ _slomo_breach_chair_guy_animated() {
 }
 
 chair_animate() {
-  eChair = spawn("script_model", self.reference.origin);
-  eChair setModel("furniture_chair_metal01");
+  eChair = Spawn("script_model", self.reference.origin);
+  eChair SetModel("furniture_chair_metal01");
   eChair.animname = "chair";
   eChair assign_animtree();
-  eChair.reference = spawn("script_origin", self.reference.origin);
+  eChair.reference = Spawn("script_origin", self.reference.origin);
   eChair.reference.angles = self.reference.angles;
-  //ent = spawnStruct();
+  //ent = SpawnStruct();
   //ent.entity = eChair;
   //ent.forward = 40;
   //ent translate_local();
@@ -3150,13 +3050,13 @@ _slomo_breach_desk_guy() {
 }
 
 desk_animate() {
-  eDesk = spawn("script_model", self.reference.origin);
-  eDesk setModel("furniture_long_desk_animate");
+  eDesk = Spawn("script_model", self.reference.origin);
+  eDesk SetModel("furniture_long_desk_animate");
   eDesk.animname = "desk";
   eDesk assign_animtree();
-  eDesk.reference = spawn("script_origin", self.reference.origin);
+  eDesk.reference = Spawn("script_origin", self.reference.origin);
   eDesk.reference.angles = self.reference.angles;
-  //ent = spawnStruct();
+  //ent = SpawnStruct();
   //ent.entity = eDesk;
   //ent.forward = 40;
   //ent translate_local();
@@ -3164,13 +3064,13 @@ desk_animate() {
   eDesk.reference thread anim_single_solo(eDesk, "breach_react_desk_v7_desk");
 }
 
+
 // CUSTOM FUNCTIONS FOR SLOWMO BREACH GUYS
 
 breach_near_player(player) {
   foreach(ent in level.breach_groups) {
-    if(player IsTouching(ent.door_volume)) {
+    if(player IsTouching(ent.door_volume))
       return ent;
-    }
   }
 }
 
@@ -3184,50 +3084,47 @@ get_breach_groups() {
 make_empty_breach(group_num) {
   // Make no AI or hostages spawn for the specified group number. The breach remains functional.
 
-  AssertEx(isDefined(group_num), "You must specify a breach group number to make empty");
-  AssertEx(isDefined(level.breach_groups[group_num]), group_num + " is not a valid breach group number");
+  AssertEx(IsDefined(group_num), "You must specify a breach group number to make empty");
+  AssertEx(IsDefined(level.breach_groups[group_num]), group_num + " is not a valid breach group number");
   level.breach_groups[group_num].enabled = false;
 }
 
 delete_breach(group_num) {
   // Removes the breach group and all associated entities.
 
-  AssertEx(isDefined(group_num), "You must specify a breach group number to delete");
-  AssertEx(isDefined(level.breach_groups[group_num]), group_num + " is not a valid breach group number");
-  AssertEx(isDefined(level.breach_groups[group_num].trigger), "Tried to delete breach that was already deleted");
+  AssertEx(IsDefined(group_num), "You must specify a breach group number to delete");
+  AssertEx(IsDefined(level.breach_groups[group_num]), group_num + " is not a valid breach group number");
+  AssertEx(IsDefined(level.breach_groups[group_num].trigger), "Tried to delete breach that was already deleted");
   level.breach_groups[group_num].trigger Delete();
   solids = level.breach_groups[group_num].path_solids;
   array_call(solids, ::ConnectPaths);
   array_thread(solids, ::self_delete);
-  foreach(trigger in level.breach_groups[group_num].lookat_triggers) {
-    trigger Delete();
-  }
+  foreach(trigger in level.breach_groups[group_num].lookat_triggers)
+  trigger Delete();
 }
 
 breach_debug_display_animnames(room_volume) {
-  if(!isDefined(self)) {
+
+  if(!isdefined(self))
     return;
-  }
   org = self.origin;
   wait(0.05);
-  if(GetDvar("breach_debug") == "0") {
+  if(GetDvar("breach_debug") == "0")
     return;
-  }
   //self ==> the script_origin in the door targeted by the lookat trigger
   aBreachAI = [];
-  aAI1 = getEntArray("breach_enemy_spawner", "targetname");
-  aAI2 = getEntArray("breach_hostage_spawner", "targetname");
+  aAI1 = GetEntArray("breach_enemy_spawner", "targetname");
+  aAI2 = GetEntArray("breach_hostage_spawner", "targetname");
   aBreachAI = array_merge(aAI1, aAI2);
   foreach(spawner in aBreachAI) {
-    if(!spawner IsTouching(room_volume)) {
+    if(!spawner IsTouching(room_volume))
       aBreachAI = array_remove(aBreachAI, spawner);
-    }
   }
 
-  while(!room_volume.breached) {
+  while (!room_volume.breached) {
     neworg = org;
     foreach(spawner in aBreachAI) {
-      if(isDefined(spawner.animation)) {
+      if(IsDefined(spawner.animation)) {
         thread debug_message(spawner.animation, neworg, 1);
         neworg = neworg - (0, 0, 10);
       }
@@ -3241,15 +3138,13 @@ breach_debug_display_animnames(room_volume) {
 }
 
 will_be_manhandled() {
-  if(is_coop()) {
+  if(is_coop())
     return false;
-  }
 
-  if((isDefined(level.hostagemanhandle)) && (level.hostagemanhandle == false)) {
+  if((IsDefined(level.hostagemanhandle)) && (level.hostagemanhandle == false))
     return false;
-  }
 
-  if(isDefined(self.script_noteworthy)) {
+  if(IsDefined(self.script_noteworthy)) {
     return self.script_noteworthy == "manhandled" || self.script_noteworthy == "manhandled_guarded";
   }
 
@@ -3258,13 +3153,11 @@ will_be_manhandled() {
 
 manhandler_hold() {
   // First need all enemies dead...
-  if(level.breachEnemies_alive > 0) {
+  if(level.breachEnemies_alive > 0)
     return true;
-  }
 
-  if(!self.startManhandling) {
+  if(!self.startManhandling)
     return true;
-  }
 
   return false;
 }
@@ -3280,7 +3173,7 @@ get_manhandled() {
   -------------------------*/
   if(self.script_noteworthy == "manhandled") {
     manhandlerSpawner = GetEnt(self.target, "targetname");
-    AssertEx(isDefined(manhandlerSpawner), "Hostage with export " + self.export+" is tagged with a script_noteworthy of 'manhandled', but is not targeting a friendly spawner that will do the manhandling.");
+    AssertEx(IsDefined(manhandlerSpawner), "Hostage with export " + self.export+" is tagged with a script_noteworthy of 'manhandled', but is not targeting a friendly spawner that will do the manhandling.");
   }
 
   friendly_manhandler = undefined; // may not spawn a manhandler if this hostage will just be guarded....the hostage getting manhandled will take care of spawning him
@@ -3296,9 +3189,8 @@ get_manhandled() {
 
   //Is there a suffix to add to the anims? Hostages with the same breach anim
   //may have different takedowns for different rooms
-  if(isDefined(self.script_parameters)) {
+  if(IsDefined(self.script_parameters))
     sAnimVariationSuffix = self.script_parameters;
-  }
 
   //script_noteworthy defines whether hostage is taken down by a friendly or just guarded
   switch (self.script_noteworthy) {
@@ -3325,7 +3217,7 @@ get_manhandled() {
   if(self.script_noteworthy == "manhandled") {
     friendly_manhandler = manhandlerSpawner spawn_ai(true);
     friendly_manhandler Hide();
-    AssertEx(isDefined(level.scr_anim["generic"][friendly_manhandler.animation]), "Manhandling friendly with export " + self.export+" does not have animation " + friendly_manhandler.animation + " defined in a level.scr_anim");
+    AssertEx(IsDefined(level.scr_anim["generic"][friendly_manhandler.animation]), "Manhandling friendly with export " + self.export+" does not have animation " + friendly_manhandler.animation + " defined in a level.scr_anim");
     self.reference anim_generic_first_frame(friendly_manhandler, friendly_manhandler.animation);
     friendly_manhandler PushPlayer(true);
     level.manhandler = friendly_manhandler;
@@ -3341,9 +3233,8 @@ get_manhandled() {
   /*-----------------------
   SHOW MANHANDLER, IF THERE IS ONE TO SHOW
   -------------------------*/
-  if(self.script_noteworthy == "manhandled") {
+  if(self.script_noteworthy == "manhandled")
     friendly_manhandler Show();
-  }
 
   /*-----------------------
   WAIT TO FINISH REGULAR BREACH ANIM
@@ -3360,21 +3251,19 @@ get_manhandled() {
   /*-----------------------
   PLAY MANHANDLE PREPARE IDLE UNTIL MANHANDLER READY TO COME IN
   -------------------------*/
-  if(anim_exists(sAnimManhandledPrepareIdle)) {
+  if(anim_exists(sAnimManhandledPrepareIdle))
     self.reference thread anim_generic_loop(self, sAnimManhandledPrepareIdle, "stop_idle");
-  } else {
+  else
     sAnimManhandledPrepareIdle = undefined;
-  }
 
   self.readyToBeManhandled = true;
 
   /*-----------------------
   ONLY WAIT IF THE HOSTAGE HAS AN APPROPRIATE LOOP
   -------------------------*/
-  if(isDefined(sAnimManhandledPrepareIdle)) {
-    while(self manhandler_hold()) {
+  if(IsDefined(sAnimManhandledPrepareIdle)) {
+    while (self manhandler_hold())
       wait(0.05);
-    }
   }
   /*-----------------------
   PLAY MANHANDLE ANIMS
@@ -3394,12 +3283,12 @@ get_manhandled() {
   PLAY MANHANDLE IDLES
   -------------------------*/
   //Play friendly manhandler idle if there
-  if((isDefined(friendly_manhandler)) && (isDefined(level.scr_anim["generic"][friendly_manhandler.animation + "_idle"]))) {
+  if((IsDefined(friendly_manhandler)) && (IsDefined(level.scr_anim["generic"][friendly_manhandler.animation + "_idle"]))) {
     self.reference thread anim_generic_loop(friendly_manhandler, friendly_manhandler.animation + "_idle", "stop_idle");
   }
 
   //play hostage manhandle idle if there
-  if(isDefined(level.scr_anim["generic"][sAnimManhandledIdle])) {
+  if(IsDefined(level.scr_anim["generic"][sAnimManhandledIdle])) {
     self.reference thread anim_generic_loop(self, sAnimManhandledIdle, "stop_idle");
   }
 }
@@ -3407,7 +3296,7 @@ get_manhandled() {
 special_gulag_adjustment() {
   angles = level.player GetPlayerAngles();
   angles = (0, angles[1], 0);
-  forward = anglesToForward(angles);
+  forward = AnglesToForward(angles);
   up = AnglesToUp(angles);
 
   tag_origin = spawn_tag_origin();
@@ -3438,7 +3327,7 @@ player_slows_down() {
 price_breach_ent_movesto_player() {
   self endon("stop_following_player");
   wait(1.5);
-  for(;;) {
+  for (;;) {
     self moveto(level.player.origin, 2, 0, 0);
     wait(0.05);
   }
@@ -3447,7 +3336,7 @@ price_breach_ent_movesto_player() {
 price_breach_ent_rotatesto_player() {
   self endon("stop_following_player");
   ent = spawn("script_origin", (0, 0, 0));
-  for(;;) {
+  for (;;) {
     start = level.player.origin;
     start = set_z(start, 0);
     end = self.origin;
@@ -3455,8 +3344,8 @@ price_breach_ent_rotatesto_player() {
 
     angles = vectortoangles(start - end);
 
-    forward = anglesToForward(angles);
-    my_forward = anglesToForward(self.angles);
+    forward = anglestoforward(angles);
+    my_forward = anglestoforward(self.angles);
     my_right = anglestoright(self.angles);
 
     dot = vectordot(forward, my_right);
@@ -3465,9 +3354,8 @@ price_breach_ent_rotatesto_player() {
     yaw_dif = abs(acos(dot));
 
     rotate = 2;
-    if(rotate > yaw_dif) {
+    if(rotate > yaw_dif)
       rotate = yaw_dif;
-    }
 
     if(dot < 0) {
       ent addyaw(rotate);
@@ -3497,9 +3385,8 @@ manhandler_think() {
   }
   self thread magic_bullet_shield();
   self setFlashbangImmunity(true);
-  if(!flag("no_mercy")) {
+  if(!flag("no_mercy"))
     self.ignoreme = true;
-  }
   self.grenadeawareness = 0;
   wait(1);
   /*-----------------------
@@ -3508,13 +3395,11 @@ manhandler_think() {
   aHostages = [];
   aAI = GetAISpeciesArray("neutral", "civilian");
   foreach(guy in aAI) {
-    if(!isDefined(guy.readyToBeManhandled)) {
+    if(!isdefined(guy.readyToBeManhandled))
       continue;
-    }
-    if((isDefined(guy.script_slowmo_breach)) && (guy.script_slowmo_breach == self.script_slowmo_breach)) {
-      if((isDefined(guy.script_noteworthy)) && (IsSubStr(guy.script_noteworthy, "manhandled"))) {
+    if((IsDefined(guy.script_slowmo_breach)) && (guy.script_slowmo_breach == self.script_slowmo_breach)) {
+      if((IsDefined(guy.script_noteworthy)) && (IsSubStr(guy.script_noteworthy, "manhandled")))
         aHostages = array_add(aHostages, guy);
-      }
     }
   }
   AssertEx(aHostages.size > 0, "Manhandler with export " + self.export+" can not find any hostages with script_noteworthy containing 'manhandled*' in its script_slomo_breach number");
@@ -3524,11 +3409,11 @@ manhandler_think() {
   -------------------------*/
   iCounter = aHostages.size;
   tempArray = aHostages;
-  while(iCounter > 0) {
+  while (iCounter > 0) {
     wait(0.05);
     foreach(guy in tempArray) {
       // This shouldn't be necessary?
-      if(!isDefined(guy) || guy.readyToBeManhandled == true) {
+      if(!isdefined(guy) || guy.readyToBeManhandled == true) {
         tempArray = array_remove(tempArray, guy);
         iCounter--;
       }
@@ -3540,9 +3425,8 @@ manhandler_think() {
   -------------------------*/
   foreach(guy in aHostages) {
     // This shouldn't be necessary?
-    if(isDefined(guy)) {
+    if(IsDefined(guy))
       guy.startManhandling = true;
-    }
   }
 
 }
@@ -3552,11 +3436,10 @@ assert_if_anim_not_defined(sAnim) {
 }
 
 anim_exists(sAnim) {
-  if(isDefined(level.scr_anim["generic"][sAnim])) {
+  if(IsDefined(level.scr_anim["generic"][sAnim]))
     return true;
-  } else {
+  else
     return false;
-  }
 }
 
 /*
@@ -3573,7 +3456,7 @@ anim_exists(sAnim) {
 =============
 */
 add_slowmo_breach_custom_function(animation, function) {
-  AssertEx(!isDefined(level._slowmo_functions[animation]), "Tried to redefined function for slow mo breach guys with animation " + animation);
+  AssertEx(!isdefined(level._slowmo_functions[animation]), "Tried to redefined function for slow mo breach guys with animation " + animation);
   level._slowmo_functions[animation] = function;
 }
 
@@ -3590,11 +3473,10 @@ add_slowmo_breach_custom_function(animation, function) {
 =============
 */
 add_slowmo_breacher() {
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   AssertEx(IsAI(self), "add_slomo_breacher() can only be called on a friendly AI");
-  if(!isDefined(level.breachfriendlies)) {
+  if(!isdefined(level.breachfriendlies)) {
     level.breachfriendlies = [];
     level.breachfriendlies[0] = self;
   } else if(is_in_array(level.breachfriendlies, self)) {
@@ -3616,13 +3498,11 @@ add_slowmo_breacher() {
 =============
 */
 remove_slowmo_breacher() {
-  if(!isDefined(self)) {
+  if(!isdefined(self))
     return;
-  }
   AssertEx(IsAI(self), "remove_slomo_breacher() can only be called on a friendly AI");
-  if(!isDefined(level.breachfriendlies)) {
+  if(!isdefined(level.breachfriendlies))
     return;
-  }
   if(is_in_array(level.breachfriendlies, self)) {
     level.breachfriendlies = array_remove(level.breachfriendlies, self);
   }
@@ -3665,5 +3545,5 @@ using_illegal_breach_weapon() {
 
   weapon = self getCurrentWeapon();
 
-  return isDefined(illegal_weapons[weapon]);
+  return isdefined(illegal_weapons[weapon]);
 }

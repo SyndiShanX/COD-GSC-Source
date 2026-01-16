@@ -10,7 +10,7 @@
 KILLSTREAK_STRING_TABLE = "sp/killstreakTable.csv";
 
 init() {
-  // && 1 Kill Streak!
+  // &&1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
 
   initKillstreakData();
@@ -28,23 +28,22 @@ init() {
 }
 
 initKillstreakData() {
-  for(i = 1; true; i++) {
+  for (i = 1; true; i++) {
     retVal = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
-    if(!isDefined(retVal) || retVal == "") {
+    if(!isDefined(retVal) || retVal == "")
       break;
-    }
 
     streakRef = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
     assert(streakRef != "");
 
     streakUseHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 6);
-    // string not found for
-    assert(streakUseHint != &"");
+    // string not found for 
+    assert(streakUseHint != & "");
     precacheString(streakUseHint);
 
     streakFailHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 11);
-    // string not found for
-    assert(streakFailHint != &"");
+    // string not found for 
+    assert(streakFailHint != & "");
     precacheString(streakFailHint);
 
     //chad - no earn dialog yet
@@ -60,16 +59,15 @@ initKillstreakData() {
     Chad:
     	enemies will never use killstreak rewards because they are just stupid AI haha
     	maybe someday I can make them use killstreaks to make things interesting
-    		
+		
     streakEnemyUseDialog = tableLookup( KILLSTREAK_STRING_TABLE, 0, i, 9 );
     assert( streakEnemyUseDialog != "" );
     game["dialog"]["enemy_"+streakRef+"_inbound"] = streakEnemyUseDialog;
     */
 
     streakWeapon = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 12);
-    if(streakWeapon != "") {
+    if(streakWeapon != "")
       precacheItem(streakWeapon);
-    }
 
     streakPoints = int(tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 13));
     assert(streakPoints != 0);
@@ -106,15 +104,13 @@ killstreakUsePressed() {
 
     /* Chad - leader dialog doesn't exist but we can probably just do a playlocalsoundwrapper on all
     players instead since there isn't anyone on the other team
-    		
+		
     //array_thread( level.players, ::playLocalSoundWrapper, level.pmc.sound[ "juggernaut_attack" ] );
-    		
-    if( level.teamBased ) {
+		
+    if( level.teamBased )
     	thread leaderDialog( streakName + "_inbound", team );
-    }
-    else {
+    else
     	self thread leaderDialogOnPlayer( streakName + "_inbound" );
-    }
     */
 
     self playLocalSound("weap_c4detpack_trigger_plr");
@@ -133,24 +129,20 @@ killstreakUseWaiter() {
 
   self notifyOnPlayerCommand("use killstreak", "+actionslot 4");
 
-  for(;;) {
+  for (;;) {
     self waittill("use killstreak");
 
-    if(!isAlive(self)) {
+    if(!isAlive(self))
       continue;
-    }
 
-    if(isDefined(self.canUseKillstreaks) && !self.canUseKillstreaks) {
+    if(isDefined(self.canUseKillstreaks) && !self.canUseKillstreaks)
       continue;
-    }
 
-    if(isDefined(self.placingSentry)) {
+    if(isdefined(self.placingSentry))
       continue;
-    }
 
-    if(!isDefined(self.pers["killstreak"])) {
+    if(!isDefined(self.pers["killstreak"]))
       continue;
-    }
 
     self killstreakUsePressed();
   }
@@ -159,14 +151,12 @@ killstreakUseWaiter() {
 checkKillstreakReward(streakCount) {
   streak = streakCount;
 
-  if(streak < 3) {
+  if(streak < 3)
     return;
-  }
 
   if(!isDefined(self.killStreaks[streak])) {
-    if(streak >= 10 && (streak % 5 == 0)) {
+    if(streak >= 10 && (streak % 5 == 0))
       self streakNotify(streak);
-    }
     return;
   }
 
@@ -179,8 +169,8 @@ streakNotify(streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // && 1 Kill Streak!
-  notifyData.titleLabel = &"MP_KILLSTREAK_N";
+  // &&1 Kill Streak!
+  notifyData.titleLabel = & "MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
 
   self maps\_rank::notifyMessage(notifyData);
@@ -192,8 +182,8 @@ rewardNotify(streakName, streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // && 1 Kill Streak!
-  notifyData.titleLabel = &"MP_KILLSTREAK_N";
+  // &&1 Kill Streak!
+  notifyData.titleLabel = & "MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.notifyText = getKillstreakHint(streakName);
   notifyData.textIsString = true;
@@ -205,18 +195,15 @@ rewardNotify(streakName, streakVal) {
 }
 
 tryGiveKillstreak(streakName, streakVal) {
-  if(!isDefined(level.killstreakFuncs[streakName])) {
+  if(!isDefined(level.killstreakFuncs[streakName]))
     return false;
-  }
 
-  if(isDefined(self.selectingLocation)) {
+  if(isDefined(self.selectingLocation))
     return false;
-  }
 
   if(isDefined(self.pers["killstreak"])) {
-    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"])) {
+    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"]))
       return false;
-    }
   }
 
   self thread rewardNotify(streakName, streakVal);
@@ -238,9 +225,8 @@ giveKillstreak(streakName) {
 
   self.pers["killstreak"] = streakName;
 
-  if(isDefined(level.killstreakSetupFuncs[streakName])) {
+  if(isdefined(level.killstreakSetupFuncs[streakName]))
     self[[level.killstreakSetupFuncs[streakName]]]();
-  }
 }
 
 giveKillstreakWeapon(weapon) {
@@ -250,11 +236,10 @@ giveKillstreakWeapon(weapon) {
 }
 
 getStreakCost(streakName) {
-  if(is_coop()) {
+  if(is_coop())
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 5));
-  } else {
+  else
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 4));
-  }
 }
 
 getKillstreakHint(streakName) {
@@ -278,9 +263,8 @@ getKillstreakWeapon(streakName) {
 }
 
 giveOwnedKillstreakItem() {
-  if(isDefined(self.pers["killstreak"])) {
+  if(isdefined(self.pers["killstreak"]))
     self giveKillstreak(self.pers["killstreak"]);
-  }
 }
 
 setKillstreaks(streak1, streak2, streak3) {

@@ -18,6 +18,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace namespace_5449c7ba;
 
 init() {
@@ -41,12 +42,12 @@ main() {
   level.var_79260935.e_vault_defend_blocker = getent("e_vault_defend_blocker", "targetname");
   level.var_79260935.s_vault_reward = struct::get("s_vault_reward", "targetname");
   level.var_79260935.var_7ff5dbc4 = struct::get("facility_vault_door_bundle", "targetname");
-  zm_sq::register(#"sams_box", # "step_1", # "sams_box_step1", &sams_box_step1_setup, &sams_box_step1_cleanup);
-  zm_sq::register(#"sams_box", # "step_2", # "sams_box_step2", &sams_box_step2_setup, &sams_box_step2_cleanup);
-  zm_sq::register(#"sams_box", # "step_3", # "sams_box_step3", &sams_box_step3_setup, &sams_box_step3_cleanup);
-  zm_sq::register(#"sams_box", # "step_4", # "sams_box_step4", &sams_box_step4_setup, &sams_box_step4_cleanup);
-  zm_sq::register(#"sams_box", # "step_5", # "sams_box_step5", &sams_box_step5_setup, &sams_box_step5_cleanup);
-  zm_sq::register(#"sams_box", # "step_6", # "sams_box_step6", &sams_box_step6_setup, &sams_box_step6_cleanup);
+  zm_sq::register(#"sams_box", #"step_1", #"sams_box_step1", &sams_box_step1_setup, &sams_box_step1_cleanup);
+  zm_sq::register(#"sams_box", #"step_2", #"sams_box_step2", &sams_box_step2_setup, &sams_box_step2_cleanup);
+  zm_sq::register(#"sams_box", #"step_3", #"sams_box_step3", &sams_box_step3_setup, &sams_box_step3_cleanup);
+  zm_sq::register(#"sams_box", #"step_4", #"sams_box_step4", &sams_box_step4_setup, &sams_box_step4_cleanup);
+  zm_sq::register(#"sams_box", #"step_5", #"sams_box_step5", &sams_box_step5_setup, &sams_box_step5_cleanup);
+  zm_sq::register(#"sams_box", #"step_6", #"sams_box_step6", &sams_box_step6_setup, &sams_box_step6_cleanup);
   zm_sq::start(#"sams_box", !zm_utility::is_standard());
 }
 
@@ -138,7 +139,7 @@ function_ee2edc25() {
 }
 
 function_d332685() {
-  level endon(#"end_game", # "hash_7220fbbcfb27dbd4");
+  level endon(#"end_game", #"hash_7220fbbcfb27dbd4");
   s_results = self waittill(#"trigger_activated");
   e_who = s_results.e_who;
   playsoundatposition(#"hash_d8937c5c97f485e", self.e_keycard.origin);
@@ -162,7 +163,7 @@ function_d332685() {
 }
 
 function_f83bfaa() {
-  level endon(#"end_game", # "hash_7220fbbcfb27dbd4");
+  level endon(#"end_game", #"hash_7220fbbcfb27dbd4");
 
   while(true) {
     s_results = self waittill(#"trigger_activated");
@@ -258,7 +259,7 @@ sams_box_step2_setup(var_5ea5c94d) {
 }
 
 function_6c5a5d32() {
-  level endon(#"end_game", # "hash_4119ce1986c28b9d");
+  level endon(#"end_game", #"hash_4119ce1986c28b9d");
   self waittill(#"trigger_activated");
   level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_keycard_1", 2);
   level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_keycard_2", 2);
@@ -304,7 +305,7 @@ sams_box_step3_cleanup(var_5ea5c94d, ended_early) {
 
 function_36db86a9(e_player) {
   if(level flag::get(#"hash_475c24f631fab267")) {
-    str_hint = zm_utility::function_d6046228(#"hash_3d7d3a56e292c6fa", # "hash_b6e409536fc91fe");
+    str_hint = zm_utility::function_d6046228(#"hash_3d7d3a56e292c6fa", #"hash_b6e409536fc91fe");
     self sethintstring(str_hint);
     return 1;
   }
@@ -376,7 +377,7 @@ function_bb5cf7f2(e_player) {
   }
 
   if(var_cb24ec97) {
-    str_hint = zm_utility::function_d6046228(#"hash_56fc5ab8c0878d32", # "hash_17af2e2ebc75a206");
+    str_hint = zm_utility::function_d6046228(#"hash_56fc5ab8c0878d32", #"hash_17af2e2ebc75a206");
     self sethintstring(str_hint);
     return 1;
   }
@@ -497,7 +498,7 @@ sams_box_step6_cleanup(var_5ea5c94d, ended_early) {
 }
 
 function_c0510b69(e_player) {
-  str_hint = zm_utility::function_d6046228(#"hash_7976ce10c7043db7", # "hash_226401bfc284fb25");
+  str_hint = zm_utility::function_d6046228(#"hash_7976ce10c7043db7", #"hash_226401bfc284fb25");
   self sethintstring(str_hint);
   return true;
 }
@@ -533,17 +534,19 @@ private function_89c75856() {
 
 private on_disconnect() {
   if(self hasweapon(level.var_79260935.w_music_box)) {
+
     iprintln("<dev string:x38>");
 
-    level.var_79260935.s_vault_reward function_89c75856();
+      level.var_79260935.s_vault_reward function_89c75856();
   }
 }
 
 private function_33f0ddd3(s_event) {
   if(s_event.event === "take_weapon" && s_event.weapon === level.var_79260935.w_music_box && self.var_3b55baa1 !== level.var_79260935.w_music_box) {
+
     iprintln("<dev string:x38>");
 
-    level.var_79260935.s_vault_reward function_89c75856();
+      level.var_79260935.s_vault_reward function_89c75856();
   }
 }
 

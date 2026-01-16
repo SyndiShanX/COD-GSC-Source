@@ -11,7 +11,7 @@
 #include maps\mp\_visionset_mgr;
 
 enable_divetonuke_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_flakjacket", "divetonuke", 2000, &"ZOMBIE_PERK_DIVETONUKE", "zombie_perk_bottle_nuke");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_flakjacket", "divetonuke", 2000, & "ZOMBIE_PERK_DIVETONUKE", "zombie_perk_bottle_nuke");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_flakjacket", ::divetonuke_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_flakjacket", ::divetonuke_register_clientfield, ::divetonuke_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_machine("specialty_flakjacket", ::divetonuke_perk_machine_setup, ::divetonuke_perk_machine_think);
@@ -29,7 +29,9 @@ init_divetonuke() {
 
 divetonuke_precache() {
   if(isDefined(level.divetonuke_precache_override_func)) {
-    [[level.divetonuke_precache_override_func]]();
+    [
+      [level.divetonuke_precache_override_func]
+    ]();
     return;
   }
 
@@ -39,7 +41,7 @@ divetonuke_precache() {
   precachemodel("zombie_vending_nuke_on");
   precachestring(&"ZOMBIE_PERK_DIVETONUKE");
   level._effect["divetonuke_light"] = loadfx("misc/fx_zombie_cola_dtap_on");
-  level.machine_assets["divetonuke"] = spawnStruct();
+  level.machine_assets["divetonuke"] = spawnstruct();
   level.machine_assets["divetonuke"].weapon = "zombie_perk_bottle_nuke";
   level.machine_assets["divetonuke"].off_model = "zombie_vending_nuke";
   level.machine_assets["divetonuke"].on_model = "zombie_vending_nuke_on";
@@ -61,30 +63,28 @@ divetonuke_perk_machine_setup(use_trigger, perk_machine, bump_trigger, collision
   perk_machine.script_string = "divetonuke_perk";
   perk_machine.targetname = "vending_divetonuke";
 
-  if(isDefined(bump_trigger)) {
+  if(isDefined(bump_trigger))
     bump_trigger.script_string = "divetonuke_perk";
-  }
 }
 
 divetonuke_perk_machine_think() {
   init_divetonuke();
 
   while(true) {
-    machine = getEntArray("vending_divetonuke", "targetname");
-    machine_triggers = getEntArray("vending_divetonuke", "target");
+    machine = getentarray("vending_divetonuke", "targetname");
+    machine_triggers = getentarray("vending_divetonuke", "target");
 
-    for(i = 0; i < machine.size; i++) {
-      machine[i] setModel(level.machine_assets["divetonuke"].off_model);
-    }
+    for(i = 0; i < machine.size; i++)
+      machine[i] setmodel(level.machine_assets["divetonuke"].off_model);
 
     array_thread(machine_triggers, ::set_power_on, 0);
     level thread do_initial_power_off_callback(machine, "divetonuke");
     level waittill("divetonuke_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setModel(level.machine_assets["divetonuke"].on_model);
+      machine[i] setmodel(level.machine_assets["divetonuke"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playSound("zmb_perks_power_on");
+      machine[i] playsound("zmb_perks_power_on");
       machine[i] thread perk_fx("divetonuke_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -92,22 +92,20 @@ divetonuke_perk_machine_think() {
     level notify("specialty_flakjacket_power_on");
     array_thread(machine_triggers, ::set_power_on, 1);
 
-    if(isDefined(level.machine_assets["divetonuke"].power_on_callback)) {
+    if(isDefined(level.machine_assets["divetonuke"].power_on_callback))
       array_thread(machine, level.machine_assets["divetonuke"].power_on_callback);
-    }
 
     level waittill("divetonuke_off");
 
-    if(isDefined(level.machine_assets["divetonuke"].power_off_callback)) {
+    if(isDefined(level.machine_assets["divetonuke"].power_off_callback))
       array_thread(machine, level.machine_assets["divetonuke"].power_off_callback);
-    }
 
     array_thread(machine, ::turn_perk_off);
   }
 }
 
 divetonuke_host_migration_func() {
-  flop = getEntArray("vending_divetonuke", "targetname");
+  flop = getentarray("vending_divetonuke", "targetname");
 
   foreach(perk in flop) {
     if(isDefined(perk.model) && perk.model == level.machine_assets["divetonuke"].on_model) {
@@ -122,14 +120,13 @@ divetonuke_explode(attacker, origin) {
   min_damage = level.zombie_vars["zombie_perk_divetonuke_min_damage"];
   max_damage = level.zombie_vars["zombie_perk_divetonuke_max_damage"];
 
-  if(isDefined(level.flopper_network_optimized) && level.flopper_network_optimized) {
+  if(isDefined(level.flopper_network_optimized) && level.flopper_network_optimized)
     attacker thread divetonuke_explode_network_optimized(origin, radius, max_damage, min_damage, "MOD_GRENADE_SPLASH");
-  } else {
+  else
     radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_GRENADE_SPLASH");
-  }
 
-  playFX(level._effect["divetonuke_groundhit"], origin);
-  attacker playSound("zmb_phdflop_explo");
+  playfx(level._effect["divetonuke_groundhit"], origin);
+  attacker playsound("zmb_phdflop_explo");
   maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_perk_divetonuke", attacker);
   wait 1;
   maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_perk_divetonuke", attacker);

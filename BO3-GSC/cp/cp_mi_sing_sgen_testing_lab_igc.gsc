@@ -46,17 +46,17 @@ function skipto_testing_lab_igc_init(str_objective, b_starting) {
   function_d9cab9d3();
   level waittill("hash_89d9c0f");
   level thread namespace_d40478f6::function_4a262c0b();
-  if(isDefined(level.bzm_sgendialogue6callback)) {
+  if(isdefined(level.bzm_sgendialogue6callback)) {
     level thread[[level.bzm_sgendialogue6callback]]();
   }
   level.var_280d5f68 = getent("human_lab_door_l", "targetname");
   level.var_280d5f68.v_start_pos = level.var_280d5f68.origin;
   level.var_3c301126 = getent("human_lab_door_r", "targetname");
   level.var_3c301126.v_start_pos = level.var_3c301126.origin;
-  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh005", &humanlab_3rd_sh005, "play");
-  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh200", &dni_lab_igc_complete, "done");
-  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh200", &function_5841c784, "players_done");
-  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh040", &function_7a6f4571, "play");
+  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh005", & humanlab_3rd_sh005, "play");
+  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh200", & dni_lab_igc_complete, "done");
+  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh200", & function_5841c784, "players_done");
+  level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh040", & function_7a6f4571, "play");
   level thread scene::play("cin_sgen_14_humanlab_3rd_doors");
   level scene::play("cin_sgen_14_humanlab_3rd_sh005", level.var_2240f121);
   level.var_2240f121 = undefined;
@@ -108,8 +108,8 @@ function humanlab_3rd_sh005(a_ents) {
     if(isplayer(e_in_scene)) {
       e_in_scene cybercom::cybercom_armpulse(1);
       e_in_scene clientfield::set_to_player("sndCCHacking", 2);
-      e_in_scene util::delay(1, "death", &clientfield::increment_to_player, "hack_dni_fx");
-      e_in_scene util::delay(2, "death", &clientfield::set_to_player, "sndCCHacking", 0);
+      e_in_scene util::delay(1, "death", & clientfield::increment_to_player, "hack_dni_fx");
+      e_in_scene util::delay(2, "death", & clientfield::set_to_player, "sndCCHacking", 0);
     }
   }
 }
@@ -142,7 +142,7 @@ function function_d9cab9d3() {
   objectives::complete("cp_waypoint_breadcrumb");
   t_hack triggerenable(1);
   objectives::set("cp_level_sgen_hack_door_signal_source");
-  util::init_interactive_gameobject(t_hack, &"cp_prompt_dni_sgen_hack_door", &"CP_MI_SING_SGEN_HACK", &function_474ab5c2);
+  util::init_interactive_gameobject(t_hack, & "cp_prompt_dni_sgen_hack_door", & "CP_MI_SING_SGEN_HACK", & function_474ab5c2);
 }
 
 function function_474ab5c2(e_player) {

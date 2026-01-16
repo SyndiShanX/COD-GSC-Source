@@ -29,7 +29,7 @@ forceEnd() {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   if(level.onlineGame || level.systemLink) {
-    endString = &"GAME_HOST_ENDED_GAME";
+    endString = & "GAME_HOST_ENDED_GAME";
   } else {
     endString = "";
   }

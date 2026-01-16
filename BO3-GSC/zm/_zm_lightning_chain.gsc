@@ -24,7 +24,7 @@
 #namespace lightning_chain;
 
 function autoexec __init__sytem__() {
-  system::register("lightning_chain", &init, undefined, undefined);
+  system::register("lightning_chain", & init, undefined, undefined);
 }
 
 function init() {
@@ -38,11 +38,11 @@ function init() {
   clientfield::register("vehicle", "lc_fx", 1, 2, "int");
   clientfield::register("actor", "lc_death_fx", 1, 2, "int");
   clientfield::register("vehicle", "lc_death_fx", 10000, 2, "int");
-  callback::on_connect(&on_player_connect);
+  callback::on_connect( & on_player_connect);
 }
 
 function create_lightning_chain_params(max_arcs = 5, max_enemies_killed = 10, radius_start = 300, radius_decay = 20, head_gib_chance = 75, arc_travel_time = 0.11, kills_for_powerup = 10, min_fx_distance = 128, network_death_choke = 4, should_kill_enemies = 1, clientside_fx = 1, arc_fx_sound = undefined, no_fx = 0, prevent_weapon_kill_credit = 0) {
-  lcp = spawnStruct();
+  lcp = spawnstruct();
   lcp.max_arcs = max_arcs;
   lcp.max_enemies_killed = max_enemies_killed;
   lcp.radius_start = radius_start;
@@ -65,7 +65,7 @@ function private on_player_connect() {
   self endon("death");
   self waittill("spawned_player");
   self.tesla_network_death_choke = 0;
-  for(;;) {
+  for (;;) {
     util::wait_network_frame(2);
     self.tesla_network_death_choke = 0;
   }
@@ -73,17 +73,17 @@ function private on_player_connect() {
 
 function arc_damage(source_enemy, player, arc_num, params = level.default_lightning_chain_params) {
   player endon("disconnect");
-  if(!isDefined(player.tesla_network_death_choke)) {
+  if(!isdefined(player.tesla_network_death_choke)) {
     player.tesla_network_death_choke = 0;
   }
-  if(!isDefined(player.tesla_enemies_hit)) {
+  if(!isdefined(player.tesla_enemies_hit)) {
     player.tesla_enemies_hit = 0;
   }
   zm_utility::debug_print((("TESLA: Evaulating arc damage for arc: " + arc_num) + " Current enemies hit: ") + player.tesla_enemies_hit);
   lc_flag_hit(self, 1);
   radius_decay = params.radius_decay * arc_num;
   origin = self gettagorigin("j_head");
-  if(!isDefined(origin)) {
+  if(!isdefined(origin)) {
     origin = self.origin;
   }
   enemies = lc_get_enemies_in_area(origin, params.radius_start - radius_decay, player);
@@ -91,8 +91,8 @@ function arc_damage(source_enemy, player, arc_num, params = level.default_lightn
   lc_flag_hit(enemies, 1);
   self thread lc_do_damage(source_enemy, arc_num, player, params);
   zm_utility::debug_print((("TESLA: " + enemies.size) + " enemies hit during arc: ") + arc_num);
-  for(i = 0; i < enemies.size; i++) {
-    if(!isDefined(enemies[i]) || enemies[i] == self) {
+  for (i = 0; i < enemies.size; i++) {
+    if(!isdefined(enemies[i]) || enemies[i] == self) {
       continue;
     }
     if(lc_end_arc_damage(arc_num + 1, player.tesla_enemies_hit, params)) {
@@ -130,26 +130,26 @@ function private lc_get_enemies_in_area(origin, distance, player) {
   level thread lc_debug_arc(origin, distance);
   distance_squared = distance * distance;
   enemies = [];
-  if(!isDefined(player.tesla_enemies)) {
+  if(!isdefined(player.tesla_enemies)) {
     player.tesla_enemies = zombie_utility::get_round_enemy_array();
     if(player.tesla_enemies.size > 0) {
       player.tesla_enemies = array::get_all_closest(origin, player.tesla_enemies);
     }
   }
   zombies = player.tesla_enemies;
-  if(isDefined(zombies)) {
-    for(i = 0; i < zombies.size; i++) {
-      if(!isDefined(zombies[i])) {
+  if(isdefined(zombies)) {
+    for (i = 0; i < zombies.size; i++) {
+      if(!isdefined(zombies[i])) {
         continue;
       }
-      if(isDefined(zombies[i].lightning_chain_immune) && zombies[i].lightning_chain_immune) {
+      if(isdefined(zombies[i].lightning_chain_immune) && zombies[i].lightning_chain_immune) {
         continue;
       }
       test_origin = zombies[i] gettagorigin("j_head");
-      if(!isDefined(test_origin)) {
+      if(!isdefined(test_origin)) {
         test_origin = zombies[i].origin;
       }
-      if(isDefined(zombies[i].zombie_tesla_hit) && zombies[i].zombie_tesla_hit == 1) {
+      if(isdefined(zombies[i].zombie_tesla_hit) && zombies[i].zombie_tesla_hit == 1) {
         continue;
       }
       if(zm_utility::is_magic_bullet_shield_enabled(zombies[i])) {
@@ -168,14 +168,14 @@ function private lc_get_enemies_in_area(origin, distance, player) {
 }
 
 function private lc_flag_hit(enemy, hit) {
-  if(isDefined(enemy)) {
+  if(isdefined(enemy)) {
     if(isarray(enemy)) {
-      for(i = 0; i < enemy.size; i++) {
-        if(isDefined(enemy[i])) {
+      for (i = 0; i < enemy.size; i++) {
+        if(isdefined(enemy[i])) {
           enemy[i].zombie_tesla_hit = hit;
         }
       }
-    } else if(isDefined(enemy)) {
+    } else if(isdefined(enemy)) {
       enemy.zombie_tesla_hit = hit;
     }
   }
@@ -186,7 +186,7 @@ function private lc_do_damage(source_enemy, arc_num, player, params) {
   if(arc_num > 1) {
     wait(randomfloatrange(0.2, 0.6) * arc_num);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   if(params.clientside_fx) {
@@ -196,10 +196,10 @@ function private lc_do_damage(source_enemy, arc_num, player, params) {
       clientfield::set("lc_fx", 1);
     }
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(source_enemy) && source_enemy != self) {
+  if(isdefined(source_enemy) && source_enemy != self) {
     if(player.tesla_arc_count > 3) {
       util::wait_network_frame();
       player.tesla_arc_count = 0;
@@ -207,42 +207,42 @@ function private lc_do_damage(source_enemy, arc_num, player, params) {
     player.tesla_arc_count++;
     source_enemy lc_play_arc_fx(self, params);
   }
-  while(player.tesla_network_death_choke > params.network_death_choke) {
+  while (player.tesla_network_death_choke > params.network_death_choke) {
     zm_utility::debug_print("TESLA: Choking Tesla Damage. Dead enemies this network frame: " + player.tesla_network_death_choke);
     wait(0.05);
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   player.tesla_network_death_choke++;
   self lc_play_death_fx(arc_num, params);
   self.tesla_death = params.should_kill_enemies;
   origin = player.origin;
-  if(isDefined(source_enemy) && source_enemy != self) {
+  if(isdefined(source_enemy) && source_enemy != self) {
     origin = source_enemy.origin;
   }
-  if(!isDefined(self) || !isalive(self)) {
+  if(!isdefined(self) || !isalive(self)) {
     return;
   }
   if(params.should_kill_enemies) {
-    if(isDefined(self.tesla_damage_func)) {
+    if(isdefined(self.tesla_damage_func)) {
       self[[self.tesla_damage_func]](origin, player);
       return;
     }
-    if(isDefined(params.prevent_weapon_kill_credit) && params.prevent_weapon_kill_credit) {
+    if(isdefined(params.prevent_weapon_kill_credit) && params.prevent_weapon_kill_credit) {
       self dodamage(self.health + 666, origin, player, undefined, "none", "MOD_UNKNOWN", 0, level.weaponnone);
     } else {
       weapon = level.weaponnone;
-      if(isDefined(params.weapon)) {
+      if(isdefined(params.weapon)) {
         weapon = params.weapon;
       }
       self dodamage(self.health + 666, origin, player, undefined, "none", "MOD_UNKNOWN", 0, weapon);
     }
-    if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given) && player zm_spawner::player_can_score_from_zombies()) {
+    if(!(isdefined(self.deathpoints_already_given) && self.deathpoints_already_given) && player zm_spawner::player_can_score_from_zombies()) {
       self.deathpoints_already_given = 1;
       player zm_score::player_add_points("death", "", "");
     }
-    if(isDefined(params.challenge_stat_name) && isDefined(player) && isplayer(player)) {
+    if(isdefined(params.challenge_stat_name) && isdefined(player) && isplayer(player)) {
       player zm_stats::increment_challenge_stat(params.challenge_stat_name);
     }
   }
@@ -253,10 +253,10 @@ function lc_play_death_fx(arc_num, params) {
   fx = "tesla_shock";
   n_fx = 1;
   b_can_clientside = 1;
-  if(isDefined(self.isdog) && self.isdog) {
+  if(isdefined(self.isdog) && self.isdog) {
     tag = "J_Spine1";
   }
-  if(isDefined(self.teslafxtag)) {
+  if(isdefined(self.teslafxtag)) {
     b_can_clientside = 0;
     tag = self.teslafxtag;
   } else if(!self.archetype === "zombie") {
@@ -277,24 +277,26 @@ function lc_play_death_fx(arc_num, params) {
       zm_net::network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[fx], self, tag);
     }
   }
-  if(isDefined(self.tesla_head_gib_func) && !self.head_gibbed && params.should_kill_enemies && (!(isDefined(self.no_gib) && self.no_gib))) {
-    [[self.tesla_head_gib_func]]();
+  if(isdefined(self.tesla_head_gib_func) && !self.head_gibbed && params.should_kill_enemies && (!(isdefined(self.no_gib) && self.no_gib))) {
+    [
+      [self.tesla_head_gib_func]
+    ]();
   }
 }
 
 function lc_play_arc_fx(target, params) {
-  if(!isDefined(self) || !isDefined(target)) {
+  if(!isdefined(self) || !isdefined(target)) {
     wait(params.arc_travel_time);
     return;
   }
   tag = "J_SpineUpper";
-  if(isDefined(self.isdog) && self.isdog) {
+  if(isdefined(self.isdog) && self.isdog) {
     tag = "J_Spine1";
   } else if(!self.archetype === "zombie") {
     tag = "tag_origin";
   }
   target_tag = "J_SpineUpper";
-  if(isDefined(target.isdog) && target.isdog) {
+  if(isdefined(target.isdog) && target.isdog) {
     target_tag = "J_Spine1";
   } else if(!self.archetype === "zombie") {
     tag = "tag_origin";
@@ -307,8 +309,8 @@ function lc_play_arc_fx(target, params) {
     return;
   }
   fxorg = util::spawn_model("tag_origin", origin);
-  fx = playFXOnTag(level._effect["tesla_bolt"], fxorg, "tag_origin");
-  if(isDefined(params.arc_fx_sound)) {
+  fx = playfxontag(level._effect["tesla_bolt"], fxorg, "tag_origin");
+  if(isdefined(params.arc_fx_sound)) {
     playsoundatposition(params.arc_fx_sound, fxorg.origin);
   }
   fxorg moveto(target_origin, params.arc_travel_time);
@@ -321,7 +323,7 @@ function private lc_debug_arc(origin, distance) {
     return;
   }
   start = gettime();
-  while(gettime() < (start + 3000)) {
+  while (gettime() < (start + 3000)) {
     wait(0.05);
   }
 }

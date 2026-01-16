@@ -20,7 +20,7 @@
 #namespace zm_perk_random;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_random", &__init__, &__main__, undefined);
+  system::register("zm_perk_random", & __init__, & __main__, undefined);
 }
 
 function __init__() {
@@ -42,11 +42,11 @@ function __init__() {
 }
 
 function __main__() {
-  if(!isDefined(level.perk_random_machine_count)) {
+  if(!isdefined(level.perk_random_machine_count)) {
     level.perk_random_machine_count = 1;
   }
-  if(!isDefined(level.perk_random_machine_state_func)) {
-    level.perk_random_machine_state_func = &process_perk_random_machine_state;
+  if(!isdefined(level.perk_random_machine_state_func)) {
+    level.perk_random_machine_state_func = & process_perk_random_machine_state;
   }
   level thread setup_devgui();
   level thread setup_perk_random_machines();
@@ -55,14 +55,14 @@ function __main__() {
 function private setup_perk_random_machines() {
   waittillframeend();
   level.perk_bottle_weapon_array = arraycombine(level.machine_assets, level._custom_perks, 0, 1);
-  level.perk_random_machines = getEntArray("perk_random_machine", "targetname");
+  level.perk_random_machines = getentarray("perk_random_machine", "targetname");
   level.perk_random_machine_count = level.perk_random_machines.size;
   perk_random_machine_init();
 }
 
 function perk_random_machine_init() {
   foreach(machine in level.perk_random_machines) {
-    if(!isDefined(machine.cost)) {
+    if(!isdefined(machine.cost)) {
       machine.cost = 1500;
     }
     machine.current_perk_random_machine = 0;
@@ -78,8 +78,8 @@ function perk_random_machine_init() {
 
 function private init_starting_perk_random_machine_location() {
   b_starting_machine_found = 0;
-  for(i = 0; i < level.perk_random_machines.size; i++) {
-    if(isDefined(level.perk_random_machines[i].script_noteworthy) && issubstr(level.perk_random_machines[i].script_noteworthy, "start_perk_random_machine") && (!(isDefined(b_starting_machine_found) && b_starting_machine_found))) {
+  for (i = 0; i < level.perk_random_machines.size; i++) {
+    if(isdefined(level.perk_random_machines[i].script_noteworthy) && issubstr(level.perk_random_machines[i].script_noteworthy, "start_perk_random_machine") && (!(isdefined(b_starting_machine_found) && b_starting_machine_found))) {
       level.perk_random_machines[i].current_perk_random_machine = 1;
       level.perk_random_machines[i] thread machine_think();
       level.perk_random_machines[i] thread set_perk_random_machine_state("initial");
@@ -91,7 +91,7 @@ function private init_starting_perk_random_machine_location() {
 }
 
 function create_perk_random_machine_unitrigger_stub() {
-  self.unitrigger_stub = spawnStruct();
+  self.unitrigger_stub = spawnstruct();
   self.unitrigger_stub.script_width = 70;
   self.unitrigger_stub.script_height = 30;
   self.unitrigger_stub.script_length = 40;
@@ -100,15 +100,15 @@ function create_perk_random_machine_unitrigger_stub() {
   self.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   self.unitrigger_stub.trigger_target = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(self.unitrigger_stub, 1);
-  self.unitrigger_stub.prompt_and_visibility_func = &perk_random_machine_trigger_update_prompt;
+  self.unitrigger_stub.prompt_and_visibility_func = & perk_random_machine_trigger_update_prompt;
   self.unitrigger_stub.script_int = self.script_int;
-  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &perk_random_unitrigger_think);
+  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & perk_random_unitrigger_think);
 }
 
 function perk_random_machine_trigger_update_prompt(player) {
   can_use = self perk_random_machine_stub_update_prompt(player);
-  if(isDefined(self.hint_string)) {
-    if(isDefined(self.hint_parm1)) {
+  if(isdefined(self.hint_string)) {
+    if(isdefined(self.hint_parm1)) {
       self sethintstring(self.hint_string, self.hint_parm1);
     } else {
       self sethintstring(self.hint_string);
@@ -125,21 +125,21 @@ function perk_random_machine_stub_update_prompt(player) {
   self.hint_parm1 = undefined;
   n_power_on = is_power_on(self.stub.script_int);
   if(!n_power_on) {
-    self.hint_string = &"ZOMBIE_NEED_POWER";
+    self.hint_string = & "ZOMBIE_NEED_POWER";
     return false;
   }
   if(self.stub.trigger_target.state == "idle" || self.stub.trigger_target.state == "vending") {
     n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
     if(!player zm_utility::can_player_purchase_perk()) {
-      self.hint_string = &"ZOMBIE_RANDOM_PERK_TOO_MANY";
-      if(isDefined(n_purchase_limit)) {
+      self.hint_string = & "ZOMBIE_RANDOM_PERK_TOO_MANY";
+      if(isdefined(n_purchase_limit)) {
         self.hint_parm1 = n_purchase_limit;
       }
       return false;
     }
-    if(isDefined(self.stub.trigger_target.machine_user)) {
-      if(isDefined(self.stub.trigger_target.grab_perk_hint) && self.stub.trigger_target.grab_perk_hint) {
-        self.hint_string = &"ZOMBIE_RANDOM_PERK_PICKUP";
+    if(isdefined(self.stub.trigger_target.machine_user)) {
+      if(isdefined(self.stub.trigger_target.grab_perk_hint) && self.stub.trigger_target.grab_perk_hint) {
+        self.hint_string = & "ZOMBIE_RANDOM_PERK_PICKUP";
         return true;
       }
       self.hint_string = "";
@@ -147,24 +147,24 @@ function perk_random_machine_stub_update_prompt(player) {
     }
     n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
     if(!player zm_utility::can_player_purchase_perk()) {
-      self.hint_string = &"ZOMBIE_RANDOM_PERK_TOO_MANY";
-      if(isDefined(n_purchase_limit)) {
+      self.hint_string = & "ZOMBIE_RANDOM_PERK_TOO_MANY";
+      if(isdefined(n_purchase_limit)) {
         self.hint_parm1 = n_purchase_limit;
       }
       return false;
     }
-    self.hint_string = &"ZOMBIE_RANDOM_PERK_BUY";
+    self.hint_string = & "ZOMBIE_RANDOM_PERK_BUY";
     self.hint_parm1 = level._random_zombie_perk_cost;
     return true;
   }
-  self.hint_string = &"ZOMBIE_RANDOM_PERK_ELSEWHERE";
+  self.hint_string = & "ZOMBIE_RANDOM_PERK_ELSEWHERE";
   return false;
 }
 
 function trigger_visible_to_player(player) {
   self setinvisibletoplayer(player);
   visible = 1;
-  if(isDefined(self.stub.trigger_target.machine_user)) {
+  if(isdefined(self.stub.trigger_target.machine_user)) {
     if(player != self.stub.trigger_target.machine_user || zm_utility::is_placeable_mine(self.stub.trigger_target.machine_user getcurrentweapon())) {
       visible = 0;
     }
@@ -182,7 +182,7 @@ function trigger_visible_to_player(player) {
 }
 
 function player_has_all_available_perks() {
-  for(i = 0; i < level._random_perk_machine_perk_list.size; i++) {
+  for (i = 0; i < level._random_perk_machine_perk_list.size; i++) {
     if(!self hasperk(level._random_perk_machine_perk_list[i])) {
       return false;
     }
@@ -191,7 +191,7 @@ function player_has_all_available_perks() {
 }
 
 function can_buy_perk() {
-  if(isDefined(self.is_drinking) && self.is_drinking > 0) {
+  if(isdefined(self.is_drinking) && self.is_drinking > 0) {
     return false;
   }
   current_weapon = self getcurrentweapon();
@@ -209,7 +209,7 @@ function can_buy_perk() {
 
 function perk_random_unitrigger_think(player) {
   self endon("kill_trigger");
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     self.stub.trigger_target notify("trigger", player);
   }
@@ -226,26 +226,26 @@ function machine_think() {
     self thread set_perk_random_machine_state("initial");
     wait(1);
   }
-  if(isDefined(level.zm_custom_perk_random_power_flag)) {
+  if(isdefined(level.zm_custom_perk_random_power_flag)) {
     level flag::wait_till(level.zm_custom_perk_random_power_flag);
   } else {
-    while(!is_power_on(self.script_int)) {
+    while (!is_power_on(self.script_int)) {
       wait(1);
     }
   }
   self thread set_perk_random_machine_state("idle");
-  if(isDefined(level.bottle_spawn_location)) {
+  if(isdefined(level.bottle_spawn_location)) {
     level.bottle_spawn_location delete();
   }
   level.bottle_spawn_location = spawn("script_model", self.origin);
-  level.bottle_spawn_location setModel("tag_origin");
+  level.bottle_spawn_location setmodel("tag_origin");
   level.bottle_spawn_location.angles = self.angles;
   level.bottle_spawn_location.origin = level.bottle_spawn_location.origin + vectorscale((0, 0, 1), 65);
-  while(true) {
+  while (true) {
     self waittill("trigger", player);
     level flag::clear("machine_can_reset");
     if(!player zm_score::can_player_purchase(level._random_zombie_perk_cost)) {
-      self playSound("evt_perk_deny");
+      self playsound("evt_perk_deny");
       continue;
     }
     self.machine_user = player;
@@ -254,13 +254,13 @@ function machine_think() {
     player zm_stats::increment_player_stat("use_perk_random");
     player zm_score::minus_to_player_score(level._random_zombie_perk_cost);
     self thread set_perk_random_machine_state("vending");
-    if(isDefined(level.perk_random_vo_func_usemachine) && isDefined(player)) {
+    if(isdefined(level.perk_random_vo_func_usemachine) && isdefined(player)) {
       player thread[[level.perk_random_vo_func_usemachine]]();
     }
-    while(true) {
+    while (true) {
       random_perk = get_weighted_random_perk(player);
-      self playSound("zmb_rand_perk_start");
-      self playLoopSound("zmb_rand_perk_loop", 1);
+      self playsound("zmb_rand_perk_start");
+      self playloopsound("zmb_rand_perk_loop", 1);
       wait(1);
       self notify("bottle_spawned");
       self thread start_perk_bottle_cycling();
@@ -269,29 +269,29 @@ function machine_think() {
       wait(3);
       self notify("done_cycling");
       if(self.num_time_used >= self.num_til_moved && level.perk_random_machine_count > 1) {
-        level.bottle_spawn_location setModel("wpn_t7_zmb_perk_bottle_bear_world");
+        level.bottle_spawn_location setmodel("wpn_t7_zmb_perk_bottle_bear_world");
         self stoploopsound(0.5);
         self thread set_perk_random_machine_state("leaving");
         wait(3);
         player zm_score::add_to_player_score(level._random_zombie_perk_cost);
-        level.bottle_spawn_location setModel("tag_origin");
+        level.bottle_spawn_location setmodel("tag_origin");
         self thread machine_selector();
         self clientfield::set("lightning_bolt_FX_toggle", 0);
         self.machine_user = undefined;
         break;
       } else {
-        level.bottle_spawn_location setModel(model);
+        level.bottle_spawn_location setmodel(model);
       }
-      self playSound("zmb_rand_perk_bottle");
+      self playsound("zmb_rand_perk_bottle");
       self.grab_perk_hint = 1;
       self thread grab_check(player, random_perk);
       self thread time_out_check();
       self util::waittill_either("grab_check", "time_out_check");
       self.grab_perk_hint = 0;
-      self playSound("zmb_rand_perk_stop");
+      self playsound("zmb_rand_perk_stop");
       self stoploopsound(0.5);
       self.machine_user = undefined;
-      level.bottle_spawn_location setModel("tag_origin");
+      level.bottle_spawn_location setmodel("tag_origin");
       self thread set_perk_random_machine_state("idle");
       break;
     }
@@ -302,17 +302,17 @@ function machine_think() {
 function grab_check(player, random_perk) {
   self endon("time_out_check");
   perk_is_bought = 0;
-  while(!perk_is_bought) {
+  while (!perk_is_bought) {
     self waittill("trigger", e_triggerer);
     if(e_triggerer == player) {
-      if(isDefined(player.is_drinking) && player.is_drinking > 0) {
+      if(isdefined(player.is_drinking) && player.is_drinking > 0) {
         wait(0.1);
         continue;
       }
       if(player zm_utility::can_player_purchase_perk()) {
         perk_is_bought = 1;
       } else {
-        self playSound("evt_perk_deny");
+        self playsound("evt_perk_deny");
         self notify("time_out_or_perk_grab");
         return;
       }
@@ -330,7 +330,7 @@ function grab_check(player, random_perk) {
     player thread zm_perks::wait_give_perk(random_perk, 1);
   }
   player zm_perks::perk_give_bottle_end(gun, random_perk);
-  if(!(isDefined(player.has_drunk_wunderfizz) && player.has_drunk_wunderfizz)) {
+  if(!(isdefined(player.has_drunk_wunderfizz) && player.has_drunk_wunderfizz)) {
     player.has_drunk_wunderfizz = 1;
   }
 }
@@ -348,11 +348,11 @@ function time_out_check() {
 }
 
 function wait_for_power() {
-  if(isDefined(self.script_int)) {
+  if(isdefined(self.script_int)) {
     str_wait = "power_on" + self.script_int;
     level flag::wait_till(str_wait);
   } else {
-    if(isDefined(level.zm_custom_perk_random_power_flag)) {
+    if(isdefined(level.zm_custom_perk_random_power_flag)) {
       level flag::wait_till(level.zm_custom_perk_random_power_flag);
     } else {
       level flag::wait_till("power_on");
@@ -369,7 +369,7 @@ function machine_selector() {
     do {
       new_machine = level.perk_random_machines[randomint(level.perk_random_machines.size)];
     }
-    while(new_machine.current_perk_random_machine == 1);
+    while (new_machine.current_perk_random_machine == 1);
     new_machine.current_perk_random_machine = 1;
     self.current_perk_random_machine = 0;
     wait(10);
@@ -378,10 +378,10 @@ function machine_selector() {
 }
 
 function include_perk_in_random_rotation(perk) {
-  if(!isDefined(level._random_perk_machine_perk_list)) {
+  if(!isdefined(level._random_perk_machine_perk_list)) {
     level._random_perk_machine_perk_list = [];
   }
-  if(!isDefined(level._random_perk_machine_perk_list)) {
+  if(!isdefined(level._random_perk_machine_perk_list)) {
     level._random_perk_machine_perk_list = [];
   } else if(!isarray(level._random_perk_machine_perk_list)) {
     level._random_perk_machine_perk_list = array(level._random_perk_machine_perk_list);
@@ -391,14 +391,14 @@ function include_perk_in_random_rotation(perk) {
 
 function get_weighted_random_perk(player) {
   keys = array::randomize(getarraykeys(level._random_perk_machine_perk_list));
-  if(isDefined(level.custom_random_perk_weights)) {
+  if(isdefined(level.custom_random_perk_weights)) {
     keys = player[[level.custom_random_perk_weights]]();
   }
   forced_perk = getdvarstring("");
-  if(forced_perk != "" && isDefined(level._random_perk_machine_perk_list[forced_perk])) {
+  if(forced_perk != "" && isdefined(level._random_perk_machine_perk_list[forced_perk])) {
     arrayinsert(keys, forced_perk, 0);
   }
-  for(i = 0; i < keys.size; i++) {
+  for (i = 0; i < keys.size; i++) {
     if(player hasperk(level._random_perk_machine_perk_list[keys[i]])) {
       continue;
       continue;
@@ -411,7 +411,7 @@ function get_weighted_random_perk(player) {
 function perk_bottle_motion() {
   putouttime = 3;
   putbacktime = 10;
-  v_float = (anglesToForward(self.angles - (0, 90, 0))) * 10;
+  v_float = (anglestoforward(self.angles - (0, 90, 0))) * 10;
   level.bottle_spawn_location.origin = self.origin + (0, 0, 53);
   level.bottle_spawn_location.angles = self.angles;
   level.bottle_spawn_location.origin = level.bottle_spawn_location.origin - v_float;
@@ -428,14 +428,14 @@ function start_perk_bottle_cycling() {
   self endon("done_cycling");
   array_key = getarraykeys(level.perk_bottle_weapon_array);
   timer = 0;
-  while(true) {
-    for(i = 0; i < array_key.size; i++) {
-      if(isDefined(level.perk_bottle_weapon_array[array_key[i]].weapon)) {
+  while (true) {
+    for (i = 0; i < array_key.size; i++) {
+      if(isdefined(level.perk_bottle_weapon_array[array_key[i]].weapon)) {
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].weapon);
       } else {
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].perk_bottle_weapon);
       }
-      level.bottle_spawn_location setModel(model);
+      level.bottle_spawn_location setmodel(model);
       wait(0.2);
     }
   }
@@ -443,7 +443,7 @@ function start_perk_bottle_cycling() {
 
 function get_perk_weapon_model(perk) {
   weapon = level.machine_assets[perk].weapon;
-  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_bottle_weapon)) {
+  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].perk_bottle_weapon)) {
     weapon = level._custom_perks[perk].perk_bottle_weapon;
   }
   return getweaponmodel(weapon);
@@ -462,21 +462,21 @@ function perk_random_vending() {
 function perk_random_loop_anim(n_piece, s_anim_1, s_anim_2) {
   self endon("zbarrier_state_change");
   current_state = self.state;
-  while(self.state == current_state) {
+  while (self.state == current_state) {
     self setzbarrierpiecestate(n_piece, s_anim_1);
-    while(self getzbarrierpiecestate(n_piece) == s_anim_1) {
+    while (self getzbarrierpiecestate(n_piece) == s_anim_1) {
       wait(0.05);
     }
     self setzbarrierpiecestate(n_piece, s_anim_2);
-    while(self getzbarrierpiecestate(n_piece) == s_anim_2) {
+    while (self getzbarrierpiecestate(n_piece) == s_anim_2) {
       wait(0.05);
     }
   }
 }
 
 function perk_random_vend_sfx() {
-  self playLoopSound("zmb_rand_perk_sparks");
-  level.bottle_spawn_location playLoopSound("zmb_rand_perk_vortex");
+  self playloopsound("zmb_rand_perk_sparks");
+  level.bottle_spawn_location playloopsound("zmb_rand_perk_vortex");
   self waittill("zbarrier_state_change");
   self stoploopsound();
   level.bottle_spawn_location stoploopsound();
@@ -488,11 +488,11 @@ function perk_random_initial() {
 
 function perk_random_idle() {
   self clientfield::set("client_stone_emmissive_blink", 0);
-  if(isDefined(level.perk_random_idle_effects_override)) {
+  if(isdefined(level.perk_random_idle_effects_override)) {
     self[[level.perk_random_idle_effects_override]]();
   } else {
     self clientfield::set("lightning_bolt_FX_toggle", 1);
-    while(self.state == "idle") {
+    while (self.state == "idle") {
       wait(0.05);
     }
     self clientfield::set("lightning_bolt_FX_toggle", 0);
@@ -500,14 +500,14 @@ function perk_random_idle() {
 }
 
 function perk_random_arrive() {
-  while(self getzbarrierpiecestate(0) == "opening") {
+  while (self getzbarrierpiecestate(0) == "opening") {
     wait(0.05);
   }
   self notify("arrived");
 }
 
 function perk_random_leaving() {
-  while(self getzbarrierpiecestate(0) == "closing") {
+  while (self getzbarrierpiecestate(0) == "closing") {
     wait(0.05);
   }
   wait(0.05);
@@ -516,7 +516,7 @@ function perk_random_leaving() {
 
 function set_perk_random_machine_state(state) {
   wait(0.1);
-  for(i = 0; i < self getnumzbarrierpieces(); i++) {
+  for (i = 0; i < self getnumzbarrierpieces(); i++) {
     self hidezbarrierpiece(i);
   }
   self notify("zbarrier_state_change");
@@ -586,7 +586,7 @@ function process_perk_random_machine_state(state) {
       break;
     }
     default: {
-      if(isDefined(level.custom_perk_random_state_handler)) {
+      if(isdefined(level.custom_perk_random_state_handler)) {
         self[[level.custom_perk_random_state_handler]](state);
       }
       break;
@@ -596,7 +596,7 @@ function process_perk_random_machine_state(state) {
 
 function machine_sounds() {
   level endon("machine_think");
-  while(true) {
+  while (true) {
     level waittill("pmstrt");
     rndprk_ent = spawn("script_origin", self.origin);
     rndprk_ent stopsounds();
@@ -612,11 +612,11 @@ function getweaponmodel(weapon) {
 }
 
 function is_power_on(n_power_index) {
-  if(isDefined(n_power_index)) {
+  if(isdefined(n_power_index)) {
     str_power = "power_on" + n_power_index;
     n_power_on = level flag::get(str_power);
   } else {
-    if(isDefined(level.zm_custom_perk_random_power_flag)) {
+    if(isdefined(level.zm_custom_perk_random_power_flag)) {
       n_power_on = level flag::get(level.zm_custom_perk_random_power_flag);
     } else {
       n_power_on = level flag::get("power_on");
@@ -626,12 +626,12 @@ function is_power_on(n_power_index) {
 }
 
 function setup_devgui() {
-  level.perk_random_devgui_callback = &wunderfizz_devgui_callback;
+  level.perk_random_devgui_callback = & wunderfizz_devgui_callback;
 }
 
 function wunderfizz_devgui_callback(cmd) {
   players = getplayers();
-  a_e_wunderfizzes = getEntArray("", "");
+  a_e_wunderfizzes = getentarray("", "");
   e_wunderfizz = arraygetclosest(getplayers()[0].origin, a_e_wunderfizzes);
   switch (cmd) {
     case "": {

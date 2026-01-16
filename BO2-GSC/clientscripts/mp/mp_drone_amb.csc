@@ -153,9 +153,10 @@ scanner_alert() {
 }
 
 trig_enter_alarm(trigplayer) {
-  self playSound(0, "amb_scanner_detect");
+  self playsound(0, "amb_scanner_detect");
   wait 0.25;
-  playSound(0, "amb_scanner_alarm", (-460, -809, -438));
+  playsound(0, "amb_scanner_alarm", (-460, -809, -438));
 }
 
-trig_leave_alarm(trigplayer) {}
+trig_leave_alarm(trigplayer) {
+}

@@ -14,7 +14,7 @@
 #namespace zm_factory_fx;
 
 function autoexec __init__sytem__() {
-  system::register("zm_factory_fx", &__init__, undefined, undefined);
+  system::register("zm_factory_fx", & __init__, undefined, undefined);
 }
 
 function __init__() {
@@ -33,10 +33,10 @@ function main() {
 function run_door_fxanim(str_flag, str_scene, str_exploder) {
   level waittill("start_zombie_round_logic");
   level flag::wait_till(str_flag);
-  if(isDefined(str_scene)) {
+  if(isdefined(str_scene)) {
     level thread scene::play(str_scene, "targetname");
   }
-  if(isDefined(str_exploder)) {
+  if(isdefined(str_exploder)) {
     level thread exploder::exploder(str_exploder);
   }
 }

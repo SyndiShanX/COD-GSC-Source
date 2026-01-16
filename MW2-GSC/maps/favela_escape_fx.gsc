@@ -78,12 +78,12 @@ setup_util_fx() {
 }
 
 bird_startle_trigs() {
-  trigs = getEntArray("trig_bird_startle", "targetname");
+  trigs = GetEntArray("trig_bird_startle", "targetname");
   array_thread(trigs, ::bird_startle_trig_think);
 }
 
 bird_startle_trig_think() {
-  ASSERT(isDefined(self.script_exploder), "Bird startle trigger at origin " + self.origin + " doesn't have script_exploder set.");
+  ASSERT(IsDefined(self.script_exploder), "Bird startle trigger at origin " + self.origin + " doesn't have script_exploder set.");
   exploderName = self.script_exploder;
 
   self waittill("trigger");
@@ -93,7 +93,7 @@ bird_startle_trig_think() {
 }
 
 levelstart_fx_setup() {
-  lights = getEntArray("flickerlight_fire", "script_noteworthy");
+  lights = GetEntArray("flickerlight_fire", "script_noteworthy");
   array_thread(lights, ::flickerlight_fire);
 }
 
@@ -101,13 +101,14 @@ flickerlight_fire() {
   wait(RandomFloatRange(.05, .5));
 
   intensity = self GetLightIntensity();
-  while(1) {
+  while (1) {
     self SetLightIntensity(intensity * RandomFloatRange(1.2, 2.2));
     wait(RandomFloatRange(.05, 1));
   }
 }
 
 footstep_effects() {
+
   //Regular footstep fx
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("concrete", loadfx("impacts/footstep_dust"));
@@ -154,6 +155,7 @@ footstep_effects() {
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "asphalt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "mud", loadfx("impacts/footstep_mud"));
+
 }
 
 treadfx_override() {

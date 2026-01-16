@@ -32,9 +32,8 @@ skipto_roof_meeting() {
   trigger_use("trigger_vtol");
   a_courtyard_enemies = [];
 
-  for(i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++)
     a_courtyard_enemies[i] = simple_spawn_single("anthem_courtyard_soldiers" + i);
-  }
 
   maps\_patrol::patrol_init();
   level.harper set_ignoreme(1);
@@ -50,9 +49,8 @@ skipto_roof_meeting() {
   level thread run_scene("rooftop_meeting_soldiers67_idle");
   level thread run_scene("rooftop_meeting_talkers_idle");
 
-  foreach(ai_soldier in getEntArray("anthem_helipad_soldiers_ai", "targetname")) {
-    ai_soldier set_ignoreall(1);
-  }
+  foreach(ai_soldier in getentarray("anthem_helipad_soldiers_ai", "targetname"))
+  ai_soldier set_ignoreall(1);
 
   level thread courtyard_sounds();
   skipto_teleport("skipto_roof_meeting", array(level.harper));
@@ -320,13 +318,11 @@ drone_meeting_event() {
   trigger_off("melee_drop_hurt_trigger", "targetname");
   trigger_off("melee_drop_hurt_trigger2", "targetname");
 
-  if(flag("trainyard_melee_harper_cross_bridge_started") && !flag("trainyard_melee_harper_cross_bridge_done")) {
+  if(flag("trainyard_melee_harper_cross_bridge_started") && !flag("trainyard_melee_harper_cross_bridge_done"))
     end_scene("trainyard_melee_harper_cross_bridge");
-  }
 
-  if(flag("jump_down_approach_harper_started") && !flag("jump_down_approach_harper_done")) {
+  if(flag("jump_down_approach_harper_started") && !flag("jump_down_approach_harper_done"))
     end_scene("jump_down_approach_harper");
-  }
 
   flag_wait("jump_down_player_done");
   level thread harper_and_gaz_scene();
@@ -443,9 +439,8 @@ trigger_jump_down_scene() {
       if(level.wiiu) {
         controller_type = level.player getcontrollertype();
 
-        if(controller_type == "remote") {
+        if(controller_type == "remote")
           mantle_pressed = mantle_pressed || level.player sprintbuttonpressed();
-        }
       }
 
       if(mantle_pressed) {
@@ -467,9 +462,8 @@ mantle_disable_gaz() {
     trigger_wait("trigger_jump_down_scene");
     level.player allowjump(0);
 
-    while(level.player istouching(t_anim)) {
+    while(level.player istouching(t_anim))
       wait 0.05;
-    }
 
     level.player allowjump(1);
   }
@@ -491,26 +485,22 @@ hide_player_ropes() {
   flag_wait("jump_down_player_started");
   e_body = get_model_or_models_from_scene("jump_down_player", "player_body");
 
-  for(i = 1; i < 9; i++) {
+  for(i = 1; i < 9; i++)
     e_body hidepart("jnt_rope_0" + i);
-  }
 
   e_body hidepart("jnt_hook");
   e_body hidepart("J_Snpr_Cbnr");
   e_body hidepart("J_Snpr_CbnrOpen");
   e_body hidepart("J_Snpr_Knot");
 
-  for(i = 1; i < 4; i++) {
+  for(i = 1; i < 4; i++)
     e_body hidepart("J_Snpr_RopeShort_0" + i);
-  }
 
-  for(i = 1; i < 10; i++) {
+  for(i = 1; i < 10; i++)
     e_body hidepart("J_Snpr_Rope_0" + i);
-  }
 
-  for(i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++)
     e_body hidepart("J_Snpr_Rope_1" + i);
-  }
 }
 
 harper_pathing_gaz_melee() {
@@ -529,9 +519,8 @@ harper_pathing_gaz_melee() {
     level thread run_scene("jump_down_attack_gaz_idle");
     level thread run_scene("jump_down_attack_gaz_guard_idle");
 
-    if(!flag("jump_down_player_started")) {
+    if(!flag("jump_down_player_started"))
       run_scene("trainyard_melee_harper_cross_bridge");
-    }
 
     if(!flag("jump_down_player_started")) {
       level.harper anim_set_blend_in_time(0.2);
@@ -543,9 +532,8 @@ harper_pathing_gaz_melee() {
   exploder(820);
   vh_gaz = getent("gaz_tiger", "targetname");
 
-  if(isDefined(vh_gaz)) {
+  if(isDefined(vh_gaz))
     vh_gaz thread tiger_headlights_on();
-  }
 
   if(!flag("jump_down_player_started")) {
     run_scene("jump_down_preidle_harper");
@@ -704,7 +692,7 @@ gaz_victim_fail() {
 }
 
 drone_gaz_melee_fail() {
-  setdvar("ui_deadquote", &"PAKISTAN_SHARED_KILLED_BY_DRONE");
+  setdvar("ui_deadquote", & "PAKISTAN_SHARED_KILLED_BY_DRONE");
   level thread maps\pakistan_anthem::drone_death_hud(level.player);
   s_spawnpt = getstruct("drone_gaz_melee", "targetname");
   s_goal1 = getstruct("drone_gaz_melee_goal1", "targetname");
@@ -754,9 +742,8 @@ harper_gaz_melee_fail() {
 harper_and_gaz_scene() {
   scene_wait("jump_down_harper");
 
-  if(!flag("jump_down_attack_harper_started")) {
+  if(!flag("jump_down_attack_harper_started"))
     level thread run_scene("jump_down_attack_harper_idle");
-  }
 }
 
 detection_event_drone_pathing() {
@@ -817,9 +804,8 @@ detection_event_drone_pathing() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 control_room_drone_target() {
@@ -846,13 +832,13 @@ turn_off_spotlight_fx() {
 
 drone_focus_rooftop(e_target) {
   e_target_fx = spawn("script_model", e_target.origin);
-  e_target_fx setModel("tag_origin");
-  e_target_fx.direction = anglesToForward(self gettagangles("tag_flash")) * -1;
+  e_target_fx setmodel("tag_origin");
+  e_target_fx.direction = anglestoforward(self gettagangles("tag_flash")) * -1;
   e_target_fx.angles = vectortoangles(e_target_fx.direction);
   e_target_fx play_fx("spotlight_target", e_target_fx.origin, e_target_fx.angles, undefined, 1, "tag_origin", 1);
 
   while(true) {
-    e_target_fx.direction = anglesToForward(self gettagangles("tag_flash")) * -1;
+    e_target_fx.direction = anglestoforward(self gettagangles("tag_flash")) * -1;
     e_target_fx.angles = vectortoangles(e_target_fx.direction);
     e_target_fx.origin = e_target.origin;
 
@@ -871,20 +857,18 @@ check_control_room() {
   wait 4;
   t_control = getent("trig_control_room", "targetname");
 
-  if(level.player istouching(t_control)) {
+  if(level.player istouching(t_control))
     self thread drone_spotted_player();
-  }
 }
 
 detection_spotlight_think() {
   while(isDefined(self)) {
-    v_drone_spotlight_trigger_origin = bulletTrace(self gettagorigin("tag_flash"), anglesToForward(self gettagangles("tag_flash")) * 5096 + self gettagorigin("tag_flash"), 0, level.player)["position"];
+    v_drone_spotlight_trigger_origin = bullettrace(self gettagorigin("tag_flash"), anglestoforward(self gettagangles("tag_flash")) * 5096 + self gettagorigin("tag_flash"), 0, level.player)["position"];
     n_distance_from_spotlight = distancesquared(level.player.origin, v_drone_spotlight_trigger_origin);
 
-    if(n_distance_from_spotlight < 65536 && bullettracepassed(self gettagorigin("tag_flash"), level.player getEye(), 1, self, level.harper) || flag("drone_player_detected")) {
-      if(!level.b_under_tarp) {
+    if(n_distance_from_spotlight < 65536 && bullettracepassed(self gettagorigin("tag_flash"), level.player geteye(), 1, self, level.harper) || flag("drone_player_detected")) {
+      if(!level.b_under_tarp)
         self thread drone_spotted_player();
-      }
 
       break;
     }
@@ -907,32 +891,30 @@ detection_tarp_blocker_think() {
   level endon("detection_complete");
 
   while(true) {
-    if(level.player istouching(getent("drone_detection_tarp_trigger", "targetname"))) {
+    if(level.player istouching(getent("drone_detection_tarp_trigger", "targetname")))
       level.b_under_tarp = 1;
-    } else {
+    else
       level.b_under_tarp = 0;
-    }
 
     wait 0.05;
   }
 }
 
 detection_blocker_cleanup() {
-  foreach(m_blocker in getEntArray("drone_detection_blocker", "script_noteworthy")) {
-    m_blocker delete();
-  }
+  foreach(m_blocker in getentarray("drone_detection_blocker", "script_noteworthy"))
+  m_blocker delete();
 }
 
 courtyard_cleanup() {
-  a_enemies = getEntArray("anthem_courtyard_soldiers_ai", "targetname");
+  a_enemies = getentarray("anthem_courtyard_soldiers_ai", "targetname");
 
-  foreach(ai_enemy in a_enemies) {
-    ai_enemy delete();
-  }
+  foreach(ai_enemy in a_enemies)
+  ai_enemy delete();
 
   a_enemies = simple_spawn("anthem_rearguard");
 
-  foreach(ai_enemy in a_enemies) {}
+  foreach(ai_enemy in a_enemies) {
+  }
 }
 
 melee_attach_knife_player(e_player_body) {
@@ -945,7 +927,7 @@ melee_detach_knife_player(e_player_body) {
 }
 
 melee_bloodfx_knife_player(e_player_body) {
-  playFXOnTag(getfx("melee_knife_blood_player"), level.player.m_knife, "tag_knife_fx");
+  playfxontag(getfx("melee_knife_blood_player"), level.player.m_knife, "tag_knife_fx");
 }
 
 melee_attach_knife_harper(ai_harper) {
@@ -959,7 +941,7 @@ melee_detach_knife_harper(ai_harper) {
 
 melee_bloodfx_knife_harper(ai_harper) {
   level.player playrumbleonentity("damage_light");
-  playFXOnTag(getfx("melee_knife_blood_harper"), level.harper.m_knife, "tag_knife_fx");
+  playfxontag(getfx("melee_knife_blood_harper"), level.harper.m_knife, "tag_knife_fx");
 }
 
 drone_gantry_entry() {
@@ -972,7 +954,7 @@ drone_gantry_entry() {
 melee_cb_radio_audio() {
   cb_radio = getent("trainyard_melee_guard1", "targetname");
   cb_radio_sound = spawn("script_origin", cb_radio.origin);
-  cb_radio_sound playLoopSound("amb_cb_radio_loop", 2);
+  cb_radio_sound playloopsound("amb_cb_radio_loop", 2);
   trigger_wait("railyard_drone_meeting_trigger");
   cb_radio_sound stoploopsound(5);
   wait 1;
@@ -998,9 +980,8 @@ observation_gaz_convoy_delete() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self)) {
+  if(!isalive(self))
     self delete();
-  }
 }
 
 train_enter() {
@@ -1008,15 +989,14 @@ train_enter() {
   v_final_position = m_train.origin;
   v_start_position = m_train.origin + vectorscale((1, 0, 0), 6144.0);
 
-  foreach(m_attachment in getEntArray("train_engine", "target")) {
-    m_attachment linkto(m_train, "tag_origin");
-  }
+  foreach(m_attachment in getentarray("train_engine", "target"))
+  m_attachment linkto(m_train, "tag_origin");
 
   m_train moveto(v_start_position, 0.05);
-  m_train playLoopSound("amb_train_idle_lp");
+  m_train playloopsound("amb_train_idle_lp");
   flag_wait("trainyard_drone_meeting_started");
   m_train thread train_rumble();
-  m_train playSound("evt_train_arrive");
+  m_train playsound("evt_train_arrive");
   m_train moveto(v_final_position, 25.0, 0, 6.0);
   wait 21;
   level thread train_exposure();
@@ -1152,7 +1132,7 @@ harper_water_wake() {
   flag_wait("trainyard_millibar_meeting_harper_approach_started");
   wait 0.8;
   self.water_fx = spawn("script_model", self.origin + vectorscale((0, 0, -1), 4.0));
-  self.water_fx setModel("tag_origin");
+  self.water_fx setmodel("tag_origin");
   self.water_fx thread waterfx_follow_harper();
   self.water_fx setclientflag(9);
 }
@@ -1239,7 +1219,7 @@ play_grenade_light() {
   self endon("delete");
 
   while(true) {
-    playFXOnTag(level._effect["grenade_light"], self, "tag_origin");
+    playfxontag(level._effect["grenade_light"], self, "tag_origin");
     wait 0.5;
   }
 }
@@ -1276,9 +1256,8 @@ magic_bullet_hitting_water() {
   level endon("start_defend_convoy");
   a_s_gunfire = getstructarray("underground_fake_fire_location", "targetname");
 
-  for(i = 0; i < a_s_gunfire.size; i++) {
+  for(i = 0; i < a_s_gunfire.size; i++)
     a_s_gunfire[i] thread pick_firing_targets();
-  }
 }
 
 pick_firing_targets() {
@@ -1298,7 +1277,7 @@ play_bullet_hitting_water_fx() {
   e_gunfire = getent("fire_water_bullet", "targetname");
 
   while(true) {
-    playFXOnTag(level._effect["underwater_bullet_fx"], e_gunfire, "tag_origin");
+    playfxontag(level._effect["underwater_bullet_fx"], e_gunfire, "tag_origin");
     wait 0.2;
   }
 }
@@ -1322,7 +1301,7 @@ millibar_toggle_think() {
   setmusicstate("PAK_MILLIBAR");
   flag_set("anthem_harper_vo_millibar_meeting_start");
   level waittill("millibar_stop");
-  level.player playSound("evt_loud_signal");
+  level.player playsound("evt_loud_signal");
   level clientnotify("millibar_off");
   level thread maps\_audio::switch_music_wait("PAK_GRENADES_DROP", 4);
   ceiling show();
@@ -1343,9 +1322,9 @@ millibar_fov() {
 
 courtyard_sounds() {
   train_yard = spawn("script_origin", (-12573, 34411, 649));
-  train_yard playLoopSound("amb_train_yard");
+  train_yard playloopsound("amb_train_yard");
   motor_pool = spawn("script_origin", (-20312, 40531, 755));
-  motor_pool playLoopSound("amb_motor_pool");
+  motor_pool playloopsound("amb_motor_pool");
 }
 
 vo_roof_meeting() {
@@ -1423,9 +1402,8 @@ vision_jiffylube_handler() {
     trigger_wait("vision_jiffylube_trigger");
     level thread maps\createart\pakistan_2_art::vision_jiffylube_room();
 
-    while(level.player istouching(getent("vision_jiffylube_trigger", "targetname"))) {
+    while(level.player istouching(getent("vision_jiffylube_trigger", "targetname")))
       wait 0.05;
-    }
 
     level thread maps\createart\pakistan_2_art::turn_back_to_default();
   }
@@ -1435,7 +1413,7 @@ underwater_explo_sounds() {
   level waittill("nade_explo");
   wait 11;
   fire_uw_a = spawn("script_origin", (-18601, 33658, 270));
-  fire_uw_a playLoopSound("amb_fire_nade");
+  fire_uw_a playloopsound("amb_fire_nade");
 }
 
 start_ambient_drones_rooftop() {
@@ -1459,15 +1437,13 @@ delete_scenes() {
   flag_wait("trainyard_melee_harper_door_close_done");
   e_tower_door = getent("guard_entrance", "targetname");
 
-  if(isDefined(e_tower_door)) {
+  if(isDefined(e_tower_door))
     e_tower_door delete();
-  }
 
   e_tower_clip = getent("guard_entrance_collision", "targetname");
 
-  if(isDefined(e_tower_clip)) {
+  if(isDefined(e_tower_clip))
     e_tower_clip delete();
-  }
 
   delete_scene_all("rooftop_exit_open", 1);
   delete_scene_all("jump_down_gaz_idle", 1);
@@ -1479,15 +1455,12 @@ delete_scenes() {
   e_door_coll = getent("lab_door_collision", "targetname");
   e_labdoor = getent("drone_entrance", "targetname");
 
-  if(isDefined(e_door_clip)) {
+  if(isDefined(e_door_clip))
     e_door_clip delete();
-  }
 
-  if(isDefined(e_door_coll)) {
+  if(isDefined(e_door_coll))
     e_door_coll delete();
-  }
 
-  if(isDefined(e_labdoor)) {
+  if(isDefined(e_labdoor))
     e_labdoor delete();
-  }
 }
